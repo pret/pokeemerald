@@ -7,1963 +7,6 @@
 
 
 
-
-	thumb_func_start pokemonanimfunc_01
-pokemonanimfunc_01: @ 817F808
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0
-	bne _0817F81A
-	adds r0, r6, 0
-	bl sub_817F670
-_0817F81A:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0x28
-	ble _0817F840
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r6, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	adds r0, r6, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r6, 0x1C]
-	b _0817F88C
-	.pool
-_0817F840:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	lsls r0, 9
-	movs r1, 0x28
-	bl __divsi3
-	adds r4, r0, 0
-	cmp r0, 0
-	bge _0817F854
-	adds r4, 0xFF
-_0817F854:
-	asrs r4, 8
-	lsls r4, 8
-	subs r4, r0, r4
-	lsls r4, 16
-	asrs r4, 16
-	adds r0, r4, 0
-	movs r1, 0x20
-	bl Sin
-	movs r1, 0x80
-	lsls r1, 1
-	adds r5, r1, 0
-	adds r0, r5
-	strh r0, [r6, 0x36]
-	adds r0, r4, 0
-	movs r1, 0x20
-	bl Cos
-	adds r0, r5
-	strh r0, [r6, 0x38]
-	movs r0, 0x36
-	ldrsh r1, [r6, r0]
-	movs r0, 0x38
-	ldrsh r2, [r6, r0]
-	adds r0, r6, 0
-	movs r3, 0
-	bl sub_817F6D4
-_0817F88C:
-	ldrh r0, [r6, 0x32]
-	adds r0, 0x1
-	strh r0, [r6, 0x32]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_01
-
-	thumb_func_start pokemonanimfunc_02
-pokemonanimfunc_02: @ 817F898
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldrh r1, [r4, 0x32]
-	movs r2, 0x32
-	ldrsh r0, [r4, r2]
-	cmp r0, 0x28
-	ble _0817F8B4
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	b _0817F8EE
-	.pool
-_0817F8B4:
-	movs r0, 0x1
-	ands r0, r1
-	movs r5, 0xFF
-	cmp r0, 0
-	bne _0817F8C0
-	movs r5, 0x1
-_0817F8C0:
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	lsls r0, 7
-	movs r1, 0x28
-	bl __divsi3
-	adds r1, r0, 0
-	cmp r1, 0
-	bge _0817F8D4
-	adds r0, 0xFF
-_0817F8D4:
-	asrs r0, 8
-	lsls r0, 8
-	subs r0, r1, r0
-	lsls r0, 16
-	asrs r0, 16
-	movs r1, 0x6
-	bl Sin
-	lsls r1, r5, 24
-	asrs r1, 24
-	adds r2, r0, 0
-	muls r2, r1
-	adds r0, r2, 0
-_0817F8EE:
-	strh r0, [r4, 0x24]
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x1
-	strh r0, [r4, 0x32]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_02
-
-	thumb_func_start sub_817F8FC
-sub_817F8FC: @ 817F8FC
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_817F70C
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	cmp r1, r0
-	ble _0817F91C
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	b _0817F946
-	.pool
-_0817F91C:
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 7
-	movs r2, 0x2E
-	ldrsh r1, [r4, r2]
-	bl __divsi3
-	adds r1, r0, 0
-	cmp r1, 0
-	bge _0817F936
-	adds r0, 0xFF
-_0817F936:
-	asrs r0, 8
-	lsls r0, 8
-	subs r0, r1, r0
-	lsls r0, 16
-	asrs r0, 16
-	movs r1, 0x6
-	bl Sin
-_0817F946:
-	strh r0, [r4, 0x24]
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x1
-	strh r0, [r4, 0x32]
-	adds r0, r4, 0
-	bl sub_817F70C
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_817F8FC
-
-	thumb_func_start pokemonanimfunc_03
-pokemonanimfunc_03: @ 817F95C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x28
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl sub_817F8FC
-	ldr r0, =sub_817F8FC
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_03
-
-	thumb_func_start sub_817F978
-sub_817F978: @ 817F978
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_817F70C
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	cmp r1, r0
-	ble _0817F998
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	b _0817F9C4
-	.pool
-_0817F998:
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 7
-	movs r2, 0x2E
-	ldrsh r1, [r4, r2]
-	bl __divsi3
-	adds r1, r0, 0
-	cmp r1, 0
-	bge _0817F9B2
-	adds r0, 0xFF
-_0817F9B2:
-	asrs r0, 8
-	lsls r0, 8
-	subs r0, r1, r0
-	lsls r0, 16
-	asrs r0, 16
-	movs r1, 0x6
-	bl Sin
-	negs r0, r0
-_0817F9C4:
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x1
-	strh r0, [r4, 0x32]
-	adds r0, r4, 0
-	bl sub_817F70C
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_817F978
-
-	thumb_func_start pokemonanimfunc_04
-pokemonanimfunc_04: @ 817F9D8
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x28
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl sub_817F978
-	ldr r0, =sub_817F978
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_04
-
-	thumb_func_start sub_817F9F4
-sub_817F9F4: @ 817F9F4
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	movs r0, 0xC0
-	lsls r0, 1
-	cmp r1, r0
-	ble _0817FA14
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	strh r0, [r4, 0x24]
-	b _0817FA5E
-	.pool
-_0817FA14:
-	adds r0, r1, 0
-	cmp r1, 0
-	bge _0817FA1C
-	adds r0, 0x7F
-_0817FA1C:
-	asrs r2, r0, 7
-	lsls r0, r2, 16
-	asrs r0, 16
-	cmp r0, 0
-	blt _0817FA60
-	cmp r0, 0x1
-	ble _0817FA48
-	cmp r0, 0x3
-	bgt _0817FA60
-	ldr r2, =0xffffff00
-	adds r1, r2
-	lsls r0, r1, 16
-	asrs r0, 16
-	movs r1, 0x2E
-	ldrsh r2, [r4, r1]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 16
-	b _0817FA56
-	.pool
-_0817FA48:
-	lsls r0, r2, 7
-	subs r0, r1, r0
-	lsls r0, 16
-	asrs r0, 16
-	movs r2, 0x2E
-	ldrsh r1, [r4, r2]
-	lsls r1, 17
-_0817FA56:
-	asrs r1, 16
-	bl Sin
-	negs r0, r0
-_0817FA5E:
-	strh r0, [r4, 0x26]
-_0817FA60:
-	ldrh r0, [r4, 0x32]
-	adds r0, 0xC
-	strh r0, [r4, 0x32]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_817F9F4
-
-	thumb_func_start pokemonanimfunc_1E
-pokemonanimfunc_1E: @ 817FA6C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x4
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl sub_817F9F4
-	ldr r0, =sub_817F9F4
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_1E
-
-	thumb_func_start pokemonanimfunc_06
-pokemonanimfunc_06: @ 817FA88
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x32
-	ldrsh r2, [r4, r0]
-	movs r0, 0xC0
-	lsls r0, 2
-	cmp r2, r0
-	ble _0817FAA8
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	strh r0, [r4, 0x24]
-	b _0817FB56
-	.pool
-_0817FAA8:
-	adds r0, r2, 0
-	cmp r2, 0
-	bge _0817FAB0
-	adds r0, 0x7F
-_0817FAB0:
-	lsls r0, 9
-	asrs r0, 16
-	cmp r0, 0x5
-	bhi _0817FB3C
-	lsls r0, 2
-	ldr r1, =_0817FAC8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_0817FAC8:
-	.4byte _0817FAE0
-	.4byte _0817FAE0
-	.4byte _0817FAE4
-	.4byte _0817FAE8
-	.4byte _0817FB04
-	.4byte _0817FB1E
-_0817FAE0:
-	movs r0, 0
-	b _0817FB3A
-_0817FAE4:
-	movs r2, 0
-	b _0817FB3C
-_0817FAE8:
-	adds r0, r2, 0
-	cmp r2, 0
-	bge _0817FAF0
-	adds r0, 0x7F
-_0817FAF0:
-	asrs r0, 7
-	lsls r0, 7
-	subs r0, r2, r0
-	lsls r0, 3
-	negs r0, r0
-	cmp r0, 0
-	bge _0817FB00
-	adds r0, 0x7F
-_0817FB00:
-	asrs r0, 7
-	b _0817FB3A
-_0817FB04:
-	adds r0, r2, 0
-	cmp r2, 0
-	bge _0817FB0C
-	adds r0, 0x7F
-_0817FB0C:
-	asrs r0, 7
-	lsls r0, 7
-	subs r0, r2, r0
-	cmp r0, 0
-	bge _0817FB18
-	adds r0, 0x7
-_0817FB18:
-	asrs r0, 3
-	subs r0, 0x8
-	b _0817FB3A
-_0817FB1E:
-	adds r0, r2, 0
-	cmp r2, 0
-	bge _0817FB26
-	adds r0, 0x7F
-_0817FB26:
-	asrs r0, 7
-	lsls r0, 7
-	subs r0, r2, r0
-	lsls r0, 3
-	negs r0, r0
-	cmp r0, 0
-	bge _0817FB36
-	adds r0, 0x7F
-_0817FB36:
-	asrs r0, 7
-	adds r0, 0x8
-_0817FB3A:
-	strh r0, [r4, 0x24]
-_0817FB3C:
-	adds r0, r2, 0
-	cmp r2, 0
-	bge _0817FB44
-	adds r0, 0x7F
-_0817FB44:
-	asrs r0, 7
-	lsls r0, 7
-	subs r0, r2, r0
-	lsls r0, 16
-	asrs r0, 16
-	movs r1, 0x8
-	bl Sin
-	negs r0, r0
-_0817FB56:
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x32]
-	adds r0, 0xC
-	strh r0, [r4, 0x32]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_06
-
-	thumb_func_start pokemonanimfunc_09
-pokemonanimfunc_09: @ 817FB64
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0
-	bne _0817FB76
-	adds r0, r6, 0
-	bl sub_817F670
-_0817FB76:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0x28
-	ble _0817FB9C
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r6, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	adds r0, r6, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r6, 0x1C]
-	b _0817FC12
-	.pool
-_0817FB9C:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	lsls r0, 8
-	movs r1, 0x28
-	bl __divsi3
-	adds r1, r0, 0
-	cmp r1, 0
-	bge _0817FBB0
-	adds r0, 0xFF
-_0817FBB0:
-	asrs r0, 8
-	lsls r0, 8
-	subs r0, r1, r0
-	lsls r0, 16
-	lsrs r4, r0, 16
-	ldrh r0, [r6, 0x32]
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0817FBE0
-	lsls r4, 16
-	asrs r4, 16
-	adds r0, r4, 0
-	movs r1, 0x20
-	bl Sin
-	movs r1, 0x80
-	lsls r1, 1
-	adds r5, r1, 0
-	adds r0, r5
-	strh r0, [r6, 0x36]
-	adds r0, r4, 0
-	movs r1, 0x20
-	b _0817FBFA
-_0817FBE0:
-	lsls r4, 16
-	asrs r4, 16
-	adds r0, r4, 0
-	movs r1, 0x8
-	bl Sin
-	movs r1, 0x80
-	lsls r1, 1
-	adds r5, r1, 0
-	adds r0, r5
-	strh r0, [r6, 0x36]
-	adds r0, r4, 0
-	movs r1, 0x8
-_0817FBFA:
-	bl Sin
-	adds r0, r5
-	strh r0, [r6, 0x38]
-	movs r0, 0x36
-	ldrsh r1, [r6, r0]
-	movs r0, 0x38
-	ldrsh r2, [r6, r0]
-	adds r0, r6, 0
-	movs r3, 0
-	bl sub_817F6D4
-_0817FC12:
-	ldrh r0, [r6, 0x32]
-	adds r0, 0x1
-	strh r0, [r6, 0x32]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_09
-
-	thumb_func_start sub_817FC20
-sub_817FC20: @ 817FC20
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl sub_817F70C
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _0817FC32
-	strh r0, [r4, 0x34]
-_0817FC32:
-	ldr r2, =gUnknown_0860AD70
-	movs r5, 0x34
-	ldrsh r1, [r4, r5]
-	lsls r0, r1, 1
-	adds r0, r1
-	adds r1, r2, 0x2
-	adds r3, r0, r1
-	movs r1, 0
-	ldrsb r1, [r3, r1]
-	movs r5, 0x32
-	ldrsh r0, [r4, r5]
-	cmp r1, r0
-	bne _0817FC6A
-	adds r0, r1, 0
-	cmp r0, 0
-	bne _0817FC60
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	b _0817FC6A
-	.pool
-_0817FC60:
-	ldrh r0, [r4, 0x34]
-	adds r0, 0x1
-	movs r1, 0
-	strh r0, [r4, 0x34]
-	strh r1, [r4, 0x32]
-_0817FC6A:
-	movs r0, 0x34
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 1
-	adds r1, r0, r1
-	adds r0, r2, 0x2
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, 0
-	bne _0817FC8C
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	b _0817FCBE
-	.pool
-_0817FC8C:
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	ldrh r1, [r4, 0x24]
-	adds r0, r1
-	strh r0, [r4, 0x24]
-	movs r5, 0x34
-	ldrsh r1, [r4, r5]
-	lsls r0, r1, 1
-	adds r0, r1
-	adds r1, r2, 0x1
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	ldrh r1, [r4, 0x26]
-	adds r0, r1
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x1
-	strh r0, [r4, 0x32]
-	adds r0, r4, 0
-	bl sub_817F70C
-_0817FCBE:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_817FC20
-
-	thumb_func_start pokemonanimfunc_0A
-pokemonanimfunc_0A: @ 817FCC4
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_817FC20
-	ldr r0, =sub_817FC20
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_0A
-
-	thumb_func_start sub_817FCDC
-sub_817FCDC: @ 817FCDC
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	movs r0, 0x90
-	lsls r0, 4
-	cmp r1, r0
-	ble _0817FCF8
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	b _0817FD12
-	.pool
-_0817FCF8:
-	adds r0, r1, 0
-	cmp r1, 0
-	bge _0817FD00
-	adds r0, 0xFF
-_0817FD00:
-	asrs r0, 8
-	lsls r0, 8
-	subs r0, r1, r0
-	lsls r0, 16
-	asrs r0, 16
-	movs r2, 0x3C
-	ldrsh r1, [r4, r2]
-	bl Sin
-_0817FD12:
-	strh r0, [r4, 0x24]
-	ldrh r0, [r4, 0x2E]
-	ldrh r1, [r4, 0x32]
-	adds r0, r1
-	strh r0, [r4, 0x32]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_817FCDC
-
-	thumb_func_start pokemonanimfunc_0F
-pokemonanimfunc_0F: @ 817FD24
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x3C
-	strh r0, [r4, 0x2E]
-	movs r0, 0x3
-	strh r0, [r4, 0x3C]
-	adds r0, r4, 0
-	bl sub_817FCDC
-	ldr r0, =sub_817FCDC
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_0F
-
-	thumb_func_start sub_817FD44
-sub_817FD44: @ 817FD44
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	movs r0, 0x90
-	lsls r0, 4
-	cmp r1, r0
-	ble _0817FD60
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	b _0817FD78
-	.pool
-_0817FD60:
-	adds r0, r1, 0
-	cmp r1, 0
-	bge _0817FD68
-	adds r0, 0xFF
-_0817FD68:
-	asrs r0, 8
-	lsls r0, 8
-	subs r0, r1, r0
-	lsls r0, 16
-	asrs r0, 16
-	movs r1, 0x3
-	bl Sin
-_0817FD78:
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x2E]
-	ldrh r1, [r4, 0x32]
-	adds r0, r1
-	strh r0, [r4, 0x32]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_817FD44
-
-	thumb_func_start pokemonanimfunc_10
-pokemonanimfunc_10: @ 817FD88
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x3C
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl sub_817FD44
-	ldr r0, =sub_817FD44
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_10
-
-	thumb_func_start pokemonanimfunc_11
-pokemonanimfunc_11: @ 817FDA4
-	push {r4-r7,lr}
-	adds r7, r0, 0
-	ldrh r2, [r7, 0x32]
-	movs r0, 0x32
-	ldrsh r1, [r7, r0]
-	movs r0, 0x80
-	lsls r0, 2
-	cmp r1, r0
-	ble _0817FDC8
-	ldr r0, =sub_8184D88
-	str r0, [r7, 0x1C]
-	movs r0, 0
-	strh r0, [r7, 0x24]
-	strh r0, [r7, 0x26]
-	b _0817FE24
-	.pool
-_0817FDC8:
-	movs r0, 0x1
-	ands r0, r2
-	movs r5, 0xFF
-	cmp r0, 0
-	bne _0817FDD4
-	movs r5, 0x1
-_0817FDD4:
-	movs r1, 0x32
-	ldrsh r0, [r7, r1]
-	cmp r0, 0
-	bge _0817FDDE
-	adds r0, 0x3
-_0817FDDE:
-	asrs r0, 2
-	movs r1, 0x8
-	bl Sin
-	lsls r0, 16
-	asrs r6, r0, 16
-	movs r0, 0x32
-	ldrsh r1, [r7, r0]
-	adds r4, r1, 0
-	cmp r1, 0
-	bge _0817FDF6
-	adds r4, 0xFF
-_0817FDF6:
-	asrs r4, 8
-	lsls r4, 8
-	subs r4, r1, r4
-	lsls r4, 16
-	asrs r4, 16
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl Sin
-	lsls r5, 24
-	asrs r5, 24
-	adds r1, r0, 0
-	muls r1, r5
-	adds r0, r1, 0
-	strh r0, [r7, 0x26]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl Cos
-	adds r1, r0, 0
-	muls r1, r5
-	adds r0, r1, 0
-	strh r0, [r7, 0x24]
-_0817FE24:
-	ldrh r0, [r7, 0x32]
-	adds r0, 0x9
-	strh r0, [r7, 0x32]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_11
-
-	thumb_func_start sub_817FE30
-sub_817FE30: @ 817FE30
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	ldr r2, =gUnknown_03001240
-	ldrh r6, [r4, 0x2E]
-	movs r0, 0x2E
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r5, r0, r2
-	ldrh r0, [r5]
-	cmp r0, 0
-	beq _0817FE54
-	subs r0, 0x1
-	strh r0, [r5]
-	b _0817FEF8
-	.pool
-_0817FE54:
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _0817FE70
-	movs r2, 0x8
-	ldrsh r0, [r5, r2]
-	cmp r0, 0
-	bne _0817FE70
-	adds r0, r4, 0
-	bl sub_817F670
-	ldrh r0, [r5, 0x8]
-	adds r0, 0x1
-	strh r0, [r5, 0x8]
-_0817FE70:
-	ldr r2, =gUnknown_03001240
-	lsls r1, r6, 16
-	asrs r1, 16
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r5, r0, r2
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	movs r2, 0x6
-	ldrsh r0, [r5, r2]
-	cmp r1, r0
-	ble _0817FEC4
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r4, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	ldrh r1, [r5, 0x4]
-	movs r2, 0x4
-	ldrsh r0, [r5, r2]
-	cmp r0, 0x1
-	ble _0817FEB4
-	subs r0, r1, 0x1
-	movs r1, 0
-	strh r0, [r5, 0x4]
-	movs r0, 0xA
-	strh r0, [r5]
-	strh r1, [r4, 0x32]
-	b _0817FEF2
-	.pool
-_0817FEB4:
-	adds r0, r4, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	b _0817FEF2
-	.pool
-_0817FEC4:
-	movs r0, 0x32
-	ldrsh r1, [r4, r0]
-	adds r0, r1, 0
-	cmp r1, 0
-	bge _0817FED0
-	adds r0, 0xFF
-_0817FED0:
-	asrs r0, 8
-	lsls r0, 8
-	subs r0, r1, r0
-	lsls r0, 16
-	asrs r0, 16
-	movs r1, 0x80
-	lsls r1, 5
-	bl Sin
-	strh r0, [r4, 0x3A]
-	movs r2, 0x80
-	lsls r2, 1
-	ldrh r3, [r4, 0x3A]
-	adds r0, r4, 0
-	adds r1, r2, 0
-	bl sub_817F6D4
-_0817FEF2:
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x10
-	strh r0, [r4, 0x32]
-_0817FEF8:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_817FE30
-
-	thumb_func_start pokemonanimfunc_12
-pokemonanimfunc_12: @ 817FF00
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_817F758
-	lsls r0, 24
-	lsrs r0, 24
-	movs r3, 0
-	strh r0, [r4, 0x2E]
-	ldr r2, =gUnknown_03001240
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	movs r0, 0x80
-	lsls r0, 2
-	strh r0, [r1, 0x6]
-	strh r3, [r1]
-	adds r0, r4, 0
-	bl sub_817FE30
-	ldr r0, =sub_817FE30
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_12
-
-	thumb_func_start sub_817FF3C
-sub_817FF3C: @ 817FF3C
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x2E]
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _0817FF54
-	adds r0, r4, 0
-	bl sub_817F670
-_0817FF54:
-	movs r2, 0x32
-	ldrsh r6, [r4, r2]
-	ldr r1, =gUnknown_03001240
-	lsls r0, r5, 1
-	adds r0, r5
-	lsls r0, 2
-	adds r0, r1
-	ldrh r1, [r0]
-	cmp r6, r1
-	ble _0817FF8C
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r4, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	adds r0, r4, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	b _0817FFAA
-	.pool
-_0817FF8C:
-	movs r2, 0x8
-	ldrsh r1, [r0, r2]
-	movs r0, 0x80
-	lsls r0, 9
-	bl __divsi3
-	muls r0, r6
-	strh r0, [r4, 0x3A]
-	movs r2, 0x80
-	lsls r2, 1
-	ldrh r3, [r4, 0x3A]
-	adds r0, r4, 0
-	adds r1, r2, 0
-	bl sub_817F6D4
-_0817FFAA:
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x1
-	strh r0, [r4, 0x32]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_817FF3C
-
-	thumb_func_start pokemonanimfunc_1F
-pokemonanimfunc_1F: @ 817FFB8
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_817F758
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x2E]
-	ldr r2, =gUnknown_03001240
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	movs r0, 0x3C
-	strh r0, [r1]
-	movs r0, 0x14
-	strh r0, [r1, 0x8]
-	adds r0, r4, 0
-	bl sub_817FF3C
-	ldr r0, =sub_817FF3C
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_1F
-
-	thumb_func_start sub_817FFF0
-sub_817FFF0: @ 817FFF0
-	push {r4-r7,lr}
-	adds r5, r0, 0
-	ldrh r0, [r5, 0x2E]
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r0, r5, 0
-	bl sub_817F70C
-	ldr r1, =gUnknown_03001240
-	lsls r0, r7, 1
-	adds r0, r7
-	lsls r0, 2
-	adds r6, r0, r1
-	movs r0, 0x32
-	ldrsh r1, [r5, r0]
-	movs r2, 0x6
-	ldrsh r0, [r6, r2]
-	cmp r1, r0
-	ble _0818002C
-	movs r0, 0
-	strh r0, [r5, 0x24]
-	strh r0, [r5, 0x26]
-	ldr r0, =sub_8184D88
-	str r0, [r5, 0x1C]
-	b _0818006A
-	.pool
-_0818002C:
-	movs r0, 0x32
-	ldrsh r1, [r5, r0]
-	adds r0, r1, 0
-	adds r0, 0xC0
-	adds r4, r0, 0
-	cmp r0, 0
-	bge _0818003E
-	ldr r2, =0x000001bf
-	adds r4, r1, r2
-_0818003E:
-	asrs r4, 8
-	lsls r4, 8
-	subs r4, r0, r4
-	lsls r4, 16
-	asrs r4, 16
-	movs r0, 0x8
-	ldrsh r1, [r6, r0]
-	lsls r1, 17
-	asrs r1, 16
-	adds r0, r4, 0
-	bl Cos
-	negs r0, r0
-	strh r0, [r5, 0x24]
-	movs r2, 0x8
-	ldrsh r1, [r6, r2]
-	adds r0, r4, 0
-	bl Sin
-	ldrh r1, [r6, 0x8]
-	adds r0, r1
-	strh r0, [r5, 0x26]
-_0818006A:
-	ldr r0, =gUnknown_03001240
-	lsls r1, r7, 1
-	adds r1, r7
-	lsls r1, 2
-	adds r1, r0
-	ldrh r0, [r1, 0x2]
-	ldrh r1, [r5, 0x32]
-	adds r0, r1
-	strh r0, [r5, 0x32]
-	adds r0, r5, 0
-	bl sub_817F70C
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_817FFF0
-
-	thumb_func_start pokemonanimfunc_14
-pokemonanimfunc_14: @ 8180090
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_817F758
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x2E]
-	ldr r2, =gUnknown_03001240
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	movs r0, 0x80
-	lsls r0, 2
-	strh r0, [r1, 0x6]
-	movs r0, 0x6
-	strh r0, [r1, 0x8]
-	movs r0, 0x18
-	strh r0, [r1, 0x2]
-	adds r0, r4, 0
-	bl sub_817FFF0
-	ldr r0, =sub_817FFF0
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_14
-
-	thumb_func_start pokemonanimfunc_15
-pokemonanimfunc_15: @ 81800D0
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _081800EC
-	ldrb r0, [r4, 0x5]
-	lsrs r0, 4
-	lsls r0, 4
-	movs r2, 0x80
-	lsls r2, 1
-	adds r1, r2, 0
-	adds r0, r1
-	strh r0, [r4, 0x3C]
-_081800EC:
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x80
-	ble _0818010C
-	ldrh r0, [r4, 0x3C]
-	movs r1, 0x10
-	movs r2, 0
-	movs r3, 0
-	bl BlendPalette
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	b _08180128
-	.pool
-_0818010C:
-	movs r2, 0x32
-	ldrsh r0, [r4, r2]
-	movs r1, 0x10
-	bl Sin
-	adds r2, r0, 0
-	strh r2, [r4, 0x3A]
-	ldrh r0, [r4, 0x3C]
-	lsls r2, 24
-	lsrs r2, 24
-	movs r1, 0x10
-	movs r3, 0
-	bl BlendPalette
-_08180128:
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x1
-	strh r0, [r4, 0x32]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_15
-
-	thumb_func_start pokemonanimfunc_16
-pokemonanimfunc_16: @ 8180134
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	movs r7, 0
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0
-	bne _08180148
-	adds r0, r6, 0
-	bl sub_817F670
-_08180148:
-	ldrh r5, [r6, 0x32]
-	movs r2, 0x32
-	ldrsh r0, [r6, r2]
-	cmp r0, 0x28
-	ble _08180170
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r6, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	adds r0, r6, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r6, 0x1C]
-	b _08180204
-	.pool
-_08180170:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	lsls r0, 7
-	movs r1, 0x28
-	bl __divsi3
-	lsls r0, 16
-	lsrs r4, r0, 16
-	adds r0, r5, 0
-	subs r0, 0xA
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x13
-	bhi _08180196
-	ldrh r0, [r6, 0x3C]
-	adds r0, 0x33
-	strh r0, [r6, 0x3C]
-	movs r7, 0xFF
-	ands r7, r0
-_08180196:
-	movs r2, 0x30
-	ldrsh r0, [r6, r2]
-	cmp r0, 0
-	bne _081801C4
-	lsls r5, r4, 16
-	asrs r0, r5, 16
-	movs r1, 0x28
-	bl Sin
-	adds r4, r0, 0
-	adds r0, r7, 0
-	movs r1, 0x10
-	bl Sin
-	ldr r1, =0xffffff00
-	adds r0, r1
-	adds r4, r0
-	strh r4, [r6, 0x36]
-	adds r4, r5, 0
-	b _081801E4
-	.pool
-_081801C4:
-	adds r0, r7, 0
-	movs r1, 0x10
-	bl Sin
-	adds r5, r0, 0
-	lsls r4, 16
-	asrs r0, r4, 16
-	movs r1, 0x28
-	bl Sin
-	movs r2, 0x80
-	lsls r2, 1
-	adds r1, r2, 0
-	subs r1, r5
-	subs r1, r0
-	strh r1, [r6, 0x36]
-_081801E4:
-	asrs r0, r4, 16
-	movs r1, 0x10
-	bl Sin
-	movs r1, 0x80
-	lsls r1, 1
-	adds r0, r1
-	strh r0, [r6, 0x38]
-	movs r2, 0x36
-	ldrsh r1, [r6, r2]
-	movs r0, 0x38
-	ldrsh r2, [r6, r0]
-	adds r0, r6, 0
-	movs r3, 0
-	bl sub_817F618
-_08180204:
-	ldrh r0, [r6, 0x32]
-	adds r0, 0x1
-	strh r0, [r6, 0x32]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_16
-
-	thumb_func_start pokemonanimfunc_17
-pokemonanimfunc_17: @ 8180210
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r5, r0, 0
-	movs r0, 0
-	mov r8, r0
-	movs r7, 0
-	movs r1, 0x32
-	ldrsh r0, [r5, r1]
-	cmp r0, 0
-	bne _0818022C
-	adds r0, r5, 0
-	bl sub_817F670
-_0818022C:
-	ldrh r6, [r5, 0x32]
-	movs r2, 0x32
-	ldrsh r0, [r5, r2]
-	cmp r0, 0x28
-	ble _08180258
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r5, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	adds r0, r5, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r5, 0x1C]
-	mov r0, r8
-	strh r0, [r5, 0x26]
-	b _0818030A
-	.pool
-_08180258:
-	movs r1, 0x32
-	ldrsh r0, [r5, r1]
-	lsls r0, 7
-	movs r1, 0x28
-	bl __divsi3
-	lsls r0, 16
-	lsrs r4, r0, 16
-	adds r0, r6, 0
-	subs r0, 0xA
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x13
-	bhi _0818027E
-	ldrh r0, [r5, 0x3C]
-	adds r0, 0x33
-	strh r0, [r5, 0x3C]
-	movs r7, 0xFF
-	ands r7, r0
-_0818027E:
-	movs r2, 0x30
-	ldrsh r0, [r5, r2]
-	cmp r0, 0
-	bne _081802A0
-	lsls r4, 16
-	asrs r0, r4, 16
-	movs r1, 0x10
-	bl Sin
-	ldr r2, =0xffffff00
-	adds r1, r2, 0
-	subs r1, r0
-	strh r1, [r5, 0x36]
-	b _081802B2
-	.pool
-_081802A0:
-	lsls r4, 16
-	asrs r0, r4, 16
-	movs r1, 0x10
-	bl Sin
-	movs r1, 0x80
-	lsls r1, 1
-	adds r0, r1
-	strh r0, [r5, 0x36]
-_081802B2:
-	adds r6, r4, 0
-	adds r0, r7, 0
-	movs r1, 0x8
-	bl Sin
-	adds r4, r0, 0
-	asrs r0, r6, 16
-	movs r1, 0x28
-	bl Sin
-	movs r2, 0x80
-	lsls r2, 1
-	adds r1, r2, 0
-	subs r4, r1, r4
-	subs r4, r0
-	strh r4, [r5, 0x38]
-	lsls r4, 16
-	asrs r4, 16
-	lsls r1, 16
-	asrs r1, 16
-	cmp r4, r1
-	beq _081802F0
-	movs r2, 0x38
-	ldrsh r0, [r5, r2]
-	subs r0, r1, r0
-	cmp r0, 0
-	bge _081802EA
-	adds r0, 0x7
-_081802EA:
-	lsls r0, 13
-	lsrs r0, 16
-	mov r8, r0
-_081802F0:
-	mov r1, r8
-	lsls r0, r1, 16
-	asrs r0, 16
-	negs r0, r0
-	strh r0, [r5, 0x26]
-	movs r2, 0x36
-	ldrsh r1, [r5, r2]
-	movs r0, 0x38
-	ldrsh r2, [r5, r0]
-	adds r0, r5, 0
-	movs r3, 0
-	bl sub_817F618
-_0818030A:
-	ldrh r0, [r5, 0x32]
-	adds r0, 0x1
-	strh r0, [r5, 0x32]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_17
-
-	thumb_func_start sub_818031C
-sub_818031C: @ 818031C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x32]
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	ldrh r0, [r4, 0x3A]
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r2, =gUnknown_0860AA80
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	lsls r0, 1
-	adds r1, r0, r2
-	ldrb r5, [r1]
-	adds r2, 0x1
-	adds r0, r2
-	ldrb r6, [r0]
-	movs r1, 0
-	cmp r5, 0xFE
-	beq _08180358
-	subs r0, r6, r7
-	muls r0, r5
-	adds r1, r6, 0
-	bl __divsi3
-	lsls r0, 24
-	lsrs r1, r0, 24
-_08180358:
-	cmp r5, 0xFF
-	bne _08180370
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	strh r0, [r4, 0x26]
-	b _08180394
-	.pool
-_08180370:
-	mov r0, r8
-	bl Sin
-	strh r0, [r4, 0x26]
-	cmp r7, r6
-	bne _08180386
-	ldrh r0, [r4, 0x38]
-	adds r0, 0x1
-	strh r0, [r4, 0x38]
-	movs r0, 0
-	b _08180392
-_08180386:
-	ldrh r0, [r4, 0x2E]
-	ldrh r1, [r4, 0x32]
-	adds r0, r1
-	strh r0, [r4, 0x32]
-	ldrh r0, [r4, 0x3A]
-	adds r0, 0x1
-_08180392:
-	strh r0, [r4, 0x3A]
-_08180394:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_818031C
-
-	thumb_func_start pokemonanimfunc_19
-pokemonanimfunc_19: @ 81803A0
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x30
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl sub_818031C
-	ldr r0, =sub_818031C
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_19
-
-	thumb_func_start pokemonanimfunc_1A
-pokemonanimfunc_1A: @ 81803BC
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r4, r0, 0
-	bl sub_817F70C
-	ldrh r0, [r4, 0x32]
-	lsls r7, r0, 24
-	lsrs r5, r7, 24
-	mov r8, r5
-	cmp r0, 0
-	bne _081803DA
-	adds r0, r4, 0
-	bl sub_817F670
-_081803DA:
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x23
-	ble _08180404
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r4, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	adds r0, r4, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	strh r0, [r4, 0x24]
-	b _0818045E
-	.pool
-_08180404:
-	adds r6, r5, 0
-	subs r6, 0xA
-	lsls r0, r6, 7
-	movs r1, 0x14
-	bl __divsi3
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r5, 0x9
-	bhi _0818042A
-	movs r2, 0x80
-	lsls r2, 1
-	lsrs r3, r7, 25
-	lsls r3, 9
-	adds r0, r4, 0
-	adds r1, r2, 0
-	bl sub_817F6D4
-	b _0818045E
-_0818042A:
-	lsls r0, r6, 24
-	lsrs r0, 24
-	cmp r0, 0x13
-	bhi _08180442
-	lsls r0, r1, 16
-	asrs r0, 16
-	movs r1, 0x5
-	bl Sin
-	negs r0, r0
-	strh r0, [r4, 0x24]
-	b _0818045E
-_08180442:
-	movs r2, 0x80
-	lsls r2, 1
-	movs r3, 0x23
-	mov r0, r8
-	subs r3, r0
-	lsrs r0, r3, 31
-	adds r3, r0
-	asrs r3, 1
-	lsls r3, 26
-	lsrs r3, 16
-	adds r0, r4, 0
-	adds r1, r2, 0
-	bl sub_817F6D4
-_0818045E:
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x1
-	strh r0, [r4, 0x32]
-	adds r0, r4, 0
-	bl sub_817F70C
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemonanimfunc_1A
-
-	thumb_func_start pokemonanimfunc_1B
-pokemonanimfunc_1B: @ 8180474
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0
-	bne _08180486
-	adds r0, r6, 0
-	bl sub_817F670
-_08180486:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0x64
-	ble _081804B0
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r6, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	movs r0, 0
-	strh r0, [r6, 0x26]
-	adds r0, r6, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r6, 0x1C]
-	b _081804E8
-	.pool
-_081804B0:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	lsls r0, 8
-	movs r1, 0x64
-	bl __divsi3
-	adds r4, r0, 0
-	lsls r4, 16
-	asrs r4, 16
-	adds r0, r4, 0
-	movs r1, 0xA
-	bl Sin
-	strh r0, [r6, 0x26]
-	movs r5, 0x80
-	lsls r5, 1
-	ldr r1, =0x00000ccc
-	adds r0, r4, 0
-	bl Sin
-	adds r3, r0, 0
-	lsls r3, 16
-	lsrs r3, 16
-	adds r0, r6, 0
-	adds r1, r5, 0
-	adds r2, r5, 0
-	bl sub_817F6D4
-_081804E8:
-	ldrh r0, [r6, 0x32]
-	adds r0, 0x1
-	strh r0, [r6, 0x32]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_1B
-
-	thumb_func_start sub_81804F8
-sub_81804F8: @ 81804F8
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r5, 0
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0
-	bne _0818050C
-	adds r0, r6, 0
-	bl sub_817F670
-_0818050C:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0x64
-	ble _08180534
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r6, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	strh r5, [r6, 0x26]
-	adds r0, r6, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r6, 0x1C]
-	b _08180582
-	.pool
-_08180534:
-	movs r0, 0x32
-	ldrsh r5, [r6, r0]
-	lsls r0, r5, 8
-	movs r1, 0x64
-	bl __divsi3
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 9
-	adds r0, r5, 0
-	movs r1, 0x64
-	bl __divsi3
-	adds r5, r0, 0
-	movs r0, 0xFF
-	ands r5, r0
-	lsls r4, 16
-	asrs r4, 16
-	movs r0, 0x2E
-	ldrsh r1, [r6, r0]
-	adds r0, r4, 0
-	bl Sin
-	strh r0, [r6, 0x26]
-	movs r4, 0x80
-	lsls r4, 1
-	adds r0, r5, 0
-	ldr r1, =0x00000ccc
-	bl Sin
-	adds r3, r0, 0
-	lsls r3, 16
-	lsrs r3, 16
-	adds r0, r6, 0
-	adds r1, r4, 0
-	adds r2, r4, 0
-	bl sub_817F6D4
-_08180582:
-	ldrh r0, [r6, 0x32]
-	adds r0, 0x1
-	strh r0, [r6, 0x32]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81804F8
-
-	thumb_func_start pokemonanimfunc_1C
-pokemonanimfunc_1C: @ 8180594
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0xA
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl sub_81804F8
-	ldr r0, =sub_81804F8
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_1C
-
-	thumb_func_start sub_81805B0
-sub_81805B0: @ 81805B0
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r5, 0
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0
-	bne _081805C4
-	adds r0, r6, 0
-	bl sub_817F670
-_081805C4:
-	movs r2, 0x32
-	ldrsh r0, [r6, r2]
-	cmp r0, 0x64
-	ble _081805EC
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r6, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	strh r5, [r6, 0x26]
-	adds r0, r6, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r6, 0x1C]
-	b _08180644
-	.pool
-_081805EC:
-	movs r0, 0x32
-	ldrsh r5, [r6, r0]
-	lsls r0, r5, 8
-	movs r1, 0x64
-	bl __divsi3
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 9
-	adds r0, r5, 0
-	movs r1, 0x64
-	bl __divsi3
-	adds r5, r0, 0
-	movs r0, 0xFF
-	ands r5, r0
-	lsls r4, 16
-	asrs r0, r4, 16
-	lsrs r4, 31
-	adds r0, r4
-	asrs r0, 1
-	movs r2, 0x2E
-	ldrsh r1, [r6, r2]
-	lsls r1, 17
-	asrs r1, 16
-	bl Sin
-	negs r0, r0
-	strh r0, [r6, 0x26]
-	movs r4, 0x80
-	lsls r4, 1
-	adds r0, r5, 0
-	ldr r1, =0x00000ccc
-	bl Sin
-	adds r3, r0, 0
-	lsls r3, 16
-	lsrs r3, 16
-	adds r0, r6, 0
-	adds r1, r4, 0
-	adds r2, r4, 0
-	bl sub_817F6D4
-_08180644:
-	ldrh r0, [r6, 0x32]
-	adds r0, 0x1
-	strh r0, [r6, 0x32]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81805B0
-
-	thumb_func_start pokemonanimfunc_18
-pokemonanimfunc_18: @ 8180654
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x5
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl sub_81805B0
-	ldr r0, =sub_81805B0
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_18
-
-	thumb_func_start pokemonanimfunc_1D
-pokemonanimfunc_1D: @ 8180670
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	bl sub_817F70C
-	movs r5, 0
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0
-	bne _08180688
-	adds r0, r6, 0
-	bl sub_817F670
-_08180688:
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	cmp r0, 0x64
-	ble _081806B0
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r6, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl sub_817F6D4
-	strh r5, [r6, 0x24]
-	adds r0, r6, 0
-	bl sub_817F77C
-	ldr r0, =sub_8184D88
-	str r0, [r6, 0x1C]
-	b _081806FC
-	.pool
-_081806B0:
-	movs r0, 0x32
-	ldrsh r5, [r6, r0]
-	lsls r0, r5, 8
-	movs r1, 0x64
-	bl __divsi3
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 9
-	adds r0, r5, 0
-	movs r1, 0x64
-	bl __divsi3
-	adds r5, r0, 0
-	movs r0, 0xFF
-	ands r5, r0
-	lsls r4, 16
-	asrs r4, 16
-	adds r0, r4, 0
-	movs r1, 0x8
-	bl Sin
-	strh r0, [r6, 0x24]
-	movs r4, 0x80
-	lsls r4, 1
-	adds r0, r5, 0
-	ldr r1, =0x00000ccc
-	bl Sin
-	adds r3, r0, 0
-	lsls r3, 16
-	lsrs r3, 16
-	adds r0, r6, 0
-	adds r1, r4, 0
-	adds r2, r4, 0
-	bl sub_817F6D4
-_081806FC:
-	ldrh r0, [r6, 0x32]
-	adds r0, 0x1
-	strh r0, [r6, 0x32]
-	adds r0, r6, 0
-	bl sub_817F70C
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end pokemonanimfunc_1D
-
 	thumb_func_start sub_8180714
 sub_8180714: @ 8180714
 	push {r4-r6,lr}
@@ -1974,7 +17,7 @@ sub_8180714: @ 8180714
 	cmp r0, 0
 	bne _0818072A
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r6, [r4, 0x34]
 _0818072A:
 	adds r0, r4, 0
@@ -1992,11 +35,11 @@ _0818072A:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	strh r6, [r4, 0x26]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _081807FE
 	.pool
@@ -2064,7 +107,7 @@ _081807B0:
 	asrs r2, r5, 16
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -2122,11 +165,11 @@ sub_8180828: @ 8180828
 	adds r0, r5, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	strh r6, [r5, 0x26]
 	adds r0, r5, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r5, 0x1C]
 	b _081808D0
 	.pool
@@ -2172,7 +215,7 @@ _08180894:
 	asrs r2, 16
 	adds r0, r5, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldrh r0, [r5, 0x32]
 	adds r0, 0x1
 	strh r0, [r5, 0x32]
@@ -2197,7 +240,7 @@ pokemonanimfunc_13: @ 81808D8
 	cmp r0, 0
 	bne _081808F2
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x3
 	strh r0, [r4, 0x3C]
 	movs r0, 0x8
@@ -2260,7 +303,7 @@ sub_8180900: @ 8180900
 	cmp r0, 0
 	bne _0818096C
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -2282,12 +325,12 @@ _0818096C:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	strh r5, [r4, 0x24]
 	strh r5, [r4, 0x26]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08180A3A
 	.pool
@@ -2338,7 +381,7 @@ _08180A04:
 	lsls r2, 1
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r0, 0x36
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 1
@@ -2427,7 +470,7 @@ _08180AA8:
 	movs r1, 0x10
 	movs r2, 0
 	bl BlendPalette
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08180AE8
 	.pool
@@ -2480,7 +523,7 @@ _08180B14:
 	movs r2, 0
 	movs r3, 0x1F
 	bl BlendPalette
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08180B50
 	.pool
@@ -2533,7 +576,7 @@ _08180B78:
 	movs r1, 0x10
 	movs r2, 0
 	bl BlendPalette
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08180BB6
 	.pool
@@ -2586,7 +629,7 @@ _08180BE0:
 	movs r1, 0x10
 	movs r2, 0
 	bl BlendPalette
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08180C20
 	.pool
@@ -2639,7 +682,7 @@ _08180C4C:
 	movs r1, 0x10
 	movs r2, 0
 	bl BlendPalette
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08180C8C
 	.pool
@@ -2670,7 +713,7 @@ _08180C8C:
 pokemonanimfunc_25: @ 8180C9C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldr r0, =sub_8180CB4
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -2792,7 +835,7 @@ _08180D84:
 	lsls r3, r5, 8
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r1, 0x24
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
@@ -2842,7 +885,7 @@ _08180DE2:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -2885,7 +928,7 @@ sub_8180E28: @ 8180E28
 	strh r0, [r4, 0x24]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _08180E4A:
 	adds r0, r4, 0
@@ -2900,7 +943,7 @@ _08180E4A:
 pokemonanimfunc_26: @ 8180E5C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0
 	strh r0, [r4, 0x34]
 	ldr r0, =sub_8180E78
@@ -3041,7 +1084,7 @@ _08180F44:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x20
@@ -3050,7 +1093,7 @@ _08180F44:
 	strh r5, [r4, 0x26]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _08180F96:
 	adds r0, r4, 0
@@ -3105,7 +1148,7 @@ _08180FC6:
 	ands r1, r0
 	mov r2, r12
 	strb r1, [r2]
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r3, 0x1C]
 _08180FFC:
 	movs r0, 0x2
@@ -3121,7 +1164,7 @@ _08180FFE:
 pokemonanimfunc_28: @ 818100C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldr r0, =sub_8181024
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -3192,7 +1235,7 @@ sub_8181068: @ 8181068
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x20
@@ -3224,7 +1267,7 @@ sub_81810C4: @ 81810C4
 	bgt _081810E8
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _081810E8:
 	adds r0, r4, 0
@@ -3239,7 +1282,7 @@ _081810E8:
 pokemonanimfunc_29: @ 81810F8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldr r0, =sub_8181110
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -3315,7 +1358,7 @@ _08181186:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F70C
 	pop {r4}
@@ -3342,7 +1385,7 @@ sub_81811A4: @ 81811A4
 	strh r2, [r4, 0x26]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _081811CE:
 	adds r0, r4, 0
@@ -3407,7 +1450,7 @@ _08181238:
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r2, 0x2E
 	ldrsh r1, [r4, r2]
 	lsls r0, r1, 1
@@ -3519,7 +1562,7 @@ _081812DA:
 _08181328:
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _08181332:
 	movs r2, 0x80
@@ -3529,7 +1572,7 @@ _08181332:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F70C
 _0818134A:
@@ -3543,7 +1586,7 @@ _0818134A:
 pokemonanimfunc_2B: @ 8181354
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0
 	strh r0, [r4, 0x3A]
 	strh r0, [r4, 0x3C]
@@ -3606,7 +1649,7 @@ _081813BA:
 	adds r0, r4, 0
 _081813D2:
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldrh r0, [r4, 0x3C]
 	adds r0, 0x1
 	strh r0, [r4, 0x3C]
@@ -3623,10 +1666,10 @@ _081813DE:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _08181404:
 	adds r0, r4, 0
@@ -3670,7 +1713,7 @@ _08181442:
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	bne _08181464
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _081814CE
 	.pool
@@ -3739,7 +1782,7 @@ sub_81814D4: @ 81814D4
 	cmp r0, 0
 	bne _081814E6
 	adds r0, r6, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 _081814E6:
 	adds r0, r6, 0
 	bl sub_817F70C
@@ -3761,7 +1804,7 @@ _081814E6:
 	adds r0, r6, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r3, 0
 	strh r3, [r6, 0x24]
 	movs r0, 0x2E
@@ -3783,7 +1826,7 @@ _081814E6:
 _0818153C:
 	adds r0, r6, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r6, 0x1C]
 	b _08181588
 	.pool
@@ -3813,7 +1856,7 @@ _0818154C:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r5, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _08181588:
 	ldrh r0, [r6, 0x32]
 	adds r0, 0x1
@@ -3860,7 +1903,7 @@ sub_81815D4: @ 81815D4
 	cmp r0, 0
 	bne _081815E6
 	adds r0, r6, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 _081815E6:
 	adds r0, r6, 0
 	bl sub_817F70C
@@ -3882,7 +1925,7 @@ _081815E6:
 	adds r0, r6, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r3, 0
 	strh r3, [r6, 0x24]
 	movs r0, 0x2E
@@ -3904,7 +1947,7 @@ _081815E6:
 _0818163C:
 	adds r0, r6, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r6, 0x1C]
 	b _0818168A
 	.pool
@@ -3935,7 +1978,7 @@ _0818164C:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r5, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _0818168A:
 	ldrh r0, [r6, 0x32]
 	adds r0, 0x1
@@ -3977,7 +2020,7 @@ pokemonanimfunc_2E: @ 81816A0
 pokemonanimfunc_2F: @ 81816D4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	adds r0, r4, 0
 	adds r0, 0x28
 	movs r1, 0
@@ -4030,7 +2073,7 @@ sub_8181708: @ 8181708
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x78
@@ -4104,7 +2147,7 @@ sub_8181794: @ 8181794
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r5, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x7F
@@ -4115,7 +2158,7 @@ sub_8181794: @ 8181794
 	adds r1, r5, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	strh r6, [r4, 0x32]
 	adds r0, r4, 0
 	bl sub_817F77C
@@ -4155,7 +2198,7 @@ _08181834:
 	cmp r0, 0
 	bne _0818184A
 	adds r0, r5, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r6, [r5, 0x36]
 	strh r6, [r5, 0x38]
 	movs r0, 0x1
@@ -4192,7 +2235,7 @@ _0818184A:
 	asrs r2, 16
 	adds r0, r5, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r3, 0x36
 	ldrsh r0, [r5, r3]
 	cmp r0, 0x80
@@ -4233,7 +2276,7 @@ _081818A2:
 	asrs r2, 16
 	adds r0, r5, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r1, 0x36
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x80
@@ -4268,10 +2311,10 @@ _08181922:
 	adds r0, r5, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r5, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r5, 0x1C]
 _0818193A:
 	ldr r2, =gUnknown_03001240
@@ -4329,7 +2372,7 @@ pokemonanimfunc_31: @ 8181994
 	lsls r0, 2
 	cmp r4, r0
 	ble _081819B8
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r5, 0x1C]
 	movs r0, 0
 	strh r0, [r5, 0x24]
@@ -4466,7 +2509,7 @@ pokemonanimfunc_32: @ 8181A78
 	ldr r0, =0x0000ffff
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r5, [r4, 0x34]
 	adds r0, r4, 0
 	bl sub_8181ABC
@@ -4568,7 +2611,7 @@ sub_8181B4C: @ 8181B4C
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r0, 0
 	strh r0, [r4, 0x26]
 	strh r0, [r4, 0x32]
@@ -4646,7 +2689,7 @@ _08181BD6:
 	asrs r2, r6, 16
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -4705,7 +2748,7 @@ sub_8181C2C: @ 8181C2C
 _08181C7C:
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 _08181C84:
 	str r0, [r4, 0x1C]
 	movs r0, 0
@@ -4768,7 +2811,7 @@ sub_8181CE8: @ 8181CE8
 	cmp r0, 0
 	bne _08181D00
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -4787,7 +2830,7 @@ _08181D00:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldr r2, =gUnknown_03001240
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
@@ -4809,7 +2852,7 @@ _08181D00:
 _08181D48:
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _08181D52:
 	adds r0, r4, 0
@@ -4834,7 +2877,7 @@ _08181D60:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldr r2, =gUnknown_03001240
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
@@ -4889,7 +2932,7 @@ pokemonanimfunc_34: @ 8181DE4
 	cmp r0, 0
 	bne _08181DFC
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -4908,10 +2951,10 @@ _08181DFC:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	adds r0, r4, 0
 	bl sub_817F70C
@@ -4951,7 +2994,7 @@ _08181E4E:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldrh r0, [r4, 0x3C]
 	adds r0, 0x8
 	strh r0, [r4, 0x3C]
@@ -5013,7 +3056,7 @@ _08181ED8:
 	negs r1, r1
 	ands r1, r0
 	strb r1, [r2]
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r3, 0x1C]
 _08181EEE:
 	pop {r4,r5}
@@ -5026,7 +3069,7 @@ _08181EEE:
 pokemonanimfunc_36: @ 8181EF8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0
 	strh r0, [r4, 0x3C]
 	ldr r0, =sub_8181F14
@@ -5065,7 +3108,7 @@ _08181F38:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5144,7 +3187,7 @@ sub_8181FC0: @ 8181FC0
 	strh r1, [r4, 0x24]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08181FFE
 	.pool
@@ -5165,7 +3208,7 @@ _08181FFE:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F70C
 	pop {r4}
@@ -5182,7 +3225,7 @@ pokemonanimfunc_37: @ 818201C
 	cmp r5, 0
 	bne _08182036
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -5201,7 +3244,7 @@ _08182036:
 	strh r0, [r4, 0x3C]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _081820A6
 	.pool
@@ -5263,7 +3306,7 @@ _081820B2:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F70C
 	pop {r4,r5}
@@ -5275,7 +3318,7 @@ _081820B2:
 pokemonanimfunc_38: @ 81820E0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0
 	strh r0, [r4, 0x3C]
 	strh r0, [r4, 0x36]
@@ -5333,7 +3376,7 @@ _0818214A:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F70C
 	pop {r4}
@@ -5380,7 +3423,7 @@ _081821AA:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F70C
 	pop {r4}
@@ -5441,7 +3484,7 @@ _08182224:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F70C
 	pop {r4}
@@ -5464,7 +3507,7 @@ sub_8182248: @ 8182248
 	strh r0, [r4, 0x3C]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _0818228E
 	.pool
@@ -5491,7 +3534,7 @@ _0818228E:
 	lsrs r3, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F70C
 	pop {r4}
@@ -5509,7 +3552,7 @@ pokemonanimfunc_39: @ 81822B0
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x28
 	ble _081822D0
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x24]
@@ -5609,7 +3652,7 @@ pokemonanimfunc_3A: @ 8182370
 	cmp r5, 0
 	bne _08182392
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r5, [r4, 0x38]
 	strh r5, [r4, 0x3A]
 	strh r5, [r4, 0x3C]
@@ -5653,7 +3696,7 @@ _08182392:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	b _08182494
 _081823E4:
 	movs r2, 0x38
@@ -5671,10 +3714,10 @@ _081823E4:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _08182410:
 	movs r2, 0x3C
@@ -5743,7 +3786,7 @@ _08182474:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _08182494:
 	adds r0, r4, 0
 	bl sub_817F70C
@@ -5761,7 +3804,7 @@ pokemonanimfunc_3B: @ 81824A0
 	cmp r5, 0
 	bne _081824BA
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -5780,10 +3823,10 @@ _081824BA:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08182540
 	.pool
@@ -5830,7 +3873,7 @@ _08182518:
 	asrs r2, 16
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _08182540:
 	pop {r4,r5}
 	pop {r0}
@@ -5846,7 +3889,7 @@ pokemonanimfunc_3C: @ 8182548
 	cmp r5, 0
 	bne _08182562
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -5864,10 +3907,10 @@ _08182562:
 	adds r1, r5, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _081825D4
 	.pool
@@ -5903,7 +3946,7 @@ _081825AE:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _081825D4:
 	pop {r4,r5}
 	pop {r0}
@@ -5914,7 +3957,7 @@ _081825D4:
 pokemonanimfunc_3D: @ 81825DC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldr r0, =sub_81825F8
 	str r0, [r4, 0x1C]
 	movs r0, 0
@@ -5961,7 +4004,7 @@ _08182620:
 	asrs r2, 16
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6041,7 +4084,7 @@ _081826C8:
 	asrs r2, 16
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x3
@@ -6082,7 +4125,7 @@ sub_81826F8: @ 81826F8
 	ble _08182742
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x26]
@@ -6091,7 +4134,7 @@ sub_81826F8: @ 81826F8
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _08182742:
 	movs r1, 0x80
 	lsls r1, 1
@@ -6102,7 +4145,7 @@ _08182742:
 	asrs r2, 16
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -6123,14 +4166,14 @@ sub_8182764: @ 8182764
 	strh r0, [r4, 0x24]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	b _081827F4
 	.pool
 _08182798:
@@ -6178,7 +4221,7 @@ _081827CC:
 	lsls r2, 1
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _081827F4:
 	pop {r4}
 	pop {r0}
@@ -6194,7 +4237,7 @@ pokemonanimfunc_3E: @ 81827FC
 	cmp r5, 0
 	bne _08182822
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -6227,14 +4270,14 @@ sub_8182830: @ 8182830
 	strh r0, [r4, 0x24]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	b _081828C0
 	.pool
 _08182864:
@@ -6282,7 +4325,7 @@ _08182898:
 	lsls r2, 1
 	adds r0, r4, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _081828C0:
 	pop {r4}
 	pop {r0}
@@ -6298,7 +4341,7 @@ pokemonanimfunc_3F: @ 81828C8
 	cmp r5, 0
 	bne _081828EE
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -6327,7 +4370,7 @@ pokemonanimfunc_40: @ 81828FC
 	cmp r5, 0
 	bne _0818291A
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -6348,8 +4391,8 @@ _0818291A:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
-	ldr r0, =sub_8184D88
+	bl HandleSetAffineData
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _0818299E
 	.pool
@@ -6395,7 +4438,7 @@ _08182978:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _0818299E:
 	adds r0, r4, 0
 	bl sub_817F70C
@@ -6414,7 +4457,7 @@ pokemonanimfunc_41: @ 81829AC
 	cmp r5, 0
 	bne _081829CA
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -6435,8 +4478,8 @@ _081829CA:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
-	ldr r0, =sub_8184D88
+	bl HandleSetAffineData
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08182A5E
 	.pool
@@ -6490,7 +4533,7 @@ _08182A30:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _08182A5E:
 	adds r0, r4, 0
 	bl sub_817F70C
@@ -6509,7 +4552,7 @@ pokemonanimfunc_42: @ 8182A6C
 	cmp r5, 0
 	bne _08182A8A
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -6530,8 +4573,8 @@ _08182A8A:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
-	ldr r0, =sub_8184D88
+	bl HandleSetAffineData
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08182B16
 	.pool
@@ -6581,7 +4624,7 @@ _08182AEA:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _08182B16:
 	adds r0, r4, 0
 	bl sub_817F70C
@@ -6601,7 +4644,7 @@ pokemonanimfunc_43: @ 8182B24
 	lsls r0, 4
 	cmp r1, r0
 	ble _08182B48
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x3A]
@@ -6843,7 +4886,7 @@ _08182D08:
 	movs r0, 0
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _08182D12:
 	adds r0, r4, 0
@@ -7220,7 +5263,7 @@ pokemonanimfunc_56: @ 8182FB8
 	movs r0, 0x2
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r5, [r4, 0x34]
 	adds r0, r4, 0
 	bl sub_8181ABC
@@ -7398,7 +5441,7 @@ sub_8183140: @ 8183140
 	lsls r0, 4
 	cmp r2, r0
 	ble _0818315C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	b _08183180
@@ -7481,7 +5524,7 @@ pokemonanimfunc_59: @ 81831D4
 	lsls r0, 4
 	cmp r1, r0
 	ble _081831F8
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x3A]
@@ -7625,7 +5668,7 @@ sub_81832C8: @ 81832C8
 	adds r0, r6, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldrh r1, [r6, 0x36]
 	movs r2, 0x36
 	ldrsh r0, [r6, r2]
@@ -7633,7 +5676,7 @@ sub_81832C8: @ 81832C8
 	bgt _08183310
 	adds r0, r6, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r6, 0x1C]
 	b _081833DC
 	.pool
@@ -7733,7 +5776,7 @@ _08183392:
 	asrs r2, 16
 	adds r0, r6, 0
 	movs r3, 0
-	bl sub_817F618
+	bl SetAffineData
 	ldrh r0, [r6, 0x38]
 	adds r0, 0x1
 	strh r0, [r6, 0x38]
@@ -7757,7 +5800,7 @@ pokemonanimfunc_5A: @ 81833E8
 	movs r4, 0x1
 	strh r4, [r5, 0x32]
 	adds r0, r5, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r4, [r5, 0x36]
 	movs r0, 0x28
 	strh r0, [r5, 0x3A]
@@ -7794,7 +5837,7 @@ sub_8183418: @ 8183418
 	adds r0, r6, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldrh r1, [r6, 0x36]
 	movs r2, 0x36
 	ldrsh r0, [r6, r2]
@@ -7802,7 +5845,7 @@ sub_8183418: @ 8183418
 	bgt _08183460
 	adds r0, r6, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r6, 0x1C]
 	b _08183538
 	.pool
@@ -7906,7 +5949,7 @@ _08183522:
 	lsls r2, 1
 	adds r0, r6, 0
 	movs r3, 0
-	bl sub_817F618
+	bl SetAffineData
 	ldrh r0, [r6, 0x38]
 	adds r0, 0x1
 	strh r0, [r6, 0x38]
@@ -7930,7 +5973,7 @@ pokemonanimfunc_5B: @ 8183544
 	movs r4, 0x1
 	strh r4, [r5, 0x32]
 	adds r0, r5, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r4, [r5, 0x36]
 	movs r0, 0x28
 	strh r0, [r5, 0x3A]
@@ -7989,7 +6032,7 @@ _081835A6:
 _081835C2:
 	cmp r5, 0xFF
 	bne _081835D8
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x26]
@@ -8092,7 +6135,7 @@ pokemonanimfunc_5F: @ 8183674
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x28
 	ble _08183690
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	b _081836CA
@@ -8146,7 +6189,7 @@ pokemonanimfunc_60: @ 81836D8
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x28
 	ble _081836F4
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	b _0818372E
@@ -8297,7 +6340,7 @@ sub_81837DC: @ 81837DC
 	adds r0, r7, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	ldrh r1, [r7, 0x36]
 	movs r2, 0x36
 	ldrsh r0, [r7, r2]
@@ -8305,7 +6348,7 @@ sub_81837DC: @ 81837DC
 	bgt _08183824
 	adds r0, r7, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r7, 0x1C]
 	b _0818392C
 	.pool
@@ -8431,7 +6474,7 @@ _081838EA:
 	asrs r2, 16
 	adds r0, r7, 0
 	movs r3, 0
-	bl sub_817F618
+	bl SetAffineData
 	ldrh r0, [r7, 0x38]
 	adds r0, 0x1
 	strh r0, [r7, 0x38]
@@ -8456,7 +6499,7 @@ pokemonanimfunc_65: @ 818393C
 	movs r4, 0x1
 	strh r4, [r5, 0x32]
 	adds r0, r5, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r4, [r5, 0x36]
 	movs r0, 0x28
 	strh r0, [r5, 0x3A]
@@ -8482,7 +6525,7 @@ pokemonanimfunc_66: @ 818396C
 	lsls r0, 4
 	cmp r1, r0
 	ble _08183990
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x3A]
@@ -8614,7 +6657,7 @@ pokemonanimfunc_67: @ 8183A60
 	lsls r0, 4
 	cmp r1, r0
 	ble _08183A84
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x3A]
@@ -8784,7 +6827,7 @@ _08183B8C:
 	lsls r0, 16
 	cmp r0, 0
 	bne _08183BC8
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08183C06
 	.pool
@@ -8894,14 +6937,14 @@ sub_8183C6C: @ 8183C6C
 	bgt _08183CA4
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	b _08183CE8
 	.pool
 _08183CA4:
@@ -8938,7 +6981,7 @@ _08183CC2:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _08183CE8:
 	pop {r4,r5}
 	pop {r0}
@@ -8955,7 +6998,7 @@ pokemonanimfunc_6B: @ 8183CF0
 	cmp r5, 0
 	bne _08183D16
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -8984,7 +7027,7 @@ pokemonanimfunc_6C: @ 8183D28
 	cmp r5, 0
 	bne _08183D4E
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -9012,7 +7055,7 @@ pokemonanimfunc_6D: @ 8183D60
 	cmp r5, 0
 	bne _08183D88
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -9041,7 +7084,7 @@ pokemonanimfunc_6E: @ 8183D94
 	cmp r5, 0
 	bne _08183DBA
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -9069,7 +7112,7 @@ pokemonanimfunc_6F: @ 8183DC8
 	cmp r5, 0
 	bne _08183DF0
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -9098,7 +7141,7 @@ pokemonanimfunc_70: @ 8183DFC
 	cmp r5, 0
 	bne _08183E22
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
 	strh r0, [r4, 0x32]
@@ -9126,7 +7169,7 @@ pokemonanimfunc_71: @ 8183E30
 	cmp r0, 0
 	bne _08183E4A
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x5
 	strh r0, [r4, 0x3C]
 	movs r0, 0x8
@@ -9148,7 +7191,7 @@ pokemonanimfunc_72: @ 8183E58
 	cmp r0, 0
 	bne _08183E72
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x3
 	strh r0, [r4, 0x3C]
 	movs r0, 0x4
@@ -9172,7 +7215,7 @@ pokemonanimfunc_73: @ 8183E80
 	movs r4, 0x1
 	strh r4, [r5, 0x32]
 	adds r0, r5, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r4, [r5, 0x36]
 	movs r0, 0x1E
 	strh r0, [r5, 0x3A]
@@ -9198,7 +7241,7 @@ pokemonanimfunc_74: @ 8183EB0
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x2
 	strh r0, [r4, 0x36]
 	movs r0, 0x14
@@ -9225,7 +7268,7 @@ pokemonanimfunc_75: @ 8183EE0
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x2
 	strh r0, [r4, 0x36]
 	movs r0, 0x14
@@ -9253,7 +7296,7 @@ pokemonanimfunc_76: @ 8183F14
 	movs r4, 0x1
 	strh r4, [r5, 0x32]
 	adds r0, r5, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r4, [r5, 0x36]
 	movs r0, 0x1E
 	strh r0, [r5, 0x3A]
@@ -9280,7 +7323,7 @@ pokemonanimfunc_77: @ 8183F44
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x2
 	strh r0, [r4, 0x36]
 	movs r0, 0x14
@@ -9308,7 +7351,7 @@ pokemonanimfunc_78: @ 8183F78
 	movs r4, 0x1
 	strh r4, [r5, 0x32]
 	adds r0, r5, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	strh r4, [r5, 0x36]
 	movs r0, 0x1E
 	strh r0, [r5, 0x3A]
@@ -9337,7 +7380,7 @@ sub_8183FA8: @ 8183FA8
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
 	bgt _08183FD0
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x24]
@@ -9499,7 +7542,7 @@ sub_81840C4: @ 81840C4
 	ldrsh r0, [r5, r3]
 	cmp r1, r0
 	bgt _081840EC
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r5, 0x1C]
 	b _081840F4
 	.pool
@@ -9772,7 +7815,7 @@ sub_8184290: @ 8184290
 	ldrh r3, [r4, 0x3A]
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -9787,7 +7830,7 @@ pokemonanimfunc_82: @ 81842DC
 	cmp r5, 0
 	bne _08184300
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x3C
 	strh r0, [r4, 0x3C]
 	movs r0, 0x8
@@ -9809,7 +7852,7 @@ _08184300:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r2, 0
 	strh r2, [r4, 0x24]
 	strh r2, [r4, 0x26]
@@ -9824,7 +7867,7 @@ _08184300:
 	bgt _08184348
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08184358
 	.pool
@@ -9853,7 +7896,7 @@ pokemonanimfunc_83: @ 8184360
 	cmp r5, 0
 	bne _08184384
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x5A
 	strh r0, [r4, 0x3C]
 	movs r0, 0x8
@@ -9875,7 +7918,7 @@ _08184384:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r2, 0
 	strh r2, [r4, 0x24]
 	strh r2, [r4, 0x26]
@@ -9890,7 +7933,7 @@ _08184384:
 	bgt _081843CC
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _081843DC
 	.pool
@@ -9919,7 +7962,7 @@ pokemonanimfunc_84: @ 81843E4
 	cmp r5, 0
 	bne _08184408
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r0, 0x1E
 	strh r0, [r4, 0x3C]
 	movs r0, 0x8
@@ -9941,7 +7984,7 @@ _08184408:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	movs r2, 0
 	strh r2, [r4, 0x24]
 	strh r2, [r4, 0x26]
@@ -9956,7 +7999,7 @@ _08184408:
 	bgt _08184450
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _08184460
 	.pool
@@ -9993,10 +8036,10 @@ sub_8184468: @ 8184468
 	adds r0, r6, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 	adds r0, r6, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r6, 0x1C]
 	b _08184544
 	.pool
@@ -10080,7 +8123,7 @@ _08184530:
 	ldrsh r2, [r6, r0]
 	adds r0, r6, 0
 	movs r3, 0
-	bl sub_817F6D4
+	bl HandleSetAffineData
 _08184544:
 	ldrh r0, [r6, 0x32]
 	adds r0, 0x1
@@ -10099,7 +8142,7 @@ pokemonanimfunc_85: @ 8184550
 	cmp r0, 0
 	bne _08184570
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x26]
 	adds r0, 0x2
 	strh r0, [r4, 0x26]
@@ -10124,7 +8167,7 @@ pokemonanimfunc_86: @ 818457C
 	cmp r0, 0
 	bne _0818459A
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x26]
 	adds r0, 0x2
 	strh r0, [r4, 0x26]
@@ -10148,7 +8191,7 @@ pokemonanimfunc_87: @ 81845A8
 	cmp r0, 0
 	bne _081845C6
 	adds r0, r4, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	ldrh r0, [r4, 0x26]
 	adds r0, 0x2
 	strh r0, [r4, 0x26]
@@ -10299,7 +8342,7 @@ sub_81846B8: @ 81846B8
 	strh r0, [r4, 0x24]
 	adds r0, r4, 0
 	bl sub_817F77C
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 _081846DA:
 	adds r0, r4, 0
@@ -10314,7 +8357,7 @@ _081846DA:
 pokemonanimfunc_88: @ 81846EC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r2, 0
 	movs r1, 0x4
 	strh r1, [r4, 0x3C]
@@ -10338,7 +8381,7 @@ pokemonanimfunc_88: @ 81846EC
 pokemonanimfunc_89: @ 8184718
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r2, 0
 	movs r1, 0x2
 	strh r1, [r4, 0x3C]
@@ -10362,7 +8405,7 @@ pokemonanimfunc_89: @ 8184718
 pokemonanimfunc_8A: @ 8184744
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_817F670
+	bl HandleStartAffineAnim
 	movs r1, 0
 	strh r1, [r4, 0x3C]
 	movs r0, 0x6
@@ -10427,7 +8470,7 @@ sub_8184798: @ 8184798
 	bne _081847D0
 	movs r0, 0
 	strh r0, [r4, 0x24]
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _0818482E
 	.pool
@@ -10594,7 +8637,7 @@ sub_81848E0: @ 81848E0
 	movs r2, 0
 	movs r3, 0x1F
 	bl BlendPalette
-	ldr r0, =sub_8184D88
+	ldr r0, =SpriteCB_SetDummyOnAnimEnd
 	str r0, [r4, 0x1C]
 	b _0818492A
 	.pool
@@ -11223,8 +9266,8 @@ _08184D7A:
 	bx r0
 	thumb_func_end pokemonanimfunc_96
 
-	thumb_func_start sub_8184D88
-sub_8184D88: @ 8184D88
+	thumb_func_start SpriteCB_SetDummyOnAnimEnd
+SpriteCB_SetDummyOnAnimEnd: @ 8184D88
 	push {lr}
 	adds r2, r0, 0
 	adds r0, 0x3F
@@ -11239,6 +9282,6 @@ _08184D9C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8184D88
+	thumb_func_end SpriteCB_SetDummyOnAnimEnd
 
 	.align 2, 0 @ Don't pad with nop.
