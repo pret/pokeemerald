@@ -461,7 +461,7 @@ sub_80E70F4: @ 80E70F4
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0

@@ -12385,7 +12385,7 @@ sub_81A0C9C: @ 81A0C9C
 	bl sub_808BCF4
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	bl sub_81A0A70
 	pop {r0}
 	bx r0
@@ -14586,7 +14586,7 @@ sub_81A1EA8: @ 81A1EA8
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -14874,7 +14874,7 @@ sub_81A2134: @ 81A2134
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -15227,7 +15227,7 @@ sub_81A2460: @ 81A2460
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -15475,7 +15475,7 @@ sub_81A2698: @ 81A2698
 	strb r0, [r6]
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r6]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -15778,7 +15778,7 @@ sub_81A2968: @ 81A2968
 	strb r0, [r5]
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r5]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -16153,7 +16153,7 @@ sub_81A2C94: @ 81A2C94
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -16448,7 +16448,7 @@ sub_81A2F38: @ 81A2F38
 	strb r0, [r5]
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r5]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -16526,7 +16526,7 @@ sub_81A2FF8: @ 81A2FF8
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -19573,7 +19573,7 @@ sub_81A4AA0: @ 81A4AA0
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

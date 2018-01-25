@@ -3489,7 +3489,7 @@ void ShowBerryBlenderRecordWindow(void)
 
     winTemplate = sBlenderRecordWindowTemplate;
     gResultsWindowId = AddWindow(&winTemplate);
-    sub_81973FC(gResultsWindowId, 0);
+    NewMenuHelpers_DrawStdWindowFrame(gResultsWindowId, 0);
     FillWindowPixelBuffer(gResultsWindowId, 0x11);
 
     xPos = GetStringCenterAlignXOffset(1, gText_BlenderMaxSpeedRecord, 0x90);

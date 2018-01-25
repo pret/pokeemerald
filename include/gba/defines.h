@@ -39,6 +39,9 @@
 #define BG_CHAR_ADDR(n)   (BG_VRAM + (BG_CHAR_SIZE * (n)))
 #define BG_SCREEN_ADDR(n) (BG_VRAM + (BG_SCREEN_SIZE * (n)))
 
+#define BG_TILE_H_FLIP(n) (0x400 | (n))
+#define BG_TILE_V_FLIP(n) (0x800 | (n))
+
 // text-mode BG
 #define OBJ_VRAM0      (VRAM + 0x10000)
 #define OBJ_VRAM0_SIZE 0x8000

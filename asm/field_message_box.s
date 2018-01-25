@@ -57,7 +57,7 @@ _08098182:
 _08098188:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 _08098190:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -313,7 +313,7 @@ sub_8098358: @ 8098358
 	bl task_del_textbox
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldr r1, =gUnknown_020375BC
 	movs r0, 0
 	strb r0, [r1]

@@ -463,7 +463,7 @@ sub_816B21C: @ 816B21C
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -599,7 +599,7 @@ mapldr_080EBC0C: @ 816B33C
 	bl sub_81973A4
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r0, =sub_816B368
 	movs r1, 0
 	bl CreateTask
@@ -2540,7 +2540,7 @@ bx_battle_menu_t3: @ 816C3A4
 	bne _0816C3F2
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	movs r1, 0x6
 	ldrsh r0, [r5, r1]
 	cmp r0, 0

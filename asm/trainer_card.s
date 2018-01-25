@@ -409,7 +409,7 @@ _080C2A2C:
 	bl sub_800AC34
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_WaitingTrainerFinishReading
 	movs r0, 0x1
 	str r0, [sp]

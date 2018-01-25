@@ -6730,7 +6730,7 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     subPrinter.letterSpacing = 0;
     subPrinter.lineSpacing = 0;
     subPrinter.fontColor_l = TEXT_COLOR_TRANSPARENT;
-    subPrinter.fontColor_h = TEXT_COLOR_WHITE;
+    subPrinter.fgColor = TEXT_COLOR_WHITE;
     subPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
     subPrinter.shadowColor = TEXT_COLOR_DARK_GREY;
 

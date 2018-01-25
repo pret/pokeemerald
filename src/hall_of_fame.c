@@ -81,7 +81,7 @@ extern const u8 gText_MainMenuTime[];
 extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
 
-extern void sub_81973C4(u8, u8);
+extern void NewMenuHelpers_DrawDialogueFrame(u8, u8);
 extern u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 speed, void ( *callback)(u16, struct TextPrinter *), u8 fgColor, u8 bgColor, u8 shadowColor);
 extern void sub_8175620(void);
 extern u8 TrySavingData(u8);
@@ -539,7 +539,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     }
     *lastSavedTeam = *sHofMonPtr;
 
-    sub_81973C4(0, 0);
+    NewMenuHelpers_DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_SavingDontTurnOffPower, 0, NULL, 2, 1, 3);
     CopyWindowToVram(0, 3);
     gTasks[taskId].func = Task_Hof_TrySaveData;
@@ -746,7 +746,7 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
     {
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         HallOfFame_PrintPlayerInfo(1, 2);
-        sub_81973C4(0, 0);
+        NewMenuHelpers_DrawDialogueFrame(0, 0);
         AddTextPrinterParameterized(0, 1, gText_LeagueChamp, 0, NULL, 2, 1, 3);
         CopyWindowToVram(0, 3);
         gTasks[taskId].func = Task_Hof_ExitOnKeyPressed;
@@ -1115,7 +1115,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
 static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
 {
     sub_8198180(gText_UnkCtrlF800Exit, 8, 1);
-    sub_81973C4(0, 0);
+    NewMenuHelpers_DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_HOFCorrupted, 0, NULL, 2, 1, 3);
     CopyWindowToVram(0, 3);
     gTasks[taskId].func = Task_HofPC_ExitOnButtonPress;

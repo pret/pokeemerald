@@ -2440,7 +2440,7 @@ void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
     textSubPrinter.letterSpacing = r8[(12 * arg1) + 4];
     textSubPrinter.lineSpacing = r8[(12 * arg1) + 5];
     textSubPrinter.fontColor_l = 0;
-    textSubPrinter.fontColor_h = r8[(12 * arg1) + 7];
+    textSubPrinter.fgColor = r8[(12 * arg1) + 7];
     textSubPrinter.bgColor = r8[(12 * arg1) + 8];
     textSubPrinter.shadowColor = r8[(12 * arg1) + 9];
 

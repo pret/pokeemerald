@@ -57,24 +57,24 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                     switch (char_)
                     {
                         case 1:
-                            textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset ++;
-                            GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                            textPrinter->subPrinter.fgColor = *textPrinter->subPrinter.current_text_offset ++;
+                            GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
                             return 2;
                         case 2:
                             textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset ++;
-                            GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                            GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
                             return 2;
                         case 3:
                             textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset ++;
-                            GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                            GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
                             return 2;
                         case 4:
-                            textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
+                            textPrinter->subPrinter.fgColor = *textPrinter->subPrinter.current_text_offset;
                             textPrinter->subPrinter.bgColor = *++ textPrinter->subPrinter.current_text_offset;
                             textPrinter->subPrinter.shadowColor = *++ textPrinter->subPrinter.current_text_offset;
                             textPrinter->subPrinter.current_text_offset ++;
 
-                            GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                            GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
                             return 2;
                         case 5:
                             textPrinter->subPrinter.current_text_offset ++;

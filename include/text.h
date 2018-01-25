@@ -116,7 +116,7 @@ struct TextSubPrinter // TODO: Better name
     u8 letterSpacing;
     u8 lineSpacing;
     u8 fontColor_l:4;   // 0xC
-    u8 fontColor_h:4;
+    u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
 };
@@ -149,7 +149,7 @@ struct FontInfo
     u8 letterSpacing;
     u8 lineSpacing;
     u8 fontColor_l:4;
-    u8 fontColor_h:4;
+    u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
 };

@@ -247,7 +247,7 @@ SECTIONS {
         src/battle_dome_cards.o(.text);
         src/lilycove_lady.o(.text);
         asm/battle_frontier_1.o(.text);
-        asm/new_menu_helpers.o(.text);
+        src/new_menu_helpers.o(.text);
         asm/menu.o(.text);
         asm/battle_frontier_2.o(.text);
         asm/item_menu.o(.text);

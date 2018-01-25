@@ -39,5 +39,6 @@ void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterS
 void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
 void sub_81995E4(u8 windowId, u8 optionsNo, const struct MenuAction *actions, const u8 *actionIds);
 void sub_8197DF8(u8 windowId, bool8 copyToVram);
+u8 sub_8198AA4(u8, u8, u8, u8, u8, u8, u16);
 
 #endif // GUARD_MENU_H

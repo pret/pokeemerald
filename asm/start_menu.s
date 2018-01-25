@@ -148,7 +148,7 @@ _0809F8E4:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldr r1, =gUnknown_02037619
 	movs r0, 0
 	strb r0, [r1, 0x1]
@@ -1832,7 +1832,7 @@ _080A06EC:
 	strb r0, [r6]
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
