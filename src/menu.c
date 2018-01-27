@@ -7,6 +7,7 @@
 #include "constants/songs.h"
 #include "main.h"
 #include "sound.h"
+#include "menu_helpers.h"
 
 struct SomeUnkStruct
 {
@@ -24,11 +25,11 @@ struct Menu
     s8 maxCursorPos;
     u8 windowId;
     u8 fontId;
-    u8 menu_field_7;
-    u8 cursorHeight;
-    u8 menu_field_9;
-    u8 menu_field_A;
-    u8 menu_field_B;
+    u8 optionWidth;
+    u8 optionHeight;
+    u8 horizontalCount;
+    u8 verticalCount;
+    bool8 APressMuted;
 };
 
 extern EWRAM_DATA struct Menu gUnknown_0203CD90;
@@ -435,7 +436,7 @@ void sub_8198314(void)
     }
 }
 
-u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 cursorPos, u8 a7)
+u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos, u8 a7)
 {
     s32 pos;
     
@@ -445,10 +446,10 @@ u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numC
     gUnknown_0203CD90.maxCursorPos = numChoices - 1;
     gUnknown_0203CD90.windowId = windowId;
     gUnknown_0203CD90.fontId = fontId;
-    gUnknown_0203CD90.cursorHeight = cursorHeight;
-    gUnknown_0203CD90.menu_field_B = a7;
+    gUnknown_0203CD90.optionHeight = cursorHeight;
+    gUnknown_0203CD90.APressMuted = a7;
     
-    pos = cursorPos;
+    pos = initialCursorPos;
     
     if (pos < 0 || pos > gUnknown_0203CD90.maxCursorPos)
         gUnknown_0203CD90.cursorPos = 0;
@@ -459,14 +460,15 @@ u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numC
     return gUnknown_0203CD90.cursorPos;
 }
 
-u8 sub_81983AC(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 cursorPos)
+u8 sub_81983AC(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos)
 {
-    return sub_8198348(windowId, fontId, left, top, cursorHeight, numChoices, cursorPos, 0);
+    return sub_8198348(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos, 0);
 }
 
-u8 sub_81983EC(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8 cursorPos)
+u8 sub_81983EC(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8 initialCursorPos)
 {
-    return sub_81983AC(windowId, fontId, left, top, GetMenuCursorDimensionByFont(fontId, 1), numChoices, cursorPos);
+    u8 cursorHeight = GetMenuCursorDimensionByFont(fontId, 1);
+    return sub_81983AC(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos);
 }
 
 void RedrawMenuCursor(u8 oldPos, u8 newPos)
@@ -475,8 +477,8 @@ void RedrawMenuCursor(u8 oldPos, u8 newPos)
     
     width = GetMenuCursorDimensionByFont(gUnknown_0203CD90.fontId, 0);
     height = GetMenuCursorDimensionByFont(gUnknown_0203CD90.fontId, 1);
-    FillWindowPixelRect(gUnknown_0203CD90.windowId, 0x11, gUnknown_0203CD90.left, gUnknown_0203CD90.cursorHeight * oldPos + gUnknown_0203CD90.top, width, height);
-    PrintTextOnWindow(gUnknown_0203CD90.windowId, gUnknown_0203CD90.fontId, gText_SelectorArrow3, gUnknown_0203CD90.left, gUnknown_0203CD90.cursorHeight * newPos + gUnknown_0203CD90.top, 0, 0);
+    FillWindowPixelRect(gUnknown_0203CD90.windowId, 0x11, gUnknown_0203CD90.left, gUnknown_0203CD90.optionHeight * oldPos + gUnknown_0203CD90.top, width, height);
+    PrintTextOnWindow(gUnknown_0203CD90.windowId, gUnknown_0203CD90.fontId, gText_SelectorArrow3, gUnknown_0203CD90.left, gUnknown_0203CD90.optionHeight * newPos + gUnknown_0203CD90.top, 0, 0);
 }
 
 u8 MoveMenuCursor(s8 cursorDelta)
@@ -520,17 +522,15 @@ s8 ProcessMenuInput(void)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        if (!gUnknown_0203CD90.menu_field_B)
+        if (!gUnknown_0203CD90.APressMuted)
             PlaySE(SE_SELECT);
         return gUnknown_0203CD90.cursorPos;
     }
-
-    if (gMain.newKeys & B_BUTTON)
+    else if (gMain.newKeys & B_BUTTON)
     {
         return -1;
     }
-
-    if (gMain.newKeys & DPAD_UP)
+    else if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
         MoveMenuCursor(-1);
@@ -552,17 +552,15 @@ s8 ProcessMenuInputNoWrapAround(void)
     
     if (gMain.newKeys & A_BUTTON)
     {
-        if (!gUnknown_0203CD90.menu_field_B)
+        if (!gUnknown_0203CD90.APressMuted)
             PlaySE(SE_SELECT);
         return gUnknown_0203CD90.cursorPos;
     }
-
-    if (gMain.newKeys & B_BUTTON)
+    else if (gMain.newKeys & B_BUTTON)
     {
         return -1;
     }
-
-    if (gMain.newKeys & DPAD_UP)
+    else if (gMain.newKeys & DPAD_UP)
     {
         if (oldPos != MoveMenuCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
@@ -582,17 +580,15 @@ s8 ProcessMenuInput_other(void)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        if (!gUnknown_0203CD90.menu_field_B)
+        if (!gUnknown_0203CD90.APressMuted)
             PlaySE(SE_SELECT);
         return gUnknown_0203CD90.cursorPos;
     }
-
-    if (gMain.newKeys & B_BUTTON)
+    else if (gMain.newKeys & B_BUTTON)
     {
         return -1;
     }
-
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         MoveMenuCursor(-1);
@@ -614,17 +610,15 @@ s8 ProcessMenuInputNoWrapAround_other(void)
     
     if (gMain.newKeys & A_BUTTON)
     {
-        if (!gUnknown_0203CD90.menu_field_B)
+        if (!gUnknown_0203CD90.APressMuted)
             PlaySE(SE_SELECT);
         return gUnknown_0203CD90.cursorPos;
     }
-
-    if (gMain.newKeys & B_BUTTON)
+    else if (gMain.newKeys & B_BUTTON)
     {
         return -1;
     }
-
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
     {
         if (oldPos != MoveMenuCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
@@ -722,7 +716,7 @@ u16 sub_8198AA4(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 
     return AddWindow(&template);
 }
 
-void sub_8198AF8(struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 cursorPos)
+void sub_8198AF8(struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
     struct TextSubPrinter printer;
     
@@ -745,7 +739,7 @@ void sub_8198AF8(struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 
     
     AddTextPrinter(&printer, 0xFF, 0);
     
-    sub_81983AC(gUnknown_0203CD9F, fontId, left, top, GetFontAttribute(fontId, 1), 2, cursorPos);
+    sub_81983AC(gUnknown_0203CD9F, fontId, left, top, GetFontAttribute(fontId, 1), 2, initialCursorPos);
 }
 
 void sub_8198C34(struct WindowTemplate *window, u8 fontId, u16 baseTileNum, u8 paletteNum)
@@ -822,20 +816,20 @@ void sub_8198EF8(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struc
     sub_8198DBC(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a4, a5, strs, a8);
 }
 
-u8 sub_8198F58(u8 a0, u8 a1, s8 a2, s8 a3, u8 a4, u8 a5, u8 a6, u8 a7, u8 a8, u8 a9)
+u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, u8 a6, u8 a7, u8 numChoices, u8 a9)
 {
     s32 pos;
     
-    gUnknown_0203CD90.left = a2;
-    gUnknown_0203CD90.top = a3;
+    gUnknown_0203CD90.left = left;
+    gUnknown_0203CD90.top = top;
     gUnknown_0203CD90.minCursorPos = 0;
-    gUnknown_0203CD90.maxCursorPos = a8 - 1;
-    gUnknown_0203CD90.windowId = a0;
-    gUnknown_0203CD90.fontId = a1;
-    gUnknown_0203CD90.menu_field_7 = a4;
-    gUnknown_0203CD90.cursorHeight = a5;
-    gUnknown_0203CD90.menu_field_9 = a6;
-    gUnknown_0203CD90.menu_field_A = a7;
+    gUnknown_0203CD90.maxCursorPos = numChoices - 1;
+    gUnknown_0203CD90.windowId = windowId;
+    gUnknown_0203CD90.fontId = fontId;
+    gUnknown_0203CD90.optionWidth = a4;
+    gUnknown_0203CD90.optionHeight = cursorHeight;
+    gUnknown_0203CD90.horizontalCount = a6;
+    gUnknown_0203CD90.verticalCount = a7;
     
     pos = a9;
     
@@ -846,4 +840,343 @@ u8 sub_8198F58(u8 a0, u8 a1, s8 a2, s8 a3, u8 a4, u8 a5, u8 a6, u8 a7, u8 a8, u8
     
     sub_8199134(0, 0);
     return gUnknown_0203CD90.cursorPos;
+}
+
+u8 sub_8198FD4(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7)
+{
+    u8 cursorHeight = GetMenuCursorDimensionByFont(fontId, 1);
+    u8 numChoices = a5 * a6;
+    return sub_8198F58(windowId, fontId, left, top, a4, cursorHeight, a5, a6, numChoices, a7);
+}
+
+void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
+{
+    u8 cursorWidth = GetMenuCursorDimensionByFont(gUnknown_0203CD90.fontId, 0);
+    u8 cursorHeight = GetMenuCursorDimensionByFont(gUnknown_0203CD90.fontId, 1);
+    u8 xPos = (oldCursorPos % gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.optionWidth + gUnknown_0203CD90.left;
+    u8 yPos = (oldCursorPos / gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.optionHeight + gUnknown_0203CD90.top;
+    FillWindowPixelRect(gUnknown_0203CD90.windowId,
+                        0x11,
+                        xPos,
+                        yPos,
+                        cursorWidth,
+                        cursorHeight);
+    xPos = (newCursorPos % gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.optionWidth + gUnknown_0203CD90.left;
+    yPos = (newCursorPos / gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.optionHeight + gUnknown_0203CD90.top;
+    PrintTextOnWindow(gUnknown_0203CD90.windowId,
+                      gUnknown_0203CD90.fontId,
+                      gText_SelectorArrow3,
+                      xPos,
+                      yPos,
+                      0,
+                      0);
+}
+
+u8 sub_8199134(s8 deltaX, s8 deltaY)
+{
+    u8 oldPos = gUnknown_0203CD90.cursorPos;
+    
+    if (deltaX != 0)
+    {
+        if ((gUnknown_0203CD90.cursorPos % gUnknown_0203CD90.horizontalCount) + deltaX < 0)
+        {
+            gUnknown_0203CD90.cursorPos += gUnknown_0203CD90.horizontalCount - 1;
+        }
+        else if ((gUnknown_0203CD90.cursorPos % gUnknown_0203CD90.horizontalCount) + deltaX >= gUnknown_0203CD90.horizontalCount)
+        {
+            gUnknown_0203CD90.cursorPos = (gUnknown_0203CD90.cursorPos / gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.horizontalCount;
+        }
+        else
+        {
+            gUnknown_0203CD90.cursorPos += deltaX;
+        }
+    }
+    
+    if (deltaY != 0)
+    {
+        if ((gUnknown_0203CD90.cursorPos / gUnknown_0203CD90.horizontalCount) + deltaY < 0)
+        {
+            gUnknown_0203CD90.cursorPos += gUnknown_0203CD90.horizontalCount * (gUnknown_0203CD90.verticalCount - 1);
+        }
+        else if ((gUnknown_0203CD90.cursorPos / gUnknown_0203CD90.horizontalCount) + deltaY >= gUnknown_0203CD90.verticalCount)
+        {
+            gUnknown_0203CD90.cursorPos -= gUnknown_0203CD90.horizontalCount * (gUnknown_0203CD90.verticalCount - 1);
+        }
+        else
+        {
+            gUnknown_0203CD90.cursorPos += (gUnknown_0203CD90.horizontalCount * deltaY);
+        }
+    }
+    
+    if (gUnknown_0203CD90.cursorPos > gUnknown_0203CD90.maxCursorPos)
+    {
+        gUnknown_0203CD90.cursorPos = oldPos;
+        return gUnknown_0203CD90.cursorPos;
+    }
+    else
+    {
+        sub_8199060(oldPos, gUnknown_0203CD90.cursorPos);
+        return gUnknown_0203CD90.cursorPos;
+    }
+}
+
+u8 sub_81991F8(s8 deltaX, s8 deltaY)
+{
+    u8 oldPos = gUnknown_0203CD90.cursorPos;
+    
+    if (deltaX != 0)
+    {
+        if (((gUnknown_0203CD90.cursorPos % gUnknown_0203CD90.horizontalCount) + deltaX >= 0) &&
+        ((gUnknown_0203CD90.cursorPos % gUnknown_0203CD90.horizontalCount) + deltaX < gUnknown_0203CD90.horizontalCount))
+        {
+            gUnknown_0203CD90.cursorPos += deltaX;
+        }
+    }
+    
+    if (deltaY != 0)
+    {
+        if (((gUnknown_0203CD90.cursorPos / gUnknown_0203CD90.horizontalCount) + deltaY >= 0) &&
+        ((gUnknown_0203CD90.cursorPos / gUnknown_0203CD90.horizontalCount) + deltaY < gUnknown_0203CD90.verticalCount))
+        {
+            gUnknown_0203CD90.cursorPos += (gUnknown_0203CD90.horizontalCount * deltaY);
+        }
+    }
+    
+    if (gUnknown_0203CD90.cursorPos > gUnknown_0203CD90.maxCursorPos)
+    {
+        gUnknown_0203CD90.cursorPos = oldPos;
+        return gUnknown_0203CD90.cursorPos;
+    }
+    else
+    {
+        sub_8199060(oldPos, gUnknown_0203CD90.cursorPos);
+        return gUnknown_0203CD90.cursorPos;
+    }
+}
+
+s8 sub_8199284(void)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_0203CD90.cursorPos;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        return -1;
+    }
+    else if (gMain.newKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        sub_8199134(0, -1);
+        return -2;
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        sub_8199134(0, 1);
+        return -2;
+    }
+    else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+    {
+        PlaySE(SE_SELECT);
+        sub_8199134(-1, 0);
+        return -2;
+    }
+    else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+    {
+        PlaySE(SE_SELECT);
+        sub_8199134(1, 0);
+        return -2;
+    }
+
+    return -2;
+}
+
+s8 sub_8199334(void)
+{
+    u8 oldPos = gUnknown_0203CD90.cursorPos;
+    
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_0203CD90.cursorPos;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        return -1;
+    }
+    else if (gMain.newKeys & DPAD_UP)
+    {
+        if (oldPos != sub_81991F8(0, -1))
+            PlaySE(SE_SELECT);
+        return -2;
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        if (oldPos != sub_81991F8(0, 1))
+            PlaySE(SE_SELECT);
+        return -2;
+    }
+    else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+    {
+        if (oldPos != sub_81991F8(-1, 0))
+            PlaySE(SE_SELECT);
+        return -2;
+    }
+    else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+    {
+        if (oldPos != sub_81991F8(1, 0))
+            PlaySE(SE_SELECT);
+        return -2;
+    }
+
+    return -2;
+}
+
+s8 sub_81993D8(void)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_0203CD90.cursorPos;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        return -1;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        sub_8199134(0, -1);
+        return -2;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        sub_8199134(0, 1);
+        return -2;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || sub_812210C() == 1)
+    {
+        PlaySE(SE_SELECT);
+        sub_8199134(-1, 0);
+        return -2;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || sub_812210C() == 2)
+    {
+        PlaySE(SE_SELECT);
+        sub_8199134(1, 0);
+        return -2;
+    }
+
+    return -2;
+}
+
+s8 sub_8199484(void)
+{
+    u8 oldPos = gUnknown_0203CD90.cursorPos;
+    
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_0203CD90.cursorPos;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        return -1;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    {
+        if (oldPos != sub_81991F8(0, -1))
+            PlaySE(SE_SELECT);
+        return -2;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    {
+        if (oldPos != sub_81991F8(0, 1))
+            PlaySE(SE_SELECT);
+        return -2;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || sub_812210C() == 1)
+    {
+        if (oldPos != sub_81991F8(-1, 0))
+            PlaySE(SE_SELECT);
+        return -2;
+    }
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || sub_812210C() == 2)
+    {
+        if (oldPos != sub_81991F8(1, 0))
+            PlaySE(SE_SELECT);
+        return -2;
+    }
+
+    return -2;
+}
+
+u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, bool8 APressMuted)
+{
+    s32 pos;
+    
+    gUnknown_0203CD90.left = 0;
+    gUnknown_0203CD90.top = 1;
+    gUnknown_0203CD90.minCursorPos = 0;
+    gUnknown_0203CD90.maxCursorPos = itemCount - 1;
+    gUnknown_0203CD90.windowId = windowId;
+    gUnknown_0203CD90.fontId = 1;
+    gUnknown_0203CD90.optionHeight = 16;
+    gUnknown_0203CD90.APressMuted = APressMuted;
+    
+    pos = initialCursorPos;
+    
+    if (pos < 0 || pos > gUnknown_0203CD90.maxCursorPos)
+        gUnknown_0203CD90.cursorPos = 0;
+    else
+        gUnknown_0203CD90.cursorPos = pos;
+    
+    return MoveMenuCursor(0);
+}
+
+u8 InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 windowId, u8 itemCount, u8 initialCursorPos)
+{
+    return InitMenuInUpperLeftCorner(windowId, itemCount, initialCursorPos, FALSE);
+}
+
+void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs)
+{
+    u32 i;
+    
+    for (i = 0; i < itemCount; i++)
+    {
+        PrintTextOnWindow(windowId, 1, strs[i].text, 8, (i * 16) + 1, 0xFF, NULL);
+    }
+    
+    CopyWindowToVram(windowId, 2);
+}
+
+void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const u8 *a8)
+{
+    u8 i;
+    struct TextSubPrinter printer;
+    
+    printer.windowId = windowId;
+    printer.fontId = 1;
+    printer.fgColor = GetFontAttribute(1, 5);
+    printer.bgColor = GetFontAttribute(1, 6);
+    printer.shadowColor = GetFontAttribute(1, 7);
+    printer.fontColor_l = GetFontAttribute(1, 4);
+    printer.letterSpacing = 0;
+    printer.lineSpacing = 0;
+    printer.x = 8;
+    printer.currentX = 8;
+    
+    for (i = 0; i < itemCount; i++)
+    {
+        printer.current_text_offset = strs[a8[i]].text;
+        printer.y = (i * 16) + 1;
+        printer.currentY = (i * 16) + 1;
+        AddTextPrinter(&printer, 0xFF, 0);
+    }
+    
+    CopyWindowToVram(windowId, 2);
 }
