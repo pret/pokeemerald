@@ -1340,12 +1340,9 @@ gUnknown_0203CD80: @ 203CD80
 gUnknown_0203CD88: @ 203CD88
 	.space 0x4
 
-gUnknown_0203CD8C: @ 203CD8C
-	.space 0x1
+    .include "src/new_menu_helpers.o"
 
-gUnknown_0203CD8D: @ 203CD8D
-	.space 0x3
-
+    .align 2
 gUnknown_0203CD90: @ 203CD90
 	.space 0xC
 

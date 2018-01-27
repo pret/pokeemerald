@@ -13,34 +13,29 @@
 #define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200
 
-extern EWRAM_DATA u8 gUnknown_0203CD8C;
-extern EWRAM_DATA u8 gUnknown_0203CD8D;
+static EWRAM_DATA u8 gUnknown_0203CD8C = 0;
+static EWRAM_DATA u8 gUnknown_0203CD8D = 0;
 
-extern const u8 gUnknown_0860EA6C[];
-extern const u16 gUnknown_0860EA4C[];
-extern const u16 gUnknown_0860F074[];
-extern const u8 gUnknown_0860F094[];
-extern const struct WindowTemplate gUnknown_0860F098[];
-extern const struct WindowTemplate gUnknown_0860F0A8;
+const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
+static const u8 gUnknown_0860F094[] = { 8, 4, 1 };
 
-extern void sub_819645C(void);
+static const struct WindowTemplate gUnknown_0860F098[] = 
+{
+    { 0x00, 0x02, 0x0F, 0x1B, 0x04, 0x0F, 0x194 },
+    DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate gUnknown_0860F0A8 =
+{
+    0x00, 0x15, 0x09, 0x05, 0x04, 0x0F, 0x125
+};
+
 // Forward declarations
 extern void sub_81973A4(void);
 extern void DrawStandardFrame(u8, u8, u8, u8, u8, u8);
 extern void DrawDialogueFrame(u8, u8, u8, u8, u8, u8);
 extern void sub_81977BC(u8, u8, u8, u8, u8, u8);
 extern void sub_8197804(u8, u8, u8, u8, u8, u8);
-
-void sub_8197184(u8 window, u32 destTile, u32 destPalette)
-{
-    LoadBgTiles(GetWindowAttribute(window, WINDOW_PRIORITY), gUnknown_0860EA6C, 0x100, destTile);
-    LoadPalette(gUnknown_0860EA4C, destPalette * 16, 32);
-}
-
-void sub_81971C4(void)
-{
-    sub_819645C();
-}
 
 void sub_81971D0(void)
 {
