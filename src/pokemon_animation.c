@@ -592,7 +592,23 @@ static const u8 sSpeciesToBackAnimId[] =
     0x11, // SPECIES_CHIMECHO
 };
 
-const u8 gUnknown_0860AA64[] = {0x00, 0x05, 0x01, 0x01, 0x00, 0x0f, 0x01, 0x04, 0x00, 0x02, 0x01, 0x02, 0x00, 0x02, 0x01, 0x02, 0x00, 0x02, 0x01, 0x02, 0x00, 0x02, 0x01, 0x02, 0x00, 0x02, 0x00, 0xff};
+const u8 gUnknown_0860AA64[][2] =
+{
+    {0, 5},
+    {1, 1},
+    {0, 15},
+    {1, 4},
+    {0, 2},
+    {1, 2},
+    {0, 2},
+    {1, 2},
+    {0, 2},
+    {1, 2},
+    {0, 2},
+    {1, 2},
+    {0, 2},
+    {0, 0xFF}
+};
 
 const u8 gUnknown_0860AA80[][2] =
 {
@@ -833,8 +849,6 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_860AD68[] =
     gSpriteAffineAnim_860AD48,
     gSpriteAffineAnim_860AD58
 };
-
-extern const s8 gUnknown_0860AD70[][3];
 
 // code
 void MonAnimDummySpriteCallback(struct Sprite *sprite)
@@ -1300,6 +1314,20 @@ void pokemonanimfunc_09(struct Sprite *sprite)
 
     sprite->data[2]++;
 }
+
+static const s8 gUnknown_0860AD70[][3] =
+{
+    {-1, -1, 6},
+    {2,   0, 6},
+    {-2,  2, 6},
+    {2,   0, 6},
+    {-2, -2, 6},
+    {2,   0, 6},
+    {-2,  2, 6},
+    {2,   0, 6},
+    {-1, -1, 6},
+    {0,   0, 0},
+};
 
 void sub_817FC20(struct Sprite *sprite)
 {
@@ -1826,5 +1854,1281 @@ void pokemonanimfunc_1D(struct Sprite *sprite)
     }
 
     sprite->data[2]++;
+    sub_817F70C(sprite);
+}
+
+void sub_8180714(struct Sprite *sprite)
+{
+    s16 posY = 0;
+
+    if (sprite->data[2] == 0)
+    {
+        HandleStartAffineAnim(sprite);
+        sprite->data[3] = 0;
+    }
+
+    sub_817F70C(sprite);
+
+    if (sprite->data[2] > sprite->data[0] * 3)
+    {
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sprite->pos2.y = 0;
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        s16 yScale = Sin(sprite->data[4], 32) + 256;
+
+        if (sprite->data[2] > sprite->data[0] && sprite->data[2] < sprite->data[0] * 2)
+            sprite->data[3] += (128 / sprite->data[0]);
+        if (yScale > 256)
+            posY = (256 - yScale) / 8;
+
+        sprite->pos2.y = -(Sin(sprite->data[3], 10)) - posY;
+        HandleSetAffineData(sprite, 0x100 - Sin(sprite->data[4], 32), yScale, 0);
+        sprite->data[2]++;
+        sprite->data[4] = (sprite->data[4] + 128 / sprite->data[0]) & 0xFF;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void pokemonanimfunc_00(struct Sprite *sprite)
+{
+    sprite->data[0] = 16;
+    sub_8180714(sprite);
+    sprite->callback = sub_8180714;
+}
+
+void sub_8180828(struct Sprite *sprite)
+{
+    s16 posY = 0;
+
+    if (sprite->data[2] > (128 / sprite->data[6]) * sprite->data[7])
+    {
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sprite->pos2.y = 0;
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        s16 yScale = Sin(sprite->data[4], 32) + 256;
+
+        if (yScale > 256)
+            posY = (256 - yScale) / 8;
+
+        sprite->pos2.y = -(posY);
+        HandleSetAffineData(sprite, Sin(sprite->data[4], 48) + 256, yScale, 0);
+        sprite->data[2]++;
+        sprite->data[4] = (sprite->data[4] + sprite->data[6]) & 0xFF;
+    }
+}
+
+void pokemonanimfunc_13(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        HandleStartAffineAnim(sprite);
+        sprite->data[7] = 3;
+        sprite->data[6] = 8;
+    }
+
+    sub_8180828(sprite);
+}
+
+static const s8 gUnknown_0860AD8E[][8][3] =
+{
+    {
+        {0,  8, 8},
+        {8, -8, 12},
+        {-8, 8, 12},
+        {8, -8, 12},
+        {-8, 8, 12},
+        {8, -8, 12},
+        {-8, 0, 12},
+        {0,  0, 0}
+    },
+    {
+        {0,  8, 16},
+        {8, -8, 24},
+        {-8, 8, 24},
+        {8, -8, 24},
+        {-8, 8, 24},
+        {8, -8, 24},
+        {-8, 0, 24},
+        {0,  0, 0}
+    },
+};
+
+void sub_8180900(struct Sprite *sprite)
+{
+    s16 var;
+    u8 structId;
+    s8 r9;
+    s16 r10;
+    s16 r7;
+    u32 arrId;
+
+    sub_817F70C(sprite);
+    structId = sprite->data[0];
+    var = gUnknown_03001240[structId].field_6;
+    r9 = gUnknown_0860AD8E[gUnknown_03001240[structId].field_8][sprite->data[4]][0];
+    r10 = gUnknown_0860AD8E[gUnknown_03001240[structId].field_8][sprite->data[4]][1] - r9;
+    arrId = gUnknown_03001240[structId].field_8;
+    r7 = sprite->data[3];
+
+    if (sprite->data[2] == 0)
+    {
+        HandleStartAffineAnim(sprite);
+        sprite->data[2]++;
+    }
+
+    if (gUnknown_0860AD8E[arrId][sprite->data[4]][2] == 0)
+    {
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        u16 rotation;
+
+        sprite->pos2.y = -(Sin(r7 * 128 / gUnknown_0860AD8E[arrId][sprite->data[4]][2], 10));
+        sprite->pos2.x = (r10 * r7 / gUnknown_0860AD8E[arrId][sprite->data[4]][2]) + r9;
+
+        rotation = -(var * sprite->pos2.x) / 8;
+        HandleSetAffineData(sprite, 0x100, 0x100, rotation);
+
+        if (r7 == gUnknown_0860AD8E[arrId][sprite->data[4]][2])
+        {
+            sprite->data[4]++;
+            sprite->data[3] = 0;
+        }
+        else
+        {
+            sprite->data[3]++;
+        }
+    }
+
+    sub_817F70C(sprite);
+}
+
+void pokemonanimfunc_05(struct Sprite *sprite)
+{
+    u8 id = sprite->data[0] = sub_817F758();
+    gUnknown_03001240[id].field_6 = 4096;
+    gUnknown_03001240[id].field_8 = sprite->data[6];
+    sub_8180900(sprite);
+    sprite->callback = sub_8180900;
+}
+
+const u8 gUnknown_0860ADBE[] = {0x01, 0x01, 0x0c, 0xfe, 0x00, 0x0c, 0x01, 0xff, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+void pokemonanimfunc_20(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+
+    if (sprite->data[2] > 128)
+    {
+        BlendPalette(sprite->data[7], 0x10, 0, 0x2DF);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        sprite->data[6] = Sin(sprite->data[2], 12);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x2DF);
+    }
+
+    sprite->data[2] += 2;
+}
+
+void pokemonanimfunc_21(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+
+    if (sprite->data[2] > 128)
+    {
+        BlendPalette(sprite->data[7], 0x10, 0, 0x1F);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        sprite->data[6] = Sin(sprite->data[2], 12);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x1F);
+    }
+
+    sprite->data[2] += 2;
+}
+
+void pokemonanimfunc_22(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+
+    if (sprite->data[2] > 128)
+    {
+        BlendPalette(sprite->data[7], 0x10, 0, 0x7C00);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        sprite->data[6] = Sin(sprite->data[2], 12);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x7C00);
+    }
+
+    sprite->data[2] += 2;
+}
+
+void pokemonanimfunc_23(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+
+    if (sprite->data[2] > 128)
+    {
+        BlendPalette(sprite->data[7], 0x10, 0, 0x3FF);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        sprite->data[6] = Sin(sprite->data[2], 12);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x3FF);
+    }
+
+    sprite->data[2] += 2;
+}
+
+void pokemonanimfunc_24(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+
+    if (sprite->data[2] > 128)
+    {
+        BlendPalette(sprite->data[7], 0x10, 0, 0x6018);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        sprite->data[6] = Sin(sprite->data[2], 12);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x6018);
+    }
+
+    sprite->data[2] += 2;
+}
+
+void sub_8180CB4(struct Sprite *sprite);
+void sub_8180CE8(struct Sprite *sprite);
+void sub_8180D44(struct Sprite *sprite);
+void sub_8180DC0(struct Sprite *sprite);
+void sub_8180E28(struct Sprite *sprite);
+
+void pokemonanimfunc_25(struct Sprite *sprite)
+{
+    HandleStartAffineAnim(sprite);
+    sprite->callback = sub_8180CB4;
+}
+
+void sub_8180CB4(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    if (++sprite->pos2.x > 7)
+    {
+        sprite->pos2.x = 8;
+        sprite->data[7] = 2;
+        sprite->callback = sub_8180CE8;
+    }
+    sub_817F70C(sprite);
+}
+
+void sub_8180CE8(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+
+    sprite->pos2.x -= sprite->data[7];
+    sprite->data[7]++;
+    if (sprite->pos2.x <= 0)
+    {
+        s16 subResult;
+        u8 var = sprite->data[7];
+        sprite->data[6] = 0;
+        subResult = sprite->pos2.x;
+
+        do
+        {
+            subResult -= var;
+            sprite->data[6]++;
+            var++;
+        }
+        while (subResult > -8);
+
+        sprite->data[5] = 1;
+        sprite->callback = sub_8180D44;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8180D44(struct Sprite *sprite)
+{
+    u8 rotation;
+
+    sub_817F70C(sprite);
+    sprite->pos2.x -= sprite->data[7];
+    sprite->data[7]++;
+    rotation = (sprite->data[5] * 6) / sprite->data[6];
+
+    if (++sprite->data[5] > sprite->data[6])
+        sprite->data[5] = sprite->data[6];
+
+    HandleSetAffineData(sprite, 0x100, 0x100, rotation * 256);
+
+    if (sprite->pos2.x < -8)
+    {
+        sprite->pos2.x = -8;
+        sprite->data[4] = 2;
+        sprite->data[3] = 0;
+        sprite->data[2] = rotation;
+        sprite->callback = sub_8180DC0;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8180DC0(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+
+    if (sprite->data[3] > 11)
+    {
+        sprite->data[2] -= 2;
+        if (sprite->data[2] < 0)
+            sprite->data[2] = 0;
+
+        HandleSetAffineData(sprite, 0x100, 0x100, sprite->data[2] << 8);
+        if (sprite->data[2] == 0)
+            sprite->callback = sub_8180E28;
+    }
+    else
+    {
+        sprite->pos2.x += sprite->data[4];
+        sprite->data[4] *= -1;
+        sprite->data[3]++;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8180E28(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+
+    sprite->pos2.x += 2;
+    if (sprite->pos2.x > 0)
+    {
+        sprite->pos2.x = 0;
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8180E78(struct Sprite *sprite);
+void sub_8180ED0(struct Sprite *sprite);
+void sub_8180F2C(struct Sprite *sprite);
+
+void pokemonanimfunc_26(struct Sprite *sprite)
+{
+    HandleStartAffineAnim(sprite);
+    sprite->data[3] = 0;
+    sprite->callback = sub_8180E78;
+}
+
+void sub_8180E78(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->pos2.x++;
+    sprite->pos2.y--;
+
+    if (sprite->pos2.x % 2 == 0 && sprite->data[3] <= 0)
+        sprite->data[3] = 10;
+    if (sprite->pos2.x > 7)
+    {
+        sprite->pos2.x = 8;
+        sprite->pos2.y = -8;
+        sprite->data[4] = 0;
+        sprite->callback = sub_8180ED0;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8180ED0(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->pos2.x = Cos(sprite->data[4], 16) - 8;
+    sprite->pos2.y = Sin(sprite->data[4], 16) - 8;
+
+    if (sprite->data[4] > 63)
+    {
+        sprite->data[2] = 160;
+        sprite->data[3] = 10;
+        sprite->callback = sub_8180F2C;
+    }
+    sprite->data[4] += 8;
+    if (sprite->data[4] > 64)
+        sprite->data[4] = 64;
+
+    sub_817F70C(sprite);
+}
+
+void sub_8180F2C(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+
+    if (sprite->data[3] > 0)
+    {
+        sprite->data[3]--;
+    }
+    else
+    {
+        u32 rotation;
+
+        sprite->pos2.x = Cos(sprite->data[2], 5) - 4;
+        sprite->pos2.y = -(Sin(sprite->data[2], 5)) + 4;
+        sprite->data[2] -= 4;
+        rotation = sprite->data[2] - 32;
+        HandleSetAffineData(sprite, 0x100, 0x100, rotation * 512);
+
+        if (sprite->data[2] <= 32)
+        {
+            sprite->pos2.x = 0;
+            sprite->pos2.y = 0;
+            sub_817F77C(sprite);
+            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        }
+    }
+
+    sub_817F70C(sprite);
+}
+
+void pokemonanimfunc_27(struct Sprite *sprite)
+{
+    if (sprite->data[3] > 0)
+    {
+        sprite->data[3]--;
+    }
+    else
+    {
+        sprite->data[4] = (sprite->data[4] == 0) ? 1 : 0;
+        sprite->invisible = sprite->data[4];
+        if (++sprite->data[2] > 19)
+        {
+            sprite->invisible = 0;
+            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        }
+        sprite->data[3] = 2;
+    }
+}
+
+void sub_8181024(struct Sprite *sprite);
+void sub_8181068(struct Sprite *sprite);
+void sub_81810C4(struct Sprite *sprite);
+
+void pokemonanimfunc_28(struct Sprite *sprite)
+{
+    HandleStartAffineAnim(sprite);
+    sprite->callback = sub_8181024;
+}
+
+void sub_8181024(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->pos2.x--;
+    sprite->pos2.y++;
+
+    if (sprite->pos2.x <= -16)
+    {
+        sprite->pos2.x = -16;
+        sprite->pos2.y = 16;
+        sprite->callback = sub_8181068;
+        sprite->data[2] = 160;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8181068(struct Sprite *sprite)
+{
+    u32 rotation;
+
+    sub_817F70C(sprite);
+    sprite->data[2] -= 4;
+    sprite->pos2.x = Cos(sprite->data[2], 22);
+    sprite->pos2.y = -(Sin(sprite->data[2], 22));
+    rotation = sprite->data[2] - 32;
+    HandleSetAffineData(sprite, 0x100, 0x100, rotation * 512);
+
+    if (sprite->data[2] <= 32)
+        sprite->callback = sub_81810C4;
+
+    sub_817F70C(sprite);
+}
+
+void sub_81810C4(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->pos2.x--;
+    sprite->pos2.y++;
+
+    if (sprite->pos2.x <= 0)
+    {
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8181110(struct Sprite *sprite);
+void sub_8181144(struct Sprite *sprite);
+void sub_81811A4(struct Sprite *sprite);
+
+void pokemonanimfunc_29(struct Sprite *sprite)
+{
+    HandleStartAffineAnim(sprite);
+    sprite->callback = sub_8181110;
+}
+
+void sub_8181110(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->pos2.x++;
+    sprite->pos2.y--;
+
+    if (sprite->pos2.x > 15)
+    {
+        sprite->data[2] = 0;
+        sprite->callback = sub_8181144;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8181144(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->data[2] += 16;
+
+    if (sprite->pos2.x <= -16)
+    {
+        sprite->pos2.x = -16;
+        sprite->pos2.y = 16;
+        sprite->data[2] = 0;
+        sprite->callback = sub_81811A4;
+    }
+    else
+    {
+        sprite->pos2.x -= 2;
+        sprite->pos2.y += 2;
+    }
+
+    HandleSetAffineData(sprite, 0x100, 0x100, sprite->data[2] << 8);
+    sub_817F70C(sprite);
+}
+
+void sub_81811A4(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->pos2.x++;
+    sprite->pos2.y--;;
+
+    if (sprite->pos2.x >= 0)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8181214(struct Sprite *sprite);
+
+void pokemonanimfunc_2A(struct Sprite *sprite)
+{
+    u8 id = sprite->data[0] = sub_817F758();
+    gUnknown_03001240[id].field_2 = 2;
+    sub_8181214(sprite);
+    sprite->callback = sub_8181214;
+}
+
+void sub_8181214(struct Sprite *sprite)
+{
+    if (gUnknown_03001240[sprite->data[0]].field_0 != 0)
+    {
+        gUnknown_03001240[sprite->data[0]].field_0--;
+    }
+    else
+    {
+        sub_817F70C(sprite);
+        if (sprite->data[2] == 0)
+        {
+            sprite->data[2]++;
+            HandleStartAffineAnim(sprite);
+            sprite->data[7] = gUnknown_03001240[sprite->data[0]].field_2;
+            sprite->data[3] = -1;
+            sprite->data[4] = -1;
+            sprite->data[5] = 0;
+            sprite->data[6] = 0;
+        }
+
+        sprite->pos2.x += (sprite->data[7] * 2 * sprite->data[3]);
+        sprite->pos2.y += (sprite->data[7] * sprite->data[4]);
+        sprite->data[6] += 8;
+        if (sprite->pos2.x <= -16 || sprite->pos2.x >= 16)
+        {
+            sprite->pos2.x = sprite->data[3] * 16;
+            sprite->data[3] *= -1;
+            sprite->data[5]++;
+        }
+        else if (sprite->pos2.y <= -16 || sprite->pos2.y >= 16)
+        {
+            sprite->pos2.y = sprite->data[4] * 16;
+            sprite->data[4] *= -1;
+            sprite->data[5]++;
+        }
+
+        if (sprite->data[5] > 5 && sprite->pos2.x <= 0)
+        {
+            sprite->pos2.x = 0;
+            sprite->pos2.y = 0;
+            if (gUnknown_03001240[sprite->data[0]].field_4 > 1)
+            {
+                gUnknown_03001240[sprite->data[0]].field_4--;
+                sprite->data[5] = 0;
+                sprite->data[6] = 0;
+                gUnknown_03001240[sprite->data[0]].field_0 = 10;
+            }
+            else
+            {
+                sub_817F77C(sprite);
+                sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+            }
+        }
+
+        HandleSetAffineData(sprite, 0x100, 0x100, sprite->data[6] << 8);
+        sub_817F70C(sprite);
+    }
+}
+
+void sub_8181370(struct Sprite *sprite);
+
+void pokemonanimfunc_2B(struct Sprite *sprite)
+{
+    HandleStartAffineAnim(sprite);
+    sprite->data[6] = 0;
+    sprite->data[7] = 0;
+    sprite->callback = sub_8181370;
+}
+
+void sub_8181370(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->data[6] += 4;
+    sprite->pos2.x = -(Sin(sprite->data[6], 16));
+    sprite->pos2.y = -(Sin((sprite->data[6] * 2) & 0xFF, 8));
+    if (sprite->data[6] > 192 && sprite->data[7] == 1)
+    {
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sprite->data[7]++;
+    }
+    else if (sprite->data[6] > 64 && sprite->data[7] == 0)
+    {
+        HandleSetAffineData(sprite, -0x100, 0x100, 0);
+        sprite->data[7]++;
+    }
+
+    if (sprite->data[6] > 255)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    sub_817F70C(sprite);
+}
+
+void pokemonanimfunc_2C(struct Sprite *sprite)
+{
+    if (++sprite->data[2] == 1)
+    {
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[6] = 0;
+        sprite->data[5] = 0;
+        sprite->data[4] = 0;
+    }
+
+    if (gUnknown_0860AA64[sprite->data[6]][1] == 0xFF)
+    {
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        if (sprite->data[4] == 1)
+        {
+            if (gUnknown_0860AA64[sprite->data[6]][0] != 0)
+                BlendPalette(sprite->data[7], 0x10, 0x10, 0x3FF);
+            else
+                BlendPalette(sprite->data[7], 0x10, 0, 0x3FF);
+
+            sprite->data[4] = 0;
+        }
+
+        if (gUnknown_0860AA64[sprite->data[6]][1] == sprite->data[5])
+        {
+            sprite->data[4] = 1;
+            sprite->data[5] = 0;
+            sprite->data[6]++;
+        }
+        else
+        {
+            sprite->data[5]++;
+        }
+    }
+}
+
+void sub_81814D4(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+        HandleStartAffineAnim(sprite);
+
+    sub_817F70C(sprite);
+    if (sprite->data[2] > gUnknown_03001240[sprite->data[0]].field_8)
+    {
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sprite->pos2.x = 0;
+        if (gUnknown_03001240[sprite->data[0]].field_4 > 1)
+        {
+            gUnknown_03001240[sprite->data[0]].field_4--;
+            sprite->data[2] = 0;
+        }
+        else
+        {
+            sub_817F77C(sprite);
+            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        }
+    }
+    else
+    {
+        s16 index = (sprite->data[2] * 256) / gUnknown_03001240[sprite->data[0]].field_8;
+        sprite->pos2.x = -(Sin(index, 10));
+        HandleSetAffineData(sprite, 0x100, 0x100, Sin(index, 3276));
+    }
+
+    sprite->data[2]++;
+    sub_817F70C(sprite);
+}
+
+void pokemonanimfunc_2D(struct Sprite *sprite)
+{
+    u8 id = sprite->data[0] = sub_817F758();
+    gUnknown_03001240[id].field_8 = 50;
+    sub_81814D4(sprite);
+    sprite->callback = sub_81814D4;
+}
+
+void sub_81815D4(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+        HandleStartAffineAnim(sprite);
+
+    sub_817F70C(sprite);
+    if (sprite->data[2] > gUnknown_03001240[sprite->data[0]].field_8)
+    {
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sprite->pos2.x = 0;
+        if (gUnknown_03001240[sprite->data[0]].field_4 > 1)
+        {
+            gUnknown_03001240[sprite->data[0]].field_4--;
+            sprite->data[2] = 0;
+        }
+        else
+        {
+            sub_817F77C(sprite);
+            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        }
+    }
+    else
+    {
+        s16 index = (sprite->data[2] * 256) / gUnknown_03001240[sprite->data[0]].field_8;
+        sprite->pos2.x = -(Sin(index, 10));
+        HandleSetAffineData(sprite, 0x100, 0x100, -(Sin(index, 3276)));
+    }
+
+    sprite->data[2]++;
+    sub_817F70C(sprite);
+}
+
+void pokemonanimfunc_2E(struct Sprite *sprite)
+{
+    u8 id = sprite->data[0] = sub_817F758();
+    gUnknown_03001240[id].field_8 = 50;
+    sub_81815D4(sprite);
+    sprite->callback = sub_81815D4;
+}
+
+void sub_8181708(struct Sprite *sprite);
+void sub_8181770(struct Sprite *sprite);
+void sub_8181794(struct Sprite *sprite);
+
+void pokemonanimfunc_2F(struct Sprite *sprite)
+{
+    HandleStartAffineAnim(sprite);
+    sprite->data[6] = -(14 * sprite->centerToCornerVecX / 10);
+    sprite->data[7] = 128;
+    sprite->callback = sub_8181708;
+}
+
+void sub_8181708(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->data[7]--;
+    sprite->pos2.x = Cos(sprite->data[7], sprite->data[6]) + sprite->data[6];
+
+    sprite->pos2.y = -(Sin(sprite->data[7], sprite->data[6] += 0)); // dummy += 0 is needed to match
+
+    HandleSetAffineData(sprite, 0x100, 0x100, (sprite->data[7] - 128) << 8);
+    if (sprite->data[7] <= 120)
+    {
+        sprite->data[7] = 120;
+        sprite->data[3] = 0;
+        sprite->callback = sub_8181770;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8181770(struct Sprite *sprite)
+{
+    if (sprite->data[3] == 20)
+    {
+        sprite->callback = sub_8181794;
+        sprite->data[3] = 0;
+    }
+
+    sprite->data[3]++;
+}
+
+void sub_8181794(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->data[7] += 2;
+    sprite->pos2.x = Cos(sprite->data[7], sprite->data[6]) + sprite->data[6];
+
+    sprite->pos2.y = -(Sin(sprite->data[7], sprite->data[6] += 0)); // dummy += 0 is needed to match
+
+    HandleSetAffineData(sprite, 0x100, 0x100, (sprite->data[7] - 128) << 8);
+    if (sprite->data[7] >= 128)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sprite->data[2] = 0;
+        sub_817F77C(sprite);
+        sprite->callback = pokemonanimfunc_10;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8181810(struct Sprite *sprite)
+{
+    if (gUnknown_03001240[sprite->data[0]].field_0 != 0)
+    {
+        gUnknown_03001240[sprite->data[0]].field_0--;
+    }
+    else
+    {
+        if (sprite->data[2] == 0)
+        {
+            HandleStartAffineAnim(sprite);
+            sprite->data[4] = 0;
+            sprite->data[5] = 0;
+            sprite->data[2] = 1;
+        }
+
+        if (sprite->data[5] == 0)
+        {
+            sprite->data[7] = Sin(sprite->data[4], 256);
+            sprite->pos2.y = Sin(sprite->data[4], 16);
+            sprite->data[6] = Sin(sprite->data[4], 32);
+            HandleSetAffineData(sprite, 0x100 - sprite->data[6], 0x100 + sprite->data[7], 0);
+            if (sprite->data[4] == 128)
+            {
+                sprite->data[4] = 0;
+                sprite->data[5] = 1;
+            }
+        }
+        else if (sprite->data[5] == 1)
+        {
+            sprite->data[7] = Sin(sprite->data[4], 32);
+            sprite->pos2.y = -(Sin(sprite->data[4], 8));
+            sprite->data[6] = Sin(sprite->data[4], 128);
+            HandleSetAffineData(sprite, 0x100 + sprite->data[6], 0x100 - sprite->data[7], 0);
+            if (sprite->data[4] == 128)
+            {
+                if (gUnknown_03001240[sprite->data[0]].field_4 > 1)
+                {
+                    gUnknown_03001240[sprite->data[0]].field_4--;
+                    gUnknown_03001240[sprite->data[0]].field_0 = 10;
+                    sprite->data[4] = 0;
+                    sprite->data[5] = 0;
+                }
+                else
+                {
+                    HandleSetAffineData(sprite, 0x100, 0x100, 0);
+                    sub_817F77C(sprite);
+                    sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+                }
+            }
+        }
+
+        sprite->data[4] += gUnknown_03001240[sprite->data[0]].field_6;
+    }
+}
+
+void pokemonanimfunc_30(struct Sprite *sprite)
+{
+    u8 id = sprite->data[0] = sub_817F758();
+    gUnknown_03001240[id].field_6 = 4;
+    sub_8181810(sprite);
+    sprite->callback = sub_8181810;
+}
+
+void pokemonanimfunc_31(struct Sprite *sprite)
+{
+    s32 counter = sprite->data[2];
+    sub_817F70C(sprite);
+    if (counter > 512)
+    {
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+    }
+    else
+    {
+        switch (sprite->data[2] / 128)
+        {
+        case 0:
+            sprite->pos2.x = -(counter % 128 * 8) / 128;
+            break;
+        case 1:
+            sprite->pos2.x = (counter % 128 / 16) - 8;
+            break;
+        case 2:
+            sprite->pos2.x = (counter % 128 / 16);
+            break;
+        case 3:
+            sprite->pos2.x = -(counter % 128 * 8) / 128 + 8;
+            break;
+        }
+
+        sprite->pos2.y = -(Sin(counter % 128, 8));
+    }
+
+    sprite->data[2] += 12;
+    sub_817F70C(sprite);
+}
+
+void sub_8181ABC(struct Sprite *sprite);
+void sub_8181B4C(struct Sprite *sprite);
+void sub_8181C2C(struct Sprite *sprite);
+
+void pokemonanimfunc_32(struct Sprite *sprite)
+{
+    u8 id = sprite->data[0] = sub_817F758();
+    gUnknown_03001240[id].field_8 = -1;
+    HandleStartAffineAnim(sprite);
+    sprite->data[3] = 0;
+    sub_8181ABC(sprite);
+    sprite->callback = sub_8181ABC;
+}
+
+void sub_8181ABC(struct Sprite *sprite)
+{
+    if (gUnknown_03001240[sprite->data[0]].field_0 != 0)
+    {
+        gUnknown_03001240[sprite->data[0]].field_0--;
+    }
+    else
+    {
+        s32 counter;
+
+        sub_817F70C(sprite);
+        counter = sprite->data[2];
+        if (sprite->data[2] > 128)
+        {
+            sprite->data[2] = 0;
+            sprite->callback = sub_8181B4C;
+        }
+        else
+        {
+            s32 var = 8 * gUnknown_03001240[sprite->data[0]].field_8;
+            sprite->pos2.x = var * (counter % 128) / 128;
+            sprite->pos2.y = -(Sin(counter % 128, 8));
+            sprite->data[2] += 12;
+        }
+
+        sub_817F70C(sprite);
+    }
+}
+
+void sub_8181B4C(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    if (sprite->data[2] > 48)
+    {
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sprite->pos2.y = 0;
+        sprite->data[2] = 0;
+        sprite->callback = sub_8181C2C;
+    }
+    else
+    {
+        s16 yDelta;
+        s16 yScale = Sin(sprite->data[4], 64) + 256;
+        if (sprite->data[2] >= 16 && sprite->data[2] <= 31)
+        {
+            sprite->data[3] += 8;
+            sprite->pos2.x -= gUnknown_03001240[sprite->data[0]].field_8;
+        }
+
+        yDelta = 0;
+        if (yScale > 256)
+            yDelta = (256 - yScale) / 8;
+
+        sprite->pos2.y = -(Sin(sprite->data[3], 20)) - yDelta;
+        HandleSetAffineData(sprite, 256 - Sin(sprite->data[4], 32), yScale, 0);
+        sprite->data[2]++;
+        sprite->data[4] += 8;
+        sprite->data[4] &= 0xFF;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8181C2C(struct Sprite *sprite)
+{
+    s32 counter;
+
+    sub_817F70C(sprite);
+    counter = sprite->data[2];
+    if (counter > 128)
+    {
+        if (gUnknown_03001240[sprite->data[0]].field_4 > 1)
+        {
+            gUnknown_03001240[sprite->data[0]].field_4--;
+            gUnknown_03001240[sprite->data[0]].field_0 = 10;
+            sprite->data[3] = 0;
+            sprite->data[2] = 0;
+            sprite->data[4] = 0;
+            sprite->callback = sub_8181ABC;
+        }
+        else
+        {
+            sub_817F77C(sprite);
+            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        }
+
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+    }
+    else
+    {
+        register s32 var asm("r4") = gUnknown_03001240[sprite->data[0]].field_8;
+
+        sprite->pos2.x = (var << 3) * (counter % 128) / 128 - (gUnknown_03001240[sprite->data[0]].field_8 * 8);
+        sprite->pos2.y = -(Sin(counter % 128, 8));
+    }
+
+    sprite->data[2] += 12;
+    sub_817F70C(sprite);
+}
+
+void sub_8181CE8(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        HandleStartAffineAnim(sprite);
+        sprite->data[2]++;
+    }
+
+    sub_817F70C(sprite);
+    if (sprite->data[7] > 254)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        if (gUnknown_03001240[sprite->data[0]].field_4 > 1)
+        {
+            gUnknown_03001240[sprite->data[0]].field_4--;
+            sprite->data[2] = 0;
+            sprite->data[7] = 0;
+        }
+        else
+        {
+            sub_817F77C(sprite);
+            sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        }
+
+        sub_817F70C(sprite);
+    }
+    else
+    {
+        u16 rotation;
+
+        sprite->pos2.x = -(Sin(sprite->data[7], 16));
+        rotation = Sin(sprite->data[7], 32);
+        HandleSetAffineData(sprite, 0x100, 0x100, rotation << 8);
+        sprite->data[7] += gUnknown_03001240[sprite->data[0]].field_6;
+        sub_817F70C(sprite);
+    }
+}
+
+void pokemonanimfunc_33(struct Sprite *sprite)
+{
+    u8 id = sprite->data[0] = sub_817F758();
+    gUnknown_03001240[id].field_6 = 4;
+    sub_8181CE8(sprite);
+    sprite->callback = sub_8181CE8;
+}
+
+void pokemonanimfunc_34(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        HandleStartAffineAnim(sprite);
+        sprite->data[2]++;
+    }
+
+    sub_817F70C(sprite);
+    if (sprite->data[7] > 254)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        HandleSetAffineData(sprite, 0x100, 0x100, 0);
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+        sub_817F70C(sprite);
+    }
+    else
+    {
+        u16 rotation;
+
+        sprite->pos2.x = -(Sin(sprite->data[7], 16));
+        sprite->pos2.y = -(Sin(sprite->data[7] % 128, 16));
+        rotation = Sin(sprite->data[7], 32);
+        HandleSetAffineData(sprite, 0x100, 0x100, rotation << 8);
+        sprite->data[7] += 8;
+        sub_817F70C(sprite);
+    }
+}
+
+void pokemonanimfunc_35(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+        sprite->data[7] = 0;
+
+    if (sprite->data[2] == sprite->data[7])
+    {
+        sprite->data[7] = 0;
+        sprite->data[2]++;
+        sprite->invisible = 0;
+    }
+    else
+    {
+        sprite->data[7]++;
+        sprite->invisible = 1;
+    }
+
+    if (sprite->data[2] > 10)
+    {
+        sprite->invisible = 0;
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+}
+
+void sub_8181F14(struct Sprite *sprite);
+void sub_8181F50(struct Sprite *sprite);
+void sub_8181FC0(struct Sprite *sprite);
+
+void pokemonanimfunc_36(struct Sprite *sprite)
+{
+    HandleStartAffineAnim(sprite);
+    sprite->data[7] = 0;
+    sprite->callback = sub_8181F14;
+}
+
+void sub_8181F14(struct Sprite *sprite)
+{
+    if (sprite->data[7] > 31)
+    {
+        sprite->data[7] = 32;
+        sprite->data[2] = 0;
+        sprite->callback = sub_8181F50;
+    }
+    else
+    {
+        sprite->data[7] += 4;
+    }
+
+    HandleSetAffineData(sprite, 0x100, 0x100, sprite->data[7] << 8);
+}
+
+void sub_8181F50(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    if (sprite->data[2] > 512)
+    {
+        sprite->callback = sub_8181FC0;
+        sprite->data[6] = 0;
+    }
+    else
+    {
+        sprite->pos2.x = -(sprite->data[2] * 16) / 512;
+        sprite->pos2.y = -(Sin(sprite->data[2] % 128, 4));
+        sprite->data[2] += 12;
+    }
+
+    sub_817F70C(sprite);
+}
+
+void sub_8181FC0(struct Sprite *sprite)
+{
+    sub_817F70C(sprite);
+    sprite->data[7] -= 2;
+    if (sprite->data[7] < 0)
+    {
+        sprite->data[7] = 0;
+        sprite->pos2.x = 0;
+        sub_817F77C(sprite);
+        sprite->callback = SpriteCB_SetDummyOnAnimEnd;
+    }
+    else
+    {
+        sprite->pos2.x = -(Sin(sprite->data[7] * 2, 16));
+    }
+
+    HandleSetAffineData(sprite, 0x100, 0x100, sprite->data[7] << 8);
     sub_817F70C(sprite);
 }
