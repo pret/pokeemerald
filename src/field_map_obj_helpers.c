@@ -1,15 +1,22 @@
 #include "global.h"
 #include "field_ground_effect.h"
 #include "field_map_obj.h"
+#include "field_effect.h"
+
+extern void sub_8097D68(struct Sprite *sprite);
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 
-extern const s8 gUnknown_0850E7BA[];
-extern const s8 gUnknown_0850E772[];
-
+extern const struct Coords16 gUnknown_0850DB7C[4];
 extern s16 gUnknown_0850E768[];
 extern SpriteStepFunc *const gUnknown_0850E754[];
-extern const struct Coords16 gUnknown_0850DB7C[4];
+extern const s8 gUnknown_0850E772[];
+extern const s8 gUnknown_0850E7BA[];
+extern const s8 *const gUnknown_0850E834[];
+extern s16 gUnknown_0850E840[];
+extern u8 gUnknown_0850E846[];
+extern s16 gUnknown_0850E84A[];
+extern u8 gUnknown_0850E850[];
 
 bool8 FreezeMapObject(struct MapObject *mapObject)
 {
@@ -192,10 +199,6 @@ bool8 sub_8097758(struct Sprite *sprite)
     return result;
 }
 
-extern const s8 *const gUnknown_0850E834[];
-extern s16 gUnknown_0850E840[];
-extern u8 gUnknown_0850E846[];
-
 s16 sub_8097820(s16 a1, u8 a2)
 {
     return gUnknown_0850E834[a2][a1];
@@ -237,9 +240,6 @@ u8 sub_809785C(struct Sprite *sprite)
 
     return v2;
 }
-
-extern s16 gUnknown_0850E84A[];
-extern u8 gUnknown_0850E850[];
 
 u8 sub_80978E4(struct Sprite *sprite)
 {
@@ -328,8 +328,6 @@ void sub_80979D4(struct Sprite *sprite, bool8 invisible)
         sprite->invisible = 1;
 }
 
-extern void sub_8097D68(struct Sprite *sprite);
-
 void sub_8097AC8(struct Sprite *sprite)
 {
     sub_8097D68(sprite);
@@ -368,4 +366,160 @@ void sub_8097B78(u8 var1, u8 var2)
 
     if(spriteId != MAX_SPRITES)
         StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(var2));
+}
+
+void sub_8097BB4(u8 var1, u8 var2)
+{
+    int spriteId = sub_8097B2C(var1);
+
+    if(spriteId != MAX_SPRITES)
+    {
+        struct Sprite *sprite = &gSprites[spriteId];
+        const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(var2);
+        u16 tileNum = sprite->oam.tileNum;
+
+        sprite->oam = *gfxInfo->oam;
+        sprite->oam.tileNum = tileNum;
+        sprite->oam.paletteNum = gfxInfo->paletteSlot;
+        sprite->images = gfxInfo->images;
+
+        if(gfxInfo->subspriteTables == NULL)
+        {
+            sprite->subspriteTables = NULL;
+            sprite->subspriteTableNum = 0;
+            sprite->subspriteMode = 0;
+        }
+        else
+        {
+            SetSubspriteTables(sprite, gfxInfo->subspriteTables);
+            sprite->subspriteMode = 2;
+        }
+        StartSpriteAnim(sprite, 0);
+    }
+}
+
+void sub_8097C44(u8 var, bool32 var2)
+{
+    u8 spriteId = sub_8097B2C(var);
+
+    if(spriteId == MAX_SPRITES)
+        return;
+
+    if(var2)
+        gSprites[spriteId].data[2] = 1;
+    else
+        gSprites[spriteId].data[2] = 0;
+}
+
+bool32 sub_8097C8C(u8 var)
+{
+    u8 spriteId = sub_8097B2C(var);
+
+    if(spriteId == MAX_SPRITES)
+        return FALSE;
+
+    return (gSprites[spriteId].data[2] == TRUE);
+}
+
+void sub_8097CC4(u8 var1, u8 var2)
+{
+    u8 spriteId = sub_8097B2C(var1);
+
+    if(spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].data[3] = var2;
+        gSprites[spriteId].data[4] = 0;
+    }
+}
+
+void sub_8097CF4(struct Sprite *sprite)
+{
+    switch(sprite->data[4])
+    {
+        case 0:
+            sprite->pos2.y = 0;
+            sprite->data[4]++;
+        case 1:
+            sprite->pos2.y -= 8;
+            if(sprite->pos2.y == -160)
+            {
+                sprite->pos2.y = 0;
+                sprite->data[2] = 1;
+                sprite->data[3] = 0;
+                sprite->data[4] = 0;
+            }
+    }
+}
+
+void sub_8097D30(struct Sprite *sprite)
+{
+    switch(sprite->data[4])
+    {
+        case 0:
+            sprite->pos2.y = -160;
+            sprite->data[4]++;
+        case 1:
+            sprite->pos2.y += 8;
+            if(sprite->pos2.y == 0)
+            {
+                sprite->data[3] = 0;
+                sprite->data[4] = 0;
+            }
+    }
+}
+
+void sub_8097D68(struct Sprite *sprite)
+{
+    switch(sprite->data[3])
+    {
+        case 1:
+            sub_8097D30(sprite);
+            break;
+        case 2:
+            sub_8097CF4(sprite);
+            break;
+        case 0:
+            break;
+        default:
+            sprite->data[3] = 0;
+            break;
+    }
+}
+
+bool32 sub_8097D9C(u8 var)
+{
+    u8 spriteId = sub_8097B2C(var);
+
+    if(spriteId == MAX_SPRITES)
+        return FALSE;
+
+    if(gSprites[spriteId].data[3] != FALSE)
+        return TRUE;
+
+    return FALSE;
+}
+
+u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct MapObject *mapObject)
+{
+    FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
+    return FieldEffectStart(fieldEffectId);
+}
+
+void DoShadowFieldEffect(struct MapObject *mapObject)
+{
+    if (!mapObject->mapobj_bit_22)
+    {
+        mapObject->mapobj_bit_22 = 1;
+        oe_exec_and_other_stuff(FLDEFF_SHADOW, mapObject);
+    }
+}
+
+void DoRippleFieldEffect(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    gFieldEffectArguments[0] = sprite->pos1.x;
+    gFieldEffectArguments[1] = sprite->pos1.y + (gfxInfo->height >> 1) - 2;
+    gFieldEffectArguments[2] = 151;
+    gFieldEffectArguments[3] = 3;
+    FieldEffectStart(FLDEFF_RIPPLE);
 }
