@@ -24,7 +24,7 @@
 #define INCBIN_S32 {0}
 #endif // __APPLE__
 
-#define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
+#define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))
 
 // useful math macros
 

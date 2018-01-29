@@ -8,6 +8,9 @@
 #include "main.h"
 #include "sound.h"
 #include "menu_helpers.h"
+#include "malloc.h"
+#include "task.h"
+#include "dma3.h"
 
 struct SomeUnkStruct
 {
@@ -37,6 +40,9 @@ extern EWRAM_DATA u16 gUnknown_0203CD9C;
 extern EWRAM_DATA u8 gUnknown_0203CD9E;
 extern EWRAM_DATA u8 gUnknown_0203CD9F;
 extern EWRAM_DATA u8 gUnknown_0203CDA0;
+extern EWRAM_DATA bool8 gUnknown_0203CDA4[4];
+extern EWRAM_DATA u16 gUnknown_0203CDA8;
+extern EWRAM_DATA void *gUnknown_0203CDAC[0x20];
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
 const u8 gUnknown_0860F0D0[] = { 15, 1, 2 };
@@ -81,6 +87,7 @@ extern u8 MoveMenuCursor(s8);
 extern u8 sub_8199134(s8, s8);
 extern void sub_8199F74(u8, u8, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8, u8);
 extern void sub_8198C78(void);
+extern void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 
 void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextSubPrinter *, u16))
 {
@@ -716,7 +723,7 @@ u16 sub_8198AA4(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 
     return AddWindow(&template);
 }
 
-void sub_8198AF8(struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
+void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
     struct TextSubPrinter printer;
     
@@ -742,7 +749,7 @@ void sub_8198AF8(struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 
     sub_81983AC(gUnknown_0203CD9F, fontId, left, top, GetFontAttribute(fontId, 1), 2, initialCursorPos);
 }
 
-void sub_8198C34(struct WindowTemplate *window, u8 fontId, u16 baseTileNum, u8 paletteNum)
+void sub_8198C34(const struct WindowTemplate *window, u8 fontId, u16 baseTileNum, u8 paletteNum)
 {
     sub_8198AF8(window, fontId, 0, 1, baseTileNum, paletteNum, 0);
 }
@@ -1179,4 +1186,268 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
     }
     
     CopyWindowToVram(windowId, 2);
+}
+
+void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
+{
+    struct TextSubPrinter printer;
+    
+    gUnknown_0203CD9F = AddWindow(window);
+    SetWindowBorderStyle(gUnknown_0203CD9F, TRUE, baseTileNum, paletteNum);
+    
+    printer.current_text_offset = gText_YesNo;
+    printer.windowId = gUnknown_0203CD9F;
+    printer.fontId = 1;
+    printer.x = 8;
+    printer.y = 1;
+    printer.currentX = printer.x;
+    printer.currentY = printer.y;
+    printer.fgColor = GetFontAttribute(1, 5);
+    printer.bgColor = GetFontAttribute(1, 6);
+    printer.shadowColor = GetFontAttribute(1, 7);
+    printer.fontColor_l = GetFontAttribute(1, 4);
+    printer.letterSpacing = 0;
+    printer.lineSpacing = 0;
+    
+    AddTextPrinter(&printer, 0xFF, 0);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_0203CD9F, 2, initialCursorPos);
+}
+
+void sub_81997AC(u8 windowId, u8 a4, u8 a6, u8 a7, const struct MenuAction *strs)
+{
+    u32 i;
+    u32 j;
+    for (i = 0; i < a7; i++)
+    {
+        for (j = 0; j < a6; j++)
+        {
+            PrintTextOnWindow(windowId, 1, strs[(i * a6) + j].text, (a4 * j) + 8, (i * 16) + 1, 0xFF, NULL);
+        }
+    }
+    CopyWindowToVram(windowId, 2);
+}
+
+void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8)
+{
+    u8 i;
+    u8 j;
+    struct TextSubPrinter printer;
+    
+    printer.windowId = windowId;
+    printer.fontId = 1;
+    printer.fgColor = GetFontAttribute(1, 5);
+    printer.bgColor = GetFontAttribute(1, 6);
+    printer.shadowColor = GetFontAttribute(1, 7);
+    printer.fontColor_l = GetFontAttribute(1, 4);
+    printer.letterSpacing = 0;
+    printer.lineSpacing = 0;
+    
+    for (i = 0; i < itemCount2; i++)
+    {
+        for (j = 0; j < itemCount; j++)
+        {
+            printer.current_text_offset = strs[a8[(itemCount * i) + j]].text;
+            printer.x = (a4 * j) + 8;
+            printer.y = (16 * i) + 1;
+            printer.currentX = printer.x;
+            printer.currentY = printer.y;
+            AddTextPrinter(&printer, 0xFF, 0);
+        }
+    }
+    
+    CopyWindowToVram(windowId, 2);
+}
+
+u8 sub_8199944(u8 windowId, u8 optionWidth, u8 horizontalCount, u8 verticalCount, u8 initialCursorPos)
+{
+    s32 pos;
+    
+    gUnknown_0203CD90.left = 0;
+    gUnknown_0203CD90.top = 1;
+    gUnknown_0203CD90.minCursorPos = 0;
+    gUnknown_0203CD90.maxCursorPos = (horizontalCount * verticalCount) - 1;
+    gUnknown_0203CD90.windowId = windowId;
+    gUnknown_0203CD90.fontId = 1;
+    gUnknown_0203CD90.optionWidth = optionWidth;
+    gUnknown_0203CD90.optionHeight = 16;
+    gUnknown_0203CD90.horizontalCount = horizontalCount;
+    gUnknown_0203CD90.verticalCount = verticalCount;
+    
+    pos = initialCursorPos;
+    
+    if (pos < 0 || pos > gUnknown_0203CD90.maxCursorPos)
+        gUnknown_0203CD90.cursorPos = 0;
+    else
+        gUnknown_0203CD90.cursorPos = pos;
+    
+    sub_8199134(0, 0);
+    return gUnknown_0203CD90.cursorPos;
+}
+
+void clear_scheduled_bg_copies_to_vram(void)
+{
+    memset(gUnknown_0203CDA4, 0, sizeof(gUnknown_0203CDA4));
+}
+
+void schedule_bg_copy_tilemap_to_vram(u8 bgId)
+{
+    gUnknown_0203CDA4[bgId] = TRUE;
+}
+
+void do_scheduled_bg_tilemap_copies_to_vram(void)
+{
+    if (gUnknown_0203CDA4[0] == TRUE)
+    {
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_0203CDA4[0] = FALSE;
+    }
+    if (gUnknown_0203CDA4[1] == TRUE)
+    {
+        CopyBgTilemapBufferToVram(1);
+        gUnknown_0203CDA4[1] = FALSE;
+    }
+    if (gUnknown_0203CDA4[2] == TRUE)
+    {
+        CopyBgTilemapBufferToVram(2);
+        gUnknown_0203CDA4[2] = FALSE;
+    }
+    if (gUnknown_0203CDA4[3] == TRUE)
+    {
+        CopyBgTilemapBufferToVram(3);
+        gUnknown_0203CDA4[3] = FALSE;
+    }
+}
+
+void reset_temp_tile_data_buffers(void)
+{
+    int i;
+    for (i = 0; i < (s32)ARRAY_COUNT(gUnknown_0203CDAC); i++)
+    {
+        gUnknown_0203CDAC[i] = NULL;
+    }
+    gUnknown_0203CDA8 = 0;
+}
+
+bool8 free_temp_tile_data_buffers_if_possible(void)
+{
+    int i;
+    
+    if (!IsDma3ManagerBusyWithBgCopy())
+    {
+        if (gUnknown_0203CDA8)
+        {
+            for (i = 0; i < gUnknown_0203CDA8; i++)
+            {
+                FREE_AND_SET_NULL(gUnknown_0203CDAC[i]);
+            }
+            gUnknown_0203CDA8 = 0;
+        }
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
+void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, u16 offset, u8 mode)
+{
+    int sizeOut;
+    if (gUnknown_0203CDA8 < ARRAY_COUNT(gUnknown_0203CDAC))
+    {
+        void *ptr = malloc_and_decompress(src, &sizeOut);
+        if (!size)
+            size = sizeOut;
+        if (ptr)
+        {
+            copy_decompressed_tile_data_to_vram(bgId, ptr, size, offset, mode);
+            gUnknown_0203CDAC[gUnknown_0203CDA8++] = ptr;
+        }
+        return ptr;
+    }
+    return NULL;
+}
+
+void copy_decompressed_tile_data_to_vram_autofree(u8 bgId, const void *src, int size, u16 offset, u8 mode)
+{
+    int sizeOut;
+    void *ptr = malloc_and_decompress(src, &sizeOut);
+    if (!size)
+        size = sizeOut;
+    if (ptr)
+    {
+        u8 taskId = CreateTask(task_free_buf_after_copying_tile_data_to_vram, 0);
+        gTasks[taskId].data[0] = copy_decompressed_tile_data_to_vram(bgId, ptr, size, offset, mode);
+        SetWordTaskArg(taskId, 1, (u32)ptr);
+    }
+}
+
+void task_free_buf_after_copying_tile_data_to_vram(u8 taskId)
+{
+    if (!CheckForSpaceForDma3Request(gTasks[taskId].data[0]))
+    {
+        Free((void *)GetWordTaskArg(taskId, 1));
+        DestroyTask(taskId);
+    }
+}
+
+void *malloc_and_decompress(const void *src, int *size)
+{
+    void *ptr;
+    u8 *sizeAsBytes = (u8 *)size;
+    u8 *srcAsBytes = (u8 *)src;
+    
+    sizeAsBytes[0] = srcAsBytes[1];
+    sizeAsBytes[1] = srcAsBytes[2];
+    sizeAsBytes[2] = srcAsBytes[3];
+    sizeAsBytes[3] = 0;
+    
+    ptr = Alloc(*size);
+    if (ptr)
+        LZ77UnCompWram(src, ptr);
+    return ptr;
+}
+
+u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode)
+{
+    switch (mode)
+    {
+        case 0:
+            return LoadBgTiles(bgId, src, size, offset);
+        case 1:
+            return LoadBgTilemap(bgId, src, size, offset);
+        default:
+            return -1;
+    }
+}
+
+void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
+{
+    u8 i;
+    u8 j;
+    u16 *ptr = GetBgTilemapBuffer(bgId);
+    
+    for (i = top; i < top + height; i++)
+    {
+        for (j = left; j < left + width; j++)
+        {
+            ptr[(i * 32) + j] = (ptr[(i * 32) + j] & 0xFFF) | (palette << 12);
+        }
+    }
+}
+
+void sub_8199CBC(u8 bgId, void *dest, u8 left, u8 top, u8 width, u8 height)
+{
+    u8 i;
+    u8 j;
+    u16 *ptr = GetBgTilemapBuffer(bgId);
+    u16 *destAsU16 = dest;
+    
+    for (i = 0; i < height; i++)
+    {
+        for (j = 0; j < width; j++)
+        {
+            destAsU16[(i * height) + j] = ptr[(i * height) + j];
+        }
+    }
 }

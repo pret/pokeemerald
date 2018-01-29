@@ -28,7 +28,7 @@ s8 ProcessMenuInput(void);
 s8 ProcessMenuInputNoWrapAround(void);
 void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
 void reset_temp_tile_data_buffers(void);
-int decompress_and_copy_tile_data_to_vram(u8 bg_id, const void *src, int size, u16 offset, u8 mode);
+void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, u16 offset, u8 mode);
 bool8 free_temp_tile_data_buffers_if_possible(void);
 struct WindowTemplate sub_8198A50(u8, u8, u8, u8, u8, u8, u16);
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
@@ -40,5 +40,7 @@ void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u8 a3);
 void sub_81995E4(u8 windowId, u8 optionsNo, const struct MenuAction *actions, const u8 *actionIds);
 void sub_8197DF8(u8 windowId, bool8 copyToVram);
 u16 sub_8198AA4(u8, u8, u8, u8, u8, u8, u16);
+void *malloc_and_decompress(const void *src, int *sizeOut);
+u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
 
 #endif // GUARD_MENU_H
