@@ -14,7 +14,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "field_camera.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "malloc.h"
 #include "gpu_regs.h"
 #include "decompress.h"
@@ -56,8 +56,6 @@ struct StructRectangularSpiral
 typedef bool8 (*TransitionStateFunc)(struct Task *task);
 typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
 
-extern u16 gUnknown_020393A8[];
-extern u16 gUnknown_02038C28[][0x3C0];
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 
@@ -65,7 +63,7 @@ extern const struct OamData gFieldObjectBaseOam_32x32;
 
 extern void c2_exit_to_overworld_2_switch(void);
 extern void sub_80AC3D0(void);
-extern void dp12_8087EA4(void);
+extern void ScanlineEffect_Clear(void);
 
 // this file's functions
 static void LaunchBattleTransitionTask(u8 transitionId);
@@ -1110,9 +1108,9 @@ static void Phase2Task_Swirl(u8 taskId)
 static bool8 Phase2_Swirl_Func1(struct Task *task)
 {
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
-    sub_8149F98(gUnknown_020393A8, sTransitionStructPtr->field_14, 0, 2, 0, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[1], sTransitionStructPtr->field_14, 0, 2, 0, 160);
 
     SetVBlankCallback(VBlankCB_Phase2_Swirl);
     SetHBlankCallback(HBlankCB_Phase2_Swirl);
@@ -1129,7 +1127,7 @@ static bool8 Phase2_Swirl_Func2(struct Task *task)
     task->tData1 += 4;
     task->tData2 += 8;
 
-    sub_8149F98(gUnknown_02038C28[0], sTransitionStructPtr->field_14, task->tData1, 2, task->tData2, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], sTransitionStructPtr->field_14, task->tData1, 2, task->tData2, 160);
 
     if (!gPaletteFade.active)
     {
@@ -1145,12 +1143,12 @@ static void VBlankCB_Phase2_Swirl(void)
 {
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
 }
 
 static void HBlankCB_Phase2_Swirl(void)
 {
-    u16 var = gUnknown_02038C28[1][REG_VCOUNT];
+    u16 var = gScanlineEffectRegBuffers[1][REG_VCOUNT];
     REG_BG1HOFS = var;
     REG_BG2HOFS = var;
     REG_BG3HOFS = var;
@@ -1164,10 +1162,10 @@ static void Phase2Task_Shuffle(u8 taskId)
 static bool8 Phase2_Shuffle_Func1(struct Task *task)
 {
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
-    memset(gUnknown_020393A8, sTransitionStructPtr->field_16, 0x140);
+    memset(gScanlineEffectRegBuffers[1], sTransitionStructPtr->field_16, 0x140);
 
     SetVBlankCallback(VBlankCB_Phase2_Shuffle);
     SetHBlankCallback(HBlankCB_Phase2_Shuffle);
@@ -1192,7 +1190,7 @@ static bool8 Phase2_Shuffle_Func2(struct Task *task)
     for (i = 0; i < 160; i++, r4 += 4224)
     {
         u16 var = r4 / 256;
-        gUnknown_02038C28[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
+        gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
     }
 
     if (!gPaletteFade.active)
@@ -1206,12 +1204,12 @@ static void VBlankCB_Phase2_Shuffle(void)
 {
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
 }
 
 static void HBlankCB_Phase2_Shuffle(void)
 {
-    u16 var = gUnknown_02038C28[1][REG_VCOUNT];
+    u16 var = gScanlineEffectRegBuffers[1][REG_VCOUNT];
     REG_BG1VOFS = var;
     REG_BG2VOFS = var;
     REG_BG3VOFS = var;
@@ -1257,7 +1255,7 @@ static void sub_814669C(struct Task *task)
     s32 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     task->tData1 = 16;
     task->tData2 = 0;
@@ -1272,7 +1270,7 @@ static void sub_814669C(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_02038C28[1][i] = 240;
+        gScanlineEffectRegBuffers[1][i] = 240;
     }
 
     SetVBlankCallback(VBlankCB0_Phase2_BigPokeball);
@@ -1351,7 +1349,7 @@ static bool8 Phase2_BigPokeball_Func2(struct Task *task)
             dst1[i * 32 + j] = *BigPokeballMap | 0xF000;
         }
     }
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return TRUE;
@@ -1363,7 +1361,7 @@ static bool8 Phase2_Aqua_Func2(struct Task *task)
 
     sub_8149F58(&dst1, &dst2);
     LZ77UnCompVram(sTeamAqua_Tilemap, dst1);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1375,7 +1373,7 @@ static bool8 Phase2_Magma_Func2(struct Task *task)
 
     sub_8149F58(&dst1, &dst2);
     LZ77UnCompVram(sTeamMagma_Tilemap, dst1);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1388,7 +1386,7 @@ static bool8 Phase2_Regice_Func2(struct Task *task)
     sub_8149F58(&dst1, &dst2);
     LoadPalette(gUnknown_085BC2B4, 0xF0, 0x20);
     CpuCopy16(gUnknown_085BC314, dst1, 0x500);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1401,7 +1399,7 @@ static bool8 Phase2_Registeel_Func2(struct Task *task)
     sub_8149F58(&dst1, &dst2);
     LoadPalette(gUnknown_085BC2D4, 0xF0, 0x20);
     CpuCopy16(gUnknown_085BCB14, dst1, 0x500);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1414,7 +1412,7 @@ static bool8 Phase2_Regirock_Func2(struct Task *task)
     sub_8149F58(&dst1, &dst2);
     LoadPalette(gUnknown_085BC2F4, 0xF0, 0x20);
     CpuCopy16(gUnknown_085BD314, dst1, 0x500);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1499,7 +1497,7 @@ static bool8 Phase2_BigPokeball_Func3(struct Task *task)
     task->tData4 += 8;
     task->tData5 -= 256;
 
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
 
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
@@ -1519,7 +1517,7 @@ static bool8 Phase2_BigPokeball_Func4(struct Task *task)
     task->tData4 += 8;
     task->tData5 -= 256;
 
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
 
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
@@ -1531,7 +1529,7 @@ static bool8 Phase2_BigPokeball_Func5(struct Task *task)
     task->tData4 += 8;
     task->tData5 -= 256;
 
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
 
     if (task->tData5 <= 0)
     {
@@ -1577,7 +1575,7 @@ static bool8 Phase2_BigPokeball_Func6(struct Task *task)
         if (task->tData1 < 0)
             task->tData1 = 0;
     }
-    sub_814A014(gUnknown_02038C28[0], 120, 80, task->tData1);
+    sub_814A014(gScanlineEffectRegBuffers[0], 120, 80, task->tData1);
     if (task->tData1 == 0)
     {
         SetVBlankCallback(NULL);
@@ -1604,7 +1602,7 @@ static void Transition_BigPokeball_Vblank(void)
     DmaStop(0);
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
     REG_WININ = sTransitionStructPtr->WININ;
     REG_WINOUT = sTransitionStructPtr->WINOUT;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
@@ -1615,13 +1613,13 @@ static void Transition_BigPokeball_Vblank(void)
 static void VBlankCB0_Phase2_BigPokeball(void)
 {
     Transition_BigPokeball_Vblank();
-    DmaSet(0, gUnknown_020393A8, &REG_BG0HOFS, 0xA2400001);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_BG0HOFS, 0xA2400001);
 }
 
 static void VBlankCB1_Phase2_BigPokeball(void)
 {
     Transition_BigPokeball_Vblank();
-    DmaSet(0, gUnknown_020393A8, &REG_WIN0H, 0xA2400001);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, 0xA2400001);
 }
 
 static void Phase2Task_PokeballsTrail(u8 taskId)
@@ -1741,7 +1739,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task)
     u16 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     sTransitionStructPtr->WININ = 0;
     sTransitionStructPtr->WINOUT = 63;
@@ -1750,7 +1748,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_020393A8[i] = 0xF3F4;
+        gScanlineEffectRegBuffers[1][i] = 0xF3F4;
     }
 
     SetVBlankCallback(VBlankCB_Phase2_Clockwise_BlackFade);
@@ -1767,7 +1765,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func2(struct Task *task)
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, sTransitionStructPtr->data[4], -1, 1, 1);
     do
     {
-        gUnknown_02038C28[0][sTransitionStructPtr->data[3]] = (sTransitionStructPtr->data[2] + 1) | 0x7800;
+        gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]] = (sTransitionStructPtr->data[2] + 1) | 0x7800;
     } while (!sub_814A228(sTransitionStructPtr->data, 1, 1));
 
     sTransitionStructPtr->data[4] += 16;
@@ -1795,7 +1793,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task)
         r1 = 120, r3 = sTransitionStructPtr->data[2] + 1;
         if (sTransitionStructPtr->data[5] >= 80)
             r1 = sTransitionStructPtr->data[2], r3 = 240;
-        gUnknown_02038C28[0][sTransitionStructPtr->data[3]] = (r3) | (r1 << 8);
+        gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]] = (r3) | (r1 << 8);
         if (var != 0)
             break;
         var = sub_814A228(sTransitionStructPtr->data, 1, 1);
@@ -1811,7 +1809,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task)
     {
         while (sTransitionStructPtr->data[3] < sTransitionStructPtr->data[5])
         {
-            gUnknown_02038C28[0][++sTransitionStructPtr->data[3]] = (r3) | (r1 << 8);
+            gScanlineEffectRegBuffers[0][++sTransitionStructPtr->data[3]] = (r3) | (r1 << 8);
         }
     }
 
@@ -1826,7 +1824,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func4(struct Task *task)
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, sTransitionStructPtr->data[4], 160, 1, 1);
     do
     {
-        gUnknown_02038C28[0][sTransitionStructPtr->data[3]] = (sTransitionStructPtr->data[2] << 8) | 0xF0;
+        gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]] = (sTransitionStructPtr->data[2] << 8) | 0xF0;
     } while (!sub_814A228(sTransitionStructPtr->data, 1, 1));
 
     sTransitionStructPtr->data[4] -= 16;
@@ -1851,12 +1849,12 @@ static bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task)
 
     while (1)
     {
-        r1 = (gUnknown_02038C28[0][sTransitionStructPtr->data[3]]) & 0xFF;
+        r1 = (gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]]) & 0xFF;
         r2 = sTransitionStructPtr->data[2];
         if (sTransitionStructPtr->data[5] <= 80)
             r2 = 120, r1 = sTransitionStructPtr->data[2];
         var4 = (r1) | (r2 << 8);
-        gUnknown_02038C28[0][sTransitionStructPtr->data[3]] = var4;
+        gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]] = var4;
         if (var != 0)
             break;
         var = sub_814A228(sTransitionStructPtr->data, 1, 1);
@@ -1872,7 +1870,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task)
     {
         while (sTransitionStructPtr->data[3] > sTransitionStructPtr->data[5])
         {
-            gUnknown_02038C28[0][--sTransitionStructPtr->data[3]] = (r1) | (r2 << 8);
+            gScanlineEffectRegBuffers[0][--sTransitionStructPtr->data[3]] = (r1) | (r2 << 8);
         }
     }
 
@@ -1892,7 +1890,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func6(struct Task *task)
         r2 = 120, r3 = sTransitionStructPtr->data[2];
         if (sTransitionStructPtr->data[2] >= 120)
             r2 = 0, r3 = 240;
-        gUnknown_02038C28[0][sTransitionStructPtr->data[3]] = (r3) | (r2 << 8);
+        gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]] = (r3) | (r2 << 8);
 
     } while (!sub_814A228(sTransitionStructPtr->data, 1, 1));
 
@@ -1917,12 +1915,12 @@ static void VBlankCB_Phase2_Clockwise_BlackFade(void)
     DmaStop(0);
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA != 0)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
     REG_WININ = sTransitionStructPtr->WININ;
     REG_WINOUT = sTransitionStructPtr->WINOUT;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
-    REG_WIN0H = gUnknown_02038C28[1][0];
-    DmaSet(0, gUnknown_02038C28[1], &REG_WIN0H, 0xA2400001);
+    REG_WIN0H = gScanlineEffectRegBuffers[1][0];
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, 0xA2400001);
 }
 
 static void Phase2Task_Ripple(u8 taskId)
@@ -1935,11 +1933,11 @@ static bool8 Phase2_Ripple_Func1(struct Task *task)
     u8 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_020393A8[i] = sTransitionStructPtr->field_16;
+        gScanlineEffectRegBuffers[1][i] = sTransitionStructPtr->field_16;
     }
 
     SetVBlankCallback(VBlankCB_Phase2_Ripple);
@@ -1971,7 +1969,7 @@ static bool8 Phase2_Ripple_Func2(struct Task *task)
         // todo: fix the asm
         s16 var = r4 >> 8;
         asm("");
-        gUnknown_02038C28[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
+        gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
     }
 
     if (++task->tData3 == 81)
@@ -1991,12 +1989,12 @@ static void VBlankCB_Phase2_Ripple(void)
 {
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
 }
 
 static void HBlankCB_Phase2_Ripple(void)
 {
-    u16 var = gUnknown_02038C28[1][REG_VCOUNT];
+    u16 var = gScanlineEffectRegBuffers[1][REG_VCOUNT];
     REG_BG1VOFS = var;
     REG_BG2VOFS = var;
     REG_BG3VOFS = var;
@@ -2012,7 +2010,7 @@ static bool8 Phase2_Wave_Func1(struct Task *task)
     u8 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     sTransitionStructPtr->WININ = 63;
     sTransitionStructPtr->WINOUT = 0;
@@ -2021,7 +2019,7 @@ static bool8 Phase2_Wave_Func1(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_02038C28[1][i] = 242;
+        gScanlineEffectRegBuffers[1][i] = 242;
     }
 
     SetVBlankCallback(VBlankCB_Phase2_Wave);
@@ -2037,7 +2035,7 @@ static bool8 Phase2_Wave_Func2(struct Task *task)
     bool8 nextFunc;
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    toStore = gUnknown_02038C28[0];
+    toStore = gScanlineEffectRegBuffers[0];
     r5 = task->tData2;
     task->tData2 += 16;
     task->tData1 += 8;
@@ -2073,11 +2071,11 @@ static void VBlankCB_Phase2_Wave(void)
     DmaStop(0);
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA != 0)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
     REG_WININ = sTransitionStructPtr->WININ;
     REG_WINOUT = sTransitionStructPtr->WINOUT;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
-    DmaSet(0, gUnknown_02038C28[1], &REG_WIN0H, 0xA2400001);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, 0xA2400001);
 }
 
 static void Phase2Task_Sydney(u8 taskId)
@@ -2120,7 +2118,7 @@ static bool8 Phase2_Mugshot_Func1(struct Task *task)
     u8 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     Mugshots_CreateOpponentPlayerSprites(task);
 
     task->tData1 = 0;
@@ -2132,7 +2130,7 @@ static bool8 Phase2_Mugshot_Func1(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_02038C28[1][i] = 0xF0F1;
+        gScanlineEffectRegBuffers[1][i] = 0xF0F1;
     }
 
     SetVBlankCallback(VBlankCB0_Phase2_Mugshots);
@@ -2177,7 +2175,7 @@ static bool8 Phase2_Mugshot_Func3(struct Task *task)
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
-    toStore = gUnknown_02038C28[0];
+    toStore = gScanlineEffectRegBuffers[0];
     r5 = task->tData1;
     task->tData1 += 0x10;
 
@@ -2223,7 +2221,7 @@ static bool8 Phase2_Mugshot_Func4(struct Task *task)
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
-    for (i = 0, toStore = gUnknown_02038C28[0]; i < 160; i++, toStore++)
+    for (i = 0, toStore = gScanlineEffectRegBuffers[0]; i < 160; i++, toStore++)
     {
         *toStore = 0xF0;
     }
@@ -2266,8 +2264,8 @@ static bool8 Phase2_Mugshot_Func6(struct Task *task)
         sTransitionStructPtr->VBlank_DMA = FALSE;
         SetVBlankCallback(NULL);
         DmaStop(0);
-        memset(gUnknown_02038C28[0], 0, 0x140);
-        memset(gUnknown_02038C28[1], 0, 0x140);
+        memset(gScanlineEffectRegBuffers[0], 0, 0x140);
+        memset(gScanlineEffectRegBuffers[1], 0, 0x140);
         SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         task->tState++;
@@ -2300,15 +2298,15 @@ static bool8 Phase2_Mugshot_Func7(struct Task *task)
         {
             s16 index1 = 0x50 - i;
             s16 index2 = 0x50 + i;
-            if (gUnknown_02038C28[0][index1] <= 15)
+            if (gScanlineEffectRegBuffers[0][index1] <= 15)
             {
                 r6 = TRUE;
-                gUnknown_02038C28[0][index1]++;
+                gScanlineEffectRegBuffers[0][index1]++;
             }
-            if (gUnknown_02038C28[0][index2] <= 15)
+            if (gScanlineEffectRegBuffers[0][index2] <= 15)
             {
                 r6 = TRUE;
-                gUnknown_02038C28[0][index2]++;
+                gScanlineEffectRegBuffers[0][index2]++;
             }
         }
     }
@@ -2336,7 +2334,7 @@ static bool8 Phase2_Mugshot_Func9(struct Task *task)
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
     task->tData3++;
-    memset(gUnknown_02038C28[0], task->tData3, 0x140);
+    memset(gScanlineEffectRegBuffers[0], task->tData3, 0x140);
     if (task->tData3 > 15)
         task->tState++;
 
@@ -2357,12 +2355,12 @@ static void VBlankCB0_Phase2_Mugshots(void)
     DmaStop(0);
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA != 0)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
     REG_BG0VOFS = sTransitionStructPtr->BG0VOFS;
     REG_WININ = sTransitionStructPtr->WININ;
     REG_WINOUT = sTransitionStructPtr->WINOUT;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
-    DmaSet(0, gUnknown_02038C28[1], &REG_WIN0H, 0xA2400001);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, 0xA2400001);
 }
 
 static void VBlankCB1_Phase2_Mugshots(void)
@@ -2370,9 +2368,9 @@ static void VBlankCB1_Phase2_Mugshots(void)
     DmaStop(0);
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA != 0)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
     REG_BLDCNT = sTransitionStructPtr->BLDCNT;
-    DmaSet(0, gUnknown_02038C28[1], &REG_BLDY, 0xA2400001);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_BLDY, 0xA2400001);
 }
 
 static void HBlankCB_Phase2_Mugshots(void)
@@ -2500,7 +2498,7 @@ static bool8 Phase2_Slice_Func1(struct Task *task)
     u16 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     task->tData2 = 256;
     task->tData3 = 1;
@@ -2511,8 +2509,8 @@ static bool8 Phase2_Slice_Func1(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_02038C28[1][i] = sTransitionStructPtr->field_14;
-        gUnknown_02038C28[1][160 + i] = 0xF0;
+        gScanlineEffectRegBuffers[1][i] = sTransitionStructPtr->field_14;
+        gScanlineEffectRegBuffers[1][160 + i] = 0xF0;
     }
 
     EnableInterrupts(INTR_FLAG_HBLANK);
@@ -2541,8 +2539,8 @@ static bool8 Phase2_Slice_Func2(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        u16 *storeLoc1 = &gUnknown_02038C28[0][i];
-        u16 *storeLoc2 = &gUnknown_02038C28[0][i + 160];
+        u16 *storeLoc1 = &gScanlineEffectRegBuffers[0][i];
+        u16 *storeLoc2 = &gScanlineEffectRegBuffers[0][i + 160];
         if (i & 1)
         {
             *storeLoc1 = sTransitionStructPtr->field_14 + task->tData1;
@@ -2578,15 +2576,15 @@ static void VBlankCB_Phase2_Slice(void)
     REG_WINOUT = sTransitionStructPtr->WINOUT;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
     if (sTransitionStructPtr->VBlank_DMA)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 640);
-    DmaSet(0, &gUnknown_02038C28[1][160], &REG_WIN0H, 0xA2400001);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 640);
+    DmaSet(0, &gScanlineEffectRegBuffers[1][160], &REG_WIN0H, 0xA2400001);
 }
 
 static void HBlankCB_Phase2_Slice(void)
 {
     if (REG_VCOUNT < 160)
     {
-        u16 var = gUnknown_02038C28[1][REG_VCOUNT];
+        u16 var = gScanlineEffectRegBuffers[1][REG_VCOUNT];
         REG_BG1HOFS = var;
         REG_BG2HOFS = var;
         REG_BG3HOFS = var;
@@ -2603,7 +2601,7 @@ static bool8 Phase2_ShredSplit_Func1(struct Task *task)
     u16 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     sTransitionStructPtr->WININ = 63;
     sTransitionStructPtr->WINOUT = 0;
@@ -2611,13 +2609,13 @@ static bool8 Phase2_ShredSplit_Func1(struct Task *task)
 
     for (i = 0; i < 0xA0; i++)
     {
-        gUnknown_02038C28[1][i] = sTransitionStructPtr->field_14;
-        gUnknown_02038C28[1][0xA0 + i] = 0xF0;
-        gUnknown_02038C28[0][i] = sTransitionStructPtr->field_14;
-        gUnknown_02038C28[0][0xA0 + i] = 0xF0;
-        gUnknown_02038C28[0][0x140 + i] = 0;
-        gUnknown_02038C28[0][0x1E0 + i] = 0x100;
-        gUnknown_02038C28[0][0x280 + i] = 1;
+        gScanlineEffectRegBuffers[1][i] = sTransitionStructPtr->field_14;
+        gScanlineEffectRegBuffers[1][0xA0 + i] = 0xF0;
+        gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_14;
+        gScanlineEffectRegBuffers[0][0xA0 + i] = 0xF0;
+        gScanlineEffectRegBuffers[0][0x140 + i] = 0;
+        gScanlineEffectRegBuffers[0][0x1E0 + i] = 0x100;
+        gScanlineEffectRegBuffers[0][0x280 + i] = 1;
     }
 
     task->tData4 = 0;
@@ -2657,9 +2655,9 @@ static bool8 Phase2_ShredSplit_Func2(struct Task *task)
                 unkVar = (arr1[j]) + (arr2[k] * -(i) * 2);
                 if (unkVar >= 0 && (unkVar != 79 || j != 1))
                 {
-                    ptr4 = &gUnknown_02038C28[0][unkVar + 320];
-                    ptr3 = &gUnknown_02038C28[0][unkVar + 480];
-                    ptr1 = &gUnknown_02038C28[0][unkVar + 640];
+                    ptr4 = &gScanlineEffectRegBuffers[0][unkVar + 320];
+                    ptr3 = &gScanlineEffectRegBuffers[0][unkVar + 480];
+                    ptr1 = &gScanlineEffectRegBuffers[0][unkVar + 640];
                     if (*ptr4 > 0xEF)
                     {
                         *ptr4 = 0xF0;
@@ -2673,8 +2671,8 @@ static bool8 Phase2_ShredSplit_Func2(struct Task *task)
                         if (*ptr3 <= 0xFFF)
                             *ptr3 += *ptr1;
                     }
-                    ptr2 = &gUnknown_02038C28[0][unkVar];
-                    ptr3 = &gUnknown_02038C28[0][unkVar + 160];
+                    ptr2 = &gScanlineEffectRegBuffers[0][unkVar];
+                    ptr3 = &gScanlineEffectRegBuffers[0][unkVar + 160];
                     *ptr2 = sTransitionStructPtr->field_14 + *ptr4;
                     *ptr3 = 0xF0 - *ptr4;
 
@@ -2691,9 +2689,9 @@ static bool8 Phase2_ShredSplit_Func2(struct Task *task)
                 unkVar = (arr1[j] + 1) + (arr2[k] * -(i) * 2);
                 if (unkVar <= 160 && (unkVar != 80 || j != 1))
                 {
-                    ptr4 = &gUnknown_02038C28[0][unkVar + 320];
-                    ptr3 = &gUnknown_02038C28[0][unkVar + 480];
-                    ptr1 = &gUnknown_02038C28[0][unkVar + 640];
+                    ptr4 = &gScanlineEffectRegBuffers[0][unkVar + 320];
+                    ptr3 = &gScanlineEffectRegBuffers[0][unkVar + 480];
+                    ptr1 = &gScanlineEffectRegBuffers[0][unkVar + 640];
                     if (*ptr4 > 0xEF)
                     {
                         *ptr4 = 0xF0;
@@ -2707,8 +2705,8 @@ static bool8 Phase2_ShredSplit_Func2(struct Task *task)
                         if (*ptr3 <= 0xFFF)
                             *ptr3 += *ptr1;
                     }
-                    ptr2 = &gUnknown_02038C28[0][unkVar];
-                    ptr3 = &gUnknown_02038C28[0][unkVar + 160];
+                    ptr2 = &gScanlineEffectRegBuffers[0][unkVar];
+                    ptr3 = &gScanlineEffectRegBuffers[0][unkVar + 160];
                     *ptr2 = sTransitionStructPtr->field_14 - *ptr4;
                     *ptr3 = (*ptr4 << 8) | (0xF1);
 
@@ -2732,7 +2730,7 @@ static bool8 Phase2_ShredSplit_Func2(struct Task *task)
 
 // This function never increments the state counter, because the loop condition
 // is always false, resulting in the game being stuck in an infinite loop.
-// It's possible this transition is only partially 
+// It's possible this transition is only partially
 // done and the second part was left out.
 static bool8 Phase2_ShredSplit_Func3(struct Task *task)
 {
@@ -2742,7 +2740,7 @@ static bool8 Phase2_ShredSplit_Func3(struct Task *task)
 
     for (i = 0; i < 0xA0; i++)
     {
-        if (gUnknown_02038C28[1][i] != 0xF0 && gUnknown_02038C28[1][i] != checkVar2)
+        if (gScanlineEffectRegBuffers[1][i] != 0xF0 && gScanlineEffectRegBuffers[1][i] != checkVar2)
             done = FALSE; // a break statement should be put here
     }
 
@@ -2775,7 +2773,7 @@ static bool8 Phase2_Blackhole_Func1(struct Task *task)
     s32 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     sTransitionStructPtr->WININ = 0;
     sTransitionStructPtr->WINOUT = 63;
@@ -2784,7 +2782,7 @@ static bool8 Phase2_Blackhole_Func1(struct Task *task)
 
     for (i = 0; i < 0xA0; i++)
     {
-        gUnknown_02038C28[1][i] = 0;
+        gScanlineEffectRegBuffers[1][i] = 0;
     }
 
     SetVBlankCallback(VBlankCB1_Phase2_BigPokeball);
@@ -2814,7 +2812,7 @@ static bool8 Phase2_Blackhole1_Func3(struct Task *task)
             task->tData1 += (task->tData2 >> 8);
         if (task->tData1 > 0xA0)
             task->tData1 = 0xA0;
-        sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->tData1);
+        sub_814A014(gScanlineEffectRegBuffers[0], 0x78, 0x50, task->tData1);
         if (task->tData1 == 0xA0)
         {
             task->tFuncState = 1;
@@ -2840,7 +2838,7 @@ static bool8 Phase2_Blackhole1_Func2(struct Task *task)
     }
     task->tData1 += gUnknown_085C8C80[task->tData6];
     task->tData6 = (task->tData6 + 1) % 2;
-    sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->tData1);
+    sub_814A014(gScanlineEffectRegBuffers[0], 0x78, 0x50, task->tData1);
     if (task->tData1 < 9)
     {
         task->tState++;
@@ -2866,7 +2864,7 @@ static bool8 Phase2_Blackhole2_Func2(struct Task *task)
     if (task->tData1 > 0xA0)
         task->tData1 = 0xA0;
 
-    sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->tData1);
+    sub_814A014(gScanlineEffectRegBuffers[0], 0x78, 0x50, task->tData1);
     if (task->tData1 == 0xA0)
     {
         DmaStop(0);
@@ -3113,7 +3111,7 @@ static bool8 Phase2_Rayquaza_Func3(struct Task *task)
     u16 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     SetGpuReg(REG_OFFSET_BG0CNT, 0x9A08);
     sub_8149F58(&dst1, &dst2);
@@ -3126,8 +3124,8 @@ static bool8 Phase2_Rayquaza_Func3(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_02038C28[0][i] = 0;
-        gUnknown_02038C28[1][i] = 0x100;
+        gScanlineEffectRegBuffers[0][i] = 0;
+        gScanlineEffectRegBuffers[1][i] = 0x100;
     }
 
     SetVBlankCallback(VBlankCB_Phase2_Rayquaza);
@@ -3212,7 +3210,7 @@ static bool8 Phase2_Rayquaza_Func9(struct Task *task)
 
         for (i = 0; i < 160; i++)
         {
-            gUnknown_02038C28[1][i] = 0;
+            gScanlineEffectRegBuffers[1][i] = 0;
         }
 
         SetVBlankCallback(VBlankCB1_Phase2_BigPokeball);
@@ -3233,11 +3231,11 @@ static void VBlankCB_Phase2_Rayquaza(void)
     VBlankCB_BattleTransition();
 
     if (sTransitionStructPtr->field_20 == 0)
-        dmaSrc = gUnknown_02038C28[0];
+        dmaSrc = gScanlineEffectRegBuffers[0];
     else if (sTransitionStructPtr->field_20 == 1)
-        dmaSrc = gUnknown_02038C28[1];
+        dmaSrc = gScanlineEffectRegBuffers[1];
     else
-        dmaSrc = gUnknown_02038C28[0];
+        dmaSrc = gScanlineEffectRegBuffers[0];
 
     DmaSet(0, dmaSrc, &REG_BG0VOFS, 0xA2400001);
 }
@@ -3252,7 +3250,7 @@ static bool8 Phase2_WhiteFade_Func1(struct Task *task)
     u16 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     sTransitionStructPtr->BLDCNT = 0xBF;
     sTransitionStructPtr->BLDY = 0;
@@ -3262,8 +3260,8 @@ static bool8 Phase2_WhiteFade_Func1(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_02038C28[1][i] = 0;
-        gUnknown_02038C28[1][i + 160] = 0xF0;
+        gScanlineEffectRegBuffers[1][i] = 0;
+        gScanlineEffectRegBuffers[1][i + 160] = 0xF0;
     }
 
     EnableInterrupts(INTR_FLAG_HBLANK);
@@ -3343,8 +3341,8 @@ static void VBlankCB0_Phase2_WhiteFade(void)
     REG_WINOUT = sTransitionStructPtr->WINOUT;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
     if (sTransitionStructPtr->VBlank_DMA)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 640);
-    DmaSet(0, &gUnknown_02038C28[1][160], &REG_WIN0H, 0xA2400001);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 640);
+    DmaSet(0, &gScanlineEffectRegBuffers[1][160], &REG_WIN0H, 0xA2400001);
 }
 
 static void VBlankCB1_Phase2_WhiteFade(void)
@@ -3360,7 +3358,7 @@ static void VBlankCB1_Phase2_WhiteFade(void)
 
 static void HBlankCB_Phase2_WhiteFade(void)
 {
-    REG_BLDY = gUnknown_02038C28[1][REG_VCOUNT];
+    REG_BLDY = gScanlineEffectRegBuffers[1][REG_VCOUNT];
 }
 
 static void sub_8149864(struct Sprite *sprite)
@@ -3374,8 +3372,8 @@ static void sub_8149864(struct Sprite *sprite)
     else
     {
         u16 i;
-        u16* ptr1 = &gUnknown_02038C28[0][sprite->pos1.y];
-        u16* ptr2 = &gUnknown_02038C28[0][sprite->pos1.y + 160];
+        u16* ptr1 = &gScanlineEffectRegBuffers[0][sprite->pos1.y];
+        u16* ptr2 = &gScanlineEffectRegBuffers[0][sprite->pos1.y + 160];
         for (i = 0; i < 20; i++)
         {
             ptr1[i] = sprite->data[0] >> 8;
@@ -3465,7 +3463,7 @@ static bool8 Phase2_Shards_Func1(struct Task *task)
     u16 i;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     sTransitionStructPtr->WININ = 0x3F;
     sTransitionStructPtr->WINOUT = 0;
@@ -3473,10 +3471,10 @@ static bool8 Phase2_Shards_Func1(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_02038C28[0][i] = 0xF0;
+        gScanlineEffectRegBuffers[0][i] = 0xF0;
     }
 
-    CpuSet(gUnknown_02038C28[0], gUnknown_02038C28[1], 0xA0);
+    CpuSet(gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 0xA0);
     SetVBlankCallback(VBlankCB_Phase2_Shards);
 
     task->tState++;
@@ -3505,8 +3503,8 @@ static bool8 Phase2_Shards_Func3(struct Task *task)
 
     for (i = 0, nextFunc = FALSE; i < 16; i++)
     {
-        s16 r3 = gUnknown_02038C28[0][sTransitionStructPtr->data[3]] >> 8;
-        s16 r4 = gUnknown_02038C28[0][sTransitionStructPtr->data[3]] & 0xFF;
+        s16 r3 = gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]] >> 8;
+        s16 r4 = gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]] & 0xFF;
         if (task->tData2 == 0)
         {
             if (r3 < sTransitionStructPtr->data[2])
@@ -3521,7 +3519,7 @@ static bool8 Phase2_Shards_Func3(struct Task *task)
             if (r4 <= r3)
                 r4 = r3;
         }
-        gUnknown_02038C28[0][sTransitionStructPtr->data[3]] = (r4) | (r3 << 8);
+        gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]] = (r4) | (r3 << 8);
         if (nextFunc)
         {
             task->tState++;
@@ -3568,12 +3566,12 @@ static void VBlankCB_Phase2_Shards(void)
     DmaStop(0);
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
     REG_WININ = sTransitionStructPtr->WININ;
     REG_WINOUT = sTransitionStructPtr->WINOUT;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
-    REG_WIN0H = gUnknown_02038C28[1][0];
-    DmaSet(0, gUnknown_02038C28[1], &REG_WIN0H, 0xA2400001);
+    REG_WIN0H = gScanlineEffectRegBuffers[1][0];
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, 0xA2400001);
 }
 
 // sub-task for phase2
@@ -3875,7 +3873,7 @@ static bool8 Phase2_29_Func2(struct Task *task)
 
     sub_8149F58(&dst1, &dst2);
     LZ77UnCompVram(gUnknown_085C828C, dst1);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 0x84, task->tData5, 160);
+    sub_8149F98(gScanlineEffectRegBuffers[0], 0, task->tData4, 0x84, task->tData5, 160);
 
     task->tState++;
     return TRUE;
@@ -3896,7 +3894,7 @@ static bool8 Phase2_30_Func1(struct Task *task)
     u16 *dst1, *dst2;
 
     sub_8149F08();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
     task->tData2 = 0x2000;
     task->tData1 = 0x7FFF;
@@ -3934,7 +3932,7 @@ static bool8 Phase2_30_Func3(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        gUnknown_02038C28[1][i] = sTransitionStructPtr->field_16;
+        gScanlineEffectRegBuffers[1][i] = sTransitionStructPtr->field_16;
     }
 
     SetVBlankCallback(VBlankCB_Phase2_30);
@@ -3980,7 +3978,7 @@ static bool8 Phase2_30_Func4(struct Task *task)
     {
         s16 index = var6 / 256;
         asm("");
-        gUnknown_02038C28[0][i] = sTransitionStructPtr->field_16 + Sin(index, amplitude);
+        gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(index, amplitude);
     }
 
     if (++task->tData3 == 101)
@@ -4004,12 +4002,12 @@ static void VBlankCB_Phase2_30(void)
     REG_BLDALPHA = sTransitionStructPtr->BLDALPHA;
 
     if (sTransitionStructPtr->VBlank_DMA)
-        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
 }
 
 static void HBlankCB_Phase2_30(void)
 {
-    u16 var = gUnknown_02038C28[1][REG_VCOUNT];
+    u16 var = gScanlineEffectRegBuffers[1][REG_VCOUNT];
     REG_BG0VOFS = var;
 }
 

@@ -713,36 +713,7 @@ gUnknown_02038BC6: @ 2038BC6
 gFieldEffectArguments: @ 2038C08
 	.space 0x20
 
-gUnknown_02038C28: @ 2038C28
-	.space 0x2
-
-gUnknown_02038C2A: @ 2038C2A
-	.space 0x2
-
-gUnknown_02038C2C: @ 2038C2C
-	.space 0x13C
-
-gUnknown_02038D68: @ 2038D68
-	.space 0x140
-
-gUnknown_02038EA8: @ 2038EA8
-	.space 0x280
-
-gUnknown_02039128: @ 2039128
-	.space 0x280
-
-gUnknown_020393A8: @ 20393A8
-	.space 0x140
-
-gUnknown_020394E8: @ 20394E8
-	.space 0x640
-
-gUnknown_02039B28: @ 2039B28
-	.space 0x1C
-
-gUnknown_02039B44: @ 2039B44
-	.space 0x4
-
+    .include "src/scanline_effect.o"
     .include "src/option_menu.o"
 	
 	.align 2

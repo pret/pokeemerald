@@ -3637,7 +3637,7 @@ VBlankCB_Field: @ 8086390
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	bl FieldUpdateBgTilemapScroll
 	bl TransferPlttBuffer
 	bl TransferTilesetAnimsBuffer
@@ -3657,7 +3657,7 @@ sub_80863B0: @ 80863B0
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	b _080863F0
 	.pool
 _080863D4:
@@ -3671,7 +3671,7 @@ _080863D4:
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 _080863F0:
 	pop {r0}
 	bx r0
@@ -4294,7 +4294,7 @@ sub_8086988: @ 8086988
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl dp13_810BB8C
 	bl ResetCameraUpdateInfo
 	bl InstallCameraPanAheadCallback

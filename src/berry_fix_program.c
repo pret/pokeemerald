@@ -6,7 +6,7 @@
 #include "main.h"
 #include "sprite.h"
 #include "task.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "window.h"
 #include "text.h"
 #include "menu.h"

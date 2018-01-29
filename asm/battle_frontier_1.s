@@ -11000,8 +11000,8 @@ _0819486C:
 	movs r1, 0
 	strh r1, [r0, 0x8]
 _08194878:
-	bl dp12_8087EA4
-	ldr r0, =gUnknown_02038C28
+	bl ScanlineEffect_Clear
+	ldr r0, =gScanlineEffectRegBuffers
 	ldr r2, =0x00001f0a
 	movs r4, 0xF0
 	lsls r4, 3
@@ -11017,7 +11017,7 @@ _08194888:
 	bge _08194888
 	movs r5, 0x5B
 	ldr r3, =gUnknown_0860CF44
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	ldr r2, =0x00001f09
 	ldr r4, =0x00000836
 	adds r1, r0, r4
@@ -11033,7 +11033,7 @@ _081948A4:
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
 	ldr r2, [r3, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	mov r0, r8
 	bl DestroyTask
 _081948C2:
@@ -11513,7 +11513,7 @@ sub_8194CE4: @ 8194CE4
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.pool

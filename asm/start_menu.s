@@ -1561,7 +1561,7 @@ _080A0490:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	b _080A04FC
 _080A04A2:
 	movs r0, 0

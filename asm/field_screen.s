@@ -9572,12 +9572,12 @@ _080AFE30:
 	beq _080AFEBC
 	b _080AFEC6
 _080AFE36:
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -9591,12 +9591,12 @@ _080AFE36:
 	b _080AFEC6
 	.pool
 _080AFE64:
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r6, 0x2
 	ldrsh r1, [r4, r6]
@@ -9631,7 +9631,7 @@ _080AFEB4:
 	bl DestroyTask
 	b _080AFEC6
 _080AFEBC:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	adds r0, r5, 0
 	bl DestroyTask
 _080AFEC6:
@@ -9665,12 +9665,12 @@ _080AFEF4:
 	beq _080AFF80
 	b _080AFF8A
 _080AFEFA:
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -9684,12 +9684,12 @@ _080AFEFA:
 	b _080AFF8A
 	.pool
 _080AFF28:
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r6, 0x2
 	ldrsh r1, [r4, r6]
@@ -9724,7 +9724,7 @@ _080AFF78:
 	bl DestroyTask
 	b _080AFF8A
 _080AFF80:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	adds r0, r5, 0
 	bl DestroyTask
 _080AFF8A:
@@ -9914,7 +9914,7 @@ sub_80B00E8: @ 80B00E8
 	lsrs r0, 24
 	cmp r0, 0
 	beq _080B0116
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	ldr r1, =gUnknown_0854FE64
 	lsls r0, 1
 	adds r0, r1
@@ -9940,7 +9940,7 @@ _080B0116:
 	thumb_func_start door_upload_tiles
 door_upload_tiles: @ 80B0124
 	push {r4,lr}
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000e68
@@ -10261,7 +10261,7 @@ _080B0368:
 	bl sub_8199C30
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	movs r2, 0x4
 	ldrsh r1, [r5, r2]
 	movs r0, 0x6
@@ -10280,7 +10280,7 @@ _080B0368:
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	movs r0, 0x1
 	strh r0, [r5]
 	b _080B052C
