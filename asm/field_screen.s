@@ -2339,43 +2339,43 @@ _080AC290:
 	.4byte _080AC300
 _080AC2B8:
 	movs r0, 0x1
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2C0:
 	movs r0, 0x2
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2C8:
 	movs r0, 0x3
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2D0:
 	movs r0, 0x4
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2D8:
 	movs r0, 0x5
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2E0:
 	movs r0, 0x6
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2E8:
 	movs r0, 0x9
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2F0:
 	movs r0, 0x7
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2F8:
 	movs r0, 0x8
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC300:
 	movs r0, 0xB
-	bl sub_80AEDF0
+	bl SetWeather
 _080AC306:
 	pop {r0}
 	bx r0
@@ -7561,8 +7561,8 @@ sub_80AEDBC: @ 80AEDBC
 	.pool
 	thumb_func_end sub_80AEDBC
 
-	thumb_func_start sub_80AEDF0
-sub_80AEDF0: @ 80AEDF0
+	thumb_func_start SetWeather
+SetWeather: @ 80AEDF0
 	push {lr}
 	bl SetSav1Weather
 	bl GetSav1Weather
@@ -7571,7 +7571,7 @@ sub_80AEDF0: @ 80AEDF0
 	bl weather_set
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AEDF0
+	thumb_func_end SetWeather
 
 	thumb_func_start sub_80AEE08
 sub_80AEE08: @ 80AEE08
