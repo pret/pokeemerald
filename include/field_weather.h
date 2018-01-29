@@ -139,7 +139,7 @@ enum
     FADE_TO_WHITE,
 };
 
-void FadeScreen(u8, u8);
+void FadeScreen(u8, s8);
 // ...
 void UpdateSpritePaletteWithWeather(u8 tag);
 void ApplyWeatherGammaShiftToPal(u8);

@@ -1625,8 +1625,8 @@ _080ABCBC:
 	.pool
 	thumb_func_end sub_80ABC7C
 
-	thumb_func_start fade_screen
-fade_screen: @ 80ABCD0
+	thumb_func_start FadeScreen
+FadeScreen: @ 80ABCD0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1762,7 +1762,7 @@ _080ABDE4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end fade_screen
+	thumb_func_end FadeScreen
 
 	thumb_func_start sub_80ABDFC
 sub_80ABDFC: @ 80ABDFC
@@ -7537,8 +7537,8 @@ GetSav1Weather: @ 80AEDAC
 	.pool
 	thumb_func_end GetSav1Weather
 
-	thumb_func_start sub_80AEDBC
-sub_80AEDBC: @ 80AEDBC
+	thumb_func_start SetSav1WeatherFromCurrMapHeader
+SetSav1WeatherFromCurrMapHeader: @ 80AEDBC
 	push {r4,r5,lr}
 	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
@@ -7559,7 +7559,7 @@ sub_80AEDBC: @ 80AEDBC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80AEDBC
+	thumb_func_end SetSav1WeatherFromCurrMapHeader
 
 	thumb_func_start sub_80AEDF0
 sub_80AEDF0: @ 80AEDF0
@@ -7872,13 +7872,13 @@ _080AF06A:
 	bl palette_bg_faded_fill_black
 	movs r0, 0
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _080AF084
 _080AF078:
 	bl palette_bg_faded_fill_white
 	movs r0, 0x2
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 _080AF084:
 	pop {r4}
 	pop {r0}
@@ -7891,7 +7891,7 @@ sub_80AF08C: @ 80AF08C
 	bl palette_bg_faded_fill_white
 	movs r0, 0x2
 	movs r1, 0x8
-	bl fade_screen
+	bl FadeScreen
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80AF08C
@@ -7902,7 +7902,7 @@ pal_fill_black: @ 80AF0A0
 	bl palette_bg_faded_fill_black
 	movs r0, 0
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r0}
 	bx r0
 	thumb_func_end pal_fill_black
@@ -7928,12 +7928,12 @@ sub_80AF0B4: @ 80AF0B4
 _080AF0DA:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _080AF0EC
 _080AF0E4:
 	movs r0, 0x3
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 _080AF0EC:
 	pop {r4}
 	pop {r0}
@@ -8761,7 +8761,7 @@ sub_80AF79C: @ 80AF79C
 	bl music_something
 	movs r0, 0x3
 	movs r1, 0x8
-	bl fade_screen
+	bl FadeScreen
 	bl play_some_sound
 	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF3B0
@@ -8990,7 +8990,7 @@ _080AF99A:
 	bl sub_8009FAC
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	bl music_something
 	movs r0, 0x9
 	bl PlaySE

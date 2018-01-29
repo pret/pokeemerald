@@ -1482,7 +1482,7 @@ _080FDBC8:
 	str r1, [r0]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_80FDC00
 	str r0, [r5]
 _080FDBDA:

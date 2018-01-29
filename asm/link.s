@@ -21684,7 +21684,7 @@ _080148CC:
 	bne _080149B2
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	movs r0, 0x2
 	strh r0, [r7]
 	b _080149B2
