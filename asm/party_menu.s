@@ -4268,7 +4268,7 @@ _081B243E:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -5946,7 +5946,7 @@ _081B328C:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -6007,7 +6007,7 @@ sub_81B3300: @ 81B3300
 	movs r0, 0x6
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -10415,7 +10415,7 @@ party_menu_link_mon_icon_anim: @ 81B5A2C
 	ldr r0, [sp, 0x20]
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	strb r0, [r4, 0x9]
 	ldr r2, =gSprites
 	ldrb r0, [r4, 0x9]

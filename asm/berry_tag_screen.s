@@ -486,7 +486,7 @@ sub_817804C: @ 817804C
 	str r6, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}

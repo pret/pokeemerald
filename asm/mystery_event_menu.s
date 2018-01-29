@@ -655,7 +655,7 @@ sub_8178EC4: @ 8178EC4
 	movs r1, 0x1
 	adds r2, r6, 0
 	ldr r3, [sp, 0x18]
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3

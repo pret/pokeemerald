@@ -21900,7 +21900,7 @@ _081D1D8C:
 	movs r1, 0x1
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _081D1DAC:
 	add sp, 0x34
 	pop {r4,r5}
@@ -23765,7 +23765,7 @@ sub_81D2BF4: @ 81D2BF4
 	str r0, [sp, 0xC]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}

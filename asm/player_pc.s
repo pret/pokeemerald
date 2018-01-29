@@ -2150,7 +2150,7 @@ _0816C030:
 	movs r1, 0x1
 	movs r2, 0
 	adds r3, r6, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _0816C050:
 	add sp, 0x14
 	pop {r4-r6}

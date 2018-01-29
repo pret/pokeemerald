@@ -2576,7 +2576,7 @@ static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y,
     color.bgColor = 1;
     color.shadowColor = 3;
 
-    AddTextPrinterParametrized2(winId, 0, x, y, 0, 0, &color, -1, str);
+    AddTextPrinterParameterized2(winId, 0, x, y, 0, 0, &color, -1, str);
 
     *windowId = winId;
     return (u8*)(GetWindowAttribute(winId, WINDOW_TILE_DATA));

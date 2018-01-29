@@ -28911,7 +28911,7 @@ _08018720:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	adds r1, r7, 0
 	movs r2, 0xDE
@@ -28927,7 +28927,7 @@ _08018720:
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -29099,7 +29099,7 @@ sub_8018884: @ 8018884
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xF
@@ -29452,7 +29452,7 @@ _08018B4A:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldrb r0, [r4]
 	movs r1, 0x1
 	movs r2, 0xF
@@ -29598,7 +29598,7 @@ _08018C8C:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldrb r0, [r5]
 	movs r1, 0x1
 	movs r2, 0xF
@@ -33150,7 +33150,7 @@ _0801A93A:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r4-r7}
 	pop {r0}
@@ -33471,7 +33471,7 @@ sub_801AB68: @ 801AB68
 	movs r1, 0x1
 	adds r2, r6, 0
 	ldr r3, [sp, 0x14]
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -48548,7 +48548,7 @@ _08022616:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	b _0802269C
 	.pool
 _08022668:
@@ -48575,7 +48575,7 @@ _08022668:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _0802269C:
 	ldr r1, =0x000001bb
 	adds r0, r6, r1
@@ -49451,7 +49451,7 @@ _08022D42:
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _08022DB2
 	.pool
 _08022D90:
@@ -49470,7 +49470,7 @@ _08022D90:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 _08022DB2:
 	movs r0, 0
 	movs r1, 0x3
@@ -52034,7 +52034,7 @@ _080241A6:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -52393,7 +52393,7 @@ _08024460:
 	str r1, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _080244AC
 	.pool
 _08024490:
@@ -52409,7 +52409,7 @@ _08024490:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 _080244AC:
 	movs r0, 0
 	movs r1, 0x3
@@ -64123,7 +64123,7 @@ _0802A3AE:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _0802A410
 	.pool
 _0802A3D8:

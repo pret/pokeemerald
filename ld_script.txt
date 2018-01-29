@@ -147,7 +147,7 @@ SECTIONS {
         asm/shop.o(.text);
         src/berry.o(.text);
         asm/script_menu.o(.text);
-        asm/naming_screen.o(.text);
+        src/naming_screen.o(.text);
         src/money.o(.text);
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
@@ -440,7 +440,7 @@ SECTIONS {
         data/shop.o(.rodata);
         src/berry.o(.rodata);
         data/script_menu.o(.rodata);
-        data/naming_screen.o(.rodata);
+        src/naming_screen.o(.rodata);
         src/money.o(.rodata);
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
@@ -540,7 +540,7 @@ SECTIONS {
         data/trainer_rematch.o(.rodata);
         data/unk_transition.o(.rodata);
         src/unk_transition.o(.rodata);
-        data/link_strings.o(.rodata);
+        data/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);

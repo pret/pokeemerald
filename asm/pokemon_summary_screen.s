@@ -5362,7 +5362,7 @@ sub_81C6C3C: @ 81C6C3C
 	str r4, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
@@ -5408,7 +5408,7 @@ sub_81C6C94: @ 81C6C94
 	str r4, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x7
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3

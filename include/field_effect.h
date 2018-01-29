@@ -78,5 +78,6 @@ void FieldEffectStop(struct Sprite *sprite, u8 id);
 u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void sub_80B7FC8(void);
 void FieldEffectActiveListRemove(u8 id);
+void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 
 #endif //GUARD_FIELD_EFFECTS_H

@@ -3035,7 +3035,7 @@ sub_80BCE2C: @ 80BCE2C
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r8
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r3}
 	mov r8, r3
@@ -6163,7 +6163,7 @@ sub_80BE8DC: @ 80BE8DC
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}
@@ -9974,7 +9974,7 @@ sub_80C0A88: @ 80C0A88
 	str r4, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r4-r6}
 	pop {r0}
@@ -11022,7 +11022,7 @@ sub_80C1270: @ 80C1270
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}

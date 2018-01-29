@@ -35,7 +35,7 @@ AddTextPrinterWithCallbackForMessage: @ 8197A9C
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -992,7 +992,7 @@ _0819829E:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	mov r2, r9
 	cmp r2, 0
 	beq _081982C8
@@ -4736,9 +4736,9 @@ box_print: @ 8199E64
 	bx r0
 	thumb_func_end box_print
 
-	thumb_func_start AddTextPrinterParametrized2
-@ void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, u8 speed, u8 *str)
-AddTextPrinterParametrized2: @ 8199EEC
+	thumb_func_start AddTextPrinterParameterized2
+@ void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, u8 speed, u8 *str)
+AddTextPrinterParameterized2: @ 8199EEC
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -4806,7 +4806,7 @@ AddTextPrinterParametrized2: @ 8199EEC
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end AddTextPrinterParametrized2
+	thumb_func_end AddTextPrinterParameterized2
 
 	thumb_func_start sub_8199F74
 sub_8199F74: @ 8199F74
