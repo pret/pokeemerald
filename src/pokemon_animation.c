@@ -5,6 +5,7 @@
 #include "trig.h"
 #include "task.h"
 #include "blend_palette.h"
+#include "constants/rgb.h"
 
 struct UnkAnimStruct
 {
@@ -903,7 +904,7 @@ static void Task_HandleMonAnimation(u8 taskId)
         sprite->data[1] = 1;
         sprite->data[0] = 0;
 
-        for (i = 2; i < 8; i++)
+        for (i = 2; i < ARRAY_COUNT(sprite->data); i++)
             sprite->data[i] = 0;
 
         sprite->callback = sMonAnimFunctions[gTasks[taskId].tAnimId];
@@ -1588,13 +1589,13 @@ static void pokemonanimfunc_15(struct Sprite *sprite)
 
     if (sprite->data[2] > 128)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, 0);
+        BlendPalette(sprite->data[7], 0x10, 0, RGB_BLACK);
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 16);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_BLACK);
     }
 
     sprite->data[2]++;
@@ -2050,13 +2051,13 @@ static void pokemonanimfunc_20(struct Sprite *sprite)
 
     if (sprite->data[2] > 128)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, 0x2DF);
+        BlendPalette(sprite->data[7], 0x10, 0, RGB(31, 22, 0));
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x2DF);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB(31, 22, 0));
     }
 
     sprite->data[2] += 2;
@@ -2069,13 +2070,13 @@ static void pokemonanimfunc_21(struct Sprite *sprite)
 
     if (sprite->data[2] > 128)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, 0x1F);
+        BlendPalette(sprite->data[7], 0x10, 0, RGB_RED);
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x1F);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_RED);
     }
 
     sprite->data[2] += 2;
@@ -2088,13 +2089,13 @@ static void pokemonanimfunc_22(struct Sprite *sprite)
 
     if (sprite->data[2] > 128)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, 0x7C00);
+        BlendPalette(sprite->data[7], 0x10, 0, RGB_BLUE);
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x7C00);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_BLUE);
     }
 
     sprite->data[2] += 2;
@@ -2107,13 +2108,13 @@ static void pokemonanimfunc_23(struct Sprite *sprite)
 
     if (sprite->data[2] > 128)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, 0x3FF);
+        BlendPalette(sprite->data[7], 0x10, 0, RGB_YELLOW);
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x3FF);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_YELLOW);
     }
 
     sprite->data[2] += 2;
@@ -2126,13 +2127,13 @@ static void pokemonanimfunc_24(struct Sprite *sprite)
 
     if (sprite->data[2] > 128)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, 0x6018);
+        BlendPalette(sprite->data[7], 0x10, 0, RGB(24, 0, 24));
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], 0x6018);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB(24, 0, 24));
     }
 
     sprite->data[2] += 2;
@@ -2602,9 +2603,9 @@ static void pokemonanimfunc_2C(struct Sprite *sprite)
         if (sprite->data[4] == 1)
         {
             if (sUnknown_0860AA64[sprite->data[6]][0] != 0)
-                BlendPalette(sprite->data[7], 0x10, 0x10, 0x3FF);
+                BlendPalette(sprite->data[7], 0x10, 0x10, RGB_YELLOW);
             else
-                BlendPalette(sprite->data[7], 0x10, 0, 0x3FF);
+                BlendPalette(sprite->data[7], 0x10, 0, RGB_YELLOW);
 
             sprite->data[4] = 0;
         }
@@ -5357,9 +5358,9 @@ static void BackAnimBlendYellow(struct Sprite *sprite)
         if (sprite->data[4] == 1)
         {
             if (array[sprite->data[6]].field_0 != 0)
-                BlendPalette(sprite->data[7], 0x10, 0x10, 0x3FF);
+                BlendPalette(sprite->data[7], 0x10, 0x10, RGB_YELLOW);
             else
-                BlendPalette(sprite->data[7], 0x10, 0, 0x3FF);
+                BlendPalette(sprite->data[7], 0x10, 0, RGB_YELLOW);
 
             sprite->data[4] = 0;
         }
@@ -5419,22 +5420,22 @@ static void pokemonanimfunc_8D(struct Sprite *sprite)
     BackAnimBlendYellow(sprite);
 }
 
-static const u16 sUnknown_0860AE88[] =
-{
-    0x1F, 0x3E0, 0x7C00, 0x0
-};
-
 static void BackAnimBlend(struct Sprite *sprite)
 {
+    static const u16 sColors[] =
+    {
+        RGB_RED, RGB_GREEN, RGB_BLUE, RGB_BLACK
+    };
+
     if (sprite->data[2] > 127)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, 0x1F);
+        BlendPalette(sprite->data[7], 0x10, 0, RGB_RED);
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], sUnknown_0860AE88[sprite->data[1]]);
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], sColors[sprite->data[1]]);
     }
 }
 
