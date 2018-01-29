@@ -2472,15 +2472,15 @@ _080AC3B6:
 	bx r0
 	thumb_func_end play_some_sound
 
-	thumb_func_start sub_80AC3BC
-sub_80AC3BC: @ 80AC3BC
+	thumb_func_start IsWeatherChangeComplete
+IsWeatherChangeComplete: @ 80AC3BC
 	ldr r0, =gUnknown_02038454
 	ldr r1, =0x000006d3
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_80AC3BC
+	thumb_func_end IsWeatherChangeComplete
 
 	thumb_func_start sub_80AC3D0
 sub_80AC3D0: @ 80AC3D0
