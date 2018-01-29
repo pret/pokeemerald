@@ -31433,7 +31433,7 @@ _08019B84:
 	b _08019B9C
 _08019B96:
 	adds r0, r4, 0
-	bl sub_8097404
+	bl FreezeMapObject
 _08019B9C:
 	movs r0, 0x1
 _08019B9E:

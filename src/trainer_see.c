@@ -639,7 +639,7 @@ void sub_80B45D0(void)
             gApproachingTrainerId++;
             gSpecialVar_Result = 1;
             UnfreezeMapObjects();
-            sub_80974D0(gApproachingTrainers[1].mapObjectId);
+            FreezeMapObjectsExceptOne(gApproachingTrainers[1].mapObjectId);
         }
         else
         {

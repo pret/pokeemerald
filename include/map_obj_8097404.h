@@ -29,6 +29,6 @@ bool8 sub_8097758(struct Sprite *);
 void sub_8097FA4(struct MapObject *);
 void sub_8098044(u8);
 void UnfreezeMapObjects(void);
-void sub_80974D0(u8 mapObjectId);
+void FreezeMapObjectsExceptOne(u8 mapObjectId);
 
 #endif //GUARD_MAP_OBJ_8097404_H
