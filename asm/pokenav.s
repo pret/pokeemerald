@@ -44,7 +44,7 @@ sub_81C72A4: @ 81C72A4
 	bl SetMainCallback2
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r0}
 	bx r0
 	.pool

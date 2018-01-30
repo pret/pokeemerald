@@ -171,7 +171,7 @@ void Task_CallItemUseOnFieldCallback(u8 taskId)
         gUnknown_0203A0F4(taskId);
 }
 
-void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField, u8 *str)
+void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField, const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     if (!isUsingRegisteredKeyItemOnField)
@@ -375,9 +375,9 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
     {
         if (events->bgEvents[i].kind == 7 && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + 0x1F4))
         {
-            distanceX = (u16)events -> bgEvents[i].x + 7;
+            distanceX = (u16)events->bgEvents[i].x + 7;
             newDistanceX = distanceX - x;
-            distanceY = (u16)events -> bgEvents[i].y + 7;
+            distanceY = (u16)events->bgEvents[i].y + 7;
             newDistanceY = distanceY - y;
             
             if ((u16)(newDistanceX + 7) < 15 && (newDistanceY >= -5) && (newDistanceY < 6))
@@ -772,7 +772,7 @@ void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
     else
     {
         gFieldCallback = sub_80AF6D4;
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = sub_80FDC00;
     }
 }
@@ -879,9 +879,7 @@ bool8 sub_80FDE2C(void)
     z = PlayerGetZCoord();
     objId = GetFieldObjectIdByXYZ(x, y, z);
     if (objId == 16 || gMapObjects[objId].graphicsId != 0xE4)
-    {
         return FALSE;
-    }
     else
         return TRUE;
 }
@@ -1100,7 +1098,9 @@ void ItemUseInBattle_PokeBall(u8 taskId)
             sub_81C5B14(taskId);
     }
     else if (!InBattlePyramid())
+    {
         DisplayItemMessage(taskId, 1, gText_BoxFull, bag_menu_inits_lists_menu);
+    }
     else
         DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, sub_81C6714);
 }
