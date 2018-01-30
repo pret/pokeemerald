@@ -2054,300 +2054,295 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
 #ifdef NONMATCHING
 u16 RenderText(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct* r4 = &textPrinter->sub_union.sub;
-    int temp;
-    int r4two;
-    int jpnvar;
-    u8* tempTwo;
-    u16 songId;
-    int dummy;
-    u8 dummyTwo;
-    
+    struct TextPrinterSubStruct *r4 = &textPrinter->sub_union.sub;
+    u16 currChar;
+    s32 width;
+
     switch (textPrinter->state) // _080057C4
     {
-        case 0: // _080057F0
-            if ((gMain.heldKeys & (A_BUTTON | B_BUTTON)) && r4->font_type_upper)
+    case 0: // _080057F0
+        if ((gMain.heldKeys & (A_BUTTON | B_BUTTON)) && r4->font_type_upper)
+            textPrinter->delayCounter = 0;
+
+        if (textPrinter->delayCounter && textPrinter->text_speed) //_0800580A
+        {
+            textPrinter->delayCounter--;
+            if (gTextFlags.flag_0 && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
+            {
+                r4->font_type_upper = 1;
                 textPrinter->delayCounter = 0;
-            if (textPrinter->delayCounter && textPrinter->text_speed) //_0800580A
-            {
-                textPrinter->delayCounter--;
-                if (gTextFlags.flag_0 && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
-                {
-                    r4->font_type_upper = 1;
-                    textPrinter->delayCounter = 0;
-                }
-                return 3;
             }
-            else // _0800584C
-            {
-                if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) && gTextFlags.flag_2)
-                    textPrinter->delayCounter = 3;
-                else
-                    textPrinter->delayCounter = textPrinter->text_speed;
-                temp = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                switch (temp) //_0800588A
-                {
-                    case 0xF8+6: //_080058B8
-                        textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
-                        textPrinter->subPrinter.currentY += (gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing);
-                        return 2;
-                    case 0xF8+5: //_080058DC
-                        textPrinter->subPrinter.current_text_offset++;
-                        return 2;
-                    case 0xF8+4: //_080058E0
-                        temp = *textPrinter->subPrinter.current_text_offset;
-                        textPrinter->subPrinter.current_text_offset++;
-                        switch (temp) // _080058F0
-                        {
-                            
-                            case 1: // _08005960
-                                textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
-                                return 2;
-                            case 2: // _08005982
-                                textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
-                                return 2;
-                            case 3: // _080059A6
-                                textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
-                                return 2;
-                            case 4: // _080059C0
-                                textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
-                                return 2;
-                            case 5: // _08005A0E
-                                textPrinter->subPrinter.current_text_offset++;
-                                return 2;
-                            case 6: //_08005A12
-                                r4->font_type = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                return 2;
-                            case 7: // _08005A0A
-                                return 2;
-                            case 8: // _08005A2A
-                                textPrinter->delayCounter = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                textPrinter->state = 6;
-                                return 2;
-                            case 9: // _08005A3A
-                                textPrinter->state = 1;
-                                if (gTextFlags.flag_2)
-                                    r4->frames_visible_counter = 0;
-                                return 3;
-                            case 10: // _08005A58
-                                textPrinter->state = 5;
-                                return 3;
-                            case 11: // _08005A5C
-                                songId = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                songId |= *textPrinter->subPrinter.current_text_offset << 8;
-                                textPrinter->subPrinter.current_text_offset++;
-                                PlayBGM(songId);
-                                return 2;
-                            case 16: // _08005A76
-                                songId = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                songId |= (*textPrinter->subPrinter.current_text_offset << 8);
-                                textPrinter->subPrinter.current_text_offset++;
-                                PlaySE(songId);
-                                return 2;
-                            case 13: // _08005A90
-                                textPrinter->subPrinter.currentX = textPrinter->subPrinter.x + *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                return 2;
-                            case 14: // _08005A98
-                                textPrinter->subPrinter.currentY = textPrinter->subPrinter.y + *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                return 2;
-                            case 15: // _08005AA4
-                                FillWindowPixelBuffer(textPrinter->subPrinter.windowId, textPrinter->subPrinter.bgColor | textPrinter->subPrinter.bgColor << 4);
-                                textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
-                                textPrinter->subPrinter.currentY = textPrinter->subPrinter.y;
-                                return 2;
-                            case 23: // _08005ABE
-                                m4aMPlayStop(&gMPlayInfo_BGM);
-                                return 2;
-                            case 24: // _08005ACC
-                                m4aMPlayContinue(&gMPlayInfo_BGM);
-                                return 2;
-                            case 17: // _08005AD8
-                                temp = *textPrinter->subPrinter.current_text_offset;
-                                textPrinter->subPrinter.current_text_offset++;
-                                if (temp > 0)
-                                {
-                                    ClearTextSpan(textPrinter, temp);
-                                    textPrinter->subPrinter.currentX += temp;
-                                    return 0;
-                                }
-                                return 2;
-                            case 18: // _08005AF2
-                                textPrinter->subPrinter.currentX = *textPrinter->subPrinter.current_text_offset + textPrinter->subPrinter.x;
-                                textPrinter->subPrinter.current_text_offset++;
-                                return 2;
-                            case 19: // _08005B02
-                                temp = *textPrinter->subPrinter.current_text_offset;
-                                temp += textPrinter->subPrinter.x;
-                                textPrinter->subPrinter.current_text_offset++;
-                                r4two = temp - textPrinter->subPrinter.currentX;
-                                if (temp - textPrinter->subPrinter.currentX > 0)
-                                {
-                                    ClearTextSpan(textPrinter, r4two);
-                                    textPrinter->subPrinter.currentX += r4two;
-                                    return 0;
-                                }
-                                return 2;
-                            case 20: // _08005B26
-                                textPrinter->minLetterSpacing = *textPrinter->subPrinter.current_text_offset++;
-                                return 2;
-                            case 21: // _08005B36
-                                textPrinter->japanese = 1;
-                                return 2;
-                            case 22: // _08005B3E
-                                textPrinter->japanese = 0;
-                                return 2;
-                            case 12: // _08005B5A
-                                dummyTwo = *textPrinter->subPrinter.current_text_offset;
-                                dummy = 0x100;
-                                temp = dummy | dummyTwo;
-                                textPrinter->subPrinter.current_text_offset++;
-                                break;
-                        }
-                        break;
-                    case 0xF8+3: // _08005B48
-                        textPrinter->state = 2;
-                        TextPrinterInitDownArrowCounters(textPrinter);
-                        return 3;
-                    case 0xF8+2: // _08005B4C
-                        textPrinter->state = 3;
-                        TextPrinterInitDownArrowCounters(textPrinter);
-                        return 3;
-                    case 0xF8+1: // _08005B5A
-                        dummyTwo = *textPrinter->subPrinter.current_text_offset;
-                        dummy = 0x100;
-                        temp = dummy | dummyTwo;
-                        textPrinter->subPrinter.current_text_offset++;
-                        break;
-                    case 0xF8+0: // _08005B6C
-                        temp = *textPrinter->subPrinter.current_text_offset;
-                        textPrinter->subPrinter.current_text_offset++;
-                        gUnknown_03002F90[0x80] = DrawKeypadIcon(textPrinter->subPrinter.windowId, temp, textPrinter->subPrinter.currentX, textPrinter->subPrinter.currentY);
-                        textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80] +  textPrinter->subPrinter.letterSpacing;
-                        return 0;
-                    case 0xF8+7: // _08005D6C
-                        return 1;
-                }
-                
-            }
-            switch (r4->font_type) // _08005B90
-            {
-                case 0: // _08005BCC
-                    jpnvar =  textPrinter->japanese;
-                    DecompressGlyphFont0(temp, jpnvar);
-                    break;
-                case 1: // _08005BDA
-                    jpnvar =  textPrinter->japanese;
-                    DecompressGlyphFont1(temp, jpnvar);
-                    break;
-                case 2:
-                case 3:
-                case 4:
-                case 5: // _08005BE8
-                    jpnvar =  textPrinter->japanese;
-                    DecompressGlyphFont2(temp, jpnvar);
-                    break;
-                case 7: // _08005BF6
-                    jpnvar =  textPrinter->japanese;
-                    DecompressGlyphFont7(temp, jpnvar);
-                    break;
-                case 8: // _08005C04
-                    jpnvar =  textPrinter->japanese;
-                    DecompressGlyphFont8(temp, jpnvar);
-                    break;
-                case 6: // _08005C10
-                    break;
-            }
-            CopyGlyphToWindow(textPrinter); // _08005C10
-            if (textPrinter->minLetterSpacing) 
-            {
-                textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80];
-                r4two = textPrinter->minLetterSpacing - gUnknown_03002F90[0x80];
-                if (r4two > 0)
-                {
-                    ClearTextSpan(textPrinter, r4two);
-                    textPrinter->subPrinter.currentX += r4two;
-                }
-            }
-            else // _08005C48
-            {
-                if (textPrinter->japanese)
-                    textPrinter->subPrinter.currentX += (gUnknown_03002F90[0x80] + textPrinter->subPrinter.letterSpacing);
-                else
-                    textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80];
-            }
-            return 0;
-        case 1: // _08005C78
-            if (TextPrinterWait(textPrinter))
-                textPrinter->state = 0;
             return 3;
-        case 2: // _08005C8C
-            if (TextPrinterWaitWithDownArrow(textPrinter))
+        }
+
+        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) && gTextFlags.flag_2)
+            textPrinter->delayCounter = 3;
+        else
+            textPrinter->delayCounter = textPrinter->text_speed;
+
+        currChar = *textPrinter->subPrinter.current_text_offset;
+        textPrinter->subPrinter.current_text_offset++;
+
+        switch (currChar) //_0800588A
+        {
+        case 0xF8+6: //_080058B8
+            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
+            textPrinter->subPrinter.currentY += (gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing);
+            return 2;
+        case 0xF8+5: //_080058DC
+            textPrinter->subPrinter.current_text_offset++;
+            return 2;
+        case 0xF8+4: //_080058E0
+            currChar = *textPrinter->subPrinter.current_text_offset;
+            textPrinter->subPrinter.current_text_offset++;
+            switch (currChar) // _080058F0
             {
-                FillWindowPixelBuffer(textPrinter->subPrinter.windowId, (textPrinter->subPrinter.bgColor << 4) | textPrinter->subPrinter.bgColor);
+            case 1: // _08005960
+                textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                return 2;
+            case 2: // _08005982
+                textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                return 2;
+            case 3: // _080059A6
+                textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                return 2;
+            case 4: // _080059C0
+                textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                return 2;
+            case 5: // _08005A0E
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 6: //_08005A12
+                r4->font_type = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 7: // _08005A0A
+                return 2;
+            case 8: // _08005A2A
+                textPrinter->delayCounter = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                textPrinter->state = 6;
+                return 2;
+            case 9: // _08005A3A
+                textPrinter->state = 1;
+                if (gTextFlags.flag_2)
+                    r4->frames_visible_counter = 0;
+                return 3;
+            case 10: // _08005A58
+                textPrinter->state = 5;
+                return 3;
+            case 11: // _08005A5C
+                currChar = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                currChar |= *textPrinter->subPrinter.current_text_offset << 8;
+                textPrinter->subPrinter.current_text_offset++;
+                PlayBGM(currChar);
+                return 2;
+            case 16: // _08005A76
+                currChar = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                currChar |= (*textPrinter->subPrinter.current_text_offset << 8);
+                textPrinter->subPrinter.current_text_offset++;
+                PlaySE(currChar);
+                return 2;
+            case 13: // _08005A90
+                textPrinter->subPrinter.currentX = textPrinter->subPrinter.x + *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 14: // _08005A98
+                textPrinter->subPrinter.currentY = textPrinter->subPrinter.y + *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 15: // _08005AA4
+                FillWindowPixelBuffer(textPrinter->subPrinter.windowId, textPrinter->subPrinter.bgColor | textPrinter->subPrinter.bgColor << 4);
                 textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
                 textPrinter->subPrinter.currentY = textPrinter->subPrinter.y;
-                textPrinter->state = 0;
-            }
-            return 3;
-        case 3: // _08005CB8
-            if (TextPrinterWaitWithDownArrow(textPrinter))
-            {
-                TextPrinterClearDownArrow(textPrinter);
-                textPrinter->scrollDistance = gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing;
-                textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
-                textPrinter->state = 4;
-            }
-            return 3;
-        case 4: // _08005CF0
-            if (textPrinter->scrollDistance)
-            {
-                int scrollSpeed = sub_8197964();
-                int r4two = gWindowVerticalScrollSpeeds[scrollSpeed];
-                if (textPrinter->scrollDistance < r4two)
+                return 2;
+            case 23: // _08005ABE
+                m4aMPlayStop(&gMPlayInfo_BGM);
+                return 2;
+            case 24: // _08005ACC
+                m4aMPlayContinue(&gMPlayInfo_BGM);
+                return 2;
+            case 17: // _08005AD8
+                width = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                if (width > 0)
                 {
-                    ScrollWindow(textPrinter->subPrinter.windowId, 0, textPrinter->scrollDistance, textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor);
-                    textPrinter->scrollDistance = 0;
+                    ClearTextSpan(textPrinter, width);
+                    textPrinter->subPrinter.currentX += width;
+                    return 0;
                 }
-                else
+                return 2;
+            case 18: // _08005AF2
+                textPrinter->subPrinter.currentX = *textPrinter->subPrinter.current_text_offset + textPrinter->subPrinter.x;
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 19: // _08005B02
                 {
-                    ScrollWindow(textPrinter->subPrinter.windowId, 0, (int)r4two, textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor);
-                    textPrinter->scrollDistance -= r4two;
+                    s32 widthHelper = *textPrinter->subPrinter.current_text_offset;
+                    widthHelper += textPrinter->subPrinter.x;
+                    textPrinter->subPrinter.current_text_offset++;
+                    width = widthHelper - textPrinter->subPrinter.currentX;
+                    if (width > 0)
+                    {
+                        ClearTextSpan(textPrinter, width);
+                        textPrinter->subPrinter.currentX += width;
+                        return 0;
+                    }
                 }
-                CopyWindowToVram(textPrinter->subPrinter.windowId, 2);
+                return 2;
+            case 20: // _08005B26
+                textPrinter->minLetterSpacing = *textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 21: // _08005B36
+                textPrinter->japanese = 1;
+                return 2;
+            case 22: // _08005B3E
+                textPrinter->japanese = 0;
+                return 2;
+            case 12: // _08005B5A
+                currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
+                textPrinter->subPrinter.current_text_offset++;
+                break;
+            }
+            break;
+
+        case 0xF8+3: // _08005B48
+            textPrinter->state = 2;
+            TextPrinterInitDownArrowCounters(textPrinter);
+            return 3;
+        case 0xF8+2: // _08005B4C
+            textPrinter->state = 3;
+            TextPrinterInitDownArrowCounters(textPrinter);
+            return 3;
+        case 0xF8+1: // _08005B5A
+            currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
+            textPrinter->subPrinter.current_text_offset++;
+            break;
+        case 0xF8+0: // _08005B6C
+            currChar = *textPrinter->subPrinter.current_text_offset;
+            textPrinter->subPrinter.current_text_offset++;
+            gUnknown_03002F90[0x80] = DrawKeypadIcon(textPrinter->subPrinter.windowId, currChar, textPrinter->subPrinter.currentX, textPrinter->subPrinter.currentY);
+            textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80] + textPrinter->subPrinter.letterSpacing;
+            return 0;
+        case 0xF8+7: // _08005D6C
+            return 1;
+        }
+
+        switch (r4->font_type) // _08005B90
+        {
+        case 0: // _08005BCC
+            DecompressGlyphFont0(currChar, textPrinter->japanese);
+            break;
+        case 1: // _08005BDA
+            DecompressGlyphFont1(currChar, textPrinter->japanese);
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case 5: // _08005BE8
+            DecompressGlyphFont2(currChar, textPrinter->japanese);
+            break;
+        case 7: // _08005BF6
+            DecompressGlyphFont7(currChar, textPrinter->japanese);
+            break;
+        case 8: // _08005C04
+            DecompressGlyphFont8(currChar, textPrinter->japanese);
+            break;
+        case 6: // _08005C10
+            break;
+        }
+
+        CopyGlyphToWindow(textPrinter); // _08005C10
+
+        if (textPrinter->minLetterSpacing)
+        {
+            textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80];
+            width = textPrinter->minLetterSpacing - gUnknown_03002F90[0x80];
+            if (width > 0)
+            {
+                ClearTextSpan(textPrinter, width);
+                textPrinter->subPrinter.currentX += width;
+            }
+        }
+        else // _08005C48
+        {
+            if (textPrinter->japanese)
+                textPrinter->subPrinter.currentX += (gUnknown_03002F90[0x80] + textPrinter->subPrinter.letterSpacing);
+            else
+                textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80];
+        }
+
+        return 0;
+    case 1: // _08005C78
+        if (TextPrinterWait(textPrinter))
+            textPrinter->state = 0;
+        return 3;
+    case 2: // _08005C8C
+        if (TextPrinterWaitWithDownArrow(textPrinter))
+        {
+            FillWindowPixelBuffer(textPrinter->subPrinter.windowId, (textPrinter->subPrinter.bgColor << 4) | textPrinter->subPrinter.bgColor);
+            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
+            textPrinter->subPrinter.currentY = textPrinter->subPrinter.y;
+            textPrinter->state = 0;
+        }
+        return 3;
+    case 3: // _08005CB8
+        if (TextPrinterWaitWithDownArrow(textPrinter))
+        {
+            TextPrinterClearDownArrow(textPrinter);
+            textPrinter->scrollDistance = gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing;
+            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
+            textPrinter->state = 4;
+        }
+        return 3;
+    case 4: // _08005CF0
+        if (textPrinter->scrollDistance)
+        {
+            int scrollSpeed = sub_8197964();
+            int speed = gWindowVerticalScrollSpeeds[scrollSpeed];
+            if (textPrinter->scrollDistance < speed)
+            {
+                ScrollWindow(textPrinter->subPrinter.windowId, 0, textPrinter->scrollDistance, textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor);
+                textPrinter->scrollDistance = 0;
             }
             else
-                textPrinter->state = 0;
-            return 3;
-        case 5: // _08005D48
-            if (!IsSEPlaying())
-                textPrinter->state = 0;
-            return 3;
-        case 6: // _08005D5A
-            if (textPrinter->delayCounter != 0)
-                textPrinter->delayCounter--;
-            else
-                textPrinter->state = 0;
-            return 3;
+            {
+                ScrollWindow(textPrinter->subPrinter.windowId, 0, speed, textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor);
+                textPrinter->scrollDistance -= speed;
+            }
+            CopyWindowToVram(textPrinter->subPrinter.windowId, 2);
+        }
+        else
+        {
+            textPrinter->state = 0;
+        }
+        return 3;
+    case 5: // _08005D48
+        if (!IsSEPlaying())
+            textPrinter->state = 0;
+        return 3;
+    case 6: // _08005D5A
+        if (textPrinter->delayCounter != 0)
+            textPrinter->delayCounter--;
+        else
+            textPrinter->state = 0;
+        return 3;
     }
+
     return 1;
 }
 #else
