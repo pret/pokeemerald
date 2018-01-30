@@ -416,12 +416,12 @@ _080774B2:
 	cmp r0, 0
 	beq _08077528
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011BA4
 	b _08077B46
 	.pool
 _08077528:
-	bl sub_8009734
+	bl OpenLink
 	ldr r0, =gMain
 	movs r7, 0x87
 	lsls r7, 3
@@ -466,7 +466,7 @@ _0807757A:
 	b _08077B22
 	.pool
 _0807758C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
@@ -475,7 +475,7 @@ _0807758C:
 	bcs _080775A0
 	b _08077B46
 _080775A0:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _080775D8
@@ -7026,7 +7026,7 @@ _0807AC92:
 	lsls r0, 1
 	cmp r1, r0
 	bls _0807ACC4
-	bl sub_80097E8
+	bl CloseLink
 	ldr r0, =c2_800ACD4
 	bl SetMainCallback2
 	ldr r1, [r4]
@@ -7264,7 +7264,7 @@ _0807AEAC:
 	ldr r2, =0x00001144
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_80097E8
+	bl CloseLink
 _0807AEC0:
 	ldr r4, =gUnknown_020322A0
 	movs r5, 0x80
@@ -7332,7 +7332,7 @@ _0807AF58:
 	adds r0, 0xFA
 	movs r1, 0x1
 	strb r1, [r0]
-	bl sub_8009734
+	bl OpenLink
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -7369,13 +7369,13 @@ _0807AFAC:
 	b _0807B0E4
 	.pool
 _0807AFBC:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807AFC8
 	b _0807B0DC
 _0807AFC8:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24

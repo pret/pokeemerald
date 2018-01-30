@@ -28072,7 +28072,7 @@ sub_81D4E30: @ 81D4E30
 	ldr r2, =0x00005503
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_8009734
+	bl OpenLink
 	movs r0, 0x1
 	bl sub_800B330
 	pop {r0}
@@ -28128,11 +28128,11 @@ _081D4EBA:
 	thumb_func_start sub_81D4EC0
 sub_81D4EC0: @ 81D4EC0
 	push {lr}
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4EDC
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -28186,11 +28186,11 @@ _081D4F20:
 	.4byte _081D4FEC
 	.4byte _081D4FF8
 _081D4F38:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4F88
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -28212,7 +28212,7 @@ _081D4F54:
 	strb r0, [r4]
 	b _081D500C
 _081D4F6C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -28248,7 +28248,7 @@ _081D4FA0:
 	movs r0, 0x5
 	b _081D500E
 _081D4FB6:
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D500C
@@ -28447,7 +28447,7 @@ _081D515C:
 	beq _081D5166
 	b _081D52FC
 _081D5166:
-	bl sub_80097E8
+	bl CloseLink
 	b _081D525C
 _081D516C:
 	adds r0, r4, 0
@@ -28500,20 +28500,20 @@ _081D51D0:
 	beq _081D51F4
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_80097E8
+	bl CloseLink
 	adds r0, r4, 0
 	bl sub_81D505C
 	b _081D535A
 	.pool
 _081D51F4:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _081D5210
 	adds r0, r4, 0
 	bl sub_81D505C
-	bl sub_80097E8
+	bl CloseLink
 	movs r0, 0x7
 	strb r0, [r4, 0x8]
 	b _081D548A
@@ -28523,7 +28523,7 @@ _081D5210:
 	beq _081D522E
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_80097E8
+	bl CloseLink
 	adds r0, r4, 0
 	bl sub_81D505C
 	movs r0, 0x8
@@ -28537,7 +28537,7 @@ _081D522E:
 	bne _081D523C
 	b _081D548A
 _081D523C:
-	bl sub_80097E8
+	bl CloseLink
 	bl sub_81D4E30
 	adds r0, r4, 0
 	bl sub_81D505C
@@ -28654,13 +28654,13 @@ _081D5340:
 _081D5350:
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_80097E8
+	bl CloseLink
 _081D535A:
 	movs r0, 0x17
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D5360:
-	bl sub_80097E8
+	bl CloseLink
 	movs r0, 0x15
 	strb r0, [r4, 0x8]
 	b _081D548A
@@ -28670,7 +28670,7 @@ _081D536A:
 	cmp r0, 0
 	beq _081D537A
 _081D5374:
-	bl sub_80097E8
+	bl CloseLink
 	b _081D53C0
 _081D537A:
 	bl GetBlockReceivedStatus

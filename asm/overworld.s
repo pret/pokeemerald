@@ -3584,7 +3584,7 @@ sub_808631C: @ 808631C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808632E
-	bl sub_80097E8
+	bl CloseLink
 _0808632E:
 	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]

@@ -84,7 +84,7 @@ gUnknown_03003092: @ 3003092
 gUnknown_03003094: @ 3003094
 	.space 0x4C
 
-gUnknown_030030E0: @ 30030E0
+gLinkStatus: @ 30030E0
 	.space 0x4
 
 gUnknown_030030E4: @ 30030E4

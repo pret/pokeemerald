@@ -655,25 +655,25 @@ LilycoveCity_ContestLobby_EventScript_29416C:: @ 829416C
 	end
 
 LilycoveCity_ContestLobby_EventScript_294176:: @ 8294176
-	special sub_80097E8
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_2781C7, 4
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_294183:: @ 8294183
-	special sub_80097E8
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_278255, 4
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_294190:: @ 8294190
-	special sub_80097E8
+	special CloseLink
 	msgbox gUnknown_08272D9C, 4
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_29419D:: @ 829419D
-	special sub_80097E8
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_27821C, 4
 	releaseall
 	end
