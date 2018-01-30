@@ -8,7 +8,7 @@
 // Exported type declarations
 
 // Exported RAM declarations
-extern void *gUnknown_020375B8;
+extern u8 *gUnknown_020375B8;
 
 // Exported ROM declarations
 void sub_8097AC8(struct Sprite *);

@@ -2,8 +2,13 @@
 #include "field_ground_effect.h"
 #include "field_map_obj.h"
 #include "field_effect.h"
+#include "map_obj_8097404.h"
+#include "malloc.h"
+#include "task.h"
+#include "util.h"
 
 extern void sub_8097D68(struct Sprite *sprite);
+extern void sub_8097FE4(u8);
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 
@@ -522,4 +527,318 @@ void DoRippleFieldEffect(struct MapObject *mapObject, struct Sprite *sprite)
     gFieldEffectArguments[2] = 151;
     gFieldEffectArguments[3] = 3;
     FieldEffectStart(FLDEFF_RIPPLE);
+}
+
+#ifdef NONMATCHING
+bool32 sub_8097E50(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    bool32 ableToStore = FALSE;
+    if (gUnknown_020375B8 == NULL)
+    {
+        gUnknown_020375B8 = AllocZeroed(0x14);
+        gUnknown_020375B8[0] = mapObject->localId;
+        gUnknown_020375B8[16] = 1;
+        ableToStore = TRUE;
+    }
+    else
+    {
+        u8 i;
+        u8 firstFreeSlot;
+        bool32 found;
+        for (firstFreeSlot = 16, found = FALSE, i = 0; i < 16; i++)
+        {
+            if (firstFreeSlot == 16 && gUnknown_020375B8[i] == 0)
+                firstFreeSlot = i;
+            
+            if (gUnknown_020375B8[i] == mapObject->localId)
+            {
+                found = TRUE;
+                break;
+            }
+        }
+        
+        if (!found && firstFreeSlot != 16)
+        {
+            gUnknown_020375B8[firstFreeSlot] = mapObject->localId;
+            gUnknown_020375B8[16]++;
+            ableToStore = TRUE; // the nonmatching problem is that ableToStore == TRUE isnt being merged with the above ableToStore = TRUE assignment.
+        }
+    }
+    
+    if (ableToStore == TRUE)
+    {
+        mapObject->mapobj_bit_12 = TRUE;
+        mapObject->mapobj_bit_9 = TRUE;
+    }
+    
+    sprite->data[2] = 1;
+    return TRUE;
+}
+#else
+__attribute__((naked))
+bool32 sub_8097E50(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    adds r4, r0, 0\n\
+    mov r8, r1\n\
+    movs r0, 0\n\
+    mov r12, r0\n\
+    ldr r0, =gUnknown_020375B8\n\
+    ldr r1, [r0]\n\
+    adds r6, r0, 0\n\
+    cmp r1, 0\n\
+    bne _08097E80\n\
+    movs r0, 0x14\n\
+    bl AllocZeroed\n\
+    str r0, [r6]\n\
+    ldrb r1, [r4, 0x8]\n\
+    strb r1, [r0]\n\
+    ldr r1, [r6]\n\
+    movs r0, 0x1\n\
+    strb r0, [r1, 0x10]\n\
+    b _08097ECC\n\
+    .pool\n\
+_08097E80:\n\
+    movs r2, 0x10\n\
+    movs r5, 0\n\
+    movs r1, 0\n\
+    adds r3, r6, 0\n\
+    b _08097E90\n\
+_08097E8A:\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+_08097E90:\n\
+    cmp r1, 0xF\n\
+    bhi _08097EB2\n\
+    cmp r2, 0x10\n\
+    bne _08097EA4\n\
+    ldr r0, [r3]\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _08097EA4\n\
+    adds r2, r1, 0\n\
+_08097EA4:\n\
+    ldr r0, [r3]\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    ldrb r7, [r4, 0x8]\n\
+    cmp r0, r7\n\
+    bne _08097E8A\n\
+    movs r5, 0x1\n\
+_08097EB2:\n\
+    cmp r5, 0\n\
+    bne _08097ECE\n\
+    cmp r2, 0x10\n\
+    beq _08097ECE\n\
+    ldr r0, [r6]\n\
+    adds r0, r2\n\
+    ldrb r1, [r4, 0x8]\n\
+    strb r1, [r0]\n\
+    ldr r1, [r6]\n\
+    ldrb r0, [r1, 0x10]\n\
+    adds r0, 0x1\n\
+    strb r0, [r1, 0x10]\n\
+    movs r0, 0x1\n\
+_08097ECC:\n\
+    mov r12, r0\n\
+_08097ECE:\n\
+    mov r1, r12\n\
+    cmp r1, 0x1\n\
+    bne _08097EE0\n\
+    ldrb r0, [r4, 0x1]\n\
+    movs r1, 0x10\n\
+    orrs r0, r1\n\
+    movs r1, 0x2\n\
+    orrs r0, r1\n\
+    strb r0, [r4, 0x1]\n\
+_08097EE0:\n\
+    movs r0, 0x1\n\
+    mov r7, r8\n\
+    strh r0, [r7, 0x32]\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided");
+}
+#endif
+
+// this function is very similar to the above one and I don't want to decompile this one until the above is matching.
+__attribute__((naked))
+bool32 sub_8097EF0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    adds r6, r0, 0\n\
+    mov r8, r1\n\
+    movs r0, 0x1\n\
+    strh r0, [r1, 0x32]\n\
+    ldr r5, =gUnknown_020375B8\n\
+    ldr r0, [r5]\n\
+    cmp r0, 0\n\
+    beq _08097F68\n\
+    movs r7, 0\n\
+    adds r0, r6, 0\n\
+    bl sub_8097F78\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    cmp r1, 0x10\n\
+    beq _08097F28\n\
+    ldr r0, [r5]\n\
+    adds r0, r1\n\
+    movs r1, 0\n\
+    strb r1, [r0]\n\
+    ldr r1, [r5]\n\
+    ldrb r0, [r1, 0x10]\n\
+    subs r0, 0x1\n\
+    strb r0, [r1, 0x10]\n\
+    movs r7, 0x1\n\
+_08097F28:\n\
+    ldr r0, [r5]\n\
+    ldrb r4, [r0, 0x10]\n\
+    cmp r4, 0\n\
+    bne _08097F36\n\
+    bl Free\n\
+    str r4, [r5]\n\
+_08097F36:\n\
+    cmp r7, 0x1\n\
+    bne _08097F68\n\
+    ldrb r0, [r6, 0x5]\n\
+    bl GetFieldObjectGraphicsInfo\n\
+    ldrb r1, [r0, 0xC]\n\
+    lsls r1, 25\n\
+    lsrs r1, 31\n\
+    lsls r1, 4\n\
+    ldrb r2, [r6, 0x1]\n\
+    movs r0, 0x11\n\
+    negs r0, r0\n\
+    ands r0, r2\n\
+    orrs r0, r1\n\
+    movs r1, 0x3\n\
+    negs r1, r1\n\
+    ands r0, r1\n\
+    strb r0, [r6, 0x1]\n\
+    mov r2, r8\n\
+    adds r2, 0x2C\n\
+    ldrb r1, [r2]\n\
+    movs r0, 0x41\n\
+    negs r0, r0\n\
+    ands r0, r1\n\
+    strb r0, [r2]\n\
+_08097F68:\n\
+    movs r0, 0x1\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .pool\n\
+    .syntax divided");
+}
+
+u8 sub_8097F78(struct MapObject *mapObject)
+{
+    u8 i;
+
+    for(i = 0; i < 0x10; i++)
+    {
+        if(gUnknown_020375B8[i] == mapObject->localId)
+            return i;
+    }
+    return 0x10;
+}
+
+void sub_8097FA4(struct MapObject *mapObject)
+{
+    u8 taskId = CreateTask(sub_8097FE4, 0xFF);
+    struct Task *task = &gTasks[taskId];
+
+    StoreWordInTwoHalfwords(&task->data[0], (u32)mapObject);
+    mapObject->mapobj_unk_1B = taskId;
+    task->data[3] = 0xFFFF;
+}
+
+void sub_8097FE4(u8 taskId)
+{
+    struct MapObject *mapObject;
+    struct Sprite *sprite;
+    struct Task *task = &gTasks[taskId];
+
+    LoadWordFromTwoHalfwords(&task->data[0], (u32 *)&mapObject); // load the map object pointer.
+    sprite = &gSprites[mapObject->spriteId];
+
+    if(!(task->data[2] & 0x3))
+        sprite->pos2.y += task->data[3];
+
+    if(!(task->data[2] & 0xF))
+        task->data[3] = -task->data[3];
+
+    task->data[2]++;
+}
+
+void sub_8098044(u8 taskId)
+{
+    u32 word;
+    struct Task *task = &gTasks[taskId];
+
+    LoadWordFromTwoHalfwords(&task->data[0], &word); // huh??? why does it load a word that never gets used???
+    DestroyTask(taskId);
+}
+
+void sub_8098074(u8 var1, u8 var2)
+{
+    u8 i;
+
+    for(i = 0; i < 0x10; i++)
+    {
+        if(i != var1 && i != var2 &&
+            gMapObjects[i].active && i != gPlayerAvatar.mapObjectId)
+                FreezeMapObject(&gMapObjects[i]);
+    }
+}
+
+bool32 sub_80980C0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->pos2.y = 0;
+    sprite->data[2]++;
+    return FALSE;
+}
+
+bool32 sub_80980D0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->pos2.y -= 8;
+
+    if(sprite->pos2.y == -160)
+        sprite->data[2]++;
+    return FALSE;
+}
+
+bool32 sub_80980F4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->pos2.y = -160;
+    sprite->data[2]++;
+    return FALSE;
+}
+
+bool32 sub_8098108(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->pos2.y += 8;
+
+    if(!sprite->pos2.y)
+        sprite->data[2]++;
+    return FALSE;
+}
+
+// though this function returns FALSE without doing anything, this header is required due to being in an array of functions which needs it.
+bool32 sub_8098124(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return TRUE;
 }
