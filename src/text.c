@@ -1,6 +1,9 @@
 #include "global.h"
+#include "battle.h"
 #include "main.h"
+#include "m4a.h"
 #include "palette.h"
+#include "sound.h"
 #include "string_util.h"
 #include "window.h"
 #include "text.h"
@@ -14,6 +17,7 @@ extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
 extern void PlaySE(u16 songNum);
 extern u8* UnkTextUtil_GetPtrI(u8 a1);
+extern int sub_8197964();
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};
@@ -24,6 +28,7 @@ static u16 gLastTextFgColor;
 static u16 gLastTextShadowColor;
 
 extern struct Main gMain;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 const struct FontInfo *gFonts;
 u8 gUnknown_03002F84;
@@ -35,22 +40,22 @@ u8 gGlyphDimensions[0x2];
 TextFlags gTextFlags;
 
 const u8 gFontHalfRowOffsets[] = {
-	0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
+    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
     0x09, 0x0A, 0x0B, 0x09, 0x0C, 0x0D, 0x0E, 0x0C, 0x0F, 0x10, 0x11, 0x0F, 0x09, 0x0A, 0x0B, 0x09,
     0x12, 0x13, 0x14, 0x12, 0x15, 0x16, 0x17, 0x15, 0x18, 0x19, 0x1A, 0x18, 0x12, 0x13, 0x14, 0x12,
-	0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
+    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
     0x1B, 0x1C, 0x1D, 0x1B, 0x1E, 0x1F, 0x20, 0x1E, 0x21, 0x22, 0x23, 0x21, 0x1B, 0x1C, 0x1D, 0x1B,
     0x24, 0x25, 0x26, 0x24, 0x27, 0x28, 0x29, 0x27, 0x2A, 0x2B, 0x2C, 0x2A, 0x24, 0x25, 0x26, 0x24,
-	0x2D, 0x2E, 0x2F, 0x2D, 0x30, 0x31, 0x32, 0x30, 0x33, 0x34, 0x35, 0x33, 0x2D, 0x2E, 0x2F, 0x2D,
+    0x2D, 0x2E, 0x2F, 0x2D, 0x30, 0x31, 0x32, 0x30, 0x33, 0x34, 0x35, 0x33, 0x2D, 0x2E, 0x2F, 0x2D,
     0x1B, 0x1C, 0x1D, 0x1B, 0x1E, 0x1F, 0x20, 0x1E, 0x21, 0x22, 0x23, 0x21, 0x1B, 0x1C, 0x1D, 0x1B,
     0x36, 0x37, 0x38, 0x36, 0x39, 0x3A, 0x3B, 0x39, 0x3C, 0x3D, 0x3E, 0x3C, 0x36, 0x37, 0x38, 0x36,
-	0x3F, 0x40, 0x41, 0x3F, 0x42, 0x43, 0x44, 0x42, 0x45, 0x46, 0x47, 0x45, 0x3F, 0x40, 0x41, 0x3F,
+    0x3F, 0x40, 0x41, 0x3F, 0x42, 0x43, 0x44, 0x42, 0x45, 0x46, 0x47, 0x45, 0x3F, 0x40, 0x41, 0x3F,
     0x48, 0x49, 0x4A, 0x48, 0x4B, 0x4C, 0x4D, 0x4B, 0x4E, 0x4F, 0x50, 0x4E, 0x48, 0x49, 0x4A, 0x48,
     0x36, 0x37, 0x38, 0x36, 0x39, 0x3A, 0x3B, 0x39, 0x3C, 0x3D, 0x3E, 0x3C, 0x36, 0x37, 0x38, 0x36,
-	0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
+    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
     0x09, 0x0A, 0x0B, 0x09, 0x0C, 0x0D, 0x0E, 0x0C, 0x0F, 0x10, 0x11, 0x0F, 0x09, 0x0A, 0x0B, 0x09,
     0x12, 0x13, 0x14, 0x12, 0x15, 0x16, 0x17, 0x15, 0x18, 0x19, 0x1A, 0x18, 0x12, 0x13, 0x14, 0x12,
-	0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00
+    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00
 };
 
 const u8 gDownArrowTiles[] = INCBIN_U8("data/graphics/fonts/down_arrow.4bpp");
@@ -378,460 +383,460 @@ __attribute__((naked))
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
 {
     asm("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, #0x24\n\
-	lsl r0, #24\n\
-	lsr r0, #24\n\
-	lsl r1, #24\n\
-	lsr r1, #24\n\
-	lsl r2, #24\n\
-	lsr r2, #24\n\
-	ldr r3, =gFontHalfRowLookupTable\n\
-	ldr r4, =gLastTextBgColor\n\
-	strh r1, [r4]\n\
-	ldr r4, =gLastTextFgColor\n\
-	strh r0, [r4]\n\
-	ldr r4, =gLastTextShadowColor\n\
-	strh r2, [r4]\n\
-	lsl r5, r1, #12\n\
-	lsl r6, r0, #12\n\
-	lsl r4, r2, #12\n\
-	mov r8, r4\n\
-	lsl r7, r1, #8\n\
-	str r7, [sp]\n\
-	lsl r4, r1, #4\n\
-	mov r9, r4\n\
-	orr r7, r4\n\
-	str r7, [sp, #0x4]\n\
-	orr r7, r1\n\
-	add r4, r5, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	add r4, r6, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r8\n\
-	orr r7, r4\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	lsl r7, r0, #8\n\
-	mov r10, r7\n\
-	mov r4, r10\n\
-	mov r7, r9\n\
-	orr r4, r7\n\
-	str r4, [sp, #0x8]\n\
-	add r7, r4, #0\n\
-	orr r7, r1\n\
-	add r4, r5, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	add r4, r6, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r8\n\
-	orr r7, r4\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	lsl r7, r2, #8\n\
-	mov r12, r7\n\
-	mov r4, r12\n\
-	mov r7, r9\n\
-	orr r4, r7\n\
-	str r4, [sp, #0xC]\n\
-	add r7, r4, #0\n\
-	orr r7, r1\n\
-	add r4, r5, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	add r4, r6, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r8\n\
-	orr r7, r4\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	lsl r7, r0, #4\n\
-	mov r9, r7\n\
-	ldr r4, [sp]\n\
-	orr r4, r7\n\
-	str r4, [sp, #0x10]\n\
-	add r7, r4, #0\n\
-	orr r7, r1\n\
-	add r4, r5, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	add r4, r6, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r8\n\
-	orr r7, r4\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	mov r7, r10\n\
-	add r4, r7, #0\n\
-	mov r7, r9\n\
-	orr r4, r7\n\
-	str r4, [sp, #0x14]\n\
-	add r7, r4, #0\n\
-	orr r7, r1\n\
-	add r4, r5, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	add r4, r6, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r8\n\
-	orr r7, r4\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	mov r7, r12\n\
-	add r4, r7, #0\n\
-	mov r7, r9\n\
-	orr r4, r7\n\
-	str r4, [sp, #0x18]\n\
-	add r7, r4, #0\n\
-	orr r7, r1\n\
-	add r4, r5, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	add r4, r6, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r8\n\
-	orr r7, r4\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	lsl r7, r2, #4\n\
-	mov r9, r7\n\
-	mov r4, r9\n\
-	ldr r7, [sp]\n\
-	orr r7, r4\n\
-	str r7, [sp, #0x1C]\n\
-	orr r7, r1\n\
-	add r4, r5, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	add r4, r6, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r8\n\
-	orr r7, r4\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	mov r7, r9\n\
-	mov r4, r10\n\
-	orr r4, r7\n\
-	str r4, [sp, #0x20]\n\
-	add r7, r4, #0\n\
-	orr r7, r1\n\
-	add r4, r5, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	add r4, r6, #0\n\
-	orr r4, r7\n\
-	strh r4, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r8\n\
-	orr r7, r4\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	mov r4, r12\n\
-	mov r7, r9\n\
-	orr r4, r7\n\
-	add r7, r4, #0\n\
-	orr r7, r1\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	ldr r7, [sp, #0x4]\n\
-	orr r7, r0\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	ldr r7, [sp, #0x8]\n\
-	orr r7, r0\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	ldr r7, [sp, #0xC]\n\
-	orr r7, r0\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	ldr r7, [sp, #0x10]\n\
-	orr r7, r0\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	ldr r7, [sp, #0x14]\n\
-	orr r7, r0\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	ldr r7, [sp, #0x18]\n\
-	orr r7, r0\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	ldr r7, [sp, #0x1C]\n\
-	orr r7, r0\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	ldr r7, [sp, #0x20]\n\
-	orr r7, r0\n\
-	add r1, r5, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	add r1, r6, #0\n\
-	orr r1, r7\n\
-	strh r1, [r3]\n\
-	add r3, #0x2\n\
-	mov r1, r8\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r4, #0\n\
-	orr r7, r0\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	ldr r0, [sp, #0x4]\n\
-	orr r7, r0\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	orr r7, r1\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	ldr r1, [sp, #0x8]\n\
-	orr r7, r1\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	mov r0, r8\n\
-	orr r7, r0\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	ldr r1, [sp, #0xC]\n\
-	orr r7, r1\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	mov r0, r8\n\
-	orr r7, r0\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	ldr r1, [sp, #0x10]\n\
-	orr r7, r1\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	mov r0, r8\n\
-	orr r7, r0\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	ldr r1, [sp, #0x14]\n\
-	orr r7, r1\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	mov r0, r8\n\
-	orr r7, r0\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	ldr r1, [sp, #0x18]\n\
-	orr r7, r1\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	mov r0, r8\n\
-	orr r7, r0\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	ldr r1, [sp, #0x1C]\n\
-	orr r7, r1\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	mov r0, r8\n\
-	orr r7, r0\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	ldr r1, [sp, #0x20]\n\
-	orr r7, r1\n\
-	add r0, r5, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	add r0, r6, #0\n\
-	orr r0, r7\n\
-	strh r0, [r3]\n\
-	add r3, #0x2\n\
-	mov r0, r8\n\
-	orr r7, r0\n\
-	strh r7, [r3]\n\
-	add r3, #0x2\n\
-	add r7, r2, #0\n\
-	orr r7, r4\n\
-	orr r5, r7\n\
-	strh r5, [r3]\n\
-	add r3, #0x2\n\
-	orr r6, r7\n\
-	strh r6, [r3]\n\
-	orr r0, r7\n\
-	strh r0, [r3, #0x2]\n\
-	add sp, #0x24\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, #0x24\n\
+    lsl r0, #24\n\
+    lsr r0, #24\n\
+    lsl r1, #24\n\
+    lsr r1, #24\n\
+    lsl r2, #24\n\
+    lsr r2, #24\n\
+    ldr r3, =gFontHalfRowLookupTable\n\
+    ldr r4, =gLastTextBgColor\n\
+    strh r1, [r4]\n\
+    ldr r4, =gLastTextFgColor\n\
+    strh r0, [r4]\n\
+    ldr r4, =gLastTextShadowColor\n\
+    strh r2, [r4]\n\
+    lsl r5, r1, #12\n\
+    lsl r6, r0, #12\n\
+    lsl r4, r2, #12\n\
+    mov r8, r4\n\
+    lsl r7, r1, #8\n\
+    str r7, [sp]\n\
+    lsl r4, r1, #4\n\
+    mov r9, r4\n\
+    orr r7, r4\n\
+    str r7, [sp, #0x4]\n\
+    orr r7, r1\n\
+    add r4, r5, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    add r4, r6, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r8\n\
+    orr r7, r4\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    lsl r7, r0, #8\n\
+    mov r10, r7\n\
+    mov r4, r10\n\
+    mov r7, r9\n\
+    orr r4, r7\n\
+    str r4, [sp, #0x8]\n\
+    add r7, r4, #0\n\
+    orr r7, r1\n\
+    add r4, r5, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    add r4, r6, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r8\n\
+    orr r7, r4\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    lsl r7, r2, #8\n\
+    mov r12, r7\n\
+    mov r4, r12\n\
+    mov r7, r9\n\
+    orr r4, r7\n\
+    str r4, [sp, #0xC]\n\
+    add r7, r4, #0\n\
+    orr r7, r1\n\
+    add r4, r5, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    add r4, r6, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r8\n\
+    orr r7, r4\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    lsl r7, r0, #4\n\
+    mov r9, r7\n\
+    ldr r4, [sp]\n\
+    orr r4, r7\n\
+    str r4, [sp, #0x10]\n\
+    add r7, r4, #0\n\
+    orr r7, r1\n\
+    add r4, r5, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    add r4, r6, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r8\n\
+    orr r7, r4\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    mov r7, r10\n\
+    add r4, r7, #0\n\
+    mov r7, r9\n\
+    orr r4, r7\n\
+    str r4, [sp, #0x14]\n\
+    add r7, r4, #0\n\
+    orr r7, r1\n\
+    add r4, r5, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    add r4, r6, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r8\n\
+    orr r7, r4\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    mov r7, r12\n\
+    add r4, r7, #0\n\
+    mov r7, r9\n\
+    orr r4, r7\n\
+    str r4, [sp, #0x18]\n\
+    add r7, r4, #0\n\
+    orr r7, r1\n\
+    add r4, r5, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    add r4, r6, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r8\n\
+    orr r7, r4\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    lsl r7, r2, #4\n\
+    mov r9, r7\n\
+    mov r4, r9\n\
+    ldr r7, [sp]\n\
+    orr r7, r4\n\
+    str r7, [sp, #0x1C]\n\
+    orr r7, r1\n\
+    add r4, r5, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    add r4, r6, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r8\n\
+    orr r7, r4\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    mov r7, r9\n\
+    mov r4, r10\n\
+    orr r4, r7\n\
+    str r4, [sp, #0x20]\n\
+    add r7, r4, #0\n\
+    orr r7, r1\n\
+    add r4, r5, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    add r4, r6, #0\n\
+    orr r4, r7\n\
+    strh r4, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r8\n\
+    orr r7, r4\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    mov r4, r12\n\
+    mov r7, r9\n\
+    orr r4, r7\n\
+    add r7, r4, #0\n\
+    orr r7, r1\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    ldr r7, [sp, #0x4]\n\
+    orr r7, r0\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    ldr r7, [sp, #0x8]\n\
+    orr r7, r0\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    ldr r7, [sp, #0xC]\n\
+    orr r7, r0\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    ldr r7, [sp, #0x10]\n\
+    orr r7, r0\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    ldr r7, [sp, #0x14]\n\
+    orr r7, r0\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    ldr r7, [sp, #0x18]\n\
+    orr r7, r0\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    ldr r7, [sp, #0x1C]\n\
+    orr r7, r0\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    ldr r7, [sp, #0x20]\n\
+    orr r7, r0\n\
+    add r1, r5, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    add r1, r6, #0\n\
+    orr r1, r7\n\
+    strh r1, [r3]\n\
+    add r3, #0x2\n\
+    mov r1, r8\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r4, #0\n\
+    orr r7, r0\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    ldr r0, [sp, #0x4]\n\
+    orr r7, r0\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    orr r7, r1\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    ldr r1, [sp, #0x8]\n\
+    orr r7, r1\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    mov r0, r8\n\
+    orr r7, r0\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    ldr r1, [sp, #0xC]\n\
+    orr r7, r1\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    mov r0, r8\n\
+    orr r7, r0\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    ldr r1, [sp, #0x10]\n\
+    orr r7, r1\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    mov r0, r8\n\
+    orr r7, r0\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    ldr r1, [sp, #0x14]\n\
+    orr r7, r1\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    mov r0, r8\n\
+    orr r7, r0\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    ldr r1, [sp, #0x18]\n\
+    orr r7, r1\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    mov r0, r8\n\
+    orr r7, r0\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    ldr r1, [sp, #0x1C]\n\
+    orr r7, r1\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    mov r0, r8\n\
+    orr r7, r0\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    ldr r1, [sp, #0x20]\n\
+    orr r7, r1\n\
+    add r0, r5, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    add r0, r6, #0\n\
+    orr r0, r7\n\
+    strh r0, [r3]\n\
+    add r3, #0x2\n\
+    mov r0, r8\n\
+    orr r7, r0\n\
+    strh r7, [r3]\n\
+    add r3, #0x2\n\
+    add r7, r2, #0\n\
+    orr r7, r4\n\
+    orr r5, r7\n\
+    strh r5, [r3]\n\
+    add r3, #0x2\n\
+    orr r6, r7\n\
+    strh r6, [r3]\n\
+    orr r0, r7\n\
+    strh r0, [r3, #0x2]\n\
+    add sp, #0x24\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool");
 }
 #endif
 
@@ -874,165 +879,165 @@ __attribute__((naked))
 void DecompressGlyphTile(const u16 *src, u16 *dest)
 {
     asm("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	ldrh r7, [r0]\n\
-	ldr r5, =gFontHalfRowLookupTable\n\
-	ldr r4, =gFontHalfRowOffsets\n\
-	mov r2, #0xFF\n\
-	mov r8, r2\n\
-	add r2, r7, #0\n\
-	mov r3, r8\n\
-	and r2, r3\n\
-	add r2, r4\n\
-	ldrb r2, [r2]\n\
-	lsl r2, #1\n\
-	add r2, r5\n\
-	ldrh r3, [r2]\n\
-	lsl r3, #16\n\
-	lsr r2, r7, #8\n\
-	add r2, r4\n\
-	ldrb r2, [r2]\n\
-	lsl r2, #1\n\
-	add r2, r5\n\
-	ldrh r2, [r2]\n\
-	orr r3, r2\n\
-	add r6, r1, #0\n\
-	stmia r6!, {r3}\n\
-	ldrh r7, [r0, #0x2]\n\
-	add r0, #0x4\n\
-	add r2, r7, #0\n\
-	mov r3, r8\n\
-	and r2, r3\n\
-	add r2, r4\n\
-	ldrb r2, [r2]\n\
-	lsl r2, #1\n\
-	add r2, r5\n\
-	ldrh r3, [r2]\n\
-	lsl r3, #16\n\
-	lsr r2, r7, #8\n\
-	add r2, r4\n\
-	ldrb r2, [r2]\n\
-	lsl r2, #1\n\
-	add r2, r5\n\
-	ldrh r2, [r2]\n\
-	orr r3, r2\n\
-	str r3, [r1, #0x4]\n\
-	add r6, #0x4\n\
-	ldrh r7, [r0]\n\
-	add r0, #0x2\n\
-	add r1, r7, #0\n\
-	mov r2, r8\n\
-	and r1, r2\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r2, [r1]\n\
-	lsl r2, #16\n\
-	lsr r1, r7, #8\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r1, [r1]\n\
-	orr r2, r1\n\
-	stmia r6!, {r2}\n\
-	ldrh r7, [r0]\n\
-	add r0, #0x2\n\
-	add r1, r7, #0\n\
-	mov r3, r8\n\
-	and r1, r3\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r2, [r1]\n\
-	lsl r2, #16\n\
-	lsr r1, r7, #8\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r1, [r1]\n\
-	orr r2, r1\n\
-	stmia r6!, {r2}\n\
-	ldrh r7, [r0]\n\
-	add r0, #0x2\n\
-	add r1, r7, #0\n\
-	and r1, r3\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r2, [r1]\n\
-	lsl r2, #16\n\
-	lsr r1, r7, #8\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r1, [r1]\n\
-	orr r2, r1\n\
-	stmia r6!, {r2}\n\
-	ldrh r7, [r0]\n\
-	add r0, #0x2\n\
-	add r1, r7, #0\n\
-	and r1, r3\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r2, [r1]\n\
-	lsl r2, #16\n\
-	lsr r1, r7, #8\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r1, [r1]\n\
-	orr r2, r1\n\
-	stmia r6!, {r2}\n\
-	ldrh r7, [r0]\n\
-	add r1, r7, #0\n\
-	and r1, r3\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r2, [r1]\n\
-	lsl r2, #16\n\
-	lsr r1, r7, #8\n\
-	add r1, r4\n\
-	ldrb r1, [r1]\n\
-	lsl r1, #1\n\
-	add r1, r5\n\
-	ldrh r1, [r1]\n\
-	orr r2, r1\n\
-	stmia r6!, {r2}\n\
-	ldrh r7, [r0, #0x2]\n\
-	add r0, r7, #0\n\
-	and r0, r3\n\
-	add r0, r4\n\
-	ldrb r0, [r0]\n\
-	lsl r0, #1\n\
-	add r0, r5\n\
-	ldrh r1, [r0]\n\
-	lsl r1, #16\n\
-	lsr r0, r7, #8\n\
-	add r0, r4\n\
-	ldrb r0, [r0]\n\
-	lsl r0, #1\n\
-	add r0, r5\n\
-	ldrh r0, [r0]\n\
-	orr r1, r0\n\
-	str r1, [r6]\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
+    mov r7, r8\n\
+    push {r7}\n\
+    ldrh r7, [r0]\n\
+    ldr r5, =gFontHalfRowLookupTable\n\
+    ldr r4, =gFontHalfRowOffsets\n\
+    mov r2, #0xFF\n\
+    mov r8, r2\n\
+    add r2, r7, #0\n\
+    mov r3, r8\n\
+    and r2, r3\n\
+    add r2, r4\n\
+    ldrb r2, [r2]\n\
+    lsl r2, #1\n\
+    add r2, r5\n\
+    ldrh r3, [r2]\n\
+    lsl r3, #16\n\
+    lsr r2, r7, #8\n\
+    add r2, r4\n\
+    ldrb r2, [r2]\n\
+    lsl r2, #1\n\
+    add r2, r5\n\
+    ldrh r2, [r2]\n\
+    orr r3, r2\n\
+    add r6, r1, #0\n\
+    stmia r6!, {r3}\n\
+    ldrh r7, [r0, #0x2]\n\
+    add r0, #0x4\n\
+    add r2, r7, #0\n\
+    mov r3, r8\n\
+    and r2, r3\n\
+    add r2, r4\n\
+    ldrb r2, [r2]\n\
+    lsl r2, #1\n\
+    add r2, r5\n\
+    ldrh r3, [r2]\n\
+    lsl r3, #16\n\
+    lsr r2, r7, #8\n\
+    add r2, r4\n\
+    ldrb r2, [r2]\n\
+    lsl r2, #1\n\
+    add r2, r5\n\
+    ldrh r2, [r2]\n\
+    orr r3, r2\n\
+    str r3, [r1, #0x4]\n\
+    add r6, #0x4\n\
+    ldrh r7, [r0]\n\
+    add r0, #0x2\n\
+    add r1, r7, #0\n\
+    mov r2, r8\n\
+    and r1, r2\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r2, [r1]\n\
+    lsl r2, #16\n\
+    lsr r1, r7, #8\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r1, [r1]\n\
+    orr r2, r1\n\
+    stmia r6!, {r2}\n\
+    ldrh r7, [r0]\n\
+    add r0, #0x2\n\
+    add r1, r7, #0\n\
+    mov r3, r8\n\
+    and r1, r3\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r2, [r1]\n\
+    lsl r2, #16\n\
+    lsr r1, r7, #8\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r1, [r1]\n\
+    orr r2, r1\n\
+    stmia r6!, {r2}\n\
+    ldrh r7, [r0]\n\
+    add r0, #0x2\n\
+    add r1, r7, #0\n\
+    and r1, r3\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r2, [r1]\n\
+    lsl r2, #16\n\
+    lsr r1, r7, #8\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r1, [r1]\n\
+    orr r2, r1\n\
+    stmia r6!, {r2}\n\
+    ldrh r7, [r0]\n\
+    add r0, #0x2\n\
+    add r1, r7, #0\n\
+    and r1, r3\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r2, [r1]\n\
+    lsl r2, #16\n\
+    lsr r1, r7, #8\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r1, [r1]\n\
+    orr r2, r1\n\
+    stmia r6!, {r2}\n\
+    ldrh r7, [r0]\n\
+    add r1, r7, #0\n\
+    and r1, r3\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r2, [r1]\n\
+    lsl r2, #16\n\
+    lsr r1, r7, #8\n\
+    add r1, r4\n\
+    ldrb r1, [r1]\n\
+    lsl r1, #1\n\
+    add r1, r5\n\
+    ldrh r1, [r1]\n\
+    orr r2, r1\n\
+    stmia r6!, {r2}\n\
+    ldrh r7, [r0, #0x2]\n\
+    add r0, r7, #0\n\
+    and r0, r3\n\
+    add r0, r4\n\
+    ldrb r0, [r0]\n\
+    lsl r0, #1\n\
+    add r0, r5\n\
+    ldrh r1, [r0]\n\
+    lsl r1, #16\n\
+    lsr r0, r7, #8\n\
+    add r0, r4\n\
+    ldrb r0, [r0]\n\
+    lsl r0, #1\n\
+    add r0, r5\n\
+    ldrh r0, [r0]\n\
+    orr r1, r0\n\
+    str r1, [r6]\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool");
 }
 #endif
 
@@ -1055,703 +1060,703 @@ __attribute__((naked))
 void CopyGlyphToWindow(struct TextPrinter *x)
 {
     asm("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, #0x8C\n\
-	add r3, r0, #0\n\
-	ldrb r1, [r3, #0x4]\n\
-	lsl r0, r1, #1\n\
-	add r0, r1\n\
-	lsl r0, #2\n\
-	ldr r1, =gWindows\n\
-	add r1, r0, r1\n\
-	add r2, r1, #0\n\
-	ldrb r7, [r1, #0x3]\n\
-	lsl r0, r7, #3\n\
-	ldrb r6, [r3, #0x8]\n\
-	sub r4, r0, r6\n\
-	ldr r5, =gUnknown_03002F90\n\
-	add r0, r5, #0\n\
-	add r0, #0x80\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	ble _08004DD2\n\
-	add r4, r0, #0\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, #0x8C\n\
+    add r3, r0, #0\n\
+    ldrb r1, [r3, #0x4]\n\
+    lsl r0, r1, #1\n\
+    add r0, r1\n\
+    lsl r0, #2\n\
+    ldr r1, =gWindows\n\
+    add r1, r0, r1\n\
+    add r2, r1, #0\n\
+    ldrb r7, [r1, #0x3]\n\
+    lsl r0, r7, #3\n\
+    ldrb r6, [r3, #0x8]\n\
+    sub r4, r0, r6\n\
+    ldr r5, =gUnknown_03002F90\n\
+    add r0, r5, #0\n\
+    add r0, #0x80\n\
+    ldrb r0, [r0]\n\
+    cmp r4, r0\n\
+    ble _08004DD2\n\
+    add r4, r0, #0\n\
 _08004DD2:\n\
-	ldrb r0, [r1, #0x4]\n\
-	lsl r0, #3\n\
-	ldrb r3, [r3, #0x9]\n\
-	sub r0, r3\n\
-	add r1, r5, #0\n\
-	add r1, #0x81\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	ble _08004DE6\n\
-	add r0, r1, #0\n\
+    ldrb r0, [r1, #0x4]\n\
+    lsl r0, #3\n\
+    ldrb r3, [r3, #0x9]\n\
+    sub r0, r3\n\
+    add r1, r5, #0\n\
+    add r1, #0x81\n\
+    ldrb r1, [r1]\n\
+    cmp r0, r1\n\
+    ble _08004DE6\n\
+    add r0, r1, #0\n\
 _08004DE6:\n\
-	str r6, [sp]\n\
-	mov r8, r3\n\
-	add r3, r5, #0\n\
-	ldr r2, [r2, #0x8]\n\
-	mov r9, r2\n\
-	lsl r1, r7, #5\n\
-	str r1, [sp, #0x4]\n\
-	cmp r4, #0x8\n\
-	ble _08004DFA\n\
-	b _08004F94\n\
+    str r6, [sp]\n\
+    mov r8, r3\n\
+    add r3, r5, #0\n\
+    ldr r2, [r2, #0x8]\n\
+    mov r9, r2\n\
+    lsl r1, r7, #5\n\
+    str r1, [sp, #0x4]\n\
+    cmp r4, #0x8\n\
+    ble _08004DFA\n\
+    b _08004F94\n\
 _08004DFA:\n\
-	cmp r0, #0x8\n\
-	bgt _08004E84\n\
-	mov r1, r8\n\
-	str r3, [sp, #0x8]\n\
-	add r2, r6, #0\n\
-	add r2, r4\n\
-	mov r8, r2\n\
-	add r0, r1, r0\n\
-	str r0, [sp, #0xC]\n\
-	str r6, [sp, #0x10]\n\
-	cmp r1, r0\n\
-	bcc _08004E14\n\
-	b _080052AA\n\
+    cmp r0, #0x8\n\
+    bgt _08004E84\n\
+    mov r1, r8\n\
+    str r3, [sp, #0x8]\n\
+    add r2, r6, #0\n\
+    add r2, r4\n\
+    mov r8, r2\n\
+    add r0, r1, r0\n\
+    str r0, [sp, #0xC]\n\
+    str r6, [sp, #0x10]\n\
+    cmp r1, r0\n\
+    bcc _08004E14\n\
+    b _080052AA\n\
 _08004E14:\n\
-	ldr r3, [sp, #0x8]\n\
-	ldm r3!, {r5}\n\
-	str r3, [sp, #0x8]\n\
-	ldr r4, [sp, #0x10]\n\
-	add r0, r1, #0x1\n\
-	mov r10, r0\n\
-	cmp r4, r8\n\
-	bcs _08004E72\n\
-	mov r2, #0x7\n\
-	mov r12, r2\n\
-	lsr r0, r1, #3\n\
-	ldr r2, [sp, #0x4]\n\
-	add r3, r0, #0\n\
-	mul r3, r2\n\
-	add r7, r3, #0\n\
-	mov r3, r12\n\
-	and r1, r3\n\
-	lsl r6, r1, #2\n\
+    ldr r3, [sp, #0x8]\n\
+    ldm r3!, {r5}\n\
+    str r3, [sp, #0x8]\n\
+    ldr r4, [sp, #0x10]\n\
+    add r0, r1, #0x1\n\
+    mov r10, r0\n\
+    cmp r4, r8\n\
+    bcs _08004E72\n\
+    mov r2, #0x7\n\
+    mov r12, r2\n\
+    lsr r0, r1, #3\n\
+    ldr r2, [sp, #0x4]\n\
+    add r3, r0, #0\n\
+    mul r3, r2\n\
+    add r7, r3, #0\n\
+    mov r3, r12\n\
+    and r1, r3\n\
+    lsl r6, r1, #2\n\
 _08004E38:\n\
-	add r3, r5, #0\n\
-	mov r0, #0xF\n\
-	and r3, r0\n\
-	cmp r3, #0\n\
-	beq _08004E6A\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, r12\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r0, #0xF\n\
+    and r3, r0\n\
+    cmp r3, #0\n\
+    beq _08004E6A\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _08004E6A:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r8\n\
-	bcc _08004E38\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _08004E38\n\
 _08004E72:\n\
-	mov r1, r10\n\
-	ldr r2, [sp, #0xC]\n\
-	cmp r1, r2\n\
-	bcc _08004E14\n\
-	b _080052AA\n\
-	.pool\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0xC]\n\
+    cmp r1, r2\n\
+    bcc _08004E14\n\
+    b _080052AA\n\
+    .pool\n\
 _08004E84:\n\
-	mov r1, r8\n\
-	str r3, [sp, #0x14]\n\
-	ldr r3, [sp]\n\
-	add r3, r4\n\
-	mov r12, r3\n\
-	add r2, r1, #0\n\
-	add r2, #0x8\n\
-	str r2, [sp, #0x18]\n\
-	ldr r3, [sp]\n\
-	str r3, [sp, #0x1C]\n\
-	mov r2, r12\n\
-	str r2, [sp, #0x74]\n\
-	ldr r3, [sp, #0x18]\n\
-	str r3, [sp, #0x88]\n\
-	sub r0, #0x8\n\
-	str r0, [sp, #0x80]\n\
-	cmp r1, r3\n\
-	bcs _08004F0E\n\
+    mov r1, r8\n\
+    str r3, [sp, #0x14]\n\
+    ldr r3, [sp]\n\
+    add r3, r4\n\
+    mov r12, r3\n\
+    add r2, r1, #0\n\
+    add r2, #0x8\n\
+    str r2, [sp, #0x18]\n\
+    ldr r3, [sp]\n\
+    str r3, [sp, #0x1C]\n\
+    mov r2, r12\n\
+    str r2, [sp, #0x74]\n\
+    ldr r3, [sp, #0x18]\n\
+    str r3, [sp, #0x88]\n\
+    sub r0, #0x8\n\
+    str r0, [sp, #0x80]\n\
+    cmp r1, r3\n\
+    bcs _08004F0E\n\
 _08004EA8:\n\
-	ldr r0, [sp, #0x14]\n\
-	ldm r0!, {r5}\n\
-	str r0, [sp, #0x14]\n\
-	ldr r4, [sp, #0x1C]\n\
-	add r2, r1, #0x1\n\
-	mov r8, r2\n\
-	cmp r4, r12\n\
-	bcs _08004F06\n\
-	mov r3, #0x7\n\
-	mov r10, r3\n\
-	lsr r0, r1, #3\n\
-	ldr r3, [sp, #0x4]\n\
-	add r2, r0, #0\n\
-	mul r2, r3\n\
-	add r7, r2, #0\n\
-	mov r0, r10\n\
-	and r1, r0\n\
-	lsl r6, r1, #2\n\
+    ldr r0, [sp, #0x14]\n\
+    ldm r0!, {r5}\n\
+    str r0, [sp, #0x14]\n\
+    ldr r4, [sp, #0x1C]\n\
+    add r2, r1, #0x1\n\
+    mov r8, r2\n\
+    cmp r4, r12\n\
+    bcs _08004F06\n\
+    mov r3, #0x7\n\
+    mov r10, r3\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r10\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
 _08004ECC:\n\
-	add r3, r5, #0\n\
-	mov r1, #0xF\n\
-	and r3, r1\n\
-	cmp r3, #0\n\
-	beq _08004EFE\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, r10\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _08004EFE\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r10\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _08004EFE:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r12\n\
-	bcc _08004ECC\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r12\n\
+    bcc _08004ECC\n\
 _08004F06:\n\
-	mov r1, r8\n\
-	ldr r2, [sp, #0x18]\n\
-	cmp r1, r2\n\
-	bcc _08004EA8\n\
+    mov r1, r8\n\
+    ldr r2, [sp, #0x18]\n\
+    cmp r1, r2\n\
+    bcc _08004EA8\n\
 _08004F0E:\n\
-	ldr r1, [sp, #0x88]\n\
-	ldr r3, =gUnknown_03002FD0\n\
-	str r3, [sp, #0x20]\n\
-	ldr r0, [sp, #0x74]\n\
-	mov r8, r0\n\
-	ldr r2, [sp, #0x80]\n\
-	add r2, r1, r2\n\
-	str r2, [sp, #0x24]\n\
-	ldr r3, [sp]\n\
-	str r3, [sp, #0x28]\n\
-	cmp r1, r2\n\
-	bcc _08004F28\n\
-	b _080052AA\n\
+    ldr r1, [sp, #0x88]\n\
+    ldr r3, =gUnknown_03002FD0\n\
+    str r3, [sp, #0x20]\n\
+    ldr r0, [sp, #0x74]\n\
+    mov r8, r0\n\
+    ldr r2, [sp, #0x80]\n\
+    add r2, r1, r2\n\
+    str r2, [sp, #0x24]\n\
+    ldr r3, [sp]\n\
+    str r3, [sp, #0x28]\n\
+    cmp r1, r2\n\
+    bcc _08004F28\n\
+    b _080052AA\n\
 _08004F28:\n\
-	ldr r0, [sp, #0x20]\n\
-	ldm r0!, {r5}\n\
-	str r0, [sp, #0x20]\n\
-	ldr r4, [sp, #0x28]\n\
-	add r2, r1, #0x1\n\
-	mov r10, r2\n\
-	cmp r4, r8\n\
-	bcs _08004F86\n\
-	mov r3, #0x7\n\
-	mov r12, r3\n\
-	lsr r0, r1, #3\n\
-	ldr r3, [sp, #0x4]\n\
-	add r2, r0, #0\n\
-	mul r2, r3\n\
-	add r7, r2, #0\n\
-	mov r0, r12\n\
-	and r1, r0\n\
-	lsl r6, r1, #2\n\
+    ldr r0, [sp, #0x20]\n\
+    ldm r0!, {r5}\n\
+    str r0, [sp, #0x20]\n\
+    ldr r4, [sp, #0x28]\n\
+    add r2, r1, #0x1\n\
+    mov r10, r2\n\
+    cmp r4, r8\n\
+    bcs _08004F86\n\
+    mov r3, #0x7\n\
+    mov r12, r3\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r12\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
 _08004F4C:\n\
-	add r3, r5, #0\n\
-	mov r1, #0xF\n\
-	and r3, r1\n\
-	cmp r3, #0\n\
-	beq _08004F7E\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, r12\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _08004F7E\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _08004F7E:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r8\n\
-	bcc _08004F4C\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _08004F4C\n\
 _08004F86:\n\
-	mov r1, r10\n\
-	ldr r2, [sp, #0x24]\n\
-	cmp r1, r2\n\
-	bcc _08004F28\n\
-	b _080052AA\n\
-	.pool\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x24]\n\
+    cmp r1, r2\n\
+    bcc _08004F28\n\
+    b _080052AA\n\
+    .pool\n\
 _08004F94:\n\
-	cmp r0, #0x8\n\
-	ble _08004F9A\n\
-	b _080050A4\n\
+    cmp r0, #0x8\n\
+    ble _08004F9A\n\
+    b _080050A4\n\
 _08004F9A:\n\
-	mov r1, r8\n\
-	str r3, [sp, #0x2C]\n\
-	ldr r3, [sp]\n\
-	add r3, #0x8\n\
-	mov r12, r3\n\
-	add r0, r8\n\
-	str r0, [sp, #0x30]\n\
-	ldr r0, [sp]\n\
-	str r0, [sp, #0x34]\n\
-	ldr r2, [sp, #0x30]\n\
-	str r2, [sp, #0x78]\n\
-	str r3, [sp, #0x84]\n\
-	sub r4, #0x8\n\
-	str r4, [sp, #0x7C]\n\
-	cmp r8, r2\n\
-	bcs _0800501C\n\
+    mov r1, r8\n\
+    str r3, [sp, #0x2C]\n\
+    ldr r3, [sp]\n\
+    add r3, #0x8\n\
+    mov r12, r3\n\
+    add r0, r8\n\
+    str r0, [sp, #0x30]\n\
+    ldr r0, [sp]\n\
+    str r0, [sp, #0x34]\n\
+    ldr r2, [sp, #0x30]\n\
+    str r2, [sp, #0x78]\n\
+    str r3, [sp, #0x84]\n\
+    sub r4, #0x8\n\
+    str r4, [sp, #0x7C]\n\
+    cmp r8, r2\n\
+    bcs _0800501C\n\
 _08004FBA:\n\
-	ldr r0, [sp, #0x2C]\n\
-	ldm r0!, {r5}\n\
-	str r0, [sp, #0x2C]\n\
-	ldr r4, [sp, #0x34]\n\
-	add r2, r1, #0x1\n\
-	mov r10, r2\n\
-	cmp r4, r12\n\
-	bcs _08005014\n\
-	lsr r0, r1, #3\n\
-	ldr r2, [sp, #0x4]\n\
-	add r3, r0, #0\n\
-	mul r3, r2\n\
-	add r7, r3, #0\n\
-	mov r3, #0x7\n\
-	and r1, r3\n\
-	lsl r6, r1, #2\n\
+    ldr r0, [sp, #0x2C]\n\
+    ldm r0!, {r5}\n\
+    str r0, [sp, #0x2C]\n\
+    ldr r4, [sp, #0x34]\n\
+    add r2, r1, #0x1\n\
+    mov r10, r2\n\
+    cmp r4, r12\n\
+    bcs _08005014\n\
+    lsr r0, r1, #3\n\
+    ldr r2, [sp, #0x4]\n\
+    add r3, r0, #0\n\
+    mul r3, r2\n\
+    add r7, r3, #0\n\
+    mov r3, #0x7\n\
+    and r1, r3\n\
+    lsl r6, r1, #2\n\
 _08004FDA:\n\
-	add r3, r5, #0\n\
-	mov r0, #0xF\n\
-	and r3, r0\n\
-	cmp r3, #0\n\
-	beq _0800500C\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, #0x7\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r0, #0xF\n\
+    and r3, r0\n\
+    cmp r3, #0\n\
+    beq _0800500C\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, #0x7\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _0800500C:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r12\n\
-	bcc _08004FDA\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r12\n\
+    bcc _08004FDA\n\
 _08005014:\n\
-	mov r1, r10\n\
-	ldr r2, [sp, #0x30]\n\
-	cmp r1, r2\n\
-	bcc _08004FBA\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x30]\n\
+    cmp r1, r2\n\
+    bcc _08004FBA\n\
 _0800501C:\n\
-	mov r1, r8\n\
-	ldr r3, =gUnknown_03002FB0\n\
-	str r3, [sp, #0x38]\n\
-	ldr r0, [sp, #0x84]\n\
-	ldr r2, [sp, #0x7C]\n\
-	add r0, r2\n\
-	mov r8, r0\n\
-	ldr r3, [sp, #0x78]\n\
-	str r3, [sp, #0x3C]\n\
-	ldr r0, [sp, #0x84]\n\
-	str r0, [sp, #0x40]\n\
-	cmp r1, r3\n\
-	bcc _08005038\n\
-	b _080052AA\n\
+    mov r1, r8\n\
+    ldr r3, =gUnknown_03002FB0\n\
+    str r3, [sp, #0x38]\n\
+    ldr r0, [sp, #0x84]\n\
+    ldr r2, [sp, #0x7C]\n\
+    add r0, r2\n\
+    mov r8, r0\n\
+    ldr r3, [sp, #0x78]\n\
+    str r3, [sp, #0x3C]\n\
+    ldr r0, [sp, #0x84]\n\
+    str r0, [sp, #0x40]\n\
+    cmp r1, r3\n\
+    bcc _08005038\n\
+    b _080052AA\n\
 _08005038:\n\
-	ldr r2, [sp, #0x38]\n\
-	ldm r2!, {r5}\n\
-	str r2, [sp, #0x38]\n\
-	ldr r4, [sp, #0x40]\n\
-	add r3, r1, #0x1\n\
-	mov r10, r3\n\
-	cmp r4, r8\n\
-	bcs _08005096\n\
-	mov r0, #0x7\n\
-	mov r12, r0\n\
-	lsr r0, r1, #3\n\
-	ldr r3, [sp, #0x4]\n\
-	add r2, r0, #0\n\
-	mul r2, r3\n\
-	add r7, r2, #0\n\
-	mov r0, r12\n\
-	and r1, r0\n\
-	lsl r6, r1, #2\n\
+    ldr r2, [sp, #0x38]\n\
+    ldm r2!, {r5}\n\
+    str r2, [sp, #0x38]\n\
+    ldr r4, [sp, #0x40]\n\
+    add r3, r1, #0x1\n\
+    mov r10, r3\n\
+    cmp r4, r8\n\
+    bcs _08005096\n\
+    mov r0, #0x7\n\
+    mov r12, r0\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r12\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
 _0800505C:\n\
-	add r3, r5, #0\n\
-	mov r1, #0xF\n\
-	and r3, r1\n\
-	cmp r3, #0\n\
-	beq _0800508E\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, r12\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _0800508E\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _0800508E:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r8\n\
-	bcc _0800505C\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _0800505C\n\
 _08005096:\n\
-	mov r1, r10\n\
-	ldr r2, [sp, #0x3C]\n\
-	cmp r1, r2\n\
-	bcc _08005038\n\
-	b _080052AA\n\
-	.pool\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x3C]\n\
+    cmp r1, r2\n\
+    bcc _08005038\n\
+    b _080052AA\n\
+    .pool\n\
 _080050A4:\n\
-	mov r1, r8\n\
-	str r5, [sp, #0x44]\n\
-	ldr r3, [sp]\n\
-	add r3, #0x8\n\
-	mov r12, r3\n\
-	mov r2, r8\n\
-	add r2, #0x8\n\
-	str r2, [sp, #0x48]\n\
-	ldr r3, [sp]\n\
-	str r3, [sp, #0x4C]\n\
-	str r2, [sp, #0x88]\n\
-	sub r0, #0x8\n\
-	str r0, [sp, #0x80]\n\
-	mov r0, r12\n\
-	str r0, [sp, #0x84]\n\
-	sub r4, #0x8\n\
-	str r4, [sp, #0x7C]\n\
-	cmp r8, r2\n\
-	bcs _0800512C\n\
+    mov r1, r8\n\
+    str r5, [sp, #0x44]\n\
+    ldr r3, [sp]\n\
+    add r3, #0x8\n\
+    mov r12, r3\n\
+    mov r2, r8\n\
+    add r2, #0x8\n\
+    str r2, [sp, #0x48]\n\
+    ldr r3, [sp]\n\
+    str r3, [sp, #0x4C]\n\
+    str r2, [sp, #0x88]\n\
+    sub r0, #0x8\n\
+    str r0, [sp, #0x80]\n\
+    mov r0, r12\n\
+    str r0, [sp, #0x84]\n\
+    sub r4, #0x8\n\
+    str r4, [sp, #0x7C]\n\
+    cmp r8, r2\n\
+    bcs _0800512C\n\
 _080050CA:\n\
-	ldr r2, [sp, #0x44]\n\
-	ldm r2!, {r5}\n\
-	str r2, [sp, #0x44]\n\
-	ldr r4, [sp, #0x4C]\n\
-	add r3, r1, #0x1\n\
-	mov r10, r3\n\
-	cmp r4, r12\n\
-	bcs _08005124\n\
-	lsr r0, r1, #3\n\
-	ldr r3, [sp, #0x4]\n\
-	add r2, r0, #0\n\
-	mul r2, r3\n\
-	add r7, r2, #0\n\
-	mov r0, #0x7\n\
-	and r1, r0\n\
-	lsl r6, r1, #2\n\
+    ldr r2, [sp, #0x44]\n\
+    ldm r2!, {r5}\n\
+    str r2, [sp, #0x44]\n\
+    ldr r4, [sp, #0x4C]\n\
+    add r3, r1, #0x1\n\
+    mov r10, r3\n\
+    cmp r4, r12\n\
+    bcs _08005124\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, #0x7\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
 _080050EA:\n\
-	add r3, r5, #0\n\
-	mov r1, #0xF\n\
-	and r3, r1\n\
-	cmp r3, #0\n\
-	beq _0800511C\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, #0x7\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _0800511C\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, #0x7\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _0800511C:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r12\n\
-	bcc _080050EA\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r12\n\
+    bcc _080050EA\n\
 _08005124:\n\
-	mov r1, r10\n\
-	ldr r2, [sp, #0x48]\n\
-	cmp r1, r2\n\
-	bcc _080050CA\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x48]\n\
+    cmp r1, r2\n\
+    bcc _080050CA\n\
 _0800512C:\n\
-	mov r1, r8\n\
-	ldr r3, =gUnknown_03002FB0\n\
-	str r3, [sp, #0x50]\n\
-	ldr r0, [sp, #0x84]\n\
-	ldr r2, [sp, #0x7C]\n\
-	add r0, r2\n\
-	mov r8, r0\n\
-	ldr r3, [sp, #0x88]\n\
-	str r3, [sp, #0x54]\n\
-	ldr r0, [sp, #0x84]\n\
-	str r0, [sp, #0x58]\n\
-	cmp r1, r3\n\
-	bcs _080051AC\n\
+    mov r1, r8\n\
+    ldr r3, =gUnknown_03002FB0\n\
+    str r3, [sp, #0x50]\n\
+    ldr r0, [sp, #0x84]\n\
+    ldr r2, [sp, #0x7C]\n\
+    add r0, r2\n\
+    mov r8, r0\n\
+    ldr r3, [sp, #0x88]\n\
+    str r3, [sp, #0x54]\n\
+    ldr r0, [sp, #0x84]\n\
+    str r0, [sp, #0x58]\n\
+    cmp r1, r3\n\
+    bcs _080051AC\n\
 _08005146:\n\
-	ldr r2, [sp, #0x50]\n\
-	ldm r2!, {r5}\n\
-	str r2, [sp, #0x50]\n\
-	ldr r4, [sp, #0x58]\n\
-	add r3, r1, #0x1\n\
-	mov r10, r3\n\
-	cmp r4, r8\n\
-	bcs _080051A4\n\
-	mov r0, #0x7\n\
-	mov r12, r0\n\
-	lsr r0, r1, #3\n\
-	ldr r3, [sp, #0x4]\n\
-	add r2, r0, #0\n\
-	mul r2, r3\n\
-	add r7, r2, #0\n\
-	mov r0, r12\n\
-	and r1, r0\n\
-	lsl r6, r1, #2\n\
+    ldr r2, [sp, #0x50]\n\
+    ldm r2!, {r5}\n\
+    str r2, [sp, #0x50]\n\
+    ldr r4, [sp, #0x58]\n\
+    add r3, r1, #0x1\n\
+    mov r10, r3\n\
+    cmp r4, r8\n\
+    bcs _080051A4\n\
+    mov r0, #0x7\n\
+    mov r12, r0\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r12\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
 _0800516A:\n\
-	add r3, r5, #0\n\
-	mov r1, #0xF\n\
-	and r3, r1\n\
-	cmp r3, #0\n\
-	beq _0800519C\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, r12\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _0800519C\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _0800519C:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r8\n\
-	bcc _0800516A\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _0800516A\n\
 _080051A4:\n\
-	mov r1, r10\n\
-	ldr r2, [sp, #0x54]\n\
-	cmp r1, r2\n\
-	bcc _08005146\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x54]\n\
+    cmp r1, r2\n\
+    bcc _08005146\n\
 _080051AC:\n\
-	ldr r1, [sp, #0x88]\n\
-	ldr r3, =gUnknown_03002FD0\n\
-	str r3, [sp, #0x5C]\n\
-	ldr r0, [sp, #0x84]\n\
-	mov r8, r0\n\
-	ldr r2, [sp, #0x80]\n\
-	add r2, r1, r2\n\
-	str r2, [sp, #0x60]\n\
-	ldr r3, [sp]\n\
-	str r3, [sp, #0x64]\n\
-	cmp r1, r2\n\
-	bcs _0800522A\n\
+    ldr r1, [sp, #0x88]\n\
+    ldr r3, =gUnknown_03002FD0\n\
+    str r3, [sp, #0x5C]\n\
+    ldr r0, [sp, #0x84]\n\
+    mov r8, r0\n\
+    ldr r2, [sp, #0x80]\n\
+    add r2, r1, r2\n\
+    str r2, [sp, #0x60]\n\
+    ldr r3, [sp]\n\
+    str r3, [sp, #0x64]\n\
+    cmp r1, r2\n\
+    bcs _0800522A\n\
 _080051C4:\n\
-	ldr r0, [sp, #0x5C]\n\
-	ldm r0!, {r5}\n\
-	str r0, [sp, #0x5C]\n\
-	ldr r4, [sp, #0x64]\n\
-	add r2, r1, #0x1\n\
-	mov r10, r2\n\
-	cmp r4, r8\n\
-	bcs _08005222\n\
-	mov r3, #0x7\n\
-	mov r12, r3\n\
-	lsr r0, r1, #3\n\
-	ldr r3, [sp, #0x4]\n\
-	add r2, r0, #0\n\
-	mul r2, r3\n\
-	add r7, r2, #0\n\
-	mov r0, r12\n\
-	and r1, r0\n\
-	lsl r6, r1, #2\n\
+    ldr r0, [sp, #0x5C]\n\
+    ldm r0!, {r5}\n\
+    str r0, [sp, #0x5C]\n\
+    ldr r4, [sp, #0x64]\n\
+    add r2, r1, #0x1\n\
+    mov r10, r2\n\
+    cmp r4, r8\n\
+    bcs _08005222\n\
+    mov r3, #0x7\n\
+    mov r12, r3\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r12\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
 _080051E8:\n\
-	add r3, r5, #0\n\
-	mov r1, #0xF\n\
-	and r3, r1\n\
-	cmp r3, #0\n\
-	beq _0800521A\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, r12\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _0800521A\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _0800521A:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r8\n\
-	bcc _080051E8\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _080051E8\n\
 _08005222:\n\
-	mov r1, r10\n\
-	ldr r2, [sp, #0x60]\n\
-	cmp r1, r2\n\
-	bcc _080051C4\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x60]\n\
+    cmp r1, r2\n\
+    bcc _080051C4\n\
 _0800522A:\n\
-	ldr r4, [sp, #0x84]\n\
-	ldr r1, [sp, #0x88]\n\
-	ldr r3, =gUnknown_03002FF0\n\
-	str r3, [sp, #0x68]\n\
-	ldr r0, [sp, #0x7C]\n\
-	add r0, r4\n\
-	mov r8, r0\n\
-	ldr r2, [sp, #0x80]\n\
-	add r2, r1, r2\n\
-	str r2, [sp, #0x6C]\n\
-	str r4, [sp, #0x70]\n\
-	cmp r1, r2\n\
-	bcs _080052AA\n\
+    ldr r4, [sp, #0x84]\n\
+    ldr r1, [sp, #0x88]\n\
+    ldr r3, =gUnknown_03002FF0\n\
+    str r3, [sp, #0x68]\n\
+    ldr r0, [sp, #0x7C]\n\
+    add r0, r4\n\
+    mov r8, r0\n\
+    ldr r2, [sp, #0x80]\n\
+    add r2, r1, r2\n\
+    str r2, [sp, #0x6C]\n\
+    str r4, [sp, #0x70]\n\
+    cmp r1, r2\n\
+    bcs _080052AA\n\
 _08005244:\n\
-	ldr r3, [sp, #0x68]\n\
-	ldm r3!, {r5}\n\
-	str r3, [sp, #0x68]\n\
-	ldr r4, [sp, #0x70]\n\
-	add r0, r1, #0x1\n\
-	mov r10, r0\n\
-	cmp r4, r8\n\
-	bcs _080052A2\n\
-	mov r2, #0x7\n\
-	mov r12, r2\n\
-	lsr r0, r1, #3\n\
-	ldr r2, [sp, #0x4]\n\
-	add r3, r0, #0\n\
-	mul r3, r2\n\
-	add r7, r3, #0\n\
-	mov r3, r12\n\
-	and r1, r3\n\
-	lsl r6, r1, #2\n\
+    ldr r3, [sp, #0x68]\n\
+    ldm r3!, {r5}\n\
+    str r3, [sp, #0x68]\n\
+    ldr r4, [sp, #0x70]\n\
+    add r0, r1, #0x1\n\
+    mov r10, r0\n\
+    cmp r4, r8\n\
+    bcs _080052A2\n\
+    mov r2, #0x7\n\
+    mov r12, r2\n\
+    lsr r0, r1, #3\n\
+    ldr r2, [sp, #0x4]\n\
+    add r3, r0, #0\n\
+    mul r3, r2\n\
+    add r7, r3, #0\n\
+    mov r3, r12\n\
+    and r1, r3\n\
+    lsl r6, r1, #2\n\
 _08005268:\n\
-	add r3, r5, #0\n\
-	mov r0, #0xF\n\
-	and r3, r0\n\
-	cmp r3, #0\n\
-	beq _0800529A\n\
-	lsr r2, r4, #3\n\
-	lsl r2, #5\n\
-	add r2, r9\n\
-	add r0, r4, #0\n\
-	mov r1, r12\n\
-	and r0, r1\n\
-	lsr r0, #1\n\
-	add r2, r0\n\
-	add r2, r7\n\
-	add r2, r6\n\
-	mov r1, #0x1\n\
-	and r1, r4\n\
-	lsl r1, #2\n\
-	lsl r3, r1\n\
-	mov r0, #0xF0\n\
-	asr r0, r1\n\
-	ldrb r1, [r2]\n\
-	and r0, r1\n\
-	orr r3, r0\n\
-	strb r3, [r2]\n\
+    add r3, r5, #0\n\
+    mov r0, #0xF\n\
+    and r3, r0\n\
+    cmp r3, #0\n\
+    beq _0800529A\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
 _0800529A:\n\
-	lsr r5, #4\n\
-	add r4, #0x1\n\
-	cmp r4, r8\n\
-	bcc _08005268\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _08005268\n\
 _080052A2:\n\
-	mov r1, r10\n\
-	ldr r2, [sp, #0x6C]\n\
-	cmp r1, r2\n\
-	bcc _08005244\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x6C]\n\
+    cmp r1, r2\n\
+    bcc _08005244\n\
 _080052AA:\n\
-	add sp, #0x8C\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
+    add sp, #0x8C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool");
 }
 
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
@@ -2046,733 +2051,1028 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
         }
     }
 }
+#ifdef NONMATCHING
+u16 RenderText(struct TextPrinter *textPrinter)
+{
+    struct TextPrinterSubStruct *r4 = &textPrinter->sub_union.sub;
+    u16 currChar;
+    s32 width;
 
+    switch (textPrinter->state) // _080057C4
+    {
+    case 0: // _080057F0
+        if ((gMain.heldKeys & (A_BUTTON | B_BUTTON)) && r4->font_type_upper)
+            textPrinter->delayCounter = 0;
+
+        if (textPrinter->delayCounter && textPrinter->text_speed) //_0800580A
+        {
+            textPrinter->delayCounter--;
+            if (gTextFlags.flag_0 && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
+            {
+                r4->font_type_upper = 1;
+                textPrinter->delayCounter = 0;
+            }
+            return 3;
+        }
+
+        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) && gTextFlags.flag_2)
+            textPrinter->delayCounter = 3;
+        else
+            textPrinter->delayCounter = textPrinter->text_speed;
+
+        currChar = *textPrinter->subPrinter.current_text_offset;
+        textPrinter->subPrinter.current_text_offset++;
+
+        switch (currChar) //_0800588A
+        {
+        case 0xF8+6: //_080058B8
+            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
+            textPrinter->subPrinter.currentY += (gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing);
+            return 2;
+        case 0xF8+5: //_080058DC
+            textPrinter->subPrinter.current_text_offset++;
+            return 2;
+        case 0xF8+4: //_080058E0
+            currChar = *textPrinter->subPrinter.current_text_offset;
+            textPrinter->subPrinter.current_text_offset++;
+            switch (currChar) // _080058F0
+            {
+            case 1: // _08005960
+                textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                return 2;
+            case 2: // _08005982
+                textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                return 2;
+            case 3: // _080059A6
+                textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                return 2;
+            case 4: // _080059C0
+                textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                return 2;
+            case 5: // _08005A0E
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 6: //_08005A12
+                r4->font_type = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 7: // _08005A0A
+                return 2;
+            case 8: // _08005A2A
+                textPrinter->delayCounter = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                textPrinter->state = 6;
+                return 2;
+            case 9: // _08005A3A
+                textPrinter->state = 1;
+                if (gTextFlags.flag_2)
+                    r4->frames_visible_counter = 0;
+                return 3;
+            case 10: // _08005A58
+                textPrinter->state = 5;
+                return 3;
+            case 11: // _08005A5C
+                currChar = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                currChar |= *textPrinter->subPrinter.current_text_offset << 8;
+                textPrinter->subPrinter.current_text_offset++;
+                PlayBGM(currChar);
+                return 2;
+            case 16: // _08005A76
+                currChar = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                currChar |= (*textPrinter->subPrinter.current_text_offset << 8);
+                textPrinter->subPrinter.current_text_offset++;
+                PlaySE(currChar);
+                return 2;
+            case 13: // _08005A90
+                textPrinter->subPrinter.currentX = textPrinter->subPrinter.x + *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 14: // _08005A98
+                textPrinter->subPrinter.currentY = textPrinter->subPrinter.y + *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 15: // _08005AA4
+                FillWindowPixelBuffer(textPrinter->subPrinter.windowId, textPrinter->subPrinter.bgColor | textPrinter->subPrinter.bgColor << 4);
+                textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
+                textPrinter->subPrinter.currentY = textPrinter->subPrinter.y;
+                return 2;
+            case 23: // _08005ABE
+                m4aMPlayStop(&gMPlayInfo_BGM);
+                return 2;
+            case 24: // _08005ACC
+                m4aMPlayContinue(&gMPlayInfo_BGM);
+                return 2;
+            case 17: // _08005AD8
+                width = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.current_text_offset++;
+                if (width > 0)
+                {
+                    ClearTextSpan(textPrinter, width);
+                    textPrinter->subPrinter.currentX += width;
+                    return 0;
+                }
+                return 2;
+            case 18: // _08005AF2
+                textPrinter->subPrinter.currentX = *textPrinter->subPrinter.current_text_offset + textPrinter->subPrinter.x;
+                textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 19: // _08005B02
+                {
+                    s32 widthHelper = *textPrinter->subPrinter.current_text_offset;
+                    widthHelper += textPrinter->subPrinter.x;
+                    textPrinter->subPrinter.current_text_offset++;
+                    width = widthHelper - textPrinter->subPrinter.currentX;
+                    if (width > 0)
+                    {
+                        ClearTextSpan(textPrinter, width);
+                        textPrinter->subPrinter.currentX += width;
+                        return 0;
+                    }
+                }
+                return 2;
+            case 20: // _08005B26
+                textPrinter->minLetterSpacing = *textPrinter->subPrinter.current_text_offset++;
+                return 2;
+            case 21: // _08005B36
+                textPrinter->japanese = 1;
+                return 2;
+            case 22: // _08005B3E
+                textPrinter->japanese = 0;
+                return 2;
+            case 12: // _08005B5A
+                currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
+                textPrinter->subPrinter.current_text_offset++;
+                break;
+            }
+            break;
+
+        case 0xF8+3: // _08005B48
+            textPrinter->state = 2;
+            TextPrinterInitDownArrowCounters(textPrinter);
+            return 3;
+        case 0xF8+2: // _08005B4C
+            textPrinter->state = 3;
+            TextPrinterInitDownArrowCounters(textPrinter);
+            return 3;
+        case 0xF8+1: // _08005B5A
+            currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
+            textPrinter->subPrinter.current_text_offset++;
+            break;
+        case 0xF8+0: // _08005B6C
+            currChar = *textPrinter->subPrinter.current_text_offset;
+            textPrinter->subPrinter.current_text_offset++;
+            gUnknown_03002F90[0x80] = DrawKeypadIcon(textPrinter->subPrinter.windowId, currChar, textPrinter->subPrinter.currentX, textPrinter->subPrinter.currentY);
+            textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80] + textPrinter->subPrinter.letterSpacing;
+            return 0;
+        case 0xF8+7: // _08005D6C
+            return 1;
+        }
+
+        switch (r4->font_type) // _08005B90
+        {
+        case 0: // _08005BCC
+            DecompressGlyphFont0(currChar, textPrinter->japanese);
+            break;
+        case 1: // _08005BDA
+            DecompressGlyphFont1(currChar, textPrinter->japanese);
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case 5: // _08005BE8
+            DecompressGlyphFont2(currChar, textPrinter->japanese);
+            break;
+        case 7: // _08005BF6
+            DecompressGlyphFont7(currChar, textPrinter->japanese);
+            break;
+        case 8: // _08005C04
+            DecompressGlyphFont8(currChar, textPrinter->japanese);
+            break;
+        case 6: // _08005C10
+            break;
+        }
+
+        CopyGlyphToWindow(textPrinter); // _08005C10
+
+        if (textPrinter->minLetterSpacing)
+        {
+            textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80];
+            width = textPrinter->minLetterSpacing - gUnknown_03002F90[0x80];
+            if (width > 0)
+            {
+                ClearTextSpan(textPrinter, width);
+                textPrinter->subPrinter.currentX += width;
+            }
+        }
+        else // _08005C48
+        {
+            if (textPrinter->japanese)
+                textPrinter->subPrinter.currentX += (gUnknown_03002F90[0x80] + textPrinter->subPrinter.letterSpacing);
+            else
+                textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80];
+        }
+
+        return 0;
+    case 1: // _08005C78
+        if (TextPrinterWait(textPrinter))
+            textPrinter->state = 0;
+        return 3;
+    case 2: // _08005C8C
+        if (TextPrinterWaitWithDownArrow(textPrinter))
+        {
+            FillWindowPixelBuffer(textPrinter->subPrinter.windowId, (textPrinter->subPrinter.bgColor << 4) | textPrinter->subPrinter.bgColor);
+            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
+            textPrinter->subPrinter.currentY = textPrinter->subPrinter.y;
+            textPrinter->state = 0;
+        }
+        return 3;
+    case 3: // _08005CB8
+        if (TextPrinterWaitWithDownArrow(textPrinter))
+        {
+            TextPrinterClearDownArrow(textPrinter);
+            textPrinter->scrollDistance = gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing;
+            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
+            textPrinter->state = 4;
+        }
+        return 3;
+    case 4: // _08005CF0
+        if (textPrinter->scrollDistance)
+        {
+            int scrollSpeed = sub_8197964();
+            int speed = gWindowVerticalScrollSpeeds[scrollSpeed];
+            if (textPrinter->scrollDistance < speed)
+            {
+                ScrollWindow(textPrinter->subPrinter.windowId, 0, textPrinter->scrollDistance, textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor);
+                textPrinter->scrollDistance = 0;
+            }
+            else
+            {
+                ScrollWindow(textPrinter->subPrinter.windowId, 0, speed, textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor);
+                textPrinter->scrollDistance -= speed;
+            }
+            CopyWindowToVram(textPrinter->subPrinter.windowId, 2);
+        }
+        else
+        {
+            textPrinter->state = 0;
+        }
+        return 3;
+    case 5: // _08005D48
+        if (!IsSEPlaying())
+            textPrinter->state = 0;
+        return 3;
+    case 6: // _08005D5A
+        if (textPrinter->delayCounter != 0)
+            textPrinter->delayCounter--;
+        else
+            textPrinter->state = 0;
+        return 3;
+    }
+
+    return 1;
+}
+#else
 __attribute__((naked))
-u16 RenderText(struct TextPrinter *textPrinter) // 80057B4
+u16 RenderText(struct TextPrinter *textPrinter)
 {
     asm("push {r4-r6,lr}\n\
-	add r6, r0, #0\n\
-	add r4, r6, #0\n\
-	add r4, #0x14\n\
-	ldrb r0, [r6, #0x1C]\n\
-	cmp r0, #0x6\n\
-	bls _080057C4\n\
-	b _08005D6C\n\
+    add r6, r0, #0\n\
+    add r4, r6, #0\n\
+    add r4, #0x14\n\
+    ldrb r0, [r6, #0x1C]\n\
+    cmp r0, #0x6\n\
+    bls _080057C4\n\
+    b _08005D6C\n\
 _080057C4:\n\
-	lsl r0, #2\n\
-	ldr r1, =_080057D4\n\
-	add r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
+    lsl r0, #2\n\
+    ldr r1, =_080057D4\n\
+    add r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .pool\n\
+    .align 2, 0\n\
 _080057D4:\n\
-	.4byte _080057F0\n\
-	.4byte _08005C78\n\
-	.4byte _08005C8C\n\
-	.4byte _08005CB8\n\
-	.4byte _08005CF0\n\
-	.4byte _08005D48\n\
-	.4byte _08005D5A\n\
+    .4byte _080057F0\n\
+    .4byte _08005C78\n\
+    .4byte _08005C8C\n\
+    .4byte _08005CB8\n\
+    .4byte _08005CF0\n\
+    .4byte _08005D48\n\
+    .4byte _08005D5A\n\
 _080057F0:\n\
-	ldr r2, =gMain\n\
-	ldrh r1, [r2, #0x2C]\n\
-	mov r0, #0x3\n\
-	and r0, r1\n\
-	cmp r0, #0\n\
-	beq _0800580A\n\
-	ldrb r1, [r4]\n\
-	mov r0, #0x10\n\
-	and r0, r1\n\
-	cmp r0, #0\n\
-	beq _0800580A\n\
-	mov r0, #0\n\
-	strb r0, [r6, #0x1E]\n\
+    ldr r2, =gMain\n\
+    ldrh r1, [r2, #0x2C]\n\
+    mov r0, #0x3\n\
+    and r0, r1\n\
+    cmp r0, #0\n\
+    beq _0800580A\n\
+    ldrb r1, [r4]\n\
+    mov r0, #0x10\n\
+    and r0, r1\n\
+    cmp r0, #0\n\
+    beq _0800580A\n\
+    mov r0, #0\n\
+    strb r0, [r6, #0x1E]\n\
 _0800580A:\n\
-	ldrb r1, [r6, #0x1E]\n\
-	cmp r1, #0\n\
-	beq _0800584C\n\
-	ldrb r0, [r6, #0x1D]\n\
-	cmp r0, #0\n\
-	beq _0800584C\n\
-	sub r0, r1, #0x1\n\
-	strb r0, [r6, #0x1E]\n\
-	ldr r0, =gTextFlags\n\
-	ldrb r1, [r0]\n\
-	mov r0, #0x1\n\
-	and r0, r1\n\
-	cmp r0, #0\n\
-	bne _08005828\n\
-	b _08005B56\n\
+    ldrb r1, [r6, #0x1E]\n\
+    cmp r1, #0\n\
+    beq _0800584C\n\
+    ldrb r0, [r6, #0x1D]\n\
+    cmp r0, #0\n\
+    beq _0800584C\n\
+    sub r0, r1, #0x1\n\
+    strb r0, [r6, #0x1E]\n\
+    ldr r0, =gTextFlags\n\
+    ldrb r1, [r0]\n\
+    mov r0, #0x1\n\
+    and r0, r1\n\
+    cmp r0, #0\n\
+    bne _08005828\n\
+    b _08005B56\n\
 _08005828:\n\
-	ldrh r1, [r2, #0x2E]\n\
-	mov r0, #0x3\n\
-	and r0, r1\n\
-	cmp r0, #0\n\
-	bne _08005834\n\
-	b _08005B56\n\
+    ldrh r1, [r2, #0x2E]\n\
+    mov r0, #0x3\n\
+    and r0, r1\n\
+    cmp r0, #0\n\
+    bne _08005834\n\
+    b _08005B56\n\
 _08005834:\n\
-	ldrb r0, [r4]\n\
-	mov r1, #0x10\n\
-	orr r0, r1\n\
-	strb r0, [r4]\n\
-	mov r0, #0\n\
-	strb r0, [r6, #0x1E]\n\
-	b _08005B56\n\
-	.pool\n\
+    ldrb r0, [r4]\n\
+    mov r1, #0x10\n\
+    orr r0, r1\n\
+    strb r0, [r4]\n\
+    mov r0, #0\n\
+    strb r0, [r6, #0x1E]\n\
+    b _08005B56\n\
+    .pool\n\
 _0800584C:\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r0, [r0]\n\
-	mov r1, #0x80\n\
-	lsl r1, #17\n\
-	and r0, r1\n\
-	cmp r0, #0\n\
-	bne _08005874\n\
-	ldr r0, =gTextFlags\n\
-	ldrb r1, [r0]\n\
-	mov r0, #0x4\n\
-	and r0, r1\n\
-	cmp r0, #0\n\
-	beq _08005874\n\
-	mov r0, #0x3\n\
-	b _08005876\n\
-	.pool\n\
+    ldr r0, =gBattleTypeFlags\n\
+    ldr r0, [r0]\n\
+    mov r1, #0x80\n\
+    lsl r1, #17\n\
+    and r0, r1\n\
+    cmp r0, #0\n\
+    bne _08005874\n\
+    ldr r0, =gTextFlags\n\
+    ldrb r1, [r0]\n\
+    mov r0, #0x4\n\
+    and r0, r1\n\
+    cmp r0, #0\n\
+    beq _08005874\n\
+    mov r0, #0x3\n\
+    b _08005876\n\
+    .pool\n\
 _08005874:\n\
-	ldrb r0, [r6, #0x1D]\n\
+    ldrb r0, [r6, #0x1D]\n\
 _08005876:\n\
-	strb r0, [r6, #0x1E]\n\
-	ldr r0, [r6]\n\
-	ldrb r3, [r0]\n\
-	add r0, #0x1\n\
-	str r0, [r6]\n\
-	add r0, r3, #0\n\
-	sub r0, #0xF8\n\
-	cmp r0, #0x7\n\
-	bls _0800588A\n\
-	b _08005B90\n\
+    strb r0, [r6, #0x1E]\n\
+    ldr r0, [r6]\n\
+    ldrb r3, [r0]\n\
+    add r0, #0x1\n\
+    str r0, [r6]\n\
+    add r0, r3, #0\n\
+    sub r0, #0xF8\n\
+    cmp r0, #0x7\n\
+    bls _0800588A\n\
+    b _08005B90\n\
 _0800588A:\n\
-	lsl r0, #2\n\
-	ldr r1, =_08005898\n\
-	add r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
+    lsl r0, #2\n\
+    ldr r1, =_08005898\n\
+    add r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .pool\n\
+    .align 2, 0\n\
 _08005898:\n\
-	.4byte _08005B6C\n\
-	.4byte _08005B5A\n\
-	.4byte _08005B4C\n\
-	.4byte _08005B48\n\
-	.4byte _080058E0\n\
-	.4byte _080058DC\n\
-	.4byte _080058B8\n\
-	.4byte _08005D6C\n\
+    .4byte _08005B6C\n\
+    .4byte _08005B5A\n\
+    .4byte _08005B4C\n\
+    .4byte _08005B48\n\
+    .4byte _080058E0\n\
+    .4byte _080058DC\n\
+    .4byte _080058B8\n\
+    .4byte _08005D6C\n\
 _080058B8:\n\
-	ldrb r0, [r6, #0x6]\n\
-	strb r0, [r6, #0x8]\n\
-	ldrb r1, [r6, #0x5]\n\
-	ldr r0, =gFonts\n\
-	ldr r2, [r0]\n\
-	lsl r0, r1, #1\n\
-	add r0, r1\n\
-	lsl r0, #2\n\
-	add r0, r2\n\
-	ldrb r1, [r6, #0xB]\n\
-	ldrb r0, [r0, #0x5]\n\
-	add r1, r0\n\
-	ldrb r0, [r6, #0x9]\n\
-	add r0, r1\n\
-	b _08005ABA\n\
-	.pool\n\
+    ldrb r0, [r6, #0x6]\n\
+    strb r0, [r6, #0x8]\n\
+    ldrb r1, [r6, #0x5]\n\
+    ldr r0, =gFonts\n\
+    ldr r2, [r0]\n\
+    lsl r0, r1, #1\n\
+    add r0, r1\n\
+    lsl r0, #2\n\
+    add r0, r2\n\
+    ldrb r1, [r6, #0xB]\n\
+    ldrb r0, [r0, #0x5]\n\
+    add r1, r0\n\
+    ldrb r0, [r6, #0x9]\n\
+    add r0, r1\n\
+    b _08005ABA\n\
+    .pool\n\
 _080058DC:\n\
-	ldr r0, [r6]\n\
-	b _08005B30\n\
+    ldr r0, [r6]\n\
+    b _08005B30\n\
 _080058E0:\n\
-	ldr r0, [r6]\n\
-	ldrb r3, [r0]\n\
-	add r0, #0x1\n\
-	str r0, [r6]\n\
-	sub r0, r3, #0x1\n\
-	cmp r0, #0x17\n\
-	bls _080058F0\n\
-	b _08005B90\n\
+    ldr r0, [r6]\n\
+    ldrb r3, [r0]\n\
+    add r0, #0x1\n\
+    str r0, [r6]\n\
+    sub r0, r3, #0x1\n\
+    cmp r0, #0x17\n\
+    bls _080058F0\n\
+    b _08005B90\n\
 _080058F0:\n\
-	lsl r0, #2\n\
-	ldr r1, =_08005900\n\
-	add r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
+    lsl r0, #2\n\
+    ldr r1, =_08005900\n\
+    add r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .pool\n\
+    .align 2, 0\n\
 _08005900:\n\
-	.4byte _08005960\n\
-	.4byte _08005982\n\
-	.4byte _080059A6\n\
-	.4byte _080059C0\n\
-	.4byte _08005A0E\n\
-	.4byte _08005A12\n\
-	.4byte _08005A0A\n\
-	.4byte _08005A2A\n\
-	.4byte _08005A3A\n\
-	.4byte _08005A58\n\
-	.4byte _08005A5C\n\
-	.4byte _08005B5A\n\
-	.4byte _08005A90\n\
-	.4byte _08005A98\n\
-	.4byte _08005AA4\n\
-	.4byte _08005A76\n\
-	.4byte _08005AD8\n\
-	.4byte _08005AF2\n\
-	.4byte _08005B02\n\
-	.4byte _08005B26\n\
-	.4byte _08005B36\n\
-	.4byte _08005B3E\n\
-	.4byte _08005ABE\n\
-	.4byte _08005ACC\n\
+    .4byte _08005960 @0\n\
+    .4byte _08005982 @1\n\
+    .4byte _080059A6 @2\n\
+    .4byte _080059C0 @3\n\
+    .4byte _08005A0E @4\n\
+    .4byte _08005A12 @5\n\
+    .4byte _08005A0A @6\n\
+    .4byte _08005A2A @7\n\
+    .4byte _08005A3A @8\n\
+    .4byte _08005A58 @9\n\
+    .4byte _08005A5C @10\n\
+    .4byte _08005B5A @11\n\
+    .4byte _08005A90 @12\n\
+    .4byte _08005A98 @13\n\
+    .4byte _08005AA4 @14\n\
+    .4byte _08005A76 @15\n\
+    .4byte _08005AD8 @16\n\
+    .4byte _08005AF2 @17\n\
+    .4byte _08005B02 @18\n\
+    .4byte _08005B26 @19\n\
+    .4byte _08005B36 @20\n\
+    .4byte _08005B3E @21\n\
+    .4byte _08005ABE @22\n\
+    .4byte _08005ACC @23\n\
 _08005960:\n\
-	ldr r2, [r6]\n\
-	ldrb r1, [r2]\n\
-	lsl r1, #4\n\
-	ldrb r3, [r6, #0xC]\n\
-	mov r0, #0xF\n\
-	and r0, r3\n\
-	orr r0, r1\n\
-	strb r0, [r6, #0xC]\n\
-	add r2, #0x1\n\
-	str r2, [r6]\n\
-	lsl r0, #24\n\
-	lsr r0, #28\n\
-	ldrb r2, [r6, #0xD]\n\
-	lsl r1, r2, #28\n\
-	lsr r1, #28\n\
-	lsr r2, #4\n\
-	b _08005A06\n\
+    ldr r2, [r6]\n\
+    ldrb r1, [r2]\n\
+    lsl r1, #4\n\
+    ldrb r3, [r6, #0xC]\n\
+    mov r0, #0xF\n\
+    and r0, r3\n\
+    orr r0, r1\n\
+    strb r0, [r6, #0xC]\n\
+    add r2, #0x1\n\
+    str r2, [r6]\n\
+    lsl r0, #24\n\
+    lsr r0, #28\n\
+    ldrb r2, [r6, #0xD]\n\
+    lsl r1, r2, #28\n\
+    lsr r1, #28\n\
+    lsr r2, #4\n\
+    b _08005A06\n\
 _08005982:\n\
-	ldr r1, [r6]\n\
-	ldrb r2, [r1]\n\
-	mov r0, #0xF\n\
-	and r0, r2\n\
-	ldrb r3, [r6, #0xD]\n\
-	mov r2, #0x10\n\
-	neg r2, r2\n\
-	and r2, r3\n\
-	orr r2, r0\n\
-	strb r2, [r6, #0xD]\n\
-	add r1, #0x1\n\
-	str r1, [r6]\n\
-	ldrb r0, [r6, #0xC]\n\
-	lsr r0, #4\n\
-	lsl r1, r2, #28\n\
-	lsr r1, #28\n\
-	lsr r2, #4\n\
-	b _08005A06\n\
+    ldr r1, [r6]\n\
+    ldrb r2, [r1]\n\
+    mov r0, #0xF\n\
+    and r0, r2\n\
+    ldrb r3, [r6, #0xD]\n\
+    mov r2, #0x10\n\
+    neg r2, r2\n\
+    and r2, r3\n\
+    orr r2, r0\n\
+    strb r2, [r6, #0xD]\n\
+    add r1, #0x1\n\
+    str r1, [r6]\n\
+    ldrb r0, [r6, #0xC]\n\
+    lsr r0, #4\n\
+    lsl r1, r2, #28\n\
+    lsr r1, #28\n\
+    lsr r2, #4\n\
+    b _08005A06\n\
 _080059A6:\n\
-	ldr r1, [r6]\n\
-	ldrb r0, [r1]\n\
-	lsl r0, #4\n\
-	ldrb r3, [r6, #0xD]\n\
-	mov r2, #0xF\n\
-	and r2, r3\n\
-	orr r2, r0\n\
-	strb r2, [r6, #0xD]\n\
-	add r1, #0x1\n\
-	str r1, [r6]\n\
-	ldrb r0, [r6, #0xC]\n\
-	lsr r0, #4\n\
-	b _080059FE\n\
+    ldr r1, [r6]\n\
+    ldrb r0, [r1]\n\
+    lsl r0, #4\n\
+    ldrb r3, [r6, #0xD]\n\
+    mov r2, #0xF\n\
+    and r2, r3\n\
+    orr r2, r0\n\
+    strb r2, [r6, #0xD]\n\
+    add r1, #0x1\n\
+    str r1, [r6]\n\
+    ldrb r0, [r6, #0xC]\n\
+    lsr r0, #4\n\
+    b _080059FE\n\
 _080059C0:\n\
-	ldr r3, [r6]\n\
-	ldrb r1, [r3]\n\
-	lsl r1, #4\n\
-	ldrb r4, [r6, #0xC]\n\
-	mov r2, #0xF\n\
-	add r0, r2, #0\n\
-	and r0, r4\n\
-	orr r0, r1\n\
-	strb r0, [r6, #0xC]\n\
-	add r5, r3, #0x1\n\
-	str r5, [r6]\n\
-	ldrb r3, [r3, #0x1]\n\
-	add r1, r2, #0\n\
-	and r1, r3\n\
-	ldrb r4, [r6, #0xD]\n\
-	mov r3, #0x10\n\
-	neg r3, r3\n\
-	and r3, r4\n\
-	orr r3, r1\n\
-	strb r3, [r6, #0xD]\n\
-	add r4, r5, #0x1\n\
-	str r4, [r6]\n\
-	ldrb r1, [r5, #0x1]\n\
-	lsl r1, #4\n\
-	and r2, r3\n\
-	orr r2, r1\n\
-	strb r2, [r6, #0xD]\n\
-	add r4, #0x1\n\
-	str r4, [r6]\n\
-	lsl r0, #24\n\
-	lsr r0, #28\n\
+    ldr r3, [r6]\n\
+    ldrb r1, [r3]\n\
+    lsl r1, #4\n\
+    ldrb r4, [r6, #0xC]\n\
+    mov r2, #0xF\n\
+    add r0, r2, #0\n\
+    and r0, r4\n\
+    orr r0, r1\n\
+    strb r0, [r6, #0xC]\n\
+    add r5, r3, #0x1\n\
+    str r5, [r6]\n\
+    ldrb r3, [r3, #0x1]\n\
+    add r1, r2, #0\n\
+    and r1, r3\n\
+    ldrb r4, [r6, #0xD]\n\
+    mov r3, #0x10\n\
+    neg r3, r3\n\
+    and r3, r4\n\
+    orr r3, r1\n\
+    strb r3, [r6, #0xD]\n\
+    add r4, r5, #0x1\n\
+    str r4, [r6]\n\
+    ldrb r1, [r5, #0x1]\n\
+    lsl r1, #4\n\
+    and r2, r3\n\
+    orr r2, r1\n\
+    strb r2, [r6, #0xD]\n\
+    add r4, #0x1\n\
+    str r4, [r6]\n\
+    lsl r0, #24\n\
+    lsr r0, #28\n\
 _080059FE:\n\
-	lsl r1, r2, #28\n\
-	lsr r1, #28\n\
-	lsl r2, #24\n\
-	lsr r2, #28\n\
+    lsl r1, r2, #28\n\
+    lsr r1, #28\n\
+    lsl r2, #24\n\
+    lsr r2, #28\n\
 _08005A06:\n\
-	bl GenerateFontHalfRowLookupTable\n\
+    bl GenerateFontHalfRowLookupTable\n\
 _08005A0A:\n\
-	mov r0, #0x2\n\
-	b _08005D6E\n\
+    mov r0, #0x2\n\
+    b _08005D6E\n\
 _08005A0E:\n\
-	ldr r0, [r6]\n\
-	b _08005B30\n\
+    ldr r0, [r6]\n\
+    b _08005B30\n\
 _08005A12:\n\
-	ldr r0, [r6]\n\
-	ldrb r0, [r0]\n\
-	mov r1, #0xF\n\
-	and r1, r0\n\
-	ldrb r2, [r4]\n\
-	mov r0, #0x10\n\
-	neg r0, r0\n\
-	and r0, r2\n\
-	orr r0, r1\n\
-	strb r0, [r4]\n\
-	ldr r0, [r6]\n\
-	b _08005B30\n\
+    ldr r0, [r6]\n\
+    ldrb r0, [r0]\n\
+    mov r1, #0xF\n\
+    and r1, r0\n\
+    ldrb r2, [r4]\n\
+    mov r0, #0x10\n\
+    neg r0, r0\n\
+    and r0, r2\n\
+    orr r0, r1\n\
+    strb r0, [r4]\n\
+    ldr r0, [r6]\n\
+    b _08005B30\n\
 _08005A2A:\n\
-	ldr r0, [r6]\n\
-	ldrb r1, [r0]\n\
-	strb r1, [r6, #0x1E]\n\
-	add r0, #0x1\n\
-	str r0, [r6]\n\
-	mov r0, #0x6\n\
-	strb r0, [r6, #0x1C]\n\
-	b _08005A0A\n\
+    ldr r0, [r6]\n\
+    ldrb r1, [r0]\n\
+    strb r1, [r6, #0x1E]\n\
+    add r0, #0x1\n\
+    str r0, [r6]\n\
+    mov r0, #0x6\n\
+    strb r0, [r6, #0x1C]\n\
+    b _08005A0A\n\
 _08005A3A:\n\
-	mov r0, #0x1\n\
-	strb r0, [r6, #0x1C]\n\
-	ldr r0, =gTextFlags\n\
-	ldrb r1, [r0]\n\
-	mov r0, #0x4\n\
-	and r0, r1\n\
-	cmp r0, #0\n\
-	bne _08005A4C\n\
-	b _08005B56\n\
+    mov r0, #0x1\n\
+    strb r0, [r6, #0x1C]\n\
+    ldr r0, =gTextFlags\n\
+    ldrb r1, [r0]\n\
+    mov r0, #0x4\n\
+    and r0, r1\n\
+    cmp r0, #0\n\
+    bne _08005A4C\n\
+    b _08005B56\n\
 _08005A4C:\n\
-	mov r0, #0\n\
-	strb r0, [r4, #0x2]\n\
-	b _08005B56\n\
-	.pool\n\
+    mov r0, #0\n\
+    strb r0, [r4, #0x2]\n\
+    b _08005B56\n\
+    .pool\n\
 _08005A58:\n\
-	mov r0, #0x5\n\
-	b _08005D56\n\
+    mov r0, #0x5\n\
+    b _08005D56\n\
 _08005A5C:\n\
-	ldr r0, [r6]\n\
-	ldrb r3, [r0]\n\
-	add r1, r0, #0x1\n\
-	str r1, [r6]\n\
-	ldrb r0, [r0, #0x1]\n\
-	lsl r0, #8\n\
-	orr r3, r0\n\
-	add r1, #0x1\n\
-	str r1, [r6]\n\
-	add r0, r3, #0\n\
-	bl PlayBGM\n\
-	b _08005A0A\n\
+    ldr r0, [r6]\n\
+    ldrb r3, [r0]\n\
+    add r1, r0, #0x1\n\
+    str r1, [r6]\n\
+    ldrb r0, [r0, #0x1]\n\
+    lsl r0, #8\n\
+    orr r3, r0\n\
+    add r1, #0x1\n\
+    str r1, [r6]\n\
+    add r0, r3, #0\n\
+    bl PlayBGM\n\
+    b _08005A0A\n\
 _08005A76:\n\
-	ldr r0, [r6]\n\
-	ldrb r3, [r0]\n\
-	add r1, r0, #0x1\n\
-	str r1, [r6]\n\
-	ldrb r0, [r0, #0x1]\n\
-	lsl r0, #8\n\
-	orr r3, r0\n\
-	add r1, #0x1\n\
-	str r1, [r6]\n\
-	add r0, r3, #0\n\
-	bl PlaySE\n\
-	b _08005A0A\n\
+    ldr r0, [r6]\n\
+    ldrb r3, [r0]\n\
+    add r1, r0, #0x1\n\
+    str r1, [r6]\n\
+    ldrb r0, [r0, #0x1]\n\
+    lsl r0, #8\n\
+    orr r3, r0\n\
+    add r1, #0x1\n\
+    str r1, [r6]\n\
+    add r0, r3, #0\n\
+    bl PlaySE\n\
+    b _08005A0A\n\
 _08005A90:\n\
-	ldr r1, [r6]\n\
-	ldrb r0, [r1]\n\
-	ldrb r3, [r6, #0x6]\n\
-	b _08005AF8\n\
+    ldr r1, [r6]\n\
+    ldrb r0, [r1]\n\
+    ldrb r3, [r6, #0x6]\n\
+    b _08005AF8\n\
 _08005A98:\n\
-	ldr r1, [r6]\n\
-	ldrb r0, [r1]\n\
-	ldrb r2, [r6, #0x7]\n\
-	add r0, r2\n\
-	strb r0, [r6, #0x9]\n\
-	b _08005AFC\n\
+    ldr r1, [r6]\n\
+    ldrb r0, [r1]\n\
+    ldrb r2, [r6, #0x7]\n\
+    add r0, r2\n\
+    strb r0, [r6, #0x9]\n\
+    b _08005AFC\n\
 _08005AA4:\n\
-	ldrb r0, [r6, #0x4]\n\
-	ldrb r2, [r6, #0xD]\n\
-	lsl r2, #28\n\
-	lsr r1, r2, #4\n\
-	orr r1, r2\n\
-	lsr r1, #24\n\
-	bl FillWindowPixelBuffer\n\
-	ldrb r0, [r6, #0x6]\n\
-	strb r0, [r6, #0x8]\n\
-	ldrb r0, [r6, #0x7]\n\
+    ldrb r0, [r6, #0x4]\n\
+    ldrb r2, [r6, #0xD]\n\
+    lsl r2, #28\n\
+    lsr r1, r2, #4\n\
+    orr r1, r2\n\
+    lsr r1, #24\n\
+    bl FillWindowPixelBuffer\n\
+    ldrb r0, [r6, #0x6]\n\
+    strb r0, [r6, #0x8]\n\
+    ldrb r0, [r6, #0x7]\n\
 _08005ABA:\n\
-	strb r0, [r6, #0x9]\n\
-	b _08005A0A\n\
+    strb r0, [r6, #0x9]\n\
+    b _08005A0A\n\
 _08005ABE:\n\
-	ldr r0, =gMPlayInfo_BGM\n\
-	bl m4aMPlayStop\n\
-	b _08005A0A\n\
-	.pool\n\
+    ldr r0, =gMPlayInfo_BGM\n\
+    bl m4aMPlayStop\n\
+    b _08005A0A\n\
+    .pool\n\
 _08005ACC:\n\
-	ldr r0, =gMPlayInfo_BGM\n\
-	bl m4aMPlayContinue\n\
-	b _08005A0A\n\
-	.pool\n\
+    ldr r0, =gMPlayInfo_BGM\n\
+    bl m4aMPlayContinue\n\
+    b _08005A0A\n\
+    .pool\n\
 _08005AD8:\n\
-	ldr r0, [r6]\n\
-	ldrb r4, [r0]\n\
-	add r0, #0x1\n\
-	str r0, [r6]\n\
-	cmp r4, #0\n\
-	ble _08005A0A\n\
-	add r0, r6, #0\n\
-	add r1, r4, #0\n\
-	bl ClearTextSpan\n\
-	ldrb r0, [r6, #0x8]\n\
-	add r0, r4\n\
-	b _08005C6E\n\
+    ldr r0, [r6]\n\
+    ldrb r4, [r0]\n\
+    add r0, #0x1\n\
+    str r0, [r6]\n\
+    cmp r4, #0\n\
+    ble _08005A0A\n\
+    add r0, r6, #0\n\
+    add r1, r4, #0\n\
+    bl ClearTextSpan\n\
+    ldrb r0, [r6, #0x8]\n\
+    add r0, r4\n\
+    b _08005C6E\n\
 _08005AF2:\n\
-	ldr r1, [r6]\n\
-	ldrb r0, [r6, #0x6]\n\
-	ldrb r3, [r1]\n\
+    ldr r1, [r6]\n\
+    ldrb r0, [r6, #0x6]\n\
+    ldrb r3, [r1]\n\
 _08005AF8:\n\
-	add r0, r3\n\
-	strb r0, [r6, #0x8]\n\
+    add r0, r3\n\
+    strb r0, [r6, #0x8]\n\
 _08005AFC:\n\
-	add r1, #0x1\n\
-	str r1, [r6]\n\
-	b _08005A0A\n\
+    add r1, #0x1\n\
+    str r1, [r6]\n\
+    b _08005A0A\n\
 _08005B02:\n\
-	ldr r0, [r6]\n\
-	ldrb r2, [r0]\n\
-	ldrb r1, [r6, #0x6]\n\
-	add r2, r1\n\
-	add r0, #0x1\n\
-	str r0, [r6]\n\
-	ldrb r0, [r6, #0x8]\n\
-	sub r4, r2, r0\n\
-	cmp r4, #0\n\
-	bgt _08005B18\n\
-	b _08005A0A\n\
+    ldr r0, [r6]\n\
+    ldrb r2, [r0]\n\
+    ldrb r1, [r6, #0x6]\n\
+    add r2, r1\n\
+    add r0, #0x1\n\
+    str r0, [r6]\n\
+    ldrb r0, [r6, #0x8]\n\
+    sub r4, r2, r0\n\
+    cmp r4, #0\n\
+    bgt _08005B18\n\
+    b _08005A0A\n\
 _08005B18:\n\
-	add r0, r6, #0\n\
-	add r1, r4, #0\n\
-	bl ClearTextSpan\n\
-	ldrb r0, [r6, #0x8]\n\
-	add r0, r4\n\
-	b _08005C6E\n\
+    add r0, r6, #0\n\
+    add r1, r4, #0\n\
+    bl ClearTextSpan\n\
+    ldrb r0, [r6, #0x8]\n\
+    add r0, r4\n\
+    b _08005C6E\n\
 _08005B26:\n\
-	ldr r0, [r6]\n\
-	ldrb r2, [r0]\n\
-	add r1, r6, #0\n\
-	add r1, #0x20\n\
-	strb r2, [r1]\n\
+    ldr r0, [r6]\n\
+    ldrb r2, [r0]\n\
+    add r1, r6, #0\n\
+    add r1, #0x20\n\
+    strb r2, [r1]\n\
 _08005B30:\n\
-	add r0, #0x1\n\
-	str r0, [r6]\n\
-	b _08005A0A\n\
+    add r0, #0x1\n\
+    str r0, [r6]\n\
+    b _08005A0A\n\
 _08005B36:\n\
-	add r1, r6, #0\n\
-	add r1, #0x21\n\
-	mov r0, #0x1\n\
-	b _08005B44\n\
+    add r1, r6, #0\n\
+    add r1, #0x21\n\
+    mov r0, #0x1\n\
+    b _08005B44\n\
 _08005B3E:\n\
-	add r1, r6, #0\n\
-	add r1, #0x21\n\
-	mov r0, #0\n\
+    add r1, r6, #0\n\
+    add r1, #0x21\n\
+    mov r0, #0\n\
 _08005B44:\n\
-	strb r0, [r1]\n\
-	b _08005A0A\n\
+    strb r0, [r1]\n\
+    b _08005A0A\n\
 _08005B48:\n\
-	mov r0, #0x2\n\
-	b _08005B4E\n\
+    mov r0, #0x2\n\
+    b _08005B4E\n\
 _08005B4C:\n\
-	mov r0, #0x3\n\
+    mov r0, #0x3\n\
 _08005B4E:\n\
-	strb r0, [r6, #0x1C]\n\
-	add r0, r6, #0\n\
-	bl TextPrinterInitDownArrowCounters\n\
+    strb r0, [r6, #0x1C]\n\
+    add r0, r6, #0\n\
+    bl TextPrinterInitDownArrowCounters\n\
 _08005B56:\n\
-	mov r0, #0x3\n\
-	b _08005D6E\n\
+    mov r0, #0x3\n\
+    b _08005D6E\n\
 _08005B5A:\n\
-	ldr r0, [r6]\n\
-	ldrb r3, [r0]\n\
-	mov r2, #0x80\n\
-	lsl r2, #1\n\
-	add r1, r2, #0\n\
-	orr r3, r1\n\
-	add r0, #0x1\n\
-	str r0, [r6]\n\
-	b _08005B90\n\
+    ldr r0, [r6]\n\
+    ldrb r3, [r0]\n\
+    mov r2, #0x80\n\
+    lsl r2, #1\n\
+    add r1, r2, #0\n\
+    orr r3, r1\n\
+    add r0, #0x1\n\
+    str r0, [r6]\n\
+    b _08005B90\n\
 _08005B6C:\n\
-	ldr r0, [r6]\n\
-	ldrb r3, [r0]\n\
-	add r0, #0x1\n\
-	str r0, [r6]\n\
-	ldrb r0, [r6, #0x4]\n\
-	add r1, r3, #0\n\
-	ldrb r2, [r6, #0x8]\n\
-	ldrb r3, [r6, #0x9]\n\
-	bl DrawKeypadIcon\n\
-	ldr r1, =gUnknown_03002F90\n\
-	add r1, #0x80\n\
-	strb r0, [r1]\n\
-	ldrb r3, [r6, #0xA]\n\
-	add r0, r3\n\
-	b _08005C6A\n\
-	.pool\n\
+    ldr r0, [r6]\n\
+    ldrb r3, [r0]\n\
+    add r0, #0x1\n\
+    str r0, [r6]\n\
+    ldrb r0, [r6, #0x4]\n\
+    add r1, r3, #0\n\
+    ldrb r2, [r6, #0x8]\n\
+    ldrb r3, [r6, #0x9]\n\
+    bl DrawKeypadIcon\n\
+    ldr r1, =gUnknown_03002F90\n\
+    add r1, #0x80\n\
+    strb r0, [r1]\n\
+    ldrb r3, [r6, #0xA]\n\
+    add r0, r3\n\
+    b _08005C6A\n\
+    .pool\n\
 _08005B90:\n\
-	ldr r0, [r4]\n\
-	lsl r0, #28\n\
-	lsr r0, #28\n\
-	cmp r0, #0x8\n\
-	bhi _08005C10\n\
-	lsl r0, #2\n\
-	ldr r1, =_08005BA8\n\
-	add r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
+    ldr r0, [r4]\n\
+    lsl r0, #28\n\
+    lsr r0, #28\n\
+    cmp r0, #0x8\n\
+    bhi _08005C10\n\
+    lsl r0, #2\n\
+    ldr r1, =_08005BA8\n\
+    add r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .pool\n\
+    .align 2, 0\n\
 _08005BA8:\n\
-	.4byte _08005BCC\n\
-	.4byte _08005BDA\n\
-	.4byte _08005BE8\n\
-	.4byte _08005BE8\n\
-	.4byte _08005BE8\n\
-	.4byte _08005BE8\n\
-	.4byte _08005C10\n\
-	.4byte _08005BF6\n\
-	.4byte _08005C04\n\
+    .4byte _08005BCC\n\
+    .4byte _08005BDA\n\
+    .4byte _08005BE8\n\
+    .4byte _08005BE8\n\
+    .4byte _08005BE8\n\
+    .4byte _08005BE8\n\
+    .4byte _08005C10\n\
+    .4byte _08005BF6\n\
+    .4byte _08005C04\n\
 _08005BCC:\n\
-	add r0, r6, #0\n\
-	add r0, #0x21\n\
-	ldrb r1, [r0]\n\
-	add r0, r3, #0\n\
-	bl DecompressGlyphFont0\n\
-	b _08005C10\n\
+    add r0, r6, #0\n\
+    add r0, #0x21\n\
+    ldrb r1, [r0]\n\
+    add r0, r3, #0\n\
+    bl DecompressGlyphFont0\n\
+    b _08005C10\n\
 _08005BDA:\n\
-	add r0, r6, #0\n\
-	add r0, #0x21\n\
-	ldrb r1, [r0]\n\
-	add r0, r3, #0\n\
-	bl DecompressGlyphFont1\n\
-	b _08005C10\n\
+    add r0, r6, #0\n\
+    add r0, #0x21\n\
+    ldrb r1, [r0]\n\
+    add r0, r3, #0\n\
+    bl DecompressGlyphFont1\n\
+    b _08005C10\n\
 _08005BE8:\n\
-	add r0, r6, #0\n\
-	add r0, #0x21\n\
-	ldrb r1, [r0]\n\
-	add r0, r3, #0\n\
-	bl DecompressGlyphFont2\n\
-	b _08005C10\n\
+    add r0, r6, #0\n\
+    add r0, #0x21\n\
+    ldrb r1, [r0]\n\
+    add r0, r3, #0\n\
+    bl DecompressGlyphFont2\n\
+    b _08005C10\n\
 _08005BF6:\n\
-	add r0, r6, #0\n\
-	add r0, #0x21\n\
-	ldrb r1, [r0]\n\
-	add r0, r3, #0\n\
-	bl DecompressGlyphFont7\n\
-	b _08005C10\n\
+    add r0, r6, #0\n\
+    add r0, #0x21\n\
+    ldrb r1, [r0]\n\
+    add r0, r3, #0\n\
+    bl DecompressGlyphFont7\n\
+    b _08005C10\n\
 _08005C04:\n\
-	add r0, r6, #0\n\
-	add r0, #0x21\n\
-	ldrb r1, [r0]\n\
-	add r0, r3, #0\n\
-	bl DecompressGlyphFont8\n\
+    add r0, r6, #0\n\
+    add r0, #0x21\n\
+    ldrb r1, [r0]\n\
+    add r0, r3, #0\n\
+    bl DecompressGlyphFont8\n\
 _08005C10:\n\
-	add r0, r6, #0\n\
-	bl CopyGlyphToWindow\n\
-	add r2, r6, #0\n\
-	add r2, #0x20\n\
-	ldrb r0, [r2]\n\
-	cmp r0, #0\n\
-	beq _08005C48\n\
-	ldr r1, =gUnknown_03002F90\n\
-	add r1, #0x80\n\
-	ldrb r0, [r1]\n\
-	ldrb r3, [r6, #0x8]\n\
-	add r0, r3\n\
-	strb r0, [r6, #0x8]\n\
-	ldrb r2, [r2]\n\
-	ldrb r0, [r1]\n\
-	sub r4, r2, r0\n\
-	cmp r4, #0\n\
-	ble _08005C70\n\
-	add r0, r6, #0\n\
-	add r1, r4, #0\n\
-	bl ClearTextSpan\n\
-	ldrb r0, [r6, #0x8]\n\
-	add r0, r4\n\
-	b _08005C6E\n\
-	.pool\n\
+    add r0, r6, #0\n\
+    bl CopyGlyphToWindow\n\
+    add r2, r6, #0\n\
+    add r2, #0x20\n\
+    ldrb r0, [r2]\n\
+    cmp r0, #0\n\
+    beq _08005C48\n\
+    ldr r1, =gUnknown_03002F90\n\
+    add r1, #0x80\n\
+    ldrb r0, [r1]\n\
+    ldrb r3, [r6, #0x8]\n\
+    add r0, r3\n\
+    strb r0, [r6, #0x8]\n\
+    ldrb r2, [r2]\n\
+    ldrb r0, [r1]\n\
+    sub r4, r2, r0\n\
+    cmp r4, #0\n\
+    ble _08005C70\n\
+    add r0, r6, #0\n\
+    add r1, r4, #0\n\
+    bl ClearTextSpan\n\
+    ldrb r0, [r6, #0x8]\n\
+    add r0, r4\n\
+    b _08005C6E\n\
+    .pool\n\
 _08005C48:\n\
-	add r0, r6, #0\n\
-	add r0, #0x21\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	beq _08005C64\n\
-	ldr r0, =gUnknown_03002F90\n\
-	add r0, #0x80\n\
-	ldrb r1, [r6, #0xA]\n\
-	ldrb r0, [r0]\n\
-	add r1, r0\n\
-	ldrb r0, [r6, #0x8]\n\
-	b _08005C6C\n\
-	.pool\n\
+    add r0, r6, #0\n\
+    add r0, #0x21\n\
+    ldrb r0, [r0]\n\
+    cmp r0, #0\n\
+    beq _08005C64\n\
+    ldr r0, =gUnknown_03002F90\n\
+    add r0, #0x80\n\
+    ldrb r1, [r6, #0xA]\n\
+    ldrb r0, [r0]\n\
+    add r1, r0\n\
+    ldrb r0, [r6, #0x8]\n\
+    b _08005C6C\n\
+    .pool\n\
 _08005C64:\n\
-	ldr r0, =gUnknown_03002F90\n\
-	add r0, #0x80\n\
-	ldrb r0, [r0]\n\
+    ldr r0, =gUnknown_03002F90\n\
+    add r0, #0x80\n\
+    ldrb r0, [r0]\n\
 _08005C6A:\n\
-	ldrb r1, [r6, #0x8]\n\
+    ldrb r1, [r6, #0x8]\n\
 _08005C6C:\n\
-	add r0, r1\n\
+    add r0, r1\n\
 _08005C6E:\n\
-	strb r0, [r6, #0x8]\n\
+    strb r0, [r6, #0x8]\n\
 _08005C70:\n\
-	mov r0, #0\n\
-	b _08005D6E\n\
-	.pool\n\
+    mov r0, #0\n\
+    b _08005D6E\n\
+    .pool\n\
 _08005C78:\n\
-	add r0, r6, #0\n\
-	bl TextPrinterWait\n\
-	lsl r0, #16\n\
-	cmp r0, #0\n\
-	bne _08005C86\n\
-	b _08005B56\n\
+    add r0, r6, #0\n\
+    bl TextPrinterWait\n\
+    lsl r0, #16\n\
+    cmp r0, #0\n\
+    bne _08005C86\n\
+    b _08005B56\n\
 _08005C86:\n\
-	mov r0, #0\n\
-	strb r0, [r6, #0x1C]\n\
-	b _08005B56\n\
+    mov r0, #0\n\
+    strb r0, [r6, #0x1C]\n\
+    b _08005B56\n\
 _08005C8C:\n\
-	add r0, r6, #0\n\
-	bl TextPrinterWaitWithDownArrow\n\
-	lsl r0, #16\n\
-	cmp r0, #0\n\
-	bne _08005C9A\n\
-	b _08005B56\n\
+    add r0, r6, #0\n\
+    bl TextPrinterWaitWithDownArrow\n\
+    lsl r0, #16\n\
+    cmp r0, #0\n\
+    bne _08005C9A\n\
+    b _08005B56\n\
 _08005C9A:\n\
-	ldrb r0, [r6, #0x4]\n\
-	ldrb r2, [r6, #0xD]\n\
-	lsl r2, #28\n\
-	lsr r1, r2, #4\n\
-	orr r1, r2\n\
-	lsr r1, #24\n\
-	bl FillWindowPixelBuffer\n\
-	ldrb r0, [r6, #0x6]\n\
-	mov r1, #0\n\
-	strb r0, [r6, #0x8]\n\
-	ldrb r0, [r6, #0x7]\n\
-	strb r0, [r6, #0x9]\n\
-	strb r1, [r6, #0x1C]\n\
-	b _08005B56\n\
+    ldrb r0, [r6, #0x4]\n\
+    ldrb r2, [r6, #0xD]\n\
+    lsl r2, #28\n\
+    lsr r1, r2, #4\n\
+    orr r1, r2\n\
+    lsr r1, #24\n\
+    bl FillWindowPixelBuffer\n\
+    ldrb r0, [r6, #0x6]\n\
+    mov r1, #0\n\
+    strb r0, [r6, #0x8]\n\
+    ldrb r0, [r6, #0x7]\n\
+    strb r0, [r6, #0x9]\n\
+    strb r1, [r6, #0x1C]\n\
+    b _08005B56\n\
 _08005CB8:\n\
-	add r0, r6, #0\n\
-	bl TextPrinterWaitWithDownArrow\n\
-	lsl r0, #16\n\
-	cmp r0, #0\n\
-	bne _08005CC6\n\
-	b _08005B56\n\
+    add r0, r6, #0\n\
+    bl TextPrinterWaitWithDownArrow\n\
+    lsl r0, #16\n\
+    cmp r0, #0\n\
+    bne _08005CC6\n\
+    b _08005B56\n\
 _08005CC6:\n\
-	add r0, r6, #0\n\
-	bl TextPrinterClearDownArrow\n\
-	ldrb r1, [r6, #0x5]\n\
-	ldr r0, =gFonts\n\
-	ldr r2, [r0]\n\
-	lsl r0, r1, #1\n\
-	add r0, r1\n\
-	lsl r0, #2\n\
-	add r0, r2\n\
-	ldrb r1, [r6, #0xB]\n\
-	ldrb r0, [r0, #0x5]\n\
-	add r1, r0\n\
-	strb r1, [r6, #0x1F]\n\
-	ldrb r0, [r6, #0x6]\n\
-	strb r0, [r6, #0x8]\n\
-	mov r0, #0x4\n\
-	strb r0, [r6, #0x1C]\n\
-	b _08005B56\n\
-	.pool\n\
+    add r0, r6, #0\n\
+    bl TextPrinterClearDownArrow\n\
+    ldrb r1, [r6, #0x5]\n\
+    ldr r0, =gFonts\n\
+    ldr r2, [r0]\n\
+    lsl r0, r1, #1\n\
+    add r0, r1\n\
+    lsl r0, #2\n\
+    add r0, r2\n\
+    ldrb r1, [r6, #0xB]\n\
+    ldrb r0, [r0, #0x5]\n\
+    add r1, r0\n\
+    strb r1, [r6, #0x1F]\n\
+    ldrb r0, [r6, #0x6]\n\
+    strb r0, [r6, #0x8]\n\
+    mov r0, #0x4\n\
+    strb r0, [r6, #0x1C]\n\
+    b _08005B56\n\
+    .pool\n\
 _08005CF0:\n\
-	ldrb r0, [r6, #0x1F]\n\
-	cmp r0, #0\n\
-	beq _08005D44\n\
-	bl sub_8197964\n\
-	ldr r1, =gWindowVerticalScrollSpeeds\n\
-	add r0, r1\n\
-	ldrb r4, [r0]\n\
-	ldrb r2, [r6, #0x1F]\n\
-	cmp r2, r4\n\
-	bge _08005D20\n\
-	ldrb r0, [r6, #0x4]\n\
-	ldrb r1, [r6, #0xD]\n\
-	lsl r1, #28\n\
-	lsr r3, r1, #4\n\
-	orr r3, r1\n\
-	lsr r3, #24\n\
-	mov r1, #0\n\
-	bl ScrollWindow\n\
-	mov r0, #0\n\
-	b _08005D38\n\
-	.pool\n\
+    ldrb r0, [r6, #0x1F]\n\
+    cmp r0, #0\n\
+    beq _08005D44\n\
+    bl sub_8197964\n\
+    ldr r1, =gWindowVerticalScrollSpeeds\n\
+    add r0, r1\n\
+    ldrb r4, [r0]\n\
+    ldrb r2, [r6, #0x1F]\n\
+    cmp r2, r4\n\
+    bge _08005D20\n\
+    ldrb r0, [r6, #0x4]\n\
+    ldrb r1, [r6, #0xD]\n\
+    lsl r1, #28\n\
+    lsr r3, r1, #4\n\
+    orr r3, r1\n\
+    lsr r3, #24\n\
+    mov r1, #0\n\
+    bl ScrollWindow\n\
+    mov r0, #0\n\
+    b _08005D38\n\
+    .pool\n\
 _08005D20:\n\
-	ldrb r0, [r6, #0x4]\n\
-	ldrb r1, [r6, #0xD]\n\
-	lsl r1, #28\n\
-	lsr r3, r1, #4\n\
-	orr r3, r1\n\
-	lsr r3, #24\n\
-	mov r1, #0\n\
-	add r2, r4, #0\n\
-	bl ScrollWindow\n\
-	ldrb r0, [r6, #0x1F]\n\
-	sub r0, r4\n\
+    ldrb r0, [r6, #0x4]\n\
+    ldrb r1, [r6, #0xD]\n\
+    lsl r1, #28\n\
+    lsr r3, r1, #4\n\
+    orr r3, r1\n\
+    lsr r3, #24\n\
+    mov r1, #0\n\
+    add r2, r4, #0\n\
+    bl ScrollWindow\n\
+    ldrb r0, [r6, #0x1F]\n\
+    sub r0, r4\n\
 _08005D38:\n\
-	strb r0, [r6, #0x1F]\n\
-	ldrb r0, [r6, #0x4]\n\
-	mov r1, #0x2\n\
-	bl CopyWindowToVram\n\
-	b _08005B56\n\
+    strb r0, [r6, #0x1F]\n\
+    ldrb r0, [r6, #0x4]\n\
+    mov r1, #0x2\n\
+    bl CopyWindowToVram\n\
+    b _08005B56\n\
 _08005D44:\n\
-	strb r0, [r6, #0x1C]\n\
-	b _08005B56\n\
+    strb r0, [r6, #0x1C]\n\
+    b _08005B56\n\
 _08005D48:\n\
-	bl IsSEPlaying\n\
-	lsl r0, #24\n\
-	lsr r0, #24\n\
-	cmp r0, #0\n\
-	beq _08005D56\n\
-	b _08005B56\n\
+    bl IsSEPlaying\n\
+    lsl r0, #24\n\
+    lsr r0, #24\n\
+    cmp r0, #0\n\
+    beq _08005D56\n\
+    b _08005B56\n\
 _08005D56:\n\
-	strb r0, [r6, #0x1C]\n\
-	b _08005B56\n\
+    strb r0, [r6, #0x1C]\n\
+    b _08005B56\n\
 _08005D5A:\n\
-	ldrb r0, [r6, #0x1E]\n\
-	add r1, r0, #0\n\
-	cmp r1, #0\n\
-	beq _08005D68\n\
-	sub r0, #0x1\n\
-	strb r0, [r6, #0x1E]\n\
-	b _08005B56\n\
+    ldrb r0, [r6, #0x1E]\n\
+    add r1, r0, #0\n\
+    cmp r1, #0\n\
+    beq _08005D68\n\
+    sub r0, #0x1\n\
+    strb r0, [r6, #0x1E]\n\
+    b _08005B56\n\
 _08005D68:\n\
-	strb r1, [r6, #0x1C]\n\
-	b _08005B56\n\
+    strb r1, [r6, #0x1C]\n\
+    b _08005B56\n\
 _08005D6C:\n\
-	mov r0, #0x1\n\
+    mov r0, #0x1\n\
 _08005D6E:\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1");
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n");
 }
+#endif
 
 u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
 {

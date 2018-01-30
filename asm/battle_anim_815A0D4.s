@@ -1689,7 +1689,7 @@ _0815AE58:
 	ldrsh r0, [r5, r6]
 	cmp r1, r0
 	bgt _0815AE8E
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r0, r4
@@ -1729,7 +1729,7 @@ _0815AEA2:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldr r0, =sub_815AED8
 	str r0, [r5]
 	add sp, 0xC
@@ -1820,7 +1820,7 @@ _0815AF5C:
 	ldrsh r0, [r4, r2]
 	cmp r1, r0
 	bge _0815AF90
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -1848,7 +1848,7 @@ _0815AF90:
 	ldrsh r0, [r4, r2]
 	cmp r1, r0
 	bgt _0815AFC4
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -1877,7 +1877,7 @@ _0815AFC4:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _0815AFDA
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _0815AFDA:
@@ -6151,7 +6151,7 @@ _0815D316:
 	ldrh r3, [r0]
 	movs r7, 0
 	movs r2, 0
-	ldr r6, =gUnknown_02038C28
+	ldr r6, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r0, r6
@@ -6192,7 +6192,7 @@ _0815D326:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldr r0, =sub_815D398
 	str r0, [r4]
 	add sp, 0xC
@@ -6304,7 +6304,7 @@ _0815D40E:
 	ldrsh r0, [r6, r3]
 	cmp r1, r0
 	ble _0815D52E
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	mov r10, r0
 	ldr r1, [sp, 0x4]
 	lsls r0, r1, 16
@@ -6325,7 +6325,7 @@ _0815D47E:
 	subs r0, r1
 	lsls r0, 7
 	adds r2, r0
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	adds r2, r0
 	lsls r4, 16
 	asrs r4, 16
@@ -6343,7 +6343,7 @@ _0815D47E:
 	subs r0, r1
 	lsls r0, 7
 	adds r3, r0
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r3, r1
 	lsls r1, r7, 16
 	asrs r1, 16
@@ -6407,7 +6407,7 @@ _0815D52E:
 	lsls r1, r2, 17
 	cmp r1, 0
 	blt _0815D55A
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	ldr r7, [sp, 0x4]
 	lsls r0, r7, 16
 	asrs r0, 16
@@ -6487,7 +6487,7 @@ _0815D5CC:
 	asrs r0, 16
 	cmp r0, 0xC
 	ble _0815D63C
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0

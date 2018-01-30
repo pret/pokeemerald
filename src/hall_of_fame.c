@@ -20,11 +20,12 @@
 #include "string_util.h"
 #include "m4a.h"
 #include "international_string_util.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "trig.h"
 #include "random.h"
 #include "event_data.h"
 #include "overworld.h"
+#include "new_menu_helpers.h"
 
 struct HallofFameMon
 {
@@ -53,7 +54,6 @@ static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
 extern bool8 gHasHallOfFameRecords;
 extern u32 gUnknown_0203BCD4;
-extern u8 gDecompressionBuffer[];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern MainCallback gGameContinueCallback;
 extern u32 gDamagedSaveSectors;
@@ -82,7 +82,6 @@ extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
 
 extern void sub_81973C4(u8, u8);
-extern u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 speed, void ( *callback)(u16, struct TextPrinter *), u8 fgColor, u8 bgColor, u8 shadowColor);
 extern void sub_8175620(void);
 extern u8 TrySavingData(u8);
 extern u8 sub_818D3E4(u16 species, u32 trainerId, u32 personality, u8 flags, s16 x, s16 y, u8, u16);

@@ -4,6 +4,7 @@
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "task.h"
+#include "constants/rgb.h"
 
 enum
 {

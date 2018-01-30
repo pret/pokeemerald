@@ -21684,7 +21684,7 @@ _080148CC:
 	bne _080149B2
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	movs r0, 0x2
 	strh r0, [r7]
 	b _080149B2
@@ -39837,7 +39837,7 @@ sub_801DF20: @ 801DF20
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_801DF20
@@ -42568,7 +42568,7 @@ sub_801F544: @ 801F544
 	str r0, [r4]
 _0801F55A:
 	bl FreeAllWindowBuffers
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	pop {r4}
@@ -44875,13 +44875,13 @@ sub_8020770: @ 8020770
 	strh r1, [r0, 0x20]
 	str r1, [sp, 0xC]
 	add r0, sp, 0xC
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	ldr r2, =0x010003c0
 	bl CpuFastSet
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -44896,12 +44896,12 @@ sub_80207C0: @ 80207C0
 	lsrs r0, 16
 	mov r1, sp
 	strh r0, [r1]
-	ldr r5, =gUnknown_02039B28
+	ldr r5, =gScanlineEffect
 	ldrb r0, [r5, 0x14]
 	lsls r1, r0, 4
 	subs r1, r0
 	lsls r1, 7
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	adds r1, r4
 	ldr r2, =0x01000090
 	mov r0, sp
@@ -44939,7 +44939,7 @@ sub_8020818: @ 8020818
 	lsrs r4, 16
 	mov r0, sp
 	strh r4, [r0]
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	ldr r0, =0x01000090
 	mov r9, r0
 	mov r0, sp

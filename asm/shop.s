@@ -188,7 +188,7 @@ HandleShopMenuBuy: @ 80DFBD0
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -216,7 +216,7 @@ HandleShopMenuSell: @ 80DFC0C
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r4}
 	pop {r0}
 	bx r0

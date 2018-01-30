@@ -2049,7 +2049,7 @@ sub_81C4F24: @ 81C4F24
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81C4F44
 	movs r1, 0xA
 	bl CreateTask
