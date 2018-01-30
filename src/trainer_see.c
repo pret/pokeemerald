@@ -6,7 +6,7 @@
 #include "field_effect.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
-#include "map_obj_8097404.h"
+#include "field_map_obj_helpers.h"
 #include "pokenav.h"
 #include "task.h"
 #include "util.h"
