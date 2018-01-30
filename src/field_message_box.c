@@ -1,19 +1,11 @@
 #include "global.h"
+#include "new_menu_helpers.h"
 #include "string.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 
-extern void sub_81973A4(void);
-extern void sub_81973C4(u8, u8);
-extern u16 sub_8197224(void);
-extern int sub_8196094(void);
-extern void sub_8196080(u8*);
-extern void AddTextPrinterForMessage(u8);
-extern void sub_8197434(u8, u8);
-extern void sub_81973FC(u8, u8);
-
-extern u8 gUnknown_020375BC;
+u8 gUnknown_020375BC = 0;
 
 void textbox_fdecode_auto_and_task_add(u8*, int);
 void textbox_auto_and_task_add(void);
