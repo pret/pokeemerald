@@ -790,7 +790,7 @@ void sub_81ABCC0(int a, int b, int c)
         }
         if ((select = (gMain.newKeys & SELECT_BUTTON)))
         {
-            if (sub_81AC2C0())
+            if (sub_81AC2C0() == 1)
             {
                 sub_81AE860(data[0], ScrollPos, CursorPos);
                 if ((*ScrollPos + *CursorPos) != gUnknown_0203CE54->unk829[gUnknown_0203CE58.pocket] - 1)
@@ -805,10 +805,19 @@ void sub_81ABCC0(int a, int b, int c)
         {
             int r4 = ListMenuHandleInputGetItemId(data[0]);
             sub_81AE860(data[0], ScrollPos, CursorPos);
-            if (r4 != -2)
+            switch (r4)
             {
-                if (r4 != -1)
-                {
+                default:
+                    if (gUnknown_0203CE58.unk4 == 5)
+                    {
+                        PlaySE(SE_HAZURE);
+                        return;
+                    }
+                        PlaySE(SE_SELECT);
+                        gSpecialVar_ItemId = select;
+                        gTasks[taskId].func = unknown_ItemMenu_Confirm;
+                    return;
+                case -2:
                     PlaySE(SE_SELECT);
                     sub_81AB824();
                     bag_menu_print_cursor_(data[0], 2);
@@ -816,16 +825,13 @@ void sub_81ABCC0(int a, int b, int c)
                     data[2] = BagGetQuantityByPocketPosition(gUnknown_0203CE58.pocket + 1, r4);
                     gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, r4);
                     gUnknown_08614054[gUnknown_0203CE58.unk4](taskId);
-                }
+                 case -1:
+                    break;
+                
+                
+                
             }
-            else if (gUnknown_0203CE58.unk4 == 5)
-                PlaySE(SE_HAZURE);
-            else
-            {
-                PlaySE(SE_SELECT);
-                gSpecialVar_ItemId = select;
-                gTasks[taskId].func = unknown_ItemMenu_Confirm;
-            }
+            
         }
     }
 } */
