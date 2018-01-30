@@ -449,7 +449,7 @@ _0809FB34:
 	beq _0809FBA0
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _0809FBA0
 	.pool
 _0809FB98:

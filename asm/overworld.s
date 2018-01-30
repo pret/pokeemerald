@@ -1383,7 +1383,7 @@ _080850C8:
 	adds r1, r5, 0
 	bl TryUpdateRandomTrainerRematches
 	bl DoTimeBasedEvents
-	bl sub_80AEDBC
+	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_8085B2C
 	bl update_sav1_flash_used_on_map
 	bl Overworld_ClearSavedMusic
@@ -1483,7 +1483,7 @@ _080851A2:
 	beq _080851EE
 	bl DoTimeBasedEvents
 _080851EE:
-	bl sub_80AEDBC
+	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_8085B2C
 	cmp r5, 0
 	beq _08085200
