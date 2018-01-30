@@ -1,12 +1,6 @@
 #ifndef GUARD_BLEND_PALETTE_H
 #define GUARD_BLEND_PALETTE_H
 
-// Exported type declarations
+void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor);
 
-// Exported RAM declarations
-
-// Exported ROM declarations
-
-void BlendPalette(u16, u16, u8, u16);
-
-#endif //GUARD_BLEND_PALETTE_H
+#endif // GUARD_BLEND_PALETTE_H

@@ -74,16 +74,8 @@ gUnknown_03001204: @ 3001204
 	.space 0x4
 
 	.include "src/battle_transition.o"
-
-gUnknown_03001240: @ 3001240
-	.space 0x30
-
-gUnknown_03001270: @ 3001270
-	.space 0x4
-
-gUnknown_03001274: @ 3001274
-	.space 0x4
-
+	.include "src/pokemon_animation.o"
+	
 gUnknown_03001278: @ 3001278
 	.space 0x1
 

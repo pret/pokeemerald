@@ -12,7 +12,7 @@
 #include "window.h"
 #include "text_window.h"
 #include "menu.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "task.h"
 #include "strings.h"
 #include "sound.h"

@@ -126,7 +126,7 @@ SECTIONS {
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         asm/field_effect.o(.text);
-        asm/unknown_task.o(.text);
+        src/scanline_effect.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
         asm/pokedex.o(.text);
@@ -162,7 +162,7 @@ SECTIONS {
         asm/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80FC4F4.o(.text);
-        asm/item_use.o(.text);
+        src/item_use.o(.text);
         asm/battle_anim_80FE840.o(.text);
         src/bike.o(.text);
         asm/easy_chat.o(.text);
@@ -185,7 +185,7 @@ SECTIONS {
         src/pokeblock.o(.text);
         asm/fldeff_flash.o(.text);
         asm/post_battle_event_funcs.o(.text);
-        asm/time_events.o(.text);
+        src/time_events.o(.text);
         asm/birch_pc.o(.text);
         src/hof_pc.o(.text);
         asm/field_specials.o(.text);
@@ -240,7 +240,7 @@ SECTIONS {
         src/bard_music.o(.text);
         src/fldeff_teleport.o(.text);
         asm/battle_link_817C95C.o(.text);
-        asm/pokemon_animation.o(.text);
+        src/pokemon_animation.o(.text);
         src/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
@@ -472,7 +472,7 @@ SECTIONS {
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
         data/fldeff_flash.o(.rodata);
-        data/time_events.o(.rodata);
+        src/time_events.o(.rodata);
         data/field_specials.o(.rodata);
         data/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
@@ -514,7 +514,7 @@ SECTIONS {
         src/evolution_graphics.o(.rodata);
         src/bard_music.o(.rodata);
         data/battle_link_817C95C.o(.rodata);
-        data/pokemon_animation.o(.rodata);
+        src/pokemon_animation.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);
         src/battle_dome_cards.o(.rodata);

@@ -4,7 +4,7 @@
 #include "main.h"
 #include "overworld.h"
 #include "task.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "palette.h"
 #include "text.h"
 #include "menu.h"
