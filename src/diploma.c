@@ -3,7 +3,7 @@
 #include "palette.h"
 #include "main.h"
 #include "gpu_regs.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "task.h"
 #include "malloc.h"
 #include "decompress.h"

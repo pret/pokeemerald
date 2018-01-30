@@ -14,7 +14,7 @@
 #include "battle.h"
 #include "battle_controllers.h"
 #include "palette.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "list_menu.h"
 #include "gpu_regs.h"
 #include "decompress.h"

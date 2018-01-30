@@ -888,7 +888,7 @@ _0809EFCA:
 	bl ResetOamRange
 	bl LoadOam
 	bl ScanlineEffect_Stop
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
