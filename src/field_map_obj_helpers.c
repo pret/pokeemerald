@@ -43,7 +43,7 @@ bool8 FreezeMapObject(struct MapObject *mapObject)
 void FreezeMapObjects(void)
 {
     u8 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
         if (gMapObjects[i].active && i != gPlayerAvatar.mapObjectId)
             FreezeMapObject(&gMapObjects[i]);
 }
@@ -51,7 +51,7 @@ void FreezeMapObjects(void)
 void FreezeMapObjectsExceptOne(u8 a1)
 {
     u8 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
         if (i != a1 && gMapObjects[i].active && i != gPlayerAvatar.mapObjectId)
             FreezeMapObject(&gMapObjects[i]);
 }
@@ -69,7 +69,7 @@ void npc_sync_anim_pause_bits(struct MapObject *mapObject)
 void UnfreezeMapObjects(void)
 {
     u8 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
         if (gMapObjects[i].active)
             npc_sync_anim_pause_bits(&gMapObjects[i]);
 }
@@ -748,12 +748,12 @@ u8 sub_8097F78(struct MapObject *mapObject)
 {
     u8 i;
 
-    for(i = 0; i < 0x10; i++)
+    for(i = 0; i < MAP_OBJECTS_COUNT; i++)
     {
         if(gUnknown_020375B8[i] == mapObject->localId)
             return i;
     }
-    return 0x10;
+    return MAP_OBJECTS_COUNT;
 }
 
 void sub_8097FA4(struct MapObject *mapObject)
@@ -797,7 +797,7 @@ void sub_8098074(u8 var1, u8 var2)
 {
     u8 i;
 
-    for(i = 0; i < 0x10; i++)
+    for(i = 0; i < MAP_OBJECTS_COUNT; i++)
     {
         if(i != var1 && i != var2 &&
             gMapObjects[i].active && i != gPlayerAvatar.mapObjectId)
@@ -837,7 +837,7 @@ bool32 sub_8098108(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-// though this function returns FALSE without doing anything, this header is required due to being in an array of functions which needs it.
+// though this function returns TRUE without doing anything, this header is required due to being in an array of functions which needs it.
 bool32 sub_8098124(struct MapObject *mapObject, struct Sprite *sprite)
 {
     return TRUE;
