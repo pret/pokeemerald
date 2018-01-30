@@ -771,7 +771,7 @@ void sub_81ABCC0(int a, int b, int c)
     PrintMoneyAmount(a, 0x26, 1, c, 0);
 }
 
-/* void Task_BagMenu(u8 taskId)
+void Task_BagMenu(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
     u16* ScrollPos = &gUnknown_0203CE58.unk12[gUnknown_0203CE58.pocket];
@@ -807,17 +807,19 @@ void sub_81ABCC0(int a, int b, int c)
             sub_81AE860(data[0], ScrollPos, CursorPos);
             switch (r4)
             {
-                default:
+                case -1:
+                    break;
+                case -2:
                     if (gUnknown_0203CE58.unk4 == 5)
                     {
                         PlaySE(SE_HAZURE);
-                        return;
+                        break;
                     }
-                        PlaySE(SE_SELECT);
-                        gSpecialVar_ItemId = select;
-                        gTasks[taskId].func = unknown_ItemMenu_Confirm;
-                    return;
-                case -2:
+                    PlaySE(SE_SELECT);
+                    gSpecialVar_ItemId = select;
+                    gTasks[taskId].func = unknown_ItemMenu_Confirm;
+                    break;
+                default:
                     PlaySE(SE_SELECT);
                     sub_81AB824();
                     bag_menu_print_cursor_(data[0], 2);
@@ -825,13 +827,18 @@ void sub_81ABCC0(int a, int b, int c)
                     data[2] = BagGetQuantityByPocketPosition(gUnknown_0203CE58.pocket + 1, r4);
                     gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, r4);
                     gUnknown_08614054[gUnknown_0203CE58.unk4](taskId);
-                 case -1:
-                    break;
-                
-                
-                
             }
-            
         }
     }
-} */
+}
+
+void set_callback3_to_bag(u8 taskId)
+{
+    bag_menu_add_pocket_scroll_arrow_indicators_maybe();
+    bag_menu_add_list_scroll_arrow_indicators_maybe();
+    ClearWindowTilemap(3);
+    ClearWindowTilemap(4);
+    PutWindowTilemap(1);
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = Task_BagMenu;
+}
