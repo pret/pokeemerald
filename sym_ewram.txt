@@ -642,8 +642,6 @@ gUnknown_020375B6: @ 20375B6
 gUnknown_020375B8: @ 20375B8
 	.space 0x4
 
-gUnknown_020375BC: @ 20375BC
-
     .include "src/field_message_box.o"
 
     .align 2
