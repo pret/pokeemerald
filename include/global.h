@@ -37,6 +37,9 @@
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
+#define min(a, b) ((a) < (b) ? (a) : (b))
+#define max(a, b) ((a) >= (b) ? (a) : (b))
+
 #define HEAP_SIZE 0x1C000
 
 extern u8 gStringVar1[];
