@@ -2155,7 +2155,7 @@ trigger_activate: @ 809D04C
 	cmp r1, 0
 	bne _0809D062
 	ldrb r0, [r4, 0x6]
-	bl trigger_activate_weather
+	bl DoCoordEventWeather
 	b _0809D082
 _0809D062:
 	ldrh r0, [r4, 0x6]

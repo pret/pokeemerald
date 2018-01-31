@@ -150,6 +150,8 @@ void PlayRainSoundEffect(void);
 // ...
 void SetSav1Weather(u32);
 u8 GetSav1Weather(void);
+void sub_80AEDBC(void);
+
 void SetSav1WeatherFromCurrMapHeader(void);
 // ...
 void DoCurrentWeather(void);

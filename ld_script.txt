@@ -105,7 +105,7 @@ SECTIONS {
         src/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         src/event_data.o(.text);
-        asm/coord_event_weather.o(.text);
+        src/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         src/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
@@ -407,7 +407,7 @@ SECTIONS {
         data/map_obj_8097404.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
-        data/coord_event_weather.o(.rodata);
+        src/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);
         src/start_menu.o(.rodata);
