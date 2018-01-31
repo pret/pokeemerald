@@ -230,7 +230,7 @@ SECTIONS {
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
-        asm/mystery_event_menu.o(.text);
+        src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
         src/pokeblock_feed.o(.text);
@@ -505,7 +505,7 @@ SECTIONS {
         src/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
-        data/mystery_event_menu.o(.rodata);
+        src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
         src/pokeblock_feed.o(.rodata);

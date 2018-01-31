@@ -143,8 +143,9 @@ extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
+extern u32 gLinkStatus;
 
-void Task_DestroySelf(u8);
+void Task_DestroySelf(u8 taskId);
 void OpenLink(void);
 void CloseLink(void);
 u16 LinkMain2(u16 *);
@@ -188,11 +189,10 @@ bool8 sub_8010500(void);
 void sub_800DFB4(u8, u8);
 void sub_800ADF8(void);
 void sub_800B488(void);
-void sub_8009734(void);
+void OpenLink(void);
 void sub_800A620(void);
 void sub_8011BD0(void);
-u8 sub_800ABAC(void);
-u8 sub_800ABBC(void);
 void sub_800AC34(void);
+u8 sub_800A0C8(s32, s32);
 
 #endif // GUARD_LINK_H

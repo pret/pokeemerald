@@ -202,4 +202,12 @@ extern const u8 gText_ButtonMode[];
 extern const u8 gText_MaleSymbol[];
 extern const u8 gText_FemaleSymbol[];
 
+// mystery event menu text
+extern const u8 gText_EventSafelyLoaded[];
+extern const u8 gText_LoadErrorEndingSession[];
+extern const u8 gText_PressAToLoadEvent[];
+extern const u8 gText_LoadingEvent[];
+extern const u8 gText_DontRemoveCableTurnOff[];
+extern const u8 gText_LinkStandby2[];
+
 #endif //GUARD_STRINGS_H
