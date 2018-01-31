@@ -5,7 +5,7 @@
 #include "task.h"
 #include "text.h"
 
-u8 gUnknown_020375BC = 0;
+EWRAM_DATA u8 gUnknown_020375BC = 0;
 
 void textbox_fdecode_auto_and_task_add(u8*, int);
 void textbox_auto_and_task_add(void);
