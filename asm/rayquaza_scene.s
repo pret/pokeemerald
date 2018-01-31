@@ -5,1266 +5,7 @@
 
 	.text
 
-	thumb_func_start sub_81D6720
-sub_81D6720: @ 81D6720
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	mov r8, r2
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r6, =gUnknown_0203CF60
-	ldr r0, =0x00002018
-	bl AllocZeroed
-	str r0, [r6]
-	ldr r1, =0x00002006
-	adds r0, r1
-	strb r4, [r0]
-	ldr r0, [r6]
-	mov r1, r8
-	str r1, [r0]
-	ldr r1, =0x00002007
-	adds r0, r1
-	strb r5, [r0]
-	ldr r0, =sub_81D6774
-	bl SetMainCallback2
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D6720
-
-	thumb_func_start sub_81D6774
-sub_81D6774: @ 81D6774
-	push {lr}
-	bl SetVBlankHBlankCallbacksToNull
-	bl clear_scheduled_bg_copies_to_vram
-	bl ScanlineEffect_Stop
-	bl FreeAllSpritePalettes
-	bl ResetPaletteFade
-	bl ResetSpriteData
-	bl ResetTasks
-	movs r0, 0
-	movs r1, 0xF0
-	movs r2, 0x20
-	bl FillPalette
-	ldr r1, =gUnknown_0862A6A0
-	ldr r0, =gUnknown_0203CF60
-	ldr r0, [r0]
-	ldr r2, =0x00002006
-	adds r0, r2
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0
-	bl CreateTask
-	ldr r0, =sub_81D67D0
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D6774
-
-	thumb_func_start sub_81D67D0
-sub_81D67D0: @ 81D67D0
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81D67D0
-
-	thumb_func_start sub_81D67EC
-sub_81D67EC: @ 81D67EC
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81D67EC
-
-	thumb_func_start sub_81D6800
-sub_81D6800: @ 81D6800
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _081D6830
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	ldr r4, =gUnknown_0203CF60
-	ldr r0, [r4]
-	ldr r0, [r0]
-	bl SetMainCallback2
-	ldr r0, [r4]
-	bl Free
-	adds r0, r5, 0
-	bl DestroyTask
-_081D6830:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D6800
-
-	thumb_func_start sub_81D6840
-sub_81D6840: @ 81D6840
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r3, r0, 24
-	adds r6, r3, 0
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0
-	bne _081D68B2
-	ldr r2, =gUnknown_0203CF60
-	ldr r1, [r2]
-	ldr r4, =0x00002007
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _081D6888
-	ldr r0, =gTasks
-	lsls r1, r3, 2
-	adds r1, r3
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, =sub_81D6800
-	b _081D68B0
-	.pool
-_081D6888:
-	ldr r4, =0x00002006
-	adds r1, r4
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r2, [r2]
-	ldr r1, =0x00002004
-	adds r0, r2, r1
-	strh r5, [r0]
-	ldr r0, =gTasks
-	lsls r1, r6, 2
-	adds r1, r6
-	lsls r1, 3
-	adds r1, r0
-	ldr r3, =gUnknown_0862A6A0
-	adds r2, r4
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r0, r3
-	ldr r0, [r0]
-_081D68B0:
-	str r0, [r1]
-_081D68B2:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D6840
-
-	thumb_func_start sub_81D68C8
-sub_81D68C8: @ 81D68C8
-	push {lr}
-	movs r0, 0x48
-	movs r1, 0x3F
-	bl SetGpuReg
-	movs r0, 0x4A
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x40
-	movs r1, 0xF0
-	bl SetGpuReg
-	ldr r1, =0x00001888
-	movs r0, 0x44
-	bl SetGpuReg
-	ldr r0, =gPlttBufferUnfaded
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, =gPlttBufferFaded
-	strh r1, [r0]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D68C8
-
-	thumb_func_start sub_81D6904
-sub_81D6904: @ 81D6904
-	push {lr}
-	movs r0, 0x48
-	movs r1, 0x3F
-	bl SetGpuReg
-	movs r0, 0x4A
-	movs r1, 0x3F
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81D6904
-
-	thumb_func_start sub_81D691C
-sub_81D691C: @ 81D691C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r4, r0, 0
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r5, r0, r1
-	bl sub_81D750C
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _081D697E
-	movs r0, 0
-	ldrsh r1, [r5, r0]
-	cmp r1, 0x40
-	bne _081D6954
-	bl sub_81D7438
-	b _081D6978
-	.pool
-_081D6954:
-	cmp r1, 0x90
-	bne _081D695E
-	bl sub_81D7480
-	b _081D6978
-_081D695E:
-	cmp r1, 0x94
-	beq _081D6974
-	movs r0, 0xA4
-	lsls r0, 1
-	cmp r1, r0
-	bne _081D6978
-	adds r0, r4, 0
-	movs r1, 0
-	bl sub_81D75B4
-	b _081D697E
-_081D6974:
-	bl sub_81D74C8
-_081D6978:
-	ldrh r0, [r5]
-	adds r0, 0x1
-	strh r0, [r5]
-_081D697E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81D691C
-
-	thumb_func_start sub_81D6984
-sub_81D6984: @ 81D6984
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	ldr r0, =gUnknown_0862A72C
-	mov r8, r0
-	movs r1, 0x58
-	movs r2, 0x48
-	movs r3, 0x3
-	bl CreateSprite
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r6, =gSprites
-	lsls r4, r5, 4
-	adds r4, r5
-	lsls r4, 2
-	adds r0, r6, 0
-	adds r0, 0x1C
-	adds r0, r4, r0
-	ldr r1, =sub_81D6A20
-	str r1, [r0]
-	adds r0, r6, 0
-	adds r0, 0x2E
-	adds r4, r0
-	mov r0, r8
-	movs r1, 0x38
-	movs r2, 0x68
-	movs r3, 0x3
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4]
-	ldr r0, =gUnknown_0862A750
-	movs r1, 0x4B
-	movs r2, 0x65
-	movs r3, 0
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x2]
-	ldr r0, =gUnknown_0862A774
-	movs r1, 0x6D
-	movs r2, 0x72
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x4]
-	movs r0, 0
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x1
-	bl StartSpriteAnim
-	adds r0, r5, 0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81D6984
-
-	thumb_func_start sub_81D6A20
-sub_81D6A20: @ 81D6A20
-	push {r4,lr}
-	adds r3, r0, 0
-	movs r0, 0x2E
-	adds r0, r3
-	mov r12, r0
-	ldrh r0, [r0, 0xA]
-	adds r0, 0x1
-	movs r1, 0x1F
-	ands r0, r1
-	mov r1, r12
-	strh r0, [r1, 0xA]
-	cmp r0, 0
-	bne _081D6A84
-	ldrh r1, [r3, 0x20]
-	movs r2, 0x20
-	ldrsh r0, [r3, r2]
-	cmp r0, 0x48
-	beq _081D6A84
-	subs r0, r1, 0x1
-	strh r0, [r3, 0x20]
-	ldr r2, =gSprites
-	movs r4, 0x2E
-	ldrsh r1, [r3, r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r0, 0x20]
-	subs r1, 0x1
-	strh r1, [r0, 0x20]
-	mov r0, r12
-	movs r4, 0x2
-	ldrsh r1, [r0, r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r0, 0x20]
-	subs r1, 0x1
-	strh r1, [r0, 0x20]
-	mov r0, r12
-	movs r4, 0x4
-	ldrsh r1, [r0, r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r0, 0x20]
-	subs r1, 0x1
-	strh r1, [r0, 0x20]
-_081D6A84:
-	adds r0, r3, 0
-	adds r0, 0x2B
-	ldrb r3, [r0]
-	cmp r3, 0x1
-	beq _081D6AE4
-	cmp r3, 0x1
-	bgt _081D6A9C
-	cmp r3, 0
-	beq _081D6AA6
-	b _081D6B68
-	.pool
-_081D6A9C:
-	cmp r3, 0x2
-	beq _081D6B24
-	cmp r3, 0x3
-	beq _081D6AE4
-	b _081D6B68
-_081D6AA6:
-	ldr r2, =gSprites
-	mov r0, r12
-	movs r4, 0x2
-	ldrsh r1, [r0, r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	strh r3, [r0, 0x24]
-	mov r0, r12
-	movs r4, 0x2
-	ldrsh r1, [r0, r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	strh r3, [r0, 0x26]
-	mov r0, r12
-	movs r4, 0x4
-	ldrsh r1, [r0, r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	strh r3, [r0, 0x24]
-	mov r0, r12
-	movs r4, 0x4
-	ldrsh r1, [r0, r4]
-	b _081D6B5E
-	.pool
-_081D6AE4:
-	ldr r2, =gSprites
-	mov r0, r12
-	movs r3, 0x2
-	ldrsh r1, [r0, r3]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, =0x0000ffff
-	strh r1, [r0, 0x24]
-	mov r4, r12
-	movs r0, 0x2
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	movs r3, 0
-	strh r3, [r0, 0x26]
-	movs r0, 0x4
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	movs r1, 0x1
-	negs r1, r1
-	b _081D6B58
-	.pool
-_081D6B24:
-	ldr r2, =gSprites
-	mov r3, r12
-	movs r4, 0x2
-	ldrsh r1, [r3, r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, =0x0000ffff
-	strh r1, [r0, 0x24]
-	movs r0, 0x2
-	ldrsh r1, [r3, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	movs r3, 0x1
-	strh r3, [r0, 0x26]
-	mov r4, r12
-	movs r0, 0x4
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, =0x0000fffe
-_081D6B58:
-	strh r1, [r0, 0x24]
-	movs r0, 0x4
-	ldrsh r1, [r4, r0]
-_081D6B5E:
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	strh r3, [r0, 0x26]
-_081D6B68:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D6A20
-
-	thumb_func_start sub_81D6B7C
-sub_81D6B7C: @ 81D6B7C
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	ldr r5, =gUnknown_0862A81C
-	adds r0, r5, 0
-	movs r1, 0x88
-	movs r2, 0x60
-	movs r3, 0x1
-	bl CreateSprite
-	mov r8, r0
-	mov r0, r8
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	ldr r6, =gSprites
-	lsls r4, r0, 4
-	add r4, r8
-	lsls r4, 2
-	adds r0, r6, 0
-	adds r0, 0x1C
-	adds r0, r4, r0
-	ldr r1, =sub_81D6D20
-	str r1, [r0]
-	adds r0, r6, 0
-	adds r0, 0x2E
-	adds r4, r0
-	adds r0, r5, 0
-	movs r1, 0xA8
-	movs r2, 0x60
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 8
-	strh r0, [r4]
-	adds r0, r5, 0
-	movs r1, 0x88
-	movs r2, 0x70
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldrh r1, [r4]
-	orrs r0, r1
-	strh r0, [r4]
-	adds r0, r5, 0
-	movs r1, 0xA8
-	movs r2, 0x70
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 8
-	strh r0, [r4, 0x2]
-	adds r0, r5, 0
-	movs r1, 0x88
-	movs r2, 0x80
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldrh r1, [r4, 0x2]
-	orrs r0, r1
-	strh r0, [r4, 0x2]
-	adds r0, r5, 0
-	movs r1, 0xA8
-	movs r2, 0x80
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 8
-	strh r0, [r4, 0x4]
-	adds r0, r5, 0
-	movs r1, 0x68
-	movs r2, 0x80
-	movs r3, 0x2
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldrh r1, [r4, 0x4]
-	orrs r0, r1
-	strh r0, [r4, 0x4]
-	adds r0, r5, 0
-	movs r1, 0x88
-	movs r2, 0x80
-	movs r3, 0x2
-	bl CreateSprite
-	lsls r0, 8
-	strh r0, [r4, 0x6]
-	adds r0, r5, 0
-	movs r1, 0xB8
-	movs r2, 0x80
-	movs r3, 0
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldrh r1, [r4, 0x6]
-	orrs r0, r1
-	strh r0, [r4, 0x6]
-	ldr r0, =gUnknown_0862A84C
-	movs r1, 0xD0
-	movs r2, 0x84
-	movs r3, 0
-	bl CreateSprite
-	lsls r0, 8
-	strh r0, [r4, 0x8]
-	ldr r0, =gUnknown_0862A864
-	movs r1, 0xC8
-	movs r2, 0x78
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldrh r1, [r4, 0x8]
-	orrs r0, r1
-	strh r0, [r4, 0x8]
-	ldrh r1, [r4]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x1
-	bl StartSpriteAnim
-	ldrb r1, [r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x2
-	bl StartSpriteAnim
-	ldrh r1, [r4, 0x2]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x3
-	bl StartSpriteAnim
-	ldrb r1, [r4, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x4
-	bl StartSpriteAnim
-	ldrh r1, [r4, 0x4]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x5
-	bl StartSpriteAnim
-	ldrb r1, [r4, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x6
-	bl StartSpriteAnim
-	ldrh r1, [r4, 0x6]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x7
-	bl StartSpriteAnim
-	ldrb r1, [r4, 0x6]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x8
-	bl StartSpriteAnim
-	mov r0, r8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81D6B7C
-
-	thumb_func_start sub_81D6D20
-sub_81D6D20: @ 81D6D20
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	adds r3, r4, 0
-	adds r3, 0x2E
-	ldrh r0, [r3, 0xA]
-	adds r0, 0x1
-	movs r1, 0x1F
-	ands r0, r1
-	strh r0, [r3, 0xA]
-	ldr r7, =gSprites
-	cmp r0, 0
-	bne _081D6E0E
-	ldrh r1, [r4, 0x20]
-	movs r2, 0x20
-	ldrsh r0, [r4, r2]
-	cmp r0, 0x98
-	beq _081D6E0E
-	adds r0, r1, 0x1
-	strh r0, [r4, 0x20]
-	ldrh r1, [r4, 0x2E]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r0, [r4, 0x2E]
-	movs r2, 0xFF
-	adds r1, r2, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r1, [r3, 0x2]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r0, [r3, 0x2]
-	adds r1, r2, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r1, [r3, 0x4]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r0, [r3, 0x4]
-	adds r1, r2, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r1, [r3, 0x6]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r0, [r3, 0x6]
-	adds r1, r2, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r1, [r3, 0x8]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-	ldrh r0, [r3, 0x8]
-	ands r2, r0
-	lsls r0, r2, 4
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r7
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x1
-	strh r1, [r0, 0x20]
-_081D6E0E:
-	adds r6, r7, 0
-	movs r5, 0xFF
-	ldrb r1, [r3, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	adds r0, 0x2B
-	ldrb r2, [r0]
-	cmp r2, 0x1
-	beq _081D6EE0
-	cmp r2, 0x1
-	bgt _081D6E34
-	cmp r2, 0
-	beq _081D6E40
-	b _081D6FC8
-	.pool
-_081D6E34:
-	cmp r2, 0x2
-	bne _081D6E3A
-	b _081D6F68
-_081D6E3A:
-	cmp r2, 0x3
-	beq _081D6EE0
-	b _081D6FC8
-_081D6E40:
-	strh r2, [r4, 0x26]
-	ldrh r1, [r3]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r0, [r3]
-	adds r1, r5, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x2]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r0, [r3, 0x2]
-	adds r1, r5, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x4]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r0, [r3, 0x4]
-	adds r1, r5, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x6]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r0, [r3, 0x6]
-	adds r1, r5, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x8]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x8]
-	ands r1, r5
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	b _081D6FC6
-_081D6EE0:
-	movs r2, 0x1
-	strh r2, [r4, 0x26]
-	ldrh r1, [r3]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrb r1, [r3]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x2]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrb r1, [r3, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x4]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrb r1, [r3, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x6]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrb r1, [r3, 0x6]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x8]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrb r1, [r3, 0x8]
-	b _081D6FBE
-_081D6F68:
-	strh r2, [r4, 0x26]
-	ldrh r1, [r3]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r0, [r3]
-	adds r1, r5, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x2]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r0, [r3, 0x2]
-	adds r1, r5, 0
-	ands r1, r0
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x4]
-	lsls r1, 16
-	asrs r1, 24
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x26]
-	ldrh r1, [r3, 0x8]
-	ands r1, r5
-_081D6FBE:
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-_081D6FC6:
-	strh r2, [r0, 0x26]
-_081D6FC8:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81D6D20
-
-	thumb_func_start sub_81D6FD0
-sub_81D6FD0: @ 81D6FD0
-	push {lr}
-	bl sub_81D67EC
-	bl ScanlineEffect_InitHBlankDmaTransfer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81D6FD0
-
-	thumb_func_start sub_81D6FE0
-sub_81D6FE0: @ 81D6FE0
-	push {r4,lr}
-	bl ResetVramOamAndBgCntRegs
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, =gUnknown_0862A888
-	movs r0, 0
-	movs r2, 0x3
-	bl InitBgsFromTemplates
-	ldr r4, =gUnknown_0203CF60
-	ldr r1, [r4]
-	adds r1, 0x4
-	movs r0, 0
-	bl SetBgTilemapBuffer
-	ldr r1, [r4]
-	ldr r0, =0x00000804
-	adds r1, r0
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	ldr r1, [r4]
-	ldr r0, =0x00001004
-	adds r1, r0
-	movs r0, 0x2
-	bl SetBgTilemapBuffer
-	bl ResetAllBgsCoordinates
-	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
-	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
-	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
-	movs r1, 0x82
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	movs r0, 0
-	bl ShowBg
-	movs r0, 0x1
-	bl ShowBg
-	movs r0, 0x2
-	bl ShowBg
-	movs r0, 0x50
-	movs r1, 0
-	bl SetGpuReg
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D6FE0
-
-	thumb_func_start sub_81D706C
-sub_81D706C: @ 81D706C
-	push {r4,lr}
-	sub sp, 0x4
-	bl reset_temp_tile_data_buffers
-	ldr r1, =gRaySceneClouds_Gfx
-	movs r0, 0
-	str r0, [sp]
-	movs r2, 0
-	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
-_081D7082:
-	bl free_temp_tile_data_buffers_if_possible
-	lsls r0, 24
-	cmp r0, 0
-	bne _081D7082
-	ldr r0, =gRaySceneClouds2_Tilemap
-	ldr r4, =gUnknown_0203CF60
-	ldr r1, [r4]
-	adds r1, 0x4
-	bl LZDecompressWram
-	ldr r0, =gRaySceneClouds1_Tilemap
-	ldr r1, [r4]
-	ldr r2, =0x00000804
-	adds r1, r2
-	bl LZDecompressWram
-	ldr r0, =gRaySceneClouds3_Tilemap
-	ldr r1, [r4]
-	ldr r2, =0x00001004
-	adds r1, r2
-	bl LZDecompressWram
-	ldr r0, =gRaySceneClouds_Pal
-	movs r1, 0
-	movs r2, 0x40
-	bl LoadCompressedPalette
-	ldr r0, =gUnknown_0862A8C4
-	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_0862A8F8
-	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_0862A924
-	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_0862A9D4
-	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_0862AA14
-	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_0862AA34
-	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_0862A8CC
-	bl LoadCompressedObjectPalette
-	ldr r0, =gUnknown_0862A9DC
-	bl LoadCompressedObjectPalette
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D706C
-
-	thumb_func_start sub_81D7134
-sub_81D7134: @ 81D7134
-	push {r4-r7,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r6, r1, 3
-	ldr r7, =gTasks + 0x8
-	adds r5, r6, r7
-	bl ScanlineEffect_Clear
-	bl sub_81D6FE0
-	bl sub_81D706C
-	movs r4, 0
-	str r4, [sp, 0x4]
-	ldr r1, =gScanlineEffectRegBuffers
-	ldr r2, =0x010003c0
-	add r0, sp, 0x4
-	bl CpuFastSet
-	ldr r2, =gUnknown_0862A87C
-	ldr r0, [r2]
-	ldr r1, [r2, 0x4]
-	ldr r2, [r2, 0x8]
-	bl ScanlineEffect_SetParams
-	strh r4, [r5]
-	ldr r0, =sub_81D7228
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x2]
-	ldr r0, =gUnknown_0203CF60
-	ldr r0, [r0]
-	ldr r1, =0x00002006
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _081D71CC
-	bl sub_81D6984
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x4]
-	bl sub_81D6B7C
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x6]
-	adds r0, r7, 0
-	subs r0, 0x8
-	adds r0, r6, r0
-	ldr r1, =sub_81D691C
-	str r1, [r0]
-	b _081D71EE
-	.pool
-_081D71CC:
-	bl sub_81D7664
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x4]
-	bl sub_81D78BC
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x6]
-	adds r0, r7, 0
-	subs r0, 0x8
-	adds r0, r6, r0
-	ldr r1, =sub_81D736C
-	str r1, [r0]
-	bl StopMapMusic
-_081D71EE:
-	movs r4, 0x1
-	negs r4, r4
-	adds r0, r4, 0
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	movs r0, 0
-	str r0, [sp]
-	adds r0, r4, 0
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, =sub_81D6FD0
-	bl SetVBlankCallback
-	movs r0, 0x53
-	bl PlaySE
-	add sp, 0x8
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81D7134
+	
 
 	thumb_func_start sub_81D7228
 sub_81D7228: @ 81D7228
@@ -1277,7 +18,7 @@ sub_81D7228: @ 81D7228
 	ldr r0, =gTasks + 0x8
 	adds r3, r1, r0
 	movs r1, 0x18
-	ldr r7, =gUnknown_0203CF60
+	ldr r7, =sRayScene
 	ldr r4, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
@@ -1781,7 +522,7 @@ sub_81D7600: @ 81D7600
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, =sub_81D6840
+	ldr r1, =Task_SetNextAnim
 	str r1, [r0]
 _081D7652:
 	pop {r4-r7}
@@ -2765,7 +1506,7 @@ sub_81D7E10: @ 81D7E10
 	movs r0, 0x1
 	movs r2, 0x3
 	bl InitBgsFromTemplates
-	ldr r4, =gUnknown_0203CF60
+	ldr r4, =sRayScene
 	ldr r1, [r4]
 	adds r1, 0x4
 	movs r0, 0
@@ -2836,7 +1577,7 @@ _081D7ED0:
 	cmp r0, 0
 	bne _081D7ED0
 	ldr r0, =gRaySceneClouds2_Tilemap
-	ldr r4, =gUnknown_0203CF60
+	ldr r4, =sRayScene
 	ldr r1, [r4]
 	adds r1, 0x4
 	bl LZDecompressWram
@@ -3146,7 +1887,7 @@ sub_81D8164: @ 81D8164
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, =sub_81D6840
+	ldr r0, =Task_SetNextAnim
 	str r0, [r1]
 _081D8192:
 	pop {r4}
@@ -3299,7 +2040,7 @@ sub_81D82B0: @ 81D82B0
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
-	ldr r4, =gUnknown_0203CF60
+	ldr r4, =sRayScene
 	ldr r1, [r4]
 	adds r1, 0x4
 	movs r0, 0
@@ -3375,7 +2116,7 @@ _081D8380:
 	cmp r6, 0
 	bne _081D8380
 	ldr r0, =gRaySceneRayquazaLight_Tilemap
-	ldr r5, =gUnknown_0203CF60
+	ldr r5, =sRayScene
 	ldr r1, [r5]
 	adds r1, 0x4
 	bl LZDecompressWram
@@ -3441,7 +2182,7 @@ sub_81D844C: @ 81D844C
 	lsrs r0, 16
 	cmp r0, 0x6F
 	bhi _081D848C
-	ldr r0, =gUnknown_0203CF60
+	ldr r0, =sRayScene
 	ldr r0, [r0]
 	ldr r3, =0x00002008
 	adds r0, r3
@@ -3462,7 +2203,7 @@ _081D8492:
 	strh r0, [r1]
 	cmp r2, 0
 	bne _081D84E0
-	ldr r0, =gUnknown_0203CF60
+	ldr r0, =sRayScene
 	ldr r1, [r0]
 	ldr r2, =0x00002008
 	adds r3, r1, r2
@@ -3531,7 +2272,7 @@ sub_81D84EC: @ 81D84EC
 	bl BlendPalettes
 	ldr r0, =sub_81D67EC
 	bl SetVBlankCallback
-	ldr r0, =gUnknown_0203CF60
+	ldr r0, =sRayScene
 	ldr r0, [r0]
 	ldr r1, =0x00002008
 	adds r2, r0, r1
@@ -3708,7 +2449,7 @@ sub_81D8684: @ 81D8684
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, =sub_81D6840
+	ldr r0, =Task_SetNextAnim
 	str r0, [r1]
 _081D86B8:
 	pop {r4}
@@ -3906,7 +2647,7 @@ sub_81D8828: @ 81D8828
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
-	ldr r4, =gUnknown_0203CF60
+	ldr r4, =sRayScene
 	ldr r1, [r4]
 	adds r1, 0x4
 	movs r0, 0
@@ -3986,7 +2727,7 @@ _081D8904:
 	cmp r0, 0
 	bne _081D8904
 	ldr r0, =gRayChaseRayquazaChase2_Tilemap
-	ldr r4, =gUnknown_0203CF60
+	ldr r4, =sRayScene
 	ldr r1, [r4]
 	adds r1, 0x4
 	bl LZDecompressWram
@@ -4342,7 +3083,7 @@ sub_81D8BEC: @ 81D8BEC
 	adds r0, r6, 0
 	subs r0, 0x8
 	adds r0, r5, r0
-	ldr r1, =sub_81D6840
+	ldr r1, =Task_SetNextAnim
 	str r1, [r0]
 _081D8C26:
 	pop {r4-r6}
@@ -4361,7 +3102,7 @@ sub_81D8C38: @ 81D8C38
 	movs r0, 0x1
 	movs r2, 0x3
 	bl InitBgsFromTemplates
-	ldr r4, =gUnknown_0203CF60
+	ldr r4, =sRayScene
 	ldr r1, [r4]
 	adds r1, 0x4
 	movs r0, 0
@@ -4426,7 +3167,7 @@ _081D8CEA:
 	cmp r0, 0
 	bne _081D8CEA
 	ldr r0, =gRaySceneHushRing_Tilemap
-	ldr r4, =gUnknown_0203CF60
+	ldr r4, =sRayScene
 	ldr r1, [r4]
 	ldr r2, =0x00000804
 	adds r1, r2
@@ -4815,7 +3556,7 @@ _081D9078:
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, =sub_81D6840
+	ldr r1, =Task_SetNextAnim
 	str r1, [r0]
 	b _081D90A0
 	.pool

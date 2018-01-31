@@ -1,15 +1,19 @@
 #include "global.h"
+#include "rayquaza_scene.h"
 #include "sprite.h"
 #include "task.h"
 #include "graphics.h"
 #include "bg.h"
-
-struct UnkRayquazaStruct
-{
-    u32 field_0;
-    u32 field_4;
-    u32 field_8;
-};
+#include "main.h"
+#include "malloc.h"
+#include "palette.h"
+#include "scanline_effect.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "gpu_regs.h"
+#include "decompress.h"
+#include "sound.h"
+#include "constants/songs.h"
 
 // this file's functions
 void sub_81D7134(u8 taskId);
@@ -17,21 +21,21 @@ void sub_81D7F4C(u8 taskId);
 void sub_81D84EC(u8 taskId);
 void sub_81D8980(u8 taskId);
 void sub_81D8DB4(u8 taskId);
-void sub_81D6800(u8 taskId);
+void Task_EndAfterFadeScreen(u8 taskId);
 
 void sub_81D8260(struct Sprite *sprite);
 void sub_81D961C(struct Sprite *sprite);
 
 // const rom data
-const TaskFunc gUnknown_0862A6A0[] =
+const TaskFunc sTasksForAnimations[] =
 {
-    sub_81D7134,
-    sub_81D7134,
-    sub_81D7F4C,
-    sub_81D84EC,
-    sub_81D8980,
-    sub_81D8DB4,
-    sub_81D6800
+    sub_81D7134, // RAY_ANIM_DUO_FIGHT_PRE
+    sub_81D7134, // RAY_ANIM_DUO_FIGHT
+    sub_81D7F4C, // RAY_ANIM_TAKES_FLIGHT
+    sub_81D84EC, // RAY_ANIM_DESCENDS
+    sub_81D8980, // RAY_ANIM_CHARGES
+    sub_81D8DB4, // RAY_ANIM_CHACES_AWAY
+    Task_EndAfterFadeScreen // RAY_ANIM_END
 };
 
 static const struct OamData sOamData_862A6BC =
@@ -372,7 +376,12 @@ const struct SpriteTemplate gUnknown_0862A864 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct UnkRayquazaStruct gUnknown_0862A87C = {0x4000014, 0xA2600001, 1};
+const struct ScanlineEffectParams gUnknown_0862A87C =
+{
+    .dmaDest = (vu16 *)REG_ADDR_BG1HOFS,
+    .dmaControl = 0xA2600001,
+    .initState = 1
+};
 
 const struct BgTemplate gUnknown_0862A888[] =
 {
@@ -1162,3 +1171,366 @@ const struct BgTemplate gUnknown_0862AD08[] =
     }
 };
 
+struct RaySceneStruct
+{
+    MainCallback callback;
+    u8 tilemapBuffers[3][0x800];
+    u8 field_1804[0x800];
+    u16 field_2004;
+    u8 animId;
+    bool8 onlyOneAnim;
+};
+
+extern struct RaySceneStruct *sRayScene;
+
+// this file's functions
+void sub_81D6774(void);
+void sub_81D67D0(void);
+void sub_81D750C(void);
+void sub_81D7438(void);
+void sub_81D7480(void);
+void sub_81D74C8(void);
+void sub_81D75B4(u8 taskId, s8 palDelay);
+void sub_81D6A20(struct Sprite *sprite);
+void sub_81D6D20(struct Sprite *sprite);
+void sub_81D7228(u8 taskId);
+void sub_81D736C(u8 taskId);
+u8 sub_81D7664(void);
+u8 sub_81D78BC(void);
+
+// code
+void sub_81D6720(u8 animId, bool8 onlyOneAnim, MainCallback callback)
+{
+    sRayScene = AllocZeroed(0x2018);
+    sRayScene->animId = animId;
+    sRayScene->callback = callback;
+    sRayScene->onlyOneAnim = onlyOneAnim;
+    SetMainCallback2(sub_81D6774);
+}
+
+void sub_81D6774(void)
+{
+    SetVBlankHBlankCallbacksToNull();
+    clear_scheduled_bg_copies_to_vram();
+    ScanlineEffect_Stop();
+    FreeAllSpritePalettes();
+    ResetPaletteFade();
+    ResetSpriteData();
+    ResetTasks();
+    FillPalette(0, 0xF0, 0x20);
+    CreateTask(sTasksForAnimations[sRayScene->animId], 0);
+    SetMainCallback2(sub_81D67D0);
+}
+
+void sub_81D67D0(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    do_scheduled_bg_tilemap_copies_to_vram();
+    UpdatePaletteFade();
+}
+
+void sub_81D67EC(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void Task_EndAfterFadeScreen(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        SetMainCallback2(sRayScene->callback);
+        Free(sRayScene);
+        DestroyTask(taskId);
+    }
+}
+
+void Task_SetNextAnim(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (sRayScene->onlyOneAnim == TRUE)
+        {
+            gTasks[taskId].func = Task_EndAfterFadeScreen;
+        }
+        else
+        {
+            sRayScene->animId++;
+            sRayScene->field_2004 = 0;
+            gTasks[taskId].func = sTasksForAnimations[sRayScene->animId];
+        }
+    }
+}
+
+void sub_81D68C8(void)
+{
+    SetGpuReg(REG_OFFSET_WININ, 0x3F);
+    SetGpuReg(REG_OFFSET_WINOUT, 0);
+    SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
+    SetGpuReg(REG_OFFSET_WIN0V, 0x1888);
+    gPlttBufferUnfaded[0] = 0;
+    gPlttBufferFaded[0] = 0;
+}
+
+void sub_81D6904(void)
+{
+    SetGpuReg(REG_OFFSET_WININ, 0x3F);
+    SetGpuReg(REG_OFFSET_WINOUT, 0x3F);
+}
+
+void sub_81D691C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_81D750C();
+    if (!gPaletteFade.active)
+    {
+        s16 counter = data[0];
+        if (counter == 64)
+        {
+            sub_81D7438();
+        }
+        else if (counter == 144)
+        {
+            sub_81D7480();
+        }
+        else
+        {
+            switch (counter)
+            {
+            case 328:
+                sub_81D75B4(taskId, 0);
+                return;
+            case 148:
+                sub_81D74C8();
+                break;
+            }
+        }
+
+        data[0]++;
+    }
+}
+
+u8 sub_81D6984(void)
+{
+    u8 spriteId;
+    s16 *data;
+
+    spriteId = CreateSprite(&gUnknown_0862A72C, 88, 72, 3);
+    gSprites[spriteId].callback = sub_81D6A20;
+    data = gSprites[spriteId].data;
+    data[0] = CreateSprite(&gUnknown_0862A72C, 56, 104, 3);
+    data[1] = CreateSprite(&gUnknown_0862A750, 75, 101, 0);
+    data[2] = CreateSprite(&gUnknown_0862A774, 109, 114, 1);
+    StartSpriteAnim(&gSprites[data[0]], 1);
+    return spriteId;
+}
+
+void sub_81D6A20(struct Sprite *sprite)
+{
+    s16 *data = sprite->data;
+    data[5]++;
+    data[5] &= 0x1F;
+    if (data[5] == 0 && sprite->pos1.x != 72)
+    {
+        sprite->pos1.x--;
+        gSprites[sprite->data[0]].pos1.x--;
+        gSprites[data[1]].pos1.x--;
+        gSprites[data[2]].pos1.x--;
+    }
+
+    switch (sprite->animCmdIndex)
+    {
+    case 0:
+        gSprites[data[1]].pos2.x = 0;
+        gSprites[data[1]].pos2.y = 0;
+        gSprites[data[2]].pos2.x = 0;
+        gSprites[data[2]].pos2.y = 0;
+        break;
+    case 1:
+    case 3:
+        gSprites[data[1]].pos2.x = -1;
+        gSprites[data[1]].pos2.y = 0;
+        gSprites[data[2]].pos2.x = -1;
+        gSprites[data[2]].pos2.y = 0;
+        break;
+    case 2:
+        gSprites[data[1]].pos2.x = -1;
+        gSprites[data[1]].pos2.y = 1;
+        gSprites[data[2]].pos2.x = -2;
+        gSprites[data[2]].pos2.y = 1;
+        break;
+    }
+}
+
+u8 sub_81D6B7C(void)
+{
+    u8 spriteId;
+    s16 *data;
+
+    spriteId = CreateSprite(&gUnknown_0862A81C, 136, 96, 1);
+    gSprites[spriteId].callback = sub_81D6D20;
+    data = gSprites[spriteId].data;
+
+    data[0] = CreateSprite(&gUnknown_0862A81C, 168, 96, 1) << 8;
+    data[0] |= CreateSprite(&gUnknown_0862A81C, 136, 112, 1);
+    data[1] = CreateSprite(&gUnknown_0862A81C, 168, 112, 1) << 8;
+    data[1] |= CreateSprite(&gUnknown_0862A81C, 136, 128, 1);
+    data[2] = CreateSprite(&gUnknown_0862A81C, 168, 128, 1) << 8;
+    data[2] |= CreateSprite(&gUnknown_0862A81C, 104, 128, 2);
+    data[3] = CreateSprite(&gUnknown_0862A81C, 136, 128, 2) << 8;
+    data[3] |= CreateSprite(&gUnknown_0862A81C, 184, 128, 0);
+    data[4] = CreateSprite(&gUnknown_0862A84C, 208, 132, 0) << 8;
+    data[4] |= CreateSprite(&gUnknown_0862A864, 200, 120, 1);
+
+    StartSpriteAnim(&gSprites[data[0] >> 8], 1);
+    StartSpriteAnim(&gSprites[data[0] & 0xFF], 2);
+    StartSpriteAnim(&gSprites[data[1] >> 8], 3);
+    StartSpriteAnim(&gSprites[data[1] & 0xFF], 4);
+    StartSpriteAnim(&gSprites[data[2] >> 8], 5);
+    StartSpriteAnim(&gSprites[data[2] & 0xFF], 6);
+    StartSpriteAnim(&gSprites[data[3] >> 8], 7);
+    StartSpriteAnim(&gSprites[data[3] & 0xFF], 8);
+
+    return spriteId;
+}
+
+void sub_81D6D20(struct Sprite *sprite)
+{
+    s16 *data = sprite->data;
+    data[5]++;
+    data[5] &= 0x1F;
+    if (data[5] == 0 && sprite->pos1.x != 152)
+    {
+        sprite->pos1.x++;
+        gSprites[sprite->data[0] >> 8].pos1.x++;
+        gSprites[sprite->data[0] & 0xFF].pos1.x++;
+        gSprites[data[1] >> 8].pos1.x++;
+        gSprites[data[1] & 0xFF].pos1.x++;
+        gSprites[data[2] >> 8].pos1.x++;
+        gSprites[data[2] & 0xFF].pos1.x++;
+        gSprites[data[3] >> 8].pos1.x++;
+        gSprites[data[3] & 0xFF].pos1.x++;
+        gSprites[data[4] >> 8].pos1.x++;
+        gSprites[data[4] & 0xFF].pos1.x++;
+    }
+
+    switch (gSprites[data[2] & 0xFF].animCmdIndex)
+    {
+    case 0:
+        sprite->pos2.y = 0;
+        gSprites[data[0] >> 8].pos2.y = 0;
+        gSprites[data[0] & 0xFF].pos2.y = 0;
+        gSprites[data[1] >> 8].pos2.y = 0;
+        gSprites[data[1] & 0xFF].pos2.y = 0;
+        gSprites[data[2] >> 8].pos2.y = 0;
+        gSprites[data[2] & 0xFF].pos2.y = 0;
+        gSprites[data[3] >> 8].pos2.y = 0;
+        gSprites[data[3] & 0xFF].pos2.y = 0;
+        gSprites[data[4] >> 8].pos2.y = 0;
+        gSprites[data[4] & 0xFF].pos2.y = 0;
+        break;
+    case 1:
+    case 3:
+        sprite->pos2.y = 1;
+        gSprites[data[0] >> 8].pos2.y = 1;
+        gSprites[data[0] & 0xFF].pos2.y = 1;
+        gSprites[data[1] >> 8].pos2.y = 1;
+        gSprites[data[1] & 0xFF].pos2.y = 1;
+        gSprites[data[2] >> 8].pos2.y = 1;
+        gSprites[data[2] & 0xFF].pos2.y = 1;
+        gSprites[data[3] >> 8].pos2.y = 1;
+        gSprites[data[3] & 0xFF].pos2.y = 1;
+        gSprites[data[4] >> 8].pos2.y = 1;
+        gSprites[data[4] & 0xFF].pos2.y = 1;
+        break;
+    case 2:
+        sprite->pos2.y = 2;
+        gSprites[data[0] >> 8].pos2.y = 2;
+        gSprites[data[0] & 0xFF].pos2.y = 2;
+        gSprites[data[1] >> 8].pos2.y = 2;
+        gSprites[data[1] & 0xFF].pos2.y = 2;
+        gSprites[data[2] >> 8].pos2.y = 2;
+        gSprites[data[4] & 0xFF].pos2.y = 2;
+        break;
+    }
+}
+
+void sub_81D6FD0(void)
+{
+    sub_81D67EC();
+    ScanlineEffect_InitHBlankDmaTransfer();
+}
+
+void sub_81D6FE0(void)
+{
+    ResetVramOamAndBgCntRegs();
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, gUnknown_0862A888, 3);
+    SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
+    SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
+    SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
+    ResetAllBgsCoordinates();
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+}
+
+void sub_81D706C(void)
+{
+    reset_temp_tile_data_buffers();
+    decompress_and_copy_tile_data_to_vram(0, gRaySceneClouds_Gfx, 0, 0, 0);
+    while (free_temp_tile_data_buffers_if_possible());
+
+    LZDecompressWram(gRaySceneClouds2_Tilemap, sRayScene->tilemapBuffers[0]);
+    LZDecompressWram(gRaySceneClouds1_Tilemap, sRayScene->tilemapBuffers[1]);
+    LZDecompressWram(gRaySceneClouds3_Tilemap, sRayScene->tilemapBuffers[2]);
+    LoadCompressedPalette(gRaySceneClouds_Pal, 0, 0x40);
+    LoadCompressedObjectPic(&gUnknown_0862A8C4);
+    LoadCompressedObjectPic(&gUnknown_0862A8F8);
+    LoadCompressedObjectPic(&gUnknown_0862A924);
+    LoadCompressedObjectPic(&gUnknown_0862A9D4);
+    LoadCompressedObjectPic(&gUnknown_0862AA14);
+    LoadCompressedObjectPic(&gUnknown_0862AA34);
+    LoadCompressedObjectPalette(&gUnknown_0862A8CC);
+    LoadCompressedObjectPalette(&gUnknown_0862A9DC);
+}
+
+void sub_81D7134(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    ScanlineEffect_Clear();
+    sub_81D6FE0();
+    sub_81D706C();
+    CpuFastFill16(0, gScanlineEffectRegBuffers, sizeof(gScanlineEffectRegBuffers));
+    ScanlineEffect_SetParams(gUnknown_0862A87C);
+    data[0] = 0;
+    data[1] = CreateTask(sub_81D7228, 0);
+    if (sRayScene->animId == RAY_ANIM_DUO_FIGHT_PRE)
+    {
+        data[2] = sub_81D6984();
+        data[3] = sub_81D6B7C();
+        gTasks[taskId].func = sub_81D691C;
+    }
+    else
+    {
+        data[2] = sub_81D7664();
+        data[3] = sub_81D78BC();
+        gTasks[taskId].func = sub_81D736C;
+        StopMapMusic();
+    }
+
+    BlendPalettes(-1, 0x10, 0);
+    BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+    SetVBlankCallback(sub_81D6FD0);
+    PlaySE(SE_T_OOAME);
+}

@@ -1527,4 +1527,4 @@ gUnknown_0203CF58: @ 203CF58
 gUnknown_0203CF5C: @ 203CF5C
 	.space 0x4
 
-gUnknown_0203CF60: @ 203CF60
+sRayScene: @ 203CF60

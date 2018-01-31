@@ -2678,5 +2678,10 @@ extern const u8 gRaySceneGroudonLeft_Pal[];
 extern const u8 gRaySceneKyogreRight_Pal[];
 extern const u8 gRaySceneRayquazaHover_Pal[];
 extern const u8 gRaySceneSplash_Pal[];
+extern const u8 gRaySceneClouds_Gfx[];
+extern const u8 gRaySceneClouds_Pal[];
+extern const u8 gRaySceneClouds2_Tilemap[];
+extern const u8 gRaySceneClouds1_Tilemap[];
+extern const u8 gRaySceneClouds3_Tilemap[];
 
 #endif //GUARD_GRAPHICS_H
