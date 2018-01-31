@@ -27,7 +27,8 @@ extern bool8 gSoftResetDisabled;
  * Sectors 0 - 13:      Save Slot 1
  * Sectors 14 - 27:     Save Slot 2
  * Sectors 28 - 29:     Hall of Fame
- * Sectors 30 - 31:     e-Reader battle tower data, maybe? (note: deprecated in Emerald US)
+ * Sector 30:           e-Reader/Mystery Gift Stuff (note: e-Reader is deprecated in Emerald US)
+ * Sector 31:           Recorded Battle
  * 
  * There are two save slots for saving the player's game data. We alternate between
  * them each time the game is saved, so that if the current save slot is corrupt,
