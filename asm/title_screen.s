@@ -464,7 +464,7 @@ _080AA766:
 @ void title_screen_vblank_callback()
 title_screen_vblank_callback: @ 80AA780
 	push {lr}
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
@@ -779,7 +779,7 @@ _080AAAF0:
 	movs r1, 0xA0
 	movs r2, 0x4
 	movs r3, 0x4
-	bl sub_80BA384
+	bl ScanlineEffect_InitWave
 	ldr r0, =c2_title_screen_2
 	bl SetMainCallback2
 _080AAB1E:

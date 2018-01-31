@@ -563,7 +563,7 @@ _080D7B4E:
 	bl sub_80D779C
 	bl sub_80D77E4
 	bl sub_80D7678
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl ResetPaletteFade
 	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
@@ -1367,7 +1367,7 @@ vblank_cb_battle: @ 80D827C
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.pool

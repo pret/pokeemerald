@@ -70,6 +70,8 @@ void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpNum);
 void c2_load_new_map(void);
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 void mapldr_default(void);
+u8 get_map_light_from_warp0(void);
+bool8 is_light_level_1_2_3_5_or_6(u8 a1);
 
 void IncrementGameStat(u8);
 u32 GetGameStat(u8);

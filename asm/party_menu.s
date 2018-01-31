@@ -17171,7 +17171,7 @@ sub_81B9404: @ 81B9404
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81B9424
 	movs r1, 0xA
 	bl CreateTask
@@ -17247,7 +17247,7 @@ sub_81B94B0: @ 81B94B0
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81B94D0
 	movs r1, 0xA
 	bl CreateTask
@@ -17297,7 +17297,7 @@ sub_81B951C: @ 81B951C
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81B953C
 	movs r1, 0xA
 	bl CreateTask
@@ -17418,7 +17418,7 @@ sub_81B9620: @ 81B9620
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81B9640
 	movs r1, 0xA
 	bl CreateTask

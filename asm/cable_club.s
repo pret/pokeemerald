@@ -1808,7 +1808,7 @@ _080B32E0:
 _080B32F8:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r1, =gLinkType
 	ldr r2, =0x00002211
 	adds r0, r2, 0
@@ -1921,7 +1921,7 @@ _080B33E8:
 _080B3408:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =gLinkType
 	ldr r2, =0x00002211
 	adds r1, r2, 0
@@ -2399,7 +2399,7 @@ _080B382E:
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	bl sub_8009FAC
 	b _080B3864
 _080B3840:
@@ -2470,7 +2470,7 @@ _080B38C6:
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	bl Rfu_set_zero
 	b _080B38FC
 _080B38D8:
