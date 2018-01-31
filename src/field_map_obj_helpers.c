@@ -7,9 +7,6 @@
 #include "task.h"
 #include "util.h"
 
-extern void sub_8097D68(struct Sprite *sprite);
-extern void sub_8097FE4(u8);
-
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 
 extern const struct Coords16 gUnknown_0850DB7C[4];
@@ -22,6 +19,9 @@ extern s16 gUnknown_0850E840[];
 extern u8 gUnknown_0850E846[];
 extern s16 gUnknown_0850E84A[];
 extern u8 gUnknown_0850E850[];
+
+void sub_8097D68(struct Sprite *sprite);
+void sub_8097FE4(u8);
 
 bool8 FreezeMapObject(struct MapObject *mapObject)
 {
