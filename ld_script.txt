@@ -98,7 +98,7 @@ SECTIONS {
         src/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
         src/field_map_obj_helpers.o(.text);
-        asm/field_message_box.o(.text);
+        src/field_message_box.o(.text);
         asm/map_obj_lock.o(.text);
         src/text_window.o(.text);
         src/script.o(.text);
