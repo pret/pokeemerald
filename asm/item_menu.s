@@ -5,35 +5,6 @@
 
 	.text
 
-	thumb_func_start set_callback3_to_bag
-set_callback3_to_bag: @ 81ABECC
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl bag_menu_add_pocket_scroll_arrow_indicators_maybe
-	bl bag_menu_add_list_scroll_arrow_indicators_maybe
-	movs r0, 0x3
-	bl ClearWindowTilemap
-	movs r0, 0x4
-	bl ClearWindowTilemap
-	movs r0, 0x1
-	bl PutWindowTilemap
-	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, =Task_BagMenu
-	str r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end set_callback3_to_bag
-
 	thumb_func_start GetSwitchBagPocketDirection
 GetSwitchBagPocketDirection: @ 81ABF10
 	push {lr}
