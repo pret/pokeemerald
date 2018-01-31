@@ -16,13 +16,13 @@
 #include "new_menu_helpers.h"
 #include "palette.h"
 #include "rom_818CFC8.h"
+#include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string.h"
 #include "string_util.h"
 #include "task.h"
 #include "menu_helpers.h"
-#include "unknown_task.h"
 #include "window.h"
 
 struct bagStruct {
