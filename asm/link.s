@@ -15,7 +15,7 @@ sub_80093CC: @ 80093CC
 	cmp r0, r1
 	beq _080093F4
 	bl sub_800B4A4
-	bl sub_80097E8
+	bl CloseLink
 	bl RestoreSerialTimer3IntrHandlers
 	movs r0, 0
 	b _080093FE
@@ -29,15 +29,15 @@ _080093FE:
 	bx r1
 	thumb_func_end sub_80093CC
 
-	thumb_func_start sub_8009404
-sub_8009404: @ 8009404
+	thumb_func_start Task_DestroySelf
+Task_DestroySelf: @ 8009404
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8009404
+	thumb_func_end Task_DestroySelf
 
 	thumb_func_start sub_8009414
 sub_8009414: @ 8009414
@@ -210,7 +210,7 @@ sub_8009570: @ 8009570
 	ldr r2, =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_8009734
+	bl OpenLink
 	ldr r0, =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
@@ -236,7 +236,7 @@ _080095A0:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, =sub_8009404
+	ldr r0, =Task_DestroySelf
 	movs r1, 0
 	bl CreateTask
 	bl RunTasks
@@ -384,8 +384,8 @@ _08009726:
 	.pool
 	thumb_func_end task02_080097CC
 
-	thumb_func_start sub_8009734
-sub_8009734: @ 8009734
+	thumb_func_start OpenLink
+OpenLink: @ 8009734
 	push {r4-r6,lr}
 	ldr r0, =gLinkVSyncDisabled
 	ldrb r4, [r0]
@@ -443,10 +443,10 @@ _080097BE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8009734
+	thumb_func_end OpenLink
 
-	thumb_func_start sub_80097E8
-sub_80097E8: @ 80097E8
+	thumb_func_start CloseLink
+CloseLink: @ 80097E8
 	push {r4,lr}
 	ldr r0, =gReceivedRemoteLinkPlayers
 	movs r4, 0
@@ -464,7 +464,7 @@ _080097FC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80097E8
+	thumb_func_end CloseLink
 
 	thumb_func_start sub_8009818
 sub_8009818: @ 8009818
@@ -698,7 +698,7 @@ _080099FC:
 	bls _080099FC
 	ldrh r0, [r4]
 	strh r0, [r5]
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -717,7 +717,7 @@ _080099FC:
 _08009A34:
 	bl sub_800AEB4
 _08009A38:
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldrh r0, [r0]
 _08009A3C:
 	pop {r4,r5}
@@ -745,7 +745,7 @@ _08009A70:
 	adds r5, r0
 	adds r4, 0x1
 _08009A78:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1378,7 +1378,7 @@ GetLinkPlayerCount: @ 8009FCC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08009FEC
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	movs r1, 0x1C
 	ands r0, r1
@@ -1514,7 +1514,7 @@ sub_800A0AC: @ 800A0AC
 	str r1, [r0]
 	ldr r0, =gUnknown_020229C8
 	strh r1, [r0]
-	bl sub_8009734
+	bl OpenLink
 	pop {r0}
 	bx r0
 	.pool
@@ -1532,7 +1532,7 @@ sub_800A0C8: @ 800A0C8
 	beq _0800A0DA
 	b _0800A214
 _0800A0DA:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1552,7 +1552,7 @@ _0800A0FC:
 	bne _0800A10E
 	ldr r0, =gUnknown_0300306C
 	strb r4, [r0]
-	bl sub_80097E8
+	bl CloseLink
 _0800A10E:
 	movs r6, 0
 	ldr r4, =gLinkPlayers
@@ -2211,7 +2211,7 @@ _0800A616:
 	thumb_func_start sub_800A620
 sub_800A620: @ 800A620
 	push {lr}
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r1, [r0]
 	movs r0, 0x20
 	ands r0, r1
@@ -2499,7 +2499,7 @@ _0800A81C:
 	thumb_func_start sub_800A824
 sub_800A824: @ 800A824
 	push {lr}
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	movs r1, 0x20
 	ands r0, r1
@@ -2534,7 +2534,7 @@ task00_link_test: @ 800A850
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_800A6E8
-	ldr r4, =gUnknown_030030E0
+	ldr r4, =gLinkStatus
 	ldr r0, [r4]
 	movs r1, 0xF
 	movs r2, 0x1
@@ -2606,7 +2606,7 @@ task00_link_test: @ 800A850
 	movs r2, 0x6
 	movs r3, 0x1
 	bl sub_800A6E8
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x19
@@ -2807,7 +2807,7 @@ _0800AAB4:
 	ldrb r0, [r0]
 	cmp r3, r0
 	bne _0800AAE4
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r9
@@ -2887,7 +2887,7 @@ _0800AB5A:
 	ldr r1, =gUnknown_0300306C
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80097E8
+	bl CloseLink
 	ldr r0, =c2_800ACD4
 	bl SetMainCallback2
 _0800AB6A:
@@ -2918,25 +2918,25 @@ sub_800AB98: @ 800AB98
 	.pool
 	thumb_func_end sub_800AB98
 
-	thumb_func_start sub_800ABAC
-sub_800ABAC: @ 800ABAC
-	ldr r0, =gUnknown_030030E0
+	thumb_func_start GetLinkPlayerCount_2
+GetLinkPlayerCount_2: @ 800ABAC
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	movs r1, 0x1C
 	ands r0, r1
 	lsrs r0, 2
 	bx lr
 	.pool
-	thumb_func_end sub_800ABAC
+	thumb_func_end GetLinkPlayerCount_2
 
-	thumb_func_start sub_800ABBC
-sub_800ABBC: @ 800ABBC
+	thumb_func_start IsLinkMaster
+IsLinkMaster: @ 800ABBC
 	push {lr}
 	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800ABDC
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	lsrs r0, 5
 	movs r1, 0x1
@@ -2950,7 +2950,7 @@ _0800ABDC:
 _0800ABE4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800ABBC
+	thumb_func_end IsLinkMaster
 
 	thumb_func_start sub_800ABE8
 sub_800ABE8: @ 800ABE8
@@ -3074,7 +3074,7 @@ _0800ACD0:
 	ldr r0, =gUnknown_03002748
 	movs r4, 0x1
 	strb r4, [r0]
-	bl sub_80097E8
+	bl CloseLink
 	ldr r1, =gUnknown_03003140
 	movs r0, 0
 	str r0, [r1]
@@ -3178,7 +3178,7 @@ _0800ADB6:
 	ldr r0, =gUnknown_03002748
 	movs r4, 0x1
 	strb r4, [r0]
-	bl sub_80097E8
+	bl CloseLink
 	ldr r1, =gUnknown_03003140
 	movs r0, 0
 	str r0, [r1]
@@ -3290,7 +3290,7 @@ sub_800AEB4: @ 800AEB4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800AEF4
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r2, [r0]
 	movs r0, 0xFE
 	lsls r0, 11
@@ -3315,7 +3315,7 @@ _0800AEEA:
 	ldr r1, =gUnknown_0300306C
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80097E8
+	bl CloseLink
 _0800AEF4:
 	pop {r0}
 	bx r0
@@ -3426,7 +3426,7 @@ _0800AF8C:
 	ldr r1, =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =sub_8009404
+	ldr r0, =Task_DestroySelf
 	movs r1, 0
 	bl CreateTask
 	bl StopMapMusic
@@ -3740,16 +3740,16 @@ _0800B314:
 	.pool
 	thumb_func_end sub_800B2F8
 
-	thumb_func_start sub_800B320
-sub_800B320: @ 800B320
-	ldr r0, =gUnknown_030030E0
+	thumb_func_start IsLinkConnectionEstablished
+IsLinkConnectionEstablished: @ 800B320
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	lsrs r0, 6
 	movs r1, 0x1
 	ands r0, r1
 	bx lr
 	.pool
-	thumb_func_end sub_800B320
+	thumb_func_end IsLinkConnectionEstablished
 
 	thumb_func_start sub_800B330
 sub_800B330: @ 800B330
@@ -3864,7 +3864,7 @@ HandleLinkConnection: @ 800B40C
 	ldr r1, =gSendCmd
 	ldr r2, =gRecvCmds
 	bl sub_800B638
-	ldr r4, =gUnknown_030030E0
+	ldr r4, =gLinkStatus
 	str r0, [r4]
 	ldr r0, =gUnknown_030022EC
 	bl sub_80099E0
@@ -15025,7 +15025,7 @@ _08010E20:
 	ldrb r1, [r0]
 	movs r1, 0x2
 	strb r1, [r0]
-	bl sub_80097E8
+	bl CloseLink
 	b _08010E8E
 	.pool
 _08010E5C:
@@ -16613,7 +16613,7 @@ sub_8011AFC: @ 8011AFC
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	ldr r0, =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
@@ -18142,7 +18142,7 @@ _08012848:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	ldrb r1, [r4]
 	movs r0, 0xF
 	ands r0, r1
@@ -19650,7 +19650,7 @@ _08013590:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C5C
 	movs r0, 0x70
 	bl AllocZeroed
@@ -20398,7 +20398,7 @@ _08013CD0:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C5C
 	movs r0, 0x1
 	bl sub_80111B0
@@ -21897,7 +21897,7 @@ _08014AB0:
 	movs r1, 0
 	bl sub_8010FA0
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	movs r0, 0x2
 	bl sub_8011C10
 	movs r0, 0x1
@@ -22435,7 +22435,7 @@ _08014FA4:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C5C
 	movs r0, 0x70
 	bl AllocZeroed
@@ -22823,7 +22823,7 @@ _08015358:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C5C
 	movs r0, 0x70
 	bl AllocZeroed
@@ -23373,7 +23373,7 @@ _08015878:
 	ldrh r2, [r2, 0xC]
 	bl sub_8010FCC
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C84
 	ldr r0, [r6, 0x8]
 	movs r1, 0x1
@@ -25223,7 +25223,7 @@ _080169BE:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C84
 	movs r0, 0x1
 	bl sub_80111B0
@@ -31098,7 +31098,7 @@ _080198FE:
 	b _08019922
 	.pool
 _0801990C:
-	bl sub_80097E8
+	bl CloseLink
 	ldr r0, [r5, 0x10]
 	bl Free
 	adds r0, r4, 0

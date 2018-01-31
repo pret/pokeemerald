@@ -1270,9 +1270,7 @@ gUnknown_0203BCE8: @ 203BCE8
 gUnknown_0203BCF4: @ 203BCF4
 	.space 0x4
 
-gUnknown_0203BCF8: @ 203BCF8
-	.space 0x4
-
+    .include "src/mystery_event_menu.o"
     .include "src/save_failed_screen.o"
 
 gBraillePuzzleCallbackFlag: @ 203BD14

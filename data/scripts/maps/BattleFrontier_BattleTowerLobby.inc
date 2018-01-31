@@ -725,7 +725,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F0E3:: @ 823F0E3
 	special copy_player_party_from_sav1
 
 BattleFrontier_BattleTowerLobby_EventScript_23F0E6:: @ 823F0E6
-	special sub_80097E8
+	special CloseLink
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FD07, 4
 
 BattleFrontier_BattleTowerLobby_EventScript_23F0F1:: @ 823F0F1
@@ -951,7 +951,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F2C5:: @ 823F2C5
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F327:: @ 823F327
-	special sub_80097E8
+	special CloseLink
 	compare VAR_0x8005, 3
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F33F
 	msgbox BattleFrontier_BattleTowerLobby_Text_278255, 4
@@ -966,13 +966,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23F33F:: @ 823F33F
 
 BattleFrontier_BattleTowerLobby_EventScript_23F351:: @ 823F351
 	msgbox BattleFrontier_BattleTowerLobby_Text_241240, 4
-	special sub_80097E8
+	special CloseLink
 	msgbox BattleFrontier_BattleTowerLobby_Text_2782A8, 4
 	release
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F366:: @ 823F366
-	special sub_80097E8
+	special CloseLink
 	compare VAR_0x8005, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F394
 	compare VAR_0x8005, 1

@@ -105,7 +105,7 @@ SECTIONS {
         src/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         src/event_data.o(.text);
-        asm/coord_event_weather.o(.text);
+        src/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         src/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
@@ -230,7 +230,7 @@ SECTIONS {
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
-        asm/mystery_event_menu.o(.text);
+        src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
         src/pokeblock_feed.o(.text);
@@ -407,7 +407,7 @@ SECTIONS {
         data/map_obj_8097404.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
-        data/coord_event_weather.o(.rodata);
+        src/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);
         src/start_menu.o(.rodata);
@@ -505,7 +505,7 @@ SECTIONS {
         src/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
-        data/mystery_event_menu.o(.rodata);
+        src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
         src/pokeblock_feed.o(.rodata);

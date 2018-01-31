@@ -709,7 +709,7 @@ LilycoveCity_ContestLobby_EventScript_21A971:: @ 821A971
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A97F:: @ 821A97F
-	special sub_80097E8
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_27BD4F, 4
 	release
 	end
@@ -811,13 +811,13 @@ LilycoveCity_ContestLobby_EventScript_21AAE1:: @ 821AAE1
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AAEF:: @ 821AAEF
-	special sub_80097E8
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_27821C, 4
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AAFC:: @ 821AAFC
-	special sub_80097E8
+	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_27C879, 4
 	release
 	end

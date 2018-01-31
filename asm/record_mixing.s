@@ -765,10 +765,10 @@ _080E73B0:
 	movs r0, 0x65
 	b _080E7564
 _080E73B8:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -796,7 +796,7 @@ _080E73EA:
 _080E73F8:
 	bl sub_800AA48
 	adds r4, r0, 0
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -808,7 +808,7 @@ _080E740C:
 	strh r4, [r5, 0x20]
 	lsls r4, 16
 	asrs r4, 16
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -824,7 +824,7 @@ _080E742A:
 _080E7432:
 	bl sub_800AA48
 	adds r4, r0, 0
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -868,7 +868,7 @@ _080E746E:
 	b _080E7564
 	.pool
 _080E7490:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0

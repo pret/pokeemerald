@@ -178,7 +178,7 @@ _080B24C8:
 	b _080B24F2
 _080B24CC:
 	ldr r4, =gStringVar1
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -239,7 +239,7 @@ sub_80B252C: @ 80B252C
 	ands r0, r1
 	cmp r0, 0
 	beq _080B2570
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -269,7 +269,7 @@ sub_80B2578: @ 80B2578
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B258E
@@ -404,7 +404,7 @@ sub_80B2688: @ 80B2688
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -426,7 +426,7 @@ sub_80B2688: @ 80B2688
 	adds r4, r0, r1
 	movs r0, 0
 	strh r0, [r4, 0xE]
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -506,7 +506,7 @@ sub_80B275C: @ 80B275C
 	mov r9, r0
 	mov r7, r8
 	add r7, r9
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -585,7 +585,7 @@ sub_80B2804: @ 80B2804
 	bne _080B2898
 	bl sub_800AA48
 	adds r4, r0, 0
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -652,7 +652,7 @@ sub_80B28A8: @ 80B28A8
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080B290A
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
@@ -729,13 +729,13 @@ _080B297C:
 	cmp r2, 0x9
 	bne _080B2994
 _080B2984:
-	bl sub_80097E8
+	bl CloseLink
 	bl HideFieldMessageBox
 	ldr r0, =sub_80B2CB0
 	b _080B29E4
 	.pool
 _080B2994:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	ldr r4, =gUnknown_03005DB8
 	strb r0, [r4]
 	bl GetMultiplayerId
@@ -812,7 +812,7 @@ _080B2A42:
 	cmp r0, 0x9
 	bne _080B2A6C
 _080B2A4A:
-	bl sub_80097E8
+	bl CloseLink
 _080B2A4E:
 	bl HideFieldMessageBox
 	ldr r0, =gTasks
@@ -825,7 +825,7 @@ _080B2A4E:
 	b _080B2ACE
 	.pool
 _080B2A6C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	ldr r4, =gUnknown_03005DB8
 	strb r0, [r4]
 	bl GetMultiplayerId
@@ -1610,7 +1610,7 @@ sub_80B3144: @ 80B3144
 	ldrsh r2, [r4, r3]
 	cmp r2, 0
 	bne _080B3178
-	bl sub_8009734
+	bl OpenLink
 	bl sub_800A2BC
 	ldr r0, =task00_08081A90
 	movs r1, 0x50
@@ -1640,12 +1640,12 @@ sub_80B3194: @ 80B3194
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080B31DA
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1681,7 +1681,7 @@ sub_80B31E8: @ 80B31E8
 	lsrs r5, r0, 24
 	bl sub_800AA48
 	adds r4, r0, 0
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -2651,7 +2651,7 @@ task00_08081A90: @ 80B3A30
 	lsls r0, 17
 	cmp r1, r0
 	ble _080B3A62
-	bl sub_80097E8
+	bl CloseLink
 	ldr r0, =c2_800ACD4
 	bl SetMainCallback2
 	adds r0, r4, 0
@@ -2669,7 +2669,7 @@ _080B3A62:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B3A86
-	bl sub_80097E8
+	bl CloseLink
 	ldr r0, =c2_800ACD4
 	bl SetMainCallback2
 _080B3A86:
@@ -2761,7 +2761,7 @@ _080B3B2A:
 	b _080B3BB8
 	.pool
 _080B3B40:
-	bl sub_8009734
+	bl OpenLink
 	ldr r0, =task00_08081A90
 	movs r1, 0x1
 	bl CreateTask
@@ -2779,14 +2779,14 @@ _080B3B54:
 	strh r0, [r5, 0x2]
 	b _080B3B96
 _080B3B68:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bcc _080B3BB8
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B3B96
