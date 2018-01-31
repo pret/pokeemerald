@@ -64,7 +64,7 @@ void HandleLinkBattleSetup(void)
         if (gLinkVSyncDisabled)
             sub_800B488();
         if (!gReceivedRemoteLinkPlayers)
-            sub_8009734();
+            OpenLink();
         CreateTask(task00_08081A90, 0);
         CreateTasksForSendRecvLinkBuffers();
     }
@@ -793,9 +793,9 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
             else
                 var = (gBattleTypeFlags & BATTLE_TYPE_MULTI) ? 4 : 2;
 
-            if (sub_800ABAC() >= var)
+            if (GetLinkPlayerCount_2() >= var)
             {
-                if (sub_800ABBC())
+                if (IsLinkMaster())
                 {
                     sub_800A620();
                     gTasks[taskId].data[11]++;

@@ -17,5 +17,9 @@ void SetStandardWindowBorderStyle(u8 a0, u8 a1);
 void sub_8197930(void);
 u8 GetPlayerTextSpeed(void);
 void sub_81978B0(u16 arg0);
+u16 sub_8197224(void);
+int sub_8196094(void);
+void sub_8196080(u8*);
+void AddTextPrinterForMessage(u8);
 
 #endif // GUARD_NEW_MENU_HELPERS_H
