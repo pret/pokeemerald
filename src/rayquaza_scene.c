@@ -14,6 +14,8 @@
 #include "decompress.h"
 #include "sound.h"
 #include "constants/songs.h"
+#include "constants/rgb.h"
+#include "random.h"
 
 // this file's functions
 void sub_81D7134(u8 taskId);
@@ -21,6 +23,12 @@ void sub_81D7F4C(u8 taskId);
 void sub_81D84EC(u8 taskId);
 void sub_81D8980(u8 taskId);
 void sub_81D8DB4(u8 taskId);
+void sub_81D857C(u8 taskId);
+void sub_81D8684(u8 taskId);
+void sub_81D89E0(u8 taskId);
+void sub_81D8AD8(u8 taskId);
+void sub_81D8B2C(u8 taskId);
+void sub_81D8BEC(u8 taskId);
 void Task_EndAfterFadeScreen(u8 taskId);
 
 void sub_81D8260(struct Sprite *sprite);
@@ -1174,11 +1182,12 @@ const struct BgTemplate gUnknown_0862AD08[] =
 struct RaySceneStruct
 {
     MainCallback callback;
-    u8 tilemapBuffers[3][0x800];
-    u8 field_1804[0x800];
+    u8 tilemapBuffers[4][0x800];
     u16 field_2004;
     u8 animId;
     bool8 onlyOneAnim;
+    s16 field_2008;
+    s16 field_200A;
 };
 
 extern struct RaySceneStruct *sRayScene;
@@ -1190,13 +1199,25 @@ void sub_81D750C(void);
 void sub_81D7438(void);
 void sub_81D7480(void);
 void sub_81D74C8(void);
+void sub_81D8BB4(void);
 void sub_81D75B4(u8 taskId, s8 palDelay);
 void sub_81D6A20(struct Sprite *sprite);
 void sub_81D6D20(struct Sprite *sprite);
+void sub_81D7860(struct Sprite *sprite);
+void sub_81D7D14(struct Sprite *sprite);
+void sub_81D7700(struct Sprite *sprite);
+void sub_81D7A60(struct Sprite *sprite);
+void sub_81D874C(struct Sprite *sprite);
 void sub_81D7228(u8 taskId);
 void sub_81D736C(u8 taskId);
+void sub_81D752C(u8 taskId);
+void sub_81D7600(u8 taskId);
+void sub_81D7FC0(u8 taskId);
+void sub_81D81A4(u8 taskId);
+void sub_81D8164(u8 taskId);
 u8 sub_81D7664(void);
 u8 sub_81D78BC(void);
+u8 sub_81D86CC(void);
 
 // code
 void sub_81D6720(u8 animId, bool8 onlyOneAnim, MainCallback callback)
@@ -1470,7 +1491,7 @@ void sub_81D6FE0(void)
 {
     ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_0862A888, 3);
+    InitBgsFromTemplates(0, gUnknown_0862A888, ARRAY_COUNT(gUnknown_0862A888));
     SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
     SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
@@ -1533,4 +1554,895 @@ void sub_81D7134(u8 taskId)
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
     SetVBlankCallback(sub_81D6FD0);
     PlaySE(SE_T_OOAME);
+}
+
+void sub_81D7228(u8 taskId)
+{
+    s16 i;
+    u16 *data = gTasks[taskId].data;
+
+    for (i = 24; i < 92; i++)
+    {
+        if (i <= 47)
+        {
+            gScanlineEffectRegBuffers[0][i] = data[0] >> 8;
+            gScanlineEffectRegBuffers[1][i] = data[0] >> 8;
+        }
+        else if (i <= 63)
+        {
+            gScanlineEffectRegBuffers[0][i] = data[1] >> 8;
+            gScanlineEffectRegBuffers[1][i] = data[1] >> 8;
+        }
+        else if (i <= 75)
+        {
+            gScanlineEffectRegBuffers[0][i] = data[2] >> 8;
+            gScanlineEffectRegBuffers[1][i] = data[2] >> 8;
+        }
+        else if (i <= 83)
+        {
+            gScanlineEffectRegBuffers[0][i] = data[3] >> 8;
+            gScanlineEffectRegBuffers[1][i] = data[3] >> 8;
+        }
+        else if (i <= 87)
+        {
+            gScanlineEffectRegBuffers[0][i] = data[4] >> 8;
+            gScanlineEffectRegBuffers[1][i] = data[4] >> 8;
+        }
+        else
+        {
+            gScanlineEffectRegBuffers[0][i] = data[5] >> 8;
+            gScanlineEffectRegBuffers[1][i] = data[5] >> 8;
+        }
+    }
+
+    if (sRayScene->animId == RAY_ANIM_DUO_FIGHT_PRE)
+    {
+        data[0] += 448;
+        data[1] += 384;
+        data[2] += 320;
+        data[3] += 256;
+        data[4] += 192;
+        data[5] += 128;
+    }
+    else
+    {
+        data[0] += 768;
+        data[1] += 640;
+        data[2] += 512;
+        data[3] += 384;
+        data[4] += 256;
+        data[5] += 128;
+    }
+}
+
+void sub_81D736C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_81D750C();
+    if (!gPaletteFade.active)
+    {
+        s16 counter = data[0];
+        if (counter == 32 || counter == 112)
+        {
+            sub_81D7438();
+        }
+        else if (counter == 216)
+        {
+            sub_81D7480();
+        }
+        else if (counter == 220)
+        {
+            sub_81D74C8();
+        }
+        else
+        {
+            switch (counter)
+            {
+            case 412:
+                sub_81D75B4(taskId, 2);
+                return;
+            case 380:
+                SetGpuReg(REG_OFFSET_BLDCNT, 0x244);
+                gTasks[data[1]].func = sub_81D752C;
+                gTasks[data[1]].data[0] = 0;
+                gTasks[data[1]].data[2] = data[2];
+                gTasks[data[1]].data[3] = data[3];
+                ScanlineEffect_Stop();
+                break;
+            }
+        }
+
+        data[0]++;
+    }
+}
+
+void sub_81D7438(void)
+{
+    PlaySE(SE_T_KAMI);
+    sub_80A2C44(0x7FFF, 0, 0x10, 0, -1, 0, 0);
+    sub_80A2C44(0xFFFF0000, 0, 0x10, 0, 0, 0, 1);
+}
+
+void sub_81D7480(void)
+{
+    PlaySE(SE_T_KAMI);
+    sub_80A2C44(0x7FFF, 0, 0x10, 0x10, -1, 0, 0);
+    sub_80A2C44(0xFFFF0000, 0, 0x10, 0x10, 0, 0, 1);
+}
+
+void sub_81D74C8(void)
+{
+    sub_80A2C44(0x7FFF, 4, 0x10, 0, -1, 0, 0);
+    sub_80A2C44(0xFFFF0000, 4, 0x10, 0, 0, 0, 1);
+}
+
+void sub_81D750C(void)
+{
+    ChangeBgX(2, 0x400, 1);
+    ChangeBgY(2, 0x800, 2);
+}
+
+void sub_81D752C(u8 taskId)
+{
+    u16 bgY;
+    s16 *data = gTasks[taskId].data;
+    sub_81D7860(&gSprites[data[2]]);
+    sub_81D7D14(&gSprites[data[3]]);
+
+    bgY = GetBgY(1);
+    if (GetBgY(1) == 0 || bgY > 0x8000)
+        ChangeBgY(1, 0x400, 2);
+
+    if (data[0] != 16)
+    {
+        data[0]++;
+        SetGpuReg(REG_OFFSET_BLDALPHA, (data[0] << 8) | (16 - data[0]));
+    }
+}
+
+void sub_81D75B4(u8 taskId, s8 palDelay)
+{
+    PlaySE(SE_T_OOAME_E);
+    BeginNormalPaletteFade(-1, palDelay, 0, 0x10, 0);
+    gTasks[taskId].func = sub_81D7600;
+}
+
+void sub_81D7600(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_81D750C();
+    if (!gPaletteFade.active)
+    {
+        DestroyTask(data[1]);
+        ChangeBgY(1, 0, 0);
+        SetVBlankCallback(NULL);
+        ScanlineEffect_Stop();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        data[0] = 0;
+        gTasks[taskId].func = Task_SetNextAnim;
+    }
+}
+
+u8 sub_81D7664(void)
+{
+    u8 spriteId;
+    s16 *data;
+
+    spriteId = CreateSprite(&gUnknown_0862A8D4, 98, 72, 3);
+    gSprites[spriteId].callback = sub_81D7700;
+    data = gSprites[spriteId].data;
+    data[0] = CreateSprite(&gUnknown_0862A8D4, 66, 104, 3);
+    data[1] = CreateSprite(&gUnknown_0862A900, 85, 101, 0);
+    data[2] = CreateSprite(&gUnknown_0862A92C, 119, 114, 1);
+    StartSpriteAnim(&gSprites[data[0]], 1);
+    return spriteId;
+}
+
+void sub_81D7700(struct Sprite *sprite)
+{
+    s16 *data = sprite->data;
+    data[5]++;
+    data[5] &= 0xF;
+    if (!(data[5] & 7) && sprite->pos1.x != 72)
+    {
+        sprite->pos1.x--;
+        gSprites[sprite->data[0]].pos1.x--;
+        gSprites[data[1]].pos1.x--;
+        gSprites[data[2]].pos1.x--;
+    }
+
+    switch (sprite->animCmdIndex)
+    {
+    case 0:
+        gSprites[data[1]].pos2.x = 0;
+        gSprites[data[1]].pos2.y = 0;
+        gSprites[data[2]].pos2.x = 0;
+        gSprites[data[2]].pos2.y = 0;
+        break;
+    case 1:
+    case 3:
+        gSprites[data[1]].pos2.x = -1;
+        gSprites[data[1]].pos2.y = 0;
+        gSprites[data[2]].pos2.x = -1;
+        gSprites[data[2]].pos2.y = 0;
+        break;
+    case 2:
+        gSprites[data[1]].pos2.x = -1;
+        gSprites[data[1]].pos2.y = 1;
+        gSprites[data[2]].pos2.x = -2;
+        gSprites[data[2]].pos2.y = 1;
+        break;
+    }
+}
+
+void sub_81D7860(struct Sprite *sprite)
+{
+    s16 *data = sprite->data;
+    if (sprite->pos1.y <= 160)
+    {
+        sprite->pos1.y += 8;
+        gSprites[sprite->data[0]].pos1.y += 8;
+        gSprites[data[1]].pos1.y += 8;
+        gSprites[data[2]].pos1.y += 8;
+    }
+}
+
+u8 sub_81D78BC(void)
+{
+    u8 spriteId;
+    s16 *data;
+
+    spriteId = CreateSprite(&gUnknown_0862A9E4, 126, 96, 1);
+    gSprites[spriteId].callback = sub_81D7A60;
+    data = gSprites[spriteId].data;
+
+    data[0] = CreateSprite(&gUnknown_0862A9E4, 158, 96, 1) << 8;
+    data[0] |= CreateSprite(&gUnknown_0862A9E4, 126, 112, 1);
+    data[1] = CreateSprite(&gUnknown_0862A9E4, 158, 112, 1) << 8;
+    data[1] |= CreateSprite(&gUnknown_0862A9E4, 126, 128, 1);
+    data[2] = CreateSprite(&gUnknown_0862A9E4, 158, 128, 1) << 8;
+    data[2] |= CreateSprite(&gUnknown_0862A9E4, 94, 128, 2);
+    data[3] = CreateSprite(&gUnknown_0862A9E4, 126, 128, 2) << 8;
+    data[3] |= CreateSprite(&gUnknown_0862A9E4, 174, 128, 0);
+    data[4] = CreateSprite(&gUnknown_0862AA1C, 198, 132, 0) << 8;
+    data[4] |= CreateSprite(&gUnknown_0862AA3C, 190, 120, 1);
+
+    StartSpriteAnim(&gSprites[data[0] >> 8], 1);
+    StartSpriteAnim(&gSprites[data[0] & 0xFF], 2);
+    StartSpriteAnim(&gSprites[data[1] >> 8], 3);
+    StartSpriteAnim(&gSprites[data[1] & 0xFF], 4);
+    StartSpriteAnim(&gSprites[data[2] >> 8], 5);
+    StartSpriteAnim(&gSprites[data[2] & 0xFF], 6);
+    StartSpriteAnim(&gSprites[data[3] >> 8], 7);
+    StartSpriteAnim(&gSprites[data[3] & 0xFF], 8);
+
+    return spriteId;
+}
+
+void sub_81D7A60(struct Sprite *sprite)
+{
+    s16 *data = sprite->data;
+    data[5]++;
+    data[5] &= 0xF;
+    if (!(data[5] & 7) && sprite->pos1.x != 152)
+    {
+        sprite->pos1.x++;
+        gSprites[sprite->data[0] >> 8].pos1.x++;
+        gSprites[sprite->data[0] & 0xFF].pos1.x++;
+        gSprites[data[1] >> 8].pos1.x++;
+        gSprites[data[1] & 0xFF].pos1.x++;
+        gSprites[data[2] >> 8].pos1.x++;
+        gSprites[data[2] & 0xFF].pos1.x++;
+        gSprites[data[3] >> 8].pos1.x++;
+        gSprites[data[3] & 0xFF].pos1.x++;
+        gSprites[data[4] >> 8].pos1.x++;
+        gSprites[data[4] & 0xFF].pos1.x++;
+    }
+
+    switch (gSprites[data[2] & 0xFF].animCmdIndex)
+    {
+    case 0:
+        sprite->pos2.y = 0;
+        gSprites[data[0] >> 8].pos2.y = 0;
+        gSprites[data[0] & 0xFF].pos2.y = 0;
+        gSprites[data[1] >> 8].pos2.y = 0;
+        gSprites[data[1] & 0xFF].pos2.y = 0;
+        gSprites[data[2] >> 8].pos2.y = 0;
+        gSprites[data[2] & 0xFF].pos2.y = 0;
+        gSprites[data[3] >> 8].pos2.y = 0;
+        gSprites[data[3] & 0xFF].pos2.y = 0;
+        gSprites[data[4] >> 8].pos2.y = 0;
+        gSprites[data[4] & 0xFF].pos2.y = 0;
+        break;
+    case 1:
+    case 3:
+        sprite->pos2.y = 1;
+        gSprites[data[0] >> 8].pos2.y = 1;
+        gSprites[data[0] & 0xFF].pos2.y = 1;
+        gSprites[data[1] >> 8].pos2.y = 1;
+        gSprites[data[1] & 0xFF].pos2.y = 1;
+        gSprites[data[2] >> 8].pos2.y = 1;
+        gSprites[data[2] & 0xFF].pos2.y = 1;
+        gSprites[data[3] >> 8].pos2.y = 1;
+        gSprites[data[3] & 0xFF].pos2.y = 1;
+        gSprites[data[4] >> 8].pos2.y = 1;
+        gSprites[data[4] & 0xFF].pos2.y = 1;
+        break;
+    case 2:
+        sprite->pos2.y = 2;
+        gSprites[data[0] >> 8].pos2.y = 2;
+        gSprites[data[0] & 0xFF].pos2.y = 2;
+        gSprites[data[1] >> 8].pos2.y = 2;
+        gSprites[data[1] & 0xFF].pos2.y = 2;
+        gSprites[data[2] >> 8].pos2.y = 2;
+        gSprites[data[4] & 0xFF].pos2.y = 2;
+        break;
+    }
+}
+
+void sub_81D7D14(struct Sprite *sprite)
+{
+    s16 *data = sprite->data;
+    if (sprite->pos1.y <= 160)
+    {
+        sprite->pos1.y += 8;
+        gSprites[sprite->data[0] >> 8].pos1.y += 8;
+        gSprites[sprite->data[0] & 0xFF].pos1.y += 8;
+        gSprites[data[1] >> 8].pos1.y += 8;
+        gSprites[data[1] & 0xFF].pos1.y += 8;
+        gSprites[data[2] >> 8].pos1.y += 8;
+        gSprites[data[2] & 0xFF].pos1.y += 8;
+        gSprites[data[3] >> 8].pos1.y += 8;
+        gSprites[data[3] & 0xFF].pos1.y += 8;
+        gSprites[data[4] >> 8].pos1.y += 8;
+        gSprites[data[4] & 0xFF].pos1.y += 8;
+    }
+}
+
+void sub_81D7E10(void)
+{
+    ResetVramOamAndBgCntRegs();
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(1, gUnknown_0862AA54, ARRAY_COUNT(gUnknown_0862AA54));
+    SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
+    SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
+    SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
+    ResetAllBgsCoordinates();
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+}
+
+void sub_81D7E9C(void)
+{
+    reset_temp_tile_data_buffers();
+    decompress_and_copy_tile_data_to_vram(0, gRaySceneClouds_Gfx, 0, 0, 0);
+    decompress_and_copy_tile_data_to_vram(1, gRaySceneOvercast_Gfx, 0, 0, 0);
+    decompress_and_copy_tile_data_to_vram(2, gRaySceneRayquaza_Gfx, 0, 0, 0);
+    while (free_temp_tile_data_buffers_if_possible());
+
+    LZDecompressWram(gRaySceneClouds2_Tilemap, sRayScene->tilemapBuffers[0]);
+    LZDecompressWram(gRaySceneOvercast_Tilemap, sRayScene->tilemapBuffers[1]);
+    LZDecompressWram(gRaySceneRayquaza_Tilemap, sRayScene->tilemapBuffers[2]);
+    LoadCompressedPalette(gRaySceneRayquaza_Pal, 0, 0x40);
+    LoadCompressedObjectPic(&gUnknown_0862AA90);
+    LoadCompressedObjectPalette(&gUnknown_0862AA98);
+}
+
+void sub_81D7F4C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    PlayNewMapMusic(MUS_REKKUU_KOURIN);
+    sub_81D7E10();
+    sub_81D7E9C();
+    SetGpuReg(REG_OFFSET_BLDCNT, 0x250);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
+    BlendPalettes(-1, 0x10, 0);
+    SetVBlankCallback(sub_81D67EC);
+    CreateTask(sub_81D81A4, 0);
+    data[0] = 0;
+    data[1] = 0;
+    gTasks[taskId].func = sub_81D7FC0;
+}
+
+void sub_81D7FC0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    switch (data[0])
+    {
+    case 0:
+        if (data[1] == 8)
+        {
+            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            data[2] = 0;
+            data[3] = 30;
+            data[4] = 0;
+            data[5] = 7;
+            data[1] = 0;
+            data[0]++;
+        }
+        else
+        {
+            data[1]++;
+        }
+        break;
+    case 1:
+        data[2] += data[3];
+        data[4] += data[5];
+        if (data[3] > 3)
+            data[3] -= 3;
+        if (data[5] != 0)
+            data[5]--;
+        if (data[2] > 255)
+        {
+            data[2] = 256;
+            data[3] = 0;
+            data[6] = 12;
+            data[7] = -1;
+            data[1] = 0;
+            data[0]++;
+        }
+        SetBgAffine(2, 0x7800, 0x1800, 0x78, data[4] + 32, data[2], data[2], 0);
+        break;
+    case 2:
+        data[1]++;
+        SetBgAffine(2, 0x7800, 0x1800, 0x78, data[4] + 32 + (data[6] >> 2), data[2], data[2], 0);
+        data[6] += data[7];
+        if (data[6] == 12 || data[6] == -12)
+        {
+            data[7] *= -1;
+            if (data[1] > 295)
+            {
+                data[0]++;
+                BeginNormalPaletteFade(-1, 6, 0, 0x10, 0);
+            }
+        }
+        break;
+    case 3:
+        data[2] += 16;
+        SetBgAffine(2, 0x7800, 0x1800, 0x78, data[4] + 32, data[2], data[2], 0);
+        sub_81D8164(taskId);
+        break;
+    }
+}
+
+void sub_81D8164(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetVBlankCallback(NULL);
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gTasks[taskId].func = Task_SetNextAnim;
+    }
+}
+
+void sub_81D81A4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if ((data[1] & 3) == 0)
+    {
+        u8 spriteId = CreateSprite(&gUnknown_0862AAA0,
+                                   (gUnknown_0862AAB8[data[0]][0] * 4) + 120,
+                                   (gUnknown_0862AAB8[data[0]][1] * 4) + 80,
+                                   0);
+        gSprites[spriteId].data[0] = (s8)(data[0]);
+        gSprites[spriteId].oam.objMode = 1;
+        gSprites[spriteId].oam.affineMode = 3;
+        gSprites[spriteId].oam.priority = 2;
+        InitSpriteAffineAnim(&gSprites[spriteId]);
+        if (data[0] == 9)
+        {
+            DestroyTask(taskId);
+            return;
+        }
+        else
+        {
+            data[0]++;
+        }
+    }
+
+    data[1]++;
+}
+
+void sub_81D8260(struct Sprite *sprite)
+{
+    if (sprite->data[1] == 0)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+    }
+    else
+    {
+        sprite->pos2.x += gUnknown_0862AAB8[sprite->data[0]][0];
+        sprite->pos2.y += gUnknown_0862AAB8[sprite->data[0]][1];
+    }
+
+    sprite->data[1]++;
+    sprite->data[1] &= 0xF;
+}
+
+void sub_81D82B0(void)
+{
+    ResetVramOamAndBgCntRegs();
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, gUnknown_0862AACC, ARRAY_COUNT(gUnknown_0862AACC));
+    SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
+    SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
+    SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
+    SetBgTilemapBuffer(3, sRayScene->tilemapBuffers[3]);
+    ResetAllBgsCoordinates();
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    schedule_bg_copy_tilemap_to_vram(3);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+}
+
+void sub_81D8358(void)
+{
+    reset_temp_tile_data_buffers();
+    decompress_and_copy_tile_data_to_vram(0, gRaySceneRayquazaLight_Gfx, 0, 0, 0);
+    decompress_and_copy_tile_data_to_vram(1, gRaySceneOvercast2_Gfx, 0, 0, 0);
+    while (free_temp_tile_data_buffers_if_possible());
+
+    LZDecompressWram(gRaySceneRayquazaLight_Tilemap, sRayScene->tilemapBuffers[0]);
+    LZDecompressWram(gRaySceneOvercast2_Tilemap, sRayScene->tilemapBuffers[3]);
+    CpuFastFill16(0, sRayScene->tilemapBuffers[2], 0x800);
+    CpuFastCopy(sRayScene->tilemapBuffers[3], sRayScene->tilemapBuffers[1], 0x800);
+    CpuFastFill16(0, &sRayScene->tilemapBuffers[1][0x100], 0x340);
+
+    LoadCompressedPalette(gRaySceneOvercast2_Pal, 0, 0x40);
+    gPlttBufferUnfaded[0] = RGB_WHITE;
+    gPlttBufferFaded[0] = RGB_WHITE;
+    LoadCompressedObjectPic(&gUnknown_0862AAFC);
+    LoadCompressedObjectPic(&gUnknown_0862AB04);
+    LoadCompressedObjectPalette(&gUnknown_0862AB0C);
+}
+
+void sub_81D844C(void)
+{
+    u16 VCOUNT = GetGpuReg(REG_OFFSET_VCOUNT);
+    if (VCOUNT >= 24 && VCOUNT <= 135 && VCOUNT - 24 <= sRayScene->field_2008)
+        REG_BLDALPHA = 0xD08;
+    else
+        REG_BLDALPHA = 0x1000;
+
+    if (VCOUNT == 0)
+    {
+        if (sRayScene->field_2008 <= 0x1FFF)
+        {
+            if (sRayScene->field_2008 <= 39)
+                sRayScene->field_2008 += 4;
+            else if (sRayScene->field_2008 <= 79)
+                sRayScene->field_2008 += 2;
+            else
+                sRayScene->field_2008 += 1;
+        }
+
+        sRayScene->field_200A++;
+    }
+}
+
+void sub_81D84EC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_81D82B0();
+    sub_81D8358();
+    SetGpuRegBits(REG_OFFSET_BLDCNT, 0x1E41);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0x1000);
+    BlendPalettes(-1, 0x10, 0);
+    SetVBlankCallback(sub_81D67EC);
+    sRayScene->field_2008 = 0;
+    sRayScene->field_200A = 0;
+    data[0] = 0;
+    data[1] = 0;
+    data[2] = 0;
+    data[3] = 0;
+    data[4] = 0x1000;
+    gTasks[taskId].func = sub_81D857C;
+}
+
+void sub_81D857C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    switch (data[0])
+    {
+    case 0:
+        if (data[1] == 8)
+        {
+            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            data[1] = 0;
+            data[0]++;
+        }
+        else
+        {
+            data[1]++;
+        }
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+        {
+            if (data[1] == 10)
+            {
+                data[1] = 0;
+                data[0]++;
+                SetHBlankCallback(sub_81D844C);
+                EnableInterrupts(INTR_FLAG_HBLANK | INTR_FLAG_VBLANK);
+            }
+            else
+            {
+                data[1]++;
+            }
+        }
+        break;
+    case 2:
+        if (data[1] == 80)
+        {
+            data[1] = 0;
+            data[0]++;
+            sub_81D86CC();
+        }
+        else
+        {
+            data[1]++;
+        }
+        break;
+    case 3:
+        if (++data[1] == 368)
+        {
+            data[1] = 0;
+            data[0]++;
+        }
+        break;
+    case 4:
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        gTasks[taskId].func = sub_81D8684;
+        break;
+    }
+}
+
+void sub_81D8684(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetVBlankCallback(NULL);
+        SetHBlankCallback(NULL);
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gTasks[taskId].func = Task_SetNextAnim;
+    }
+}
+
+u8 sub_81D86CC(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_0862AB14, 160, 0, 0);
+    s16 *data = gSprites[spriteId].data;
+    data[0] = CreateSprite(&gUnknown_0862AB2C, 184, -48, 0);
+    gSprites[spriteId].callback = sub_81D874C;
+    gSprites[spriteId].oam.priority = 3;
+    gSprites[data[0]].oam.priority = 3;
+    return spriteId;
+}
+
+void sub_81D874C(struct Sprite *sprite)
+{
+    s16 *data = sprite->data;
+    s16 counter = data[2];
+    if (counter == 0)
+    {
+        data[3] = 12;
+        data[4] = 8;
+    }
+    else if (counter == 256)
+    {
+        data[3] = 9;
+        data[4] = 7;
+    }
+    else if (counter == 268)
+    {
+        data[3] = 8;
+        data[4] = 6;
+    }
+    else if (counter == 280)
+    {
+        data[3] = 7;
+        data[4] = 5;
+    }
+    else if (counter == 292)
+    {
+        data[3] = 6;
+        data[4] = 4;
+    }
+    else if (counter == 304)
+    {
+        data[3] = 5;
+        data[4] = 3;
+    }
+    else if (counter == 320)
+    {
+        data[3] = 4;
+        data[4] = 2;
+    }
+
+    if (data[2] % data[3] == 0)
+    {
+        sprite->pos2.x--;
+        gSprites[data[0]].pos2.x--;
+    }
+    if (data[2] % data[4] == 0)
+    {
+        sprite->pos2.y++;
+        gSprites[data[0]].pos2.y++;
+    }
+
+    data[2]++;
+}
+
+void sub_81D8828(void)
+{
+    ResetVramOamAndBgCntRegs();
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, gUnknown_0862AB44, ARRAY_COUNT(gUnknown_0862AB44));
+    SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
+    SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
+    SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
+    SetBgTilemapBuffer(3, sRayScene->tilemapBuffers[3]);
+    ResetAllBgsCoordinates();
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    schedule_bg_copy_tilemap_to_vram(3);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_WIN0_ON);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+}
+
+void sub_81D88D0(void)
+{
+    reset_temp_tile_data_buffers();
+    decompress_and_copy_tile_data_to_vram(1, gRaySceneRayquazaChase_Gfx, 0, 0, 0);
+    decompress_and_copy_tile_data_to_vram(2, gRaySceneChaseStreaks_Gfx, 0, 0, 0);
+    decompress_and_copy_tile_data_to_vram(3, gRaySceneChaseBg_Gfx, 0, 0, 0);
+    while (free_temp_tile_data_buffers_if_possible());
+
+    LZDecompressWram(gRayChaseRayquazaChase2_Tilemap, sRayScene->tilemapBuffers[0]);
+    LZDecompressWram(gRayChaseRayquazaChase_Tilemap, sRayScene->tilemapBuffers[1]);
+    LZDecompressWram(gRaySceneChaseStreaks_Tilemap, sRayScene->tilemapBuffers[2]);
+    LZDecompressWram(gRaySceneChaseBg_Tilemap, sRayScene->tilemapBuffers[3]);
+    LoadCompressedPalette(gRaySceneChase_Pal, 0, 0x80);
+}
+
+void sub_81D8980(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_81D8828();
+    sub_81D88D0();
+    sub_81D68C8();
+    BlendPalettes(-1, 0x10, 0);
+    SetVBlankCallback(sub_81D67EC);
+    data[0] = 0;
+    data[1] = 0;
+    data[2] = CreateTask(sub_81D8AD8, 0);
+    gTasks[taskId].func = sub_81D89E0;
+}
+
+void sub_81D89E0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_81D8BB4();
+    if ((data[3] & 7) == 0 && data[0] <= 1 && data[1] <= 89)
+        PlaySE(SE_OP_BASYU);
+
+    data[3]++;
+    switch (data[0])
+    {
+    case 0:
+        if (data[1] == 8)
+        {
+            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            data[1] = 0;
+            data[0]++;
+        }
+        else
+        {
+            data[1]++;
+        }
+        break;
+    case 1:
+        if (data[1] == 127)
+        {
+            data[1] = 0;
+            data[0]++;
+            gTasks[data[2]].func = sub_81D8B2C;
+        }
+        else
+        {
+            data[1]++;
+        }
+        break;
+    case 2:
+        if (data[1] == 12)
+        {
+            data[1] = 0;
+            data[0]++;
+        }
+        else
+        {
+            data[1]++;
+        }
+        break;
+    case 3:
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        gTasks[taskId].func = sub_81D8BEC;
+        break;
+    }
+}
+
+void sub_81D8AD8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if ((data[15] & 3) == 0)
+    {
+        ChangeBgX(1, (Random() % 8 - 4) << 8, 0);
+        ChangeBgY(1, (Random() % 8 - 4) << 8, 0);
+    }
+
+    data[15]++;
+}
+
+void sub_81D8B2C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (data[0] == 0)
+    {
+        ChangeBgX(1, 0, 0);
+        ChangeBgY(1, 0, 0);
+        data[0]++;
+        data[1] = 10;
+        data[2] = -1;
+    }
+    else if (data[0] == 1)
+    {
+        ChangeBgX(1, data[1] << 8, 2);
+        ChangeBgY(1, data[1] << 8, 1);
+        data[1] += data[2];
+        if (data[1] == -10)
+            data[2] *= -1;
+    }
+}
+
+void sub_81D8BB4(void)
+{
+    ChangeBgX(2, 0x400, 2);
+    ChangeBgY(2, 0x400, 1);
+    ChangeBgX(0, 0x800, 2);
+    ChangeBgY(0, 0x800, 1);
+}
+
+void sub_81D8BEC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_81D8BB4();
+    if (!gPaletteFade.active)
+    {
+        SetVBlankCallback(NULL);
+        sub_81D6904();
+        DestroyTask(data[2]);
+        gTasks[taskId].func = Task_SetNextAnim;
+    }
 }
