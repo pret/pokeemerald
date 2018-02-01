@@ -39,19 +39,19 @@ static void Task_RayTakesFlightAnim(u8 taskId);
 static void Task_RayDescendsAnim(u8 taskId);
 static void Task_RayChargesAnim(u8 taskId);
 static void Task_RayChasesAwayAnim(u8 taskId);
-static void sub_81D857C(u8 taskId);
+static void Task_HandleRayDescends(u8 taskId);
 static void Task_RayDescendsEnd(u8 taskId);
-static void sub_81D89E0(u8 taskId);
+static void Task_HandleRayCharges(u8 taskId);
 static void sub_81D8AD8(u8 taskId);
 static void sub_81D8B2C(u8 taskId);
 static void Task_RayChargesEnd(u8 taskId);
-static void sub_81D8E80(u8 taskId);
+static void Task_HandleRayChasesAway(u8 taskId);
 static void sub_81D8FB0(u8 taskId);
 static void sub_81D7228(u8 taskId);
-static void sub_81D736C(u8 taskId);
+static void Task_HandleDuoFight(u8 taskId);
 static void sub_81D752C(u8 taskId);
 static void Task_DuoFightEnd(u8 taskId);
-static void sub_81D7FC0(u8 taskId);
+static void Task_HandleRayTakesFlight(u8 taskId);
 static void sub_81D81A4(u8 taskId);
 static void Task_RayTakesFlightEnd(u8 taskId);
 static void sub_81D94D4(u8 taskId);
@@ -1316,7 +1316,7 @@ static void sub_81D6904(void)
     SetGpuReg(REG_OFFSET_WINOUT, 0x3F);
 }
 
-static void sub_81D691C(u8 taskId)
+static void Task_HandleDuoFightPre(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D750C();
@@ -1493,7 +1493,7 @@ static void sub_81D6D20(struct Sprite *sprite)
     }
 }
 
-static void sub_81D6FD0(void)
+static void VblankCB_DuoFight(void)
 {
     VblankCB_RayquazaScene();
     ScanlineEffect_InitHBlankDmaTransfer();
@@ -1552,19 +1552,19 @@ static void Task_DuoFightAnim(u8 taskId)
     {
         data[2] = sub_81D6984();
         data[3] = sub_81D6B7C();
-        gTasks[taskId].func = sub_81D691C;
+        gTasks[taskId].func = Task_HandleDuoFightPre;
     }
     else
     {
         data[2] = sub_81D7664();
         data[3] = sub_81D78BC();
-        gTasks[taskId].func = sub_81D736C;
+        gTasks[taskId].func = Task_HandleDuoFight;
         StopMapMusic();
     }
 
     BlendPalettes(-1, 0x10, 0);
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
-    SetVBlankCallback(sub_81D6FD0);
+    SetVBlankCallback(VblankCB_DuoFight);
     PlaySE(SE_T_OOAME);
 }
 
@@ -1627,7 +1627,7 @@ static void sub_81D7228(u8 taskId)
     }
 }
 
-static void sub_81D736C(u8 taskId)
+static void Task_HandleDuoFight(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D750C();
@@ -1960,10 +1960,10 @@ static void Task_RayTakesFlightAnim(u8 taskId)
     CreateTask(sub_81D81A4, 0);
     data[0] = 0;
     data[1] = 0;
-    gTasks[taskId].func = sub_81D7FC0;
+    gTasks[taskId].func = Task_HandleRayTakesFlight;
 }
 
-static void sub_81D7FC0(u8 taskId)
+static void Task_HandleRayTakesFlight(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -2163,10 +2163,10 @@ static void Task_RayDescendsAnim(u8 taskId)
     data[2] = 0;
     data[3] = 0;
     data[4] = 0x1000;
-    gTasks[taskId].func = sub_81D857C;
+    gTasks[taskId].func = Task_HandleRayDescends;
 }
 
-static void sub_81D857C(u8 taskId)
+static void Task_HandleRayDescends(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -2350,10 +2350,10 @@ static void Task_RayChargesAnim(u8 taskId)
     data[0] = 0;
     data[1] = 0;
     data[2] = CreateTask(sub_81D8AD8, 0);
-    gTasks[taskId].func = sub_81D89E0;
+    gTasks[taskId].func = Task_HandleRayCharges;
 }
 
-static void sub_81D89E0(u8 taskId)
+static void Task_HandleRayCharges(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D8BB4();
@@ -2514,7 +2514,7 @@ static void Task_RayChasesAwayAnim(u8 taskId)
     SetVBlankCallback(VblankCB_RayquazaScene);
     data[0] = 0;
     data[1] = 0;
-    gTasks[taskId].func = sub_81D8E80;
+    gTasks[taskId].func = Task_HandleRayChasesAway;
     data[2] = CreateTask(sub_81D8FB0, 0);
     gTasks[data[2]].data[0] = 0;
     gTasks[data[2]].data[1] = 0;
@@ -2523,7 +2523,7 @@ static void Task_RayChasesAwayAnim(u8 taskId)
     gTasks[data[2]].data[4] = 1;
 }
 
-static void sub_81D8E80(u8 taskId)
+static void Task_HandleRayChasesAway(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -2837,7 +2837,7 @@ static void sub_81D961C(struct Sprite *sprite)
             sprite->callback = sub_81D97E0;
             return;
         case 352:
-            sub_81D9274(FindTaskIdByFunc(sub_81D8E80));
+            sub_81D9274(FindTaskIdByFunc(Task_HandleRayChasesAway));
             break;
         }
     }
