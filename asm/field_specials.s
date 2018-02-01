@@ -7156,14 +7156,14 @@ sub_813B7D8: @ 813B7D8
 	ldr r2, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81D6720
+	bl DoRayquazaScene
 	b _0813B802
 	.pool
 _0813B7F8:
 	ldr r2, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_81D6720
+	bl DoRayquazaScene
 _0813B802:
 	pop {r0}
 	bx r0

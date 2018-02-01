@@ -1,6 +1,8 @@
 #ifndef GUARD_RAYQUAZA_SCENE_H
 #define GUARD_RAYQUAZA_SCENE_H
 
+void DoRayquazaScene(u8 animId, bool8 onlyOneAnim, void (*callback)(void));
+
 enum
 {
     RAY_ANIM_DUO_FIGHT_PRE,

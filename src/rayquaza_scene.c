@@ -14,28 +14,80 @@
 #include "decompress.h"
 #include "sound.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "constants/rgb.h"
 #include "random.h"
 
-// this file's functions
-void sub_81D7134(u8 taskId);
-void sub_81D7F4C(u8 taskId);
-void sub_81D84EC(u8 taskId);
-void sub_81D8980(u8 taskId);
-void sub_81D8DB4(u8 taskId);
-void sub_81D857C(u8 taskId);
-void sub_81D8684(u8 taskId);
-void sub_81D89E0(u8 taskId);
-void sub_81D8AD8(u8 taskId);
-void sub_81D8B2C(u8 taskId);
-void sub_81D8BEC(u8 taskId);
-void Task_EndAfterFadeScreen(u8 taskId);
+struct RaySceneStruct
+{
+    MainCallback callback;
+    u8 tilemapBuffers[4][0x800];
+    u16 field_2004; // set but unused
+    u8 animId;
+    bool8 onlyOneAnim;
+    s16 field_2008;
+    s16 field_200A;
+    u8 unusedFields[12]; // completely unused
+};
 
-void sub_81D8260(struct Sprite *sprite);
-void sub_81D961C(struct Sprite *sprite);
+// EWRAM vars
+static EWRAM_DATA struct RaySceneStruct *sRayScene = NULL;
+
+// this file's functions
+static void sub_81D7134(u8 taskId);
+static void sub_81D7F4C(u8 taskId);
+static void sub_81D84EC(u8 taskId);
+static void sub_81D8980(u8 taskId);
+static void sub_81D8DB4(u8 taskId);
+static void sub_81D857C(u8 taskId);
+static void sub_81D8684(u8 taskId);
+static void sub_81D89E0(u8 taskId);
+static void sub_81D8AD8(u8 taskId);
+static void sub_81D8B2C(u8 taskId);
+static void sub_81D8BEC(u8 taskId);
+static void sub_81D8E80(u8 taskId);
+static void sub_81D8FB0(u8 taskId);
+static void sub_81D7228(u8 taskId);
+static void sub_81D736C(u8 taskId);
+static void sub_81D752C(u8 taskId);
+static void sub_81D7600(u8 taskId);
+static void sub_81D7FC0(u8 taskId);
+static void sub_81D81A4(u8 taskId);
+static void sub_81D8164(u8 taskId);
+static void sub_81D94D4(u8 taskId);
+static void sub_81D93D8(u8 taskId);
+static void sub_81D9034(u8 taskId);
+static void sub_81D90A8(u8 taskId);
+static void sub_81D98B4(u8 taskId);
+static void Task_EndAfterFadeScreen(u8 taskId);
+static void sub_81D6774(void);
+static void sub_81D67D0(void);
+static void sub_81D750C(void);
+static void sub_81D7438(void);
+static void sub_81D7480(void);
+static void sub_81D74C8(void);
+static void sub_81D8BB4(void);
+static void sub_81D6A20(struct Sprite *sprite);
+static void sub_81D6D20(struct Sprite *sprite);
+static void sub_81D7860(struct Sprite *sprite);
+static void sub_81D7D14(struct Sprite *sprite);
+static void sub_81D7700(struct Sprite *sprite);
+static void sub_81D7A60(struct Sprite *sprite);
+static void sub_81D874C(struct Sprite *sprite);
+static void sub_81D9338(struct Sprite *sprite);
+static void sub_81D9420(struct Sprite *sprite);
+static void sub_81D8260(struct Sprite *sprite);
+static void sub_81D961C(struct Sprite *sprite);
+static void sub_81D97E0(struct Sprite *sprite);
+static void sub_81D9528(struct Sprite *sprite);
+static u8 sub_81D7664(void);
+static u8 sub_81D78BC(void);
+static u8 sub_81D86CC(void);
+static void sub_81D75B4(u8 taskId, s8 palDelay);
+static void sub_81D9868(struct Sprite *sprite, u8 animNum, s16 x, s16 y);
 
 // const rom data
-const TaskFunc sTasksForAnimations[] =
+static const TaskFunc sTasksForAnimations[] =
 {
     sub_81D7134, // RAY_ANIM_DUO_FIGHT_PRE
     sub_81D7134, // RAY_ANIM_DUO_FIGHT
@@ -206,7 +258,7 @@ static const union AnimCmd *const sSpriteAnimTable_862A724[] =
     sSpriteAnim_862A710
 };
 
-const struct SpriteTemplate gUnknown_0862A72C =
+static const struct SpriteTemplate sUnknown_0862A72C =
 {
     .tileTag = 30505,
     .paletteTag = 30505,
@@ -228,7 +280,7 @@ static const union AnimCmd *const sSpriteAnimTable_862A74C[] =
     sSpriteAnim_862A744
 };
 
-const struct SpriteTemplate gUnknown_0862A750 =
+static const struct SpriteTemplate sUnknown_0862A750 =
 {
     .tileTag = 30506,
     .paletteTag = 30505,
@@ -250,7 +302,7 @@ static const union AnimCmd *const sSpriteAnimTable_862A770[] =
     sSpriteAnim_862A768
 };
 
-const struct SpriteTemplate gUnknown_0862A774 =
+static const struct SpriteTemplate sUnknown_0862A774 =
 {
     .tileTag = 30507,
     .paletteTag = 30505,
@@ -337,7 +389,7 @@ static const union AnimCmd *const sSpriteAnimTable_862A7F8[] =
     sSpriteAnim_862A7E4
 };
 
-const struct SpriteTemplate gUnknown_0862A81C =
+static const struct SpriteTemplate sUnknown_0862A81C =
 {
     .tileTag = 30508,
     .paletteTag = 30508,
@@ -362,7 +414,7 @@ static const union AnimCmd *const sSpriteAnimTable_862A848[] =
     sSpriteAnim_862A834
 };
 
-const struct SpriteTemplate gUnknown_0862A84C =
+static const struct SpriteTemplate sUnknown_0862A84C =
 {
     .tileTag = 30509,
     .paletteTag = 30508,
@@ -373,7 +425,7 @@ const struct SpriteTemplate gUnknown_0862A84C =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_0862A864 =
+static const struct SpriteTemplate sUnknown_0862A864 =
 {
     .tileTag = 30510,
     .paletteTag = 30508,
@@ -384,14 +436,14 @@ const struct SpriteTemplate gUnknown_0862A864 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct ScanlineEffectParams gUnknown_0862A87C =
+static const struct ScanlineEffectParams sUnknown_0862A87C =
 {
     .dmaDest = (vu16 *)REG_ADDR_BG1HOFS,
     .dmaControl = 0xA2600001,
     .initState = 1
 };
 
-const struct BgTemplate gUnknown_0862A888[] =
+static const struct BgTemplate sUnknown_0862A888[] =
 {
     {
         .bg = 0,
@@ -446,17 +498,17 @@ static const union AnimCmd *const sSpriteAnimTable_862A8BC[] =
     sSpriteAnim_862A8A8
 };
 
-const struct CompressedSpriteSheet gUnknown_0862A8C4 =
+static const struct CompressedSpriteSheet sUnknown_0862A8C4 =
 {
     gRaySceneGroudon_Gfx, 0x3000, 30505
 };
 
-const struct CompressedSpritePalette gUnknown_0862A8CC =
+static const struct CompressedSpritePalette sUnknown_0862A8CC =
 {
     gRaySceneGroudon_Pal, 30505
 };
 
-const struct SpriteTemplate gUnknown_0862A8D4 =
+static const struct SpriteTemplate sUnknown_0862A8D4 =
 {
     .tileTag = 30505,
     .paletteTag = 30505,
@@ -478,12 +530,12 @@ static const union AnimCmd *const sSpriteAnimTable_862A8F4[] =
     sSpriteAnim_862A8EC
 };
 
-const struct CompressedSpriteSheet gUnknown_0862A8F8 =
+static const struct CompressedSpriteSheet sUnknown_0862A8F8 =
 {
     gRaySceneGroudon2_Gfx, 0x200, 30506
 };
 
-const struct SpriteTemplate gUnknown_0862A900 =
+static const struct SpriteTemplate sUnknown_0862A900 =
 {
     .tileTag = 30506,
     .paletteTag = 30505,
@@ -505,12 +557,12 @@ static const union AnimCmd *const sSpriteAnimTable_862A920[] =
     sSpriteAnim_862A918
 };
 
-const struct CompressedSpriteSheet gUnknown_0862A924 =
+static const struct CompressedSpriteSheet sUnknown_0862A924 =
 {
     gRaySceneGroudon3_Gfx, 0x400, 30507
 };
 
-const struct SpriteTemplate gUnknown_0862A92C =
+static const struct SpriteTemplate sUnknown_0862A92C =
 {
     .tileTag = 30507,
     .paletteTag = 30505,
@@ -597,17 +649,17 @@ static const union AnimCmd *const sSpriteAnimTable_862A9B0[] =
     sSpriteAnim_862A99C
 };
 
-const struct CompressedSpriteSheet gUnknown_0862A9D4 =
+static const struct CompressedSpriteSheet sUnknown_0862A9D4 =
 {
     gRaySceneKyogre_Gfx, 0xF00, 30508
 };
 
-const struct CompressedSpritePalette gUnknown_0862A9DC =
+static const struct CompressedSpritePalette sUnknown_0862A9DC =
 {
     gRaySceneKyogre_Pal, 30508
 };
 
-const struct SpriteTemplate gUnknown_0862A9E4 =
+static const struct SpriteTemplate sUnknown_0862A9E4 =
 {
     .tileTag = 30508,
     .paletteTag = 30508,
@@ -632,12 +684,12 @@ static const union AnimCmd *const sSpriteAnimTable_862AA10[] =
     sSpriteAnim_862A9FC
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AA14 =
+static const struct CompressedSpriteSheet sUnknown_0862AA14 =
 {
     gRaySceneKyogre2_Gfx, 0xC0, 30509
 };
 
-const struct SpriteTemplate gUnknown_0862AA1C =
+static const struct SpriteTemplate sUnknown_0862AA1C =
 {
     .tileTag = 30509,
     .paletteTag = 30508,
@@ -648,12 +700,12 @@ const struct SpriteTemplate gUnknown_0862AA1C =
     .callback = SpriteCallbackDummy,
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AA34 =
+static const struct CompressedSpriteSheet sUnknown_0862AA34 =
 {
     gRaySceneKyogre3_Gfx, 0x200, 30510
 };
 
-const struct SpriteTemplate gUnknown_0862AA3C =
+static const struct SpriteTemplate sUnknown_0862AA3C =
 {
     .tileTag = 30510,
     .paletteTag = 30508,
@@ -664,7 +716,7 @@ const struct SpriteTemplate gUnknown_0862AA3C =
     .callback = SpriteCallbackDummy,
 };
 
-const struct BgTemplate gUnknown_0862AA54[] =
+static const struct BgTemplate sUnknown_0862AA54[] =
 {
     {
         .bg = 0,
@@ -719,17 +771,17 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_862AA8C[] =
     sSpriteAffineAnim_862AA6C
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AA90 =
+static const struct CompressedSpriteSheet sUnknown_0862AA90 =
 {
     gRaySceneSmoke_Gfx, 0x100, 30555
 };
 
-const struct CompressedSpritePalette gUnknown_0862AA98 =
+static const struct CompressedSpritePalette sUnknown_0862AA98 =
 {
     gRaySceneSmoke_Pal, 30555
 };
 
-const struct SpriteTemplate gUnknown_0862AAA0 =
+static const struct SpriteTemplate sUnknown_0862AAA0 =
 {
     .tileTag = 30555,
     .paletteTag = 30555,
@@ -740,7 +792,7 @@ const struct SpriteTemplate gUnknown_0862AAA0 =
     .callback = sub_81D8260,
 };
 
-const s8 gUnknown_0862AAB8[][2] =
+static const s8 sUnknown_0862AAB8[][2] =
 {
     {-1,    5},
     {-3,    -4},
@@ -754,7 +806,7 @@ const s8 gUnknown_0862AAB8[][2] =
     {9,     1}
 };
 
-const struct BgTemplate gUnknown_0862AACC[] =
+static const struct BgTemplate sUnknown_0862AACC[] =
 {
     {
         .bg = 0,
@@ -818,22 +870,22 @@ static const union AnimCmd *const sSpriteAnimTable_862AAF8[] =
     sSpriteAnim_862AAEC
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AAFC =
+static const struct CompressedSpriteSheet sUnknown_0862AAFC =
 {
     gRaySceneRayquazaFly1_Gfx, 0x1000, 30556
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AB04 =
+static const struct CompressedSpriteSheet sUnknown_0862AB04 =
 {
     gRaySceneRayquazaTail_Gfx, 0x200, 30557
 };
 
-const struct CompressedSpritePalette gUnknown_0862AB0C =
+static const struct CompressedSpritePalette sUnknown_0862AB0C =
 {
     gRaySceneRayquaza_Pal, 30556
 };
 
-const struct SpriteTemplate gUnknown_0862AB14 =
+static const struct SpriteTemplate sUnknown_0862AB14 =
 {
     .tileTag = 30556,
     .paletteTag = 30556,
@@ -844,7 +896,7 @@ const struct SpriteTemplate gUnknown_0862AB14 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_0862AB2C =
+static const struct SpriteTemplate sUnknown_0862AB2C =
 {
     .tileTag = 30557,
     .paletteTag = 30556,
@@ -855,7 +907,7 @@ const struct SpriteTemplate gUnknown_0862AB2C =
     .callback = SpriteCallbackDummy,
 };
 
-const struct BgTemplate gUnknown_0862AB44[] =
+static const struct BgTemplate sUnknown_0862AB44[] =
 {
     {
         .bg = 0,
@@ -1032,57 +1084,57 @@ static const union AnimCmd *const sSpriteAnimTable_862AC24[] =
     sSpriteAnim_862AC08
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AC28 =
+static const struct CompressedSpriteSheet sUnknown_0862AC28 =
 {
     gRaySceneGroudonLeft_Gfx, 0x1800, 30565
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AC30 =
+static const struct CompressedSpriteSheet sUnknown_0862AC30 =
 {
     gRaySceneGroudonTail_Gfx, 0x80, 30566
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AC38 =
+static const struct CompressedSpriteSheet sUnknown_0862AC38 =
 {
     gRaySceneKyogreRight_Gfx, 0x600, 30568
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AC40 =
+static const struct CompressedSpriteSheet sUnknown_0862AC40 =
 {
     gRaySceneRayquazaHover_Gfx, 0x2000, 30569
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AC48 =
+static const struct CompressedSpriteSheet sUnknown_0862AC48 =
 {
     gRaySceneRayquazaFlyIn_Gfx, 0x800, 30570
 };
 
-const struct CompressedSpriteSheet gUnknown_0862AC50 =
+static const struct CompressedSpriteSheet sUnknown_0862AC50 =
 {
     gRaySceneSplash_Gfx, 0x300, 30571
 };
 
-const struct CompressedSpritePalette gUnknown_0862AC58 =
+static const struct CompressedSpritePalette sUnknown_0862AC58 =
 {
     gRaySceneGroudonLeft_Pal, 30565
 };
 
-const struct CompressedSpritePalette gUnknown_0862AC60 =
+static const struct CompressedSpritePalette sUnknown_0862AC60 =
 {
     gRaySceneKyogreRight_Pal, 30568
 };
 
-const struct CompressedSpritePalette gUnknown_0862AC68 =
+static const struct CompressedSpritePalette sUnknown_0862AC68 =
 {
     gRaySceneRayquazaHover_Pal, 30569
 };
 
-const struct CompressedSpritePalette gUnknown_0862AC70 =
+static const struct CompressedSpritePalette sUnknown_0862AC70 =
 {
     gRaySceneSplash_Pal, 30571
 };
 
-const struct SpriteTemplate gUnknown_0862AC78 =
+static const struct SpriteTemplate sUnknown_0862AC78 =
 {
     .tileTag = 30565,
     .paletteTag = 30565,
@@ -1093,7 +1145,7 @@ const struct SpriteTemplate gUnknown_0862AC78 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_0862AC90 =
+static const struct SpriteTemplate sUnknown_0862AC90 =
 {
     .tileTag = 30566,
     .paletteTag = 30565,
@@ -1104,7 +1156,7 @@ const struct SpriteTemplate gUnknown_0862AC90 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_0862ACA8 =
+static const struct SpriteTemplate sUnknown_0862ACA8 =
 {
     .tileTag = 30568,
     .paletteTag = 30568,
@@ -1115,7 +1167,7 @@ const struct SpriteTemplate gUnknown_0862ACA8 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_0862ACC0 =
+static const struct SpriteTemplate sUnknown_0862ACC0 =
 {
     .tileTag = 30569,
     .paletteTag = 30569,
@@ -1126,7 +1178,7 @@ const struct SpriteTemplate gUnknown_0862ACC0 =
     .callback = sub_81D961C,
 };
 
-const struct SpriteTemplate gUnknown_0862ACD8 =
+static const struct SpriteTemplate sUnknown_0862ACD8 =
 {
     .tileTag = 30570,
     .paletteTag = 30569,
@@ -1137,7 +1189,7 @@ const struct SpriteTemplate gUnknown_0862ACD8 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_0862ACF0 =
+static const struct SpriteTemplate sUnknown_0862ACF0 =
 {
     .tileTag = 30571,
     .paletteTag = 30571,
@@ -1148,7 +1200,7 @@ const struct SpriteTemplate gUnknown_0862ACF0 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct BgTemplate gUnknown_0862AD08[] =
+static const struct BgTemplate sUnknown_0862AD08[] =
 {
     {
         .bg = 0,
@@ -1179,57 +1231,17 @@ const struct BgTemplate gUnknown_0862AD08[] =
     }
 };
 
-struct RaySceneStruct
-{
-    MainCallback callback;
-    u8 tilemapBuffers[4][0x800];
-    u16 field_2004;
-    u8 animId;
-    bool8 onlyOneAnim;
-    s16 field_2008;
-    s16 field_200A;
-};
-
-extern struct RaySceneStruct *sRayScene;
-
-// this file's functions
-void sub_81D6774(void);
-void sub_81D67D0(void);
-void sub_81D750C(void);
-void sub_81D7438(void);
-void sub_81D7480(void);
-void sub_81D74C8(void);
-void sub_81D8BB4(void);
-void sub_81D75B4(u8 taskId, s8 palDelay);
-void sub_81D6A20(struct Sprite *sprite);
-void sub_81D6D20(struct Sprite *sprite);
-void sub_81D7860(struct Sprite *sprite);
-void sub_81D7D14(struct Sprite *sprite);
-void sub_81D7700(struct Sprite *sprite);
-void sub_81D7A60(struct Sprite *sprite);
-void sub_81D874C(struct Sprite *sprite);
-void sub_81D7228(u8 taskId);
-void sub_81D736C(u8 taskId);
-void sub_81D752C(u8 taskId);
-void sub_81D7600(u8 taskId);
-void sub_81D7FC0(u8 taskId);
-void sub_81D81A4(u8 taskId);
-void sub_81D8164(u8 taskId);
-u8 sub_81D7664(void);
-u8 sub_81D78BC(void);
-u8 sub_81D86CC(void);
-
 // code
-void sub_81D6720(u8 animId, bool8 onlyOneAnim, MainCallback callback)
+void DoRayquazaScene(u8 animId, bool8 onlyOneAnim, void (*callback)(void))
 {
-    sRayScene = AllocZeroed(0x2018);
+    sRayScene = AllocZeroed(sizeof(*sRayScene));
     sRayScene->animId = animId;
     sRayScene->callback = callback;
     sRayScene->onlyOneAnim = onlyOneAnim;
     SetMainCallback2(sub_81D6774);
 }
 
-void sub_81D6774(void)
+static void sub_81D6774(void)
 {
     SetVBlankHBlankCallbacksToNull();
     clear_scheduled_bg_copies_to_vram();
@@ -1243,7 +1255,7 @@ void sub_81D6774(void)
     SetMainCallback2(sub_81D67D0);
 }
 
-void sub_81D67D0(void)
+static void sub_81D67D0(void)
 {
     RunTasks();
     AnimateSprites();
@@ -1252,14 +1264,14 @@ void sub_81D67D0(void)
     UpdatePaletteFade();
 }
 
-void sub_81D67EC(void)
+static void sub_81D67EC(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void Task_EndAfterFadeScreen(u8 taskId)
+static void Task_EndAfterFadeScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1271,7 +1283,7 @@ void Task_EndAfterFadeScreen(u8 taskId)
     }
 }
 
-void Task_SetNextAnim(u8 taskId)
+static void Task_SetNextAnim(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1288,7 +1300,7 @@ void Task_SetNextAnim(u8 taskId)
     }
 }
 
-void sub_81D68C8(void)
+static void sub_81D68C8(void)
 {
     SetGpuReg(REG_OFFSET_WININ, 0x3F);
     SetGpuReg(REG_OFFSET_WINOUT, 0);
@@ -1298,13 +1310,13 @@ void sub_81D68C8(void)
     gPlttBufferFaded[0] = 0;
 }
 
-void sub_81D6904(void)
+static void sub_81D6904(void)
 {
     SetGpuReg(REG_OFFSET_WININ, 0x3F);
     SetGpuReg(REG_OFFSET_WINOUT, 0x3F);
 }
 
-void sub_81D691C(u8 taskId)
+static void sub_81D691C(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D750C();
@@ -1336,22 +1348,22 @@ void sub_81D691C(u8 taskId)
     }
 }
 
-u8 sub_81D6984(void)
+static u8 sub_81D6984(void)
 {
     u8 spriteId;
     s16 *data;
 
-    spriteId = CreateSprite(&gUnknown_0862A72C, 88, 72, 3);
+    spriteId = CreateSprite(&sUnknown_0862A72C, 88, 72, 3);
     gSprites[spriteId].callback = sub_81D6A20;
     data = gSprites[spriteId].data;
-    data[0] = CreateSprite(&gUnknown_0862A72C, 56, 104, 3);
-    data[1] = CreateSprite(&gUnknown_0862A750, 75, 101, 0);
-    data[2] = CreateSprite(&gUnknown_0862A774, 109, 114, 1);
+    data[0] = CreateSprite(&sUnknown_0862A72C, 56, 104, 3);
+    data[1] = CreateSprite(&sUnknown_0862A750, 75, 101, 0);
+    data[2] = CreateSprite(&sUnknown_0862A774, 109, 114, 1);
     StartSpriteAnim(&gSprites[data[0]], 1);
     return spriteId;
 }
 
-void sub_81D6A20(struct Sprite *sprite)
+static void sub_81D6A20(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     data[5]++;
@@ -1388,25 +1400,25 @@ void sub_81D6A20(struct Sprite *sprite)
     }
 }
 
-u8 sub_81D6B7C(void)
+static u8 sub_81D6B7C(void)
 {
     u8 spriteId;
     s16 *data;
 
-    spriteId = CreateSprite(&gUnknown_0862A81C, 136, 96, 1);
+    spriteId = CreateSprite(&sUnknown_0862A81C, 136, 96, 1);
     gSprites[spriteId].callback = sub_81D6D20;
     data = gSprites[spriteId].data;
 
-    data[0] = CreateSprite(&gUnknown_0862A81C, 168, 96, 1) << 8;
-    data[0] |= CreateSprite(&gUnknown_0862A81C, 136, 112, 1);
-    data[1] = CreateSprite(&gUnknown_0862A81C, 168, 112, 1) << 8;
-    data[1] |= CreateSprite(&gUnknown_0862A81C, 136, 128, 1);
-    data[2] = CreateSprite(&gUnknown_0862A81C, 168, 128, 1) << 8;
-    data[2] |= CreateSprite(&gUnknown_0862A81C, 104, 128, 2);
-    data[3] = CreateSprite(&gUnknown_0862A81C, 136, 128, 2) << 8;
-    data[3] |= CreateSprite(&gUnknown_0862A81C, 184, 128, 0);
-    data[4] = CreateSprite(&gUnknown_0862A84C, 208, 132, 0) << 8;
-    data[4] |= CreateSprite(&gUnknown_0862A864, 200, 120, 1);
+    data[0] = CreateSprite(&sUnknown_0862A81C, 168, 96, 1) << 8;
+    data[0] |= CreateSprite(&sUnknown_0862A81C, 136, 112, 1);
+    data[1] = CreateSprite(&sUnknown_0862A81C, 168, 112, 1) << 8;
+    data[1] |= CreateSprite(&sUnknown_0862A81C, 136, 128, 1);
+    data[2] = CreateSprite(&sUnknown_0862A81C, 168, 128, 1) << 8;
+    data[2] |= CreateSprite(&sUnknown_0862A81C, 104, 128, 2);
+    data[3] = CreateSprite(&sUnknown_0862A81C, 136, 128, 2) << 8;
+    data[3] |= CreateSprite(&sUnknown_0862A81C, 184, 128, 0);
+    data[4] = CreateSprite(&sUnknown_0862A84C, 208, 132, 0) << 8;
+    data[4] |= CreateSprite(&sUnknown_0862A864, 200, 120, 1);
 
     StartSpriteAnim(&gSprites[data[0] >> 8], 1);
     StartSpriteAnim(&gSprites[data[0] & 0xFF], 2);
@@ -1420,7 +1432,7 @@ u8 sub_81D6B7C(void)
     return spriteId;
 }
 
-void sub_81D6D20(struct Sprite *sprite)
+static void sub_81D6D20(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     data[5]++;
@@ -1481,17 +1493,17 @@ void sub_81D6D20(struct Sprite *sprite)
     }
 }
 
-void sub_81D6FD0(void)
+static void sub_81D6FD0(void)
 {
     sub_81D67EC();
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void sub_81D6FE0(void)
+static void sub_81D6FE0(void)
 {
     ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_0862A888, ARRAY_COUNT(gUnknown_0862A888));
+    InitBgsFromTemplates(0, sUnknown_0862A888, ARRAY_COUNT(sUnknown_0862A888));
     SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
     SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
@@ -1506,7 +1518,7 @@ void sub_81D6FE0(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-void sub_81D706C(void)
+static void sub_81D706C(void)
 {
     reset_temp_tile_data_buffers();
     decompress_and_copy_tile_data_to_vram(0, gRaySceneClouds_Gfx, 0, 0, 0);
@@ -1516,24 +1528,24 @@ void sub_81D706C(void)
     LZDecompressWram(gRaySceneClouds1_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneClouds3_Tilemap, sRayScene->tilemapBuffers[2]);
     LoadCompressedPalette(gRaySceneClouds_Pal, 0, 0x40);
-    LoadCompressedObjectPic(&gUnknown_0862A8C4);
-    LoadCompressedObjectPic(&gUnknown_0862A8F8);
-    LoadCompressedObjectPic(&gUnknown_0862A924);
-    LoadCompressedObjectPic(&gUnknown_0862A9D4);
-    LoadCompressedObjectPic(&gUnknown_0862AA14);
-    LoadCompressedObjectPic(&gUnknown_0862AA34);
-    LoadCompressedObjectPalette(&gUnknown_0862A8CC);
-    LoadCompressedObjectPalette(&gUnknown_0862A9DC);
+    LoadCompressedObjectPic(&sUnknown_0862A8C4);
+    LoadCompressedObjectPic(&sUnknown_0862A8F8);
+    LoadCompressedObjectPic(&sUnknown_0862A924);
+    LoadCompressedObjectPic(&sUnknown_0862A9D4);
+    LoadCompressedObjectPic(&sUnknown_0862AA14);
+    LoadCompressedObjectPic(&sUnknown_0862AA34);
+    LoadCompressedObjectPalette(&sUnknown_0862A8CC);
+    LoadCompressedObjectPalette(&sUnknown_0862A9DC);
 }
 
-void sub_81D7134(u8 taskId)
+static void sub_81D7134(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ScanlineEffect_Clear();
     sub_81D6FE0();
     sub_81D706C();
     CpuFastFill16(0, gScanlineEffectRegBuffers, sizeof(gScanlineEffectRegBuffers));
-    ScanlineEffect_SetParams(gUnknown_0862A87C);
+    ScanlineEffect_SetParams(sUnknown_0862A87C);
     data[0] = 0;
     data[1] = CreateTask(sub_81D7228, 0);
     if (sRayScene->animId == RAY_ANIM_DUO_FIGHT_PRE)
@@ -1556,7 +1568,7 @@ void sub_81D7134(u8 taskId)
     PlaySE(SE_T_OOAME);
 }
 
-void sub_81D7228(u8 taskId)
+static void sub_81D7228(u8 taskId)
 {
     s16 i;
     u16 *data = gTasks[taskId].data;
@@ -1615,7 +1627,7 @@ void sub_81D7228(u8 taskId)
     }
 }
 
-void sub_81D736C(u8 taskId)
+static void sub_81D736C(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D750C();
@@ -1656,33 +1668,33 @@ void sub_81D736C(u8 taskId)
     }
 }
 
-void sub_81D7438(void)
+static void sub_81D7438(void)
 {
     PlaySE(SE_T_KAMI);
     sub_80A2C44(0x7FFF, 0, 0x10, 0, -1, 0, 0);
     sub_80A2C44(0xFFFF0000, 0, 0x10, 0, 0, 0, 1);
 }
 
-void sub_81D7480(void)
+static void sub_81D7480(void)
 {
     PlaySE(SE_T_KAMI);
     sub_80A2C44(0x7FFF, 0, 0x10, 0x10, -1, 0, 0);
     sub_80A2C44(0xFFFF0000, 0, 0x10, 0x10, 0, 0, 1);
 }
 
-void sub_81D74C8(void)
+static void sub_81D74C8(void)
 {
     sub_80A2C44(0x7FFF, 4, 0x10, 0, -1, 0, 0);
     sub_80A2C44(0xFFFF0000, 4, 0x10, 0, 0, 0, 1);
 }
 
-void sub_81D750C(void)
+static void sub_81D750C(void)
 {
     ChangeBgX(2, 0x400, 1);
     ChangeBgY(2, 0x800, 2);
 }
 
-void sub_81D752C(u8 taskId)
+static void sub_81D752C(u8 taskId)
 {
     u16 bgY;
     s16 *data = gTasks[taskId].data;
@@ -1700,14 +1712,14 @@ void sub_81D752C(u8 taskId)
     }
 }
 
-void sub_81D75B4(u8 taskId, s8 palDelay)
+static void sub_81D75B4(u8 taskId, s8 palDelay)
 {
     PlaySE(SE_T_OOAME_E);
     BeginNormalPaletteFade(-1, palDelay, 0, 0x10, 0);
     gTasks[taskId].func = sub_81D7600;
 }
 
-void sub_81D7600(u8 taskId)
+static void sub_81D7600(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D750C();
@@ -1724,22 +1736,22 @@ void sub_81D7600(u8 taskId)
     }
 }
 
-u8 sub_81D7664(void)
+static u8 sub_81D7664(void)
 {
     u8 spriteId;
     s16 *data;
 
-    spriteId = CreateSprite(&gUnknown_0862A8D4, 98, 72, 3);
+    spriteId = CreateSprite(&sUnknown_0862A8D4, 98, 72, 3);
     gSprites[spriteId].callback = sub_81D7700;
     data = gSprites[spriteId].data;
-    data[0] = CreateSprite(&gUnknown_0862A8D4, 66, 104, 3);
-    data[1] = CreateSprite(&gUnknown_0862A900, 85, 101, 0);
-    data[2] = CreateSprite(&gUnknown_0862A92C, 119, 114, 1);
+    data[0] = CreateSprite(&sUnknown_0862A8D4, 66, 104, 3);
+    data[1] = CreateSprite(&sUnknown_0862A900, 85, 101, 0);
+    data[2] = CreateSprite(&sUnknown_0862A92C, 119, 114, 1);
     StartSpriteAnim(&gSprites[data[0]], 1);
     return spriteId;
 }
 
-void sub_81D7700(struct Sprite *sprite)
+static void sub_81D7700(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     data[5]++;
@@ -1776,7 +1788,7 @@ void sub_81D7700(struct Sprite *sprite)
     }
 }
 
-void sub_81D7860(struct Sprite *sprite)
+static void sub_81D7860(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     if (sprite->pos1.y <= 160)
@@ -1788,25 +1800,25 @@ void sub_81D7860(struct Sprite *sprite)
     }
 }
 
-u8 sub_81D78BC(void)
+static u8 sub_81D78BC(void)
 {
     u8 spriteId;
     s16 *data;
 
-    spriteId = CreateSprite(&gUnknown_0862A9E4, 126, 96, 1);
+    spriteId = CreateSprite(&sUnknown_0862A9E4, 126, 96, 1);
     gSprites[spriteId].callback = sub_81D7A60;
     data = gSprites[spriteId].data;
 
-    data[0] = CreateSprite(&gUnknown_0862A9E4, 158, 96, 1) << 8;
-    data[0] |= CreateSprite(&gUnknown_0862A9E4, 126, 112, 1);
-    data[1] = CreateSprite(&gUnknown_0862A9E4, 158, 112, 1) << 8;
-    data[1] |= CreateSprite(&gUnknown_0862A9E4, 126, 128, 1);
-    data[2] = CreateSprite(&gUnknown_0862A9E4, 158, 128, 1) << 8;
-    data[2] |= CreateSprite(&gUnknown_0862A9E4, 94, 128, 2);
-    data[3] = CreateSprite(&gUnknown_0862A9E4, 126, 128, 2) << 8;
-    data[3] |= CreateSprite(&gUnknown_0862A9E4, 174, 128, 0);
-    data[4] = CreateSprite(&gUnknown_0862AA1C, 198, 132, 0) << 8;
-    data[4] |= CreateSprite(&gUnknown_0862AA3C, 190, 120, 1);
+    data[0] = CreateSprite(&sUnknown_0862A9E4, 158, 96, 1) << 8;
+    data[0] |= CreateSprite(&sUnknown_0862A9E4, 126, 112, 1);
+    data[1] = CreateSprite(&sUnknown_0862A9E4, 158, 112, 1) << 8;
+    data[1] |= CreateSprite(&sUnknown_0862A9E4, 126, 128, 1);
+    data[2] = CreateSprite(&sUnknown_0862A9E4, 158, 128, 1) << 8;
+    data[2] |= CreateSprite(&sUnknown_0862A9E4, 94, 128, 2);
+    data[3] = CreateSprite(&sUnknown_0862A9E4, 126, 128, 2) << 8;
+    data[3] |= CreateSprite(&sUnknown_0862A9E4, 174, 128, 0);
+    data[4] = CreateSprite(&sUnknown_0862AA1C, 198, 132, 0) << 8;
+    data[4] |= CreateSprite(&sUnknown_0862AA3C, 190, 120, 1);
 
     StartSpriteAnim(&gSprites[data[0] >> 8], 1);
     StartSpriteAnim(&gSprites[data[0] & 0xFF], 2);
@@ -1820,7 +1832,7 @@ u8 sub_81D78BC(void)
     return spriteId;
 }
 
-void sub_81D7A60(struct Sprite *sprite)
+static void sub_81D7A60(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     data[5]++;
@@ -1881,7 +1893,7 @@ void sub_81D7A60(struct Sprite *sprite)
     }
 }
 
-void sub_81D7D14(struct Sprite *sprite)
+static void sub_81D7D14(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     if (sprite->pos1.y <= 160)
@@ -1900,11 +1912,11 @@ void sub_81D7D14(struct Sprite *sprite)
     }
 }
 
-void sub_81D7E10(void)
+static void sub_81D7E10(void)
 {
     ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(1, gUnknown_0862AA54, ARRAY_COUNT(gUnknown_0862AA54));
+    InitBgsFromTemplates(1, sUnknown_0862AA54, ARRAY_COUNT(sUnknown_0862AA54));
     SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
     SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
@@ -1919,7 +1931,7 @@ void sub_81D7E10(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-void sub_81D7E9C(void)
+static void sub_81D7E9C(void)
 {
     reset_temp_tile_data_buffers();
     decompress_and_copy_tile_data_to_vram(0, gRaySceneClouds_Gfx, 0, 0, 0);
@@ -1931,11 +1943,11 @@ void sub_81D7E9C(void)
     LZDecompressWram(gRaySceneOvercast_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneRayquaza_Tilemap, sRayScene->tilemapBuffers[2]);
     LoadCompressedPalette(gRaySceneRayquaza_Pal, 0, 0x40);
-    LoadCompressedObjectPic(&gUnknown_0862AA90);
-    LoadCompressedObjectPalette(&gUnknown_0862AA98);
+    LoadCompressedObjectPic(&sUnknown_0862AA90);
+    LoadCompressedObjectPalette(&sUnknown_0862AA98);
 }
 
-void sub_81D7F4C(u8 taskId)
+static void sub_81D7F4C(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     PlayNewMapMusic(MUS_REKKUU_KOURIN);
@@ -1951,7 +1963,7 @@ void sub_81D7F4C(u8 taskId)
     gTasks[taskId].func = sub_81D7FC0;
 }
 
-void sub_81D7FC0(u8 taskId)
+static void sub_81D7FC0(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -2012,7 +2024,7 @@ void sub_81D7FC0(u8 taskId)
     }
 }
 
-void sub_81D8164(u8 taskId)
+static void sub_81D8164(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2023,14 +2035,14 @@ void sub_81D8164(u8 taskId)
     }
 }
 
-void sub_81D81A4(u8 taskId)
+static void sub_81D81A4(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if ((data[1] & 3) == 0)
     {
-        u8 spriteId = CreateSprite(&gUnknown_0862AAA0,
-                                   (gUnknown_0862AAB8[data[0]][0] * 4) + 120,
-                                   (gUnknown_0862AAB8[data[0]][1] * 4) + 80,
+        u8 spriteId = CreateSprite(&sUnknown_0862AAA0,
+                                   (sUnknown_0862AAB8[data[0]][0] * 4) + 120,
+                                   (sUnknown_0862AAB8[data[0]][1] * 4) + 80,
                                    0);
         gSprites[spriteId].data[0] = (s8)(data[0]);
         gSprites[spriteId].oam.objMode = 1;
@@ -2051,7 +2063,7 @@ void sub_81D81A4(u8 taskId)
     data[1]++;
 }
 
-void sub_81D8260(struct Sprite *sprite)
+static void sub_81D8260(struct Sprite *sprite)
 {
     if (sprite->data[1] == 0)
     {
@@ -2060,19 +2072,19 @@ void sub_81D8260(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos2.x += gUnknown_0862AAB8[sprite->data[0]][0];
-        sprite->pos2.y += gUnknown_0862AAB8[sprite->data[0]][1];
+        sprite->pos2.x += sUnknown_0862AAB8[sprite->data[0]][0];
+        sprite->pos2.y += sUnknown_0862AAB8[sprite->data[0]][1];
     }
 
     sprite->data[1]++;
     sprite->data[1] &= 0xF;
 }
 
-void sub_81D82B0(void)
+static void sub_81D82B0(void)
 {
     ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_0862AACC, ARRAY_COUNT(gUnknown_0862AACC));
+    InitBgsFromTemplates(0, sUnknown_0862AACC, ARRAY_COUNT(sUnknown_0862AACC));
     SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
     SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
@@ -2090,7 +2102,7 @@ void sub_81D82B0(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-void sub_81D8358(void)
+static void sub_81D8358(void)
 {
     reset_temp_tile_data_buffers();
     decompress_and_copy_tile_data_to_vram(0, gRaySceneRayquazaLight_Gfx, 0, 0, 0);
@@ -2106,12 +2118,12 @@ void sub_81D8358(void)
     LoadCompressedPalette(gRaySceneOvercast2_Pal, 0, 0x40);
     gPlttBufferUnfaded[0] = RGB_WHITE;
     gPlttBufferFaded[0] = RGB_WHITE;
-    LoadCompressedObjectPic(&gUnknown_0862AAFC);
-    LoadCompressedObjectPic(&gUnknown_0862AB04);
-    LoadCompressedObjectPalette(&gUnknown_0862AB0C);
+    LoadCompressedObjectPic(&sUnknown_0862AAFC);
+    LoadCompressedObjectPic(&sUnknown_0862AB04);
+    LoadCompressedObjectPalette(&sUnknown_0862AB0C);
 }
 
-void sub_81D844C(void)
+static void sub_81D844C(void)
 {
     u16 VCOUNT = GetGpuReg(REG_OFFSET_VCOUNT);
     if (VCOUNT >= 24 && VCOUNT <= 135 && VCOUNT - 24 <= sRayScene->field_2008)
@@ -2135,7 +2147,7 @@ void sub_81D844C(void)
     }
 }
 
-void sub_81D84EC(u8 taskId)
+static void sub_81D84EC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D82B0();
@@ -2154,7 +2166,7 @@ void sub_81D84EC(u8 taskId)
     gTasks[taskId].func = sub_81D857C;
 }
 
-void sub_81D857C(u8 taskId)
+static void sub_81D857C(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -2213,7 +2225,7 @@ void sub_81D857C(u8 taskId)
     }
 }
 
-void sub_81D8684(u8 taskId)
+static void sub_81D8684(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2225,18 +2237,18 @@ void sub_81D8684(u8 taskId)
     }
 }
 
-u8 sub_81D86CC(void)
+static u8 sub_81D86CC(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_0862AB14, 160, 0, 0);
+    u8 spriteId = CreateSprite(&sUnknown_0862AB14, 160, 0, 0);
     s16 *data = gSprites[spriteId].data;
-    data[0] = CreateSprite(&gUnknown_0862AB2C, 184, -48, 0);
+    data[0] = CreateSprite(&sUnknown_0862AB2C, 184, -48, 0);
     gSprites[spriteId].callback = sub_81D874C;
     gSprites[spriteId].oam.priority = 3;
     gSprites[data[0]].oam.priority = 3;
     return spriteId;
 }
 
-void sub_81D874C(struct Sprite *sprite)
+static void sub_81D874C(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     s16 counter = data[2];
@@ -2290,11 +2302,11 @@ void sub_81D874C(struct Sprite *sprite)
     data[2]++;
 }
 
-void sub_81D8828(void)
+static void sub_81D8828(void)
 {
     ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_0862AB44, ARRAY_COUNT(gUnknown_0862AB44));
+    InitBgsFromTemplates(0, sUnknown_0862AB44, ARRAY_COUNT(sUnknown_0862AB44));
     SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
     SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
@@ -2312,7 +2324,7 @@ void sub_81D8828(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-void sub_81D88D0(void)
+static void sub_81D88D0(void)
 {
     reset_temp_tile_data_buffers();
     decompress_and_copy_tile_data_to_vram(1, gRaySceneRayquazaChase_Gfx, 0, 0, 0);
@@ -2327,7 +2339,7 @@ void sub_81D88D0(void)
     LoadCompressedPalette(gRaySceneChase_Pal, 0, 0x80);
 }
 
-void sub_81D8980(u8 taskId)
+static void sub_81D8980(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D8828();
@@ -2341,7 +2353,7 @@ void sub_81D8980(u8 taskId)
     gTasks[taskId].func = sub_81D89E0;
 }
 
-void sub_81D89E0(u8 taskId)
+static void sub_81D89E0(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D8BB4();
@@ -2393,7 +2405,7 @@ void sub_81D89E0(u8 taskId)
     }
 }
 
-void sub_81D8AD8(u8 taskId)
+static void sub_81D8AD8(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if ((data[15] & 3) == 0)
@@ -2405,7 +2417,7 @@ void sub_81D8AD8(u8 taskId)
     data[15]++;
 }
 
-void sub_81D8B2C(u8 taskId)
+static void sub_81D8B2C(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (data[0] == 0)
@@ -2426,7 +2438,7 @@ void sub_81D8B2C(u8 taskId)
     }
 }
 
-void sub_81D8BB4(void)
+static void sub_81D8BB4(void)
 {
     ChangeBgX(2, 0x400, 2);
     ChangeBgY(2, 0x400, 1);
@@ -2434,7 +2446,7 @@ void sub_81D8BB4(void)
     ChangeBgY(0, 0x800, 1);
 }
 
-void sub_81D8BEC(u8 taskId)
+static void sub_81D8BEC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D8BB4();
@@ -2444,5 +2456,477 @@ void sub_81D8BEC(u8 taskId)
         sub_81D6904();
         DestroyTask(data[2]);
         gTasks[taskId].func = Task_SetNextAnim;
+    }
+}
+
+static void sub_81D8C38(void)
+{
+    ResetVramOamAndBgCntRegs();
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(1, sUnknown_0862AD08, ARRAY_COUNT(sUnknown_0862AD08));
+    SetBgTilemapBuffer(0, sRayScene->tilemapBuffers[0]);
+    SetBgTilemapBuffer(1, sRayScene->tilemapBuffers[1]);
+    SetBgTilemapBuffer(2, sRayScene->tilemapBuffers[2]);
+    ResetAllBgsCoordinates();
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_WIN0_ON);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+}
+
+static void sub_81D8CC4(void)
+{
+    reset_temp_tile_data_buffers();
+    decompress_and_copy_tile_data_to_vram(2, gRaySceneHushRing_Gfx, 0, 0, 0);
+    decompress_and_copy_tile_data_to_vram(0, gRaySceneHushBg_Gfx, 0, 0, 0);
+    while (free_temp_tile_data_buffers_if_possible());
+
+    LZDecompressWram(gRaySceneHushRing_Tilemap, sRayScene->tilemapBuffers[1]);
+    LZDecompressWram(gRaySceneHushBg_Tilemap, sRayScene->tilemapBuffers[0]);
+    LZDecompressWram(gRaySceneHushRing_Map, sRayScene->tilemapBuffers[2]);
+    LoadCompressedPalette(gRaySceneHushBg_Pal, 0, 0x60);
+    LoadCompressedObjectPic(&sUnknown_0862AC28);
+    LoadCompressedObjectPic(&sUnknown_0862AC30);
+    LoadCompressedObjectPic(&sUnknown_0862AC38);
+    LoadCompressedObjectPic(&sUnknown_0862AC40);
+    LoadCompressedObjectPic(&sUnknown_0862AC48);
+    LoadCompressedObjectPic(&sUnknown_0862AC50);
+    LoadCompressedObjectPalette(&sUnknown_0862AC58);
+    LoadCompressedObjectPalette(&sUnknown_0862AC60);
+    LoadCompressedObjectPalette(&sUnknown_0862AC68);
+    LoadCompressedObjectPalette(&sUnknown_0862AC70);
+}
+
+static void sub_81D8DB4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_81D8C38();
+    sub_81D8CC4();
+    sub_81D68C8();
+    ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0x241);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0xE09);
+    BlendPalettes(-1, 0x10, 0);
+    SetVBlankCallback(sub_81D67EC);
+    data[0] = 0;
+    data[1] = 0;
+    gTasks[taskId].func = sub_81D8E80;
+    data[2] = CreateTask(sub_81D8FB0, 0);
+    gTasks[data[2]].data[0] = 0;
+    gTasks[data[2]].data[1] = 0;
+    gTasks[data[2]].data[2] = 0;
+    gTasks[data[2]].data[3] = 1;
+    gTasks[data[2]].data[4] = 1;
+}
+
+static void sub_81D8E80(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    switch (data[0])
+    {
+    case 0:
+        if (data[1] == 8)
+        {
+            sub_81D90A8(taskId);
+            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            data[1] = 0;
+            data[0]++;
+        }
+        else
+        {
+            data[1]++;
+        }
+        break;
+    case 1:
+        if (gSprites[data[5]].callback == sub_81D97E0)
+        {
+            if (data[1] == 64)
+            {
+                sub_81D94D4(taskId);
+                sub_81D93D8(taskId);
+                data[1] = 0;
+                data[0]++;
+            }
+            else
+            {
+                data[1]++;
+            }
+        }
+        break;
+    case 2:
+        if (data[1] == 448)
+        {
+            data[1] = 0;
+            data[0]++;
+        }
+        else
+        {
+            data[1]++;
+            if (data[1] % 144 == 0)
+            {
+                sub_80A2C44(0xFFFE, 0, 0x10, 0, -1, 0, 0);
+                sub_80A2C44(0xFFFF0000, 0, 0x10, 0, 0, 0, 1);
+            }
+        }
+        break;
+    case 3:
+        BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
+        gTasks[taskId].func = sub_81D9034;
+        break;
+    }
+}
+
+static void sub_81D8FB0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if ((data[0] & 0xF) == 0)
+    {
+        SetGpuReg(REG_OFFSET_BLDALPHA, ((data[1] + 14) << 8 & 0x1F00) | ((data[2] + 9) & 0xF));
+        data[1] -= data[3];
+        data[2] += data[4];
+        if (data[1] == -3 || data[1] == 0)
+            data[3] *= -1;
+        if (data[2] == 3 || data[2] == 0)
+            data[4] *= -1;
+    }
+
+    data[0]++;
+}
+
+static void sub_81D9034(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active)
+    {
+        StopMapMusic();
+        if (data[1] == 0)
+        {
+            SetVBlankCallback(NULL);
+            sub_81D6904();
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            DestroyTask(data[2]);
+        }
+
+        if (data[1] == 32)
+        {
+            data[1] = 0;
+            gTasks[taskId].func = Task_SetNextAnim;
+        }
+        else
+        {
+            data[1]++;
+        }
+    }
+}
+
+static void sub_81D90A8(u8 taskId)
+{
+    s16 *taskData, *spriteData;
+
+    taskData = gTasks[taskId].data;
+
+    taskData[3] = CreateSprite(&sUnknown_0862AC78, 64, 120, 0);
+    spriteData = gSprites[taskData[3]].data;
+    spriteData[0] = CreateSprite(&sUnknown_0862AC90, 16, 130, 0);
+    gSprites[taskData[3]].oam.priority = 1;
+    gSprites[spriteData[0]].oam.priority = 1;
+
+    taskData[4] = CreateSprite(&sUnknown_0862ACA8, 160, 128, 1);
+    spriteData = gSprites[taskData[4]].data;
+    spriteData[0] = CreateSprite(&sUnknown_0862ACA8, 192, 128, 1);
+    spriteData[1] = CreateSprite(&sUnknown_0862ACA8, 224, 128, 1);
+    gSprites[taskData[4]].oam.priority = 1;
+    gSprites[spriteData[0]].oam.priority = 1;
+    gSprites[spriteData[1]].oam.priority = 1;
+    StartSpriteAnim(&gSprites[spriteData[0]], 1);
+    StartSpriteAnim(&gSprites[spriteData[1]], 2);
+
+    taskData[5] = CreateSprite(&sUnknown_0862ACC0, 120, -65, 0);
+    spriteData = gSprites[taskData[5]].data;
+    spriteData[0] = CreateSprite(&sUnknown_0862ACD8, 120, -113, 0);
+    gSprites[taskData[5]].oam.priority = 1;
+    gSprites[spriteData[0]].oam.priority = 1;
+}
+
+static void sub_81D9274(u8 taskId)
+{
+    s16 *taskData = gTasks[taskId].data;
+
+    gSprites[taskData[3]].callback = sub_81D9338;
+    gSprites[taskData[3]].data[4] = 0;
+    gSprites[taskData[3]].data[5] = 0;
+    gSprites[taskData[3]].data[6] = 4;
+    gSprites[taskData[3]].data[7] = 0;
+
+    gSprites[taskData[4]].callback = sub_81D9338;
+    gSprites[taskData[4]].data[4] = 0;
+    gSprites[taskData[4]].data[5] = 0;
+    gSprites[taskData[4]].data[6] = 4;
+    gSprites[taskData[4]].data[7] = 1;
+}
+
+static void sub_81D9338(struct Sprite *sprite)
+{
+    if ((sprite->data[4] & 7) == 0)
+    {
+        if (sprite->data[7] == 0)
+        {
+            sprite->pos1.x -= sprite->data[6];
+            gSprites[sprite->data[0]].pos1.x -= sprite->data[6];
+        }
+        else
+        {
+            sprite->pos1.x += sprite->data[6];
+            gSprites[sprite->data[0]].pos1.x += sprite->data[6];
+            gSprites[sprite->data[1]].pos1.x += sprite->data[6];
+        }
+
+        sprite->data[5]++;
+        sprite->data[6] -= sprite->data[5];
+        if (sprite->data[5] == 3)
+        {
+            sprite->data[4] = 0;
+            sprite->data[5] = 0;
+            sprite->data[6] = 0;
+            sprite->callback = SpriteCallbackDummy;
+            return;
+        }
+    }
+
+    sprite->data[4]++;
+}
+
+static void sub_81D93D8(u8 taskId)
+{
+    s16 *taskData = gTasks[taskId].data;
+    gSprites[taskData[3]].callback = sub_81D9420;
+    StartSpriteAnim(&gSprites[taskData[3]], 1);
+}
+
+static void sub_81D9420(struct Sprite *sprite)
+{
+    switch (sprite->animCmdIndex)
+    {
+    case 0:
+    case 2:
+        if (sprite->animDelayCounter % 12 == 0)
+        {
+            sprite->pos1.x -= 2;
+            gSprites[sprite->data[0]].pos1.x -=2;
+        }
+        gSprites[sprite->data[0]].pos2.y = 0;
+        break;
+    case 1:
+    case 3:
+        gSprites[sprite->data[0]].pos2.y = -2;
+        if ((sprite->animDelayCounter & 15) == 0)
+        {
+            sprite->pos1.y++;
+            gSprites[sprite->data[0]].pos1.y++;
+        }
+        break;
+    }
+}
+
+static void sub_81D94D4(u8 taskId)
+{
+    s16 *taskData, *spriteData;
+
+    taskData = gTasks[taskId].data;
+    spriteData = gSprites[taskData[4]].data;
+
+    gSprites[taskData[4]].callback = sub_81D9528;
+    gSprites[spriteData[0]].callback = sub_81D9528;
+    gSprites[spriteData[1]].callback = sub_81D9528;
+}
+
+static void sub_81D9528(struct Sprite *sprite)
+{
+    if ((sprite->data[4] & 3) == 0)
+    {
+        if (sprite->pos2.x == 1)
+            sprite->pos2.x = -1;
+        else
+            sprite->pos2.x = 1;
+    }
+    if (sprite->data[5] == 128)
+    {
+        sprite->data[7] = CreateSprite(&sUnknown_0862ACF0, 152, 132, 0);
+        gSprites[sprite->data[7]].oam.priority = 1;
+        sprite->data[7] = CreateSprite(&sUnknown_0862ACF0, 224, 132, 0);
+        gSprites[sprite->data[7]].oam.priority = 1;
+        gSprites[sprite->data[7]].hFlip = 1;
+        sprite->data[5]++;
+    }
+    if (sprite->data[5] > 127)
+    {
+        if (sprite->pos2.y != 32)
+        {
+            sprite->data[6]++;
+            sprite->pos2.y = sprite->data[6] >> 4;
+        }
+    }
+    else
+    {
+        sprite->data[5]++;
+    }
+
+    if (sprite->data[4] % 64 == 0)
+        PlaySE(SE_W250);
+
+    sprite->data[4]++;
+}
+
+static void sub_81D961C(struct Sprite *sprite)
+{
+    s16 counter = sprite->data[7];
+    if (counter <= 64)
+    {
+        sprite->pos2.y += 2;
+        gSprites[sprite->data[0]].pos2.y += 2;
+        if (sprite->data[7] == 64)
+        {
+            sub_81D9868(sprite, 1, 0, -48);
+            sprite->data[4] = 5;
+            sprite->data[5] = -1;
+            gSprites[sprite->data[0]].data[4] = 3;
+            gSprites[sprite->data[0]].data[5] = 5;
+        }
+    }
+    else if (counter <= 111)
+    {
+        sub_81D97E0(sprite);
+        if (sprite->data[4] == 0)
+            PlaySE(SE_BT_START);
+        if (sprite->data[4] == -3)
+            sub_81D9868(sprite, 2, 48, 16);
+    }
+    else if (counter == 112)
+    {
+        gSprites[sprite->data[0]].data[4] = 7;
+        gSprites[sprite->data[0]].data[5] = 3;
+        sub_81D97E0(sprite);
+    }
+    else if (counter <= 327)
+    {
+        sub_81D97E0(sprite);
+    }
+    else if (counter == 328)
+    {
+        sub_81D97E0(sprite);
+        sub_81D9868(sprite, 3, 48, 16);
+        sprite->pos2.x = 1;
+        gSprites[sprite->data[0]].pos2.x = 1;
+        PlayCry1(SPECIES_RAYQUAZA, 0);
+        CreateTask(sub_81D98B4, 0);
+    }
+    else
+    {
+        switch (counter)
+        {
+        case 376:
+            sprite->pos2.x = 0;
+            gSprites[sprite->data[0]].pos2.x = 0;
+            sub_81D97E0(sprite);
+            sub_81D9868(sprite, 2, 48, 16);
+            sprite->callback = sub_81D97E0;
+            return;
+        case 352:
+            sub_81D9274(FindTaskIdByFunc(sub_81D8E80));
+            break;
+        }
+    }
+
+    if (sprite->data[7] > 328 && (sprite->data[7] & 1) == 0)
+    {
+        sprite->pos2.x *= -1;
+        gSprites[sprite->data[0]].pos2.x = sprite->pos2.x;
+    }
+
+    sprite->data[7]++;
+}
+
+static void sub_81D97E0(struct Sprite *sprite)
+{
+    struct Sprite *sprite2 = &gSprites[sprite->data[0]];
+    if (!(sprite->data[6] & sprite2->data[4]))
+    {
+        sprite->pos2.y += sprite->data[4];
+        gSprites[sprite->data[0]].pos2.y += sprite->data[4];
+        sprite->data[4] += sprite->data[5];
+        if (sprite->data[4] >= sprite2->data[5] || sprite->data[4] <= -sprite2->data[5])
+        {
+            if (sprite->data[4] > sprite2->data[5])
+                sprite->data[4] = sprite2->data[5];
+            else if (sprite->data[4] < -sprite2->data[5])
+                sprite->data[4] = -sprite2->data[5];
+
+            sprite->data[5] *= -1;
+        }
+    }
+
+    sprite->data[6]++;
+}
+
+static void sub_81D9868(struct Sprite *sprite, u8 animNum, s16 x, s16 y)
+{
+    struct Sprite *sprite2 = &gSprites[sprite->data[0]];
+
+    sprite2->pos1.x = sprite->pos1.x + x;
+    sprite2->pos1.y = sprite->pos1.y + y;
+
+    sprite2->pos2.x = sprite->pos2.x;
+    sprite2->pos2.y = sprite->pos2.y;
+
+    StartSpriteAnim(sprite, animNum);
+    StartSpriteAnim(sprite2, animNum);
+}
+
+static void sub_81D98B4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    switch (data[0])
+    {
+    case 0:
+        SetBgAffine(2, 0x4000, 0x4000, 0x78, 0x40, 0x100, 0x100, 0);
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
+        data[4] = 16;
+        data[0]++;
+        break;
+    case 1:
+        if (data[5] == 8)
+            PlaySE(SE_JIDO_DOA);
+        if (data[2] == 2)
+        {
+            data[0]++;
+        }
+        else
+        {
+            data[1] += data[4];
+            data[5]++;
+            if (data[3] % 3 == 0 && data[4] != 4)
+                data[4] -= 2;
+
+            data[3]++;
+            SetBgAffine(2, 0x4000, 0x4000, 0x78, 0x40, 0x100 - data[1], 0x100 - data[1], 0);
+            if (data[1] > 255)
+            {
+                data[1] = 0;
+                data[3] = 0;
+                data[5] = 0;
+                data[4] = 16;
+                data[2]++;
+            }
+        }
+        break;
+    case 2:
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
+        DestroyTask(taskId);
+        break;
     }
 }

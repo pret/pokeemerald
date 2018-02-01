@@ -2700,5 +2700,11 @@ extern const u8 gRayChaseRayquazaChase_Tilemap[];
 extern const u8 gRaySceneChaseStreaks_Tilemap[];
 extern const u8 gRaySceneChaseBg_Tilemap[];
 extern const u8 gRaySceneChase_Pal[];
+extern const u8 gRaySceneHushRing_Tilemap[];
+extern const u8 gRaySceneHushBg_Tilemap[];
+extern const u8 gRaySceneHushRing_Map[];
+extern const u8 gRaySceneHushBg_Pal[];
+extern const u8 gRaySceneHushBg_Gfx[];
+extern const u8 gRaySceneHushRing_Gfx[];
 
 #endif //GUARD_GRAPHICS_H
