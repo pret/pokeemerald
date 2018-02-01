@@ -34,11 +34,11 @@ struct RaySceneStruct
 static EWRAM_DATA struct RaySceneStruct *sRayScene = NULL;
 
 // this file's functions
-static void sub_81D7134(u8 taskId);
-static void sub_81D7F4C(u8 taskId);
-static void sub_81D84EC(u8 taskId);
-static void sub_81D8980(u8 taskId);
-static void sub_81D8DB4(u8 taskId);
+static void Task_DuoFightAnim(u8 taskId);
+static void Task_RayTakesFlightAnim(u8 taskId);
+static void Task_RayDescendsAnim(u8 taskId);
+static void Task_RayChargesAnim(u8 taskId);
+static void Task_RayChasesAwayAnim(u8 taskId);
 static void sub_81D857C(u8 taskId);
 static void sub_81D8684(u8 taskId);
 static void sub_81D89E0(u8 taskId);
@@ -89,12 +89,12 @@ static void sub_81D9868(struct Sprite *sprite, u8 animNum, s16 x, s16 y);
 // const rom data
 static const TaskFunc sTasksForAnimations[] =
 {
-    sub_81D7134, // RAY_ANIM_DUO_FIGHT_PRE
-    sub_81D7134, // RAY_ANIM_DUO_FIGHT
-    sub_81D7F4C, // RAY_ANIM_TAKES_FLIGHT
-    sub_81D84EC, // RAY_ANIM_DESCENDS
-    sub_81D8980, // RAY_ANIM_CHARGES
-    sub_81D8DB4, // RAY_ANIM_CHACES_AWAY
+    Task_DuoFightAnim, // RAY_ANIM_DUO_FIGHT_PRE
+    Task_DuoFightAnim, // RAY_ANIM_DUO_FIGHT
+    Task_RayTakesFlightAnim, // RAY_ANIM_TAKES_FLIGHT
+    Task_RayDescendsAnim, // RAY_ANIM_DESCENDS
+    Task_RayChargesAnim, // RAY_ANIM_CHARGES
+    Task_RayChasesAwayAnim, // RAY_ANIM_CHACES_AWAY
     Task_EndAfterFadeScreen // RAY_ANIM_END
 };
 
@@ -1538,7 +1538,7 @@ static void sub_81D706C(void)
     LoadCompressedObjectPalette(&sUnknown_0862A9DC);
 }
 
-static void sub_81D7134(u8 taskId)
+static void Task_DuoFightAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ScanlineEffect_Clear();
@@ -1947,7 +1947,7 @@ static void sub_81D7E9C(void)
     LoadCompressedObjectPalette(&sUnknown_0862AA98);
 }
 
-static void sub_81D7F4C(u8 taskId)
+static void Task_RayTakesFlightAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     PlayNewMapMusic(MUS_REKKUU_KOURIN);
@@ -2147,7 +2147,7 @@ static void sub_81D844C(void)
     }
 }
 
-static void sub_81D84EC(u8 taskId)
+static void Task_RayDescendsAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D82B0();
@@ -2339,7 +2339,7 @@ static void sub_81D88D0(void)
     LoadCompressedPalette(gRaySceneChase_Pal, 0, 0x80);
 }
 
-static void sub_81D8980(u8 taskId)
+static void Task_RayChargesAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D8828();
@@ -2501,7 +2501,7 @@ static void sub_81D8CC4(void)
     LoadCompressedObjectPalette(&sUnknown_0862AC70);
 }
 
-static void sub_81D8DB4(u8 taskId)
+static void Task_RayChasesAwayAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D8C38();
