@@ -40,28 +40,28 @@ static void Task_RayDescendsAnim(u8 taskId);
 static void Task_RayChargesAnim(u8 taskId);
 static void Task_RayChasesAwayAnim(u8 taskId);
 static void sub_81D857C(u8 taskId);
-static void sub_81D8684(u8 taskId);
+static void Task_RayDescendsEnd(u8 taskId);
 static void sub_81D89E0(u8 taskId);
 static void sub_81D8AD8(u8 taskId);
 static void sub_81D8B2C(u8 taskId);
-static void sub_81D8BEC(u8 taskId);
+static void Task_RayChargesEnd(u8 taskId);
 static void sub_81D8E80(u8 taskId);
 static void sub_81D8FB0(u8 taskId);
 static void sub_81D7228(u8 taskId);
 static void sub_81D736C(u8 taskId);
 static void sub_81D752C(u8 taskId);
-static void sub_81D7600(u8 taskId);
+static void Task_DuoFightEnd(u8 taskId);
 static void sub_81D7FC0(u8 taskId);
 static void sub_81D81A4(u8 taskId);
-static void sub_81D8164(u8 taskId);
+static void Task_RayTakesFlightEnd(u8 taskId);
 static void sub_81D94D4(u8 taskId);
 static void sub_81D93D8(u8 taskId);
-static void sub_81D9034(u8 taskId);
+static void Task_RayChasesAwayEnd(u8 taskId);
 static void sub_81D90A8(u8 taskId);
 static void sub_81D98B4(u8 taskId);
 static void Task_EndAfterFadeScreen(u8 taskId);
-static void sub_81D6774(void);
-static void sub_81D67D0(void);
+static void CB2_InitRayquazaScene(void);
+static void CB2_RayquazaScene(void);
 static void sub_81D750C(void);
 static void sub_81D7438(void);
 static void sub_81D7480(void);
@@ -83,7 +83,7 @@ static void sub_81D9528(struct Sprite *sprite);
 static u8 sub_81D7664(void);
 static u8 sub_81D78BC(void);
 static u8 sub_81D86CC(void);
-static void sub_81D75B4(u8 taskId, s8 palDelay);
+static void DuoFightEnd(u8 taskId, s8 palDelay);
 static void sub_81D9868(struct Sprite *sprite, u8 animNum, s16 x, s16 y);
 
 // const rom data
@@ -1238,10 +1238,10 @@ void DoRayquazaScene(u8 animId, bool8 onlyOneAnim, void (*callback)(void))
     sRayScene->animId = animId;
     sRayScene->callback = callback;
     sRayScene->onlyOneAnim = onlyOneAnim;
-    SetMainCallback2(sub_81D6774);
+    SetMainCallback2(CB2_InitRayquazaScene);
 }
 
-static void sub_81D6774(void)
+static void CB2_InitRayquazaScene(void)
 {
     SetVBlankHBlankCallbacksToNull();
     clear_scheduled_bg_copies_to_vram();
@@ -1252,10 +1252,10 @@ static void sub_81D6774(void)
     ResetTasks();
     FillPalette(0, 0xF0, 0x20);
     CreateTask(sTasksForAnimations[sRayScene->animId], 0);
-    SetMainCallback2(sub_81D67D0);
+    SetMainCallback2(CB2_RayquazaScene);
 }
 
-static void sub_81D67D0(void)
+static void CB2_RayquazaScene(void)
 {
     RunTasks();
     AnimateSprites();
@@ -1264,7 +1264,7 @@ static void sub_81D67D0(void)
     UpdatePaletteFade();
 }
 
-static void sub_81D67EC(void)
+static void VblankCB_RayquazaScene(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -1336,7 +1336,7 @@ static void sub_81D691C(u8 taskId)
             switch (counter)
             {
             case 328:
-                sub_81D75B4(taskId, 0);
+                DuoFightEnd(taskId, 0);
                 return;
             case 148:
                 sub_81D74C8();
@@ -1495,7 +1495,7 @@ static void sub_81D6D20(struct Sprite *sprite)
 
 static void sub_81D6FD0(void)
 {
-    sub_81D67EC();
+    VblankCB_RayquazaScene();
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
@@ -1651,7 +1651,7 @@ static void sub_81D736C(u8 taskId)
             switch (counter)
             {
             case 412:
-                sub_81D75B4(taskId, 2);
+                DuoFightEnd(taskId, 2);
                 return;
             case 380:
                 SetGpuReg(REG_OFFSET_BLDCNT, 0x244);
@@ -1712,14 +1712,14 @@ static void sub_81D752C(u8 taskId)
     }
 }
 
-static void sub_81D75B4(u8 taskId, s8 palDelay)
+static void DuoFightEnd(u8 taskId, s8 palDelay)
 {
     PlaySE(SE_T_OOAME_E);
     BeginNormalPaletteFade(-1, palDelay, 0, 0x10, 0);
-    gTasks[taskId].func = sub_81D7600;
+    gTasks[taskId].func = Task_DuoFightEnd;
 }
 
-static void sub_81D7600(u8 taskId)
+static void Task_DuoFightEnd(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D750C();
@@ -1956,7 +1956,7 @@ static void Task_RayTakesFlightAnim(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, 0x250);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
     BlendPalettes(-1, 0x10, 0);
-    SetVBlankCallback(sub_81D67EC);
+    SetVBlankCallback(VblankCB_RayquazaScene);
     CreateTask(sub_81D81A4, 0);
     data[0] = 0;
     data[1] = 0;
@@ -2019,12 +2019,12 @@ static void sub_81D7FC0(u8 taskId)
     case 3:
         data[2] += 16;
         SetBgAffine(2, 0x7800, 0x1800, 0x78, data[4] + 32, data[2], data[2], 0);
-        sub_81D8164(taskId);
+        Task_RayTakesFlightEnd(taskId);
         break;
     }
 }
 
-static void sub_81D8164(u8 taskId)
+static void Task_RayTakesFlightEnd(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2155,7 +2155,7 @@ static void Task_RayDescendsAnim(u8 taskId)
     SetGpuRegBits(REG_OFFSET_BLDCNT, 0x1E41);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x1000);
     BlendPalettes(-1, 0x10, 0);
-    SetVBlankCallback(sub_81D67EC);
+    SetVBlankCallback(VblankCB_RayquazaScene);
     sRayScene->field_2008 = 0;
     sRayScene->field_200A = 0;
     data[0] = 0;
@@ -2220,12 +2220,12 @@ static void sub_81D857C(u8 taskId)
         break;
     case 4:
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-        gTasks[taskId].func = sub_81D8684;
+        gTasks[taskId].func = Task_RayDescendsEnd;
         break;
     }
 }
 
-static void sub_81D8684(u8 taskId)
+static void Task_RayDescendsEnd(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2346,7 +2346,7 @@ static void Task_RayChargesAnim(u8 taskId)
     sub_81D88D0();
     sub_81D68C8();
     BlendPalettes(-1, 0x10, 0);
-    SetVBlankCallback(sub_81D67EC);
+    SetVBlankCallback(VblankCB_RayquazaScene);
     data[0] = 0;
     data[1] = 0;
     data[2] = CreateTask(sub_81D8AD8, 0);
@@ -2400,7 +2400,7 @@ static void sub_81D89E0(u8 taskId)
         break;
     case 3:
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-        gTasks[taskId].func = sub_81D8BEC;
+        gTasks[taskId].func = Task_RayChargesEnd;
         break;
     }
 }
@@ -2446,7 +2446,7 @@ static void sub_81D8BB4(void)
     ChangeBgY(0, 0x800, 1);
 }
 
-static void sub_81D8BEC(u8 taskId)
+static void Task_RayChargesEnd(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     sub_81D8BB4();
@@ -2511,7 +2511,7 @@ static void Task_RayChasesAwayAnim(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, 0x241);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0xE09);
     BlendPalettes(-1, 0x10, 0);
-    SetVBlankCallback(sub_81D67EC);
+    SetVBlankCallback(VblankCB_RayquazaScene);
     data[0] = 0;
     data[1] = 0;
     gTasks[taskId].func = sub_81D8E80;
@@ -2575,7 +2575,7 @@ static void sub_81D8E80(u8 taskId)
         break;
     case 3:
         BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
-        gTasks[taskId].func = sub_81D9034;
+        gTasks[taskId].func = Task_RayChasesAwayEnd;
         break;
     }
 }
@@ -2597,7 +2597,7 @@ static void sub_81D8FB0(u8 taskId)
     data[0]++;
 }
 
-static void sub_81D9034(u8 taskId)
+static void Task_RayChasesAwayEnd(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
