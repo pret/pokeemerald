@@ -527,8 +527,8 @@ _080D5082:
 	.pool
 	thumb_func_end sub_80D5070
 
-	thumb_func_start sub_80D50D4
-sub_80D50D4: @ 80D50D4
+	thumb_func_start CreateBerryTagSprite
+CreateBerryTagSprite: @ 80D50D4
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -554,7 +554,7 @@ sub_80D50D4: @ 80D50D4
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80D50D4
+	thumb_func_end CreateBerryTagSprite
 
 	thumb_func_start sub_80D510C
 sub_80D510C: @ 80D510C

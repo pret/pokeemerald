@@ -229,6 +229,7 @@ SECTIONS {
         asm/credits.o(.text);
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
+        src/berry_tag_screen.o(.text);
         asm/berry_tag_screen.o(.text);
         src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
@@ -504,7 +505,7 @@ SECTIONS {
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);
         data/strings.o(.rodata);
-        data/berry_tag_screen.o(.rodata);
+        src/berry_tag_screen.o(.rodata);
         src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
