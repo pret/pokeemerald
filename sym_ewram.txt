@@ -1409,12 +1409,7 @@ gUnknown_0203CE8C: @ 203CE8C
 	.space 0x10
 
     .include "src/unk_text_util.o"
-
-gUnknown_0203CEBC: @ 203CEBC
-	.space 0x4
-
-gUnknown_0203CEC0: @ 203CEC0
-	.space 0x4
+    .include "src/item_icon.o"
 
 gUnknown_0203CEC4: @ 203CEC4
 	.space 0x4

@@ -969,7 +969,7 @@ _080E02AE:
 	ldr r0, =0x0000083e
 	adds r1, r3, r0
 	adds r0, r1, 0
-	bl AddItemIconObject
+	bl AddItemIconSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40

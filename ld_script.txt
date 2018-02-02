@@ -255,7 +255,7 @@ SECTIONS {
         asm/menu_indicators.o(.text);
         src/unk_text_util.o(.text);
         src/save_location.o(.text);
-        asm/item_icon.o(.text);
+        src/item_icon.o(.text);
         asm/party_menu.o(.text);
         asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
@@ -526,6 +526,7 @@ SECTIONS {
         data/menu_indicators.o(.rodata);
         src/save_location.o(.rodata);
         data/item_icon.o(.rodata);
+        src/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
