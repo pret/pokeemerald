@@ -120,6 +120,13 @@ const struct WindowTemplate gUnknown_085105AC[] =
 const struct WindowTemplate gUnknown_085105BC = {0, 1, 1, 0xE, 0xA, 0xF, 8};
 
 // code
+void SetDexPokemonPokenavFlags(void) // unused
+{
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKENAV_GET);
+}
+
 void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;

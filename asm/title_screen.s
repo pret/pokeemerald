@@ -1243,7 +1243,7 @@ c2_reset_rtc_screen_1: @ 80AAF0C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AAF1E
-	ldr r0, =sub_809EF88
+	ldr r0, =CB2_InitResetRtcScreen
 	bl SetMainCallback2
 _080AAF1E:
 	pop {r0}
