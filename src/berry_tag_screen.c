@@ -5,6 +5,7 @@
 #include "field_map_obj.h"
 #include "item_menu.h"
 #include "constants/items.h"
+#include "item.h"
 #include "item_use.h"
 #include "main.h"
 #include "menu.h"
@@ -29,7 +30,7 @@
 #include "international_string_util.h"
 
 // const rom data
-const struct BgTemplate gUnknown_085EFCF0[] =
+static const struct BgTemplate gUnknown_085EFCF0[] =
 {
   {
       .bg = 0,
@@ -69,15 +70,15 @@ const struct BgTemplate gUnknown_085EFCF0[] =
   }
 };
 
-const u16 gUnknown_085EFD00[] = INCBIN_U16("graphics/interface/berry_tag_screen.gbapal");
+static const u16 gUnknown_085EFD00[] = INCBIN_U16("graphics/interface/berry_tag_screen.gbapal");
 
-const struct TextColor gUnknown_085EFD20[] =
+static const struct TextColor gUnknown_085EFD20[] =
 {
     {0, 2, 3},
     {15, 14, 13}
 };
 
-const struct WindowTemplate gUnknown_085EFD28[] =
+static const struct WindowTemplate gUnknown_085EFD28[] =
 {
     {0x01, 0x0b, 0x04, 0x08, 0x02, 0x0f, 0x0045},
     {0x01, 0x0b, 0x07, 0x12, 0x04, 0x0f, 0x0055},
@@ -86,7 +87,7 @@ const struct WindowTemplate gUnknown_085EFD28[] =
     DUMMY_WIN_TEMPLATE
 };
 
-const u8 *const gBerryFirmnessStringPointers[] =
+static const u8 *const gBerryFirmnessStringPointers[] =
 {
     gBerryFirmnessString_VerySoft,
     gBerryFirmnessString_Soft,
@@ -96,22 +97,26 @@ const u8 *const gBerryFirmnessStringPointers[] =
 };
 
 // this file's functions
-void sub_8177C84(void);
-void sub_8177E14(void);
-void sub_8178008(void);
-void sub_8178090(void);
-void sub_81780F4(void);
-void sub_8178338(void);
-void sub_817839C(void);
-void sub_8178404(void);
-void sub_8178110(void);
-void sub_8178174(void);
-void sub_8178250(void);
-void sub_81782D0(void);
-void sub_8178304(void);
-bool8 sub_8177CB0(void);
-bool8 sub_8177E88(void);
-void sub_8178654(u8 taskId);
+static void sub_8177C84(void);
+static void sub_8177E14(void);
+static void sub_8178008(void);
+static void sub_8178090(void);
+static void sub_81780F4(void);
+static void sub_8178338(void);
+static void sub_817839C(void);
+static void sub_8178404(void);
+static void sub_8178110(void);
+static void sub_8178174(void);
+static void sub_8178250(void);
+static void sub_81782D0(void);
+static void sub_8178304(void);
+static bool8 sub_8177CB0(void);
+static bool8 sub_8177E88(void);
+static void sub_8178654(u8 taskId);
+static void sub_8178610(u8 taskId);
+static void sub_81787AC(u8 taskId);
+static void sub_81786AC(u8 taskId, s8 toMove);
+static void sub_8178728(s8 toMove);
 
 // code
 struct BerryTagScreenStruct
@@ -119,21 +124,20 @@ struct BerryTagScreenStruct
     u16 tilemapBuffers[3][0x400];
     u16 berryId;
     u8 berrySpriteId;
-    u16 field_1804;
-    u16 field_1806;
+    u8 flavorCircleIds[FLAVOR_COUNT];
     u16 field_1808;
 };
 
 extern struct BerryTagScreenStruct *sBerryTag;
 
-void sub_8177C14(void)
+void DoBerryTagScreen(void)
 {
     sBerryTag = AllocZeroed(0x180C);
     sBerryTag->berryId = ItemIdToBerryType(gSpecialVar_ItemId);
     SetMainCallback2(sub_8177C84);
 }
 
-void sub_8177C54(void)
+static void sub_8177C54(void)
 {
     RunTasks();
     AnimateSprites();
@@ -142,14 +146,14 @@ void sub_8177C54(void)
     UpdatePaletteFade();
 }
 
-void sub_8177C70(void)
+static void sub_8177C70(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_8177C84(void)
+static void sub_8177C84(void)
 {
     while (1)
     {
@@ -162,7 +166,7 @@ void sub_8177C84(void)
     }
 }
 
-bool8 sub_8177CB0(void)
+static bool8 sub_8177CB0(void)
 {
     switch (gMain.state)
     {
@@ -246,7 +250,7 @@ bool8 sub_8177CB0(void)
     return FALSE;
 }
 
-void sub_8177E14(void)
+static void sub_8177E14(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_085EFCF0, ARRAY_COUNT(gUnknown_085EFCF0));
@@ -263,7 +267,7 @@ void sub_8177E14(void)
     ShowBg(3);
 }
 
-bool8 sub_8177E88(void)
+static bool8 sub_8177E88(void)
 {
     u16 i;
 
@@ -314,7 +318,7 @@ bool8 sub_8177E88(void)
     return FALSE;
 }
 
-void sub_8178008(void)
+static void sub_8178008(void)
 {
     u16 i;
 
@@ -327,12 +331,12 @@ void sub_8178008(void)
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
-void sub_817804C(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed, u8 colorStructId)
+static void sub_817804C(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed, u8 colorStructId)
 {
     AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, &gUnknown_085EFD20[colorStructId], speed, text);
 }
 
-void sub_8178090(void)
+static void sub_8178090(void)
 {
     memcpy(GetBgTilemapBuffer(0), sBerryTag->tilemapBuffers[2], sizeof(sBerryTag->tilemapBuffers[2]));
     FillWindowPixelBuffer(3, 0xFF);
@@ -341,7 +345,7 @@ void sub_8178090(void)
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
-void sub_81780F4(void)
+static void sub_81780F4(void)
 {
     sub_8178110();
     sub_8178174();
@@ -350,7 +354,7 @@ void sub_81780F4(void)
     sub_8178304();
 }
 
-void sub_8178110(void)
+static void sub_8178110(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
     ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, 2, 2);
@@ -359,7 +363,7 @@ void sub_8178110(void)
     sub_817804C(0, gStringVar4, 0, 1, 0, 0);
 }
 
-void sub_8178174(void)
+static void sub_8178174(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
     PrintTextOnWindow(1, 1, gText_SizeSlash, 0, 1, TEXT_SPEED_FF, NULL);
@@ -384,7 +388,7 @@ void sub_8178174(void)
     }
 }
 
-void sub_8178250(void)
+static void sub_8178250(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
     PrintTextOnWindow(1, 1, gText_FirmSlash, 0, 0x11, TEXT_SPEED_FF, NULL);
@@ -394,19 +398,246 @@ void sub_8178250(void)
         PrintTextOnWindow(1, 1, gText_ThreeMarks, 0x28, 0x11, 0, NULL);
 }
 
-void sub_81782D0(void)
+static void sub_81782D0(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
     PrintTextOnWindow(2, 1, berry->description1, 0, 1, 0, NULL);
 }
 
-void sub_8178304(void)
+static void sub_8178304(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
     PrintTextOnWindow(2, 1, berry->description2, 0, 0x11, 0, NULL);
 }
 
-void sub_8178338(void)
+static void sub_8178338(void)
 {
     sBerryTag->berrySpriteId = CreateBerryTagSprite(sBerryTag->berryId - 1, 56, 64);
+}
+
+static void sub_817836C(void)
+{
+    DestroySprite(&gSprites[sBerryTag->berrySpriteId]);
+    FreeBerryTagSpritePalette();
+}
+
+static void sub_817839C(void)
+{
+    sBerryTag->flavorCircleIds[FLAVOR_SPICY] = CreateBerryFlavorCircleSprite(64);
+    sBerryTag->flavorCircleIds[FLAVOR_DRY] = CreateBerryFlavorCircleSprite(104);
+    sBerryTag->flavorCircleIds[FLAVOR_SWEET] = CreateBerryFlavorCircleSprite(144);
+    sBerryTag->flavorCircleIds[FLAVOR_BITTER] = CreateBerryFlavorCircleSprite(184);
+    sBerryTag->flavorCircleIds[FLAVOR_SOUR] = CreateBerryFlavorCircleSprite(224);
+}
+
+static void sub_8178404(void)
+{
+    const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
+
+    if (berry->spicy)
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SPICY]].invisible = 0;
+    else
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SPICY]].invisible = 1;
+
+    if (berry->dry)
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_DRY]].invisible = 0;
+    else
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_DRY]].invisible = 1;
+
+    if (berry->sweet)
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SWEET]].invisible = 0;
+    else
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SWEET]].invisible = 1;
+
+    if (berry->bitter)
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_BITTER]].invisible = 0;
+    else
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_BITTER]].invisible = 1;
+
+    if (berry->sour)
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SOUR]].invisible = 0;
+    else
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SOUR]].invisible = 1;
+}
+
+static void sub_8178594(void)
+{
+    u16 i;
+
+    for (i = 0; i < FLAVOR_COUNT; i++)
+        DestroySprite(&gSprites[sBerryTag->flavorCircleIds[i]]);
+}
+
+static void sub_81785D0(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    gTasks[taskId].func = sub_8178610;
+}
+
+static void sub_8178610(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_817836C();
+        sub_8178594();
+        Free(sBerryTag);
+        FreeAllWindowBuffers();
+        SetMainCallback2(bag_menu_mail_related);
+        DestroyTask(taskId);
+    }
+}
+
+static void sub_8178654(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        u16 arrowKeys = gMain.newAndRepeatedKeys & DPAD_ANY;
+        if (arrowKeys == DPAD_UP)
+            sub_81786AC(taskId, -1);
+        else if (arrowKeys == DPAD_DOWN)
+            sub_81786AC(taskId, 1);
+        else if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+            sub_81785D0(taskId);
+    }
+}
+
+static void sub_81786AC(u8 taskId, s8 toMove)
+{
+    s16 *data = gTasks[taskId].data;
+    s16 currPocketPosition = gUnknown_0203CE58.unk12[3] + gUnknown_0203CE58.unk8[3];
+    u32 newPocketPosition = currPocketPosition + toMove;
+    if (newPocketPosition < 46 && BagGetItemIdByPocketPosition(BAG_BERRIES, newPocketPosition) != 0)
+    {
+        if (toMove < 0)
+            data[1] = 2;
+        else
+            data[1] = 1;
+
+        data[0] = 0;
+        PlaySE(SE_SELECT);
+        sub_8178728(toMove);
+        gTasks[taskId].func = sub_81787AC;
+    }
+}
+
+static void sub_8178728(s8 toMove)
+{
+    u16 *scrollPos = &gUnknown_0203CE58.unk12[3];
+    u16 *cursorPos = &gUnknown_0203CE58.unk8[3];
+    if (toMove > 0)
+    {
+        if (*cursorPos < 4 || BagGetItemIdByPocketPosition(BAG_BERRIES, *scrollPos + 8) == 0)
+            *cursorPos += toMove;
+        else
+            *scrollPos += toMove;
+    }
+    else
+    {
+        if (*cursorPos > 3 || *scrollPos == 0)
+            *cursorPos += toMove;
+        else
+            *scrollPos += toMove;
+    }
+
+    sBerryTag->berryId = ItemIdToBerryType(BagGetItemIdByPocketPosition(BAG_BERRIES, *scrollPos + *cursorPos));
+}
+
+static void sub_81787AC(u8 taskId)
+{
+    u16 i;
+    s16 posY;
+    s16 *data = gTasks[taskId].data;
+    data[0] += 0x10;
+    data[0] &= 0xFF;
+
+    if (data[1] == 1)
+    {
+        switch (data[0])
+        {
+        case 0x30:
+            FillWindowPixelBuffer(0, 0);
+            break;
+        case 0x40:
+            sub_8178110();
+            break;
+        case 0x50:
+            sub_817836C();
+            sub_8178338();
+            break;
+        case 0x60:
+            FillWindowPixelBuffer(1, 0);
+            break;
+        case 0x70:
+            sub_8178174();
+            break;
+        case 0x80:
+            sub_8178250();
+            break;
+        case 0x90:
+            sub_8178404();
+            break;
+        case 0xA0:
+            FillWindowPixelBuffer(2, 0);
+            break;
+        case 0xB0:
+            sub_81782D0();
+            break;
+        case 0xC0:
+            sub_8178304();
+            break;
+        }
+    }
+    else
+    {
+        switch (data[0])
+        {
+        case 0x30:
+            FillWindowPixelBuffer(2, 0);
+            break;
+        case 0x40:
+            sub_8178304();
+            break;
+        case 0x50:
+            sub_81782D0();
+            break;
+        case 0x60:
+            sub_8178404();
+            break;
+        case 0x70:
+            FillWindowPixelBuffer(1, 0);
+            break;
+        case 0x80:
+            sub_8178250();
+            break;
+        case 0x90:
+            sub_8178174();
+            break;
+        case 0xA0:
+            sub_817836C();
+            sub_8178338();
+            break;
+        case 0xB0:
+            FillWindowPixelBuffer(0, 0);
+            break;
+        case 0xC0:
+            sub_8178110();
+            break;
+        }
+    }
+
+    if (data[1] == 1)
+        posY = -data[0];
+    else
+        posY = data[0];
+
+    gSprites[sBerryTag->berrySpriteId].pos2.y = posY;
+    for (i = 0; i < FLAVOR_COUNT; i++)
+        gSprites[sBerryTag->flavorCircleIds[i]].pos2.y = posY;
+
+    ChangeBgY(1, 0x1000, data[1]);
+    ChangeBgY(2, 0x1000, data[1]);
+
+    if (data[0] == 0)
+        gTasks[taskId].func = sub_8178654;
 }

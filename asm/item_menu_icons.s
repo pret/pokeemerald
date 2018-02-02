@@ -556,15 +556,15 @@ CreateBerryTagSprite: @ 80D50D4
 	.pool
 	thumb_func_end CreateBerryTagSprite
 
-	thumb_func_start sub_80D510C
-sub_80D510C: @ 80D510C
+	thumb_func_start FreeBerryTagSpritePalette
+FreeBerryTagSpritePalette: @ 80D510C
 	push {lr}
 	ldr r0, =0x00007544
 	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D510C
+	thumb_func_end FreeBerryTagSpritePalette
 
 	thumb_func_start sub_80D511C
 sub_80D511C: @ 80D511C
@@ -617,8 +617,8 @@ _080D5172:
 	.pool
 	thumb_func_end sub_80D511C
 
-	thumb_func_start sub_80D518C
-sub_80D518C: @ 80D518C
+	thumb_func_start CreateBerryFlavorCircleSprite
+CreateBerryFlavorCircleSprite: @ 80D518C
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =gUnknown_0857FE10
@@ -632,6 +632,6 @@ sub_80D518C: @ 80D518C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80D518C
+	thumb_func_end CreateBerryFlavorCircleSprite
 
 	.align 2, 0 @ Don't pad with nop.
