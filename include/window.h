@@ -68,5 +68,11 @@ void BlitBitmapRectToWindow4BitTo8Bit(u8 windowId, u8 *pixels, u16 srcX, u16 src
 void CopyWindowToVram8Bit(u8 windowId, u8 mode);
 
 extern struct Window gWindows[];
+extern void* gUnknown_03002F70[];
+extern u32 filler_03002F58;
+extern u32 filler_03002F5C;
+extern u32 filler_03002F64;
+
+extern u8 gUnknown_03002F60;
 
 #endif // GUARD_WINDOW_H

@@ -1,14 +1,7 @@
 	.space 0x8
 	.include "main.o"
 	.include "bg.o"
-
-    .align 4
-gUnknown_03002F60: @ 3002F60
-	.space 0x10
-
-gUnknown_03002F70: @ 3002F70
-	.space 0x10
-
+	.include "window.o"
 	.include "text.o"
 	.include "sprite.o"
 	.include "link.o"
