@@ -195,8 +195,10 @@ extern struct LinkPlayer gLinkPlayers[5];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern u32 gUnknown_020223C0;
+extern bool8 gLinkVSyncDisabled;
+extern u32 gLinkStatus;
 
-void Task_DestroySelf(u8);
+void Task_DestroySelf(u8 taskId);
 void OpenLink(void);
 void CloseLink(void);
 u16 LinkMain2(const u16 *);

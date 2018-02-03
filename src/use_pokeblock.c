@@ -4,7 +4,7 @@
 #include "malloc.h"
 #include "palette.h"
 #include "pokenav.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "text.h"
 #include "bg.h"
 #include "window.h"
@@ -131,7 +131,7 @@ void sub_8166340(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
     sub_81D2108(gUnknown_0203BCAC->field_7C58);
-    sub_80BA0A8();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 void sub_816636C(void (*func)(void))

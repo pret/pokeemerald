@@ -3923,7 +3923,7 @@ _080148CC:
 	bne _080149B2
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	movs r0, 0x2
 	strh r0, [r7]
 	b _080149B2
@@ -11150,7 +11150,7 @@ _08018720:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	adds r1, r7, 0
 	movs r2, 0xDE
@@ -11166,7 +11166,7 @@ _08018720:
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -11338,7 +11338,7 @@ sub_8018884: @ 8018884
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xF
@@ -11691,7 +11691,7 @@ _08018B4A:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldrb r0, [r4]
 	movs r1, 0x1
 	movs r2, 0xF
@@ -11837,7 +11837,7 @@ _08018C8C:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldrb r0, [r5]
 	movs r1, 0x1
 	movs r2, 0xF
@@ -13672,7 +13672,7 @@ _08019B84:
 	b _08019B9C
 _08019B96:
 	adds r0, r4, 0
-	bl sub_8097404
+	bl FreezeMapObject
 _08019B9C:
 	movs r0, 0x1
 _08019B9E:
@@ -15389,7 +15389,7 @@ _0801A93A:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r4-r7}
 	pop {r0}
@@ -15710,7 +15710,7 @@ sub_801AB68: @ 801AB68
 	movs r1, 0x1
 	adds r2, r6, 0
 	ldr r3, [sp, 0x14]
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -22076,7 +22076,7 @@ sub_801DF20: @ 801DF20
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_801DF20
@@ -24807,7 +24807,7 @@ sub_801F544: @ 801F544
 	str r0, [r4]
 _0801F55A:
 	bl FreeAllWindowBuffers
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	pop {r4}
@@ -27114,13 +27114,13 @@ sub_8020770: @ 8020770
 	strh r1, [r0, 0x20]
 	str r1, [sp, 0xC]
 	add r0, sp, 0xC
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	ldr r2, =0x010003c0
 	bl CpuFastSet
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -27135,12 +27135,12 @@ sub_80207C0: @ 80207C0
 	lsrs r0, 16
 	mov r1, sp
 	strh r0, [r1]
-	ldr r5, =gUnknown_02039B28
+	ldr r5, =gScanlineEffect
 	ldrb r0, [r5, 0x14]
 	lsls r1, r0, 4
 	subs r1, r0
 	lsls r1, 7
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	adds r1, r4
 	ldr r2, =0x01000090
 	mov r0, sp
@@ -27178,7 +27178,7 @@ sub_8020818: @ 8020818
 	lsrs r4, 16
 	mov r0, sp
 	strh r4, [r0]
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	ldr r0, =0x01000090
 	mov r9, r0
 	mov r0, sp
@@ -30787,7 +30787,7 @@ _08022616:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	b _0802269C
 	.pool
 _08022668:
@@ -30814,7 +30814,7 @@ _08022668:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _0802269C:
 	ldr r1, =0x000001bb
 	adds r0, r6, r1
@@ -31690,7 +31690,7 @@ _08022D42:
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _08022DB2
 	.pool
 _08022D90:
@@ -31709,7 +31709,7 @@ _08022D90:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 _08022DB2:
 	movs r0, 0
 	movs r1, 0x3
@@ -34273,7 +34273,7 @@ _080241A6:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -34632,7 +34632,7 @@ _08024460:
 	str r1, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _080244AC
 	.pool
 _08024490:
@@ -34648,7 +34648,7 @@ _08024490:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 _080244AC:
 	movs r0, 0
 	movs r1, 0x3
@@ -46362,7 +46362,7 @@ _0802A3AE:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _0802A410
 	.pool
 _0802A3D8:

@@ -638,7 +638,7 @@ static bool8 IsPaletteNotActive(void)
 
 bool8 ScrCmd_fadescreen(struct ScriptContext *ctx)
 {
-    fade_screen(ScriptReadByte(ctx), 0);
+    FadeScreen(ScriptReadByte(ctx), 0);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
@@ -648,7 +648,7 @@ bool8 ScrCmd_fadescreenspeed(struct ScriptContext *ctx)
     u8 mode = ScriptReadByte(ctx);
     u8 speed = ScriptReadByte(ctx);
 
-    fade_screen(mode, speed);
+    FadeScreen(mode, speed);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
@@ -662,12 +662,12 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
         case 1:
         default:
             CpuCopy32(gPlttBufferUnfaded, gPaletteDecompressionBuffer, PLTT_DECOMP_BUFFER_SIZE);
-            fade_screen(mode, 0);
+            FadeScreen(mode, 0);
             break;
         case 0:
         case 2:
             CpuCopy32(gPaletteDecompressionBuffer, gPlttBufferUnfaded, PLTT_DECOMP_BUFFER_SIZE);
-            fade_screen(mode, 0);
+            FadeScreen(mode, 0);
             break;
     }
 
@@ -726,7 +726,7 @@ bool8 ScrCmd_setweather(struct ScriptContext *ctx)
 
 bool8 ScrCmd_resetweather(struct ScriptContext *ctx)
 {
-    sub_80AEDBC();
+    SetSav1WeatherFromCurrMapHeader();
     return FALSE;
 }
 

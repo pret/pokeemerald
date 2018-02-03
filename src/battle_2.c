@@ -4,7 +4,7 @@
 #include "main.h"
 #include "load_save.h"
 #include "gpu_regs.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "battle_setup.h"
 #include "battle_scripts.h"
 #include "pokemon.h"
@@ -47,13 +47,6 @@
 #include "battle_string_ids.h"
 #include "data2.h"
 
-struct UnknownStruct6
-{
-    u16 unk0[0xA0];
-    u8 fillerA0[0x640];
-    u16 unk780[0xA0];
-};
-
 struct UnknownPokemonStruct2
 {
     /*0x00*/ u16 species;
@@ -91,8 +84,6 @@ extern void (*gBattleMainFunc)(void);
 extern void (*gCB2_AfterEvolution)(void);
 extern struct UnknownPokemonStruct2 gUnknown_02022FF8[3]; // what is it used for?
 extern struct UnknownPokemonStruct2* gUnknown_02023058; // what is it used for?
-extern u8 gUnknown_02039B28[]; // possibly a struct?
-extern struct UnknownStruct6 gUnknown_02038C28; // todo: identify & document
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gDecompressionBuffer[];
@@ -163,6 +154,7 @@ extern const u8 * const gBattlescriptsForBallThrow[];
 extern const u8 * const gBattlescriptsForRunningByItem[];
 extern const u8 * const gBattlescriptsForUsingItem[];
 extern const u8 * const gBattlescriptsForSafariActions[];
+extern const struct ScanlineEffectParams gUnknown_0831AC70;
 
 // strings
 extern const u8 gText_LinkStandby3[];
@@ -181,7 +173,7 @@ extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
 
 // functions
-extern void dp12_8087EA4(void);
+extern void ScanlineEffect_Clear(void);
 extern void sub_80356D0(void);
 extern void GetFrontierTrainerName(u8* dst, u16 trainerId); // battle tower
 extern void sub_8166188(void); // battle tower, sets link battle mons level but why?
@@ -384,24 +376,21 @@ static void CB2_InitBattleInternal(void)
     else
     {
         gBattle_WIN0V = 0x5051;
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
 
         for (i = 0; i < 80; i++)
         {
-            gUnknown_02038C28.unk0[i] = 0xF0;
-            gUnknown_02038C28.unk780[i] = 0xF0;
+            gScanlineEffectRegBuffers[0][i] = 0xF0;
+            gScanlineEffectRegBuffers[1][i] = 0xF0;
         }
         for (i = 80; i < 160; i++)
         {
-            #ifndef NONMATCHING
-                asm(""::"r"(i)); // needed to match
-            #endif // NONMATCHING
-
-            gUnknown_02038C28.unk0[i] = 0xFF10;
-            gUnknown_02038C28.unk780[i] = 0xFF10;
+            asm(""::"r"(i));
+            gScanlineEffectRegBuffers[0][i] = 0xFF10;
+            gScanlineEffectRegBuffers[1][i] = 0xFF10;
         }
 
-        sub_80BA038(gUnknown_0831AC70);
+        ScanlineEffect_SetParams(gUnknown_0831AC70);
     }
 
     ResetPaletteFade();
@@ -1597,7 +1586,7 @@ void BattleMainCB2(void)
 static void FreeRestoreBattleData(void)
 {
     gMain.callback1 = gPreBattleCallback1;
-    gUnknown_02039B28[0x15] = 3;
+    gScanlineEffect.state = 3;
     gMain.inBattle = 0;
     ZeroEnemyPartyMons();
     m4aSongNumStop(0x5A);
@@ -1815,7 +1804,7 @@ void VBlankCB_Battle(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_80BA0A8();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 void nullsub_17(void)
@@ -1953,18 +1942,18 @@ void sub_8038D64(void)
         SetGpuReg(REG_OFFSET_WINOUT, 0);
         gBattle_WIN0H = 0xF0;
         gBattle_WIN0V = 0x5051;
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
 
         for (i = 0; i < 80; i++)
         {
-            gUnknown_02038C28.unk0[i] = 0xF0;
-            gUnknown_02038C28.unk780[i] = 0xF0;
+            gScanlineEffectRegBuffers[0][i] = 0xF0;
+            gScanlineEffectRegBuffers[1][i] = 0xF0;
         }
         for (i = 80; i < 160; i++)
         {
             asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
-            gUnknown_02038C28.unk0[i] = 0xFF10;
-            gUnknown_02038C28.unk780[i] = 0xFF10;
+            gScanlineEffectRegBuffers[0][i] = 0xFF10;
+            gScanlineEffectRegBuffers[1][i] = 0xFF10;
         }
 
         ResetPaletteFade();

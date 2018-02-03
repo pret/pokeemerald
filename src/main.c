@@ -7,7 +7,7 @@
 #include "m4a.h"
 #include "bg.h"
 #include "rtc.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "overworld.h"
 #include "play_time.h"
 #include "random.h"

@@ -6,7 +6,7 @@
 #include "field_effect.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
-#include "map_obj_8097404.h"
+#include "field_map_obj_helpers.h"
 #include "pokenav.h"
 #include "task.h"
 #include "util.h"
@@ -639,7 +639,7 @@ void sub_80B45D0(void)
             gApproachingTrainerId++;
             gSpecialVar_Result = 1;
             UnfreezeMapObjects();
-            sub_80974D0(gApproachingTrainers[1].mapObjectId);
+            FreezeMapObjectsExceptOne(gApproachingTrainers[1].mapObjectId);
         }
         else
         {

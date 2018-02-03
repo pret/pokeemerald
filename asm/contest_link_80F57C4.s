@@ -344,7 +344,7 @@ sub_80F5B00: @ 80F5B00
 	bl SetVBlankCallback
 	bl sub_80F7DF4
 	bl sub_80F57C4
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
@@ -492,7 +492,7 @@ sub_80F5C24: @ 80F5C24
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.pool

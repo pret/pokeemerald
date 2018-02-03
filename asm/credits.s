@@ -149,7 +149,7 @@ _081755E4:
 	movs r0, 0
 	movs r1, 0x1
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}

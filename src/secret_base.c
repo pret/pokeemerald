@@ -394,7 +394,7 @@ void sub_80E8FD0(u8 taskId)
 void sub_80E9068(void)
 {
     CreateTask(sub_80E8FD0, 0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
@@ -451,7 +451,7 @@ void sub_80E916C(u8 taskId)
 void sub_80E91F8(void)
 {
     CreateTask(sub_80E916C, 0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 bool8 CurrentMapIsSecretBase(void)
@@ -651,7 +651,7 @@ void sub_80E96A4(u8 taskId)
 void sub_80E9728(void)
 {
     CreateTask(sub_80E96A4, 0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 void sub_80E9744(void)

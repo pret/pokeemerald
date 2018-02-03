@@ -34,5 +34,6 @@ void sub_808BCE8(void);
 
 void sub_808D074(u8);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
+u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

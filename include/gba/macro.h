@@ -122,6 +122,27 @@
 
 #define DmaFillLarge32(dmaNum, value, dest, size, block) DmaFillLarge(dmaNum, value, dest, size, block, 32)
 
+#define DmaClearLarge(dmaNum, dest, size, block, bit) \
+{                                                           \
+    void *_dest = dest;                                     \
+    u32 _size = size;                                       \
+    while (1)                                               \
+    {                                                       \
+        DmaFill##bit(dmaNum, 0, _dest, (block));       \
+        _dest += (block);                                   \
+        _size -= (block);                                   \
+        if (_size <= (block))                               \
+        {                                                   \
+            DmaFill##bit(dmaNum, 0, _dest, _size);     \
+            break;                                          \
+        }                                                   \
+    }                                                       \
+}
+
+#define DmaClearLarge16(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 16)
+
+#define DmaClearLarge32(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 32)
+
 #define DmaCopyDefvars(dmaNum, src, dest, size, bit) \
 {                                                    \
     const void *_src = src;                          \

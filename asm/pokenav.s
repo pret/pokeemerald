@@ -44,7 +44,7 @@ sub_81C72A4: @ 81C72A4
 	bl SetMainCallback2
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r0}
 	bx r0
 	.pool
@@ -7068,7 +7068,7 @@ sub_81CA914: @ 81CA914
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CA914
@@ -7101,7 +7101,7 @@ titlescreen_0: @ 81CA92C
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldr r0, =sub_81CA914
 	bl c3args_set_0toR1_1to0
 	ldr r0, =sub_81CA9EC
@@ -7220,7 +7220,7 @@ sub_81CAA3C: @ 81CAA3C
 	mov r0, sp
 	movs r6, 0
 	strh r6, [r0]
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	ldr r0, =0x010000a0
 	mov r8, r0
 	mov r0, sp
@@ -15647,7 +15647,7 @@ sub_81CEE44: @ 81CEE44
 	bl TransferPlttBuffer
 	adds r0, r4, 0
 	bl sub_81D2108
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -21900,7 +21900,7 @@ _081D1D8C:
 	movs r1, 0x1
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _081D1DAC:
 	add sp, 0x34
 	pop {r4,r5}
@@ -22318,7 +22318,7 @@ sub_81D20BC: @ 81D20BC
 	b _081D20FA
 	.pool
 _081D20D4:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -22332,7 +22332,7 @@ _081D20E2:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -22366,7 +22366,7 @@ sub_81D2108: @ 81D2108
 	adds r0, r6, 0
 	bl sub_81D2634
 	movs r7, 0
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	mov r12, r5
 	movs r0, 0xF0
 	lsls r0, 3
@@ -23765,7 +23765,7 @@ sub_81D2BF4: @ 81D2BF4
 	str r0, [sp, 0xC]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}

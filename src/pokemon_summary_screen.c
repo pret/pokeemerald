@@ -162,7 +162,7 @@ extern struct BattleMove gBattleMoves[];
 
 extern u32 ChangeBgX(u8 bg, u32 value, u8 op);
 extern void sub_8199C30(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f);
-extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor* colors, s8 speed, u8 *str);
+extern void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor* colors, s8 speed, u8 *str);
 extern s32 GetStringCenterAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
 extern s32 GetStringRightAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
 extern bool8 sub_81A6BF4();
@@ -2557,7 +2557,7 @@ void sub_81C2554()
 
 void sub_81C25A4(u8 a, u8 *b, u8 c, u8 d, u8 e, u8 f)
 {
-    AddTextPrinterParametrized2(a, 1, c, d, 0, e, &gUnknown_0861CD2C[f], 0, b);
+    AddTextPrinterParameterized2(a, 1, c, d, 0, e, &gUnknown_0861CD2C[f], 0, b);
 }
 
 void sub_81C25E8()

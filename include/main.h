@@ -66,5 +66,7 @@ void InitFlashTimer(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
 void RestoreSerialTimer3IntrHandlers(void);
+void StartTimer1(void);
+void SeedRngAndSetTrainerId(void);
 
 #endif // GUARD_MAIN_H

@@ -3602,7 +3602,7 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
         FillWindowPixelBuffer(windowId, txtColor.fgColor | (txtColor.fgColor << 4));
     }
 
-    AddTextPrinterParametrized2(windowId, 1, x, y, letterSpacing, 1, &txtColor, speed, string);
+    AddTextPrinterParameterized2(windowId, 1, x, y, letterSpacing, 1, &txtColor, speed, string);
 }
 
 static bool32 Blender_PrintText(s16 *textState, const u8 *string, s32 textSpeed)
