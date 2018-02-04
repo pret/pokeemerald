@@ -830,8 +830,8 @@ sub_809EF00: @ 809EF00
 	.pool
 	thumb_func_end sub_809EF00
 
-	thumb_func_start sub_809EF88
-sub_809EF88: @ 809EF88
+	thumb_func_start CB2_InitResetRtcScreen
+CB2_InitResetRtcScreen: @ 809EF88
 	push {r4-r7,lr}
 	sub sp, 0x4
 	movs r0, 0
@@ -905,7 +905,7 @@ _0809EFCA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809EF88
+	thumb_func_end CB2_InitResetRtcScreen
 
 	thumb_func_start sub_809F048
 sub_809F048: @ 809F048
