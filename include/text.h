@@ -185,6 +185,13 @@ struct __attribute__((packed)) TextColor
     u8 shadowColor;
 };
 
+struct AlignedTextColor // because sometimes it's necessary
+{
+    u8 fgColor;
+    u8 bgColor;
+    u8 shadowColor;
+};
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];

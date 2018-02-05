@@ -95,9 +95,9 @@ sub_8197224: @ 8197224
 	bx r1
 	thumb_func_end sub_8197224
 
-	thumb_func_start AddTextPrinterParametrized
-@ u16 AddTextPrinterParametrized(u8 windowId, u8 fontId, u8 *str, u8 speed, void ( *callback)(u16, struct TextPrinter *), u8 fgColor, u8 bgColor, u8 shadowColor)
-AddTextPrinterParametrized: @ 8197238
+	thumb_func_start AddTextPrinterParameterized
+@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, u8 *str, u8 speed, void ( *callback)(u16, struct TextPrinter *), u8 fgColor, u8 bgColor, u8 shadowColor)
+AddTextPrinterParameterized: @ 8197238
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -166,7 +166,7 @@ AddTextPrinterParametrized: @ 8197238
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end AddTextPrinterParametrized
+	thumb_func_end AddTextPrinterParameterized
 
 	thumb_func_start AddTextPrinterForMessage
 @ void AddTextPrinterForMessage(u8 allowSkippingDelayWithButtonPress)
@@ -198,7 +198,7 @@ AddTextPrinterForMessage: @ 81972C4
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -236,7 +236,7 @@ AddTextPrinterForMessage_2: @ 8197310
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -273,7 +273,7 @@ AddTextPrinterWithCustomSpeedForMessage: @ 819735C
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}

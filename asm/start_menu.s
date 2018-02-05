@@ -449,7 +449,7 @@ _0809FB34:
 	beq _0809FBA0
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _0809FBA0
 	.pool
 _0809FB98:
@@ -1561,7 +1561,7 @@ _080A0490:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	b _080A04FC
 _080A04A2:
 	movs r0, 0
@@ -1695,7 +1695,7 @@ _080A05AC:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0xFF
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xE

@@ -7096,7 +7096,7 @@ _081926B0:
 	movs r1, 0x1
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -8779,7 +8779,7 @@ _081934B0:
 	mov r1, r10
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -8927,7 +8927,7 @@ _081935FA:
 	movs r1, 0x1
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -11000,8 +11000,8 @@ _0819486C:
 	movs r1, 0
 	strh r1, [r0, 0x8]
 _08194878:
-	bl dp12_8087EA4
-	ldr r0, =gUnknown_02038C28
+	bl ScanlineEffect_Clear
+	ldr r0, =gScanlineEffectRegBuffers
 	ldr r2, =0x00001f0a
 	movs r4, 0xF0
 	lsls r4, 3
@@ -11017,7 +11017,7 @@ _08194888:
 	bge _08194888
 	movs r5, 0x5B
 	ldr r3, =gUnknown_0860CF44
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	ldr r2, =0x00001f09
 	ldr r4, =0x00000836
 	adds r1, r0, r4
@@ -11033,7 +11033,7 @@ _081948A4:
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
 	ldr r2, [r3, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	mov r0, r8
 	bl DestroyTask
 _081948C2:
@@ -11513,7 +11513,7 @@ sub_8194CE4: @ 8194CE4
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.pool

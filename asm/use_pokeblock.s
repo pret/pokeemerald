@@ -732,10 +732,10 @@ _08166C28:
 	b _08166D18
 	.pool
 _08166C40:
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 _08166C4A:
 	ldr r1, [r4]
 	adds r1, 0x50

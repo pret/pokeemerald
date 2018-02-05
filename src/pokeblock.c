@@ -14,7 +14,7 @@
 #include "battle.h"
 #include "battle_controllers.h"
 #include "palette.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "list_menu.h"
 #include "gpu_regs.h"
 #include "decompress.h"
@@ -583,7 +583,7 @@ static void HandleInitWindows(void)
 
 static void PrintOnPokeblockWindow(u8 windowId, const u8 *string, s32 x)
 {
-    AddTextPrinterParametrized2(windowId, 1, x, 1, 0, 0, &sTextColorInPokeblockMenu, 0, string);
+    AddTextPrinterParameterized2(windowId, 1, x, 1, 0, 0, &sTextColorInPokeblockMenu, 0, string);
 }
 
 static void PutPokeblockInfoText(void)

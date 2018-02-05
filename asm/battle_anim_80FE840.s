@@ -12802,7 +12802,7 @@ _08104EDC:
 	lsls r0, 16
 	cmp r2, r0
 	bgt _08104F1A
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r4, r0
@@ -12839,7 +12839,7 @@ _08104F1A:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldr r0, =sub_8104F54
 	str r0, [r5]
 	add sp, 0xC
@@ -12919,7 +12919,7 @@ _08104FCC:
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
 	blt _08104FF0
-	ldr r2, =gUnknown_02038C28
+	ldr r2, =gScanlineEffectRegBuffers
 	lsls r0, 1
 	adds r0, r2
 	ldrh r1, [r3, 0x14]
@@ -12943,7 +12943,7 @@ _08104FF0:
 	ldrsh r1, [r3, r2]
 	cmp r0, r1
 	blt _0810500E
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	adds r0, r4, 0
@@ -18518,7 +18518,7 @@ _08107D8C:
 	movs r3, 0
 	movs r2, 0x10
 	ldrsh r0, [r4, r2]
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	mov r12, r1
 	cmp r3, r0
 	bge _08107DCA
@@ -18555,7 +18555,7 @@ _08107DCA:
 	ldrsh r0, [r4, r3]
 	cmp r1, r0
 	bge _08107E04
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -18584,7 +18584,7 @@ _08107E04:
 	asrs r0, r2, 16
 	cmp r0, 0x9F
 	bgt _08107E3A
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -18652,7 +18652,7 @@ _08107E7A:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -18689,8 +18689,8 @@ _08107ED8:
 	ldrsh r0, [r4, r1]
 	cmp r3, r0
 	bge _08107F0C
-	ldr r6, =gUnknown_02038C28
-	ldr r5, =gUnknown_02039B28
+	ldr r6, =gScanlineEffectRegBuffers
+	ldr r5, =gScanlineEffect
 _08107EE6:
 	lsls r1, r3, 16
 	asrs r1, 16
@@ -18719,8 +18719,8 @@ _08107F0C:
 	ldrsh r0, [r4, r3]
 	cmp r1, r0
 	bge _08107F40
-	ldr r6, =gUnknown_02038C28
-	ldr r5, =gUnknown_02039B28
+	ldr r6, =gScanlineEffectRegBuffers
+	ldr r5, =gScanlineEffect
 _08107F1E:
 	asrs r3, r2, 16
 	lsls r2, r3, 1
@@ -18745,8 +18745,8 @@ _08107F40:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _08108022
-	ldr r6, =gUnknown_02038C28
-	ldr r5, =gUnknown_02039B28
+	ldr r6, =gScanlineEffectRegBuffers
+	ldr r5, =gScanlineEffect
 _08107F4E:
 	asrs r3, r1, 16
 	lsls r2, r3, 1
@@ -18771,8 +18771,8 @@ _08107F78:
 	ldrsh r0, [r4, r1]
 	cmp r3, r0
 	bge _08107FAC
-	ldr r6, =gUnknown_02038C28
-	ldr r5, =gUnknown_02039B28
+	ldr r6, =gScanlineEffectRegBuffers
+	ldr r5, =gScanlineEffect
 _08107F86:
 	lsls r1, r3, 16
 	asrs r1, 16
@@ -18801,8 +18801,8 @@ _08107FAC:
 	ldrsh r0, [r4, r3]
 	cmp r1, r0
 	bge _08107FE0
-	ldr r6, =gUnknown_02038C28
-	ldr r5, =gUnknown_02039B28
+	ldr r6, =gScanlineEffectRegBuffers
+	ldr r5, =gScanlineEffect
 _08107FBE:
 	asrs r3, r2, 16
 	lsls r2, r3, 1
@@ -18827,8 +18827,8 @@ _08107FE0:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _0810800C
-	ldr r6, =gUnknown_02038C28
-	ldr r5, =gUnknown_02039B28
+	ldr r6, =gScanlineEffectRegBuffers
+	ldr r5, =gScanlineEffect
 _08107FEE:
 	asrs r3, r1, 16
 	lsls r2, r3, 1
@@ -34618,7 +34618,7 @@ _0810FEC0:
 	adds r0, 0x40
 	cmp r1, r0
 	bgt _0810FEFA
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -34651,7 +34651,7 @@ _0810FEFA:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldr r0, =sub_810FF34
 	str r0, [r4]
 	add sp, 0xC
@@ -34700,7 +34700,7 @@ _0810FF66:
 	ldr r0, =gSineTable
 	mov r9, r0
 	movs r7, 0x3
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	mov r12, r1
 	movs r2, 0xF0
 	lsls r2, 3
@@ -34775,7 +34775,7 @@ _0810FFFE:
 	ble _08110026
 	b _08110014
 _0811000E:
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _08110014:
@@ -38728,7 +38728,7 @@ _08112054:
 _0811206C:
 	movs r2, 0x2
 	movs r3, 0x6
-	bl sub_80BA384
+	bl ScanlineEffect_InitWave
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x1C]
@@ -38884,7 +38884,7 @@ _081121A8:
 	beq _081121F0
 	b _08112258
 _081121AE:
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0x1
@@ -41152,7 +41152,7 @@ _0811345A:
 	ldrsh r0, [r4, r1]
 	cmp r3, r0
 	bgt _08113488
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -41175,7 +41175,7 @@ _08113488:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldr r0, =sub_81134B8
 	str r0, [r4]
 	add sp, 0xC
@@ -41264,7 +41264,7 @@ _0811354E:
 	bl sub_8113574
 	b _0811356E
 _08113556:
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	ldrh r0, [r2, 0x8]
@@ -41292,11 +41292,11 @@ sub_8113574: @ 8113574
 	ldrsh r0, [r5, r1]
 	cmp r4, r0
 	bgt _081135CA
-	ldr r7, =gUnknown_02038C28
+	ldr r7, =gScanlineEffectRegBuffers
 	mov r12, r7
 	ldr r0, =gSineTable
 	mov r8, r0
-	ldr r6, =gUnknown_02039B28
+	ldr r6, =gScanlineEffect
 _08113592:
 	lsls r2, r4, 1
 	ldrb r1, [r6, 0x14]
@@ -42169,7 +42169,7 @@ _08113CB0:
 	movs r0, 0x3
 	bl sub_8114374
 	movs r3, 0
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r4, r0
@@ -42189,7 +42189,7 @@ _08113CDC:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	movs r0, 0x3F
 	eors r7, r0
 	movs r1, 0xFC
@@ -42344,7 +42344,7 @@ _08113E3E:
 	b _08113E5E
 	.pool
 _08113E58:
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _08113E5E:
@@ -42534,7 +42534,7 @@ _08114002:
 	str r0, [sp, 0x10]
 	movs r3, 0
 	add r4, sp, 0x10
-	ldr r6, =gUnknown_02038C28
+	ldr r6, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r7, r6, r0
@@ -42563,7 +42563,7 @@ _08114010:
 	strb r2, [r4, 0x9]
 	ldr r0, [sp, 0x10]
 	ldr r2, [r4, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 _08114044:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -42772,7 +42772,7 @@ _081141DA:
 	bne _08114232
 	b _08114204
 _081141FE:
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _08114204:
@@ -42827,9 +42827,9 @@ sub_8114244: @ 8114244
 	movs r4, 0
 	cmp r0, 0
 	ble _081142A4
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, =gUnknown_02039B28
+	ldr r7, =gScanlineEffect
 _08114278:
 	lsls r2, r4, 16
 	asrs r2, 16
@@ -42861,9 +42861,9 @@ _081142A4:
 	ldrsh r0, [r6, r2]
 	cmp r1, r0
 	bgt _081142EE
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, =gUnknown_02039B28
+	ldr r7, =gScanlineEffect
 _081142B8:
 	asrs r4, r3, 16
 	cmp r4, 0
@@ -42904,8 +42904,8 @@ _081142EE:
 	ldrsh r0, [r6, r3]
 	cmp r1, r0
 	bge _08114366
-	ldr r7, =gUnknown_02038C28
-	ldr r4, =gUnknown_02039B28
+	ldr r7, =gScanlineEffectRegBuffers
+	ldr r4, =gScanlineEffect
 _08114306:
 	asrs r3, r2, 16
 	cmp r3, 0
@@ -42935,7 +42935,7 @@ _08114338:
 	adds r5, r0, 0
 	adds r5, 0x9F
 	movs r4, 0
-	ldr r3, =gUnknown_02038C28
+	ldr r3, =gScanlineEffectRegBuffers
 	movs r2, 0xF0
 	lsls r2, 3
 	adds r6, r3, r2
@@ -44235,7 +44235,7 @@ _08114E4E:
 	b _08114E7E
 	.pool
 _08114E78:
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _08114E7E:
@@ -44510,7 +44510,7 @@ _08115094:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _081150DA
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _081150C2:
@@ -44561,7 +44561,7 @@ _08115114:
 	asrs r4, r0, 16
 	cmp r2, r0
 	bge _08115140
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -44584,7 +44584,7 @@ _08115140:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _0811516E
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	lsls r0, r3, 16
 	asrs r0, 16
 	adds r3, r0, 0
@@ -44616,7 +44616,7 @@ _0811516E:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -50740,9 +50740,9 @@ _08118442:
 	strh r0, [r1, 0xC]
 _0811845A:
 	movs r3, 0
-	ldr r5, =gUnknown_02039B28
+	ldr r5, =gScanlineEffect
 	mov r9, r5
-	ldr r7, =gUnknown_02038C28
+	ldr r7, =gScanlineEffectRegBuffers
 	mov r6, r9
 	adds r5, r1, 0
 _08118466:
@@ -50760,8 +50760,8 @@ _08118466:
 	ble _08118466
 	cmp r3, 0x9F
 	bgt _081184AA
-	ldr r7, =gUnknown_02038C28
-	ldr r6, =gUnknown_02039B28
+	ldr r7, =gScanlineEffectRegBuffers
+	ldr r6, =gScanlineEffect
 	ldr r1, =gTasks
 	mov r2, r12
 	adds r0, r2, r4
@@ -51089,9 +51089,9 @@ _0811873C:
 	strh r0, [r1, 0xC]
 _08118752:
 	movs r3, 0
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	mov r8, r0
-	ldr r2, =gUnknown_02038C28
+	ldr r2, =gScanlineEffectRegBuffers
 	mov r12, r2
 	mov r7, r8
 	adds r4, r1, 0
@@ -51110,9 +51110,9 @@ _08118760:
 	ble _08118760
 	cmp r3, 0x9F
 	bgt _081187A4
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, =gUnknown_02039B28
+	ldr r7, =gScanlineEffect
 	ldr r1, =gTasks
 	adds r0, r6, r5
 	lsls r0, 3
@@ -51378,9 +51378,9 @@ _081189BA:
 	strh r0, [r1, 0xC]
 _081189D0:
 	movs r3, 0
-	ldr r6, =gUnknown_02039B28
+	ldr r6, =gScanlineEffect
 	mov r8, r6
-	ldr r7, =gUnknown_02038C28
+	ldr r7, =gScanlineEffectRegBuffers
 	adds r4, r1, 0
 _081189DA:
 	lsls r2, r3, 1
@@ -51397,8 +51397,8 @@ _081189DA:
 	ble _081189DA
 	cmp r3, 0x9F
 	bgt _08118A1E
-	ldr r7, =gUnknown_02038C28
-	ldr r6, =gUnknown_02039B28
+	ldr r7, =gScanlineEffectRegBuffers
+	ldr r6, =gScanlineEffect
 	ldr r1, =gTasks
 	mov r2, r12
 	adds r0, r2, r5
@@ -51707,9 +51707,9 @@ _08118C90:
 	strh r0, [r1, 0xC]
 _08118CA6:
 	movs r3, 0
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	mov r12, r0
-	ldr r2, =gUnknown_02038C28
+	ldr r2, =gScanlineEffectRegBuffers
 	mov r8, r2
 	mov r7, r12
 	adds r4, r1, 0
@@ -51728,9 +51728,9 @@ _08118CB4:
 	ble _08118CB4
 	cmp r3, 0x9F
 	bgt _08118CF8
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	mov r8, r0
-	ldr r7, =gUnknown_02039B28
+	ldr r7, =gScanlineEffect
 	ldr r1, =gTasks
 	adds r0, r5, r6
 	lsls r0, 3
@@ -52025,7 +52025,7 @@ _08118F28:
 	lsls r1, 7
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	ldr r1, =gTasks

@@ -416,12 +416,12 @@ _080774B2:
 	cmp r0, 0
 	beq _08077528
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011BA4
 	b _08077B46
 	.pool
 _08077528:
-	bl sub_8009734
+	bl OpenLink
 	ldr r0, =gMain
 	movs r7, 0x87
 	lsls r7, 3
@@ -466,7 +466,7 @@ _0807757A:
 	b _08077B22
 	.pool
 _0807758C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
@@ -475,7 +475,7 @@ _0807758C:
 	bcs _080775A0
 	b _08077B46
 _080775A0:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _080775D8
@@ -646,7 +646,7 @@ _080776E2:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -705,7 +705,7 @@ _08077756:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -1264,7 +1264,7 @@ _08077CA8:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -1323,7 +1323,7 @@ _08077D1E:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -4609,7 +4609,7 @@ _080798BC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -7026,7 +7026,7 @@ _0807AC92:
 	lsls r0, 1
 	cmp r1, r0
 	bls _0807ACC4
-	bl sub_80097E8
+	bl CloseLink
 	ldr r0, =c2_800ACD4
 	bl SetMainCallback2
 	ldr r1, [r4]
@@ -7264,7 +7264,7 @@ _0807AEAC:
 	ldr r2, =0x00001144
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_80097E8
+	bl CloseLink
 _0807AEC0:
 	ldr r4, =gUnknown_020322A0
 	movs r5, 0x80
@@ -7332,7 +7332,7 @@ _0807AF58:
 	adds r0, 0xFA
 	movs r1, 0x1
 	strb r1, [r0]
-	bl sub_8009734
+	bl OpenLink
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -7369,13 +7369,13 @@ _0807AFAC:
 	b _0807B0E4
 	.pool
 _0807AFBC:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807AFC8
 	b _0807B0DC
 _0807AFC8:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
@@ -14296,7 +14296,7 @@ sub_807F1A8: @ 807F1A8
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

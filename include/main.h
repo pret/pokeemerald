@@ -60,5 +60,7 @@ void SetSerialCallback(IntrCallback callback);
 void InitFlashTimer(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
+void StartTimer1(void);
+void SeedRngAndSetTrainerId(void);
 
 #endif // GUARD_MAIN_H

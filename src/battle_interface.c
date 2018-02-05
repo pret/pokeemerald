@@ -20,6 +20,7 @@
 #include "international_string_util.h"
 #include "safari_zone.h"
 #include "battle_anim.h"
+#include "constants/rgb.h"
 
 struct TestingBar
 {
@@ -555,13 +556,13 @@ enum
     PAL_STATUS_BRN
 };
 
-static const u16 sStatusIconPalettes[] =
+static const u16 sStatusIconColors[] =
 {
-    0x6198, // PAL_STATUS_PSN
-    0xEF7, // PAL_STATUS_PAR
-    0x4694, // PAL_STATUS_SLP
-    0x72D1, // PAL_STATUS_FRZ
-    0x29DC // PAL_STATUS_BRN
+    RGB(24, 12, 24), // PAL_STATUS_PSN
+    RGB(23, 23, 3), // PAL_STATUS_PAR
+    RGB(20, 20, 17), // PAL_STATUS_SLP
+    RGB(17, 22, 28), // PAL_STATUS_FRZ
+    RGB(28, 14, 10) // PAL_STATUS_BRN
 };
 
 static const struct WindowTemplate sHealthboxWindowTemplate = {0, 0, 0, 8, 2, 0, 0}; // width = 8, height = 2
@@ -2071,7 +2072,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     pltAdder = gSprites[healthboxSpriteId].oam.paletteNum * 16;
     pltAdder += bank + 12;
 
-    FillPalette(sStatusIconPalettes[statusPalId], pltAdder + 0x100, 2);
+    FillPalette(sStatusIconColors[statusPalId], pltAdder + 0x100, 2);
     CpuCopy16(gPlttBufferUnfaded + 0x100 + pltAdder, (void*)(OBJ_PLTT + pltAdder * 2), 2);
     CpuCopy32(statusGfxPtr, (void*)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder) * 32), 96);
     if (IsDoubleBattle() == TRUE || GetBankSide(bank) == SIDE_OPPONENT)
@@ -2575,7 +2576,7 @@ static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y,
     color.bgColor = 1;
     color.shadowColor = 3;
 
-    AddTextPrinterParametrized2(winId, 0, x, y, 0, 0, &color, -1, str);
+    AddTextPrinterParameterized2(winId, 0, x, y, 0, 0, &color, -1, str);
 
     *windowId = winId;
     return (u8*)(GetWindowAttribute(winId, WINDOW_TILE_DATA));

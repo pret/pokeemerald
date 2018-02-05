@@ -1625,8 +1625,8 @@ _080ABCBC:
 	.pool
 	thumb_func_end sub_80ABC7C
 
-	thumb_func_start fade_screen
-fade_screen: @ 80ABCD0
+	thumb_func_start FadeScreen
+FadeScreen: @ 80ABCD0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1762,7 +1762,7 @@ _080ABDE4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end fade_screen
+	thumb_func_end FadeScreen
 
 	thumb_func_start sub_80ABDFC
 sub_80ABDFC: @ 80ABDFC
@@ -2339,43 +2339,43 @@ _080AC290:
 	.4byte _080AC300
 _080AC2B8:
 	movs r0, 0x1
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2C0:
 	movs r0, 0x2
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2C8:
 	movs r0, 0x3
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2D0:
 	movs r0, 0x4
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2D8:
 	movs r0, 0x5
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2E0:
 	movs r0, 0x6
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2E8:
 	movs r0, 0x9
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2F0:
 	movs r0, 0x7
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC2F8:
 	movs r0, 0x8
-	bl sub_80AEDF0
+	bl SetWeather
 	b _080AC306
 _080AC300:
 	movs r0, 0xB
-	bl sub_80AEDF0
+	bl SetWeather
 _080AC306:
 	pop {r0}
 	bx r0
@@ -2472,15 +2472,15 @@ _080AC3B6:
 	bx r0
 	thumb_func_end play_some_sound
 
-	thumb_func_start sub_80AC3BC
-sub_80AC3BC: @ 80AC3BC
+	thumb_func_start IsWeatherChangeComplete
+IsWeatherChangeComplete: @ 80AC3BC
 	ldr r0, =gUnknown_02038454
 	ldr r1, =0x000006d3
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_80AC3BC
+	thumb_func_end IsWeatherChangeComplete
 
 	thumb_func_start sub_80AC3D0
 sub_80AC3D0: @ 80AC3D0
@@ -7537,8 +7537,8 @@ GetSav1Weather: @ 80AEDAC
 	.pool
 	thumb_func_end GetSav1Weather
 
-	thumb_func_start sub_80AEDBC
-sub_80AEDBC: @ 80AEDBC
+	thumb_func_start SetSav1WeatherFromCurrMapHeader
+SetSav1WeatherFromCurrMapHeader: @ 80AEDBC
 	push {r4,r5,lr}
 	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
@@ -7559,10 +7559,10 @@ sub_80AEDBC: @ 80AEDBC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80AEDBC
+	thumb_func_end SetSav1WeatherFromCurrMapHeader
 
-	thumb_func_start sub_80AEDF0
-sub_80AEDF0: @ 80AEDF0
+	thumb_func_start SetWeather
+SetWeather: @ 80AEDF0
 	push {lr}
 	bl SetSav1Weather
 	bl GetSav1Weather
@@ -7571,7 +7571,7 @@ sub_80AEDF0: @ 80AEDF0
 	bl weather_set
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80AEDF0
+	thumb_func_end SetWeather
 
 	thumb_func_start sub_80AEE08
 sub_80AEE08: @ 80AEE08
@@ -7872,13 +7872,13 @@ _080AF06A:
 	bl palette_bg_faded_fill_black
 	movs r0, 0
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _080AF084
 _080AF078:
 	bl palette_bg_faded_fill_white
 	movs r0, 0x2
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 _080AF084:
 	pop {r4}
 	pop {r0}
@@ -7891,7 +7891,7 @@ sub_80AF08C: @ 80AF08C
 	bl palette_bg_faded_fill_white
 	movs r0, 0x2
 	movs r1, 0x8
-	bl fade_screen
+	bl FadeScreen
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80AF08C
@@ -7902,7 +7902,7 @@ pal_fill_black: @ 80AF0A0
 	bl palette_bg_faded_fill_black
 	movs r0, 0
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r0}
 	bx r0
 	thumb_func_end pal_fill_black
@@ -7928,12 +7928,12 @@ sub_80AF0B4: @ 80AF0B4
 _080AF0DA:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _080AF0EC
 _080AF0E4:
 	movs r0, 0x3
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 _080AF0EC:
 	pop {r4}
 	pop {r0}
@@ -8761,7 +8761,7 @@ sub_80AF79C: @ 80AF79C
 	bl music_something
 	movs r0, 0x3
 	movs r1, 0x8
-	bl fade_screen
+	bl FadeScreen
 	bl play_some_sound
 	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF3B0
@@ -8990,7 +8990,7 @@ _080AF99A:
 	bl sub_8009FAC
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	bl music_something
 	movs r0, 0x9
 	bl PlaySE
@@ -9572,12 +9572,12 @@ _080AFE30:
 	beq _080AFEBC
 	b _080AFEC6
 _080AFE36:
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -9591,12 +9591,12 @@ _080AFE36:
 	b _080AFEC6
 	.pool
 _080AFE64:
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r6, 0x2
 	ldrsh r1, [r4, r6]
@@ -9631,7 +9631,7 @@ _080AFEB4:
 	bl DestroyTask
 	b _080AFEC6
 _080AFEBC:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	adds r0, r5, 0
 	bl DestroyTask
 _080AFEC6:
@@ -9665,12 +9665,12 @@ _080AFEF4:
 	beq _080AFF80
 	b _080AFF8A
 _080AFEFA:
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -9684,12 +9684,12 @@ _080AFEFA:
 	b _080AFF8A
 	.pool
 _080AFF28:
-	ldr r0, =gUnknown_02039B28
+	ldr r0, =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r6, 0x2
 	ldrsh r1, [r4, r6]
@@ -9724,7 +9724,7 @@ _080AFF78:
 	bl DestroyTask
 	b _080AFF8A
 _080AFF80:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	adds r0, r5, 0
 	bl DestroyTask
 _080AFF8A:
@@ -9914,7 +9914,7 @@ sub_80B00E8: @ 80B00E8
 	lsrs r0, 24
 	cmp r0, 0
 	beq _080B0116
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	ldr r1, =gUnknown_0854FE64
 	lsls r0, 1
 	adds r0, r1
@@ -9940,7 +9940,7 @@ _080B0116:
 	thumb_func_start door_upload_tiles
 door_upload_tiles: @ 80B0124
 	push {r4,lr}
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000e68
@@ -10261,7 +10261,7 @@ _080B0368:
 	bl sub_8199C30
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	movs r2, 0x4
 	ldrsh r1, [r5, r2]
 	movs r0, 0x6
@@ -10280,7 +10280,7 @@ _080B0368:
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	movs r0, 0x1
 	strh r0, [r5]
 	b _080B052C

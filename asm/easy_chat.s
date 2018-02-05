@@ -652,7 +652,7 @@ sub_811A7E4: @ 811A7E4
 _0811A804:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _0811A840
 _0811A80E:
 	ldr r0, =gPaletteFade

@@ -5639,7 +5639,7 @@ _0813AAAA:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	ldr r1, =gUnknown_085B312C
 	lsls r0, r5, 1
 	adds r1, r0, r1
@@ -5665,7 +5665,7 @@ _0813AAE8:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	ldr r1, =gUnknown_085B3142
 	lsls r0, r5, 1
 	adds r1, r0, r1
@@ -5712,7 +5712,7 @@ _0813AB5C:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	ldr r1, =gUnknown_085B314E
 	lsls r0, r5, 1
 	adds r0, r1
@@ -5736,7 +5736,7 @@ _0813AB94:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	ldr r1, =gUnknown_085B315C
 	lsls r0, r5, 1
 	adds r0, r1

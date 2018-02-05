@@ -14,7 +14,7 @@
 #include "rom_818CFC8.h"
 #include "rom_81BE66C.h"
 #include "field_ground_effect.h"
-#include "map_obj_8097404.h"
+#include "field_map_obj_helpers.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "field_effect.h"

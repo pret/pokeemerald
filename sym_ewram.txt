@@ -642,9 +642,9 @@ gUnknown_020375B6: @ 20375B6
 gUnknown_020375B8: @ 20375B8
 	.space 0x4
 
-gUnknown_020375BC: @ 20375BC
-	.space 0x4
+    .include "src/field_message_box.o"
 
+    .align 2
 gUnknown_020375C0: @ 20375C0
 	.space 0x4
 
@@ -713,36 +713,7 @@ gUnknown_02038BC6: @ 2038BC6
 gFieldEffectArguments: @ 2038C08
 	.space 0x20
 
-gUnknown_02038C28: @ 2038C28
-	.space 0x2
-
-gUnknown_02038C2A: @ 2038C2A
-	.space 0x2
-
-gUnknown_02038C2C: @ 2038C2C
-	.space 0x13C
-
-gUnknown_02038D68: @ 2038D68
-	.space 0x140
-
-gUnknown_02038EA8: @ 2038EA8
-	.space 0x280
-
-gUnknown_02039128: @ 2039128
-	.space 0x280
-
-gUnknown_020393A8: @ 20393A8
-	.space 0x140
-
-gUnknown_020394E8: @ 20394E8
-	.space 0x640
-
-gUnknown_02039B28: @ 2039B28
-	.space 0x1C
-
-gUnknown_02039B44: @ 2039B44
-	.space 0x4
-
+    .include "src/scanline_effect.o"
     .include "src/option_menu.o"
 	
 	.align 2
@@ -945,9 +916,7 @@ gUnknown_02039F8C: @ 2039F8C
 gUnknown_02039F90: @ 2039F90
 	.space 0x4
 
-gUnknown_02039F94: @ 2039F94
-	.space 0x4
-
+    .include "src/naming_screen.o"
     .include "src/money.o"
     
     .align 2
@@ -1301,9 +1270,7 @@ gUnknown_0203BCE8: @ 203BCE8
 gUnknown_0203BCF4: @ 203BCF4
 	.space 0x4
 
-gUnknown_0203BCF8: @ 203BCF8
-	.space 0x4
-
+    .include "src/mystery_event_menu.o"
     .include "src/save_failed_screen.o"
 
 gBraillePuzzleCallbackFlag: @ 203BD14

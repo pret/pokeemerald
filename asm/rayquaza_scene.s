@@ -1058,7 +1058,7 @@ _081D6FC8:
 sub_81D6FD0: @ 81D6FD0
 	push {lr}
 	bl sub_81D67EC
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81D6FD0
@@ -1183,12 +1183,12 @@ sub_81D7134: @ 81D7134
 	lsls r6, r1, 3
 	ldr r7, =gTasks + 0x8
 	adds r5, r6, r7
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl sub_81D6FE0
 	bl sub_81D706C
 	movs r4, 0
 	str r4, [sp, 0x4]
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	ldr r2, =0x010003c0
 	add r0, sp, 0x4
 	bl CpuFastSet
@@ -1196,7 +1196,7 @@ sub_81D7134: @ 81D7134
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	strh r4, [r5]
 	ldr r0, =sub_81D7228
 	movs r1, 0
@@ -1278,7 +1278,7 @@ sub_81D7228: @ 81D7228
 	adds r3, r1, r0
 	movs r1, 0x18
 	ldr r7, =gUnknown_0203CF60
-	ldr r4, =gUnknown_02038C28
+	ldr r4, =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r5, r4, r0

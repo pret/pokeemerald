@@ -2602,8 +2602,8 @@ _0808BD2C:
 	.pool
 	thumb_func_end sub_808BCF4
 
-	thumb_func_start sub_808BD3C
-sub_808BD3C: @ 808BD3C
+	thumb_func_start GetRivalAvatarGraphicsIdByStateIdAndGender
+GetRivalAvatarGraphicsIdByStateIdAndGender: @ 808BD3C
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
@@ -2614,7 +2614,7 @@ sub_808BD3C: @ 808BD3C
 	ldrb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_808BD3C
+	thumb_func_end GetRivalAvatarGraphicsIdByStateIdAndGender
 
 	thumb_func_start GetPlayerAvatarGraphicsIdByStateIdAndGender
 @ u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 stateId, u8 gender)
@@ -4538,7 +4538,7 @@ fish9: @ 808CC64
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -4695,7 +4695,7 @@ fishB: @ 808CD94
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	movs r0, 0xD
 	strh r0, [r5, 0x8]
 	movs r0, 0x1
@@ -4743,7 +4743,7 @@ fishC: @ 808CE04
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]

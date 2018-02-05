@@ -233,6 +233,7 @@ extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
 
 extern struct Sprite gSprites[];
+extern struct OamMatrix gOamMatrices[];
 
 void ResetSpriteData(void);
 void AnimateSprites(void);

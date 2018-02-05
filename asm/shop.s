@@ -188,7 +188,7 @@ HandleShopMenuBuy: @ 80DFBD0
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -216,7 +216,7 @@ HandleShopMenuSell: @ 80DFC0C
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -839,7 +839,7 @@ _080E0176:
 	adds r0, r6, 0
 	movs r1, 0x7
 	adds r3, r7, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _080E01AC:
 	add sp, 0x14
 	pop {r4-r7}
@@ -1201,7 +1201,7 @@ BuyMenuPrint: @ 80E04A4
 	str r6, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}

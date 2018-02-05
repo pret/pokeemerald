@@ -552,7 +552,7 @@ sub_816B2C8: @ 816B2C8
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r0}
 	bx r0
 	.pool
@@ -1221,7 +1221,7 @@ sub_816B878: @ 816B878
 	lsrs r4, 24
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1494,7 +1494,7 @@ sub_816BABC: @ 816BABC
 _0816BAD4:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -2150,7 +2150,7 @@ _0816C030:
 	movs r1, 0x1
 	movs r2, 0
 	adds r3, r6, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _0816C050:
 	add sp, 0x14
 	pop {r4-r6}

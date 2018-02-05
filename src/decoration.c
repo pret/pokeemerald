@@ -500,7 +500,7 @@ void sub_8126B80(u8 taskId)
 void sub_8126C08(void)
 {
     FillWindowPixelBuffer(0, 0x11);
-    AddTextPrinterParametrized(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
+    AddTextPrinterParameterized(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
 }
 
 void SecretBasePC_Decorate(u8 taskId)
@@ -529,7 +529,7 @@ void SecretBasePC_PutAway(u8 taskId)
     {
         sub_8126A58(0);
         sub_8197434(0, 0);
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8129ABC;
     }
@@ -1247,7 +1247,7 @@ void sub_8127F68(u8 taskId)
     {
         if (sub_8127F38() == TRUE)
         {
-            fade_screen(1, 0);
+            FadeScreen(1, 0);
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].func = sub_8128060;
         }
@@ -1661,7 +1661,7 @@ void sub_8128BA0(u8 taskId)
 
 void sub_8128BBC(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = c1_overworld_prev_quest;
 }
@@ -2635,7 +2635,7 @@ void sub_812A1A0(u8 taskId)
 
 void sub_812A1C0(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_81298EC;
 }
@@ -2654,7 +2654,7 @@ void sub_812A210(u8 taskId)
 
 void sub_812A22C(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_812A25C;
 }

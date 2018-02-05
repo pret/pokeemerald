@@ -3,7 +3,7 @@
 #include "battle.h"
 #include "palette.h"
 #include "main.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "text.h"
 #include "gpu_regs.h"
 #include "bg.h"
@@ -34,7 +34,7 @@ extern struct SpriteTemplate gUnknown_0202499C;
 
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
 
-extern void dp12_8087EA4(void);
+extern void ScanlineEffect_Clear(void);
 extern void sub_8035658(void);
 extern bool8 IsDoubleBattle(void);
 extern u8 GetSubstituteSpriteDefault_Y(u8 bank);
@@ -72,7 +72,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     switch (gBattleScripting.reshowMainState)
     {
     case 0:
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         sub_8035658();
         SetBgAttribute(1, BG_CTRL_ATTR_VISIBLE, 0);
         SetBgAttribute(2, BG_CTRL_ATTR_VISIBLE, 0);
