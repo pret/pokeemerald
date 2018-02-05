@@ -522,20 +522,7 @@ gMoveToLearn: @ 20244E2
 gBattleMonForms: @ 20244E4
 	.space 0x4
 
-sLearningMoveTableID: @ 20244E8
-	.space 0x1
-
-gPlayerPartyCount: @ 20244E9
-	.space 0x1
-
-gEnemyPartyCount: @ 20244EA
-	.space 0x2
-
-gPlayerParty: @ 20244EC
-	.space 600
-
-gEnemyParty: @ 2024744
-	.space 600
+	.include "src/pokemon_1.o"
 
 gUnknown_0202499C: @ 202499C
 	.space 0x18
