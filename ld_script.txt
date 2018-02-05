@@ -426,7 +426,7 @@ SECTIONS {
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         src/trainer_see.o(.rodata);
-        data/wild_encounter.o(.rodata);
+        src/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         src/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
