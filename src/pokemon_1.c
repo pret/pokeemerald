@@ -2,7 +2,11 @@
 #include "pokemon.h"
 #include "random.h"
 #include "main.h"
+#include "constants/species.h"
+#include "constants/abilities.h"
 #include "constants/items.h"
+#include "constants/trainers.h"
+#include "constants/moves.h"
 #include "string_util.h"
 #include "text.h"
 
@@ -14,6 +18,57 @@
 
 extern u8 sav1_map_get_name(void);
 
+// const rom data
+const struct SpindaSpot gSpindaSpotGraphics[] =
+{
+    {16, 7, INCBIN_U16("graphics/spinda_spots/spot_0.bin")},
+    {40, 8, INCBIN_U16("graphics/spinda_spots/spot_1.bin")},
+    {22, 25, INCBIN_U16("graphics/spinda_spots/spot_2.bin")},
+    {34, 26, INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
+};
+
+#include "data/pokemon/item_effects.h"
+
+const s8 gNatureStatTable[][5] =
+{
+    // Atk Def Spd Sp.Atk Sp.Def
+    {    0,  0,  0,     0,     0}, // Hardy
+    {   +1, -1,  0,     0,     0}, // Lonely
+    {   +1,  0, -1,     0,     0}, // Brave
+    {   +1,  0,  0,    -1,     0}, // Adamant
+    {   +1,  0,  0,     0,    -1}, // Naughty
+    {   -1, +1,  0,     0,     0}, // Bold
+    {    0,  0,  0,     0,     0}, // Docile
+    {    0, +1, -1,     0,     0}, // Relaxed
+    {    0, +1,  0,    -1,     0}, // Impish
+    {    0, +1,  0,     0,    -1}, // Lax
+    {   -1,  0, +1,     0,     0}, // Timid
+    {    0, -1, +1,     0,     0}, // Hasty
+    {    0,  0,  0,     0,     0}, // Serious
+    {    0,  0, +1,    -1,     0}, // Jolly
+    {    0,  0, +1,     0,    -1}, // Naive
+    {   -1,  0,  0,    +1,     0}, // Modest
+    {    0, -1,  0,    +1,     0}, // Mild
+    {    0,  0, -1,    +1,     0}, // Quiet
+    {    0,  0,  0,     0,     0}, // Bashful
+    {    0,  0,  0,    +1,    -1}, // Rash
+    {   -1,  0,  0,     0,    +1}, // Calm
+    {    0, -1,  0,     0,    +1}, // Gentle
+    {    0,  0, -1,     0,    +1}, // Sassy
+    {    0,  0,  0,    -1,    +1}, // Careful
+    {    0,  0,  0,     0,     0}, // Quirky
+};
+
+#include "data/pokemon/tmhm_learnsets.h"
+#include "data/pokemon/trainer_class_lookups.h"
+#include "data/pokemon/cry_ids.h"
+#include "data/pokemon/experience_tables.h"
+#include "data/pokemon/base_stats.h"
+#include "data/pokemon/level_up_learnsets.h"
+#include "data/pokemon/evolution.h"
+#include "data/pokemon/level_up_learnset_pointers.h"
+
+// code
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
     u8 *raw = (u8 *)boxMon;
@@ -43,14 +98,14 @@ void ZeroMonData(struct Pokemon *mon)
 void ZeroPlayerPartyMons(void)
 {
     s32 i;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
         ZeroMonData(&gPlayerParty[i]);
 }
 
 void ZeroEnemyPartyMons(void)
 {
     s32 i;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
         ZeroMonData(&gEnemyParty[i]);
 }
 

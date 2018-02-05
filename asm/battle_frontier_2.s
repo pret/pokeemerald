@@ -29783,7 +29783,7 @@ GetTrainerEncounterMusicIdInBattlePyramind: @ 81A9F3C
 	lsls r0, 16
 	lsrs r0, 16
 	movs r4, 0
-	ldr r3, =gTrainerClassToNameIndex
+	ldr r3, =gFacilityClassToTrainerClass
 	ldr r1, =gUnknown_0203BC88
 	ldr r2, [r1]
 	movs r1, 0x34

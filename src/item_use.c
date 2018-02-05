@@ -379,12 +379,12 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
             newDistanceX = distanceX - x;
             distanceY = (u16)events->bgEvents[i].y + 7;
             newDistanceY = distanceY - y;
-            
+
             if ((u16)(newDistanceX + 7) < 15 && (newDistanceY >= -5) && (newDistanceY < 6))
                 sub_80FD8E0(taskId, newDistanceX, newDistanceY);
         }
     }
-    
+
     sub_80FD7C8(taskId);
     if (gTasks[taskId].data[2] == TRUE)
         return TRUE;
@@ -929,7 +929,7 @@ void ItemUseOutOfBattle_RareCandy(u8 taskId)
 
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
-    if (gSpecialVar_ItemId >= ITEM_HM01)
+    if (gSpecialVar_ItemId >= ITEM_HM01_CUT)
         DisplayItemMessage(taskId, 1, gText_BootedUpHM, sub_80FDF90); // HM
     else
         DisplayItemMessage(taskId, 1, gText_BootedUpTM, sub_80FDF90); // TM
@@ -992,7 +992,7 @@ void ItemUseOutOfBattle_Repel(u8 taskId)
 void sub_80FE124(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (++data[8] > 7)
     {
         data[8] = 0;
