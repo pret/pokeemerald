@@ -233,7 +233,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -244,7 +244,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -275,7 +275,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
             WallyBufferExecCompleted();
         }
         break;
@@ -1162,7 +1162,7 @@ static void WallyDoMoveAnimation(void)
     switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
     {
     case 0:
-        if (gBattleSpritesDataPtr->bankData[gActiveBattler].behindSubstitute)
+        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
         {
             InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
         }
@@ -1181,7 +1181,7 @@ static void WallyDoMoveAnimation(void)
         if (!gAnimScriptActive)
         {
             sub_805EB9C(1);
-            if (gBattleSpritesDataPtr->bankData[gActiveBattler].behindSubstitute)
+            if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
             {
                 InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_MON_TO_SUBSTITUTE);
             }
@@ -1490,7 +1490,7 @@ static void sub_816AA80(u8 bank)
 {
     u16 species;
 
-    gBattleSpritesDataPtr->bankData[bank].transformSpecies = 0;
+    gBattleSpritesDataPtr->battlerData[bank].transformSpecies = 0;
     gBattlerPartyIndexes[bank] = gBattleBufferA[bank][1];
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
     gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);

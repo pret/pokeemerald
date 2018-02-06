@@ -127,7 +127,7 @@ static const struct SpritePalette gUnknown_0832C128[2] =
 void AllocateBattleSpritesData(void)
 {
     gBattleSpritesDataPtr = AllocZeroed(sizeof(struct BattleSpriteData));
-    gBattleSpritesDataPtr->bankData = AllocZeroed(sizeof(struct BattleSpriteInfo) * MAX_BATTLERS_COUNT);
+    gBattleSpritesDataPtr->battlerData = AllocZeroed(sizeof(struct BattleSpriteInfo) * MAX_BATTLERS_COUNT);
     gBattleSpritesDataPtr->healthBoxesData = AllocZeroed(sizeof(struct BattleHealthboxInfo) * MAX_BATTLERS_COUNT);
     gBattleSpritesDataPtr->animationData = AllocZeroed(sizeof(struct BattleAnimationInfo));
     gBattleSpritesDataPtr->battleBars = AllocZeroed(sizeof(struct BattleBarInfo) * MAX_BATTLERS_COUNT);
@@ -141,7 +141,7 @@ void FreeBattleSpritesData(void)
     FREE_AND_SET_NULL(gBattleSpritesDataPtr->battleBars);
     FREE_AND_SET_NULL(gBattleSpritesDataPtr->animationData);
     FREE_AND_SET_NULL(gBattleSpritesDataPtr->healthBoxesData);
-    FREE_AND_SET_NULL(gBattleSpritesDataPtr->bankData);
+    FREE_AND_SET_NULL(gBattleSpritesDataPtr->battlerData);
     FREE_AND_SET_NULL(gBattleSpritesDataPtr);
 }
 
@@ -432,12 +432,12 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBank, u8 atkBank, u8 defBank,
         gBattleMonForms[activeBank] = (argument & ~(0x80));
         return TRUE;
     }
-    if (gBattleSpritesDataPtr->bankData[activeBank].behindSubstitute
+    if (gBattleSpritesDataPtr->battlerData[activeBank].behindSubstitute
         && !ShouldAnimBeDoneRegardlessOfSubsitute(tableId))
     {
         return TRUE;
     }
-    if (gBattleSpritesDataPtr->bankData[activeBank].behindSubstitute
+    if (gBattleSpritesDataPtr->battlerData[activeBank].behindSubstitute
         && tableId == B_ANIM_SUBSTITUTE_FADE
         && gSprites[gBattlerSpriteIds[activeBank]].invisible)
     {
@@ -549,14 +549,14 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank)
 
     monsPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
 
-    if (gBattleSpritesDataPtr->bankData[bank].transformSpecies == SPECIES_NONE)
+    if (gBattleSpritesDataPtr->battlerData[bank].transformSpecies == SPECIES_NONE)
     {
         species = GetMonData(mon, MON_DATA_SPECIES);
         currentPersonality = monsPersonality;
     }
     else
     {
-        species = gBattleSpritesDataPtr->bankData[bank].transformSpecies;
+        species = gBattleSpritesDataPtr->battlerData[bank].transformSpecies;
         currentPersonality = gTransformedPersonalities[bank];
     }
 
@@ -568,7 +568,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank)
 
     paletteOffset = 0x100 + bank * 16;
 
-    if (gBattleSpritesDataPtr->bankData[bank].transformSpecies == SPECIES_NONE)
+    if (gBattleSpritesDataPtr->battlerData[bank].transformSpecies == SPECIES_NONE)
         lzPaletteData = GetMonFrontSpritePal(mon);
     else
         lzPaletteData = GetFrontSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
@@ -585,7 +585,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank)
     }
 
     // transform's pink color
-    if (gBattleSpritesDataPtr->bankData[bank].transformSpecies != SPECIES_NONE)
+    if (gBattleSpritesDataPtr->battlerData[bank].transformSpecies != SPECIES_NONE)
     {
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
@@ -602,21 +602,21 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank)
 
     monsPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
 
-    if (gBattleSpritesDataPtr->bankData[bank].transformSpecies == SPECIES_NONE)
+    if (gBattleSpritesDataPtr->battlerData[bank].transformSpecies == SPECIES_NONE)
     {
         species = GetMonData(mon, MON_DATA_SPECIES);
         currentPersonality = monsPersonality;
     }
     else
     {
-        species = gBattleSpritesDataPtr->bankData[bank].transformSpecies;
+        species = gBattleSpritesDataPtr->battlerData[bank].transformSpecies;
         currentPersonality = gTransformedPersonalities[bank];
     }
 
     otId = GetMonData(mon, MON_DATA_OT_ID);
     position = GetBattlerPosition(bank);
 
-    if (sub_80688F8(1, bank) == 1 || gBattleSpritesDataPtr->bankData[bank].transformSpecies != SPECIES_NONE)
+    if (sub_80688F8(1, bank) == 1 || gBattleSpritesDataPtr->battlerData[bank].transformSpecies != SPECIES_NONE)
     {
         HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species],
                                                   gMonSpritesGfxPtr->sprites[position],
@@ -631,7 +631,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank)
 
     paletteOffset = 0x100 + bank * 16;
 
-    if (gBattleSpritesDataPtr->bankData[bank].transformSpecies == SPECIES_NONE)
+    if (gBattleSpritesDataPtr->battlerData[bank].transformSpecies == SPECIES_NONE)
         lzPaletteData = GetMonFrontSpritePal(mon);
     else
         lzPaletteData = GetFrontSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
@@ -648,7 +648,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank)
     }
 
     // transform's pink color
-    if (gBattleSpritesDataPtr->bankData[bank].transformSpecies != SPECIES_NONE)
+    if (gBattleSpritesDataPtr->battlerData[bank].transformSpecies != SPECIES_NONE)
     {
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
@@ -804,7 +804,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *bank)
         if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI) && *bank == 0)
             gHealthboxSpriteIds[*bank] = CreateSafariPlayerHealthboxSprites();
         else
-            gHealthboxSpriteIds[*bank] = CreateHealthboxSprites(*bank);
+            gHealthboxSpriteIds[*bank] = CreateBattlerHealthboxSprites(*bank);
 
         (*bank)++;
         if (*bank == gBattlersCount)
@@ -864,7 +864,7 @@ void ClearSpritesHealthboxAnimData(void)
 static void ClearSpritesBankHealthboxAnimData(void)
 {
     ClearSpritesHealthboxAnimData();
-    memset(gBattleSpritesDataPtr->bankData, 0, sizeof(struct BattleSpriteInfo) * MAX_BATTLERS_COUNT);
+    memset(gBattleSpritesDataPtr->battlerData, 0, sizeof(struct BattleSpriteInfo) * MAX_BATTLERS_COUNT);
 }
 
 void CopyAllBattleSpritesInvisibilities(void)
@@ -872,12 +872,12 @@ void CopyAllBattleSpritesInvisibilities(void)
     s32 i;
 
     for (i = 0; i < gBattlersCount; i++)
-        gBattleSpritesDataPtr->bankData[i].invisible = gSprites[gBattlerSpriteIds[i]].invisible;
+        gBattleSpritesDataPtr->battlerData[i].invisible = gSprites[gBattlerSpriteIds[i]].invisible;
 }
 
 void CopyBattleSpriteInvisibility(u8 bank)
 {
-    gBattleSpritesDataPtr->bankData[bank].invisible = gSprites[gBattlerSpriteIds[bank]].invisible;
+    gBattleSpritesDataPtr->battlerData[bank].invisible = gSprites[gBattlerSpriteIds[bank]].invisible;
 }
 
 void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
@@ -894,7 +894,7 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
         paletteOffset = 0x100 + bankAtk * 16;
         LoadPalette(gBattleStruct->castformPalette[gBattleSpritesDataPtr->animationData->animArg], paletteOffset, 32);
         gBattleMonForms[bankAtk] = gBattleSpritesDataPtr->animationData->animArg;
-        if (gBattleSpritesDataPtr->bankData[bankAtk].transformSpecies != SPECIES_NONE)
+        if (gBattleSpritesDataPtr->battlerData[bankAtk].transformSpecies != SPECIES_NONE)
         {
             BlendPalette(paletteOffset, 16, 6, 0x7FFF);
             CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
@@ -970,7 +970,7 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
 
         if (!IsContest())
         {
-            gBattleSpritesDataPtr->bankData[bankAtk].transformSpecies = targetSpecies;
+            gBattleSpritesDataPtr->battlerData[bankAtk].transformSpecies = targetSpecies;
             gBattleMonForms[bankAtk] = gBattleMonForms[bankDef];
         }
 
@@ -1040,12 +1040,12 @@ void LoadBattleMonGfxAndAnimate(u8 bank, bool8 loadMonSprite, u8 spriteId)
 void TrySetBehindSubstituteSpriteBit(u8 bank, u16 move)
 {
     if (move == MOVE_SUBSTITUTE)
-        gBattleSpritesDataPtr->bankData[bank].behindSubstitute = 1;
+        gBattleSpritesDataPtr->battlerData[bank].behindSubstitute = 1;
 }
 
 void ClearBehindSubstituteBit(u8 bank)
 {
-    gBattleSpritesDataPtr->bankData[bank].behindSubstitute = 0;
+    gBattleSpritesDataPtr->battlerData[bank].behindSubstitute = 0;
 }
 
 void HandleLowHpMusicChange(struct Pokemon *mon, u8 bank)
@@ -1055,22 +1055,22 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 bank)
 
     if (GetHPBarLevel(hp, maxHP) == HP_BAR_RED)
     {
-        if (!gBattleSpritesDataPtr->bankData[bank].lowHpSong)
+        if (!gBattleSpritesDataPtr->battlerData[bank].lowHpSong)
         {
-            if (!gBattleSpritesDataPtr->bankData[bank ^ BIT_FLANK].lowHpSong)
+            if (!gBattleSpritesDataPtr->battlerData[bank ^ BIT_FLANK].lowHpSong)
                 PlaySE(SE_HINSI);
-            gBattleSpritesDataPtr->bankData[bank].lowHpSong = 1;
+            gBattleSpritesDataPtr->battlerData[bank].lowHpSong = 1;
         }
     }
     else
     {
-        gBattleSpritesDataPtr->bankData[bank].lowHpSong = 0;
+        gBattleSpritesDataPtr->battlerData[bank].lowHpSong = 0;
         if (!IsDoubleBattle())
         {
             m4aSongNumStop(SE_HINSI);
             return;
         }
-        if (IsDoubleBattle() && !gBattleSpritesDataPtr->bankData[bank ^ BIT_FLANK].lowHpSong)
+        if (IsDoubleBattle() && !gBattleSpritesDataPtr->battlerData[bank ^ BIT_FLANK].lowHpSong)
         {
             m4aSongNumStop(SE_HINSI);
             return;
@@ -1082,9 +1082,9 @@ void BattleStopLowHpSound(void)
 {
     u8 playerBank = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
-    gBattleSpritesDataPtr->bankData[playerBank].lowHpSong = 0;
+    gBattleSpritesDataPtr->battlerData[playerBank].lowHpSong = 0;
     if (IsDoubleBattle())
-        gBattleSpritesDataPtr->bankData[playerBank ^ BIT_FLANK].lowHpSong = 0;
+        gBattleSpritesDataPtr->battlerData[playerBank ^ BIT_FLANK].lowHpSong = 0;
 
     m4aSongNumStop(SE_HINSI);
 }
@@ -1168,11 +1168,11 @@ void SpriteCB_EnemyShadow(struct Sprite *shadowSprite)
     }
     if (gAnimScriptActive || bankSprite->invisible)
         invisible = TRUE;
-    else if (gBattleSpritesDataPtr->bankData[bank].transformSpecies != SPECIES_NONE
-             && gEnemyMonElevation[gBattleSpritesDataPtr->bankData[bank].transformSpecies] == 0)
+    else if (gBattleSpritesDataPtr->battlerData[bank].transformSpecies != SPECIES_NONE
+             && gEnemyMonElevation[gBattleSpritesDataPtr->battlerData[bank].transformSpecies] == 0)
         invisible = TRUE;
 
-    if (gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
+    if (gBattleSpritesDataPtr->battlerData[bank].behindSubstitute)
         invisible = TRUE;
 
     shadowSprite->pos1.x = bankSprite->pos1.x;
@@ -1193,8 +1193,8 @@ void SetBattlerShadowSpriteCallback(u8 bank, u16 species)
     if (GetBattlerSide(bank) == B_SIDE_PLAYER)
         return;
 
-    if (gBattleSpritesDataPtr->bankData[bank].transformSpecies != SPECIES_NONE)
-        species = gBattleSpritesDataPtr->bankData[bank].transformSpecies;
+    if (gBattleSpritesDataPtr->battlerData[bank].transformSpecies != SPECIES_NONE)
+        species = gBattleSpritesDataPtr->battlerData[bank].transformSpecies;
 
     if (gEnemyMonElevation[species] != 0)
         gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].callback = SpriteCB_EnemyShadow;
@@ -1232,7 +1232,7 @@ void sub_805EF14(void)
 
 void ClearTemporarySpeciesSpriteData(u8 bank, bool8 dontClearSubstitute)
 {
-    gBattleSpritesDataPtr->bankData[bank].transformSpecies = SPECIES_NONE;
+    gBattleSpritesDataPtr->battlerData[bank].transformSpecies = SPECIES_NONE;
     gBattleMonForms[bank] = 0;
     if (!dontClearSubstitute)
         ClearBehindSubstituteBit(bank);

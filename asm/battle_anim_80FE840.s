@@ -29520,7 +29520,7 @@ sub_810D608: @ 810D608
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0810D664
-	ldr r4, =gBattleMoveAttacker
+	ldr r4, =gBattlerAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl GetBattlerSpriteCoord
@@ -29808,7 +29808,7 @@ sub_810D874: @ 810D874
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0810D8B8
-	ldr r4, =gBattleMoveAttacker
+	ldr r4, =gBattlerAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl GetBattlerSpriteCoord
@@ -40918,7 +40918,7 @@ sub_8113250: @ 8113250
 	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0]
 	strh r0, [r6, 0x3A]
-	ldr r4, =gBattleMoveAttacker
+	ldr r4, =gBattlerAttacker
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_80A861C
@@ -50065,7 +50065,7 @@ sub_8117E94: @ 8117E94
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gBattleAnimAttacker
-	ldr r1, =gBattleMoveTarget
+	ldr r1, =gBattlerTarget
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, =gBattleAnimTarget
@@ -50117,7 +50117,7 @@ sub_8117F10: @ 8117F10
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gBattleAnimTarget
-	ldr r1, =gBattleMoveTarget
+	ldr r1, =gBattlerTarget
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -50132,7 +50132,7 @@ sub_8117F30: @ 8117F30
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gBattleAnimAttacker
-	ldr r1, =gBattleMoveAttacker
+	ldr r1, =gBattlerAttacker
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, =gBattleAnimTarget

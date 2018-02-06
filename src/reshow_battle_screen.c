@@ -46,8 +46,8 @@ extern u8 GetBattlerSpriteCoord(u8 bank, u8 caseId);
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
-static bool8 LoadBankSpriteGfx(u8 bank);
-static void CreateBankSprite(u8 bank);
+static bool8 LoadBattlerSpriteGfx(u8 bank);
+static void CreateBattlerSprite(u8 bank);
 static void CreateHealthboxSprite(u8 bank);
 static void sub_80A95F4(void);
 
@@ -118,32 +118,32 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         }
         break;
     case 7:
-        if (!LoadBankSpriteGfx(0))
+        if (!LoadBattlerSpriteGfx(0))
             gBattleScripting.reshowMainState--;
         break;
     case 8:
-        if (!LoadBankSpriteGfx(1))
+        if (!LoadBattlerSpriteGfx(1))
             gBattleScripting.reshowMainState--;
         break;
     case 9:
-        if (!LoadBankSpriteGfx(2))
+        if (!LoadBattlerSpriteGfx(2))
             gBattleScripting.reshowMainState--;
         break;
     case 10:
-        if (!LoadBankSpriteGfx(3))
+        if (!LoadBattlerSpriteGfx(3))
             gBattleScripting.reshowMainState--;
         break;
     case 11:
-        CreateBankSprite(0);
+        CreateBattlerSprite(0);
         break;
     case 12:
-        CreateBankSprite(1);
+        CreateBattlerSprite(1);
         break;
     case 13:
-        CreateBankSprite(2);
+        CreateBattlerSprite(2);
         break;
     case 14:
-        CreateBankSprite(3);
+        CreateBattlerSprite(3);
         break;
     case 15:
         CreateHealthboxSprite(0);
@@ -208,25 +208,25 @@ static void sub_80A95F4(void)
     regBgcnt2->charBaseBlock = 0;
 }
 
-static bool8 LoadBankSpriteGfx(u8 bank)
+static bool8 LoadBattlerSpriteGfx(u8 battler)
 {
-    if (bank < gBattlersCount)
+    if (battler < gBattlersCount)
     {
-        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
         {
-            if (!gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
-                BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[bank]], bank);
+            if (!gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
+                BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battler]], battler);
             else
-                BattleLoadSubstituteOrMonSpriteGfx(bank, FALSE);
+                BattleLoadSubstituteOrMonSpriteGfx(battler, FALSE);
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
-            DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, bank);
-        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
-            DecompressTrainerBackPic(BACK_PIC_WALLY, bank);
-        else if (!gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
-            BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[bank]], bank);
+        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == 0)
+            DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, battler);
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == 0)
+            DecompressTrainerBackPic(BACK_PIC_WALLY, battler);
+        else if (!gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
+            BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
         else
-            BattleLoadSubstituteOrMonSpriteGfx(bank, FALSE);
+            BattleLoadSubstituteOrMonSpriteGfx(battler, FALSE);
 
         gBattleScripting.reshowHelperState = 0;
     }
@@ -243,111 +243,111 @@ struct MonCoords
 };
 extern const struct MonCoords gTrainerBackPicCoords[];
 
-static void CreateBankSprite(u8 bank)
+static void CreateBattlerSprite(u8 battler)
 {
-    if (bank < gBattlersCount)
+    if (battler < gBattlersCount)
     {
         u8 posY;
 
-        if (gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
-            posY = GetSubstituteSpriteDefault_Y(bank);
+        if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
+            posY = GetSubstituteSpriteDefault_Y(battler);
         else
-            posY = GetBattlerSpriteDefault_Y(bank);
+            posY = GetBattlerSpriteDefault_Y(battler);
 
-        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
         {
-            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
+            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 return;
 
-            sub_806A068(GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, GetBattlerSpriteCoord(bank, 2), posY, sub_80A82E4(bank));
-            gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
-            gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
-            gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
-            gSprites[gBattlerSpriteIds[bank]].data[2] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
+            sub_806A068(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
+            gBattlerSpriteIds[battler] = CreateSprite(&gUnknown_0202499C, GetBattlerSpriteCoord(battler, 2), posY, sub_80A82E4(battler));
+            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+            gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
+            gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
+            gSprites[gBattlerSpriteIds[battler]].data[2] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
-            StartSpriteAnim(&gSprites[gBattlerSpriteIds[bank]], gBattleMonForms[bank]);
-            if (gBattleSpritesDataPtr->bankData[bank].transformSpecies == SPECIES_CASTFORM)
-                gSprites[gBattlerSpriteIds[bank]].anims = gMonAnimationsSpriteAnimsPtrTable[SPECIES_CASTFORM];
+            StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], gBattleMonForms[battler]);
+            if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies == SPECIES_CASTFORM)
+                gSprites[gBattlerSpriteIds[battler]].anims = gMonAnimationsSpriteAnimsPtrTable[SPECIES_CASTFORM];
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
+        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == 0)
         {
             sub_806A12C(gSaveBlock2Ptr->playerGender, GetBattlerPosition(B_POSITION_PLAYER_LEFT));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, 0x50,
+            gBattlerSpriteIds[battler] = CreateSprite(&gUnknown_0202499C, 0x50,
                                                 (8 - gTrainerBackPicCoords[gSaveBlock2Ptr->playerGender].coords) * 4 + 80,
                                                  sub_80A82E4(0));
-            gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
-            gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
-            gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
+            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+            gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
+            gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == 0)
         {
             sub_806A12C(BACK_PIC_WALLY, GetBattlerPosition(0));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, 0x50,
+            gBattlerSpriteIds[battler] = CreateSprite(&gUnknown_0202499C, 0x50,
                                                 (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords) * 4 + 80,
                                                  sub_80A82E4(0));
-            gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
-            gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
-            gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
+            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+            gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
+            gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
         }
         else
         {
-            if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
+            if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 return;
 
-            sub_806A068(GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
-            gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, GetBattlerSpriteCoord(bank, 2), posY, sub_80A82E4(bank));
-            gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
-            gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
-            gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
-            gSprites[gBattlerSpriteIds[bank]].data[2] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
+            sub_806A068(GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
+            gBattlerSpriteIds[battler] = CreateSprite(&gUnknown_0202499C, GetBattlerSpriteCoord(battler, 2), posY, sub_80A82E4(battler));
+            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+            gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
+            gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
+            gSprites[gBattlerSpriteIds[battler]].data[2] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
-            StartSpriteAnim(&gSprites[gBattlerSpriteIds[bank]], gBattleMonForms[bank]);
-            if (gBattleSpritesDataPtr->bankData[bank].transformSpecies == SPECIES_CASTFORM)
-                gSprites[gBattlerSpriteIds[bank]].anims = gMonAnimationsSpriteAnimsPtrTable[SPECIES_CASTFORM];
+            StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], gBattleMonForms[battler]);
+            if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies == SPECIES_CASTFORM)
+                gSprites[gBattlerSpriteIds[battler]].anims = gMonAnimationsSpriteAnimsPtrTable[SPECIES_CASTFORM];
         }
 
-        gSprites[gBattlerSpriteIds[bank]].invisible = gBattleSpritesDataPtr->bankData[bank].invisible;
+        gSprites[gBattlerSpriteIds[battler]].invisible = gBattleSpritesDataPtr->battlerData[battler].invisible;
     }
 }
 
-static void CreateHealthboxSprite(u8 bank)
+static void CreateHealthboxSprite(u8 battler)
 {
-    if (bank < gBattlersCount)
+    if (battler < gBattlersCount)
     {
         u8 healthboxSpriteId;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
+        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == 0)
             healthboxSpriteId = CreateSafariPlayerHealthboxSprites();
-        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == 0)
             return;
         else
-            healthboxSpriteId = CreateHealthboxSprites(bank);
+            healthboxSpriteId = CreateBattlerHealthboxSprites(battler);
 
-        gHealthboxSpriteIds[bank] = healthboxSpriteId;
-        InitBattlerHealthboxCoords(bank);
+        gHealthboxSpriteIds[battler] = healthboxSpriteId;
+        InitBattlerHealthboxCoords(battler);
         SetHealthboxSpriteVisible(healthboxSpriteId);
 
-        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[bank], &gEnemyParty[gBattlerPartyIndexes[bank]], HEALTHBOX_ALL);
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gEnemyParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[bank], &gPlayerParty[gBattlerPartyIndexes[bank]], HEALTHBOX_SAFARI_ALL_TEXT);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_SAFARI_ALL_TEXT);
         else
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[bank], &gPlayerParty[gBattlerPartyIndexes[bank]], HEALTHBOX_ALL);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
 
-        if (GetBattlerPosition(bank) == B_POSITION_OPPONENT_RIGHT || GetBattlerPosition(bank) == B_POSITION_PLAYER_RIGHT)
-            DummyBattleInterfaceFunc(gHealthboxSpriteIds[bank], TRUE);
+        if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_RIGHT || GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)
+            DummyBattleInterfaceFunc(gHealthboxSpriteIds[battler], TRUE);
         else
-            DummyBattleInterfaceFunc(gHealthboxSpriteIds[bank], FALSE);
+            DummyBattleInterfaceFunc(gHealthboxSpriteIds[battler], FALSE);
 
-        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
         {
-            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
+            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 SetHealthboxSpriteInvisible(healthboxSpriteId);
         }
         else if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
         {
-            if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
+            if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 SetHealthboxSpriteInvisible(healthboxSpriteId);
         }
     }

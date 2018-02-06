@@ -54,7 +54,7 @@ enum
     HEALTHBOX_SAFARI_BALLS_TEXT
 };
 
-u8 CreateHealthboxSprites(u8 bank);
+u8 CreateBattlerHealthboxSprites(u8 bank);
 u8 CreateSafariPlayerHealthboxSprites(void);
 void SetBattleBarStruct(u8 bank, u8 healthboxSpriteId, s32 maxVal, s32 currVal, s32 receivedValue);
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId);

@@ -13,17 +13,18 @@
 /*
  * A battler may be in one of four positions on the field. The first bit determines
  * what side the battler is on, either the player's side or the opponent's side.
- * The second bit determines whether the pokemon is on the left or right of the
- * given side. Note that the opponent's mons are drawn opposite because the position
- * numbers correspond to their perspective. The battler number is usually the same
- * as the position, except in the case of link battles.
+ * The second bit determines what flank the battler is on, either the left or right.
+ * Note that the opponent's flanks are drawn corresponding to their perspective, so
+ * their right mon appears on the left, and their left mon appears on the right.
+ * The battler ID is usually the same as the position, except in the case of link battles.
  *
  *   + ------------------------- +
- *   |          Opponent's side  |
+ *   |           Opponent's side |
+ *   |            Right    Left  |
  *   |              3       1    |
  *   |                           |
- *   |                           |
  *   | Player's side             |
+ *   |  Left   Right             |
  *   |   0       2               |
  *   ----------------------------+
  *   |                           |
@@ -38,11 +39,15 @@
 #define B_POSITION_PLAYER_RIGHT       2
 #define B_POSITION_OPPONENT_RIGHT     3
 
-#define B_POSITION_PARTNER(position)  ((position) ^ 2)
-#define B_POSITION_OPPOSITE(position) ((position) ^ 1)
+// These macros can be used with either battler ID or positions to get the partner or the opposite mon
+#define BATTLE_OPPOSITE(id) ((id) ^ 1)
+#define BATTLE_PARTNER(id) ((id) ^ 2)
 
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
+
+#define B_FLANK_LEFT 0
+#define B_FLANK_RIGHT 1
 
 #define BIT_SIDE        1
 #define BIT_FLANK       2
@@ -170,7 +175,7 @@ extern u8 gBattleOutcome;
 
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 
-//
+// Not really sure what a "hitmarker" is.
 
 #define HITMARKER_x10                   0x00000010
 #define HITMARKER_x20                   0x00000020
@@ -214,21 +219,24 @@ extern u32 gHitMarker;
 
 extern u16 gSideStatuses[2];
 
-#define ACTION_USE_MOVE             0
-#define ACTION_USE_ITEM             1
-#define ACTION_SWITCH               2
-#define ACTION_RUN                  3
-#define ACTION_WATCHES_CAREFULLY    4
-#define ACTION_SAFARI_ZONE_BALL     5
-#define ACTION_POKEBLOCK_CASE       6
-#define ACTION_GO_NEAR              7
-#define ACTION_SAFARI_ZONE_RUN      8
-#define ACTION_9                    9
-#define ACTION_RUN_BATTLESCRIPT     10 // when executing an action
-#define ACTION_CANCEL_PARTNER       12 // when choosing an action
-#define ACTION_FINISHED             12 // when executing an action
-#define ACTION_NOTHING_FAINTED      13 // when choosing an action
-#define ACTION_INIT_VALUE           0xFF
+// Battle Actions
+// These determine what each battler will do in a turn
+#define B_ACTION_USE_MOVE               0
+#define B_ACTION_USE_ITEM               1
+#define B_ACTION_SWITCH                 2
+#define B_ACTION_RUN                    3
+#define B_ACTION_SAFARI_WATCH_CAREFULLY 4
+#define B_ACTION_SAFARI_BALL            5
+#define B_ACTION_SAFARI_POKEBLOCK       6
+#define B_ACTION_SAFARI_GO_NEAR         7
+#define B_ACTION_SAFARI_RUN             8
+// The exact purposes of these are unclear
+#define B_ACTION_UNKNOWN9               9
+#define B_ACTION_EXEC_SCRIPT            10 // when executing an action
+#define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
+#define B_ACTION_FINISHED               12 // when executing an action
+#define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
+#define B_ACTION_NONE                   0xFF
 
 #define MOVE_RESULT_MISSED             (1 << 0)
 #define MOVE_RESULT_SUPER_EFFECTIVE    (1 << 1)
@@ -421,8 +429,8 @@ struct DisableStruct
     /*0x12*/ u8 chargeTimer2 : 4;
     /*0x13*/ u8 tauntTimer1:4;
     /*0x13*/ u8 tauntTimer2:4;
-    /*0x14*/ u8 bankPreventingEscape;
-    /*0x15*/ u8 bankWithSureHit;
+    /*0x14*/ u8 battlerPreventingEscape;
+    /*0x15*/ u8 battlerWithSureHit;
     /*0x16*/ u8 isFirstTurn;
     /*0x17*/ u8 unk17;
     /*0x18*/ u8 truantCounter : 1;
@@ -593,10 +601,6 @@ struct BattleResources
 };
 
 extern struct BattleResources* gBattleResources;
-
-#define BATTLESCRIPTS_STACK     (gBattleResources->battleScriptsStack)
-#define BATTLE_CALLBACKS_STACK  (gBattleResources->battleCallbackStack)
-#define BATTLE_LVLUP_STATS      (gBattleResources->statsBeforeLvlUp)
 
 struct BattleResults
 {
@@ -836,7 +840,7 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 atk49_state;
-    u8 bankWithAbility;
+    u8 battlerWithAbility;
     u8 multihitMoveEffect;
     u8 battler;
     u8 animTurn;
@@ -946,7 +950,7 @@ struct BattleBarInfo
 
 struct BattleSpriteData
 {
-    struct BattleSpriteInfo *bankData;
+    struct BattleSpriteInfo *battlerData;
     struct BattleHealthboxInfo *healthBoxesData;
     struct BattleAnimationInfo *animationData;
     struct BattleBarInfo *battleBars;

@@ -25,8 +25,8 @@
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
-extern u8 gBattleMoveAttacker;
-extern u8 gBattleMoveTarget;
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
 extern u16 gBattle_WIN0H;
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
@@ -221,8 +221,8 @@ void ClearBattleAnimationVars(void)
 
 void DoMoveAnim(u16 move)
 {
-    gBattleAnimAttacker = gBattleMoveAttacker;
-    gBattleAnimTarget = gBattleMoveTarget;
+    gBattleAnimAttacker = gBattlerAttacker;
+    gBattleAnimTarget = gBattlerTarget;
     LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
 }
 
@@ -665,7 +665,7 @@ bool8 IsBattlerSpriteVisible(u8 bank)
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.
-    if (!gBattleSpritesDataPtr->bankData[bank].invisible || !gSprites[gBattlerSpriteIds[bank]].invisible)
+    if (!gBattleSpritesDataPtr->battlerData[bank].invisible || !gSprites[gBattlerSpriteIds[bank]].invisible)
         return TRUE;
 
     return FALSE;

@@ -27,9 +27,9 @@ extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
 extern u8 gActiveBattler;
 extern u8 gBankInMenu;
-extern u8 gBattleMoveTarget;
-extern u8 gBattleMoveAttacker;
-extern u8 gStringBank;
+extern u8 gBattlerTarget;
+extern u8 gBattlerAttacker;
+extern u8 gStringBattler;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
 extern u8 gBattleMonForms[4];
@@ -210,7 +210,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
 void sub_806CF24(s32 stat)
 {
-    gBattleMoveTarget = gBankInMenu;
+    gBattlerTarget = gBankInMenu;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
@@ -233,7 +233,7 @@ u8 *sub_806CF78(u16 itemId)
         itemEffect = gItemEffectTable[itemId - 13];
     }
 
-    gStringBank = gBankInMenu;
+    gStringBattler = gBankInMenu;
 
     for (i = 0; i < 3; i++)
     {
@@ -247,7 +247,7 @@ u8 *sub_806CF78(u16 itemId)
             }
             else
             {
-                gBattleMoveAttacker = gBankInMenu;
+                gBattlerAttacker = gBankInMenu;
                 BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
             }
         }
@@ -255,7 +255,7 @@ u8 *sub_806CF78(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        gBattleMoveAttacker = gBankInMenu;
+        gBattlerAttacker = gBankInMenu;
         BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
     }
 

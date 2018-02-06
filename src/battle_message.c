@@ -17,11 +17,11 @@
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
 extern u8 gActiveBattler;
-extern u8 gBattleMoveAttacker;
-extern u8 gBattleMoveTarget;
-extern u8 gStringBank;
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
+extern u8 gStringBattler;
 extern u8 gEffectBank;
-extern u8 gAbilitiesPerBank[MAX_BATTLERS_COUNT];
+extern u8 gBattlerAbilities[MAX_BATTLERS_COUNT];
 extern u32 gBattleTypeFlags;
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
@@ -1436,12 +1436,12 @@ void BufferStringBattle(u16 stringID)
     gBattleScripting.battler = gStringInfo->scrActive;
     *(&gBattleStruct->field_52) = gStringInfo->unk1605E;
     *(&gBattleStruct->hpScale) = gStringInfo->hpScale;
-    gStringBank = gStringInfo->StringBank;
+    gStringBattler = gStringInfo->StringBank;
     *(&gBattleStruct->stringMoveType) = gStringInfo->moveType;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        gAbilitiesPerBank[i] = gStringInfo->abilities[i];
+        gBattlerAbilities[i] = gStringInfo->abilities[i];
     }
     for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
     {
@@ -1884,23 +1884,23 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only bank 0/1
-                HANDLE_NICKNAME_STRING_CASE(gBattleMoveAttacker,
-                                            gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleMoveAttacker))])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker,
+                                            gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker))])
                 break;
             case B_TXT_ATK_PARTNER_NAME: // attacker partner name
-                if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
-                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleMoveAttacker)) + 2]], MON_DATA_NICKNAME, text);
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker)) + 2]], MON_DATA_NICKNAME, text);
                 else
-                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleMoveAttacker)) + 2]], MON_DATA_NICKNAME, text);
+                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker)) + 2]], MON_DATA_NICKNAME, text);
 
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX: // attacker name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattleMoveAttacker, gBattlerPartyIndexes[gBattleMoveAttacker])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker])
                 break;
             case B_TXT_DEF_NAME_WITH_PREFIX: // target name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattleMoveTarget, gBattlerPartyIndexes[gBattleMoveTarget])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
                 break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect bank name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gEffectBank, gBattlerPartyIndexes[gEffectBank])
@@ -1930,10 +1930,10 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                     {
                         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
                         {
-                            if ((gBattleScripting.multiplayerId != 0 && (gStringBank & BIT_SIDE))
-                                || (gBattleScripting.multiplayerId == 0 && !(gStringBank & BIT_SIDE)))
+                            if ((gBattleScripting.multiplayerId != 0 && (gStringBattler & BIT_SIDE))
+                                || (gBattleScripting.multiplayerId == 0 && !(gStringBattler & BIT_SIDE)))
                             {
-                                StringCopy(text, gEnigmaBerries[gStringBank].name);
+                                StringCopy(text, gEnigmaBerries[gStringBattler].name);
                                 StringAppend(text, gText_BerrySuffix);
                                 toCpy = text;
                             }
@@ -1944,9 +1944,9 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                         }
                         else
                         {
-                            if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gStringBank)
+                            if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gStringBattler)
                             {
-                                StringCopy(text, gEnigmaBerries[gStringBank].name);
+                                StringCopy(text, gEnigmaBerries[gStringBattler].name);
                                 StringAppend(text, gText_BerrySuffix);
                                 toCpy = text;
                             }
@@ -1970,16 +1970,16 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = gAbilityNames[gLastUsedAbility];
                 break;
             case B_TXT_ATK_ABILITY: // attacker ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleMoveAttacker]];
+                toCpy = gAbilityNames[gBattlerAbilities[gBattlerAttacker]];
                 break;
             case B_TXT_DEF_ABILITY: // target ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleMoveTarget]];
+                toCpy = gAbilityNames[gBattlerAbilities[gBattlerTarget]];
                 break;
             case B_TXT_SCR_ACTIVE_ABILITY: // scripting active ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleScripting.battler]];
+                toCpy = gAbilityNames[gBattlerAbilities[gBattleScripting.battler]];
                 break;
             case B_TXT_EFF_ABILITY: // effect bank ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gEffectBank]];
+                toCpy = gAbilityNames[gBattlerAbilities[gEffectBank]];
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
@@ -2094,37 +2094,37 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                     toCpy = gText_Someones;
                 break;
             case B_TXT_ATK_PREFIX2:
-                if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix2;
                 else
                     toCpy = gText_FoePkmnPrefix3;
                 break;
             case B_TXT_DEF_PREFIX2:
-                if (GetBattlerSide(gBattleMoveTarget) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix2;
                 else
                     toCpy = gText_FoePkmnPrefix3;
                 break;
             case B_TXT_ATK_PREFIX1:
-                if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix;
                 else
                     toCpy = gText_FoePkmnPrefix2;
                 break;
             case B_TXT_DEF_PREFIX1:
-                if (GetBattlerSide(gBattleMoveTarget) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix;
                 else
                     toCpy = gText_FoePkmnPrefix2;
                 break;
             case B_TXT_ATK_PREFIX3:
-                if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix3;
                 else
                     toCpy = gText_FoePkmnPrefix4;
                 break;
             case B_TXT_DEF_PREFIX3:
-                if (GetBattlerSide(gBattleMoveTarget) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix3;
                 else
                     toCpy = gText_FoePkmnPrefix4;
@@ -2313,9 +2313,9 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
                 if (hword == ITEM_ENIGMA_BERRY)
                 {
-                    if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gStringBank)
+                    if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gStringBattler)
                     {
-                        StringCopy(dst, gEnigmaBerries[gStringBank].name);
+                        StringCopy(dst, gEnigmaBerries[gStringBattler].name);
                         StringAppend(dst, gText_BerrySuffix);
                     }
                     else

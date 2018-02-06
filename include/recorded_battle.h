@@ -9,7 +9,7 @@ void sub_8184DA4(u8 arg0);
 void sub_8184E58(void);
 void RecordedBattle_SetBattlerAction(u8 bank, u8 action);
 void RecordedBattle_ClearBattlerAction(u8 bank, u8 bytesToClear);
-u8 RecordedBattle_GetBankAction(u8 bank);
+u8 RecordedBattle_GetBattlerAction(u8 bank);
 u8 sub_81850D0(void);
 u8 sub_81850DC(u8 *arg0);
 void sub_81851A8(u8 *arg0);

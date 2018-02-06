@@ -17,7 +17,7 @@
 
 extern bool8 gDoingBattleAnim;
 extern u8 gActiveBattler;
-extern u8 gBattleMoveTarget;
+extern u8 gBattlerTarget;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBattlerSpriteIds[];
 extern u8 gHealthboxSpriteIds[];
@@ -378,7 +378,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     switch (throwCaseId)
     {
     case POKEBALL_PLAYER_SENDOUT:
-        gBattleMoveTarget = bank;
+        gBattlerTarget = bank;
         gSprites[ballSpriteId].pos1.x = 24;
         gSprites[ballSpriteId].pos1.y = 68;
         gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
@@ -386,17 +386,17 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     case POKEBALL_OPPONENT_SENDOUT:
         gSprites[ballSpriteId].pos1.x = GetBattlerSpriteCoord(bank, BANK_X_POS);
         gSprites[ballSpriteId].pos1.y = GetBattlerSpriteCoord(bank, BANK_Y_POS) + 24;
-        gBattleMoveTarget = bank;
+        gBattlerTarget = bank;
         gSprites[ballSpriteId].data[0] = 0;
         gSprites[ballSpriteId].callback = SpriteCB_OpponentMonSendOut;
         break;
     default:
-        gBattleMoveTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         notSendOut = TRUE;
         break;
     }
 
-    gSprites[ballSpriteId].sBank = gBattleMoveTarget;
+    gSprites[ballSpriteId].sBank = gBattlerTarget;
     if (!notSendOut)
     {
         DestroyTask(taskId);
@@ -405,12 +405,12 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     // this will perform an unused ball throw animation
     gSprites[ballSpriteId].data[0] = 0x22;
-    gSprites[ballSpriteId].data[2] = GetBattlerSpriteCoord(gBattleMoveTarget, BANK_X_POS);
-    gSprites[ballSpriteId].data[4] = GetBattlerSpriteCoord(gBattleMoveTarget, BANK_Y_POS) - 16;
+    gSprites[ballSpriteId].data[2] = GetBattlerSpriteCoord(gBattlerTarget, BANK_X_POS);
+    gSprites[ballSpriteId].data[4] = GetBattlerSpriteCoord(gBattlerTarget, BANK_Y_POS) - 16;
     gSprites[ballSpriteId].data[5] = -40;
     sub_80A68D4(&gSprites[ballSpriteId]);
     gSprites[ballSpriteId].oam.affineParam = taskId;
-    gTasks[taskId].tOpponentBank = gBattleMoveTarget;
+    gTasks[taskId].tOpponentBank = gBattlerTarget;
     gTasks[taskId].func = TaskDummy;
     PlaySE(SE_NAGERU);
 }

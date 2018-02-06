@@ -29,7 +29,7 @@ extern u8 gActiveBattler;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gChosenMovesByBanks[MAX_BATTLERS_COUNT];
+extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_03001278;
 extern u8 gUnknown_03001279;
 
@@ -221,7 +221,7 @@ void RecordedBattle_ClearBattlerAction(u8 bank, u8 bytesToClear)
     }
 }
 
-u8 RecordedBattle_GetBankAction(u8 bank)
+u8 RecordedBattle_GetBattlerAction(u8 bank)
 {
     // trying to read past array or invalid action byte, battle is over
     if (sRecordedBytesNo[bank] >= BANK_RECORD_SIZE || sBattleRecords[bank][sRecordedBytesNo[bank]] == 0xFF)
@@ -1561,14 +1561,14 @@ void sub_818603C(u8 arg0)
                     u8 array3[8];
                     u8 var;
 
-                    RecordedBattle_GetBankAction(bank);
+                    RecordedBattle_GetBattlerAction(bank);
                     for (j = 0; j < 4; j++)
                     {
                         ppBonuses[j] = ((gBattleMons[bank].ppBonuses & ((3 << (j << 1)))) >> (j << 1));
                     }
                     for (j = 0; j < 4; j++)
                     {
-                        array1[j] = RecordedBattle_GetBankAction(bank);
+                        array1[j] = RecordedBattle_GetBattlerAction(bank);
                         movePp.moves[j] = gBattleMons[bank].moves[array1[j]];
                         movePp.pp[j] = gBattleMons[bank].pp[array1[j]];
                         array3[j] = ppBonuses[array1[j]];
@@ -1612,7 +1612,7 @@ void sub_818603C(u8 arg0)
                         SetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP_BONUSES, &var);
                     }
 
-                    gChosenMovesByBanks[bank] = gBattleMons[bank].moves[*(gBattleStruct->chosenMovePositions + bank)];
+                    gChosenMoveByBattler[bank] = gBattleMons[bank].moves[*(gBattleStruct->chosenMovePositions + bank)];
                 }
             }
         }

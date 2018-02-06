@@ -333,10 +333,10 @@ gLastUsedItem: @ 2024208
 gLastUsedAbility: @ 202420A
 	.space 0x1
 
-gBattleMoveAttacker: @ 202420B
+gBattlerAttacker: @ 202420B
 	.space 0x1
 
-gBattleMoveTarget: @ 202420C
+gBattlerTarget: @ 202420C
 	.space 0x1
 
 gBank1: @ 202420D
@@ -345,7 +345,7 @@ gBank1: @ 202420D
 gEffectBank: @ 202420E
 	.space 0x1
 
-gStringBank: @ 202420F
+gStringBattler: @ 202420F
 	.space 0x1
 
 gAbsentBattlerFlags: @ 2024210
@@ -360,7 +360,7 @@ gMultiHitCounter: @ 2024212
 gBattlescriptCurrInstr: @ 2024214
 	.space 0x8
 
-gActionForBanks: @ 202421C
+gChosenActionByBattler: @ 202421C
 	.space 0x4
 
 gSelectionBattleScripts: @ 2024220
@@ -390,7 +390,7 @@ gLockedMoves: @ 2024268
 gLastHitBy: @ 2024270
 	.space 0x4
 
-gChosenMovesByBanks: @ 2024274
+gChosenMoveByBattler: @ 2024274
 	.space 0x8
 
 gMoveResultFlags: @ 202427C
@@ -1165,7 +1165,7 @@ gUnknown_0203AB98: @ 203AB98
     .include "src/coins.o"
     .include "src/battle_transition.o"
 
-gAbilitiesPerBank: @ 203ABA4
+gBattlerAbilities: @ 203ABA4
 	.space 0x4
 
 gStringInfo: @ 203ABA8

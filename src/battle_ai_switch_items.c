@@ -39,7 +39,7 @@ static bool8 ShouldSwitchIfPerishSong(void)
         && gDisableStructs[gActiveBattler].perishSongTimer1 == 0)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
-        BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -60,7 +60,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         return FALSE;
 
-    opposingPosition = B_POSITION_OPPOSITE(GetBattlerPosition(gActiveBattler));
+    opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
 
     if (gBattleMons[GetBattlerAtPosition(opposingPosition)].ability != ABILITY_WONDER_GUARD)
         return FALSE;
@@ -121,7 +121,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             {
                 // we found a mon
                 *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-                BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+                BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
                 return TRUE;
             }
         }
@@ -151,10 +151,10 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         bankIn1 = gActiveBattler;
-        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_PARTNER(GetBattlerPosition(gActiveBattler)))])
+        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))])
             bankIn2 = gActiveBattler;
         else
-            bankIn2 = GetBattlerAtPosition(B_POSITION_PARTNER(GetBattlerPosition(gActiveBattler)));
+            bankIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
     }
     else
     {
@@ -221,7 +221,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         {
             // we found a mon
             *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-            BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
             return TRUE;
         }
     }
@@ -241,13 +241,13 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if ((gLastLandedMoves[gActiveBattler] == 0 || gLastLandedMoves[gActiveBattler] == 0xFFFF) && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
-        BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
     else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0 && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
-        BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -258,7 +258,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if (Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
-        BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -273,7 +273,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
     u8 moveFlags;
     u16 move;
 
-    opposingPosition = B_POSITION_OPPOSITE(GetBattlerPosition(gActiveBattler));
+    opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
     opposingBank = GetBattlerAtPosition(opposingPosition);
 
     if (!(gAbsentBattlerFlags & gBitTable[opposingBank]))
@@ -297,7 +297,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         return FALSE;
 
-    opposingBank = GetBattlerAtPosition(B_POSITION_PARTNER(opposingPosition));
+    opposingBank = GetBattlerAtPosition(BATTLE_PARTNER(opposingPosition));
 
     if (!(gAbsentBattlerFlags & gBitTable[opposingBank]))
     {
@@ -357,10 +357,10 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         bankIn1 = gActiveBattler;
-        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_PARTNER(GetBattlerPosition(gActiveBattler)))])
+        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))])
             bankIn2 = gActiveBattler;
         else
-            bankIn2 = GetBattlerAtPosition(B_POSITION_PARTNER(GetBattlerPosition(gActiveBattler)));
+            bankIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
     }
     else
     {
@@ -426,7 +426,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
                 if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % moduloPercent == 0)
                 {
                     *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-                    BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+                    BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
                     return TRUE;
                 }
             }
@@ -611,7 +611,7 @@ void AI_TrySwitchOrUseItem(void)
         }
     }
 
-    BtlController_EmitTwoReturnValues(1, ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
+    BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
 }
 
 static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8 *var)
@@ -937,7 +937,7 @@ static bool8 ShouldUseItem(void)
 
         if (shouldUse)
         {
-            BtlController_EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
             *(gBattleStruct->chosenItem + (gActiveBattler / 2) * 2) = item;
             gBattleResources->battleHistory->trainerItems[i] = 0;
             return shouldUse;

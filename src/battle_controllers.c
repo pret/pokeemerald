@@ -31,8 +31,8 @@ extern u8 gBattleBuffersTransferData[0x100];
 extern u8 gUnknown_02022D08;
 extern u8 gUnknown_02022D09;
 extern u8 gUnknown_02022D0A;
-extern u8 gBattleMoveAttacker;
-extern u8 gBattleMoveTarget;
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
 extern u8 gEffectBank;
 extern u16 gBattleWeather;
@@ -42,7 +42,7 @@ extern u16 gChosenMove;
 extern u16 gLastUsedItem;
 extern u8 gBattleOutcome;
 extern u8 gLastUsedAbility;
-extern u8 gStringBank;
+extern u8 gStringBattler;
 
 extern const struct BattleMove gBattleMoves[];
 
@@ -752,8 +752,8 @@ void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
     }
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_BUFFER_ID] = bufferId;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ACTIVE_BANK] = gActiveBattler;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ATTACKER] = gBattleMoveAttacker;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_TARGET] = gBattleMoveTarget;
+    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ATTACKER] = gBattlerAttacker;
+    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_TARGET] = gBattlerTarget;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_HI] = (alignedSize & 0x0000FF00) >> 8;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ABSENT_BANK_FLAGS] = gAbsentBattlerFlags;
@@ -920,8 +920,8 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
             {
-                gBattleMoveAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 2];
-                gBattleMoveTarget = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 3];
+                gBattlerAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 2];
+                gBattlerTarget = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 3];
                 gAbsentBattlerFlags = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 6];
                 gEffectBank = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 7];
             }
@@ -1126,7 +1126,7 @@ void BtlController_EmitPrintString(u8 bufferId, u16 stringID)
     stringInfo->scrActive = gBattleScripting.battler;
     stringInfo->unk1605E = gBattleStruct->field_52;
     stringInfo->hpScale = gBattleStruct->hpScale;
-    stringInfo->StringBank = gStringBank;
+    stringInfo->StringBank = gStringBattler;
     stringInfo->moveType = gBattleMoves[gCurrentMove].type;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
