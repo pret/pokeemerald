@@ -840,93 +840,79 @@ void BlendPalettesUnfaded(u32 selectedPalettes, u8 coeff, u16 color)
 
 void TintPalette_GrayScale(u16 *palette, u16 count)
 {
-    int r;
-    int g;
-    int b;
+    s32 r, g, b, i;
     u32 gray;
 
-    int i;
     for (i = 0; i < count; i++)
     {
-        r = *palette & 0x1F;
-        g = (*palette >> 5) & 0x1F;
+        r = (*palette >>  0) & 0x1F;
+        g = (*palette >>  5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
 
-        r = r * Q_8_8(0.2969);
-        r += g * Q_8_8(0.5899);
-        r += b * Q_8_8(0.1133);
+        gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
-        gray = r >> 8;
-
-        *palette++ = gray << 10 | gray << 5 | gray;
+        *palette++ = (gray << 10) | (gray << 5) | (gray << 0);
     }
 }
 
 void TintPalette_GrayScale2(u16 *palette, u16 count)
 {
-    int r;
-    int g;
-    int b;
+    s32 r, g, b, i;
     u32 gray;
 
-    int i;
     for (i = 0; i < count; i++)
     {
-        r = *palette & 0x1F;
-        g = (*palette >> 5) & 0x1F;
+        r = (*palette >>  0) & 0x1F;
+        g = (*palette >>  5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
 
-        r = r * Q_8_8(0.2969);
-        r += g * Q_8_8(0.5899);
-        r += b * Q_8_8(0.1133);
-
-        gray = r >> 8;
+        gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
         if (gray > 0x1F)
             gray = 0x1F;
 
         gray = sRoundedDownGrayscaleMap[gray];
 
-        *palette++ = gray << 10 | gray << 5 | gray;
+        *palette++ = (gray << 10) | (gray << 5) | (gray << 0);
     }
 }
 
 void TintPalette_SepiaTone(u16 *palette, u16 count)
 {
-    s32 r, g, b, gray;
-    s32 i;
-
-    for (i = 0; i < count; palette++, i++)
+    s32 r, g, b, i;
+    u32 gray;
+    
+    for (i = 0; i < count; i++)
     {
         r = (*palette >>  0) & 0x1F;
         g = (*palette >>  5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
 
-        gray = (r * 76 + g * 151 + b * 29) >> 8;
+        gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
-        r = (u16)((307 * gray)) >> 8;
-        g = (u16)((256 * gray)) >> 8;
-        b = (u16)((240 * gray)) >> 8;
+        r = (u16)((Q_8_8(1.2) * gray)) >> 8;
+        g = (u16)((Q_8_8(1.0) * gray)) >> 8;
+        b = (u16)((Q_8_8(0.94) * gray)) >> 8;
 
         if (r > 31)
             r = 31;
 
-        *palette = (b << 10) | (g << 5) | (r << 0);
+        *palette++ = (b << 10) | (g << 5) | (r << 0);
     }
 }
 
 void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 bTone)
 {
-    s32 r, g, b, gray;
-    s32 i;
+    s32 r, g, b, i;
+    u32 gray;
 
-    for (i = 0; i < count; palette++, i++)
+    for (i = 0; i < count; i++)
     {
         r = (*palette >>  0) & 0x1F;
         g = (*palette >>  5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
 
-        gray = (r * 76 + g * 151 + b * 29) >> 8;
+        gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
         r = (u16)((rTone * gray)) >> 8;
         g = (u16)((gTone * gray)) >> 8;
@@ -939,7 +925,7 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 b
         if (b > 31)
             b = 31;
 
-        *palette = (b << 10) | (g << 5) | (r << 0);
+        *palette++ = (b << 10) | (g << 5) | (r << 0);
     }
 }
 
