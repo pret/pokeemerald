@@ -215,10 +215,10 @@ gBattleResults: @ 3005D10
 gLeveledUpInBattle: @ 3005D54
 	.space 0xC
 
-gBattlerFuncs: @ 3005D60
+gBattlerControllerFuncs: @ 3005D60
 	.space 0x10
 
-gHealthBoxesIds: @ 3005D70
+gHealthboxSpriteIds: @ 3005D70
 	.space 0x4
 
 gMultiUsePlayerCursor: @ 3005D74

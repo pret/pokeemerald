@@ -28,16 +28,16 @@
 #include "data2.h"
 #include "party_menu.h"
 
-extern u32 gBattleExecBuffer;
+extern u32 gBattleControllerExecFlags;
 extern u8 gActiveBattler;
-extern u8 gBankSpriteIds[MAX_BATTLERS_COUNT];
+extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gAbsentBattlerFlags;
 extern u8 gBattlersCount;
 extern bool8 gDoingBattleAnim;
-extern void (*gBattlerFuncs[MAX_BATTLERS_COUNT])(void);
-extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
 extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern u8 gMultiUsePlayerCursor;
@@ -48,7 +48,7 @@ extern struct SpriteTemplate gUnknown_0202499C;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
 extern u16 gSpecialVar_ItemId;
 extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
-extern u8 gHealthBoxesIds[MAX_BATTLERS_COUNT];
+extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gBattleOutcome;
 extern u8 gNumberOfMovesToChoose;
 extern u16 gBattle_BG0_X;
@@ -204,7 +204,7 @@ static void nullsub_117(void)
 
 void SetControllerToWally(void)
 {
-    gBattlerFuncs[gActiveBattler] = WallyBufferRunCommand;
+    gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
     gBattleStruct->wallyBattleState = 0;
     gBattleStruct->wallyMovesState = 0;
     gBattleStruct->wallyWaitFrames = 0;
@@ -213,7 +213,7 @@ void SetControllerToWally(void)
 
 static void WallyBufferRunCommand(void)
 {
-    if (gBattleExecBuffer & gBitTable[gActiveBattler])
+    if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
         if (gBattleBufferA[gActiveBattler][0] < ARRAY_COUNT(sWallyBufferCommands))
             sWallyBufferCommands[gBattleBufferA[gActiveBattler][0]]();
@@ -233,7 +233,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            EmitTwoReturnValues(1, ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(1, ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -244,7 +244,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            EmitTwoReturnValues(1, ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(1, ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -254,7 +254,7 @@ static void WallyHandleActions(void)
     case 3:
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
-            EmitTwoReturnValues(1, 9, 0);
+            BtlController_EmitTwoReturnValues(1, 9, 0);
             WallyBufferExecCompleted();
             gBattleStruct->wallyBattleState++;
             gBattleStruct->wallyMovesState = 0;
@@ -275,7 +275,7 @@ static void WallyHandleActions(void)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
             WallyBufferExecCompleted();
         }
         break;
@@ -284,7 +284,7 @@ static void WallyHandleActions(void)
 
 static void CompleteOnBankSpriteCallbackDummy(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         WallyBufferExecCompleted();
 }
 
@@ -304,7 +304,7 @@ static void OpenBagAfterPaletteFade(void)
 {
     if (!gPaletteFade.active)
     {
-        gBattlerFuncs[gActiveBattler] = CompleteOnChosenItem;
+        gBattlerControllerFuncs[gActiveBattler] = CompleteOnChosenItem;
         nullsub_35();
         FreeAllWindowBuffers();
         DoWallyTutorialBagMenu();
@@ -315,7 +315,7 @@ static void CompleteOnChosenItem(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        EmitOneReturnValue(1, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(1, gSpecialVar_ItemId);
         WallyBufferExecCompleted();
     }
 }
@@ -323,29 +323,29 @@ static void CompleteOnChosenItem(void)
 static void sub_816864C(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
-        sub_8172EF0(gActiveBattler, &gPlayerParty[gBattlePartyID[gActiveBattler]]);
+        sub_8172EF0(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
-        sub_8172EF0(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlePartyID[gActiveBattler ^ BIT_FLANK]]);
+        sub_8172EF0(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
 
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive
         && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive
         && gSprites[gUnknown_03005D7C[gActiveBattler]].callback == SpriteCallbackDummy
-        && gSprites[gBankSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+        && gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
         if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
             DestroySprite(&gSprites[gUnknown_03005D7C[gActiveBattler ^ BIT_FLANK]]);
-            UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBattler ^ BIT_FLANK], &gPlayerParty[gBattlePartyID[gActiveBattler ^ BIT_FLANK]], HEALTHBOX_ALL);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]], HEALTHBOX_ALL);
             sub_8076918(gActiveBattler ^ BIT_FLANK);
-            SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBattler ^ BIT_FLANK]);
+            SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK]);
         }
         DestroySprite(&gSprites[gUnknown_03005D7C[gActiveBattler]]);
-        UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBattler], &gPlayerParty[gBattlePartyID[gActiveBattler]], HEALTHBOX_ALL);
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_ALL);
         sub_8076918(gActiveBattler);
-        SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBattler]);
+        SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
         gBattleSpritesDataPtr->animationData->field_9_x1 = 0;
-        gBattlerFuncs[gActiveBattler] = sub_8168818;
+        gBattlerControllerFuncs[gActiveBattler] = sub_8168818;
     }
 
 }
@@ -354,7 +354,7 @@ static void sub_8168818(void)
 {
     bool32 r4 = FALSE;
 
-    if (gSprites[gHealthBoxesIds[gActiveBattler]].callback == SpriteCallbackDummy)
+    if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         r4 = TRUE;
 
     if (r4 && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1
@@ -370,7 +370,7 @@ static void sub_8168818(void)
         FreeSpritePaletteByTag(0x27F9);
 
         CreateTask(c3_0802FDF4, 10);
-        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBattler]], gActiveBattler);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 
         WallyBufferExecCompleted();
     }
@@ -378,24 +378,24 @@ static void sub_8168818(void)
 
 static void CompleteOnHealthbarDone(void)
 {
-    s16 hpValue = sub_8074AA0(gActiveBattler, gHealthBoxesIds[gActiveBattler], HEALTH_BAR, 0);
+    s16 hpValue = sub_8074AA0(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
 
-    SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBattler]);
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
     if (hpValue != -1)
     {
-        UpdateHpTextInHealthbox(gHealthBoxesIds[gActiveBattler], hpValue, HP_CURRENT);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
     }
     else
     {
-        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBattler]], gActiveBattler);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
         WallyBufferExecCompleted();
     }
 }
 
 static void DoHitAnimBlinkSpriteEffect(void)
 {
-    u8 spriteId = gBankSpriteIds[gActiveBattler];
+    u8 spriteId = gBattlerSpriteIds[gActiveBattler];
 
     if (gSprites[spriteId].data[1] == 32)
     {
@@ -416,16 +416,16 @@ static void sub_8168A20(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
     {
-        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBankSpriteIds[gActiveBattler]]);
-        SetHealthboxSpriteInvisible(gHealthBoxesIds[gActiveBattler]);
+        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
         WallyBufferExecCompleted();
     }
 }
 
 static void CompleteOnBankSpriteCallbackDummy2(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         WallyBufferExecCompleted();
 }
 
@@ -437,7 +437,7 @@ static void CompleteOnFinishedBattleAnimation(void)
 
 static void WallyBufferExecCompleted(void)
 {
-    gBattlerFuncs[gActiveBattler] = WallyBufferRunCommand;
+    gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         u8 playerId = GetMultiplayerId();
@@ -447,7 +447,7 @@ static void WallyBufferExecCompleted(void)
     }
     else
     {
-        gBattleExecBuffer &= ~gBitTable[gActiveBattler];
+        gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
     }
 }
 
@@ -466,7 +466,7 @@ static void WallyHandleGetMonData(void)
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        size += CopyWallyMonData(gBattlePartyID[gActiveBattler], monData);
+        size += CopyWallyMonData(gBattlerPartyIndexes[gActiveBattler], monData);
     }
     else
     {
@@ -478,7 +478,7 @@ static void WallyHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    EmitDataTransfer(1, size, monData);
+    BtlController_EmitDataTransfer(1, size, monData);
     WallyBufferExecCompleted();
 }
 
@@ -800,7 +800,7 @@ static void WallyHandleSetMonData(void)
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        SetWallyMonData(gBattlePartyID[gActiveBattler]);
+        SetWallyMonData(gBattlerPartyIndexes[gActiveBattler]);
     }
     else
     {
@@ -1030,7 +1030,7 @@ static void SetWallyMonData(u8 monId)
         break;
     }
 
-    HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBattler]], gActiveBattler);
+    HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 }
 
 static void WallyHandleSetRawMonData(void)
@@ -1053,13 +1053,13 @@ static void WallyHandleReturnMonToBall(void)
     if (gBattleBufferA[gActiveBattler][1] == 0)
     {
         InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_PLAYER_MON);
-        gBattlerFuncs[gActiveBattler] = sub_8168A20;
+        gBattlerControllerFuncs[gActiveBattler] = sub_8168A20;
     }
     else
     {
-        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBattler]]);
-        DestroySprite(&gSprites[gBankSpriteIds[gActiveBattler]]);
-        SetHealthboxSpriteInvisible(gHealthBoxesIds[gActiveBattler]);
+        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
         WallyBufferExecCompleted();
     }
 }
@@ -1068,30 +1068,30 @@ static void WallyHandleDrawTrainerPic(void)
 {
     DecompressTrainerBackPic(BACK_PIC_WALLY, gActiveBattler);
     sub_806A12C(BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
-    gBankSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
                                                80,
                                                80 + 4 * (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords),
                                                30);
-    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = 240;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = -2;
-    gSprites[gBankSpriteIds[gActiveBattler]].callback = sub_805D7AC;
-    gBattlerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_805D7AC;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
 }
 
 static void WallyHandleTrainerSlide(void)
 {
     DecompressTrainerBackPic(BACK_PIC_WALLY, gActiveBattler);
     sub_806A12C(BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
-    gBankSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
                                                80,
                                                80 + 4 * (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords),
                                                30);
-    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = -96;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 2;
-    gSprites[gBankSpriteIds[gActiveBattler]].callback = sub_805D7AC;
-    gBattlerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_805D7AC;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
 }
 
 static void WallyHandleTrainerSlideBack(void)
@@ -1114,7 +1114,7 @@ static void WallyHandleSuccessBallThrowAnim(void)
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
     InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
-    gBattlerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
 }
 
 static void WallyHandleBallThrowAnim(void)
@@ -1124,7 +1124,7 @@ static void WallyHandleBallThrowAnim(void)
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
     InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
-    gBattlerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
 }
 
 static void WallyHandlePause(void)
@@ -1150,7 +1150,7 @@ static void WallyHandleMoveAnimation(void)
     else
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-        gBattlerFuncs[gActiveBattler] = WallyDoMoveAnimation;
+        gBattlerControllerFuncs[gActiveBattler] = WallyDoMoveAnimation;
     }
 
 }
@@ -1209,7 +1209,7 @@ static void WallyHandlePrintString(void)
     stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
-    gBattlerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
 static void WallyHandlePrintSelectionString(void)
@@ -1226,7 +1226,7 @@ static void HandleChooseActionAfterDma3(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 160;
-        gBattlerFuncs[gActiveBattler] = WallyHandleActions;
+        gBattlerControllerFuncs[gActiveBattler] = WallyHandleActions;
     }
 }
 
@@ -1234,7 +1234,7 @@ static void WallyHandleChooseAction(void)
 {
     s32 i;
 
-    gBattlerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
+    gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattleHandleAddTextPrinter(gText_BattleMenu, 2);
 
     for (i = 0; i < 4; i++)
@@ -1271,7 +1271,7 @@ static void WallyHandleChooseMove(void)
         if (--gBattleStruct->wallyMoveFrames == 0)
         {
             PlaySE(SE_SELECT);
-            EmitTwoReturnValues(1, 10, 0x100);
+            BtlController_EmitTwoReturnValues(1, 10, 0x100);
             WallyBufferExecCompleted();
         }
         break;
@@ -1281,7 +1281,7 @@ static void WallyHandleChooseMove(void)
 static void WallyHandleChooseItem(void)
 {
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-    gBattlerFuncs[gActiveBattler] = OpenBagAfterPaletteFade;
+    gBattlerControllerFuncs[gActiveBattler] = OpenBagAfterPaletteFade;
     gBankInMenu = gActiveBattler;
 }
 
@@ -1304,20 +1304,20 @@ static void WallyHandleHealthBarUpdate(void)
 
     if (hpVal != INSTANT_HP_BAR_DROP)
     {
-        u32 maxHP = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBattler]], MON_DATA_MAX_HP);
-        u32 curHP = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBattler]], MON_DATA_HP);
+        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
+        u32 curHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
 
-        SetBattleBarStruct(gActiveBattler, gHealthBoxesIds[gActiveBattler], maxHP, curHP, hpVal);
+        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, curHP, hpVal);
     }
     else
     {
-        u32 maxHP = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBattler]], MON_DATA_MAX_HP);
+        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
 
-        SetBattleBarStruct(gActiveBattler, gHealthBoxesIds[gActiveBattler], maxHP, 0, hpVal);
-        UpdateHpTextInHealthbox(gHealthBoxesIds[gActiveBattler], 0, HP_CURRENT);
+        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], 0, HP_CURRENT);
     }
 
-    gBattlerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
 static void WallyHandleExpUpdate(void)
@@ -1402,16 +1402,16 @@ static void WallyHandleCmd40(void)
 
 static void WallyHandleHitAnimation(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBattler]].invisible == TRUE)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
     {
         WallyBufferExecCompleted();
     }
     else
     {
         gDoingBattleAnim = TRUE;
-        gSprites[gBankSpriteIds[gActiveBattler]].data[1] = 0;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
         DoHitAnimHealthboxEffect(gActiveBattler);
-        gBattlerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
+        gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
     }
 }
 
@@ -1443,7 +1443,7 @@ static void WallyHandlePlayFanfareOrBGM(void)
 
 static void WallyHandleFaintingCry(void)
 {
-    u16 species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES);
+    u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
     PlayCry1(species, 25);
     WallyBufferExecCompleted();
@@ -1461,20 +1461,20 @@ static void WallyHandleIntroTrainerBallThrow(void)
     u8 paletteNum;
     u8 taskId;
 
-    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBattler]]);
+    oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
 
-    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 50;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[4] = gSprites[gBankSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBankSpriteIds[gActiveBattler]].callback = sub_80A6EEC;
-    gSprites[gBankSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80A6EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
 
-    StoreSpriteCallbackInData6(&gSprites[gBankSpriteIds[gActiveBattler]], sub_805CC00);
-    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], 1);
+    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_805CC00);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
 
     paletteNum = AllocSpritePalette(0xD6F8);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[BACK_PIC_WALLY].data, 0x100 + paletteNum * 16, 32);
-    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
 
     taskId = CreateTask(sub_816AC04, 5);
     gTasks[taskId].data[0] = gActiveBattler;
@@ -1483,7 +1483,7 @@ static void WallyHandleIntroTrainerBallThrow(void)
         gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
-    gBattlerFuncs[gActiveBattler] = nullsub_21;
+    gBattlerControllerFuncs[gActiveBattler] = nullsub_21;
 }
 
 static void sub_816AA80(u8 bank)
@@ -1491,25 +1491,25 @@ static void sub_816AA80(u8 bank)
     u16 species;
 
     gBattleSpritesDataPtr->bankData[bank].transformSpecies = 0;
-    gBattlePartyID[bank] = gBattleBufferA[bank][1];
-    species = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+    gBattlerPartyIndexes[bank] = gBattleBufferA[bank][1];
+    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
     gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);
     sub_806A068(species, GetBattlerPosition(bank));
-    gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C,
-                                        GetBankCoord(bank, 2),
-                                        GetBankSpriteDefault_Y(bank),
+    gBattlerSpriteIds[bank] = CreateSprite(&gUnknown_0202499C,
+                                        GetBattlerSpriteCoord(bank, 2),
+                                        GetBattlerSpriteDefault_Y(bank),
                                         sub_80A82E4(bank));
 
-    gSprites[gUnknown_03005D7C[bank]].data[1] = gBankSpriteIds[bank];
+    gSprites[gUnknown_03005D7C[bank]].data[1] = gBattlerSpriteIds[bank];
     gSprites[gUnknown_03005D7C[bank]].data[2] = bank;
 
-    gSprites[gBankSpriteIds[bank]].data[0] = bank;
-    gSprites[gBankSpriteIds[bank]].data[2] = species;
-    gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
+    gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
+    gSprites[gBattlerSpriteIds[bank]].data[2] = species;
+    gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
 
-    StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
-    gSprites[gBankSpriteIds[bank]].invisible = TRUE;
-    gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[bank]], gBattleMonForms[bank]);
+    gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
     gSprites[gUnknown_03005D7C[bank]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
@@ -1524,9 +1524,9 @@ static void sub_816AC04(u8 taskId)
         u8 savedActiveBank = gActiveBattler;
 
         gActiveBattler = gTasks[taskId].data[0];
-        gBattleBufferA[gActiveBattler][1] = gBattlePartyID[gActiveBattler];
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_816AA80(gActiveBattler);
-        gBattlerFuncs[gActiveBattler] = sub_816864C;
+        gBattlerControllerFuncs[gActiveBattler] = sub_816864C;
         gActiveBattler = savedActiveBank;
         DestroyTask(taskId);
     }
@@ -1569,7 +1569,7 @@ static void WallyHandleBattleAnimation(void)
     if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
         WallyBufferExecCompleted();
     else
-        gBattlerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
+        gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
 }
 
 static void WallyHandleLinkStandbyMsg(void)
@@ -1590,7 +1590,7 @@ static void WallyHandleCmd55(void)
     WallyBufferExecCompleted();
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_WILD) && gBattleTypeFlags & BATTLE_TYPE_LINK)
-        gBattlerFuncs[gActiveBattler] = sub_80587B0;
+        gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
 }
 
 static void nullsub_118(void)

@@ -25,8 +25,8 @@
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
-extern u8 gBattleAttacker;
-extern u8 gBattleDefender;
+extern u8 gBattleMoveAttacker;
+extern u8 gBattleMoveTarget;
 extern u16 gBattle_WIN0H;
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
@@ -35,8 +35,8 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
-extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
-extern u8 gBankSpriteIds[MAX_BATTLERS_COUNT];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
+extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
@@ -130,8 +130,8 @@ EWRAM_DATA static u8 sMonAnimTaskIdArray[2] = {0};
 EWRAM_DATA u8 gAnimMoveTurn = 0;
 EWRAM_DATA static u8 sAnimBackgroundFadeState = 0;
 EWRAM_DATA static u16 sAnimMoveIndex = 0; // set but unused.
-EWRAM_DATA u8 gAnimBankAttacker = 0;
-EWRAM_DATA u8 gAnimBankTarget = 0;
+EWRAM_DATA u8 gBattleAnimAttacker = 0;
+EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimSpeciesByBanks[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gUnknown_02038440 = 0;
 
@@ -214,15 +214,15 @@ void ClearBattleAnimationVars(void)
     gAnimMoveTurn = 0;
     sAnimBackgroundFadeState = 0;
     sAnimMoveIndex = 0;
-    gAnimBankAttacker = 0;
-    gAnimBankTarget = 0;
+    gBattleAnimAttacker = 0;
+    gBattleAnimTarget = 0;
     gUnknown_02038440 = 0;
 }
 
 void DoMoveAnim(u16 move)
 {
-    gAnimBankAttacker = gBattleAttacker;
-    gAnimBankTarget = gBattleDefender;
+    gBattleAnimAttacker = gBattleMoveAttacker;
+    gBattleAnimTarget = gBattleMoveTarget;
     LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
 }
 
@@ -237,9 +237,9 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             if (GetBattlerSide(i) != 0)
-                gAnimSpeciesByBanks[i] = GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_SPECIES);
+                gAnimSpeciesByBanks[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
             else
-                gAnimSpeciesByBanks[i] = GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_SPECIES);
+                gAnimSpeciesByBanks[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
         }
     }
     else
@@ -409,7 +409,7 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = sub_80A82E4(gAnimBankTarget) + (s8)(argVar);
+        subpriority = sub_80A82E4(gBattleAnimTarget) + (s8)(argVar);
     }
     else
     {
@@ -418,13 +418,13 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = sub_80A82E4(gAnimBankAttacker) + (s8)(argVar);
+        subpriority = sub_80A82E4(gBattleAnimAttacker) + (s8)(argVar);
     }
 
     if (subpriority < 3)
         subpriority = 3;
 
-    CreateSpriteAndAnimate(template, GetBankCoord(gAnimBankTarget, 2), GetBankCoord(gAnimBankTarget, 3), subpriority);
+    CreateSpriteAndAnimate(template, GetBattlerSpriteCoord(gBattleAnimTarget, 2), GetBattlerSpriteCoord(gBattleAnimTarget, 3), subpriority);
     gAnimVisualTaskCount++;
 }
 
@@ -565,7 +565,7 @@ static void sub_80A40F4(u8 taskId)
     u8 newTaskId;
 
     s16 *selfData = gTasks[taskId].data;
-    u8 bankSpriteId = gBankSpriteIds[selfData[t1_MONBG_BANK]];
+    u8 bankSpriteId = gBattlerSpriteIds[selfData[t1_MONBG_BANK]];
     gSprites[bankSpriteId].invisible = 1;
 
     if (!selfData[t1_CREATE_ANOTHER_TASK])
@@ -607,11 +607,11 @@ static void ScriptCmd_monbg(void)
 
     animBank = sBattleAnimScriptPtr[0];
     if (animBank & ANIM_TARGET)
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
     else
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
 
-    if (IsAnimBankSpriteVisible(bank))
+    if (IsBattlerSpriteVisible(bank))
     {
         u8 position = GetBattlerPosition(bank);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
@@ -630,7 +630,7 @@ static void ScriptCmd_monbg(void)
     }
 
     bank ^= BIT_FLANK;
-    if (IsAnimBankSpriteVisible(bank))
+    if (IsBattlerSpriteVisible(bank))
     {
         u8 position = GetBattlerPosition(bank);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
@@ -652,20 +652,20 @@ static void ScriptCmd_monbg(void)
     gAnimScriptCallback = WaitAnimFrameCount;
 }
 
-bool8 IsAnimBankSpriteVisible(u8 bank)
+bool8 IsBattlerSpriteVisible(u8 bank)
 {
     if (IsContest())
     {
-        if (bank == gAnimBankAttacker)
+        if (bank == gBattleAnimAttacker)
             return TRUE;
         else
             return FALSE;
     }
-    if (!IsBankSpritePresent(bank))
+    if (!IsBattlerSpritePresent(bank))
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.
-    if (!gBattleSpritesDataPtr->bankData[bank].invisible || !gSprites[gBankSpriteIds[bank]].invisible)
+    if (!gBattleSpritesDataPtr->bankData[bank].invisible || !gSprites[gBattlerSpriteIds[bank]].invisible)
         return TRUE;
 
     return FALSE;
@@ -699,7 +699,7 @@ void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible)
         SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 1);
         SetAnimBgAttribute(1, BG_ANIM_AREA_OVERFLOW_MODE, 0);
 
-        bankSpriteId = gBankSpriteIds[bank];
+        bankSpriteId = gBattlerSpriteIds[bank];
 
         gBattle_BG1_X =  -(gSprites[bankSpriteId].pos1.x + gSprites[bankSpriteId].pos2.x) + 0x20;
         if (IsContest() && IsSpeciesNotUnown(gContestResources->field_18->field_0))
@@ -707,7 +707,7 @@ void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible)
 
         gBattle_BG1_Y =  -(gSprites[bankSpriteId].pos1.y + gSprites[bankSpriteId].pos2.y) + 0x20;
         if (setSpriteInvisible)
-            gSprites[gBankSpriteIds[bank]].invisible = 1;
+            gSprites[gBattlerSpriteIds[bank]].invisible = 1;
 
         SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
         SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
@@ -736,13 +736,13 @@ void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible)
         SetAnimBgAttribute(2, BG_ANIM_SCREEN_SIZE, 1);
         SetAnimBgAttribute(2, BG_ANIM_AREA_OVERFLOW_MODE, 0);
 
-        bankSpriteId = gBankSpriteIds[bank];
+        bankSpriteId = gBattlerSpriteIds[bank];
 
         gBattle_BG2_X =  -(gSprites[bankSpriteId].pos1.x + gSprites[bankSpriteId].pos2.x) + 0x20;
         gBattle_BG2_Y =  -(gSprites[bankSpriteId].pos1.y + gSprites[bankSpriteId].pos2.y) + 0x20;
 
         if (setSpriteInvisible)
-            gSprites[gBankSpriteIds[bank]].invisible = 1;
+            gSprites[gBattlerSpriteIds[bank]].invisible = 1;
 
         SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
@@ -869,14 +869,14 @@ static void ScriptCmd_clearmonbg(void)
         animBankId = ANIM_DEF_PARTNER;
 
     if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
     if (sMonAnimTaskIdArray[0] != 0xFF)
-        gSprites[gBankSpriteIds[bank]].invisible = 0;
+        gSprites[gBattlerSpriteIds[bank]].invisible = 0;
     if (animBankId > 1 && sMonAnimTaskIdArray[1] != 0xFF)
-        gSprites[gBankSpriteIds[bank ^ BIT_FLANK]].invisible = 0;
+        gSprites[gBattlerSpriteIds[bank ^ BIT_FLANK]].invisible = 0;
     else
         animBankId = 0;
 
@@ -931,11 +931,11 @@ static void ScriptCmd_monbg_22(void)
         animBankId = ANIM_DEF_PARTNER;
 
     if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
-    if (IsAnimBankSpriteVisible(bank))
+    if (IsBattlerSpriteVisible(bank))
     {
         u8 position = GetBattlerPosition(bank);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
@@ -947,7 +947,7 @@ static void ScriptCmd_monbg_22(void)
     }
 
     bank ^= BIT_FLANK;
-    if (animBankId > 1 && IsAnimBankSpriteVisible(bank))
+    if (animBankId > 1 && IsBattlerSpriteVisible(bank))
     {
         u8 position = GetBattlerPosition(bank);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
@@ -976,14 +976,14 @@ static void ScriptCmd_clearmonbg_23(void)
         animBankId = ANIM_DEF_PARTNER;
 
     if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
     else
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
 
-    if (IsAnimBankSpriteVisible(bank))
-        gSprites[gBankSpriteIds[bank]].invisible = 0;
-    if (animBankId > 1 && IsAnimBankSpriteVisible(bank ^ BIT_FLANK))
-        gSprites[gBankSpriteIds[bank ^ BIT_FLANK]].invisible = 0;
+    if (IsBattlerSpriteVisible(bank))
+        gSprites[gBattlerSpriteIds[bank]].invisible = 0;
+    if (animBankId > 1 && IsBattlerSpriteVisible(bank ^ BIT_FLANK))
+        gSprites[gBattlerSpriteIds[bank ^ BIT_FLANK]].invisible = 0;
     else
         animBankId = 0;
 
@@ -1007,9 +1007,9 @@ static void sub_80A4BB0(u8 taskId)
         else
             toBG_2 = TRUE;
 
-        if (IsAnimBankSpriteVisible(bank))
+        if (IsBattlerSpriteVisible(bank))
             sub_80A477C(toBG_2);
-        if (gTasks[taskId].data[0] > 1 && IsAnimBankSpriteVisible(bank ^ BIT_FLANK))
+        if (gTasks[taskId].data[0] > 1 && IsBattlerSpriteVisible(bank ^ BIT_FLANK))
             sub_80A477C(toBG_2 ^ 1);
 
         DestroyTask(taskId);
@@ -1145,7 +1145,7 @@ static void ScriptCmd_fadetobgfromset(void)
 
     if (IsContest())
         gTasks[taskId].tBackgroundId = bg3;
-    else if (GetBattlerSide(gAnimBankTarget) == B_SIDE_PLAYER)
+    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         gTasks[taskId].tBackgroundId = bg2;
     else
         gTasks[taskId].tBackgroundId = bg1;
@@ -1270,21 +1270,21 @@ static void ScriptCmd_changebg(void)
 
 s8 BattleAnimAdjustPanning(s8 pan)
 {
-    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].statusAnimActive)
+    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
-        if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = PAN_SIDE_OPPONENT;
         else
             pan = PAN_SIDE_PLAYER;
     }
     else if (IsContest())
     {
-        if (gAnimBankAttacker != gAnimBankTarget || gAnimBankAttacker != 2 || pan != PAN_SIDE_OPPONENT)
+        if (gBattleAnimAttacker != gBattleAnimTarget || gBattleAnimAttacker != 2 || pan != PAN_SIDE_OPPONENT)
             pan *= -1;
     }
-    else if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_PLAYER)
+    else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
-        if (GetBattlerSide(gAnimBankTarget) == B_SIDE_PLAYER)
+        if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         {
             if (pan == PAN_SIDE_OPPONENT)
                 pan = PAN_SIDE_PLAYER;
@@ -1292,7 +1292,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
                 pan *= -1;
         }
     }
-    else if (GetBattlerSide(gAnimBankTarget) == B_SIDE_OPPONENT)
+    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
     {
         if (pan == PAN_SIDE_PLAYER)
             pan = PAN_SIDE_OPPONENT;
@@ -1312,16 +1312,16 @@ s8 BattleAnimAdjustPanning(s8 pan)
 
 s8 BattleAnimAdjustPanning2(s8 pan)
 {
-    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].statusAnimActive)
+    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
-        if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = PAN_SIDE_OPPONENT;
         else
             pan = PAN_SIDE_PLAYER;
     }
     else
     {
-        if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER || IsContest())
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER || IsContest())
             pan = -pan;
     }
     return pan;
@@ -1701,9 +1701,9 @@ static void ScriptCmd_monbgprio_28(void)
     sBattleAnimScriptPtr += 2;
 
     if (wantedBank != ANIM_ATTACKER)
-        bank = gAnimBankTarget;
+        bank = gBattleAnimTarget;
     else
-        bank = gAnimBankAttacker;
+        bank = gBattleAnimAttacker;
 
     bankIdentity = GetBattlerPosition(bank);
     if (!IsContest() && (bankIdentity == B_POSITION_PLAYER_LEFT || bankIdentity == B_POSITION_OPPONENT_RIGHT))
@@ -1731,12 +1731,12 @@ static void ScriptCmd_monbgprio_2A(void)
 
     wantedBank = sBattleAnimScriptPtr[1];
     sBattleAnimScriptPtr += 2;
-    if (GetBattlerSide(gAnimBankAttacker) != GetBattlerSide(gAnimBankTarget))
+    if (GetBattlerSide(gBattleAnimAttacker) != GetBattlerSide(gBattleAnimTarget))
     {
         if (wantedBank != ANIM_ATTACKER)
-            bank = gAnimBankTarget;
+            bank = gBattleAnimTarget;
         else
-            bank = gAnimBankAttacker;
+            bank = gBattleAnimAttacker;
 
         bankIdentity = GetBattlerPosition(bank);
         if (!IsContest() && (bankIdentity == B_POSITION_PLAYER_LEFT || bankIdentity == B_POSITION_OPPONENT_RIGHT))
@@ -1751,7 +1751,7 @@ static void ScriptCmd_invisible(void)
 {
     u8 spriteId;
 
-    spriteId = GetAnimBankSpriteId(sBattleAnimScriptPtr[1]);
+    spriteId = GetBattlerSpriteId(sBattleAnimScriptPtr[1]);
     if (spriteId != 0xFF)
         gSprites[spriteId].invisible = 1;
 
@@ -1762,7 +1762,7 @@ static void ScriptCmd_visible(void)
 {
     u8 spriteId;
 
-    spriteId = GetAnimBankSpriteId(sBattleAnimScriptPtr[1]);
+    spriteId = GetBattlerSpriteId(sBattleAnimScriptPtr[1]);
     if (spriteId != 0xFF)
         gSprites[spriteId].invisible = 0;
 
@@ -1778,17 +1778,17 @@ static void ScriptCmd_doublebattle_2D(void)
     wantedBank = sBattleAnimScriptPtr[1];
     sBattleAnimScriptPtr += 2;
     if (!IsContest() && IsDoubleBattle()
-     && GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
+     && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
     {
         if (wantedBank == ANIM_ATTACKER)
         {
-            r4 = sub_80A8364(gAnimBankAttacker);
-            spriteId = GetAnimBankSpriteId(ANIM_ATTACKER);
+            r4 = sub_80A8364(gBattleAnimAttacker);
+            spriteId = GetBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
-            r4 = sub_80A8364(gAnimBankTarget);
-            spriteId = GetAnimBankSpriteId(ANIM_TARGET);
+            r4 = sub_80A8364(gBattleAnimTarget);
+            spriteId = GetBattlerSpriteId(ANIM_TARGET);
         }
         if (spriteId != 0xFF)
         {
@@ -1813,17 +1813,17 @@ static void ScriptCmd_doublebattle_2E(void)
     wantedBank = sBattleAnimScriptPtr[1];
     sBattleAnimScriptPtr += 2;
     if (!IsContest() && IsDoubleBattle()
-     && GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
+     && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
     {
         if (wantedBank == ANIM_ATTACKER)
         {
-            r4 = sub_80A8364(gAnimBankAttacker);
-            spriteId = GetAnimBankSpriteId(ANIM_ATTACKER);
+            r4 = sub_80A8364(gBattleAnimAttacker);
+            spriteId = GetBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
-            r4 = sub_80A8364(gAnimBankTarget);
-            spriteId = GetAnimBankSpriteId(ANIM_TARGET);
+            r4 = sub_80A8364(gBattleAnimTarget);
+            spriteId = GetBattlerSpriteId(ANIM_TARGET);
         }
 
         if (spriteId != 0xFF && r4 == 2)

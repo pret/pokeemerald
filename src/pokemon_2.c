@@ -16,8 +16,8 @@ struct Unknown_020249B4
 
 extern u8 gAbsentBattlerFlags;
 extern u8 gActiveBattler;
-extern u8 gBattleAttacker;
-extern u8 gBattleDefender;
+extern u8 gBattleMoveAttacker;
+extern u8 gBattleMoveTarget;
 extern u8 gLastUsedAbility;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
@@ -55,14 +55,14 @@ u8 CountAliveMonsInBattle(u8 caseId)
     case BATTLE_ALIVE_ATK_SIDE:
         for (i = 0; i < 4; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(gBattleAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattleMoveAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case BATTLE_ALIVE_DEF_SIDE:
         for (i = 0; i < 4; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(gBattleDefender) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattleMoveTarget) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;

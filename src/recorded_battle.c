@@ -27,7 +27,7 @@ extern u16 gTrainerBattleOpponent_B;
 extern u16 gPartnerTrainerId;
 extern u8 gActiveBattler;
 extern u8 gBattlersCount;
-extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u16 gChosenMovesByBanks[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_03001278;
@@ -200,7 +200,7 @@ void sub_8184E58(void)
     }
 }
 
-void RecordedBattle_SetBankAction(u8 bank, u8 action)
+void RecordedBattle_SetBattlerAction(u8 bank, u8 action)
 {
     if (sRecordedBytesNo[bank] < BANK_RECORD_SIZE && sUnknown_0203C7AC != 2)
     {
@@ -208,7 +208,7 @@ void RecordedBattle_SetBankAction(u8 bank, u8 action)
     }
 }
 
-void RecordedBattle_ClearBankAction(u8 bank, u8 bytesToClear)
+void RecordedBattle_ClearBattlerAction(u8 bank, u8 bytesToClear)
 {
     s32 i;
 
@@ -221,7 +221,7 @@ void RecordedBattle_ClearBankAction(u8 bank, u8 bytesToClear)
     }
 }
 
-u8 RecordedBattle_ReadBankAction(u8 bank)
+u8 RecordedBattle_GetBankAction(u8 bank)
 {
     // trying to read past array or invalid action byte, battle is over
     if (sRecordedBytesNo[bank] >= BANK_RECORD_SIZE || sBattleRecords[bank][sRecordedBytesNo[bank]] == 0xFF)
@@ -1536,14 +1536,14 @@ void sub_818603C(u8 arg0)
                 }
                 if (j != 4) // player's mon's move has been changed
                 {
-                    RecordedBattle_SetBankAction(bank, ACTION_MOVE_CHANGE);
+                    RecordedBattle_SetBattlerAction(bank, ACTION_MOVE_CHANGE);
                     for (j = 0; j < 4; j++)
                     {
                         for (k = 0; k < 4; k++)
                         {
                             if (gBattleMons[bank].moves[j] == sRecordedBattle_PlayerMonMoves[bank / 2][k])
                             {
-                                RecordedBattle_SetBankAction(bank, k);
+                                RecordedBattle_SetBattlerAction(bank, k);
                                 break;
                             }
                         }
@@ -1561,14 +1561,14 @@ void sub_818603C(u8 arg0)
                     u8 array3[8];
                     u8 var;
 
-                    RecordedBattle_ReadBankAction(bank);
+                    RecordedBattle_GetBankAction(bank);
                     for (j = 0; j < 4; j++)
                     {
                         ppBonuses[j] = ((gBattleMons[bank].ppBonuses & ((3 << (j << 1)))) >> (j << 1));
                     }
                     for (j = 0; j < 4; j++)
                     {
-                        array1[j] = RecordedBattle_ReadBankAction(bank);
+                        array1[j] = RecordedBattle_GetBankAction(bank);
                         movePp.moves[j] = gBattleMons[bank].moves[array1[j]];
                         movePp.pp[j] = gBattleMons[bank].pp[array1[j]];
                         array3[j] = ppBonuses[array1[j]];
@@ -1591,25 +1591,25 @@ void sub_818603C(u8 arg0)
                     {
                         for (j = 0; j < 4; j++)
                         {
-                            ppBonuses[j] = ((GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1));
+                            ppBonuses[j] = ((GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1));
                         }
                         for (j = 0; j < 4; j++)
                         {
-                            movePp.moves[j] = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_MOVE1 + array1[j], NULL);
-                            movePp.pp[j] = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_PP1 + array1[j], NULL);
+                            movePp.moves[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_MOVE1 + array1[j], NULL);
+                            movePp.pp[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP1 + array1[j], NULL);
                             array3[j] = ppBonuses[array1[j]];
                         }
                         for (j = 0; j < 4; j++)
                         {
-                            SetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_MOVE1 + j, &movePp.moves[j]);
-                            SetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_PP1 + j, &movePp.pp[j]);
+                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_MOVE1 + j, &movePp.moves[j]);
+                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP1 + j, &movePp.pp[j]);
                         }
                         var = 0;
                         for (j = 0; j < 4; j++)
                         {
                             var |= (array3[j]) << (j << 1);
                         }
-                        SetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_PP_BONUSES, &var);
+                        SetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP_BONUSES, &var);
                     }
 
                     gChosenMovesByBanks[bank] = gBattleMons[bank].moves[*(gBattleStruct->chosenMovePositions + bank)];

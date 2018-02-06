@@ -9,7 +9,7 @@
 #include "battle_scripts.h"
 
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203CF00[];
 extern const u8 *gBattlescriptCurrInstr;
 extern u8 gBattleCommunication[];
@@ -101,13 +101,13 @@ void AdjustFriendshipOnBattleFaint(u8 bank)
     if (gBattleMons[opposingBank].level > gBattleMons[bank].level)
     {
         if (gBattleMons[opposingBank].level - gBattleMons[bank].level > 29)
-            AdjustFriendship(&gPlayerParty[gBattlePartyID[bank]], 8);
+            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[bank]], 8);
         else
-            AdjustFriendship(&gPlayerParty[gBattlePartyID[bank]], 6);
+            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[bank]], 6);
     }
     else
     {
-        AdjustFriendship(&gPlayerParty[gBattlePartyID[bank]], 6);
+        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[bank]], 6);
     }
 }
 
@@ -122,7 +122,7 @@ void sub_80571DC(u8 bank, u8 arg1)
         for (i = 0; i < 3; i++)
             gUnknown_0203CF00[i] = *(0 * 3 + i + (u8*)(gBattleStruct->field_60));
 
-        sub_81B8FB0(pokemon_order_func(gBattlePartyID[bank]), pokemon_order_func(arg1));
+        sub_81B8FB0(pokemon_order_func(gBattlerPartyIndexes[bank]), pokemon_order_func(arg1));
 
         for (i = 0; i < 3; i++)
             *(0 * 3 + i + (u8*)(gBattleStruct->field_60)) = gUnknown_0203CF00[i];
@@ -207,8 +207,8 @@ u32 sub_805725C(u8 bank)
     if (effect == 2)
     {
         gActiveBattler = bank;
-        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-        MarkBufferBankForExecution(gActiveBattler);
+        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+        MarkBattlerForControllerExec(gActiveBattler);
     }
 
     return effect;

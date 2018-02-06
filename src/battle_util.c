@@ -33,8 +33,8 @@ extern u16 gCurrentMove;
 extern u16 gLastUsedItem;
 extern u8 gBattlersCount;
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
-extern u8 gBattleAttacker;
-extern u8 gBattleDefender;
+extern u8 gBattleMoveAttacker;
+extern u8 gBattleMoveTarget;
 extern u8 gAbsentBattlerFlags;
 extern u16 gBattleWeather;
 extern u8 gBattleTurnOrder[MAX_BATTLERS_COUNT];
@@ -48,7 +48,7 @@ extern u32 gBattleTypeFlags;
 extern u16 gLastMoves[MAX_BATTLERS_COUNT];
 extern u32 gHitMarker;
 extern u8 gEffectBank;
-extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBank1;
 extern u16 gChosenMovesByBanks[MAX_BATTLERS_COUNT];
 extern u8 gMoveResultFlags;
@@ -56,7 +56,7 @@ extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
 extern u8 gTakenDmgBanks[MAX_BATTLERS_COUNT];
 extern u8 gLastUsedAbility;
 extern u8 gCurrentActionFuncId;
-extern u32 gBattleExecBuffer;
+extern u32 gBattleControllerExecFlags;
 extern u16 gRandomMove;
 extern u8 gCurrMovePos;
 extern u8 gUnknown_020241E9;
@@ -79,10 +79,10 @@ u8 GetBattleBank(u8 caseId)
     switch (caseId)
     {
     case BS_GET_TARGET:
-        ret = gBattleDefender;
+        ret = gBattleMoveTarget;
         break;
     case BS_GET_ATTACKER:
-        ret = gBattleAttacker;
+        ret = gBattleMoveAttacker;
         break;
     case BS_GET_EFFECT_BANK:
         ret = gEffectBank;
@@ -142,8 +142,8 @@ void PressurePPLose(u8 defender, u8 attacker, u16 move)
         && !(gDisableStructs[attacker].unk18_b & gBitTable[i]))
     {
         gActiveBattler = attacker;
-        EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + i, 0, 1, &gBattleMons[gActiveBattler].pp[i]);
-        MarkBufferBankForExecution(gActiveBattler);
+        BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + i, 0, 1, &gBattleMons[gActiveBattler].pp[i]);
+        MarkBattlerForControllerExec(gActiveBattler);
     }
 }
 
@@ -176,8 +176,8 @@ void PressurePPLoseOnUsingImprision(u8 attacker)
         && !(gDisableStructs[attacker].unk18_b & gBitTable[imprisionPos]))
     {
         gActiveBattler = attacker;
-        EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + imprisionPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisionPos]);
-        MarkBufferBankForExecution(gActiveBattler);
+        BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + imprisionPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisionPos]);
+        MarkBattlerForControllerExec(gActiveBattler);
     }
 }
 
@@ -209,37 +209,33 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
         && !(gDisableStructs[attacker].unk18_b & gBitTable[perishSongPos]))
     {
         gActiveBattler = attacker;
-        EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + perishSongPos, 0, 1, &gBattleMons[gActiveBattler].pp[perishSongPos]);
-        MarkBufferBankForExecution(gActiveBattler);
+        BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + perishSongPos, 0, 1, &gBattleMons[gActiveBattler].pp[perishSongPos]);
+        MarkBattlerForControllerExec(gActiveBattler);
     }
 }
 
-void MarkAllBufferBanksForExecution(void) // unused
+void MarkAllBattlersForControllerExec(void) // unused
 {
     s32 i;
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         for (i = 0; i < gBattlersCount; i++)
-            gBattleExecBuffer |= gBitTable[i] << 0x1C;
+            gBattleControllerExecFlags |= gBitTable[i] << 0x1C;
     }
     else
     {
         for (i = 0; i < gBattlersCount; i++)
-            gBattleExecBuffer |= gBitTable[i];
+            gBattleControllerExecFlags |= gBitTable[i];
     }
 }
 
-void MarkBufferBankForExecution(u8 battler)
+void MarkBattlerForControllerExec(u8 battlerId)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        gBattleExecBuffer |= gBitTable[battler] << 0x1C;
-    }
+        gBattleControllerExecFlags |= gBitTable[battlerId] << 0x1C;
     else
-    {
-        gBattleExecBuffer |= gBitTable[battler];
-    }
+        gBattleControllerExecFlags |= gBitTable[battlerId];
 }
 
 void sub_803F850(u8 arg0)
@@ -247,9 +243,9 @@ void sub_803F850(u8 arg0)
     s32 i;
 
     for (i = 0; i < GetLinkPlayerCount(); i++)
-        gBattleExecBuffer |= gBitTable[arg0] << (i << 2);
+        gBattleControllerExecFlags |= gBitTable[arg0] << (i << 2);
 
-    gBattleExecBuffer &= ~(0x10000000 << arg0);
+    gBattleControllerExecFlags &= ~(0x10000000 << arg0);
 }
 
 void CancelMultiTurnMoves(u8 battler)
@@ -284,8 +280,8 @@ bool8 WasUnableToUseMove(u8 battler)
 void PrepareStringBattle(u16 stringId, u8 battler)
 {
     gActiveBattler = battler;
-    EmitPrintString(0, stringId);
-    MarkBufferBankForExecution(gActiveBattler);
+    BtlController_EmitPrintString(0, stringId);
+    MarkBattlerForControllerExec(gActiveBattler);
 }
 
 void ResetSentPokesToOpponentValue(void)
@@ -297,7 +293,7 @@ void ResetSentPokesToOpponentValue(void)
     gSentPokesToOpponent[1] = 0;
 
     for (i = 0; i < gBattlersCount; i += 2)
-        bits |= gBitTable[gBattlePartyID[i]];
+        bits |= gBitTable[gBattlerPartyIndexes[i]];
 
     for (i = 1; i < gBattlersCount; i += 2)
         gSentPokesToOpponent[(i & BIT_FLANK) >> 1] = bits;
@@ -316,7 +312,7 @@ void sub_803F9EC(u8 battler)
         for (i = 0; i < gBattlersCount; i += 2)
         {
             if (!(gAbsentBattlerFlags & gBitTable[i]))
-                bits |= gBitTable[gBattlePartyID[i]];
+                bits |= gBitTable[gBattlerPartyIndexes[i]];
         }
 
         gSentPokesToOpponent[flank] = bits;
@@ -333,7 +329,7 @@ void sub_803FA70(u8 battler)
     {
         s32 i;
         for (i = 1; i < gBattlersCount; i++)
-            gSentPokesToOpponent[(i & BIT_FLANK) >> 1] |= gBitTable[gBattlePartyID[battler]];
+            gSentPokesToOpponent[(i & BIT_FLANK) >> 1] |= gBitTable[gBattlerPartyIndexes[battler]];
     }
 }
 
@@ -540,10 +536,10 @@ u8 UpdateTurnCounters(void)
     u8 effect = 0;
     s32 i;
 
-    for (gBattleAttacker = 0; gBattleAttacker < gBattlersCount && gAbsentBattlerFlags & gBitTable[gBattleAttacker]; gBattleAttacker++)
+    for (gBattleMoveAttacker = 0; gBattleMoveAttacker < gBattlersCount && gAbsentBattlerFlags & gBitTable[gBattleMoveAttacker]; gBattleMoveAttacker++)
     {
     }
-    for (gBattleDefender = 0; gBattleDefender < gBattlersCount && gAbsentBattlerFlags & gBitTable[gBattleDefender]; gBattleDefender++)
+    for (gBattleMoveTarget = 0; gBattleMoveTarget < gBattlersCount && gAbsentBattlerFlags & gBitTable[gBattleMoveTarget]; gBattleMoveTarget++)
     {
     }
 
@@ -579,7 +575,7 @@ u8 UpdateTurnCounters(void)
             while (gBattleStruct->turnSideTracker < 2)
             {
                 sideBank = gBattleStruct->turnSideTracker;
-                gActiveBattler = gBattleAttacker = gSideTimers[sideBank].reflectBank;
+                gActiveBattler = gBattleMoveAttacker = gSideTimers[sideBank].reflectBank;
                 if (gSideStatuses[sideBank] & SIDE_STATUS_REFLECT)
                 {
                     if (--gSideTimers[sideBank].reflectTimer == 0)
@@ -604,7 +600,7 @@ u8 UpdateTurnCounters(void)
             while (gBattleStruct->turnSideTracker < 2)
             {
                 sideBank = gBattleStruct->turnSideTracker;
-                gActiveBattler = gBattleAttacker = gSideTimers[sideBank].lightscreenBank;
+                gActiveBattler = gBattleMoveAttacker = gSideTimers[sideBank].lightscreenBank;
                 if (gSideStatuses[sideBank] & SIDE_STATUS_LIGHTSCREEN)
                 {
                     if (--gSideTimers[sideBank].lightscreenTimer == 0)
@@ -630,7 +626,7 @@ u8 UpdateTurnCounters(void)
             while (gBattleStruct->turnSideTracker < 2)
             {
                 sideBank = gBattleStruct->turnSideTracker;
-                gActiveBattler = gBattleAttacker = gSideTimers[sideBank].mistBank;
+                gActiveBattler = gBattleMoveAttacker = gSideTimers[sideBank].mistBank;
                 if (gSideTimers[sideBank].mistTimer != 0
                  && --gSideTimers[sideBank].mistTimer == 0)
                 {
@@ -654,7 +650,7 @@ u8 UpdateTurnCounters(void)
             while (gBattleStruct->turnSideTracker < 2)
             {
                 sideBank = gBattleStruct->turnSideTracker;
-                gActiveBattler = gBattleAttacker = gSideTimers[sideBank].safeguardBank;
+                gActiveBattler = gBattleMoveAttacker = gSideTimers[sideBank].safeguardBank;
                 if (gSideStatuses[sideBank] & SIDE_STATUS_SAFEGUARD)
                 {
                     if (--gSideTimers[sideBank].safeguardTimer == 0)
@@ -682,7 +678,7 @@ u8 UpdateTurnCounters(void)
                  && --gWishFutureKnock.wishCounter[gActiveBattler] == 0
                  && gBattleMons[gActiveBattler].hp != 0)
                 {
-                    gBattleDefender = gActiveBattler;
+                    gBattleMoveTarget = gActiveBattler;
                     BattleScriptExecute(BattleScript_WishComesTrue);
                     effect++;
                 }
@@ -800,7 +796,7 @@ u8 TurnBasedEffects(void)
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
     while (gBattleStruct->turnEffectsBank < gBattlersCount && gBattleStruct->turnEffectsTracker <= TURNBASED_MAX_CASE)
     {
-        gActiveBattler = gBattleAttacker = gBattleTurnOrder[gBattleStruct->turnEffectsBank];
+        gActiveBattler = gBattleMoveAttacker = gBattleTurnOrder[gBattleStruct->turnEffectsBank];
         if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
         {
             gBattleStruct->turnEffectsBank++;
@@ -843,12 +839,12 @@ u8 TurnBasedEffects(void)
                  && gBattleMons[gStatuses3[gActiveBattler] & STATUS3_LEECHSEED_BANK].hp != 0
                  && gBattleMons[gActiveBattler].hp != 0)
                 {
-                    gBattleDefender = gStatuses3[gActiveBattler] & STATUS3_LEECHSEED_BANK; //funny how the 'target' is actually the bank that receives HP
+                    gBattleMoveTarget = gStatuses3[gActiveBattler] & STATUS3_LEECHSEED_BANK; //funny how the 'target' is actually the bank that receives HP
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
-                    gBattleScripting.animArg1 = gBattleDefender;
-                    gBattleScripting.animArg2 = gBattleAttacker;
+                    gBattleScripting.animArg1 = gBattleMoveTarget;
+                    gBattleScripting.animArg2 = gBattleMoveAttacker;
                     BattleScriptExecute(BattleScript_LeechSeedTurnDrain);
                     effect++;
                 }
@@ -957,29 +953,29 @@ u8 TurnBasedEffects(void)
             case 10:  // uproar
                 if (gBattleMons[gActiveBattler].status2 & STATUS2_UPROAR)
                 {
-                    for (gBattleAttacker = 0; gBattleAttacker < gBattlersCount; gBattleAttacker++)
+                    for (gBattleMoveAttacker = 0; gBattleMoveAttacker < gBattlersCount; gBattleMoveAttacker++)
                     {
-                        if ((gBattleMons[gBattleAttacker].status1 & STATUS1_SLEEP)
-                         && gBattleMons[gBattleAttacker].ability != ABILITY_SOUNDPROOF)
+                        if ((gBattleMons[gBattleMoveAttacker].status1 & STATUS1_SLEEP)
+                         && gBattleMons[gBattleMoveAttacker].ability != ABILITY_SOUNDPROOF)
                         {
-                            gBattleMons[gBattleAttacker].status1 &= ~(STATUS1_SLEEP);
-                            gBattleMons[gBattleAttacker].status2 &= ~(STATUS2_NIGHTMARE);
+                            gBattleMons[gBattleMoveAttacker].status1 &= ~(STATUS1_SLEEP);
+                            gBattleMons[gBattleMoveAttacker].status2 &= ~(STATUS2_NIGHTMARE);
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                             BattleScriptExecute(BattleScript_MonWokeUpInUproar);
-                            gActiveBattler = gBattleAttacker;
-                            EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-                            MarkBufferBankForExecution(gActiveBattler);
+                            gActiveBattler = gBattleMoveAttacker;
+                            BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                            MarkBattlerForControllerExec(gActiveBattler);
                             break;
                         }
                     }
-                    if (gBattleAttacker != gBattlersCount)
+                    if (gBattleMoveAttacker != gBattlersCount)
                     {
                         effect = 2;  // a pokemon was awaken
                         break;
                     }
                     else
                     {
-                        gBattleAttacker = gActiveBattler;
+                        gBattleMoveAttacker = gActiveBattler;
                         gBattleMons[gActiveBattler].status2 -= 0x10;  // uproar timer goes down
                         if (WasUnableToUseMove(gActiveBattler))
                         {
@@ -1092,8 +1088,8 @@ u8 TurnBasedEffects(void)
                     {
                         CancelMultiTurnMoves(gActiveBattler);
                         gBattleMons[gActiveBattler].status1 |= (Random() & 3) + 2;
-                        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-                        MarkBufferBankForExecution(gActiveBattler);
+                        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                        MarkBattlerForControllerExec(gActiveBattler);
                         gEffectBank = gActiveBattler;
                         BattleScriptExecute(BattleScript_YawnMakesAsleep);
                         effect++;
@@ -1142,16 +1138,16 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
 
                 PREPARE_MOVE_BUFFER(gBattleTextBuff1, gWishFutureKnock.futureSightMove[gActiveBattler]);
 
-                gBattleDefender = gActiveBattler;
-                gBattleAttacker = gWishFutureKnock.futureSightAttacker[gActiveBattler];
+                gBattleMoveTarget = gActiveBattler;
+                gBattleMoveAttacker = gWishFutureKnock.futureSightAttacker[gActiveBattler];
                 gBattleMoveDamage = gWishFutureKnock.futureSightDmg[gActiveBattler];
-                gSpecialStatuses[gBattleDefender].moveturnLostHP = 0xFFFF;
+                gSpecialStatuses[gBattleMoveTarget].moveturnLostHP = 0xFFFF;
                 BattleScriptExecute(BattleScript_MonTookFutureAttack);
 
                 if (gWishFutureKnock.futureSightCounter[gActiveBattler] == 0
                  && gWishFutureKnock.futureSightCounter[gActiveBattler ^ BIT_FLANK] == 0)
                 {
-                    gSideStatuses[GET_BATTLER_SIDE(gBattleDefender)] &= ~(SIDE_STATUS_FUTUREATTACK);
+                    gSideStatuses[GET_BATTLER_SIDE(gBattleMoveTarget)] &= ~(SIDE_STATUS_FUTUREATTACK);
                 }
                 return TRUE;
             }
@@ -1166,7 +1162,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
     case 1:
         while (gBattleStruct->wishPerishSongBank < gBattlersCount)
         {
-            gActiveBattler = gBattleAttacker = gBattleTurnOrder[gBattleStruct->wishPerishSongBank];
+            gActiveBattler = gBattleMoveAttacker = gBattleTurnOrder[gBattleStruct->wishPerishSongBank];
             if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
             {
                 gBattleStruct->wishPerishSongBank++;
@@ -1244,9 +1240,9 @@ bool8 HandleFaintedMonActions(void)
         case 1:
             do
             {
-                gBank1 = gBattleDefender = gBattleStruct->faintedActionsBank;
+                gBank1 = gBattleMoveTarget = gBattleStruct->faintedActionsBank;
                 if (gBattleMons[gBattleStruct->faintedActionsBank].hp == 0
-                 && !(gBattleStruct->field_DF & gBitTable[gBattlePartyID[gBattleStruct->faintedActionsBank]])
+                 && !(gBattleStruct->field_DF & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBank]])
                  && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBank]))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);
@@ -1270,7 +1266,7 @@ bool8 HandleFaintedMonActions(void)
         case 4:
             do
             {
-                gBank1 = gBattleDefender = gBattleStruct->faintedActionsBank;
+                gBank1 = gBattleMoveTarget = gBattleStruct->faintedActionsBank;
                 if (gBattleMons[gBattleStruct->faintedActionsBank].hp == 0
                  && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBank]))
                 {
@@ -1320,17 +1316,17 @@ u8 AtkCanceller_UnableToUseMove(void)
         switch (gBattleStruct->atkCancellerTracker)
         {
         case 0: // flags clear
-            gBattleMons[gBattleAttacker].status2 &= ~(STATUS2_DESTINY_BOND);
-            gStatuses3[gBattleAttacker] &= ~(STATUS3_GRUDGE);
+            gBattleMons[gBattleMoveAttacker].status2 &= ~(STATUS2_DESTINY_BOND);
+            gStatuses3[gBattleMoveAttacker] &= ~(STATUS3_GRUDGE);
             gBattleStruct->atkCancellerTracker++;
             break;
         case 1: // check being asleep
-            if (gBattleMons[gBattleAttacker].status1 & STATUS1_SLEEP)
+            if (gBattleMons[gBattleMoveAttacker].status1 & STATUS1_SLEEP)
             {
-                if (UproarWakeUpCheck(gBattleAttacker))
+                if (UproarWakeUpCheck(gBattleMoveAttacker))
                 {
-                    gBattleMons[gBattleAttacker].status1 &= ~(STATUS1_SLEEP);
-                    gBattleMons[gBattleAttacker].status2 &= ~(STATUS2_NIGHTMARE);
+                    gBattleMons[gBattleMoveAttacker].status1 &= ~(STATUS1_SLEEP);
+                    gBattleMons[gBattleMoveAttacker].status2 &= ~(STATUS2_NIGHTMARE);
                     BattleScriptPushCursor();
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                     gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
@@ -1339,15 +1335,15 @@ u8 AtkCanceller_UnableToUseMove(void)
                 else
                 {
                     u8 toSub;
-                    if (gBattleMons[gBattleAttacker].ability == ABILITY_EARLY_BIRD)
+                    if (gBattleMons[gBattleMoveAttacker].ability == ABILITY_EARLY_BIRD)
                         toSub = 2;
                     else
                         toSub = 1;
-                    if ((gBattleMons[gBattleAttacker].status1 & STATUS1_SLEEP) < toSub)
-                        gBattleMons[gBattleAttacker].status1 &= ~(STATUS1_SLEEP);
+                    if ((gBattleMons[gBattleMoveAttacker].status1 & STATUS1_SLEEP) < toSub)
+                        gBattleMons[gBattleMoveAttacker].status1 &= ~(STATUS1_SLEEP);
                     else
-                        gBattleMons[gBattleAttacker].status1 -= toSub;
-                    if (gBattleMons[gBattleAttacker].status1 & STATUS1_SLEEP)
+                        gBattleMons[gBattleMoveAttacker].status1 -= toSub;
+                    if (gBattleMons[gBattleMoveAttacker].status1 & STATUS1_SLEEP)
                     {
                         if (gCurrentMove != MOVE_SNORE && gCurrentMove != MOVE_SLEEP_TALK)
                         {
@@ -1358,7 +1354,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     }
                     else
                     {
-                        gBattleMons[gBattleAttacker].status2 &= ~(STATUS2_NIGHTMARE);
+                        gBattleMons[gBattleMoveAttacker].status2 &= ~(STATUS2_NIGHTMARE);
                         BattleScriptPushCursor();
                         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                         gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
@@ -1369,7 +1365,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 2: // check being frozen
-            if (gBattleMons[gBattleAttacker].status1 & STATUS1_FREEZE)
+            if (gBattleMons[gBattleMoveAttacker].status1 & STATUS1_FREEZE)
             {
                 if (Random() % 5)
                 {
@@ -1386,7 +1382,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 else // unfreeze
                 {
-                    gBattleMons[gBattleAttacker].status1 &= ~(STATUS1_FREEZE);
+                    gBattleMons[gBattleMoveAttacker].status1 &= ~(STATUS1_FREEZE);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -1396,9 +1392,9 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 3: // truant
-            if (gBattleMons[gBattleAttacker].ability == ABILITY_TRUANT && gDisableStructs[gBattleAttacker].truantCounter)
+            if (gBattleMons[gBattleMoveAttacker].ability == ABILITY_TRUANT && gDisableStructs[gBattleMoveAttacker].truantCounter)
             {
-                CancelMultiTurnMoves(gBattleAttacker);
+                CancelMultiTurnMoves(gBattleMoveAttacker);
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
@@ -1408,11 +1404,11 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 4: // recharge
-            if (gBattleMons[gBattleAttacker].status2 & STATUS2_RECHARGE)
+            if (gBattleMons[gBattleMoveAttacker].status2 & STATUS2_RECHARGE)
             {
-                gBattleMons[gBattleAttacker].status2 &= ~(STATUS2_RECHARGE);
-                gDisableStructs[gBattleAttacker].rechargeCounter = 0;
-                CancelMultiTurnMoves(gBattleAttacker);
+                gBattleMons[gBattleMoveAttacker].status2 &= ~(STATUS2_RECHARGE);
+                gDisableStructs[gBattleMoveAttacker].rechargeCounter = 0;
+                CancelMultiTurnMoves(gBattleMoveAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedMustRecharge;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
@@ -1420,11 +1416,11 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 5: // flinch
-            if (gBattleMons[gBattleAttacker].status2 & STATUS2_FLINCHED)
+            if (gBattleMons[gBattleMoveAttacker].status2 & STATUS2_FLINCHED)
             {
-                gBattleMons[gBattleAttacker].status2 &= ~(STATUS2_FLINCHED);
-                gProtectStructs[gBattleAttacker].flinchImmobility = 1;
-                CancelMultiTurnMoves(gBattleAttacker);
+                gBattleMons[gBattleMoveAttacker].status2 &= ~(STATUS2_FLINCHED);
+                gProtectStructs[gBattleMoveAttacker].flinchImmobility = 1;
+                CancelMultiTurnMoves(gBattleMoveAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedFlinched;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
@@ -1432,11 +1428,11 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 6: // disabled move
-            if (gDisableStructs[gBattleAttacker].disabledMove == gCurrentMove && gDisableStructs[gBattleAttacker].disabledMove != 0)
+            if (gDisableStructs[gBattleMoveAttacker].disabledMove == gCurrentMove && gDisableStructs[gBattleMoveAttacker].disabledMove != 0)
             {
-                gProtectStructs[gBattleAttacker].usedDisabledMove = 1;
-                gBattleScripting.battler = gBattleAttacker;
-                CancelMultiTurnMoves(gBattleAttacker);
+                gProtectStructs[gBattleMoveAttacker].usedDisabledMove = 1;
+                gBattleScripting.battler = gBattleMoveAttacker;
+                CancelMultiTurnMoves(gBattleMoveAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsDisabled;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
@@ -1444,10 +1440,10 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 7: // taunt
-            if (gDisableStructs[gBattleAttacker].tauntTimer1 && gBattleMoves[gCurrentMove].power == 0)
+            if (gDisableStructs[gBattleMoveAttacker].tauntTimer1 && gBattleMoves[gCurrentMove].power == 0)
             {
-                gProtectStructs[gBattleAttacker].usedTauntedMove = 1;
-                CancelMultiTurnMoves(gBattleAttacker);
+                gProtectStructs[gBattleMoveAttacker].usedTauntedMove = 1;
+                CancelMultiTurnMoves(gBattleMoveAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsTaunted;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
@@ -1455,10 +1451,10 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 8: // imprisoned
-            if (GetImprisonedMovesCount(gBattleAttacker, gCurrentMove))
+            if (GetImprisonedMovesCount(gBattleMoveAttacker, gCurrentMove))
             {
-                gProtectStructs[gBattleAttacker].usedImprisionedMove = 1;
-                CancelMultiTurnMoves(gBattleAttacker);
+                gProtectStructs[gBattleMoveAttacker].usedImprisionedMove = 1;
+                CancelMultiTurnMoves(gBattleMoveAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsImprisoned;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
@@ -1466,10 +1462,10 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 9: // confusion
-            if (gBattleMons[gBattleAttacker].status2 & STATUS2_CONFUSION)
+            if (gBattleMons[gBattleMoveAttacker].status2 & STATUS2_CONFUSION)
             {
-                gBattleMons[gBattleAttacker].status2--;
-                if (gBattleMons[gBattleAttacker].status2 & STATUS2_CONFUSION)
+                gBattleMons[gBattleMoveAttacker].status2--;
+                if (gBattleMons[gBattleMoveAttacker].status2 & STATUS2_CONFUSION)
                 {
                     if (Random() & 1)
                     {
@@ -1479,9 +1475,9 @@ u8 AtkCanceller_UnableToUseMove(void)
                     else // confusion dmg
                     {
                         gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                        gBattleDefender = gBattleAttacker;
-                        gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattleAttacker], &gBattleMons[gBattleAttacker], MOVE_POUND, 0, 40, 0, gBattleAttacker, gBattleAttacker);
-                        gProtectStructs[gBattleAttacker].confusionSelfDmg = 1;
+                        gBattleMoveTarget = gBattleMoveAttacker;
+                        gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattleMoveAttacker], &gBattleMons[gBattleMoveAttacker], MOVE_POUND, 0, 40, 0, gBattleMoveAttacker, gBattleMoveAttacker);
+                        gProtectStructs[gBattleMoveAttacker].confusionSelfDmg = 1;
                         gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     }
                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsConfused;
@@ -1496,11 +1492,11 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 10: // paralysis
-            if ((gBattleMons[gBattleAttacker].status1 & STATUS1_PARALYSIS) && (Random() % 4) == 0)
+            if ((gBattleMons[gBattleMoveAttacker].status1 & STATUS1_PARALYSIS) && (Random() % 4) == 0)
             {
-                gProtectStructs[gBattleAttacker].prlzImmobility = 1;
+                gProtectStructs[gBattleMoveAttacker].prlzImmobility = 1;
                 // This is removed in Emerald for some reason
-                //CancelMultiTurnMoves(gBattleAttacker);
+                //CancelMultiTurnMoves(gBattleMoveAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsParalyzed;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
@@ -1508,17 +1504,17 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 11: // infatuation
-            if (gBattleMons[gBattleAttacker].status2 & STATUS2_INFATUATION)
+            if (gBattleMons[gBattleMoveAttacker].status2 & STATUS2_INFATUATION)
             {
-                gBattleScripting.battler = CountTrailingZeroBits((gBattleMons[gBattleAttacker].status2 & STATUS2_INFATUATION) >> 0x10);
+                gBattleScripting.battler = CountTrailingZeroBits((gBattleMons[gBattleMoveAttacker].status2 & STATUS2_INFATUATION) >> 0x10);
                 if (Random() & 1)
                     BattleScriptPushCursor();
                 else
                 {
                     BattleScriptPush(BattleScript_MoveUsedIsParalyzedCantAttack);
                     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
-                    gProtectStructs[gBattleAttacker].loveImmobility = 1;
-                    CancelMultiTurnMoves(gBattleAttacker);
+                    gProtectStructs[gBattleMoveAttacker].loveImmobility = 1;
+                    CancelMultiTurnMoves(gBattleMoveAttacker);
                 }
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsInLove;
                 effect = 1;
@@ -1526,22 +1522,22 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 12: // bide
-            if (gBattleMons[gBattleAttacker].status2 & STATUS2_BIDE)
+            if (gBattleMons[gBattleMoveAttacker].status2 & STATUS2_BIDE)
             {
-                gBattleMons[gBattleAttacker].status2 -= 0x100;
-                if (gBattleMons[gBattleAttacker].status2 & STATUS2_BIDE)
+                gBattleMons[gBattleMoveAttacker].status2 -= 0x100;
+                if (gBattleMons[gBattleMoveAttacker].status2 & STATUS2_BIDE)
                     gBattlescriptCurrInstr = BattleScript_BideStoringEnergy;
                 else
                 {
                     // This is removed in Emerald for some reason
-                    //gBattleMons[gBattleAttacker].status2 &= ~(STATUS2_MULTIPLETURNS);
-                    if (gTakenDmg[gBattleAttacker])
+                    //gBattleMons[gBattleMoveAttacker].status2 &= ~(STATUS2_MULTIPLETURNS);
+                    if (gTakenDmg[gBattleMoveAttacker])
                     {
                         gCurrentMove = MOVE_BIDE;
-                        *bideDmg = gTakenDmg[gBattleAttacker] * 2;
-                        gBattleDefender = gTakenDmgBanks[gBattleAttacker];
-                        if (gAbsentBattlerFlags & gBitTable[gBattleDefender])
-                            gBattleDefender = GetMoveTarget(MOVE_BIDE, 1);
+                        *bideDmg = gTakenDmg[gBattleMoveAttacker] * 2;
+                        gBattleMoveTarget = gTakenDmgBanks[gBattleMoveAttacker];
+                        if (gAbsentBattlerFlags & gBitTable[gBattleMoveTarget])
+                            gBattleMoveTarget = GetMoveTarget(MOVE_BIDE, 1);
                         gBattlescriptCurrInstr = BattleScript_BideAttack;
                     }
                     else
@@ -1552,11 +1548,11 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 13: // move thawing
-            if (gBattleMons[gBattleAttacker].status1 & STATUS1_FREEZE)
+            if (gBattleMons[gBattleMoveAttacker].status1 & STATUS1_FREEZE)
             {
                 if (gBattleMoves[gCurrentMove].effect == EFFECT_THAW_HIT)
                 {
-                    gBattleMons[gBattleAttacker].status1 &= ~(STATUS1_FREEZE);
+                    gBattleMons[gBattleMoveAttacker].status1 &= ~(STATUS1_FREEZE);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
@@ -1573,9 +1569,9 @@ u8 AtkCanceller_UnableToUseMove(void)
 
     if (effect == 2)
     {
-        gActiveBattler = gBattleAttacker;
-        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-        MarkBufferBankForExecution(gActiveBattler);
+        gActiveBattler = gBattleMoveAttacker;
+        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+        MarkBattlerForControllerExec(gActiveBattler);
     }
     return effect;
 }
@@ -1611,7 +1607,7 @@ bool8 sub_80423F4(u8 battler, u8 r1, u8 r2)
             if (GetBattlerSide(battler) == B_SIDE_PLAYER)
             {
                 party = gPlayerParty;
-                r7 = GetBankMultiplayerId(battler);
+                r7 = GetBattlerMultiplayerId(battler);
                 r6 = sub_806D82C(r7);
             }
             else
@@ -1630,7 +1626,7 @@ bool8 sub_80423F4(u8 battler, u8 r1, u8 r2)
         }
         else
         {
-            r7 = GetBankMultiplayerId(battler);
+            r7 = GetBattlerMultiplayerId(battler);
             if (GetBattlerSide(battler) == B_SIDE_PLAYER)
                 party = gPlayerParty;
             else
@@ -1678,9 +1674,9 @@ bool8 sub_80423F4(u8 battler, u8 r1, u8 r2)
             party = gPlayerParty;
         }
         if (r1 == 6)
-            r1 = gBattlePartyID[r7];
+            r1 = gBattlerPartyIndexes[r7];
         if (r2 == 6)
-            r2 = gBattlePartyID[r6];
+            r2 = gBattlerPartyIndexes[r6];
         for (i = 0; i < 6; i++)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
@@ -1754,19 +1750,19 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     u32 pidAtk;
     u32 pidDef;
 
-    if (gBattleAttacker >= gBattlersCount)
-        gBattleAttacker = battler;
-    if (GetBattlerSide(gBattleAttacker) == B_SIDE_PLAYER)
-        pokeAtk = &gPlayerParty[gBattlePartyID[gBattleAttacker]];
+    if (gBattleMoveAttacker >= gBattlersCount)
+        gBattleMoveAttacker = battler;
+    if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
+        pokeAtk = &gPlayerParty[gBattlerPartyIndexes[gBattleMoveAttacker]];
     else
-        pokeAtk = &gEnemyParty[gBattlePartyID[gBattleAttacker]];
+        pokeAtk = &gEnemyParty[gBattlerPartyIndexes[gBattleMoveAttacker]];
 
-    if (gBattleDefender >= gBattlersCount)
-        gBattleDefender = battler;
-    if (GetBattlerSide(gBattleDefender) == B_SIDE_PLAYER)
-        pokeDef = &gPlayerParty[gBattlePartyID[gBattleDefender]];
+    if (gBattleMoveTarget >= gBattlersCount)
+        gBattleMoveTarget = battler;
+    if (GetBattlerSide(gBattleMoveTarget) == B_SIDE_PLAYER)
+        pokeDef = &gPlayerParty[gBattlerPartyIndexes[gBattleMoveTarget]];
     else
-        pokeDef = &gEnemyParty[gBattlePartyID[gBattleDefender]];
+        pokeDef = &gEnemyParty[gBattlerPartyIndexes[gBattleMoveTarget]];
 
     speciesAtk = GetMonData(pokeAtk, MON_DATA_SPECIES);
     pidAtk = GetMonData(pokeAtk, MON_DATA_PERSONALITY);
@@ -1797,8 +1793,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         switch (caseID)
         {
         case ABILITYEFFECT_ON_SWITCHIN: // 0
-            if (gBattleAttacker >= gBattlersCount)
-                gBattleAttacker = battler;
+            if (gBattleMoveAttacker >= gBattlersCount)
+                gBattleMoveAttacker = battler;
             switch (gLastUsedAbility)
             {
             case ABILITYEFFECT_SWITCH_IN_WEATHER:
@@ -1915,7 +1911,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITYEFFECT_ENDTURN: // 1
             if (gBattleMons[battler].hp != 0)
             {
-                gBattleAttacker = battler;
+                gBattleMoveAttacker = battler;
                 switch (gLastUsedAbility)
                 {
                 case ABILITY_RAIN_DISH:
@@ -1948,8 +1944,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         gBattleMons[battler].status2 &= ~(STATUS2_NIGHTMARE);  // fix nightmare glitch
                         gBattleScripting.battler = gActiveBattler = battler;
                         BattleScriptPushCursorAndCallback(BattleScript_ShedSkinActivates);
-                        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
-                        MarkBufferBankForExecution(gActiveBattler);
+                        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
+                        MarkBattlerForControllerExec(gActiveBattler);
                         effect++;
                     }
                     break;
@@ -1965,7 +1961,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                     break;
                 case ABILITY_TRUANT:
-                    gDisableStructs[gBattleAttacker].truantCounter ^= 1;
+                    gDisableStructs[gBattleMoveAttacker].truantCounter ^= 1;
                     break;
                 }
             }
@@ -1980,7 +1976,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 if (sSoundMovesTable[i] != 0xFFFF)
                 {
-                    if (gBattleMons[gBattleAttacker].status2 & STATUS2_MULTIPLETURNS)
+                    if (gBattleMons[gBattleMoveAttacker].status2 & STATUS2_MULTIPLETURNS)
                         gHitMarker |= HITMARKER_NO_PPDEDUCT;
                     gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
                     effect = 1;
@@ -1995,7 +1991,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case ABILITY_VOLT_ABSORB:
                     if (moveType == TYPE_ELECTRIC && gBattleMoves[move].power != 0)
                     {
-                        if (gProtectStructs[gBattleAttacker].notFirstStrike)
+                        if (gProtectStructs[gBattleMoveAttacker].notFirstStrike)
                             gBattlescriptCurrInstr = BattleScript_MoveHPDrain;
                         else
                             gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
@@ -2006,7 +2002,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case ABILITY_WATER_ABSORB:
                     if (moveType == TYPE_WATER && gBattleMoves[move].power != 0)
                     {
-                        if (gProtectStructs[gBattleAttacker].notFirstStrike)
+                        if (gProtectStructs[gBattleMoveAttacker].notFirstStrike)
                             gBattlescriptCurrInstr = BattleScript_MoveHPDrain;
                         else
                             gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
@@ -2020,7 +2016,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         if (!(gBattleResources->flags->flags[battler] & UNKNOWN_FLAG_FLASH_FIRE))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                            if (gProtectStructs[gBattleAttacker].notFirstStrike)
+                            if (gProtectStructs[gBattleMoveAttacker].notFirstStrike)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
@@ -2031,7 +2027,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         else
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                            if (gProtectStructs[gBattleAttacker].notFirstStrike)
+                            if (gProtectStructs[gBattleMoveAttacker].notFirstStrike)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
@@ -2045,7 +2041,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     if (gBattleMons[battler].maxHP == gBattleMons[battler].hp)
                     {
-                        if ((gProtectStructs[gBattleAttacker].notFirstStrike))
+                        if ((gProtectStructs[gBattleMoveAttacker].notFirstStrike))
                             gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless;
                         else
                             gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless_PPLoss;
@@ -2067,7 +2063,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && move != MOVE_STRUGGLE
                  && gBattleMoves[move].power != 0
-                 && (gSpecialStatuses[gBattleDefender].moveturnLostHP_physical || gSpecialStatuses[gBattleDefender].moveturnLostHP_special)
+                 && (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_physical || gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_special)
                  && gBattleMons[battler].type1 != moveType
                  && gBattleMons[battler].type2 != moveType
                  && gBattleMons[battler].hp != 0)
@@ -2082,12 +2078,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 break;
             case ABILITY_ROUGH_SKIN:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                 && gBattleMons[gBattleAttacker].hp != 0
-                 && !gProtectStructs[gBattleAttacker].confusionSelfDmg
-                 && (gSpecialStatuses[gBattleDefender].moveturnLostHP_physical || gSpecialStatuses[gBattleDefender].moveturnLostHP_special)
+                 && gBattleMons[gBattleMoveAttacker].hp != 0
+                 && !gProtectStructs[gBattleMoveAttacker].confusionSelfDmg
+                 && (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_physical || gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_special)
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
                 {
-                    gBattleMoveDamage = gBattleMons[gBattleAttacker].maxHP / 16;
+                    gBattleMoveDamage = gBattleMons[gBattleMoveAttacker].maxHP / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     BattleScriptPushCursor();
@@ -2097,9 +2093,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 break;
             case ABILITY_EFFECT_SPORE:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                 && gBattleMons[gBattleAttacker].hp != 0
-                 && !gProtectStructs[gBattleAttacker].confusionSelfDmg
-                 && (gSpecialStatuses[gBattleDefender].moveturnLostHP_physical || gSpecialStatuses[gBattleDefender].moveturnLostHP_special)
+                 && gBattleMons[gBattleMoveAttacker].hp != 0
+                 && !gProtectStructs[gBattleMoveAttacker].confusionSelfDmg
+                 && (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_physical || gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_special)
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
                  && (Random() % 10) == 0)
                 {
@@ -2120,9 +2116,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 break;
             case ABILITY_POISON_POINT:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                 && gBattleMons[gBattleAttacker].hp != 0
-                 && !gProtectStructs[gBattleAttacker].confusionSelfDmg
-                 && (gSpecialStatuses[gBattleDefender].moveturnLostHP_physical || gSpecialStatuses[gBattleDefender].moveturnLostHP_special)
+                 && gBattleMons[gBattleMoveAttacker].hp != 0
+                 && !gProtectStructs[gBattleMoveAttacker].confusionSelfDmg
+                 && (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_physical || gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_special)
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
                  && (Random() % 3) == 0)
                 {
@@ -2135,9 +2131,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 break;
             case ABILITY_STATIC:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                 && gBattleMons[gBattleAttacker].hp != 0
-                 && !gProtectStructs[gBattleAttacker].confusionSelfDmg
-                 && (gSpecialStatuses[gBattleDefender].moveturnLostHP_physical || gSpecialStatuses[gBattleDefender].moveturnLostHP_special)
+                 && gBattleMons[gBattleMoveAttacker].hp != 0
+                 && !gProtectStructs[gBattleMoveAttacker].confusionSelfDmg
+                 && (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_physical || gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_special)
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
                  && (Random() % 3) == 0)
                 {
@@ -2150,10 +2146,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 break;
             case ABILITY_FLAME_BODY:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                 && gBattleMons[gBattleAttacker].hp != 0
-                 && !gProtectStructs[gBattleAttacker].confusionSelfDmg
+                 && gBattleMons[gBattleMoveAttacker].hp != 0
+                 && !gProtectStructs[gBattleMoveAttacker].confusionSelfDmg
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
-                 && (gSpecialStatuses[gBattleDefender].moveturnLostHP_physical || gSpecialStatuses[gBattleDefender].moveturnLostHP_special)
+                 && (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_physical || gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_special)
                  && (Random() % 3) == 0)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_BURN;
@@ -2165,19 +2161,19 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 break;
             case ABILITY_CUTE_CHARM:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                 && gBattleMons[gBattleAttacker].hp != 0
-                 && !gProtectStructs[gBattleAttacker].confusionSelfDmg
+                 && gBattleMons[gBattleMoveAttacker].hp != 0
+                 && !gProtectStructs[gBattleMoveAttacker].confusionSelfDmg
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
-                 && (gSpecialStatuses[gBattleDefender].moveturnLostHP_physical || gSpecialStatuses[gBattleDefender].moveturnLostHP_special)
-                 && gBattleMons[gBattleDefender].hp != 0
+                 && (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_physical || gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_special)
+                 && gBattleMons[gBattleMoveTarget].hp != 0
                  && (Random() % 3) == 0
-                 && gBattleMons[gBattleAttacker].ability != ABILITY_OBLIVIOUS
+                 && gBattleMons[gBattleMoveAttacker].ability != ABILITY_OBLIVIOUS
                  && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != GetGenderFromSpeciesAndPersonality(speciesDef, pidDef)
-                 && !(gBattleMons[gBattleAttacker].status2 & STATUS2_INFATUATION)
+                 && !(gBattleMons[gBattleMoveAttacker].status2 & STATUS2_INFATUATION)
                  && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != MON_GENDERLESS
                  && GetGenderFromSpeciesAndPersonality(speciesDef, pidDef) != MON_GENDERLESS)
                 {
-                    gBattleMons[gBattleAttacker].status2 |= STATUS2_INFATUATED_WITH(gBattleDefender);
+                    gBattleMons[gBattleMoveAttacker].status2 |= STATUS2_INFATUATED_WITH(gBattleMoveTarget);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_CuteCharmActivates;
                     effect++;
@@ -2261,8 +2257,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
                     gBattleScripting.battler = battler;
                     gActiveBattler = battler;
-                    EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-                    MarkBufferBankForExecution(gActiveBattler);
+                    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                    MarkBattlerForControllerExec(gActiveBattler);
                     return effect;
                 }
             }
@@ -2292,7 +2288,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleStruct->synchronizeMoveEffect = MOVE_EFFECT_POISON;
 
                 gBattleCommunication[MOVE_EFFECT_BYTE] = gBattleStruct->synchronizeMoveEffect + MOVE_EFFECT_AFFECTS_USER;
-                gBattleScripting.battler = gBattleDefender;
+                gBattleScripting.battler = gBattleMoveTarget;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
@@ -2308,7 +2304,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleStruct->synchronizeMoveEffect = MOVE_EFFECT_POISON;
 
                 gBattleCommunication[MOVE_EFFECT_BYTE] = gBattleStruct->synchronizeMoveEffect;
-                gBattleScripting.battler = gBattleAttacker;
+                gBattleScripting.battler = gBattleMoveAttacker;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
@@ -2379,7 +2375,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         gStatuses3[i] &= ~(STATUS3_TRACE);
                         gBattleScripting.battler = i;
 
-                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlePartyID[gActiveBattler])
+                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
                         PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
                         break;
                     }
@@ -2560,11 +2556,11 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
         bankQuality = ItemId_GetHoldEffectParam(gLastUsedItem);
     }
 
-    atkItem = gBattleMons[gBattleAttacker].item;
+    atkItem = gBattleMons[gBattleMoveAttacker].item;
     if (atkItem == ITEM_ENIGMA_BERRY)
     {
-        atkHoldEffect = gEnigmaBerries[gBattleAttacker].holdEffect;
-        atkQuality = gEnigmaBerries[gBattleAttacker].holdEffectParam;
+        atkHoldEffect = gEnigmaBerries[gBattleMoveAttacker].holdEffect;
+        atkQuality = gEnigmaBerries[gBattleMoveAttacker].holdEffectParam;
     }
     else
     {
@@ -2573,11 +2569,11 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
     }
 
     // def variables are unused
-    defItem = gBattleMons[gBattleDefender].item;
+    defItem = gBattleMons[gBattleMoveTarget].item;
     if (defItem == ITEM_ENIGMA_BERRY)
     {
-        defHoldEffect = gEnigmaBerries[gBattleDefender].holdEffect;
-        defQuality = gEnigmaBerries[gBattleDefender].holdEffectParam;
+        defHoldEffect = gEnigmaBerries[gBattleMoveTarget].holdEffect;
+        defQuality = gEnigmaBerries[gBattleMoveTarget].holdEffectParam;
     }
     else
     {
@@ -2607,7 +2603,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             {
                 gBattleScripting.battler = bank;
                 gStringBank = bank;
-                gActiveBattler = gBattleAttacker = bank;
+                gActiveBattler = gBattleMoveAttacker = bank;
                 BattleScriptExecute(BattleScript_WhiteHerbEnd2);
             }
             break;
@@ -2637,9 +2633,9 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     u16 move;
 
                     if (GetBattlerSide(bank) == B_SIDE_PLAYER)
-                        mon = &gPlayerParty[gBattlePartyID[bank]];
+                        mon = &gPlayerParty[gBattlerPartyIndexes[bank]];
                     else
-                        mon = &gEnemyParty[gBattlePartyID[bank]];
+                        mon = &gEnemyParty[gBattlerPartyIndexes[bank]];
                     for (i = 0; i < 4; i++)
                     {
                         move = GetMonData(mon, MON_DATA_MOVE1 + i);
@@ -2659,8 +2655,8 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                         PREPARE_MOVE_BUFFER(gBattleTextBuff1, move);
 
                         BattleScriptExecute(BattleScript_BerryPPHealEnd2);
-                        EmitSetMonData(0, i + REQUEST_PPMOVE1_BATTLE, 0, 1, &changedPP);
-                        MarkBufferBankForExecution(gActiveBattler);
+                        BtlController_EmitSetMonData(0, i + REQUEST_PPMOVE1_BATTLE, 0, 1, &changedPP);
+                        MarkBattlerForControllerExec(gActiveBattler);
                         effect = ITEM_PP_CHANGE;
                     }
                 }
@@ -2678,7 +2674,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gBattleScripting.battler = bank;
                     gStringBank = bank;
-                    gActiveBattler = gBattleAttacker = bank;
+                    gActiveBattler = gBattleMoveAttacker = bank;
                     BattleScriptExecute(BattleScript_WhiteHerbEnd2);
                 }
                 break;
@@ -3006,12 +3002,12 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             {
                 gBattleScripting.battler = bank;
                 gStringBank = bank;
-                gActiveBattler = gBattleAttacker = bank;
+                gActiveBattler = gBattleMoveAttacker = bank;
                 switch (effect)
                 {
                 case ITEM_STATUS_CHANGE:
-                    EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
-                    MarkBufferBankForExecution(gActiveBattler);
+                    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
+                    MarkBattlerForControllerExec(gActiveBattler);
                     break;
                 case ITEM_PP_CHANGE:
                     if (!(gBattleMons[bank].status2 & STATUS2_TRANSFORMED) && !(gDisableStructs[bank].unk18_b & gBitTable[i]))
@@ -3165,8 +3161,8 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 gBattleScripting.battler = bank;
                 gStringBank = bank;
                 gActiveBattler = bank;
-                EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-                MarkBufferBankForExecution(gActiveBattler);
+                BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                MarkBattlerForControllerExec(gActiveBattler);
                 break;
             }
         }
@@ -3178,10 +3174,10 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             {
             case HOLD_EFFECT_FLINCH:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                    && (gSpecialStatuses[gBattleDefender].moveturnLostHP_physical || gSpecialStatuses[gBattleDefender].moveturnLostHP_special)
+                    && (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_physical || gSpecialStatuses[gBattleMoveTarget].moveturnLostHP_special)
                     && (Random() % 100) < atkQuality
                     && gBattleMoves[gCurrentMove].flags & FLAG_KINGSROCK_AFFECTED
-                    && gBattleMons[gBattleDefender].hp)
+                    && gBattleMons[gBattleMoveTarget].hp)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
                     BattleScriptPushCursor();
@@ -3191,19 +3187,19 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 break;
             case HOLD_EFFECT_SHELL_BELL:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                    && gSpecialStatuses[gBattleDefender].moveturnLostHP != 0
-                    && gSpecialStatuses[gBattleDefender].moveturnLostHP != 0xFFFF
-                    && gBattleAttacker != gBattleDefender
-                    && gBattleMons[gBattleAttacker].hp != gBattleMons[gBattleAttacker].maxHP
-                    && gBattleMons[gBattleAttacker].hp != 0)
+                    && gSpecialStatuses[gBattleMoveTarget].moveturnLostHP != 0
+                    && gSpecialStatuses[gBattleMoveTarget].moveturnLostHP != 0xFFFF
+                    && gBattleMoveAttacker != gBattleMoveTarget
+                    && gBattleMons[gBattleMoveAttacker].hp != gBattleMons[gBattleMoveAttacker].maxHP
+                    && gBattleMons[gBattleMoveAttacker].hp != 0)
                 {
                     gLastUsedItem = atkItem;
-                    gStringBank = gBattleAttacker;
-                    gBattleScripting.battler = gBattleAttacker;
-                    gBattleMoveDamage = (gSpecialStatuses[gBattleDefender].moveturnLostHP / atkQuality) * -1;
+                    gStringBank = gBattleMoveAttacker;
+                    gBattleScripting.battler = gBattleMoveAttacker;
+                    gBattleMoveDamage = (gSpecialStatuses[gBattleMoveTarget].moveturnLostHP / atkQuality) * -1;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = -1;
-                    gSpecialStatuses[gBattleDefender].moveturnLostHP = 0;
+                    gSpecialStatuses[gBattleMoveTarget].moveturnLostHP = 0;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_ItemHealHP_Ret;
                     effect++;
@@ -3226,7 +3222,7 @@ void ClearFuryCutterDestinyBondGrudge(u8 bank)
 
 void HandleAction_RunBattleScript(void) // identical to RunBattleScriptCommands
 {
-    if (gBattleExecBuffer == 0)
+    if (gBattleControllerExecFlags == 0)
         gBattleScriptingCommandsTable[*gBattlescriptCurrInstr]();
 }
 
@@ -3244,18 +3240,18 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
     switch (moveTarget)
     {
     case MOVE_TARGET_SELECTED:
-        side = GetBattlerSide(gBattleAttacker) ^ BIT_SIDE;
+        side = GetBattlerSide(gBattleMoveAttacker) ^ BIT_SIDE;
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBank = gSideTimers[side].followmeTarget;
         else
         {
-            side = GetBattlerSide(gBattleAttacker);
+            side = GetBattlerSide(gBattleMoveAttacker);
             do
             {
                 targetBank = Random() % gBattlersCount;
-            } while (targetBank == gBattleAttacker || side == GetBattlerSide(targetBank) || gAbsentBattlerFlags & gBitTable[targetBank]);
+            } while (targetBank == gBattleMoveAttacker || side == GetBattlerSide(targetBank) || gAbsentBattlerFlags & gBitTable[targetBank]);
             if (gBattleMoves[move].type == TYPE_ELECTRIC
-                && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIDE, gBattleAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
+                && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIDE, gBattleMoveAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
                 && gBattleMons[targetBank].ability != ABILITY_LIGHTNING_ROD)
             {
                 targetBank ^= BIT_FLANK;
@@ -3268,17 +3264,17 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
     case MOVE_TARGET_OPPONENTS_FIELD:
-        targetBank = GetBattlerAtPosition((GetBattlerPosition(gBattleAttacker) & BIT_SIDE) ^ BIT_SIDE);
+        targetBank = GetBattlerAtPosition((GetBattlerPosition(gBattleMoveAttacker) & BIT_SIDE) ^ BIT_SIDE);
         if (gAbsentBattlerFlags & gBitTable[targetBank])
             targetBank ^= BIT_FLANK;
         break;
     case MOVE_TARGET_RANDOM:
-        side = GetBattlerSide(gBattleAttacker) ^ BIT_SIDE;
+        side = GetBattlerSide(gBattleMoveAttacker) ^ BIT_SIDE;
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBank = gSideTimers[side].followmeTarget;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & MOVE_TARGET_RANDOM)
         {
-            if (GetBattlerSide(gBattleAttacker) == B_SIDE_PLAYER)
+            if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
             {
                 if (Random() & 1)
                     targetBank = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
@@ -3296,15 +3292,15 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
                 targetBank ^= BIT_FLANK;
         }
         else
-            targetBank = GetBattlerAtPosition((GetBattlerPosition(gBattleAttacker) & BIT_SIDE) ^ BIT_SIDE);
+            targetBank = GetBattlerAtPosition((GetBattlerPosition(gBattleMoveAttacker) & BIT_SIDE) ^ BIT_SIDE);
         break;
     case MOVE_TARGET_USER:
     case MOVE_TARGET_x10:
-        targetBank = gBattleAttacker;
+        targetBank = gBattleMoveAttacker;
         break;
     }
 
-    *(gBattleStruct->moveTarget + gBattleAttacker) = targetBank;
+    *(gBattleStruct->moveTarget + gBattleMoveAttacker) = targetBank;
 
     return targetBank;
 }
@@ -3313,10 +3309,10 @@ static bool32 HasObedientBitSet(u8 bank)
 {
     if (GetBattlerSide(bank) == B_SIDE_OPPONENT)
         return TRUE;
-    if (GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS
-        && GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
+    if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS
+        && GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
             return TRUE;
-    return GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_OBEDIENCE, NULL);
+    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_OBEDIENCE, NULL);
 }
 
 u8 IsMonDisobedient(void)
@@ -3327,18 +3323,18 @@ u8 IsMonDisobedient(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
         return 0;
-    if (GetBattlerSide(gBattleAttacker) == B_SIDE_OPPONENT)
+    if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_OPPONENT)
         return 0;
 
-    if (HasObedientBitSet(gBattleAttacker)) // only if species is Mew or Deoxys
+    if (HasObedientBitSet(gBattleMoveAttacker)) // only if species is Mew or Deoxys
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gBattleAttacker) == 2)
+        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gBattleMoveAttacker) == 2)
             return 0;
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
             return 0;
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             return 0;
-        if (!IsOtherTrainer(gBattleMons[gBattleAttacker].otId, gBattleMons[gBattleAttacker].otName))
+        if (!IsOtherTrainer(gBattleMons[gBattleMoveAttacker].otId, gBattleMons[gBattleMoveAttacker].otName))
             return 0;
         if (FlagGet(FLAG_BADGE08_GET))
             return 0;
@@ -3353,27 +3349,27 @@ u8 IsMonDisobedient(void)
             obedienceLevel = 70;
     }
 
-    if (gBattleMons[gBattleAttacker].level <= obedienceLevel)
+    if (gBattleMons[gBattleMoveAttacker].level <= obedienceLevel)
         return 0;
     rnd = (Random() & 255);
-    calc = (gBattleMons[gBattleAttacker].level + obedienceLevel) * rnd >> 8;
+    calc = (gBattleMons[gBattleMoveAttacker].level + obedienceLevel) * rnd >> 8;
     if (calc < obedienceLevel)
         return 0;
 
     // is not obedient
     if (gCurrentMove == MOVE_RAGE)
-        gBattleMons[gBattleAttacker].status2 &= ~(STATUS2_RAGE);
-    if (gBattleMons[gBattleAttacker].status1 & STATUS1_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
+        gBattleMons[gBattleMoveAttacker].status2 &= ~(STATUS2_RAGE);
+    if (gBattleMons[gBattleMoveAttacker].status1 & STATUS1_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
     {
         gBattlescriptCurrInstr = BattleScript_82DB695;
         return 1;
     }
 
     rnd = (Random() & 255);
-    calc = (gBattleMons[gBattleAttacker].level + obedienceLevel) * rnd >> 8;
+    calc = (gBattleMons[gBattleMoveAttacker].level + obedienceLevel) * rnd >> 8;
     if (calc < obedienceLevel)
     {
-        calc = CheckMoveLimitations(gBattleAttacker, gBitTable[gCurrMovePos], 0xFF);
+        calc = CheckMoveLimitations(gBattleMoveAttacker, gBitTable[gCurrMovePos], 0xFF);
         if (calc == 0xF) // all moves cannot be used
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = Random() & 3;
@@ -3387,19 +3383,19 @@ u8 IsMonDisobedient(void)
                 gCurrMovePos = gUnknown_020241E9 = Random() & 3;
             } while (gBitTable[gCurrMovePos] & calc);
 
-            gRandomMove = gBattleMons[gBattleAttacker].moves[gCurrMovePos];
+            gRandomMove = gBattleMons[gBattleMoveAttacker].moves[gCurrMovePos];
             gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
-            gBattleDefender = GetMoveTarget(gRandomMove, 0);
+            gBattleMoveTarget = GetMoveTarget(gRandomMove, 0);
             gHitMarker |= HITMARKER_x200000;
             return 2;
         }
     }
     else
     {
-        obedienceLevel = gBattleMons[gBattleAttacker].level - obedienceLevel;
+        obedienceLevel = gBattleMons[gBattleMoveAttacker].level - obedienceLevel;
 
         calc = (Random() & 255);
-        if (calc < obedienceLevel && !(gBattleMons[gBattleAttacker].status1 & STATUS1_ANY) && gBattleMons[gBattleAttacker].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gBattleAttacker].ability != ABILITY_INSOMNIA)
+        if (calc < obedienceLevel && !(gBattleMons[gBattleMoveAttacker].status1 & STATUS1_ANY) && gBattleMons[gBattleMoveAttacker].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gBattleMoveAttacker].ability != ABILITY_INSOMNIA)
         {
             // try putting asleep
             int i;
@@ -3417,8 +3413,8 @@ u8 IsMonDisobedient(void)
         calc -= obedienceLevel;
         if (calc < obedienceLevel)
         {
-            gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattleAttacker], &gBattleMons[gBattleAttacker], MOVE_POUND, 0, 40, 0, gBattleAttacker, gBattleAttacker);
-            gBattleDefender = gBattleAttacker;
+            gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattleMoveAttacker], &gBattleMons[gBattleMoveAttacker], MOVE_POUND, 0, 40, 0, gBattleMoveAttacker, gBattleMoveAttacker);
+            gBattleMoveTarget = gBattleMoveAttacker;
             gBattlescriptCurrInstr = BattleScript_82DB6F0;
             gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
             return 2;

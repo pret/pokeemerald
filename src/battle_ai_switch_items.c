@@ -15,7 +15,7 @@ extern u8 gAbsentBattlerFlags;
 extern u32 gBattleTypeFlags;
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
 extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
 extern u16 gDynamicBasePower;
@@ -39,7 +39,7 @@ static bool8 ShouldSwitchIfPerishSong(void)
         && gDisableStructs[gActiveBattler].perishSongTimer1 == 0)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
-        EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -104,7 +104,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             continue;
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlePartyID[gActiveBattler])
+        if (i == gBattlerPartyIndexes[gActiveBattler])
             continue;
 
         GetMonData(&party[i], MON_DATA_SPECIES); // unused return value
@@ -121,7 +121,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             {
                 // we found a mon
                 *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-                EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+                BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
                 return TRUE;
             }
         }
@@ -202,9 +202,9 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlePartyID[bankIn1])
+        if (i == gBattlerPartyIndexes[bankIn1])
             continue;
-        if (i == gBattlePartyID[bankIn2])
+        if (i == gBattlerPartyIndexes[bankIn2])
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
@@ -221,7 +221,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         {
             // we found a mon
             *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-            EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+            BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
             return TRUE;
         }
     }
@@ -241,13 +241,13 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if ((gLastLandedMoves[gActiveBattler] == 0 || gLastLandedMoves[gActiveBattler] == 0xFFFF) && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
-        EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
     else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0 && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
-        EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -258,7 +258,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if (Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
-        EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -396,9 +396,9 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
             continue;
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlePartyID[bankIn1])
+        if (i == gBattlerPartyIndexes[bankIn1])
             continue;
-        if (i == gBattlePartyID[bankIn2])
+        if (i == gBattlerPartyIndexes[bankIn2])
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
@@ -426,7 +426,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
                 if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % moduloPercent == 0)
                 {
                     *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-                    EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+                    BtlController_EmitTwoReturnValues(1, ACTION_SWITCH, 0);
                     return TRUE;
                 }
             }
@@ -504,9 +504,9 @@ static bool8 ShouldSwitch(void)
             continue;
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlePartyID[bankIn1])
+        if (i == gBattlerPartyIndexes[bankIn1])
             continue;
-        if (i == gBattlePartyID[bankIn2])
+        if (i == gBattlerPartyIndexes[bankIn2])
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
@@ -586,9 +586,9 @@ void AI_TrySwitchOrUseItem(void)
                     {
                         if (GetMonData(&party[monToSwitchId], MON_DATA_HP) == 0)
                             continue;
-                        if (monToSwitchId == gBattlePartyID[bankIn1])
+                        if (monToSwitchId == gBattlerPartyIndexes[bankIn1])
                             continue;
-                        if (monToSwitchId == gBattlePartyID[bankIn2])
+                        if (monToSwitchId == gBattlerPartyIndexes[bankIn2])
                             continue;
                         if (monToSwitchId == *(gBattleStruct->monToSwitchIntoId + bankIn1))
                             continue;
@@ -611,7 +611,7 @@ void AI_TrySwitchOrUseItem(void)
         }
     }
 
-    EmitTwoReturnValues(1, ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
+    BtlController_EmitTwoReturnValues(1, ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
 }
 
 static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8 *var)
@@ -654,7 +654,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     if (*(gBattleStruct->monToSwitchIntoId + gActiveBattler) != 6)
         return *(gBattleStruct->monToSwitchIntoId + gActiveBattler);
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-        return gBattlePartyID[gActiveBattler] + 1;
+        return gBattlerPartyIndexes[gActiveBattler] + 1;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
@@ -706,8 +706,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
             if (species != SPECIES_NONE
                 && GetMonData(&party[i], MON_DATA_HP) != 0
                 && !(gBitTable[i] & invalidMons)
-                && gBattlePartyID[bankIn1] != i
-                && gBattlePartyID[bankIn2] != i
+                && gBattlerPartyIndexes[bankIn1] != i
+                && gBattlerPartyIndexes[bankIn2] != i
                 && i != *(gBattleStruct->monToSwitchIntoId + bankIn1)
                 && i != *(gBattleStruct->monToSwitchIntoId + bankIn2))
             {
@@ -764,9 +764,9 @@ u8 GetMostSuitableMonToSwitchInto(void)
             continue;
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
-        if (gBattlePartyID[bankIn1] == i)
+        if (gBattlerPartyIndexes[bankIn1] == i)
             continue;
-        if (gBattlePartyID[bankIn2] == i)
+        if (gBattlerPartyIndexes[bankIn2] == i)
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
@@ -937,7 +937,7 @@ static bool8 ShouldUseItem(void)
 
         if (shouldUse)
         {
-            EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
             *(gBattleStruct->chosenItem + (gActiveBattler / 2) * 2) = item;
             gBattleResources->battleHistory->trainerItems[i] = 0;
             return shouldUse;

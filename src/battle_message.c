@@ -17,8 +17,8 @@
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
 extern u8 gActiveBattler;
-extern u8 gBattleAttacker;
-extern u8 gBattleDefender;
+extern u8 gBattleMoveAttacker;
+extern u8 gBattleMoveTarget;
 extern u8 gStringBank;
 extern u8 gEffectBank;
 extern u8 gAbilitiesPerBank[MAX_BATTLERS_COUNT];
@@ -26,7 +26,7 @@ extern u32 gBattleTypeFlags;
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
 extern u16 gPartnerTrainerId;
-extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
@@ -1836,80 +1836,80 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = gStringVar3;
                 break;
             case B_TXT_PLAYER_MON1_NAME: // first player poke name
-                GetMonData(&gPlayerParty[gBattlePartyID[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]],
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_OPPONENT_MON1_NAME: // first enemy poke name
-                GetMonData(&gEnemyParty[gBattlePartyID[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)]],
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_PLAYER_MON2_NAME: // second player poke name
-                GetMonData(&gPlayerParty[gBattlePartyID[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)]],
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_OPPONENT_MON2_NAME: // second enemy poke name
-                GetMonData(&gEnemyParty[gBattlePartyID[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]],
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON1_NAME: // link first player poke name
-                GetMonData(&gPlayerParty[gBattlePartyID[gLinkPlayers[multiplayerID].lp_field_18]],
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].lp_field_18]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON1_NAME: // link first opponent poke name
-                GetMonData(&gEnemyParty[gBattlePartyID[gLinkPlayers[multiplayerID].lp_field_18 ^ 1]],
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].lp_field_18 ^ 1]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON2_NAME: // link second player poke name
-                GetMonData(&gPlayerParty[gBattlePartyID[gLinkPlayers[multiplayerID].lp_field_18 ^ 2]],
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].lp_field_18 ^ 2]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON2_NAME: // link second opponent poke name
-                GetMonData(&gEnemyParty[gBattlePartyID[gLinkPlayers[multiplayerID].lp_field_18 ^ 3]],
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].lp_field_18 ^ 3]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only bank 0/1
-                HANDLE_NICKNAME_STRING_CASE(gBattleAttacker,
-                                            gBattlePartyID[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleAttacker))])
+                HANDLE_NICKNAME_STRING_CASE(gBattleMoveAttacker,
+                                            gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleMoveAttacker))])
                 break;
             case B_TXT_ATK_PARTNER_NAME: // attacker partner name
-                if (GetBattlerSide(gBattleAttacker) == B_SIDE_PLAYER)
-                    GetMonData(&gPlayerParty[gBattlePartyID[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleAttacker)) + 2]], MON_DATA_NICKNAME, text);
+                if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
+                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleMoveAttacker)) + 2]], MON_DATA_NICKNAME, text);
                 else
-                    GetMonData(&gEnemyParty[gBattlePartyID[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleAttacker)) + 2]], MON_DATA_NICKNAME, text);
+                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattleMoveAttacker)) + 2]], MON_DATA_NICKNAME, text);
 
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX: // attacker name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattleAttacker, gBattlePartyID[gBattleAttacker])
+                HANDLE_NICKNAME_STRING_CASE(gBattleMoveAttacker, gBattlerPartyIndexes[gBattleMoveAttacker])
                 break;
             case B_TXT_DEF_NAME_WITH_PREFIX: // target name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattleDefender, gBattlePartyID[gBattleDefender])
+                HANDLE_NICKNAME_STRING_CASE(gBattleMoveTarget, gBattlerPartyIndexes[gBattleMoveTarget])
                 break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gEffectBank, gBattlePartyID[gEffectBank])
+                HANDLE_NICKNAME_STRING_CASE(gEffectBank, gBattlerPartyIndexes[gEffectBank])
                 break;
             case B_TXT_ACTIVE_NAME_WITH_PREFIX: // active bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlePartyID[gActiveBattler])
+                HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
                 break;
             case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX: // scripting active bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlePartyID[gBattleScripting.battler])
+                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlerPartyIndexes[gBattleScripting.battler])
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
                 if (gStringInfo->currentMove > LAST_MOVE_INDEX)
@@ -1970,10 +1970,10 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = gAbilityNames[gLastUsedAbility];
                 break;
             case B_TXT_ATK_ABILITY: // attacker ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleAttacker]];
+                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleMoveAttacker]];
                 break;
             case B_TXT_DEF_ABILITY: // target ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleDefender]];
+                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleMoveTarget]];
                 break;
             case B_TXT_SCR_ACTIVE_ABILITY: // scripting active ability
                 toCpy = gAbilityNames[gAbilitiesPerBank[gBattleScripting.battler]];
@@ -2039,16 +2039,16 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = gLinkPlayers[multiplayerID].name;
                 break;
             case B_TXT_1F: // link partner name?
-                toCpy = gLinkPlayers[GetBankMultiplayerId(2 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(2 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
                 break;
             case B_TXT_20: // link opponent 1 name?
-                toCpy = gLinkPlayers[GetBankMultiplayerId(1 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(1 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
                 break;
             case B_TXT_21: // link opponent 2 name?
-                toCpy = gLinkPlayers[GetBankMultiplayerId(3 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(3 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
                 break;
             case B_TXT_22: // link scripting active name
-                toCpy = gLinkPlayers[GetBankMultiplayerId(gBattleScripting.battler)].name;
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(gBattleScripting.battler)].name;
                 break;
             case B_TXT_PLAYER_NAME: // player name
                 if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
@@ -2094,37 +2094,37 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                     toCpy = gText_Someones;
                 break;
             case B_TXT_ATK_PREFIX2:
-                if (GetBattlerSide(gBattleAttacker) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix2;
                 else
                     toCpy = gText_FoePkmnPrefix3;
                 break;
             case B_TXT_DEF_PREFIX2:
-                if (GetBattlerSide(gBattleDefender) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattleMoveTarget) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix2;
                 else
                     toCpy = gText_FoePkmnPrefix3;
                 break;
             case B_TXT_ATK_PREFIX1:
-                if (GetBattlerSide(gBattleAttacker) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix;
                 else
                     toCpy = gText_FoePkmnPrefix2;
                 break;
             case B_TXT_DEF_PREFIX1:
-                if (GetBattlerSide(gBattleDefender) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattleMoveTarget) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix;
                 else
                     toCpy = gText_FoePkmnPrefix2;
                 break;
             case B_TXT_ATK_PREFIX3:
-                if (GetBattlerSide(gBattleAttacker) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattleMoveAttacker) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix3;
                 else
                     toCpy = gText_FoePkmnPrefix4;
                 break;
             case B_TXT_DEF_PREFIX3:
-                if (GetBattlerSide(gBattleDefender) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBattleMoveTarget) == B_SIDE_PLAYER)
                     toCpy = gText_AllyPkmnPrefix3;
                 else
                     toCpy = gText_FoePkmnPrefix4;

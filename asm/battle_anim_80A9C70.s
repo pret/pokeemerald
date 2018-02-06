@@ -17,7 +17,7 @@ sub_80A9C70: @ 80A9C70
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gBankSpriteIds
+	ldr r0, =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r6, [r0]
 	ldr r0, =sub_80A9DB4
@@ -331,10 +331,10 @@ sub_80A9EF4: @ 80A9EF4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, =gAnimBankTarget
+	ldr r4, =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	ldr r1, =0xffe00000
@@ -342,7 +342,7 @@ sub_80A9EF4: @ 80A9EF4
 	lsrs r5, r0, 16
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	ldr r1, =0xffdc0000
@@ -863,9 +863,9 @@ LaunchStatusAnimation: @ 80AA364
 	lsrs r4, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	strb r4, [r0]
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 	strb r4, [r0]
 	ldr r0, =gBattleAnims_Statuses
 	movs r2, 0

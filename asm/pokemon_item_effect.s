@@ -130,7 +130,7 @@ _0806BDC4:
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0806BE70
-	ldr r2, =gBattlePartyID
+	ldr r2, =gBattlerPartyIndexes
 	lsls r0, r1, 1
 	adds r0, r2
 	ldrh r3, [r0]
@@ -973,7 +973,7 @@ _0806C4FC:
 	ldrb r0, [r2]
 	bics r0, r1
 	strb r0, [r2]
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r3, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1155,9 +1155,9 @@ _0806C6AE:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl EmitGetMonData
+	bl BtlController_EmitGetMonData
 	ldrb r0, [r4]
-	bl MarkBufferBankForExecution
+	bl MarkBattlerForControllerExec
 	strb r5, [r4]
 	b _0806C6EC
 	.pool

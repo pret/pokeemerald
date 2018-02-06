@@ -16,7 +16,7 @@ sub_8170478: @ 8170478
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x10]
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r4, [r0]
 	ldr r0, =gBattle_WIN0H
 	movs r1, 0
@@ -56,7 +56,7 @@ sub_8170478: @ 8170478
 	movs r1, 0x3
 	movs r2, 0x1
 	bl SetAnimBgAttribute
-	ldr r0, =gHealthBoxesIds
+	ldr r0, =gHealthboxSpriteIds
 	adds r4, r0
 	ldrb r0, [r4]
 	ldr r1, =gSprites
@@ -212,7 +212,7 @@ sub_8170660: @ 8170660
 	push {r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	mov r8, r0
 	ldr r1, =gTasks
@@ -373,7 +373,7 @@ _0817076C:
 	movs r1, 0x1
 	movs r2, 0
 	bl SetAnimBgAttribute
-	ldr r0, =gHealthBoxesIds
+	ldr r0, =gHealthboxSpriteIds
 	add r0, r8
 	ldrb r0, [r0]
 	lsls r1, r0, 4
@@ -434,7 +434,7 @@ sub_8170834: @ 8170834
 	adds r7, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gHealthBoxesIds
+	ldr r0, =gHealthboxSpriteIds
 	adds r2, r0
 	ldrb r0, [r2]
 	lsls r5, r0, 4
@@ -540,7 +540,7 @@ sub_8170920: @ 8170920
 	lsrs r4, 24
 	mov r1, sp
 	adds r1, 0x1
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r2, [r0]
 	mov r0, sp
 	bl sub_8170834
@@ -561,7 +561,7 @@ sub_817094C: @ 817094C
 	push {r5,r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gHealthBoxesIds
+	ldr r1, =gHealthboxSpriteIds
 	adds r0, r1
 	ldrb r0, [r0]
 	ldr r1, =gSprites
@@ -628,7 +628,7 @@ sub_81709EC: @ 81709EC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_817094C
 	adds r0, r4, 0
@@ -765,8 +765,8 @@ sub_8170B04: @ 8170B04
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r5, [r0]
@@ -851,8 +851,8 @@ sub_8170BB0: @ 8170BB0
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =gBankSpriteIds
-	ldr r4, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r4, =gBattleAnimAttacker
 	ldrb r0, [r4]
 	adds r1, r0, r1
 	ldrb r1, [r1]
@@ -861,7 +861,7 @@ sub_8170BB0: @ 8170BB0
 	lsls r0, 24
 	cmp r0, 0
 	bne _08170BF8
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -872,7 +872,7 @@ sub_8170BB0: @ 8170BB0
 	b _08170C08
 	.pool
 _08170BF8:
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -904,16 +904,16 @@ _08170C08:
 	b _08170CEE
 	.pool
 _08170C44:
-	ldr r5, =gAnimBankAttacker
+	ldr r5, =gBattleAnimAttacker
 	ldrb r0, [r5]
 	movs r1, 0
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	adds r1, r0, 0
 	lsls r1, 24
 	ldr r2, =gSprites
@@ -1162,18 +1162,18 @@ sub_8170E04: @ 8170E04
 	adds r6, r4, r1
 	movs r0, 0x22
 	strh r0, [r6, 0x2E]
-	ldr r2, =gAnimBankTarget
+	ldr r2, =gBattleAnimTarget
 	mov r8, r2
 	ldrb r0, [r2]
 	movs r1, 0
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1186,7 +1186,7 @@ sub_8170E04: @ 8170E04
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r3, [r0, 0x8]
-	ldr r1, =gBankSpriteIds
+	ldr r1, =gBattlerSpriteIds
 	mov r2, r8
 	ldrb r0, [r2]
 	adds r0, r1
@@ -1313,18 +1313,18 @@ _08170F54:
 	adds r6, r4, r0
 	movs r0, 0x22
 	strh r0, [r6, 0x2E]
-	ldr r1, =gAnimBankTarget
+	ldr r1, =gBattleAnimTarget
 	mov r8, r1
 	ldrb r0, [r1]
 	movs r1, 0
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1336,7 +1336,7 @@ _08170F54:
 	str r0, [r4]
 	movs r0, 0
 	bl GetBattlerAtPosition
-	ldr r1, =gBankSpriteIds
+	ldr r1, =gBattlerSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1372,7 +1372,7 @@ sub_8171030: @ 8171030
 	ldr r6, =gSprites
 	movs r0, 0
 	bl GetBattlerAtPosition
-	ldr r1, =gBankSpriteIds
+	ldr r1, =gBattlerSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1423,7 +1423,7 @@ sub_81710A8: @ 81710A8
 	ldr r6, =gSprites
 	movs r0, 0
 	bl GetBattlerAtPosition
-	ldr r4, =gBankSpriteIds
+	ldr r4, =gBattlerSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1550,7 +1550,7 @@ _08171188:
 	movs r2, 0x1
 	movs r3, 0x1C
 	bl LaunchBallStarsTask
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 	ldrb r1, [r0]
 	movs r0, 0
 	movs r2, 0xE
@@ -1584,8 +1584,8 @@ sub_81711E8: @ 81711E8
 	ldr r0, =sub_8171240
 	str r0, [r4, 0x1C]
 	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankTarget
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1606,8 +1606,8 @@ _08171224:
 sub_8171240: @ 8171240
 	push {r4-r7,lr}
 	adds r7, r0, 0
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankTarget
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r4, [r0]
@@ -2333,7 +2333,7 @@ sub_81717F8: @ 81717F8
 	push {r7}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r7, =gAnimBankTarget
+	ldr r7, =gBattleAnimTarget
 	ldrh r0, [r6, 0x36]
 	adds r0, 0x1
 	movs r1, 0
@@ -2390,7 +2390,7 @@ _08171880:
 	cmp r1, r0
 	bne _081718BC
 	ldr r5, =gSprites
-	ldr r4, =gBankSpriteIds
+	ldr r4, =gBattlerSpriteIds
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -2715,7 +2715,7 @@ sub_8171AE4: @ 8171AE4
 	movs r2, 0x1
 	movs r3, 0x1C
 	bl LaunchBallStarsTask
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0xE
@@ -2723,8 +2723,8 @@ sub_8171AE4: @ 8171AE4
 	bl LaunchBallFadeMonTask
 _08171B36:
 	ldr r6, =gSprites
-	ldr r5, =gBankSpriteIds
-	ldr r4, =gAnimBankTarget
+	ldr r5, =gBattlerSpriteIds
+	ldr r4, =gBattleAnimTarget
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2791,8 +2791,8 @@ sub_8171BAC: @ 8171BAC
 	strb r0, [r2]
 _08171BCA:
 	ldr r4, =gSprites
-	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimBankTarget
+	ldr r3, =gBattlerSpriteIds
+	ldr r2, =gBattleAnimTarget
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -2840,8 +2840,8 @@ _08171C24:
 	cmp r5, 0
 	beq _08171C8A
 	ldr r4, =gSprites
-	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimBankTarget
+	ldr r3, =gBattlerSpriteIds
+	ldr r2, =gBattleAnimTarget
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -4729,8 +4729,8 @@ sub_8172BF0: @ 8172BF0
 	lsrs r7, r0, 24
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =gBankSpriteIds
-	ldr r3, =gAnimBankAttacker
+	ldr r0, =gBattlerSpriteIds
+	ldr r3, =gBattleAnimAttacker
 	ldrb r2, [r3]
 	adds r0, r2, r0
 	ldrb r6, [r0]
@@ -4877,7 +4877,7 @@ _08172D28:
 	adds r0, r1
 	ldrb r1, [r0, 0x8]
 	strh r1, [r0, 0x8]
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -4949,7 +4949,7 @@ _08172DC0:
 	beq _08172E4E
 	b _08172E84
 _08172DC6:
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_80A8364
 	lsls r0, 24
@@ -5009,8 +5009,8 @@ _08172E14:
 	strh r0, [r4, 0x26]
 	b _08172E84
 _08172E4E:
-	ldr r1, =gBankSpriteIds
-	ldr r4, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r4, =gBattleAnimAttacker
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5048,7 +5048,7 @@ sub_8172E9C: @ 8172E9C
 	ldr r3, =gBattleAnimArgs
 	ldr r1, =gBattleSpritesDataPtr
 	ldr r2, [r1]
-	ldr r1, =gAnimBankAttacker
+	ldr r1, =gBattleAnimAttacker
 	ldrb r1, [r1]
 	ldr r2, [r2]
 	lsls r1, 2
@@ -5068,7 +5068,7 @@ sub_8172ED0: @ 8172ED0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gAnimBankTarget
+	ldr r2, =gBattleAnimTarget
 	ldr r1, =gEffectBank
 	ldrb r1, [r1]
 	strb r1, [r2]
@@ -5108,7 +5108,7 @@ sub_8172EF0: @ 8172EF0
 	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r6, 0
-	bl IsAnimBankSpriteVisible
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172FC8
@@ -5234,12 +5234,12 @@ _0817303A:
 	ldrb r0, [r4, 0x8]
 	mov r8, r0
 	movs r1, 0
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
 	movs r1, 0x1
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0x1E
@@ -5579,7 +5579,7 @@ sub_817330C: @ 817330C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	ldr r5, =gBattleAnimArgs
 	lsrs r0, 24
@@ -5591,7 +5591,7 @@ sub_817330C: @ 817330C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl GetBankCoord
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x6]
@@ -5602,8 +5602,8 @@ sub_817330C: @ 817330C
 	adds r0, r4, 0
 	bl sub_80A68D4
 	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5627,8 +5627,8 @@ sub_817339C: @ 817339C
 	push {lr}
 	adds r3, r0, 0
 	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5678,8 +5678,8 @@ sub_8173400: @ 8173400
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r5, =gSprites
-	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimBankAttacker
+	ldr r3, =gBattlerSpriteIds
+	ldr r2, =gBattleAnimAttacker
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -5733,7 +5733,7 @@ sub_817345C: @ 817345C
 _08173478:
 	movs r0, 0
 	bl GetBattlerAtPosition
-	ldr r1, =gAnimBankAttacker
+	ldr r1, =gBattleAnimAttacker
 	strb r0, [r1]
 	movs r0, 0x1
 	b _08173498
@@ -5741,12 +5741,12 @@ _08173478:
 _0817348C:
 	movs r0, 0x1
 	bl GetBattlerAtPosition
-	ldr r1, =gAnimBankAttacker
+	ldr r1, =gBattleAnimAttacker
 	strb r0, [r1]
 	movs r0, 0
 _08173498:
 	bl GetBattlerAtPosition
-	ldr r1, =gAnimBankTarget
+	ldr r1, =gBattleAnimTarget
 	strb r0, [r1]
 _081734A0:
 	adds r0, r4, 0
@@ -5812,13 +5812,13 @@ sub_817351C: @ 817351C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gAnimBankAttacker
+	ldr r3, =gBattleAnimAttacker
 	ldr r1, =gBattleSpritesDataPtr
 	ldr r2, [r1]
 	ldr r1, [r2, 0x8]
 	ldrh r1, [r1]
 	strb r1, [r3]
-	ldr r3, =gAnimBankTarget
+	ldr r3, =gBattleAnimTarget
 	ldr r1, [r2, 0x8]
 	ldrh r1, [r1]
 	lsrs r1, 8

@@ -154,9 +154,9 @@ enum
 };
 
 extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
-extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBattlersCount;
-extern u8 gHealthBoxesIds[MAX_BATTLERS_COUNT];
+extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 
 extern const u8 * const gNatureNamePointers[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
@@ -898,7 +898,7 @@ void sub_80724A8(s16 arg0, s16 arg1, u16 *arg2)
 // healthboxSpriteId_2 refers to the other part
 // there's also one other sprite that appears to be a black square? dont fully understand its role
 
-u8 CreateBankHealthboxSprites(u8 bank)
+u8 CreateHealthboxSprites(u8 bank)
 {
     s16 data6 = 0;
     u8 healthboxSpriteId_1, healthboxSpriteId_2;
@@ -1089,9 +1089,9 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        u8 healthboxSpriteId_1 = gHealthBoxesIds[i];
-        u8 healthboxSpriteId_2 = gSprites[gHealthBoxesIds[i]].oam.affineParam;
-        u8 healthboxSpriteId_3 = gSprites[gHealthBoxesIds[i]].data[5];
+        u8 healthboxSpriteId_1 = gHealthboxSpriteIds[i];
+        u8 healthboxSpriteId_2 = gSprites[gHealthboxSpriteIds[i]].oam.affineParam;
+        u8 healthboxSpriteId_3 = gSprites[gHealthboxSpriteIds[i]].data[5];
 
         gSprites[healthboxSpriteId_1].oam.priority = priority;
         gSprites[healthboxSpriteId_2].oam.priority = priority;
@@ -1099,7 +1099,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
     }
 }
 
-void SetBankHealthboxSpritePos(u8 bank)
+void InitBattlerHealthboxCoords(u8 bank)
 {
     s16 x = 0, y = 0;
 
@@ -1129,7 +1129,7 @@ void SetBankHealthboxSpritePos(u8 bank)
         }
     }
 
-    UpdateSpritePos(gHealthBoxesIds[bank], x, y);
+    UpdateSpritePos(gHealthboxSpriteIds[bank], x, y);
 }
 
 static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
@@ -1417,7 +1417,7 @@ void SwapHpBarsWithHpText(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gSprites[gHealthBoxesIds[i]].callback == SpriteCallbackDummy
+        if (gSprites[gHealthboxSpriteIds[i]].callback == SpriteCallbackDummy
          && GetBattlerSide(i) != B_SIDE_OPPONENT
          && (IsDoubleBattle() || GetBattlerSide(i) != B_SIDE_PLAYER))
         {
@@ -1434,17 +1434,17 @@ void SwapHpBarsWithHpText(void)
 
                 if (noBars == TRUE) // bars to text
                 {
-                    spriteId = gSprites[gHealthBoxesIds[i]].data[5];
+                    spriteId = gSprites[gHealthboxSpriteIds[i]].data[5];
 
                     CpuFill32(0, (void*)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32), 0x100);
-                    UpdateHpTextInHealthboxInDoubles(gHealthBoxesIds[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_HP), HP_CURRENT);
-                    UpdateHpTextInHealthboxInDoubles(gHealthBoxesIds[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_MAX_HP), HP_MAX);
+                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
+                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
                 }
                 else // text to bars
                 {
-                    UpdateStatusIconInHealthbox(gHealthBoxesIds[i]);
-                    UpdateHealthboxAttribute(gHealthBoxesIds[i], &gPlayerParty[gBattlePartyID[i]], HEALTHBOX_HEALTH_BAR);
-                    CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_117), (void*)(OBJ_VRAM0 + 0x680 + gSprites[gHealthBoxesIds[i]].oam.tileNum * 32), 32);
+                    UpdateStatusIconInHealthbox(gHealthboxSpriteIds[i]);
+                    UpdateHealthboxAttribute(gHealthboxSpriteIds[i], &gPlayerParty[gBattlerPartyIndexes[i]], HEALTHBOX_HEALTH_BAR);
+                    CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_117), (void*)(OBJ_VRAM0 + 0x680 + gSprites[gHealthboxSpriteIds[i]].oam.tileNum * 32), 32);
                 }
             }
             else
@@ -1453,26 +1453,26 @@ void SwapHpBarsWithHpText(void)
                 {
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                     {
-                        sub_80730D4(gHealthBoxesIds[i], &gEnemyParty[gBattlePartyID[i]]);
+                        sub_80730D4(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]]);
                     }
                     else
                     {
-                        spriteId = gSprites[gHealthBoxesIds[i]].data[5];
+                        spriteId = gSprites[gHealthboxSpriteIds[i]].data[5];
 
                         CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32), 0x100);
-                        UpdateHpTextInHealthboxInDoubles(gHealthBoxesIds[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_HP), HP_CURRENT);
-                        UpdateHpTextInHealthboxInDoubles(gHealthBoxesIds[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_MAX_HP), HP_MAX);
+                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
+                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
                     }
                 }
                 else // text to bars
                 {
-                    UpdateStatusIconInHealthbox(gHealthBoxesIds[i]);
-                    UpdateHealthboxAttribute(gHealthBoxesIds[i], &gEnemyParty[gBattlePartyID[i]], HEALTHBOX_HEALTH_BAR);
+                    UpdateStatusIconInHealthbox(gHealthboxSpriteIds[i]);
+                    UpdateHealthboxAttribute(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]], HEALTHBOX_HEALTH_BAR);
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-                        UpdateHealthboxAttribute(gHealthBoxesIds[i], &gEnemyParty[gBattlePartyID[i]], HEALTHBOX_NICK);
+                        UpdateHealthboxAttribute(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]], HEALTHBOX_NICK);
                 }
             }
-            gSprites[gHealthBoxesIds[i]].data[7] ^= 1;
+            gSprites[gHealthboxSpriteIds[i]].data[7] ^= 1;
         }
     }
 }
@@ -1994,7 +1994,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
     bank = gSprites[healthboxSpriteId].data[6];
     if (GetBattlerSide(bank) == B_SIDE_PLAYER)
         return;
-    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
+    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
         return;
 
     healthboxSpriteId_2 = gSprites[healthboxSpriteId].data[5];
@@ -2018,7 +2018,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     healthboxSpriteId_2 = gSprites[healthboxSpriteId].data[5];
     if (GetBattlerSide(bank) == B_SIDE_PLAYER)
     {
-        status = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_STATUS);
+        status = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_STATUS);
         if (!IsDoubleBattle())
             tileNumAdder = 0x1A;
         else
@@ -2026,7 +2026,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     }
     else
     {
-        status = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_STATUS);
+        status = GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_STATUS);
         tileNumAdder = 0x11;
     }
 
@@ -2323,7 +2323,7 @@ static void sub_8074B9C(u8 bank, u8 whichBar)
                     gBattleSpritesDataPtr->battleBars[bank].receivedValue,
                     &gBattleSpritesDataPtr->battleBars[bank].field_10,
                     array, 8);
-        level = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_LEVEL);
+        level = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_LEVEL);
         if (level == MAX_MON_LEVEL)
         {
             for (i = 0; i < 8; i++)

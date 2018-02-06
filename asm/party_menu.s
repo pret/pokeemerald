@@ -16048,7 +16048,7 @@ _081B8AFC:
 	adds r0, r5, 0
 	bl sub_81B8F38
 	lsls r0, 24
-	ldr r2, =gBattlePartyID
+	ldr r2, =gBattlerPartyIndexes
 	lsls r1, r4, 1
 	adds r1, r2
 	lsrs r0, 24
@@ -16115,7 +16115,7 @@ _081B8BA8:
 	ldr r1, =gUnknown_0203CEE8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -16150,7 +16150,7 @@ _081B8BFC:
 _081B8C20:
 	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -16230,7 +16230,7 @@ _081B8CBE:
 	movs r0, 0
 	bl GetBattlerAtPosition
 	mov r2, sp
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -16257,7 +16257,7 @@ _081B8CFC:
 	movs r0, 0
 	bl GetBattlerAtPosition
 	mov r1, sp
-	ldr r4, =gBattlePartyID
+	ldr r4, =gBattlerPartyIndexes
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -16388,7 +16388,7 @@ _081B8DF0:
 	bne _081B8E28
 	movs r3, 0x1
 	mov r2, sp
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -16412,7 +16412,7 @@ _081B8E1A:
 _081B8E28:
 	movs r3, 0x2
 	mov r1, sp
-	ldr r2, =gBattlePartyID
+	ldr r2, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r2
 	ldrh r0, [r0]

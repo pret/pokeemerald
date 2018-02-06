@@ -52,7 +52,7 @@
 void AI_CalcDmg(u8 bankAtk, u8 bankDef);
 u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility);
-u8 BankGetTurnOrder(u8 bank);
+u8 GetBattlerTurnOrderNum(u8 bank);
 void SetMoveEffect(bool8 primary, u8 certain);
 void BattleDestroyYesNoCursorAt(u8 cursorPosition);
 void BattleCreateYesNoCursorAt(u8 cursorPosition);

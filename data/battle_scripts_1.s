@@ -735,7 +735,7 @@ BattleScript_AlreadyPoisoned::
 	goto BattleScript_MoveEnd
 
 BattleScript_ImmunityProtected::
-	copybyte gEffectBank, gBattleDefender
+	copybyte gEffectBank, gBattleMoveTarget
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_PSNPrevention
 	goto BattleScript_MoveEnd
@@ -1055,7 +1055,7 @@ BattleScript_AlreadyParalyzed::
 	goto BattleScript_MoveEnd
 
 BattleScript_LimberProtected::
-	copybyte gEffectBank, gBattleDefender
+	copybyte gEffectBank, gBattleMoveTarget
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_PRLZPrevention
 	goto BattleScript_MoveEnd
@@ -1513,7 +1513,7 @@ BattleScript_EffectCurse::
 	jumpifstat ATTACKER, NOT_EQUAL, ATK, 0xC, BattleScript_CurseTrySpeed
 	jumpifstat ATTACKER, EQUAL, DEF, 0xC, BattleScript_ButItFailed
 BattleScript_CurseTrySpeed::
-	copybyte gBattleDefender, gBattleAttacker
+	copybyte gBattleMoveTarget, gBattleMoveAttacker
 	setbyte sANIM_TURN, 0x1
 	attackanimation
 	waitanimation
@@ -1534,7 +1534,7 @@ BattleScript_CurseTryDefence::
 BattleScript_CurseEnd::
 	goto BattleScript_MoveEnd
 BattleScript_GhostCurse::
-	jumpifbytenotequal gBattleAttacker, gBattleDefender, BattleScript_DoGhostCurse
+	jumpifbytenotequal gBattleMoveAttacker, gBattleMoveTarget, BattleScript_DoGhostCurse
 	getmovetarget ATTACKER
 BattleScript_DoGhostCurse::
 	attackcanceler
@@ -2217,7 +2217,7 @@ BattleScript_EffectWillOWisp::
 	goto BattleScript_MoveEnd
 
 BattleScript_WaterVeilPrevents::
-	copybyte gEffectBank, gBattleDefender
+	copybyte gEffectBank, gBattleMoveTarget
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_BRNPrevention
 	goto BattleScript_MoveEnd
@@ -2598,11 +2598,11 @@ BattleScript_EffectTeeterDance::
 	attackcanceler
 	attackstring
 	ppreduce
-	setbyte gBattleDefender, 0x0
+	setbyte gBattleMoveTarget, 0x0
 BattleScript_TeeterDanceLoop::
 	movevaluescleanup
 	setmoveeffect EFFECT_CONFUSION
-	jumpifbyteequal gBattleAttacker, gBattleDefender, BattleScript_TeeterDanceLoopIncrement
+	jumpifbyteequal gBattleMoveAttacker, gBattleMoveTarget, BattleScript_TeeterDanceLoopIncrement
 	jumpifability TARGET, ABILITY_OWN_TEMPO, BattleScript_TeeterDanceOwnTempoPrevents
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_TeeterDanceSubstitutePrevents
 	jumpifstatus2 TARGET, STATUS2_CONFUSION, BattleScript_TeeterDanceAlreadyConfused
@@ -2618,8 +2618,8 @@ BattleScript_TeeterDanceDoMoveEndIncrement::
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
 BattleScript_TeeterDanceLoopIncrement::
-	addbyte gBattleDefender, 0x1
-	jumpifbytenotequal gBattleDefender, gBattlersCount, BattleScript_TeeterDanceLoop
+	addbyte gBattleMoveTarget, 0x1
+	jumpifbytenotequal gBattleMoveTarget, gBattlersCount, BattleScript_TeeterDanceLoop
 	end
 
 BattleScript_TeeterDanceOwnTempoPrevents::
@@ -3228,7 +3228,7 @@ BattleScript_DamagingWeatherContinues::
 	playanimation2 ATTACKER, sANIM_ARG1, NULL
 	setbyte gBattleCommunication, 0x0
 BattleScript_DamagingWeatherLoop::
-	copyarraywithindex gBattleAttacker, gBattleTurnOrder, gBattleCommunication, 0x1
+	copyarraywithindex gBattleMoveAttacker, gBattleTurnOrder, gBattleCommunication, 0x1
 	weatherdamage
 	jumpifword EQUAL, gBattleMoveDamage, 0x0, BattleScript_DamagingWeatherLoopIncrement
 	printfromtable gSandStormHailDmgStringIds
@@ -3521,7 +3521,7 @@ BattleScript_RapidSpinAway::
 BattleScript_WrapFree::
 	printstring STRINGID_PKMNGOTFREE
 	waitmessage 0x40
-	copybyte gBattleDefender, sBANK
+	copybyte gBattleMoveTarget, sBANK
 	return
 
 BattleScript_LeechSeedFree::
@@ -4053,7 +4053,7 @@ BattleScript_82DB4B8::
 BattleScript_82DB4BE::
 	pause 0x20
 BattleScript_82DB4C1::
-	setbyte gBattleDefender, 0x0
+	setbyte gBattleMoveTarget, 0x0
 	setstatchanger ATK, 1, TRUE
 BattleScript_82DB4CD::
 	trygetintimidatetarget BattleScript_82DB51B
@@ -4068,7 +4068,7 @@ BattleScript_82DB4CD::
 	printstring STRINGID_PKMNCUTSATTACKWITH
 	waitmessage 0x40
 BattleScript_82DB510::
-	addbyte gBattleDefender, 0x1
+	addbyte gBattleMoveTarget, 0x1
 	goto BattleScript_82DB4CD
 BattleScript_82DB51B::
 	return

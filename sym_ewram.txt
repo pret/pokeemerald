@@ -273,13 +273,13 @@ gBattleBufferB: @ 2023864
 gActiveBattler: @ 2024064
 	.space 0x4
 
-gBattleExecBuffer: @ 2024068
+gBattleControllerExecFlags: @ 2024068
 	.space 0x4
 
 gBattlersCount: @ 202406C
 	.space 0x2
 
-gBattlePartyID: @ 202406E
+gBattlerPartyIndexes: @ 202406E
 	.space 0x8
 
 gBattlerPositions: @ 2024076
@@ -300,7 +300,7 @@ gCurrentActionFuncId: @ 2024083
 gBattleMons: @ 2024084
 	.space 0x160
 
-gBankSpriteIds: @ 20241E4
+gBattlerSpriteIds: @ 20241E4
 	.space 0x4
 
 gCurrMovePos: @ 20241E8
@@ -333,10 +333,10 @@ gLastUsedItem: @ 2024208
 gLastUsedAbility: @ 202420A
 	.space 0x1
 
-gBattleAttacker: @ 202420B
+gBattleMoveAttacker: @ 202420B
 	.space 0x1
 
-gBattleDefender: @ 202420C
+gBattleMoveTarget: @ 202420C
 	.space 0x1
 
 gBank1: @ 202420D
