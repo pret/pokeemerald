@@ -659,25 +659,6 @@ gUnknown_020375D6: @ 20375D6
 
     .include "src/event_data.o"
     .include "src/start_menu.o"
-
-gUnknown_02037619: @ 2037619
-	.space 0x1
-
-gUnknown_0203761A: @ 203761A
-	.space 0x2
-
-gUnknown_0203761C: @ 203761C
-	.space 0x4
-
-gUnknown_02037620: @ 2037620
-	.space 0x1
-
-gUnknown_02037621: @ 2037621
-	.space 0x1
-
-gUnknown_02037622: @ 2037622
-	.space 0x2
-
 	.include "src/tileset_anims.o"
 	.include "src/palette.o"
     .include "src/sound.o"
