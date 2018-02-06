@@ -89,7 +89,7 @@ u8 GetBattlerSpriteCoord(u8 bank, u8 attributeId);
 
 bool8 IsBattlerSpritePresent(u8 bank);
 void sub_80A6C68(u8 arg0);
-u8 GetBattlerSpriteId(u8 wantedBank);
+u8 GetAnimBattlerSpriteId(u8 wantedBank);
 bool8 IsDoubleBattle(void);
 u8 sub_80A6D94(void);
 u8 sub_80A8364(u8);

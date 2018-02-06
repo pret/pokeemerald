@@ -1751,7 +1751,7 @@ static void ScriptCmd_invisible(void)
 {
     u8 spriteId;
 
-    spriteId = GetBattlerSpriteId(sBattleAnimScriptPtr[1]);
+    spriteId = GetAnimBattlerSpriteId(sBattleAnimScriptPtr[1]);
     if (spriteId != 0xFF)
         gSprites[spriteId].invisible = 1;
 
@@ -1762,7 +1762,7 @@ static void ScriptCmd_visible(void)
 {
     u8 spriteId;
 
-    spriteId = GetBattlerSpriteId(sBattleAnimScriptPtr[1]);
+    spriteId = GetAnimBattlerSpriteId(sBattleAnimScriptPtr[1]);
     if (spriteId != 0xFF)
         gSprites[spriteId].invisible = 0;
 
@@ -1783,12 +1783,12 @@ static void ScriptCmd_doublebattle_2D(void)
         if (wantedBank == ANIM_ATTACKER)
         {
             r4 = sub_80A8364(gBattleAnimAttacker);
-            spriteId = GetBattlerSpriteId(ANIM_ATTACKER);
+            spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
             r4 = sub_80A8364(gBattleAnimTarget);
-            spriteId = GetBattlerSpriteId(ANIM_TARGET);
+            spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
         if (spriteId != 0xFF)
         {
@@ -1818,12 +1818,12 @@ static void ScriptCmd_doublebattle_2E(void)
         if (wantedBank == ANIM_ATTACKER)
         {
             r4 = sub_80A8364(gBattleAnimAttacker);
-            spriteId = GetBattlerSpriteId(ANIM_ATTACKER);
+            spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
             r4 = sub_80A8364(gBattleAnimTarget);
-            spriteId = GetBattlerSpriteId(ANIM_TARGET);
+            spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
 
         if (spriteId != 0xFF && r4 == 2)

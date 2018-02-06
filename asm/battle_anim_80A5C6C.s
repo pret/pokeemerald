@@ -716,8 +716,8 @@ _080A6238:
 	bx r1
 	thumb_func_end sub_80A6190
 
-	thumb_func_start GetBattlerSpriteId
-GetBattlerSpriteId: @ 80A6240
+	thumb_func_start GetAnimBattlerSpriteId
+GetAnimBattlerSpriteId: @ 80A6240
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -785,7 +785,7 @@ _080A62CA:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end GetBattlerSpriteId
+	thumb_func_end GetAnimBattlerSpriteId
 
 	thumb_func_start StoreSpriteCallbackInData6
 StoreSpriteCallbackInData6: @ 80A62D4
@@ -2889,7 +2889,7 @@ sub_80A7238: @ 80A7238
 	beq _080A7268
 	ldr r4, =gSprites
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -3858,7 +3858,7 @@ duplicate_obj_of_side_rel2move_in_transparent_mode: @ 80A79E8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -4084,7 +4084,7 @@ sub_80A7B98: @ 80A7B98
 	lsrs r4, r0, 24
 	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -6101,7 +6101,7 @@ sub_80A8BC4: @ 80A8BC4
 	ldr r0, =gTasks
 	adds r5, r1, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0

@@ -1434,7 +1434,7 @@ sub_80FF3B0: @ 80FF3B0
 	ands r0, r1
 	strb r0, [r2]
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	movs r0, 0x80
 	lsls r0, 1
 	strh r0, [r4, 0x2E]
@@ -1452,7 +1452,7 @@ sub_80FF3EC: @ 80FF3EC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -1517,7 +1517,7 @@ sub_80FF458: @ 80FF458
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r0, =gSprites
@@ -1567,7 +1567,7 @@ _080FF498:
 	orrs r0, r1
 	strb r0, [r7, 0x5]
 	movs r0, 0x3
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r4, r1, 4
@@ -1618,7 +1618,7 @@ sub_80FF53C: @ 80FF53C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r6, r0, 0
@@ -1698,7 +1698,7 @@ sub_80FF5CC: @ 80FF5CC
 	cmp r5, 0
 	bne _080FF674
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1723,7 +1723,7 @@ sub_80FF5CC: @ 80FF5CC
 	orrs r0, r2
 	strb r0, [r1, 0x5]
 	movs r0, 0x3
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -3867,7 +3867,7 @@ _08100700:
 	adds r0, r7
 	strh r0, [r4, 0x22]
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 _0810071A:
 	adds r0, r6, 0
 	bl sub_80A8328
@@ -8237,7 +8237,7 @@ sub_81029B4: @ 81029B4
 	ldr r1, =gTasks
 	adds r6, r0, r1
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x8]
@@ -11678,7 +11678,7 @@ sub_81045B0: @ 81045B0
 	lsls r5, 24
 	lsrs r5, 24
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -11735,7 +11735,7 @@ sub_8104614: @ 8104614
 	cmp r1, r0
 	bne _08104664
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -11771,7 +11771,7 @@ sub_8104674: @ 8104674
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -12129,7 +12129,7 @@ sub_8104938: @ 8104938
 	.pool
 _08104964:
 	ldrb r0, [r5]
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12303,7 +12303,7 @@ sub_8104AB4: @ 8104AB4
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12476,7 +12476,7 @@ sub_8104C38: @ 8104C38
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12528,7 +12528,7 @@ sub_8104CA4: @ 8104CA4
 	ldr r0, =gTasks
 	adds r4, r1, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0
@@ -13873,7 +13873,7 @@ sub_810577C: @ 810577C
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -13968,7 +13968,7 @@ _08105850:
 _08105856:
 	strh r0, [r4, 0x24]
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -14154,7 +14154,7 @@ sub_810599C: @ 810599C
 	movs r0, 0x2
 	strh r0, [r4, 0x24]
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -14939,7 +14939,7 @@ sub_8106020: @ 8106020
 	lsrs r0, 24
 	adds r6, r0, 0
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, =gTasks
@@ -14955,7 +14955,7 @@ sub_8106020: @ 8106020
 	cmp r0, 0x1
 	bne _0810607C
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -15004,7 +15004,7 @@ sub_81060B0: @ 81060B0
 	lsrs r0, 24
 	adds r6, r0, 0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, =gTasks
@@ -15020,7 +15020,7 @@ sub_81060B0: @ 81060B0
 	cmp r0, 0x1
 	bne _0810610C
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16593,7 +16593,7 @@ sub_8106D90: @ 8106D90
 	lsrs r5, 24
 	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -18963,7 +18963,7 @@ sub_81080E4: @ 81080E4
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -21389,7 +21389,7 @@ sub_8109460: @ 8109460
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -22600,12 +22600,12 @@ _08109DE2:
 	adds r0, 0x1
 	strh r0, [r4, 0x22]
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
 	movs r0, 0x3
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -24532,7 +24532,7 @@ sub_810AD98: @ 810AD98
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
@@ -24641,7 +24641,7 @@ _0810AE8E:
 	b _0810AFC0
 _0810AE90:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
@@ -27505,7 +27505,7 @@ _0810C594:
 	cmp r0, 0
 	bne _0810C5F0
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -30867,7 +30867,7 @@ sub_810E13C: @ 810E13C
 	ldr r0, =sub_810E184
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -31021,7 +31021,7 @@ _0810E274:
 	ble _0810E2BC
 _0810E296:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -32289,7 +32289,7 @@ _0810EC46:
 	movs r1, 0x1
 	bl sub_80A69CC
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -32379,7 +32379,7 @@ _0810ECE0:
 	cmp r0, r1
 	bge _0810ED1E
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -32416,7 +32416,7 @@ sub_810ED28: @ 810ED28
 	ldr r0, =sub_810ED70
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -32989,7 +32989,7 @@ sub_810F184: @ 810F184
 	cmp r0, 0
 	bne _0810F1BC
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -33005,7 +33005,7 @@ sub_810F184: @ 810F184
 	.pool
 _0810F1BC:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -33774,7 +33774,7 @@ sub_810F7D4: @ 810F7D4
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -33824,7 +33824,7 @@ sub_810F83C: @ 810F83C
 	ldr r0, =gTasks
 	adds r4, r1, r0
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -34891,7 +34891,7 @@ _08110094:
 	bl CalcCenterToCornerVec
 	ldr r1, =gBattleAnimArgs
 	ldrb r0, [r1]
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x22]
@@ -36732,7 +36732,7 @@ _0811101E:
 	strh r0, [r6, 0x24]
 	strh r5, [r6, 0xA]
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
@@ -37770,7 +37770,7 @@ sub_811188C: @ 811188C
 	movs r0, 0x52
 	bl SetGpuReg
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -37881,7 +37881,7 @@ sub_811196C: @ 811196C
 	.pool
 _08111994:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldrh r0, [r4, 0x8]
@@ -38626,7 +38626,7 @@ _08111F0C:
 	movs r0, 0x10
 	strh r0, [r5, 0xE]
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -38888,7 +38888,7 @@ _081121AE:
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0x1
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
@@ -42979,7 +42979,7 @@ sub_8114374: @ 8114374
 _0811438A:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -43295,7 +43295,7 @@ _08114650:
 	lsrs r5, r0, 16
 _0811465C:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -43421,7 +43421,7 @@ _08114776:
 	cmp r0, 0x2
 	bne _08114824
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gSprites
@@ -43562,7 +43562,7 @@ _081148C4:
 	.4byte _081148FC
 _081148E4:
 	ldrb r0, [r2]
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	b _08114902
@@ -44092,7 +44092,7 @@ _08114D28:
 	.4byte _08114E8C
 _08114D3C:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -44272,7 +44272,7 @@ sub_8114EB4: @ 8114EB4
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -44361,7 +44361,7 @@ sub_8114F54: @ 8114F54
 	.pool
 _08114F78:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -44438,7 +44438,7 @@ _08115004:
 	.4byte _081150D4
 _08115018:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -44846,7 +44846,7 @@ _08115370:
 	.pool
 _08115380:
 	ldrb r0, [r6]
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1A]
@@ -47048,7 +47048,7 @@ sub_81164F0: @ 81164F0
 	adds r4, r0, 0
 	ldr r5, =gBattleAnimArgs
 	ldrb r0, [r5]
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
@@ -47965,7 +47965,7 @@ _08116CA0:
 	lsrs r5, r0, 16
 _08116CAC:
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -48119,7 +48119,7 @@ _08116DF6:
 	movs r1, 0
 	bl SetGpuReg
 	movs r0, 0
-	bl GetBattlerSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r4, =gSprites
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
