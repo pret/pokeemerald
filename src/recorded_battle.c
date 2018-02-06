@@ -25,11 +25,11 @@ extern u32 gBattleTypeFlags;
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
 extern u16 gPartnerTrainerId;
-extern u8 gActiveBank;
-extern u8 gBattleBanksCount;
-extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
-extern u16 gChosenMovesByBanks[BATTLE_BANKS_COUNT];
+extern u8 gActiveBattler;
+extern u8 gBattlersCount;
+extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
+extern u16 gChosenMovesByBanks[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_03001278;
 extern u8 gUnknown_03001279;
 
@@ -52,13 +52,13 @@ struct RecordedBattleSave
 {
     struct Pokemon playerParty[PARTY_SIZE];
     struct Pokemon opponentParty[PARTY_SIZE];
-    u8 playersName[BATTLE_BANKS_COUNT][PLAYER_NAME_LENGTH];
-    u8 playersGender[BATTLE_BANKS_COUNT];
-    u32 playersTrainerId[BATTLE_BANKS_COUNT];
-    u8 playersLanguage[BATTLE_BANKS_COUNT];
+    u8 playersName[MAX_BATTLERS_COUNT][PLAYER_NAME_LENGTH];
+    u8 playersGender[MAX_BATTLERS_COUNT];
+    u32 playersTrainerId[MAX_BATTLERS_COUNT];
+    u8 playersLanguage[MAX_BATTLERS_COUNT];
     u32 rngSeed;
     u32 battleFlags;
-    u8 playersBank[BATTLE_BANKS_COUNT];
+    u8 playersBank[MAX_BATTLERS_COUNT];
     u16 opponentA;
     u16 opponentB;
     u16 partnerId;
@@ -75,14 +75,14 @@ struct RecordedBattleSave
     u16 field_50E[6];
     u8 field_51A;
     u8 field_51B;
-    u8 battleRecord[BATTLE_BANKS_COUNT][BANK_RECORD_SIZE];
+    u8 battleRecord[MAX_BATTLERS_COUNT][BANK_RECORD_SIZE];
     u32 checksum;
 };
 
 EWRAM_DATA u32 gRecordedBattleRngSeed = 0;
 EWRAM_DATA u32 gBattlePalaceMoveSelectionRngValue = 0;
-EWRAM_DATA static u8 sBattleRecords[BATTLE_BANKS_COUNT][BANK_RECORD_SIZE] = {0};
-EWRAM_DATA static u16 sRecordedBytesNo[BATTLE_BANKS_COUNT] = {0};
+EWRAM_DATA static u8 sBattleRecords[MAX_BATTLERS_COUNT][BANK_RECORD_SIZE] = {0};
+EWRAM_DATA static u16 sRecordedBytesNo[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sUnknown_0203C79C[4] = {0};
 EWRAM_DATA static u16 sUnknown_0203C7A4[4] = {0};
 EWRAM_DATA static u8 sUnknown_0203C7AC = 0;
@@ -99,7 +99,7 @@ EWRAM_DATA static u32 sRecordedBattle_AI_Scripts = 0;
 EWRAM_DATA static struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
 EWRAM_DATA static u16 sRecordedBattle_PlayerMonMoves[2][4] = {0};
-EWRAM_DATA static struct PlayerInfo sRecordedBattle_Players[BATTLE_BANKS_COUNT] = {0};
+EWRAM_DATA static struct PlayerInfo sRecordedBattle_Players[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sUnknown_0203CCD0 = 0;
 EWRAM_DATA static u8 sUnknown_0203CCD1[8] = {0};
 EWRAM_DATA static u8 sUnknown_0203CCD9 = 0;
@@ -123,7 +123,7 @@ void sub_8184DA4(u8 arg0)
     sUnknown_0203C7AC = arg0;
     sUnknown_0203CCD0 = 0;
 
-    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         sRecordedBytesNo[i] = 0;
         sUnknown_0203C79C[i] = 0;
@@ -164,7 +164,7 @@ void sub_8184E58(void)
         gUnknown_0203C7B4 = GetMultiplayerId();
         linkPlayersCount = GetLinkPlayerCount();
 
-        for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             sRecordedBattle_Players[i].trainerId = gLinkPlayers[i].trainerId;
             sRecordedBattle_Players[i].gender = gLinkPlayers[i].gender;
@@ -248,7 +248,7 @@ u8 sub_81850DC(u8 *arg0)
     u8 i, j;
     u8 ret = 0;
 
-    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (sRecordedBytesNo[i] != sUnknown_0203C79C[i])
         {
@@ -350,7 +350,7 @@ u32 MoveRecordedBattleToSaveData(void)
         battleSave->opponentParty[i] = sSavedOpponentParty[i];
     }
 
-    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         for (j = 0; j < PLAYER_NAME_LENGTH; j++)
         {
@@ -1339,7 +1339,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
         gEnemyParty[i] = src->opponentParty[i];
     }
 
-    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         for (var = FALSE, j = 0; j < PLAYER_NAME_LENGTH; j++)
         {
@@ -1386,7 +1386,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
 
     gSaveBlock2Ptr->frontierChosenLvl = src->field_4FC;
 
-    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         for (j = 0; j < BANK_RECORD_SIZE; j++)
         {
@@ -1462,7 +1462,7 @@ u8 GetActiveBankLinkPlayerGender(void)
 
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
-        if (gLinkPlayers[i].lp_field_18 == gActiveBank)
+        if (gLinkPlayers[i].lp_field_18 == gActiveBattler)
             break;
     }
 
@@ -1501,7 +1501,7 @@ void RecordedBattle_CopyBankMoves(void)
 {
     s32 i;
 
-    if (GetBankSide(gActiveBank) == SIDE_OPPONENT)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
         return;
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
         return;
@@ -1510,7 +1510,7 @@ void RecordedBattle_CopyBankMoves(void)
 
     for (i = 0; i < 4; i++)
     {
-        sRecordedBattle_PlayerMonMoves[gActiveBank / 2][i] = gBattleMons[gActiveBank].moves[i];
+        sRecordedBattle_PlayerMonMoves[gActiveBattler / 2][i] = gBattleMons[gActiveBattler].moves[i];
     }
 }
 
@@ -1523,9 +1523,9 @@ void sub_818603C(u8 arg0)
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
         return;
 
-    for (bank = 0; bank < gBattleBanksCount; bank++)
+    for (bank = 0; bank < gBattlersCount; bank++)
     {
-        if (GetBankSide(bank) != SIDE_OPPONENT) // player's side only
+        if (GetBattlerSide(bank) != B_SIDE_OPPONENT) // player's side only
         {
             if (arg0 == 1)
             {

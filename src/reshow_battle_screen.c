@@ -22,14 +22,14 @@ extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 extern u8 gReservedSpritePaletteCount;
-extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
+extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gBankInMenu;
-extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern u8 gBattleBanksCount;
+extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern u8 gBattlersCount;
 extern u32 gBattleTypeFlags;
-extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
-extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
-extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
+extern u8 gBankSpriteIds[MAX_BATTLERS_COUNT];
+extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
+extern u8 gHealthBoxesIds[MAX_BATTLERS_COUNT];
 extern struct SpriteTemplate gUnknown_0202499C;
 
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
@@ -164,13 +164,13 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             LoadAndCreateEnemyShadowSprites();
 
-            opponentBank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
+            opponentBank = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
             SetBankEnemyShadowSpriteCallback(opponentBank, species);
 
             if (IsDoubleBattle())
             {
-                opponentBank = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
+                opponentBank = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
                 species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
                 SetBankEnemyShadowSpriteCallback(opponentBank, species);
             }
@@ -210,9 +210,9 @@ static void sub_80A95F4(void)
 
 static bool8 LoadBankSpriteGfx(u8 bank)
 {
-    if (bank < gBattleBanksCount)
+    if (bank < gBattlersCount)
     {
-        if (GetBankSide(bank) != SIDE_PLAYER)
+        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
         {
             if (!gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
                 BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlePartyID[bank]], bank);
@@ -245,7 +245,7 @@ extern const struct MonCoords gTrainerBackPicCoords[];
 
 static void CreateBankSprite(u8 bank)
 {
-    if (bank < gBattleBanksCount)
+    if (bank < gBattlersCount)
     {
         u8 posY;
 
@@ -254,12 +254,12 @@ static void CreateBankSprite(u8 bank)
         else
             posY = GetBankSpriteDefault_Y(bank);
 
-        if (GetBankSide(bank) != SIDE_PLAYER)
+        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
         {
             if (GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
                 return;
 
-            sub_806A068(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankPosition(bank));
+            sub_806A068(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
             gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, GetBankCoord(bank, 2), posY, sub_80A82E4(bank));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
@@ -272,7 +272,7 @@ static void CreateBankSprite(u8 bank)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
         {
-            sub_806A12C(gSaveBlock2Ptr->playerGender, GetBankPosition(B_POSITION_PLAYER_LEFT));
+            sub_806A12C(gSaveBlock2Ptr->playerGender, GetBattlerPosition(B_POSITION_PLAYER_LEFT));
             gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, 0x50,
                                                 (8 - gTrainerBackPicCoords[gSaveBlock2Ptr->playerGender].coords) * 4 + 80,
                                                  sub_80A82E4(0));
@@ -282,7 +282,7 @@ static void CreateBankSprite(u8 bank)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
         {
-            sub_806A12C(BACK_PIC_WALLY, GetBankPosition(0));
+            sub_806A12C(BACK_PIC_WALLY, GetBattlerPosition(0));
             gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, 0x50,
                                                 (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords) * 4 + 80,
                                                  sub_80A82E4(0));
@@ -295,7 +295,7 @@ static void CreateBankSprite(u8 bank)
             if (GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
                 return;
 
-            sub_806A068(GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankPosition(bank));
+            sub_806A068(GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
             gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, GetBankCoord(bank, 2), posY, sub_80A82E4(bank));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
@@ -313,7 +313,7 @@ static void CreateBankSprite(u8 bank)
 
 static void CreateHealthboxSprite(u8 bank)
 {
-    if (bank < gBattleBanksCount)
+    if (bank < gBattlersCount)
     {
         u8 healthboxSpriteId;
 
@@ -328,19 +328,19 @@ static void CreateHealthboxSprite(u8 bank)
         SetBankHealthboxSpritePos(bank);
         SetHealthboxSpriteVisible(healthboxSpriteId);
 
-        if (GetBankSide(bank) != SIDE_PLAYER)
+        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
             UpdateHealthboxAttribute(gHealthBoxesIds[bank], &gEnemyParty[gBattlePartyID[bank]], HEALTHBOX_ALL);
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             UpdateHealthboxAttribute(gHealthBoxesIds[bank], &gPlayerParty[gBattlePartyID[bank]], HEALTHBOX_SAFARI_ALL_TEXT);
         else
             UpdateHealthboxAttribute(gHealthBoxesIds[bank], &gPlayerParty[gBattlePartyID[bank]], HEALTHBOX_ALL);
 
-        if (GetBankPosition(bank) == B_POSITION_OPPONENT_RIGHT || GetBankPosition(bank) == B_POSITION_PLAYER_RIGHT)
+        if (GetBattlerPosition(bank) == B_POSITION_OPPONENT_RIGHT || GetBattlerPosition(bank) == B_POSITION_PLAYER_RIGHT)
             DummyBattleInterfaceFunc(gHealthBoxesIds[bank], TRUE);
         else
             DummyBattleInterfaceFunc(gHealthBoxesIds[bank], FALSE);
 
-        if (GetBankSide(bank) != SIDE_PLAYER)
+        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
         {
             if (GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
                 SetHealthboxSpriteInvisible(healthboxSpriteId);

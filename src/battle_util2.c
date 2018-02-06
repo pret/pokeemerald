@@ -8,12 +8,12 @@
 #include "random.h"
 #include "battle_scripts.h"
 
-extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
-extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
+extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
+extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203CF00[];
 extern const u8 *gBattlescriptCurrInstr;
 extern u8 gBattleCommunication[];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 
 extern void sub_81D55D0(void);
 extern void sub_81D5694(void);
@@ -87,15 +87,15 @@ void AdjustFriendshipOnBattleFaint(u8 bank)
     {
         u8 opposingBank2;
 
-        opposingBank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
-        opposingBank2 = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
+        opposingBank = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        opposingBank2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
 
         if (gBattleMons[opposingBank2].level > gBattleMons[opposingBank].level)
             opposingBank = opposingBank2;
     }
     else
     {
-        opposingBank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
+        opposingBank = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
     }
 
     if (gBattleMons[opposingBank].level > gBattleMons[bank].level)
@@ -113,7 +113,7 @@ void AdjustFriendshipOnBattleFaint(u8 bank)
 
 void sub_80571DC(u8 bank, u8 arg1)
 {
-    if (GetBankSide(bank) != SIDE_OPPONENT)
+    if (GetBattlerSide(bank) != B_SIDE_OPPONENT)
     {
         s32 i;
 
@@ -206,9 +206,9 @@ u32 sub_805725C(u8 bank)
 
     if (effect == 2)
     {
-        gActiveBank = bank;
-        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
-        MarkBufferBankForExecution(gActiveBank);
+        gActiveBattler = bank;
+        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+        MarkBufferBankForExecution(gActiveBattler);
     }
 
     return effect;

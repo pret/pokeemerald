@@ -40,7 +40,7 @@ _080A5C9C:
 _080A5CB0:
 	ldr r4, =gUnknown_08525F58
 	adds r0, r5, 0
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 22
 	ldr r1, =gBattleTypeFlags
@@ -56,7 +56,7 @@ _080A5CB0:
 _080A5CD8:
 	ldr r4, =gUnknown_08525F58
 	adds r0, r5, 0
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 22
 	ldr r1, =gBattleTypeFlags
@@ -90,7 +90,7 @@ _080A5D24:
 	b _080A5D9A
 _080A5D28:
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5D60
@@ -164,7 +164,7 @@ sub_80A5DB8: @ 80A5DB8
 	lsls r1, 16
 	lsrs r5, r1, 16
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5DDA
@@ -394,7 +394,7 @@ sub_80A5FA0: @ 80A5FA0
 	adds r7, r4, 0
 	movs r5, 0
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -445,7 +445,7 @@ sub_80A600C: @ 80A600C
 	lsls r2, 24
 	lsrs r7, r2, 24
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6030
@@ -476,7 +476,7 @@ _080A603E:
 	lsrs r4, r0, 16
 _080A605C:
 	adds r0, r6, 0
-	bl GetBankPosition
+	bl GetBattlerPosition
 	ldr r3, =gUnknown_08525F58
 	lsls r0, 24
 	lsrs r0, 22
@@ -494,7 +494,7 @@ _080A605C:
 	cmp r7, 0
 	beq _080A609C
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A6096
@@ -605,7 +605,7 @@ GetSubstituteSpriteDefault_Y: @ 80A614C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6170
@@ -650,7 +650,7 @@ sub_80A6190: @ 80A6190
 	cmp r0, 0
 	bne _080A6238
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A61E4
@@ -699,7 +699,7 @@ _080A621C:
 	ldrh r4, [r1, 0x2]
 _080A621E:
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6238
@@ -1596,7 +1596,7 @@ sub_80A6864: @ 80A6864
 	.pool
 _080A68A4:
 	ldrb r0, [r7]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A68BC
@@ -1806,41 +1806,41 @@ _080A6A04:
 	.pool
 	thumb_func_end sub_80A69CC
 
-	thumb_func_start GetBankSide
-GetBankSide: @ 80A6A30
+	thumb_func_start GetBattlerSide
+GetBattlerSide: @ 80A6A30
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gBankPositions
+	ldr r1, =gBattlerPositions
 	adds r0, r1
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
 	bx lr
 	.pool
-	thumb_func_end GetBankSide
+	thumb_func_end GetBattlerSide
 
-	thumb_func_start GetBankPosition
-GetBankPosition: @ 80A6A44
+	thumb_func_start GetBattlerPosition
+GetBattlerPosition: @ 80A6A44
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gBankPositions
+	ldr r1, =gBattlerPositions
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end GetBankPosition
+	thumb_func_end GetBattlerPosition
 
-	thumb_func_start GetBankByPosition
-GetBankByPosition: @ 80A6A54
+	thumb_func_start GetBattlerAtPosition
+GetBattlerAtPosition: @ 80A6A54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r1, 0
-	ldr r0, =gBattleBanksCount
+	ldr r0, =gBattlersCount
 	ldrb r2, [r0]
 	cmp r1, r2
 	bcs _080A6A7E
-	ldr r4, =gBankPositions
+	ldr r4, =gBattlerPositions
 	ldrb r0, [r4]
 	cmp r0, r3
 	beq _080A6A7E
@@ -1860,7 +1860,7 @@ _080A6A7E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end GetBankByPosition
+	thumb_func_end GetBattlerAtPosition
 
 	thumb_func_start IsBankSpritePresent
 IsBankSpritePresent: @ 80A6A90
@@ -1883,13 +1883,13 @@ IsBankSpritePresent: @ 80A6A90
 	b _080A6B18
 	.pool
 _080A6ABC:
-	ldr r0, =gBankPositions
+	ldr r0, =gBattlerPositions
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	beq _080A6B18
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6AF0
@@ -3496,7 +3496,7 @@ _080A76F2:
 	cmp r5, 0
 	beq _080A771A
 	movs r0, 0
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsAnimBankSpriteVisible
@@ -3504,7 +3504,7 @@ _080A76F2:
 	cmp r0, 0
 	beq _080A771A
 	movs r0, 0
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -3514,7 +3514,7 @@ _080A771A:
 	cmp r6, 0
 	beq _080A7746
 	movs r0, 0x2
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsAnimBankSpriteVisible
@@ -3522,7 +3522,7 @@ _080A771A:
 	cmp r0, 0
 	beq _080A7746
 	movs r0, 0x2
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3534,7 +3534,7 @@ _080A7746:
 	cmp r7, 0
 	beq _080A7772
 	movs r0, 0x1
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsAnimBankSpriteVisible
@@ -3542,7 +3542,7 @@ _080A7746:
 	cmp r0, 0
 	beq _080A7772
 	movs r0, 0x1
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3555,7 +3555,7 @@ _080A7772:
 	cmp r0, 0
 	beq _080A77A0
 	movs r0, 0x3
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsAnimBankSpriteVisible
@@ -3563,7 +3563,7 @@ _080A7772:
 	cmp r0, 0
 	beq _080A77A0
 	movs r0, 0x3
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3592,7 +3592,7 @@ sub_80A77B4: @ 80A77B4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPosition
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -3672,7 +3672,7 @@ _080A7842:
 	bl sub_80A69CC
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A785C
@@ -3718,7 +3718,7 @@ sub_80A78AC: @ 80A78AC
 	bl sub_80A69CC
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A78CC
@@ -3811,7 +3811,7 @@ _080A7976:
 	ldrb r6, [r0]
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A798E
@@ -4567,7 +4567,7 @@ _080A7F42:
 _080A7F78:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7FD8
@@ -4959,7 +4959,7 @@ _080A825C:
 sub_80A8278: @ 80A8278
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r0, =gBattleBanksCount
+	ldr r0, =gBattlersCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bge _080A82D2
@@ -4998,7 +4998,7 @@ _080A8286:
 	strb r2, [r0, 0x5]
 _080A82C8:
 	adds r5, 0x1
-	ldr r0, =gBattleBanksCount
+	ldr r0, =gBattlersCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _080A8286
@@ -5027,7 +5027,7 @@ _080A82FC:
 	b _080A8320
 _080A8300:
 	adds r0, r4, 0
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1E
@@ -5053,7 +5053,7 @@ sub_80A8328: @ 80A8328
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl IsContest
@@ -5093,7 +5093,7 @@ sub_80A8364: @ 80A8364
 	cmp r0, 0
 	bne _080A838A
 	adds r0, r4, 0
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -5486,7 +5486,7 @@ _080A86AC:
 	.pool
 _080A86C4:
 	mov r0, r8
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A8790
@@ -5943,7 +5943,7 @@ sub_80A8A6C: @ 80A8A6C
 	bl sub_80A6838
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8AAC
@@ -6000,7 +6000,7 @@ sub_80A8AEC: @ 80A8AEC
 	adds r4, r0, 0
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8B1C
@@ -6056,7 +6056,7 @@ sub_80A8B64: @ 80A8B64
 	bl sub_80A6838
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8B90
@@ -6108,7 +6108,7 @@ sub_80A8BC4: @ 80A8BC4
 	strh r0, [r5, 0x8]
 	ldr r7, =gAnimBankAttacker
 	ldrb r0, [r7]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r1, 0x8
 	cmp r0, 0
@@ -6403,7 +6403,7 @@ sub_80A8E30: @ 80A8E30
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A8E68
@@ -6489,7 +6489,7 @@ sub_80A8EE4: @ 80A8EE4
 	strh r0, [r4, 0x36]
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A8F24

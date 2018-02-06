@@ -11,46 +11,45 @@
 #include "battle_bg.h"
 
 /*
- * Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
  * A battler may be in one of four positions on the field. The first bit determines
  * what side the battler is on, either the player's side or the opponent's side.
  * The second bit determines whether the pokemon is on the left or right of the
  * given side. Note that the opponent's mons are drawn opposite because the position
- * numbers correspond to their perspective. The bank number is usually the same
+ * numbers correspond to their perspective. The battler number is usually the same
  * as the position, except in the case of link battles.
  *
- *   +---------------------- +
- *   |       Opponent's side:|
- *   |          3       1    |
- *   |                       |
- *   |                       |
- *   |Player's side:         |
- *   |    0       2          |
- *   ------------------------+
- *   |                       |
- *   |                       |
- *   +-----------------------+
+ *   + ------------------------- +
+ *   |          Opponent's side  |
+ *   |              3       1    |
+ *   |                           |
+ *   |                           |
+ *   | Player's side             |
+ *   |   0       2               |
+ *   ----------------------------+
+ *   |                           |
+ *   |                           |
+ *   +---------------------------+
  */
 
-#define BATTLE_BANKS_COUNT  4
+#define MAX_BATTLERS_COUNT  4
 
 #define B_POSITION_PLAYER_LEFT        0
 #define B_POSITION_OPPONENT_LEFT      1
 #define B_POSITION_PLAYER_RIGHT       2
 #define B_POSITION_OPPONENT_RIGHT     3
 
-#define B_POSITION_PARTNER(position) ((position) ^ 2)
+#define B_POSITION_PARTNER(position)  ((position) ^ 2)
 #define B_POSITION_OPPOSITE(position) ((position) ^ 1)
 
-#define SIDE_PLAYER     0x0
-#define SIDE_OPPONENT   0x1
+#define B_SIDE_PLAYER     0
+#define B_SIDE_OPPONENT   1
 
-#define BIT_SIDE        0x1
-#define BIT_MON         0x2
+#define BIT_SIDE        1
+#define BIT_FLANK       2
 
-#define GET_BANK_POSITION(bank)     (gBankPositions[bank])
-#define GET_BANK_SIDE(bank)         (GetBankPosition(bank) & BIT_SIDE)
-#define GET_BANK_SIDE2(bank)        (GET_BANK_POSITION(bank) & BIT_SIDE)
+#define GET_BATTLER_POSITION(battler)     (gBattlerPositions[battler])
+#define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
+#define GET_BATTLER_SIDE2(battler)        (GET_BATTLER_POSITION(battler) & BIT_SIDE)
 
 // Battle Type Flags
 
@@ -133,8 +132,8 @@ extern u8 gBattleOutcome;
 #define STATUS2_LOCK_CONFUSE          0x00000C00
 #define STATUS2_MULTIPLETURNS         0x00001000
 #define STATUS2_WRAPPED               0x0000E000
-#define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every bank
-#define STATUS2_INFATUATED_WITH(bank) (gBitTable[bank] << 16)
+#define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every battler
+#define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
 #define STATUS2_FOCUS_ENERGY          0x00100000
 #define STATUS2_TRANSFORMED           0x00200000
 #define STATUS2_RECHARGE              0x00400000
@@ -148,7 +147,7 @@ extern u8 gBattleOutcome;
 #define STATUS2_DEFENSE_CURL          0x40000000
 #define STATUS2_TORMENT               0x80000000
 
-// Seems like per-bank statuses. Not quite sure how to categorize these
+// Seems like per-battler statuses. Not quite sure how to categorize these
 #define STATUS3_LEECHSEED_BANK          0x3
 #define STATUS3_LEECHSEED               0x4
 #define STATUS3_ALWAYS_HITS             0x18    // two bits
@@ -169,7 +168,7 @@ extern u8 gBattleOutcome;
 #define STATUS3_TRACE                   0x100000
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
-extern u32 gStatuses3[BATTLE_BANKS_COUNT];
+extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 
 //
 
@@ -197,8 +196,8 @@ extern u32 gStatuses3[BATTLE_BANKS_COUNT];
 #define HITMARKER_OBEYS                 0x02000000
 #define HITMARKER_x4000000              0x04000000
 #define HITMARKER_x8000000              0x08000000
-#define HITMARKER_FAINTED(bank)         (gBitTable[bank] << 0x1C)
-#define HITMARKER_UNK(bank)             (0x10000000 << bank)
+#define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 0x1C)
+#define HITMARKER_UNK(battler)          (0x10000000 << battler)
 
 extern u32 gHitMarker;
 
@@ -339,7 +338,7 @@ struct TrainerMonNoItemDefaultMoves
     u16 species;
 };
 
-u8 GetBankSide(u8 bank);
+u8 GetBattlerSide(u8 battler);
 
 struct TrainerMonItemDefaultMoves
 {
@@ -434,7 +433,7 @@ struct DisableStruct
     /*0x1A*/ u8 unk1A[2];
 };
 
-extern struct DisableStruct gDisableStructs[BATTLE_BANKS_COUNT];
+extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 
 struct ProtectStruct
 {
@@ -474,7 +473,7 @@ struct ProtectStruct
     /* field_E */ u16 fieldE;
 };
 
-extern struct ProtectStruct gProtectStructs[BATTLE_BANKS_COUNT];
+extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
 
 struct SpecialStatus
 {
@@ -496,7 +495,7 @@ struct SpecialStatus
     u8 field13;
 };
 
-extern struct SpecialStatus gSpecialStatuses[BATTLE_BANKS_COUNT];
+extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 
 struct SideTimer
 {
@@ -518,12 +517,12 @@ extern struct SideTimer gSideTimers[];
 
 struct WishFutureKnock
 {
-    u8 futureSightCounter[BATTLE_BANKS_COUNT];
-    u8 futureSightAttacker[BATTLE_BANKS_COUNT];
-    s32 futureSightDmg[BATTLE_BANKS_COUNT];
-    u16 futureSightMove[BATTLE_BANKS_COUNT];
-    u8 wishCounter[BATTLE_BANKS_COUNT];
-    u8 wishUserID[BATTLE_BANKS_COUNT];
+    u8 futureSightCounter[MAX_BATTLERS_COUNT];
+    u8 futureSightAttacker[MAX_BATTLERS_COUNT];
+    s32 futureSightDmg[MAX_BATTLERS_COUNT];
+    u16 futureSightMove[MAX_BATTLERS_COUNT];
+    u8 wishCounter[MAX_BATTLERS_COUNT];
+    u8 wishUserID[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
     u8 knockedOffPokes[2];
 };
@@ -546,16 +545,16 @@ struct AI_ThinkingStruct
 
 struct UsedMoves
 {
-    u16 moves[BATTLE_BANKS_COUNT];
-    u16 unknown[BATTLE_BANKS_COUNT];
+    u16 moves[MAX_BATTLERS_COUNT];
+    u16 unknown[MAX_BATTLERS_COUNT];
 };
 
 struct BattleHistory
 {
-    struct UsedMoves usedMoves[BATTLE_BANKS_COUNT];
-    u8 abilities[BATTLE_BANKS_COUNT];
-    u8 itemEffects[BATTLE_BANKS_COUNT];
-    u16 trainerItems[BATTLE_BANKS_COUNT];
+    struct UsedMoves usedMoves[MAX_BATTLERS_COUNT];
+    u8 abilities[MAX_BATTLERS_COUNT];
+    u8 itemEffects[MAX_BATTLERS_COUNT];
+    u16 trainerItems[MAX_BATTLERS_COUNT];
     u8 itemsNo;
 };
 
@@ -661,9 +660,9 @@ struct BattleStruct
     u16 expValue;
     u8 field_52;
     u8 sentInPokes;
-    bool8 selectionScriptFinished[BATTLE_BANKS_COUNT];
+    bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
     u8 field_58[4];
-    u8 monToSwitchIntoId[BATTLE_BANKS_COUNT];
+    u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 field_60[4][3];
     u8 runTries;
     u8 caughtMonNick[11];
@@ -675,8 +674,8 @@ struct BattleStruct
     u8 field_7D;
     u8 field_7E;
     u8 formToChangeInto;
-    u8 chosenMovePositions[BATTLE_BANKS_COUNT];
-    u8 stateIdAfterSelScript[BATTLE_BANKS_COUNT];
+    u8 chosenMovePositions[MAX_BATTLERS_COUNT];
+    u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 field_88;
     u8 field_89;
     u8 field_8A;
@@ -709,12 +708,12 @@ struct BattleStruct
     u8 synchronizeMoveEffect;
     u8 field_B3;
     void (*savedCallback)(void);
-    u16 usedHeldItems[BATTLE_BANKS_COUNT];
+    u16 usedHeldItems[MAX_BATTLERS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
     u8 AI_itemType[2];
     u8 AI_itemFlags[2];
-    u16 choicedMove[BATTLE_BANKS_COUNT];
-    u16 changedItems[BATTLE_BANKS_COUNT];
+    u16 choicedMove[MAX_BATTLERS_COUNT];
+    u16 changedItems[MAX_BATTLERS_COUNT];
     u8 intimidateBank;
     u8 switchInItemsCounter;
     u8 field_DA;
@@ -722,7 +721,7 @@ struct BattleStruct
     u8 fillerDC[0xDF-0xDC];
     u8 field_DF;
     u8 mirrorMoveArrays[32];
-    u16 castformPalette[BATTLE_BANKS_COUNT][16];
+    u16 castformPalette[MAX_BATTLERS_COUNT][16];
     u8 field_180;
     u8 field_181;
     u8 field_182;
@@ -735,7 +734,7 @@ struct BattleStruct
     u8 field_1A4[96];
     u8 field_204[104];
     u8 field_26C[40];
-    u8 AI_monToSwitchIntoId[BATTLE_BANKS_COUNT];
+    u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 field_298[8];
     u8 field_2A0;
     u8 field_2A1;
@@ -839,7 +838,7 @@ struct BattleScripting
     u8 atk49_state;
     u8 bankWithAbility;
     u8 multihitMoveEffect;
-    u8 bank;
+    u8 battler;
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
@@ -871,9 +870,9 @@ enum
 };
 
 // rom_80A5C6C
-u8 GetBankSide(u8 bank);
-u8 GetBankPosition(u8 bank);
-u8 GetBankByPosition(u8 bank);
+u8 GetBattlerSide(u8 bank);
+u8 GetBattlerPosition(u8 bank);
+u8 GetBattlerAtPosition(u8 bank);
 
 struct BattleSpriteInfo
 {

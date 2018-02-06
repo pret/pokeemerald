@@ -363,7 +363,7 @@ void sub_8035D74(u8 taskId)
     case 0:
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+            for (i = 0; i < MAX_BATTLERS_COUNT; i++)
             {
                 name = gLinkPlayers[i].name;
                 linkPlayer = &gLinkPlayers[i];

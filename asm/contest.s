@@ -1048,7 +1048,7 @@ _080D8004:
 	bl sub_80DC594
 	bl sub_80DC5E8
 	bl sub_80DC7EC
-	ldr r1, =gBankPositions
+	ldr r1, =gBattlerPositions
 	strb r4, [r1]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
@@ -1058,9 +1058,9 @@ _080D8004:
 	strb r2, [r1, 0x3]
 	ldr r0, =gBattleTypeFlags
 	str r4, [r0]
-	ldr r4, =gBankAttacker
+	ldr r4, =gBattleAttacker
 	strb r2, [r4]
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	strb r3, [r0]
 	bl sub_80DB0C4
 	ldr r2, =gBankSpriteIds
@@ -2548,7 +2548,7 @@ _080D8DD0:
 	adds r4, r0
 	strh r5, [r4, 0xC]
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	strb r5, [r0]
@@ -13798,7 +13798,7 @@ sub_80DEA20: @ 80DEA20
 	bl CreateInvisibleSpriteWithCallback
 	ldr r1, =gBankSpriteIds
 	strb r0, [r1, 0x3]
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -13905,12 +13905,12 @@ _080DEAD0:
 	.4byte _080DEB60
 	.4byte _080DEB60
 _080DEB54:
-	ldr r1, =gBankDefender
+	ldr r1, =gBattleDefender
 	movs r0, 0x2
 	b _080DEB64
 	.pool
 _080DEB60:
-	ldr r1, =gBankDefender
+	ldr r1, =gBattleDefender
 	movs r0, 0x3
 _080DEB64:
 	strb r0, [r1]

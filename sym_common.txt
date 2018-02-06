@@ -215,7 +215,7 @@ gBattleResults: @ 3005D10
 gLeveledUpInBattle: @ 3005D54
 	.space 0xC
 
-gBattleBankFunc: @ 3005D60
+gBattlerFuncs: @ 3005D60
 	.space 0x10
 
 gHealthBoxesIds: @ 3005D70

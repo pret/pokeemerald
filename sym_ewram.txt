@@ -270,25 +270,25 @@ gBattleBufferA: @ 2023064
 gBattleBufferB: @ 2023864
 	.space 0x800
 
-gActiveBank: @ 2024064
+gActiveBattler: @ 2024064
 	.space 0x4
 
 gBattleExecBuffer: @ 2024068
 	.space 0x4
 
-gBattleBanksCount: @ 202406C
+gBattlersCount: @ 202406C
 	.space 0x2
 
 gBattlePartyID: @ 202406E
 	.space 0x8
 
-gBankPositions: @ 2024076
+gBattlerPositions: @ 2024076
 	.space 0x4
 
 gActionsByTurnOrder: @ 202407A
 	.space 0x4
 
-gBanksByTurnOrder: @ 202407E
+gBattleTurnOrder: @ 202407E
 	.space 0x4
 
 gCurrentTurnActionNumber: @ 2024082
@@ -333,10 +333,10 @@ gLastUsedItem: @ 2024208
 gLastUsedAbility: @ 202420A
 	.space 0x1
 
-gBankAttacker: @ 202420B
+gBattleAttacker: @ 202420B
 	.space 0x1
 
-gBankDefender: @ 202420C
+gBattleDefender: @ 202420C
 	.space 0x1
 
 gBank1: @ 202420D
@@ -348,7 +348,7 @@ gEffectBank: @ 202420E
 gStringBank: @ 202420F
 	.space 0x1
 
-gAbsentBankFlags: @ 2024210
+gAbsentBattlerFlags: @ 2024210
 	.space 0x1
 
 gCritMultiplier: @ 2024211

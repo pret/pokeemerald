@@ -153,10 +153,10 @@ enum
     HEALTHBOX_GFX_117,
 };
 
-extern u8 gBankPositions[BATTLE_BANKS_COUNT];
-extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern u8 gBattleBanksCount;
-extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
+extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
+extern u16 gBattlePartyID[MAX_BATTLERS_COUNT];
+extern u8 gBattlersCount;
+extern u8 gHealthBoxesIds[MAX_BATTLERS_COUNT];
 
 extern const u8 * const gNatureNamePointers[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
@@ -907,7 +907,7 @@ u8 CreateBankHealthboxSprites(u8 bank)
 
     if (!IsDoubleBattle())
     {
-        if (GetBankSide(bank) == SIDE_PLAYER)
+        if (GetBattlerSide(bank) == B_SIDE_PLAYER)
         {
             healthboxSpriteId_1 = CreateSprite(&sHealthboxPlayerSpriteTemplates[0], 240, 160, 1);
             healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[0], 240, 160, 1);
@@ -932,10 +932,10 @@ u8 CreateBankHealthboxSprites(u8 bank)
     }
     else
     {
-        if (GetBankSide(bank) == SIDE_PLAYER)
+        if (GetBattlerSide(bank) == B_SIDE_PLAYER)
         {
-            healthboxSpriteId_1 = CreateSprite(&sHealthboxPlayerSpriteTemplates[GetBankPosition(bank) / 2], 240, 160, 1);
-            healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[GetBankPosition(bank) / 2], 240, 160, 1);
+            healthboxSpriteId_1 = CreateSprite(&sHealthboxPlayerSpriteTemplates[GetBattlerPosition(bank) / 2], 240, 160, 1);
+            healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[GetBattlerPosition(bank) / 2], 240, 160, 1);
 
             gSprites[healthboxSpriteId_1].oam.affineParam = healthboxSpriteId_2;
 
@@ -947,8 +947,8 @@ u8 CreateBankHealthboxSprites(u8 bank)
         }
         else
         {
-            healthboxSpriteId_1 = CreateSprite(&sHealthboxOpponentSpriteTemplates[GetBankPosition(bank) / 2], 240, 160, 1);
-            healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxOpponentSpriteTemplates[GetBankPosition(bank) / 2], 240, 160, 1);
+            healthboxSpriteId_1 = CreateSprite(&sHealthboxOpponentSpriteTemplates[GetBattlerPosition(bank) / 2], 240, 160, 1);
+            healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxOpponentSpriteTemplates[GetBattlerPosition(bank) / 2], 240, 160, 1);
 
             gSprites[healthboxSpriteId_1].oam.affineParam = healthboxSpriteId_2;
 
@@ -960,9 +960,9 @@ u8 CreateBankHealthboxSprites(u8 bank)
         }
     }
 
-    unkSpriteId = CreateSpriteAtEnd(&sUnknown_0832C1C0[gBankPositions[bank]], 140, 60, 0);
+    unkSpriteId = CreateSpriteAtEnd(&sUnknown_0832C1C0[gBattlerPositions[bank]], 140, 60, 0);
     unkSpritePtr = &gSprites[unkSpriteId];
-    SetSubspriteTables(unkSpritePtr, &sUnknown_0832C28C[GetBankSide(bank)]);
+    SetSubspriteTables(unkSpritePtr, &sUnknown_0832C28C[GetBattlerSide(bank)]);
     unkSpritePtr->subspriteMode = 2;
     unkSpritePtr->oam.priority = 1;
 
@@ -1087,7 +1087,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
     s32 i;
 
-    for (i = 0; i < gBattleBanksCount; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         u8 healthboxSpriteId_1 = gHealthBoxesIds[i];
         u8 healthboxSpriteId_2 = gSprites[gHealthBoxesIds[i]].oam.affineParam;
@@ -1105,14 +1105,14 @@ void SetBankHealthboxSpritePos(u8 bank)
 
     if (!IsDoubleBattle())
     {
-        if (GetBankSide(bank) != SIDE_PLAYER)
+        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
             x = 44, y = 30;
         else
             x = 158, y = 88;
     }
     else
     {
-        switch (GetBankPosition(bank))
+        switch (GetBattlerPosition(bank))
         {
         case B_POSITION_PLAYER_LEFT:
             x = 159, y = 76;
@@ -1156,7 +1156,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, 2, &windowId);
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * 32;
 
-    if (GetBankSide(gSprites[healthboxSpriteId].data[6]) == SIDE_PLAYER)
+    if (GetBattlerSide(gSprites[healthboxSpriteId].data[6]) == B_SIDE_PLAYER)
     {
         objVram = (void*)(OBJ_VRAM0);
         if (!IsDoubleBattle())
@@ -1180,7 +1180,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
     u8 text[32];
     void *objVram;
 
-    if (GetBankSide(gSprites[healthboxSpriteId].data[6]) == SIDE_PLAYER && !IsDoubleBattle())
+    if (GetBattlerSide(gSprites[healthboxSpriteId].data[6]) == B_SIDE_PLAYER && !IsDoubleBattle())
     {
         spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * 32;
         if (maxOrCurrent != HP_CURRENT) // singles, max
@@ -1214,7 +1214,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
 
         memcpy(text, sUnknown_0832C3C4, sizeof(sUnknown_0832C3C4));
         bank = gSprites[healthboxSpriteId].data[6];
-        if (IsDoubleBattle() == TRUE || GetBankSide(bank) == SIDE_OPPONENT)
+        if (IsDoubleBattle() == TRUE || GetBattlerSide(bank) == B_SIDE_OPPONENT)
         {
             UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, value, maxOrCurrent);
         }
@@ -1223,7 +1223,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
             u32 var;
             u8 i;
 
-            if (GetBankSide(gSprites[healthboxSpriteId].data[6]) == SIDE_PLAYER)
+            if (GetBattlerSide(gSprites[healthboxSpriteId].data[6]) == B_SIDE_PLAYER)
             {
                 if (maxOrCurrent == HP_CURRENT)
                     var = 29;
@@ -1258,7 +1258,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
     u8 text[32];
     void *objVram;
 
-    if (GetBankSide(gSprites[healthboxSpriteId].data[6]) == SIDE_PLAYER)
+    if (GetBattlerSide(gSprites[healthboxSpriteId].data[6]) == B_SIDE_PLAYER)
     {
         if (gBattleSpritesDataPtr->bankData[gSprites[healthboxSpriteId].data[6]].hpNumbersNoBars) // don't print text if only bars are visible
         {
@@ -1335,7 +1335,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
             }
             else
             {
-                if (GetBankSide(bank) == SIDE_PLAYER) // impossible to reach part, because the bank is from the opponent's side
+                if (GetBattlerSide(bank) == B_SIDE_PLAYER) // impossible to reach part, because the bank is from the opponent's side
                 {
                     CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_116),
                           (void*)(OBJ_VRAM0) + ((gSprites[healthboxSpriteId].oam.tileNum + 52) * 32),
@@ -1354,7 +1354,7 @@ static void sub_80730D4(u8 healthboxSpriteId, struct Pokemon *mon)
     u8 i, var, nature, healthboxSpriteId_2;
 
     memcpy(text, sUnknown_0832C3C4, sizeof(sUnknown_0832C3C4));
-    barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBankPosition(gSprites[healthboxSpriteId].data[6]) * 384)];
+    barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBattlerPosition(gSprites[healthboxSpriteId].data[6]) * 384)];
     var = 5;
     nature = GetNature(mon);
     StringCopy(text + 6, gNatureNamePointers[nature]);
@@ -1415,17 +1415,17 @@ void SwapHpBarsWithHpText(void)
     s32 i;
     u8 spriteId;
 
-    for (i = 0; i < gBattleBanksCount; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (gSprites[gHealthBoxesIds[i]].callback == SpriteCallbackDummy
-         && GetBankSide(i) != SIDE_OPPONENT
-         && (IsDoubleBattle() || GetBankSide(i) != SIDE_PLAYER))
+         && GetBattlerSide(i) != B_SIDE_OPPONENT
+         && (IsDoubleBattle() || GetBattlerSide(i) != B_SIDE_PLAYER))
         {
             bool8 noBars;
 
             gBattleSpritesDataPtr->bankData[i].hpNumbersNoBars ^= 1;
             noBars = gBattleSpritesDataPtr->bankData[i].hpNumbersNoBars;
-            if (GetBankSide(i) == SIDE_PLAYER)
+            if (GetBattlerSide(i) == B_SIDE_PLAYER)
             {
                 if (!IsDoubleBattle())
                     continue;
@@ -1486,9 +1486,9 @@ u8 CreatePartyStatusSummarySprites(u8 bank, struct HpAndStatus *partyInfo, u8 ar
     u8 ballIconSpritesIds[6];
     u8 taskId;
 
-    if (!arg2 || GetBankPosition(bank) != B_POSITION_OPPONENT_RIGHT)
+    if (!arg2 || GetBattlerPosition(bank) != B_POSITION_OPPONENT_RIGHT)
     {
-        if (GetBankSide(bank) == SIDE_PLAYER)
+        if (GetBattlerSide(bank) == B_SIDE_PLAYER)
         {
             isOpponent = FALSE;
             bar_X = 136, bar_Y = 96;
@@ -1567,7 +1567,7 @@ u8 CreatePartyStatusSummarySprites(u8 bank, struct HpAndStatus *partyInfo, u8 ar
         gSprites[ballIconSpritesIds[i]].data[2] = isOpponent;
     }
 
-    if (GetBankSide(bank) == SIDE_PLAYER)
+    if (GetBattlerSide(bank) == B_SIDE_PLAYER)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
@@ -1712,7 +1712,7 @@ void sub_8073C30(u8 taskId)
     {
         for (i = 0; i < 6; i++)
         {
-            if (GetBankSide(bank) != SIDE_PLAYER)
+            if (GetBattlerSide(bank) != B_SIDE_PLAYER)
             {
                 gSprites[sp[5 - i]].data[1] = 7 * i;
                 gSprites[sp[5 - i]].data[3] = 0;
@@ -1964,7 +1964,7 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
 
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * 32;
 
-    if (GetBankSide(gSprites[healthboxSpriteId].data[6]) == SIDE_PLAYER)
+    if (GetBattlerSide(gSprites[healthboxSpriteId].data[6]) == B_SIDE_PLAYER)
     {
         sub_8075198((void*)(0x6010040 + spriteTileNum), windowTileData, 6);
         ptr = (void*)(OBJ_VRAM0);
@@ -1992,7 +1992,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
         return;
 
     bank = gSprites[healthboxSpriteId].data[6];
-    if (GetBankSide(bank) == SIDE_PLAYER)
+    if (GetBattlerSide(bank) == B_SIDE_PLAYER)
         return;
     if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
         return;
@@ -2016,7 +2016,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
 
     bank = gSprites[healthboxSpriteId].data[6];
     healthboxSpriteId_2 = gSprites[healthboxSpriteId].data[5];
-    if (GetBankSide(bank) == SIDE_PLAYER)
+    if (GetBattlerSide(bank) == B_SIDE_PLAYER)
     {
         status = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_STATUS);
         if (!IsDoubleBattle())
@@ -2075,7 +2075,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     FillPalette(sStatusIconColors[statusPalId], pltAdder + 0x100, 2);
     CpuCopy16(gPlttBufferUnfaded + 0x100 + pltAdder, (void*)(OBJ_PLTT + pltAdder * 2), 2);
     CpuCopy32(statusGfxPtr, (void*)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder) * 32), 96);
-    if (IsDoubleBattle() == TRUE || GetBankSide(bank) == SIDE_OPPONENT)
+    if (IsDoubleBattle() == TRUE || GetBattlerSide(bank) == B_SIDE_OPPONENT)
     {
         if (!gBattleSpritesDataPtr->bankData[bank].hpNumbersNoBars)
         {
@@ -2181,9 +2181,9 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
     u8 bank = gSprites[healthboxSpriteId].data[6];
 
     if (elementId == HEALTHBOX_ALL && !IsDoubleBattle())
-        GetBankSide(bank); // pointless function call
+        GetBattlerSide(bank); // pointless function call
 
-    if (GetBankSide(gSprites[healthboxSpriteId].data[6]) == SIDE_PLAYER)
+    if (GetBattlerSide(gSprites[healthboxSpriteId].data[6]) == B_SIDE_PLAYER)
     {
         u8 isDoubles;
 

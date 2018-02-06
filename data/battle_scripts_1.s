@@ -735,7 +735,7 @@ BattleScript_AlreadyPoisoned::
 	goto BattleScript_MoveEnd
 
 BattleScript_ImmunityProtected::
-	copybyte gEffectBank, gBankDefender
+	copybyte gEffectBank, gBattleDefender
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_PSNPrevention
 	goto BattleScript_MoveEnd
@@ -1055,7 +1055,7 @@ BattleScript_AlreadyParalyzed::
 	goto BattleScript_MoveEnd
 
 BattleScript_LimberProtected::
-	copybyte gEffectBank, gBankDefender
+	copybyte gEffectBank, gBattleDefender
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_PRLZPrevention
 	goto BattleScript_MoveEnd
@@ -1513,7 +1513,7 @@ BattleScript_EffectCurse::
 	jumpifstat ATTACKER, NOT_EQUAL, ATK, 0xC, BattleScript_CurseTrySpeed
 	jumpifstat ATTACKER, EQUAL, DEF, 0xC, BattleScript_ButItFailed
 BattleScript_CurseTrySpeed::
-	copybyte gBankDefender, gBankAttacker
+	copybyte gBattleDefender, gBattleAttacker
 	setbyte sANIM_TURN, 0x1
 	attackanimation
 	waitanimation
@@ -1534,7 +1534,7 @@ BattleScript_CurseTryDefence::
 BattleScript_CurseEnd::
 	goto BattleScript_MoveEnd
 BattleScript_GhostCurse::
-	jumpifbytenotequal gBankAttacker, gBankDefender, BattleScript_DoGhostCurse
+	jumpifbytenotequal gBattleAttacker, gBattleDefender, BattleScript_DoGhostCurse
 	getmovetarget ATTACKER
 BattleScript_DoGhostCurse::
 	attackcanceler
@@ -1603,7 +1603,7 @@ BattleScript_PerishSongLoop::
 	jumpifability SCRIPTING_BANK, ABILITY_SOUNDPROOF, BattleScript_PerishSongNotAffected
 BattleScript_PerishSongLoopIncrement::
 	addbyte sBANK, 0x1
-	jumpifbytenotequal sBANK, gBattleBanksCount, BattleScript_PerishSongLoop
+	jumpifbytenotequal sBANK, gBattlersCount, BattleScript_PerishSongLoop
 	goto BattleScript_MoveEnd
 
 BattleScript_PerishSongNotAffected::
@@ -2217,7 +2217,7 @@ BattleScript_EffectWillOWisp::
 	goto BattleScript_MoveEnd
 
 BattleScript_WaterVeilPrevents::
-	copybyte gEffectBank, gBankDefender
+	copybyte gEffectBank, gBattleDefender
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_BRNPrevention
 	goto BattleScript_MoveEnd
@@ -2598,11 +2598,11 @@ BattleScript_EffectTeeterDance::
 	attackcanceler
 	attackstring
 	ppreduce
-	setbyte gBankDefender, 0x0
+	setbyte gBattleDefender, 0x0
 BattleScript_TeeterDanceLoop::
 	movevaluescleanup
 	setmoveeffect EFFECT_CONFUSION
-	jumpifbyteequal gBankAttacker, gBankDefender, BattleScript_TeeterDanceLoopIncrement
+	jumpifbyteequal gBattleAttacker, gBattleDefender, BattleScript_TeeterDanceLoopIncrement
 	jumpifability TARGET, ABILITY_OWN_TEMPO, BattleScript_TeeterDanceOwnTempoPrevents
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_TeeterDanceSubstitutePrevents
 	jumpifstatus2 TARGET, STATUS2_CONFUSION, BattleScript_TeeterDanceAlreadyConfused
@@ -2618,8 +2618,8 @@ BattleScript_TeeterDanceDoMoveEndIncrement::
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
 BattleScript_TeeterDanceLoopIncrement::
-	addbyte gBankDefender, 0x1
-	jumpifbytenotequal gBankDefender, gBattleBanksCount, BattleScript_TeeterDanceLoop
+	addbyte gBattleDefender, 0x1
+	jumpifbytenotequal gBattleDefender, gBattlersCount, BattleScript_TeeterDanceLoop
 	end
 
 BattleScript_TeeterDanceOwnTempoPrevents::
@@ -2935,7 +2935,7 @@ BattleScript_82DA908::
 	switchinanim GBANK_1, FALSE
 	waitstate
 	switchineffects 5
-	jumpifbytenotequal gBank1, gBattleBanksCount, BattleScript_82DA908
+	jumpifbytenotequal gBank1, gBattlersCount, BattleScript_82DA908
 BattleScript_82DA92C::
 	end2
 
@@ -3228,7 +3228,7 @@ BattleScript_DamagingWeatherContinues::
 	playanimation2 ATTACKER, sANIM_ARG1, NULL
 	setbyte gBattleCommunication, 0x0
 BattleScript_DamagingWeatherLoop::
-	copyarraywithindex gBankAttacker, gBanksByTurnOrder, gBattleCommunication, 0x1
+	copyarraywithindex gBattleAttacker, gBattleTurnOrder, gBattleCommunication, 0x1
 	weatherdamage
 	jumpifword EQUAL, gBattleMoveDamage, 0x0, BattleScript_DamagingWeatherLoopIncrement
 	printfromtable gSandStormHailDmgStringIds
@@ -3243,7 +3243,7 @@ BattleScript_DamagingWeatherLoop::
 BattleScript_DamagingWeatherLoopIncrement::
 	jumpifbyte NOT_EQUAL, gBattleOutcome, 0, BattleScript_DamagingWeatherContinuesEnd
 	addbyte gBattleCommunication, 0x1
-	jumpifbytenotequal gBattleCommunication, gBattleBanksCount, BattleScript_DamagingWeatherLoop
+	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_DamagingWeatherLoop
 BattleScript_DamagingWeatherContinuesEnd::
 	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
 	end2
@@ -3521,7 +3521,7 @@ BattleScript_RapidSpinAway::
 BattleScript_WrapFree::
 	printstring STRINGID_PKMNGOTFREE
 	waitmessage 0x40
-	copybyte gBankDefender, sBANK
+	copybyte gBattleDefender, sBANK
 	return
 
 BattleScript_LeechSeedFree::
@@ -4032,7 +4032,7 @@ BattleScript_WeatherFormChanges::
 BattleScript_WeatherFormChangesLoop::
 	trycastformdatachange
 	addbyte sBANK, 0x1
-	jumpifbytenotequal sBANK, gBattleBanksCount, BattleScript_WeatherFormChangesLoop
+	jumpifbytenotequal sBANK, gBattlersCount, BattleScript_WeatherFormChangesLoop
 	return
 
 BattleScript_CastformChange::
@@ -4053,7 +4053,7 @@ BattleScript_82DB4B8::
 BattleScript_82DB4BE::
 	pause 0x20
 BattleScript_82DB4C1::
-	setbyte gBankDefender, 0x0
+	setbyte gBattleDefender, 0x0
 	setstatchanger ATK, 1, TRUE
 BattleScript_82DB4CD::
 	trygetintimidatetarget BattleScript_82DB51B
@@ -4068,7 +4068,7 @@ BattleScript_82DB4CD::
 	printstring STRINGID_PKMNCUTSATTACKWITH
 	waitmessage 0x40
 BattleScript_82DB510::
-	addbyte gBankDefender, 0x1
+	addbyte gBattleDefender, 0x1
 	goto BattleScript_82DB4CD
 BattleScript_82DB51B::
 	return
@@ -4474,7 +4474,7 @@ BattleScript_82DB887::
 	waitmessage 0x40
 BattleScript_82DB89D::
 	addbyte gBattleCommunication + 1, 0x1
-	jumpifbytenotequal gBattleCommunication + 1, gBattleBanksCount, BattleScript_82DB887
+	jumpifbytenotequal gBattleCommunication + 1, gBattlersCount, BattleScript_82DB887
 	setbyte gBattleCommunication, 0x0
 	setbyte gBattleCommunication + 1, 0x0
 	end2

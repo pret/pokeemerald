@@ -34,26 +34,26 @@ _0817C988:
 	movs r1, 0x81
 	lsls r1, 2
 	adds r7, r0, r1
-	ldr r5, =gBankAttacker
+	ldr r5, =gBattleAttacker
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, =gEffectBank
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
 	ldr r0, =gStringInfo
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x7]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -83,7 +83,7 @@ _0817CA10:
 	str r1, [sp, 0x8]
 	cmp r6, 0
 	bne _0817CA3C
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r2
@@ -94,7 +94,7 @@ _0817CA10:
 	b _0817CA4C
 	.pool
 _0817CA3C:
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r2
@@ -105,7 +105,7 @@ _0817CA3C:
 _0817CA4C:
 	adds r1, r0
 	str r1, [sp, 0xC]
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	ldr r1, =gStringInfo
 	ldr r1, [r1]
@@ -134,20 +134,20 @@ _0817CA4C:
 	bl _0817E0A2
 	.pool
 _0817CA9C:
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	mov r8, r0
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r5, r0, 25
 	ldr r0, =gEffectBank
 	ldrb r0, [r0]
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r3, r0, 25
 	ldr r1, [sp]
@@ -572,7 +572,7 @@ _0817D0DC:
 	lsls r3, 2
 	adds r3, r7, r3
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -602,7 +602,7 @@ _0817D124:
 	lsls r2, 2
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -635,7 +635,7 @@ _0817D16C:
 	lsls r0, 2
 	adds r5, r7, r0
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -716,7 +716,7 @@ _0817D216:
 	lsls r2, 2
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -776,7 +776,7 @@ _0817D296:
 	lsls r2, 2
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -834,7 +834,7 @@ _0817D314:
 	adds r3, r0
 	adds r3, r7, r3
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -940,8 +940,8 @@ _0817D3F2:
 	bne _0817D3FE
 	bl _0817E0A6
 _0817D3FE:
-	ldr r0, =gBankAttacker
-	ldr r1, =gBankDefender
+	ldr r0, =gBattleAttacker
+	ldr r1, =gBattleDefender
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -1015,7 +1015,7 @@ _0817D498:
 	adds r2, r0
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1092,7 +1092,7 @@ _0817D53C:
 	adds r2, r0
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1162,7 +1162,7 @@ _0817D5CE:
 	adds r2, r0
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1227,7 +1227,7 @@ _0817D65E:
 	adds r2, r0
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1314,7 +1314,7 @@ _0817D704:
 	lsls r4, 3
 	adds r2, r4
 	adds r2, r7, r2
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r5
@@ -1354,7 +1354,7 @@ _0817D76C:
 	bl _0817E0A6
 _0817D77E:
 	ldr r6, =gBattlePartyID
-	ldr r5, =gBankAttacker
+	ldr r5, =gBattleAttacker
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r6
@@ -1408,7 +1408,7 @@ _0817D7D8:
 	lsls r4, 3
 	adds r2, r4
 	adds r2, r7, r2
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r5
@@ -1452,7 +1452,7 @@ _0817D838:
 	lsls r4, 3
 	adds r2, r4
 	adds r2, r7, r2
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r5
@@ -1498,7 +1498,7 @@ _0817D8A4:
 _0817D8B6:
 	ldr r2, =gBattlePartyID
 	mov r8, r2
-	ldr r6, =gBankAttacker
+	ldr r6, =gBattleAttacker
 	ldrb r0, [r6]
 	lsls r0, 1
 	add r0, r8
@@ -1574,7 +1574,7 @@ _0817D94C:
 	adds r2, r0
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1640,7 +1640,7 @@ _0817D9C2:
 	lsls r4, 3
 	adds r2, r4
 	adds r2, r7, r2
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r5
@@ -1672,7 +1672,7 @@ _0817D9C2:
 	.pool
 _0817DA24:
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1715,7 +1715,7 @@ _0817DA68:
 	lsls r4, 3
 	adds r2, r4
 	adds r2, r7, r2
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r5
@@ -1748,7 +1748,7 @@ _0817DA68:
 	.pool
 _0817DACC:
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1803,7 +1803,7 @@ _0817DB24:
 	lsls r4, 3
 	adds r3, r4
 	adds r3, r7, r3
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r5
@@ -1839,7 +1839,7 @@ _0817DB76:
 	.pool
 _0817DB90:
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1876,7 +1876,7 @@ _0817DBD4:
 	adds r3, r0
 	adds r3, r7, r3
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -1944,7 +1944,7 @@ _0817DC62:
 	lsls r2, 2
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2022,7 +2022,7 @@ _0817DCFC:
 	adds r2, r0
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2050,7 +2050,7 @@ _0817DD38:
 	adds r2, r0
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2122,7 +2122,7 @@ _0817DDC8:
 	lsls r2, 2
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2155,7 +2155,7 @@ _0817DE10:
 	lsls r2, 2
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2254,7 +2254,7 @@ _0817DEDC:
 	lsls r2, 2
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2332,7 +2332,7 @@ _0817DF70:
 	lsls r2, 2
 	adds r2, r7, r2
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2414,7 +2414,7 @@ _0817DFE6:
 	ands r0, r2
 	strb r0, [r1]
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2557,16 +2557,16 @@ _0817E122:
 	lsls r1, 2
 	adds r1, r0, r1
 	str r1, [sp, 0x8]
-	ldr r2, =gBankAttacker
+	ldr r2, =gBattleAttacker
 	mov r10, r2
 	ldrb r0, [r2]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r1, r10
@@ -2593,7 +2593,7 @@ _0817E122:
 _0817E184:
 	mov r2, r10
 	ldrb r0, [r2]
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	lsls r0, 3
@@ -2617,7 +2617,7 @@ _0817E184:
 	strb r1, [r0]
 	mov r1, r10
 	ldrb r0, [r1]
-	bl GetBankPosition
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 25
 	lsls r0, 3
@@ -2812,9 +2812,9 @@ sub_817E32C: @ 817E32C
 	movs r1, 0x81
 	lsls r1, 2
 	adds r4, r0, r1
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r5, 0x12
@@ -3244,14 +3244,14 @@ sub_817E684: @ 817E684
 	movs r2, 0x81
 	lsls r2, 2
 	adds r7, r0, r2
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r3, r0, 24
 	mov r0, r10
@@ -3298,7 +3298,7 @@ _0817E6F0:
 	.4byte _0817E760
 _0817E760:
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -3330,7 +3330,7 @@ _0817E79C:
 	lsls r2, r0, 4
 	ldr r4, =0x0000ffff
 	ldr r1, [r1]
-	ldr r3, =gBankAttacker
+	ldr r3, =gBattleAttacker
 	ldrh r0, [r1]
 	cmp r6, r0
 	bne _0817E7E0
@@ -3708,15 +3708,15 @@ sub_817EA80: @ 817EA80
 	movs r1, 0x81
 	lsls r1, 2
 	adds r5, r0, r1
-	ldr r3, =gBankAttacker
+	ldr r3, =gBattleAttacker
 	mov r8, r3
 	ldrb r0, [r3]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r0, r4, 1
@@ -4006,7 +4006,7 @@ _0817ECCC:
 	lsrs r0, 5
 	subs r6, r0, 0x1
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -4165,7 +4165,7 @@ _0817EE1C:
 	bne _0817EEBC
 	adds r2, r4, 0
 	ldr r1, =gBattlePartyID
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -4269,9 +4269,9 @@ sub_817EECC: @ 817EECC
 	beq _0817EEE6
 	b _0817F1FA
 _0817EEE6:
-	ldr r4, =gBankAttacker
+	ldr r4, =gBattleAttacker
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4291,7 +4291,7 @@ _0817EEF8:
 	bgt _0817EF10
 	b _0817F1FA
 _0817EF10:
-	ldr r0, =gBankDefender
+	ldr r0, =gBattleDefender
 	ldrb r0, [r0]
 	muls r0, r1
 	adds r0, r5
@@ -4367,7 +4367,7 @@ _0817EF8A:
 	beq _0817EF98
 	b _0817F1FA
 _0817EF98:
-	ldr r2, =gBankAttacker
+	ldr r2, =gBattleAttacker
 	ldrb r0, [r2]
 	adds r0, r6
 	ldrb r0, [r0]
@@ -4386,11 +4386,11 @@ _0817EF98:
 	mov r10, r3
 	mov r8, r0
 	add r7, sp, 0x10
-	ldr r4, =gBankDefender
+	ldr r4, =gBattleDefender
 	mov r9, r4
 _0817EFC2:
 	lsls r1, r5, 1
-	ldr r6, =gBankAttacker
+	ldr r6, =gBattleAttacker
 	ldrb r0, [r6]
 	movs r2, 0x58
 	muls r0, r2
@@ -4414,13 +4414,13 @@ _0817EFC2:
 	ldr r4, =gSideStatuses
 	mov r1, r9
 	ldrb r0, [r1]
-	bl GetBankPosition
+	bl GetBattlerPosition
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1
 	adds r1, r4
 	ldrh r3, [r1]
-	ldr r2, =gBankAttacker
+	ldr r2, =gBattleAttacker
 	ldrb r0, [r2]
 	movs r4, 0x58
 	muls r0, r4
@@ -4437,7 +4437,7 @@ _0817EFC2:
 	str r4, [sp]
 	movs r4, 0
 	str r4, [sp, 0x4]
-	ldr r6, =gBankAttacker
+	ldr r6, =gBattleAttacker
 	ldrb r4, [r6]
 	str r4, [sp, 0x8]
 	mov r6, r9
@@ -4448,7 +4448,7 @@ _0817EFC2:
 	ldr r4, =gBattleMoveDamage
 	str r3, [r4]
 	ldr r1, =gStatuses3
-	ldr r2, =gBankAttacker
+	ldr r2, =gBattleAttacker
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
@@ -4472,7 +4472,7 @@ _0817EFC2:
 	str r0, [r4]
 _0817F06A:
 	ldr r0, =gProtectStructs
-	ldr r6, =gBankAttacker
+	ldr r6, =gBattleAttacker
 	ldrb r1, [r6]
 	lsls r1, 4
 	adds r1, r0
@@ -4513,7 +4513,7 @@ _0817F0B4:
 	cmp r5, 0x3
 	ble _0817EFC2
 	movs r5, 0
-	ldr r3, =gBankAttacker
+	ldr r3, =gBattleAttacker
 	ldr r6, =gMoveSelectionCursor
 	ldr r4, =gBattlePartyID
 	mov r8, r4
@@ -4545,9 +4545,9 @@ _0817F0D8:
 	movs r7, 0
 _0817F0F6:
 	movs r5, 0
-	ldr r4, =gBankDefender
+	ldr r4, =gBattleDefender
 	ldr r6, =gEnemyParty
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	add r0, r10
 	ldrb r3, [r0]
@@ -4582,7 +4582,7 @@ _0817F11A:
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
-	ldr r2, =gBankAttacker
+	ldr r2, =gBattleAttacker
 	ldrb r0, [r2]
 	lsls r0, 1
 	add r0, r8
@@ -4598,7 +4598,7 @@ _0817F11A:
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r4, =gBankAttacker
+	ldr r4, =gBattleAttacker
 	ldrb r3, [r4]
 	mov r2, r10
 	adds r0, r3, r2
@@ -4625,7 +4625,7 @@ _0817F1D4:
 _0817F1DC:
 	ldr r2, =gBattleMoveDamage
 	ldr r1, =gMoveSelectionCursor
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -4695,7 +4695,7 @@ _0817F270:
 	cmp r2, 0x95
 	bne _0817F294
 	ldr r2, =gBattleMons
-	ldr r0, =gBankAttacker
+	ldr r0, =gBattleAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -4801,7 +4801,7 @@ GetBankMoveSlotId: @ 817F33C
 	lsls r1, 16
 	lsrs r7, r1, 16
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	ldr r6, =gEnemyParty
 	cmp r0, 0

@@ -47,7 +47,7 @@ extern s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
 extern u8 gAnimMoveTurn;
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
-extern u16 gAnimSpeciesByBanks[BATTLE_BANKS_COUNT];
+extern u16 gAnimSpeciesByBanks[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_02038440;
 
 void ClearBattleAnimationVars(void);

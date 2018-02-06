@@ -379,7 +379,7 @@ _08158E1E:
 	.pool
 _08158E38:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158E5C
@@ -504,7 +504,7 @@ _08158F2E:
 	.pool
 _08158F48:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158F6C

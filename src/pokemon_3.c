@@ -25,10 +25,10 @@
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u8 gBankInMenu;
-extern u8 gBankDefender;
-extern u8 gBankAttacker;
+extern u8 gBattleDefender;
+extern u8 gBattleAttacker;
 extern u8 gStringBank;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
@@ -113,7 +113,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        temp = gEnigmaBerries[gActiveBank].itemEffect;
+        temp = gEnigmaBerries[gActiveBattler].itemEffect;
     }
 
     itemEffect = temp;
@@ -210,7 +210,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
 void sub_806CF24(s32 stat)
 {
-    gBankDefender = gBankInMenu;
+    gBattleDefender = gBankInMenu;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
@@ -247,7 +247,7 @@ u8 *sub_806CF78(u16 itemId)
             }
             else
             {
-                gBankAttacker = gBankInMenu;
+                gBattleAttacker = gBankInMenu;
                 BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
             }
         }
@@ -255,7 +255,7 @@ u8 *sub_806CF78(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        gBankAttacker = gBankInMenu;
+        gBattleAttacker = gBankInMenu;
         BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
     }
 
@@ -1366,7 +1366,7 @@ void sub_806E994(void)
     gBattleTextBuff1[2] = gBattleStruct->field_49;
     gBattleTextBuff1[4] = B_BUFF_EOS;
 
-    if (!GetBankSide(gBattleStruct->field_49))
+    if (!GetBattlerSide(gBattleStruct->field_49))
         gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[gBattleStruct->field_49]);
     else
         gBattleTextBuff1[3] = gBattlePartyID[gBattleStruct->field_49];
