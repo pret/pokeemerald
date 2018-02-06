@@ -11,6 +11,8 @@
 #include "malloc.h"
 #include "task.h"
 #include "dma3.h"
+#include "string_util.h"
+#include "pokemon_icon.h"
 
 struct SomeUnkStruct
 {
@@ -45,7 +47,7 @@ extern EWRAM_DATA u16 gUnknown_0203CDA8;
 extern EWRAM_DATA void *gUnknown_0203CDAC[0x20];
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
-const u8 gUnknown_0860F0D0[] = { 15, 1, 2 };
+const struct TextColor gUnknown_0860F0D0[] = { 15, 1, 2 };
 const struct SomeUnkStruct gUnknown_0860F0D4[] = 
 {
     { 12, 12, 0x00 },
@@ -78,6 +80,10 @@ const struct SomeUnkStruct gUnknown_0860F0D4[] =
 
 extern const u8 gText_SelectorArrow3[];
 extern const u8 gText_YesNo[];
+extern const u16 gFireRedMenuElements1_Pal[16];
+extern const u16 gFireRedMenuElements2_Pal[16];
+extern const u16 gFireRedMenuElements3_Pal[16];
+extern const u8 gFireRedMenuElements_Gfx[];
 
 extern void sub_8197BB4(u8, u8, u8, u8, u8, u8);
 extern void sub_8197E30(u8, u8, u8, u8, u8, u8);
@@ -85,7 +91,7 @@ extern void DrawWindowBorder(u8, u8, u8, u8, u8, u8);
 extern void sub_81980A8(u8, u8, u8, u8, u8, u8);
 extern u8 MoveMenuCursor(s8);
 extern u8 sub_8199134(s8, s8);
-extern void sub_8199F74(u8, u8, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8, u8);
+extern void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing);
 extern void sub_8198C78(void);
 extern void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 
@@ -687,7 +693,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
         printer.current_text_offset = strs[a8[i]].text;
         printer.y = (lineHeight * i) + top;
         printer.currentY = printer.y;
-        AddTextPrinter(&printer, 0xFF, 0);
+        AddTextPrinter(&printer, 0xFF, NULL);
     }
     
     CopyWindowToVram(windowId, 2);
@@ -744,7 +750,7 @@ void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top
     printer.letterSpacing = GetFontAttribute(fontId, 2);
     printer.lineSpacing = GetFontAttribute(fontId, 3);
     
-    AddTextPrinter(&printer, 0xFF, 0);
+    AddTextPrinter(&printer, 0xFF, NULL);
     
     sub_81983AC(gUnknown_0203CD9F, fontId, left, top, GetFontAttribute(fontId, 1), 2, initialCursorPos);
 }
@@ -811,7 +817,7 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
             printer.y = (GetFontAttribute(fontId, 1) * i) + top;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
-            AddTextPrinter(&printer, 0xFF, 0);
+            AddTextPrinter(&printer, 0xFF, NULL);
         }
     }
     
@@ -1182,7 +1188,7 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
         printer.current_text_offset = strs[a8[i]].text;
         printer.y = (i * 16) + 1;
         printer.currentY = (i * 16) + 1;
-        AddTextPrinter(&printer, 0xFF, 0);
+        AddTextPrinter(&printer, 0xFF, NULL);
     }
     
     CopyWindowToVram(windowId, 2);
@@ -1209,7 +1215,7 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
     
-    AddTextPrinter(&printer, 0xFF, 0);
+    AddTextPrinter(&printer, 0xFF, NULL);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_0203CD9F, 2, initialCursorPos);
 }
 
@@ -1251,7 +1257,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
             printer.y = (16 * i) + 1;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
-            AddTextPrinter(&printer, 0xFF, 0);
+            AddTextPrinter(&printer, 0xFF, NULL);
         }
     }
     
@@ -1436,18 +1442,435 @@ void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
     }
 }
 
-void sub_8199CBC(u8 bgId, void *dest, u8 left, u8 top, u8 width, u8 height)
+void sub_8199CBC(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i;
     u8 j;
-    u16 *ptr = GetBgTilemapBuffer(bgId);
-    u16 *destAsU16 = dest;
+    const u16 *src = GetBgTilemapBuffer(bgId);
     
     for (i = 0; i < height; i++)
     {
         for (j = 0; j < width; j++)
         {
-            destAsU16[(i * height) + j] = ptr[(i * height) + j];
+            dest[(i * width) + j] = src[(i + top) * 32 + j + left];
         }
     }
+}
+
+void sub_8199D3C(void *ptr, int delta, int width, int height, bool32 is8BPP)
+{
+    int i;
+    int area = width * height;
+    if (is8BPP == TRUE)
+    {
+        u8 *as8BPP = ptr;
+        for (i = 0; i < area; i++)
+        {
+            as8BPP[i] += delta;
+        }
+    }
+    else
+    {
+        u16 *as4BPP = ptr;
+        for (i = 0; i < area; i++)
+        {
+            as4BPP[i] = (as4BPP[i] & 0xFC00) | ((as4BPP[i] + delta) & 0x3FF);
+        }
+    }
+}
+
+void sub_8199D98(void)
+{
+    ChangeBgX(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgY(3, 0, 0);
+}
+
+void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)
+{
+    int temp = (!GetBgAttribute(bg, 4)) ? 0x20 : 0x40;
+    void *addr = (void *)((GetBgAttribute(bg, 1) * 0x4000) + (GetBgAttribute(bg, 10) + a2) * temp);
+    RequestDma3Fill(a1 << 24 | a1 << 16 | a1 << 8 | a1, addr + VRAM, a3 * temp, 1);
+}
+
+void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const struct TextColor *color, s8 speed, const u8 *str)
+{
+    struct TextSubPrinter printer;
+    
+    printer.current_text_offset = str;
+    printer.windowId = windowId;
+    printer.fontId = fontId;
+    printer.x = left;
+    printer.y = top;
+    printer.currentX = printer.x;
+    printer.currentY = printer.y;
+    printer.letterSpacing = GetFontAttribute(fontId, 2);
+    printer.lineSpacing = GetFontAttribute(fontId, 3);
+    printer.fontColor_l = 0;
+    printer.fgColor = color->bgColor;
+    printer.bgColor = color->fgColor;
+    printer.shadowColor = color->shadowColor;
+    
+    AddTextPrinter(&printer, speed, NULL);
+}
+
+void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str)
+{
+    struct TextSubPrinter printer;
+    
+    printer.current_text_offset = str;
+    printer.windowId = windowId;
+    printer.fontId = fontId;
+    printer.x = left;
+    printer.y = top;
+    printer.currentX = printer.x;
+    printer.currentY = printer.y;
+    printer.letterSpacing = letterSpacing;
+    printer.lineSpacing = lineSpacing;
+    printer.fontColor_l = 0;
+    printer.fgColor = color->bgColor;
+    printer.bgColor = color->fgColor;
+    printer.shadowColor = color->shadowColor;
+    
+    AddTextPrinter(&printer, speed, NULL);
+}
+
+void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing)
+{
+    struct TextSubPrinter printer;
+    
+    printer.current_text_offset = str;
+    printer.windowId = windowId;
+    printer.fontId = fontId;
+    printer.x = left;
+    printer.y = top;
+    printer.currentX = left;
+    printer.currentY = top;
+    printer.letterSpacing = letterSpacing;
+    printer.lineSpacing = lineSpacing;
+    printer.fontColor_l = 0;
+    
+    printer.fgColor = GetFontAttribute(fontId, 5);
+    printer.bgColor = GetFontAttribute(fontId, 6);
+    printer.shadowColor = GetFontAttribute(fontId, 7);
+    
+    AddTextPrinter(&printer, speed, callback);
+}
+
+void sub_819A024(u8 windowId, const u8 *src, u16 a2, u16 a3)
+{
+    int count = 0;
+    while (gSaveBlock2Ptr->playerName[count] != EOS)
+        count++;
+    
+    StringExpandPlaceholders(gStringVar4, src);
+    
+    PrintTextOnWindow(windowId, 1, gStringVar4, a2, a3, 0xFF, 0);
+}
+
+//Screw this function, it's long and unreferenced and ugh
+/*void sub_819A080(u16 *a0, u16 *a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
+{
+    int v1 = ((a0[2] - a4) > a6) ? (a6 + a2) : (a0[2] - a4);
+    int v2;
+    
+    if (a0[3] - a5 < a7)
+        v2 = a3 + a0[3] - a5;
+    else
+        v2 = a3 + a7;
+    
+    
+}*/
+
+__attribute__((naked))
+void sub_819A080(u16 *a0, u16 *a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
+{
+	asm("push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, #0x28\n\
+	str r0, [sp]\n\
+	str r1, [sp, #0x4]\n\
+	ldr r0, [sp, #0x48]\n\
+	ldr r4, [sp, #0x4C]\n\
+	ldr r1, [sp, #0x50]\n\
+	ldr r5, [sp, #0x54]\n\
+	lsl r2, #16\n\
+	lsr r2, #16\n\
+	str r2, [sp, #0x8]\n\
+	lsl r3, #16\n\
+	lsr r3, #16\n\
+	lsl r0, #16\n\
+	lsr r0, #16\n\
+	str r0, [sp, #0xC]\n\
+	lsl r4, #16\n\
+	lsr r4, #16\n\
+	lsl r1, #16\n\
+	lsr r1, #16\n\
+	lsl r5, #16\n\
+	lsr r5, #16\n\
+	ldr r2, [sp, #0x4]\n\
+	ldrh r0, [r2, #0x4]\n\
+	ldr r2, [sp, #0xC]\n\
+	sub r0, r2\n\
+	ldr r2, [sp, #0x8]\n\
+	add r2, r1, r2\n\
+	str r2, [sp, #0x10]\n\
+	cmp r0, r1\n\
+	bge _0819A0CC\n\
+	ldr r1, [sp, #0x8]\n\
+	add r0, r1\n\
+	str r0, [sp, #0x10]\n\
+_0819A0CC:\n\
+	ldr r2, [sp, #0x4]\n\
+	ldrh r1, [r2, #0x6]\n\
+	sub r0, r1, r4\n\
+	cmp r0, r5\n\
+	bge _0819A0DE\n\
+	add r0, r3, r1\n\
+	sub r0, r4\n\
+	str r0, [sp, #0x14]\n\
+	b _0819A0E2\n\
+_0819A0DE:\n\
+	add r5, r3, r5\n\
+	str r5, [sp, #0x14]\n\
+_0819A0E2:\n\
+	ldr r0, [sp]\n\
+	ldrh r1, [r0, #0x4]\n\
+	mov r2, #0x7\n\
+	add r0, r1, #0\n\
+	and r0, r2\n\
+	add r1, r0\n\
+	asr r1, #3\n\
+	str r1, [sp, #0x18]\n\
+	ldr r0, [sp, #0x4]\n\
+	ldrh r1, [r0, #0x4]\n\
+	add r0, r1, #0\n\
+	and r0, r2\n\
+	add r1, r0\n\
+	asr r1, #3\n\
+	str r1, [sp, #0x1C]\n\
+	mov r12, r3\n\
+	mov r8, r4\n\
+	ldr r1, [sp, #0x14]\n\
+	cmp r12, r1\n\
+	blt _0819A10C\n\
+	b _0819A24A\n\
+_0819A10C:\n\
+	ldr r5, [sp, #0x8]\n\
+	ldr r6, [sp, #0xC]\n\
+	mov r2, r12\n\
+	add r2, #0x1\n\
+	str r2, [sp, #0x20]\n\
+	mov r0, r8\n\
+	add r0, #0x1\n\
+	str r0, [sp, #0x24]\n\
+	ldr r1, [sp, #0x10]\n\
+	cmp r5, r1\n\
+	blt _0819A124\n\
+	b _0819A23A\n\
+_0819A124:\n\
+	mov r7, #0x1\n\
+	mov r2, #0xF0\n\
+	mov r10, r2\n\
+	mov r0, #0xF\n\
+	mov r9, r0\n\
+_0819A12E:\n\
+	asr r0, r5, #1\n\
+	mov r1, #0x3\n\
+	and r0, r1\n\
+	ldr r2, [sp]\n\
+	ldr r1, [r2]\n\
+	add r1, r0\n\
+	asr r0, r5, #3\n\
+	lsl r0, #5\n\
+	add r1, r0\n\
+	mov r2, r12\n\
+	asr r0, r2, #3\n\
+	ldr r2, [sp, #0x18]\n\
+	mul r0, r2\n\
+	lsl r0, #5\n\
+	add r1, r0\n\
+	mov r2, r12\n\
+	lsl r0, r2, #29\n\
+	lsr r0, #27\n\
+	add r3, r1, r0\n\
+	asr r0, r6, #1\n\
+	mov r1, #0x3\n\
+	and r0, r1\n\
+	ldr r2, [sp, #0x4]\n\
+	ldr r1, [r2]\n\
+	add r1, r0\n\
+	asr r0, r6, #3\n\
+	lsl r0, #5\n\
+	add r1, r0\n\
+	mov r2, r8\n\
+	asr r0, r2, #3\n\
+	ldr r2, [sp, #0x1C]\n\
+	mul r0, r2\n\
+	lsl r0, #5\n\
+	add r1, r0\n\
+	mov r2, r8\n\
+	lsl r0, r2, #29\n\
+	lsr r0, #27\n\
+	add r4, r1, r0\n\
+	add r0, r4, #0\n\
+	and r0, r7\n\
+	cmp r0, #0\n\
+	beq _0819A1DA\n\
+	sub r4, #0x1\n\
+	add r0, r6, #0\n\
+	and r0, r7\n\
+	cmp r0, #0\n\
+	beq _0819A1B2\n\
+	ldrh r0, [r4]\n\
+	ldr r2, =0x00000fff\n\
+	and r2, r0\n\
+	add r0, r5, #0\n\
+	and r0, r7\n\
+	cmp r0, #0\n\
+	beq _0819A1A8\n\
+	ldrb r1, [r3]\n\
+	mov r0, r10\n\
+	and r0, r1\n\
+	lsl r0, #8\n\
+	b _0819A22A\n\
+	.pool\n\
+_0819A1A8:\n\
+	ldrb r1, [r3]\n\
+	mov r0, r9\n\
+	and r0, r1\n\
+	lsl r0, #12\n\
+	b _0819A22A\n\
+_0819A1B2:\n\
+	ldrh r0, [r4]\n\
+	ldr r2, =0x0000f0ff\n\
+	and r2, r0\n\
+	add r0, r5, #0\n\
+	and r0, r7\n\
+	cmp r0, #0\n\
+	beq _0819A1D0\n\
+	ldrb r1, [r3]\n\
+	mov r0, r10\n\
+	and r0, r1\n\
+	lsl r0, #4\n\
+	b _0819A22A\n\
+	.pool\n\
+_0819A1D0:\n\
+	ldrb r1, [r3]\n\
+	mov r0, r9\n\
+	and r0, r1\n\
+	lsl r0, #8\n\
+	b _0819A22A\n\
+_0819A1DA:\n\
+	add r0, r6, #0\n\
+	and r0, r7\n\
+	cmp r0, #0\n\
+	beq _0819A206\n\
+	ldrh r0, [r4]\n\
+	ldr r2, =0x0000ff0f\n\
+	and r2, r0\n\
+	add r0, r5, #0\n\
+	and r0, r7\n\
+	cmp r0, #0\n\
+	beq _0819A1FC\n\
+	ldrb r1, [r3]\n\
+	mov r0, r10\n\
+	b _0819A228\n\
+	.pool\n\
+_0819A1FC:\n\
+	ldrb r1, [r3]\n\
+	mov r0, r9\n\
+	and r0, r1\n\
+	lsl r0, #4\n\
+	b _0819A22A\n\
+_0819A206:\n\
+	ldrh r0, [r4]\n\
+	ldr r2, =0x0000fff0\n\
+	and r2, r0\n\
+	add r0, r5, #0\n\
+	and r0, r7\n\
+	cmp r0, #0\n\
+	beq _0819A224\n\
+	ldrb r1, [r3]\n\
+	mov r0, r10\n\
+	and r0, r1\n\
+	lsr r0, #4\n\
+	b _0819A22A\n\
+	.pool\n\
+_0819A224:\n\
+	ldrb r1, [r3]\n\
+	mov r0, r9\n\
+_0819A228:\n\
+	and r0, r1\n\
+_0819A22A:\n\
+	orr r2, r0\n\
+	strh r2, [r4]\n\
+	add r5, #0x1\n\
+	add r6, #0x1\n\
+	ldr r0, [sp, #0x10]\n\
+	cmp r5, r0\n\
+	bge _0819A23A\n\
+	b _0819A12E\n\
+_0819A23A:\n\
+	ldr r1, [sp, #0x20]\n\
+	mov r12, r1\n\
+	ldr r2, [sp, #0x24]\n\
+	mov r8, r2\n\
+	ldr r0, [sp, #0x14]\n\
+	cmp r12, r0\n\
+	bge _0819A24A\n\
+	b _0819A10C\n\
+_0819A24A:\n\
+	add sp, #0x28\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n");
+}
+
+void sub_819A25C(u8 palOffset, u16 speciesId)
+{
+    LoadPalette(GetValidMonIconPalettePtr(speciesId), palOffset, 0x20);
+}
+
+void sub_819A27C(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
+{
+    BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality, 1), x, y, 32, 32);
+}
+
+void sub_819A2BC(u8 palOffset, u8 palId)
+{
+    const u16 *palette;
+    
+    switch (palId)
+    {
+        case 0:
+        default:
+            palette = gFireRedMenuElements1_Pal;
+            break;
+        case 1:
+            palette = gFireRedMenuElements2_Pal;
+            break;
+        case 2:
+            palette = gFireRedMenuElements3_Pal;
+            break;
+    }
+    
+    LoadPalette(palette, palOffset, 0x20);
+}
+
+void blit_move_info_icon(u8 windowId, u8 iconId, u16 x, u16 y)
+{
+    BlitBitmapRectToWindow(windowId, gFireRedMenuElements_Gfx + gUnknown_0860F0D4[iconId].unk3 * 32, 0, 0, 128, 128, x, y, gUnknown_0860F0D4[iconId].unk1, gUnknown_0860F0D4[iconId].unk2);
 }

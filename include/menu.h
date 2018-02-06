@@ -16,7 +16,7 @@ struct MenuAction
     } func;
 };
 
-void box_print(u8, u8, u8, u8, const void *, s8, const u8 *);
+void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const struct TextColor *color, s8 speed, const u8 *str);
 void sub_8198070(u8 windowId, bool8 copyToVram);
 void SetWindowTemplateFields(struct WindowTemplate* template, u8 priority, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 palNum, u16 baseBlock);
 void SetWindowBorderStyle(u8 windowId, bool8 copyToVram, u16 tileStart, u8 palette);
