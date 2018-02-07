@@ -2654,6 +2654,12 @@ extern const u8 gBattleTerrainPalette_StadiumWallace[];
 extern const u8 gPokedexMenu2_Gfx[];
 extern const u8 gPokedexText_Pal[];
 
+// berry tag screen
+extern const u8 gUnknown_08D9BB44[];
+extern const u8 gUnknown_08D9BF98[];
+extern const u8 gUnknown_08D9C13C[];
+extern const u8 gUnknown_08D9BEF0[];
+
 // rayquaza scene gfx
 extern const u8 gRaySceneGroudon_Gfx[];
 extern const u8 gRaySceneGroudon2_Gfx[];
