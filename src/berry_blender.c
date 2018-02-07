@@ -18,7 +18,6 @@
 #include "event_data.h"
 #include "main.h"
 #include "link.h"
-#include "new_menu_helpers.h"
 #include "item_menu_icons.h"
 #include "berry.h"
 #include "item.h"

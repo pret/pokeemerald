@@ -6,7 +6,6 @@
 #include "menu.h"
 #include "task.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
 #include "pokemon.h"
 #include "graphics.h"
 #include "malloc.h"

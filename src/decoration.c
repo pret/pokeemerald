@@ -20,7 +20,7 @@
 #include "field_map_obj.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "menu_indicators.h"
 #include "sound.h"
 #include "event_scripts.h"

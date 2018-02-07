@@ -5,7 +5,6 @@
 #include "task.h"
 #include "sprite.h"
 #include "string_util.h"
-#include "new_menu_helpers.h"
 #include "window.h"
 #include "bg.h"
 #include "gpu_regs.h"

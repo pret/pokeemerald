@@ -2679,4 +2679,10 @@ extern const u8 gRaySceneKyogreRight_Pal[];
 extern const u8 gRaySceneRayquazaHover_Pal[];
 extern const u8 gRaySceneSplash_Pal[];
 
+//menu graphics
+extern const u16 gFireRedMenuElements1_Pal[16];
+extern const u16 gFireRedMenuElements2_Pal[16];
+extern const u16 gFireRedMenuElements3_Pal[16];
+extern const u8 gFireRedMenuElements_Gfx[];
+
 #endif //GUARD_GRAPHICS_H

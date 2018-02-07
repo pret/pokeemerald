@@ -9,7 +9,6 @@
 #include "window.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
 #include "menu_indicators.h"
 #include "constants/maps.h"
 #include "constants/songs.h"

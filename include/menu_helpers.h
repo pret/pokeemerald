@@ -1,6 +1,8 @@
 #ifndef GUARD_MENU_HELPERS_H
 #define GUARD_MENU_HELPERS_H
 
+#include "task.h"
+
 // Exported type declarations
 
 struct YesNoFuncTable

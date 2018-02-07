@@ -29,7 +29,6 @@
 #include "menu.h"
 #include "money.h"
 #include "mystery_event_script.h"
-#include "new_menu_helpers.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon_3.h"

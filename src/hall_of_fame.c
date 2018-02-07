@@ -82,7 +82,6 @@ extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
 
 extern void NewMenuHelpers_DrawDialogueFrame(u8, u8);
-extern u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 speed, void ( *callback)(u16, struct TextPrinter *), u8 fgColor, u8 bgColor, u8 shadowColor);
 extern void sub_8175620(void);
 extern u8 TrySavingData(u8);
 extern u8 sub_818D3E4(u16 species, u32 trainerId, u32 personality, u8 flags, s16 x, s16 y, u8, u16);
