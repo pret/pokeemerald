@@ -1,0 +1,9 @@
+gPreBattleCallback1
+gBattleMainFunc
+gBattleResults
+gLeveledUpInBattle
+gBattlerControllerFuncs
+gHealthboxSpriteIds
+gMultiUsePlayerCursor
+gNumberOfMovesToChoose
+gUnknown_03005D7C

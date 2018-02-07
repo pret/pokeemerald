@@ -93,7 +93,6 @@
 #define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
 #define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
 
-extern u32 gBattleTypeFlags;
 
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
@@ -113,7 +112,6 @@ extern u32 gBattleTypeFlags;
 #define B_OUTCOME_POKE_TELEPORTED      0xA
 #define B_OUTCOME_LINK_BATTLE_RAN      0x80
 
-extern u8 gBattleOutcome;
 
 // Non-volatile status conditions
 // These persist remain outside of battle and after switching out
@@ -173,7 +171,6 @@ extern u8 gBattleOutcome;
 #define STATUS3_TRACE                   0x100000
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
-extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 
 // Not really sure what a "hitmarker" is.
 
@@ -204,7 +201,6 @@ extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 #define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 0x1C)
 #define HITMARKER_UNK(battler)          (0x10000000 << battler)
 
-extern u32 gHitMarker;
 
 // Per-side statuses that affect an entire party
 
@@ -217,7 +213,6 @@ extern u32 gHitMarker;
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
-extern u16 gSideStatuses[2];
 
 // Battle Actions
 // These determine what each battler will do in a turn
@@ -267,7 +262,6 @@ extern u16 gSideStatuses[2];
 #define WEATHER_HAIL_ANY            (WEATHER_HAIL)
 #define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
 
-extern u16 gBattleWeather;
 
 #define BATTLE_TERRAIN_GRASS        0
 #define BATTLE_TERRAIN_LONG_GRASS   1
@@ -280,7 +274,6 @@ extern u16 gBattleWeather;
 #define BATTLE_TERRAIN_BUILDING     8
 #define BATTLE_TERRAIN_PLAIN        9
 
-extern u8 gBattleTerrain;
 
 // array entries for battle communication
 #define MULTIUSE_STATE          0x0
@@ -339,14 +332,14 @@ extern u8 gBattleTerrain;
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
+#define BATTLE_BUFFER_LINK_SIZE 0x1000
+
 struct TrainerMonNoItemDefaultMoves
 {
     u16 iv;
     u8 lvl;
     u16 species;
 };
-
-u8 GetBattlerSide(u8 battler);
 
 struct TrainerMonItemDefaultMoves
 {
@@ -441,8 +434,6 @@ struct DisableStruct
     /*0x1A*/ u8 unk1A[2];
 };
 
-extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
-
 struct ProtectStruct
 {
     /* field_0 */
@@ -481,8 +472,6 @@ struct ProtectStruct
     /* field_E */ u16 fieldE;
 };
 
-extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
-
 struct SpecialStatus
 {
     u8 statLowered : 1;             // 0x1
@@ -503,8 +492,6 @@ struct SpecialStatus
     u8 field13;
 };
 
-extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
-
 struct SideTimer
 {
     /*0x00*/ u8 reflectTimer;
@@ -521,8 +508,6 @@ struct SideTimer
     /*0x0B*/ u8 fieldB;
 };
 
-extern struct SideTimer gSideTimers[];
-
 struct WishFutureKnock
 {
     u8 futureSightCounter[MAX_BATTLERS_COUNT];
@@ -534,8 +519,6 @@ struct WishFutureKnock
     u8 weatherDuration;
     u8 knockedOffPokes[2];
 };
-
-extern struct WishFutureKnock gWishFutureKnock;
 
 struct AI_ThinkingStruct
 {
@@ -600,8 +583,6 @@ struct BattleResources
     struct BattleScriptsStack *AI_ScriptsStack;
 };
 
-extern struct BattleResources* gBattleResources;
-
 struct BattleResults
 {
     u8 playerFaintCounter;    // 0x0
@@ -628,8 +609,6 @@ struct BattleResults
     u8 filler34[2];           // 0x34
     u8 catchAttempts[11];     // 0x36
 };
-
-extern struct BattleResults gBattleResults;
 
 struct BattleStruct
 {
@@ -745,8 +724,6 @@ struct BattleStruct
     u8 field_2A2;
 };
 
-extern struct BattleStruct* gBattleStruct;
-
 #define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \
     if (gBattleStruct->dynamicMoveType)                     \
@@ -859,8 +836,6 @@ struct BattleScripting
     u8 multiplayerId;
 };
 
-extern struct BattleScripting gBattleScripting;
-
 enum
 {
     BACK_PIC_BRENDAN,
@@ -874,7 +849,7 @@ enum
 };
 
 // rom_80A5C6C
-u8 GetBattlerSide(u8 bank);
+u8 GetBattlerSide(u8 battler);
 u8 GetBattlerPosition(u8 bank);
 u8 GetBattlerAtPosition(u8 bank);
 
@@ -956,18 +931,6 @@ struct BattleSpriteData
     struct BattleBarInfo *battleBars;
 };
 
-extern struct BattleSpriteData *gBattleSpritesDataPtr;
-
-#define BATTLE_BUFFER_LINK_SIZE 0x1000
-
-extern u8 *gLinkBattleSendBuffer;
-extern u8 *gLinkBattleRecvBuffer;
-
-extern u8 *gUnknown_0202305C;
-extern u8 *gUnknown_02023060;
-
-// Move this somewhere else
-
 #include "sprite.h"
 
 struct MonSpritesGfx
@@ -982,11 +945,107 @@ struct MonSpritesGfx
     void *field_17C;
 };
 
-extern struct BattleSpritesGfx* gMonSpritesGfx;
-extern u8 gBattleOutcome;
-extern u16 gLastUsedItem;
+// all battle variables are declared in battle_main.c
 extern u32 gBattleTypeFlags;
-extern struct MonSpritesGfx* gMonSpritesGfxPtr;
-extern u16 gTrainerBattleOpponent_A;
+extern u8 gBattleTerrain;
+extern u32 gUnknown_02022FF4;
+extern u8 *gUnknown_0202305C;
+extern u8 *gUnknown_02023060;
+extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
+extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
+extern u8 gActiveBattler;
+extern u32 gBattleControllerExecFlags;
+extern u8 gBattlersCount;
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
+extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
+extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
+extern u8 gBattleTurnOrder[MAX_BATTLERS_COUNT];
+extern u8 gCurrentTurnActionNumber;
+extern u8 gCurrentActionFuncId;
+extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
+extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
+extern u8 gCurrMovePos;
+extern u8 gUnknown_020241E9;
+extern u16 gCurrentMove;
+extern u16 gChosenMove;
+extern u16 gRandomMove;
+extern s32 gBattleMoveDamage;
+extern s32 gHpDealt;
+extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
+extern u16 gLastUsedItem;
+extern u8 gLastUsedAbility;
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
+extern u8 gBank1;
+extern u8 gEffectBank;
+extern u8 gStringBattler;
+extern u8 gAbsentBattlerFlags;
+extern u8 gCritMultiplier;
+extern u8 gMultiHitCounter;
+extern const u8 *gBattlescriptCurrInstr;
+extern u32 gUnusedBattleMainVar;
+extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
+extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
+extern const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT];
+extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
+extern u16 gLastMoves[MAX_BATTLERS_COUNT];
+extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
+extern u16 gLastHitByType[MAX_BATTLERS_COUNT];
+extern u16 gLastResultingMoves[MAX_BATTLERS_COUNT];
+extern u16 gLockedMoves[MAX_BATTLERS_COUNT];
+extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
+extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
+extern u8 gMoveResultFlags;
+extern u32 gHitMarker;
+extern u8 gUnknown_02024284[MAX_BATTLERS_COUNT];
+extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
+extern u8 gUnknown_0202428C;
+extern u16 gSideStatuses[2];
+extern struct SideTimer gSideTimers[2];
+extern u32 gStatuses3[MAX_BATTLERS_COUNT];
+extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
+extern u16 gPauseCounterBattle;
+extern u16 gPaydayMoney;
+extern u16 gRandomTurnNumber;
+extern u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT];
+extern u8 gBattleOutcome;
+extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
+extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
+extern u16 gBattleWeather;
+extern struct WishFutureKnock gWishFutureKnock;
+extern u16 gUnknown_020243FC;
+extern u8 gSentPokesToOpponent[2];
+extern u16 gDynamicBasePower;
+extern u16 gExpShareExp;
+extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
+extern struct BattleScripting gBattleScripting;
+extern struct BattleStruct *gBattleStruct;
+extern u8 *gLinkBattleSendBuffer;
+extern u8 *gLinkBattleRecvBuffer;
+extern struct BattleResources *gBattleResources;
+extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
+extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
+extern u8 gUnknown_020244B4[MAX_BATTLERS_COUNT];
+extern u8 gBattlerInMenuId;
+extern bool8 gDoingBattleAnim;
+extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
+extern u8 gPlayerDpadHoldFrames;
+extern struct BattleSpriteData *gBattleSpritesDataPtr;
+extern struct MonSpritesGfx *gMonSpritesGfxPtr;
+extern u8 *gUnknown_020244D8;
+extern u8 *gUnknown_020244DC;
+extern u16 gBattleMovePower;
+extern u16 gMoveToLearn;
+extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
+
+extern void (*gPreBattleCallback1)(void);
+extern void (*gBattleMainFunc)(void);
+extern struct BattleResults gBattleResults;
+extern u8 gLeveledUpInBattle;
+extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
+extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
+extern u8 gMultiUsePlayerCursor;
+extern u8 gNumberOfMovesToChoose;
+extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
 
 #endif // GUARD_BATTLE_H

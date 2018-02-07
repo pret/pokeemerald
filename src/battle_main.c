@@ -45,6 +45,7 @@
 #include "safari_zone.h"
 #include "battle_string_ids.h"
 #include "data2.h"
+#include "decompress.h"
 
 struct UnknownPokemonStruct2
 {
@@ -60,8 +61,6 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-extern u8 gBattleCommunication[];
-extern u8 gBattleTerrain;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG1_X;
@@ -70,74 +69,13 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern u16 gPartnerTrainerId;
 extern u16 gBattle_WIN0H;
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
 extern u16 gBattle_WIN1V;
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
-extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
-extern void (*gPreBattleCallback1)(void);
-extern void (*gBattleMainFunc)(void);
-extern void (*gCB2_AfterEvolution)(void);
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
-extern u8 gDecompressionBuffer[];
-extern u16 gUnknown_020243FC;
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern u8 gStringBattler;
-extern u32 gHitMarker;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u16 gPaydayMoney;
-extern u16 gBattleWeather;
-extern u16 gPauseCounterBattle;
-extern u16 gRandomTurnNumber;
-extern u8 gActiveBattler;
-extern u8 gBattlersCount;
-extern u8 gBattlerAttacker;
-extern u8 gBattlerTarget;
-extern u8 gLeveledUpInBattle;
-extern u8 gAbsentBattlerFlags;
-extern u32 gBattleControllerExecFlags;
-extern u8 gMultiHitCounter;
-extern u8 gMoveResultFlags;
-extern s32 gBattleMoveDamage;
-extern const u8* gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT];
-extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
-extern u16 gLastMoves[MAX_BATTLERS_COUNT];
-extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
-extern u16 gLastHitByType[MAX_BATTLERS_COUNT];
-extern u16 gLastResultingMoves[MAX_BATTLERS_COUNT];
-extern u16 gLockedMoves[MAX_BATTLERS_COUNT];
-extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
-extern u8 gUnknown_02024284[MAX_BATTLERS_COUNT];
-extern u32 gStatuses3[MAX_BATTLERS_COUNT];
-extern u16 gSideStatuses[2];
-extern u16 gCurrentMove;
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u8 gBattleTurnOrder[MAX_BATTLERS_COUNT];
-extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
-extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
-extern u8 gCurrentActionFuncId;
-extern u8 gLastUsedAbility;
 extern u8 gUnknown_0203CF00[];
-extern const u8* gSelectionBattleScripts[MAX_BATTLERS_COUNT];
-extern const u8* gBattlescriptCurrInstr;
-extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
-extern u8 gCurrentTurnActionNumber;
-extern u16 gDynamicBasePower;
-extern u8 gCritMultiplier;
-extern u8 gCurrMovePos;
-extern u8 gUnknown_020241E9;
-extern u16 gChosenMove;
 
 extern const struct BattleMove gBattleMoves[];
 extern const u16 gBattleTextboxPalette[]; // battle textbox palette
@@ -353,6 +291,17 @@ EWRAM_DATA u8 *gUnknown_020244DC = NULL;
 EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
+
+// IWRAM common vars
+void (*gPreBattleCallback1)(void);
+void (*gBattleMainFunc)(void);
+struct BattleResults gBattleResults;
+u8 gLeveledUpInBattle;
+void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
+u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
+u8 gMultiUsePlayerCursor;
+u8 gNumberOfMovesToChoose;
+u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
 
 // rom const data
 static void (* const sTurnActionsFuncsTable[])(void) =

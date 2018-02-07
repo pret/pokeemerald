@@ -39,67 +39,9 @@
 #include "task.h"
 #include "naming_screen.h"
 #include "battle_string_ids.h"
+#include "battle_setup.h"
+#include "overworld.h"
 
-// variables
-
-extern u8 gCritMultiplier;
-extern s32 gBattleMoveDamage;
-extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u8 gActiveBattler;
-extern u32 gBattleControllerExecFlags;
-extern u8 gBattlersCount;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattleTurnOrder[MAX_BATTLERS_COUNT];
-extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
-extern u16 gCurrentMove;
-extern u8 gLastUsedAbility;
-extern u8 gStringBattler;
-extern u8 gEffectBank;
-extern u8 gAbsentBattlerFlags;
-extern u8 gMultiHitCounter;
-extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
-extern u16 gPauseCounterBattle;
-extern u16 gPaydayMoney;
-extern u16 gRandomTurnNumber;
-extern u8 gBattlerAttacker;
-extern u8 gBattlerTarget;
-extern const u8* gBattlescriptCurrInstr;
-extern u8 gCurrMovePos;
-extern u8 gCurrentActionFuncId;
-extern u8 gMoveResultFlags;
-extern u8 gBattleCommunication[];
-extern u16 gLastLandedMoves[4];
-extern u16 gLastHitByType[4];
-extern u16 gLastResultingMoves[4];
-extern u8 gLastHitBy[4];
-extern u8 gStringBattler;
-extern u16 gDynamicBasePower;
-extern u16 gLastUsedItem;
-extern u16 gBattleMovePower;
-extern s32 gHpDealt;
-extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
-extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
-extern u8 gSentPokesToOpponent[2];
-extern u8 gBank1;
-extern u16 gExpShareExp;
-extern u8 gLeveledUpInBattle;
-extern void (*gBattleMainFunc)(void);
-extern u8 gPlayerPartyCount;
-extern u16 gMoveToLearn;
-extern u16 gRandomMove;
-extern u8 gBattlerInMenuId;
-extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
-extern u8 gCurrentTurnActionNumber;
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern u16 gLockedMoves[MAX_BATTLERS_COUNT];
-extern u16 gPartnerTrainerId;
-extern u16 gChosenMove;
-extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
-extern u16 gLastMoves[MAX_BATTLERS_COUNT];
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
-extern u8 gUnknown_020241E9;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
@@ -114,7 +56,6 @@ struct TrainerMoney
 };
 
 extern const struct BattleMove gBattleMoves[];
-extern const struct BaseStats gBaseStats[];
 extern const u8 gTypeEffectiveness[336];
 extern const struct TrainerMoney gTrainerMoneyTable[];
 extern const u8* const gBattleScriptsForMoveEffects[];
@@ -124,7 +65,6 @@ extern void sub_81A5718(u8 bank); // battle frontier 2
 extern void sub_81A56B4(void); // battle frontier 2
 extern void sub_81BFA38(struct Pokemon* party, u8 monPartyId, u8 monCount, void (*callback)(void), u16 move); // pokemon summary screen
 extern u8 sub_81C1B94(void); // pokemon summary screen
-extern void IncrementGameStat(u8 statId); // rom_4
 extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokenav.s
 extern void sub_81D3640(u8 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
 extern void sub_81D3784(u8 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
