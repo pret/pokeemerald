@@ -1197,26 +1197,26 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gBattleResources->secretBase->partySpecies[i])
+        if (gBattleResources->secretBase->party.species[i])
         {
             CreateMon(&gEnemyParty[i],
-                gBattleResources->secretBase->partySpecies[i],
-                gBattleResources->secretBase->partyLevels[i],
+                gBattleResources->secretBase->party.species[i],
+                gBattleResources->secretBase->party.levels[i],
                 15,
                 1,
-                gBattleResources->secretBase->partyPersonality[i],
+                gBattleResources->secretBase->party.personality[i],
                 2,
                 0);
 
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleResources->secretBase->partyHeldItems[i]);
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleResources->secretBase->party.heldItems[i]);
 
             for (j = 0; j < 6; j++)
-                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gBattleResources->secretBase->partyEVs[i]);
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gBattleResources->secretBase->party.EVs[i]);
 
             for (j = 0; j < 4; j++)
             {
-                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, &gBattleResources->secretBase->partyMoves[i * 4 + j]);
-                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gBattleResources->secretBase->partyMoves[i * 4 + j]].pp);
+                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, &gBattleResources->secretBase->party.moves[i * 4 + j]);
+                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gBattleResources->secretBase->party.moves[i * 4 + j]].pp);
             }
         }
     }

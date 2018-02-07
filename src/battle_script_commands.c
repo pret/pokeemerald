@@ -6226,7 +6226,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
 
     if (trainerId == SECRET_BASE_OPPONENT)
     {
-        moneyReward = 20 * gBattleResources->secretBase->partyLevels[0] * gBattleStruct->moneyMultiplier;
+        moneyReward = 20 * gBattleResources->secretBase->party.levels[0] * gBattleStruct->moneyMultiplier;
     }
     else
     {

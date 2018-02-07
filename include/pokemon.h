@@ -128,7 +128,6 @@
 
 #define NUMBER_OF_MON_TYPES     0x12
 
-#define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
