@@ -133,7 +133,7 @@ extern const u8 gMultiBootProgram_BerryGlitchFix_End[];
 
 // .text
 
-void InitBerryFixProgram(void)
+void CB2_InitBerryFixProgram(void)
 {
     DisableInterrupts(0xFFFF);
     EnableInterrupts(0x0001);

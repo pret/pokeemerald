@@ -28867,7 +28867,7 @@ sub_80186A4: @ 80186A4
 	movs r0, 0x3
 	bl GetBgTilemapBuffer
 	bl Free
-	ldr r0, =c2_title_screen_1
+	ldr r0, =CB2_InitTitleScreen
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
