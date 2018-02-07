@@ -2018,7 +2018,7 @@ void sub_819A080(struct UnkStruct_819A080 *a0, struct UnkStruct_819A080 *a1, u16
     // sp+04 = a1
     // sp+08 = a2
     // sp+0c = a4
-    int sp10 = a1->unk04 - a4 > a6 ? a6 + a2 : a1->unk04 - a4;
+    int sp10 = a1->unk04 - a4 < a6 ? a1->unk04 - a4 + a2 : a6 + a2;
     int sp14 = a0->unk06 - a5 < a7 ? a3 + a0->unk06 - a5 : a3 + a7;
     int sp18 = (a0->unk04 + (a0->unk04 & 0x7)) / 8;
     int sp1c = (a1->unk04 + (a1->unk04 & 0x7)) / 8;
