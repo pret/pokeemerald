@@ -348,7 +348,7 @@ AddBagItemIconObject: @ 80D4F38
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl AddItemIconObject
+	bl AddItemIconSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -527,8 +527,8 @@ _080D5082:
 	.pool
 	thumb_func_end sub_80D5070
 
-	thumb_func_start sub_80D50D4
-sub_80D50D4: @ 80D50D4
+	thumb_func_start CreateBerryTagSprite
+CreateBerryTagSprite: @ 80D50D4
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -554,17 +554,17 @@ sub_80D50D4: @ 80D50D4
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80D50D4
+	thumb_func_end CreateBerryTagSprite
 
-	thumb_func_start sub_80D510C
-sub_80D510C: @ 80D510C
+	thumb_func_start FreeBerryTagSpritePalette
+FreeBerryTagSpritePalette: @ 80D510C
 	push {lr}
 	ldr r0, =0x00007544
 	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D510C
+	thumb_func_end FreeBerryTagSpritePalette
 
 	thumb_func_start sub_80D511C
 sub_80D511C: @ 80D511C
@@ -617,8 +617,8 @@ _080D5172:
 	.pool
 	thumb_func_end sub_80D511C
 
-	thumb_func_start sub_80D518C
-sub_80D518C: @ 80D518C
+	thumb_func_start CreateBerryFlavorCircleSprite
+CreateBerryFlavorCircleSprite: @ 80D518C
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =gUnknown_0857FE10
@@ -632,6 +632,6 @@ sub_80D518C: @ 80D518C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80D518C
+	thumb_func_end CreateBerryFlavorCircleSprite
 
 	.align 2, 0 @ Don't pad with nop.

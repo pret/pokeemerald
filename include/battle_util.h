@@ -48,8 +48,8 @@ u8 GetBattleBank(u8 caseId);
 void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
-void MarkAllBufferBanksForExecution(void); // unused
-void MarkBufferBankForExecution(u8 bank);
+void MarkAllBattlersForControllerExec(void); // unused
+void MarkBattlerForControllerExec(u8 bank);
 void sub_803F850(u8 arg0);
 void CancelMultiTurnMoves(u8 bank);
 bool8 WasUnableToUseMove(u8 bank);

@@ -4,6 +4,192 @@
 	.syntax unified
 
 	.text
+	
+	thumb_func_start sub_81B0038
+sub_81B0038: @ 81B0038
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x4
+	ldr r4, [sp, 0x24]
+	lsls r0, 24
+	lsrs r0, 24
+	mov r8, r0
+	lsls r1, 24
+	lsrs r1, 24
+	mov r9, r1
+	lsls r2, 24
+	lsrs r7, r2, 24
+	lsls r3, 24
+	lsrs r3, 24
+	str r3, [sp]
+	lsls r4, 24
+	lsrs r6, r4, 24
+	bl reset_brm
+	ldr r0, =gUnknown_0203CEC4
+	mov r10, r0
+	movs r0, 0x8E
+	lsls r0, 2
+	bl Alloc
+	adds r5, r0, 0
+	mov r1, r10
+	str r5, [r1]
+	cmp r5, 0
+	bne _081B0088
+	ldr r0, [sp, 0x2C]
+	bl SetMainCallback2
+	b _081B0194
+	.pool
+_081B0088:
+	ldr r3, =gUnknown_0203CEC8
+	movs r1, 0xF
+	mov r4, r8
+	ands r1, r4
+	ldrb r2, [r3, 0x8]
+	movs r0, 0x10
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r3, 0x8]
+	ldr r0, [sp, 0x2C]
+	str r0, [r3]
+	movs r4, 0
+	strb r7, [r3, 0xB]
+	lsls r2, r6, 2
+	ldrh r1, [r5, 0xA]
+	movs r0, 0x3
+	ands r0, r1
+	orrs r0, r2
+	strh r0, [r5, 0xA]
+	ldr r0, [sp, 0x28]
+	str r0, [r5]
+	str r4, [r5, 0x4]
+	ldrb r1, [r5, 0x8]
+	movs r0, 0xF
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r5, 0x8]
+	mov r1, r10
+	ldr r2, [r1]
+	ldrh r0, [r2, 0x8]
+	movs r4, 0xFE
+	lsls r4, 3
+	adds r1, r4, 0
+	orrs r0, r1
+	strh r0, [r2, 0x8]
+	ldr r0, [r2, 0x8]
+	movs r1, 0xFE
+	lsls r1, 10
+	orrs r0, r1
+	str r0, [r2, 0x8]
+	adds r6, r3, 0
+	mov r5, r8
+	cmp r5, 0x4
+	bne _081B00F0
+	ldrb r0, [r2, 0x8]
+	movs r1, 0x1
+	orrs r0, r1
+	b _081B00F8
+	.pool
+_081B00F0:
+	ldrb r1, [r2, 0x8]
+	movs r0, 0x2
+	negs r0, r0
+	ands r0, r1
+_081B00F8:
+	strb r0, [r2, 0x8]
+	mov r0, r9
+	cmp r0, 0xFF
+	beq _081B0114
+	movs r0, 0x3
+	mov r1, r9
+	ands r0, r1
+	lsls r0, 4
+	ldrb r2, [r6, 0x8]
+	movs r1, 0x31
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r6, 0x8]
+_081B0114:
+	movs r2, 0
+	ldr r5, =gUnknown_0203CEC4
+	movs r4, 0x86
+	lsls r4, 2
+	movs r3, 0
+_081B011E:
+	ldr r0, [r5]
+	lsls r1, r2, 1
+	adds r0, r4
+	adds r0, r1
+	strh r3, [r0]
+	adds r0, r2, 0x1
+	lsls r0, 16
+	lsrs r2, r0, 16
+	cmp r2, 0xF
+	bls _081B011E
+	movs r2, 0
+	ldr r4, =gUnknown_0203CEC4
+	movs r3, 0xFF
+_081B0138:
+	ldr r0, [r4]
+	adds r0, 0xC
+	adds r0, r2
+	ldrb r1, [r0]
+	orrs r1, r3
+	strb r1, [r0]
+	adds r0, r2, 0x1
+	lsls r0, 16
+	lsrs r2, r0, 16
+	cmp r2, 0x2
+	bls _081B0138
+	ldr r4, [sp]
+	cmp r4, 0
+	bne _081B015C
+	strb r4, [r6, 0x9]
+	b _081B017E
+	.pool
+_081B015C:
+	adds r1, r6, 0
+	movs r0, 0x9
+	ldrsb r0, [r1, r0]
+	cmp r0, 0x5
+	bgt _081B017A
+	adds r1, r0, 0
+	movs r0, 0x64
+	muls r0, r1
+	ldr r1, =gPlayerParty
+	adds r0, r1
+	movs r1, 0xB
+	bl GetMonData
+	cmp r0, 0
+	bne _081B017E
+_081B017A:
+	movs r0, 0
+	strb r0, [r6, 0x9]
+_081B017E:
+	ldr r2, =gTextFlags
+	ldrb r1, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2]
+	bl CalculatePlayerPartyCount
+	ldr r0, =c2_811EBD0
+	bl SetMainCallback2
+_081B0194:
+	add sp, 0x4
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_81B0038
 
 	thumb_func_start sub_81B01B0
 sub_81B01B0: @ 81B01B0
@@ -16041,14 +16227,14 @@ _081B8AF8:
 	b _081B8B24
 _081B8AFC:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8B1E
 	adds r0, r5, 0
 	bl sub_81B8F38
 	lsls r0, 24
-	ldr r2, =gBattlePartyID
+	ldr r2, =gBattlerPartyIndexes
 	lsls r1, r4, 1
 	adds r1, r2
 	lsrs r0, 24
@@ -16060,7 +16246,7 @@ _081B8B1E:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _081B8B24:
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattlersCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _081B8AFC
@@ -16115,7 +16301,7 @@ _081B8BA8:
 	ldr r1, =gUnknown_0203CEE8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -16150,7 +16336,7 @@ _081B8BFC:
 _081B8C20:
 	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -16228,9 +16414,9 @@ _081B8CBE:
 	bne _081B8CFC
 	movs r5, 0x1
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	mov r2, sp
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -16255,16 +16441,16 @@ _081B8CF0:
 _081B8CFC:
 	movs r5, 0x2
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	mov r1, sp
-	ldr r4, =gBattlePartyID
+	ldr r4, =gBattlerPartyIndexes
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
 	ldrh r0, [r0]
 	strb r0, [r1]
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	mov r1, sp
 	lsls r0, 24
 	lsrs r0, 23
@@ -16339,24 +16525,24 @@ sub_81B8D88: @ 81B8D88
 	lsrs r7, r1, 24
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8DB0
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x2
 	b _081B8DBC
 _081B8DB0:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
 _081B8DBC:
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl sub_81B1250
@@ -16388,7 +16574,7 @@ _081B8DF0:
 	bne _081B8E28
 	movs r3, 0x1
 	mov r2, sp
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -16412,7 +16598,7 @@ _081B8E1A:
 _081B8E28:
 	movs r3, 0x2
 	mov r1, sp
-	ldr r2, =gBattlePartyID
+	ldr r2, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r2
 	ldrh r0, [r0]

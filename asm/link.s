@@ -46462,7 +46462,7 @@ _080214C6:
 	lsrs r3, 16
 	ldr r0, =gUnknown_082F436C
 	adds r1, r2, 0
-	bl AddItemIconObjectWithCustomObjectTemplate
+	bl AddCustomItemIconSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r2, r9

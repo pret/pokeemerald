@@ -42,7 +42,7 @@ static bool32 sub_80F958C(void)
 static void sub_80F95C0(u8 partyIdx)
 {
     struct Pokemon *pokemon = gPlayerParty + partyIdx;
-    unsigned int status = STATUS_NONE;
+    unsigned int status = STATUS1_NONE;
     AdjustFriendship(pokemon, 0x07);
     SetMonData(pokemon, MON_DATA_STATUS, &status);
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);

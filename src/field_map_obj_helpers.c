@@ -549,14 +549,14 @@ bool32 sub_8097E50(struct MapObject *mapObject, struct Sprite *sprite)
         {
             if (firstFreeSlot == 16 && gUnknown_020375B8[i] == 0)
                 firstFreeSlot = i;
-            
+
             if (gUnknown_020375B8[i] == mapObject->localId)
             {
                 found = TRUE;
                 break;
             }
         }
-        
+
         if (!found && firstFreeSlot != 16)
         {
             gUnknown_020375B8[firstFreeSlot] = mapObject->localId;
@@ -564,13 +564,13 @@ bool32 sub_8097E50(struct MapObject *mapObject, struct Sprite *sprite)
             ableToStore = TRUE; // the nonmatching problem is that ableToStore == TRUE isnt being merged with the above ableToStore = TRUE assignment.
         }
     }
-    
+
     if (ableToStore == TRUE)
     {
         mapObject->mapobj_bit_12 = TRUE;
         mapObject->mapobj_bit_9 = TRUE;
     }
-    
+
     sprite->data[2] = 1;
     return TRUE;
 }
