@@ -34,7 +34,7 @@
 #include "menu_helpers.h"
 #include "window.h"
 
-struct bagStruct {
+struct BagStruct {
     void (*bagCallback)(void); 
     u8 location;
     u8 pocket;
@@ -44,7 +44,7 @@ struct bagStruct {
     u8 **pocketStringsPtr;
 };
 
-struct unkBagStruct {
+struct UnkBagStruct {
     MainCallback unk0;
     u8 unk4[0x800];
     u8 unk804;
@@ -75,15 +75,15 @@ struct unkBagStruct {
     u8 filler2[4];
 };
 
-struct listBuffer1 {
+struct ListBuffer1 {
     struct ListMenuItem subBuffers[65];
 };
 
-struct listBuffer2 {
+struct ListBuffer2 {
     s8 name[65][24];
 };
 
-struct unkWallyStruct {
+struct TempWallyStruct {
     struct ItemSlot bagPocket_Items[30];
     struct ItemSlot bagPocket_PokeBalls[16];
     u16 cursorPosition[5];
@@ -92,16 +92,16 @@ struct unkWallyStruct {
     u16 pocket;
 };
 
-struct unkStructTextFunc{
+struct UnkStructTextFunc{
     u8* text;
     TaskFunc func;
 };
 
-extern struct bagStruct gUnknown_0203CE58;
-extern struct unkBagStruct *gUnknown_0203CE54;
-extern struct listBuffer1 *gUnknown_0203CE74;
-extern struct listBuffer2 *gUnknown_0203CE78;
-extern struct unkWallyStruct *gUnknown_0203CE80;
+extern struct BagStruct gUnknown_0203CE58;
+extern struct UnkBagStruct *gUnknown_0203CE54;
+extern struct ListBuffer1 *gUnknown_0203CE74;
+extern struct ListBuffer2 *gUnknown_0203CE78;
+extern struct TempWallyStruct *gUnknown_0203CE80;
 extern u16 gUnknown_0203CE6A[];
 extern u16 gUnknown_0203CE60[];
 extern void sub_8086194(void);
@@ -133,15 +133,15 @@ extern void sub_80D4FEC(u8);
 extern void sub_80D4FC8(u8);
 extern void sub_80D702C(struct ItemSlot*, s16, u16);
 extern bool8 sub_8122148(u16);
-extern void AddItemMenuActionTextPrinters (u8, u8, u8, u8, u8, u8, u8, struct unkStructTextFunc*, u8*);
-extern void sub_8198DBC(u8, u8, u8, u8, u8, u8, u8, struct unkStructTextFunc*, u8*);
+extern void AddItemMenuActionTextPrinters (u8, u8, u8, u8, u8, u8, u8, struct UnkStructTextFunc*, u8*);
+extern void sub_8198DBC(u8, u8, u8, u8, u8, u8, u8, struct UnkStructTextFunc*, u8*);
 extern void sub_8199944(u8, u8, u8, u8, u8);
 extern void sub_8199134(s8, s8);
 extern void sub_80FDD10(u8);
 extern bool8 AdjustQuantityAccordingToDPadInput(s16*, u16);
 extern void sub_81B7F60(void);
 extern bool8 itemid_80BF6D8_mail_related(u16);
-extern void sub_8177C14(void);
+extern void DoBerryTagScreen(void);
 extern void sub_808B864(void);
 extern void sub_808BCF4(void);
 extern void FreezeMapObjects(void);
@@ -264,7 +264,7 @@ extern u8 gUnknown_0861404B[];
 extern u8 gUnknown_0861404D[];
 extern u8 gUnknown_0861404F[];
 extern u8 gText_Var1IsSelected[];
-extern struct unkStructTextFunc gUnknown_08613FB4[];
+extern struct UnkStructTextFunc gUnknown_08613FB4[];
 extern u8 gText_TossHowManyVar1s[];
 extern u8 gText_ConfirmTossItems[];
 extern struct YesNoFuncTable gUnknown_08614084;
@@ -352,7 +352,7 @@ void sub_81AAC70(void)
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)())
 {
     u8 temp;
-    gUnknown_0203CE54 = AllocZeroed(sizeof(struct unkBagStruct));
+    gUnknown_0203CE54 = AllocZeroed(sizeof(struct UnkBagStruct));
     if (gUnknown_0203CE54 == 0)
         SetMainCallback2(postExitMenuMainCallback2);
     else
@@ -579,8 +579,8 @@ u8 sub_81AB1F0(u8 a)
 
 void allocate_bag_item_list_buffers(void)
 {
-    gUnknown_0203CE74 = Alloc(sizeof(struct listBuffer1));
-    gUnknown_0203CE78 = Alloc(sizeof(struct listBuffer2));
+    gUnknown_0203CE74 = Alloc(sizeof(struct ListBuffer1));
+    gUnknown_0203CE78 = Alloc(sizeof(struct ListBuffer2));
 }
 
 void load_bag_item_list_buffers(u8 pocketId)
@@ -1798,7 +1798,7 @@ void sub_81AD350(u8 taskId)
 
 void ItemMenu_CheckTag(u8 taskId)
 {
-    gUnknown_0203CE54->unk0 = sub_8177C14;
+    gUnknown_0203CE54->unk0 = DoBerryTagScreen;
     unknown_ItemMenu_Confirm(taskId);
 }
 
@@ -2101,7 +2101,7 @@ void PrepareBagForWallyTutorial(void)
 {
     u32 i;
     
-    gUnknown_0203CE80 = AllocZeroed(sizeof(struct unkWallyStruct));
+    gUnknown_0203CE80 = AllocZeroed(sizeof(struct TempWallyStruct));
     memcpy(gUnknown_0203CE80->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, sizeof(gSaveBlock1Ptr->bagPocket_Items));
     memcpy(gUnknown_0203CE80->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bagPocket_PokeBalls));
     gUnknown_0203CE80->pocket = gUnknown_0203CE58.pocket;
