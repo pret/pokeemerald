@@ -1,5 +1,5 @@
-#ifndef GUARD_BATTLE_AI_H
-#define GUARD_BATTLE_AI_H
+#ifndef GUARD_CONSTANTS_BATTLE_AI_H
+#define GUARD_CONSTANTS_BATTLE_AI_H
 
 // battlers
 #define AI_TARGET 0
@@ -49,4 +49,4 @@
 #define AI_SCRIPT_SAFARI (1 << 30)
 #define AI_SCRIPT_FIRST_BATTLE (1 << 31)
 
-#endif // GUARD_BATTLE_AI_H
+#endif // GUARD_CONSTANTS_BATTLE_AI_H

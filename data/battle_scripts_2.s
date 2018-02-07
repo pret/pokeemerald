@@ -1,3 +1,6 @@
+#include "constants/battle.h"
+#include "constants/battle_anim.h"
+#include "constants/battle_string_ids.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 	.include "asm/macros.inc"
@@ -5,7 +8,6 @@
 	.include "constants/constants.inc"
 	.include "constants/battle_constants.inc"
 	.include "constants/battle_script_constants.inc"
-	.include "constants/battle_text.inc"
 
 	.section script_data, "aw", %progbits
 
@@ -81,12 +83,12 @@ BattleScript_TryNicknameCaughtMon::
 BattleScript_GiveCaughtMonEnd::
 	givecaughtmon
 BattleScript_SuccessBallThrowEnd::
-	setbyte gBattleOutcome, CAUGHT
+	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 
 BattleScript_WallyBallThrow::
 	printstring STRINGID_GOTCHAPKMNCAUGHT2
-	setbyte gBattleOutcome, CAUGHT
+	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 
 BattleScript_ShakeBallThrow::
@@ -96,7 +98,7 @@ BattleScript_ShakeBallThrow::
 	jumpifbyte NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_ShakeBallThrowEnd
 	printstring STRINGID_OUTOFSAFARIBALLS
 	waitmessage 0x40
-	setbyte gBattleOutcome, OUT_OF_BALLS
+	setbyte gBattleOutcome, B_OUTCOME_NO_SAFARI_BALLS
 BattleScript_ShakeBallThrowEnd::
 	finishaction
 
@@ -172,7 +174,7 @@ BattleScript_OpponentUsesGuardSpecs::
 
 BattleScript_RunByUsingItem::
 	playse SE_NIGERU
-	setbyte gBattleOutcome, RAN
+	setbyte gBattleOutcome, B_OUTCOME_RAN
 	finishturn
 
 BattleScript_ActionWatchesCarefully::
@@ -188,7 +190,7 @@ BattleScript_ActionGetNear::
 BattleScript_ActionThrowPokeblock::
 	printstring STRINGID_THREWPOKEBLOCKATPKMN
 	waitmessage 0x40
-	playanimation ATTACKER, ANIM_x4, NULL
+	playanimation ATTACKER, B_ANIM_x4, NULL
 	printfromtable gSafariPokeblockResultStringIds
 	waitmessage 0x40
 	end2

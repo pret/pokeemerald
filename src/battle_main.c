@@ -43,7 +43,7 @@
 #include "roamer.h"
 #include "tv.h"
 #include "safari_zone.h"
-#include "battle_string_ids.h"
+#include "constants/battle_string_ids.h"
 #include "data2.h"
 #include "decompress.h"
 
@@ -330,11 +330,11 @@ static void (* const sEndTurnFuncsTable[])(void) =
     HandleEndTurn_BattleLost,           // B_OUTCOME_DREW
     HandleEndTurn_RanFromBattle,        // B_OUTCOME_RAN
     HandleEndTurn_FinishBattle,         // B_OUTCOME_PLAYER_TELEPORTED
-    HandleEndTurn_MonFled,              // B_OUTCOME_POKE_FLED
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_CAUGHT_POKE
+    HandleEndTurn_MonFled,              // B_OUTCOME_MON_FLED
+    HandleEndTurn_FinishBattle,         // B_OUTCOME_CAUGHT
     HandleEndTurn_FinishBattle,         // battle outcome 8
     HandleEndTurn_FinishBattle,         // B_OUTCOME_FORFEITED
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_POKE_TELEPORTED
+    HandleEndTurn_FinishBattle,         // B_OUTCOME_MON_TELEPORTED
 };
 
 const u8 gStatusConditionString_PoisonJpn[8] = _("どく$$$$$");
@@ -5025,7 +5025,7 @@ static void ReturnFromBattleToOverworld(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
     {
         UpdateRoamerHPStatus(&gEnemyParty[0]);
-        if ((gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT_POKE)
+        if ((gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT)
             SetRoamerInactive();
     }
 
@@ -5496,7 +5496,7 @@ static void HandleAction_Run(void)
             else
             {
                 gCurrentTurnActionNumber = gBattlersCount;
-                gBattleOutcome = B_OUTCOME_POKE_FLED;
+                gBattleOutcome = B_OUTCOME_MON_FLED;
             }
         }
     }

@@ -38,7 +38,7 @@
 #include "pokemon_storage_system.h"
 #include "task.h"
 #include "naming_screen.h"
-#include "battle_string_ids.h"
+#include "constants/battle_string_ids.h"
 #include "battle_setup.h"
 #include "overworld.h"
 
@@ -7053,7 +7053,7 @@ static void atk76_various(void)
         if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED;
         else
-            gBattleOutcome = B_OUTCOME_POKE_TELEPORTED;
+            gBattleOutcome = B_OUTCOME_MON_TELEPORTED;
         break;
     case VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC:
         BtlController_EmitPlayFanfareOrBGM(0, MUS_KACHI1, TRUE);

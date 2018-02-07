@@ -993,8 +993,8 @@ static bool32 IsPlayerDefeated(u32 battleOutcome)
     case B_OUTCOME_WON:
     case B_OUTCOME_RAN:
     case B_OUTCOME_PLAYER_TELEPORTED:
-    case B_OUTCOME_POKE_FLED:
-    case B_OUTCOME_CAUGHT_POKE:
+    case B_OUTCOME_MON_FLED:
+    case B_OUTCOME_CAUGHT:
         return FALSE;
     default:
         return FALSE;

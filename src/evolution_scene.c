@@ -21,7 +21,7 @@
 #include "constants/songs.h"
 #include "overworld.h"
 #include "battle_message.h"
-#include "battle_string_ids.h"
+#include "constants/battle_string_ids.h"
 #include "gpu_regs.h"
 #include "bg.h"
 #include "link.h"

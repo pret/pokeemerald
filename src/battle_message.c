@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_message.h"
-#include "battle_string_ids.h"
+#include "constants/battle_string_ids.h"
 #include "constants/moves.h"
 #include "text.h"
 #include "string_util.h"
