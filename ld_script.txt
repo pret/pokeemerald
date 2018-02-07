@@ -54,6 +54,7 @@ SECTIONS {
         src/string_util.o(.text);
         asm/link.o(.text);
         src/rtc.o(.text);
+        src/main_menu.o(.text);
         asm/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
