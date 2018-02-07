@@ -1389,7 +1389,7 @@
 	.endm
 	
 	.macro jumpifmovehadnoeffect jumpptr
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, \jumpptr
+	jumpifbyte COMMON_BITS, gMoveResultFlags, MOVE_RESULT_NO_EFFECT, \jumpptr
 	.endm
 	
 	.macro jumpifbattletype flags, jumpptr

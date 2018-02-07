@@ -45,9 +45,9 @@ extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
 extern u8 gAnimMoveTurn;
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
-extern u16 gAnimSpeciesByBanks[BATTLE_BANKS_COUNT];
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
+extern u16 gAnimSpeciesByBanks[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_02038440;
 
 void ClearBattleAnimationVars(void);
@@ -56,7 +56,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);
-bool8 IsAnimBankSpriteVisible(u8 bank);
+bool8 IsBattlerSpriteVisible(u8 bank);
 void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible);
 bool8 IsContest(void);
 s8 BattleAnimAdjustPanning(s8 pan);
@@ -85,17 +85,17 @@ enum
     BANK_Y_POS,
 };
 
-u8 GetBankPosition(u8 bank, u8 attributeId);
+u8 GetBattlerSpriteCoord(u8 bank, u8 attributeId);
 
-bool8 IsBankSpritePresent(u8 bank);
+bool8 IsBattlerSpritePresent(u8 bank);
 void sub_80A6C68(u8 arg0);
-u8 GetAnimBankSpriteId(u8 wantedBank);
+u8 GetAnimBattlerSpriteId(u8 wantedBank);
 bool8 IsDoubleBattle(void);
 u8 sub_80A6D94(void);
 u8 sub_80A8364(u8);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
-u8 GetBankSpriteDefault_Y(u8 bank);
+u8 GetBattlerSpriteDefault_Y(u8 bank);
 u8 sub_80A82E4(u8 bank);
 u8 GetSubstituteSpriteDefault_Y(u8 bank);
 

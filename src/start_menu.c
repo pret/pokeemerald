@@ -62,6 +62,11 @@ EWRAM_DATA u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA u8 sStartMenuCursorPos = 0;
 EWRAM_DATA u8 sNumStartMenuActions = 0;
 EWRAM_DATA u8 sCurrentStartMenuActions[9] = {0};
+EWRAM_DATA u8 gUnknown_02037619[2] = {0};
+EWRAM_DATA bool8 (*gUnknown_0203761C)(void) = NULL;
+EWRAM_DATA u8 gUnknown_02037620 = 0;
+EWRAM_DATA u8 gUnknown_02037621 = 0;
+EWRAM_DATA u8 gUnknown_02037622 = 0;
 
 // const rom data
 static const struct WindowTemplate gSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
@@ -120,6 +125,13 @@ const struct WindowTemplate gUnknown_085105AC[] =
 const struct WindowTemplate gUnknown_085105BC = {0, 1, 1, 0xE, 0xA, 0xF, 8};
 
 // code
+void SetDexPokemonPokenavFlags(void) // unused
+{
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKENAV_GET);
+}
+
 void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;

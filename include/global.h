@@ -34,8 +34,13 @@
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
 
+#define PARTY_SIZE 6
+
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
+
+#define min(a, b) ((a) < (b) ? (a) : (b))
+#define max(a, b) ((a) >= (b) ? (a) : (b))
 
 #define HEAP_SIZE 0x1C000
 
@@ -292,6 +297,16 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
+struct SecretBaseParty
+{
+    u32 personality[PARTY_SIZE];
+    u16 moves[PARTY_SIZE * 4];
+    u16 species[PARTY_SIZE];
+    u16 heldItems[PARTY_SIZE];
+    u8 levels[PARTY_SIZE];
+    u8 EVs[PARTY_SIZE];
+};
+
 struct SecretBaseRecord
 {
     /*0x1A9C*/ u8 secretBaseId;
@@ -307,12 +322,7 @@ struct SecretBaseRecord
     /*0x1AAD*/ u8 sbr_field_11;
     /*0x1AAE*/ u8 decorations[16];
     /*0x1ABE*/ u8 decorationPos[16];
-    /*0x1AD0*/ u32 partyPersonality[6];
-    /*0x1AE8*/ u16 partyMoves[6 * 4];
-    /*0x1B18*/ u16 partySpecies[6];
-    /*0x1B24*/ u16 partyHeldItems[6];
-    /*0x1B2E*/ u8 partyLevels[6];
-    /*0x1B34*/ u8 partyEVs[6];
+    /*0x1AD0*/ struct SecretBaseParty party;
 };
 
 #include "constants/game_stat.h"
