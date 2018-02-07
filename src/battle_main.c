@@ -81,8 +81,6 @@ extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);
 extern void (*gCB2_AfterEvolution)(void);
-extern struct UnknownPokemonStruct2 gUnknown_02022FF8[3]; // what is it used for?
-extern struct UnknownPokemonStruct2* gUnknown_02023058; // what is it used for?
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gDecompressionBuffer[];
@@ -92,7 +90,6 @@ extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
 extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
 extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern u8 gStringBattler;
-extern u32 gUnknown_02022F88;
 extern u32 gHitMarker;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
@@ -260,6 +257,102 @@ static void HandleAction_Action9(void);
 static void HandleAction_Action11(void);
 static void HandleAction_NothingIsFainted(void);
 static void HandleAction_ActionFinished(void);
+
+// EWRAM vars
+EWRAM_DATA u32 gUnknown_02022F88[25] = {0};
+EWRAM_DATA u32 gBattleTypeFlags = 0;
+EWRAM_DATA u8 gBattleTerrain = 0;
+EWRAM_DATA u32 gUnknown_02022FF4 = 0;
+EWRAM_DATA struct UnknownPokemonStruct2 gUnknown_02022FF8[3] = {0}; // what is it used for?
+EWRAM_DATA struct UnknownPokemonStruct2* gUnknown_02023058 = NULL; // what is it used for?
+EWRAM_DATA u8 *gUnknown_0202305C = NULL;
+EWRAM_DATA u8 *gUnknown_02023060 = NULL;
+EWRAM_DATA u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200] = {0};
+EWRAM_DATA u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200] = {0};
+EWRAM_DATA u8 gActiveBattler = 0;
+EWRAM_DATA u32 gBattleControllerExecFlags = 0;
+EWRAM_DATA u8 gBattlersCount = 0;
+EWRAM_DATA u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerPositions[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattleTurnOrder[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gCurrentTurnActionNumber = 0;
+EWRAM_DATA u8 gCurrentActionFuncId = 0;
+EWRAM_DATA struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gCurrMovePos = 0;
+EWRAM_DATA u8 gUnknown_020241E9 = 0;
+EWRAM_DATA u16 gCurrentMove = 0;
+EWRAM_DATA u16 gChosenMove = 0;
+EWRAM_DATA u16 gRandomMove = 0;
+EWRAM_DATA s32 gBattleMoveDamage = 0;
+EWRAM_DATA s32 gHpDealt = 0;
+EWRAM_DATA s32 gTakenDmg[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastUsedItem = 0;
+EWRAM_DATA u8 gLastUsedAbility = 0;
+EWRAM_DATA u8 gBattlerAttacker = 0;
+EWRAM_DATA u8 gBattlerTarget = 0;
+EWRAM_DATA u8 gBank1 = 0;
+EWRAM_DATA u8 gEffectBank = 0;
+EWRAM_DATA u8 gStringBattler = 0;
+EWRAM_DATA u8 gAbsentBattlerFlags = 0;
+EWRAM_DATA u8 gCritMultiplier = 0;
+EWRAM_DATA u8 gMultiHitCounter = 0;
+EWRAM_DATA const u8 *gBattlescriptCurrInstr = NULL;
+EWRAM_DATA u32 gUnusedBattleMainVar = 0;
+EWRAM_DATA u8 gChosenActionByBattler[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
+EWRAM_DATA const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
+EWRAM_DATA u16 gLastPrintedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastLandedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastHitByType[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastResultingMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLockedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gLastHitBy[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gMoveResultFlags = 0;
+EWRAM_DATA u32 gHitMarker = 0;
+EWRAM_DATA u8 gUnknown_02024284[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gUnknown_0202428C = 0;
+EWRAM_DATA u16 gSideStatuses[2] = {0};
+EWRAM_DATA struct SideTimer gSideTimers[2] = {0};
+EWRAM_DATA u32 gStatuses3[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gPauseCounterBattle = 0;
+EWRAM_DATA u16 gPaydayMoney = 0;
+EWRAM_DATA u16 gRandomTurnNumber = 0;
+EWRAM_DATA u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT] = {0};
+EWRAM_DATA u8 gBattleOutcome = 0;
+EWRAM_DATA struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gBattleWeather = 0;
+EWRAM_DATA struct WishFutureKnock gWishFutureKnock = {0};
+EWRAM_DATA u16 gUnknown_020243FC = 0;
+EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
+EWRAM_DATA u16 gDynamicBasePower = 0;
+EWRAM_DATA u16 gExpShareExp = 0;
+EWRAM_DATA struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA struct BattleScripting gBattleScripting = {0};
+EWRAM_DATA struct BattleStruct *gBattleStruct = NULL;
+EWRAM_DATA u8 *gLinkBattleSendBuffer = NULL;
+EWRAM_DATA u8 *gLinkBattleRecvBuffer = NULL;
+EWRAM_DATA struct BattleResources *gBattleResources = NULL;
+EWRAM_DATA u8 gActionSelectionCursor[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gUnknown_020244B4[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerInMenuId = 0;
+EWRAM_DATA bool8 gDoingBattleAnim = FALSE;
+EWRAM_DATA u32 gTransformedPersonalities[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gPlayerDpadHoldFrames = 0;
+EWRAM_DATA struct BattleSpriteData *gBattleSpritesDataPtr = NULL;
+EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
+EWRAM_DATA u8 *gUnknown_020244D8 = NULL;
+EWRAM_DATA u8 *gUnknown_020244DC = NULL;
+EWRAM_DATA u16 gBattleMovePower = 0;
+EWRAM_DATA u16 gMoveToLearn = 0;
+EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 
 // rom const data
 static void (* const sTurnActionsFuncsTable[])(void) =
@@ -2437,7 +2530,7 @@ static void sub_80398D0(struct Sprite *sprite)
         {
             sprite->invisible = FALSE;
             sprite->callback = SpriteCallbackDummy_2;
-            gUnknown_02022F88 = 0;
+            gUnknown_02022F88[0] = 0;
         }
     }
 }
@@ -3656,12 +3749,12 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleMons[i].status2 &= ~(STATUS2_FLINCHED);
 
     *(&gBattleStruct->turnEffectsTracker) = 0;
-    *(&gBattleStruct->turnEffectsBank) = 0;
+    *(&gBattleStruct->turnEffectsBattlerId) = 0;
     *(&gBattleStruct->wishPerishSongState) = 0;
-    *(&gBattleStruct->wishPerishSongBank) = 0;
+    *(&gBattleStruct->wishPerishSongBattlerId) = 0;
     gBattleScripting.atk49_state = 0;
     gBattleStruct->faintedActionsState = 0;
-    gBattleStruct->turncountersTracker = 0;
+    gBattleStruct->turnCountersTracker = 0;
     gMoveResultFlags = 0;
 
     gRandomTurnNumber = Random();
@@ -3689,10 +3782,10 @@ static void HandleEndTurn_ContinueBattle(void)
                 CancelMultiTurnMoves(i);
         }
         gBattleStruct->turnEffectsTracker = 0;
-        gBattleStruct->turnEffectsBank = 0;
+        gBattleStruct->turnEffectsBattlerId = 0;
         gBattleStruct->wishPerishSongState = 0;
-        gBattleStruct->wishPerishSongBank = 0;
-        gBattleStruct->turncountersTracker = 0;
+        gBattleStruct->wishPerishSongBattlerId = 0;
+        gBattleStruct->turnCountersTracker = 0;
         gMoveResultFlags = 0;
     }
 }
@@ -4556,7 +4649,7 @@ static void SetActionsAndBanksTurnOrder(void)
                 }
             }
             gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
-            gBattleStruct->focusPunchBank = 0;
+            gBattleStruct->focusPunchBattlerId = 0;
             return;
         }
         else
@@ -4598,7 +4691,7 @@ static void SetActionsAndBanksTurnOrder(void)
         }
     }
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
-    gBattleStruct->focusPunchBank = 0;
+    gBattleStruct->focusPunchBattlerId = 0;
 }
 
 static void TurnValuesCleanUp(bool8 var0)
@@ -4654,10 +4747,10 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
     {
-        while (gBattleStruct->focusPunchBank < gBattlersCount)
+        while (gBattleStruct->focusPunchBattlerId < gBattlersCount)
         {
-            gActiveBattler = gBattlerAttacker = gBattleStruct->focusPunchBank;
-            gBattleStruct->focusPunchBank++;
+            gActiveBattler = gBattlerAttacker = gBattleStruct->focusPunchBattlerId;
+            gBattleStruct->focusPunchBattlerId++;
             if (gChosenMoveByBattler[gActiveBattler] == MOVE_FOCUS_PUNCH
                 && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)

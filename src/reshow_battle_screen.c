@@ -23,7 +23,7 @@ extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBattlersCount;
 extern u32 gBattleTypeFlags;
@@ -175,7 +175,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
                 SetBattlerShadowSpriteCallback(opponentBank, species);
             }
 
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gBankInMenu], 0);
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gBattlerInMenuId], 0);
 
             if (gLinkVSyncDisabled != 0 && gReceivedRemoteLinkPlayers != 0)
             {

@@ -476,8 +476,8 @@ struct ProtectStruct
 
     /* field_4 */ u32 physicalDmg;
     /* field_8 */ u32 specialDmg;
-    /* field_C */ u8 physicalBank;
-    /* field_D */ u8 specialBank;
+    /* field_C */ u8 physicalBattlerId;
+    /* field_D */ u8 specialBattlerId;
     /* field_E */ u16 fieldE;
 };
 
@@ -494,11 +494,11 @@ struct SpecialStatus
     u8 flag40 : 1;
     u8 focusBanded : 1;
     u8 field1[3];
-    s32 moveturnLostHP;
-    s32 moveturnLostHP_physical;
-    s32 moveturnLostHP_special;
-    u8 moveturnPhysicalBank;
-    u8 moveturnSpecialBank;
+    s32 dmg;
+    s32 physicalDmg;
+    s32 specialDmg;
+    u8 physicalBattlerId;
+    u8 specialBattlerId;
     u8 field12;
     u8 field13;
 };
@@ -508,13 +508,13 @@ extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 struct SideTimer
 {
     /*0x00*/ u8 reflectTimer;
-    /*0x01*/ u8 reflectBank;
+    /*0x01*/ u8 reflectBattlerId;
     /*0x02*/ u8 lightscreenTimer;
-    /*0x03*/ u8 lightscreenBank;
+    /*0x03*/ u8 lightscreenBattlerId;
     /*0x04*/ u8 mistTimer;
-    /*0x05*/ u8 mistBank;
+    /*0x05*/ u8 mistBattlerId;
     /*0x06*/ u8 safeguardTimer;
-    /*0x07*/ u8 safeguardBank;
+    /*0x07*/ u8 safeguardBattlerId;
     /*0x08*/ u8 followmeTimer;
     /*0x09*/ u8 followmeTarget;
     /*0x0A*/ u8 spikesAmount;
@@ -530,7 +530,7 @@ struct WishFutureKnock
     s32 futureSightDmg[MAX_BATTLERS_COUNT];
     u16 futureSightMove[MAX_BATTLERS_COUNT];
     u8 wishCounter[MAX_BATTLERS_COUNT];
-    u8 wishUserID[MAX_BATTLERS_COUNT];
+    u8 wishMonId[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
     u8 knockedOffPokes[2];
 };
@@ -625,7 +625,7 @@ struct BattleResults
     u16 playerMon2Species;    // 0x26
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[10];     // 0x2A
-    u8 filler34[2];
+    u8 filler34[2];           // 0x34
     u8 catchAttempts[11];     // 0x36
 };
 
@@ -634,12 +634,12 @@ extern struct BattleResults gBattleResults;
 struct BattleStruct
 {
     u8 turnEffectsTracker;
-    u8 turnEffectsBank;
+    u8 turnEffectsBattlerId;
     u8 filler2;
-    u8 turncountersTracker;
+    u8 turnCountersTracker;
     u8 wrappedMove[8]; // ask gamefreak why they declared it that way
     u8 moveTarget[4];
-    u8 expGetterId;
+    u8 expGetterMonId;
     u8 field_11;
     u8 wildVictorySong;
     u8 dynamicMoveType;
@@ -653,13 +653,13 @@ struct BattleStruct
     u8 field_45;
     u8 field_46;
     u8 field_47;
-    u8 focusPunchBank;
+    u8 focusPunchBattlerId;
     u8 field_49;
     u8 moneyMultiplier;
     u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
     u8 faintedActionsState;
-    u8 faintedActionsBank;
+    u8 faintedActionsBattlerId;
     u8 field_4F;
     u16 expValue;
     u8 field_52;
@@ -687,7 +687,7 @@ struct BattleStruct
     u8 field_8C;
     u8 field_8D;
     u8 stringMoveType;
-    u8 expGetterBank;
+    u8 expGetterBattlerId;
     u8 field_90;
     u8 field_91;
     u8 field_92;
@@ -732,7 +732,7 @@ struct BattleStruct
     u8 field_183;
     struct BattleEnigmaBerry battleEnigmaBerry;
     u8 wishPerishSongState;
-    u8 wishPerishSongBank;
+    u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
     u8 field_1A4[96];

@@ -54,7 +54,7 @@ extern u8 gNumberOfMovesToChoose;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern s32 gUnknown_0203CD70;
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u32 gBattlePalaceMoveSelectionRngValue;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_020244B4[];
@@ -1282,7 +1282,7 @@ static void WallyHandleChooseItem(void)
 {
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAfterPaletteFade;
-    gBankInMenu = gActiveBattler;
+    gBattlerInMenuId = gActiveBattler;
 }
 
 static void WallyHandleChoosePokemon(void)

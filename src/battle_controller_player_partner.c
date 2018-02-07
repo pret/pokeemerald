@@ -41,7 +41,7 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gBattleOutcome;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u16 gUnknown_020243FC;
 extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];

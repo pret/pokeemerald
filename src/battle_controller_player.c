@@ -58,7 +58,7 @@ extern u8 gNumberOfMovesToChoose;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern s32 gUnknown_0203CD70;
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u32 gBattlePalaceMoveSelectionRngValue;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_020244B4[];
@@ -2677,7 +2677,7 @@ static void PlayerHandleChooseItem(void)
 
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
-    gBankInMenu = gActiveBattler;
+    gBattlerInMenuId = gActiveBattler;
 
     for (i = 0; i < 3; i++)
         gUnknown_0203CF00[i] = gBattleBufferA[gActiveBattler][1 + i];
@@ -2704,7 +2704,7 @@ static void PlayerHandleChoosePokemon(void)
         *(&gBattleStruct->field_B0) = gBattleBufferA[gActiveBattler][3];
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gBattlerControllerFuncs[gActiveBattler] = sub_80597CC;
-        gBankInMenu = gActiveBattler;
+        gBattlerInMenuId = gActiveBattler;
     }
 }
 

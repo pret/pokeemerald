@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_AI_H
 #define GUARD_BATTLE_AI_H
 
-// banks enum
+// battlers
 #define AI_TARGET 0
 #define AI_USER 1
 #define AI_TARGET_PARTNER 2
@@ -22,7 +22,7 @@
 #define AI_EFFECTIVENESS_x0_25  10
 #define AI_EFFECTIVENESS_x0     0
 
-// ai weather enum
+// ai weather
 #define AI_WEATHER_SUN 0
 #define AI_WEATHER_RAIN 1
 #define AI_WEATHER_SANDSTORM 2

@@ -40,7 +40,7 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gBattleOutcome;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u16 gUnknown_020243FC;
 
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
@@ -500,7 +500,7 @@ static void SafariHandleChooseItem(void)
 
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     gBattlerControllerFuncs[gActiveBattler] = SafariOpenPokeblockCase;
-    gBankInMenu = gActiveBattler;
+    gBattlerInMenuId = gActiveBattler;
 }
 
 static void SafariHandleChoosePokemon(void)

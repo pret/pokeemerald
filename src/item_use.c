@@ -88,7 +88,7 @@ extern void sub_80B7CC8(void);
 extern void flagmods_08054D70(void);
 extern u8* sub_806CF78(u16);
 extern bool8 ExecuteTableBasedItemEffect_(struct Pokemon*, u16, u8, u8);
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u16 gBattlerPartyIndexes[];
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
@@ -984,7 +984,7 @@ void sub_80FE440(u8 taskId)
 
 void ItemUseInBattle_StatIncrease(u8 taskId)
 {
-    u16 partyId = gBattlerPartyIndexes[gBankInMenu];
+    u16 partyId = gBattlerPartyIndexes[gBattlerInMenuId];
 
     if (ExecuteTableBasedItemEffect_(&gPlayerParty[partyId], gSpecialVar_ItemId, partyId, 0) != FALSE)
     {
