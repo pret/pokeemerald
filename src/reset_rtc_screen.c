@@ -171,7 +171,7 @@ static const struct SpriteTemplate sSpriteTemplate_85104F0 =
 };
 
 // code
-static void SpriteCB_ResetRtcCusor0(struct Sprite *sprite)
+static void SpriteCB_ResetRtcCursor0(struct Sprite *sprite)
 {
     int state = gTasks[sprite->data[0]].data[2];
     if (state != sprite->data[1])
@@ -221,7 +221,7 @@ static void SpriteCB_ResetRtcCusor0(struct Sprite *sprite)
     }
 }
 
-static void SpriteCB_ResetRtcCusor1(struct Sprite *sprite)
+static void SpriteCB_ResetRtcCursor1(struct Sprite *sprite)
 {
     int state = gTasks[sprite->data[0]].data[2];
     if (state != sprite->data[1])
@@ -274,12 +274,12 @@ static void CreateCursor(u8 taskId)
     LoadSpritePalette(&sSpritePalette_Arrow);
 
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_85104F0, 53, 68, 0);
-    gSprites[spriteId].callback = SpriteCB_ResetRtcCusor0;
+    gSprites[spriteId].callback = SpriteCB_ResetRtcCursor0;
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].data[1] = -1;
 
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_85104F0, 53, 68, 0);
-    gSprites[spriteId].callback = SpriteCB_ResetRtcCusor1;
+    gSprites[spriteId].callback = SpriteCB_ResetRtcCursor1;
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].data[1] = -1;
 }
@@ -330,13 +330,13 @@ static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, u16 keys)
 {
     if (keys & DPAD_DOWN)
     {
-        (*val)--;
+        *val -= 1;
         if (*val < minVal)
             *val = maxVal;
     }
     else if (keys & DPAD_UP)
     {
-        (*val)++;
+        *val += 1;
         if (*val > maxVal)
             *val = minVal;
     }
