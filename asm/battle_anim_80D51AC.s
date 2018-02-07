@@ -12,7 +12,7 @@ sub_80D51AC: @ 80D51AC
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -165,7 +165,7 @@ sub_80D52D0: @ 80D52D0
 	bgt _080D52FC
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -200,23 +200,23 @@ _080D5320:
 _080D5324:
 	movs r0, 0x3
 _080D5326:
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl IsAnimBankSpriteVisible
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D533C
 	movs r6, 0x1
 _080D533C:
-	ldr r0, =gBankSpriteIds
+	ldr r0, =gBattlerSpriteIds
 	adds r0, r4, r0
 	b _080D5350
 	.pool
 _080D5348:
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 _080D5350:
@@ -379,7 +379,7 @@ sub_80D5484: @ 80D5484
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -603,7 +603,7 @@ sub_80D5644: @ 80D5644
 	lsrs r4, 24
 	ldr r5, =gBattleAnimArgs
 	ldrb r0, [r5]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -723,7 +723,7 @@ sub_80D5738: @ 80D5738
 	movs r6, 0x1
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r1, 0x8
@@ -842,9 +842,9 @@ sub_80D5830: @ 80D5830
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D584C
@@ -871,9 +871,9 @@ sub_80D5860: @ 80D5860
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5890
@@ -891,8 +891,8 @@ _080D5894:
 	movs r0, 0
 	strh r2, [r4, 0x2E]
 	strh r0, [r4, 0x32]
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -938,7 +938,7 @@ sub_80D58F8: @ 80D58F8
 	strb r0, [r2]
 	ldr r5, =gBattleAnimArgs
 	ldrb r0, [r5, 0x4]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r2, [r5]
@@ -987,13 +987,13 @@ sub_80D5968: @ 80D5968
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080D598C
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	b _080D5990
 	.pool
 _080D598C:
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankTarget
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimTarget
 _080D5990:
 	ldrb r0, [r0]
 	adds r0, r1
@@ -1133,18 +1133,18 @@ sub_80D5A94: @ 80D5A94
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080D5AB0
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	b _080D5AB2
 	.pool
 _080D5AB0:
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 _080D5AB2:
 	ldrb r2, [r0]
-	ldr r0, =gBankSpriteIds
+	ldr r0, =gBattlerSpriteIds
 	adds r0, r2, r0
 	ldrb r6, [r0]
 	adds r0, r2, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5ADC
@@ -1218,18 +1218,18 @@ sub_80D5B48: @ 80D5B48
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080D5B70
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	b _080D5B72
 	.pool
 _080D5B70:
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 _080D5B72:
 	ldrb r1, [r0]
-	ldr r0, =gBankSpriteIds
+	ldr r0, =gBattlerSpriteIds
 	adds r0, r1, r0
 	ldrb r7, [r0]
 	adds r0, r1, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5B9C
@@ -1338,9 +1338,9 @@ sub_80D5C50: @ 80D5C50
 	bl __divsi3
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5C82
@@ -1352,7 +1352,7 @@ sub_80D5C50: @ 80D5C50
 	strh r0, [r5, 0xA]
 _080D5C82:
 	ldrb r0, [r5]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r1, =gTasks
 	lsls r4, r6, 2
 	adds r4, r6
@@ -1508,7 +1508,7 @@ sub_80D5DB0: @ 80D5DB0
 	cmp r0, 0
 	blt _080D5E10
 	ldrb r0, [r1]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	b _080D5E18
@@ -1518,20 +1518,20 @@ _080D5DD8:
 	beq _080D5DE8
 	b _080D5E10
 _080D5DDE:
-	ldr r5, =gAnimBankAttacker
+	ldr r5, =gBattleAnimAttacker
 	b _080D5DEA
 	.pool
 _080D5DE8:
-	ldr r5, =gAnimBankTarget
+	ldr r5, =gBattleAnimTarget
 _080D5DEA:
 	ldrb r0, [r5]
 	movs r4, 0x2
 	eors r0, r4
-	bl IsAnimBankSpriteVisible
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5E10
-	ldr r1, =gBankSpriteIds
+	ldr r1, =gBattlerSpriteIds
 	ldrb r0, [r5]
 	eors r0, r4
 	adds r0, r1
@@ -1549,9 +1549,9 @@ _080D5E18:
 	lsls r0, 3
 	adds r5, r0, r1
 	strh r2, [r5, 0x8]
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5E44
@@ -1622,9 +1622,9 @@ sub_80D5EB8: @ 80D5EB8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =gAnimBankAttacker
+	ldr r6, =gBattleAnimAttacker
 	ldrb r0, [r6]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5ED4
@@ -1635,7 +1635,7 @@ sub_80D5EB8: @ 80D5EB8
 _080D5ED4:
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x8]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gTasks
@@ -1660,7 +1660,7 @@ _080D5ED4:
 	b _080D5F18
 	.pool
 _080D5F14:
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
 _080D5F18:
 	strh r0, [r2, 0x12]
@@ -1722,7 +1722,7 @@ sub_80D5F3C: @ 80D5F3C
 	.pool
 _080D5F94:
 	ldrb r0, [r4, 0x12]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D5FBC
@@ -1836,7 +1836,7 @@ sub_80D6064: @ 80D6064
 	lsrs r4, 24
 	ldr r6, =gBattleAnimArgs
 	ldrb r0, [r6, 0x6]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -1939,7 +1939,7 @@ sub_80D6134: @ 80D6134
 	lsrs r7, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x4]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -1995,14 +1995,14 @@ _080D61B8:
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _080D61C8
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	b _080D61CA
 	.pool
 _080D61C8:
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 _080D61CA:
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0
@@ -2057,7 +2057,7 @@ sub_80D622C: @ 80D622C
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x4]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -2076,14 +2076,14 @@ sub_80D622C: @ 80D622C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080D6274
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	b _080D6276
 	.pool
 _080D6274:
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 _080D6276:
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D6288
@@ -2290,7 +2290,7 @@ _080D63EE:
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x1E]
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x16]

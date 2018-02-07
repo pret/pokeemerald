@@ -16,7 +16,7 @@ struct UnkAnimStruct
     s16 field_8;
 };
 
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 
 // this file's functions
 static void pokemonanimfunc_00(struct Sprite *sprite);
@@ -945,7 +945,7 @@ void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
     gTasks[taskId].tPtrHI = (u32)(sprite);
 
     bank = sprite->data[0];
-    nature = GetNature(&gPlayerParty[gBattlePartyID[bank]]);
+    nature = GetNature(&gPlayerParty[gBattlerPartyIndexes[bank]]);
 
     animId = 3 * backAnimSet + sBackAnimNatureModTable[nature];
     gTasks[taskId].tAnimId = sBackAnimationIds[animId];

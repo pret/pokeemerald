@@ -25,15 +25,15 @@
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u8 gBankInMenu;
-extern u8 gBankTarget;
-extern u8 gBankAttacker;
-extern u8 gStringBank;
+extern u8 gBattlerTarget;
+extern u8 gBattlerAttacker;
+extern u8 gStringBattler;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
 extern u8 gBattleMonForms[4];
-extern u16 gBattlePartyID[4];
+extern u16 gBattlerPartyIndexes[4];
 extern u8 gLastUsedAbility;
 extern u16 gPartnerTrainerId;
 extern u32 gHitMarker;
@@ -113,7 +113,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        temp = gEnigmaBerries[gActiveBank].itemEffect;
+        temp = gEnigmaBerries[gActiveBattler].itemEffect;
     }
 
     itemEffect = temp;
@@ -210,7 +210,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
 void sub_806CF24(s32 stat)
 {
-    gBankTarget = gBankInMenu;
+    gBattlerTarget = gBankInMenu;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
@@ -233,7 +233,7 @@ u8 *sub_806CF78(u16 itemId)
         itemEffect = gItemEffectTable[itemId - 13];
     }
 
-    gStringBank = gBankInMenu;
+    gStringBattler = gBankInMenu;
 
     for (i = 0; i < 3; i++)
     {
@@ -247,7 +247,7 @@ u8 *sub_806CF78(u16 itemId)
             }
             else
             {
-                gBankAttacker = gBankInMenu;
+                gBattlerAttacker = gBankInMenu;
                 BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
             }
         }
@@ -255,7 +255,7 @@ u8 *sub_806CF78(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        gBankAttacker = gBankInMenu;
+        gBattlerAttacker = gBankInMenu;
         BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
     }
 
@@ -615,7 +615,7 @@ bool16 sub_806D82C(u8 id)
     return retVal;
 }
 
-s32 GetBankMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 a1)
 {
     s32 id;
     for (id = 0; id < MAX_LINK_PLAYERS; id++)
@@ -1366,12 +1366,12 @@ void sub_806E994(void)
     gBattleTextBuff1[2] = gBattleStruct->field_49;
     gBattleTextBuff1[4] = B_BUFF_EOS;
 
-    if (!GetBankSide(gBattleStruct->field_49))
-        gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[gBattleStruct->field_49]);
+    if (!GetBattlerSide(gBattleStruct->field_49))
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->field_49]);
     else
-        gBattleTextBuff1[3] = gBattlePartyID[gBattleStruct->field_49];
+        gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->field_49];
 
-    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBankInMenu, pokemon_order_func(gBattlePartyID[gBankInMenu]))
+    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBankInMenu, pokemon_order_func(gBattlerPartyIndexes[gBankInMenu]))
 
     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
@@ -1478,7 +1478,7 @@ const u8 *GetTrainerPartnerName(void)
     else
     {
         u8 id = GetMultiplayerId();
-        return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].lp_field_18 ^ 2)].name;
+        return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].lp_field_18 ^ 2)].name;
     }
 }
 
