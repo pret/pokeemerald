@@ -13,6 +13,7 @@
 #include "util.h"
 #include "task.h"
 #include "text.h"
+#include "battle_setup.h"
 
 #define BANK_RECORD_SIZE 664
 #define ILLEGAL_BATTLE_TYPES ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
@@ -21,15 +22,6 @@
                               | BATTLE_TYPE_RECORDED | BATTLE_TYPE_x4000000 | BATTLE_TYPE_SECRET_BASE           \
                               | BATTLE_TYPE_GROUDON | BATTLE_TYPE_KYOGRE | BATTLE_TYPE_RAYQUAZA))
 
-extern u32 gBattleTypeFlags;
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
-extern u16 gPartnerTrainerId;
-extern u8 gActiveBattler;
-extern u8 gBattlersCount;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_03001278;
 extern u8 gUnknown_03001279;
 

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/abilities.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "constants/hold_effects.h"
 #include "event_data.h"
 #include "item.h"
@@ -9,15 +10,6 @@
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/battle_move_effects.h"
-
-extern u32 gBattleTypeFlags;
-extern struct BattlePokemon gBattleMons[4];
-extern u16 gCurrentMove;
-extern u8 gCritMultiplier;
-extern u16 gBattleWeather;
-extern struct BattleEnigmaBerry gEnigmaBerries[];
-extern u16 gBattleMovePower;
-extern u16 gTrainerBattleOpponent_A;
 
 bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 bank);
 

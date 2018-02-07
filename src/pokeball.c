@@ -15,12 +15,6 @@
 #include "util.h"
 #include "graphics.h"
 
-extern bool8 gDoingBattleAnim;
-extern u8 gActiveBattler;
-extern u8 gBattlerTarget;
-extern u16 gBattlerPartyIndexes[];
-extern u8 gBattlerSpriteIds[];
-extern u8 gHealthboxSpriteIds[];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 // this file's functions

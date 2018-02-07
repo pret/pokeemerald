@@ -23,17 +23,7 @@
 #include "contest.h"
 #include "constants/songs.h"
 
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gActiveBattler;
-extern u8 gBattlersCount;
 extern u16 gUnknown_020243FC;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
-extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;

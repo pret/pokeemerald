@@ -14,22 +14,7 @@
 #include "battle_controllers.h"
 #include "battle_setup.h"
 
-extern u16 gLastUsedItem;
-extern u8 gLastUsedAbility;
-extern u8 gActiveBattler;
-extern u8 gBattlerAttacker;
-extern u8 gBattlerTarget;
-extern u8 gStringBattler;
-extern u8 gEffectBank;
 extern u8 gBattlerAbilities[MAX_BATTLERS_COUNT];
-extern u32 gBattleTypeFlags;
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
-extern u16 gPartnerTrainerId;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203C7B4;
 extern struct StringInfoBattle *gStringInfo;
 
@@ -2360,20 +2345,20 @@ static void sub_814F8F8(u8* textBuff)
 
 // Appends "!" to the text buffer `dst`. In the original Japanese this looked
 // into the table of moves at sUnknownMoveTable and varied the line accordingly.
-// 
+//
 // gText_ExclamationMark was a plain "!", used for any attack not on the list.
 // It resulted in the translation "<NAME>'s <ATTACK>!".
-// 
+//
 // gText_ExclamationMark2 was "を つかった！". This resulted in the translation
 // "<NAME> used <ATTACK>!", which was used for all attacks in English.
-// 
+//
 // gText_ExclamationMark3 was "した！". This was used for those moves whose
 // names were verbs, such as Recover, and resulted in translations like "<NAME>
 // recovered itself!".
-// 
+//
 // gText_ExclamationMark4 was "を した！" This resulted in a translation of
 // "<NAME> did an <ATTACK>!".
-// 
+//
 // gText_ExclamationMark5 was " こうげき！" This resulted in a translation of
 // "<NAME>'s <ATTACK> attack!".
 static void sub_814F950(u8* dst)

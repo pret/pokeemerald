@@ -48,13 +48,11 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern u8 gBattleTerrain;
 extern struct SpriteTemplate gUnknown_0202499C;
 extern bool8 gAffineAnimsDisabled;
 extern u16 gMoveToLearn;
 extern const u8 gSpeciesNames[][11];
 
-extern u8 gBattleCommunication[];
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID      gBattleCommunication[2]
 
@@ -113,7 +111,7 @@ static const u16 sUnknown_085B5884[] = INCBIN_U16("graphics/evolution_scene/tran
 
 static const u8 Text_ShedinjaJapaneseName[] = _("ヌケニン");
 
-static const u8 sUnknown_085B58C9[][4] = 
+static const u8 sUnknown_085B58C9[][4] =
 {
     { 0x00, 0x0C, 0x01, 0x06 },
     { 0x0D, 0x24, 0x05, 0x02 },

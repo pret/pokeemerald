@@ -24,38 +24,15 @@
 #include "reshow_battle_screen.h"
 #include "pokeball.h"
 #include "data2.h"
+#include "item_use.h"
+#include "battle_setup.h"
 
-extern u32 gBattleControllerExecFlags;
-extern u8 gActiveBattler;
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gBattlersCount;
-extern bool8 gDoingBattleAnim;
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern void (*gPreBattleCallback1)(void);
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern struct SpriteTemplate gUnknown_0202499C;
-extern u16 gSpecialVar_ItemId;
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gBattleOutcome;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern u16 gUnknown_020243FC;
-extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
-extern u16 gPartnerTrainerId;
-extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
-extern u8 gBattlerTarget;
-extern u8 gAbsentBattlerFlags;
-extern u8 gUnknown_020244B4[];
-extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
 extern u8 gUnknown_0203C7B4;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
@@ -63,6 +40,7 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
 extern void sub_806A068(u16, u8);
 extern u16 sub_8068B48(void);
+extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
 static void RecordedOpponentHandleGetMonData(void);

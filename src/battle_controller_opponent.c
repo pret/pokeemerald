@@ -27,33 +27,13 @@
 #include "random.h"
 #include "pokeball.h"
 #include "data2.h"
+#include "battle_setup.h"
 
-extern u32 gBattleControllerExecFlags;
-extern u8 gActiveBattler;
-extern u8 gBattlerTarget;
-extern u8 gAbsentBattlerFlags;
-extern bool8 gDoingBattleAnim;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern void *gUnknown_020244D8;
-extern void *gUnknown_020244DC;
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
 extern struct SpriteTemplate gUnknown_0202499C;
-extern struct UnusedControllerStruct gUnknown_02022D0C;
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
-extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u16 gUnknown_020243FC;
-extern u8 gUnknown_020244B4[];
-extern void (*gPreBattleCallback1)(void);
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
+extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct BattleMove gBattleMoves[];

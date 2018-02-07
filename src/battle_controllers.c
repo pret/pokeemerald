@@ -12,37 +12,13 @@
 #include "constants/abilities.h"
 #include "battle_message.h"
 
-extern u32 gBattleTypeFlags;
-extern u32 gBattleControllerExecFlags;
-extern void (*gBattleMainFunc)(void);
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gBattlersCount;
-extern u8 gActiveBattler;
+extern u8 gBattleBuffersTransferData[0x100];
 extern u8 gUnknown_0202428C;
 extern u32 gUnknown_02022FF4;
 extern u8 gUnknown_0203C7B4;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBuffersTransferData[0x100];
 extern u8 gUnknown_02022D08;
 extern u8 gUnknown_02022D09;
 extern u8 gUnknown_02022D0A;
-extern u8 gBattlerAttacker;
-extern u8 gBattlerTarget;
-extern u8 gAbsentBattlerFlags;
-extern u8 gEffectBank;
-extern u16 gBattleWeather;
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gCurrentMove;
-extern u16 gChosenMove;
-extern u16 gLastUsedItem;
-extern u8 gBattleOutcome;
-extern u8 gLastUsedAbility;
-extern u8 gStringBattler;
 
 extern const struct BattleMove gBattleMoves[];
 

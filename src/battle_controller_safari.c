@@ -21,26 +21,12 @@
 #include "pokeball.h"
 #include "data2.h"
 #include "pokeblock.h"
+#include "item_use.h"
 
-extern u32 gBattleControllerExecFlags;
-extern u8 gActiveBattler;
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gBattlersCount;
-extern bool8 gDoingBattleAnim;
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern void (*gPreBattleCallback1)(void);
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern struct SpriteTemplate gUnknown_0202499C;
-extern u16 gSpecialVar_ItemId;
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gBattleOutcome;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u8 gBattlerInMenuId;
 extern u16 gUnknown_020243FC;
 
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];

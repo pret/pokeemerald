@@ -153,11 +153,6 @@ enum
     HEALTHBOX_GFX_117,
 };
 
-extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattlersCount;
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-
 extern const u8 * const gNatureNamePointers[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 

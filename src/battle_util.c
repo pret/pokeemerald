@@ -23,45 +23,6 @@
 #include "link.h"
 #include "berry.h"
 
-extern const u8* gBattlescriptCurrInstr;
-extern const u8* gSelectionBattleScripts[MAX_BATTLERS_COUNT];
-extern const u8* gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT];
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u8 gActiveBattler;
-extern u8 gStringBattler;
-extern u16 gCurrentMove;
-extern u16 gLastUsedItem;
-extern u8 gBattlersCount;
-extern u32 gStatuses3[MAX_BATTLERS_COUNT];
-extern u8 gBattlerAttacker;
-extern u8 gBattlerTarget;
-extern u8 gAbsentBattlerFlags;
-extern u16 gBattleWeather;
-extern u8 gBattleTurnOrder[MAX_BATTLERS_COUNT];
-extern u16 gSideStatuses[2];
-extern u8 gBattleCommunication[];
-extern void (*gBattleMainFunc)(void);
-extern s32 gBattleMoveDamage;
-extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern u32 gBattleTypeFlags;
-extern u16 gLastMoves[MAX_BATTLERS_COUNT];
-extern u32 gHitMarker;
-extern u8 gEffectBank;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBank1;
-extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
-extern u8 gMoveResultFlags;
-extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
-extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
-extern u8 gLastUsedAbility;
-extern u8 gCurrentActionFuncId;
-extern u32 gBattleControllerExecFlags;
-extern u16 gRandomMove;
-extern u8 gCurrMovePos;
-extern u8 gUnknown_020241E9;
-extern u8 gSentPokesToOpponent[2];
-
 extern const struct BattleMove gBattleMoves[];
 
 extern u8 weather_get_current(void);

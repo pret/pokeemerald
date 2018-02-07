@@ -8,12 +8,7 @@
 #include "random.h"
 #include "battle_scripts.h"
 
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203CF00[];
-extern const u8 *gBattlescriptCurrInstr;
-extern u8 gBattleCommunication[];
-extern u8 gActiveBattler;
 
 extern void sub_81D55D0(void);
 extern void sub_81D5694(void);

@@ -30,6 +30,7 @@
 #include "strings.h"
 #include "secret_base.h"
 #include "string_util.h"
+#include "overworld.h"
 
 enum
 {
@@ -82,11 +83,7 @@ extern void sub_81D61E8(void);
 extern void sub_80982B8(void);
 extern void sub_81A9EDC(u16 a0);
 extern void sub_81D572C(u8 a0, u16 arg1);
-extern void IncrementGameStat(u8 statId);
-extern u32 GetGameStat(u8 statId);
 
-extern u32 gBattleTypeFlags;
-extern u8 gBattleOutcome;
 extern void (*gFieldCallback)(void);
 
 // this file's functions
