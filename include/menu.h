@@ -16,7 +16,7 @@ struct MenuAction
     } func;
 };
 
-void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const struct TextColor *color, s8 speed, const u8 *str);
+void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str);
 void sub_8198070(u8 windowId, bool8 copyToVram);
 void SetWindowTemplateFields(struct WindowTemplate* template, u8 priority, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 palNum, u16 baseBlock);
 void SetWindowBorderStyle(u8 windowId, bool8 copyToVram, u16 tileStart, u8 palette);
@@ -35,7 +35,7 @@ void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirs
 s8 ProcessMenuInputNoWrap_(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
-void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
+void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str);
 void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u8 a3);
 void sub_81995E4(u8 windowId, u8 optionsNo, const struct MenuAction *actions, const u8 *actionIds);
 void sub_8197DF8(u8 windowId, bool8 copyToVram);

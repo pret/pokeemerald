@@ -12,7 +12,7 @@ gUnknown_085EFD00:: @ 85EFD00
 	.incbin "graphics/interface/berry_tag_screen.gbapal"
 
 	.align 2
-gUnknown_085EFD20:: @ 85EFD20 struct TextColor
+gUnknown_085EFD20:: @ 85EFD20
 	.byte 0x00, 0x02, 0x03
 
 	.byte 0x0F, 0x0E, 0x0D

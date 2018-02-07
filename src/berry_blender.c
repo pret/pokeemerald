@@ -3574,35 +3574,35 @@ static bool32 TryAddContestLinkTvShow(struct Pokeblock *pokeblock, struct TvBlen
 
 static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s32 speed, s32 caseId)
 {
-    struct TextColor txtColor;
+    u8 txtColor[3];
     u32 letterSpacing = 0;
 
     switch (caseId)
     {
     case 0:
     case 3:
-        txtColor.fgColor = 1;
-        txtColor.bgColor = 2;
-        txtColor.shadowColor = 3;
+        txtColor[0] = 1;
+        txtColor[1] = 2;
+        txtColor[2] = 3;
         break;
     case 1:
-        txtColor.fgColor = 0;
-        txtColor.bgColor = 2;
-        txtColor.shadowColor = 3;
+        txtColor[0] = 0;
+        txtColor[1] = 2;
+        txtColor[2] = 3;
         break;
     case 2:
-        txtColor.fgColor = 0;
-        txtColor.bgColor = 4;
-        txtColor.shadowColor = 5;
+        txtColor[0] = 0;
+        txtColor[1] = 4;
+        txtColor[2] = 5;
         break;
     }
 
     if (caseId != 3)
     {
-        FillWindowPixelBuffer(windowId, txtColor.fgColor | (txtColor.fgColor << 4));
+        FillWindowPixelBuffer(windowId, txtColor[0] | (txtColor[0] << 4));
     }
 
-    AddTextPrinterParameterized2(windowId, 1, x, y, letterSpacing, 1, &txtColor, speed, string);
+    AddTextPrinterParameterized2(windowId, 1, x, y, letterSpacing, 1, txtColor, speed, string);
 }
 
 static bool32 Blender_PrintText(s16 *textState, const u8 *string, s32 textSpeed)

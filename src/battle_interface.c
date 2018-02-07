@@ -2565,17 +2565,17 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp)
 static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 arg3, u32 *windowId)
 {
     u16 winId;
-    struct TextColor color;
+    u8 color[3];
     struct WindowTemplate winTemplate = sHealthboxWindowTemplate;
 
     winId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(winId, (arg3 << 4) | (arg3));
 
-    color.fgColor = arg3;
-    color.bgColor = 1;
-    color.shadowColor = 3;
+    color[0] = arg3;
+    color[1] = 1;
+    color[2] = 3;
 
-    AddTextPrinterParameterized2(winId, 0, x, y, 0, 0, &color, -1, str);
+    AddTextPrinterParameterized2(winId, 0, x, y, 0, 0, color, -1, str);
 
     *windowId = winId;
     return (u8*)(GetWindowAttribute(winId, WINDOW_TILE_DATA));

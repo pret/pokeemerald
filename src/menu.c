@@ -13,6 +13,10 @@
 #include "dma3.h"
 #include "string_util.h"
 #include "pokemon_icon.h"
+#include "constants/flags.h"
+#include "event_data.h"
+#include "pokedex.h"
+#include "region_map.h"
 
 struct SomeUnkStruct
 {
@@ -47,7 +51,7 @@ extern EWRAM_DATA u16 gUnknown_0203CDA8;
 extern EWRAM_DATA void *gUnknown_0203CDAC[0x20];
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
-const struct TextColor gUnknown_0860F0D0[] = { 15, 1, 2 };
+const u8 gUnknown_0860F0D0[] = { 15, 1, 2 };
 const struct SomeUnkStruct gUnknown_0860F0D4[] = 
 {
     { 12, 12, 0x00 },
@@ -386,22 +390,22 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
 
 void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyToVram)
 {
-    struct TextColor color;
+    u8 color[3];
     u16 width = 0;
     
     if (gUnknown_0203CDA0 != 0xFF)
     {
         if (a3 != 0)
         {
-            color.fgColor = 0;
-            color.bgColor = 1;
-            color.shadowColor = 2;
+            color[0] = 0;
+            color[1] = 1;
+            color[2] = 2;
         }
         else
         {
-            color.fgColor = 15;
-            color.bgColor = 1;
-            color.shadowColor = 2;
+            color[0] = 15;
+            color[1] = 1;
+            color[2] = 2;
         }
         PutWindowTilemap(gUnknown_0203CDA0);
         FillWindowPixelBuffer(gUnknown_0203CDA0, 0xFF);
@@ -412,11 +416,11 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
                       0,
                       0xEC - (GetWindowAttribute(gUnknown_0203CDA0, WINDOW_TILEMAP_LEFT) * 8) - a4 - width,
                       1,
-                      &color,
+                      color,
                       0,
                       string2);
         }
-        AddTextPrinterParameterized2(gUnknown_0203CDA0, 1, 4, 1, 0, 0, &color, 0, string);
+        AddTextPrinterParameterized2(gUnknown_0203CDA0, 1, 4, 1, 0, 0, color, 0, string);
         if (copyToVram)
             CopyWindowToVram(gUnknown_0203CDA0, 3);
     }
@@ -1498,7 +1502,7 @@ void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)
     RequestDma3Fill(a1 << 24 | a1 << 16 | a1 << 8 | a1, addr + VRAM, a3 * temp, 1);
 }
 
-void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const struct TextColor *color, s8 speed, const u8 *str)
+void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str)
 {
     struct TextSubPrinter printer;
     
@@ -1512,14 +1516,14 @@ void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const struct TextColor *
     printer.letterSpacing = GetFontAttribute(fontId, 2);
     printer.lineSpacing = GetFontAttribute(fontId, 3);
     printer.fontColor_l = 0;
-    printer.fgColor = color->bgColor;
-    printer.bgColor = color->fgColor;
-    printer.shadowColor = color->shadowColor;
+    printer.fgColor = color[1];
+    printer.bgColor = color[0];
+    printer.shadowColor = color[2];
     
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str)
+void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
 {
     struct TextSubPrinter printer;
     
@@ -1533,9 +1537,9 @@ void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 le
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
     printer.fontColor_l = 0;
-    printer.fgColor = color->bgColor;
-    printer.bgColor = color->fgColor;
-    printer.shadowColor = color->shadowColor;
+    printer.fgColor = color[1];
+    printer.bgColor = color[0];
+    printer.shadowColor = color[2];
     
     AddTextPrinter(&printer, speed, NULL);
 }
@@ -1873,4 +1877,50 @@ void sub_819A2BC(u8 palOffset, u8 palId)
 void blit_move_info_icon(u8 windowId, u8 iconId, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(windowId, gFireRedMenuElements_Gfx + gUnknown_0860F0D4[iconId].unk3 * 32, 0, 0, 128, 128, x, y, gUnknown_0860F0D4[iconId].unk1, gUnknown_0860F0D4[iconId].unk2);
+}
+
+void sub_819A344(u8 a0, u8 *a1, u8 a2)
+{
+    s32 curFlag;
+    s32 flagCount;
+    u8 *endOfString;
+    u8 *string = a1;
+    
+    *(string++) = EXT_CTRL_CODE_BEGIN;
+    *(string++) = EXT_CTRL_CODE_COLOR;
+    *(string++) = a2;
+    *(string++) = EXT_CTRL_CODE_BEGIN;
+    *(string++) = EXT_CTRL_CODE_SHADOW;
+    *(string++) = a2 + 1;
+    
+    switch (a0)
+    {
+        case 0:
+            StringCopy(string, gSaveBlock2Ptr->playerName);
+            break;
+        case 1:
+            if (IsNationalPokedexEnabled())
+                string = ConvertIntToDecimalStringN(string, pokedex_count(1), 0, 3);
+            else
+                string = ConvertIntToDecimalStringN(string, sub_80C0844(1), 0, 3);
+            *string = EOS;
+            break;
+        case 2:
+            string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeHours, 0, 3);
+            *(string++) = CHAR_COLON;
+            ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeMinutes, 2, 2);
+            break;
+        case 3:
+            sub_81245DC(string, gMapHeader.regionMapSectionId);
+            break;
+        case 4:
+            for (curFlag = FLAG_BADGE01_GET, flagCount = 0, endOfString = string + 1; curFlag <= FLAG_BADGE08_GET; curFlag++)
+            {
+                if (FlagGet(curFlag))
+                    flagCount++;
+            }
+            *string = flagCount + CHAR_0;
+            *endOfString = EOS;
+            break;
+    }
 }

@@ -5,6 +5,70 @@
 
 	.text
 
+	thumb_func_start sub_819A44C
+sub_819A44C: @ 819A44C
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	ldrb r4, [r5, 0x5]
+	lsrs r4, 4
+	movs r0, 0x65
+	bl IndexOfSpritePaletteTag
+	lsls r0, 24
+	lsls r4, 16
+	lsrs r4, 16
+	lsrs r0, 24
+	cmp r4, r0
+	bne _0819A4BA
+	adds r0, r5, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x10
+	ands r0, r1
+	cmp r0, 0
+	beq _0819A4B0
+	ldrh r1, [r5, 0x2E]
+	movs r2, 0x2E
+	ldrsh r0, [r5, r2]
+	cmp r0, 0
+	beq _0819A484
+	subs r0, r1, 0x1
+	strh r0, [r5, 0x2E]
+	b _0819A4C2
+_0819A484:
+	bl Random
+	lsls r0, 16
+	lsrs r0, 16
+	movs r1, 0x5
+	bl __umodsi3
+	lsls r0, 16
+	cmp r0, 0
+	bne _0819A4A6
+	adds r0, r5, 0
+	movs r1, 0
+	bl StartSpriteAnim
+	movs r0, 0x20
+	strh r0, [r5, 0x2E]
+	b _0819A4C2
+_0819A4A6:
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl StartSpriteAnim
+	b _0819A4C2
+_0819A4B0:
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl StartSpriteAnimIfDifferent
+	b _0819A4C2
+_0819A4BA:
+	adds r0, r5, 0
+	movs r1, 0
+	bl StartSpriteAnimIfDifferent
+_0819A4C2:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_819A44C
+
 	thumb_func_start sub_819A4C8
 sub_819A4C8: @ 819A4C8
 	push {lr}

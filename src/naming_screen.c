@@ -1496,7 +1496,7 @@ static void TaskDummy3(void)
     
 }
 
-static const struct TextColor sGenderColors[2] = 
+static const u8 sGenderColors[2][3] = 
 {
     {0, 9, 8},
     {0, 5, 4}
@@ -1516,7 +1516,7 @@ static void sub_80E49BC(void)
             StringCopy(genderSymbol, gText_FemaleSymbol);
             isFemale = TRUE;
         }
-        box_print(gNamingScreenData->windows[2], 1, 0x68, 1, &sGenderColors[isFemale], -1, genderSymbol);
+        box_print(gNamingScreenData->windows[2], 1, 0x68, 1, sGenderColors[isFemale], -1, genderSymbol);
     }
 }
 
@@ -1661,19 +1661,18 @@ static void sub_80E4D10(void)
     PutWindowTilemap(gNamingScreenData->windows[2]);
 }
 
-static const struct AlignedTextColor sUnkColor1 =
+struct TextColorThing   // needed because of alignment... it's so stupid
 {
-    13, 1, 2
+    u8 colors[3][4];
 };
 
-static const struct AlignedTextColor sUnkColor2 =
+static const struct TextColorThing sUnkColorStruct =
 {
-    14, 1, 2
-};
-
-static const struct AlignedTextColor sUnkColor3 =
-{
-    15, 1, 2
+    {
+        {13, 1, 2},
+        {14, 1, 2},
+        {15, 1, 2}
+    }
 };
 
 static const u8 sFillValues[3] = 
@@ -1681,11 +1680,11 @@ static const u8 sFillValues[3] =
     0xEE, 0xDD, 0xFF
 };
 
-static const struct AlignedTextColor *const sUnkColors[3] = 
+static const u8 *const sUnkColors[3] = 
 {
-    &sUnkColor2,
-    &sUnkColor1,
-    &sUnkColor3
+    sUnkColorStruct.colors[1],
+    sUnkColorStruct.colors[0],
+    sUnkColorStruct.colors[2]
 };
 
 static void sub_80E4DE4(u8 window, u8 a1)
@@ -1738,7 +1737,7 @@ static void sub_80E4E5C(void)
 
 static void sub_80E4EF0(void)
 {
-    const struct TextColor color[] = { 15, 1, 2 };
+    const u8 color[3] = { 15, 1, 2 };
     
     FillWindowPixelBuffer(gNamingScreenData->windows[4], 0xFF);
     box_print(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);

@@ -403,7 +403,7 @@ void PutWindowRectTilemap(u8 windowId, u8 x, u8 y, u8 width, u8 height)
     }
 }
 
-void BlitBitmapToWindow(u8 windowId, u8 *pixels, u16 x, u16 y, u16 width, u16 height)
+void BlitBitmapToWindow(u8 windowId, const u8 *pixels, u16 x, u16 y, u16 width, u16 height)
 {
     BlitBitmapRectToWindow(windowId, pixels, 0, 0, width, height, x, y, width, height);
 }

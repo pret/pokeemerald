@@ -284,7 +284,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeblockCase =
     SpriteCallbackDummy
 };
 
-static const struct TextColor sTextColorInPokeblockMenu = {0, 2, 3};
+static const u8 sTextColorInPokeblockMenu[3] = {0, 2, 3};
 
 static const struct Pokeblock sFavoritePokeblocksTable[] =
 {
@@ -583,7 +583,7 @@ static void HandleInitWindows(void)
 
 static void PrintOnPokeblockWindow(u8 windowId, const u8 *string, s32 x)
 {
-    AddTextPrinterParameterized2(windowId, 1, x, 1, 0, 0, &sTextColorInPokeblockMenu, 0, string);
+    AddTextPrinterParameterized2(windowId, 1, x, 1, 0, 0, sTextColorInPokeblockMenu, 0, string);
 }
 
 static void PutPokeblockInfoText(void)
