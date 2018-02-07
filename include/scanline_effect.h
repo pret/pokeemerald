@@ -1,7 +1,7 @@
 #ifndef GUARD_SCANLINE_EFFECT_H
 #define GUARD_SCANLINE_EFFECT_H
 
-// DMA control value to ransfer a single 16-bit value at HBlank
+// DMA control value to transfer a single 16-bit value at HBlank
 #define SCANLINE_EFFECT_DMACNT_16BIT (((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_INC | DMA_16BIT | DMA_DEST_RELOAD) << 16) | 1)
 
 #define SCANLINE_EFFECT_REG_BG0HOFS (REG_ADDR_BG0HOFS - REG_ADDR_BG0HOFS)
@@ -36,7 +36,7 @@ struct ScanlineEffect
 
 extern struct ScanlineEffect gScanlineEffect;
 
-extern u16 gScanlineEffectRegBuffers[][0x3C0];
+extern u16 gScanlineEffectRegBuffers[2][0x3C0];
 
 void ScanlineEffect_Stop(void);
 void ScanlineEffect_Clear(void);
