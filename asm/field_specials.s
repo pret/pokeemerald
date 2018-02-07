@@ -5764,7 +5764,7 @@ sub_813ABD4: @ 813ABD4
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl AddItemIconObject
+	bl AddItemIconSprite
 	ldr r4, =gUnknown_0203AB6C
 	strb r0, [r4]
 	lsls r0, 24
