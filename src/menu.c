@@ -765,26 +765,26 @@ u8 sub_81980F0(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile)
 {
     struct WindowTemplate window;
     memset(&window, 0, sizeof(window));
-    
+
     if (bg > 3)
         window.priority = 0;
     else
         window.priority = bg;
-    
+
     window.tilemapTop = yPos;
     window.height = 2;
     window.tilemapLeft = 0x1E - xPos;
     window.width = xPos;
     window.paletteNum = palette;
     window.baseBlock = baseTile;
-    
+
     gUnknown_0203CDA0 = AddWindow(&window);
-    
+
     if (palette > 15)
         palette = 15 * 16;
     else
         palette *= 16;
-    
+
     LoadPalette(gUnknown_0860F0B0, palette, sizeof(gUnknown_0860F0B0));
     return gUnknown_0203CDA0;
 }
@@ -792,7 +792,7 @@ u8 sub_81980F0(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile)
 void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
 {
     u16 width = 0;
-    
+
     if (gUnknown_0203CDA0 != 0xFF)
     {
         PutWindowTilemap(gUnknown_0203CDA0);
@@ -814,7 +814,7 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
 {
     u8 color[3];
     u16 width = 0;
-    
+
     if (gUnknown_0203CDA0 != 0xFF)
     {
         if (a3 != 0)
@@ -878,7 +878,7 @@ void sub_8198314(void)
 u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos, u8 a7)
 {
     s32 pos;
-    
+
     gUnknown_0203CD90.left = left;
     gUnknown_0203CD90.top = top;
     gUnknown_0203CD90.minCursorPos = 0;
@@ -887,14 +887,14 @@ u8 sub_8198348(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numC
     gUnknown_0203CD90.fontId = fontId;
     gUnknown_0203CD90.optionHeight = cursorHeight;
     gUnknown_0203CD90.APressMuted = a7;
-    
+
     pos = initialCursorPos;
-    
+
     if (pos < 0 || pos > gUnknown_0203CD90.maxCursorPos)
         gUnknown_0203CD90.cursorPos = 0;
     else
         gUnknown_0203CD90.cursorPos = pos;
-    
+
     MoveMenuCursor(0);
     return gUnknown_0203CD90.cursorPos;
 }
@@ -913,7 +913,7 @@ u8 sub_81983EC(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8 initia
 void RedrawMenuCursor(u8 oldPos, u8 newPos)
 {
     u8 width, height;
-    
+
     width = GetMenuCursorDimensionByFont(gUnknown_0203CD90.fontId, 0);
     height = GetMenuCursorDimensionByFont(gUnknown_0203CD90.fontId, 1);
     FillWindowPixelRect(gUnknown_0203CD90.windowId, 0x11, gUnknown_0203CD90.left, gUnknown_0203CD90.optionHeight * oldPos + gUnknown_0203CD90.top, width, height);
@@ -924,14 +924,14 @@ u8 MoveMenuCursor(s8 cursorDelta)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
     int newPos = gUnknown_0203CD90.cursorPos + cursorDelta;
-    
+
     if (newPos < gUnknown_0203CD90.minCursorPos)
         gUnknown_0203CD90.cursorPos = gUnknown_0203CD90.maxCursorPos;
     else if (newPos > gUnknown_0203CD90.maxCursorPos)
         gUnknown_0203CD90.cursorPos = gUnknown_0203CD90.minCursorPos;
     else
         gUnknown_0203CD90.cursorPos += cursorDelta;
-    
+
     RedrawMenuCursor(oldPos, gUnknown_0203CD90.cursorPos);
     return gUnknown_0203CD90.cursorPos;
 }
@@ -940,14 +940,14 @@ u8 MoveMenuCursorNoWrapAround(s8 cursorDelta)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
     int newPos = gUnknown_0203CD90.cursorPos + cursorDelta;
-    
+
     if (newPos < gUnknown_0203CD90.minCursorPos)
         gUnknown_0203CD90.cursorPos = gUnknown_0203CD90.minCursorPos;
     else if (newPos > gUnknown_0203CD90.maxCursorPos)
         gUnknown_0203CD90.cursorPos = gUnknown_0203CD90.maxCursorPos;
     else
         gUnknown_0203CD90.cursorPos += cursorDelta;
-    
+
     RedrawMenuCursor(oldPos, gUnknown_0203CD90.cursorPos);
     return gUnknown_0203CD90.cursorPos;
 }
@@ -988,7 +988,7 @@ s8 ProcessMenuInput(void)
 s8 ProcessMenuInputNoWrapAround(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
-    
+
     if (gMain.newKeys & A_BUTTON)
     {
         if (!gUnknown_0203CD90.APressMuted)
@@ -1046,7 +1046,7 @@ s8 ProcessMenuInput_other(void)
 s8 ProcessMenuInputNoWrapAround_other(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
-    
+
     if (gMain.newKeys & A_BUTTON)
     {
         if (!gUnknown_0203CD90.APressMuted)
@@ -1102,7 +1102,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
 {
     u8 i;
     struct TextSubPrinter printer;
-    
+
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.fgColor = GetFontAttribute(fontId, 5);
@@ -1113,7 +1113,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
     printer.lineSpacing = GetFontAttribute(fontId, 3);
     printer.x = left;
     printer.currentX = left;
-    
+
     for (i = 0; i < itemCount; i++)
     {
         printer.current_text_offset = strs[a8[i]].text;
@@ -1121,7 +1121,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
         printer.currentY = printer.y;
         AddTextPrinter(&printer, 0xFF, NULL);
     }
-    
+
     CopyWindowToVram(windowId, 2);
 }
 
@@ -1158,10 +1158,10 @@ u16 sub_8198AA4(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 
 void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
     struct TextSubPrinter printer;
-    
+
     gUnknown_0203CD9F = AddWindow(window);
     SetWindowBorderStyle(gUnknown_0203CD9F, TRUE, baseTileNum, paletteNum);
-    
+
     printer.current_text_offset = gText_YesNo;
     printer.windowId = gUnknown_0203CD9F;
     printer.fontId = fontId;
@@ -1175,9 +1175,9 @@ void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top
     printer.fontColor_l = GetFontAttribute(fontId, 4);
     printer.letterSpacing = GetFontAttribute(fontId, 2);
     printer.lineSpacing = GetFontAttribute(fontId, 3);
-    
+
     AddTextPrinter(&printer, 0xFF, NULL);
-    
+
     sub_81983AC(gUnknown_0203CD9F, fontId, left, top, GetFontAttribute(fontId, 1), 2, initialCursorPos);
 }
 
@@ -1224,7 +1224,7 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     u8 i;
     u8 j;
     struct TextSubPrinter printer;
-    
+
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.fgColor = GetFontAttribute(fontId, 5);
@@ -1233,7 +1233,7 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     printer.fontColor_l = GetFontAttribute(fontId, 4);
     printer.letterSpacing = GetFontAttribute(fontId, 2);
     printer.lineSpacing = GetFontAttribute(fontId, 3);
-    
+
     for (i = 0; i < itemCount2; i++)
     {
         for (j = 0; j < itemCount; j++)
@@ -1246,7 +1246,7 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
             AddTextPrinter(&printer, 0xFF, NULL);
         }
     }
-    
+
     CopyWindowToVram(windowId, 2);
 }
 
@@ -1258,7 +1258,7 @@ void sub_8198EF8(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struc
 u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, u8 a6, u8 a7, u8 numChoices, u8 a9)
 {
     s32 pos;
-    
+
     gUnknown_0203CD90.left = left;
     gUnknown_0203CD90.top = top;
     gUnknown_0203CD90.minCursorPos = 0;
@@ -1269,14 +1269,14 @@ u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, 
     gUnknown_0203CD90.optionHeight = cursorHeight;
     gUnknown_0203CD90.horizontalCount = a6;
     gUnknown_0203CD90.verticalCount = a7;
-    
+
     pos = a9;
-    
+
     if (pos < 0 || pos > gUnknown_0203CD90.maxCursorPos)
         gUnknown_0203CD90.cursorPos = 0;
     else
         gUnknown_0203CD90.cursorPos = pos;
-    
+
     sub_8199134(0, 0);
     return gUnknown_0203CD90.cursorPos;
 }
@@ -1314,7 +1314,7 @@ void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
 u8 sub_8199134(s8 deltaX, s8 deltaY)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
-    
+
     if (deltaX != 0)
     {
         if ((gUnknown_0203CD90.cursorPos % gUnknown_0203CD90.horizontalCount) + deltaX < 0)
@@ -1330,7 +1330,7 @@ u8 sub_8199134(s8 deltaX, s8 deltaY)
             gUnknown_0203CD90.cursorPos += deltaX;
         }
     }
-    
+
     if (deltaY != 0)
     {
         if ((gUnknown_0203CD90.cursorPos / gUnknown_0203CD90.horizontalCount) + deltaY < 0)
@@ -1346,7 +1346,7 @@ u8 sub_8199134(s8 deltaX, s8 deltaY)
             gUnknown_0203CD90.cursorPos += (gUnknown_0203CD90.horizontalCount * deltaY);
         }
     }
-    
+
     if (gUnknown_0203CD90.cursorPos > gUnknown_0203CD90.maxCursorPos)
     {
         gUnknown_0203CD90.cursorPos = oldPos;
@@ -1362,7 +1362,7 @@ u8 sub_8199134(s8 deltaX, s8 deltaY)
 u8 sub_81991F8(s8 deltaX, s8 deltaY)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
-    
+
     if (deltaX != 0)
     {
         if (((gUnknown_0203CD90.cursorPos % gUnknown_0203CD90.horizontalCount) + deltaX >= 0) &&
@@ -1371,7 +1371,7 @@ u8 sub_81991F8(s8 deltaX, s8 deltaY)
             gUnknown_0203CD90.cursorPos += deltaX;
         }
     }
-    
+
     if (deltaY != 0)
     {
         if (((gUnknown_0203CD90.cursorPos / gUnknown_0203CD90.horizontalCount) + deltaY >= 0) &&
@@ -1380,7 +1380,7 @@ u8 sub_81991F8(s8 deltaX, s8 deltaY)
             gUnknown_0203CD90.cursorPos += (gUnknown_0203CD90.horizontalCount * deltaY);
         }
     }
-    
+
     if (gUnknown_0203CD90.cursorPos > gUnknown_0203CD90.maxCursorPos)
     {
         gUnknown_0203CD90.cursorPos = oldPos;
@@ -1435,7 +1435,7 @@ s8 sub_8199284(void)
 s8 sub_8199334(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
-    
+
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
@@ -1515,7 +1515,7 @@ s8 sub_81993D8(void)
 s8 sub_8199484(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
-    
+
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
@@ -1556,7 +1556,7 @@ s8 sub_8199484(void)
 u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, bool8 APressMuted)
 {
     s32 pos;
-    
+
     gUnknown_0203CD90.left = 0;
     gUnknown_0203CD90.top = 1;
     gUnknown_0203CD90.minCursorPos = 0;
@@ -1565,14 +1565,14 @@ u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, boo
     gUnknown_0203CD90.fontId = 1;
     gUnknown_0203CD90.optionHeight = 16;
     gUnknown_0203CD90.APressMuted = APressMuted;
-    
+
     pos = initialCursorPos;
-    
+
     if (pos < 0 || pos > gUnknown_0203CD90.maxCursorPos)
         gUnknown_0203CD90.cursorPos = 0;
     else
         gUnknown_0203CD90.cursorPos = pos;
-    
+
     return MoveMenuCursor(0);
 }
 
@@ -1584,12 +1584,12 @@ u8 InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 windowId, u8 itemCount, u8 
 void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs)
 {
     u32 i;
-    
+
     for (i = 0; i < itemCount; i++)
     {
         PrintTextOnWindow(windowId, 1, strs[i].text, 8, (i * 16) + 1, 0xFF, NULL);
     }
-    
+
     CopyWindowToVram(windowId, 2);
 }
 
@@ -1597,7 +1597,7 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
 {
     u8 i;
     struct TextSubPrinter printer;
-    
+
     printer.windowId = windowId;
     printer.fontId = 1;
     printer.fgColor = GetFontAttribute(1, 5);
@@ -1608,7 +1608,7 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
     printer.lineSpacing = 0;
     printer.x = 8;
     printer.currentX = 8;
-    
+
     for (i = 0; i < itemCount; i++)
     {
         printer.current_text_offset = strs[a8[i]].text;
@@ -1616,17 +1616,17 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
         printer.currentY = (i * 16) + 1;
         AddTextPrinter(&printer, 0xFF, NULL);
     }
-    
+
     CopyWindowToVram(windowId, 2);
 }
 
 void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
     struct TextSubPrinter printer;
-    
+
     gUnknown_0203CD9F = AddWindow(window);
     SetWindowBorderStyle(gUnknown_0203CD9F, TRUE, baseTileNum, paletteNum);
-    
+
     printer.current_text_offset = gText_YesNo;
     printer.windowId = gUnknown_0203CD9F;
     printer.fontId = 1;
@@ -1640,7 +1640,7 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     printer.fontColor_l = GetFontAttribute(1, 4);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
-    
+
     AddTextPrinter(&printer, 0xFF, NULL);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_0203CD9F, 2, initialCursorPos);
 }
@@ -1664,7 +1664,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     u8 i;
     u8 j;
     struct TextSubPrinter printer;
-    
+
     printer.windowId = windowId;
     printer.fontId = 1;
     printer.fgColor = GetFontAttribute(1, 5);
@@ -1673,7 +1673,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     printer.fontColor_l = GetFontAttribute(1, 4);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
-    
+
     for (i = 0; i < itemCount2; i++)
     {
         for (j = 0; j < itemCount; j++)
@@ -1686,14 +1686,14 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
             AddTextPrinter(&printer, 0xFF, NULL);
         }
     }
-    
+
     CopyWindowToVram(windowId, 2);
 }
 
 u8 sub_8199944(u8 windowId, u8 optionWidth, u8 horizontalCount, u8 verticalCount, u8 initialCursorPos)
 {
     s32 pos;
-    
+
     gUnknown_0203CD90.left = 0;
     gUnknown_0203CD90.top = 1;
     gUnknown_0203CD90.minCursorPos = 0;
@@ -1704,14 +1704,14 @@ u8 sub_8199944(u8 windowId, u8 optionWidth, u8 horizontalCount, u8 verticalCount
     gUnknown_0203CD90.optionHeight = 16;
     gUnknown_0203CD90.horizontalCount = horizontalCount;
     gUnknown_0203CD90.verticalCount = verticalCount;
-    
+
     pos = initialCursorPos;
-    
+
     if (pos < 0 || pos > gUnknown_0203CD90.maxCursorPos)
         gUnknown_0203CD90.cursorPos = 0;
     else
         gUnknown_0203CD90.cursorPos = pos;
-    
+
     sub_8199134(0, 0);
     return gUnknown_0203CD90.cursorPos;
 }
@@ -1763,7 +1763,7 @@ void reset_temp_tile_data_buffers(void)
 bool8 free_temp_tile_data_buffers_if_possible(void)
 {
     int i;
-    
+
     if (!IsDma3ManagerBusyWithBgCopy())
     {
         if (gUnknown_0203CDA8)
@@ -1828,12 +1828,12 @@ void *malloc_and_decompress(const void *src, int *size)
     void *ptr;
     u8 *sizeAsBytes = (u8 *)size;
     u8 *srcAsBytes = (u8 *)src;
-    
+
     sizeAsBytes[0] = srcAsBytes[1];
     sizeAsBytes[1] = srcAsBytes[2];
     sizeAsBytes[2] = srcAsBytes[3];
     sizeAsBytes[3] = 0;
-    
+
     ptr = Alloc(*size);
     if (ptr)
         LZ77UnCompWram(src, ptr);
@@ -1858,7 +1858,7 @@ void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
     u8 i;
     u8 j;
     u16 *ptr = GetBgTilemapBuffer(bgId);
-    
+
     for (i = top; i < top + height; i++)
     {
         for (j = left; j < left + width; j++)
@@ -1873,7 +1873,7 @@ void sub_8199CBC(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height)
     u8 i;
     u8 j;
     const u16 *src = GetBgTilemapBuffer(bgId);
-    
+
     for (i = 0; i < height; i++)
     {
         for (j = 0; j < width; j++)
@@ -1927,7 +1927,7 @@ void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)
 void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str)
 {
     struct TextSubPrinter printer;
-    
+
     printer.current_text_offset = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
@@ -1948,7 +1948,7 @@ void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 spee
 void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
 {
     struct TextSubPrinter printer;
-    
+
     printer.current_text_offset = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
@@ -1969,7 +1969,7 @@ void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 le
 void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing)
 {
     struct TextSubPrinter printer;
-    
+
     printer.current_text_offset = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
@@ -1980,11 +1980,11 @@ void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 spee
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
     printer.fontColor_l = 0;
-    
+
     printer.fgColor = GetFontAttribute(fontId, 5);
     printer.bgColor = GetFontAttribute(fontId, 6);
     printer.shadowColor = GetFontAttribute(fontId, 7);
-    
+
     AddTextPrinter(&printer, speed, callback);
 }
 
@@ -1993,28 +1993,93 @@ void sub_819A024(u8 windowId, const u8 *src, u16 a2, u16 a3)
     int count = 0;
     while (gSaveBlock2Ptr->playerName[count] != EOS)
         count++;
-    
+
     StringExpandPlaceholders(gStringVar4, src);
-    
+
     PrintTextOnWindow(windowId, 1, gStringVar4, a2, a3, 0xFF, 0);
 }
 
 //Screw this function, it's long and unreferenced and ugh
-/*void sub_819A080(u16 *a0, u16 *a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
-{
-    int v1 = ((a0[2] - a4) > a6) ? (a6 + a2) : (a0[2] - a4);
-    int v2;
-    
-    if (a0[3] - a5 < a7)
-        v2 = a3 + a0[3] - a5;
-    else
-        v2 = a3 + a7;
-    
-    
-}*/
 
+struct UnkStruct_819A080 {
+    u8 *unk00;
+    u16 unk04;
+    u16 unk06;
+};
+
+#ifdef NONMATCHING
+void sub_819A080(struct UnkStruct_819A080 *a0, struct UnkStruct_819A080 *a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
+{
+    // r3 = a3
+    // r4 = a5
+    // r1 = a6
+    // r5 = a7
+    // sp+00 = a0
+    // sp+04 = a1
+    // sp+08 = a2
+    // sp+0c = a4
+    int sp10 = a1->unk04 - a4 > a6 ? a6 + a2 : a1->unk04 - a4;
+    int sp14 = a0->unk06 - a5 < a7 ? a3 + a0->unk06 - a5 : a3 + a7;
+    int sp18 = (a0->unk04 + (a0->unk04 & 0x7)) / 8;
+    int sp1c = (a1->unk04 + (a1->unk04 & 0x7)) / 8;
+    int r12; // sp+20
+    int r8;  // sp+24
+    int r5;
+    int r6;
+    u16 r2;
+
+    for (r12 = a3, r8 = a5; r12 < sp14; r12++, r8++)
+    {
+        for (r5 = a2, r6 = a4; a5 < sp10; a5++, a6++)
+        {
+            u8 *r3 = a0->unk00 + ((r5 >> 1) & 0x3) + ((r5 >> 3) << 5) + (((r12 >> 3) * sp18) << 5) + ((r12 & 0x7) << 2);
+            u8 *r4 = a1->unk00 + ((r6 >> 1) & 0x3) + ((r6 >> 3) << 5) + (((r8 >> 3) * sp1c) << 5) + ((r8 & 0x7) << 2);
+            if (((uintptr_t)r4) & 0x1)
+            {
+                u16 *r4_2 = (u16 *)(r4 - 1);
+                if (r6 & 0x1)
+                {
+                    r2 = *r4_2 & 0x0fff;
+                    if (r5 & 0x1)
+                        *r4_2 = r2 | ((*r3 & 0xf0) << 8);
+                    else
+                        *r4_2 = r2 | ((*r3 & 0x0f) << 12);
+                }
+                else
+                {
+                    r2 = *r4_2 * 0xf0ff;
+                    if (r5 & 0x1)
+                        *r4_2 = r2 | ((*r3 & 0xf0) << 4);
+                    else
+                        *r4_2 = r2 | ((*r3 & 0x0f) << 8);
+                }
+            }
+            else
+            {
+                u16 *r4_2 = (u16 *)r4;
+                if (r6 & 1)
+                {
+                    r2 = *r4_2 & 0xff0f;
+                    if (r5 & 1)
+                        *r4_2 = r2 | ((*r3 & 0xf0) << 0);
+                    else
+                        *r4_2 = r2 | ((*r3 & 0x0f) << 4);
+                }
+                else
+                {
+                    r2 = *r4_2 & 0xfff0;
+                    if (r5 & 1)
+                        *r4_2 = r2 | ((*r3 & 0xf0) >> 4);
+                    else
+                        *r4_2 = r2 | ((*r3 & 0x0f) >> 0);
+                }
+            }
+        }
+    }
+}
+#else
 __attribute__((naked))
-void sub_819A080(u16 *a0, u16 *a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
+void sub_819A080(struct UnkStruct_819A080 *a0, struct UnkStruct_819A080 *a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
 {
 	asm("push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -2264,6 +2329,7 @@ _0819A24A:\n\
 	pop {r0}\n\
 	bx r0\n");
 }
+#endif
 
 void sub_819A25C(u8 palOffset, u16 speciesId)
 {
@@ -2278,7 +2344,7 @@ void sub_819A27C(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
 void sub_819A2BC(u8 palOffset, u8 palId)
 {
     const u16 *palette;
-    
+
     switch (palId)
     {
         case 0:
@@ -2292,7 +2358,7 @@ void sub_819A2BC(u8 palOffset, u8 palId)
             palette = gFireRedMenuElements3_Pal;
             break;
     }
-    
+
     LoadPalette(palette, palOffset, 0x20);
 }
 
