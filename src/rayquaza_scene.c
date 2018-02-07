@@ -1264,7 +1264,7 @@ static void CB2_RayquazaScene(void)
     UpdatePaletteFade();
 }
 
-static void VblankCB_RayquazaScene(void)
+static void VBlankCB_RayquazaScene(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -1493,9 +1493,9 @@ static void sub_81D6D20(struct Sprite *sprite)
     }
 }
 
-static void VblankCB_DuoFight(void)
+static void VBlankCB_DuoFight(void)
 {
-    VblankCB_RayquazaScene();
+    VBlankCB_RayquazaScene();
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
@@ -1564,7 +1564,7 @@ static void Task_DuoFightAnim(u8 taskId)
 
     BlendPalettes(-1, 0x10, 0);
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
-    SetVBlankCallback(VblankCB_DuoFight);
+    SetVBlankCallback(VBlankCB_DuoFight);
     PlaySE(SE_T_OOAME);
 }
 
@@ -1654,7 +1654,7 @@ static void Task_HandleDuoFight(u8 taskId)
                 DuoFightEnd(taskId, 2);
                 return;
             case 380:
-                SetGpuReg(REG_OFFSET_BLDCNT, 0x244);
+                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
                 gTasks[data[1]].func = sub_81D752C;
                 gTasks[data[1]].data[0] = 0;
                 gTasks[data[1]].data[2] = data[2];
@@ -1953,10 +1953,10 @@ static void Task_RayTakesFlightAnim(u8 taskId)
     PlayNewMapMusic(MUS_REKKUU_KOURIN);
     sub_81D7E10();
     sub_81D7E9C();
-    SetGpuReg(REG_OFFSET_BLDCNT, 0x250);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
     BlendPalettes(-1, 0x10, 0);
-    SetVBlankCallback(VblankCB_RayquazaScene);
+    SetVBlankCallback(VBlankCB_RayquazaScene);
     CreateTask(sub_81D81A4, 0);
     data[0] = 0;
     data[1] = 0;
@@ -2152,10 +2152,10 @@ static void Task_RayDescendsAnim(u8 taskId)
     s16 *data = gTasks[taskId].data;
     sub_81D82B0();
     sub_81D8358();
-    SetGpuRegBits(REG_OFFSET_BLDCNT, 0x1E41);
+    SetGpuRegBits(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x1000);
     BlendPalettes(-1, 0x10, 0);
-    SetVBlankCallback(VblankCB_RayquazaScene);
+    SetVBlankCallback(VBlankCB_RayquazaScene);
     sRayScene->field_2008 = 0;
     sRayScene->field_200A = 0;
     data[0] = 0;
@@ -2346,7 +2346,7 @@ static void Task_RayChargesAnim(u8 taskId)
     sub_81D88D0();
     sub_81D68C8();
     BlendPalettes(-1, 0x10, 0);
-    SetVBlankCallback(VblankCB_RayquazaScene);
+    SetVBlankCallback(VBlankCB_RayquazaScene);
     data[0] = 0;
     data[1] = 0;
     data[2] = CreateTask(sub_81D8AD8, 0);
@@ -2508,10 +2508,10 @@ static void Task_RayChasesAwayAnim(u8 taskId)
     sub_81D8CC4();
     sub_81D68C8();
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0x241);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0xE09);
     BlendPalettes(-1, 0x10, 0);
-    SetVBlankCallback(VblankCB_RayquazaScene);
+    SetVBlankCallback(VBlankCB_RayquazaScene);
     data[0] = 0;
     data[1] = 0;
     gTasks[taskId].func = Task_HandleRayChasesAway;
