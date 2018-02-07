@@ -108,7 +108,7 @@ SECTIONS {
         src/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         src/clock.o(.text);
-        asm/reset_rtc_screen.o(.text);
+        src/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         asm/start_menu.o(.text);
         src/tileset_anims.o(.text);
@@ -408,7 +408,7 @@ SECTIONS {
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);
-        data/reset_rtc_screen.o(.rodata);
+        src/reset_rtc_screen.o(.rodata);
         src/start_menu.o(.rodata);
         src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
