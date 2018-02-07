@@ -10,16 +10,16 @@
 #include "constants/items.h"
 #include "pokemon_item_effects.h"
 
-extern u8 gActiveBank;
-extern u8 gAbsentBankFlags;
+extern u8 gActiveBattler;
+extern u8 gAbsentBattlerFlags;
 extern u32 gBattleTypeFlags;
-extern u32 gStatuses3[BATTLE_BANKS_COUNT];
-extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
-extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern u16 gLastLandedMoves[BATTLE_BANKS_COUNT];
-extern u8 gLastHitBy[BATTLE_BANKS_COUNT];
+extern u32 gStatuses3[MAX_BATTLERS_COUNT];
+extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
+extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
+extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
 extern u16 gDynamicBasePower;
-extern u8 gBattleMoveFlags;
+extern u8 gMoveResultFlags;
 extern u8 gCritMultiplier;
 extern s32 gBattleMoveDamage;
 
@@ -35,11 +35,11 @@ static bool8 ShouldUseItem(void);
 
 static bool8 ShouldSwitchIfPerishSong(void)
 {
-    if (gStatuses3[gActiveBank] & STATUS3_PERISH_SONG
-        && gDisableStructs[gActiveBank].perishSongTimer1 == 0)
+    if (gStatuses3[gActiveBattler] & STATUS3_PERISH_SONG
+        && gDisableStructs[gActiveBattler].perishSongTimer1 == 0)
     {
-        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
-        EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -48,7 +48,7 @@ static bool8 ShouldSwitchIfPerishSong(void)
 
 static bool8 ShouldSwitchIfWonderGuard(void)
 {
-    u8 opposingIdentity;
+    u8 opposingPosition;
     u8 opposingBank;
     u8 moveFlags;
     s32 i, j;
@@ -60,27 +60,27 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         return FALSE;
 
-    opposingIdentity = GetBankIdentity(gActiveBank) ^ BIT_SIDE;
+    opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
 
-    if (gBattleMons[GetBankByIdentity(opposingIdentity)].ability != ABILITY_WONDER_GUARD)
+    if (gBattleMons[GetBattlerAtPosition(opposingPosition)].ability != ABILITY_WONDER_GUARD)
         return FALSE;
 
     // check if pokemon has a super effective move
-    for (opposingBank = GetBankByIdentity(opposingIdentity), i = 0; i < 4; i++)
+    for (opposingBank = GetBattlerAtPosition(opposingPosition), i = 0; i < 4; i++)
     {
-        move = gBattleMons[gActiveBank].moves[i];
+        move = gBattleMons[gActiveBattler].moves[i];
         if (move == MOVE_NONE)
             continue;
 
         moveFlags = AI_TypeCalc(move, gBattleMons[opposingBank].species, gBattleMons[opposingBank].ability);
-        if (moveFlags & MOVESTATUS_SUPEREFFECTIVE)
+        if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
             return FALSE;
     }
 
     // get party information
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))
     {
-        if ((gActiveBank & BIT_MON) == 0)
+        if ((gActiveBattler & BIT_FLANK) == 0)
             firstId = 0, lastId = 3;
         else
             firstId = 3, lastId = 6;
@@ -90,7 +90,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
         firstId = 0, lastId = 6;
     }
 
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -104,24 +104,24 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             continue;
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlePartyID[gActiveBank])
+        if (i == gBattlerPartyIndexes[gActiveBattler])
             continue;
 
         GetMonData(&party[i], MON_DATA_SPECIES); // unused return value
         GetMonData(&party[i], MON_DATA_ALT_ABILITY); // unused return value
 
-        for (opposingBank = GetBankByIdentity(opposingIdentity), j = 0; j < 4; j++)
+        for (opposingBank = GetBattlerAtPosition(opposingPosition), j = 0; j < 4; j++)
         {
             move = GetMonData(&party[i], MON_DATA_MOVE1 + j);
             if (move == MOVE_NONE)
                 continue;
 
             moveFlags = AI_TypeCalc(move, gBattleMons[opposingBank].species, gBattleMons[opposingBank].ability);
-            if (moveFlags & MOVESTATUS_SUPEREFFECTIVE && Random() % 3 < 2)
+            if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % 3 < 2)
             {
                 // we found a mon
-                *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = i;
-                EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+                *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
+                BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
                 return TRUE;
             }
         }
@@ -141,42 +141,42 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 
     if (HasSuperEffectiveMoveAgainstOpponents(TRUE) && Random() % 3 != 0)
         return FALSE;
-    if (gLastLandedMoves[gActiveBank] == 0)
+    if (gLastLandedMoves[gActiveBattler] == 0)
         return FALSE;
-    if (gLastLandedMoves[gActiveBank] == 0xFFFF)
+    if (gLastLandedMoves[gActiveBattler] == 0xFFFF)
         return FALSE;
-    if (gBattleMoves[gLastLandedMoves[gActiveBank]].power == 0)
+    if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0)
         return FALSE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        bankIn1 = gActiveBank;
-        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON)])
-            bankIn2 = gActiveBank;
+        bankIn1 = gActiveBattler;
+        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))])
+            bankIn2 = gActiveBattler;
         else
-            bankIn2 = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON);
+            bankIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
     }
     else
     {
-        bankIn1 = gActiveBank;
-        bankIn2 = gActiveBank;
+        bankIn1 = gActiveBattler;
+        bankIn2 = gActiveBattler;
     }
 
-    if (gBattleMoves[gLastLandedMoves[gActiveBank]].type == TYPE_FIRE)
+    if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_FIRE)
         absorbingTypeAbility = ABILITY_FLASH_FIRE;
-    else if (gBattleMoves[gLastLandedMoves[gActiveBank]].type == TYPE_WATER)
+    else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_WATER)
         absorbingTypeAbility = ABILITY_WATER_ABSORB;
-    else if (gBattleMoves[gLastLandedMoves[gActiveBank]].type == TYPE_ELECTRIC)
+    else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_ELECTRIC)
         absorbingTypeAbility = ABILITY_VOLT_ABSORB;
     else
         return FALSE;
 
-    if (gBattleMons[gActiveBank].ability == absorbingTypeAbility)
+    if (gBattleMons[gActiveBattler].ability == absorbingTypeAbility)
         return FALSE;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))
     {
-        if ((gActiveBank & BIT_MON) == 0)
+        if ((gActiveBattler & BIT_FLANK) == 0)
             firstId = 0, lastId = 3;
         else
             firstId = 3, lastId = 6;
@@ -186,7 +186,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         firstId = 0, lastId = 6;
     }
 
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -202,9 +202,9 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlePartyID[bankIn1])
+        if (i == gBattlerPartyIndexes[bankIn1])
             continue;
-        if (i == gBattlePartyID[bankIn2])
+        if (i == gBattlerPartyIndexes[bankIn2])
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
@@ -220,8 +220,8 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
             // we found a mon
-            *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = i;
-            EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+            *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
             return TRUE;
         }
     }
@@ -231,34 +231,34 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 
 static bool8 ShouldSwitchIfNaturalCure(void)
 {
-    if (!(gBattleMons[gActiveBank].status1 & STATUS_SLEEP))
+    if (!(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP))
         return FALSE;
-    if (gBattleMons[gActiveBank].ability != ABILITY_NATURAL_CURE)
+    if (gBattleMons[gActiveBattler].ability != ABILITY_NATURAL_CURE)
         return FALSE;
-    if (gBattleMons[gActiveBank].hp < gBattleMons[gActiveBank].maxHP / 2)
+    if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 2)
         return FALSE;
 
-    if ((gLastLandedMoves[gActiveBank] == 0 || gLastLandedMoves[gActiveBank] == 0xFFFF) && Random() & 1)
+    if ((gLastLandedMoves[gActiveBattler] == 0 || gLastLandedMoves[gActiveBattler] == 0xFFFF) && Random() & 1)
     {
-        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
-        EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
-    else if (gBattleMoves[gLastLandedMoves[gActiveBank]].power == 0 && Random() & 1)
+    else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0 && Random() & 1)
     {
-        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
-        EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
-    if (FindMonWithFlagsAndSuperEffective(MOVESTATUS_NOTAFFECTED, 1))
+    if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_DOESNT_AFFECT_FOE, 1))
         return TRUE;
-    if (FindMonWithFlagsAndSuperEffective(MOVESTATUS_NOTVERYEFFECTIVE, 1))
+    if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_NOT_VERY_EFFECTIVE, 1))
         return TRUE;
     if (Random() & 1)
     {
-        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
-        EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -267,25 +267,25 @@ static bool8 ShouldSwitchIfNaturalCure(void)
 
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
 {
-    u8 opposingIdentity;
+    u8 opposingPosition;
     u8 opposingBank;
     s32 i;
     u8 moveFlags;
     u16 move;
 
-    opposingIdentity = GetBankIdentity(gActiveBank) ^ BIT_SIDE;
-    opposingBank = GetBankByIdentity(opposingIdentity);
+    opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
+    opposingBank = GetBattlerAtPosition(opposingPosition);
 
-    if (!(gAbsentBankFlags & gBitTable[opposingBank]))
+    if (!(gAbsentBattlerFlags & gBitTable[opposingBank]))
     {
         for (i = 0; i < 4; i++)
         {
-            move = gBattleMons[gActiveBank].moves[i];
+            move = gBattleMons[gActiveBattler].moves[i];
             if (move == MOVE_NONE)
                 continue;
 
             moveFlags = AI_TypeCalc(move, gBattleMons[opposingBank].species, gBattleMons[opposingBank].ability);
-            if (moveFlags & MOVESTATUS_SUPEREFFECTIVE)
+            if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
             {
                 if (noRng)
                     return TRUE;
@@ -297,18 +297,18 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         return FALSE;
 
-    opposingBank = GetBankByIdentity(opposingIdentity ^ BIT_MON);
+    opposingBank = GetBattlerAtPosition(BATTLE_PARTNER(opposingPosition));
 
-    if (!(gAbsentBankFlags & gBitTable[opposingBank]))
+    if (!(gAbsentBattlerFlags & gBitTable[opposingBank]))
     {
         for (i = 0; i < 4; i++)
         {
-            move = gBattleMons[gActiveBank].moves[i];
+            move = gBattleMons[gActiveBattler].moves[i];
             if (move == MOVE_NONE)
                 continue;
 
             moveFlags = AI_TypeCalc(move, gBattleMons[opposingBank].species, gBattleMons[opposingBank].ability);
-            if (moveFlags & MOVESTATUS_SUPEREFFECTIVE)
+            if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
             {
                 if (noRng)
                     return TRUE;
@@ -328,8 +328,8 @@ static bool8 AreStatsRaised(void)
 
     for (i = 0; i < BATTLE_STATS_NO; i++)
     {
-        if (gBattleMons[gActiveBank].statStages[i] > 6)
-            buffedStatsValue += gBattleMons[gActiveBank].statStages[i] - 6;
+        if (gBattleMons[gActiveBattler].statStages[i] > 6)
+            buffedStatsValue += gBattleMons[gActiveBattler].statStages[i] - 6;
     }
 
     return (buffedStatsValue > 3);
@@ -345,32 +345,32 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     u16 move;
     u8 moveFlags;
 
-    if (gLastLandedMoves[gActiveBank] == 0)
+    if (gLastLandedMoves[gActiveBattler] == 0)
         return FALSE;
-    if (gLastLandedMoves[gActiveBank] == 0xFFFF)
+    if (gLastLandedMoves[gActiveBattler] == 0xFFFF)
         return FALSE;
-    if (gLastHitBy[gActiveBank] == 0xFF)
+    if (gLastHitBy[gActiveBattler] == 0xFF)
         return FALSE;
-    if (gBattleMoves[gLastLandedMoves[gActiveBank]].power == 0)
+    if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0)
         return FALSE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        bankIn1 = gActiveBank;
-        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON)])
-            bankIn2 = gActiveBank;
+        bankIn1 = gActiveBattler;
+        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))])
+            bankIn2 = gActiveBattler;
         else
-            bankIn2 = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON);
+            bankIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
     }
     else
     {
-        bankIn1 = gActiveBank;
-        bankIn2 = gActiveBank;
+        bankIn1 = gActiveBattler;
+        bankIn2 = gActiveBattler;
     }
 
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))
     {
-        if ((gActiveBank & BIT_MON) == 0)
+        if ((gActiveBattler & BIT_FLANK) == 0)
             firstId = 0, lastId = 3;
         else
             firstId = 3, lastId = 6;
@@ -380,7 +380,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
         firstId = 0, lastId = 6;
     }
 
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -396,9 +396,9 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
             continue;
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlePartyID[bankIn1])
+        if (i == gBattlerPartyIndexes[bankIn1])
             continue;
-        if (i == gBattlePartyID[bankIn2])
+        if (i == gBattlerPartyIndexes[bankIn2])
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
@@ -411,10 +411,10 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
         else
             monAbility = gBaseStats[species].ability1;
 
-        moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBank], species, monAbility);
+        moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (moveFlags & flags)
         {
-            bankIn1 = gLastHitBy[gActiveBank];
+            bankIn1 = gLastHitBy[gActiveBattler];
 
             for (j = 0; j < 4; j++)
             {
@@ -423,10 +423,10 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
                     continue;
 
                 moveFlags = AI_TypeCalc(move, gBattleMons[bankIn1].species, gBattleMons[bankIn1].ability);
-                if (moveFlags & MOVESTATUS_SUPEREFFECTIVE && Random() % moduloPercent == 0)
+                if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % moduloPercent == 0)
                 {
-                    *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = i;
-                    EmitTwoReturnValues(1, ACTION_SWITCH, 0);
+                    *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
+                    BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
                     return TRUE;
                 }
             }
@@ -446,19 +446,19 @@ static bool8 ShouldSwitch(void)
     s32 i;
     s32 availableToSwitch;
 
-    if (gBattleMons[*(activeBankPtr = &gActiveBank)].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
+    if (gBattleMons[*(activeBankPtr = &gActiveBattler)].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
         return FALSE;
-    if (gStatuses3[gActiveBank] & STATUS3_ROOTED)
+    if (gStatuses3[gActiveBattler] & STATUS3_ROOTED)
         return FALSE;
-    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, gActiveBank, ABILITY_SHADOW_TAG, 0, 0))
+    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, gActiveBattler, ABILITY_SHADOW_TAG, 0, 0))
         return FALSE;
-    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, gActiveBank, ABILITY_ARENA_TRAP, 0, 0))
+    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, gActiveBattler, ABILITY_ARENA_TRAP, 0, 0))
         return FALSE; // misses the flying or levitate check
     if (AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_MAGNET_PULL, 0, 0))
     {
-        if (gBattleMons[gActiveBank].type1 == TYPE_STEEL)
+        if (gBattleMons[gActiveBattler].type1 == TYPE_STEEL)
             return FALSE;
-        if (gBattleMons[gActiveBank].type2 == TYPE_STEEL)
+        if (gBattleMons[gActiveBattler].type2 == TYPE_STEEL)
             return FALSE;
     }
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
@@ -468,10 +468,10 @@ static bool8 ShouldSwitch(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         bankIn1 = *activeBankPtr;
-        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankIdentity(*activeBankPtr) ^ BIT_MON)])
+        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(GetBattlerPosition(*activeBankPtr) ^ BIT_FLANK)])
             bankIn2 = *activeBankPtr;
         else
-            bankIn2 = GetBankByIdentity(GetBankIdentity(*activeBankPtr) ^ BIT_MON);
+            bankIn2 = GetBattlerAtPosition(GetBattlerPosition(*activeBankPtr) ^ BIT_FLANK);
     }
     else
     {
@@ -481,7 +481,7 @@ static bool8 ShouldSwitch(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))
     {
-        if ((gActiveBank & BIT_MON) == 0)
+        if ((gActiveBattler & BIT_FLANK) == 0)
             firstId = 0, lastId = 3;
         else
             firstId = 3, lastId = 6;
@@ -491,7 +491,7 @@ static bool8 ShouldSwitch(void)
         firstId = 0, lastId = 6;
     }
 
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -504,9 +504,9 @@ static bool8 ShouldSwitch(void)
             continue;
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlePartyID[bankIn1])
+        if (i == gBattlerPartyIndexes[bankIn1])
             continue;
-        if (i == gBattlePartyID[bankIn2])
+        if (i == gBattlerPartyIndexes[bankIn2])
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
@@ -530,8 +530,8 @@ static bool8 ShouldSwitch(void)
         return FALSE;
     if (AreStatsRaised())
         return FALSE;
-    if (FindMonWithFlagsAndSuperEffective(MOVESTATUS_NOTAFFECTED, 2)
-        || FindMonWithFlagsAndSuperEffective(MOVESTATUS_NOTVERYEFFECTIVE, 3))
+    if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_DOESNT_AFFECT_FOE, 2)
+        || FindMonWithFlagsAndSuperEffective(MOVE_RESULT_NOT_VERY_EFFECTIVE, 3))
         return TRUE;
 
     return FALSE;
@@ -543,9 +543,9 @@ void AI_TrySwitchOrUseItem(void)
     u8 bankIn1, bankIn2;
     s32 firstId;
     s32 lastId; // + 1
-    u8 bankIdentity = GetBankIdentity(gActiveBank);
+    u8 bankIdentity = GetBattlerPosition(gActiveBattler);
 
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -554,25 +554,25 @@ void AI_TrySwitchOrUseItem(void)
     {
         if (ShouldSwitch())
         {
-            if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) == 6)
+            if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == 6)
             {
                 s32 monToSwitchId = GetMostSuitableMonToSwitchInto();
                 if (monToSwitchId == 6)
                 {
                     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
                     {
-                        bankIn1 = GetBankByIdentity(bankIdentity);
+                        bankIn1 = GetBattlerAtPosition(bankIdentity);
                         bankIn2 = bankIn1;
                     }
                     else
                     {
-                        bankIn1 = GetBankByIdentity(bankIdentity);
-                        bankIn2 = GetBankByIdentity(bankIdentity ^ BIT_MON);
+                        bankIn1 = GetBattlerAtPosition(bankIdentity);
+                        bankIn2 = GetBattlerAtPosition(bankIdentity ^ BIT_FLANK);
                     }
 
                     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))
                     {
-                        if ((gActiveBank & BIT_MON) == 0)
+                        if ((gActiveBattler & BIT_FLANK) == 0)
                             firstId = 0, lastId = 3;
                         else
                             firstId = 3, lastId = 6;
@@ -586,9 +586,9 @@ void AI_TrySwitchOrUseItem(void)
                     {
                         if (GetMonData(&party[monToSwitchId], MON_DATA_HP) == 0)
                             continue;
-                        if (monToSwitchId == gBattlePartyID[bankIn1])
+                        if (monToSwitchId == gBattlerPartyIndexes[bankIn1])
                             continue;
-                        if (monToSwitchId == gBattlePartyID[bankIn2])
+                        if (monToSwitchId == gBattlerPartyIndexes[bankIn2])
                             continue;
                         if (monToSwitchId == *(gBattleStruct->monToSwitchIntoId + bankIn1))
                             continue;
@@ -599,10 +599,10 @@ void AI_TrySwitchOrUseItem(void)
                     }
                 }
 
-                *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = monToSwitchId;
+                *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = monToSwitchId;
             }
 
-            *(gBattleStruct->monToSwitchIntoId + gActiveBank) = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank);
+            *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler);
             return;
         }
         else if (ShouldUseItem())
@@ -611,7 +611,7 @@ void AI_TrySwitchOrUseItem(void)
         }
     }
 
-    EmitTwoReturnValues(1, ACTION_USE_MOVE, (gActiveBank ^ BIT_SIDE) << 8);
+    BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
 }
 
 static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8 *var)
@@ -651,34 +651,34 @@ u8 GetMostSuitableMonToSwitchInto(void)
     u8 invalidMons;
     u16 move;
 
-    if (*(gBattleStruct->monToSwitchIntoId + gActiveBank) != 6)
-        return *(gBattleStruct->monToSwitchIntoId + gActiveBank);
+    if (*(gBattleStruct->monToSwitchIntoId + gActiveBattler) != 6)
+        return *(gBattleStruct->monToSwitchIntoId + gActiveBattler);
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-        return gBattlePartyID[gActiveBank] + 1;
+        return gBattlerPartyIndexes[gActiveBattler] + 1;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        bankIn1 = gActiveBank;
-        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON)])
-            bankIn2 = gActiveBank;
+        bankIn1 = gActiveBattler;
+        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK)])
+            bankIn2 = gActiveBattler;
         else
-            bankIn2 = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON);
+            bankIn2 = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK);
 
         // UB: It considers the opponent only player's side even though it can battle alongside player;
-        opposingBank = Random() & BIT_MON;
-        if (gAbsentBankFlags & gBitTable[opposingBank])
-            opposingBank ^= BIT_MON;
+        opposingBank = Random() & BIT_FLANK;
+        if (gAbsentBattlerFlags & gBitTable[opposingBank])
+            opposingBank ^= BIT_FLANK;
     }
     else
     {
-        opposingBank = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_SIDE);
-        bankIn1 = gActiveBank;
-        bankIn2 = gActiveBank;
+        opposingBank = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_SIDE);
+        bankIn1 = gActiveBattler;
+        bankIn2 = gActiveBattler;
     }
 
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))
     {
-        if ((gActiveBank & BIT_MON) == 0)
+        if ((gActiveBattler & BIT_FLANK) == 0)
             firstId = 0, lastId = 3;
         else
             firstId = 3, lastId = 6;
@@ -688,7 +688,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         firstId = 0, lastId = 6;
     }
 
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -706,8 +706,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
             if (species != SPECIES_NONE
                 && GetMonData(&party[i], MON_DATA_HP) != 0
                 && !(gBitTable[i] & invalidMons)
-                && gBattlePartyID[bankIn1] != i
-                && gBattlePartyID[bankIn2] != i
+                && gBattlerPartyIndexes[bankIn1] != i
+                && gBattlerPartyIndexes[bankIn2] != i
                 && i != *(gBattleStruct->monToSwitchIntoId + bankIn1)
                 && i != *(gBattleStruct->monToSwitchIntoId + bankIn2))
             {
@@ -734,7 +734,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
             for (i = 0; i < 4; i++)
             {
                 move = GetMonData(&party[bestMonId], MON_DATA_MOVE1 + i);
-                if (move != MOVE_NONE && TypeCalc(move, gActiveBank, opposingBank) & MOVESTATUS_SUPEREFFECTIVE)
+                if (move != MOVE_NONE && TypeCalc(move, gActiveBattler, opposingBank) & MOVE_RESULT_SUPER_EFFECTIVE)
                     break;
             }
 
@@ -752,7 +752,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gBattleScripting.dmgMultiplier = 1;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
     gCritMultiplier = 1;
     bestDmg = 0;
     bestMonId = 6;
@@ -764,9 +764,9 @@ u8 GetMostSuitableMonToSwitchInto(void)
             continue;
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
-        if (gBattlePartyID[bankIn1] == i)
+        if (gBattlerPartyIndexes[bankIn1] == i)
             continue;
-        if (gBattlePartyID[bankIn2] == i)
+        if (gBattlerPartyIndexes[bankIn2] == i)
             continue;
         if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
@@ -779,8 +779,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
             gBattleMoveDamage = 0;
             if (move != MOVE_NONE && gBattleMoves[move].power != 1)
             {
-                AI_CalcDmg(gActiveBank, opposingBank);
-                TypeCalc(move, gActiveBank, opposingBank);
+                AI_CalcDmg(gActiveBattler, opposingBank);
+                TypeCalc(move, gActiveBattler, opposingBank);
             }
             if (bestDmg < gBattleMoveDamage)
             {
@@ -817,10 +817,10 @@ static bool8 ShouldUseItem(void)
     u8 validMons = 0;
     bool8 shouldUse = FALSE;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBankIdentity(gActiveBank) == IDENTITY_PLAYER_MON2)
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT)
         return FALSE;
 
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -855,14 +855,14 @@ static bool8 ShouldUseItem(void)
         else
             itemEffects = gItemEffectTable[item - 13];
 
-        *(gBattleStruct->AI_itemType + gActiveBank / 2) = GetAI_ItemType(item, itemEffects);
+        *(gBattleStruct->AI_itemType + gActiveBattler / 2) = GetAI_ItemType(item, itemEffects);
 
-        switch (*(gBattleStruct->AI_itemType + gActiveBank / 2))
+        switch (*(gBattleStruct->AI_itemType + gActiveBattler / 2))
         {
         case AI_ITEM_FULL_RESTORE:
-            if (gBattleMons[gActiveBank].hp >= gBattleMons[gActiveBank].maxHP / 4)
+            if (gBattleMons[gActiveBattler].hp >= gBattleMons[gActiveBattler].maxHP / 4)
                 break;
-            if (gBattleMons[gActiveBank].hp == 0)
+            if (gBattleMons[gActiveBattler].hp == 0)
                 break;
             shouldUse = TRUE;
             break;
@@ -870,65 +870,65 @@ static bool8 ShouldUseItem(void)
             paramOffset = GetItemEffectParamOffset(item, 4, 4);
             if (paramOffset == 0)
                 break;
-            if (gBattleMons[gActiveBank].hp == 0)
+            if (gBattleMons[gActiveBattler].hp == 0)
                 break;
-            if (gBattleMons[gActiveBank].hp < gBattleMons[gActiveBank].maxHP / 4 || gBattleMons[gActiveBank].maxHP - gBattleMons[gActiveBank].hp > itemEffects[paramOffset])
+            if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP / 4 || gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp > itemEffects[paramOffset])
                 shouldUse = TRUE;
             break;
         case AI_ITEM_CURE_CONDITION:
-            *(gBattleStruct->AI_itemFlags + gActiveBank / 2) = 0;
-            if (itemEffects[3] & 0x20 && gBattleMons[gActiveBank].status1 & STATUS_SLEEP)
+            *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) = 0;
+            if (itemEffects[3] & 0x20 && gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
             {
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x20;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x20;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x10 && (gBattleMons[gActiveBank].status1 & STATUS_POISON || gBattleMons[gActiveBank].status1 & STATUS_TOXIC_POISON))
+            if (itemEffects[3] & 0x10 && (gBattleMons[gActiveBattler].status1 & STATUS1_POISON || gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON))
             {
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x10;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x10;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x8 && gBattleMons[gActiveBank].status1 & STATUS_BURN)
+            if (itemEffects[3] & 0x8 && gBattleMons[gActiveBattler].status1 & STATUS1_BURN)
             {
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x8;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x8;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x4 && gBattleMons[gActiveBank].status1 & STATUS_FREEZE)
+            if (itemEffects[3] & 0x4 && gBattleMons[gActiveBattler].status1 & STATUS1_FREEZE)
             {
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x4;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x4;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x2 && gBattleMons[gActiveBank].status1 & STATUS_PARALYSIS)
+            if (itemEffects[3] & 0x2 && gBattleMons[gActiveBattler].status1 & STATUS1_PARALYSIS)
             {
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x2;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x2;
                 shouldUse = TRUE;
             }
-            if (itemEffects[3] & 0x1 && gBattleMons[gActiveBank].status2 & STATUS2_CONFUSION)
+            if (itemEffects[3] & 0x1 && gBattleMons[gActiveBattler].status2 & STATUS2_CONFUSION)
             {
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x1;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x1;
                 shouldUse = TRUE;
             }
             break;
         case AI_ITEM_X_STAT:
-            *(gBattleStruct->AI_itemFlags + gActiveBank / 2) = 0;
-            if (gDisableStructs[gActiveBank].isFirstTurn == 0)
+            *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) = 0;
+            if (gDisableStructs[gActiveBattler].isFirstTurn == 0)
                 break;
             if (itemEffects[0] & 0xF)
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x1;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x1;
             if (itemEffects[1] & 0xF0)
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x2;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x2;
             if (itemEffects[1] & 0xF)
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x4;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x4;
             if (itemEffects[2] & 0xF)
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x8;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x8;
             if (itemEffects[2] & 0xF0)
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x20;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x20;
             if (itemEffects[0] & 0x30)
-                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x80;
+                *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x80;
             shouldUse = TRUE;
             break;
         case AI_ITEM_GUARD_SPECS:
-            bankSide = GetBankSide(gActiveBank);
-            if (gDisableStructs[gActiveBank].isFirstTurn != 0 && gSideTimers[bankSide].mistTimer == 0)
+            bankSide = GetBattlerSide(gActiveBattler);
+            if (gDisableStructs[gActiveBattler].isFirstTurn != 0 && gSideTimers[bankSide].mistTimer == 0)
                 shouldUse = TRUE;
             break;
         case AI_ITEM_NOT_RECOGNIZABLE:
@@ -937,8 +937,8 @@ static bool8 ShouldUseItem(void)
 
         if (shouldUse)
         {
-            EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
-            *(gBattleStruct->chosenItem + (gActiveBank / 2) * 2) = item;
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
+            *(gBattleStruct->chosenItem + (gActiveBattler / 2) * 2) = item;
             gBattleResources->battleHistory->trainerItems[i] = 0;
             return shouldUse;
         }

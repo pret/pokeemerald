@@ -4524,7 +4524,7 @@ ItemMenu_CheckTag: @ 81AD378
 	lsrs r0, 24
 	ldr r1, =gUnknown_0203CE54
 	ldr r2, [r1]
-	ldr r1, =sub_8177C14
+	ldr r1, =DoBerryTagScreen
 	str r1, [r2]
 	bl unknown_ItemMenu_Confirm
 	pop {r0}

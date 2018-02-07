@@ -128,7 +128,6 @@
 
 #define NUMBER_OF_MON_TYPES     0x12
 
-#define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
@@ -626,7 +625,7 @@ bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 bool8 IsTradedMon(struct Pokemon *mon);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
-s32 GetBankMultiplayerId(u16 a1);
+s32 GetBattlerMultiplayerId(u16 a1);
 bool16 sub_806D82C(u8 id);
 u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
 void sub_8068AA4(void); // sets stats for deoxys

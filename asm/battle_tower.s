@@ -5354,7 +5354,7 @@ sub_8164E04: @ 8164E04
 	adds r0, r2
 	ldrh r1, [r5]
 	bl sub_8165B88
-	ldr r6, =gBattlePartyID
+	ldr r6, =gBattlerPartyIndexes
 	ldrh r0, [r6, 0x2]
 	movs r5, 0x64
 	muls r0, r5
