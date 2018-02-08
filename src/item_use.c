@@ -780,7 +780,7 @@ void ItemUseOutOfBattle_RareCandy(u8 taskId)
 
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
-    if (gSpecialVar_ItemId >= ITEM_HM01)
+    if (gSpecialVar_ItemId >= ITEM_HM01_CUT)
         DisplayItemMessage(taskId, 1, gText_BootedUpHM, sub_80FDF90); // HM
     else
         DisplayItemMessage(taskId, 1, gText_BootedUpTM, sub_80FDF90); // TM

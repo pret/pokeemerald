@@ -71,7 +71,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_8571730[] =
     sSpriteAffineAnim_8571720
 };
 
-const struct TextColor gUnknown_08571734[] = {4, 0xF, 0xE};
+const u8 gUnknown_08571734[] = {4, 0xF, 0xE};
 const u8 gUnknown_08571737[] = _("/30");
 
 // code

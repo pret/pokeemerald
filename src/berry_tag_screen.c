@@ -93,7 +93,7 @@ static const struct BgTemplate sBackgroundTemplates[] =
 
 static const u16 sFontPalette[] = INCBIN_U16("graphics/interface/berry_tag_screen.gbapal");
 
-static const struct TextColor sTextColors[] =
+static const u8 sTextColors[2][3] =
 {
     {0, 2, 3},
     {15, 14, 13}
@@ -343,7 +343,7 @@ static void HandleInitWindows(void)
 
 static void PrintTextInBerryTagScreen(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed, u8 colorStructId)
 {
-    AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, &sTextColors[colorStructId], speed, text);
+    AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, sTextColors[colorStructId], speed, text);
 }
 
 static void AddBerryTagTextToBg0(void)

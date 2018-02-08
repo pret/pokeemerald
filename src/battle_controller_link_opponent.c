@@ -12,6 +12,7 @@
 #include "util.h"
 #include "main.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 #include "sound.h"
 #include "window.h"
 #include "m4a.h"
@@ -33,7 +34,7 @@ extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct BattleMove gBattleMoves[];
-extern const u8 gUnknown_0831F578[];
+extern const u8 gFacilityClassToPicIndex[];
 
 extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
 extern void sub_806A068(u16, u8);
@@ -1256,17 +1257,17 @@ static void LinkOpponentHandleDrawTrainerPic(void)
             || (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_LEAF_GREEN)
             {
                 if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender != 0)
-                    trainerPicId = gUnknown_0831F578[0x4F];
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_10];
                 else
-                    trainerPicId = gUnknown_0831F578[0x4E];
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_9];
             }
             else if ((gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_RUBY
                      || (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender != 0)
-                    trainerPicId = gUnknown_0831F578[0x51];
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_12];
                 else
-                    trainerPicId = gUnknown_0831F578[0x50];
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_11];
             }
             else
             {
@@ -1285,17 +1286,17 @@ static void LinkOpponentHandleDrawTrainerPic(void)
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
-                trainerPicId = gUnknown_0831F578[0x4F];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_10];
             else
-                trainerPicId = gUnknown_0831F578[0x4E];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_9];
         }
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_RUBY
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
-                trainerPicId = gUnknown_0831F578[0x51];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_12];
             else
-                trainerPicId = gUnknown_0831F578[0x50];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_11];
         }
         else
         {

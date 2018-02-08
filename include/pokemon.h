@@ -420,18 +420,13 @@ struct Evolution
 
 #define EVOS_PER_MON 5
 
-struct EvolutionData
-{
-    struct Evolution evolutions[EVOS_PER_MON];
-};
-
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern const struct BaseStats gBaseStats[];
 extern const u8 *const gItemEffectTable[];
-extern const struct EvolutionData gEvolutionTable[];
+extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
