@@ -508,7 +508,7 @@ _081406E0:
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_082A5B89
 	movs r1, 0x1
@@ -740,7 +740,7 @@ sub_8140914: @ 8140914
 	ldr r5, =gUnknown_0203AB8C
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r5]
 	ldr r2, =gUnknown_082A5C13
 	movs r1, 0x1
@@ -2631,7 +2631,7 @@ sub_814189C: @ 814189C
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_082A5BD7
 	b _08141902
@@ -2643,7 +2643,7 @@ _081418EC:
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_082A5BCB
 _08141902:
@@ -2667,7 +2667,7 @@ _08141928:
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_082A5BE0
 	movs r1, 0x1
@@ -2805,7 +2805,7 @@ sub_8141A18: @ 8141A18
 	ldr r5, =gUnknown_0203AB8C
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r5]
 	movs r1, 0x1
 	str r1, [sp]
@@ -3001,7 +3001,7 @@ _08141BB0:
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_082A5C21
 	movs r1, 0x1
@@ -3028,7 +3028,7 @@ _08141C58:
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_082A5C61
 	movs r1, 0x1
@@ -3060,7 +3060,7 @@ _08141CBC:
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_082A5C04
 	movs r1, 0x1
@@ -3147,7 +3147,7 @@ _08141D44:
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_082A5C61
 	movs r1, 0x1
@@ -4667,7 +4667,7 @@ sub_81429F0: @ 81429F0
 	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	str r5, [sp]
 	movs r0, 0xFF
 	str r0, [sp, 0x4]
@@ -4744,7 +4744,7 @@ sub_8142A88: @ 8142A88
 	beq _08142B28
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldr r2, =gUnknown_082A5B6B
 	str r7, [sp]
 	movs r0, 0xFF
@@ -4768,7 +4768,7 @@ _08142B28:
 	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0xFF
@@ -4798,7 +4798,7 @@ _08142B78:
 	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	str r7, [sp]
 	movs r0, 0xFF
 	str r0, [sp, 0x4]

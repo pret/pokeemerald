@@ -800,7 +800,7 @@ sub_8120708: @ 8120708
 	adds r5, r0, 0
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	movs r4, 0x1
 	str r4, [sp]
 	str r4, [sp, 0x4]

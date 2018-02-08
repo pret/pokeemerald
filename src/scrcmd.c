@@ -29,7 +29,6 @@
 #include "menu.h"
 #include "money.h"
 #include "mystery_event_script.h"
-#include "new_menu_helpers.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon_3.h"
@@ -1313,7 +1312,7 @@ bool8 ScrCmd_cmdDB(struct ScriptContext *ctx)
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
     sub_81973A4();
-    sub_81973C4(0, 1);
+    NewMenuHelpers_DrawDialogueFrame(0, 1);
     PrintTextOnWindow(0, 1, msg, 0, 1, 0, 0);
     return FALSE;
 }
@@ -1530,7 +1529,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     template2 = template1;
     gUnknown_03000F30 = AddWindow(&template2);
     sub_809882C(gUnknown_03000F30, 0x214, 0xE0);
-    sub_81973FC(gUnknown_03000F30, 0);
+    NewMenuHelpers_DrawStdWindowFrame(gUnknown_03000F30, 0);
     PutWindowTilemap(gUnknown_03000F30);
     FillWindowPixelBuffer(gUnknown_03000F30, 0x11);
     PrintTextOnWindow(gUnknown_03000F30, 6, gStringVar4, temp1, temp2, 0xFF, 0x0);
@@ -1651,7 +1650,7 @@ _0809AEC6:\n\
 	bl sub_809882C\n\
 	ldrb r0, [r5]\n\
 	mov r1, #0\n\
-	bl sub_81973FC\n\
+	bl NewMenuHelpers_DrawStdWindowFrame\n\
 	ldrb r0, [r5]\n\
 	bl PutWindowTilemap\n\
 	ldrb r0, [r5]\n\

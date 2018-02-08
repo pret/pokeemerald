@@ -975,7 +975,7 @@ sub_812ACF4: @ 812ACF4
 	sub sp, 0xC
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_YouDontHaveThreeCoins
 	movs r0, 0x1
 	str r0, [sp]
@@ -1543,7 +1543,7 @@ sub_812B158: @ 812B158
 	sub sp, 0xC
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_QuitTheGame
 	movs r0, 0x1
 	str r0, [sp]
@@ -1633,7 +1633,7 @@ sub_812B214: @ 812B214
 	sub sp, 0xC
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_YouveGot9999Coins
 	movs r0, 0x1
 	str r0, [sp]
@@ -1686,7 +1686,7 @@ sub_812B280: @ 812B280
 	sub sp, 0xC
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_YouveRunOutOfCoins
 	movs r0, 0x1
 	str r0, [sp]

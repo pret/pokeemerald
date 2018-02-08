@@ -168,12 +168,12 @@ static bool8 WipeSectors(u32);
 // although this is a general text printer, it's only used in this file.
 static void SaveFailedScreenTextPrint(u8 *text, u8 var1, u8 var2)
 {
-    struct TextColor color;
+    u8 color[3];
 
-    color.fgColor = 0;
-    color.bgColor = 15;
-    color.shadowColor = 3;
-    AddTextPrinterParameterized2(gSaveFailedWindowIds[TEXT_WIN_ID], 1, var1 * 8, var2 * 8 + 1, 0, 0, &color, 0, text);
+    color[0] = 0;
+    color[1] = 15;
+    color[2] = 3;
+    AddTextPrinterParameterized2(gSaveFailedWindowIds[TEXT_WIN_ID], 1, var1 * 8, var2 * 8 + 1, 0, 0, color, 0, text);
 }
 
 void DoSaveFailedScreen(u8 saveType)

@@ -2713,4 +2713,10 @@ extern const u8 gRaySceneHushBg_Pal[];
 extern const u8 gRaySceneHushBg_Gfx[];
 extern const u8 gRaySceneHushRing_Gfx[];
 
+//menu graphics
+extern const u16 gFireRedMenuElements1_Pal[16];
+extern const u16 gFireRedMenuElements2_Pal[16];
+extern const u16 gFireRedMenuElements3_Pal[16];
+extern const u8 gFireRedMenuElements_Gfx[];
+
 #endif //GUARD_GRAPHICS_H
