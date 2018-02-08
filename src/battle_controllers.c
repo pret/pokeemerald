@@ -733,7 +733,7 @@ void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_HI] = (alignedSize & 0x0000FF00) >> 8;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ABSENT_BANK_FLAGS] = gAbsentBattlerFlags;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_EFFECT_BANK] = gEffectBank;
+    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_EFFECT_BANK] = gEffectBattler;
 
     for (i = 0; i < size; i++)
         gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_DATA + i] = data[i];
@@ -899,7 +899,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
                 gBattlerAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 2];
                 gBattlerTarget = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 3];
                 gAbsentBattlerFlags = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 6];
-                gEffectBank = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 7];
+                gEffectBattler = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 7];
             }
             break;
         case 1:

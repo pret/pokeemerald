@@ -5,8 +5,7 @@
 #include "constants/moves.h"
 #include "constants/battle_move_effects.h"
 #include "constants/hold_effects.h"
-	.include "constants/battle_constants.inc"
-	.include "constants/type_constants.inc"
+#include "constants/pokemon.h"
 	.include "asm/macros/battle_ai_script.inc"
 
 	.section script_data, "aw", %progbits
@@ -250,64 +249,64 @@ BattleAIScript_82DC341:
 	if_hp_less_than AI_USER, 51, Score_Minus10
 
 BattleAIScript_82DC348:
-	if_stat_level_equal AI_USER, ATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
 	end
 
 BattleAIScript_82DC351:
-	if_stat_level_equal AI_USER, DEF, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus10
 	end
 
 BattleAIScript_82DC35A:
-	if_stat_level_equal AI_USER, SPEED, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus10
 	end
 
 BattleAIScript_82DC363:
-	if_stat_level_equal AI_USER, SPATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
 	end
 
 BattleAIScript_82DC36C:
-	if_stat_level_equal AI_USER, SPDEF, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus10
 	end
 
 BattleAIScript_82DC375:
-	if_stat_level_equal AI_USER, ACC, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_ACC, 12, Score_Minus10
 	end
 
 BattleAIScript_82DC37E:
-	if_stat_level_equal AI_USER, EVASION, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_EVASION, 12, Score_Minus10
 	end
 
 BattleAIScript_82DC387:
-	if_stat_level_equal AI_TARGET, ATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_HYPER_CUTTER, Score_Minus10
 	goto BattleAIScript_82DC3F6
 
 BattleAIScript_82DC39C:
-	if_stat_level_equal AI_TARGET, DEF, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus10
 	goto BattleAIScript_82DC3F6
 
 BattleAIScript_82DC3A9:
-	if_stat_level_equal AI_TARGET, SPEED, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPEED, 0, Score_Minus10
 	if_ability AI_TARGET, ABILITY_SPEED_BOOST, Score_Minus10
 	goto BattleAIScript_82DC3F6
 
 BattleAIScript_82DC3BF:
-	if_stat_level_equal AI_TARGET, SPATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus10
 	goto BattleAIScript_82DC3F6
 
 BattleAIScript_82DC3CC:
-	if_stat_level_equal AI_TARGET, SPDEF, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPDEF, 0, Score_Minus10
 	goto BattleAIScript_82DC3F6
 
 BattleAIScript_82DC3D9:
-	if_stat_level_equal AI_TARGET, ACC, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_ACC, 0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_KEEN_EYE, Score_Minus10
 	goto BattleAIScript_82DC3F6
 
 BattleAIScript_82DC3EE:
-	if_stat_level_equal AI_TARGET, EVASION, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_EVASION, 0, Score_Minus10
 
 BattleAIScript_82DC3F6:
 	get_ability AI_TARGET
@@ -316,20 +315,20 @@ BattleAIScript_82DC3F6:
 	end
 
 BattleAIScript_82DC405:
-	if_stat_level_less_than AI_USER, ATK, 6, BattleAIScript_82DC47A
-	if_stat_level_less_than AI_USER, DEF, 6, BattleAIScript_82DC47A
-	if_stat_level_less_than AI_USER, SPEED, 6, BattleAIScript_82DC47A
-	if_stat_level_less_than AI_USER, SPATK, 6, BattleAIScript_82DC47A
-	if_stat_level_less_than AI_USER, SPDEF, 6, BattleAIScript_82DC47A
-	if_stat_level_less_than AI_USER, ACC, 6, BattleAIScript_82DC47A
-	if_stat_level_less_than AI_USER, EVASION, 6, BattleAIScript_82DC47A
-	if_stat_level_more_than AI_TARGET, ATK, 6, BattleAIScript_82DC47A
-	if_stat_level_more_than AI_TARGET, DEF, 6, BattleAIScript_82DC47A
-	if_stat_level_more_than AI_TARGET, SPEED, 6, BattleAIScript_82DC47A
-	if_stat_level_more_than AI_TARGET, SPATK, 6, BattleAIScript_82DC47A
-	if_stat_level_more_than AI_TARGET, SPDEF, 6, BattleAIScript_82DC47A
-	if_stat_level_more_than AI_TARGET, ACC, 6, BattleAIScript_82DC47A
-	if_stat_level_more_than AI_TARGET, EVASION, 6, BattleAIScript_82DC47A
+	if_stat_level_less_than AI_USER, STAT_ATK, 6, BattleAIScript_82DC47A
+	if_stat_level_less_than AI_USER, STAT_DEF, 6, BattleAIScript_82DC47A
+	if_stat_level_less_than AI_USER, STAT_SPEED, 6, BattleAIScript_82DC47A
+	if_stat_level_less_than AI_USER, STAT_SPATK, 6, BattleAIScript_82DC47A
+	if_stat_level_less_than AI_USER, STAT_SPDEF, 6, BattleAIScript_82DC47A
+	if_stat_level_less_than AI_USER, STAT_ACC, 6, BattleAIScript_82DC47A
+	if_stat_level_less_than AI_USER, STAT_EVASION, 6, BattleAIScript_82DC47A
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 6, BattleAIScript_82DC47A
+	if_stat_level_more_than AI_TARGET, STAT_DEF, 6, BattleAIScript_82DC47A
+	if_stat_level_more_than AI_TARGET, STAT_SPEED, 6, BattleAIScript_82DC47A
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, 6, BattleAIScript_82DC47A
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 6, BattleAIScript_82DC47A
+	if_stat_level_more_than AI_TARGET, STAT_ACC, 6, BattleAIScript_82DC47A
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 6, BattleAIScript_82DC47A
 	goto Score_Minus10
 
 BattleAIScript_82DC47A:
@@ -437,8 +436,8 @@ BattleAIScript_82DC5B0:
 	end
 
 BattleAIScript_82DC5BB:
-	if_stat_level_equal AI_USER, ATK, 12, Score_Minus10
-	if_stat_level_equal AI_USER, DEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus8
 	end
 
 BattleAIScript_82DC5CC:
@@ -485,8 +484,8 @@ BattleAIScript_82DC635:
 	end
 
 BattleAIScript_82DC640:
-	if_stat_level_equal AI_TARGET, ATK, 0, Score_Minus10
-	if_stat_level_equal AI_TARGET, SPATK, 0, Score_Minus8
+	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus8
 
 BattleAIScript_82DC650:
 	count_usable_party_mons AI_USER
@@ -575,18 +574,18 @@ BattleAIScript_82DC71E:
 	end
 
 BattleAIScript_82DC729:
-	if_stat_level_equal AI_TARGET, ATK, 0, Score_Minus10
-	if_stat_level_equal AI_TARGET, DEF, 0, Score_Minus8
+	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus8
 	end
 
 BattleAIScript_82DC73A:
-	if_stat_level_equal AI_USER, DEF, 12, Score_Minus10
-	if_stat_level_equal AI_USER, SPDEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus8
 	end
 
 BattleAIScript_82DC74B:
-	if_stat_level_equal AI_USER, ATK, 12, Score_Minus10
-	if_stat_level_equal AI_USER, DEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus8
 	end
 
 BattleAIScript_82DC75C:
@@ -594,13 +593,13 @@ BattleAIScript_82DC75C:
 	end
 
 BattleAIScript_82DC767:
-	if_stat_level_equal AI_USER, SPATK, 12, Score_Minus10
-	if_stat_level_equal AI_USER, SPDEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus8
 	end
 
 BattleAIScript_82DC778:
-	if_stat_level_equal AI_USER, ATK, 12, Score_Minus10
-	if_stat_level_equal AI_USER, SPEED, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus8
 	end
 
 Score_Minus1:
@@ -806,9 +805,9 @@ BattleAIScript_82DCAC7:
 	end
 
 BattleAIScript_82DCAC8:
-	if_stat_level_less_than AI_TARGET, EVASION, 7, BattleAIScript_82DCAE2
+	if_stat_level_less_than AI_TARGET, STAT_EVASION, 7, BattleAIScript_82DCAE2
 	score -1
-	if_stat_level_less_than AI_TARGET, EVASION, 10, BattleAIScript_82DCAE2
+	if_stat_level_less_than AI_TARGET, STAT_EVASION, 10, BattleAIScript_82DCAE2
 	if_random_less_than 128, BattleAIScript_82DCAE2
 	score -1
 
@@ -907,7 +906,7 @@ sMovesTable_82DCB6C:
     .2byte -1
 
 BattleAIScript_82DCBBC:
-	if_stat_level_less_than AI_USER, ATK, 9, BattleAIScript_82DCBD1
+	if_stat_level_less_than AI_USER, STAT_ATK, 9, BattleAIScript_82DCBD1
 	if_random_less_than 100, BattleAIScript_82DCBE0
 	score -1
 	goto BattleAIScript_82DCBE0
@@ -929,7 +928,7 @@ BattleAIScript_82DCBF6:
 	end
 
 BattleAIScript_82DCBF7:
-	if_stat_level_less_than AI_USER, DEF, 9, BattleAIScript_82DCC0C
+	if_stat_level_less_than AI_USER, STAT_DEF, 9, BattleAIScript_82DCC0C
 	if_random_less_than 100, BattleAIScript_82DCC1B
 	score -1
 	goto BattleAIScript_82DCC1B
@@ -987,7 +986,7 @@ BattleAIScript_82DCC72:
 	end
 
 BattleAIScript_82DCC73:
-	if_stat_level_less_than AI_USER, SPATK, 9, BattleAIScript_82DCC88
+	if_stat_level_less_than AI_USER, STAT_SPATK, 9, BattleAIScript_82DCC88
 	if_random_less_than 100, BattleAIScript_82DCC97
 	score -1
 	goto BattleAIScript_82DCC97
@@ -1009,7 +1008,7 @@ BattleAIScript_82DCCAD:
 	end
 
 BattleAIScript_82DCCAE:
-	if_stat_level_less_than AI_USER, SPDEF, 9, BattleAIScript_82DCCC3
+	if_stat_level_less_than AI_USER, STAT_SPDEF, 9, BattleAIScript_82DCCC3
 	if_random_less_than 100, BattleAIScript_82DCCD2
 	score -1
 	goto BattleAIScript_82DCCD2
@@ -1055,7 +1054,7 @@ sTypesTable_82DCD0A:
     .byte -1
 
 BattleAIScript_82DCD14:
-	if_stat_level_less_than AI_USER, ACC, 9, BattleAIScript_82DCD24
+	if_stat_level_less_than AI_USER, STAT_ACC, 9, BattleAIScript_82DCD24
 	if_random_less_than 50, BattleAIScript_82DCD24
 	score -2
 
@@ -1072,7 +1071,7 @@ BattleAIScript_82DCD2E:
 	score +3
 
 BattleAIScript_82DCD3D:
-	if_stat_level_less_than AI_USER, EVASION, 9, BattleAIScript_82DCD4D
+	if_stat_level_less_than AI_USER, STAT_EVASION, 9, BattleAIScript_82DCD4D
 	if_random_less_than 128, BattleAIScript_82DCD4D
 	score -1
 
@@ -1102,7 +1101,7 @@ BattleAIScript_82DCD90:
 
 BattleAIScript_82DCDA2:
 	if_hp_more_than AI_USER, 70, BattleAIScript_82DCDC7
-	if_stat_level_equal AI_USER, EVASION, 6, BattleAIScript_82DCDC7
+	if_stat_level_equal AI_USER, STAT_EVASION, 6, BattleAIScript_82DCDC7
 	if_hp_less_than AI_USER, 40, BattleAIScript_82DCDC5
 	if_hp_less_than AI_TARGET, 40, BattleAIScript_82DCDC5
 	if_random_less_than 70, BattleAIScript_82DCDC7
@@ -1114,10 +1113,10 @@ BattleAIScript_82DCDC7:
 	end
 
 BattleAIScript_82DCDC8:
-	if_stat_level_more_than AI_TARGET, EVASION, 10, BattleAIScript_82DCDED
-	if_stat_level_less_than AI_USER, ACC, 2, BattleAIScript_82DCDED
-	if_stat_level_more_than AI_TARGET, EVASION, 8, BattleAIScript_82DCDEF
-	if_stat_level_less_than AI_USER, ACC, 4, BattleAIScript_82DCDEF
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 10, BattleAIScript_82DCDED
+	if_stat_level_less_than AI_USER, STAT_ACC, 2, BattleAIScript_82DCDED
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, BattleAIScript_82DCDEF
+	if_stat_level_less_than AI_USER, STAT_ACC, 4, BattleAIScript_82DCDEF
 	goto BattleAIScript_82DCDF7
 
 BattleAIScript_82DCDED:
@@ -1131,13 +1130,13 @@ BattleAIScript_82DCDF7:
 	end
 
 BattleAIScript_82DCDF8:
-	if_stat_level_equal AI_TARGET, ATK, 6, BattleAIScript_82DCE1B
+	if_stat_level_equal AI_TARGET, STAT_ATK, 6, BattleAIScript_82DCE1B
 	score -1
 	if_hp_more_than AI_USER, 90, BattleAIScript_82DCE0B
 	score -1
 
 BattleAIScript_82DCE0B:
-	if_stat_level_more_than AI_TARGET, ATK, 3, BattleAIScript_82DCE1B
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 3, BattleAIScript_82DCE1B
 	if_random_less_than 50, BattleAIScript_82DCE1B
 	score -2
 
@@ -1167,7 +1166,7 @@ sTypesTable_82DCE43:
 
 BattleAIScript_82DCE4A:
 	if_hp_less_than AI_USER, 70, BattleAIScript_82DCE59
-	if_stat_level_more_than AI_TARGET, DEF, 3, BattleAIScript_82DCE61
+	if_stat_level_more_than AI_TARGET, STAT_DEF, 3, BattleAIScript_82DCE61
 
 BattleAIScript_82DCE59:
 	if_random_less_than 50, BattleAIScript_82DCE61
@@ -1199,13 +1198,13 @@ BattleAIScript_82DCE96:
 	end
 
 BattleAIScript_82DCE97:
-	if_stat_level_equal AI_TARGET, ATK, 6, BattleAIScript_82DCEBA
+	if_stat_level_equal AI_TARGET, STAT_ATK, 6, BattleAIScript_82DCEBA
 	score -1
 	if_hp_more_than AI_USER, 90, BattleAIScript_82DCEAA
 	score -1
 
 BattleAIScript_82DCEAA:
-	if_stat_level_more_than AI_TARGET, SPATK, 3, BattleAIScript_82DCEBA
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, 3, BattleAIScript_82DCEBA
 	if_random_less_than 50, BattleAIScript_82DCEBA
 	score -2
 
@@ -1237,7 +1236,7 @@ sTypesTable_82DCEE2:
 
 BattleAIScript_82DCEEB:
 	if_hp_less_than AI_USER, 70, BattleAIScript_82DCEFA
-	if_stat_level_more_than AI_TARGET, SPDEF, 3, BattleAIScript_82DCF02
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 3, BattleAIScript_82DCF02
 
 BattleAIScript_82DCEFA:
 	if_random_less_than 50, BattleAIScript_82DCF02
@@ -1259,7 +1258,7 @@ BattleAIScript_82DCF1A:
 	score -1
 
 BattleAIScript_82DCF22:
-	if_stat_level_more_than AI_USER, ACC, 4, BattleAIScript_82DCF32
+	if_stat_level_more_than AI_USER, STAT_ACC, 4, BattleAIScript_82DCF32
 	if_random_less_than 80, BattleAIScript_82DCF32
 	score -2
 
@@ -1285,7 +1284,7 @@ BattleAIScript_82DCF68:
 
 BattleAIScript_82DCF7A:
 	if_hp_more_than AI_USER, 70, BattleAIScript_82DCF9F
-	if_stat_level_equal AI_TARGET, ACC, 6, BattleAIScript_82DCF9F
+	if_stat_level_equal AI_TARGET, STAT_ACC, 6, BattleAIScript_82DCF9F
 	if_hp_less_than AI_USER, 40, BattleAIScript_82DCF9D
 	if_hp_less_than AI_TARGET, 40, BattleAIScript_82DCF9D
 	if_random_less_than 70, BattleAIScript_82DCF9F
@@ -1298,7 +1297,7 @@ BattleAIScript_82DCF9F:
 
 BattleAIScript_82DCFA0:
 	if_hp_less_than AI_USER, 70, BattleAIScript_82DCFAF
-	if_stat_level_more_than AI_TARGET, EVASION, 3, BattleAIScript_82DCFB7
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 3, BattleAIScript_82DCFB7
 
 BattleAIScript_82DCFAF:
 	if_random_less_than 50, BattleAIScript_82DCFB7
@@ -1312,16 +1311,16 @@ BattleAIScript_82DCFC0:
 	end
 
 BattleAIScript_82DCFC1:
-	if_stat_level_more_than AI_USER, ATK, 8, BattleAIScript_82DD016
-	if_stat_level_more_than AI_USER, DEF, 8, BattleAIScript_82DD016
-	if_stat_level_more_than AI_USER, SPATK, 8, BattleAIScript_82DD016
-	if_stat_level_more_than AI_USER, SPDEF, 8, BattleAIScript_82DD016
-	if_stat_level_more_than AI_USER, EVASION, 8, BattleAIScript_82DD016
-	if_stat_level_less_than AI_TARGET, ATK, 4, BattleAIScript_82DD016
-	if_stat_level_less_than AI_TARGET, DEF, 4, BattleAIScript_82DD016
-	if_stat_level_less_than AI_TARGET, SPATK, 4, BattleAIScript_82DD016
-	if_stat_level_less_than AI_TARGET, SPDEF, 4, BattleAIScript_82DD016
-	if_stat_level_less_than AI_TARGET, ACC, 4, BattleAIScript_82DD016
+	if_stat_level_more_than AI_USER, STAT_ATK, 8, BattleAIScript_82DD016
+	if_stat_level_more_than AI_USER, STAT_DEF, 8, BattleAIScript_82DD016
+	if_stat_level_more_than AI_USER, STAT_SPATK, 8, BattleAIScript_82DD016
+	if_stat_level_more_than AI_USER, STAT_SPDEF, 8, BattleAIScript_82DD016
+	if_stat_level_more_than AI_USER, STAT_EVASION, 8, BattleAIScript_82DD016
+	if_stat_level_less_than AI_TARGET, STAT_ATK, 4, BattleAIScript_82DD016
+	if_stat_level_less_than AI_TARGET, STAT_DEF, 4, BattleAIScript_82DD016
+	if_stat_level_less_than AI_TARGET, STAT_SPATK, 4, BattleAIScript_82DD016
+	if_stat_level_less_than AI_TARGET, STAT_SPDEF, 4, BattleAIScript_82DD016
+	if_stat_level_less_than AI_TARGET, STAT_ACC, 4, BattleAIScript_82DD016
 	goto BattleAIScript_82DD01E
 
 BattleAIScript_82DD016:
@@ -1329,16 +1328,16 @@ BattleAIScript_82DD016:
 	score -3
 
 BattleAIScript_82DD01E:
-	if_stat_level_more_than AI_TARGET, ATK, 8, BattleAIScript_82DD07B
-	if_stat_level_more_than AI_TARGET, DEF, 8, BattleAIScript_82DD07B
-	if_stat_level_more_than AI_TARGET, SPATK, 8, BattleAIScript_82DD07B
-	if_stat_level_more_than AI_TARGET, SPDEF, 8, BattleAIScript_82DD07B
-	if_stat_level_more_than AI_TARGET, EVASION, 8, BattleAIScript_82DD07B
-	if_stat_level_less_than AI_USER, ATK, 4, BattleAIScript_82DD07B
-	if_stat_level_less_than AI_USER, DEF, 4, BattleAIScript_82DD07B
-	if_stat_level_less_than AI_USER, SPATK, 4, BattleAIScript_82DD07B
-	if_stat_level_less_than AI_USER, SPDEF, 4, BattleAIScript_82DD07B
-	if_stat_level_less_than AI_USER, ACC, 4, BattleAIScript_82DD07B
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 8, BattleAIScript_82DD07B
+	if_stat_level_more_than AI_TARGET, STAT_DEF, 8, BattleAIScript_82DD07B
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, 8, BattleAIScript_82DD07B
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 8, BattleAIScript_82DD07B
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, BattleAIScript_82DD07B
+	if_stat_level_less_than AI_USER, STAT_ATK, 4, BattleAIScript_82DD07B
+	if_stat_level_less_than AI_USER, STAT_DEF, 4, BattleAIScript_82DD07B
+	if_stat_level_less_than AI_USER, STAT_SPATK, 4, BattleAIScript_82DD07B
+	if_stat_level_less_than AI_USER, STAT_SPDEF, 4, BattleAIScript_82DD07B
+	if_stat_level_less_than AI_USER, STAT_ACC, 4, BattleAIScript_82DD07B
 	if_random_less_than 50, BattleAIScript_82DD083
 	score -1
 	goto BattleAIScript_82DD083
@@ -1358,11 +1357,11 @@ BattleAIScript_82DD08D:
 	end
 
 BattleAIScript_82DD08E:
-	if_stat_level_more_than AI_TARGET, ATK, 8, BattleAIScript_82DD0BD
-	if_stat_level_more_than AI_TARGET, DEF, 8, BattleAIScript_82DD0BD
-	if_stat_level_more_than AI_TARGET, SPATK, 8, BattleAIScript_82DD0BD
-	if_stat_level_more_than AI_TARGET, SPDEF, 8, BattleAIScript_82DD0BD
-	if_stat_level_more_than AI_TARGET, EVASION, 8, BattleAIScript_82DD0BD
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 8, BattleAIScript_82DD0BD
+	if_stat_level_more_than AI_TARGET, STAT_DEF, 8, BattleAIScript_82DD0BD
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, 8, BattleAIScript_82DD0BD
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 8, BattleAIScript_82DD0BD
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, BattleAIScript_82DD0BD
 	score -3
 	goto BattleAIScript_82DD0C5
 
@@ -1570,7 +1569,7 @@ BattleAIScript_82DD2B7:
 	end
 
 BattleAIScript_82DD2B8:
-	if_stat_level_more_than AI_TARGET, ATK, 3, BattleAIScript_82DD2D0
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 3, BattleAIScript_82DD2D0
 	score +3
 	get_turn_count
 	if_not_equal 0, BattleAIScript_82DD2D2
@@ -1988,17 +1987,17 @@ BattleAIScript_82DD645:
 	if_equal TYPE_GHOST, BattleAIScript_82DD68A
 	get_user_type2
 	if_equal TYPE_GHOST, BattleAIScript_82DD68A
-	if_stat_level_more_than AI_USER, DEF, 9, BattleAIScript_82DD693
+	if_stat_level_more_than AI_USER, STAT_DEF, 9, BattleAIScript_82DD693
 	if_random_less_than 128, BattleAIScript_82DD665
 	score +1
 
 BattleAIScript_82DD665:
-	if_stat_level_more_than AI_USER, DEF, 7, BattleAIScript_82DD693
+	if_stat_level_more_than AI_USER, STAT_DEF, 7, BattleAIScript_82DD693
 	if_random_less_than 128, BattleAIScript_82DD675
 	score +1
 
 BattleAIScript_82DD675:
-	if_stat_level_more_than AI_USER, DEF, 6, BattleAIScript_82DD693
+	if_stat_level_more_than AI_USER, STAT_DEF, 6, BattleAIScript_82DD693
 	if_random_less_than 128, BattleAIScript_82DD693
 	score +1
 	goto BattleAIScript_82DD693
@@ -2063,7 +2062,7 @@ BattleAIScript_82DD75D:
 	if_equal TYPE_GHOST, BattleAIScript_82DD77C
 	get_user_type2
 	if_equal TYPE_GHOST, BattleAIScript_82DD77C
-	if_stat_level_more_than AI_USER, EVASION, 8, BattleAIScript_82DD782
+	if_stat_level_more_than AI_USER, STAT_EVASION, 8, BattleAIScript_82DD782
 	score -2
 	goto BattleAIScript_82DD78A
 
@@ -2093,11 +2092,11 @@ BattleAIScript_82DD7A8:
 	end
 
 BattleAIScript_82DD7A9:
-	if_stat_level_more_than AI_USER, ATK, 8, BattleAIScript_82DD7D6
-	if_stat_level_more_than AI_USER, DEF, 8, BattleAIScript_82DD7D6
-	if_stat_level_more_than AI_USER, SPATK, 8, BattleAIScript_82DD7D6
-	if_stat_level_more_than AI_USER, SPDEF, 8, BattleAIScript_82DD7D6
-	if_stat_level_more_than AI_USER, EVASION, 8, BattleAIScript_82DD7D6
+	if_stat_level_more_than AI_USER, STAT_ATK, 8, BattleAIScript_82DD7D6
+	if_stat_level_more_than AI_USER, STAT_DEF, 8, BattleAIScript_82DD7D6
+	if_stat_level_more_than AI_USER, STAT_SPATK, 8, BattleAIScript_82DD7D6
+	if_stat_level_more_than AI_USER, STAT_SPDEF, 8, BattleAIScript_82DD7D6
+	if_stat_level_more_than AI_USER, STAT_EVASION, 8, BattleAIScript_82DD7D6
 	goto BattleAIScript_82DD7FC
 
 BattleAIScript_82DD7D6:
@@ -2114,11 +2113,11 @@ BattleAIScript_82DD7EF:
 	goto BattleAIScript_82DD844
 
 BattleAIScript_82DD7FC:
-	if_stat_level_more_than AI_USER, ATK, 7, BattleAIScript_82DD829
-	if_stat_level_more_than AI_USER, DEF, 7, BattleAIScript_82DD829
-	if_stat_level_more_than AI_USER, SPATK, 7, BattleAIScript_82DD829
-	if_stat_level_more_than AI_USER, SPDEF, 7, BattleAIScript_82DD829
-	if_stat_level_more_than AI_USER, EVASION, 7, BattleAIScript_82DD829
+	if_stat_level_more_than AI_USER, STAT_ATK, 7, BattleAIScript_82DD829
+	if_stat_level_more_than AI_USER, STAT_DEF, 7, BattleAIScript_82DD829
+	if_stat_level_more_than AI_USER, STAT_SPATK, 7, BattleAIScript_82DD829
+	if_stat_level_more_than AI_USER, STAT_SPDEF, 7, BattleAIScript_82DD829
+	if_stat_level_more_than AI_USER, STAT_EVASION, 7, BattleAIScript_82DD829
 	goto BattleAIScript_82DD842
 
 BattleAIScript_82DD829:
@@ -2209,19 +2208,19 @@ BattleAIScript_82DD8F1:
 	end
 
 BattleAIScript_82DD8F2:
-	if_stat_level_more_than AI_TARGET, ATK, 8, BattleAIScript_82DD91F
-	if_stat_level_more_than AI_TARGET, DEF, 8, BattleAIScript_82DD91F
-	if_stat_level_more_than AI_TARGET, SPATK, 8, BattleAIScript_82DD91F
-	if_stat_level_more_than AI_TARGET, SPDEF, 8, BattleAIScript_82DD91F
-	if_stat_level_more_than AI_TARGET, EVASION, 8, BattleAIScript_82DD91F
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 8, BattleAIScript_82DD91F
+	if_stat_level_more_than AI_TARGET, STAT_DEF, 8, BattleAIScript_82DD91F
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, 8, BattleAIScript_82DD91F
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 8, BattleAIScript_82DD91F
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, BattleAIScript_82DD91F
 	goto BattleAIScript_82DD957
 
 BattleAIScript_82DD91F:
-	if_stat_level_less_than AI_USER, ATK, 7, BattleAIScript_82DD954
-	if_stat_level_less_than AI_USER, DEF, 7, BattleAIScript_82DD954
-	if_stat_level_less_than AI_USER, SPATK, 7, BattleAIScript_82DD954
-	if_stat_level_less_than AI_USER, SPDEF, 7, BattleAIScript_82DD954
-	if_stat_level_less_than AI_USER, EVASION, 7, BattleAIScript_82DD952
+	if_stat_level_less_than AI_USER, STAT_ATK, 7, BattleAIScript_82DD954
+	if_stat_level_less_than AI_USER, STAT_DEF, 7, BattleAIScript_82DD954
+	if_stat_level_less_than AI_USER, STAT_SPATK, 7, BattleAIScript_82DD954
+	if_stat_level_less_than AI_USER, STAT_SPDEF, 7, BattleAIScript_82DD954
+	if_stat_level_less_than AI_USER, STAT_EVASION, 7, BattleAIScript_82DD952
 	if_random_less_than 50, BattleAIScript_82DD959
 	goto BattleAIScript_82DD957
 
@@ -2516,7 +2515,7 @@ sAbilitiesTable_82DDBDF:
 BattleAIScript_82DDBF0:
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, BattleAIScript_82DDC1D
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, BattleAIScript_82DDC1D
-	if_stat_level_less_than AI_USER, ATK, 6, BattleAIScript_82DDC1D
+	if_stat_level_less_than AI_USER, STAT_ATK, 6, BattleAIScript_82DDC1D
 	if_target_faster BattleAIScript_82DDC16
 	if_hp_more_than AI_USER, 40, BattleAIScript_82DDC1D
 	goto BattleAIScript_82DDC1F
@@ -2931,12 +2930,12 @@ sMovesTable_82DDF75:
 BattleAIScript_82DDF7B:
 	get_turn_count
 	if_equal 0, Score_Minus2
-	if_stat_level_more_than AI_USER, ATK, 8, Score_Plus3
-	if_stat_level_more_than AI_USER, ATK, 7, Score_Plus2
-	if_stat_level_more_than AI_USER, ATK, 6, Score_Plus1
-	if_stat_level_more_than AI_USER, SPATK, 8, Score_Plus3
-	if_stat_level_more_than AI_USER, SPATK, 7, Score_Plus2
-	if_stat_level_more_than AI_USER, SPATK, 6, Score_Plus1
+	if_stat_level_more_than AI_USER, STAT_ATK, 8, Score_Plus3
+	if_stat_level_more_than AI_USER, STAT_ATK, 7, Score_Plus2
+	if_stat_level_more_than AI_USER, STAT_ATK, 6, Score_Plus1
+	if_stat_level_more_than AI_USER, STAT_SPATK, 8, Score_Plus3
+	if_stat_level_more_than AI_USER, STAT_SPATK, 7, Score_Plus2
+	if_stat_level_more_than AI_USER, STAT_SPATK, 6, Score_Plus1
 	end
 
 BattleAIScript_82DDFB3:
@@ -3074,7 +3073,7 @@ BattleAIScript_82DE178:
 	goto Score_Minus30_
 
 BattleAIScript_82DE185:
-	if_stat_level_more_than AI_TARGET, ATK, 7, BattleAIScript_82DE18F
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 7, BattleAIScript_82DE18F
 	score +3
 
 BattleAIScript_82DE18F:

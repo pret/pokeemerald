@@ -27,7 +27,6 @@ extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern struct SpriteTemplate gUnknown_0202499C;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u16 gUnknown_020243FC;
 
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
@@ -634,7 +633,7 @@ static void SafariHandleFaintingCry(void)
 static void SafariHandleIntroSlide(void)
 {
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_020243FC |= 1;
+    gIntroSlideFlags |= 1;
     SafariBufferExecCompleted();
 }
 

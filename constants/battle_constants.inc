@@ -1,9 +1,0 @@
-@ stats
-	.set HP, 0x0
-	.set ATK, 0x1
-	.set DEF, 0x2
-	.set SPEED, 0x3
-	.set SPATK, 0x4
-	.set SPDEF, 0x5
-	.set ACC, 0x6
-	.set EVASION, 0x7

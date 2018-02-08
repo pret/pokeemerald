@@ -28,7 +28,6 @@
 extern struct SpriteTemplate gUnknown_0202499C;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u16 gUnknown_020243FC;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203C7B4;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
@@ -1208,7 +1207,7 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            trainerPicId = GetActiveBankLinkPlayerGender();
+            trainerPicId = GetActiveBattlerLinkPlayerGender();
         else
             trainerPicId = gLinkPlayers[gUnknown_0203C7B4].gender;
     }
@@ -1662,7 +1661,7 @@ static void RecordedPlayerHandleFaintingCry(void)
 static void RecordedPlayerHandleIntroSlide(void)
 {
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_020243FC |= 1;
+    gIntroSlideFlags |= 1;
     RecordedPlayerBufferExecCompleted();
 }
 
@@ -1697,7 +1696,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
 
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_120;
@@ -1744,7 +1743,7 @@ static void RecordedPlayerHandleDrawPartyStatusSummary(void)
     else
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
-        gUnknown_020244B4[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
+        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
@@ -1766,7 +1765,7 @@ static void sub_818CDF4(void)
 static void RecordedPlayerHandleCmd49(void)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
     RecordedPlayerBufferExecCompleted();
 }
 

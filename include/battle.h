@@ -90,27 +90,6 @@
 #define TYPE_FORESIGHT  0xFE
 #define TYPE_ENDTABLE   0xFF
 
-#define BS_GET_TARGET                   0
-#define BS_GET_ATTACKER                 1
-#define BS_GET_EFFECT_BANK              2
-#define BS_GET_gBank1   3
-#define BS_GET_BANK_0   7
-#define BS_ATTACKER_WITH_PARTNER        4 // for atk98_status_icon_update
-#define BS_GET_ATTACKER_SIDE            8 // for atk1E_jumpifability
-#define BS_GET_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
-#define BS_GET_SCRIPTING_BANK           10
-#define BS_GET_OPPONENT1                12
-#define BS_GET_PLAYER2                  13
-#define BS_GET_OPPONENT2                14
-
-// for battle script commands
-#define CMP_EQUAL               0x0
-#define CMP_NOT_EQUAL           0x1
-#define CMP_GREATER_THAN        0x2
-#define CMP_LESS_THAN           0x3
-#define CMP_COMMON_BITS         0x4
-#define CMP_NO_COMMON_BITS      0x5
-
 #define BATTLE_BUFFER_LINK_SIZE 0x1000
 
 struct TrainerMonNoItemDefaultMoves
@@ -511,6 +490,9 @@ struct BattleStruct
         typeArg = gBattleMoves[move].type;                  \
 }
 
+#define IS_MOVE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
+#define IS_MOVE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
+
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
@@ -678,7 +660,7 @@ extern u8 gCurrentActionFuncId;
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gCurrMovePos;
-extern u8 gUnknown_020241E9;
+extern u8 gChosenMovePos;
 extern u16 gCurrentMove;
 extern u16 gChosenMove;
 extern u16 gRandomMove;
@@ -689,8 +671,8 @@ extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
 extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
-extern u8 gBank1;
-extern u8 gEffectBank;
+extern u8 gBattlerFainted;
+extern u8 gEffectBattler;
 extern u8 gStringBattler;
 extern u8 gAbsentBattlerFlags;
 extern u8 gCritMultiplier;
@@ -710,7 +692,6 @@ extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
 extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u8 gMoveResultFlags;
 extern u32 gHitMarker;
-extern u8 gUnknown_02024284[MAX_BATTLERS_COUNT];
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0202428C;
 extern u16 gSideStatuses[2];
@@ -726,7 +707,7 @@ extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
 extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 extern u16 gBattleWeather;
 extern struct WishFutureKnock gWishFutureKnock;
-extern u16 gUnknown_020243FC;
+extern u16 gIntroSlideFlags;
 extern u8 gSentPokesToOpponent[2];
 extern u16 gDynamicBasePower;
 extern u16 gExpShareExp;
@@ -738,7 +719,7 @@ extern u8 *gLinkBattleRecvBuffer;
 extern struct BattleResources *gBattleResources;
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gUnknown_020244B4[MAX_BATTLERS_COUNT];
+extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u8 gBattlerInMenuId;
 extern bool8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];

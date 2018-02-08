@@ -30,7 +30,7 @@ struct PlayerInfo
     u32 trainerId;
     u8 name[PLAYER_NAME_LENGTH];
     u8 gender;
-    u16 bank;
+    u16 battlerId;
     u16 language;
 };
 
@@ -50,7 +50,7 @@ struct RecordedBattleSave
     u8 playersLanguage[MAX_BATTLERS_COUNT];
     u32 rngSeed;
     u32 battleFlags;
-    u8 playersBank[MAX_BATTLERS_COUNT];
+    u8 playersBattler[MAX_BATTLERS_COUNT];
     u16 opponentA;
     u16 opponentB;
     u16 partnerId;
@@ -160,7 +160,7 @@ void sub_8184E58(void)
         {
             sRecordedBattle_Players[i].trainerId = gLinkPlayers[i].trainerId;
             sRecordedBattle_Players[i].gender = gLinkPlayers[i].gender;
-            sRecordedBattle_Players[i].bank = gLinkPlayers[i].lp_field_18;
+            sRecordedBattle_Players[i].battlerId = gLinkPlayers[i].lp_field_18;
             sRecordedBattle_Players[i].language = gLinkPlayers[i].language;
 
             if (i < linkPlayersCount)
@@ -184,7 +184,7 @@ void sub_8184E58(void)
                                     | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
         sRecordedBattle_Players[0].gender = gSaveBlock2Ptr->playerGender;
-        sRecordedBattle_Players[0].bank = 0;
+        sRecordedBattle_Players[0].battlerId = 0;
         sRecordedBattle_Players[0].language = gGameLanguage;
 
         for (i = 0; i < PLAYER_NAME_LENGTH; i++)
@@ -192,31 +192,31 @@ void sub_8184E58(void)
     }
 }
 
-void RecordedBattle_SetBattlerAction(u8 bank, u8 action)
+void RecordedBattle_SetBattlerAction(u8 battlerId, u8 action)
 {
-    if (sRecordedBytesNo[bank] < BANK_RECORD_SIZE && sUnknown_0203C7AC != 2)
+    if (sRecordedBytesNo[battlerId] < BANK_RECORD_SIZE && sUnknown_0203C7AC != 2)
     {
-        sBattleRecords[bank][sRecordedBytesNo[bank]++] = action;
+        sBattleRecords[battlerId][sRecordedBytesNo[battlerId]++] = action;
     }
 }
 
-void RecordedBattle_ClearBattlerAction(u8 bank, u8 bytesToClear)
+void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
 {
     s32 i;
 
     for (i = 0; i < bytesToClear; i++)
     {
-        sRecordedBytesNo[bank]--;
-        sBattleRecords[bank][sRecordedBytesNo[bank]] |= 0xFF;
-        if (sRecordedBytesNo[bank] == 0)
+        sRecordedBytesNo[battlerId]--;
+        sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] |= 0xFF;
+        if (sRecordedBytesNo[battlerId] == 0)
             break;
     }
 }
 
-u8 RecordedBattle_GetBattlerAction(u8 bank)
+u8 RecordedBattle_GetBattlerAction(u8 battlerId)
 {
     // trying to read past array or invalid action byte, battle is over
-    if (sRecordedBytesNo[bank] >= BANK_RECORD_SIZE || sBattleRecords[bank][sRecordedBytesNo[bank]] == 0xFF)
+    if (sRecordedBytesNo[battlerId] >= BANK_RECORD_SIZE || sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] == 0xFF)
     {
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED; // hah
         ResetPaletteFadeControl();
@@ -226,7 +226,7 @@ u8 RecordedBattle_GetBattlerAction(u8 bank)
     }
     else
     {
-        return sBattleRecords[bank][sRecordedBytesNo[bank]++];
+        return sBattleRecords[battlerId][sRecordedBytesNo[battlerId]++];
     }
 }
 
@@ -350,7 +350,7 @@ u32 MoveRecordedBattleToSaveData(void)
         }
         battleSave->playersGender[i] = sRecordedBattle_Players[i].gender;
         battleSave->playersLanguage[i] = sRecordedBattle_Players[i].language;
-        battleSave->playersBank[i] = sRecordedBattle_Players[i].bank;
+        battleSave->playersBattler[i] = sRecordedBattle_Players[i].battlerId;
         battleSave->playersTrainerId[i] = sRecordedBattle_Players[i].trainerId;
     }
 
@@ -367,16 +367,16 @@ u32 MoveRecordedBattleToSaveData(void)
         }
         else if (sRecordedBattle_BattleFlags & BATTLE_TYPE_MULTI)
         {
-            switch (sRecordedBattle_Players[0].bank)
+            switch (sRecordedBattle_Players[0].battlerId)
             {
             case 0:
             case 2:
-                if (!(sRecordedBattle_Players[gUnknown_0203C7B4].bank & 1))
+                if (!(sRecordedBattle_Players[gUnknown_0203C7B4].battlerId & 1))
                     battleSave->battleFlags |= BATTLE_TYPE_x80000000;
                 break;
             case 1:
             case 3:
-                if ((sRecordedBattle_Players[gUnknown_0203C7B4].bank & 1))
+                if ((sRecordedBattle_Players[gUnknown_0203C7B4].battlerId & 1))
                     battleSave->battleFlags |= BATTLE_TYPE_x80000000;
                 break;
             }
@@ -1341,7 +1341,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
         }
         gLinkPlayers[i].gender = src->playersGender[i];
         gLinkPlayers[i].language = src->playersLanguage[i];
-        gLinkPlayers[i].lp_field_18 = src->playersBank[i];
+        gLinkPlayers[i].lp_field_18 = src->playersBattler[i];
         gLinkPlayers[i].trainerId = src->playersTrainerId[i];
 
         if (var)
@@ -1448,7 +1448,7 @@ static void RecordedBattle_RestoreSavedParties(void)
     }
 }
 
-u8 GetActiveBankLinkPlayerGender(void)
+u8 GetActiveBattlerLinkPlayerGender(void)
 {
     s32 i;
 
@@ -1489,7 +1489,7 @@ u8 GetTextSpeedInRecordedBattle(void)
     return sRecordedBattle_TextSpeed;
 }
 
-void RecordedBattle_CopyBankMoves(void)
+void RecordedBattle_CopyBattlerMoves(void)
 {
     s32 i;
 
@@ -1510,32 +1510,32 @@ void RecordedBattle_CopyBankMoves(void)
 
 void sub_818603C(u8 arg0)
 {
-    s32 bank, j, k;
+    s32 battlerId, j, k;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
         return;
 
-    for (bank = 0; bank < gBattlersCount; bank++)
+    for (battlerId = 0; battlerId < gBattlersCount; battlerId++)
     {
-        if (GetBattlerSide(bank) != B_SIDE_OPPONENT) // player's side only
+        if (GetBattlerSide(battlerId) != B_SIDE_OPPONENT) // player's side only
         {
             if (arg0 == 1)
             {
                 for (j = 0; j < 4; j++)
                 {
-                    if (gBattleMons[bank].moves[j] != sRecordedBattle_PlayerMonMoves[bank / 2][j])
+                    if (gBattleMons[battlerId].moves[j] != sRecordedBattle_PlayerMonMoves[battlerId / 2][j])
                         break;
                 }
                 if (j != 4) // player's mon's move has been changed
                 {
-                    RecordedBattle_SetBattlerAction(bank, ACTION_MOVE_CHANGE);
+                    RecordedBattle_SetBattlerAction(battlerId, ACTION_MOVE_CHANGE);
                     for (j = 0; j < 4; j++)
                     {
                         for (k = 0; k < 4; k++)
                         {
-                            if (gBattleMons[bank].moves[j] == sRecordedBattle_PlayerMonMoves[bank / 2][k])
+                            if (gBattleMons[battlerId].moves[j] == sRecordedBattle_PlayerMonMoves[battlerId / 2][k])
                             {
-                                RecordedBattle_SetBattlerAction(bank, k);
+                                RecordedBattle_SetBattlerAction(battlerId, k);
                                 break;
                             }
                         }
@@ -1544,7 +1544,7 @@ void sub_818603C(u8 arg0)
             }
             else
             {
-                if (sBattleRecords[bank][sRecordedBytesNo[bank]] == ACTION_MOVE_CHANGE)
+                if (sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] == ACTION_MOVE_CHANGE)
                 {
                     u8 ppBonuses[4];
                     u8 array1[4];
@@ -1553,58 +1553,58 @@ void sub_818603C(u8 arg0)
                     u8 array3[8];
                     u8 var;
 
-                    RecordedBattle_GetBattlerAction(bank);
+                    RecordedBattle_GetBattlerAction(battlerId);
                     for (j = 0; j < 4; j++)
                     {
-                        ppBonuses[j] = ((gBattleMons[bank].ppBonuses & ((3 << (j << 1)))) >> (j << 1));
+                        ppBonuses[j] = ((gBattleMons[battlerId].ppBonuses & ((3 << (j << 1)))) >> (j << 1));
                     }
                     for (j = 0; j < 4; j++)
                     {
-                        array1[j] = RecordedBattle_GetBattlerAction(bank);
-                        movePp.moves[j] = gBattleMons[bank].moves[array1[j]];
-                        movePp.pp[j] = gBattleMons[bank].pp[array1[j]];
+                        array1[j] = RecordedBattle_GetBattlerAction(battlerId);
+                        movePp.moves[j] = gBattleMons[battlerId].moves[array1[j]];
+                        movePp.pp[j] = gBattleMons[battlerId].pp[array1[j]];
                         array3[j] = ppBonuses[array1[j]];
-                        array2[j] = (gDisableStructs[bank].unk18_b & gBitTable[j]) >> j;
+                        array2[j] = (gDisableStructs[battlerId].unk18_b & gBitTable[j]) >> j;
                     }
                     for (j = 0; j < 4; j++)
                     {
-                        gBattleMons[bank].moves[j] = movePp.moves[j];
-                        gBattleMons[bank].pp[j] = movePp.pp[j];
+                        gBattleMons[battlerId].moves[j] = movePp.moves[j];
+                        gBattleMons[battlerId].pp[j] = movePp.pp[j];
                     }
-                    gBattleMons[bank].ppBonuses = 0;
-                    gDisableStructs[bank].unk18_b = 0;
+                    gBattleMons[battlerId].ppBonuses = 0;
+                    gDisableStructs[battlerId].unk18_b = 0;
                     for (j = 0; j < 4; j++)
                     {
-                        gBattleMons[bank].ppBonuses |= (array3[j]) << (j << 1);
-                        gDisableStructs[bank].unk18_b |= (array2[j]) << (j);
+                        gBattleMons[battlerId].ppBonuses |= (array3[j]) << (j << 1);
+                        gDisableStructs[battlerId].unk18_b |= (array2[j]) << (j);
                     }
 
-                    if (!(gBattleMons[bank].status2 & STATUS2_TRANSFORMED))
+                    if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED))
                     {
                         for (j = 0; j < 4; j++)
                         {
-                            ppBonuses[j] = ((GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1));
+                            ppBonuses[j] = ((GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1));
                         }
                         for (j = 0; j < 4; j++)
                         {
-                            movePp.moves[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_MOVE1 + array1[j], NULL);
-                            movePp.pp[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP1 + array1[j], NULL);
+                            movePp.moves[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + array1[j], NULL);
+                            movePp.pp[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP1 + array1[j], NULL);
                             array3[j] = ppBonuses[array1[j]];
                         }
                         for (j = 0; j < 4; j++)
                         {
-                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_MOVE1 + j, &movePp.moves[j]);
-                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP1 + j, &movePp.pp[j]);
+                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + j, &movePp.moves[j]);
+                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP1 + j, &movePp.pp[j]);
                         }
                         var = 0;
                         for (j = 0; j < 4; j++)
                         {
                             var |= (array3[j]) << (j << 1);
                         }
-                        SetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_PP_BONUSES, &var);
+                        SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP_BONUSES, &var);
                     }
 
-                    gChosenMoveByBattler[bank] = gBattleMons[bank].moves[*(gBattleStruct->chosenMovePositions + bank)];
+                    gChosenMoveByBattler[battlerId] = gBattleMons[battlerId].moves[*(gBattleStruct->chosenMovePositions + battlerId)];
                 }
             }
         }

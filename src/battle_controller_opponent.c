@@ -1846,7 +1846,7 @@ static void OpponentHandleFaintingCry(void)
 static void OpponentHandleIntroSlide(void)
 {
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_020243FC |= 1;
+    gIntroSlideFlags |= 1;
     OpponentBufferExecCompleted();
 }
 
@@ -1868,7 +1868,7 @@ static void OpponentHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
 
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_26;
@@ -1933,7 +1933,7 @@ static void OpponentHandleDrawPartyStatusSummary(void)
             }
         }
 
-        gUnknown_020244B4[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
+        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
@@ -1955,7 +1955,7 @@ static void sub_8062A2C(void)
 static void OpponentHandleCmd49(void)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
     OpponentBufferExecCompleted();
 }
 

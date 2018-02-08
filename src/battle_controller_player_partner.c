@@ -28,7 +28,6 @@
 extern struct SpriteTemplate gUnknown_0202499C;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u16 gUnknown_020243FC;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
@@ -1775,7 +1774,7 @@ static void PlayerPartnerHandleFaintingCry(void)
 static void PlayerPartnerHandleIntroSlide(void)
 {
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_020243FC |= 1;
+    gIntroSlideFlags |= 1;
     PlayerPartnerBufferExecCompleted();
 }
 
@@ -1814,7 +1813,7 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
 
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_77;
@@ -1861,7 +1860,7 @@ static void PlayerPartnerHandleDrawPartyStatusSummary(void)
     else
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
-        gUnknown_020244B4[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
+        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
@@ -1883,7 +1882,7 @@ static void sub_81BE498(void)
 static void PlayerPartnerHandleCmd49(void)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
     PlayerPartnerBufferExecCompleted();
 }
 

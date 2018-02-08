@@ -23,7 +23,6 @@
 #include "contest.h"
 #include "constants/songs.h"
 
-extern u16 gUnknown_020243FC;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
@@ -356,7 +355,7 @@ void sub_805D770(struct Sprite *sprite, bool8 arg1)
 
 void sub_805D7AC(struct Sprite *sprite)
 {
-    if (!(gUnknown_020243FC & 1))
+    if (!(gIntroSlideFlags & 1))
     {
         sprite->pos2.x += sprite->data[0];
         if (sprite->pos2.x == 0)

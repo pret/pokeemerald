@@ -1888,7 +1888,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
                 break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gEffectBank, gBattlerPartyIndexes[gEffectBank])
+                HANDLE_NICKNAME_STRING_CASE(gEffectBattler, gBattlerPartyIndexes[gEffectBattler])
                 break;
             case B_TXT_ACTIVE_NAME_WITH_PREFIX: // active bank name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
@@ -1964,7 +1964,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = gAbilityNames[gBattlerAbilities[gBattleScripting.battler]];
                 break;
             case B_TXT_EFF_ABILITY: // effect bank ability
-                toCpy = gAbilityNames[gBattlerAbilities[gEffectBank]];
+                toCpy = gAbilityNames[gBattlerAbilities[gEffectBattler]];
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)

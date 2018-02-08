@@ -1,6 +1,5 @@
 	.include "constants/gba_constants.inc"
 	.include "constants/misc_constants.inc"
-	.include "constants/type_constants.inc"
 	.include "constants/contest_constants.inc"
 	.include "constants/pokemon_data_constants.inc"
 	.include "constants/item_data_constants.inc"

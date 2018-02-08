@@ -116,11 +116,11 @@ extern void PadNameString(u8* dst, u8 arg2); //
 extern void sub_81B9150(void);
 extern void sub_800AC34(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
-extern void sub_8076918(u8 bank);
+extern void sub_8076918(u8 battlerId);
 extern void SetHealthboxSpriteVisible(u8 healthoxSpriteId);
 extern void sub_81A56B4(void); // battle frontier 2
 extern u8 sub_81A9E28(void); // battle frontier 2
-extern void sub_81A56E8(u8 bank); // battle frontier 2
+extern void sub_81A56E8(u8 battlerId); // battle frontier 2
 extern void sub_81B8FB0(u8, u8); // party menu
 extern u8 pokemon_order_func(u8); // party menu
 extern bool8 InBattlePyramid(void);
@@ -168,7 +168,7 @@ static void BattleIntroPlayer1SendsOutMonAnimation(void);
 static void TryDoEventsBeforeFirstTurn(void);
 static void HandleTurnActionSelectionState(void);
 static void RunTurnActionsFunctions(void);
-static void SetActionsAndBanksTurnOrder(void);
+static void SetActionsAndBattlersTurnOrder(void);
 static void sub_803CDF8(void);
 static bool8 sub_803CDB8(void);
 static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
@@ -197,7 +197,7 @@ static void HandleAction_NothingIsFainted(void);
 static void HandleAction_ActionFinished(void);
 
 // EWRAM vars
-EWRAM_DATA u32 gUnknown_02022F88[25] = {0};
+EWRAM_DATA static u32 sUnusedUnknownArray[25] = {0};
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
 EWRAM_DATA u32 gUnknown_02022FF4 = 0;
@@ -219,7 +219,7 @@ EWRAM_DATA u8 gCurrentActionFuncId = 0;
 EWRAM_DATA struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gCurrMovePos = 0;
-EWRAM_DATA u8 gUnknown_020241E9 = 0;
+EWRAM_DATA u8 gChosenMovePos = 0;
 EWRAM_DATA u16 gCurrentMove = 0;
 EWRAM_DATA u16 gChosenMove = 0;
 EWRAM_DATA u16 gRandomMove = 0;
@@ -230,8 +230,8 @@ EWRAM_DATA u16 gLastUsedItem = 0;
 EWRAM_DATA u8 gLastUsedAbility = 0;
 EWRAM_DATA u8 gBattlerAttacker = 0;
 EWRAM_DATA u8 gBattlerTarget = 0;
-EWRAM_DATA u8 gBank1 = 0;
-EWRAM_DATA u8 gEffectBank = 0;
+EWRAM_DATA u8 gBattlerFainted = 0;
+EWRAM_DATA u8 gEffectBattler = 0;
 EWRAM_DATA u8 gStringBattler = 0;
 EWRAM_DATA u8 gAbsentBattlerFlags = 0;
 EWRAM_DATA u8 gCritMultiplier = 0;
@@ -251,7 +251,7 @@ EWRAM_DATA u8 gLastHitBy[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gMoveResultFlags = 0;
 EWRAM_DATA u32 gHitMarker = 0;
-EWRAM_DATA u8 gUnknown_02024284[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u8 sUnusedBattlersArray[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gUnknown_0202428C = 0;
 EWRAM_DATA u16 gSideStatuses[2] = {0};
@@ -267,7 +267,7 @@ EWRAM_DATA struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gBattleWeather = 0;
 EWRAM_DATA struct WishFutureKnock gWishFutureKnock = {0};
-EWRAM_DATA u16 gUnknown_020243FC = 0;
+EWRAM_DATA u16 gIntroSlideFlags = 0;
 EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
 EWRAM_DATA u16 gDynamicBasePower = 0;
 EWRAM_DATA u16 gExpShareExp = 0;
@@ -279,7 +279,7 @@ EWRAM_DATA u8 *gLinkBattleRecvBuffer = NULL;
 EWRAM_DATA struct BattleResources *gBattleResources = NULL;
 EWRAM_DATA u8 gActionSelectionCursor[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u8 gUnknown_020244B4[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerInMenuId = 0;
 EWRAM_DATA bool8 gDoingBattleAnim = FALSE;
 EWRAM_DATA u32 gTransformedPersonalities[MAX_BATTLERS_COUNT] = {0};
@@ -1740,7 +1740,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             else
                 personalityValue = 0x88;
 
-            for (j = 0; gTrainers[trainerNum].trainerName[j] != 0xFF; j++)
+            for (j = 0; gTrainers[trainerNum].trainerName[j] != EOS; j++)
                 nameHash += gTrainers[trainerNum].trainerName[j];
 
             switch (gTrainers[trainerNum].partyFlags)
@@ -2425,7 +2425,7 @@ void oac_poke_opponent(struct Sprite *sprite)
 
 static void sub_803980C(struct Sprite *sprite)
 {
-    if ((gUnknown_020243FC & 1) == 0)
+    if ((gIntroSlideFlags & 1) == 0)
     {
         sprite->pos2.x += 2;
         if (sprite->pos2.x == 0)
@@ -2479,7 +2479,7 @@ static void sub_80398D0(struct Sprite *sprite)
         {
             sprite->invisible = FALSE;
             sprite->callback = SpriteCallbackDummy_2;
-            gUnknown_02022F88[0] = 0;
+            sUnusedUnknownArray[0] = 0;
         }
     }
 }
@@ -2602,7 +2602,7 @@ void sub_8039BB4(struct Sprite *sprite)
 
 static void oac_poke_ally_(struct Sprite *sprite)
 {
-    if ((gUnknown_020243FC & 1) == 0)
+    if ((gIntroSlideFlags & 1) == 0)
     {
         sprite->pos2.x -= 2;
         if (sprite->pos2.x == 0)
@@ -2624,7 +2624,7 @@ static void SpriteCallbackDummy_3(struct Sprite *sprite)
 
 void sub_8039C00(struct Sprite *sprite)
 {
-    if (!(gUnknown_020243FC & 1))
+    if (!(gIntroSlideFlags & 1))
     {
         sprite->pos2.x += sprite->data[1];
         sprite->pos2.y += sprite->data[2];
@@ -2773,7 +2773,7 @@ static void BattleStartClearSetData(void)
             dataPtr[j] = 0;
 
         gDisableStructs[i].isFirstTurn = 2;
-        gUnknown_02024284[i] = 0;
+        sUnusedBattlersArray[i] = 0;
         gLastMoves[i] = 0;
         gLastLandedMoves[i] = 0;
         gLastHitByType[i] = 0;
@@ -2826,7 +2826,7 @@ static void BattleStartClearSetData(void)
 
     gPauseCounterBattle = 0;
     gBattleMoveDamage = 0;
-    gUnknown_020243FC = 0;
+    gIntroSlideFlags = 0;
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
     gLeveledUpInBattle = 0;
@@ -3926,7 +3926,7 @@ static void HandleTurnActionSelectionState(void)
         switch (gBattleCommunication[gActiveBattler])
         {
         case STATE_TURN_START_RECORD: // recorded battle related on start of every turn
-            RecordedBattle_CopyBankMoves();
+            RecordedBattle_CopyBattlerMoves();
             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
             break;
         case STATE_BEFORE_ACTION_CHOSEN: // choose an action
@@ -4330,7 +4330,7 @@ static void HandleTurnActionSelectionState(void)
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
     {
         sub_818603C(1);
-        gBattleMainFunc = SetActionsAndBanksTurnOrder;
+        gBattleMainFunc = SetActionsAndBattlersTurnOrder;
 
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
@@ -4387,162 +4387,162 @@ void SwapTurnOrder(u8 id1, u8 id2)
     gBattleTurnOrder[id2] = temp;
 }
 
-u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves)
+u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
     u8 strikesFirst = 0;
-    u8 speedMultiplierBank1 = 0, speedMultiplierBank2 = 0;
-    u32 speedBank1 = 0, speedBank2 = 0;
+    u8 speedMultiplierBattler1 = 0, speedMultiplierBattler2 = 0;
+    u32 speedBattler1 = 0, speedBattler2 = 0;
     u8 holdEffect = 0;
     u8 holdEffectParam = 0;
-    u16 moveBank1 = 0, moveBank2 = 0;
+    u16 moveBattler1 = 0, moveBattler2 = 0;
 
     if (WEATHER_HAS_EFFECT)
     {
-        if ((gBattleMons[bank1].ability == ABILITY_SWIFT_SWIM && gBattleWeather & WEATHER_RAIN_ANY)
-            || (gBattleMons[bank1].ability == ABILITY_CHLOROPHYLL && gBattleWeather & WEATHER_SUN_ANY))
-            speedMultiplierBank1 = 2;
+        if ((gBattleMons[battler1].ability == ABILITY_SWIFT_SWIM && gBattleWeather & WEATHER_RAIN_ANY)
+            || (gBattleMons[battler1].ability == ABILITY_CHLOROPHYLL && gBattleWeather & WEATHER_SUN_ANY))
+            speedMultiplierBattler1 = 2;
         else
-            speedMultiplierBank1 = 1;
+            speedMultiplierBattler1 = 1;
 
-        if ((gBattleMons[bank2].ability == ABILITY_SWIFT_SWIM && gBattleWeather & WEATHER_RAIN_ANY)
-            || (gBattleMons[bank2].ability == ABILITY_CHLOROPHYLL && gBattleWeather & WEATHER_SUN_ANY))
-            speedMultiplierBank2 = 2;
+        if ((gBattleMons[battler2].ability == ABILITY_SWIFT_SWIM && gBattleWeather & WEATHER_RAIN_ANY)
+            || (gBattleMons[battler2].ability == ABILITY_CHLOROPHYLL && gBattleWeather & WEATHER_SUN_ANY))
+            speedMultiplierBattler2 = 2;
         else
-            speedMultiplierBank2 = 1;
+            speedMultiplierBattler2 = 1;
     }
     else
     {
-        speedMultiplierBank1 = 1;
-        speedMultiplierBank2 = 1;
+        speedMultiplierBattler1 = 1;
+        speedMultiplierBattler2 = 1;
     }
 
-    speedBank1 = (gBattleMons[bank1].speed * speedMultiplierBank1)
-                * (gStatStageRatios[gBattleMons[bank1].statStages[STAT_STAGE_SPEED]][0])
-                / (gStatStageRatios[gBattleMons[bank1].statStages[STAT_STAGE_SPEED]][1]);
+    speedBattler1 = (gBattleMons[battler1].speed * speedMultiplierBattler1)
+                * (gStatStageRatios[gBattleMons[battler1].statStages[STAT_STAGE_SPEED]][0])
+                / (gStatStageRatios[gBattleMons[battler1].statStages[STAT_STAGE_SPEED]][1]);
 
-    if (gBattleMons[bank1].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[battler1].item == ITEM_ENIGMA_BERRY)
     {
-        holdEffect = gEnigmaBerries[bank1].holdEffect;
-        holdEffectParam = gEnigmaBerries[bank1].holdEffectParam;
+        holdEffect = gEnigmaBerries[battler1].holdEffect;
+        holdEffectParam = gEnigmaBerries[battler1].holdEffectParam;
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[bank1].item);
-        holdEffectParam = ItemId_GetHoldEffectParam(gBattleMons[bank1].item);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler1].item);
+        holdEffectParam = ItemId_GetHoldEffectParam(gBattleMons[battler1].item);
     }
 
     // badge boost
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
         && FlagGet(FLAG_BADGE03_GET)
-        && GetBattlerSide(bank1) == B_SIDE_PLAYER)
+        && GetBattlerSide(battler1) == B_SIDE_PLAYER)
     {
-        speedBank1 = (speedBank1 * 110) / 100;
+        speedBattler1 = (speedBattler1 * 110) / 100;
     }
 
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
-        speedBank1 /= 2;
+        speedBattler1 /= 2;
 
-    if (gBattleMons[bank1].status1 & STATUS1_PARALYSIS)
-        speedBank1 /= 4;
+    if (gBattleMons[battler1].status1 & STATUS1_PARALYSIS)
+        speedBattler1 /= 4;
 
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
-        speedBank1 = UINT_MAX;
+        speedBattler1 = UINT_MAX;
 
-    // check second bank's speed
+    // check second battlerId's speed
 
-    speedBank2 = (gBattleMons[bank2].speed * speedMultiplierBank2)
-                * (gStatStageRatios[gBattleMons[bank2].statStages[STAT_STAGE_SPEED]][0])
-                / (gStatStageRatios[gBattleMons[bank2].statStages[STAT_STAGE_SPEED]][1]);
+    speedBattler2 = (gBattleMons[battler2].speed * speedMultiplierBattler2)
+                * (gStatStageRatios[gBattleMons[battler2].statStages[STAT_STAGE_SPEED]][0])
+                / (gStatStageRatios[gBattleMons[battler2].statStages[STAT_STAGE_SPEED]][1]);
 
-    if (gBattleMons[bank2].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[battler2].item == ITEM_ENIGMA_BERRY)
     {
-        holdEffect = gEnigmaBerries[bank2].holdEffect;
-        holdEffectParam = gEnigmaBerries[bank2].holdEffectParam;
+        holdEffect = gEnigmaBerries[battler2].holdEffect;
+        holdEffectParam = gEnigmaBerries[battler2].holdEffectParam;
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[bank2].item);
-        holdEffectParam = ItemId_GetHoldEffectParam(gBattleMons[bank2].item);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler2].item);
+        holdEffectParam = ItemId_GetHoldEffectParam(gBattleMons[battler2].item);
     }
 
     // badge boost
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
         && FlagGet(FLAG_BADGE03_GET)
-        && GetBattlerSide(bank2) == B_SIDE_PLAYER)
+        && GetBattlerSide(battler2) == B_SIDE_PLAYER)
     {
-        speedBank2 = (speedBank2 * 110) / 100;
+        speedBattler2 = (speedBattler2 * 110) / 100;
     }
 
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
-        speedBank2 /= 2;
+        speedBattler2 /= 2;
 
-    if (gBattleMons[bank2].status1 & STATUS1_PARALYSIS)
-        speedBank2 /= 4;
+    if (gBattleMons[battler2].status1 & STATUS1_PARALYSIS)
+        speedBattler2 /= 4;
 
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
-        speedBank2 = UINT_MAX;
+        speedBattler2 = UINT_MAX;
 
     if (ignoreChosenMoves)
     {
-        moveBank1 = MOVE_NONE;
-        moveBank2 = MOVE_NONE;
+        moveBattler1 = MOVE_NONE;
+        moveBattler2 = MOVE_NONE;
     }
     else
     {
-        if (gChosenActionByBattler[bank1] == B_ACTION_USE_MOVE)
+        if (gChosenActionByBattler[battler1] == B_ACTION_USE_MOVE)
         {
-            if (gProtectStructs[bank1].onlyStruggle)
-                moveBank1 = MOVE_STRUGGLE;
+            if (gProtectStructs[battler1].onlyStruggle)
+                moveBattler1 = MOVE_STRUGGLE;
             else
-                moveBank1 = gBattleMons[bank1].moves[*(gBattleStruct->chosenMovePositions + bank1)];
+                moveBattler1 = gBattleMons[battler1].moves[*(gBattleStruct->chosenMovePositions + battler1)];
         }
         else
-            moveBank1 = MOVE_NONE;
+            moveBattler1 = MOVE_NONE;
 
-        if (gChosenActionByBattler[bank2] == B_ACTION_USE_MOVE)
+        if (gChosenActionByBattler[battler2] == B_ACTION_USE_MOVE)
         {
-            if (gProtectStructs[bank2].onlyStruggle)
-                moveBank2 = MOVE_STRUGGLE;
+            if (gProtectStructs[battler2].onlyStruggle)
+                moveBattler2 = MOVE_STRUGGLE;
             else
-                moveBank2 = gBattleMons[bank2].moves[*(gBattleStruct->chosenMovePositions + bank2)];
+                moveBattler2 = gBattleMons[battler2].moves[*(gBattleStruct->chosenMovePositions + battler2)];
         }
         else
-            moveBank2 = MOVE_NONE;
+            moveBattler2 = MOVE_NONE;
     }
 
     // both move priorities are different than 0
-    if (gBattleMoves[moveBank1].priority != 0 || gBattleMoves[moveBank2].priority != 0)
+    if (gBattleMoves[moveBattler1].priority != 0 || gBattleMoves[moveBattler2].priority != 0)
     {
         // both priorities are the same
-        if (gBattleMoves[moveBank1].priority == gBattleMoves[moveBank2].priority)
+        if (gBattleMoves[moveBattler1].priority == gBattleMoves[moveBattler2].priority)
         {
-            if (speedBank1 == speedBank2 && Random() & 1)
+            if (speedBattler1 == speedBattler2 && Random() & 1)
                 strikesFirst = 2; // same speeds, same priorities
-            else if (speedBank1 < speedBank2)
-                strikesFirst = 1; // bank2 has more speed
+            else if (speedBattler1 < speedBattler2)
+                strikesFirst = 1; // battler2 has more speed
 
-            // else bank1 has more speed
+            // else battler1 has more speed
         }
-        else if (gBattleMoves[moveBank1].priority < gBattleMoves[moveBank2].priority)
-            strikesFirst = 1; // bank2's move has greater priority
+        else if (gBattleMoves[moveBattler1].priority < gBattleMoves[moveBattler2].priority)
+            strikesFirst = 1; // battler2's move has greater priority
 
-        // else bank1's move has greater priority
+        // else battler1's move has greater priority
     }
     // both priorities are equal to 0
     else
     {
-        if (speedBank1 == speedBank2 && Random() & 1)
+        if (speedBattler1 == speedBattler2 && Random() & 1)
             strikesFirst = 2; // same speeds, same priorities
-        else if (speedBank1 < speedBank2)
-            strikesFirst = 1; // bank2 has more speed
+        else if (speedBattler1 < speedBattler2)
+            strikesFirst = 1; // battler2 has more speed
 
-        // else bank1 has more speed
+        // else battler1 has more speed
     }
 
     return strikesFirst;
 }
 
-static void SetActionsAndBanksTurnOrder(void)
+static void SetActionsAndBattlersTurnOrder(void)
 {
     s32 var = 0;
     s32 i, j;
@@ -4625,14 +4625,14 @@ static void SetActionsAndBanksTurnOrder(void)
             {
                 for (j = i + 1; j < gBattlersCount; j++)
                 {
-                    u8 bank1 = gBattleTurnOrder[i];
-                    u8 bank2 = gBattleTurnOrder[j];
+                    u8 battler1 = gBattleTurnOrder[i];
+                    u8 battler2 = gBattleTurnOrder[j];
                     if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
                         && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
                         && gActionsByTurnOrder[i] != B_ACTION_SWITCH
                         && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
                     {
-                        if (GetWhoStrikesFirst(bank1, bank2, FALSE))
+                        if (GetWhoStrikesFirst(battler1, battler2, FALSE))
                             SwapTurnOrder(i, j);
                     }
                 }
@@ -4742,7 +4742,7 @@ static void RunTurnActionsFunctions(void)
     }
     else
     {
-        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
+        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battlerId
         {
             gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
             gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
@@ -4976,7 +4976,7 @@ static void TryEvolvePokemon(void)
 
     while (gLeveledUpInBattle != 0)
     {
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (gLeveledUpInBattle & gBitTable[i])
             {
@@ -5073,7 +5073,7 @@ static void HandleAction_UseMove(void)
     gMoveResultFlags = 0;
     gMultiHitCounter = 0;
     gBattleCommunication[6] = 0;
-    gCurrMovePos = gUnknown_020241E9 = *(gBattleStruct->chosenMovePositions + gBattlerAttacker);
+    gCurrMovePos = gChosenMovePos = *(gBattleStruct->chosenMovePositions + gBattlerAttacker);
 
     // choose move
     if (gProtectStructs[gBattlerAttacker].onlyStruggle)
@@ -5092,14 +5092,14 @@ static void HandleAction_UseMove(void)
              && gDisableStructs[gBattlerAttacker].encoredMove == gBattleMons[gBattlerAttacker].moves[gDisableStructs[gBattlerAttacker].encoredMovePos])
     {
         gCurrentMove = gChosenMove = gDisableStructs[gBattlerAttacker].encoredMove;
-        gCurrMovePos = gUnknown_020241E9 = gDisableStructs[gBattlerAttacker].encoredMovePos;
+        gCurrMovePos = gChosenMovePos = gDisableStructs[gBattlerAttacker].encoredMovePos;
         *(gBattleStruct->moveTarget + gBattlerAttacker) = GetMoveTarget(gCurrentMove, 0);
     }
     // check if the encored move wasn't overwritten
     else if (gDisableStructs[gBattlerAttacker].encoredMove != MOVE_NONE
              && gDisableStructs[gBattlerAttacker].encoredMove != gBattleMons[gBattlerAttacker].moves[gDisableStructs[gBattlerAttacker].encoredMovePos])
     {
-        gCurrMovePos = gUnknown_020241E9 = gDisableStructs[gBattlerAttacker].encoredMovePos;
+        gCurrMovePos = gChosenMovePos = gDisableStructs[gBattlerAttacker].encoredMovePos;
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
         gDisableStructs[gBattlerAttacker].encoredMove = MOVE_NONE;
         gDisableStructs[gBattlerAttacker].encoredMovePos = 0;
