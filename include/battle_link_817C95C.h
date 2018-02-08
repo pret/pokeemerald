@@ -6,6 +6,6 @@ void sub_817E0FC(u16 move, u16 weatherFlags, struct DisableStruct *disableStruct
 void sub_817E32C(u8 animationId);
 void sub_817E3F4(void);
 void sub_817F2A8(void);
-u8 GetBankMoveSlotId(u8 bank, u16 move);
+u8 GetBattlerMoveSlotId(u8 bank, u16 move);
 
 #endif // GUARD_BATTLE_LINK_817C95C_H

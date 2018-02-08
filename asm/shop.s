@@ -188,7 +188,7 @@ HandleShopMenuBuy: @ 80DFBD0
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -216,7 +216,7 @@ HandleShopMenuSell: @ 80DFC0C
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -969,7 +969,7 @@ _080E02AE:
 	ldr r0, =0x0000083e
 	adds r1, r3, r0
 	adds r0, r1, 0
-	bl AddItemIconObject
+	bl AddItemIconSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40

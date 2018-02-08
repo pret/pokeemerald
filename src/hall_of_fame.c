@@ -20,11 +20,12 @@
 #include "string_util.h"
 #include "m4a.h"
 #include "international_string_util.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "trig.h"
 #include "random.h"
 #include "event_data.h"
 #include "overworld.h"
+#include "menu.h"
 
 struct HallofFameMon
 {
@@ -53,7 +54,6 @@ static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
 extern bool8 gHasHallOfFameRecords;
 extern u32 gUnknown_0203BCD4;
-extern u8 gDecompressionBuffer[];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern MainCallback gGameContinueCallback;
 extern u32 gDamagedSaveSectors;

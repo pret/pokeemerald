@@ -529,7 +529,7 @@ void SecretBasePC_PutAway(u8 taskId)
     {
         sub_8126A58(0);
         sub_8197434(0, 0);
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8129ABC;
     }
@@ -1247,7 +1247,7 @@ void sub_8127F68(u8 taskId)
     {
         if (sub_8127F38() == TRUE)
         {
-            fade_screen(1, 0);
+            FadeScreen(1, 0);
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].func = sub_8128060;
         }
@@ -1661,7 +1661,7 @@ void sub_8128BA0(u8 taskId)
 
 void sub_8128BBC(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = c1_overworld_prev_quest;
 }
@@ -2013,9 +2013,9 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     {
         return MAX_SPRITES;
     }
-    LZDecompressWram(GetDecorationIconPicOrPalette(decor, 0), gUnknown_0203CEBC);
-    CopyItemIconPicTo4x4Buffer(gUnknown_0203CEBC, gUnknown_0203CEC0);
-    sheet.data = gUnknown_0203CEC0;
+    LZDecompressWram(GetDecorationIconPicOrPalette(decor, 0), gItemIconDecompressionBuffer);
+    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+    sheet.data = gItemIcon4x4Buffer;
     sheet.size = 0x200;
     sheet.tag = tilesTag;
     LoadSpriteSheet(&sheet);
@@ -2023,7 +2023,7 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     palette.tag = paletteTag;
     LoadCompressedObjectPalette(&palette);
     template = malloc(sizeof(struct SpriteTemplate));
-    *template = gUnknown_08614FF4;
+    *template = gItemIconSpriteTemplate;
     template->tileTag = tilesTag;
     template->paletteTag = paletteTag;
     spriteId = CreateSprite(template, 0, 0, 0);
@@ -2635,7 +2635,7 @@ void sub_812A1A0(u8 taskId)
 
 void sub_812A1C0(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_81298EC;
 }
@@ -2654,7 +2654,7 @@ void sub_812A210(u8 taskId)
 
 void sub_812A22C(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_812A25C;
 }

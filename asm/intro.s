@@ -11,7 +11,7 @@ sub_816CBE8: @ 816CBE8
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_816CBE8
@@ -59,7 +59,7 @@ sub_816CC54: @ 816CC54
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816CC66
-	ldr r0, =c2_title_screen_1
+	ldr r0, =CB2_InitTitleScreen
 	bl SetMainCallback2
 _0816CC66:
 	pop {r0}
@@ -337,13 +337,13 @@ _0816CEFA:
 	.pool
 	thumb_func_end c2_copyright_1
 
-	thumb_func_start c2_show_copyright_and_intro_again_2
-c2_show_copyright_and_intro_again_2: @ 816CF0C
+	thumb_func_start CB2_InitCopyrightScreenAfterTitleScreen
+CB2_InitCopyrightScreenAfterTitleScreen: @ 816CF0C
 	push {lr}
 	bl do_copyright_screen
 	pop {r0}
 	bx r0
-	thumb_func_end c2_show_copyright_and_intro_again_2
+	thumb_func_end CB2_InitCopyrightScreenAfterTitleScreen
 
 	thumb_func_start task_intro_1
 @ void task_intro_1(int task_id)
@@ -2124,7 +2124,7 @@ task_intro_17: @ 816DEEC
 	movs r1, 0xA0
 	movs r2, 0x4
 	movs r3, 0x4
-	bl sub_80BA384
+	bl ScanlineEffect_InitWave
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -2411,7 +2411,7 @@ _0816E156:
 	adds r0, r1
 	ldr r1, =task_intro_19
 	str r1, [r0]
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _0816E176:
@@ -2623,7 +2623,7 @@ task_intro_19: @ 816E2A0
 	movs r1, 0xA0
 	movs r2, 0x4
 	movs r3, 0x4
-	bl sub_80BA384
+	bl ScanlineEffect_InitWave
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -3038,7 +3038,7 @@ _0816E69C:
 	adds r0, r1
 	ldr r1, =task_intro_21
 	str r1, [r0]
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _0816E6BC:

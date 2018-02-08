@@ -406,7 +406,7 @@ _080C7428:
 _080C745C:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	movs r0, 0x4
 	strh r0, [r5, 0x8]
 	b _080C756A

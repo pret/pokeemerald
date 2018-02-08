@@ -170,7 +170,7 @@ _0809F926:
 	b _0809F940
 	.pool
 _0809F930:
-	ldr r4, =gUnknown_0203761A
+	ldr r4, =gUnknown_02037619+1
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl PrintStartMenuActions
@@ -449,7 +449,7 @@ _0809FB34:
 	beq _0809FBA0
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _0809FBA0
 	.pool
 _0809FB98:
@@ -1561,7 +1561,7 @@ _080A0490:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	b _080A04FC
 _080A04A2:
 	movs r0, 0

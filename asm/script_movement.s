@@ -553,7 +553,7 @@ _080D36DC:
 	adds r1, r6, 0
 	bl sub_80D355C
 	adds r0, r4, 0
-	bl sub_8097404
+	bl FreezeMapObject
 	b _080D370E
 	.pool
 _080D36F8:

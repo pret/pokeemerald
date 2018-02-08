@@ -11,7 +11,7 @@
 #include "pokemon.h"
 #include "string_util.h"
 #include "battle.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "decompress.h"
 #include "m4a.h"
 #include "menu.h"
@@ -1367,7 +1367,7 @@ static void VBlankCB_EvolutionScene(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_80BA0A8();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 static void VBlankCB_TradeEvolutionScene(void)
@@ -1384,7 +1384,7 @@ static void VBlankCB_TradeEvolutionScene(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_80BA0A8();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 static void sub_813FDEC(u8 taskId)

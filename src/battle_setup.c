@@ -990,14 +990,14 @@ static bool32 IsPlayerDefeated(u32 battleOutcome)
 {
     switch (battleOutcome)
     {
-    case BATTLE_LOST:
-    case BATTLE_DREW:
+    case B_OUTCOME_LOST:
+    case B_OUTCOME_DREW:
         return TRUE;
-    case BATTLE_WON:
-    case BATTLE_RAN:
-    case BATTLE_PLAYER_TELEPORTED:
-    case BATTLE_POKE_FLED:
-    case BATTLE_CAUGHT:
+    case B_OUTCOME_WON:
+    case B_OUTCOME_RAN:
+    case B_OUTCOME_PLAYER_TELEPORTED:
+    case B_OUTCOME_POKE_FLED:
+    case B_OUTCOME_CAUGHT_POKE:
         return FALSE;
     default:
         return FALSE;

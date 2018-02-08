@@ -63,11 +63,6 @@
 
 #define TOTAL_OBJ_TILE_COUNT 1024
 
-#define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
-
-#define RGB_BLACK RGB(0, 0, 0)
-#define RGB_WHITE RGB(31, 31, 31)
-
 #define WIN_RANGE(a, b) (((a) << 8) | (b))
 
 #endif // GUARD_GBA_DEFINES

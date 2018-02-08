@@ -25,15 +25,15 @@
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u8 gBankInMenu;
-extern u8 gBankTarget;
-extern u8 gBankAttacker;
-extern u8 gStringBank;
+extern u8 gBattlerTarget;
+extern u8 gBattlerAttacker;
+extern u8 gStringBattler;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
 extern u8 gBattleMonForms[4];
-extern u16 gBattlePartyID[4];
+extern u16 gBattlerPartyIndexes[4];
 extern u8 gLastUsedAbility;
 extern u16 gPartnerTrainerId;
 extern u32 gHitMarker;
@@ -74,8 +74,6 @@ extern u8 GetFrontierOpponentClass(u16 trainerId);
 extern u8 pokemon_order_func(u8 bankPartyId);
 extern void GetFrontierTrainerName(u8* dest, u16 trainerId);
 extern void sub_81C488C(u8);
-extern void sub_817F578(struct Sprite*, u8 frontAnimId);
-extern u8 GetSpeciesBackAnimId(u16 species);
 
 static void sub_806E6CC(u8 taskId);
 
@@ -115,7 +113,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        temp = gEnigmaBerries[gActiveBank].itemEffect;
+        temp = gEnigmaBerries[gActiveBattler].itemEffect;
     }
 
     itemEffect = temp;
@@ -212,7 +210,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
 void sub_806CF24(s32 stat)
 {
-    gBankTarget = gBankInMenu;
+    gBattlerTarget = gBankInMenu;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
@@ -235,7 +233,7 @@ u8 *sub_806CF78(u16 itemId)
         itemEffect = gItemEffectTable[itemId - 13];
     }
 
-    gStringBank = gBankInMenu;
+    gStringBattler = gBankInMenu;
 
     for (i = 0; i < 3; i++)
     {
@@ -249,7 +247,7 @@ u8 *sub_806CF78(u16 itemId)
             }
             else
             {
-                gBankAttacker = gBankInMenu;
+                gBattlerAttacker = gBankInMenu;
                 BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
             }
         }
@@ -257,7 +255,7 @@ u8 *sub_806CF78(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        gBankAttacker = gBankInMenu;
+        gBattlerAttacker = gBankInMenu;
         BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
     }
 
@@ -617,7 +615,7 @@ bool16 sub_806D82C(u8 id)
     return retVal;
 }
 
-s32 GetBankMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 a1)
 {
     s32 id;
     for (id = 0; id < MAX_LINK_PLAYERS; id++)
@@ -1368,12 +1366,12 @@ void sub_806E994(void)
     gBattleTextBuff1[2] = gBattleStruct->field_49;
     gBattleTextBuff1[4] = B_BUFF_EOS;
 
-    if (!GetBankSide(gBattleStruct->field_49))
-        gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[gBattleStruct->field_49]);
+    if (!GetBattlerSide(gBattleStruct->field_49))
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->field_49]);
     else
-        gBattleTextBuff1[3] = gBattlePartyID[gBattleStruct->field_49];
+        gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->field_49];
 
-    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBankInMenu, pokemon_order_func(gBattlePartyID[gBankInMenu]))
+    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBankInMenu, pokemon_order_func(gBattlerPartyIndexes[gBankInMenu]))
 
     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
@@ -1480,7 +1478,7 @@ const u8 *GetTrainerPartnerName(void)
     else
     {
         u8 id = GetMultiplayerId();
-        return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].lp_field_18 ^ 2)].name;
+        return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].lp_field_18 ^ 2)].name;
     }
 }
 
@@ -1508,7 +1506,7 @@ static void Task_PokemonSummaryAnimateAfterDelay(u8 taskId)
 {
     if (--gTasks[taskId].data[3] == 0)
     {
-        sub_817F578(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].data[2]);
+        StartMonSummaryAnimation(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].data[2]);
         sub_81C488C(0xFF);
         DestroyTask(taskId);
     }
@@ -1523,7 +1521,6 @@ void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u
 }
 
 extern void SpriteCallbackDummy_2(struct Sprite*);
-extern void sub_817F60C(struct Sprite*);
 
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3)
 {
@@ -1580,11 +1577,11 @@ void PokemonSummaryDoMonAnimation(struct Sprite* sprite, u16 species, bool8 oneF
         gTasks[taskId].data[2] = gMonFrontAnimIdsTable[species - 1];
         gTasks[taskId].data[3] = gMonAnimationDelayTable[species - 1];
         sub_81C488C(taskId);
-        sub_817F60C(sprite);
+        SetSpriteCB_MonAnimDummy(sprite);
     }
     else
     {
-        sub_817F578(sprite, gMonFrontAnimIdsTable[species - 1]);
+        StartMonSummaryAnimation(sprite, gMonFrontAnimIdsTable[species - 1]);
     }
 }
 
@@ -1603,7 +1600,7 @@ void BattleAnimateBackSprite(struct Sprite* sprite, u16 species)
     }
     else
     {
-        LaunchAnimationTaskForBackSprite(sprite, GetSpeciesBackAnimId(species));
+        LaunchAnimationTaskForBackSprite(sprite, GetSpeciesBackAnimSet(species));
         sprite->callback = SpriteCallbackDummy_2;
     }
 }

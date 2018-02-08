@@ -19,6 +19,7 @@ struct MenuAction
 
 void sub_81971D0(void);
 void sub_8197200(void);
+u16 sub_8197224(void);
 void sub_81973A4(void);
 void NewMenuHelpers_DrawDialogueFrame(u8, u8);
 void sub_819746C(u8 windowId, bool8 copyToVram);
@@ -57,5 +58,6 @@ void sub_8197DF8(u8 windowId, bool8 copyToVram);
 u16 sub_8198AA4(u8, u8, u8, u8, u8, u8, u16);
 void *malloc_and_decompress(const void *src, int *sizeOut);
 u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
+void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 
 #endif // GUARD_MENU_H

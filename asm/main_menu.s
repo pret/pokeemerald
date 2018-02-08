@@ -1495,7 +1495,7 @@ _08030478:
 	b _0803048A
 	.pool
 _08030480:
-	ldr r0, =sub_8178974
+	ldr r0, =CB2_InitMysteryEventMenu
 	b _0803048A
 	.pool
 _08030488:
@@ -1608,7 +1608,7 @@ _08030578:
 	ldr r0, =gUnknown_02022D06
 	strh r4, [r0]
 	bl FreeAllWindowBuffers
-	ldr r0, =c2_title_screen_1
+	ldr r0, =CB2_InitTitleScreen
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask

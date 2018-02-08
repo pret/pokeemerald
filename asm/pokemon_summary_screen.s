@@ -2049,7 +2049,7 @@ sub_81C4F24: @ 81C4F24
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81C4F44
 	movs r1, 0xA
 	bl CreateTask
@@ -5756,7 +5756,7 @@ sub_81C6F90: @ 81C6F90
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl AddItemIconObject
+	bl AddItemIconSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40

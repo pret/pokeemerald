@@ -18,7 +18,7 @@ sub_80C2690: @ 80C2690
 	cmp r0, 0
 	beq _080C26C0
 	ldr r1, =0x040000d4
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -40,7 +40,7 @@ sub_80C26D4: @ 80C26D4
 	ldrh r3, [r4]
 	movs r0, 0
 	strh r0, [r4]
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	ldr r0, =0x04000006
 	ldrh r2, [r0]
 	movs r0, 0xFF
@@ -3977,9 +3977,9 @@ sub_80C4998: @ 80C4998
 	movs r0, 0x3
 	bl HideBg
 	bl ScanlineEffect_Stop
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	movs r1, 0
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	movs r2, 0
 	movs r3, 0xF0
 	lsls r3, 3
@@ -4066,7 +4066,7 @@ _080C4A0E:
 	movs r2, 0
 	cmp r2, r7
 	bcs _080C4A78
-	ldr r3, =gUnknown_02038C28
+	ldr r3, =gScanlineEffectRegBuffers
 _080C4A60:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -4091,7 +4091,7 @@ _080C4A78:
 	lsrs r7, r4, 16
 	cmp r1, r0
 	bge _080C4AB0
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	mov r12, r0
 	adds r4, r3, 0
 _080C4A92:
@@ -4116,7 +4116,7 @@ _080C4AB0:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _080C4ACE
-	ldr r2, =gUnknown_02038C28
+	ldr r2, =gScanlineEffectRegBuffers
 _080C4ABC:
 	asrs r0, r1, 16
 	lsls r1, r0, 1
@@ -4392,7 +4392,7 @@ _080C4CB6:
 	movs r2, 0
 	cmp r2, r7
 	bcs _080C4D20
-	ldr r3, =gUnknown_02038C28
+	ldr r3, =gScanlineEffectRegBuffers
 _080C4D08:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -4417,7 +4417,7 @@ _080C4D20:
 	lsrs r7, r4, 16
 	cmp r1, r0
 	bge _080C4D56
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	mov r12, r0
 	adds r4, r3, 0
 _080C4D3A:
@@ -4441,7 +4441,7 @@ _080C4D56:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _080C4D74
-	ldr r2, =gUnknown_02038C28
+	ldr r2, =gScanlineEffectRegBuffers
 _080C4D62:
 	asrs r0, r1, 16
 	lsls r1, r0, 1

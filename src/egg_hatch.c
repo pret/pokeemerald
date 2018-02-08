@@ -61,7 +61,7 @@ extern u8 sav1_map_get_name(void);
 extern s8 ProcessMenuInputNoWrap_(void);
 extern void TVShowConvertInternationalString(u8* str1, u8* str2, u8);
 extern void sub_806A068(u16, u8);
-extern void fade_screen(u8, u8);
+extern void FadeScreen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
 extern void sub_80AF168(void);
 extern void AllocateMonSpritesGfx(void);
@@ -465,7 +465,7 @@ void EggHatch(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_EggHatch, 10);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 static void Task_EggHatch(u8 taskID)

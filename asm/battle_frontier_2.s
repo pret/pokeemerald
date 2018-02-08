@@ -21098,7 +21098,7 @@ sub_81A5718: @ 81A5718
 	b _081A57D8
 	.pool
 _081A576C:
-	ldr r0, =gBattleMoveFlags
+	ldr r0, =gMoveResultFlags
 	ldrb r1, [r0]
 	movs r0, 0x29
 	ands r0, r1
