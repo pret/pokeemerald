@@ -60,7 +60,7 @@ SECTIONS {
         src/decompress.o(.text);
         asm/rom_8034C54.o(.text);
         src/battle_bg.o(.text);
-        src/battle_2.o(.text);
+        src/battle_main.o(.text);
         src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
         src/battle_util2.o(.text);
@@ -109,7 +109,7 @@ SECTIONS {
         src/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         src/clock.o(.text);
-        asm/reset_rtc_screen.o(.text);
+        src/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         asm/start_menu.o(.text);
         src/tileset_anims.o(.text);
@@ -120,7 +120,7 @@ SECTIONS {
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
         asm/battle_anim_80A9C70.o(.text);
-        asm/title_screen.o(.text);
+        src/title_screen.o(.text);
         asm/field_screen.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
@@ -230,7 +230,7 @@ SECTIONS {
         asm/credits.o(.text);
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
-        asm/berry_tag_screen.o(.text);
+        src/berry_tag_screen.o(.text);
         src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
@@ -256,7 +256,7 @@ SECTIONS {
         asm/menu_indicators.o(.text);
         src/unk_text_util.o(.text);
         src/save_location.o(.text);
-        asm/item_icon.o(.text);
+        src/item_icon.o(.text);
         asm/party_menu.o(.text);
         asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
@@ -270,7 +270,6 @@ SECTIONS {
         asm/pokemon_summary_screen.o(.text);
         asm/pokenav.o(.text);
         src/rayquaza_scene.o(.text);
-        asm/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
         asm/contest_link_81D9DE4.o(.text);
         asm/trainer_rematch.o(.text);
@@ -378,7 +377,7 @@ SECTIONS {
         data/main_menu.o(.rodata);
         data/battle_1.o(.rodata);
         data/data2b.o(.rodata);
-        src/battle_2.o(.rodata);
+        src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
@@ -410,7 +409,7 @@ SECTIONS {
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);
-        data/reset_rtc_screen.o(.rodata);
+        src/reset_rtc_screen.o(.rodata);
         src/start_menu.o(.rodata);
         src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
@@ -420,7 +419,7 @@ SECTIONS {
         data/rom_8525F58.o(.rodata);
         data/map_events.o(.rodata);
         data/battle_anim_80A9C70.o(.rodata);
-        data/title_screen.o(.rodata);
+        src/title_screen.o(.rodata);
         data/field_screen.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
@@ -505,7 +504,7 @@ SECTIONS {
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);
         data/strings.o(.rodata);
-        data/berry_tag_screen.o(.rodata);
+        src/berry_tag_screen.o(.rodata);
         src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
@@ -527,6 +526,7 @@ SECTIONS {
         data/menu_indicators.o(.rodata);
         src/save_location.o(.rodata);
         data/item_icon.o(.rodata);
+        src/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);

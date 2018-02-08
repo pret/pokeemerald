@@ -28867,7 +28867,7 @@ sub_80186A4: @ 80186A4
 	movs r0, 0x3
 	bl GetBgTilemapBuffer
 	bl Free
-	ldr r0, =c2_title_screen_1
+	ldr r0, =CB2_InitTitleScreen
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -46462,7 +46462,7 @@ _080214C6:
 	lsrs r3, 16
 	ldr r0, =gUnknown_082F436C
 	adds r1, r2, 0
-	bl AddItemIconObjectWithCustomObjectTemplate
+	bl AddCustomItemIconSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r2, r9

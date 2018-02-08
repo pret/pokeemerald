@@ -5,43 +5,6 @@
 
 	.text
 
-	thumb_func_start task_new_game_prof_birch_speech_4
-task_new_game_prof_birch_speech_4: @ 80309CC
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08030A0A
-	bl sub_8197224
-	lsls r0, 16
-	cmp r0, 0
-	bne _08030A0A
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, =task_new_game_prof_birch_speech_5
-	str r1, [r0]
-	ldr r0, =gStringVar4
-	ldr r1, =gText_ThisIsAPokemon
-	bl StringExpandPlaceholders
-	ldr r1, =sub_80323A0
-	movs r0, 0x1
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r0, =gUnknown_03000DD0
-	strb r4, [r0]
-_08030A0A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end task_new_game_prof_birch_speech_4
-
 	thumb_func_start task_new_game_prof_birch_speech_5
 task_new_game_prof_birch_speech_5: @ 8030A2C
 	push {r4,lr}

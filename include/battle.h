@@ -4,35 +4,59 @@
 // should they be included here or included individually by every file?
 #include "battle_util.h"
 #include "battle_script_commands.h"
-#include "battle_2.h"
+#include "battle_main.h"
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
 #include "battle_bg.h"
 
 /*
-    Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
-    Each bank has a value consisting of two bits.
-    0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
-    0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
-*/
+ * A battler may be in one of four positions on the field. The first bit determines
+ * what side the battler is on, either the player's side or the opponent's side.
+ * The second bit determines what flank the battler is on, either the left or right.
+ * Note that the opponent's flanks are drawn corresponding to their perspective, so
+ * their right mon appears on the left, and their left mon appears on the right.
+ * The battler ID is usually the same as the position, except in the case of link battles.
+ *
+ *   + ------------------------- +
+ *   |           Opponent's side |
+ *   |            Right    Left  |
+ *   |              3       1    |
+ *   |                           |
+ *   | Player's side             |
+ *   |  Left   Right             |
+ *   |   0       2               |
+ *   ----------------------------+
+ *   |                           |
+ *   |                           |
+ *   +---------------------------+
+ */
 
-#define BATTLE_BANKS_COUNT  4
+#define MAX_BATTLERS_COUNT  4
 
-#define IDENTITY_PLAYER_MON1        0
-#define IDENTITY_OPPONENT_MON1      1
-#define IDENTITY_PLAYER_MON2        2
-#define IDENTITY_OPPONENT_MON2      3
+#define B_POSITION_PLAYER_LEFT        0
+#define B_POSITION_OPPONENT_LEFT      1
+#define B_POSITION_PLAYER_RIGHT       2
+#define B_POSITION_OPPONENT_RIGHT     3
 
-#define SIDE_PLAYER     0x0
-#define SIDE_OPPONENT   0x1
+// These macros can be used with either battler ID or positions to get the partner or the opposite mon
+#define BATTLE_OPPOSITE(id) ((id) ^ 1)
+#define BATTLE_PARTNER(id) ((id) ^ 2)
 
-#define BIT_SIDE        0x1
-#define BIT_MON         0x2
+#define B_SIDE_PLAYER     0
+#define B_SIDE_OPPONENT   1
 
-#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
-#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
-#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
+#define B_FLANK_LEFT 0
+#define B_FLANK_RIGHT 1
+
+#define BIT_SIDE        1
+#define BIT_FLANK       2
+
+#define GET_BATTLER_POSITION(battler)     (gBattlerPositions[battler])
+#define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
+#define GET_BATTLER_SIDE2(battler)        (GET_BATTLER_POSITION(battler) & BIT_SIDE)
+
+// Battle Type Flags
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -66,6 +90,10 @@
 #define BATTLE_TYPE_KYOGRE          0x20000000
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
 #define BATTLE_TYPE_x80000000       0x80000000
+#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
+#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
+
+extern u32 gBattleTypeFlags;
 
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
@@ -73,56 +101,58 @@
 #define STEVEN_PARTNER_ID           0xC03
 #define SECRET_BASE_OPPONENT        0x400
 
-#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
-#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
+#define B_OUTCOME_WON                  0x1
+#define B_OUTCOME_LOST                 0x2
+#define B_OUTCOME_DREW                 0x3
+#define B_OUTCOME_RAN                  0x4
+#define B_OUTCOME_PLAYER_TELEPORTED    0x5
+#define B_OUTCOME_POKE_FLED            0x6
+#define B_OUTCOME_CAUGHT_POKE          0x7
+#define B_OUTCOME_NO_SAFARI_BALLS      0x8
+#define B_OUTCOME_FORFEITED            0x9
+#define B_OUTCOME_POKE_TELEPORTED      0xA
+#define B_OUTCOME_LINK_BATTLE_RAN      0x80
 
-#define BATTLE_WON                  0x1
-#define BATTLE_LOST                 0x2
-#define BATTLE_DREW                 0x3
-#define BATTLE_RAN                  0x4
-#define BATTLE_PLAYER_TELEPORTED    0x5
-#define BATTLE_POKE_FLED            0x6
-#define BATTLE_CAUGHT               0x7
-#define BATTLE_SAFARI_OUT_OF_BALLS  0x8
-#define BATTLE_FORFEITED            0x9
-#define BATTLE_OPPONENT_TELEPORTED  0xA
+extern u8 gBattleOutcome;
 
-#define OUTCOME_LINK_BATTLE_RUN      0x80
+// Non-volatile status conditions
+// These persist remain outside of battle and after switching out
+#define STATUS1_NONE             0x0
+#define STATUS1_SLEEP            0x7
+#define STATUS1_POISON           0x8
+#define STATUS1_BURN             0x10
+#define STATUS1_FREEZE           0x20
+#define STATUS1_PARALYSIS        0x40
+#define STATUS1_TOXIC_POISON     0x80
+#define STATUS1_TOXIC_COUNTER    0xF00
+#define STATUS1_PSN_ANY          (STATUS1_POISON | STATUS1_TOXIC_POISON)
+#define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FREEZE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON)
 
-#define STATUS_NONE             0x0
-#define STATUS_SLEEP            0x7
-#define STATUS_POISON           0x8
-#define STATUS_BURN             0x10
-#define STATUS_FREEZE           0x20
-#define STATUS_PARALYSIS        0x40
-#define STATUS_TOXIC_POISON     0x80
-#define STATUS_TOXIC_COUNTER    0xF00
+// Volatile status ailments
+// These are removed after exiting the battle or switching out
+#define STATUS2_CONFUSION             0x00000007
+#define STATUS2_FLINCHED              0x00000008
+#define STATUS2_UPROAR                0x00000070
+#define STATUS2_BIDE                  0x00000300  // two bits 0x100, 0x200
+#define STATUS2_LOCK_CONFUSE          0x00000C00
+#define STATUS2_MULTIPLETURNS         0x00001000
+#define STATUS2_WRAPPED               0x0000E000
+#define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every battler
+#define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
+#define STATUS2_FOCUS_ENERGY          0x00100000
+#define STATUS2_TRANSFORMED           0x00200000
+#define STATUS2_RECHARGE              0x00400000
+#define STATUS2_RAGE                  0x00800000
+#define STATUS2_SUBSTITUTE            0x01000000
+#define STATUS2_DESTINY_BOND          0x02000000
+#define STATUS2_ESCAPE_PREVENTION     0x04000000
+#define STATUS2_NIGHTMARE             0x08000000
+#define STATUS2_CURSED                0x10000000
+#define STATUS2_FORESIGHT             0x20000000
+#define STATUS2_DEFENSE_CURL          0x40000000
+#define STATUS2_TORMENT               0x80000000
 
-#define STATUS_PSN_ANY          ((STATUS_POISON | STATUS_TOXIC_POISON))
-#define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
-
-#define STATUS2_CONFUSION           0x00000007
-#define STATUS2_FLINCHED            0x00000008
-#define STATUS2_UPROAR              0x00000070
-#define STATUS2_BIDE                0x00000300  // two bits 0x100, 0x200
-#define STATUS2_LOCK_CONFUSE        0x00000C00
-#define STATUS2_MULTIPLETURNS       0x00001000
-#define STATUS2_WRAPPED             0x0000E000
-#define STATUS2_INFATUATION         0x000F0000  // 4 bits, one for every bank
-#define STATUS2_INFATUATED_WITH(bank)((gBitTable[bank] << 16))
-#define STATUS2_FOCUS_ENERGY        0x00100000
-#define STATUS2_TRANSFORMED         0x00200000
-#define STATUS2_RECHARGE            0x00400000
-#define STATUS2_RAGE                0x00800000
-#define STATUS2_SUBSTITUTE          0x01000000
-#define STATUS2_DESTINY_BOND        0x02000000
-#define STATUS2_ESCAPE_PREVENTION   0x04000000
-#define STATUS2_NIGHTMARE           0x08000000
-#define STATUS2_CURSED              0x10000000
-#define STATUS2_FORESIGHT           0x20000000
-#define STATUS2_DEFENSE_CURL        0x40000000
-#define STATUS2_TORMENT             0x80000000
-
+// Seems like per-battler statuses. Not quite sure how to categorize these
 #define STATUS3_LEECHSEED_BANK          0x3
 #define STATUS3_LEECHSEED               0x4
 #define STATUS3_ALWAYS_HITS             0x18    // two bits
@@ -141,8 +171,11 @@
 #define STATUS3_UNDERWATER              0x40000
 #define STATUS3_INTIMIDATE_POKES        0x80000
 #define STATUS3_TRACE                   0x100000
+#define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
-#define STATUS3_SEMI_INVULNERABLE       ((STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER))
+extern u32 gStatuses3[MAX_BATTLERS_COUNT];
+
+// Not really sure what a "hitmarker" is.
 
 #define HITMARKER_x10                   0x00000010
 #define HITMARKER_x20                   0x00000020
@@ -168,8 +201,12 @@
 #define HITMARKER_OBEYS                 0x02000000
 #define HITMARKER_x4000000              0x04000000
 #define HITMARKER_x8000000              0x08000000
-#define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
-#define HITMARKER_UNK(bank)             ((0x10000000 << bank))
+#define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 0x1C)
+#define HITMARKER_UNK(battler)          (0x10000000 << battler)
+
+extern u32 gHitMarker;
+
+// Per-side statuses that affect an entire party
 
 #define SIDE_STATUS_REFLECT          (1 << 0)
 #define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
@@ -180,49 +217,57 @@
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
-#define ACTION_USE_MOVE             0
-#define ACTION_USE_ITEM             1
-#define ACTION_SWITCH               2
-#define ACTION_RUN                  3
-#define ACTION_WATCHES_CAREFULLY    4
-#define ACTION_SAFARI_ZONE_BALL     5
-#define ACTION_POKEBLOCK_CASE       6
-#define ACTION_GO_NEAR              7
-#define ACTION_SAFARI_ZONE_RUN      8
-#define ACTION_9                    9
-#define ACTION_RUN_BATTLESCRIPT     10 // when executing an action
-#define ACTION_CANCEL_PARTNER       12 // when choosing an action
-#define ACTION_FINISHED             12 // when executing an action
-#define ACTION_NOTHING_FAINTED      13 // when choosing an action
-#define ACTION_INIT_VALUE           0xFF
+extern u16 gSideStatuses[2];
 
-#define MOVESTATUS_MISSED             (1 << 0)
-#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
-#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
-#define MOVESTATUS_NOTAFFECTED        (1 << 3)
-#define MOVESTATUS_ONEHITKO           (1 << 4)
-#define MOVESTATUS_FAILED             (1 << 5)
-#define MOVESTATUS_ENDURED            (1 << 6)
-#define MOVESTATUS_HUNGON             (1 << 7)
+// Battle Actions
+// These determine what each battler will do in a turn
+#define B_ACTION_USE_MOVE               0
+#define B_ACTION_USE_ITEM               1
+#define B_ACTION_SWITCH                 2
+#define B_ACTION_RUN                    3
+#define B_ACTION_SAFARI_WATCH_CAREFULLY 4
+#define B_ACTION_SAFARI_BALL            5
+#define B_ACTION_SAFARI_POKEBLOCK       6
+#define B_ACTION_SAFARI_GO_NEAR         7
+#define B_ACTION_SAFARI_RUN             8
+// The exact purposes of these are unclear
+#define B_ACTION_UNKNOWN9               9
+#define B_ACTION_EXEC_SCRIPT            10 // when executing an action
+#define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
+#define B_ACTION_FINISHED               12 // when executing an action
+#define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
+#define B_ACTION_NONE                   0xFF
 
-#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
+#define MOVE_RESULT_MISSED             (1 << 0)
+#define MOVE_RESULT_SUPER_EFFECTIVE    (1 << 1)
+#define MOVE_RESULT_NOT_VERY_EFFECTIVE (1 << 2)
+#define MOVE_RESULT_DOESNT_AFFECT_FOE  (1 << 3)
+#define MOVE_RESULT_ONE_HIT_KO         (1 << 4)
+#define MOVE_RESULT_FAILED             (1 << 5)
+#define MOVE_RESULT_FOE_ENDURED        (1 << 6)
+#define MOVE_RESULT_FOE_HUNG_ON        (1 << 7)
+#define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
 
+// Battle Weather flags
+
 #define WEATHER_RAIN_TEMPORARY      (1 << 0)
-#define WEATHER_RAIN_DOWNPOUR       (1 << 1)
+#define WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
 #define WEATHER_RAIN_PERMANENT      (1 << 2)
-#define WEATHER_RAIN_ANY ((WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT))
+#define WEATHER_RAIN_ANY            (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT)
 #define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
 #define WEATHER_SANDSTORM_PERMANENT (1 << 4)
-#define WEATHER_SANDSTORM_ANY ((WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT))
+#define WEATHER_SANDSTORM_ANY       (WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT)
 #define WEATHER_SUN_TEMPORARY       (1 << 5)
 #define WEATHER_SUN_PERMANENT       (1 << 6)
-#define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
+#define WEATHER_SUN_ANY             (WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT)
 #define WEATHER_HAIL                (1 << 7)
-#define WEATHER_HAIL_ANY ((WEATHER_HAIL))
-#define WEATHER_ANY ((WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY))
+#define WEATHER_HAIL_ANY            (WEATHER_HAIL)
+#define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
+
+extern u16 gBattleWeather;
 
 #define BATTLE_TERRAIN_GRASS        0
 #define BATTLE_TERRAIN_LONG_GRASS   1
@@ -234,6 +279,8 @@
 #define BATTLE_TERRAIN_CAVE         7
 #define BATTLE_TERRAIN_BUILDING     8
 #define BATTLE_TERRAIN_PLAIN        9
+
+extern u8 gBattleTerrain;
 
 // array entries for battle communication
 #define MULTIUSE_STATE          0x0
@@ -299,7 +346,7 @@ struct TrainerMonNoItemDefaultMoves
     u16 species;
 };
 
-u8 GetBankSide(u8 bank);
+u8 GetBattlerSide(u8 battler);
 
 struct TrainerMonItemDefaultMoves
 {
@@ -382,8 +429,8 @@ struct DisableStruct
     /*0x12*/ u8 chargeTimer2 : 4;
     /*0x13*/ u8 tauntTimer1:4;
     /*0x13*/ u8 tauntTimer2:4;
-    /*0x14*/ u8 bankPreventingEscape;
-    /*0x15*/ u8 bankWithSureHit;
+    /*0x14*/ u8 battlerPreventingEscape;
+    /*0x15*/ u8 battlerWithSureHit;
     /*0x16*/ u8 isFirstTurn;
     /*0x17*/ u8 unk17;
     /*0x18*/ u8 truantCounter : 1;
@@ -394,7 +441,7 @@ struct DisableStruct
     /*0x1A*/ u8 unk1A[2];
 };
 
-extern struct DisableStruct gDisableStructs[BATTLE_BANKS_COUNT];
+extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 
 struct ProtectStruct
 {
@@ -434,7 +481,7 @@ struct ProtectStruct
     /* field_E */ u16 fieldE;
 };
 
-extern struct ProtectStruct gProtectStructs[BATTLE_BANKS_COUNT];
+extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
 
 struct SpecialStatus
 {
@@ -456,7 +503,7 @@ struct SpecialStatus
     u8 field13;
 };
 
-extern struct SpecialStatus gSpecialStatuses[BATTLE_BANKS_COUNT];
+extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 
 struct SideTimer
 {
@@ -478,12 +525,12 @@ extern struct SideTimer gSideTimers[];
 
 struct WishFutureKnock
 {
-    u8 futureSightCounter[BATTLE_BANKS_COUNT];
-    u8 futureSightAttacker[BATTLE_BANKS_COUNT];
-    s32 futureSightDmg[BATTLE_BANKS_COUNT];
-    u16 futureSightMove[BATTLE_BANKS_COUNT];
-    u8 wishCounter[BATTLE_BANKS_COUNT];
-    u8 wishUserID[BATTLE_BANKS_COUNT];
+    u8 futureSightCounter[MAX_BATTLERS_COUNT];
+    u8 futureSightAttacker[MAX_BATTLERS_COUNT];
+    s32 futureSightDmg[MAX_BATTLERS_COUNT];
+    u16 futureSightMove[MAX_BATTLERS_COUNT];
+    u8 wishCounter[MAX_BATTLERS_COUNT];
+    u8 wishUserID[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
     u8 knockedOffPokes[2];
 };
@@ -506,16 +553,16 @@ struct AI_ThinkingStruct
 
 struct UsedMoves
 {
-    u16 moves[BATTLE_BANKS_COUNT];
-    u16 unknown[BATTLE_BANKS_COUNT];
+    u16 moves[MAX_BATTLERS_COUNT];
+    u16 unknown[MAX_BATTLERS_COUNT];
 };
 
 struct BattleHistory
 {
-    struct UsedMoves usedMoves[BATTLE_BANKS_COUNT];
-    u8 abilities[BATTLE_BANKS_COUNT];
-    u8 itemEffects[BATTLE_BANKS_COUNT];
-    u16 trainerItems[BATTLE_BANKS_COUNT];
+    struct UsedMoves usedMoves[MAX_BATTLERS_COUNT];
+    u8 abilities[MAX_BATTLERS_COUNT];
+    u8 itemEffects[MAX_BATTLERS_COUNT];
+    u16 trainerItems[MAX_BATTLERS_COUNT];
     u8 itemsNo;
 };
 
@@ -554,10 +601,6 @@ struct BattleResources
 };
 
 extern struct BattleResources* gBattleResources;
-
-#define BATTLESCRIPTS_STACK     (gBattleResources->battleScriptsStack)
-#define BATTLE_CALLBACKS_STACK  (gBattleResources->battleCallbackStack)
-#define BATTLE_LVLUP_STATS      (gBattleResources->statsBeforeLvlUp)
 
 struct BattleResults
 {
@@ -621,9 +664,9 @@ struct BattleStruct
     u16 expValue;
     u8 field_52;
     u8 sentInPokes;
-    bool8 selectionScriptFinished[BATTLE_BANKS_COUNT];
+    bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
     u8 field_58[4];
-    u8 monToSwitchIntoId[BATTLE_BANKS_COUNT];
+    u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 field_60[4][3];
     u8 runTries;
     u8 caughtMonNick[11];
@@ -635,8 +678,8 @@ struct BattleStruct
     u8 field_7D;
     u8 field_7E;
     u8 formToChangeInto;
-    u8 chosenMovePositions[BATTLE_BANKS_COUNT];
-    u8 stateIdAfterSelScript[BATTLE_BANKS_COUNT];
+    u8 chosenMovePositions[MAX_BATTLERS_COUNT];
+    u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 field_88;
     u8 field_89;
     u8 field_8A;
@@ -669,12 +712,12 @@ struct BattleStruct
     u8 synchronizeMoveEffect;
     u8 field_B3;
     void (*savedCallback)(void);
-    u16 usedHeldItems[BATTLE_BANKS_COUNT];
+    u16 usedHeldItems[MAX_BATTLERS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
     u8 AI_itemType[2];
     u8 AI_itemFlags[2];
-    u16 choicedMove[BATTLE_BANKS_COUNT];
-    u16 changedItems[BATTLE_BANKS_COUNT];
+    u16 choicedMove[MAX_BATTLERS_COUNT];
+    u16 changedItems[MAX_BATTLERS_COUNT];
     u8 intimidateBank;
     u8 switchInItemsCounter;
     u8 field_DA;
@@ -682,7 +725,7 @@ struct BattleStruct
     u8 fillerDC[0xDF-0xDC];
     u8 field_DF;
     u8 mirrorMoveArrays[32];
-    u16 castformPalette[BATTLE_BANKS_COUNT][16];
+    u16 castformPalette[MAX_BATTLERS_COUNT][16];
     u8 field_180;
     u8 field_181;
     u8 field_182;
@@ -695,7 +738,7 @@ struct BattleStruct
     u8 field_1A4[96];
     u8 field_204[104];
     u8 field_26C[40];
-    u8 AI_monToSwitchIntoId[BATTLE_BANKS_COUNT];
+    u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 field_298[8];
     u8 field_2A0;
     u8 field_2A1;
@@ -797,9 +840,9 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 atk49_state;
-    u8 bankWithAbility;
+    u8 battlerWithAbility;
     u8 multihitMoveEffect;
-    u8 bank;
+    u8 battler;
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
@@ -831,9 +874,9 @@ enum
 };
 
 // rom_80A5C6C
-u8 GetBankSide(u8 bank);
-u8 GetBankIdentity(u8 bank);
-u8 GetBankByIdentity(u8 bank);
+u8 GetBattlerSide(u8 bank);
+u8 GetBattlerPosition(u8 bank);
+u8 GetBattlerAtPosition(u8 bank);
 
 struct BattleSpriteInfo
 {
@@ -907,7 +950,7 @@ struct BattleBarInfo
 
 struct BattleSpriteData
 {
-    struct BattleSpriteInfo *bankData;
+    struct BattleSpriteInfo *battlerData;
     struct BattleHealthboxInfo *healthBoxesData;
     struct BattleAnimationInfo *animationData;
     struct BattleBarInfo *battleBars;

@@ -79,6 +79,7 @@ extern u16 gUnknown_082FECFC[];
 extern u16 gUnknown_082FF028[];
 extern struct WindowTemplate gUnknown_082FF080[];
 extern u8 gUnknown_082C897B[];
+extern u8 gText_ThisIsAPokemon[];
 
 u32 InitMainMenu(bool8);
 void Task_MainMenuCheckSaveFile(u8);
@@ -104,6 +105,8 @@ void task_new_game_prof_birch_speech_3(u8);
 void unknown_rbox_to_vram(u8, u8);
 void sub_8032318(u8);
 void task_new_game_prof_birch_speech_4(u8);
+void task_new_game_prof_birch_speech_5(u8);
+void sub_80323A0(struct TextPrinter*, u16);
 
 extern void LoadMainMenuWindowFrameTiles(u8, u16);
 extern bool8 sub_80093CC(void);
@@ -116,8 +119,10 @@ extern void CB2_InitOptionMenu(void);
 extern void c2_mystery_gift(void);
 extern void CB2_InitMysteryEventMenu(void);
 extern void sub_801867C(void);
-extern void c2_title_screen_1(void);
+extern void CB2_InitTitleScreen(void);
 extern void dp13_810BB8C(void);
+extern bool16 sub_8197224(void);
+extern void AddTextPrinterWithCallbackForMessage(u8, void(*callback)(struct TextPrinter*, u16));
 
 void CB2_MainMenu(void)
 {
@@ -689,7 +694,7 @@ void Task_HandleMainMenuBPressed(u8 taskId)
             RemoveScrollIndicatorArrowPair(gTasks[taskId].data[13]);
         gUnknown_02022D06 = 0;
         FreeAllWindowBuffers();
-        SetMainCallback2(c2_title_screen_1);
+        SetMainCallback2(CB2_InitTitleScreen);
         DestroyTask(taskId);
     }
 }
@@ -891,5 +896,16 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
             AddTextPrinterForMessage(1);
             gTasks[taskId].func = task_new_game_prof_birch_speech_4;
         }
+    }
+}
+
+void task_new_game_prof_birch_speech_4(u8 taskId)
+{
+    if (!gPaletteFade.active && !sub_8197224())
+    {
+        gTasks[taskId].func = task_new_game_prof_birch_speech_5;
+        StringExpandPlaceholders(gStringVar4, gText_ThisIsAPokemon);
+        AddTextPrinterWithCallbackForMessage(1, sub_80323A0);
+        gUnknown_03000DD0 = taskId;
     }
 }
