@@ -950,11 +950,11 @@ static const u16 sRarePickupItems[] =
 	ITEM_FULL_RESTORE,
 	ITEM_ETHER,
 	ITEM_WHITE_HERB,
-	ITEM_TM44,
+	ITEM_TM44_REST,
 	ITEM_ELIXIR,
-	ITEM_TM01,
+	ITEM_TM01_FOCUS_PUNCH,
 	ITEM_LEFTOVERS,
-	ITEM_TM26,
+	ITEM_TM26_EARTHQUAKE,
 };
 
 static const u8 sPickupProbabilities[] =
@@ -6724,7 +6724,7 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     subPrinter.letterSpacing = 0;
     subPrinter.lineSpacing = 0;
     subPrinter.fontColor_l = TEXT_COLOR_TRANSPARENT;
-    subPrinter.fontColor_h = TEXT_COLOR_WHITE;
+    subPrinter.fgColor = TEXT_COLOR_WHITE;
     subPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
     subPrinter.shadowColor = TEXT_COLOR_DARK_GREY;
 

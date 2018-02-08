@@ -17,7 +17,6 @@
 #include "bg.h"
 #include "window.h"
 #include "gpu_regs.h"
-#include "new_menu_helpers.h"
 
 struct ResetRtcStruct
 {

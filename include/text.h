@@ -75,6 +75,10 @@
 #define CHAR_NEWLINE        0xFE
 #define EOS                 0xFF // end of string
 
+#define EXT_CTRL_CODE_COLOR     0x1
+#define EXT_CTRL_CODE_HIGHLIGHT 0x2
+#define EXT_CTRL_CODE_SHADOW    0x3
+
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
 #define TEXT_COLOR_DARK_GREY    0x2
@@ -116,7 +120,7 @@ struct TextSubPrinter // TODO: Better name
     u8 letterSpacing;
     u8 lineSpacing;
     u8 fontColor_l:4;   // 0xC
-    u8 fontColor_h:4;
+    u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
 };
@@ -149,7 +153,7 @@ struct FontInfo
     u8 letterSpacing;
     u8 lineSpacing;
     u8 fontColor_l:4;
-    u8 fontColor_h:4;
+    u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
 };
@@ -177,20 +181,6 @@ typedef struct {
 } TextFlags;
 
 extern TextFlags gTextFlags;
-
-struct __attribute__((packed)) TextColor
-{
-    u8 fgColor;
-    u8 bgColor;
-    u8 shadowColor;
-};
-
-struct AlignedTextColor // because sometimes it's necessary
-{
-    u8 fgColor;
-    u8 bgColor;
-    u8 shadowColor;
-};
 
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];

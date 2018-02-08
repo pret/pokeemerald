@@ -1,7 +1,6 @@
 	.include "asm/macros.inc"
 	.include "constants/gba_constants.inc"
 	.include "constants/misc_constants.inc"
-	.include "constants/species_constants.inc"
 
 	.syntax unified
 
@@ -2400,7 +2399,7 @@ _08078726:
 	bne _08078766
 	adds r0, r4, 0
 	movs r1, 0x2
-	ldr r2, =gSpeciesNames + SPECIES_SHEDINJA * POKEMON_NAME_LENGTH
+	ldr r2, =gSpeciesNames + 303 * POKEMON_NAME_LENGTH @ SPECIES_SHEDINJA
 	bl SetMonData
 _08078766:
 	adds r4, 0x64

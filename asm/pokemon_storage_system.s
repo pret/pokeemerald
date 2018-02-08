@@ -211,7 +211,7 @@ _080C72AC:
 	bl sub_81973A4
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -627,7 +627,7 @@ sub_80C75FC: @ 80C75FC
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	adds r0, r4, 0
 	movs r1, 0x5
 	mov r2, r8

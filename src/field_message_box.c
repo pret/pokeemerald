@@ -1,9 +1,10 @@
 #include "global.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "string.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "battle_frontier_1.h"
 
 EWRAM_DATA u8 gUnknown_020375BC = 0;
 
@@ -30,7 +31,7 @@ void sub_8098154(u8 taskId)
            task->data[0]++;
            break;
         case 1:
-           sub_81973C4(0, 1);
+           NewMenuHelpers_DrawDialogueFrame(0, 1);
            task->data[0]++;
            break;
         case 2:
@@ -143,7 +144,7 @@ bool8 IsFieldMessageBoxHidden(void)
 void sub_8098358(void)
 {
     task_del_textbox();
-    sub_81973FC(0, 1);
+    NewMenuHelpers_DrawStdWindowFrame(0, 1);
     gUnknown_020375BC = 0;
 }
 

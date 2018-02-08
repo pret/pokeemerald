@@ -17,7 +17,6 @@
 #include "window.h"
 #include "gpu_regs.h"
 #include "text_window.h"
-#include "new_menu_helpers.h"
 #include "decompress.h"
 
 // this file's functions
@@ -291,13 +290,13 @@ static void CB2_MysteryEventMenu(void)
 
 static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed)
 {
-    struct TextColor textColor;
+    u8 textColor[3];
     u8 letterSpacing = 0;
     u8 lineSpacing = 1;
-    textColor.fgColor = 1;
-    textColor.bgColor = 2;
-    textColor.shadowColor = 3;
+    textColor[0] = 1;
+    textColor[1] = 2;
+    textColor[2] = 3;
 
-    FillWindowPixelBuffer(windowId, (textColor.fgColor) | (textColor.fgColor << 4));
-    AddTextPrinterParameterized2(windowId, 1, x, y, letterSpacing, lineSpacing, &textColor, speed, text);
+    FillWindowPixelBuffer(windowId, (textColor[0]) | (textColor[0] << 4));
+    AddTextPrinterParameterized2(windowId, 1, x, y, letterSpacing, lineSpacing, textColor, speed, text);
 }

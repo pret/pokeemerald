@@ -43,7 +43,7 @@ extern u16 ItemIdToBattleMoveId(u16);
 extern s32 ListMenuHandleInputGetItemId(u8);
 extern void sub_81AE6C8(u8, u16*, u16*);
 extern void sub_819746C(u8, bool8);
-extern void sub_81973FC(u8, bool8);
+extern void NewMenuHelpers_DrawStdWindowFrame(u8, bool8);
 extern void sub_81B9328(void);
 extern void sub_81AF078(u32, bool8, struct ListMenu *);
 extern void c2_exit_to_overworld_2_switch(void);
@@ -413,7 +413,7 @@ static u16 GetEggSpecies(u16 species)
         {
             for (k = 0; k < EVOS_PER_MON; k++)
             {
-                if (gEvolutionTable[j].evolutions[k].targetSpecies == species)
+                if (gEvolutionTable[j][k].targetSpecies == species)
                 {
                     species = j;
                     found = TRUE;
@@ -694,7 +694,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         {
             for (j = 0; j < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; j++)
             {
-                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01 + j) && CanMonLearnTMHM(egg, j))
+                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
                 {
                     if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xffff)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
@@ -1212,7 +1212,7 @@ static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
     gTextFlags.flag_1 = 0;
     printer.letterSpacing = 0;
     printer.lineSpacing = 1;
-    printer.fontColor_h = 2;
+    printer.fgColor = 2;
     printer.bgColor = 1;
     printer.shadowColor = 3;
 
@@ -1296,7 +1296,7 @@ void ShowDaycareLevelMenu(void)
     u8 daycareMenuTaskId;
 
     windowId = AddWindow(&sDaycareLevelMenuWindowTemplate);
-    sub_81973FC(windowId, FALSE);
+    NewMenuHelpers_DrawStdWindowFrame(windowId, FALSE);
 
     menuTemplate = sDaycareListMenuLevelTemplate;
     menuTemplate.unk_10 = windowId;

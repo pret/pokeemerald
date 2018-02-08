@@ -17,7 +17,7 @@
 #include "strings.h"
 #include "window.h"
 #include "text_window.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 
 struct BattleBackground
 {

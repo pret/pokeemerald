@@ -16,7 +16,6 @@
 #include "event_data.h"
 #include "strings.h"
 #include "string_util.h"
-#include "new_menu_helpers.h"
 #include "party_menu.h"
 #include "m4a.h"
 #include "sound.h"
