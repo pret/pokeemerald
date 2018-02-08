@@ -4,14 +4,15 @@
 #include "bg.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_indicators.h"
-#include "new_menu_helpers.h"
 #include "palette.h"
+#include "pokeball.h"
 #include "rtc.h"
 #include "save.h"
 #include "scanline_effect.h"
@@ -60,7 +61,7 @@ extern u8 gJPText_No1MSubCircuit[];
 extern u16 gUnknown_02022D06;
 extern struct WindowTemplate gUnknown_082FF070[];
 extern u8 gText_BatteryRunDry[];
-extern struct TextColor gUnknown_082FF0E0;
+extern u8 gUnknown_082FF0E0[];
 extern u8 gText_MainMenuNewGame[];
 extern struct WindowTemplate gUnknown_082FF048[];
 extern struct ArrowStruct gUnknown_082FF0F4;
@@ -80,6 +81,9 @@ extern u16 gUnknown_082FF028[];
 extern struct WindowTemplate gUnknown_082FF080[];
 extern u8 gUnknown_082C897B[];
 extern u8 gText_ThisIsAPokemon[];
+extern u8 gUnknown_082C8A1F[];
+extern u8 gUnknown_02022D04;
+extern u8 gUnknown_082C8BD0[];
 
 u32 InitMainMenu(bool8);
 void Task_MainMenuCheckSaveFile(u8);
@@ -107,6 +111,15 @@ void sub_8032318(u8);
 void task_new_game_prof_birch_speech_4(u8);
 void task_new_game_prof_birch_speech_5(u8);
 void sub_80323A0(struct TextPrinter*, u16);
+void task_new_game_prof_birch_speech_6(u8);
+void sub_8030B14(u8);
+void task_new_game_prof_birch_speech_7(u8);
+void sub_8031ACC(u8, u8);
+void sub_8031C88(u8, u8);
+void task_new_game_prof_birch_speech_8(u8);
+void task_new_game_prof_birch_speech_9(u8);
+void task_new_game_prof_birch_speech_10(u8);
+void task_new_game_prof_birch_speech_11(u8);
 
 extern void LoadMainMenuWindowFrameTiles(u8, u16);
 extern bool8 sub_80093CC(void);
@@ -367,8 +380,8 @@ void Task_DisplayMainMenu(u8 taskId)
             default:
                 FillWindowPixelBuffer(0, 0xAA);
                 FillWindowPixelBuffer(1, 0xAA);
-                box_print(0, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuNewGame);
-                box_print(1, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuOption);
+                box_print(0, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuNewGame);
+                box_print(1, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuOption);
                 PutWindowTilemap(0);
                 PutWindowTilemap(1);
                 CopyWindowToVram(0, 2);
@@ -380,9 +393,9 @@ void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(2, 0xAA);
                 FillWindowPixelBuffer(3, 0xAA);
                 FillWindowPixelBuffer(4, 0xAA);
-                box_print(2, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuContinue);
-                box_print(3, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuNewGame);
-                box_print(4, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuOption);
+                box_print(2, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuContinue);
+                box_print(3, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuNewGame);
+                box_print(4, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuOption);
                 fmt_savegame();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -399,10 +412,10 @@ void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(3, 0xAA);
                 FillWindowPixelBuffer(4, 0xAA);
                 FillWindowPixelBuffer(5, 0xAA);
-                box_print(2, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuContinue);
-                box_print(3, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuNewGame);
-                box_print(4, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuMysteryGift);
-                box_print(5, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuOption);
+                box_print(2, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuContinue);
+                box_print(3, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuNewGame);
+                box_print(4, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuMysteryGift);
+                box_print(5, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuOption);
                 fmt_savegame();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -423,11 +436,11 @@ void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(4, 0xAA);
                 FillWindowPixelBuffer(5, 0xAA);
                 FillWindowPixelBuffer(6, 0xAA);
-                box_print(2, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuContinue);
-                box_print(3, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuNewGame);
-                box_print(4, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuMysteryGift2);
-                box_print(5, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuMysteryEvents);
-                box_print(6, 1, 0, 1, &gUnknown_082FF0E0, -1, gText_MainMenuOption);
+                box_print(2, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuContinue);
+                box_print(3, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuNewGame);
+                box_print(4, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuMysteryGift2);
+                box_print(5, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuMysteryEvents);
+                box_print(6, 1, 0, 1, gUnknown_082FF0E0, -1, gText_MainMenuOption);
                 fmt_savegame();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -907,5 +920,132 @@ void task_new_game_prof_birch_speech_4(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gText_ThisIsAPokemon);
         AddTextPrinterWithCallbackForMessage(1, sub_80323A0);
         gUnknown_03000DD0 = taskId;
+    }
+}
+
+void task_new_game_prof_birch_speech_5(u8 taskId)
+{
+    if (!sub_8197224())
+    {
+        StringExpandPlaceholders(gStringVar4, gUnknown_082C8A1F);
+        AddTextPrinterForMessage(1);
+        gTasks[taskId].func = task_new_game_prof_birch_speech_6;
+    }
+}
+
+void sub_8030A70(u8 taskId)
+{
+    u8 spriteId = gTasks[gUnknown_03000DD0].data[9];
+    
+    gSprites[spriteId].pos1.x = 0x64;
+    gSprites[spriteId].pos1.y = 0x4B;
+    gSprites[spriteId].invisible = 0;
+    gSprites[spriteId].data[0] = 0;
+    
+    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 0x70, 0x3A, 0, 0, 0x20, 0xFFFF, SPECIES_LOTAD);
+    gTasks[taskId].func = sub_8030B14;
+    gTasks[gUnknown_03000DD0].data[7] = 0;
+}
+
+void sub_8030B14(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    struct Sprite *sprite = &gSprites[gTasks[gUnknown_03000DD0].data[9]];
+
+    switch (data[0])
+    {
+        case 0:
+            if (sprite->callback == SpriteCallbackDummy)
+            {
+                sprite->oam.affineMode = 0;
+                goto _08030B98_inc_data0;
+            }
+            break;
+        case 1:
+            if (gTasks[gUnknown_03000DD0].data[7] >= 0x60)
+            {
+                DestroyTask(taskId);
+                if (gTasks[gUnknown_03000DD0].data[7] < 0x4000)
+                    gTasks[gUnknown_03000DD0].data[7]++;
+            }
+            break;
+        _08030B98_inc_data0:
+        default:
+            data[0]++;
+            if (gTasks[gUnknown_03000DD0].data[7] < 0x4000)
+                gTasks[gUnknown_03000DD0].data[7]++;
+            break;
+    }
+}
+
+void task_new_game_prof_birch_speech_6(u8 taskId)
+{
+    if (!sub_8197224())
+    {
+        gUnknown_02022D04 = 0;
+        StringExpandPlaceholders(gStringVar4, gUnknown_082C8BD0);
+        AddTextPrinterForMessage(1);
+        gTasks[taskId].func = task_new_game_prof_birch_speech_7;
+    }
+}
+
+void task_new_game_prof_birch_speech_7(u8 taskId)
+{
+    if (!sub_8197224())
+    {
+        gSprites[gTasks[taskId].data[8]].oam.objMode = 1;
+        gSprites[gTasks[taskId].data[9]].oam.objMode = 1;
+        sub_8031ACC(taskId, 2);
+        sub_8031C88(taskId, 1);
+        gTasks[taskId].data[7] = 0x40;
+        gTasks[taskId].func = task_new_game_prof_birch_speech_8;
+    }
+}
+
+void task_new_game_prof_birch_speech_8(u8 taskId)
+{
+    if (gTasks[taskId].data[4] != -60)
+    {
+        gTasks[taskId].data[4] -= 2;
+        SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].data[4]);
+    }
+    else
+    {
+        gTasks[taskId].data[4] = -60;
+        gTasks[taskId].func = task_new_game_prof_birch_speech_9;
+    }
+}
+
+void task_new_game_prof_birch_speech_9(u8 taskId)
+{
+    if (gTasks[taskId].data[5])
+    {
+        gSprites[gTasks[taskId].data[8]].invisible = 1;
+        gSprites[gTasks[taskId].data[9]].invisible = 1;
+        if (gTasks[taskId].data[7])
+            gTasks[taskId].data[7]--;
+        else
+        {
+            u8 spriteId = gTasks[taskId].data[10];
+            
+            gSprites[spriteId].pos1.x = 0xB4;
+            gSprites[spriteId].pos1.y = 0x3C;
+            gSprites[spriteId].invisible = 0;
+            gSprites[spriteId].oam.objMode = 1;
+            gTasks[taskId].data[2] = spriteId;
+            gTasks[taskId].data[6] = 0;
+            sub_8031BAC(taskId, 2);
+            sub_8031D34(taskId, 1);
+            gTasks[taskId].func = task_new_game_prof_birch_speech_10;
+        }
+    }
+}
+
+void task_new_game_prof_birch_speech_10(u8 taskId)
+{
+    if (gTasks[taskId].data[5])
+    {
+        gSprites[gTasks[taskId].data[2]].oam.objMode = 0;
+        gTasks[taskId].func = task_new_game_prof_birch_speech_11;
     }
 }
