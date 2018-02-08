@@ -1421,7 +1421,7 @@ void BufferStringBattle(u16 stringID)
     gBattleScripting.battler = gStringInfo->scrActive;
     *(&gBattleStruct->field_52) = gStringInfo->unk1605E;
     *(&gBattleStruct->hpScale) = gStringInfo->hpScale;
-    gStringBattler = gStringInfo->StringBank;
+    gPotentialItemEffectBattler = gStringInfo->StringBank;
     *(&gBattleStruct->stringMoveType) = gStringInfo->moveType;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
@@ -1915,10 +1915,10 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                     {
                         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
                         {
-                            if ((gBattleScripting.multiplayerId != 0 && (gStringBattler & BIT_SIDE))
-                                || (gBattleScripting.multiplayerId == 0 && !(gStringBattler & BIT_SIDE)))
+                            if ((gBattleScripting.multiplayerId != 0 && (gPotentialItemEffectBattler & BIT_SIDE))
+                                || (gBattleScripting.multiplayerId == 0 && !(gPotentialItemEffectBattler & BIT_SIDE)))
                             {
-                                StringCopy(text, gEnigmaBerries[gStringBattler].name);
+                                StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
                                 StringAppend(text, gText_BerrySuffix);
                                 toCpy = text;
                             }
@@ -1929,9 +1929,9 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                         }
                         else
                         {
-                            if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gStringBattler)
+                            if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gPotentialItemEffectBattler)
                             {
-                                StringCopy(text, gEnigmaBerries[gStringBattler].name);
+                                StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
                                 StringAppend(text, gText_BerrySuffix);
                                 toCpy = text;
                             }
@@ -2298,9 +2298,9 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
                 if (hword == ITEM_ENIGMA_BERRY)
                 {
-                    if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gStringBattler)
+                    if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gPotentialItemEffectBattler)
                     {
-                        StringCopy(dst, gEnigmaBerries[gStringBattler].name);
+                        StringCopy(dst, gEnigmaBerries[gPotentialItemEffectBattler].name);
                         StringAppend(dst, gText_BerrySuffix);
                     }
                     else

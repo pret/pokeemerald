@@ -1102,7 +1102,7 @@ void BtlController_EmitPrintString(u8 bufferId, u16 stringID)
     stringInfo->scrActive = gBattleScripting.battler;
     stringInfo->unk1605E = gBattleStruct->field_52;
     stringInfo->hpScale = gBattleStruct->hpScale;
-    stringInfo->StringBank = gStringBattler;
+    stringInfo->StringBank = gPotentialItemEffectBattler;
     stringInfo->moveType = gBattleMoves[gCurrentMove].type;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)

@@ -232,7 +232,7 @@ EWRAM_DATA u8 gBattlerAttacker = 0;
 EWRAM_DATA u8 gBattlerTarget = 0;
 EWRAM_DATA u8 gBattlerFainted = 0;
 EWRAM_DATA u8 gEffectBattler = 0;
-EWRAM_DATA u8 gStringBattler = 0;
+EWRAM_DATA u8 gPotentialItemEffectBattler = 0;
 EWRAM_DATA u8 gAbsentBattlerFlags = 0;
 EWRAM_DATA u8 gCritMultiplier = 0;
 EWRAM_DATA u8 gMultiHitCounter = 0;
@@ -3815,7 +3815,7 @@ u8 IsRunningFromBattleImpossible(void)
     else
         holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item);
 
-    gStringBattler = gActiveBattler;
+    gPotentialItemEffectBattler = gActiveBattler;
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
         return 0;
@@ -4417,8 +4417,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     }
 
     speedBattler1 = (gBattleMons[battler1].speed * speedMultiplierBattler1)
-                * (gStatStageRatios[gBattleMons[battler1].statStages[STAT_STAGE_SPEED]][0])
-                / (gStatStageRatios[gBattleMons[battler1].statStages[STAT_STAGE_SPEED]][1]);
+                * (gStatStageRatios[gBattleMons[battler1].statStages[STAT_SPEED]][0])
+                / (gStatStageRatios[gBattleMons[battler1].statStages[STAT_SPEED]][1]);
 
     if (gBattleMons[battler1].item == ITEM_ENIGMA_BERRY)
     {
@@ -4451,8 +4451,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     // check second battlerId's speed
 
     speedBattler2 = (gBattleMons[battler2].speed * speedMultiplierBattler2)
-                * (gStatStageRatios[gBattleMons[battler2].statStages[STAT_STAGE_SPEED]][0])
-                / (gStatStageRatios[gBattleMons[battler2].statStages[STAT_STAGE_SPEED]][1]);
+                * (gStatStageRatios[gBattleMons[battler2].statStages[STAT_SPEED]][0])
+                / (gStatStageRatios[gBattleMons[battler2].statStages[STAT_SPEED]][1]);
 
     if (gBattleMons[battler2].item == ITEM_ENIGMA_BERRY)
     {
@@ -5380,7 +5380,7 @@ bool8 TryRunFromBattle(u8 battler)
     else
         holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
 
-    gStringBattler = battler;
+    gPotentialItemEffectBattler = battler;
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
     {

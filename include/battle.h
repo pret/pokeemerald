@@ -673,7 +673,7 @@ extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
 extern u8 gBattlerFainted;
 extern u8 gEffectBattler;
-extern u8 gStringBattler;
+extern u8 gPotentialItemEffectBattler;
 extern u8 gAbsentBattlerFlags;
 extern u8 gCritMultiplier;
 extern u8 gMultiHitCounter;

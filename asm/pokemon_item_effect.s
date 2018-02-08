@@ -100,7 +100,7 @@ _0806BDBC:
 	lsrs r0, 24
 _0806BDC4:
 	str r0, [sp, 0x34]
-	ldr r1, =gStringBattler
+	ldr r1, =gPotentialItemEffectBattler
 	ldr r0, =gBattlerInMenuId
 	ldrb r2, [r0]
 	strb r2, [r1]

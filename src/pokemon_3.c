@@ -29,7 +29,7 @@ extern u8 gActiveBattler;
 extern u8 gBattlerInMenuId;
 extern u8 gBattlerTarget;
 extern u8 gBattlerAttacker;
-extern u8 gStringBattler;
+extern u8 gPotentialItemEffectBattler;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
 extern u8 gBattleMonForms[4];
@@ -233,7 +233,7 @@ u8 *sub_806CF78(u16 itemId)
         itemEffect = gItemEffectTable[itemId - 13];
     }
 
-    gStringBattler = gBattlerInMenuId;
+    gPotentialItemEffectBattler = gBattlerInMenuId;
 
     for (i = 0; i < 3; i++)
     {
