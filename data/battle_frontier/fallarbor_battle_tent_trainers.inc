@@ -1,7 +1,7 @@
 	.align 2
 gFallarborBattleTentTrainers:: @ 85DF084
 @ 0
-	.4byte TRAINER_CLASS_AROMA_LADY
+	.4byte FACILITY_CLASS_AROMA_LADY
 	.string "AMBER$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I
@@ -27,7 +27,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Amber
 
 @ 1
-	.4byte TRAINER_CLASS_RUIN_MANIAC
+	.4byte FACILITY_CLASS_RUIN_MANIAC
 	.string "JAVIER$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I
@@ -53,7 +53,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Javier
 
 @ 2
-	.4byte TRAINER_CLASS_TUBER_1
+	.4byte FACILITY_CLASS_TUBER_1
 	.string "NATALIE$", 8
 @ pre-battle speech
 	.2byte EC_WORD_THE
@@ -79,7 +79,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Natalie
 
 @ 3
-	.4byte TRAINER_CLASS_TUBER_2
+	.4byte FACILITY_CLASS_TUBER_2
 	.string "TREVE$", 8
 @ pre-battle speech
 	.2byte EC_WORD_LOOK
@@ -105,7 +105,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Treve
 
 @ 4
-	.4byte TRAINER_CLASS_LADY
+	.4byte FACILITY_CLASS_LADY
 	.string "ARIANNA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_IF_I_WIN
@@ -131,7 +131,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Arianna
 
 @ 5
-	.4byte TRAINER_CLASS_BEAUTY
+	.4byte FACILITY_CLASS_BEAUTY
 	.string "JADYN$", 8
 @ pre-battle speech
 	.2byte EC_WORD_MY
@@ -157,7 +157,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Jadyn
 
 @ 6
-	.4byte TRAINER_CLASS_RICH_BOY
+	.4byte FACILITY_CLASS_RICH_BOY
 	.string "GERARDO$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I_AM
@@ -183,7 +183,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Gerardo
 
 @ 7
-	.4byte TRAINER_CLASS_POKEMANIAC
+	.4byte FACILITY_CLASS_POKEMANIAC
 	.string "JONN$", 8
 @ pre-battle speech
 	.2byte EC_WORD_THE
@@ -209,7 +209,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Jonn
 
 @ 8
-	.4byte TRAINER_CLASS_SWIMMER_M
+	.4byte FACILITY_CLASS_SWIMMER_M
 	.string "ESTEBAN$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YOU_RE
@@ -235,7 +235,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Esteban
 
 @ 9
-	.4byte TRAINER_CLASS_CAMPER
+	.4byte FACILITY_CLASS_CAMPER
 	.string "JAMESON$", 8
 @ pre-battle speech
 	.2byte EC_WORD_MY
@@ -261,7 +261,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Jameson
 
 @ 10
-	.4byte TRAINER_CLASS_BUG_MANIAC
+	.4byte FACILITY_CLASS_BUG_MANIAC
 	.string "ALANZO$", 8
 @ pre-battle speech
 	.2byte EC_MOVE2(FORESIGHT)
@@ -287,7 +287,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Alanzo
 
 @ 11
-	.4byte TRAINER_CLASS_GENTLEMAN
+	.4byte FACILITY_CLASS_GENTLEMAN
 	.string "HOWARD$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YOUR
@@ -313,7 +313,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Howard
 
 @ 12
-	.4byte TRAINER_CLASS_GUITARIST
+	.4byte FACILITY_CLASS_GUITARIST
 	.string "CONRAD$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YOUR
@@ -339,7 +339,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Conrad
 
 @ 13
-	.4byte TRAINER_CLASS_SCHOOL_KID_2
+	.4byte FACILITY_CLASS_SCHOOL_KID_2
 	.string "MAKENNA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_SHOW
@@ -365,7 +365,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Makenna
 
 @ 14
-	.4byte TRAINER_CLASS_COOLTRAINER_1
+	.4byte FACILITY_CLASS_COOLTRAINER_1
 	.string "BRAYAN$", 8
 @ pre-battle speech
 	.2byte EC_WORD_CAN
@@ -391,7 +391,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Brayan
 
 @ 15
-	.4byte TRAINER_CLASS_COOLTRAINER_2
+	.4byte FACILITY_CLASS_COOLTRAINER_2
 	.string "MARIANA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_A
@@ -417,7 +417,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Mariana
 
 @ 16
-	.4byte TRAINER_CLASS_POKEFAN_1
+	.4byte FACILITY_CLASS_POKEFAN_1
 	.string "SHELDON$", 8
 @ pre-battle speech
 	.2byte EC_WORD_A
@@ -443,7 +443,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Sheldon
 
 @ 17
-	.4byte TRAINER_CLASS_POKEFAN_2
+	.4byte FACILITY_CLASS_POKEFAN_2
 	.string "GIANNA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_AHAHA
@@ -469,7 +469,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Gianna
 
 @ 18
-	.4byte TRAINER_CLASS_EXPERT_1
+	.4byte FACILITY_CLASS_EXPERT_1
 	.string "YAHIR$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YOU
@@ -495,7 +495,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Yahir
 
 @ 19
-	.4byte TRAINER_CLASS_EXPERT_2
+	.4byte FACILITY_CLASS_EXPERT_2
 	.string "BRITNEY$", 8
 @ pre-battle speech
 	.2byte EC_WORD_IT
@@ -521,7 +521,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Britney
 
 @ 20
-	.4byte TRAINER_CLASS_YOUNGSTER
+	.4byte FACILITY_CLASS_YOUNGSTER
 	.string "HECTER$", 8
 @ pre-battle speech
 	.2byte EC_WORD_MY
@@ -547,7 +547,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Hecter
 
 @ 21
-	.4byte TRAINER_CLASS_FISHERMAN
+	.4byte FACILITY_CLASS_FISHERMAN
 	.string "TANNOR$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YOU
@@ -573,7 +573,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Tannor
 
 @ 22
-	.4byte TRAINER_CLASS_BIRD_KEEPER
+	.4byte FACILITY_CLASS_BIRD_KEEPER
 	.string "BENJI$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YOU
@@ -599,7 +599,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Benji
 
 @ 23
-	.4byte TRAINER_CLASS_NINJA_BOY
+	.4byte FACILITY_CLASS_NINJA_BOY
 	.string "RORY$", 8
 @ pre-battle speech
 	.2byte EC_WORD_DON_T
@@ -625,7 +625,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Rory
 
 @ 24
-	.4byte TRAINER_CLASS_PARASOL_LADY
+	.4byte FACILITY_CLASS_PARASOL_LADY
 	.string "ELEANOR$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I
@@ -651,7 +651,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Eleanor
 
 @ 25
-	.4byte TRAINER_CLASS_SWIMMER_F
+	.4byte FACILITY_CLASS_SWIMMER_F
 	.string "EVELYN$", 8
 @ pre-battle speech
 	.2byte EC_WORD_MY
@@ -677,7 +677,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Evelyn
 
 @ 26
-	.4byte TRAINER_CLASS_PICNICKER
+	.4byte FACILITY_CLASS_PICNICKER
 	.string "ARIELLE$", 8
 @ pre-battle speech
 	.2byte EC_WORD_IT_S
@@ -703,7 +703,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Arielle
 
 @ 27
-	.4byte TRAINER_CLASS_SAILOR
+	.4byte FACILITY_CLASS_SAILOR
 	.string "CONNAR$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I_AM
@@ -729,7 +729,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Connar
 
 @ 28
-	.4byte TRAINER_CLASS_COLLECTOR
+	.4byte FACILITY_CLASS_COLLECTOR
 	.string "MAURICE$", 8
 @ pre-battle speech
 	.2byte EC_WORD_THERE
@@ -755,7 +755,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Maurice
 
 @ 29
-	.4byte TRAINER_CLASS_LASS
+	.4byte FACILITY_CLASS_LASS
 	.string "KIANNA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I

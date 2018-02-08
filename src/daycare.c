@@ -413,7 +413,7 @@ static u16 GetEggSpecies(u16 species)
         {
             for (k = 0; k < EVOS_PER_MON; k++)
             {
-                if (gEvolutionTable[j].evolutions[k].targetSpecies == species)
+                if (gEvolutionTable[j][k].targetSpecies == species)
                 {
                     species = j;
                     found = TRUE;
@@ -694,7 +694,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         {
             for (j = 0; j < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; j++)
             {
-                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01 + j) && CanMonLearnTMHM(egg, j))
+                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
                 {
                     if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xffff)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);

@@ -2,6 +2,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/species.h"
+#include "constants/trainers.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
