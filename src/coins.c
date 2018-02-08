@@ -4,7 +4,6 @@
 #include "window.h"
 #include "strings.h"
 #include "string_util.h"
-#include "new_menu_helpers.h"
 #include "menu.h"
 #include "international_string_util.h"
 

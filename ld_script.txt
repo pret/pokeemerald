@@ -247,8 +247,7 @@ SECTIONS {
         src/battle_dome_cards.o(.text);
         src/lilycove_lady.o(.text);
         asm/battle_frontier_1.o(.text);
-        asm/new_menu_helpers.o(.text);
-        asm/menu.o(.text);
+        src/menu.o(.text);
         asm/battle_frontier_2.o(.text);
         asm/item_menu.o(.text);
         asm/list_menu.o(.text);
@@ -519,7 +518,7 @@ SECTIONS {
         src/battle_dome_cards.o(.rodata);
         src/lilycove_lady.o(.rodata);
         data/battle_frontier_1.o(.rodata);
-        data/new_menu_helpers.o(.rodata);
+        src/menu.o(.rodata);
         data/battle_frontier_2.o(.rodata);
         data/item_menu.o(.rodata);
         data/menu_indicators.o(.rodata);

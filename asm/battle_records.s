@@ -667,7 +667,7 @@ sub_813C4BC: @ 813C4BC
 	strb r0, [r6]
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r6]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

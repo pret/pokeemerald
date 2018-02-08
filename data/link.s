@@ -2004,14 +2004,14 @@ gUnknown_082F06F8:: @ 82F06F8
 	.4byte gText_ReturnToTitle
 
 	.align 2
-gUnknown_082F0720:: @ 82F0720 struct TextColor
+gUnknown_082F0720:: @ 82F0720
 	.byte 0x00, 0x01, 0x02
 	
 	.align 2
 	.byte 0x00, 0x01, 0x02
 
 	.align 2
-gUnknown_082F0728:: @ 82F0728 struct TextColor
+gUnknown_082F0728:: @ 82F0728
 	.byte 0x01, 0x02, 0x03
 
 	.align 2
