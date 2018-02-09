@@ -1,7 +1,7 @@
-    .include "asm/macros.inc"
+#include "constants/species.h"
+#include "constants/moves.h"
+	.include "asm/macros.inc"
     .include "constants/constants.inc"
-	.include "constants/species_constants.inc"
-	.include "include/constants/moves.h"
 
     .section .rodata
     .align 2, 0

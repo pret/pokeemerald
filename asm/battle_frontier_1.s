@@ -7171,7 +7171,7 @@ _0819270A:
 	ldr r4, [sp, 0x24]
 	cmp r4, r0
 	bne _08192784
-	ldr r0, =gTrainerClassToNameIndex
+	ldr r0, =gFacilityClassToTrainerClass
 	adds r0, 0x3C
 	ldrb r5, [r0]
 	b _081927A2
@@ -12991,7 +12991,7 @@ sub_8195938: @ 8195938
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
-	ldr r4, =gTrainers + TRAINER_TUCKER * 0x28 + 0x4 @ Tucker's name
+	ldr r4, =(gTrainers + 806 * 0x28 + 0x4) @ TRAINER_TUCKER name
 _08195940:
 	adds r0, r3, r2
 	adds r1, r2, r4

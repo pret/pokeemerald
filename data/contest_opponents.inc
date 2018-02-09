@@ -879,7 +879,7 @@
 	.4byte 0x0
 	.4byte 0x0
 	.4byte 0xffff
-	.2byte SPECIES_FARFETCH_D
+	.2byte SPECIES_FARFETCHD
 	.string "FETCHIN$   "
 	.string "RAUL$   "
 	.byte 66

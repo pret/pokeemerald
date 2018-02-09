@@ -827,7 +827,7 @@ _08068BE0:
 	ldrb r0, [r1, 0x13]
 	lsls r0, 3
 	orrs r2, r0
-	ldr r1, =gTrainerClassToNameIndex
+	ldr r1, =gFacilityClassToTrainerClass
 	ldr r0, =gUnknown_08329D54
 	lsls r2, 1
 	adds r2, r0

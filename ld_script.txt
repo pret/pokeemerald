@@ -384,6 +384,8 @@ SECTIONS {
         src/battle_controller_opponent.o(.rodata);
         src/battle_controller_link_opponent.o(.rodata);
         data/data2c.o(.rodata);
+        src/pokemon_1.o(.rodata);
+        data/data2e.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
         src/daycare.o(.rodata);
@@ -423,7 +425,7 @@ SECTIONS {
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         src/trainer_see.o(.rodata);
-        data/wild_encounter.o(.rodata);
+        src/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         src/option_menu.o(.rodata);
         src/pokedex.o(.rodata);

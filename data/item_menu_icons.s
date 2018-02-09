@@ -1,4 +1,4 @@
-	#include "constants/items.h"
+#include "constants/items.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
