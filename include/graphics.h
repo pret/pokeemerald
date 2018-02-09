@@ -2719,4 +2719,10 @@ extern const u16 gFireRedMenuElements2_Pal[16];
 extern const u16 gFireRedMenuElements3_Pal[16];
 extern const u8 gFireRedMenuElements_Gfx[];
 
+//item menu graphics
+extern const u8 gBagScreen_Gfx[];
+extern u16 gBagScreenFemale_Pal[];
+extern u16 gBagScreenMale_Pal[];
+extern u8 gBagMenuHMIcon_Gfx[];
+
 #endif //GUARD_GRAPHICS_H

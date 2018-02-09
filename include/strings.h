@@ -239,4 +239,30 @@ extern const u8 gText_Var1DotVar2[];
 extern const u8 gText_ThreeMarks[];
 extern const u8 gText_FirmSlash[];
 
+//item menu screen text
+extern u8 gText_CloseBag[];
+extern u8 gText_ClearTo11Var1Clear5Var2[];
+extern u8 gText_UnkF908Var1Clear7Var2[];
+extern u8 gText_xVar1[];
+extern u8 gText_ReturnToVar1[];
+extern u8 gText_SelectorArrow2[];
+extern u8 gText_MoveVar1Where[];
+extern u8 gText_Var1IsSelected[];
+extern u8 gText_TossHowManyVar1s[];
+extern u8 gText_ConfirmTossItems[];
+extern u8 gText_ThrewAwayVar2Var1s[];
+extern u8 gText_CantWriteMail[];
+extern u8 gText_NoPokemon[];
+extern u8 gText_Var1CantBeHeld[];
+extern u8 gText_Var1CantBeHeldHere[];
+extern u8 gText_CantBuyKeyItem[];
+extern u8 gText_HowManyToSell[];
+extern u8 gText_ICanPayVar1[];
+extern u8 gText_TurnedOverVar1ForVar2[];
+extern u8 gText_DepositHowManyVar1[];
+extern u8 gText_CantStoreImportantItems[];
+extern u8 gText_DepositedVar2Var1s[];
+extern u8 gText_NoRoomForItems[];
+extern u8 gText_ThreeDashes[];
+
 #endif //GUARD_STRINGS_H

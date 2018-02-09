@@ -59,5 +59,10 @@ u16 sub_8198AA4(u8, u8, u8, u8, u8, u8, u16);
 void *malloc_and_decompress(const void *src, int *sizeOut);
 u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
+void AddItemMenuActionTextPrinters (u8, u8, u8, u8, u8, u8, u8, const struct MenuAction*, const u8*);
+void sub_8198DBC(u8, u8, u8, u8, u8, u8, u8, const struct MenuAction*, const u8*);
+u8 sub_8199944(u8, u8, u8, u8, u8);
+u8 sub_8199134(s8, s8);
+void sub_819A2BC(u8, u8);
 
 #endif // GUARD_MENU_H
