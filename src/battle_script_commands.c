@@ -81,7 +81,6 @@ extern u16 GetBattlePyramidPickupItemId(void);
 extern u8 sav1_map_get_light_level(void);
 extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
-extern void sub_80356D0(void);
 
 // strings
 extern const u8 gText_BattleYesNoChoice[];

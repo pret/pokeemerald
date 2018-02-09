@@ -7,6 +7,7 @@
 #include "scanline_effect.h"
 #include "battle_setup.h"
 #include "battle_scripts.h"
+#include "battle_interface.h"
 #include "pokemon.h"
 #include "palette.h"
 #include "task.h"
@@ -46,6 +47,8 @@
 #include "constants/battle_string_ids.h"
 #include "data2.h"
 #include "decompress.h"
+#include "international_string_util.h"
+#include "pokeball.h"
 
 struct UnknownPokemonStruct2
 {
@@ -107,17 +110,11 @@ extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
 
 // functions
-extern void ScanlineEffect_Clear(void);
-extern void sub_80356D0(void);
 extern void GetFrontierTrainerName(u8* dst, u16 trainerId); // battle tower
 extern void sub_8166188(void); // battle tower, sets link battle mons level but why?
 extern void sub_8165B88(u8* dst, u16 trainerId); // battle tower, gets language
-extern void PadNameString(u8* dst, u8 arg2); //
 extern void sub_81B9150(void);
-extern void sub_800AC34(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
-extern void sub_8076918(u8 battlerId);
-extern void SetHealthboxSpriteVisible(u8 healthoxSpriteId);
 extern void sub_81A56B4(void); // battle frontier 2
 extern u8 sub_81A9E28(void); // battle frontier 2
 extern void sub_81A56E8(u8 battlerId); // battle frontier 2

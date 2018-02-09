@@ -172,9 +172,6 @@ extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u8 gHealthboxElementsGfxTable[][32];
 
-// functions
-extern void LoadBattleBarGfx(u8 arg0);
-
 // this file's functions
 
 static const u8 *GetHealthboxElementGfxPtr(u8 elementId);

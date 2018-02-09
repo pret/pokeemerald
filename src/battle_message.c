@@ -13,6 +13,9 @@
 #include "palette.h"
 #include "battle_controllers.h"
 #include "battle_setup.h"
+#include "menu.h"
+#include "recorded_battle.h"
+#include "international_string_util.h"
 
 extern u8 gBattlerAbilities[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203C7B4;
@@ -41,9 +44,6 @@ extern void GetEreaderTrainerName(u8 *txtPtr);
 extern void sub_81A36D0(u8 arg0, u16 trainerId); // battle_frontier_2
 extern void sub_81D572C(u8 arg0, u16 trainerId); // pokenav
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
-extern s32 GetStringCenterAlignXOffsetWithLetterSpacing(u8 fontId, const u8 *str, s32 totalWidth, s16 letterSpacing);
-extern u8 GetTextSpeedInRecordedBattle(void);
-extern u8 GetPlayerTextSpeed(void);
 
 // this file's functions
 static void sub_814F8F8(u8 *textPtr);
