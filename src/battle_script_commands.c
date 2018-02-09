@@ -6940,7 +6940,7 @@ static void atk74_hpthresholds2(void)
 static void atk75_useitemonopponent(void)
 {
     gBankInMenu = gBattlerAttacker;
-    ExecuteTableBasedItemEffect(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker]], gLastUsedItem, gBattlerPartyIndexes[gBattlerAttacker], 0, 1);
+    PokemonUseItemEffects(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker]], gLastUsedItem, gBattlerPartyIndexes[gBattlerAttacker], 0, 1);
 
     gBattlescriptCurrInstr += 1;
 }

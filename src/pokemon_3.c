@@ -61,7 +61,18 @@ extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
 extern const u8 gMonAnimationDelayTable[];
 extern const u8 gMonFrontAnimIdsTable[];
+extern const u8 gFacilityClassToPicIndex[];
+extern const u8 gTrainerClassNames[][13];
 
+struct PokeItem
+{
+    u16 species;
+    u16 item;
+};
+
+extern const struct PokeItem gAlteringCaveWildMonHeldItems[9];
+
+extern void SpriteCallbackDummy_2(struct Sprite*);
 extern bool8 InBattlePyramid(void);
 extern bool8 InBattlePike(void);
 extern bool8 sub_81D5C18(void);
@@ -84,7 +95,7 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask,
     if (status & healMask)
     {
         status &= ~healMask;
-        SetMonData(mon, MON_DATA_STATUS, (u8 *)&status);
+        SetMonData(mon, MON_DATA_STATUS, &status);
         if (gMain.inBattle && battleBank != 4)
             gBattleMons[battleBank].status1 &= ~healMask;
         return FALSE;
@@ -1376,14 +1387,6 @@ void sub_806E994(void)
     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
 
-struct PokeItem
-{
-    u16 species;
-    u16 item;
-};
-
-extern const struct PokeItem gAlteringCaveWildMonHeldItems[9];
-
 static s32 GetWildMonTableIdInAlteringCave(u16 species)
 {
     s32 i;
@@ -1520,8 +1523,6 @@ void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u
         DoMonFrontSpriteAnimation(sprite, species, noCry, arg3);
 }
 
-extern void SpriteCallbackDummy_2(struct Sprite*);
-
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3)
 {
     s8 pan;
@@ -1652,8 +1653,6 @@ u8 sub_806EF84(u8 arg0, u8 arg1)
     return i;
 }
 
-extern const u8 gFacilityClassToPicIndex[];
-
 u16 sub_806EFF0(u16 arg0)
 {
     return gFacilityClassToPicIndex[arg0];
@@ -1666,8 +1665,6 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
     else
         return sub_806EFF0(0x3C);
 }
-
-extern const u8 gTrainerClassNames[][13];
 
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 {
