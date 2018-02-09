@@ -334,6 +334,32 @@ struct UnknownPokemonStruct
     u8 friendship;
 };
 
+struct UnknownPokemonSubStruct2
+{
+    u16 species;
+    u16 moves[4];
+    u16 item;
+};
+
+struct UnknownPokemonStruct2
+{
+    u8 field_0_0 : 5;
+    u8 field_0_1 : 2;
+    u8 field_1;
+    u8 field_2;
+    u8 field_3;
+    struct UnknownPokemonSubStruct2 mons[3];
+    u8 field_28[23];
+    u8 language;
+};
+
+struct UnknownPokemonStruct3
+{
+    u8 field_0[48];
+    u16 field_30;
+    u8 field_32[38];
+};
+
 #define BATTLE_STATS_NO 8
 
 struct BattlePokemon
@@ -590,7 +616,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
 
-u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex);
+u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
 
 void MonRestorePP(struct Pokemon *);
 void BoxMonRestorePP(struct BoxPokemon *);
@@ -628,7 +654,7 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 s32 GetBattlerMultiplayerId(u16 a1);
 bool16 sub_806D82C(u8 id);
 u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
-void sub_8068AA4(void); // sets stats for deoxys
+void SetDeoxysStats(void); // sets stats for deoxys
 bool8 HasTwoFramesAnimation(u16 species);
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem);
 void RandomlyGivePartyPokerus(struct Pokemon *party);
@@ -645,7 +671,7 @@ void sub_806A1C0(u16 arg0, u8 bankIdentity);
 void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity);
 u8 GetSecretBaseTrainerPicIndex(void);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
-void BoxMonToMon(struct BoxPokemon *srcMon, struct Pokemon *dstMon);
+void BoxMonToMon(const struct BoxPokemon *srcMon, struct Pokemon *dstMon);
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 u8 GetMonsStateToDoubles_2(void);
 

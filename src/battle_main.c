@@ -46,7 +46,7 @@
 #include "battle_string_ids.h"
 #include "data2.h"
 
-struct UnknownPokemonStruct2
+struct UnknownPokemonStruct4
 {
     /*0x00*/ u16 species;
     /*0x02*/ u16 heldItem;
@@ -81,8 +81,8 @@ extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);
 extern void (*gCB2_AfterEvolution)(void);
-extern struct UnknownPokemonStruct2 gUnknown_02022FF8[3]; // what is it used for?
-extern struct UnknownPokemonStruct2* gUnknown_02023058; // what is it used for?
+extern struct UnknownPokemonStruct4 gUnknown_02022FF8[3]; // what is it used for?
+extern struct UnknownPokemonStruct4* gUnknown_02023058; // what is it used for?
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gDecompressionBuffer[];
@@ -751,7 +751,7 @@ static void CB2_HandleStartBattle(void)
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyMultiplayerId][1];
             sub_8185F90(gBlockRecvBuffer[playerMultiplayerId][1]);
             sub_8185F90(gBlockRecvBuffer[enemyMultiplayerId][1]);
-            sub_8068AA4();
+            SetDeoxysStats();
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1163,9 +1163,9 @@ static void CB2_PreInitMultiBattle(void)
     case 0:
         if (gReceivedRemoteLinkPlayers != 0 && sub_800A520())
         {
-            gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct2) * 3);
+            gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct4) * 3);
             sub_80379F8(0);
-            SendBlock(bitmask_all_link_players_but_self(), gUnknown_02023058, sizeof(struct UnknownPokemonStruct2) * 3);
+            SendBlock(bitmask_all_link_players_but_self(), gUnknown_02023058, sizeof(struct UnknownPokemonStruct4) * 3);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1183,12 +1183,12 @@ static void CB2_PreInitMultiBattle(void)
                     if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[playerMultiplierId].lp_field_18 & 1))
                         || (gLinkPlayers[i].lp_field_18 & 1 && gLinkPlayers[playerMultiplierId].lp_field_18 & 1))
                     {
-                        memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct2) * 3);
+                        memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct4) * 3);
                     }
                 }
                 else
                 {
-                    memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct2) * 3);
+                    memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct4) * 3);
                 }
             }
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1247,7 +1247,7 @@ static void CB2_PreInitIngamePlayerPartnerBattle(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct2) * 3);
+        gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct4) * 3);
         sub_80379F8(3);
         gBattleCommunication[MULTIUSE_STATE]++;
         *savedCallback = gMain.savedCallback;
@@ -1330,7 +1330,7 @@ static void CB2_HandleStartMultiBattle(void)
             ResetBlockReceivedFlags();
             sub_8036EB8(4, playerMultiplayerId);
             SetAllPlayersBerryData();
-            sub_8068AA4();
+            SetDeoxysStats();
             var = CreateTask(sub_8035D74, 0);
             gTasks[var].data[1] = 0x10E;
             gTasks[var].data[2] = 0x5A;

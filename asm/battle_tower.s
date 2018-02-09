@@ -2351,7 +2351,7 @@ _08163368:
 	ldr r2, [sp, 0x30]
 	str r2, [sp, 0x8]
 	ldr r2, [sp, 0x20]
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	movs r0, 0xFF
 	mov r6, sp
 	strb r0, [r6, 0x14]
@@ -2775,7 +2775,7 @@ _081636CE:
 	str r2, [sp, 0x8]
 	ldr r2, [sp, 0x14]
 	mov r3, r10
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	movs r1, 0
 	add r0, sp, 0xC
 	strb r1, [r0]
@@ -2894,7 +2894,7 @@ _081637D0:
 	mov r2, r9
 	str r2, [sp, 0x8]
 	movs r2, 0x1E
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	movs r1, 0
 	add r0, sp, 0xC
 	strb r1, [r0]
@@ -6289,7 +6289,7 @@ _081655A6:
 	str r3, [sp, 0x8]
 	lsrs r2, 24
 	mov r3, r12
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	movs r0, 0xFF
 	str r0, [sp, 0x48]
 	movs r0, 0
@@ -7550,7 +7550,7 @@ _08165FDA:
 	ldr r2, [sp, 0x2C]
 	str r2, [sp, 0x8]
 	ldr r2, [sp, 0x20]
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	add r1, sp, 0x14
 	movs r0, 0xFF
 	strb r0, [r1]

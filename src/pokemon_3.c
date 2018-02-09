@@ -633,7 +633,7 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
     return TRAINER_ENCOUNTER_MUSIC(trainerOpponentId);
 }
 
-u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex)
+u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
 {
     if (statIndex < 1 || statIndex > 5)
     {
