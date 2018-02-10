@@ -31,7 +31,6 @@
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokemon_3.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "overworld.h"

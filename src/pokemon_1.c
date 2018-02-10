@@ -27,6 +27,7 @@
 #include "rtc.h"
 #include "m4a.h"
 #include "malloc.h"
+#include "util.h"
 
 //Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
@@ -39,7 +40,7 @@ struct Unknown_806F160_Struct
     u8 field_0_0 : 4;
     u8 field_0_1 : 4;
     u8 field_1;
-    u8 field_2;
+    u8 magic;
     u8 field_3_0 : 4;
     u8 field_3_1 : 4;
     void *bytes;
@@ -96,7 +97,6 @@ extern u8 gLastUsedAbility;
 extern u16 gPartnerTrainerId;
 extern u32 gHitMarker;
 
-extern const u32 gBitTable[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
 extern const struct SpriteTemplate gUnknown_08329DF8[];
 extern const union AnimCmd* gUnknown_082FF70C[];
@@ -105,8 +105,6 @@ extern const union AnimCmd* const * const gUnknown_08305D0C[];
 extern const union AnimCmd* const * const gUnknown_0830536C[];
 extern const u8 gText_BadEgg[];
 extern const u8 gText_EggNickname[];
-extern const u8 gFacilityClassToPicIndex[];
-extern const u8 gFacilityClassToTrainerClass[];
 extern const u8 gSecretBaseTrainerClasses[][5];
 extern const struct BattleMove gBattleMoves[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
@@ -122,11 +120,6 @@ extern const u8 gUnknown_08329D22[];
 extern const u8 gUnknown_08329D26[];
 extern const u8 gUnknown_08329D2A[];
 extern const u8 gUnknown_08329EC2[];
-extern const u16 gSpeciesToHoennPokedexNum[];
-extern const u16 gSpeciesToNationalPokedexNum[];
-extern const u16 gHoennToNationalOrder[];
-extern const u16 gSpeciesIdToCryId[];
-extern const struct SpindaSpot gSpindaSpotGraphics[];
 extern const u8* const gStatNamesTable[];
 extern const u8 gSpeciesNames[][11];
 extern const u8 gUnknown_08329EC8[];
@@ -136,7 +129,6 @@ extern const u8 gText_PkmnGettingPumped[];
 extern const u8 gText_PkmnShroudedInMist[];
 extern const s8 gNatureStatTable[][5];
 extern const s8 gUnknown_08329ECE[][3];
-extern const u32 gBitTable[];
 extern const u32 gTMHMLearnsets[][2];
 extern const u8 gText_BattleWallyName[];
 extern const u8 gText_PkmnsXPreventsSwitching[];
@@ -145,8 +137,9 @@ extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
 extern const u8 gMonAnimationDelayTable[];
 extern const u8 gMonFrontAnimIdsTable[];
-extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gTrainerClassNames[][13];
+extern const struct SpriteTemplate gUnknown_08329D98[];
+extern const struct SpriteTemplate gUnknown_08329F28;
 
 extern bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 bank);
 extern u8 pokemon_order_func(u8);
@@ -157,7 +150,6 @@ extern u16 get_unknown_box_id(void);
 extern u8 StorageGetCurrentBox(void);
 extern void set_unknown_box_id(u8);
 extern struct BoxPokemon* GetBoxedMonPtr(u8 boxNumber, u8 boxPosition);
-extern s32 GetDeoxysStat(struct Pokemon *mon, s32 statId);
 extern void sub_803FA70(u8 bank);
 extern void ClearTemporarySpeciesSpriteData(u8 bank, bool8);
 extern u32 GetBoxMonDataFromAnyBox(u8 boxNo, u8 boxPos, s32 field);
@@ -4912,14 +4904,12 @@ bool8 sub_806F104(void)
     return FALSE;
 }
 
-extern const struct SpriteTemplate gUnknown_08329D98[];
-extern const struct SpriteTemplate gUnknown_08329F28;
+#define FORCE_SIGNED(x)(-(x * (-1)))
 
 void sub_806F160(struct Unknown_806F160_Struct* structPtr)
 {
-    s32 i;
-    u16 j;
-    for (i = 0; i < structPtr->field_0_0; i = (u16)(i + 1))
+    u16 i, j;
+    for (i = 0; i < FORCE_SIGNED(structPtr->field_0_0); i++)
     {
         structPtr->templates[i] = gUnknown_08329D98[i];
         for (j = 0; j < structPtr->field_1; j++)
@@ -4933,9 +4923,8 @@ void sub_806F160(struct Unknown_806F160_Struct* structPtr)
 
 void sub_806F1FC(struct Unknown_806F160_Struct* structPtr)
 {
-    s32 i;
-    u16 j;
-    for (i = 0; i < structPtr->field_0_0; i = (u16)(i + 1))
+    u16 i, j;
+    for (i = 0; i < FORCE_SIGNED(structPtr->field_0_0); i++)
     {
         structPtr->templates[i] = gUnknown_08329F28;
         for (j = 0; j < structPtr->field_1; j++)
@@ -4948,14 +4937,14 @@ void sub_806F1FC(struct Unknown_806F160_Struct* structPtr)
     }
 }
 
-struct Unknown_806F160_Struct *sub_806F2AC(u8 arg0, u8 arg1)
+struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
 {
     u8 i;
     u8 flags;
     struct Unknown_806F160_Struct *structPtr;
 
     flags = 0;
-    arg0 %= 2;
+    id %= 2;
     structPtr = AllocZeroed(sizeof(*structPtr));
     if (structPtr == NULL)
         return NULL;
@@ -4979,7 +4968,7 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 arg0, u8 arg1)
         break;
     }
 
-    structPtr->bytes = AllocZeroed(structPtr->field_3_0 * structPtr->field_0_0);
+    structPtr->bytes = AllocZeroed(structPtr->field_3_0 * 0x800 * 4 * structPtr->field_0_0);
     structPtr->byteArrays = AllocZeroed(structPtr->field_0_0 * 32);
     if (structPtr->bytes == NULL || structPtr->byteArrays == NULL)
     {
@@ -4987,7 +4976,7 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 arg0, u8 arg1)
     }
     else
     {
-        for (i = 0; i < structPtr->field_0_0; i++)
+        for (i = 0; i < FORCE_SIGNED(structPtr->field_0_0); i++)
             structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 0xD));
     }
 
@@ -5037,9 +5026,55 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 arg0, u8 arg1)
     }
     else
     {
-        structPtr->field_2 = 0xA3;
-        gUnknown_020249B4[arg0] = structPtr;
+        structPtr->magic = 0xA3;
+        gUnknown_020249B4[id] = structPtr;
     }
 
-    return gUnknown_020249B4[arg0];
+    return gUnknown_020249B4[id];
+}
+
+void sub_806F47C(u8 id)
+{
+    struct Unknown_806F160_Struct *structPtr;
+
+    id %= 2;
+    structPtr = gUnknown_020249B4[id];
+    if (structPtr == NULL)
+        return;
+
+    if (structPtr->magic != 0xA3)
+    {
+        memset(structPtr, 0, sizeof(struct Unknown_806F160_Struct));
+    }
+    else
+    {
+
+        if (structPtr->frameImages != NULL)
+            FREE_AND_SET_NULL(structPtr->frameImages);
+        if (structPtr->templates != NULL)
+            FREE_AND_SET_NULL(structPtr->templates);
+        if (structPtr->byteArrays != NULL)
+            FREE_AND_SET_NULL(structPtr->byteArrays);
+        if (structPtr->bytes != NULL)
+            FREE_AND_SET_NULL(structPtr->bytes);
+
+        memset(structPtr, 0, sizeof(struct Unknown_806F160_Struct));
+        Free(structPtr);
+    }
+}
+
+u8 *sub_806F4F8(u8 id, u8 arg1)
+{
+    struct Unknown_806F160_Struct *structPtr = gUnknown_020249B4[id % 2];
+    if (structPtr->magic != 0xA3)
+    {
+        return NULL;
+    }
+    else
+    {
+        if (arg1 >= FORCE_SIGNED(structPtr->field_0_0))
+            arg1 = 0;
+
+        return structPtr->byteArrays[arg1];
+    }
 }

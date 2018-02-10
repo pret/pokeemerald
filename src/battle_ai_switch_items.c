@@ -8,7 +8,6 @@
 #include "random.h"
 #include "util.h"
 #include "constants/items.h"
-#include "pokemon_item_effects.h"
 
 extern u8 gActiveBattler;
 extern u8 gAbsentBattlerFlags;

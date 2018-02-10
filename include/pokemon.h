@@ -675,6 +675,13 @@ void BoxMonToMon(const struct BoxPokemon *srcMon, struct Pokemon *dstMon);
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 u8 GetMonsStateToDoubles_2(void);
 
+bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 itemId, u8 partyId, u8 monMoveIndex, u8 a5);
+s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 bankAtk, u8 bankDef);
+const u8* GetTrainerClassNameFromId(u16 trainerId);
+const u8* GetTrainerNameFromId(u16 trainerId);
+void PlayMapChosenOrBattleBGM(u16 song);
+u8 GetTrainerEncounterMusicId(u16 trainerOpponentId);
+
 #include "sprite.h"
 
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
