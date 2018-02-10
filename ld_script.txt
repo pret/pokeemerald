@@ -69,7 +69,6 @@ SECTIONS {
         src/battle_ai_switch_items.o(.text);
         src/battle_controller_link_opponent.o(.text);
         src/pokemon_1.o(.text);
-        src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);
         src/trig.o(.text);
         src/random.o(.text);
