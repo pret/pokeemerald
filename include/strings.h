@@ -218,6 +218,34 @@ extern const u8 gText_FemaleSymbol[];
 extern const u8 gText_SelectorArrow3[];
 extern const u8 gText_YesNo[];
 
+// main menu/birch speech text
+extern const u8 gText_SaveFileErased[];
+extern const u8 gText_SaveFileCorrupted[];
+extern const u8 gJPText_No1MSubCircuit[];
+extern const u8 gText_BatteryRunDry[];
+extern const u8 gText_MainMenuNewGame[];
+extern const u8 gText_MainMenuOption[];
+extern const u8 gText_MainMenuContinue[];
+extern const u8 gText_MainMenuMysteryGift2[];
+extern const u8 gText_MainMenuMysteryEvents[];
+extern const u8 gText_MainMenuMysteryGift[];
+extern const u8 gText_WirelessNotConnected[];
+extern const u8 gText_MysteryGiftCantUse[];
+extern const u8 gText_MysteryEventsCantUse[];
+extern const u8 gText_Birch_Welcome[];
+extern const u8 gText_ThisIsAPokemon[];
+extern const u8 gText_Birch_MainSpeech[];
+extern const u8 gText_Birch_AndYouAre[];
+extern const u8 gText_Birch_BoyOrGirl[];
+extern const u8 gText_Birch_WhatsYourName[];
+extern const u8 gText_Birch_SoItsPlayer[];
+extern const u8 gText_Birch_YourePlayer[];
+extern const u8 gText_Birch_AreYouReady[];
+extern const u8 gText_ContinueMenuPlayer[];
+extern const u8 gText_ContinueMenuTime[];
+extern const u8 gText_ContinueMenuPokedex[];
+extern const u8 gText_ContinueMenuBadges[];
+
 // mystery event menu text
 extern const u8 gText_EventSafelyLoaded[];
 extern const u8 gText_LoadErrorEndingSession[];

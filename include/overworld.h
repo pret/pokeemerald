@@ -55,6 +55,7 @@ void Overworld_ChangeMusicTo(u16);
 
 bool32 is_c1_link_related_active(void);
 
+void CB2_NewGame(void);
 void strange_npc_table_clear(void);
 const struct MapHeader *get_mapheader_by_bank_and_number(u16, u16);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);

@@ -6,6 +6,7 @@
 // Exported RAM declarations
 
 // Exported ROM declarations
+void Task_ScrollIndicatorArrowPairOnMainMenu(u8);
 u8 AddScrollIndicatorArrowPairParametrized(u8, u8, u8, u8, s32, u16, u16, u16 *);
 void RemoveScrollIndicatorArrowPair(u8);
 
