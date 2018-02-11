@@ -339,7 +339,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Conrad
 
 @ 13
-	.4byte FACILITY_CLASS_SCHOOL_KID_2
+	.4byte FACILITY_CLASS_SCHOOL_KID_F
 	.string "MAKENNA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_SHOW
@@ -365,7 +365,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Makenna
 
 @ 14
-	.4byte FACILITY_CLASS_COOLTRAINER_1
+	.4byte FACILITY_CLASS_COOLTRAINER_M
 	.string "BRAYAN$", 8
 @ pre-battle speech
 	.2byte EC_WORD_CAN
@@ -391,7 +391,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Brayan
 
 @ 15
-	.4byte FACILITY_CLASS_COOLTRAINER_2
+	.4byte FACILITY_CLASS_COOLTRAINER_F
 	.string "MARIANA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_A
@@ -469,7 +469,7 @@ gFallarborBattleTentTrainers:: @ 85DF084
 	.4byte gFallarborBattleTentTrainerMons_Gianna
 
 @ 18
-	.4byte FACILITY_CLASS_EXPERT_1
+	.4byte FACILITY_CLASS_EXPERT_M
 	.string "YAHIR$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YOU
