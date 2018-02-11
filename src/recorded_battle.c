@@ -50,7 +50,7 @@ struct RecordedBattleSave
     u8 playersLanguage[MAX_BATTLERS_COUNT];
     u32 rngSeed;
     u32 battleFlags;
-    u8 playersBattler[MAX_BATTLERS_COUNT];
+    u8 playersBattlers[MAX_BATTLERS_COUNT];
     u16 opponentA;
     u16 opponentB;
     u16 partnerId;
@@ -350,7 +350,7 @@ u32 MoveRecordedBattleToSaveData(void)
         }
         battleSave->playersGender[i] = sRecordedBattle_Players[i].gender;
         battleSave->playersLanguage[i] = sRecordedBattle_Players[i].language;
-        battleSave->playersBattler[i] = sRecordedBattle_Players[i].battlerId;
+        battleSave->playersBattlers[i] = sRecordedBattle_Players[i].battlerId;
         battleSave->playersTrainerId[i] = sRecordedBattle_Players[i].trainerId;
     }
 
@@ -1341,7 +1341,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
         }
         gLinkPlayers[i].gender = src->playersGender[i];
         gLinkPlayers[i].language = src->playersLanguage[i];
-        gLinkPlayers[i].lp_field_18 = src->playersBattler[i];
+        gLinkPlayers[i].lp_field_18 = src->playersBattlers[i];
         gLinkPlayers[i].trainerId = src->playersTrainerId[i];
 
         if (var)
