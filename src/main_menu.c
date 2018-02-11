@@ -11,6 +11,7 @@
 #include "event_data.h"
 #include "field_effect.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "international_string_util.h"
 #include "link.h"
 #include "main.h"
@@ -43,8 +44,8 @@
 
 // Static RAM declarations
 
-extern u8 gUnknown_02022D04;
-extern u16 gUnknown_02022D06;
+EWRAM_DATA u8 gUnknown_02022D04 = 0;
+EWRAM_DATA u16 gUnknown_02022D06 = 0;
 
 IWRAM_DATA u8 gUnknown_03000DD0;
 
@@ -67,8 +68,6 @@ struct ArrowStruct {
     u16 unk6[5];
 };
 
-extern u16 gMainMenuBgPal[];
-extern u16 gMainMenuTextPal[];
 extern struct BgTemplate gUnknown_082FF0E8[];
 extern struct WindowTemplate gUnknown_082FF038[];
 extern struct WindowTemplate gUnknown_082FF070[];
@@ -76,13 +75,8 @@ extern u8 gUnknown_082FF0E0[];
 extern struct WindowTemplate gUnknown_082FF048[];
 extern struct ArrowStruct gUnknown_082FF0F4;
 extern struct BgTemplate gUnknown_082FF0F0;
-extern u8 gBirchIntroShadowGfx[];
-extern u8 gUnknown_082FEEF0[];
-extern u16 gUnknown_082FECFC[];
-extern u16 gUnknown_082FF028[];
 extern struct WindowTemplate gUnknown_082FF080[];
 extern const union AffineAnimCmd *const gUnknown_082FF114[];
-extern u16 gUnknown_082FF018[];
 extern struct WindowTemplate gUnknown_082FF088[];
 extern const struct MenuAction gUnknown_082FF118[];
 extern u8* gMalePresetNames[];
@@ -93,7 +87,7 @@ u32 InitMainMenu(bool8);
 void Task_MainMenuCheckSaveFile(u8);
 void Task_MainMenuCheckBattery(u8);
 void Task_WaitForSaveFileErrorWindow(u8);
-void CreateMainMenuErrorWindow(u8*);
+void CreateMainMenuErrorWindow(const u8*);
 void sub_8032250(struct WindowTemplate*);
 void Task_DisplayMainMenu(u8);
 void Task_WaitForBatteryDryErrorWindow(u8);
@@ -1686,7 +1680,7 @@ void set_default_player_name(u8 nameId)
     gSaveBlock2Ptr->playerName[7] = 0xFF;
 }
 
-void CreateMainMenuErrorWindow(u8* str)
+void CreateMainMenuErrorWindow(const u8* str)
 {
     FillWindowPixelBuffer(7, 17);
     PrintTextOnWindow(7, 1, str, 0, 1, 2, 0);

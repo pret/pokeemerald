@@ -2713,6 +2713,15 @@ extern const u8 gRaySceneHushBg_Pal[];
 extern const u8 gRaySceneHushBg_Gfx[];
 extern const u8 gRaySceneHushRing_Gfx[];
 
+//main menu/birch graphics
+extern const u16 gMainMenuBgPal[];
+extern const u16 gMainMenuTextPal[];
+extern const u16 gUnknown_082FECFC[];
+extern const u16 gUnknown_082FF028[];
+extern const u16 gUnknown_082FF018[];
+extern const u8 gBirchIntroShadowGfx[];
+extern const u8 gUnknown_082FEEF0[];
+
 //menu graphics
 extern const u16 gFireRedMenuElements1_Pal[16];
 extern const u16 gFireRedMenuElements2_Pal[16];
