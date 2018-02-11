@@ -25,8 +25,6 @@
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
-extern u8 gBattlerAttacker;
-extern u8 gBattlerTarget;
 extern u16 gBattle_WIN0H;
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
@@ -35,12 +33,9 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
-extern u8 gDecompressionBuffer[];
 
 extern const u16 gUnknown_082C8D64[];
 extern const u8 * const gBattleAnims_Moves[];

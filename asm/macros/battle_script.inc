@@ -1373,11 +1373,11 @@
 	.endm
 	
 	.macro jumpifmove move, jumpptr
-	jumpifhalfword EQUAL, gCurrentMove, \move, \jumpptr
+	jumpifhalfword CMP_EQUAL, gCurrentMove, \move, \jumpptr
 	.endm
 
 	.macro jumpifnotmove move, jumpptr
-	jumpifhalfword NOT_EQUAL, gCurrentMove, \move, \jumpptr
+	jumpifhalfword CMP_NOT_EQUAL, gCurrentMove, \move, \jumpptr
 	.endm
 	
 	.macro jumpifstatus3 bank, status, jumpptr
@@ -1389,13 +1389,13 @@
 	.endm
 	
 	.macro jumpifmovehadnoeffect jumpptr
-	jumpifbyte COMMON_BITS, gMoveResultFlags, MOVE_RESULT_NO_EFFECT, \jumpptr
+	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_NO_EFFECT, \jumpptr
 	.endm
 	
 	.macro jumpifbattletype flags, jumpptr
-	jumpifword COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
+	jumpifword CMP_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm
 	
 	.macro jumpifnotbattletype flags, jumpptr
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
+	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm

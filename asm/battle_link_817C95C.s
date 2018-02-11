@@ -44,7 +44,7 @@ _0817C988:
 	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gEffectBank
+	ldr r0, =gEffectBattler
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -145,7 +145,7 @@ _0817CA9C:
 	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r5, r0, 25
-	ldr r0, =gEffectBank
+	ldr r0, =gEffectBattler
 	ldrb r0, [r0]
 	bl GetBattlerPosition
 	lsls r0, 24
@@ -1302,7 +1302,7 @@ _0817D6F2:
 	bl _0817E0A6
 _0817D704:
 	ldr r5, =gBattlerPartyIndexes
-	ldr r6, =gEffectBank
+	ldr r6, =gEffectBattler
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r5
@@ -1396,7 +1396,7 @@ _0817D7B2:
 	.pool
 _0817D7D8:
 	ldr r5, =gBattlerPartyIndexes
-	ldr r6, =gEffectBank
+	ldr r6, =gEffectBattler
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r5
@@ -1440,7 +1440,7 @@ _0817D7D8:
 	.pool
 _0817D838:
 	ldr r5, =gBattlerPartyIndexes
-	ldr r6, =gEffectBank
+	ldr r6, =gEffectBattler
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r5
@@ -1628,7 +1628,7 @@ _0817D9AE:
 	b _0817E086
 _0817D9C2:
 	ldr r5, =gBattlerPartyIndexes
-	ldr r6, =gEffectBank
+	ldr r6, =gEffectBattler
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r5
@@ -1703,7 +1703,7 @@ _0817DA48:
 	.pool
 _0817DA68:
 	ldr r5, =gBattlerPartyIndexes
-	ldr r6, =gEffectBank
+	ldr r6, =gEffectBattler
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r5
@@ -1791,7 +1791,7 @@ _0817DB10:
 	.pool
 _0817DB24:
 	ldr r5, =gBattlerPartyIndexes
-	ldr r6, =gEffectBank
+	ldr r6, =gEffectBattler
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r5

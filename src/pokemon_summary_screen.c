@@ -20,6 +20,7 @@
 #include "task.h"
 #include "text.h"
 #include "window.h"
+#include "event_data.h"
 
 struct ContestMove
 {
@@ -36,8 +37,6 @@ struct ContestEffect
     u8 jam;
 };
 
-
-
 extern struct UnkSummaryStruct* gUnknown_0203CF1C;
 extern struct BgTemplate gUnknown_0861CBB4;
 extern u8 gUnknown_0203CF20;
@@ -45,7 +44,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern s8 gUnknown_0861CC1C[];
 extern u8 gUnknown_08329D22[];
 extern u8 gUnknown_0203CF21;
-extern u16 gSpecialVar_0x8005;
 extern struct UnkStruct_61CC04 gUnknown_0861CC04;
 extern struct UnkStruct_61CC04 gUnknown_0861CC10;
 extern struct UnkStruct_61CC04 gUnknown_0861CBEC;

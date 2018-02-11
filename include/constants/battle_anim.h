@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_BATTLE_ANIM_H
 #define GUARD_CONSTANTS_BATTLE_ANIM_H
 
-// banks enum used in scripts
+// battlers
 #define ANIM_ATTACKER 0
 #define ANIM_TARGET 1
 #define ANIM_ATK_PARTNER 2

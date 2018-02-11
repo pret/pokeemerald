@@ -10,21 +10,7 @@
 #include "constants/items.h"
 #include "pokemon_item_effects.h"
 
-extern u8 gActiveBattler;
-extern u8 gAbsentBattlerFlags;
-extern u32 gBattleTypeFlags;
-extern u32 gStatuses3[MAX_BATTLERS_COUNT];
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
-extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
-extern u16 gDynamicBasePower;
-extern u8 gMoveResultFlags;
-extern u8 gCritMultiplier;
-extern s32 gBattleMoveDamage;
-
 extern const struct BattleMove gBattleMoves[];
-extern const struct BaseStats gBaseStats[];
 extern const u8 gTypeEffectiveness[];
 extern const u8 * const gItemEffectTable[]; // todo: fix once struct is declared
 

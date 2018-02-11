@@ -1,7 +1,7 @@
+#include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 	.include "asm/macros/battle_anim_script.inc"
-	.include "include/constants/battle_anim.h"
 
 	.section script_data, "aw", %progbits
 

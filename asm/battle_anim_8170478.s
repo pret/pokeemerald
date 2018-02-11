@@ -5069,7 +5069,7 @@ sub_8172ED0: @ 8172ED0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gBattleAnimTarget
-	ldr r1, =gEffectBank
+	ldr r1, =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
