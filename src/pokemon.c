@@ -33,6 +33,13 @@
 #include "strings.h"
 #include "pokenav.h"
 #include "pokemon_storage_system.h"
+#include "recorded_battle.h"
+
+struct SpeciesItem
+{
+    u16 species;
+    u16 item;
+};
 
 // Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
@@ -40,78 +47,32 @@
 // Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-
-struct PokeItem
-{
-    u16 species;
-    u16 item;
-};
-extern const struct PokeItem gAlteringCaveWildMonHeldItems[9];
-
-extern u8 gAbsentBattlerFlags;
-extern u8 gActiveBattler;
-extern u8 gBattlersCount;
-extern u8 gBattlerAttacker;
-extern u16 gBattlerPartyIndexes[];
-extern u8 gBattlerTarget;
-extern u8 gBankInMenu;
-extern u8 gLastUsedAbility;
-extern u32 gBattleTypeFlags;
-extern struct BattlePokemon gBattleMons[4];
-extern u32 gBattleTypeFlags;
-extern struct BattlePokemon gBattleMons[4];
-extern u16 gCurrentMove;
-extern u8 gCritMultiplier;
-extern u16 gBattleWeather;
-extern struct BattleEnigmaBerry gEnigmaBerries[];
-extern u16 gBattleMovePower;
-extern u32 gBattleTypeFlags;
-extern s32 gBattleMoveDamage;
-extern u8 gUnknown_0203C7B4;
-extern u16 gMoveToLearn;
-extern u8 gStringBattler;
-extern struct BattlePokemon gBattleMons[4];
-extern struct BattleEnigmaBerry gEnigmaBerries[4];
-extern u8 gActiveBattler;
-extern u8 gBankInMenu;
-extern u8 gBattlerTarget;
-extern u8 gBattlerAttacker;
-extern u8 gStringBattler;
-extern u32 gBattleTypeFlags;
-extern u8 gBattleMonForms[4];
-extern u16 gBattlerPartyIndexes[4];
-extern u8 gLastUsedAbility;
-extern u32 gHitMarker;
-
-extern const struct SpriteTemplate gUnknown_08329D98[];
-extern const struct SpriteTemplate gUnknown_08329DF8[];
+extern const struct OamData gUnknown_0831ACB0;
+extern const struct OamData gUnknown_0831ACA8;
+extern const struct SpriteFrameImage gUnknown_082FF3A8[];
+extern const struct SpriteFrameImage gUnknown_082FF3C8[];
+extern const struct SpriteFrameImage gUnknown_082FF3E8[];
+extern const struct SpriteFrameImage gUnknown_082FF408[];
+extern const struct SpriteFrameImage gUnknown_082FF428[];
+extern const struct SpriteFrameImage gUnknown_082FF448[];
+extern const struct SpriteFrameImage gUnknown_082FF468[];
+extern const struct SpriteFrameImage gUnknown_082FF490[];
+extern const struct SpriteFrameImage gUnknown_082FF4B8[];
+extern const struct SpriteFrameImage gUnknown_082FF4D8[];
+extern const struct SpriteFrameImage gUnknown_082FF4F8[];
+extern const struct SpriteFrameImage gUnknown_082FF518[];
+extern const union AffineAnimCmd *const gUnknown_082FF618[];
+extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *gUnknown_082FF70C[];
 extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[];
 extern const union AnimCmd *const *const gUnknown_08305D0C[];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
-extern const u8 gSecretBaseFacilityClasses[][5];
 extern const struct BattleMove gBattleMoves[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
-extern const u8 gUnknown_08329D22[];
-extern const u8 gUnknown_08329D26[];
-extern const u8 gHoldEffectToType[][2];
-extern const u8 gStatStageRatios[][2];
 extern const struct UnknownPokemonStruct3 gUnknown_08610970[];
-extern const u16 gUnknown_08329D48[];
-extern const u16 gUnknown_08329D54[];
-extern const u8 gUnknown_08329D22[];
-extern const u8 gUnknown_08329D26[];
-extern const u8 gUnknown_08329D2A[];
-extern const u8 gUnknown_08329EC2[];
-extern const u8 gUnknown_08329EC8[];
-extern const s8 gUnknown_08329ECE[][3];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
-extern const u16 gHMMoves[];
-extern const u8 gMonAnimationDelayTable[];
-extern const u8 gMonFrontAnimIdsTable[];
 extern const u8 gTrainerClassNames[][13];
-extern const struct SpriteTemplate gUnknown_08329F28;
 
 extern u8 pokemon_order_func(u8);
 extern u16 get_unknown_box_id(void);
@@ -140,7 +101,7 @@ static void sub_806E6CC(u8 taskId);
 static bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
 
 // EWRAM vars
-EWRAM_DATA u8 sLearningMoveTableID = 0;
+EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
 EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
@@ -201,6 +162,1095 @@ const s8 gNatureStatTable[][5] =
 #include "data/pokemon/level_up_learnsets.h"
 #include "data/pokemon/evolution.h"
 #include "data/pokemon/level_up_learnset_pointers.h"
+
+static const u8 sMonFrontAnimIdsTable[] =
+{
+    0x06, // SPECIES_BULBASAUR
+    0x17, // SPECIES_IVYSAUR
+    0x2f, // SPECIES_VENUSAUR
+    0x52, // SPECIES_CHARMANDER
+    0x25, // SPECIES_CHARMELEON
+    0x10, // SPECIES_CHARIZARD
+    0x0b, // SPECIES_SQUIRTLE
+    0x13, // SPECIES_WARTORTLE
+    0x19, // SPECIES_BLASTOISE
+    0x0b, // SPECIES_CATERPIE
+    0x0b, // SPECIES_METAPOD
+    0x1d, // SPECIES_BUTTERFREE
+    0x46, // SPECIES_WEEDLE
+    0x20, // SPECIES_KAKUNA
+    0x02, // SPECIES_BEEDRILL
+    0x47, // SPECIES_PIDGEY
+    0x17, // SPECIES_PIDGEOTTO
+    0x29, // SPECIES_PIDGEOT
+    0x43, // SPECIES_RATTATA
+    0x2b, // SPECIES_RATICATE
+    0x18, // SPECIES_SPEAROW
+    0x2b, // SPECIES_FEAROW
+    0x16, // SPECIES_EKANS
+    0x17, // SPECIES_ARBOK
+    0x2c, // SPECIES_PIKACHU
+    0x17, // SPECIES_RAICHU
+    0x2d, // SPECIES_SANDSHREW
+    0x17, // SPECIES_SANDSLASH
+    0x00, // SPECIES_NIDORAN_F
+    0x17, // SPECIES_NIDORINA
+    0x0f, // SPECIES_NIDOQUEEN
+    0x09, // SPECIES_NIDORAN_M
+    0x13, // SPECIES_NIDORINO
+    0x0f, // SPECIES_NIDOKING
+    0x00, // SPECIES_CLEFAIRY
+    0x4a, // SPECIES_CLEFABLE
+    0x17, // SPECIES_VULPIX
+    0x10, // SPECIES_NINETALES
+    0x48, // SPECIES_JIGGLYPUFF
+    0x31, // SPECIES_WIGGLYTUFF
+    0x00, // SPECIES_ZUBAT
+    0x1d, // SPECIES_GOLBAT
+    0x00, // SPECIES_ODDISH
+    0x45, // SPECIES_GLOOM
+    0x49, // SPECIES_VILEPLUME
+    0x46, // SPECIES_PARAS
+    0x0f, // SPECIES_PARASECT
+    0x06, // SPECIES_VENONAT
+    0x4b, // SPECIES_VENOMOTH
+    0x10, // SPECIES_DIGLETT
+    0x4c, // SPECIES_DUGTRIO
+    0x52, // SPECIES_MEOWTH
+    0x17, // SPECIES_PERSIAN
+    0x06, // SPECIES_PSYDUCK
+    0x4c, // SPECIES_GOLDUCK
+    0x32, // SPECIES_MANKEY
+    0x48, // SPECIES_PRIMEAPE
+    0x25, // SPECIES_GROWLITHE
+    0x02, // SPECIES_ARCANINE
+    0x00, // SPECIES_POLIWAG
+    0x32, // SPECIES_POLIWHIRL
+    0x19, // SPECIES_POLIWRATH
+    0x31, // SPECIES_ABRA
+    0x09, // SPECIES_KADABRA
+    0x17, // SPECIES_ALAKAZAM
+    0x00, // SPECIES_MACHOP
+    0x10, // SPECIES_MACHOKE
+    0x31, // SPECIES_MACHAMP
+    0x17, // SPECIES_BELLSPROUT
+    0x0d, // SPECIES_WEEPINBELL
+    0x32, // SPECIES_VICTREEBEL
+    0x00, // SPECIES_TENTACOOL
+    0x00, // SPECIES_TENTACRUEL
+    0x48, // SPECIES_GEODUDE
+    0x48, // SPECIES_GRAVELER
+    0x2f, // SPECIES_GOLEM
+    0x20, // SPECIES_PONYTA
+    0x11, // SPECIES_RAPIDASH
+    0x45, // SPECIES_SLOWPOKE
+    0x0b, // SPECIES_SLOWBRO
+    0x54, // SPECIES_MAGNEMITE
+    0x2c, // SPECIES_MAGNETON
+    0x48, // SPECIES_FARFETCHD
+    0x4c, // SPECIES_DODUO
+    0x41, // SPECIES_DODRIO
+    0x0b, // SPECIES_SEEL
+    0x45, // SPECIES_DEWGONG
+    0x46, // SPECIES_GRIMER
+    0x30, // SPECIES_MUK
+    0x12, // SPECIES_SHELLDER
+    0x1d, // SPECIES_CLOYSTER
+    0x15, // SPECIES_GASTLY
+    0x35, // SPECIES_HAUNTER
+    0x3a, // SPECIES_GENGAR
+    0x43, // SPECIES_ONIX
+    0x4f, // SPECIES_DROWZEE
+    0x09, // SPECIES_HYPNO
+    0x03, // SPECIES_KRABBY
+    0x4b, // SPECIES_KINGLER
+    0x00, // SPECIES_VOLTORB
+    0x00, // SPECIES_ELECTRODE
+    0x46, // SPECIES_EXEGGCUTE
+    0x32, // SPECIES_EXEGGUTOR
+    0x48, // SPECIES_CUBONE
+    0x05, // SPECIES_MAROWAK
+    0x16, // SPECIES_HITMONLEE
+    0x09, // SPECIES_HITMONCHAN
+    0x45, // SPECIES_LICKITUNG
+    0x13, // SPECIES_KOFFING
+    0x04, // SPECIES_WEEZING
+    0x10, // SPECIES_RHYHORN
+    0x13, // SPECIES_RHYDON
+    0x45, // SPECIES_CHANSEY
+    0x48, // SPECIES_TANGELA
+    0x17, // SPECIES_KANGASKHAN
+    0x12, // SPECIES_HORSEA
+    0x04, // SPECIES_SEADRA
+    0x0d, // SPECIES_GOLDEEN
+    0x1c, // SPECIES_SEAKING
+    0x4e, // SPECIES_STARYU
+    0x12, // SPECIES_STARMIE
+    0x46, // SPECIES_MR_MIME
+    0x02, // SPECIES_SCYTHER
+    0x17, // SPECIES_JYNX
+    0x2c, // SPECIES_ELECTABUZZ
+    0x0f, // SPECIES_MAGMAR
+    0x09, // SPECIES_PINSIR
+    0x19, // SPECIES_TAUROS
+    0x05, // SPECIES_MAGIKARP
+    0x48, // SPECIES_GYARADOS
+    0x17, // SPECIES_LAPRAS
+    0x01, // SPECIES_DITTO
+    0x17, // SPECIES_EEVEE
+    0x17, // SPECIES_VAPOREON
+    0x00, // SPECIES_JOLTEON
+    0x17, // SPECIES_FLAREON
+    0x52, // SPECIES_PORYGON
+    0x51, // SPECIES_OMANYTE
+    0x09, // SPECIES_OMASTAR
+    0x1d, // SPECIES_KABUTO
+    0x0f, // SPECIES_KABUTOPS
+    0x47, // SPECIES_AERODACTYL
+    0x0b, // SPECIES_SNORLAX
+    0x09, // SPECIES_ARTICUNO
+    0x2c, // SPECIES_ZAPDOS
+    0x45, // SPECIES_MOLTRES
+    0x00, // SPECIES_DRATINI
+    0x10, // SPECIES_DRAGONAIR
+    0x47, // SPECIES_DRAGONITE
+    0x09, // SPECIES_MEWTWO
+    0x0d, // SPECIES_MEW
+    0x00, // SPECIES_CHIKORITA
+    0x00, // SPECIES_BAYLEEF
+    0x17, // SPECIES_MEGANIUM
+    0x52, // SPECIES_CYNDAQUIL
+    0x17, // SPECIES_QUILAVA
+    0x10, // SPECIES_TYPHLOSION
+    0x31, // SPECIES_TOTODILE
+    0x0f, // SPECIES_CROCONAW
+    0x0f, // SPECIES_FERALIGATR
+    0x00, // SPECIES_SENTRET
+    0x32, // SPECIES_FURRET
+    0x47, // SPECIES_HOOTHOOT
+    0x17, // SPECIES_NOCTOWL
+    0x52, // SPECIES_LEDYBA
+    0x47, // SPECIES_LEDIAN
+    0x4f, // SPECIES_SPINARAK
+    0x0f, // SPECIES_ARIADOS
+    0x00, // SPECIES_CROBAT
+    0x45, // SPECIES_CHINCHOU
+    0x51, // SPECIES_LANTURN
+    0x1e, // SPECIES_PICHU
+    0x52, // SPECIES_CLEFFA
+    0x0c, // SPECIES_IGGLYBUFF
+    0x0b, // SPECIES_TOGEPI
+    0x00, // SPECIES_TOGETIC
+    0x31, // SPECIES_NATU
+    0x09, // SPECIES_XATU
+    0x00, // SPECIES_MAREEP
+    0x1e, // SPECIES_FLAAFFY
+    0x2c, // SPECIES_AMPHAROS
+    0x0b, // SPECIES_BELLOSSOM
+    0x00, // SPECIES_MARILL
+    0x4a, // SPECIES_AZUMARILL
+    0x46, // SPECIES_SUDOWOODO
+    0x32, // SPECIES_POLITOED
+    0x1c, // SPECIES_HOPPIP
+    0x18, // SPECIES_SKIPLOOM
+    0x51, // SPECIES_JUMPLUFF
+    0x32, // SPECIES_AIPOM
+    0x52, // SPECIES_SUNKERN
+    0x00, // SPECIES_SUNFLORA
+    0x2b, // SPECIES_YANMA
+    0x00, // SPECIES_WOOPER
+    0x16, // SPECIES_QUAGSIRE
+    0x09, // SPECIES_ESPEON
+    0x10, // SPECIES_UMBREON
+    0x00, // SPECIES_MURKROW
+    0x13, // SPECIES_SLOWKING
+    0x1c, // SPECIES_MISDREAVUS
+    0x0a, // SPECIES_UNOWN
+    0x30, // SPECIES_WOBBUFFET
+    0x1e, // SPECIES_GIRAFARIG
+    0x0b, // SPECIES_PINECO
+    0x10, // SPECIES_FORRETRESS
+    0x00, // SPECIES_DUNSPARCE
+    0x13, // SPECIES_GLIGAR
+    0x0f, // SPECIES_STEELIX
+    0x17, // SPECIES_SNUBBULL
+    0x10, // SPECIES_GRANBULL
+    0x3a, // SPECIES_QWILFISH
+    0x02, // SPECIES_SCIZOR
+    0x0b, // SPECIES_SHUCKLE
+    0x41, // SPECIES_HERACROSS
+    0x16, // SPECIES_SNEASEL
+    0x17, // SPECIES_TEDDIURSA
+    0x10, // SPECIES_URSARING
+    0x17, // SPECIES_SLUGMA
+    0x17, // SPECIES_MAGCARGO
+    0x00, // SPECIES_SWINUB
+    0x0f, // SPECIES_PILOSWINE
+    0x03, // SPECIES_CORSOLA
+    0x52, // SPECIES_REMORAID
+    0x17, // SPECIES_OCTILLERY
+    0x52, // SPECIES_DELIBIRD
+    0x0d, // SPECIES_MANTINE
+    0x17, // SPECIES_SKARMORY
+    0x17, // SPECIES_HOUNDOUR
+    0x10, // SPECIES_HOUNDOOM
+    0x42, // SPECIES_KINGDRA
+    0x32, // SPECIES_PHANPY
+    0x19, // SPECIES_DONPHAN
+    0x00, // SPECIES_PORYGON2
+    0x00, // SPECIES_STANTLER
+    0x31, // SPECIES_SMEARGLE
+    0x16, // SPECIES_TYROGUE
+    0x02, // SPECIES_HITMONTOP
+    0x09, // SPECIES_SMOOCHUM
+    0x2c, // SPECIES_ELEKID
+    0x00, // SPECIES_MAGBY
+    0x45, // SPECIES_MILTANK
+    0x00, // SPECIES_BLISSEY
+    0x2c, // SPECIES_RAIKOU
+    0x09, // SPECIES_ENTEI
+    0x10, // SPECIES_SUICUNE
+    0x52, // SPECIES_LARVITAR
+    0x10, // SPECIES_PUPITAR
+    0x0f, // SPECIES_TYRANITAR
+    0x3a, // SPECIES_LUGIA
+    0x09, // SPECIES_HO_OH
+    0x18, // SPECIES_CELEBI
+    0x00, // 252
+    0x00, // 253
+    0x00, // 254
+    0x00, // 255
+    0x00, // 256
+    0x00, // 257
+    0x00, // 258
+    0x00, // 259
+    0x00, // 260
+    0x00, // 261
+    0x00, // 262
+    0x00, // 263
+    0x00, // 264
+    0x00, // 265
+    0x00, // 266
+    0x00, // 267
+    0x00, // 268
+    0x00, // 269
+    0x00, // 270
+    0x00, // 271
+    0x00, // 272
+    0x00, // 273
+    0x00, // 274
+    0x00, // 275
+    0x00, // 276
+    0x00, // SPECIES_TREECKO
+    0x17, // SPECIES_GROVYLE
+    0x10, // SPECIES_SCEPTILE
+    0x16, // SPECIES_TORCHIC
+    0x06, // SPECIES_COMBUSKEN
+    0x0f, // SPECIES_BLAZIKEN
+    0x01, // SPECIES_MUDKIP
+    0x04, // SPECIES_MARSHTOMP
+    0x1e, // SPECIES_SWAMPERT
+    0x10, // SPECIES_POOCHYENA
+    0x10, // SPECIES_MIGHTYENA
+    0x03, // SPECIES_ZIGZAGOON
+    0x09, // SPECIES_LINOONE
+    0x00, // SPECIES_WURMPLE
+    0x00, // SPECIES_SILCOON
+    0x04, // SPECIES_BEAUTIFLY
+    0x04, // SPECIES_CASCOON
+    0x06, // SPECIES_DUSTOX
+    0x00, // SPECIES_LOTAD
+    0x00, // SPECIES_LOMBRE
+    0x49, // SPECIES_LUDICOLO
+    0x05, // SPECIES_SEEDOT
+    0x00, // SPECIES_NUZLEAF
+    0x02, // SPECIES_SHIFTRY
+    0x00, // SPECIES_NINCADA
+    0x46, // SPECIES_NINJASK
+    0x1c, // SPECIES_SHEDINJA
+    0x1e, // SPECIES_TAILLOW
+    0x01, // SPECIES_SWELLOW
+    0x00, // SPECIES_SHROOMISH
+    0x00, // SPECIES_BRELOOM
+    0x31, // SPECIES_SPINDA
+    0x1b, // SPECIES_WINGULL
+    0x1c, // SPECIES_PELIPPER
+    0x00, // SPECIES_SURSKIT
+    0x00, // SPECIES_MASQUERAIN
+    0x01, // SPECIES_WAILMER
+    0x1c, // SPECIES_WAILORD
+    0x00, // SPECIES_SKITTY
+    0x17, // SPECIES_DELCATTY
+    0x35, // SPECIES_KECLEON
+    0x1d, // SPECIES_BALTOY
+    0x51, // SPECIES_CLAYDOL
+    0x49, // SPECIES_NOSEPASS
+    0x17, // SPECIES_TORKOAL
+    0x15, // SPECIES_SABLEYE
+    0x49, // SPECIES_BARBOACH
+    0x49, // SPECIES_WHISCASH
+    0x1d, // SPECIES_LUVDISC
+    0x10, // SPECIES_CORPHISH
+    0x09, // SPECIES_CRAWDAUNT
+    0x49, // SPECIES_FEEBAS
+    0x22, // SPECIES_MILOTIC
+    0x49, // SPECIES_CARVANHA
+    0x56, // SPECIES_SHARPEDO
+    0x10, // SPECIES_TRAPINCH
+    0x0f, // SPECIES_VIBRAVA
+    0x4b, // SPECIES_FLYGON
+    0x0b, // SPECIES_MAKUHITA
+    0x34, // SPECIES_HARIYAMA
+    0x00, // SPECIES_ELECTRIKE
+    0x00, // SPECIES_MANECTRIC
+    0x04, // SPECIES_NUMEL
+    0x10, // SPECIES_CAMERUPT
+    0x53, // SPECIES_SPHEAL
+    0x17, // SPECIES_SEALEO
+    0x0f, // SPECIES_WALREIN
+    0x49, // SPECIES_CACNEA
+    0x04, // SPECIES_CACTURNE
+    0x45, // SPECIES_SNORUNT
+    0x0a, // SPECIES_GLALIE
+    0x0e, // SPECIES_LUNATONE
+    0x08, // SPECIES_SOLROCK
+    0x00, // SPECIES_AZURILL
+    0x56, // SPECIES_SPOINK
+    0x32, // SPECIES_GRUMPIG
+    0x00, // SPECIES_PLUSLE
+    0x01, // SPECIES_MINUN
+    0x00, // SPECIES_MAWILE
+    0x05, // SPECIES_MEDITITE
+    0x45, // SPECIES_MEDICHAM
+    0x04, // SPECIES_SWABLU
+    0x16, // SPECIES_ALTARIA
+    0x32, // SPECIES_WYNAUT
+    0x0a, // SPECIES_DUSKULL
+    0x02, // SPECIES_DUSCLOPS
+    0x45, // SPECIES_ROSELIA
+    0x45, // SPECIES_SLAKOTH
+    0x31, // SPECIES_VIGOROTH
+    0x45, // SPECIES_SLAKING
+    0x00, // SPECIES_GULPIN
+    0x45, // SPECIES_SWALOT
+    0x10, // SPECIES_TROPIUS
+    0x03, // SPECIES_WHISMUR
+    0x49, // SPECIES_LOUDRED
+    0x19, // SPECIES_EXPLOUD
+    0x12, // SPECIES_CLAMPERL
+    0x09, // SPECIES_HUNTAIL
+    0x1c, // SPECIES_GOREBYSS
+    0x11, // SPECIES_ABSOL
+    0x1c, // SPECIES_SHUPPET
+    0x0d, // SPECIES_BANETTE
+    0x17, // SPECIES_SEVIPER
+    0x09, // SPECIES_ZANGOOSE
+    0x1a, // SPECIES_RELICANTH
+    0x45, // SPECIES_ARON
+    0x00, // SPECIES_LAIRON
+    0x19, // SPECIES_AGGRON
+    0x1d, // SPECIES_CASTFORM
+    0x00, // SPECIES_VOLBEAT
+    0x05, // SPECIES_ILLUMISE
+    0x17, // SPECIES_LILEEP
+    0x19, // SPECIES_CRADILY
+    0x12, // SPECIES_ANORITH
+    0x10, // SPECIES_ARMALDO
+    0x45, // SPECIES_RALTS
+    0x00, // SPECIES_KIRLIA
+    0x00, // SPECIES_GARDEVOIR
+    0x19, // SPECIES_BAGON
+    0x04, // SPECIES_SHELGON
+    0x0f, // SPECIES_SALAMENCE
+    0x0f, // SPECIES_BELDUM
+    0x04, // SPECIES_METANG
+    0x10, // SPECIES_METAGROSS
+    0x01, // SPECIES_REGIROCK
+    0x44, // SPECIES_REGICE
+    0x09, // SPECIES_REGISTEEL
+    0x2d, // SPECIES_KYOGRE
+    0x10, // SPECIES_GROUDON
+    0x0f, // SPECIES_RAYQUAZA
+    0x2d, // SPECIES_LATIAS
+    0x10, // SPECIES_LATIOS
+    0x0d, // SPECIES_JIRACHI
+    0x1b, // SPECIES_DEOXYS
+    0x1d, // SPECIES_CHIMECHO
+};
+
+static const u8 sMonAnimationDelayTable[] =
+{
+    0x00, // SPECIES_BULBASAUR
+    0x00, // SPECIES_IVYSAUR
+    0x00, // SPECIES_VENUSAUR
+    0x00, // SPECIES_CHARMANDER
+    0x00, // SPECIES_CHARMELEON
+    0x00, // SPECIES_CHARIZARD
+    0x00, // SPECIES_SQUIRTLE
+    0x00, // SPECIES_WARTORTLE
+    0x32, // SPECIES_BLASTOISE
+    0x00, // SPECIES_CATERPIE
+    0x00, // SPECIES_METAPOD
+    0x00, // SPECIES_BUTTERFREE
+    0x0a, // SPECIES_WEEDLE
+    0x14, // SPECIES_KAKUNA
+    0x23, // SPECIES_BEEDRILL
+    0x00, // SPECIES_PIDGEY
+    0x19, // SPECIES_PIDGEOTTO
+    0x00, // SPECIES_PIDGEOT
+    0x00, // SPECIES_RATTATA
+    0x00, // SPECIES_RATICATE
+    0x00, // SPECIES_SPEAROW
+    0x02, // SPECIES_FEAROW
+    0x1e, // SPECIES_EKANS
+    0x00, // SPECIES_ARBOK
+    0x00, // SPECIES_PIKACHU
+    0x00, // SPECIES_RAICHU
+    0x00, // SPECIES_SANDSHREW
+    0x00, // SPECIES_SANDSLASH
+    0x1c, // SPECIES_NIDORAN_F
+    0x00, // SPECIES_NIDORINA
+    0x00, // SPECIES_NIDOQUEEN
+    0x00, // SPECIES_NIDORAN_M
+    0x00, // SPECIES_NIDORINO
+    0x19, // SPECIES_NIDOKING
+    0x00, // SPECIES_CLEFAIRY
+    0x00, // SPECIES_CLEFABLE
+    0x00, // SPECIES_VULPIX
+    0x00, // SPECIES_NINETALES
+    0x00, // SPECIES_JIGGLYPUFF
+    0x00, // SPECIES_WIGGLYTUFF
+    0x00, // SPECIES_ZUBAT
+    0x00, // SPECIES_GOLBAT
+    0x00, // SPECIES_ODDISH
+    0x00, // SPECIES_GLOOM
+    0x00, // SPECIES_VILEPLUME
+    0x0a, // SPECIES_PARAS
+    0x2d, // SPECIES_PARASECT
+    0x14, // SPECIES_VENONAT
+    0x00, // SPECIES_VENOMOTH
+    0x19, // SPECIES_DIGLETT
+    0x23, // SPECIES_DUGTRIO
+    0x28, // SPECIES_MEOWTH
+    0x14, // SPECIES_PERSIAN
+    0x00, // SPECIES_PSYDUCK
+    0x00, // SPECIES_GOLDUCK
+    0x14, // SPECIES_MANKEY
+    0x00, // SPECIES_PRIMEAPE
+    0x1e, // SPECIES_GROWLITHE
+    0x28, // SPECIES_ARCANINE
+    0x00, // SPECIES_POLIWAG
+    0x05, // SPECIES_POLIWHIRL
+    0x00, // SPECIES_POLIWRATH
+    0x00, // SPECIES_ABRA
+    0x00, // SPECIES_KADABRA
+    0x00, // SPECIES_ALAKAZAM
+    0x00, // SPECIES_MACHOP
+    0x00, // SPECIES_MACHOKE
+    0x00, // SPECIES_MACHAMP
+    0x00, // SPECIES_BELLSPROUT
+    0x03, // SPECIES_WEEPINBELL
+    0x00, // SPECIES_VICTREEBEL
+    0x00, // SPECIES_TENTACOOL
+    0x00, // SPECIES_TENTACRUEL
+    0x00, // SPECIES_GEODUDE
+    0x00, // SPECIES_GRAVELER
+    0x00, // SPECIES_GOLEM
+    0x00, // SPECIES_PONYTA
+    0x00, // SPECIES_RAPIDASH
+    0x00, // SPECIES_SLOWPOKE
+    0x00, // SPECIES_SLOWBRO
+    0x00, // SPECIES_MAGNEMITE
+    0x00, // SPECIES_MAGNETON
+    0x00, // SPECIES_FARFETCHD
+    0x00, // SPECIES_DODUO
+    0x00, // SPECIES_DODRIO
+    0x00, // SPECIES_SEEL
+    0x00, // SPECIES_DEWGONG
+    0x00, // SPECIES_GRIMER
+    0x2d, // SPECIES_MUK
+    0x14, // SPECIES_SHELLDER
+    0x00, // SPECIES_CLOYSTER
+    0x00, // SPECIES_GASTLY
+    0x17, // SPECIES_HAUNTER
+    0x00, // SPECIES_GENGAR
+    0x00, // SPECIES_ONIX
+    0x30, // SPECIES_DROWZEE
+    0x28, // SPECIES_HYPNO
+    0x00, // SPECIES_KRABBY
+    0x00, // SPECIES_KINGLER
+    0x00, // SPECIES_VOLTORB
+    0x00, // SPECIES_ELECTRODE
+    0x00, // SPECIES_EXEGGCUTE
+    0x00, // SPECIES_EXEGGUTOR
+    0x00, // SPECIES_CUBONE
+    0x00, // SPECIES_MAROWAK
+    0x00, // SPECIES_HITMONLEE
+    0x19, // SPECIES_HITMONCHAN
+    0x00, // SPECIES_LICKITUNG
+    0x00, // SPECIES_KOFFING
+    0x00, // SPECIES_WEEZING
+    0x00, // SPECIES_RHYHORN
+    0x00, // SPECIES_RHYDON
+    0x00, // SPECIES_CHANSEY
+    0x00, // SPECIES_TANGELA
+    0x00, // SPECIES_KANGASKHAN
+    0x00, // SPECIES_HORSEA
+    0x00, // SPECIES_SEADRA
+    0x00, // SPECIES_GOLDEEN
+    0x00, // SPECIES_SEAKING
+    0x00, // SPECIES_STARYU
+    0x00, // SPECIES_STARMIE
+    0x00, // SPECIES_MR_MIME
+    0x0a, // SPECIES_SCYTHER
+    0x00, // SPECIES_JYNX
+    0x00, // SPECIES_ELECTABUZZ
+    0x00, // SPECIES_MAGMAR
+    0x00, // SPECIES_PINSIR
+    0x0a, // SPECIES_TAUROS
+    0x00, // SPECIES_MAGIKARP
+    0x00, // SPECIES_GYARADOS
+    0x00, // SPECIES_LAPRAS
+    0x00, // SPECIES_DITTO
+    0x00, // SPECIES_EEVEE
+    0x00, // SPECIES_VAPOREON
+    0x00, // SPECIES_JOLTEON
+    0x00, // SPECIES_FLAREON
+    0x00, // SPECIES_PORYGON
+    0x00, // SPECIES_OMANYTE
+    0x00, // SPECIES_OMASTAR
+    0x00, // SPECIES_KABUTO
+    0x00, // SPECIES_KABUTOPS
+    0x00, // SPECIES_AERODACTYL
+    0x00, // SPECIES_SNORLAX
+    0x00, // SPECIES_ARTICUNO
+    0x00, // SPECIES_ZAPDOS
+    0x00, // SPECIES_MOLTRES
+    0x00, // SPECIES_DRATINI
+    0x00, // SPECIES_DRAGONAIR
+    0x00, // SPECIES_DRAGONITE
+    0x00, // SPECIES_MEWTWO
+    0x00, // SPECIES_MEW
+    0x00, // SPECIES_CHIKORITA
+    0x00, // SPECIES_BAYLEEF
+    0x00, // SPECIES_MEGANIUM
+    0x00, // SPECIES_CYNDAQUIL
+    0x00, // SPECIES_QUILAVA
+    0x14, // SPECIES_TYPHLOSION
+    0x00, // SPECIES_TOTODILE
+    0x00, // SPECIES_CROCONAW
+    0x05, // SPECIES_FERALIGATR
+    0x00, // SPECIES_SENTRET
+    0x00, // SPECIES_FURRET
+    0x00, // SPECIES_HOOTHOOT
+    0x00, // SPECIES_NOCTOWL
+    0x00, // SPECIES_LEDYBA
+    0x00, // SPECIES_LEDIAN
+    0x00, // SPECIES_SPINARAK
+    0x00, // SPECIES_ARIADOS
+    0x00, // SPECIES_CROBAT
+    0x00, // SPECIES_CHINCHOU
+    0x00, // SPECIES_LANTURN
+    0x00, // SPECIES_PICHU
+    0x00, // SPECIES_CLEFFA
+    0x00, // SPECIES_IGGLYBUFF
+    0x00, // SPECIES_TOGEPI
+    0x00, // SPECIES_TOGETIC
+    0x1e, // SPECIES_NATU
+    0x00, // SPECIES_XATU
+    0x32, // SPECIES_MAREEP
+    0x00, // SPECIES_FLAAFFY
+    0x0a, // SPECIES_AMPHAROS
+    0x00, // SPECIES_BELLOSSOM
+    0x00, // SPECIES_MARILL
+    0x00, // SPECIES_AZUMARILL
+    0x00, // SPECIES_SUDOWOODO
+    0x28, // SPECIES_POLITOED
+    0x00, // SPECIES_HOPPIP
+    0x00, // SPECIES_SKIPLOOM
+    0x00, // SPECIES_JUMPLUFF
+    0x00, // SPECIES_AIPOM
+    0x00, // SPECIES_SUNKERN
+    0x00, // SPECIES_SUNFLORA
+    0x00, // SPECIES_YANMA
+    0x00, // SPECIES_WOOPER
+    0x00, // SPECIES_QUAGSIRE
+    0x00, // SPECIES_ESPEON
+    0x00, // SPECIES_UMBREON
+    0x00, // SPECIES_MURKROW
+    0x00, // SPECIES_SLOWKING
+    0x00, // SPECIES_MISDREAVUS
+    0x00, // SPECIES_UNOWN
+    0x00, // SPECIES_WOBBUFFET
+    0x00, // SPECIES_GIRAFARIG
+    0x00, // SPECIES_PINECO
+    0x00, // SPECIES_FORRETRESS
+    0x0a, // SPECIES_DUNSPARCE
+    0x00, // SPECIES_GLIGAR
+    0x2d, // SPECIES_STEELIX
+    0x00, // SPECIES_SNUBBULL
+    0x00, // SPECIES_GRANBULL
+    0x27, // SPECIES_QWILFISH
+    0x13, // SPECIES_SCIZOR
+    0x00, // SPECIES_SHUCKLE
+    0x00, // SPECIES_HERACROSS
+    0x00, // SPECIES_SNEASEL
+    0x00, // SPECIES_TEDDIURSA
+    0x00, // SPECIES_URSARING
+    0x00, // SPECIES_SLUGMA
+    0x00, // SPECIES_MAGCARGO
+    0x00, // SPECIES_SWINUB
+    0x00, // SPECIES_PILOSWINE
+    0x00, // SPECIES_CORSOLA
+    0x00, // SPECIES_REMORAID
+    0x14, // SPECIES_OCTILLERY
+    0x00, // SPECIES_DELIBIRD
+    0x00, // SPECIES_MANTINE
+    0x00, // SPECIES_SKARMORY
+    0x00, // SPECIES_HOUNDOUR
+    0x00, // SPECIES_HOUNDOOM
+    0x00, // SPECIES_KINGDRA
+    0x00, // SPECIES_PHANPY
+    0x00, // SPECIES_DONPHAN
+    0x00, // SPECIES_PORYGON2
+    0x00, // SPECIES_STANTLER
+    0x00, // SPECIES_SMEARGLE
+    0x00, // SPECIES_TYROGUE
+    0x00, // SPECIES_HITMONTOP
+    0x28, // SPECIES_SMOOCHUM
+    0x00, // SPECIES_ELEKID
+    0x00, // SPECIES_MAGBY
+    0x00, // SPECIES_MILTANK
+    0x00, // SPECIES_BLISSEY
+    0x00, // SPECIES_RAIKOU
+    0x00, // SPECIES_ENTEI
+    0x00, // SPECIES_SUICUNE
+    0x00, // SPECIES_LARVITAR
+    0x00, // SPECIES_PUPITAR
+    0x0a, // SPECIES_TYRANITAR
+    0x14, // SPECIES_LUGIA
+    0x00, // SPECIES_HO_OH
+    0x00, // SPECIES_CELEBI
+    0x00, // 252
+    0x00, // 253
+    0x00, // 254
+    0x00, // 255
+    0x00, // 256
+    0x00, // 257
+    0x00, // 258
+    0x00, // 259
+    0x00, // 260
+    0x00, // 261
+    0x00, // 262
+    0x00, // 263
+    0x00, // 264
+    0x00, // 265
+    0x00, // 266
+    0x00, // 267
+    0x00, // 268
+    0x00, // 269
+    0x00, // 270
+    0x00, // 271
+    0x00, // 272
+    0x00, // 273
+    0x00, // 274
+    0x00, // 275
+    0x00, // 276
+    0x00, // SPECIES_TREECKO
+    0x00, // SPECIES_GROVYLE
+    0x00, // SPECIES_SCEPTILE
+    0x00, // SPECIES_TORCHIC
+    0x00, // SPECIES_COMBUSKEN
+    0x00, // SPECIES_BLAZIKEN
+    0x00, // SPECIES_MUDKIP
+    0x00, // SPECIES_MARSHTOMP
+    0x00, // SPECIES_SWAMPERT
+    0x00, // SPECIES_POOCHYENA
+    0x00, // SPECIES_MIGHTYENA
+    0x00, // SPECIES_ZIGZAGOON
+    0x00, // SPECIES_LINOONE
+    0x00, // SPECIES_WURMPLE
+    0x00, // SPECIES_SILCOON
+    0x00, // SPECIES_BEAUTIFLY
+    0x00, // SPECIES_CASCOON
+    0x00, // SPECIES_DUSTOX
+    0x00, // SPECIES_LOTAD
+    0x00, // SPECIES_LOMBRE
+    0x00, // SPECIES_LUDICOLO
+    0x00, // SPECIES_SEEDOT
+    0x00, // SPECIES_NUZLEAF
+    0x00, // SPECIES_SHIFTRY
+    0x00, // SPECIES_NINCADA
+    0x00, // SPECIES_NINJASK
+    0x00, // SPECIES_SHEDINJA
+    0x00, // SPECIES_TAILLOW
+    0x00, // SPECIES_SWELLOW
+    0x00, // SPECIES_SHROOMISH
+    0x00, // SPECIES_BRELOOM
+    0x00, // SPECIES_SPINDA
+    0x00, // SPECIES_WINGULL
+    0x00, // SPECIES_PELIPPER
+    0x00, // SPECIES_SURSKIT
+    0x00, // SPECIES_MASQUERAIN
+    0x00, // SPECIES_WAILMER
+    0x0a, // SPECIES_WAILORD
+    0x00, // SPECIES_SKITTY
+    0x00, // SPECIES_DELCATTY
+    0x1e, // SPECIES_KECLEON
+    0x00, // SPECIES_BALTOY
+    0x00, // SPECIES_CLAYDOL
+    0x00, // SPECIES_NOSEPASS
+    0x00, // SPECIES_TORKOAL
+    0x00, // SPECIES_SABLEYE
+    0x00, // SPECIES_BARBOACH
+    0x00, // SPECIES_WHISCASH
+    0x00, // SPECIES_LUVDISC
+    0x00, // SPECIES_CORPHISH
+    0x00, // SPECIES_CRAWDAUNT
+    0x00, // SPECIES_FEEBAS
+    0x2d, // SPECIES_MILOTIC
+    0x00, // SPECIES_CARVANHA
+    0x00, // SPECIES_SHARPEDO
+    0x00, // SPECIES_TRAPINCH
+    0x00, // SPECIES_VIBRAVA
+    0x00, // SPECIES_FLYGON
+    0x00, // SPECIES_MAKUHITA
+    0x00, // SPECIES_HARIYAMA
+    0x00, // SPECIES_ELECTRIKE
+    0x00, // SPECIES_MANECTRIC
+    0x00, // SPECIES_NUMEL
+    0x00, // SPECIES_CAMERUPT
+    0x0f, // SPECIES_SPHEAL
+    0x00, // SPECIES_SEALEO
+    0x00, // SPECIES_WALREIN
+    0x00, // SPECIES_CACNEA
+    0x00, // SPECIES_CACTURNE
+    0x14, // SPECIES_SNORUNT
+    0x00, // SPECIES_GLALIE
+    0x00, // SPECIES_LUNATONE
+    0x00, // SPECIES_SOLROCK
+    0x00, // SPECIES_AZURILL
+    0x00, // SPECIES_SPOINK
+    0x0f, // SPECIES_GRUMPIG
+    0x00, // SPECIES_PLUSLE
+    0x00, // SPECIES_MINUN
+    0x00, // SPECIES_MAWILE
+    0x00, // SPECIES_MEDITITE
+    0x00, // SPECIES_MEDICHAM
+    0x00, // SPECIES_SWABLU
+    0x00, // SPECIES_ALTARIA
+    0x0f, // SPECIES_WYNAUT
+    0x00, // SPECIES_DUSKULL
+    0x1e, // SPECIES_DUSCLOPS
+    0x00, // SPECIES_ROSELIA
+    0x00, // SPECIES_SLAKOTH
+    0x00, // SPECIES_VIGOROTH
+    0x00, // SPECIES_SLAKING
+    0x00, // SPECIES_GULPIN
+    0x00, // SPECIES_SWALOT
+    0x00, // SPECIES_TROPIUS
+    0x00, // SPECIES_WHISMUR
+    0x00, // SPECIES_LOUDRED
+    0x00, // SPECIES_EXPLOUD
+    0x00, // SPECIES_CLAMPERL
+    0x00, // SPECIES_HUNTAIL
+    0x00, // SPECIES_GOREBYSS
+    0x2d, // SPECIES_ABSOL
+    0x00, // SPECIES_SHUPPET
+    0x00, // SPECIES_BANETTE
+    0x00, // SPECIES_SEVIPER
+    0x00, // SPECIES_ZANGOOSE
+    0x00, // SPECIES_RELICANTH
+    0x00, // SPECIES_ARON
+    0x00, // SPECIES_LAIRON
+    0x00, // SPECIES_AGGRON
+    0x00, // SPECIES_CASTFORM
+    0x00, // SPECIES_VOLBEAT
+    0x00, // SPECIES_ILLUMISE
+    0x00, // SPECIES_LILEEP
+    0x00, // SPECIES_CRADILY
+    0x00, // SPECIES_ANORITH
+    0x00, // SPECIES_ARMALDO
+    0x00, // SPECIES_RALTS
+    0x00, // SPECIES_KIRLIA
+    0x00, // SPECIES_GARDEVOIR
+    0x00, // SPECIES_BAGON
+    0x00, // SPECIES_SHELGON
+    0x46, // SPECIES_SALAMENCE
+    0x00, // SPECIES_BELDUM
+    0x00, // SPECIES_METANG
+    0x00, // SPECIES_METAGROSS
+    0x00, // SPECIES_REGIROCK
+    0x00, // SPECIES_REGICE
+    0x00, // SPECIES_REGISTEEL
+    0x3c, // SPECIES_KYOGRE
+    0x00, // SPECIES_GROUDON
+    0x3c, // SPECIES_RAYQUAZA
+    0x00, // SPECIES_LATIAS
+    0x00, // SPECIES_LATIOS
+    0x00, // SPECIES_JIRACHI
+    0x00, // SPECIES_DEOXYS
+    0x00, // SPECIES_CHIMECHO
+};
+
+const u8 gUnknown_08329D22[] = {0x03, 0x0c, 0x30, 0xc0}; // Masks for getting PP Up count, also PP Max values
+const u8 gUnknown_08329D26[] = {0xfc, 0xf3, 0xcf, 0x3f}; // Masks for setting PP Up count
+const u8 gUnknown_08329D2A[] = {0x01, 0x04, 0x10, 0x40}; // Values added to PP Up count
+
+const u8 gStatStageRatios[][2] =
+{
+    {10, 40}, // -6
+    {10, 35}, // -5
+    {10, 30}, // -4
+    {10, 25}, // -3
+    {10, 20}, // -2
+    {10, 15}, // -1
+    {10, 10}, //  0
+    {15, 10}, // +1
+    {20, 10}, // +2
+    {25, 10}, // +3
+    {30, 10}, // +4
+    {35, 10}, // +5
+    {40, 10}, // +6
+};
+
+static const u16 sDeoxysBaseStats[] =
+{
+    50, // Hp
+    95, // Attack
+    90, // Defense
+    180, // Speed
+    95, // Sp.Attack
+    90, // Sp.Defense
+};
+
+const u16 gUnknown_08329D54[] =
+{
+    FACILITY_CLASS_COOLTRAINER_1, FACILITY_CLASS_BLACK_BELT, FACILITY_CLASS_CAMPER,
+    FACILITY_CLASS_YOUNGSTER, FACILITY_CLASS_PSYCHIC_1, FACILITY_CLASS_BUG_CATCHER,
+    FACILITY_CLASS_PKMN_BREEDER_2, FACILITY_CLASS_GUITARIST, FACILITY_CLASS_COOLTRAINER_2,
+    FACILITY_CLASS_HEX_MANIAC, FACILITY_CLASS_PICNICKER, FACILITY_CLASS_LASS,
+    FACILITY_CLASS_PSYCHIC_2, FACILITY_CLASS_BATTLE_GIRL, FACILITY_CLASS_PKMN_BREEDER_1,
+    FACILITY_CLASS_BEAUTY
+};
+
+static const u8 sHoldEffectToType[][2] =
+{
+    {HOLD_EFFECT_BUG_POWER, TYPE_BUG},
+    {HOLD_EFFECT_STEEL_POWER, TYPE_STEEL},
+    {HOLD_EFFECT_GROUND_POWER, TYPE_GROUND},
+    {HOLD_EFFECT_ROCK_POWER, TYPE_ROCK},
+    {HOLD_EFFECT_GRASS_POWER, TYPE_GRASS},
+    {HOLD_EFFECT_DARK_POWER, TYPE_DARK},
+    {HOLD_EFFECT_FIGHTING_POWER, TYPE_FIGHTING},
+    {HOLD_EFFECT_ELECTRIC_POWER, TYPE_ELECTRIC},
+    {HOLD_EFFECT_WATER_POWER, TYPE_WATER},
+    {HOLD_EFFECT_FLYING_POWER, TYPE_FLYING},
+    {HOLD_EFFECT_POISON_POWER, TYPE_POISON},
+    {HOLD_EFFECT_ICE_POWER, TYPE_ICE},
+    {HOLD_EFFECT_GHOST_POWER, TYPE_GHOST},
+    {HOLD_EFFECT_PSYCHIC_POWER, TYPE_PSYCHIC},
+    {HOLD_EFFECT_FIRE_POWER, TYPE_FIRE},
+    {HOLD_EFFECT_DRAGON_POWER, TYPE_DRAGON},
+    {HOLD_EFFECT_NORMAL_POWER, TYPE_NORMAL},
+};
+
+const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
+{
+    {   // B_POSITION_PLAYER_LEFT
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF3A8,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {   // B_POSITION_OPPONENT_LEFT
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACA8,
+        .anims = NULL,
+        .images = gUnknown_082FF3C8,
+        .affineAnims = gUnknown_082FF694,
+        .callback = oac_poke_opponent,
+    },
+    {   // B_POSITION_PLAYER_RIGHT
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF3E8,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {   // B_POSITION_OPPONENT_RIGHT
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACA8,
+        .anims = NULL,
+        .images = gUnknown_082FF408,
+        .affineAnims = gUnknown_082FF694,
+        .callback = oac_poke_opponent
+    },
+};
+
+static const struct SpriteTemplate gUnknown_08329DF8[] =
+{
+    {
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF428,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF448,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF468,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF490,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF4B8,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF4D8,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF4F8,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+    {
+        .tileTag = 0xFFFF,
+        .paletteTag = 0,
+        .oam = &gUnknown_0831ACB0,
+        .anims = NULL,
+        .images = gUnknown_082FF518,
+        .affineAnims = gUnknown_082FF618,
+        .callback = sub_8039BB4,
+    },
+};
+
+static const u8 sSecretBaseFacilityClasses[2][5] =
+{
+    {FACILITY_CLASS_YOUNGSTER, FACILITY_CLASS_BUG_CATCHER, FACILITY_CLASS_RICH_BOY, FACILITY_CLASS_CAMPER, FACILITY_CLASS_COOLTRAINER_1},
+    {FACILITY_CLASS_LASS, FACILITY_CLASS_SCHOOL_KID_2, FACILITY_CLASS_LADY, FACILITY_CLASS_PICNICKER, FACILITY_CLASS_COOLTRAINER_2}
+};
+
+static const u8 sGetMonDataEVConstants[] =
+{
+    MON_DATA_HP_EV,
+    MON_DATA_ATK_EV,
+    MON_DATA_DEF_EV,
+    MON_DATA_SPEED_EV,
+    MON_DATA_SPDEF_EV,
+    MON_DATA_SPATK_EV
+};
+
+static const u8 gUnknown_08329EC8[] =
+{
+    STAT_ATK, STAT_ATK, STAT_SPEED, STAT_DEF, STAT_SPATK, STAT_ACC
+};
+
+static const s8 gUnknown_08329ECE[][3] =
+{
+    { 5,  3,  2},
+    { 5,  3,  2},
+    { 1,  1,  0},
+    { 3,  2,  1},
+    { 1,  1,  0},
+    { 1,  1,  1},
+    {-1, -1, -1},
+    {-5, -5, -10},
+    {-5, -5, -10},
+};
+
+static const u16 sHMMoves[] =
+{
+    MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
+    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, 0xFFFF
+};
+
+static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
+{
+    {SPECIES_NONE,      ITEM_NONE},
+    {SPECIES_MAREEP,    ITEM_GANLON_BERRY},
+    {SPECIES_PINECO,	ITEM_APICOT_BERRY},
+    {SPECIES_HOUNDOUR,	ITEM_BIG_MUSHROOM},
+    {SPECIES_TEDDIURSA,	ITEM_PETAYA_BERRY},
+    {SPECIES_AIPOM,		ITEM_BERRY_JUICE},
+    {SPECIES_SHUCKLE,	ITEM_BERRY_JUICE},
+    {SPECIES_STANTLER,	ITEM_PETAYA_BERRY},
+    {SPECIES_SMEARGLE,	ITEM_SALAC_BERRY},
+};
+
+static const struct OamData sOamData_8329F20 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const struct SpriteTemplate gUnknown_08329F28 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 0xFFFF,
+    .oam = &sOamData_8329F20,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
 
 // code
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
@@ -757,7 +1807,7 @@ static s32 GetDeoxysStat(struct Pokemon *mon, s32 statId)
 
     ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
     evVal = GetMonData(mon, MON_DATA_HP_EV + statId, NULL);
-    statValue = (u16)(((gUnknown_08329D48[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5);
+    statValue = (u16)(((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5);
 
     nature = GetNature(mon);
     statId_ = statId; // needed to match
@@ -1208,10 +2258,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, bankDef))
         spDefense = (110 * spDefense) / 100;
 
-    for (i = 0; i < 17; i++)
+    for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
     {
-        if (attackerHoldEffect == gHoldEffectToType[i][0]
-            && type == gHoldEffectToType[i][1])
+        if (attackerHoldEffect == sHoldEffectToType[i][0]
+            && type == sHoldEffectToType[i][1])
         {
             if (type <= 8)
                 attack = (attack * (attackerHoldEffectParam + 100)) / 100;
@@ -1268,26 +2318,26 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     {
         if (gCritMultiplier == 2)
         {
-            if (attacker->statStages[STAT_STAGE_ATK] > 6)
-                APPLY_STAT_MOD(damage, attacker, attack, STAT_STAGE_ATK)
+            if (attacker->statStages[STAT_ATK] > 6)
+                APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
             else
                 damage = attack;
         }
         else
-            APPLY_STAT_MOD(damage, attacker, attack, STAT_STAGE_ATK)
+            APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
 
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
 
         if (gCritMultiplier == 2)
         {
-            if (defender->statStages[STAT_STAGE_DEF] < 6)
-                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_STAGE_DEF)
+            if (defender->statStages[STAT_DEF] < 6)
+                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
             else
                 damageHelper = defense;
         }
         else
-            APPLY_STAT_MOD(damageHelper, defender, defense, STAT_STAGE_DEF)
+            APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
 
         damage = damage / damageHelper;
         damage /= 50;
@@ -1318,26 +2368,26 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     {
         if (gCritMultiplier == 2)
         {
-            if (attacker->statStages[STAT_STAGE_SPATK] > 6)
-                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_STAGE_SPATK)
+            if (attacker->statStages[STAT_SPATK] > 6)
+                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
             else
                 damage = spAttack;
         }
         else
-            APPLY_STAT_MOD(damage, attacker, spAttack, STAT_STAGE_SPATK)
+            APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
 
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
 
         if (gCritMultiplier == 2)
         {
-            if (defender->statStages[STAT_STAGE_SPDEF] < 6)
-                APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_STAGE_SPDEF)
+            if (defender->statStages[STAT_SPDEF] < 6)
+                APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
             else
                 damageHelper = spDefense;
         }
         else
-            APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_STAGE_SPDEF)
+            APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
 
         damage = (damage / damageHelper);
         damage /= 50;
@@ -1689,7 +2739,7 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8* data)
             ret = mon->defense;
         break;
     case MON_DATA_SPEED:
-        ret = (u16)GetDeoxysStat(mon, STAT_SPD);
+        ret = (u16)GetDeoxysStat(mon, STAT_SPEED);
         if (!ret)
             ret = mon->speed;
         break;
@@ -2575,13 +3625,13 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {
-    u8 facilityClass = gSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
+    u8 facilityClass = sSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
     return gFacilityClassToPicIndex[facilityClass];
 }
 
 u8 GetSecretBaseTrainerClass(void)
 {
-    u8 facilityClass = gSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
+    u8 facilityClass = sSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
     return gFacilityClassToTrainerClass[facilityClass];
 }
 
@@ -2729,7 +3779,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     if (heldItem == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
-            holdEffect = gEnigmaBerries[gBankInMenu].holdEffect;
+            holdEffect = gEnigmaBerries[gBattlerInMenuId].holdEffect;
         else
             holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
     }
@@ -2738,10 +3788,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         holdEffect = ItemId_GetHoldEffect(heldItem);
     }
 
-    gStringBattler = gBankInMenu;
+    gPotentialItemEffectBattler = gBattlerInMenuId;
     if (gMain.inBattle)
     {
-        gActiveBattler = gBankInMenu;
+        gActiveBattler = gBattlerInMenuId;
         cmdIndex = (GetBattlerSide(gActiveBattler) != B_SIDE_PLAYER);
         while (cmdIndex < gBattlersCount)
         {
@@ -2795,49 +3845,49 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0xF)
-             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_ATK] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] += itemEffect[cmdIndex] & 0xF;
-                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] > 12)
-                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_ATK] += itemEffect[cmdIndex] & 0xF;
+                if (gBattleMons[gActiveBattler].statStages[STAT_ATK] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_ATK] = 12;
                 retVal = FALSE;
             }
             break;
         // in-battle stat boosting effects?
         case 1:
             if ((itemEffect[cmdIndex] & 0xF0)
-             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_DEF] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] += (itemEffect[cmdIndex] & 0xF0) >> 4;
-                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] > 12)
-                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_DEF] += (itemEffect[cmdIndex] & 0xF0) >> 4;
+                if (gBattleMons[gActiveBattler].statStages[STAT_DEF] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_DEF] = 12;
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0xF)
-             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_SPEED] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] += itemEffect[cmdIndex] & 0xF;
-                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] > 12)
-                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_SPEED] += itemEffect[cmdIndex] & 0xF;
+                if (gBattleMons[gActiveBattler].statStages[STAT_SPEED] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_SPEED] = 12;
                 retVal = FALSE;
             }
             break;
         // more stat boosting effects?
         case 2:
             if ((itemEffect[cmdIndex] & 0xF0)
-             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_ACC] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] += (itemEffect[cmdIndex] & 0xF0) >> 4;
-                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] > 12)
-                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_ACC] += (itemEffect[cmdIndex] & 0xF0) >> 4;
+                if (gBattleMons[gActiveBattler].statStages[STAT_ACC] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_ACC] = 12;
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0xF)
-             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_SPATK] < 12)
             {
-                gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] += itemEffect[cmdIndex] & 0xF;
-                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] > 12)
-                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_SPATK] += itemEffect[cmdIndex] & 0xF;
+                if (gBattleMons[gActiveBattler].statStages[STAT_SPATK] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_SPATK] = 12;
                 retVal = FALSE;
             }
             break;
@@ -2908,7 +3958,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     case 1:
                         evCount = GetMonEVCount(mon);
                         r5 = itemEffect[var_3C];
-                        dataSigned = GetMonData(mon, gUnknown_08329EC2[var_38], NULL);
+                        dataSigned = GetMonData(mon, sGetMonDataEVConstants[var_38], NULL);
                         r2 = r5;
                         if (r2 > 0)
                         {
@@ -2938,7 +3988,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (dataSigned < 0)
                                 dataSigned = 0;
                         }
-                        SetMonData(mon, gUnknown_08329EC2[var_38], &dataSigned);
+                        SetMonData(mon, sGetMonDataEVConstants[var_38], &dataSigned);
                         CalculateMonStats(mon);
                         var_3C++;
                         retVal = FALSE;
@@ -3108,7 +4158,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     case 3:
                         evCount = GetMonEVCount(mon);
                         r5 = itemEffect[var_3C];
-                        dataSigned = GetMonData(mon, gUnknown_08329EC2[var_38 + 2], NULL);
+                        dataSigned = GetMonData(mon, sGetMonDataEVConstants[var_38 + 2], NULL);
                         r2 = r5;
                         if (r2 > 0)
                         {
@@ -3138,7 +4188,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (dataSigned < 0)
                                 dataSigned = 0;
                         }
-                        SetMonData(mon, gUnknown_08329EC2[var_38 + 2], &dataSigned);
+                        SetMonData(mon, sGetMonDataEVConstants[var_38 + 2], &dataSigned);
                         CalculateMonStats(mon);
                         retVal = FALSE;
                         var_3C++;
@@ -3377,10 +4427,10 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     return offset;
 }
 
-static void sub_806CF24(s32 stat)
+static void sub_806CF24(s32 arg0)
 {
-    gBattlerTarget = gBankInMenu;
-    StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
+    gBattlerTarget = gBattlerInMenuId;
+    StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[arg0]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
 }
@@ -3393,7 +4443,7 @@ u8 *sub_806CF78(u16 itemId)
     if (itemId == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
-            itemEffect = gEnigmaBerries[gBankInMenu].itemEffect;
+            itemEffect = gEnigmaBerries[gBattlerInMenuId].itemEffect;
         else
             itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     }
@@ -3402,7 +4452,7 @@ u8 *sub_806CF78(u16 itemId)
         itemEffect = gItemEffectTable[itemId - 13];
     }
 
-    gStringBattler = gBankInMenu;
+    gPotentialItemEffectBattler = gBattlerInMenuId;
 
     for (i = 0; i < 3; i++)
     {
@@ -3416,7 +4466,7 @@ u8 *sub_806CF78(u16 itemId)
             }
             else
             {
-                gBattlerAttacker = gBankInMenu;
+                gBattlerAttacker = gBattlerInMenuId;
                 BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
             }
         }
@@ -3424,7 +4474,7 @@ u8 *sub_806CF78(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        gBattlerAttacker = gBankInMenu;
+        gBattlerAttacker = gBattlerInMenuId;
         BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
     }
 
@@ -4452,9 +5502,9 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 bool32 IsHMMove2(u16 move)
 {
     int i = 0;
-    while (gHMMoves[i] != 0xFFFF)
+    while (sHMMoves[i] != 0xFFFF)
     {
-        if (gHMMoves[i++] == move)
+        if (sHMMoves[i++] == move)
             return TRUE;
     }
     return FALSE;
@@ -4540,7 +5590,7 @@ void sub_806E994(void)
     else
         gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->field_49];
 
-    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBankInMenu, pokemon_order_func(gBattlerPartyIndexes[gBankInMenu]))
+    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBattlerInMenuId, pokemon_order_func(gBattlerPartyIndexes[gBattlerInMenuId]))
 
     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
@@ -4548,8 +5598,8 @@ void sub_806E994(void)
 static s32 GetWildMonTableIdInAlteringCave(u16 species)
 {
     s32 i;
-    for (i = 0; i < (s32) ARRAY_COUNT(gAlteringCaveWildMonHeldItems); i++)
-        if (gAlteringCaveWildMonHeldItems[i].species == species)
+    for (i = 0; i < (s32) ARRAY_COUNT(sAlteringCaveWildMonHeldItems); i++)
+        if (sAlteringCaveWildMonHeldItems[i].species == species)
             return i;
     return 0;
 }
@@ -4575,7 +5625,7 @@ void SetWildMonHeldItem(void)
             {
                 if (rnd < var2)
                     return;
-                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gAlteringCaveWildMonHeldItems[alteringCaveId].item);
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &sAlteringCaveWildMonHeldItems[alteringCaveId].item);
             }
             else
             {
@@ -4710,16 +5760,16 @@ void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, 
             if (HasTwoFramesAnimation(species))
                 StartSpriteAnim(sprite, 1);
         }
-        if (gMonAnimationDelayTable[species - 1] != 0)
+        if (sMonAnimationDelayTable[species - 1] != 0)
         {
             u8 taskId = CreateTask(Task_AnimateAfterDelay, 0);
             STORE_PTR_IN_TASK(sprite, taskId, 0);
-            gTasks[taskId].data[2] = gMonFrontAnimIdsTable[species - 1];
-            gTasks[taskId].data[3] = gMonAnimationDelayTable[species - 1];
+            gTasks[taskId].data[2] = sMonFrontAnimIdsTable[species - 1];
+            gTasks[taskId].data[3] = sMonAnimationDelayTable[species - 1];
         }
         else
         {
-            LaunchAnimationTaskForFrontSprite(sprite, gMonFrontAnimIdsTable[species - 1]);
+            LaunchAnimationTaskForFrontSprite(sprite, sMonFrontAnimIdsTable[species - 1]);
         }
         sprite->callback = SpriteCallbackDummy_2;
     }
@@ -4729,18 +5779,18 @@ void PokemonSummaryDoMonAnimation(struct Sprite* sprite, u16 species, bool8 oneF
 {
     if (!oneFrame && HasTwoFramesAnimation(species))
         StartSpriteAnim(sprite, 1);
-    if (gMonAnimationDelayTable[species - 1] != 0)
+    if (sMonAnimationDelayTable[species - 1] != 0)
     {
         u8 taskId = CreateTask(Task_PokemonSummaryAnimateAfterDelay, 0);
         STORE_PTR_IN_TASK(sprite, taskId, 0);
-        gTasks[taskId].data[2] = gMonFrontAnimIdsTable[species - 1];
-        gTasks[taskId].data[3] = gMonAnimationDelayTable[species - 1];
+        gTasks[taskId].data[2] = sMonFrontAnimIdsTable[species - 1];
+        gTasks[taskId].data[3] = sMonAnimationDelayTable[species - 1];
         sub_81C488C(taskId);
         SetSpriteCB_MonAnimDummy(sprite);
     }
     else
     {
-        StartMonSummaryAnimation(sprite, gMonFrontAnimIdsTable[species - 1]);
+        StartMonSummaryAnimation(sprite, sMonFrontAnimIdsTable[species - 1]);
     }
 }
 

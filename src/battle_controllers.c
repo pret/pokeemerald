@@ -12,37 +12,13 @@
 #include "constants/abilities.h"
 #include "battle_message.h"
 
-extern u32 gBattleTypeFlags;
-extern u32 gBattleControllerExecFlags;
-extern void (*gBattleMainFunc)(void);
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gBattlersCount;
-extern u8 gActiveBattler;
+extern u8 gBattleBuffersTransferData[0x100];
 extern u8 gUnknown_0202428C;
 extern u32 gUnknown_02022FF4;
 extern u8 gUnknown_0203C7B4;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBuffersTransferData[0x100];
 extern u8 gUnknown_02022D08;
 extern u8 gUnknown_02022D09;
 extern u8 gUnknown_02022D0A;
-extern u8 gBattlerAttacker;
-extern u8 gBattlerTarget;
-extern u8 gAbsentBattlerFlags;
-extern u8 gEffectBank;
-extern u16 gBattleWeather;
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gCurrentMove;
-extern u16 gChosenMove;
-extern u16 gLastUsedItem;
-extern u8 gBattleOutcome;
-extern u8 gLastUsedAbility;
-extern u8 gStringBattler;
 
 extern const struct BattleMove gBattleMoves[];
 
@@ -757,7 +733,7 @@ void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_HI] = (alignedSize & 0x0000FF00) >> 8;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ABSENT_BANK_FLAGS] = gAbsentBattlerFlags;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_EFFECT_BANK] = gEffectBank;
+    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_EFFECT_BANK] = gEffectBattler;
 
     for (i = 0; i < size; i++)
         gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_DATA + i] = data[i];
@@ -923,7 +899,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
                 gBattlerAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 2];
                 gBattlerTarget = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 3];
                 gAbsentBattlerFlags = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 6];
-                gEffectBank = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 7];
+                gEffectBattler = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 7];
             }
             break;
         case 1:
@@ -1126,7 +1102,7 @@ void BtlController_EmitPrintString(u8 bufferId, u16 stringID)
     stringInfo->scrActive = gBattleScripting.battler;
     stringInfo->unk1605E = gBattleStruct->field_52;
     stringInfo->hpScale = gBattleStruct->hpScale;
-    stringInfo->StringBank = gStringBattler;
+    stringInfo->StringBank = gPotentialItemEffectBattler;
     stringInfo->moveType = gBattleMoves[gCurrentMove].type;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)

@@ -1,6 +1,7 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
+#include "constants/pokemon.h"
 #include "sprite.h"
 
 #define MON_DATA_PERSONALITY        0
@@ -109,80 +110,10 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
-#define TYPE_NORMAL   0x00
-#define TYPE_FIGHTING 0x01
-#define TYPE_FLYING   0x02
-#define TYPE_POISON   0x03
-#define TYPE_GROUND   0x04
-#define TYPE_ROCK     0x05
-#define TYPE_BUG      0x06
-#define TYPE_GHOST    0x07
-#define TYPE_STEEL    0x08
-#define TYPE_MYSTERY  0x09
-#define TYPE_FIRE     0x0a
-#define TYPE_WATER    0x0b
-#define TYPE_GRASS    0x0c
-#define TYPE_ELECTRIC 0x0d
-#define TYPE_PSYCHIC  0x0e
-#define TYPE_ICE      0x0f
-#define TYPE_DRAGON   0x10
-#define TYPE_DARK     0x11
-
-#define NUMBER_OF_MON_TYPES     0x12
-
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
 #define MAX_MON_LEVEL 100
-
-enum
-{
-    EGG_GROUP_NONE,
-    EGG_GROUP_MONSTER,
-    EGG_GROUP_WATER_1,
-    EGG_GROUP_BUG,
-    EGG_GROUP_FLYING,
-    EGG_GROUP_FIELD,
-    EGG_GROUP_FAIRY,
-    EGG_GROUP_GRASS,
-    EGG_GROUP_HUMAN_LIKE,
-    EGG_GROUP_WATER_3,
-    EGG_GROUP_MINERAL,
-    EGG_GROUP_AMORPHOUS,
-    EGG_GROUP_WATER_2,
-    EGG_GROUP_DITTO,
-    EGG_GROUP_DRAGON,
-    EGG_GROUP_UNDISCOVERED
-};
-
-enum
-{
-    NATURE_HARDY,
-    NATURE_LONELY,
-    NATURE_BRAVE,
-    NATURE_ADAMANT,
-    NATURE_NAUGHTY,
-    NATURE_BOLD,
-    NATURE_DOCILE,
-    NATURE_RELAXED,
-    NATURE_IMPISH,
-    NATURE_LAX,
-    NATURE_TIMID,
-    NATURE_HASTY,
-    NATURE_SERIOUS,
-    NATURE_JOLLY,
-    NATURE_NAIVE,
-    NATURE_MODEST,
-    NATURE_MILD,
-    NATURE_QUIET,
-    NATURE_BASHFUL,
-    NATURE_RASH,
-    NATURE_CALM,
-    NATURE_GENTLE,
-    NATURE_SASSY,
-    NATURE_CAREFUL,
-    NATURE_QUIRKY,
-};
 
 struct PokemonSubstruct0
 {
@@ -416,28 +347,6 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
-enum
-{
-    STAT_STAGE_HP,       // 0
-    STAT_STAGE_ATK,      // 1
-    STAT_STAGE_DEF,      // 2
-    STAT_STAGE_SPEED,    // 3
-    STAT_STAGE_SPATK,    // 4
-    STAT_STAGE_SPDEF,    // 5
-    STAT_STAGE_ACC,      // 6
-    STAT_STAGE_EVASION,  // 7
-};
-
-enum
-{
-    STAT_HP,     // 0
-    STAT_ATK,    // 1
-    STAT_DEF,    // 2
-    STAT_SPD,    // 3
-    STAT_SPATK,  // 4
-    STAT_SPDEF,  // 5
-};
-
 struct BaseStats
 {
  /* 0x00 */ u8 baseHP;
@@ -556,13 +465,20 @@ extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
+extern struct SpriteTemplate gUnknown_0202499C;
+extern struct PokemonStorage* gPokemonStoragePtr;
+
 extern const struct BaseStats gBaseStats[];
 extern const u8 *const gItemEffectTable[];
 extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
-extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
-extern struct SpriteTemplate gUnknown_0202499C;
+extern const u8 gUnknown_08329D22[];
+extern const u8 gUnknown_08329D26[];
+extern const u8 gUnknown_08329D2A[];
+extern const u8 gStatStageRatios[][2];
+extern const u16 gUnknown_08329D54[];
+extern const struct SpriteTemplate gUnknown_08329D98[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -722,6 +638,6 @@ bool8 HasTwoFramesAnimation(u16 species);
 bool8 sub_806F104(void);
 struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1);
 void sub_806F47C(u8 id);
-u8 *sub_806F4F8(u8 id, u8 arg1)
+u8 *sub_806F4F8(u8 id, u8 arg1);
 
 #endif // GUARD_POKEMON_H

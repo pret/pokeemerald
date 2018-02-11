@@ -12,6 +12,7 @@
 #include "sprite.h"
 #include "constants/species.h"
 #include "battle_interface.h"
+#include "battle_anim.h"
 
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
@@ -21,27 +22,11 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern u8 gReservedSpritePaletteCount;
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gBankInMenu;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattlersCount;
-extern u32 gBattleTypeFlags;
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
 
-extern void ScanlineEffect_Clear(void);
-extern void sub_8035658(void);
-extern bool8 IsDoubleBattle(void);
-extern u8 GetSubstituteSpriteDefault_Y(u8 bank);
-extern u8 GetBattlerSpriteDefault_Y(u8 bank);
-extern u8 sub_80A82E4(u8 bank);
 extern void sub_806A068(u16 species, u8 bankIdentity);
 extern void sub_806A12C(u16 backPicId, u8 bankIdentity);
-extern u8 GetBattlerSpriteCoord(u8 bank, u8 caseId);
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
@@ -174,7 +159,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
                 SetBattlerShadowSpriteCallback(opponentBank, species);
             }
 
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gBankInMenu], 0);
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gBattlerInMenuId], 0);
 
             if (gLinkVSyncDisabled != 0 && gReceivedRemoteLinkPlayers != 0)
             {

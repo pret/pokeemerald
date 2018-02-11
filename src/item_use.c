@@ -1,4 +1,5 @@
 #include "global.h"
+#include "item_use.h"
 #include "battle.h"
 #include "berry.h"
 #include "bike.h"
@@ -28,7 +29,6 @@
 #include "task.h"
 #include "text.h"
 
-extern u16 gSpecialVar_ItemId;
 extern void(**gUnknown_0203CE54)(void);
 extern void(**gUnknown_0203CF2C)(void);
 extern void(*gUnknown_0203A0F4)(u8 taskId);
@@ -87,15 +87,12 @@ extern void sub_81ABA88(u8);
 extern void sub_80B7CC8(void);
 extern void flagmods_08054D70(void);
 extern u8* sub_806CF78(u16);
-extern bool8 ExecuteTableBasedItemEffect(struct Pokemon*, u16, u8, u8);
-extern u8 gBankInMenu;
-extern u16 gBattlerPartyIndexes[];
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
 extern struct MapConnection *sub_8088A8C(s16, s16);
 
 void MapPostLoadHook_UseItem(void);
-extern void sub_80AF6D4(void);
+void sub_80AF6D4(void);
 void Task_CallItemUseOnFieldCallback(u8 taskId);
 void bag_menu_inits_lists_menu(u8 taskId);
 void ItemUseOnFieldCB_Bike(u8 taskId);
@@ -984,7 +981,7 @@ void sub_80FE440(u8 taskId)
 
 void ItemUseInBattle_StatIncrease(u8 taskId)
 {
-    u16 partyId = gBattlerPartyIndexes[gBankInMenu];
+    u16 partyId = gBattlerPartyIndexes[gBattlerInMenuId];
 
     if (ExecuteTableBasedItemEffect(&gPlayerParty[partyId], gSpecialVar_ItemId, partyId, 0) != FALSE)
     {

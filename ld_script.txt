@@ -378,7 +378,6 @@ SECTIONS {
         src/battle_controller_link_opponent.o(.rodata);
         data/data2c.o(.rodata);
         src/pokemon.o(.rodata);
-        data/data2e.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
         src/daycare.o(.rodata);

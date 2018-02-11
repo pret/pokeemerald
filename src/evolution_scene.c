@@ -21,7 +21,7 @@
 #include "constants/songs.h"
 #include "overworld.h"
 #include "battle_message.h"
-#include "battle_string_ids.h"
+#include "constants/battle_string_ids.h"
 #include "gpu_regs.h"
 #include "bg.h"
 #include "link.h"
@@ -48,12 +48,10 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern u8 gBattleTerrain;
 extern bool8 gAffineAnimsDisabled;
 extern u16 gMoveToLearn;
 extern const u8 gSpeciesNames[][11];
 
-extern u8 gBattleCommunication[];
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID      gBattleCommunication[2]
 
