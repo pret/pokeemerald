@@ -45,7 +45,6 @@ extern u8 gMultiUsePlayerCursor;
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gPartnerTrainerId;
-extern struct SpriteTemplate gUnknown_0202499C;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
 extern u16 gSpecialVar_ItemId;
 extern u8 gUnknown_0203CEE8;

@@ -36,7 +36,6 @@ extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
 extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern struct SpriteTemplate gUnknown_0202499C;
 extern u16 gSpecialVar_ItemId;
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gBattleOutcome;

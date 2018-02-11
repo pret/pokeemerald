@@ -44,7 +44,6 @@ extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
 extern void *gUnknown_020244D8;
 extern void *gUnknown_020244DC;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
-extern struct SpriteTemplate gUnknown_0202499C;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;

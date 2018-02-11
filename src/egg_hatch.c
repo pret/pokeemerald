@@ -44,7 +44,6 @@ struct EggHatchData
     u8 textColor[3];
 };
 
-extern struct SpriteTemplate gUnknown_0202499C;
 extern void (*gFieldCallback)(void);
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -440,12 +439,12 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
             HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
                                                       gMonSpritesGfxPtr->sprites[(a0 * 2) + 1],
                                                       species, pid);
-            LoadCompressedObjectPalette(sub_806E794(mon));
+            LoadCompressedObjectPalette(GetMonSpritePalStruct(mon));
             *speciesLoc = species;
         }
         break;
     case 1:
-        sub_806A068(sub_806E794(mon)->tag, r5);
+        sub_806A068(GetMonSpritePalStruct(mon)->tag, r5);
         spriteID = CreateSprite(&gUnknown_0202499C, 120, 75, 6);
         gSprites[spriteID].invisible = 1;
         gSprites[spriteID].callback = SpriteCallbackDummy;

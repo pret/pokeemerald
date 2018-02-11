@@ -522,14 +522,7 @@ gMoveToLearn: @ 20244E2
 gBattleMonForms: @ 20244E4
 	.space 0x4
 
-	.include "src/pokemon_1.o"
-
-gUnknown_0202499C: @ 202499C
-	.space 0x18
-
-gUnknown_020249B4: @ 20249B4
-	.space 0x8
-
+	.include "src/pokemon.o"
 	.include "src/random.o"
 	.include "src/daycare.o"
     .include "src/load_save.o"

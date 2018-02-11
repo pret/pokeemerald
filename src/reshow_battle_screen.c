@@ -30,7 +30,6 @@ extern u32 gBattleTypeFlags;
 extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-extern struct SpriteTemplate gUnknown_0202499C;
 
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
 

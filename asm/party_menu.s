@@ -11943,7 +11943,7 @@ _081B6558:
 	adds r1, r5, 0
 _081B6572:
 	adds r3, r6, 0
-	bl ExecuteTableBasedItemEffect_
+	bl ExecuteTableBasedItemEffect
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4-r6}
