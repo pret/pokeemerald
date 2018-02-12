@@ -18,6 +18,6 @@ enum
 
 s8 GetSetPokedexFlag(u16 nationalNum, u8 caseId);
 u16 GetNationalPokedexCount(u8);
-u16 sub_80C0844(u8);
+u16 GetHoennPokedexCount(u8);
 
 #endif // GUARD_POKEDEX_H
