@@ -421,7 +421,7 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
     return FALSE;
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 bool8 ShouldDoBrailleRegicePuzzle(void)
 {
     asm(".syntax unified\n\

@@ -5,7 +5,9 @@
 	.include "src/bg.o"
 	.include "src/text.o"
 	.include "src/sprite.o"
-	.include "src/link.o"
+    .include "src/link.o"
+    .include "src/link_rfu.o"
+    .include "src/rom_8011DC0.o"
 	.include "src/rtc.o"
 	.include "src/main_menu.o"
 	.include "src/rom_8034C54.o"
@@ -55,7 +57,7 @@ gUnknown_030011F7: @ 30011F7
 	.space 0x1
 
 	.include "src/starter_choose.o"
-	
+
 	.align 0x2
 
 gUnknown_030011FC: @ 30011FC

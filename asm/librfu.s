@@ -33,35 +33,35 @@ _082E3EDC:
 _082E3EE0:
 	cmp r7, 0
 	beq _082E3EEC
-	ldr r3, _082E3EE8
+	ldr r3, =0x00000e64
 	b _082E3EEE
 	.align 2, 0
-_082E3EE8: .4byte 0x00000e64
+	.pool
 _082E3EEC:
-	ldr r3, _082E3EF8
+	ldr r3, =0x00000504
 _082E3EEE:
 	cmp r2, r3
 	bcs _082E3EFC
 	movs r0, 0x1
 	b _082E3FB8
 	.align 2, 0
-_082E3EF8: .4byte 0x00000504
+	.pool
 _082E3EFC:
-	ldr r0, _082E3FC0
+	ldr r0, =gUnknown_03007890
 	str r4, [r0]
-	ldr r1, _082E3FC4
+	ldr r1, =gUnknown_03007894
 	adds r0, r4, 0
 	adds r0, 0xB4
 	str r0, [r1]
-	ldr r1, _082E3FC8
+	ldr r1, =gUnknown_03007898
 	adds r0, 0x28
 	str r0, [r1]
-	ldr r2, _082E3FCC
+	ldr r2, =gUnknown_03007880
 	movs r1, 0xDE
 	lsls r1, 1
 	adds r0, r4, r1
 	str r0, [r2]
-	ldr r1, _082E3FD0
+	ldr r1, =gUnknown_03007870
 	movs r3, 0xDF
 	lsls r3, 2
 	adds r0, r4, r3
@@ -88,10 +88,10 @@ _082E3F28:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _082E3F28
-	ldr r0, _082E3FC8
+	ldr r0, =gUnknown_03007898
 	ldr r1, [r0]
 	adds r1, 0xDC
-	ldr r4, _082E3FD0
+	ldr r4, =gUnknown_03007870
 	ldr r0, [r4, 0xC]
 	adds r0, 0x1C
 	str r0, [r1]
@@ -100,7 +100,7 @@ _082E3F28:
 	bl STWI_init_all
 	bl rfu_STC_clearAPIVariables
 	movs r5, 0
-	ldr r3, _082E3FCC
+	ldr r3, =gUnknown_03007880
 	movs r2, 0
 _082E3F6C:
 	lsls r1, r5, 2
@@ -117,16 +117,16 @@ _082E3F6C:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _082E3F6C
-	ldr r4, _082E3FD4
+	ldr r4, =sub_82E53F4
 	movs r0, 0x2
 	negs r0, r0
 	ands r4, r0
-	ldr r1, _082E3FC8
+	ldr r1, =gUnknown_03007898
 	ldr r0, [r1]
 	adds r2, r0, 0
 	adds r2, 0x8
 	movs r3, 0x2F
-	ldr r5, _082E3FD8
+	ldr r5, =0x0000ffff
 _082E3F9C:
 	ldrh r0, [r4]
 	strh r0, [r2]
@@ -147,30 +147,24 @@ _082E3FB8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E3FC0: .4byte gUnknown_03007890
-_082E3FC4: .4byte gUnknown_03007894
-_082E3FC8: .4byte gUnknown_03007898
-_082E3FCC: .4byte gUnknown_03007880
-_082E3FD0: .4byte gUnknown_03007870
-_082E3FD4: .4byte sub_82E53F4
-_082E3FD8: .4byte 0x0000ffff
+	.pool
 	thumb_func_end rfu_initializeAPI
 
 	thumb_func_start rfu_STC_clearAPIVariables
 rfu_STC_clearAPIVariables: @ 82E3FDC
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, _082E4050
+	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	adds r7, r0, 0
 	movs r6, 0
 	strh r6, [r1]
-	ldr r5, _082E4054
+	ldr r5, =gUnknown_03007894
 	ldr r1, [r5]
 	ldrb r4, [r1]
 	mov r0, sp
 	strh r6, [r0]
-	ldr r2, _082E4058
+	ldr r2, =0x01000014
 	bl CpuSet
 	ldr r2, [r5]
 	movs r0, 0x8
@@ -180,9 +174,9 @@ rfu_STC_clearAPIVariables: @ 82E3FDC
 	mov r0, sp
 	adds r0, 0x2
 	strh r1, [r0]
-	ldr r4, _082E405C
+	ldr r4, =gUnknown_03007890
 	ldr r1, [r4]
-	ldr r2, _082E4060
+	ldr r2, =0x0100005a
 	bl CpuSet
 	ldr r1, [r4]
 	movs r0, 0x4
@@ -208,30 +202,26 @@ _082E4030:
 	lsrs r2, r0, 24
 	cmp r2, 0x3
 	bls _082E4030
-	ldr r0, _082E4050
+	ldr r0, =0x04000208
 	strh r7, [r0]
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4050: .4byte 0x04000208
-_082E4054: .4byte gUnknown_03007894
-_082E4058: .4byte 0x01000014
-_082E405C: .4byte gUnknown_03007890
-_082E4060: .4byte 0x0100005a
+	.pool
 	thumb_func_end rfu_STC_clearAPIVariables
 
 	thumb_func_start rfu_REQ_PARENT_resumeRetransmitAndChange
 rfu_REQ_PARENT_resumeRetransmitAndChange: @ 82E4064
 	push {lr}
-	ldr r0, _082E4074
+	ldr r0, =rfu_STC_REQ_callback
 	bl STWI_set_Callback_M
 	bl STWI_send_ResumeRetransmitAndChangeREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4074: .4byte rfu_STC_REQ_callback
+	.pool
 	thumb_func_end rfu_REQ_PARENT_resumeRetransmitAndChange
 
 	thumb_func_start rfu_UNI_PARENT_getDRAC_ACK
@@ -240,7 +230,7 @@ rfu_UNI_PARENT_getDRAC_ACK: @ 82E4078
 	adds r4, r0, 0
 	movs r0, 0
 	strb r0, [r4]
-	ldr r5, _082E4090
+	ldr r5, =gUnknown_03007890
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -249,7 +239,7 @@ rfu_UNI_PARENT_getDRAC_ACK: @ 82E4078
 	lsls r0, 2
 	b _082E40BA
 	.align 2, 0
-_082E4090: .4byte gUnknown_03007890
+	.pool
 _082E4094:
 	bl rfu_getSTWIRecvBuffer
 	adds r1, r0, 0
@@ -294,13 +284,13 @@ rfu_setTimerInterrupt: @ 82E40C0
 
 	thumb_func_start rfu_getSTWIRecvBuffer
 rfu_getSTWIRecvBuffer: @ 82E40D4
-	ldr r0, _082E40E0
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_082E40E0: .4byte gUnknown_03007898
+	.pool
 	thumb_func_end rfu_getSTWIRecvBuffer
 
 	thumb_func_start rfu_setMSCCallback
@@ -315,7 +305,7 @@ rfu_setMSCCallback: @ 82E40E4
 rfu_setREQCallback: @ 82E40F0
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, _082E4108
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	str r1, [r0]
 	negs r0, r1
@@ -325,7 +315,7 @@ rfu_setREQCallback: @ 82E40F0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4108: .4byte gUnknown_03007898
+	.pool
 	thumb_func_end rfu_setREQCallback
 
 	thumb_func_start rfu_enableREQCallback
@@ -334,16 +324,16 @@ rfu_enableREQCallback: @ 82E410C
 	lsls r0, 24
 	cmp r0, 0
 	beq _082E4124
-	ldr r0, _082E4120
+	ldr r0, =gUnknown_03007894
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0x8
 	orrs r0, r1
 	b _082E412E
 	.align 2, 0
-_082E4120: .4byte gUnknown_03007894
+	.pool
 _082E4124:
-	ldr r0, _082E4134
+	ldr r0, =gUnknown_03007894
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0xF7
@@ -353,7 +343,7 @@ _082E412E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4134: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_enableREQCallback
 
 	thumb_func_start rfu_STC_REQ_callback
@@ -363,9 +353,9 @@ rfu_STC_REQ_callback: @ 82E4138
 	lsrs r5, r0, 24
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, _082E416C
+	ldr r0, =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
-	ldr r0, _082E4170
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	strh r4, [r0, 0x1C]
 	ldrb r1, [r0]
@@ -373,7 +363,7 @@ rfu_STC_REQ_callback: @ 82E4138
 	ands r0, r1
 	cmp r0, 0
 	beq _082E4166
-	ldr r0, _082E4174
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	ldr r2, [r0]
 	adds r0, r5, 0
@@ -384,9 +374,7 @@ _082E4166:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E416C: .4byte rfu_CB_defaultCallback
-_082E4170: .4byte gUnknown_03007894
-_082E4174: .4byte gUnknown_03007898
+	.pool
 	thumb_func_end rfu_STC_REQ_callback
 
 	thumb_func_start rfu_CB_defaultCallback
@@ -398,21 +386,21 @@ rfu_CB_defaultCallback: @ 82E4178
 	lsrs r3, r1, 16
 	cmp r0, 0xFF
 	bne _082E41D4
-	ldr r0, _082E41DC
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
 	cmp r0, 0
 	beq _082E41A2
-	ldr r0, _082E41E0
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	ldr r2, [r0]
 	movs r0, 0xFF
 	adds r1, r3, 0
 	bl _call_via_r2
 _082E41A2:
-	ldr r0, _082E41E4
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -434,7 +422,7 @@ _082E41C2:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _082E41B0
-	ldr r0, _082E41E4
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -443,41 +431,39 @@ _082E41D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E41DC: .4byte gUnknown_03007894
-_082E41E0: .4byte gUnknown_03007898
-_082E41E4: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_CB_defaultCallback
 
 	thumb_func_start rfu_waitREQComplete
 rfu_waitREQComplete: @ 82E41E8
 	push {lr}
 	bl STWI_poll_CommandEnd
-	ldr r0, _082E41F8
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x1C]
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E41F8: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_waitREQComplete
 
 	thumb_func_start rfu_REQ_RFUStatus
 rfu_REQ_RFUStatus: @ 82E41FC
 	push {lr}
-	ldr r0, _082E420C
+	ldr r0, =rfu_STC_REQ_callback
 	bl STWI_set_Callback_M
 	bl STWI_send_SystemStatusREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E420C: .4byte rfu_STC_REQ_callback
+	.pool
 	thumb_func_end rfu_REQ_RFUStatus
 
 	thumb_func_start rfu_getRFUStatus
 rfu_getRFUStatus: @ 82E4210
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, _082E4228
+	ldr r5, =gUnknown_03007898
 	ldr r0, [r5]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -487,7 +473,7 @@ rfu_getRFUStatus: @ 82E4210
 	movs r0, 0x10
 	b _082E4246
 	.align 2, 0
-_082E4228: .4byte gUnknown_03007898
+	.pool
 _082E422C:
 	bl STWI_poll_CommandEnd
 	lsls r0, 16
@@ -512,12 +498,11 @@ _082E4246:
 	thumb_func_start sub_82E424C
 sub_82E424C: @ 82E424C
 	push {lr}
-	ldr r2, _082E4254
-	ldr r3, _082E4258
+	ldr r2, =gUnknown_089A324C
+	ldr r3, =gDma3Requests + 0xE0
 	b _082E4266
 	.align 2, 0
-_082E4254: .4byte gUnknown_089A324C
-_082E4258: .4byte gDma3Requests + 0xE0
+	.pool
 	thumb_func_end sub_82E424C
 
 	thumb_func_start sub_82E425C
@@ -546,17 +531,17 @@ _082E4274:
 	lsrs r1, r0, 24
 	cmp r1, 0x59
 	bls _082E4274
-	ldr r0, _082E42B0
+	ldr r0, =gDma3Requests + 0xEA
 	ldrh r0, [r0]
 	cmp r3, r0
 	bne _082E42BC
 	movs r0, 0xC0
 	lsls r0, 18
-	ldr r1, _082E42B4
+	ldr r1, =gUnknown_03007890
 	ldr r1, [r1]
 	movs r2, 0x5A
 	bl CpuSet
-	ldr r0, _082E42B8
+	ldr r0, =gUnknown_03007894
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0x80
@@ -565,9 +550,7 @@ _082E4274:
 	movs r0, 0
 	b _082E42BE
 	.align 2, 0
-_082E42B0: .4byte gDma3Requests + 0xEA
-_082E42B4: .4byte gUnknown_03007890
-_082E42B8: .4byte gUnknown_03007894
+	.pool
 _082E42BC:
 	movs r0, 0x1
 _082E42BE:
@@ -578,35 +561,34 @@ _082E42BE:
 	thumb_func_start rfu_REQ_stopMode
 rfu_REQ_stopMode: @ 82E42C4
 	push {lr}
-	ldr r0, _082E42E4
+	ldr r0, =0x04000208
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _082E42EC
 	movs r0, 0x3D
 	movs r1, 0x6
 	bl rfu_STC_REQ_callback
-	ldr r0, _082E42E8
+	ldr r0, =gRfuState
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x12]
 	movs r0, 0x6
 	strh r0, [r1, 0x12]
 	b _082E4362
 	.align 2, 0
-_082E42E4: .4byte 0x04000208
-_082E42E8: .4byte gRfuState
+	.pool
 _082E42EC:
 	bl AgbRFU_SoftReset
 	bl rfu_STC_clearAPIVariables
 	movs r0, 0x8
 	bl sub_82E6D6C
-	ldr r1, _082E433C
+	ldr r1, =0x00008001
 	cmp r0, r1
 	bne _082E4350
-	ldr r0, _082E4340
+	ldr r0, =gRfuState
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
 	lsls r0, 2
-	ldr r2, _082E4344
+	ldr r2, =0x04000100
 	adds r1, r0, r2
 	movs r0, 0
 	str r0, [r1]
@@ -615,8 +597,8 @@ _082E42EC:
 	str r0, [r1]
 	ldr r0, [r1]
 	lsls r0, 16
-	ldr r2, _082E4348
-	ldr r3, _082E434C
+	ldr r2, =0x0105ffff
+	ldr r3, =rfu_CB_stopMode
 	cmp r0, r2
 	bhi _082E432A
 _082E4322:
@@ -632,13 +614,9 @@ _082E432A:
 	bl STWI_send_StopModeREQ
 	b _082E4362
 	.align 2, 0
-_082E433C: .4byte 0x00008001
-_082E4340: .4byte gRfuState
-_082E4344: .4byte 0x04000100
-_082E4348: .4byte 0x0105ffff
-_082E434C: .4byte rfu_CB_stopMode
+	.pool
 _082E4350:
-	ldr r1, _082E4368
+	ldr r1, =0x04000128
 	movs r2, 0x80
 	lsls r2, 6
 	adds r0, r2, 0
@@ -650,7 +628,7 @@ _082E4362:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4368: .4byte 0x04000128
+	.pool
 	thumb_func_end rfu_REQ_stopMode
 
 	thumb_func_start rfu_CB_stopMode
@@ -663,7 +641,7 @@ rfu_CB_stopMode: @ 82E436C
 	adds r2, r1, 0
 	cmp r2, 0
 	bne _082E4386
-	ldr r1, _082E4394
+	ldr r1, =0x04000128
 	movs r4, 0x80
 	lsls r4, 6
 	adds r0, r4, 0
@@ -676,13 +654,13 @@ _082E4386:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4394: .4byte 0x04000128
+	.pool
 	thumb_func_end rfu_CB_stopMode
 
 	thumb_func_start rfu_REQBN_softReset_and_checkID
 rfu_REQBN_softReset_and_checkID: @ 82E4398
 	push {lr}
-	ldr r0, _082E43A8
+	ldr r0, =0x04000208
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _082E43AC
@@ -690,7 +668,7 @@ rfu_REQBN_softReset_and_checkID: @ 82E4398
 	negs r0, r0
 	b _082E43CC
 	.align 2, 0
-_082E43A8: .4byte 0x04000208
+	.pool
 _082E43AC:
 	bl AgbRFU_SoftReset
 	bl rfu_STC_clearAPIVariables
@@ -699,7 +677,7 @@ _082E43AC:
 	adds r2, r0, 0
 	cmp r2, 0
 	bne _082E43CA
-	ldr r1, _082E43D0
+	ldr r1, =0x04000128
 	movs r3, 0x80
 	lsls r3, 6
 	adds r0, r3, 0
@@ -710,19 +688,19 @@ _082E43CC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E43D0: .4byte 0x04000128
+	.pool
 	thumb_func_end rfu_REQBN_softReset_and_checkID
 
 	thumb_func_start rfu_REQ_reset
 rfu_REQ_reset: @ 82E43D4
 	push {lr}
-	ldr r0, _082E43E4
+	ldr r0, =rfu_CB_reset
 	bl STWI_set_Callback_M
 	bl STWI_send_ResetREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E43E4: .4byte rfu_CB_reset
+	.pool
 	thumb_func_end rfu_REQ_reset
 
 	thumb_func_start rfu_CB_reset
@@ -756,7 +734,7 @@ rfu_REQ_configSystem: @ 82E440C
 	lsrs r5, 24
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r0, _082E4444
+	ldr r0, =rfu_STC_REQ_callback
 	bl STWI_set_Callback_M
 	movs r0, 0x3
 	ands r4, r0
@@ -768,16 +746,15 @@ rfu_REQ_configSystem: @ 82E440C
 	bl STWI_send_SystemConfigREQ
 	cmp r6, 0
 	bne _082E444C
-	ldr r0, _082E4448
+	ldr r0, =gUnknown_03007894
 	ldr r1, [r0]
 	movs r0, 0x1
 	strh r0, [r1, 0x1A]
 	b _082E4466
 	.align 2, 0
-_082E4444: .4byte rfu_STC_REQ_callback
-_082E4448: .4byte gUnknown_03007894
+	.pool
 _082E444C:
-	ldr r5, _082E446C
+	ldr r5, =0x04000208
 	ldrh r4, [r5]
 	movs r0, 0
 	strh r0, [r5]
@@ -785,7 +762,7 @@ _082E444C:
 	lsls r0, 2
 	adds r1, r6, 0
 	bl Div
-	ldr r1, _082E4470
+	ldr r1, =gUnknown_03007894
 	ldr r1, [r1]
 	strh r0, [r1, 0x1A]
 	strh r4, [r5]
@@ -794,8 +771,7 @@ _082E4466:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E446C: .4byte 0x04000208
-_082E4470: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_REQ_configSystem
 
 	thumb_func_start rfu_REQ_configGameData
@@ -821,7 +797,7 @@ rfu_REQ_configGameData: @ 82E4474
 	strb r2, [r0, 0x1]
 _082E449A:
 	movs r2, 0x2
-	ldr r0, _082E44FC
+	ldr r0, =rfu_CB_configGameData
 	mov r12, r0
 _082E44A0:
 	mov r3, sp
@@ -871,7 +847,7 @@ _082E44E6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E44FC: .4byte rfu_CB_configGameData
+	.pool
 	thumb_func_end rfu_REQ_configGameData
 
 	thumb_func_start rfu_CB_configGameData
@@ -884,10 +860,10 @@ rfu_CB_configGameData: @ 82E4500
 	lsrs r7, r1, 16
 	cmp r7, 0
 	bne _082E458A
-	ldr r0, _082E4544
+	ldr r0, =gRfuState
 	ldr r0, [r0]
 	ldr r1, [r0, 0x24]
-	ldr r0, _082E4548
+	ldr r0, =gUnknown_03007890
 	ldr r6, [r0]
 	ldrb r2, [r1, 0x4]
 	adds r5, r6, 0
@@ -911,8 +887,7 @@ rfu_CB_configGameData: @ 82E4500
 	movs r0, 0x1
 	b _082E4552
 	.align 2, 0
-_082E4544: .4byte gRfuState
-_082E4548: .4byte gUnknown_03007890
+	.pool
 _082E454C:
 	adds r1, r6, 0
 	adds r1, 0x97
@@ -920,7 +895,7 @@ _082E454C:
 _082E4552:
 	strb r0, [r1]
 	movs r2, 0
-	ldr r3, _082E4598
+	ldr r3, =gUnknown_03007890
 _082E4558:
 	ldr r0, [r3]
 	adds r0, 0x9A
@@ -935,7 +910,7 @@ _082E4558:
 	bls _082E4558
 	adds r4, 0x1
 	movs r2, 0
-	ldr r3, _082E4598
+	ldr r3, =gUnknown_03007890
 _082E4574:
 	ldr r0, [r3]
 	adds r0, 0xA9
@@ -956,15 +931,15 @@ _082E458A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4598: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_CB_configGameData
 
 	thumb_func_start rfu_REQ_startSearchChild
 rfu_REQ_startSearchChild: @ 82E459C
 	push {r4,lr}
 	movs r1, 0
-	ldr r4, _082E45E4
-	ldr r3, _082E45E8
+	ldr r4, =rfu_CB_defaultCallback
+	ldr r3, =gUnknown_03007894
 	movs r2, 0
 _082E45A6:
 	ldr r0, [r3]
@@ -984,7 +959,7 @@ _082E45A6:
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _082E45F0
-	ldr r0, _082E45EC
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -995,21 +970,19 @@ _082E45A6:
 	bl rfu_STC_clearLinkStatus
 	b _082E45F6
 	.align 2, 0
-_082E45E4: .4byte rfu_CB_defaultCallback
-_082E45E8: .4byte gUnknown_03007894
-_082E45EC: .4byte gUnknown_03007898
+	.pool
 _082E45F0:
 	movs r0, 0x19
 	bl rfu_STC_REQ_callback
 _082E45F6:
-	ldr r0, _082E4608
+	ldr r0, =rfu_CB_startSearchChild
 	bl STWI_set_Callback_M
 	bl STWI_send_SC_StartREQ
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4608: .4byte rfu_CB_startSearchChild
+	.pool
 	thumb_func_end rfu_REQ_startSearchChild
 
 	thumb_func_start rfu_CB_startSearchChild
@@ -1022,7 +995,7 @@ rfu_CB_startSearchChild: @ 82E460C
 	adds r2, r1, 0
 	cmp r2, 0
 	bne _082E4624
-	ldr r0, _082E4630
+	ldr r0, =gUnknown_03007894
 	ldr r1, [r0]
 	movs r0, 0x1
 	strb r0, [r1, 0x9]
@@ -1033,7 +1006,7 @@ _082E4624:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4630: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_CB_startSearchChild
 
 	thumb_func_start rfu_STC_clearLinkStatus
@@ -1049,16 +1022,16 @@ rfu_STC_clearLinkStatus: @ 82E4634
 	mov r0, sp
 	movs r5, 0
 	strh r5, [r0]
-	ldr r4, _082E4690
+	ldr r4, =gUnknown_03007890
 	ldr r1, [r4]
 	adds r1, 0x14
-	ldr r2, _082E4694
+	ldr r2, =0x01000040
 	bl CpuSet
 	ldr r0, [r4]
 	strb r5, [r0, 0x8]
 _082E465C:
 	movs r1, 0
-	ldr r2, _082E4690
+	ldr r2, =gUnknown_03007890
 	adds r4, r2, 0
 	movs r3, 0
 _082E4664:
@@ -1085,32 +1058,31 @@ _082E4664:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4690: .4byte gUnknown_03007890
-_082E4694: .4byte 0x01000040
+	.pool
 	thumb_func_end rfu_STC_clearLinkStatus
 
 	thumb_func_start rfu_REQ_pollSearchChild
 rfu_REQ_pollSearchChild: @ 82E4698
 	push {lr}
-	ldr r0, _082E46A8
+	ldr r0, =rfu_CB_pollAndEndSearchChild
 	bl STWI_set_Callback_M
 	bl STWI_send_SC_PollingREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E46A8: .4byte rfu_CB_pollAndEndSearchChild
+	.pool
 	thumb_func_end rfu_REQ_pollSearchChild
 
 	thumb_func_start rfu_REQ_endSearchChild
 rfu_REQ_endSearchChild: @ 82E46AC
 	push {lr}
-	ldr r0, _082E46BC
+	ldr r0, =rfu_CB_pollAndEndSearchChild
 	bl STWI_set_Callback_M
 	bl STWI_send_SC_EndREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E46BC: .4byte rfu_CB_pollAndEndSearchChild
+	.pool
 	thumb_func_end rfu_REQ_endSearchChild
 
 	thumb_func_start rfu_CB_pollAndEndSearchChild
@@ -1126,13 +1098,13 @@ rfu_CB_pollAndEndSearchChild: @ 82E46C0
 _082E46D2:
 	cmp r4, 0x1A
 	bne _082E4714
-	ldr r5, _082E4708
+	ldr r5, =gUnknown_03007890
 	ldr r0, [r5]
 	adds r0, 0x94
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _082E4730
-	ldr r0, _082E470C
+	ldr r0, =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
 	bl STWI_send_SystemStatusREQ
 	bl STWI_poll_CommandEnd
@@ -1140,7 +1112,7 @@ _082E46D2:
 	cmp r0, 0
 	bne _082E4730
 	ldr r1, [r5]
-	ldr r0, _082E4710
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1149,13 +1121,11 @@ _082E46D2:
 	strh r0, [r1]
 	b _082E4730
 	.align 2, 0
-_082E4708: .4byte gUnknown_03007890
-_082E470C: .4byte rfu_CB_defaultCallback
-_082E4710: .4byte gUnknown_03007898
+	.pool
 _082E4714:
 	cmp r4, 0x1B
 	bne _082E4730
-	ldr r0, _082E4740
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	cmp r0, 0xFF
@@ -1164,7 +1134,7 @@ _082E4714:
 	movs r0, 0
 	strh r0, [r1]
 _082E4728:
-	ldr r0, _082E4744
+	ldr r0, =gUnknown_03007894
 	ldr r1, [r0]
 	movs r0, 0
 	strb r0, [r1, 0x9]
@@ -1176,8 +1146,7 @@ _082E4730:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4740: .4byte gUnknown_03007890
-_082E4744: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_CB_pollAndEndSearchChild
 
 	thumb_func_start rfu_STC_readChildList
@@ -1185,7 +1154,7 @@ rfu_STC_readChildList: @ 82E4748
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, _082E47F8
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1193,9 +1162,9 @@ rfu_STC_readChildList: @ 82E4748
 	adds r6, r0, 0x4
 	cmp r7, 0
 	beq _082E47EE
-	ldr r0, _082E47FC
+	ldr r0, =gUnknown_03007894
 	mov r8, r0
-	ldr r1, _082E4800
+	ldr r1, =gUnknown_03007890
 	mov r12, r1
 _082E4766:
 	ldrb r4, [r6, 0x2]
@@ -1274,21 +1243,19 @@ _082E47EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E47F8: .4byte gUnknown_03007898
-_082E47FC: .4byte gUnknown_03007894
-_082E4800: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_STC_readChildList
 
 	thumb_func_start rfu_REQ_startSearchParent
 rfu_REQ_startSearchParent: @ 82E4804
 	push {lr}
-	ldr r0, _082E4814
+	ldr r0, =rfu_CB_startSearchParent
 	bl STWI_set_Callback_M
 	bl STWI_send_SP_StartREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4814: .4byte rfu_CB_startSearchParent
+	.pool
 	thumb_func_end rfu_REQ_startSearchParent
 
 	thumb_func_start rfu_CB_startSearchParent
@@ -1315,13 +1282,13 @@ _082E482E:
 	thumb_func_start rfu_REQ_pollSearchParent
 rfu_REQ_pollSearchParent: @ 82E483C
 	push {lr}
-	ldr r0, _082E484C
+	ldr r0, =sub_82E4850
 	bl STWI_set_Callback_M
 	bl STWI_send_SP_PollingREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E484C: .4byte sub_82E4850
+	.pool
 	thumb_func_end rfu_REQ_pollSearchParent
 
 	thumb_func_start sub_82E4850
@@ -1347,13 +1314,13 @@ _082E4864:
 	thumb_func_start rfu_REQ_endSearchParent
 rfu_REQ_endSearchParent: @ 82E4874
 	push {lr}
-	ldr r0, _082E4884
+	ldr r0, =rfu_STC_REQ_callback
 	bl STWI_set_Callback_M
 	bl STWI_send_SP_EndREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4884: .4byte rfu_STC_REQ_callback
+	.pool
 	thumb_func_end rfu_REQ_endSearchParent
 
 	thumb_func_start rfu_STC_readParentCandidateList
@@ -1365,12 +1332,12 @@ rfu_STC_readParentCandidateList: @ 82E4888
 	mov r0, sp
 	movs r4, 0
 	strh r4, [r0]
-	ldr r5, _082E4930
+	ldr r5, =gUnknown_03007890
 	ldr r1, [r5]
 	adds r1, 0x14
-	ldr r2, _082E4934
+	ldr r2, =0x01000040
 	bl CpuSet
-	ldr r0, _082E4938
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -1382,7 +1349,7 @@ rfu_STC_readParentCandidateList: @ 82E4888
 	cmp r7, 0
 	beq _082E498C
 	mov r12, r5
-	ldr r0, _082E493C
+	ldr r0, =0x00007fff
 	mov r8, r0
 _082E48BE:
 	subs r0, r7, 0x7
@@ -1444,10 +1411,7 @@ _082E48D8:
 	strb r0, [r4, 0x3]
 	b _082E4942
 	.align 2, 0
-_082E4930: .4byte gUnknown_03007890
-_082E4934: .4byte 0x01000040
-_082E4938: .4byte gUnknown_03007898
-_082E493C: .4byte 0x00007fff
+	.pool
 _082E4940:
 	strb r3, [r4, 0x3]
 _082E4942:
@@ -1507,7 +1471,7 @@ rfu_REQ_startConnectParent: @ 82E4998
 	lsrs r4, r0, 16
 	movs r3, 0
 	movs r2, 0
-	ldr r1, _082E49E4
+	ldr r1, =gUnknown_03007890
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x14]
 	cmp r0, r4
@@ -1533,18 +1497,16 @@ _082E49C4:
 _082E49CC:
 	cmp r3, 0
 	bne _082E49F0
-	ldr r0, _082E49E8
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	strh r4, [r0, 0x1E]
-	ldr r0, _082E49EC
+	ldr r0, =rfu_STC_REQ_callback
 	bl STWI_set_Callback_M
 	adds r0, r4, 0
 	bl STWI_send_CP_StartREQ
 	b _082E49F8
 	.align 2, 0
-_082E49E4: .4byte gUnknown_03007890
-_082E49E8: .4byte gUnknown_03007894
-_082E49EC: .4byte rfu_STC_REQ_callback
+	.pool
 _082E49F0:
 	movs r0, 0x1F
 	adds r1, r3, 0
@@ -1558,13 +1520,13 @@ _082E49F8:
 	thumb_func_start rfu_REQ_pollConnectParent
 rfu_REQ_pollConnectParent: @ 82E4A00
 	push {lr}
-	ldr r0, _082E4A10
+	ldr r0, =rfu_CB_pollConnectParent
 	bl STWI_set_Callback_M
 	bl STWI_send_CP_PollingREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4A10: .4byte rfu_CB_pollConnectParent
+	.pool
 	thumb_func_end rfu_REQ_pollConnectParent
 
 	thumb_func_start rfu_CB_pollConnectParent
@@ -1583,7 +1545,7 @@ rfu_CB_pollConnectParent: @ 82E4A14
 	str r1, [sp, 0x28]
 	cmp r1, 0
 	bne _082E4B16
-	ldr r0, _082E4AD0
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1597,7 +1559,7 @@ rfu_CB_pollConnectParent: @ 82E4A14
 	lsls r0, 17
 	lsls r0, r1
 	lsrs r2, r0, 24
-	ldr r4, _082E4AD4
+	ldr r4, =gUnknown_03007890
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x2]
 	adds r0, r2, 0
@@ -1621,7 +1583,7 @@ rfu_CB_pollConnectParent: @ 82E4A14
 	strb r0, [r1, 0x1]
 	ldr r0, [r4]
 	strb r2, [r0]
-	ldr r3, _082E4AD8
+	ldr r3, =gUnknown_03007894
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0x80
@@ -1656,17 +1618,14 @@ _082E4A92:
 	ldr r1, [r7]
 	adds r1, 0x14
 	adds r0, r6, 0
-	ldr r2, _082E4ADC
+	ldr r2, =0x01000040
 	bl CpuSet
 	ldr r0, [r7]
 	mov r1, r8
 	strb r1, [r0, 0x8]
 	b _082E4AF4
 	.align 2, 0
-_082E4AD0: .4byte gUnknown_03007898
-_082E4AD4: .4byte gUnknown_03007890
-_082E4AD8: .4byte gUnknown_03007894
-_082E4ADC: .4byte 0x01000040
+	.pool
 _082E4AE0:
 	adds r0, r4, 0
 	adds r0, 0x14
@@ -1682,7 +1641,7 @@ _082E4AEA:
 _082E4AF4:
 	cmp r5, 0x3
 	bhi _082E4B16
-	ldr r4, _082E4B30
+	ldr r4, =gUnknown_03007890
 	mov r0, r10
 	lsls r5, r0, 5
 	adds r0, r5, 0
@@ -1709,7 +1668,7 @@ _082E4B16:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4B30: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_CB_pollConnectParent
 
 	thumb_func_start rfu_getConnectParentStatus
@@ -1718,7 +1677,7 @@ rfu_getConnectParentStatus: @ 82E4B34
 	adds r3, r0, 0
 	movs r0, 0xFF
 	strb r0, [r3]
-	ldr r0, _082E4B54
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -1731,7 +1690,7 @@ rfu_getConnectParentStatus: @ 82E4B34
 	movs r0, 0x10
 	b _082E4B64
 	.align 2, 0
-_082E4B54: .4byte gUnknown_03007898
+	.pool
 _082E4B58:
 	adds r2, 0x6
 	ldrb r0, [r2]
@@ -1747,17 +1706,17 @@ _082E4B64:
 	thumb_func_start rfu_REQ_endConnectParent
 rfu_REQ_endConnectParent: @ 82E4B68
 	push {lr}
-	ldr r0, _082E4B94
+	ldr r0, =rfu_CB_pollConnectParent
 	bl STWI_set_Callback_M
 	bl STWI_send_CP_EndREQ
-	ldr r0, _082E4B98
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0x3
 	bhi _082E4B90
-	ldr r0, _082E4B9C
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	adds r0, 0xA
 	ldrb r1, [r1, 0x6]
@@ -1768,21 +1727,19 @@ _082E4B90:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4B94: .4byte rfu_CB_pollConnectParent
-_082E4B98: .4byte gUnknown_03007898
-_082E4B9C: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_REQ_endConnectParent
 
 	thumb_func_start rfu_syncVBlank
 rfu_syncVBlank: @ 82E4BA0
 	push {r4,r5,lr}
 	bl rfu_NI_checkCommFailCounter
-	ldr r0, _082E4BE8
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	beq _082E4C78
-	ldr r4, _082E4BEC
+	ldr r4, =gUnknown_03007894
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0
@@ -1810,8 +1767,7 @@ _082E4BBE:
 	strh r0, [r1, 0x20]
 	b _082E4BFA
 	.align 2, 0
-_082E4BE8: .4byte gUnknown_03007890
-_082E4BEC: .4byte gUnknown_03007894
+	.pool
 _082E4BF0:
 	cmp r3, 0
 	beq _082E4C10
@@ -1822,16 +1778,16 @@ _082E4BFA:
 	cmp r3, 0
 	beq _082E4C10
 _082E4BFE:
-	ldr r3, _082E4C0C
+	ldr r3, =gUnknown_03007894
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0xFD
 	ands r0, r1
 	b _082E4C1A
 	.align 2, 0
-_082E4C0C: .4byte gUnknown_03007894
+	.pool
 _082E4C10:
-	ldr r3, _082E4C6C
+	ldr r3, =gUnknown_03007894
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0x2
@@ -1850,7 +1806,7 @@ _082E4C1A:
 	movs r0, 0xFB
 	ands r0, r1
 	strb r0, [r3]
-	ldr r0, _082E4C70
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -1872,15 +1828,14 @@ _082E4C54:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _082E4C42
-	ldr r0, _082E4C70
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	movs r0, 0xFF
 	strb r0, [r1]
 	movs r0, 0x1
 	b _082E4C7A
 	.align 2, 0
-_082E4C6C: .4byte gUnknown_03007894
-_082E4C70: .4byte gUnknown_03007890
+	.pool
 _082E4C74:
 	subs r0, 0x1
 	strh r0, [r3, 0x20]
@@ -1919,21 +1874,21 @@ rfu_REQBN_watchLink: @ 82E4C80
 	ldrb r0, [r2, 0xC]
 	ldr r2, [sp, 0x4]
 	strb r0, [r2]
-	ldr r5, _082E4D20
+	ldr r5, =gUnknown_03007890
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	bne _082E4CBE
 	b _082E504E
 _082E4CBE:
-	ldr r0, _082E4D24
+	ldr r0, =gRfuState
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0
 	bne _082E4CCA
 	b _082E504E
 _082E4CCA:
-	ldr r3, _082E4D28
+	ldr r3, =gUnknown_03007894
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r4, 0x4
@@ -1957,7 +1912,7 @@ _082E4CEE:
 	lsrs r0, 24
 	cmp r0, 0x29
 	bne _082E4D30
-	ldr r0, _082E4D2C
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -1979,16 +1934,13 @@ _082E4D18:
 	str r2, [sp, 0x8]
 	b _082E4D88
 	.align 2, 0
-_082E4D20: .4byte gUnknown_03007890
-_082E4D24: .4byte gRfuState
-_082E4D28: .4byte gUnknown_03007894
-_082E4D2C: .4byte gUnknown_03007898
+	.pool
 _082E4D30:
 	movs r0, 0x9B
 	lsls r0, 1
 	cmp r6, r0
 	bne _082E4D80
-	ldr r0, _082E4DDC
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2011,7 +1963,7 @@ _082E4D56:
 	ands r0, r1
 	cmp r0, 0
 	beq _082E4D76
-	ldr r0, _082E4DE0
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r0, r5
@@ -2031,7 +1983,7 @@ _082E4D80:
 	bne _082E4D88
 	b _082E504E
 _082E4D88:
-	ldr r4, _082E4DDC
+	ldr r4, =gUnknown_03007898
 	ldr r0, [r4]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2039,7 +1991,7 @@ _082E4D88:
 	str r1, [sp, 0x10]
 	ldr r0, [r0, 0x4]
 	str r0, [sp, 0x14]
-	ldr r0, _082E4DE4
+	ldr r0, =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
 	bl STWI_send_LinkStatusREQ
 	bl STWI_poll_CommandEnd
@@ -2053,7 +2005,7 @@ _082E4D88:
 	ldr r0, [r0]
 	adds r2, r0, 0x4
 	movs r5, 0
-	ldr r3, _082E4DE0
+	ldr r3, =gUnknown_03007890
 _082E4DBC:
 	ldr r0, [r3]
 	adds r0, 0xA
@@ -2071,9 +2023,7 @@ _082E4DBC:
 	movs r5, 0
 	b _082E4DF4
 	.align 2, 0
-_082E4DDC: .4byte gUnknown_03007898
-_082E4DE0: .4byte gUnknown_03007890
-_082E4DE4: .4byte rfu_CB_defaultCallback
+	.pool
 _082E4DE8:
 	movs r0, 0x11
 	ldr r1, [sp, 0xC]
@@ -2081,7 +2031,7 @@ _082E4DE8:
 	ldr r0, [sp, 0xC]
 	b _082E5050
 _082E4DF4:
-	ldr r1, _082E4E7C
+	ldr r1, =gUnknown_03007894
 	ldr r0, [r1]
 	adds r0, 0xE
 	adds r2, r0, r5
@@ -2091,7 +2041,7 @@ _082E4DF4:
 	beq _082E4E1A
 	subs r0, 0x4
 	strb r0, [r2]
-	ldr r0, _082E4E80
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r1, r0, r5
@@ -2115,7 +2065,7 @@ _082E4E2E:
 	ldr r2, [sp, 0x8]
 	cmp r2, 0x1
 	bne _082E4F10
-	ldr r4, _082E4E80
+	ldr r4, =gUnknown_03007890
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x2]
 	ands r0, r6
@@ -2152,15 +2102,14 @@ _082E4E2E:
 	strb r2, [r0]
 	b _082E4F10
 	.align 2, 0
-_082E4E7C: .4byte gUnknown_03007894
-_082E4E80: .4byte gUnknown_03007890
+	.pool
 _082E4E84:
 	bl STWI_send_SystemStatusREQ
 	bl STWI_poll_CommandEnd
 	lsls r0, 16
 	cmp r0, 0
 	bne _082E4F10
-	ldr r0, _082E4EB4
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2177,9 +2126,9 @@ _082E4E84:
 	ldr r0, [sp]
 	b _082E4F0E
 	.align 2, 0
-_082E4EB4: .4byte gUnknown_03007898
+	.pool
 _082E4EB8:
-	ldr r2, _082E4F00
+	ldr r2, =gUnknown_03007894
 	ldr r1, [r2]
 	adds r1, 0xA
 	adds r1, r5
@@ -2214,7 +2163,7 @@ _082E4EB8:
 	strb r0, [r2]
 	b _082E4F10
 	.align 2, 0
-_082E4F00: .4byte gUnknown_03007894
+	.pool
 _082E4F04:
 	ldr r0, [r3]
 	adds r0, 0xA
@@ -2224,7 +2173,7 @@ _082E4F04:
 _082E4F0E:
 	strb r1, [r0]
 _082E4F10:
-	ldr r2, _082E4F70
+	ldr r2, =gUnknown_03007890
 	mov r12, r2
 	ldr r1, [r2]
 	ldrb r7, [r1]
@@ -2266,15 +2215,14 @@ _082E4F10:
 	ldrb r0, [r1, 0x1]
 	adds r0, 0x1
 	strb r0, [r1, 0x1]
-	ldr r0, _082E4F74
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r0, r5
 	strb r3, [r0]
 	b _082E5002
 	.align 2, 0
-_082E4F70: .4byte gUnknown_03007890
-_082E4F74: .4byte gUnknown_03007894
+	.pool
 _082E4F78:
 	movs r0, 0
 	strb r0, [r4]
@@ -2287,7 +2235,7 @@ _082E4F7E:
 	bne _082E5002
 	bl STWI_send_SlotStatusREQ
 	bl STWI_poll_CommandEnd
-	ldr r0, _082E4FC8
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -2302,7 +2250,7 @@ _082E4F7E:
 	ldrb r0, [r2, 0x2]
 	cmp r0, r5
 	bne _082E4FD0
-	ldr r0, _082E4FCC
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	lsls r1, r5, 1
 	adds r0, 0x12
@@ -2316,8 +2264,7 @@ _082E4F7E:
 	lsls r0, 24
 	b _082E4FFE
 	.align 2, 0
-_082E4FC8: .4byte gUnknown_03007898
-_082E4FCC: .4byte gUnknown_03007894
+	.pool
 _082E4FD0:
 	adds r2, 0x4
 	subs r0, r3, 0x1
@@ -2329,7 +2276,7 @@ _082E4FD0:
 	ldrb r0, [r2, 0x2]
 	cmp r0, r5
 	bne _082E4FD0
-	ldr r0, _082E5060
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	lsls r1, r5, 1
 	adds r0, 0x12
@@ -2346,7 +2293,7 @@ _082E4FFE:
 	lsrs r0, 24
 	mov r9, r0
 _082E5002:
-	ldr r0, _082E5064
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	mov r2, r8
@@ -2373,7 +2320,7 @@ _082E5028:
 	bl STWI_send_DisconnectREQ
 	bl STWI_poll_CommandEnd
 _082E5038:
-	ldr r1, _082E5068
+	ldr r1, =gUnknown_03007898
 	ldr r0, [r1]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2396,9 +2343,7 @@ _082E5050:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E5060: .4byte gUnknown_03007894
-_082E5064: .4byte gUnknown_03007890
-_082E5068: .4byte gUnknown_03007898
+	.pool
 	thumb_func_end rfu_REQBN_watchLink
 
 	thumb_func_start rfu_STC_removeLinkData
@@ -2416,13 +2361,13 @@ rfu_STC_removeLinkData: @ 82E506C
 	lsls r0, 17
 	lsls r0, r7
 	lsrs r6, r0, 24
-	ldr r0, _082E511C
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	adds r0, 0xE
 	adds r0, r7
 	movs r1, 0
 	strb r1, [r0]
-	ldr r1, _082E5120
+	ldr r1, =gUnknown_03007890
 	ldr r4, [r1]
 	ldrb r0, [r4, 0x2]
 	ands r0, r6
@@ -2449,7 +2394,7 @@ _082E50AA:
 	strb r0, [r2, 0x3]
 	ldr r3, [r3]
 	ldr r0, [r3]
-	ldr r1, _082E5124
+	ldr r1, =0x00ff00ff
 	ands r0, r1
 	cmp r0, 0
 	bne _082E50D2
@@ -2468,7 +2413,7 @@ _082E50D2:
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, r0
-	ldr r2, _082E5128
+	ldr r2, =0x01000010
 	mov r0, sp
 	bl CpuSet
 	mov r0, r8
@@ -2494,10 +2439,7 @@ _082E5110:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E511C: .4byte gUnknown_03007894
-_082E5120: .4byte gUnknown_03007890
-_082E5124: .4byte 0x00ff00ff
-_082E5128: .4byte 0x01000010
+	.pool
 	thumb_func_end rfu_STC_removeLinkData
 
 	thumb_func_start rfu_REQ_disconnect
@@ -2505,7 +2447,7 @@ rfu_REQ_disconnect: @ 82E512C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _082E5170
+	ldr r2, =gUnknown_03007890
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x2]
 	ldrb r1, [r1, 0x3]
@@ -2513,7 +2455,7 @@ rfu_REQ_disconnect: @ 82E512C
 	ands r0, r4
 	cmp r0, 0
 	beq _082E51B0
-	ldr r0, _082E5174
+	ldr r0, =gUnknown_03007894
 	ldr r1, [r0]
 	strb r4, [r1, 0x5]
 	ldr r2, [r2]
@@ -2536,14 +2478,13 @@ rfu_REQ_disconnect: @ 82E512C
 	bl rfu_CB_disconnect
 	b _082E51B0
 	.align 2, 0
-_082E5170: .4byte gUnknown_03007890
-_082E5174: .4byte gUnknown_03007894
+	.pool
 _082E5178:
 	ldr r0, [r3]
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0
 	beq _082E51A4
-	ldr r0, _082E51A0
+	ldr r0, =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
 	bl STWI_send_SC_EndREQ
 	bl STWI_poll_CommandEnd
@@ -2555,9 +2496,9 @@ _082E5178:
 	bl rfu_STC_REQ_callback
 	b _082E51B0
 	.align 2, 0
-_082E51A0: .4byte rfu_CB_defaultCallback
+	.pool
 _082E51A4:
-	ldr r0, _082E51B8
+	ldr r0, =rfu_CB_disconnect
 	bl STWI_set_Callback_M
 	adds r0, r4, 0
 	bl STWI_send_DisconnectREQ
@@ -2566,7 +2507,7 @@ _082E51B0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E51B8: .4byte rfu_CB_disconnect
+	.pool
 	thumb_func_end rfu_REQ_disconnect
 
 	thumb_func_start rfu_CB_disconnect
@@ -2578,19 +2519,19 @@ rfu_CB_disconnect: @ 82E51BC
 	lsrs r5, r1, 16
 	cmp r5, 0x3
 	bne _082E51F8
-	ldr r0, _082E528C
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _082E51F8
-	ldr r0, _082E5290
+	ldr r0, =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
 	bl STWI_send_SystemStatusREQ
 	bl STWI_poll_CommandEnd
 	lsls r0, 16
 	cmp r0, 0
 	bne _082E51F8
-	ldr r0, _082E5294
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2599,9 +2540,9 @@ rfu_CB_disconnect: @ 82E51BC
 	bne _082E51F8
 	movs r5, 0
 _082E51F8:
-	ldr r3, _082E5298
+	ldr r3, =gUnknown_03007894
 	ldr r2, [r3]
-	ldr r0, _082E528C
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x2]
 	ldrb r1, [r1, 0x3]
@@ -2609,7 +2550,7 @@ _082E51F8:
 	ldrb r1, [r2, 0x5]
 	ands r0, r1
 	strb r0, [r2, 0x5]
-	ldr r0, _082E5294
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -2624,7 +2565,7 @@ _082E5220:
 	lsls r0, 17
 	lsls r0, r4
 	lsrs r0, 24
-	ldr r1, _082E5298
+	ldr r1, =gUnknown_03007894
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x5]
 	ands r0, r1
@@ -2640,7 +2581,7 @@ _082E523C:
 	cmp r4, 0x3
 	bls _082E5220
 _082E5246:
-	ldr r0, _082E528C
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x2]
 	ldrb r0, [r2, 0x3]
@@ -2653,12 +2594,12 @@ _082E5258:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl rfu_STC_REQ_callback
-	ldr r0, _082E5298
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0
 	beq _082E5286
-	ldr r0, _082E5290
+	ldr r0, =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
 	bl STWI_send_SC_StartREQ
 	bl STWI_poll_CommandEnd
@@ -2673,10 +2614,7 @@ _082E5286:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E528C: .4byte gUnknown_03007890
-_082E5290: .4byte rfu_CB_defaultCallback
-_082E5294: .4byte gUnknown_03007898
-_082E5298: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_CB_disconnect
 
 	thumb_func_start rfu_REQ_CHILD_startConnectRecovery
@@ -2684,13 +2622,13 @@ rfu_REQ_CHILD_startConnectRecovery: @ 82E529C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _082E52EC
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	strb r5, [r0, 0x5]
 	movs r4, 0
 	movs r0, 0x1
 	ands r0, r5
-	ldr r2, _082E52F0
+	ldr r2, =rfu_STC_REQ_callback
 	cmp r0, 0
 	bne _082E52CA
 	movs r1, 0x1
@@ -2708,7 +2646,7 @@ _082E52B6:
 _082E52CA:
 	adds r0, r2, 0
 	bl STWI_set_Callback_M
-	ldr r0, _082E52F4
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	lsls r0, r4, 5
 	adds r0, r1, r0
@@ -2721,21 +2659,19 @@ _082E52CA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E52EC: .4byte gUnknown_03007894
-_082E52F0: .4byte rfu_STC_REQ_callback
-_082E52F4: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_REQ_CHILD_startConnectRecovery
 
 	thumb_func_start rfu_REQ_CHILD_pollConnectRecovery
 rfu_REQ_CHILD_pollConnectRecovery: @ 82E52F8
 	push {lr}
-	ldr r0, _082E5308
+	ldr r0, =rfu_CB_CHILD_pollConnectRecovery
 	bl STWI_set_Callback_M
 	bl STWI_send_CPR_PollingREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E5308: .4byte rfu_CB_CHILD_pollConnectRecovery
+	.pool
 	thumb_func_end rfu_REQ_CHILD_pollConnectRecovery
 
 	thumb_func_start rfu_CB_CHILD_pollConnectRecovery
@@ -2750,20 +2686,20 @@ rfu_CB_CHILD_pollConnectRecovery: @ 82E530C
 	lsrs r7, r1, 16
 	cmp r7, 0
 	bne _082E5390
-	ldr r0, _082E53A4
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0
 	bne _082E5390
-	ldr r0, _082E53A8
+	ldr r0, =gUnknown_03007894
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x5]
 	adds r6, r0, 0
 	cmp r1, 0
 	beq _082E5390
-	ldr r1, _082E53AC
+	ldr r1, =gUnknown_03007890
 	ldr r0, [r1]
 	strb r7, [r0]
 	movs r4, 0
@@ -2818,9 +2754,7 @@ _082E5390:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E53A4: .4byte gUnknown_03007898
-_082E53A8: .4byte gUnknown_03007894
-_082E53AC: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_CB_CHILD_pollConnectRecovery
 
 	thumb_func_start rfu_CHILD_getConnectRecoveryStatus
@@ -2829,7 +2763,7 @@ rfu_CHILD_getConnectRecoveryStatus: @ 82E53B0
 	adds r2, r0, 0
 	movs r0, 0xFF
 	strb r0, [r2]
-	ldr r0, _082E53D0
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -2842,7 +2776,7 @@ rfu_CHILD_getConnectRecoveryStatus: @ 82E53B0
 	movs r0, 0x10
 	b _082E53DA
 	.align 2, 0
-_082E53D0: .4byte gUnknown_03007898
+	.pool
 _082E53D4:
 	ldrb r0, [r1, 0x4]
 	strb r0, [r2]
@@ -2855,13 +2789,13 @@ _082E53DA:
 	thumb_func_start rfu_REQ_CHILD_endConnectRecovery
 rfu_REQ_CHILD_endConnectRecovery: @ 82E53E0
 	push {lr}
-	ldr r0, _082E53F0
+	ldr r0, =rfu_CB_CHILD_pollConnectRecovery
 	bl STWI_set_Callback_M
 	bl STWI_send_CPR_EndREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E53F0: .4byte rfu_CB_CHILD_pollConnectRecovery
+	.pool
 	thumb_func_end rfu_REQ_CHILD_endConnectRecovery
 
 	thumb_func_start sub_82E53F4
@@ -2905,12 +2839,12 @@ rfu_REQ_changeMasterSlave: @ 82E5424
 	lsrs r0, 16
 	cmp r0, 0x1
 	bne _082E5444
-	ldr r0, _082E5440
+	ldr r0, =rfu_STC_REQ_callback
 	bl STWI_set_Callback_M
 	bl STWI_send_MS_ChangeREQ
 	b _082E544C
 	.align 2, 0
-_082E5440: .4byte rfu_STC_REQ_callback
+	.pool
 _082E5444:
 	movs r0, 0x27
 	movs r1, 0
@@ -2929,7 +2863,7 @@ rfu_getMasterSlave: @ 82E5450
 	lsrs r2, r0, 24
 	cmp r2, 0x1
 	bne _082E547E
-	ldr r0, _082E5484
+	ldr r0, =gRfuState
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x2C
@@ -2950,7 +2884,7 @@ _082E547E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E5484: .4byte gRfuState
+	.pool
 	thumb_func_end rfu_getMasterSlave
 
 	thumb_func_start rfu_clearAllSlot
@@ -2959,7 +2893,7 @@ rfu_clearAllSlot: @ 82E5488
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
-	ldr r1, _082E550C
+	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	mov r8, r0
 	movs r0, 0
@@ -2972,21 +2906,21 @@ rfu_clearAllSlot: @ 82E5488
 _082E54A4:
 	mov r0, sp
 	strh r7, [r0]
-	ldr r0, _082E5510
+	ldr r0, =gUnknown_03007880
 	lsls r4, r5, 2
 	adds r0, r4, r0
 	ldr r1, [r0]
 	mov r0, sp
-	ldr r2, _082E5514
+	ldr r2, =0x01000034
 	bl CpuSet
 	strh r7, [r6]
-	ldr r0, _082E5518
+	ldr r0, =gUnknown_03007870
 	adds r4, r0
 	ldr r1, [r4]
 	adds r0, r6, 0
-	ldr r2, _082E551C
+	ldr r2, =0x0100000a
 	bl CpuSet
-	ldr r3, _082E5520
+	ldr r3, =gUnknown_03007890
 	ldr r0, [r3]
 	adds r0, 0x10
 	adds r0, r5
@@ -3007,10 +2941,10 @@ _082E54A4:
 	strb r1, [r0, 0x5]
 	ldr r0, [r3]
 	strb r1, [r0, 0x6]
-	ldr r0, _082E5524
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	strb r1, [r0, 0x2]
-	ldr r0, _082E550C
+	ldr r0, =0x04000208
 	mov r1, r8
 	strh r1, [r0]
 	add sp, 0x4
@@ -3020,13 +2954,7 @@ _082E54A4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E550C: .4byte 0x04000208
-_082E5510: .4byte gUnknown_03007880
-_082E5514: .4byte 0x01000034
-_082E5518: .4byte gUnknown_03007870
-_082E551C: .4byte 0x0100000a
-_082E5520: .4byte gUnknown_03007890
-_082E5524: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_clearAllSlot
 
 	thumb_func_start rfu_STC_releaseFrame
@@ -3038,14 +2966,14 @@ rfu_STC_releaseFrame: @ 82E5528
 	adds r5, r2, 0
 	lsls r1, 24
 	lsrs r3, r1, 24
-	ldr r0, _082E5560
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _082E5568
-	ldr r6, _082E5564
+	ldr r6, =gUnknown_03007890
 	cmp r3, 0
 	bne _082E5554
 	ldr r1, [r6]
@@ -3060,10 +2988,9 @@ _082E5554:
 	strb r0, [r1, 0xF]
 	b _082E5588
 	.align 2, 0
-_082E5560: .4byte gUnknown_03007894
-_082E5564: .4byte gUnknown_03007890
+	.pool
 _082E5568:
-	ldr r6, _082E5590
+	ldr r6, =gUnknown_03007890
 	cmp r3, 0
 	bne _082E557C
 	ldr r1, [r6]
@@ -3085,7 +3012,7 @@ _082E5588:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E5590: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_STC_releaseFrame
 
 	thumb_func_start rfu_clearSlot
@@ -3116,7 +3043,7 @@ _082E55B4:
 	lsls r0, 3
 	b _082E572C
 _082E55C4:
-	ldr r1, _082E5608
+	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	mov r10, r0
 	movs r0, 0
@@ -3127,7 +3054,7 @@ _082E55C4:
 	cmp r0, 0
 	beq _082E568C
 	movs r3, 0
-	ldr r1, _082E560C
+	ldr r1, =gUnknown_03007880
 	lsls r0, r7, 2
 	adds r0, r1
 	mov r9, r0
@@ -3142,7 +3069,7 @@ _082E55E2:
 	beq _082E5634
 	mov r2, r9
 	ldr r4, [r2]
-	ldr r0, _082E5610
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r0, 0x2C
@@ -3152,9 +3079,7 @@ _082E55E2:
 	strb r0, [r2, 0x4]
 	b _082E5634
 	.align 2, 0
-_082E5608: .4byte 0x04000208
-_082E560C: .4byte gUnknown_03007880
-_082E5610: .4byte gUnknown_03007890
+	.pool
 _082E5614:
 	movs r0, 0x8
 	mov r1, r8
@@ -3165,7 +3090,7 @@ _082E5614:
 	ldr r0, [r2]
 	adds r4, r0, 0
 	adds r4, 0x34
-	ldr r0, _082E56C8
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	movs r1, 0x1
 	lsls r1, r7
@@ -3212,7 +3137,7 @@ _082E5674:
 	strh r0, [r1]
 	mov r0, sp
 	adds r1, r4, 0
-	ldr r2, _082E56CC
+	ldr r2, =0x0100001a
 	bl CpuSet
 _082E5684:
 	lsls r0, r6, 16
@@ -3225,7 +3150,7 @@ _082E568C:
 	ands r0, r4
 	cmp r0, 0
 	beq _082E5702
-	ldr r1, _082E56D0
+	ldr r1, =gUnknown_03007870
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r3, [r0]
@@ -3235,14 +3160,14 @@ _082E568C:
 	ands r0, r1
 	cmp r0, 0
 	beq _082E56F4
-	ldr r0, _082E56D4
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _082E56D8
-	ldr r2, _082E56C8
+	ldr r2, =gUnknown_03007890
 	ldr r1, [r2]
 	ldrb r0, [r1, 0xF]
 	adds r0, 0x3
@@ -3251,12 +3176,9 @@ _082E568C:
 	strb r0, [r1, 0xF]
 	b _082E56EA
 	.align 2, 0
-_082E56C8: .4byte gUnknown_03007890
-_082E56CC: .4byte 0x0100001a
-_082E56D0: .4byte gUnknown_03007870
-_082E56D4: .4byte gUnknown_03007894
+	.pool
 _082E56D8:
-	ldr r2, _082E573C
+	ldr r2, =gUnknown_03007890
 	ldr r1, [r2]
 	adds r1, 0x10
 	adds r1, r7
@@ -3275,7 +3197,7 @@ _082E56F4:
 	mov r0, sp
 	movs r1, 0
 	strh r1, [r0]
-	ldr r2, _082E5740
+	ldr r2, =0x01000006
 	adds r1, r3, 0
 	bl CpuSet
 _082E5702:
@@ -3287,16 +3209,16 @@ _082E5702:
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _082E5744
+	ldr r1, =gUnknown_03007870
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r1, [r0]
 	adds r1, 0xC
-	ldr r2, _082E5748
+	ldr r2, =0x01000004
 	mov r0, sp
 	bl CpuSet
 _082E5724:
-	ldr r0, _082E574C
+	ldr r0, =0x04000208
 	mov r2, r10
 	strh r2, [r0]
 	movs r0, 0
@@ -3310,11 +3232,7 @@ _082E572C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E573C: .4byte gUnknown_03007890
-_082E5740: .4byte 0x01000006
-_082E5744: .4byte gUnknown_03007870
-_082E5748: .4byte 0x01000004
-_082E574C: .4byte 0x04000208
+	.pool
 	thumb_func_end rfu_clearSlot
 
 	thumb_func_start rfu_setRecvBuffer
@@ -3338,7 +3256,7 @@ _082E576C:
 	ands r0, r3
 	cmp r0, 0
 	beq _082E5788
-	ldr r0, _082E5784
+	ldr r0, =gUnknown_03007880
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -3346,7 +3264,7 @@ _082E576C:
 	str r6, [r0, 0x6C]
 	b _082E57A2
 	.align 2, 0
-_082E5784: .4byte gUnknown_03007880
+	.pool
 _082E5788:
 	movs r0, 0x10
 	ands r2, r0
@@ -3356,7 +3274,7 @@ _082E5788:
 	lsls r0, 3
 	b _082E57A4
 _082E5796:
-	ldr r0, _082E57AC
+	ldr r0, =gUnknown_03007870
 	lsls r1, r4, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -3369,7 +3287,7 @@ _082E57A4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E57AC: .4byte gUnknown_03007870
+	.pool
 	thumb_func_end rfu_setRecvBuffer
 
 	thumb_func_start rfu_NI_setSendData
@@ -3406,7 +3324,7 @@ rfu_UNI_setSendData: @ 82E57DC
 	lsrs r1, r0, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, _082E57F8
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -3414,7 +3332,7 @@ rfu_UNI_setSendData: @ 82E57DC
 	adds r0, r2, 0x3
 	b _082E57FE
 	.align 2, 0
-_082E57F8: .4byte gUnknown_03007890
+	.pool
 _082E57FC:
 	adds r0, r2, 0x2
 _082E57FE:
@@ -3444,7 +3362,7 @@ rfu_NI_CHILD_setSendGameName: @ 82E5818
 	lsls r1, 17
 	lsls r1, r0
 	lsrs r1, 24
-	ldr r0, _082E5848
+	ldr r0, =gUnknown_03007890
 	ldr r3, [r0]
 	adds r3, 0x98
 	movs r0, 0x1A
@@ -3457,7 +3375,7 @@ rfu_NI_CHILD_setSendGameName: @ 82E5818
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E5848: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_NI_CHILD_setSendGameName
 
 	thumb_func_start rfu_STC_setSendData_org
@@ -3476,17 +3394,16 @@ rfu_STC_setSendData_org: @ 82E584C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r0, _082E5878
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	mov r10, r0
 	cmp r1, 0xFF
 	bne _082E5880
-	ldr r0, _082E587C
+	ldr r0, =0x00000301
 	b _082E5A36
 	.align 2, 0
-_082E5878: .4byte gUnknown_03007890
-_082E587C: .4byte 0x00000301
+	.pool
 _082E5880:
 	movs r0, 0xF
 	ands r0, r3
@@ -3502,10 +3419,10 @@ _082E588E:
 	ands r0, r3
 	cmp r0, r3
 	beq _082E58A4
-	ldr r0, _082E58A0
+	ldr r0, =0x00000401
 	b _082E5A36
 	.align 2, 0
-_082E58A0: .4byte 0x00000401
+	.pool
 _082E58A4:
 	movs r0, 0x10
 	ands r0, r6
@@ -3519,15 +3436,15 @@ _082E58B2:
 	ands r0, r3
 	cmp r0, 0
 	beq _082E58C0
-	ldr r0, _082E58BC
+	ldr r0, =0x00000402
 	b _082E5A36
 	.align 2, 0
-_082E58BC: .4byte 0x00000402
+	.pool
 _082E58C0:
 	movs r2, 0
 	movs r0, 0x1
 	ands r0, r3
-	ldr r4, _082E58F0
+	ldr r4, =gUnknown_089A3220
 	cmp r0, 0
 	bne _082E58E2
 	movs r1, 0x1
@@ -3551,7 +3468,7 @@ _082E58E2:
 	adds r1, 0xF
 	b _082E58FE
 	.align 2, 0
-_082E58F0: .4byte gUnknown_089A3220
+	.pool
 _082E58F4:
 	cmp r0, 0
 	bne _082E5900
@@ -3578,7 +3495,7 @@ _082E5918:
 	lsls r0, 3
 	b _082E5A36
 _082E591E:
-	ldr r1, _082E596C
+	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	str r0, [sp, 0x4]
 	movs r7, 0
@@ -3592,7 +3509,7 @@ _082E591E:
 	cmp r6, 0x40
 	bne _082E59F4
 _082E5938:
-	ldr r1, _082E5970
+	ldr r1, =gUnknown_03007880
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -3618,8 +3535,7 @@ _082E5938:
 	strb r7, [r1]
 	b _082E5978
 	.align 2, 0
-_082E596C: .4byte 0x04000208
-_082E5970: .4byte gUnknown_03007880
+	.pool
 _082E5974:
 	movs r0, 0x1
 	strb r0, [r1]
@@ -3652,7 +3568,7 @@ _082E5998:
 	bls _082E5998
 	movs r2, 0
 	movs r5, 0x1
-	ldr r4, _082E59EC
+	ldr r4, =gUnknown_03007880
 	movs r1, 0
 _082E59B2:
 	adds r0, r3, 0
@@ -3681,19 +3597,18 @@ _082E59C4:
 	mov r1, r8
 	subs r0, r1
 	strb r0, [r2]
-	ldr r0, _082E59F0
+	ldr r0, =0x00008021
 	mov r2, r12
 	strh r0, [r2]
 	b _082E5A2C
 	.align 2, 0
-_082E59EC: .4byte gUnknown_03007880
-_082E59F0: .4byte 0x00008021
+	.pool
 _082E59F4:
 	movs r0, 0x10
 	ands r0, r6
 	cmp r0, 0
 	beq _082E5A2C
-	ldr r1, _082E5A48
+	ldr r1, =gUnknown_03007870
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -3709,7 +3624,7 @@ _082E59F4:
 	subs r0, r2
 	mov r2, r9
 	strb r0, [r2]
-	ldr r0, _082E5A4C
+	ldr r0, =0x00008024
 	strh r0, [r1]
 	mov r0, r10
 	ldr r2, [r0]
@@ -3718,7 +3633,7 @@ _082E59F4:
 	orrs r0, r1
 	strb r0, [r2, 0x6]
 _082E5A2C:
-	ldr r0, _082E5A50
+	ldr r0, =0x04000208
 	mov r1, sp
 	ldrh r1, [r1, 0x4]
 	strh r1, [r0]
@@ -3733,9 +3648,7 @@ _082E5A36:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E5A48: .4byte gUnknown_03007870
-_082E5A4C: .4byte 0x00008024
-_082E5A50: .4byte 0x04000208
+	.pool
 	thumb_func_end rfu_STC_setSendData_org
 
 	thumb_func_start rfu_changeSendTarget
@@ -3761,13 +3674,13 @@ rfu_changeSendTarget: @ 82E5A54
 _082E5A78:
 	cmp r0, 0x20
 	bne _082E5B18
-	ldr r0, _082E5B08
+	ldr r0, =gUnknown_03007880
 	mov r12, r0
 	lsls r0, r7, 2
 	add r0, r12
 	ldr r5, [r0]
 	ldrh r2, [r5]
-	ldr r1, _082E5B0C
+	ldr r1, =0x00008020
 	adds r0, r1, 0
 	ands r0, r2
 	cmp r0, r1
@@ -3783,7 +3696,7 @@ _082E5A78:
 	bne _082E5AA6
 	b _082E5BAA
 _082E5AA6:
-	ldr r1, _082E5B10
+	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	mov r8, r0
 	strh r2, [r1]
@@ -3812,7 +3725,7 @@ _082E5AD2:
 	lsrs r2, r0, 24
 	cmp r2, 0x3
 	bls _082E5ABE
-	ldr r0, _082E5B14
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x4]
 	ldr r2, [sp]
@@ -3829,34 +3742,29 @@ _082E5AD2:
 	movs r0, 0x27
 	strh r0, [r5]
 _082E5AFE:
-	ldr r0, _082E5B10
+	ldr r0, =0x04000208
 	mov r1, r8
 	strh r1, [r0]
 	b _082E5BAA
 	.align 2, 0
-_082E5B08: .4byte gUnknown_03007880
-_082E5B0C: .4byte 0x00008020
-_082E5B10: .4byte 0x04000208
-_082E5B14: .4byte gUnknown_03007890
+	.pool
 _082E5B18:
 	cmp r3, 0x10
 	bne _082E5BA4
-	ldr r3, _082E5B34
+	ldr r3, =gUnknown_03007870
 	lsls r1, r7, 2
 	adds r0, r1, r3
 	ldr r0, [r0]
 	ldrh r2, [r0]
-	ldr r0, _082E5B38
+	ldr r0, =0x00008024
 	adds r5, r3, 0
 	cmp r2, r0
 	beq _082E5B40
 _082E5B2E:
-	ldr r0, _082E5B3C
+	ldr r0, =0x00000403
 	b _082E5BAC
 	.align 2, 0
-_082E5B34: .4byte gUnknown_03007870
-_082E5B38: .4byte 0x00008024
-_082E5B3C: .4byte 0x00000403
+	.pool
 _082E5B40:
 	movs r3, 0
 	movs r2, 0
@@ -3880,16 +3788,16 @@ _082E5B54:
 	cmp r2, 0
 	beq _082E5B70
 _082E5B66:
-	ldr r0, _082E5B6C
+	ldr r0, =0x00000404
 	b _082E5BAC
 	.align 2, 0
-_082E5B6C: .4byte 0x00000404
+	.pool
 _082E5B70:
-	ldr r3, _082E5B9C
+	ldr r3, =0x04000208
 	ldrh r0, [r3]
 	mov r8, r0
 	strh r2, [r3]
-	ldr r4, _082E5BA0
+	ldr r4, =gUnknown_03007890
 	ldr r2, [r4]
 	adds r5, r1, r5
 	ldr r0, [r5]
@@ -3908,8 +3816,7 @@ _082E5B70:
 	strh r2, [r3]
 	b _082E5BAA
 	.align 2, 0
-_082E5B9C: .4byte 0x04000208
-_082E5BA0: .4byte gUnknown_03007890
+	.pool
 _082E5BA4:
 	movs r0, 0xC0
 	lsls r0, 3
@@ -3938,13 +3845,13 @@ rfu_NI_stopReceivingData: @ 82E5BBC
 	lsls r0, 3
 	b _082E5C26
 _082E5BCC:
-	ldr r1, _082E5BF8
+	ldr r1, =gUnknown_03007880
 	lsls r0, r3, 2
 	adds r0, r1
 	ldr r2, [r0]
 	adds r5, r2, 0
 	adds r5, 0x34
-	ldr r1, _082E5BFC
+	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	adds r4, r0, 0
 	movs r0, 0
@@ -3955,20 +3862,18 @@ _082E5BCC:
 	ands r0, r1
 	cmp r0, 0
 	beq _082E5C20
-	ldr r0, _082E5C00
+	ldr r0, =0x00008043
 	cmp r1, r0
 	bne _082E5C04
 	movs r0, 0x48
 	b _082E5C06
 	.align 2, 0
-_082E5BF8: .4byte gUnknown_03007880
-_082E5BFC: .4byte 0x04000208
-_082E5C00: .4byte 0x00008043
+	.pool
 _082E5C04:
 	movs r0, 0x47
 _082E5C06:
 	strh r0, [r2, 0x34]
-	ldr r0, _082E5C2C
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	movs r1, 0x1
 	lsls r1, r3
@@ -3980,7 +3885,7 @@ _082E5C06:
 	adds r2, r5, 0
 	bl rfu_STC_releaseFrame
 _082E5C20:
-	ldr r0, _082E5C30
+	ldr r0, =0x04000208
 	strh r4, [r0]
 	movs r0, 0
 _082E5C26:
@@ -3988,8 +3893,7 @@ _082E5C26:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E5C2C: .4byte gUnknown_03007890
-_082E5C30: .4byte 0x04000208
+	.pool
 	thumb_func_end rfu_NI_stopReceivingData
 
 	thumb_func_start rfu_UNI_changeAndReadySendData
@@ -4007,22 +3911,20 @@ rfu_UNI_changeAndReadySendData: @ 82E5C34
 	lsls r0, 3
 	b _082E5CC0
 _082E5C4C:
-	ldr r1, _082E5C60
+	ldr r1, =gUnknown_03007870
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
 	ldrh r1, [r4]
-	ldr r0, _082E5C64
+	ldr r0, =0x00008024
 	cmp r1, r0
 	beq _082E5C6C
-	ldr r0, _082E5C68
+	ldr r0, =0x00000403
 	b _082E5CC0
 	.align 2, 0
-_082E5C60: .4byte gUnknown_03007870
-_082E5C64: .4byte 0x00008024
-_082E5C68: .4byte 0x00000403
+	.pool
 _082E5C6C:
-	ldr r0, _082E5C80
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -4033,7 +3935,7 @@ _082E5C6C:
 	ldrb r1, [r1, 0xF]
 	b _082E5C92
 	.align 2, 0
-_082E5C80: .4byte gUnknown_03007890
+	.pool
 _082E5C84:
 	adds r0, r3, 0
 	adds r0, 0x10
@@ -4048,7 +3950,7 @@ _082E5C92:
 	lsrs r3, r0, 24
 	cmp r3, r5
 	bcc _082E5CBC
-	ldr r2, _082E5CB8
+	ldr r2, =0x04000208
 	ldrh r1, [r2]
 	movs r0, 0
 	strh r0, [r2]
@@ -4062,7 +3964,7 @@ _082E5C92:
 	movs r0, 0
 	b _082E5CC0
 	.align 2, 0
-_082E5CB8: .4byte 0x04000208
+	.pool
 _082E5CBC:
 	movs r0, 0xA0
 	lsls r0, 3
@@ -4079,12 +3981,12 @@ rfu_UNI_readySendData: @ 82E5CC8
 	lsrs r0, 24
 	cmp r0, 0x3
 	bhi _082E5CE6
-	ldr r1, _082E5CEC
+	ldr r1, =gUnknown_03007870
 	lsls r0, 2
 	adds r0, r1
 	ldr r2, [r0]
 	ldrh r1, [r2]
-	ldr r0, _082E5CF0
+	ldr r0, =0x00008024
 	cmp r1, r0
 	bne _082E5CE6
 	movs r0, 0x1
@@ -4093,8 +3995,7 @@ _082E5CE6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E5CEC: .4byte gUnknown_03007870
-_082E5CF0: .4byte 0x00008024
+	.pool
 	thumb_func_end rfu_UNI_readySendData
 
 	thumb_func_start rfu_UNI_clearRecvNewDataFlag
@@ -4104,7 +4005,7 @@ rfu_UNI_clearRecvNewDataFlag: @ 82E5CF4
 	lsrs r0, 24
 	cmp r0, 0x3
 	bhi _082E5D0A
-	ldr r1, _082E5D10
+	ldr r1, =gUnknown_03007870
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -4114,7 +4015,7 @@ _082E5D0A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E5D10: .4byte gUnknown_03007870
+	.pool
 	thumb_func_end rfu_UNI_clearRecvNewDataFlag
 
 	thumb_func_start rfu_REQ_sendData
@@ -4122,7 +4023,7 @@ rfu_REQ_sendData: @ 82E5D14
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _082E5D60
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	adds r4, r0, 0
@@ -4140,7 +4041,7 @@ _082E5D28:
 	orrs r3, r0
 	cmp r3, 0
 	bne _082E5DB8
-	ldr r0, _082E5D64
+	ldr r0, =gUnknown_03007894
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x3]
 	adds r4, r0, 0
@@ -4159,8 +4060,7 @@ _082E5D50:
 	strb r0, [r1, 0x8]
 	b _082E5D6E
 	.align 2, 0
-_082E5D60: .4byte gUnknown_03007890
-_082E5D64: .4byte gUnknown_03007894
+	.pool
 _082E5D68:
 	ldrb r0, [r1, 0x7]
 	adds r0, 0x1
@@ -4176,13 +4076,13 @@ _082E5D6E:
 	cmp r0, 0
 	bne _082E5E12
 _082E5D80:
-	ldr r4, _082E5DA4
+	ldr r4, =gUnknown_03007898
 	ldr r1, [r4]
 	movs r0, 0x1
 	str r0, [r1, 0x68]
 	movs r0, 0xFF
 	str r0, [r1, 0x78]
-	ldr r0, _082E5DA8
+	ldr r0, =sub_82E5F00
 	bl STWI_set_Callback_M
 	cmp r5, 0
 	bne _082E5DAC
@@ -4192,8 +4092,7 @@ _082E5D80:
 	bl STWI_send_DataTxREQ
 	b _082E5E4E
 	.align 2, 0
-_082E5DA4: .4byte gUnknown_03007898
-_082E5DA8: .4byte sub_82E5F00
+	.pool
 _082E5DAC:
 	ldr r0, [r4]
 	adds r0, 0x68
@@ -4211,14 +4110,14 @@ _082E5DC4:
 	ldrb r0, [r0, 0xE]
 	cmp r0, 0
 	beq _082E5E12
-	ldr r0, _082E5DF0
+	ldr r0, =rfu_CB_sendData
 	bl STWI_set_Callback_M
 	cmp r5, 0
 	beq _082E5DFC
-	ldr r0, _082E5DF4
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0x68
-	ldr r1, _082E5DF8
+	ldr r1, =gUnknown_03007894
 	ldr r1, [r1]
 	ldr r1, [r1, 0x24]
 	adds r1, 0x4
@@ -4227,14 +4126,12 @@ _082E5DC4:
 	bl STWI_send_DataTxAndChangeREQ
 	b _082E5E4E
 	.align 2, 0
-_082E5DF0: .4byte rfu_CB_sendData
-_082E5DF4: .4byte gUnknown_03007898
-_082E5DF8: .4byte gUnknown_03007894
+	.pool
 _082E5DFC:
-	ldr r0, _082E5E34
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0x68
-	ldr r1, _082E5E38
+	ldr r1, =gUnknown_03007894
 	ldr r1, [r1]
 	ldr r1, [r1, 0x24]
 	adds r1, 0x4
@@ -4244,12 +4141,12 @@ _082E5DFC:
 _082E5E12:
 	cmp r5, 0
 	beq _082E5E4E
-	ldr r0, _082E5E3C
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _082E5E44
-	ldr r0, _082E5E40
+	ldr r0, =gRfuState
 	ldr r0, [r0]
 	ldr r1, [r0, 0x1C]
 	cmp r1, 0
@@ -4258,12 +4155,9 @@ _082E5E12:
 	bl _call_via_r1
 	b _082E5E4E
 	.align 2, 0
-_082E5E34: .4byte gUnknown_03007898
-_082E5E38: .4byte gUnknown_03007894
-_082E5E3C: .4byte gUnknown_03007890
-_082E5E40: .4byte gRfuState
+	.pool
 _082E5E44:
-	ldr r0, _082E5E54
+	ldr r0, =rfu_CB_sendData2
 	bl STWI_set_Callback_M
 	bl STWI_send_MS_ChangeREQ
 _082E5E4E:
@@ -4271,7 +4165,7 @@ _082E5E4E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E5E54: .4byte rfu_CB_sendData2
+	.pool
 	thumb_func_end rfu_REQ_sendData
 
 	thumb_func_start rfu_CB_sendData
@@ -4284,10 +4178,10 @@ rfu_CB_sendData: @ 82E5E58
 	cmp r7, 0
 	bne _082E5EC2
 	movs r6, 0
-	ldr r0, _082E5EE0
+	ldr r0, =0x00008020
 	mov r8, r0
 _082E5E6C:
-	ldr r0, _082E5EE4
+	ldr r0, =gUnknown_03007870
 	lsls r2, r6, 2
 	adds r0, r2, r0
 	ldr r1, [r0]
@@ -4297,7 +4191,7 @@ _082E5E6C:
 	movs r0, 0
 	strb r0, [r1, 0x2]
 _082E5E7E:
-	ldr r0, _082E5EE8
+	ldr r0, =gUnknown_03007880
 	adds r0, r2, r0
 	ldr r4, [r0]
 	ldrh r0, [r4]
@@ -4307,7 +4201,7 @@ _082E5E7E:
 	movs r1, 0
 	adds r2, r4, 0
 	bl rfu_STC_releaseFrame
-	ldr r5, _082E5EEC
+	ldr r5, =gUnknown_03007890
 	ldr r2, [r5]
 	ldrb r1, [r4, 0x1A]
 	ldrb r0, [r2, 0x4]
@@ -4333,7 +4227,7 @@ _082E5EB8:
 	cmp r6, 0x3
 	bls _082E5E6C
 _082E5EC2:
-	ldr r0, _082E5EEC
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	ldrb r0, [r1, 0xE]
 	movs r0, 0
@@ -4347,10 +4241,7 @@ _082E5EC2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E5EE0: .4byte 0x00008020
-_082E5EE4: .4byte gUnknown_03007870
-_082E5EE8: .4byte gUnknown_03007880
-_082E5EEC: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_CB_sendData
 
 	thumb_func_start rfu_CB_sendData2
@@ -4395,7 +4286,7 @@ rfu_constructSendLLFrame: @ 82E5F28
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, _082E5FD4
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	cmp r0, 0xFF
@@ -4413,7 +4304,7 @@ _082E5F40:
 	movs r0, 0
 	strb r0, [r2, 0xE]
 	mov r8, r0
-	ldr r0, _082E5FD8
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0x6C
 	str r0, [sp]
@@ -4421,11 +4312,11 @@ _082E5F40:
 	movs r0, 0x80
 	lsls r0, 8
 	mov r9, r0
-	ldr r1, _082E5FDC
+	ldr r1, =0x00008024
 	mov r10, r1
 _082E5F6A:
 	movs r5, 0
-	ldr r0, _082E5FE0
+	ldr r0, =gUnknown_03007880
 	lsls r7, r6, 2
 	adds r4, r7, r0
 	ldr r2, [r4]
@@ -4454,7 +4345,7 @@ _082E5F8A:
 	lsrs r0, 16
 	adds r5, r0
 _082E5FA6:
-	ldr r0, _082E5FE4
+	ldr r0, =gUnknown_03007870
 	adds r0, r7, r0
 	ldr r0, [r0]
 	ldrh r0, [r0]
@@ -4469,7 +4360,7 @@ _082E5FA6:
 _082E5FC0:
 	cmp r5, 0
 	beq _082E5FF4
-	ldr r0, _082E5FD4
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4477,11 +4368,7 @@ _082E5FC0:
 	add r8, r5
 	b _082E5FF4
 	.align 2, 0
-_082E5FD4: .4byte gUnknown_03007890
-_082E5FD8: .4byte gUnknown_03007898
-_082E5FDC: .4byte 0x00008024
-_082E5FE0: .4byte gUnknown_03007880
-_082E5FE4: .4byte gUnknown_03007870
+	.pool
 _082E5FE8:
 	adds r0, r7, r6
 	adds r0, 0x8
@@ -4495,15 +4382,15 @@ _082E5FF4:
 	lsrs r6, r0, 24
 	cmp r6, 0x3
 	bls _082E5F6A
-	ldr r6, _082E6054
+	ldr r6, =gUnknown_03007894
 	mov r0, r8
 	cmp r0, 0
 	beq _082E603E
 	ldr r2, [sp]
 	movs r0, 0x3
 	ands r0, r2
-	ldr r5, _082E6058
-	ldr r1, _082E605C
+	ldr r5, =gUnknown_03007890
+	ldr r1, =gUnknown_03007898
 	cmp r0, 0
 	beq _082E6026
 	movs r4, 0
@@ -4543,9 +4430,7 @@ _082E6044:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6054: .4byte gUnknown_03007894
-_082E6058: .4byte gUnknown_03007890
-_082E605C: .4byte gUnknown_03007898
+	.pool
 	thumb_func_end rfu_constructSendLLFrame
 
 	thumb_func_start rfu_STC_NI_constructLLSF
@@ -4561,15 +4446,15 @@ rfu_STC_NI_constructLLSF: @ 82E6060
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	ldr r2, _082E60DC
+	ldr r2, =gUnknown_03007890
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	lsls r0, 4
-	ldr r1, _082E60E0
+	ldr r1, =gUnknown_089A3220
 	adds r0, r1
 	mov r8, r0
 	ldrh r1, [r4]
-	ldr r0, _082E60E4
+	ldr r0, =0x00008022
 	cmp r1, r0
 	bne _082E60CA
 	adds r3, r4, 0
@@ -4615,11 +4500,9 @@ _082E60CA:
 	movs r5, 0
 	b _082E612C
 	.align 2, 0
-_082E60DC: .4byte gUnknown_03007890
-_082E60E0: .4byte gUnknown_089A3220
-_082E60E4: .4byte 0x00008022
+	.pool
 _082E60E8:
-	ldr r0, _082E6114
+	ldr r0, =0x00008022
 	cmp r9, r0
 	bne _082E611C
 	adds r3, r4, 0
@@ -4642,7 +4525,7 @@ _082E60E8:
 	lsrs r5, r0, 16
 	b _082E6130
 	.align 2, 0
-_082E6114: .4byte 0x00008022
+	.pool
 _082E6118:
 	adds r5, r7, 0
 	b _082E6130
@@ -4687,7 +4570,7 @@ _082E6130:
 	orrs r3, r0
 	orrs r3, r5
 	str r3, [sp]
-	ldr r2, _082E61EC
+	ldr r2, =gUnknown_03007890
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4728,7 +4611,7 @@ _082E61A2:
 	adds r0, r1
 	ldr r0, [r0]
 	str r0, [sp, 0x4]
-	ldr r0, _082E61F0
+	ldr r0, =gUnknown_03007898
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	ldr r3, [r1, 0x4]
@@ -4737,7 +4620,7 @@ _082E61A2:
 	bl _call_via_r3
 _082E61C2:
 	ldrh r1, [r4]
-	ldr r0, _082E61F4
+	ldr r0, =0x00008022
 	cmp r1, r0
 	bne _082E61DC
 	ldrb r0, [r6]
@@ -4750,7 +4633,7 @@ _082E61C2:
 	movs r0, 0
 	strb r0, [r6]
 _082E61DC:
-	ldr r0, _082E61EC
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	cmp r1, 0x1
@@ -4759,9 +4642,7 @@ _082E61DC:
 	strb r1, [r2, 0xE]
 	b _082E6206
 	.align 2, 0
-_082E61EC: .4byte gUnknown_03007890
-_082E61F0: .4byte gUnknown_03007898
-_082E61F4: .4byte 0x00008022
+	.pool
 _082E61F8:
 	movs r0, 0x1
 	mov r1, r10
@@ -4796,7 +4677,7 @@ rfu_STC_UNI_constructLLSF: @ 82E6220
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _082E6248
+	ldr r1, =gUnknown_03007870
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
@@ -4810,13 +4691,13 @@ _082E6244:
 	movs r0, 0
 	b _082E62E8
 	.align 2, 0
-_082E6248: .4byte gUnknown_03007870
+	.pool
 _082E624C:
-	ldr r0, _082E62C4
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	lsls r0, 4
-	ldr r1, _082E62C8
+	ldr r1, =gUnknown_089A3220
 	adds r5, r0, r1
 	ldrh r0, [r4]
 	movs r1, 0xF
@@ -4836,7 +4717,7 @@ _082E624C:
 _082E6276:
 	mov r2, sp
 	movs r3, 0
-	ldr r1, _082E62CC
+	ldr r1, =gUnknown_03007898
 	mov r12, r1
 	add r7, sp, 0x4
 	ldrb r0, [r5]
@@ -4865,7 +4746,7 @@ _082E629E:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl _call_via_r3
-	ldr r0, _082E62C4
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	cmp r0, 0x1
@@ -4874,9 +4755,7 @@ _082E629E:
 	movs r0, 0x10
 	b _082E62DC
 	.align 2, 0
-_082E62C4: .4byte gUnknown_03007890
-_082E62C8: .4byte gUnknown_089A3220
-_082E62CC: .4byte gUnknown_03007898
+	.pool
 _082E62D0:
 	movs r0, 0x10
 	mov r1, r8
@@ -4903,12 +4782,12 @@ _082E62E8:
 	thumb_func_start rfu_REQ_recvData
 rfu_REQ_recvData: @ 82E62F4
 	push {r4,lr}
-	ldr r0, _082E6328
+	ldr r0, =gUnknown_03007890
 	ldr r4, [r0]
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _082E6320
-	ldr r2, _082E632C
+	ldr r2, =gUnknown_03007894
 	ldr r3, [r2]
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
@@ -4919,7 +4798,7 @@ rfu_REQ_recvData: @ 82E62F4
 	strb r0, [r3, 0x3]
 	ldr r0, [r2]
 	strb r1, [r0, 0x4]
-	ldr r0, _082E6330
+	ldr r0, =rfu_CB_recvData
 	bl STWI_set_Callback_M
 	bl STWI_send_DataRxREQ
 _082E6320:
@@ -4927,9 +4806,7 @@ _082E6320:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6328: .4byte gUnknown_03007890
-_082E632C: .4byte gUnknown_03007894
-_082E6330: .4byte rfu_CB_recvData
+	.pool
 	thumb_func_end rfu_REQ_recvData
 
 	thumb_func_start rfu_CB_recvData
@@ -4946,17 +4823,17 @@ rfu_CB_recvData: @ 82E6334
 	lsrs r7, r1, 16
 	cmp r7, 0
 	bne _082E63F8
-	ldr r0, _082E6370
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
 	beq _082E63F8
-	ldr r0, _082E6374
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	strb r7, [r0, 0x1]
-	ldr r0, _082E6378
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4964,25 +4841,23 @@ rfu_CB_recvData: @ 82E6334
 	bl rfu_STC_PARENT_analyzeRecvPacket
 	b _082E6380
 	.align 2, 0
-_082E6370: .4byte gUnknown_03007898
-_082E6374: .4byte gUnknown_03007894
-_082E6378: .4byte gUnknown_03007890
+	.pool
 _082E637C:
 	bl rfu_STC_CHILD_analyzeRecvPacket
 _082E6380:
 	movs r6, 0
-	ldr r0, _082E6410
+	ldr r0, =0x00008043
 	mov r8, r0
-	ldr r3, _082E6414
+	ldr r3, =gUnknown_03007890
 _082E6388:
-	ldr r0, _082E6418
+	ldr r0, =gUnknown_03007880
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r4, [r1]
 	ldrh r0, [r4, 0x34]
 	cmp r0, r8
 	bne _082E63DA
-	ldr r0, _082E641C
+	ldr r0, =gUnknown_03007894
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	asrs r0, r6
@@ -5022,7 +4897,7 @@ _082E63DA:
 	lsrs r6, r0, 24
 	cmp r6, 0x3
 	bls _082E6388
-	ldr r0, _082E641C
+	ldr r0, =gUnknown_03007894
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0
@@ -5044,17 +4919,14 @@ _082E63F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6410: .4byte 0x00008043
-_082E6414: .4byte gUnknown_03007890
-_082E6418: .4byte gUnknown_03007880
-_082E641C: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_CB_recvData
 
 	thumb_func_start rfu_STC_PARENT_analyzeRecvPacket
 rfu_STC_PARENT_analyzeRecvPacket: @ 82E6420
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, _082E64B0
+	ldr r1, =gUnknown_03007898
 	ldr r0, [r1]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -5063,7 +4935,7 @@ rfu_STC_PARENT_analyzeRecvPacket: @ 82E6420
 	movs r5, 0
 	mov r12, r1
 	movs r7, 0x1F
-	ldr r4, _082E64B4
+	ldr r4, =gUnknown_03007894
 	movs r6, 0x1
 _082E643A:
 	mov r0, sp
@@ -5129,14 +5001,13 @@ _082E64A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E64B0: .4byte gUnknown_03007898
-_082E64B4: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_STC_PARENT_analyzeRecvPacket
 
 	thumb_func_start rfu_STC_CHILD_analyzeRecvPacket
 rfu_STC_CHILD_analyzeRecvPacket: @ 82E64B8
 	push {r4-r6,lr}
-	ldr r0, _082E6508
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -5147,7 +5018,7 @@ rfu_STC_CHILD_analyzeRecvPacket: @ 82E64B8
 	adds r5, 0x8
 	cmp r4, 0
 	bne _082E64D8
-	ldr r0, _082E650C
+	ldr r0, =gUnknown_03007894
 	ldr r1, [r0]
 	movs r0, 0xF
 	strb r0, [r1, 0x1]
@@ -5177,8 +5048,7 @@ _082E6500:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6508: .4byte gUnknown_03007898
-_082E650C: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_STC_CHILD_analyzeRecvPacket
 
 	thumb_func_start rfu_STC_analyzeLLSF
@@ -5195,14 +5065,14 @@ rfu_STC_analyzeLLSF: @ 82E6510
 	mov r12, r0
 	lsls r2, 16
 	lsrs r3, r2, 16
-	ldr r2, _082E6544
+	ldr r2, =gUnknown_03007890
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	mvns r0, r0
 	movs r1, 0x1
 	ands r0, r1
 	lsls r0, 4
-	ldr r1, _082E6548
+	ldr r1, =gUnknown_089A3220
 	adds r6, r0, r1
 	ldrb r0, [r6]
 	cmp r3, r0
@@ -5210,8 +5080,7 @@ rfu_STC_analyzeLLSF: @ 82E6510
 	adds r0, r3, 0
 	b _082E673E
 	.align 2, 0
-_082E6544: .4byte gUnknown_03007890
-_082E6548: .4byte gUnknown_089A3220
+	.pool
 _082E654C:
 	movs r5, 0
 	movs r4, 0
@@ -5239,7 +5108,7 @@ _082E6574:
 	lsrs r0, r3
 	mov r3, r8
 	ands r0, r3
-	ldr r1, _082E664C
+	ldr r1, =0xffffff00
 	mov r10, r1
 	mov r3, r10
 	mov r2, r9
@@ -5252,7 +5121,7 @@ _082E6574:
 	ldrb r1, [r6, 0x8]
 	ands r0, r1
 	lsls r0, 8
-	ldr r4, _082E6650
+	ldr r4, =0xffff00ff
 	adds r2, r4, 0
 	ands r2, r3
 	orrs r2, r0
@@ -5263,7 +5132,7 @@ _082E6574:
 	ldrb r1, [r6, 0x9]
 	ands r0, r1
 	lsls r0, 16
-	ldr r3, _082E6654
+	ldr r3, =0xff00ffff
 	ands r3, r2
 	orrs r3, r0
 	str r3, [sp]
@@ -5273,7 +5142,7 @@ _082E6574:
 	ldrb r1, [r6, 0xA]
 	ands r0, r1
 	lsls r0, 24
-	ldr r2, _082E6658
+	ldr r2, =0x00ffffff
 	mov r8, r2
 	mov r1, r8
 	ands r1, r3
@@ -5303,7 +5172,7 @@ _082E6574:
 	ldrh r0, [r6, 0xE]
 	ands r5, r0
 	lsls r1, r5, 16
-	ldr r0, _082E665C
+	ldr r0, =0x0000ffff
 	ands r0, r4
 	orrs r0, r1
 	str r0, [sp, 0x4]
@@ -5319,7 +5188,7 @@ _082E6574:
 	beq _082E661A
 	b _082E673C
 _082E661A:
-	ldr r2, _082E6660
+	ldr r2, =gUnknown_03007890
 	ldr r3, [r2]
 	ldrb r2, [r3]
 	cmp r2, 0x1
@@ -5344,12 +5213,7 @@ _082E6632:
 	bl rfu_STC_UNI_receive
 	b _082E673C
 	.align 2, 0
-_082E664C: .4byte 0xffffff00
-_082E6650: .4byte 0xffff00ff
-_082E6654: .4byte 0xff00ffff
-_082E6658: .4byte 0x00ffffff
-_082E665C: .4byte 0x0000ffff
-_082E6660: .4byte gUnknown_03007890
+	.pool
 _082E6664:
 	mov r5, r9
 	ldrb r0, [r5, 0x3]
@@ -5362,7 +5226,7 @@ _082E6664:
 	b _082E673C
 _082E6678:
 	movs r4, 0
-	ldr r1, _082E6690
+	ldr r1, =gUnknown_03007880
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x1A]
 	mov r5, r12
@@ -5373,7 +5237,7 @@ _082E6678:
 	ldrb r0, [r3, 0x4]
 	b _082E66BA
 	.align 2, 0
-_082E6690: .4byte gUnknown_03007880
+	.pool
 _082E6694:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -5390,7 +5254,7 @@ _082E6694:
 	ands r0, r2
 	cmp r0, 0
 	beq _082E6694
-	ldr r3, _082E66D4
+	ldr r3, =gUnknown_03007890
 	ldr r0, [r3]
 	ldrb r0, [r0, 0x4]
 	mov r5, r12
@@ -5408,7 +5272,7 @@ _082E66BA:
 	bl rfu_STC_NI_receive_Sender
 	b _082E673C
 	.align 2, 0
-_082E66D4: .4byte gUnknown_03007890
+	.pool
 _082E66D8:
 	ldrb r1, [r3, 0x2]
 	mov r2, r9
@@ -5443,7 +5307,7 @@ _082E6706:
 	bl rfu_STC_NI_receive_Receiver
 	b _082E6732
 _082E6718:
-	ldr r0, _082E6750
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
 	asrs r0, r4
@@ -5473,7 +5337,7 @@ _082E673E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E6750: .4byte gUnknown_03007890
+	.pool
 	thumb_func_end rfu_STC_analyzeLLSF
 
 	thumb_func_start rfu_STC_UNI_receive
@@ -5484,7 +5348,7 @@ rfu_STC_UNI_receive: @ 82E6754
 	str r2, [sp]
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r2, _082E6788
+	ldr r2, =gUnknown_03007870
 	lsls r1, r7, 2
 	adds r1, r2
 	ldr r3, [r1]
@@ -5501,12 +5365,11 @@ rfu_STC_UNI_receive: @ 82E6754
 	bcs _082E6790
 	movs r0, 0x49
 	strh r0, [r3, 0xC]
-	ldr r0, _082E678C
+	ldr r0, =0x00000701
 	strh r0, [r5, 0x2]
 	b _082E67DE
 	.align 2, 0
-_082E6788: .4byte gUnknown_03007870
-_082E678C: .4byte 0x00000701
+	.pool
 _082E6790:
 	ldrb r0, [r5, 0x7]
 	cmp r0, 0
@@ -5514,11 +5377,11 @@ _082E6790:
 	ldrb r0, [r5, 0x6]
 	cmp r0, 0
 	beq _082E67B4
-	ldr r0, _082E67A4
+	ldr r0, =0x00000709
 	strh r0, [r5, 0x2]
 	b _082E67DE
 	.align 2, 0
-_082E67A4: .4byte 0x00000709
+	.pool
 _082E67A8:
 	ldrb r0, [r5, 0x6]
 	cmp r0, 0
@@ -5528,7 +5391,7 @@ _082E67A8:
 	strh r0, [r5, 0x2]
 _082E67B4:
 	movs r4, 0
-	ldr r0, _082E67FC
+	ldr r0, =0x00008042
 	strh r0, [r5]
 	ldrh r0, [r6, 0x6]
 	strh r0, [r5, 0x4]
@@ -5538,7 +5401,7 @@ _082E67B4:
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	str r0, [sp, 0x4]
-	ldr r0, _082E6800
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	add r1, sp, 0x4
 	ldr r3, [r0, 0x4]
@@ -5551,7 +5414,7 @@ _082E67DE:
 	ldrh r0, [r5, 0x2]
 	cmp r0, 0
 	beq _082E67F2
-	ldr r0, _082E6804
+	ldr r0, =gUnknown_03007894
 	ldr r2, [r0]
 	movs r0, 0x10
 	lsls r0, r7
@@ -5564,9 +5427,7 @@ _082E67F2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E67FC: .4byte 0x00008042
-_082E6800: .4byte gUnknown_03007898
-_082E6804: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_STC_UNI_receive
 
 	thumb_func_start rfu_STC_NI_receive_Sender
@@ -5582,7 +5443,7 @@ rfu_STC_NI_receive_Sender: @ 82E6808
 	lsls r1, 24
 	lsrs r1, 24
 	mov r10, r1
-	ldr r1, _082E68D4
+	ldr r1, =gUnknown_03007880
 	lsrs r0, 22
 	adds r0, r1
 	ldr r0, [r0]
@@ -5598,13 +5459,13 @@ rfu_STC_NI_receive_Sender: @ 82E6808
 	ldrb r2, [r6, 0x2]
 	cmp r2, 0x2
 	bne _082E6844
-	ldr r0, _082E68D8
+	ldr r0, =0x00008022
 	cmp r9, r0
 	beq _082E685E
 _082E6844:
 	cmp r2, 0x1
 	bne _082E684E
-	ldr r0, _082E68DC
+	ldr r0, =0x00008021
 	cmp r9, r0
 	beq _082E685E
 _082E684E:
@@ -5613,7 +5474,7 @@ _082E684E:
 	mov r8, r3
 	cmp r2, 0x3
 	bne _082E6882
-	ldr r0, _082E68E0
+	ldr r0, =0x00008023
 	cmp r9, r0
 	bne _082E6882
 _082E685E:
@@ -5658,14 +5519,14 @@ _082E6882:
 	strb r1, [r0]
 	mov r7, r12
 	ldrh r1, [r7]
-	ldr r2, _082E68E4
+	ldr r2, =0x00007fdf
 	adds r0, r1, r2
 	lsls r0, 16
 	lsrs r0, 16
 	adds r5, r3, 0
 	cmp r0, 0x1
 	bhi _082E6970
-	ldr r0, _082E68DC
+	ldr r0, =0x00008021
 	cmp r1, r0
 	bne _082E68E8
 	ldrb r1, [r6, 0x4]
@@ -5678,11 +5539,7 @@ _082E6882:
 	str r0, [r1]
 	b _082E68FE
 	.align 2, 0
-_082E68D4: .4byte gUnknown_03007880
-_082E68D8: .4byte 0x00008022
-_082E68DC: .4byte 0x00008021
-_082E68E0: .4byte 0x00008023
-_082E68E4: .4byte 0x00007fdf
+	.pool
 _082E68E8:
 	ldrb r2, [r6, 0x4]
 	lsls r2, 2
@@ -5713,7 +5570,7 @@ _082E6912:
 	strb r2, [r0]
 	mov r7, r12
 	ldrh r1, [r7]
-	ldr r0, _082E6954
+	ldr r0, =0x00008021
 	cmp r1, r0
 	bne _082E695C
 	movs r4, 0
@@ -5738,28 +5595,27 @@ _082E6926:
 	bls _082E6926
 	ldr r0, [r7, 0x30]
 	str r0, [r7, 0x14]
-	ldr r0, _082E6958
+	ldr r0, =0x00008022
 	strh r0, [r7]
 	b _082E697E
 	.align 2, 0
-_082E6954: .4byte 0x00008021
-_082E6958: .4byte 0x00008022
+	.pool
 _082E695C:
 	strb r2, [r5]
 	mov r0, r12
 	str r2, [r0, 0x14]
-	ldr r0, _082E696C
+	ldr r0, =0x00008023
 	mov r1, r12
 	strh r0, [r1]
 	b _082E697E
 	.align 2, 0
-_082E696C: .4byte 0x00008023
+	.pool
 _082E6970:
 	lsls r1, 16
-	ldr r0, _082E69E0
+	ldr r0, =0x80230000
 	cmp r1, r0
 	bne _082E697E
-	ldr r0, _082E69E4
+	ldr r0, =0x00008020
 	mov r2, r12
 	strh r0, [r2]
 _082E697E:
@@ -5785,11 +5641,11 @@ _082E697E:
 	cmp r0, 0
 	beq _082E69CE
 _082E69A8:
-	ldr r4, _082E69E8
+	ldr r4, =0x04000208
 	ldrh r2, [r4]
 	movs r0, 0
 	strh r0, [r4]
-	ldr r0, _082E69EC
+	ldr r0, =gUnknown_03007894
 	ldr r3, [r0]
 	movs r0, 0x10
 	mov r7, r10
@@ -5799,7 +5655,7 @@ _082E69A8:
 	movs r1, 0
 	strb r0, [r3, 0x2]
 	lsls r0, r7, 2
-	ldr r3, _082E69F0
+	ldr r3, =gUnknown_03007880
 	adds r0, r3
 	ldr r0, [r0]
 	strh r1, [r0, 0x2]
@@ -5814,11 +5670,7 @@ _082E69CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E69E0: .4byte 0x80230000
-_082E69E4: .4byte 0x00008020
-_082E69E8: .4byte 0x04000208
-_082E69EC: .4byte gUnknown_03007894
-_082E69F0: .4byte gUnknown_03007880
+	.pool
 	thumb_func_end rfu_STC_NI_receive_Sender
 
 	thumb_func_start rfu_STC_NI_receive_Receiver
@@ -5835,7 +5687,7 @@ rfu_STC_NI_receive_Receiver: @ 82E69F4
 	lsrs r0, 24
 	mov r8, r0
 	movs r7, 0
-	ldr r1, _082E6A54
+	ldr r1, =gUnknown_03007880
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
@@ -5852,7 +5704,7 @@ rfu_STC_NI_receive_Receiver: @ 82E69F4
 	ldrb r0, [r6, 0x2]
 	cmp r0, 0x3
 	bne _082E6A64
-	ldr r0, _082E6A58
+	ldr r0, =gUnknown_03007894
 	ldr r2, [r0]
 	movs r0, 0x1
 	mov r1, r8
@@ -5861,25 +5713,22 @@ rfu_STC_NI_receive_Receiver: @ 82E69F4
 	orrs r0, r1
 	strb r0, [r2, 0x1]
 	ldrh r1, [r4, 0x34]
-	ldr r0, _082E6A5C
+	ldr r0, =0x00008042
 	cmp r1, r0
 	bne _082E6AAA
 	adds r0, r4, 0
 	adds r0, 0x54
 	strb r7, [r0]
 	strb r7, [r3]
-	ldr r0, _082E6A60
+	ldr r0, =0x00008043
 	strh r0, [r4, 0x34]
 	b _082E6AAA
 	.align 2, 0
-_082E6A54: .4byte gUnknown_03007880
-_082E6A58: .4byte gUnknown_03007894
-_082E6A5C: .4byte 0x00008042
-_082E6A60: .4byte 0x00008043
+	.pool
 _082E6A64:
 	cmp r0, 0x2
 	bne _082E6A90
-	ldr r0, _082E6A88
+	ldr r0, =0x00008041
 	cmp r9, r0
 	bne _082E6A7C
 	ldr r0, [r5, 0x14]
@@ -5890,17 +5739,16 @@ _082E6A64:
 	bl rfu_STC_NI_initSlot_asRecvDataEntity
 _082E6A7C:
 	ldrh r1, [r5]
-	ldr r0, _082E6A8C
+	ldr r0, =0x00008042
 	cmp r1, r0
 	bne _082E6AAA
 	b _082E6AAE
 	.align 2, 0
-_082E6A88: .4byte 0x00008041
-_082E6A8C: .4byte 0x00008042
+	.pool
 _082E6A90:
 	cmp r0, 0x1
 	bne _082E6AAA
-	ldr r7, _082E6B5C
+	ldr r7, =0x00008041
 	cmp r9, r7
 	beq _082E6AAE
 	mov r0, r8
@@ -5925,7 +5773,7 @@ _082E6AAE:
 	ands r0, r1
 	cmp r2, r0
 	bne _082E6B04
-	ldr r0, _082E6B60
+	ldr r0, =gUnknown_03007898
 	ldr r0, [r0]
 	lsls r1, r3, 2
 	adds r1, 0x4
@@ -5935,7 +5783,7 @@ _082E6AAE:
 	mov r0, sp
 	bl _call_via_r3
 	ldrh r1, [r5]
-	ldr r0, _082E6B64
+	ldr r0, =0x00008042
 	cmp r1, r0
 	bne _082E6AF4
 	ldrb r0, [r6, 0x4]
@@ -5979,11 +5827,11 @@ _082E6B04:
 	cmp r0, r6
 	bne _082E6B4A
 _082E6B2C:
-	ldr r3, _082E6B68
+	ldr r3, =0x04000208
 	ldrh r2, [r3]
 	movs r0, 0
 	strh r0, [r3]
-	ldr r0, _082E6B6C
+	ldr r0, =gUnknown_03007894
 	ldr r4, [r0]
 	movs r0, 0x1
 	mov r1, r8
@@ -6004,11 +5852,7 @@ _082E6B4A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6B5C: .4byte 0x00008041
-_082E6B60: .4byte gUnknown_03007898
-_082E6B64: .4byte 0x00008042
-_082E6B68: .4byte 0x04000208
-_082E6B6C: .4byte gUnknown_03007894
+	.pool
 	thumb_func_end rfu_STC_NI_receive_Receiver
 
 	thumb_func_start rfu_STC_NI_initSlot_asRecvControllData
@@ -6017,7 +5861,7 @@ rfu_STC_NI_initSlot_asRecvControllData: @ 82E6B70
 	adds r2, r1, 0
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _082E6B8C
+	ldr r0, =gUnknown_03007890
 	ldr r3, [r0]
 	ldrb r1, [r3]
 	mov r12, r0
@@ -6028,7 +5872,7 @@ rfu_STC_NI_initSlot_asRecvControllData: @ 82E6B70
 	adds r1, 0xF
 	b _082E6B98
 	.align 2, 0
-_082E6B8C: .4byte gUnknown_03007890
+	.pool
 _082E6B90:
 	movs r5, 0x2
 	adds r0, r4, 0
@@ -6049,9 +5893,9 @@ _082E6B98:
 	bcs _082E6BD0
 	movs r0, 0x49
 	strh r0, [r2]
-	ldr r0, _082E6BC8
+	ldr r0, =0x00000702
 	strh r0, [r2, 0x18]
-	ldr r0, _082E6BCC
+	ldr r0, =gUnknown_03007894
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x4]
 	adds r0, r6, 0
@@ -6059,8 +5903,7 @@ _082E6B98:
 	strb r0, [r2, 0x4]
 	b _082E6BF6
 	.align 2, 0
-_082E6BC8: .4byte 0x00000702
-_082E6BCC: .4byte gUnknown_03007894
+	.pool
 _082E6BD0:
 	strh r3, [r2, 0x18]
 	ldrb r0, [r1]
@@ -6074,7 +5917,7 @@ _082E6BD0:
 	strb r7, [r2, 0x1F]
 	strh r3, [r2, 0x2E]
 	strb r4, [r2, 0x1A]
-	ldr r0, _082E6BFC
+	ldr r0, =0x00008041
 	strh r0, [r2]
 	mov r0, r12
 	ldr r1, [r0]
@@ -6086,7 +5929,7 @@ _082E6BF6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6BFC: .4byte 0x00008041
+	.pool
 	thumb_func_end rfu_STC_NI_initSlot_asRecvControllData
 
 	thumb_func_start rfu_STC_NI_initSlot_asRecvDataEntity
@@ -6100,7 +5943,7 @@ rfu_STC_NI_initSlot_asRecvDataEntity: @ 82E6C00
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _082E6C24
-	ldr r0, _082E6C20
+	ldr r0, =gUnknown_03007890
 	lsls r1, r5, 5
 	adds r1, 0x14
 	ldr r0, [r0]
@@ -6108,9 +5951,9 @@ rfu_STC_NI_initSlot_asRecvDataEntity: @ 82E6C00
 	adds r0, 0x4
 	b _082E6C7A
 	.align 2, 0
-_082E6C20: .4byte gUnknown_03007890
+	.pool
 _082E6C24:
-	ldr r1, _082E6C68
+	ldr r1, =gUnknown_03007880
 	lsls r0, r5, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -6122,18 +5965,18 @@ _082E6C24:
 	lsls r1, 17
 	lsls r1, r5
 	lsrs r1, 24
-	ldr r0, _082E6C6C
+	ldr r0, =gUnknown_03007894
 	ldr r3, [r0]
 	ldrb r2, [r3, 0x4]
 	adds r0, r1, 0
 	orrs r0, r2
 	strb r0, [r3, 0x4]
-	ldr r0, _082E6C70
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x5]
 	bics r0, r1
 	strb r0, [r2, 0x5]
-	ldr r0, _082E6C74
+	ldr r0, =0x00000701
 	strh r0, [r4, 0x18]
 	movs r0, 0x47
 	strh r0, [r4]
@@ -6143,10 +5986,7 @@ _082E6C24:
 	bl rfu_STC_releaseFrame
 	b _082E6CAC
 	.align 2, 0
-_082E6C68: .4byte gUnknown_03007880
-_082E6C6C: .4byte gUnknown_03007894
-_082E6C70: .4byte gUnknown_03007890
-_082E6C74: .4byte 0x00000701
+	.pool
 _082E6C78:
 	ldr r0, [r2, 0x68]
 _082E6C7A:
@@ -6174,39 +6014,39 @@ _082E6C86:
 	bls _082E6C86
 	ldr r0, [r4, 0x30]
 	str r0, [r4, 0x14]
-	ldr r0, _082E6CB4
+	ldr r0, =0x00008042
 	strh r0, [r4]
 _082E6CAC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6CB4: .4byte 0x00008042
+	.pool
 	thumb_func_end rfu_STC_NI_initSlot_asRecvDataEntity
 
 	thumb_func_start rfu_NI_checkCommFailCounter
 rfu_NI_checkCommFailCounter: @ 82E6CB8
 	push {r4-r7,lr}
-	ldr r2, _082E6D44
+	ldr r2, =gUnknown_03007890
 	ldr r0, [r2]
 	ldrb r1, [r0, 0x4]
 	ldrb r0, [r0, 0x5]
 	orrs r0, r1
 	cmp r0, 0
 	beq _082E6D3E
-	ldr r1, _082E6D48
+	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	mov r12, r0
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _082E6D4C
+	ldr r1, =gUnknown_03007894
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x2]
 	lsrs r7, r0, 4
 	movs r3, 0
 	adds r6, r1, 0
 	adds r5, r2, 0
-	ldr r4, _082E6D50
+	ldr r4, =gUnknown_03007880
 _082E6CE2:
 	movs r0, 0x80
 	lsls r0, 17
@@ -6253,7 +6093,7 @@ _082E6D28:
 	ldr r0, [r6]
 	movs r1, 0
 	strb r1, [r0, 0x2]
-	ldr r0, _082E6D48
+	ldr r0, =0x04000208
 	mov r1, r12
 	strh r1, [r0]
 _082E6D3E:
@@ -6261,16 +6101,13 @@ _082E6D3E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6D44: .4byte gUnknown_03007890
-_082E6D48: .4byte 0x04000208
-_082E6D4C: .4byte gUnknown_03007894
-_082E6D50: .4byte gUnknown_03007880
+	.pool
 	thumb_func_end rfu_NI_checkCommFailCounter
 
 	thumb_func_start rfu_REQ_noise
 rfu_REQ_noise: @ 82E6D54
 	push {lr}
-	ldr r0, _082E6D68
+	ldr r0, =rfu_STC_REQ_callback
 	bl STWI_set_Callback_M
 	movs r0, 0x1
 	movs r1, 0
@@ -6278,7 +6115,7 @@ rfu_REQ_noise: @ 82E6D54
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6D68: .4byte rfu_STC_REQ_callback
+	.pool
 	thumb_func_end rfu_REQ_noise
 
 	thumb_func_start sub_82E6D6C
@@ -6288,7 +6125,7 @@ sub_82E6D6C: @ 82E6D6C
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _082E6D84
+	ldr r0, =0x04000208
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _082E6D88
@@ -6296,32 +6133,29 @@ sub_82E6D6C: @ 82E6D6C
 	negs r0, r0
 	b _082E6E08
 	.align 2, 0
-_082E6D84: .4byte 0x04000208
+	.pool
 _082E6D88:
-	ldr r0, _082E6DB4
+	ldr r0, =0x04000200
 	ldrh r0, [r0]
 	mov r8, r0
-	ldr r4, _082E6DB8
+	ldr r4, =gRfuState
 	ldr r1, [r4]
 	movs r0, 0xA
 	str r0, [r1]
-	ldr r0, _082E6DBC
+	ldr r0, =sub_82E6F88
 	bl STWI_set_Callback_ID
 	bl sub_82E6E20
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
 	lsls r0, 2
-	ldr r1, _082E6DC0
+	ldr r1, =0x04000100
 	adds r4, r0, r1
 	lsls r0, r5, 27
 	lsrs r5, r0, 24
 	movs r7, 0
 	b _082E6DD6
 	.align 2, 0
-_082E6DB4: .4byte 0x04000200
-_082E6DB8: .4byte gRfuState
-_082E6DBC: .4byte sub_82E6F88
-_082E6DC0: .4byte 0x04000100
+	.pool
 _082E6DC4:
 	strh r6, [r4, 0x2]
 	strh r6, [r4]
@@ -6344,15 +6178,15 @@ _082E6DD6:
 	cmp r6, 0
 	beq _082E6DC4
 _082E6DEA:
-	ldr r1, _082E6E14
+	ldr r1, =0x04000208
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, _082E6E18
+	ldr r0, =0x04000200
 	mov r2, r8
 	strh r2, [r0]
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r0, _082E6E1C
+	ldr r0, =gRfuState
 	ldr r1, [r0]
 	movs r0, 0
 	str r0, [r1]
@@ -6365,20 +6199,18 @@ _082E6E08:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E6E14: .4byte 0x04000208
-_082E6E18: .4byte 0x04000200
-_082E6E1C: .4byte gRfuState
+	.pool
 	thumb_func_end sub_82E6D6C
 
 	thumb_func_start sub_82E6E20
 sub_82E6E20: @ 82E6E20
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r3, _082E6E78
+	ldr r3, =0x04000208
 	movs r4, 0
 	strh r4, [r3]
-	ldr r2, _082E6E7C
-	ldr r0, _082E6E80
+	ldr r2, =0x04000200
+	ldr r0, =gRfuState
 	ldr r0, [r0]
 	movs r1, 0x8
 	ldrb r0, [r0, 0xA]
@@ -6390,7 +6222,7 @@ sub_82E6E20: @ 82E6E20
 	strh r0, [r2]
 	movs r0, 0x1
 	strh r0, [r3]
-	ldr r0, _082E6E84
+	ldr r0, =0x04000134
 	strh r4, [r0]
 	subs r2, 0xD8
 	movs r1, 0x80
@@ -6405,30 +6237,24 @@ sub_82E6E20: @ 82E6E20
 	strh r0, [r2]
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, _082E6E88
-	ldr r2, _082E6E8C
+	ldr r1, =gUnknown_030078A0
+	ldr r2, =0x05000003
 	mov r0, sp
 	bl CpuSet
-	ldr r0, _082E6E90
+	ldr r0, =0x04000202
 	strh r5, [r0]
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6E78: .4byte 0x04000208
-_082E6E7C: .4byte 0x04000200
-_082E6E80: .4byte gRfuState
-_082E6E84: .4byte 0x04000134
-_082E6E88: .4byte gUnknown_030078A0
-_082E6E8C: .4byte 0x05000003
-_082E6E90: .4byte 0x04000202
+	.pool
 	thumb_func_end sub_82E6E20
 
 	thumb_func_start sub_82E6E94
 sub_82E6E94: @ 82E6E94
 	push {r4-r7,lr}
-	ldr r0, _082E6EA8
+	ldr r0, =gUnknown_030078A0
 	ldrb r1, [r0, 0x1]
 	mov r12, r1
 	adds r7, r0, 0
@@ -6438,19 +6264,19 @@ sub_82E6E94: @ 82E6E94
 	beq _082E6EE4
 	b _082E6F7C
 	.align 2, 0
-_082E6EA8: .4byte gUnknown_030078A0
+	.pool
 _082E6EAC:
 	movs r6, 0x1
 	strb r6, [r7]
-	ldr r3, _082E6ED8
+	ldr r3, =0x04000128
 	ldrh r0, [r3]
 	movs r5, 0x1
 	orrs r0, r5
 	strh r0, [r3]
-	ldr r4, _082E6EDC
+	ldr r4, =0x04000208
 	mov r0, r12
 	strh r0, [r4]
-	ldr r2, _082E6EE0
+	ldr r2, =0x04000200
 	ldrh r0, [r2]
 	movs r1, 0x80
 	orrs r0, r1
@@ -6462,9 +6288,7 @@ _082E6EAC:
 	strb r0, [r3]
 	b _082E6F80
 	.align 2, 0
-_082E6ED8: .4byte 0x04000128
-_082E6EDC: .4byte 0x04000208
-_082E6EE0: .4byte 0x04000200
+	.pool
 _082E6EE4:
 	ldrh r0, [r7, 0xA]
 	cmp r0, 0
@@ -6475,9 +6299,9 @@ _082E6EE4:
 	ldrh r0, [r7, 0x2]
 	cmp r0, 0
 	bne _082E6F80
-	ldr r3, _082E6F0C
+	ldr r3, =0x04000208
 	strh r0, [r3]
-	ldr r2, _082E6F10
+	ldr r2, =0x04000128
 	ldrh r0, [r2]
 	movs r1, 0x80
 	orrs r0, r1
@@ -6486,32 +6310,31 @@ _082E6EE4:
 	strh r1, [r3]
 	b _082E6F80
 	.align 2, 0
-_082E6F0C: .4byte 0x04000208
-_082E6F10: .4byte 0x04000128
+	.pool
 _082E6F14:
 	ldrh r1, [r7, 0x4]
-	ldr r0, _082E6F60
+	ldr r0, =0x00008001
 	cmp r1, r0
 	beq _082E6F80
 	ldrh r6, [r7, 0x2]
 	cmp r6, 0
 	bne _082E6F80
-	ldr r4, _082E6F64
+	ldr r4, =0x04000208
 	strh r6, [r4]
-	ldr r3, _082E6F68
+	ldr r3, =0x04000200
 	ldrh r1, [r3]
-	ldr r0, _082E6F6C
+	ldr r0, =0x0000ff7f
 	ands r0, r1
 	strh r0, [r3]
 	mov r7, r12
 	strh r7, [r4]
-	ldr r2, _082E6F70
+	ldr r2, =0x04000128
 	strh r6, [r2]
 	movs r1, 0x80
 	lsls r1, 5
 	adds r0, r1, 0
 	strh r0, [r2]
-	ldr r0, _082E6F74
+	ldr r0, =0x04000202
 	movs r5, 0x80
 	strh r5, [r0]
 	ldrh r0, [r2]
@@ -6528,12 +6351,7 @@ _082E6F14:
 	strh r0, [r4]
 	b _082E6F80
 	.align 2, 0
-_082E6F60: .4byte 0x00008001
-_082E6F64: .4byte 0x04000208
-_082E6F68: .4byte 0x04000200
-_082E6F6C: .4byte 0x0000ff7f
-_082E6F70: .4byte 0x04000128
-_082E6F74: .4byte 0x04000202
+	.pool
 _082E6F78:
 	movs r0, 0x2
 	strb r0, [r7, 0x1]
@@ -6551,14 +6369,14 @@ _082E6F82:
 	thumb_func_start sub_82E6F88
 sub_82E6F88: @ 82E6F88
 	push {r4,r5,lr}
-	ldr r0, _082E6FD0
+	ldr r0, =0x04000120
 	ldr r5, [r0]
-	ldr r0, _082E6FD4
+	ldr r0, =gUnknown_030078A0
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x1
 	beq sub_82E6FA2
-	ldr r0, _082E6FD8
+	ldr r0, =0x04000128
 	ldrh r1, [r0]
 	movs r2, 0x80
 	orrs r1, r2
@@ -6590,9 +6408,7 @@ sub_82E6FA2: @ 82E6FA2
 	strh r5, [r4, 0xA]
 	b _082E6FF6
 	.align 2, 0
-_082E6FD0: .4byte 0x04000120
-_082E6FD4: .4byte gUnknown_030078A0
-_082E6FD8: .4byte 0x04000128
+	.pool
 _082E6FDC:
 	ldrh r0, [r4, 0x4]
 	mvns r0, r0
@@ -6613,19 +6429,19 @@ _082E6FF6:
 	cmp r0, 0x3
 	bhi _082E700C
 	lsls r0, 1
-	ldr r1, _082E7008
+	ldr r1, =gUnknown_089A3258
 	adds r0, r1
 	ldrh r0, [r0]
 	b _082E700E
 	.align 2, 0
-_082E7008: .4byte gUnknown_089A3258
+	.pool
 _082E700C:
-	ldr r0, _082E7064
+	ldr r0, =0x00008001
 _082E700E:
 	strh r0, [r4, 0x4]
 	mvns r0, r5
 	strh r0, [r4, 0x6]
-	ldr r3, _082E7068
+	ldr r3, =0x04000120
 	ldrh r2, [r4, 0x4]
 	ldrb r1, [r4]
 	movs r0, 0x1
@@ -6643,12 +6459,12 @@ _082E700E:
 	ldrh r0, [r4, 0x2]
 	cmp r0, 0
 	bne _082E703E
-	ldr r0, _082E706C
+	ldr r0, =0x0000494e
 	cmp r5, r0
 	bne _082E705C
 _082E703E:
 	movs r0, 0
-	ldr r1, _082E7070
+	ldr r1, =0x00000257
 _082E7042:
 	adds r0, 0x1
 	lsls r0, 16
@@ -6658,7 +6474,7 @@ _082E7042:
 	ldrh r0, [r4, 0xA]
 	cmp r0, 0
 	bne _082E705C
-	ldr r0, _082E7074
+	ldr r0, =0x04000128
 	ldrh r1, [r0]
 	movs r2, 0x80
 	orrs r1, r2
@@ -6668,11 +6484,7 @@ _082E705C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E7064: .4byte 0x00008001
-_082E7068: .4byte 0x04000120
-_082E706C: .4byte 0x0000494e
-_082E7070: .4byte 0x00000257
-_082E7074: .4byte 0x04000128
+	.pool
 	thumb_func_end sub_82E6FA2
 
 	.align 2, 0 @ Don't pad with nop.

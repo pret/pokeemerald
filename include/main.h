@@ -42,13 +42,18 @@ struct Main
     /*0x439*/ u8 field_439_x4:1;
 };
 
-extern u8 gUnknown_3001764;
-extern struct Main gMain;
-extern bool8 gSoftResetDisabled;
-extern bool8 gLinkVSyncDisabled;
-
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
+
+extern u16 gKeyRepeatStartDelay;
+extern bool8 gLinkTransferringData;
+extern struct Main gMain;
+extern u16 gKeyRepeatContinueDelay;
+extern bool8 gSoftResetDisabled;
+extern IntrFunc gIntrTable[];
+extern u8 gLinkVSyncDisabled;
+extern u32 IntrMain_Buffer[];
+extern u8 gPcmDmaCounter;
 
 void AgbMain(void);
 void SetMainCallback2(MainCallback callback);
@@ -60,6 +65,7 @@ void SetSerialCallback(IntrCallback callback);
 void InitFlashTimer(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
+void RestoreSerialTimer3IntrHandlers(void);
 void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
 

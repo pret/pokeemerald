@@ -2,8 +2,11 @@
 #include "window.h"
 #include "malloc.h"
 
-extern u8 gUnknown_03002F60;
-extern void* gUnknown_03002F70[];
+u32 filler_03002F58;
+u32 filler_03002F5C;
+u8 gUnknown_03002F60;
+u32 filler_03002F64;
+void *gUnknown_03002F70[4];
 extern u32 gUnneededFireRedVariable;
 
 #define WINDOWS_MAX  32

@@ -160,7 +160,7 @@ extern void sub_809882C(u8, u16, u8);
 extern void copy_textbox_border_tile_patterns_to_vram(u8, u16, u8);
 extern void sub_81AABF0(void (*callback)(void));
 extern void sub_800B4C0(void);
-extern void sub_8009F8C(void);
+extern void ClearLinkCallback(void);
 extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 extern void sub_8153430(void);
 extern bool8 sub_8153474(void);
@@ -952,10 +952,10 @@ static void sub_807FAC8(void)
                 sBerryBlenderData->syncArrowSpriteIds[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
                 StartSpriteAnim(&gSprites[sBerryBlenderData->syncArrowSpriteIds[i]], i + 8);
             }
-            if (gReceivedRemoteLinkPlayers != 0 && gLinkVSyncDisabled)
+            if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
             {
                 sub_800E0E8();
-                sub_800DFB4(0, 0);
+                CreateWirelessStatusIndicatorSprite(0, 0);
             }
             SetVBlankCallback(VBlankCB0_BerryBlender);
             sBerryBlenderData->mainState++;
@@ -1158,10 +1158,10 @@ static void sub_8080018(void)
             sBerryBlenderData->syncArrowSprite2Ids[i] = CreateSprite(&sBlenderSyncArrow_SpriteTemplate, sBlenderSyncArrowsPos[i][0], sBlenderSyncArrowsPos[i][1], 1);
             StartSpriteAnim(&gSprites[sBerryBlenderData->syncArrowSprite2Ids[i]], i + 8);
         }
-        if (gReceivedRemoteLinkPlayers != 0 && gLinkVSyncDisabled)
+        if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
         {
             sub_800E0E8();
-            sub_800DFB4(0, 0);
+            CreateWirelessStatusIndicatorSprite(0, 0);
         }
         sBerryBlenderData->mainState++;
         break;
@@ -1874,7 +1874,7 @@ static void sub_8081370(u16 a0)
 
 static bool32 sub_80814B0(u16 arg0, u16 arg1, u16 arg2)
 {
-    if (gReceivedRemoteLinkPlayers != 0 && gLinkVSyncDisabled)
+    if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
     {
         if ((arg0 & 0xFF00) == arg2)
             return TRUE;
@@ -2316,7 +2316,7 @@ static void sub_8081E20(void)
 
 static void sub_8081F94(u16 *a0)
 {
-    if (gReceivedRemoteLinkPlayers != 0 && gLinkVSyncDisabled)
+    if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
         *a0 = 0x2F00;
     else
         *a0 = 0x2FFF;
@@ -2345,7 +2345,7 @@ static void CB2_HandleBlenderEndGame(void)
         sBerryBlenderData->field_4C -= 32;
         if (sBerryBlenderData->field_4C <= 0)
         {
-            sub_8009F8C();
+            ClearLinkCallback();
             sBerryBlenderData->field_4C = 0;
 
             if (gReceivedRemoteLinkPlayers != 0)
@@ -2365,7 +2365,7 @@ static void CB2_HandleBlenderEndGame(void)
         }
         else if (sub_800A520())
         {
-            if (gReceivedRemoteLinkPlayers != 0 && gLinkVSyncDisabled)
+            if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
             {
                 sBerryBlenderData->gameBlock.timeRPM.time = sBerryBlenderData->gameFrameTime;
                 sBerryBlenderData->gameBlock.timeRPM.max_RPM = sBerryBlenderData->max_RPM;
@@ -2394,7 +2394,7 @@ static void CB2_HandleBlenderEndGame(void)
             ResetBlockReceivedFlags();
             sBerryBlenderData->gameEndState++;
 
-            if (gReceivedRemoteLinkPlayers != 0 && gLinkVSyncDisabled)
+            if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
             {
                 struct BlenderGameBlock *receivedBlock = (struct BlenderGameBlock*)(&gBlockRecvBuffer);
 
@@ -2871,7 +2871,7 @@ static void sub_8082D28(void)
     if (gReceivedRemoteLinkPlayers != 0)
         playerId = GetMultiplayerId();
 
-    if (gLinkVSyncDisabled && gReceivedRemoteLinkPlayers != 0)
+    if (gWirelessCommType && gReceivedRemoteLinkPlayers != 0)
     {
         if (playerId == 0)
         {

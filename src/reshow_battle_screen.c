@@ -162,10 +162,10 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             ActionSelectionCreateCursorAt(gActionSelectionCursor[gBattlerInMenuId], 0);
 
-            if (gLinkVSyncDisabled != 0 && gReceivedRemoteLinkPlayers != 0)
+            if (gWirelessCommType != 0 && gReceivedRemoteLinkPlayers != 0)
             {
                 sub_800E0E8();
-                sub_800DFB4(0, 0);
+                CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         break;

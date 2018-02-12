@@ -20,6 +20,7 @@
 #include "constants/hold_effects.h"
 #include "constants/trainers.h"
 #include "link.h"
+#include "link_rfu.h"
 #include "bg.h"
 #include "dma3.h"
 #include "string_util.h"
@@ -738,7 +739,7 @@ static void CB2_HandleStartBattle(void)
             sub_805EF14();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
-        if (gLinkVSyncDisabled)
+        if (gWirelessCommType)
             sub_800E0E8();
         break;
     case 1:
@@ -762,8 +763,8 @@ static void CB2_HandleStartBattle(void)
                     SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->field_180, 32);
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
-                if (gLinkVSyncDisabled)
-                    sub_800DFB4(0, 0);
+                if (gWirelessCommType)
+                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else
@@ -933,7 +934,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             sub_805EF14();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
-        if (gLinkVSyncDisabled)
+        if (gWirelessCommType)
             sub_800E0E8();
         // fall through
     case 1:
@@ -964,8 +965,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
 
-                if (gLinkVSyncDisabled)
-                    sub_800DFB4(0, 0);
+                if (gWirelessCommType)
+                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else
@@ -1241,14 +1242,14 @@ static void CB2_PreInitMultiBattle(void)
         if (sub_800A520() && !gPaletteFade.active)
         {
             gBattleCommunication[MULTIUSE_STATE]++;
-            if (gLinkVSyncDisabled)
+            if (gWirelessCommType)
                 sub_800ADF8();
             else
                 sub_800AC34();
         }
         break;
     case 3:
-        if (gLinkVSyncDisabled)
+        if (gWirelessCommType)
         {
             if (sub_8010500())
             {
@@ -1333,7 +1334,7 @@ static void CB2_HandleStartMultiBattle(void)
             sub_805EF14();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
-        if (gLinkVSyncDisabled)
+        if (gWirelessCommType)
             sub_800E0E8();
         break;
     case 1:
@@ -1351,8 +1352,8 @@ static void CB2_HandleStartMultiBattle(void)
                     SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->field_180, 32);
                     gBattleCommunication[MULTIUSE_STATE]++;
                 }
-                if (gLinkVSyncDisabled)
-                    sub_800DFB4(0, 0);
+                if (gWirelessCommType)
+                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else
@@ -2136,12 +2137,12 @@ static void sub_8038F34(void)
         }
         break;
     case 8:
-        if (!gLinkVSyncDisabled)
+        if (!gWirelessCommType)
             sub_800AC34();
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 9:
-        if (!gMain.field_439_x4 || gLinkVSyncDisabled || gReceivedRemoteLinkPlayers != 1)
+        if (!gMain.field_439_x4 || gWirelessCommType || gReceivedRemoteLinkPlayers != 1)
         {
             gMain.field_439_x4 = 0;
             SetMainCallback2(gMain.savedCallback);
@@ -2320,13 +2321,13 @@ static void sub_803939C(void)
     case 8:
         if (--gBattleCommunication[1] == 0)
         {
-            if (gMain.field_439_x4 && !gLinkVSyncDisabled)
+            if (gMain.field_439_x4 && !gWirelessCommType)
                 sub_800AC34();
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 9:
-        if (!gMain.field_439_x4 || gLinkVSyncDisabled || gReceivedRemoteLinkPlayers != 1)
+        if (!gMain.field_439_x4 || gWirelessCommType || gReceivedRemoteLinkPlayers != 1)
         {
             gMain.field_439_x4 = 0;
             if (!gPaletteFade.active)
@@ -3389,7 +3390,7 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
 }
 
 #else
-__attribute__((naked))
+ASM_DIRECT
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
     asm(".syntax unified\n\

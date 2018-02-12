@@ -25,8 +25,6 @@ struct UCoords32
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern MainCallback gFieldCallback;
 
-void IncrementGameStat(u8 index);
-
 void Overworld_SetMapObjTemplateCoords(u8, s16, s16);
 void Overworld_SetMapObjTemplateMovementType(u8, u8);
 
@@ -54,6 +52,7 @@ void Overworld_ChangeMusicToDefault(void);
 void Overworld_ChangeMusicTo(u16);
 
 bool32 is_c1_link_related_active(void);
+extern u16 gUnknown_03005DA8;
 
 void strange_npc_table_clear(void);
 const struct MapHeader *get_mapheader_by_bank_and_number(u16, u16);
@@ -73,6 +72,9 @@ void mapldr_default(void);
 u8 get_map_light_from_warp0(void);
 bool8 is_light_level_1_2_3_5_or_6(u8 a1);
 
+bool32 sub_80875C8(void);
+bool32 sub_8087634(void);
+bool32 sub_808766C(void);
 void IncrementGameStat(u8);
 u32 GetGameStat(u8);
 

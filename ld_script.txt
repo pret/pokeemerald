@@ -52,7 +52,10 @@ SECTIONS {
         src/text.o(.text);
         src/sprite.o(.text);
         src/string_util.o(.text);
-        asm/link.o(.text);
+        src/link.o(.text);
+        src/link_rfu.o(.text);
+        asm/link_rfu.o(.text);
+        asm/rom_8011DC0.o(.text);
         src/rtc.o(.text);
         asm/main_menu.o(.text);
         src/battle_controllers.o(.text);
@@ -370,7 +373,9 @@ SECTIONS {
         src/sprite.o(.rodata);
         data/io_reg.o(.rodata);
         src/string_util.o(.rodata);
-        data/link.o(.rodata);
+        src/link.o(.rodata);
+        src/link_rfu.o(.rodata);
+        data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);
         data/main_menu.o(.rodata);
         data/battle_1.o(.rodata);

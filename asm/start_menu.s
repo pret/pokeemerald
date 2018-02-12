@@ -1615,7 +1615,7 @@ _080A0506:
 	thumb_func_start sub_80A0514
 sub_80A0514: @ 80A0514
 	push {lr}
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl sub_80A03E4
 	cmp r0, 0
 	beq _080A052E
@@ -1712,7 +1712,7 @@ _080A05AC:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A0620

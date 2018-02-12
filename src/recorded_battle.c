@@ -476,7 +476,7 @@ u32 MoveRecordedBattleToSaveData(void)
 }
 
 #else
-__attribute__((naked))
+ASM_DIRECT
 u32 MoveRecordedBattleToSaveData(void)
 {
     asm(".syntax unified\n\

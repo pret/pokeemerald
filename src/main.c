@@ -1,49 +1,31 @@
 #include "global.h"
-#include "main.h"
+#include "crt0.h"
+#include "malloc.h"
+#include "link.h"
+#include "link_rfu.h"
+#include "librfu.h"
 #include "m4a.h"
+#include "bg.h"
 #include "rtc.h"
+#include "scanline_effect.h"
+#include "overworld.h"
+#include "play_time.h"
 #include "random.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
+#include "load_save.h"
+#include "gpu_regs.h"
+#include "agb_flash.h"
+#include "sound.h"
 #include "battle.h"
+#include "battle_controllers.h"
+#include "text.h"
+#include "intro.h"
+#include "main.h"
 
-extern u16 GetGpuReg(u8);
-extern void SetGpuReg(u8, u16);
-extern void LinkVSync(void);
-extern void sub_800E174(void);
 extern void sub_800B9B8(void);
-extern void InitGpuRegManager(void);
-extern void sub_800E6D0(void);
-extern void CheckForFlashMemory(void);
-extern void InitMapMusic(void);
-extern void ResetBgs(void);
-extern void SetDefaultFontsPointer(void);
-extern void InitHeap(void *heapStart, u32 heapSize); // malloc.h
-extern void rfu_REQ_stopMode(void);
-extern void rfu_waitREQComplete(void);
-extern bool32 sub_8087634(void);
-extern bool32 sub_80875C8(void);
-extern void ClearSpriteCopyRequests(void);
-extern void PlayTimeCounter_Update(void);
-extern void MapMusicMain(void);
-extern void EnableInterrupts(u16);
-extern void sub_8033648(void);
-extern u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
-extern void ScanlineEffect_Stop(void);
-
-extern struct SoundInfo gSoundInfo;
-extern u32 gFlashMemoryPresent;
-extern u32 IntrMain[];
-extern u8 gHeap[];
-extern struct SaveBlock2 gSaveblock2;
-extern struct PokemonStorage gPokemonStorage;
-extern u32 gBattleTypeFlags;
 extern u8 gUnknown_03002748;
 extern u32 *gUnknown_0203CF5C;
-
-void Timer3Intr(void);
-bool8 HandleLinkConnection(void);
-void c2_copyright_1(void);
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -79,19 +61,19 @@ const IntrFunc gIntrTableTemplate[] =
 
 static u16 gUnknown_03000000;
 
-extern u16 gKeyRepeatStartDelay;
-extern u8 gUnknown_030022B4;
-extern struct Main gMain;
-extern u16 gKeyRepeatContinueDelay;
-extern u8 gSoftResetDisabled;
-extern IntrFunc gIntrTable[INTR_COUNT];
-extern bool8 gLinkVSyncDisabled;
-extern u32 IntrMain_Buffer[0x200];
-extern u8 gPcmDmaCounter;
+u16 gKeyRepeatStartDelay;
+bool8 gLinkTransferringData;
+struct Main gMain;
+u16 gKeyRepeatContinueDelay;
+bool8 gSoftResetDisabled;
+IntrFunc gIntrTable[INTR_COUNT];
+u8 gLinkVSyncDisabled;
+u32 IntrMain_Buffer[0x200];
+u8 gPcmDmaCounter;
 
-extern u16 gTrainerId;
+static EWRAM_DATA u16 gTrainerId = 0;
 
-EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
+//EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);
@@ -129,7 +111,7 @@ void AgbMain()
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
 
-    gUnknown_030022B4 = 0;
+    gLinkTransferringData = FALSE;
     gUnknown_03000000 = 0xFC0;
 
     for (;;)
@@ -147,22 +129,22 @@ void AgbMain()
 
         if (sub_8087634() == 1)
         {
-            gUnknown_030022B4 = 1;
+            gLinkTransferringData = TRUE;
             UpdateLinkAndCallCallbacks();
-            gUnknown_030022B4 = 0;
+            gLinkTransferringData = FALSE;
         }
         else
         {
-            gUnknown_030022B4 = 0;
+            gLinkTransferringData = FALSE;
             UpdateLinkAndCallCallbacks();
 
             if (sub_80875C8() == 1)
             {
                 gMain.newKeys = 0;
                 ClearSpriteCopyRequests();
-                gUnknown_030022B4 = 1;
+                gLinkTransferringData = TRUE;
                 UpdateLinkAndCallCallbacks();
-                gUnknown_030022B4 = 0;
+                gLinkTransferringData = FALSE;
             }
         }
 
@@ -335,10 +317,10 @@ extern void CopyBufferedValuesToGpuRegs(void);
 
 static void VBlankIntr(void)
 {
-    if (gLinkVSyncDisabled != FALSE)
+    if (gWirelessCommType != 0)
+        RfuVSync();
+    else if (gLinkVSyncDisabled == FALSE)
         LinkVSync();
-    else if (gUnknown_03002748 == FALSE)
-        sub_800B9B8();
 
     gMain.vblankCounter1++;
 

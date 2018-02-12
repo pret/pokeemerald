@@ -11,6 +11,7 @@
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
+#define ASM_DIRECT __attribute__((naked))
 
 // IDE support
 #if defined (__APPLE__) || defined (__CYGWIN__)
@@ -87,6 +88,7 @@ enum LanguageId
     LANGUAGE_SPANISH = 7,
 };
 
+#define GAME_VERSION (VERSION_EMERALD)
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
 enum
@@ -605,6 +607,11 @@ struct WaldaPhrase
     bool8 patternUnlocked;
 };
 
+struct UnkSaveSubstruct_3b98 {
+    u32 trainerId;
+    u8 trainerName[8];
+};
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -689,7 +696,9 @@ struct SaveBlock1
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[52];
     /*0x3B58*/ LilycoveLady lilycoveLady;
-    /*0x3B88*/ u8 filler_3B88[0x1E8];
+    /*0x3B88*/ u8 filler_3B88[0x10];
+    /*0x3B98*/ struct UnkSaveSubstruct_3b98 unk_3B98[20];
+    /*0x3C88*/ u8 filler_3C88[0xE8];
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
 };

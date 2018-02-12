@@ -136,7 +136,7 @@ _08077258:
 	thumb_func_start sub_8077260
 sub_8077260: @ 8077260
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08077280
@@ -410,7 +410,7 @@ _080774B2:
 	ldr r0, [r0]
 	adds r0, 0xA8
 	strb r2, [r0]
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08077528
@@ -511,7 +511,7 @@ _080775E8:
 	beq _080775F2
 	b _08077B46
 _080775F2:
-	bl sub_800A23C
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -532,7 +532,7 @@ _08077600:
 	ldr r0, [r0]
 	adds r0, 0xA8
 	strb r2, [r0]
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807762A
@@ -544,7 +544,7 @@ _0807762A:
 	b _08077B46
 	.pool
 _08077648:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08077680
@@ -564,7 +564,7 @@ _0807765C:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	b _08077B46
 	.pool
 _08077680:
@@ -1183,14 +1183,14 @@ _08077C28:
 	b _080780D8
 	.pool
 _08077C3C:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08077C50
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _08077C50:
 	ldr r1, =gMain
 	movs r3, 0x87
@@ -1781,7 +1781,7 @@ sub_807816C: @ 807816C
 	adds r0, 0x7E
 	ldrb r0, [r0]
 	strb r0, [r1, 0x1]
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080781B4
@@ -1810,7 +1810,7 @@ sub_80781C8: @ 80781C8
 	ldr r5, =gMain
 	ldr r0, =sub_80773AC
 	str r0, [r5, 0x8]
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08078220
@@ -4005,7 +4005,7 @@ sub_8079490: @ 8079490
 	ands r0, r1
 	cmp r0, 0
 	bne _080794C4
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080794B4
@@ -4030,7 +4030,7 @@ _080794C4:
 	thumb_func_start sub_80794CC
 sub_80794CC: @ 80794CC
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08079518
@@ -7026,7 +7026,7 @@ _0807AC92:
 	cmp r1, r0
 	bls _0807ACC4
 	bl CloseLink
-	ldr r0, =c2_800ACD4
+	ldr r0, =CB2_LinkError
 	bl SetMainCallback2
 	ldr r1, [r4]
 	adds r3, r1, 0
@@ -7408,7 +7408,7 @@ _0807B006:
 	beq _0807B014
 	b _0807B116
 _0807B014:
-	bl sub_800A23C
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7508,14 +7508,14 @@ _0807B0F0:
 	ands r0, r1
 	cmp r0, 0
 	bne _0807B116
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807B110
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _0807B110:
 	ldr r0, =sub_807EA2C
 	bl SetMainCallback2
@@ -12857,7 +12857,7 @@ _0807E4AE:
 _0807E4B2:
 	strb r0, [r1]
 _0807E4B4:
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807E4C2
@@ -13832,7 +13832,7 @@ _0807EDC0:
 	movs r0, 0x15
 	bl IncrementGameStat
 _0807EDCE:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807EDF6
@@ -14045,7 +14045,7 @@ _0807EFA4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0807F03A
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807EFD8
@@ -14072,7 +14072,7 @@ _0807EFE4:
 	b _0807F03A
 	.pool
 _0807EFF0:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807F028
@@ -14100,7 +14100,7 @@ _0807F028:
 	ldr r0, =c2_080543C4
 	bl SetMainCallback2
 _0807F03A:
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F048
@@ -14142,7 +14142,7 @@ c2_080543C4: @ 807F068
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807F0B6
@@ -14884,7 +14884,7 @@ _0807F6F8:
 	ldr r0, =c2_080543C4
 	bl SetMainCallback2
 _0807F70C:
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F71A

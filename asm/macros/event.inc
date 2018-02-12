@@ -1,20 +1,20 @@
 	@ Does nothing.
-	.macro nop 
+	.macro nop
 	.byte 0x00
 	.endm
 
 	@ Does nothing.
-	.macro nop1 
+	.macro nop1
 	.byte 0x01
 	.endm
 
 	@ Terminates script execution.
-	.macro end 
+	.macro end
 	.byte 0x02
 	.endm
 
 	@ Jumps back to after the last-executed call statement, and continues script execution from there.
-	.macro return 
+	.macro return
 	.byte 0x03
 	.endm
 
@@ -71,12 +71,12 @@
 	.endm
 
 	@ Executes a script stored in a default RAM location.
-	.macro gotoram 
+	.macro gotoram
 	.byte 0x0c
 	.endm
 
 	@ Terminates script execution and "resets the script RAM".
-	.macro killscript 
+	.macro killscript
 	.byte 0x0d
 	.endm
 
@@ -271,7 +271,7 @@
 	.endm
 
 	@ Blocks script execution until a command or ASM code manually unblocks it. Generally used with specific commands and specials. If this command runs, and a subsequent command or piece of ASM does not unblock state, the script will remain blocked indefinitely (essentially a hang).
-	.macro waitstate 
+	.macro waitstate
 	.byte 0x27
 	.endm
 
@@ -307,12 +307,12 @@
 	.endm
 
 	@ Runs time based events. In FireRed, this command is a nop.
-	.macro dodailyevents 
+	.macro dodailyevents
 	.byte 0x2d
 	.endm
 
 	@ Sets the values of variables 0x8000, 0x8001, and 0x8002 to the current hour, minute, and second. In FRLG, this command sets those variables to zero.
-	.macro gettime 
+	.macro gettime
 	.byte 0x2e
 	.endm
 
@@ -323,7 +323,7 @@
 	.endm
 
 	@ Blocks script execution until the currently-playing sound (triggered by playse) finishes playing.
-	.macro waitse 
+	.macro waitse
 	.byte 0x30
 	.endm
 
@@ -334,7 +334,7 @@
 	.endm
 
 	@ Blocks script execution until all currently-playing fanfares finish.
-	.macro waitfanfare 
+	.macro waitfanfare
 	.byte 0x32
 	.endm
 
@@ -352,7 +352,7 @@
 	.endm
 
 	@ Crossfades the currently-playing song into the map's default song.
-	.macro fadedefaultbgm 
+	.macro fadedefaultbgm
 	.byte 0x35
 	.endm
 
@@ -460,7 +460,7 @@
 	.endm
 
 	@ Retrieves the number of Pokemon in the player's party, and stores that number in variable 0x800D (LASTRESULT).
-	.macro getpartysize 
+	.macro getpartysize
 	.byte 0x43
 	.endm
 
@@ -612,7 +612,7 @@
 	.endm
 
 	@ If the script was called by an Object, then that Object will turn to face toward the metatile that the player is standing on.
-	.macro faceplayer 
+	.macro faceplayer
 	.byte 0x5a
 	.endm
 
@@ -679,17 +679,17 @@
 
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this command behind-the-scenes), and blocks script execution until the battle finishes.
-	.macro trainerbattlebegin 
+	.macro trainerbattlebegin
 	.byte 0x5d
 	.endm
 
 	@ Goes to address after the trainerbattle command (called by the battle functions, see battle_setup.c)
-	.macro gotopostbattlescript 
+	.macro gotopostbattlescript
 	.byte 0x5e
 	.endm
 
 	@ Goes to address specified in the trainerbattle command (called by the battle functions, see battle_setup.c)
-	.macro gotobeatenscript 
+	.macro gotobeatenscript
 	.byte 0x5f
 	.endm
 
@@ -730,7 +730,7 @@
 	.endm
 
 	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the box and its text have been fully drawn.
-	.macro waitmessage 
+	.macro waitmessage
 	.byte 0x66
 	.endm
 
@@ -741,32 +741,32 @@
 	.endm
 
 	@ Closes the current message box.
-	.macro closemessage 
+	.macro closemessage
 	.byte 0x68
 	.endm
 
 	@ Ceases movement for all Objects on-screen.
-	.macro lockall 
+	.macro lockall
 	.byte 0x69
 	.endm
 
 	@ If the script was called by an Object, then that Object's movement will cease.
-	.macro lock 
+	.macro lock
 	.byte 0x6a
 	.endm
 
 	@ Resumes normal movement for all Objects on-screen, and closes any standard message boxes that are still open.
-	.macro releaseall 
+	.macro releaseall
 	.byte 0x6b
 	.endm
 
 	@ If the script was called by an Object, then that Object's movement will resume. This command also closes any standard message boxes that are still open.
-	.macro release 
+	.macro release
 	.byte 0x6c
 	.endm
 
 	@ Blocks script execution until the player presses any key.
-	.macro waitbuttonpress 
+	.macro waitbuttonpress
 	.byte 0x6d
 	.endm
 
@@ -807,7 +807,7 @@
 	.endm
 
 	@ Nopped in Emerald.
-	.macro drawbox 
+	.macro drawbox
 	.byte 0x72
 	.endm
 
@@ -838,7 +838,7 @@
 	.endm
 
 	@ Hides all boxes displayed with drawmonpic.
-	.macro erasemonpic 
+	.macro erasemonpic
 	.byte 0x76
 	.endm
 
@@ -978,22 +978,22 @@
 	.endm
 
 	@ This allows you to choose a Pokemon to use in a contest. In FireRed, this command sets the byte at 0x03000EA8 to 0x01.
-	.macro choosecontestmon 
+	.macro choosecontestmon
 	.byte 0x8b
 	.endm
 
 	@ Starts a contest. In FireRed, this command is a nop.
-	.macro startcontest 
+	.macro startcontest
 	.byte 0x8c
 	.endm
 
 	@ Shows the results of a contest. In FireRed, this command is a nop.
-	.macro showcontestresults 
+	.macro showcontestresults
 	.byte 0x8d
 	.endm
 
 	@ Starts a contest over a link connection. In FireRed, this command is a nop.
-	.macro contestlinktransfer 
+	.macro contestlinktransfer
 	.byte 0x8e
 	.endm
 
@@ -1033,7 +1033,7 @@
 	.endm
 
 	@ Hides the secondary box spawned by showmoney.
-	.macro hidemoneybox 
+	.macro hidemoneybox
 	.byte 0x94
 	.endm
 
@@ -1104,7 +1104,7 @@
 	.endm
 
 	@ Checks the player's gender. If male, then 0x0000 is stored in variable 0x800D (LASTRESULT). If female, then 0x0001 is stored in LASTRESULT.
-	.macro checkplayergender 
+	.macro checkplayergender
 	.byte 0xa0
 	.endm
 
@@ -1125,7 +1125,7 @@
 	.endm
 
 	@ Queues a weather change to the default weather for the map.
-	.macro resetweather 
+	.macro resetweather
 	.byte 0xa3
 	.endm
 
@@ -1136,7 +1136,7 @@
 	.endm
 
 	@ Executes the weather change queued with resetweather or setweather. The current weather will smoothly fade into the queued weather.
-	.macro doweather 
+	.macro doweather
 	.byte 0xa5
 	.endm
 
@@ -1195,7 +1195,7 @@
 	.endm
 
 	@ Waits for the door animation started with opendoor or closedoor to finish.
-	.macro waitdooranim 
+	.macro waitdooranim
 	.byte 0xae
 	.endm
 
@@ -1223,7 +1223,7 @@
 	.endm
 
 	@ In FireRed and Emerald, this command is a nop.
-	.macro showelevmenu 
+	.macro showelevmenu
 	.byte 0xb2
 	.endm
 
@@ -1251,7 +1251,7 @@
 	.endm
 
 	@ Starts a wild battle against the Pokemon generated by setwildbattle. Blocks script execution until the battle finishes.
-	.macro dowildbattle 
+	.macro dowildbattle
 	.byte 0xb7
 	.endm
 
@@ -1335,7 +1335,7 @@
 	.endm
 
 	@ Blocks script execution until cry finishes.
-	.macro waitmoncry 
+	.macro waitmoncry
 	.byte 0xc5
 	.endm
 
@@ -1359,17 +1359,17 @@
 	.endm
 
 	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom of the screen when the Main Menu is opened.
-	.macro unloadhelp 
+	.macro unloadhelp
 	.byte 0xc9
 	.endm
 
 	@ After using this command, all standard message boxes will use the signpost frame.
-	.macro signmsg 
+	.macro signmsg
 	.byte 0xca
 	.endm
 
 	@ Ends the effects of signmsg, returning message box frames to normal.
-	.macro normalmsg 
+	.macro normalmsg
 	.byte 0xcb
 	.endm
 
@@ -1393,7 +1393,7 @@
 	.endm
 
 	@ Depending on factors I haven't managed to understand yet, this command may cause script execution to jump to the offset specified by the pointer at 0x020375C0.
-	.macro execram 
+	.macro execram
 	.byte 0xcf
 	.endm
 
@@ -1424,7 +1424,7 @@
 	.2byte \unknown
 	.endm
 
-	.macro mossdeepgym2 
+	.macro mossdeepgym2
 	.byte 0xd4
 	.endm
 
@@ -1434,7 +1434,7 @@
 	.2byte \var
 	.endm
 
-	.macro mossdeepgym4 
+	.macro mossdeepgym4
 	.byte 0xd6
 	.endm
 
@@ -1446,15 +1446,15 @@
 	.2byte \word2
 	.endm
 
-	.macro cmdD8 
+	.macro cmdD8
 	.byte 0xd8
 	.endm
 
-	.macro cmdD9 
+	.macro cmdD9
 	.byte 0xd9
 	.endm
 
-	.macro hidebox2 
+	.macro hidebox2
 	.byte 0xda
 	.endm
 
@@ -1519,7 +1519,7 @@
 	.endm
 
 	.macro case condition, dest
-	compare_var_to_value 0x8000, \condition
+	compare 0x8000, \condition
 	goto_eq \dest
 	.endm
 
