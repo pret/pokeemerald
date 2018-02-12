@@ -327,7 +327,7 @@ extern u8 gMoveNames[][0xD];
 extern u8* gReturnToXStringsTable[];
 extern u32 gUnknown_0203CE5E[];
 extern u8 EventScript_2736B3[];
-extern u16 gUnknown_0860F074[];
+extern const u16 gUnknown_0860F074[];
 extern struct BattleMove gBattleMoves[];
 
 void ResetBagScrollPositions(void)
