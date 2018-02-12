@@ -522,7 +522,7 @@ SECTIONS {
         data/battle_frontier_1.o(.rodata);
         src/menu.o(.rodata);
         data/battle_frontier_2.o(.rodata);
-        data/item_menu.o(.rodata);
+        src/item_menu.o(.rodata);
         data/menu_indicators.o(.rodata);
         src/save_location.o(.rodata);
         data/item_icon.o(.rodata);

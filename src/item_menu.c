@@ -47,6 +47,208 @@
 #include "menu_helpers.h"
 #include "window.h"
 
+void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
+void CB2_Bag(void);
+bool8 setup_bag_menu(void);
+void bag_menu_init_bgs(void);
+bool8 load_bag_menu_graphics(void);
+void setup_bag_menu_textboxes(void);
+void allocate_bag_item_list_buffers(void);
+void load_bag_item_list_buffers(u8);
+void bag_menu_print_pocket_names(u8*, u8*);
+void bag_menu_copy_pocket_name_to_window(u32);
+void bag_menu_draw_pocket_indicator_square(u8, u8);
+void AddBagVisualObject(u8);
+void bag_menu_add_pocket_scroll_arrow_indicators_maybe(void);
+void bag_menu_add_list_scroll_arrow_indicators_maybe(void);
+void bag_menu_prepare_tmhm_move_window(void);
+bool8 IsWallysBag(void);
+void Task_WallyTutorialBagMenu(u8);
+void Task_BagMenu(u8);
+void get_name(s8*, u16);
+u16 ItemIdToBattleMoveId(u16);
+void ShakeBagVisual(void);
+u16 BagGetItemIdByPocketPosition(u8, u16);
+void AddBagItemIconObject(u16, u8);
+void bag_menu_print_description_box_text(int);
+void bag_menu_print_cursor(u8, u8);
+void bag_menu_print(u8, u8, const u8*, u8, u8, u8, u8, u8, u8);
+bool8 itemid_is_unique(u16);
+u16 BagGetQuantityByPocketPosition(u8, u16);
+void sub_81AB89C(void);
+void task_close_bag_menu_2(u8);
+u8 AddItemMessageWindow(u8);
+void bag_menu_RemoveBagItem_message_window(u8);
+void set_callback3_to_bag(u8);
+void sub_81ABC54(u8, s16);
+u8 bag_menu_add_window(u8);
+u8 GetSwitchBagPocketDirection(void);
+void SwitchBagPocket(u8, s16, u16);
+bool8 sub_81AC2C0(void);
+void bag_menu_swap_items(u8);
+void SetBagVisualPocketId(u8, u8);
+void RemoveBagObject(u8);
+void AddSwitchPocketRotatingBallObject(s16);
+void sub_81AC10C(u8);
+void sub_81AC3C0(u8);
+void sub_81AC498(u8);
+void sub_81AC590(u8);
+void PrintTMHMMoveData(u16);
+void sub_81ACAF8(u8);
+void sub_81ACB54(u8, u8, u8);
+void Task_HandleInBattleItemMenuInput(u8);
+void Task_HandleOutOfBattleItemMenuInput(u8);
+bool8 sub_81ACDFC(s8);
+void bag_menu_remove_window(u8);
+void bag_menu_print_there_is_no_pokemon(u8);
+void Task_ChooseHowManyToToss(u8);
+void BagMenuConfirmToss(u8);
+void bag_menu_yes_no(u8, u8, const struct YesNoFuncTable*);
+void Task_ActuallyToss(u8);
+void ItemMenu_Cancel(u8);
+void sub_81AD350(u8);
+void bag_menu_print_cant_be_held_msg(u8);
+void bag_menu_AddMoney_window(void);
+void sub_81AD680(u8);
+void sub_81AD730(u8);
+void sub_81AD6E4(u8);
+void bag_menu_remove_money_window(void);
+void bag_menu_RemoveBagItem_message_window(u8);
+void sub_81AD794(u8);
+void sub_81AD8C8(u8);
+void sub_81AD9C0(u8);
+void sub_81ADB14(u8);
+void sub_81ADA7C(u8);
+void sub_81ADC0C(u8);
+void bag_menu_leave_maybe_3(void);
+void bag_menu_leave_maybe_2(void);
+void bag_menu_leave_maybe(void);
+void sub_81ABA6C(void);
+void sub_81ABAC4(void);
+void sub_81ABAE0(void);
+u8 sub_81AB1F0(u8);
+void sub_81AC23C(u8);
+void bag_menu_change_item_callback(u32 a, bool8 b, struct ListMenu*);
+void sub_81AB520(u8 rboxId, int item_index_in_pocket, u8 a);
+void ItemMenu_UseOutOfBattle(u8 taskId);
+void ItemMenu_Toss(u8 taskId);
+void ItemMenu_Register(u8 taskId);
+void ItemMenu_Give(u8 taskId);
+void ItemMenu_Cancel(u8 taskId);
+void ItemMenu_UseInBattle(u8 taskId);
+void ItemMenu_CheckTag(u8 taskId);
+void unknown_ItemMenu_Confirm(u8 taskId);
+void unknown_ItemMenu_Show(u8 taskId);
+void unknown_ItemMenu_Give2(u8 taskId);
+void unknown_ItemMenu_Confirm2(u8 taskId);
+void unknown_item_menu_type(u8 taskId);
+void item_menu_type_2(u8 taskId);
+void display_sell_item_ask_str(u8 taskId);
+void unknown_ItemMenu_Confirm(u8 taskId);
+void display_deposit_item_ask_str(u8 taskId);
+void item_menu_type_b(u8 taskId);
+void BagMenuActuallyToss(u8 taskId);
+void BagMenuCancelToss(u8 taskId);
+void sub_81AD84C(u8 taskId);
+void sub_81AD6FC(u8 taskId);
+
+// .rodata
+
+const struct BgTemplate gUnknown_08613F90[3] = {
+    {0, 0, 31, 0, 0, 1, 0}, 
+    {1, 0, 30, 0, 0, 0, 0}, 
+    {2, 3, 29, 0, 0, 2, 0}
+};
+    
+const struct ListMenuTemplate gUnknown_08613F9C = {
+    NULL, bag_menu_change_item_callback, sub_81AB520, 0, 0, 0, 0, 8, 0, 1, 1, 0, 3, 0, 0, 0, 7, 0
+};
+
+const struct MenuAction gUnknown_08613FB4[] = {
+    {gMenuText_Use, ItemMenu_UseOutOfBattle}, 
+    {gMenuText_Toss, ItemMenu_Toss}, 
+    {gMenuText_Register, ItemMenu_Register}, 
+    {gMenuText_Give, ItemMenu_Give},
+    {gText_Cancel2, ItemMenu_Cancel},
+    {gMenuText_Use, ItemMenu_UseInBattle},
+    {gMenuText_Check, ItemMenu_UseOutOfBattle},
+    {gMenuText_Walk, ItemMenu_UseOutOfBattle},
+    {gMenuText_Deselect, ItemMenu_Register},
+    {gMenuText_CheckTag, ItemMenu_CheckTag},
+    {gMenuText_Confirm, unknown_ItemMenu_Confirm},
+    {gMenuText_Show, unknown_ItemMenu_Show},
+    {gMenuText_Give2, unknown_ItemMenu_Give2},
+    {gMenuText_Confirm, unknown_ItemMenu_Confirm2},
+    {gText_EmptyString2, NULL}
+};
+
+const u8 gUnknown_0861402C[] = {0, 3, 1, 4};
+const u8 gUnknown_08614030[] = {0, 2, 14, 4};
+const u8 gUnknown_08614034[] = {3, 14, 1, 4};
+const u8 gUnknown_08614038[] = {0, 3, 14, 4};
+const u8 gUnknown_0861403C[] = {9, 14, 0, 3, 1, 4};
+const u8 gUnknown_08614042[] = {5, 4};
+const u8 gUnknown_08614044[] = {3, 4};
+const u8 gUnknown_08614046 = 4;
+const u8 gUnknown_08614047[] = {10, 9, 14, 4};
+const u8 gUnknown_0861404B[] = {11, 4};
+const u8 gUnknown_0861404D[] = {12, 4};
+const u8 gUnknown_0861404F[] = {13, 4};
+
+const TaskFunc gUnknown_08614054[] = {
+    unknown_item_menu_type,
+    unknown_item_menu_type,
+    item_menu_type_2,
+    display_sell_item_ask_str,
+    unknown_ItemMenu_Confirm,
+    unknown_item_menu_type,
+    display_deposit_item_ask_str,
+    unknown_item_menu_type,
+    unknown_item_menu_type,
+    unknown_item_menu_type,
+    NULL,
+    item_menu_type_b
+};
+
+const struct YesNoFuncTable gUnknown_08614084 = {BagMenuActuallyToss, BagMenuCancelToss};
+
+const struct YesNoFuncTable gUnknown_0861408C = {sub_81AD84C, sub_81AD6FC};
+
+const u16 gUnknown_08614094[] = {0x1C00, 0x110, 0x1064, -1, -1, 0x6F, 0x6F, 0};
+
+const u8 gUnknown_086140A4[] = INCBIN_U8("graphics/interface/select_button.4bpp");
+
+const u8 gUnknown_08614164[][3] = {
+    {0, 1, 3}, 
+    {0, 1, 4},
+    {0, 3, 6},
+    {2, 1, 3},
+    {0, 14, 10}
+};
+
+const struct WindowTemplate gUnknown_08614174[] = {
+    {0, 14, 2, 15, 16, 1, 0x27},
+    {0, 0, 13, 14, 6, 1, 0x117},
+    {0, 4, 1, 8, 2, 1, 0x1A1},
+    {0, 1, 13, 5, 6, 12, 0x16B},
+    {0, 7, 13, 4, 6, 12, 0x189},
+    {1, 2, 15, 27, 4, 15, 0x1B1},
+    {0xFF, 0, 0, 0, 0, 0, 0}
+};
+
+const struct WindowTemplate gUnknown_086141AC[] = {
+    {1, 22, 17, 7, 2, 15, 0x21D},
+    {1, 22, 15, 7, 4, 15, 0x21D},
+    {1, 15, 15, 14, 4, 15, 0x21D},
+    {1, 15, 13, 14, 6, 15, 0x21D},
+    {1, 2, 15, 27, 4, 15, 0x1B1},
+    {1, 24, 15, 5, 4, 15, 0x21D},
+    {1, 21, 9, 5, 4, 15, 0x21D},
+    {1, 24, 17, 5, 2, 15, 0x21D},
+    {1, 18, 11, 10, 2, 15, 0x245},
+    {1, 1, 1, 10, 2, 15, 0x231}
+};
+
 // .text
 
 struct BagStruct {
@@ -76,7 +278,7 @@ struct UnkBagStruct {
     u8 filler3[2];
     u8 unk81E;
     u8 unk81F;
-    u8* unk820;
+    const u8* unk820;
     u8 unk824;
     u8 unk825;
     u8 filler[2];
@@ -115,121 +317,17 @@ EWRAM_DATA struct TempWallyStruct *gUnknown_0203CE80 = 0;
 
 void (*gFieldCallback)(void);
 
-void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
-void CB2_Bag(void);
-bool8 setup_bag_menu(void);
-void bag_menu_init_bgs(void);
-bool8 load_bag_menu_graphics(void);
-void setup_bag_menu_textboxes(void);
-void allocate_bag_item_list_buffers(void);
-void load_bag_item_list_buffers(u8);
-void bag_menu_print_pocket_names(u8*, u8*);
-void bag_menu_copy_pocket_name_to_window(u32);
-void bag_menu_draw_pocket_indicator_square(u8, u8);
-void AddBagVisualObject(u8);
-void bag_menu_add_pocket_scroll_arrow_indicators_maybe(void);
-void bag_menu_add_list_scroll_arrow_indicators_maybe(void);
-void bag_menu_prepare_tmhm_move_window(void);
-bool8 IsWallysBag(void);
-void Task_WallyTutorialBagMenu(u8);
-void Task_BagMenu(u8);
-void get_name(s8*, u16);
-u16 ItemIdToBattleMoveId(u16);
-void ShakeBagVisual(void);
-u16 BagGetItemIdByPocketPosition(u8, u16);
-void AddBagItemIconObject(u16, u8);
-void bag_menu_print_description_box_text(int);
-void bag_menu_print_cursor(u8, u8);
-void bag_menu_print(u8, u8, u8*, u8, u8, u8, u8, u8, u8);
-bool8 itemid_is_unique(u16);
-u16 BagGetQuantityByPocketPosition(u8, u16);
-void sub_81AB89C(void);
-void task_close_bag_menu_2(u8);
-u8 AddItemMessageWindow(u8);
-void bag_menu_RemoveBagItem_message_window(u8);
-void set_callback3_to_bag(u8);
-void sub_81ABC54(u8, s16);
-u8 bag_menu_add_window(u8);
-u8 GetSwitchBagPocketDirection(void);
-void SwitchBagPocket(u8, s16, u16);
-bool8 sub_81AC2C0(void);
-void bag_menu_swap_items(u8);
-void SetBagVisualPocketId(u8, u8);
-void RemoveBagObject(u8);
-void AddSwitchPocketRotatingBallObject(s16);
-void sub_81AC10C(u8);
-void sub_81AC3C0(u8);
-void sub_81AC498(u8);
-void sub_81AC590(u8);
-void PrintTMHMMoveData(u16);
-void sub_81ACAF8(u8);
-void sub_81ACB54(u8, u8, u8);
-void Task_HandleInBattleItemMenuInput(u8);
-void Task_HandleOutOfBattleItemMenuInput(u8);
-bool8 sub_81ACDFC(s8);
-void bag_menu_remove_window(u8);
-void bag_menu_print_there_is_no_pokemon(u8);
-void Task_ChooseHowManyToToss(u8);
-void BagMenuConfirmToss(u8);
-void bag_menu_yes_no(u8, u8, struct YesNoFuncTable*);
-void Task_ActuallyToss(u8);
-void ItemMenu_Cancel(u8);
-void sub_81AD350(u8);
-void bag_menu_print_cant_be_held_msg(u8);
-void bag_menu_AddMoney_window(void);
-void sub_81AD680(u8);
-void sub_81AD730(u8);
-void sub_81AD6E4(u8);
-void bag_menu_remove_money_window(void);
-void bag_menu_RemoveBagItem_message_window(u8);
-void sub_81AD794(u8);
-void sub_81AD8C8(u8);
-void sub_81AD9C0(u8);
-void sub_81ADB14(u8);
-void sub_81ADA7C(u8);
-void sub_81ADC0C(u8);
-void bag_menu_leave_maybe_3(void);
-void bag_menu_leave_maybe_2(void);
-void bag_menu_leave_maybe(void);
-void sub_81ABA6C(void);
-void sub_81ABAC4(void);
-void sub_81ABAE0(void);
-u8 sub_81AB1F0(u8);
-void sub_81AC23C(u8);
-
 extern u8 *gPocketNamesStringsTable[];
-extern struct BgTemplate gUnknown_08613F90[];
 extern u8 gUnknown_08D9A88C[];
 extern struct CompressedSpriteSheet gUnknown_0857FB34;
 extern struct CompressedSpriteSheet gUnknown_0857FB3C;
 extern struct CompressedSpritePalette gUnknown_0857FB44;
 extern struct ListMenuTemplate gUnknown_08613F9C;
 extern u8 gMoveNames[][0xD];
-extern u8 gUnknown_086140A4[];
 extern u8* gReturnToXStringsTable[];
-extern u32 gUnknown_08614094[];
 extern u32 gUnknown_0203CE5E[];
-extern TaskFunc gUnknown_08614054[];
-extern u8 gUnknown_0861402C[];
-extern u8 gUnknown_08614030[];
-extern u8 gUnknown_08614034[];
-extern u8 gUnknown_08614038[];
-extern u8 gUnknown_0861403C[];
-extern u8 gUnknown_08614042[];
-extern u8 gUnknown_08614044[];
-extern u8 gUnknown_08614046[];
-extern u8 gUnknown_08614047[];
-extern u8 gUnknown_0861404B[];
-extern u8 gUnknown_0861404D[];
-extern u8 gUnknown_0861404F[];
-extern struct MenuAction gUnknown_08613FB4[];
-extern struct YesNoFuncTable gUnknown_08614084;
 extern u8 EventScript_2736B3[];
-extern struct YesNoFuncTable gUnknown_0861408C;
-extern struct WindowTemplate gUnknown_08614174[];
 extern u16 gUnknown_0860F074[];
-extern u8 gUnknown_08614164[][3];
-extern struct WindowTemplate gUnknown_086141AC[];
 extern struct BattleMove gBattleMoves[];
 
 void ResetBagScrollPositions(void)
@@ -462,7 +560,7 @@ void bag_menu_init_bgs(void)
     SetBgTilemapBuffer(2, gUnknown_0203CE54->unk4);
     ResetAllBgsCoordinates();
     schedule_bg_copy_tilemap_to_vram(2);
-    SetGpuReg(REG_OFFSET_DISPCNT, 0x1040);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
@@ -535,7 +633,7 @@ void load_bag_item_list_buffers(u8 pocketId)
     
     if (!gUnknown_0203CE54->unk81B_2)
     {
-        for (i = 0;i < gUnknown_0203CE54->unk829[pocketId] - 1; i++)
+        for (i = 0; i < gUnknown_0203CE54->unk829[pocketId] - 1; i++)
         {
             get_name(gUnknown_0203CE78->name[i], pocket->itemSlots[i].itemId);
             subBuffer = gUnknown_0203CE74->subBuffers;
@@ -549,7 +647,7 @@ void load_bag_item_list_buffers(u8 pocketId)
     }
     else
     {
-        for (i = 0;i < gUnknown_0203CE54->unk829[pocketId]; i++)
+        for (i = 0; i < gUnknown_0203CE54->unk829[pocketId]; i++)
         {
             get_name(gUnknown_0203CE78->name[i], pocket->itemSlots[i].itemId);
             subBuffer = gUnknown_0203CE74->subBuffers;
@@ -591,7 +689,7 @@ void get_name(s8 *dest, u16 itemId)
     }
 }
 
-void bag_menu_change_item_callback(u32 a, u8 b)
+void bag_menu_change_item_callback(u32 a, bool8 b, struct ListMenu *unused)
 {
     if (b != 1)
     {
@@ -802,7 +900,7 @@ u8 sub_81ABB2C(u8 a)
     return gUnknown_0203CE58.scrollPosition[a] + gUnknown_0203CE58.cursorPosition[a];
 }
 
-void DisplayItemMessage(u8 taskId, u8 fontId, u8 *str, void ( *callback)(u8 taskId))
+void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u8 taskId))
 {
     s16* data = gTasks[taskId].data;
     
@@ -1325,7 +1423,7 @@ void sub_81AC644(u8 unused)
             }
             else
             {
-                gUnknown_0203CE54->unk820 = gUnknown_08614046;
+                gUnknown_0203CE54->unk820 = &gUnknown_08614046;
                 gUnknown_0203CE54->unk828 = 1;
             }
             break;
@@ -1341,7 +1439,7 @@ void sub_81AC644(u8 unused)
             }
             else
             {
-                gUnknown_0203CE54->unk820 = gUnknown_08614046;
+                gUnknown_0203CE54->unk820 = &gUnknown_08614046;
                 gUnknown_0203CE54->unk828 = 1;
             }
             break;
@@ -1353,7 +1451,7 @@ void sub_81AC644(u8 unused)
             }
             else
             {
-                gUnknown_0203CE54->unk820 = gUnknown_08614046;
+                gUnknown_0203CE54->unk820 = &gUnknown_08614046;
                 gUnknown_0203CE54->unk828 = 1;
             }
             break;
@@ -1365,7 +1463,7 @@ void sub_81AC644(u8 unused)
             }
             else
             {
-                gUnknown_0203CE54->unk820 = gUnknown_08614046;
+                gUnknown_0203CE54->unk820 = &gUnknown_08614046;
                 gUnknown_0203CE54->unk828 = 1;
             }
             break;
@@ -1378,7 +1476,7 @@ void sub_81AC644(u8 unused)
             {
                 if (gUnknown_0203CE58.pocket == 4 || !sub_8122148(gSpecialVar_ItemId))
                 {
-                    gUnknown_0203CE54->unk820 = gUnknown_08614046;
+                    gUnknown_0203CE54->unk820 = &gUnknown_08614046;
                     gUnknown_0203CE54->unk828 = 1;
                 }
                 else
@@ -2213,7 +2311,7 @@ void setup_bag_menu_textboxes(void)
     copy_textbox_border_tile_patterns_to_vram(0, 10, -48);
     sub_819A2BC(-64, 1);
     LoadPalette(&gUnknown_0860F074, 0xF0, 0x20);
-    for (i = 0;i < 3; i++)
+    for (i = 0; i < 3; i++)
     {
         FillWindowPixelBuffer(i, 0);
         PutWindowTilemap(i);
@@ -2222,7 +2320,7 @@ void setup_bag_menu_textboxes(void)
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
-void bag_menu_print(u8 a, u8 b, u8 *str, u8 c, u8 d, u8 e, u8 f, u8 g, u8 h)
+void bag_menu_print(u8 a, u8 b, const u8 *str, u8 c, u8 d, u8 e, u8 f, u8 g, u8 h)
 {
     AddTextPrinterParameterized2(a, b, c, d, e, f, gUnknown_08614164[h], g, str);
 }
@@ -2278,7 +2376,7 @@ void bag_menu_RemoveBagItem_message_window(u8 a)
     }
 }
 
-void bag_menu_yes_no(u8 a, u8 b, struct YesNoFuncTable *funcTable)
+void bag_menu_yes_no(u8 a, u8 b, const struct YesNoFuncTable *funcTable)
 {
     CreateYesNoMenuWithCallbacks(a, &gUnknown_086141AC[b], 1, 0, 2, 1, 14, funcTable);
 }
@@ -2310,12 +2408,12 @@ void PrintTMHMMoveData(u16 itemId)
 {
     u8 i;
     u16 moveId;
-    u8* text;
+    const u8* text;
     
     FillWindowPixelBuffer(4, 0);
     if (itemId == ITEM_NONE)
     {
-        for (i = 0;i < 4; i++)
+        for (i = 0; i < 4; i++)
             bag_menu_print(4, 1, gText_ThreeDashes, 7, i * 12, 0, 0, -1, 4);
         CopyWindowToVram(4, 2);
     }
