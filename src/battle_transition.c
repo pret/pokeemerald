@@ -61,9 +61,7 @@ extern u16 gBattle_BG0_Y;
 
 extern const struct OamData gFieldObjectBaseOam_32x32;
 
-extern void c2_exit_to_overworld_2_switch(void);
 extern void sub_80AC3D0(void);
-extern void ScanlineEffect_Clear(void);
 
 // this file's functions
 static void LaunchBattleTransitionTask(u8 transitionId);

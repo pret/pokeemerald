@@ -178,303 +178,9 @@ gBattle_WIN1V: @ 2022E2A
 	.space 0x2
 
     .include "src/battle_message.o"
+	.include "src/battle_main.o"
 
-gUnknown_02022F88: @ 2022F88
-	.space 0x64
-
-gBattleTypeFlags: @ 2022FEC
-	.space 0x4
-
-gBattleTerrain: @ 2022FF0
-	.space 0x4
-
-gUnknown_02022FF4: @ 2022FF4
-	.space 0x4
-
-gUnknown_02022FF8: @ 2022FF8
-	.space 0x60
-
-gUnknown_02023058: @ 2023058
-	.space 0x4
-
-gUnknown_0202305C: @ 202305C
-	.space 0x4
-
-gUnknown_02023060: @ 2023060
-	.space 0x4
-
-gBattleBufferA: @ 2023064
-	.space 0x800
-
-gBattleBufferB: @ 2023864
-	.space 0x800
-
-gActiveBank: @ 2024064
-	.space 0x4
-
-gBattleExecBuffer: @ 2024068
-	.space 0x4
-
-gNoOfAllBanks: @ 202406C
-	.space 0x2
-
-gBattlePartyID: @ 202406E
-	.space 0x8
-
-gBanksByIdentity: @ 2024076
-	.space 0x4
-
-gActionsByTurnOrder: @ 202407A
-	.space 0x4
-
-gBanksByTurnOrder: @ 202407E
-	.space 0x4
-
-gCurrentTurnActionNumber: @ 2024082
-	.space 0x1
-
-gCurrentActionFuncId: @ 2024083
-	.space 0x1
-
-gBattleMons: @ 2024084
-	.space 0x160
-
-gBankSpriteIds: @ 20241E4
-	.space 0x4
-
-gCurrMovePos: @ 20241E8
-	.space 0x1
-
-gUnknown_020241E9: @ 20241E9
-	.space 0x1
-
-gCurrentMove: @ 20241EA
-	.space 0x2
-
-gChosenMove: @ 20241EC
-	.space 0x2
-
-gRandomMove: @ 20241EE
-	.space 0x2
-
-gBattleMoveDamage: @ 20241F0
-	.space 0x4
-
-gHpDealt: @ 20241F4
-	.space 0x4
-
-gTakenDmg: @ 20241F8
-	.space 0x10
-
-gLastUsedItem: @ 2024208
-	.space 0x2
-
-gLastUsedAbility: @ 202420A
-	.space 0x1
-
-gBankAttacker: @ 202420B
-	.space 0x1
-
-gBankTarget: @ 202420C
-	.space 0x1
-
-gBank1: @ 202420D
-	.space 0x1
-
-gEffectBank: @ 202420E
-	.space 0x1
-
-gStringBank: @ 202420F
-	.space 0x1
-
-gAbsentBankFlags: @ 2024210
-	.space 0x1
-
-gCritMultiplier: @ 2024211
-	.space 0x1
-
-gMultiHitCounter: @ 2024212
-	.space 0x2
-
-gBattlescriptCurrInstr: @ 2024214
-	.space 0x8
-
-gActionForBanks: @ 202421C
-	.space 0x4
-
-gSelectionBattleScripts: @ 2024220
-	.space 0x10
-
-gPalaceSelectionBattleScripts: @ 2024230
-	.space 0x10
-
-gLastPrintedMoves: @ 2024240
-	.space 0x8
-
-gLastMoves: @ 2024248
-	.space 0x8
-
-gLastLandedMoves: @ 2024250
-	.space 0x8
-
-gLastHitByType: @ 2024258
-	.space 0x8
-
-gLastResultingMoves: @ 2024260
-	.space 0x8
-
-gLockedMoves: @ 2024268
-	.space 0x8
-
-gLastHitBy: @ 2024270
-	.space 0x4
-
-gChosenMovesByBanks: @ 2024274
-	.space 0x8
-
-gBattleMoveFlags: @ 202427C
-	.space 0x4
-
-gHitMarker: @ 2024280
-	.space 0x4
-
-gUnknown_02024284: @ 2024284
-	.space 0x4
-
-gTakenDmgBanks: @ 2024288
-	.space 0x4
-
-gUnknown_0202428C: @ 202428C
-	.space 0x2
-
-gSideAffecting: @ 202428E
-	.space 0x6
-
-gSideTimers: @ 2024294
-	.space 0x18
-
-gStatuses3: @ 20242AC
-	.space 0x10
-
-gDisableStructs: @ 20242BC
-	.space 0x70
-
-gPauseCounterBattle: @ 202432C
-	.space 0x2
-
-gPaydayMoney: @ 202432E
-	.space 0x2
-
-gRandomTurnNumber: @ 2024330
-	.space 0x2
-
-gBattleCommunication: @ 2024332
-	.space 0x1
-
-gUnknown_02024333: @ 2024333
-	.space 0x7
-
-gBattleOutcome: @ 202433A
-	.space 0x2
-
-gProtectStructs: @ 202433C
-	.space 0x40
-
-gSpecialStatuses: @ 202437C
-	.space 0x50
-
-gBattleWeather: @ 20243CC
-	.space 0x4
-
-gWishFutureKnock: @ 20243D0
-	.space 0x2C
-
-gUnknown_020243FC: @ 20243FC
-	.space 0x2
-
-gSentPokesToOpponent: @ 20243FE
-	.space 0x2
-
-gDynamicBasePower: @ 2024400
-	.space 0x2
-
-gExpShareExp: @ 2024402
-	.space 0x2
-
-gEnigmaBerries: @ 2024404
-	.space 0x70
-
-gBattleScripting: @ 2024474
-	.space 0x28
-
-gBattleStruct: @ 202449C
-	.space 0x4
-
-gLinkBattleSendBuffer: @ 20244A0
-	.space 0x4
-
-gLinkBattleRecvBuffer: @ 20244A4
-	.space 0x4
-
-gBattleResources: @ 20244A8
-	.space 0x4
-
-gActionSelectionCursor: @ 20244AC
-	.space 0x4
-
-gMoveSelectionCursor: @ 20244B0
-	.space 0x4
-
-gUnknown_020244B4: @ 20244B4
-	.space 0x4
-
-gBankInMenu: @ 20244B8
-	.space 0x1
-
-gDoingBattleAnim: @ 20244B9
-	.space 0x3
-
-gTransformedPersonalities: @ 20244BC
-	.space 0x10
-
-gPlayerDpadHoldFrames: @ 20244CC
-	.space 0x4
-
-gBattleSpritesDataPtr: @ 20244D0
-	.space 0x4
-
-gMonSpritesGfxPtr: @ 20244D4
-	.space 0x4
-
-gUnknown_020244D8: @ 20244D8
-	.space 0x4
-
-gUnknown_020244DC: @ 20244DC
-	.space 0x4
-
-gBattleMovePower: @ 20244E0
-	.space 0x2
-
-gMoveToLearn: @ 20244E2
-	.space 0x2
-
-gBattleMonForms: @ 20244E4
-	.space 0x4
-
-sLearningMoveTableID: @ 20244E8
-	.space 0x1
-
-gPlayerPartyCount: @ 20244E9
-	.space 0x1
-
-gEnemyPartyCount: @ 20244EA
-	.space 0x2
-
-gPlayerParty: @ 20244EC
-	.space 600
-
-gEnemyParty: @ 2024744
-	.space 600
+	.include "src/pokemon_1.o"
 
 gUnknown_0202499C: @ 202499C
 	.space 0x18
@@ -598,25 +304,6 @@ gUnknown_020375D6: @ 20375D6
 
     .include "src/event_data.o"
     .include "src/start_menu.o"
-
-gUnknown_02037619: @ 2037619
-	.space 0x1
-
-gUnknown_0203761A: @ 203761A
-	.space 0x2
-
-gUnknown_0203761C: @ 203761C
-	.space 0x4
-
-gUnknown_02037620: @ 2037620
-	.space 0x1
-
-gUnknown_02037621: @ 2037621
-	.space 0x1
-
-gUnknown_02037622: @ 2037622
-	.space 0x2
-
 	.include "src/tileset_anims.o"
 	.include "src/palette.o"
     .include "src/sound.o"
@@ -1104,7 +791,7 @@ gUnknown_0203AB98: @ 203AB98
     .include "src/coins.o"
     .include "src/battle_transition.o"
 
-gAbilitiesPerBank: @ 203ABA4
+gBattlerAbilities: @ 203ABA4
 	.space 0x4
 
 gStringInfo: @ 203ABA8
@@ -1205,10 +892,7 @@ gUnknown_0203BCE8: @ 203BCE8
 
     .include "src/lottery_corner.o"
     .include "src/diploma.o"
-
-gUnknown_0203BCF4: @ 203BCF4
-	.space 0x4
-
+    .include "src/berry_tag_screen.o"
     .include "src/mystery_event_menu.o"
     .include "src/save_failed_screen.o"
 
@@ -1248,36 +932,9 @@ gUnknown_0203CD80: @ 203CD80
 gUnknown_0203CD88: @ 203CD88
 	.space 0x4
 
-gUnknown_0203CD8C: @ 203CD8C
-	.space 0x1
+    .include "src/menu.o"
 
-gUnknown_0203CD8D: @ 203CD8D
-	.space 0x3
-
-gUnknown_0203CD90: @ 203CD90
-	.space 0xC
-
-gUnknown_0203CD9C: @ 203CD9C
-	.space 0x2
-
-gUnknown_0203CD9E: @ 203CD9E
-	.space 0x1
-
-gUnknown_0203CD9F: @ 203CD9F
-	.space 0x1
-
-gUnknown_0203CDA0: @ 203CDA0
-	.space 0x4
-
-gUnknown_0203CDA4: @ 203CDA4
-	.space 0x4
-
-gUnknown_0203CDA8: @ 203CDA8
-	.space 0x4
-
-gUnknown_0203CDAC: @ 203CDAC
-	.space 0x80
-
+    .align 2
 gUnknown_0203CE2C: @ 203CE2C
 	.space 0x4
 
@@ -1348,12 +1005,7 @@ gUnknown_0203CE8C: @ 203CE8C
 	.space 0x10
 
     .include "src/unk_text_util.o"
-
-gUnknown_0203CEBC: @ 203CEBC
-	.space 0x4
-
-gUnknown_0203CEC0: @ 203CEC0
-	.space 0x4
+    .include "src/item_icon.o"
 
 gUnknown_0203CEC4: @ 203CEC4
 	.space 0x4
@@ -1466,4 +1118,4 @@ gUnknown_0203CF58: @ 203CF58
 gUnknown_0203CF5C: @ 203CF5C
 	.space 0x4
 
-gUnknown_0203CF60: @ 203CF60
+	.include "src/rayquaza_scene.o"

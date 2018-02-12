@@ -7171,7 +7171,7 @@ _0819270A:
 	ldr r4, [sp, 0x24]
 	cmp r4, r0
 	bne _08192784
-	ldr r0, =gTrainerClassToNameIndex
+	ldr r0, =gFacilityClassToTrainerClass
 	adds r0, 0x3C
 	ldrb r5, [r0]
 	b _081927A2
@@ -12991,7 +12991,7 @@ sub_8195938: @ 8195938
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
-	ldr r4, =gTrainers + TRAINER_TUCKER * 0x28 + 0x4 @ Tucker's name
+	ldr r4, =(gTrainers + 806 * 0x28 + 0x4) @ TRAINER_TUCKER name
 _08195940:
 	adds r0, r3, r2
 	adds r1, r2, r4
@@ -16009,6 +16009,44 @@ _0819715C:
 	pop {r0}
 	bx r0
 	.pool
+
 	thumb_func_end sub_8197080
+	thumb_func_start sub_8197184
+sub_8197184: @ 8197184
+	push {r4,r5,lr}
+	adds r4, r1, 0
+	adds r5, r2, 0
+	lsls r0, 24
+	lsrs r0, 24
+	movs r1, 0
+	bl GetWindowAttribute
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r1, =gUnknown_0860EA6C
+	movs r2, 0x80
+	lsls r2, 1
+	lsls r4, 16
+	lsrs r4, 16
+	adds r3, r4, 0
+	bl LoadBgTiles
+	ldr r0, =gUnknown_0860EA4C
+	lsls r5, 20
+	lsrs r5, 16
+	adds r1, r5, 0
+	movs r2, 0x20
+	bl LoadPalette
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_8197184
+
+	thumb_func_start sub_81971C4
+sub_81971C4: @ 81971C4
+	push {lr}
+	bl sub_819645C
+	pop {r0}
+	bx r0
+	thumb_func_end sub_81971C4
 
 	.align 2, 0 @ Don't pad with nop.

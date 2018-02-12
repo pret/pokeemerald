@@ -41,7 +41,7 @@ struct EggHatchData
     u8 unused_9;
     u8 unused_A;
     u16 species;
-    struct TextColor textColor;
+    u8 textColor[3];
 };
 
 extern struct SpriteTemplate gUnknown_0202499C;
@@ -857,10 +857,10 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8
 static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
 {
     FillWindowPixelBuffer(windowId, 0xFF);
-    sEggHatchData->textColor.fgColor = 0;
-    sEggHatchData->textColor.bgColor = 5;
-    sEggHatchData->textColor.shadowColor = 6;
-    AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, &sEggHatchData->textColor, speed, string);
+    sEggHatchData->textColor[0] = 0;
+    sEggHatchData->textColor[1] = 5;
+    sEggHatchData->textColor[2] = 6;
+    AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, sEggHatchData->textColor, speed, string);
 }
 
 u8 GetEggStepsToSubtract(void)

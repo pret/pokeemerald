@@ -581,7 +581,7 @@ _080689E4:
 	beq _080689CE
 _080689F4:
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080689CE
@@ -827,7 +827,7 @@ _08068BE0:
 	ldrb r0, [r1, 0x13]
 	lsls r0, 3
 	orrs r2, r0
-	ldr r1, =gTrainerClassToNameIndex
+	ldr r1, =gFacilityClassToTrainerClass
 	ldr r0, =gUnknown_08329D54
 	lsls r2, 1
 	adds r2, r0

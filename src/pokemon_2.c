@@ -14,10 +14,10 @@ struct Unknown_020249B4
     struct SpriteTemplate* templates;
 };
 
-extern u8 gAbsentBankFlags;
-extern u8 gActiveBank;
-extern u8 gBankAttacker;
-extern u8 gBankTarget;
+extern u8 gAbsentBattlerFlags;
+extern u8 gActiveBattler;
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
 extern u8 gLastUsedAbility;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
@@ -34,9 +34,9 @@ extern const union AnimCmd* const * const gUnknown_0830536C[];
 extern const u8 gText_BadEgg[];
 extern const u8 gText_EggNickname[];
 
-extern u8 GetBankSide(u8 bank);
-extern u8 GetBankByIdentity(u8 bank);
-extern u8 GetBankIdentity(u8 bank);
+extern u8 GetBattlerSide(u8 bank);
+extern u8 GetBattlerAtPosition(u8 bank);
+extern u8 GetBattlerPosition(u8 bank);
 
 u8 CountAliveMonsInBattle(u8 caseId)
 {
@@ -48,21 +48,21 @@ u8 CountAliveMonsInBattle(u8 caseId)
     case BATTLE_ALIVE_EXCEPT_ACTIVE:
         for (i = 0; i < 4; i++)
         {
-            if (i != gActiveBank && !(gAbsentBankFlags & gBitTable[i]))
+            if (i != gActiveBattler && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case BATTLE_ALIVE_ATK_SIDE:
         for (i = 0; i < 4; i++)
         {
-            if (GetBankSide(i) == GetBankSide(gBankAttacker) && !(gAbsentBankFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattlerAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case BATTLE_ALIVE_DEF_SIDE:
         for (i = 0; i < 4; i++)
         {
-            if (GetBankSide(i) == GetBankSide(gBankTarget) && !(gAbsentBankFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattlerTarget) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -75,7 +75,7 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 bank)
 {
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
         return FALSE;
-    if (GetBankSide(bank) != SIDE_PLAYER)
+    if (GetBattlerSide(bank) != B_SIDE_PLAYER)
         return FALSE;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gTrainerBattleOpponent_A == SECRET_BASE_OPPONENT)
         return FALSE;
@@ -86,11 +86,11 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 bank)
 
 u8 GetDefaultMoveTarget(u8 bank)
 {
-    u8 status = GetBankIdentity(bank) & 1;
+    u8 status = GetBattlerPosition(bank) & 1;
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBankByIdentity(status);
+        return GetBattlerAtPosition(status);
     if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > 1)
     {
         u8 val;
@@ -99,14 +99,14 @@ u8 GetDefaultMoveTarget(u8 bank)
             val = status ^ 2;
         else
             val = status;
-        return GetBankByIdentity(val);
+        return GetBattlerAtPosition(val);
     }
     else
     {
-        if ((gAbsentBankFlags & gBitTable[status]))
-            return GetBankByIdentity(status ^ 2);
+        if ((gAbsentBattlerFlags & gBitTable[status]))
+            return GetBattlerAtPosition(status ^ 2);
         else
-            return GetBankByIdentity(status);
+            return GetBattlerAtPosition(status);
     }
 }
 
@@ -332,7 +332,7 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8* data)
             ret = mon->defense;
         break;
     case MON_DATA_SPEED:
-        ret = GetDeoxysStat(mon, STAT_SPD);
+        ret = GetDeoxysStat(mon, STAT_SPEED);
         if (!ret)
             ret = mon->speed;
         break;
@@ -1197,45 +1197,45 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gBattleResources->secretBase->partySpecies[i])
+        if (gBattleResources->secretBase->party.species[i])
         {
             CreateMon(&gEnemyParty[i],
-                gBattleResources->secretBase->partySpecies[i],
-                gBattleResources->secretBase->partyLevels[i],
+                gBattleResources->secretBase->party.species[i],
+                gBattleResources->secretBase->party.levels[i],
                 15,
                 1,
-                gBattleResources->secretBase->partyPersonality[i],
+                gBattleResources->secretBase->party.personality[i],
                 2,
                 0);
 
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleResources->secretBase->partyHeldItems[i]);
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleResources->secretBase->party.heldItems[i]);
 
             for (j = 0; j < 6; j++)
-                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gBattleResources->secretBase->partyEVs[i]);
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gBattleResources->secretBase->party.EVs[i]);
 
             for (j = 0; j < 4; j++)
             {
-                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, &gBattleResources->secretBase->partyMoves[i * 4 + j]);
-                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gBattleResources->secretBase->partyMoves[i * 4 + j]].pp);
+                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, &gBattleResources->secretBase->party.moves[i * 4 + j]);
+                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gBattleResources->secretBase->party.moves[i * 4 + j]].pp);
             }
         }
     }
 }
 
-extern const u8 gUnknown_0831F578[];
-extern const u8 gTrainerClassToNameIndex[];
+extern const u8 gFacilityClassToPicIndex[];
+extern const u8 gFacilityClassToTrainerClass[];
 extern const u8 gSecretBaseTrainerClasses[][5];
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {
     u8 trainerClass = gSecretBaseTrainerClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
-    return gUnknown_0831F578[trainerClass];
+    return gFacilityClassToPicIndex[trainerClass];
 }
 
 u8 GetSecretBaseTrainerNameIndex(void)
 {
     u8 trainerClass = gSecretBaseTrainerClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
-    return gTrainerClassToNameIndex[trainerClass];
+    return gFacilityClassToTrainerClass[trainerClass];
 }
 
 bool8 IsPlayerPartyAndPokemonStorageFull(void)
@@ -1353,7 +1353,7 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     StringCopy10(gBattleMons[bank].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[bank].otName);
 
-    hpSwitchout = &gBattleStruct->hpOnSwitchout[GetBankSide(bank)];
+    hpSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(bank)];
     *hpSwitchout = gBattleMons[bank].hp;
 
     for (i = 0; i < 8; i++)

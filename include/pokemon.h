@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
+#include "constants/pokemon.h"
+
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
@@ -107,81 +109,10 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
-#define TYPE_NORMAL   0x00
-#define TYPE_FIGHTING 0x01
-#define TYPE_FLYING   0x02
-#define TYPE_POISON   0x03
-#define TYPE_GROUND   0x04
-#define TYPE_ROCK     0x05
-#define TYPE_BUG      0x06
-#define TYPE_GHOST    0x07
-#define TYPE_STEEL    0x08
-#define TYPE_MYSTERY  0x09
-#define TYPE_FIRE     0x0a
-#define TYPE_WATER    0x0b
-#define TYPE_GRASS    0x0c
-#define TYPE_ELECTRIC 0x0d
-#define TYPE_PSYCHIC  0x0e
-#define TYPE_ICE      0x0f
-#define TYPE_DRAGON   0x10
-#define TYPE_DARK     0x11
-
-#define NUMBER_OF_MON_TYPES     0x12
-
-#define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
 #define MAX_MON_LEVEL 100
-
-enum
-{
-    EGG_GROUP_NONE,
-    EGG_GROUP_MONSTER,
-    EGG_GROUP_WATER_1,
-    EGG_GROUP_BUG,
-    EGG_GROUP_FLYING,
-    EGG_GROUP_FIELD,
-    EGG_GROUP_FAIRY,
-    EGG_GROUP_GRASS,
-    EGG_GROUP_HUMAN_LIKE,
-    EGG_GROUP_WATER_3,
-    EGG_GROUP_MINERAL,
-    EGG_GROUP_AMORPHOUS,
-    EGG_GROUP_WATER_2,
-    EGG_GROUP_DITTO,
-    EGG_GROUP_DRAGON,
-    EGG_GROUP_UNDISCOVERED
-};
-
-enum
-{
-    NATURE_HARDY,
-    NATURE_LONELY,
-    NATURE_BRAVE,
-    NATURE_ADAMANT,
-    NATURE_NAUGHTY,
-    NATURE_BOLD,
-    NATURE_DOCILE,
-    NATURE_RELAXED,
-    NATURE_IMPISH,
-    NATURE_LAX,
-    NATURE_TIMID,
-    NATURE_HASTY,
-    NATURE_SERIOUS,
-    NATURE_JOLLY,
-    NATURE_NAIVE,
-    NATURE_MODEST,
-    NATURE_MILD,
-    NATURE_QUIET,
-    NATURE_BASHFUL,
-    NATURE_RASH,
-    NATURE_CALM,
-    NATURE_GENTLE,
-    NATURE_SASSY,
-    NATURE_CAREFUL,
-    NATURE_QUIRKY,
-};
 
 struct PokemonSubstruct0
 {
@@ -375,28 +306,6 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
-enum
-{
-    STAT_STAGE_HP,       // 0
-    STAT_STAGE_ATK,      // 1
-    STAT_STAGE_DEF,      // 2
-    STAT_STAGE_SPEED,    // 3
-    STAT_STAGE_SPATK,    // 4
-    STAT_STAGE_SPDEF,    // 5
-    STAT_STAGE_ACC,      // 6
-    STAT_STAGE_EVASION,  // 7
-};
-
-enum
-{
-    STAT_HP,     // 0
-    STAT_ATK,    // 1
-    STAT_DEF,    // 2
-    STAT_SPD,    // 3
-    STAT_SPATK,  // 4
-    STAT_SPDEF,  // 5
-};
-
 struct BaseStats
 {
  /* 0x00 */ u8 baseHP;
@@ -511,18 +420,13 @@ struct Evolution
 
 #define EVOS_PER_MON 5
 
-struct EvolutionData
-{
-    struct Evolution evolutions[EVOS_PER_MON];
-};
-
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern const struct BaseStats gBaseStats[];
 extern const u8 *const gItemEffectTable[];
-extern const struct EvolutionData gEvolutionTable[];
+extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
@@ -631,7 +535,7 @@ bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 bool8 IsTradedMon(struct Pokemon *mon);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
-s32 GetBankMultiplayerId(u16 a1);
+s32 GetBattlerMultiplayerId(u16 a1);
 bool16 sub_806D82C(u8 id);
 u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
 void sub_8068AA4(void); // sets stats for deoxys

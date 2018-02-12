@@ -21,7 +21,7 @@
 #include "constants/songs.h"
 #include "overworld.h"
 #include "battle_message.h"
-#include "battle_string_ids.h"
+#include "constants/battle_string_ids.h"
 #include "gpu_regs.h"
 #include "bg.h"
 #include "link.h"
@@ -48,13 +48,11 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern u8 gBattleTerrain;
 extern struct SpriteTemplate gUnknown_0202499C;
 extern bool8 gAffineAnimsDisabled;
 extern u16 gMoveToLearn;
 extern const u8 gSpeciesNames[][11];
 
-extern u8 gBattleCommunication[];
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID      gBattleCommunication[2]
 
@@ -110,7 +108,7 @@ static const u16 sUnknown_085B5884[] = INCBIN_U16("graphics/evolution_scene/tran
 
 static const u8 Text_ShedinjaJapaneseName[] = _("ヌケニン");
 
-static const u8 sUnknown_085B58C9[][4] = 
+static const u8 sUnknown_085B58C9[][4] =
 {
     { 0x00, 0x0C, 0x01, 0x06 },
     { 0x0D, 0x24, 0x05, 0x02 },
@@ -572,16 +570,16 @@ static void CB2_TradeEvolutionSceneUpdate(void)
 static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
 {
     u32 data = 0;
-    if (gEvolutionTable[preEvoSpecies].evolutions[0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < 6)
+    if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < 6)
     {
         s32 i;
-        struct Pokemon* Shedinja = &gPlayerParty[gPlayerPartyCount];
-        const struct EvolutionData* evoTable;
-        const struct EvolutionData* evos;
+        struct Pokemon* shedinja = &gPlayerParty[gPlayerPartyCount];
+        const struct Evolution *evos;
+        const struct Evolution *evos2;
 
         CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
-        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, (&gEvolutionTable[preEvoSpecies].evolutions[1].targetSpecies));
-        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_NICKNAME, (gSpeciesNames[gEvolutionTable[preEvoSpecies].evolutions[1].targetSpecies]));
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, (&gEvolutionTable[preEvoSpecies][1].targetSpecies));
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_NICKNAME, (gSpeciesNames[gEvolutionTable[preEvoSpecies][1].targetSpecies]));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_HELD_ITEM, (&data));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MARKINGS, (&data));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_10, (&data));
@@ -599,15 +597,16 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         CalculatePlayerPartyCount();
 
         // can't match it otherwise, ehh
-        evoTable = gEvolutionTable;
-        evos = evoTable + preEvoSpecies;
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos->evolutions[1].targetSpecies), FLAG_SET_SEEN);
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos->evolutions[1].targetSpecies), FLAG_SET_CAUGHT);
+        evos2 = gEvolutionTable[0];
+        evos = evos2 + EVOS_PER_MON * preEvoSpecies;
 
-        if (GetMonData(Shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
-            && GetMonData(Shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos[1].targetSpecies), FLAG_SET_SEEN);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos[1].targetSpecies), FLAG_SET_CAUGHT);
+
+        if (GetMonData(shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
+            && GetMonData(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
             && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
-                SetMonData(Shedinja, MON_DATA_NICKNAME, Text_ShedinjaJapaneseName);
+                SetMonData(shedinja, MON_DATA_NICKNAME, Text_ShedinjaJapaneseName);
     }
 }
 

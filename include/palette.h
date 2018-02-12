@@ -67,5 +67,6 @@ void BeginFastPaletteFade(u8);
 void BeginHardwarePaletteFade(u8, u8, u8, u8, u8);
 void BlendPalettes(u32, u8, u16);
 void BlendPalettesUnfaded(u32, u8, u16);
+void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7);
 
 #endif // GUARD_PALETTE_H

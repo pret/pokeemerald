@@ -204,7 +204,7 @@ s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
     return -1;  // no free DMA request was found
 }
 
-int CheckForSpaceForDma3Request(s16 index)
+s16 CheckForSpaceForDma3Request(s16 index)
 {
     int i = 0;
 

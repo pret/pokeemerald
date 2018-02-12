@@ -32,7 +32,7 @@ extern bool32 InUnionRoom(void);
 extern bool8 InBattlePike(void);
 extern bool8 InBattlePyramid(void);
 extern bool8 InMultiBattleRoom(void);
-extern void sub_81973FC(u8 windowId, u8 a1);
+extern void NewMenuHelpers_DrawStdWindowFrame(u8 windowId, u8 a1);
 extern void sub_8198070(u8 windowId, u8 a1);
 
 // this file's functions
@@ -62,6 +62,11 @@ EWRAM_DATA u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA u8 sStartMenuCursorPos = 0;
 EWRAM_DATA u8 sNumStartMenuActions = 0;
 EWRAM_DATA u8 sCurrentStartMenuActions[9] = {0};
+EWRAM_DATA u8 gUnknown_02037619[2] = {0};
+EWRAM_DATA bool8 (*gUnknown_0203761C)(void) = NULL;
+EWRAM_DATA u8 gUnknown_02037620 = 0;
+EWRAM_DATA u8 gUnknown_02037621 = 0;
+EWRAM_DATA u8 gUnknown_02037622 = 0;
 
 // const rom data
 static const struct WindowTemplate gSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
@@ -120,6 +125,13 @@ const struct WindowTemplate gUnknown_085105AC[] =
 const struct WindowTemplate gUnknown_085105BC = {0, 1, 1, 0xE, 0xA, 0xF, 8};
 
 // code
+void SetDexPokemonPokenavFlags(void) // unused
+{
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKENAV_GET);
+}
+
 void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;
@@ -224,7 +236,7 @@ void DisplaySafariBallsWindow(void)
 {
     sSafariBallsWindowId = AddWindow(&gSafariBallsWindowTemplate);
     PutWindowTilemap(sSafariBallsWindowId);
-    sub_81973FC(sSafariBallsWindowId, 0);
+    NewMenuHelpers_DrawStdWindowFrame(sSafariBallsWindowId, 0);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
     PrintTextOnWindow(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
@@ -239,7 +251,7 @@ void DisplayPyramidFloorWindow(void)
     else
         sBattlePyramidFloorWindowId = AddWindow(&gPyramidFloorWindowTemplate_2);
     PutWindowTilemap(sBattlePyramidFloorWindowId);
-    sub_81973FC(sBattlePyramidFloorWindowId, 0);
+    NewMenuHelpers_DrawStdWindowFrame(sBattlePyramidFloorWindowId, 0);
     StringCopy(gStringVar1, sPyramindFloorNames[gSaveBlock2Ptr->field_CAA[4]]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     PrintTextOnWindow(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);

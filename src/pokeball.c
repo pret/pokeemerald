@@ -15,12 +15,6 @@
 #include "util.h"
 #include "graphics.h"
 
-extern bool8 gDoingBattleAnim;
-extern u8 gActiveBank;
-extern u8 gBankTarget;
-extern u16 gBattlePartyID[];
-extern u8 gBankSpriteIds[];
-extern u8 gHealthBoxesIds[];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 // this file's functions
@@ -334,12 +328,12 @@ u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow)
     u8 taskId;
 
     gDoingBattleAnim = TRUE;
-    gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive = 1;
+    gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive = 1;
 
     taskId = CreateTask(Task_DoPokeballSendOutAnim, 5);
     gTasks[taskId].tPan = pan;
     gTasks[taskId].tThrowId = kindOfThrow;
-    gTasks[taskId].tBank = gActiveBank;
+    gTasks[taskId].tBank = gActiveBattler;
 
     return 0;
 }
@@ -363,10 +357,10 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     throwCaseId = gTasks[taskId].tThrowId;
     bank = gTasks[taskId].tBank;
 
-    if (GetBankSide(bank) != SIDE_PLAYER)
-        itemId = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_POKEBALL);
+    if (GetBattlerSide(bank) != B_SIDE_PLAYER)
+        itemId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_POKEBALL);
     else
-        itemId = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_POKEBALL);
+        itemId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_POKEBALL);
 
     ballId = ItemIdToBallId(itemId);
     LoadBallGfx(ballId);
@@ -378,25 +372,25 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     switch (throwCaseId)
     {
     case POKEBALL_PLAYER_SENDOUT:
-        gBankTarget = bank;
+        gBattlerTarget = bank;
         gSprites[ballSpriteId].pos1.x = 24;
         gSprites[ballSpriteId].pos1.y = 68;
         gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
         break;
     case POKEBALL_OPPONENT_SENDOUT:
-        gSprites[ballSpriteId].pos1.x = GetBankPosition(bank, BANK_X_POS);
-        gSprites[ballSpriteId].pos1.y = GetBankPosition(bank, BANK_Y_POS) + 24;
-        gBankTarget = bank;
+        gSprites[ballSpriteId].pos1.x = GetBattlerSpriteCoord(bank, BANK_X_POS);
+        gSprites[ballSpriteId].pos1.y = GetBattlerSpriteCoord(bank, BANK_Y_POS) + 24;
+        gBattlerTarget = bank;
         gSprites[ballSpriteId].data[0] = 0;
         gSprites[ballSpriteId].callback = SpriteCB_OpponentMonSendOut;
         break;
     default:
-        gBankTarget = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         notSendOut = TRUE;
         break;
     }
 
-    gSprites[ballSpriteId].sBank = gBankTarget;
+    gSprites[ballSpriteId].sBank = gBattlerTarget;
     if (!notSendOut)
     {
         DestroyTask(taskId);
@@ -405,12 +399,12 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     // this will perform an unused ball throw animation
     gSprites[ballSpriteId].data[0] = 0x22;
-    gSprites[ballSpriteId].data[2] = GetBankPosition(gBankTarget, BANK_X_POS);
-    gSprites[ballSpriteId].data[4] = GetBankPosition(gBankTarget, BANK_Y_POS) - 16;
+    gSprites[ballSpriteId].data[2] = GetBattlerSpriteCoord(gBattlerTarget, BANK_X_POS);
+    gSprites[ballSpriteId].data[4] = GetBattlerSpriteCoord(gBattlerTarget, BANK_Y_POS) - 16;
     gSprites[ballSpriteId].data[5] = -40;
     sub_80A68D4(&gSprites[ballSpriteId]);
     gSprites[ballSpriteId].oam.affineParam = taskId;
-    gTasks[taskId].tOpponentBank = gBankTarget;
+    gTasks[taskId].tOpponentBank = gBattlerTarget;
     gTasks[taskId].func = TaskDummy;
     PlaySE(SE_NAGERU);
 }
@@ -458,9 +452,9 @@ static void sub_80756E0(struct Sprite *sprite)
     {
         sprite->data[5] = 0;
         sprite->callback = sub_807574C;
-        StartSpriteAffineAnim(&gSprites[gBankSpriteIds[sprite->sBank]], 2);
-        AnimateSprite(&gSprites[gBankSpriteIds[sprite->sBank]]);
-        gSprites[gBankSpriteIds[sprite->sBank]].data[1] = 0;
+        StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[sprite->sBank]], 2);
+        AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->sBank]]);
+        gSprites[gBattlerSpriteIds[sprite->sBank]].data[1] = 0;
     }
 }
 
@@ -469,17 +463,17 @@ static void sub_807574C(struct Sprite *sprite)
     sprite->data[5]++;
     if (sprite->data[5] == 11)
         PlaySE(SE_SUIKOMU);
-    if (gSprites[gBankSpriteIds[sprite->sBank]].affineAnimEnded)
+    if (gSprites[gBattlerSpriteIds[sprite->sBank]].affineAnimEnded)
     {
         StartSpriteAnim(sprite, 2);
-        gSprites[gBankSpriteIds[sprite->sBank]].invisible = TRUE;
+        gSprites[gBattlerSpriteIds[sprite->sBank]].invisible = TRUE;
         sprite->data[5] = 0;
         sprite->callback = sub_80757E4;
     }
     else
     {
-        gSprites[gBankSpriteIds[sprite->sBank]].data[1] += 0x60;
-        gSprites[gBankSpriteIds[sprite->sBank]].pos2.y = -gSprites[gBankSpriteIds[sprite->sBank]].data[1] >> 8;
+        gSprites[gBattlerSpriteIds[sprite->sBank]].data[1] += 0x60;
+        gSprites[gBattlerSpriteIds[sprite->sBank]].pos2.y = -gSprites[gBattlerSpriteIds[sprite->sBank]].data[1] >> 8;
     }
 }
 
@@ -755,19 +749,19 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         u16 wantedCryCase;
         u8 taskId;
 
-        if (GetBankSide(bank) != SIDE_PLAYER)
+        if (GetBattlerSide(bank) != B_SIDE_PLAYER)
         {
-            mon = &gEnemyParty[gBattlePartyID[bank]];
+            mon = &gEnemyParty[gBattlerPartyIndexes[bank]];
             pan = 25;
         }
         else
         {
-            mon = &gPlayerParty[gBattlePartyID[bank]];
+            mon = &gPlayerParty[gBattlerPartyIndexes[bank]];
             pan = -25;
         }
 
         species = GetMonData(mon, MON_DATA_SPECIES);
-        if ((bank == GetBankByIdentity(IDENTITY_PLAYER_MON1) || bank == GetBankByIdentity(IDENTITY_OPPONENT_MON1))
+        if ((bank == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) || bank == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -783,7 +777,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
         if (!IsDoubleBattle() || !gBattleSpritesDataPtr->animationData->field_9_x1)
             wantedCryCase = 0;
-        else if (bank == GetBankByIdentity(IDENTITY_PLAYER_MON1) || bank == GetBankByIdentity(IDENTITY_OPPONENT_MON1))
+        else if (bank == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) || bank == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
             wantedCryCase = 1;
         else
             wantedCryCase = 2;
@@ -795,21 +789,21 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         gTasks[taskId].tCryTaskPan = pan;
         gTasks[taskId].tCryTaskWantedCry = wantedCryCase;
         gTasks[taskId].tCryTaskBank = bank;
-        gTasks[taskId].tCryTaskMonSpriteId = gBankSpriteIds[sprite->sBank];
+        gTasks[taskId].tCryTaskMonSpriteId = gBattlerSpriteIds[sprite->sBank];
         gTasks[taskId].tCryTaskMonPtr1 = (u32)(mon) >> 0x10;
         gTasks[taskId].tCryTaskMonPtr2 = (u32)(mon);
         gTasks[taskId].tCryTaskState = 0;
     }
 
-    StartSpriteAffineAnim(&gSprites[gBankSpriteIds[sprite->sBank]], 1);
+    StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[sprite->sBank]], 1);
 
-    if (GetBankSide(sprite->sBank) == SIDE_OPPONENT)
-        gSprites[gBankSpriteIds[sprite->sBank]].callback = sub_8039B58;
+    if (GetBattlerSide(sprite->sBank) == B_SIDE_OPPONENT)
+        gSprites[gBattlerSpriteIds[sprite->sBank]].callback = sub_8039B58;
     else
-        gSprites[gBankSpriteIds[sprite->sBank]].callback = sub_8039E44;
+        gSprites[gBattlerSpriteIds[sprite->sBank]].callback = sub_8039E44;
 
-    AnimateSprite(&gSprites[gBankSpriteIds[sprite->sBank]]);
-    gSprites[gBankSpriteIds[sprite->sBank]].data[1] = 0x1000;
+    AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->sBank]]);
+    gSprites[gBattlerSpriteIds[sprite->sBank]].data[1] = 0x1000;
 }
 
 #undef tCryTaskSpecies
@@ -836,35 +830,35 @@ static void HandleBallAnimEnd(struct Sprite *sprite)
     bool8 affineAnimEnded = FALSE;
     u8 bank = sprite->sBank;
 
-    gSprites[gBankSpriteIds[bank]].invisible = FALSE;
+    gSprites[gBattlerSpriteIds[bank]].invisible = FALSE;
     if (sprite->animEnded)
         sprite->invisible = TRUE;
-    if (gSprites[gBankSpriteIds[bank]].affineAnimEnded)
+    if (gSprites[gBattlerSpriteIds[bank]].affineAnimEnded)
     {
-        StartSpriteAffineAnim(&gSprites[gBankSpriteIds[bank]], 0);
+        StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[bank]], 0);
         affineAnimEnded = TRUE;
     }
     else
     {
-        gSprites[gBankSpriteIds[bank]].data[1] -= 288;
-        gSprites[gBankSpriteIds[bank]].pos2.y = gSprites[gBankSpriteIds[bank]].data[1] >> 8;
+        gSprites[gBattlerSpriteIds[bank]].data[1] -= 288;
+        gSprites[gBattlerSpriteIds[bank]].pos2.y = gSprites[gBattlerSpriteIds[bank]].data[1] >> 8;
     }
     if (sprite->animEnded && affineAnimEnded)
     {
         s32 i, doneBanks;
 
-        gSprites[gBankSpriteIds[bank]].pos2.y = 0;
+        gSprites[gBattlerSpriteIds[bank]].pos2.y = 0;
         gDoingBattleAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[bank].ballAnimActive = 0;
         FreeSpriteOamMatrix(sprite);
         DestroySprite(sprite);
 
-        for (doneBanks = 0, i = 0; i < BATTLE_BANKS_COUNT; i++)
+        for (doneBanks = 0, i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             if (gBattleSpritesDataPtr->healthBoxesData[i].ballAnimActive == 0)
                 doneBanks++;
         }
-        if (doneBanks == BATTLE_BANKS_COUNT)
+        if (doneBanks == MAX_BATTLERS_COUNT)
         {
             for (i = 0; i < POKEBALL_COUNT; i++)
                 FreeBallGfx(i);
@@ -889,8 +883,8 @@ static void sub_80760F8(struct Sprite *sprite)
     }
     else if (sprite->data[4] == 315)
     {
-        FreeOamMatrix(gSprites[gBankSpriteIds[sprite->sBank]].oam.matrixNum);
-        DestroySprite(&gSprites[gBankSpriteIds[sprite->sBank]]);
+        FreeOamMatrix(gSprites[gBattlerSpriteIds[sprite->sBank]].oam.matrixNum);
+        DestroySprite(&gSprites[gBattlerSpriteIds[sprite->sBank]]);
         DestroySpriteAndFreeResources(sprite);
         if (gMain.inBattle)
             gBattleSpritesDataPtr->healthBoxesData[bank].ballAnimActive = 0;
@@ -900,8 +894,8 @@ static void sub_80760F8(struct Sprite *sprite)
 static void SpriteCB_PlayerMonSendOut_1(struct Sprite *sprite)
 {
     sprite->data[0] = 25;
-    sprite->data[2] = GetBankPosition(sprite->sBank, 2);
-    sprite->data[4] = GetBankPosition(sprite->sBank, 3) + 24;
+    sprite->data[2] = GetBattlerSpriteCoord(sprite->sBank, 2);
+    sprite->data[4] = GetBattlerSpriteCoord(sprite->sBank, 3) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->sBank;
     sub_80A68D4(sprite);
@@ -956,7 +950,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
             sprite->data[0] = 0;
 
             if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1
-             && sprite->sBank == GetBankByIdentity(IDENTITY_PLAYER_MON2))
+             && sprite->sBank == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT))
                 sprite->callback = SpriteCB_ReleaseMon2FromBall;
             else
                 sprite->callback = SpriteCB_ReleaseMonFromBall;
@@ -982,7 +976,7 @@ static void SpriteCB_OpponentMonSendOut(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
         if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1
-         && sprite->sBank == GetBankByIdentity(IDENTITY_OPPONENT_MON2))
+         && sprite->sBank == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))
             sprite->callback = SpriteCB_ReleaseMon2FromBall;
         else
             sprite->callback = SpriteCB_ReleaseMonFromBall;
@@ -1183,14 +1177,14 @@ static void DestroySpriteAndFreeResources_(struct Sprite *sprite)
 
 void sub_8076918(u8 bank)
 {
-    struct Sprite *healthboxSprite = &gSprites[gHealthBoxesIds[bank]];
+    struct Sprite *healthboxSprite = &gSprites[gHealthboxSpriteIds[bank]];
 
     healthboxSprite->data[0] = 5;
     healthboxSprite->data[1] = 0;
     healthboxSprite->pos2.x = 0x73;
     healthboxSprite->pos2.y = 0;
     healthboxSprite->callback = sub_80769CC;
-    if (GetBankSide(bank) != SIDE_PLAYER)
+    if (GetBattlerSide(bank) != B_SIDE_PLAYER)
     {
         healthboxSprite->data[0] = -healthboxSprite->data[0];
         healthboxSprite->data[1] = -healthboxSprite->data[1];
@@ -1198,7 +1192,7 @@ void sub_8076918(u8 bank)
         healthboxSprite->pos2.y = -healthboxSprite->pos2.y;
     }
     gSprites[healthboxSprite->data[5]].callback(&gSprites[healthboxSprite->data[5]]);
-    if (GetBankIdentity(bank) == IDENTITY_PLAYER_MON2)
+    if (GetBattlerPosition(bank) == B_POSITION_PLAYER_RIGHT)
         healthboxSprite->callback = sub_80769A8;
 }
 
@@ -1226,7 +1220,7 @@ void DoHitAnimHealthboxEffect(u8 bank)
 
     spriteId = CreateInvisibleSpriteWithCallback(SpriteCB_HitAnimHealthoxEffect);
     gSprites[spriteId].data[0] = 1;
-    gSprites[spriteId].data[1] = gHealthBoxesIds[bank];
+    gSprites[spriteId].data[1] = gHealthboxSpriteIds[bank];
     gSprites[spriteId].callback = SpriteCB_HitAnimHealthoxEffect;
 }
 
@@ -1275,8 +1269,8 @@ void FreeBallGfx(u8 ballId)
 
 static u16 GetBankPokeballItemId(u8 bank)
 {
-    if (GetBankSide(bank) == SIDE_PLAYER)
-        return GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_POKEBALL);
+    if (GetBattlerSide(bank) == B_SIDE_PLAYER)
+        return GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_POKEBALL);
     else
-        return GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_POKEBALL);
+        return GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_POKEBALL);
 }

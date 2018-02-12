@@ -164,7 +164,7 @@ u16 PrintTextOnWindow(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 spee
     subPrinter.letterSpacing = gFonts[fontId].letterSpacing;
     subPrinter.lineSpacing = gFonts[fontId].lineSpacing;
     subPrinter.fontColor_l = gFonts[fontId].fontColor_l;
-    subPrinter.fontColor_h = gFonts[fontId].fontColor_h;
+    subPrinter.fgColor = gFonts[fontId].fgColor;
     subPrinter.bgColor = gFonts[fontId].bgColor;
     subPrinter.shadowColor = gFonts[fontId].shadowColor;
     return AddTextPrinter(&subPrinter, speed, callback);
@@ -194,7 +194,7 @@ bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*ca
     gTempTextPrinter.minLetterSpacing = 0;
     gTempTextPrinter.japanese = 0;
 
-    GenerateFontHalfRowLookupTable(textSubPrinter->fontColor_h, textSubPrinter->bgColor, textSubPrinter->shadowColor);
+    GenerateFontHalfRowLookupTable(textSubPrinter->fgColor, textSubPrinter->bgColor, textSubPrinter->shadowColor);
     if (speed != TEXT_SPEED_FF && speed != 0x0)
     {
         --gTempTextPrinter.text_speed;
@@ -3517,7 +3517,7 @@ u8 GetFontAttribute(u8 fontId, u8 attributeId)
             result = gFontInfos[fontId].fontColor_l;
             break;
         case 5:
-            result = gFontInfos[fontId].fontColor_h;
+            result = gFontInfos[fontId].fgColor;
             break;
         case 6:
             result = gFontInfos[fontId].bgColor;

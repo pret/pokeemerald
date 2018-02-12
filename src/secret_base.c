@@ -9,10 +9,10 @@
 #include "window.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
 #include "menu_indicators.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "sound.h"
 #include "overworld.h"
 #include "fieldmap.h"
@@ -32,6 +32,7 @@
 #include "international_string_util.h"
 #include "event_data.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "rom6.h"
 #include "decoration.h"
 #include "link.h"
@@ -711,237 +712,45 @@ u8 sub_80E98AC(struct Pokemon *pokemon)
     return evTotal / 6;
 }
 
-#ifdef NONMATCHING
-// This function is a meme
 void sub_80E9914(void)
 {
-    u32 zero;
-    u32 *personality;
     u16 partyIdx;
     u16 moveIdx;
     u16 sbPartyIdx;
-    u16 *species;
-    u16 *items;
-    u16 *moves;
-    u8 *levels;
-    u8 *evs;
+    struct SecretBaseParty *party;
 
     sbPartyIdx = 0;
-    personality = gSaveBlock1Ptr->secretBases[0].partyPersonality;
+    party = &gSaveBlock1Ptr->secretBases[0].party;
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0)
     {
-        partyIdx = 0;
-        moves = gSaveBlock1Ptr->secretBases[0].partyMoves;
-        species = gSaveBlock1Ptr->secretBases[0].partySpecies;
-        items = gSaveBlock1Ptr->secretBases[0].partyHeldItems;
-        levels = gSaveBlock1Ptr->secretBases[0].partyLevels;
-        evs = gSaveBlock1Ptr->secretBases[0].partyEVs;
-        zero = 0;
-        for (partyIdx = 0; partyIdx < PARTY_SIZE; partyIdx ++)
+        for (partyIdx = 0; partyIdx < PARTY_SIZE; partyIdx++)
         {
-            for (moveIdx = 0; moveIdx < 4; moveIdx ++)
+            for (moveIdx = 0; moveIdx < 4; moveIdx++)
             {
-                moves[partyIdx * 4 + moveIdx] = zero;
+                party->moves[partyIdx * 4 + moveIdx] = 0;
             }
-            species[partyIdx] = zero;
-            items[partyIdx] = zero;
-            levels[partyIdx] = zero;
-            personality[partyIdx] = zero;
-            evs[partyIdx] = zero;
-            if (GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_EGG))
+            party->species[partyIdx] = 0;
+            party->heldItems[partyIdx] = 0;
+            party->levels[partyIdx] = 0;
+            party->personality[partyIdx] = 0;
+            party->EVs[partyIdx] = 0;
+            if (GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES) != SPECIES_NONE
+                && !GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_EGG))
             {
-                for (moveIdx = 0; moveIdx < 4; moveIdx ++)
+                for (moveIdx = 0; moveIdx < 4; moveIdx++)
                 {
-                    moves[sbPartyIdx * 4 + moveIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_MOVE1 + moveIdx);
+                    party->moves[sbPartyIdx * 4 + moveIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_MOVE1 + moveIdx);
                 }
-                species[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
-                items[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_HELD_ITEM);
-                levels[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_LEVEL);
-                personality[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
-                evs[sbPartyIdx] = sub_80E98AC(&gPlayerParty[partyIdx]);
-                sbPartyIdx ++;
+                party->species[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
+                party->heldItems[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_HELD_ITEM);
+                party->levels[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_LEVEL);
+                party->personality[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
+                party->EVs[sbPartyIdx] = sub_80E98AC(&gPlayerParty[partyIdx]);
+                sbPartyIdx++;
             }
         }
     }
 }
-#else
-ASM_DIRECT void sub_80E9914(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0x24\n"
-                    "\tmovs r0, 0\n"
-                    "\tmov r10, r0\n"
-                    "\tldr r0, =gSaveBlock1Ptr\n"
-                    "\tldr r1, [r0]\n"
-                    "\tldr r2, =0x00001ad0\n"
-                    "\tadds r2, r1, r2\n"
-                    "\tstr r2, [sp]\n"
-                    "\tldr r3, =0x00001a9c\n"
-                    "\tadds r0, r1, r3\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _080E993A\n"
-                    "\tb _080E9A60\n"
-                    "_080E993A:\n"
-                    "\tmovs r6, 0\n"
-                    "\tldr r7, =0x00001ae8\n"
-                    "\tadds r7, r1, r7\n"
-                    "\tstr r7, [sp, 0x14]\n"
-                    "\tldr r0, =0x00001b18\n"
-                    "\tadds r0, r1, r0\n"
-                    "\tstr r0, [sp, 0xC]\n"
-                    "\tldr r2, =0x00001b24\n"
-                    "\tadds r2, r1, r2\n"
-                    "\tstr r2, [sp, 0x10]\n"
-                    "\tadds r3, 0x94\n"
-                    "\tadds r3, r1, r3\n"
-                    "\tstr r3, [sp, 0x18]\n"
-                    "\tldr r7, =0x00001b36\n"
-                    "\tadds r7, r1, r7\n"
-                    "\tstr r7, [sp, 0x1C]\n"
-                    "\tmov r9, r6\n"
-                    "_080E995C:\n"
-                    "\tmovs r4, 0\n"
-                    "\tlsls r5, r6, 2\n"
-                    "\tlsls r3, r6, 1\n"
-                    "\tldr r0, =gPlayerParty\n"
-                    "\tmov r8, r0\n"
-                    "\tadds r1, r6, 0x1\n"
-                    "\tstr r1, [sp, 0x4]\n"
-                    "\tadds r2, r5, 0\n"
-                    "\tldr r1, [sp, 0x14]\n"
-                    "_080E996E:\n"
-                    "\tadds r0, r2, r4\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r0, r1, r0\n"
-                    "\tmov r7, r9\n"
-                    "\tstrh r7, [r0]\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r4, r0, 16\n"
-                    "\tcmp r4, 0x3\n"
-                    "\tbls _080E996E\n"
-                    "\tldr r1, [sp, 0xC]\n"
-                    "\tadds r0, r1, r3\n"
-                    "\tmov r2, r9\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tldr r7, [sp, 0x10]\n"
-                    "\tadds r0, r7, r3\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tldr r1, [sp, 0x18]\n"
-                    "\tadds r0, r1, r6\n"
-                    "\tmov r2, r9\n"
-                    "\tstrb r2, [r0]\n"
-                    "\tldr r3, [sp]\n"
-                    "\tadds r0, r3, r5\n"
-                    "\tmov r7, r9\n"
-                    "\tstr r7, [r0]\n"
-                    "\tldr r1, [sp, 0x1C]\n"
-                    "\tadds r0, r1, r6\n"
-                    "\tstrb r7, [r0]\n"
-                    "\tmovs r2, 0x64\n"
-                    "\tadds r5, r6, 0\n"
-                    "\tmuls r5, r2\n"
-                    "\tmov r3, r8\n"
-                    "\tadds r4, r5, r3\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0xB\n"
-                    "\tbl GetMonData\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _080E9A54\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x2D\n"
-                    "\tbl GetMonData\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _080E9A54\n"
-                    "\tmovs r4, 0\n"
-                    "\tmov r7, r10\n"
-                    "\tlsls r7, 2\n"
-                    "\tmov r8, r7\n"
-                    "\tmov r0, r10\n"
-                    "\tlsls r7, r0, 1\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstr r0, [sp, 0x8]\n"
-                    "\tldr r2, =gPlayerParty\n"
-                    "_080E99DA:\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tadds r1, 0xD\n"
-                    "\tadds r0, r5, r2\n"
-                    "\tstr r2, [sp, 0x20]\n"
-                    "\tbl GetMonData\n"
-                    "\tmov r3, r8\n"
-                    "\tadds r1, r3, r4\n"
-                    "\tlsls r1, 1\n"
-                    "\tldr r3, [sp, 0x14]\n"
-                    "\tadds r1, r3, r1\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r4, r0, 16\n"
-                    "\tldr r2, [sp, 0x20]\n"
-                    "\tcmp r4, 0x3\n"
-                    "\tbls _080E99DA\n"
-                    "\tmovs r0, 0x64\n"
-                    "\tadds r4, r6, 0\n"
-                    "\tmuls r4, r0\n"
-                    "\tldr r0, =gPlayerParty\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0xB\n"
-                    "\tbl GetMonData\n"
-                    "\tldr r2, [sp, 0xC]\n"
-                    "\tadds r1, r2, r7\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0xC\n"
-                    "\tbl GetMonData\n"
-                    "\tldr r3, [sp, 0x10]\n"
-                    "\tadds r1, r3, r7\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x38\n"
-                    "\tbl GetMonData\n"
-                    "\tldr r1, [sp, 0x18]\n"
-                    "\tadd r1, r10\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0\n"
-                    "\tbl GetMonData\n"
-                    "\tldr r1, [sp]\n"
-                    "\tadd r1, r8\n"
-                    "\tstr r0, [r1]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl sub_80E98AC\n"
-                    "\tldr r1, [sp, 0x1C]\n"
-                    "\tadd r1, r10\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tldr r7, [sp, 0x8]\n"
-                    "\tlsls r0, r7, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tmov r10, r0\n"
-                    "_080E9A54:\n"
-                    "\tldr r1, [sp, 0x4]\n"
-                    "\tlsls r0, r1, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x5\n"
-                    "\tbhi _080E9A60\n"
-                    "\tb _080E995C\n"
-                    "_080E9A60:\n"
-                    "\tadd sp, 0x24\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.pool");
-}
-#endif
 
 void sub_80E9A90(void)
 {
@@ -1356,7 +1165,6 @@ void sub_80EA354(void)
     gSpecialVar_0x8004 = sub_80EA20C(secretBaseRecordId);
     gSpecialVar_Result = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
 }
-
 
 void sub_80EA3E4(u8 taskId)
 {

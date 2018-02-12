@@ -1048,7 +1048,7 @@ _080D8004:
 	bl sub_80DC594
 	bl sub_80DC5E8
 	bl sub_80DC7EC
-	ldr r1, =gBanksByIdentity
+	ldr r1, =gBattlerPositions
 	strb r4, [r1]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
@@ -1058,12 +1058,12 @@ _080D8004:
 	strb r2, [r1, 0x3]
 	ldr r0, =gBattleTypeFlags
 	str r4, [r0]
-	ldr r4, =gBankAttacker
+	ldr r4, =gBattlerAttacker
 	strb r2, [r4]
-	ldr r0, =gBankTarget
+	ldr r0, =gBattlerTarget
 	strb r3, [r0]
 	bl sub_80DB0C4
-	ldr r2, =gBankSpriteIds
+	ldr r2, =gBattlerSpriteIds
 	ldrb r1, [r4]
 	adds r1, r2
 	strb r0, [r1]
@@ -2547,8 +2547,8 @@ _080D8DD0:
 	lsls r4, 3
 	adds r4, r0
 	strh r5, [r4, 0xC]
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattlerAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	strb r5, [r0]
@@ -13796,9 +13796,9 @@ sub_80DEA20: @ 80DEA20
 	push {lr}
 	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
-	ldr r1, =gBankSpriteIds
+	ldr r1, =gBattlerSpriteIds
 	strb r0, [r1, 0x3]
-	ldr r0, =gBankTarget
+	ldr r0, =gBattlerTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -13817,7 +13817,7 @@ sub_80DEA20: @ 80DEA20
 	thumb_func_start sub_80DEA5C
 sub_80DEA5C: @ 80DEA5C
 	push {r4,lr}
-	ldr r0, =gBankSpriteIds
+	ldr r0, =gBattlerSpriteIds
 	ldrb r0, [r0, 0x3]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -13829,13 +13829,13 @@ sub_80DEA5C: @ 80DEA5C
 	strh r0, [r4, 0x26]
 	movs r0, 0x3
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	movs r0, 0x3
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -13905,12 +13905,12 @@ _080DEAD0:
 	.4byte _080DEB60
 	.4byte _080DEB60
 _080DEB54:
-	ldr r1, =gBankTarget
+	ldr r1, =gBattlerTarget
 	movs r0, 0x2
 	b _080DEB64
 	.pool
 _080DEB60:
-	ldr r1, =gBankTarget
+	ldr r1, =gBattlerTarget
 	movs r0, 0x3
 _080DEB64:
 	strb r0, [r1]

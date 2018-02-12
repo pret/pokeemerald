@@ -1,4 +1,5 @@
 #include "global.h"
+#include "item_use.h"
 #include "battle.h"
 #include "berry.h"
 #include "bike.h"
@@ -28,7 +29,6 @@
 #include "task.h"
 #include "text.h"
 
-extern u16 gSpecialVar_ItemId;
 extern void(**gUnknown_0203CE54)(void);
 extern void(**gUnknown_0203CF2C)(void);
 extern void(*gUnknown_0203A0F4)(u8 taskId);
@@ -88,13 +88,12 @@ extern void sub_80B7CC8(void);
 extern void flagmods_08054D70(void);
 extern u8* sub_806CF78(u16);
 extern bool8 ExecuteTableBasedItemEffect_(struct Pokemon*, u16, u8, u8);
-extern u8 gBankInMenu;
-extern u16 gBattlePartyID[];
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
+extern struct MapConnection *sub_8088A8C(s16, s16);
 
 void MapPostLoadHook_UseItem(void);
-extern void sub_80AF6D4(void);
+void sub_80AF6D4(void);
 void Task_CallItemUseOnFieldCallback(u8 taskId);
 void bag_menu_inits_lists_menu(u8 taskId);
 void ItemUseOnFieldCB_Bike(u8 taskId);
@@ -379,12 +378,12 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
             newDistanceX = distanceX - x;
             distanceY = (u16)events->bgEvents[i].y + 7;
             newDistanceY = distanceY - y;
-            
+
             if ((u16)(newDistanceX + 7) < 15 && (newDistanceY >= -5) && (newDistanceY < 6))
                 sub_80FD8E0(taskId, newDistanceX, newDistanceY);
         }
     }
-    
+
     sub_80FD7C8(taskId);
     if (gTasks[taskId].data[2] == TRUE)
         return TRUE;
@@ -453,8 +452,6 @@ bool8 sub_80FD730(struct MapConnection *connection, int x, int y)
     return sub_80FD6D4(mapHeader->events, localX, localY);
 }
 
-// weird math
-#ifdef NONMATCHING
 void sub_80FD7C8(u8 taskId)
 {
     s16 x, y;
@@ -462,15 +459,18 @@ void sub_80FD7C8(u8 taskId)
     s16 width = gMapHeader.mapData->width + 7;
     s16 height = gMapHeader.mapData->height + 7;
 
+    s16 var1 = 7;
+    s16 var2 = 7;
+
     PlayerGetDestCoords(&x, &y);
 
     for (curX = x - 7; curX <= x + 7; curX++)
     {
         for (curY = y - 5; curY <= y + 5; curY++)
         {
-            if (7 > curX
+            if (var1 > curX
              || curX >= width
-             || 7 > curY
+             || var2 > curY
              || curY >= height)
             {
                 struct MapConnection *conn = sub_8088A8C(curX, curY);
@@ -480,155 +480,6 @@ void sub_80FD7C8(u8 taskId)
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_80FD7C8(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x14\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp, 0x4]\n\
-	ldr r0, =gMapHeader\n\
-	ldr r1, [r0]\n\
-	ldr r0, [r1]\n\
-	adds r0, 0x7\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	str r0, [sp, 0x8]\n\
-	ldr r0, [r1, 0x4]\n\
-	adds r0, 0x7\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	str r0, [sp, 0xC]\n\
-	mov r4, sp\n\
-	adds r4, 0x2\n\
-	mov r0, sp\n\
-	adds r1, r4, 0\n\
-	bl PlayerGetDestCoords\n\
-	mov r0, sp\n\
-	ldrh r0, [r0]\n\
-	subs r0, 0x7\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	asrs r0, 16\n\
-	mov r1, sp\n\
-	movs r2, 0\n\
-	ldrsh r1, [r1, r2]\n\
-	adds r1, 0x7\n\
-	cmp r0, r1\n\
-	bgt _080FD8CC\n\
-_080FD816:\n\
-	mov r5, sp\n\
-	ldrh r0, [r5, 0x2]\n\
-	subs r0, 0x5\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	lsls r2, r4, 16\n\
-	asrs r1, r2, 16\n\
-	movs r6, 0x2\n\
-	ldrsh r0, [r5, r6]\n\
-	adds r0, 0x5\n\
-	lsls r3, 16\n\
-	mov r8, r3\n\
-	cmp r1, r0\n\
-	bgt _080FD8B6\n\
-	movs r0, 0x7\n\
-	str r0, [sp, 0x10]\n\
-	mov r1, r8\n\
-	asrs r1, 16\n\
-	mov r9, r1\n\
-	mov r10, r0\n\
-_080FD83E:\n\
-	ldr r3, [sp, 0x10]\n\
-	cmp r3, r9\n\
-	bgt _080FD860\n\
-	ldr r5, [sp, 0x8]\n\
-	lsls r0, r5, 16\n\
-	asrs r0, 16\n\
-	cmp r9, r0\n\
-	bge _080FD860\n\
-	asrs r1, r2, 16\n\
-	cmp r10, r1\n\
-	bgt _080FD860\n\
-	ldr r6, [sp, 0xC]\n\
-	lsls r0, r6, 16\n\
-	asrs r0, 16\n\
-	lsls r7, r4, 16\n\
-	cmp r1, r0\n\
-	blt _080FD89E\n\
-_080FD860:\n\
-	mov r0, r8\n\
-	asrs r5, r0, 16\n\
-	lsls r4, 16\n\
-	asrs r6, r4, 16\n\
-	adds r0, r5, 0\n\
-	adds r1, r6, 0\n\
-	bl sub_8088A8C\n\
-	adds r7, r4, 0\n\
-	cmp r0, 0\n\
-	beq _080FD89E\n\
-	adds r1, r5, 0\n\
-	adds r2, r6, 0\n\
-	bl sub_80FD730\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _080FD89E\n\
-	mov r0, sp\n\
-	ldrh r1, [r0]\n\
-	subs r1, r5, r1\n\
-	lsls r1, 16\n\
-	asrs r1, 16\n\
-	ldrh r2, [r0, 0x2]\n\
-	subs r2, r6, r2\n\
-	lsls r2, 16\n\
-	asrs r2, 16\n\
-	ldr r0, [sp, 0x4]\n\
-	bl sub_80FD8E0\n\
-_080FD89E:\n\
-	movs r1, 0x80\n\
-	lsls r1, 9\n\
-	adds r0, r7, r1\n\
-	lsrs r4, r0, 16\n\
-	lsls r2, r4, 16\n\
-	asrs r1, r2, 16\n\
-	mov r3, sp\n\
-	movs r5, 0x2\n\
-	ldrsh r0, [r3, r5]\n\
-	adds r0, 0x5\n\
-	cmp r1, r0\n\
-	ble _080FD83E\n\
-_080FD8B6:\n\
-	movs r1, 0x80\n\
-	lsls r1, 9\n\
-	add r1, r8\n\
-	lsrs r3, r1, 16\n\
-	asrs r1, 16\n\
-	mov r0, sp\n\
-	movs r6, 0\n\
-	ldrsh r0, [r0, r6]\n\
-	adds r0, 0x7\n\
-	cmp r1, r0\n\
-	ble _080FD816\n\
-_080FD8CC:\n\
-	add sp, 0x14\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80FD8E0(u8 taskId, s16 x, s16 y)
 {
@@ -929,7 +780,7 @@ void ItemUseOutOfBattle_RareCandy(u8 taskId)
 
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
-    if (gSpecialVar_ItemId >= ITEM_HM01)
+    if (gSpecialVar_ItemId >= ITEM_HM01_CUT)
         DisplayItemMessage(taskId, 1, gText_BootedUpHM, sub_80FDF90); // HM
     else
         DisplayItemMessage(taskId, 1, gText_BootedUpTM, sub_80FDF90); // TM
@@ -992,7 +843,7 @@ void ItemUseOutOfBattle_Repel(u8 taskId)
 void sub_80FE124(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (++data[8] > 7)
     {
         data[8] = 0;
@@ -1131,7 +982,7 @@ void sub_80FE440(u8 taskId)
 
 void ItemUseInBattle_StatIncrease(u8 taskId)
 {
-    u16 partyId = gBattlePartyID[gBankInMenu];
+    u16 partyId = gBattlerPartyIndexes[gBattlerInMenuId];
 
     if (ExecuteTableBasedItemEffect_(&gPlayerParty[partyId], gSpecialVar_ItemId, partyId, 0) != FALSE)
     {

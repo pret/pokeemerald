@@ -19,7 +19,6 @@
 #include "task.h"
 #include "scanline_effect.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "text.h"
 #include "strings.h"
 #include "constants/songs.h"

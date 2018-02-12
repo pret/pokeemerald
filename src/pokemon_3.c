@@ -25,15 +25,15 @@
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
-extern u8 gActiveBank;
-extern u8 gBankInMenu;
-extern u8 gBankTarget;
-extern u8 gBankAttacker;
-extern u8 gStringBank;
+extern u8 gActiveBattler;
+extern u8 gBattlerInMenuId;
+extern u8 gBattlerTarget;
+extern u8 gBattlerAttacker;
+extern u8 gPotentialItemEffectBattler;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
 extern u8 gBattleMonForms[4];
-extern u16 gBattlePartyID[4];
+extern u16 gBattlerPartyIndexes[4];
 extern u8 gLastUsedAbility;
 extern u16 gPartnerTrainerId;
 extern u32 gHitMarker;
@@ -113,7 +113,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        temp = gEnigmaBerries[gActiveBank].itemEffect;
+        temp = gEnigmaBerries[gActiveBattler].itemEffect;
     }
 
     itemEffect = temp;
@@ -210,7 +210,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
 void sub_806CF24(s32 stat)
 {
-    gBankTarget = gBankInMenu;
+    gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
@@ -224,7 +224,7 @@ u8 *sub_806CF78(u16 itemId)
     if (itemId == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
-            itemEffect = gEnigmaBerries[gBankInMenu].itemEffect;
+            itemEffect = gEnigmaBerries[gBattlerInMenuId].itemEffect;
         else
             itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     }
@@ -233,7 +233,7 @@ u8 *sub_806CF78(u16 itemId)
         itemEffect = gItemEffectTable[itemId - 13];
     }
 
-    gStringBank = gBankInMenu;
+    gPotentialItemEffectBattler = gBattlerInMenuId;
 
     for (i = 0; i < 3; i++)
     {
@@ -247,7 +247,7 @@ u8 *sub_806CF78(u16 itemId)
             }
             else
             {
-                gBankAttacker = gBankInMenu;
+                gBattlerAttacker = gBattlerInMenuId;
                 BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
             }
         }
@@ -255,7 +255,7 @@ u8 *sub_806CF78(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        gBankAttacker = gBankInMenu;
+        gBattlerAttacker = gBattlerInMenuId;
         BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
     }
 
@@ -301,56 +301,56 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 
         for (i = 0; i < 5; i++)
         {
-            switch (gEvolutionTable[species].evolutions[i].method)
+            switch (gEvolutionTable[species][i].method)
             {
             case EVO_FRIENDSHIP:
                 if (friendship >= 220)
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
                 RtcCalcLocalTime();
                 if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && friendship >= 220)
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
                 RtcCalcLocalTime();
                 if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && friendship >= 220)
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL:
-                if (gEvolutionTable[species].evolutions[i].param <= level)
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                if (gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_ATK_GT_DEF:
-                if (gEvolutionTable[species].evolutions[i].param <= level)
+                if (gEvolutionTable[species][i].param <= level)
                     if (GetMonData(mon, MON_DATA_ATK, 0) > GetMonData(mon, MON_DATA_DEF, 0))
-                        targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_ATK_EQ_DEF:
-                if (gEvolutionTable[species].evolutions[i].param <= level)
+                if (gEvolutionTable[species][i].param <= level)
                     if (GetMonData(mon, MON_DATA_ATK, 0) == GetMonData(mon, MON_DATA_DEF, 0))
-                        targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_ATK_LT_DEF:
-                if (gEvolutionTable[species].evolutions[i].param <= level)
+                if (gEvolutionTable[species][i].param <= level)
                     if (GetMonData(mon, MON_DATA_ATK, 0) < GetMonData(mon, MON_DATA_DEF, 0))
-                        targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_SILCOON:
-                if (gEvolutionTable[species].evolutions[i].param <= level && (upperPersonality % 10) <= 4)
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                if (gEvolutionTable[species][i].param <= level && (upperPersonality % 10) <= 4)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_CASCOON:
-                if (gEvolutionTable[species].evolutions[i].param <= level && (upperPersonality % 10) > 4)
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                if (gEvolutionTable[species][i].param <= level && (upperPersonality % 10) > 4)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_NINJASK:
-                if (gEvolutionTable[species].evolutions[i].param <= level)
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                if (gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_BEAUTY:
-                if (gEvolutionTable[species].evolutions[i].param <= beauty)
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                if (gEvolutionTable[species][i].param <= beauty)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
         }
@@ -358,17 +358,17 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     case 1:
         for (i = 0; i < 5; i++)
         {
-            switch (gEvolutionTable[species].evolutions[i].method)
+            switch (gEvolutionTable[species][i].method)
             {
             case EVO_TRADE:
-                targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_TRADE_ITEM:
-                if (gEvolutionTable[species].evolutions[i].param == heldItem)
+                if (gEvolutionTable[species][i].param == heldItem)
                 {
                     heldItem = 0;
                     SetMonData(mon, MON_DATA_HELD_ITEM, (u8 *)&heldItem);
-                    targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 }
                 break;
             }
@@ -378,10 +378,10 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     case 3:
         for (i = 0; i < 5; i++)
         {
-            if (gEvolutionTable[species].evolutions[i].method == EVO_ITEM
-             && gEvolutionTable[species].evolutions[i].param == evolutionItem)
+            if (gEvolutionTable[species][i].method == EVO_ITEM
+             && gEvolutionTable[species][i].param == evolutionItem)
             {
-                targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
         }
@@ -615,7 +615,7 @@ bool16 sub_806D82C(u8 id)
     return retVal;
 }
 
-s32 GetBankMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 a1)
 {
     s32 id;
     for (id = 0; id < MAX_LINK_PLAYERS; id++)
@@ -1366,12 +1366,12 @@ void sub_806E994(void)
     gBattleTextBuff1[2] = gBattleStruct->field_49;
     gBattleTextBuff1[4] = B_BUFF_EOS;
 
-    if (!GetBankSide(gBattleStruct->field_49))
-        gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[gBattleStruct->field_49]);
+    if (!GetBattlerSide(gBattleStruct->field_49))
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->field_49]);
     else
-        gBattleTextBuff1[3] = gBattlePartyID[gBattleStruct->field_49];
+        gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->field_49];
 
-    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBankInMenu, pokemon_order_func(gBattlePartyID[gBankInMenu]))
+    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBattlerInMenuId, pokemon_order_func(gBattlerPartyIndexes[gBattlerInMenuId]))
 
     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
@@ -1478,7 +1478,7 @@ const u8 *GetTrainerPartnerName(void)
     else
     {
         u8 id = GetMultiplayerId();
-        return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].lp_field_18 ^ 2)].name;
+        return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].lp_field_18 ^ 2)].name;
     }
 }
 
@@ -1652,11 +1652,11 @@ u8 sub_806EF84(u8 arg0, u8 arg1)
     return i;
 }
 
-extern const u8 gUnknown_0831F578[];
+extern const u8 gFacilityClassToPicIndex[];
 
 u16 sub_806EFF0(u16 arg0)
 {
-    return gUnknown_0831F578[arg0];
+    return gFacilityClassToPicIndex[arg0];
 }
 
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)

@@ -17,7 +17,8 @@
 #include "strings.h"
 #include "window.h"
 #include "text_window.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
+#include "battle_setup.h"
 
 struct BattleBackground
 {
@@ -35,13 +36,10 @@ extern const struct BgTemplate gUnknown_0831AA08[4];
 extern const struct WindowTemplate *gUnknown_0831ABA0[];
 extern const struct BattleBackground gBattleTerrainTable[];
 
-extern u8 gBattleTerrain;
-extern u16 gTrainerBattleOpponent_A;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
-extern u16 gPartnerTrainerId;
 
 extern u8 GetCurrentMapBattleScene(void);
 
@@ -273,13 +271,13 @@ static void sub_8035AE4(u8 taskId, u8 bank, u8 bgId, u8 destX, u8 destY)
 
 static void sub_8035C4C(void)
 {
-    if (gBattleOutcome == BATTLE_DREW)
+    if (gBattleOutcome == B_OUTCOME_DREW)
     {
         BattleHandleAddTextPrinter(gText_Draw, 0x15);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if (gBattleOutcome == BATTLE_WON)
+        if (gBattleOutcome == B_OUTCOME_WON)
         {
             switch (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18)
             {
@@ -324,7 +322,7 @@ static void sub_8035C4C(void)
             }
         }
     }
-    else if (gBattleOutcome == BATTLE_WON)
+    else if (gBattleOutcome == B_OUTCOME_WON)
     {
         if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 != 0)
         {
@@ -363,7 +361,7 @@ void sub_8035D74(u8 taskId)
     case 0:
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+            for (i = 0; i < MAX_BATTLERS_COUNT; i++)
             {
                 name = gLinkPlayers[i].name;
                 linkPlayer = &gLinkPlayers[i];

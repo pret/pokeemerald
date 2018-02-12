@@ -1340,7 +1340,7 @@ GetFrontierTrainerFrontSpriteId: @ 8162AA0
 	lsls r0, 1
 	cmp r4, r0
 	bne _08162AD0
-	ldr r1, =gUnknown_0831F578
+	ldr r1, =gFacilityClassToPicIndex
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000bed
@@ -1362,7 +1362,7 @@ _08162AE4:
 	ldr r0, =0x0000012b
 	cmp r4, r0
 	bhi _08162B08
-	ldr r2, =gUnknown_0831F578
+	ldr r2, =gFacilityClassToPicIndex
 	ldr r0, =gUnknown_0203BC88
 	ldr r1, [r0]
 	movs r0, 0x34
@@ -1383,7 +1383,7 @@ _08162B08:
 	ands r0, r1
 	cmp r0, 0
 	beq _08162B38
-	ldr r4, =gUnknown_0831F578
+	ldr r4, =gFacilityClassToPicIndex
 	bl sub_818649C
 	lsls r0, 24
 	lsrs r0, 24
@@ -1391,7 +1391,7 @@ _08162B08:
 	b _08162BC8
 	.pool
 _08162B38:
-	ldr r3, =gUnknown_0831F578
+	ldr r3, =gFacilityClassToPicIndex
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0xfffffed4
@@ -1413,7 +1413,7 @@ _08162B64:
 	ands r0, r1
 	cmp r0, 0
 	bne _08162BB0
-	ldr r4, =gUnknown_0831F578
+	ldr r4, =gFacilityClassToPicIndex
 	ldr r3, =gUnknown_08610970
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
@@ -1436,7 +1436,7 @@ _08162B64:
 	b _08162BC8
 	.pool
 _08162BB0:
-	ldr r5, =gUnknown_0831F578
+	ldr r5, =gFacilityClassToPicIndex
 	ldr r4, =gUnknown_08610970
 	bl sub_81864A8
 	lsls r0, 24
@@ -1467,7 +1467,7 @@ GetFrontierOpponentClass: @ 8162BD8
 	lsls r0, 1
 	cmp r4, r0
 	bne _08162C08
-	ldr r1, =gTrainerClassToNameIndex
+	ldr r1, =gFacilityClassToTrainerClass
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000bed
@@ -1499,7 +1499,7 @@ _08162C38:
 	ldr r0, =0x0000012b
 	cmp r4, r0
 	bhi _08162C60
-	ldr r2, =gTrainerClassToNameIndex
+	ldr r2, =gFacilityClassToTrainerClass
 	ldr r0, =gUnknown_0203BC88
 	ldr r1, [r0]
 	movs r0, 0x34
@@ -1521,7 +1521,7 @@ _08162C60:
 	ands r0, r1
 	cmp r0, 0
 	beq _08162C90
-	ldr r4, =gTrainerClassToNameIndex
+	ldr r4, =gFacilityClassToTrainerClass
 	bl sub_818649C
 	lsls r0, 24
 	lsrs r0, 24
@@ -1530,7 +1530,7 @@ _08162C60:
 	b _08162D1E
 	.pool
 _08162C90:
-	ldr r3, =gTrainerClassToNameIndex
+	ldr r3, =gFacilityClassToTrainerClass
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0xfffffed4
@@ -1553,7 +1553,7 @@ _08162CBC:
 	ands r0, r1
 	cmp r0, 0
 	beq _08162CF4
-	ldr r5, =gTrainerClassToNameIndex
+	ldr r5, =gFacilityClassToTrainerClass
 	ldr r4, =gUnknown_08610970
 	bl sub_81864A8
 	lsls r0, 24
@@ -1568,7 +1568,7 @@ _08162CBC:
 	b _08162D1E
 	.pool
 _08162CF4:
-	ldr r4, =gTrainerClassToNameIndex
+	ldr r4, =gFacilityClassToTrainerClass
 	ldr r3, =gUnknown_08610970
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
@@ -1736,7 +1736,7 @@ _08162E68:
 	ldr r0, =0x00000c03
 	cmp r5, r0
 	bne _08162E88
-	ldr r2, =gTrainers + TRAINER_STEVEN * 0x28 + 0x4 @ Steven's name
+	ldr r2, =gTrainers + 804 * 0x28 + 0x4 @ TRAINER_STEVEN name
 _08162E70:
 	adds r0, r6, r4
 	adds r1, r4, r2
@@ -5354,7 +5354,7 @@ sub_8164E04: @ 8164E04
 	adds r0, r2
 	ldrh r1, [r5]
 	bl sub_8165B88
-	ldr r6, =gBattlePartyID
+	ldr r6, =gBattlerPartyIndexes
 	ldrh r0, [r6, 0x2]
 	movs r5, 0x64
 	muls r0, r5
@@ -5845,7 +5845,7 @@ _08165206:
 
 	thumb_func_start GetEreaderTrainerFrontSpriteId
 GetEreaderTrainerFrontSpriteId: @ 8165244
-	ldr r1, =gUnknown_0831F578
+	ldr r1, =gFacilityClassToPicIndex
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000bed
@@ -5859,7 +5859,7 @@ GetEreaderTrainerFrontSpriteId: @ 8165244
 
 	thumb_func_start GetEreaderTrainerClassId
 GetEreaderTrainerClassId: @ 8165264
-	ldr r1, =gTrainerClassToNameIndex
+	ldr r1, =gFacilityClassToTrainerClass
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000bed
@@ -6193,7 +6193,7 @@ _081654DE:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x7
-	ldr r2, =gTrainers + TRAINER_STEVEN * 0x28 + 0x4 @ Steven's name
+	ldr r2, =gTrainers + 804 * 0x28 + 0x4 @ TRAINER_STEVEN name
 	bl SetMonData
 	movs r0, 0
 	str r0, [sp, 0x44]

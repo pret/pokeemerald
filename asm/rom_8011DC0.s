@@ -481,7 +481,7 @@ _08012938:
 	bl CopyWindowToVram
 	ldrb r0, [r6, 0xF]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F015C
@@ -497,7 +497,7 @@ _08012938:
 	strb r0, [r6, 0x12]
 	ldrb r0, [r6, 0x11]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r6, 0x11]
 	bl PutWindowTilemap
 	ldrb r0, [r6, 0x11]
@@ -1962,7 +1962,7 @@ _0801360C:
 	bl CopyWindowToVram
 	ldrb r0, [r6, 0xB]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F0204
@@ -1978,7 +1978,7 @@ _0801360C:
 	strb r0, [r6, 0xE]
 	ldrb r0, [r6, 0xD]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r6, 0xD]
 	bl PutWindowTilemap
 	ldrb r0, [r6, 0xD]
@@ -8275,7 +8275,7 @@ sub_8017020: @ 8017020
 	bl sub_81973A4
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r0, =gStringVar4
 	adds r1, r4, 0
 	bl StringExpandPlaceholders
@@ -8320,7 +8320,7 @@ _08017076:
 	bl sub_81973A4
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r0, =gStringVar4
 	adds r1, r5, 0
 	bl StringExpandPlaceholders
@@ -8412,7 +8412,7 @@ sub_8017118: @ 8017118
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	adds r0, r4, 0
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
@@ -8508,7 +8508,7 @@ _080171DC:
 	strb r0, [r5]
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp, 0x24]
@@ -8621,7 +8621,7 @@ _080172C8:
 	strb r0, [r6]
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp, 0x24]
@@ -11106,7 +11106,7 @@ sub_80186A4: @ 80186A4
 	movs r0, 0x3
 	bl GetBgTilemapBuffer
 	bl Free
-	ldr r0, =c2_title_screen_1
+	ldr r0, =CB2_InitTitleScreen
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -28701,7 +28701,7 @@ _080214C6:
 	lsrs r3, 16
 	ldr r0, =gUnknown_082F436C
 	adds r1, r2, 0
-	bl AddItemIconObjectWithCustomObjectTemplate
+	bl AddCustomItemIconSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r2, r9
@@ -31662,7 +31662,7 @@ _08022D38:
 _08022D42:
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x2
 	mov r8, r0
@@ -34260,7 +34260,7 @@ _080241A6:
 	beq _0802421E
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_SavingDontTurnOffPower
 	movs r0, 0
 	str r0, [sp]
@@ -34617,7 +34617,7 @@ _0802445A:
 _08024460:
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldrh r1, [r5, 0x14]
 	cmp r1, 0x3
 	bne _08024490
@@ -46350,7 +46350,7 @@ _0802A3A4:
 _0802A3AE:
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_SavingDontTurnOffPower
 	str r4, [sp]
 	movs r0, 0x2

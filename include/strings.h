@@ -157,6 +157,19 @@ extern const u8 gText_EggNickname[];
 extern const u8 gText_Pokemon[];
 extern const u8 gText_InGameClockUsable[];
 
+// reset rtc screen texts
+extern const u8 gText_Day[];
+extern const u8 gText_Colon3[];
+extern const u8 gText_Confirm2[];
+extern const u8 gText_PresentTime[];
+extern const u8 gText_PreviousTime[];
+extern const u8 gText_ResetRTCConfirmCancel[];
+extern const u8 gText_NoSaveFileCantSetTime[];
+extern const u8 gText_PleaseResetTime[];
+extern const u8 gText_ClockHasBeenReset[];
+extern const u8 gText_SaveCompleted[];
+extern const u8 gText_SaveFailed[];
+
 // menu texts
 extern const u8 gText_MenuPokedex[];
 extern const u8 gText_MenuPokemon[];
@@ -207,6 +220,9 @@ extern const u8 gText_ButtonMode[];
 extern const u8 gText_MaleSymbol[];
 extern const u8 gText_FemaleSymbol[];
 
+extern const u8 gText_SelectorArrow3[];
+extern const u8 gText_YesNo[];
+
 // mystery event menu text
 extern const u8 gText_EventSafelyLoaded[];
 extern const u8 gText_LoadErrorEndingSession[];
@@ -214,5 +230,18 @@ extern const u8 gText_PressAToLoadEvent[];
 extern const u8 gText_LoadingEvent[];
 extern const u8 gText_DontRemoveCableTurnOff[];
 extern const u8 gText_LinkStandby2[];
+
+// berry tag screen text
+extern const u8 gBerryFirmnessString_VerySoft[];
+extern const u8 gBerryFirmnessString_Soft[];
+extern const u8 gBerryFirmnessString_Hard[];
+extern const u8 gBerryFirmnessString_VeryHard[];
+extern const u8 gBerryFirmnessString_SuperHard[];
+extern const u8 gText_BerryTag[];
+extern const u8 gText_UnkF908Var1Var2[];
+extern const u8 gText_SizeSlash[];
+extern const u8 gText_Var1DotVar2[];
+extern const u8 gText_ThreeMarks[];
+extern const u8 gText_FirmSlash[];
 
 #endif //GUARD_STRINGS_H

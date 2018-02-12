@@ -1208,7 +1208,7 @@ void PutPokemonTodayFailedOnTheAir(void)
         {
             ct = 0xFF;
         }
-        if (ct > 2 && (gBattleOutcome == BATTLE_POKE_FLED || gBattleOutcome == BATTLE_WON))
+        if (ct > 2 && (gBattleOutcome == B_OUTCOME_MON_FLED || gBattleOutcome == B_OUTCOME_WON))
         {
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_POKEMON_TODAY_FAILED, FALSE) != TRUE)
@@ -2402,23 +2402,23 @@ void sub_80EE184(void)
         show->breakingNews.poke1Species = gBattleResults.playerMon1Species;
         switch (gBattleOutcome)
         {
-            case BATTLE_LOST:
-            case BATTLE_DREW:
+            case B_OUTCOME_LOST:
+            case B_OUTCOME_DREW:
                 show->breakingNews.kind = TVSHOW_OFF_AIR;
                 return;
-            case BATTLE_CAUGHT:
+            case B_OUTCOME_CAUGHT:
                 show->breakingNews.outcome = 0;
                 break;
-            case BATTLE_WON:
+            case B_OUTCOME_WON:
                 show->breakingNews.outcome = 1;
                 break;
-            case BATTLE_RAN:
-            case BATTLE_PLAYER_TELEPORTED:
-            case BATTLE_SAFARI_OUT_OF_BALLS:
+            case B_OUTCOME_RAN:
+            case B_OUTCOME_PLAYER_TELEPORTED:
+            case B_OUTCOME_NO_SAFARI_BALLS:
                 show->breakingNews.outcome = 2;
                 break;
-            case BATTLE_POKE_FLED:
-            case BATTLE_OPPONENT_TELEPORTED:
+            case B_OUTCOME_MON_FLED:
+            case B_OUTCOME_MON_TELEPORTED:
                 show->breakingNews.outcome = 3;
                 break;
         }

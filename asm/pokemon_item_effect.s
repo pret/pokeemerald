@@ -77,7 +77,7 @@ ExecuteTableBasedItemEffect: @ 806BD28
 	cmp r0, 0
 	beq _0806BDA8
 	ldr r2, =gEnigmaBerries
-	ldr r0, =gBankInMenu
+	ldr r0, =gBattlerInMenuId
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -100,8 +100,8 @@ _0806BDBC:
 	lsrs r0, 24
 _0806BDC4:
 	str r0, [sp, 0x34]
-	ldr r1, =gStringBank
-	ldr r0, =gBankInMenu
+	ldr r1, =gPotentialItemEffectBattler
+	ldr r0, =gBattlerInMenuId
 	ldrb r2, [r0]
 	strb r2, [r1]
 	ldr r0, =gMain
@@ -114,23 +114,23 @@ _0806BDC4:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	beq _0806BE64
-	ldr r0, =gActiveBank
+	ldr r0, =gActiveBattler
 	strb r2, [r0]
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
 	orrs r1, r0
 	lsrs r1, 31
 	str r1, [sp, 0x1C]
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattlersCount
 	ldr r4, [sp, 0xC]
 	subs r4, 0xD
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0806BE70
-	ldr r2, =gBattlePartyID
+	ldr r2, =gBattlerPartyIndexes
 	lsls r0, r1, 1
 	adds r0, r2
 	ldrh r3, [r0]
@@ -148,7 +148,7 @@ _0806BE3C:
 	ldr r1, [sp, 0x1C]
 	adds r1, 0x2
 	str r1, [sp, 0x1C]
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattlersCount
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0806BE70
@@ -165,7 +165,7 @@ _0806BE3C:
 	b _0806BE70
 	.pool
 _0806BE64:
-	ldr r0, =gActiveBank
+	ldr r0, =gActiveBattler
 	strb r1, [r0]
 	movs r3, 0x4
 	str r3, [sp, 0x38]
@@ -200,7 +200,7 @@ _0806BE9A:
 	ands r0, r1
 	cmp r0, 0
 	beq _0806BECC
-	ldr r0, =gActiveBank
+	ldr r0, =gActiveBattler
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -297,7 +297,7 @@ _0806BF76:
 	cmp r0, 0
 	beq _0806BFA4
 	ldr r1, =gBattleMons
-	ldr r0, =gActiveBank
+	ldr r0, =gActiveBattler
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -323,7 +323,7 @@ _0806BFA4:
 	bl _0806CD4C
 _0806BFB2:
 	ldr r6, =gBattleMons
-	ldr r5, =gActiveBank
+	ldr r5, =gActiveBattler
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -362,7 +362,7 @@ _0806BFFC:
 	cmp r3, 0
 	beq _0806C042
 	ldr r7, =gBattleMons
-	ldr r5, =gActiveBank
+	ldr r5, =gActiveBattler
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -396,7 +396,7 @@ _0806C042:
 	bl _0806CD4C
 _0806C050:
 	ldr r6, =gBattleMons
-	ldr r5, =gActiveBank
+	ldr r5, =gActiveBattler
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -433,7 +433,7 @@ _0806C08C:
 	cmp r3, 0
 	beq _0806C0D2
 	ldr r7, =gBattleMons
-	ldr r5, =gActiveBank
+	ldr r5, =gActiveBattler
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -467,7 +467,7 @@ _0806C0D2:
 	bl _0806CD4C
 _0806C0E0:
 	ldr r6, =gBattleMons
-	ldr r5, =gActiveBank
+	ldr r5, =gActiveBattler
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -506,9 +506,9 @@ _0806C120:
 	cmp r0, 0
 	beq _0806C168
 	ldr r5, =gSideTimers
-	ldr r4, =gActiveBank
+	ldr r4, =gActiveBattler
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -519,7 +519,7 @@ _0806C120:
 	cmp r0, 0
 	bne _0806C168
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -965,7 +965,7 @@ _0806C4FC:
 	ldr r3, [sp, 0x38]
 	cmp r3, 0x4
 	beq _0806C55C
-	ldr r2, =gAbsentBankFlags
+	ldr r2, =gAbsentBattlerFlags
 	ldr r1, =gBitTable
 	lsls r0, r3, 2
 	adds r0, r1
@@ -973,7 +973,7 @@ _0806C4FC:
 	ldrb r0, [r2]
 	bics r0, r1
 	strb r0, [r2]
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r3, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -983,14 +983,14 @@ _0806C4FC:
 	lsrs r1, 24
 	ldr r0, [sp, 0x38]
 	bl CopyPlayerPartyMonToBattleData
-	ldr r0, =gActiveBank
+	ldr r0, =gActiveBattler
 	ldrb r0, [r0]
 	b _0806C574
 	.pool
 _0806C55C:
-	ldr r3, =gAbsentBankFlags
+	ldr r3, =gAbsentBattlerFlags
 	ldr r1, =gBitTable
-	ldr r2, =gActiveBank
+	ldr r2, =gActiveBattler
 	ldrb r0, [r2]
 	eors r0, r4
 	lsls r0, 2
@@ -1001,7 +1001,7 @@ _0806C55C:
 	strb r0, [r3]
 	ldrb r0, [r2]
 _0806C574:
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806C5B2
@@ -1135,9 +1135,9 @@ _0806C65E:
 	ands r0, r3
 	cmp r0, 0
 	bne _0806C6EC
-	ldr r4, =gActiveBank
+	ldr r4, =gActiveBattler
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806C6EC
@@ -1155,9 +1155,9 @@ _0806C6AE:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl EmitGetMonData
+	bl BtlController_EmitGetMonData
 	ldrb r0, [r4]
-	bl MarkBufferBankForExecution
+	bl MarkBattlerForControllerExec
 	strb r5, [r4]
 	b _0806C6EC
 	.pool

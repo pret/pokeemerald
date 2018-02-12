@@ -7,33 +7,7 @@
 	.include "link.o"
 	.include "link_rfu.o"
     .include "rtc.o"
-
-gPreBattleCallback1: @ 3005D00
-	.space 0x4
-
-gBattleMainFunc: @ 3005D04
-	.space 0xC
-
-gBattleResults: @ 3005D10
-	.space 0x44
-
-gLeveledUpInBattle: @ 3005D54
-	.space 0xC
-
-gBattleBankFunc: @ 3005D60
-	.space 0x10
-
-gHealthBoxesIds: @ 3005D70
-	.space 0x4
-
-gMultiUsePlayerCursor: @ 3005D74
-	.space 0x4
-
-gNumberOfMovesToChoose: @ 3005D78
-	.space 0x4
-
-gUnknown_03005D7C: @ 3005D7C
-	.space 0x4
+    .include "battle_main.o"
 
 gRngValue: @ 3005D80
 	.space 0x4

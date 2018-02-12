@@ -82,7 +82,7 @@ extern const u8 BattleScript_SpikesOnAttacker[];
 extern const u8 BattleScript_82DAE7A[];
 extern const u8 BattleScript_SpikesOnTarget[];
 extern const u8 BattleScript_82DAEB1[];
-extern const u8 BattleScript_SpikesOngBank1[];
+extern const u8 BattleScript_SpikesOnFaintedBattler[];
 extern const u8 BattleScript_82DAEE8[];
 extern const u8 BattleScript_82DAEFE[];
 extern const u8 BattleScript_PerishSongTakesLife[];

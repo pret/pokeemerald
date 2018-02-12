@@ -1608,7 +1608,7 @@ _08030578:
 	ldr r0, =gUnknown_02022D06
 	strh r4, [r0]
 	bl FreeAllWindowBuffers
-	ldr r0, =c2_title_screen_1
+	ldr r0, =CB2_InitTitleScreen
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
