@@ -113,7 +113,7 @@ void sub_80FE024(u8 taskId);
 void sub_80FE124(u8 taskId);
 void sub_80FE164(u8 taskId);
 
-void DisplayItemMessage(u8 taskId, u8 a, u8* str, void(*callback)(u8 taskId));
+void DisplayItemMessage(u8 taskId, u8 a, const u8* str, void(*callback)(u8 taskId));
 void DisplayItemMessageInBattlePyramid(u8 taskId, u8* str, void(*callback)(u8 taskId));
 void DisplayItemMessageOnField(u8 taskId, u8* str, void(*callback)(u8 taskId));
 void sub_81C6714(u8 taskId);
