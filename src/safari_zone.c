@@ -108,7 +108,7 @@ void SafariZoneRetirePrompt(void)
 void CB2_EndSafariBattle(void)
 {
     sSafariZoneFleedMons += gBattleResults.field_1F;
-    if (gBattleOutcome == B_OUTCOME_CAUGHT_POKE)
+    if (gBattleOutcome == B_OUTCOME_CAUGHT)
         sSafariZoneCaughtMons++;
     if (gNumSafariBalls != 0)
     {
@@ -121,7 +121,7 @@ void CB2_EndSafariBattle(void)
         gFieldCallback = sub_80AF6F0;
         SetMainCallback2(c2_load_new_map);
     }
-    else if (gBattleOutcome == B_OUTCOME_CAUGHT_POKE)
+    else if (gBattleOutcome == B_OUTCOME_CAUGHT)
     {
         ScriptContext1_SetupScript(EventScript_2A4B9B);
         ScriptContext1_Stop();

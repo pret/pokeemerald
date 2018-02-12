@@ -50069,7 +50069,7 @@ sub_8117E94: @ 8117E94
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, =gBattleAnimTarget
-	ldr r1, =gEffectBank
+	ldr r1, =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -50136,7 +50136,7 @@ sub_8117F30: @ 8117F30
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, =gBattleAnimTarget
-	ldr r1, =gEffectBank
+	ldr r1, =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -50670,7 +50670,7 @@ _081183B4:
 	strh r0, [r1, 0xC]
 	movs r0, 0x20
 	strh r0, [r1, 0xE]
-	ldr r2, =gUnknown_020243FC
+	ldr r2, =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, =0x0000fffe
 	ands r0, r1
@@ -51014,7 +51014,7 @@ _08118690:
 	strh r0, [r1, 0xE]
 	movs r0, 0x1
 	strh r0, [r1, 0x12]
-	ldr r2, =gUnknown_020243FC
+	ldr r2, =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, =0x0000fffe
 	ands r0, r1
@@ -51315,7 +51315,7 @@ _08118934:
 	strh r0, [r1, 0xE]
 	movs r0, 0x1
 	strh r0, [r1, 0x12]
-	ldr r2, =gUnknown_020243FC
+	ldr r2, =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, =0x0000fffe
 	ands r0, r1
@@ -51675,7 +51675,7 @@ _08118C50:
 	strh r0, [r1, 0xC]
 	movs r0, 0x20
 	strh r0, [r1, 0xE]
-	ldr r2, =gUnknown_020243FC
+	ldr r2, =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, =0x0000fffe
 	ands r0, r1
@@ -51924,7 +51924,7 @@ _08118E7E:
 	strh r0, [r1, 0x8]
 	movs r0, 0xF0
 	strh r0, [r1, 0xC]
-	ldr r2, =gUnknown_020243FC
+	ldr r2, =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, =0x0000fffe
 	ands r0, r1

@@ -2,6 +2,7 @@
 #include "battle_ai_script_commands.h"
 #include "pokemon.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "constants/species.h"
 #include "constants/abilities.h"
 #include "random.h"
@@ -44,26 +45,7 @@ in order to read the next command correctly. refer to battle_ai_scripts.s for th
 AI scripts.
 */
 
-extern u32 gBattleTypeFlags;
-extern u8 gActiveBattler;
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern u16 gCurrentMove;
-extern u8 gBattlerTarget;
-extern u8 gAbsentBattlerFlags;
-extern u16 gLastMoves[MAX_BATTLERS_COUNT];
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
-extern u32 gStatuses3[MAX_BATTLERS_COUNT];
-extern u16 gSideStatuses[2];
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u16 gDynamicBasePower;
-extern u8 gMoveResultFlags;
-extern s32 gBattleMoveDamage;
-extern u8 gCritMultiplier;
-extern u16 gBattleWeather;
-
 extern const struct BattleMove gBattleMoves[];
-extern const struct BaseStats gBaseStats[];
 extern const u8 * const gBattleAI_ScriptsTable[];
 
 extern u32 GetAiScriptsInRecordedBattle();

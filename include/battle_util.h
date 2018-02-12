@@ -44,7 +44,7 @@
 #define BS_GET_PLAYER2                  13
 #define BS_GET_OPPONENT2                14
 
-u8 GetBattleBank(u8 caseId);
+u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
