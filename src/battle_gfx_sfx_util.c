@@ -39,7 +39,6 @@ extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 extern const union AnimCmd* const * const gMonAnimationsSpriteAnimsPtrTable[];
-extern const struct SpriteTemplate gUnknown_08329D98[4];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 extern const u8 gEnemyMonElevation[];

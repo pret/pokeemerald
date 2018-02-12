@@ -180,14 +180,7 @@ gBattle_WIN1V: @ 2022E2A
     .include "src/battle_message.o"
 	.include "src/battle_main.o"
 
-	.include "src/pokemon_1.o"
-
-gUnknown_0202499C: @ 202499C
-	.space 0x18
-
-gUnknown_020249B4: @ 20249B4
-	.space 0x8
-
+	.include "src/pokemon.o"
 	.include "src/random.o"
 	.include "src/daycare.o"
     .include "src/load_save.o"

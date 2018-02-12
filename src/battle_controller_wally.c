@@ -30,8 +30,6 @@
 #include "battle_setup.h"
 #include "item_use.h"
 
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern struct SpriteTemplate gUnknown_0202499C;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern s32 gUnknown_0203CD70;

@@ -12,7 +12,6 @@
 #include "constants/hold_effects.h"
 #include "util.h"
 #include "pokemon.h"
-#include "calculate_base_damage.h"
 #include "random.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
@@ -32,7 +31,6 @@
 #include "bg.h"
 #include "string_util.h"
 #include "pokemon_icon.h"
-#include "pokemon_item_effects.h"
 #include "m4a.h"
 #include "mail.h"
 #include "event_data.h"
@@ -6882,8 +6880,7 @@ static void atk74_hpthresholds2(void)
 static void atk75_useitemonopponent(void)
 {
     gBattlerInMenuId = gBattlerAttacker;
-    ExecuteTableBasedItemEffect(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker]], gLastUsedItem, gBattlerPartyIndexes[gBattlerAttacker], 0, 1);
-
+    PokemonUseItemEffects(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker]], gLastUsedItem, gBattlerPartyIndexes[gBattlerAttacker], 0, 1);
     gBattlescriptCurrInstr += 1;
 }
 

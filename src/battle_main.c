@@ -51,7 +51,7 @@
 #include "international_string_util.h"
 #include "pokeball.h"
 
-struct UnknownPokemonStruct2
+struct UnknownPokemonStruct4
 {
     /*0x00*/ u16 species;
     /*0x02*/ u16 heldItem;
@@ -86,7 +86,6 @@ extern const u16 gBattleTextboxPalette[]; // battle textbox palette
 extern const struct BgTemplate gUnknown_0831AA08[];
 extern const struct WindowTemplate * const gUnknown_0831ABA0[];
 extern const u8 gUnknown_0831ACE0[];
-extern const u8 gStatStageRatios[][2];
 extern const u8 * const gBattleScriptsForMoveEffects[];
 extern const u8 * const gBattlescriptsForBallThrow[];
 extern const u8 * const gBattlescriptsForRunningByItem[];
@@ -199,8 +198,8 @@ EWRAM_DATA static u32 sUnusedUnknownArray[25] = {0};
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
 EWRAM_DATA u32 gUnknown_02022FF4 = 0;
-EWRAM_DATA struct UnknownPokemonStruct2 gUnknown_02022FF8[3] = {0}; // what is it used for?
-EWRAM_DATA struct UnknownPokemonStruct2* gUnknown_02023058 = NULL; // what is it used for?
+EWRAM_DATA struct UnknownPokemonStruct4 gUnknown_02022FF8[3] = {0}; // what is it used for?
+EWRAM_DATA struct UnknownPokemonStruct4* gUnknown_02023058 = NULL; // what is it used for?
 EWRAM_DATA u8 *gUnknown_0202305C = NULL;
 EWRAM_DATA u8 *gUnknown_02023060 = NULL;
 EWRAM_DATA u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200] = {0};
@@ -791,7 +790,7 @@ static void CB2_HandleStartBattle(void)
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyMultiplayerId][1];
             sub_8185F90(gBlockRecvBuffer[playerMultiplayerId][1]);
             sub_8185F90(gBlockRecvBuffer[enemyMultiplayerId][1]);
-            sub_8068AA4();
+            SetDeoxysStats();
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1203,9 +1202,9 @@ static void CB2_PreInitMultiBattle(void)
     case 0:
         if (gReceivedRemoteLinkPlayers != 0 && sub_800A520())
         {
-            gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct2) * 3);
+            gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct4) * 3);
             sub_80379F8(0);
-            SendBlock(bitmask_all_link_players_but_self(), gUnknown_02023058, sizeof(struct UnknownPokemonStruct2) * 3);
+            SendBlock(bitmask_all_link_players_but_self(), gUnknown_02023058, sizeof(struct UnknownPokemonStruct4) * 3);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1223,12 +1222,12 @@ static void CB2_PreInitMultiBattle(void)
                     if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[playerMultiplierId].lp_field_18 & 1))
                         || (gLinkPlayers[i].lp_field_18 & 1 && gLinkPlayers[playerMultiplierId].lp_field_18 & 1))
                     {
-                        memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct2) * 3);
+                        memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct4) * 3);
                     }
                 }
                 else
                 {
-                    memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct2) * 3);
+                    memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct4) * 3);
                 }
             }
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1287,7 +1286,7 @@ static void CB2_PreInitIngamePlayerPartnerBattle(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct2) * 3);
+        gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct4) * 3);
         sub_80379F8(3);
         gBattleCommunication[MULTIUSE_STATE]++;
         *savedCallback = gMain.savedCallback;
@@ -1370,7 +1369,7 @@ static void CB2_HandleStartMultiBattle(void)
             ResetBlockReceivedFlags();
             sub_8036EB8(4, playerMultiplayerId);
             SetAllPlayersBerryData();
-            sub_8068AA4();
+            SetDeoxysStats();
             var = CreateTask(sub_8035D74, 0);
             gTasks[var].data[1] = 0x10E;
             gTasks[var].data[2] = 0x5A;

@@ -25,7 +25,6 @@
 #include "data2.h"
 #include "item_use.h"
 
-extern struct SpriteTemplate gUnknown_0202499C;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];

@@ -20,7 +20,6 @@
 #include "battle_ai_script_commands.h"
 #include "battle_controllers.h"
 #include "event_data.h"
-#include "calculate_base_damage.h"
 #include "link.h"
 #include "berry.h"
 

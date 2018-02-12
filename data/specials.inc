@@ -490,7 +490,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813AF48
 	def_special sub_813AFC8
 	def_special sub_813B1D0
-	def_special DoScriptedWildBattle
+	def_special CreateObedientEnemyMon
 	def_special sub_81BEB54
 	def_special sub_81BEB68
 	def_special sub_81BEB7C

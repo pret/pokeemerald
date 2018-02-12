@@ -7155,7 +7155,7 @@ _0807AD94:
 	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _0807ADB2:
 	mov r0, r8
-	bl sub_806E794
+	bl GetMonSpritePalStruct
 	bl LoadCompressedObjectPalette
 	ldr r0, =gUnknown_020322A0
 	ldr r1, [r0]
@@ -7171,7 +7171,7 @@ _0807ADB2:
 	.pool
 _0807ADE0:
 	mov r0, r8
-	bl sub_806E794
+	bl GetMonSpritePalStruct
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
 	bl sub_806A068
@@ -9589,7 +9589,7 @@ _0807C66C:
 	ldr r0, [r5]
 	adds r0, 0xF0
 	ldrh r0, [r0]
-	bl IsPokeSpriteNotFlipped
+	bl IsMonSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807C6E4
@@ -11663,7 +11663,7 @@ _0807DA74:
 	ldr r0, [r5]
 	adds r0, 0xF0
 	ldrh r0, [r0]
-	bl IsPokeSpriteNotFlipped
+	bl IsMonSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807DAEC

@@ -1591,7 +1591,7 @@ _0818F7E8:
 	lsrs r1, 16
 	ldr r0, [sp, 0x18]
 	movs r2, 0x1
-	bl nature_stat_mod
+	bl ModifyStatByNature
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -1618,7 +1618,7 @@ _0818F820:
 	lsrs r1, 16
 	ldr r0, [sp, 0x18]
 	movs r2, 0x2
-	bl nature_stat_mod
+	bl ModifyStatByNature
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -1645,7 +1645,7 @@ _0818F858:
 	lsrs r1, 16
 	ldr r0, [sp, 0x18]
 	movs r2, 0x3
-	bl nature_stat_mod
+	bl ModifyStatByNature
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -1672,7 +1672,7 @@ _0818F890:
 	lsrs r1, 16
 	ldr r0, [sp, 0x18]
 	movs r2, 0x4
-	bl nature_stat_mod
+	bl ModifyStatByNature
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -1699,7 +1699,7 @@ _0818F8C8:
 	lsrs r1, 16
 	ldr r0, [sp, 0x18]
 	movs r2, 0x5
-	bl nature_stat_mod
+	bl ModifyStatByNature
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -1941,7 +1941,7 @@ sub_818FA74: @ 818FA74
 	str r4, [sp, 0x4]
 	ldr r7, [sp, 0x14]
 	str r7, [sp, 0x8]
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	add r0, sp, 0xC
 	movs r1, 0x1
 	negs r1, r1

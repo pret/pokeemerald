@@ -339,7 +339,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Ernesto
 
 @ 13
-	.4byte FACILITY_CLASS_SCHOOL_KID_2
+	.4byte FACILITY_CLASS_SCHOOL_KID_F
 	.string "NALA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I
@@ -365,7 +365,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Nala
 
 @ 14
-	.4byte FACILITY_CLASS_COOLTRAINER_1
+	.4byte FACILITY_CLASS_COOLTRAINER_M
 	.string "DARNELL$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I
@@ -391,7 +391,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Darnell
 
 @ 15
-	.4byte FACILITY_CLASS_COOLTRAINER_2
+	.4byte FACILITY_CLASS_COOLTRAINER_F
 	.string "ASHLYN$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I
@@ -469,7 +469,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Justine
 
 @ 18
-	.4byte FACILITY_CLASS_EXPERT_1
+	.4byte FACILITY_CLASS_EXPERT_M
 	.string "TYSON$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YOU_RE

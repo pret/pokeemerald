@@ -48,7 +48,6 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern struct SpriteTemplate gUnknown_0202499C;
 extern bool8 gAffineAnimsDisabled;
 extern u16 gMoveToLearn;
 extern const u8 gSpeciesNames[][11];
