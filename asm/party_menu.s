@@ -10032,7 +10032,7 @@ _081B557C:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r1, r0, 0
 	ldr r0, =gStringVar1
 	ldrb r1, [r1, 0x14]
@@ -10057,7 +10057,7 @@ _081B55B8:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r1, r0, 0
 	ldr r0, =gStringVar1
 	ldrb r1, [r1, 0x14]

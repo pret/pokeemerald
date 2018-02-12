@@ -7855,7 +7855,7 @@ pal_fill_for_maplights: @ 80AF040
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7910,7 +7910,7 @@ pal_fill_black: @ 80AF0A0
 	thumb_func_start sub_80AF0B4
 sub_80AF0B4: @ 80AF0B4
 	push {r4,lr}
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

@@ -214,21 +214,9 @@ gUnknown_020322D5: @ 20322D5
 gUnknown_020322D8: @ 20322D8
 	.space 0x4
 
-gUnknown_020322DC: @ 20322DC
-	.space 0x8
+	.include "src/overworld.o"
 
-gUnknown_020322E4: @ 20322E4
-	.space 0x8
-
-gUnknown_020322EC: @ 20322EC
-	.space 0x8
-
-gUnknown_020322F4: @ 20322F4
-	.space 0x8
-
-gUnknown_020322FC: @ 20322FC
-	.space 0x4
-
+.align 2
 gUnknown_02032300: @ 2032300
 	.space 0x4
 

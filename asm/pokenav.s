@@ -8095,7 +8095,7 @@ sub_81CB0C8: @ 81CB0C8
 	ldrh r2, [r0, 0xA]
 	ldrh r1, [r0, 0xC]
 	adds r0, r2, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -30295,7 +30295,7 @@ sub_81D6120: @ 81D6120
 	push {lr}
 	movs r0, 0x1A
 	movs r1, 0x40
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldr r0, [r0, 0x4]
 	ldr r0, [r0, 0x8]
 	adds r0, 0x8
@@ -30334,7 +30334,7 @@ _081D6162:
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x1A
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldr r0, [r0, 0x4]
 	ldr r0, [r0, 0x8]
 _081D6176:

@@ -14665,7 +14665,7 @@ sub_819672C: @ 819672C
 	ldrh r2, [r0, 0xA]
 	ldrh r1, [r0, 0xC]
 	adds r0, r2, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1

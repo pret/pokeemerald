@@ -5,1008 +5,9 @@
 
 	.text
 
-	thumb_func_start sub_8084620
-sub_8084620: @ 8084620
-	push {r4,lr}
-	ldr r0, =EverGrandeCity_HallOfFame_EventScript_271857
-	bl ScriptContext2_RunNewScript
-	ldr r0, =gSaveBlock1Ptr
-	ldr r4, [r0]
-	movs r0, 0x92
-	lsls r0, 3
-	adds r4, r0
-	adds r0, r4, 0
-	bl GetMoney
-	adds r1, r0, 0
-	lsrs r1, 1
-	adds r0, r4, 0
-	bl SetMoney
-	bl HealPlayerParty
-	bl sub_8084720
-	bl copy_saved_warp3_bank_and_enter_x_to_warp1
-	bl warp_in
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8084620
-
-	thumb_func_start flag_var_implications_of_teleport_
-flag_var_implications_of_teleport_: @ 8084660
-	push {lr}
-	bl player_avatar_init_params_reset
-	ldr r0, =0x0000088b
-	bl FlagClear
-	ldr r0, =0x0000088d
-	bl FlagClear
-	ldr r0, =0x0000088c
-	bl FlagClear
-	ldr r0, =0x00000889
-	bl FlagClear
-	ldr r0, =0x00000888
-	bl FlagClear
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end flag_var_implications_of_teleport_
-
-	thumb_func_start Overworld_ResetStateAfterTeleport
-Overworld_ResetStateAfterTeleport: @ 808469C
-	push {lr}
-	bl player_avatar_init_params_reset
-	ldr r0, =0x0000088b
-	bl FlagClear
-	ldr r0, =0x0000088d
-	bl FlagClear
-	ldr r0, =0x0000088c
-	bl FlagClear
-	ldr r0, =0x00000889
-	bl FlagClear
-	ldr r0, =0x00000888
-	bl FlagClear
-	ldr r0, =EverGrandeCity_HallOfFame_EventScript_271862
-	bl ScriptContext2_RunNewScript
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Overworld_ResetStateAfterTeleport
-
-	thumb_func_start flagmods_08054D70
-flagmods_08054D70: @ 80846E4
-	push {lr}
-	bl player_avatar_init_params_reset
-	ldr r0, =0x0000088b
-	bl FlagClear
-	ldr r0, =0x0000088d
-	bl FlagClear
-	ldr r0, =0x0000088c
-	bl FlagClear
-	ldr r0, =0x00000889
-	bl FlagClear
-	ldr r0, =0x00000888
-	bl FlagClear
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end flagmods_08054D70
-
-	thumb_func_start sub_8084720
-sub_8084720: @ 8084720
-	push {r4,lr}
-	bl player_avatar_init_params_reset
-	ldr r0, =0x0000088b
-	bl FlagClear
-	ldr r0, =0x0000088d
-	bl FlagClear
-	ldr r0, =0x0000088c
-	bl FlagClear
-	ldr r0, =0x00000889
-	bl FlagClear
-	ldr r0, =0x00000888
-	bl FlagClear
-	ldr r4, =0x00004039
-	adds r0, r4, 0
-	bl VarGet
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1
-	bne _08084764
-	adds r0, r4, 0
-	movs r1, 0
-	bl VarSet
-	ldr r0, =0x00004037
-	movs r1, 0
-	bl VarSet
-_08084764:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8084720
-
-	thumb_func_start sub_8084788
-sub_8084788: @ 8084788
-	push {lr}
-	ldr r0, =0x0000088c
-	bl FlagClear
-	bl sub_8085B2C
-	bl ResetCyclingRoadChallengeData
-	bl UpdateLocationHistoryForRoamer
-	bl RoamerMoveToOtherLocationSet
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8084788
-
-	thumb_func_start ResetGameStats
-ResetGameStats: @ 80847A8
-	push {r4,lr}
-	movs r4, 0
-_080847AC:
-	lsls r0, r4, 24
-	lsrs r0, 24
-	movs r1, 0
-	bl sav12_xor_set
-	adds r4, 0x1
-	cmp r4, 0x3F
-	ble _080847AC
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end ResetGameStats
-
-	thumb_func_start IncrementGameStat
-@ void IncrementGameStat(u8 a1)
-IncrementGameStat: @ 80847C4
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x33
-	bhi _080847EC
-	adds r0, r4, 0
-	bl GetGameStat
-	adds r1, r0, 0
-	ldr r0, =0x00fffffe
-	cmp r1, r0
-	bhi _080847E4
-	adds r1, 0x1
-	b _080847E6
-	.pool
-_080847E4:
-	ldr r1, =0x00ffffff
-_080847E6:
-	adds r0, r4, 0
-	bl sav12_xor_set
-_080847EC:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end IncrementGameStat
-
-	thumb_func_start GetGameStat
-GetGameStat: @ 80847F8
-	push {lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x33
-	bhi _08084828
-	ldr r0, =gSaveBlock1Ptr
-	ldr r2, [r0]
-	lsls r0, r1, 2
-	ldr r1, =0x0000159c
-	adds r2, r1
-	adds r2, r0
-	ldr r0, =gSaveBlock2Ptr
-	ldr r1, [r0]
-	adds r1, 0xAC
-	ldr r0, [r2]
-	ldr r1, [r1]
-	eors r0, r1
-	b _0808482A
-	.pool
-_08084828:
-	movs r0, 0
-_0808482A:
-	pop {r1}
-	bx r1
-	thumb_func_end GetGameStat
-
-	thumb_func_start sav12_xor_set
-sav12_xor_set: @ 8084830
-	push {lr}
-	adds r3, r1, 0
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x33
-	bhi _08084854
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	lsls r0, r2, 2
-	ldr r2, =0x0000159c
-	adds r1, r2
-	adds r1, r0
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	adds r0, 0xAC
-	ldr r0, [r0]
-	eors r0, r3
-	str r0, [r1]
-_08084854:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sav12_xor_set
-
-	thumb_func_start ApplyNewEncryptionKeyToGameStats
-ApplyNewEncryptionKeyToGameStats: @ 8084864
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	movs r4, 0
-	ldr r6, =gSaveBlock1Ptr
-_0808486C:
-	lsls r1, r4, 2
-	ldr r0, =0x0000159c
-	adds r1, r0
-	ldr r0, [r6]
-	adds r0, r1
-	adds r1, r5, 0
-	bl ApplyNewEncryptionKeyToWord
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x3F
-	bls _0808486C
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ApplyNewEncryptionKeyToGameStats
-
-	thumb_func_start CopyFieldObjectTemplatesToSav1
-@ void CopyFieldObjectTemplatesToSav1()
-CopyFieldObjectTemplatesToSav1: @ 8084894
-	push {r4,r5,lr}
-	sub sp, 0x4
-	movs r0, 0
-	str r0, [sp]
-	ldr r5, =gSaveBlock1Ptr
-	ldr r1, [r5]
-	movs r4, 0xC7
-	lsls r4, 4
-	adds r1, r4
-	ldr r2, =0x05000180
-	mov r0, sp
-	bl CpuSet
-	ldr r0, =gMapHeader
-	ldr r2, [r0, 0x4]
-	ldr r0, [r2, 0x4]
-	ldr r1, [r5]
-	adds r1, r4
-	ldrb r3, [r2]
-	lsls r2, r3, 1
-	adds r2, r3
-	lsls r2, 1
-	movs r3, 0x80
-	lsls r3, 19
-	orrs r2, r3
-	bl CpuSet
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CopyFieldObjectTemplatesToSav1
-
-	thumb_func_start CopyFieldObjectTemplateCoordsToSav1
-@ void CopyFieldObjectTemplateCoordsToSav1()
-CopyFieldObjectTemplateCoordsToSav1: @ 80848E0
-	push {lr}
-	ldr r0, =gMapHeader
-	ldr r1, [r0, 0x4]
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r2, [r1, 0x4]
-	movs r3, 0xC7
-	lsls r3, 4
-	adds r1, r0, r3
-	movs r3, 0x3F
-_080848F4:
-	ldr r0, [r2, 0x10]
-	str r0, [r1, 0x10]
-	adds r2, 0x18
-	adds r1, 0x18
-	subs r3, 0x1
-	cmp r3, 0
-	bge _080848F4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CopyFieldObjectTemplateCoordsToSav1
-
-	thumb_func_start Overworld_SetMapObjTemplateCoords
-Overworld_SetMapObjTemplateCoords: @ 8084910
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 16
-	lsrs r4, r1, 16
-	lsls r2, 16
-	lsrs r2, 16
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	movs r1, 0
-	movs r6, 0xC7
-	lsls r6, 4
-	adds r3, r0, r6
-_0808492A:
-	ldrb r0, [r3]
-	cmp r0, r5
-	bne _0808493C
-	strh r4, [r3, 0x4]
-	strh r2, [r3, 0x6]
-	b _08084944
-	.pool
-_0808493C:
-	adds r3, 0x18
-	adds r1, 0x1
-	cmp r1, 0x3F
-	ble _0808492A
-_08084944:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end Overworld_SetMapObjTemplateCoords
-
-	thumb_func_start Overworld_SetMapObjTemplateMovementType
-Overworld_SetMapObjTemplateMovementType: @ 808494C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	movs r3, 0
-	movs r5, 0xC7
-	lsls r5, 4
-	adds r2, r0, r5
-_08084962:
-	ldrb r0, [r2]
-	cmp r0, r4
-	bne _08084970
-	strb r1, [r2, 0x9]
-	b _08084978
-	.pool
-_08084970:
-	adds r2, 0x18
-	adds r3, 0x1
-	cmp r3, 0x3F
-	ble _08084962
-_08084978:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end Overworld_SetMapObjTemplateMovementType
-
-	thumb_func_start mapdata_load_assets_to_gpu_and_full_redraw
-mapdata_load_assets_to_gpu_and_full_redraw: @ 8084980
-	push {r4,lr}
-	bl move_tilemap_camera_to_upper_left_corner
-	ldr r4, =gMapHeader
-	ldr r0, [r4]
-	bl copy_map_tileset1_tileset2_to_vram
-	ldr r0, [r4]
-	bl apply_map_tileset1_tileset2_palette
-	bl DrawWholeMapView
-	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end mapdata_load_assets_to_gpu_and_full_redraw
-
-	thumb_func_start get_mapdata_header
-@ mapdata_header *get_mapdata_header()
-get_mapdata_header: @ 80849A8
-	push {lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldrh r1, [r0, 0x32]
-	cmp r1, 0
-	bne _080849BC
-	movs r0, 0
-	b _080849C6
-	.pool
-_080849BC:
-	ldr r0, =gMapAttributes
-	subs r1, 0x1
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, [r1]
-_080849C6:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end get_mapdata_header
-
-	thumb_func_start warp_shift
-@ void warp_shift()
-warp_shift: @ 80849D0
-	ldr r3, =gUnknown_020322DC
-	ldr r0, =gSaveBlock1Ptr
-	ldr r2, [r0]
-	ldr r0, [r2, 0x4]
-	ldr r1, [r2, 0x8]
-	str r0, [r3]
-	str r1, [r3, 0x4]
-	ldr r0, =gUnknown_020322E4
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [r2, 0x4]
-	str r1, [r2, 0x8]
-	ldr r2, =gUnknown_020322EC
-	ldr r0, =gUnknown_08339D3C
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	ldr r2, =gUnknown_020322F4
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	bx lr
-	.pool
-	thumb_func_end warp_shift
-
-	thumb_func_start set_warp2_warp3_to_neg_1
-@ void set_warp2_warp3_to_neg_1()
-set_warp2_warp3_to_neg_1: @ 8084A14
-	ldr r2, =gUnknown_020322EC
-	ldr r0, =gUnknown_08339D3C
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	ldr r2, =gUnknown_020322F4
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	bx lr
-	.pool
-	thumb_func_end set_warp2_warp3_to_neg_1
-
-	thumb_func_start warp_set
-@ void warp_set(warpdata *warp, char bank, char map, char warpid, char enter_x, char enter_y)
-warp_set: @ 8084A34
-	push {r4,r5,lr}
-	ldr r4, [sp, 0xC]
-	ldr r5, [sp, 0x10]
-	strb r1, [r0]
-	strb r2, [r0, 0x1]
-	strb r3, [r0, 0x2]
-	lsls r4, 24
-	asrs r4, 24
-	strh r4, [r0, 0x4]
-	lsls r5, 24
-	asrs r5, 24
-	strh r5, [r0, 0x6]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end warp_set
-
-	thumb_func_start warp_data_is_not_neg_1
-@ int warp_data_is_not_neg_1(warpdata *warp)
-warp_data_is_not_neg_1: @ 8084A54
-	push {lr}
-	adds r1, r0, 0
-	movs r2, 0
-	ldrsb r2, [r1, r2]
-	movs r0, 0x1
-	negs r0, r0
-	cmp r2, r0
-	bne _08084A88
-	movs r0, 0x1
-	ldrsb r0, [r1, r0]
-	cmp r0, r2
-	bne _08084A88
-	movs r2, 0x2
-	ldrsb r2, [r1, r2]
-	cmp r2, r0
-	bne _08084A88
-	movs r0, 0x4
-	ldrsh r3, [r1, r0]
-	cmp r3, r2
-	bne _08084A88
-	movs r2, 0x6
-	ldrsh r0, [r1, r2]
-	cmp r0, r3
-	bne _08084A88
-	movs r0, 0x1
-	b _08084A8A
-_08084A88:
-	movs r0, 0
-_08084A8A:
-	pop {r1}
-	bx r1
-	thumb_func_end warp_data_is_not_neg_1
-
-	thumb_func_start get_mapheader_by_bank_and_number
-@ struct mapheader *get_mapheader_by_bank_and_number(unsigned int bank, unsigned int num)
-get_mapheader_by_bank_and_number: @ 8084A90
-	lsls r0, 16
-	lsls r1, 16
-	ldr r2, =gMapGroups
-	lsrs r0, 14
-	adds r0, r2
-	ldr r0, [r0]
-	lsrs r1, 14
-	adds r1, r0
-	ldr r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end get_mapheader_by_bank_and_number
-
-	thumb_func_start warp1_get_mapheader
-@ struct mapheader *warp1_get_mapheader()
-warp1_get_mapheader: @ 8084AA8
-	push {lr}
-	ldr r1, =gUnknown_020322E4
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	lsls r0, 16
-	lsrs r0, 16
-	ldrb r1, [r1, 0x1]
-	lsls r1, 24
-	asrs r1, 24
-	lsls r1, 16
-	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end warp1_get_mapheader
-
-	thumb_func_start set_current_map_header_from_sav1_save_old_name
-@ void set_current_map_header_from_sav1_save_old_name()
-set_current_map_header_from_sav1_save_old_name: @ 8084ACC
-	push {r4-r6,lr}
-	ldr r1, =gUnknown_020322FC
-	ldr r4, =gMapHeader
-	ldrb r0, [r4, 0x14]
-	strh r0, [r1]
-	ldr r5, =gSaveBlock1Ptr
-	ldr r1, [r5]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	lsls r0, 16
-	lsrs r0, 16
-	ldrb r1, [r1, 0x5]
-	lsls r1, 24
-	asrs r1, 24
-	lsls r1, 16
-	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
-	adds r1, r4, 0
-	ldm r0!, {r2,r3,r6}
-	stm r1!, {r2,r3,r6}
-	ldm r0!, {r2,r3,r6}
-	stm r1!, {r2,r3,r6}
-	ldr r0, [r0]
-	str r0, [r1]
-	ldr r1, [r5]
-	ldrh r0, [r4, 0x12]
-	strh r0, [r1, 0x32]
-	bl get_mapdata_header
-	str r0, [r4]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end set_current_map_header_from_sav1_save_old_name
-
-	thumb_func_start set_current_map_header_from_sav1
-set_current_map_header_from_sav1: @ 8084B1C
-	push {r4,r5,lr}
-	ldr r4, =gMapHeader
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	lsls r0, 16
-	lsrs r0, 16
-	ldrb r1, [r1, 0x5]
-	lsls r1, 24
-	asrs r1, 24
-	lsls r1, 16
-	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
-	adds r1, r4, 0
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldr r0, [r0]
-	str r0, [r1]
-	bl get_mapdata_header
-	str r0, [r4]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end set_current_map_header_from_sav1
-
-	thumb_func_start update_camera_pos_from_warpid
-@ void update_camera_pos_from_warpid()
-update_camera_pos_from_warpid: @ 8084B5C
-	push {r4,r5,lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r2, [r0]
-	movs r1, 0x6
-	ldrsb r1, [r2, r1]
-	adds r4, r0, 0
-	cmp r1, 0
-	blt _08084B94
-	ldr r3, =gMapHeader
-	ldr r0, [r3, 0x4]
-	ldrb r5, [r0, 0x1]
-	cmp r1, r5
-	bge _08084B94
-	ldr r0, [r0, 0x8]
-	lsls r1, 3
-	adds r0, r1, r0
-	ldrh r0, [r0]
-	strh r0, [r2]
-	ldr r0, [r3, 0x4]
-	ldr r0, [r0, 0x8]
-	adds r1, r0
-	ldrh r0, [r1, 0x2]
-	strh r0, [r2, 0x2]
-	b _08084BCC
-	.pool
-_08084B94:
-	ldr r1, [r4]
-	ldrh r3, [r1, 0x8]
-	movs r2, 0x8
-	ldrsh r0, [r1, r2]
-	cmp r0, 0
-	blt _08084BB0
-	ldrh r2, [r1, 0xA]
-	movs r5, 0xA
-	ldrsh r0, [r1, r5]
-	cmp r0, 0
-	blt _08084BB0
-	strh r3, [r1]
-	strh r2, [r1, 0x2]
-	b _08084BCC
-_08084BB0:
-	ldr r3, [r4]
-	ldr r2, =gMapHeader
-	ldr r0, [r2]
-	ldr r0, [r0]
-	lsrs r1, r0, 31
-	adds r0, r1
-	asrs r0, 1
-	strh r0, [r3]
-	ldr r0, [r2]
-	ldr r0, [r0, 0x4]
-	lsrs r1, r0, 31
-	adds r0, r1
-	asrs r0, 1
-	strh r0, [r3, 0x2]
-_08084BCC:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end update_camera_pos_from_warpid
-
-	thumb_func_start warp_in
-warp_in: @ 8084BD8
-	push {lr}
-	bl warp_shift
-	bl set_current_map_header_from_sav1_save_old_name
-	bl update_camera_pos_from_warpid
-	pop {r0}
-	bx r0
-	thumb_func_end warp_in
-
-	thumb_func_start Overworld_SetWarpDestination
-@ void Overworld_SetWarpDestination(char bank, char map, char warpid, char enter_x, char enter_y)
-Overworld_SetWarpDestination: @ 8084BEC
-	push {r4-r6,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r6, r2, 0
-	ldr r1, [sp, 0x18]
-	ldr r0, =gUnknown_020322E4
-	lsls r4, 24
-	asrs r4, 24
-	lsls r5, 24
-	asrs r5, 24
-	lsls r6, 24
-	asrs r6, 24
-	lsls r3, 24
-	asrs r3, 24
-	str r3, [sp]
-	lsls r1, 24
-	asrs r1, 24
-	str r1, [sp, 0x4]
-	adds r1, r4, 0
-	adds r2, r5, 0
-	adds r3, r6, 0
-	bl warp_set
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Overworld_SetWarpDestination
-
-	thumb_func_start warp1_set_2
-@ void warp1_set_2(char bank, char map, char warpid)
-warp1_set_2: @ 8084C28
-	push {lr}
-	sub sp, 0x4
-	lsls r0, 24
-	asrs r0, 24
-	lsls r1, 24
-	asrs r1, 24
-	lsls r2, 24
-	asrs r2, 24
-	movs r3, 0x1
-	negs r3, r3
-	str r3, [sp]
-	bl Overworld_SetWarpDestination
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	thumb_func_end warp1_set_2
-
-	thumb_func_start saved_warp2_set
-@ void saved_warp2_set(char bank, char map, char warpid)
-saved_warp2_set: @ 8084C48
-	push {r4,r5,lr}
-	sub sp, 0x8
-	ldr r0, =gSaveBlock1Ptr
-	ldr r5, [r0]
-	adds r0, r5, 0
-	adds r0, 0x14
-	lsls r1, 24
-	asrs r1, 24
-	lsls r2, 24
-	asrs r2, 24
-	lsls r3, 24
-	asrs r3, 24
-	movs r4, 0
-	ldrsb r4, [r5, r4]
-	str r4, [sp]
-	movs r4, 0x2
-	ldrsb r4, [r5, r4]
-	str r4, [sp, 0x4]
-	bl warp_set
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end saved_warp2_set
-
-	thumb_func_start saved_warp2_set_2
-saved_warp2_set_2: @ 8084C7C
-	push {r4,r5,lr}
-	sub sp, 0x8
-	ldr r4, [sp, 0x14]
-	ldr r5, [sp, 0x18]
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	adds r0, 0x14
-	lsls r1, 24
-	asrs r1, 24
-	lsls r2, 24
-	asrs r2, 24
-	lsls r3, 24
-	asrs r3, 24
-	lsls r4, 24
-	asrs r4, 24
-	str r4, [sp]
-	lsls r5, 24
-	asrs r5, 24
-	str r5, [sp, 0x4]
-	bl warp_set
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end saved_warp2_set_2
-
-	thumb_func_start copy_saved_warp2_bank_and_enter_x_to_warp1
-copy_saved_warp2_bank_and_enter_x_to_warp1: @ 8084CB4
-	ldr r2, =gUnknown_020322E4
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, [r0, 0x18]
-	ldr r0, [r0, 0x14]
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	bx lr
-	.pool
-	thumb_func_end copy_saved_warp2_bank_and_enter_x_to_warp1
-
-	thumb_func_start sub_8084CCC
-@ void sub_8084CCC(int a1)
-sub_8084CCC: @ 8084CCC
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetHealLocationPointer
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _08084CFA
-	movs r0, 0
-	ldrsb r0, [r4, r0]
-	movs r1, 0x1
-	ldrsb r1, [r4, r1]
-	movs r2, 0x1
-	negs r2, r2
-	movs r3, 0x2
-	ldrsb r3, [r4, r3]
-	ldrb r4, [r4, 0x4]
-	lsls r4, 24
-	asrs r4, 24
-	str r4, [sp]
-	bl Overworld_SetWarpDestination
-_08084CFA:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8084CCC
-
-	thumb_func_start copy_saved_warp3_bank_and_enter_x_to_warp1
-@ void copy_saved_warp3_bank_and_enter_x_to_warp1()
-copy_saved_warp3_bank_and_enter_x_to_warp1: @ 8084D04
-	ldr r2, =gUnknown_020322E4
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, [r0, 0x20]
-	ldr r0, [r0, 0x1C]
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	bx lr
-	.pool
-	thumb_func_end copy_saved_warp3_bank_and_enter_x_to_warp1
-
-	thumb_func_start Overworld_SetHealLocationWarp
-Overworld_SetHealLocationWarp: @ 8084D1C
-	push {r4,r5,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetHealLocationPointer
-	adds r5, r0, 0
-	cmp r5, 0
-	beq _08084D50
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	adds r0, 0x1C
-	movs r1, 0
-	ldrsb r1, [r5, r1]
-	movs r2, 0x1
-	ldrsb r2, [r5, r2]
-	movs r3, 0x1
-	negs r3, r3
-	movs r4, 0x2
-	ldrsb r4, [r5, r4]
-	str r4, [sp]
-	movs r4, 0x4
-	ldrsb r4, [r5, r4]
-	str r4, [sp, 0x4]
-	bl warp_set
-_08084D50:
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Overworld_SetHealLocationWarp
-
-	thumb_func_start sub_8084D5C
-sub_8084D5C: @ 8084D5C
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 16
-	lsrs r6, r0, 16
-	lsls r1, 16
-	lsrs r7, r1, 16
-	bl sav1_map_get_light_level
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r1, =gUnknown_020322E4
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	ldrb r1, [r1, 0x1]
-	lsls r1, 24
-	asrs r1, 24
-	bl get_map_light_level_by_bank_and_number
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r0, r4, 0
-	bl is_light_level_1_2_3_5_or_6
-	lsls r0, 24
-	cmp r0, 0
-	beq _08084DC4
-	adds r0, r5, 0
-	bl is_light_level_1_2_3_5_or_6
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _08084DC4
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	ldrb r1, [r1, 0x5]
-	lsls r1, 24
-	asrs r1, 24
-	movs r2, 0x1
-	negs r2, r2
-	subs r3, r6, 0x7
-	lsls r3, 24
-	asrs r3, 24
-	subs r4, r7, 0x6
-	lsls r4, 24
-	asrs r4, 24
-	str r4, [sp]
-	bl sub_8084DD4
-_08084DC4:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8084D5C
-
-	thumb_func_start sub_8084DD4
-sub_8084DD4: @ 8084DD4
-	push {r4-r6,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r6, r2, 0
-	ldr r1, [sp, 0x18]
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	adds r0, 0x24
-	lsls r4, 24
-	asrs r4, 24
-	lsls r5, 24
-	asrs r5, 24
-	lsls r6, 24
-	asrs r6, 24
-	lsls r3, 24
-	asrs r3, 24
-	str r3, [sp]
-	lsls r1, 24
-	asrs r1, 24
-	str r1, [sp, 0x4]
-	adds r1, r4, 0
-	adds r2, r5, 0
-	adds r3, r6, 0
-	bl warp_set
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8084DD4
-
 	thumb_func_start sub_8084E14
 sub_8084E14: @ 8084E14
-	ldr r2, =gUnknown_020322E4
+	ldr r2, =gWarpDestination
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x28]
@@ -1041,7 +42,7 @@ sub_8084E2C: @ 8084E2C
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -1051,7 +52,7 @@ sub_8084E2C: @ 8084E2C
 
 	thumb_func_start warp1_set_to_warp2
 warp1_set_to_warp2: @ 8084E68
-	ldr r2, =gUnknown_020322E4
+	ldr r2, =gWarpDestination
 	ldr r0, =gUnknown_020322EC
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
@@ -1085,7 +86,7 @@ sub_8084E80: @ 8084E80
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -1106,7 +107,7 @@ sub_8084EBC: @ 8084EBC
 	bl warp_data_is_not_neg_1
 	cmp r0, 0x1
 	bne _08084EF0
-	ldr r2, =gUnknown_020322E4
+	ldr r2, =gWarpDestination
 	ldr r0, =gUnknown_020322DC
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
@@ -1136,7 +137,7 @@ _08084F0A:
 
 	thumb_func_start warp1_set_to_sav1w
 warp1_set_to_sav1w: @ 8084F14
-	ldr r2, =gUnknown_020322E4
+	ldr r2, =gWarpDestination
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x10]
@@ -1173,7 +174,7 @@ sub_8084F2C: @ 8084F2C
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -1206,7 +207,7 @@ sub_8084F6C: @ 8084F6C
 	movs r4, 0x4
 	ldrsb r4, [r5, r4]
 	str r4, [sp, 0x4]
-	bl warp_set
+	bl SetWarpData
 _08084FA0:
 	add sp, 0x8
 	pop {r4,r5}
@@ -1372,9 +373,9 @@ mliX_load_map: @ 8085098
 	beq _080850C8
 	bl sub_8085810
 _080850C8:
-	bl warp_shift
+	bl ApplyCurrentWarp
 	bl set_current_map_header_from_sav1_save_old_name
-	bl CopyFieldObjectTemplatesToSav1
+	bl LoadMapObjTemplatesFromHeader
 	bl TrySetMapSaveWarpStatus
 	bl ClearTempFieldEventData
 	bl ResetCyclingRoadChallengeData
@@ -1384,7 +385,7 @@ _080850C8:
 	bl TryUpdateRandomTrainerRematches
 	bl DoTimeBasedEvents
 	bl SetSav1WeatherFromCurrMapHeader
-	bl sub_8085B2C
+	bl ChooseAmbientCrySpecies
 	bl update_sav1_flash_used_on_map
 	bl Overworld_ClearSavedMusic
 	bl mapheader_run_script_with_tag_x3
@@ -1411,7 +412,7 @@ _08085116:
 	ldrb r0, [r2, 0x14]
 	cmp r0, 0x3A
 	bne _0808514C
-	ldr r1, =gUnknown_020322FC
+	ldr r1, =gLastMapSectionId
 	ldrh r1, [r1]
 	cmp r0, r1
 	beq _08085150
@@ -1451,7 +452,7 @@ _08085190:
 	bl sub_81D5DF8
 	b _080851A2
 _0808519E:
-	bl CopyFieldObjectTemplatesToSav1
+	bl LoadMapObjTemplatesFromHeader
 _080851A2:
 	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x17]
@@ -1484,7 +485,7 @@ _080851A2:
 	bl DoTimeBasedEvents
 _080851EE:
 	bl SetSav1WeatherFromCurrMapHeader
-	bl sub_8085B2C
+	bl ChooseAmbientCrySpecies
 	cmp r5, 0
 	beq _08085200
 	ldr r0, =0x00000888
@@ -1589,7 +590,7 @@ _080852CA:
 	thumb_func_start sub_80852D4
 sub_80852D4: @ 80852D4
 	push {r4-r7,lr}
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -2111,7 +1112,7 @@ _080856A4:
 	ldrsb r1, [r4, r1]
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrh r0, [r0, 0x10]
 	b _080856CE
 _080856CA:
@@ -2175,7 +1176,7 @@ _08085730:
 	thumb_func_start warp1_target_get_music
 warp1_target_get_music: @ 8085738
 	push {lr}
-	ldr r0, =gUnknown_020322E4
+	ldr r0, =gWarpDestination
 	bl warp_target_get_music
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -2233,7 +1234,7 @@ Overworld_PlaySpecialMapMusic: @ 8085784
 	b _080857D6
 	.pool
 _080857B4:
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -2441,7 +1442,7 @@ music_something: @ 8085910
 	lsls r0, 3
 	cmp r2, r0
 	bne _08085972
-	ldr r3, =gUnknown_020322E4
+	ldr r3, =gWarpDestination
 	ldrh r0, [r3]
 	ands r1, r0
 	cmp r1, r2
@@ -2658,8 +1659,8 @@ _08085B20:
 	bx r0
 	thumb_func_end wild_encounter_related
 
-	thumb_func_start sub_8085B2C
-sub_8085B2C: @ 8085B2C
+	thumb_func_start ChooseAmbientCrySpecies
+ChooseAmbientCrySpecies: @ 8085B2C
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -2687,11 +1688,11 @@ _08085B62:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8085B2C
+	thumb_func_end ChooseAmbientCrySpecies
 
-	thumb_func_start get_map_light_level_by_bank_and_number
-@ int get_map_light_level_by_bank_and_number(int bank, int number)
-get_map_light_level_by_bank_and_number: @ 8085B74
+	thumb_func_start GetMapTypeByGroupAndId
+@ int GetMapTypeByGroupAndId(int bank, int number)
+GetMapTypeByGroupAndId: @ 8085B74
 	push {lr}
 	lsls r0, 24
 	asrs r0, 8
@@ -2699,11 +1700,11 @@ get_map_light_level_by_bank_and_number: @ 8085B74
 	lsls r1, 24
 	asrs r1, 8
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x17]
 	pop {r1}
 	bx r1
-	thumb_func_end get_map_light_level_by_bank_and_number
+	thumb_func_end GetMapTypeByGroupAndId
 
 	thumb_func_start get_map_light_level_from_warp
 @ int get_map_light_level_from_warp(warpdata *warp)
@@ -2714,15 +1715,15 @@ get_map_light_level_from_warp: @ 8085B8C
 	movs r1, 0x1
 	ldrsb r1, [r0, r1]
 	adds r0, r2, 0
-	bl get_map_light_level_by_bank_and_number
+	bl GetMapTypeByGroupAndId
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	thumb_func_end get_map_light_level_from_warp
 
-	thumb_func_start sav1_map_get_light_level
-sav1_map_get_light_level: @ 8085BA4
+	thumb_func_start Overworld_GetMapTypeOfSaveblockLocation
+Overworld_GetMapTypeOfSaveblockLocation: @ 8085BA4
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -2733,7 +1734,7 @@ sav1_map_get_light_level: @ 8085BA4
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sav1_map_get_light_level
+	thumb_func_end Overworld_GetMapTypeOfSaveblockLocation
 
 	thumb_func_start get_map_light_from_warp0
 get_map_light_from_warp0: @ 8085BBC
@@ -2828,7 +1829,7 @@ sav1_saved_warp2_map_get_name: @ 8085C30
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -2849,7 +1850,7 @@ sav1_map_get_name: @ 8085C58
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -2870,7 +1871,7 @@ GetCurrentMapBattleScene: @ 8085C80
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x1B]
 	pop {r1}
 	bx r1
@@ -3210,7 +2211,7 @@ CB2_WhiteOut: @ 8085F58
 	bl sub_808631C
 	bl StopMapMusic
 	bl ResetSafariZoneFlag_
-	bl sub_8084620
+	bl DoWhiteOut
 	bl player_avatar_init_params_reset
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
@@ -3502,7 +2503,7 @@ sub_8086230: @ 8086230
 	bne _0808624A
 	bl sub_81A3908
 _0808624A:
-	bl set_current_map_header_from_sav1
+	bl LoadSaveblockMapHeader
 	bl set_warp2_warp3_to_neg_1
 	bl GetCurrentTrainerHillMapId
 	lsls r0, 24
@@ -3523,7 +2524,7 @@ _08086278:
 	bl sub_81D5F48
 	b _0808628A
 _08086286:
-	bl CopyFieldObjectTemplateCoordsToSav1
+	bl LoadSaveblockMapObjScripts
 _0808628A:
 	bl UnfreezeMapObjects
 	bl DoTimeBasedEvents

@@ -2570,7 +2570,7 @@ sub_8141800: @ 8141800
 	movs r0, 0x1E
 	ldrsh r1, [r4, r0]
 	movs r0, 0x1D
-	bl sav12_xor_set
+	bl SetGameStat
 _08141848:
 	ldr r1, =sub_8141A18
 	ldr r2, =0x0000ffff

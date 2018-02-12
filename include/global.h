@@ -618,7 +618,7 @@ struct SaveBlock1
     /*0x04*/ struct WarpData location;
     /*0x0C*/ struct WarpData warp1;
     /*0x14*/ struct WarpData warp2;
-    /*0x1C*/ struct WarpData warp3;
+    /*0x1C*/ struct WarpData lastHealLocation;
     /*0x24*/ struct WarpData warp4;
     /*0x2C*/ u16 battleMusic;
     /*0x2E*/ u8 weather;
@@ -704,6 +704,23 @@ struct SaveBlock1
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
+
+struct MapPosition
+{
+    s16 x;
+    s16 y;
+    u8 height;
+};
+
+struct UnkStruct_8054FF8
+{
+    u8 a;
+    u8 b;
+    u8 c;
+    u8 d;
+    struct MapPosition sub;
+    u16 field_C;
+};
 
 struct Bitmap           // TODO: Find a better spot for this
 {

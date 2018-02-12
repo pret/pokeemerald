@@ -1673,7 +1673,7 @@ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 m
     }
     else
     {
-        mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
         templates = mapHeader->events->mapObjects;
         count = mapHeader->events->mapObjectCount;
     }

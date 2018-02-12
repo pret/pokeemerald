@@ -51,9 +51,10 @@
 #define GAME_STAT_USED_DAYCARE              47
 #define GAME_STAT_RODE_CABLE_CAR            48
 #define GAME_STAT_ENTERED_HOT_SPRINGS       49
+#define GAME_STAT_50                        50
+#define GAME_STAT_51                        51
 
-/*TODO: add new stats added in Emerald*/
-
+#define NUM_USED_GAME_STATS                 52
 #define NUM_GAME_STATS                      64
 
 #endif // GUARD_CONSTANTS_GAME_STAT_H

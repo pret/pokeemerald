@@ -85,7 +85,7 @@ extern void sub_81C59BC(void);
 extern void sub_81AB9A8(u8);
 extern void sub_81ABA88(u8);
 extern void sub_80B7CC8(void);
-extern void flagmods_08054D70(void);
+extern void Overworld_ResetStateAfterDigEscRope(void);
 extern u8* sub_806CF78(u16);
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
@@ -904,7 +904,7 @@ void task08_080A1C44(u8 taskId)
 
 void re_escape_rope(u8 taskId)
 {
-    flagmods_08054D70();
+    Overworld_ResetStateAfterDigEscRope();
     sub_80FE058();
     gTasks[taskId].data[0] = 0;
     DisplayItemMessageOnField(taskId, gStringVar4, task08_080A1C44);

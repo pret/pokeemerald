@@ -45,13 +45,13 @@ _0813BFCA:
 	bge _0813BFCA
 	movs r0, 0x17
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	movs r0, 0x18
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	movs r0, 0x19
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	pop {r4,r5}
 	pop {r0}
 	bx r0

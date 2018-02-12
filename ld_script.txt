@@ -86,6 +86,7 @@ SECTIONS {
         src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
+        src/overworld.o(.text);
         asm/overworld.o(.text);
         asm/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
@@ -393,7 +394,7 @@ SECTIONS {
         data/trade.o(.rodata);
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
-        data/overworld.o(.rodata);
+        src/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         data/fieldmap.o(.rodata);

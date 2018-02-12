@@ -2008,7 +2008,7 @@ _080B6A64:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B6A8A
-	bl flag_var_implications_of_teleport_
+	bl Overworld_ResetStateAfterFly
 	bl warp_in
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
@@ -4881,7 +4881,7 @@ _080B81B8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B81E6
-	bl copy_saved_warp3_bank_and_enter_x_to_warp1
+	bl Overworld_SetWarpDestToLastHealLoc
 	bl warp_in
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
@@ -5211,7 +5211,7 @@ _080B8484:
 	thumb_func_start sub_80B849C
 sub_80B849C: @ 80B849C
 	push {r4,lr}
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	lsls r0, 24
 	lsrs r0, 24
 	bl is_light_level_1_2_3_5_or_6
