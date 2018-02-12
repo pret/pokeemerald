@@ -79,7 +79,7 @@ SECTIONS {
         src/daycare.o(.text);
         src/egg_hatch.o(.text);
         src/battle_interface.o(.text);
-        asm/smokescreen.o(.text);
+        src/smokescreen.o(.text);
         src/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);
