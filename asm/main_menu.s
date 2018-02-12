@@ -4654,12 +4654,12 @@ fmt_pokedex: @ 8031F7C
 	cmp r0, 0
 	beq _08031FA4
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	b _08031FAA
 	.pool
 _08031FA4:
 	movs r0, 0x1
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 _08031FAA:
 	lsls r0, 16
 	lsrs r7, r0, 16

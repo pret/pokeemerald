@@ -34,13 +34,13 @@ bool16 ScriptGetPokedexInfo(void)
 {
     if (gSpecialVar_0x8004 == 0) // is national dex not present?
     {
-        gSpecialVar_0x8005 = sub_80C0844(0);
-        gSpecialVar_0x8006 = sub_80C0844(1);
+        gSpecialVar_0x8005 = GetHoennPokedexCount(0);
+        gSpecialVar_0x8006 = GetHoennPokedexCount(1);
     }
     else
     {
-        gSpecialVar_0x8005 = pokedex_count(0);
-        gSpecialVar_0x8006 = pokedex_count(1);
+        gSpecialVar_0x8005 = GetNationalPokedexCount(0);
+        gSpecialVar_0x8006 = GetNationalPokedexCount(1);
     }
 
     return IsNationalPokedexEnabled();
