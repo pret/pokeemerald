@@ -252,7 +252,7 @@ _0815226C:
 	ldrb r2, [r2]
 	cmp r3, r2
 	bcs _08152292
-	ldr r0, =gUnknown_030024F8
+	ldr r0, =gMain+0x238
 	mov r12, r0
 	ldr r4, =gDummyOamData
 	adds r2, r5, 0
@@ -350,7 +350,7 @@ _08152322:
 	cmp r0, 0
 	beq _08152348
 	lsls r0, r6, 3
-	ldr r1, =gUnknown_030024F8
+	ldr r1, =gMain+0x238
 	adds r0, r1
 	ldr r1, =gDummyOamData
 	ldm r1!, {r2,r3}
@@ -412,7 +412,7 @@ _08152348:
 	orrs r0, r1
 	strh r0, [r2, 0x4]
 	lsls r1, r6, 3
-	ldr r2, =gUnknown_030024F8
+	ldr r2, =gMain+0x238
 	ldr r0, [r4, 0x4]
 	adds r1, r2
 	adds r0, r5, r0
@@ -746,7 +746,7 @@ _081525FC:
 	orrs r0, r2
 	strb r0, [r1, 0x19]
 	lsls r1, r5, 3
-	ldr r0, =gUnknown_030024F8
+	ldr r0, =gMain+0x238
 	adds r1, r0
 	ldr r0, =gDummyOamData
 	ldm r0!, {r2,r3}

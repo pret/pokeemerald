@@ -3180,7 +3180,7 @@ CB2_NewGame: @ 8085EF8
 	ldr r1, =gUnknown_03005DB0
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl do_load_map_stuff_loop
 	bl SetFieldVBlankCallback
 	ldr r0, =c1_overworld
@@ -3255,7 +3255,7 @@ c2_load_new_map: @ 8085FCC
 	thumb_func_start c2_load_new_map_2
 c2_load_new_map_2: @ 8085FFC
 	push {lr}
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl do_load_map_stuff_loop
 	bl SetFieldVBlankCallback
 	ldr r0, =c1_overworld
@@ -3317,7 +3317,7 @@ sub_8086074: @ 8086074
 	thumb_func_start c2_80567AC
 c2_80567AC: @ 8086098
 	push {lr}
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl map_loading_iteration_3
 	cmp r0, 0
 	beq _080860B8
@@ -3356,7 +3356,7 @@ _080860EA:
 	thumb_func_start c2_exit_to_overworld_2_local
 c2_exit_to_overworld_2_local: @ 80860F4
 	push {lr}
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl sub_8086638
 	cmp r0, 0
 	beq _0808610A
@@ -3375,7 +3375,7 @@ c2_exit_to_overworld_2_link: @ 8086118
 	bl sub_8087598
 	cmp r0, 0
 	bne _08086132
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl map_loading_iteration_2_link
 	cmp r0, 0
 	beq _08086132
@@ -3395,7 +3395,7 @@ c2_8056854: @ 8086140
 	ldr r0, =c1_link_related
 	bl set_callback1
 	bl sub_8086C2C
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086174
@@ -3586,7 +3586,7 @@ sub_808631C: @ 808631C
 	bne _0808632E
 	bl CloseLink
 _0808632E:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086348
@@ -3768,14 +3768,14 @@ _080864DA:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08086506
 _080864E0:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086506
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	b _08086506
 	.pool
 _080864FC:
@@ -4056,14 +4056,14 @@ _08086766:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08086792
 _0808676C:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086792
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	b _08086792
 	.pool
 _08086788:
@@ -4565,7 +4565,7 @@ _08086BCA:
 	thumb_func_start c1_link_related
 c1_link_related: @ 8086BD8
 	push {r4,lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086BF2
@@ -4578,7 +4578,7 @@ c1_link_related: @ 8086BD8
 _08086BF2:
 	ldr r0, =gUnknown_03005DB4
 	ldrb r4, [r0]
-	ldr r0, =gUnknown_03003020
+	ldr r0, =gLinkPartnersHeldKeys
 	adds r1, r4, 0
 	bl sub_8086F38
 	ldr r0, =gUnknown_03000E14
@@ -4610,7 +4610,7 @@ sub_8086C2C: @ 8086C2C
 	thumb_func_start sub_8086C40
 sub_8086C40: @ 8086C40
 	push {lr}
-	ldr r0, =gUnknown_03003020
+	ldr r0, =gLinkPartnersHeldKeys
 	bl sub_808709C
 	pop {r0}
 	bx r0
@@ -4631,7 +4631,7 @@ c1_link_related_func_set: @ 8086C50
 	thumb_func_start sub_8086C64
 sub_8086C64: @ 8086C64
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086C82
@@ -5029,7 +5029,7 @@ _08086FC0:
 	movs r0, 0x11
 	strh r0, [r1]
 _08086FC6:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086FFC
@@ -5926,7 +5926,7 @@ _08087666:
 	thumb_func_start sub_808766C
 sub_808766C: @ 808766C
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08087688
@@ -5946,11 +5946,11 @@ _0808768A:
 	thumb_func_start sub_8087690
 sub_8087690: @ 8087690
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080876B0
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldr r1, =0x00000339
 	adds r0, r1
 	ldrb r0, [r0]

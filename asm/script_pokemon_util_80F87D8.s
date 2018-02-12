@@ -1100,7 +1100,7 @@ sub_80F90DC: @ 80F90DC
 	bl sub_800E0E8
 	movs r0, 0x8
 	movs r1, 0x8
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _080F90FE:
 	pop {r0}
 	bx r0

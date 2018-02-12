@@ -2154,7 +2154,7 @@ void sub_80EDE98(TVShow *show)
     }
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void sub_80EDE98(TVShow *show)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -4110,7 +4110,7 @@ void sub_80F0708(void) // FIXME: register allocation shenanigans
     }
 }
 #else
-__attribute__((naked)) void sub_80F0708(void)
+ASM_DIRECT void sub_80F0708(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r9\n"

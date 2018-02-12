@@ -2128,9 +2128,9 @@ sub_80F6AE8: @ 80F6AE8
 	bl sub_800E0E8
 	movs r0, 0x8
 	movs r1, 0x8
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r4, =gSprites
-	ldr r0, =gUnknown_02022B10
+	ldr r0, =gWirelessStatusIndicatorSpriteId
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1

@@ -100,7 +100,6 @@ EWRAM_DATA static u16 sUnknown_0203CCDC[6] = {0};
 EWRAM_DATA static u8 sUnknown_0203CCE8 = 0;
 
 extern u32 sub_81A513C(void);
-extern void PlayMapChosenOrBattleBGM(bool8);
 
 // this file's functions
 static u8 sub_8185278(u8 *arg0, u8 *arg1, u8 *arg2);
@@ -476,7 +475,7 @@ u32 MoveRecordedBattleToSaveData(void)
 }
 
 #else
-__attribute__((naked))
+ASM_DIRECT
 u32 MoveRecordedBattleToSaveData(void)
 {
     asm(".syntax unified\n\

@@ -366,7 +366,7 @@ sub_8034EFC: @ 8034EFC
 	movs r0, 0
 	strh r0, [r1]
 	lsls r1, r5, 3
-	ldr r2, =gUnknown_030022F8
+	ldr r2, =gMain+0x38
 	mov r9, r2
 	add r1, r9
 	mov r0, r8

@@ -339,7 +339,7 @@ gSlateportBattleTentTrainers:: @ 85DDA14
 	.4byte gSlateportBattleTentTrainerMons_Kyler
 
 @ 13
-	.4byte FACILITY_CLASS_SCHOOL_KID_2
+	.4byte FACILITY_CLASS_SCHOOL_KID_F
 	.string "MAGGIE$", 8
 @ pre-battle speech
 	.2byte EC_POKEMON(VULPIX)
@@ -365,7 +365,7 @@ gSlateportBattleTentTrainers:: @ 85DDA14
 	.4byte gSlateportBattleTentTrainerMons_Maggie
 
 @ 14
-	.4byte FACILITY_CLASS_COOLTRAINER_1
+	.4byte FACILITY_CLASS_COOLTRAINER_M
 	.string "STEPHON$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I_AM
@@ -391,7 +391,7 @@ gSlateportBattleTentTrainers:: @ 85DDA14
 	.4byte gSlateportBattleTentTrainerMons_Stephon
 
 @ 15
-	.4byte FACILITY_CLASS_COOLTRAINER_2
+	.4byte FACILITY_CLASS_COOLTRAINER_F
 	.string "REBECCA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_THAT
@@ -469,7 +469,7 @@ gSlateportBattleTentTrainers:: @ 85DDA14
 	.4byte gSlateportBattleTentTrainerMons_Janae
 
 @ 18
-	.4byte FACILITY_CLASS_EXPERT_1
+	.4byte FACILITY_CLASS_EXPERT_M
 	.string "CAIDEN$", 8
 @ pre-battle speech
 	.2byte EC_WORD_MY

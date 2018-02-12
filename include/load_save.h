@@ -2,6 +2,8 @@
 #define GUARD_LOAD_SAVE_H
 
 extern bool32 gFlashMemoryPresent;
+extern struct SaveBlock2 gSaveblock2;
+extern struct PokemonStorage gPokemonStorage;
 
 void ClearSav2(void);
 void ClearSav1(void);
@@ -19,6 +21,5 @@ void LoadSerializedGame(void);
 void LoadPlayerBag(void);
 void SavePlayerBag(void);
 void SetSaveBlocksPointers(u16);
-void MoveSaveBlocks_ResetHeap(void);
 
 #endif // GUARD_LOAD_SAVE_H

@@ -121,14 +121,14 @@ SouthernIsland_Interior_EventScript_242BA4:: @ 8242BA4
 	setvar VAR_0x8004, 408
 	setvar VAR_0x8005, 50
 	setvar VAR_0x8006, 191
-	special DoScriptedWildBattle
+	special CreateObedientEnemyMon
 	return
 
 SouthernIsland_Interior_EventScript_242BB7:: @ 8242BB7
 	setvar VAR_0x8004, 407
 	setvar VAR_0x8005, 50
 	setvar VAR_0x8006, 191
-	special DoScriptedWildBattle
+	special CreateObedientEnemyMon
 	return
 
 SouthernIsland_Interior_Movement_242BCA: @ 8242BCA

@@ -86,7 +86,7 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	setvar VAR_0x8004, 410
 	setvar VAR_0x8005, 30
 	setvar VAR_0x8006, 0
-	special DoScriptedWildBattle
+	special CreateObedientEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate

@@ -229,6 +229,14 @@ extern const u8* const gPokeblockWasTooXStringTable[];
 extern const u8* const gRefereeStringsTable[];
 extern const u8* const gStatNamesTable2[];
 
+extern const u8 gText_BadEgg[];
+extern const u8 gText_StatRose[];
+extern const u8 gText_PkmnsStatChanged2[];
+extern const u8 gText_PkmnGettingPumped[];
+extern const u8 gText_PkmnShroudedInMist[];
+extern const u8 gText_BattleWallyName[];
+extern const u8 gText_PkmnsXPreventsSwitching[];
+
 extern const u16 gMissStringIds[];
 extern const u16 gTrappingMoves[];
 

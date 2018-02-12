@@ -189,7 +189,7 @@ static void CB2_MysteryEventMenu(void)
         {
             if (gReceivedRemoteLinkPlayers != 0)
             {
-                if (sub_800A0C8(2, 2) == 3)
+                if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == 3)
                 {
                     sub_800AC34();
                     GetEventLoadMessage(gStringVar4, 1);

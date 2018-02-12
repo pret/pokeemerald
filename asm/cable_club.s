@@ -143,7 +143,7 @@ sub_80B2478: @ 80B2478
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_800A0C8
+	bl GetLinkPlayerDataExchangeStatusTimed
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -205,7 +205,7 @@ sub_80B24F8: @ 80B24F8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -274,7 +274,7 @@ sub_80B2578: @ 80B2578
 	cmp r0, 0
 	beq _080B258E
 	movs r0, 0x1
-	bl sub_800B330
+	bl SetSuppressLinkErrorMessage
 _080B258E:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -309,7 +309,7 @@ sub_80B25CC: @ 80B25CC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B2E8
+	bl GetSioMultiSI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -374,9 +374,9 @@ sub_80B2634: @ 80B2634
 	ldrsh r2, [r4, r3]
 	cmp r2, 0
 	bne _080B266C
-	bl sub_800A0AC
+	bl OpenLinkTimed
 	bl sub_800AB98
-	bl sub_800A2BC
+	bl ResetLinkPlayers
 	ldr r0, =gUnknown_08550594
 	bl AddWindow
 	strh r0, [r4, 0xA]
@@ -418,7 +418,7 @@ sub_80B2688: @ 80B2688
 	cmp r5, 0x1
 	bls _080B26FC
 	movs r0, 0x1
-	bl sub_800B330
+	bl SetSuppressLinkErrorMessage
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1065,7 +1065,7 @@ _080B2C7E:
 	cmp r4, r0
 	bcc _080B2C5C
 	movs r0, 0
-	bl sub_800B330
+	bl SetSuppressLinkErrorMessage
 	bl ResetBlockReceivedFlags
 	ldr r0, =gSpecialVar_Result
 	adds r1, r5, 0
@@ -1611,7 +1611,7 @@ sub_80B3144: @ 80B3144
 	cmp r2, 0
 	bne _080B3178
 	bl OpenLink
-	bl sub_800A2BC
+	bl ResetLinkPlayers
 	ldr r0, =task00_08081A90
 	movs r1, 0x50
 	bl CreateTask
@@ -1710,7 +1710,7 @@ sub_80B3220: @ 80B3220
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080B3248
-	bl sub_800A23C
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1813,7 +1813,7 @@ _080B32F8:
 	ldr r2, =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_8009FAC
+	bl ClearLinkCallback_2
 	b _080B3346
 	.pool
 _080B3318:
@@ -1926,7 +1926,7 @@ _080B3408:
 	ldr r2, =0x00002211
 	adds r1, r2, 0
 	strh r1, [r0]
-	bl sub_8009FAC
+	bl ClearLinkCallback_2
 	movs r0, 0x1
 	strh r0, [r6]
 	b _080B3532
@@ -1945,7 +1945,7 @@ _080B343A:
 	b _080B3532
 	.pool
 _080B3444:
-	ldr r1, =gUnknown_020229CC
+	ldr r1, =gLocalLinkPlayer
 	movs r0, 0
 	movs r2, 0x1C
 	bl SendBlock
@@ -2172,7 +2172,7 @@ sub_80B360C: @ 80B360C
 	movs r5, 0x1
 	eors r0, r5
 	bl sub_813C2A0
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B36B2
@@ -2400,7 +2400,7 @@ _080B382E:
 	movs r0, 0x1
 	movs r1, 0
 	bl FadeScreen
-	bl sub_8009FAC
+	bl ClearLinkCallback_2
 	b _080B3864
 _080B3840:
 	ldr r0, =gPaletteFade
@@ -2512,7 +2512,7 @@ _080B391C:
 	thumb_func_start sub_80B3924
 sub_80B3924: @ 80B3924
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3940
@@ -2552,7 +2552,7 @@ sub_80B3968: @ 80B3968
 	ldr r2, =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3994
@@ -2652,7 +2652,7 @@ task00_08081A90: @ 80B3A30
 	cmp r1, r0
 	ble _080B3A62
 	bl CloseLink
-	ldr r0, =c2_800ACD4
+	ldr r0, =CB2_LinkError
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -2661,7 +2661,7 @@ _080B3A62:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3AA6
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3AA0
@@ -2670,7 +2670,7 @@ _080B3A62:
 	cmp r0, 0
 	bne _080B3A86
 	bl CloseLink
-	ldr r0, =c2_800ACD4
+	ldr r0, =CB2_LinkError
 	bl SetMainCallback2
 _080B3A86:
 	adds r0, r4, 0
@@ -2752,7 +2752,7 @@ _080B3B20:
 	beq _080B3B9E
 	b _080B3BB8
 _080B3B2A:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3B40
@@ -2808,7 +2808,7 @@ _080B3B9E:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080B3BB8
-	bl sub_800A23C
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2825,7 +2825,7 @@ _080B3BB8:
 	thumb_func_start sub_80B3BC4
 sub_80B3BC4: @ 80B3BC4
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3BD6

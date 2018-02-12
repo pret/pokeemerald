@@ -143,7 +143,7 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	setvar VAR_0x8004, 151
 	setvar VAR_0x8005, 30
 	setvar VAR_0x8006, 0
-	special DoScriptedWildBattle
+	special CreateObedientEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate

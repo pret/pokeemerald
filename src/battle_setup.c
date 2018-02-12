@@ -5,7 +5,6 @@
 #include "battle_transition.h"
 #include "main.h"
 #include "task.h"
-#include "pokemon_3.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "constants/game_stat.h"

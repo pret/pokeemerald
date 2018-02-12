@@ -24,7 +24,6 @@
 #include "item_use.h"
 
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern struct SpriteTemplate gUnknown_0202499C;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 

@@ -1960,7 +1960,7 @@ _0819B572:
 	mov r2, r9
 	str r2, [sp, 0x8]
 	ldr r2, [sp, 0x14]
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	movs r1, 0
 	add r0, sp, 0xC
 	strb r1, [r0]
@@ -2103,7 +2103,7 @@ _0819B678:
 	mov r2, r10
 	str r2, [sp, 0x8]
 	movs r2, 0x1E
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	add r0, sp, 0xC
 	movs r3, 0
 	strb r3, [r0]
@@ -23864,7 +23864,7 @@ _081A6E0C:
 	ldr r4, [sp, 0x28]
 	str r4, [sp, 0x8]
 	lsrs r2, 24
-	bl sub_8068634
+	bl CreateMonWithEVSpreadPersonalityOTID
 	add r0, sp, 0x1C
 	movs r7, 0
 	strb r7, [r0]

@@ -25,7 +25,6 @@
 #include "data2.h"
 #include "battle_setup.h"
 
-extern struct SpriteTemplate gUnknown_0202499C;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern struct UnusedControllerStruct gUnknown_02022D0C;

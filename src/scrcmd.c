@@ -31,7 +31,6 @@
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokemon_3.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "overworld.h"
@@ -1529,7 +1528,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;
 }*/
-__attribute__((naked))
+ASM_DIRECT
 bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     asm("push {r4-r7,lr}\n\

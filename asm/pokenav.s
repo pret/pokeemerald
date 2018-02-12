@@ -25789,7 +25789,7 @@ sub_81D3B54: @ 81D3B54
 	adds r5, r1, 0
 	bl sub_81D41A0
 	movs r7, 0x2
-	ldr r4, =gUnknown_03003144
+	ldr r4, =gShouldAdvanceLinkState
 _081D3B64:
 	bl sub_81D4170
 	ldr r0, =gUnknown_030012E2
@@ -25857,7 +25857,7 @@ sub_81D3BE8: @ 81D3BE8
 	adds r5, r0, 0
 	bl sub_81D41A0
 	movs r6, 0x2
-	ldr r4, =gUnknown_03003144
+	ldr r4, =gShouldAdvanceLinkState
 _081D3BF6:
 	bl sub_81D4170
 	ldr r0, =gUnknown_030012E2
@@ -26006,7 +26006,7 @@ sub_81D3D34: @ 81D3D34
 	movs r1, 0x8
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r0, =gUnknown_03003144
+	ldr r0, =gShouldAdvanceLinkState
 	strb r3, [r0]
 	ldr r0, =gUnknown_030012E6
 	strh r3, [r0]
@@ -26062,7 +26062,7 @@ _081D3DC8:
 	beq _081D3DD8
 	bl sub_81D413C
 _081D3DD8:
-	ldr r0, =gUnknown_03003144
+	ldr r0, =gShouldAdvanceLinkState
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _081D3DE2
@@ -26080,7 +26080,7 @@ _081D3DE8:
 	movs r0, 0x3
 	strb r0, [r1, 0x1]
 _081D3DFC:
-	ldr r0, =gUnknown_03003144
+	ldr r0, =gShouldAdvanceLinkState
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _081D3E18
@@ -28050,7 +28050,7 @@ _081D4E12:
 	beq _081D4E1C
 	movs r5, 0x3
 _081D4E1C:
-	ldr r1, =gUnknown_03003144
+	ldr r1, =gShouldAdvanceLinkState
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r5, 0
@@ -28074,7 +28074,7 @@ sub_81D4E30: @ 81D4E30
 	strh r0, [r1]
 	bl OpenLink
 	movs r0, 0x1
-	bl sub_800B330
+	bl SetSuppressLinkErrorMessage
 	pop {r0}
 	bx r0
 	.pool
@@ -28090,7 +28090,7 @@ sub_81D4E60: @ 81D4E60
 	strh r0, [r1]
 	movs r0, 0
 	strh r0, [r2]
-	ldr r0, =gUnknown_03003174
+	ldr r0, =gLink+0x4
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [sp, 0x4]
@@ -28157,7 +28157,7 @@ sub_81D4EE4: @ 81D4EE4
 	lsrs r0, 24
 	cmp r0, 0x2
 	bhi _081D4F08
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4F08
@@ -28256,7 +28256,7 @@ _081D4FB6:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081D4FE6
-	bl sub_800A23C
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4FE0
@@ -28665,7 +28665,7 @@ _081D5360:
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D536A:
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D537A

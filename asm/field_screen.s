@@ -8987,7 +8987,7 @@ _080AF994:
 	beq _080AF9D0
 	b _080AF9E8
 _080AF99A:
-	bl sub_8009FAC
+	bl ClearLinkCallback_2
 	movs r0, 0x1
 	movs r1, 0
 	bl FadeScreen

@@ -1968,7 +1968,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
-                    toCpy = gTrainerClassNames[GetSecretBaseTrainerNameIndex()];
+                    toCpy = gTrainerClassNames[GetSecretBaseTrainerClass()];
                 else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
                     toCpy = gTrainerClassNames[sub_8068BB0()];
                 else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)

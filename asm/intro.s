@@ -282,7 +282,7 @@ _0816CE6C:
 	.pool
 _0816CE8C:
 	bl GameCubeMultiBoot_Quit
-	ldr r0, =sub_800BA38
+	ldr r0, =SerialCB
 	bl SetSerialCallback
 _0816CE96:
 	movs r0, 0
@@ -562,7 +562,7 @@ task_intro_2: @ 816D12C
 	movs r0, 0xCF
 	lsls r0, 1
 	bl m4aSongNumStart
-	bl sub_800B628
+	bl ResetSerial
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

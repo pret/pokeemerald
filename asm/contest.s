@@ -643,7 +643,7 @@ _080D7C04:
 	bl sub_800E0E8
 	movs r0, 0x8
 	movs r1, 0x8
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _080D7C56:
 	pop {r4-r6}
 	pop {r0}

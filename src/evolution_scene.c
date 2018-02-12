@@ -48,7 +48,6 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern struct SpriteTemplate gUnknown_0202499C;
 extern bool8 gAffineAnimsDisabled;
 extern u16 gMoveToLearn;
 extern const u8 gSpeciesNames[][11];
@@ -67,9 +66,6 @@ extern const u8 gText_PkmnStoppedEvolving[];
 extern const u8 gText_EllipsisQuestionMark[];
 extern const u8 gText_CommunicationStandby5[];
 
-extern void copy_decompressed_tile_data_to_vram_autofree(u8 arg0, const void *arg1, bool32 arg2, u16 arg3, u8 arg4);
-extern u32 sub_80391E0(u8, u8);
-extern void SpriteCallbackDummy_2(struct Sprite *sprite);
 extern void sub_80356D0(void);
 extern void sub_807B154(void);
 extern void sub_806A068(u16, u8);
@@ -471,10 +467,10 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         }
         break;
     case 6:
-        if (gLinkVSyncDisabled)
+        if (gWirelessCommType)
         {
             sub_800E0E8();
-            sub_800DFB4(0, 0);
+            CreateWirelessStatusIndicatorSprite(0, 0);
         }
         BlendPalettes(-1,0x10, 0);
         gMain.state++;
@@ -1255,7 +1251,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         case 5:
             if (!gPaletteFade.active)
             {
-                if (gLinkVSyncDisabled)
+                if (gWirelessCommType)
                     sub_800E084();
 
                 Free(GetBgTilemapBuffer(3));

@@ -14,8 +14,6 @@
 extern u8 gText_ClearAllSaveData[];
 extern u8 gText_ClearingData[];
 
-extern u16 gUnknown_0860F074[];
-
 static void Task_DoClearSaveDataScreenYesNo(u8);
 static void Task_ClearSaveDataScreenYesNoChoice(u8);
 static void Task_ClearSaveData(u8);
