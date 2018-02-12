@@ -45,7 +45,7 @@ extern void ItemUseOutOfBattle_EvolutionStone(u8 b);
 extern void bag_menu_mail_related(void);
 extern void OpenPokeblockCase(u8 a, void(*b)(void));
 extern void overworld_free_bg_tilemaps(void);
-extern bool32 sav1_map_is_biking_allowed(void);
+extern bool32 Overworld_IsBikingAllowed(void);
 extern bool8 IsPlayerFacingSurfableFishableWater(void);
 extern bool8 sub_81221AC(void);
 extern u8 gText_ItemFinderNothing[];
@@ -236,7 +236,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
         DisplayCannotDismountBikeMessage(taskId, data[3]);
     else
     {
-        if (sav1_map_is_biking_allowed() == TRUE && IsBikingDisallowedByPlayer() == 0)
+        if (Overworld_IsBikingAllowed() == TRUE && IsBikingDisallowedByPlayer() == 0)
         {
             gUnknown_0203A0F4 = ItemUseOnFieldCB_Bike;
             SetUpItemUseOnFieldCallback(taskId);

@@ -417,8 +417,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B880
 	def_special sub_81A085C
 	def_special ShouldTryGetTrainerScript
-	def_special AddMapNamePopUpWindowTask
-	def_special AddMapNamePopUpWindowTask
+	def_special ShowMapNamePopup
+	def_special ShowMapNamePopup
 	def_special sub_81BE994
 	def_special sub_81BE79C
 	def_special sub_81BE7F4

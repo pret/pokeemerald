@@ -182,8 +182,8 @@ _0809D9EA:
 	bx r0
 	thumb_func_end ActivatePerStepCallback
 
-	thumb_func_start wild_encounter_reset_coro_args
-wild_encounter_reset_coro_args: @ 809D9F0
+	thumb_func_start ResetFieldTasksArgs
+ResetFieldTasksArgs: @ 809D9F0
 	push {lr}
 	ldr r0, =task_per_step_callback_manager
 	bl FindTaskIdByFunc
@@ -207,7 +207,7 @@ _0809DA1A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end wild_encounter_reset_coro_args
+	thumb_func_end ResetFieldTasksArgs
 
 	thumb_func_start nullsub_34
 nullsub_34: @ 809DA2C

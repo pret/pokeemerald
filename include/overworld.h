@@ -63,6 +63,14 @@ void sub_8084D5C(s16 a1, s16 a2);
 void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
 // to erase later
+bool32 Overworld_IsBikingAllowed(void);
+u8 sub_808532C(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3);
+u8 sub_808538C(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4);
+u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void);
+bool8 Overworld_MapTypeIsIndoors(u8 mapType);
+void SetDefaultFlashLevel(void);
+void Overworld_ClearSavedMusic(void);
+void sub_8085810(void);
 u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
 u8 Overworld_GetMapTypeOfSaveblockLocation(void);
 void Overworld_SetMapObjTemplateCoords(u8, s16, s16);

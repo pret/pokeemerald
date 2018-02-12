@@ -1884,8 +1884,8 @@ _080ABEF4:
 	.pool
 	thumb_func_end sub_80ABE18
 
-	thumb_func_start sub_80ABF00
-sub_80ABF00: @ 80ABF00
+	thumb_func_start ApplyWeatherGammaShiftToPal
+ApplyWeatherGammaShiftToPal: @ 80ABF00
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1900,7 +1900,7 @@ sub_80ABF00: @ 80ABF00
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80ABF00
+	thumb_func_end ApplyWeatherGammaShiftToPal
 
 	thumb_func_start sub_80ABF20
 sub_80ABF20: @ 80ABF20
@@ -10478,7 +10478,7 @@ sub_80B058C: @ 80B058C
 	thumb_func_start sub_80B05B4
 sub_80B05B4: @ 80B05B4
 	push {lr}
-	bl sub_80859B0
+	bl Overworld_FadeOutMapMusic
 	ldr r0, =task50_0807F0C8
 	movs r1, 0x50
 	bl CreateTask

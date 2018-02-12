@@ -2156,7 +2156,7 @@ sub_80B360C: @ 80B360C
 	negs r1, r1
 	ands r0, r1
 	str r0, [r2]
-	bl call_ResetMapMusic
+	bl Overworld_ResetMapMusic
 	bl copy_player_party_from_sav1
 	bl copy_bags_and_unk_data_to_save_blocks
 	bl sub_813BF10
