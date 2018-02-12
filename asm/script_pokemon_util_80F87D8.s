@@ -83,7 +83,7 @@ sub_80F8850: @ 80F8850
 	thumb_func_start sub_80F8864
 sub_80F8864: @ 80F8864
 	push {lr}
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080F88A4
@@ -157,7 +157,7 @@ sub_80F88E8: @ 80F88E8
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F8930
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _080F8930
@@ -601,7 +601,7 @@ sub_80F8C7C: @ 80F8C7C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F8D18
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _080F8D18
@@ -952,7 +952,7 @@ sub_80F8FA0: @ 80F8FA0
 	ands r0, r1
 	cmp r0, 0
 	bne _080F8FD8
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
@@ -960,7 +960,7 @@ sub_80F8FA0: @ 80F8FA0
 	b _080F8FDE
 	.pool
 _080F8FD8:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x4
 	strh r0, [r1]
 _080F8FDE:
@@ -987,11 +987,11 @@ sub_80F8FE8: @ 80F8FE8
 	adds r0, r1
 	str r0, [r2]
 	lsrs r0, 16
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	b _080F902A
 	.pool
 _080F9020:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -1174,8 +1174,8 @@ _080F917A:
 	bx r1
 	thumb_func_end sub_80F9160
 
-	thumb_func_start sp000_heal_pokemon
-sp000_heal_pokemon: @ 80F9180
+	thumb_func_start HealPlayerParty
+HealPlayerParty: @ 80F9180
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1267,7 +1267,7 @@ _080F922C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sp000_heal_pokemon
+	thumb_func_end HealPlayerParty
 
 	thumb_func_start ScriptGiveMon
 @ void ScriptGiveMon(s16 species_num, u8 level, int held_item)
@@ -1343,7 +1343,7 @@ ScriptGiveEgg: @ 80F92C8
 	lsrs r1, 16
 	mov r0, sp
 	movs r2, 0x1
-	bl sub_8070954
+	bl CreateEgg
 	add r2, sp, 0x64
 	movs r0, 0x1
 	strb r0, [r2]
@@ -1359,8 +1359,8 @@ ScriptGiveEgg: @ 80F92C8
 	bx r1
 	thumb_func_end ScriptGiveEgg
 
-	thumb_func_start sub_80F92F8
-sub_80F92F8: @ 80F92F8
+	thumb_func_start HasEnoughMonsForDoubleBattle
+HasEnoughMonsForDoubleBattle: @ 80F92F8
 	push {lr}
 	bl GetMonsStateToDoubles
 	lsls r0, 24
@@ -1376,13 +1376,13 @@ _080F9310:
 	cmp r1, 0x2
 	bne _080F9318
 _080F9314:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 _080F9318:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80F92F8
+	thumb_func_end HasEnoughMonsForDoubleBattle
 
 	thumb_func_start sub_80F9320
 sub_80F9320: @ 80F9320
@@ -1550,12 +1550,12 @@ sub_80F9460: @ 80F9460
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080F9478
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	b _080F947E
 	.pool
 _080F9478:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _080F947E:
@@ -1590,12 +1590,12 @@ sub_80F94B8: @ 80F94B8
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080F94D0
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	b _080F94D6
 	.pool
 _080F94D0:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _080F94D6:

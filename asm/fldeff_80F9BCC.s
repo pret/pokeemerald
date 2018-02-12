@@ -563,7 +563,7 @@ _080F9FFE:
 sub_80FA004: @ 80FA004
 	push {r4,lr}
 	bl sub_80E8BC8
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080FA0AE
@@ -591,7 +591,7 @@ sub_80FA004: @ 80FA004
 	bne _080FA070
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA0DC
@@ -606,7 +606,7 @@ _080FA070:
 	bne _080FA0A0
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA1E8
@@ -625,7 +625,7 @@ _080FA0AE:
 _080FA0B2:
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA34C
@@ -642,12 +642,12 @@ _080FA0C4:
 	thumb_func_start sub_80FA0DC
 sub_80FA0DC: @ 80FA0DC
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08275A86
+	ldr r0, =EventScript_275A86
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -777,12 +777,12 @@ sub_80FA1D8: @ 80FA1D8
 	thumb_func_start sub_80FA1E8
 sub_80FA1E8: @ 80FA1E8
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08275ADF
+	ldr r0, =EventScript_275ADF
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -950,12 +950,12 @@ sub_80FA33C: @ 80FA33C
 	thumb_func_start sub_80FA34C
 sub_80FA34C: @ 80FA34C
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08275B38
+	ldr r0, =EventScript_275B38
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -2063,7 +2063,7 @@ _080FACC2:
 	ldr r0, =gStringVar2
 	ldr r1, =gText_Gold
 	bl StringCopy
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =0x00004054
@@ -2087,7 +2087,7 @@ _080FAD14:
 	ldr r0, =gStringVar2
 	ldr r1, =gText_Silver
 	bl StringCopy
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =0x00004054
@@ -2103,12 +2103,12 @@ _080FAD14:
 	b _080FAD8A
 	.pool
 _080FAD60:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _080FAD70
 	.pool
 _080FAD6C:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 _080FAD70:
 	strh r0, [r1]
@@ -2131,7 +2131,7 @@ _080FAD8A:
 	b _080FADCE
 	.pool
 _080FADA4:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x3
 	strh r0, [r1]
 	ldr r0, =0x00004054
@@ -2200,8 +2200,8 @@ _080FAE2A:
 	.pool
 	thumb_func_end sub_80FADE4
 
-	thumb_func_start task50_overworld_posion_effect
-task50_overworld_posion_effect: @ 80FAE38
+	thumb_func_start task50_overworld_poison_effect
+task50_overworld_poison_effect: @ 80FAE38
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -2260,32 +2260,32 @@ _080FAE92:
 _080FAEA2:
 	pop {r0}
 	bx r0
-	thumb_func_end task50_overworld_posion_effect
+	thumb_func_end task50_overworld_poison_effect
 
-	thumb_func_start overworld_posion_effect
-overworld_posion_effect: @ 80FAEA8
+	thumb_func_start overworld_poison_effect
+overworld_poison_effect: @ 80FAEA8
 	push {lr}
 	movs r0, 0x4F
 	bl PlaySE
-	ldr r0, =task50_overworld_posion_effect
+	ldr r0, =task50_overworld_poison_effect
 	movs r1, 0x50
 	bl CreateTask
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end overworld_posion_effect
+	thumb_func_end overworld_poison_effect
 
-	thumb_func_start c3_80A0DD8_is_running
-c3_80A0DD8_is_running: @ 80FAEC0
+	thumb_func_start FieldPoisonEffectIsRunning
+FieldPoisonEffectIsRunning: @ 80FAEC0
 	push {lr}
-	ldr r0, =task50_overworld_posion_effect
+	ldr r0, =task50_overworld_poison_effect
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end c3_80A0DD8_is_running
+	thumb_func_end FieldPoisonEffectIsRunning
 
 	thumb_func_start sub_80FAED4
 sub_80FAED4: @ 80FAED4

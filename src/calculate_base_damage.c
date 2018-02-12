@@ -1,23 +1,15 @@
 #include "global.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "battle.h"
-#include "hold_effects.h"
+#include "battle_setup.h"
+#include "constants/hold_effects.h"
 #include "event_data.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "pokemon.h"
-#include "species.h"
-#include "moves.h"
-#include "battle_move_effects.h"
-
-extern u32 gBattleTypeFlags;
-extern struct BattlePokemon gBattleMons[4];
-extern u16 gCurrentMove;
-extern u8 gCritMultiplier;
-extern u16 gBattleWeather;
-extern struct BattleEnigmaBerry gEnigmaBerries[];
-extern u16 gBattleMovePower;
-extern u16 gTrainerBattleOpponent_A;
+#include "constants/species.h"
+#include "constants/moves.h"
+#include "constants/battle_move_effects.h"
 
 bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 bank);
 
@@ -84,13 +76,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
 
-    if (ShouldGetStatBadgeBoost(BADGE01_GET, bankAtk))
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, bankAtk))
         attack = (110 * attack) / 100;
-    if (ShouldGetStatBadgeBoost(BADGE05_GET, bankDef))
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, bankDef))
         defense = (110 * defense) / 100;
-    if (ShouldGetStatBadgeBoost(BADGE07_GET, bankAtk))
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, bankAtk))
         spAttack = (110 * spAttack) / 100;
-    if (ShouldGetStatBadgeBoost(BADGE07_GET, bankDef))
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, bankDef))
         spDefense = (110 * spDefense) / 100;
 
     for (i = 0; i < 17; i++)
@@ -149,35 +141,35 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
-    if (type < TYPE_MYSTERY) // is physical
+    if (IS_MOVE_PHYSICAL(type))
     {
         if (gCritMultiplier == 2)
         {
-            if (attacker->statStages[STAT_STAGE_ATK] > 6)
-                APPLY_STAT_MOD(damage, attacker, attack, STAT_STAGE_ATK)
+            if (attacker->statStages[STAT_ATK] > 6)
+                APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
             else
                 damage = attack;
         }
         else
-            APPLY_STAT_MOD(damage, attacker, attack, STAT_STAGE_ATK)
+            APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
 
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
 
         if (gCritMultiplier == 2)
         {
-            if (defender->statStages[STAT_STAGE_DEF] < 6)
-                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_STAGE_DEF)
+            if (defender->statStages[STAT_DEF] < 6)
+                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
             else
                 damageHelper = defense;
         }
         else
-            APPLY_STAT_MOD(damageHelper, defender, defense, STAT_STAGE_DEF)
+            APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
 
         damage = damage / damageHelper;
         damage /= 50;
 
-        if ((attacker->status1 & STATUS_BURN) && attacker->ability != ABILITY_GUTS)
+        if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
             damage /= 2;
 
         if ((sideStatus & SIDE_STATUS_REFLECT) && gCritMultiplier == 1)
@@ -199,30 +191,30 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (type == TYPE_MYSTERY)
         damage = 0; // is ??? type. does 0 damage.
 
-    if (type > TYPE_MYSTERY) // is special?
+    if (IS_MOVE_SPECIAL(type))
     {
         if (gCritMultiplier == 2)
         {
-            if (attacker->statStages[STAT_STAGE_SPATK] > 6)
-                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_STAGE_SPATK)
+            if (attacker->statStages[STAT_SPATK] > 6)
+                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
             else
                 damage = spAttack;
         }
         else
-            APPLY_STAT_MOD(damage, attacker, spAttack, STAT_STAGE_SPATK)
+            APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
 
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
 
         if (gCritMultiplier == 2)
         {
-            if (defender->statStages[STAT_STAGE_SPDEF] < 6)
-                APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_STAGE_SPDEF)
+            if (defender->statStages[STAT_SPDEF] < 6)
+                APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
             else
                 damageHelper = spDefense;
         }
         else
-            APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_STAGE_SPDEF)
+            APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
 
         damage = (damage / damageHelper);
         damage /= 50;

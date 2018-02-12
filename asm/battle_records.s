@@ -496,7 +496,7 @@ sub_813C2F4: @ 813C2F4
 	movs r2, 0xD0
 	bl GetStringCenterAlignXOffset
 	adds r3, r0, 0
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	ldrb r0, [r0]
 	lsls r3, 24
 	lsrs r3, 24
@@ -531,7 +531,7 @@ sub_813C384: @ 813C384
 	ldr r7, [r6, 0xC]
 	cmp r7, 0
 	bne _0813C40C
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r8, r0
 	ldrb r0, [r0]
 	ldr r2, =gUnknown_085B3D84
@@ -587,7 +587,7 @@ _0813C40C:
 	lsrs r1, 24
 	ldr r0, =gStringVar1
 	bl ConvertInternationalString
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r8, r0
 	ldrb r0, [r0]
 	lsls r4, 3
@@ -661,13 +661,13 @@ sub_813C4BC: @ 813C4BC
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0xC
-	ldr r6, =gUnknown_0203AB74
+	ldr r6, =gResultsWindowId
 	ldr r0, =gUnknown_085B3D7C
 	bl AddWindow
 	strb r0, [r6]
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	ldrb r0, [r6]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -729,7 +729,7 @@ _0813C540:
 	adds r4, 0x1
 	cmp r4, 0x4
 	ble _0813C540
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]
@@ -748,7 +748,7 @@ _0813C540:
 	thumb_func_start sub_813C5A0
 sub_813C5A0: @ 813C5A0
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_819746C
@@ -1034,7 +1034,7 @@ _0813C6FA:
 	thumb_func_start sub_813C80C
 sub_813C80C: @ 813C80C
 	push {lr}
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade

@@ -127,7 +127,7 @@ InitMainMenu: @ 802F6F4
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -1487,7 +1487,7 @@ _08030460:
 	ldr r0, =gMain
 	ldr r1, =CB2_ReinitMainMenu
 	str r1, [r0, 0x8]
-	ldr r0, =CB2_OptionsMenu
+	ldr r0, =CB2_InitOptionMenu
 	b _0803048A
 	.pool
 _08030478:
@@ -1495,7 +1495,7 @@ _08030478:
 	b _0803048A
 	.pool
 _08030480:
-	ldr r0, =sub_8178974
+	ldr r0, =CB2_InitMysteryEventMenu
 	b _0803048A
 	.pool
 _08030488:
@@ -1608,7 +1608,7 @@ _08030578:
 	ldr r0, =gUnknown_02022D06
 	strh r4, [r0]
 	bl FreeAllWindowBuffers
-	ldr r0, =c2_title_screen_1
+	ldr r0, =CB2_InitTitleScreen
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1929,7 +1929,7 @@ task_new_game_prof_birch_speech_1: @ 80307B0
 	movs r1, 0x1
 	movs r2, 0x10
 	bl LoadPalette
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
@@ -2215,7 +2215,7 @@ sub_8030A70: @ 8030A70
 	str r2, [sp, 0x10]
 	movs r2, 0x70
 	movs r3, 0x3A
-	bl sub_8076438
+	bl CreatePokeballSpriteToReleaseMon
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3025,7 +3025,7 @@ task_new_game_prof_birch_speech_part2_4: @ 8031188
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3708,7 +3708,7 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	strh r0, [r4, 0x16]
 	ldr r0, =0x0000ffc4
 	strh r0, [r4, 0x10]
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
@@ -3948,7 +3948,7 @@ AddBirchSpeechObjects: @ 803192C
 	movs r1, 0x78
 	movs r2, 0x3C
 	movs r3, 0
-	bl sub_80B5E6C
+	bl CreateTrainerSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -3981,7 +3981,7 @@ AddBirchSpeechObjects: @ 803192C
 	movs r1, 0x78
 	movs r2, 0x3C
 	movs r3, 0
-	bl sub_80B5E6C
+	bl CreateTrainerSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -4783,7 +4783,7 @@ LoadMainMenuWindowFrameTiles: @ 80320A4
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
-	bl sub_8098758
+	bl GetWindowFrameTilesPal
 	ldr r1, [r0]
 	movs r2, 0x90
 	lsls r2, 1
@@ -4793,7 +4793,7 @@ LoadMainMenuWindowFrameTiles: @ 80320A4
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
-	bl sub_8098758
+	bl GetWindowFrameTilesPal
 	ldr r0, [r0, 0x4]
 	movs r1, 0x20
 	movs r2, 0x20

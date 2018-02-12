@@ -11,7 +11,7 @@ sub_816CBE8: @ 816CBE8
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_816CBE8
@@ -59,7 +59,7 @@ sub_816CC54: @ 816CC54
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816CC66
-	ldr r0, =c2_title_screen_1
+	ldr r0, =CB2_InitTitleScreen
 	bl SetMainCallback2
 _0816CC66:
 	pop {r0}
@@ -184,7 +184,7 @@ _0816CCF4:
 	movs r0, 0
 	movs r2, 0
 	bl load_copyright_graphics
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -337,13 +337,13 @@ _0816CEFA:
 	.pool
 	thumb_func_end c2_copyright_1
 
-	thumb_func_start c2_show_copyright_and_intro_again_2
-c2_show_copyright_and_intro_again_2: @ 816CF0C
+	thumb_func_start CB2_InitCopyrightScreenAfterTitleScreen
+CB2_InitCopyrightScreenAfterTitleScreen: @ 816CF0C
 	push {lr}
 	bl do_copyright_screen
 	pop {r0}
 	bx r0
-	thumb_func_end c2_show_copyright_and_intro_again_2
+	thumb_func_end CB2_InitCopyrightScreenAfterTitleScreen
 
 	thumb_func_start task_intro_1
 @ void task_intro_1(int task_id)
@@ -1945,24 +1945,24 @@ task_intro_13: @ 816DD28
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
-	ldr r0, =gUnknown_08D88494
+	ldr r0, =gIntro3GroudonGfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D88D40
+	ldr r0, =gIntro3GroudonTilemap
 	ldr r1, =0x0600c000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D89F7C
+	ldr r0, =gIntro3LegendBgGfx
 	ldr r1, =0x06004000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D8A818
+	ldr r0, =gIntro3GroudonBgTilemap
 	ldr r1, =0x0600e000
 	bl LZDecompressVram
 	ldr r0, =gBattleAnimPicTable + 0x1D0
 	bl LoadCompressedObjectPicUsingHeap
 	ldr r0, =gBattleAnimPaletteTable + 0x1D0
 	bl LoadCompressedObjectPaletteUsingHeap
-	ldr r0, =gUnknown_08D85CD0
+	ldr r0, =gIntro3BgPal
 	ldr r1, =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 1
@@ -2124,7 +2124,7 @@ task_intro_17: @ 816DEEC
 	movs r1, 0xA0
 	movs r2, 0x4
 	movs r3, 0x4
-	bl sub_80BA384
+	bl ScanlineEffect_InitWave
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -2229,7 +2229,7 @@ _0816DFF4:
 	strh r0, [r4, 0xC]
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
-	ldr r1, =gUnknown_08D85CD0
+	ldr r1, =gIntro3BgPal
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0x3E
 	movs r2, 0x1
@@ -2271,7 +2271,7 @@ _0816E046:
 	strh r0, [r4, 0xC]
 	movs r2, 0xE
 	ldrsh r0, [r4, r2]
-	ldr r1, =gUnknown_08D85CD0
+	ldr r1, =gIntro3BgPal
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0x3E
 	movs r2, 0x1
@@ -2411,7 +2411,7 @@ _0816E156:
 	adds r0, r1
 	ldr r1, =task_intro_19
 	str r1, [r0]
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _0816E176:
@@ -2571,14 +2571,14 @@ task_intro_19: @ 816E2A0
 	lsls r4, 24
 	lsrs r4, 24
 	bl ResetSpriteData
-	ldr r0, =gUnknown_08D89224
+	ldr r0, =gIntro3KyogreGfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D89ABC
+	ldr r0, =gIntro3KyogreTilemap
 	ldr r1, =0x0600c000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D8A934
+	ldr r0, =gIntro3KyogreBgTilemap
 	ldr r1, =0x0600e000
 	bl LZDecompressVram
 	ldr r0, =gUnknown_085E4C88
@@ -2623,7 +2623,7 @@ task_intro_19: @ 816E2A0
 	movs r1, 0xA0
 	movs r2, 0x4
 	movs r3, 0x4
-	bl sub_80BA384
+	bl ScanlineEffect_InitWave
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -2888,7 +2888,7 @@ _0816E56E:
 	strh r0, [r5, 0xC]
 	movs r2, 0xE
 	ldrsh r0, [r5, r2]
-	ldr r1, =gUnknown_08D85CD0
+	ldr r1, =gIntro3BgPal
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0x5E
 	movs r2, 0x1
@@ -2932,7 +2932,7 @@ _0816E5BC:
 	strh r0, [r5, 0xC]
 	movs r2, 0xE
 	ldrsh r0, [r5, r2]
-	ldr r1, =gUnknown_08D85CD0
+	ldr r1, =gIntro3BgPal
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0x5E
 	movs r2, 0x1
@@ -3038,7 +3038,7 @@ _0816E69C:
 	adds r0, r1
 	ldr r1, =task_intro_21
 	str r1, [r0]
-	ldr r1, =gUnknown_02039B28
+	ldr r1, =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _0816E6BC:
@@ -3319,7 +3319,7 @@ task_intro_21: @ 816E888
 	movs r0, 0x1A
 	movs r1, 0
 	bl SetGpuReg
-	ldr r4, =gUnknown_08D8AA54
+	ldr r4, =gIntro3CloudsGfx
 	movs r1, 0xC0
 	lsls r1, 19
 	adds r0, r4, 0
@@ -3327,7 +3327,7 @@ task_intro_21: @ 816E888
 	ldr r1, =0x06004000
 	adds r0, r4, 0
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D8B6E8
+	ldr r0, =gIntro3Clouds3Tilemap
 	ldr r1, =0x0600e000
 	bl LZDecompressVram
 	ldr r1, =gTasks
@@ -3349,10 +3349,10 @@ task_intro_22: @ 816E954
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_08D8B180
+	ldr r0, =gIntro3Clouds1Tilemap
 	ldr r1, =0x0600c000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D8B440
+	ldr r0, =gIntro3Clouds2Tilemap
 	ldr r1, =0x0600d000
 	bl LZDecompressVram
 	ldr r1, =gTasks
@@ -3509,16 +3509,16 @@ task_intro_25: @ 816EAB8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_08D8C16C
+	ldr r0, =gIntro3RayquazaTilemap
 	ldr r1, =0x0600e000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D8CCC8
+	ldr r0, =gIntro3Clouds4Tilemap
 	ldr r1, =0x0600c000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D8BA74
+	ldr r0, =gIntro3RayquazaGfx
 	ldr r1, =0x06004000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D8C838
+	ldr r0, =gIntro3Clouds2Gfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZDecompressVram
@@ -3725,7 +3725,7 @@ _0816ECA0:
 _0816ECAC:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
-	ldr r1, =gUnknown_08D85CD0
+	ldr r1, =gIntro3BgPal
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0xBA
 	movs r2, 0x1
@@ -3757,7 +3757,7 @@ _0816ECDC:
 	strh r0, [r4, 0x32]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
-	ldr r1, =gUnknown_08D85CD0
+	ldr r1, =gIntro3BgPal
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0xBA
 	movs r2, 0x1
@@ -4007,7 +4007,7 @@ _0816EEF4:
 	movs r2, 0x2
 	ldrsh r0, [r5, r2]
 	lsls r0, 1
-	ldr r1, =gUnknown_08D85E72
+	ldr r1, =gIntro3BgPal + 0x1A2
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0xBC
 	movs r2, 0x1
@@ -4043,7 +4043,7 @@ _0816EF34:
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
 	lsls r0, 1
-	ldr r1, =gUnknown_08D85E72
+	ldr r1, =gIntro3BgPal + 0x1A2
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0xB0
 	movs r2, 0x1
@@ -4080,7 +4080,7 @@ _0816EF80:
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
 	lsls r0, 1
-	ldr r1, =gUnknown_08D85E52
+	ldr r1, =gIntro3BgPal + 0x182
 	adds r0, r1
 	ldr r1, =gPlttBufferFaded + 0xB8
 	movs r2, 0x1
@@ -4148,7 +4148,7 @@ _0816F00A:
 	movs r0, 0x50
 	movs r1, 0x10
 	bl BlendPalette
-	ldr r4, =gUnknown_08D85E7C
+	ldr r4, =gIntro3BgPal + 0x1AC
 	ldr r5, =gPlttBufferFaded + 0xBC
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -5617,7 +5617,7 @@ _0816FBB4:
 	cmp r0, 0
 	beq _0816FC14
 	lsls r0, 1
-	ldr r4, =gUnknown_08D85C50
+	ldr r4, =gIntro1GameFreakTextFadePal
 	adds r0, r4
 	ldr r5, =gPlttBufferFaded + 0x23E
 	adds r1, r5, 0
@@ -5651,7 +5651,7 @@ _0816FC14:
 	movs r1, 0x30
 	ldrsh r0, [r6, r1]
 	lsls r0, 1
-	ldr r4, =gUnknown_08D85C50
+	ldr r4, =gIntro1GameFreakTextFadePal
 	adds r0, r4
 	ldr r5, =gPlttBufferFaded + 0x23E
 	adds r1, r5, 0
@@ -5696,7 +5696,7 @@ _0816FC6C:
 	cmp r0, 0x9
 	bgt _0816FCE6
 	lsls r0, 1
-	ldr r4, =gUnknown_08D85C50
+	ldr r4, =gIntro1GameFreakTextFadePal
 	adds r0, r4
 	ldr r5, =gPlttBufferFaded + 0x23E
 	adds r1, r5, 0

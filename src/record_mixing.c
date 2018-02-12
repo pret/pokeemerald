@@ -2,12 +2,12 @@
 // Includes
 #include "global.h"
 #include "malloc.h"
-#include "rng.h"
-#include "items.h"
+#include "random.h"
+#include "constants/items.h"
 #include "text.h"
 #include "item.h"
 #include "task.h"
-#include "species.h"
+#include "constants/species.h"
 #include "save.h"
 #include "load_save.h"
 #include "pokemon.h"
@@ -15,13 +15,13 @@
 #include "link.h"
 #include "tv.h"
 #include "battle_tower.h"
-#include "new_menu_helpers.h"
 #include "window.h"
 #include "mystery_event_script.h"
 #include "secret_base.h"
 #include "mauville_old_man.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
+#include "menu.h"
 #include "overworld.h"
 #include "field_screen.h"
 #include "fldeff_80F9BCC.h"
@@ -153,7 +153,7 @@ void sub_80E6CA0(struct PlayerRecords *dest)
     sub_81659DC(gUnknown_0300114C, &dest->battleTowerRecord);
     if (GetMultiplayerId() == 0)
     {
-        dest->battleTowerRecord.ruby_sapphire.unk_11c8 = sub_81539D4();
+        dest->battleTowerRecord.ruby_sapphire.unk_11c8 = GetRecordMixingGift();
     }
 }
 
@@ -173,7 +173,7 @@ void sub_80E6D54(struct PlayerRecords *dest)
     TaskDummy4(&dest->battleTowerRecord);
     if (GetMultiplayerId() == 0)
     {
-        dest->battleTowerRecord.ruby_sapphire.unk_11c8 = sub_81539D4();
+        dest->battleTowerRecord.ruby_sapphire.unk_11c8 = GetRecordMixingGift();
     }
 }
 
@@ -206,7 +206,7 @@ void sub_80E6E24(void)
         sub_80E8AC0(&gUnknown_0203A018->battleTowerRecord);
         if (GetMultiplayerId() == 0)
         {
-            gUnknown_0203A018->unk_1210 = sub_81539D4();
+            gUnknown_0203A018->unk_1210 = GetRecordMixingGift();
         }
         sub_80E8110(gUnknown_0203A018->unk_1254, gUnknown_03001154);
         sub_80E8260(gUnknown_0203A018->unk_12dc);
@@ -248,7 +248,7 @@ void sub_80E6F60(u32 which)
 
 void sub_80E70F4(const u8 *src)
 {
-    sub_81973C4(0, 0);
+    NewMenuHelpers_DrawDialogueFrame(0, 0);
     PrintTextOnWindow(0, 1, src, 0, 1, 0, NULL);
     CopyWindowToVram(0, 3);
 }
@@ -285,7 +285,7 @@ static void sub_80E715C(u8 taskId)
             if (!gTasks[data[10]].isActive)
             {
                 data[0] = 2;
-                FlagSet(SYS_MIX_RECORD);
+                FlagSet(FLAG_SYS_MIX_RECORD);
                 sub_80FB074();
                 DestroyTask(data[15]);
             }
@@ -354,8 +354,8 @@ static void sub_80E7324(u8 taskId)
             }
             break;
         case 101:
-            r4 = sub_800ABAC();
-            if (sub_800ABBC() == TRUE)
+            r4 = GetLinkPlayerCount_2();
+            if (IsLinkMaster() == TRUE)
             {
                 if (r4 == sub_800AA48())
                 {
@@ -371,14 +371,14 @@ static void sub_80E7324(u8 taskId)
             }
             break;
         case 201:
-            if (sub_800AA48() == sub_800ABAC() && ++ task->data[12] > (sub_800ABAC() * 30))
+            if (sub_800AA48() == GetLinkPlayerCount_2() && ++ task->data[12] > (GetLinkPlayerCount_2() * 30))
             {
                 sub_800A620();
                 task->data[0] = 1;
             }
             break;
         case 301:
-            if (sub_800AA48() == sub_800ABAC())
+            if (sub_800AA48() == GetLinkPlayerCount_2())
             {
                 task->data[0] = 1;
             }
@@ -398,7 +398,7 @@ static void sub_80E7324(u8 taskId)
             }
             break;
         case 2:
-            task->data[6] = sub_800ABAC();
+            task->data[6] = GetLinkPlayerCount_2();
             task->data[0] = 0;
             task->data[5] = sub_80E7810();
             task->func = sub_80E756C;
@@ -1427,7 +1427,7 @@ __attribute__((naked)) static void sub_80E7B60(struct UnkStruct_80E7B60 *src, si
 
 static void sub_80E7F68(u16 *item, u8 which)
 {
-    if (which != 0 && *item != ITEM_NONE && GetPocketByItemId(*item) == KEYITEMS_POCKET + 1)
+    if (which != 0 && *item != ITEM_NONE && GetPocketByItemId(*item) == BAG_KEYITEMS)
     {
         if (!CheckBagHasItem(*item, 1) && !CheckPCHasItem(*item, 1) && AddBagItem(*item, 1))
         {
@@ -1435,7 +1435,7 @@ static void sub_80E7F68(u16 *item, u8 which)
             StringCopy(gStringVar1, gLinkPlayers[0].name);
             if (*item == ITEM_EON_TICKET)
             {
-                FlagSet(SYS_HAS_EON_TICKET);
+                FlagSet(FLAG_SYS_HAS_EON_TICKET);
             }
         }
         else

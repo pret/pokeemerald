@@ -2,54 +2,110 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-    
+
 gUnknown_085DFA60:: @ 85DFA60
-	.incbin "baserom.gba", 0x5dfa60, 0x20
+	.incbin "graphics/interface/85DFA60.bin"
 
 gUnknown_085DFA80:: @ 85DFA80
-	.incbin "baserom.gba", 0x5dfa80, 0xe0
+	.incbin "graphics/interface/85DFA80.4bpp"
 
 gUnknown_085DFB60:: @ 85DFB60
-	.incbin "baserom.gba", 0x5dfb60, 0xac
+	.incbin "graphics/interface/85DFB60.bin"
 
 gUnknown_085DFC0C:: @ 85DFC0C
-	.incbin "baserom.gba", 0x5dfc0c, 0xa4
+	.incbin "graphics/interface/85DFC0C.bin"
 
 gUnknown_085DFCB0:: @ 85DFCB0
-	.incbin "baserom.gba", 0x5dfcb0, 0x14
+	.4byte 22, 47, 33, 24, 23
 
 gUnknown_085DFCC4:: @ 85DFCC4
-	.incbin "baserom.gba", 0x5dfcc4, 0x5
+	.byte 0, 4, 3, 2, 1
 
 gUnknown_085DFCC9:: @ 85DFCC9
-	.incbin "baserom.gba", 0x5dfcc9, 0x3
+	.byte 0, 8, 1
 
 gUnknown_085DFCCC:: @ 85DFCCC
-	.incbin "baserom.gba", 0x5dfccc, 0x10
+	.4byte 0x1F8
+	.4byte 0x31E1
+	.4byte 0x4021DF
+	.4byte 0x1172
 
 gUnknown_085DFCDC:: @ 85DFCDC
-	.incbin "baserom.gba", 0x5dfcdc, 0x20
+	window_template 0, 0xD, 1, 0xD, 4, 0xF, 1
+	window_template 0, 0, 0xE, 0xB, 2, 0xF, 0x35
+	window_template 0, 1, 0x11, 0x1C, 2, 0xF, 0x4B
+	null_window_template
 
-gUnknown_085DFCFC:: @ 85DFCFC
-	.incbin "baserom.gba", 0x5dfcfc, 0x8
+sUsePokeblockYesNoWinTemplate:: @ 85DFCFC
+	window_template 0, 0x18, 0xB, 5, 4, 0xF, 0x83
 
-gUnknown_085DFD04:: @ 85DFD04
-	.incbin "baserom.gba", 0x5dfd04, 0x14
+sContestStatNames:: @ 85DFD04
+	.4byte gText_Coolness
+	.4byte gText_Toughness
+	.4byte gText_Smartness
+	.4byte gText_Cuteness
+	.4byte gText_Beauty3
 
 gUnknown_085DFD18:: @ 85DFD18
-	.incbin "baserom.gba", 0x5dfd18, 0x8
+	obj_tiles gUsePokeblockUpDown_Gfx, 0x200, 0
 
 gUnknown_085DFD20:: @ 85DFD20
-	.incbin "baserom.gba", 0x5dfd20, 0x8
+	obj_pal gUsePokeblockUpDown_Pal, 0
 
 gUnknown_085DFD28:: @ 85DFD28
-	.incbin "baserom.gba", 0x5dfd28, 0x34
+	.2byte 0x9c, 0x24
+	.2byte 0x75, 0x3b
+	.2byte 0x75, 0x76
+	.2byte 0xc5, 0x76
+	.2byte 0xc5, 0x3b
+	
+gUnknown_085DFD3C:: @ 85DFD3C
+	.2byte 0x4000
+	.2byte 0x8000
+	.2byte 0x400
+	.2byte 0
+	
+gUnknown_085DFD44:: @ 85DFD44
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
+	
+gUnknown_085DFD4C:: @ 85DFD4C
+	obj_image_anim_frame 8, 5
+	obj_image_anim_end
+	
+gUnknown_085DFD54:: @ 85DFD54
+	.4byte gUnknown_085DFD44
+	.4byte gUnknown_085DFD4C
 
 gUnknown_085DFD5C:: @ 85DFD5C
-	.incbin "baserom.gba", 0x5dfd5c, 0x44
+	spr_template 0, 0, gUnknown_085DFD3C, gUnknown_085DFD54, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	
+gUnknown_085DFD74:: @ 85DFD74
+	.2byte 0x4000
+	.2byte 0xC000
+	.2byte 0x400
+	.2byte 0
+	
+gUnknown_085DFD7C:: @ 85DFD7C
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
+
+gUnknown_085DFD84:: @ 85DFD84
+	obj_image_anim_frame 32, 5
+	obj_image_anim_end
+
+gUnknown_085DFD8C:: @ 85DFD8C
+	obj_image_anim_frame 64, 5
+	obj_image_anim_end
+	
+gUnknown_085DFD94:: @ 85DFD94
+	.4byte gUnknown_085DFD7C
+	.4byte gUnknown_085DFD84
+	.4byte gUnknown_085DFD8C
 
 gUnknown_085DFDA0:: @ 85DFDA0
-	.incbin "baserom.gba", 0x5dfda0, 0x18
+	spr_template 1, 1, gUnknown_085DFD74, gUnknown_085DFD94, NULL, gDummySpriteAffineAnimTable, sub_8168374
 
 gUnknown_085DFDB8:: @ 85DFDB8
-	.incbin "baserom.gba", 0x5dfdb8, 0x8
+	.4byte gUsePokeblockCondition_Pal
+	.4byte 1

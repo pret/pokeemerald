@@ -5,224 +5,8 @@
 
 	.text
 
-	thumb_func_start CountMonsInBox
-CountMonsInBox: @ 80C6FA0
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r4, 0
-	movs r5, 0
-_080C6FAA:
-	lsls r1, r4, 24
-	lsrs r1, 24
-	adds r0, r6, 0
-	movs r2, 0xB
-	bl GetBoxMonDataFromAnyBox
-	cmp r0, 0
-	beq _080C6FC0
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-_080C6FC0:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x1D
-	bls _080C6FAA
-	lsls r0, r5, 24
-	lsrs r0, 24
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end CountMonsInBox
 
-	thumb_func_start sub_80C6FD4
-sub_80C6FD4: @ 80C6FD4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r4, 0
-_080C6FDC:
-	lsls r1, r4, 24
-	lsrs r1, 24
-	adds r0, r5, 0
-	movs r2, 0xB
-	bl GetBoxMonDataFromAnyBox
-	cmp r0, 0
-	bne _080C6FF2
-	lsls r0, r4, 16
-	asrs r0, 16
-	b _080C7000
-_080C6FF2:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x1D
-	bls _080C6FDC
-	movs r0, 0x1
-	negs r0, r0
-_080C7000:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C6FD4
-
-	thumb_func_start sub_80C7008
-sub_80C7008: @ 80C7008
-	push {r4-r6,lr}
-	movs r5, 0
-	movs r6, 0
-_080C700E:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _080C7036
-	adds r0, r4, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _080C7036
-	adds r0, r6, 0x1
-	lsls r0, 16
-	lsrs r6, r0, 16
-_080C7036:
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	cmp r5, 0x5
-	bls _080C700E
-	lsls r0, r6, 24
-	lsrs r0, 24
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80C7008
-
-	thumb_func_start sub_80C7050
-sub_80C7050: @ 80C7050
-	push {r4-r7,lr}
-	lsls r0, 24
-	movs r5, 0
-	movs r6, 0
-	lsrs r7, r0, 24
-_080C705A:
-	cmp r5, r7
-	beq _080C7092
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _080C7092
-	adds r0, r4, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _080C7092
-	adds r0, r4, 0
-	movs r1, 0x39
-	bl GetMonData
-	cmp r0, 0
-	beq _080C7092
-	adds r0, r6, 0x1
-	lsls r0, 16
-	lsrs r6, r0, 16
-_080C7092:
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	cmp r5, 0x5
-	bls _080C705A
-	lsls r0, r6, 24
-	lsrs r0, 24
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80C7050
-
-	thumb_func_start sub_80C70AC
-sub_80C70AC: @ 80C70AC
-	push {lr}
-	ldr r0, =gSpecialVar_0x8004
-	ldrb r0, [r0]
-	bl sub_80C7050
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80C70AC
-
-	thumb_func_start sub_80C70C4
-sub_80C70C4: @ 80C70C4
-	push {r4,r5,lr}
-	movs r4, 0
-	movs r5, 0
-_080C70CA:
-	movs r0, 0x64
-	muls r0, r4
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _080C70E2
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-_080C70E2:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x5
-	bls _080C70CA
-	lsls r0, r5, 24
-	lsrs r0, 24
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80C70C4
-
-	thumb_func_start sub_80C70FC
-sub_80C70FC: @ 80C70FC
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r4, r2, 16
-	lsrs r4, 16
-	bl StringCopy
-	adds r1, r0, 0
-	adds r5, r4
-	cmp r1, r5
-	bcs _080C711A
-	movs r0, 0
-_080C7112:
-	strb r0, [r1]
-	adds r1, 0x1
-	cmp r1, r5
-	bcc _080C7112
-_080C711A:
-	movs r0, 0xFF
-	strb r0, [r1]
-	adds r0, r1, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C70FC
-
-	thumb_func_start sub_80C7128
+    thumb_func_start sub_80C7128
 sub_80C7128: @ 80C7128
 	push {r4-r7,lr}
 	mov r7, r9
@@ -427,7 +211,7 @@ _080C72AC:
 	bl sub_81973A4
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -449,7 +233,7 @@ _080C72AC:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0xFF
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -555,7 +339,7 @@ _080C7392:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _080C756A
 	.pool
 _080C73D0:
@@ -578,7 +362,7 @@ _080C73F6:
 	ldrsh r4, [r5, r3]
 	cmp r4, 0
 	bne _080C7428
-	bl sub_80C70C4
+	bl CountPartyMons
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -601,7 +385,7 @@ _080C7428:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x1
 	bne _080C745C
-	bl sub_80C70C4
+	bl CountPartyMons
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -622,7 +406,7 @@ _080C7428:
 _080C745C:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	movs r0, 0x4
 	strh r0, [r5, 0x8]
 	b _080C756A
@@ -725,7 +509,7 @@ _080C7532:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	strh r4, [r5, 0x8]
 	b _080C756A
 	.pool
@@ -843,7 +627,7 @@ sub_80C75FC: @ 80C75FC
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_81973FC
+	bl NewMenuHelpers_DrawStdWindowFrame
 	adds r0, r4, 0
 	movs r1, 0x5
 	mov r2, r8
@@ -1322,7 +1106,7 @@ sub_80C7958: @ 80C7958
 	ldrh r0, [r3]
 	adds r0, 0x1
 	strh r0, [r1]
-	ldr r0, =gUnknown_08571710
+	ldr r0, =sSpriteAnimTable_8571710
 	str r0, [sp, 0xC]
 	movs r4, 0
 _080C7A10:
@@ -2252,7 +2036,7 @@ _080C8230:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080C825C
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080C825C
@@ -2417,7 +2201,7 @@ _080C83CC:
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C83F4
@@ -2520,7 +2304,7 @@ _080C84C8:
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C84F8
@@ -3090,7 +2874,7 @@ _080C8A0C:
 	ldr r2, =0x00000ce6
 	adds r0, r2
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8A8C
@@ -3129,7 +2913,7 @@ _080C8A7C:
 	ldr r2, =0x00000ce6
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8A98
@@ -3539,7 +3323,7 @@ _080C8E38:
 	b _080C8EA0
 	.pool
 _080C8E4C:
-	bl party_compaction
+	bl CompactPartySlots
 	bl sub_80CB950
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
@@ -3625,7 +3409,7 @@ _080C8F0C:
 	adds r0, 0x1
 	strb r0, [r1]
 _080C8F22:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3699,7 +3483,7 @@ _080C8FA4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C8FD0
-	bl party_compaction
+	bl CompactPartySlots
 	bl sub_80CB950
 	b _080C905C
 	.pool
@@ -3877,7 +3661,7 @@ _080C914E:
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C9168
@@ -4159,7 +3943,7 @@ _080C93E4:
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C9404
@@ -4349,7 +4133,7 @@ _080C9584:
 	b _080C9664
 	.pool
 _080C95A4:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4453,7 +4237,7 @@ sub_80C9670: @ 80C9670
 	b _080C96AE
 	.pool
 _080C9688:
-	bl party_compaction
+	bl CompactPartySlots
 	bl sub_80CB950
 	ldr r1, [r4]
 	ldrb r0, [r1]
@@ -5143,7 +4927,7 @@ _080C9C78:
 	b _080C9CAA
 	.pool
 _080C9C8C:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -5274,7 +5058,7 @@ _080C9DAC:
 	b _080C9DE0
 	.pool
 _080C9DC0:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -5458,7 +5242,7 @@ _080C9F56:
 sub_80C9F6C: @ 80C9F6C
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	mov r0, sp
 	strh r1, [r0]
@@ -5559,7 +5343,7 @@ sub_80CA044: @ 80CA044
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
-	ldr r1, =gUnknown_08DD2FE8
+	ldr r1, =gPSSMenu_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -5609,7 +5393,7 @@ _080CA0C2:
 	thumb_func_start sub_80CA0C8
 sub_80CA0C8: @ 80CA0C8
 	push {lr}
-	ldr r0, =gUnknown_08572744
+	ldr r0, =gWaveformSpritePalette
 	bl LoadSpritePalette
 	pop {r0}
 	bx r0
@@ -5714,7 +5498,7 @@ sub_80CA154: @ 80CA154
 sub_80CA1C4: @ 80CA1C4
 	push {r4,lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_0857274C
+	ldr r0, =gWaveformSpriteSheet
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [sp]
@@ -6320,7 +6104,7 @@ sub_80CA704: @ 80CA704
 	ldr r1, [r4]
 	adds r1, 0xB0
 	bl LZ77UnCompWram
-	ldr r0, =gUnknown_08DD36A8
+	ldr r0, =gPSSMenu_Pal
 	movs r1, 0x10
 	movs r2, 0x20
 	bl LoadPalette
@@ -6567,7 +6351,7 @@ _080CA94C:
 	movs r1, 0
 	strb r1, [r0]
 	bl sub_80CBB9C
-	bl party_compaction
+	bl CompactPartySlots
 	movs r0, 0x2
 	str r0, [sp]
 	movs r1, 0
@@ -6953,7 +6737,7 @@ sub_80CAC58: @ 80CAC58
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r1, =gUnknown_0857276C
 	lsls r0, r6, 3
 	adds r0, r1
@@ -6990,7 +6774,7 @@ _080CACB8:
 	adds r1, r2
 _080CACC0:
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	b _080CAD30
 	.pool
 _080CACD0:
@@ -7033,7 +6817,7 @@ _080CAD16:
 	ldr r0, =0x000021eb
 	adds r1, r0
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 _080CAD30:
 	ldr r5, =gUnknown_02039D08
 	ldr r0, [r5]
@@ -7043,7 +6827,7 @@ _080CAD30:
 	lsls r1, r6, 3
 	adds r1, r2
 	ldr r1, [r1]
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -9340,7 +9124,7 @@ _080CBF80:
 	adds r1, r3
 	ldr r0, [r1]
 	ldr r2, [r0]
-	ldr r0, =gUnknown_0857291C
+	ldr r0, =gSpriteAffineAnimTable_857291C
 	str r0, [r2, 0x10]
 	ldr r0, [r1]
 	ldr r0, [r0]
@@ -10351,7 +10135,7 @@ _080CC7E6:
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_085775B8
+	ldr r1, =gWallpaperTable
 	adds r6, r0, r1
 	ldr r0, [r6, 0x4]
 	ldr r1, [r7]
@@ -10862,7 +10646,7 @@ _080CCC70:
 	adds r1, r6, r1
 	lsls r1, 16
 	asrs r1, 16
-	ldr r0, =gUnknown_0857B0A8
+	ldr r0, =gSpriteTemplate_857B0A8
 	movs r2, 0x1C
 	movs r3, 0x18
 	bl CreateSprite
@@ -10936,7 +10720,7 @@ sub_80CCCFC: @ 80CCCFC
 	ldr r0, =0x00030200
 	str r0, [r3, 0x4]
 	add r1, sp, 0x4
-	ldr r0, =gUnknown_0857B0A8
+	ldr r0, =gSpriteTemplate_857B0A8
 	ldm r0!, {r5-r7}
 	stm r1!, {r5-r7}
 	ldm r0!, {r5-r7}
@@ -13381,7 +13165,7 @@ sub_80CE19C: @ 80CE19C
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
-	bl sub_80C6FD4
+	bl GetFirstFreeBoxSpot
 	lsls r0, 16
 	lsrs r4, r0, 16
 	asrs r0, 16
@@ -14127,7 +13911,7 @@ _080CE838:
 	ldr r2, =0x00002187
 	adds r1, r2
 	strb r0, [r1]
-	bl sub_80C70C4
+	bl CountPartyMons
 	ldr r1, [r4]
 	subs r0, 0x1
 	ldr r2, =0x00002186
@@ -14193,8 +13977,8 @@ _080CE900:
 	.pool
 	thumb_func_end sub_80CE8E4
 
-	thumb_func_start party_compaction
-party_compaction: @ 80CE90C
+	thumb_func_start CompactPartySlots
+CompactPartySlots: @ 80CE90C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -14271,7 +14055,7 @@ _080CE992:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end party_compaction
+	thumb_func_end CompactPartySlots
 
 	thumb_func_start sub_80CE9A8
 sub_80CE9A8: @ 80CE9A8
@@ -14347,7 +14131,7 @@ sub_80CEA30: @ 80CEA30
 	bne _080CEA64
 	ldr r0, =gUnknown_02039D79
 	ldrb r0, [r0]
-	bl sub_80C7050
+	bl CountPartyAliveNonEggMonsExcept
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CEA64
@@ -14376,7 +14160,7 @@ sub_80CEA6C: @ 80CEA6C
 	bne _080CEAAC
 	ldr r0, =gUnknown_02039D79
 	ldrb r0, [r0]
-	bl sub_80C7050
+	bl CountPartyAliveNonEggMonsExcept
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CEAAC
@@ -14656,7 +14440,7 @@ _080CEC86:
 	adds r1, r3
 	str r0, [r1]
 	adds r0, r6, 0
-	bl pokemon_get_pal
+	bl GetMonFrontSpritePal
 	ldr r1, [r4]
 	ldr r2, =0x00000cdc
 	adds r1, r2
@@ -14759,7 +14543,7 @@ _080CED7E:
 	adds r1, r4
 	ldrh r0, [r1]
 	mov r1, r9
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	ldr r1, [r5]
 	ldr r3, =0x00000cdc
 	adds r2, r1, r3
@@ -16384,7 +16168,7 @@ sub_80CFB44: @ 80CFB44
 	.pool
 _080CFB8C:
 	ldrh r0, [r1]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CFBA4
@@ -16413,7 +16197,7 @@ _080CFBAC:
 	.pool
 _080CFBCC:
 	ldrh r0, [r1]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -16456,14 +16240,14 @@ sub_80CFC14: @ 80CFC14
 	push {r4-r6,lr}
 	sub sp, 0x2C
 	mov r1, sp
-	ldr r0, =gUnknown_0857B9E4
+	ldr r0, =gHandCursorSpriteSheets
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
 	add r4, sp, 0x18
 	adds r1, r4, 0
-	ldr r0, =gUnknown_0857B9FC
+	ldr r0, =gHandCursorSpritePalettes
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
 	ldr r0, [r0]
@@ -16495,7 +16279,7 @@ sub_80CFC14: @ 80CFC14
 	adds r2, r4, 0
 	adds r3, r5, 0
 	bl sub_80CD444
-	ldr r0, =gUnknown_0857BA50
+	ldr r0, =gSpriteTemplate_857BA50
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	movs r3, 0
@@ -16569,7 +16353,7 @@ _080CFD3C:
 	movs r3, 0x15
 	movs r4, 0x2
 _080CFD40:
-	ldr r0, =gUnknown_0857BA68
+	ldr r0, =gSpriteTemplate_857BA68
 	movs r1, 0
 	movs r2, 0
 	bl CreateSprite
@@ -18540,7 +18324,7 @@ sub_80D0C60: @ 80D0C60
 	orrs r0, r1
 	str r0, [r2, 0x4]
 	mov r1, sp
-	ldr r0, =gUnknown_0857BC70
+	ldr r0, =gSpriteTemplate_857BC70
 	ldm r0!, {r4-r6}
 	stm r1!, {r4-r6}
 	ldm r0!, {r4-r6}
@@ -21042,7 +20826,7 @@ sub_80D2054: @ 80D2054
 	lsls r1, 4
 	adds r0, r1
 	adds r1, r5, 0
-	bl sub_8069004
+	bl BoxMonToMon
 _080D2088:
 	pop {r4,r5}
 	pop {r0}
@@ -21264,8 +21048,8 @@ _080D220C:
 	bx r1
 	thumb_func_end sub_80D214C
 
-	thumb_func_start sub_80D2218
-sub_80D2218: @ 80D2218
+	thumb_func_start CheckFreePokemonStorageSpace
+CheckFreePokemonStorageSpace: @ 80D2218
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -21311,7 +21095,7 @@ _080D2262:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D2218
+	thumb_func_end CheckFreePokemonStorageSpace
 
 	thumb_func_start sub_80D2270
 sub_80D2270: @ 80D2270
@@ -21876,7 +21660,7 @@ sub_80D2644: @ 80D2644
 	mov r2, r9
 	ldr r1, [r2]
 	adds r5, r1
-	ldr r2, =gUnknown_0857BC88
+	ldr r2, =gSpriteTemplate_857BC88
 	lsls r4, 2
 	lsls r1, r0, 4
 	adds r4, r1

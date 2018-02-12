@@ -150,8 +150,8 @@ _08158C4C:
 	.pool
 	thumb_func_end sub_8158C04
 
-	thumb_func_start mas_80DCF38
-mas_80DCF38: @ 8158C58
+	thumb_func_start sub_8158C58
+sub_8158C58: @ 8158C58
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -230,7 +230,7 @@ mas_80DCF38: @ 8158C58
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end mas_80DCF38
+	thumb_func_end sub_8158C58
 
 	thumb_func_start sub_8158D08
 sub_8158D08: @ 8158D08
@@ -336,25 +336,25 @@ _08158DD0:
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _08158DEC
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r4, [r0]
 	b _08158E12
 	.pool
 _08158DEC:
 	cmp r1, 0x1
 	bne _08158DFC
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 	ldrb r4, [r0]
 	b _08158E12
 	.pool
 _08158DFC:
 	cmp r1, 0x2
 	bne _08158E08
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	b _08158E0A
 	.pool
 _08158E08:
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 _08158E0A:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -369,7 +369,7 @@ _08158E12:
 	bne _08158E38
 _08158E1E:
 	adds r0, r4, 0
-	bl IsAnimBankSpriteVisible
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158E38
@@ -379,11 +379,11 @@ _08158E1E:
 	.pool
 _08158E38:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158E5C
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -393,7 +393,7 @@ _08158E38:
 	b _08158E6A
 	.pool
 _08158E5C:
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -461,25 +461,25 @@ _08158EE0:
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _08158EFC
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r4, [r0]
 	b _08158F22
 	.pool
 _08158EFC:
 	cmp r1, 0x1
 	bne _08158F0C
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 	ldrb r4, [r0]
 	b _08158F22
 	.pool
 _08158F0C:
 	cmp r1, 0x2
 	bne _08158F18
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	b _08158F1A
 	.pool
 _08158F18:
-	ldr r0, =gAnimBankTarget
+	ldr r0, =gBattleAnimTarget
 _08158F1A:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -494,7 +494,7 @@ _08158F22:
 	bne _08158F48
 _08158F2E:
 	adds r0, r4, 0
-	bl IsAnimBankSpriteVisible
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158F48
@@ -504,11 +504,11 @@ _08158F2E:
 	.pool
 _08158F48:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158F6C
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -518,7 +518,7 @@ _08158F48:
 	b _08158F7A
 	.pool
 _08158F6C:
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -705,7 +705,7 @@ sub_81590B8: @ 81590B8
 	.pool
 _081590F8:
 	ldr r1, =gAnimSpeciesByBanks
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1

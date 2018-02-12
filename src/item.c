@@ -1,17 +1,17 @@
 #include "global.h"
 #include "item.h"
-#include "items.h"
+#include "berry.h"
+#include "constants/items.h"
 #include "string_util.h"
 #include "text.h"
 #include "event_data.h"
 
-extern void ApplyNewEncyprtionKeyToHword(u16* hword, u32 newKey);
+extern void ApplyNewEncryptionKeyToHword(u16* hword, u32 newKey);
 extern bool8 InBattlePyramid(void);
 
 extern const u8 gText_PokeBalls[];
 extern const u8 gText_Berries[];
 extern const u8 gText_Berry[];
-extern const u8 gUnknown_085897E4[][28]; // not sure what this one is
 
 bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -36,39 +36,39 @@ void SetBagItemId(u16* slot, u16 newItemId)
     *slot = newItemId;
 }
 
-void ApplyNewEncyprtionKeyToBagItems(u32 newKey)
+void ApplyNewEncryptionKeyToBagItems(u32 newKey)
 {
     u32 pocket, item;
     for (pocket = 0; pocket < 5; pocket++)
     {
         for (item = 0; item < gBagPockets[pocket].capacity; item++)
-            ApplyNewEncyprtionKeyToHword(&(gBagPockets[pocket].itemSlots[item].quantity), newKey);
+            ApplyNewEncryptionKeyToHword(&(gBagPockets[pocket].itemSlots[item].quantity), newKey);
     }
 }
 
-void ApplyNewEncyprtionKeyToBagItems_(u32 newKey) // really GF?
+void ApplyNewEncryptionKeyToBagItems_(u32 newKey) // really GF?
 {
-    ApplyNewEncyprtionKeyToBagItems(newKey);
+    ApplyNewEncryptionKeyToBagItems(newKey);
 }
 
 // TODO: move those max values to defines
 
 void SetBagItemsPointers(void)
 {
-    gBagPockets[ITEMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Items;
-    gBagPockets[ITEMS_POCKET].capacity = 30;
+    gBagPockets[BAG_ITEMS - 1].itemSlots = gSaveBlock1Ptr->bagPocket_Items;
+    gBagPockets[BAG_ITEMS - 1].capacity = 30;
 
-    gBagPockets[KEYITEMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_KeyItems;
-    gBagPockets[KEYITEMS_POCKET].capacity = 30;
+    gBagPockets[BAG_KEYITEMS - 1].itemSlots = gSaveBlock1Ptr->bagPocket_KeyItems;
+    gBagPockets[BAG_KEYITEMS - 1].capacity = 30;
 
-    gBagPockets[BALLS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_PokeBalls;
-    gBagPockets[BALLS_POCKET].capacity = 16;
+    gBagPockets[BAG_POKEBALLS - 1].itemSlots = gSaveBlock1Ptr->bagPocket_PokeBalls;
+    gBagPockets[BAG_POKEBALLS - 1].capacity = 16;
 
-    gBagPockets[TMHM_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_TMHM;
-    gBagPockets[TMHM_POCKET].capacity = 64;
+    gBagPockets[BAG_TMsHMs - 1].itemSlots = gSaveBlock1Ptr->bagPocket_TMHM;
+    gBagPockets[BAG_TMsHMs - 1].capacity = 64;
 
-    gBagPockets[BERRIES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
-    gBagPockets[BERRIES_POCKET].capacity = 46;
+    gBagPockets[BAG_BERRIES - 1].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
+    gBagPockets[BAG_BERRIES - 1].capacity = 46;
 }
 
 void CopyItemName(u16 itemId, u8 *string)
@@ -87,8 +87,8 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity)
     }
     else
     {
-        if (itemId >= 0x85 && itemId <= 0xAF)
-            GetBerryCountString(string, gUnknown_085897E4[itemId], quantity);
+        if (itemId >= ITEM_CHERI_BERRY && itemId <= ITEM_ENIGMA_BERRY)
+            GetBerryCountString(string, gBerries[itemId - ITEM_CHERI_BERRY].name, quantity);
         else
             StringCopy(string, ItemId_GetItem(itemId)->name);
     }
@@ -156,11 +156,11 @@ bool8 HasAtLeastOneBerry(void)
     {
         if (CheckBagHasItem(i, 1) == TRUE)
         {
-            gScriptResult = 1;
+            gSpecialVar_Result = 1;
             return TRUE;
         }
     }
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     return FALSE;
 }
 
@@ -177,7 +177,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
     if (InBattlePyramid() || FlagGet(0x4004) == TRUE)
         return CheckPyramidBagHasSpace(itemId, count);
     pocket = ItemId_GetPocket(itemId) - 1;
-    if (pocket != BERRIES_POCKET)
+    if (pocket != BAG_BERRIES)
         slotCapacity = 99;
     else
         slotCapacity = 999;
@@ -190,7 +190,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
             quantity = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
             if (quantity + count <= slotCapacity)
                 return TRUE;
-            if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
+            if (pocket == BAG_TMsHMs || pocket == BAG_BERRIES)
                 return FALSE;
             count -= slotCapacity - quantity;
             if (count == 0)
@@ -207,7 +207,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
             {
                 if (count <= slotCapacity)
                     return TRUE;
-                if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
+                if (pocket == BAG_TMsHMs || pocket == BAG_BERRIES)
                     return FALSE;
                 count -= slotCapacity;
             }

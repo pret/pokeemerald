@@ -581,7 +581,7 @@ _080689E4:
 	beq _080689CE
 _080689F4:
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080689CE
@@ -827,7 +827,7 @@ _08068BE0:
 	ldrb r0, [r1, 0x13]
 	lsls r0, 3
 	orrs r2, r0
-	ldr r1, =gTrainerClassToNameIndex
+	ldr r1, =gFacilityClassToTrainerClass
 	ldr r0, =gUnknown_08329D54
 	lsls r2, 1
 	adds r2, r0
@@ -1310,8 +1310,8 @@ _08068FF4:
 	bx r0
 	thumb_func_end CalculateMonStats
 
-	thumb_func_start sub_8069004
-sub_8069004: @ 8069004
+	thumb_func_start BoxMonToMon
+BoxMonToMon: @ 8069004
 	push {r4,lr}
 	sub sp, 0x4
 	adds r2, r0, 0
@@ -1346,7 +1346,7 @@ sub_8069004: @ 8069004
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069004
+	thumb_func_end BoxMonToMon
 
 	thumb_func_start GetLevelFromMonExp
 GetLevelFromMonExp: @ 8069054

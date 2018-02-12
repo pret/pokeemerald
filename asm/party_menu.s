@@ -4,6 +4,192 @@
 	.syntax unified
 
 	.text
+	
+	thumb_func_start sub_81B0038
+sub_81B0038: @ 81B0038
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x4
+	ldr r4, [sp, 0x24]
+	lsls r0, 24
+	lsrs r0, 24
+	mov r8, r0
+	lsls r1, 24
+	lsrs r1, 24
+	mov r9, r1
+	lsls r2, 24
+	lsrs r7, r2, 24
+	lsls r3, 24
+	lsrs r3, 24
+	str r3, [sp]
+	lsls r4, 24
+	lsrs r6, r4, 24
+	bl reset_brm
+	ldr r0, =gUnknown_0203CEC4
+	mov r10, r0
+	movs r0, 0x8E
+	lsls r0, 2
+	bl Alloc
+	adds r5, r0, 0
+	mov r1, r10
+	str r5, [r1]
+	cmp r5, 0
+	bne _081B0088
+	ldr r0, [sp, 0x2C]
+	bl SetMainCallback2
+	b _081B0194
+	.pool
+_081B0088:
+	ldr r3, =gUnknown_0203CEC8
+	movs r1, 0xF
+	mov r4, r8
+	ands r1, r4
+	ldrb r2, [r3, 0x8]
+	movs r0, 0x10
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r3, 0x8]
+	ldr r0, [sp, 0x2C]
+	str r0, [r3]
+	movs r4, 0
+	strb r7, [r3, 0xB]
+	lsls r2, r6, 2
+	ldrh r1, [r5, 0xA]
+	movs r0, 0x3
+	ands r0, r1
+	orrs r0, r2
+	strh r0, [r5, 0xA]
+	ldr r0, [sp, 0x28]
+	str r0, [r5]
+	str r4, [r5, 0x4]
+	ldrb r1, [r5, 0x8]
+	movs r0, 0xF
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r5, 0x8]
+	mov r1, r10
+	ldr r2, [r1]
+	ldrh r0, [r2, 0x8]
+	movs r4, 0xFE
+	lsls r4, 3
+	adds r1, r4, 0
+	orrs r0, r1
+	strh r0, [r2, 0x8]
+	ldr r0, [r2, 0x8]
+	movs r1, 0xFE
+	lsls r1, 10
+	orrs r0, r1
+	str r0, [r2, 0x8]
+	adds r6, r3, 0
+	mov r5, r8
+	cmp r5, 0x4
+	bne _081B00F0
+	ldrb r0, [r2, 0x8]
+	movs r1, 0x1
+	orrs r0, r1
+	b _081B00F8
+	.pool
+_081B00F0:
+	ldrb r1, [r2, 0x8]
+	movs r0, 0x2
+	negs r0, r0
+	ands r0, r1
+_081B00F8:
+	strb r0, [r2, 0x8]
+	mov r0, r9
+	cmp r0, 0xFF
+	beq _081B0114
+	movs r0, 0x3
+	mov r1, r9
+	ands r0, r1
+	lsls r0, 4
+	ldrb r2, [r6, 0x8]
+	movs r1, 0x31
+	negs r1, r1
+	ands r1, r2
+	orrs r1, r0
+	strb r1, [r6, 0x8]
+_081B0114:
+	movs r2, 0
+	ldr r5, =gUnknown_0203CEC4
+	movs r4, 0x86
+	lsls r4, 2
+	movs r3, 0
+_081B011E:
+	ldr r0, [r5]
+	lsls r1, r2, 1
+	adds r0, r4
+	adds r0, r1
+	strh r3, [r0]
+	adds r0, r2, 0x1
+	lsls r0, 16
+	lsrs r2, r0, 16
+	cmp r2, 0xF
+	bls _081B011E
+	movs r2, 0
+	ldr r4, =gUnknown_0203CEC4
+	movs r3, 0xFF
+_081B0138:
+	ldr r0, [r4]
+	adds r0, 0xC
+	adds r0, r2
+	ldrb r1, [r0]
+	orrs r1, r3
+	strb r1, [r0]
+	adds r0, r2, 0x1
+	lsls r0, 16
+	lsrs r2, r0, 16
+	cmp r2, 0x2
+	bls _081B0138
+	ldr r4, [sp]
+	cmp r4, 0
+	bne _081B015C
+	strb r4, [r6, 0x9]
+	b _081B017E
+	.pool
+_081B015C:
+	adds r1, r6, 0
+	movs r0, 0x9
+	ldrsb r0, [r1, r0]
+	cmp r0, 0x5
+	bgt _081B017A
+	adds r1, r0, 0
+	movs r0, 0x64
+	muls r0, r1
+	ldr r1, =gPlayerParty
+	adds r0, r1
+	movs r1, 0xB
+	bl GetMonData
+	cmp r0, 0
+	bne _081B017E
+_081B017A:
+	movs r0, 0
+	strb r0, [r6, 0x9]
+_081B017E:
+	ldr r2, =gTextFlags
+	ldrb r1, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2]
+	bl CalculatePlayerPartyCount
+	ldr r0, =c2_811EBD0
+	bl SetMainCallback2
+_081B0194:
+	add sp, 0x4
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_81B0038
 
 	thumb_func_start sub_81B01B0
 sub_81B01B0: @ 81B01B0
@@ -98,7 +284,7 @@ _081B0234:
 	.4byte _081B0474
 _081B0290:
 	bl SetVBlankHBlankCallbacksToNull
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	bl clear_scheduled_bg_copies_to_vram
 	ldr r1, =gMain
 	movs r0, 0x87
@@ -107,7 +293,7 @@ _081B0290:
 	b _081B048C
 	.pool
 _081B02AC:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _081B0484
 _081B02B2:
 	bl ResetPaletteFade
@@ -429,7 +615,7 @@ sub_81B0550: @ 81B0550
 	ldr r1, [r5]
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82
@@ -487,7 +673,7 @@ _081B05F0:
 	.4byte _081B0694
 _081B0610:
 	ldr r4, =gUnknown_0203CEE0
-	ldr r0, =gUnknown_08D967EC
+	ldr r0, =gPartyMenuMisc_Gfx
 	mov r1, sp
 	bl malloc_and_decompress
 	adds r1, r0, 0
@@ -505,14 +691,14 @@ _081B0638:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B06B4
-	ldr r0, =gUnknown_08D96BA0
+	ldr r0, =gPartyMenuMisc_Tilemap
 	ldr r1, =gUnknown_0203CEE4
 	ldr r1, [r1]
 	bl LZDecompressWram
 	b _081B069A
 	.pool
 _081B0658:
-	ldr r0, =gUnknown_08D96AB4
+	ldr r0, =gPartyMenuMisc_Pal
 	movs r2, 0xB0
 	lsls r2, 1
 	movs r1, 0
@@ -1213,13 +1399,13 @@ sub_81B0BFC: @ 81B0BFC
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r6, r1, r0
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r4, [r0]
 	ldr r0, =gUnknown_0203CEC8
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0xC
 	bne _081B0C40
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gSpecialVar_0x8005
@@ -2111,13 +2297,13 @@ _081B134C:
 	bx r0
 	thumb_func_end c3_0811FAB4
 
-	thumb_func_start brm_get_pokemon_selection
-brm_get_pokemon_selection: @ 81B1354
+	thumb_func_start GetCursorSelectionMonId
+GetCursorSelectionMonId: @ 81B1354
 	ldr r0, =gUnknown_0203CEC8
 	ldrb r0, [r0, 0x9]
 	bx lr
 	.pool
-	thumb_func_end brm_get_pokemon_selection
+	thumb_func_end GetCursorSelectionMonId
 
 	thumb_func_start sub_81B1360
 sub_81B1360: @ 81B1360
@@ -2554,7 +2740,7 @@ sub_81B1708: @ 81B1708
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3161,7 +3347,7 @@ sub_81B1B8C: @ 81B1B8C
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	movs r0, 0x6
-	bl sub_8121F20
+	bl RunTextPrintersRetIsActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -3402,14 +3588,14 @@ sub_81B1DB8: @ 81B1DB8
 	lsrs r4, r5, 16
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081B1DE2
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_80D4420
+	bl GiveMailToMon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -4010,7 +4196,7 @@ sub_81B227C: @ 81B227C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4211,7 +4397,7 @@ _081B23E8:
 	movs r1, 0x4F
 	movs r2, 0xD0
 	bl sub_809882C
-	bl sub_8098C64
+	bl GetOverworldTextboxPalettePtr
 	movs r1, 0xE0
 	movs r2, 0x20
 	bl LoadPalette
@@ -4249,7 +4435,7 @@ _081B243E:
 	adds r0, r4, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r5, =gText_Confirm
+	ldr r5, =gMenuText_Confirm
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0x30
@@ -4268,7 +4454,7 @@ _081B243E:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -5946,7 +6132,7 @@ _081B328C:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -5992,7 +6178,7 @@ sub_81B3300: @ 81B3300
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -6007,7 +6193,7 @@ sub_81B3300: @ 81B3300
 	movs r0, 0x6
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -6216,7 +6402,7 @@ _081B34D2:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B3508
@@ -7739,7 +7925,7 @@ c2_8123744: @ 81B41F0
 	mov r7, r8
 	push {r7}
 	sub sp, 0xC
-	ldr r6, =gScriptItemId
+	ldr r6, =gSpecialVar_ItemId
 	ldrh r0, [r6]
 	cmp r0, 0
 	bne _081B4224
@@ -7791,7 +7977,7 @@ _081B425A:
 	.pool
 _081B4278:
 	ldrh r0, [r6]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B42A4
@@ -7845,7 +8031,7 @@ sub_81B42D0: @ 81B42D0
 	ands r0, r1
 	cmp r0, 0
 	bne _081B432C
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r4, [r0]
 	ldr r0, =gUnknown_0203CEC8
 	mov r8, r0
@@ -7952,7 +8138,7 @@ sub_81B43DC: @ 81B43DC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -7969,7 +8155,7 @@ _081B43FC:
 	beq _081B44DE
 	b _081B44EC
 _081B4402:
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -7999,7 +8185,7 @@ _081B4402:
 	.pool
 _081B4458:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B4498
@@ -8135,12 +8321,12 @@ sub_81B4578: @ 81B4578
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r7, [r0]
 	cmp r7, 0
 	bne _081B45F8
 	adds r0, r5, 0
-	bl sub_80D4680
+	bl TakeMailFromMon
 	ldr r4, =gUnknown_0203CEFC
 	adds r0, r5, 0
 	movs r1, 0xC
@@ -8212,7 +8398,7 @@ sub_81B4624: @ 81B4624
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	movs r2, 0
 	movs r3, 0
@@ -8220,7 +8406,7 @@ sub_81B4624: @ 81B4624
 	b _081B467C
 	.pool
 _081B4670:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r1]
 	movs r2, 0
@@ -8485,7 +8671,7 @@ sub_81B48DC: @ 81B48DC
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r4, r1, r0
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8681,7 +8867,7 @@ sub_81B4A98: @ 81B4A98
 	adds r0, r1
 	ldr r1, =sub_81B4AE0
 	movs r2, 0x1
-	bl sub_8121478
+	bl ReadMail
 	pop {r0}
 	bx r0
 	.pool
@@ -8777,7 +8963,7 @@ sub_81B4BA0: @ 81B4BA0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8801,7 +8987,7 @@ _081B4BC6:
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl sub_80D4700
+	bl TakeMailFromMon2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -8883,7 +9069,7 @@ sub_81B4C94: @ 81B4C94
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8925,7 +9111,7 @@ _081B4CBE:
 	ldrsb r0, [r1, r0]
 	muls r0, r7
 	adds r0, r6
-	bl sub_80D4680
+	bl TakeMailFromMon
 	ldr r0, =gText_MailTakenFromPkmn
 	movs r1, 0
 	bl sub_81B1B5C
@@ -9691,7 +9877,7 @@ sub_81B5430: @ 81B5430
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -9892,7 +10078,7 @@ _081B55E8:
 	.pool
 _081B5614:
 	ldr r1, =gUnknown_0203CEC8
-	ldr r0, =sub_8124690
+	ldr r0, =MCB2_FlyMap
 	b _081B5628
 	.pool
 _081B5624:
@@ -9985,7 +10171,7 @@ sub_81B56D8: @ 81B56D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10027,8 +10213,8 @@ _081B572A:
 	.pool
 	thumb_func_end sub_81B56D8
 
-	thumb_func_start hm_add_c3_launch_phase_2
-hm_add_c3_launch_phase_2: @ 81B5738
+	thumb_func_start FieldCallback_Teleport
+FieldCallback_Teleport: @ 81B5738
 	push {lr}
 	bl pal_fill_black
 	ldr r0, =task_launch_hm_phase_2
@@ -10038,7 +10224,7 @@ hm_add_c3_launch_phase_2: @ 81B5738
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end hm_add_c3_launch_phase_2
+	thumb_func_end FieldCallback_Teleport
 
 	thumb_func_start task_launch_hm_phase_2
 task_launch_hm_phase_2: @ 81B5750
@@ -10134,7 +10320,7 @@ _081B57FE:
 	thumb_func_start hm_surf_run_dp02scr
 hm_surf_run_dp02scr: @ 81B5804
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -10160,7 +10346,7 @@ sub_81B5820: @ 81B5820
 	cmp r0, 0x1
 	bne _081B585C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =hm_surf_run_dp02scr
@@ -10199,7 +10385,7 @@ sub_81B5884: @ 81B5884
 	push {lr}
 	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -10238,7 +10424,7 @@ sub_81B58A8: @ 81B58A8
 	thumb_func_start hm2_waterfall
 hm2_waterfall: @ 81B58D4
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -10278,7 +10464,7 @@ hm_prepare_waterfall: @ 81B58F0
 	cmp r0, 0x1
 	bne _081B594C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =hm2_waterfall
@@ -10298,7 +10484,7 @@ _081B594E:
 	thumb_func_start sub_81B5958
 sub_81B5958: @ 81B5958
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -10325,7 +10511,7 @@ sub_81B5974: @ 81B5974
 	.pool
 _081B5990:
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_81B5958
@@ -10415,7 +10601,7 @@ party_menu_link_mon_icon_anim: @ 81B5A2C
 	ldr r0, [sp, 0x20]
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	strb r0, [r4, 0x9]
 	ldr r2, =gSprites
 	ldrb r0, [r4, 0x9]
@@ -10645,7 +10831,7 @@ party_menu_held_item_object: @ 81B5C14
 	bl GetMonData
 	cmp r0, 0
 	beq _081B5C3C
-	ldr r0, =gUnknown_08615EC0
+	ldr r0, =gSpriteTemplate_8615EC0
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x2]
 	ldrb r2, [r2, 0x3]
@@ -10671,7 +10857,7 @@ party_menu_link_mon_held_item_object: @ 81B5C48
 	lsrs r5, r1, 16
 	cmp r0, 0
 	beq _081B5C84
-	ldr r0, =gUnknown_08615EC0
+	ldr r0, =gSpriteTemplate_8615EC0
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x2]
 	ldrb r2, [r2, 0x3]
@@ -10735,7 +10921,7 @@ sub_81B5CB0: @ 81B5CB0
 	b _081B5D24
 	.pool
 _081B5CD8:
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B5CFC
@@ -10821,7 +11007,7 @@ _081B5D68:
 	adds r0, r7, r5
 	ldrb r4, [r0]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -10853,7 +11039,7 @@ _081B5DAC:
 	adds r0, r5, r7
 	ldrb r4, [r0, 0x6]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -10896,7 +11082,7 @@ sub_81B5DF0: @ 81B5DF0
 	add r0, r8
 	adds r0, 0x43
 	ldrb r3, [r0]
-	ldr r0, =gUnknown_08615EC0
+	ldr r0, =gSpriteTemplate_8615EC0
 	subs r3, 0x1
 	lsls r3, 24
 	lsrs r3, 24
@@ -10991,7 +11177,7 @@ party_menu_pokeball_object: @ 81B5ECC
 	bl GetMonData
 	cmp r0, 0
 	beq _081B5EEA
-	ldr r0, =gUnknown_08615F08
+	ldr r0, =gSpriteTemplate_8615F08
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x6]
 	ldrb r2, [r2, 0x7]
@@ -11012,7 +11198,7 @@ party_menu_link_mon_pokeball_object: @ 81B5EF4
 	lsls r0, 16
 	cmp r0, 0
 	beq _081B5F24
-	ldr r0, =gUnknown_08615F08
+	ldr r0, =gSpriteTemplate_8615F08
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x6]
 	ldrb r2, [r2, 0x7]
@@ -11046,7 +11232,7 @@ sub_81B5F34: @ 81B5F34
 	lsrs r3, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_08615F08
+	ldr r0, =gSpriteTemplate_8615F08
 	adds r1, r3, 0
 	movs r3, 0x8
 	bl CreateSprite
@@ -11078,7 +11264,7 @@ sub_81B5F74: @ 81B5F74
 	lsrs r3, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_08615F78
+	ldr r0, =gSpriteTemplate_8615F78
 	adds r1, r3, 0
 	movs r3, 0x8
 	bl CreateSprite
@@ -11194,7 +11380,7 @@ party_menu_status_condition_object: @ 81B6064
 	bl GetMonData
 	cmp r0, 0
 	beq _081B608C
-	ldr r0, =gUnknown_08616008
+	ldr r0, =gSpriteTemplate_8616008
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x4]
 	ldrb r2, [r2, 0x5]
@@ -11220,7 +11406,7 @@ party_menu_link_mon_status_condition_object: @ 81B6098
 	lsrs r5, r1, 24
 	cmp r0, 0
 	beq _081B60D4
-	ldr r0, =gUnknown_08616008
+	ldr r0, =gSpriteTemplate_8616008
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x4]
 	ldrb r2, [r2, 0x5]
@@ -11359,7 +11545,7 @@ _081B61BC:
 	movs r7, 0
 	movs r6, 0
 _081B61C0:
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl GetItemEffectType
 	lsls r0, 24
@@ -11787,7 +11973,7 @@ ItemUseCB_Medicine: @ 81B6588
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r5, r1, r0
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r6, [r0]
 	adds r0, r5, 0
 	adds r1, r6, 0
@@ -12032,7 +12218,7 @@ sub_81B67C8: @ 81B67C8
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r5, r1, r0
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r6, [r0]
 	adds r0, r6, 0
 	bl GetItemEffectType
@@ -12391,7 +12577,7 @@ dp05_ether: @ 81B6AFC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	cmp r0, 0xAF
 	bne _081B6B20
@@ -12500,7 +12686,7 @@ ether_effect_related: @ 81B6BEC
 	lsrs r6, r0, 24
 	movs r4, 0
 	ldr r7, =gUnknown_0203CED6
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r5, [r0]
 	movs r0, 0xE
 	negs r0, r0
@@ -12729,7 +12915,7 @@ sub_81B6DC4: @ 81B6DC4
 	movs r0, 0xE
 	adds r0, r7
 	mov r8, r0
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r4, [r0]
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
@@ -12818,7 +13004,7 @@ sub_81B6EB4: @ 81B6EB4
 	adds r5, r1, r0
 	adds r6, r2, 0
 	adds r6, 0xE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r4, [r0]
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
@@ -12928,7 +13114,7 @@ _081B6FC0:
 _081B6FDC:
 	cmp r0, 0x2
 	bne _081B6FE4
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r2, [r0]
 _081B6FE4:
 	adds r0, r5, 0
@@ -12970,7 +13156,7 @@ sub_81B7028: @ 81B7028
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -13272,7 +13458,7 @@ sub_81B72C8: @ 81B72C8
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r4, r1, r0
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -13324,7 +13510,7 @@ _081B7306:
 _081B7368:
 	cmp r0, 0x2
 	bne _081B7370
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r5, [r0]
 _081B7370:
 	ldr r0, =gTasks
@@ -13409,7 +13595,7 @@ dp05_rare_candy: @ 81B7404
 	movs r1, 0x86
 	lsls r1, 2
 	adds r4, r6, r1
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	mov r8, r2
 	adds r0, r5, 0
 	movs r1, 0x38
@@ -13467,7 +13653,7 @@ _081B74B4:
 	ldrb r0, [r0, 0x9]
 	adds r1, r5, 0
 	bl sub_81B754C
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -14084,7 +14270,7 @@ sub_81B7A28: @ 81B7A28
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldrb r0, [r6, 0x9]
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	movs r2, 0
 	bl ExecuteTableBasedItemEffect__
@@ -14236,7 +14422,7 @@ _081B7BC8:
 	ldr r1, =gUnknown_0203CEE8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -14312,7 +14498,7 @@ sub_81B7C74: @ 81B7C74
 	ldr r0, [r1]
 	str r0, [r2]
 	ldrb r0, [r1, 0x9]
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r1, [r4]
 	movs r2, 0
 	bl ExecuteTableBasedItemEffect__
@@ -14685,7 +14871,7 @@ _081B7F72:
 	movs r3, 0
 	bl sub_81B0038
 	ldr r1, =gUnknown_0203CEC8
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	strh r0, [r1, 0xC]
 	add sp, 0xC
@@ -14728,7 +14914,7 @@ sub_81B7FAC: @ 81B7FAC
 	.pool
 _081B7FF8:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B800C
@@ -14770,7 +14956,7 @@ sub_81B8044: @ 81B8044
 	lsrs r4, r0, 24
 	ldr r5, =gUnknown_0203CEC8
 	ldrh r0, [r5, 0xC]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B807C
@@ -14933,12 +15119,12 @@ sub_81B81A8: @ 81B81A8
 	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081B8208
 	adds r0, r5, 0
-	bl sub_80D4680
+	bl TakeMailFromMon
 	ldr r4, =gUnknown_0203CEFC
 	adds r0, r5, 0
 	movs r1, 0xC
@@ -15054,7 +15240,7 @@ sub_81B82D4: @ 81B82D4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -15093,7 +15279,7 @@ _081B82FA:
 	.pool
 _081B8338:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B835C
@@ -15281,9 +15467,9 @@ sub_81B8474: @ 81B8474
 _081B84DC:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80D460C
+	bl GiveMailToMon2
 	adds r0, r4, 0
-	bl sub_80D439C
+	bl ClearMailStruct
 	ldr r0, =gText_MailTransferredFromMailbox
 	movs r1, 0x1
 	bl sub_81B1B5C
@@ -15994,7 +16180,7 @@ sub_81B8A7C: @ 81B8A7C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl sub_81B1250
@@ -16041,14 +16227,14 @@ _081B8AF8:
 	b _081B8B24
 _081B8AFC:
 	adds r0, r4, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8B1E
 	adds r0, r5, 0
 	bl sub_81B8F38
 	lsls r0, 24
-	ldr r2, =gBattlePartyID
+	ldr r2, =gBattlerPartyIndexes
 	lsls r1, r4, 1
 	adds r1, r2
 	lsrs r0, 24
@@ -16060,7 +16246,7 @@ _081B8B1E:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _081B8B24:
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattlersCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _081B8AFC
@@ -16115,8 +16301,8 @@ _081B8BA8:
 	ldr r1, =gUnknown_0203CEE8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gBattlePartyID
-	ldr r0, =gBankInMenu
+	ldr r1, =gBattlerPartyIndexes
+	ldr r0, =gBattlerInMenuId
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -16148,9 +16334,9 @@ _081B8BFC:
 	b _081B8C42
 	.pool
 _081B8C20:
-	ldr r0, =gBankInMenu
+	ldr r0, =gBattlerInMenuId
 	ldrb r0, [r0]
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -16228,9 +16414,9 @@ _081B8CBE:
 	bne _081B8CFC
 	movs r5, 0x1
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	mov r2, sp
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -16255,16 +16441,16 @@ _081B8CF0:
 _081B8CFC:
 	movs r5, 0x2
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	mov r1, sp
-	ldr r4, =gBattlePartyID
+	ldr r4, =gBattlerPartyIndexes
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
 	ldrh r0, [r0]
 	strb r0, [r1]
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	mov r1, sp
 	lsls r0, 24
 	lsrs r0, 23
@@ -16339,24 +16525,24 @@ sub_81B8D88: @ 81B8D88
 	lsrs r7, r1, 24
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8DB0
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x2
 	b _081B8DBC
 _081B8DB0:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
 _081B8DBC:
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl sub_81B1250
@@ -16388,7 +16574,7 @@ _081B8DF0:
 	bne _081B8E28
 	movs r3, 0x1
 	mov r2, sp
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -16412,7 +16598,7 @@ _081B8E1A:
 _081B8E28:
 	movs r3, 0x2
 	mov r1, sp
-	ldr r2, =gBattlePartyID
+	ldr r2, =gBattlerPartyIndexes
 	lsls r0, r4, 1
 	adds r0, r2
 	ldrh r0, [r0]
@@ -17113,7 +17299,7 @@ sub_81B9354: @ 81B9354
 sub_81B9390: @ 81B9390
 	push {r4,lr}
 	ldr r4, =gSpecialVar_0x8004
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -17171,7 +17357,7 @@ sub_81B9404: @ 81B9404
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81B9424
 	movs r1, 0xA
 	bl CreateTask
@@ -17218,7 +17404,7 @@ _081B945C:
 	thumb_func_start sub_81B9470
 sub_81B9470: @ 81B9470
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r2, =gUnknown_02039F24
 	strb r0, [r2]
 	lsls r0, 24
@@ -17247,7 +17433,7 @@ sub_81B94B0: @ 81B94B0
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81B94D0
 	movs r1, 0xA
 	bl CreateTask
@@ -17297,7 +17483,7 @@ sub_81B951C: @ 81B951C
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81B953C
 	movs r1, 0xA
 	bl CreateTask
@@ -17345,7 +17531,7 @@ _081B9574:
 sub_81B9588: @ 81B9588
 	push {r4,r5,lr}
 	ldr r5, =gSpecialVar_0x8004
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -17381,7 +17567,7 @@ _081B95BA:
 	thumb_func_start sub_81B95E0
 sub_81B95E0: @ 81B95E0
 	push {r4,r5,lr}
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	movs r4, 0
@@ -17418,7 +17604,7 @@ sub_81B9620: @ 81B9620
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81B9640
 	movs r1, 0xA
 	bl CreateTask
@@ -17490,7 +17676,7 @@ sub_81B968C: @ 81B968C
 	thumb_func_start sub_81B96D0
 sub_81B96D0: @ 81B96D0
 	push {r4,r5,lr}
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	movs r4, 0
@@ -17741,13 +17927,13 @@ sub_81B98DC: @ 81B98DC
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _081B990C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	b _081B9910
 	.pool
 _081B990C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 _081B9910:
 	pop {r0}
@@ -17760,7 +17946,7 @@ sub_81B9918: @ 81B9918
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gSpecialVar_0x8004
@@ -17813,7 +17999,7 @@ _081B9980:
 	bl sub_80D23A8
 	cmp r0, 0x1
 	beq _081B999C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _081B999C:

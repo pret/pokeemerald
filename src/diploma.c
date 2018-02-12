@@ -3,7 +3,7 @@
 #include "palette.h"
 #include "main.h"
 #include "gpu_regs.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "task.h"
 #include "malloc.h"
 #include "decompress.h"
@@ -17,7 +17,7 @@ extern int decompress_and_copy_tile_data_to_vram(u8 bg_id, void *src, int size, 
 extern bool8 free_temp_tile_data_buffers_if_possible(void);
 extern void sub_80861E8(void); // rom4
 extern bool16 sub_80C0944(void);
-extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, u8 *str);
+extern void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 *color, s8 speed, u8 *str);
 
 extern u16 gUnknown_0860F074[];
 
@@ -72,7 +72,7 @@ void CB2_ShowDiploma(void)
     DmaFill16(3, 0, VRAM, VRAM_SIZE);
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
@@ -208,12 +208,7 @@ static void InitDiplomaWindow(void)
 
 static void PrintDiplomaText(u8 *text, u8 var1, u8 var2)
 {
-    struct TextColor color =
-    {
-        .fgColor = 0,
-        .bgColor = 2,
-        .shadowColor = 3,
-    };
+    u8 color[3] = {0, 2, 3};
 
-    AddTextPrinterParametrized2(0, 1, var1, var2, 0, 0, &color, -1, text);
+    AddTextPrinterParameterized2(0, 1, var1, var2, 0, 0, color, -1, text);
 }

@@ -18,7 +18,7 @@ sub_80C2690: @ 80C2690
 	cmp r0, 0
 	beq _080C26C0
 	ldr r1, =0x040000d4
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -40,7 +40,7 @@ sub_80C26D4: @ 80C26D4
 	ldrh r3, [r4]
 	movs r0, 0
 	strh r0, [r4]
-	ldr r1, =gUnknown_02038C28
+	ldr r1, =gScanlineEffectRegBuffers
 	ldr r0, =0x04000006
 	ldrh r2, [r0]
 	movs r0, 0xFF
@@ -409,7 +409,7 @@ _080C2A2C:
 	bl sub_800AC34
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_WaitingTrainerFinishReading
 	movs r0, 0x1
 	str r0, [sp]
@@ -601,12 +601,12 @@ _080C2C04:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C2C28
-	ldr r0, =gUnknown_08DD1AB8
+	ldr r0, =gEmeraldTrainerCard_Gfx
 	ldr r2, =0x000019a8
 	b _080C2C4A
 	.pool
 _080C2C28:
-	ldr r0, =gUnknown_08DD246C
+	ldr r0, =gFireRedTrainerCard_Gfx
 	ldr r2, =0x000019a8
 	b _080C2C4A
 	.pool
@@ -1556,7 +1556,7 @@ sub_80C3404: @ 80C3404
 sub_80C3414: @ 80C3414
 	push {lr}
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r0, =sub_80C2760
 	movs r1, 0
 	bl CreateTask
@@ -3082,7 +3082,7 @@ _080C4214:
 	movs r1, 0x60
 	movs r2, 0
 	movs r3, 0
-	bl sub_80A2BAC
+	bl TintPalette_CustomTone
 	b _080C424A
 _080C422A:
 	adds r0, r4, r5
@@ -3094,7 +3094,7 @@ _080C422A:
 	lsls r1, 1
 	str r1, [sp]
 	movs r1, 0x60
-	bl sub_80A2BAC
+	bl TintPalette_CustomTone
 	b _080C424A
 _080C4242:
 	adds r0, r4, r5
@@ -3317,7 +3317,7 @@ _080C4418:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C447C
-	ldr r1, =gUnknown_0856FAE4
+	ldr r1, =gEmeraldTrainerCardStarPals
 	ldr r3, =0x00000535
 	adds r0, r2, r3
 	ldrb r0, [r0]
@@ -3344,7 +3344,7 @@ _080C4418:
 	b _080C44B2
 	.pool
 _080C447C:
-	ldr r1, =gUnknown_0856FAF8
+	ldr r1, =gFireRedTrainerCardStarPals
 	ldr r3, =0x00000535
 	adds r0, r2, r3
 	ldrb r0, [r0]
@@ -3976,10 +3976,10 @@ sub_80C4998: @ 80C4998
 	bl HideBg
 	movs r0, 0x3
 	bl HideBg
-	bl remove_some_task
-	bl dp12_8087EA4
+	bl ScanlineEffect_Stop
+	bl ScanlineEffect_Clear
 	movs r1, 0
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	movs r2, 0
 	movs r3, 0xF0
 	lsls r3, 3
@@ -4066,7 +4066,7 @@ _080C4A0E:
 	movs r2, 0
 	cmp r2, r7
 	bcs _080C4A78
-	ldr r3, =gUnknown_02038C28
+	ldr r3, =gScanlineEffectRegBuffers
 _080C4A60:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -4091,7 +4091,7 @@ _080C4A78:
 	lsrs r7, r4, 16
 	cmp r1, r0
 	bge _080C4AB0
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	mov r12, r0
 	adds r4, r3, 0
 _080C4A92:
@@ -4116,7 +4116,7 @@ _080C4AB0:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _080C4ACE
-	ldr r2, =gUnknown_02038C28
+	ldr r2, =gScanlineEffectRegBuffers
 _080C4ABC:
 	asrs r0, r1, 16
 	lsls r1, r0, 1
@@ -4392,7 +4392,7 @@ _080C4CB6:
 	movs r2, 0
 	cmp r2, r7
 	bcs _080C4D20
-	ldr r3, =gUnknown_02038C28
+	ldr r3, =gScanlineEffectRegBuffers
 _080C4D08:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -4417,7 +4417,7 @@ _080C4D20:
 	lsrs r7, r4, 16
 	cmp r1, r0
 	bge _080C4D56
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	mov r12, r0
 	adds r4, r3, 0
 _080C4D3A:
@@ -4441,7 +4441,7 @@ _080C4D56:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _080C4D74
-	ldr r2, =gUnknown_02038C28
+	ldr r2, =gScanlineEffectRegBuffers
 _080C4D62:
 	asrs r0, r1, 16
 	lsls r1, r0, 1
@@ -5000,7 +5000,7 @@ _080C5240:
 	adds r0, r2
 	ldrh r0, [r0]
 	strh r0, [r1, 0x6]
-	bl sub_8185290
+	bl CanCopyRecordedBattleSaveData
 	ldr r3, [r5]
 	movs r1, 0x1
 	ands r0, r1
@@ -5310,7 +5310,7 @@ _080C54AC:
 _080C54D8:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	movs r0, 0x2
 	bl DisableInterrupts
@@ -5594,7 +5594,7 @@ _080C577C:
 	bl HideBg
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	b _080C57E4
 _080C57A6:
@@ -5766,7 +5766,7 @@ sub_80C58D4: @ 80C58D4
 	beq _080C5914
 	cmp r0, 0x2
 	beq _080C591C
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	b _080C5924
 	.pool
 _080C5914:
@@ -5825,7 +5825,7 @@ _080C5970:
 	strh r0, [r1, 0x6]
 	bl sub_80C52E4
 	ldr r0, =sub_80C58D4
-	bl sub_8185E24
+	bl PlayRecordedBattle
 	b _080C599A
 	.pool
 _080C5994:
@@ -7189,7 +7189,7 @@ _080C64F0:
 _080C6510:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	b _080C6694
 _080C6520:
@@ -7400,7 +7400,7 @@ _080C66FC:
 _080C6722:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	b _080C67A4
 _080C6732:
@@ -8258,7 +8258,7 @@ _080C6E08:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldr r0, [sp, 0x4C]
 	mov r10, r4
 	cmp r0, 0x6
@@ -8410,7 +8410,7 @@ sub_80C6EAC: @ 80C6EAC
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	lsrs r5, 1
 	adds r0, r7, 0
 	ldr r1, [sp, 0x24]

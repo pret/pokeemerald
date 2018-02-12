@@ -79,8 +79,8 @@ _08122522:
 	.pool
 	thumb_func_end InitDewfordTrend
 
-	thumb_func_start sub_8122580
-sub_8122580: @ 8122580
+	thumb_func_start UpdateDewfordTrendPerDay
+UpdateDewfordTrendPerDay: @ 8122580
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -253,7 +253,7 @@ _081226BE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8122580
+	thumb_func_end UpdateDewfordTrendPerDay
 
 	thumb_func_start sub_81226D8
 sub_81226D8: @ 81226D8
@@ -667,7 +667,7 @@ sub_81229C8: @ 81229C8
 	negs r0, r0
 	lsrs r4, r0, 31
 _08122A0C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -677,7 +677,7 @@ _08122A0C:
 
 	thumb_func_start sub_8122A30
 sub_8122A30: @ 8122A30
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_Result
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00002e6c

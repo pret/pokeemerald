@@ -2,40 +2,39 @@
 	.include "src/malloc.o"
 	.include "src/dma3_manager.o"
 	.include "src/gpu_regs.o"
-    .include "src/bg.o"
+	.include "src/bg.o"
 	.include "src/text.o"
 	.include "src/sprite.o"
-    .include "src/link.o"
-    .include "src/rtc.o"
-    .include "src/main_menu.o"
-    .include "src/battle_1.o"
-    .include "src/egg_hatch.o"
-    .include "src/berry_blender.o"
-    .include "src/play_time.o"
-    .include "src/rom4.o"
-    .include "src/field_camera.o"
-    .include "src/script.o"
-    .include "src/scrcmd.o"
-    .include "src/tileset_anims.o"
-    .include "src/palette.o"
-    .include "src/sound.o"
-    .include "src/field_screen.o"
-    .include "src/field_effect.o"
-    .include "src/pokemon_storage_system.o"
-    .include "src/fldeff_cut.o"
-    .include "src/script_menu.o"
-    .include "src/record_mixing.o"
-    .include "src/tv.o"
+	.include "src/link.o"
+	.include "src/rtc.o"
+	.include "src/main_menu.o"
+	.include "src/rom_8034C54.o"
+	.include "src/egg_hatch.o"
+	.include "src/berry_blender.o"
+	.include "src/play_time.o"
+	.include "src/overworld.o"
+	.include "src/field_camera.o"
+	.include "src/script.o"
+	.include "src/scrcmd.o"
+	.include "src/tileset_anims.o"
+	.include "src/palette.o"
+	.include "src/sound.o"
+	.include "src/field_screen.o"
+	.include "src/field_effect.o"
+	.include "src/pokemon_storage_system.o"
+	.include "src/fldeff_cut.o"
+	.include "src/script_menu.o"
+	.include "src/record_mixing.o"
+	.include "src/tv.o"
 
-    .space 1 @ TODO: define this u32 in mauville_old_man
+	.space 1 @ TODO: define this u32 in mauville_old_man
 gUnknown_03001178: @ 3001178
 	.space 0x4
 
 gUnknown_0300117C: @ 300117C
 	.space 0x4
 
-gUnknown_03001180: @ 3001180
-	.space 0x8
+	.include "src/region_map.o"
 
 gUnknown_03001188: @ 3001188
 	.space 0x68
@@ -55,8 +54,9 @@ gUnknown_030011F6: @ 30011F6
 gUnknown_030011F7: @ 30011F7
 	.space 0x1
 
-gUnknown_030011F8: @ 30011F8
-	.space 0x4
+	.include "src/starter_choose.o"
+	
+	.align 0x2
 
 gUnknown_030011FC: @ 30011FC
 	.space 0x2
@@ -73,27 +73,9 @@ gUnknown_03001202: @ 3001202
 gUnknown_03001204: @ 3001204
 	.space 0x4
 
-gUnknown_03001208: @ 3001208
-	.space 0x2
-
-sTestingTransitionId: @ 300120A
-	.space 0x1
-
-sTestingTransitionState: @ 300120B
-	.space 0x5
-
-gUnknown_03001210: @ 3001210
-	.space 0x30
-
-gUnknown_03001240: @ 3001240
-	.space 0x30
-
-gUnknown_03001270: @ 3001270
-	.space 0x4
-
-gUnknown_03001274: @ 3001274
-	.space 0x4
-
+	.include "src/battle_transition.o"
+	.include "src/pokemon_animation.o"
+	
 gUnknown_03001278: @ 3001278
 	.space 0x1
 
@@ -138,7 +120,7 @@ gUnknown_03001298: @ 3001298
 gUnknown_030012A8: @ 30012A8
 	.space 0x10
 
-    .include "src/berry_fix_program.o"
+	.include "src/berry_fix_program.o"
 
 gUnknown_030012BC: @ 30012BC
 	.space 0x4
@@ -192,9 +174,22 @@ gUnknown_030012FC: @ 30012FC
 	.space 0x4
 
 gUnknown_03001300: @ 3001300
-	.space 0x770
+	.space 0x40
+
+gMPlayTrack_BGM: @ 3001340
+	.space 0x320
+
+gMPlayTrack_SE1: @ 3001660
+	.space 0xF0
+
+gMPlayTrack_SE2: @ 3001750
+	.space 0x2D0
+
+gMPlayTrack_SE3: @ 3001A20
+	.space 0x50
 
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
 	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
+	.include "tools/agbcc/lib/libc.a:syscalls.o"

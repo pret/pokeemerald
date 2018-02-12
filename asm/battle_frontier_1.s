@@ -136,7 +136,7 @@ _0818EAC8:
 	.4byte _0818ECD0
 	.4byte _0818ECF4
 _0818EAF0:
-	ldr r3, =gScriptResult
+	ldr r3, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	lsls r1, r5, 1
@@ -150,7 +150,7 @@ _0818EAF0:
 	b _0818ED10
 	.pool
 _0818EB14:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldr r3, =0x00000cdc
@@ -170,7 +170,7 @@ _0818EB14:
 	b _0818ED10
 	.pool
 _0818EB48:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -180,7 +180,7 @@ _0818EB48:
 	b _0818ECBE
 	.pool
 _0818EB64:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -190,7 +190,7 @@ _0818EB64:
 	b _0818ECBE
 	.pool
 _0818EB80:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -198,7 +198,7 @@ _0818EB80:
 	b _0818ECBA
 	.pool
 _0818EB98:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -216,7 +216,7 @@ _0818EBB4:
 	bne _0818EC04
 	cmp r5, 0
 	beq _0818EBE8
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -226,7 +226,7 @@ _0818EBB4:
 	b _0818ECBE
 	.pool
 _0818EBE8:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -238,7 +238,7 @@ _0818EBE8:
 _0818EC04:
 	cmp r5, 0
 	beq _0818EC24
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -248,7 +248,7 @@ _0818EC04:
 	b _0818ECBE
 	.pool
 _0818EC24:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -266,7 +266,7 @@ _0818EC40:
 	bne _0818EC90
 	cmp r5, 0
 	beq _0818EC74
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -277,7 +277,7 @@ _0818EC40:
 	b _0818ED10
 	.pool
 _0818EC74:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -289,7 +289,7 @@ _0818EC74:
 _0818EC90:
 	cmp r5, 0
 	beq _0818ECB0
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -299,7 +299,7 @@ _0818EC90:
 	b _0818ECBE
 	.pool
 _0818ECB0:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -328,7 +328,7 @@ _0818ECD0:
 	b _0818ED10
 	.pool
 _0818ECF4:
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r3, =0x00000d0a
@@ -7096,7 +7096,7 @@ _081926B0:
 	movs r1, 0x1
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -7171,7 +7171,7 @@ _0819270A:
 	ldr r4, [sp, 0x24]
 	cmp r4, r0
 	bne _08192784
-	ldr r0, =gTrainerClassToNameIndex
+	ldr r0, =gFacilityClassToTrainerClass
 	adds r0, 0x3C
 	ldrb r5, [r0]
 	b _081927A2
@@ -7383,12 +7383,12 @@ _08192932:
 	ldr r1, [sp, 0x24]
 	cmp r1, r0
 	bne _08192980
-	ldr r0, =gUnknown_0860D1D0
+	ldr r0, =gBattleDomePotentialPointers
 	ldr r0, [r0, 0x40]
 	b _0819298A
 	.pool
 _08192980:
-	ldr r0, =gUnknown_0860D1D0
+	ldr r0, =gBattleDomePotentialPointers
 	ldr r2, [sp, 0x20]
 	lsls r1, r2, 2
 	adds r1, r0
@@ -7503,7 +7503,7 @@ _08192A58:
 	cmp r7, 0x2
 	ble _081929AE
 	movs r7, 0
-	ldr r2, =gUnknown_0860D214
+	ldr r2, =gBattleDomeOpponentStylePointers
 	mov r9, r2
 	ldr r3, =gUnknown_0860C988
 	mov r10, r3
@@ -8071,7 +8071,7 @@ _08192ED0:
 	movs r7, 0x2A
 _08192ED2:
 	lsls r0, r7, 2
-	ldr r3, =gUnknown_0860D294
+	ldr r3, =gBattleDomeOpponentStatsPointers
 	adds r0, r3
 	ldr r0, [r0]
 	str r0, [sp, 0xC]
@@ -8779,7 +8779,7 @@ _081934B0:
 	mov r1, r10
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -8927,7 +8927,7 @@ _081935FA:
 	movs r1, 0x1
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -9029,7 +9029,7 @@ _081936A0:
 	movs r0, 0xD0
 	strb r0, [r1, 0xD]
 	ldr r4, =gStringVar4
-	ldr r0, =gUnknown_0860D38C
+	ldr r0, =gBattleDomeWinStringsPointers
 	ldr r7, [sp, 0x70]
 	adds r0, r7, r0
 	ldr r1, [r0]
@@ -9167,7 +9167,7 @@ _08193802:
 	bl AddTextPrinter
 	add r0, sp, 0xC
 	strb r6, [r0, 0xA]
-	ldr r0, =gUnknown_0860D350
+	ldr r0, =gBattleDomeMatchNumberPointers
 	ldr r1, [sp, 0x58]
 	adds r0, r1, r0
 	ldr r0, [r0]
@@ -9449,7 +9449,7 @@ _08193AA8:
 	b _08193BC2
 _08193ABA:
 	bl FreeAllWindowBuffers
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r4, =gUnknown_0203CD7C
 	ldr r0, [r4]
 	bl Free
@@ -9494,7 +9494,7 @@ _08193B20:
 	cmp r6, 0
 	bne _08193BC2
 	bl FreeAllWindowBuffers
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r4, =gUnknown_0203CD7C
 	ldr r0, [r4]
 	bl Free
@@ -9534,7 +9534,7 @@ _08193B84:
 	cmp r6, 0
 	bne _08193BC2
 	bl FreeAllWindowBuffers
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r4, =gUnknown_0203CD7C
 	ldr r0, [r4]
 	bl Free
@@ -11000,8 +11000,8 @@ _0819486C:
 	movs r1, 0
 	strh r1, [r0, 0x8]
 _08194878:
-	bl dp12_8087EA4
-	ldr r0, =gUnknown_02038C28
+	bl ScanlineEffect_Clear
+	ldr r0, =gScanlineEffectRegBuffers
 	ldr r2, =0x00001f0a
 	movs r4, 0xF0
 	lsls r4, 3
@@ -11017,7 +11017,7 @@ _08194888:
 	bge _08194888
 	movs r5, 0x5B
 	ldr r3, =gUnknown_0860CF44
-	ldr r0, =gUnknown_02038C28
+	ldr r0, =gScanlineEffectRegBuffers
 	ldr r2, =0x00001f09
 	ldr r4, =0x00000836
 	adds r1, r0, r4
@@ -11033,7 +11033,7 @@ _081948A4:
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
 	ldr r2, [r3, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	mov r0, r8
 	bl DestroyTask
 _081948C2:
@@ -11513,7 +11513,7 @@ sub_8194CE4: @ 8194CE4
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.pool
@@ -11707,12 +11707,12 @@ sub_8194EC0: @ 8194EC0
 	bl sub_8195358
 	cmp r4, r0
 	ble _08194EE8
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _08194EEC
 	.pool
 _08194EE8:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 _08194EEC:
 	strh r0, [r1]
@@ -12991,7 +12991,7 @@ sub_8195938: @ 8195938
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
-	ldr r4, =gTrainers + TRAINER_TUCKER * 0x28 + 0x4 @ Tucker's name
+	ldr r4, =(gTrainers + 806 * 0x28 + 0x4) @ TRAINER_TUCKER name
 _08195940:
 	adds r0, r3, r2
 	adds r1, r2, r4
@@ -13130,7 +13130,7 @@ _08195A74:
 	beq _08195AB0
 	b _08195AD0
 _08195A7A:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldr r1, [r5]
 	ldr r2, =0x00000dc6
 	adds r1, r2
@@ -13139,7 +13139,7 @@ _08195A7A:
 	b _08195AD0
 	.pool
 _08195A90:
-	ldr r3, =gScriptResult
+	ldr r3, =gSpecialVar_Result
 	ldr r0, [r5]
 	lsls r1, r7, 1
 	lsls r2, r6, 2
@@ -13152,7 +13152,7 @@ _08195A90:
 	b _08195AD0
 	.pool
 _08195AB0:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	ldr r2, [r5]
 	ldr r0, =0x00000cdc
 	adds r2, r0
@@ -13285,7 +13285,7 @@ sub_8195BB0: @ 8195BB0
 	ldrh r0, [r2]
 	cmp r0, 0x31
 	bhi _08195C00
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -13297,12 +13297,12 @@ sub_8195BB0: @ 8195BB0
 _08195C00:
 	cmp r0, 0x62
 	bhi _08195C10
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x3
 	b _08195C14
 	.pool
 _08195C10:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x4
 _08195C14:
 	strh r0, [r1]
@@ -13517,12 +13517,12 @@ sub_8195DB8: @ 8195DB8
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r5, [r0]
 	b _08195E06
 	.pool
 _08195E00:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _08195E06:
@@ -13641,7 +13641,7 @@ sub_8195ED8: @ 8195ED8
 	push {r4,lr}
 	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	cmp r0, 0
 	beq _08195F30
@@ -13791,7 +13791,7 @@ sub_8195FF8: @ 8195FF8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, =gUnknown_085500A4
+	ldr r6, =gRematchTable
 _08196000:
 	movs r1, 0xAE
 	lsls r1, 1
@@ -13887,7 +13887,7 @@ task_prev_quest: @ 81960A8
 	cmp r0, 0
 	bne _081960C2
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 _081960C2:
@@ -14097,7 +14097,7 @@ sub_8196274: @ 8196274
 _08196298:
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
-	ldr r1, =gUnknown_0860EF70
+	ldr r1, =gText_PokenavCallEllipsis
 	bl sub_81965D8
 	movs r0, 0x1
 _081962A4:
@@ -14531,7 +14531,7 @@ sub_81965D8: @ 81965D8
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -14659,7 +14659,7 @@ sub_8196710: @ 8196710
 	thumb_func_start sub_819672C
 sub_819672C: @ 819672C
 	push {lr}
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, 4
 	adds r0, r1
 	ldrh r2, [r0, 0xA]
@@ -14677,10 +14677,10 @@ sub_8196748: @ 8196748
 	push {r4-r6,lr}
 	movs r5, 0
 	movs r6, 0
-	ldr r4, =gUnknown_085500A4
+	ldr r4, =gRematchTable
 _08196750:
 	ldrh r0, [r4]
-	bl HasTrainerAlreadyBeenFought
+	bl HasTrainerBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819675E
@@ -14703,10 +14703,10 @@ sub_8196774: @ 8196774
 	adds r7, r0, 0
 	movs r4, 0
 	movs r6, 0
-	ldr r5, =gUnknown_085500A4
+	ldr r5, =gRematchTable
 _0819677E:
 	ldrh r0, [r5]
-	bl HasTrainerAlreadyBeenFought
+	bl HasTrainerBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819679A
@@ -14766,7 +14766,7 @@ _081967EC:
 	adds r4, r0, 0
 	movs r7, 0x1
 	adds r0, r5, 0
-	bl sub_80B1E94
+	bl UpdateRematchIfDefeated
 	b _08196832
 _0819680A:
 	bl Random
@@ -15270,7 +15270,7 @@ sub_8196B98: @ 8196B98
 	adds r7, r0, 0
 	cmp r1, 0xFF
 	beq _08196C5C
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, r2, 4
 	adds r2, r0, r1
 	ldrh r4, [r2, 0xA]
@@ -15373,7 +15373,7 @@ sub_8196C70: @ 8196C70
 	lsls r1, 2
 	adds r1, r2
 	ldrh r0, [r1]
-	bl sub_80B2250
+	bl GetLastBeatenRematchTrainerId
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r5, =gTrainers
@@ -16009,6 +16009,44 @@ _0819715C:
 	pop {r0}
 	bx r0
 	.pool
+
 	thumb_func_end sub_8197080
+	thumb_func_start sub_8197184
+sub_8197184: @ 8197184
+	push {r4,r5,lr}
+	adds r4, r1, 0
+	adds r5, r2, 0
+	lsls r0, 24
+	lsrs r0, 24
+	movs r1, 0
+	bl GetWindowAttribute
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r1, =gUnknown_0860EA6C
+	movs r2, 0x80
+	lsls r2, 1
+	lsls r4, 16
+	lsrs r4, 16
+	adds r3, r4, 0
+	bl LoadBgTiles
+	ldr r0, =gUnknown_0860EA4C
+	lsls r5, 20
+	lsrs r5, 16
+	adds r1, r5, 0
+	movs r2, 0x20
+	bl LoadPalette
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_8197184
+
+	thumb_func_start sub_81971C4
+sub_81971C4: @ 81971C4
+	push {lr}
+	bl sub_819645C
+	pop {r0}
+	bx r0
+	thumb_func_end sub_81971C4
 
 	.align 2, 0 @ Don't pad with nop.

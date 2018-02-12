@@ -188,7 +188,7 @@ HandleShopMenuBuy: @ 80DFBD0
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -216,7 +216,7 @@ HandleShopMenuSell: @ 80DFC0C
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -409,7 +409,7 @@ _080DFDAC:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	movs r1, 0
 	movs r2, 0
 	bl ListMenuInit
@@ -448,7 +448,7 @@ _080DFE20:
 	ldr r2, =0x01000100
 	add r0, sp, 0x8
 	bl CpuFastSet
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl reset_temp_tile_data_buffers
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
@@ -601,7 +601,7 @@ _080DFF78:
 	movs r0, 0x2
 	negs r0, r0
 	str r0, [r1, 0x4]
-	ldr r3, =gUnknown_03006310
+	ldr r3, =gMultiuseListMenuTemplate
 	adds r1, r3, 0
 	ldr r0, =gUnknown_08589A48
 	ldm r0!, {r4-r6}
@@ -627,7 +627,7 @@ _080DFFDC:
 _080DFFDE:
 	ldr r0, =gUnknown_02039F70
 	ldr r0, [r0]
-	ldr r1, =gUnknown_03006310
+	ldr r1, =gMultiuseListMenuTemplate
 	ldrh r1, [r1, 0xE]
 	ldr r2, =0x00002004
 	adds r0, r2
@@ -839,7 +839,7 @@ _080E0176:
 	adds r0, r6, 0
 	movs r1, 0x7
 	adds r3, r7, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _080E01AC:
 	add sp, 0x14
 	pop {r4-r7}
@@ -969,7 +969,7 @@ _080E02AE:
 	ldr r0, =0x0000083e
 	adds r1, r3, r0
 	adds r0, r1, 0
-	bl AddItemIconObject
+	bl AddItemIconSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -1201,7 +1201,7 @@ BuyMenuPrint: @ 80E04A4
 	str r6, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}
@@ -1219,7 +1219,7 @@ BuyMenuDisplayMessage: @ 80E04E8
 	adds r6, r2, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1976,7 +1976,7 @@ Task_BuyMenu: @ 80E0AC8
 	b _080E0C8E
 _080E0AEA:
 	ldrb r0, [r4, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r5, r0, 0
 	ldrb r0, [r4, 0xE]
 	ldr r7, =gUnknown_02039F70
@@ -1985,7 +1985,7 @@ _080E0AEA:
 	adds r1, r2, r3
 	subs r3, 0x2
 	adds r2, r3
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0

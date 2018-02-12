@@ -2,9 +2,9 @@
 #include "berry.h"
 #include "main.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "text.h"
-#include "rng.h"
+#include "random.h"
 #include "event_data.h"
 #include "fieldmap.h"
 
@@ -14,15 +14,9 @@ extern void CB2_ChooseBerry(void);
 extern const u8* GetFieldObjectScriptPointerForComparison(void);
 extern bool8 sub_8092E9C(u8, u8, u8);
 
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 
 extern const u8 BerryTreeScript[];
-
-#define BERRY_NAME_LENGTH 6
-
-#define FIRST_BERRY ITEM_CHERI_BERRY
-#define LAST_BERRY ITEM_ENIGMA_BERRY
-
 
 static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
 static const u8 sBerryDescriptionPart2_Cheri[] = _("The bright red BERRY is very spicy.");
@@ -1062,28 +1056,28 @@ u8 GetStageByBerryTreeId(u8 id)
 
 u8 ItemIdToBerryType(u16 item)
 {
-    u16 berry = item - FIRST_BERRY;
+    u16 berry = item - FIRST_BERRY_INDEX;
 
-    if (berry > LAST_BERRY - FIRST_BERRY)
+    if (berry > LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
         return 1;
     else
-        return item - FIRST_BERRY + 1;
+        return ITEM_TO_BERRY(item);
 }
 
 u16 BerryTypeToItemId(u16 berry)
 {
     u16 item = berry - 1;
 
-    if (item > LAST_BERRY - FIRST_BERRY)
-        return FIRST_BERRY;
+    if (item > LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
+        return FIRST_BERRY_INDEX;
     else
-        return berry + FIRST_BERRY - 1;
+        return berry + FIRST_BERRY_INDEX - 1;
 }
 
 void GetBerryNameByBerryType(u8 berry, u8 *string)
 {
-    memcpy(string, GetBerryInfo(berry)->name, BERRY_NAME_LENGTH);
-    string[BERRY_NAME_LENGTH] = EOS;
+    memcpy(string, GetBerryInfo(berry)->name, BERRY_NAME_COUNT - 1);
+    string[BERRY_NAME_COUNT - 1] = EOS;
 }
 
 void GetBerryCountStringByBerryType(u8 berry, u8* dest, u32 berryCount)
@@ -1169,7 +1163,7 @@ void FieldObjectInteractionGetBerryTreeData(void)
     id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     berry = GetBerryTypeByBerryTreeId(id);
     ResetBerryTreeSparkleFlag(id);
-    unk = gScriptLastTalked;
+    unk = gSpecialVar_LastTalked;
     num = gSaveBlock1Ptr->location.mapNum;
     group = gSaveBlock1Ptr->location.mapGroup;
     if (sub_8092E9C(unk, num, group))
@@ -1202,7 +1196,7 @@ void Bag_ChooseBerry(void)
 
 void FieldObjectInteractionPlantBerryTree(void)
 {
-    u8 berry = ItemIdToBerryType(gScriptItemId);
+    u8 berry = ItemIdToBerryType(gSpecialVar_ItemId);
 
     PlantBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject), berry, 1, TRUE);
     FieldObjectInteractionGetBerryTreeData();
@@ -1219,7 +1213,7 @@ void FieldObjectInteractionPickBerryTree(void)
 void FieldObjectInteractionRemoveBerryTree(void)
 {
     RemoveBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject));
-    sub_8092EF0(gScriptLastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    sub_8092EF0(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 u8 PlayerHasBerries(void)

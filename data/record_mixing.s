@@ -2,19 +2,36 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-    .align 2, 0
+	.align 2, 0
 
 gUnknown_0858CF8C:: @ 858CF8C
-	.incbin "baserom.gba", 0x58cf8c, 0x2
+	.byte 1, 0
 
 gUnknown_0858CF8E:: @ 858CF8E
-	.incbin "baserom.gba", 0x58cf8e, 0x6
+	.byte 1, 2, 0
+	.byte 2, 0, 1
 
 gUnknown_0858CF94:: @ 858CF94
-	.incbin "baserom.gba", 0x58cf94, 0x24
+	.byte 1, 0, 3
+	.byte 2, 3, 0
+	.byte 1, 2, 2
+	.byte 0, 3, 1
+	.byte 1, 3, 0
+	.byte 2, 2, 3
+	.byte 0, 1, 3
+	.byte 2, 0, 1
+	.byte 1, 2, 3
+	.byte 0, 2, 3
+	.byte 1, 0, 3
+	.byte 2, 1, 0
 
 gUnknown_0858CFB8:: @ 858CFB8
-	.incbin "baserom.gba", 0x58cfb8, 0x6
+	.byte 0, 1
+	.byte 1, 2
+	.byte 2, 0
 
 gUnknown_0858CFBE:: @ 858CFBE
-	.incbin "baserom.gba", 0x58cfbe, 0xe
+	.byte 0, 1, 2, 3
+	.byte 0, 2, 1, 3
+	.byte 0, 3, 2, 1
+	.byte 0, 0

@@ -44,12 +44,12 @@
 #define BS_GET_PLAYER2                  13
 #define BS_GET_OPPONENT2                14
 
-u8 GetBattleBank(u8 caseId);
+u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
-void MarkAllBufferBanksForExecution(void); // unused
-void MarkBufferBankForExecution(u8 bank);
+void MarkAllBattlersForControllerExec(void); // unused
+void MarkBattlerForControllerExec(u8 bank);
 void sub_803F850(u8 arg0);
 void CancelMultiTurnMoves(u8 bank);
 bool8 WasUnableToUseMove(u8 bank);
@@ -66,8 +66,8 @@ bool8 AreAllMovesUnusable(void);
 u8 GetImprisonedMovesCount(u8 bank, u16 move);
 u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects(void);
-bool8 sub_8041364(void);
-bool8 sub_8041728(void);
+bool8 HandleWishPerishSongOnTurnEnd(void);
+bool8 HandleFaintedMonActions(void);
 void TryClearRageStatuses(void);
 u8 AtkCanceller_UnableToUseMove(void);
 bool8 sub_80423F4(u8 bank, u8 r1, u8 r2);
@@ -79,6 +79,6 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
 void ClearFuryCutterDestinyBondGrudge(u8 bank);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
-u8 IsPokeDisobedient(void);
+u8 IsMonDisobedient(void);
 
 #endif // GUARD_BATTLE_UTIL_H

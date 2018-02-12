@@ -975,7 +975,7 @@ sub_812ACF4: @ 812ACF4
 	sub sp, 0xC
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_YouDontHaveThreeCoins
 	movs r0, 0x1
 	str r0, [sp]
@@ -1543,7 +1543,7 @@ sub_812B158: @ 812B158
 	sub sp, 0xC
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_QuitTheGame
 	movs r0, 0x1
 	str r0, [sp]
@@ -1581,7 +1581,7 @@ sub_812B158: @ 812B158
 	thumb_func_start sub_812B1B0
 sub_812B1B0: @ 812B1B0
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1633,7 +1633,7 @@ sub_812B214: @ 812B214
 	sub sp, 0xC
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_YouveGot9999Coins
 	movs r0, 0x1
 	str r0, [sp]
@@ -1686,7 +1686,7 @@ sub_812B280: @ 812B280
 	sub sp, 0xC
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	ldr r2, =gText_YouveRunOutOfCoins
 	movs r0, 0x1
 	str r0, [sp]
@@ -8934,7 +8934,7 @@ sub_812EB48: @ 812EB48
 	ldrb r3, [r1]
 	adds r1, r3, 0
 	adds r2, r3, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x1
 	movs r1, 0x1
@@ -8979,7 +8979,7 @@ sub_812EBCC: @ 812EBCC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	movs r4, 0
 _0812EBEA:
 	ldr r0, =gUnknown_0203AB34
@@ -10588,7 +10588,7 @@ sub_812F7E4: @ 812F7E4
 	bl Alloc
 	adds r1, r0, 0
 	str r1, [r4]
-	ldr r0, =gUnknown_08DD0050
+	ldr r0, =gSlotMachineReelTime_Gfx
 	bl LZDecompressWram
 	ldr r4, =gUnknown_0203AAD8
 	movs r0, 0xD8
@@ -10715,14 +10715,14 @@ sub_812F908: @ 812F908
 	bl Alloc
 	adds r1, r0, 0
 	str r1, [r4]
-	ldr r0, =gUnknown_08DCDB30
+	ldr r0, =gSlotMachineMenu_Gfx
 	bl LZDecompressWram
 	ldr r1, [r4]
 	movs r0, 0x2
 	adds r2, r5, 0
 	movs r3, 0
 	bl LoadBgTiles
-	ldr r0, =gUnknown_08DCDA90
+	ldr r0, =gSlotMachineMenu_Pal
 	movs r1, 0
 	movs r2, 0xA0
 	bl LoadPalette
@@ -10748,7 +10748,7 @@ sub_812F958: @ 812F958
 	thumb_func_start sub_812F968
 sub_812F968: @ 812F968
 	push {lr}
-	ldr r1, =gUnknown_08DCE770
+	ldr r1, =gSlotMachineMenu_Tilemap
 	movs r2, 0xA0
 	lsls r2, 3
 	movs r0, 0x2

@@ -121,7 +121,7 @@ sub_81AAC28: @ 81AAC28
 	ldr r0, =gSpecialVar_0x8005
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	pop {r0}
 	bx r0
@@ -135,7 +135,7 @@ sub_81AAC50: @ 81AAC50
 	movs r0, 0x7
 	movs r1, 0x5
 	bl GoToBagMenu
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	pop {r0}
@@ -150,7 +150,7 @@ sub_81AAC70: @ 81AAC70
 	movs r0, 0x8
 	movs r1, 0x5
 	bl GoToBagMenu
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	pop {r0}
@@ -343,7 +343,7 @@ _081AAE34:
 	bl clear_scheduled_bg_copies_to_vram
 	b _081AB012
 _081AAE3E:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -463,7 +463,7 @@ _081AAF54:
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrb r2, [r4, 0x5]
 	lsls r2, 1
 	adds r1, r4, 0
@@ -568,7 +568,7 @@ _081AB046:
 	thumb_func_start bag_menu_init_bgs
 bag_menu_init_bgs: @ 81AB050
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	ldr r4, =gUnknown_0203CE54
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -586,7 +586,7 @@ bag_menu_init_bgs: @ 81AB050
 	adds r1, 0x4
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82
@@ -637,7 +637,7 @@ _081AB0E8:
 	.4byte _081AB1A8
 _081AB0FC:
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08D9A620
+	ldr r1, =gBagScreen_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -670,14 +670,14 @@ _081AB13C:
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	beq _081AB164
-	ldr r0, =gUnknown_08D9A5D4
+	ldr r0, =gBagScreenFemale_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
 	b _081AB1AE
 	.pool
 _081AB164:
-	ldr r0, =gUnknown_08D9A588
+	ldr r0, =gBagScreenMale_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
@@ -719,7 +719,7 @@ _081AB1B2:
 	b _081AB1E4
 	.pool
 _081AB1CC:
-	bl sub_8122328
+	bl LoadListMenuArrowsGfx
 	ldr r0, [r4]
 	ldr r1, =0x00000834
 	adds r0, r1
@@ -902,7 +902,7 @@ _081AB30C:
 	cmp r6, r0
 	bcc _081AB30C
 _081AB34A:
-	ldr r2, =gUnknown_03006310
+	ldr r2, =gMultiuseListMenuTemplate
 	adds r1, r2, 0
 	ldr r0, =gUnknown_08613F9C
 	ldm r0!, {r3-r5}
@@ -1164,7 +1164,7 @@ _081AB570:
 	lsrs r0, 16
 	cmp r0, 0x7
 	bhi _081AB5BE
-	ldr r1, =gUnknown_08DC6378
+	ldr r1, =gBagMenuHMIcon_Gfx
 	subs r3, r7, 0x1
 	lsls r3, 16
 	lsrs r3, 16
@@ -1863,7 +1863,7 @@ DisplayItemMessage: @ 81ABB4C
 	strh r0, [r4, 0x14]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x14]
@@ -1924,7 +1924,7 @@ bag_menu_inits_lists_menu: @ 81ABBBC
 	bl sub_81ABA88
 	ldrb r0, [r7, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	mov r2, r8
 	ldrh r1, [r2]
 	ldrh r2, [r4]
@@ -2133,7 +2133,7 @@ _081ABDCC:
 	ldrb r0, [r6]
 	adds r1, r7, 0
 	mov r2, r8
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	ldrh r2, [r7]
 	mov r3, r8
 	ldrh r0, [r3]
@@ -2157,12 +2157,12 @@ _081ABDCC:
 	.pool
 _081ABE10:
 	ldrb r0, [r6]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r4, r0, 0
 	ldrb r0, [r6]
 	adds r1, r7, 0
 	mov r2, r8
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0
@@ -2181,7 +2181,7 @@ _081ABE32:
 _081ABE40:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	mov r1, r10
 	strh r1, [r0]
 	ldr r0, =gTasks + 0x8
@@ -2215,7 +2215,7 @@ _081ABE68:
 	lsrs r0, 24
 	adds r1, r4, 0
 	bl BagGetItemIdByPocketPosition
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	strh r0, [r1]
 	ldr r1, =gUnknown_08614054
 	ldrb r0, [r5, 0x4]
@@ -2603,7 +2603,7 @@ _081AC1DC:
 	subs r5, r4, 0x5
 	ldrb r0, [r5, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrb r2, [r5, 0x5]
 	lsls r2, 1
 	adds r1, r4, 0
@@ -2847,12 +2847,12 @@ sub_81AC3C0: @ 81AC3C0
 	adds r1, r2, r1
 	adds r3, 0x8
 	adds r2, r3
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	b _081AC472
 	.pool
 _081AC418:
 	ldrb r0, [r4]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r7, r0, 0
 	ldrb r0, [r4]
 	ldr r5, =gUnknown_0203CE58
@@ -2864,7 +2864,7 @@ _081AC418:
 	adds r4, r5, 0
 	adds r4, 0x8
 	adds r2, r4
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0
 	bl sub_80D4FC8
 	ldrb r0, [r5, 0x5]
@@ -2989,7 +2989,7 @@ _081AC4F8:
 _081AC538:
 	ldrb r0, [r5, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	mov r2, r8
 	ldrh r1, [r2]
 	ldrh r2, [r7]
@@ -3070,7 +3070,7 @@ sub_81AC590: @ 81AC590
 _081AC5F2:
 	ldrb r0, [r4, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r6]
 	ldrh r2, [r5]
 	bl ListMenuInit
@@ -3125,7 +3125,7 @@ _081AC668:
 	.4byte _081AC70C
 	.4byte _081AC690
 _081AC690:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl ItemId_GetBattleUsage
 	lsls r0, 24
@@ -3170,7 +3170,7 @@ _081AC6E8:
 	b _081ACA10
 	.pool
 _081AC70C:
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -3205,7 +3205,7 @@ _081AC748:
 	b _081ACA10
 	.pool
 _081AC76C:
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -3240,7 +3240,7 @@ _081AC7A8:
 	b _081ACA10
 	.pool
 _081AC7CC:
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -3288,7 +3288,7 @@ _081AC840:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0x4
 	beq _081AC856
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl sub_8122148
 	lsls r0, 24
@@ -3358,9 +3358,9 @@ _081AC8D4:
 	ldr r1, =gUnknown_0861402C
 	movs r2, 0x4
 	bl memcpy
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3396,7 +3396,7 @@ _081AC92C:
 	ldr r0, [r0]
 	ldr r1, =0x00000496
 	adds r0, r1
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r2]
 	cmp r0, r1
@@ -3472,7 +3472,7 @@ _081ACA12:
 	bne _081ACA50
 	movs r0, 0x1
 	bl ClearWindowTilemap
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl PrintTMHMMoveData
 	movs r0, 0x3
@@ -3484,7 +3484,7 @@ _081ACA12:
 	b _081ACA86
 	.pool
 _081ACA50:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -3985,7 +3985,7 @@ ItemMenu_UseOutOfBattle: @ 81ACE7C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl ItemId_GetFieldFunc
 	cmp r0, 0
@@ -4015,7 +4015,7 @@ _081ACEB8:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0x3
 	beq _081ACEE8
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
@@ -4055,7 +4055,7 @@ ItemMenu_Toss: @ 81ACEF4
 	b _081ACF6A
 	.pool
 _081ACF24:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4105,7 +4105,7 @@ BagMenuConfirmToss: @ 81ACF88
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4242,7 +4242,7 @@ BagMenuActuallyToss: @ 81AD0CC
 	lsls r4, 3
 	ldr r5, =gTasks + 0x8
 	adds r6, r4, r5
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4312,7 +4312,7 @@ Task_ActuallyToss: @ 81AD150
 	beq _081AD1CE
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r5, 0x10]
 	bl RemoveBagItem
@@ -4326,7 +4326,7 @@ Task_ActuallyToss: @ 81AD150
 	bl sub_81ABA88
 	ldrb r0, [r4, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	mov r2, r8
 	ldrh r1, [r2]
 	ldrh r2, [r7]
@@ -4369,7 +4369,7 @@ ItemMenu_Register: @ 81AD1EC
 	ldr r0, [r0]
 	ldr r2, =0x00000496
 	adds r1, r0, r2
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldrh r0, [r1]
 	cmp r0, r2
@@ -4388,7 +4388,7 @@ _081AD23A:
 	ldr r0, =gUnknown_0203CE58
 	ldrb r0, [r0, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r6]
 	ldrh r2, [r5]
 	bl ListMenuInit
@@ -4412,7 +4412,7 @@ ItemMenu_Give: @ 81AD278
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	bl bag_menu_remove_some_window
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -4476,7 +4476,7 @@ bag_menu_print_cant_be_held_msg: @ 81AD30C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4524,7 +4524,7 @@ ItemMenu_CheckTag: @ 81AD378
 	lsrs r0, 24
 	ldr r1, =gUnknown_0203CE54
 	ldr r2, [r1]
-	ldr r1, =sub_8177C14
+	ldr r1, =DoBerryTagScreen
 	str r1, [r2]
 	bl unknown_ItemMenu_Confirm
 	pop {r0}
@@ -4567,7 +4567,7 @@ ItemMenu_UseInBattle: @ 81AD3DC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl ItemId_GetBattleFunc
 	cmp r0, 0
@@ -4601,7 +4601,7 @@ item_menu_type_2: @ 81AD41C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -4662,9 +4662,9 @@ item_menu_type_b: @ 81AD4B4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4748,10 +4748,10 @@ _081AD550:
 	cmp r6, 0x1
 	bne _081AD5C4
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	ldr r0, [r4]
 	adds r0, r5
 	ldrh r1, [r0]
@@ -4775,7 +4775,7 @@ _081AD5C4:
 	adds r0, r5
 	strh r7, [r0]
 _081AD5CA:
-	ldr r0, =gUnknown_082736B3
+	ldr r0, =EventScript_2736B3
 	bl ScriptContext1_SetupScript
 _081AD5D0:
 	movs r0, 0x1
@@ -4798,7 +4798,7 @@ display_sell_item_ask_str: @ 81AD5DC
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r6, =gScriptItemId
+	ldr r6, =gSpecialVar_ItemId
 	ldrh r0, [r6]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -4861,7 +4861,7 @@ sub_81AD680: @ 81AD680
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
 	ldr r6, =gStringVar1
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -4944,7 +4944,7 @@ sub_81AD730: @ 81AD730
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -4996,7 +4996,7 @@ sub_81AD794: @ 81AD794
 	ldrb r4, [r0]
 	movs r2, 0x10
 	ldrsh r5, [r6, r2]
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -5061,7 +5061,7 @@ sub_81AD84C: @ 81AD84C
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r6, =gScriptItemId
+	ldr r6, =gSpecialVar_ItemId
 	ldrh r0, [r6]
 	ldr r1, =gStringVar2
 	bl CopyItemName
@@ -5122,7 +5122,7 @@ sub_81AD8C8: @ 81AD8C8
 	adds r5, r0
 	movs r0, 0x5F
 	bl PlaySE
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	mov r8, r2
 	ldrh r0, [r2]
 	mov r3, r10
@@ -5155,7 +5155,7 @@ sub_81AD8C8: @ 81AD8C8
 	bl sub_81ABA88
 	ldrb r0, [r7, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	mov r2, r9
 	ldrh r1, [r2]
 	ldrh r2, [r5]
@@ -5241,7 +5241,7 @@ display_deposit_item_ask_str: @ 81AD9EC
 	b _081ADA5E
 	.pool
 _081ADA18:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -5366,7 +5366,7 @@ sub_81ADB14: @ 81ADB14
 	movs r0, 0x1
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -5690,7 +5690,7 @@ _081ADDEC:
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl bag_menu_print_cursor_
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	movs r0, 0x4
 	strh r0, [r1]
 	adds r0, r5, 0
@@ -5726,10 +5726,10 @@ unknown_ItemMenu_Show: @ 81ADE38
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r1, =gSpecialVar_0x8005
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window
@@ -5760,11 +5760,11 @@ unknown_ItemMenu_Give2: @ 81ADE8C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window
@@ -5795,7 +5795,7 @@ unknown_ItemMenu_Confirm2: @ 81ADEDC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window
@@ -6043,7 +6043,7 @@ bag_menu_print: @ 81AE0BC
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3

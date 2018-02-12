@@ -34,13 +34,13 @@ gUnknown_020223C0: @ 20223C0
 gBlockRecvBuffer: @ 20223C4
 	.space 0x500
 
-gUnknown_020228C4: @ 20228C4 gBlockSendBuffer
+gBlockSendBuffer: @ 20228C4 gBlockSendBuffer
 	.space 0x100
 
 gUnknown_020229C4: @ 20229C4
 	.space 0x2
 
-gUnknown_020229C6: @ 20229C6
+gLinkType: @ 20229C6
 	.space 0x2
 
 gUnknown_020229C8: @ 20229C8
@@ -239,303 +239,9 @@ gBattle_WIN1V: @ 2022E2A
 	.space 0x2
 
     .include "src/battle_message.o"
+	.include "src/battle_main.o"
 
-gUnknown_02022F88: @ 2022F88
-	.space 0x64
-
-gBattleTypeFlags: @ 2022FEC
-	.space 0x4
-
-gBattleTerrain: @ 2022FF0
-	.space 0x4
-
-gUnknown_02022FF4: @ 2022FF4
-	.space 0x4
-
-gUnknown_02022FF8: @ 2022FF8
-	.space 0x60
-
-gUnknown_02023058: @ 2023058
-	.space 0x4
-
-gUnknown_0202305C: @ 202305C
-	.space 0x4
-
-gUnknown_02023060: @ 2023060
-	.space 0x4
-
-gBattleBufferA: @ 2023064
-	.space 0x800
-
-gBattleBufferB: @ 2023864
-	.space 0x800
-
-gActiveBank: @ 2024064
-	.space 0x4
-
-gBattleExecBuffer: @ 2024068
-	.space 0x4
-
-gNoOfAllBanks: @ 202406C
-	.space 0x2
-
-gBattlePartyID: @ 202406E
-	.space 0x8
-
-gBanksByIdentity: @ 2024076
-	.space 0x4
-
-gActionsByTurnOrder: @ 202407A
-	.space 0x4
-
-gBanksByTurnOrder: @ 202407E
-	.space 0x4
-
-gCurrentTurnActionNumber: @ 2024082
-	.space 0x1
-
-gCurrentActionFuncId: @ 2024083
-	.space 0x1
-
-gBattleMons: @ 2024084
-	.space 0x160
-
-gBankSpriteIds: @ 20241E4
-	.space 0x4
-
-gCurrMovePos: @ 20241E8
-	.space 0x1
-
-gUnknown_020241E9: @ 20241E9
-	.space 0x1
-
-gCurrentMove: @ 20241EA
-	.space 0x2
-
-gLastUsedMove: @ 20241EC
-	.space 0x2
-
-gRandomMove: @ 20241EE
-	.space 0x2
-
-gBattleMoveDamage: @ 20241F0
-	.space 0x4
-
-gHpDealt: @ 20241F4
-	.space 0x4
-
-gTakenDmg: @ 20241F8
-	.space 0x10
-
-gLastUsedItem: @ 2024208
-	.space 0x2
-
-gLastUsedAbility: @ 202420A
-	.space 0x1
-
-gBankAttacker: @ 202420B
-	.space 0x1
-
-gBankTarget: @ 202420C
-	.space 0x1
-
-gBank1: @ 202420D
-	.space 0x1
-
-gEffectBank: @ 202420E
-	.space 0x1
-
-gStringBank: @ 202420F
-	.space 0x1
-
-gAbsentBankFlags: @ 2024210
-	.space 0x1
-
-gCritMultiplier: @ 2024211
-	.space 0x1
-
-gMultiHitCounter: @ 2024212
-	.space 0x2
-
-gBattlescriptCurrInstr: @ 2024214
-	.space 0x8
-
-gActionForBanks: @ 202421C
-	.space 0x4
-
-gBattlescriptPtrsForSelection: @ 2024220
-	.space 0x10
-
-gUnknown_02024230: @ 2024230
-	.space 0x10
-
-gUnknownMovesUsedByBanks: @ 2024240
-	.space 0x8
-
-gLastUsedMovesByBanks: @ 2024248
-	.space 0x8
-
-gUnknown_02024250: @ 2024250
-	.space 0x8
-
-gUnknown_02024258: @ 2024258
-	.space 0x8
-
-gUnknown_02024260: @ 2024260
-	.space 0x8
-
-gLockedMoves: @ 2024268
-	.space 0x8
-
-gUnknown_02024270: @ 2024270
-	.space 0x4
-
-gChosenMovesByBanks: @ 2024274
-	.space 0x8
-
-gBattleMoveFlags: @ 202427C
-	.space 0x4
-
-gHitMarker: @ 2024280
-	.space 0x4
-
-gUnknown_02024284: @ 2024284
-	.space 0x4
-
-gTakenDmgBanks: @ 2024288
-	.space 0x4
-
-gUnknown_0202428C: @ 202428C
-	.space 0x2
-
-gSideAffecting: @ 202428E
-	.space 0x6
-
-gSideTimers: @ 2024294
-	.space 0x18
-
-gStatuses3: @ 20242AC
-	.space 0x10
-
-gDisableStructs: @ 20242BC
-	.space 0x70
-
-gPauseCounterBattle: @ 202432C
-	.space 0x2
-
-gPaydayMoney: @ 202432E
-	.space 0x2
-
-gRandomTurnNumber: @ 2024330
-	.space 0x2
-
-gBattleCommunication: @ 2024332
-	.space 0x1
-
-gUnknown_02024333: @ 2024333
-	.space 0x7
-
-gBattleOutcome: @ 202433A
-	.space 0x2
-
-gProtectStructs: @ 202433C
-	.space 0x40
-
-gSpecialStatuses: @ 202437C
-	.space 0x50
-
-gBattleWeather: @ 20243CC
-	.space 0x4
-
-gWishFutureKnock: @ 20243D0
-	.space 0x2C
-
-gUnknown_020243FC: @ 20243FC
-	.space 0x2
-
-gSentPokesToOpponent: @ 20243FE
-	.space 0x2
-
-gDynamicBasePower: @ 2024400
-	.space 0x2
-
-gExpShareExp: @ 2024402
-	.space 0x2
-
-gEnigmaBerries: @ 2024404
-	.space 0x70
-
-gBattleScripting: @ 2024474
-	.space 0x28
-
-gBattleStruct: @ 202449C
-	.space 0x4
-
-gLinkBattleSendBuffer: @ 20244A0
-	.space 0x4
-
-gLinkBattleRecvBuffer: @ 20244A4
-	.space 0x4
-
-gBattleResources: @ 20244A8
-	.space 0x4
-
-gActionSelectionCursor: @ 20244AC
-	.space 0x4
-
-gMoveSelectionCursor: @ 20244B0
-	.space 0x4
-
-gUnknown_020244B4: @ 20244B4
-	.space 0x4
-
-gBankInMenu: @ 20244B8
-	.space 0x1
-
-gDoingBattleAnim: @ 20244B9
-	.space 0x3
-
-gTransformedPersonalities: @ 20244BC
-	.space 0x10
-
-gPlayerDpadHoldFrames: @ 20244CC
-	.space 0x4
-
-gBattleSpritesDataPtr: @ 20244D0
-	.space 0x4
-
-gMonSpritesGfxPtr: @ 20244D4
-	.space 0x4
-
-gUnknown_020244D8: @ 20244D8
-	.space 0x4
-
-gUnknown_020244DC: @ 20244DC
-	.space 0x4
-
-gBattleMovePower: @ 20244E0
-	.space 0x2
-
-gMoveToLearn: @ 20244E2
-	.space 0x2
-
-gBattleMonForms: @ 20244E4
-	.space 0x4
-
-sLearningMoveTableID: @ 20244E8
-	.space 0x1
-
-gPlayerPartyCount: @ 20244E9
-	.space 0x1
-
-gEnemyPartyCount: @ 20244EA
-	.space 0x2
-
-gPlayerParty: @ 20244EC
-	.space 600
-
-gEnemyParty: @ 2024744
-	.space 600
+	.include "src/pokemon_1.o"
 
 gUnknown_0202499C: @ 202499C
 	.space 0x18
@@ -543,31 +249,9 @@ gUnknown_0202499C: @ 202499C
 gUnknown_020249B4: @ 20249B4
 	.space 0x8
 
-	.include "src/rng.o"
-
-	.align 2
-gUnknown_020249C4: @ 20249C4
-	.space 0x64
-
-gUnknown_02024A28: @ 2024A28
-	.space 0x8
-
-gUnknown_02024A30: @ 2024A30
-	.space 0x8
-
-gUnknown_02024A38: @ 2024A38
-	.space 0x14
-
-gUnknown_02024A4C: @ 2024A4C
-	.space 0x8
-
+	.include "src/random.o"
+	.include "src/daycare.o"
     .include "src/load_save.o"
-
-gUnknown_02031C58: @ 2031C58
-	.space 0x528
-
-gUnknown_02032180: @ 2032180
-	.space 0x4
 
 gUnknown_02032184: @ 2032184
 	.space 0x4
@@ -586,18 +270,8 @@ gUnknown_0203229C: @ 203229C
 
 gUnknown_020322A0: @ 20322A0
 	.space 0x4
-
-gUnknown_020322A4: @ 20322A4
-	.space 0x4
-
-gUnknown_020322A8: @ 20322A8
-	.space 0x14
-
-gUnknown_020322BC: @ 20322BC
-	.space 0x14
-
-gUnknown_020322D0: @ 20322D0
-	.space 0x4
+    
+    .include "src/berry_blender.o"
 
 gDifferentSaveFile: @ 20322D4
 	.space 0x1
@@ -674,9 +348,9 @@ gUnknown_020375B6: @ 20375B6
 gUnknown_020375B8: @ 20375B8
 	.space 0x4
 
-gUnknown_020375BC: @ 20375BC
-	.space 0x4
+    .include "src/field_message_box.o"
 
+    .align 2
 gUnknown_020375C0: @ 20375C0
 	.space 0x4
 
@@ -691,25 +365,6 @@ gUnknown_020375D6: @ 20375D6
 
     .include "src/event_data.o"
     .include "src/start_menu.o"
-
-gUnknown_02037619: @ 2037619
-	.space 0x1
-
-gUnknown_0203761A: @ 203761A
-	.space 0x2
-
-gUnknown_0203761C: @ 203761C
-	.space 0x4
-
-gUnknown_02037620: @ 2037620
-	.space 0x1
-
-gUnknown_02037621: @ 2037621
-	.space 0x1
-
-gUnknown_02037622: @ 2037622
-	.space 0x2
-
 	.include "src/tileset_anims.o"
 	.include "src/palette.o"
     .include "src/sound.o"
@@ -738,98 +393,17 @@ gUnknown_02038BC4: @ 2038BC4
 gUnknown_02038BC6: @ 2038BC6
 	.space 0x2
 
-gUnknown_02038BC8: @ 2038BC8
-	.space 0x2
-
-gTrainerBattleOpponent_A: @ 2038BCA
-	.space 0x2
-
-gTrainerBattleOpponent_B: @ 2038BCC
-	.space 0x2
-
-gPartnerTrainerId: @ 2038BCE
-	.space 0x2
-
-gUnknown_02038BD0: @ 2038BD0
-	.space 0x4
-
-gUnknown_02038BD4: @ 2038BD4
-	.space 0x4
-
-gUnknown_02038BD8: @ 2038BD8
-	.space 0x4
-
-gUnknown_02038BDC: @ 2038BDC
-	.space 0x4
-
-gUnknown_02038BE0: @ 2038BE0
-	.space 0x4
-
-gUnknown_02038BE4: @ 2038BE4
-	.space 0x4
-
-gUnknown_02038BE8: @ 2038BE8
-	.space 0x4
-
-gUnknown_02038BEC: @ 2038BEC
-	.space 0x4
-
-gUnknown_02038BF0: @ 2038BF0
-	.space 0x4
-
-gUnknown_02038BF4: @ 2038BF4
-	.space 0x4
-
-gUnknown_02038BF8: @ 2038BF8
-	.space 0x1
-
-gUnknown_02038BF9: @ 2038BF9
-	.space 0x3
-
-gUnknown_02038BFC: @ 2038BFC
-	.space 0x4
-
-gUnknown_02038C00: @ 2038C00
-	.space 0x4
-
-gUnknown_02038C04: @ 2038C04
-	.space 0x4
+	.include "src/battle_setup.o"
+	.include "src/trainer_see.o"
+    .include "src/wild_encounter.o"
 
 gFieldEffectArguments: @ 2038C08
 	.space 0x20
 
-gUnknown_02038C28: @ 2038C28
-	.space 0x2
-
-gUnknown_02038C2A: @ 2038C2A
-	.space 0x2
-
-gUnknown_02038C2C: @ 2038C2C
-	.space 0x13C
-
-gUnknown_02038D68: @ 2038D68
-	.space 0x140
-
-gUnknown_02038EA8: @ 2038EA8
-	.space 0x280
-
-gUnknown_02039128: @ 2039128
-	.space 0x280
-
-gUnknown_020393A8: @ 20393A8
-	.space 0x140
-
-gUnknown_020394E8: @ 20394E8
-	.space 0x640
-
-gUnknown_02039B28: @ 2039B28
-	.space 0x1C
-
-gUnknown_02039B44: @ 2039B44
-	.space 0x4
-
-gUnknown_02039B48: @ 2039B48
-	.space 0x4
+    .include "src/scanline_effect.o"
+    .include "src/option_menu.o"
+	
+	.align 2
 
 gUnknown_02039B4C: @ 2039B4C
 	.space 0x4
@@ -978,10 +552,10 @@ gUnknown_02039F2A: @ 2039F2A
 gUnknown_02039F2B: @ 2039F2B
 	.space 0x1
 
-gScriptContestCategory: @ 2039F2C
+gSpecialVar_ContestCategory: @ 2039F2C
 	.space 0x2
 
-gUnknown_02039F2E: @ 2039F2E
+gSpecialVar_ContestRank: @ 2039F2E
 	.space 0x2
 
 gUnknown_02039F30: @ 2039F30
@@ -1029,9 +603,7 @@ gUnknown_02039F8C: @ 2039F8C
 gUnknown_02039F90: @ 2039F90
 	.space 0x4
 
-gUnknown_02039F94: @ 2039F94
-	.space 0x4
-
+    .include "src/naming_screen.o"
     .include "src/money.o"
     .include "src/record_mixing.o"
     .include "src/secret_base.o"
@@ -1095,12 +667,7 @@ gUnknown_0203A138: @ 203A138
 gUnknown_0203A140: @ 203A140
 	.space 0x4
 
-gUnknown_0203A144: @ 203A144
-	.space 0x4
-
-gUnknown_0203A148: @ 203A148
-	.space 0x4
-
+	.include "src/region_map.o"
     .include "src/decoration.o"
     .align 2
 
@@ -1195,20 +762,13 @@ gUnknown_0203AB34: @ 203AB34
 .align 2
 gUnknown_0203AB40: @ 203AB40
 	.space 0x8
+	
+	.include "src/pokeblock.o"
 
-gUnknown_0203AB48: @ 203AB48
-	.space 0x6
-
-gUnknown_0203AB4E: @ 203AB4E
-	.space 0x2
-
-gUnknown_0203AB50: @ 203AB50
-	.space 0x4
-
-gUnknown_0203AB54: @ 203AB54
+gBikeCyclingChallenge: @ 203AB54
 	.space 0x1
 
-gUnknown_0203AB55: @ 203AB55
+gBikeCollisions: @ 203AB55
 	.space 0x3
 
 gUnknown_0203AB58: @ 203AB58
@@ -1253,7 +813,7 @@ gUnknown_0203AB6F: @ 203AB6F
 gUnknown_0203AB70: @ 203AB70
 	.space 0x4
 
-gUnknown_0203AB74: @ 203AB74
+gResultsWindowId: @ 203AB74
 	.space 0x4
 
 gUnknown_0203AB78: @ 203AB78
@@ -1280,12 +840,9 @@ gUnknown_0203AB98: @ 203AB98
 	.space 0x4
 
     .include "src/coins.o"
-    
-    .align 2
-sTransitionStructPtr: @ 203ABA0
-	.space 0x4
+    .include "src/battle_transition.o"
 
-gAbilitiesPerBank: @ 203ABA4
+gBattlerAbilities: @ 203ABA4
 	.space 0x4
 
 gStringInfo: @ 203ABA8
@@ -1319,8 +876,7 @@ gUnknown_0203ABB8: @ 203ABB8
     
 .space 0x4 /*unused var?*/
 
-gUnknown_0203BBC0: @ 203BBC0
-	.space 0x74
+	.include "src/mystery_event_script.o"
 
 gUnknown_0203BC34: @ 203BC34
 	.space 0x4
@@ -1337,32 +893,7 @@ gUnknown_0203BC88: @ 203BC88
 gUnknown_0203BC8C: @ 203BC8C
 	.space 0x4
 
-gUnknown_0203BC90: @ 203BC90
-	.space 0x4
-
-gUnknown_0203BC94: @ 203BC94
-	.space 0x4
-
-gUnknown_0203BC98: @ 203BC98
-	.space 0x4
-
-gUnknown_0203BC9C: @ 203BC9C
-	.space 0x2
-
-gUnknown_0203BC9E: @ 203BC9E
-	.space 0x2
-
-gUnknown_0203BCA0: @ 203BCA0
-	.space 0x4
-
-gUnknown_0203BCA4: @ 203BCA4
-	.space 0x4
-
-gUnknown_0203BCA8: @ 203BCA8
-	.space 0x4
-
-gUnknown_0203BCAC: @ 203BCAC
-	.space 0x4
+	.include "src/use_pokeblock.o"
 
 gUnknown_0203BCB0: @ 203BCB0
 	.space 0x4
@@ -1388,17 +919,12 @@ gUnknown_0203BCC8: @ 203BCC8
 gUnknown_0203BCCC: @ 203BCCC
 	.space 0x4
 
-gUnknown_0203BCD0: @ 203BCD0
-	.space 0x4
+	.include "src/field_region_map.o"
 
 gUnknown_0203BCD4: @ 203BCD4
 	.space 0x4
 
-gUnknown_0203BCD8: @ 203BCD8
-	.space 0x4
-
-gUnknown_0203BCDC: @ 203BCDC
-	.space 0x4
+    .include "src/hall_of_fame.o"
 
 gUnknown_0203BCE0: @ 203BCE0
 	.space 0x2
@@ -1406,7 +932,7 @@ gUnknown_0203BCE0: @ 203BCE0
 gUnknown_0203BCE2: @ 203BCE2
 	.space 0x2
 
-gUnknown_0203BCE4: @ 203BCE4
+gHasHallOfFameRecords: @ 203BCE4
 	.space 0x1
 
 gUnknown_0203BCE5: @ 203BCE5
@@ -1417,23 +943,14 @@ gUnknown_0203BCE8: @ 203BCE8
 
     .include "src/lottery_corner.o"
     .include "src/diploma.o"
-
-gUnknown_0203BCF4: @ 203BCF4
-	.space 0x4
-
-gUnknown_0203BCF8: @ 203BCF8
-	.space 0x4
-
+    .include "src/berry_tag_screen.o"
+    .include "src/mystery_event_menu.o"
     .include "src/save_failed_screen.o"
 
 gBraillePuzzleCallbackFlag: @ 203BD14
 	.space 0x4
 
-gUnknown_0203BD18: @ 203BD18
-	.space 0x4
-
-gUnknown_0203BD1C: @ 203BD1C
-	.space 0x8
+	.include "src/pokeblock_feed.o"
 
 gUnknown_0203BD24: @ 203BD24
 	.space 0x2
@@ -1444,90 +961,7 @@ gUnknown_0203BD26: @ 203BD26
 gUnknown_0203BD28: @ 203BD28
 	.space 0x4
 
-gRecordedBattleRngSeed: @ 203BD2C
-	.space 0x4
-
-gBattlePalaceMoveSelectionRngValue: @ 203BD30
-	.space 0x4
-
-gUnknown_0203BD34: @ 203BD34
-	.space 0xA60
-
-gUnknown_0203C794: @ 203C794
-	.space 0x8
-
-gUnknown_0203C79C: @ 203C79C
-	.space 0x8
-
-gUnknown_0203C7A4: @ 203C7A4
-	.space 0x8
-
-gUnknown_0203C7AC: @ 203C7AC
-	.space 0x1
-
-gUnknown_0203C7AD: @ 203C7AD
-	.space 0x1
-
-gUnknown_0203C7AE: @ 203C7AE
-	.space 0x1
-
-gUnknown_0203C7AF: @ 203C7AF
-	.space 0x1
-
-gUnknown_0203C7B0: @ 203C7B0
-	.space 0x4
-
-gUnknown_0203C7B4: @ 203C7B4
-	.space 0x1
-
-gUnknown_0203C7B5: @ 203C7B5
-	.space 0x1
-
-gUnknown_0203C7B6: @ 203C7B6
-	.space 0x1
-
-gUnknown_0203C7B7: @ 203C7B7
-	.space 0x1
-
-gUnknown_0203C7B8: @ 203C7B8
-	.space 0x4
-
-gUnknown_0203C7BC: @ 203C7BC
-	.space 0x4
-
-gUnknown_0203C7C0: @ 203C7C0
-	.space 0x258
-
-gUnknown_0203CA18: @ 203CA18
-	.space 0x258
-
-gUnknown_0203CC70: @ 203CC70
-	.space 0x10
-
-gUnknown_0203CC80: @ 203CC80
-	.space 0x4
-
-gUnknown_0203CC84: @ 203CC84
-	.space 0x4C
-
-gUnknown_0203CCD0: @ 203CCD0
-	.space 0x1
-
-gUnknown_0203CCD1: @ 203CCD1
-	.space 0x8
-
-gUnknown_0203CCD9: @ 203CCD9
-	.space 0x1
-
-gUnknown_0203CCDA: @ 203CCDA
-	.space 0x2
-
-gUnknown_0203CCDC: @ 203CCDC
-	.space 0xC
-
-gUnknown_0203CCE8: @ 203CCE8
-	.space 0x4
-
+    .include "src/recorded_battle.o"
     .include "src/battle_dome_cards.o"
     .include "src/lilycove_lady.o"
 
@@ -1549,36 +983,9 @@ gUnknown_0203CD80: @ 203CD80
 gUnknown_0203CD88: @ 203CD88
 	.space 0x4
 
-gUnknown_0203CD8C: @ 203CD8C
-	.space 0x1
+    .include "src/menu.o"
 
-gUnknown_0203CD8D: @ 203CD8D
-	.space 0x3
-
-gUnknown_0203CD90: @ 203CD90
-	.space 0xC
-
-gUnknown_0203CD9C: @ 203CD9C
-	.space 0x2
-
-gUnknown_0203CD9E: @ 203CD9E
-	.space 0x1
-
-gUnknown_0203CD9F: @ 203CD9F
-	.space 0x1
-
-gUnknown_0203CDA0: @ 203CDA0
-	.space 0x4
-
-gUnknown_0203CDA4: @ 203CDA4
-	.space 0x4
-
-gUnknown_0203CDA8: @ 203CDA8
-	.space 0x4
-
-gUnknown_0203CDAC: @ 203CDAC
-	.space 0x80
-
+    .align 2
 gUnknown_0203CE2C: @ 203CE2C
 	.space 0x4
 
@@ -1636,7 +1043,7 @@ gUnknown_0203CE74: @ 203CE74
 gUnknown_0203CE78: @ 203CE78
 	.space 0x4
 
-gScriptItemId: @ 203CE7C
+gSpecialVar_ItemId: @ 203CE7C
 	.space 0x4
 
 gUnknown_0203CE80: @ 203CE80
@@ -1648,14 +1055,8 @@ gUnknown_0203CE84: @ 203CE84
 gUnknown_0203CE8C: @ 203CE8C
 	.space 0x10
 
-gUnknown_0203CE9C: @ 203CE9C
-	.space 0x20
-
-gUnknown_0203CEBC: @ 203CEBC
-	.space 0x4
-
-gUnknown_0203CEC0: @ 203CEC0
-	.space 0x4
+    .include "src/unk_text_util.o"
+    .include "src/item_icon.o"
 
 gUnknown_0203CEC4: @ 203CEC4
 	.space 0x4
@@ -1768,4 +1169,4 @@ gUnknown_0203CF58: @ 203CF58
 gUnknown_0203CF5C: @ 203CF5C
 	.space 0x4
 
-gUnknown_0203CF60: @ 203CF60
+	.include "src/rayquaza_scene.o"

@@ -3893,7 +3893,7 @@ gItems:: @ 85839A0
 	.4byte gMachBikeItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_Bike
 	.4byte 0
@@ -3908,7 +3908,7 @@ gItems:: @ 85839A0
 	.4byte gCoinCaseItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CoinCase
 	.4byte 0
@@ -3923,7 +3923,7 @@ gItems:: @ 85839A0
 	.4byte gItemfinderItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_Itemfinder
 	.4byte 0
@@ -3938,7 +3938,7 @@ gItems:: @ 85839A0
 	.4byte gOldRodItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_Rod
 	.4byte 0
@@ -3953,7 +3953,7 @@ gItems:: @ 85839A0
 	.4byte gGoodRodItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_Rod
 	.4byte 0
@@ -3968,7 +3968,7 @@ gItems:: @ 85839A0
 	.4byte gSuperRodItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_Rod
 	.4byte 0
@@ -3983,7 +3983,7 @@ gItems:: @ 85839A0
 	.4byte gSSTicketItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -3998,7 +3998,7 @@ gItems:: @ 85839A0
 	.4byte gContestPassItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4028,7 +4028,7 @@ gItems:: @ 85839A0
 	.4byte gWailmerPailItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_WailmerPail
 	.4byte 0
@@ -4043,7 +4043,7 @@ gItems:: @ 85839A0
 	.4byte gDevonGoodsItemDescription
 	.byte 2
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4058,7 +4058,7 @@ gItems:: @ 85839A0
 	.4byte gSootSackItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4073,7 +4073,7 @@ gItems:: @ 85839A0
 	.4byte gBasementKeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4088,7 +4088,7 @@ gItems:: @ 85839A0
 	.4byte gAcroBikeItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_Bike
 	.4byte 0
@@ -4103,7 +4103,7 @@ gItems:: @ 85839A0
 	.4byte gPokeblockCaseItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 3
 	.4byte ItemUseOutOfBattle_PokeblockCase
 	.4byte 0
@@ -4118,7 +4118,7 @@ gItems:: @ 85839A0
 	.4byte gLetterItemDescription
 	.byte 2
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4133,7 +4133,7 @@ gItems:: @ 85839A0
 	.4byte gEonTicketItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4148,7 +4148,7 @@ gItems:: @ 85839A0
 	.4byte gRedOrbItemDescription
 	.byte 2
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4163,7 +4163,7 @@ gItems:: @ 85839A0
 	.4byte gBlueOrbItemDescription
 	.byte 2
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4178,7 +4178,7 @@ gItems:: @ 85839A0
 	.4byte gScannerItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4193,7 +4193,7 @@ gItems:: @ 85839A0
 	.4byte gGoGogglesItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4208,7 +4208,7 @@ gItems:: @ 85839A0
 	.4byte gMeteoriteItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4223,7 +4223,7 @@ gItems:: @ 85839A0
 	.4byte gRoom1KeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4238,7 +4238,7 @@ gItems:: @ 85839A0
 	.4byte gRoom2KeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4253,7 +4253,7 @@ gItems:: @ 85839A0
 	.4byte gRoom4KeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4268,7 +4268,7 @@ gItems:: @ 85839A0
 	.4byte gRoom6KeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4283,7 +4283,7 @@ gItems:: @ 85839A0
 	.4byte gStorageKeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4298,7 +4298,7 @@ gItems:: @ 85839A0
 	.4byte gRootFossilItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4313,7 +4313,7 @@ gItems:: @ 85839A0
 	.4byte gClawFossilItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -4328,7 +4328,7 @@ gItems:: @ 85839A0
 	.4byte gDevonScopeItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5243,7 +5243,7 @@ gItems:: @ 85839A0
 	.4byte gOaksParcelItemDescription
 	.byte 2
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5258,7 +5258,7 @@ gItems:: @ 85839A0
 	.4byte gPokeFluteItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5273,7 +5273,7 @@ gItems:: @ 85839A0
 	.4byte gSecretKeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5288,7 +5288,7 @@ gItems:: @ 85839A0
 	.4byte gBikeVoucherItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5303,7 +5303,7 @@ gItems:: @ 85839A0
 	.4byte gGoldTeethItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5318,7 +5318,7 @@ gItems:: @ 85839A0
 	.4byte gOldAmberItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5333,7 +5333,7 @@ gItems:: @ 85839A0
 	.4byte gCardKeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5348,7 +5348,7 @@ gItems:: @ 85839A0
 	.4byte gLiftKeyItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5363,7 +5363,7 @@ gItems:: @ 85839A0
 	.4byte gHelixFossilItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5378,7 +5378,7 @@ gItems:: @ 85839A0
 	.4byte gDomeFossilItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5393,7 +5393,7 @@ gItems:: @ 85839A0
 	.4byte gSilphScopeItemDescription
 	.byte 1
 	.byte 0
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5408,7 +5408,7 @@ gItems:: @ 85839A0
 	.4byte gBicycleItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5423,7 +5423,7 @@ gItems:: @ 85839A0
 	.4byte gTownMapItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5438,7 +5438,7 @@ gItems:: @ 85839A0
 	.4byte gVSSeekerItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5453,7 +5453,7 @@ gItems:: @ 85839A0
 	.4byte gFameCheckerItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5468,7 +5468,7 @@ gItems:: @ 85839A0
 	.4byte gTMCaseItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5483,7 +5483,7 @@ gItems:: @ 85839A0
 	.4byte gBerryPouchItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5498,7 +5498,7 @@ gItems:: @ 85839A0
 	.4byte gTeachyTVItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 2
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5513,7 +5513,7 @@ gItems:: @ 85839A0
 	.4byte gTriPassItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5528,7 +5528,7 @@ gItems:: @ 85839A0
 	.4byte gRainbowPassItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5543,7 +5543,7 @@ gItems:: @ 85839A0
 	.4byte gTeaItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5558,7 +5558,7 @@ gItems:: @ 85839A0
 	.4byte gMysticTicketItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5573,7 +5573,7 @@ gItems:: @ 85839A0
 	.4byte gAuroraTicketItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5588,7 +5588,7 @@ gItems:: @ 85839A0
 	.4byte gPowderJarItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_PowderJar
 	.4byte 0
@@ -5603,7 +5603,7 @@ gItems:: @ 85839A0
 	.4byte gRubyItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5618,7 +5618,7 @@ gItems:: @ 85839A0
 	.4byte gSapphireItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5633,7 +5633,7 @@ gItems:: @ 85839A0
 	.4byte gMagmaEmblemItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
@@ -5648,7 +5648,7 @@ gItems:: @ 85839A0
 	.4byte gOldSeaMapItemDescription
 	.byte 1
 	.byte 1
-	.byte POCKET_KEY_ITEMS
+	.byte BAG_KEYITEMS
 	.byte 4
 	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0

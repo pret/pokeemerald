@@ -26,7 +26,7 @@ sub_81754DC: @ 81754DC
 	ands r0, r1
 	cmp r0, 0
 	beq _08175522
-	ldr r0, =gUnknown_0203BCE4
+	ldr r0, =gHasHallOfFameRecords
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08175522
@@ -149,7 +149,7 @@ _081755E4:
 	movs r0, 0
 	movs r1, 0x1
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}
@@ -3675,7 +3675,7 @@ sub_8177388: @ 8177388
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8133EDC
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r0, 16
 	bl SpeciesToNationalPokedexNum

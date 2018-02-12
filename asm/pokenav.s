@@ -44,7 +44,7 @@ sub_81C72A4: @ 81C72A4
 	bl SetMainCallback2
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	pop {r0}
 	bx r0
 	.pool
@@ -683,7 +683,7 @@ _081C77B0:
 	movs r0, 0
 	bl sub_81C763C
 	adds r4, r0, 0
-	ldr r1, =gUnknown_08DC7B80
+	ldr r1, =gPokenavHeader_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r2, 0
@@ -693,12 +693,12 @@ _081C77B0:
 	movs r0, 0
 	adds r1, r4, 0
 	bl SetBgTilemapBuffer
-	ldr r1, =gUnknown_08DC7D84
+	ldr r1, =gPokenavHeader_Tilemap
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r0, =gUnknown_08DC7B60
+	ldr r0, =gPokenavHeader_Pal
 	movs r1, 0
 	movs r2, 0x20
 	bl sub_81C7944
@@ -1571,7 +1571,7 @@ sub_81C7E58: @ 81C7E58
 	bl sub_8034974
 	adds r5, r0, 0
 	lsls r4, 5
-	ldr r0, =gUnknown_08DC7F00
+	ldr r0, =gPokenavLeftHeader_Pal
 	adds r4, r0
 	movs r0, 0x1
 	bl IndexOfSpritePaletteTag
@@ -1653,7 +1653,7 @@ sub_81C7F24: @ 81C7F24
 	bl sub_8034974
 	adds r5, r0, 0
 	lsls r4, 5
-	ldr r0, =gUnknown_08DC7F00
+	ldr r0, =gPokenavLeftHeader_Pal
 	adds r4, r0
 	movs r0, 0x2
 	bl IndexOfSpritePaletteTag
@@ -5198,7 +5198,7 @@ _081C9A5C:
 	ldr r0, =gUnknown_08620194
 	movs r1, 0x3
 	bl sub_81C7B54
-	ldr r1, =gUnknown_08DC90E0
+	ldr r1, =gPokenavMessageBox_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -5209,14 +5209,14 @@ _081C9A5C:
 	adds r1, 0x8C
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
-	ldr r1, =gUnknown_08DC9130
+	ldr r1, =gPokenavMessageBox_Tilemap
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_08DC90C0
+	ldr r0, =gPokenavMessageBox_Pal
 	movs r1, 0x10
 	movs r2, 0x20
 	bl sub_81C7944
@@ -6948,7 +6948,7 @@ sub_81CA818: @ 81CA818
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_0861FC7A
+	ldr r5, =gUnknown_0861FC78 + 2
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0
@@ -6967,7 +6967,7 @@ sub_81CA818: @ 81CA818
 	thumb_func_start sub_81CA850
 sub_81CA850: @ 81CA850
 	push {lr}
-	ldr r0, =gUnknown_0861FC86
+	ldr r0, =gUnknown_0861FC78 + 0xE
 	movs r1, 0x31
 	movs r2, 0x4
 	bl sub_81C7944
@@ -6985,7 +6985,7 @@ sub_81CA864: @ 81CA864
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_0861FC86
+	ldr r5, =gUnknown_0861FC78 + 0xE
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0
@@ -7068,7 +7068,7 @@ sub_81CA914: @ 81CA914
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CA914
@@ -7095,13 +7095,13 @@ titlescreen_0: @ 81CA92C
 	movs r0, 0x44
 	movs r1, 0xA0
 	bl SetGpuRegBits
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl sub_81CAA3C
 	ldr r2, =gUnknown_08620384
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldr r0, =sub_81CA914
 	bl c3args_set_0toR1_1to0
 	ldr r0, =sub_81CA9EC
@@ -7122,7 +7122,7 @@ sub_81CA994: @ 81CA994
 	lsls r1, 6
 	movs r0, 0
 	bl ClearGpuRegBits
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r0, =sub_81CA9EC
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -7220,7 +7220,7 @@ sub_81CAA3C: @ 81CAA3C
 	mov r0, sp
 	movs r6, 0
 	strh r6, [r0]
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	ldr r0, =0x010000a0
 	mov r8, r0
 	mov r0, sp
@@ -7890,7 +7890,7 @@ _081CAF34:
 	adds r0, r5, 0
 	bl sub_81D1BD0
 	adds r4, r0, 0
-	ldr r0, =gUnknown_0831F578
+	ldr r0, =gFacilityClassToPicIndex
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	b _081CAF6C
@@ -7924,7 +7924,7 @@ sub_81CAF78: @ 81CAF78
 	strb r0, [r6]
 	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	cmp r0, 0
 	bne _081CAFA4
@@ -8089,7 +8089,7 @@ _081CB0C0:
 	thumb_func_start sub_81CB0C8
 sub_81CB0C8: @ 81CB0C8
 	push {lr}
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, 4
 	adds r0, r1
 	ldrh r2, [r0, 0xA]
@@ -10207,7 +10207,7 @@ sub_81CC158: @ 81CC158
 	adds r1, 0xF
 	bl sub_81CAF78
 	adds r5, r0, 0
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r2, [r4, 0x14]
@@ -10864,7 +10864,7 @@ sub_81CC670: @ 81CC670
 	movs r0, 0x4
 	bl sub_81C763C
 	adds r4, r0, 0
-	bl sub_812305C
+	bl FreeRegionMapIconResources
 	bl sub_81CC9EC
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
@@ -10886,7 +10886,7 @@ sub_81CC6A4: @ 81CC6A4
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_81237B4
+	bl UpdateRegionMapVideoRegs
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CC6A4
@@ -10991,10 +10991,10 @@ _081CC784:
 	bne _081CC7AC
 	movs r0, 0x4
 	movs r1, 0x9
-	bl sub_8124288
+	bl CreateRegionMapPlayerIcon
 	movs r0, 0x5
 	movs r1, 0xA
-	bl sub_81240D4
+	bl CreateRegionMapCursor
 	bl sub_812454C
 	b _081CC77C
 _081CC7AC:
@@ -11374,7 +11374,7 @@ sub_81CCA1C: @ 81CCA1C
 	movs r1, 0x10
 	movs r2, 0x20
 	bl sub_81C7944
-	ldr r0, =gUnknown_08DC91E8
+	ldr r0, =gHoennMapZoomIcons_Pal
 	movs r1, 0x30
 	movs r2, 0x20
 	bl sub_81C7944
@@ -11813,7 +11813,7 @@ _081CCE34:
 	mov r1, r8
 	lsrs r0, r1, 24
 	lsrs r1, r7, 24
-	bl sub_8145CF4
+	bl GetLandmarkName
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _081CCE08
@@ -13532,7 +13532,7 @@ _081CDBD0:
 	adds r0, r4, 0
 	mov r1, r8
 	adds r2, r5, 0
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	mov r2, r9
 	lsls r1, r2, 7
 	adds r1, r7, r1
@@ -13941,7 +13941,7 @@ _081CDF18:
 	ldr r1, =0x0000040b
 	movs r0, 0x52
 	bl SetGpuReg
-	ldr r1, =gUnknown_08DC6548
+	ldr r1, =gPokenavCondition_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x3
@@ -13973,7 +13973,7 @@ _081CDFB8:
 	beq _081CDFC4
 	b _081CE2C0
 _081CDFC4:
-	ldr r0, =gUnknown_08DC6DFC
+	ldr r0, =gPokenavCondition_Tilemap
 	adds r4, r5, 0x4
 	adds r1, r4, 0
 	bl LZ77UnCompVram
@@ -13983,7 +13983,7 @@ _081CDFC4:
 	bl sub_81CDD5C
 	cmp r0, 0x1
 	bne _081CDFF2
-	ldr r1, =gUnknown_08DC7070
+	ldr r1, =gPokenavOptions_Tilemap
 	movs r0, 0x9
 	str r0, [sp]
 	movs r0, 0x4
@@ -13995,7 +13995,7 @@ _081CDFC4:
 _081CDFF2:
 	movs r0, 0x3
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_08DC6528
+	ldr r0, =gPokenavCondition_Pal
 	movs r1, 0x10
 	movs r2, 0x20
 	bl sub_81C7944
@@ -15647,7 +15647,7 @@ sub_81CEE44: @ 81CEE44
 	bl TransferPlttBuffer
 	adds r0, r4, 0
 	bl sub_81D2108
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -16941,17 +16941,17 @@ sub_81CF7F4: @ 81CF7F4
 	mov r8, r0
 	bl sub_81CF0F0
 	adds r7, r0, 0
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r4, =gStringVar1
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0xFF
 	strb r0, [r4]
 	ldr r5, =gStringVar2
 	ldr r1, =gText_NumberF700
 	adds r0, r5, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	mov r1, r8
 	ldrb r0, [r1, 0x8]
 	movs r1, 0x1
@@ -19854,14 +19854,14 @@ sub_81D0E84: @ 81D0E84
 	movs r2, 0
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r4, =gStringVar4
 	ldr r1, =gText_RibbonsF700
 	adds r0, r4, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	ldrb r0, [r5, 0xA]
 	movs r1, 0x44
 	bl FillWindowPixelBuffer
@@ -20738,7 +20738,7 @@ _081D15B6:
 
 	thumb_func_start sub_81D15BC
 sub_81D15BC: @ 81D15BC
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, 4
 	adds r0, r1
 	ldrh r0, [r0]
@@ -20751,7 +20751,7 @@ sub_81D15CC: @ 81D15CC
 	push {lr}
 	adds r3, r0, 0
 	movs r1, 0
-	ldr r2, =gUnknown_085500A4
+	ldr r2, =gRematchTable
 _081D15D4:
 	ldrh r0, [r2]
 	cmp r0, r3
@@ -21440,7 +21440,7 @@ _081D1A24:
 	cmp r0, 0
 	bne _081D1A1C
 	adds r0, r7, 0
-	bl sub_80B2318
+	bl CountBattledRematchTeams
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -21900,7 +21900,7 @@ _081D1D8C:
 	movs r1, 0x1
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _081D1DAC:
 	add sp, 0x34
 	pop {r4,r5}
@@ -21921,7 +21921,7 @@ sub_81D1DC0: @ 81D1DC0
 	ldr r7, =gUnknown_0203CF4C
 	ldr r0, =gText_Cancel2
 	mov r12, r0
-	ldr r4, =gUnknown_03006310
+	ldr r4, =gMultiuseListMenuTemplate
 	ldr r1, =gUnknown_0203CF48
 	mov r8, r1
 	ldr r2, =sub_81D1E7C
@@ -22318,7 +22318,7 @@ sub_81D20BC: @ 81D20BC
 	b _081D20FA
 	.pool
 _081D20D4:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -22332,7 +22332,7 @@ _081D20E2:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80BA038
+	bl ScanlineEffect_SetParams
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -22366,7 +22366,7 @@ sub_81D2108: @ 81D2108
 	adds r0, r6, 0
 	bl sub_81D2634
 	movs r7, 0
-	ldr r5, =gUnknown_02038C28
+	ldr r5, =gScanlineEffectRegBuffers
 	mov r12, r5
 	movs r0, 0xF0
 	lsls r0, 3
@@ -23376,7 +23376,7 @@ sub_81D28C8: @ 81D28C8
 	push {r4-r7,lr}
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r3, =gUnknown_03006310
+	ldr r3, =gMultiuseListMenuTemplate
 	adds r2, r3, 0
 	ldr r1, =gUnknown_08625548
 	ldm r1!, {r5-r7}
@@ -23751,7 +23751,7 @@ sub_81D2BF4: @ 81D2BF4
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -23765,7 +23765,7 @@ sub_81D2BF4: @ 81D2BF4
 	str r0, [sp, 0xC]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -24408,7 +24408,7 @@ _081D30C4:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	mov r1, r9
 	bl LZ77UnCompWram
 _081D311A:
@@ -25722,7 +25722,7 @@ sub_81D3AD8: @ 81D3AD8
 	adds r5, r0, 0
 	adds r4, r1, 0
 	movs r0, 0x1E
-	bl sub_81535DC
+	bl TryCopySpecialSaveSection
 	cmp r0, 0x1
 	bne _081D3B04
 	ldr r2, =0x00000ee8
@@ -26754,7 +26754,7 @@ _081D4368:
 	b _081D449E
 _081D4394:
 	movs r3, 0
-	ldr r1, =gUnknown_0862608E
+	ldr r1, =gUnknown_0862608C + 2
 	adds r0, r7, r1
 	movs r2, 0x16
 	ldrsh r1, [r4, r2]
@@ -26887,7 +26887,7 @@ _081D449E:
 	mov r3, r10
 	adds r4, r0, r3
 	ldr r6, =gUnknown_0862608C
-	ldr r1, =gUnknown_0862608E
+	ldr r1, =gUnknown_0862608C + 2
 	adds r0, r7, r1
 	movs r3, 0x16
 	ldrsh r1, [r4, r3]
@@ -27683,7 +27683,7 @@ _081D4AF8:
 	movs r2, 0x80
 	orrs r1, r2
 	strb r1, [r0]
-	ldr r0, =gScriptFacing
+	ldr r0, =gSpecialVar_Facing
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _081D4B3A
@@ -28068,11 +28068,11 @@ sub_81D4E30: @ 81D4E30
 	lsls r2, 6
 	movs r1, 0
 	bl memset
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00005503
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_8009734
+	bl OpenLink
 	movs r0, 0x1
 	bl sub_800B330
 	pop {r0}
@@ -28128,11 +28128,11 @@ _081D4EBA:
 	thumb_func_start sub_81D4EC0
 sub_81D4EC0: @ 81D4EC0
 	push {lr}
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4EDC
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -28186,11 +28186,11 @@ _081D4F20:
 	.4byte _081D4FEC
 	.4byte _081D4FF8
 _081D4F38:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4F88
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -28212,7 +28212,7 @@ _081D4F54:
 	strb r0, [r4]
 	b _081D500C
 _081D4F6C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -28248,7 +28248,7 @@ _081D4FA0:
 	movs r0, 0x5
 	b _081D500E
 _081D4FB6:
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D500C
@@ -28447,7 +28447,7 @@ _081D515C:
 	beq _081D5166
 	b _081D52FC
 _081D5166:
-	bl sub_80097E8
+	bl CloseLink
 	b _081D525C
 _081D516C:
 	adds r0, r4, 0
@@ -28500,20 +28500,20 @@ _081D51D0:
 	beq _081D51F4
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_80097E8
+	bl CloseLink
 	adds r0, r4, 0
 	bl sub_81D505C
 	b _081D535A
 	.pool
 _081D51F4:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _081D5210
 	adds r0, r4, 0
 	bl sub_81D505C
-	bl sub_80097E8
+	bl CloseLink
 	movs r0, 0x7
 	strb r0, [r4, 0x8]
 	b _081D548A
@@ -28523,7 +28523,7 @@ _081D5210:
 	beq _081D522E
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_80097E8
+	bl CloseLink
 	adds r0, r4, 0
 	bl sub_81D505C
 	movs r0, 0x8
@@ -28537,7 +28537,7 @@ _081D522E:
 	bne _081D523C
 	b _081D548A
 _081D523C:
-	bl sub_80097E8
+	bl CloseLink
 	bl sub_81D4E30
 	adds r0, r4, 0
 	bl sub_81D505C
@@ -28654,13 +28654,13 @@ _081D5340:
 _081D5350:
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_80097E8
+	bl CloseLink
 _081D535A:
 	movs r0, 0x17
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D5360:
-	bl sub_80097E8
+	bl CloseLink
 	movs r0, 0x15
 	strb r0, [r4, 0x8]
 	b _081D548A
@@ -28670,7 +28670,7 @@ _081D536A:
 	cmp r0, 0
 	beq _081D537A
 _081D5374:
-	bl sub_80097E8
+	bl CloseLink
 	b _081D53C0
 _081D537A:
 	bl GetBlockReceivedStatus
@@ -28880,7 +28880,7 @@ sub_81D5530: @ 81D5530
 	lsls r1, 24
 	adds r0, r1
 	lsrs r0, 24
-	ldr r2, =gTrainerClassToNameIndex
+	ldr r2, =gFacilityClassToTrainerClass
 	ldr r1, =gUnknown_0203CF58
 	ldr r1, [r1]
 	adds r1, 0x16
@@ -28947,7 +28947,7 @@ sub_81D5588: @ 81D5588
 	adds r3, r0
 	ldrb r4, [r3, 0x1B]
 	bl sub_81D5710
-	ldr r0, =gUnknown_0831F578
+	ldr r0, =gFacilityClassToPicIndex
 	adds r4, r0
 	ldrb r0, [r4]
 	pop {r4}
@@ -29323,7 +29323,7 @@ _081D5854:
 sub_81D58D8: @ 81D58D8
 	push {lr}
 	bl sub_80008E8
-	ldr r3, =gScriptResult
+	ldr r3, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r3]
 	ldr r0, =gSaveBlock1Ptr
@@ -29381,7 +29381,7 @@ sub_81D5924: @ 81D5924
 	cmp r4, 0
 	beq _081D596C
 _081D5952:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 	strh r0, [r1]
 	b _081D59C0
@@ -29413,12 +29413,12 @@ _081D596C:
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r4, [r0]
 	b _081D59C0
 	.pool
 _081D59BC:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r6, [r0]
 _081D59C0:
 	pop {r3}
@@ -29444,7 +29444,7 @@ sub_81D59D0: @ 81D59D0
 	lsrs r5, r0, 24
 	cmp r5, 0
 	beq _081D59FC
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r3, [r0]
 	b _081D5A4E
 	.pool
@@ -29473,12 +29473,12 @@ _081D59FC:
 	adds r2, r0
 	ldr r0, [r2]
 	str r0, [r1]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r5, [r0]
 	b _081D5A4E
 	.pool
 _081D5A48:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _081D5A4E:
@@ -29556,7 +29556,7 @@ sub_81D5AD0: @ 81D5AD0
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	b _081D5B20
 	.pool
@@ -29569,12 +29569,12 @@ _081D5B00:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _081D5B20
 	.pool
 _081D5B1C:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 _081D5B20:
 	strh r0, [r1]
@@ -29653,12 +29653,12 @@ sub_81D5BBC: @ 81D5BBC
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	b _081D5BF0
 	.pool
 _081D5BEC:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 _081D5BF0:
 	strh r0, [r1]
@@ -29672,7 +29672,7 @@ _081D5BF0:
 sub_81D5C00: @ 81D5C00
 	push {lr}
 	bl sub_81D56B0
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_81D5710
@@ -29721,12 +29721,12 @@ sub_81D5C5C: @ 81D5C5C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _081D5C74
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	b _081D5C7A
 	.pool
 _081D5C74:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _081D5C7A:
@@ -30022,7 +30022,7 @@ _081D5E64:
 	movs r1, 0xF
 	ands r0, r1
 	strh r0, [r5, 0xE]
-	ldr r0, =gUnknown_082C83F0
+	ldr r0, =EventScript_2C83F0
 	str r0, [r5, 0x10]
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -30343,8 +30343,8 @@ _081D6176:
 	.pool
 	thumb_func_end sub_81D6134
 
-	thumb_func_start battle_init
-battle_init: @ 81D6180
+	thumb_func_start sub_81D6180
+sub_81D6180: @ 81D6180
 	lsls r0, 24
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
@@ -30355,7 +30355,7 @@ battle_init: @ 81D6180
 	ldrh r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end battle_init
+	thumb_func_end sub_81D6180
 
 	thumb_func_start GetTrainerHillTrainerFlag
 @ u8 GetTrainerHillTrainerFlag(u8 fieldObjectId)
@@ -30487,7 +30487,7 @@ _081D62A2:
 
 	thumb_func_start sub_81D62AC
 sub_81D62AC: @ 81D62AC
-	ldr r0, =gUnknown_082C83F0
+	ldr r0, =EventScript_2C83F0
 	bx lr
 	.pool
 	thumb_func_end sub_81D62AC
@@ -30495,7 +30495,7 @@ sub_81D62AC: @ 81D62AC
 	thumb_func_start sub_81D62B4
 sub_81D62B4: @ 81D62B4
 	push {lr}
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrh r1, [r0]
 	movs r0, 0x5
 	bl sub_81D572C
@@ -30656,7 +30656,7 @@ sub_81D63C8: @ 81D63C8
 	ldrb r4, [r3, 0x1B]
 	bl sub_81D5710
 	movs r2, 0
-	ldr r0, =gTrainerClassToNameIndex
+	ldr r0, =gFacilityClassToTrainerClass
 	adds r4, r0
 	ldrb r3, [r4]
 	ldr r1, =gUnknown_0862A3B4
@@ -30772,7 +30772,7 @@ _081D64D4:
 
 	thumb_func_start sub_81D64DC
 sub_81D64DC: @ 81D64DC
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000ef9
@@ -30825,7 +30825,7 @@ sub_81D6534: @ 81D6534
 	cmp r0, 0x6
 	beq _081D6560
 	bl sub_81D5C00
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _081D6560
@@ -30851,12 +30851,12 @@ sub_81D6568: @ 81D6568
 	ands r0, r1
 	cmp r0, 0
 	beq _081D6590
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	b _081D6594
 	.pool
 _081D6590:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 _081D6594:
 	strh r0, [r1]

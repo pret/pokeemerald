@@ -4,7 +4,7 @@
 #include "sprite.h"
 #include "window.h"
 #include "malloc.h"
-#include "species.h"
+#include "constants/species.h"
 #include "palette.h"
 #include "decompress.h"
 #include "battle_dome_cards.h"
@@ -19,7 +19,7 @@ extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *const gUnknown_082FF70C[];
 extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[NUM_SPECIES];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
-extern const u8 gUnknown_0831F578[];
+extern const u8 gFacilityClassToPicIndex[];
 
 // Static type declarations
 
@@ -119,7 +119,7 @@ static void sub_818D0C4(u16 species, u32 otId, u32 personality, u8 paletteSlot, 
         if (paletteTag == 0xFFFF)
         {
             gUnknown_0203CCEC.paletteTag |= 0xFFFF;
-            LoadCompressedPalette(species_and_otid_get_pal(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
+            LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
         }
         else
         {
@@ -146,7 +146,7 @@ static void sub_818D180(u16 species, u32 otId, u32 personality, u8 paletteSlot, 
 {
     if (!isTrainer)
     {
-        LoadCompressedPalette(species_and_otid_get_pal(species, otId, personality), paletteSlot * 0x10, 0x20);
+        LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality), paletteSlot * 0x10, 0x20);
     }
     else
     {
@@ -421,9 +421,9 @@ u8 sub_818D97C(u8 a0, u8 a1)
         switch (a0)
         {
             default:
-                return gUnknown_0831F578[0x3F];
+                return gFacilityClassToPicIndex[0x3F];
             case 0:
-                return gUnknown_0831F578[0x3C];
+                return gFacilityClassToPicIndex[0x3C];
         }
     }
     return a0;

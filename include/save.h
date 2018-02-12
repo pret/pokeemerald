@@ -56,44 +56,45 @@ enum
     HOF_DELETE_SAVE // unused
 };
 
+#define SECTION_ID_RECORDED_BATTLE  31
+
 void ClearSaveData(void);
 void ResetSaveCounters(void);
-//bool32 ManipulateSectorBits(u8 op, u8 bit);
-//u8 save_write_to_flash(u16 a1, const struct SaveSectionLocation *a2);
-u8 HandleWriteSector(u16, const struct SaveSectionLocation *);
-//u8 HandleWriteSectorNBytes(u8 sector, u8 *data, u16 size);
-u8 TryWriteSector(u8, u8 *);
-//u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location);
-//u32 RestoreSaveBackupVars(const struct SaveSectionLocation *location);
-//u8 sub_812550C(u16 a1, const struct SaveSectionLocation *location);
+bool32 SetDamagedSectorBits(u8 op, u8 bit);
+u8 save_write_to_flash(u16 a1, const struct SaveSectionLocation *location);
+u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location);
+u8 HandleWriteSectorNBytes(u8 sector, u8 *data, u16 size);
+u8 TryWriteSector(u8 sector, u8 *data);
+u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location);
+u32 RestoreSaveBackupVars(const struct SaveSectionLocation *location);
+u8 sub_81529D4(u16 a1, const struct SaveSectionLocation *location);
 u8 sub_8152A34(u16 a1, const struct SaveSectionLocation *location);
-u8 ClearSaveData_2(u16, const struct SaveSectionLocation *location);
-//u8 sub_8125758(u16 a1, const struct SaveSectionLocation *location);
-//u8 sub_81257F0(u16 a1, const struct SaveSectionLocation *location);
-//u8 sub_812587C(u16 a1, const struct SaveSectionLocation *location);
-u8 sub_8152E10(u16, const struct SaveSectionLocation *location);
+u8 ClearSaveData_2(u16 a1, const struct SaveSectionLocation *location);
+u8 sav12_xor_get(u16 a1, const struct SaveSectionLocation *location);
+u8 sub_8152CAC(u16 a1, const struct SaveSectionLocation *location);
+u8 sub_8152D44(u16 a1, const struct SaveSectionLocation *location);
+u8 sub_8152DD0(u16 a1, const struct SaveSectionLocation *location);
+u8 sub_8152E10(u16 a1, const struct SaveSectionLocation *location);
 u8 GetSaveValidStatus(const struct SaveSectionLocation *location);
-//u8 sub_8125B88(u8 a1, u8 *data, u16 size);
-u8 DoReadFlashWholeSection(u8, struct SaveSection *);
-u16 CalculateChecksum(void *, u16);
+u8 sub_81530DC(u8 a1, u8 *data, u16 size);
+u8 DoReadFlashWholeSection(u8 sector, struct SaveSection *section);
+u16 CalculateChecksum(void *data, u16 size);
+void UpdateSaveAddresses(void);
 u8 HandleSavingData(u8 saveType);
-//u8 TrySavingData(u8 saveType);
-//u8 sub_8125D80(void);
-//bool8 sub_8125DA8(void);
-//u8 sub_8125DDC(void);
-//u8 sub_8125E04(void);
-//u8 sub_8125E2C(void);
-//bool8 sub_8125E6C(void);
-//u8 sub_8125EC8(u8 a1);
-//bool8 unref_sub_8125F4C(struct UnkSaveSection *a1);
-//u8 unref_sub_8125FA0(void);
-//u8 unref_sub_8125FF0(u8 *data, u16 size);
-//u8 unref_sub_8126068(u8 sector, u8 *data, u32 size);
-//u8 unref_sub_8126080(u8 sector, u8 *data);
+u8 TrySavingData(u8 saveType);
+u8 sub_8153380(void);
+bool8 sub_81533AC(void);
+u8 sub_81533E0(void);
+u8 sub_8153408(void);
+u8 sub_8153430(void);
+bool8 sub_8153474(void);
+u8 sub_81534D0(u8 a1);
 u16 sub_815355C(void);
 u8 sub_81534D0(u8);
 u8 sub_8153430(void);
 bool8 sub_8153474(void);
+u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
+u32 sub_8153634(u8 sector, u8* src);
 void sub_8153688(u8 taskId);
 
 #endif // GUARD_SAVE_H

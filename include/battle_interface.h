@@ -15,6 +15,15 @@ enum
     EXP_BAR
 };
 
+enum
+{
+    HP_BAR_EMPTY,
+    HP_BAR_RED,
+    HP_BAR_YELLOW,
+    HP_BAR_GREEN,
+    HP_BAR_FULL,
+};
+
 #define TAG_HEALTHBOX_PLAYER1_TILE      0xD6FF
 #define TAG_HEALTHBOX_PLAYER2_TILE      0xD700
 #define TAG_HEALTHBOX_OPPONENT1_TILE    0xD701
@@ -45,7 +54,7 @@ enum
     HEALTHBOX_SAFARI_BALLS_TEXT
 };
 
-u8 CreateBankHealthboxSprites(u8 bank);
+u8 CreateBattlerHealthboxSprites(u8 bank);
 u8 CreateSafariPlayerHealthboxSprites(void);
 void SetBattleBarStruct(u8 bank, u8 healthboxSpriteId, s32 maxVal, s32 currVal, s32 receivedValue);
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId);
@@ -53,7 +62,7 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId);
 void DestoryHealthboxSprite(u8 healthboxSpriteId);
 void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly);
 void UpdateOamPriorityInAllHealthboxes(u8 priority);
-void SetBankHealthboxSpritePos(u8 bank);
+void InitBattlerHealthboxCoords(u8 bank);
 void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 void SwapHpBarsWithHpText(void);
 u8 CreatePartyStatusSummarySprites(u8 bank, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart);

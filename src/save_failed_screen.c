@@ -9,11 +9,10 @@
 #include "menu.h"
 #include "save.h"
 #include "gba/flash_internal.h"
+#include "text_window.h"
 
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
-
-extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, u8 *str);
 
 extern void (*gGameContinueCallback)(void);
 
@@ -23,9 +22,7 @@ extern const u8 gBirchHelpGfx[];
 extern const u8 gBirchBagTilemap[];
 extern const u8 gBirchGrassTilemap[];
 extern const u16 gBirchBagGrassPal[];
-extern const u16 gUnknown_0850FEFC[];
 extern const u16 gUnknown_0860F074[];
-extern const u32 gUnknown_0850E87C[];
 extern struct SaveSection gSaveDataBuffer;
 
 extern u8 gText_SaveFailedCheckingBackup[];
@@ -156,8 +153,8 @@ static const u8 sClockFrames[8][3] =
     { 5, 1, 0 },
 };
 
-static const u8 gSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
-static const u8 gSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
+static const u8 sSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
+static const u8 sSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
 
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);
@@ -171,12 +168,12 @@ static bool8 WipeSectors(u32);
 // although this is a general text printer, it's only used in this file.
 static void SaveFailedScreenTextPrint(u8 *text, u8 var1, u8 var2)
 {
-    struct TextColor color;
+    u8 color[3];
 
-    color.fgColor = 0;
-    color.bgColor = 15;
-    color.shadowColor = 3;
-    AddTextPrinterParametrized2(gSaveFailedWindowIds[TEXT_WIN_ID], 1, var1 * 8, var2 * 8 + 1, 0, 0, &color, 0, text);
+    color[0] = 0;
+    color[1] = 15;
+    color[2] = 3;
+    AddTextPrinterParameterized2(gSaveFailedWindowIds[TEXT_WIN_ID], 1, var1 * 8, var2 * 8 + 1, 0, 0, color, 0, text);
 }
 
 void DoSaveFailedScreen(u8 saveType)
@@ -223,12 +220,12 @@ static void CB2_SaveFailedScreen(void)
             LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
             LZ77UnCompVram(gBirchBagTilemap, (void *)(VRAM + 0x7000));
             LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x7800));
-            LZ77UnCompVram(gSaveFailedClockGfx, (void *)(VRAM + 0x10020));
+            LZ77UnCompVram(sSaveFailedClockGfx, (void *)(VRAM + 0x10020));
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, gUnknown_085EFD88, 3);
             SetBgTilemapBuffer(0, (void *)&gDecompressionBuffer[0x2000]);
             CpuFill32(0, &gDecompressionBuffer[0x2000], 0x800);
-            LoadBgTiles(0, gUnknown_0850E87C, 0x120, 0x214);
+            LoadBgTiles(0, gTextWindowFrame1_Gfx, 0x120, 0x214);
             InitWindows(gUnknown_085EFD94);
             // AddWindowWithoutTileMap returns a u16/integer, but the info is clobbered into a u8 here resulting in lost info. Bug?
             gSaveFailedWindowIds[TEXT_WIN_ID] = AddWindowWithoutTileMap(gUnknown_085EFD9C);
@@ -240,8 +237,8 @@ static void CB2_SaveFailedScreen(void)
             ResetTasks();
             ResetPaletteFade();
             LoadPalette(gBirchBagGrassPal, 0, 0x40);
-            LoadPalette(gSaveFailedClockPal, 0x100, 0x20);
-            LoadPalette(gUnknown_0850FEFC, 0xE0, 0x20);
+            LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
+            LoadPalette(gTextWindowFrame1_Pal, 0xE0, 0x20);
             LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
             SetWindowBorderStyle(gSaveFailedWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
             SetWindowBorderStyle(gSaveFailedWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);

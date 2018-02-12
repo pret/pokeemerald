@@ -120,10 +120,6 @@ union AffineAnimCmd
     {.jump = {.type = AFFINEANIMCMDTYPE_JUMP, .target = _target}}
 #define AFFINEANIMCMD_END \
     {.type = AFFINEANIMCMDTYPE_END}
-#define AFFINEANIMCMD_LOOP(_count) \
-    {.loop = {.type = AFFINEANIMCMDTYPE_LOOP, .count = _count}}
-#define AFFINEANIMCMD_JUMP(_target) \
-    {.jump = {.type = AFFINEANIMCMDTYPE_JUMP, .target = _target}}
 
 struct AffineAnimState
 {
@@ -195,14 +191,7 @@ struct Sprite
     /*0x2D*/ u8 animLoopCounter;
 
     // general purpose data fields
-    /*0x2E*/ s16 data0;
-    /*0x30*/ s16 data1;
-    /*0x32*/ s16 data2;
-    /*0x34*/ s16 data3;
-    /*0x36*/ s16 data4;
-    /*0x38*/ s16 data5;
-    /*0x3A*/ s16 data6;
-    /*0x3C*/ s16 data7;
+    /*0x2E*/ s16 data[8];
 
     /*0x3E*/ u16 inUse:1;               //1
              u16 coordOffsetEnabled:1;  //2
@@ -244,6 +233,7 @@ extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
 
 extern struct Sprite gSprites[];
+extern struct OamMatrix gOamMatrices[];
 
 void ResetSpriteData(void);
 void AnimateSprites(void);

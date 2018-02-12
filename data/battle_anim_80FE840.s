@@ -16,7 +16,13 @@ gUnknown_08592114:: @ 8592114
     .align 2
 gUnknown_08592118:: @ 8592118
 	spr_template 0x2753, 0x2753, gUnknown_08524944, gUnknown_08592114, NULL, gDummySpriteAffineAnimTable, sub_80FE840
+	
+	.align 2
+gUnknown_08592130:: @ 8592130
 	spr_template 0x2754, 0x2754, gUnknown_08524944, gUnknown_08592114, NULL, gDummySpriteAffineAnimTable, sub_80FE840
+	
+    .align 2
+gUnknown_08592148:: @ 8592148
 	spr_template 0x2751, 0x2751, gUnknown_08524944, gUnknown_08592114, NULL, gDummySpriteAffineAnimTable, sub_80FE840
 
     .align 2

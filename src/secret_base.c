@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "constants/decorations.h"
 #include "malloc.h"
 #include "task.h"
 #include "palette.h"
@@ -8,10 +9,10 @@
 #include "window.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
 #include "menu_indicators.h"
-#include "map_constants.h"
-#include "songs.h"
+#include "constants/maps.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 #include "sound.h"
 #include "overworld.h"
 #include "fieldmap.h"
@@ -31,6 +32,7 @@
 #include "international_string_util.h"
 #include "event_data.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "rom6.h"
 #include "decoration.h"
 #include "link.h"
@@ -89,30 +91,30 @@ const struct {
 };
 
 const u8 gUnknown_0858CFE8[] = {
-    MAP_ID_SECRET_BASE_RED_CAVE1,    0x00, 0x01, 0x03,
-    MAP_ID_SECRET_BASE_RED_CAVE2,    0x00, 0x05, 0x09,
-    MAP_ID_SECRET_BASE_RED_CAVE3,    0x00, 0x01, 0x03,
-    MAP_ID_SECRET_BASE_RED_CAVE4,    0x00, 0x07, 0x0d,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,  0x00, 0x02, 0x03,
-    MAP_ID_SECRET_BASE_BROWN_CAVE2,  0x00, 0x09, 0x02,
-    MAP_ID_SECRET_BASE_BROWN_CAVE3,  0x00, 0x0d, 0x04,
-    MAP_ID_SECRET_BASE_BROWN_CAVE4,  0x00, 0x01, 0x02,
-    MAP_ID_SECRET_BASE_BLUE_CAVE1,   0x00, 0x01, 0x03,
-    MAP_ID_SECRET_BASE_BLUE_CAVE2,   0x00, 0x01, 0x02,
-    MAP_ID_SECRET_BASE_BLUE_CAVE3,   0x00, 0x03, 0x0f,
-    MAP_ID_SECRET_BASE_BLUE_CAVE4,   0x00, 0x03, 0x0e,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 0x00, 0x09, 0x03,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE2, 0x00, 0x08, 0x07,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE3, 0x00, 0x03, 0x06,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE4, 0x00, 0x05, 0x09,
-    MAP_ID_SECRET_BASE_TREE1,        0x00, 0x02, 0x03,
-    MAP_ID_SECRET_BASE_TREE2,        0x00, 0x05, 0x06,
-    MAP_ID_SECRET_BASE_TREE3,        0x00, 0x0f, 0x03,
-    MAP_ID_SECRET_BASE_TREE4,        0x00, 0x04, 0x0a,
-    MAP_ID_SECRET_BASE_SHRUB1,       0x00, 0x03, 0x03,
-    MAP_ID_SECRET_BASE_SHRUB2,       0x00, 0x01, 0x02,
-    MAP_ID_SECRET_BASE_SHRUB3,       0x00, 0x07, 0x08,
-    MAP_ID_SECRET_BASE_SHRUB4,       0x00, 0x09, 0x06
+    MAP_NUM(SECRET_BASE_RED_CAVE1),    0x00, 0x01, 0x03,
+    MAP_NUM(SECRET_BASE_RED_CAVE2),    0x00, 0x05, 0x09,
+    MAP_NUM(SECRET_BASE_RED_CAVE3),    0x00, 0x01, 0x03,
+    MAP_NUM(SECRET_BASE_RED_CAVE4),    0x00, 0x07, 0x0d,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE1),  0x00, 0x02, 0x03,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE2),  0x00, 0x09, 0x02,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE3),  0x00, 0x0d, 0x04,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE4),  0x00, 0x01, 0x02,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE1),   0x00, 0x01, 0x03,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE2),   0x00, 0x01, 0x02,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE3),   0x00, 0x03, 0x0f,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE4),   0x00, 0x03, 0x0e,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE1), 0x00, 0x09, 0x03,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE2), 0x00, 0x08, 0x07,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE3), 0x00, 0x03, 0x06,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE4), 0x00, 0x05, 0x09,
+    MAP_NUM(SECRET_BASE_TREE1),        0x00, 0x02, 0x03,
+    MAP_NUM(SECRET_BASE_TREE2),        0x00, 0x05, 0x06,
+    MAP_NUM(SECRET_BASE_TREE3),        0x00, 0x0f, 0x03,
+    MAP_NUM(SECRET_BASE_TREE4),        0x00, 0x04, 0x0a,
+    MAP_NUM(SECRET_BASE_SHRUB1),       0x00, 0x03, 0x03,
+    MAP_NUM(SECRET_BASE_SHRUB2),       0x00, 0x01, 0x02,
+    MAP_NUM(SECRET_BASE_SHRUB3),       0x00, 0x07, 0x08,
+    MAP_NUM(SECRET_BASE_SHRUB4),       0x00, 0x09, 0x06
 };
 
 const struct MenuAction gUnknown_0858D048[] = {
@@ -175,14 +177,14 @@ void sub_80E8B6C(void)
 {
     u16 i;
 
-    gScriptResult = FALSE;
+    gSpecialVar_Result = FALSE;
     for (i = 0; i < 20; i ++)
     {
         if (sCurSecretBaseId != gSaveBlock1Ptr->secretBases[i].secretBaseId)
         {
             continue;
         }
-        gScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
         VarSet(VAR_0x4054, i);
         break;
     }
@@ -192,11 +194,11 @@ void sub_80E8BC8(void)
 {
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0)
     {
-        gScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
     }
     else
     {
-        gScriptResult = FALSE;
+        gSpecialVar_Result = FALSE;
     }
 }
 
@@ -360,7 +362,7 @@ void sub_80E8F9C(void)
     s8 idx;
 
     idx = sCurSecretBaseId / 10 * 4;
-    warp1_set_2(MAP_GROUP_SECRET_BASE_RED_CAVE1, gUnknown_0858CFE8[idx], gUnknown_0858CFE8[idx + 1]);
+    warp1_set_2(MAP_GROUP(SECRET_BASE_RED_CAVE1), gUnknown_0858CFE8[idx], gUnknown_0858CFE8[idx + 1]);
 }
 
 void sub_80E8FD0(u8 taskId)
@@ -393,7 +395,7 @@ void sub_80E8FD0(u8 taskId)
 void sub_80E9068(void)
 {
     CreateTask(sub_80E8FD0, 0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
@@ -450,12 +452,12 @@ void sub_80E916C(u8 taskId)
 void sub_80E91F8(void)
 {
     CreateTask(sub_80E916C, 0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 bool8 CurrentMapIsSecretBase(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_SECRET_BASE_RED_CAVE1 && (u8)gSaveBlock1Ptr->location.mapNum <= MAP_ID_SECRET_BASE_SHRUB4)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SECRET_BASE_RED_CAVE1) && (u8)gSaveBlock1Ptr->location.mapNum <= MAP_NUM(SECRET_BASE_SHRUB4))
     {
         return TRUE;
     }
@@ -544,22 +546,22 @@ void sub_80E933C(void)
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                 if (MetatileBehavior_IsMB_B5(metatile) == TRUE || MetatileBehavior_IsMB_C3(metatile) == TRUE)
                 {
-                    gScriptResult = gMapHeader.events->mapObjects[objIdx].graphicsId + VAR_0x3F20;
-                    VarSet(gScriptResult, gDecorations[roomDecor[decorIdx]].tiles[0]);
-                    gScriptResult = gMapHeader.events->mapObjects[objIdx].localId;
+                    gSpecialVar_Result = gMapHeader.events->mapObjects[objIdx].graphicsId + VAR_0x3F20;
+                    VarSet(gSpecialVar_Result, gDecorations[roomDecor[decorIdx]].tiles[0]);
+                    gSpecialVar_Result = gMapHeader.events->mapObjects[objIdx].localId;
                     FlagClear(gSpecialVar_0x8004 + 0xAE);
-                    show_sprite(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-                    sub_808EBA8(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-                    sub_808F254(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                    show_sprite(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                    sub_808EBA8(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+                    sub_808F254(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
                     if (CurrentMapIsSecretBase() == TRUE && VarGet(VAR_0x4054) != 0)
                     {
                         if (category == DECORCAT_DOLL)
                         {
-                            sub_808F28C(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_DOLL);
+                            sub_808F28C(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_DOLL);
                         }
                         else if (category == DECORCAT_CUSHION)
                         {
-                            sub_808F28C(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_CUSHION);
+                            sub_808F28C(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_CUSHION);
                         }
                     }
                     gSpecialVar_0x8004 ++;
@@ -608,14 +610,14 @@ void sub_80E9668(struct Coords16 *coords, struct MapEvents *events)
 {
     sub_80E9608(coords, events);
     sub_80E8B6C();
-    ScriptContext1_SetupScript(gUnknown_08275BB7);
+    ScriptContext1_SetupScript(EventScript_275BB7);
 }
 
 bool8 sub_80E9680(void)
 {
     sub_80E8B58();
     sub_80E8B6C();
-    if (gScriptResult == TRUE)
+    if (gSpecialVar_Result == TRUE)
     {
         return FALSE;
     }
@@ -650,18 +652,18 @@ void sub_80E96A4(u8 taskId)
 void sub_80E9728(void)
 {
     CreateTask(sub_80E96A4, 0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 void sub_80E9744(void)
 {
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != sCurSecretBaseId)
     {
-        gScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
     }
     else
     {
-        gScriptResult = FALSE;
+        gSpecialVar_Result = FALSE;
     }
 }
 
@@ -710,237 +712,45 @@ u8 sub_80E98AC(struct Pokemon *pokemon)
     return evTotal / 6;
 }
 
-#ifdef NONMATCHING
-// This function is a meme
 void sub_80E9914(void)
 {
-    u32 zero;
-    u32 *personality;
     u16 partyIdx;
     u16 moveIdx;
     u16 sbPartyIdx;
-    u16 *species;
-    u16 *items;
-    u16 *moves;
-    u8 *levels;
-    u8 *evs;
+    struct SecretBaseParty *party;
 
     sbPartyIdx = 0;
-    personality = gSaveBlock1Ptr->secretBases[0].partyPersonality;
+    party = &gSaveBlock1Ptr->secretBases[0].party;
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0)
     {
-        partyIdx = 0;
-        moves = gSaveBlock1Ptr->secretBases[0].partyMoves;
-        species = gSaveBlock1Ptr->secretBases[0].partySpecies;
-        items = gSaveBlock1Ptr->secretBases[0].partyHeldItems;
-        levels = gSaveBlock1Ptr->secretBases[0].partyLevels;
-        evs = gSaveBlock1Ptr->secretBases[0].partyEVs;
-        zero = 0;
-        for (partyIdx = 0; partyIdx < PARTY_SIZE; partyIdx ++)
+        for (partyIdx = 0; partyIdx < PARTY_SIZE; partyIdx++)
         {
-            for (moveIdx = 0; moveIdx < 4; moveIdx ++)
+            for (moveIdx = 0; moveIdx < 4; moveIdx++)
             {
-                moves[partyIdx * 4 + moveIdx] = zero;
+                party->moves[partyIdx * 4 + moveIdx] = 0;
             }
-            species[partyIdx] = zero;
-            items[partyIdx] = zero;
-            levels[partyIdx] = zero;
-            personality[partyIdx] = zero;
-            evs[partyIdx] = zero;
-            if (GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_EGG))
+            party->species[partyIdx] = 0;
+            party->heldItems[partyIdx] = 0;
+            party->levels[partyIdx] = 0;
+            party->personality[partyIdx] = 0;
+            party->EVs[partyIdx] = 0;
+            if (GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES) != SPECIES_NONE
+                && !GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_EGG))
             {
-                for (moveIdx = 0; moveIdx < 4; moveIdx ++)
+                for (moveIdx = 0; moveIdx < 4; moveIdx++)
                 {
-                    moves[sbPartyIdx * 4 + moveIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_MOVE1 + moveIdx);
+                    party->moves[sbPartyIdx * 4 + moveIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_MOVE1 + moveIdx);
                 }
-                species[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
-                items[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_HELD_ITEM);
-                levels[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_LEVEL);
-                personality[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
-                evs[sbPartyIdx] = sub_80E98AC(&gPlayerParty[partyIdx]);
-                sbPartyIdx ++;
+                party->species[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
+                party->heldItems[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_HELD_ITEM);
+                party->levels[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_LEVEL);
+                party->personality[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
+                party->EVs[sbPartyIdx] = sub_80E98AC(&gPlayerParty[partyIdx]);
+                sbPartyIdx++;
             }
         }
     }
 }
-#else
-__attribute__((naked)) void sub_80E9914(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0x24\n"
-                    "\tmovs r0, 0\n"
-                    "\tmov r10, r0\n"
-                    "\tldr r0, =gSaveBlock1Ptr\n"
-                    "\tldr r1, [r0]\n"
-                    "\tldr r2, =0x00001ad0\n"
-                    "\tadds r2, r1, r2\n"
-                    "\tstr r2, [sp]\n"
-                    "\tldr r3, =0x00001a9c\n"
-                    "\tadds r0, r1, r3\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _080E993A\n"
-                    "\tb _080E9A60\n"
-                    "_080E993A:\n"
-                    "\tmovs r6, 0\n"
-                    "\tldr r7, =0x00001ae8\n"
-                    "\tadds r7, r1, r7\n"
-                    "\tstr r7, [sp, 0x14]\n"
-                    "\tldr r0, =0x00001b18\n"
-                    "\tadds r0, r1, r0\n"
-                    "\tstr r0, [sp, 0xC]\n"
-                    "\tldr r2, =0x00001b24\n"
-                    "\tadds r2, r1, r2\n"
-                    "\tstr r2, [sp, 0x10]\n"
-                    "\tadds r3, 0x94\n"
-                    "\tadds r3, r1, r3\n"
-                    "\tstr r3, [sp, 0x18]\n"
-                    "\tldr r7, =0x00001b36\n"
-                    "\tadds r7, r1, r7\n"
-                    "\tstr r7, [sp, 0x1C]\n"
-                    "\tmov r9, r6\n"
-                    "_080E995C:\n"
-                    "\tmovs r4, 0\n"
-                    "\tlsls r5, r6, 2\n"
-                    "\tlsls r3, r6, 1\n"
-                    "\tldr r0, =gPlayerParty\n"
-                    "\tmov r8, r0\n"
-                    "\tadds r1, r6, 0x1\n"
-                    "\tstr r1, [sp, 0x4]\n"
-                    "\tadds r2, r5, 0\n"
-                    "\tldr r1, [sp, 0x14]\n"
-                    "_080E996E:\n"
-                    "\tadds r0, r2, r4\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r0, r1, r0\n"
-                    "\tmov r7, r9\n"
-                    "\tstrh r7, [r0]\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r4, r0, 16\n"
-                    "\tcmp r4, 0x3\n"
-                    "\tbls _080E996E\n"
-                    "\tldr r1, [sp, 0xC]\n"
-                    "\tadds r0, r1, r3\n"
-                    "\tmov r2, r9\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tldr r7, [sp, 0x10]\n"
-                    "\tadds r0, r7, r3\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tldr r1, [sp, 0x18]\n"
-                    "\tadds r0, r1, r6\n"
-                    "\tmov r2, r9\n"
-                    "\tstrb r2, [r0]\n"
-                    "\tldr r3, [sp]\n"
-                    "\tadds r0, r3, r5\n"
-                    "\tmov r7, r9\n"
-                    "\tstr r7, [r0]\n"
-                    "\tldr r1, [sp, 0x1C]\n"
-                    "\tadds r0, r1, r6\n"
-                    "\tstrb r7, [r0]\n"
-                    "\tmovs r2, 0x64\n"
-                    "\tadds r5, r6, 0\n"
-                    "\tmuls r5, r2\n"
-                    "\tmov r3, r8\n"
-                    "\tadds r4, r5, r3\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0xB\n"
-                    "\tbl GetMonData\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _080E9A54\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x2D\n"
-                    "\tbl GetMonData\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _080E9A54\n"
-                    "\tmovs r4, 0\n"
-                    "\tmov r7, r10\n"
-                    "\tlsls r7, 2\n"
-                    "\tmov r8, r7\n"
-                    "\tmov r0, r10\n"
-                    "\tlsls r7, r0, 1\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstr r0, [sp, 0x8]\n"
-                    "\tldr r2, =gPlayerParty\n"
-                    "_080E99DA:\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tadds r1, 0xD\n"
-                    "\tadds r0, r5, r2\n"
-                    "\tstr r2, [sp, 0x20]\n"
-                    "\tbl GetMonData\n"
-                    "\tmov r3, r8\n"
-                    "\tadds r1, r3, r4\n"
-                    "\tlsls r1, 1\n"
-                    "\tldr r3, [sp, 0x14]\n"
-                    "\tadds r1, r3, r1\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r4, r0, 16\n"
-                    "\tldr r2, [sp, 0x20]\n"
-                    "\tcmp r4, 0x3\n"
-                    "\tbls _080E99DA\n"
-                    "\tmovs r0, 0x64\n"
-                    "\tadds r4, r6, 0\n"
-                    "\tmuls r4, r0\n"
-                    "\tldr r0, =gPlayerParty\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0xB\n"
-                    "\tbl GetMonData\n"
-                    "\tldr r2, [sp, 0xC]\n"
-                    "\tadds r1, r2, r7\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0xC\n"
-                    "\tbl GetMonData\n"
-                    "\tldr r3, [sp, 0x10]\n"
-                    "\tadds r1, r3, r7\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x38\n"
-                    "\tbl GetMonData\n"
-                    "\tldr r1, [sp, 0x18]\n"
-                    "\tadd r1, r10\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0\n"
-                    "\tbl GetMonData\n"
-                    "\tldr r1, [sp]\n"
-                    "\tadd r1, r8\n"
-                    "\tstr r0, [r1]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl sub_80E98AC\n"
-                    "\tldr r1, [sp, 0x1C]\n"
-                    "\tadd r1, r10\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tldr r7, [sp, 0x8]\n"
-                    "\tlsls r0, r7, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tmov r10, r0\n"
-                    "_080E9A54:\n"
-                    "\tldr r1, [sp, 0x4]\n"
-                    "\tlsls r0, r1, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x5\n"
-                    "\tbhi _080E9A60\n"
-                    "\tb _080E995C\n"
-                    "_080E9A60:\n"
-                    "\tadd sp, 0x24\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.pool");
-}
-#endif
 
 void sub_80E9A90(void)
 {
@@ -1016,15 +826,15 @@ void sub_80E9BDC(void)
 {
     if (sub_80E9878(VarGet(VAR_0x4054)) == TRUE)
     {
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     }
     else if (sub_80E9BA8() > 9)
     {
-        gScriptResult = 2;
+        gSpecialVar_Result = 2;
     }
     else
     {
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
     }
 }
 
@@ -1081,13 +891,13 @@ void game_continue(u8 taskId)
         if (sub_80E9878(i))
         {
             sub_80E9780(gUnknown_0203A020->names[count], i);
-            gUnknown_0203A020->items[count].unk_00 = gUnknown_0203A020->names[count];
-            gUnknown_0203A020->items[count].unk_04 = i;
+            gUnknown_0203A020->items[count].name = gUnknown_0203A020->names[count];
+            gUnknown_0203A020->items[count].id = i;
             count ++;
         }
     }
-    gUnknown_0203A020->items[count].unk_00 = gText_Cancel;
-    gUnknown_0203A020->items[count].unk_04 = -2;
+    gUnknown_0203A020->items[count].name = gText_Cancel;
+    gUnknown_0203A020->items[count].id = -2;
     data[0] = count + 1;
     if (data[0] < 8)
     {
@@ -1097,11 +907,11 @@ void game_continue(u8 taskId)
     {
         data[3] = 8;
     }
-    gUnknown_03006310 = gUnknown_0858D07C;
-    gUnknown_03006310.unk_10 = data[6];
-    gUnknown_03006310.unk_0c = data[0];
-    gUnknown_03006310.unk_00 = gUnknown_0203A020->items;
-    gUnknown_03006310.unk_0e = data[3];
+    gMultiuseListMenuTemplate = gUnknown_0858D07C;
+    gMultiuseListMenuTemplate.unk_10 = data[6];
+    gMultiuseListMenuTemplate.totalItems = data[0];
+    gMultiuseListMenuTemplate.items = gUnknown_0203A020->items;
+    gMultiuseListMenuTemplate.maxShowed = data[3];
 }
 
 void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu)
@@ -1118,7 +928,7 @@ void sub_80E9E00(u8 taskId)
 
     data = gTasks[taskId].data;
     SetStandardWindowBorderStyle(data[6], 0);
-    data[5] = ListMenuInit(&gUnknown_03006310, data[2], data[1]);
+    data[5] = ListMenuInit(&gMultiuseListMenuTemplate, data[2], data[1]);
     sub_80E9E44(taskId);
     schedule_bg_copy_tilemap_to_vram(0);
 }
@@ -1137,8 +947,8 @@ void sub_80E9E90(u8 taskId)
     s32 input;
 
     data = gTasks[taskId].data;
-    input = ListMenuHandleInput(data[5]);
-    get_coro_args_x18_x1A(data[5], &data[2], &data[1]);
+    input = ListMenuHandleInputGetItemId(data[5]);
+    sub_81AE860(data[5], &data[2], &data[1]);
     switch (input)
     {
         case -1:
@@ -1282,48 +1092,48 @@ u8 sub_80EA20C(u8 secretBaseRecordId)
     return (gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerId[0] % 5) + (gSaveBlock1Ptr->secretBases[secretBaseRecordId].gender * 5);
 }
 
-const u8 *sub_80EA250(void)
+const u8 *GetSecretBaseTrainerLoseText(void)
 {
     u8 param;
 
     param = sub_80EA20C(VarGet(VAR_0x4054));
     if (param == 0)
     {
-        return gUnknown_08274966;
+        return SecretBase_RedCave1_Text_274966;
     }
     if (param == 1)
     {
-        return gUnknown_08274D13;
+        return SecretBase_RedCave1_Text_274D13;
     }
     if (param == 2)
     {
-        return gUnknown_08274FFE;
+        return SecretBase_RedCave1_Text_274FFE;
     }
     if (param == 3)
     {
-        return gUnknown_08275367;
+        return SecretBase_RedCave1_Text_275367;
     }
     if (param == 4)
     {
-        return gUnknown_082756C7;
+        return SecretBase_RedCave1_Text_2756C7;
     }
     if (param == 5)
     {
-        return gUnknown_08274B24;
+        return SecretBase_RedCave1_Text_274B24;
     }
     if (param == 6)
     {
-        return gUnknown_08274E75;
+        return SecretBase_RedCave1_Text_274E75;
     }
     if (param == 7)
     {
-        return gUnknown_082751E1;
+        return SecretBase_RedCave1_Text_2751E1;
     }
     if (param == 8)
     {
-        return gUnknown_082754F6;
+        return SecretBase_RedCave1_Text_2754F6;
     }
-    return gUnknown_082758CC;
+    return SecretBase_RedCave1_Text_2758CC;
 }
 
 void sub_80EA2E4(void)
@@ -1335,7 +1145,7 @@ void sub_80EA2E4(void)
 
 void sub_80EA30C(void)
 {
-    gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gScriptResult;
+    gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gSpecialVar_Result;
 }
 
 void sub_80EA354(void)
@@ -1353,9 +1163,8 @@ void sub_80EA354(void)
         FlagSet(0x922);
     }
     gSpecialVar_0x8004 = sub_80EA20C(secretBaseRecordId);
-    gScriptResult = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
+    gSpecialVar_Result = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
 }
-
 
 void sub_80EA3E4(u8 taskId)
 {
@@ -1866,7 +1675,7 @@ void sub_80EAF80(void *records, size_t recordSize, u8 linkIdx)
 {
     struct SecretBaseRecordMixer mixers[3];
     u16 i;
-    
+
     if (FlagGet(0x60))
     {
         switch (GetLinkPlayerCount())

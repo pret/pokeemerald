@@ -652,7 +652,7 @@ sub_811A7E4: @ 811A7E4
 _0811A804:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	b _0811A840
 _0811A80E:
 	ldr r0, =gPaletteFade
@@ -1635,7 +1635,7 @@ _0811AF86:
 	thumb_func_start sub_811AF8C
 sub_811AF8C: @ 811AF8C
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1659,7 +1659,7 @@ _0811AFAC:
 	b _0811AFE6
 	.pool
 _0811AFC0:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	ldr r0, =gUnknown_0203A118
 	ldr r0, [r0]
@@ -1684,7 +1684,7 @@ _0811AFE6:
 	thumb_func_start sub_811AFEC
 sub_811AFEC: @ 811AFEC
 	push {r4,lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1709,7 +1709,7 @@ _0811B00C:
 	.pool
 _0811B020:
 	bl sub_811BE9C
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl sub_811B4EC
 	strh r0, [r4]
 	bl sub_811B3E4
@@ -1727,7 +1727,7 @@ _0811B03A:
 	thumb_func_start sub_811B040
 sub_811B040: @ 811B040
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1832,7 +1832,7 @@ sub_811B0E8: @ 811B0E8
 	thumb_func_start sub_811B0F8
 sub_811B0F8: @ 811B0F8
 	push {r4,lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1860,7 +1860,7 @@ _0811B118:
 	b _0811B14A
 	.pool
 _0811B134:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl sub_811B4EC
 	strh r0, [r4]
 	bl sub_811B3E4
@@ -3691,7 +3691,7 @@ sub_811BDF0: @ 811BDF0
 	adds r6, r0, 0
 	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r0, =0x00003b70
 	adds r5, r4, r0
 	adds r0, r5, 0
@@ -3707,17 +3707,17 @@ sub_811BDF0: @ 811BDF0
 	bl TVShowConvertInternationalString
 	movs r0, 0
 	mov r1, sp
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	b _0811BE3C
 	.pool
 _0811BE34:
 	ldr r1, =gText_Lady
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 _0811BE3C:
 	ldr r1, =gText_F700sQuiz
 	adds r0, r6, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	add sp, 0x20
 	pop {r4-r6}
 	pop {r0}
@@ -3966,14 +3966,14 @@ _0811BFE0:
 	b _0811C124
 	.pool
 _0811C044:
-	ldr r1, =gUnknown_08DCBDD0
+	ldr r1, =gEasyChatWindow_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r1, =gUnknown_08DCBF10
+	ldr r1, =gEasyChatWindow_Tilemap
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
@@ -5810,7 +5810,7 @@ sub_811CF04: @ 811CF04
 sub_811CF64: @ 811CF64
 	push {r4,lr}
 	bl ResetPaletteFade
-	ldr r0, =gUnknown_08DCBDB0
+	ldr r0, =gEasyChatMode_Pal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
@@ -6075,7 +6075,7 @@ _0811D19C:
 	b _0811D1BC
 	.pool
 _0811D1A8:
-	ldr r0, =gText_CombineTwoWordsOrPhrases
+	ldr r0, =gText_CombineTwoWordsOrPhrases3
 	str r0, [sp, 0xC]
 	b _0811D1BC
 	.pool

@@ -2,4 +2,4 @@
 	.set POCKET_POKE_BALLS, 0x02
 	.set POCKET_TM_HM,      0x03
 	.set POCKET_BERRIES,    0x04
-	.set POCKET_KEY_ITEMS,  0x05
+	.set BAG_KEYITEMS,  0x05

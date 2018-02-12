@@ -1185,7 +1185,7 @@ sub_80E89F8: @ 80E89F8
 	ldr r1, =0x00003030
 	adds r0, r1
 	adds r1, r5, 0
-	bl sub_806FA9C
+	bl InitDaycareMailRecordMixing
 	ldr r0, =gUnknown_03001148
 	ldr r1, [r0]
 	adds r0, r6, 0
@@ -1228,7 +1228,7 @@ _080E8A78:
 	beq _080E8A90
 	mov r0, r8
 	movs r1, 0xFC
-	bl sub_81DB4DC
+	bl PadNameString
 _080E8A90:
 	ldrb r1, [r7]
 	lsrs r1, 4

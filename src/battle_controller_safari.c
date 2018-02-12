@@ -4,11 +4,12 @@
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "pokemon.h"
 #include "link.h"
 #include "util.h"
 #include "main.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "window.h"
 #include "m4a.h"
@@ -19,27 +20,13 @@
 #include "reshow_battle_screen.h"
 #include "pokeball.h"
 #include "data2.h"
+#include "pokeblock.h"
+#include "item_use.h"
 
-extern u32 gBattleExecBuffer;
-extern u8 gActiveBank;
-extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
-extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
-extern u8 gNoOfAllBanks;
-extern bool8 gDoingBattleAnim;
-extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
-extern void (*gPreBattleCallback1)(void);
-extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
-extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
-extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
+extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern struct SpriteTemplate gUnknown_0202499C;
-extern u16 gScriptItemId;
-extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
-extern u8 gBattleOutcome;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u8 gBankInMenu;
-extern u16 gUnknown_020243FC;
 
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
@@ -66,7 +53,7 @@ static void SafariHandleBallThrowAnim(void);
 static void SafariHandlePause(void);
 static void SafariHandleMoveAnimation(void);
 static void SafariHandlePrintString(void);
-static void SafariHandlePrintStringPlayerOnly(void);
+static void SafariHandlePrintSelectionString(void);
 static void SafariHandleChooseAction(void);
 static void SafariHandleUnknownYesNoBox(void);
 static void SafariHandleChooseMove(void);
@@ -92,7 +79,7 @@ static void SafariHandleCmd39(void);
 static void SafariHandleCmd40(void);
 static void SafariHandleHitAnimation(void);
 static void SafariHandleCmd42(void);
-static void SafariHandleEffectivenessSound(void);
+static void SafariHandlePlaySE(void);
 static void SafariHandlePlayFanfareOrBGM(void);
 static void SafariHandleFaintingCry(void);
 static void SafariHandleIntroSlide(void);
@@ -130,7 +117,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     SafariHandlePause,
     SafariHandleMoveAnimation,
     SafariHandlePrintString,
-    SafariHandlePrintStringPlayerOnly,
+    SafariHandlePrintSelectionString,
     SafariHandleChooseAction,
     SafariHandleUnknownYesNoBox,
     SafariHandleChooseMove,
@@ -156,7 +143,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     SafariHandleCmd40,
     SafariHandleHitAnimation,
     SafariHandleCmd42,
-    SafariHandleEffectivenessSound,
+    SafariHandlePlaySE,
     SafariHandlePlayFanfareOrBGM,
     SafariHandleFaintingCry,
     SafariHandleIntroSlide,
@@ -178,15 +165,15 @@ static void nullsub_114(void)
 
 void SetControllerToSafari(void)
 {
-    gBattleBankFunc[gActiveBank] = SafariBufferRunCommand;
+    gBattlerControllerFuncs[gActiveBattler] = SafariBufferRunCommand;
 }
 
 static void SafariBufferRunCommand(void)
 {
-    if (gBattleExecBuffer & gBitTable[gActiveBank])
+    if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
-        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(sSafariBufferCommands))
-            sSafariBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        if (gBattleBufferA[gActiveBattler][0] < ARRAY_COUNT(sSafariBufferCommands))
+            sSafariBufferCommands[gBattleBufferA[gActiveBattler][0]]();
         else
             SafariBufferExecCompleted();
     }
@@ -198,68 +185,68 @@ static void HandleInputChooseAction(void)
     {
         PlaySE(SE_SELECT);
 
-        switch (gActionSelectionCursor[gActiveBank])
+        switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0:
-            EmitTwoReturnValues(1, ACTION_SAFARI_ZONE_BALL, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BALL, 0);
             break;
         case 1:
-            EmitTwoReturnValues(1, ACTION_POKEBLOCK_CASE, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_POKEBLOCK, 0);
             break;
         case 2:
-            EmitTwoReturnValues(1, ACTION_GO_NEAR, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_GO_NEAR, 0);
             break;
         case 3:
-            EmitTwoReturnValues(1, ACTION_SAFARI_ZONE_RUN, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_RUN, 0);
             break;
         }
         SafariBufferExecCompleted();
     }
     else if (gMain.newKeys & DPAD_LEFT)
     {
-        if (gActionSelectionCursor[gActiveBank] & 1)
+        if (gActionSelectionCursor[gActiveBattler] & 1)
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBank]);
-            gActionSelectionCursor[gActiveBank] ^= 1;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBank], 0);
+            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] ^= 1;
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_RIGHT)
     {
-        if (!(gActionSelectionCursor[gActiveBank] & 1))
+        if (!(gActionSelectionCursor[gActiveBattler] & 1))
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBank]);
-            gActionSelectionCursor[gActiveBank] ^= 1;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBank], 0);
+            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] ^= 1;
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_UP)
     {
-        if (gActionSelectionCursor[gActiveBank] & 2)
+        if (gActionSelectionCursor[gActiveBattler] & 2)
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBank]);
-            gActionSelectionCursor[gActiveBank] ^= 2;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBank], 0);
+            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] ^= 2;
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        if (!(gActionSelectionCursor[gActiveBank] & 2))
+        if (!(gActionSelectionCursor[gActiveBattler] & 2))
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBank]);
-            gActionSelectionCursor[gActiveBank] ^= 2;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBank], 0);
+            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] ^= 2;
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
 }
 
 static void CompleteOnBankSpriteCallbackDummy(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         SafariBufferExecCompleted();
 }
 
@@ -271,7 +258,7 @@ static void CompleteOnInactiveTextPrinter(void)
 
 static void CompleteOnHealthboxSpriteCallbackDummy(void)
 {
-    if (gSprites[gHealthBoxesIds[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         SafariBufferExecCompleted();
 }
 
@@ -287,17 +274,17 @@ static void sub_81595E4(void)
 
 static void CompleteOnSpecialAnimDone(void)
 {
-    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
+    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
         SafariBufferExecCompleted();
 }
 
-static void OpenPokeblockCase(void)
+static void SafariOpenPokeblockCase(void)
 {
     if (!gPaletteFade.active)
     {
-        gBattleBankFunc[gActiveBank] = CompleteWhenChosePokeblock;
+        gBattlerControllerFuncs[gActiveBattler] = CompleteWhenChosePokeblock;
         FreeAllWindowBuffers();
-        sub_81358F4();
+        OpenPokeblockCaseInBattle();
     }
 }
 
@@ -305,36 +292,36 @@ static void CompleteWhenChosePokeblock(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        EmitOneReturnValue(1, gScriptItemId);
+        BtlController_EmitOneReturnValue(1, gSpecialVar_ItemId);
         SafariBufferExecCompleted();
     }
 }
 
 static void CompleteOnFinishedBattleAnimation(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animFromTableActive)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
         SafariBufferExecCompleted();
 }
 
 static void SafariBufferExecCompleted(void)
 {
-    gBattleBankFunc[gActiveBank] = SafariBufferRunCommand;
+    gBattlerControllerFuncs[gActiveBattler] = SafariBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         u8 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBank][0] = CONTROLLER_TERMINATOR_NOP;
+        gBattleBufferA[gActiveBattler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
     {
-        gBattleExecBuffer &= ~gBitTable[gActiveBank];
+        gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
     }
 }
 
 static void CompleteOnFinishedStatusAnimation(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].statusAnimActive)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
         SafariBufferExecCompleted();
 }
 
@@ -375,18 +362,18 @@ static void SafariHandleReturnMonToBall(void)
 
 static void SafariHandleDrawTrainerPic(void)
 {
-    DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, gActiveBank);
-    sub_806A12C(gSaveBlock2Ptr->playerGender, GetBankIdentity(gActiveBank));
-    gBankSpriteIds[gActiveBank] = CreateSprite(
+    DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, gActiveBattler);
+    sub_806A12C(gSaveBlock2Ptr->playerGender, GetBattlerPosition(gActiveBattler));
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_0202499C,
       80,
       (8 - gTrainerBackPicCoords[gSaveBlock2Ptr->playerGender].coords) * 4 + 80,
       30);
-    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
-    gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
-    gSprites[gBankSpriteIds[gActiveBank]].data0 = -2;
-    gSprites[gBankSpriteIds[gActiveBank]].callback = sub_805D7AC;
-    gBattleBankFunc[gActiveBank] = CompleteOnBankSpriteCallbackDummy;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_805D7AC;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
 }
 
 static void SafariHandleTrainerSlide(void)
@@ -413,18 +400,18 @@ static void SafariHandleSuccessBallThrowAnim(void)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    DoSpecialBattleAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
-    gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
 }
 
 static void SafariHandleBallThrowAnim(void)
 {
-    u8 ballThrowCaseId = gBattleBufferA[gActiveBank][1];
+    u8 ballThrowCaseId = gBattleBufferA[gActiveBattler][1];
 
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    DoSpecialBattleAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
-    gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
 }
 
 static void SafariHandlePause(void)
@@ -443,15 +430,15 @@ static void SafariHandlePrintString(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    stringId = (u16*)(&gBattleBufferA[gActiveBank][2]);
+    stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
-    gBattleBankFunc[gActiveBank] = CompleteOnInactiveTextPrinter;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
-static void SafariHandlePrintStringPlayerOnly(void)
+static void SafariHandlePrintSelectionString(void)
 {
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         SafariHandlePrintString();
     else
         SafariBufferExecCompleted();
@@ -463,7 +450,7 @@ static void HandleChooseActionAfterDma3(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 160;
-        gBattleBankFunc[gActiveBank] = HandleInputChooseAction;
+        gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseAction;
     }
 }
 
@@ -471,13 +458,13 @@ static void SafariHandleChooseAction(void)
 {
     s32 i;
 
-    gBattleBankFunc[gActiveBank] = HandleChooseActionAfterDma3;
+    gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattleHandleAddTextPrinter(gText_SafariZoneMenu, 2);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
 
-    ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBank], 0);
+    ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo2);
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 1);
 }
@@ -497,8 +484,8 @@ static void SafariHandleChooseItem(void)
     s32 i;
 
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-    gBattleBankFunc[gActiveBank] = OpenPokeblockCase;
-    gBankInMenu = gActiveBank;
+    gBattlerControllerFuncs[gActiveBattler] = SafariOpenPokeblockCase;
+    gBattlerInMenuId = gActiveBattler;
 }
 
 static void SafariHandleChoosePokemon(void)
@@ -523,7 +510,7 @@ static void SafariHandleExpUpdate(void)
 
 static void SafariHandleStatusIconUpdate(void)
 {
-    UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], HEALTHBOX_SAFARI_BALLS_TEXT);
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_BALLS_TEXT);
     SafariBufferExecCompleted();
 }
 
@@ -607,29 +594,29 @@ static void SafariHandleCmd42(void)
     SafariBufferExecCompleted();
 }
 
-static void SafariHandleEffectivenessSound(void)
+static void SafariHandlePlaySE(void)
 {
     s8 pan;
 
-    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         pan = PAN_SIDE_PLAYER;
     else
         pan = PAN_SIDE_OPPONENT;
 
-    PlaySE12WithPanning(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8), pan);
+    PlaySE12WithPanning(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8), pan);
     SafariBufferExecCompleted();
 }
 
 static void SafariHandlePlayFanfareOrBGM(void)
 {
-    if (gBattleBufferA[gActiveBank][3])
+    if (gBattleBufferA[gActiveBattler][3])
     {
-        BattleMusicStop();
-        PlayBGM(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
+        BattleStopLowHpSound();
+        PlayBGM(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
     }
     else
     {
-        PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
+        PlayFanfare(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
     }
 
     SafariBufferExecCompleted();
@@ -637,7 +624,7 @@ static void SafariHandlePlayFanfareOrBGM(void)
 
 static void SafariHandleFaintingCry(void)
 {
-    u16 species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
+    u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
     PlayCry1(species, 25);
     SafariBufferExecCompleted();
@@ -645,17 +632,17 @@ static void SafariHandleFaintingCry(void)
 
 static void SafariHandleIntroSlide(void)
 {
-    HandleIntroSlide(gBattleBufferA[gActiveBank][1]);
-    gUnknown_020243FC |= 1;
+    HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
+    gIntroSlideFlags |= 1;
     SafariBufferExecCompleted();
 }
 
 static void SafariHandleIntroTrainerBallThrow(void)
 {
-    UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], HEALTHBOX_SAFARI_ALL_TEXT);
-    sub_8076918(gActiveBank);
-    SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBank]);
-    gBattleBankFunc[gActiveBank] = CompleteOnHealthboxSpriteCallbackDummy;
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_ALL_TEXT);
+    sub_8076918(gActiveBattler);
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthboxSpriteCallbackDummy;
 }
 
 static void SafariHandleDrawPartyStatusSummary(void)
@@ -680,13 +667,13 @@ static void SafariHandleSpriteInvisibility(void)
 
 static void SafariHandleBattleAnimation(void)
 {
-    u8 animationId = gBattleBufferA[gActiveBank][1];
-    u16 argument = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+    u8 animationId = gBattleBufferA[gActiveBattler][1];
+    u16 argument = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
-    if (DoBattleAnimationFromTable(gActiveBank, gActiveBank, gActiveBank, animationId, argument))
+    if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
         SafariBufferExecCompleted();
     else
-        gBattleBankFunc[gActiveBank] = CompleteOnFinishedBattleAnimation;
+        gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
 }
 
 static void SafariHandleLinkStandbyMsg(void)
@@ -701,12 +688,12 @@ static void SafariHandleResetActionMoveSelection(void)
 
 static void SafariHandleCmd55(void)
 {
-    gBattleOutcome = gBattleBufferA[gActiveBank][1];
+    gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
     SafariBufferExecCompleted();
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_WILD))
-        gBattleBankFunc[gActiveBank] = sub_81595E4;
+        gBattlerControllerFuncs[gActiveBattler] = sub_81595E4;
 }
 
 static void nullsub_115(void)

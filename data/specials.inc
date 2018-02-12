@@ -1,13 +1,14 @@
 .macro def_special ptr
+.global SPECIAL_\ptr
 .set SPECIAL_\ptr, __special__
 .set __special__, __special__ + 1
-    .4byte \ptr
-    .endm
+	.4byte \ptr
+	.endm
 
 .set __special__, 0
-        .align 2
+		.align 2
 gSpecials:: @ 81DBA64
-	def_special sp000_heal_pokemon
+	def_special HealPlayerParty
 	def_special sub_809D2BC
 	def_special sub_80AF948
 	def_special sub_80AF9F8
@@ -39,13 +40,13 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B2E4C
 	def_special sub_80B2E74
 	def_special sub_80B2EA8
-	def_special sub_80097E8
+	def_special CloseLink
 	def_special sub_80B3968
 	def_special sub_80B3924
 	def_special nullsub_37
 	def_special sub_80B3254
 	def_special sub_80B2FD8
-	def_special sub_8138240
+	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerFieldObject
 	def_special copy_player_party_to_sav1
 	def_special copy_player_party_from_sav1
@@ -61,17 +62,17 @@ gSpecials:: @ 81DBA64
 	def_special FieldObjectInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
-	def_special sub_80B170C
-	def_special sub_80B1A14
-	def_special special_trainer_unable_to_battle
-	def_special check_trainer_flag
-	def_special sub_80B45AC
+	def_special GetTrainerBattleMode
+	def_special ShowTrainerIntroSpeech
+	def_special ShowTrainerCantBattleSpeech
+	def_special GetTrainerFlag
+	def_special EndTrainerApproach
 	def_special SetUpTrainerEncounterMusic
-	def_special sub_80B226C
-	def_special sub_80B22A0
-	def_special sub_80B19EC
+	def_special ShouldTryRematchBattle
+	def_special IsTrainerReadyForRematch
+	def_special BattleSetup_StartRematchBattle
 	def_special sub_80C7578
-	def_special sub_80F92F8
+	def_special HasEnoughMonsForDoubleBattle
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
@@ -142,36 +143,36 @@ gSpecials:: @ 81DBA64
 	def_special sub_8122A30
 	def_special sub_80D6EDC
 	def_special CalculatePlayerPartyCount
-	def_special sub_80C7008
-	def_special sub_80C70AC
+	def_special CountPartyNonEggMons
+	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special sub_80F88E8
 	def_special sub_80F88DC
 	def_special sub_80F8864
 	def_special sub_80F8940
 	def_special ShowContestWinner
-	def_special sub_8138540
-	def_special sub_81384F0
-	def_special sub_8138AC0
+	def_special MauvilleGymSpecial2
+	def_special MauvilleGymSpecial1
+	def_special ShowFieldMessageStringVar4
 	def_special DrawWholeMapView
-	def_special sub_8138AD0
-	def_special sub_8138750
-	def_special sub_81388E4
-	def_special sub_8138AA4
-	def_special sub_8138AF0
-	def_special sub_8138B10
-	def_special sub_8138B48
-	def_special sub_8138BC8
-	def_special sub_8138B8C
+	def_special StorePlayerCoordsInVars
+	def_special MauvilleGymSpecial3
+	def_special PetalburgGymSpecial1
+	def_special PetalburgGymSpecial2
+	def_special GetPlayerTrainerIdOnesDigit
+	def_special GetPlayerBigGuyGirlString
+	def_special GetRivalSonDaughterString
+	def_special SetFlagInVar
+	def_special CableCarWarp
 	def_special sub_814FC9C
-	def_special sub_8085784
-	def_special Special_StartWallClock
+	def_special Overworld_PlaySpecialMapMusic
+	def_special StartWallClock
 	def_special Special_ViewWallClock
-	def_special sub_80B1138
-	def_special sub_80B086C
+	def_special ChooseStarter
+	def_special StartWallyTutorialBattle
 	def_special ChangePokemonNickname
 	def_special sub_81B94B0
-	def_special sub_8136EF4
-	def_special sub_807FA80
+	def_special GetFirstFreePokeblockSlot
+	def_special DoBerryBlending
 	def_special sub_8142BC8
 	def_special sub_813BD60
 	def_special sub_813BCA8
@@ -181,7 +182,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813BF60
 	def_special sub_813BA60
 	def_special sub_813BF7C
-	def_special rock_smash_wild_pokemon_encounter
+	def_special RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
 	def_special GabbyAndTyAfterInterview
 	def_special GabbyAndTyBeforeInterview
@@ -191,18 +192,18 @@ gSpecials:: @ 81DBA64
 	def_special GabbyAndTyGetLastBattleTrivia
 	def_special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	def_special sub_8138B80
-	def_special sp0B5_daycare
-	def_special sp0B6_daycare
-	def_special sub_8070728
-	def_special sp0B8_daycare
-	def_special sp0B9_daycare_relationship_comment
-	def_special sub_8070C58
-	def_special daycare_send_selected_pokemon
-	def_special sub_8071330
-	def_special sub_80712C0
-	def_special sub_806FF30
-	def_special sub_806FED8
-	def_special sub_806FDC4
+	def_special GetDaycareMonNicknames
+	def_special GetDaycareState
+	def_special RejectEggFromDayCare
+	def_special GiveEggFromDaycare
+	def_special SetDaycareCompatibilityString
+	def_special GetSelectedMonNickAndSpecies
+	def_special StoreSelectedPokemonInDaycare
+	def_special ChooseSendDaycareMon
+	def_special ShowDaycareLevelMenu
+	def_special GetNumLevelsGainedFromDaycare
+	def_special GetDaycareCost
+	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8071614
@@ -213,34 +214,34 @@ gSpecials:: @ 81DBA64
 	def_special sp0C8_whiteout_maybe
 	def_special sub_80FBE90
 	def_special sub_80FBED0
-	def_special sub_8137F90
-	def_special sub_8137FB0
+	def_special SetSSTidalFlag
+	def_special ResetSSTidalFlag
 	def_special EnterSafariMode
 	def_special ExitSafariMode
 	def_special GetPokeblockFeederInFront
-	def_special sub_8135908
-	def_special sub_813793C
-	def_special sub_8137988
-	def_special sub_8137A0C
-	def_special sub_8137A4C
-	def_special sub_8137C10
-	def_special sp0D9_ComputerRelated
-	def_special sub_8138E20
+	def_special OpenPokeblockCaseOnFeeder
+	def_special IsMirageIslandPresent
+	def_special UpdateShoalTideFlag
+	def_special InitBirchState
+	def_special ScriptGetPokedexInfo
+	def_special ShowPokedexRatingMessage
+	def_special DoPCTurnOnEffect
+	def_special DoPCTurnOffEffect
 	def_special sub_8139994
-	def_special sub_8138EC0
-	def_special sub_8138FAC
+	def_special DoLotteryCornerComputerEffect
+	def_special EndLotteryCornerComputerEffect
 	def_special sub_81B951C
 	def_special sub_81B968C
 	def_special sub_81B9770
 	def_special sub_81B9718
 	def_special sub_81B96D0
 	def_special sub_8160638
-	def_special sub_8137EFC
-	def_special sub_8137D0C
-	def_special sp0E3_walkrun_bitfield_interpretation
-	def_special sub_8137E6C
-	def_special sub_8137F44
-	def_special sub_8138C04
+	def_special GetRecordedCyclingRoadResults
+	def_special Special_BeginCyclingRoadChallenge
+	def_special GetPlayerAvatarBike
+	def_special FinishCyclingRoadChallenge
+	def_special UpdateCyclingRoadState
+	def_special GetLeadMonFriendshipScore
 	def_special sub_81A1780
 	def_special sub_8161F74
 	def_special sub_818E9AC
@@ -256,44 +257,44 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B9B80
 	def_special sub_81B9D08
 	def_special sub_80F9490
-	def_special sub_81652B4
+	def_special ValidateEReaderTrainer
 	def_special sub_8139228
 	def_special sub_80F94E8
 	def_special sub_816AE58
 	def_special sub_816AE98
-	def_special sub_8138C94
+	def_special FieldShowRegionMap
 	def_special sub_807E73C
 	def_special sub_807EA10
 	def_special sub_807F0E4
 	def_special sub_807E9D4
-	def_special sub_8138BDC
+	def_special GetWeekCount
 	def_special RetrieveLotteryNumber
 	def_special PickLotteryCornerTicket
 	def_special ShowBerryBlenderRecordWindow
-	def_special sub_8138FEC
-	def_special sub_8138FD4
-	def_special sp109_CreatePCMenu
-	def_special sub_8137C28
-	def_special sub_8137CB4
-	def_special sub_8139004
-	def_special sub_8139030
-	def_special sub_813905C
-	def_special sub_8139088
-	def_special sub_81390B4
+	def_special ResetTrickHouseEndRoomFlag
+	def_special SetTrickHouseEndRoomFlag
+	def_special ScrSpecial_CreatePCMenu
+	def_special AccessHallOfFamePC
+	def_special Special_ShowDiploma
+	def_special CheckLeadMonCool
+	def_special CheckLeadMonBeauty
+	def_special CheckLeadMonCute
+	def_special CheckLeadMonSmart
+	def_special CheckLeadMonTough
 	def_special sub_80FB7A4
 	def_special DoSoftReset
-	def_special sub_8137734
+	def_special GameClear
 	def_special sub_8139A78
 	def_special nullsub_55
 	def_special SpawnScriptFieldObject
 	def_special RemoveScriptFieldObject
-	def_special sub_81391D0
-	def_special sub_8139200
+	def_special GetPokeblockNameByMonNature
+	def_special GetSecretBaseNearbyMapName
 	def_special CheckRelicanthWailord
 	def_special ShouldDoBrailleStrengthEffectOld
 	def_special sub_80B0534
 	def_special sub_80B058C
-	def_special sub_81379F8
+	def_special WaitWeather
 	def_special sub_8139238
 	def_special sub_8139248
 	def_special player_get_direction_lower_nybble
@@ -301,28 +302,28 @@ gSpecials:: @ 81DBA64
 	def_special sub_81392D4
 	def_special sub_81392F8
 	def_special sub_8139320
-	def_special sub_8139348
-	def_special sub_8139370
-	def_special sub_81393C8
+	def_special LeadMonHasEffortRibbon
+	def_special GiveLeadMonEffortRibbon
+	def_special Special_AreLeadMonEVsMaxedOut
 	def_special sub_8098574
 	def_special sub_809859C
 	def_special InitRoamer
 	def_special sub_81393FC
-	def_special sub_81390E0
+	def_special IsGrassTypeInParty
 	def_special sub_80AFC60
-	def_special sub_813946C
-	def_special sub_81394D8
+	def_special PutZigzagoonInPlayerParty
+	def_special IsStarterInParty
 	def_special sub_80E980C
-	def_special sub_8139530
+	def_special ScriptCheckFreePokemonStorageSpace
 	def_special DoSealedChamberShakingEffect1
 	def_special sub_8139B60
 	def_special sub_80FAC78
-	def_special sub_8139540
+	def_special IsPokerusInParty
 	def_special sub_809E1C8
 	def_special sub_8139560
-	def_special sub_80B0A18
-	def_special sub_80B0934
-	def_special sub_80B0A74
+	def_special StartGroudonKyogreBattle
+	def_special BattleSetup_StartLegendaryBattle
+	def_special StartRegiBattle
 	def_special sub_80B16D8
 	def_special DoSealedChamberShakingEffect2
 	def_special sub_8139634
@@ -332,11 +333,11 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F8D28
 	def_special sub_80F8EB8
 	def_special sub_8162794
-	def_special sub_80B08EC
-	def_special sub_8139648
-	def_special sub_8139668
+	def_special BattleSetup_StartLatiBattle
+	def_special SetRoute119Weather
+	def_special SetRoute123Weather
 	def_special sub_80F8FA0
-	def_special sub_81396E0
+	def_special ScriptGetPartyMonSpecies
 	def_special sub_81B98DC
 	def_special nullsub_54
 	def_special sub_80E9B70
@@ -415,7 +416,7 @@ gSpecials:: @ 81DBA64
 	def_special PutLilycoveContestLadyShowOnTheAir
 	def_special sub_813B880
 	def_special sub_81A085C
-	def_special CheckIfMultipleTrainersWantBattle
+	def_special ShouldTryGetTrainerScript
 	def_special AddMapNamePopUpWindowTask
 	def_special AddMapNamePopUpWindowTask
 	def_special sub_81BE994
@@ -534,4 +535,3 @@ gSpecials:: @ 81DBA64
 	def_special sub_813C5A0
 	def_special sub_8139C10
 	def_special sub_80B3BC4
-

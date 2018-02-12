@@ -62,7 +62,7 @@ _080983E2:
 	thumb_func_start ScriptFreezeMapObjects
 ScriptFreezeMapObjects: @ 80983E8
 	push {lr}
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r0, =sub_80983A4
 	movs r1, 0x50
 	bl CreateTask
@@ -109,7 +109,7 @@ _0809842A:
 	cmp r0, 0
 	blt _08098452
 	adds r0, r1, 0
-	bl sub_8097404
+	bl FreezeMapObject
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 _08098452:
@@ -154,7 +154,7 @@ LockSelectedMapObject: @ 80984A0
 	push {r4,r5,lr}
 	ldr r4, =gSelectedMapObject
 	ldrb r0, [r4]
-	bl sub_80974D0
+	bl FreezeMapObjectsExceptOne
 	ldr r0, =sub_8098400
 	movs r1, 0x50
 	bl CreateTask
@@ -171,7 +171,7 @@ LockSelectedMapObject: @ 80984A0
 	cmp r0, 0
 	blt _080984DE
 	adds r0, r1, 0
-	bl sub_8097404
+	bl FreezeMapObject
 	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
@@ -256,7 +256,7 @@ sub_8098574: @ 8098574
 	lsls r0, 2
 	ldr r1, =gMapObjects
 	adds r0, r1
-	ldr r1, =gScriptFacing
+	ldr r1, =gSpecialVar_Facing
 	ldrb r1, [r1]
 	bl FieldObjectFaceOppositeDirection
 	pop {r0}
@@ -317,7 +317,7 @@ _080985E8:
 	cmp r0, 0
 	blt _0809860C
 	adds r0, r1, 0
-	bl sub_8097404
+	bl FreezeMapObject
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 _0809860C:
@@ -345,15 +345,15 @@ sub_8098630: @ 8098630
 	mov r6, r8
 	push {r6,r7}
 	movs r0, 0
-	bl sub_80B47E0
+	bl GetChosenApproachingTrainerMapObjectId
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030060A8
+	ldr r0, =gNoOfApproachingTrainers
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080986E0
 	movs r0, 0x1
-	bl sub_80B47E0
+	bl GetChosenApproachingTrainerMapObjectId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
@@ -385,7 +385,7 @@ sub_8098630: @ 8098630
 	cmp r0, 0
 	blt _0809869A
 	adds r0, r1, 0
-	bl sub_8097404
+	bl FreezeMapObject
 	movs r0, 0x1
 	strh r0, [r6, 0xA]
 _0809869A:
@@ -410,14 +410,14 @@ _0809869A:
 	cmp r0, 0
 	blt _0809871A
 	adds r0, r1, 0
-	bl sub_8097404
+	bl FreezeMapObject
 	movs r0, 0x1
 	strh r0, [r4, 0xA]
 	b _0809871A
 	.pool
 _080986E0:
 	adds r0, r4, 0
-	bl sub_80974D0
+	bl FreezeMapObjectsExceptOne
 	ldr r0, =sub_80985BC
 	movs r1, 0x50
 	bl CreateTask
@@ -439,7 +439,7 @@ _080986E0:
 	cmp r0, 0
 	blt _0809871A
 	adds r0, r1, 0
-	bl sub_8097404
+	bl FreezeMapObject
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 _0809871A:

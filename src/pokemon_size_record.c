@@ -1,7 +1,7 @@
 #include "global.h"
 #include "pokemon_size_record.h"
 #include "event_data.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "text.h"
 #include "pokemon.h"
@@ -109,13 +109,13 @@ static void FormatMonSizeRecord(u8 *string, u32 size)
 
 static u8 CompareMonSize(u16 species, u16 *sizeRecord)
 {
-    if (gScriptResult == 0xFF)
+    if (gSpecialVar_Result == 0xFF)
     {
         return 0;
     }
     else
     {
-        struct Pokemon *pkmn = &gPlayerParty[gScriptResult];
+        struct Pokemon *pkmn = &gPlayerParty[gSpecialVar_Result];
 
         if (GetMonData(pkmn, MON_DATA_IS_EGG) == TRUE || GetMonData(pkmn, MON_DATA_SPECIES) != species)
         {
@@ -173,7 +173,7 @@ void CompareSeedotSize(void)
 {
     u16 *sizeRecord = GetVarPointer(VAR_SEEDOT_SIZE_RECORD);
 
-    gScriptResult = CompareMonSize(SPECIES_SEEDOT, sizeRecord);
+    gSpecialVar_Result = CompareMonSize(SPECIES_SEEDOT, sizeRecord);
 }
 
 void InitLotadSizeRecord(void)
@@ -192,7 +192,7 @@ void CompareLotadSize(void)
 {
     u16 *sizeRecord = GetVarPointer(VAR_LOTAD_SIZE_RECORD);
 
-    gScriptResult = CompareMonSize(SPECIES_LOTAD, sizeRecord);
+    gSpecialVar_Result = CompareMonSize(SPECIES_LOTAD, sizeRecord);
 }
 
 void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
@@ -217,6 +217,6 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
             }
         }
         if (gotRibbon)
-            FlagSet(SYS_RIBBON_GET);
+            FlagSet(FLAG_SYS_RIBBON_GET);
     }
 }

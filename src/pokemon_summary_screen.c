@@ -3,22 +3,24 @@
 #include "bg.h"
 #include "decompress.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "malloc.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "palette.h"
 #include "pokemon.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sprite.h"
+#include "unk_text_util.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "window.h"
+#include "event_data.h"
 
 struct ContestMove
 {
@@ -35,25 +37,22 @@ struct ContestEffect
     u8 jam;
 };
 
-
-
 extern struct UnkSummaryStruct* gUnknown_0203CF1C;
 extern struct BgTemplate gUnknown_0861CBB4;
 extern u8 gUnknown_0203CF20;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern s8 gUnknown_0861CC1C[];
 extern u8 gUnknown_08329D22[];
 extern u8 gUnknown_0203CF21;
-extern u16 gSpecialVar_0x8005;
 extern struct UnkStruct_61CC04 gUnknown_0861CC04;
 extern struct UnkStruct_61CC04 gUnknown_0861CC10;
 extern struct UnkStruct_61CC04 gUnknown_0861CBEC;
 extern struct UnkStruct_61CC04 gUnknown_0861CBF8;
-extern u16 gUnknown_08DC3CD4[];
+extern u16 gSummaryScreenWindow_Tilemap[];
 extern struct ContestMove gContestMoves[];
 extern struct ContestEffect gContestEffects[];
 extern struct WindowTemplate gUnknown_0861CC24;
-extern struct TextColor gUnknown_0861CD2C[];
+extern u8 gUnknown_0861CD2C[][3];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern u8 gText_MaleSymbol[];
 extern u8 gText_FemaleSymbol[];
@@ -72,9 +71,9 @@ extern void do_scheduled_bg_tilemap_copies_to_vram(void);
 extern u8 sub_81221EC();
 extern u8 sub_81221AC();
 extern void SetVBlankHBlankCallbacksToNull();
-extern void sub_8121DA0();
+extern void ResetVramOamAndBgCntRegs();
 extern void clear_scheduled_bg_copies_to_vram();
-extern void remove_some_task();
+extern void ScanlineEffect_Stop();
 extern void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable);
 extern void ShowBg(u8 a);
 extern void SetGpuReg(u8 regOffset, u16 value);
@@ -92,12 +91,11 @@ extern struct CompressedSpriteSheet gUnknown_0861D074;
 extern struct CompressedSpriteSheet gUnknown_0861D0F8;
 extern struct CompressedSpritePalette gUnknown_0861D100;
 extern struct CompressedSpritePalette gUnknown_0861D07C;
-extern u8 gUnknown_08D97B84;
+extern u8 gMoveTypes_Pal;
 extern u8 gUnknown_08D97D0C;
 extern void reset_temp_tile_data_buffers();
 extern void decompress_and_copy_tile_data_to_vram(u8 a, void* tiledata, u8 b, u8 c, u8 d);
 extern u8 free_temp_tile_data_buffers_if_possible();
-extern void sub_8069004(struct BoxPokemon* a, void* b);
 extern void sub_81C1E20(u8 taskId);
 extern u8 *GetMonNickname(struct Pokemon *mon, u8 *dest);
 extern u16 SpeciesToPokedexNum(u16 species);
@@ -162,14 +160,12 @@ extern struct BattleMove gBattleMoves[];
 
 extern u32 ChangeBgX(u8 bg, u32 value, u8 op);
 extern void sub_8199C30(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f);
-extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor* colors, s8 speed, u8 *str);
+extern void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const u8* colors, s8 speed, u8 *str);
 extern s32 GetStringCenterAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
 extern s32 GetStringRightAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
 extern bool8 sub_81A6BF4();
 extern bool8 sub_81B9E94();
-extern void sub_81AFBF0();
-extern u8 sub_81AFC0C(u8 a, u8 *b);
-extern void sub_81AFC28(u8 *a, u8 *b);
+extern void UnkTextUtil_Reset();
 extern void sub_8124610(u8 *a, u8 b);
 extern int GetPlayerIDAsU32();
 extern u8 GetCurrentPpToMaxPpState(u8 a, u8 b);
@@ -195,7 +191,7 @@ void sub_81C4A88();
 void sub_81C4280();
 void sub_81C0510(u8 taskId);
 void sub_81C171C(u8 taskId);
-void sub_8121E10();
+void ResetAllBgsCoordinates();
 u8 sub_81B205C(struct Pokemon* a);
 void sub_81C1DA4(u16 a, s16 b);
 void sub_81C1EFC(u16 a, s16 b, u16 c);
@@ -452,12 +448,12 @@ bool8 sub_81BFB10(void)
     {
     case 0:
         SetVBlankHBlankCallbacksToNull();
-        sub_8121DA0();
+        ResetVramOamAndBgCntRegs();
         clear_scheduled_bg_copies_to_vram();
         gMain.state++;
         break;
     case 1:
-        remove_some_task();
+        ScanlineEffect_Stop();
         gMain.state++;
         break;
     case 2:
@@ -580,7 +576,7 @@ void sub_81BFE24()
     SetBgTilemapBuffer(1, &gUnknown_0203CF1C->unkTilemap2);
     SetBgTilemapBuffer(2, &gUnknown_0203CF1C->unkTilemap1);
     SetBgTilemapBuffer(3, &gUnknown_0203CF1C->unkTilemap0);
-    sub_8121E10();
+    ResetAllBgsCoordinates();
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
     schedule_bg_copy_tilemap_to_vram(3);
@@ -650,7 +646,7 @@ u8 sub_81BFEB0()
         gUnknown_0203CF1C->unk40F0++;
         break;
     case 12:
-        LoadCompressedPalette(&gUnknown_08D97B84, 0x1D0, 0x60);
+        LoadCompressedPalette(&gMoveTypes_Pal, 0x1D0, 0x60);
         gUnknown_0203CF1C->unk40F0 = 0;
         return 1;
     }
@@ -667,7 +663,7 @@ void sub_81C0098(struct Pokemon *mon)
     else
     {
         struct BoxPokemon *boxMon = gUnknown_0203CF1C->unk0->boxMon;
-        sub_8069004(&boxMon[gUnknown_0203CF1C->unk40BE], mon);
+        BoxMonToMon(&boxMon[gUnknown_0203CF1C->unk40BE], mon);
     }
 }
 
@@ -795,7 +791,7 @@ void sub_81C0484(u8 taskId)
         ResetSpriteData();
         FreeAllSpritePalettes();
         StopCryAndClearCrySongs();
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         if (gMonSpritesGfxPtr == 0)
             sub_806F47C(0);
         sub_81C0434();
@@ -939,7 +935,7 @@ void sub_81C0704(u8 taskId)
         gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentMon, &data[1]);
         if (gUnknown_0203CF1C->unk40D3 == 0xFF)
             return;
-        gSprites[gUnknown_0203CF1C->unk40D3].data2 = 1;
+        gSprites[gUnknown_0203CF1C->unk40D3].data[2] = 1;
         sub_81C0E24();
         data[1] = 0;
         break;
@@ -954,7 +950,7 @@ void sub_81C0704(u8 taskId)
         sub_81C2524();
         break;
     case 12:
-        gSprites[gUnknown_0203CF1C->unk40D3].data2 = 0;
+        gSprites[gUnknown_0203CF1C->unk40D3].data[2] = 0;
         break;
     default:
         if (sub_81221EC() == 0 && FuncIsActiveTask(sub_81C20F0) == 0)
@@ -1810,7 +1806,7 @@ void sub_81C171C(u8 taskId)
 void sub_81C174C(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (sub_81221EC() != 1)
     {
         if (gPaletteFade.active != 1)
@@ -1857,7 +1853,7 @@ void sub_81C174C(u8 taskId)
                 gUnknown_0203CF21 = 4;
                 gSpecialVar_0x8005 = 4;
                 sub_81C044C(taskId);
-            }   
+            }
         }
     }
 }
@@ -1907,7 +1903,7 @@ void sub_81C1940(u8 taskId)
         {
             if (gUnknown_0203CF1C->unk40C0 != 2)
             {
-                
+
                 ClearWindowTilemap(19);
                 if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
                     ClearWindowTilemap(13);
@@ -2224,7 +2220,7 @@ void sub_81C1E20(u8 taskId)
         {
             if (gUnknown_0203CF1C->unk40C0 == 2)
                 PutWindowTilemap(14);
-            
+
         }
         else
         {
@@ -2277,7 +2273,7 @@ void sub_81C1F80(u8 taskId)
                 PutWindowTilemap(15);
             sub_81C240C(data[2]);
         }
-        else 
+        else
         {
             if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
             {
@@ -2345,18 +2341,18 @@ void sub_81C2194(u16 *a, u16 b, u8 c)
     {
         for (i = 0; i < 20; i++)
         {
-            a[(i + var) << 1] = gUnknown_08DC3CD4[i] + b;
-            a[((i + var) << 1) + 0x40] = gUnknown_08DC3CD4[i] + b;
-            a[((i + var) << 1) + 0x80] = gUnknown_08DC3CD4[i + 20] + b;
+            a[(i + var) << 1] = gSummaryScreenWindow_Tilemap[i] + b;
+            a[((i + var) << 1) + 0x40] = gSummaryScreenWindow_Tilemap[i] + b;
+            a[((i + var) << 1) + 0x80] = gSummaryScreenWindow_Tilemap[i + 20] + b;
         }
     }
     else
     {
         for (i = 0; i < 20; i++)
         {
-            a[(i + var)] = gUnknown_08DC3CD4[i + 20] + b;
-            a[((i + var)) + 0x40] = gUnknown_08DC3CD4[i + 40] + b;
-            a[((i + var)) + 0x80] = gUnknown_08DC3CD4[i + 40] + b;
+            a[(i + var)] = gSummaryScreenWindow_Tilemap[i + 20] + b;
+            a[((i + var)) + 0x40] = gSummaryScreenWindow_Tilemap[i + 40] + b;
+            a[((i + var)) + 0x80] = gSummaryScreenWindow_Tilemap[i + 40] + b;
         }
     }
 }
@@ -2374,7 +2370,7 @@ void sub_81C2194(u16 *a, u16 b, u8 c)
 	cmp r2, 0\n\
 	bne _081C21E4\n\
 	movs r3, 0\n\
-	ldr r5, =gUnknown_08DC3CD4\n\
+	ldr r5, =gSummaryScreenWindow_Tilemap\n\
 _081C21A8:\n\
 	adds r2, r7, r3\n\
 	lsls r2, 1\n\
@@ -2404,7 +2400,7 @@ _081C21A8:\n\
 	.pool\n\
 _081C21E4:\n\
 	movs r3, 0\n\
-	ldr r5, =gUnknown_08DC3CD4\n\
+	ldr r5, =gSummaryScreenWindow_Tilemap\n\
 _081C21E8:\n\
 	adds r1, r7, r3\n\
 	lsls r1, 1\n\
@@ -2559,7 +2555,7 @@ void sub_81C2554()
 
 void sub_81C25A4(u8 a, u8 *b, u8 c, u8 d, u8 e, u8 f)
 {
-    AddTextPrinterParametrized2(a, 1, c, d, 0, e, &gUnknown_0861CD2C[f], 0, b);
+    AddTextPrinterParameterized2(a, 1, c, d, 0, e, gUnknown_0861CD2C[f], 0, b);
 }
 
 void sub_81C25E8()
@@ -2994,12 +2990,12 @@ void sub_81C307C()
 {
     struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u8 *text;
-    sub_81AFBF0();
-    sub_81AFC0C(0, gUnknown_0861CE74);
-    sub_81AFC0C(1, gUnknown_0861CE7B);
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, gUnknown_0861CE74);
+    UnkTextUtil_SetPtrI(1, gUnknown_0861CE7B);
     sub_81C31C0();
     if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE || sub_81C3304() == TRUE)
-        sub_81AFC28(gStringVar4, gText_XNature);
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, gText_XNature);
     else
     {
         u8 *alloced1 = Alloc(32);
@@ -3008,7 +3004,7 @@ void sub_81C307C()
         if (sum->metLocation <= 0xD4)
         {
             sub_8124610(alloced2, sum->metLocation);
-            sub_81AFC0C(4, alloced2);
+            UnkTextUtil_SetPtrI(4, alloced2);
         }
         if (sub_81C3220() == 1)
         {
@@ -3023,7 +3019,7 @@ void sub_81C307C()
             text = (sum->metLocation > 0xD4) ? gText_XNatureObtainedInTrade : gText_XNatureProbablyMetAt;
         else
             text = gText_XNatureObtainedInTrade;
-        sub_81AFC28(gStringVar4, text);
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, text);
         Free(alloced1);
         Free(alloced2);
     }
@@ -3037,8 +3033,8 @@ void sub_81C3194()
 void sub_81C31C0()
 {
     struct UnkSummaryStruct *sumStruct = gUnknown_0203CF1C;
-    sub_81AFC0C(2, gNatureNamePointers[sumStruct->summary.nature]);
-    sub_81AFC0C(5, gText_EmptyString5);
+    UnkTextUtil_SetPtrI(2, gNatureNamePointers[sumStruct->summary.nature]);
+    UnkTextUtil_SetPtrI(5, gText_EmptyString5);
 }
 
 void sub_81C31F0(u8 *a)
@@ -3047,7 +3043,7 @@ void sub_81C31F0(u8 *a)
     if (level == 0)
         level = 5;
     ConvertIntToDecimalStringN(a, level, 0, 3);
-    sub_81AFC0C(3, a);
+    UnkTextUtil_SetPtrI(3, a);
 }
 
 u8 sub_81C3220()
@@ -3302,12 +3298,12 @@ void sub_81C3710()
     ConvertIntToDecimalStringN(alloced2, gUnknown_0203CF1C->summary.maxHP, 1, 3);
     ConvertIntToDecimalStringN(alloced3, gUnknown_0203CF1C->summary.atk, 1, 7);
     ConvertIntToDecimalStringN(alloced4, gUnknown_0203CF1C->summary.def, 1, 7);
-    sub_81AFBF0();
-    sub_81AFC0C(0, alloced1);
-    sub_81AFC0C(1, alloced2);
-    sub_81AFC0C(2, alloced3);
-    sub_81AFC0C(3, alloced4);
-    sub_81AFC28(gStringVar4, gUnknown_0861CE82);
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, alloced1);
+    UnkTextUtil_SetPtrI(1, alloced2);
+    UnkTextUtil_SetPtrI(2, alloced3);
+    UnkTextUtil_SetPtrI(3, alloced4);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_0861CE82);
     Free(alloced1);
     Free(alloced2);
     Free(alloced3);
@@ -3324,11 +3320,11 @@ void sub_81C3808()
     ConvertIntToDecimalStringN(gStringVar1, gUnknown_0203CF1C->summary.spatk, 1, 3);
     ConvertIntToDecimalStringN(gStringVar2, gUnknown_0203CF1C->summary.spdef, 1, 3);
     ConvertIntToDecimalStringN(gStringVar3, gUnknown_0203CF1C->summary.speed, 1, 3);
-    sub_81AFBF0();
-    sub_81AFC0C(0, gStringVar1);
-    sub_81AFC0C(1, gStringVar2);
-    sub_81AFC0C(2, gStringVar3);
-    sub_81AFC28(gStringVar4, gUnknown_0861CE8E);
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, gStringVar1);
+    UnkTextUtil_SetPtrI(1, gStringVar2);
+    UnkTextUtil_SetPtrI(2, gStringVar3);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_0861CE8E);
 }
 
 void sub_81C3890()
@@ -3437,10 +3433,10 @@ void sub_81C3B08(u8 a)
         sub_81C25A4(r8, gMoveNames[move], 0, (a<<4) + 1, 0, 1);
         ConvertIntToDecimalStringN(gStringVar1, r10->summary.pp[a], 1, 2);
         ConvertIntToDecimalStringN(gStringVar2, r6, 1, 2);
-        sub_81AFBF0();
-        sub_81AFC0C(0, gStringVar1);
-        sub_81AFC0C(1, gStringVar2);
-        sub_81AFC28(gStringVar4, gUnknown_0861CE97);
+        UnkTextUtil_Reset();
+        UnkTextUtil_SetPtrI(0, gStringVar1);
+        UnkTextUtil_SetPtrI(1, gStringVar2);
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_0861CE97);
         text = gStringVar4;
         r5 = GetCurrentPpToMaxPpState(r10->summary.pp[a], r6) + 9;
         offset = GetStringRightAlignXOffset(1, text, 0x2C);
@@ -3532,17 +3528,17 @@ void sub_81C3B08(u8 a)
 	movs r2, 0x1\n\
 	movs r3, 0x2\n\
 	bl ConvertIntToDecimalStringN\n\
-	bl sub_81AFBF0\n\
+	bl UnkTextUtil_Reset\n\
 	movs r0, 0\n\
 	mov r1, r8\n\
-	bl sub_81AFC0C\n\
+	bl UnkTextUtil_SetPtrI\n\
 	movs r0, 0x1\n\
 	adds r1, r4, 0\n\
-	bl sub_81AFC0C\n\
+	bl UnkTextUtil_SetPtrI\n\
 	ldr r4, =gStringVar4\n\
 	ldr r1, =gUnknown_0861CE97\n\
 	adds r0, r4, 0\n\
-	bl sub_81AFC28\n\
+	bl UnkTextUtil_StringExpandPlaceholders\n\
 	adds r7, r4, 0\n\
 	ldrb r0, [r5]\n\
 	adds r1, r6, 0\n\
@@ -3645,7 +3641,7 @@ void sub_81C3D54(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s16 dataa = data[0] - 1;
-    
+
     switch (dataa)
     {
         case 0:

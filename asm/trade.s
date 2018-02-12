@@ -1,5 +1,6 @@
 	.include "asm/macros.inc"
-	.include "constants/constants.inc"
+	.include "constants/gba_constants.inc"
+	.include "constants/misc_constants.inc"
 
 	.syntax unified
 
@@ -401,7 +402,7 @@ _080774B2:
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _0807754C
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r5, =0x00001122
 	adds r0, r5, 0
 	strh r0, [r1]
@@ -414,12 +415,12 @@ _080774B2:
 	cmp r0, 0
 	beq _08077528
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011BA4
 	b _08077B46
 	.pool
 _08077528:
-	bl sub_8009734
+	bl OpenLink
 	ldr r0, =gMain
 	movs r7, 0x87
 	lsls r7, 3
@@ -464,7 +465,7 @@ _0807757A:
 	b _08077B22
 	.pool
 _0807758C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
@@ -473,7 +474,7 @@ _0807758C:
 	bcs _080775A0
 	b _08077B46
 _080775A0:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _080775D8
@@ -644,7 +645,7 @@ _080776E2:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -703,7 +704,7 @@ _08077756:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -824,7 +825,7 @@ _080778CA:
 	adds r4, 0x10
 _080778DE:
 	add r1, sp, 0x10
-	ldr r0, =gUnknown_0832DCAC
+	ldr r0, =gSpriteTemplate_832DCAC
 	ldm r0!, {r2,r3,r7}
 	stm r1!, {r2,r3,r7}
 	ldm r0!, {r2,r3,r7}
@@ -861,7 +862,7 @@ _080778DE:
 	adds r4, 0x88
 _0807792C:
 	add r1, sp, 0x10
-	ldr r0, =gUnknown_0832DCAC
+	ldr r0, =gSpriteTemplate_832DCAC
 	ldm r0!, {r2,r3,r7}
 	stm r1!, {r2,r3,r7}
 	ldm r0!, {r2,r3,r7}
@@ -887,7 +888,7 @@ _0807792C:
 	b _08077B22
 	.pool
 _08077970:
-	ldr r4, =gUnknown_0832DCAC
+	ldr r4, =gSpriteTemplate_832DCAC
 	add r1, sp, 0x10
 	adds r0, r4, 0
 	ldm r0!, {r2,r3,r7}
@@ -925,7 +926,7 @@ _08077970:
 	lsls r5, 13
 _080779BC:
 	add r1, sp, 0x10
-	ldr r0, =gUnknown_0832DCAC
+	ldr r0, =gSpriteTemplate_832DCAC
 	ldm r0!, {r2,r3,r7}
 	stm r1!, {r2,r3,r7}
 	ldm r0!, {r2,r3,r7}
@@ -946,7 +947,7 @@ _080779BC:
 	adds r6, 0x1
 	cmp r6, 0x5
 	ble _080779BC
-	ldr r0, =gUnknown_0832DC94
+	ldr r0, =gSpriteTemplate_832DC94
 	ldr r2, =gUnknown_0832DE24
 	ldrb r1, [r2]
 	lsls r1, 19
@@ -1262,7 +1263,7 @@ _08077CA8:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -1321,7 +1322,7 @@ _08077D1E:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -1448,7 +1449,7 @@ _08077EA0:
 	adds r4, 0x10
 _08077EB4:
 	add r1, sp, 0xC
-	ldr r0, =gUnknown_0832DCAC
+	ldr r0, =gSpriteTemplate_832DCAC
 	ldm r0!, {r2,r3,r7}
 	stm r1!, {r2,r3,r7}
 	ldm r0!, {r2,r3,r7}
@@ -1485,7 +1486,7 @@ _08077EB4:
 	adds r4, 0x88
 _08077F02:
 	add r1, sp, 0xC
-	ldr r0, =gUnknown_0832DCAC
+	ldr r0, =gSpriteTemplate_832DCAC
 	ldm r0!, {r2,r3,r7}
 	stm r1!, {r2,r3,r7}
 	ldm r0!, {r2,r3,r7}
@@ -1511,7 +1512,7 @@ _08077F02:
 	b _080780D8
 	.pool
 _08077F48:
-	ldr r4, =gUnknown_0832DCAC
+	ldr r4, =gSpriteTemplate_832DCAC
 	add r1, sp, 0xC
 	adds r0, r4, 0
 	ldm r0!, {r2,r3,r7}
@@ -1549,7 +1550,7 @@ _08077F48:
 	lsls r5, 13
 _08077F94:
 	add r1, sp, 0xC
-	ldr r0, =gUnknown_0832DCAC
+	ldr r0, =gSpriteTemplate_832DCAC
 	ldm r0!, {r2,r3,r7}
 	stm r1!, {r2,r3,r7}
 	ldm r0!, {r2,r3,r7}
@@ -1588,7 +1589,7 @@ _08077FE4:
 	adds r0, 0x6
 _08077FEA:
 	strb r0, [r2]
-	ldr r0, =gUnknown_0832DC94
+	ldr r0, =gSpriteTemplate_832DC94
 	ldr r3, =gUnknown_0832DE24
 	ldr r1, [r4]
 	adds r1, 0x35
@@ -1929,7 +1930,7 @@ _080782D4:
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBufferRect_ChangePalette
-	ldr r1, =gUnknown_0832CABC
+	ldr r1, =gTradeStripesBG2Tilemap
 	movs r2, 0x80
 	lsls r2, 4
 	movs r0, 0x2
@@ -1938,7 +1939,7 @@ _080782D4:
 	b _0807837E
 	.pool
 _08078324:
-	ldr r1, =gUnknown_0832D2BC
+	ldr r1, =gTradeStripesBG3Tilemap
 	movs r2, 0x80
 	lsls r2, 4
 	movs r0, 0x3
@@ -2142,7 +2143,7 @@ _08078484:
 	.4byte _080786F0
 	.4byte _08078720
 _080784DC:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gPlayerParty
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2208,7 +2209,7 @@ _08078552:
 	b _080787A2
 	.pool
 _0807857C:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gPlayerParty + 200
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2247,7 +2248,7 @@ _080785B6:
 	b _080787A2
 	.pool
 _080785E0:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gPlayerParty + 400
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2286,7 +2287,7 @@ _0807861A:
 	b _080787A2
 	.pool
 _08078644:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x00002be0
@@ -2328,7 +2329,7 @@ _0807868A:
 	b _080787A2
 	.pool
 _080786B4:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x000031a8
@@ -2392,13 +2393,13 @@ _08078726:
 	mov r2, sp
 	bl GetMonData
 	mov r0, sp
-	ldr r1, =gUnknown_0832DF94
+	ldr r1, =gJPText_Shedinja
 	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	bne _08078766
 	adds r0, r4, 0
 	movs r1, 0x2
-	ldr r2, =gSpeciesNames + SPECIES_SHEDINJA * POKEMON_NAME_LENGTH
+	ldr r2, =gSpeciesNames + 303 * POKEMON_NAME_LENGTH @ SPECIES_SHEDINJA
 	bl SetMonData
 _08078766:
 	adds r4, 0x64
@@ -2442,7 +2443,7 @@ _080787AC:
 	thumb_func_start sub_80787B8
 sub_80787B8: @ 80787B8
 	push {lr}
-	ldr r0, =gUnknown_0832DAE5
+	ldr r0, =gText_IsThisTradeOkay
 	ldr r1, =gUnknown_0203229C
 	ldr r1, [r1]
 	adds r1, 0x72
@@ -3694,7 +3695,7 @@ _0807920E:
 	thumb_func_start sub_8079218
 sub_8079218: @ 8079218
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3796,7 +3797,7 @@ _080792D8:
 	thumb_func_start sub_80792E4
 sub_80792E4: @ 80792E4
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4436,7 +4437,7 @@ _08079772:
 	lsls r0, 2
 	add r0, r8
 	bl sub_80A6DEC
-	ldr r1, =gUnknown_0832C8BE
+	ldr r1, =gTradePartyBoxTilemap
 	ldr r0, [sp, 0x64]
 	subs r2, r0, r7
 	lsls r2, 24
@@ -4489,7 +4490,7 @@ _080798AC:
 	b _08079A24
 	.pool
 _080798BC:
-	ldr r1, =gUnknown_0832C6C0
+	ldr r1, =gTradeMovesBoxTilemap
 	ldr r0, [sp, 0x60]
 	lsls r2, r0, 4
 	subs r2, r0
@@ -4607,7 +4608,7 @@ _080798BC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -4767,7 +4768,7 @@ _08079AFE:
 	lsrs r4, r0, 16
 	cmp r4, 0x3
 	bls _08079ADE
-	ldr r1, =gUnknown_0832DABC
+	ldr r1, =gText_EmptyString7
 	adds r0, r6, 0
 	bl StringCopy
 	movs r4, 0
@@ -4787,7 +4788,7 @@ _08079B20:
 	bl StringAppend
 _08079B3C:
 	adds r0, r6, 0
-	ldr r1, =gUnknown_0832DAD2
+	ldr r1, =gText_NewLine3
 	bl StringAppend
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -4797,10 +4798,10 @@ _08079B3C:
 	b _08079B6C
 	.pool
 _08079B5C:
-	ldr r1, =gUnknown_0832DABC
+	ldr r1, =gText_EmptyString7
 	adds r0, r6, 0
 	bl StringCopy
-	ldr r1, =gUnknown_0832DADF
+	ldr r1, =gText_FourQuestionMarks
 	adds r0, r6, 0
 	bl StringAppend
 _08079B6C:
@@ -5112,7 +5113,7 @@ _08079DDE:
 _08079DF0:
 	add r0, sp, 0xC
 	movs r1, 0
-	bl sub_8070ECC
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	movs r2, 0x83
 	cmp r0, 0
@@ -5122,7 +5123,7 @@ _08079DF0:
 _08079E04:
 	add r0, sp, 0xC
 	movs r1, 0xFE
-	bl sub_8070ECC
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	movs r2, 0x83
 	cmp r0, 0
@@ -5324,7 +5325,7 @@ sub_8079F88: @ 8079F88
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_0832C8BE
+	ldr r1, =gTradePartyBoxTilemap
 	lsls r2, r4, 4
 	subs r2, r4
 	lsls r2, 24
@@ -5696,7 +5697,7 @@ _0807A2B8:
 	mov r0, sp
 	b _0807A2D6
 _0807A2BC:
-	ldr r0, =gUnknown_0832DCE4
+	ldr r0, =gSpritePalette_TradeScreenText
 	bl LoadSpritePalette
 	b _0807A2DA
 	.pool
@@ -7024,7 +7025,7 @@ _0807AC92:
 	lsls r0, 1
 	cmp r1, r0
 	bls _0807ACC4
-	bl sub_80097E8
+	bl CloseLink
 	ldr r0, =c2_800ACD4
 	bl SetMainCallback2
 	ldr r1, [r4]
@@ -7258,11 +7259,11 @@ _0807AEAC:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807AEC0
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001144
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_80097E8
+	bl CloseLink
 _0807AEC0:
 	ldr r4, =gUnknown_020322A0
 	movs r5, 0x80
@@ -7330,7 +7331,7 @@ _0807AF58:
 	adds r0, 0xFA
 	movs r1, 0x1
 	strb r1, [r0]
-	bl sub_8009734
+	bl OpenLink
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -7367,13 +7368,13 @@ _0807AFAC:
 	b _0807B0E4
 	.pool
 _0807AFBC:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807AFC8
 	b _0807B0DC
 _0807AFC8:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
@@ -7600,7 +7601,7 @@ sub_807B170: @ 807B170
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
 	bl DeactivateAllTextPrinters
-	ldr r0, =gUnknown_08C00000
+	ldr r0, =gBattleTextboxTiles
 	mov r10, r0
 	movs r0, 0
 	mov r9, r0
@@ -7609,7 +7610,7 @@ sub_807B170: @ 807B170
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r0, =gUnknown_08C00524
+	ldr r0, =gBattleTextboxTilemap
 	mov r8, r0
 	ldr r4, =0x0201c000
 	adds r1, r4, 0
@@ -7619,7 +7620,7 @@ sub_807B170: @ 807B170
 	adds r2, r5, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r6, =gUnknown_08C004E0
+	ldr r6, =gBattleTextboxPalette
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -7948,7 +7949,7 @@ sub_807B4D0: @ 807B4D0
 	adds r1, r2
 	ldr r0, [r0]
 	adds r0, r1
-	bl sub_80D439C
+	bl ClearMailStruct
 _0807B52A:
 	ldr r4, =gUnknown_020322A0
 	ldr r0, [r4]
@@ -7985,7 +7986,7 @@ _0807B566:
 	ldr r0, =gUnknown_020321C0
 	adds r1, r0
 	adds r0, r7, 0
-	bl sub_80D460C
+	bl GiveMailToMon2
 _0807B57C:
 	mov r0, r9
 	bl sub_807B464
@@ -8103,11 +8104,11 @@ _0807B668:
 	ldr r1, =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, =gUnknown_08DD7300
+	ldr r0, =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	ldr r4, =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -8166,7 +8167,7 @@ _0807B726:
 	ldr r1, =0x80000800
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	movs r4, 0xC0
 	lsls r4, 19
 	movs r5, 0xA1
@@ -8444,11 +8445,11 @@ _0807B9FC:
 	ldr r1, =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, =gUnknown_08DD7300
+	ldr r0, =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	ldr r4, =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -8569,7 +8570,7 @@ _0807BB68:
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_08338ED0
+	ldr r0, =gIngameTrades
 	adds r4, r0
 	ldr r0, =gStringVar1
 	adds r1, r4, 0
@@ -9096,7 +9097,7 @@ _0807C1DC:
 	beq _0807C1FC
 	bl _0807CFB4
 _0807C1FC:
-	ldr r0, =gUnknown_08338D28
+	ldr r0, =gSpriteTemplate_8338D28
 	movs r1, 0x78
 	movs r2, 0x20
 	movs r3, 0
@@ -9226,7 +9227,7 @@ _0807C318:
 	bl _0807CFB4
 _0807C328:
 	bl sub_807AB28
-	ldr r0, =gUnknown_08338E74
+	ldr r0, =gSpriteTemplate_8338E74
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -9294,7 +9295,7 @@ _0807C3B0:
 	beq _0807C3C4
 	bl _0807CFB4
 _0807C3C4:
-	ldr r0, =gUnknown_08338DFC
+	ldr r0, =gSpriteTemplate_8338DFC
 	movs r1, 0x80
 	movs r2, 0x41
 	movs r3, 0
@@ -9314,7 +9315,7 @@ _0807C3E0:
 	ldr r1, [r4]
 	adds r1, 0x90
 	strb r0, [r1]
-	ldr r0, =gUnknown_08338DC8
+	ldr r0, =gSpriteTemplate_8338DC8
 	movs r1, 0x80
 	movs r2, 0x50
 	movs r3, 0
@@ -9453,7 +9454,7 @@ _0807C528:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r5, =gUnknown_08338DC8
+	ldr r5, =gSpriteTemplate_8338DC8
 	adds r0, r5, 0
 	movs r1, 0x6F
 	movs r2, 0xAA
@@ -9602,7 +9603,7 @@ _0807C66C:
 	adds r1, r4, 0
 	adds r1, 0x10
 	adds r0, r1
-	ldr r1, =gUnknown_08338ECC
+	ldr r1, =gSpriteAffineAnimTable_8338ECC
 	str r1, [r0]
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -9913,7 +9914,7 @@ _0807C8FA:
 	ldr r1, [r7]
 	adds r1, 0x90
 	strb r0, [r1]
-	ldr r0, =gUnknown_08338DC8
+	ldr r0, =gSpriteTemplate_8338DC8
 	movs r1, 0x80
 	adds r2, r4, 0
 	movs r3, 0
@@ -10089,7 +10090,7 @@ _0807CA86:
 	bne _0807CA92
 	b _0807CFB4
 _0807CA92:
-	ldr r0, =gUnknown_08338DFC
+	ldr r0, =gSpriteTemplate_8338DFC
 	movs r1, 0x80
 	movs r2, 0x41
 	movs r3, 0
@@ -10111,7 +10112,7 @@ _0807CA92:
 	b _0807CFB4
 	.pool
 _0807CAC8:
-	ldr r0, =gUnknown_08338E74
+	ldr r0, =gSpriteTemplate_8338E74
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -10253,7 +10254,7 @@ _0807CBEC:
 	b _0807CF48
 	.pool
 _0807CBF4:
-	ldr r0, =gUnknown_08338D28
+	ldr r0, =gSpriteTemplate_8338D28
 	movs r2, 0x8
 	negs r2, r2
 	movs r1, 0x78
@@ -10445,7 +10446,7 @@ _0807CD1C:
 	str r2, [sp, 0x10]
 	movs r2, 0x78
 	movs r3, 0x54
-	bl sub_8076438
+	bl CreatePokeballSpriteToReleaseMon
 	ldr r0, [r7]
 	adds r0, 0xD3
 	ldrb r1, [r0]
@@ -11158,7 +11159,7 @@ _0807D5B8:
 	beq _0807D5D8
 	bl _0807E400
 _0807D5D8:
-	ldr r0, =gUnknown_08338D28
+	ldr r0, =gSpriteTemplate_8338D28
 	movs r1, 0x78
 	movs r2, 0x20
 	movs r3, 0
@@ -11288,7 +11289,7 @@ _0807D6F4:
 _0807D704:
 	movs r0, 0x3
 	bl sub_807B62C
-	ldr r0, =gUnknown_08338E8C
+	ldr r0, =gSpriteTemplate_8338E8C
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -11384,7 +11385,7 @@ _0807D7C4:
 	adds r0, r1
 	ldr r1, =sub_807AA4C
 	str r1, [r0]
-	ldr r0, =gUnknown_08338DC8
+	ldr r0, =gSpriteTemplate_8338DC8
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -11522,7 +11523,7 @@ _0807D924:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r5, =gUnknown_08338DC8
+	ldr r5, =gSpriteTemplate_8338DC8
 	adds r0, r5, 0
 	movs r1, 0x6F
 	movs r2, 0xAA
@@ -11676,7 +11677,7 @@ _0807DA74:
 	adds r1, r4, 0
 	adds r1, 0x10
 	adds r0, r1
-	ldr r1, =gUnknown_08338ECC
+	ldr r1, =gSpriteAffineAnimTable_8338ECC
 	str r1, [r0]
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -12006,7 +12007,7 @@ _0807DD02:
 	adds r0, r1
 	ldr r1, =sub_807AA4C
 	str r1, [r0]
-	ldr r0, =gUnknown_08338DC8
+	ldr r0, =gSpriteTemplate_8338DC8
 	movs r1, 0x78
 	adds r2, r4, 0
 	movs r3, 0
@@ -12216,7 +12217,7 @@ _0807DF12:
 	strh r6, [r5]
 	b _0807E398
 _0807DF16:
-	ldr r0, =gUnknown_08338E74
+	ldr r0, =gSpriteTemplate_8338E74
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -12358,7 +12359,7 @@ _0807E038:
 	b _0807E394
 	.pool
 _0807E040:
-	ldr r0, =gUnknown_08338D28
+	ldr r0, =gSpriteTemplate_8338D28
 	movs r2, 0x8
 	negs r2, r2
 	movs r1, 0x78
@@ -12550,7 +12551,7 @@ _0807E168:
 	str r2, [sp, 0x10]
 	movs r2, 0x78
 	movs r3, 0x54
-	bl sub_8076438
+	bl CreatePokeballSpriteToReleaseMon
 	ldr r0, [r7]
 	adds r0, 0xD3
 	ldrb r1, [r0]
@@ -13182,7 +13183,7 @@ sub_807E73C: @ 807E73C
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_08338ED0
+	ldr r0, =gIngameTrades
 	adds r4, r0
 	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x38]
@@ -13212,7 +13213,7 @@ sub_807E784: @ 807E784
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_08338ED0
+	ldr r0, =gIngameTrades
 	adds r4, r0
 	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
@@ -13251,7 +13252,7 @@ sub_807E7E8: @ 807E7E8
 	lsls r2, r1, 4
 	subs r2, r1
 	lsls r2, 2
-	ldr r1, =gUnknown_08338ED0
+	ldr r1, =gIngameTrades
 	adds r5, r2, r1
 	movs r1, 0x64
 	muls r0, r1
@@ -13367,7 +13368,7 @@ sub_807E7E8: @ 807E7E8
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	beq _0807E960
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E954
@@ -13440,7 +13441,7 @@ _0807E98E:
 	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_81DB4DC
+	bl PadNameString
 	ldr r1, [r6, 0x18]
 	lsrs r0, r1, 24
 	strb r0, [r5, 0x1A]
@@ -13814,7 +13815,7 @@ _0807ED98:
 	movs r0, 0x32
 	strb r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_082C8959
+	ldr r1, =gText_SavingDontTurnOffPower
 _0807EDA6:
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -14294,7 +14295,7 @@ sub_807F1A8: @ 807F1A8
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -14668,7 +14669,7 @@ _0807F50A:
 	movs r1, 0x3
 	strb r1, [r0]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_082C8959
+	ldr r1, =gText_SavingDontTurnOffPower
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0

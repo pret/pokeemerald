@@ -15,5 +15,8 @@ void sub_80F14F8(TVShow *shows);
 size_t sub_80EF370(int value);
 void sub_80F1208(TVShow *dest);
 void sub_80F0BB8(void);
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unused, u8 sheen, u8 language);
+void SetPokemonAnglerSpecies(u16 species);
+void UpdateTVShowsPerDay(u16 days);
 
 #endif //GUARD_TV_H

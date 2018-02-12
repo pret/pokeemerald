@@ -4,8 +4,6 @@
     .section .rodata
     .align 2, 0
 
-	@ only partially done because this file terrifies me
-
 gUnknown_08524904:: @ 8524904
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00
 
@@ -295,614 +293,615 @@ gUnknown_08524B3C:: @ 8524B3C
 
     .align 2
 gBattleAnimPicTable:: @ 8524B44
-	obj_tiles 0x08c02538, 0x0200, 0x2710
-	obj_tiles 0x08c1c6e0, 0x0300, 0x2711
-	obj_tiles 0x08c20784, 0x0200, 0x2712
-	obj_tiles 0x08c025e8, 0x0100, 0x2713
-	obj_tiles 0x08c0265c, 0x0200, 0x2714
-	obj_tiles 0x08c0270c, 0x0400, 0x2715
-	obj_tiles 0x08c027e0, 0x0180, 0x2716
-	obj_tiles 0x08c029cc, 0x0800, 0x2717
-	obj_tiles 0x08c02b68, 0x0020, 0x2718
-	obj_tiles 0x08c02fa4, 0x0400, 0x2719
-	obj_tiles 0x08c02bc4, 0x1200, 0x271a
-	obj_tiles 0x08c032ac, 0x0180, 0x271b
-	obj_tiles 0x08c0334c, 0x0080, 0x271c
-	obj_tiles 0x08c03438, 0x0080, 0x271d
-	obj_tiles 0x08c1fbd4, 0x0280, 0x271e
-	obj_tiles 0x08c03484, 0x0080, 0x271f
-	obj_tiles 0x08c03518, 0x0100, 0x2720
-	obj_tiles 0x08c03598, 0x0020, 0x2721
-	obj_tiles 0x08c24d7c, 0x0080, 0x2722
-	obj_tiles 0x08c035f8, 0x0400, 0x2723
-	obj_tiles 0x08c036b8, 0x0200, 0x2724
-	obj_tiles 0x08c03a28, 0x0a00, 0x2725
-	obj_tiles 0x08c03a28, 0x0a00, 0x2726
-	obj_tiles 0x08c037d4, 0x0380, 0x2727
-	obj_tiles 0x08c03ea0, 0x0300, 0x2728
-	obj_tiles 0x08c03db0, 0x0a00, 0x2729
-	obj_tiles 0x08c04494, 0x0a00, 0x272a
-	obj_tiles 0x08c0481c, 0x0a00, 0x272b
-	obj_tiles 0x08c04b40, 0x0a00, 0x272c
-	obj_tiles 0x08c04e90, 0x0a00, 0x272d
-	obj_tiles 0x08c05170, 0x0a00, 0x272e
-	obj_tiles 0x08c03f80, 0x0e00, 0x272f
-	obj_tiles 0x08c043a8, 0x0380, 0x2730
-	obj_tiles 0x08c0557c, 0x1000, 0x2731
-	obj_tiles 0x08c05eec, 0x0800, 0x2732
-	obj_tiles 0x08c062b8, 0x0a00, 0x2733
-	obj_tiles 0x08c06678, 0x0800, 0x2734
-	obj_tiles 0x08c06a4c, 0x0a00, 0x2735
-	obj_tiles 0x08c07964, 0x0a00, 0x2736
-	obj_tiles 0x08c07b88, 0x0a00, 0x2737
-	obj_tiles 0x08c07e84, 0x0a00, 0x2738
-	obj_tiles 0x08c08090, 0x0a00, 0x2739
-	obj_tiles 0x08c082c4, 0x0a00, 0x273a
-	obj_tiles 0x08c085bc, 0x0a00, 0x273b
-	obj_tiles 0x08c08a0c, 0x0a00, 0x273c
-	obj_tiles 0x08c08ca0, 0x0a00, 0x273d
-	obj_tiles 0x08c09604, 0x1000, 0x273e
-	obj_tiles 0x08c09604, 0x1000, 0x273f
-	obj_tiles 0x08c09cf0, 0x1000, 0x2740
-	obj_tiles 0x08c09cf0, 0x1000, 0x2741
-	obj_tiles 0x08c09ffc, 0x0200, 0x2742
-	obj_tiles 0x08c0a09c, 0x0200, 0x2743
-	obj_tiles 0x08c0a148, 0x0200, 0x2744
-	obj_tiles 0x08c2e830, 0x0800, 0x2745
-	obj_tiles 0x08c0a3a8, 0x0080, 0x2746
-	obj_tiles 0x08c0a8bc, 0x0200, 0x2747
-	obj_tiles 0x08c0a3ec, 0x1000, 0x2748
-	obj_tiles 0x08c0a980, 0x0180, 0x2749
-	obj_tiles 0x08c0aa2c, 0x0c00, 0x274a
-	obj_tiles 0x08c0aebc, 0x0100, 0x274b
-	obj_tiles 0x08c0af38, 0x0040, 0x274c
-	obj_tiles 0x08c0af7c, 0x0180, 0x274d
-	obj_tiles 0x08c0b04c, 0x0800, 0x274e
-	obj_tiles 0x08c0b444, 0x0480, 0x274f
-	obj_tiles 0x08c23104, 0x0200, 0x2750
-	obj_tiles 0x08c0b6bc, 0x0200, 0x2751
-	obj_tiles 0x08c0b7f0, 0x0100, 0x2752
-	obj_tiles 0x08c0b6bc, 0x0200, 0x2753
-	obj_tiles 0x08c0b6bc, 0x0200, 0x2754
-	obj_tiles 0x08c0b6bc, 0x0200, 0x2755
-	obj_tiles 0x08c0b864, 0x0200, 0x2756
-	obj_tiles 0x08c0b90c, 0x0a00, 0x2757
-	obj_tiles 0x08c0bb38, 0x0300, 0x2758
-	obj_tiles 0x08c0bc20, 0x0180, 0x2759
-	obj_tiles 0x08c1b29c, 0x00a0, 0x275a
-	obj_tiles 0x08c0bd5c, 0x0700, 0x275b
-	obj_tiles 0x08c14cec, 0x0400, 0x275c
-	obj_tiles 0x08c14f50, 0x0200, 0x275d
-	obj_tiles 0x08c0bffc, 0x0300, 0x275e
-	obj_tiles 0x08c0c1bc, 0x0c00, 0x275f
-	obj_tiles 0x08c0c5ec, 0x0a00, 0x2760
-	obj_tiles 0x08c0c974, 0x0080, 0x2761
-	obj_tiles 0x08c0cb90, 0x0040, 0x2762
-	obj_tiles 0x08c0ce18, 0x0e00, 0x2763
-	obj_tiles 0x08c0d2bc, 0x0e00, 0x2764
-	obj_tiles 0x08c0d680, 0x0280, 0x2765
-	obj_tiles 0x08c0d738, 0x0200, 0x2766
-	obj_tiles 0x08c24cfc, 0x0080, 0x2767
-	obj_tiles 0x08c0d8a8, 0x00c0, 0x2768
-	obj_tiles 0x08c0d8f8, 0x0a00, 0x2769
-	obj_tiles 0x08c0db6c, 0x0200, 0x276a
-	obj_tiles 0x08c0dbfc, 0x0180, 0x276b
-	obj_tiles 0x08c0dd30, 0x0080, 0x276c
-	obj_tiles 0x08c0ddac, 0x1000, 0x276d
-	obj_tiles 0x08c0e47c, 0x0a00, 0x276e
-	obj_tiles 0x08c0e620, 0x0180, 0x276f
-	obj_tiles 0x08c0e6d0, 0x0380, 0x2770
-	obj_tiles 0x08c0e840, 0x0c00, 0x2771
-	obj_tiles 0x08c0ea20, 0x0200, 0x2772
-	obj_tiles 0x08c27cec, 0x0200, 0x2773
-	obj_tiles 0x08c0eb58, 0x0200, 0x2774
-	obj_tiles 0x08c0ec58, 0x0200, 0x2775
-	obj_tiles 0x08c0ed88, 0x0400, 0x2776
-	obj_tiles 0x08c0ef20, 0x0080, 0x2777
-	obj_tiles 0x08c0ef8c, 0x0400, 0x2778
-	obj_tiles 0x08c0f174, 0x0c00, 0x2779
-	obj_tiles 0x08c0f720, 0x0200, 0x277a
-	obj_tiles 0x08c0f810, 0x1000, 0x277b
-	obj_tiles 0x08c0fbe4, 0x0a00, 0x277c
-	obj_tiles 0x08c0ff68, 0x0020, 0x277d
-	obj_tiles 0x08c0ffb8, 0x0e00, 0x277e
-	obj_tiles 0x08c1039c, 0x0080, 0x277f
-	obj_tiles 0x08c10404, 0x0a00, 0x2780
-	obj_tiles 0x08c10754, 0x0400, 0x2781
-	obj_tiles 0x08c109e8, 0x0200, 0x2782
-	obj_tiles 0x08c115e4, 0x0700, 0x2783
-	obj_tiles 0x08c12e88, 0x0800, 0x2784
-	obj_tiles 0x08c1315c, 0x0a00, 0x2785
-	obj_tiles 0x08c133b4, 0x0600, 0x2786
-	obj_tiles 0x08c13568, 0x0800, 0x2787
-	obj_tiles 0x08c13820, 0x0200, 0x2788
-	obj_tiles 0x08c1393c, 0x0040, 0x2789
-	obj_tiles 0x08c1398c, 0x0180, 0x278a
-	obj_tiles 0x08c13aa4, 0x0600, 0x278b
-	obj_tiles 0x08c13be0, 0x0600, 0x278c
-	obj_tiles 0x08c13ea0, 0x0200, 0x278d
-	obj_tiles 0x08c13fb4, 0x0080, 0x278e
-	obj_tiles 0x08c1403c, 0x0200, 0x278f
-	obj_tiles 0x08c14200, 0x0800, 0x2790
-	obj_tiles 0x08c1448c, 0x0080, 0x2791
-	obj_tiles 0x08c144f0, 0x0a00, 0x2792
-	obj_tiles 0x08c148e8, 0x0280, 0x2793
-	obj_tiles 0x08c14a58, 0x0280, 0x2794
-	obj_tiles 0x08c14b78, 0x0100, 0x2795
-	obj_tiles 0x08c14c1c, 0x0200, 0x2796
-	obj_tiles 0x08c1a3a0, 0x0200, 0x2797
-	obj_tiles 0x08c1a540, 0x0020, 0x2798
-	obj_tiles 0x08c1a58c, 0x0a00, 0x2799
-	obj_tiles 0x08c1ab40, 0x0800, 0x279a
-	obj_tiles 0x08c1a790, 0x0800, 0x279b
-	obj_tiles 0x08c1ac8c, 0x00c0, 0x279c
-	obj_tiles 0x08c1ad2c, 0x01c0, 0x279d
-	obj_tiles 0x08c1ae54, 0x0100, 0x279e
-	obj_tiles 0x08c2cbac, 0x0800, 0x279f
-	obj_tiles 0x08c1bc64, 0x0200, 0x27a0
-	obj_tiles 0x08c1a9a0, 0x0800, 0x27a1
-	obj_tiles 0x08c02478, 0x0180, 0x27a2
-	obj_tiles 0x08c1af6c, 0x0180, 0x27a3
-	obj_tiles 0x08c1b178, 0x0200, 0x27a4
-	obj_tiles 0x08c1b0a8, 0x0200, 0x27a5
-	obj_tiles 0x08c1b328, 0x0180, 0x27a6
-	obj_tiles 0x08c1b418, 0x0400, 0x27a7
-	obj_tiles 0x08c033cc, 0x0080, 0x27a8
-	obj_tiles 0x08c1b510, 0x0100, 0x27a9
-	obj_tiles 0x08c1b594, 0x0100, 0x27aa
-	obj_tiles 0x08c1b660, 0x0140, 0x27ab
-	obj_tiles 0x08c1b748, 0x0800, 0x27ac
-	obj_tiles 0x08c1b988, 0x0200, 0x27ad
-	obj_tiles 0x08c1ba04, 0x0100, 0x27ae
-	obj_tiles 0x08c1baf0, 0x00a0, 0x27af
-	obj_tiles 0x08c1bb94, 0x0100, 0x27b0
-	obj_tiles 0x08c0297c, 0x0080, 0x27b1
-	obj_tiles 0x08c1be40, 0x0300, 0x27b2
-	obj_tiles 0x08c1bee4, 0x0100, 0x27b3
-	obj_tiles 0x08c1bee4, 0x0100, 0x27b4
-	obj_tiles 0x08c1bee4, 0x0100, 0x27b5
-	obj_tiles 0x08c1bfa4, 0x0800, 0x27b6
-	obj_tiles 0x08c1bfa4, 0x0800, 0x27b7
-	obj_tiles 0x08c1bfa4, 0x0800, 0x27b8
-	obj_tiles 0x08c1bfa4, 0x0800, 0x27b9
-	obj_tiles 0x08c1bfa4, 0x0800, 0x27ba
-	obj_tiles 0x08c1c350, 0x0080, 0x27bb
-	obj_tiles 0x08c1bc64, 0x0200, 0x27bc
-	obj_tiles 0x08c1c7bc, 0x0200, 0x27bd
-	obj_tiles 0x08c1d5fc, 0x0200, 0x27be
-	obj_tiles 0x08c1d6c4, 0x0080, 0x27bf
-	obj_tiles 0x08c1d750, 0x0200, 0x27c0
-	obj_tiles 0x08c1d8d0, 0x0500, 0x27c1
-	obj_tiles 0x08c1d9ac, 0x0800, 0x27c2
-	obj_tiles 0x08c1db64, 0x0400, 0x27c3
-	obj_tiles 0x08c1dc40, 0x0020, 0x27c4
-	obj_tiles 0x08c1dc58, 0x0800, 0x27c5
-	obj_tiles 0x08c1dfe8, 0x0100, 0x27c6
-	obj_tiles 0x08c1e0b4, 0x0800, 0x27c7
-	obj_tiles 0x08c1e354, 0x0400, 0x27c8
-	obj_tiles 0x08c1e4d0, 0x0a00, 0x27c9
-	obj_tiles 0x08c1edd8, 0x1000, 0x27ca
-	obj_tiles 0x08c1ebc8, 0x0800, 0x27cb
-	obj_tiles 0x08d966c0, 0x0400, 0x27cc
-	obj_tiles 0x08c20198, 0x0200, 0x27cd
-	obj_tiles 0x08c1fc84, 0x0800, 0x27ce
-	obj_tiles 0x08c1ff04, 0x0800, 0x27cf
-	obj_tiles 0x08c2023c, 0x0800, 0x27d0
-	obj_tiles 0x08c204e4, 0x0200, 0x27d1
-	obj_tiles 0x08c20c4c, 0x0800, 0x27d2
-	obj_tiles 0x08c20fac, 0x0200, 0x27d3
-	obj_tiles 0x08c20890, 0x0800, 0x27d4
-	obj_tiles 0x08c21084, 0x0200, 0x27d5
-	obj_tiles 0x08c2121c, 0x0800, 0x27d6
-	obj_tiles 0x08c21634, 0x0400, 0x27d7
-	obj_tiles 0x08c21718, 0x0200, 0x27d8
-	obj_tiles 0x08c21874, 0x0a80, 0x27d9
-	obj_tiles 0x08c220a8, 0x0600, 0x27da
-	obj_tiles 0x08c22234, 0x0800, 0x27db
-	obj_tiles 0x08c21f0c, 0x0200, 0x27dc
-	obj_tiles 0x08c226a4, 0x0600, 0x27dd
-	obj_tiles 0x08c22404, 0x0800, 0x27de
-	obj_tiles 0x08c228fc, 0x0180, 0x27df
-	obj_tiles 0x08c229ec, 0x0800, 0x27e0
-	obj_tiles 0x08c22ddc, 0x0800, 0x27e1
-	obj_tiles 0x08c23218, 0x0080, 0x27e2
-	obj_tiles 0x08c242b0, 0x0080, 0x27e3
-	obj_tiles 0x08c2407c, 0x0800, 0x27e4
-	obj_tiles 0x08c24300, 0x0800, 0x27e5
-	obj_tiles 0x08c24590, 0x0600, 0x27e6
-	obj_tiles 0x08c24820, 0x0600, 0x27e7
-	obj_tiles 0x08c23218, 0x0080, 0x27e8
-	obj_tiles 0x08c23ff4, 0x0080, 0x27e9
-	obj_tiles 0x08c24c50, 0x0180, 0x27ea
-	obj_tiles 0x08c23218, 0x0080, 0x27eb
-	obj_tiles 0x08c24dfc, 0x0200, 0x27ec
-	obj_tiles 0x08c24f48, 0x0400, 0x27ed
-	obj_tiles 0x08c251ac, 0x0a00, 0x27ee
-	obj_tiles 0x08c254e0, 0x0800, 0x27ef
-	obj_tiles 0x08c25794, 0x0200, 0x27f0
-	obj_tiles 0x08c27764, 0x0400, 0x27f1
-	obj_tiles 0x08c27a58, 0x0080, 0x27f2
-	obj_tiles 0x08c27910, 0x0800, 0x27f3
-	obj_tiles 0x08c25b1c, 0x0200, 0x27f4
-	obj_tiles 0x08c27b08, 0x0300, 0x27f5
-	obj_tiles 0x08c258b8, 0x0800, 0x27f6
-	obj_tiles 0x08c28394, 0x0380, 0x27f7
-	obj_tiles 0x08c27e34, 0x0800, 0x27f8
-	obj_tiles 0x08c28564, 0x00c0, 0x27f9
-	obj_tiles 0x08c28610, 0x0800, 0x27fa
-	obj_tiles 0x08c28880, 0x0060, 0x27fb
-	obj_tiles 0x08c28880, 0x0060, 0x27fc
-	obj_tiles 0x08c28880, 0x0060, 0x27fd
-	obj_tiles 0x08c287f4, 0x0080, 0x27fe
-	obj_tiles 0x08c2caa0, 0x0180, 0x27ff
-	obj_tiles 0x08c2cdf4, 0x0180, 0x2800
-	obj_tiles 0x08c2d348, 0x0200, 0x2801
-	obj_tiles 0x08c2d570, 0x0200, 0x2802
-	obj_tiles 0x08c2d6d0, 0x0020, 0x2803
-	obj_tiles 0x08c2e554, 0x0400, 0x2804
-	obj_tiles 0x08c2df08, 0x0600, 0x2805
-	obj_tiles 0x08c2e0ac, 0x1000, 0x2806
-	obj_tiles 0x08c2e64c, 0x0400, 0x2807
-	obj_tiles 0x08c2eba4, 0x0020, 0x2808
-	obj_tiles 0x08c2ebd4, 0x0080, 0x2809
-	obj_tiles 0x08c2ec44, 0x0800, 0x280a
-	obj_tiles 0x08c2ee38, 0x0080, 0x280b
-	obj_tiles 0x08c2eeb4, 0x0200, 0x280c
-	obj_tiles 0x08c2eff0, 0x0400, 0x280d
-	obj_tiles 0x08c2f1f4, 0x0200, 0x280e
-	obj_tiles 0x08c2f354, 0x0200, 0x280f
-	obj_tiles 0x08c2f4f0, 0x0800, 0x2810
-	obj_tiles 0x08c2f8a4, 0x0280, 0x2811
-	obj_tiles 0x08c2f3e0, 0x0200, 0x2812
-	obj_tiles 0x08c1b0a8, 0x0200, 0x2813
-	obj_tiles 0x08d8dae0, 0x0400, 0x2814
-	obj_tiles 0x08d8d2a4, 0x0200, 0x2815
-	obj_tiles 0x08d8e840, 0x0200, 0x2816
-	obj_tiles 0x08d93b44, 0x0080, 0x2817
-	obj_tiles 0x08d8ea54, 0x0020, 0x2818
-	obj_tiles 0x08d8ea54, 0x0020, 0x2819
-	obj_tiles 0x08d93b9c, 0x0080, 0x281a
-	obj_tiles 0x08c2407c, 0x0800, 0x281b
-	obj_tiles 0x08d8ea54, 0x0020, 0x281c
-	obj_tiles 0x08d8ef2c, 0x0080, 0x281d
-	obj_tiles 0x08dba378, 0x0400, 0x281e
-	obj_tiles 0x08dba4b8, 0x0080, 0x281f
-	obj_tiles 0x08d8ecc4, 0x0800, 0x2820
-	obj_tiles 0x08d8ef04, 0x0020, 0x2821
-	obj_tiles 0x08d8ef98, 0x0800, 0x2822
-	obj_tiles 0x08d8f118, 0x0800, 0x2823
-	obj_tiles 0x08d8f284, 0x0800, 0x2824
-	obj_tiles 0x08d92eec, 0x1000, 0x2825
-	obj_tiles 0x08d93c24, 0x0800, 0x2826
-	obj_tiles 0x08d93e4c, 0x00a0, 0x2827
-	obj_tiles 0x08d8f780, 0x0800, 0x2828
-	obj_tiles 0x08d93eb4, 0x0200, 0x2829
-	obj_tiles 0x08dba174, 0x0600, 0x282a
-	obj_tiles 0x08d93474, 0x0200, 0x282b
-	obj_tiles 0x08d94658, 0x0800, 0x282c
-	obj_tiles 0x08d949f0, 0x0200, 0x282d
-	obj_tiles 0x08c1e0b4, 0x0800, 0x282e
-	obj_tiles 0x08c0a3ec, 0x1000, 0x282f
-	obj_tiles 0x08c1bee4, 0x0100, 0x2830
+	obj_tiles gBattleAnimSpriteSheet_000, 0x0200, 0x2710
+	obj_tiles gBattleAnimSpriteSheet_001, 0x0300, 0x2711
+	obj_tiles gBattleAnimSpriteSheet_002, 0x0200, 0x2712
+	obj_tiles gBattleAnimSpriteSheet_003, 0x0100, 0x2713
+	obj_tiles gBattleAnimSpriteSheet_004, 0x0200, 0x2714
+	obj_tiles gBattleAnimSpriteSheet_005, 0x0400, 0x2715
+	obj_tiles gBattleAnimSpriteSheet_006, 0x0180, 0x2716
+	obj_tiles gBattleAnimSpriteSheet_007, 0x0800, 0x2717
+	obj_tiles gBattleAnimSpriteSheet_008, 0x0020, 0x2718
+	obj_tiles gBattleAnimSpriteSheet_009, 0x0400, 0x2719
+	obj_tiles gBattleAnimSpriteSheet_010, 0x1200, 0x271a
+	obj_tiles gBattleAnimSpriteSheet_011, 0x0180, 0x271b
+	obj_tiles gBattleAnimSpriteSheet_012, 0x0080, 0x271c
+	obj_tiles gBattleAnimSpriteSheet_013, 0x0080, 0x271d
+	obj_tiles gBattleAnimSpriteSheet_014, 0x0280, 0x271e
+	obj_tiles gBattleAnimSpriteSheet_015, 0x0080, 0x271f
+	obj_tiles gBattleAnimSpriteSheet_016, 0x0100, 0x2720
+	obj_tiles gBattleAnimSpriteSheet_017, 0x0020, 0x2721
+	obj_tiles gBattleAnimSpriteSheet_018, 0x0080, 0x2722
+	obj_tiles gBattleAnimSpriteSheet_019, 0x0400, 0x2723
+	obj_tiles gBattleAnimSpriteSheet_020, 0x0200, 0x2724
+	obj_tiles gBattleAnimSpriteSheet_021, 0x0a00, 0x2725
+	obj_tiles gBattleAnimSpriteSheet_021, 0x0a00, 0x2726
+	obj_tiles gBattleAnimSpriteSheet_023, 0x0380, 0x2727
+	obj_tiles gBattleAnimSpriteSheet_024, 0x0300, 0x2728
+	obj_tiles gBattleAnimSpriteSheet_025, 0x0a00, 0x2729
+	obj_tiles gBattleAnimSpriteSheet_026, 0x0a00, 0x272a
+	obj_tiles gBattleAnimSpriteSheet_027, 0x0a00, 0x272b
+	obj_tiles gBattleAnimSpriteSheet_028, 0x0a00, 0x272c
+	obj_tiles gBattleAnimSpriteSheet_029, 0x0a00, 0x272d
+	obj_tiles gBattleAnimSpriteSheet_030, 0x0a00, 0x272e
+	obj_tiles gBattleAnimSpriteSheet_031, 0x0e00, 0x272f
+	obj_tiles gBattleAnimSpriteSheet_032, 0x0380, 0x2730
+	obj_tiles gBattleAnimSpriteSheet_033, 0x1000, 0x2731
+	obj_tiles gBattleAnimSpriteSheet_034, 0x0800, 0x2732
+	obj_tiles gBattleAnimSpriteSheet_035, 0x0a00, 0x2733
+	obj_tiles gBattleAnimSpriteSheet_036, 0x0800, 0x2734
+	obj_tiles gBattleAnimSpriteSheet_037, 0x0a00, 0x2735
+	obj_tiles gBattleAnimSpriteSheet_038, 0x0a00, 0x2736
+	obj_tiles gBattleAnimSpriteSheet_039, 0x0a00, 0x2737
+	obj_tiles gBattleAnimSpriteSheet_040, 0x0a00, 0x2738
+	obj_tiles gBattleAnimSpriteSheet_041, 0x0a00, 0x2739
+	obj_tiles gBattleAnimSpriteSheet_042, 0x0a00, 0x273a
+	obj_tiles gBattleAnimSpriteSheet_043, 0x0a00, 0x273b
+	obj_tiles gBattleAnimSpriteSheet_044, 0x0a00, 0x273c
+	obj_tiles gBattleAnimSpriteSheet_045, 0x0a00, 0x273d
+	obj_tiles gBattleAnimSpriteSheet_046, 0x1000, 0x273e
+	obj_tiles gBattleAnimSpriteSheet_046, 0x1000, 0x273f
+	obj_tiles gBattleAnimSpriteSheet_048, 0x1000, 0x2740
+	obj_tiles gBattleAnimSpriteSheet_048, 0x1000, 0x2741
+	obj_tiles gBattleAnimSpriteSheet_050, 0x0200, 0x2742
+	obj_tiles gBattleAnimSpriteSheet_051, 0x0200, 0x2743
+	obj_tiles gBattleAnimSpriteSheet_052, 0x0200, 0x2744
+	obj_tiles gBattleAnimSpriteSheet_053, 0x0800, 0x2745
+	obj_tiles gBattleAnimSpriteSheet_054, 0x0080, 0x2746
+	obj_tiles gBattleAnimSpriteSheet_055, 0x0200, 0x2747
+	obj_tiles gBattleAnimSpriteSheet_056, 0x1000, 0x2748
+	obj_tiles gBattleAnimSpriteSheet_057, 0x0180, 0x2749
+	obj_tiles gBattleAnimSpriteSheet_058, 0x0c00, 0x274a
+	obj_tiles gBattleAnimSpriteSheet_059, 0x0100, 0x274b
+	obj_tiles gBattleAnimSpriteSheet_060, 0x0040, 0x274c
+	obj_tiles gBattleAnimSpriteSheet_061, 0x0180, 0x274d
+	obj_tiles gBattleAnimSpriteSheet_062, 0x0800, 0x274e
+	obj_tiles gBattleAnimSpriteSheet_063, 0x0480, 0x274f
+	obj_tiles gBattleAnimSpriteSheet_064, 0x0200, 0x2750
+	obj_tiles gBattleAnimSpriteSheet_065, 0x0200, 0x2751
+	obj_tiles gBattleAnimSpriteSheet_066, 0x0100, 0x2752
+	obj_tiles gBattleAnimSpriteSheet_065, 0x0200, 0x2753
+	obj_tiles gBattleAnimSpriteSheet_065, 0x0200, 0x2754
+	obj_tiles gBattleAnimSpriteSheet_065, 0x0200, 0x2755
+	obj_tiles gBattleAnimSpriteSheet_070, 0x0200, 0x2756
+	obj_tiles gBattleAnimSpriteSheet_071, 0x0a00, 0x2757
+	obj_tiles gBattleAnimSpriteSheet_072, 0x0300, 0x2758
+	obj_tiles gBattleAnimSpriteSheet_073, 0x0180, 0x2759
+	obj_tiles gBattleAnimSpriteSheet_074, 0x00a0, 0x275a
+	obj_tiles gBattleAnimSpriteSheet_075, 0x0700, 0x275b
+	obj_tiles gBattleAnimSpriteSheet_076, 0x0400, 0x275c
+	obj_tiles gBattleAnimSpriteSheet_077, 0x0200, 0x275d
+	obj_tiles gBattleAnimSpriteSheet_078, 0x0300, 0x275e
+	obj_tiles gBattleAnimSpriteSheet_079, 0x0c00, 0x275f
+	obj_tiles gBattleAnimSpriteSheet_080, 0x0a00, 0x2760
+	obj_tiles gBattleAnimSpriteSheet_081, 0x0080, 0x2761
+	obj_tiles gBattleAnimSpriteSheet_082, 0x0040, 0x2762
+	obj_tiles gBattleAnimSpriteSheet_083, 0x0e00, 0x2763
+	obj_tiles gBattleAnimSpriteSheet_084, 0x0e00, 0x2764
+	obj_tiles gBattleAnimSpriteSheet_085, 0x0280, 0x2765
+	obj_tiles gBattleAnimSpriteSheet_086, 0x0200, 0x2766
+	obj_tiles gBattleAnimSpriteSheet_087, 0x0080, 0x2767
+	obj_tiles gBattleAnimSpriteSheet_088, 0x00c0, 0x2768
+	obj_tiles gBattleAnimSpriteSheet_089, 0x0a00, 0x2769
+	obj_tiles gBattleAnimSpriteSheet_090, 0x0200, 0x276a
+	obj_tiles gBattleAnimSpriteSheet_091, 0x0180, 0x276b
+	obj_tiles gBattleAnimSpriteSheet_092, 0x0080, 0x276c
+	obj_tiles gBattleAnimSpriteSheet_093, 0x1000, 0x276d
+	obj_tiles gBattleAnimSpriteSheet_094, 0x0a00, 0x276e
+	obj_tiles gBattleAnimSpriteSheet_095, 0x0180, 0x276f
+	obj_tiles gBattleAnimSpriteSheet_096, 0x0380, 0x2770
+	obj_tiles gBattleAnimSpriteSheet_097, 0x0c00, 0x2771
+	obj_tiles gBattleAnimSpriteSheet_098, 0x0200, 0x2772
+	obj_tiles gBattleAnimSpriteSheet_099, 0x0200, 0x2773
+	obj_tiles gBattleAnimSpriteSheet_100, 0x0200, 0x2774
+	obj_tiles gBattleAnimSpriteSheet_101, 0x0200, 0x2775
+	obj_tiles gBattleAnimSpriteSheet_102, 0x0400, 0x2776
+	obj_tiles gBattleAnimSpriteSheet_103, 0x0080, 0x2777
+	obj_tiles gBattleAnimSpriteSheet_104, 0x0400, 0x2778
+	obj_tiles gBattleAnimSpriteSheet_105, 0x0c00, 0x2779
+	obj_tiles gBattleAnimSpriteSheet_106, 0x0200, 0x277a
+	obj_tiles gBattleAnimSpriteSheet_107, 0x1000, 0x277b
+	obj_tiles gBattleAnimSpriteSheet_108, 0x0a00, 0x277c
+	obj_tiles gBattleAnimSpriteSheet_109, 0x0020, 0x277d
+	obj_tiles gBattleAnimSpriteSheet_110, 0x0e00, 0x277e
+	obj_tiles gBattleAnimSpriteSheet_111, 0x0080, 0x277f
+	obj_tiles gBattleAnimSpriteSheet_112, 0x0a00, 0x2780
+	obj_tiles gBattleAnimSpriteSheet_113, 0x0400, 0x2781
+	obj_tiles gBattleAnimSpriteSheet_114, 0x0200, 0x2782
+	obj_tiles gBattleAnimSpriteSheet_115, 0x0700, 0x2783
+	obj_tiles gBattleAnimSpriteSheet_116, 0x0800, 0x2784
+	obj_tiles gBattleAnimSpriteSheet_117, 0x0a00, 0x2785
+	obj_tiles gBattleAnimSpriteSheet_118, 0x0600, 0x2786
+	obj_tiles gBattleAnimSpriteSheet_119, 0x0800, 0x2787
+	obj_tiles gBattleAnimSpriteSheet_120, 0x0200, 0x2788
+	obj_tiles gBattleAnimSpriteSheet_121, 0x0040, 0x2789
+	obj_tiles gBattleAnimSpriteSheet_122, 0x0180, 0x278a
+	obj_tiles gBattleAnimSpriteSheet_123, 0x0600, 0x278b
+	obj_tiles gBattleAnimSpriteSheet_124, 0x0600, 0x278c
+	obj_tiles gBattleAnimSpriteSheet_125, 0x0200, 0x278d
+	obj_tiles gBattleAnimSpriteSheet_126, 0x0080, 0x278e
+	obj_tiles gBattleAnimSpriteSheet_127, 0x0200, 0x278f
+	obj_tiles gBattleAnimSpriteSheet_128, 0x0800, 0x2790
+	obj_tiles gBattleAnimSpriteSheet_129, 0x0080, 0x2791
+	obj_tiles gBattleAnimSpriteSheet_130, 0x0a00, 0x2792
+	obj_tiles gBattleAnimSpriteSheet_131, 0x0280, 0x2793
+	obj_tiles gBattleAnimSpriteSheet_132, 0x0280, 0x2794
+	obj_tiles gBattleAnimSpriteSheet_133, 0x0100, 0x2795
+	obj_tiles gBattleAnimSpriteSheet_134, 0x0200, 0x2796
+	obj_tiles gBattleAnimSpriteSheet_135, 0x0200, 0x2797
+	obj_tiles gBattleAnimSpriteSheet_136, 0x0020, 0x2798
+	obj_tiles gBattleAnimSpriteSheet_137, 0x0a00, 0x2799
+	obj_tiles gBattleAnimSpriteSheet_138, 0x0800, 0x279a
+	obj_tiles gBattleAnimSpriteSheet_139, 0x0800, 0x279b
+	obj_tiles gBattleAnimSpriteSheet_140, 0x00c0, 0x279c
+	obj_tiles gBattleAnimSpriteSheet_141, 0x01c0, 0x279d
+	obj_tiles gBattleAnimSpriteSheet_142, 0x0100, 0x279e
+	obj_tiles gBattleAnimSpriteSheet_143, 0x0800, 0x279f
+	obj_tiles gBattleAnimSpriteSheet_144, 0x0200, 0x27a0
+	obj_tiles gBattleAnimSpriteSheet_145, 0x0800, 0x27a1
+	obj_tiles gBattleAnimSpriteSheet_146, 0x0180, 0x27a2
+	obj_tiles gBattleAnimSpriteSheet_147, 0x0180, 0x27a3
+	obj_tiles gBattleAnimSpriteSheet_148, 0x0200, 0x27a4
+	obj_tiles gBattleAnimSpriteSheet_149, 0x0200, 0x27a5
+	obj_tiles gBattleAnimSpriteSheet_150, 0x0180, 0x27a6
+	obj_tiles gBattleAnimSpriteSheet_151, 0x0400, 0x27a7
+	obj_tiles gBattleAnimSpriteSheet_152, 0x0080, 0x27a8
+	obj_tiles gBattleAnimSpriteSheet_153, 0x0100, 0x27a9
+	obj_tiles gBattleAnimSpriteSheet_154, 0x0100, 0x27aa
+	obj_tiles gBattleAnimSpriteSheet_155, 0x0140, 0x27ab
+	obj_tiles gBattleAnimSpriteSheet_156, 0x0800, 0x27ac
+	obj_tiles gBattleAnimSpriteSheet_157, 0x0200, 0x27ad
+	obj_tiles gBattleAnimSpriteSheet_158, 0x0100, 0x27ae
+	obj_tiles gBattleAnimSpriteSheet_159, 0x00a0, 0x27af
+	obj_tiles gBattleAnimSpriteSheet_160, 0x0100, 0x27b0
+	obj_tiles gBattleAnimSpriteSheet_161, 0x0080, 0x27b1
+	obj_tiles gBattleAnimSpriteSheet_162, 0x0300, 0x27b2
+	obj_tiles gBattleAnimSpriteSheet_163, 0x0100, 0x27b3
+	obj_tiles gBattleAnimSpriteSheet_163, 0x0100, 0x27b4
+	obj_tiles gBattleAnimSpriteSheet_163, 0x0100, 0x27b5
+	obj_tiles gBattleAnimSpriteSheet_166, 0x0800, 0x27b6
+	obj_tiles gBattleAnimSpriteSheet_166, 0x0800, 0x27b7
+	obj_tiles gBattleAnimSpriteSheet_166, 0x0800, 0x27b8
+	obj_tiles gBattleAnimSpriteSheet_166, 0x0800, 0x27b9
+	obj_tiles gBattleAnimSpriteSheet_166, 0x0800, 0x27ba
+	obj_tiles gBattleAnimSpriteSheet_171, 0x0080, 0x27bb
+	obj_tiles gBattleAnimSpriteSheet_144, 0x0200, 0x27bc
+	obj_tiles gBattleAnimSpriteSheet_173, 0x0200, 0x27bd
+	obj_tiles gBattleAnimSpriteSheet_174, 0x0200, 0x27be
+	obj_tiles gBattleAnimSpriteSheet_175, 0x0080, 0x27bf
+	obj_tiles gBattleAnimSpriteSheet_176, 0x0200, 0x27c0
+	obj_tiles gBattleAnimSpriteSheet_177, 0x0500, 0x27c1
+	obj_tiles gBattleAnimSpriteSheet_178, 0x0800, 0x27c2
+	obj_tiles gBattleAnimSpriteSheet_179, 0x0400, 0x27c3
+	obj_tiles gBattleAnimSpriteSheet_180, 0x0020, 0x27c4
+	obj_tiles gBattleAnimSpriteSheet_181, 0x0800, 0x27c5
+	obj_tiles gBattleAnimSpriteSheet_182, 0x0100, 0x27c6
+	obj_tiles gBattleAnimSpriteSheet_183, 0x0800, 0x27c7
+	obj_tiles gBattleAnimSpriteSheet_184, 0x0400, 0x27c8
+	obj_tiles gBattleAnimSpriteSheet_185, 0x0a00, 0x27c9
+	obj_tiles gBattleAnimSpriteSheet_186, 0x1000, 0x27ca
+	obj_tiles gBattleAnimSpriteSheet_187, 0x0800, 0x27cb
+	obj_tiles gBattleAnimSpriteSheet_188, 0x0400, 0x27cc
+	obj_tiles gBattleAnimSpriteSheet_189, 0x0200, 0x27cd
+	obj_tiles gBattleAnimSpriteSheet_190, 0x0800, 0x27ce
+	obj_tiles gBattleAnimSpriteSheet_191, 0x0800, 0x27cf
+	obj_tiles gBattleAnimSpriteSheet_192, 0x0800, 0x27d0
+	obj_tiles gBattleAnimSpriteSheet_193, 0x0200, 0x27d1
+	obj_tiles gBattleAnimSpriteSheet_194, 0x0800, 0x27d2
+	obj_tiles gBattleAnimSpriteSheet_195, 0x0200, 0x27d3
+	obj_tiles gBattleAnimSpriteSheet_196, 0x0800, 0x27d4
+	obj_tiles gBattleAnimSpriteSheet_197, 0x0200, 0x27d5
+	obj_tiles gBattleAnimSpriteSheet_198, 0x0800, 0x27d6
+	obj_tiles gBattleAnimSpriteSheet_199, 0x0400, 0x27d7
+	obj_tiles gBattleAnimSpriteSheet_200, 0x0200, 0x27d8
+	obj_tiles gBattleAnimSpriteSheet_201, 0x0a80, 0x27d9
+	obj_tiles gBattleAnimSpriteSheet_202, 0x0600, 0x27da
+	obj_tiles gBattleAnimSpriteSheet_203, 0x0800, 0x27db
+	obj_tiles gBattleAnimSpriteSheet_204, 0x0200, 0x27dc
+	obj_tiles gBattleAnimSpriteSheet_205, 0x0600, 0x27dd
+	obj_tiles gBattleAnimSpriteSheet_206, 0x0800, 0x27de
+	obj_tiles gBattleAnimSpriteSheet_207, 0x0180, 0x27df
+	obj_tiles gBattleAnimSpriteSheet_208, 0x0800, 0x27e0
+	obj_tiles gBattleAnimSpriteSheet_209, 0x0800, 0x27e1
+	obj_tiles gBattleAnimSpriteSheet_210, 0x0080, 0x27e2
+	obj_tiles gBattleAnimSpriteSheet_211, 0x0080, 0x27e3
+	obj_tiles gBattleAnimSpriteSheet_212, 0x0800, 0x27e4
+	obj_tiles gBattleAnimSpriteSheet_213, 0x0800, 0x27e5
+	obj_tiles gBattleAnimSpriteSheet_214, 0x0600, 0x27e6
+	obj_tiles gBattleAnimSpriteSheet_215, 0x0600, 0x27e7
+	obj_tiles gBattleAnimSpriteSheet_210, 0x0080, 0x27e8
+	obj_tiles gBattleAnimSpriteSheet_217, 0x0080, 0x27e9
+	obj_tiles gBattleAnimSpriteSheet_218, 0x0180, 0x27ea
+	obj_tiles gBattleAnimSpriteSheet_210, 0x0080, 0x27eb
+	obj_tiles gBattleAnimSpriteSheet_220, 0x0200, 0x27ec
+	obj_tiles gBattleAnimSpriteSheet_221, 0x0400, 0x27ed
+	obj_tiles gBattleAnimSpriteSheet_222, 0x0a00, 0x27ee
+	obj_tiles gBattleAnimSpriteSheet_223, 0x0800, 0x27ef
+	obj_tiles gBattleAnimSpriteSheet_224, 0x0200, 0x27f0
+	obj_tiles gBattleAnimSpriteSheet_225, 0x0400, 0x27f1
+	obj_tiles gBattleAnimSpriteSheet_226, 0x0080, 0x27f2
+	obj_tiles gBattleAnimSpriteSheet_227, 0x0800, 0x27f3
+	obj_tiles gBattleAnimSpriteSheet_228, 0x0200, 0x27f4
+	obj_tiles gBattleAnimSpriteSheet_229, 0x0300, 0x27f5
+	obj_tiles gBattleAnimSpriteSheet_230, 0x0800, 0x27f6
+	obj_tiles gBattleAnimSpriteSheet_231, 0x0380, 0x27f7
+	obj_tiles gBattleAnimSpriteSheet_232, 0x0800, 0x27f8
+	obj_tiles gBattleAnimSpriteSheet_233, 0x00c0, 0x27f9
+	obj_tiles gBattleAnimSpriteSheet_234, 0x0800, 0x27fa
+	obj_tiles gBattleAnimSpriteSheet_235, 0x0060, 0x27fb
+	obj_tiles gBattleAnimSpriteSheet_235, 0x0060, 0x27fc
+	obj_tiles gBattleAnimSpriteSheet_235, 0x0060, 0x27fd
+	obj_tiles gBattleAnimSpriteSheet_238, 0x0080, 0x27fe
+	obj_tiles gBattleAnimSpriteSheet_239, 0x0180, 0x27ff
+	obj_tiles gBattleAnimSpriteSheet_240, 0x0180, 0x2800
+	obj_tiles gBattleAnimSpriteSheet_241, 0x0200, 0x2801
+	obj_tiles gBattleAnimSpriteSheet_242, 0x0200, 0x2802
+	obj_tiles gBattleAnimSpriteSheet_243, 0x0020, 0x2803
+	obj_tiles gBattleAnimSpriteSheet_244, 0x0400, 0x2804
+	obj_tiles gBattleAnimSpriteSheet_245, 0x0600, 0x2805
+	obj_tiles gBattleAnimSpriteSheet_246, 0x1000, 0x2806
+	obj_tiles gBattleAnimSpriteSheet_247, 0x0400, 0x2807
+	obj_tiles gBattleAnimSpriteSheet_248, 0x0020, 0x2808
+	obj_tiles gBattleAnimSpriteSheet_249, 0x0080, 0x2809
+	obj_tiles gBattleAnimSpriteSheet_250, 0x0800, 0x280a
+	obj_tiles gBattleAnimSpriteSheet_251, 0x0080, 0x280b
+	obj_tiles gBattleAnimSpriteSheet_252, 0x0200, 0x280c
+	obj_tiles gBattleAnimSpriteSheet_253, 0x0400, 0x280d
+	obj_tiles gBattleAnimSpriteSheet_254, 0x0200, 0x280e
+	obj_tiles gBattleAnimSpriteSheet_255, 0x0200, 0x280f
+	obj_tiles gBattleAnimSpriteSheet_256, 0x0800, 0x2810
+	obj_tiles gBattleAnimSpriteSheet_257, 0x0280, 0x2811
+	obj_tiles gBattleAnimSpriteSheet_258, 0x0200, 0x2812
+	obj_tiles gBattleAnimSpriteSheet_149, 0x0200, 0x2813
+	obj_tiles gBattleAnimSpriteSheet_260, 0x0400, 0x2814
+	obj_tiles gBattleAnimSpriteSheet_261, 0x0200, 0x2815
+	obj_tiles gBattleAnimSpriteSheet_262, 0x0200, 0x2816
+	obj_tiles gBattleAnimSpriteSheet_263, 0x0080, 0x2817
+	obj_tiles gBattleAnimSpriteSheet_264, 0x0020, 0x2818
+	obj_tiles gBattleAnimSpriteSheet_264, 0x0020, 0x2819
+	obj_tiles gBattleAnimSpriteSheet_266, 0x0080, 0x281a
+	obj_tiles gBattleAnimSpriteSheet_212, 0x0800, 0x281b
+	obj_tiles gBattleAnimSpriteSheet_264, 0x0020, 0x281c
+	obj_tiles gBattleAnimSpriteSheet_269, 0x0080, 0x281d
+	obj_tiles gBattleAnimSpriteSheet_270, 0x0400, 0x281e
+	obj_tiles gBattleAnimSpriteSheet_271, 0x0080, 0x281f
+	obj_tiles gBattleAnimSpriteSheet_272, 0x0800, 0x2820
+	obj_tiles gBattleAnimSpriteSheet_273, 0x0020, 0x2821
+	obj_tiles gBattleAnimSpriteSheet_274, 0x0800, 0x2822
+	obj_tiles gBattleAnimSpriteSheet_275, 0x0800, 0x2823
+	obj_tiles gBattleAnimSpriteSheet_276, 0x0800, 0x2824
+	obj_tiles gBattleAnimSpriteSheet_277, 0x1000, 0x2825
+	obj_tiles gBattleAnimSpriteSheet_278, 0x0800, 0x2826
+	obj_tiles gBattleAnimSpriteSheet_279, 0x00a0, 0x2827
+	obj_tiles gBattleAnimSpriteSheet_280, 0x0800, 0x2828
+	obj_tiles gBattleAnimSpriteSheet_281, 0x0200, 0x2829
+	obj_tiles gBattleAnimSpriteSheet_282, 0x0600, 0x282a
+	obj_tiles gBattleAnimSpriteSheet_283, 0x0200, 0x282b
+	obj_tiles gBattleAnimSpriteSheet_284, 0x0800, 0x282c
+	obj_tiles gBattleAnimSpriteSheet_285, 0x0200, 0x282d
+	obj_tiles gBattleAnimSpriteSheet_183, 0x0800, 0x282e
+	obj_tiles gBattleAnimSpriteSheet_056, 0x1000, 0x282f
+	obj_tiles gBattleAnimSpriteSheet_163, 0x0100, 0x2830
 
     .align 2
 gBattleAnimPaletteTable:: @ 852544C
-	obj_pal 0x08c028cc, 0x2710
-	obj_pal 0x08c1c794, 0x2711
-	obj_pal 0x08c20868, 0x2712
-	obj_pal 0x08c028f0, 0x2713
-	obj_pal 0x08c02918, 0x2714
-	obj_pal 0x08c0292c, 0x2715
-	obj_pal 0x08c02954, 0x2716
-	obj_pal 0x08c02b48, 0x2717
-	obj_pal 0x08c02b88, 0x2718
-	obj_pal 0x08c0328c, 0x2719
-	obj_pal 0x08c02ba4, 0x271a
-	obj_pal 0x08c03324, 0x271b
-	obj_pal 0x08c033b4, 0x271c
-	obj_pal 0x08c0346c, 0x271d
-	obj_pal 0x08c1fc68, 0x271e
-	obj_pal 0x08c034f0, 0x271f
-	obj_pal 0x08c03588, 0x2720
-	obj_pal 0x08c03588, 0x2721
-	obj_pal 0x08c24db8, 0x2722
-	obj_pal 0x08c035dc, 0x2723
-	obj_pal 0x08c03784, 0x2724
-	obj_pal 0x08c03a00, 0x2725
-	obj_pal 0x08c03d60, 0x2726
-	obj_pal 0x08c037ac, 0x2727
-	obj_pal 0x08c03f6c, 0x2728
-	obj_pal 0x08c03d88, 0x2729
-	obj_pal 0x08c047cc, 0x272a
-	obj_pal 0x08c047f4, 0x272b
-	obj_pal 0x08c04b18, 0x272c
-	obj_pal 0x08c05148, 0x272d
-	obj_pal 0x08c05530, 0x272e
-	obj_pal 0x08c04360, 0x272f
-	obj_pal 0x08c04380, 0x2730
-	obj_pal 0x08c05554, 0x2731
-	obj_pal 0x08c05554, 0x2732
-	obj_pal 0x08c05554, 0x2733
-	obj_pal 0x08c06650, 0x2734
-	obj_pal 0x08c06650, 0x2735
-	obj_pal 0x08c07914, 0x2736
-	obj_pal 0x08c0793c, 0x2737
-	obj_pal 0x08c07914, 0x2738
-	obj_pal 0x08c07914, 0x2739
-	obj_pal 0x08c08594, 0x273a
-	obj_pal 0x08c089bc, 0x273b
-	obj_pal 0x08c089e4, 0x273c
-	obj_pal 0x08c08c78, 0x273d
-	obj_pal 0x08c099e4, 0x273e
-	obj_pal 0x08c09a04, 0x273e
-	obj_pal 0x08c09f88, 0x2740
-	obj_pal 0x08c09fb0, 0x2741
-	obj_pal 0x08c09fd8, 0x2742
-	obj_pal 0x08c09fd8, 0x2743
-	obj_pal 0x08c09fd8, 0x2744
-	obj_pal 0x08c047cc, 0x2745
-	obj_pal 0x08c0a3d4, 0x2746
-	obj_pal 0x08c09fd8, 0x2747
-	obj_pal 0x08c0a894, 0x2748
-	obj_pal 0x08c0aa08, 0x2749
-	obj_pal 0x08c0ae94, 0x274a
-	obj_pal 0x08c0af1c, 0x274b
-	obj_pal 0x08c0af60, 0x274c
-	obj_pal 0x08c0b02c, 0x274d
-	obj_pal 0x08c0b41c, 0x274e
-	obj_pal 0x08c0b600, 0x274f
-	obj_pal 0x08c231f4, 0x2750
-	obj_pal 0x08c0b7d0, 0x2751
-	obj_pal 0x08c0b83c, 0x2752
-	obj_pal 0x08d8eaa4, 0x2753
-	obj_pal 0x08d8eac4, 0x2754
-	obj_pal 0x08c0b7d0, 0x2755
-	obj_pal 0x08c0b8e4, 0x2756
-	obj_pal 0x08c0b8e4, 0x2757
-	obj_pal 0x08c0bc08, 0x2758
-	obj_pal 0x08c0bd3c, 0x2759
-	obj_pal 0x08c1b304, 0x275a
-	obj_pal 0x08c0bfd8, 0x275b
-	obj_pal 0x08c14f28, 0x275c
-	obj_pal 0x08c14f28, 0x275d
-	obj_pal 0x08c0c194, 0x275e
-	obj_pal 0x08c0c194, 0x275f
-	obj_pal 0x08c0c950, 0x2760
-	obj_pal 0x08c0c9f8, 0x2761
-	obj_pal 0x08c0cbb4, 0x2762
-	obj_pal 0x08c0cbc8, 0x2763
-	obj_pal 0x08c0cbf0, 0x2764
-	obj_pal 0x08c0cc18, 0x2765
-	obj_pal 0x08c0cc30, 0x2766
-	obj_pal 0x08c24d54, 0x2767
-	obj_pal 0x08c0cc58, 0x2768
-	obj_pal 0x08c0cc74, 0x2769
-	obj_pal 0x08c0cc9c, 0x276a
-	obj_pal 0x08c0b698, 0x276b
-	obj_pal 0x08c0ccc0, 0x276c
-	obj_pal 0x08c0ccdc, 0x276d
-	obj_pal 0x08c0cd04, 0x276e
-	obj_pal 0x08c0cd44, 0x276f
-	obj_pal 0x08c0cd6c, 0x2770
-	obj_pal 0x08c0cd88, 0x2771
-	obj_pal 0x08c0cd04, 0x2772
-	obj_pal 0x08c27e0c, 0x2773
-	obj_pal 0x08c0cdb0, 0x2774
-	obj_pal 0x08c0cdcc, 0x2775
-	obj_pal 0x08c0cdcc, 0x2776
-	obj_pal 0x08c0cdf4, 0x2777
-	obj_pal 0x08c0f14c, 0x2778
-	obj_pal 0x08c0f6f8, 0x2779
-	obj_pal 0x08c0f6f8, 0x277a
-	obj_pal 0x08c0fbbc, 0x277b
-	obj_pal 0x08c0fbbc, 0x277c
-	obj_pal 0x08c0ff90, 0x277d
-	obj_pal 0x08c0ff90, 0x277e
-	obj_pal 0x08c103e0, 0x277f
-	obj_pal 0x08c1072c, 0x2780
-	obj_pal 0x08c109c0, 0x2781
-	obj_pal 0x08c10adc, 0x2782
-	obj_pal 0x08c028ac, 0x2783
-	obj_pal 0x08c13134, 0x2784
-	obj_pal 0x08c13398, 0x2785
-	obj_pal 0x08c1354c, 0x2786
-	obj_pal 0x08c137f8, 0x2787
-	obj_pal 0x08c13914, 0x2788
-	obj_pal 0x08c13968, 0x2789
-	obj_pal 0x08c13a88, 0x278a
-	obj_pal 0x08c13a88, 0x278b
-	obj_pal 0x08c13e78, 0x278c
-	obj_pal 0x08c13f8c, 0x278d
-	obj_pal 0x08c1401c, 0x278e
-	obj_pal 0x08c141dc, 0x278f
-	obj_pal 0x08c1446c, 0x2790
-	obj_pal 0x08c1446c, 0x2791
-	obj_pal 0x08c148c0, 0x2792
-	obj_pal 0x08c148c0, 0x2793
-	obj_pal 0x08c14b58, 0x2794
-	obj_pal 0x08c14bf4, 0x2795
-	obj_pal 0x08c14bf4, 0x2796
-	obj_pal 0x08c1a478, 0x2797
-	obj_pal 0x08c1a564, 0x2798
-	obj_pal 0x08c1a478, 0x2799
-	obj_pal 0x08c1a478, 0x279a
-	obj_pal 0x08c1a980, 0x279b
-	obj_pal 0x08c1ad0c, 0x279c
-	obj_pal 0x08c1ae34, 0x279d
-	obj_pal 0x08c1ae34, 0x279e
-	obj_pal 0x08c2cddc, 0x279f
-	obj_pal 0x08c1bcdc, 0x27a0
-	obj_pal 0x08c1a980, 0x27a1
-	obj_pal 0x08c028ac, 0x27a2
-	obj_pal 0x08c1b080, 0x27a3
-	obj_pal 0x08c1b25c, 0x27a4
-	obj_pal 0x08c1b25c, 0x27a5
-	obj_pal 0x08c1b3fc, 0x27a6
-	obj_pal 0x08c1b3fc, 0x27a7
-	obj_pal 0x08c03414, 0x27a8
-	obj_pal 0x08c1b57c, 0x27a9
-	obj_pal 0x08c1b640, 0x27aa
-	obj_pal 0x08c1b728, 0x27ab
-	obj_pal 0x08c1b960, 0x27ac
-	obj_pal 0x08c1b9ec, 0x27ad
-	obj_pal 0x08c1bacc, 0x27ae
-	obj_pal 0x08c1bb6c, 0x27af
-	obj_pal 0x08c1bc3c, 0x27b0
-	obj_pal 0x08c029a4, 0x27b1
-	obj_pal 0x08c1bec4, 0x27b2
-	obj_pal 0x08c1bf44, 0x27b3
-	obj_pal 0x08c1bf74, 0x27b4
-	obj_pal 0x08c1bf8c, 0x27b5
-	obj_pal 0x08c1c2b0, 0x27b6
-	obj_pal 0x08c1c2d0, 0x27b7
-	obj_pal 0x08c1c2f0, 0x27b8
-	obj_pal 0x08c1c310, 0x27b9
-	obj_pal 0x08c1c330, 0x27ba
-	obj_pal 0x08c1c39c, 0x27bb
-	obj_pal 0x08c1c3c4, 0x27bc
-	obj_pal 0x08c1c794, 0x27bd
-	obj_pal 0x08c1d69c, 0x27be
-	obj_pal 0x08c1d728, 0x27bf
-	obj_pal 0x08c1d8a8, 0x27c0
-	obj_pal 0x08c1d994, 0x27c1
-	obj_pal 0x08c1db14, 0x27c2
-	obj_pal 0x08c1db3c, 0x27c3
-	obj_pal 0x08c1db3c, 0x27c4
-	obj_pal 0x08c1db3c, 0x27c5
-	obj_pal 0x08c1e08c, 0x27c6
-	obj_pal 0x08c1e32c, 0x27c7
-	obj_pal 0x08c1e4a8, 0x27c8
-	obj_pal 0x08c1e8e4, 0x27c9
-	obj_pal 0x08c1f1a4, 0x27ca
-	obj_pal 0x08c1edb8, 0x27cb
-	obj_pal 0x08d967d4, 0x27cc
-	obj_pal 0x08c2021c, 0x27cd
-	obj_pal 0x08c1fee0, 0x27ce
-	obj_pal 0x08c20170, 0x27cf
-	obj_pal 0x08c204bc, 0x27d0
-	obj_pal 0x08c20640, 0x27d1
-	obj_pal 0x08c20f84, 0x27d2
-	obj_pal 0x08c21064, 0x27d3
-	obj_pal 0x08c20c34, 0x27d4
-	obj_pal 0x08c211f4, 0x27d5
-	obj_pal 0x08c2160c, 0x27d6
-	obj_pal 0x08c216fc, 0x27d7
-	obj_pal 0x08c21858, 0x27d8
-	obj_pal 0x08c21ee4, 0x27d9
-	obj_pal 0x08c22210, 0x27da
-	obj_pal 0x08c223e0, 0x27db
-	obj_pal 0x08c22080, 0x27dc
-	obj_pal 0x08c228d8, 0x27dd
-	obj_pal 0x08c22610, 0x27de
-	obj_pal 0x08c229c8, 0x27df
-	obj_pal 0x08c1c2d0, 0x27e0
-	obj_pal 0x08c230e4, 0x27e1
-	obj_pal 0x08c232a0, 0x27e2
-	obj_pal 0x08c2456c, 0x27e3
-	obj_pal 0x08c2456c, 0x27e4
-	obj_pal 0x08c2456c, 0x27e5
-	obj_pal 0x08c231f4, 0x27e6
-	obj_pal 0x08c249ac, 0x27e7
-	obj_pal 0x08c232c0, 0x27e8
-	obj_pal 0x08c2405c, 0x27e9
-	obj_pal 0x08c24c28, 0x27ea
-	obj_pal 0x08c23280, 0x27eb
-	obj_pal 0x08c24dd4, 0x27ec
-	obj_pal 0x08c24f28, 0x27ed
-	obj_pal 0x08c25498, 0x27ee
-	obj_pal 0x08c254c0, 0x27ef
-	obj_pal 0x08c25774, 0x27f0
-	obj_pal 0x08c278e8, 0x27f1
-	obj_pal 0x08c27ae4, 0x27f2
-	obj_pal 0x08c27ae4, 0x27f3
-	obj_pal 0x08c25afc, 0x27f4
-	obj_pal 0x08c27cc4, 0x27f5
-	obj_pal 0x08c25890, 0x27f6
-	obj_pal 0x08c2836c, 0x27f7
-	obj_pal 0x08c2836c, 0x27f8
-	obj_pal 0x08c285e8, 0x27f9
-	obj_pal 0x08c287d0, 0x27fa
-	obj_pal 0x08c288d0, 0x27fb
-	obj_pal 0x08c288ec, 0x27fc
-	obj_pal 0x08c28908, 0x27fd
-	obj_pal 0x08c2885c, 0x27fe
-	obj_pal 0x08c2cb84, 0x27ff
-	obj_pal 0x08c2ce94, 0x2800
-	obj_pal 0x08c2d40c, 0x2801
-	obj_pal 0x08c2d6ac, 0x2802
-	obj_pal 0x08c2d6f8, 0x2803
-	obj_pal 0x08c2e630, 0x2804
-	obj_pal 0x08c2dee0, 0x2805
-	obj_pal 0x08c2dee0, 0x2806
-	obj_pal 0x08c231f4, 0x2807
-	obj_pal 0x08c2ebbc, 0x2808
-	obj_pal 0x08c2ec24, 0x2809
-	obj_pal 0x08c2ec24, 0x280a
-	obj_pal 0x08c2ee9c, 0x280b
-	obj_pal 0x08c2efcc, 0x280c
-	obj_pal 0x08c2f1cc, 0x280d
-	obj_pal 0x08c2f32c, 0x280e
-	obj_pal 0x08c2f3cc, 0x280f
-	obj_pal 0x08c2f87c, 0x2810
-	obj_pal 0x08c2f9c0, 0x2811
-	obj_pal 0x08c2f4c8, 0x2812
-	obj_pal 0x08c1b27c, 0x2813
-	obj_pal 0x08d8dc9c, 0x2814
-	obj_pal 0x08d8dab8, 0x2815
-	obj_pal 0x08d8e914, 0x2816
-	obj_pal 0x08d93b84, 0x2817
-	obj_pal 0x08d8ea74, 0x2818
-	obj_pal 0x08d8ea8c, 0x2819
-	obj_pal 0x08d93bdc, 0x281a
-	obj_pal 0x08d93bf4, 0x281b
-	obj_pal 0x08d93c0c, 0x281c
-	obj_pal 0x08d8ef80, 0x281d
-	obj_pal 0x08dba35c, 0x281e
-	obj_pal 0x08dba4a0, 0x281f
-	obj_pal 0x08d8eee0, 0x2820
-	obj_pal 0x08d8eee0, 0x2821
-	obj_pal 0x08d8f3ec, 0x2822
-	obj_pal 0x08d8f3ec, 0x2823
-	obj_pal 0x08d8f3ec, 0x2824
-	obj_pal 0x08d92ec4, 0x2825
-	obj_pal 0x08d93e30, 0x2826
-	obj_pal 0x08d93e98, 0x2827
-	obj_pal 0x08d8fb7c, 0x2828
-	obj_pal 0x08d9403c, 0x2829
-	obj_pal 0x08dba14c, 0x282a
-	obj_pal 0x08d93458, 0x282b
-	obj_pal 0x08d949d4, 0x282c
-	obj_pal 0x08d94a90, 0x282d
-	obj_pal 0x08d96698, 0x282e
-	obj_pal 0x08d9104c, 0x282f
-	obj_pal 0x08c1bf5c, 0x2830
+	obj_pal gBattleAnimSpritePalette_000, 0x2710
+	obj_pal gBattleAnimSpritePalette_001, 0x2711
+	obj_pal gBattleAnimSpritePalette_002, 0x2712
+	obj_pal gBattleAnimSpritePalette_003, 0x2713
+	obj_pal gBattleAnimSpritePalette_004, 0x2714
+	obj_pal gBattleAnimSpritePalette_005, 0x2715
+	obj_pal gBattleAnimSpritePalette_006, 0x2716
+	obj_pal gBattleAnimSpritePalette_007, 0x2717
+	obj_pal gBattleAnimSpritePalette_008, 0x2718
+	obj_pal gBattleAnimSpritePalette_009, 0x2719
+	obj_pal gBattleAnimSpritePalette_010, 0x271a
+	obj_pal gBattleAnimSpritePalette_011, 0x271b
+	obj_pal gBattleAnimSpritePalette_012, 0x271c
+	obj_pal gBattleAnimSpritePalette_013, 0x271d
+	obj_pal gBattleAnimSpritePalette_014, 0x271e
+	obj_pal gBattleAnimSpritePalette_015, 0x271f
+	obj_pal gBattleAnimSpritePalette_016, 0x2720
+	obj_pal gBattleAnimSpritePalette_016, 0x2721
+	obj_pal gBattleAnimSpritePalette_018, 0x2722
+	obj_pal gBattleAnimSpritePalette_019, 0x2723
+	obj_pal gBattleAnimSpritePalette_020, 0x2724
+	obj_pal gBattleAnimSpritePalette_021, 0x2725
+	obj_pal gBattleAnimSpritePalette_022, 0x2726
+	obj_pal gBattleAnimSpritePalette_023, 0x2727
+	obj_pal gBattleAnimSpritePalette_024, 0x2728
+	obj_pal gBattleAnimSpritePalette_025, 0x2729
+	obj_pal gBattleAnimSpritePalette_026, 0x272a
+	obj_pal gBattleAnimSpritePalette_027, 0x272b
+	obj_pal gBattleAnimSpritePalette_028, 0x272c
+	obj_pal gBattleAnimSpritePalette_029, 0x272d
+	obj_pal gBattleAnimSpritePalette_030, 0x272e
+	obj_pal gBattleAnimSpritePalette_031, 0x272f
+	obj_pal gBattleAnimSpritePalette_032, 0x2730
+	obj_pal gBattleAnimSpritePalette_033, 0x2731
+	obj_pal gBattleAnimSpritePalette_033, 0x2732
+	obj_pal gBattleAnimSpritePalette_033, 0x2733
+	obj_pal gBattleAnimSpritePalette_036, 0x2734
+	obj_pal gBattleAnimSpritePalette_036, 0x2735
+	obj_pal gBattleAnimSpritePalette_038, 0x2736
+	obj_pal gBattleAnimSpritePalette_039, 0x2737
+	obj_pal gBattleAnimSpritePalette_038, 0x2738
+	obj_pal gBattleAnimSpritePalette_038, 0x2739
+	obj_pal gBattleAnimSpritePalette_042, 0x273a
+	obj_pal gBattleAnimSpritePalette_043, 0x273b
+	obj_pal gBattleAnimSpritePalette_044, 0x273c
+	obj_pal gBattleAnimSpritePalette_045, 0x273d
+	obj_pal gBattleAnimSpritePalette_046, 0x273e
+	obj_pal gBattleAnimSpritePalette_047, 0x273e
+	obj_pal gBattleAnimSpritePalette_048, 0x2740
+	obj_pal gBattleAnimSpritePalette_049, 0x2741
+	obj_pal gBattleAnimSpritePalette_050, 0x2742
+	obj_pal gBattleAnimSpritePalette_050, 0x2743
+	obj_pal gBattleAnimSpritePalette_050, 0x2744
+	obj_pal gBattleAnimSpritePalette_026, 0x2745
+	obj_pal gBattleAnimSpritePalette_054, 0x2746
+	obj_pal gBattleAnimSpritePalette_050, 0x2747
+	obj_pal gBattleAnimSpritePalette_056, 0x2748
+	obj_pal gBattleAnimSpritePalette_057, 0x2749
+	obj_pal gBattleAnimSpritePalette_058, 0x274a
+	obj_pal gBattleAnimSpritePalette_059, 0x274b
+	obj_pal gBattleAnimSpritePalette_060, 0x274c
+	obj_pal gBattleAnimSpritePalette_061, 0x274d
+	obj_pal gBattleAnimSpritePalette_062, 0x274e
+	obj_pal gBattleAnimSpritePalette_063, 0x274f
+	obj_pal gBattleAnimSpritePalette_064, 0x2750
+	obj_pal gBattleAnimSpritePalette_065, 0x2751
+	obj_pal gBattleAnimSpritePalette_066, 0x2752
+	obj_pal gBattleAnimSpritePalette_067, 0x2753
+	obj_pal gBattleAnimSpritePalette_068, 0x2754
+	obj_pal gBattleAnimSpritePalette_065, 0x2755
+	obj_pal gBattleAnimSpritePalette_070, 0x2756
+	obj_pal gBattleAnimSpritePalette_070, 0x2757
+	obj_pal gBattleAnimSpritePalette_072, 0x2758
+	obj_pal gBattleAnimSpritePalette_073, 0x2759
+	obj_pal gBattleAnimSpritePalette_074, 0x275a
+	obj_pal gBattleAnimSpritePalette_075, 0x275b
+	obj_pal gBattleAnimSpritePalette_076, 0x275c
+	obj_pal gBattleAnimSpritePalette_076, 0x275d
+	obj_pal gBattleAnimSpritePalette_078, 0x275e
+	obj_pal gBattleAnimSpritePalette_078, 0x275f
+	obj_pal gBattleAnimSpritePalette_080, 0x2760
+	obj_pal gBattleAnimSpritePalette_081, 0x2761
+	obj_pal gBattleAnimSpritePalette_082, 0x2762
+	obj_pal gBattleAnimSpritePalette_083, 0x2763
+	obj_pal gBattleAnimSpritePalette_084, 0x2764
+	obj_pal gBattleAnimSpritePalette_085, 0x2765
+	obj_pal gBattleAnimSpritePalette_086, 0x2766
+	obj_pal gBattleAnimSpritePalette_087, 0x2767
+	obj_pal gBattleAnimSpritePalette_088, 0x2768
+	obj_pal gBattleAnimSpritePalette_089, 0x2769
+	obj_pal gBattleAnimSpritePalette_090, 0x276a
+	obj_pal gBattleAnimSpritePalette_091, 0x276b
+	obj_pal gBattleAnimSpritePalette_092, 0x276c
+	obj_pal gBattleAnimSpritePalette_093, 0x276d
+	obj_pal gBattleAnimSpritePalette_094, 0x276e
+	obj_pal gBattleAnimSpritePalette_095, 0x276f
+	obj_pal gBattleAnimSpritePalette_096, 0x2770
+	obj_pal gBattleAnimSpritePalette_097, 0x2771
+	obj_pal gBattleAnimSpritePalette_094, 0x2772
+	obj_pal gBattleAnimSpritePalette_099, 0x2773
+	obj_pal gBattleAnimSpritePalette_100, 0x2774
+	obj_pal gBattleAnimSpritePalette_101, 0x2775
+	obj_pal gBattleAnimSpritePalette_101, 0x2776
+	obj_pal gBattleAnimSpritePalette_103, 0x2777
+	obj_pal gBattleAnimSpritePalette_104, 0x2778
+	obj_pal gBattleAnimSpritePalette_105, 0x2779
+	obj_pal gBattleAnimSpritePalette_105, 0x277a
+	obj_pal gBattleAnimSpritePalette_107, 0x277b
+	obj_pal gBattleAnimSpritePalette_107, 0x277c
+	obj_pal gBattleAnimSpritePalette_109, 0x277d
+	obj_pal gBattleAnimSpritePalette_109, 0x277e
+	obj_pal gBattleAnimSpritePalette_111, 0x277f
+	obj_pal gBattleAnimSpritePalette_112, 0x2780
+	obj_pal gBattleAnimSpritePalette_113, 0x2781
+	obj_pal gBattleAnimSpritePalette_114, 0x2782
+	obj_pal gBattleAnimSpritePalette_115, 0x2783
+	obj_pal gBattleAnimSpritePalette_116, 0x2784
+	obj_pal gBattleAnimSpritePalette_117, 0x2785
+	obj_pal gBattleAnimSpritePalette_118, 0x2786
+	obj_pal gBattleAnimSpritePalette_119, 0x2787
+	obj_pal gBattleAnimSpritePalette_120, 0x2788
+	obj_pal gBattleAnimSpritePalette_121, 0x2789
+	obj_pal gBattleAnimSpritePalette_122, 0x278a
+	obj_pal gBattleAnimSpritePalette_122, 0x278b
+	obj_pal gBattleAnimSpritePalette_124, 0x278c
+	obj_pal gBattleAnimSpritePalette_125, 0x278d
+	obj_pal gBattleAnimSpritePalette_126, 0x278e
+	obj_pal gBattleAnimSpritePalette_127, 0x278f
+	obj_pal gBattleAnimSpritePalette_128, 0x2790
+	obj_pal gBattleAnimSpritePalette_128, 0x2791
+	obj_pal gBattleAnimSpritePalette_130, 0x2792
+	obj_pal gBattleAnimSpritePalette_130, 0x2793
+	obj_pal gBattleAnimSpritePalette_132, 0x2794
+	obj_pal gBattleAnimSpritePalette_133, 0x2795
+	obj_pal gBattleAnimSpritePalette_133, 0x2796
+	obj_pal gBattleAnimSpritePalette_135, 0x2797
+	obj_pal gBattleAnimSpritePalette_136, 0x2798
+	obj_pal gBattleAnimSpritePalette_135, 0x2799
+	obj_pal gBattleAnimSpritePalette_135, 0x279a
+	obj_pal gBattleAnimSpritePalette_139, 0x279b
+	obj_pal gBattleAnimSpritePalette_140, 0x279c
+	obj_pal gBattleAnimSpritePalette_141, 0x279d
+	obj_pal gBattleAnimSpritePalette_141, 0x279e
+	obj_pal gBattleAnimSpritePalette_143, 0x279f
+	obj_pal gBattleAnimSpritePalette_144, 0x27a0
+	obj_pal gBattleAnimSpritePalette_139, 0x27a1
+	obj_pal gBattleAnimSpritePalette_115, 0x27a2
+	obj_pal gBattleAnimSpritePalette_147, 0x27a3
+	obj_pal gBattleAnimSpritePalette_148, 0x27a4
+	obj_pal gBattleAnimSpritePalette_148, 0x27a5
+	obj_pal gBattleAnimSpritePalette_150, 0x27a6
+	obj_pal gBattleAnimSpritePalette_150, 0x27a7
+	obj_pal gBattleAnimSpritePalette_152, 0x27a8
+	obj_pal gBattleAnimSpritePalette_153, 0x27a9
+	obj_pal gBattleAnimSpritePalette_154, 0x27aa
+	obj_pal gBattleAnimSpritePalette_155, 0x27ab
+	obj_pal gBattleAnimSpritePalette_156, 0x27ac
+	obj_pal gBattleAnimSpritePalette_157, 0x27ad
+	obj_pal gBattleAnimSpritePalette_158, 0x27ae
+	obj_pal gBattleAnimSpritePalette_159, 0x27af
+	obj_pal gBattleAnimSpritePalette_160, 0x27b0
+	obj_pal gBattleAnimSpritePalette_161, 0x27b1
+	obj_pal gBattleAnimSpritePalette_162, 0x27b2
+	obj_pal gBattleAnimSpritePalette_163, 0x27b3
+	obj_pal gBattleAnimSpritePalette_164, 0x27b4
+	obj_pal gBattleAnimSpritePalette_165, 0x27b5
+	obj_pal gBattleAnimSpritePalette_166, 0x27b6
+	obj_pal gBattleAnimSpritePalette_167, 0x27b7
+	obj_pal gBattleAnimSpritePalette_168, 0x27b8
+	obj_pal gBattleAnimSpritePalette_169, 0x27b9
+	obj_pal gBattleAnimSpritePalette_170, 0x27ba
+	obj_pal gBattleAnimSpritePalette_171, 0x27bb
+	obj_pal gBattleAnimSpritePalette_172, 0x27bc
+	obj_pal gBattleAnimSpritePalette_001, 0x27bd
+	obj_pal gBattleAnimSpritePalette_174, 0x27be
+	obj_pal gBattleAnimSpritePalette_175, 0x27bf
+	obj_pal gBattleAnimSpritePalette_176, 0x27c0
+	obj_pal gBattleAnimSpritePalette_177, 0x27c1
+	obj_pal gBattleAnimSpritePalette_178, 0x27c2
+	obj_pal gBattleAnimSpritePalette_179, 0x27c3
+	obj_pal gBattleAnimSpritePalette_179, 0x27c4
+	obj_pal gBattleAnimSpritePalette_179, 0x27c5
+	obj_pal gBattleAnimSpritePalette_182, 0x27c6
+	obj_pal gBattleAnimSpritePalette_183, 0x27c7
+	obj_pal gBattleAnimSpritePalette_184, 0x27c8
+	obj_pal gBattleAnimSpritePalette_185, 0x27c9
+	obj_pal gBattleAnimSpritePalette_186, 0x27ca
+	obj_pal gBattleAnimSpritePalette_187, 0x27cb
+	obj_pal gBattleAnimSpritePalette_188, 0x27cc
+	obj_pal gBattleAnimSpritePalette_189, 0x27cd
+	obj_pal gBattleAnimSpritePalette_190, 0x27ce
+	obj_pal gBattleAnimSpritePalette_191, 0x27cf
+	obj_pal gBattleAnimSpritePalette_192, 0x27d0
+	obj_pal gBattleAnimSpritePalette_193, 0x27d1
+	obj_pal gBattleAnimSpritePalette_194, 0x27d2
+	obj_pal gBattleAnimSpritePalette_195, 0x27d3
+	obj_pal gBattleAnimSpritePalette_196, 0x27d4
+	obj_pal gBattleAnimSpritePalette_197, 0x27d5
+	obj_pal gBattleAnimSpritePalette_198, 0x27d6
+	obj_pal gBattleAnimSpritePalette_199, 0x27d7
+	obj_pal gBattleAnimSpritePalette_200, 0x27d8
+	obj_pal gBattleAnimSpritePalette_201, 0x27d9
+	obj_pal gBattleAnimSpritePalette_202, 0x27da
+	obj_pal gBattleAnimSpritePalette_203, 0x27db
+	obj_pal gBattleAnimSpritePalette_204, 0x27dc
+	obj_pal gBattleAnimSpritePalette_205, 0x27dd
+	obj_pal gBattleAnimSpritePalette_206, 0x27de
+	obj_pal gBattleAnimSpritePalette_207, 0x27df
+	obj_pal gBattleAnimSpritePalette_167, 0x27e0
+	obj_pal gBattleAnimSpritePalette_209, 0x27e1
+	obj_pal gBattleAnimSpritePalette_210, 0x27e2
+	obj_pal gBattleAnimSpritePalette_211, 0x27e3
+	obj_pal gBattleAnimSpritePalette_211, 0x27e4
+	obj_pal gBattleAnimSpritePalette_211, 0x27e5
+	obj_pal gBattleAnimSpritePalette_064, 0x27e6
+	obj_pal gBattleAnimSpritePalette_215, 0x27e7
+	obj_pal gBattleAnimSpritePalette_216, 0x27e8
+	obj_pal gBattleAnimSpritePalette_217, 0x27e9
+	obj_pal gBattleAnimSpritePalette_218, 0x27ea
+	obj_pal gBattleAnimSpritePalette_219, 0x27eb
+	obj_pal gBattleAnimSpritePalette_220, 0x27ec
+	obj_pal gBattleAnimSpritePalette_221, 0x27ed
+	obj_pal gBattleAnimSpritePalette_222, 0x27ee
+	obj_pal gBattleAnimSpritePalette_223, 0x27ef
+	obj_pal gBattleAnimSpritePalette_224, 0x27f0
+	obj_pal gBattleAnimSpritePalette_225, 0x27f1
+	obj_pal gBattleAnimSpritePalette_226, 0x27f2
+	obj_pal gBattleAnimSpritePalette_226, 0x27f3
+	obj_pal gBattleAnimSpritePalette_228, 0x27f4
+	obj_pal gBattleAnimSpritePalette_229, 0x27f5
+	obj_pal gBattleAnimSpritePalette_230, 0x27f6
+	obj_pal gBattleAnimSpritePalette_231, 0x27f7
+	obj_pal gBattleAnimSpritePalette_231, 0x27f8
+	obj_pal gBattleAnimSpritePalette_233, 0x27f9
+	obj_pal gBattleAnimSpritePalette_234, 0x27fa
+	obj_pal gBattleAnimSpritePalette_235, 0x27fb
+	obj_pal gBattleAnimSpritePalette_236, 0x27fc
+	obj_pal gBattleAnimSpritePalette_237, 0x27fd
+	obj_pal gBattleAnimSpritePalette_238, 0x27fe
+	obj_pal gBattleAnimSpritePalette_239, 0x27ff
+	obj_pal gBattleAnimSpritePalette_240, 0x2800
+	obj_pal gBattleAnimSpritePalette_241, 0x2801
+	obj_pal gBattleAnimSpritePalette_242, 0x2802
+	obj_pal gBattleAnimSpritePalette_243, 0x2803
+	obj_pal gBattleAnimSpritePalette_244, 0x2804
+	obj_pal gBattleAnimSpritePalette_245, 0x2805
+	obj_pal gBattleAnimSpritePalette_245, 0x2806
+	obj_pal gBattleAnimSpritePalette_064, 0x2807
+	obj_pal gBattleAnimSpritePalette_248, 0x2808
+	obj_pal gBattleAnimSpritePalette_249, 0x2809
+	obj_pal gBattleAnimSpritePalette_249, 0x280a
+	obj_pal gBattleAnimSpritePalette_251, 0x280b
+	obj_pal gBattleAnimSpritePalette_252, 0x280c
+	obj_pal gBattleAnimSpritePalette_253, 0x280d
+	obj_pal gBattleAnimSpritePalette_254, 0x280e
+	obj_pal gBattleAnimSpritePalette_255, 0x280f
+	obj_pal gBattleAnimSpritePalette_256, 0x2810
+	obj_pal gBattleAnimSpritePalette_257, 0x2811
+	obj_pal gBattleAnimSpritePalette_258, 0x2812
+	obj_pal gBattleAnimSpritePalette_259, 0x2813
+	obj_pal gBattleAnimSpritePalette_260, 0x2814
+	obj_pal gBattleAnimSpritePalette_261, 0x2815
+	obj_pal gBattleAnimSpritePalette_262, 0x2816
+	obj_pal gBattleAnimSpritePalette_263, 0x2817
+	obj_pal gBattleAnimSpritePalette_264, 0x2818
+	obj_pal gBattleAnimSpritePalette_265, 0x2819
+	obj_pal gBattleAnimSpritePalette_266, 0x281a
+	obj_pal gBattleAnimSpritePalette_267, 0x281b
+	obj_pal gBattleAnimSpritePalette_268, 0x281c
+	obj_pal gBattleAnimSpritePalette_269, 0x281d
+	obj_pal gBattleAnimSpritePalette_270, 0x281e
+	obj_pal gBattleAnimSpritePalette_271, 0x281f
+	obj_pal gBattleAnimSpritePalette_272, 0x2820
+	obj_pal gBattleAnimSpritePalette_272, 0x2821
+	obj_pal gBattleAnimSpritePalette_274, 0x2822
+	obj_pal gBattleAnimSpritePalette_274, 0x2823
+	obj_pal gBattleAnimSpritePalette_274, 0x2824
+	obj_pal gBattleAnimSpritePalette_277, 0x2825
+	obj_pal gBattleAnimSpritePalette_278, 0x2826
+	obj_pal gBattleAnimSpritePalette_279, 0x2827
+	obj_pal gBattleAnimSpritePalette_280, 0x2828
+	obj_pal gBattleAnimSpritePalette_281, 0x2829
+	obj_pal gBattleAnimSpritePalette_282, 0x282a
+	obj_pal gBattleAnimSpritePalette_283, 0x282b
+	obj_pal gBattleAnimSpritePalette_284, 0x282c
+	obj_pal gBattleAnimSpritePalette_285, 0x282d
+	obj_pal gBattleAnimSpritePalette_286, 0x282e
+	obj_pal gBattleAnimSpritePalette_287, 0x282f
+	obj_pal gBattleAnimSpritePalette_288, 0x2830
 
     .align 2
 gBattleAnimBackgroundTable:: @ 8525D54
-	.4byte 0x08c1c844, 0x08c1ce3c, 0x08c1ce5c
-	.4byte 0x08c1c844, 0x08c1ce3c, 0x08c1ce5c
-	.4byte 0x08d90074, 0x08d90d3c, 0x08d90d58
-	.4byte 0x08c1e90c, 0x08c1eadc, 0x08c1eb00
-	.4byte 0x08c25bec, 0x08c25bc4, 0x08c26958
-	.4byte 0x08c25bec, 0x08c25bc4, 0x08c26e54
-	.4byte 0x08c25bec, 0x08c25bc4, 0x08c27324
-	.4byte 0x08c28924, 0x08c28acc, 0x08c28b1c
-	.4byte 0x08c28924, 0x08c28acc, 0x08c28cac
-	.4byte 0x08c29dbc, 0x08c29d7c, 0x08c29a84
-	.4byte 0x08c29dbc, 0x08c29d7c, 0x08c2a33c
-	.4byte 0x08c2bde4, 0x08c2c780, 0x08c2c7a8
-	.4byte 0x08c2b05c, 0x08c2bdc4, 0x08c2a808
-	.4byte 0x08c2b05c, 0x08c2bdc4, 0x08c2aad0
-	.4byte 0x08c2b05c, 0x08c2bdc4, 0x08c2adcc
-	.4byte 0x08d8dcb4, 0x08d8e624, 0x08d8e648
-	.4byte 0x08d92b28, 0x08d92b00, 0x08d92d88
-	.4byte 0x08d8f414, 0x08d8f570, 0x08d8f598
-	.4byte 0x08c28924, 0x08c28af4, 0x08c28b1c
-	.4byte 0x08c28924, 0x08c28af4, 0x08c28cac
-	.4byte 0x08c28e38, 0x08c29860, 0x08c29880
-	.4byte 0x08d9405c, 0x08d94350, 0x08d9436c
-	.4byte 0x08c29dbc, 0x08c29d9c, 0x08c29a84
-	.4byte 0x08c29dbc, 0x08c29d9c, 0x08c2a33c
-	.4byte 0x08c25bec, 0x08d91074, 0x08c26958
-	.4byte 0x08c25bec, 0x08d91074, 0x08c26e54
-	.4byte 0x08c25bec, 0x08d91074, 0x08c27324
+	.4byte gBattleAnimBackgroundImage_00, gBattleAnimBackgroundPalette_00, gBattleAnimBackgroundTilemap_00
+	.4byte gBattleAnimBackgroundImage_00, gBattleAnimBackgroundPalette_00, gBattleAnimBackgroundTilemap_00
+	.4byte gBattleAnimBackgroundImage_02, gBattleAnimBackgroundPalette_02, gBattleAnimBackgroundTilemap_02
+	.4byte gBattleAnimBackgroundImage_03, gBattleAnimBackgroundPalette_03, gBattleAnimBackgroundTilemap_03
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_04
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_05
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_06
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_07, gBattleAnimBackgroundTilemap_07
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_07, gBattleAnimBackgroundTilemap_08
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_09, gBattleAnimBackgroundTilemap_09
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_09, gBattleAnimBackgroundTilemap_10
+	.4byte gBattleAnimBackgroundImage_11, gBattleAnimBackgroundPalette_11, gBattleAnimBackgroundTilemap_11
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_12
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_13
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_14
+	.4byte gBattleAnimBackgroundImage_15, gBattleAnimBackgroundPalette_15, gBattleAnimBackgroundTilemap_15
+	.4byte gBattleAnimBackgroundImage_16, gBattleAnimBackgroundPalette_16, gBattleAnimBackgroundTilemap_16
+	.4byte gBattleAnimBackgroundImage_17, gBattleAnimBackgroundPalette_17, gBattleAnimBackgroundTilemap_17
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_18, gBattleAnimBackgroundTilemap_07
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_18, gBattleAnimBackgroundTilemap_08
+	.4byte gBattleAnimBackgroundImage_20, gBattleAnimBackgroundPalette_20, gBattleAnimBackgroundTilemap_20
+	.4byte gBattleAnimBackgroundImage_21, gBattleAnimBackgroundPalette_21, gBattleAnimBackgroundTilemap_21
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_22, gBattleAnimBackgroundTilemap_09
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_22, gBattleAnimBackgroundTilemap_10
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_04
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_05
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_06
+

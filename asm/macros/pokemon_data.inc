@@ -52,5 +52,5 @@
 	.byte \max_level
 	.endif
 
-	.2byte SPECIES_\species
+	.2byte \species
 	.endm

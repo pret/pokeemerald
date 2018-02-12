@@ -1,0 +1,102 @@
+FortreeCity_House1_MapScripts:: @ 82162BA
+	.byte 0
+
+FortreeCity_House1_EventScript_2162BB:: @ 82162BB
+	lock
+	faceplayer
+	checkflag FLAG_0x09B
+	goto_eq FortreeCity_House1_EventScript_216355
+	setvar VAR_0x8008, 1
+	copyvar VAR_0x8004, VAR_0x8008
+	specialvar VAR_RESULT, sub_807E73C
+	copyvar VAR_0x8009, VAR_RESULT
+	msgbox FortreeCity_House1_Text_21637B, 5
+	compare VAR_RESULT, 0
+	goto_eq FortreeCity_House1_EventScript_21633D
+	special sub_81B94B0
+	waitstate
+	copyvar VAR_0x800A, VAR_0x8004
+	compare VAR_0x8004, 255
+	goto_eq FortreeCity_House1_EventScript_21633D
+	copyvar VAR_0x8005, VAR_0x800A
+	specialvar VAR_RESULT, sub_807E9D4
+	copyvar VAR_0x800B, VAR_RESULT
+	compare VAR_RESULT, VAR_0x8009
+	goto_if 5, FortreeCity_House1_EventScript_216347
+	copyvar VAR_0x8004, VAR_0x8008
+	copyvar VAR_0x8005, VAR_0x800A
+	special sub_807EA10
+	special sub_807F0E4
+	waitstate
+	bufferspeciesname 0, VAR_0x8009
+	msgbox FortreeCity_House1_Text_216440, 4
+	setflag FLAG_0x09B
+	release
+	end
+
+FortreeCity_House1_EventScript_21633D:: @ 821633D
+	msgbox FortreeCity_House1_Text_21649F, 4
+	release
+	end
+
+FortreeCity_House1_EventScript_216347:: @ 8216347
+	bufferspeciesname 0, VAR_0x8009
+	msgbox FortreeCity_House1_Text_216474, 4
+	release
+	end
+
+FortreeCity_House1_EventScript_216355:: @ 8216355
+	msgbox FortreeCity_House1_Text_2164DB, 4
+	release
+	end
+
+FortreeCity_House1_EventScript_21635F:: @ 821635F
+	msgbox FortreeCity_House1_Text_21653B, 2
+	end
+
+FortreeCity_House1_EventScript_216368:: @ 8216368
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_ZIGZAGOON, 0
+	msgbox FortreeCity_House1_Text_216597, 4
+	waitmoncry
+	release
+	end
+
+FortreeCity_House1_Text_21637B: @ 821637B
+	.string "Wrooooaaar! I need it!\n"
+	.string "I have to get me a {STR_VAR_1}!\l"
+	.string "I’ll do anything for it!\p"
+	.string "…Uh… Did you hear that?\n"
+	.string "My shout from the bottom of my heart?\p"
+	.string "Having heard that, you will trade\n"
+	.string "your {STR_VAR_1} for my {STR_VAR_2},\l"
+	.string "won’t you?$"
+
+FortreeCity_House1_Text_216440: @ 8216440
+	.string "Oh, yeah, right on!\p"
+	.string "{STR_VAR_1}, welcome!\n"
+	.string "{STR_VAR_2}, you take care!$"
+
+FortreeCity_House1_Text_216474: @ 8216474
+	.string "Uh, no, I don’t think so.\n"
+	.string "That isn’t a {STR_VAR_1}.$"
+
+FortreeCity_House1_Text_21649F: @ 821649F
+	.string "No? You won’t trade me?\n"
+	.string "Even after I bared my heart to you?$"
+
+FortreeCity_House1_Text_2164DB: @ 82164DB
+	.string "I’m going to make VOLBEAT super\n"
+	.string "strong from this moment on!\p"
+	.string "I hope you do the same with PLUSLE!$"
+
+FortreeCity_House1_Text_21653B: @ 821653B
+	.string "Trading POKéMON with others…\p"
+	.string "It’s as if you’re trading your own\n"
+	.string "memories with other people.$"
+
+FortreeCity_House1_Text_216597: @ 8216597
+	.string "ZIGZAGOON: Gumomoh?$"
+

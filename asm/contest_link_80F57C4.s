@@ -344,7 +344,7 @@ sub_80F5B00: @ 80F5B00
 	bl SetVBlankCallback
 	bl sub_80F7DF4
 	bl sub_80F57C4
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
@@ -492,7 +492,7 @@ sub_80F5C24: @ 80F5C24
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.pool
@@ -548,7 +548,7 @@ _080F5D2A:
 	movs r0, 0x8
 	strh r0, [r1]
 	bl InterviewBefore
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080F5D58
@@ -556,7 +556,7 @@ _080F5D2A:
 _080F5D58:
 	movs r0, 0x2
 	bl sub_813BADC
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrb r0, [r0]
 	bl sub_80DEDA8
 	movs r0, 0xFE
@@ -673,7 +673,7 @@ _080F5E78:
 	movs r0, 0x25
 	bl IncrementGameStat
 _080F5E92:
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrb r0, [r0]
 	bl sub_80DEDA8
 	movs r0, 0xFE
@@ -2151,7 +2151,7 @@ sub_80F6AE8: @ 80F6AE8
 	movs r2, 0x80
 	movs r3, 0x1
 	bl RequestDma3Fill
-	ldr r0, =gUnknown_0858D8C8
+	ldr r0, =gSpriteTemplate_858D8C8
 	movs r1, 0x8
 	movs r2, 0x8
 	movs r3, 0
@@ -2454,7 +2454,7 @@ sub_80F6DC0: @ 80F6DC0
 	push {r4-r6,lr}
 	sub sp, 0x20
 	mov r1, sp
-	ldr r0, =gUnknown_0858D7F8
+	ldr r0, =gSpriteTemplate_858D7F8
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
 	ldm r0!, {r2-r4}
@@ -2972,7 +2972,7 @@ sub_80F71C8: @ 80F71C8
 	b _080F7240
 	.pool
 _080F71F8:
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r2, [r0]
 	cmp r2, 0
 	bne _080F720C
@@ -3008,7 +3008,7 @@ _080F7236:
 	bl CopyToBgTilemapBufferRect
 	movs r5, 0xF
 _080F7240:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080F725C
@@ -3564,7 +3564,7 @@ sub_80F7670: @ 80F7670
 	ldrb r0, [r0, 0x7]
 	cmp r0, 0x27
 	bhi _080F7732
-	ldr r4, =gUnknown_0858D860
+	ldr r4, =gSpriteTemplate_858D860
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -4640,15 +4640,15 @@ sub_80F7F30: @ 80F7F30
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _080F7F5E
-	ldr r4, =gScriptContestCategory
+	ldr r4, =gSpecialVar_ContestCategory
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_02039F2E
+	ldr r1, =gSpecialVar_ContestRank
 	ldrb r1, [r1]
 	bl sub_80DAB8C
 	ldrb r0, [r4]
 	bl sub_80DB09C
 _080F7F5E:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r5, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -4666,7 +4666,7 @@ sub_80F7F7C: @ 80F7F7C
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r2, r1, r0
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080F7FEE
@@ -4704,7 +4704,7 @@ _080F7FDC:
 	movs r1, 0x36
 _080F7FE0:
 	bl GetMonData
-	ldr r1, =gUnknown_02039F2E
+	ldr r1, =gSpecialVar_ContestRank
 	ldrh r1, [r1]
 	cmp r0, r1
 	bls _080F7FEE
@@ -4730,7 +4730,7 @@ sub_80F7FFC: @ 80F7FFC
 	beq _080F8010
 	b _080F8250
 _080F8010:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bls _080F801A
@@ -4762,7 +4762,7 @@ _080F8048:
 	lsrs r1, r0, 24
 	mov r0, sp
 	strb r1, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r1, r0
 	bls _080F806C
@@ -4812,7 +4812,7 @@ _080F80B8:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bls _080F80DC
@@ -4861,7 +4861,7 @@ _080F8124:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bls _080F8148
@@ -4908,7 +4908,7 @@ _080F8190:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bhi _080F8250
@@ -4951,7 +4951,7 @@ _080F81F8:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bhi _080F8250
@@ -5488,7 +5488,7 @@ _080F8678:
 	bl sub_80F86E0
 	ldr r1, =gUnknown_02039F2B
 	strb r0, [r1]
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrb r0, [r0]
 	bl sub_80DB09C
 	ldr r1, =sub_80FCF40

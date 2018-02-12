@@ -1,0 +1,714 @@
+LittlerootTown_BrendansHouse_2F_EventScript_2926FE:: @ 82926FE
+LittlerootTown_MaysHouse_2F_EventScript_2926FE:: @ 82926FE
+	setvar VAR_0x4092, 5
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292704:: @ 8292704
+LittlerootTown_MaysHouse_1F_EventScript_292704:: @ 8292704
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A1C, 4
+	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_27259E
+	waitmovement 0
+	compare VAR_0x8005, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_29274D
+	compare VAR_0x8005, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292758
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A46, 4
+	closemessage
+	setvar VAR_0x4092, 4
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292763
+	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_2725A6
+	waitmovement 0
+	releaseall
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_29274D:: @ 829274D
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A8
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292758:: @ 8292758
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_Movement_292763: @ 8292763
+	step_up
+	step_end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292765:: @ 8292765
+LittlerootTown_MaysHouse_1F_EventScript_292765:: @ 8292765
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B24, 4
+	closemessage
+	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_2725A6
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292AF0
+	waitmovement 0
+	releaseall
+	end
+
+LittlerootTown_BrendansHouse_2F_EventScript_292781:: @ 8292781
+	lockall
+	setvar VAR_0x8004, 0
+	goto LittlerootTown_BrendansHouse_2F_EventScript_292799
+	end
+
+LittlerootTown_MaysHouse_2F_EventScript_29278D:: @ 829278D
+	lockall
+	setvar VAR_0x8004, 1
+	goto LittlerootTown_MaysHouse_2F_EventScript_292799
+	end
+
+LittlerootTown_BrendansHouse_2F_EventScript_292799:: @ 8292799
+LittlerootTown_MaysHouse_2F_EventScript_292799:: @ 8292799
+	checkflag FLAG_0x051
+	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_29283F
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8668, 4
+	call LittlerootTown_BrendansHouse_2F_EventScript_292849
+	delay 30
+	setvar VAR_0x4092, 6
+	setflag FLAG_0x051
+	setflag FLAG_0x2F2
+	setflag FLAG_0x2F3
+	checkplayergender
+	compare VAR_RESULT, 0
+	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_2927DF
+	compare VAR_RESULT, 1
+	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_29280F
+	playse SE_KAIDAN
+	removeobject VAR_0x8008
+	releaseall
+	end
+
+LittlerootTown_BrendansHouse_2F_EventScript_2927DF:: @ 82927DF
+	setvar VAR_0x8008, 14
+	addobject VAR_0x8008
+	applymovement VAR_0x8008, LittlerootTown_BrendansHouse_2F_Movement_292850
+	waitmovement 0
+	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_2725A8
+	waitmovement 0
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F869A, 4
+	closemessage
+	applymovement VAR_0x8008, LittlerootTown_BrendansHouse_2F_Movement_292857
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_2F_EventScript_29280F:: @ 829280F
+	setvar VAR_0x8008, 14
+	addobject VAR_0x8008
+	applymovement VAR_0x8008, LittlerootTown_BrendansHouse_2F_Movement_29285B
+	waitmovement 0
+	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_2725A4
+	waitmovement 0
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F869A, 4
+	closemessage
+	applymovement VAR_0x8008, LittlerootTown_BrendansHouse_2F_Movement_292862
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_2F_EventScript_29283F:: @ 829283F
+	incrementgamestat 45
+	fadescreen 1
+	special Special_ViewWallClock
+	waitstate
+	releaseall
+	end
+
+LittlerootTown_BrendansHouse_2F_EventScript_292849:: @ 8292849
+	fadescreen 1
+	special StartWallClock
+	waitstate
+	return
+
+LittlerootTown_BrendansHouse_2F_Movement_292850: @ 8292850
+	step_13
+	step_down
+	step_27
+	step_14
+	step_13
+	step_left
+	step_end
+
+LittlerootTown_BrendansHouse_2F_Movement_292857: @ 8292857
+	step_right
+	step_up
+	step_13
+	step_end
+
+LittlerootTown_BrendansHouse_2F_Movement_29285B: @ 829285B
+	step_13
+	step_down
+	step_28
+	step_14
+	step_13
+	step_right
+	step_end
+
+LittlerootTown_BrendansHouse_2F_Movement_292862: @ 8292862
+	step_left
+	step_up
+	step_13
+	step_end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292866:: @ 8292866
+LittlerootTown_MaysHouse_1F_EventScript_292866:: @ 8292866
+	setvar VAR_0x4092, 7
+	releaseall
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_29286D:: @ 829286D
+	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_2725A8
+	waitmovement 0
+	call LittlerootTown_BrendansHouse_1F_EventScript_29294B
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292AE0
+	waitmovement 0
+	playbgm MUS_INTER_V, 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7BBC, 4
+	closemessage
+	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_2929B7
+	waitmovement 0
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292AE6
+	waitmovement 0
+	call LittlerootTown_BrendansHouse_1F_EventScript_29296C
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	waitmovement 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7BF1, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7C35, 4
+	closemessage
+	setvar VAR_0x4001, 1
+	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_2929BD
+	waitmovement 0
+	goto LittlerootTown_BrendansHouse_1F_EventScript_292866
+	end
+
+LittlerootTown_MaysHouse_1F_EventScript_2928DC:: @ 82928DC
+	applymovement VAR_0x8005, LittlerootTown_MaysHouse_1F_Movement_2725A4
+	waitmovement 0
+	call LittlerootTown_MaysHouse_1F_EventScript_29294B
+	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_292AE8
+	waitmovement 0
+	playbgm MUS_INTER_V, 0
+	msgbox LittlerootTown_MaysHouse_1F_Text_1F7BBC, 4
+	closemessage
+	applymovement VAR_0x8005, LittlerootTown_MaysHouse_1F_Movement_2929BA
+	waitmovement 0
+	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_292AEE
+	waitmovement 0
+	call LittlerootTown_MaysHouse_1F_EventScript_29296C
+	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_2725A8
+	waitmovement 0
+	msgbox LittlerootTown_MaysHouse_1F_Text_1F7BF1, 4
+	msgbox LittlerootTown_MaysHouse_1F_Text_1F7C35, 4
+	closemessage
+	setvar VAR_0x4001, 1
+	applymovement VAR_0x8005, LittlerootTown_MaysHouse_1F_Movement_2929C1
+	waitmovement 0
+	goto LittlerootTown_MaysHouse_1F_EventScript_292866
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_29294B:: @ 829294B
+LittlerootTown_MaysHouse_1F_EventScript_29294B:: @ 829294B
+	playse SE_PIN
+	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_272598
+	waitmovement 0
+	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_27259A
+	waitmovement 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B96, 4
+	closemessage
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_29296C:: @ 829296C
+LittlerootTown_MaysHouse_1F_EventScript_29296C:: @ 829296C
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A6
+	waitmovement 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7EC6, 4
+	fadedefaultbgm
+	special TurnOffTVScreen
+	setflag FLAG_SYS_TV_HOME
+	delay 35
+	return
+
+LittlerootTown_BrendansHouse_1F_Movement_292989: @ 8292989
+	step_up
+	step_right
+	step_right
+	step_right
+	step_right
+	step_down
+	step_28
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292991: @ 8292991
+	step_up
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_27
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292999: @ 8292999
+	step_right
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_29299B: @ 829299B
+	step_left
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_29299D: @ 829299D
+	step_27
+	step_14
+	step_14
+	step_14
+	step_14
+	step_28
+	step_14
+	step_14
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_2929A6: @ 82929A6
+	step_28
+	step_14
+	step_14
+	step_14
+	step_14
+	step_27
+	step_14
+	step_14
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_2929AF: @ 82929AF
+	step_up
+	step_left
+	step_left
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_2929B3: @ 82929B3
+	step_up
+	step_right
+	step_right
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_2929B7: @ 82929B7
+	step_left
+	step_28
+	step_end
+
+LittlerootTown_MaysHouse_1F_Movement_2929BA: @ 82929BA
+	step_right
+	step_27
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_2929BD: @ 82929BD
+	step_left
+	step_down
+	step_28
+	step_end
+
+LittlerootTown_MaysHouse_1F_Movement_2929C1: @ 82929C1
+	step_right
+	step_down
+	step_27
+	step_end
+
+LittlerootTown_BrendansHouse_1F_EventScript_2929C5:: @ 82929C5
+LittlerootTown_MaysHouse_1F_EventScript_2929C5:: @ 82929C5
+	lock
+	faceplayer
+	compare VAR_0x4082, 4
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
+	compare VAR_0x408C, 4
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
+	checkflag FLAG_HAS_MATCH_CALL
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A19
+	checkflag FLAG_0x052
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A86
+	compare VAR_0x4001, 1
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A94
+	compare VAR_0x4092, 7
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292AB0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A1C, 4
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292A0F:: @ 8292A0F
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7DBE, 4
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292A19:: @ 8292A19
+	checkflag FLAG_0x0D8
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A43
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7E0E, 4
+	closemessage
+	delay 30
+	playfanfare MUS_ME_TORE_EYE
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7E89, 4
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_0x0D8
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292A43:: @ 8292A43
+	checkflag FLAG_BADGE05_GET
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A51
+	goto LittlerootTown_BrendansHouse_1F_EventScript_292A86
+
+LittlerootTown_BrendansHouse_1F_EventScript_292A51:: @ 8292A51
+	checkflag FLAG_0x085
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A86
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D73, 4
+	giveitem_std ITEM_AMULET_COIN
+	compare VAR_RESULT, 0
+	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_272054
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7DBE, 4
+	setflag FLAG_0x085
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292A86:: @ 8292A86
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D08, 4
+	goto LittlerootTown_BrendansHouse_1F_EventScript_292A9E
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292A94:: @ 8292A94
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7CC3, 4
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292A9E:: @ 8292A9E
+	closemessage
+	call LittlerootTown_BrendansHouse_1F_EventScript_272083
+	incrementgamestat 16
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D5C, 4
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292AB0:: @ 8292AB0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7CD8, 4
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292ABA:: @ 8292ABA
+LittlerootTown_MaysHouse_1F_EventScript_292ABA:: @ 8292ABA
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_VIGOROTH, 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7EA8, 4
+	waitmoncry
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292ACD:: @ 8292ACD
+LittlerootTown_MaysHouse_1F_EventScript_292ACD:: @ 8292ACD
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_VIGOROTH, 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7EB3, 4
+	waitmoncry
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_Movement_292AE0: @ 8292AE0
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292AE6: @ 8292AE6
+	step_left
+	step_end
+
+LittlerootTown_MaysHouse_1F_Movement_292AE8: @ 8292AE8
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_end
+
+LittlerootTown_MaysHouse_1F_Movement_292AEE: @ 8292AEE
+	step_right
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292AF0: @ 8292AF0
+	step_up
+	step_end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292AF2:: @ 8292AF2
+LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
+	lockall
+	checkplayergender
+	compare VAR_RESULT, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292C76
+	compare VAR_RESULT, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292C86
+	compare VAR_0x8008, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D08
+	compare VAR_0x8008, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D13
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_27259E
+	waitmovement 0
+	playse SE_PIN
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_272598
+	waitmovement 0
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_27259A
+	waitmovement 0
+	delay 20
+	compare VAR_0x8008, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292C96
+	compare VAR_0x8008, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CA1
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F800E, 4
+	giveitem_std ITEM_SS_TICKET
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F80FE, 4
+	closemessage
+	delay 20
+	compare VAR_0x8008, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CAC
+	compare VAR_0x8008, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CC1
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F815B, 4
+	closemessage
+	compare VAR_0x8008, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CD6
+	compare VAR_0x8008, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CEF
+	playse SE_DOOR
+	removeobject VAR_0x8009
+	setflag FLAG_0x123
+	delay 30
+	compare VAR_0x8008, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D48
+	compare VAR_0x8008, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D5D
+	delay 20
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F81B9, 4
+	closemessage
+	setflag FLAG_SYS_TV_LATI
+	special TurnOnTVScreen
+	delay 60
+	compare VAR_0x8008, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D72
+	compare VAR_0x8008, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D7D
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F824B, 4
+	closemessage
+	compare VAR_0x8008, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D1E
+	compare VAR_0x8008, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D33
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, 4
+	closemessage
+	clearflag FLAG_SYS_TV_LATI
+	setflag FLAG_0x0FF
+	special TurnOffTVScreen
+	compare VAR_0x8008, 0
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D88
+	compare VAR_0x8008, 1
+	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D9D
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8351, 4
+	multichoice 22, 8, 108, 1
+	copyvar VAR_0x8004, VAR_RESULT
+	special InitRoamer
+	copyvar VAR_0x40D5, VAR_RESULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F83A1, 4
+	closemessage
+	setvar VAR_0x4082, 4
+	setvar VAR_0x408C, 4
+	releaseall
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_292C72:: @ 8292C72
+	setflag FLAG_SYS_TV_LATI
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292C76:: @ 8292C76
+	setvar VAR_0x8008, 0
+	setvar VAR_0x8009, 5
+	setvar VAR_0x800A, 1
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292C86:: @ 8292C86
+	setvar VAR_0x8008, 1
+	setvar VAR_0x8009, 5
+	setvar VAR_0x800A, 1
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292C96:: @ 8292C96
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_292DB2
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292CA1:: @ 8292CA1
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_292DB5
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292CAC:: @ 8292CAC
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_292989
+	waitmovement 0
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_292DB8
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292CC1:: @ 8292CC1
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_292991
+	waitmovement 0
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_292DBA
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292CD6:: @ 8292CD6
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292DCC
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_292DCC
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_292DBC
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292CEF:: @ 8292CEF
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292DCC
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_292DCC
+	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_292DC1
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D08:: @ 8292D08
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292DC6
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D13:: @ 8292D13
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292DD1
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D1E:: @ 8292D1E
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292DD7
+	waitmovement 0
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D33:: @ 8292D33
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292DDE
+	waitmovement 0
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_2725A8
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D48:: @ 8292D48
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_292999
+	waitmovement 0
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D5D:: @ 8292D5D
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_29299B
+	waitmovement 0
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A8
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D72:: @ 8292D72
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_29299D
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D7D:: @ 8292D7D
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_2929A6
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D88:: @ 8292D88
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_2929AF
+	waitmovement 0
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A8
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_292D9D:: @ 8292D9D
+	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_2929B3
+	waitmovement 0
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_Movement_292DB2: @ 8292DB2
+	step_right
+	step_right
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DB5: @ 8292DB5
+	step_left
+	step_left
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DB8: @ 8292DB8
+	step_02
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DBA: @ 8292DBA
+	step_03
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DBC: @ 8292DBC
+	step_down
+	step_right
+	step_down
+	step_13
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DC1: @ 8292DC1
+	step_down
+	step_left
+	step_down
+	step_13
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DC6: @ 8292DC6
+	step_14
+	step_down
+	step_down
+	step_down
+	step_27
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DCC: @ 8292DCC
+	step_13
+	step_14
+	step_14
+	step_25
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DD1: @ 8292DD1
+	step_14
+	step_down
+	step_down
+	step_down
+	step_28
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DD7: @ 8292DD7
+	step_up
+	step_left
+	step_left
+	step_left
+	step_left
+	step_26
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_292DDE: @ 8292DDE
+	step_up
+	step_right
+	step_right
+	step_right
+	step_right
+	step_26
+	step_end

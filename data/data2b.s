@@ -1,5 +1,8 @@
-@ the second big chunk of data
-
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
+#include "constants/trainers.h"
+#include "constants/pokemon.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -4710,7 +4713,7 @@ gUnknown_0831AA18:: @ 831AA18
 	window_template 0x00, 0x0c, 0x02, 0x06, 0x02, 0x00, 0x00a0
 	window_template 0x00, 0x04, 0x02, 0x07, 0x02, 0x00, 0x00a0
 	window_template 0x00, 0x13, 0x02, 0x07, 0x02, 0x00, 0x00b0
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_0831AAE0:: @ 831AAE0
@@ -4737,7 +4740,7 @@ gUnknown_0831AAE0:: @ 831AAE0
 	window_template 0x00, 0x0c, 0x08, 0x06, 0x02, 0x05, 0x013c
 	window_template 0x00, 0x08, 0x0b, 0x0e, 0x02, 0x05, 0x0148
 	window_template 0x00, 0x02, 0x0f, 0x1a, 0x04, 0x07, 0x0090
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_0831ABA0:: @ 831ABA0
@@ -4747,74 +4750,74 @@ gUnknown_0831ABA0:: @ 831ABA0
 	.align 2
 gBattleTerrainTable:: @ 831ABA8
 	@ tall_grass
-	.4byte gUnknown_08D77D68
-	.4byte gUnknown_08D78350
-	.4byte gUnknown_08D7E280
-	.4byte gUnknown_08D7E808
-	.4byte gUnknown_08D78318
+	.4byte gBattleTerrainTiles_TallGrass
+	.4byte gBattleTerrainTilemap_TallGrass
+	.4byte gBattleTerrainAnimTiles_TallGrass
+	.4byte gBattleTerrainAnimTilemap_TallGrass
+	.4byte gBattleTerrainPalette_TallGrass
 
 	@ long_grass
-	.4byte gUnknown_08D78600
-	.4byte gUnknown_08D78CB8
-	.4byte gUnknown_08D7E9C4
-	.4byte gUnknown_08D7F0D4
-	.4byte gUnknown_08D78C78
+	.4byte gBattleTerrainTiles_LongGrass
+	.4byte gBattleTerrainTilemap_LongGrass
+	.4byte gBattleTerrainAnimTiles_LongGrass
+	.4byte gBattleTerrainAnimTilemap_LongGrass
+	.4byte gBattleTerrainPalette_LongGrass
 
 	@ sand
-	.4byte gUnknown_08D78F68
-	.4byte gUnknown_08D795A8
-	.4byte gUnknown_08D7F30C
-	.4byte gUnknown_08D7F850
-	.4byte gUnknown_08D79560
+	.4byte gBattleTerrainTiles_Sand
+	.4byte gBattleTerrainTilemap_Sand
+	.4byte gBattleTerrainAnimTiles_Sand
+	.4byte gBattleTerrainAnimTilemap_Sand
+	.4byte gBattleTerrainPalette_Sand
 
 	@ underwater
-	.4byte gUnknown_08D79858
-	.4byte gUnknown_08D79E58
-	.4byte gUnknown_08D7F9F8
-	.4byte gUnknown_08D7FEC4
-	.4byte gUnknown_08D79E10
+	.4byte gBattleTerrainTiles_Underwater
+	.4byte gBattleTerrainTilemap_Underwater
+	.4byte gBattleTerrainAnimTiles_Underwater
+	.4byte gBattleTerrainAnimTilemap_Underwater
+	.4byte gBattleTerrainPalette_Underwater
 
 	@ water
-	.4byte gUnknown_08D7A108
-	.4byte gUnknown_08D7A720
-	.4byte gUnknown_08D80054
-	.4byte gUnknown_08D80660
-	.4byte gUnknown_08D7A6DC
+	.4byte gBattleTerrainTiles_Water
+	.4byte gBattleTerrainTilemap_Water
+	.4byte gBattleTerrainAnimTiles_Water
+	.4byte gBattleTerrainAnimTilemap_Water
+	.4byte gBattleTerrainPalette_Water
 
 	@ pond_water
-	.4byte gUnknown_08D7A9D0
-	.4byte gUnknown_08D7AFB8
-	.4byte gUnknown_08D80804
-	.4byte gUnknown_08D80D50
-	.4byte gUnknown_08D7AF78
+	.4byte gBattleTerrainTiles_PondWater
+	.4byte gBattleTerrainTilemap_PondWater
+	.4byte gBattleTerrainAnimTiles_PondWater
+	.4byte gBattleTerrainAnimTilemap_PondWater
+	.4byte gBattleTerrainPalette_PondWater
 
 	@ rock
-	.4byte gUnknown_08D7B268
-	.4byte gUnknown_08D7B864
-	.4byte gUnknown_08D80E9C
-	.4byte gUnknown_08D8147C
-	.4byte gUnknown_08D7B828
+	.4byte gBattleTerrainTiles_Rock
+	.4byte gBattleTerrainTilemap_Rock
+	.4byte gBattleTerrainAnimTiles_Rock
+	.4byte gBattleTerrainAnimTilemap_Rock
+	.4byte gBattleTerrainPalette_Rock
 
 	@ cave
-	.4byte gUnknown_08D7BB14
-	.4byte gUnknown_08D7C154
-	.4byte gUnknown_08D81610
-	.4byte gUnknown_08D81E2C
-	.4byte gUnknown_08D7C10C
+	.4byte gBattleTerrainTiles_Cave
+	.4byte gBattleTerrainTilemap_Cave
+	.4byte gBattleTerrainAnimTiles_Cave
+	.4byte gBattleTerrainAnimTilemap_Cave
+	.4byte gBattleTerrainPalette_Cave
 
 	@ building
-	.4byte gUnknown_08D7C440
-	.4byte gUnknown_08D7CA28
-	.4byte gUnknown_08D820D4
-	.4byte gUnknown_08D824E4
-	.4byte gUnknown_08D7DEB4
+	.4byte gBattleTerrainTiles_Building
+	.4byte gBattleTerrainTilemap_Building
+	.4byte gBattleTerrainAnimTiles_Building
+	.4byte gBattleTerrainAnimTilemap_Building
+	.4byte gBattleTerrainPalette_Building
 
 	@ plain
-	.4byte gUnknown_08D7C440
-	.4byte gUnknown_08D7CA28
-	.4byte gUnknown_08D820D4
-	.4byte gUnknown_08D824E4
-	.4byte gUnknown_08D7C404
+	.4byte gBattleTerrainTiles_Building
+	.4byte gBattleTerrainTilemap_Building
+	.4byte gBattleTerrainAnimTiles_Building
+	.4byte gBattleTerrainAnimTilemap_Building
+	.4byte gBattleTerrainPalette_Plain
 
 	.align 2
 gUnknown_0831AC70:: @ 831AC70

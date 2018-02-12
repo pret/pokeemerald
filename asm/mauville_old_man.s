@@ -157,7 +157,7 @@ sub_81201C8: @ 81201C8
 	thumb_func_start sub_81201DC
 sub_81201DC: @ 81201DC
 	push {r4,lr}
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl sub_81201C8
 	lsls r0, 24
 	lsrs r0, 24
@@ -170,7 +170,7 @@ sub_81201DC: @ 81201DC
 
 	thumb_func_start sub_81201F4
 sub_81201F4: @ 81201F4
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002e51
@@ -347,7 +347,7 @@ sub_8120340: @ 8120340
 
 	thumb_func_start sub_8120358
 sub_8120358: @ 8120358
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002e28
@@ -379,14 +379,14 @@ sub_812038C: @ 812038C
 	ldr r0, =0x0000ffff
 	cmp r1, r0
 	bne _081203AC
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	b _081203B6
 	.pool
 _081203AC:
 	ldr r0, =gStringVar1
 	bl CopyEasyChatWord
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 _081203B6:
 	strh r0, [r1]
@@ -405,14 +405,14 @@ sub_81203C4: @ 81203C4
 	ldrb r0, [r2, 0x1]
 	cmp r0, 0xA
 	bne _081203EC
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	strb r0, [r2, 0x1]
 	b _081203F2
 	.pool
 _081203EC:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _081203F2:
@@ -503,7 +503,7 @@ _081204C4:
 	adds r0, 0x1
 _081204C8:
 	strb r0, [r5, 0x1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	pop {r4-r6}
@@ -800,7 +800,7 @@ sub_8120708: @ 8120708
 	adds r5, r0, 0
 	movs r0, 0
 	movs r1, 0
-	bl sub_81973C4
+	bl NewMenuHelpers_DrawDialogueFrame
 	movs r4, 0x1
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -965,7 +965,7 @@ _08120850:
 	lsls r1, 1
 	adds r0, r1
 	strh r0, [r6, 0x6]
-	ldr r4, =gMPlay_SE2
+	ldr r4, =gMPlayInfo_SE2
 	ldr r5, =0x0000ffff
 	ldrh r2, [r6, 0x6]
 	adds r0, r4, 0
@@ -1008,7 +1008,7 @@ _081208BC:
 	subs r0, 0x40
 _081208C0:
 	strh r0, [r6, 0x8]
-	ldr r4, =gMPlay_SE2
+	ldr r4, =gMPlayInfo_SE2
 	ldr r5, =0x0000ffff
 	ldrh r2, [r6, 0x6]
 	adds r0, r4, 0
@@ -1059,7 +1059,7 @@ _08120922:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08120938
-	ldr r0, =gMPlay_SE2
+	ldr r0, =gMPlayInfo_SE2
 	bl m4aMPlayStop
 	movs r0, 0x4
 _08120936:
@@ -1228,7 +1228,7 @@ _08120A7E:
 	bne _08120AB0
 	movs r0, 0x6
 	bl FadeInBGM
-	ldr r0, =gMPlay_SE2
+	ldr r0, =gMPlayInfo_SE2
 	movs r1, 0x2
 	bl m4aMPlayFadeOutTemporarily
 	bl EnableBothScriptContexts
@@ -2382,13 +2382,13 @@ _0812132C:
 	cmp r4, r0
 	bne _0812135C
 _0812134E:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	b _08121364
 	.pool
 _0812135C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r5, [r0]
 	ldr r0, =gUnknown_03001178
 	strb r4, [r0]

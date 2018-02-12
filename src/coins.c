@@ -2,7 +2,7 @@
 #include "coins.h"
 #include "text.h"
 #include "window.h"
-#include "text_window.h"
+#include "strings.h"
 #include "string_util.h"
 #include "menu.h"
 #include "international_string_util.h"
@@ -10,10 +10,6 @@
 #define MAX_COINS 9999
 
 EWRAM_DATA u8 sCoinsWindowId = 0;
-
-extern void sub_819746C(u8 windowId, bool8 copyToVram);
-
-extern const u8 gText_Coins[];
 
 void PrintCoinsString(u32 coinAmount)
 {
@@ -53,7 +49,6 @@ void SetCoins(u16 coinAmount)
     gSaveBlock1Ptr->coins = coinAmount ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-/* Can't match it lol
 bool8 GiveCoins(u16 toAdd)
 {
     u16 newAmount;
@@ -67,10 +62,22 @@ bool8 GiveCoins(u16 toAdd)
     }
     else
     {
-        newAmount = ownedCoins + toAdd;
-        if (newAmount > MAX_COINS)
-            newAmount = MAX_COINS;
+        ownedCoins += toAdd;
+        if (ownedCoins > MAX_COINS)
+            ownedCoins = MAX_COINS;
+        newAmount = ownedCoins;
     }
     SetCoins(newAmount);
     return TRUE;
-}*/
+}
+
+bool8 TakeCoins(u16 toSub)
+{
+    u16 ownedCoins = GetCoins();
+    if (ownedCoins >= toSub)
+    {
+        SetCoins(ownedCoins - toSub);
+        return TRUE;
+    }
+    return FALSE;
+}

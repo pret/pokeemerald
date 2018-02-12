@@ -1,8 +1,9 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#include <string.h>
+#include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
-#include "config.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -11,7 +12,19 @@
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 
-#define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
+// IDE support
+#if defined (__APPLE__) || defined (__CYGWIN__)
+#define _(x) x
+#define __(x) x
+#define INCBIN_U8 {0}
+#define INCBIN_U16 {0}
+#define INCBIN_U32 {0}
+#define INCBIN_S8 {0}
+#define INCBIN_S16 {0}
+#define INCBIN_S32 {0}
+#endif // __APPLE__
+
+#define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))
 
 // useful math macros
 
@@ -21,13 +34,38 @@
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
 
+#define PARTY_SIZE 6
+
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
+
+#define min(a, b) ((a) < (b) ? (a) : (b))
+#define max(a, b) ((a) >= (b) ? (a) : (b))
+
+#define HEAP_SIZE 0x1C000
 
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
+
+// There are many quirks in the source code which have overarching behavioral differences from
+// a number of other files. For example, diploma.c seems to declare rodata before each use while
+// other files declare out of order and must be at the beginning. There are also a number of
+// macros which differ from one file to the next due to the method of obtaining the result, such
+// as these below. Because of this, there is a theory (Two Team Theory) that states that these
+// programming projects had more than 1 "programming team" which utilized different macros for
+// each of the files that were worked on.
+#define T1_READ_8(ptr)  ((ptr)[0])
+#define T1_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
+#define T1_READ_32(ptr) ((ptr)[0] | ((ptr)[1] << 8) | ((ptr)[2] << 16) | ((ptr)[3] << 24))
+#define T1_READ_PTR(ptr) (u8*) T1_READ_32(ptr)
+
+// T2_READ_8 is a duplicate to remain consistent with each group.
+#define T2_READ_8(ptr)  ((ptr)[0])
+#define T2_READ_16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
+#define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
+#define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
 enum
 {
@@ -38,10 +76,15 @@ enum
     VERSION_LEAF_GREEN = 5,
 };
 
-enum LanguageId {
+enum LanguageId
+{
     LANGUAGE_JAPANESE = 1,
     LANGUAGE_ENGLISH = 2,
+    LANGUAGE_FRENCH = 3,
+    LANGUAGE_ITALIAN = 4,
     LANGUAGE_GERMAN = 5,
+    // 6 goes unused but the theory is it was meant to be Korean
+    LANGUAGE_SPANISH = 7,
 };
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
@@ -160,9 +203,31 @@ struct BerryCrush
     u32 unk;
 };
 
+#define PLAYER_NAME_LENGTH  8
+
+struct UnknownSaveBlock2Struct
+{
+    u8 field_0;
+    u8 field_1;
+    u8 field_2[2];
+    u8 field_4[8];
+    u8 field_C[16];
+    u16 field_1C[6];
+    u16 field_28[6];
+    u8 field_34[176];
+    u8 field_E4;
+    u8 field_E5;
+    u8 field_E6;
+    u8 field_E7;
+    u8 field_E8;
+    u8 field_E9;
+    u8 field_EA;
+    u8 field_EB;
+}; // sizeof = 0xEC
+
 struct SaveBlock2
 {
-    /*0x00*/ u8 playerName[8];
+    /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
     /*0x09*/ u8 specialSaveWarp;
     /*0x0A*/ u8 playerTrainerId[4];
@@ -190,12 +255,13 @@ struct SaveBlock2
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
-    /*0x214*/ u8 field_214[1032];
+    /*0x21C*/ u8 field_21C[1032];
     /*0x624*/ u16 contestLinkResults[20]; // 4 positions for 5 categories, possibly a struct or a 2d array
 
         // All below could be a one giant struct
 
-    /*0x64C*/ u8 field_64C[0x588];
+    /*0x64C*/ u8 field_64C[236];
+    /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
     /*0xBD8*/ u8 field_BD8[11];
@@ -209,10 +275,12 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_d : 1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e : 1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[0x2e];
+    /*0xCAA*/ u16 field_CAA[4];
+    /*0xCB2*/ u16 battlePyramidWildHeaderId;
+    /*0xCB4*/ u16 field_CB4[41];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
-    /*0xd08*/ u8 filler_D08[0x112];
+    /*0xD08*/ u8 filler_D08[0x112];
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
     /*0xE1C*/ u8 field_E1C[16];
     /*0xE2C*/ struct PyramidBag pyramidBag;
@@ -230,6 +298,16 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
+struct SecretBaseParty
+{
+    u32 personality[PARTY_SIZE];
+    u16 moves[PARTY_SIZE * 4];
+    u16 species[PARTY_SIZE];
+    u16 heldItems[PARTY_SIZE];
+    u8 levels[PARTY_SIZE];
+    u8 EVs[PARTY_SIZE];
+};
+
 struct SecretBaseRecord
 {
     /*0x1A9C*/ u8 secretBaseId;
@@ -245,15 +323,10 @@ struct SecretBaseRecord
     /*0x1AAD*/ u8 sbr_field_11;
     /*0x1AAE*/ u8 decorations[16];
     /*0x1ABE*/ u8 decorationPos[16];
-    /*0x1AD0*/ u32 partyPersonality[6];
-    /*0x1AE8*/ u16 partyMoves[6 * 4];
-    /*0x1B18*/ u16 partySpecies[6];
-    /*0x1B24*/ u16 partyHeldItems[6];
-    /*0x1B2E*/ u8 partyLevels[6];
-    /*0x1B34*/ u8 partyEVs[6];
+    /*0x1AD0*/ struct SecretBaseParty party;
 };
 
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "global.fieldmap.h"
 #include "global.berry.h"
 #include "global.tv.h"
@@ -325,10 +398,12 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
+#define MAIL_WORDS_COUNT 9
+
 struct MailStruct
 {
-    /*0x00*/ u16 words[9];
-    /*0x12*/ u8 playerName[8];
+    /*0x00*/ u16 words[MAIL_WORDS_COUNT];
+    /*0x12*/ u8 playerName[PLAYER_NAME_LENGTH];
     /*0x1A*/ u8 trainerId[4];
     /*0x1E*/ u16 species;
     /*0x20*/ u16 itemId;
@@ -420,30 +495,53 @@ struct ContestWinner
     u8 contestRank;
 };
 
+struct DaycareMiscMon
+{
+    struct MailStruct mail;
+    u8 OT_name[OT_NAME_LENGTH + 1];
+    u8 monName[POKEMON_NAME_LENGTH + 1];
+    u8 gameLanguage:4;
+    u8 monLanguage:4;
+};
+
 struct DaycareMon
 {
     struct BoxPokemon mon;
-    struct MailStruct mail;
-    u8 OT_name[OT_NAME_LENGTH + 1];
-    u8 monName[11];
-    u8 language_maybe : 4;
-    u8 unknown : 4;
-    u32 stepsTaken;
+    struct DaycareMiscMon misc;
+    u32 steps;
 };
 
-struct DaycareData
+#define DAYCARE_MON_COUNT   2
+
+struct DayCare
 {
-    struct DaycareMon mons[2];
+    struct DaycareMon mons[DAYCARE_MON_COUNT];
     u32 offspringPersonality;
     u8 stepCounter;
 };
 
-#define MAP_OBJECTS_COUNT  16
-#define BERRY_TREES_COUNT  128
-#define FLAGS_COUNT        300
-#define VARS_COUNT         256
+struct DayCareMail
+{
+    /*0x00*/ struct MailStruct message;
+    /*0x24*/ u8 names[19];
+};
 
-enum {
+struct RecordMixingDayCareMail
+{
+    struct DayCareMail mail[DAYCARE_MON_COUNT];
+    u32 numDaycareMons;
+    bool16 holdsItem[DAYCARE_MON_COUNT];
+};
+
+#define POKEBLOCKS_COUNT    40
+#define MAP_OBJECTS_COUNT   16
+#define BERRY_TREES_COUNT   128
+#define FLAGS_COUNT         300
+#define VARS_COUNT          256
+#define MAIL_COUNT          16
+
+enum
+{
     LILYCOVE_LADY_QUIZ,
     LILYCOVE_LADY_FAVOUR,
     LILYCOVE_LADY_CONTEST
@@ -534,7 +632,7 @@ struct SaveBlock1
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[16];
     /*0x690*/ struct ItemSlot bagPocket_TMHM[64];
     /*0x790*/ struct ItemSlot bagPocket_Berries[46];
-    /*0x848*/ struct Pokeblock pokeblocks[40];
+    /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x988*/ u8 seen1[52];
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 field_9C2[6];
@@ -575,13 +673,13 @@ struct SaveBlock1
     /*0x2BBC*/ u16 unk2BBC[6];
     /*0x2BC8*/ u16 unk2BC8[6];
     /*0x2BD4*/ u16 unk2BD4[6];
-    /*0x2BE0*/ struct MailStruct mail[16];
+    /*0x2BE0*/ struct MailStruct mail[MAIL_COUNT];
     /*0x2E20*/ u8 additionalPhrases[5]; // bitfield for 33 additional phrases in easy chat system
     /*0x2E25*/ u8 unk2E25[3]; // possibly padding?
     /*0x2E28*/ OldMan oldMan;
     /*0x2e64*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2e90*/ struct ContestWinner contestWinners[13]; // 0 - 5 used in contest hall, 6 - 7 unused?, 8 - 12 museum
-    /*0x3030*/ struct DaycareData daycare;
+    /*0x3030*/ struct DayCare daycare;
     /*0x3150*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x31A0*/ u8 unk_31A0;
     /*0x31A1*/ u8 filler_31A1[7];

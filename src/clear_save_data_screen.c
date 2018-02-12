@@ -1,7 +1,7 @@
 #include "global.h"
 #include "task.h"
-#include "menu.h"
 #include "text.h"
+#include "menu.h"
 #include "sound.h"
 #include "main.h"
 #include "save.h"
@@ -9,7 +9,7 @@
 #include "gpu_regs.h"
 #include "bg.h"
 #include "text_window.h"
-#include "songs.h"
+#include "constants/songs.h"
 
 extern u8 gText_ClearAllSaveData[];
 extern u8 gText_ClearingData[];
@@ -88,7 +88,7 @@ static void Task_DoClearSaveDataScreenYesNo(u8 taskId)
 
 static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
 {
-    switch(sub_8198C58())
+    switch(ProcessMenuInputNoWrap_())
     {
         case 0:
             FillWindowPixelBuffer(0, 17);

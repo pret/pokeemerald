@@ -1,32 +1,39 @@
+#include "constants/battle.h"
+#include "constants/battle_script_commands.h"
+#include "constants/battle_anim.h"
+#include "constants/battle_string_ids.h"
+#include "constants/items.h"
+#include "constants/songs.h"
 	.include "asm/macros.inc"
+	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
 
 	.align 2
 gBattlescriptsForBallThrow:: @ 82DBD08
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD7E
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
-	.4byte gUnknown_082DBD68
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_SafariBallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
 
 	.align 2
-gUnknown_082DBD3C:: @ 82DBD3C
-	.4byte gUnknown_082DBE12
-	.4byte gUnknown_082DBE1C
-	.4byte gUnknown_082DBE1C
-	.4byte gUnknown_082DBE4B
-	.4byte gUnknown_082DBE6F
-	.4byte gUnknown_082DBE91
+gBattlescriptsForUsingItem:: @ 82DBD3C
+	.4byte BattleScript_PlayerUsesItem
+	.4byte BattleScript_OpponentUsesHealItem
+	.4byte BattleScript_OpponentUsesHealItem
+	.4byte BattleScript_OpponentUsesStatusCureItem
+	.4byte BattleScript_OpponentUsesXItem
+	.4byte BattleScript_OpponentUsesGuardSpecs
 
 	.align 2
 gBattlescriptsForRunningByItem:: @ 82DBD54
@@ -34,55 +41,166 @@ gBattlescriptsForRunningByItem:: @ 82DBD54
 
 	.align 2
 gBattlescriptsForSafariActions:: @ 82DBD58
-	.4byte gUnknown_082DBEBD
-	.4byte gUnknown_082DBEC4
-	.4byte gUnknown_082DBECD
-	.4byte gUnknown_082DBEE3
+	.4byte BattleScript_ActionWatchesCarefully
+	.4byte BattleScript_ActionGetNear
+	.4byte BattleScript_ActionThrowPokeblock
+	.4byte BattleScript_82DBEE3
 
-gUnknown_082DBD68:: @ 82DBD68
-	.incbin "baserom.gba", 0x2dbd68, 0x16
+BattleScript_BallThrow::
+	jumpifword CMP_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_WALLY_TUTORIAL, BattleScript_BallThrowByWally
+	printstring STRINGID_PLAYERUSEDITEM
+	handleballthrow
 
-gUnknown_082DBD7E:: @ 82DBD7E
-	.incbin "baserom.gba", 0x2dbd7e, 0x6
+BattleScript_BallThrowByWally::
+	printstring STRINGID_WALLYUSEDITEM
+	handleballthrow
 
-BattleScript_SuccessBallThrow:: @ 82DBD84
-	.incbin "baserom.gba", 0x2dbd84, 0x46
+BattleScript_SafariBallThrow::
+	printstring STRINGID_PLAYERUSEDITEM
+	updatestatusicon BS_ATTACKER
+	handleballthrow
 
-BattleScript_WallyBallThrow:: @ 82DBDCA
-	.incbin "baserom.gba", 0x2dbdca, 0xa
+BattleScript_SuccessBallThrow::
+	jumpifhalfword CMP_EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_PrintCaughtMonInfo
+	incrementgamestat 0xB
+BattleScript_PrintCaughtMonInfo::
+	printstring STRINGID_GOTCHAPKMNCAUGHT
+	trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
+	printstring STRINGID_PKMNDATAADDEDTODEX
+	waitstate
+	setbyte gBattleCommunication, 0x0
+	displaydexinfo
+BattleScript_TryNicknameCaughtMon::
+	printstring STRINGID_GIVENICKNAMECAPTURED
+	waitstate
+	setbyte gBattleCommunication, 0x0
+	trygivecaughtmonnick BattleScript_GiveCaughtMonEnd
+	givecaughtmon
+	printfromtable gCaughtMonStringIds
+	waitmessage 0x40
+	goto BattleScript_SuccessBallThrowEnd
+BattleScript_GiveCaughtMonEnd::
+	givecaughtmon
+BattleScript_SuccessBallThrowEnd::
+	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
+	finishturn
 
-BattleScript_ShakeBallThrow:: @ 82DBDD4
-	.incbin "baserom.gba", 0x2dbdd4, 0x2e
+BattleScript_WallyBallThrow::
+	printstring STRINGID_GOTCHAPKMNCAUGHT2
+	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
+	finishturn
 
-BattleScript_TrainerBallBlock:: @ 82DBE02
-	.incbin "baserom.gba", 0x2dbe02, 0x10
+BattleScript_ShakeBallThrow::
+	printfromtable gBallEscapeStringIds
+	waitmessage 0x40
+	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_ShakeBallThrowEnd
+	jumpifbyte CMP_NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_ShakeBallThrowEnd
+	printstring STRINGID_OUTOFSAFARIBALLS
+	waitmessage 0x40
+	setbyte gBattleOutcome, B_OUTCOME_NO_SAFARI_BALLS
+BattleScript_ShakeBallThrowEnd::
+	finishaction
 
-gUnknown_082DBE12:: @ 82DBE12
-	.incbin "baserom.gba", 0x2dbe12, 0xa
+BattleScript_TrainerBallBlock::
+	waitmessage 0x40
+	printstring STRINGID_TRAINERBLOCKEDBALL
+	waitmessage 0x40
+	printstring STRINGID_DONTBEATHIEF
+	waitmessage 0x40
+	finishaction
 
-gUnknown_082DBE1C:: @ 82DBE1C
-	.incbin "baserom.gba", 0x2dbe1c, 0x2f
+BattleScript_PlayerUsesItem::
+	setbyte sMOVEEND_STATE, 0xF
+	moveend 0x1, 0x0
+	end
 
-gUnknown_082DBE4B:: @ 82DBE4B
-	.incbin "baserom.gba", 0x2dbe4b, 0x24
+BattleScript_OpponentUsesHealItem::
+	printstring STRINGID_EMPTYSTRING3
+	pause 0x30
+	playse SE_KAIFUKU
+	printstring STRINGID_TRAINER1USEDITEM
+	waitmessage 0x40
+	useitemonopponent
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
+	waitmessage 0x40
+	updatestatusicon BS_ATTACKER
+	setbyte sMOVEEND_STATE, 0xF
+	moveend 0x1, 0x0
+	finishaction
 
-gUnknown_082DBE6F:: @ 82DBE6F
-	.incbin "baserom.gba", 0x2dbe6f, 0x22
+BattleScript_OpponentUsesStatusCureItem::
+	printstring STRINGID_EMPTYSTRING3
+	pause 0x30
+	playse SE_KAIFUKU
+	printstring STRINGID_TRAINER1USEDITEM
+	waitmessage 0x40
+	useitemonopponent
+	printfromtable gTrainerItemCuredStatusStringIds
+	waitmessage 0x40
+	updatestatusicon BS_ATTACKER
+	setbyte sMOVEEND_STATE, 0xF
+	moveend 0x1, 0x0
+	finishaction
 
-gUnknown_082DBE91:: @ 82DBE91
-	.incbin "baserom.gba", 0x2dbe91, 0x22
+BattleScript_OpponentUsesXItem::
+	printstring STRINGID_EMPTYSTRING3
+	pause 0x30
+	playse SE_KAIFUKU
+	printstring STRINGID_TRAINER1USEDITEM
+	waitmessage 0x40
+	useitemonopponent
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+	setbyte sMOVEEND_STATE, 0xF
+	moveend 0x1, 0x0
+	finishaction
 
-BattleScript_RunByUsingItem:: @ 82DBEB3
-	.incbin "baserom.gba", 0x2dbeb3, 0xA
+BattleScript_OpponentUsesGuardSpecs::
+	printstring STRINGID_EMPTYSTRING3
+	pause 0x30
+	playse SE_KAIFUKU
+	printstring STRINGID_TRAINER1USEDITEM
+	waitmessage 0x40
+	useitemonopponent
+	printfromtable gMistUsedStringIds
+	waitmessage 0x40
+	setbyte sMOVEEND_STATE, 0xF
+	moveend 0x1, 0x0
+	finishaction
 
-gUnknown_082DBEBD:: @ 82DBEBD
-	.incbin "baserom.gba", 0x2dbebd, 0x7
+BattleScript_RunByUsingItem::
+	playse SE_NIGERU
+	setbyte gBattleOutcome, B_OUTCOME_RAN
+	finishturn
 
-gUnknown_082DBEC4:: @ 82DBEC4
-	.incbin "baserom.gba", 0x2dbec4, 0x9
+BattleScript_ActionWatchesCarefully::
+	printstring STRINGID_PKMNWATCHINGCAREFULLY
+	waitmessage 0x40
+	end2
 
-gUnknown_082DBECD:: @ 82DBECD
-	.incbin "baserom.gba", 0x2dbecd, 0x16
+BattleScript_ActionGetNear::
+	printfromtable gSafariGetNearStringIds
+	waitmessage 0x40
+	end2
 
-gUnknown_082DBEE3:: @ 82DBEE3
-	.incbin "baserom.gba", 0x2dbee3, 0x15
+BattleScript_ActionThrowPokeblock::
+	printstring STRINGID_THREWPOKEBLOCKATPKMN
+	waitmessage 0x40
+	playanimation BS_ATTACKER, B_ANIM_x4, NULL
+	printfromtable gSafariPokeblockResultStringIds
+	waitmessage 0x40
+	end2
+
+BattleScript_82DBEE3::
+	printstring STRINGID_RETURNMON
+	waitmessage 0x40
+	returnatktoball
+	waitstate
+	trainerslidein BS_TARGET
+	waitstate
+	printstring STRINGID_YOUTHROWABALLNOWRIGHT
+	waitmessage 0x40
+	end2

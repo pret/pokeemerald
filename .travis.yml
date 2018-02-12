@@ -1,0 +1,28 @@
+language: generic
+dist: trusty
+sudo: false
+env:
+  global:
+    - DEVKITARM=$HOME/devkitARM
+addons:
+  apt:
+    packages:
+      - gcc-multilib
+      - linux-libc-dev
+cache:
+  apt: true
+install:
+  - pushd $HOME
+  - travis_retry wget http://download.sourceforge.net/devkitpro/devkitARM_r46-x86_64-linux.tar.bz2
+  - tar xf devkitARM*.tar.bz2
+  - travis_retry git clone https://github.com/pret/agbcc.git
+  - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
+  - popd
+
+matrix:
+  include:
+    - os: linux
+      env: _="Build"
+      script:
+        - ./build_tools.sh
+        - make -j2 compare

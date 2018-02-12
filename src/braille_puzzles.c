@@ -1,19 +1,19 @@
 #include "global.h"
 #include "event_data.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "script.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
 #include "field_effect.h"
-#include "flags.h"
+#include "constants/flags.h"
 
 extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId); // fieldmap
 extern void DrawWholeMapView(); // field_camera
 extern void SetCameraPanningCallback(void ( *callback)()); // field_camera
 extern void InstallCameraPanAheadCallback(void);
 extern void SetCameraPanning(s16 x, s16 y);
-extern u8 brm_get_pokemon_selection(void);
+extern u8 GetCursorSelectionMonId(void);
 extern void FieldEffectActiveListRemove(u8 id); // field_effect
 extern u8 oei_task_add(void);
 
@@ -33,7 +33,7 @@ void sub_8179944(void);
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_DIG)
+    if (!FlagGet(FLAG_SYS_BRAILLE_DIG)
      && (gSaveBlock1Ptr->location.mapGroup == 0x18
      && gSaveBlock1Ptr->location.mapNum == 0x47))
     {
@@ -58,7 +58,7 @@ void DoBrailleDigEffect(void)
     MapGridSetMetatileIdAt(18, 9, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(SYS_BRAILLE_DIG);
+    FlagSet(FLAG_SYS_BRAILLE_DIG);
     ScriptContext2_Disable();
 }
 
@@ -81,7 +81,7 @@ bool8 CheckRelicanthWailord(void)
 void ShouldDoBrailleStrengthEffectOld(void)
 {
     /*
-        if (!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
+        if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
@@ -105,13 +105,13 @@ void DoBrailleStrengthEffect(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(SYS_BRAILLE_STRENGTH);
+    FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
     ScriptContext2_Disable();
 }
 
 bool8 ShouldDoBrailleFlyEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
+    if (!FlagGet(FLAG_SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
     {
         if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;
@@ -151,7 +151,7 @@ void UseFlyAncientTomb_Finish(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(SYS_BRAILLE_FLY);
+    FlagSet(FLAG_SYS_BRAILLE_FLY);
     ScriptContext2_Disable();
 }
     */
@@ -205,7 +205,7 @@ void SealedChamberShakingEffect(u8 taskId)
 // moved later in the function because it was rewritten.
 bool8 ShouldDoBrailleStrengthEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x06))
+    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x06))
     {
         if (gSaveBlock1Ptr->pos.x == 6 && gSaveBlock1Ptr->pos.y == 23)
             { gBraillePuzzleCallbackFlag = STRENGTH_PUZZLE; return TRUE; }
@@ -220,7 +220,7 @@ bool8 ShouldDoBrailleStrengthEffect(void)
 
 void sub_8179834(void)
 {
-    gFieldEffectArguments[0] = brm_get_pokemon_selection();
+    gFieldEffectArguments[0] = GetCursorSelectionMonId();
     FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
 }
 
@@ -240,13 +240,13 @@ void sub_8179860(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(SYS_BRAILLE_STRENGTH);
+    FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
     ScriptContext2_Disable();
 }
 
 bool8 ShouldDoBrailleFlyEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x44))
+    if (!FlagGet(FLAG_SYS_BRAILLE_FLY) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x44))
     {
         if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 25)
             { gBraillePuzzleCallbackFlag = FLY_PUZZLE; return TRUE; }
@@ -256,7 +256,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
 
 void sub_8179918(void)
 {
-    gFieldEffectArguments[0] = brm_get_pokemon_selection();
+    gFieldEffectArguments[0] = GetCursorSelectionMonId();
     FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
 }
 
@@ -276,7 +276,7 @@ void sub_8179944(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(SYS_BRAILLE_FLY);
+    FlagSet(FLAG_SYS_BRAILLE_FLY);
     ScriptContext2_Disable();
 }
 
@@ -284,7 +284,7 @@ void sub_8179944(void)
 void DoBrailleWait(void)
 {
     /*
-    if (!FlagGet(SYS_BRAILLE_WAIT))
+    if (!FlagGet(FLAG_SYS_BRAILLE_WAIT))
         CreateTask(Task_BrailleWait, 0x50);
 }
 
@@ -387,7 +387,7 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
     if (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x43)
     {
         // _08179A1A
-        if (FlagGet(SYS_BRAILLE_WAIT) != FALSE)
+        if (FlagGet(FLAG_SYS_BRAILLE_WAIT) != FALSE)
             return FALSE;
         if (FlagGet(2) == FALSE)
             return FALSE;

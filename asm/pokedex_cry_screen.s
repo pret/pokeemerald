@@ -239,7 +239,7 @@ sub_8145534: @ 8145534
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	ldr r0, [r0, 0x4]
 	cmp r0, 0
 	bge _08145582
@@ -675,9 +675,9 @@ _08145884:
 	b _081458F8
 	.pool
 _081458B0:
-	ldr r0, =gUnknown_085B8C80
+	ldr r0, =gCryMeterNeedleSpriteSheets
 	bl LoadSpriteSheets
-	ldr r0, =gUnknown_085B8C90
+	ldr r0, =gCryMeterNeedleSpritePalettes
 	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085B8C68
 	ldrb r1, [r4, 0x4]

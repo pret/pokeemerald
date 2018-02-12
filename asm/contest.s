@@ -563,7 +563,7 @@ _080D7B4E:
 	bl sub_80D779C
 	bl sub_80D77E4
 	bl sub_80D7678
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl ResetPaletteFade
 	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
@@ -1048,7 +1048,7 @@ _080D8004:
 	bl sub_80DC594
 	bl sub_80DC5E8
 	bl sub_80DC7EC
-	ldr r1, =gBanksByIdentity
+	ldr r1, =gBattlerPositions
 	strb r4, [r1]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
@@ -1058,12 +1058,12 @@ _080D8004:
 	strb r2, [r1, 0x3]
 	ldr r0, =gBattleTypeFlags
 	str r4, [r0]
-	ldr r4, =gBankAttacker
+	ldr r4, =gBattlerAttacker
 	strb r2, [r4]
-	ldr r0, =gBankTarget
+	ldr r0, =gBattlerTarget
 	strb r3, [r0]
 	bl sub_80DB0C4
-	ldr r2, =gBankSpriteIds
+	ldr r2, =gBattlerSpriteIds
 	ldrb r1, [r4]
 	adds r1, r2
 	strb r0, [r1]
@@ -1367,7 +1367,7 @@ vblank_cb_battle: @ 80D827C
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_80BA0A8
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.pool
@@ -1416,13 +1416,13 @@ sub_80D833C: @ 80D833C
 	cmp r0, 0
 	bne _080D83CC
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_0827D507
+	ldr r1, =gText_0827D507
 	bl StringCopy
 	b _080D83D4
 	.pool
 _080D83CC:
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_0827D531
+	ldr r1, =gText_0827D531
 	bl StringCopy
 _080D83D4:
 	bl sub_80DB89C
@@ -1753,13 +1753,13 @@ _080D868E:
 	cmp r0, 0
 	bne _080D86DC
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_0827D507
+	ldr r1, =gText_0827D507
 	bl StringCopy
 	b _080D86E4
 	.pool
 _080D86DC:
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_0827D531
+	ldr r1, =gText_0827D531
 	bl StringCopy
 _080D86E4:
 	bl sub_80DB89C
@@ -2547,8 +2547,8 @@ _080D8DD0:
 	lsls r4, 3
 	adds r4, r0
 	strh r5, [r4, 0xC]
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattlerAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	strb r5, [r0]
@@ -2655,7 +2655,7 @@ _080D8F38:
 	bl StringCopy
 _080D8F48:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827D55A
+	ldr r1, =gText_0827D55A
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3566,7 +3566,7 @@ _080D96D4:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E793
+	ldr r1, =gText_0827E793
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3638,20 +3638,20 @@ _080D9774:
 	asrs r0, r4, 24
 	cmp r0, 0x1
 	bne _080D97A0
-	ldr r0, =gUnknown_0827E32E
+	ldr r0, =gText_0827E32E
 	b _080D97A6
 	.pool
 _080D97A0:
 	cmp r0, 0x2
 	bne _080D97B4
-	ldr r0, =gUnknown_0827E35B
+	ldr r0, =gText_0827E35B
 _080D97A6:
 	movs r1, 0x1
 	bl sub_80DEC30
 	b _080D97BC
 	.pool
 _080D97B4:
-	ldr r0, =gUnknown_0827E38D
+	ldr r0, =gText_0827E38D
 	movs r1, 0x1
 	bl sub_80DEC30
 _080D97BC:
@@ -3675,7 +3675,7 @@ _080D97DC:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E2FE
+	ldr r1, =gText_0827E2FE
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3813,7 +3813,7 @@ _080D9904:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E6E3
+	ldr r1, =gText_0827E6E3
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -4043,7 +4043,7 @@ _080D9B30:
 	cmp r3, 0
 	bge _080D9B48
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_0827E73C
+	ldr r1, =gText_0827E73C
 	bl StringExpandPlaceholders
 	b _080D9B74
 	.pool
@@ -4058,13 +4058,13 @@ _080D9B48:
 	cmp r0, 0x4
 	bgt _080D9B6C
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_0827E717
+	ldr r1, =gText_0827E717
 	bl StringExpandPlaceholders
 	b _080D9B74
 	.pool
 _080D9B6C:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_0827E76A
+	ldr r1, =gText_0827E76A
 	bl StringExpandPlaceholders
 _080D9B74:
 	ldr r0, =gStringVar4
@@ -4402,7 +4402,7 @@ _080D9DD4:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E7EA
+	ldr r1, =gText_0827E7EA
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -4426,7 +4426,7 @@ _080D9E60:
 _080D9E6A:
 	bl sub_80DB89C
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E817
+	ldr r1, =gText_0827E817
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -4491,7 +4491,7 @@ _080D9EDC:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E58A
+	ldr r1, =gText_0827E58A
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -4630,7 +4630,7 @@ _080DA038:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827D56F
+	ldr r1, =gText_0827D56F
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -5373,7 +5373,7 @@ _080DA668:
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827D597
+	ldr r1, =gText_0827D597
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -6313,7 +6313,7 @@ _080DAE1E:
 	movs r0, 0x4
 	b _080DAE9A
 _080DAE2E:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DAE82
@@ -6358,7 +6358,7 @@ _080DAE82:
 	movs r0, 0
 	b _080DAE9A
 _080DAE86:
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	adds r2, r1, 0
 	ldrh r1, [r0]
 	movs r0, 0x2
@@ -6652,12 +6652,12 @@ sub_80DB0C4: @ 80DB0C4
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_08587C00
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08C1C6B8
+	ldr r0, =gContest2Pal
 	movs r1, 0x88
 	lsls r1, 1
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	ldr r0, =gUnknown_08587BE8
+	ldr r0, =gSpriteTemplate_8587BE8
 	movs r1, 0x70
 	movs r2, 0x24
 	movs r3, 0x1E
@@ -6692,7 +6692,7 @@ sub_80DB120: @ 80DB120
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_08587C10
 	bl LoadCompressedObjectPalette
-	ldr r0, =gUnknown_08587C18
+	ldr r0, =gSpriteTemplate_8587C18
 	movs r1, 0x60
 	movs r2, 0xA
 	movs r3, 0x1D
@@ -6763,7 +6763,7 @@ _080DB1CC:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	movs r1, 0x90
 	lsls r1, 1
 	movs r2, 0x20
@@ -8456,7 +8456,7 @@ sub_80DBED4: @ 80DBED4
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r1, 1
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	lsls r0, 3
 	adds r1, r0
@@ -8891,7 +8891,7 @@ _080DC226:
 	ble _080DC284
 	movs r0, 0x60
 	bl PlaySE
-	ldr r4, =gMPlay_SE1
+	ldr r4, =gMPlayInfo_SE1
 	adds r0, r4, 0
 	bl m4aMPlayImmInit
 	ldr r1, =0x0000ffff
@@ -8946,7 +8946,7 @@ _080DC2C8:
 	ldrb r0, [r0]
 	adds r0, r5
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_08587AD0
+	ldr r0, =gSpriteTemplate_8587AD0
 	movs r1, 0xB4
 	movs r3, 0x1
 	bl CreateSprite
@@ -9240,7 +9240,7 @@ _080DC506:
 	ldr r1, =gUnknown_08587AE8
 	adds r0, r1
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08587B18
+	ldr r0, =gSpriteTemplate_8587B18
 	adds r0, r6, r0
 	ldr r2, =gUnknown_08587A70
 	ldr r1, =gUnknown_02039F26
@@ -9264,7 +9264,7 @@ _080DC506:
 	adds r0, r1
 	lsls r0, 2
 	add r0, r8
-	ldr r1, =gUnknown_08587B80
+	ldr r1, =gSubspriteTables_8587B80
 	bl SetSubspriteTables
 	ldr r0, [r7]
 	ldr r0, [r0, 0x14]
@@ -9298,7 +9298,7 @@ sub_80DC594: @ 80DC594
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_08587BB8
 	bl LoadSpritePalette
-	ldr r0, =gUnknown_08587BC8
+	ldr r0, =gSpriteTemplate_8587BC8
 	movs r1, 0x1E
 	movs r2, 0x2C
 	movs r3, 0x1
@@ -9877,7 +9877,7 @@ sub_80DC9EC: @ 80DC9EC
 	lsls r4, r2, 1
 	adds r4, r2
 	lsls r4, 3
-	ldr r0, =gUnknown_0858998C
+	ldr r0, =gSpriteTemplate_858998C
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB8
@@ -11207,7 +11207,7 @@ sub_80DD45C: @ 80DD45C
 	cmp r1, 0
 	bne _080DD4DC
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E837
+	ldr r1, =gText_0827E837
 	bl StringCopy
 	b _080DD52C
 	.pool
@@ -11216,7 +11216,7 @@ _080DD4DC:
 	cmp r0, 0x1
 	bne _080DD4F4
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E83F
+	ldr r1, =gText_0827E83F
 	bl StringCopy
 	b _080DD52C
 	.pool
@@ -11225,7 +11225,7 @@ _080DD4F4:
 	cmp r0, 0x2
 	bne _080DD50C
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E847
+	ldr r1, =gText_0827E847
 	bl StringCopy
 	b _080DD52C
 	.pool
@@ -11234,13 +11234,13 @@ _080DD50C:
 	cmp r0, 0x3
 	bne _080DD524
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E850
+	ldr r1, =gText_0827E850
 	bl StringCopy
 	b _080DD52C
 	.pool
 _080DD524:
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E85A
+	ldr r1, =gText_0827E85A
 	bl StringCopy
 _080DD52C:
 	ldr r4, =gStringVar4
@@ -11731,7 +11731,7 @@ _080DD956:
 	ldr r1, [r0]
 	movs r0, 0x13
 	ldrsb r0, [r1, r0]
-	ldr r4, =gUnknown_08D8EC24
+	ldr r4, =gContestApplauseMeterGfx
 	cmp r5, r0
 	bge _080DD966
 	adds r4, 0x40
@@ -11805,7 +11805,7 @@ sub_80DD9F0: @ 80DD9F0
 	ldrb r1, [r0, 0x1]
 	lsls r1, 29
 	lsrs r1, 29
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r2, [r0]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -13796,9 +13796,9 @@ sub_80DEA20: @ 80DEA20
 	push {lr}
 	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
-	ldr r1, =gBankSpriteIds
+	ldr r1, =gBattlerSpriteIds
 	strb r0, [r1, 0x3]
-	ldr r0, =gBankTarget
+	ldr r0, =gBattlerTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -13817,7 +13817,7 @@ sub_80DEA20: @ 80DEA20
 	thumb_func_start sub_80DEA5C
 sub_80DEA5C: @ 80DEA5C
 	push {r4,lr}
-	ldr r0, =gBankSpriteIds
+	ldr r0, =gBattlerSpriteIds
 	ldrb r0, [r0, 0x3]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -13829,13 +13829,13 @@ sub_80DEA5C: @ 80DEA5C
 	strh r0, [r4, 0x26]
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	movs r0, 0x3
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -13905,12 +13905,12 @@ _080DEAD0:
 	.4byte _080DEB60
 	.4byte _080DEB60
 _080DEB54:
-	ldr r1, =gBankTarget
+	ldr r1, =gBattlerTarget
 	movs r0, 0x2
 	b _080DEB64
 	.pool
 _080DEB60:
-	ldr r1, =gBankTarget
+	ldr r1, =gBattlerTarget
 	movs r0, 0x3
 _080DEB64:
 	strb r0, [r1]
@@ -14067,7 +14067,7 @@ _080DEC80:
 	b _080DEC9C
 	.pool
 _080DEC94:
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r1, r0, 24
 _080DEC9C:
@@ -14260,7 +14260,7 @@ _080DEDE6:
 	b _080DEF90
 	.pool
 _080DEE00:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DEE4C
@@ -14369,7 +14369,7 @@ _080DEEF4:
 	mov r2, r10
 	ldr r0, [r2]
 	adds r0, r7
-	ldr r1, =gUnknown_02039F2E
+	ldr r1, =gSpecialVar_ContestRank
 	ldrh r1, [r1]
 	ldr r3, =0x00002eae
 	adds r0, r3
@@ -14383,7 +14383,7 @@ _080DEF02:
 	mov r2, r9
 	lsls r1, r2, 5
 	adds r0, r1
-	ldr r1, =gScriptContestCategory
+	ldr r1, =gSpecialVar_ContestCategory
 	ldrh r1, [r1]
 	ldr r3, =0x00002e9a
 	adds r0, r3
@@ -14485,7 +14485,7 @@ _080DEFE6:
 	b _080DF03A
 	.pool
 _080DEFF8:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DF038

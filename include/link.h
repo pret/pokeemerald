@@ -2,11 +2,10 @@
 #define GUARD_LINK_H
 
 #define MAX_LINK_PLAYERS 4
+#define MAX_RFU_PLAYERS 5
 #define CMD_LENGTH 8
 #define QUEUE_CAPACITY 50
 #define BLOCK_BUFFER_SIZE 0x100
-
-#define gBlockSendBuffer gUnknown_020228C4 // FIXME
 
 #define LINK_STAT_LOCAL_ID               0x00000003
 #define LINK_STAT_PLAYER_COUNT           0x0000001C
@@ -70,7 +69,7 @@ struct LinkPlayer
     /* 0x08 */ u8 name[11];
     /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;
-    /* 0x18 */ u16 lp_field_18;
+    /* 0x18 */ u16 lp_field_18; // battle bank in battles
     /* 0x1A */ u16 language;
 };
 
@@ -133,7 +132,7 @@ struct BlockRequest
 extern const struct BlockRequest sBlockRequestLookupTable[5];
 
 extern struct Link gLink;
-extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
+extern u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
@@ -144,8 +143,9 @@ extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
+extern u32 gLinkStatus;
 
-void Task_DestroySelf(u8);
+void Task_DestroySelf(u8 taskId);
 void OpenLink(void);
 void CloseLink(void);
 u16 LinkMain2(u16 *);
@@ -181,6 +181,7 @@ void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
 u8 GetLinkPlayerCount(void);
+bool32 InUnionRoom(void);
 
 void sub_800E0E8(void);
 bool8 sub_800A520(void);
@@ -188,11 +189,9 @@ bool8 sub_8010500(void);
 void sub_800DFB4(u8, u8);
 void sub_800ADF8(void);
 void sub_800B488(void);
-void sub_8009734(void);
+void OpenLink(void);
 void sub_800A620(void);
 void sub_8011BD0(void);
-u8 sub_800ABAC(void);
-u8 sub_800ABBC(void);
 void sub_800AC34(void);
 bool32 Link_AnyPartnersPlayingRubyOrSapphire(void);
 bool32 sub_800A03C(void);
@@ -202,5 +201,6 @@ void sub_8009FAC(void);
 void sub_800A4D8(u8);
 u8 sub_800A9D8(void);
 bool8 sub_801048C(u8);
+u8 sub_800A0C8(s32, s32);
 
 #endif // GUARD_LINK_H

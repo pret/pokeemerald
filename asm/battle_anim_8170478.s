@@ -16,7 +16,7 @@ sub_8170478: @ 8170478
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x10]
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r4, [r0]
 	ldr r0, =gBattle_WIN0H
 	movs r1, 0
@@ -56,7 +56,7 @@ sub_8170478: @ 8170478
 	movs r1, 0x3
 	movs r2, 0x1
 	bl SetAnimBgAttribute
-	ldr r0, =gHealthBoxesIds
+	ldr r0, =gHealthboxSpriteIds
 	adds r4, r0
 	ldrb r0, [r4]
 	ldr r1, =gSprites
@@ -212,7 +212,7 @@ sub_8170660: @ 8170660
 	push {r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	mov r8, r0
 	ldr r1, =gTasks
@@ -373,7 +373,7 @@ _0817076C:
 	movs r1, 0x1
 	movs r2, 0
 	bl SetAnimBgAttribute
-	ldr r0, =gHealthBoxesIds
+	ldr r0, =gHealthboxSpriteIds
 	add r0, r8
 	ldrb r0, [r0]
 	lsls r1, r0, 4
@@ -434,7 +434,7 @@ sub_8170834: @ 8170834
 	adds r7, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gHealthBoxesIds
+	ldr r0, =gHealthboxSpriteIds
 	adds r2, r0
 	ldrb r0, [r2]
 	lsls r5, r0, 4
@@ -540,7 +540,7 @@ sub_8170920: @ 8170920
 	lsrs r4, 24
 	mov r1, sp
 	adds r1, 0x1
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r2, [r0]
 	mov r0, sp
 	bl sub_8170834
@@ -561,7 +561,7 @@ sub_817094C: @ 817094C
 	push {r5,r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gHealthBoxesIds
+	ldr r1, =gHealthboxSpriteIds
 	adds r0, r1
 	ldrb r0, [r0]
 	ldr r1, =gSprites
@@ -628,7 +628,7 @@ sub_81709EC: @ 81709EC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_817094C
 	adds r0, r4, 0
@@ -765,8 +765,8 @@ sub_8170B04: @ 8170B04
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r5, [r0]
@@ -851,17 +851,17 @@ sub_8170BB0: @ 8170BB0
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =gBankSpriteIds
-	ldr r4, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r4, =gBattleAnimAttacker
 	ldrb r0, [r4]
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	mov r9, r1
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08170BF8
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -872,7 +872,7 @@ sub_8170BB0: @ 8170BB0
 	b _08170C08
 	.pool
 _08170BF8:
-	ldr r1, =gBattlePartyID
+	ldr r1, =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -886,7 +886,7 @@ _08170C08:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -904,16 +904,16 @@ _08170C08:
 	b _08170CEE
 	.pool
 _08170C44:
-	ldr r5, =gAnimBankAttacker
+	ldr r5, =gBattleAnimAttacker
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	adds r1, r0, 0
 	lsls r1, 24
 	ldr r2, =gSprites
@@ -934,7 +934,7 @@ _08170C44:
 	mov r0, r8
 	str r0, [sp]
 	adds r0, r4, 0
-	bl sub_8171D98
+	bl LaunchBallStarsTask
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x1C]
@@ -950,7 +950,7 @@ _08170C44:
 	ldrb r1, [r5]
 	movs r0, 0
 	mov r3, r8
-	bl sub_81729E8
+	bl LaunchBallFadeMonTask
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x1E]
@@ -998,10 +998,10 @@ sub_8170CFC: @ 8170CFC
 	lsrs r4, 24
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8076A78
+	bl LoadBallGfx
 	adds r0, r4, 0
 	bl DestroyAnimVisualTask
 	pop {r4}
@@ -1018,10 +1018,10 @@ sub_8170D24: @ 8170D24
 	lsrs r4, 24
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8076AE8
+	bl FreeBallGfx
 	adds r0, r4, 0
 	bl DestroyAnimVisualTask
 	pop {r4}
@@ -1057,8 +1057,8 @@ _08170D74:
 	.pool
 	thumb_func_end sub_8170D4C
 
-	thumb_func_start ball_number_to_ball_processing_index
-ball_number_to_ball_processing_index: @ 8170D84
+	thumb_func_start ItemIdToBallId
+ItemIdToBallId: @ 8170D84
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1123,7 +1123,7 @@ _08170DFC:
 _08170DFE:
 	pop {r1}
 	bx r1
-	thumb_func_end ball_number_to_ball_processing_index
+	thumb_func_end ItemIdToBallId
 
 	thumb_func_start sub_8170E04
 sub_8170E04: @ 8170E04
@@ -1138,14 +1138,14 @@ sub_8170E04: @ 8170E04
 	mov r10, r0
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, =gUnknown_0832C588
+	ldr r1, =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x20
 	movs r2, 0x50
@@ -1162,18 +1162,18 @@ sub_8170E04: @ 8170E04
 	adds r6, r4, r1
 	movs r0, 0x22
 	strh r0, [r6, 0x2E]
-	ldr r2, =gAnimBankTarget
+	ldr r2, =gBattleAnimTarget
 	mov r8, r2
 	ldrb r0, [r2]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1186,7 +1186,7 @@ sub_8170E04: @ 8170E04
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r3, [r0, 0x8]
-	ldr r1, =gBankSpriteIds
+	ldr r1, =gBattlerSpriteIds
 	mov r2, r8
 	ldrb r0, [r2]
 	adds r0, r1
@@ -1278,12 +1278,12 @@ _08170F50:
 _08170F54:
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A82E4
@@ -1294,7 +1294,7 @@ _08170F54:
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =gUnknown_0832C588
+	ldr r1, =gBallSpriteTemplates
 	adds r0, r1
 	adds r1, r6, 0
 	adds r1, 0x20
@@ -1313,18 +1313,18 @@ _08170F54:
 	adds r6, r4, r0
 	movs r0, 0x22
 	strh r0, [r6, 0x2E]
-	ldr r1, =gAnimBankTarget
+	ldr r1, =gBattleAnimTarget
 	mov r8, r1
 	ldrb r0, [r1]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1335,8 +1335,8 @@ _08170F54:
 	ldr r0, =SpriteCallbackDummy
 	str r0, [r4]
 	movs r0, 0
-	bl GetBankByIdentity
-	ldr r1, =gBankSpriteIds
+	bl GetBattlerAtPosition
+	ldr r1, =gBattlerSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1371,8 +1371,8 @@ sub_8171030: @ 8171030
 	lsrs r5, r0, 24
 	ldr r6, =gSprites
 	movs r0, 0
-	bl GetBankByIdentity
-	ldr r1, =gBankSpriteIds
+	bl GetBattlerAtPosition
+	ldr r1, =gBattlerSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1422,8 +1422,8 @@ sub_81710A8: @ 81710A8
 	lsrs r5, r0, 24
 	ldr r6, =gSprites
 	movs r0, 0
-	bl GetBankByIdentity
-	ldr r4, =gBankSpriteIds
+	bl GetBattlerAtPosition
+	ldr r4, =gBattlerSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1438,7 +1438,7 @@ sub_81710A8: @ 81710A8
 	cmp r0, 0
 	bge _081710F4
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1487,7 +1487,7 @@ sub_8171134: @ 8171134
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _081711D2
@@ -1532,7 +1532,7 @@ _08171188:
 	str r0, [r4, 0x1C]
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xB
@@ -1549,13 +1549,13 @@ _08171188:
 	str r5, [sp]
 	movs r2, 0x1
 	movs r3, 0x1C
-	bl sub_8171D98
-	ldr r0, =gAnimBankTarget
+	bl LaunchBallStarsTask
+	ldr r0, =gBattleAnimTarget
 	ldrb r1, [r0]
 	movs r0, 0
 	movs r2, 0xE
 	adds r3, r5, 0
-	bl sub_81729E8
+	bl LaunchBallFadeMonTask
 _081711D2:
 	add sp, 0x4
 	pop {r4,r5}
@@ -1584,8 +1584,8 @@ sub_81711E8: @ 81711E8
 	ldr r0, =sub_8171240
 	str r0, [r4, 0x1C]
 	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankTarget
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1606,8 +1606,8 @@ _08171224:
 sub_8171240: @ 8171240
 	push {r4-r7,lr}
 	adds r7, r0, 0
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankTarget
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r4, [r0]
@@ -2333,7 +2333,7 @@ sub_81717F8: @ 81717F8
 	push {r7}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r7, =gAnimBankTarget
+	ldr r7, =gBattleAnimTarget
 	ldrh r0, [r6, 0x36]
 	adds r0, 0x1
 	movs r1, 0
@@ -2390,7 +2390,7 @@ _08171880:
 	cmp r1, r0
 	bne _081718BC
 	ldr r5, =gSprites
-	ldr r4, =gBankSpriteIds
+	ldr r4, =gBattlerSpriteIds
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -2671,7 +2671,7 @@ sub_8171AAC: @ 8171AAC
 	orrs r0, r1
 	strb r0, [r3]
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _08171ADC
@@ -2697,7 +2697,7 @@ sub_8171AE4: @ 8171AE4
 	str r0, [r4, 0x1C]
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xB
@@ -2714,17 +2714,17 @@ sub_8171AE4: @ 8171AE4
 	str r5, [sp]
 	movs r2, 0x1
 	movs r3, 0x1C
-	bl sub_8171D98
-	ldr r0, =gAnimBankTarget
+	bl LaunchBallStarsTask
+	ldr r0, =gBattleAnimTarget
 	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0xE
 	adds r3, r5, 0
-	bl sub_81729E8
+	bl LaunchBallFadeMonTask
 _08171B36:
 	ldr r6, =gSprites
-	ldr r5, =gBankSpriteIds
-	ldr r4, =gAnimBankTarget
+	ldr r5, =gBattlerSpriteIds
+	ldr r4, =gBattleAnimTarget
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2791,8 +2791,8 @@ sub_8171BAC: @ 8171BAC
 	strb r0, [r2]
 _08171BCA:
 	ldr r4, =gSprites
-	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimBankTarget
+	ldr r3, =gBattlerSpriteIds
+	ldr r2, =gBattleAnimTarget
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -2840,8 +2840,8 @@ _08171C24:
 	cmp r5, 0
 	beq _08171C8A
 	ldr r4, =gSprites
-	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimBankTarget
+	ldr r3, =gBattlerSpriteIds
+	ldr r2, =gBattleAnimTarget
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -3007,8 +3007,8 @@ _08171D86:
 	.pool
 	thumb_func_end sub_8171D60
 
-	thumb_func_start sub_8171D98
-sub_8171D98: @ 8171D98
+	thumb_func_start LaunchBallStarsTask
+LaunchBallStarsTask: @ 8171D98
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -3070,7 +3070,7 @@ sub_8171D98: @ 8171D98
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8171D98
+	thumb_func_end LaunchBallStarsTask
 
 	thumb_func_start sub_8171E20
 sub_8171E20: @ 8171E20
@@ -4476,8 +4476,8 @@ _081729E2:
 	bx r0
 	thumb_func_end sub_8172944
 
-	thumb_func_start sub_81729E8
-sub_81729E8: @ 81729E8
+	thumb_func_start LaunchBallFadeMonTask
+LaunchBallFadeMonTask: @ 81729E8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4563,7 +4563,7 @@ _08172A7E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81729E8
+	thumb_func_end LaunchBallFadeMonTask
 
 	thumb_func_start sub_8172AB0
 sub_8172AB0: @ 8172AB0
@@ -4729,8 +4729,8 @@ sub_8172BF0: @ 8172BF0
 	lsrs r7, r0, 24
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =gBankSpriteIds
-	ldr r3, =gAnimBankAttacker
+	ldr r0, =gBattlerSpriteIds
+	ldr r3, =gBattleAnimAttacker
 	ldrb r2, [r3]
 	adds r0, r2, r0
 	ldrb r6, [r0]
@@ -4764,7 +4764,7 @@ _08172C36:
 	adds r0, r4
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172C78
@@ -4825,7 +4825,7 @@ _08172CC8:
 	ldrb r1, [r5, 0x1E]
 	adds r0, r2, 0
 	adds r2, r6, 0
-	bl refresh_graphics_maybe
+	bl LoadBattleMonGfxAndAnimate
 	ldrh r0, [r5, 0x1C]
 	adds r0, 0x1
 	strh r0, [r5, 0x1C]
@@ -4838,7 +4838,7 @@ _08172CDA:
 	adds r0, r2
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172D10
@@ -4877,9 +4877,9 @@ _08172D28:
 	adds r0, r1
 	ldrb r1, [r0, 0x8]
 	strh r1, [r0, 0x8]
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -4949,7 +4949,7 @@ _08172DC0:
 	beq _08172E4E
 	b _08172E84
 _08172DC6:
-	ldr r0, =gAnimBankAttacker
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_80A8364
 	lsls r0, 24
@@ -5009,8 +5009,8 @@ _08172E14:
 	strh r0, [r4, 0x26]
 	b _08172E84
 _08172E4E:
-	ldr r1, =gBankSpriteIds
-	ldr r4, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r4, =gBattleAnimAttacker
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5030,7 +5030,7 @@ _08172E4E:
 	movs r3, 0x1
 	bl RequestDma3Fill
 	ldrb r0, [r4]
-	bl sub_805E974
+	bl ClearBehindSubstituteBit
 	adds r0, r5, 0
 	bl DestroyAnimVisualTask
 _08172E84:
@@ -5048,7 +5048,7 @@ sub_8172E9C: @ 8172E9C
 	ldr r3, =gBattleAnimArgs
 	ldr r1, =gBattleSpritesDataPtr
 	ldr r2, [r1]
-	ldr r1, =gAnimBankAttacker
+	ldr r1, =gBattleAnimAttacker
 	ldrb r1, [r1]
 	ldr r2, [r2]
 	lsls r1, 2
@@ -5068,8 +5068,8 @@ sub_8172ED0: @ 8172ED0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gAnimBankTarget
-	ldr r1, =gEffectBank
+	ldr r2, =gBattleAnimTarget
+	ldr r1, =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -5108,7 +5108,7 @@ sub_8172EF0: @ 8172EF0
 	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r6, 0
-	bl IsAnimBankSpriteVisible
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172FC8
@@ -5234,12 +5234,12 @@ _0817303A:
 	ldrb r0, [r4, 0x8]
 	mov r8, r0
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0x1E
@@ -5347,7 +5347,7 @@ _08173118:
 	cmp r0, 0
 	bne _08173160
 	mov r0, r8
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r1, 0x3F
 	cmp r0, 0
@@ -5575,11 +5575,11 @@ sub_817330C: @ 817330C
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	ldr r5, =gBattleAnimArgs
 	lsrs r0, 24
@@ -5587,11 +5587,11 @@ sub_817330C: @ 817330C
 	adds r0, r1
 	strh r0, [r4, 0x32]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x6]
@@ -5602,8 +5602,8 @@ sub_817330C: @ 817330C
 	adds r0, r4, 0
 	bl sub_80A68D4
 	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5627,8 +5627,8 @@ sub_817339C: @ 817339C
 	push {lr}
 	adds r3, r0, 0
 	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimBankAttacker
+	ldr r1, =gBattlerSpriteIds
+	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5652,7 +5652,7 @@ _081733C0:
 sub_81733D4: @ 81733D4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _081733F6
@@ -5678,8 +5678,8 @@ sub_8173400: @ 8173400
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r5, =gSprites
-	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimBankAttacker
+	ldr r3, =gBattlerSpriteIds
+	ldr r2, =gBattleAnimAttacker
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -5732,21 +5732,21 @@ sub_817345C: @ 817345C
 	.pool
 _08173478:
 	movs r0, 0
-	bl GetBankByIdentity
-	ldr r1, =gAnimBankAttacker
+	bl GetBattlerAtPosition
+	ldr r1, =gBattleAnimAttacker
 	strb r0, [r1]
 	movs r0, 0x1
 	b _08173498
 	.pool
 _0817348C:
 	movs r0, 0x1
-	bl GetBankByIdentity
-	ldr r1, =gAnimBankAttacker
+	bl GetBattlerAtPosition
+	ldr r1, =gBattleAnimAttacker
 	strb r0, [r1]
 	movs r0, 0
 _08173498:
-	bl GetBankByIdentity
-	ldr r1, =gAnimBankTarget
+	bl GetBattlerAtPosition
+	ldr r1, =gBattleAnimTarget
 	strb r0, [r1]
 _081734A0:
 	adds r0, r4, 0
@@ -5812,13 +5812,13 @@ sub_817351C: @ 817351C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gAnimBankAttacker
+	ldr r3, =gBattleAnimAttacker
 	ldr r1, =gBattleSpritesDataPtr
 	ldr r2, [r1]
 	ldr r1, [r2, 0x8]
 	ldrh r1, [r1]
 	strb r1, [r3]
-	ldr r3, =gAnimBankTarget
+	ldr r3, =gBattleAnimTarget
 	ldr r1, [r2, 0x8]
 	ldrh r1, [r1]
 	lsrs r1, 8

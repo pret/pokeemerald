@@ -4,6 +4,7 @@
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "task.h"
+#include "constants/rgb.h"
 
 enum
 {
@@ -65,7 +66,8 @@ static const struct PaletteStructTemplate gDummyPaletteStructTemplate = {
     .uid = 0xFFFF,
     .pst_field_B_5 = 1
 };
-static const u8 gUnknown_0852489C[] = {
+
+static const u8 sRoundedDownGrayscaleMap[] = {
      0,  0,  0,  0,  0,
      5,  5,  5,  5,  5,
     11, 11, 11, 11, 11,
@@ -620,7 +622,7 @@ static u8 UpdateFastPaletteFade(void)
             gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
         }
         break;
-    case FAST_FADE_OUT_TO_WHTIE:
+    case FAST_FADE_OUT_TO_WHITE:
         for (i = paletteOffsetStart; i < paletteOffsetEnd; i++)
         {
             struct PlttData *data = (struct PlttData *)&gPlttBufferFaded[i];
@@ -701,7 +703,7 @@ static u8 UpdateFastPaletteFade(void)
         case FAST_FADE_IN_FROM_BLACK:
             CpuCopy32(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
             break;
-        case FAST_FADE_OUT_TO_WHTIE:
+        case FAST_FADE_OUT_TO_WHITE:
             CpuFill32(0xFFFFFFFF, gPlttBufferFaded, PLTT_SIZE);
             break;
         case FAST_FADE_OUT_TO_BLACK:
@@ -838,292 +840,94 @@ void BlendPalettesUnfaded(u32 selectedPalettes, u8 coeff, u16 color)
 
 void TintPalette_GrayScale(u16 *palette, u16 count)
 {
-    s32 r;
-    s32 g;
-    s32 b;
-    s32 gray;
+    s32 r, g, b, i;
+    u32 gray;
 
-    int i;
     for (i = 0; i < count; i++)
     {
-        r = *palette & 0x1F;
-        g = (*palette >> 5) & 0x1F;
+        r = (*palette >>  0) & 0x1F;
+        g = (*palette >>  5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
-        r *= 0x4C;
-        r += g * 0x97;
-        r += b * 0x1D;
-        
-        gray = r >> 8;
-        
-        *palette++ = gray << 10 | gray << 5 | gray;
+
+        gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
+
+        *palette++ = (gray << 10) | (gray << 5) | (gray << 0);
     }
-    return;
 }
 
 void TintPalette_GrayScale2(u16 *palette, u16 count)
 {
-    s32 r;
-    s32 g;
-    s32 b;
-    s32 gray;
-
-    int i;
-    for (i = 0; i < count; i++)
-    {
-        r = *palette & 0x1F;
-        g = (*palette >> 5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
-        
-        r *= 0x4C;
-        r += g * 0x97;
-        r += b * 0x1D;
-        
-        gray = r >> 8;
-        
-        if ((u32)gray > 0x1F)
-            gray = 0x1F;
-        
-        gray = gUnknown_0852489C[gray];
-        
-        *palette++ = gray << 10 | gray << 5 | gray;
-    }
-    return;
-}
-
-#ifdef NONMATCHING
-void TintPalette_SepiaTone(u16 *palette, u16 count)
-{
-    s32 r;
-    s32 g;
-    s32 b;
+    s32 r, g, b, i;
     u32 gray;
-    u32 sepia;
-    s8 r2;
-    s8 g2;
-    s8 b2;
-    
-    int i;
+
     for (i = 0; i < count; i++)
     {
-        r = *palette & 0x1F;
-        g = (*palette >> 5) & 0x1F;
+        r = (*palette >>  0) & 0x1F;
+        g = (*palette >>  5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
-        r *= 0x4C;
-        r += g * 0x97;
-        r += b * 0x1D;
-        
-        gray = (s32)(r >> 8);
-        
-        sepia = (gray * 0x133);
-        
-        r2 = (u16)sepia >> 8;
-        
-        g2 = gray;
-        
-        b2 = (gray * 15);
-        
-        if (r2 > 0x1F)
-            r2 = 0x1F;
-        
-        *palette++ = b2 << 10 | g2 << 5 | r2;
+
+        gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
+
+        if (gray > 0x1F)
+            gray = 0x1F;
+
+        gray = sRoundedDownGrayscaleMap[gray];
+
+        *palette++ = (gray << 10) | (gray << 5) | (gray << 0);
     }
-    return;
 }
-#else
-__attribute__((naked))
+
 void TintPalette_SepiaTone(u16 *palette, u16 count)
 {
-    asm("push {r4-r7,lr}\n\
-    add r5, r0, #0\n\
-    lsl r1, #16\n\
-    lsr r1, #16\n\
-    cmp r1, #0\n\
-    beq _080A2BA2\n\
-    mov r7, #0x1F\n\
-    add r6, r1, #0\n\
-_080A2B50:\n\
-    ldrh r0, [r5]\n\
-    mov r1, #0x1F\n\
-    and r1, r0\n\
-    lsl r0, #16\n\
-    lsr r2, r0, #21\n\
-    and r2, r7\n\
-    lsr r3, r0, #26\n\
-    and r3, r7\n\
-    mov r0, #0x4C\n\
-    mul r1, r0\n\
-    mov r0, #0x97\n\
-    mul r0, r2\n\
-    add r1, r0\n\
-    lsl r0, r3, #3\n\
-    sub r0, r3\n\
-    lsl r0, #2\n\
-    add r0, r3\n\
-    add r1, r0\n\
-    asr r1, #8\n\
-    ldr r0, =0x00000133\n\
-    mul r0, r1\n\
-    lsl r0, #16\n\
-    lsr r2, r0, #24\n\
-    lsl r0, r1, #24\n\
-    lsr r4, r0, #24\n\
-    lsl r0, r1, #4\n\
-    sub r0, r1\n\
-    lsl r0, #20\n\
-    lsr r3, r0, #24\n\
-    cmp r2, #0x1F\n\
-    ble _080A2B90\n\
-    mov r2, #0x1F\n\
-_080A2B90:\n\
-    lsl r0, r3, #10\n\
-    lsl r1, r4, #5\n\
-    orr r0, r1\n\
-    orr r0, r2\n\
-    strh r0, [r5]\n\
-    add r5, #0x2\n\
-    sub r6, #0x1\n\
-    cmp r6, #0\n\
-    bne _080A2B50\n\
-_080A2BA2:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
-
-#ifdef NONMATCHING
-void sub_80A2BAC(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
-{
-    s32 r;
-    s32 g;
-    s32 b;
-    s32 gray;
-    u8 r2;
-    u8 g2;
-    u8 b2;
-
-    int i;
+    s32 r, g, b, i;
+    u32 gray;
+    
     for (i = 0; i < count; i++)
     {
-        r = *palette & 0x1F;
-        g = (*palette >> 5) & 0x1F;
+        r = (*palette >>  0) & 0x1F;
+        g = (*palette >>  5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
-        r *= 0x4C;
-        r += g * 0x97;
-        r += b * 0x1D;
-        
-        gray = r >> 8;
-        
-        r2 = (u16)(gray * a3) >> 8;
-        
-        g2 = (u16)(gray * a4) >> 8;
-        
-        b2 = (u16)(gray * a5) >> 8;
-        
-        if (r2 > 0x1F)
-            r2 = 0x1F;
-        
-        if (g2 > 0x1F)
-            g2 = 0x1F;
-        
-        if (b2 > 0x1F)
-            b2 = 0x1F;
-        
-        *palette++ = b2 << 10 | g2 << 5 | r2;
+
+        gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
+
+        r = (u16)((Q_8_8(1.2) * gray)) >> 8;
+        g = (u16)((Q_8_8(1.0) * gray)) >> 8;
+        b = (u16)((Q_8_8(0.94) * gray)) >> 8;
+
+        if (r > 31)
+            r = 31;
+
+        *palette++ = (b << 10) | (g << 5) | (r << 0);
     }
-    return;
 }
-#else
-__attribute__((naked))
-void sub_80A2BAC(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
+
+void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 bTone)
 {
-    asm("push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    add r5, r0, #0\n\
-    ldr r0, [sp, #0x1C]\n\
-    lsl r1, #16\n\
-    lsr r1, #16\n\
-    lsl r2, #16\n\
-    lsr r2, #16\n\
-    mov r9, r2\n\
-    lsl r3, #16\n\
-    lsr r3, #16\n\
-    mov r8, r3\n\
-    lsl r0, #16\n\
-    lsr r0, #16\n\
-    mov r12, r0\n\
-    cmp r1, #0\n\
-    beq _080A2C38\n\
-    mov r7, #0x1F\n\
-    add r6, r1, #0\n\
-_080A2BD6:\n\
-    ldrh r0, [r5]\n\
-    mov r1, #0x1F\n\
-    and r1, r0\n\
-    lsl r0, #16\n\
-    lsr r2, r0, #21\n\
-    and r2, r7\n\
-    lsr r3, r0, #26\n\
-    and r3, r7\n\
-    mov r0, #0x4C\n\
-    mul r1, r0\n\
-    mov r0, #0x97\n\
-    mul r0, r2\n\
-    add r1, r0\n\
-    lsl r0, r3, #3\n\
-    sub r0, r3\n\
-    lsl r0, #2\n\
-    add r0, r3\n\
-    add r1, r0\n\
-    asr r1, #8\n\
-    mov r0, r9\n\
-    mul r0, r1\n\
-    lsl r0, #16\n\
-    lsr r4, r0, #24\n\
-    mov r0, r8\n\
-    mul r0, r1\n\
-    lsl r0, #16\n\
-    lsr r2, r0, #24\n\
-    mov r0, r12\n\
-    mul r0, r1\n\
-    lsl r0, #16\n\
-    lsr r3, r0, #24\n\
-    cmp r4, #0x1F\n\
-    ble _080A2C1A\n\
-    mov r4, #0x1F\n\
-_080A2C1A:\n\
-    cmp r2, #0x1F\n\
-    ble _080A2C20\n\
-    mov r2, #0x1F\n\
-_080A2C20:\n\
-    cmp r3, #0x1F\n\
-    ble _080A2C26\n\
-    mov r3, #0x1F\n\
-_080A2C26:\n\
-    lsl r0, r3, #10\n\
-    lsl r1, r2, #5\n\
-    orr r0, r1\n\
-    orr r0, r4\n\
-    strh r0, [r5]\n\
-    add r5, #0x2\n\
-    sub r6, #0x1\n\
-    cmp r6, #0\n\
-    bne _080A2BD6\n\
-_080A2C38:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0");
+    s32 r, g, b, i;
+    u32 gray;
+
+    for (i = 0; i < count; i++)
+    {
+        r = (*palette >>  0) & 0x1F;
+        g = (*palette >>  5) & 0x1F;
+        b = (*palette >> 10) & 0x1F;
+
+        gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
+
+        r = (u16)((rTone * gray)) >> 8;
+        g = (u16)((gTone * gray)) >> 8;
+        b = (u16)((bTone * gray)) >> 8;
+
+        if (r > 31)
+            r = 31;
+        if (g > 31)
+            g = 31;
+        if (b > 31)
+            b = 31;
+
+        *palette++ = (b << 10) | (g << 5) | (r << 0);
+    }
 }
-#endif
 
 void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
 {
@@ -1153,7 +957,7 @@ void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
     gTasks[taskId].func(taskId);
 }
 
-u32 sub_80A2CF8(u8 var)
+bool32 sub_80A2CF8(u8 var)
 {
     int i;
 
@@ -1181,7 +985,7 @@ void sub_80A2D54(u8 taskId)
 {
     u32 wordVar;
     s16 *data;
-    u16 temp;
+    s16 temp;
 
     data = gTasks[taskId].data;
     wordVar = GetWordTaskArg(taskId, 5);
@@ -1191,7 +995,7 @@ void sub_80A2D54(u8 taskId)
         data[4] = 0;
         BlendPalettes(wordVar, data[0], data[7]);
         temp = data[1];
-        if (data[0] == (s16)temp)
+        if (data[0] == temp)
         {
             DestroyTask(taskId);
         }
@@ -1200,12 +1004,12 @@ void sub_80A2D54(u8 taskId)
             data[0] += data[2];
             if (data[2] >= 0)
             {
-                if (data[0] < (s16)temp)
+                if (data[0] < temp)
                 {
                     return;
                 }
             }
-            else if (data[0] > (s16)temp)
+            else if (data[0] > temp)
             {
                 return;
             }

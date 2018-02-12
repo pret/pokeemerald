@@ -1,15 +1,15 @@
-
-// Includes
 #include "global.h"
+#include "constants/decorations.h"
 #include "decompress.h"
 #include "malloc.h"
+#include "text.h"
 #include "string_util.h"
 #include "international_string_util.h"
 #include "script.h"
 #include "task.h"
 #include "main.h"
 #include "palette.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "overworld.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
@@ -20,12 +20,12 @@
 #include "field_map_obj.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "menu_indicators.h"
 #include "sound.h"
 #include "event_scripts.h"
 #include "event_data.h"
-#include "region_map.h"
+#include "constants/region_map_sections.h"
 #include "player_pc.h"
 #include "strings.h"
 #include "tv.h"
@@ -33,7 +33,7 @@
 #include "tilesets.h"
 #include "item_icon.h"
 #include "trader.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
 #include "graphics.h"
@@ -68,27 +68,27 @@ struct DecorRearrangementDataBuffer {
 // Static RAM declarations
 
 EWRAM_DATA u8 *gCurDecorInventoryItems = NULL;
-EWRAM_DATA u8 sSecretBasePCMenuCursorPos = 0;
-EWRAM_DATA u8 sCurDecorCatCount = 0;
-EWRAM_DATA u8 sSecretBaseItemsIndicesBuffer[16] = {};
-EWRAM_DATA u8 sPlayerRoomItemsIndicesBuffer[12] = {};
-EWRAM_DATA u16 sSecretBasePCSelectDecorLineNo = 0;
-EWRAM_DATA u16 sSecretBasePCSelectDecorPageNo = 0;
+EWRAM_DATA static u8 sSecretBasePCMenuCursorPos = 0;
+EWRAM_DATA static u8 sCurDecorCatCount = 0;
+EWRAM_DATA static u8 sSecretBaseItemsIndicesBuffer[16] = {};
+EWRAM_DATA static u8 sPlayerRoomItemsIndicesBuffer[12] = {};
+EWRAM_DATA static u16 sSecretBasePCSelectDecorLineNo = 0;
+EWRAM_DATA static u16 sSecretBasePCSelectDecorPageNo = 0;
 EWRAM_DATA u8 gCurDecorationIndex = 0;
-EWRAM_DATA u8 sCurDecorationCategory = DECORCAT_DESK;
-EWRAM_DATA u32 filler_0203a174[2] = {};
+EWRAM_DATA static u8 sCurDecorationCategory = DECORCAT_DESK;
+EWRAM_DATA static u32 filler_0203a174[2] = {};
 EWRAM_DATA struct DecorPCPointers gUnknown_0203A17C = {};
-EWRAM_DATA u8 sDecorMenuWindowIndices[4] = {};
+EWRAM_DATA static u8 sDecorMenuWindowIndices[4] = {};
 EWRAM_DATA struct DecorPCBuffer *sDecorPCBuffer = NULL;
 EWRAM_DATA struct PlaceDecorationGraphicsDataBuffer sPlaceDecorationGraphicsDataBuffer = {};
-EWRAM_DATA u16 sCurDecorMapX = 0;
-EWRAM_DATA u16 sCurDecorMapY = 0;
-EWRAM_DATA u8 sDecor_CameraSpriteObjectIdx1 = 0;
-EWRAM_DATA u8 sDecor_CameraSpriteObjectIdx2 = 0;
-EWRAM_DATA u8 sDecorationLastDirectionMoved = 0;
-EWRAM_DATA struct OamData sDecorSelectorOam = {};
-EWRAM_DATA struct DecorRearrangementDataBuffer sDecorRearrangementDataBuffer[16] = {};
-EWRAM_DATA u8 sCurDecorSelectedInRearrangement = 0;
+EWRAM_DATA static u16 sCurDecorMapX = 0;
+EWRAM_DATA static u16 sCurDecorMapY = 0;
+EWRAM_DATA static u8 sDecor_CameraSpriteObjectIdx1 = 0;
+EWRAM_DATA static u8 sDecor_CameraSpriteObjectIdx2 = 0;
+EWRAM_DATA static u8 sDecorationLastDirectionMoved = 0;
+EWRAM_DATA static struct OamData sDecorSelectorOam = {};
+EWRAM_DATA static struct DecorRearrangementDataBuffer sDecorRearrangementDataBuffer[16] = {};
+EWRAM_DATA static u8 sCurDecorSelectedInRearrangement = 0;
 
 // Static ROM declarations
 
@@ -500,7 +500,7 @@ void sub_8126B80(u8 taskId)
 void sub_8126C08(void)
 {
     FillWindowPixelBuffer(0, 0x11);
-    AddTextPrinterParametrized(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
+    AddTextPrinterParameterized(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
 }
 
 void SecretBasePC_Decorate(u8 taskId)
@@ -529,7 +529,7 @@ void SecretBasePC_PutAway(u8 taskId)
     {
         sub_8126A58(0);
         sub_8197434(0, 0);
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8129ABC;
     }
@@ -727,7 +727,7 @@ void sub_81271CC(u8 taskId)
 {
     sub_8126A58(1);
     sub_8126A88();
-    sub_81973C4(0, 0);
+    NewMenuHelpers_DrawDialogueFrame(0, 0);
     sub_8126C08();
     gTasks[taskId].func = sub_8126B80;
 }
@@ -792,17 +792,17 @@ void sub_8127330(u8 taskId)
     for (i = 0; i < sDecorPCBuffer->unk_520 - 1; i ++)
     {
         sub_8127454(sDecorPCBuffer->names[i], gCurDecorInventoryItems[i]);
-        sDecorPCBuffer->items[i].unk_00 = sDecorPCBuffer->names[i];
-        sDecorPCBuffer->items[i].unk_04 = i;
+        sDecorPCBuffer->items[i].name = sDecorPCBuffer->names[i];
+        sDecorPCBuffer->items[i].id = i;
     }
     StringCopy(sDecorPCBuffer->names[i], gText_Cancel);
-    sDecorPCBuffer->items[i].unk_00 = sDecorPCBuffer->names[i];
-    sDecorPCBuffer->items[i].unk_04 = -2;
-    gUnknown_03006310 = gUnknown_085A6BD0;
-    gUnknown_03006310.unk_10 = sDecorMenuWindowIndices[1];
-    gUnknown_03006310.unk_0c = sDecorPCBuffer->unk_520;
-    gUnknown_03006310.unk_00 = sDecorPCBuffer->items;
-    gUnknown_03006310.unk_0e = sDecorPCBuffer->unk_521;
+    sDecorPCBuffer->items[i].name = sDecorPCBuffer->names[i];
+    sDecorPCBuffer->items[i].id = -2;
+    gMultiuseListMenuTemplate = gUnknown_085A6BD0;
+    gMultiuseListMenuTemplate.unk_10 = sDecorMenuWindowIndices[1];
+    gMultiuseListMenuTemplate.totalItems = sDecorPCBuffer->unk_520;
+    gMultiuseListMenuTemplate.items = sDecorPCBuffer->items;
+    gMultiuseListMenuTemplate.maxShowed = sDecorPCBuffer->unk_521;
 }
 
 void sub_8127454(u8 *dest, u16 decorId)
@@ -871,7 +871,7 @@ void sub_812759C(u8 taskId)
     sub_81272C8();
     sub_81272F8();
     sub_8127330(taskId);
-    data[13] = ListMenuInit(&gUnknown_03006310, sSecretBasePCSelectDecorPageNo, sSecretBasePCSelectDecorLineNo);
+    data[13] = ListMenuInit(&gMultiuseListMenuTemplate, sSecretBasePCSelectDecorPageNo, sSecretBasePCSelectDecorLineNo);
     sub_8127500();
 }
 
@@ -889,8 +889,8 @@ void sub_812764C(u8 taskId)
     data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        input = ListMenuHandleInput(data[13]);
-        get_coro_args_x18_x1A(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
+        input = ListMenuHandleInputGetItemId(data[13]);
+        sub_81AE860(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
         switch (input)
         {
             case -1:
@@ -1247,7 +1247,7 @@ void sub_8127F68(u8 taskId)
     {
         if (sub_8127F38() == TRUE)
         {
-            fade_screen(1, 0);
+            FadeScreen(1, 0);
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].func = sub_8128060;
         }
@@ -1303,7 +1303,7 @@ void sub_8128060(u8 taskId)
 
 void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
 {
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.unk4].data0;
+    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.unk4].data[0];
     gUnknown_03005DD0.unk4 = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
     gSprites[gUnknown_03005DD0.unk4].oam.priority = 1;
     gSprites[gUnknown_03005DD0.unk4].callback = sub_81292D0;
@@ -1384,8 +1384,8 @@ void sub_812826C(u8 taskId)
 void sub_81283BC(u8 taskId)
 {
     gTasks[taskId].data[10] = 0;
-    gSprites[sDecor_CameraSpriteObjectIdx1].data7 = 1;
-    gSprites[sDecor_CameraSpriteObjectIdx2].data7 = 1;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 1;
+    gSprites[sDecor_CameraSpriteObjectIdx2].data[7] = 1;
     sub_8128DE0();
     sub_8128950(taskId);
 }
@@ -1393,8 +1393,8 @@ void sub_81283BC(u8 taskId)
 void sub_8128414(u8 taskId)
 {
     gTasks[taskId].data[10] = 0;
-    gSprites[sDecor_CameraSpriteObjectIdx1].data7 = 1;
-    gSprites[sDecor_CameraSpriteObjectIdx2].data7 = 1;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 1;
+    gSprites[sDecor_CameraSpriteObjectIdx2].data[7] = 1;
     sub_8128DE0();
     StringExpandPlaceholders(gStringVar4, gText_CancelDecorating);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_8128B80);
@@ -1600,10 +1600,10 @@ void sub_81289F0(u8 taskId)
     {
         sCurDecorMapX = gTasks[taskId].data[0] - 7;
         sCurDecorMapY = gTasks[taskId].data[1] - 7;
-        ScriptContext1_SetupScript(gUnknown_08275D1F);
+        ScriptContext1_SetupScript(EventScript_275D1F);
     }
     gSprites[sDecor_CameraSpriteObjectIdx1].pos1.y += 2;
-    if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
+    if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
     {
         TV_PutSecretBaseVisitOnTheAir();
     }
@@ -1661,7 +1661,7 @@ void sub_8128BA0(u8 taskId)
 
 void sub_8128BBC(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = c1_overworld_prev_quest;
 }
@@ -1700,7 +1700,7 @@ void sub_8128C64(u8 taskId)
             data[2] ++;
             break;
         case 1:
-            ScriptContext1_SetupScript(gUnknown_08275D0C);
+            ScriptContext1_SetupScript(EventScript_275D0C);
             data[2] ++;
             break;
         case 2:
@@ -1770,8 +1770,8 @@ bool8 sub_8128DB4(void)
 void sub_8128DE0(void)
 {
     sDecorationLastDirectionMoved = 0;
-    gSprites[sDecor_CameraSpriteObjectIdx1].data2 = 0;
-    gSprites[sDecor_CameraSpriteObjectIdx1].data3 = 0;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[2] = 0;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[3] = 0;
 }
 
 void sub_8128E18(u8 taskId)
@@ -1779,7 +1779,7 @@ void sub_8128E18(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    if (!gSprites[sDecor_CameraSpriteObjectIdx1].data4)
+    if (!gSprites[sDecor_CameraSpriteObjectIdx1].data[4])
     {
         if (data[10] == 1)
         {
@@ -1793,29 +1793,29 @@ void sub_8128E18(u8 taskId)
         if ((gMain.heldKeys & 0x0F0) == DPAD_UP)
         {
             sDecorationLastDirectionMoved = DIR_SOUTH;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data2 =  0;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data3 = -2;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  0;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[3] = -2;
             data[1]--;
         }
         if ((gMain.heldKeys & 0x0F0) == DPAD_DOWN)
         {
             sDecorationLastDirectionMoved = DIR_NORTH;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data2 =  0;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data3 =  2;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  0;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[3] =  2;
             data[1]++;
         }
         if ((gMain.heldKeys & 0x0F0) == DPAD_LEFT)
         {
             sDecorationLastDirectionMoved = DIR_WEST;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data2 = -2;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data3 =  0;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[2] = -2;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[3] =  0;
             data[0]--;
         }
         if ((gMain.heldKeys & 0x0F0) == DPAD_RIGHT)
         {
             sDecorationLastDirectionMoved = DIR_EAST;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data2 =  2;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data3 =  0;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  2;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[3] =  0;
             data[0]++;
         }
         if (!sub_8128DB4() || !sub_8128D10(taskId))
@@ -1825,8 +1825,8 @@ void sub_8128E18(u8 taskId)
     }
     if (sDecorationLastDirectionMoved)
     {
-        gSprites[sDecor_CameraSpriteObjectIdx1].data4++;
-        gSprites[sDecor_CameraSpriteObjectIdx1].data4 &= 7;
+        gSprites[sDecor_CameraSpriteObjectIdx1].data[4]++;
+        gSprites[sDecor_CameraSpriteObjectIdx1].data[4] &= 7;
     }
     if (!data[10])
     {
@@ -1844,7 +1844,7 @@ void sub_8128E18(u8 taskId)
 void sub_8128FD8(u8 taskId)
 {
     sub_8197434(0, 1);
-    gSprites[sDecor_CameraSpriteObjectIdx1].data7 = 0;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].func = sub_8128E18;
 }
@@ -1955,20 +1955,20 @@ void SetDecorSelectionBoxOamAttributes(u8 decorShape)
 
 void sub_81292D0(struct Sprite *sprite)
 {
-    sprite->data2 = 0;
-    sprite->data3 = 0;
-    sprite->data4 = 0;
-    sprite->data5 = 0;
-    sprite->data6 = 0;
-    sprite->data7 = 0;
+    sprite->data[2] = 0;
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+    sprite->data[5] = 0;
+    sprite->data[6] = 0;
+    sprite->data[7] = 0;
     sprite->callback = sub_81292E8;
 }
 
 void sub_81292E8(struct Sprite *sprite)
 {
-    if (sprite->data7 == 0)
+    if (sprite->data[7] == 0)
     {
-        if (sprite->data6 < 15)
+        if (sprite->data[6] < 15)
         {
             sprite->invisible = FALSE;
         }
@@ -1976,8 +1976,8 @@ void sub_81292E8(struct Sprite *sprite)
         {
             sprite->invisible = TRUE;
         }
-        sprite->data6 ++;
-        sprite->data6 &= 0x1F;
+        sprite->data[6] ++;
+        sprite->data[6] &= 0x1F;
     }
     else
     {
@@ -2013,9 +2013,9 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     {
         return MAX_SPRITES;
     }
-    LZDecompressWram(GetDecorationIconPicOrPalette(decor, 0), gUnknown_0203CEBC);
-    CopyItemIconPicTo4x4Buffer(gUnknown_0203CEBC, gUnknown_0203CEC0);
-    sheet.data = gUnknown_0203CEC0;
+    LZDecompressWram(GetDecorationIconPicOrPalette(decor, 0), gItemIconDecompressionBuffer);
+    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+    sheet.data = gItemIcon4x4Buffer;
     sheet.size = 0x200;
     sheet.tag = tilesTag;
     LoadSpriteSheet(&sheet);
@@ -2023,7 +2023,7 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     palette.tag = paletteTag;
     LoadCompressedObjectPalette(&palette);
     template = malloc(sizeof(struct SpriteTemplate));
-    *template = gUnknown_08614FF4;
+    *template = gItemIconSpriteTemplate;
     template->tileTag = tilesTag;
     template->paletteTag = paletteTag;
     spriteId = CreateSprite(template, 0, 0, 0);
@@ -2133,10 +2133,10 @@ void sub_8129708(void)
     u16 i;
 
     gSpecialVar_0x8005 = 0;
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     if (gSpecialVar_0x8004 == sCurDecorSelectedInRearrangement)
     {
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     }
     else if (gDecorations[gUnknown_0203A17C.items[sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx]].permission == DECORPERM_SOLID_MAT)
     {
@@ -2206,7 +2206,7 @@ void sub_81298EC(u8 taskId)
         case 1:
             if (!gPaletteFade.active) {
                 DrawWholeMapView();
-                ScriptContext1_SetupScript(gUnknown_08275D2E);
+                ScriptContext1_SetupScript(EventScript_275D2E);
                 sub_8197434(0, 1);
                 gTasks[taskId].data[2] = 2;
             }
@@ -2222,7 +2222,7 @@ void sub_81298EC(u8 taskId)
             {
                 StringExpandPlaceholders(gStringVar4, gText_DecorationReturnedToPC);
                 DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
-                if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
+                if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
                 {
                     TV_PutSecretBaseVisitOnTheAir();
                 }
@@ -2249,7 +2249,7 @@ bool8 sub_81299AC(u8 taskId)
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
     player_get_direction_lower_nybble();
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.unk4].data0;
+    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.unk4].data[0];
     sub_812A39C();
     gUnknown_03005DD0.unk4 = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);
     if (gSaveBlock2Ptr->playerGender == MALE)
@@ -2300,7 +2300,7 @@ void sub_8129ABC(u8 taskId)
 void sub_8129B34(u8 taskId)
 {
     sub_8197434(0, 1);
-    gSprites[sDecor_CameraSpriteObjectIdx1].data7 = 0;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = sub_812A36C;
     gSprites[sDecor_CameraSpriteObjectIdx2].pos1.x = 0x88;
@@ -2635,7 +2635,7 @@ void sub_812A1A0(u8 taskId)
 
 void sub_812A1C0(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_81298EC;
 }
@@ -2654,7 +2654,7 @@ void sub_812A210(u8 taskId)
 
 void sub_812A22C(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_812A25C;
 }
@@ -2691,7 +2691,7 @@ void sub_812A2C4(u8 taskId)
             data[2] ++;
             break;
         case 1:
-            ScriptContext1_SetupScript(gUnknown_08275D0C);
+            ScriptContext1_SetupScript(EventScript_275D0C);
             data[2] ++;
             break;
         case 2:
@@ -2712,7 +2712,7 @@ void sub_812A334(void)
     u8 taskId;
 
     pal_fill_black();
-    sub_81973C4(0, 1);
+    NewMenuHelpers_DrawDialogueFrame(0, 1);
     sub_8126ABC();
     taskId = CreateTask(sub_812A2C4, 8);
     gTasks[taskId].data[2] = 0;
@@ -2720,9 +2720,9 @@ void sub_812A334(void)
 
 void sub_812A36C(struct Sprite *sprite)
 {
-    sprite->data0 ++;
-    sprite->data0 &= 0x1F;
-    if (sprite->data0 > 15)
+    sprite->data[0] ++;
+    sprite->data[0] &= 0x1F;
+    if (sprite->data[0] > 15)
     {
         sprite->invisible = TRUE;
     }

@@ -60,5 +60,6 @@ u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
 u16 itemid_get_market_price(u16 itemId);
+u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 pocketPos);
 
 #endif // ITEM_H

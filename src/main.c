@@ -2,7 +2,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "rtc.h"
-#include "rng.h"
+#include "random.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
 #include "battle.h"
@@ -29,7 +29,7 @@ extern void MapMusicMain(void);
 extern void EnableInterrupts(u16);
 extern void sub_8033648(void);
 extern u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
-extern void remove_some_task(void);
+extern void ScanlineEffect_Stop(void);
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gFlashMemoryPresent;
@@ -122,7 +122,7 @@ void AgbMain()
     ClearDma3Requests();
     ResetBgs();
     SetDefaultFontsPointer();
-    InitHeap(gHeap, 0x1C000);
+    InitHeap(gHeap, HEAP_SIZE);
 
     gSoftResetDisabled = FALSE;
 
@@ -332,7 +332,6 @@ void SetSerialCallback(IntrCallback callback)
 }
 
 extern void CopyBufferedValuesToGpuRegs(void);
-extern void ProcessDma3Requests(void);
 
 static void VBlankIntr(void)
 {
@@ -426,7 +425,7 @@ void DoSoftReset(void)
 {
     REG_IME = 0;
     m4aSoundVSyncOff();
-    remove_some_task();
+    ScanlineEffect_Stop();
     DmaStop(1);
     DmaStop(2);
     DmaStop(3);

@@ -212,17 +212,17 @@ _081C3FEC:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x1
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_0861CE97
 	adds r0, r4, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2C
@@ -1116,7 +1116,7 @@ sub_81C4778: @ 81C4778
 	bne _081C47AE
 	adds r0, r1, 0
 	adds r0, 0xC
-	bl sub_805F110
+	bl ShouldPlayNormalPokeCry
 	cmp r0, 0x1
 	bne _081C47A4
 	ldrh r0, [r4, 0x2]
@@ -1424,16 +1424,16 @@ sub_81C4A08: @ 81C4A08
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8076A78
+	bl LoadBallGfx
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =gUnknown_0832C588
+	ldr r1, =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x10
 	movs r2, 0x88
@@ -2049,7 +2049,7 @@ sub_81C4F24: @ 81C4F24
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, =sub_81C4F44
 	movs r1, 0xA
 	bl CreateTask
@@ -2239,7 +2239,7 @@ _081C50E4:
 	bl clear_scheduled_bg_copies_to_vram
 	b _081C51A2
 _081C50EE:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _081C51A2
 _081C50F4:
 	bl FreeAllSpritePalettes
@@ -2351,7 +2351,7 @@ _081C51D6:
 	thumb_func_start sub_81C51DC
 sub_81C51DC: @ 81C51DC
 	push {lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0861F2B4
@@ -2363,7 +2363,7 @@ sub_81C51DC: @ 81C51DC
 	adds r1, 0x4
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82
@@ -2411,7 +2411,7 @@ _081C5264:
 	.4byte _081C52D4
 _081C5278:
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08D9A620
+	ldr r1, =gBagScreen_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -2460,7 +2460,7 @@ _081C52DC:
 	b _081C5308
 	.pool
 _081C52F0:
-	bl sub_8122328
+	bl LoadListMenuArrowsGfx
 	ldr r0, [r4]
 	ldr r1, =0x00000984
 	adds r0, r1
@@ -2559,7 +2559,7 @@ _081C5382:
 	movs r0, 0x2
 	negs r0, r0
 	str r0, [r1]
-	ldr r2, =gUnknown_03006310
+	ldr r2, =gMultiuseListMenuTemplate
 	adds r1, r2, 0
 	ldr r0, =gUnknown_0861F2C0
 	ldm r0!, {r4,r6,r7}
@@ -2918,7 +2918,7 @@ sub_81C56F8: @ 81C56F8
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldr r2, =gUnknown_0203CF30
 	ldrh r1, [r2, 0x8]
 	ldrh r2, [r2, 0x6]
@@ -3545,7 +3545,7 @@ _081C5C12:
 	adds r1, r4, 0
 	adds r1, 0x8
 	adds r2, r4, 0x6
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	ldrh r1, [r4, 0x8]
 	ldrh r0, [r4, 0x6]
 	adds r1, r0
@@ -3565,14 +3565,14 @@ _081C5C12:
 	.pool
 _081C5C5C:
 	ldrb r0, [r7]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r6, r0, 0
 	ldrb r0, [r7]
 	ldr r1, =gUnknown_0203CF38
 	mov r8, r1
 	mov r2, r8
 	subs r2, 0x2
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -3585,7 +3585,7 @@ _081C5C5C:
 _081C5C88:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	strh r4, [r0]
 	adds r0, r5, 0
 	bl sub_81C5B14
@@ -3594,7 +3594,7 @@ _081C5C88:
 _081C5CA0:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	mov r12, r2
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
@@ -3681,7 +3681,7 @@ sub_81C5D20: @ 81C5D20
 	b _081C5DD8
 	.pool
 _081C5D74:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl ItemId_GetBattleUsage
 	lsls r0, 24
@@ -3722,7 +3722,7 @@ _081C5DCE:
 _081C5DD8:
 	strb r0, [r1]
 _081C5DDA:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4195,7 +4195,7 @@ sub_81C61E0: @ 81C61E0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl ItemId_GetPocket
 	lsls r0, 24
@@ -4207,7 +4207,7 @@ sub_81C61E0: @ 81C61E0
 	cmp r0, 0x3
 	beq _081C620C
 	ldrh r0, [r4]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4315,7 +4315,7 @@ sub_81C62C4: @ 81C62C4
 	b _081C6334
 	.pool
 _081C62F4:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4362,7 +4362,7 @@ sub_81C6350: @ 81C6350
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4577,7 +4577,7 @@ sub_81C654C: @ 81C654C
 	lsls r4, 3
 	ldr r5, =gTasks + 0x8
 	adds r6, r4, r5
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4635,7 +4635,7 @@ sub_81C65CC: @ 81C65CC
 	beq _081C662E
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r4, 0x10]
 	bl RemovePyramidBagItem
@@ -4646,7 +4646,7 @@ sub_81C65CC: @ 81C65CC
 	bl sub_81C5924
 	bl sub_81C59BC
 	bl sub_81C5314
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r6]
 	ldrh r2, [r7]
 	bl ListMenuInit
@@ -4671,9 +4671,9 @@ sub_81C6648: @ 81C6648
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	bl sub_81C61A8
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4713,7 +4713,7 @@ sub_81C66AC: @ 81C66AC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4785,7 +4785,7 @@ sub_81C674C: @ 81C674C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -4820,7 +4820,7 @@ sub_81C679C: @ 81C679C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl ItemId_GetBattleFunc
 	cmp r0, 0
@@ -4953,18 +4953,18 @@ sub_81C68B0: @ 81C68B0
 	ldrb r0, [r4]
 	ldr r1, =gUnknown_0203CF38
 	subs r2, r1, 0x2
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	b _081C6940
 	.pool
 _081C68F8:
 	ldrb r0, [r4]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r6, r0, 0
 	ldrb r0, [r4]
 	ldr r4, =gUnknown_0203CF38
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0
 	bl sub_81C7028
 	subs r4, 0x8
@@ -5066,7 +5066,7 @@ _081C69A8:
 	strh r0, [r1, 0x6]
 _081C69E0:
 	bl sub_81C5314
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r7]
 	mov r3, r8
 	ldrh r2, [r3]
@@ -5124,7 +5124,7 @@ sub_81C6A14: @ 81C6A14
 	strh r0, [r1, 0x6]
 _081C6A5E:
 	bl sub_81C5314
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r5]
 	ldrh r2, [r7]
 	bl ListMenuInit
@@ -5238,7 +5238,7 @@ _081C6AF8:
 	bl Free
 	adds r0, r5, 0
 	bl Free
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	b _081C6BC6
@@ -5266,7 +5266,7 @@ _081C6B9C:
 	lsrs r6, r0, 24
 	cmp r6, 0x2
 	bls _081C6B9C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r7, 0
@@ -5362,7 +5362,7 @@ sub_81C6C3C: @ 81C6C3C
 	str r4, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
@@ -5408,7 +5408,7 @@ sub_81C6C94: @ 81C6C94
 	str r4, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x7
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
@@ -5547,7 +5547,7 @@ DisplayItemMessageInBattlePyramid: @ 81C6DD8
 	movs r0, 0x2
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -5756,7 +5756,7 @@ sub_81C6F90: @ 81C6F90
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl AddItemIconObject
+	bl AddItemIconSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
