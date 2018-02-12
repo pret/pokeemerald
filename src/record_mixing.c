@@ -894,8 +894,8 @@ static void sub_80E7B60(struct UnkStruct_80E7B60 *src, size_t recordSize, u8 whi
             break;
     }
     _src = (void *)src + which * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].mail, &_src->unk_00[0], sizeof(struct DayCareMailRecordMixing));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].mail, &_src->unk_00[1], sizeof(struct DayCareMailRecordMixing));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[0].misc.mail, &_src->unk_00[0], sizeof(struct DayCareMailRecordMixing));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[1].misc.mail, &_src->unk_00[1], sizeof(struct DayCareMailRecordMixing));
     SeedRng(oldSeed);
 }
 #else
