@@ -246,7 +246,7 @@ SECTIONS {
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
         asm/battle_frontier_2.o(.text);
-        asm/item_menu.o(.text);
+        src/item_menu.o(.text);
         asm/list_menu.o(.text);
         asm/menu_indicators.o(.text);
         src/unk_text_util.o(.text);
@@ -520,7 +520,7 @@ SECTIONS {
         data/battle_frontier_1.o(.rodata);
         src/menu.o(.rodata);
         data/battle_frontier_2.o(.rodata);
-        data/item_menu.o(.rodata);
+        src/item_menu.o(.rodata);
         data/menu_indicators.o(.rodata);
         src/save_location.o(.rodata);
         data/item_icon.o(.rodata);

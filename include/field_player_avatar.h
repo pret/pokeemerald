@@ -31,6 +31,8 @@ u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e);
 u8 PlayerGetZCoord(void);
 void SetPlayerAvatarTransitionFlags(u16 a);
 void sub_808BCE8(void);
+void sub_808B864(void);
+void sub_808BCF4(void);
 
 void sub_808D074(u8);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);

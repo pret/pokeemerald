@@ -208,6 +208,7 @@ void DecompressGlyphTile(const u16 *src, u16 *dest);
 u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
+u8 GetMenuCursorDimensionByFont(u8, u8);
 
 u16 Font0Func(struct TextPrinter *textPrinter);
 u16 Font1Func(struct TextPrinter *textPrinter);

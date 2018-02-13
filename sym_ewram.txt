@@ -959,37 +959,9 @@ gUnknown_0203CE50: @ 203CE50
 	.space 0x4
 
 gUnknown_0203CE54: @ 203CE54
-	.space 0x4
-
-gUnknown_0203CE58: @ 203CE58
-	.space 0x5
-
-gUnknown_0203CE5D: @ 203CE5D
-	.space 0x1
-
-gUnknown_0203CE5E: @ 203CE5E
-	.space 0x2
-
-gUnknown_0203CE60: @ 203CE60
-	.space 0xA
-
-gUnknown_0203CE6A: @ 203CE6A
-	.space 0x6
-
-gUnknown_0203CE70: @ 203CE70
-	.space 0x4
-
-gUnknown_0203CE74: @ 203CE74
-	.space 0x4
-
-gUnknown_0203CE78: @ 203CE78
-	.space 0x4
-
-gSpecialVar_ItemId: @ 203CE7C
-	.space 0x4
-
-gUnknown_0203CE80: @ 203CE80
-	.space 0x4
+	.align 2
+    
+    .include "src/item_menu.o"
 
 gUnknown_0203CE84: @ 203CE84
 	.space 0x8
