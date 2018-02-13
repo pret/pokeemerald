@@ -1925,11 +1925,11 @@ sub_80C376C: @ 80C376C
 	cmp r0, 0
 	bne _080C377E
 	movs r0, 0x1
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	b _080C3784
 _080C377E:
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 _080C3784:
 	lsls r0, 16
 	lsrs r0, 16

@@ -418,7 +418,7 @@ _0809FAFE:
 	cmp r1, r0
 	bne _0809FB34
 	movs r0, 0
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	cmp r0, 0
 	beq _0809FBA0
