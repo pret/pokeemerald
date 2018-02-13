@@ -11,6 +11,8 @@ void UpdateBirchState(u16 days);
 void UpdateFrontierManiac(u16 days);
 void UpdateFrontierGambler(u16 days);
 void SetShoalItemFlag(u16 days);
+
+bool8 npc_before_player_of_type(u8);
 u8 oei_task_add(void);
 
 #endif //GUARD_ROM6_H
