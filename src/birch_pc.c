@@ -3,7 +3,7 @@
 #include "field_message_box.h"
 #include "pokedex.h"
 #include "constants/species.h"
-#include "text.h"
+#include "strings.h"
 
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
