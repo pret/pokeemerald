@@ -87,7 +87,6 @@ SECTIONS {
         src/play_time.o(.text);
         src/new_game.o(.text);
         src/overworld.o(.text);
-        asm/overworld.o(.text);
         asm/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);

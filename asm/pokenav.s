@@ -14,7 +14,7 @@ CB2_PokeNav: @ 81C7250
 	str r0, [r4]
 	cmp r0, 0
 	bne _081C7270
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	bl SetMainCallback2
 	b _081C7292
 	.pool
@@ -66,7 +66,7 @@ sub_81C72BC: @ 81C72BC
 	str r0, [r4]
 	cmp r0, 0
 	bne _081C72F0
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	b _081C7320
 	.pool
@@ -351,12 +351,12 @@ _081C752C:
 	bl sub_81C7334
 	cmp r4, 0
 	beq _081C755C
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	b _081C7562
 	.pool
 _081C755C:
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	bl SetMainCallback2
 _081C7562:
 	pop {r4-r7}
@@ -3757,7 +3757,7 @@ sub_81C8EF8: @ 81C8EF8
 	lsls r2, 2
 	add r2, r8
 	str r2, [r5, 0x44]
-	ldrh r3, [r2, 0x4]
+	ldrh r3, [r2( 0x4]
 	lsls r1, r3, 22
 	lsrs r1, 22
 	adds r1, 0x2

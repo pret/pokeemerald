@@ -3276,7 +3276,7 @@ sub_8141E7C: @ 8141E7C
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask

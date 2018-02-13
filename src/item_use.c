@@ -637,7 +637,7 @@ void sub_80FDC00(u8 taskId)
     if (!gPaletteFade.active)
     {
         overworld_free_bg_tilemaps();
-        OpenPokeblockCase(0, c2_exit_to_overworld_2_switch);
+        OpenPokeblockCase(0, CB2_ReturnToField);
         DestroyTask(taskId);
     }
 }
@@ -678,7 +678,7 @@ void sub_80FDD10(u8 taskId)
     {
         gUnknown_0203A0F4 = sub_80FDD74;
         gFieldCallback = MapPostLoadHook_UseItem;
-        *gUnknown_0203CE54 = c2_exit_to_overworld_2_switch;
+        *gUnknown_0203CE54 = CB2_ReturnToField;
         unknown_ItemMenu_Confirm(taskId);
     }
     else

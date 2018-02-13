@@ -1581,7 +1581,7 @@ void MCB2_FlyMap(void)
             gUnknown_0203A148 = malloc(sizeof(*gUnknown_0203A148));
             if (gUnknown_0203A148 == NULL)
             {
-                SetMainCallback2(sub_8086194);
+                SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
             }
             else
             {

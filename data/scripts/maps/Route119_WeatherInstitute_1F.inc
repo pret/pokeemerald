@@ -3,7 +3,7 @@ Route119_WeatherInstitute_1F_MapScripts:: @ 826FA86
 	.byte 0
 
 Route119_WeatherInstitute_1F_MapScript1_26FA8C: @ 826FA8C
-	compare VAR_0x40B3, 0
+	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	call_if 1, Route119_WeatherInstitute_1F_EventScript_26FA98
 	end
 
@@ -16,7 +16,7 @@ Route119_WeatherInstitute_1F_EventScript_26FAA4:: @ 826FAA4
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	compare VAR_0x40B3, 0
+	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	goto_eq Route119_WeatherInstitute_1F_EventScript_26FABE
 	msgbox Route119_WeatherInstitute_1F_Text_26FCE5, 4
 	release

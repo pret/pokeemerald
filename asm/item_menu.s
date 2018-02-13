@@ -31,7 +31,7 @@ ResetBagScrollPositions: @ 81AAB70
 @ void CB2_BagMenuFromStartMenu()
 CB2_BagMenuFromStartMenu: @ 81AAB9C
 	push {lr}
-	ldr r2, =sub_8086194
+	ldr r2, =CB2_ReturnToFieldWithOpenMenu
 	movs r0, 0
 	movs r1, 0x5
 	bl GoToBagMenu
@@ -5747,7 +5747,7 @@ bag_menu_leave_maybe_3: @ 81ADE6C
 	ldr r0, =gFieldCallback
 	ldr r1, =sub_819FA50
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -5782,7 +5782,7 @@ bag_menu_leave_maybe_2: @ 81ADEBC
 	ldr r0, =gFieldCallback
 	ldr r1, =sub_818DEF4
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -5813,7 +5813,7 @@ bag_menu_leave_maybe: @ 81ADF00
 	ldr r0, =gFieldCallback
 	ldr r1, =sub_818E564
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0

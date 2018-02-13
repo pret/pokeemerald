@@ -1,12 +1,13 @@
 #include "global.h"
 #include "overworld.h"
+#include "main.h"
 #include "battle_setup.h"
 #include "berry.h"
 // #include "cable_club.h"
 #include "clock.h"
 #include "event_data.h"
 #include "field_camera.h"
-// #include "field_control_avatar.h"
+#include "field_control_avatar.h"
 #include "field_effect.h"
 #include "field_fadetransition.h"
 #include "field_ground_effect.h"
@@ -53,68 +54,229 @@
 #include "bg.h"
 #include "money.h"
 #include "save_location.h"
+#include "constants/abilities.h"
+#include "malloc.h"
+#include "gpu_regs.h"
+#include "link_rfu.h"
 
 // event scripts
 extern const u8 EventScript_WhiteOut[];
 extern const u8 EventScript_271862[];
+extern const u8 EventScript_277513[];
+extern const u8 EventScript_TradeRoom_TooBusyToNotice[];
+extern const u8 EventScript_TradeRoom_ReadTrainerCard1[];
+extern const u8 EventScript_TradeRoom_ReadTrainerCard2[];
+extern const u8 gUnknown_08277388[];
+extern const u8 gUnknown_082773A3[];
+extern const u8 gUnknown_082773BE[];
+extern const u8 gUnknown_082773D9[];
+extern const u8 gUnknown_0827741D[];
+extern const u8 gUnknown_08277432[];
+extern const u8 gUnknown_08277447[];
+extern const u8 gUnknown_0827745C[];
+extern const u8 gUnknown_08277374[];
+extern const u8 gUnknown_0827737E[];
+extern const u8 gUnknown_082773FF[];
+extern const u8 gUnknown_082773F5[];
+extern const u8 gUnknown_082774EF[];
+extern const u8 gUnknown_08277509[];
 
 // vars
-extern struct MapData *const gMapAttributes[];
-extern struct MapHeader *const *const gMapGroups[];
+extern const struct MapData *const gMapAttributes[];
+extern const struct MapHeader *const *const gMapGroups[];
 extern const s32 gMaxFlashLevel;
+extern const u16 gUnknown_82EC7C4[];
+
+extern u16 gSaveFileStatus;
+extern u16 gUnknown_03005DA8;
+extern u8 *gUnknown_03005DA0;
+extern u8 *gUnknown_03005D9C;
+extern u8 *gUnknown_03005DA4;
+extern bool8 (*gUnknown_03005DB0)(void);
+extern u8 gUnknown_03005DB4;
+extern u8 gFieldLinkPlayerCount;
+extern MainCallback gFieldCallback;
 
 // functions
 extern void HealPlayerParty(void);
 extern void move_tilemap_camera_to_upper_left_corner(void);
 extern void cur_mapheader_run_tileset_funcs_after_some_cpuset(void);
 extern void DrawWholeMapView(void);
-extern void copy_map_tileset1_tileset2_to_vram(struct MapData *);
-extern void apply_map_tileset1_tileset2_palette(struct MapData *);
+extern void copy_map_tileset1_tileset2_to_vram(const struct MapData *);
+extern void apply_map_tileset1_tileset2_palette(const struct MapData *);
 extern void ResetCyclingRoadChallengeData(void);
 extern void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey);
 extern void mapheader_run_script_with_tag_x5(void);
 extern void ResetFieldTasksArgs(void);
 extern void sub_80A0A2C(void);
 extern void not_trainer_hill_battle_pyramid(void);
-extern void apply_map_tileset2_palette(struct MapData *);
-extern void copy_map_tileset2_to_vram_2(struct MapData *);
+extern void apply_map_tileset2_palette(const struct MapData *);
+extern void copy_map_tileset2_to_vram_2(const struct MapData *);
 extern void prev_quest_postbuffer_cursor_backup_reset(void);
 extern void ShowMapNamePopup(void);
 extern bool32 InTrainerHill(void);
+extern bool32 sub_808651C(void);
+extern bool8 sub_80AF6A4(void);
+extern bool8 sub_81A9E6C(void);
+extern bool8 sub_80E909C(void);
 extern void sub_81AA1D8(void);
+extern void c2_change_map(void);
 extern void sub_81D5DF8(void);
 extern void sub_80EB218(void);
+extern void sub_81BE72C(void);
+extern void sub_80AF3C8(void);
+extern void sub_81971F4(void);
+extern void sub_808B578(void);
+extern void sub_80AF314(void);
+extern void sub_80AF214(void);
+extern void sub_80AF188(void);
+extern void door_upload_tiles(void);
+extern void RotatingGate_InitPuzzleAndGraphics(void);
+extern void sub_80AF168(void);
+extern void sub_80AF3C8(void);
+extern void ExecuteTruckSequence(void);
+extern void sub_80A0A38(void);
 extern void trainer_hill_map_load_related(void);
+extern void sub_8087D74(void);
 extern void battle_pyramid_map_load_related(u8);
+extern void sub_80B00E8(u8);
 extern void UpdateTVScreensOnMap(u32, u32);
 extern void sub_80E9238(u8);
+extern void sub_81A3908(void);
+extern void sub_81AA2F8(void);
+extern void sub_8195E10(void);
+extern void sub_80EDB44(void);
+extern void sub_81D64C0(void);
+extern void sub_81BE6AC(void);
+extern void sub_8098128(void);
+extern void copy_map_tileset1_to_vram(const struct MapData *);
+extern void copy_map_tileset2_to_vram(const struct MapData *);
+extern void FieldUpdateBgTilemapScroll(void);
+extern void TransferTilesetAnimsBuffer(void);
+extern bool32 sub_81D5F48(void);
+extern u8 GetCurrentTrainerHillMapId(void);
+extern bool8 warp0_in_pokecenter(void);
+extern void dp13_810BB8C(void);
+extern void FieldEffectActiveListClear(void);
+extern void SetUpFieldTasks(void);
+extern void sub_81BE6B8(void);
+extern void sub_80AAFA4(void);
+extern void sub_809FA9C(void);
+extern void sub_80AEE84(void);
+extern void mapldr_default(void);
+extern void npc_paltag_set_load(u8);
+extern void sub_8088B3C(u16, u16);
+extern bool32 sub_800F0B8(void);
+extern bool32 sub_8009F3C(void);
+extern void sub_8010198(void);
+extern u32 sub_800B4DC(void);
+extern bool32 sub_80B39D4(u8);
+extern const u8* sub_809C2C8(struct MapPosition *a1, u8, u8);
+extern u8 *sub_809D0F4(void*);
+extern u8 sub_808BD6C(u8);
+extern u8 sub_808BD7C(u8);
+extern void sub_80979D4(struct Sprite*, u8);
 
 // this file's functions
 static void Overworld_ResetStateAfterWhiteOut(void);
-void ChooseAmbientCrySpecies(void);
+static void c2_80567AC(void);
+static void CB2_LoadMap2(void);
+static void VBlankCB_Field(void);
+static void SpriteCB_LinkPlayer(struct Sprite *sprite);
+static void ChooseAmbientCrySpecies(void);
+static void do_load_map_stuff_loop(u8 *state);
+static bool32 map_loading_iteration_3(u8 *state);
+static bool32 sub_8086638(u8 *state);
+static bool32 load_map_stuff(u8 *state, u32);
+static bool32 map_loading_iteration_2_link(u8 *state);
+static void mli4_mapscripts_and_other(void);
+static void map_loading_lcd_reset(void);
+static u8 sub_8087858(u8);
+static u16 sub_80871C0(u32 a1);
+static void sub_80867C8(void);
+static void sub_80867D8(void);
+static void sub_8086AE4(void);
+static void sub_80869DC(void);
+static void sub_8086B14(void);
+static void sub_8086AAC(void);
+static void sub_8086988(bool32 arg0);
+static void sub_8086A80(void);
+static void sub_8086A68(void);
+static void sub_8086860(void);
+static void sub_8086AC8(void);
+static void sub_8086B9C(void);
+static void sub_8086C40(void);
+static void sub_8086C90(void);
+static void sub_8086FA0(u16);
+static void sub_8086F38(u16*, s32);
+static u8 npc_something3(u8 a1, u8 a2);
+static u8 LinkPlayerDetectCollision(u8 selfMapObjId, u8 a2, s16 x, s16 y);
+static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion);
+static void sub_8087878(u8 linkPlayerId, u16 *x, u16 *y);
+static u8 sub_80878A0(u8 linkPlayerId);
+static u8 sub_80878C0(u8 linkPlayerId);
+static s32 sub_80878E4(u8 linkPlayerId);
+static u8 GetLinkPlayerIdAt(s16 x, s16 y);
+static void sub_808796C(u8 linkPlayerId, u8 a2);
+static void ZeroMapObject(struct MapObject *mapObj);
+static void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4);
+static void InitLinkPlayerMapObjectPos(struct MapObject *mapObj, s16 x, s16 y);
+static void sub_80877DC(u8 linkPlayerId, u8 a2);
+static void sub_808780C(u8 linkPlayerId);
+static u8 sub_8087858(u8 linkPlayerId);
+static void sub_8087584(void);
+static u32 sub_8087690(void);
+static void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj);
+static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1);
+static u16 sub_8087480(const u8 *script);
+static void sub_8087510(void);
+static void sub_808751C(void);
+static void sub_8087530(const u8 *script);
+static void sub_808754C(void);
+static void sub_8087568(const u8 *script);
+static void sub_80872D8(s32 linkPlayerId, s32 a2, struct UnkStruct_8054FF8 *a3);
+static bool32 sub_8087340(struct UnkStruct_8054FF8 *a1);
+static bool32 sub_8087358(struct UnkStruct_8054FF8 *a1);
+static u8 *sub_8087370(struct UnkStruct_8054FF8 *a1);
+static bool32 sub_8087388(struct UnkStruct_8054FF8 *a1);
+static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1);
+static u16 sub_808711C(u32);
+static u16 sub_8087140(u32);
+static void sub_808709C(u16 *a1);
+static u16 sub_80870B0(u32 a1);
+static u16 sub_80870F8(u32 a1);
+static u16 sub_8087068(u16 a1);
+static void c1_link_related(void);
+static void c1_link_related_func_set(u16 (*func)(u32));
+static void SetFieldVBlankCallback(void);
+static void FieldClearVBlankHBlankCallbacks(void);
+static void sub_8085810(void);
+static u8 sub_808532C(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3);
+static u8 sub_808538C(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4);
+static u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void);
 
 // IWRAM bss vars
-IWRAM_DATA void *gUnknown_03000E0C;
-IWRAM_DATA u8 gUnknown_03000E10[4];
-IWRAM_DATA u8 (*gUnknown_03000E14)(u32);
-IWRAM_DATA u8 gUnknown_03000E18;
-IWRAM_DATA u8 gUnknown_03000E19;
-IWRAM_DATA void *rom4_c_unused_03000e1c;
+IWRAM_DATA static void *sUnknown_03000E0C;
+IWRAM_DATA static u8 sUnknown_03000E10[4];
+IWRAM_DATA static u16 (*sUnknown_03000E14)(u32);
+IWRAM_DATA static u8 sUnknown_03000E18;
+IWRAM_DATA static u8 sUnknown_03000E19;
+IWRAM_DATA static u32 sUnusedVar;
 
 // EWRAM vars
-EWRAM_DATA u8 gUnknown_020322D8 = 0;
+EWRAM_DATA static u8 sUnknown_020322D8 = 0;
 EWRAM_DATA struct WarpData gUnknown_020322DC = {0};
-EWRAM_DATA struct WarpData gWarpDestination = {0};  // new warp position
-EWRAM_DATA struct WarpData gUnknown_020322EC = {0};
-EWRAM_DATA struct WarpData gUnknown_020322F4 = {0};
-EWRAM_DATA u16 gLastMapSectionId = 0;
-EWRAM_DATA struct UnkPlayerStruct gUnknown_02032300 = {0};
-EWRAM_DATA u16 sAmbientCrySpecies = 0;
-EWRAM_DATA bool8 sIsAmbientCryWaterMon = FALSE;
+EWRAM_DATA static struct WarpData sWarpDestination = {0};  // new warp position
+EWRAM_DATA static struct WarpData sUnknown_020322EC = {0};
+EWRAM_DATA static struct WarpData sUnknown_020322F4 = {0};
+EWRAM_DATA static u16 sLastMapSectionId = 0;
+EWRAM_DATA static struct UnkPlayerStruct sUnknown_02032300 = {0};
+EWRAM_DATA static u16 sAmbientCrySpecies = 0;
+EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
 EWRAM_DATA struct LinkPlayerMapObject gLinkPlayerMapObjects[4] = {0};
 
 // const rom data
-const struct WarpData sDummyWarpData =
+static const struct WarpData sDummyWarpData =
 {
     .mapGroup = -1,
     .mapNum = -1,
@@ -123,7 +285,7 @@ const struct WarpData sDummyWarpData =
     .y = -1,
 };
 
-const u8 sUnusedData[] =
+static const u8 sUnusedData[] =
 {
     0xB0, 0x04, 0x00, 0x00,
     0x10, 0x0E, 0x00, 0x00,
@@ -148,7 +310,7 @@ const struct UCoords32 gUnknown_08339D64[] =
     { 1, -1},
 };
 
-const struct BgTemplate gUnknown_08339DAC[] =
+static const struct BgTemplate gUnknown_08339DAC[] =
 {
     {
         .bg = 0,
@@ -188,7 +350,7 @@ const struct BgTemplate gUnknown_08339DAC[] =
     }
 };
 
-const struct ScanlineEffectParams gUnknown_08339DBC =
+static const struct ScanlineEffectParams gUnknown_08339DBC =
 {
     (void *)REG_ADDR_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
@@ -196,22 +358,22 @@ const struct ScanlineEffectParams gUnknown_08339DBC =
     0,
 };
 
-u8 sub_80879D8(struct LinkPlayerMapObject *, struct MapObject *, u8);
-u8 sub_80879F8(struct LinkPlayerMapObject *, struct MapObject *, u8);
-u8 sub_80879FC(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_80879D8(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_80879F8(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_80879FC(struct LinkPlayerMapObject *, struct MapObject *, u8);
 
-u8 (*const gUnknown_08339DC8[])(struct LinkPlayerMapObject *, struct MapObject *, u8) =
+static u8 (*const gUnknown_08339DC8[])(struct LinkPlayerMapObject *, struct MapObject *, u8) =
 {
     sub_80879D8,
     sub_80879F8,
     sub_80879FC,
 };
 
-u8 sub_8087A1C(struct LinkPlayerMapObject *, struct MapObject *, u8);
-u8 sub_8087A20(struct LinkPlayerMapObject *, struct MapObject *, u8);
-u8 sub_8087A88(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_8087A1C(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_8087A20(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_8087A88(struct LinkPlayerMapObject *, struct MapObject *, u8);
 
-u8 (*const gUnknown_08339DD4[])(struct LinkPlayerMapObject *, struct MapObject *, u8) =
+static u8 (*const gUnknown_08339DD4[])(struct LinkPlayerMapObject *, struct MapObject *, u8) =
 {
     sub_8087A1C,
     sub_8087A20,
@@ -226,10 +388,10 @@ u8 (*const gUnknown_08339DD4[])(struct LinkPlayerMapObject *, struct MapObject *
     sub_8087A88,
 };
 
-void sub_8087AA0(struct LinkPlayerMapObject *, struct MapObject *);
-void sub_8087AA8(struct LinkPlayerMapObject *, struct MapObject *);
+static void sub_8087AA0(struct LinkPlayerMapObject *, struct MapObject *);
+static void sub_8087AA8(struct LinkPlayerMapObject *, struct MapObject *);
 
-void (*const gUnknown_08339E00[])(struct LinkPlayerMapObject *, struct MapObject *) =
+static void (*const gUnknown_08339E00[])(struct LinkPlayerMapObject *, struct MapObject *) =
 {
     sub_8087AA0,
     sub_8087AA8,
@@ -292,7 +454,7 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     }
 }
 
-void sub_8084788(void)
+static void sub_8084788(void)
 {
     FlagClear(FLAG_SYS_SAFARI_MODE);
     ChooseAmbientCrySpecies();
@@ -399,7 +561,7 @@ void Overworld_SetMapObjTemplateMovementType(u8 localId, u8 movementType)
     }
 }
 
-void mapdata_load_assets_to_gpu_and_full_redraw(void)
+static void mapdata_load_assets_to_gpu_and_full_redraw(void)
 {
     move_tilemap_camera_to_upper_left_corner();
     copy_map_tileset1_tileset2_to_vram(gMapHeader.mapData);
@@ -408,7 +570,7 @@ void mapdata_load_assets_to_gpu_and_full_redraw(void)
     cur_mapheader_run_tileset_funcs_after_some_cpuset();
 }
 
-struct MapData *get_mapdata_header(void)
+const struct MapData *get_mapdata_header(void)
 {
     u16 mapDataId = gSaveBlock1Ptr->mapDataId;
     if (mapDataId)
@@ -419,15 +581,15 @@ struct MapData *get_mapdata_header(void)
 void ApplyCurrentWarp(void)
 {
     gUnknown_020322DC = gSaveBlock1Ptr->location;
-    gSaveBlock1Ptr->location = gWarpDestination;
-    gUnknown_020322EC = sDummyWarpData;
-    gUnknown_020322F4 = sDummyWarpData;
+    gSaveBlock1Ptr->location = sWarpDestination;
+    sUnknown_020322EC = sDummyWarpData;
+    sUnknown_020322F4 = sDummyWarpData;
 }
 
 void set_warp2_warp3_to_neg_1(void)
 {
-    gUnknown_020322EC = sDummyWarpData;
-    gUnknown_020322F4 = sDummyWarpData;
+    sUnknown_020322EC = sDummyWarpData;
+    sUnknown_020322F4 = sDummyWarpData;
 }
 
 void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
@@ -454,19 +616,19 @@ bool32 warp_data_is_not_neg_1(struct WarpData *warp)
     return TRUE;
 }
 
-struct MapHeader *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum)
+const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum)
 {
     return gMapGroups[mapGroup][mapNum];
 }
 
-struct MapHeader *const warp1_get_mapheader(void)
+const struct MapHeader *warp1_get_mapheader(void)
 {
-    return Overworld_GetMapHeaderByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
+    return Overworld_GetMapHeaderByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
 }
 
 void set_current_map_header_from_sav1_save_old_name(void)
 {
-    gLastMapSectionId = gMapHeader.regionMapSectionId;
+    sLastMapSectionId = gMapHeader.regionMapSectionId;
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     gSaveBlock1Ptr->mapDataId = gMapHeader.mapDataId;
     gMapHeader.mapData = get_mapdata_header();
@@ -506,7 +668,7 @@ void warp_in(void)
 
 void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gWarpDestination, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&sWarpDestination, mapGroup, mapNum, warpId, x, y);
 }
 
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId)
@@ -514,19 +676,19 @@ void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId)
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
 }
 
-void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId)
+void saved_warp2_set(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId)
 {
     SetWarpData(&gSaveBlock1Ptr->warp2, mapGroup, mapNum, warpId, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
 }
 
-void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void saved_warp2_set_2(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
     SetWarpData(&gSaveBlock1Ptr->warp2, mapGroup, mapNum, warpId, x, y);
 }
 
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
 {
-    gWarpDestination = gSaveBlock1Ptr->warp2;
+    sWarpDestination = gSaveBlock1Ptr->warp2;
 }
 
 void sub_8084CCC(u8 a1)
@@ -539,7 +701,7 @@ void sub_8084CCC(u8 a1)
 
 void Overworld_SetWarpDestToLastHealLoc(void)
 {
-    gWarpDestination = gSaveBlock1Ptr->lastHealLocation;
+    sWarpDestination = gSaveBlock1Ptr->lastHealLocation;
 }
 
 void Overworld_SetHealLocationWarp(u8 healLocationId)
@@ -553,7 +715,7 @@ void Overworld_SetHealLocationWarp(u8 healLocationId)
 void sub_8084D5C(s16 a1, s16 a2)
 {
     u8 currMapType = Overworld_GetMapTypeOfSaveblockLocation();
-    u8 destMapType = GetMapTypeByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
+    u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
     if (is_light_level_1_2_3_5_or_6(currMapType) && is_light_level_1_2_3_5_or_6(destMapType) != TRUE)
         sub_8084DD4(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, a1 - 7, a2 - 6);
 }
@@ -565,39 +727,39 @@ void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 
 void sub_8084E14(void)
 {
-    gWarpDestination = gSaveBlock1Ptr->warp4;
+    sWarpDestination = gSaveBlock1Ptr->warp4;
 }
 
 void sub_8084E2C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gUnknown_020322EC, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&sUnknown_020322EC, mapGroup, mapNum, warpId, x, y);
 }
 
 void warp1_set_to_warp2(void)
 {
-    gWarpDestination = gUnknown_020322EC;
+    sWarpDestination = sUnknown_020322EC;
 }
 
 void sub_8084E80(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gUnknown_020322F4, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&sUnknown_020322F4, mapGroup, mapNum, warpId, x, y);
 }
 
 void sub_8084EBC(s16 x, s16 y)
 {
-    if (warp_data_is_not_neg_1(&gUnknown_020322F4) == TRUE)
+    if (warp_data_is_not_neg_1(&sUnknown_020322F4) == TRUE)
     {
-        gWarpDestination = gUnknown_020322DC;
+        sWarpDestination = gUnknown_020322DC;
     }
     else
     {
-        Overworld_SetWarpDestination(gUnknown_020322F4.mapGroup, gUnknown_020322F4.mapNum, -1, x, y);
+        Overworld_SetWarpDestination(sUnknown_020322F4.mapGroup, sUnknown_020322F4.mapNum, -1, x, y);
     }
 }
 
 void warp1_set_to_sav1w(void)
 {
-    gWarpDestination = gSaveBlock1Ptr->warp1;
+    sWarpDestination = gSaveBlock1Ptr->warp1;
 }
 
 void sub_8084F2C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
@@ -617,11 +779,11 @@ void sub_8084FAC(void)
     gSaveBlock1Ptr->warp1 = gSaveBlock1Ptr->warp2;
 }
 
-struct MapConnection *GetMapConnection(u8 dir)
+const struct MapConnection *GetMapConnection(u8 dir)
 {
     s32 i;
     s32 count = gMapHeader.connections->count;
-    struct MapConnection *connection = gMapHeader.connections->connections;
+    const struct MapConnection *connection = gMapHeader.connections->connections;
 
     if (connection == NULL)
         return NULL;
@@ -635,7 +797,7 @@ struct MapConnection *GetMapConnection(u8 dir)
 
 bool8 sub_8084FF8(u8 dir, u16 x, u16 y)
 {
-    struct MapConnection *connection = GetMapConnection(dir);
+    const struct MapConnection *connection = GetMapConnection(dir);
 
     if (connection != NULL)
     {
@@ -644,7 +806,7 @@ bool8 sub_8084FF8(u8 dir, u16 x, u16 y)
     else
     {
         mapheader_run_script_with_tag_x6();
-        if (warp_data_is_not_neg_1(&gUnknown_020322EC))
+        if (warp_data_is_not_neg_1(&sUnknown_020322EC))
             return FALSE;
         warp1_set_to_warp2();
     }
@@ -697,17 +859,17 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
 
-    if (gMapHeader.regionMapSectionId != 0x3A || gMapHeader.regionMapSectionId != gLastMapSectionId)
+    if (gMapHeader.regionMapSectionId != 0x3A || gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
 }
 
-void mli0_load_map(u32 a1)
+static void mli0_load_map(u32 a1)
 {
     bool8 v2;
     bool8 indoors;
 
     set_current_map_header_from_sav1_save_old_name();
-    if (!(gUnknown_020322D8 & 1))
+    if (!(sUnknown_020322D8 & 1))
     {
         if (gMapHeader.mapDataId == 0x169)
             sub_81AA1D8();
@@ -753,39 +915,39 @@ void mli0_load_map(u32 a1)
 
 void player_avatar_init_params_reset(void)
 {
-    gUnknown_02032300.player_field_1 = 1;
-    gUnknown_02032300.player_field_0 = 1;
+    sUnknown_02032300.player_field_1 = 1;
+    sUnknown_02032300.player_field_0 = 1;
 }
 
 void walkrun_find_lowest_active_bit_in_bitfield(void)
 {
-    gUnknown_02032300.player_field_1 = player_get_direction_lower_nybble();
+    sUnknown_02032300.player_field_1 = player_get_direction_lower_nybble();
 
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
-        gUnknown_02032300.player_field_0 = 2;
+        sUnknown_02032300.player_field_0 = 2;
     else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE))
-        gUnknown_02032300.player_field_0 = 4;
+        sUnknown_02032300.player_field_0 = 4;
     else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-        gUnknown_02032300.player_field_0 = 8;
+        sUnknown_02032300.player_field_0 = 8;
     else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_4))
-        gUnknown_02032300.player_field_0 = 16;
+        sUnknown_02032300.player_field_0 = 16;
     else
-        gUnknown_02032300.player_field_0 = 1;
+        sUnknown_02032300.player_field_0 = 1;
 }
 
-struct UnkPlayerStruct *sub_80852D4(void)
+static struct UnkPlayerStruct *sub_80852D4(void)
 {
     struct UnkPlayerStruct playerStruct;
     u8 mapType = Overworld_GetMapTypeOfSaveblockLocation();
     u16 v2 = cur_mapdata_block_role_at_screen_center_acc_to_sav1();
-    u8 v4 = sub_808532C(&gUnknown_02032300, v2, mapType);
+    u8 v4 = sub_808532C(&sUnknown_02032300, v2, mapType);
     playerStruct.player_field_0 = v4;
-    playerStruct.player_field_1 = sub_808538C(&gUnknown_02032300, v4, v2, mapType);
-    gUnknown_02032300 = playerStruct;
-    return &gUnknown_02032300;
+    playerStruct.player_field_1 = sub_808538C(&sUnknown_02032300, v4, v2, mapType);
+    sUnknown_02032300 = playerStruct;
+    return &sUnknown_02032300;
 }
 
-u8 sub_808532C(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
+static u8 sub_808532C(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
 {
     if (a3 != 8 && FlagGet(FLAG_SYS_CRUISE_MODE))
         return 1;
@@ -802,7 +964,7 @@ u8 sub_808532C(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
     return 4;
 }
 
-u8 sub_808538C(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
+static u8 sub_808538C(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
 {
     if (FlagGet(FLAG_SYS_CRUISE_MODE) && a4 == 6)
         return 4;
@@ -826,7 +988,7 @@ u8 sub_808538C(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
     return 1;
 }
 
-u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void)
+static u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void)
 {
     return MapGridGetMetatileBehaviorAt(gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7);
 }
@@ -869,15 +1031,15 @@ void sub_8085524(u16 mapDataId)
 
 void sub_8085540(u8 var)
 {
-    gUnknown_020322D8 = var;
+    sUnknown_020322D8 = var;
 }
 
 u8 sub_808554C(void)
 {
-    return gUnknown_020322D8;
+    return sUnknown_020322D8;
 }
 
-bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
+static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
 {
     if (!FlagGet(FLAG_SYS_WEATHER_CTRL))
         return FALSE;
@@ -910,7 +1072,7 @@ bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
     return FALSE;
 }
 
-bool16 NoMusicInSotopolisWithLegendaries(struct WarpData *warp)
+static bool16 NoMusicInSotopolisWithLegendaries(struct WarpData *warp)
 {
     if (VarGet(VAR_0x40CA) != 1)
         return FALSE;
@@ -921,7 +1083,7 @@ bool16 NoMusicInSotopolisWithLegendaries(struct WarpData *warp)
     return FALSE;
 }
 
-bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
+static bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
 {
     if (VarGet(VAR_WEATHER_INSTITUTE_STATE))
         return FALSE;
@@ -933,7 +1095,7 @@ bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
     return FALSE;
 }
 
-bool16 IsInflitratedSpaceCenter(struct WarpData *warp)
+static bool16 IsInflitratedSpaceCenter(struct WarpData *warp)
 {
     if (VarGet(VAR_0x405D) == 0)
         return FALSE;
@@ -987,7 +1149,7 @@ u16 GetCurrLocationDefaultMusic(void)
 
 u16 GetWarpDestinationMusic(void)
 {
-    u16 music = GetLocationMusic(&gWarpDestination);
+    u16 music = GetLocationMusic(&sWarpDestination);
     if (music != 0x7FFF)
     {
         return music;
@@ -1035,7 +1197,7 @@ void Overworld_ClearSavedMusic(void)
     gSaveBlock1Ptr->savedMusic = 0;
 }
 
-void sub_8085810(void)
+static void sub_8085810(void)
 {
     if (FlagGet(FLAG_SPECIAL_FLAG_0x4001) != TRUE)
     {
@@ -1074,7 +1236,7 @@ void Overworld_ChangeMusicTo(u16 newMusic)
 
 u8 GetMapMusicFadeoutSpeed(void)
 {
-    struct MapHeader *mapHeader = warp1_get_mapheader();
+    const struct MapHeader *mapHeader = warp1_get_mapheader();
     if (Overworld_MapTypeIsIndoors(mapHeader->mapType) == TRUE)
         return 2;
     else
@@ -1091,10 +1253,10 @@ void music_something(void)
             && VarGet(VAR_0x40CA) == 2
             && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
-            && gWarpDestination.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
-            && gWarpDestination.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
-            && gWarpDestination.x == 0x1D
-            && gWarpDestination.y == 0x35)
+            && sWarpDestination.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
+            && sWarpDestination.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
+            && sWarpDestination.x == 0x1D
+            && sWarpDestination.y == 0x35)
             return;
         FadeOutMapMusic(GetMapMusicFadeoutSpeed());
     }
@@ -1108,4 +1270,1921 @@ bool8 sub_80859A0(void)
 void Overworld_FadeOutMapMusic(void)
 {
     FadeOutMapMusic(4);
+}
+
+static void PlayAmbientCry(void)
+{
+    s16 x, y;
+    s8 pan;
+    s8 volume;
+
+    PlayerGetDestCoords(&x, &y);
+    if (sIsAmbientCryWaterMon == TRUE
+     && !MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
+        return;
+    pan = (Random() % 88) + 212;
+    volume = (Random() % 30) + 50;
+    PlayCry2(sAmbientCrySpecies, pan, volume, 1);
+}
+
+void UpdateAmbientCry(s16 *state, u16 *delayCounter)
+{
+    u8 i, monsCount, divBy;
+
+    switch (*state)
+    {
+    case 0:
+        if (sAmbientCrySpecies == SPECIES_NONE)
+            *state = 4;
+        else
+            *state = 1;
+        break;
+    case 1:
+        *delayCounter = (Random() % 2400) + 1200;
+        *state = 3;
+        break;
+    case 2:
+        divBy = 1;
+        monsCount = CalculatePlayerPartyCount();
+        for (i = 0; i < monsCount; i++)
+        {
+            if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT3)
+                && GetMonAbility(&gPlayerParty[0]) == ABILITY_SWARM)
+            {
+                divBy = 2;
+                break;
+            }
+        }
+        *delayCounter = ((Random() % 1200) + 1200) / divBy;
+        *state = 3;
+        break;
+    case 3:
+        (*delayCounter)--;
+        if (*delayCounter == 0)
+        {
+            PlayAmbientCry();
+            *state = 2;
+        }
+        break;
+    case 4:
+        break;
+    }
+}
+
+static void ChooseAmbientCrySpecies(void)
+{
+    if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE130)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE130))
+     && !IsMirageIslandPresent())
+    {
+        // Only play water pokemon cries on this route
+        // when Mirage Island is not present
+        sIsAmbientCryWaterMon = TRUE;
+        sAmbientCrySpecies = GetLocalWaterMon();
+    }
+    else
+    {
+        sAmbientCrySpecies = GetLocalWildMon(&sIsAmbientCryWaterMon);
+    }
+}
+
+u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum)
+{
+    return Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->mapType;
+}
+
+u8 GetMapTypeByWarpData(struct WarpData *warp)
+{
+    return GetMapTypeByGroupAndId(warp->mapGroup, warp->mapNum);
+}
+
+u8 Overworld_GetMapTypeOfSaveblockLocation(void)
+{
+    return GetMapTypeByWarpData(&gSaveBlock1Ptr->location);
+}
+
+u8 get_map_light_from_warp0(void)
+{
+    return GetMapTypeByWarpData(&gUnknown_020322DC);
+}
+
+bool8 is_light_level_1_2_3_5_or_6(u8 mapType)
+{
+    if (mapType == MAP_TYPE_ROUTE
+     || mapType == MAP_TYPE_TOWN
+     || mapType == MAP_TYPE_UNDERWATER
+     || mapType == MAP_TYPE_CITY
+     || mapType == MAP_TYPE_6)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
+{
+    if (mapType == MAP_TYPE_ROUTE
+     || mapType == MAP_TYPE_TOWN
+     || mapType == MAP_TYPE_6
+     || mapType == MAP_TYPE_CITY)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 Overworld_MapTypeIsIndoors(u8 mapType)
+{
+    if (mapType == MAP_TYPE_INDOOR
+     || mapType == MAP_TYPE_SECRET_BASE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+u8 sav1_saved_warp2_map_get_name(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp2.mapGroup, gSaveBlock1Ptr->warp2.mapNum)->regionMapSectionId;
+}
+
+u8 sav1_map_get_name(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
+}
+
+u8 GetCurrentMapBattleScene(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->battleType;
+}
+
+static void overworld_bg_setup(void)
+{
+    InitBgsFromTemplates(0, gUnknown_08339DAC, ARRAY_COUNT(gUnknown_08339DAC));
+    SetBgAttribute(1, BG_CTRL_ATTR_PALETTEMODE, 1);
+    SetBgAttribute(2, BG_CTRL_ATTR_PALETTEMODE, 1);
+    SetBgAttribute(3, BG_CTRL_ATTR_PALETTEMODE, 1);
+    gUnknown_03005DA0 = AllocZeroed(0x800);
+    gUnknown_03005D9C = AllocZeroed(0x800);
+    gUnknown_03005DA4 = AllocZeroed(0x800);
+    SetBgTilemapBuffer(1, gUnknown_03005DA0);
+    SetBgTilemapBuffer(2, gUnknown_03005D9C);
+    SetBgTilemapBuffer(3, gUnknown_03005DA4);
+    sub_81971D0();
+}
+
+void overworld_free_bg_tilemaps(void)
+{
+    sub_81BE72C();
+    sub_81971F4();
+    if (gUnknown_03005DA4 != NULL)
+        FREE_AND_SET_NULL(gUnknown_03005DA4);
+    if (gUnknown_03005D9C != NULL)
+        FREE_AND_SET_NULL(gUnknown_03005D9C);
+    if (gUnknown_03005DA0 != NULL)
+        FREE_AND_SET_NULL(gUnknown_03005DA0);
+}
+
+static void ResetSafariZoneFlag_(void)
+{
+    ResetSafariZoneFlag();
+}
+
+bool32 is_c1_link_related_active(void)
+{
+    if (gMain.callback1 == c1_link_related)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
+{
+    struct FieldInput inputStruct;
+
+    sub_808B578();
+    FieldClearPlayerInput(&inputStruct);
+    FieldGetPlayerInput(&inputStruct, newKeys, heldKeys);
+    if (!ScriptContext2_IsEnabled())
+    {
+        if (sub_809C014(&inputStruct) == 1)
+        {
+            ScriptContext2_Enable();
+            HideMapNamePopUpWindow();
+        }
+        else
+        {
+            player_step(inputStruct.dpadDirection, newKeys, heldKeys);
+        }
+    }
+}
+
+void CB1_Overworld(void)
+{
+    if (gMain.callback2 == CB2_Overworld)
+        DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
+}
+
+static void OverworldBasic(void)
+{
+    ScriptContext2_RunScript();
+    RunTasks();
+    AnimateSprites();
+    CameraUpdate();
+    UpdateCameraPanning();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+    sub_80A0A38();
+    do_scheduled_bg_tilemap_copies_to_vram();
+}
+
+// This CB2 is used when starting
+void CB2_OverworldBasic(void)
+{
+    OverworldBasic();
+}
+
+void CB2_Overworld(void)
+{
+    bool32 fading = (gPaletteFade.active != 0);
+    if (fading)
+        SetVBlankCallback(NULL);
+    OverworldBasic();
+    if (fading)
+        SetFieldVBlankCallback();
+}
+
+void SetMainCallback1(MainCallback cb)
+{
+    gMain.callback1 = cb;
+}
+
+void sub_8085E94(void *a0)
+{
+    sUnknown_03000E0C = a0;
+}
+
+static bool8 map_post_load_hook_exec(void)
+{
+    if (gUnknown_03005DB0 != NULL)
+    {
+        if (!gUnknown_03005DB0())
+        {
+            return FALSE;
+        }
+        else
+        {
+            gUnknown_03005DB0 = NULL;
+            gFieldCallback = NULL;
+        }
+    }
+    else
+    {
+        if (gFieldCallback != NULL)
+            gFieldCallback();
+        else
+            mapldr_default();
+
+        gFieldCallback = NULL;
+    }
+
+    return TRUE;
+}
+
+void CB2_NewGame(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    ResetSafariZoneFlag_();
+    NewGameInitData();
+    player_avatar_init_params_reset();
+    PlayTimeCounter_Start();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    gFieldCallback = ExecuteTruckSequence;
+    gUnknown_03005DB0 = NULL;
+    do_load_map_stuff_loop(&gMain.state);
+    SetFieldVBlankCallback();
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
+}
+
+void CB2_WhiteOut(void)
+{
+    u8 val;
+
+    if (++gMain.state >= 120)
+    {
+        FieldClearVBlankHBlankCallbacks();
+        StopMapMusic();
+        ResetSafariZoneFlag_();
+        DoWhiteOut();
+        player_avatar_init_params_reset();
+        ScriptContext1_Init();
+        ScriptContext2_Disable();
+        gFieldCallback = sub_80AF3C8;
+        val = 0;
+        do_load_map_stuff_loop(&val);
+        SetFieldVBlankCallback();
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_LoadMap(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    SetMainCallback1(NULL);
+    SetMainCallback2(c2_change_map);
+    gMain.savedCallback = CB2_LoadMap2;
+}
+
+static void CB2_LoadMap2(void)
+{
+    do_load_map_stuff_loop(&gMain.state);
+    SetFieldVBlankCallback();
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
+}
+
+void sub_8086024(void)
+{
+    if (!gMain.state)
+    {
+        FieldClearVBlankHBlankCallbacks();
+        ScriptContext1_Init();
+        ScriptContext2_Disable();
+        SetMainCallback1(NULL);
+    }
+    if (load_map_stuff(&gMain.state, 1))
+    {
+        SetFieldVBlankCallback();
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void sub_8086074(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback = sub_80AF314;
+    SetMainCallback2(c2_80567AC);
+}
+
+static void c2_80567AC(void)
+{
+    if (map_loading_iteration_3(&gMain.state))
+    {
+        SetFieldVBlankCallback();
+        SetMainCallback1(c1_link_related);
+        sub_8086C2C();
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_ReturnToField(void)
+{
+    if (is_c1_link_related_active() == TRUE)
+    {
+        SetMainCallback2(CB2_ReturnToFieldLink);
+    }
+    else
+    {
+        FieldClearVBlankHBlankCallbacks();
+        SetMainCallback2(CB2_ReturnToFieldLocal);
+    }
+}
+
+void CB2_ReturnToFieldLocal(void)
+{
+    if (sub_8086638(&gMain.state))
+    {
+        SetFieldVBlankCallback();
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_ReturnToFieldLink(void)
+{
+    if (!sub_8087598() && map_loading_iteration_2_link(&gMain.state))
+        SetMainCallback2(CB2_Overworld);
+}
+
+void c2_8056854(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    SetMainCallback1(c1_link_related);
+    sub_8086C2C();
+
+    if (gWirelessCommType)
+        gFieldCallback = sub_80AF314;
+    else
+        gFieldCallback = sub_80AF214;
+
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    CB2_ReturnToField();
+}
+
+void CB2_ReturnToFieldWithOpenMenu(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gUnknown_03005DB0 = sub_80AF6A4;
+    CB2_ReturnToField();
+}
+
+void sub_80861B0(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback = sub_80AF188;
+    CB2_ReturnToField();
+}
+
+void CB2_ReturnToFieldContinueScript(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback = sub_80AF168;
+    CB2_ReturnToField();
+}
+
+void sub_80861E8(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback = sub_80AF3C8;
+    CB2_ReturnToField();
+}
+
+static void sub_8086204(void)
+{
+    if ((gMapHeader.flags & 0xF8) == 8 && sub_80E909C() == TRUE)
+        ShowMapNamePopup();
+    sub_80AF3C8();
+}
+
+void CB2_ContinueSavedGame(void)
+{
+    u8 trainerHillMapId;
+
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    ResetSafariZoneFlag_();
+    if (gSaveFileStatus == 0xFF)
+        sub_81A3908();
+
+    LoadSaveblockMapHeader();
+    set_warp2_warp3_to_neg_1();
+    trainerHillMapId = GetCurrentTrainerHillMapId();
+    if (gMapHeader.mapDataId == 0x169)
+        sub_81AA2F8();
+    else if (trainerHillMapId != 0 && trainerHillMapId != 6)
+        sub_81D5F48();
+    else
+        LoadSaveblockMapObjScripts();
+
+    UnfreezeMapObjects();
+    DoTimeBasedEvents();
+    sub_8084788();
+    if (gMapHeader.mapDataId == 0x169)
+        battle_pyramid_map_load_related(1);
+    else if (trainerHillMapId != 0)
+        trainer_hill_map_load_related();
+    else
+        sub_8087D74();
+
+    PlayTimeCounter_Start();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    sub_8195E10();
+    if (GetSecretBase2Field_9() == 1)
+    {
+        ClearSecretBase2Field_9();
+        warp1_set_to_sav1w();
+        warp_in();
+        sub_80EDB44();
+        SetMainCallback2(CB2_LoadMap);
+    }
+    else
+    {
+        sub_80EDB44();
+        gFieldCallback = sub_8086204;
+        SetMainCallback1(CB1_Overworld);
+        CB2_ReturnToField();
+    }
+}
+
+static void FieldClearVBlankHBlankCallbacks(void)
+{
+    if (warp0_in_pokecenter() == TRUE)
+        CloseLink();
+
+    if (gWirelessCommType != 0)
+    {
+        EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
+        DisableInterrupts(INTR_FLAG_HBLANK);
+    }
+    else
+    {
+        u16 savedIme = REG_IME;
+        REG_IME = 0;
+        REG_IE &= ~INTR_FLAG_HBLANK;
+        REG_IE |= INTR_FLAG_VBLANK;
+        REG_IME = savedIme;
+    }
+
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
+}
+
+static void SetFieldVBlankCallback(void)
+{
+    SetVBlankCallback(VBlankCB_Field);
+}
+
+static void VBlankCB_Field(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    ScanlineEffect_InitHBlankDmaTransfer();
+    FieldUpdateBgTilemapScroll();
+    TransferPlttBuffer();
+    TransferTilesetAnimsBuffer();
+}
+
+static void sub_80863B0(void)
+{
+    u8 val;
+
+    if (sub_81A9E6C())
+    {
+        door_upload_tiles();
+        ScanlineEffect_SetParams(gUnknown_08339DBC);
+    }
+    else if ((val = Overworld_GetFlashLevel()))
+    {
+        sub_80B00E8(val);
+        ScanlineEffect_SetParams(gUnknown_08339DBC);
+    }
+}
+
+static bool32 map_loading_iteration_3(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        overworld_bg_setup();
+        ScriptContext1_Init();
+        ScriptContext2_Disable();
+        sub_80867C8();
+        sub_80867D8();
+        (*state)++;
+        break;
+    case 1:
+        mli0_load_map(1);
+        (*state)++;
+        break;
+    case 2:
+        sub_8086988(TRUE);
+        (*state)++;
+        break;
+    case 3:
+        sub_8086AE4();
+        sub_80869DC();
+        sub_8086B14();
+        sub_8086AAC();
+        (*state)++;
+        break;
+    case 4:
+        sub_80863B0();
+        map_loading_lcd_reset();
+        sub_8197200();
+        (*state)++;
+        break;
+    case 5:
+        move_tilemap_camera_to_upper_left_corner();
+        (*state)++;
+        break;
+    case 6:
+        copy_map_tileset1_to_vram(gMapHeader.mapData);
+        (*state)++;
+        break;
+    case 7:
+        copy_map_tileset2_to_vram(gMapHeader.mapData);
+        (*state)++;
+        break;
+    case 8:
+        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        {
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+            (*state)++;
+        }
+        break;
+    case 9:
+        DrawWholeMapView();
+        (*state)++;
+        break;
+    case 10:
+        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        (*state)++;
+        break;
+    case 11:
+        if (gWirelessCommType != 0)
+        {
+            sub_800E0E8();
+            CreateWirelessStatusIndicatorSprite(0, 0);
+        }
+        (*state)++;
+        break;
+    case 12:
+        if (map_post_load_hook_exec())
+            (*state)++;
+        break;
+    case 13:
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool32 load_map_stuff(u8 *state, u32 a2)
+{
+    switch (*state)
+    {
+    case 0:
+        FieldClearVBlankHBlankCallbacks();
+        mli0_load_map(a2);
+        (*state)++;
+        break;
+    case 1:
+        sub_80867C8();
+        sub_80867D8();
+        (*state)++;
+        break;
+    case 2:
+        sub_8086988(a2);
+        (*state)++;
+        break;
+    case 3:
+        mli4_mapscripts_and_other();
+        sub_8086A80();
+        (*state)++;
+        break;
+    case 4:
+        sub_80863B0();
+        map_loading_lcd_reset();
+        sub_8197200();
+        (*state)++;
+        break;
+    case 5:
+        move_tilemap_camera_to_upper_left_corner();
+        (*state)++;
+        break;
+    case 6:
+        copy_map_tileset1_to_vram(gMapHeader.mapData);
+        (*state)++;
+        break;
+    case 7:
+        copy_map_tileset2_to_vram(gMapHeader.mapData);
+        (*state)++;
+        break;
+    case 8:
+        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        {
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+            (*state)++;
+        }
+        break;
+    case 9:
+        DrawWholeMapView();
+        (*state)++;
+        break;
+    case 10:
+        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        (*state)++;
+        break;
+    case 11:
+        if ((gMapHeader.flags & 0xF8) == 8 && sub_80E909C() == 1)
+            ShowMapNamePopup();
+        (*state)++;
+        break;
+    case 12:
+        if (map_post_load_hook_exec())
+            (*state)++;
+        break;
+    case 13:
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool32 sub_8086638(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_80867C8();
+        sub_80867D8();
+        sub_8086988(0);
+        sub_8086A68();
+        sub_8086A80();
+        (*state)++;
+        break;
+    case 1:
+        sub_8086860();
+        sub_81D64C0();
+        (*state)++;
+        break;
+    case 2:
+        if (map_post_load_hook_exec())
+            (*state)++;
+        break;
+    case 3:
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool32 map_loading_iteration_2_link(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        FieldClearVBlankHBlankCallbacks();
+        sub_80867C8();
+        sub_80867D8();
+        (*state)++;
+        break;
+    case 1:
+        sub_8086988(1);
+        (*state)++;
+        break;
+    case 2:
+        sub_8086B9C();
+        sub_8086A68();
+        sub_8086AC8();
+        (*state)++;
+        break;
+    case 3:
+        sub_80863B0();
+        map_loading_lcd_reset();
+        sub_8197200();
+        (*state)++;
+        break;
+    case 4:
+        move_tilemap_camera_to_upper_left_corner();
+        (*state)++;
+        break;
+    case 5:
+        copy_map_tileset1_to_vram(gMapHeader.mapData);
+        (*state)++;
+        break;
+    case 6:
+        copy_map_tileset2_to_vram(gMapHeader.mapData);
+        (*state)++;
+        break;
+    case 7:
+        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        {
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+            (*state)++;
+        }
+        break;
+    case 8:
+        DrawWholeMapView();
+        (*state)++;
+        break;
+    case 9:
+        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        (*state)++;
+        break;
+    case 11:
+        if (gWirelessCommType != 0)
+        {
+            sub_800E0E8();
+            CreateWirelessStatusIndicatorSprite(0, 0);
+        }
+        (*state)++;
+        break;
+    case 12:
+        if (map_post_load_hook_exec())
+            (*state)++;
+        break;
+    case 10:
+        (*state)++;
+        break;
+    case 13:
+        SetFieldVBlankCallback();
+        (*state)++;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void do_load_map_stuff_loop(u8 *state)
+{
+    while (!load_map_stuff(state, 0));
+}
+
+static void sub_80867C8(void)
+{
+    sub_81BE6AC();
+    MoveSaveBlocks_ResetHeap();
+}
+
+static void sub_80867D8(void)
+{
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    ScanlineEffect_Stop();
+
+    DmaClear16(3, PLTT + 2, PLTT_SIZE - 2);
+    DmaFillLarge16(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
+    ResetOamRange(0, 128);
+    LoadOam();
+}
+
+static void sub_8086860(void)
+{
+    sub_80863B0();
+    map_loading_lcd_reset();
+    sub_8197200();
+    mapdata_load_assets_to_gpu_and_full_redraw();
+}
+
+static void map_loading_lcd_reset(void)
+{
+    clear_scheduled_bg_copies_to_vram();
+    reset_temp_tile_data_buffers();
+    SetGpuReg(REG_OFFSET_MOSAIC, 0);
+    SetGpuReg(REG_OFFSET_WININ, 0x1F1F);
+    SetGpuReg(REG_OFFSET_WINOUT, 0x101);
+    SetGpuReg(REG_OFFSET_WIN0H, 0xFF);
+    SetGpuReg(REG_OFFSET_WIN0V, 0xFF);
+    SetGpuReg(REG_OFFSET_WIN1H, 0xFFFF);
+    SetGpuReg(REG_OFFSET_WIN1V, 0xFFFF);
+    SetGpuReg(REG_OFFSET_BLDCNT, gUnknown_82EC7C4[1] | gUnknown_82EC7C4[2] | gUnknown_82EC7C4[3] | 0x1040);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0x70D);
+    overworld_bg_setup();
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    schedule_bg_copy_tilemap_to_vram(3);
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJ_1D_MAP | 0x20);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+    sub_8098128();
+}
+
+static void sub_8086988(u32 a1)
+{
+    ResetTasks();
+    ResetSpriteData();
+    ResetPaletteFade();
+    ScanlineEffect_Clear();
+    dp13_810BB8C();
+    ResetCameraUpdateInfo();
+    InstallCameraPanAheadCallback();
+    if (!a1)
+        npc_paltag_set_load(0);
+    else
+        npc_paltag_set_load(1);
+
+    FieldEffectActiveListClear();
+    sub_80AAFA4();
+    sub_80AEE84();
+    if (!a1)
+        SetUpFieldTasks();
+    mapheader_run_script_with_tag_x5();
+    sub_81BE6B8();
+}
+
+static void sub_80869DC(void)
+{
+    gUnknown_03005DEC = 0;
+    gUnknown_03005DE8 = 0;
+    sub_808D438();
+    SpawnFieldObjectsInView(0, 0);
+    mapheader_run_first_tag4_script_list_match();
+}
+
+static void mli4_mapscripts_and_other(void)
+{
+    s16 x, y;
+    struct UnkPlayerStruct *player;
+
+    gUnknown_03005DEC = 0;
+    gUnknown_03005DE8 = 0;
+    sub_808D438();
+    sav1_camera_get_focus_coords(&x, &y);
+    player = sub_80852D4();
+    InitPlayerAvatar(x, y, player->player_field_1, gSaveBlock2Ptr->playerGender);
+    SetPlayerAvatarTransitionFlags(player->player_field_0);
+    player_avatar_init_params_reset();
+    SpawnFieldObjectsInView(0, 0);
+    mapheader_run_first_tag4_script_list_match();
+}
+
+static void sub_8086A68(void)
+{
+    sub_808E16C(0, 0);
+    RotatingGate_InitPuzzleAndGraphics();
+    mapheader_run_script_with_tag_x7();
+}
+
+static void sub_8086A80(void)
+{
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_15 = 1;
+    InitCameraUpdateCallback(gPlayerAvatar.spriteId);
+}
+
+static void sub_8086AAC(void)
+{
+    InitCameraUpdateCallback(sub_8087858(gUnknown_03005DB4));
+}
+
+static void sub_8086AC8(void)
+{
+    InitCameraUpdateCallback(sub_8087858(gUnknown_03005DB4));
+}
+
+static void sub_8086AE4(void)
+{
+    u16 x, y;
+    sav1_camera_get_focus_coords(&x, &y);
+    sub_8088B3C(x + gUnknown_03005DB4, y);
+}
+
+static void sub_8086B14(void)
+{
+    u16 i;
+    u16 x, y;
+
+    sav1_camera_get_focus_coords(&x, &y);
+    x -= gUnknown_03005DB4;
+
+    for (i = 0; i < gFieldLinkPlayerCount; i++)
+    {
+        SpawnLinkPlayerMapObject(i, i + x, y, gLinkPlayers[i].gender);
+        CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
+    }
+
+    sub_8086C40();
+}
+
+static void sub_8086B9C(void)
+{
+    u16 i;
+    for (i = 0; i < gFieldLinkPlayerCount; i++)
+        CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
+}
+
+static void c1_link_related(void)
+{
+    if (gWirelessCommType == 0 || !sub_800F0B8() || !sub_8009F3C())
+    {
+        u8 var = gUnknown_03005DB4;
+        sub_8086F38(gLinkPartnersHeldKeys, var);
+        sub_8086FA0(sUnknown_03000E14(var));
+        sub_8086C40();
+    }
+}
+
+void sub_8086C2C(void)
+{
+    sub_8086C90();
+    c1_link_related_func_set(sub_80870B0);
+}
+
+static void sub_8086C40(void)
+{
+    sub_808709C(gLinkPartnersHeldKeys);
+}
+
+static void c1_link_related_func_set(u16 (*func)(u32))
+{
+    sUnknown_03000E19 = 0;
+    sUnknown_03000E14 = func;
+}
+
+static void sub_8086C64(void)
+{
+    if (gWirelessCommType != 0)
+    {
+        if (++sUnknown_03000E19 > 60)
+            sub_8010198();
+    }
+}
+
+static void sub_8086C90(void)
+{
+    s32 i;
+    for (i = 0; i < 4; i++)
+        sUnknown_03000E10[i] = 0x80;
+}
+
+static bool32 sub_8086CA8(u16 a1)
+{
+    s32 i;
+    s32 count = gFieldLinkPlayerCount;
+
+    for (i = 0; i < count; i++)
+        if (sUnknown_03000E10[i] != a1)
+            return FALSE;
+    return TRUE;
+}
+
+static bool32 sub_8086CE0(u16 a1)
+{
+    s32 i;
+    s32 count = gFieldLinkPlayerCount;
+
+    for (i = 0; i < count; i++)
+        if (sUnknown_03000E10[i] == a1)
+            return TRUE;
+    return FALSE;
+}
+
+static void sub_8086D18(u32 a1, u16 a2, struct UnkStruct_8054FF8 *a3, u16 *a4)
+{
+    const u8 *script;
+
+    if (sUnknown_03000E10[a1] == 0x80)
+    {
+        script = sub_8087370(a3);
+        if (script)
+        {
+            *a4 = sub_8087480(script);
+            sUnknown_03000E10[a1] = 0x81;
+            if (a3->b)
+            {
+                c1_link_related_func_set(sub_80870F8);
+                sub_8087530(script);
+            }
+            return;
+        }
+        if (sub_8086CE0(0x83) == 1)
+        {
+            sUnknown_03000E10[a1] = 0x81;
+            if (a3->b)
+            {
+                c1_link_related_func_set(sub_80870F8);
+                sub_8087584();
+            }
+            return;
+        }
+        switch (a2)
+        {
+        case 24:
+            if (sub_8087358(a3))
+            {
+                sUnknown_03000E10[a1] = 0x81;
+                if (a3->b)
+                {
+                    c1_link_related_func_set(sub_80870F8);
+                    sub_808751C();
+                }
+            }
+            break;
+        case 18:
+            if (sub_8087388(a3) == TRUE)
+            {
+                sUnknown_03000E10[a1] = 0x81;
+                if (a3->b)
+                {
+                    c1_link_related_func_set(sub_80870F8);
+                    sub_808754C();
+                }
+            }
+            break;
+        case 25:
+            script = sub_80873B4(a3);
+            if (script)
+            {
+                sUnknown_03000E10[a1] = 0x81;
+                if (a3->b)
+                {
+                    c1_link_related_func_set(sub_80870F8);
+                    sub_8087568(script);
+                }
+            }
+            break;
+        case 27:
+            if (sub_8087340(a3))
+            {
+                sUnknown_03000E10[a1] = 0x81;
+                if (a3->b)
+                {
+                    c1_link_related_func_set(sub_808711C);
+                    sub_8087510();
+                }
+            }
+            break;
+        case 28:
+            if (sub_8087340(a3))
+            {
+                sUnknown_03000E10[a1] = 0x81;
+                if (a3->b)
+                {
+                    c1_link_related_func_set(sub_8087140);
+                    sub_8087510();
+                }
+            }
+            break;
+        }
+    }
+
+    switch (a2)
+    {
+    case 23:
+        sUnknown_03000E10[a1] = 0x83;
+        break;
+    case 22:
+        sUnknown_03000E10[a1] = 0x82;
+        break;
+    case 26:
+        sUnknown_03000E10[a1] = 0x80;
+        if (a3->b)
+            c1_link_related_func_set(sub_80870B0);
+        break;
+    case 29:
+        if (sUnknown_03000E10[a1] == 0x82)
+            sUnknown_03000E10[a1] = 0x81;
+        break;
+    }
+}
+
+static void sub_8086F38(u16 *a1, s32 a2)
+{
+    struct UnkStruct_8054FF8 st;
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 v5 = a1[i];
+        u16 v8 = 0;
+        sub_80872D8(i, a2, &st);
+        sub_8086D18(i, v5, &st, &v8);
+        if (sUnknown_03000E10[i] == 0x80)
+            v8 = sub_8087068(v5);
+        sub_808796C(i, v8);
+    }
+}
+
+static void sub_8086FA0(u16 a1)
+{
+    if (a1 >= 17 && a1 < 30)
+        gUnknown_03005DA8 = a1;
+    else
+        gUnknown_03005DA8 = 17;
+
+    if (gWirelessCommType != 0
+        && sub_8087690() > 1
+        && is_c1_link_related_active() == TRUE
+        && sub_8009F3C() == TRUE)
+    {
+        switch (a1)
+        {
+        case 17:
+        case 18:
+        case 19:
+        case 20:
+        case 21:
+        case 24:
+        case 25:
+            gUnknown_03005DA8 = 0;
+            break;
+        }
+    }
+}
+
+static u16 sub_808700C(u32 a1)
+{
+    if (gMain.heldKeys & DPAD_UP)
+        return 19;
+    else if (gMain.heldKeys & DPAD_DOWN)
+        return 18;
+    else if (gMain.heldKeys & DPAD_LEFT)
+        return 20;
+    else if (gMain.heldKeys & DPAD_RIGHT)
+        return 21;
+    else if (gMain.newKeys & START_BUTTON)
+        return 24;
+    else if (gMain.newKeys & A_BUTTON)
+        return 25;
+    else
+        return 17;
+}
+
+static u16 sub_8087068(u16 a1)
+{
+    switch (a1)
+    {
+    case 21:
+        return 4;
+    case 20:
+        return 3;
+    case 19:
+        return 1;
+    case 18:
+        return 2;
+    default:
+        return 0;
+    }
+}
+
+static void sub_808709C(u16 *a1)
+{
+    s32 i;
+    for (i = 0; i < 4; i++)
+        a1[i] = 17;
+}
+
+static u16 sub_80870B0(u32 a1)
+{
+    if (ScriptContext2_IsEnabled() == 1)
+        return 17;
+    if (sub_800B4DC() > 4)
+        return 27;
+    if (sub_8087690() <= 4)
+        return sub_808700C(a1);
+    return 28;
+}
+
+static u16 sub_80870EC(u32 a1)
+{
+    sub_8086C64();
+    return 17;
+}
+
+static u16 sub_80870F8(u32 a1)
+{
+    u16 retVal;
+    if (ScriptContext2_IsEnabled() == TRUE)
+    {
+        retVal = 17;
+    }
+    else
+    {
+        retVal = 26;
+        c1_link_related_func_set(sub_80870EC);
+    }
+    return retVal;
+}
+
+static u16 sub_808711C(u32 a1)
+{
+    u16 retVal;
+    if (sub_800B4DC() > 2)
+    {
+        retVal = 17;
+    }
+    else
+    {
+        retVal = 26;
+        ScriptContext2_Disable();
+        c1_link_related_func_set(sub_80870EC);
+    }
+    return retVal;
+}
+
+static u16 sub_8087140(u32 a1)
+{
+    u16 retVal;
+    if (sub_8087690() > 2)
+    {
+        retVal = 17;
+    }
+    else
+    {
+        retVal = 26;
+        ScriptContext2_Disable();
+        c1_link_related_func_set(sub_80870EC);
+    }
+    return retVal;
+}
+
+static u16 sub_8087164(u32 a1)
+{
+    sub_8086C64();
+    return 17;
+}
+
+static u16 sub_8087170(u32 linkPlayerId)
+{
+    if (sUnknown_03000E10[linkPlayerId] == 0x82)
+    {
+        if (gMain.newKeys & B_BUTTON)
+        {
+            c1_link_related_func_set(sub_8087164);
+            return 29;
+        }
+        else
+        {
+            return 17;
+        }
+    }
+    else
+    {
+        sub_8086C64();
+        return 17;
+    }
+}
+
+static u16 sub_80871AC(u32 a1)
+{
+    c1_link_related_func_set(sub_8087170);
+    return 22;
+}
+
+static u16 sub_80871C0(u32 a1)
+{
+    return 17;
+}
+
+static u16 sub_80871C4(u32 a1)
+{
+    if (sUnknown_03000E10[a1] != 0x83)
+        sub_8086C64();
+    if (sub_8086CA8(0x83) == TRUE)
+    {
+        ScriptContext1_SetupScript(EventScript_277513);
+        c1_link_related_func_set(sub_80871C0);
+    }
+    return 17;
+}
+
+static u16 sub_80871FC(u32 a1)
+{
+    c1_link_related_func_set(sub_80871C4);
+    return 23;
+}
+
+static u16 sub_8087210(u32 a1)
+{
+    return 17;
+}
+
+u32 sub_8087214(void)
+{
+    if (sub_8086CE0(0x83) == TRUE)
+        return 2;
+    if (sUnknown_03000E14 == sub_8087170 && sUnknown_03000E10[gUnknown_03005DB4] != 0x82)
+        return 0;
+    if (sUnknown_03000E14 == sub_8087164 && sUnknown_03000E10[gUnknown_03005DB4] == 0x81)
+        return 2;
+    if (sub_8086CA8(0x82) != 0)
+        return 1;
+    return 0;
+}
+
+bool32 sub_808727C(void)
+{
+    return sub_8086CE0(0x83);
+}
+
+u16 sub_8087288(void)
+{
+    c1_link_related_func_set(sub_80871AC);
+    return 0;
+}
+
+u16 sub_808729C(void)
+{
+    c1_link_related_func_set(sub_80870F8);
+    return 0;
+}
+
+u16 sub_80872B0(void)
+{
+    c1_link_related_func_set(sub_80871FC);
+    return 0;
+}
+
+u16 sub_80872C4(void)
+{
+    c1_link_related_func_set(sub_8087210);
+    return 0;
+}
+
+static void sub_80872D8(s32 linkPlayerId, s32 a2, struct UnkStruct_8054FF8 *a3)
+{
+    s16 x, y;
+
+    a3->a = linkPlayerId;
+    a3->b = (linkPlayerId == a2) ? 1 : 0;
+    a3->c = gLinkPlayerMapObjects[linkPlayerId].mode;
+    a3->d = sub_80878A0(linkPlayerId);
+    sub_8087878(linkPlayerId, &x, &y);
+    a3->sub.x = x;
+    a3->sub.y = y;
+    a3->sub.height = sub_80878C0(linkPlayerId);
+    a3->field_C = MapGridGetMetatileBehaviorAt(x, y);
+}
+
+static bool32 sub_8087340(struct UnkStruct_8054FF8 *a1)
+{
+    u8 v1 = a1->c;
+    if (v1 == 2 || v1 == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 sub_8087358(struct UnkStruct_8054FF8 *a1)
+{
+    u8 v1 = a1->c;
+    if (v1 == 2 || v1 == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static u8 *sub_8087370(struct UnkStruct_8054FF8 *a1)
+{
+    if (a1->c != 2)
+        return 0;
+    return sub_809D0F4(&a1->sub);
+}
+
+static bool32 sub_8087388(struct UnkStruct_8054FF8 *a1)
+{
+    if (a1->c != 2 && a1->c != 0)
+        return FALSE;
+    if (!MetatileBehavior_IsSouthArrowWarp(a1->field_C))
+        return FALSE;
+    if (a1->d != 1)
+        return FALSE;
+    return TRUE;
+}
+
+static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1)
+{
+    struct MapPosition unkStruct;
+    u8 linkPlayerId;
+
+    if (a1->c && a1->c != 2)
+        return 0;
+
+    unkStruct = a1->sub;
+    unkStruct.x += gUnknown_08339D64[a1->d].x;
+    unkStruct.y += gUnknown_08339D64[a1->d].y;
+    unkStruct.height = 0;
+    linkPlayerId = GetLinkPlayerIdAt(unkStruct.x, unkStruct.y);
+
+    if (linkPlayerId != 4)
+    {
+        if (!a1->b)
+            return EventScript_TradeRoom_TooBusyToNotice;
+        if (sUnknown_03000E10[linkPlayerId] != 0x80)
+            return EventScript_TradeRoom_TooBusyToNotice;
+        if (!sub_80B39D4(linkPlayerId))
+            return EventScript_TradeRoom_ReadTrainerCard1;
+        else
+            return EventScript_TradeRoom_ReadTrainerCard2;
+    }
+
+    return sub_809C2C8(&unkStruct, a1->field_C, a1->d);
+}
+
+static u16 sub_8087480(const u8 *script)
+{
+    if (script == gUnknown_08277388)
+        return 10;
+    if (script == gUnknown_082773A3)
+        return 9;
+    if (script == gUnknown_082773BE)
+        return 10;
+    if (script == gUnknown_082773D9)
+        return 9;
+    if (script == gUnknown_0827741D)
+        return 10;
+    if (script == gUnknown_08277432)
+        return 9;
+    if (script == gUnknown_08277447)
+        return 10;
+    if (script == gUnknown_0827745C)
+        return 9;
+    if (script == gUnknown_08277374)
+        return 10;
+    if (script == gUnknown_0827737E)
+        return 9;
+    if (script == gUnknown_082773F5)
+        return 10;
+    if (script == gUnknown_082773FF)
+        return 9;
+    return 0;
+}
+
+static void sub_8087510(void)
+{
+    ScriptContext2_Enable();
+}
+
+static void sub_808751C(void)
+{
+    PlaySE(SE_WIN_OPEN);
+    sub_809FA9C();
+    ScriptContext2_Enable();
+}
+
+static void sub_8087530(const u8 *script)
+{
+    PlaySE(SE_SELECT);
+    ScriptContext1_SetupScript(script);
+    ScriptContext2_Enable();
+}
+
+static void sub_808754C(void)
+{
+    PlaySE(SE_WIN_OPEN);
+    ScriptContext1_SetupScript(gUnknown_082774EF);
+    ScriptContext2_Enable();
+}
+
+static void sub_8087568(const u8 *script)
+{
+    PlaySE(SE_SELECT);
+    ScriptContext1_SetupScript(script);
+    ScriptContext2_Enable();
+}
+
+static void sub_8087584(void)
+{
+    ScriptContext1_SetupScript(gUnknown_08277509);
+    ScriptContext2_Enable();
+}
+
+bool32 sub_8087598(void)
+{
+    if (!is_c1_link_related_active())
+        return 0;
+    if (sub_800B4DC() >= 3)
+        sUnknown_03000E18 = 1;
+    else
+        sUnknown_03000E18 = 0;
+    return sUnknown_03000E18;
+}
+
+bool32 sub_80875C8(void)
+{
+    u8 temp;
+
+    if (sub_800B4DC() < 2)
+        return FALSE;
+
+    if (is_c1_link_related_active() != TRUE)
+        return FALSE;
+
+    if (sub_8009F3C() != TRUE)
+        return FALSE;
+
+    if (sUnknown_03000E14 == sub_808711C)
+        return TRUE;
+
+    if (sUnknown_03000E14 != sub_80870F8)
+        return FALSE;
+
+    temp = sUnknown_03000E18;
+    sUnknown_03000E18 = 0;
+
+    if (temp == TRUE)
+        return TRUE;
+
+    if (gPaletteFade.active && gPaletteFade.softwareFadeFinishing)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_8087634(void)
+{
+    if (sub_8087690() < 2)
+        return FALSE;
+
+    if (is_c1_link_related_active() != TRUE)
+        return FALSE;
+
+    if (sub_8009F3C() != TRUE)
+        return FALSE;
+
+    if (sUnknown_03000E14 == sub_8087140)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_808766C(void)
+{
+    if (gWirelessCommType != 0)
+        return FALSE;
+    if (!sub_8009F3C())
+        return FALSE;
+    return TRUE;
+}
+
+static u32 sub_8087690(void)
+{
+    if (gWirelessCommType != 0)
+        return gUnknown_03005000.unk_9e8.unk_232;
+    else
+        return gLink.sendQueue.count;
+}
+
+static void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj)
+{
+    memset(linkPlayerMapObj, 0, sizeof(struct LinkPlayerMapObject));
+}
+
+void ZeroAllLinkPlayerMapObjects(void)
+{
+    memset(gLinkPlayerMapObjects, 0, sizeof(gLinkPlayerMapObjects));
+}
+
+static void ZeroMapObject(struct MapObject *mapObj)
+{
+    memset(mapObj, 0, sizeof(struct MapObject));
+}
+
+static void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
+{
+    u8 mapObjId = sub_808D4F4();
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+
+    ZeroLinkPlayerMapObject(linkPlayerMapObj);
+    ZeroMapObject(mapObj);
+
+    linkPlayerMapObj->active = 1;
+    linkPlayerMapObj->linkPlayerId = linkPlayerId;
+    linkPlayerMapObj->mapObjId = mapObjId;
+    linkPlayerMapObj->mode = 0;
+
+    mapObj->active = 1;
+    mapObj->mapobj_bit_1 = a4;
+    mapObj->range.as_byte = 2;
+    mapObj->spriteId = 64;
+
+    InitLinkPlayerMapObjectPos(mapObj, x, y);
+}
+
+static void InitLinkPlayerMapObjectPos(struct MapObject *mapObj, s16 x, s16 y)
+{
+    mapObj->coords2.x = x;
+    mapObj->coords2.y = y;
+    mapObj->coords3.x = x;
+    mapObj->coords3.y = y;
+    sub_8093038(x, y, &mapObj->coords1.x, &mapObj->coords1.y);
+    mapObj->coords1.x += 8;
+    FieldObjectUpdateZCoord(mapObj);
+}
+
+static void sub_80877DC(u8 linkPlayerId, u8 a2)
+{
+    if (gLinkPlayerMapObjects[linkPlayerId].active)
+    {
+        u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+        struct MapObject *mapObj = &gMapObjects[mapObjId];
+        mapObj->range.as_byte = a2;
+    }
+}
+
+static void sub_808780C(u8 linkPlayerId)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    if (mapObj->spriteId != 64 )
+        DestroySprite(&gSprites[mapObj->spriteId]);
+    linkPlayerMapObj->active = 0;
+    mapObj->active = 0;
+}
+
+static u8 sub_8087858(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->spriteId;
+}
+
+static void sub_8087878(u8 linkPlayerId, u16 *x, u16 *y)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    *x = mapObj->coords2.x;
+    *y = mapObj->coords2.y;
+}
+
+static u8 sub_80878A0(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->range.as_byte;
+}
+
+static u8 sub_80878C0(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->mapobj_unk_0B_0;
+}
+
+static s32 sub_80878E4(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return 16 - (s8)mapObj->mapobj_unk_21;
+}
+
+static u8 GetLinkPlayerIdAt(s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < 4; i++)
+    {
+        if (gLinkPlayerMapObjects[i].active
+         && (gLinkPlayerMapObjects[i].mode == 0 || gLinkPlayerMapObjects[i].mode == 2))
+        {
+            struct MapObject *mapObj = &gMapObjects[gLinkPlayerMapObjects[i].mapObjId];
+            if (mapObj->coords2.x == x && mapObj->coords2.y == y)
+                return i;
+        }
+    }
+    return 4;
+}
+
+static void sub_808796C(u8 linkPlayerId, u8 a2)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+
+    if (linkPlayerMapObj->active)
+    {
+        if (a2 > 10)
+            mapObj->mapobj_bit_2 = 1;
+        else
+            gUnknown_08339E00[gUnknown_08339DC8[linkPlayerMapObj->mode](linkPlayerMapObj, mapObj, a2)](linkPlayerMapObj, mapObj);
+    }
+}
+
+static u8 sub_80879D8(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return gUnknown_08339DD4[a3](linkPlayerMapObj, mapObj, a3);
+}
+
+static u8 sub_80879F8(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return 1;
+}
+
+static u8 sub_80879FC(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return gUnknown_08339DD4[a3](linkPlayerMapObj, mapObj, a3);
+}
+
+static u8 sub_8087A1C(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return 0;
+}
+
+static u8 sub_8087A20(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    s16 x, y;
+
+    mapObj->range.as_byte = npc_something3(a3, mapObj->range.as_byte);
+    FieldObjectMoveDestCoords(mapObj, mapObj->range.as_byte, &x, &y);
+
+    if (LinkPlayerDetectCollision(linkPlayerMapObj->mapObjId, mapObj->range.as_byte, x, y))
+    {
+        return 0;
+    }
+    else
+    {
+        mapObj->mapobj_unk_21 = 16;
+        npc_coords_shift(mapObj, x, y);
+        FieldObjectUpdateZCoord(mapObj);
+        return 1;
+    }
+}
+
+static u8 sub_8087A88(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    mapObj->range.as_byte = npc_something3(a3, mapObj->range.as_byte);
+    return 0;
+}
+
+static void sub_8087AA0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+{
+    linkPlayerMapObj->mode = 0;
+}
+
+static void sub_8087AA8(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+{
+    mapObj->mapobj_unk_21--;
+    linkPlayerMapObj->mode = 1;
+    MoveCoords(mapObj->range.as_byte, &mapObj->coords1.x, &mapObj->coords1.y);
+    if (!mapObj->mapobj_unk_21)
+    {
+        npc_coords_shift_still(mapObj);
+        linkPlayerMapObj->mode = 2;
+    }
+}
+
+static u8 npc_something3(u8 a1, u8 a2)
+{
+    switch (a1 - 1)
+    {
+    case 0:
+    case 6:
+        return 2;
+    case 1:
+    case 7:
+        return 1;
+    case 2:
+    case 8:
+        return 3;
+    case 3:
+    case 9:
+        return 4;
+    }
+    return a2;
+}
+
+static u8 LinkPlayerDetectCollision(u8 selfMapObjId, u8 a2, s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < 16; i++)
+    {
+        if (i != selfMapObjId)
+        {
+            if ((gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
+             || (gMapObjects[i].coords3.x == x && gMapObjects[i].coords3.y == y))
+            {
+                return 1;
+            }
+        }
+    }
+    return MapGridIsImpassableAt(x, y);
+}
+
+static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    struct Sprite *sprite;
+
+    if (linkPlayerMapObj->active)
+    {
+        switch (gameVersion)
+        {
+        case VERSION_FIRE_RED:
+        case VERSION_LEAF_GREEN:
+            mapObj->spriteId = AddPseudoFieldObject(sub_808BD6C(mapObj->mapobj_bit_1), SpriteCB_LinkPlayer, 0, 0, 0);
+            break;
+        case VERSION_RUBY:
+        case VERSION_SAPPHIRE:
+            mapObj->spriteId = AddPseudoFieldObject(sub_808BD7C(mapObj->mapobj_bit_1), SpriteCB_LinkPlayer, 0, 0, 0);
+            break;
+        case VERSION_EMERALD:
+            mapObj->spriteId = AddPseudoFieldObject(GetRivalAvatarGraphicsIdByStateIdAndGender(0, mapObj->mapobj_bit_1), SpriteCB_LinkPlayer, 0, 0, 0);
+            break;
+        }
+
+        sprite = &gSprites[mapObj->spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data[0] = linkPlayerId;
+        mapObj->mapobj_bit_2 = 0;
+    }
+}
+
+static void SpriteCB_LinkPlayer(struct Sprite *sprite)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data[0]];
+    struct MapObject *mapObj = &gMapObjects[linkPlayerMapObj->mapObjId];
+    sprite->pos1.x = mapObj->coords1.x;
+    sprite->pos1.y = mapObj->coords1.y;
+    SetObjectSubpriorityByZCoord(mapObj->elevation, sprite, 1);
+    sprite->oam.priority = ZCoordToPriority(mapObj->elevation);
+
+	if (!linkPlayerMapObj->mode)
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObj->range.as_byte));
+    else
+        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(mapObj->range.as_byte));
+
+	sub_80979D4(sprite, 0);
+    if (mapObj->mapobj_bit_2)
+    {
+        sprite->invisible = ((sprite->data[7] & 4) >> 2);
+        sprite->data[7]++;
+    }
 }

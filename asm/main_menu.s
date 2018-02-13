@@ -1480,7 +1480,7 @@ _08030444:
 	strh r1, [r0]
 	ldr r0, =gPlttBufferFaded
 	strh r1, [r0]
-	ldr r0, =sub_8086230
+	ldr r0, =CB2_ContinueSavedGame
 	b _0803048A
 	.pool
 _08030460:

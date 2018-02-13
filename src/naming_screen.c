@@ -1798,22 +1798,22 @@ static bool8 sub_80E503C(u8 character)
 
 static void sub_80E5074(void)
 {
-    DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, sub_8086194);
+    DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
 static void sub_80E509C(void)
 {
-    DoNamingScreen(1, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, sub_8086194);
+    DoNamingScreen(1, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
 static void sub_80E50C4(void)
 {
-    DoNamingScreen(2, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, sub_8086194);
+    DoNamingScreen(2, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
 static void sub_80E50EC(void)
 {
-    DoNamingScreen(3, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, sub_8086194);
+    DoNamingScreen(3, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
 //--------------------------------------------------

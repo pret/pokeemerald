@@ -777,7 +777,7 @@ _08150340:
 	bl warp_in
 	ldr r0, =gFieldCallback
 	str r4, [r0]
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	add sp, 0x8
 	pop {r3}

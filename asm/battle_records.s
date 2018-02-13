@@ -855,7 +855,7 @@ sub_813C664: @ 813C664
 	ands r0, r1
 	cmp r0, 0
 	bne _0813C694
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	ldr r0, =gUnknown_0203AB78
 	ldr r0, [r0]

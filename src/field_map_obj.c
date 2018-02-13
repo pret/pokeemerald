@@ -198,7 +198,7 @@ static void npcs_clear_ids_and_state(void)
 
 void sub_808D438(void)
 {
-    strange_npc_table_clear();
+    ZeroAllLinkPlayerMapObjects();
     npcs_clear_ids_and_state();
     ClearPlayerAvatarInfo();
     sub_808D450();

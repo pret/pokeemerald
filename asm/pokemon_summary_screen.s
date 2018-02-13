@@ -2024,7 +2024,7 @@ sub_81C4EEC: @ 81C4EEC
 	thumb_func_start sub_81C4EFC
 sub_81C4EFC: @ 81C4EFC
 	push {lr}
-	ldr r1, =sub_8086194
+	ldr r1, =CB2_ReturnToFieldWithOpenMenu
 	movs r0, 0
 	bl sub_81C4F98
 	pop {r0}
@@ -2073,7 +2073,7 @@ sub_81C4F44: @ 81C4F44
 	ldr r0, =gUnknown_03005DB0
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
-	ldr r1, =c2_exit_to_overworld_2_switch
+	ldr r1, =CB2_ReturnToField
 	movs r0, 0x3
 	bl sub_81C4F98
 	adds r0, r4, 0

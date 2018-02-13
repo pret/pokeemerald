@@ -713,7 +713,7 @@ _08160CD8:
 	b _08160E8A
 _08160CE6:
 	bl sub_8160EA0
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	b _08160E8A
 	.pool

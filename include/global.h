@@ -144,6 +144,18 @@ struct UCoords16
     u16 y;
 };
 
+struct Coords32
+{
+    s32 x;
+    s32 y;
+};
+
+struct UCoords32
+{
+    u32 x;
+    u32 y;
+};
+
 struct Time
 {
     /*0x00*/ s16 days;

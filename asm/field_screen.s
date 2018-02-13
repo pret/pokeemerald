@@ -9015,7 +9015,7 @@ _080AF9D0:
 	cmp r0, 0
 	bne _080AF9E8
 	bl warp_in
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -9087,7 +9087,7 @@ _080AFA64:
 	b _080AFA7C
 _080AFA6C:
 	bl warp_in
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r6, 0
 	bl DestroyTask
@@ -10060,7 +10060,7 @@ _080B0222:
 	b _080B023A
 _080B022A:
 	bl warp_in
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
