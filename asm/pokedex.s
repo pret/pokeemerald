@@ -443,24 +443,24 @@ _080BB65E:
 	cmp r0, 0
 	bne _080BB6D0
 	movs r0, 0
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	ldr r1, [r4]
 	ldr r2, =0x0000061a
 	adds r1, r2
 	strh r0, [r1]
 	movs r0, 0x1
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	b _080BB6E4
 	.pool
 _080BB6D0:
 	movs r0, 0
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	ldr r1, [r4]
 	ldr r2, =0x0000061a
 	adds r1, r2
 	strh r0, [r1]
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 _080BB6E4:
 	ldr r1, [r4]
 	ldr r3, =0x0000061c
@@ -5058,7 +5058,7 @@ _080BDF4C:
 	movs r1, 0x1
 	bl StartSpriteAnim
 	movs r0, 0
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r0, 0
@@ -5283,7 +5283,7 @@ _080BE198:
 	lsrs r1, 24
 	bl StartSpriteAnim
 	movs r0, 0x1
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r0, 0
@@ -9597,8 +9597,8 @@ _080C07E8:
 	.pool
 	thumb_func_end GetSetPokedexFlag
 
-	thumb_func_start pokedex_count
-pokedex_count: @ 80C07F4
+	thumb_func_start GetNationalPokedexCount
+GetNationalPokedexCount: @ 80C07F4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -9641,10 +9641,10 @@ _080C0832:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end pokedex_count
+	thumb_func_end GetNationalPokedexCount
 
-	thumb_func_start sub_80C0844
-sub_80C0844: @ 80C0844
+	thumb_func_start GetHoennPokedexCount
+GetHoennPokedexCount: @ 80C0844
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -9691,7 +9691,7 @@ _080C088C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C0844
+	thumb_func_end GetHoennPokedexCount
 
 	thumb_func_start sub_80C089C
 sub_80C089C: @ 80C089C

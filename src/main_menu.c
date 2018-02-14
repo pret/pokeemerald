@@ -1814,9 +1814,9 @@ void fmt_pokedex(void)
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         if (IsNationalPokedexEnabled())
-            dexCount = pokedex_count(1);
+            dexCount = GetNationalPokedexCount(1);
         else
-            dexCount = sub_80C0844(1);
+            dexCount = GetHoennPokedexCount(1);
         StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPokedex);
         box_print(2, 1, 0, 33, gUnknown_082FF0E3, -1, gStringVar4);
         ConvertIntToDecimalStringN(str, dexCount, 0, 3);

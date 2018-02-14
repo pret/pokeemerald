@@ -63,7 +63,7 @@ static EWRAM_DATA void *gUnknown_0203CDAC[0x20] = {NULL};
 const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
 static const u8 gUnknown_0860F094[] = { 8, 4, 1 };
 
-static const struct WindowTemplate gUnknown_0860F098[] = 
+static const struct WindowTemplate gUnknown_0860F098[] =
 {
     { 0x00, 0x02, 0x0F, 0x1B, 0x04, 0x0F, 0x194 },
     DUMMY_WIN_TEMPLATE
@@ -76,7 +76,7 @@ static const struct WindowTemplate gUnknown_0860F0A8 =
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
 const u8 gUnknown_0860F0D0[] = { 15, 1, 2 };
-const struct SomeUnkStruct_60F0D4 gUnknown_0860F0D4[] = 
+const struct SomeUnkStruct_60F0D4 gUnknown_0860F0D4[] =
 {
     { 12, 12, 0x00 },
     { 32, 12, 0x20 },
@@ -151,7 +151,7 @@ u16 sub_8197224(void)
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
 {
     struct TextSubPrinter printer;
-    
+
     printer.current_text_offset = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
@@ -165,9 +165,9 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 speed,
     printer.fgColor = fgColor;
     printer.bgColor = bgColor;
     printer.shadowColor = shadowColor;
-    
+
     gTextFlags.flag_1 = 0;
-    return AddTextPrinter(&printer, speed, callback); 
+    return AddTextPrinter(&printer, speed, callback);
 }
 
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
@@ -234,7 +234,7 @@ void sub_819746C(u8 windowId, bool8 copyToVram)
 void DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
     int i;
-    
+
     FillBgTilemapBufferRect(bg,
                             STD_WINDOW_BASE_TILE_NUM + 0,
                             tilemapLeft - 1,
@@ -256,7 +256,7 @@ void DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height
                             1,
                             1,
                             STD_WINDOW_PALETTE_NUM);
-    
+
     for (i = tilemapTop; i < tilemapTop + height; i++)
     {
         FillBgTilemapBufferRect(bg,
@@ -274,7 +274,7 @@ void DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height
                                 1,
                                 STD_WINDOW_PALETTE_NUM);
     }
-    
+
     FillBgTilemapBufferRect(bg,
                             STD_WINDOW_BASE_TILE_NUM + 6,
                             tilemapLeft - 1,
@@ -1941,7 +1941,7 @@ void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 spee
     printer.fgColor = color[1];
     printer.bgColor = color[0];
     printer.shadowColor = color[2];
-    
+
     AddTextPrinter(&printer, speed, NULL);
 }
 
@@ -1962,7 +1962,7 @@ void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 le
     printer.fgColor = color[1];
     printer.bgColor = color[0];
     printer.shadowColor = color[2];
-    
+
     AddTextPrinter(&printer, speed, NULL);
 }
 
@@ -2373,14 +2373,14 @@ void sub_819A344(u8 a0, u8 *a1, u8 a2)
     s32 flagCount;
     u8 *endOfString;
     u8 *string = a1;
-    
+
     *(string++) = EXT_CTRL_CODE_BEGIN;
     *(string++) = EXT_CTRL_CODE_COLOR;
     *(string++) = a2;
     *(string++) = EXT_CTRL_CODE_BEGIN;
     *(string++) = EXT_CTRL_CODE_SHADOW;
     *(string++) = a2 + 1;
-    
+
     switch (a0)
     {
         case 0:
@@ -2388,9 +2388,9 @@ void sub_819A344(u8 a0, u8 *a1, u8 a2)
             break;
         case 1:
             if (IsNationalPokedexEnabled())
-                string = ConvertIntToDecimalStringN(string, pokedex_count(1), 0, 3);
+                string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(1), 0, 3);
             else
-                string = ConvertIntToDecimalStringN(string, sub_80C0844(1), 0, 3);
+                string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(1), 0, 3);
             *string = EOS;
             break;
         case 2:
