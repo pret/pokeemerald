@@ -641,7 +641,7 @@ static u8 sub_818E13C(void)
     return retval;
 }
 #else
-__attribute__((naked)) static u8 sub_818E13C(void)
+ASM_DIRECT static u8 sub_818E13C(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmovs r7, 0x1\n"

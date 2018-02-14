@@ -2542,7 +2542,7 @@ void sub_812A0E8(u8 taskId)
     }
 }
 #else
-__attribute__((naked)) void sub_812A0E8(u8 taskId)
+ASM_DIRECT void sub_812A0E8(u8 taskId)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tlsls r0, 24\n"

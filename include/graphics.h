@@ -2713,19 +2713,16 @@ extern const u8 gRaySceneHushBg_Pal[];
 extern const u8 gRaySceneHushBg_Gfx[];
 extern const u8 gRaySceneHushRing_Gfx[];
 
-//main menu/birch graphics
-extern const u16 gMainMenuBgPal[];
-extern const u16 gMainMenuTextPal[];
-extern const u16 gUnknown_082FECFC[];
-extern const u16 gUnknown_082FF028[];
-extern const u16 gUnknown_082FF018[];
-extern const u8 gBirchIntroShadowGfx[];
-extern const u8 gUnknown_082FEEF0[];
-
 //menu graphics
 extern const u16 gFireRedMenuElements1_Pal[16];
 extern const u16 gFireRedMenuElements2_Pal[16];
 extern const u16 gFireRedMenuElements3_Pal[16];
 extern const u8 gFireRedMenuElements_Gfx[];
+
+//item menu graphics
+extern const u8 gBagScreen_Gfx[];
+extern const u16 gBagScreenFemale_Pal[];
+extern const u16 gBagScreenMale_Pal[];
+extern const u8 gBagMenuHMIcon_Gfx[];
 
 #endif //GUARD_GRAPHICS_H

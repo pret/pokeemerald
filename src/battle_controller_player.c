@@ -26,44 +26,19 @@
 #include "random.h"
 #include "pokeball.h"
 #include "data2.h"
+#include "battle_setup.h"
+#include "item_use.h"
+#include "recorded_battle.h"
 
-extern u32 gBattleControllerExecFlags;
-extern u8 gActiveBattler;
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gAbsentBattlerFlags;
-extern u8 gBattlersCount;
-extern bool8 gDoingBattleAnim;
-extern u8 gPlayerDpadHoldFrames;
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern void (*gPreBattleCallback1)(void);
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern u8 gMultiUsePlayerCursor;
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern u16 gPartnerTrainerId;
-extern struct SpriteTemplate gUnknown_0202499C;
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
-extern u16 gSpecialVar_ItemId;
 extern u8 gUnknown_0203CEE8;
 extern u8 gUnknown_0203CEE9;
 extern u8 gUnknown_0203CF00[];
-extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gBattleOutcome;
-extern u8 gNumberOfMovesToChoose;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern s32 gUnknown_0203CD70;
-extern u8 gBankInMenu;
-extern u32 gBattlePalaceMoveSelectionRngValue;
-extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
-extern u8 gUnknown_020244B4[];
-extern u16 gUnknown_020243FC;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
+extern struct SpriteTemplate gUnknown_0202499C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
@@ -897,7 +872,7 @@ static void HandleMoveSwitchting(void)
 
 static void sub_80586F8(void)
 {
-    if (gLinkVSyncDisabled == 0)
+    if (gWirelessCommType == 0)
     {
         if (gReceivedRemoteLinkPlayers == 0)
         {
@@ -933,7 +908,7 @@ void sub_80587B0(void)
         {
             if (sub_800A520())
             {
-                if (gLinkVSyncDisabled == 0)
+                if (gWirelessCommType == 0)
                     sub_800AC34();
                 else
                     sub_800ADF8();
@@ -2677,7 +2652,7 @@ static void PlayerHandleChooseItem(void)
 
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
-    gBankInMenu = gActiveBattler;
+    gBattlerInMenuId = gActiveBattler;
 
     for (i = 0; i < 3; i++)
         gUnknown_0203CF00[i] = gBattleBufferA[gActiveBattler][1 + i];
@@ -2704,7 +2679,7 @@ static void PlayerHandleChoosePokemon(void)
         *(&gBattleStruct->field_B0) = gBattleBufferA[gActiveBattler][3];
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gBattlerControllerFuncs[gActiveBattler] = sub_80597CC;
-        gBankInMenu = gActiveBattler;
+        gBattlerInMenuId = gActiveBattler;
     }
 }
 
@@ -2953,7 +2928,7 @@ static void PlayerHandleFaintingCry(void)
 static void PlayerHandleIntroSlide(void)
 {
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_020243FC |= 1;
+    gIntroSlideFlags |= 1;
     PlayerBufferExecCompleted();
 }
 
@@ -2981,7 +2956,7 @@ static void PlayerHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
 
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_21;
@@ -3039,7 +3014,7 @@ static void PlayerHandleDrawPartyStatusSummary(void)
     else
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
-        gUnknown_020244B4[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
+        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
@@ -3061,7 +3036,7 @@ static void sub_805CE38(void)
 static void PlayerHandleCmd49(void)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
     PlayerBufferExecCompleted();
 }
 

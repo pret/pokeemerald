@@ -1,11 +1,12 @@
+#include "constants/battle.h"
+#include "constants/battle_script_commands.h"
+#include "constants/battle_anim.h"
+#include "constants/battle_string_ids.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
-	.include "constants/battle_constants.inc"
-	.include "constants/battle_script_constants.inc"
-	.include "constants/battle_text.inc"
 
 	.section script_data, "aw", %progbits
 
@@ -46,7 +47,7 @@ gBattlescriptsForSafariActions:: @ 82DBD58
 	.4byte BattleScript_82DBEE3
 
 BattleScript_BallThrow::
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_WALLY_TUTORIAL, BattleScript_BallThrowByWally
+	jumpifword CMP_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_WALLY_TUTORIAL, BattleScript_BallThrowByWally
 	printstring STRINGID_PLAYERUSEDITEM
 	handleballthrow
 
@@ -56,11 +57,11 @@ BattleScript_BallThrowByWally::
 
 BattleScript_SafariBallThrow::
 	printstring STRINGID_PLAYERUSEDITEM
-	updatestatusicon ATTACKER
+	updatestatusicon BS_ATTACKER
 	handleballthrow
 
 BattleScript_SuccessBallThrow::
-	jumpifhalfword EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_PrintCaughtMonInfo
+	jumpifhalfword CMP_EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_PrintCaughtMonInfo
 	incrementgamestat 0xB
 BattleScript_PrintCaughtMonInfo::
 	printstring STRINGID_GOTCHAPKMNCAUGHT
@@ -81,22 +82,22 @@ BattleScript_TryNicknameCaughtMon::
 BattleScript_GiveCaughtMonEnd::
 	givecaughtmon
 BattleScript_SuccessBallThrowEnd::
-	setbyte gBattleOutcome, CAUGHT
+	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 
 BattleScript_WallyBallThrow::
 	printstring STRINGID_GOTCHAPKMNCAUGHT2
-	setbyte gBattleOutcome, CAUGHT
+	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 
 BattleScript_ShakeBallThrow::
 	printfromtable gBallEscapeStringIds
 	waitmessage 0x40
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_ShakeBallThrowEnd
-	jumpifbyte NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_ShakeBallThrowEnd
+	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_ShakeBallThrowEnd
+	jumpifbyte CMP_NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_ShakeBallThrowEnd
 	printstring STRINGID_OUTOFSAFARIBALLS
 	waitmessage 0x40
-	setbyte gBattleOutcome, OUT_OF_BALLS
+	setbyte gBattleOutcome, B_OUTCOME_NO_SAFARI_BALLS
 BattleScript_ShakeBallThrowEnd::
 	finishaction
 
@@ -121,11 +122,11 @@ BattleScript_OpponentUsesHealItem::
 	waitmessage 0x40
 	useitemonopponent
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
-	healthbarupdate ATTACKER
-	datahpupdate ATTACKER
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
 	waitmessage 0x40
-	updatestatusicon ATTACKER
+	updatestatusicon BS_ATTACKER
 	setbyte sMOVEEND_STATE, 0xF
 	moveend 0x1, 0x0
 	finishaction
@@ -139,7 +140,7 @@ BattleScript_OpponentUsesStatusCureItem::
 	useitemonopponent
 	printfromtable gTrainerItemCuredStatusStringIds
 	waitmessage 0x40
-	updatestatusicon ATTACKER
+	updatestatusicon BS_ATTACKER
 	setbyte sMOVEEND_STATE, 0xF
 	moveend 0x1, 0x0
 	finishaction
@@ -172,7 +173,7 @@ BattleScript_OpponentUsesGuardSpecs::
 
 BattleScript_RunByUsingItem::
 	playse SE_NIGERU
-	setbyte gBattleOutcome, RAN
+	setbyte gBattleOutcome, B_OUTCOME_RAN
 	finishturn
 
 BattleScript_ActionWatchesCarefully::
@@ -188,7 +189,7 @@ BattleScript_ActionGetNear::
 BattleScript_ActionThrowPokeblock::
 	printstring STRINGID_THREWPOKEBLOCKATPKMN
 	waitmessage 0x40
-	playanimation ATTACKER, ANIM_x4, NULL
+	playanimation BS_ATTACKER, B_ANIM_x4, NULL
 	printfromtable gSafariPokeblockResultStringIds
 	waitmessage 0x40
 	end2
@@ -198,7 +199,7 @@ BattleScript_82DBEE3::
 	waitmessage 0x40
 	returnatktoball
 	waitstate
-	trainerslidein TARGET
+	trainerslidein BS_TARGET
 	waitstate
 	printstring STRINGID_YOUTHROWABALLNOWRIGHT
 	waitmessage 0x40

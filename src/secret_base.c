@@ -32,6 +32,7 @@
 #include "international_string_util.h"
 #include "event_data.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "rom6.h"
 #include "decoration.h"
 #include "link.h"

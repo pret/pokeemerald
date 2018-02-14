@@ -153,11 +153,6 @@ enum
     HEALTHBOX_GFX_117,
 };
 
-extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattlersCount;
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-
 extern const u8 * const gNatureNamePointers[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 
@@ -176,9 +171,6 @@ extern const u8 gBattleInterface_BallDisplayGfx[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u8 gHealthboxElementsGfxTable[][32];
-
-// functions
-extern void LoadBattleBarGfx(u8 arg0);
 
 // this file's functions
 
@@ -658,7 +650,7 @@ static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
 }
 
 #else
-__attribute__((naked))
+ASM_DIRECT
 static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
 {
     asm(".syntax unified\n\
@@ -1536,7 +1528,7 @@ u8 CreatePartyStatusSummarySprites(u8 bank, struct HpAndStatus *partyInfo, u8 ar
         gSprites[barSpriteId].pos1.x += 96;
     }
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         ballIconSpritesIds[i] = CreateSpriteAtEnd(&sStatusSummaryBallsSpriteTemplates[isOpponent], bar_X, bar_Y - 4, 9);
 

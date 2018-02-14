@@ -448,4 +448,5 @@ _081357EE:
 	.pool
 	thumb_func_end sub_81357BC
 
+
 	.align 2, 0 @ Don't pad with nop.

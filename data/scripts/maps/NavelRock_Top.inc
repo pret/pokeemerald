@@ -63,7 +63,7 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	setvar VAR_0x8004, 250
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
-	special DoScriptedWildBattle
+	special CreateObedientEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate

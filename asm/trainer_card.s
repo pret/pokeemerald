@@ -187,7 +187,7 @@ _080C2830:
 	bl sub_80C4630
 	b _080C28D4
 _080C2836:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080C2852
@@ -198,7 +198,7 @@ _080C2836:
 	bl sub_800E0E8
 	movs r0, 0xE6
 	movs r1, 0x96
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _080C2852:
 	movs r6, 0x1
 	negs r6, r6
@@ -4754,7 +4754,7 @@ sub_80C4FF0: @ 80C4FF0
 	ldr r1, =0x00000583
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_806EFF0
+	bl FacilityClassToPicIndex
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, =gUnknown_0856FB18
@@ -4795,7 +4795,7 @@ _080C5060:
 	adds r0, r1
 	adds r0, r2
 	ldrb r0, [r0]
-	bl sub_806EFF0
+	bl FacilityClassToPicIndex
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, =gUnknown_0856FB18

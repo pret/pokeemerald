@@ -1917,7 +1917,7 @@ gBattleMoves:: @ 831C898
 @ Curse
 	.byte 0x6d @ effect
 	.byte 0 @ power
-	.byte TYPE_UNKNOWN
+	.byte TYPE_MYSTERY
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ side effect chance

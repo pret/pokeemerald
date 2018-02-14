@@ -21,8 +21,8 @@ void sub_8039B58(struct Sprite *sprite);
 void sub_8039BB4(struct Sprite *sprite);
 void sub_80105DC(struct Sprite *sprite);
 void sub_8039C00(struct Sprite *sprite);
-void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d);
-void dp11b_obj_free(u8 bank, bool8 b);
+void dp11b_obj_instanciate(u8 battlerId, u8 b, s8 c, s8 d);
+void dp11b_obj_free(u8 battlerId, bool8 b);
 void sub_8039E44(struct Sprite *sprite);
 void sub_8039E60(struct Sprite *sprite);
 void sub_8039E84(struct Sprite *sprite);
@@ -35,12 +35,12 @@ void sub_803B3AC(void); // unused
 void sub_803B598(void); // unused
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
-void sub_803BDA0(u8 bank);
+void sub_803BDA0(u8 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
-u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves);
+u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
-bool8 TryRunFromBattle(u8 bank);
+bool8 TryRunFromBattle(u8 battlerId);
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];

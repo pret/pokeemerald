@@ -1,8 +1,5 @@
     .include "src/decompress.o"
-
-gTrainerId: @ 2020000
-	.space 0x4
-
+	.include "src/main.o"
     .include "src/window.o"
     .include "src/text.o"
     .include "src/sprite.o"
@@ -21,66 +18,8 @@ gStringVar4: @ 2021FC4
 	.space 0x3E8
 
 	.include "src/string_util.o"
-
-gUnknown_020223BC: @ 20223BC
-	.space 0x1
-
-gUnknown_020223BD: @ 20223BD
-	.space 0x3
-
-gUnknown_020223C0: @ 20223C0
-	.space 0x4
-
-gBlockRecvBuffer: @ 20223C4
-	.space 0x500
-
-gBlockSendBuffer: @ 20228C4 gBlockSendBuffer
-	.space 0x100
-
-gUnknown_020229C4: @ 20229C4
-	.space 0x2
-
-gLinkType: @ 20229C6
-	.space 0x2
-
-gUnknown_020229C8: @ 20229C8
-	.space 0x4
-
-gUnknown_020229CC: @ 20229CC
-	.space 0x1C
-
-gLinkPlayers: @ 20229E8
-	.space 0x24
-    
-gUnknown_02022A0C: @ 2022A0C
-	.space 0x68
-
-gUnknown_02022A74: @ 2022A74
-	.space 0x8C
-
-gUnknown_02022B00: @ 2022B00
-	.space 0x8
-
-gUnknown_02022B08: @ 2022B08
-	.space 0x4
-
-gUnknown_02022B0C: @ 2022B0C
-	.space 0x4
-
-gUnknown_02022B10: @ 2022B10
-	.space 0x4
-
-gUnknown_02022B14: @ 2022B14
-	.space 0xE
-
-gUnknown_02022B22: @ 2022B22
-	.space 0xA
-
-gUnknown_02022B2C: @ 2022B2C
-	.space 0x18
-
-gUnknown_02022B44: @ 2022B44
-	.space 0xDC
+	.include "src/link.o"
+	.include "src/link_rfu.o"
 
 gUnknown_02022C20: @ 2022C20
 	.space 0xC
@@ -178,6 +117,7 @@ gUnknown_02022CFC: @ 2022CFC
 gUnknown_02022D00: @ 2022D00
 	.space 0x4
 
+@ src/main_menu.c
 gUnknown_02022D04: @ 2022D04
 	.include "src/main_menu.o"
 
@@ -193,8 +133,7 @@ gUnknown_02022D0A: @ 2022D0A
 gUnknown_02022D0C: @ 2022D0C
 	.space 0x4
 
-gBattleBuffersTransferData: @ 2022D10
-	.space 0x100
+	.include "src/battle_controllers.o"
 
 gUnknown_02022E10: @ 2022E10
 	.space 0x4
@@ -236,297 +175,9 @@ gBattle_WIN1V: @ 2022E2A
 	.space 0x2
 
     .include "src/battle_message.o"
+	.include "src/battle_main.o"
 
-gUnknown_02022F88: @ 2022F88
-	.space 0x64
-
-gBattleTypeFlags: @ 2022FEC
-	.space 0x4
-
-gBattleTerrain: @ 2022FF0
-	.space 0x4
-
-gUnknown_02022FF4: @ 2022FF4
-	.space 0x4
-
-gUnknown_02022FF8: @ 2022FF8
-	.space 0x60
-
-gUnknown_02023058: @ 2023058
-	.space 0x4
-
-gUnknown_0202305C: @ 202305C
-	.space 0x4
-
-gUnknown_02023060: @ 2023060
-	.space 0x4
-
-gBattleBufferA: @ 2023064
-	.space 0x800
-
-gBattleBufferB: @ 2023864
-	.space 0x800
-
-gActiveBattler: @ 2024064
-	.space 0x4
-
-gBattleControllerExecFlags: @ 2024068
-	.space 0x4
-
-gBattlersCount: @ 202406C
-	.space 0x2
-
-gBattlerPartyIndexes: @ 202406E
-	.space 0x8
-
-gBattlerPositions: @ 2024076
-	.space 0x4
-
-gActionsByTurnOrder: @ 202407A
-	.space 0x4
-
-gBattleTurnOrder: @ 202407E
-	.space 0x4
-
-gCurrentTurnActionNumber: @ 2024082
-	.space 0x1
-
-gCurrentActionFuncId: @ 2024083
-	.space 0x1
-
-gBattleMons: @ 2024084
-	.space 0x160
-
-gBattlerSpriteIds: @ 20241E4
-	.space 0x4
-
-gCurrMovePos: @ 20241E8
-	.space 0x1
-
-gUnknown_020241E9: @ 20241E9
-	.space 0x1
-
-gCurrentMove: @ 20241EA
-	.space 0x2
-
-gChosenMove: @ 20241EC
-	.space 0x2
-
-gRandomMove: @ 20241EE
-	.space 0x2
-
-gBattleMoveDamage: @ 20241F0
-	.space 0x4
-
-gHpDealt: @ 20241F4
-	.space 0x4
-
-gTakenDmg: @ 20241F8
-	.space 0x10
-
-gLastUsedItem: @ 2024208
-	.space 0x2
-
-gLastUsedAbility: @ 202420A
-	.space 0x1
-
-gBattlerAttacker: @ 202420B
-	.space 0x1
-
-gBattlerTarget: @ 202420C
-	.space 0x1
-
-gBank1: @ 202420D
-	.space 0x1
-
-gEffectBank: @ 202420E
-	.space 0x1
-
-gStringBattler: @ 202420F
-	.space 0x1
-
-gAbsentBattlerFlags: @ 2024210
-	.space 0x1
-
-gCritMultiplier: @ 2024211
-	.space 0x1
-
-gMultiHitCounter: @ 2024212
-	.space 0x2
-
-gBattlescriptCurrInstr: @ 2024214
-	.space 0x8
-
-gChosenActionByBattler: @ 202421C
-	.space 0x4
-
-gSelectionBattleScripts: @ 2024220
-	.space 0x10
-
-gPalaceSelectionBattleScripts: @ 2024230
-	.space 0x10
-
-gLastPrintedMoves: @ 2024240
-	.space 0x8
-
-gLastMoves: @ 2024248
-	.space 0x8
-
-gLastLandedMoves: @ 2024250
-	.space 0x8
-
-gLastHitByType: @ 2024258
-	.space 0x8
-
-gLastResultingMoves: @ 2024260
-	.space 0x8
-
-gLockedMoves: @ 2024268
-	.space 0x8
-
-gLastHitBy: @ 2024270
-	.space 0x4
-
-gChosenMoveByBattler: @ 2024274
-	.space 0x8
-
-gMoveResultFlags: @ 202427C
-	.space 0x4
-
-gHitMarker: @ 2024280
-	.space 0x4
-
-gUnknown_02024284: @ 2024284
-	.space 0x4
-
-gTakenDmgBanks: @ 2024288
-	.space 0x4
-
-gUnknown_0202428C: @ 202428C
-	.space 0x2
-
-gSideStatuses: @ 202428E
-	.space 0x6
-
-gSideTimers: @ 2024294
-	.space 0x18
-
-gStatuses3: @ 20242AC
-	.space 0x10
-
-gDisableStructs: @ 20242BC
-	.space 0x70
-
-gPauseCounterBattle: @ 202432C
-	.space 0x2
-
-gPaydayMoney: @ 202432E
-	.space 0x2
-
-gRandomTurnNumber: @ 2024330
-	.space 0x2
-
-gBattleCommunication: @ 2024332
-	.space 0x1
-
-gUnknown_02024333: @ 2024333
-	.space 0x7
-
-gBattleOutcome: @ 202433A
-	.space 0x2
-
-gProtectStructs: @ 202433C
-	.space 0x40
-
-gSpecialStatuses: @ 202437C
-	.space 0x50
-
-gBattleWeather: @ 20243CC
-	.space 0x4
-
-gWishFutureKnock: @ 20243D0
-	.space 0x2C
-
-gUnknown_020243FC: @ 20243FC
-	.space 0x2
-
-gSentPokesToOpponent: @ 20243FE
-	.space 0x2
-
-gDynamicBasePower: @ 2024400
-	.space 0x2
-
-gExpShareExp: @ 2024402
-	.space 0x2
-
-gEnigmaBerries: @ 2024404
-	.space 0x70
-
-gBattleScripting: @ 2024474
-	.space 0x28
-
-gBattleStruct: @ 202449C
-	.space 0x4
-
-gLinkBattleSendBuffer: @ 20244A0
-	.space 0x4
-
-gLinkBattleRecvBuffer: @ 20244A4
-	.space 0x4
-
-gBattleResources: @ 20244A8
-	.space 0x4
-
-gActionSelectionCursor: @ 20244AC
-	.space 0x4
-
-gMoveSelectionCursor: @ 20244B0
-	.space 0x4
-
-gUnknown_020244B4: @ 20244B4
-	.space 0x4
-
-gBankInMenu: @ 20244B8
-	.space 0x1
-
-gDoingBattleAnim: @ 20244B9
-	.space 0x3
-
-gTransformedPersonalities: @ 20244BC
-	.space 0x10
-
-gPlayerDpadHoldFrames: @ 20244CC
-	.space 0x4
-
-gBattleSpritesDataPtr: @ 20244D0
-	.space 0x4
-
-gMonSpritesGfxPtr: @ 20244D4
-	.space 0x4
-
-gUnknown_020244D8: @ 20244D8
-	.space 0x4
-
-gUnknown_020244DC: @ 20244DC
-	.space 0x4
-
-gBattleMovePower: @ 20244E0
-	.space 0x2
-
-gMoveToLearn: @ 20244E2
-	.space 0x2
-
-gBattleMonForms: @ 20244E4
-	.space 0x4
-
-	.include "src/pokemon_1.o"
-
-gUnknown_0202499C: @ 202499C
-	.space 0x18
-
-gUnknown_020249B4: @ 20249B4
-	.space 0x8
-
+	.include "src/pokemon.o"
 	.include "src/random.o"
 	.include "src/daycare.o"
     .include "src/load_save.o"
@@ -1305,37 +956,9 @@ gUnknown_0203CE50: @ 203CE50
 	.space 0x4
 
 gUnknown_0203CE54: @ 203CE54
-	.space 0x4
-
-gUnknown_0203CE58: @ 203CE58
-	.space 0x5
-
-gUnknown_0203CE5D: @ 203CE5D
-	.space 0x1
-
-gUnknown_0203CE5E: @ 203CE5E
-	.space 0x2
-
-gUnknown_0203CE60: @ 203CE60
-	.space 0xA
-
-gUnknown_0203CE6A: @ 203CE6A
-	.space 0x6
-
-gUnknown_0203CE70: @ 203CE70
-	.space 0x4
-
-gUnknown_0203CE74: @ 203CE74
-	.space 0x4
-
-gUnknown_0203CE78: @ 203CE78
-	.space 0x4
-
-gSpecialVar_ItemId: @ 203CE7C
-	.space 0x4
-
-gUnknown_0203CE80: @ 203CE80
-	.space 0x4
+	.align 2
+    
+    .include "src/item_menu.o"
 
 gUnknown_0203CE84: @ 203CE84
 	.space 0x8

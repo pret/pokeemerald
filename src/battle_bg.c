@@ -18,6 +18,7 @@
 #include "window.h"
 #include "text_window.h"
 #include "menu.h"
+#include "battle_setup.h"
 
 struct BattleBackground
 {
@@ -35,13 +36,10 @@ extern const struct BgTemplate gUnknown_0831AA08[4];
 extern const struct WindowTemplate *gUnknown_0831ABA0[];
 extern const struct BattleBackground gBattleTerrainTable[];
 
-extern u8 gBattleTerrain;
-extern u16 gTrainerBattleOpponent_A;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
-extern u16 gPartnerTrainerId;
 
 extern u8 GetCurrentMapBattleScene(void);
 

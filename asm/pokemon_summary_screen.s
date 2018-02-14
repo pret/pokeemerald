@@ -1173,7 +1173,7 @@ sub_81C47B4: @ 81C47B4
 	ands r0, r1
 	strb r0, [r7, 0x5]
 	ldrh r0, [r6, 0x2]
-	bl IsPokeSpriteNotFlipped
+	bl IsMonSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C4828
@@ -1221,7 +1221,7 @@ sub_81C4844: @ 81C4844
 	cmp r0, 0x1
 	beq _081C487E
 	ldrh r0, [r4, 0x2E]
-	bl IsPokeSpriteNotFlipped
+	bl IsMonSpriteNotFlipped
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x30]

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_message.h"
-#include "battle_string_ids.h"
+#include "constants/battle_string_ids.h"
 #include "constants/moves.h"
 #include "text.h"
 #include "string_util.h"
@@ -13,23 +13,11 @@
 #include "palette.h"
 #include "battle_controllers.h"
 #include "battle_setup.h"
+#include "menu.h"
+#include "recorded_battle.h"
+#include "international_string_util.h"
 
-extern u16 gLastUsedItem;
-extern u8 gLastUsedAbility;
-extern u8 gActiveBattler;
-extern u8 gBattlerAttacker;
-extern u8 gBattlerTarget;
-extern u8 gStringBattler;
-extern u8 gEffectBank;
 extern u8 gBattlerAbilities[MAX_BATTLERS_COUNT];
-extern u32 gBattleTypeFlags;
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
-extern u16 gPartnerTrainerId;
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203C7B4;
 extern struct StringInfoBattle *gStringInfo;
 
@@ -56,9 +44,6 @@ extern void GetEreaderTrainerName(u8 *txtPtr);
 extern void sub_81A36D0(u8 arg0, u16 trainerId); // battle_frontier_2
 extern void sub_81D572C(u8 arg0, u16 trainerId); // pokenav
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
-extern s32 GetStringCenterAlignXOffsetWithLetterSpacing(u8 fontId, const u8 *str, s32 totalWidth, s16 letterSpacing);
-extern u8 GetTextSpeedInRecordedBattle(void);
-extern u8 GetPlayerTextSpeed(void);
 
 // this file's functions
 static void sub_814F8F8(u8 *textPtr);
@@ -1436,7 +1421,7 @@ void BufferStringBattle(u16 stringID)
     gBattleScripting.battler = gStringInfo->scrActive;
     *(&gBattleStruct->field_52) = gStringInfo->unk1605E;
     *(&gBattleStruct->hpScale) = gStringInfo->hpScale;
-    gStringBattler = gStringInfo->StringBank;
+    gPotentialItemEffectBattler = gStringInfo->StringBank;
     *(&gBattleStruct->stringMoveType) = gStringInfo->moveType;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
@@ -1903,7 +1888,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
                 break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gEffectBank, gBattlerPartyIndexes[gEffectBank])
+                HANDLE_NICKNAME_STRING_CASE(gEffectBattler, gBattlerPartyIndexes[gEffectBattler])
                 break;
             case B_TXT_ACTIVE_NAME_WITH_PREFIX: // active bank name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
@@ -1930,10 +1915,10 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                     {
                         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
                         {
-                            if ((gBattleScripting.multiplayerId != 0 && (gStringBattler & BIT_SIDE))
-                                || (gBattleScripting.multiplayerId == 0 && !(gStringBattler & BIT_SIDE)))
+                            if ((gBattleScripting.multiplayerId != 0 && (gPotentialItemEffectBattler & BIT_SIDE))
+                                || (gBattleScripting.multiplayerId == 0 && !(gPotentialItemEffectBattler & BIT_SIDE)))
                             {
-                                StringCopy(text, gEnigmaBerries[gStringBattler].name);
+                                StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
                                 StringAppend(text, gText_BerrySuffix);
                                 toCpy = text;
                             }
@@ -1944,9 +1929,9 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                         }
                         else
                         {
-                            if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gStringBattler)
+                            if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gPotentialItemEffectBattler)
                             {
-                                StringCopy(text, gEnigmaBerries[gStringBattler].name);
+                                StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
                                 StringAppend(text, gText_BerrySuffix);
                                 toCpy = text;
                             }
@@ -1979,11 +1964,11 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = gAbilityNames[gBattlerAbilities[gBattleScripting.battler]];
                 break;
             case B_TXT_EFF_ABILITY: // effect bank ability
-                toCpy = gAbilityNames[gBattlerAbilities[gEffectBank]];
+                toCpy = gAbilityNames[gBattlerAbilities[gEffectBattler]];
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
-                    toCpy = gTrainerClassNames[GetSecretBaseTrainerNameIndex()];
+                    toCpy = gTrainerClassNames[GetSecretBaseTrainerClass()];
                 else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
                     toCpy = gTrainerClassNames[sub_8068BB0()];
                 else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)
@@ -2313,9 +2298,9 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
                 if (hword == ITEM_ENIGMA_BERRY)
                 {
-                    if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gStringBattler)
+                    if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 == gPotentialItemEffectBattler)
                     {
-                        StringCopy(dst, gEnigmaBerries[gStringBattler].name);
+                        StringCopy(dst, gEnigmaBerries[gPotentialItemEffectBattler].name);
                         StringAppend(dst, gText_BerrySuffix);
                     }
                     else
@@ -2360,20 +2345,20 @@ static void sub_814F8F8(u8* textBuff)
 
 // Appends "!" to the text buffer `dst`. In the original Japanese this looked
 // into the table of moves at sUnknownMoveTable and varied the line accordingly.
-// 
+//
 // gText_ExclamationMark was a plain "!", used for any attack not on the list.
 // It resulted in the translation "<NAME>'s <ATTACK>!".
-// 
+//
 // gText_ExclamationMark2 was "を つかった！". This resulted in the translation
 // "<NAME> used <ATTACK>!", which was used for all attacks in English.
-// 
+//
 // gText_ExclamationMark3 was "した！". This was used for those moves whose
 // names were verbs, such as Recover, and resulted in translations like "<NAME>
 // recovered itself!".
-// 
+//
 // gText_ExclamationMark4 was "を した！" This resulted in a translation of
 // "<NAME> did an <ATTACK>!".
-// 
+//
 // gText_ExclamationMark5 was " こうげき！" This resulted in a translation of
 // "<NAME>'s <ATTACK> attack!".
 static void sub_814F950(u8* dst)

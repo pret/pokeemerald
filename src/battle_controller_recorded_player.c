@@ -23,36 +23,11 @@
 #include "reshow_battle_screen.h"
 #include "pokeball.h"
 #include "data2.h"
+#include "item_use.h"
 
-extern u32 gBattleControllerExecFlags;
-extern u8 gActiveBattler;
-extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
-extern u8 gBattlersCount;
-extern bool8 gDoingBattleAnim;
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
-extern void (*gPreBattleCallback1)(void);
-extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
-extern struct SpriteTemplate gUnknown_0202499C;
-extern u16 gSpecialVar_ItemId;
-extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gBattleOutcome;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u8 gBankInMenu;
-extern u16 gUnknown_020243FC;
-extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
-extern u16 gPartnerTrainerId;
-extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
-extern u8 gBattlerTarget;
-extern u8 gAbsentBattlerFlags;
-extern u8 gUnknown_020244B4[];
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
-extern u8 gBattleCommunication[];
 extern u8 gUnknown_0203C7B4;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
@@ -63,6 +38,7 @@ extern const struct BattleMove gBattleMoves[];
 
 extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
 extern void sub_806A068(u16, u8);
+extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
 static void RecordedPlayerHandleGetMonData(void);
@@ -1230,7 +1206,7 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            trainerPicId = GetActiveBankLinkPlayerGender();
+            trainerPicId = GetActiveBattlerLinkPlayerGender();
         else
             trainerPicId = gLinkPlayers[gUnknown_0203C7B4].gender;
     }
@@ -1684,7 +1660,7 @@ static void RecordedPlayerHandleFaintingCry(void)
 static void RecordedPlayerHandleIntroSlide(void)
 {
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
-    gUnknown_020243FC |= 1;
+    gIntroSlideFlags |= 1;
     RecordedPlayerBufferExecCompleted();
 }
 
@@ -1719,7 +1695,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
 
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_120;
@@ -1766,7 +1742,7 @@ static void RecordedPlayerHandleDrawPartyStatusSummary(void)
     else
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
-        gUnknown_020244B4[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
+        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
@@ -1788,7 +1764,7 @@ static void sub_818CDF4(void)
 static void RecordedPlayerHandleCmd49(void)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gUnknown_020244B4[gActiveBattler]].func = sub_8073C30;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
     RecordedPlayerBufferExecCompleted();
 }
 

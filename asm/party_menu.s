@@ -11943,7 +11943,7 @@ _081B6558:
 	adds r1, r5, 0
 _081B6572:
 	adds r3, r6, 0
-	bl ExecuteTableBasedItemEffect_
+	bl ExecuteTableBasedItemEffect
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4-r6}
@@ -16302,7 +16302,7 @@ _081B8BA8:
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r1, =gBattlerPartyIndexes
-	ldr r0, =gBankInMenu
+	ldr r0, =gBattlerInMenuId
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -16334,7 +16334,7 @@ _081B8BFC:
 	b _081B8C42
 	.pool
 _081B8C20:
-	ldr r0, =gBankInMenu
+	ldr r0, =gBattlerInMenuId
 	ldrb r0, [r0]
 	ldr r1, =gBattlerPartyIndexes
 	lsls r0, 1

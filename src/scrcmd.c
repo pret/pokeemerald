@@ -31,7 +31,6 @@
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokemon_3.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "overworld.h"
@@ -62,13 +61,6 @@ static EWRAM_DATA u16 sMovingNpcId = 0;
 static EWRAM_DATA u16 sMovingNpcMapBank = 0;
 static EWRAM_DATA u16 sMovingNpcMapId = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
-
-extern u16 gSpecialVar_0x8000;
-extern u16 gSpecialVar_0x8001;
-extern u16 gSpecialVar_0x8002;
-extern u16 gSpecialVar_0x8004;
-
-extern u16 gSpecialVar_Result;
 
 extern u16 gSpecialVar_ContestCategory;
 
@@ -1536,7 +1528,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;
 }*/
-__attribute__((naked))
+ASM_DIRECT
 bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     asm("push {r4-r7,lr}\n\

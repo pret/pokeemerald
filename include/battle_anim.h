@@ -56,8 +56,8 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);
-bool8 IsBattlerSpriteVisible(u8 bank);
-void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible);
+bool8 IsBattlerSpriteVisible(u8 battlerId);
+void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible);
 bool8 IsContest(void);
 s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
@@ -76,7 +76,7 @@ void sub_80A6F3C(struct Sprite *sprite);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
-u8 sub_80A82E4(u8 bank);
+u8 sub_80A82E4(u8 battlerId);
 bool8 AnimateBallThrow(struct Sprite *sprite);
 
 enum
@@ -85,26 +85,26 @@ enum
     BANK_Y_POS,
 };
 
-u8 GetBattlerSpriteCoord(u8 bank, u8 attributeId);
+u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId);
 
-bool8 IsBattlerSpritePresent(u8 bank);
+bool8 IsBattlerSpritePresent(u8 battlerId);
 void sub_80A6C68(u8 arg0);
-u8 GetAnimBattlerSpriteId(u8 wantedBank);
+u8 GetAnimBattlerSpriteId(u8 wantedBattler);
 bool8 IsDoubleBattle(void);
 u8 sub_80A6D94(void);
 u8 sub_80A8364(u8);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
-u8 GetBattlerSpriteDefault_Y(u8 bank);
-u8 sub_80A82E4(u8 bank);
-u8 GetSubstituteSpriteDefault_Y(u8 bank);
+u8 GetBattlerSpriteDefault_Y(u8 battlerId);
+u8 sub_80A82E4(u8 battlerId);
+u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 
 // battle_anim_80A9C70.s
-void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
+void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
 // battle_anim_8170478.s
 u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
-u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 bank, u32 arg2, u8 ballId);
+u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 
 #endif // GUARD_BATTLE_ANIM_H

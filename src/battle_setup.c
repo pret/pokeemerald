@@ -5,7 +5,6 @@
 #include "battle_transition.h"
 #include "main.h"
 #include "task.h"
-#include "pokemon_3.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "constants/game_stat.h"
@@ -30,6 +29,8 @@
 #include "strings.h"
 #include "secret_base.h"
 #include "string_util.h"
+#include "overworld.h"
+#include "field_weather.h"
 
 enum
 {
@@ -59,14 +60,11 @@ extern void sub_81BE72C(void);
 extern void FreezeMapObjects(void);
 extern void sub_808BCF4(void);
 extern void sub_80EECC8(void);
-extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
-extern void c2_exit_to_overworld_2_switch(void);
 extern void Overworld_ClearSavedMusic(void);
 extern void CB2_WhiteOut(void);
 extern void sub_80AF6F0(void);
 extern void PlayBattleBGM(void);
 extern void sub_81DA57C(void);
-extern u8 GetSav1Weather(void);
 extern u8 Overworld_GetFlashLevel(void);
 extern u16 sub_81A9AA8(u8 localId);
 extern u16 sub_81D6180(u8 localId);
@@ -82,12 +80,6 @@ extern void sub_81D61E8(void);
 extern void sub_80982B8(void);
 extern void sub_81A9EDC(u16 a0);
 extern void sub_81D572C(u8 a0, u16 arg1);
-extern void IncrementGameStat(u8 statId);
-extern u32 GetGameStat(u8 statId);
-
-extern u32 gBattleTypeFlags;
-extern u8 gBattleOutcome;
-extern void (*gFieldCallback)(void);
 
 // this file's functions
 static void DoBattlePikeWildBattle(void);
@@ -996,8 +988,8 @@ static bool32 IsPlayerDefeated(u32 battleOutcome)
     case B_OUTCOME_WON:
     case B_OUTCOME_RAN:
     case B_OUTCOME_PLAYER_TELEPORTED:
-    case B_OUTCOME_POKE_FLED:
-    case B_OUTCOME_CAUGHT_POKE:
+    case B_OUTCOME_MON_FLED:
+    case B_OUTCOME_CAUGHT:
         return FALSE;
     default:
         return FALSE;

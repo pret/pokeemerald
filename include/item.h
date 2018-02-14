@@ -61,5 +61,8 @@ ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
 u16 itemid_get_market_price(u16 itemId);
 u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 pocketPos);
+void sub_80D6FB4(struct BagPocket*);
+void sub_80D6F64(struct BagPocket*);
+void sub_80D702C(struct ItemSlot*, s16, u16);
 
 #endif // ITEM_H
