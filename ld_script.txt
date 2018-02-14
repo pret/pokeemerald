@@ -207,7 +207,7 @@ SECTIONS {
         asm/contest_ai.o(.text);
         asm/battle_anim_sound_tasks.o(.text);
         src/battle_controller_safari.o(.text);
-        asm/fldeff_sweetscent.o(.text);
+        src/fldeff_sweetscent.o(.text);
         asm/battle_anim_815A0D4.o(.text);
         asm/learn_move.o(.text);
         asm/fldeff_softboiled.o(.text);
