@@ -57,5 +57,6 @@ u8 ListMenuInit(struct ListMenuTemplate *template, u16 cursorPage, u16 cursorPos
 s32 ListMenuHandleInputGetItemId(u8 listTaskId);
 void sub_81AE860(u8 listTaskId, u16 *a1, u16 *a2);
 void sub_81AE6C8(u8 listTaskId, u16 *a1, u16 *a2);
+u8 ListMenuGetYCoordForPrintingArrowCursor(u8);
 
 #endif //GUARD_LIST_MENU_H

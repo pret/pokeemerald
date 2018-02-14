@@ -3,6 +3,7 @@
 #include "global.h"
 #include "constants/decorations.h"
 #include "malloc.h"
+#include "main.h"
 #include "task.h"
 #include "palette.h"
 #include "list_menu.h"
@@ -38,6 +39,10 @@
 #include "link.h"
 #include "tv.h"
 #include "secret_base.h"
+
+extern void (*gFieldCallback)(void);
+
+extern void mapldr_default(void);
 
 // Static type declarations
 
@@ -244,7 +249,7 @@ void sub_80E8C98(void)
 
 void sub_80E8CB0(s16 *xPtr, s16 *yPtr, u16 tile)
 {
-    struct MapData *mapData;
+    const struct MapData *mapData;
     s16 x;
     s16 y;
 
@@ -773,7 +778,7 @@ void sub_80E9AD0(void)
     u16 i;
     u16 j;
     s16 tile;
-    struct MapEvents *events;
+    const struct MapEvents *events;
 
     events = gMapHeader.events;
     for (i = 0; i < events->bgEventCount; i ++)

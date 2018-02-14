@@ -79,7 +79,7 @@ SECTIONS {
         src/daycare.o(.text);
         src/egg_hatch.o(.text);
         src/battle_interface.o(.text);
-        asm/smokescreen.o(.text);
+        src/smokescreen.o(.text);
         src/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);
@@ -183,7 +183,7 @@ SECTIONS {
         asm/fldeff_flash.o(.text);
         asm/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);
-        asm/birch_pc.o(.text);
+        src/birch_pc.o(.text);
         src/hof_pc.o(.text);
         asm/field_specials.o(.text);
         asm/battle_records.o(.text);
@@ -246,7 +246,7 @@ SECTIONS {
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
         asm/battle_frontier_2.o(.text);
-        asm/item_menu.o(.text);
+        src/item_menu.o(.text);
         asm/list_menu.o(.text);
         asm/menu_indicators.o(.text);
         src/unk_text_util.o(.text);
@@ -520,7 +520,7 @@ SECTIONS {
         data/battle_frontier_1.o(.rodata);
         src/menu.o(.rodata);
         data/battle_frontier_2.o(.rodata);
-        data/item_menu.o(.rodata);
+        src/item_menu.o(.rodata);
         data/menu_indicators.o(.rodata);
         src/save_location.o(.rodata);
         data/item_icon.o(.rodata);

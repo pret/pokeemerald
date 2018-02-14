@@ -139,6 +139,14 @@ extern const u8 gMenuText_Use[];
 extern const u8 gMenuText_Toss[];
 extern const u8 gMenuText_Give[];
 extern const u8 gMenuText_Give2[];
+extern const u8 gMenuText_Register[];
+extern const u8 gMenuText_Check[];
+extern const u8 gMenuText_Walk[];
+extern const u8 gMenuText_Deselect[];
+extern const u8 gMenuText_CheckTag[];
+extern const u8 gMenuText_Confirm[];
+extern const u8 gMenuText_Show[];
+extern const u8 gMenuText_Give2[];
 
 extern const u8 gText_Cancel2[];
 
@@ -243,5 +251,53 @@ extern const u8 gText_SizeSlash[];
 extern const u8 gText_Var1DotVar2[];
 extern const u8 gText_ThreeMarks[];
 extern const u8 gText_FirmSlash[];
+
+//item menu screen text
+extern const u8 gText_CloseBag[];
+extern const u8 gText_ClearTo11Var1Clear5Var2[];
+extern const u8 gText_UnkF908Var1Clear7Var2[];
+extern const u8 gText_xVar1[];
+extern const u8 gText_ReturnToVar1[];
+extern const u8 gText_SelectorArrow2[];
+extern const u8 gText_MoveVar1Where[];
+extern const u8 gText_Var1IsSelected[];
+extern const u8 gText_TossHowManyVar1s[];
+extern const u8 gText_ConfirmTossItems[];
+extern const u8 gText_ThrewAwayVar2Var1s[];
+extern const u8 gText_CantWriteMail[];
+extern const u8 gText_NoPokemon[];
+extern const u8 gText_Var1CantBeHeld[];
+extern const u8 gText_Var1CantBeHeldHere[];
+extern const u8 gText_CantBuyKeyItem[];
+extern const u8 gText_HowManyToSell[];
+extern const u8 gText_ICanPayVar1[];
+extern const u8 gText_TurnedOverVar1ForVar2[];
+extern const u8 gText_DepositHowManyVar1[];
+extern const u8 gText_CantStoreImportantItems[];
+extern const u8 gText_DepositedVar2Var1s[];
+extern const u8 gText_NoRoomForItems[];
+extern const u8 gText_ThreeDashes[];
+
+extern const u8 gBirchDexRatingText_LessThan10[];
+extern const u8 gBirchDexRatingText_LessThan20[];
+extern const u8 gBirchDexRatingText_LessThan30[];
+extern const u8 gBirchDexRatingText_LessThan40[];
+extern const u8 gBirchDexRatingText_LessThan50[];
+extern const u8 gBirchDexRatingText_LessThan60[];
+extern const u8 gBirchDexRatingText_LessThan70[];
+extern const u8 gBirchDexRatingText_LessThan80[];
+extern const u8 gBirchDexRatingText_LessThan90[];
+extern const u8 gBirchDexRatingText_LessThan100[];
+extern const u8 gBirchDexRatingText_LessThan110[];
+extern const u8 gBirchDexRatingText_LessThan120[];
+extern const u8 gBirchDexRatingText_LessThan130[];
+extern const u8 gBirchDexRatingText_LessThan140[];
+extern const u8 gBirchDexRatingText_LessThan150[];
+extern const u8 gBirchDexRatingText_LessThan160[];
+extern const u8 gBirchDexRatingText_LessThan170[];
+extern const u8 gBirchDexRatingText_LessThan180[];
+extern const u8 gBirchDexRatingText_LessThan190[];
+extern const u8 gBirchDexRatingText_LessThan200[];
+extern const u8 gBirchDexRatingText_DexCompleted[];
 
 #endif //GUARD_STRINGS_H

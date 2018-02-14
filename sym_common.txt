@@ -43,7 +43,8 @@ gUnknown_03005DA8: @ 3005DA8
 	.space 0x4
 
 gFieldCallback: @ 3005DAC
-	.space 0x4
+	
+    .include "item_menu.o"
 
 gUnknown_03005DB0: @ 3005DB0
 	.space 0x4

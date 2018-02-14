@@ -32,5 +32,10 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 arg1, u16 arg2, u8 arg3, u8 arg
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 arg2, u8 arg3, u8 arg4, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo);
 u8 GetLRKeysState(void);
 u8 sub_812210C(void);
+bool8 sub_81221EC(void);
+bool8 sub_81221AC(void);
+bool8 sub_8122148(u16);
+bool8 AdjustQuantityAccordingToDPadInput(s16*, u16);
+bool8 itemid_80BF6D8_mail_related(u16);
 
 #endif //GUARD_MENU_HELPERS_H

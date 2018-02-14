@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item_use.h"
 #include "battle.h"
+#include "main.h"
 #include "berry.h"
 #include "bike.h"
 #include "coins.h"
@@ -90,6 +91,7 @@ extern u8* sub_806CF78(u16);
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
 extern struct MapConnection *sub_8088A8C(s16, s16);
+extern void (*gFieldCallback)(void);
 
 void MapPostLoadHook_UseItem(void);
 void sub_80AF6D4(void);
@@ -113,13 +115,13 @@ void sub_80FE024(u8 taskId);
 void sub_80FE124(u8 taskId);
 void sub_80FE164(u8 taskId);
 
-void DisplayItemMessage(u8 taskId, u8 a, u8* str, void(*callback)(u8 taskId));
+void DisplayItemMessage(u8 taskId, u8 a, const u8* str, void(*callback)(u8 taskId));
 void DisplayItemMessageInBattlePyramid(u8 taskId, u8* str, void(*callback)(u8 taskId));
 void DisplayItemMessageOnField(u8 taskId, u8* str, void(*callback)(u8 taskId));
 void sub_81C6714(u8 taskId);
 void CleanUpAfterFailingToUseRegisteredKeyItemOnField(u8 taskId);
 void StartFishing(u8 a);
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *, u8);
+bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *, u8);
 u8 sub_80FD9B0(s16 a, s16 b);
 void sub_80FDA24(u8 a);
 void sub_80FD8E0(u8 taskId, s16 x, s16 y);
@@ -363,7 +365,7 @@ void sub_80FD5CC(u8 taskId)
     DestroyTask(taskId);
 }
 
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
+bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u8 taskId)
 {
     int distanceX, distanceY;
     s16 x, y, i, newDistanceX, newDistanceY;
@@ -390,7 +392,7 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
         return FALSE;
 }
 
-bool8 sub_80FD6D4(struct MapEvents *events, s16 x, s16 y)
+bool8 sub_80FD6D4(const struct MapEvents *events, s16 x, s16 y)
 {
     u8 bgEventCount = events->bgEventCount;
     struct BgEvent *bgEvent = events->bgEvents;

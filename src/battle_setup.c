@@ -49,6 +49,8 @@ struct TrainerBattleParameter
     u8 ptrType;
 };
 
+extern void (*gFieldCallback)(void);
+
 extern bool8 InBattlePyramid(void);
 extern bool8 InBattlePike(void);
 extern bool32 InTrainerHill(void);

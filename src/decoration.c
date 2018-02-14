@@ -38,6 +38,8 @@
 #include "decoration.h"
 #include "graphics.h"
 
+extern void (*gFieldCallback)(void);
+
 // Static type declarations
 
 #define OVERWORLD_PLACE_DECOR_SELECTOR_PAL_TAG 0xbe5

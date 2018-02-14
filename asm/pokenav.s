@@ -3757,7 +3757,7 @@ sub_81C8EF8: @ 81C8EF8
 	lsls r2, 2
 	add r2, r8
 	str r2, [r5, 0x44]
-	ldrh r3, [r2( 0x4]
+	ldrh r3, [r2, 0x4]
 	lsls r1, r3, 22
 	lsrs r1, 22
 	adds r1, 0x2

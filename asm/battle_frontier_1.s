@@ -15923,11 +15923,11 @@ sub_8197080: @ 8197080
 	b _0819715C
 _081970A2:
 	movs r0, 0
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x1
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r0, =gStringVar1
@@ -15977,11 +15977,11 @@ _081970A2:
 	strb r6, [r5]
 	adds r5, 0x1
 	movs r0, 0
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	lsrs r6, r0, 16
 	mov r0, r10

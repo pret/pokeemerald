@@ -27,5 +27,6 @@ void sub_8098044(u8);
 void UnfreezeMapObjects(void);
 void FreezeMapObjectsExceptOne(u8 mapObjectId);
 void sub_8097B78(u8, u8);
+void FreezeMapObjects(void);
 
 #endif //GUARD_FIELD_MAP_OBJ_HELPERS_H
