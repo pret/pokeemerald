@@ -12,7 +12,7 @@ void ItemUseOutOfBattle_Itemfinder(u8);
 void ItemUseOnFieldCB_Itemfinder(u8);
 void RunItemfinderResults(u8);
 void ExitItemfinder(u8);
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *, u8);
+bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *, u8);
 void sub_80C9720(u8);
 void sub_80C9838(u8, s16, s16);
 u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);

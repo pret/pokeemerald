@@ -1884,8 +1884,8 @@ _080ABEF4:
 	.pool
 	thumb_func_end sub_80ABE18
 
-	thumb_func_start sub_80ABF00
-sub_80ABF00: @ 80ABF00
+	thumb_func_start ApplyWeatherGammaShiftToPal
+ApplyWeatherGammaShiftToPal: @ 80ABF00
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1900,7 +1900,7 @@ sub_80ABF00: @ 80ABF00
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80ABF00
+	thumb_func_end ApplyWeatherGammaShiftToPal
 
 	thumb_func_start sub_80ABF20
 sub_80ABF20: @ 80ABF20
@@ -7855,7 +7855,7 @@ pal_fill_for_maplights: @ 80AF040
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7910,7 +7910,7 @@ pal_fill_black: @ 80AF0A0
 	thumb_func_start sub_80AF0B4
 sub_80AF0B4: @ 80AF0B4
 	push {r4,lr}
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -9015,7 +9015,7 @@ _080AF9D0:
 	cmp r0, 0
 	bne _080AF9E8
 	bl warp_in
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -9087,7 +9087,7 @@ _080AFA64:
 	b _080AFA7C
 _080AFA6C:
 	bl warp_in
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r6, 0
 	bl DestroyTask
@@ -10060,7 +10060,7 @@ _080B0222:
 	b _080B023A
 _080B022A:
 	bl warp_in
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -10478,7 +10478,7 @@ sub_80B058C: @ 80B058C
 	thumb_func_start sub_80B05B4
 sub_80B05B4: @ 80B05B4
 	push {lr}
-	bl sub_80859B0
+	bl Overworld_FadeOutMapMusic
 	ldr r0, =task50_0807F0C8
 	movs r1, 0x50
 	bl CreateTask

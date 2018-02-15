@@ -88,7 +88,7 @@ sub_809D908: @ 809D908
 	bl sub_809D8B8
 	adds r0, r4, 0x2
 	adds r1, r4, 0x4
-	bl wild_encounter_related
+	bl UpdateAmbientCry
 _0809D930:
 	pop {r4}
 	pop {r0}
@@ -96,8 +96,8 @@ _0809D930:
 	.pool
 	thumb_func_end sub_809D908
 
-	thumb_func_start overworld_ensure_per_step_coros_running
-overworld_ensure_per_step_coros_running: @ 809D93C
+	thumb_func_start SetUpFieldTasks
+SetUpFieldTasks: @ 809D93C
 	push {r4,r5,lr}
 	ldr r5, =task_per_step_callback_manager
 	adds r0, r5, 0
@@ -142,7 +142,7 @@ _0809D992:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end overworld_ensure_per_step_coros_running
+	thumb_func_end SetUpFieldTasks
 
 	thumb_func_start ActivatePerStepCallback
 ActivatePerStepCallback: @ 809D9A8
@@ -182,8 +182,8 @@ _0809D9EA:
 	bx r0
 	thumb_func_end ActivatePerStepCallback
 
-	thumb_func_start wild_encounter_reset_coro_args
-wild_encounter_reset_coro_args: @ 809D9F0
+	thumb_func_start ResetFieldTasksArgs
+ResetFieldTasksArgs: @ 809D9F0
 	push {lr}
 	ldr r0, =task_per_step_callback_manager
 	bl FindTaskIdByFunc
@@ -207,7 +207,7 @@ _0809DA1A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end wild_encounter_reset_coro_args
+	thumb_func_end ResetFieldTasksArgs
 
 	thumb_func_start nullsub_34
 nullsub_34: @ 809DA2C

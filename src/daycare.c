@@ -46,7 +46,7 @@ extern void sub_819746C(u8, bool8);
 extern void NewMenuHelpers_DrawStdWindowFrame(u8, bool8);
 extern void sub_81B9328(void);
 extern void sub_81AF078(u32, bool8, struct ListMenu *);
-extern void c2_exit_to_overworld_2_switch(void);
+extern void CB2_ReturnToField(void);
 
 // this file's functions
 static void ClearDaycareMonMisc(struct DaycareMiscMon *misc);
@@ -1315,5 +1315,5 @@ void ShowDaycareLevelMenu(void)
 void ChooseSendDaycareMon(void)
 {
     sub_81B9328();
-    gMain.savedCallback = c2_exit_to_overworld_2_switch;
+    gMain.savedCallback = CB2_ReturnToField;
 }

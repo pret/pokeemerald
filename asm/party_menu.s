@@ -10032,7 +10032,7 @@ _081B557C:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r1, r0, 0
 	ldr r0, =gStringVar1
 	ldrb r1, [r1, 0x14]
@@ -10057,7 +10057,7 @@ _081B55B8:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r1, r0, 0
 	ldr r0, =gStringVar1
 	ldrb r1, [r1, 0x14]
@@ -10083,7 +10083,7 @@ _081B5614:
 	.pool
 _081B5624:
 	ldr r1, =gUnknown_0203CEC8
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 _081B5628:
 	str r0, [r1]
 	adds r0, r6, 0
@@ -10189,7 +10189,7 @@ _081B56F8:
 	b _081B572A
 _081B56FE:
 	ldr r1, =gUnknown_0203CEC8
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	str r0, [r1]
 	adds r0, r4, 0
 	bl sub_81B12C0
@@ -10408,7 +10408,7 @@ sub_81B58A8: @ 81B58A8
 	str r0, [sp]
 	ldr r0, =sub_81B1370
 	str r0, [sp, 0x4]
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -14836,7 +14836,7 @@ CB2_PartyMenuFromStartMenu: @ 81B7F34
 	str r0, [sp]
 	ldr r0, =sub_81B1370
 	str r0, [sp, 0x4]
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -16021,7 +16021,7 @@ sub_81B892C: @ 81B892C
 	str r0, [sp]
 	ldr r0, =sub_81B1370
 	str r0, [sp, 0x4]
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -16042,7 +16042,7 @@ sub_81B8958: @ 81B8958
 	str r0, [sp]
 	ldr r0, =sub_81B1370
 	str r0, [sp, 0x4]
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	str r0, [sp, 0x8]
 	movs r0, 0xB
 	movs r1, 0
@@ -17283,7 +17283,7 @@ sub_81B9354: @ 81B9354
 	str r1, [sp]
 	ldr r1, =sub_81B1370
 	str r1, [sp, 0x4]
-	ldr r1, =c2_exit_to_overworld_2_switch
+	ldr r1, =CB2_ReturnToField
 	str r1, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0xB
@@ -17311,7 +17311,7 @@ _081B93A6:
 	ldr r0, =gUnknown_03005DB0
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
@@ -17420,7 +17420,7 @@ _081B9486:
 	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_without_phase_2
 	str r0, [r1]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -17556,7 +17556,7 @@ _081B95BA:
 	ldr r0, =gUnknown_03005DB0
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r4,r5}
 	pop {r0}
@@ -17660,7 +17660,7 @@ sub_81B968C: @ 81B968C
 	subs r3, 0x1
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	str r0, [sp]
 	movs r0, 0x3
 	bl sub_81BF8EC

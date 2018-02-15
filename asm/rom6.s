@@ -376,7 +376,7 @@ _0813574C:
 	thumb_func_start hm2_dig
 hm2_dig: @ 8135760
 	push {lr}
-	bl flagmods_08054D70
+	bl Overworld_ResetStateAfterDigEscRope
 	movs r0, 0x26
 	bl FieldEffectStart
 	bl GetCursorSelectionMonId

@@ -3,9 +3,9 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 826FF1E
 	.byte 0
 
 Route119_WeatherInstitute_2F_MapScript1_26FF24: @ 826FF24
-	compare VAR_0x40B3, 0
+	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF44
-	compare VAR_0x40B3, 1
+	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF50
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF5C
@@ -62,7 +62,7 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	waitmovement 0
 	msgbox Route119_WeatherInstitute_2F_Text_2705DD, 4
 	closemessage
-	setvar VAR_0x40B3, 1
+	setvar VAR_WEATHER_INSTITUTE_STATE, 1
 	clearflag FLAG_0x37D
 	fadedefaultbgm
 	fadescreen 1

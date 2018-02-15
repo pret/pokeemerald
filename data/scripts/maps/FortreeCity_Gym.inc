@@ -12,7 +12,7 @@ FortreeCity_Gym_MapScript2_2165BA: @ 82165BA
 	.2byte 0
 
 FortreeCity_Gym_EventScript_2165C4:: @ 82165C4
-	special sub_80FBED0
+	special RotatingGate_InitPuzzleAndGraphics
 	end
 
 FortreeCity_Gym_EventScript_2165C8:: @ 82165C8

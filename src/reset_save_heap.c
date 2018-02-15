@@ -26,5 +26,5 @@ void sub_81700F8(void)
         Sav2_ClearSetDefault();
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
     InitHeap(gHeap, HEAP_SIZE);
-    SetMainCallback2(sub_8086230);
+    SetMainCallback2(CB2_ContinueSavedGame);
 }

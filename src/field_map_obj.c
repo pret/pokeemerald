@@ -198,7 +198,7 @@ static void npcs_clear_ids_and_state(void)
 
 void sub_808D438(void)
 {
-    strange_npc_table_clear();
+    ZeroAllLinkPlayerMapObjects();
     npcs_clear_ids_and_state();
     ClearPlayerAvatarInfo();
     sub_808D450();
@@ -1673,7 +1673,7 @@ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 m
     }
     else
     {
-        mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
         templates = mapHeader->events->mapObjects;
         count = mapHeader->events->mapObjectCount;
     }

@@ -1244,7 +1244,7 @@ _080BBE18:
 	bl sub_80BC890
 	adds r0, r6, 0
 	bl DestroyTask
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	bl SetMainCallback2
 	ldr r0, =gMPlayInfo_BGM
 	ldr r1, =0x0000ffff

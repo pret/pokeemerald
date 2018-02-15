@@ -28,7 +28,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77:: @ 8252A77
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A8F:: @ 8252A8F
-	special AddMapNamePopUpWindowTask
+	special ShowMapNamePopup
 	setvar VAR_0x400F, 0
 	end
 

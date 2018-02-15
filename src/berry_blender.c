@@ -161,7 +161,7 @@ extern void copy_textbox_border_tile_patterns_to_vram(u8, u16, u8);
 extern void sub_81AABF0(void (*callback)(void));
 extern void sub_800B4C0(void);
 extern void ClearLinkCallback(void);
-extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
+extern void CB2_ReturnToFieldContinueScript(void);
 extern void sub_8153430(void);
 extern bool8 sub_8153474(void);
 extern void sub_80EECEC(void);
@@ -2692,7 +2692,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
         if (gReceivedRemoteLinkPlayers == 0)
         {
             FREE_AND_SET_NULL(sBerryBlenderData);
-            SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+            SetMainCallback2(CB2_ReturnToFieldContinueScript);
         }
         break;
     }
@@ -2742,7 +2742,7 @@ static void CB2_HandlePlayerPlayAgainChoice(void)
             if (sBerryBlenderData->playAgainState == PLAY_AGAIN_OK)
                 SetMainCallback2(DoBerryBlending);
             else
-                SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+                SetMainCallback2(CB2_ReturnToFieldContinueScript);
 
             FreeAllWindowBuffers();
             UnsetBgTilemapBuffer(2);

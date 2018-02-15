@@ -155,19 +155,19 @@ void sub_81AD6FC(u8 taskId);
 // .rodata
 
 const struct BgTemplate gUnknown_08613F90[3] = {
-    {0, 0, 31, 0, 0, 1, 0}, 
-    {1, 0, 30, 0, 0, 0, 0}, 
+    {0, 0, 31, 0, 0, 1, 0},
+    {1, 0, 30, 0, 0, 0, 0},
     {2, 3, 29, 0, 0, 2, 0}
 };
-    
+
 const struct ListMenuTemplate gUnknown_08613F9C = {
     NULL, bag_menu_change_item_callback, sub_81AB520, 0, 0, 0, 0, 8, 0, 1, 1, 0, 3, 0, 0, 0, 7, 0
 };
 
 const struct MenuAction gUnknown_08613FB4[] = {
-    {gMenuText_Use, ItemMenu_UseOutOfBattle}, 
-    {gMenuText_Toss, ItemMenu_Toss}, 
-    {gMenuText_Register, ItemMenu_Register}, 
+    {gMenuText_Use, ItemMenu_UseOutOfBattle},
+    {gMenuText_Toss, ItemMenu_Toss},
+    {gMenuText_Register, ItemMenu_Register},
     {gMenuText_Give, ItemMenu_Give},
     {gText_Cancel2, ItemMenu_Cancel},
     {gMenuText_Use, ItemMenu_UseInBattle},
@@ -219,7 +219,7 @@ const struct ArrowStruct gUnknown_08614094 = {0, 0x1C, 16, 1, 100, 16, -1, -1, 0
 const u8 gUnknown_086140A4[] = INCBIN_U8("graphics/interface/select_button.4bpp");
 
 const u8 gUnknown_08614164[][3] = {
-    {0, 1, 3}, 
+    {0, 1, 3},
     {0, 1, 4},
     {0, 3, 6},
     {2, 1, 3},
@@ -252,7 +252,7 @@ const struct WindowTemplate gUnknown_086141AC[] = {
 // .text
 
 struct BagStruct {
-    void (*bagCallback)(void); 
+    void (*bagCallback)(void);
     u8 location;
     u8 pocket;
     u8 unk6[2];
@@ -339,7 +339,7 @@ void ResetBagScrollPositions(void)
 
 void CB2_BagMenuFromStartMenu(void)
 {
-    GoToBagMenu(0, 5, sub_8086194);
+    GoToBagMenu(0, 5, CB2_ReturnToFieldWithOpenMenu);
 }
 
 void sub_81AABB0(void)
@@ -630,7 +630,7 @@ void load_bag_item_list_buffers(u8 pocketId)
     u16 i;
     struct BagPocket *pocket = &gBagPockets[pocketId];
     struct ListMenuItem *subBuffer;
-    
+
     if (!gUnknown_0203CE54->unk81B_2)
     {
         for (i = 0; i < gUnknown_0203CE54->unk829[pocketId] - 1; i++)
@@ -903,7 +903,7 @@ u8 sub_81ABB2C(u8 a)
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u8 taskId))
 {
     s16* data = gTasks[taskId].data;
-    
+
     data[10] = AddItemMessageWindow(4);
     FillWindowPixelBuffer(data[10], 17);
     DisplayMessageAndContinueTask(taskId, data[10], 10, 13, fontId, GetPlayerTextSpeed(), str, callback);
@@ -1056,7 +1056,7 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
     s16* data = gTasks[taskId].data;
     u8 pocketId;
 
-    
+
     data[13] = 0;
     data[12] = 0;
     data[11] = deltaBagPocketId;
@@ -1244,7 +1244,7 @@ _081AC09A:\n\
 void sub_81AC10C(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (!sub_81221AC() && !IsWallysBag())
     {
         switch (GetSwitchBagPocketDirection())
@@ -1317,7 +1317,7 @@ bool8 sub_81AC2C0(void)
 void bag_menu_swap_items(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     sub_81AF15C(data[0], 16, 1);
     data[1] = gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket] + gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
     gUnknown_0203CE54->unk81A = data[1];
@@ -1335,7 +1335,7 @@ void sub_81AC3C0(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
     int r7;
-    
+
     if (sub_81221EC() != TRUE)
     {
         if (gMain.newKeys & SELECT_BUTTON)
@@ -1375,7 +1375,7 @@ void sub_81AC498(u8 taskId)
     u16* scrollPos = &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket];
     u16* cursorPos = &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
     u16 realPos = (*scrollPos + *cursorPos);
-    
+
     if (data[1] == realPos || data[1] == (realPos - 1))
         sub_81AC590(taskId);
     else
@@ -1398,7 +1398,7 @@ void sub_81AC590(u8 taskId)
     s16* data = gTasks[taskId].data;
     u16* scrollPos = &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket];
     u16* cursorPos = &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
-    
+
     gUnknown_0203CE54->unk81A = -1;
     sub_81AE6C8(data[0], scrollPos, cursorPos);
     if (data[1] < (*scrollPos + *cursorPos))
@@ -1689,7 +1689,7 @@ void ItemMenu_UseOutOfBattle(u8 taskId)
 void ItemMenu_Toss(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     bag_menu_remove_some_window();
     data[8] = 1;
     if (data[2] == 1)
@@ -1710,7 +1710,7 @@ void ItemMenu_Toss(u8 taskId)
 void BagMenuConfirmToss(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], 0, 3);
     StringExpandPlaceholders(gStringVar4, gText_ConfirmTossItems);
@@ -1722,7 +1722,7 @@ void BagMenuConfirmToss(u8 taskId)
 void BagMenuCancelToss(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     bag_menu_print_description_box_text(data[1]);
     bag_menu_print_cursor_(data[0], 0);
     set_callback3_to_bag(taskId);
@@ -1731,7 +1731,7 @@ void BagMenuCancelToss(u8 taskId)
 void Task_ChooseHowManyToToss(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
         sub_81ABC54(gUnknown_0203CE54->unk817, data[8]);
@@ -1753,7 +1753,7 @@ void Task_ChooseHowManyToToss(u8 taskId)
 void BagMenuActuallyToss(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], 0, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
@@ -1767,7 +1767,7 @@ void Task_ActuallyToss(u8 taskId)
     s16* data = gTasks[taskId].data;
     u16* scrollPos = &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket];
     u16* cursorPos = &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
-    
+
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -1787,7 +1787,7 @@ void ItemMenu_Register(u8 taskId)
     s16* data = gTasks[taskId].data;
     u16* scrollPos = &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket];
     u16* cursorPos = &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
-    
+
     if (gSaveBlock1Ptr->registeredItem == gSpecialVar_ItemId)
         gSaveBlock1Ptr->registeredItem = 0;
     else
@@ -1852,7 +1852,7 @@ void ItemMenu_CheckTag(u8 taskId)
 void ItemMenu_Cancel(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     bag_menu_remove_some_window();
     bag_menu_print_description_box_text(data[1]);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -1910,7 +1910,7 @@ void item_menu_type_b(u8 taskId)
 bool8 UseRegisteredKeyItemOnField(void)
 {
     u8 taskId;
-    
+
     if (InUnionRoom() == TRUE || InBattlePyramid() || InBattlePike() || InMultiBattleRoom() == TRUE)
         return FALSE;
     HideMapNamePopUpWindow();
@@ -1938,14 +1938,14 @@ bool8 UseRegisteredKeyItemOnField(void)
 void display_sell_item_ask_str(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (itemid_get_market_price(gSpecialVar_ItemId) == 0)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gText_CantBuyKeyItem);
         DisplayItemMessage(taskId, 1, gStringVar4, bag_menu_inits_lists_menu);
     }
-    else 
+    else
     {
         data[8] = 1;
         if (data[2] == 1)
@@ -1965,7 +1965,7 @@ void display_sell_item_ask_str(u8 taskId)
 void sub_81AD680(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     ConvertIntToDecimalStringN(gStringVar1, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8], 0, 6);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayVar1);
     DisplayItemMessage(taskId, 1, gStringVar4, sub_81AD6E4);
@@ -1979,7 +1979,7 @@ void sub_81AD6E4(u8 taskId)
 void sub_81AD6FC(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     bag_menu_remove_money_window();
     bag_menu_RemoveBagItem_message_window(4);
     bag_menu_print_cursor_(data[0], 0);
@@ -1990,7 +1990,7 @@ void sub_81AD730(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
     u8 windowId = bag_menu_add_window(8);
-    
+
     sub_81ABCC0(windowId, 1, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8]);
     bag_menu_AddMoney_window();
     gTasks[taskId].func = sub_81AD794;
@@ -1999,7 +1999,7 @@ void sub_81AD730(u8 taskId)
 void sub_81AD794(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
         sub_81ABCC0(gUnknown_0203CE54->unk818, data[8], (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8]);
@@ -2024,7 +2024,7 @@ void sub_81AD794(u8 taskId)
 void sub_81AD84C(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     ConvertIntToDecimalStringN(gStringVar1, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8], 0, 6);
     StringExpandPlaceholders(gStringVar4, gText_TurnedOverVar1ForVar2);
@@ -2036,7 +2036,7 @@ void sub_81AD8C8(u8 taskId)
     s16* data = gTasks[taskId].data;
     u16* scrollPos = &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket];
     u16* cursorPos = &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
-    
+
     PlaySE(SE_REGI);
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
     AddMoney(&gSaveBlock1Ptr->money, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8]);
@@ -2063,7 +2063,7 @@ void sub_81AD9C0(u8 taskId)
 void display_deposit_item_ask_str(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     data[8] = 1;
     if (data[2] == 1)
     {
@@ -2083,7 +2083,7 @@ void display_deposit_item_ask_str(u8 taskId)
 void sub_81ADA7C(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
         sub_81ABC54(gUnknown_0203CE54->unk817, data[8]);
@@ -2107,7 +2107,7 @@ void sub_81ADA7C(u8 taskId)
 void sub_81ADB14(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     FillWindowPixelBuffer(1, 0);
     if (itemid_is_unique(gSpecialVar_ItemId))
     {
@@ -2132,7 +2132,7 @@ void sub_81ADB14(u8 taskId)
 void sub_81ADC0C(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -2152,7 +2152,7 @@ bool8 IsWallysBag(void)
 void PrepareBagForWallyTutorial(void)
 {
     u32 i;
-    
+
     gUnknown_0203CE80 = AllocZeroed(sizeof(struct TempWallyStruct));
     memcpy(gUnknown_0203CE80->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, sizeof(gSaveBlock1Ptr->bagPocket_Items));
     memcpy(gUnknown_0203CE80->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bagPocket_PokeBalls));
@@ -2170,7 +2170,7 @@ void PrepareBagForWallyTutorial(void)
 void RestoreBagAfterWallyTutorial(void)
 {
     u32 i;
-    
+
     memcpy(gSaveBlock1Ptr->bagPocket_Items, gUnknown_0203CE80->bagPocket_Items, sizeof(gUnknown_0203CE80->bagPocket_Items));
     memcpy(gSaveBlock1Ptr->bagPocket_PokeBalls, gUnknown_0203CE80->bagPocket_PokeBalls, sizeof(gUnknown_0203CE80->bagPocket_PokeBalls));
     gUnknown_0203CE58.pocket = gUnknown_0203CE80->pocket;
@@ -2193,7 +2193,7 @@ void DoWallyTutorialBagMenu(void)
 void Task_WallyTutorialBagMenu(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (!gPaletteFade.active)
     {
         switch (data[8])
@@ -2235,7 +2235,7 @@ void unknown_ItemMenu_Show(u8 taskId)
 void bag_menu_leave_maybe_3(void)
 {
     gFieldCallback = sub_819FA50;
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 void unknown_ItemMenu_Give2(u8 taskId)
@@ -2249,7 +2249,7 @@ void unknown_ItemMenu_Give2(u8 taskId)
 void bag_menu_leave_maybe_2(void)
 {
     gFieldCallback = sub_818DEF4;
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 void unknown_ItemMenu_Confirm2(u8 taskId)
@@ -2262,7 +2262,7 @@ void unknown_ItemMenu_Confirm2(u8 taskId)
 void bag_menu_leave_maybe(void)
 {
     gFieldCallback = sub_818E564;
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 void bag_menu_print_pocket_names(u8 *pocketName1, u8 *pocketName2)
@@ -2270,7 +2270,7 @@ void bag_menu_print_pocket_names(u8 *pocketName1, u8 *pocketName2)
     struct WindowTemplate window = {0, 0, 0, 0, 0, 0, 0};
     u16 windowId;
     int offset;
-    
+
     window.width = 16;
     window.height = 2;
     windowId = AddWindow(&window);
@@ -2304,7 +2304,7 @@ void bag_menu_copy_pocket_name_to_window(u32 a)
 void setup_bag_menu_textboxes(void)
 {
     u8 i;
-    
+
     InitWindows(gUnknown_08614174);
     DeactivateAllTextPrinters();
     sub_809882C(0, 1, -32);
@@ -2328,7 +2328,7 @@ void bag_menu_print(u8 a, u8 b, const u8 *str, u8 c, u8 d, u8 e, u8 f, u8 g, u8 
 u8 sub_81AE124(u8 a)
 {
     return gUnknown_0203CE54->unk810[a];
-}    
+}
 
 u8 bag_menu_add_window(u8 a)
 {
@@ -2409,7 +2409,7 @@ void PrintTMHMMoveData(u16 itemId)
     u8 i;
     u16 moveId;
     const u8* text;
-    
+
     FillWindowPixelBuffer(4, 0);
     if (itemId == ITEM_NONE)
     {

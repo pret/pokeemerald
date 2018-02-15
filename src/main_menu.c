@@ -295,7 +295,7 @@ void CB2_ReinitMainMenu(void)
 u32 InitMainMenu(bool8 returningFromOptionsMenu)
 {
     SetVBlankCallback(NULL);
-    
+
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
@@ -306,11 +306,11 @@ u32 InitMainMenu(bool8 returningFromOptionsMenu)
     SetGpuReg(REG_OFFSET_BG1VOFS, 0);
     SetGpuReg(REG_OFFSET_BG0HOFS, 0);
     SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-    
+
     DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
     DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
     DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
-    
+
     ResetPaletteFade();
     LoadPalette(gMainMenuBgPal, 0, 32);
     LoadPalette(gMainMenuTextPal, 0xF0, 32);
@@ -331,7 +331,7 @@ u32 InitMainMenu(bool8 returningFromOptionsMenu)
     InitWindows(gUnknown_082FF038);
     DeactivateAllTextPrinters();
     LoadMainMenuWindowFrameTiles(0, MAIN_MENU_BORDER_TILE);
-    
+
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     SetGpuReg(REG_OFFSET_WININ, 0);
@@ -339,7 +339,7 @@ u32 InitMainMenu(bool8 returningFromOptionsMenu)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
-    
+
     EnableInterrupts(1);
     SetVBlankCallback(VBlankCB_MainMenu);
     SetMainCallback2(CB2_MainMenu);
@@ -347,14 +347,14 @@ u32 InitMainMenu(bool8 returningFromOptionsMenu)
     ShowBg(0);
     HideBg(1);
     CreateTask(Task_MainMenuCheckSaveFile, 0);
-    
+
     return 0;
 }
 
 void Task_MainMenuCheckSaveFile(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (!gPaletteFade.active)
     {
         SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -364,7 +364,7 @@ void Task_MainMenuCheckSaveFile(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
-        
+
         if (sub_80093CC())
             data[15] = 1;
         switch (gSaveFileStatus)
@@ -442,7 +442,7 @@ void Task_MainMenuCheckBattery(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
-        
+
         if (!(RtcGetErrorStatus() & RTC_ERR_FLAG_MASK))
         {
             gTasks[taskId].func = Task_DisplayMainMenu;
@@ -470,7 +470,7 @@ void Task_DisplayMainMenu(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
     u16 palette;
-    
+
     if (!gPaletteFade.active)
     {
         SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -480,19 +480,19 @@ void Task_DisplayMainMenu(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
-        
+
         palette = RGB_BLACK;
         LoadPalette(&palette, 254, 2);
-        
+
         palette = RGB_WHITE;
         LoadPalette(&palette, 250, 2);
-        
+
         palette = RGB(12, 12, 12);
         LoadPalette(&palette, 251, 2);
-        
+
         palette = RGB(26, 26, 25);
         LoadPalette(&palette, 252, 2);
-        
+
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
             palette = RGB(4, 16, 31);
@@ -503,7 +503,7 @@ void Task_DisplayMainMenu(u8 taskId)
             palette = RGB(31, 3, 21);
             LoadPalette(&palette, 241, 2);
         }
-        
+
         switch (gTasks[taskId].data[0])
         {
             case HAS_NO_SAVED_GAME:
@@ -611,7 +611,7 @@ void Task_HighlightSelectedMainMenuItem(u8 taskId)
 bool8 HandleMainMenuInput(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
@@ -664,7 +664,7 @@ void Task_HandleMainMenuAPressed(u8 taskId)
 {
     bool8 r2;
     u8 action;
-    
+
     if (!gPaletteFade.active)
     {
         if (gTasks[taskId].data[0] == 3)
@@ -791,7 +791,7 @@ void Task_HandleMainMenuAPressed(u8 taskId)
             case 1:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
                 gPlttBufferFaded[0] = RGB_BLACK;
-                SetMainCallback2(sub_8086230);
+                SetMainCallback2(CB2_ContinueSavedGame);
                 DestroyTask(taskId);
                 break;
             case 2:
@@ -888,7 +888,7 @@ void Task_DisplayMainMenuInvalidActionError(u8 taskId)
 void HighlightSelectedMainMenuItem(u8 menuType, u8 selectedMenuItem, s16 a)
 {
     SetGpuReg(REG_OFFSET_WIN0H, 0x9E7);
-    
+
     switch (menuType)
     {
         case HAS_NO_SAVED_GAME:
@@ -982,7 +982,7 @@ void task_new_game_prof_birch_speech_1(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
-    
+
     LZ77UnCompVram(gBirchIntroShadowGfx, (void*)VRAM);
     LZ77UnCompVram(gUnknown_082FEEF0, (void*)(VRAM + 0x3800));
     LoadPalette(gUnknown_082FECFC, 0, 64);
@@ -1006,7 +1006,7 @@ void task_new_game_prof_birch_speech_1(u8 taskId)
 void task_new_game_prof_birch_speech_2(u8 taskId)
 {
     u8 spriteId;
-    
+
     if (gTasks[taskId].data[7])
     {
         gTasks[taskId].data[7]--;
@@ -1074,12 +1074,12 @@ void task_new_game_prof_birch_speech_5(u8 taskId)
 void sub_8030A70(u8 taskId)
 {
     u8 spriteId = gTasks[gUnknown_03000DD0].data[9];
-    
+
     gSprites[spriteId].pos1.x = 0x64;
     gSprites[spriteId].pos1.y = 0x4B;
     gSprites[spriteId].invisible = 0;
     gSprites[spriteId].data[0] = 0;
-    
+
     CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 0x70, 0x3A, 0, 0, 0x20, 0xFFFF, SPECIES_LOTAD);
     gTasks[taskId].func = sub_8030B14;
     gTasks[gUnknown_03000DD0].data[7] = 0;
@@ -1167,7 +1167,7 @@ void task_new_game_prof_birch_speech_9(u8 taskId)
         else
         {
             u8 spriteId = gTasks[taskId].data[10];
-            
+
             gSprites[spriteId].pos1.x = 0xB4;
             gSprites[spriteId].pos1.y = 0x3C;
             gSprites[spriteId].invisible = 0;
@@ -1211,7 +1211,7 @@ void task_new_game_prof_birch_speech_13(u8 taskId)
 {
     int gender = sub_8031DB4();
     int r3;
-    
+
     switch (gender)
     {
         case MALE:
@@ -1227,7 +1227,7 @@ void task_new_game_prof_birch_speech_13(u8 taskId)
             gTasks[taskId].func = task_new_game_prof_birch_speech_14;
             break;
     }
-    r3 = GetMenuCursorPos(); 
+    r3 = GetMenuCursorPos();
     if (r3 != gTasks[taskId].data[6])
     {
         gTasks[taskId].data[6] = r3;
@@ -1264,7 +1264,7 @@ void sub_8030ED4(u8 taskId)
 void sub_8030F7C(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[2];
-    
+
     if (gSprites[spriteId].pos1.x > 0xB4)
     {
         gSprites[spriteId].pos1.x -= 4;
@@ -1366,7 +1366,7 @@ void task_new_game_prof_birch_speech_part2_5(u8 taskId)
 void task_new_game_prof_birch_speech_part2_6(u8 taskId)
 {
     u8 spriteId;
-    
+
     if (gTasks[taskId].data[5])
     {
         gSprites[gTasks[taskId].data[10]].invisible = TRUE;
@@ -1411,7 +1411,7 @@ void task_new_game_prof_birch_speech_part2_7(u8 taskId)
 void task_new_game_prof_birch_speech_part2_8(u8 taskId)
 {
     u8 spriteId;
-    
+
     if (gTasks[taskId].data[5])
     {
         gSprites[gTasks[taskId].data[8]].invisible = 1;
@@ -1441,7 +1441,7 @@ void task_new_game_prof_birch_speech_part2_8(u8 taskId)
 void task_new_game_prof_birch_speech_part2_9(u8 taskId)
 {
     u8 spriteId;
-    
+
     if (gTasks[taskId].data[5])
     {
         gSprites[gTasks[taskId].data[2]].oam.objMode = 0;
@@ -1463,7 +1463,7 @@ void task_new_game_prof_birch_speech_part2_9(u8 taskId)
 void task_new_game_prof_birch_speech_part2_10(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[2];
-    
+
     if (gSprites[spriteId].affineAnimEnded)
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_11;
 }
@@ -1471,7 +1471,7 @@ void task_new_game_prof_birch_speech_part2_10(u8 taskId)
 void task_new_game_prof_birch_speech_part2_11(u8 taskId)
 {
     u8 spriteId;
-    
+
     if (!gPaletteFade.active)
     {
         spriteId = gTasks[taskId].data[2];
@@ -1499,7 +1499,7 @@ void new_game_prof_birch_speech_part2_start(void)
     u8 taskId;
     u8 spriteId;
     u16 savedIme;
-    
+
     ResetBgsAndClearDma3BusyFlags(0);
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
@@ -1577,7 +1577,7 @@ void nullsub_11(struct Sprite *sprite)
 void sub_80318D8(struct Sprite *sprite)
 {
     u32 y;
-    
+
     y = (sprite->pos1.y << 16) + sprite->data[0] + 0xC000;
     sprite->pos1.y = y >> 16;
     sprite->data[0] = y;
@@ -1594,7 +1594,7 @@ void AddBirchSpeechObjects(u8 taskId)
     u8 spriteId2;
     u8 spriteId3;
     u8 spriteId4;
-    
+
     gSprites[spriteId].callback = nullsub_11;
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].invisible = TRUE;
@@ -1619,7 +1619,7 @@ void AddBirchSpeechObjects(u8 taskId)
 void sub_8031A5C(u8 taskId)
 {
     int alpha;
-    
+
     if (gTasks[taskId].data[1] == 0)
     {
         gTasks[gTasks[taskId].data[0]].data[5] = 1;
@@ -1642,7 +1642,7 @@ void sub_8031A5C(u8 taskId)
 void sub_8031ACC(u8 taskId, u8 a)
 {
     u8 taskId2;
-    
+
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_OBJ);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
     SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -1658,7 +1658,7 @@ void sub_8031ACC(u8 taskId, u8 a)
 void sub_8031B3C(u8 taskId)
 {
     int alpha;
-    
+
     if (gTasks[taskId].data[1] == 16)
     {
         gTasks[gTasks[taskId].data[0]].data[5] = 1;
@@ -1681,7 +1681,7 @@ void sub_8031B3C(u8 taskId)
 void sub_8031BAC(u8 taskId, u8 a)
 {
     u8 taskId2;
-    
+
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_OBJ);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -1719,7 +1719,7 @@ void sub_8031C1C(u8 taskId)
 void sub_8031C88(u8 taskId, u8 a)
 {
     u8 taskId2;
-    
+
     taskId2 = CreateTask(sub_8031C1C, 0);
     gTasks[taskId2].data[0] = taskId;
     gTasks[taskId2].data[1] = 0;
@@ -1753,7 +1753,7 @@ void sub_8031CC8(u8 taskId)
 void sub_8031D34(u8 taskId, u8 a)
 {
     u8 taskId2;
-    
+
     taskId2 = CreateTask(sub_8031CC8, 0);
     gTasks[taskId2].data[0] = taskId;
     gTasks[taskId2].data[1] = 8;
@@ -1781,7 +1781,7 @@ void set_default_player_name(u8 nameId)
 {
     const u8* name;
     u8 i;
-    
+
     if (gSaveBlock2Ptr->playerGender == MALE)
         name = gMalePresetNames[nameId];
     else
@@ -1821,7 +1821,7 @@ void fmt_player(void)
 {
     u8 str[0x20];
     u8* ptr;
-    
+
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime);
     box_print(2, 1, 0x6C, 17, gUnknown_082FF0E3, -1, gStringVar4);
     ptr = ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->playTimeHours, 0, 3);
@@ -1834,7 +1834,7 @@ void fmt_pokedex(void)
 {
     u8 str[0x20];
     u16 dexCount;
-    
+
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         if (IsNationalPokedexEnabled())
@@ -1853,7 +1853,7 @@ void fmt_badges(void)
     u8 str[0x20];
     u8 badgeCount = 0;
     u32 i;
-    
+
     for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE08_GET; i++)
     {
         if (FlagGet(i))
@@ -1880,7 +1880,7 @@ void DrawMainMenuWindowBorder(const struct WindowTemplate *template, u16 baseTil
     u16 sp10 = 6 + baseTileNum;
     u16 sp14 = 7 + baseTileNum;
     u16 r6 = 8 + baseTileNum;
-    
+
     FillBgTilemapBufferRect(template->priority, baseTileNum, template->tilemapLeft - 1, template->tilemapTop - 1, 1, 1, 2);
     FillBgTilemapBufferRect(template->priority, r9, template->tilemapLeft, template->tilemapTop - 1, template->width, 1, 2);
     FillBgTilemapBufferRect(template->priority, r10, template->tilemapLeft + template->width, template->tilemapTop - 1, 1, 1, 2);
@@ -1919,7 +1919,7 @@ void sub_8032318(u8 a)
     u8 fontAttribute3 = GetFontAttribute(1, 1);
     u8 windowAttribute = GetWindowAttribute(a, 3);
     u8 windowAttribute2 = GetWindowAttribute(a, 4);
-    
+
     FillWindowPixelRect(a, fontAttribute, 0, 0, fontAttribute2 * windowAttribute, fontAttribute3 * windowAttribute2);
     CopyWindowToVram(a, 2);
 }
@@ -1936,7 +1936,7 @@ void sub_80323A0(struct TextSubPrinter *printer, u16 a)
 void sub_80323CC(u8 a, u8 b, u16 c, u16 d, u8 e, u8 f)
 {
     struct WindowTemplate sp;
-    
+
     sp = sub_8198A50(0, a + 1, b + 1, 5, 4, f, d);
     CreateYesNoMenu(&sp, c, e, 0);
 }
