@@ -47,19 +47,19 @@ enum
 // Do save types
 enum
 {
-    NORMAL_SAVE,
-    LINK_SAVE,
-    //EREADER_SAVE, // depreciated in Emerald
-	LINK2_SAVE, // unknown 2nd link save
-    HOF_SAVE,
-    DIFFERENT_FILE_SAVE,
-    HOF_DELETE_SAVE // unused
+    SAVE_NORMAL,
+    SAVE_LINK,
+    //EREADER_SAVE, // deprecated in Emerald
+	SAVE_LINK2, // unknown 2nd link save
+    SAVE_HALL_OF_FAME,
+    SAVE_OVERWRITE_DIFFERENT_FILE,
+    SAVE_HALL_OF_FAME_ERASE_BEFORE // unused
 };
 
 #define SECTION_ID_RECORDED_BATTLE  31
 
 void ClearSaveData(void);
-void ResetSaveCounters(void);
+void Save_ResetSaveCounters(void);
 bool32 SetDamagedSectorBits(u8 op, u8 bit);
 u8 save_write_to_flash(u16 a1, const struct SaveSectionLocation *location);
 u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location);
@@ -88,7 +88,7 @@ u8 sub_81533E0(void);
 u8 sub_8153408(void);
 u8 sub_8153430(void);
 bool8 sub_8153474(void);
-u8 sub_81534D0(u8 a1);
+u8 Save_LoadGameData(u8 a1);
 u16 sub_815355C(void);
 u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
 u32 sub_8153634(u8 sector, u8* src);

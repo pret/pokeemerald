@@ -3,6 +3,7 @@
 #include "save.h"
 #include "constants/game_stat.h"
 #include "task.h"
+#include "decompress.h"
 
 // for the chunk declarations
 extern struct SaveBlock2 gSaveblock2;
@@ -96,7 +97,7 @@ void ClearSaveData(void)
     }
 }
 
-void ResetSaveCounters(void)
+void Save_ResetSaveCounters(void)
 {
     gSaveCounter = 0;
     gLastWrittenSector = 0;
@@ -670,25 +671,25 @@ u8 HandleSavingData(u8 saveType)
     UpdateSaveAddresses();
     switch (saveType)
     {
-    case HOF_DELETE_SAVE: // deletes HOF before overwriting HOF completely. unused
+    case SAVE_HALL_OF_FAME_ERASE_BEFORE: // deletes HOF before overwriting HOF completely. unused
         for (i = 0xE * 2 + 0; i < 32; i++)
             EraseFlashSector(i);
-    case HOF_SAVE: // hall of fame.
+    case SAVE_HALL_OF_FAME: // hall of fame.
         if (GetGameStat(GAME_STAT_ENTERED_HOF) < 999)
             IncrementGameStat(GAME_STAT_ENTERED_HOF);
         SaveSerializedGame();
         save_write_to_flash(0xFFFF, gRamSaveSectionLocations);
-        tempAddr = (u8 *)0x201C000; // FIXME: make this a label.
+        tempAddr = gDecompressionBuffer;
         HandleWriteSectorNBytes(0x1C, tempAddr, 0xF80);
         HandleWriteSectorNBytes(0x1D, tempAddr + 0xF80, 0xF80);
         break;
-    case NORMAL_SAVE: // normal save. also called by overwriting your own save.
+    case SAVE_NORMAL: // normal save. also called by overwriting your own save.
     default:
         SaveSerializedGame();
         save_write_to_flash(0xFFFF, gRamSaveSectionLocations);
         break;
-    case LINK_SAVE: // _081532C4
-    case LINK2_SAVE:
+    case SAVE_LINK: // _081532C4
+    case SAVE_LINK2:
         SaveSerializedGame();
         for(i = 0; i < 5; i++)
             ClearSaveData_2(i, gRamSaveSectionLocations);
@@ -702,7 +703,7 @@ u8 HandleSavingData(u8 saveType)
         save_write_to_flash(0, gRamSaveSectionLocations);
         break;
     */
-    case DIFFERENT_FILE_SAVE:
+    case SAVE_OVERWRITE_DIFFERENT_FILE:
         for (i = (0xE * 2 + 0); i < 32; i++)
             EraseFlashSector(i); // erase HOF.
         SaveSerializedGame();
@@ -799,7 +800,7 @@ bool8 sub_8153474(void)
     return retVal;
 }
 
-u8 sub_81534D0(u8 a1)
+u8 Save_LoadGameData(u8 a1)
 {
     u8 result;
 

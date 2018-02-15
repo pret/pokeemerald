@@ -828,8 +828,8 @@ sub_817B7C4: @ 817B7C4
 	.pool
 	thumb_func_end sub_817B7C4
 
-	thumb_func_start sub_817B834
-sub_817B834: @ 817B834
+	thumb_func_start intro_create_brendan_sprite
+intro_create_brendan_sprite: @ 817B834
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -866,10 +866,10 @@ sub_817B834: @ 817B834
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_817B834
+	thumb_func_end intro_create_brendan_sprite
 
-	thumb_func_start sub_817B88C
-sub_817B88C: @ 817B88C
+	thumb_func_start intro_create_may_sprite
+intro_create_may_sprite: @ 817B88C
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -906,7 +906,7 @@ sub_817B88C: @ 817B88C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_817B88C
+	thumb_func_end intro_create_may_sprite
 
 	thumb_func_start nullsub_66
 nullsub_66: @ 817B8E4
@@ -1019,8 +1019,8 @@ sub_817B948: @ 817B948
 	.pool
 	thumb_func_end sub_817B948
 
-	thumb_func_start sub_817B9C4
-sub_817B9C4: @ 817B9C4
+	thumb_func_start intro_create_flygon_sprite
+intro_create_flygon_sprite: @ 817B9C4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1072,6 +1072,6 @@ sub_817B9C4: @ 817B9C4
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_817B9C4
+	thumb_func_end intro_create_flygon_sprite
 
 	.align 2, 0 @ Don't pad with nop.

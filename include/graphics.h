@@ -2725,4 +2725,24 @@ extern const u16 gBagScreenFemale_Pal[];
 extern const u16 gBagScreenMale_Pal[];
 extern const u8 gBagMenuHMIcon_Gfx[];
 
+//intro graphics
+extern const u8 gIntro3GroudonGfx[];
+extern const u8 gIntro3GroudonTilemap[];
+extern const u8 gIntro3LegendBgGfx[];
+extern const u8 gIntro3GroudonBgTilemap[];
+extern const u8 gIntro3GroudonBgTilemap[];
+extern const u8 gIntro3BgPal[0x200];
+extern const u8 gIntro3KyogreGfx[];
+extern const u8 gIntro3KyogreTilemap[];
+extern const u8 gIntro3KyogreBgTilemap[];
+extern const u8 gIntro3CloudsGfx[];
+extern const u8 gIntro3Clouds1Tilemap[];
+extern const u8 gIntro3Clouds2Tilemap[];
+extern const u8 gIntro3Clouds3Tilemap[];
+extern const u8 gIntro3Clouds4Tilemap[];
+extern const u8 gIntro3RayquazaTilemap[];
+extern const u8 gIntro3RayquazaGfx[];
+extern const u8 gIntro3Clouds2Gfx[];
+extern const u16 gIntro1GameFreakTextFadePal[];
+
 #endif //GUARD_GRAPHICS_H

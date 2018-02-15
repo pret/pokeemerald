@@ -2678,7 +2678,7 @@ _08176B54:
 	bl LoadSpritePalettes
 	movs r0, 0x78
 	movs r1, 0x2E
-	bl sub_817B834
+	bl intro_create_brendan_sprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, =gTasks
@@ -2703,7 +2703,7 @@ _08176B54:
 	movs r0, 0x88
 	lsls r0, 1
 	movs r1, 0x2E
-	bl sub_817B88C
+	bl intro_create_may_sprite
 	b _08176C2C
 	.pool
 _08176BD8:
@@ -2717,7 +2717,7 @@ _08176BD8:
 	bl LoadSpritePalettes
 	movs r0, 0x78
 	movs r1, 0x2E
-	bl sub_817B88C
+	bl intro_create_may_sprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, =gTasks
@@ -2742,7 +2742,7 @@ _08176BD8:
 	movs r0, 0x88
 	lsls r0, 1
 	movs r1, 0x2E
-	bl sub_817B834
+	bl intro_create_brendan_sprite
 _08176C2C:
 	lsls r0, 24
 	lsrs r2, r0, 24

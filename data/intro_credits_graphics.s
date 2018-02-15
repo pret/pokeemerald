@@ -383,17 +383,17 @@ gUnknown_085F52A4:: @ 85F52A4
 	spr_template 0x03ed, 0x03ed, gUnknown_085F526C, gUnknown_085F5284, NULL, gDummySpriteAffineAnimTable, nullsub_66
 
 	.align 2
-gUnknown_085F52BC:: @ 85F52BC
+gIntro2BrendanSpriteSheet:: @ 85F52BC
 	obj_tiles gIntro2BrendanNoTurnGfx, 0x2000, 0x03ea
 	null_obj_tiles
 
 	.align 2
-gUnknown_085F52CC:: @ 85F52CC
+gIntro2MaySpriteSheet:: @ 85F52CC
 	obj_tiles gIntro2MayNoTurnGfx, 0x2000, 0x03eb
 	null_obj_tiles
 
 	.align 2
-gUnknown_085F52DC:: @ 85F52DC
+gIntro2BicycleSpriteSheet:: @ 85F52DC
 	obj_tiles gIntro2BicycleGfx, 0x1000, 0x03e9
 	null_obj_tiles
 
@@ -403,7 +403,7 @@ gUnknown_085F52EC:: @ 85F52EC
 	null_obj_tiles
 
 	.align 2
-gUnknown_085F52FC:: @ 85F52FC
+gIntro2FlygonSpriteSheet:: @ 85F52FC
 	obj_tiles gIntro2FlygonGfx, 0x1000, 0x03ed
 	null_obj_tiles
 

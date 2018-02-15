@@ -20,8 +20,8 @@ void sub_81700F8(void)
     gMain.inBattle = FALSE;
     SetSaveBlocksPointers(sub_815355C());
     sub_808447C();
-    ResetSaveCounters();
-    sub_81534D0(0);
+    Save_ResetSaveCounters();
+    Save_LoadGameData(0);
     if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
         Sav2_ClearSetDefault();
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);

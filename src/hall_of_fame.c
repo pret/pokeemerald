@@ -516,7 +516,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     }
     else
     {
-        if (sub_81534D0(3) != TRUE)
+        if (Save_LoadGameData(3) != TRUE)
             memset(gDecompressionBuffer, 0, 0x2000);
     }
 
@@ -885,7 +885,7 @@ void CB2_DoHallOfFamePC(void)
 static void Task_HofPC_CopySaveData(u8 taskId)
 {
     sub_81980F0(0, 0x1E, 0, 0xC, 0x226);
-    if (sub_81534D0(3) != 1)
+    if (Save_LoadGameData(3) != 1)
     {
         gTasks[taskId].func = Task_HofPC_PrintDataIsCorrupted;
     }
