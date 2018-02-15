@@ -169,41 +169,41 @@
 //	.pool
 //	thumb_func_end sub_81615A8
 
-	thumb_func_start sub_816166C
-sub_816166C: @ 816166C
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x1
-	bl PlaySE
-	ldr r5, =gUnknown_0203CEC8
-	movs r1, 0x9
-	ldrsb r1, [r5, r1]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0x3A
-	bl GetMonData
-	movs r1, 0x5
-	bl __udivsi3
-	adds r3, r0, 0
-	lsls r3, 16
-	asrs r3, 16
-	ldrb r1, [r5, 0xA]
-	ldr r0, =sub_81616C0
-	str r0, [sp]
-	adds r0, r4, 0
-	movs r2, 0x1
-	bl sub_81B1F18
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_816166C
+//	thumb_func_start sub_816166C
+//sub_816166C: @ 816166C
+//	push {r4,r5,lr}
+//	sub sp, 0x4
+//	adds r4, r0, 0
+//	lsls r4, 24
+//	lsrs r4, 24
+//	movs r0, 0x1
+//	bl PlaySE
+//	ldr r5, =gUnknown_0203CEC8
+//	movs r1, 0x9
+//	ldrsb r1, [r5, r1]
+//	movs r0, 0x64
+//	muls r0, r1
+//	ldr r1, =gPlayerParty
+//	adds r0, r1
+//	movs r1, 0x3A
+//	bl GetMonData
+//	movs r1, 0x5
+//	bl __udivsi3
+//	adds r3, r0, 0
+//	lsls r3, 16
+//	asrs r3, 16
+//	ldrb r1, [r5, 0xA]
+//	ldr r0, =sub_81616C0
+//	str r0, [sp]
+//	adds r0, r4, 0
+//	movs r2, 0x1
+//	bl sub_81B1F18
+//	add sp, 0x4
+//	pop {r4,r5}
+//	pop {r0}
+//	bx r0
+//	.pool
+//	thumb_func_end sub_816166C
 
 	thumb_func_start sub_81616C0
 sub_81616C0: @ 81616C0
