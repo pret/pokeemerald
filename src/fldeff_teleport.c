@@ -7,17 +7,14 @@
 #include "rom6.h"
 #include "task.h"
 
-extern bool8 (*gUnknown_03005DB0)(void);
-extern void (*gUnknown_0203CEEC)(void);
-
 bool8 SetUpFieldMove_Teleport(void)
 {
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
         gUnknown_03005DB0 = FieldCallback_Teleport;
-        gUnknown_0203CEEC = hm_teleport_run_dp02scr;   
+        gUnknown_0203CEEC = hm_teleport_run_dp02scr;
         return TRUE;
-    } 
+    }
     return FALSE;
 }
 

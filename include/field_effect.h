@@ -80,5 +80,7 @@ u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buf
 void sub_80B7FC8(void);
 void FieldEffectActiveListRemove(u8 id);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
+extern void (*gUnknown_0203CEEC)(void);
+extern bool8 (*gUnknown_03005DB0)(void);
 
 #endif //GUARD_FIELD_EFFECTS_H
