@@ -1477,7 +1477,7 @@ void task_new_game_prof_birch_speech_part2_11(u8 taskId)
         spriteId = gTasks[taskId].data[2];
         gSprites[spriteId].callback = nullsub_11;
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        BeginNormalPaletteFade(-0x10000, 0, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(0xFFFF0000, 0, 0, 16, RGB_WHITEALPHA);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_12;
     }
 }
