@@ -57,7 +57,7 @@ SECTIONS {
         asm/link_rfu.o(.text);
         asm/rom_8011DC0.o(.text);
         src/rtc.o(.text);
-        asm/main_menu.o(.text);
+        src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
         asm/rom_8034C54.o(.text);
@@ -193,7 +193,7 @@ SECTIONS {
         asm/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
         src/landmark.o(.text);
-        asm/fldeff_strength.o(.text);
+        src/fldeff_strength.o(.text);
         src/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);
@@ -207,7 +207,7 @@ SECTIONS {
         asm/contest_ai.o(.text);
         asm/battle_anim_sound_tasks.o(.text);
         src/battle_controller_safari.o(.text);
-        asm/fldeff_sweetscent.o(.text);
+        src/fldeff_sweetscent.o(.text);
         asm/battle_anim_815A0D4.o(.text);
         asm/learn_move.o(.text);
         asm/fldeff_softboiled.o(.text);
@@ -371,7 +371,7 @@ SECTIONS {
         src/link_rfu.o(.rodata);
         data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);
-        data/main_menu.o(.rodata);
+        src/main_menu.o(.rodata);
         data/battle_1.o(.rodata);
         data/data2b.o(.rodata);
         src/battle_main.o(.rodata);

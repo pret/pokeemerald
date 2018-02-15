@@ -34,6 +34,7 @@ void sub_8197930(void);
 u8 GetPlayerTextSpeed(void);
 void sub_81978B0(u16 arg0);
 
+void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextSubPrinter *, u16));
 void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str);
 void sub_8198070(u8 windowId, bool8 copyToVram);
 void SetWindowTemplateFields(struct WindowTemplate* template, u8 priority, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 palNum, u16 baseBlock);
