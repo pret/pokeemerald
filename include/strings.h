@@ -348,6 +348,10 @@ extern const u8 gText_DepositedVar2Var1s[];
 extern const u8 gText_NoRoomForItems[];
 extern const u8 gText_ThreeDashes[];
 
+//party menu text
+extern const u8 gText_PkmnHPRestoredByVar2[];
+
+//birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];
 extern const u8 gBirchDexRatingText_LessThan20[];
 extern const u8 gBirchDexRatingText_LessThan30[];

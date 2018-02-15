@@ -205,42 +205,42 @@
 //	.pool
 //	thumb_func_end sub_816166C
 
-	thumb_func_start sub_81616C0
-sub_81616C0: @ 81616C0
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r0, =gUnknown_0203CEC8
-	movs r1, 0xA
-	ldrsb r1, [r0, r1]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	ldr r1, =gStringVar1
-	bl GetMonNickname
-	ldr r4, =gStringVar4
-	ldr r1, =gText_PkmnHPRestoredByVar2
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	adds r0, r4, 0
-	movs r1, 0
-	bl sub_81B1B5C
-	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
-	ldr r1, =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, =sub_8161724
-	str r1, [r0]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81616C0
+//	thumb_func_start sub_81616C0
+//sub_81616C0: @ 81616C0
+//	push {r4,r5,lr}
+//	adds r5, r0, 0
+//	lsls r5, 24
+//	lsrs r5, 24
+//	ldr r0, =gUnknown_0203CEC8
+//	movs r1, 0xA
+//	ldrsb r1, [r0, r1]
+//	movs r0, 0x64
+//	muls r0, r1
+//	ldr r1, =gPlayerParty
+//	adds r0, r1
+//	ldr r1, =gStringVar1
+//	bl GetMonNickname
+//	ldr r4, =gStringVar4
+//	ldr r1, =gText_PkmnHPRestoredByVar2
+//	adds r0, r4, 0
+//	bl StringExpandPlaceholders
+//	adds r0, r4, 0
+//	movs r1, 0
+//	bl sub_81B1B5C
+//	movs r0, 0x2
+//	bl schedule_bg_copy_tilemap_to_vram
+//	ldr r1, =gTasks
+//	lsls r0, r5, 2
+//	adds r0, r5
+//	lsls r0, 3
+//	adds r0, r1
+//	ldr r1, =sub_8161724
+//	str r1, [r0]
+//	pop {r4,r5}
+//	pop {r0}
+//	bx r0
+//	.pool
+//	thumb_func_end sub_81616C0
 
 	thumb_func_start sub_8161724
 sub_8161724: @ 8161724
