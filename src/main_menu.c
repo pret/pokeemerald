@@ -165,11 +165,35 @@ const u8 gUnknown_082FF0E0[] = {10, 11, 12};
 const u8 gUnknown_082FF0E3[] = {10, 1, 12};
 
 const struct BgTemplate gUnknown_082FF0E8[] = {
-    {0, 2, 30, 0, 0, 0, 0},
-    {1, 0, 7, 0, 0, 3, 0}
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 7,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    }
 };
 
-const struct BgTemplate gUnknown_082FF0F0 = {0, 3, 30, 0, 0, 0, 0};
+const struct BgTemplate gUnknown_082FF0F0 = {
+    .bg = 0,
+    .charBaseIndex = 3,
+    .mapBaseIndex = 30,
+    .screenSize = 0,
+    .paletteMode = 0,
+    .priority = 0,
+    .baseTile = 0
+};
 
 const struct ArrowStruct gUnknown_082FF0F4 = {2, 0x78, 8, 3, 0x78, 0x98, 3, 4, 1, 1, 0};
 
@@ -241,6 +265,8 @@ enum
     HAS_MYSTERY_EVENTS,
 };
 
+#define MAIN_MENU_BORDER_TILE   0x1D5
+
 void CB2_MainMenu(void)
 {
     RunTasks();
@@ -266,7 +292,7 @@ void CB2_ReinitMainMenu(void)
     InitMainMenu(TRUE);
 }
 
-u32 InitMainMenu(bool8 affects_palette_maybe)
+u32 InitMainMenu(bool8 returningFromOptionsMenu)
 {
     SetVBlankCallback(NULL);
     
@@ -292,7 +318,7 @@ u32 InitMainMenu(bool8 affects_palette_maybe)
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();
-    if (affects_palette_maybe)
+    if (returningFromOptionsMenu)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0x0000); // fade to black
     else
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xFFFF); // fade to white
@@ -304,7 +330,7 @@ u32 InitMainMenu(bool8 affects_palette_maybe)
     ChangeBgY(1, 0, 0);
     InitWindows(gUnknown_082FF038);
     DeactivateAllTextPrinters();
-    LoadMainMenuWindowFrameTiles(0, 0x1D5);
+    LoadMainMenuWindowFrameTiles(0, MAIN_MENU_BORDER_TILE);
     
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
@@ -478,8 +504,6 @@ void Task_DisplayMainMenu(u8 taskId)
             LoadPalette(&palette, 241, 2);
         }
         
-        
-        
         switch (gTasks[taskId].data[0])
         {
             case HAS_NO_SAVED_GAME:
@@ -492,8 +516,8 @@ void Task_DisplayMainMenu(u8 taskId)
                 PutWindowTilemap(1);
                 CopyWindowToVram(0, 2);
                 CopyWindowToVram(1, 2);
-                DrawMainMenuWindowBorder(gUnknown_082FF038, 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF038[1], 0x1D5);
+                DrawMainMenuWindowBorder(gUnknown_082FF038, MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF038[1], MAIN_MENU_BORDER_TILE);
                 break;
             case HAS_SAVED_GAME:
                 FillWindowPixelBuffer(2, 0xAA);
@@ -509,9 +533,9 @@ void Task_DisplayMainMenu(u8 taskId)
                 CopyWindowToVram(2, 2);
                 CopyWindowToVram(3, 2);
                 CopyWindowToVram(4, 2);
-                DrawMainMenuWindowBorder(gUnknown_082FF048, 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[1], 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[2], 0x1D5);
+                DrawMainMenuWindowBorder(gUnknown_082FF048, MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[1], MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[2], MAIN_MENU_BORDER_TILE);
                 break;
             case HAS_MYSTERY_GIFT:
                 FillWindowPixelBuffer(2, 0xAA);
@@ -531,10 +555,10 @@ void Task_DisplayMainMenu(u8 taskId)
                 CopyWindowToVram(3, 2);
                 CopyWindowToVram(4, 2);
                 CopyWindowToVram(5, 2);
-                DrawMainMenuWindowBorder(gUnknown_082FF048, 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[1], 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[2], 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[3], 0x1D5);
+                DrawMainMenuWindowBorder(gUnknown_082FF048, MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[1], MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[2], MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[3], MAIN_MENU_BORDER_TILE);
                 break;
             case HAS_MYSTERY_EVENTS:
                 FillWindowPixelBuffer(2, 0xAA);
@@ -558,11 +582,11 @@ void Task_DisplayMainMenu(u8 taskId)
                 CopyWindowToVram(4, 2);
                 CopyWindowToVram(5, 2);
                 CopyWindowToVram(6, 2);
-                DrawMainMenuWindowBorder(gUnknown_082FF048, 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[1], 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[2], 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[3], 0x1D5);
-                DrawMainMenuWindowBorder(&gUnknown_082FF048[4], 0x1D5);
+                DrawMainMenuWindowBorder(gUnknown_082FF048, MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[1], MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[2], MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[3], MAIN_MENU_BORDER_TILE);
+                DrawMainMenuWindowBorder(&gUnknown_082FF048[4], MAIN_MENU_BORDER_TILE);
                 data[13] = AddScrollIndicatorArrowPair(&gUnknown_082FF0F4, &gUnknown_02022D06);
                 gTasks[data[13]].func = Task_ScrollIndicatorArrowPairOnMainMenu;
                 if (gUnknown_02022D06 == 4)
@@ -592,13 +616,13 @@ bool8 HandleMainMenuInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         sub_80093CC();
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0x0000);
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_HandleMainMenuAPressed;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0xFFFF);
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_WHITEALPHA);
         SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
         SetGpuReg(REG_OFFSET_WIN0V, 0xA0);
         gTasks[taskId].func = Task_HandleMainMenuBPressed;
@@ -855,7 +879,7 @@ void Task_DisplayMainMenuInvalidActionError(u8 taskId)
             if (gMain.newKeys & (A_BUTTON | B_BUTTON))
             {
                 PlaySE(SE_SELECT);
-                BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+                BeginNormalPaletteFade(-1, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Task_HandleMainMenuBPressed;
             }
     }
@@ -1274,7 +1298,7 @@ void task_new_game_prof_birch_speech_16(u8 taskId)
 {
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
     {
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        BeginNormalPaletteFade(-1, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = task_new_game_prof_birch_speech_17;
     }
 }
@@ -1345,17 +1369,17 @@ void task_new_game_prof_birch_speech_part2_6(u8 taskId)
     
     if (gTasks[taskId].data[5])
     {
-        gSprites[gTasks[taskId].data[10]].invisible = 1;
-        gSprites[gTasks[taskId].data[11]].invisible = 1;
+        gSprites[gTasks[taskId].data[10]].invisible = TRUE;
+        gSprites[gTasks[taskId].data[11]].invisible = TRUE;
         spriteId = gTasks[taskId].data[8];
         gSprites[spriteId].pos1.x = 0x88;
         gSprites[spriteId].pos1.y = 0x3C;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = 1;
         spriteId = gTasks[taskId].data[9];
         gSprites[spriteId].pos1.x = 0x64;
         gSprites[spriteId].pos1.y = 0x4B;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = 1;
         sub_8031BAC(taskId, 2);
         sub_8031D34(taskId, 1);
@@ -1429,7 +1453,7 @@ void task_new_game_prof_birch_speech_part2_9(u8 taskId)
             InitSpriteAffineAnim(&gSprites[spriteId]);
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = sub_80318D8;
-            BeginNormalPaletteFade(0xFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0x0000FFFF, 0, 0, 16, RGB_BLACK);
             FadeOutBGM(4);
             gTasks[taskId].func = task_new_game_prof_birch_speech_part2_10;
         }
@@ -1453,7 +1477,7 @@ void task_new_game_prof_birch_speech_part2_11(u8 taskId)
         spriteId = gTasks[taskId].data[2];
         gSprites[spriteId].callback = nullsub_11;
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        BeginNormalPaletteFade(-0x10000, 0, 0, 16, -1);
+        BeginNormalPaletteFade(-0x10000, 0, 0, 16, RGB_WHITEALPHA);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_12;
     }
 }
@@ -1573,21 +1597,21 @@ void AddBirchSpeechObjects(u8 taskId)
     
     gSprites[spriteId].callback = nullsub_11;
     gSprites[spriteId].oam.priority = 0;
-    gSprites[spriteId].invisible = 1;
+    gSprites[spriteId].invisible = TRUE;
     gTasks[taskId].data[8] = spriteId;
     spriteId2 = sub_80318F4(100, 0x4B);
     gSprites[spriteId2].callback = nullsub_11;
     gSprites[spriteId2].oam.priority = 0;
-    gSprites[spriteId2].invisible = 1;
+    gSprites[spriteId2].invisible = TRUE;
     gTasks[taskId].data[9] = spriteId2;
     spriteId3 = CreateTrainerSprite(FacilityClassToPicIndex(0x3C), 0x78, 0x3C, 0, gDecompressionBuffer);
     gSprites[spriteId3].callback = nullsub_11;
-    gSprites[spriteId3].invisible = 1;
+    gSprites[spriteId3].invisible = TRUE;
     gSprites[spriteId3].oam.priority = 0;
     gTasks[taskId].data[10] = spriteId3;
     spriteId4 = CreateTrainerSprite(FacilityClassToPicIndex(0x3F), 0x78, 0x3C, 0, &gDecompressionBuffer[0x800]);
     gSprites[spriteId4].callback = nullsub_11;
-    gSprites[spriteId4].invisible = 1;
+    gSprites[spriteId4].invisible = TRUE;
     gSprites[spriteId4].oam.priority = 0;
     gTasks[taskId].data[11] = spriteId4;
 }
@@ -1773,7 +1797,7 @@ void CreateMainMenuErrorWindow(const u8* str)
     PrintTextOnWindow(7, 1, str, 0, 1, 2, 0);
     PutWindowTilemap(7);
     CopyWindowToVram(7, 2);
-    DrawMainMenuWindowBorder(gUnknown_082FF070, 0x1D5);
+    DrawMainMenuWindowBorder(gUnknown_082FF070, MAIN_MENU_BORDER_TILE);
     SetGpuReg(REG_OFFSET_WIN0H, 0x9E7);
     SetGpuReg(REG_OFFSET_WIN0V, 0x719F);
 }
@@ -1882,7 +1906,7 @@ void sub_8032298(u8 a, u8 b, u8 c, u8 d, u8 e, u8 unused)
 void sub_80322E0(u8 windowId, u8 a)
 {
     CallWindowFunction(windowId, sub_8032298);
-    FillWindowPixelBuffer(windowId, 17);
+    FillWindowPixelBuffer(windowId, 0x11);
     ClearWindowTilemap(windowId);
     if (a == 1)
         CopyWindowToVram(windowId, 3);
@@ -1912,11 +1936,9 @@ void sub_80323A0(struct TextSubPrinter *printer, u16 a)
 void sub_80323CC(u8 a, u8 b, u16 c, u16 d, u8 e, u8 f)
 {
     struct WindowTemplate sp;
-    struct WindowTemplate sp2;
     
     sp = sub_8198A50(0, a + 1, b + 1, 5, 4, f, d);
-    sp2 = sp;
-    CreateYesNoMenu(&sp2, c, e, 0);
+    CreateYesNoMenu(&sp, c, e, 0);
 }
 
 void unknown_rbox_to_vram(u8 windowId, u8 a)
@@ -1938,11 +1960,11 @@ void sub_8032474 (u8 a, u8 b, u8 c, u8 d, u8 e, u8 f)
     FillBgTilemapBufferRect(a, 0x103, b-2,   c,   1,   5, f);
     FillBgTilemapBufferRect(a, 0x105, b-1,   c,   d+1, 5, f);
     FillBgTilemapBufferRect(a, 0x106, b+d,   c,   1,   5, f);
-    FillBgTilemapBufferRect(a, 0x8FD, b-2,   c+e, 1,   1, f);
-    FillBgTilemapBufferRect(a, 0x8FF, b-1,   c+e, 1,   1, f);
-    FillBgTilemapBufferRect(a, 0x900, b,     c+e, d-1, 1, f);
-    FillBgTilemapBufferRect(a, 0x901, b+d-1, c+e, 1,   1, f);
-    FillBgTilemapBufferRect(a, 0x902, b+d,   c+e, 1,   1, f);
+    FillBgTilemapBufferRect(a, BG_TILE_V_FLIP(0xFD), b-2,   c+e, 1,   1, f);
+    FillBgTilemapBufferRect(a, BG_TILE_V_FLIP(0xFF), b-1,   c+e, 1,   1, f);
+    FillBgTilemapBufferRect(a, BG_TILE_V_FLIP(0x100), b,     c+e, d-1, 1, f);
+    FillBgTilemapBufferRect(a, BG_TILE_V_FLIP(0x101), b+d-1, c+e, 1,   1, f);
+    FillBgTilemapBufferRect(a, BG_TILE_V_FLIP(0x102), b+d,   c+e, 1,   1, f);
 }
 
 void task_new_game_prof_birch_speech_part2_1(u8 taskId)

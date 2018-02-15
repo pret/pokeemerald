@@ -12,5 +12,6 @@
 #define RGB_YELLOW RGB(31, 31, 0)
 #define RGB_MAGENTA RGB(31, 0, 31)
 #define RGB_CYAN RGB(0, 31, 31)
+#define RGB_WHITEALPHA RGB_WHITE | 0x8000
 
 #endif // GUARD_RGB_H
