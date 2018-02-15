@@ -164,7 +164,7 @@ struct MapHeader
 {
     /* 0x00 */ const struct MapData *mapData;
     /* 0x04 */ const struct MapEvents *events;
-    /* 0x08 */ u8 *mapScripts;
+    /* 0x08 */ const u8 *mapScripts;
     /* 0x0C */ const struct MapConnections *connections;
     /* 0x10 */ u16 music;
     /* 0x12 */ u16 mapDataId;

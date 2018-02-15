@@ -605,15 +605,16 @@ bool32 warp_data_is_not_neg_1(struct WarpData *warp)
 {
     if (warp->mapGroup != -1)
         return FALSE;
-    if (warp->mapNum != -1)
+    else if (warp->mapNum != -1)
         return FALSE;
-    if (warp->warpId != -1)
+    else if (warp->warpId != -1)
         return FALSE;
-    if (warp->x != -1)
+    else if (warp->x != -1)
         return FALSE;
-    if (warp->y != -1)
+    else if (warp->y != -1)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum)
@@ -2125,7 +2126,7 @@ static void map_loading_lcd_reset(void)
     SetGpuReg(REG_OFFSET_WIN1V, 0xFFFF);
     SetGpuReg(REG_OFFSET_BLDCNT, gUnknown_82EC7C4[1] | gUnknown_82EC7C4[2] | gUnknown_82EC7C4[3]
                                | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
-    SetGpuReg(REG_OFFSET_BLDALPHA, 0x70D);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(13, 7));
     overworld_bg_setup();
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
