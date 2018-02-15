@@ -33,8 +33,9 @@ void sub_81B7F60(void);
 
 void sub_81B0FCC(u8 partyIdx, u8 a);
 void sub_81B1370(u8 taskId);
-void display_pokemon_menu_message(u8 windowBorderId);
+void display_pokemon_menu_message(u8 windowId);
 void sub_81B1F18(u8 taskId, u8 pokemonIdx, s8 a, s16 hp, TaskFunc func);
 void sub_81B1B5C(void *a, u8 b);
+u8 sub_81B1BD4();
 
 #endif // GUARD_PARTY_MENU_H

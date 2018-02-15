@@ -1,9 +1,7 @@
 #include "global.h"
-#include "fldeff_softboiled.h"
 #include "menu.h"
 #include "party_menu.h"
 #include "pokemon.h"
-//#include "pokemon_menu.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
@@ -27,9 +25,7 @@ bool8 SetUpFieldMove_SoftBoiled(void)
 
     minHp = (maxHp / 5);
     if (hp > minHp)
-    {
         return TRUE;
-    }
     return FALSE;
 }
 
@@ -82,3 +78,32 @@ void sub_81616C0(u8 taskId)
     gTasks[taskId].func = sub_8161724;
 }
 
+void sub_8161724(u8 taskId)
+{
+    if(sub_81B1BD4() == 1)
+        return;
+    gUnknown_0203CEC8.unkB = 0x0;
+    sub_81B0FCC(gUnknown_0203CEC8.unk9, 0);
+    gUnknown_0203CEC8.unk9 = gUnknown_0203CEC8.unkA;
+    sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
+    sub_8198070(0x6, FALSE);
+    ClearWindowTilemap(0x6);
+    display_pokemon_menu_message(0);
+    gTasks[taskId].func = sub_81B1370;
+}
+
+void sub_8161784(u8 taskId)
+{
+    if(sub_81B1BD4() == 1)
+        return;
+    display_pokemon_menu_message(0x5);
+    gTasks[taskId].func = sub_81B1370;
+}
+
+void sub_81617B8(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_81B1B5C(&gText_CantBeUsedOnPkmn, 0);
+    schedule_bg_copy_tilemap_to_vram(2);
+    gTasks[taskId].func = sub_8161784;
+}

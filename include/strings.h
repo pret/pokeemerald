@@ -350,6 +350,7 @@ extern const u8 gText_ThreeDashes[];
 
 //party menu text
 extern const u8 gText_PkmnHPRestoredByVar2[];
+extern const u8 gText_CantBeUsedOnPkmn[];
 
 //birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];
