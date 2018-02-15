@@ -1,8 +1,12 @@
 #include "global.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
+#include "field_screen.h"
+#include "fldeff_groundshake.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "rom6.h"
@@ -11,11 +15,6 @@
 #include "sprite.h"
 #include "task.h"
 #include "wild_encounter.h"
-
-extern void sub_81BE72C(void);
-extern void sub_81BE6B8(void);
-extern void sub_80AC3D0(void);
-extern void sub_80AC3E4(void);
 
 void hm2_sweet_scent(void);
 void sub_8159F5C(void);
@@ -50,10 +49,10 @@ void sub_8159F5C(void)
 {
     u8 taskId;
 
-    PlaySE(0xEC);
+    PlaySE(SE_W230);
     CpuFastSet(gPlttBufferUnfaded, gPaletteDecompressionBuffer, 0x100);
     CpuFastSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x100);
-    BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 0, 8, 0x1F);
+    BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 0, 8, RGB_RED);
     taskId = CreateTask(sub_8159FEC, 0);
     gTasks[taskId].data[0] = 0;
     FieldEffectActiveListRemove(FLDEFF_SWEET_SCENT);
@@ -64,7 +63,7 @@ void sub_8159FEC(u8 taskId)
     if (!gPaletteFade.active)
     {
         sub_81BE72C();
-        BlendPalettes(64, 8, 0x1F);
+        BlendPalettes(0x00000040, 8, RGB_RED);
         if (gTasks[taskId].data[0] == 64)
         {
             gTasks[taskId].data[0] = 0;
@@ -75,7 +74,7 @@ void sub_8159FEC(u8 taskId)
             else
             {
                 gTasks[taskId].func = sub_815A090;
-                BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 8, 0, 0x1F);
+                BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 8, 0, RGB_RED);
                 sub_81BE6B8();
             }
         }
