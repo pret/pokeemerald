@@ -45,13 +45,13 @@ _0813BFCA:
 	bge _0813BFCA
 	movs r0, 0x17
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	movs r0, 0x18
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	movs r0, 0x19
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -855,7 +855,7 @@ sub_813C664: @ 813C664
 	ands r0, r1
 	cmp r0, 0
 	bne _0813C694
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	ldr r0, =gUnknown_0203AB78
 	ldr r0, [r0]

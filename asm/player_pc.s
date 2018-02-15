@@ -586,7 +586,7 @@ sub_816B31C: @ 816B31C
 	ldr r0, =gFieldCallback
 	ldr r1, =mapldr_080EBC0C
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -1279,7 +1279,7 @@ sub_816B900: @ 816B900
 	ldr r0, =gFieldCallback
 	ldr r1, =pal_fill_for_maplights_or_black
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -1538,7 +1538,7 @@ sub_816BB28: @ 816BB28
 	ldr r0, =gFieldCallback
 	ldr r1, =sub_816BB48
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0

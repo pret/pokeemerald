@@ -8,7 +8,7 @@
     .align 2
 gUnknown_085920D8:: @ 85920D8
 	.4byte sub_81B617C
-	.4byte c2_exit_to_overworld_2_switch
+	.4byte CB2_ReturnToField
 	.4byte NULL
 
     .align 2

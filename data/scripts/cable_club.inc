@@ -916,21 +916,21 @@ RecordCorner_EventScript_277471:: @ 8277471
 	releaseall
 	end
 
-gUnknown_0827747E:: @ 827747E
+EventScript_TradeRoom_ReadTrainerCard1:: @ 827747E
 	msgbox Text_278452, 4
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
 	end
 
-gUnknown_0827748D:: @ 827748D
+EventScript_TradeRoom_ReadTrainerCard2:: @ 827748D
 	msgbox Text_27847B, 4
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
 	end
 
-gUnknown_0827749C:: @ 827749C
+EventScript_TradeRoom_TooBusyToNotice:: @ 827749C
 	msgbox Text_27842E, 4
 	closemessage
 	end
@@ -983,7 +983,7 @@ gUnknown_08277509:: @ 8277509
 	special sub_80B371C
 	end
 
-gUnknown_08277513:: @ 8277513
+EventScript_277513:: @ 8277513
 	special sub_80B36EC
 	special sub_80AF9F8
 	waitstate

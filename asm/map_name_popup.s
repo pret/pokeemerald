@@ -9,14 +9,14 @@
 sub_80D47D4: @ 80D47D4
 	push {lr}
 	bl sub_80A0934
-	bl AddMapNamePopUpWindowTask
+	bl ShowMapNamePopup
 	movs r0, 0x1
 	pop {r1}
 	bx r1
 	thumb_func_end sub_80D47D4
 
-	thumb_func_start AddMapNamePopUpWindowTask
-AddMapNamePopUpWindowTask: @ 80D47E4
+	thumb_func_start ShowMapNamePopup
+ShowMapNamePopup: @ 80D47E4
 	push {r4,lr}
 	movs r0, 0x80
 	lsls r0, 7
@@ -83,7 +83,7 @@ _080D486C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end AddMapNamePopUpWindowTask
+	thumb_func_end ShowMapNamePopup
 
 	thumb_func_start Task_MapNamePopUpWindow
 Task_MapNamePopUpWindow: @ 80D487C

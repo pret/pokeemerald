@@ -28,6 +28,8 @@
 #include "link.h"
 #include "link_rfu.h"
 
+extern u16 gUnknown_03005DA8;
+
 // Static type declarations
 
 struct BlockTransfer

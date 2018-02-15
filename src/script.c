@@ -243,7 +243,7 @@ void ScriptContext2_RunNewScript(const u8 *ptr)
 
 u8 *mapheader_get_tagged_pointer(u8 tag)
 {
-    u8 *mapScripts = gMapHeader.mapScripts;
+    const u8 *mapScripts = gMapHeader.mapScripts;
 
     if (!mapScripts)
         return NULL;

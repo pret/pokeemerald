@@ -18683,7 +18683,7 @@ _081A4294:
 	adds r0, r3, r4
 	ldrh r1, [r0]
 	movs r0, 0x20
-	bl sav12_xor_set
+	bl SetGameStat
 	ldr r1, [r7]
 	adds r0, r1, r6
 	adds r0, r4
@@ -31002,7 +31002,7 @@ sub_81AA810: @ 81AA810
 	ldrb r1, [r3]
 	adds r1, 0x2C
 	movs r0, 0x19
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r5, r0, 0
 	movs r7, 0
 	ldr r1, [r5, 0x4]
