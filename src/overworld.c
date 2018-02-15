@@ -748,13 +748,9 @@ void sub_8084E80(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 void sub_8084EBC(s16 x, s16 y)
 {
     if (warp_data_is_not_neg_1(&sUnknown_020322F4) == TRUE)
-    {
         sWarpDestination = gUnknown_020322DC;
-    }
     else
-    {
         Overworld_SetWarpDestination(sUnknown_020322F4.mapGroup, sUnknown_020322F4.mapNum, -1, x, y);
-    }
 }
 
 void warp1_set_to_sav1w(void)
@@ -951,41 +947,43 @@ static u8 sub_808532C(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
 {
     if (a3 != 8 && FlagGet(FLAG_SYS_CRUISE_MODE))
         return 1;
-    if (a3 == 5)
+    else if (a3 == 5)
         return 16;
-    if (MetatileBehavior_IsSurfableWaterOrUnderwater(a2) == 1)
+    else if (MetatileBehavior_IsSurfableWaterOrUnderwater(a2) == 1)
         return 8;
-    if (Overworld_IsBikingAllowed() != TRUE)
+    else if (Overworld_IsBikingAllowed() != TRUE)
         return 1;
-    if (playerStruct->player_field_0 == 2)
+    else if (playerStruct->player_field_0 == 2)
         return 2;
-    if (playerStruct->player_field_0 != 4)
+    else if (playerStruct->player_field_0 != 4)
         return 1;
-    return 4;
+    else
+        return 4;
 }
 
 static u8 sub_808538C(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
 {
     if (FlagGet(FLAG_SYS_CRUISE_MODE) && a4 == 6)
         return 4;
-    if (MetatileBehavior_IsDeepSouthWarp(a3) == TRUE)
+    else if (MetatileBehavior_IsDeepSouthWarp(a3) == TRUE)
         return 2;
-    if (MetatileBehavior_IsNonAnimDoor(a3) == TRUE || MetatileBehavior_IsDoor(a3) == TRUE)
+    else if (MetatileBehavior_IsNonAnimDoor(a3) == TRUE || MetatileBehavior_IsDoor(a3) == TRUE)
         return 1;
-    if (MetatileBehavior_IsSouthArrowWarp(a3) == TRUE)
+    else if (MetatileBehavior_IsSouthArrowWarp(a3) == TRUE)
         return 2;
-    if (MetatileBehavior_IsNorthArrowWarp(a3) == TRUE)
+    else if (MetatileBehavior_IsNorthArrowWarp(a3) == TRUE)
         return 1;
-    if (MetatileBehavior_IsWestArrowWarp(a3) == TRUE)
+    else if (MetatileBehavior_IsWestArrowWarp(a3) == TRUE)
         return 4;
-    if (MetatileBehavior_IsEastArrowWarp(a3) == TRUE)
+    else if (MetatileBehavior_IsEastArrowWarp(a3) == TRUE)
         return 3;
-    if ((playerStruct->player_field_0 == 16 && a2 == 8)
+    else if ((playerStruct->player_field_0 == 16 && a2 == 8)
      || (playerStruct->player_field_0 == 8 && a2 == 16))
         return playerStruct->player_field_1;
-    if (MetatileBehavior_IsLadder(a3) == TRUE)
+    else if (MetatileBehavior_IsLadder(a3) == TRUE)
         return playerStruct->player_field_1;
-    return 1;
+    else
+        return 1;
 }
 
 static u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void)
@@ -1076,34 +1074,36 @@ static bool16 NoMusicInSotopolisWithLegendaries(struct WarpData *warp)
 {
     if (VarGet(VAR_0x40CA) != 1)
         return FALSE;
-    if (warp->mapGroup != MAP_GROUP(SOOTOPOLIS_CITY))
+    else if (warp->mapGroup != MAP_GROUP(SOOTOPOLIS_CITY))
         return FALSE;
-    if (warp->mapNum == MAP_NUM(SOOTOPOLIS_CITY))
+    else if (warp->mapNum == MAP_NUM(SOOTOPOLIS_CITY))
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
 {
     if (VarGet(VAR_WEATHER_INSTITUTE_STATE))
         return FALSE;
-    if (warp->mapGroup != MAP_GROUP(ROUTE119_WEATHER_INSTITUTE_1F))
+    else if (warp->mapGroup != MAP_GROUP(ROUTE119_WEATHER_INSTITUTE_1F))
         return FALSE;
-    if (warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_1F)
+    else if (warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_1F)
      || warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_2F))
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static bool16 IsInflitratedSpaceCenter(struct WarpData *warp)
 {
     if (VarGet(VAR_0x405D) == 0)
         return FALSE;
-    if (VarGet(VAR_0x405D) > 2)
+    else if (VarGet(VAR_0x405D) > 2)
         return FALSE;
-    if (warp->mapGroup != MAP_GROUP(MOSSDEEP_CITY_SPACE_CENTER_1F))
+    else if (warp->mapGroup != MAP_GROUP(MOSSDEEP_CITY_SPACE_CENTER_1F))
         return FALSE;
-    if (warp->mapNum == MAP_NUM(MOSSDEEP_CITY_SPACE_CENTER_1F)
+    else if (warp->mapNum == MAP_NUM(MOSSDEEP_CITY_SPACE_CENTER_1F)
      || warp->mapNum == MAP_NUM(MOSSDEEP_CITY_SPACE_CENTER_2F))
         return TRUE;
     return FALSE;
@@ -1676,7 +1676,7 @@ void c2_8056854(void)
     SetMainCallback1(c1_link_related);
     sub_8086C2C();
 
-    if (gWirelessCommType)
+    if (gWirelessCommType != 0)
         gFieldCallback = sub_80AF314;
     else
         gFieldCallback = sub_80AF214;
@@ -2123,7 +2123,8 @@ static void map_loading_lcd_reset(void)
     SetGpuReg(REG_OFFSET_WIN0V, 0xFF);
     SetGpuReg(REG_OFFSET_WIN1H, 0xFFFF);
     SetGpuReg(REG_OFFSET_WIN1V, 0xFFFF);
-    SetGpuReg(REG_OFFSET_BLDCNT, gUnknown_82EC7C4[1] | gUnknown_82EC7C4[2] | gUnknown_82EC7C4[3] | 0x1040);
+    SetGpuReg(REG_OFFSET_BLDCNT, gUnknown_82EC7C4[1] | gUnknown_82EC7C4[2] | gUnknown_82EC7C4[3]
+                               | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x70D);
     overworld_bg_setup();
     schedule_bg_copy_tilemap_to_vram(1);
@@ -2137,7 +2138,8 @@ static void map_loading_lcd_reset(void)
     ChangeBgY(2, 0, 0);
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJ_1D_MAP | 0x20);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON
+                                | DISPCNT_OBJ_1D_MAP | DISPCNT_HBLANK_INTERVAL);
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
@@ -2278,11 +2280,8 @@ static void c1_link_related_func_set(u16 (*func)(u32))
 
 static void sub_8086C64(void)
 {
-    if (gWirelessCommType != 0)
-    {
-        if (++sUnknown_03000E19 > 60)
-            sub_8010198();
-    }
+    if (gWirelessCommType != 0 && ++sUnknown_03000E19 > 60)
+        sub_8010198();
 }
 
 static void sub_8086C90(void)
@@ -2720,11 +2719,12 @@ static bool32 sub_8087388(struct UnkStruct_8054FF8 *a1)
 {
     if (a1->c != 2 && a1->c != 0)
         return FALSE;
-    if (!MetatileBehavior_IsSouthArrowWarp(a1->field_C))
+    else if (!MetatileBehavior_IsSouthArrowWarp(a1->field_C))
         return FALSE;
-    if (a1->d != 1)
+    else if (a1->d != 1)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1)
@@ -2745,9 +2745,9 @@ static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1)
     {
         if (!a1->b)
             return EventScript_TradeRoom_TooBusyToNotice;
-        if (sUnknown_03000E10[linkPlayerId] != 0x80)
+        else if (sUnknown_03000E10[linkPlayerId] != 0x80)
             return EventScript_TradeRoom_TooBusyToNotice;
-        if (!sub_80B39D4(linkPlayerId))
+        else if (!sub_80B39D4(linkPlayerId))
             return EventScript_TradeRoom_ReadTrainerCard1;
         else
             return EventScript_TradeRoom_ReadTrainerCard2;
@@ -2760,29 +2760,30 @@ static u16 sub_8087480(const u8 *script)
 {
     if (script == gUnknown_08277388)
         return 10;
-    if (script == gUnknown_082773A3)
+    else if (script == gUnknown_082773A3)
         return 9;
-    if (script == gUnknown_082773BE)
+    else if (script == gUnknown_082773BE)
         return 10;
-    if (script == gUnknown_082773D9)
+    else if (script == gUnknown_082773D9)
         return 9;
-    if (script == gUnknown_0827741D)
+    else if (script == gUnknown_0827741D)
         return 10;
-    if (script == gUnknown_08277432)
+    else if (script == gUnknown_08277432)
         return 9;
-    if (script == gUnknown_08277447)
+    else if (script == gUnknown_08277447)
         return 10;
-    if (script == gUnknown_0827745C)
+    else if (script == gUnknown_0827745C)
         return 9;
-    if (script == gUnknown_08277374)
+    else if (script == gUnknown_08277374)
         return 10;
-    if (script == gUnknown_0827737E)
+    else if (script == gUnknown_0827737E)
         return 9;
-    if (script == gUnknown_082773F5)
+    else if (script == gUnknown_082773F5)
         return 10;
-    if (script == gUnknown_082773FF)
+    else if (script == gUnknown_082773FF)
         return 9;
-    return 0;
+    else
+        return 0;
 }
 
 static void sub_8087510(void)
@@ -2841,17 +2842,13 @@ bool32 sub_80875C8(void)
 
     if (sub_800B4DC() < 2)
         return FALSE;
-
-    if (is_c1_link_related_active() != TRUE)
+    else if (is_c1_link_related_active() != TRUE)
         return FALSE;
-
-    if (sub_8009F3C() != TRUE)
+    else if (sub_8009F3C() != TRUE)
         return FALSE;
-
-    if (sUnknown_03000E14 == sub_808711C)
+    else if (sUnknown_03000E14 == sub_808711C)
         return TRUE;
-
-    if (sUnknown_03000E14 != sub_80870F8)
+    else if (sUnknown_03000E14 != sub_80870F8)
         return FALSE;
 
     temp = sUnknown_03000E18;
@@ -2859,37 +2856,34 @@ bool32 sub_80875C8(void)
 
     if (temp == TRUE)
         return TRUE;
-
-    if (gPaletteFade.active && gPaletteFade.softwareFadeFinishing)
+    else if (gPaletteFade.active && gPaletteFade.softwareFadeFinishing)
         return TRUE;
-
-    return FALSE;
+    else
+        return FALSE;
 }
 
 bool32 sub_8087634(void)
 {
     if (sub_8087690() < 2)
         return FALSE;
-
-    if (is_c1_link_related_active() != TRUE)
+    else if (is_c1_link_related_active() != TRUE)
         return FALSE;
-
-    if (sub_8009F3C() != TRUE)
+    else if (sub_8009F3C() != TRUE)
         return FALSE;
-
-    if (sUnknown_03000E14 == sub_8087140)
+    else if (sUnknown_03000E14 == sub_8087140)
         return TRUE;
-
-    return FALSE;
+    else
+        return FALSE;
 }
 
 bool32 sub_808766C(void)
 {
     if (gWirelessCommType != 0)
         return FALSE;
-    if (!sub_8009F3C())
+    else if (!sub_8009F3C())
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 static u32 sub_8087690(void)
