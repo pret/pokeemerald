@@ -119,10 +119,7 @@ gUnknown_02022D00: @ 2022D00
 
 @ src/main_menu.c
 gUnknown_02022D04: @ 2022D04
-	.space 0x2
-
-gUnknown_02022D06: @ 2022D06
-	.space 0x2
+	.include "src/main_menu.o"
 
 gUnknown_02022D08: @ 2022D08
 	.space 0x1

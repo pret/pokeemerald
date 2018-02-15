@@ -214,7 +214,7 @@ const struct YesNoFuncTable gUnknown_08614084 = {BagMenuActuallyToss, BagMenuCan
 
 const struct YesNoFuncTable gUnknown_0861408C = {sub_81AD84C, sub_81AD6FC};
 
-const u16 gUnknown_08614094[] = {0x1C00, 0x110, 0x1064, -1, -1, 0x6F, 0x6F, 0};
+const struct ArrowStruct gUnknown_08614094 = {0, 0x1C, 16, 1, 100, 16, -1, -1, 0x6F, 0x6F, 0};
 
 const u8 gUnknown_086140A4[] = INCBIN_U8("graphics/interface/select_button.4bpp");
 

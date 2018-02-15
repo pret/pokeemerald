@@ -198,6 +198,10 @@ extern u32 gUnknown_020223C0;
 extern bool8 gLinkVSyncDisabled;
 extern u32 gLinkStatus;
 
+
+void c2_mystery_gift(void);
+void sub_801867C(void);
+bool8 sub_80093CC(void);
 void Task_DestroySelf(u8 taskId);
 void OpenLink(void);
 void CloseLink(void);
