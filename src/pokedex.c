@@ -6,6 +6,65 @@
 #include "decompress.h"
 #include "bg.h"
 #include "window.h"
+#include "event_data.h"
+#include "palette.h"
+
+extern u16 gUnknown_02039B50;
+extern u8 gUnknown_02039B52;
+
+extern u8 gUnknown_030060B0;
+
+#define NATIONAL_DEX_COUNT 386
+
+struct PokedexListItem
+{
+    u16 dexNum;
+    u16 seen:1;
+    u16 owned:1;
+};
+
+struct PokedexView
+{
+    struct PokedexListItem unk0[NATIONAL_DEX_COUNT];
+    u16 unk608;
+    u8 unk60A_1:1;
+    u8 unk60A_2:1;
+    u8 unk60B;
+    u16 pokemonListCount;
+    u16 selectedPokemon;
+    u16 unk610;
+    u16 dexMode;
+    u16 unk614;
+    u16 dexOrder;
+    u16 unk618;
+    u16 unk61A;
+    u16 unk61C;
+    u16 unk61E[4];
+    u16 selectedMonSpriteId;
+    u16 unk628;
+    u16 unk62A;
+    u8 unk62C;
+    u8 unk62D;
+    u8 unk62E;
+    u8 unk62F;
+    s16 unk630;
+    s16 unk632;
+    u16 unk634;
+    u16 unk636;
+    u16 unk638;
+    u16 unk63A[4];
+    u8 filler642[8];
+    u8 unk64A;
+    u8 unk64B;
+    u8 unk64C_1:1;
+    u8 selectedScreen;
+    u8 unk64E;
+    u8 menuIsOpen;      //menuIsOpen
+    u16 menuCursorPos;     //Menu cursor position
+    s16 menuY;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
+    u8 unk654[8];
+    u8 unk65C[8];
+};
 
 // this file's functions
 void sub_80BE604(struct Sprite *sprite);
@@ -540,3 +599,94 @@ const struct WindowTemplate sWindowTemplates_0855D2A8[] =
     DUMMY_WIN_TEMPLATE
 };
 
+// .text
+
+#define DEX_FLAGS_NO ((POKEMON_SLOTS_NUMBER / 8) + ((POKEMON_SLOTS_NUMBER % 8) ? 1 : 0))
+
+void ResetPokedex(void)
+{
+    u16 i;
+    
+    gUnknown_02039B50 = 0;
+    gUnknown_02039B52 = 64;
+    gUnknown_030060B0 = 0;
+    gSaveBlock2Ptr->pokedex.unknown1 = 0;
+    gSaveBlock2Ptr->pokedex.order = 0;
+    gSaveBlock2Ptr->pokedex.nationalMagic = 0;
+    gSaveBlock2Ptr->pokedex.unknown2 = 0;
+    gSaveBlock2Ptr->pokedex.unownPersonality = 0;
+    gSaveBlock2Ptr->pokedex.spindaPersonality = 0;
+    gSaveBlock2Ptr->pokedex.unknown3 = 0;
+    DisableNationalPokedex();
+    for (i = 0; i < DEX_FLAGS_NO; i++)
+    {
+        gSaveBlock2Ptr->pokedex.owned[i] = 0;
+        gSaveBlock2Ptr->pokedex.seen[i] = 0;
+        gSaveBlock1Ptr->seen1[i] = 0;
+        gSaveBlock1Ptr->seen2[i] = 0;
+    }
+}
+
+void sub_80BB358(void)
+{
+    gUnknown_02039B50 = 0;
+    gUnknown_02039B52 = 64;
+}
+
+void sub_80BB370(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_80BB384(struct PokedexView *pokedexView)
+{
+    u16 i;
+
+    for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+    {
+        pokedexView->unk0[i].dexNum |= 0xFFFF;
+        pokedexView->unk0[i].seen = 0;
+        pokedexView->unk0[i].owned = 0;
+    }
+    pokedexView->unk608 = 0;
+    pokedexView->unk60A_1 = 0;
+    pokedexView->unk60A_2 = 0;
+    pokedexView->pokemonListCount = 0;
+    pokedexView->selectedPokemon = 0;
+    pokedexView->unk610 = 0;
+    pokedexView->dexMode = 0;
+    pokedexView->unk614 = 0;
+    pokedexView->dexOrder = 0;
+    pokedexView->unk618 = 0;
+    pokedexView->unk61A = 0;
+    pokedexView->unk61C = 0;
+    for (i = 0; i <= 3; i++)
+        pokedexView->unk61E[i] |= 0xFFFF;
+    pokedexView->unk628 = 0;
+    pokedexView->unk62A = 0;
+    pokedexView->unk62C = 0;
+    pokedexView->unk62D = 0;
+    pokedexView->unk62E = 0;
+    pokedexView->unk62F = 0;
+    pokedexView->unk630 = 0;
+    pokedexView->unk632 = 0;
+    pokedexView->unk634 = 0;
+    pokedexView->unk636 = 0;
+    pokedexView->unk638 = 0;
+    for (i = 0; i <= 3; i++)
+        pokedexView->unk63A[i] = 0;
+    pokedexView->unk64A = 0;
+    pokedexView->unk64B = 0;
+    pokedexView->unk64C_1 = 0;
+    pokedexView->selectedScreen = 0;
+    pokedexView->unk64E = 0;
+    pokedexView->menuIsOpen = 0;
+    pokedexView->menuCursorPos = 0;
+    pokedexView->menuY = 0;
+    for (i = 0; i <= 7; i++)
+        pokedexView->unk654[i] = 0;
+    for (i = 0; i <= 7; i++)
+        pokedexView->unk65C[i] = 0;
+}

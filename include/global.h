@@ -37,6 +37,7 @@
 
 #define PARTY_SIZE 6
 
+#define POKEMON_SLOTS_NUMBER 412
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
