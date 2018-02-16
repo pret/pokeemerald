@@ -2726,6 +2726,21 @@ extern const u16 gBagScreenMale_Pal[];
 extern const u8 gBagMenuHMIcon_Gfx[];
 
 //intro graphics
+extern const u8 gIntro1SparkleGfx[];
+extern const u8 gIntro1FlygonGfx[];
+extern const u16 gIntro3LightningPal[];
+extern const u8 gIntroCopyright_Gfx[];
+extern const u8 gIntroCopyright_Tilemap[];
+extern const u16 gIntroCopyright_Pal[];
+extern const u8 gIntro2VolbeatGfx[];
+extern const u8 gIntro2TorchicGfx[];
+extern const u8 gIntro2ManectricGfx[];
+extern const u16 gIntro2VolbeatPal[];
+extern const u16 gIntro2TorchicPal[];
+extern const u16 gIntro2ManectricPal[];
+extern const u8 gIntro2BubblesGfx[];
+extern const u16 gIntro2BubblesPal[];
+extern const u8 gIntro3LightningGfx[];
 extern const u8 gIntro3GroudonGfx[];
 extern const u8 gIntro3GroudonTilemap[];
 extern const u8 gIntro3LegendBgGfx[];

@@ -219,7 +219,6 @@ SECTIONS {
         src/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         src/intro.o(.text);
-        asm/intro.o(.text);
         src/reset_save_heap.o(.text);
         src/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
@@ -495,7 +494,7 @@ SECTIONS {
         data/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);
         data/player_pc.o(.rodata);
-        data/intro.o(.rodata);
+        src/intro.o(.rodata);
         src/field_region_map.o(.rodata);
         data/battle_anim_8170478.o(.rodata);
         src/hall_of_fame.o(.rodata);

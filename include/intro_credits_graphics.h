@@ -1,6 +1,10 @@
 #ifndef GUARD_INTRO_CREDITS_GRAPHICS_H
 #define GUARD_INTRO_CREDITS_GRAPHICS_H
 
+extern u16 gUnknown_0203BD24;
+extern u16 gUnknown_0203BD26;
+extern u16 gUnknown_0203BD28;
+
 extern const struct CompressedSpriteSheet gIntro2BrendanSpriteSheet[];
 extern const struct CompressedSpriteSheet gIntro2MaySpriteSheet[];
 extern const struct CompressedSpriteSheet gIntro2BicycleSpriteSheet[];
