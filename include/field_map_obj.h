@@ -25,6 +25,7 @@ enum SpinnerRunnerFollowPatterns {
 // Exported ROM declarations
 
 void sub_808D438(void);
+u8 get_go_image_anim_num(u8);
 u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetFieldObjectIdByXY(s16, s16);
@@ -88,6 +89,8 @@ bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *ma
 u8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *mapObject);
 void sub_808F23C(const struct MapObject *mapObject, u8 movementType);
 void sub_808F208(const struct MapObject *mapObject);
+void npc_coords_shift_still(struct MapObject *pObject);
+void FieldObjectMoveDestCoords(struct MapObject *pObject, u32 unk_19, s16 *pInt, s16 *pInt1);
 
 // Exported data declarations
 

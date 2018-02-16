@@ -74,7 +74,7 @@ extern void (*gFieldCallback)(void);
 
 extern const u16 gUnknown_0860F074[];
 
-extern void c2_exit_to_overworld_2_switch(void);
+extern void CB2_ReturnToField(void);
 extern bool8 sub_81221EC(void);
 extern void sub_809882C(u8, u16, u8);
 extern void copy_textbox_border_tile_patterns_to_vram(u8, u16, u8);
@@ -374,7 +374,7 @@ void OpenPokeblockCaseInBattle(void)
 
 void OpenPokeblockCaseOnFeeder(void)
 {
-    OpenPokeblockCase(PBLOCK_CASE_FEEDER, c2_exit_to_overworld_2_switch);
+    OpenPokeblockCase(PBLOCK_CASE_FEEDER, CB2_ReturnToField);
 }
 
 static void CB2_PokeblockMenu(void)

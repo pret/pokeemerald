@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_809BEDC
-sub_809BEDC: @ 809BEDC
+	thumb_func_start FieldClearPlayerInput
+FieldClearPlayerInput: @ 809BEDC
 	push {r4,r5,lr}
 	movs r1, 0x2
 	negs r1, r1
@@ -29,11 +29,11 @@ sub_809BEDC: @ 809BEDC
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809BEDC
+	thumb_func_end FieldClearPlayerInput
 
-	thumb_func_start process_overworld_input
-@ void process_overworld_input(overworld_input_data *input_data, char buttons_new, char buttons_held)
-process_overworld_input: @ 809BF08
+	thumb_func_start FieldGetPlayerInput
+@ void FieldGetPlayerInput(overworld_input_data *input_data, char buttons_new, char buttons_held)
+FieldGetPlayerInput: @ 809BF08
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -176,7 +176,7 @@ _0809C006:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end process_overworld_input
+	thumb_func_end FieldGetPlayerInput
 
 	thumb_func_start sub_809C014
 @ int sub_809C014(overworld_input_data *input_data)
@@ -2006,7 +2006,7 @@ _0809CF20:
 	bl sub_8084D5C
 	ldrb r0, [r5, 0x7]
 	ldrb r1, [r5, 0x6]
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldr r1, [r0, 0x4]
 	ldrb r0, [r5, 0x5]
 	ldr r1, [r1, 0x8]

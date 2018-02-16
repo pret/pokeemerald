@@ -881,7 +881,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
         return;
     }
 
-    switch (get_map_light_level_by_bank_and_number(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+    switch (GetMapTypeByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
     {
         default:
         case 1:
@@ -904,7 +904,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
         case 7:
             if (gMapHeader.flags & 0x02)
             {
-                mapHeader = get_mapheader_by_bank_and_number(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
                 gRegionMap->playerIsInCave = TRUE;
                 mapWidth = mapHeader->mapData->width;
@@ -923,7 +923,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             }
             break;
         case 9:
-            mapHeader = get_mapheader_by_bank_and_number((u16)gSaveBlock1Ptr->warp2.mapGroup, (u16)gSaveBlock1Ptr->warp2.mapNum);
+            mapHeader = Overworld_GetMapHeaderByGroupAndId((u16)gSaveBlock1Ptr->warp2.mapGroup, (u16)gSaveBlock1Ptr->warp2.mapNum);
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             gRegionMap->playerIsInCave = TRUE;
             mapWidth = mapHeader->mapData->width;
@@ -937,12 +937,12 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             if (gRegionMap->mapSecId != MAPSEC_DYNAMIC)
             {
                 storedWarp = &gSaveBlock1Ptr->warp4;
-                mapHeader = get_mapheader_by_bank_and_number(storedWarp->mapGroup, storedWarp->mapNum);
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(storedWarp->mapGroup, storedWarp->mapNum);
             }
             else
             {
                 storedWarp = &gSaveBlock1Ptr->warp2;
-                mapHeader = get_mapheader_by_bank_and_number(storedWarp->mapGroup, storedWarp->mapNum);
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(storedWarp->mapGroup, storedWarp->mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             }
             if (RegionMap_IsPlayerInCave(gRegionMap->mapSecId))
@@ -1065,7 +1065,7 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
             break;
         default:
         case 0:
-            mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+            mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             dimensionScale = mapHeader->mapData->width / gRegionMapEntries[gRegionMap->mapSecId].width;
@@ -1581,7 +1581,7 @@ void MCB2_FlyMap(void)
             gUnknown_0203A148 = malloc(sizeof(*gUnknown_0203A148));
             if (gUnknown_0203A148 == NULL)
             {
-                SetMainCallback2(sub_8086194);
+                SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
             }
             else
             {

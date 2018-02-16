@@ -915,8 +915,8 @@ _080FBECA:
 	bx r0
 	thumb_func_end RotatingGatePuzzleCameraUpdate
 
-	thumb_func_start sub_80FBED0
-sub_80FBED0: @ 80FBED0
+	thumb_func_start RotatingGate_InitPuzzleAndGraphics
+RotatingGate_InitPuzzleAndGraphics: @ 80FBED0
 	push {lr}
 	bl GetCurrentMapRotatingGatePuzzleType
 	cmp r0, 0
@@ -929,7 +929,7 @@ sub_80FBED0: @ 80FBED0
 _080FBEEA:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80FBED0
+	thumb_func_end RotatingGate_InitPuzzleAndGraphics
 
 	thumb_func_start CheckForRotatingGatePuzzleCollision
 CheckForRotatingGatePuzzleCollision: @ 80FBEF0

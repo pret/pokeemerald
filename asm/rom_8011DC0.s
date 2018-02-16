@@ -3116,7 +3116,7 @@ _08014070:
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
 	ldr r1, =gMain
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	str r0, [r1, 0x8]
 	ldr r0, =sub_807AE50
 	bl SetMainCallback2
@@ -3258,7 +3258,7 @@ _080141D4:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =c2_exit_to_overworld_2_switch
+	ldr r1, =CB2_ReturnToField
 	bl sub_80C4E74
 _080141F2:
 	bl RunTasks
@@ -3399,7 +3399,7 @@ sub_8014304: @ 8014304
 	ldr r0, =0x00004087
 	bl VarSet
 	bl GetLinkPlayerCount
-	ldr r1, =gUnknown_03005DB8
+	ldr r1, =gFieldLinkPlayerCount
 	strb r0, [r1]
 	bl GetMultiplayerId
 	ldr r1, =gUnknown_03005DB4
@@ -3757,7 +3757,7 @@ _08014714:
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =c2_load_new_map
+	ldr r1, =CB2_LoadMap
 	bl sub_802A9A8
 	b _08014764
 	.pool
@@ -3766,7 +3766,7 @@ _08014734:
 	movs r1, 0x9
 	movs r2, 0x1
 	bl sub_8014290
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl sub_8020C70
 	b _08014764
 	.pool
@@ -3778,7 +3778,7 @@ _0801474C:
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =c2_load_new_map
+	ldr r1, =CB2_LoadMap
 	bl sub_802493C
 _08014764:
 	adds r0, r4, 0
@@ -6931,7 +6931,7 @@ _08016502:
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF128
 	str r0, [r1]
-	ldr r1, =c2_exit_to_overworld_2_switch
+	ldr r1, =CB2_ReturnToField
 	movs r0, 0x8
 	bl sub_81B8904
 	b _08016878
@@ -7229,7 +7229,7 @@ _0801677E:
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF128
 	str r0, [r1]
-	ldr r1, =c2_exit_to_overworld_2_switch
+	ldr r1, =CB2_ReturnToField
 	movs r0, 0x9
 	bl sub_81B8904
 	adds r0, r6, 0
@@ -14941,7 +14941,7 @@ _0801A58C:
 	ldr r0, =gUnknown_03000DAC
 	ldr r0, [r0]
 	bl Free
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
@@ -16076,7 +16076,7 @@ _0801AF58:
 	bl sub_801ABDC
 	cmp r0, 0
 	beq _0801AFAE
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	b _0801AFAE
 	.pool
@@ -16102,7 +16102,7 @@ _0801AF98:
 	bl sub_801ABDC
 	cmp r0, 0
 	beq _0801AFAE
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 _0801AFAE:
 	bl RunTasks
@@ -23568,7 +23568,7 @@ _0801EBA8:
 	bne _0801EBC2
 	bl sub_801F544
 	bl sub_801DE30
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 _0801EBC2:
 	add sp, 0x4
@@ -27694,7 +27694,7 @@ _08020C26:
 	str r0, [r5]
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	cmp r4, r0
 	bne _08020C5A
 	ldr r2, =gTextFlags
@@ -27705,8 +27705,8 @@ _08020C26:
 	movs r0, 0xC8
 	lsls r0, 1
 	bl PlayNewMapMusic
-	ldr r0, =c1_overworld
-	bl set_callback1
+	ldr r0, =CB1_Overworld
+	bl SetMainCallback1
 _08020C5A:
 	movs r0, 0
 _08020C5C:

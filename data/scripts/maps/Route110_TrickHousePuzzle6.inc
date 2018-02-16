@@ -12,7 +12,7 @@ Route110_TrickHousePuzzle6_MapScript2_26DDB6: @ 826DDB6
 	.2byte 0
 
 Route110_TrickHousePuzzle6_EventScript_26DDC0:: @ 826DDC0
-	special sub_80FBED0
+	special RotatingGate_InitPuzzleAndGraphics
 	end
 
 Route110_TrickHousePuzzle6_EventScript_26DDC4:: @ 826DDC4

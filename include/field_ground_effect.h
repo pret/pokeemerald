@@ -10,6 +10,8 @@
 // Exported RAM declarations
 
 // Exported ROM declarations
+u8 ZCoordToPriority(u8);
+void FieldObjectUpdateZCoord(struct MapObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 void InitObjectPriorityByZCoord(struct Sprite *, u8);
 bool8 IsZCoordMismatchAt(u8, s16, s16);

@@ -133,12 +133,12 @@ void MoveSaveBlocks_ResetHeap(void)
 }
 
 
-u8 sav2_x1_query_bit1(void)
+u32 GetSecretBase2Field_9(void)
 {
     return gSaveBlock2Ptr->specialSaveWarp & 1;
 }
 
-void sav2_x9_clear_bit1(void)
+void ClearSecretBase2Field_9(void)
 {
     gSaveBlock2Ptr->specialSaveWarp &= ~1;
 }

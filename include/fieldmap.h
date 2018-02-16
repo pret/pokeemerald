@@ -15,5 +15,6 @@ bool8 MapGridIsImpassableAt(s16, s16);
 s32 GetMapBorderIdAt(s16, s16);
 bool32 CanCameraMoveInDirection(u8);
 u16 GetBehaviorByMetatileId(u16 metatileId);
+void sav1_camera_get_focus_coords(u16 *x, u16 *y);
 
 #endif //GUARD_FIELDMAP_H

@@ -230,7 +230,7 @@ CB2_ExitSellMenu: @ 80DFC48
 	ldr r0, =gFieldCallback
 	ldr r1, =MapPostLoadHook_ExitBuyOrSellMenu
 	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -2706,7 +2706,7 @@ Task_ExitBuyMenu: @ 80E11B0
 	bne _080E11D6
 	bl RemoveMoneyLabelObject
 	bl BuyMenuFreeMemory
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask

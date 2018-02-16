@@ -919,7 +919,7 @@ static void CB2_TestBattleTransition(void)
         if (IsBattleTransitionDone())
         {
             sTestingTransitionState = 0;
-            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            SetMainCallback2(CB2_ReturnToField);
         }
         break;
     }

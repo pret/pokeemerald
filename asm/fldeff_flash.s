@@ -217,7 +217,7 @@ sub_8137304: @ 8137304
 	bl get_map_light_from_warp0
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r3, 0

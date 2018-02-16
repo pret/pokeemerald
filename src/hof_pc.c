@@ -25,7 +25,7 @@ void AccessHallOfFamePC(void)
 
 void ReturnFromHallOfFamePC(void)
 {
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
     gFieldCallback = ReshowPCMenuAfterHallOfFamePC;
 }
 

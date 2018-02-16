@@ -208,35 +208,7 @@ gDifferentSaveFile: @ 20322D4
 gUnknown_020322D5: @ 20322D5
 	.space 0x3
 
-gUnknown_020322D8: @ 20322D8
-	.space 0x4
-
-gUnknown_020322DC: @ 20322DC
-	.space 0x8
-
-gUnknown_020322E4: @ 20322E4
-	.space 0x8
-
-gUnknown_020322EC: @ 20322EC
-	.space 0x8
-
-gUnknown_020322F4: @ 20322F4
-	.space 0x8
-
-gUnknown_020322FC: @ 20322FC
-	.space 0x4
-
-gUnknown_02032300: @ 2032300
-	.space 0x4
-
-gUnknown_02032304: @ 2032304
-	.space 0x2
-
-gUnknown_02032306: @ 2032306
-	.space 0x2
-
-gLinkPlayerMapObjects: @ 2032308
-	.space 0x10
+	.include "src/overworld.o"
 
 gUnknown_02032318: @ 2032318
 	.space 0x5000

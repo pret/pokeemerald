@@ -213,7 +213,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F972C
 	def_special sp0C8_whiteout_maybe
 	def_special sub_80FBE90
-	def_special sub_80FBED0
+	def_special RotatingGate_InitPuzzleAndGraphics
 	def_special SetSSTidalFlag
 	def_special ResetSSTidalFlag
 	def_special EnterSafariMode
@@ -417,8 +417,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B880
 	def_special sub_81A085C
 	def_special ShouldTryGetTrainerScript
-	def_special AddMapNamePopUpWindowTask
-	def_special AddMapNamePopUpWindowTask
+	def_special ShowMapNamePopup
+	def_special ShowMapNamePopup
 	def_special sub_81BE994
 	def_special sub_81BE79C
 	def_special sub_81BE7F4
