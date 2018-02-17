@@ -1943,7 +1943,7 @@ _080B69D4:
 	thumb_func_start sub_80B69DC
 sub_80B69DC: @ 80B69DC
 	push {lr}
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_080842E8
@@ -2008,9 +2008,9 @@ _080B6A64:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B6A8A
-	bl flag_var_implications_of_teleport_
+	bl Overworld_ResetStateAfterFly
 	bl warp_in
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_08084390
@@ -2764,7 +2764,7 @@ sub_80B7060: @ 80B7060
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80B70B4
 	str r0, [r1]
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r0, =sub_80B6E88
 	bl FindTaskIdByFunc
@@ -3730,7 +3730,7 @@ sub_80B7814: @ 80B7814
 	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_080851BC
 	str r0, [r1]
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r0, =sub_80B75F0
 	bl FindTaskIdByFunc
@@ -4205,7 +4205,7 @@ sub_80B7BF4: @ 80B7BF4
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80B6B68
 	str r0, [r1]
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r0, =sub_80B7A8C
 	bl FindTaskIdByFunc
@@ -4402,7 +4402,7 @@ _080B7D86:
 	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_080859D4
 	str r0, [r1]
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r0, =sub_80B7CE4
 	bl FindTaskIdByFunc
@@ -4881,9 +4881,9 @@ _080B81B8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B81E6
-	bl copy_saved_warp3_bank_and_enter_x_to_warp1
+	bl Overworld_SetWarpDestToLastHealLoc
 	bl warp_in
-	ldr r0, =c2_load_new_map
+	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_08085D88
@@ -5211,7 +5211,7 @@ _080B8484:
 	thumb_func_start sub_80B849C
 sub_80B849C: @ 80B849C
 	push {r4,lr}
-	bl sav1_map_get_light_level
+	bl Overworld_GetMapTypeOfSaveblockLocation
 	lsls r0, 24
 	lsrs r0, 24
 	bl is_light_level_1_2_3_5_or_6

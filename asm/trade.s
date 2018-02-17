@@ -10669,7 +10669,7 @@ _0807CF5C:
 	bl Free
 	str r4, [r7]
 _0807CFAA:
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	bl sub_807E784
 _0807CFB4:
@@ -12774,7 +12774,7 @@ _0807E3A8:
 	bl Free
 	str r4, [r7]
 _0807E3F6:
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	bl sub_807E784
 _0807E400:

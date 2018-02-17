@@ -1079,7 +1079,7 @@ void sub_818E914(void)
 
 void sub_818E92C(void)
 {
-    OpenPokeblockCase(3, c2_exit_to_overworld_2_switch);
+    OpenPokeblockCase(3, CB2_ReturnToField);
 }
 
 void sub_818E940(void)

@@ -11,7 +11,7 @@ mapconnection_get_mapheader: @ 8087D44
 	ldrb r2, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
 	adds r0, r2, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	pop {r1}
 	bx r1
 	thumb_func_end mapconnection_get_mapheader

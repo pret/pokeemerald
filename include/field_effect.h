@@ -74,10 +74,13 @@ extern u32 gFieldEffectArguments[8];
 u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
 void sub_80B69DC(void);
+u8 AddNewGameBirchObject(s16, s16, u8);
 void FieldEffectStop(struct Sprite *sprite, u8 id);
 u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void sub_80B7FC8(void);
 void FieldEffectActiveListRemove(u8 id);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
+extern void (*gUnknown_0203CEEC)(void);
+extern bool8 (*gUnknown_03005DB0)(void);
 
 #endif //GUARD_FIELD_EFFECTS_H

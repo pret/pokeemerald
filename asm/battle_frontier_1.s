@@ -6481,7 +6481,7 @@ _0819218E:
 	mov r0, r9
 	cmp r0, 0
 	bne _081921C4
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	b _081921FC
 	.pool
@@ -9539,7 +9539,7 @@ _08193B84:
 	ldr r0, [r4]
 	bl Free
 	str r6, [r4]
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	ldr r1, =gTasks
 	lsls r0, r5, 2
@@ -11320,7 +11320,7 @@ _08194B24:
 	ands r0, r1
 	cmp r0, 0
 	bne _08194B3C
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -14665,7 +14665,7 @@ sub_819672C: @ 819672C
 	ldrh r2, [r0, 0xA]
 	ldrh r1, [r0, 0xC]
 	adds r0, r2, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -15923,11 +15923,11 @@ sub_8197080: @ 8197080
 	b _0819715C
 _081970A2:
 	movs r0, 0
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x1
-	bl sub_80C0844
+	bl GetHoennPokedexCount
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r0, =gStringVar1
@@ -15977,11 +15977,11 @@ _081970A2:
 	strb r6, [r5]
 	adds r5, 0x1
 	movs r0, 0
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	lsrs r6, r0, 16
 	mov r0, r10

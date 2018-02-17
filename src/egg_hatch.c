@@ -63,7 +63,7 @@ extern void FadeScreen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
 extern void sub_80AF168(void);
 extern void ScanlineEffect_Stop(void);
-extern void c2_exit_to_overworld_2_switch(void);
+extern void CB2_ReturnToField(void);
 extern void play_some_sound(void);
 extern void DoNamingScreen(u8, const u8*, u16, u8, u32, MainCallback);
 extern u16 sub_80D22D0(void);
@@ -564,7 +564,7 @@ static void EggHatchSetMonNickname(void)
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
     FreeMonSpritesGfx();
     Free(sEggHatchData);
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 static void Task_EggHatchPlayBGM(u8 taskID)
@@ -688,7 +688,7 @@ static void CB2_EggHatch_1(void)
             UnsetBgTilemapBuffer(0);
             UnsetBgTilemapBuffer(1);
             Free(sEggHatchData);
-            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            SetMainCallback2(CB2_ReturnToField);
         }
         break;
     }

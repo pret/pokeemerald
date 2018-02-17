@@ -64,7 +64,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255180:: @ 8255180
 	end
 
 BattleFrontier_BattlePyramidTop_EventScript_25518A:: @ 825518A
-	special AddMapNamePopUpWindowTask
+	special ShowMapNamePopup
 	setvar VAR_0x400F, 0
 	end
 

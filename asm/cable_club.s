@@ -736,7 +736,7 @@ _080B2984:
 	.pool
 _080B2994:
 	bl GetLinkPlayerCount_2
-	ldr r4, =gUnknown_03005DB8
+	ldr r4, =gFieldLinkPlayerCount
 	strb r0, [r4]
 	bl GetMultiplayerId
 	ldr r1, =gUnknown_03005DB4
@@ -826,7 +826,7 @@ _080B2A4E:
 	.pool
 _080B2A6C:
 	bl GetLinkPlayerCount_2
-	ldr r4, =gUnknown_03005DB8
+	ldr r4, =gFieldLinkPlayerCount
 	strb r0, [r4]
 	bl GetMultiplayerId
 	ldr r1, =gUnknown_03005DB4
@@ -2132,12 +2132,12 @@ _080B35E0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B35FE
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	b _080B35FE
 	.pool
 _080B35F8:
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 _080B35FE:
 	bl RunTasks
@@ -2156,7 +2156,7 @@ sub_80B360C: @ 80B360C
 	negs r1, r1
 	ands r0, r1
 	str r0, [r2]
-	bl call_ResetMapMusic
+	bl Overworld_ResetMapMusic
 	bl copy_player_party_from_sav1
 	bl copy_bags_and_unk_data_to_save_blocks
 	bl sub_813BF10
@@ -2586,7 +2586,7 @@ sp02A_crash_sound: @ 80B39BC
 	push {lr}
 	ldr r0, =gSpecialVar_0x8006
 	ldrb r0, [r0]
-	ldr r1, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r1, =CB2_ReturnToFieldContinueScript
 	bl sub_80C4E74
 	pop {r0}
 	bx r0

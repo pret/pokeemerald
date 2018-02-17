@@ -76,7 +76,7 @@ extern bool8 sub_81B1250(void); // ?
 extern bool8 InBattlePike(void);
 extern bool8 InBattlePyramid(void);
 extern u16 GetBattlePyramidPickupItemId(void);
-extern u8 sav1_map_get_light_level(void);
+extern u8 Overworld_GetMapTypeOfSaveblockLocation(void);
 extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
 
@@ -10578,7 +10578,7 @@ static void atkEF_handleballthrow(void)
                     ballMultiplier = 10;
                 break;
             case ITEM_DIVE_BALL:
-                if (sav1_map_get_light_level() == 5)
+                if (Overworld_GetMapTypeOfSaveblockLocation() == 5)
                     ballMultiplier = 35;
                 else
                     ballMultiplier = 10;

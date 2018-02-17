@@ -418,7 +418,7 @@ _0809FAFE:
 	cmp r1, r0
 	bne _0809FB34
 	movs r0, 0
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	cmp r0, 0
 	beq _0809FBA0
@@ -591,7 +591,7 @@ StartMenu_PlayerName: @ 809FC8C
 	cmp r0, 0
 	beq _0809FCC8
 _0809FCB6:
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	bl sub_80C4DDC
 	b _0809FCEA
 	.pool
@@ -601,12 +601,12 @@ _0809FCC8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809FCE4
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	bl sub_80C51C4
 	b _0809FCEA
 	.pool
 _0809FCE4:
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	bl sub_80C4DDC
 _0809FCEA:
 	movs r0, 0x1
@@ -656,7 +656,7 @@ _0809FD38:
 	ldr r0, =CB2_InitOptionMenu
 	bl SetMainCallback2
 	ldr r1, =gMain
-	ldr r0, =sub_8086194
+	ldr r0, =CB2_ReturnToFieldWithOpenMenu
 	str r0, [r1, 0x8]
 	movs r0, 0x1
 _0809FD52:
@@ -703,7 +703,7 @@ _0809FDA0:
 	bl overworld_free_bg_tilemaps
 	ldr r0, =gUnknown_03005DB4
 	ldrb r0, [r0]
-	ldr r1, =sub_8086194
+	ldr r1, =CB2_ReturnToFieldWithOpenMenu
 	bl sub_80C4E74
 	movs r0, 0x1
 _0809FDB4:

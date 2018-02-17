@@ -150,6 +150,18 @@ struct UCoords16
     u16 y;
 };
 
+struct Coords32
+{
+    s32 x;
+    s32 y;
+};
+
+struct UCoords32
+{
+    u32 x;
+    u32 y;
+};
+
 struct Time
 {
     /*0x00*/ s16 days;
@@ -624,12 +636,12 @@ struct SaveBlock1
     /*0x04*/ struct WarpData location;
     /*0x0C*/ struct WarpData warp1;
     /*0x14*/ struct WarpData warp2;
-    /*0x1C*/ struct WarpData warp3;
+    /*0x1C*/ struct WarpData lastHealLocation;
     /*0x24*/ struct WarpData warp4;
-    /*0x2C*/ u16 battleMusic;
+    /*0x2C*/ u16 savedMusic;
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 filler_2F;
-    /*0x30*/ u8 flashUsed;
+    /*0x30*/ u8 flashLevel;
     /*0x32*/ u16 mapDataId;
     /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;
@@ -710,6 +722,23 @@ struct SaveBlock1
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
+
+struct MapPosition
+{
+    s16 x;
+    s16 y;
+    u8 height;
+};
+
+struct UnkStruct_8054FF8
+{
+    u8 a;
+    u8 b;
+    u8 c;
+    u8 d;
+    struct MapPosition sub;
+    u16 field_C;
+};
 
 struct Bitmap           // TODO: Find a better spot for this
 {

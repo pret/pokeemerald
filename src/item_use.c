@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item_use.h"
 #include "battle.h"
+#include "main.h"
 #include "berry.h"
 #include "bike.h"
 #include "coins.h"
@@ -45,7 +46,7 @@ extern void ItemUseOutOfBattle_EvolutionStone(u8 b);
 extern void bag_menu_mail_related(void);
 extern void OpenPokeblockCase(u8 a, void(*b)(void));
 extern void overworld_free_bg_tilemaps(void);
-extern bool32 sav1_map_is_biking_allowed(void);
+extern bool32 Overworld_IsBikingAllowed(void);
 extern bool8 IsPlayerFacingSurfableFishableWater(void);
 extern bool8 sub_81221AC(void);
 extern u8 gText_ItemFinderNothing[];
@@ -85,11 +86,12 @@ extern void sub_81C59BC(void);
 extern void sub_81AB9A8(u8);
 extern void sub_81ABA88(u8);
 extern void sub_80B7CC8(void);
-extern void flagmods_08054D70(void);
+extern void Overworld_ResetStateAfterDigEscRope(void);
 extern u8* sub_806CF78(u16);
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
 extern struct MapConnection *sub_8088A8C(s16, s16);
+extern void (*gFieldCallback)(void);
 
 void MapPostLoadHook_UseItem(void);
 void sub_80AF6D4(void);
@@ -119,7 +121,7 @@ void DisplayItemMessageOnField(u8 taskId, u8* str, void(*callback)(u8 taskId));
 void sub_81C6714(u8 taskId);
 void CleanUpAfterFailingToUseRegisteredKeyItemOnField(u8 taskId);
 void StartFishing(u8 a);
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *, u8);
+bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *, u8);
 u8 sub_80FD9B0(s16 a, s16 b);
 void sub_80FDA24(u8 a);
 void sub_80FD8E0(u8 taskId, s16 x, s16 y);
@@ -236,7 +238,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
         DisplayCannotDismountBikeMessage(taskId, data[3]);
     else
     {
-        if (sav1_map_is_biking_allowed() == TRUE && IsBikingDisallowedByPlayer() == 0)
+        if (Overworld_IsBikingAllowed() == TRUE && IsBikingDisallowedByPlayer() == 0)
         {
             gUnknown_0203A0F4 = ItemUseOnFieldCB_Bike;
             SetUpItemUseOnFieldCallback(taskId);
@@ -363,7 +365,7 @@ void sub_80FD5CC(u8 taskId)
     DestroyTask(taskId);
 }
 
-bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
+bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u8 taskId)
 {
     int distanceX, distanceY;
     s16 x, y, i, newDistanceX, newDistanceY;
@@ -390,7 +392,7 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
         return FALSE;
 }
 
-bool8 sub_80FD6D4(struct MapEvents *events, s16 x, s16 y)
+bool8 sub_80FD6D4(const struct MapEvents *events, s16 x, s16 y)
 {
     u8 bgEventCount = events->bgEventCount;
     struct BgEvent *bgEvent = events->bgEvents;
@@ -637,7 +639,7 @@ void sub_80FDC00(u8 taskId)
     if (!gPaletteFade.active)
     {
         overworld_free_bg_tilemaps();
-        OpenPokeblockCase(0, c2_exit_to_overworld_2_switch);
+        OpenPokeblockCase(0, CB2_ReturnToField);
         DestroyTask(taskId);
     }
 }
@@ -678,7 +680,7 @@ void sub_80FDD10(u8 taskId)
     {
         gUnknown_0203A0F4 = sub_80FDD74;
         gFieldCallback = MapPostLoadHook_UseItem;
-        *gUnknown_0203CE54 = c2_exit_to_overworld_2_switch;
+        *gUnknown_0203CE54 = CB2_ReturnToField;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -904,7 +906,7 @@ void task08_080A1C44(u8 taskId)
 
 void re_escape_rope(u8 taskId)
 {
-    flagmods_08054D70();
+    Overworld_ResetStateAfterDigEscRope();
     sub_80FE058();
     gTasks[taskId].data[0] = 0;
     DisplayItemMessageOnField(taskId, gStringVar4, task08_080A1C44);

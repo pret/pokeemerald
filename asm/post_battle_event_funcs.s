@@ -44,7 +44,7 @@ _0813776C:
 	ldrb r0, [r2, 0x11]
 	orrs r1, r0
 	movs r0, 0x1
-	bl sav12_xor_set
+	bl SetGameStat
 _0813778E:
 	bl sub_8076D48
 	ldr r0, =gSaveBlock2Ptr

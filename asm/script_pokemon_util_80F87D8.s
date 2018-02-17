@@ -390,7 +390,7 @@ _080F8AB6:
 	thumb_func_start sub_80F8ACC
 sub_80F8ACC: @ 80F8ACC
 	push {lr}
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -1559,7 +1559,7 @@ _080F9478:
 	movs r0, 0x1
 	strh r0, [r1]
 _080F947E:
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -1599,7 +1599,7 @@ _080F94D0:
 	movs r0, 0x1
 	strh r0, [r1]
 _080F94D6:
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	pop {r0}
 	bx r0

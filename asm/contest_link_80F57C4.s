@@ -1825,7 +1825,7 @@ _080F6884:
 	adds r0, r5, 0
 	bl DestroyTask
 	bl FreeAllWindowBuffers
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	bl sub_80F7E64
 _080F68A8:

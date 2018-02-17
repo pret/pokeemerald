@@ -3,6 +3,7 @@
 #include "global.h"
 #include "constants/decorations.h"
 #include "malloc.h"
+#include "main.h"
 #include "task.h"
 #include "palette.h"
 #include "list_menu.h"
@@ -38,6 +39,10 @@
 #include "link.h"
 #include "tv.h"
 #include "secret_base.h"
+
+extern void (*gFieldCallback)(void);
+
+extern void mapldr_default(void);
 
 // Static type declarations
 
@@ -244,7 +249,7 @@ void sub_80E8C98(void)
 
 void sub_80E8CB0(s16 *xPtr, s16 *yPtr, u16 tile)
 {
-    struct MapData *mapData;
+    const struct MapData *mapData;
     s16 x;
     s16 y;
 
@@ -386,7 +391,7 @@ void sub_80E8FD0(u8 taskId)
             sub_80E8F9C();
             warp_in();
             gFieldCallback = sub_80AF168;
-            SetMainCallback2(c2_load_new_map);
+            SetMainCallback2(CB2_LoadMap);
             DestroyTask(taskId);
             break;
     }
@@ -444,7 +449,7 @@ void sub_80E916C(u8 taskId)
         Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gUnknown_0858CFE8[idx + 2], gUnknown_0858CFE8[idx + 3]);
         warp_in();
         gFieldCallback = sub_80E9108;
-        SetMainCallback2(c2_load_new_map);
+        SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskId);
     }
 }
@@ -642,7 +647,7 @@ void sub_80E96A4(u8 taskId)
             copy_saved_warp2_bank_and_enter_x_to_warp1(0x7e);
             warp_in();
             gFieldCallback = mapldr_default;
-            SetMainCallback2(c2_load_new_map);
+            SetMainCallback2(CB2_LoadMap);
             ScriptContext2_Disable();
             DestroyTask(taskId);
             break;
@@ -773,7 +778,7 @@ void sub_80E9AD0(void)
     u16 i;
     u16 j;
     s16 tile;
-    struct MapEvents *events;
+    const struct MapEvents *events;
 
     events = gMapHeader.events;
     for (i = 0; i < events->bgEventCount; i ++)

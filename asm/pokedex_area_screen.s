@@ -308,7 +308,7 @@ _0813CCB8:
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x10]
 	ldrb r1, [r1, 0x11]
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldr r1, [r5]
 	ldrb r0, [r0, 0x14]
 	strh r0, [r1, 0x12]
@@ -360,7 +360,7 @@ sub_813CD04: @ 813CD04
 	strb r3, [r1, 0x11]
 	adds r0, r5, 0
 	adds r1, r3, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	bl CorrectSpecialMapSecId
 	ldr r2, [r4]
@@ -496,7 +496,7 @@ sub_813CE34: @ 813CE34
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1

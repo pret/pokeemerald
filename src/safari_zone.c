@@ -30,9 +30,9 @@ extern void sub_80EE44C(u8, u8);
 extern void IncrementGameStat(u8 index);
 extern void ScriptContext1_SetupScript(u8*);
 extern void ScriptContext2_RunNewScript(u8*);
-extern void c2_exit_to_overworld_2_switch(void);
-extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
-extern void c2_load_new_map(void);
+extern void CB2_ReturnToField(void);
+extern void CB2_ReturnToFieldContinueScript(void);
+extern void CB2_LoadMap(void);
 extern void sub_80AF6F0(void);
 extern void ScriptContext1_Stop(void);
 extern void warp_in(void);
@@ -112,20 +112,20 @@ void CB2_EndSafariBattle(void)
         sSafariZoneCaughtMons++;
     if (gNumSafariBalls != 0)
     {
-        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        SetMainCallback2(CB2_ReturnToField);
     }
     else if (gBattleOutcome == B_OUTCOME_NO_SAFARI_BALLS)
     {
         ScriptContext2_RunNewScript(EventScript_2A4B4C);
         warp_in();
         gFieldCallback = sub_80AF6F0;
-        SetMainCallback2(c2_load_new_map);
+        SetMainCallback2(CB2_LoadMap);
     }
     else if (gBattleOutcome == B_OUTCOME_CAUGHT)
     {
         ScriptContext1_SetupScript(EventScript_2A4B9B);
         ScriptContext1_Stop();
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+        SetMainCallback2(CB2_ReturnToFieldContinueScript);
     }
 }
 

@@ -8,7 +8,6 @@
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
-	
 
 	.section script_data, "aw", %progbits
 
@@ -1287,12 +1286,12 @@ EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
 	setvar VAR_0x40D3, 1
 	return
 
-EverGrandeCity_HallOfFame_EventScript_271857:: @ 8271857
+EventScript_WhiteOut:: @ 8271857
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
-	goto EverGrandeCity_HallOfFame_EventScript_271862
+	goto EventScript_271862
 	end
 
-EverGrandeCity_HallOfFame_EventScript_271862:: @ 8271862
+EventScript_271862:: @ 8271862
 	compare VAR_0x4096, 1
 	goto_eq EverGrandeCity_HallOfFame_EventScript_271884
 	compare VAR_0x4096, 2

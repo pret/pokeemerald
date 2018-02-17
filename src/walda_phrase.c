@@ -14,7 +14,7 @@ extern const u8 gText_Peekaboo[];
 extern u8 *GetWaldaPhrasePtr(void);
 extern bool32 IsWaldaPhraseEmpty(void);
 extern void sub_80AF168(void);
-extern void c2_exit_to_overworld_2_switch(void);
+extern void CB2_ReturnToField(void);
 extern void SetWaldaPhrase(const u8 *src);
 extern void SetWaldaWallpaperPatternId(u8 patternId);
 extern void SetWaldaWallpaperIconId(u8 iconId);
@@ -80,7 +80,7 @@ static void CB2_HandleGivenWaldaPhrase(void)
 
     StringCopy(gStringVar1, GetWaldaPhrasePtr());
     gFieldCallback = sub_80AF168;
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 static u32 GetWaldaPhraseInputCase(u8 *inputPtr)

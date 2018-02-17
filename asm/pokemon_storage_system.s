@@ -657,7 +657,7 @@ sub_80C7678: @ 80C7678
 	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_0808C6D8
 	str r0, [r1]
-	ldr r0, =c2_exit_to_overworld_2_switch
+	ldr r0, =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0

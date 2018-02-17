@@ -434,7 +434,7 @@ gUnknown_08615D9C:: @ 8615D9C
 	.4byte sub_80D3718, 0x00000007
 	.4byte SetUpFieldMove_Flash, 0x0000000d
 	.4byte sub_8135654, 0x0000000d
-	.4byte hm_prepare_rocksmash, 0x0000000d
+	.4byte SetUpFieldMove_Strength, 0x0000000d
 	.4byte sub_81B5820, 0x00000008
 	.4byte sub_81B5884, 0x0000000d
 	.4byte sub_81B5974, 0x0000000d
@@ -442,8 +442,8 @@ gUnknown_08615D9C:: @ 8615D9C
 	.4byte SetUpFieldMove_Teleport, 0x0000000d
 	.4byte sub_813572C, 0x0000000d
 	.4byte sub_80FA004, 0x0000000d
-	.4byte hm_prepare_dive_probably, 0x00000010
-	.4byte hm_prepare_dive_probably, 0x00000010
+	.4byte SetUpFieldMove_SoftBoiled, 0x00000010
+	.4byte SetUpFieldMove_SoftBoiled, 0x00000010
 	.4byte SetUpFieldMove_SweetScent, 0x0000000d
 
 	.align 2

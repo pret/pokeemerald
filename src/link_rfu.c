@@ -16,6 +16,8 @@
 #include "rom_8011DC0.h"
 #include "link_rfu.h"
 
+extern u16 gUnknown_03005DA8;
+
 // Static type declarations
 
 // Static RAM declarations

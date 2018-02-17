@@ -18,7 +18,7 @@ Route119_EventScript_1F4439:: @ 81F4439
 Route119_MapScript1_1F444D: @ 81F444D
 	call Route119_EventScript_271ED7
 	call Route119_EventScript_271EFB
-	compare VAR_0x40B3, 1
+	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if 1, Route119_EventScript_1F4466
 	special SetRoute119Weather
 	end
@@ -26,7 +26,7 @@ Route119_MapScript1_1F444D: @ 81F444D
 Route119_EventScript_1F4466:: @ 81F4466
 	setflag FLAG_0x37D
 	clearflag FLAG_0x37C
-	setvar VAR_0x40B3, 2
+	setvar VAR_WEATHER_INSTITUTE_STATE, 2
 	return
 
 Route119_EventScript_1F4472:: @ 81F4472
