@@ -223,7 +223,7 @@ SECTIONS {
         src/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
         src/hall_of_fame.o(.text);
-        asm/credits.o(.text);
+        src/credits.o(.text);
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
         src/berry_tag_screen.o(.text);
@@ -233,7 +233,6 @@ SECTIONS {
         src/pokeblock_feed.o(.text);
         src/clear_save_data_screen.o(.text);
         src/intro_credits_graphics.o(.text);
-        asm/intro_credits_graphics.o(.text);
         src/evolution_graphics.o(.text);
         src/bard_music.o(.text);
         src/fldeff_teleport.o(.text);
@@ -499,7 +498,7 @@ SECTIONS {
         src/field_region_map.o(.rodata);
         data/battle_anim_8170478.o(.rodata);
         src/hall_of_fame.o(.rodata);
-        data/credits.o(.rodata);
+        src/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);
         data/strings.o(.rodata);
@@ -509,7 +508,7 @@ SECTIONS {
         data/braille_puzzles.o(.rodata);
         src/pokeblock_feed.o(.rodata);
         src/clear_save_data_screen.o(.rodata);
-        data/intro_credits_graphics.o(.rodata);
+        src/intro_credits_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);
         src/bard_music.o(.rodata);
         data/battle_link_817C95C.o(.rodata);

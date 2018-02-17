@@ -369,7 +369,7 @@ static const struct HallofFameMon sDummyFameMon =
     0x3EA03EA, 0, 0, 0, {0}
 };
 
-static const u8 sUnused2[6] = {2, 1, 3, 6, 4, 5};
+static const u8 sUnused2[] = {2, 1, 3, 6, 4, 5, 0, 0};
 
 // code
 static void VBlankCB_HallOfFame(void)

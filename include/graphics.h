@@ -2731,7 +2731,7 @@ extern const u8 gIntro1FlygonGfx[];
 extern const u16 gIntro3LightningPal[];
 extern const u8 gIntroCopyright_Gfx[];
 extern const u8 gIntroCopyright_Tilemap[];
-extern const u16 gIntroCopyright_Pal[];
+extern const u16 gIntroCopyright_Pal[16];
 extern const u8 gIntro2VolbeatGfx[];
 extern const u8 gIntro2TorchicGfx[];
 extern const u8 gIntro2ManectricGfx[];
@@ -2759,5 +2759,15 @@ extern const u8 gIntro3RayquazaTilemap[];
 extern const u8 gIntro3RayquazaGfx[];
 extern const u8 gIntro3Clouds2Gfx[];
 extern const u16 gIntro1GameFreakTextFadePal[];
+
+//intro/credits graphics
+extern const u8 gIntro2BrendanNoTurnGfx[];
+extern const u8 gIntro2MayNoTurnGfx[];
+extern const u16 gIntro2BrendanNoTurnPal[];
+extern const u16 gIntro2FlygonPal[];
+extern const u8 gIntro2FlygonGfx[];
+
+//credits
+extern const u8 gCreditsCopyrightEnd_Gfx[];
 
 #endif //GUARD_GRAPHICS_H

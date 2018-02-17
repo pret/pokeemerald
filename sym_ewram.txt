@@ -862,22 +862,7 @@ gUnknown_0203BCD4: @ 203BCD4
 	.space 0x4
 
     .include "src/hall_of_fame.o"
-
-gUnknown_0203BCE0: @ 203BCE0
-	.space 0x2
-
-gUnknown_0203BCE2: @ 203BCE2
-	.space 0x2
-
-gHasHallOfFameRecords: @ 203BCE4
-	.space 0x1
-
-gUnknown_0203BCE5: @ 203BCE5
-	.space 0x3
-
-gUnknown_0203BCE8: @ 203BCE8
-	.space 0x4
-
+    .include "src/credits.o"
     .include "src/lottery_corner.o"
     .include "src/diploma.o"
     .include "src/berry_tag_screen.o"
