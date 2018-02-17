@@ -1,13 +1,17 @@
 #include "global.h"
+#include "global.fieldmap.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "event_data.h"
+#include "field_camera.h"
+#include "field_map_obj.h"
 #include "fldeff_groundshake.h"
 #include "malloc.h"
 #include "menu.h"
 #include "party_menu.h"
 #include "pokemon.h"
 #include "random.h"
+#include "script.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -81,5 +85,135 @@ void sub_81BE79C(void)
         return;
     }
     FlagClear(FLAG_0x14E);
+}
+
+void sub_81BE7F4(void)
+{
+    CreateTask(sub_81BE808, 0x8);
+}
+
+void sub_81BE808(u8 taskId)
+{
+    u8 mapObjectIdBuffer;
+    struct MapObject *fieldMapObject;
+    struct MapObject *playerAvatarMapObject;
+
+    TryGetFieldObjectIdByLocalIdAndMap(0x2D, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjectIdBuffer);
+    fieldMapObject = &(gMapObjects[mapObjectIdBuffer]);
+    gSprites[fieldMapObject->spriteId].pos2.y += 4;
+    playerAvatarMapObject = &(gMapObjects[gPlayerAvatar.mapObjectId]);
+
+    if((gSprites[fieldMapObject->spriteId].pos1.y + gSprites[fieldMapObject->spriteId].pos2.y) >=
+       (gSprites[playerAvatarMapObject->spriteId].pos1.y + gSprites[playerAvatarMapObject->spriteId].pos2.y))
+    {
+        DestroyTask(taskId);
+        EnableBothScriptContexts();
+    }
+
+}
+
+void sp136_strengh_sound(u8 a, u8 b, u8 c, u8 d)
+{
+    u8 taskId;
+
+    taskId = CreateTask(sub_81BE900, 0x9);
+    gTasks[taskId].data[0] = b;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = c;
+    gTasks[taskId].data[3] = d;
+    gTasks[taskId].data[4] = a;
+    SetCameraPanningCallback(NULL);
+    PlaySE(SE_W070);
+}
+
+void sub_81BE900(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    data[1]++;
+    if((data[1] % data[3]) == 0)
+    {
+        data[1] = 0;
+        data[2]--;
+        data[0] = -data[0];
+        data[4] = -data[4];
+        SetCameraPanning(data[0], data[4]);
+        if(!data[2])
+        {
+            sub_81BE968();
+            DestroyTask(taskId);
+            InstallCameraPanAheadCallback();
+        }
+    }
+}
+
+void sub_81BE968(void)
+{
+    u8 taskId;
+
+    taskId = FindTaskIdByFunc(sub_81BE9C0);
+    if(taskId != 0xFF)
+        gTasks[taskId].data[0]++;
+}
+
+extern const struct SpriteSheet gUnknown_08617D94[];
+
+void sub_81BE994(void)
+{
+    LoadSpriteSheets(gUnknown_08617D94);
+    sub_81BEA20();
+    CreateTask(sub_81BE9C0, 0x8);
+    sp136_strengh_sound(2, 1, 16, 3);
+}
+
+void sub_81BE9C0(u8 taskId)
+{
+    u16 *data;
+
+    data = gTasks[taskId].data;
+    data[1]++;
+    if(data[1] == 1000 || data[0] == 17)
+        gTasks[taskId].func = sub_81BEA00;
+}
+
+void sub_81BEA00(u8 taskId)
+{
+    FreeSpriteTilesByTag(4000);
+    DestroyTask(taskId);
+    EnableBothScriptContexts();
+}
+
+extern const struct SpriteTemplate gUnknown_08617E34;
+extern const struct SpriteTemplate gUnknown_08617E60;
+
+void sub_81BEA20(void)
+{
+    u8 count;
+    u8 spriteId;
+    const s16 *x;
+    const s16 *y;
+
+    for(count = 0; count <=7; count++)
+    {
+        x = &(gUnknown_08617D64[0]);
+        y = &(gUnknown_08617D64[1]);
+        spriteId = CreateSprite(&gUnknown_08617E60, x[count*3] + 120, y[count*3], 8);
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].oam.paletteNum = 0;
+        gSprites[spriteId].data[0] = count;
+    }
+
+    for(count = 0; count <=7; count++)
+    {
+
+        x = &(gUnknown_08617D64[0]);
+        y = &(gUnknown_08617D64[1]);
+
+        spriteId = CreateSprite(&gUnknown_08617E34, x[count*3] + 115, y[count*3] - 3, 8);
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].oam.paletteNum = 0;
+        gSprites[spriteId].data[0] = count;
+    }
 }
 
