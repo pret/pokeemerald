@@ -527,28 +527,29 @@ u8 sub_817B3DC(u8 a, u16 b, u16 c, u16 d)
     return taskId;
 }
 
-#ifdef NONMATCHING
 static void sub_817B458(u8 taskId)
 {
-    s16 r4;
+    s16 data1;
+    s16 data4;
+    s16 data7;
     s32 r2;
 
-    r4 = gTasks[taskId].data[1];
-    if (r4 != 0)
+    data1 = gTasks[taskId].data[1];
+    if (data1 != 0)
     {
         r2 = (gTasks[taskId].data[2] << 16) + (u16)gTasks[taskId].data[3];
-        r2 -= (u16)r4 << 4;
+        r2 -= (u16)data1 << 4;
         gTasks[taskId].data[2] = r2 >> 16;
         gTasks[taskId].data[3] = r2;
         SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].data[2]);
         SetGpuReg(REG_OFFSET_BG1VOFS, gUnknown_0203BD24 + gUnknown_0203BD26);
     }
 
-    r4 = gTasks[taskId].data[4];
-    if (r4 != 0)
+    data4 = gTasks[taskId].data[4];
+    if (data4 != 0)
     {
         r2 = (gTasks[taskId].data[5] << 16) + (u16)gTasks[taskId].data[6];
-        r2 -= (u16)r4 << 4;
+        r2 -= (u16)data4 << 4;
         gTasks[taskId].data[5] = r2 >> 16;
         gTasks[taskId].data[6] = r2;
         SetGpuReg(REG_OFFSET_BG2HOFS, gTasks[taskId].data[5]);
@@ -558,127 +559,17 @@ static void sub_817B458(u8 taskId)
             SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_0203BD24);
     }
 
-    r4 = gTasks[taskId].data[7];
-    if (r4 != 0)
+    data7 = gTasks[taskId].data[7];
+    if (data7 != 0)
     {
         r2 = (gTasks[taskId].data[8] << 16) + (u16)gTasks[taskId].data[9];
-        r2 -= (u16)r4 << 4;
+        r2 -= (u16)data7 << 4;
         gTasks[taskId].data[8] = r2 >> 16;
         gTasks[taskId].data[9] = r2;
         SetGpuReg(REG_OFFSET_BG3HOFS, gTasks[taskId].data[8]);
         SetGpuReg(REG_OFFSET_BG3VOFS, gUnknown_0203BD24);
     }
 }
-#else
-ASM_DIRECT
-static void sub_817B458(u8 taskId)
-{
-    asm("push {r4,r5,lr}\n\
-	lsl r0, #24\n\
-	lsr r5, r0, #24\n\
-	ldr r1, =gTasks\n\
-	lsl r0, r5, #2\n\
-	add r0, r5\n\
-	lsl r0, #3\n\
-	add r4, r0, r1\n\
-	ldrh r0, [r4, #0xA]\n\
-	lsl r2, r0, #16\n\
-	cmp r2, #0\n\
-	beq _0817B4A0\n\
-	mov r1, #0xC\n\
-	ldrsh r0, [r4, r1]\n\
-	lsl r0, #16\n\
-	ldrh r1, [r4, #0xE]\n\
-	add r1, r0, r1\n\
-	lsr r0, r2, #12\n\
-	sub r1, r0\n\
-	asr r0, r1, #16\n\
-	strh r0, [r4, #0xC]\n\
-	strh r1, [r4, #0xE]\n\
-	ldrh r1, [r4, #0xC]\n\
-	mov r0, #0x14\n\
-	bl SetGpuReg\n\
-	ldr r2, =gUnknown_0203BD24\n\
-	ldr r0, =gUnknown_0203BD26\n\
-	ldrh r1, [r0]\n\
-	ldrh r2, [r2]\n\
-	add r1, r2\n\
-	lsl r1, #16\n\
-	lsr r1, #16\n\
-	mov r0, #0x16\n\
-	bl SetGpuReg\n\
-_0817B4A0:\n\
-	ldrh r0, [r4, #0x10]\n\
-	lsl r2, r0, #16\n\
-	cmp r2, #0\n\
-	beq _0817B4FA\n\
-	mov r1, #0x12\n\
-	ldrsh r0, [r4, r1]\n\
-	lsl r0, #16\n\
-	ldrh r1, [r4, #0x14]\n\
-	add r1, r0, r1\n\
-	lsr r0, r2, #12\n\
-	sub r1, r0\n\
-	asr r0, r1, #16\n\
-	strh r0, [r4, #0x12]\n\
-	strh r1, [r4, #0x14]\n\
-	ldrh r1, [r4, #0x12]\n\
-	mov r0, #0x18\n\
-	bl SetGpuReg\n\
-	mov r1, #0x8\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r0, #0\n\
-	beq _0817B4F0\n\
-	ldr r2, =gUnknown_0203BD24\n\
-	ldr r0, =gUnknown_0203BD26\n\
-	ldrh r1, [r0]\n\
-	ldrh r2, [r2]\n\
-	add r1, r2\n\
-	lsl r1, #16\n\
-	lsr r1, #16\n\
-	mov r0, #0x1A\n\
-	bl SetGpuReg\n\
-	b _0817B4FA\n\
-	.pool\n\
-_0817B4F0:\n\
-	ldr r0, =gUnknown_0203BD24\n\
-	ldrh r1, [r0]\n\
-	mov r0, #0x1A\n\
-	bl SetGpuReg\n\
-_0817B4FA:\n\
-	ldr r0, =gTasks\n\
-	lsl r1, r5, #2\n\
-	add r1, r5\n\
-	lsl r1, #3\n\
-	add r2, r1, r0\n\
-	ldrh r0, [r2, #0x16]\n\
-	lsl r3, r0, #16\n\
-	cmp r3, #0\n\
-	beq _0817B532\n\
-	mov r1, #0x18\n\
-	ldrsh r0, [r2, r1]\n\
-	lsl r0, #16\n\
-	ldrh r1, [r2, #0x1A]\n\
-	add r1, r0, r1\n\
-	lsr r0, r3, #12\n\
-	sub r1, r0\n\
-	asr r0, r1, #16\n\
-	strh r0, [r2, #0x18]\n\
-	strh r1, [r2, #0x1A]\n\
-	ldrh r1, [r2, #0x18]\n\
-	mov r0, #0x1C\n\
-	bl SetGpuReg\n\
-	ldr r0, =gUnknown_0203BD24\n\
-	ldrh r1, [r0]\n\
-	mov r0, #0x1E\n\
-	bl SetGpuReg\n\
-_0817B532:\n\
-	pop {r4,r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
-}
-#endif // NONMATCHING
 
 void sub_817B540(u8 mode)
 {
