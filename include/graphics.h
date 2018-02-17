@@ -2725,4 +2725,49 @@ extern const u16 gBagScreenFemale_Pal[];
 extern const u16 gBagScreenMale_Pal[];
 extern const u8 gBagMenuHMIcon_Gfx[];
 
+//intro graphics
+extern const u8 gIntro1SparkleGfx[];
+extern const u8 gIntro1FlygonGfx[];
+extern const u16 gIntro3LightningPal[];
+extern const u8 gIntroCopyright_Gfx[];
+extern const u8 gIntroCopyright_Tilemap[];
+extern const u16 gIntroCopyright_Pal[16];
+extern const u8 gIntro2VolbeatGfx[];
+extern const u8 gIntro2TorchicGfx[];
+extern const u8 gIntro2ManectricGfx[];
+extern const u16 gIntro2VolbeatPal[];
+extern const u16 gIntro2TorchicPal[];
+extern const u16 gIntro2ManectricPal[];
+extern const u8 gIntro2BubblesGfx[];
+extern const u16 gIntro2BubblesPal[];
+extern const u8 gIntro3LightningGfx[];
+extern const u8 gIntro3GroudonGfx[];
+extern const u8 gIntro3GroudonTilemap[];
+extern const u8 gIntro3LegendBgGfx[];
+extern const u8 gIntro3GroudonBgTilemap[];
+extern const u8 gIntro3GroudonBgTilemap[];
+extern const u8 gIntro3BgPal[0x200];
+extern const u8 gIntro3KyogreGfx[];
+extern const u8 gIntro3KyogreTilemap[];
+extern const u8 gIntro3KyogreBgTilemap[];
+extern const u8 gIntro3CloudsGfx[];
+extern const u8 gIntro3Clouds1Tilemap[];
+extern const u8 gIntro3Clouds2Tilemap[];
+extern const u8 gIntro3Clouds3Tilemap[];
+extern const u8 gIntro3Clouds4Tilemap[];
+extern const u8 gIntro3RayquazaTilemap[];
+extern const u8 gIntro3RayquazaGfx[];
+extern const u8 gIntro3Clouds2Gfx[];
+extern const u16 gIntro1GameFreakTextFadePal[];
+
+//intro/credits graphics
+extern const u8 gIntro2BrendanNoTurnGfx[];
+extern const u8 gIntro2MayNoTurnGfx[];
+extern const u16 gIntro2BrendanNoTurnPal[];
+extern const u16 gIntro2FlygonPal[];
+extern const u8 gIntro2FlygonGfx[];
+
+//credits
+extern const u8 gCreditsCopyrightEnd_Gfx[];
+
 #endif //GUARD_GRAPHICS_H

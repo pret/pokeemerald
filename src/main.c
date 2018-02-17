@@ -166,7 +166,7 @@ static void InitMainCallbacks(void)
     gUnknown_0203CF5C = NULL;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
-    SetMainCallback2(c2_copyright_1);
+    SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
     gSaveBlock2Ptr = &gSaveblock2;
     gPokemonStoragePtr = &gPokemonStorage;
 }

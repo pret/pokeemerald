@@ -369,7 +369,7 @@ static const struct HallofFameMon sDummyFameMon =
     0x3EA03EA, 0, 0, 0, {0}
 };
 
-static const u8 sUnused2[6] = {2, 1, 3, 6, 4, 5};
+static const u8 sUnused2[] = {2, 1, 3, 6, 4, 5, 0, 0};
 
 // code
 static void VBlankCB_HallOfFame(void)
@@ -516,7 +516,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     }
     else
     {
-        if (sub_81534D0(3) != TRUE)
+        if (Save_LoadGameData(3) != TRUE)
             memset(gDecompressionBuffer, 0, 0x2000);
     }
 
@@ -885,7 +885,7 @@ void CB2_DoHallOfFamePC(void)
 static void Task_HofPC_CopySaveData(u8 taskId)
 {
     sub_81980F0(0, 0x1E, 0, 0xC, 0x226);
-    if (sub_81534D0(3) != 1)
+    if (Save_LoadGameData(3) != 1)
     {
         gTasks[taskId].func = Task_HofPC_PrintDataIsCorrupted;
     }
