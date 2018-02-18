@@ -107,7 +107,6 @@ void sub_81BE808(u8 taskId)
         DestroyTask(taskId);
         EnableBothScriptContexts();
     }
-
 }
 
 void sp136_strengh_sound(u8 a, u8 b, u8 c, u8 d)
@@ -187,14 +186,14 @@ void sub_81BEA20(void)
     u8 count;
     u8 spriteId;
 
-    for(count = 0; count <=7; count++)
+    for(count = 0; count <= 7; count++)
     {
         spriteId = CreateSprite(&gUnknown_08617E60, gUnknown_08617D64[count][0] + 120, gUnknown_08617D64[count][1], 8);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].oam.paletteNum = 0;
         gSprites[spriteId].data[0] = count;
     }
-    for(count = 0; count <=7; count++)
+    for(count = 0; count <= 7; count++)
     {
         spriteId = CreateSprite(&gUnknown_08617E34, gUnknown_08617D64[count][0] + 115, gUnknown_08617D64[count][1] - 3, 8);
         gSprites[spriteId].oam.priority = 0;
@@ -206,8 +205,8 @@ void sub_81BEA20(void)
 void sub_81BEAD8(struct Sprite* sprite)
 {
     sprite->data[1] += 2;
-    sprite->pos2.y = (sprite->data[1] + (s16)((u32)sprite->data[1] >> 0x1F)) >> 1;
-    if((sprite->pos1.y) + (sprite->pos2.y) >  gUnknown_08617D64[sprite->data[0]][2])
+    sprite->pos2.y = (sprite->data[1] / 2);
+    if(((sprite->pos1.y) + (sprite->pos2.y)) >  gUnknown_08617D64[sprite->data[0]][2])
     {
         DestroySprite(sprite);
         sub_81BE968();
