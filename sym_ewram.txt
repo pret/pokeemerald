@@ -824,34 +824,14 @@ gUnknown_0203BCBC: @ 203BCBC
 gUnknown_0203BCC4: @ 203BCC4
 	.space 0x4
 
-gUnknown_0203BCC8: @ 203BCC8
-	.space 0x4
-
-gUnknown_0203BCCC: @ 203BCCC
-	.space 0x4
-
+	.include "src/intro.o"
 	.include "src/field_region_map.o"
 
 gUnknown_0203BCD4: @ 203BCD4
 	.space 0x4
 
     .include "src/hall_of_fame.o"
-
-gUnknown_0203BCE0: @ 203BCE0
-	.space 0x2
-
-gUnknown_0203BCE2: @ 203BCE2
-	.space 0x2
-
-gHasHallOfFameRecords: @ 203BCE4
-	.space 0x1
-
-gUnknown_0203BCE5: @ 203BCE5
-	.space 0x3
-
-gUnknown_0203BCE8: @ 203BCE8
-	.space 0x4
-
+    .include "src/credits.o"
     .include "src/lottery_corner.o"
     .include "src/diploma.o"
     .include "src/berry_tag_screen.o"
@@ -862,16 +842,7 @@ gBraillePuzzleCallbackFlag: @ 203BD14
 	.space 0x4
 
 	.include "src/pokeblock_feed.o"
-
-gUnknown_0203BD24: @ 203BD24
-	.space 0x2
-
-gUnknown_0203BD26: @ 203BD26
-	.space 0x2
-
-gUnknown_0203BD28: @ 203BD28
-	.space 0x4
-
+	.include "src/intro_credits_graphics.o"
     .include "src/recorded_battle.o"
     .include "src/battle_dome_cards.o"
     .include "src/lilycove_lady.o"

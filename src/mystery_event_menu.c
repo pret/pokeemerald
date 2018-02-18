@@ -241,7 +241,7 @@ static void CB2_MysteryEventMenu(void)
             u16 unkVal = RunMysteryEventScript(gDecompressionBuffer);
             CpuFill32(0, gDecompressionBuffer, 0x7D4);
             if (!GetEventLoadMessage(gStringVar4, unkVal))
-                TrySavingData(NORMAL_SAVE);
+                TrySavingData(SAVE_NORMAL);
             gMain.state++;
         }
         break;
