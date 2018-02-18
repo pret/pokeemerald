@@ -7,16 +7,14 @@
 #include "field_map_obj.h"
 #include "fldeff_groundshake.h"
 #include "malloc.h"
-#include "menu.h"
-#include "party_menu.h"
-#include "pokemon.h"
 #include "random.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
-#include "string_util.h"
-#include "strings.h"
 #include "task.h"
+
+extern const struct SpriteTemplate gUnknown_08617E34;
+extern const struct SpriteTemplate gUnknown_08617E60;
 
 bool8 sub_81BE66C(void)
 {
@@ -184,36 +182,34 @@ void sub_81BEA00(u8 taskId)
     EnableBothScriptContexts();
 }
 
-extern const struct SpriteTemplate gUnknown_08617E34;
-extern const struct SpriteTemplate gUnknown_08617E60;
-
 void sub_81BEA20(void)
 {
     u8 count;
     u8 spriteId;
-    const s16 *x;
-    const s16 *y;
 
     for(count = 0; count <=7; count++)
     {
-        x = &(gUnknown_08617D64[0]);
-        y = &(gUnknown_08617D64[1]);
-        spriteId = CreateSprite(&gUnknown_08617E60, x[count*3] + 120, y[count*3], 8);
+        spriteId = CreateSprite(&gUnknown_08617E60, gUnknown_08617D64[count][0] + 120, gUnknown_08617D64[count][1], 8);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].oam.paletteNum = 0;
         gSprites[spriteId].data[0] = count;
     }
-
     for(count = 0; count <=7; count++)
     {
-
-        x = &(gUnknown_08617D64[0]);
-        y = &(gUnknown_08617D64[1]);
-
-        spriteId = CreateSprite(&gUnknown_08617E34, x[count*3] + 115, y[count*3] - 3, 8);
+        spriteId = CreateSprite(&gUnknown_08617E34, gUnknown_08617D64[count][0] + 115, gUnknown_08617D64[count][1] - 3, 8);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].oam.paletteNum = 0;
         gSprites[spriteId].data[0] = count;
     }
 }
 
+void sub_81BEAD8(struct Sprite* sprite)
+{
+    sprite->data[1] += 2;
+    sprite->pos2.y = (sprite->data[1] + (s16)((u32)sprite->data[1] >> 0x1F)) >> 1;
+    if((sprite->pos1.y) + (sprite->pos2.y) >  gUnknown_08617D64[sprite->data[0]][2])
+    {
+        DestroySprite(sprite);
+        sub_81BE968();
+    }
+}

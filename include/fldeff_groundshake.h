@@ -29,9 +29,8 @@ void sub_81BE9C0(u8 taskId);
 void sub_81BEA00(u8 taskId);
 void sub_81BEA20(void);
 
-
 extern struct Struct203CF18 *gUnknown_0203CF18;
-extern const u16 gUnknown_08617D64[];
+extern const s16 gUnknown_08617D64[][3];
 extern const u8 gUnknown_08617E18[];
 
 #endif // GUARD_FLDEFF_GROUNDSHAKE_H
