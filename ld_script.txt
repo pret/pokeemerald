@@ -259,6 +259,7 @@ SECTIONS {
         src/unk_81BAD84.o(.text);
         src/battle_controller_player_partner.o(.text);
         src/fldeff_groundshake.o(.text);
+        src/fossil_specials.o(.text);
         asm/fossil_specials.o(.text);
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
