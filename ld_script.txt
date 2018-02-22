@@ -531,7 +531,8 @@ SECTIONS {
         src/unk_text_util_2.o(.rodata);
         src/unk_81BAD84.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
-        data/fossil_special_fldeff_groundshake.o(.rodata);
+        src/fossil_specials.o(.rodata);
+		src/fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/pokenav.o(.rodata);

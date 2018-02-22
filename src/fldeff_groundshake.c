@@ -5,7 +5,6 @@
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_map_obj.h"
-#include "fldeff_groundshake.h"
 #include "malloc.h"
 #include "random.h"
 #include "script.h"
@@ -13,9 +12,109 @@
 #include "sprite.h"
 #include "task.h"
 
-extern const struct SpriteTemplate gUnknown_08617E34;
-extern const struct SpriteTemplate gUnknown_08617E60;
+// structures
+struct InnerStruct203CF18
+{
+    u8 filler[0xC4];
+};
 
+struct Struct203CF18 {
+    u8 taskId;
+    struct InnerStruct203CF18 unk4;
+}; //size = 0xC8
+
+// extern data
+extern const struct SpriteSheet gUnknown_08617D94[];
+extern const s16 gUnknown_08617D64[][3];
+
+// extern functions
+extern void sub_8151B68(struct InnerStruct203CF18 *, const u8*);
+extern void sub_8151B3C(struct InnerStruct203CF18 *);
+extern void sub_8151CA8(struct InnerStruct203CF18 *, u8, u8);
+extern void sub_8151C50(struct InnerStruct203CF18 *, u8, u8);
+extern void sub_8151D28(struct InnerStruct203CF18 *, u8, u8);
+extern void sub_8151E50(struct InnerStruct203CF18 *);
+
+// static functions
+static void sub_81BE808(u8 taskId);
+static void sub_81BE900(u8 taskId);
+static void sub_81BE968(void);
+static void sub_81BE9C0(u8 taskId);
+static void sub_81BEA00(u8 taskId);
+static void sub_81BEA20(void);
+static void sub_81BEAD8(struct Sprite* sprite);
+
+//.rodata
+static const u8 gUnknown_08617E18[] = {0x3b, 0x43, 0x61, 0x00, 0x0f, 0x05, 0xff, 0x9b};
+
+static const union AnimCmd gSpriteAnim_8617E20[] =
+{
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const gSpriteAnimTable_8617E28[] =
+{
+    gSpriteAnim_8617E20,
+};
+
+static const struct OamData gUnknown_08617E2C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate gUnknown_08617E34 = {
+    0x0FA0, 0xFFFF, &gUnknown_08617E2C, gSpriteAnimTable_8617E28, NULL, gDummySpriteAffineAnimTable, sub_81BEAD8
+};
+
+static const union AnimCmd gSpriteAnim_8617E4C[] =
+{
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const gSpriteAnim_8617E54[] =
+{
+    gSpriteAnim_8617E4C,
+};
+
+static const struct OamData gSpriteAnim_8617E58 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate gUnknown_08617E60 = {
+    0x0FA0, 0xFFFF, &gSpriteAnim_8617E58, gSpriteAnim_8617E54, NULL, gDummySpriteAffineAnimTable, sub_81BEAD8
+};
+
+// ewram
+EWRAM_DATA struct Struct203CF18 *gUnknown_0203CF18 = NULL;
+
+//text
 bool8 sub_81BE66C(void)
 {
     if (!(gSaveBlock1Ptr->location.mapGroup == 0x0 && gSaveBlock1Ptr->location.mapNum == 0x1A))
@@ -90,7 +189,7 @@ void sub_81BE7F4(void)
     CreateTask(sub_81BE808, 0x8);
 }
 
-void sub_81BE808(u8 taskId)
+static void sub_81BE808(u8 taskId)
 {
     u8 mapObjectIdBuffer;
     struct MapObject *fieldMapObject;
@@ -109,7 +208,7 @@ void sub_81BE808(u8 taskId)
     }
 }
 
-void sp136_strengh_sound(u8 a, u8 b, u8 c, u8 d)
+static void sp136_strengh_sound(u8 a, u8 b, u8 c, u8 d)
 {
     u8 taskId;
 
@@ -123,7 +222,7 @@ void sp136_strengh_sound(u8 a, u8 b, u8 c, u8 d)
     PlaySE(SE_W070);
 }
 
-void sub_81BE900(u8 taskId)
+static void sub_81BE900(u8 taskId)
 {
     s16 *data;
 
@@ -145,7 +244,7 @@ void sub_81BE900(u8 taskId)
     }
 }
 
-void sub_81BE968(void)
+static void sub_81BE968(void)
 {
     u8 taskId;
 
@@ -153,8 +252,6 @@ void sub_81BE968(void)
     if(taskId != 0xFF)
         gTasks[taskId].data[0]++;
 }
-
-extern const struct SpriteSheet gUnknown_08617D94[];
 
 void sub_81BE994(void)
 {
@@ -164,7 +261,7 @@ void sub_81BE994(void)
     sp136_strengh_sound(2, 1, 16, 3);
 }
 
-void sub_81BE9C0(u8 taskId)
+static void sub_81BE9C0(u8 taskId)
 {
     u16 *data;
 
@@ -174,14 +271,14 @@ void sub_81BE9C0(u8 taskId)
         gTasks[taskId].func = sub_81BEA00;
 }
 
-void sub_81BEA00(u8 taskId)
+static void sub_81BEA00(u8 taskId)
 {
     FreeSpriteTilesByTag(4000);
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
 
-void sub_81BEA20(void)
+static void sub_81BEA20(void)
 {
     u8 count;
     u8 spriteId;
@@ -202,7 +299,7 @@ void sub_81BEA20(void)
     }
 }
 
-void sub_81BEAD8(struct Sprite* sprite)
+static void sub_81BEAD8(struct Sprite* sprite)
 {
     sprite->data[1] += 2;
     sprite->pos2.y = (sprite->data[1] / 2);
