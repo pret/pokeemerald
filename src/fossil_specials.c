@@ -41,7 +41,7 @@ struct Struct203CF0C {
     u8 *frameImageTiles;
     struct DynamicSpriteFrameImage *frameImage;
     u8 spriteId;
-    u16 *frameImagePalette;
+    u16 *unkC;
     u16 unk10;
 };
 
@@ -50,6 +50,7 @@ struct Struct203CF0C {
 /*static*/ void sub_81BEBF4(u8 taskId);
 /*static*/ void sub_81BF028(u8 taskId);
 /*static*/ void sub_81BF248(struct Sprite *);
+/*static*/ void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e);
 
 // .rodata
 static const u8 gUnknown_08617274[] = {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00};
@@ -138,6 +139,9 @@ EWRAM_DATA u8* gUnknown_0203CF08 = NULL;
 EWRAM_DATA struct Struct203CF0C *gUnknown_0203CF0C = NULL;
 EWRAM_DATA struct Struct203CF10 *gUnknown_0203CF10 = NULL;
 EWRAM_DATA u16 *gUnknown_0203CF14 = NULL;
+
+// iwram
+IWRAM_DATA u16 gUnknown_030012A8[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 // text
 void sub_81BEB24(void)
@@ -233,8 +237,6 @@ void sub_81BEBF4(u8 taskId)
 
 #define OUTER_BUFFER_LENGTH 0x60
 #define INNER_BUFFER_LENGTH 0x30
-
-//void sub_81BF2B8(u8 *buffer, u16 offset, u8 a, u8 buffer_size, u8 d);
 
 #ifdef NONMATCHING
 void sub_81BED50(u8 taskId)
@@ -699,8 +701,8 @@ void sub_81BF028(u8 taskId)
     case 0:
         gUnknown_0203CF0C = (struct Struct203CF0C *)AllocZeroed(0x14);
         gUnknown_0203CF0C->frameImageTiles = (u8 *)AllocZeroed(ROOT_FOSSIL_GFX_TILE_LENGTH);
-        gUnknown_0203CF0C->frameImage = (struct InMemorySpriteFrameImage *)AllocZeroed(0x8);
-        gUnknown_0203CF0C->frameImagePalette = (u16 *)AllocZeroed(ROOT_FOSSIL_GFX_PALETTE_LENGTH << 1);
+        gUnknown_0203CF0C->frameImage = (struct DynamicSpriteFrameImage *)AllocZeroed(0x8);
+        gUnknown_0203CF0C->unkC = (u16 *)AllocZeroed(ROOT_FOSSIL_GFX_PALETTE_LENGTH << 1);
         gUnknown_0203CF0C->unk10 = 0;
         break;
     case 1:
@@ -724,16 +726,16 @@ void sub_81BF028(u8 taskId)
         gSprites[gUnknown_0203CF0C->spriteId].data[1] = 1;
     case 4:
         for(count = 0; count <= (ROOT_FOSSIL_GFX_PALETTE_LENGTH -1); count++)
-            gUnknown_0203CF0C->frameImagePalette[count] = count;
+            gUnknown_0203CF0C->unkC[count] = count;
         break;
     case 5:
         for(count = 0; count <= ((ROOT_FOSSIL_GFX_PALETTE_LENGTH <<1) -1); count++)
         {
             rand1 = Random() & 0xFF;
             rand2 = Random() & 0xFF;
-            temp = gUnknown_0203CF0C->frameImagePalette[rand2];
-            gUnknown_0203CF0C->frameImagePalette[rand2] = gUnknown_0203CF0C->frameImagePalette[rand1];
-            gUnknown_0203CF0C->frameImagePalette[rand1] = temp;
+            temp = gUnknown_0203CF0C->unkC[rand2];
+            gUnknown_0203CF0C->unkC[rand2] = gUnknown_0203CF0C->unkC[rand1];
+            gUnknown_0203CF0C->unkC[rand1] = temp;
         }
         gSprites[gUnknown_0203CF0C->spriteId].callback = sub_81BF248;
         break;
@@ -741,8 +743,8 @@ void sub_81BF028(u8 taskId)
         if(gSprites[gUnknown_0203CF0C->spriteId].callback != SpriteCallbackDummy)
             return;
         DestroySprite(&gSprites[gUnknown_0203CF0C->spriteId]);
-        Free(gUnknown_0203CF0C->frameImagePalette);
-        gUnknown_0203CF0C->frameImagePalette = NULL;
+        Free(gUnknown_0203CF0C->unkC);
+        gUnknown_0203CF0C->unkC = NULL;
         Free(gUnknown_0203CF0C->frameImage);
         gUnknown_0203CF0C->frameImage = NULL;
         Free(gUnknown_0203CF0C->frameImageTiles);
@@ -1008,29 +1010,33 @@ void sub_81BF028(u8 taskId)
 #ifdef NONMATCHING
 void sub_81BF248(struct Sprite *sprite)
 {
-    u8 count;
+
     u16 x;
-    u16 y;
     u8 *buffer;
+    u8 count;
 
     if(gUnknown_0203CF0C->unk10 > 0xFF)
     {
         sprite->callback = SpriteCallbackDummy;
         return;
     }
-    if(sprite->pos2.y > 0x5F)
+    if(sprite->pos1.y > 0x5F)
     {
-        for(count = 0; count <= 1; count++)
+        count = 0;
+        do
         {
             buffer = gUnknown_0203CF0C->frameImageTiles;
             x = gUnknown_0203CF0C->unk10;
             gUnknown_0203CF0C->unk10 = x+1;
-            sub_81BF2B8(buffer,gUnknown_0203CF0C->frameImagePalette[x] , 0, 0x10, 0);
+            sub_81BF2B8(buffer, gUnknown_0203CF0C->unkC[x], 0, 0x10, 0);
+            count++;
         }
+        while(count <= 1);
+
         StartSpriteAnim(sprite, 0x0);
     }
     else
-        sprite->pos2.y++;
+        sprite->pos1.y++;
 }
 
 #else
@@ -1096,8 +1102,3 @@ void sub_81BF248(struct Sprite *sprite)
         .syntax divided");
 }
 #endif // NONMATCHING
-
-extern u16  gUnknown_030012A8[8];
-
-
-
