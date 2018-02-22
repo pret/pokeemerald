@@ -684,62 +684,69 @@ void sub_81BED50(u8 taskId)
 }
 #endif // NONMATCHING
 
-#ifdef NONMATCHING
 void sub_81BF028(u8 taskId)
 {
-    u8 spriteId, zero;
-    u16 count, rand1, rand2, temp, switch_val;
-    u16 count2;
-    u32 count3;
-
+    u16 i;
+    u16 j;
     u8 *buffer;
-    struct SpriteTemplate fossilTemplate;
-;
-    switch_val = gTasks[taskId].data[0] - 1;
-    switch(switch_val)
+
+    switch(gTasks[taskId].data[0])
     {
-    case 0:
+    case 1:
         gUnknown_0203CF0C = (struct Struct203CF0C *)AllocZeroed(0x14);
-        gUnknown_0203CF0C->frameImageTiles = (u8 *)AllocZeroed(ROOT_FOSSIL_GFX_TILE_LENGTH);
-        gUnknown_0203CF0C->frameImage = (struct DynamicSpriteFrameImage *)AllocZeroed(0x8);
-        gUnknown_0203CF0C->unkC = (u16 *)AllocZeroed(ROOT_FOSSIL_GFX_PALETTE_LENGTH << 1);
+        gUnknown_0203CF0C->frameImageTiles = (u8 *)AllocZeroed(0x80);
+        gUnknown_0203CF0C->frameImage = (struct DynamicSpriteFrameImage *) AllocZeroed(0x8);
+        gUnknown_0203CF0C->unkC = (u16 *)AllocZeroed(0x200);
         gUnknown_0203CF0C->unk10 = 0;
         break;
-    case 1:
-        buffer = gUnknown_0203CF0C->frameImageTiles;
-        for(count = 0; count <= (ROOT_FOSSIL_GFX_TILE_LENGTH - 1); count++, buffer++)
-            *buffer = gRootFossil_Gfx[count];
-        break;
     case 2:
-        gUnknown_0203CF0C->frameImage->data = gUnknown_0203CF0C->frameImageTiles;
-        gUnknown_0203CF0C->frameImage->size = ROOT_FOSSIL_GFX_TILE_LENGTH;
+        {
+            buffer = gUnknown_0203CF0C->frameImageTiles;
+            for(i = 0; i < 0x80; i++, buffer++)
+                *buffer = gRootFossil_Gfx[i];
+        }
         break;
     case 3:
-        fossilTemplate = gUnknown_08617E00;
-        fossilTemplate.images = (struct SpriteFrameImage *)(gUnknown_0203CF0C->frameImage);
-
-        spriteId = CreateSprite(&fossilTemplate, 128, -10, 1);
-        gUnknown_0203CF0C->spriteId = spriteId;
-        zero = 0;
-        gSprites[gUnknown_0203CF0C->spriteId].centerToCornerVecX = zero;
-        gSprites[gUnknown_0203CF0C->spriteId].data[0] = gSprites[gUnknown_0203CF0C->spriteId].pos1.x;
-        gSprites[gUnknown_0203CF0C->spriteId].data[1] = 1;
-    case 4:
-        for(count = 0; count <= (ROOT_FOSSIL_GFX_PALETTE_LENGTH -1); count++)
-            gUnknown_0203CF0C->unkC[count] = count;
+        gUnknown_0203CF0C->frameImage->data = gUnknown_0203CF0C->frameImageTiles;
+        gUnknown_0203CF0C->frameImage->size = 0x80;
         break;
-    case 5:
-        for(count = 0; count <= ((ROOT_FOSSIL_GFX_PALETTE_LENGTH <<1) -1); count++)
+    case 4:
         {
-            rand1 = Random() & 0xFF;
-            rand2 = Random() & 0xFF;
-            temp = gUnknown_0203CF0C->unkC[rand2];
-            gUnknown_0203CF0C->unkC[rand2] = gUnknown_0203CF0C->unkC[rand1];
-            gUnknown_0203CF0C->unkC[rand1] = temp;
+            u8 spriteId, zero;
+            struct SpriteTemplate fossilTemplate;
+
+            fossilTemplate = gUnknown_08617E00;
+            fossilTemplate.images = (struct SpriteFrameImage *)(gUnknown_0203CF0C->frameImage);
+            spriteId = CreateSprite(&fossilTemplate, 128, -16, 1);
+            gUnknown_0203CF0C->spriteId = spriteId;
+            zero = 0;
+            gSprites[gUnknown_0203CF0C->spriteId].centerToCornerVecX = zero;
+            gSprites[gUnknown_0203CF0C->spriteId].data[0] = gSprites[gUnknown_0203CF0C->spriteId].pos1.x;
+            gSprites[gUnknown_0203CF0C->spriteId].data[1] = 1;
         }
-        gSprites[gUnknown_0203CF0C->spriteId].callback = sub_81BF248;
+    case 5:
+        for(i = 0; i < 0x100; i++)
+            gUnknown_0203CF0C->unkC[i] = i;
         break;
     case 6:
+        {
+            u16 rand1, rand2, temp;
+
+            j = 0x1FF;
+            for(i = 0; i <= j; i++)
+            {
+
+                rand1 = Random() % 0x100;
+                rand2 = Random() % 0x100;
+                j = 0x1FF;
+                temp = gUnknown_0203CF0C->unkC[rand2];
+                gUnknown_0203CF0C->unkC[rand2] = gUnknown_0203CF0C->unkC[rand1];
+                gUnknown_0203CF0C->unkC[rand1] = temp;
+            }
+            gSprites[gUnknown_0203CF0C->spriteId].callback = sub_81BF248;
+            break;
+        }
+    case 7:
         if(gSprites[gUnknown_0203CF0C->spriteId].callback != SpriteCallbackDummy)
             return;
         DestroySprite(&gSprites[gUnknown_0203CF0C->spriteId]);
@@ -752,353 +759,30 @@ void sub_81BF028(u8 taskId)
         Free(gUnknown_0203CF0C);
         gUnknown_0203CF0C = NULL;
         break;
-    case 7:
+    case 8:
         EnableBothScriptContexts();
     }
-    gTasks[taskId].data[0]++;
+    ++gTasks[taskId].data[0];
 }
 
-#else
-ASM_DIRECT
-void sub_81BF028(u8 taskId)
-{
-    asm("\n\
-        .syntax unified\n\
-    sub_81BF028: @ 81BF028\n\
-        push {r4-r7,lr}\n\
-        mov r7, r8\n\
-        push {r7}\n\
-        sub sp, 0x18\n\
-        lsls r0, 24\n\
-        lsrs r7, r0, 24\n\
-        ldr r1, =gTasks\n\
-        lsls r0, r7, 2\n\
-        adds r0, r7\n\
-        lsls r0, 3\n\
-        adds r0, r1\n\
-        ldrh r0, [r0, 0x8]\n\
-        subs r0, 0x1\n\
-        lsls r0, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0x7\n\
-        bls _081BF04C\n\
-        b _081BF228\n\
-    _081BF04C:\n\
-        lsls r0, 2\n\
-        ldr r1, =_081BF060\n\
-        adds r0, r1\n\
-        ldr r0, [r0]\n\
-        mov pc, r0\n\
-        .pool\n\
-        .align 2, 0\n\
-    _081BF060:\n\
-        .4byte _081BF080\n\
-        .4byte _081BF0B4\n\
-        .4byte _081BF0DC\n\
-        .4byte _081BF0F0\n\
-        .4byte _081BF148\n\
-        .4byte _081BF170\n\
-        .4byte _081BF1CC\n\
-        .4byte _081BF224\n\
-    _081BF080:\n\
-        ldr r4, =gUnknown_0203CF0C\n\
-        movs r0, 0x14\n\
-        bl AllocZeroed\n\
-        str r0, [r4]\n\
-        movs r0, 0x80\n\
-        bl AllocZeroed\n\
-        ldr r1, [r4]\n\
-        str r0, [r1]\n\
-        movs r0, 0x8\n\
-        bl AllocZeroed\n\
-        ldr r1, [r4]\n\
-        str r0, [r1, 0x4]\n\
-        movs r0, 0x80\n\
-        lsls r0, 2\n\
-        bl AllocZeroed\n\
-        ldr r1, [r4]\n\
-        str r0, [r1, 0xC]\n\
-        movs r0, 0\n\
-        strh r0, [r1, 0x10]\n\
-        b _081BF228\n\
-        .pool\n\
-    _081BF0B4:\n\
-        ldr r0, =gUnknown_0203CF0C\n\
-        ldr r0, [r0]\n\
-        ldr r1, [r0]\n\
-        movs r5, 0\n\
-        ldr r2, =gRootFossil_Gfx\n\
-    _081BF0BE:\n\
-        adds r0, r5, r2\n\
-        ldrb r0, [r0]\n\
-        strb r0, [r1]\n\
-        adds r0, r5, 0x1\n\
-        lsls r0, 16\n\
-        lsrs r5, r0, 16\n\
-        adds r1, 0x1\n\
-        cmp r5, 0x7F\n\
-        bls _081BF0BE\n\
-        b _081BF228\n\
-        .pool\n\
-    _081BF0DC:\n\
-        ldr r0, =gUnknown_0203CF0C\n\
-        ldr r0, [r0]\n\
-        ldr r1, [r0, 0x4]\n\
-        ldr r0, [r0]\n\
-        str r0, [r1]\n\
-        movs r0, 0x80\n\
-        strh r0, [r1, 0x4]\n\
-        b _081BF228\n\
-        .pool\n\
-    _081BF0F0:\n\
-        mov r1, sp\n\
-        ldr r0, =gUnknown_08617E00\n\
-        ldm r0!, {r2-r4}\n\
-        stm r1!, {r2-r4}\n\
-        ldm r0!, {r2-r4}\n\
-        stm r1!, {r2-r4}\n\
-        ldr r4, =gUnknown_0203CF0C\n\
-        ldr r0, [r4]\n\
-        ldr r0, [r0, 0x4]\n\
-        str r0, [sp, 0xC]\n\
-        movs r2, 0x10\n\
-        negs r2, r2\n\
-        mov r0, sp\n\
-        movs r1, 0x80\n\
-        movs r3, 0x1\n\
-        bl CreateSprite\n\
-        ldr r1, [r4]\n\
-        movs r3, 0\n\
-        strb r0, [r1, 0x8]\n\
-        ldr r2, =gSprites\n\
-        ldr r0, [r4]\n\
-        ldrb r1, [r0, 0x8]\n\
-        lsls r0, r1, 4\n\
-        adds r0, r1\n\
-        lsls r0, 2\n\
-        adds r0, r2\n\
-        adds r0, 0x28\n\
-        strb r3, [r0]\n\
-        ldr r3, [r4]\n\
-        ldrb r1, [r3, 0x8]\n\
-        lsls r0, r1, 4\n\
-        adds r0, r1\n\
-        lsls r0, 2\n\
-        adds r0, r2\n\
-        ldrh r1, [r0, 0x20]\n\
-        strh r1, [r0, 0x2E]\n\
-        ldrb r1, [r3, 0x8]\n\
-        lsls r0, r1, 4\n\
-        adds r0, r1\n\
-        lsls r0, 2\n\
-        adds r0, r2\n\
-        movs r1, 0x1\n\
-        strh r1, [r0, 0x30]\n\
-    _081BF148:\n\
-        movs r5, 0\n\
-        ldr r2, =gUnknown_0203CF0C\n\
-    _081BF14C:\n\
-        ldr r0, [r2]\n\
-        ldr r1, [r0, 0xC]\n\
-        lsls r0, r5, 1\n\
-        adds r0, r1\n\
-        strh r5, [r0]\n\
-        adds r0, r5, 0x1\n\
-        lsls r0, 16\n\
-        lsrs r5, r0, 16\n\
-        cmp r5, 0xFF\n\
-        bls _081BF14C\n\
-        b _081BF228\n\
-        .pool\n\
-    _081BF170:\n\
-        movs r5, 0\n\
-        movs r6, 0xFF\n\
-        ldr r0, =0x000001ff\n\
-        mov r8, r0\n\
-    _081BF178:\n\
-        bl Random\n\
-        adds r4, r6, 0\n\
-        ands r4, r0\n\
-        bl Random\n\
-        adds r1, r6, 0\n\
-        ands r1, r0\n\
-        ldr r0, =gUnknown_0203CF0C\n\
-        ldr r3, [r0]\n\
-        ldr r0, [r3, 0xC]\n\
-        lsls r1, 1\n\
-        adds r1, r0\n\
-        ldrh r2, [r1]\n\
-        lsls r4, 1\n\
-        adds r4, r0\n\
-        ldrh r0, [r4]\n\
-        strh r0, [r1]\n\
-        strh r2, [r4]\n\
-        adds r0, r5, 0x1\n\
-        lsls r0, 16\n\
-        lsrs r5, r0, 16\n\
-        cmp r5, r8\n\
-        bls _081BF178\n\
-        ldr r2, =gSprites\n\
-        ldrb r1, [r3, 0x8]\n\
-        lsls r0, r1, 4\n\
-        adds r0, r1\n\
-        lsls r0, 2\n\
-        adds r2, 0x1C\n\
-        adds r0, r2\n\
-        ldr r1, =sub_81BF248\n\
-        str r1, [r0]\n\
-        b _081BF228\n\
-        .pool\n\
-    _081BF1CC:\n\
-        ldr r3, =gSprites\n\
-        ldr r5, =gUnknown_0203CF0C\n\
-        ldr r0, [r5]\n\
-        ldrb r1, [r0, 0x8]\n\
-        lsls r0, r1, 4\n\
-        adds r0, r1\n\
-        lsls r2, r0, 2\n\
-        adds r0, r3, 0\n\
-        adds r0, 0x1C\n\
-        adds r0, r2, r0\n\
-        ldr r1, [r0]\n\
-        ldr r0, =SpriteCallbackDummy\n\
-        cmp r1, r0\n\
-        bne _081BF238\n\
-        adds r0, r2, r3\n\
-        bl DestroySprite\n\
-        ldr r0, [r5]\n\
-        ldr r0, [r0, 0xC]\n\
-        bl Free\n\
-        ldr r0, [r5]\n\
-        movs r4, 0\n\
-        str r4, [r0, 0xC]\n\
-        ldr r0, [r0, 0x4]\n\
-        bl Free\n\
-        ldr r0, [r5]\n\
-        str r4, [r0, 0x4]\n\
-        ldr r0, [r0]\n\
-        bl Free\n\
-        ldr r0, [r5]\n\
-        str r4, [r0]\n\
-        bl Free\n\
-        str r4, [r5]\n\
-        b _081BF228\n\
-        .pool\n\
-    _081BF224:\n\
-        bl EnableBothScriptContexts\n\
-    _081BF228:\n\
-        ldr r0, =gTasks\n\
-        lsls r1, r7, 2\n\
-        adds r1, r7\n\
-        lsls r1, 3\n\
-        adds r1, r0\n\
-        ldrh r0, [r1, 0x8]\n\
-        adds r0, 0x1\n\
-        strh r0, [r1, 0x8]\n\
-    _081BF238:\n\
-        add sp, 0x18\n\
-        pop {r3}\n\
-        mov r8, r3\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .pool\n\
-        .syntax divided");
-}
-#endif // NONMATCHING
 
-#ifdef NONMATCHING
 void sub_81BF248(struct Sprite *sprite)
 {
-
-    u16 x;
-    u8 *buffer;
-    u8 count;
-
-    if(gUnknown_0203CF0C->unk10 > 0xFF)
+    if (gUnknown_0203CF0C->unk10 > 0xFF)
     {
         sprite->callback = SpriteCallbackDummy;
-        return;
     }
-    if(sprite->pos1.y > 0x5F)
+    else if (sprite->pos1.y >= 0x60)
     {
-        count = 0;
-        do
+        u8 i;
+        for (i = 0; i < 2; i++)
         {
-            buffer = gUnknown_0203CF0C->frameImageTiles;
-            x = gUnknown_0203CF0C->unk10;
-            gUnknown_0203CF0C->unk10 = x+1;
-            sub_81BF2B8(buffer, gUnknown_0203CF0C->unkC[x], 0, 0x10, 0);
-            count++;
+            sub_81BF2B8(gUnknown_0203CF0C->frameImageTiles, gUnknown_0203CF0C->unkC[gUnknown_0203CF0C->unk10++], 0, 16, 0);
         }
-        while(count <= 1);
-
-        StartSpriteAnim(sprite, 0x0);
+        StartSpriteAnim(sprite, 0);
     }
     else
+    {
         sprite->pos1.y++;
+    }
 }
-
-#else
-ASM_DIRECT
-void sub_81BF248(struct Sprite *sprite)
-{
-    asm("\n\
-        .syntax unified\n\
-        push {r4,r5,lr}\n\
-        sub sp, 0x4\n\
-        adds r5, r0, 0\n\
-        ldr r0, =gUnknown_0203CF0C\n\
-        ldr r0, [r0]\n\
-        ldrh r0, [r0, 0x10]\n\
-        cmp r0, 0xFF\n\
-        bls _081BF268\n\
-        ldr r0, =SpriteCallbackDummy\n\
-        str r0, [r5, 0x1C]\n\
-        b _081BF2B0\n\
-        .pool\n\
-    _081BF268:\n\
-        ldrh r1, [r5, 0x22]\n\
-        movs r2, 0x22\n\
-        ldrsh r0, [r5, r2]\n\
-        cmp r0, 0x5F\n\
-        ble _081BF2AC\n\
-        movs r4, 0\n\
-    _081BF274:\n\
-        ldr r0, =gUnknown_0203CF0C\n\
-        ldr r3, [r0]\n\
-        ldr r0, [r3]\n\
-        ldrh r1, [r3, 0x10]\n\
-        adds r2, r1, 0x1\n\
-        strh r2, [r3, 0x10]\n\
-        lsls r1, 16\n\
-        ldr r2, [r3, 0xC]\n\
-        lsrs r1, 15\n\
-        adds r1, r2\n\
-        ldrh r1, [r1]\n\
-        movs r2, 0\n\
-        str r2, [sp]\n\
-        movs r3, 0x10\n\
-        bl sub_81BF2B8\n\
-        adds r0, r4, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r4, r0, 24\n\
-        cmp r4, 0x1\n\
-        bls _081BF274\n\
-        adds r0, r5, 0\n\
-        movs r1, 0\n\
-        bl StartSpriteAnim\n\
-        b _081BF2B0\n\
-        .pool\n\
-    _081BF2AC:\n\
-        adds r0, r1, 0x1\n\
-        strh r0, [r5, 0x22]\n\
-    _081BF2B0:\n\
-        add sp, 0x4\n\
-        pop {r4,r5}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .pool\n\
-        .syntax divided");
-}
-#endif // NONMATCHING
