@@ -236,8 +236,8 @@ SECTIONS {
         src/evolution_graphics.o(.text);
         src/bard_music.o(.text);
         src/fldeff_teleport.o(.text);
-        asm/battle_link_817C95C.o(.text);
         src/battle_link_817C95C.o(.text);
+        asm/battle_link_817C95C.o(.text);
         src/pokemon_animation.o(.text);
         src/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
