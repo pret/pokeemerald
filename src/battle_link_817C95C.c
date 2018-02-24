@@ -107,8 +107,8 @@ void sub_817C95C(u16 stringId)
     struct Pokemon *atkMon, *defMon;
     u8 moveSlot;
     u32 atkFlank, defFlank, effFlank;
-
-    register void *var1 asm("r1"), *var2 asm("r2");
+    u8 *perishCount;
+    u16 *statStringId, *finishedMoveId;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && stringId != STRINGID_ITDOESNTAFFECT && stringId != STRINGID_NOTVERYEFFECTIVE)
         return;
@@ -137,6 +137,10 @@ void sub_817C95C(u16 stringId)
         structPtr->side[atkSide].field_3_0 = 15;
         return;
     }
+
+    perishCount = (u8 *)(gBattleTextBuff1 + 4);
+    statStringId = (u16 *)(gBattleTextBuff2 + 2);
+    finishedMoveId = (u16 *)(gBattleTextBuff1 + 2);
 
     atkFlank = GetBattlerPosition(gBattlerAttacker) / 2;
     defFlank = GetBattlerPosition(gBattlerTarget) / 2;
@@ -171,8 +175,7 @@ void sub_817C95C(u16 stringId)
         structPtr->side[atkSide].field_4_1 = 1;
         break;
     case STRINGID_PKMNPERISHCOUNTFELL:
-        var1 = gBattleTextBuff1 + 4;
-        if (*(u8*)(var1) == 0)
+        if (*perishCount == 0)
             structPtr->side[atkSide].field_3_0 = 10;
         break;
     case STRINGID_PKMNWISHCAMETRUE:
@@ -228,8 +231,7 @@ void sub_817C95C(u16 stringId)
     case STRINGID_PKMNSSTATCHANGED:
         if (gBattleTextBuff1[2] != 0)
         {
-            var1 = gBattleTextBuff2 + 2;
-            if (*(u16*)(var1) == STRINGID_STATSHARPLY)
+            if (*statStringId == STRINGID_STATSHARPLY)
                 sub_817E684(0x17, moveSlot, gBattleTextBuff1[2] - 1, 0);
             else
                 sub_817E684(0x16, moveSlot, gBattleTextBuff1[2] - 1, 0);
@@ -240,8 +242,7 @@ void sub_817C95C(u16 stringId)
         {
             if (gBattlerAttacker == gBattlerTarget)
             {
-                var1 = gBattleTextBuff2 + 2;
-                if (*(u16*)(var1) == STRINGID_STATSHARPLY)
+                if (*statStringId == STRINGID_STATSHARPLY)
                     sub_817E684(0x17, moveSlot, gBattleTextBuff1[2] - 1, 0);
                 else
                     sub_817E684(0x16, moveSlot, gBattleTextBuff1[2] - 1, 0);
@@ -259,8 +260,7 @@ void sub_817C95C(u16 stringId)
     case STRINGID_PKMNSSTATCHANGED4:
         if (gBattleTextBuff1[2] != 0)
         {
-            var1 = gBattleTextBuff2 + 2;
-            if (*(u16*)(var1) == STRINGID_STATHARSHLY)
+            if (*statStringId == STRINGID_STATHARSHLY)
                 sub_817E684(0x1A, moveSlot, gBattleTextBuff1[2] - 1, 0);
             else
                 sub_817E684(0x19, moveSlot, gBattleTextBuff1[2] - 1, 0);
@@ -457,20 +457,17 @@ void sub_817C95C(u16 stringId)
         structPtr->side[atkSide].field_0_0c = moveSlot;
         break;
     case STRINGID_PKMNSXWOREOFF:
-        var1 = gBattleTextBuff1 + 2;
-        if (*(u16*)(var1) == MOVE_REFLECT)
+        if (*finishedMoveId == MOVE_REFLECT)
         {
             structPtr->side[atkSide].field_8_0_b = 0;
             structPtr->side[atkSide].field_0_0b = 0;
         }
-        var2 = gBattleTextBuff1 + 2;
-        if (*(u16*)(var2) == MOVE_LIGHT_SCREEN)
+        if (*finishedMoveId == MOVE_LIGHT_SCREEN)
         {
             structPtr->side[atkSide].field_8_0_c = 0;
             structPtr->side[atkSide].field_0_0c = 0;
         }
-        var1 = gBattleTextBuff1 + 2;
-        if (*(u16*)(var1) == MOVE_MIST)
+        if (*finishedMoveId == MOVE_MIST)
         {
             structPtr->side[atkSide].field_8_0_e = 0;
             structPtr->side[atkSide].field_0_0e = 0;
