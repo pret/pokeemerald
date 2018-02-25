@@ -44,7 +44,7 @@ static void sub_81BEA00(u8 taskId);
 static void sub_81BEA20(void);
 static void sub_81BEAD8(struct Sprite* sprite);
 
-//.rodata
+// rodata
 static const u8 gUnknown_08617E18[] = {0x3b, 0x43, 0x61, 0x00, 0x0f, 0x05, 0xff, 0x9b};
 
 static const union AnimCmd gSpriteAnim_8617E20[] =
@@ -114,7 +114,7 @@ static const struct SpriteTemplate gUnknown_08617E60 = {
 // ewram
 EWRAM_DATA struct Struct203CF18 *gUnknown_0203CF18 = NULL;
 
-//text
+// text
 bool8 sub_81BE66C(void)
 {
     if (!(gSaveBlock1Ptr->location.mapGroup == 0x0 && gSaveBlock1Ptr->location.mapNum == 0x1A))
@@ -280,22 +280,22 @@ static void sub_81BEA00(u8 taskId)
 
 static void sub_81BEA20(void)
 {
-    u8 count;
+    u8 i;
     u8 spriteId;
 
-    for(count = 0; count <= 7; count++)
+    for(i = 0; i < 8; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08617E60, gUnknown_08617D64[count][0] + 120, gUnknown_08617D64[count][1], 8);
+        spriteId = CreateSprite(&gUnknown_08617E60, gUnknown_08617D64[i][0] + 120, gUnknown_08617D64[i][1], 8);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].oam.paletteNum = 0;
-        gSprites[spriteId].data[0] = count;
+        gSprites[spriteId].data[0] = i;
     }
-    for(count = 0; count <= 7; count++)
+    for(i = 0; i < 8; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08617E34, gUnknown_08617D64[count][0] + 115, gUnknown_08617D64[count][1] - 3, 8);
+        spriteId = CreateSprite(&gUnknown_08617E34, gUnknown_08617D64[i][0] + 115, gUnknown_08617D64[i][1] - 3, 8);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].oam.paletteNum = 0;
-        gSprites[spriteId].data[0] = count;
+        gSprites[spriteId].data[0] = i;
     }
 }
 

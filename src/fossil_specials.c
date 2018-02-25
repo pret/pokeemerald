@@ -17,8 +17,10 @@
 #include "task.h"
 #include "window.h"
 
-#define ROOT_FOSSIL_GFX_TILE_LENGTH 0x80
-#define ROOT_FOSSIL_GFX_PALETTE_LENGTH 0x100
+#define MIRAGE_TOWER_GFX_LENGTH (sizeof(gUnknown_08617274) + sizeof(gMirageTower_Gfx))
+#define MIRAGE_TOWER_PALETTE_LENGTH 0x800
+#define ROOT_FOSSIL_GFX_LENGTH sizeof(gRootFossil_Gfx)
+#define ROOT_FOSSIL_GFX_RANDOMIZER_LENGTH 0x100
 
 //struct
 struct Struct8617DA4 {
@@ -46,10 +48,10 @@ struct Struct203CF0C {
 };
 
 // static functions
-/*static*/ void sub_81BED50(u8 taskId);
-/*static*/ void sub_81BEBF4(u8 taskId);
-/*static*/ void sub_81BF028(u8 taskId);
-/*static*/ void sub_81BF248(struct Sprite *);
+static void sub_81BED50(u8 taskId);
+static void sub_81BEBF4(u8 taskId);
+static void sub_81BF028(u8 taskId);
+static void sub_81BF248(struct Sprite *);
 /*static*/ void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e);
 
 // .rodata
@@ -146,9 +148,9 @@ IWRAM_DATA u16 gUnknown_030012A8[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 // text
 void sub_81BEB24(void)
 {
-    u8 count;
-    for(count = 0; count <= 0x11; count++)
-        MapGridSetMetatileIdAt(gUnknown_08617DA4[count].x + 7, gUnknown_08617DA4[count].y + 7, gUnknown_08617DA4[count].tileId);
+    u8 i;
+    for(i = 0; i < (sizeof(gUnknown_08617DA4)/sizeof(gUnknown_08617DA4[0])); i++)
+        MapGridSetMetatileIdAt(gUnknown_08617DA4[i].x + 7, gUnknown_08617DA4[i].y + 7, gUnknown_08617DA4[i].tileId);
     DrawWholeMapView();
 }
 
@@ -185,8 +187,7 @@ void sub_81BEBB4(u8 taskId)
         gTasks[taskId].data[0]--;
 }
 
-
-void sub_81BEBF4(u8 taskId)
+static void sub_81BEBF4(u8 taskId)
 {
     u8 zero;
 
@@ -198,15 +199,15 @@ void sub_81BEBF4(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        gUnknown_0203CF04 = (u8 *)AllocZeroed(0x920);
-        gUnknown_0203CF08 = (u8 *)AllocZeroed(0x800);
+        gUnknown_0203CF04 = (u8 *)AllocZeroed(MIRAGE_TOWER_GFX_LENGTH);
+        gUnknown_0203CF08 = (u8 *)AllocZeroed(MIRAGE_TOWER_PALETTE_LENGTH);
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);
         gTasks[taskId].data[0]++;
         break;
     case 2:
-        CpuSet(gUnknown_08617274, gUnknown_0203CF04, 0x490);
-        LoadBgTiles(0, gUnknown_0203CF04, 0x920, 0);
+        CpuSet(gUnknown_08617274, gUnknown_0203CF04, MIRAGE_TOWER_GFX_LENGTH / 2);
+        LoadBgTiles(0, gUnknown_0203CF04, MIRAGE_TOWER_GFX_LENGTH, 0);
         gTasks[taskId].data[0]++;
         break;
     case 3:
@@ -235,87 +236,83 @@ void sub_81BEBF4(u8 taskId)
     }
 }
 
+#ifdef NONMATCHING
 #define OUTER_BUFFER_LENGTH 0x60
 #define INNER_BUFFER_LENGTH 0x30
-
-#ifdef NONMATCHING
-void sub_81BED50(u8 taskId)
+static void sub_81BED50(u8 taskId)
 {
-    u8 count, index, size, next_index, buffer_index, anotherTaskId, anotherCount;
-    u16 rand1, rand2, temp;
-    u8 left, right;
-    u16 left16, right16;
-    u8 *buffer;
-    struct Task *currTask;
+    u8 anotherTaskId, j;
+
 
     switch(gTasks[taskId].data[0])
     {
-    case 0:
-        gUnknown_0203CF10 = (struct Struct203CF10 *)AllocZeroed(OUTER_BUFFER_LENGTH << 3);
+    case 1:
+        gUnknown_0203CF10 = (struct Struct203CF10 *)AllocZeroed(OUTER_BUFFER_LENGTH * sizeof(struct Struct203CF10));
         break;
-    case 2:
-        if(gTasks[taskId].data[3] <= (OUTER_BUFFER_LENGTH - 1))
-        {
-            if(gTasks[taskId].data[1] > 1)
-            {
-                index = gTasks[taskId].data[3];
-                gUnknown_0203CF10[index].buffer = (u8 *)Alloc(INNER_BUFFER_LENGTH);
-                for(count = 0; count <= (INNER_BUFFER_LENGTH - 1); count++)
-                    gUnknown_0203CF10[index].buffer[count] = count;
-                for(count = 0; count <= (INNER_BUFFER_LENGTH - 1); count++)
-                {
-                    rand1 = Random() % 0x30;
-                    rand2 = Random() % 0x30;
-                    temp = gUnknown_0203CF10[index].buffer[rand2];
-                    gUnknown_0203CF10[index].buffer[rand2] = gUnknown_0203CF10[index].buffer[rand1];
-                    gUnknown_0203CF10[index].buffer[rand1] = temp;
-                }
-                if(gTasks[taskId].data[3] <= (OUTER_BUFFER_LENGTH - 1))
-                    gTasks[taskId].data[3]++;
-                gTasks[taskId].data[1] = 0;
-            }
-            gTasks[taskId].data[1]++;
-        }
-        currTask = &(gTasks[taskId]);
-        right = currTask->data[3];
-        left = currTask->data[2];
-        while(left < right)
-        {
-            anotherCount = 0;
-            do
-            {
-                buffer = gUnknown_0203CF04;
-                buffer_index = gUnknown_0203CF10[left].curr_buffer_index;
-                gUnknown_0203CF10[left].curr_buffer_index = buffer_index + 1;
-                sub_81BF2B8(buffer, gUnknown_0203CF10[left].buffer[buffer_index] + (INNER_BUFFER_LENGTH * (OUTER_BUFFER_LENGTH - 1 - left)), 0, INNER_BUFFER_LENGTH, 1);
-                anotherCount++;
-            }while(!anotherCount);
-
-            if(gUnknown_0203CF10[left].curr_buffer_index > (INNER_BUFFER_LENGTH - 1))
-            {
-                Free(gUnknown_0203CF10[left].buffer);
-                gUnknown_0203CF10[left].buffer = NULL;
-                currTask->data[2]++;
-                if(left & 1)
-                    gUnknown_0203CF04[1]--;
-            }
-            left++;
-        }
-        LoadBgTiles(0, gUnknown_0203CF04, 0x920, 0);
-        if(gUnknown_0203CF10[0x5F].curr_buffer_index > (INNER_BUFFER_LENGTH - 1))
-            break;
-        return;
     case 3:
+        {
+            u16 i;
+            u16 left;
+            u32 index, next;
+
+            index = (u16)gTasks[taskId].data[3];
+            if(gTasks[taskId].data[3] <= (OUTER_BUFFER_LENGTH - 1))
+            {
+                if(gTasks[taskId].data[1] > 1)
+                {
+                    index = (u8)index;
+                    gUnknown_0203CF10[index].buffer = (u8 *)Alloc(INNER_BUFFER_LENGTH);
+                    for(i = 0; i <= (INNER_BUFFER_LENGTH - 1); i++)
+                        gUnknown_0203CF10[index].buffer[i] = i;
+                    for(i = 0; i <= (INNER_BUFFER_LENGTH - 1); i++)
+                    {
+                        u16 rand1, rand2, temp;
+
+                        rand1 = Random() % 0x30;
+                        rand2 = Random() % 0x30;
+                        temp = gUnknown_0203CF10[index].buffer[rand2];
+                        gUnknown_0203CF10[index].buffer[rand2] = gUnknown_0203CF10[index].buffer[rand1];
+                        gUnknown_0203CF10[index].buffer[rand1] = temp;
+                    }
+                    if(gTasks[taskId].data[3] <= (OUTER_BUFFER_LENGTH - 1))
+                        gTasks[taskId].data[3]++;
+                    gTasks[taskId].data[1] = 0;
+                }
+                gTasks[taskId].data[1]++;
+            }
+            index = (u8)gTasks[taskId].data[3];
+            for(left = (u8)gTasks[taskId].data[2]; left < (u16)index; left = next)
+            {
+                j = 0;
+                next = left + 1;
+                while(!j)
+                {
+                    sub_81BF2B8(gUnknown_0203CF04, ((((OUTER_BUFFER_LENGTH - 1) - left) * INNER_BUFFER_LENGTH) + gUnknown_0203CF10[left].buffer[(gUnknown_0203CF10[left].curr_buffer_index)++]), 0, INNER_BUFFER_LENGTH, 1);
+                    j++;
+                }
+                if(gUnknown_0203CF10[left].curr_buffer_index > (INNER_BUFFER_LENGTH - 1))
+                {
+                    Free(gUnknown_0203CF10[left].buffer);
+                    gUnknown_0203CF10[left].buffer = NULL;
+                    gTasks[taskId].data[2]++;
+                    if((left % 2) ==  1)
+                        gUnknown_0203CF14[1]--;
+                }
+            }
+            LoadBgTiles(0, gUnknown_0203CF04, MIRAGE_TOWER_GFX_LENGTH, 0);
+            if(gUnknown_0203CF10[OUTER_BUFFER_LENGTH - 1].curr_buffer_index > (INNER_BUFFER_LENGTH - 1))
+                break;
+            return;
+        }
+    case 4:
         UnsetBgTilemapBuffer(0);
         anotherTaskId = FindTaskIdByFunc(sub_81BEBB4);
         if(anotherTaskId != 0xFF)
             DestroyTask(anotherTaskId);
         gUnknown_0203CF14[1] = gUnknown_0203CF14[0] = 0;
-
         sub_81BEB90();
-
         break;
-    case 4:
+    case 5:
         Free(gUnknown_0203CF14);
         gUnknown_0203CF14 = NULL;
         Free(gUnknown_0203CF10);
@@ -324,29 +321,27 @@ void sub_81BED50(u8 taskId)
         gUnknown_0203CF04 = NULL;
         Free(gUnknown_0203CF08);
         gUnknown_0203CF08 = NULL;
-
-        break;
-    case 5:
-        SetGpuRegBits(0xC, 0x2);
-        SetGpuRegBits(0x8, 0x0);
-        SetBgAttribute(0, BG_CTRL_ATTR_MOSAIC, 0);
-        sub_81971D0();
-
         break;
     case 6:
-        ShowBg(0);
-
+        SetGpuRegBits(REG_OFFSET_BG2CNT, 0x2);
+        SetGpuRegBits(REG_OFFSET_BG0CNT, 0x0);
+        SetBgAttribute(0, BG_CTRL_ATTR_MOSAIC, 0);
+        sub_81971D0();
         break;
     case 7:
+        ShowBg(0);
+        break;
+    case 8:
         DestroyTask(taskId);
         EnableBothScriptContexts();
         break;
     }
     gTasks[taskId].data[0]++;
 }
+
 #else
 ASM_DIRECT
-void sub_81BED50(u8 taskId)
+static void sub_81BED50(u8 taskId)
 {
     asm("\n\
         .syntax unified\n\
@@ -684,31 +679,30 @@ void sub_81BED50(u8 taskId)
 }
 #endif // NONMATCHING
 
-void sub_81BF028(u8 taskId)
+static void sub_81BF028(u8 taskId)
 {
     u16 i;
-    u16 j;
-    u8 *buffer;
 
     switch(gTasks[taskId].data[0])
     {
     case 1:
-        gUnknown_0203CF0C = (struct Struct203CF0C *)AllocZeroed(0x14);
-        gUnknown_0203CF0C->frameImageTiles = (u8 *)AllocZeroed(0x80);
-        gUnknown_0203CF0C->frameImage = (struct DynamicSpriteFrameImage *) AllocZeroed(0x8);
-        gUnknown_0203CF0C->unkC = (u16 *)AllocZeroed(0x200);
+        gUnknown_0203CF0C = (struct Struct203CF0C *)AllocZeroed(sizeof(struct Struct203CF0C));
+        gUnknown_0203CF0C->frameImageTiles = (u8 *)AllocZeroed(ROOT_FOSSIL_GFX_LENGTH);
+        gUnknown_0203CF0C->frameImage = (struct DynamicSpriteFrameImage *) AllocZeroed(sizeof(struct DynamicSpriteFrameImage));
+        gUnknown_0203CF0C->unkC = (u16 *)AllocZeroed(ROOT_FOSSIL_GFX_RANDOMIZER_LENGTH * sizeof(u16));
         gUnknown_0203CF0C->unk10 = 0;
         break;
     case 2:
         {
+            u8 *buffer;
             buffer = gUnknown_0203CF0C->frameImageTiles;
-            for(i = 0; i < 0x80; i++, buffer++)
+            for(i = 0; i < ROOT_FOSSIL_GFX_LENGTH; i++, buffer++)
                 *buffer = gRootFossil_Gfx[i];
         }
         break;
     case 3:
         gUnknown_0203CF0C->frameImage->data = gUnknown_0203CF0C->frameImageTiles;
-        gUnknown_0203CF0C->frameImage->size = 0x80;
+        gUnknown_0203CF0C->frameImage->size = ROOT_FOSSIL_GFX_LENGTH;
         break;
     case 4:
         {
@@ -725,20 +719,18 @@ void sub_81BF028(u8 taskId)
             gSprites[gUnknown_0203CF0C->spriteId].data[1] = 1;
         }
     case 5:
-        for(i = 0; i < 0x100; i++)
+        for(i = 0; i < ROOT_FOSSIL_GFX_RANDOMIZER_LENGTH; i++)
             gUnknown_0203CF0C->unkC[i] = i;
         break;
     case 6:
         {
-            u16 rand1, rand2, temp;
-
-            j = 0x1FF;
+            u16 rand1, rand2, temp, j;
+            j = (ROOT_FOSSIL_GFX_RANDOMIZER_LENGTH * sizeof(u16)) - 1;
             for(i = 0; i <= j; i++)
             {
-
                 rand1 = Random() % 0x100;
                 rand2 = Random() % 0x100;
-                j = 0x1FF;
+                j = (ROOT_FOSSIL_GFX_RANDOMIZER_LENGTH * sizeof(u16)) - 1;
                 temp = gUnknown_0203CF0C->unkC[rand2];
                 gUnknown_0203CF0C->unkC[rand2] = gUnknown_0203CF0C->unkC[rand1];
                 gUnknown_0203CF0C->unkC[rand1] = temp;
@@ -765,10 +757,9 @@ void sub_81BF028(u8 taskId)
     ++gTasks[taskId].data[0];
 }
 
-
-void sub_81BF248(struct Sprite *sprite)
+static void sub_81BF248(struct Sprite *sprite)
 {
-    if (gUnknown_0203CF0C->unk10 > 0xFF)
+    if (gUnknown_0203CF0C->unk10 >= (ROOT_FOSSIL_GFX_RANDOMIZER_LENGTH))
     {
         sprite->callback = SpriteCallbackDummy;
     }
