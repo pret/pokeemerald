@@ -16,5 +16,6 @@ size_t sub_80EF370(int value);
 bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unused, u8 sheen, u8 language);
 void SetPokemonAnglerSpecies(u16 species);
 void UpdateTVShowsPerDay(u16 days);
+void PutBattleUpdateOnTheAir(u8 a0, u16 a1, u16 a2, u16 a3);
 
 #endif //GUARD_TV_H

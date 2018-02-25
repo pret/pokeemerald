@@ -3,8 +3,11 @@
 #include "battle.h"
 #include "battle_link_817C95C.h"
 #include "constants/battle_string_ids.h"
+#include "constants/battle_anim.h"
 #include "constants/moves.h"
+#include "constants/species.h"
 #include "battle_message.h"
+#include "tv.h"
 
 struct BattleLinkStringSide
 {
@@ -582,4 +585,137 @@ void sub_817E0FC(u16 move, u16 weatherFlags, struct DisableStruct *disableStruct
     sub_817E684(14, gBattleMoves[move].type, gBattleMoves[move].power, 0);
     sub_817E684(11, gBattleMoves[move].type, 0,                        0);
     sub_817E684(12, gBattleMoves[move].type, 0,                        0);
+}
+
+void sub_817E32C(u8 animationId)
+{
+    struct UnknownBattleLinkStruct *structPtr;
+    u32 atkSide;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
+        return;
+
+    structPtr = (struct UnknownBattleLinkStruct*)(&gBattleStruct->field_204);
+    atkSide = GetBattlerSide(gBattlerAttacker);
+    switch (animationId)
+    {
+    case B_ANIM_FUTURE_SIGHT_HIT:
+        if (structPtr->side[atkSide].futureSightMonId != 0)
+        {
+            sub_817E684(2, 0, atkSide,
+                        (structPtr->side[atkSide].futureSightMonId - 1) * 4 + structPtr->side[atkSide].futureSightMoveSlot);
+            structPtr->side[atkSide].field_3_0 = 8;
+        }
+        break;
+    case B_ANIM_DOOM_DESIRE_HIT:
+        if (structPtr->side[atkSide].doomDesireMonId != 0)
+        {
+            sub_817E684(2, 1, atkSide,
+                        (structPtr->side[atkSide].doomDesireMonId - 1) * 4 + structPtr->side[atkSide].doomDesireMoveSlot);
+            structPtr->side[atkSide].field_3_0 = 9;
+        }
+        break;
+    }
+}
+
+void sub_817E3F4(void)
+{
+    u16 playerBestSpecies = 0, opponentBestSpecies = 0;
+    s16 playerBestSum = 0, opponentBestSum = SHRT_MAX;
+    u8 playerBestMonId = 0, opponentBestMonId = 0;
+    s16 (*array)[2][6][4] = NULL;
+    u8 countPlayer = 0, countOpponent = 0;
+    s16 sum = 0;
+    u16 moveId = 0;
+    s32 i, j;
+
+    if (gBattleStruct->field_B3)
+        return;
+
+    array = &gBattleStruct->field_1A4;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+            countPlayer++;
+        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+            countOpponent++;
+    }
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) || countPlayer != countOpponent)
+        return;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
+        {
+            for (sum = 0, j = 0; j < 4; j++)
+                sum += (*array)[0][i][j];
+
+            if (playerBestSum < sum)
+            {
+                playerBestMonId = i;
+                playerBestSum = sum;
+                playerBestSpecies = species;
+            }
+        }
+
+        species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
+        if (species != SPECIES_NONE && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG, NULL))
+        {
+            s32 sideId = B_SIDE_OPPONENT;
+            for (sum = 0, j = 0; j < 4; j++)
+                sum += (*array)[sideId][i][j];
+
+            if (opponentBestSum == sum)
+            {
+                if (GetMonData(&gEnemyParty[i], MON_DATA_EXP, NULL) > GetMonData(&gEnemyParty[opponentBestMonId], MON_DATA_EXP, NULL))
+                {
+                    opponentBestMonId = i;
+                    opponentBestSum = sum;
+                    opponentBestSpecies = species;
+                }
+            }
+            else if (opponentBestSum > sum)
+            {
+                opponentBestMonId = i;
+                opponentBestSum = sum;
+                opponentBestSpecies = species;
+            }
+        }
+    }
+
+    for (sum = 0, i = 0, j = 0; j < 4; j++)
+    {
+        if (sum < (*array)[0][playerBestMonId][j])
+        {
+            sum = (*array)[0][playerBestMonId][j];
+            i = j;
+        }
+    }
+
+    moveId = GetMonData(&gPlayerParty[playerBestMonId], MON_DATA_MOVE1 + i, NULL);
+    if (playerBestSum == 0 || moveId == 0)
+        return;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    {
+        if (playerBestMonId < 3)
+        {
+            if (sub_806D82C(gBattleScripting.multiplayerId))
+                return;
+        }
+        else
+        {
+            if (!sub_806D82C(gBattleScripting.multiplayerId))
+                return;
+        }
+
+        j = (opponentBestMonId < 3) ? 0 : 1;
+        PutBattleUpdateOnTheAir(sub_806EF84(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
+    }
+    else
+    {
+        PutBattleUpdateOnTheAir(gBattleScripting.multiplayerId ^ 1, moveId, playerBestSpecies, opponentBestSpecies);
+    }
 }
