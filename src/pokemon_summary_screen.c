@@ -115,8 +115,6 @@ extern u8 gText_Appeal[];
 extern u8 gText_Jam[];
 extern u8 gText_OTSlash[];
 extern u8 gText_UnkCtrlF907F908[];
-extern u8 gAbilityNames[][13];
-extern u8 *gAbilityDescriptionPointers[];
 extern u8 gText_XNature[];
 extern u8 gText_XNatureHatchedAtYZ[];
 extern u8 gText_XNatureHatchedSomewhereAt[];
@@ -2538,7 +2536,7 @@ void sub_81C2554()
         gUnknown_0203CF1C->unk40CB[i] |= 0xFF;
 }
 
-void sub_81C25A4(u8 a, u8 *b, u8 c, u8 d, u8 e, u8 f)
+void sub_81C25A4(u8 a, const u8 *b, u8 c, u8 d, u8 e, u8 f)
 {
     AddTextPrinterParameterized2(a, 1, c, d, 0, e, gUnknown_0861CD2C[f], 0, b);
 }

@@ -42,7 +42,6 @@ extern struct SpriteTemplate gUnknown_0202499C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
-extern const u8 gTypeNames[][7];
 
 extern const u8 gText_BattleSwitchWhich[];
 extern const u8 gText_MoveInterfacePP[];
