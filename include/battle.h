@@ -472,7 +472,7 @@ struct BattleStruct
     u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
-    s16 field_1A4[2][6][4];
+    s16 field_1A4[2][PARTY_SIZE * 4];
     u8 field_204[104];
     u8 field_26C[40];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
