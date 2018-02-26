@@ -5,17 +5,17 @@ MauvilleCity_MapScripts:: @ 81DF385
 MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	setflag FLAG_VISITED_MAUVILLE_CITY
 	clearflag FLAG_0x09D
-	clearflag FLAG_0x3C1
+	clearflag FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_0x063
 	setvar VAR_0x4093, 0
-	checkflag FLAG_0x0D1
+	checkflag FLAG_GOT_TM24_FROM_WATTSON
 	call_if 1, MauvilleCity_EventScript_1DF3A9
 	end
 
 MauvilleCity_EventScript_1DF3A9:: @ 81DF3A9
-	clearflag FLAG_0x391
-	setflag FLAG_0x390
+	clearflag FLAG_SPRITEVIS_MAUVILLE_GYM_WATTSON
+	setflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
 	setflag FLAG_WATTSON_REMATCH_AVAILABLE
 	return
 
@@ -424,15 +424,15 @@ MauvilleCity_Movement_1DF72F: @ 81DF72F
 MauvilleCity_EventScript_1DF73A:: @ 81DF73A
 	lock
 	faceplayer
-	checkflag FLAG_0x0D1
+	checkflag FLAG_GOT_TM24_FROM_WATTSON
 	goto_eq MauvilleCity_EventScript_1DF7B0
 	compare VAR_0x40BA, 2
 	goto_eq MauvilleCity_EventScript_1DF784
-	checkflag FLAG_0x0D0
+	checkflag FLAG_GOT_BASEMENT_KEY_FROM_WATTSON
 	goto_eq MauvilleCity_EventScript_1DF77A
 	msgbox MauvilleCity_Text_1DFFE4, 4
 	giveitem_std ITEM_BASEMENT_KEY
-	setflag FLAG_0x0D0
+	setflag FLAG_GOT_BASEMENT_KEY_FROM_WATTSON
 	msgbox MauvilleCity_Text_1E0154, 4
 	release
 	end
@@ -447,7 +447,7 @@ MauvilleCity_EventScript_1DF784:: @ 81DF784
 	giveitem_std ITEM_TM24
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_EventScript_272054
-	setflag FLAG_0x0D1
+	setflag FLAG_GOT_TM24_FROM_WATTSON
 	msgbox MauvilleCity_Text_1E02AA, 4
 	release
 	end

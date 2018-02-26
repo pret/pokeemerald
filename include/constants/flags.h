@@ -208,8 +208,8 @@
 #define FLAG_0x0CD               0xCD
 #define FLAG_0x0CE               0xCE
 #define FLAG_0x0CF               0xCF
-#define FLAG_0x0D0               0xD0
-#define FLAG_0x0D1               0xD1
+#define FLAG_GOT_BASEMENT_KEY_FROM_WATTSON               0xD0
+#define FLAG_GOT_TM24_FROM_WATTSON               0xD1
 #define FLAG_0x0D2               0xD2
 #define FLAG_0x0D3               0xD3
 #define FLAG_0x0D4               0xD4
@@ -912,8 +912,8 @@
 #define FLAG_0x38D               0x38D
 #define FLAG_0x38E               0x38E
 #define FLAG_0x38F               0x38F
-#define FLAG_0x390               0x390
-#define FLAG_0x391               0x391
+#define FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON               0x390
+#define FLAG_SPRITEVIS_MAUVILLE_GYM_WATTSON               0x391
 #define FLAG_0x392               0x392
 #define FLAG_0x393               0x393
 #define FLAG_0x394               0x394
@@ -961,7 +961,7 @@
 #define FLAG_0x3BE               0x3BE
 #define FLAG_0x3BF               0x3BF
 #define FLAG_0x3C0               0x3C0
-#define FLAG_0x3C1               0x3C1
+#define FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION               0x3C1
 #define FLAG_0x3C2               0x3C2
 #define FLAG_0x3C3               0x3C3
 #define FLAG_0x3C4               0x3C4
