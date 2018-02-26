@@ -1,39 +1,47 @@
-
-// Includes
 #include "global.h"
 #include "constants/flags.h"
 #include "random.h"
 #include "event_data.h"
 #include "battle_setup.h"
+#include "trainer_rematch.h"
 
-// Static type declarations
+static void sub_81DA5D4(const u16 *data, size_t size, u32 a2);
+static s32 sub_81DA6CC(u32 trainerIdx);
 
-// Static RAM declarations
+static const u16 GymLeaderRematches_AfterNewMauville[] = {
+    REMATCH_ROXANNE,
+    REMATCH_BRAWLY,
+    REMATCH_WATTSON,
+    REMATCH_FLANNERY,
+    REMATCH_NORMAN,
+    REMATCH_WINONA,
+    REMATCH_TATE_AND_LIZA,
+    REMATCH_JUAN
+};
 
-// Static ROM declarations
-
-void sub_81DA5D4(const u16 *data, size_t size, u32 a2);
-s32 sub_81DA6CC(u32 trainerIdx);
-
-// .rodata
-
-const u16 gUnknown_0862AD34[] = {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48};
-const u16 gUnknown_0862AD44[] = {0x41, 0x42, 0x44, 0x45, 0x46, 0x47, 0x48};
-
-// .text
+static const u16 GymLeaderRematches_BeforeNewMauville[] = {
+    REMATCH_ROXANNE,
+    REMATCH_BRAWLY,
+    // Wattson isn't available at this time
+    REMATCH_FLANNERY,
+    REMATCH_NORMAN,
+    REMATCH_WINONA,
+    REMATCH_TATE_AND_LIZA,
+    REMATCH_JUAN
+};
 
 void sub_81DA57C(void)
 {
     if (FlagGet(FLAG_SYS_GAME_CLEAR) && (Random() % 100) <= 30)
     {
         if (FlagGet(FLAG_0x05B))
-            sub_81DA5D4(gUnknown_0862AD34, ARRAY_COUNT(gUnknown_0862AD34), 5);
+            sub_81DA5D4(GymLeaderRematches_AfterNewMauville, ARRAY_COUNT(GymLeaderRematches_AfterNewMauville), 5);
         else
-            sub_81DA5D4(gUnknown_0862AD44, ARRAY_COUNT(gUnknown_0862AD44), 1);
+            sub_81DA5D4(GymLeaderRematches_BeforeNewMauville, ARRAY_COUNT(GymLeaderRematches_BeforeNewMauville), 1);
     }
 }
 
-void sub_81DA5D4(const u16 *data, size_t size, u32 a2)
+static void sub_81DA5D4(const u16 *data, size_t size, u32 a2)
 {
     s32 r6 = 0;
     s32 r8 = 5;
@@ -83,7 +91,7 @@ void sub_81DA5D4(const u16 *data, size_t size, u32 a2)
     }
 }
 
-s32 sub_81DA6CC(u32 trainerIdx)
+static s32 sub_81DA6CC(u32 trainerIdx)
 {
     s32 i;
     for (i = 0; i < 5; i++)
