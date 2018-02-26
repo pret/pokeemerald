@@ -91,7 +91,7 @@
 #define FLAG_0x058               0x58
 #define FLAG_0x059               0x59
 #define FLAG_0x05A               0x5A
-#define FLAG_0x05B               0x5B
+#define FLAG_WATTSON_REMATCH_AVAILABLE               0x5B
 #define FLAG_0x05C               0x5C
 #define FLAG_0x05D               0x5D
 #define FLAG_0x05E               0x5E

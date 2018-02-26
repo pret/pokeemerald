@@ -31,6 +31,7 @@
 #include "string_util.h"
 #include "overworld.h"
 #include "field_weather.h"
+#include "gym_leader_rematch.h"
 
 enum
 {
@@ -66,7 +67,6 @@ extern void Overworld_ClearSavedMusic(void);
 extern void CB2_WhiteOut(void);
 extern void sub_80AF6F0(void);
 extern void PlayBattleBGM(void);
-extern void sub_81DA57C(void);
 extern u8 Overworld_GetFlashLevel(void);
 extern u16 sub_81A9AA8(u8 localId);
 extern u16 sub_81D6180(u8 localId);
@@ -945,13 +945,13 @@ static void CB2_EndFirstBattle(void)
 static void sub_80B1218(void)
 {
     if (GetGameStat(GAME_STAT_WILD_BATTLES) % 60 == 0)
-        sub_81DA57C();
+        UpdateGymLeaderRematch();
 }
 
 static void sub_80B1234(void)
 {
     if (GetGameStat(GAME_STAT_TRAINER_BATTLES) % 20 == 0)
-        sub_81DA57C();
+        UpdateGymLeaderRematch();
 }
 
 // why not just use the macros? maybe its because they didnt want to uncast const every time?

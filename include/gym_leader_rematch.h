@@ -82,6 +82,6 @@ enum {
     REMATCH_WALLACE
 };
 
-void sub_81DA57C(void);
+void UpdateGymLeaderRematch(void);
 
 #endif //GUARD_TRAINER_REMATCH_H

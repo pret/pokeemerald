@@ -16,7 +16,7 @@ MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 MauvilleCity_EventScript_1DF3A9:: @ 81DF3A9
 	clearflag FLAG_0x391
 	setflag FLAG_0x390
-	setflag FLAG_0x05B
+	setflag FLAG_WATTSON_REMATCH_AVAILABLE
 	return
 
 MauvilleCity_EventScript_1DF3B3:: @ 81DF3B3
