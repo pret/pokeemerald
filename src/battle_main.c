@@ -81,7 +81,6 @@ extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gUnknown_0203CF00[];
 
-extern const struct BattleMove gBattleMoves[];
 extern const u16 gBattleTextboxPalette[]; // battle textbox palette
 extern const struct BgTemplate gUnknown_0831AA08[];
 extern const struct WindowTemplate * const gUnknown_0831ABA0[];
@@ -5133,7 +5132,7 @@ static void HandleAction_UseMove(void)
     else if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
              && gSideTimers[side].followmeTimer == 0
              && (gBattleMoves[gCurrentMove].power != 0
-                 || gBattleMoves[gCurrentMove].target != MOVE_TARGET_x10)
+                 || gBattleMoves[gCurrentMove].target != MOVE_TARGET_USER)
              && gBattleMons[*(gBattleStruct->moveTarget + gBattlerAttacker)].ability != ABILITY_LIGHTNING_ROD
              && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
     {

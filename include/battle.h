@@ -66,14 +66,14 @@
 #define MSG_DISPLAY             0x7
 #define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
 
-#define MOVE_TARGET_SELECTED        0x0
-#define MOVE_TARGET_DEPENDS         0x1
-#define MOVE_TARGET_USER            0x2
-#define MOVE_TARGET_RANDOM          0x4
-#define MOVE_TARGET_x10             0x10
-#define MOVE_TARGET_BOTH            0x8
-#define MOVE_TARGET_FOES_AND_ALLY   0x20
-#define MOVE_TARGET_OPPONENTS_FIELD 0x40
+#define MOVE_TARGET_SELECTED            0x0
+#define MOVE_TARGET_DEPENDS             0x1
+#define MOVE_TARGET_USER_OR_SELECTED    0x2
+#define MOVE_TARGET_RANDOM              0x4
+#define MOVE_TARGET_BOTH                0x8
+#define MOVE_TARGET_USER                0x10
+#define MOVE_TARGET_FOES_AND_ALLY       0x20
+#define MOVE_TARGET_OPPONENTS_FIELD     0x40
 
 // defines for the u8 array gTypeEffectiveness
 #define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))

@@ -67,7 +67,6 @@ extern const union AnimCmd *gUnknown_082FF70C[];
 extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[];
 extern const union AnimCmd *const *const gUnknown_08305D0C[];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
-extern const struct BattleMove gBattleMoves[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const struct UnknownPokemonStruct3 gUnknown_08610970[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];

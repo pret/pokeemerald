@@ -54,7 +54,6 @@ struct TrainerMoney
     u8 value;
 };
 
-extern const struct BattleMove gBattleMoves[];
 extern const u8 gTypeEffectiveness[336];
 extern const struct TrainerMoney gTrainerMoneyTable[];
 extern const u8* const gBattleScriptsForMoveEffects[];

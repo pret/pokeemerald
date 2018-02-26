@@ -146,7 +146,6 @@ extern u8 gText_OneDash[];
 extern u8 gText_TwoDashes[];
 extern u8 gText_ThreeDashes[];
 extern u8 gUnknown_0861CE97[];
-extern struct BattleMove gBattleMoves[];
 
 extern void sub_8199C30(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f);
 extern bool8 sub_81A6BF4();
