@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/songs.h"
+#include "braille_puzzles.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_effect.h"
@@ -25,42 +26,53 @@ struct FlashStruct
     void (*func)(void);
 };
 
-// extern data
-extern u8 EventScript_2926F8[];
-
-// extern functions
-extern bool8 ShouldDoBrailleFlyEffect(void);
-extern void sub_8179918(void);
-
 // static functions
-void hm2_flash(void);
-void sub_81371B4(void);
-bool8 sub_8137304(void);
-void sub_8137404(u8 taskId);
-void sub_8137420(u8 taskId);
-void sub_81374C4(u8 taskId);
-void sub_813750C(u8 taskId);
-void sub_8137574(u8 taskId);
-void sub_81375BC(u8 taskId);
-void sub_81375D8(u8 taskId);
-void sub_8137678(u8 taskId);
-void sub_81376DC(u8 taskId);
+static void hm2_flash(void);
+static void sub_81371B4(void);
+static bool8 sub_8137304(void);
+static void sub_81373F0(void);
+static void sub_8137404(u8 taskId);
+static void sub_8137420(u8 taskId);
+static void sub_81374C4(u8 taskId);
+static void sub_813750C(u8 taskId);
+static void sub_8137574(u8 taskId);
+static void sub_81375A8(void);
+static void sub_81375BC(u8 taskId);
+static void sub_81375D8(u8 taskId);
+static void sub_8137678(u8 taskId);
+static void sub_81376DC(u8 taskId);
 
 // rodata
-extern struct FlashStruct gUnknown_085B27C8[];
+static const struct FlashStruct gUnknown_085B27C8[] =
+{
+    {1, 4, 1, 0, sub_81375A8},
+    {2, 4, 1, 0, sub_81375A8},
+    {3, 4, 1, 0, sub_81375A8},
+    {5, 4, 1, 0, sub_81375A8},
+    {6, 4, 1, 0, sub_81375A8},
+    {7, 4, 1, 0, sub_81375A8},
+    {8, 4, 1, 0, sub_81375A8},
+    {9, 4, 1, 0, sub_81375A8},
+    {4, 1, 0, 1, sub_81373F0},
+    {4, 2, 0, 1, sub_81373F0},
+    {4, 3, 0, 1, sub_81373F0},
+    {4, 5, 0, 1, sub_81373F0},
+    {4, 6, 0, 1, sub_81373F0},
+    {4, 7, 0, 1, sub_81373F0},
+    {4, 8, 0, 1, sub_81373F0},
+    {4, 9, 0, 1, sub_81373F0},
+    {0, 0, 0, 0, NULL},
+};
 
-/*static const*/ extern u16 gCaveTransitionPalette_White[];// = {0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF};
-/*static const*/ extern u16 gCaveTransitionPalette_Black[];// = {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+static const u16 gCaveTransitionPalette_White[] = INCBIN_U16("graphics/misc/cave_transition_white.gbapal");
+static const u16 gCaveTransitionPalette_Black[] = INCBIN_U16("graphics/misc/cave_transition_black.gbapal");
 
-/*static const*/ extern u16 gUnknown_085B2890[];// = INCBIN_U16("graphics/misc/83F808C.gbapal");
-/*static const*/ extern u16 gUnknown_085B28A0[];// = INCBIN_U16("graphics/misc/83F809C.gbapal");
-/*static const*/ extern u16 gCaveTransitionTilemap[];// = INCBIN_U16("graphics/misc/cave_transition_map.bin.lz");
-/*static const*/ extern u8 gCaveTransitionTiles[];// = INCBIN_U8("graphics/misc/cave_transition.4bpp.lz");
-
-// ewram
+static const u16 gUnknown_085B2890[] = INCBIN_U16("graphics/misc/85B2890.gbapal");
+static const u16 gUnknown_085B28A0[] = INCBIN_U16("graphics/misc/85B28A0.gbapal");
+static const u16 gCaveTransitionTilemap[] = INCBIN_U16("graphics/misc/cave_transition_map.bin.lz");
+static const u8 gCaveTransitionTiles[] = INCBIN_U8("graphics/misc/cave_transition.4bpp.lz");
 
 // text
-
 bool8 SetUpFieldMove_Flash(void)
 {
     if(ShouldDoBrailleFlyEffect())
@@ -80,7 +92,7 @@ bool8 SetUpFieldMove_Flash(void)
     return FALSE;
 }
 
-void hm2_flash(void)
+static void hm2_flash(void)
 {
     u8 taskId = oei_task_add();
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
@@ -88,14 +100,14 @@ void hm2_flash(void)
     gTasks[taskId].data[9] = (uintptr_t)sub_81371B4;
 }
 
-void sub_81371B4(void)
+static void sub_81371B4(void)
 {
     PlaySE(SE_W115);
     FlagSet(FLAG_SYS_USE_FLASH);
     ScriptContext1_SetupScript(EventScript_2926F8);
 }
 
-void sub_81371D4(void)
+static void sub_81371D4(void)
 {
     RunTasks();
     AnimateSprites();
@@ -103,7 +115,7 @@ void sub_81371D4(void)
     UpdatePaletteFade();
 }
 
-void sub_81371EC(void)
+static void sub_81371EC(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -141,7 +153,7 @@ void c2_change_map(void)
         SetMainCallback2(gMain.savedCallback);
 }
 
-bool8 sub_8137304(void)
+static bool8 sub_8137304(void)
 {
     u8 i;
     u8 v0 = get_map_light_from_warp0();
@@ -193,17 +205,17 @@ bool8 fade_type_for_given_maplight_pair(u8 a1, u8 a2)
     return FALSE;
 }
 
-void sub_81373F0(void)
+static void sub_81373F0(void)
 {
     CreateTask(sub_8137404, 0);
 }
 
-void sub_8137404(u8 taskId)
+static void sub_8137404(u8 taskId)
 {
     gTasks[taskId].func = sub_8137420;
 }
 
-void sub_8137420(u8 taskId)
+static void sub_8137420(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     LZ77UnCompVram(gCaveTransitionTiles, (void *)0x600C000);
@@ -233,7 +245,7 @@ void sub_8137420(u8 taskId)
     gTasks[taskId].data[1] = 0;
 }
 
-void sub_81374C4(u8 taskId)
+static void sub_81374C4(u8 taskId)
 {
     u16 count = gTasks[taskId].data[1];
     u16 blend = count + 0x1000;
@@ -250,11 +262,11 @@ void sub_81374C4(u8 taskId)
     }
 }
 
-void sub_813750C(u8 taskId)
+static void sub_813750C(u8 taskId)
 {
     u16 count;
 
-    SetGpuReg(REG_OFFSET_BLDALPHA, 4112);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 16));
     count = gTasks[taskId].data[2];
 
     if (count < 8)
@@ -270,7 +282,7 @@ void sub_813750C(u8 taskId)
     }
 }
 
-void sub_8137574(u8 taskId)
+static void sub_8137574(u8 taskId)
 {
     if (gTasks[taskId].data[2])
         gTasks[taskId].data[2]--;
@@ -278,17 +290,17 @@ void sub_8137574(u8 taskId)
         SetMainCallback2(gMain.savedCallback);
 }
 
-void sub_81375A8(void)
+static void sub_81375A8(void)
 {
     CreateTask(sub_81375BC, 0);
 }
 
-void sub_81375BC(u8 taskId)
+static void sub_81375BC(u8 taskId)
 {
     gTasks[taskId].func = sub_81375D8;
 }
 
-void sub_81375D8(u8 taskId)
+static void sub_81375D8(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     LZ77UnCompVram(gCaveTransitionTiles, (void *)0x600C000);
@@ -313,7 +325,7 @@ void sub_81375D8(u8 taskId)
     gTasks[taskId].data[2] = 0;
 }
 
-void sub_8137678(u8 taskId)
+static void sub_8137678(u8 taskId)
 {
     u16 count = gTasks[taskId].data[2];
 
@@ -337,7 +349,7 @@ void sub_8137678(u8 taskId)
     }
 }
 
-void sub_81376DC(u8 taskId)
+static void sub_81376DC(u8 taskId)
 {
     u16 count = 16 - gTasks[taskId].data[1];
     u16 blend = count + 0x1000;

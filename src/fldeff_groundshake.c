@@ -7,17 +7,13 @@
 #include "field_map_obj.h"
 #include "malloc.h"
 #include "random.h"
+#include "roulette_util.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 
 // structures
-struct InnerStruct203CF18
-{
-    u8 filler[0xC4];
-};
-
 struct Struct203CF18 {
     u8 taskId;
     struct InnerStruct203CF18 unk4;
@@ -26,14 +22,6 @@ struct Struct203CF18 {
 // extern data
 extern const struct SpriteSheet gUnknown_08617D94[];
 extern const s16 gUnknown_08617D64[][3];
-
-// extern functions
-extern void sub_8151B68(struct InnerStruct203CF18 *, const u8*);
-extern void sub_8151B3C(struct InnerStruct203CF18 *);
-extern void sub_8151CA8(struct InnerStruct203CF18 *, u8, u8);
-extern void sub_8151C50(struct InnerStruct203CF18 *, u8, u8);
-extern void sub_8151D28(struct InnerStruct203CF18 *, u8, u8);
-extern void sub_8151E50(struct InnerStruct203CF18 *);
 
 // static functions
 static void sub_81BE808(u8 taskId);
