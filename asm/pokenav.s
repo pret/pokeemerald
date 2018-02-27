@@ -20697,44 +20697,8 @@ _081D156A:
 	.pool
 	thumb_func_end sub_81D1538
 
-	thumb_func_start sub_81D1574
-sub_81D1574: @ 81D1574
-	push {lr}
-	ldrb r0, [r0]
-	cmp r0, 0x5
-	bhi _081D15A4
-	lsls r0, 2
-	ldr r1, =_081D158C
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081D158C:
-	.4byte _081D15A4
-	.4byte _081D15A8
-	.4byte _081D15AC
-	.4byte _081D15B4
-	.4byte _081D15B0
-	.4byte _081D15A8
-_081D15A4:
-	movs r0, 0
-	b _081D15B6
-_081D15A8:
-	movs r0, 0x1
-	b _081D15B6
-_081D15AC:
-	movs r0, 0x2
-	b _081D15B6
-_081D15B0:
-	movs r0, 0x3
-	b _081D15B6
-_081D15B4:
-	movs r0, 0x4
-_081D15B6:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81D1574
+// MATCH CALL
+	.section .text.after.match.call
 
 	thumb_func_start sub_81D15BC
 sub_81D15BC: @ 81D15BC
