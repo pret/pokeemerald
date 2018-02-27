@@ -38,5 +38,6 @@ void sub_80EECC8(void);
 void sub_80EECEC(void);
 void sub_80F1208(TVShow *shows);
 void sub_80EE44C(u8 nMonsCaught, u8 nPkblkUsed);
+void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent);
 
 #endif //GUARD_TV_H

@@ -1276,7 +1276,7 @@ static void InterviewAfter_ContestLiveUpdates(void)
     }
 }
 
-void PutBattleUpdateOnTheAir(u8 a0, u16 a1, u16 a2, u16 a3)
+void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent)
 {
     TVShow *show;
     u8 name[32];
@@ -1303,21 +1303,21 @@ void PutBattleUpdateOnTheAir(u8 a0, u16 a1, u16 a2, u16 a3)
             {
                 show->battleUpdate.battleType = 0;
             }
-            show->battleUpdate.move = a1;
-            show->battleUpdate.species2 = a2;
-            show->battleUpdate.species = a3;
-            StringCopy(name, gLinkPlayers[a0].name);
+            show->battleUpdate.move = move;
+            show->battleUpdate.speciesPlayer = speciesPlayer;
+            show->battleUpdate.speciesOpponent = speciesOpponent;
+            StringCopy(name, gLinkPlayers[opponentLinkPlayerId].name);
             StripExtCtrlCodes(name);
             StringCopy(show->battleUpdate.linkOpponentName, name);
             tv_store_id_2x(show);
             show->battleUpdate.language = gGameLanguage;
-            if (show->battleUpdate.language == LANGUAGE_JAPANESE || gLinkPlayers[a0].language == LANGUAGE_JAPANESE)
+            if (show->battleUpdate.language == LANGUAGE_JAPANESE || gLinkPlayers[opponentLinkPlayerId].language == LANGUAGE_JAPANESE)
             {
                 show->battleUpdate.linkOpponentLanguage = LANGUAGE_JAPANESE;
             }
             else
             {
-                show->battleUpdate.linkOpponentLanguage = gLinkPlayers[a0].language;
+                show->battleUpdate.linkOpponentLanguage = gLinkPlayers[opponentLinkPlayerId].language;
             }
         }
     }
@@ -3822,8 +3822,8 @@ static void sub_80F0708(void) // FIXME: register allocation shenanigans
             case TVSHOW_3_CHEERS_FOR_POKEBLOCKS:
                 break;
             case TVSHOW_BATTLE_UPDATE:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleUpdate.species2, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleUpdate.species, i);
+                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleUpdate.speciesPlayer, i);
+                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleUpdate.speciesOpponent, i);
                 break;
             case TVSHOW_FAN_CLUB_SPECIAL:
                 break;
@@ -5972,13 +5972,13 @@ static void DoTVShowPokemonBattleUpdate(void)
             break;
         case 2:
             TVShowConvertInternationalString(gStringVar1, show->battleUpdate.playerName, show->battleUpdate.language);
-            StringCopy(gStringVar2, gSpeciesNames[show->battleUpdate.species2]);
+            StringCopy(gStringVar2, gSpeciesNames[show->battleUpdate.speciesPlayer]);
             StringCopy(gStringVar3, gMoveNames[show->battleUpdate.move]);
             sTVShowState = 3;
             break;
         case 3:
             TVShowConvertInternationalString(gStringVar1, show->battleUpdate.linkOpponentName, show->battleUpdate.linkOpponentLanguage);
-            StringCopy(gStringVar2, gSpeciesNames[show->battleUpdate.species]);
+            StringCopy(gStringVar2, gSpeciesNames[show->battleUpdate.speciesOpponent]);
             sTVShowState = 4;
             break;
         case 4:
@@ -5993,14 +5993,14 @@ static void DoTVShowPokemonBattleUpdate(void)
             break;
         case 6:
             TVShowConvertInternationalString(gStringVar1, show->battleUpdate.playerName, show->battleUpdate.language);
-            StringCopy(gStringVar2, gSpeciesNames[show->battleUpdate.species2]);
+            StringCopy(gStringVar2, gSpeciesNames[show->battleUpdate.speciesPlayer]);
             StringCopy(gStringVar3, gMoveNames[show->battleUpdate.move]);
             sTVShowState = 7;
             break;
         case 7:
             TVShowConvertInternationalString(gStringVar1, show->battleUpdate.playerName, show->battleUpdate.language);
             TVShowConvertInternationalString(gStringVar2, show->battleUpdate.linkOpponentName, show->battleUpdate.linkOpponentLanguage);
-            StringCopy(gStringVar3, gSpeciesNames[show->battleUpdate.species]);
+            StringCopy(gStringVar3, gSpeciesNames[show->battleUpdate.speciesOpponent]);
             TVShowDone();
             break;
     }

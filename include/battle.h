@@ -368,7 +368,7 @@ struct BattleResults
     u8 catchAttempts[11];     // 0x36
 };
 
-struct BattleLinkStringSide
+struct BattleTv_Side
 {
     u32 spikesMonId:3;
     u32 reflectMonId:3;
@@ -380,7 +380,7 @@ struct BattleLinkStringSide
     u32 perishSongMonId:3;
     u32 wishMonId:3;
     u32 grudgeMonId:3;
-    u32 field_8_6:2;
+    u32 usedMoveSlot:2;
     u32 spikesMoveSlot:2;
     u32 reflectMoveSlot:2;
     u32 lightScreenMoveSlot:2;
@@ -393,18 +393,15 @@ struct BattleLinkStringSide
     u32 grudgeMoveSlot:2;
     u32 destinyBondMonId:3;
     u32 destinyBondMoveSlot:2;
-    u32 field_3_0:4;
-    u32 field_3_1:3;
+    u32 faintCause:4;
+    u32 faintCauseMonId:3;
     u32 explosion:1;
     u32 explosionMoveSlot:2;
     u32 explosionMonId:3;
     u32 perishSong:1;
-    u32 field_4_2:1;
-    u32 field_5_0:3;
-    u32 field_5_1:2;
 };
 
-struct BattleLinkStringPosition
+struct BattleTv_Position
 {
     u32 curseMonId:3;
     u32 leechSeedMonId:3;
@@ -424,11 +421,11 @@ struct BattleLinkStringPosition
     u32 mudSportMoveSlot:2;
     u32 ingrainMonId:3;
     u32 ingrainMoveSlot:2;
-    u32 field_5_5:3;
-    u32 field_6_0:2;
+    u32 attackedByMonId:3;
+    u32 attackedByMoveSlot:2;
 };
 
-struct BattleLinkStringMon
+struct BattleTv_Mon
 {
     u32 psnMonId:3;
     u32 badPsnMonId:3;
@@ -444,16 +441,16 @@ struct BattleLinkStringMon
     u32 frzMoveSlot:2;
 };
 
-struct UnknownBattleLinkStruct
+struct BattleTv
 {
-    struct BattleLinkStringMon mon[2][6]; // [side][partyId]
-    struct BattleLinkStringPosition pos[2][2]; // [side][flank]
-    struct BattleLinkStringSide side[2]; // [side]
+    struct BattleTv_Mon mon[2][6]; // [side][partyId]
+    struct BattleTv_Position pos[2][2]; // [side][flank]
+    struct BattleTv_Side side[2]; // [side]
 };
 
-struct UnknownBattleLinkArrayStruct
+struct BattleTvMovePoints
 {
-    s16 unk0[2][6*4];
+    s16 points[2][PARTY_SIZE * 4];
 };
 
 struct BattleStruct
@@ -535,7 +532,7 @@ struct BattleStruct
     u8 field_B0;
     u8 hpScale;
     u8 synchronizeMoveEffect;
-    u8 field_B3;
+    bool8 anyMonHasTransformed;
     void (*savedCallback)(void);
     u16 usedHeldItems[MAX_BATTLERS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
@@ -560,8 +557,8 @@ struct BattleStruct
     u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
-    struct UnknownBattleLinkArrayStruct field_1A4;
-    struct UnknownBattleLinkStruct field_204;
+    struct BattleTvMovePoints tvMovePoints;
+    struct BattleTv tv;
     u8 notSureWhatFieldLol[0x28];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 field_298[8];
