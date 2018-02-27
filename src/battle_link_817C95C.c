@@ -9,89 +9,6 @@
 #include "battle_message.h"
 #include "tv.h"
 
-struct BattleLinkStringSide
-{
-    u32 spikesMonId:3;
-    u32 reflectMoveId:3;
-    u32 lightScreenMonId:3;
-    u32 safeguardMonId:3;
-    u32 mistMonId:3;
-    u32 futureSightMonId:3;
-    u32 doomDesireMonId:3;
-    u32 perishSongMonId:3;
-    u32 wishMonId:3;
-    u32 grudgeMonId:3;
-    u32 field_8_6:2;
-    u32 spikesMoveSlot:2;
-    u32 reflectMoveSlot:2;
-    u32 lightScreenMoveSlot:2;
-    u32 safeguardMoveSlot:2;
-    u32 mistMoveSlot:2;
-    u32 futureSightMoveSlot:2;
-    u32 doomDesireMoveSlot:2;
-    u32 perishSongMoveSlot:2;
-    u32 wishMoveSlot:2;
-    u32 grudgeMoveSlot:2;
-    u32 destinyBondMonId:3;
-    u32 destinyBondMoveSlot:2;
-    u32 field_3_0:4;
-    u32 field_3_1:3;
-    u32 field_4_0_0:1;
-    u32 field_4_0:2;
-    u32 field_4_0_b:3;
-    u32 field_4_1:1;
-    u32 field_4_2:1;
-    u32 field_5_0:3;
-    u32 field_5_1:2;
-};
-
-struct BattleLinkStringPosition
-{
-    u32 curseMonId:3;
-    u32 leechSeedMonId:3;
-    u32 nightmareMonId:3;
-    u32 wrapMonId:3;
-    u32 attractMonId:3;
-    u32 confusionMonId:3;
-    u32 curseMoveSlot:2;
-    u32 leechSeedMoveSlot:2;
-    u32 nightmareMoveSlot:2;
-    u32 wrapMoveSlot:2;
-    u32 attractMoveSlot:2;
-    u32 confusionMoveSlot:2;
-    u32 waterSportMoveSlot:2;
-    u32 waterSportMonId:3;
-    u32 mudSportMonId:3;
-    u32 mudSportMoveSlot:2;
-    u32 ingrainMonId:3;
-    u32 ingrainMoveSlot:2;
-    u32 field_5_5:3;
-    u32 field_6_0:2;
-};
-
-struct BattleLinkStringMon
-{
-    u32 psnMonId:3;
-    u32 badPsnMonId:3;
-    u32 brnMonId:3;
-    u32 prlzMonId:3;
-    u32 slpMonId:3;
-    u32 frzMonId:3;
-    u32 psnMoveSlot:2;
-    u32 badPsnMoveSlot:2;
-    u32 brnMoveSlot:2;
-    u32 prlzMoveSlot:2;
-    u32 slpMoveSlot:2;
-    u32 frzMoveSlot:2;
-};
-
-struct UnknownBattleLinkStruct
-{
-    struct BattleLinkStringMon mon[2][6]; // [side][partyId]
-    struct BattleLinkStringPosition pos[2][2]; // [side][flank]
-    struct BattleLinkStringSide side[2]; // [side]
-};
-
 extern struct StringInfoBattle *gStringInfo;
 
 extern const struct BattleMove gBattleMoves[];
@@ -102,9 +19,12 @@ void sub_817E684(u8 arg0, u16 arg1, u8 arg2, u8 arg3);
 void sub_817EECC(void);
 void sub_817EA80(u8 arg0);
 void sub_817F394(u16 weatherFlags, u16 moveId, u8 moveSlot);
+bool8 sub_817F21C(u16 moveId, s32 *dmg, u16 *powerOverride);
 
 // const rom data
+extern const u16 *const gUnknown_0860A834[];
 extern const u16 gUnknown_0860A8A4[];
+extern const u16 gUnknown_0860A4AC[];
 
 // code
 void sub_817C95C(u16 stringId)
@@ -120,7 +40,7 @@ void sub_817C95C(u16 stringId)
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && stringId != STRINGID_ITDOESNTAFFECT && stringId != STRINGID_NOTVERYEFFECTIVE)
         return;
 
-    structPtr = (struct UnknownBattleLinkStruct*)(&gBattleStruct->field_204);
+    structPtr = &gBattleStruct->field_204;
 
     atkSide = GetBattlerSide(gBattlerAttacker);
     defSide = GetBattlerSide(gBattlerTarget);
@@ -179,7 +99,7 @@ void sub_817C95C(u16 stringId)
     case STRINGID_FAINTINTHREE:
         structPtr->side[atkSide].perishSongMonId = gBattlerPartyIndexes[gBattlerAttacker] + 1;
         structPtr->side[atkSide].perishSongMoveSlot = moveSlot;
-        structPtr->side[atkSide].field_4_1 = 1;
+        structPtr->side[atkSide].perishSong = 1;
         break;
     case STRINGID_PKMNPERISHCOUNTFELL:
         if (*perishCount == 0)
@@ -455,7 +375,7 @@ void sub_817C95C(u16 stringId)
         break;
     case STRINGID_PKMNRAISEDDEF:
     case STRINGID_PKMNRAISEDDEFALITTLE:
-        structPtr->side[atkSide].reflectMoveId = gBattlerPartyIndexes[gBattlerAttacker] + 1;
+        structPtr->side[atkSide].reflectMonId = gBattlerPartyIndexes[gBattlerAttacker] + 1;
         structPtr->side[atkSide].reflectMoveSlot = moveSlot;
         break;
     case STRINGID_PKMNRAISEDSPDEF:
@@ -466,7 +386,7 @@ void sub_817C95C(u16 stringId)
     case STRINGID_PKMNSXWOREOFF:
         if (*finishedMoveId == MOVE_REFLECT)
         {
-            structPtr->side[atkSide].reflectMoveId = 0;
+            structPtr->side[atkSide].reflectMonId = 0;
             structPtr->side[atkSide].reflectMoveSlot = 0;
         }
         if (*finishedMoveId == MOVE_LIGHT_SCREEN)
@@ -501,7 +421,7 @@ void sub_817C95C(u16 stringId)
             sub_817E684(16, 0, structPtr->side[defSide].mistMonId - 1, structPtr->side[defSide].mistMoveSlot);
         break;
     case STRINGID_THEWALLSHATTERED:
-        structPtr->side[defSide].reflectMoveId = 0;
+        structPtr->side[defSide].reflectMonId = 0;
         structPtr->side[defSide].reflectMoveSlot = 0;
         structPtr->side[defSide].lightScreenMonId = 0;
         structPtr->side[defSide].lightScreenMoveSlot = 0;
@@ -548,7 +468,7 @@ void sub_817E0FC(u16 move, u16 weatherFlags, struct DisableStruct *disableStruct
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
         return;
 
-    structPtr = (struct UnknownBattleLinkStruct*)(&gBattleStruct->field_204);
+    structPtr = &gBattleStruct->field_204;
 
     atkSide = GetBattlerSide(gBattlerAttacker);
     defSide = GetBattlerSide(gBattlerTarget);
@@ -575,10 +495,10 @@ void sub_817E0FC(u16 move, u16 weatherFlags, struct DisableStruct *disableStruct
     }
     if (move == MOVE_SELF_DESTRUCT || move == MOVE_EXPLOSION)
     {
-        structPtr->side[atkSide ^ BIT_SIDE].field_4_0_b = gBattlerPartyIndexes[gBattlerAttacker] + 1;
-        structPtr->side[atkSide ^ BIT_SIDE].field_4_0 = moveSlot;
+        structPtr->side[atkSide ^ BIT_SIDE].explosionMonId = gBattlerPartyIndexes[gBattlerAttacker] + 1;
+        structPtr->side[atkSide ^ BIT_SIDE].explosionMoveSlot = moveSlot;
         structPtr->side[atkSide ^ BIT_SIDE].field_3_0 = 13;
-        structPtr->side[atkSide ^ BIT_SIDE].field_4_0_0 = 1;
+        structPtr->side[atkSide ^ BIT_SIDE].explosion = 1;
     }
 
     sub_817E684(13, gBattleMoves[move].type, gBattleMoves[move].power, 0);
@@ -595,7 +515,7 @@ void sub_817E32C(u8 animationId)
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
         return;
 
-    structPtr = (struct UnknownBattleLinkStruct*)(&gBattleStruct->field_204);
+    structPtr = &gBattleStruct->field_204;
     atkSide = GetBattlerSide(gBattlerAttacker);
     switch (animationId)
     {
@@ -625,7 +545,7 @@ void sub_817E3F4(void)
     u16 playerBestSpecies = 0, opponentBestSpecies = 0;
     s16 playerBestSum = 0, opponentBestSum = SHRT_MAX;
     u8 playerBestMonId = 0, opponentBestMonId = 0;
-    s16 *array = NULL;
+    struct UnknownBattleLinkArrayStruct *array = NULL;
     u8 countPlayer = 0, countOpponent = 0;
     s16 sum = 0;
     u16 species = 0;
@@ -635,7 +555,7 @@ void sub_817E3F4(void)
     if (gBattleStruct->field_B3)
         return;
 
-    array = (void*) &gBattleStruct->field_1A4[0];
+    array = &gBattleStruct->field_1A4;
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
@@ -653,7 +573,7 @@ void sub_817E3F4(void)
         if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
         {
             for (sum = 0, j = 0; j < 4; j++)
-                sum += array[i * 4 + j];
+                sum += array->unk0[0][i * 4 + j];
 
             if (playerBestSum < sum)
             {
@@ -666,8 +586,9 @@ void sub_817E3F4(void)
         species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
         if (species != SPECIES_NONE && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG, NULL))
         {
+            s32 id = 1;
             for (sum = 0, j = 0; j < 4; j++)
-                sum += array[i * 4 + j];
+                sum += array->unk0[id][i * 4 + j];
 
             if (opponentBestSum == sum)
             {
@@ -689,9 +610,9 @@ void sub_817E3F4(void)
 
     for (sum = 0, i = 0, j = 0; j < 4; j++)
     {
-        if (sum < array[playerBestMonId * 4 + j])
+        if (sum < array->unk0[0][playerBestMonId * 4 + j])
         {
-            sum = array[playerBestMonId * 4 + j];
+            sum = array->unk0[0][playerBestMonId * 4 + j];
             i = j;
         }
     }
@@ -1041,3 +962,345 @@ _0817E670:\n\
 	.pool");
 }
 #endif
+
+void sub_817E684(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
+{
+    struct UnknownBattleLinkArrayStruct *array = &gBattleStruct->field_1A4;
+    struct UnknownBattleLinkStruct *structPtr = &gBattleStruct->field_204;
+    u32 atkSide = GetBattlerSide(gBattlerAttacker);
+    u32 defSide = GetBattlerSide(gBattlerTarget);
+    const u16 *ptr;
+    s32 i;
+
+    switch (caseId)
+    {
+    case 0:
+    case 1:
+    case 18:
+    case 22 ... 27:
+        array->unk0[atkSide][gBattlerPartyIndexes[gBattlerAttacker] * 4 + arg1] += gUnknown_0860A834[caseId][arg2];
+        break;
+    case 3 ... 7:
+        i = 0;
+        ptr = gUnknown_0860A834[caseId];
+        do
+        {
+            if (arg1 == ptr[i])
+            {
+                array->unk0[atkSide][gBattlerPartyIndexes[gBattlerAttacker] * 4 + arg2] += ptr[i+1];
+                break;
+            }
+            i += 2;
+        } while (ptr[i] != 0xFFFF);
+        break;
+    case 19:
+        structPtr->side[arg2 ^ 1].field_3_0 = 0;
+        array->unk0[arg2][0 * 4 + arg3] += gUnknown_0860A834[caseId][arg1];
+        break;
+    case 20:
+        structPtr->side[arg2].field_3_0 = 0;
+    case 2:
+        array->unk0[arg2][0 * 4 + arg3] += gUnknown_0860A834[caseId][arg1];
+        break;
+    case 17:
+        array->unk0[atkSide][arg2 * 4 + arg3] += gUnknown_0860A834[caseId][arg1];
+        break;
+    case 8:
+    case 9:
+    case 15:
+    case 16:
+    case 21:
+        array->unk0[atkSide ^ BIT_SIDE][arg2 * 4 + arg3] += gUnknown_0860A834[caseId][arg1];
+        break;
+    case 10:
+        array->unk0[arg1][arg2 * 4 + arg3] += gUnknown_0860A834[caseId][0];
+        break;
+    case 11:
+        if (structPtr->pos[defSide][0].waterSportMonId != -(structPtr->pos[defSide][1].waterSportMonId) && arg1 == 10)
+        {
+            if (structPtr->pos[defSide][0].waterSportMonId != 0)
+            {
+                u32 id = (structPtr->pos[defSide][0].waterSportMonId - 1) * 4;
+                array->unk0[defSide][id + structPtr->pos[defSide][0].waterSportMoveSlot] += gUnknown_0860A834[caseId][0];
+            }
+            if (structPtr->pos[defSide][1].waterSportMonId != 0)
+            {
+                u32 id = (structPtr->pos[defSide][1].waterSportMonId - 1) * 4;
+                array->unk0[defSide][id + structPtr->pos[defSide][1].waterSportMoveSlot] += gUnknown_0860A834[caseId][0];
+            }
+        }
+        break;
+    case 12:
+        if (structPtr->pos[defSide][0].mudSportMonId != -(structPtr->pos[defSide][1].mudSportMonId) && arg1 == 13)
+        {
+            if (structPtr->pos[defSide][0].mudSportMonId != 0)
+            {
+                u32 id = (structPtr->pos[defSide][0].mudSportMonId - 1) * 4;
+                array->unk0[defSide][id + structPtr->pos[defSide][0].mudSportMoveSlot] += gUnknown_0860A834[caseId][0];
+            }
+            if (structPtr->pos[defSide][1].mudSportMonId != 0)
+            {
+                u32 id = (structPtr->pos[defSide][1].mudSportMonId - 1) * 4;
+                array->unk0[defSide][id + structPtr->pos[defSide][1].mudSportMoveSlot] += gUnknown_0860A834[caseId][0];
+            }
+        }
+        break;
+    case 13:
+        if (arg1 <= 8 && arg2 != 0 && structPtr->side[defSide].reflectMonId != 0)
+        {
+            u32 id = (structPtr->side[defSide].reflectMonId - 1) * 4;
+            array->unk0[defSide][id + structPtr->side[defSide].reflectMoveSlot] += gUnknown_0860A834[caseId][0];
+        }
+        break;
+    case 14:
+        if (arg1 > 8 && arg2 != 0 && structPtr->side[defSide].lightScreenMonId != 0)
+        {
+            u32 id = (structPtr->side[defSide].lightScreenMonId - 1) * 4;
+            array->unk0[defSide][id + structPtr->side[defSide].lightScreenMoveSlot] += gUnknown_0860A834[caseId][0];
+        }
+        break;
+        break;
+    }
+}
+
+void sub_817EA80(u8 arg0)
+{
+    struct UnknownBattleLinkStruct *structPtr = &gBattleStruct->field_204;
+    u32 atkSide = GetBattlerSide(gBattlerAttacker);
+    u32 defSide = GetBattlerSide(gBattlerTarget);
+    u32 atkArrId = structPtr->side[atkSide].field_3_1;
+    s32 i;
+
+    if (structPtr->side[atkSide].field_3_0 != 0)
+    {
+        switch (structPtr->side[atkSide].field_3_0)
+        {
+        case 1:
+            if (structPtr->pos[atkSide][atkArrId].curseMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->pos[atkSide][atkArrId].curseMonId - 1) * 4 + structPtr->pos[atkSide][atkArrId].curseMoveSlot);
+            }
+            break;
+        case 2:
+            if (structPtr->pos[atkSide][atkArrId].leechSeedMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->pos[atkSide][atkArrId].leechSeedMonId - 1) * 4 + structPtr->pos[atkSide][atkArrId].leechSeedMoveSlot);
+            }
+            break;
+        case 3:
+            if (structPtr->mon[atkSide][atkArrId].psnMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->mon[atkSide][atkArrId].psnMonId - 1) * 4 + structPtr->mon[atkSide][atkArrId].psnMoveSlot);
+            }
+            if (structPtr->mon[atkSide][atkArrId].badPsnMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->mon[atkSide][atkArrId].badPsnMonId - 1) * 4 + structPtr->mon[atkSide][atkArrId].badPsnMoveSlot);
+            }
+            break;
+        case 4:
+            if (structPtr->mon[atkSide][atkArrId].brnMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->mon[atkSide][atkArrId].brnMonId - 1) * 4 + structPtr->mon[atkSide][atkArrId].brnMoveSlot);
+            }
+            break;
+        case 5:
+            if (structPtr->pos[atkSide][atkArrId].nightmareMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->pos[atkSide][atkArrId].nightmareMonId - 1) * 4 + structPtr->pos[atkSide][atkArrId].nightmareMoveSlot);
+            }
+            break;
+        case 6:
+            if (structPtr->pos[atkSide][atkArrId].wrapMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->pos[atkSide][atkArrId].wrapMonId - 1) * 4 + structPtr->pos[atkSide][atkArrId].wrapMoveSlot);
+            }
+            break;
+        case 7:
+            if (structPtr->side[atkSide].spikesMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->side[atkSide].spikesMonId - 1) * 4 + structPtr->side[atkSide].spikesMoveSlot);
+            }
+            break;
+        case 8:
+            if (structPtr->side[atkSide].futureSightMonId != 0)
+            {
+                sub_817E684(20, 0, atkSide,
+                (structPtr->side[atkSide].futureSightMonId - 1) * 4 + structPtr->side[atkSide].futureSightMoveSlot);
+            }
+            break;
+        case 9:
+            if (structPtr->side[atkSide].doomDesireMonId != 0)
+            {
+                sub_817E684(20, 0, atkSide,
+                (structPtr->side[atkSide].doomDesireMonId - 1) * 4 + structPtr->side[atkSide].doomDesireMoveSlot);
+            }
+            break;
+        case 10:
+            if (structPtr->side[atkSide].perishSong
+                && structPtr->side[atkSide].perishSongMonId - 1 != gBattlerPartyIndexes[gBattlerAttacker])
+            {
+                sub_817E684(19, 0, atkSide,
+                (structPtr->side[atkSide].perishSongMonId - 1) * 4 + structPtr->side[atkSide].perishSongMoveSlot);
+            }
+            if (structPtr->side[atkSide ^ BIT_SIDE].perishSong)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->side[atkSide ^ BIT_SIDE].perishSongMonId - 1) * 4 + structPtr->side[atkSide ^ BIT_SIDE].perishSongMoveSlot);
+            }
+            break;
+        case 11:
+            if (structPtr->side[atkSide ^ BIT_SIDE].destinyBondMonId != 0)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->side[atkSide ^ BIT_SIDE].destinyBondMonId - 1) * 4 + structPtr->side[atkSide ^ BIT_SIDE].destinyBondMoveSlot);
+            }
+            break;
+        case 12:
+            for (i = 0; i < 2; i++)
+            {
+                if (structPtr->pos[atkSide][i].confusionMonId != 0)
+                {
+                    sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                    (structPtr->pos[atkSide][i].confusionMonId - 1) * 4 + structPtr->pos[atkSide][i].confusionMoveSlot);
+                }
+            }
+            break;
+        case 13:
+            if (structPtr->side[atkSide].explosion)
+            {
+                sub_817E684(19, 0, atkSide,
+                (structPtr->side[atkSide].explosionMonId - 1) * 4 + structPtr->side[atkSide].explosionMoveSlot);
+            }
+            if (structPtr->side[atkSide ^ BIT_SIDE].explosion)
+            {
+                sub_817E684(19, 0, atkSide ^ BIT_SIDE,
+                (structPtr->side[atkSide ^ BIT_SIDE].explosionMonId - 1) * 4 + structPtr->side[atkSide ^ BIT_SIDE].explosionMoveSlot);
+            }
+            break;
+        case 14:
+            if (arg0 == 1)
+            {
+                sub_817E684(20, 0, atkSide,
+                (gBattlerPartyIndexes[gBattlerAttacker]) * 4 + structPtr->side[atkSide].field_8_6);
+            }
+            break;
+        case 15:
+            break;
+        }
+    }
+    else
+    {
+        if (structPtr->side[defSide].field_3_0 == 7)
+        {
+            if (structPtr->side[defSide].spikesMonId != 0)
+            {
+                sub_817E684(19, 0, defSide ^ BIT_SIDE,
+                (structPtr->side[defSide].spikesMonId - 1) * 4 + structPtr->side[defSide].spikesMoveSlot);
+            }
+        }
+        else
+        {
+            sub_817E684(20, 0, atkSide,
+            (gBattlerPartyIndexes[gBattlerAttacker]) * 4 + structPtr->side[atkSide].field_8_6);
+        }
+    }
+}
+
+void sub_817EECC(void)
+{
+    s32 i;
+    s32 dmgByMove[4];
+    u16 powerOverride;
+    u16 currMoveSaved;
+
+    if (gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+        return;
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
+        return;
+    if (gBattleMons[gBattlerAttacker].statStages[STAT_ACC] <= 5)
+        return;
+    if (gBattleMons[gBattlerTarget].statStages[STAT_EVASION] > 6)
+        return;
+    if (gCurrentMove == MOVE_HIDDEN_POWER || gCurrentMove == MOVE_WEATHER_BALL)
+        return;
+    if (gBattleTypeFlags & (BATTLE_TYPE_PALACE | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID))
+        return;
+    if (gBattleMoves[gBattleMons[gBattlerAttacker].moves[gMoveSelectionCursor[gBattlerAttacker]]].power == 0)
+        return;
+
+    i = 0;
+    currMoveSaved = gBattleMons[gBattlerAttacker].moves[gMoveSelectionCursor[gBattlerAttacker]];
+    while (1)
+    {
+        if (currMoveSaved == gUnknown_0860A4AC[i])
+            break;
+        i++;
+        if (gUnknown_0860A4AC[i] == 0xFFFF)
+            break;
+    }
+
+    if (gUnknown_0860A4AC[i] != 0xFFFF)
+        return;
+
+    dmgByMove[gMoveSelectionCursor[gBattlerAttacker]] = gBattleMoveDamage;
+    currMoveSaved = gCurrentMove;
+    for (i = 0; i < 4; i++)
+    {
+        gCurrentMove = gBattleMons[gBattlerAttacker].moves[i];
+        powerOverride = 0;
+        if (sub_817F21C(gCurrentMove, &dmgByMove[i], &powerOverride))
+        {
+            u8 moveResultFlags;
+            u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)];
+            gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
+                                                    sideStatus, powerOverride,
+                                                    0, gBattlerAttacker, gBattlerTarget);
+
+            if (gStatuses3[gBattlerAttacker] & STATUS3_CHARGED_UP && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
+                gBattleMoveDamage *= 2;
+            if (gProtectStructs[gBattlerAttacker].helpingHand)
+                gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
+
+            moveResultFlags = TypeCalc(gCurrentMove, gBattlerAttacker, gBattlerTarget);
+            dmgByMove[i] = gBattleMoveDamage;
+            if (dmgByMove[i] == 0 && !(moveResultFlags & MOVE_RESULT_NO_EFFECT))
+                dmgByMove[i] = 1;
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        if (i != gMoveSelectionCursor[gBattlerAttacker] && dmgByMove[i] > dmgByMove[gMoveSelectionCursor[gBattlerAttacker]])
+        {
+            u16 opponentSpecies, playerSpecies;
+            s32 bestMoveId;
+
+            if (gMoveSelectionCursor[gBattlerAttacker] != 0)
+                bestMoveId = 0;
+            else
+                bestMoveId = 1;
+
+            for (i = 0; i < 4; i++)
+            {
+                if (i != gMoveSelectionCursor[gBattlerAttacker] && dmgByMove[i] > dmgByMove[bestMoveId])
+                    bestMoveId = i;
+            }
+
+            opponentSpecies = GetMonData(&gEnemyParty [gBattlerPartyIndexes[gBattlerTarget]],   MON_DATA_SPECIES, NULL);
+            playerSpecies   = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_SPECIES, NULL);
+            sub_80EE35C(opponentSpecies, playerSpecies, gMoveSelectionCursor[gBattlerAttacker], gBattleMons[gBattlerAttacker].moves, gBattleMons[gBattlerAttacker].moves[bestMoveId]);
+            break;
+        }
+    }
+
+    gBattleMoveDamage = dmgByMove[gMoveSelectionCursor[gBattlerAttacker]];
+    gCurrentMove = currMoveSaved;
+}

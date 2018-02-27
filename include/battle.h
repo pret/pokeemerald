@@ -368,6 +368,94 @@ struct BattleResults
     u8 catchAttempts[11];     // 0x36
 };
 
+struct BattleLinkStringSide
+{
+    u32 spikesMonId:3;
+    u32 reflectMonId:3;
+    u32 lightScreenMonId:3;
+    u32 safeguardMonId:3;
+    u32 mistMonId:3;
+    u32 futureSightMonId:3;
+    u32 doomDesireMonId:3;
+    u32 perishSongMonId:3;
+    u32 wishMonId:3;
+    u32 grudgeMonId:3;
+    u32 field_8_6:2;
+    u32 spikesMoveSlot:2;
+    u32 reflectMoveSlot:2;
+    u32 lightScreenMoveSlot:2;
+    u32 safeguardMoveSlot:2;
+    u32 mistMoveSlot:2;
+    u32 futureSightMoveSlot:2;
+    u32 doomDesireMoveSlot:2;
+    u32 perishSongMoveSlot:2;
+    u32 wishMoveSlot:2;
+    u32 grudgeMoveSlot:2;
+    u32 destinyBondMonId:3;
+    u32 destinyBondMoveSlot:2;
+    u32 field_3_0:4;
+    u32 field_3_1:3;
+    u32 explosion:1;
+    u32 explosionMoveSlot:2;
+    u32 explosionMonId:3;
+    u32 perishSong:1;
+    u32 field_4_2:1;
+    u32 field_5_0:3;
+    u32 field_5_1:2;
+};
+
+struct BattleLinkStringPosition
+{
+    u32 curseMonId:3;
+    u32 leechSeedMonId:3;
+    u32 nightmareMonId:3;
+    u32 wrapMonId:3;
+    u32 attractMonId:3;
+    u32 confusionMonId:3;
+    u32 curseMoveSlot:2;
+    u32 leechSeedMoveSlot:2;
+    u32 nightmareMoveSlot:2;
+    u32 wrapMoveSlot:2;
+    u32 attractMoveSlot:2;
+    u32 confusionMoveSlot:2;
+    u32 waterSportMoveSlot:2;
+    u32 waterSportMonId:3;
+    u32 mudSportMonId:3;
+    u32 mudSportMoveSlot:2;
+    u32 ingrainMonId:3;
+    u32 ingrainMoveSlot:2;
+    u32 field_5_5:3;
+    u32 field_6_0:2;
+};
+
+struct BattleLinkStringMon
+{
+    u32 psnMonId:3;
+    u32 badPsnMonId:3;
+    u32 brnMonId:3;
+    u32 prlzMonId:3;
+    u32 slpMonId:3;
+    u32 frzMonId:3;
+    u32 psnMoveSlot:2;
+    u32 badPsnMoveSlot:2;
+    u32 brnMoveSlot:2;
+    u32 prlzMoveSlot:2;
+    u32 slpMoveSlot:2;
+    u32 frzMoveSlot:2;
+};
+
+struct UnknownBattleLinkStruct
+{
+    struct BattleLinkStringMon mon[2][6]; // [side][partyId]
+    struct BattleLinkStringPosition pos[2][2]; // [side][flank]
+    struct BattleLinkStringSide side[2]; // [side]
+};
+
+struct UnknownBattleLinkArrayStruct
+{
+    s16 unk0[2][6*4];
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -472,9 +560,9 @@ struct BattleStruct
     u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
-    s16 field_1A4[2][PARTY_SIZE * 4];
-    u8 field_204[104];
-    u8 field_26C[40];
+    struct UnknownBattleLinkArrayStruct field_1A4;
+    struct UnknownBattleLinkStruct field_204;
+    u8 notSureWhatFieldLol[0x28];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 field_298[8];
     u8 field_2A0;
@@ -492,6 +580,7 @@ struct BattleStruct
 
 #define IS_MOVE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
 #define IS_MOVE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
+
 
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40

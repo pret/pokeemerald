@@ -121,10 +121,10 @@ void sub_8032768(void)
     }
 
     for (i = 0; i < sizeof(gBattleStruct->field_1A4); i++)
-        *(gBattleStruct->field_1A4 + i) = 0;
+        *((u8*)(&gBattleStruct->field_1A4) + i) = 0;
 
     for (i = 0; i < sizeof(gBattleStruct->field_204); i++)
-        *(gBattleStruct->field_204 + i) = 0;
+        *((u8*)(&gBattleStruct->field_204) + i) = 0;
 }
 
 static void InitSinglePlayerBtlControllers(void)
