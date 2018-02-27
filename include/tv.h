@@ -3,6 +3,7 @@
 
 extern u8 *const gTVStringVarPtrs[3];
 
+void ClearTVShowData(void);
 void sub_80EE184(void);
 void sub_80EE35C(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u16 betterMove);
 void sub_80EE8C8(u16 winStreak, u8 facility);
@@ -38,6 +39,11 @@ void sub_80EECC8(void);
 void sub_80EECEC(void);
 void sub_80F1208(TVShow *shows);
 void sub_80EE44C(u8 nMonsCaught, u8 nPkblkUsed);
+void SetPokemonAnglerSpecies(u16 species);
+void UpdateTVShowsPerDay(u16 days);
+void PutPokemonTodayCaughtOnAir(void);
+void TV_PutSecretBaseVisitOnTheAir(void);
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unused, u8 sheen, u8 language);
 void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent);
 
 #endif //GUARD_TV_H

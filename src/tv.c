@@ -1789,7 +1789,6 @@ void EndMassOutbreak(void)
 
 void UpdateTVShowsPerDay(u16 days)
 {
-
     sub_80ED8B4(days);
     UpdateMassOutbreakTimeLeft(days);
     sub_80EF120(days);

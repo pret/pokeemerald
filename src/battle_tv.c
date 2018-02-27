@@ -766,9 +766,8 @@ void TryPutLinkBattleTvShowOnAir(void)
         species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
         if (species != SPECIES_NONE && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG, NULL))
         {
-            s32 id = 1;
             for (sum = 0, j = 0; j < 4; j++)
-                sum += movePoints->points[id][i * 4 + j];
+                sum += movePoints->points[1][i * 4 + j];
 
             if (opponentBestSum == sum)
             {
