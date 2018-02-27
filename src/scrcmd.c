@@ -1476,20 +1476,14 @@ bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
     return TRUE;
 }
 
-// Lots of math, can't figure it out.
-/*
 bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
-    struct WindowTemplate template1;
-    struct WindowTemplate template2;
-    int i;
-    u8 width;
-    u8 height;
-    int temp1;
-    int temp2;
-    u8 x;
-    u8 y;
+    struct WindowTemplate winTemplate;
+    s32 i;
+    u8 width, height;
+    u8 xWindow, yWindow, xText, yText;
+    u8 temp;
 
     StringExpandPlaceholders(gStringVar4, ptr + 6);
 
@@ -1507,168 +1501,30 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     if (height > 0x12)
         height = 0x12;
 
-    x = width + 2;
-    temp1 = (0x1E - x) / 2;
-    x = temp1 + 1;
-    temp1 = ((x - temp1 - 1) * 8 + 3);
+    temp = width + 2;
+    xWindow = (0x1E - temp) / 2;
 
-    y = height + 2;
-    temp2 = (0x14 - y) / 2;
-    y = temp2 + 2;
-    temp2 = ((y - temp2 - 1) * 8);
+    temp = height + 2;
+    yText = (0x14 - temp) / 2;
 
-    sub_8198A50(&template1, 0, x, y, width, height, 0xF, 0x1);
-    template2 = template1;
-    gUnknown_03000F30 = AddWindow(&template2);
+    xText = xWindow;
+    xWindow += 1;
+
+    yWindow = yText;
+    yText += 2;
+
+    xText = (xWindow - xText - 1) * 8 + 3;
+    yText = (yText - yWindow - 1) * 8;
+
+    winTemplate = sub_8198A50(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
+    gUnknown_03000F30 = AddWindow(&winTemplate);
     sub_809882C(gUnknown_03000F30, 0x214, 0xE0);
     NewMenuHelpers_DrawStdWindowFrame(gUnknown_03000F30, 0);
     PutWindowTilemap(gUnknown_03000F30);
     FillWindowPixelBuffer(gUnknown_03000F30, 0x11);
-    PrintTextOnWindow(gUnknown_03000F30, 6, gStringVar4, temp1, temp2, 0xFF, 0x0);
+    PrintTextOnWindow(gUnknown_03000F30, 6, gStringVar4, xText, yText, 0xFF, 0x0);
     CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;
-}*/
-ASM_DIRECT
-bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
-{
-    asm("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, #0x20\n\
-	bl ScriptReadWord\n\
-	add r1, r0, #0\n\
-	ldr r4, =gStringVar4\n\
-	add r1, #0x6\n\
-	add r0, r4, #0\n\
-	bl StringExpandPlaceholders\n\
-	mov r2, #0x1\n\
-	neg r2, r2\n\
-	mov r0, #0x6\n\
-	add r1, r4, #0\n\
-	bl GetStringWidth\n\
-	lsr r0, #3\n\
-	lsl r0, #24\n\
-	lsr r7, r0, #24\n\
-	cmp r7, #0x1C\n\
-	bls _0809AE9C\n\
-	mov r7, #0x1C\n\
-_0809AE9C:\n\
-	mov r5, #0x4\n\
-	ldrb r0, [r4]\n\
-	add r2, r7, #0x2\n\
-	add r1, sp, #0x18\n\
-	mov r8, r1\n\
-	cmp r0, #0xFF\n\
-	beq _0809AEC0\n\
-	add r1, r4, #0\n\
-_0809AEAC:\n\
-	ldrb r0, [r1]\n\
-	add r1, #0x1\n\
-	cmp r0, #0xFE\n\
-	bne _0809AEBA\n\
-	add r0, r5, #0x3\n\
-	lsl r0, #24\n\
-	lsr r5, r0, #24\n\
-_0809AEBA:\n\
-	ldrb r0, [r1]\n\
-	cmp r0, #0xFF\n\
-	bne _0809AEAC\n\
-_0809AEC0:\n\
-	cmp r5, #0x12\n\
-	bls _0809AEC6\n\
-	mov r5, #0x12\n\
-_0809AEC6:\n\
-	lsl r0, r2, #24\n\
-	lsr r0, #24\n\
-	mov r2, #0x1E\n\
-	sub r2, r0\n\
-	lsr r0, r2, #31\n\
-	add r2, r0\n\
-	asr r2, #1\n\
-	lsl r2, #24\n\
-	add r0, r5, #0x2\n\
-	lsl r0, #24\n\
-	lsr r0, #24\n\
-	mov r4, #0x14\n\
-	sub r4, r0\n\
-	lsr r0, r4, #31\n\
-	add r4, r0\n\
-	asr r4, #1\n\
-	lsl r4, #24\n\
-	lsr r6, r2, #24\n\
-	mov r0, #0x80\n\
-	lsl r0, #17\n\
-	add r2, r0\n\
-	lsr r2, #24\n\
-	lsr r3, r4, #24\n\
-	mov r1, #0x80\n\
-	lsl r1, #18\n\
-	add r4, r1\n\
-	lsr r4, #24\n\
-	sub r6, r2, r6\n\
-	sub r6, #0x1\n\
-	lsl r6, #3\n\
-	add r6, #0x3\n\
-	lsl r6, #24\n\
-	lsr r6, #24\n\
-	sub r4, r3\n\
-	sub r4, #0x1\n\
-	lsl r4, #27\n\
-	lsr r4, #24\n\
-	add r3, #0x1\n\
-	lsl r3, #24\n\
-	lsr r3, #24\n\
-	str r7, [sp]\n\
-	str r5, [sp, #0x4]\n\
-	mov r0, #0xF\n\
-	str r0, [sp, #0x8]\n\
-	mov r0, #0x1\n\
-	str r0, [sp, #0xC]\n\
-	add r0, sp, #0x10\n\
-	mov r1, #0\n\
-	bl sub_8198A50\n\
-	ldr r0, [sp, #0x10]\n\
-	ldr r1, [sp, #0x14]\n\
-	str r0, [sp, #0x18]\n\
-	str r1, [sp, #0x1C]\n\
-	ldr r5, =gUnknown_03000F30\n\
-	mov r0, r8\n\
-	bl AddWindow\n\
-	strb r0, [r5]\n\
-	ldrb r0, [r5]\n\
-	mov r1, #0x85\n\
-	lsl r1, #2\n\
-	mov r2, #0xE0\n\
-	bl sub_809882C\n\
-	ldrb r0, [r5]\n\
-	mov r1, #0\n\
-	bl NewMenuHelpers_DrawStdWindowFrame\n\
-	ldrb r0, [r5]\n\
-	bl PutWindowTilemap\n\
-	ldrb r0, [r5]\n\
-	mov r1, #0x11\n\
-	bl FillWindowPixelBuffer\n\
-	ldrb r0, [r5]\n\
-	ldr r2, =gStringVar4\n\
-	str r4, [sp]\n\
-	mov r1, #0xFF\n\
-	str r1, [sp, #0x4]\n\
-	mov r1, #0\n\
-	str r1, [sp, #0x8]\n\
-	mov r1, #0x6\n\
-	add r3, r6, #0\n\
-	bl PrintTextOnWindow\n\
-	ldrb r0, [r5]\n\
-	mov r1, #0x3\n\
-	bl CopyWindowToVram\n\
-	mov r0, #0\n\
-	add sp, #0x20\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.pool");
 }
 
 bool8 ScrCmd_cmdDA(struct ScriptContext *ctx)
