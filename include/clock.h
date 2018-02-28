@@ -5,4 +5,4 @@
 
 void DoTimeBasedEvents(void);
 
-#endif
+#endif // GUARD_CLOCK_H
