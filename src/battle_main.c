@@ -4038,8 +4038,7 @@ u8 IsRunningFromBattleImpossible(void)
         }
         if (side != GetBattlerSide(i)
          && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
-         && gBattleMons[gActiveBattler].type1 != TYPE_FLYING
-         && gBattleMons[gActiveBattler].type2 != TYPE_FLYING
+         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
          && gBattleMons[i].ability == ABILITY_ARENA_TRAP)
         {
             gBattleScripting.battler = i;
@@ -4049,7 +4048,7 @@ u8 IsRunningFromBattleImpossible(void)
         }
     }
     i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0);
-    if (i != 0 && (gBattleMons[gActiveBattler].type1 == TYPE_STEEL || gBattleMons[gActiveBattler].type2 == TYPE_STEEL))
+    if (i != 0 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
     {
         gBattleScripting.battler = i - 1;
         gLastUsedAbility = gBattleMons[i - 1].ability;
@@ -4236,12 +4235,10 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else if ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, gActiveBattler, ABILITY_SHADOW_TAG, 0, 0))
                              || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, gActiveBattler, ABILITY_ARENA_TRAP, 0, 0))
-                                 && gBattleMons[gActiveBattler].type1 != TYPE_FLYING
-                                 && gBattleMons[gActiveBattler].type2 != TYPE_FLYING
+                                 && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
                                  && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
                              || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
-                                 && (gBattleMons[gActiveBattler].type1 == TYPE_STEEL
-                                     || gBattleMons[gActiveBattler].type2 == TYPE_STEEL)))
+                                 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))
                     {
                         BtlController_EmitChoosePokemon(0, ((i - 1) << 4) | 4, 6, gLastUsedAbility, gBattleStruct->field_60[gActiveBattler]);
                     }

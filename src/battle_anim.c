@@ -19,10 +19,6 @@
 // sprites start at 10000 and thus must be subtracted of 10000 to account for the true index.
 #define GET_TRUE_SPRITE_INDEX(i) ((i - 10000))
 
-#define SCRIPT_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
-#define SCRIPT_READ_32(ptr) (((ptr)[0]) + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
-#define SCRIPT_READ_PTR(ptr) ((const u8*)(SCRIPT_READ_32(ptr)))
-
 #define ANIM_SPRITE_INDEX_COUNT 8
 
 extern u16 gBattle_WIN0H;
@@ -352,7 +348,7 @@ static void ScriptCmd_loadspritegfx(void)
     u16 index;
 
     sBattleAnimScriptPtr++;
-    index = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    index = T1_READ_16(sBattleAnimScriptPtr);
     LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)]);
     LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(index)]);
     sBattleAnimScriptPtr += 2;
@@ -366,7 +362,7 @@ static void ScriptCmd_unloadspritegfx(void)
     u16 index;
 
     sBattleAnimScriptPtr++;
-    index = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    index = T1_READ_16(sBattleAnimScriptPtr);
     FreeSpriteTilesByTag(gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)].tag);
     FreeSpritePaletteByTag(gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)].tag);
     sBattleAnimScriptPtr += 2;
@@ -382,7 +378,7 @@ static void ScriptCmd_createsprite(void)
     s16 subpriority;
 
     sBattleAnimScriptPtr++;
-    template = (const struct SpriteTemplate *)(SCRIPT_READ_32(sBattleAnimScriptPtr));
+    template = (const struct SpriteTemplate *)(T2_READ_32(sBattleAnimScriptPtr));
     sBattleAnimScriptPtr += 4;
 
     argVar = sBattleAnimScriptPtr[0];
@@ -392,7 +388,7 @@ static void ScriptCmd_createsprite(void)
     sBattleAnimScriptPtr++;
     for (i = 0; i < argsCount; i++)
     {
-        gBattleAnimArgs[i] = SCRIPT_READ_16(sBattleAnimScriptPtr);
+        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
         sBattleAnimScriptPtr += 2;
     }
 
@@ -433,7 +429,7 @@ static void ScriptCmd_createvisualtask(void)
 
     sBattleAnimScriptPtr++;
 
-    taskFunc = (TaskFunc)SCRIPT_READ_32(sBattleAnimScriptPtr);
+    taskFunc = (TaskFunc)T2_READ_32(sBattleAnimScriptPtr);
     sBattleAnimScriptPtr += 4;
 
     taskPriority = sBattleAnimScriptPtr[0];
@@ -444,7 +440,7 @@ static void ScriptCmd_createvisualtask(void)
 
     for (i = 0; i < numArgs; i++)
     {
-        gBattleAnimArgs[i] = SCRIPT_READ_16(sBattleAnimScriptPtr);
+        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
         sBattleAnimScriptPtr += 2;
     }
 
@@ -542,26 +538,26 @@ static void ScriptCmd_end(void)
 static void ScriptCmd_playse(void)
 {
     sBattleAnimScriptPtr++;
-    PlaySE(SCRIPT_READ_16(sBattleAnimScriptPtr));
+    PlaySE(T1_READ_16(sBattleAnimScriptPtr));
     sBattleAnimScriptPtr += 2;
 }
 
-#define t1_MONBG_BANK           0
+#define t1_MONBG_BATTLER        0
 #define t1_MON_IN_BG2           1
 #define t1_CREATE_ANOTHER_TASK  2
 #define t1_IS_SECONDMON_BG      3
 
-#define t2_BANK_SPRITE_ID       0
+#define t2_BATTLER_SPRITE_ID    0
 #define t2_MON_IN_BG2           5
-#define t2_MONBG_BANK           6
+#define t2_MONBG_BATTLER        6
 
 static void sub_80A40F4(u8 taskId)
 {
     u8 newTaskId;
 
     s16 *selfData = gTasks[taskId].data;
-    u8 bankSpriteId = gBattlerSpriteIds[selfData[t1_MONBG_BANK]];
-    gSprites[bankSpriteId].invisible = 1;
+    u8 battlerSpriteId = gBattlerSpriteIds[selfData[t1_MONBG_BATTLER]];
+    gSprites[battlerSpriteId].invisible = 1;
 
     if (!selfData[t1_CREATE_ANOTHER_TASK])
     {
@@ -570,9 +566,9 @@ static void sub_80A40F4(u8 taskId)
     }
 
     newTaskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
-    gTasks[newTaskId].data[t2_BANK_SPRITE_ID] = bankSpriteId;
-    gTasks[newTaskId].data[1] = gSprites[bankSpriteId].pos1.x + gSprites[bankSpriteId].pos2.x;
-    gTasks[newTaskId].data[2] = gSprites[bankSpriteId].pos1.y + gSprites[bankSpriteId].pos2.y;
+    gTasks[newTaskId].data[t2_BATTLER_SPRITE_ID] = battlerSpriteId;
+    gTasks[newTaskId].data[1] = gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x;
+    gTasks[newTaskId].data[2] = gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y;
 
     if (!selfData[t1_MON_IN_BG2])
     {
@@ -586,7 +582,7 @@ static void sub_80A40F4(u8 taskId)
     }
 
     gTasks[newTaskId].data[t2_MON_IN_BG2] = selfData[t1_MON_IN_BG2];
-    gTasks[newTaskId].data[t2_MONBG_BANK] = selfData[t1_MONBG_BANK];
+    gTasks[newTaskId].data[t2_MONBG_BATTLER] = selfData[t1_MONBG_BATTLER];
     sMonAnimTaskIdArray[selfData[t1_IS_SECONDMON_BG]] = newTaskId;
     DestroyAnimVisualTask(taskId);
 }
@@ -595,48 +591,48 @@ static void ScriptCmd_monbg(void)
 {
     bool8 toBG_2;
     u8 taskId;
-    u8 bank;
+    u8 battlerId;
     u8 animBank;
 
     sBattleAnimScriptPtr++;
 
     animBank = sBattleAnimScriptPtr[0];
     if (animBank & ANIM_TARGET)
-        bank = gBattleAnimTarget;
+        battlerId = gBattleAnimTarget;
     else
-        bank = gBattleAnimAttacker;
+        battlerId = gBattleAnimAttacker;
 
-    if (IsBattlerSpriteVisible(bank))
+    if (IsBattlerSpriteVisible(battlerId))
     {
-        u8 position = GetBattlerPosition(bank);
+        u8 position = GetBattlerPosition(battlerId);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(bank, toBG_2, FALSE);
+        sub_80A438C(battlerId, toBG_2, FALSE);
         taskId = CreateTask(sub_80A40F4, 10);
         gAnimVisualTaskCount++;
-        gTasks[taskId].data[t1_MONBG_BANK] = bank;
+        gTasks[taskId].data[t1_MONBG_BATTLER] = battlerId;
         gTasks[taskId].data[t1_MON_IN_BG2] = toBG_2;
         gTasks[taskId].data[t1_CREATE_ANOTHER_TASK] = TRUE;
         gTasks[taskId].data[t1_IS_SECONDMON_BG] = 0;
 
     }
 
-    bank ^= BIT_FLANK;
-    if (IsBattlerSpriteVisible(bank))
+    battlerId ^= BIT_FLANK;
+    if (IsBattlerSpriteVisible(battlerId))
     {
-        u8 position = GetBattlerPosition(bank);
+        u8 position = GetBattlerPosition(battlerId);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(bank, toBG_2, FALSE);
+        sub_80A438C(battlerId, toBG_2, FALSE);
         taskId = CreateTask(sub_80A40F4, 10);
         gAnimVisualTaskCount++;
-        gTasks[taskId].data[0] = bank;
+        gTasks[taskId].data[0] = battlerId;
         gTasks[taskId].data[1] = toBG_2;
         gTasks[taskId].data[t1_CREATE_ANOTHER_TASK] = TRUE;
         gTasks[taskId].data[t1_IS_SECONDMON_BG] = 1;
@@ -647,33 +643,33 @@ static void ScriptCmd_monbg(void)
     gAnimScriptCallback = WaitAnimFrameCount;
 }
 
-bool8 IsBattlerSpriteVisible(u8 bank)
+bool8 IsBattlerSpriteVisible(u8 battlerId)
 {
     if (IsContest())
     {
-        if (bank == gBattleAnimAttacker)
+        if (battlerId == gBattleAnimAttacker)
             return TRUE;
         else
             return FALSE;
     }
-    if (!IsBattlerSpritePresent(bank))
+    if (!IsBattlerSpritePresent(battlerId))
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.
-    if (!gBattleSpritesDataPtr->battlerData[bank].invisible || !gSprites[gBattlerSpriteIds[bank]].invisible)
+    if (!gBattleSpritesDataPtr->battlerData[battlerId].invisible || !gSprites[gBattlerSpriteIds[battlerId]].invisible)
         return TRUE;
 
     return FALSE;
 }
 
-void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible)
+void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 {
     struct UnknownAnimStruct2 unknownStruct;
-    u8 bankSpriteId;
+    u8 battlerSpriteId;
 
     if (!toBG_2)
     {
-        u8 bankIdentity;
+        u8 battlerPosition;
 
         if (IsContest() == TRUE)
         {
@@ -694,28 +690,28 @@ void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible)
         SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 1);
         SetAnimBgAttribute(1, BG_ANIM_AREA_OVERFLOW_MODE, 0);
 
-        bankSpriteId = gBattlerSpriteIds[bank];
+        battlerSpriteId = gBattlerSpriteIds[battlerId];
 
-        gBattle_BG1_X =  -(gSprites[bankSpriteId].pos1.x + gSprites[bankSpriteId].pos2.x) + 0x20;
+        gBattle_BG1_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
         if (IsContest() && IsSpeciesNotUnown(gContestResources->field_18->field_0))
             gBattle_BG1_X--;
 
-        gBattle_BG1_Y =  -(gSprites[bankSpriteId].pos1.y + gSprites[bankSpriteId].pos2.y) + 0x20;
+        gBattle_BG1_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
         if (setSpriteInvisible)
-            gSprites[gBattlerSpriteIds[bank]].invisible = 1;
+            gSprites[gBattlerSpriteIds[battlerId]].invisible = 1;
 
         SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
         SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-        LoadPalette(&gPlttBufferUnfaded[0x100 + bank * 16], unknownStruct.unk8 * 16, 0x20);
-        CpuCopy32(&gPlttBufferUnfaded[0x100 + bank * 16], (void*)(BG_PLTT + unknownStruct.unk8 * 32), 0x20);
+        LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], unknownStruct.unk8 * 16, 0x20);
+        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + unknownStruct.unk8 * 32), 0x20);
 
         if (IsContest())
-            bankIdentity = 0;
+            battlerPosition = 0;
         else
-            bankIdentity = GetBattlerPosition(bank);
+            battlerPosition = GetBattlerPosition(battlerId);
 
-        sub_8118FBC(1, 0, 0, bankIdentity, unknownStruct.unk8, unknownStruct.unk0, unknownStruct.unk4, unknownStruct.unkA);
+        sub_8118FBC(1, 0, 0, battlerPosition, unknownStruct.unk8, unknownStruct.unk0, unknownStruct.unk4, unknownStruct.unkA);
 
         if (IsContest())
             sub_80A46A0();
@@ -731,21 +727,21 @@ void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible)
         SetAnimBgAttribute(2, BG_ANIM_SCREEN_SIZE, 1);
         SetAnimBgAttribute(2, BG_ANIM_AREA_OVERFLOW_MODE, 0);
 
-        bankSpriteId = gBattlerSpriteIds[bank];
+        battlerSpriteId = gBattlerSpriteIds[battlerId];
 
-        gBattle_BG2_X =  -(gSprites[bankSpriteId].pos1.x + gSprites[bankSpriteId].pos2.x) + 0x20;
-        gBattle_BG2_Y =  -(gSprites[bankSpriteId].pos1.y + gSprites[bankSpriteId].pos2.y) + 0x20;
+        gBattle_BG2_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
+        gBattle_BG2_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
 
         if (setSpriteInvisible)
-            gSprites[gBattlerSpriteIds[bank]].invisible = 1;
+            gSprites[gBattlerSpriteIds[battlerId]].invisible = 1;
 
         SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
 
-        LoadPalette(&gPlttBufferUnfaded[0x100 + bank * 16], 0x90, 0x20);
-        CpuCopy32(&gPlttBufferUnfaded[0x100 + bank * 16], (void*)(BG_PLTT + 0x120), 0x20);
+        LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], 0x90, 0x20);
+        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + 0x120), 0x20);
 
-        sub_8118FBC(2, 0, 0, GetBattlerPosition(bank), unknownStruct.unk8, unknownStruct.unk0 + 0x1000, unknownStruct.unk4 + 0x400, unknownStruct.unkA);
+        sub_8118FBC(2, 0, 0, GetBattlerPosition(battlerId), unknownStruct.unk8, unknownStruct.unk0 + 0x1000, unknownStruct.unk4 + 0x400, unknownStruct.unkA);
     }
 }
 
@@ -852,7 +848,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 static void ScriptCmd_clearmonbg(void)
 {
     u8 animBankId;
-    u8 bank;
+    u8 battlerId;
     u8 taskId;
 
     sBattleAnimScriptPtr++;
@@ -864,20 +860,20 @@ static void ScriptCmd_clearmonbg(void)
         animBankId = ANIM_DEF_PARTNER;
 
     if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
-        bank = gBattleAnimAttacker;
+        battlerId = gBattleAnimAttacker;
     else
-        bank = gBattleAnimTarget;
+        battlerId = gBattleAnimTarget;
 
     if (sMonAnimTaskIdArray[0] != 0xFF)
-        gSprites[gBattlerSpriteIds[bank]].invisible = 0;
+        gSprites[gBattlerSpriteIds[battlerId]].invisible = 0;
     if (animBankId > 1 && sMonAnimTaskIdArray[1] != 0xFF)
-        gSprites[gBattlerSpriteIds[bank ^ BIT_FLANK]].invisible = 0;
+        gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = 0;
     else
         animBankId = 0;
 
     taskId = CreateTask(sub_80A4980, 5);
     gTasks[taskId].data[0] = animBankId;
-    gTasks[taskId].data[2] = bank;
+    gTasks[taskId].data[2] = battlerId;
 
     sBattleAnimScriptPtr++;
 }
@@ -913,7 +909,7 @@ static void sub_80A4980(u8 taskId)
 static void ScriptCmd_monbg_22(void)
 {
     bool8 toBG_2;
-    u8 bank;
+    u8 battlerId;
     u8 animBankId;
 
     sBattleAnimScriptPtr++;
@@ -926,31 +922,31 @@ static void ScriptCmd_monbg_22(void)
         animBankId = ANIM_DEF_PARTNER;
 
     if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
-        bank = gBattleAnimAttacker;
+        battlerId = gBattleAnimAttacker;
     else
-        bank = gBattleAnimTarget;
+        battlerId = gBattleAnimTarget;
 
-    if (IsBattlerSpriteVisible(bank))
+    if (IsBattlerSpriteVisible(battlerId))
     {
-        u8 position = GetBattlerPosition(bank);
+        u8 position = GetBattlerPosition(battlerId);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(bank, toBG_2, FALSE);
+        sub_80A438C(battlerId, toBG_2, FALSE);
     }
 
-    bank ^= BIT_FLANK;
-    if (animBankId > 1 && IsBattlerSpriteVisible(bank))
+    battlerId ^= BIT_FLANK;
+    if (animBankId > 1 && IsBattlerSpriteVisible(battlerId))
     {
-        u8 position = GetBattlerPosition(bank);
+        u8 position = GetBattlerPosition(battlerId);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(bank, toBG_2, FALSE);
+        sub_80A438C(battlerId, toBG_2, FALSE);
     }
 
     sBattleAnimScriptPtr++;
@@ -959,7 +955,7 @@ static void ScriptCmd_monbg_22(void)
 static void ScriptCmd_clearmonbg_23(void)
 {
     u8 animBankId;
-    u8 bank;
+    u8 battlerId;
     u8 taskId;
 
     sBattleAnimScriptPtr++;
@@ -971,20 +967,20 @@ static void ScriptCmd_clearmonbg_23(void)
         animBankId = ANIM_DEF_PARTNER;
 
     if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
-        bank = gBattleAnimAttacker;
+        battlerId = gBattleAnimAttacker;
     else
-        bank = gBattleAnimTarget;
+        battlerId = gBattleAnimTarget;
 
-    if (IsBattlerSpriteVisible(bank))
-        gSprites[gBattlerSpriteIds[bank]].invisible = 0;
-    if (animBankId > 1 && IsBattlerSpriteVisible(bank ^ BIT_FLANK))
-        gSprites[gBattlerSpriteIds[bank ^ BIT_FLANK]].invisible = 0;
+    if (IsBattlerSpriteVisible(battlerId))
+        gSprites[gBattlerSpriteIds[battlerId]].invisible = 0;
+    if (animBankId > 1 && IsBattlerSpriteVisible(battlerId ^ BIT_FLANK))
+        gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = 0;
     else
         animBankId = 0;
 
     taskId = CreateTask(sub_80A4BB0, 5);
     gTasks[taskId].data[0] = animBankId;
-    gTasks[taskId].data[2] = bank;
+    gTasks[taskId].data[2] = battlerId;
 
     sBattleAnimScriptPtr++;
 }
@@ -995,30 +991,30 @@ static void sub_80A4BB0(u8 taskId)
     if (gTasks[taskId].data[1] != 1)
     {
         bool8 toBG_2;
-        u8 bank = gTasks[taskId].data[2];
-        u8 position = GetBattlerPosition(bank);
+        u8 battlerId = gTasks[taskId].data[2];
+        u8 position = GetBattlerPosition(battlerId);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
 
-        if (IsBattlerSpriteVisible(bank))
+        if (IsBattlerSpriteVisible(battlerId))
             sub_80A477C(toBG_2);
-        if (gTasks[taskId].data[0] > 1 && IsBattlerSpriteVisible(bank ^ BIT_FLANK))
+        if (gTasks[taskId].data[0] > 1 && IsBattlerSpriteVisible(battlerId ^ BIT_FLANK))
             sub_80A477C(toBG_2 ^ 1);
 
         DestroyTask(taskId);
     }
 }
 
-#undef t1_MONBG_BANK
+#undef t1_MONBG_BATTLER
 #undef t1_MON_IN_BG2
 #undef t1_CREATE_ANOTHER_TASK
 #undef t1_IS_SECONDMON_BG
 
-#undef t2_BANK_SPRITE_ID
+#undef t2_BATTLER_SPRITE_ID
 #undef t2_MON_IN_BG2
-#undef t2_MONBG_BANK
+#undef t2_MONBG_BATTLER
 
 static void ScriptCmd_setalpha(void)
 {
@@ -1052,7 +1048,7 @@ static void ScriptCmd_call(void)
 {
     sBattleAnimScriptPtr++;
     sBattleAnimScriptRetAddr = sBattleAnimScriptPtr + 4;
-    sBattleAnimScriptPtr = SCRIPT_READ_PTR(sBattleAnimScriptPtr);
+    sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
 static void ScriptCmd_return(void)
@@ -1069,7 +1065,7 @@ static void ScriptCmd_setarg(void)
     sBattleAnimScriptPtr++;
     argId = sBattleAnimScriptPtr[0];
     sBattleAnimScriptPtr++;
-    value = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    value = T1_READ_16(sBattleAnimScriptPtr);
     sBattleAnimScriptPtr = addr + 4;
     gBattleAnimArgs[argId] = value;
 }
@@ -1079,7 +1075,7 @@ static void ScriptCmd_choosetwoturnanim(void)
     sBattleAnimScriptPtr++;
     if (gAnimMoveTurn & 1)
         sBattleAnimScriptPtr += 4;
-    sBattleAnimScriptPtr = SCRIPT_READ_PTR(sBattleAnimScriptPtr);
+    sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
 static void ScriptCmd_jumpifmoveturn(void)
@@ -1090,7 +1086,7 @@ static void ScriptCmd_jumpifmoveturn(void)
     sBattleAnimScriptPtr++;
 
     if (toCheck == gAnimMoveTurn)
-        sBattleAnimScriptPtr = SCRIPT_READ_PTR(sBattleAnimScriptPtr);
+        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
     else
         sBattleAnimScriptPtr += 4;
 }
@@ -1098,7 +1094,7 @@ static void ScriptCmd_jumpifmoveturn(void)
 static void ScriptCmd_goto(void)
 {
     sBattleAnimScriptPtr++;
-    sBattleAnimScriptPtr = SCRIPT_READ_PTR(sBattleAnimScriptPtr);
+    sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
 // Uses of this function that rely on a TRUE return are expecting inBattle to not be ticked as defined in contest behavior. As a result, if misused, this function cannot reliably discern between field and contest status and could result in undefined behavior.
@@ -1354,7 +1350,7 @@ static void ScriptCmd_playsewithpan(void)
     s8 pan;
 
     sBattleAnimScriptPtr++;
-    songId = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    songId = T1_READ_16(sBattleAnimScriptPtr);
     pan = sBattleAnimScriptPtr[2];
     PlaySE12WithPanning(songId, BattleAnimAdjustPanning(pan));
     sBattleAnimScriptPtr += 3;
@@ -1385,7 +1381,7 @@ static void ScriptCmd_panse_1B(void)
     u8 taskId;
 
     sBattleAnimScriptPtr++;
-    songNum = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    songNum = T1_READ_16(sBattleAnimScriptPtr);
     currentPanArg = sBattleAnimScriptPtr[2];
     incrementPan = sBattleAnimScriptPtr[3];
     incrementPanArg = sBattleAnimScriptPtr[4];
@@ -1457,7 +1453,7 @@ static void ScriptCmd_panse_26(void)
     u8 taskId;
 
     sBattleAnimScriptPtr++;
-    songId = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    songId = T1_READ_16(sBattleAnimScriptPtr);
     currentPan = sBattleAnimScriptPtr[2];
     targetPan = sBattleAnimScriptPtr[3];
     incrementPan = sBattleAnimScriptPtr[4];
@@ -1484,7 +1480,7 @@ static void ScriptCmd_panse_27(void)
     u8 taskId;
 
     sBattleAnimScriptPtr++;
-    songId = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    songId = T1_READ_16(sBattleAnimScriptPtr);
     currentPanArg = sBattleAnimScriptPtr[2];
     targetPanArg = sBattleAnimScriptPtr[3];
     incrementPanArg = sBattleAnimScriptPtr[4];
@@ -1528,7 +1524,7 @@ static void ScriptCmd_loopsewithpan(void)
     u8 taskId;
 
     sBattleAnimScriptPtr++;
-    songId = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    songId = T1_READ_16(sBattleAnimScriptPtr);
     panningArg = sBattleAnimScriptPtr[2];
     framesToWait = sBattleAnimScriptPtr[3];
     numberOfPlays = sBattleAnimScriptPtr[4];
@@ -1585,7 +1581,7 @@ static void ScriptCmd_waitplaysewithpan(void)
     u8 taskId;
 
     sBattleAnimScriptPtr++;
-    songId = SCRIPT_READ_16(sBattleAnimScriptPtr);
+    songId = T1_READ_16(sBattleAnimScriptPtr);
     panningArg = sBattleAnimScriptPtr[2];
     framesToWait = sBattleAnimScriptPtr[3];
     panning = BattleAnimAdjustPanning(panningArg);
@@ -1620,13 +1616,13 @@ static void ScriptCmd_createsoundtask(void)
     s32 i;
 
     sBattleAnimScriptPtr++;
-    func = (TaskFunc)SCRIPT_READ_32(sBattleAnimScriptPtr);
+    func = (TaskFunc)T2_READ_32(sBattleAnimScriptPtr);
     sBattleAnimScriptPtr += 4;
     numArgs = sBattleAnimScriptPtr[0];
     sBattleAnimScriptPtr++;
     for (i = 0; i < numArgs; i++)
     {
-        gBattleAnimArgs[i] = SCRIPT_READ_16(sBattleAnimScriptPtr);
+        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
         sBattleAnimScriptPtr += 2;
     }
     taskId = CreateTask(func, 1);
@@ -1669,10 +1665,10 @@ static void ScriptCmd_jumpargeq(void)
 
     sBattleAnimScriptPtr++;
     argId = sBattleAnimScriptPtr[0];
-    valueToCheck = SCRIPT_READ_16(sBattleAnimScriptPtr + 1);
+    valueToCheck = T1_READ_16(sBattleAnimScriptPtr + 1);
 
     if (valueToCheck == gBattleAnimArgs[argId])
-        sBattleAnimScriptPtr = SCRIPT_READ_PTR(sBattleAnimScriptPtr + 3);
+        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr + 3);
     else
         sBattleAnimScriptPtr += 7;
 }
@@ -1681,7 +1677,7 @@ static void ScriptCmd_jumpifcontest(void)
 {
     sBattleAnimScriptPtr++;
     if (IsContest())
-        sBattleAnimScriptPtr = SCRIPT_READ_PTR(sBattleAnimScriptPtr);
+        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
     else
         sBattleAnimScriptPtr += 4;
 }
@@ -1689,19 +1685,19 @@ static void ScriptCmd_jumpifcontest(void)
 static void ScriptCmd_monbgprio_28(void)
 {
     u8 wantedBank;
-    u8 bank;
-    u8 bankIdentity;
+    u8 battlerId;
+    u8 battlerPosition;
 
     wantedBank = sBattleAnimScriptPtr[1];
     sBattleAnimScriptPtr += 2;
 
     if (wantedBank != ANIM_ATTACKER)
-        bank = gBattleAnimTarget;
+        battlerId = gBattleAnimTarget;
     else
-        bank = gBattleAnimAttacker;
+        battlerId = gBattleAnimAttacker;
 
-    bankIdentity = GetBattlerPosition(bank);
-    if (!IsContest() && (bankIdentity == B_POSITION_PLAYER_LEFT || bankIdentity == B_POSITION_OPPONENT_RIGHT))
+    battlerPosition = GetBattlerPosition(battlerId);
+    if (!IsContest() && (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_OPPONENT_RIGHT))
     {
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
@@ -1721,20 +1717,20 @@ static void ScriptCmd_monbgprio_29(void)
 static void ScriptCmd_monbgprio_2A(void)
 {
     u8 wantedBank;
-    u8 bankIdentity;
-    u8 bank;
+    u8 battlerPosition;
+    u8 battlerId;
 
     wantedBank = sBattleAnimScriptPtr[1];
     sBattleAnimScriptPtr += 2;
     if (GetBattlerSide(gBattleAnimAttacker) != GetBattlerSide(gBattleAnimTarget))
     {
         if (wantedBank != ANIM_ATTACKER)
-            bank = gBattleAnimTarget;
+            battlerId = gBattleAnimTarget;
         else
-            bank = gBattleAnimAttacker;
+            battlerId = gBattleAnimAttacker;
 
-        bankIdentity = GetBattlerPosition(bank);
-        if (!IsContest() && (bankIdentity == B_POSITION_PLAYER_LEFT || bankIdentity == B_POSITION_OPPONENT_RIGHT))
+        battlerPosition = GetBattlerPosition(battlerId);
+        if (!IsContest() && (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_OPPONENT_RIGHT))
         {
             SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
             SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);

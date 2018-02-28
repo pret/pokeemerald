@@ -18,9 +18,8 @@ extern u8 gUnknown_02022D0A;
 
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
 
-
 extern void task00_08081A90(u8 taskId); // cable_club
-extern void sub_81B8D64(u8 bank, u8 arg1); // party_menu
+extern void sub_81B8D64(u8 battlerId, u8 arg1); // party_menu
 
 // this file's funcionts
 static void CreateTasksForSendRecvLinkBuffers(void);
@@ -868,7 +867,7 @@ void sub_8033648(void)
 static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
 {
     u16 blockSize;
-    u8 bank;
+    u8 battlerId;
     u8 var;
 
     if (gTasks[taskId].data[15] != gTasks[taskId].data[14])
@@ -879,17 +878,17 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
         }
-        bank = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BANK];
+        battlerId = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BANK];
         blockSize = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_LO] | (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_HI] << 8);
 
         switch (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 0])
         {
         case 0:
-            if (gBattleControllerExecFlags & gBitTable[bank])
+            if (gBattleControllerExecFlags & gBitTable[battlerId])
                 return;
 
-            memcpy(gBattleBufferA[bank], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 8], blockSize);
-            sub_803F850(bank);
+            memcpy(gBattleBufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 8], blockSize);
+            sub_803F850(battlerId);
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
             {
@@ -900,11 +899,11 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             }
             break;
         case 1:
-            memcpy(gBattleBufferB[bank], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 8], blockSize);
+            memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 8], blockSize);
             break;
         case 2:
             var = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA];
-            gBattleControllerExecFlags &= ~(gBitTable[bank] << (var * 4));
+            gBattleControllerExecFlags &= ~(gBitTable[battlerId] << (var * 4));
             break;
         }
 

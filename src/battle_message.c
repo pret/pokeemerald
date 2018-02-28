@@ -1196,7 +1196,7 @@ const u8 gText_NewLine[] = _("\n");
 const u8 gText_Are[] = _("are");
 const u8 gText_Are2[] = _("are");
 const u8 gText_BadEgg[] = _("Bad EGG");
-const u8 gText_BattleWallyName[] = _("WALLY"); 
+const u8 gText_BattleWallyName[] = _("WALLY");
 const u8 gText_Win[] = _("{HIGHLIGHT TRANSPARENT}Win");
 const u8 gText_Loss[] = _("{HIGHLIGHT TRANSPARENT}Loss");
 const u8 gText_Draw[] = _("{HIGHLIGHT TRANSPARENT}Draw");
@@ -1705,7 +1705,7 @@ u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src)
     BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
 }
 
-static const u8* TryGetStatusString(u8* src)
+static const u8* TryGetStatusString(u8 *src)
 {
     u32 i;
     u8 status[8];
@@ -1736,8 +1736,8 @@ static const u8* TryGetStatusString(u8* src)
     return NULL;
 }
 
-#define HANDLE_NICKNAME_STRING_CASE(bank, monIndex)                     \
-    if (GetBattlerSide(bank) != B_SIDE_PLAYER)                               \
+#define HANDLE_NICKNAME_STRING_CASE(battlerId, monIndex)                \
+    if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)                     \
     {                                                                   \
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
             toCpy = sText_FoePkmnPrefix;                                \
@@ -1758,10 +1758,10 @@ static const u8* TryGetStatusString(u8* src)
     StringGetEnd10(text);                                               \
     toCpy = text;
 
-u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
+u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
     u32 dstID = 0; // if they used dstID, why not use srcID as well?
-    const u8* toCpy = NULL;
+    const u8 *toCpy = NULL;
     u8 text[30];
     u8 multiplayerID;
     s32 i;
@@ -1866,7 +1866,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
-            case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only bank 0/1
+            case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only battlerId 0/1
                 HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker,
                                             gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker))])
                 break;
@@ -1885,13 +1885,13 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
             case B_TXT_DEF_NAME_WITH_PREFIX: // target name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
                 break;
-            case B_TXT_EFF_NAME_WITH_PREFIX: // effect bank name with prefix
+            case B_TXT_EFF_NAME_WITH_PREFIX: // effect battlerId name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gEffectBattler, gBattlerPartyIndexes[gEffectBattler])
                 break;
-            case B_TXT_ACTIVE_NAME_WITH_PREFIX: // active bank name with prefix
+            case B_TXT_ACTIVE_NAME_WITH_PREFIX: // active battlerId name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
                 break;
-            case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX: // scripting active bank name with prefix
+            case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX: // scripting active battlerId name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlerPartyIndexes[gBattleScripting.battler])
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
@@ -1961,7 +1961,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
             case B_TXT_SCR_ACTIVE_ABILITY: // scripting active ability
                 toCpy = gAbilityNames[gBattlerAbilities[gBattleScripting.battler]];
                 break;
-            case B_TXT_EFF_ABILITY: // effect bank ability
+            case B_TXT_EFF_ABILITY: // effect battlerId ability
                 toCpy = gAbilityNames[gBattlerAbilities[gEffectBattler]];
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name

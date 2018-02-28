@@ -478,6 +478,15 @@ struct BattleStruct
 #define IS_MOVE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
 #define IS_MOVE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
 
+#define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
+
+#define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
+#define SET_BATTLER_TYPE(battlerId, type)   \
+{                                           \
+    gBattleMons[battlerId].type1 = type;    \
+    gBattleMons[battlerId].type2 = type;    \
+}
+
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
