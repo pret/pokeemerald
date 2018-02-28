@@ -18,7 +18,6 @@ extern u8 gUnknown_02022D0A;
 
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
 
-extern const struct BattleMove gBattleMoves[];
 
 extern void task00_08081A90(u8 taskId); // cable_club
 extern void sub_81B8D64(u8 bank, u8 arg1); // party_menu
