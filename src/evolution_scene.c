@@ -59,11 +59,7 @@ extern const struct WindowTemplate gUnknown_0833900C;
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 // strings
-extern const u8 gText_PkmnIsEvolving[];
-extern const u8 gText_CongratsPkmnEvolved[];
 extern const u8 gText_BattleYesNoChoice[];
-extern const u8 gText_PkmnStoppedEvolving[];
-extern const u8 gText_EllipsisQuestionMark[];
 extern const u8 gText_CommunicationStandby5[];
 
 extern void sub_80356D0(void);

@@ -95,12 +95,8 @@ extern const struct ScanlineEffectParams gUnknown_0831AC70;
 
 // strings
 extern const u8 gText_LinkStandby3[];
-extern const u8 gText_RecordBattleToPass[];
-extern const u8 gText_BattleYesNoChoice[];
 extern const u8 gText_BattleRecordCouldntBeSaved[];
-extern const u8 gText_BattleRecordedOnPass[];
 extern const u8 gText_ShedinjaJapaneseName[];
-extern const u8 gText_EmptyString3[];
 extern const u8 gText_Poison[];
 extern const u8 gText_Sleep[];
 extern const u8 gText_Paralysis[];

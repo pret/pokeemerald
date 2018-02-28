@@ -45,14 +45,6 @@ extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 extern const u8 gTypeNames[][7];
 extern const struct BattleMove gBattleMoves[];
 
-extern const u8 gText_BattleSwitchWhich[];
-extern const u8 gText_MoveInterfacePP[];
-extern const u8 gText_MoveInterfaceType[];
-extern const u8 gText_LinkStandby[];
-extern const u8 gText_BattleMenu[];
-extern const u8 gText_WhatWillPkmnDo[];
-extern const u8 gText_BattleYesNoChoice[];
-
 extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
 extern void sub_81B89AC(u8 arg0);
 extern void sub_81AABB0(void);
