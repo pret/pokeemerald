@@ -45,7 +45,6 @@ in order to read the next command correctly. refer to battle_ai_scripts.s for th
 AI scripts.
 */
 
-extern const struct BattleMove gBattleMoves[];
 extern const u8 * const gBattleAI_ScriptsTable[];
 
 extern u32 GetAiScriptsInRecordedBattle();

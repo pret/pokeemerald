@@ -3,9 +3,9 @@
 
 // should they be included here or included individually by every file?
 #include "constants/battle.h"
+#include "battle_main.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
-#include "battle_main.h"
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
@@ -66,29 +66,14 @@
 #define MSG_DISPLAY             0x7
 #define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
 
-#define MOVE_TARGET_SELECTED        0x0
-#define MOVE_TARGET_DEPENDS         0x1
-#define MOVE_TARGET_USER            0x2
-#define MOVE_TARGET_RANDOM          0x4
-#define MOVE_TARGET_x10             0x10
-#define MOVE_TARGET_BOTH            0x8
-#define MOVE_TARGET_FOES_AND_ALLY   0x20
-#define MOVE_TARGET_OPPONENTS_FIELD 0x40
-
-// defines for the u8 array gTypeEffectiveness
-#define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))
-#define TYPE_EFFECT_DEF_TYPE(i)((gTypeEffectiveness[i + 1]))
-#define TYPE_EFFECT_MULTIPLIER(i)((gTypeEffectiveness[i + 2]))
-
-// defines for the gTypeEffectiveness multipliers
-#define TYPE_MUL_NO_EFFECT          0
-#define TYPE_MUL_NOT_EFFECTIVE      5
-#define TYPE_MUL_NORMAL             10
-#define TYPE_MUL_SUPER_EFFECTIVE    20
-
-// special type table Ids
-#define TYPE_FORESIGHT  0xFE
-#define TYPE_ENDTABLE   0xFF
+#define MOVE_TARGET_SELECTED            0x0
+#define MOVE_TARGET_DEPENDS             0x1
+#define MOVE_TARGET_USER_OR_SELECTED    0x2
+#define MOVE_TARGET_RANDOM              0x4
+#define MOVE_TARGET_BOTH                0x8
+#define MOVE_TARGET_USER                0x10
+#define MOVE_TARGET_FOES_AND_ALLY       0x20
+#define MOVE_TARGET_OPPONENTS_FIELD     0x40
 
 #define BATTLE_BUFFER_LINK_SIZE 0x1000
 
