@@ -49,7 +49,6 @@ extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 extern bool8 gAffineAnimsDisabled;
-extern u16 gMoveToLearn;
 extern const u8 gSpeciesNames[][11];
 
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
@@ -59,7 +58,6 @@ extern const struct WindowTemplate gUnknown_0833900C;
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 // strings
-extern const u8 gText_BattleYesNoChoice[];
 extern const u8 gText_CommunicationStandby5[];
 
 extern void sub_80356D0(void);

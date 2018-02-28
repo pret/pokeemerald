@@ -12,27 +12,9 @@
 #include "constants/abilities.h"
 #include "battle_message.h"
 
-extern u32 gBattleExecBuffer;
-extern void (*gBattleBankFunc[4])(void);
-extern u8 gBanksByIdentity[4];
-extern u8 gActionSelectionCursor[4];
-extern u8 gMoveSelectionCursor[4];
-extern u8 gNoOfAllBanks;
-extern u8 gActiveBank;
-extern u16 gBattlePartyID[4];
-extern u8 gBattleBufferA[4][0x200];
-extern u8 gBattleBufferB[4][0x200];
 extern u8 gUnknown_02022D08;
 extern u8 gUnknown_02022D09;
 extern u8 gUnknown_02022D0A;
-extern u8 gBankAttacker;
-extern u8 gBankTarget;
-extern u8 gAbsentBankFlags;
-extern u8 gEffectBank;
-extern struct BattlePokemon gBattleMons[4];
-extern u16 gLastUsedMove;
-extern u8 gStringBank;
-extern u8 gBattleBuffersTransferData[0x100];
 
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
 
