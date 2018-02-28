@@ -1,7 +1,5 @@
 #include "global.h"
-
-// this file's functions
-void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height, u8 colorKey);
+#include "blit.h"
 
 void BlitBitmapRect4BitWithoutColorKey(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
 {
