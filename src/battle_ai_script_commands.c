@@ -346,7 +346,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     }
     gBattleResources->AI_ScriptsStack->size = 0;
     sBattler_AI = gActiveBattler;
-    // decide a random target bank in doubles
+    // decide a random target battlerId in doubles
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         gBattlerTarget = (Random() & BIT_FLANK) + (GetBattlerSide(gActiveBattler) ^ BIT_SIDE);
@@ -620,32 +620,32 @@ static void RecordLastUsedMoveByTarget(void)
     }
 }
 
-void ClearBattlerMoveHistory(u8 bank)
+void ClearBattlerMoveHistory(u8 battlerId)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
-        gBattleResources->battleHistory->usedMoves[bank].moves[i] = 0;
+        gBattleResources->battleHistory->usedMoves[battlerId].moves[i] = 0;
 }
 
-void RecordAbilityBattle(u8 bank, u8 abilityId)
+void RecordAbilityBattle(u8 battlerId, u8 abilityId)
 {
-    gBattleResources->battleHistory->abilities[bank] = abilityId;
+    gBattleResources->battleHistory->abilities[battlerId] = abilityId;
 }
 
-void ClearBattlerAbilityHistory(u8 bank)
+void ClearBattlerAbilityHistory(u8 battlerId)
 {
-    gBattleResources->battleHistory->abilities[bank] = 0;
+    gBattleResources->battleHistory->abilities[battlerId] = 0;
 }
 
-void RecordItemEffectBattle(u8 bank, u8 itemEffect)
+void RecordItemEffectBattle(u8 battlerId, u8 itemEffect)
 {
-    gBattleResources->battleHistory->itemEffects[bank] = itemEffect;
+    gBattleResources->battleHistory->itemEffects[battlerId] = itemEffect;
 }
 
-void ClearBankItemEffectHistory(u8 bank)
+void ClearBankItemEffectHistory(u8 battlerId)
 {
-    gBattleResources->battleHistory->itemEffects[bank] = 0;
+    gBattleResources->battleHistory->itemEffects[battlerId] = 0;
 }
 
 static void BattleAICmd_if_random_less_than(void)
@@ -700,14 +700,14 @@ static void BattleAICmd_score(void)
 
 static void BattleAICmd_if_hp_less_than(void)
 {
-    u16 bank;
+    u16 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if ((u32)(100 * gBattleMons[bank].hp / gBattleMons[bank].maxHP) < gAIScriptPtr[2])
+    if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) < gAIScriptPtr[2])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -715,14 +715,14 @@ static void BattleAICmd_if_hp_less_than(void)
 
 static void BattleAICmd_if_hp_more_than(void)
 {
-    u16 bank;
+    u16 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if ((u32)(100 * gBattleMons[bank].hp / gBattleMons[bank].maxHP) > gAIScriptPtr[2])
+    if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) > gAIScriptPtr[2])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -730,14 +730,14 @@ static void BattleAICmd_if_hp_more_than(void)
 
 static void BattleAICmd_if_hp_equal(void)
 {
-    u16 bank;
+    u16 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if ((u32)(100 * gBattleMons[bank].hp / gBattleMons[bank].maxHP) == gAIScriptPtr[2])
+    if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) == gAIScriptPtr[2])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -745,14 +745,14 @@ static void BattleAICmd_if_hp_equal(void)
 
 static void BattleAICmd_if_hp_not_equal(void)
 {
-    u16 bank;
+    u16 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if ((u32)(100 * gBattleMons[bank].hp / gBattleMons[bank].maxHP) != gAIScriptPtr[2])
+    if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) != gAIScriptPtr[2])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -760,17 +760,17 @@ static void BattleAICmd_if_hp_not_equal(void)
 
 static void BattleAICmd_if_status(void)
 {
-    u16 bank;
+    u16 battlerId;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
     status = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gBattleMons[bank].status1 & status) != 0)
+    if ((gBattleMons[battlerId].status1 & status) != 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -778,17 +778,17 @@ static void BattleAICmd_if_status(void)
 
 static void BattleAICmd_if_not_status(void)
 {
-    u16 bank;
+    u16 battlerId;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
     status = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gBattleMons[bank].status1 & status) == 0)
+    if ((gBattleMons[battlerId].status1 & status) == 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -796,17 +796,17 @@ static void BattleAICmd_if_not_status(void)
 
 static void BattleAICmd_if_status2(void)
 {
-    u16 bank;
+    u16 battlerId;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
     status = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gBattleMons[bank].status2 & status) != 0)
+    if ((gBattleMons[battlerId].status2 & status) != 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -814,17 +814,17 @@ static void BattleAICmd_if_status2(void)
 
 static void BattleAICmd_if_not_status2(void)
 {
-    u16 bank;
+    u16 battlerId;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
     status = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gBattleMons[bank].status2 & status) == 0)
+    if ((gBattleMons[battlerId].status2 & status) == 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -832,17 +832,17 @@ static void BattleAICmd_if_not_status2(void)
 
 static void BattleAICmd_if_status3(void)
 {
-    u16 bank;
+    u16 battlerId;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
     status = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gStatuses3[bank] & status) != 0)
+    if ((gStatuses3[battlerId] & status) != 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -850,17 +850,17 @@ static void BattleAICmd_if_status3(void)
 
 static void BattleAICmd_if_not_status3(void)
 {
-    u16 bank;
+    u16 battlerId;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
     status = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gStatuses3[bank] & status) == 0)
+    if ((gStatuses3[battlerId] & status) == 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -868,15 +868,15 @@ static void BattleAICmd_if_not_status3(void)
 
 static void BattleAICmd_if_side_affecting(void)
 {
-    u16 bank;
+    u16 battlerId;
     u32 side, status;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    side = GET_BATTLER_SIDE(bank);
+    side = GET_BATTLER_SIDE(battlerId);
     status = AIScriptRead32(gAIScriptPtr + 2);
 
     if ((gSideStatuses[side] & status) != 0)
@@ -887,15 +887,15 @@ static void BattleAICmd_if_side_affecting(void)
 
 static void BattleAICmd_if_not_side_affecting(void)
 {
-    u16 bank;
+    u16 battlerId;
     u32 side, status;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    side = GET_BATTLER_SIDE(bank);
+    side = GET_BATTLER_SIDE(battlerId);
     status = AIScriptRead32(gAIScriptPtr + 2);
 
     if ((gSideStatuses[side] & status) == 0)
@@ -1123,9 +1123,9 @@ static void BattleAICmd_get_type(void)
     gAIScriptPtr += 2;
 }
 
-static u8 BattleAI_GetWantedBank(u8 bank)
+static u8 BattleAI_GetWantedBank(u8 battlerId)
 {
-    switch (bank)
+    switch (battlerId)
     {
         case AI_USER:
             return sBattler_AI;
@@ -1141,9 +1141,9 @@ static u8 BattleAI_GetWantedBank(u8 bank)
 
 static void BattleAICmd_is_of_type(void)
 {
-    u8 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
+    u8 battlerId = BattleAI_GetWantedBank(gAIScriptPtr[1]);
 
-    if(gBattleMons[bank].type1 == gAIScriptPtr[2] || gBattleMons[bank].type2 == gAIScriptPtr[2])
+    if(gBattleMons[battlerId].type1 == gAIScriptPtr[2] || gBattleMons[battlerId].type2 == gAIScriptPtr[2])
     {
         AI_THINKING_STRUCT->funcResult = TRUE;
     }
@@ -1277,7 +1277,7 @@ static void BattleAICmd_nullsub_2B(void)
 
 static void BattleAICmd_count_usable_party_mons(void)
 {
-    u8 bank;
+    u8 battlerId;
     u8 bankOnField1, bankOnField2;
     struct Pokemon *party;
     int i;
@@ -1285,11 +1285,11 @@ static void BattleAICmd_count_usable_party_mons(void)
     AI_THINKING_STRUCT->funcResult = 0;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if (GetBattlerSide(bank) == B_SIDE_PLAYER)
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -1297,14 +1297,14 @@ static void BattleAICmd_count_usable_party_mons(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         u32 position;
-        bankOnField1 = gBattlerPartyIndexes[bank];
-        position = GetBattlerPosition(bank) ^ BIT_FLANK;
+        bankOnField1 = gBattlerPartyIndexes[battlerId];
+        position = GetBattlerPosition(battlerId) ^ BIT_FLANK;
         bankOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(position)];
     }
-    else // in singles there's only one bank by side
+    else // in singles there's only one battlerId by side
     {
-        bankOnField1 = gBattlerPartyIndexes[bank];
-        bankOnField2 = gBattlerPartyIndexes[bank];
+        bankOnField1 = gBattlerPartyIndexes[battlerId];
+        bankOnField2 = gBattlerPartyIndexes[battlerId];
     }
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1335,110 +1335,110 @@ static void BattleAICmd_get_considered_move_effect(void)
 
 static void BattleAICmd_get_ability(void)
 {
-    u8 bank;
+    u8 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if (gActiveBattler != bank)
+    if (gActiveBattler != battlerId)
     {
-        if (BATTLE_HISTORY->abilities[bank] != 0)
+        if (BATTLE_HISTORY->abilities[battlerId] != 0)
         {
-            AI_THINKING_STRUCT->funcResult = BATTLE_HISTORY->abilities[bank];
+            AI_THINKING_STRUCT->funcResult = BATTLE_HISTORY->abilities[battlerId];
             gAIScriptPtr += 2;
             return;
         }
 
         // abilities that prevent fleeing.
-        if (gBattleMons[bank].ability == ABILITY_SHADOW_TAG
-        || gBattleMons[bank].ability == ABILITY_MAGNET_PULL
-        || gBattleMons[bank].ability == ABILITY_ARENA_TRAP)
+        if (gBattleMons[battlerId].ability == ABILITY_SHADOW_TAG
+        || gBattleMons[battlerId].ability == ABILITY_MAGNET_PULL
+        || gBattleMons[battlerId].ability == ABILITY_ARENA_TRAP)
         {
-            AI_THINKING_STRUCT->funcResult = gBattleMons[bank].ability;
+            AI_THINKING_STRUCT->funcResult = gBattleMons[battlerId].ability;
             gAIScriptPtr += 2;
             return;
         }
 
-        if (gBaseStats[gBattleMons[bank].species].ability1 != ABILITY_NONE)
+        if (gBaseStats[gBattleMons[battlerId].species].ability1 != ABILITY_NONE)
         {
-            if (gBaseStats[gBattleMons[bank].species].ability2 != ABILITY_NONE)
+            if (gBaseStats[gBattleMons[battlerId].species].ability2 != ABILITY_NONE)
             {
                 // AI has no knowledge of opponent, so it guesses which ability.
                 if (Random() & 1)
                 {
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[bank].species].ability1;
+                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].ability1;
                 }
                 else
                 {
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[bank].species].ability2;
+                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].ability2;
                 }
             }
             else
             {
-                AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[bank].species].ability1; // it's definitely ability 1.
+                AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].ability1; // it's definitely ability 1.
             }
         }
         else
         {
-            AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[bank].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
+            AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
         }
     }
     else
     {
         // The AI knows its own ability.
-        AI_THINKING_STRUCT->funcResult = gBattleMons[bank].ability;
+        AI_THINKING_STRUCT->funcResult = gBattleMons[battlerId].ability;
     }
     gAIScriptPtr += 2;
 }
 
 static void BattleAICmd_check_ability(void)
 {
-    u32 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
+    u32 battlerId = BattleAI_GetWantedBank(gAIScriptPtr[1]);
     u32 ability = gAIScriptPtr[2];
 
     if (gAIScriptPtr[1] == AI_TARGET || gAIScriptPtr[1] == AI_TARGET_PARTNER)
     {
-        if (BATTLE_HISTORY->abilities[bank] != 0)
+        if (BATTLE_HISTORY->abilities[battlerId] != 0)
         {
-            ability = BATTLE_HISTORY->abilities[bank];
+            ability = BATTLE_HISTORY->abilities[battlerId];
             AI_THINKING_STRUCT->funcResult = ability;
         }
         // abilities that prevent fleeing.
-        else if (gBattleMons[bank].ability == ABILITY_SHADOW_TAG
-        || gBattleMons[bank].ability == ABILITY_MAGNET_PULL
-        || gBattleMons[bank].ability == ABILITY_ARENA_TRAP)
+        else if (gBattleMons[battlerId].ability == ABILITY_SHADOW_TAG
+        || gBattleMons[battlerId].ability == ABILITY_MAGNET_PULL
+        || gBattleMons[battlerId].ability == ABILITY_ARENA_TRAP)
         {
-            ability = gBattleMons[bank].ability;
+            ability = gBattleMons[battlerId].ability;
         }
-        else if (gBaseStats[gBattleMons[bank].species].ability1 != ABILITY_NONE)
+        else if (gBaseStats[gBattleMons[battlerId].species].ability1 != ABILITY_NONE)
         {
-            if (gBaseStats[gBattleMons[bank].species].ability2 != ABILITY_NONE)
+            if (gBaseStats[gBattleMons[battlerId].species].ability2 != ABILITY_NONE)
             {
                 u8 abilityDummyVariable = ability; // needed to match
-                if (gBaseStats[gBattleMons[bank].species].ability1 != abilityDummyVariable
-                && gBaseStats[gBattleMons[bank].species].ability2 != abilityDummyVariable)
+                if (gBaseStats[gBattleMons[battlerId].species].ability1 != abilityDummyVariable
+                && gBaseStats[gBattleMons[battlerId].species].ability2 != abilityDummyVariable)
                 {
-                    ability = gBaseStats[gBattleMons[bank].species].ability1;
+                    ability = gBaseStats[gBattleMons[battlerId].species].ability1;
                 }
                 else
                     ability = 0;
             }
             else
             {
-                ability = gBaseStats[gBattleMons[bank].species].ability1;
+                ability = gBaseStats[gBattleMons[battlerId].species].ability1;
             }
         }
         else
         {
-            ability = gBaseStats[gBattleMons[bank].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
+            ability = gBaseStats[gBattleMons[battlerId].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
         }
     }
     else
     {
         // The AI knows its own or partner's ability.
-        ability = gBattleMons[bank].ability;
+        ability = gBattleMons[battlerId].ability;
     }
     if (ability == 0)
     {
@@ -1546,19 +1546,19 @@ static void BattleAICmd_if_status_in_party(void)
     struct Pokemon *party;
     int i;
     u32 statusToCompareTo;
-    u8 bank;
+    u8 battlerId;
 
     switch(gAIScriptPtr[1])
     {
         case AI_USER:
-            bank = sBattler_AI;
+            battlerId = sBattler_AI;
             break;
         default:
-            bank = gBattlerTarget;
+            battlerId = gBattlerTarget;
             break;
     }
 
-    party = (GetBattlerSide(bank) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    party = (GetBattlerSide(battlerId) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
     statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
 
@@ -1583,19 +1583,19 @@ static void BattleAICmd_if_status_not_in_party(void)
     struct Pokemon *party;
     int i;
     u32 statusToCompareTo;
-    u8 bank;
+    u8 battlerId;
 
     switch(gAIScriptPtr[1])
     {
         case 1:
-            bank = sBattler_AI;
+            battlerId = sBattler_AI;
             break;
         default:
-            bank = gBattlerTarget;
+            battlerId = gBattlerTarget;
             break;
     }
 
-    party = (GetBattlerSide(bank) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    party = (GetBattlerSide(battlerId) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
     statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
 
@@ -1646,14 +1646,14 @@ static void BattleAICmd_if_not_effect(void)
 
 static void BattleAICmd_if_stat_level_less_than(void)
 {
-    u32 bank;
+    u32 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if (gBattleMons[bank].statStages[gAIScriptPtr[2]] < gAIScriptPtr[3])
+    if (gBattleMons[battlerId].statStages[gAIScriptPtr[2]] < gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -1661,14 +1661,14 @@ static void BattleAICmd_if_stat_level_less_than(void)
 
 static void BattleAICmd_if_stat_level_more_than(void)
 {
-    u32 bank;
+    u32 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if (gBattleMons[bank].statStages[gAIScriptPtr[2]] > gAIScriptPtr[3])
+    if (gBattleMons[battlerId].statStages[gAIScriptPtr[2]] > gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -1676,14 +1676,14 @@ static void BattleAICmd_if_stat_level_more_than(void)
 
 static void BattleAICmd_if_stat_level_equal(void)
 {
-    u32 bank;
+    u32 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if (gBattleMons[bank].statStages[gAIScriptPtr[2]] == gAIScriptPtr[3])
+    if (gBattleMons[battlerId].statStages[gAIScriptPtr[2]] == gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -1691,14 +1691,14 @@ static void BattleAICmd_if_stat_level_equal(void)
 
 static void BattleAICmd_if_stat_level_not_equal(void)
 {
-    u32 bank;
+    u32 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if (gBattleMons[bank].statStages[gAIScriptPtr[2]] != gAIScriptPtr[3])
+    if (gBattleMons[battlerId].statStages[gAIScriptPtr[2]] != gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -1940,16 +1940,16 @@ static void BattleAICmd_if_doesnt_have_move_with_effect(void)
 
 static void BattleAICmd_if_any_move_disabled_or_encored(void)
 {
-    u8 bank;
+    u8 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
     if (gAIScriptPtr[2] == 0)
     {
-        if (gDisableStructs[bank].disabledMove == 0)
+        if (gDisableStructs[battlerId].disabledMove == 0)
         {
             gAIScriptPtr += 7;
             return;
@@ -1962,7 +1962,7 @@ static void BattleAICmd_if_any_move_disabled_or_encored(void)
         gAIScriptPtr += 7;
         return;
     }
-    else if (gDisableStructs[bank].encoredMove != 0)
+    else if (gDisableStructs[battlerId].encoredMove != 0)
     {
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         return;
@@ -2018,31 +2018,31 @@ static void BattleAICmd_watch(void)
 
 static void BattleAICmd_get_hold_effect(void)
 {
-    u8 bank;
+    u8 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    if (gActiveBattler != bank)
-        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(BATTLE_HISTORY->itemEffects[bank]);
+    if (gActiveBattler != battlerId)
+        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(BATTLE_HISTORY->itemEffects[battlerId]);
     else
-        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(gBattleMons[bank].item);
+        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(gBattleMons[battlerId].item);
 
     gAIScriptPtr += 2;
 }
 
 static void BattleAICmd_if_holds_item(void)
 {
-    u8 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
+    u8 battlerId = BattleAI_GetWantedBank(gAIScriptPtr[1]);
     u16 item;
     u8 var1, var2;
 
-    if ((bank & BIT_SIDE) == (sBattler_AI & BIT_SIDE))
-        item = gBattleMons[bank].item;
+    if ((battlerId & BIT_SIDE) == (sBattler_AI & BIT_SIDE))
+        item = gBattleMons[battlerId].item;
     else
-        item = BATTLE_HISTORY->itemEffects[bank];
+        item = BATTLE_HISTORY->itemEffects[battlerId];
 
     // UB: doesn't properly read an unaligned u16
     var2 = gAIScriptPtr[2];
@@ -2056,42 +2056,42 @@ static void BattleAICmd_if_holds_item(void)
 
 static void BattleAICmd_get_gender(void)
 {
-    u8 bank;
+    u8 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    AI_THINKING_STRUCT->funcResult = GetGenderFromSpeciesAndPersonality(gBattleMons[bank].species, gBattleMons[bank].personality);
+    AI_THINKING_STRUCT->funcResult = GetGenderFromSpeciesAndPersonality(gBattleMons[battlerId].species, gBattleMons[battlerId].personality);
 
     gAIScriptPtr += 2;
 }
 
 static void BattleAICmd_is_first_turn_for(void)
 {
-    u8 bank;
+    u8 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[bank].isFirstTurn;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[battlerId].isFirstTurn;
 
     gAIScriptPtr += 2;
 }
 
 static void BattleAICmd_get_stockpile_count(void)
 {
-    u8 bank;
+    u8 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[bank].stockpileCounter;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[battlerId].stockpileCounter;
 
     gAIScriptPtr += 2;
 }
@@ -2105,18 +2105,18 @@ static void BattleAICmd_is_double_battle(void)
 
 static void BattleAICmd_get_used_held_item(void)
 {
-    u8 bank;
+    u8 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
     // This is likely a leftover from Ruby's code and its ugly ewram access
     #ifdef NONMATCHING
-        AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[bank];
+        AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[battlerId];
     #else
-        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + offsetof(struct BattleStruct, usedHeldItems) + (bank * 2));
+        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + offsetof(struct BattleStruct, usedHeldItems) + (battlerId * 2));
     #endif // NONMATCHING
 
     gAIScriptPtr += 2;
@@ -2145,14 +2145,14 @@ static void BattleAICmd_get_move_effect_from_result(void)
 
 static void BattleAICmd_get_protect_count(void)
 {
-    u8 bank;
+    u8 battlerId;
 
     if (gAIScriptPtr[1] == AI_USER)
-        bank = sBattler_AI;
+        battlerId = sBattler_AI;
     else
-        bank = gBattlerTarget;
+        battlerId = gBattlerTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[bank].protectUses;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[battlerId].protectUses;
 
     gAIScriptPtr += 2;
 }
@@ -2255,9 +2255,9 @@ static void BattleAICmd_if_target_is_ally(void)
 
 static void BattleAICmd_if_flash_fired(void)
 {
-    u8 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
+    u8 battlerId = BattleAI_GetWantedBank(gAIScriptPtr[1]);
 
-    if (gBattleResources->flags->flags[bank] & UNKNOWN_FLAG_FLASH_FIRE)
+    if (gBattleResources->flags->flags[battlerId] & UNKNOWN_FLAG_FLASH_FIRE)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
