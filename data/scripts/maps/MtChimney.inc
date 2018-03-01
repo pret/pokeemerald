@@ -500,7 +500,7 @@ MtChimney_EventScript_22F176:: @ 822F176
 	waitmovement 0
 	msgbox MtChimney_Text_2300E3, 4
 	setvar VAR_0x8004, 313
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 313
 	callstd 8
 	release
@@ -545,7 +545,7 @@ MtChimney_EventScript_22F234:: @ 822F234
 	waitmovement 0
 	msgbox MtChimney_Text_230557, 4
 	setvar VAR_0x8004, 1
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 1
 	callstd 8
 	release

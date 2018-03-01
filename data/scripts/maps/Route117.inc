@@ -52,7 +52,7 @@ Route117_EventScript_1F39FC:: @ 81F39FC
 	waitmovement 0
 	msgbox Route117_Text_29C508, 4
 	setvar VAR_0x8004, 538
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 538
 	callstd 8
 	release
@@ -77,7 +77,7 @@ Route117_EventScript_1F3A5E:: @ 81F3A5E
 	waitmovement 0
 	msgbox Route117_Text_29C6BC, 4
 	setvar VAR_0x8004, 545
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 545
 	callstd 8
 	release
@@ -102,7 +102,7 @@ Route117_EventScript_1F3AC0:: @ 81F3AC0
 	waitmovement 0
 	msgbox Route117_Text_29C846, 4
 	setvar VAR_0x8004, 364
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 364
 	callstd 8
 	release
@@ -127,7 +127,7 @@ Route117_EventScript_1F3B22:: @ 81F3B22
 	waitmovement 0
 	msgbox Route117_Text_29CA32, 4
 	setvar VAR_0x8004, 369
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 369
 	callstd 8
 	release
@@ -155,7 +155,7 @@ Route117_EventScript_1F3B6F:: @ 81F3B6F
 Route117_EventScript_1F3B9F:: @ 81F3B9F
 	msgbox Route117_Text_29CD1D, 4
 	setvar VAR_0x8004, 287
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 287
 	callstd 8
 	release
@@ -178,7 +178,7 @@ Route117_EventScript_1F3BD3:: @ 81F3BD3
 Route117_EventScript_1F3C03:: @ 81F3C03
 	msgbox Route117_Text_29CD1D, 4
 	setvar VAR_0x8004, 287
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 287
 	callstd 8
 	release

@@ -41,7 +41,7 @@ Route102_EventScript_1EC146:: @ 81EC146
 Route102_EventScript_1EC157:: @ 81EC157
 	msgbox Route102_Text_294668, 4
 	setvar VAR_0x8004, 318
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 318
 	callstd 8
 	release
@@ -57,7 +57,7 @@ Route102_EventScript_1EC170:: @ 81EC170
 Route102_EventScript_1EC183:: @ 81EC183
 	msgbox Route102_Text_2945EB, 4
 	setvar VAR_0x8004, 318
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 318
 	callstd 8
 	release

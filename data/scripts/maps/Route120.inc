@@ -309,7 +309,7 @@ Route120_EventScript_1F581A:: @ 81F581A
 	waitmovement 0
 	msgbox Route120_Text_29E75D, 4
 	setvar VAR_0x8004, 406
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 406
 	callstd 8
 	release
@@ -344,7 +344,7 @@ Route120_EventScript_1F58AA:: @ 81F58AA
 	waitmovement 0
 	msgbox Route120_Text_29EA31, 4
 	setvar VAR_0x8004, 226
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 226
 	callstd 8
 	release

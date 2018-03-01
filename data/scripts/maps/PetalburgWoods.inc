@@ -301,7 +301,7 @@ PetalburgWoods_EventScript_22E2C5:: @ 822E2C5
 PetalburgWoods_EventScript_22E2D6:: @ 822E2D6
 	msgbox PetalburgWoods_Text_22E8C3, 4
 	setvar VAR_0x8004, 621
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 621
 	callstd 8
 	release
@@ -317,7 +317,7 @@ PetalburgWoods_EventScript_22E2EF:: @ 822E2EF
 PetalburgWoods_EventScript_22E302:: @ 822E302
 	msgbox PetalburgWoods_Text_22E914, 4
 	setvar VAR_0x8004, 621
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 621
 	callstd 8
 	release

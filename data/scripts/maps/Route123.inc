@@ -74,7 +74,7 @@ Route123_EventScript_1F6236:: @ 81F6236
 	waitmovement 0
 	msgbox Route123_Text_29FE70, 4
 	setvar VAR_0x8004, 238
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 238
 	callstd 8
 	release
@@ -99,7 +99,7 @@ Route123_EventScript_1F6298:: @ 81F6298
 	waitmovement 0
 	msgbox Route123_Text_2A0027, 4
 	setvar VAR_0x8004, 249
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 249
 	callstd 8
 	release
@@ -174,7 +174,7 @@ Route123_EventScript_1F63E8:: @ 81F63E8
 	waitmovement 0
 	msgbox Route123_Text_2A03C1, 4
 	setvar VAR_0x8004, 195
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 195
 	callstd 8
 	release

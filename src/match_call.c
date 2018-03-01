@@ -9,12 +9,18 @@
 // Static type declarations
 
 typedef struct {
+    const u8 *text;
+    u16 v4;
+    u16 v6;
+} match_call_script_t;
+
+typedef struct {
     u8 v0;
-    u8 v1;
-    u16 v2;
-    void *v4;
-    void *v8;
-    void *vC;
+    u8 gender;
+    u16 flag;
+    const u8 *name;
+    const u8 *desc;
+    match_call_script_t *script;
 } match_call_t;
 
 // Static RAM declarations
@@ -79,40 +85,40 @@ bool32 sub_81D15F4(u32 idx)
 
 bool32 sub_81D1628(const match_call_t *matchCall)
 {
-    if (matchCall->v2 == 0xffff)
+    if (matchCall->flag == 0xffff)
         return TRUE;
-    return FlagGet(matchCall->v2);
+    return FlagGet(matchCall->flag);
 }
 
 bool32 sub_81D164C(const match_call_t *matchCall)
 {
-    if (matchCall->v2 == 0xffff)
+    if (matchCall->flag == 0xffff)
         return TRUE;
-    return FlagGet(matchCall->v2);
+    return FlagGet(matchCall->flag);
 }
 
 bool32 sub_81D1670(const match_call_t *matchCall)
 {
-    if (matchCall->v2 == 0xffff)
+    if (matchCall->flag == 0xffff)
         return TRUE;
-    return FlagGet(matchCall->v2);
+    return FlagGet(matchCall->flag);
 }
 
 bool32 sub_81D1694(const match_call_t *matchCall)
 {
-    if (matchCall->v1 != gSaveBlock2Ptr->playerGender)
+    if (matchCall->gender != gSaveBlock2Ptr->playerGender)
         return FALSE;
-    if (matchCall->v2 == 0xffff)
+    if (matchCall->flag == 0xffff)
         return TRUE;
-    return FlagGet(matchCall->v2);
+    return FlagGet(matchCall->flag);
 }
 
 bool32 sub_81D16CC(const match_call_t *matchCall)
 {
-    return FlagGet(matchCall->v2);
+    return FlagGet(matchCall->flag);
 }
 
-bool8 sub_81D16DC(u32 idx)
+u8 sub_81D16DC(u32 idx)
 {
     const match_call_t *matchCall;
     s32 v0;

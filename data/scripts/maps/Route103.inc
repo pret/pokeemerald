@@ -218,7 +218,7 @@ Route103_EventScript_1EC60B:: @ 81EC60B
 Route103_EventScript_1EC63A:: @ 81EC63A
 	msgbox Route103_Text_294B8A, 4
 	setvar VAR_0x8004, 481
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 481
 	callstd 8
 	release
@@ -240,7 +240,7 @@ Route103_EventScript_1EC66E:: @ 81EC66E
 Route103_EventScript_1EC69D:: @ 81EC69D
 	msgbox Route103_Text_294B8A, 4
 	setvar VAR_0x8004, 481
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 481
 	callstd 8
 	release
@@ -270,7 +270,7 @@ Route103_EventScript_1EC714:: @ 81EC714
 	waitmovement 0
 	msgbox Route103_Text_294F7E, 4
 	setvar VAR_0x8004, 293
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 293
 	callstd 8
 	release

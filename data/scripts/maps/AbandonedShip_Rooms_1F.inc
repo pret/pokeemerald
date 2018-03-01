@@ -24,7 +24,7 @@ AbandonedShip_Rooms_1F_EventScript_237ADF:: @ 8237ADF
 	waitmovement 0
 	msgbox AbandonedShip_Rooms_1F_Text_237C2A, 4
 	setvar VAR_0x8004, 144
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 144
 	callstd 8
 	release

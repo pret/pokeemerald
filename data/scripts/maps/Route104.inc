@@ -904,7 +904,7 @@ Route104_EventScript_1ED3CE:: @ 81ED3CE
 Route104_EventScript_1ED3DF:: @ 81ED3DF
 	msgbox Route104_Text_29576B, 4
 	setvar VAR_0x8004, 604
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 604
 	callstd 8
 	release
@@ -920,7 +920,7 @@ Route104_EventScript_1ED3F8:: @ 81ED3F8
 Route104_EventScript_1ED40B:: @ 81ED40B
 	msgbox Route104_Text_2956FF, 4
 	setvar VAR_0x8004, 604
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 604
 	callstd 8
 	release
@@ -955,7 +955,7 @@ Route104_EventScript_1ED47C:: @ 81ED47C
 Route104_EventScript_1ED48D:: @ 81ED48D
 	msgbox Route104_Text_29595A, 4
 	setvar VAR_0x8004, 136
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 136
 	callstd 8
 	release
@@ -971,7 +971,7 @@ Route104_EventScript_1ED4A6:: @ 81ED4A6
 Route104_EventScript_1ED4B9:: @ 81ED4B9
 	msgbox Route104_Text_2958F8, 4
 	setvar VAR_0x8004, 136
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 136
 	callstd 8
 	release
@@ -1006,7 +1006,7 @@ Route104_EventScript_1ED52A:: @ 81ED52A
 Route104_EventScript_1ED53B:: @ 81ED53B
 	msgbox Route104_Text_295B60, 4
 	setvar VAR_0x8004, 114
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 114
 	callstd 8
 	release
@@ -1022,7 +1022,7 @@ Route104_EventScript_1ED554:: @ 81ED554
 Route104_EventScript_1ED567:: @ 81ED567
 	msgbox Route104_Text_295B01, 4
 	setvar VAR_0x8004, 114
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 114
 	callstd 8
 	release

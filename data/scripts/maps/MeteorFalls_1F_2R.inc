@@ -15,7 +15,7 @@ MeteorFalls_1F_2R_EventScript_22C50A:: @ 822C50A
 	waitmovement 0
 	msgbox MeteorFalls_1F_2R_Text_22C6F6, 4
 	setvar VAR_0x8004, 392
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 392
 	callstd 8
 	release
@@ -38,7 +38,7 @@ MeteorFalls_1F_2R_EventScript_22C540:: @ 822C540
 MeteorFalls_1F_2R_EventScript_22C570:: @ 822C570
 	msgbox MeteorFalls_1F_2R_Text_22C99C, 4
 	setvar VAR_0x8004, 681
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 681
 	callstd 8
 	release
@@ -61,7 +61,7 @@ MeteorFalls_1F_2R_EventScript_22C5A4:: @ 822C5A4
 MeteorFalls_1F_2R_EventScript_22C5D4:: @ 822C5D4
 	msgbox MeteorFalls_1F_2R_Text_22C99C, 4
 	setvar VAR_0x8004, 681
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 681
 	callstd 8
 	release

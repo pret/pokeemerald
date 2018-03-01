@@ -72,7 +72,7 @@ Route113_EventScript_1F221A:: @ 81F221A
 	waitmovement 0
 	msgbox Route113_Text_299F49, 4
 	setvar VAR_0x8004, 434
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 434
 	callstd 8
 	release
@@ -97,7 +97,7 @@ Route113_EventScript_1F227C:: @ 81F227C
 	waitmovement 0
 	msgbox Route113_Text_29A0A2, 4
 	setvar VAR_0x8004, 419
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 419
 	callstd 8
 	release

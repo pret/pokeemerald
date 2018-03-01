@@ -409,7 +409,7 @@ Route109_EventScript_1EEAC5:: @ 81EEAC5
 	waitmovement 0
 	msgbox Route109_Text_2973C1, 4
 	setvar VAR_0x8004, 64
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 64
 	callstd 8
 	release
@@ -434,7 +434,7 @@ Route109_EventScript_1EEB27:: @ 81EEB27
 	waitmovement 0
 	msgbox Route109_Text_297520, 4
 	setvar VAR_0x8004, 57
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 57
 	callstd 8
 	release

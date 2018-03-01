@@ -265,6 +265,7 @@ SECTIONS {
         asm/pokemon_summary_screen.o(.text);
         asm/pokenav.o(.text);
         src/match_call.o(.text);
+        asm/match_call.o(.text);
         asm/pokenav.o(.text.after.match.call);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
@@ -536,6 +537,8 @@ SECTIONS {
         src/berry_fix_program.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/pokenav.o(.rodata);
+        data/match_call.o(.rodata);
+        data/pokenav.o(.rodata.after.match.call);
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         data/trainer_rematch.o(.rodata);

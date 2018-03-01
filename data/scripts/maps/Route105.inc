@@ -75,7 +75,7 @@ Route105_EventScript_1EE300:: @ 81EE300
 	waitmovement 0
 	msgbox Route105_Text_296159, 4
 	setvar VAR_0x8004, 737
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 737
 	callstd 8
 	release
