@@ -6,7 +6,7 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "battle_ai_script_commands.h"
-#include "battle_link_817C95C.h"
+#include "battle_tv.h"
 #include "recorded_battle.h"
 #include "pokemon.h"
 #include "link.h"

@@ -6,7 +6,7 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "battle_ai_script_commands.h"
-#include "battle_link_817C95C.h"
+#include "battle_tv.h"
 #include "pokemon.h"
 #include "link.h"
 #include "util.h"
@@ -32,7 +32,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const struct BattleMove gBattleMoves[];
 
 extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
 extern void sub_806A068(u16, u8);
@@ -1414,7 +1413,7 @@ static void LinkOpponentHandleMoveAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             gBattlerControllerFuncs[gActiveBattler] = LinkOpponentDoMoveAnimation;
-            sub_817E0FC(move, gWeatherMoveAnim, gAnimDisableStructPtr);
+            BattleTv_SetDataBasedOnMove(move, gWeatherMoveAnim, gAnimDisableStructPtr);
         }
     }
 }
@@ -1478,7 +1477,7 @@ static void LinkOpponentHandlePrintString(void)
     BufferStringBattle(*stringId);
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
-    sub_817C95C(*stringId);
+    BattleTv_SetDataBasedOnString(*stringId);
 }
 
 static void LinkOpponentHandlePrintSelectionString(void)
@@ -1831,7 +1830,7 @@ static void LinkOpponentHandleBattleAnimation(void)
         else
             gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
 
-        sub_817E32C(animationId);
+        BattleTv_SetDataBasedOnAnimation(animationId);
     }
 }
 

@@ -36,7 +36,6 @@ extern u8 gBattleBuffersTransferData[0x100];
 
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
 
-extern const struct BattleMove gBattleMoves[];
 
 extern void task00_08081A90(u8 taskId); // cable_club
 extern void sub_81B8D64(u8 bank, u8 arg1); // party_menu
@@ -97,7 +96,6 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
 void sub_8032768(void)
 {
     s32 i;
-    u8 *data;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         sub_8184DA4(1);
@@ -120,11 +118,11 @@ void sub_8032768(void)
             sub_81B8D64(i, 0);
     }
 
-    for (i = 0; i < sizeof(gBattleStruct->field_1A4); i++)
-        *(gBattleStruct->field_1A4 + i) = 0;
+    for (i = 0; i < sizeof(gBattleStruct->tvMovePoints); i++)
+        *((u8*)(&gBattleStruct->tvMovePoints) + i) = 0;
 
-    for (i = 0; i < sizeof(gBattleStruct->field_204); i++)
-        *(gBattleStruct->field_204 + i) = 0;
+    for (i = 0; i < sizeof(gBattleStruct->tv); i++)
+        *((u8*)(&gBattleStruct->tv) + i) = 0;
 }
 
 static void InitSinglePlayerBtlControllers(void)

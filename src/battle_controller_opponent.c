@@ -5,7 +5,7 @@
 #include "battle_interface.h"
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
-#include "battle_link_817C95C.h"
+#include "battle_tv.h"
 #include "battle_ai_script_commands.h"
 #include "pokemon.h"
 #include "link.h"
@@ -35,7 +35,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const struct BattleMove gBattleMoves[];
 
 extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
 extern void sub_806A068(u16, u8);
@@ -1563,7 +1562,7 @@ static void OpponentHandleChooseMove(void)
                 BtlController_EmitTwoReturnValues(1, 15, gBattlerTarget);
                 break;
             default:
-                if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_x10))
+                if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                     gBattlerTarget = gActiveBattler;
                 if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
                 {
@@ -1585,7 +1584,7 @@ static void OpponentHandleChooseMove(void)
                 move = moveInfo->moves[chosenMoveId];
             } while (move == MOVE_NONE);
 
-            if (gBattleMoves[move].target & (MOVE_TARGET_USER | MOVE_TARGET_x10))
+            if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                 BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (gActiveBattler << 8));
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBattlerAtPosition(Random() & 2) << 8));

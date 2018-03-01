@@ -23,7 +23,6 @@
 #include "link.h"
 #include "berry.h"
 
-extern const struct BattleMove gBattleMoves[];
 
 extern u8 weather_get_current(void);
 
@@ -3255,8 +3254,8 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
         else
             targetBank = GetBattlerAtPosition((GetBattlerPosition(gBattlerAttacker) & BIT_SIDE) ^ BIT_SIDE);
         break;
+    case MOVE_TARGET_USER_OR_SELECTED:
     case MOVE_TARGET_USER:
-    case MOVE_TARGET_x10:
         targetBank = gBattlerAttacker;
         break;
     }

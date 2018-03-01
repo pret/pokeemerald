@@ -31,7 +31,6 @@ extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
-extern const struct BattleMove gBattleMoves[];
 
 extern void sub_81358F4(void);
 extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
@@ -1521,7 +1520,7 @@ static void PlayerPartnerHandleChooseMove(void)
     BattleAI_SetupAIData(0xF);
     chosenMoveId = BattleAI_ChooseMoveOrAction();
 
-    if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_x10 | MOVE_TARGET_USER))
+    if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
         gBattlerTarget = gActiveBattler;
     if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
     {

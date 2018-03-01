@@ -3388,7 +3388,7 @@ _0813980C:
 _0813981C:
 	ldrh r5, [r2]
 	adds r0, r5, 0
-	bl sub_80EF370
+	bl CountDigits
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -3408,7 +3408,7 @@ _0813983C:
 	adds r4, 0x4
 	ldrh r5, [r2]
 	adds r0, r5, 0
-	bl sub_80EF370
+	bl CountDigits
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

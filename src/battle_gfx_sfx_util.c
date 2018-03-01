@@ -28,7 +28,6 @@ extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-extern const struct BattleMove gBattleMoves[];
 extern const u8 gUnknown_0831C604[];
 extern const u8 * const gBattleAnims_VariousTable[];
 extern const u8 * const gBattleAnims_Special[];
@@ -237,7 +236,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     if (moveInfo->moves[chosenMoveId] == MOVE_CURSE)
     {
         if (moveInfo->monType1 != TYPE_GHOST && moveInfo->monType2 != TYPE_GHOST)
-            var1 = MOVE_TARGET_x10;
+            var1 = MOVE_TARGET_USER;
         else
             var1 = MOVE_TARGET_SELECTED;
     }
@@ -246,7 +245,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
         var1 = gBattleMoves[moveInfo->moves[chosenMoveId]].target;
     }
 
-    if (var1 & MOVE_TARGET_x10)
+    if (var1 & MOVE_TARGET_USER)
         chosenMoveId |= (gActiveBattler << 8);
     else if (var1 == MOVE_TARGET_SELECTED)
         chosenMoveId |= (BattlePalaceGetTargetRetValue());
@@ -261,7 +260,7 @@ static u8 sub_805D4A8(u16 move)
     switch (gBattleMoves[move].target)
     {
     case MOVE_TARGET_SELECTED:
-    case MOVE_TARGET_USER:
+    case MOVE_TARGET_USER_OR_SELECTED:
     case MOVE_TARGET_RANDOM:
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
@@ -273,7 +272,7 @@ static u8 sub_805D4A8(u16 move)
     case MOVE_TARGET_DEPENDS:
     case MOVE_TARGET_OPPONENTS_FIELD:
         return 2;
-    case MOVE_TARGET_x10:
+    case MOVE_TARGET_USER:
         return 1;
     default:
         return 0;
