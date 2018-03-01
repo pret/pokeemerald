@@ -514,375 +514,375 @@ static const u8 sText_Trainer2LoseText[];
 
 const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
-	sText_Trainer1LoseText,
-	sText_PkmnGainedEXP,
-	sText_PkmnGrewToLv,
-	sText_PkmnLearnedMove,
-	sText_TryToLearnMove1,
-	sText_TryToLearnMove2,
-	sText_TryToLearnMove3,
-	sText_PkmnForgotMove,
-	sText_StopLearningMove,
-	sText_DidNotLearnMove,
-	sText_PkmnLearnedMove2,
-	sText_AttackMissed,
-	sText_PkmnProtectedItself,
-	sText_StatsWontIncrease2,
-	sText_AvoidedDamage,
-	sText_ItDoesntAffect,
-	sText_AttackerFainted,
-	sText_TargetFainted,
-	sText_PlayerGotMoney,
-	sText_PlayerWhiteout,
-	sText_PlayerWhiteout2,
-	sText_PreventsEscape,
-	sText_HitXTimes,
-	sText_PkmnFellAsleep,
-	sText_PkmnMadeSleep,
-	sText_PkmnAlreadyAsleep,
-	sText_PkmnAlreadyAsleep2,
-	sText_PkmnWasntAffected,
-	sText_PkmnWasPoisoned,
-	sText_PkmnPoisonedBy,
-	sText_PkmnHurtByPoison,
-	sText_PkmnAlreadyPoisoned,
-	sText_PkmnBadlyPoisoned,
-	sText_PkmnEnergyDrained,
-	sText_PkmnWasBurned,
-	sText_PkmnBurnedBy,
-	sText_PkmnHurtByBurn,
-	sText_PkmnWasFrozen,
-	sText_PkmnFrozenBy,
-	sText_PkmnIsFrozen,
-	sText_PkmnWasDefrosted,
-	sText_PkmnWasDefrosted2,
-	sText_PkmnWasDefrostedBy,
-	sText_PkmnWasParalyzed,
-	sText_PkmnWasParalyzedBy,
-	sText_PkmnIsParalyzed,
-	sText_PkmnIsAlreadyParalyzed,
-	sText_PkmnHealedParalysis,
-	sText_PkmnDreamEaten,
-	sText_StatsWontIncrease,
-	sText_StatsWontDecrease,
-	sText_TeamStoppedWorking,
-	sText_FoeStoppedWorking,
-	sText_PkmnIsConfused,
-	sText_PkmnHealedConfusion,
-	sText_PkmnWasConfused,
-	sText_PkmnAlreadyConfused,
-	sText_PkmnFellInLove,
-	sText_PkmnInLove,
-	sText_PkmnImmobilizedByLove,
-	sText_PkmnBlownAway,
-	sText_PkmnChangedType,
-	sText_PkmnFlinched,
-	sText_PkmnRegainedHealth,
-	sText_PkmnHPFull,
-	sText_PkmnRaisedSpDef,
-	sText_PkmnRaisedDef,
-	sText_PkmnCoveredByVeil,
-	sText_PkmnUsedSafeguard,
-	sText_PkmnSafeguardExpired,
-	sText_PkmnWentToSleep,
-	sText_PkmnSleptHealthy,
-	sText_PkmnWhippedWhirlwind,
-	sText_PkmnTookSunlight,
-	sText_PkmnLoweredHead,
-	sText_PkmnIsGlowing,
-	sText_PkmnFlewHigh,
-	sText_PkmnDugHole,
-	sText_PkmnSqueezedByBind,
-	sText_PkmnTrappedInVortex,
-	sText_PkmnWrappedBy,
-	sText_PkmnClamped,
-	sText_PkmnHurtBy,
-	sText_PkmnFreedFrom,
-	sText_PkmnCrashed,
-	gText_PkmnShroudedInMist,
-	sText_PkmnProtectedByMist,
-	gText_PkmnGettingPumped,
-	sText_PkmnHitWithRecoil,
-	sText_PkmnProtectedItself2,
-	sText_PkmnBuffetedBySandstorm,
-	sText_PkmnPeltedByHail,
-	sText_PkmnSeeded,
-	sText_PkmnEvadedAttack,
-	sText_PkmnSappedByLeechSeed,
-	sText_PkmnFastAsleep,
-	sText_PkmnWokeUp,
-	sText_PkmnUproarKeptAwake,
-	sText_PkmnWokeUpInUproar,
-	sText_PkmnCausedUproar,
-	sText_PkmnMakingUproar,
-	sText_PkmnCalmedDown,
-	sText_PkmnCantSleepInUproar,
-	sText_PkmnStockpiled,
-	sText_PkmnCantStockpile,
-	sText_PkmnCantSleepInUproar2,
-	sText_UproarKeptPkmnAwake,
-	sText_PkmnStayedAwakeUsing,
-	sText_PkmnStoringEnergy,
-	sText_PkmnUnleashedEnergy,
-	sText_PkmnFatigueConfusion,
-	sText_PkmnPickedUpItem,
-	sText_PkmnUnaffected,
-	sText_PkmnTransformedInto,
-	sText_PkmnMadeSubstitute,
-	sText_PkmnHasSubstitute,
-	sText_SubstituteDamaged,
-	sText_PkmnSubstituteFaded,
-	sText_PkmnMustRecharge,
-	sText_PkmnRageBuilding,
-	sText_PkmnMoveWasDisabled,
-	sText_PkmnMoveIsDisabled,
-	sText_PkmnMoveDisabledNoMore,
-	sText_PkmnGotEncore,
-	sText_PkmnEncoreEnded,
-	sText_PkmnTookAim,
-	sText_PkmnSketchedMove,
-	sText_PkmnTryingToTakeFoe,
-	sText_PkmnTookFoe,
-	sText_PkmnReducedPP,
-	sText_PkmnStoleItem,
-	sText_TargetCantEscapeNow,
-	sText_PkmnFellIntoNightmare,
-	sText_PkmnLockedInNightmare,
-	sText_PkmnLaidCurse,
-	sText_PkmnAfflictedByCurse,
-	sText_SpikesScattered,
-	sText_PkmnHurtBySpikes,
-	sText_PkmnIdentified,
-	sText_PkmnPerishCountFell,
-	sText_PkmnBracedItself,
-	sText_PkmnEnduredHit,
-	sText_MagnitudeStrength,
-	sText_PkmnCutHPMaxedAttack,
-	sText_PkmnCopiedStatChanges,
-	sText_PkmnGotFree,
-	sText_PkmnShedLeechSeed,
-	sText_PkmnBlewAwaySpikes,
-	sText_PkmnFledFromBattle,
-	sText_PkmnForesawAttack,
-	sText_PkmnTookAttack,
-	sText_PkmnAttack,
-	sText_PkmnCenterAttention,
-	sText_PkmnChargingPower,
-	sText_NaturePowerTurnedInto,
-	sText_PkmnStatusNormal,
-	sText_PkmnHasNoMovesLeft,
-	sText_PkmnSubjectedToTorment,
-	sText_PkmnCantUseMoveTorment,
-	sText_PkmnTighteningFocus,
-	sText_PkmnFellForTaunt,
-	sText_PkmnCantUseMoveTaunt,
-	sText_PkmnReadyToHelp,
-	sText_PkmnSwitchedItems,
-	sText_PkmnCopiedFoe,
-	sText_PkmnMadeWish,
-	sText_PkmnWishCameTrue,
-	sText_PkmnPlantedRoots,
-	sText_PkmnAbsorbedNutrients,
-	sText_PkmnAnchoredItself,
-	sText_PkmnWasMadeDrowsy,
-	sText_PkmnKnockedOff,
-	sText_PkmnSwappedAbilities,
-	sText_PkmnSealedOpponentMove,
-	sText_PkmnCantUseMoveSealed,
-	sText_PkmnWantsGrudge,
-	sText_PkmnLostPPGrudge,
-	sText_PkmnShroudedItself,
-	sText_PkmnMoveBounced,
-	sText_PkmnWaitsForTarget,
-	sText_PkmnSnatchedMove,
-	sText_PkmnMadeItRain,
-	sText_PkmnRaisedSpeed,
-	sText_PkmnProtectedBy,
-	sText_PkmnPreventsUsage,
-	sText_PkmnRestoredHPUsing,
-	sText_PkmnChangedTypeWith,
-	sText_PkmnPreventsParalysisWith,
-	sText_PkmnPreventsRomanceWith,
-	sText_PkmnPreventsPoisoningWith,
-	sText_PkmnPreventsConfusionWith,
-	sText_PkmnRaisedFirePowerWith,
-	sText_PkmnAnchorsItselfWith,
-	sText_PkmnCutsAttackWith,
-	sText_PkmnPreventsStatLossWith,
-	sText_PkmnHurtsWith,
-	sText_PkmnTraced,
-	sText_StatSharply,
-	gText_StatRose,
-	sText_StatHarshly,
-	sText_StatFell,
-	sText_PkmnsStatChanged,
-	gText_PkmnsStatChanged2,
-	sText_PkmnsStatChanged3,
-	sText_PkmnsStatChanged4,
-	sText_CriticalHit,
-	sText_OneHitKO,
-	sText_123Poof,
-	sText_AndEllipsis,
-	sText_NotVeryEffective,
-	sText_SuperEffective,
-	sText_GotAwaySafely,
-	sText_WildPkmnFled,
-	sText_NoRunningFromTrainers,
-	sText_CantEscape,
-	sText_DontLeaveBirch,
-	sText_ButNothingHappened,
-	sText_ButItFailed,
-	sText_ItHurtConfusion,
-	sText_MirrorMoveFailed,
-	sText_StartedToRain,
-	sText_DownpourStarted,
-	sText_RainContinues,
-	sText_DownpourContinues,
-	sText_RainStopped,
-	sText_SandstormBrewed,
-	sText_SandstormRages,
-	sText_SandstormSubsided,
-	sText_SunlightGotBright,
-	sText_SunlightStrong,
-	sText_SunlightFaded,
-	sText_StartedHail,
-	sText_HailContinues,
-	sText_HailStopped,
-	sText_FailedToSpitUp,
-	sText_FailedToSwallow,
-	sText_WindBecameHeatWave,
-	sText_StatChangesGone,
-	sText_CoinsScattered,
-	sText_TooWeakForSubstitute,
-	sText_SharedPain,
-	sText_BellChimed,
-	sText_FaintInThree,
-	sText_NoPPLeft,
-	sText_ButNoPPLeft,
-	sText_PlayerUsedItem,
-	sText_WallyUsedItem,
-	sText_TrainerBlockedBall,
-	sText_DontBeAThief,
-	sText_ItDodgedBall,
-	sText_YouMissedPkmn,
-	sText_PkmnBrokeFree,
-	sText_ItAppearedCaught,
-	sText_AarghAlmostHadIt,
-	sText_ShootSoClose,
-	sText_GotchaPkmnCaught,
-	sText_GotchaPkmnCaught2,
-	sText_GiveNicknameCaptured,
-	sText_PkmnSentToPC,
-	sText_PkmnDataAddedToDex,
-	sText_ItIsRaining,
-	sText_SandstormIsRaging,
-	sText_CantEscape2,
-	sText_PkmnIgnoresAsleep,
-	sText_PkmnIgnoredOrders,
-	sText_PkmnBeganToNap,
-	sText_PkmnLoafing,
-	sText_PkmnWontObey,
-	sText_PkmnTurnedAway,
-	sText_PkmnPretendNotNotice,
-	sText_EnemyAboutToSwitchPkmn,
-	sText_CreptCloser,
-	sText_CantGetCloser,
-	sText_PkmnWatchingCarefully,
-	sText_PkmnCuriousAboutX,
-	sText_PkmnEnthralledByX,
-	sText_PkmnIgnoredX,
-	sText_ThrewPokeblockAtPkmn,
-	sText_OutOfSafariBalls,
-	sText_PkmnsItemCuredParalysis,
-	sText_PkmnsItemCuredPoison,
-	sText_PkmnsItemHealedBurn,
-	sText_PkmnsItemDefrostedIt,
-	sText_PkmnsItemWokeIt,
-	sText_PkmnsItemSnappedOut,
-	sText_PkmnsItemCuredProblem,
-	sText_PkmnsItemRestoredHealth,
-	sText_PkmnsItemRestoredPP,
-	sText_PkmnsItemRestoredStatus,
-	sText_PkmnsItemRestoredHPALittle,
-	sText_ItemAllowsOnlyYMove,
-	sText_PkmnHungOnWithX,
-	gText_EmptyString3,
-	sText_PkmnsXPreventsBurns,
-	sText_PkmnsXBlocksY,
-	sText_PkmnsXRestoredHPALittle2,
-	sText_PkmnsXWhippedUpSandstorm,
-	sText_PkmnsXPreventsYLoss,
-	sText_PkmnsXInfatuatedY,
-	sText_PkmnsXMadeYIneffective,
-	sText_PkmnsXCuredYProblem,
-	sText_ItSuckedLiquidOoze,
-	sText_PkmnTransformed,
-	sText_ElectricityWeakened,
-	sText_FireWeakened,
-	sText_PkmnHidUnderwater,
-	sText_PkmnSprangUp,
-	sText_HMMovesCantBeForgotten,
-	sText_XFoundOneY,
-	sText_PlayerDefeatedLinkTrainerTrainer1,
-	sText_SoothingAroma,
-	sText_ItemsCantBeUsedNow,
-	sText_ForXCommaYZ,
-	sText_UsingXTheYOfZN,
-	sText_PkmnUsedXToGetPumped,
-	sText_PkmnsXMadeYUseless,
-	sText_PkmnTrappedBySandTomb,
-	sText_EmptyString4,
-	sText_ABoosted,
-	sText_PkmnsXIntensifiedSun,
-	sText_PkmnMakesGroundMiss,
-	sText_YouThrowABallNowRight,
-	sText_PkmnsXTookAttack,
-	sText_PkmnChoseXAsDestiny,
-	sText_PkmnLostFocus,
-	sText_UseNextPkmn,
-	sText_PkmnFledUsingIts,
-	sText_PkmnFledUsing,
-	sText_PkmnWasDraggedOut,
-	sText_PreventedFromWorking,
-	sText_PkmnsItemNormalizedStatus,
-	sText_Trainer1UsedItem,
-	sText_BoxIsFull,
-	sText_PkmnAvoidedAttack,
-	sText_PkmnsXMadeItIneffective,
-	sText_PkmnsXPreventsFlinching,
-	sText_PkmnAlreadyHasBurn,
-	sText_StatsWontDecrease2,
-	sText_PkmnsXBlocksY2,
-	sText_PkmnsXWoreOff,
-	sText_PkmnRaisedDefALittle,
-	sText_PkmnRaisedSpDefALittle,
-	sText_TheWallShattered,
-	sText_PkmnsXPreventsYsZ,
-	sText_PkmnsXCuredItsYProblem,
-	sText_AttackerCantEscape,
-	sText_PkmnObtainedX,
-	sText_PkmnObtainedX2,
-	sText_PkmnObtainedXYObtainedZ,
-	sText_ButNoEffect,
-	sText_PkmnsXHadNoEffectOnY,
-	sText_TwoInGameTrainersDefeated,
-	sText_Trainer2LoseText,
-	sText_PkmnIncapableOfPower,
-	sText_GlintAppearsInEye,
-	sText_PkmnGettingIntoPosition,
-	sText_PkmnBeganGrowlingDeeply,
-	sText_PkmnEagerForMore,
-	sText_DefeatedOpponentByReferee,
-	sText_LostToOpponentByReferee,
-	sText_TiedOpponentByReferee,
-	sText_QuestionForfeitMatch,
-	sText_ForfeitedMatch,
-	gText_PkmnTransferredSomeonesPC,
-	gText_PkmnTransferredLanettesPC,
-	gText_PkmnBoxSomeonesPCFull,
-	gText_PkmnBoxLanettesPCFull,
-	sText_Trainer1WinText,
-	sText_Trainer2WinText,
+    sText_Trainer1LoseText, // 12
+    sText_PkmnGainedEXP, // 13
+    sText_PkmnGrewToLv, // 14
+    sText_PkmnLearnedMove, // 15
+    sText_TryToLearnMove1, // 16
+    sText_TryToLearnMove2, // 17
+    sText_TryToLearnMove3, // 18
+    sText_PkmnForgotMove, // 19
+    sText_StopLearningMove, // 20
+    sText_DidNotLearnMove, // 21
+    sText_PkmnLearnedMove2, // 22
+    sText_AttackMissed, // 23
+    sText_PkmnProtectedItself, // 24
+    sText_StatsWontIncrease2, // 25
+    sText_AvoidedDamage, // 26
+    sText_ItDoesntAffect, // 27
+    sText_AttackerFainted, // 28
+    sText_TargetFainted, // 29
+    sText_PlayerGotMoney, // 30
+    sText_PlayerWhiteout, // 31
+    sText_PlayerWhiteout2, // 32
+    sText_PreventsEscape, // 33
+    sText_HitXTimes, // 34
+    sText_PkmnFellAsleep, // 35
+    sText_PkmnMadeSleep, // 36
+    sText_PkmnAlreadyAsleep, // 37
+    sText_PkmnAlreadyAsleep2, // 38
+    sText_PkmnWasntAffected, // 39
+    sText_PkmnWasPoisoned, // 40
+    sText_PkmnPoisonedBy, // 41
+    sText_PkmnHurtByPoison, // 42
+    sText_PkmnAlreadyPoisoned, // 43
+    sText_PkmnBadlyPoisoned, // 44
+    sText_PkmnEnergyDrained, // 45
+    sText_PkmnWasBurned, // 46
+    sText_PkmnBurnedBy, // 47
+    sText_PkmnHurtByBurn, // 48
+    sText_PkmnWasFrozen, // 49
+    sText_PkmnFrozenBy, // 50
+    sText_PkmnIsFrozen, // 51
+    sText_PkmnWasDefrosted, // 52
+    sText_PkmnWasDefrosted2, // 53
+    sText_PkmnWasDefrostedBy, // 54
+    sText_PkmnWasParalyzed, // 55
+    sText_PkmnWasParalyzedBy, // 56
+    sText_PkmnIsParalyzed, // 57
+    sText_PkmnIsAlreadyParalyzed, // 58
+    sText_PkmnHealedParalysis, // 59
+    sText_PkmnDreamEaten, // 60
+    sText_StatsWontIncrease, // 61
+    sText_StatsWontDecrease, // 62
+    sText_TeamStoppedWorking, // 63
+    sText_FoeStoppedWorking, // 64
+    sText_PkmnIsConfused, // 65
+    sText_PkmnHealedConfusion, // 66
+    sText_PkmnWasConfused, // 67
+    sText_PkmnAlreadyConfused, // 68
+    sText_PkmnFellInLove, // 69
+    sText_PkmnInLove, // 70
+    sText_PkmnImmobilizedByLove, // 71
+    sText_PkmnBlownAway, // 72
+    sText_PkmnChangedType, // 73
+    sText_PkmnFlinched, // 74
+    sText_PkmnRegainedHealth, // 75
+    sText_PkmnHPFull, // 76
+    sText_PkmnRaisedSpDef, // 77
+    sText_PkmnRaisedDef, // 78
+    sText_PkmnCoveredByVeil, // 79
+    sText_PkmnUsedSafeguard, // 80
+    sText_PkmnSafeguardExpired, // 81
+    sText_PkmnWentToSleep, // 82
+    sText_PkmnSleptHealthy, // 83
+    sText_PkmnWhippedWhirlwind, // 84
+    sText_PkmnTookSunlight, // 85
+    sText_PkmnLoweredHead, // 86
+    sText_PkmnIsGlowing, // 87
+    sText_PkmnFlewHigh, // 88
+    sText_PkmnDugHole, // 89
+    sText_PkmnSqueezedByBind, // 90
+    sText_PkmnTrappedInVortex, // 91
+    sText_PkmnWrappedBy, // 92
+    sText_PkmnClamped, // 93
+    sText_PkmnHurtBy, // 94
+    sText_PkmnFreedFrom, // 95
+    sText_PkmnCrashed, // 96
+    gText_PkmnShroudedInMist, // 97
+    sText_PkmnProtectedByMist, // 98
+    gText_PkmnGettingPumped, // 99
+    sText_PkmnHitWithRecoil, // 100
+    sText_PkmnProtectedItself2, // 101
+    sText_PkmnBuffetedBySandstorm, // 102
+    sText_PkmnPeltedByHail, // 103
+    sText_PkmnSeeded, // 104
+    sText_PkmnEvadedAttack, // 105
+    sText_PkmnSappedByLeechSeed, // 106
+    sText_PkmnFastAsleep, // 107
+    sText_PkmnWokeUp, // 108
+    sText_PkmnUproarKeptAwake, // 109
+    sText_PkmnWokeUpInUproar, // 110
+    sText_PkmnCausedUproar, // 111
+    sText_PkmnMakingUproar, // 112
+    sText_PkmnCalmedDown, // 113
+    sText_PkmnCantSleepInUproar, // 114
+    sText_PkmnStockpiled, // 115
+    sText_PkmnCantStockpile, // 116
+    sText_PkmnCantSleepInUproar2, // 117
+    sText_UproarKeptPkmnAwake, // 118
+    sText_PkmnStayedAwakeUsing, // 119
+    sText_PkmnStoringEnergy, // 120
+    sText_PkmnUnleashedEnergy, // 121
+    sText_PkmnFatigueConfusion, // 122
+    sText_PkmnPickedUpItem, // 123
+    sText_PkmnUnaffected, // 124
+    sText_PkmnTransformedInto, // 125
+    sText_PkmnMadeSubstitute, // 126
+    sText_PkmnHasSubstitute, // 127
+    sText_SubstituteDamaged, // 128
+    sText_PkmnSubstituteFaded, // 129
+    sText_PkmnMustRecharge, // 130
+    sText_PkmnRageBuilding, // 131
+    sText_PkmnMoveWasDisabled, // 132
+    sText_PkmnMoveIsDisabled, // 133
+    sText_PkmnMoveDisabledNoMore, // 134
+    sText_PkmnGotEncore, // 135
+    sText_PkmnEncoreEnded, // 136
+    sText_PkmnTookAim, // 137
+    sText_PkmnSketchedMove, // 138
+    sText_PkmnTryingToTakeFoe, // 139
+    sText_PkmnTookFoe, // 140
+    sText_PkmnReducedPP, // 141
+    sText_PkmnStoleItem, // 142
+    sText_TargetCantEscapeNow, // 143
+    sText_PkmnFellIntoNightmare, // 144
+    sText_PkmnLockedInNightmare, // 145
+    sText_PkmnLaidCurse, // 146
+    sText_PkmnAfflictedByCurse, // 147
+    sText_SpikesScattered, // 148
+    sText_PkmnHurtBySpikes, // 149
+    sText_PkmnIdentified, // 150
+    sText_PkmnPerishCountFell, // 151
+    sText_PkmnBracedItself, // 152
+    sText_PkmnEnduredHit, // 153
+    sText_MagnitudeStrength, // 154
+    sText_PkmnCutHPMaxedAttack, // 155
+    sText_PkmnCopiedStatChanges, // 156
+    sText_PkmnGotFree, // 157
+    sText_PkmnShedLeechSeed, // 158
+    sText_PkmnBlewAwaySpikes, // 159
+    sText_PkmnFledFromBattle, // 160
+    sText_PkmnForesawAttack, // 161
+    sText_PkmnTookAttack, // 162
+    sText_PkmnAttack, // 163
+    sText_PkmnCenterAttention, // 164
+    sText_PkmnChargingPower, // 165
+    sText_NaturePowerTurnedInto, // 166
+    sText_PkmnStatusNormal, // 167
+    sText_PkmnHasNoMovesLeft, // 168
+    sText_PkmnSubjectedToTorment, // 169
+    sText_PkmnCantUseMoveTorment, // 170
+    sText_PkmnTighteningFocus, // 171
+    sText_PkmnFellForTaunt, // 172
+    sText_PkmnCantUseMoveTaunt, // 173
+    sText_PkmnReadyToHelp, // 174
+    sText_PkmnSwitchedItems, // 175
+    sText_PkmnCopiedFoe, // 176
+    sText_PkmnMadeWish, // 177
+    sText_PkmnWishCameTrue, // 178
+    sText_PkmnPlantedRoots, // 179
+    sText_PkmnAbsorbedNutrients, // 180
+    sText_PkmnAnchoredItself, // 181
+    sText_PkmnWasMadeDrowsy, // 182
+    sText_PkmnKnockedOff, // 183
+    sText_PkmnSwappedAbilities, // 184
+    sText_PkmnSealedOpponentMove, // 185
+    sText_PkmnCantUseMoveSealed, // 186
+    sText_PkmnWantsGrudge, // 187
+    sText_PkmnLostPPGrudge, // 188
+    sText_PkmnShroudedItself, // 189
+    sText_PkmnMoveBounced, // 190
+    sText_PkmnWaitsForTarget, // 191
+    sText_PkmnSnatchedMove, // 192
+    sText_PkmnMadeItRain, // 193
+    sText_PkmnRaisedSpeed, // 194
+    sText_PkmnProtectedBy, // 195
+    sText_PkmnPreventsUsage, // 196
+    sText_PkmnRestoredHPUsing, // 197
+    sText_PkmnChangedTypeWith, // 198
+    sText_PkmnPreventsParalysisWith, // 199
+    sText_PkmnPreventsRomanceWith, // 200
+    sText_PkmnPreventsPoisoningWith, // 201
+    sText_PkmnPreventsConfusionWith, // 202
+    sText_PkmnRaisedFirePowerWith, // 203
+    sText_PkmnAnchorsItselfWith, // 204
+    sText_PkmnCutsAttackWith, // 205
+    sText_PkmnPreventsStatLossWith, // 206
+    sText_PkmnHurtsWith, // 207
+    sText_PkmnTraced, // 208
+    sText_StatSharply, // 209
+    gText_StatRose, // 210
+    sText_StatHarshly, // 211
+    sText_StatFell, // 212
+    sText_PkmnsStatChanged, // 213
+    gText_PkmnsStatChanged2, // 214
+    sText_PkmnsStatChanged3, // 215
+    sText_PkmnsStatChanged4, // 216
+    sText_CriticalHit, // 217
+    sText_OneHitKO, // 218
+    sText_123Poof, // 219
+    sText_AndEllipsis, // 220
+    sText_NotVeryEffective, // 221
+    sText_SuperEffective, // 222
+    sText_GotAwaySafely, // 223
+    sText_WildPkmnFled, // 224
+    sText_NoRunningFromTrainers, // 225
+    sText_CantEscape, // 226
+    sText_DontLeaveBirch, // 227
+    sText_ButNothingHappened, // 228
+    sText_ButItFailed, // 229
+    sText_ItHurtConfusion, // 230
+    sText_MirrorMoveFailed, // 231
+    sText_StartedToRain, // 232
+    sText_DownpourStarted, // 233
+    sText_RainContinues, // 234
+    sText_DownpourContinues, // 235
+    sText_RainStopped, // 236
+    sText_SandstormBrewed, // 237
+    sText_SandstormRages, // 238
+    sText_SandstormSubsided, // 239
+    sText_SunlightGotBright, // 240
+    sText_SunlightStrong, // 241
+    sText_SunlightFaded, // 242
+    sText_StartedHail, // 243
+    sText_HailContinues, // 244
+    sText_HailStopped, // 245
+    sText_FailedToSpitUp, // 246
+    sText_FailedToSwallow, // 247
+    sText_WindBecameHeatWave, // 248
+    sText_StatChangesGone, // 249
+    sText_CoinsScattered, // 250
+    sText_TooWeakForSubstitute, // 251
+    sText_SharedPain, // 252
+    sText_BellChimed, // 253
+    sText_FaintInThree, // 254
+    sText_NoPPLeft, // 255
+    sText_ButNoPPLeft, // 256
+    sText_PlayerUsedItem, // 257
+    sText_WallyUsedItem, // 258
+    sText_TrainerBlockedBall, // 259
+    sText_DontBeAThief, // 260
+    sText_ItDodgedBall, // 261
+    sText_YouMissedPkmn, // 262
+    sText_PkmnBrokeFree, // 263
+    sText_ItAppearedCaught, // 264
+    sText_AarghAlmostHadIt, // 265
+    sText_ShootSoClose, // 266
+    sText_GotchaPkmnCaught, // 267
+    sText_GotchaPkmnCaught2, // 268
+    sText_GiveNicknameCaptured, // 269
+    sText_PkmnSentToPC, // 270
+    sText_PkmnDataAddedToDex, // 271
+    sText_ItIsRaining, // 272
+    sText_SandstormIsRaging, // 273
+    sText_CantEscape2, // 274
+    sText_PkmnIgnoresAsleep, // 275
+    sText_PkmnIgnoredOrders, // 276
+    sText_PkmnBeganToNap, // 277
+    sText_PkmnLoafing, // 278
+    sText_PkmnWontObey, // 279
+    sText_PkmnTurnedAway, // 280
+    sText_PkmnPretendNotNotice, // 281
+    sText_EnemyAboutToSwitchPkmn, // 282
+    sText_CreptCloser, // 283
+    sText_CantGetCloser, // 284
+    sText_PkmnWatchingCarefully, // 285
+    sText_PkmnCuriousAboutX, // 286
+    sText_PkmnEnthralledByX, // 287
+    sText_PkmnIgnoredX, // 288
+    sText_ThrewPokeblockAtPkmn, // 289
+    sText_OutOfSafariBalls, // 290
+    sText_PkmnsItemCuredParalysis, // 291
+    sText_PkmnsItemCuredPoison, // 292
+    sText_PkmnsItemHealedBurn, // 293
+    sText_PkmnsItemDefrostedIt, // 294
+    sText_PkmnsItemWokeIt, // 295
+    sText_PkmnsItemSnappedOut, // 296
+    sText_PkmnsItemCuredProblem, // 297
+    sText_PkmnsItemRestoredHealth, // 298
+    sText_PkmnsItemRestoredPP, // 299
+    sText_PkmnsItemRestoredStatus, // 300
+    sText_PkmnsItemRestoredHPALittle, // 301
+    sText_ItemAllowsOnlyYMove, // 302
+    sText_PkmnHungOnWithX, // 303
+    gText_EmptyString3, // 304
+    sText_PkmnsXPreventsBurns, // 305
+    sText_PkmnsXBlocksY, // 306
+    sText_PkmnsXRestoredHPALittle2, // 307
+    sText_PkmnsXWhippedUpSandstorm, // 308
+    sText_PkmnsXPreventsYLoss, // 309
+    sText_PkmnsXInfatuatedY, // 310
+    sText_PkmnsXMadeYIneffective, // 311
+    sText_PkmnsXCuredYProblem, // 312
+    sText_ItSuckedLiquidOoze, // 313
+    sText_PkmnTransformed, // 314
+    sText_ElectricityWeakened, // 315
+    sText_FireWeakened, // 316
+    sText_PkmnHidUnderwater, // 317
+    sText_PkmnSprangUp, // 318
+    sText_HMMovesCantBeForgotten, // 319
+    sText_XFoundOneY, // 320
+    sText_PlayerDefeatedLinkTrainerTrainer1, // 321
+    sText_SoothingAroma, // 322
+    sText_ItemsCantBeUsedNow, // 323
+    sText_ForXCommaYZ, // 324
+    sText_UsingXTheYOfZN, // 325
+    sText_PkmnUsedXToGetPumped, // 326
+    sText_PkmnsXMadeYUseless, // 327
+    sText_PkmnTrappedBySandTomb, // 328
+    sText_EmptyString4, // 329
+    sText_ABoosted, // 330
+    sText_PkmnsXIntensifiedSun, // 331
+    sText_PkmnMakesGroundMiss, // 332
+    sText_YouThrowABallNowRight, // 333
+    sText_PkmnsXTookAttack, // 334
+    sText_PkmnChoseXAsDestiny, // 335
+    sText_PkmnLostFocus, // 336
+    sText_UseNextPkmn, // 337
+    sText_PkmnFledUsingIts, // 338
+    sText_PkmnFledUsing, // 339
+    sText_PkmnWasDraggedOut, // 340
+    sText_PreventedFromWorking, // 341
+    sText_PkmnsItemNormalizedStatus, // 342
+    sText_Trainer1UsedItem, // 343
+    sText_BoxIsFull, // 344
+    sText_PkmnAvoidedAttack, // 345
+    sText_PkmnsXMadeItIneffective, // 346
+    sText_PkmnsXPreventsFlinching, // 347
+    sText_PkmnAlreadyHasBurn, // 348
+    sText_StatsWontDecrease2, // 349
+    sText_PkmnsXBlocksY2, // 350
+    sText_PkmnsXWoreOff, // 351
+    sText_PkmnRaisedDefALittle, // 352
+    sText_PkmnRaisedSpDefALittle, // 353
+    sText_TheWallShattered, // 354
+    sText_PkmnsXPreventsYsZ, // 355
+    sText_PkmnsXCuredItsYProblem, // 356
+    sText_AttackerCantEscape, // 357
+    sText_PkmnObtainedX, // 358
+    sText_PkmnObtainedX2, // 359
+    sText_PkmnObtainedXYObtainedZ, // 360
+    sText_ButNoEffect, // 361
+    sText_PkmnsXHadNoEffectOnY, // 362
+    sText_TwoInGameTrainersDefeated, // 363
+    sText_Trainer2LoseText, // 364
+    sText_PkmnIncapableOfPower, // 365
+    sText_GlintAppearsInEye, // 366
+    sText_PkmnGettingIntoPosition, // 367
+    sText_PkmnBeganGrowlingDeeply, // 368
+    sText_PkmnEagerForMore, // 369
+    sText_DefeatedOpponentByReferee, // 370
+    sText_LostToOpponentByReferee, // 371
+    sText_TiedOpponentByReferee, // 372
+    sText_QuestionForfeitMatch, // 373
+    sText_ForfeitedMatch, // 374
+    gText_PkmnTransferredSomeonesPC, // 375
+    gText_PkmnTransferredLanettesPC, // 376
+    gText_PkmnBoxSomeonesPCFull, // 377
+    gText_PkmnBoxLanettesPCFull, // 378
+    sText_Trainer1WinText, // 379
+    sText_Trainer2WinText, // 380
 };
 
 const u16 gMissStringIds[] =

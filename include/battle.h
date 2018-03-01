@@ -353,6 +353,91 @@ struct BattleResults
     u8 catchAttempts[11];     // 0x36
 };
 
+struct BattleTv_Side
+{
+    u32 spikesMonId:3;
+    u32 reflectMonId:3;
+    u32 lightScreenMonId:3;
+    u32 safeguardMonId:3;
+    u32 mistMonId:3;
+    u32 futureSightMonId:3;
+    u32 doomDesireMonId:3;
+    u32 perishSongMonId:3;
+    u32 wishMonId:3;
+    u32 grudgeMonId:3;
+    u32 usedMoveSlot:2;
+    u32 spikesMoveSlot:2;
+    u32 reflectMoveSlot:2;
+    u32 lightScreenMoveSlot:2;
+    u32 safeguardMoveSlot:2;
+    u32 mistMoveSlot:2;
+    u32 futureSightMoveSlot:2;
+    u32 doomDesireMoveSlot:2;
+    u32 perishSongMoveSlot:2;
+    u32 wishMoveSlot:2;
+    u32 grudgeMoveSlot:2;
+    u32 destinyBondMonId:3;
+    u32 destinyBondMoveSlot:2;
+    u32 faintCause:4;
+    u32 faintCauseMonId:3;
+    u32 explosion:1;
+    u32 explosionMoveSlot:2;
+    u32 explosionMonId:3;
+    u32 perishSong:1;
+};
+
+struct BattleTv_Position
+{
+    u32 curseMonId:3;
+    u32 leechSeedMonId:3;
+    u32 nightmareMonId:3;
+    u32 wrapMonId:3;
+    u32 attractMonId:3;
+    u32 confusionMonId:3;
+    u32 curseMoveSlot:2;
+    u32 leechSeedMoveSlot:2;
+    u32 nightmareMoveSlot:2;
+    u32 wrapMoveSlot:2;
+    u32 attractMoveSlot:2;
+    u32 confusionMoveSlot:2;
+    u32 waterSportMoveSlot:2;
+    u32 waterSportMonId:3;
+    u32 mudSportMonId:3;
+    u32 mudSportMoveSlot:2;
+    u32 ingrainMonId:3;
+    u32 ingrainMoveSlot:2;
+    u32 attackedByMonId:3;
+    u32 attackedByMoveSlot:2;
+};
+
+struct BattleTv_Mon
+{
+    u32 psnMonId:3;
+    u32 badPsnMonId:3;
+    u32 brnMonId:3;
+    u32 prlzMonId:3;
+    u32 slpMonId:3;
+    u32 frzMonId:3;
+    u32 psnMoveSlot:2;
+    u32 badPsnMoveSlot:2;
+    u32 brnMoveSlot:2;
+    u32 prlzMoveSlot:2;
+    u32 slpMoveSlot:2;
+    u32 frzMoveSlot:2;
+};
+
+struct BattleTv
+{
+    struct BattleTv_Mon mon[2][6]; // [side][partyId]
+    struct BattleTv_Position pos[2][2]; // [side][flank]
+    struct BattleTv_Side side[2]; // [side]
+};
+
+struct BattleTvMovePoints
+{
+    s16 points[2][PARTY_SIZE * 4];
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -432,7 +517,7 @@ struct BattleStruct
     u8 field_B0;
     u8 hpScale;
     u8 synchronizeMoveEffect;
-    u8 field_B3;
+    bool8 anyMonHasTransformed;
     void (*savedCallback)(void);
     u16 usedHeldItems[MAX_BATTLERS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
@@ -457,9 +542,9 @@ struct BattleStruct
     u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
-    u8 field_1A4[96];
-    u8 field_204[104];
-    u8 field_26C[40];
+    struct BattleTvMovePoints tvMovePoints;
+    struct BattleTv tv;
+    u8 notSureWhatFieldLol[0x28];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 field_298[8];
     u8 field_2A0;

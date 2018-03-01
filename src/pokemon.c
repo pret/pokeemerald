@@ -2198,7 +2198,7 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
     (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
 }
 
-s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 bankAtk, u8 bankDef)
+s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
     s32 damage = 0;
@@ -2228,8 +2228,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (attacker->item == ITEM_ENIGMA_BERRY)
     {
-        attackerHoldEffect = gEnigmaBerries[bankAtk].holdEffect;
-        attackerHoldEffectParam = gEnigmaBerries[bankAtk].holdEffectParam;
+        attackerHoldEffect = gEnigmaBerries[battlerIdAtk].holdEffect;
+        attackerHoldEffectParam = gEnigmaBerries[battlerIdAtk].holdEffectParam;
     }
     else
     {
@@ -2239,8 +2239,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (defender->item == ITEM_ENIGMA_BERRY)
     {
-        defenderHoldEffect = gEnigmaBerries[bankDef].holdEffect;
-        defenderHoldEffectParam = gEnigmaBerries[bankDef].holdEffectParam;
+        defenderHoldEffect = gEnigmaBerries[battlerIdDef].holdEffect;
+        defenderHoldEffectParam = gEnigmaBerries[battlerIdDef].holdEffectParam;
     }
     else
     {
@@ -2251,13 +2251,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
 
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, bankAtk))
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
         attack = (110 * attack) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, bankDef))
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerIdDef))
         defense = (110 * defense) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, bankAtk))
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdAtk))
         spAttack = (110 * spAttack) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, bankDef))
+    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdDef))
         spDefense = (110 * spDefense) / 100;
 
     for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
@@ -2442,7 +2442,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
 
         // flash fire triggered
-        if ((gBattleResources->flags->flags[bankAtk] & UNKNOWN_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        if ((gBattleResources->flags->flags[battlerIdAtk] & UNKNOWN_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
     }
 

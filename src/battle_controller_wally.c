@@ -5,7 +5,7 @@
 #include "battle_interface.h"
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
-#include "battle_link_817C95C.h"
+#include "battle_tv.h"
 #include "pokemon.h"
 #include "link.h"
 #include "util.h"
