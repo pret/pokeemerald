@@ -180,7 +180,7 @@ SECTIONS {
         src/wallclock.o(.text);
         asm/rom6.o(.text);
         src/pokeblock.o(.text);
-        asm/fldeff_flash.o(.text);
+        src/fldeff_flash.o(.text);
         asm/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);
         src/birch_pc.o(.text);
@@ -258,7 +258,8 @@ SECTIONS {
         src/multiboot.o(.text);
         src/unk_81BAD84.o(.text);
         src/battle_controller_player_partner.o(.text);
-        asm/fldeff_groundshake.o(.text);
+        src/fldeff_groundshake.o(.text);
+        src/fossil_specials.o(.text);
         asm/fossil_specials.o(.text);
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
@@ -468,7 +469,7 @@ SECTIONS {
         data/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
-        data/fldeff_flash.o(.rodata);
+        src/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         data/field_specials.o(.rodata);
         data/battle_records.o(.rodata);
@@ -529,7 +530,8 @@ SECTIONS {
         src/unk_text_util_2.o(.rodata);
         src/unk_81BAD84.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
-        data/fossil_special_fldeff_groundshake.o(.rodata);
+        src/fossil_specials.o(.rodata);
+        src/fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/pokenav.o(.rodata);
