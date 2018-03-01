@@ -11,8 +11,6 @@
 
 extern struct StringInfoBattle *gStringInfo;
 
-extern const struct BattleMove gBattleMoves[];
-
 // this file's functions
 static bool8 sub_817E0B8(u16 stringId);
 static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3);
@@ -624,14 +622,12 @@ static bool8 sub_817E0B8(u16 stringId)
 {
     s32 i = 0;
 
-    while (1)
+    do
     {
         if (sUnknown_0860A8A4[i] == stringId)
             break;
         i++;
-        if (sUnknown_0860A8A4[i] == 0xFFFF)
-            break;
-    }
+    } while (sUnknown_0860A8A4[i] != 0xFFFF);
 
     if (sUnknown_0860A8A4[i] == 0xFFFF)
         return TRUE;
@@ -1401,29 +1397,27 @@ static void TrySetBattleSeminarShow(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
         return;
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
+    else if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
         return;
-    if (gBattleMons[gBattlerAttacker].statStages[STAT_ACC] <= 5)
+    else if (gBattleMons[gBattlerAttacker].statStages[STAT_ACC] <= 5)
         return;
-    if (gBattleMons[gBattlerTarget].statStages[STAT_EVASION] > 6)
+    else if (gBattleMons[gBattlerTarget].statStages[STAT_EVASION] > 6)
         return;
-    if (gCurrentMove == MOVE_HIDDEN_POWER || gCurrentMove == MOVE_WEATHER_BALL)
+    else if (gCurrentMove == MOVE_HIDDEN_POWER || gCurrentMove == MOVE_WEATHER_BALL)
         return;
-    if (gBattleTypeFlags & (BATTLE_TYPE_PALACE | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID))
+    else if (gBattleTypeFlags & (BATTLE_TYPE_PALACE | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID))
         return;
-    if (gBattleMoves[gBattleMons[gBattlerAttacker].moves[gMoveSelectionCursor[gBattlerAttacker]]].power == 0)
+    else if (gBattleMoves[gBattleMons[gBattlerAttacker].moves[gMoveSelectionCursor[gBattlerAttacker]]].power == 0)
         return;
 
     i = 0;
     currMoveSaved = gBattleMons[gBattlerAttacker].moves[gMoveSelectionCursor[gBattlerAttacker]];
-    while (1)
+    do
     {
         if (currMoveSaved == sVariableDmgMoves[i])
             break;
         i++;
-        if (sVariableDmgMoves[i] == 0xFFFF)
-            break;
-    }
+    } while (sVariableDmgMoves[i] != 0xFFFF);
 
     if (sVariableDmgMoves[i] != 0xFFFF)
         return;
@@ -1493,14 +1487,12 @@ static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride)
     else
     {
         s32 i = 0;
-        while (1)
+        do
         {
             if (moveId == sVariableDmgMoves[i])
                 break;
             i++;
-            if (sVariableDmgMoves[i] == 0xFFFF)
-                break;
-        }
+        } while (sVariableDmgMoves[i] != 0xFFFF);
 
         if (sVariableDmgMoves[i] != 0xFFFF)
         {
