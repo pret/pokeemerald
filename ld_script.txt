@@ -180,7 +180,7 @@ SECTIONS {
         src/wallclock.o(.text);
         asm/rom6.o(.text);
         src/pokeblock.o(.text);
-		src/fldeff_flash.o(.text);
+        src/fldeff_flash.o(.text);
         asm/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);
         src/birch_pc.o(.text);

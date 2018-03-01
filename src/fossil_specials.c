@@ -292,8 +292,7 @@ static void sub_81BED50(u8 taskId)
                 }
                 if(gUnknown_0203CF10[left].curr_buffer_index > (INNER_BUFFER_LENGTH - 1))
                 {
-                    Free(gUnknown_0203CF10[left].buffer);
-                    gUnknown_0203CF10[left].buffer = NULL;
+                    FREE_AND_SET_NULL(gUnknown_0203CF10[left].buffer);
                     gTasks[taskId].data[2]++;
                     if((left % 2) ==  1)
                         gUnknown_0203CF14[1]--;
@@ -313,14 +312,10 @@ static void sub_81BED50(u8 taskId)
         sub_81BEB90();
         break;
     case 5:
-        Free(gUnknown_0203CF14);
-        gUnknown_0203CF14 = NULL;
-        Free(gUnknown_0203CF10);
-        gUnknown_0203CF10 = NULL;
-        Free(gUnknown_0203CF04);
-        gUnknown_0203CF04 = NULL;
-        Free(gUnknown_0203CF08);
-        gUnknown_0203CF08 = NULL;
+        FREE_AND_SET_NULL(gUnknown_0203CF14);
+        FREE_AND_SET_NULL(gUnknown_0203CF10);
+        FREE_AND_SET_NULL(gUnknown_0203CF04);
+        FREE_AND_SET_NULL(gUnknown_0203CF08);
         break;
     case 6:
         SetGpuRegBits(REG_OFFSET_BG2CNT, 0x2);
@@ -742,14 +737,10 @@ static void sub_81BF028(u8 taskId)
         if(gSprites[gUnknown_0203CF0C->spriteId].callback != SpriteCallbackDummy)
             return;
         DestroySprite(&gSprites[gUnknown_0203CF0C->spriteId]);
-        Free(gUnknown_0203CF0C->unkC);
-        gUnknown_0203CF0C->unkC = NULL;
-        Free(gUnknown_0203CF0C->frameImage);
-        gUnknown_0203CF0C->frameImage = NULL;
-        Free(gUnknown_0203CF0C->frameImageTiles);
-        gUnknown_0203CF0C->frameImageTiles = NULL;
-        Free(gUnknown_0203CF0C);
-        gUnknown_0203CF0C = NULL;
+        FREE_AND_SET_NULL(gUnknown_0203CF0C->unkC);;
+        FREE_AND_SET_NULL(gUnknown_0203CF0C->frameImage);
+        FREE_AND_SET_NULL(gUnknown_0203CF0C->frameImageTiles);
+        FREE_AND_SET_NULL(gUnknown_0203CF0C);
         break;
     case 8:
         EnableBothScriptContexts();

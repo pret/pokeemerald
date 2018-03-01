@@ -75,7 +75,7 @@ static const u8 gCaveTransitionTiles[] = INCBIN_U8("graphics/misc/cave_transitio
 // text
 bool8 SetUpFieldMove_Flash(void)
 {
-    if(ShouldDoBrailleFlyEffect())
+    if (ShouldDoBrailleFlyEffect())
     {
         gSpecialVar_Result = GetCursorSelectionMonId();
         gUnknown_03005DB0 = FieldCallback_Teleport;
