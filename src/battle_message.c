@@ -22,9 +22,7 @@ extern u8 gUnknown_0203C7B4;
 extern struct StringInfoBattle *gStringInfo;
 
 extern const u8 gMoveNames[LAST_MOVE_INDEX + 1][13];
-extern const u8 gAbilityNames[][13];
 extern const u8 gTrainerClassNames[][13];
-extern const u8 gTypeNames[][7];
 extern const u16 gUnknown_08D85620[];
 
 // strings

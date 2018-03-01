@@ -3134,7 +3134,7 @@ _081639FC:
 	bl __umodsi3
 	cmp r0, 0
 	bne _08163A78
-	bl sub_81DA57C
+	bl UpdateGymLeaderRematch
 	b _08163A78
 	.pool
 _08163A2C:

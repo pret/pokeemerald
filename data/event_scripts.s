@@ -1161,7 +1161,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x376
 	setflag FLAG_0x374
 	setflag FLAG_0x375
-	setflag FLAG_0x3C1
+	setflag FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION
 	setflag FLAG_0x378
 	setflag FLAG_0x2F0
 	setflag FLAG_0x2F5
@@ -1177,7 +1177,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x38F
 	setflag FLAG_0x393
 	setflag FLAG_0x358
-	setflag FLAG_0x390
+	setflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
 	setflag FLAG_0x2FD
 	setflag FLAG_0x398
 	setflag FLAG_0x399
