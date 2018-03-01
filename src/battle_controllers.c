@@ -96,7 +96,6 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
 void sub_8032768(void)
 {
     s32 i;
-    u8 *data;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         sub_8184DA4(1);
@@ -119,11 +118,11 @@ void sub_8032768(void)
             sub_81B8D64(i, 0);
     }
 
-    for (i = 0; i < sizeof(gBattleStruct->field_1A4); i++)
-        *(gBattleStruct->field_1A4 + i) = 0;
+    for (i = 0; i < sizeof(gBattleStruct->tvMovePoints); i++)
+        *((u8*)(&gBattleStruct->tvMovePoints) + i) = 0;
 
-    for (i = 0; i < sizeof(gBattleStruct->field_204); i++)
-        *(gBattleStruct->field_204 + i) = 0;
+    for (i = 0; i < sizeof(gBattleStruct->tv); i++)
+        *((u8*)(&gBattleStruct->tv) + i) = 0;
 }
 
 static void InitSinglePlayerBtlControllers(void)
