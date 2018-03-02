@@ -913,7 +913,7 @@ void game_continue(u8 taskId)
         data[3] = 8;
     }
     gMultiuseListMenuTemplate = gUnknown_0858D07C;
-    gMultiuseListMenuTemplate.unk_10 = data[6];
+    gMultiuseListMenuTemplate.windowId = data[6];
     gMultiuseListMenuTemplate.totalItems = data[0];
     gMultiuseListMenuTemplate.items = gUnknown_0203A020->items;
     gMultiuseListMenuTemplate.maxShowed = data[3];
@@ -953,14 +953,14 @@ void sub_80E9E90(u8 taskId)
 
     data = gTasks[taskId].data;
     input = ListMenuHandleInputGetItemId(data[5]);
-    sub_81AE860(data[5], &data[2], &data[1]);
+    ListMenuGetScrollAndRow(data[5], &data[2], &data[1]);
     switch (input)
     {
         case -1:
             break;
         case -2:
             PlaySE(SE_SELECT);
-            sub_81AE6C8(data[5], NULL, NULL);
+            DestroyListMenuTask(data[5], NULL, NULL);
             RemoveScrollIndicatorArrowPair(data[8]);
             sub_819746C(data[6], 0);
             ClearWindowTilemap(data[6]);
@@ -1042,7 +1042,7 @@ void sub_80EA08C(u8 taskId)
 
     data = gTasks[taskId].data;
     sub_8197434(0, 0);
-    sub_81AE6C8(data[5], &data[2], &data[1]);
+    DestroyListMenuTask(data[5], &data[2], &data[1]);
     gSaveBlock1Ptr->secretBases[data[4]].sbr_field_1_6 = 0;
     game_continue(taskId);
     sub_812225C(&data[2], &data[1], data[3], data[0]);
@@ -1061,7 +1061,7 @@ void sub_80EA13C(u8 taskId)
 
     data = gTasks[taskId].data;
     sub_8197434(0, 0);
-    sub_81AE6C8(data[5], &data[2], &data[1]);
+    DestroyListMenuTask(data[5], &data[2], &data[1]);
     sub_80E9E00(taskId);
     gTasks[taskId].func = sub_80E9E90;
 }

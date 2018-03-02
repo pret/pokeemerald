@@ -830,7 +830,7 @@ void task_close_bag_menu_2(u8 taskId)
     s16* data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        sub_81AE6C8(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
+        DestroyListMenuTask(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
         if (gUnknown_0203CE54->unk0 != 0)
             SetMainCallback2(gUnknown_0203CE54->unk0);
         else
@@ -915,7 +915,7 @@ void bag_menu_inits_lists_menu(u8 taskId)
     u16* scrollPos = &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket];
     u16* cursorPos = &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
     bag_menu_RemoveBagItem_message_window(4);
-    sub_81AE6C8(data[0], scrollPos, cursorPos);
+    DestroyListMenuTask(data[0], scrollPos, cursorPos);
     sub_81AB9A8(gUnknown_0203CE58.pocket);
     sub_81ABA88(gUnknown_0203CE58.pocket);
     load_bag_item_list_buffers(gUnknown_0203CE58.pocket);
@@ -967,7 +967,7 @@ void Task_BagMenu(u8 taskId)
         {
             if (sub_81AC2C0() == 1)
             {
-                sub_81AE860(data[0], scrollPos, cursorPos);
+                ListMenuGetScrollAndRow(data[0], scrollPos, cursorPos);
                 if ((*scrollPos + *cursorPos) != gUnknown_0203CE54->unk829[gUnknown_0203CE58.pocket] - 1)
                 {
                     PlaySE(SE_SELECT);
@@ -979,7 +979,7 @@ void Task_BagMenu(u8 taskId)
         else
         {
             int r4 = ListMenuHandleInputGetItemId(data[0]);
-            sub_81AE860(data[0], scrollPos, cursorPos);
+            ListMenuGetScrollAndRow(data[0], scrollPos, cursorPos);
             switch (r4)
             {
                 case -1:
@@ -1063,7 +1063,7 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
     {
         ClearWindowTilemap(0);
         ClearWindowTilemap(1);
-        sub_81AE6C8(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
+        DestroyListMenuTask(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
         schedule_bg_copy_tilemap_to_vram(0);
         gSprites[gUnknown_0203CE54->unk806[gUnknown_0203CE54->unk81B_1 ^ 1]].invisible = 1;
         sub_81AB824();
@@ -1125,7 +1125,7 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
 	adds r1, r2, r1\n\
 	adds r3, 0x8\n\
 	adds r2, r3\n\
-	bl sub_81AE6C8\n\
+	bl DestroyListMenuTask\n\
 	movs r0, 0\n\
 	bl schedule_bg_copy_tilemap_to_vram\n\
 	ldr r3, =gSprites\n\
@@ -1340,13 +1340,13 @@ void sub_81AC3C0(u8 taskId)
         if (gMain.newKeys & SELECT_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_81AE860(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
+            ListMenuGetScrollAndRow(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
             sub_81AC498(taskId);
         }
         else
         {
             r7 = ListMenuHandleInputGetItemId(data[0]);
-            sub_81AE860(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
+            ListMenuGetScrollAndRow(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
             sub_80D4FC8(0);
             sub_80D4FEC(gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
             switch (r7)
@@ -1381,7 +1381,7 @@ void sub_81AC498(u8 taskId)
     {
         sub_80D702C(gBagPockets[gUnknown_0203CE58.pocket].itemSlots, data[1], realPos);
         gUnknown_0203CE54->unk81A = -1;
-        sub_81AE6C8(data[0], scrollPos, cursorPos);
+        DestroyListMenuTask(data[0], scrollPos, cursorPos);
         if (data[1] < realPos)
             gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]--;
         load_bag_item_list_buffers(gUnknown_0203CE58.pocket);
@@ -1399,7 +1399,7 @@ void sub_81AC590(u8 taskId)
     u16* cursorPos = &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
 
     gUnknown_0203CE54->unk81A = -1;
-    sub_81AE6C8(data[0], scrollPos, cursorPos);
+    DestroyListMenuTask(data[0], scrollPos, cursorPos);
     if (data[1] < (*scrollPos + *cursorPos))
         gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]--;
     load_bag_item_list_buffers(gUnknown_0203CE58.pocket);
@@ -1771,7 +1771,7 @@ void Task_ActuallyToss(u8 taskId)
     {
         PlaySE(SE_SELECT);
         RemoveBagItem(gSpecialVar_ItemId, data[8]);
-        sub_81AE6C8(data[0], scrollPos, cursorPos);
+        DestroyListMenuTask(data[0], scrollPos, cursorPos);
         sub_81AB9A8(gUnknown_0203CE58.pocket);
         sub_81ABA88(gUnknown_0203CE58.pocket);
         load_bag_item_list_buffers(gUnknown_0203CE58.pocket);
@@ -1791,7 +1791,7 @@ void ItemMenu_Register(u8 taskId)
         gSaveBlock1Ptr->registeredItem = 0;
     else
         gSaveBlock1Ptr->registeredItem = gSpecialVar_ItemId;
-    sub_81AE6C8(data[0], scrollPos, cursorPos);
+    DestroyListMenuTask(data[0], scrollPos, cursorPos);
     load_bag_item_list_buffers(gUnknown_0203CE58.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -2039,7 +2039,7 @@ void sub_81AD8C8(u8 taskId)
     PlaySE(SE_REGI);
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
     AddMoney(&gSaveBlock1Ptr->money, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8]);
-    sub_81AE6C8(data[0], scrollPos, cursorPos);
+    DestroyListMenuTask(data[0], scrollPos, cursorPos);
     sub_81AB9A8(gUnknown_0203CE58.pocket);
     sub_81ABA88(gUnknown_0203CE58.pocket);
     load_bag_item_list_buffers(gUnknown_0203CE58.pocket);
@@ -2212,7 +2212,7 @@ void Task_WallyTutorialBagMenu(u8 taskId)
             case 0x132:
                 PlaySE(SE_SELECT);
                 bag_menu_remove_some_window();
-                sub_81AE6C8(data[0], 0, 0);
+                DestroyListMenuTask(data[0], 0, 0);
                 RestoreBagAfterWallyTutorial();
                 unknown_ItemMenu_Confirm(taskId);
                 break;

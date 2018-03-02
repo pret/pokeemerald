@@ -41,7 +41,7 @@ extern const u8 gDaycareText_PlayOther[];
 extern u8 GetCursorSelectionMonId(void);
 extern u16 ItemIdToBattleMoveId(u16);
 extern s32 ListMenuHandleInputGetItemId(u8);
-extern void sub_81AE6C8(u8, u16*, u16*);
+extern void DestroyListMenuTask(u8, u16*, u16*);
 extern void sub_819746C(u8, bool8);
 extern void NewMenuHelpers_DrawStdWindowFrame(u8, bool8);
 extern void sub_81B9328(void);
@@ -89,7 +89,7 @@ static const struct ListMenuTemplate sDaycareListMenuLevelTemplate =
     .cursorShadowColor = 3,
     .unk_16_0 = TRUE,
     .spaceBetweenItems = 0,
-    .unk_16_7 = FALSE,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .unk_17_0 = 1,
     .cursorKind = 0
 };
@@ -1271,7 +1271,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
             gSpecialVar_Result = 2;
             break;
         }
-        sub_81AE6C8(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
         sub_819746C(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
@@ -1280,7 +1280,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         gSpecialVar_Result = 2;
-        sub_81AE6C8(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
         sub_819746C(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);

@@ -801,7 +801,7 @@ void sub_8127330(u8 taskId)
     sDecorPCBuffer->items[i].name = sDecorPCBuffer->names[i];
     sDecorPCBuffer->items[i].id = -2;
     gMultiuseListMenuTemplate = gUnknown_085A6BD0;
-    gMultiuseListMenuTemplate.unk_10 = sDecorMenuWindowIndices[1];
+    gMultiuseListMenuTemplate.windowId = sDecorMenuWindowIndices[1];
     gMultiuseListMenuTemplate.totalItems = sDecorPCBuffer->unk_520;
     gMultiuseListMenuTemplate.items = sDecorPCBuffer->items;
     gMultiuseListMenuTemplate.maxShowed = sDecorPCBuffer->unk_521;
@@ -892,7 +892,7 @@ void sub_812764C(u8 taskId)
     if (!gPaletteFade.active)
     {
         input = ListMenuHandleInputGetItemId(data[13]);
-        sub_81AE860(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
+        ListMenuGetScrollAndRow(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
         switch (input)
         {
             case -1:
@@ -905,7 +905,7 @@ void sub_812764C(u8 taskId)
                 PlaySE(SE_SELECT);
                 gCurDecorationIndex = input;
                 sub_8127554();
-                sub_81AE6C8(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
+                DestroyListMenuTask(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
                 sub_8126A58(1);
                 sub_81277A8();
                 free(sDecorPCBuffer);
@@ -1074,7 +1074,7 @@ void sub_8127A8C(u8 taskId)
     data = gTasks[taskId].data;
     sub_8127554();
     sub_81277A8();
-    sub_81AE6C8(data[13], NULL, NULL);
+    DestroyListMenuTask(data[13], NULL, NULL);
     free(sDecorPCBuffer);
     sub_8126E44(taskId);
 }

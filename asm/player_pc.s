@@ -1021,7 +1021,7 @@ sub_816B674: @ 816B674
 	mov r8, r1
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -1050,7 +1050,7 @@ _0816B6EA:
 	ldrb r0, [r4, 0xA]
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	mov r1, r8
@@ -1129,7 +1129,7 @@ sub_816B798: @ 816B798
 	ldrb r0, [r4, 0xA]
 	movs r1, 0
 	movs r2, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	bl sub_81D1EC0
@@ -2476,7 +2476,7 @@ sub_816C30C: @ 816C30C
 	ldr r1, =gUnknown_0203BCBA
 	subs r4, r1, 0x2
 	adds r2, r4, 0
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	ldrh r1, [r4, 0x2]
 	ldrh r0, [r4]
 	adds r1, r0
@@ -2497,7 +2497,7 @@ _0816C35C:
 	ldrb r0, [r4, 0xA]
 	ldr r1, =gUnknown_0203BCBA
 	subs r2, r1, 0x2
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -2584,7 +2584,7 @@ sub_816C400: @ 816C400
 	ldrb r0, [r5, 0xA]
 	movs r1, 0
 	movs r2, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	ldr r0, =gUnknown_0203BCC4
 	ldr r0, [r0]
 	movs r1, 0xCD
@@ -2691,7 +2691,7 @@ sub_816C4FC: @ 816C4FC
 	ldrb r0, [r4, 0xA]
 	ldr r1, =gUnknown_0203BCBA
 	subs r2, r1, 0x2
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	b _0816C57E
 	.pool
 _0816C530:
@@ -2702,7 +2702,7 @@ _0816C530:
 	ldr r1, =gUnknown_0203BCBA
 	subs r4, r1, 0x2
 	adds r2, r4, 0
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	ldr r0, =gUnknown_0203BCC4
 	ldr r0, [r0]
 	movs r1, 0xCD
@@ -2776,7 +2776,7 @@ sub_816C5A0: @ 816C5A0
 	ldrb r0, [r2, 0xA]
 	adds r1, r4, 0x2
 	adds r2, r4, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	cmp r5, 0
 	bne _0816C60A
 	ldr r1, =gUnknown_0203BCC4
@@ -3359,7 +3359,7 @@ sub_816CB04: @ 816CB04
 	ldrb r0, [r5, 0xA]
 	adds r1, r4, 0x2
 	adds r2, r4, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	bl sub_816C110
 	bl sub_816C140
 	bl sub_816BD04

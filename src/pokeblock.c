@@ -319,17 +319,17 @@ static const struct ListMenuTemplate sPokeblockListMenuTemplate =
     .unk_08 = NULL,
     .totalItems = 0,
     .maxShowed = 0,
-    .unk_10 = 1,
+    .windowId = 1,
     .unk_11 = 0,
     .unk_12 = 1,
     .cursor_Y = 0,
     .upText_Y = 1,
-    .cursorColor = 2,
-    .fillColor = 0,
-    .cursorShadowColor = 3,
+    .cursorPal = 2,
+    .fillPal = 0,
+    .cursorShadowPal = 3,
     .unk_16_0 = FALSE,
     .spaceBetweenItems = 32,
-    .unk_16_7 = FALSE,
+    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
     .unk_17_0 = 1,
     .cursorKind = 1
 };
@@ -869,7 +869,7 @@ static void Task_FreeDataAndExitPokeblockCase(u8 taskId)
         if (sPokeblockMenu->caseId == PBLOCK_CASE_FEEDER || sPokeblockMenu->caseId == PBLOCK_CASE_GIVE)
             gFieldCallback = sub_80AF168;
 
-        sub_81AE6C8(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+        DestroyListMenuTask(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         sub_8136418();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -893,7 +893,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
     {
         if (gMain.newKeys & SELECT_BUTTON)
         {
-            sub_81AE860(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+            ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
             if (sSavedPokeblockData.lastItemPage + sSavedPokeblockData.lastItemPos != sPokeblockMenu->itemsNo - 1)
             {
                 PlaySE(SE_SELECT);
@@ -908,7 +908,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
             u16 oldPosition = sSavedPokeblockData.lastItemPos;
             s32 itemId = ListMenuHandleInputGetItemId(data[0]);
 
-            sub_81AE860(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+            ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
             if (oldPosition != sSavedPokeblockData.lastItemPos)
             {
                 HandlePokeblockMenuCursor(oldPosition, 5);
@@ -945,7 +945,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
     if (gMain.newKeys & SELECT_BUTTON)
     {
         PlaySE(SE_SELECT);
-        sub_81AE860(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+        ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         HandlePokeblocksSwap(taskId, FALSE);
     }
     else
@@ -954,7 +954,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
         u16 var = sSavedPokeblockData.lastItemPos;
         s32 itemId = ListMenuHandleInputGetItemId(data[0]);
 
-        sub_81AE860(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+        ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         if (i != sSavedPokeblockData.lastItemPage || var != sSavedPokeblockData.lastItemPos)
         {
             for (i = 0; i < 9; i++)
@@ -996,7 +996,7 @@ static void HandlePokeblocksSwap(u8 taskId, bool8 noSwap)
     u16 swappedFromId = sSavedPokeblockData.lastItemPage + sSavedPokeblockData.lastItemPos;
 
     sPokeblockMenu->isSwapping = FALSE;
-    sub_81AE6C8(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+    DestroyListMenuTask(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
 
     if (!noSwap && data[2] != swappedFromId && data[2] != swappedFromId - 1)
     {
@@ -1112,7 +1112,7 @@ static void HandleErasePokeblock(u8 taskId)
         lastPos = &sSavedPokeblockData.lastItemPos;
         data = gTasks[taskId].data;
 
-        sub_81AE6C8(data[0], lastPage, lastPos);
+        DestroyListMenuTask(data[0], lastPage, lastPos);
         HandlePokeblockMenuCursor(*lastPos, 5);
         SetMenuItemsCountAndMaxShowed();
         sub_81362E0();
