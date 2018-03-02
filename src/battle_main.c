@@ -3590,7 +3590,6 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
 
     gBattleMainFunc = BattleIntroRecordMonsToDex;
 }
-
 #else
 ASM_DIRECT
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
@@ -3677,7 +3676,6 @@ _0803B2F2:\n\
 	.pool\n\
         .syntax divided");
 }
-
 #endif // NONMATCHING
 
 static void BattleIntroRecordMonsToDex(void)
