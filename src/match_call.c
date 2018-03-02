@@ -77,6 +77,16 @@ typedef union {
     struct MatchCallStruct4 *type4;
 } match_call_t;
 
+struct UnkStruct_08625388 {
+    u16 idx;
+    u16 v2;
+    u16 v4;
+    const u8 *v8;
+    const u8 *vC;
+    const u8 *v10;
+    const u8 *v14;
+};
+
 // Static RAM declarations
 
 // Static ROM declarations
@@ -87,10 +97,13 @@ extern const match_call_t gUnknown_086252A8[];
 extern bool32 (*const gUnknown_086252FC[])(const match_call_t);
 extern u8 (*const gUnknown_08625310[])(const match_call_t);
 extern bool32 (*const gUnknown_08625324[])(const match_call_t);
+extern bool32 (*const gUnknown_08625338[])(const match_call_t);
+extern const struct UnkStruct_08625388 gUnknown_08625388[];
+extern u32 (*const gUnknown_0862534C[])(const match_call_t);
 
 // .text
 
-s32 sub_81D1574(const match_call_t matchCall)
+u32 sub_81D1574(const match_call_t matchCall)
 {
     switch (matchCall.common->type)
     {
@@ -129,13 +142,13 @@ s32 sub_81D15CC(s32 trainerIdx)
 bool32 sub_81D15F4(u32 idx)
 {
     match_call_t matchCall;
-    s32 v0;
+    u32 i;
 
     if (idx > 20)
         return FALSE;
     matchCall = gUnknown_086252A8[idx];
-    v0 = sub_81D1574(matchCall);
-    return gUnknown_086252FC[v0](matchCall);
+    i = sub_81D1574(matchCall);
+    return gUnknown_086252FC[i](matchCall);
 }
 
 bool32 sub_81D1628(match_call_t matchCall)
@@ -176,13 +189,13 @@ bool32 sub_81D16CC(match_call_t matchCall)
 u8 sub_81D16DC(u32 idx)
 {
     match_call_t matchCall;
-    s32 v0;
+    u32 i;
 
     if (idx > 20)
         return FALSE;
     matchCall = gUnknown_086252A8[idx];
-    v0 = sub_81D1574(matchCall);
-    return gUnknown_08625310[v0](matchCall);
+    i = sub_81D1574(matchCall);
+    return gUnknown_08625310[i](matchCall);
 }
 
 u8 sub_81D1714(match_call_t matchCall)
@@ -220,13 +233,13 @@ u8 sub_81D1754(match_call_t matchCall)
 bool32 sub_81D1758(u32 idx)
 {
     match_call_t matchCall;
-    s32 v0;
+    u32 i;
 
     if (idx > 20)
         return 0;
     matchCall = gUnknown_086252A8[idx];
-    v0 = sub_81D1574(matchCall);
-    return gUnknown_08625324[v0](matchCall);
+    i = sub_81D1574(matchCall);
+    return gUnknown_08625324[i](matchCall);
 }
 
 bool32 sub_81D178C(match_call_t matchCall)
@@ -256,3 +269,83 @@ bool32 sub_81D17E4(match_call_t matchCall)
     return FALSE;
 }
 
+bool32 sub_81D17E8(u32 idx)
+{
+    match_call_t matchCall;
+    u32 i;
+
+    if (idx > 20)
+        return FALSE;
+    matchCall = gUnknown_086252A8[idx];
+    i = sub_81D1574(matchCall);
+    if (gUnknown_08625338[i](matchCall))
+        return TRUE;
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_08625388[i].idx == idx)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 sub_81D1840(match_call_t matchCall)
+{
+    return FALSE;
+}
+
+bool32 sub_81D1844(match_call_t matchCall)
+{
+    return TRUE;
+}
+
+bool32 sub_81D1848(match_call_t matchCall)
+{
+    return TRUE;
+}
+
+bool32 sub_81D184C(match_call_t matchCall)
+{
+    return FALSE;
+}
+
+bool32 sub_81D1850(match_call_t matchCall)
+{
+    return FALSE;
+}
+
+u32 sub_81D1854(u32 idx)
+{
+    match_call_t matchCall;
+    u32 i;
+
+    if (idx > 20)
+        return ARRAY_COUNT(gRematchTable);
+    matchCall = gUnknown_086252A8[idx];
+    i = sub_81D1574(matchCall);
+    return gUnknown_0862534C[i](matchCall);
+}
+
+u32 sub_81D1888(match_call_t matchCall)
+{
+    return ARRAY_COUNT(gRematchTable);
+}
+
+u32 sub_81D188C(match_call_t matchCall)
+{
+    return matchCall.type1->v4;
+}
+
+u32 sub_81D1890(match_call_t matchCall)
+{
+    return matchCall.type2->v4;
+}
+
+u32 sub_81D1894(match_call_t matchCall)
+{
+    return ARRAY_COUNT(gRematchTable);
+}
+
+u32 sub_81D1898(match_call_t matchCall)
+{
+    return ARRAY_COUNT(gRematchTable);
+}
