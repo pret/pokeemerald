@@ -32,6 +32,7 @@ bool8 ListMenuChangeSelection(struct ListMenu *list, bool8 updateCursorAndCallCa
 void ListMenuPrintEntries(struct ListMenu *list, u16 startIndex, u16 yOffset, u16 count);
 void ListMenuDrawCursor(struct ListMenu *list);
 void ListMenuCallSelectionChangedCallback(struct ListMenu *list, u8 a2);
+u8 ListMenuAddCursorObject(struct ListMenu *list, u32 cursorKind);
 
 // code
 void ListMenuDummyTask(u8 taskId)
@@ -375,4 +376,50 @@ void ListMenuPrintEntries(struct ListMenu *list, u16 startIndex, u16 yOffset, u1
         ListMenuPrint(list, list->template.items[startIndex].name, x, y);
         startIndex++;
     }
+}
+
+extern const u8 gText_SelectorArrow2[];
+
+void ListMenuDrawCursor(struct ListMenu *list)
+{
+    u8 yMultiplier = GetFontAttribute(list->template.fontId, 1) + list->template.unk_16_3;
+    u8 x = list->template.cursor_Y;
+    u8 y = list->selectedRow * yMultiplier + list->template.upText_Y;
+    switch (list->template.cursorKind)
+    {
+    case 0:
+        ListMenuPrint(list, gText_SelectorArrow2, x, y);
+        break;
+    case 1:
+        break;
+    case 2:
+        if (list->unk_1E == 0xFF)
+            list->unk_1E = ListMenuAddCursorObject(list, 0);
+        ListMenuUpdateCursorObject(list->unk_1E,
+                                   GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 - 1,
+                                   GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y - 1, 0);
+        break;
+    case 3:
+        if (list->unk_1E == 0xFF)
+            list->unk_1E = ListMenuAddCursorObject(list, 1);
+        ListMenuUpdateCursorObject(list->unk_1E,
+                                   GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 + x,
+                                   GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y, 1);
+        break;
+    }
+}
+
+u8 ListMenuAddCursorObject(struct ListMenu *list, u32 cursorKind)
+{
+    struct CursorStruct cursor;
+
+    cursor.unk0 = 0;
+    cursor.unk1 = 0xA0;
+    cursor.unk2 = GetWindowAttribute(list->template.windowId, WINDOW_WIDTH) * 8 + 2;
+    cursor.unk4 = GetFontAttribute(list->template.fontId, 1) + 2;
+    cursor.unk6 = 0x4000;
+    cursor.unk8 = 0xFFFF;
+    cursor.unkA = 0xF;
+
+    return ListMenuAddCursorObjectInternal(&cursor, cursorKind);
 }
