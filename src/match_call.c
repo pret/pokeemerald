@@ -36,7 +36,8 @@ struct MatchCallStruct1 {
     u8 v1;
     u16 flag;
     u16 v4;
-    u8 fill6[10];
+    const u8 *v8;
+    const u8 *vC;
     const match_call_sub0_t *v10;
 };
 
@@ -76,7 +77,9 @@ struct MatchCallStruct5 {
     u8 type;
     u8 v1;
     u16 flag;
-    u8 fill4[12];
+    u16 v4;
+    const u8 *v8;
+    const u8 *vC;
     const match_call_sub0_t *v10;
 };
 
@@ -107,6 +110,7 @@ struct UnkStruct_08625388 {
 void sub_81D1920(const match_call_sub0_t *, u8 *);
 void sub_81D199C(const match_call_sub0_t *, u16, u8 *);
 void sub_8197080(u8 *);
+void sub_81D1B0C(u32, const u8 **, const u8 **);
 
 // .rodata
 
@@ -118,6 +122,7 @@ extern bool32 (*const gUnknown_08625338[])(const match_call_t);
 extern const struct UnkStruct_08625388 gUnknown_08625388[];
 extern u32 (*const gUnknown_0862534C[])(const match_call_t);
 extern void (*const gUnknown_08625360[])(const match_call_t, u8 *);
+extern void (*const gUnknown_08625374[])(const match_call_t, const u8 **, const u8 **);
 
 // .text
 
@@ -569,3 +574,49 @@ ASM_DIRECT void sub_81D199C(const match_call_sub0_t *sub0, u16 idx, u8 *dest)
                     "\t.pool");
 }
 #endif
+
+void sub_81D1A78(u32 idx, const u8 **a1, const u8 **a2)
+{
+    match_call_t matchCall;
+    u32 i;
+
+    if (idx > 20)
+        return;
+    matchCall = gUnknown_086252A8[idx];
+    i = sub_81D1574(matchCall);
+    gUnknown_08625374[i](matchCall, a1, a2);
+}
+
+void sub_81D1AB0(match_call_t matchCall, const u8 **a1, const u8 **a2)
+{
+    *a1 = matchCall.type0->v4;
+    *a2 = matchCall.type0->v8;
+}
+
+void sub_81D1ABC(match_call_t matchCall, const u8 **a1, const u8 **a2)
+{
+    match_call_t _matchCall = matchCall;
+    if (_matchCall.type1->vC == NULL)
+        sub_81D1B0C(_matchCall.type1->v4, a1, a2);
+    else
+        *a2 = _matchCall.type1->vC;
+    *a1 = _matchCall.type1->v8;
+}
+
+void sub_81D1ADC(match_call_t matchCall, const u8 **a1, const u8 **a2)
+{
+    sub_81D1B0C(matchCall.type2->v4, a1, a2);
+    *a1 = matchCall.type2->v8;
+}
+
+void sub_81D1AF4(match_call_t matchCall, const u8 **a1, const u8 **a2)
+{
+    *a1 = matchCall.type0->v4;
+    *a2 = matchCall.type0->v8;
+}
+
+void sub_81D1B00(match_call_t matchCall, const u8 **a1, const u8 **a2)
+{
+    *a1 = matchCall.type0->v4;
+    *a2 = matchCall.type0->v8;
+}
