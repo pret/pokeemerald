@@ -423,8 +423,8 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	setflag FLAG_BADGE05_GET
 	special sub_813B9A0
 	call PetalburgCity_Gym_EventScript_2721F8
-	setflag FLAG_0x391
-	clearflag FLAG_0x390
+	setflag FLAG_SPRITEVIS_MAUVILLE_GYM_WATTSON
+	clearflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
 	setvar VAR_0x8008, 5
 	call PetalburgCity_Gym_EventScript_271F43
 	clearflag FLAG_0x3AC

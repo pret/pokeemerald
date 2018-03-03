@@ -9,10 +9,10 @@
 #include "strings.h"
 #include "task.h"
 
-void sub_816166C(u8 taskId);
-void sub_81617B8(u8 taskId);
-void sub_81616C0(u8 taskId);
-void sub_8161724(u8 taskId);
+static void sub_816166C(u8 taskId);
+static void sub_81616C0(u8 taskId);
+static void sub_8161724(u8 taskId);
+static void sub_81617B8(u8 taskId);
 
 bool8 SetUpFieldMove_SoftBoiled(void)
 {
@@ -63,13 +63,13 @@ void sub_81615A8(u8 taskId)
     sub_81B1F18(taskId, unk9, -1, GetMonData(&gPlayerParty[unk9], MON_DATA_MAX_HP)/5, sub_816166C);
 }
 
-void sub_816166C(u8 taskId)
+static void sub_816166C(u8 taskId)
 {
     PlaySE(SE_KAIFUKU);
     sub_81B1F18(taskId, gUnknown_0203CEC8.unkA, 1, GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAX_HP)/5, sub_81616C0);
 }
 
-void sub_81616C0(u8 taskId)
+static void sub_81616C0(u8 taskId)
 {
     GetMonNickname(&gPlayerParty[gUnknown_0203CEC8.unkA], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
@@ -78,7 +78,7 @@ void sub_81616C0(u8 taskId)
     gTasks[taskId].func = sub_8161724;
 }
 
-void sub_8161724(u8 taskId)
+static void sub_8161724(u8 taskId)
 {
     if(sub_81B1BD4() == 1)
         return;
@@ -92,7 +92,7 @@ void sub_8161724(u8 taskId)
     gTasks[taskId].func = sub_81B1370;
 }
 
-void sub_8161784(u8 taskId)
+static void sub_8161784(u8 taskId)
 {
     if(sub_81B1BD4() == 1)
         return;
@@ -100,7 +100,7 @@ void sub_8161784(u8 taskId)
     gTasks[taskId].func = sub_81B1370;
 }
 
-void sub_81617B8(u8 taskId)
+static void sub_81617B8(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81B1B5C(&gText_CantBeUsedOnPkmn, 0);

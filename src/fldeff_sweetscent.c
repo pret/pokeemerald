@@ -6,7 +6,6 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "field_screen.h"
-#include "fldeff_groundshake.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "rom6.h"
@@ -20,6 +19,8 @@ void hm2_sweet_scent(void);
 void sub_8159F5C(void);
 void sub_8159FEC(u8 taskId);
 void sub_815A090(u8 taskId);
+void sub_81BE6B8(void);
+void sub_81BE72C(void);
 
 bool8 SetUpFieldMove_SweetScent(void)
 {

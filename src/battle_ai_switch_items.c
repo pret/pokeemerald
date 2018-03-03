@@ -9,8 +9,6 @@
 #include "util.h"
 #include "constants/items.h"
 
-extern const struct BattleMove gBattleMoves[];
-extern const u8 gTypeEffectiveness[];
 extern const u8 * const gItemEffectTable[]; // todo: fix once struct is declared
 
 // this file's functions

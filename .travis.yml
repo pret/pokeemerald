@@ -13,7 +13,7 @@ cache:
   apt: true
 install:
   - pushd $HOME
-  - travis_retry wget http://download.sourceforge.net/devkitpro/devkitARM_r47-x86_64-linux.tar.bz2
+  - travis_retry wget https://downloads.sourceforge.net/project/devkitpro/devkitARM/devkitARM_r47/devkitARM_r47-x86_64-linux.tar.bz2
   - tar xf devkitARM*.tar.bz2
   - travis_retry git clone https://github.com/pret/agbcc.git
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR

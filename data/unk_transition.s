@@ -3,6 +3,7 @@
 
 	.section .rodata
 
+	.align 2, 0
 gUnknown_0862AD54:: @ 862AD54
 	.incbin "graphics/battle_transitions/frontier_transition.4bpp.lz"
 

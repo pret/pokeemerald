@@ -1,6 +1,8 @@
 #include "global.h"
 #include "window.h"
 #include "malloc.h"
+#include "bg.h"
+#include "blit.h"
 
 u32 filler_03002F58;
 u32 filler_03002F5C;
@@ -14,19 +16,6 @@ extern u32 gUnneededFireRedVariable;
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 EWRAM_DATA static struct Window* sWindowPtr = NULL;
 EWRAM_DATA static u16 sWindowSize = 0;
-
-extern void* GetBgTilemapBuffer(u8 bg);
-extern int DummiedOutFireRedLeafGreenTileAllocFunc(int, int, int, int);
-extern u16 GetBgAttribute(u8 bg, u8 attributeId);
-extern void SetBgTilemapBuffer(u8 bg, void *tilemap);
-extern void CopyBgTilemapBufferToVram(u8 bg);
-extern u8 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset);
-extern void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, u16 tileNumDelta);
-extern void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette);
-extern void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey);
-extern void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteNum);
-extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
-extern void FillBitmapRect8Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 
 static u8 GetNumActiveWindowsOnBg(u8 bgId);
 static u8 GetNumActiveWindowsOnBg8Bit(u8 bgId);
@@ -130,13 +119,13 @@ u16 AddWindow(const struct WindowTemplate *template)
     u8 *allocatedTilemapBuffer;
     int i;
 
-    for (win = 0; win < 0x20; ++win)
+    for (win = 0; win < WINDOWS_MAX; ++win)
     {
         if ((bgLayer = gWindows[win].window.priority) == 0xFF)
             break;
     }
 
-    if (win == 0x20)
+    if (win == WINDOWS_MAX)
         return 0xFF;
 
     bgLayer = template->priority;
@@ -199,13 +188,13 @@ int AddWindowWithoutTileMap(const struct WindowTemplate *template)
     u8 bgLayer;
     int allocatedBaseBlock;
 
-    for (win = 0; win < 0x20; ++win)
+    for (win = 0; win < WINDOWS_MAX; ++win)
     {
         if (gWindows[win].window.priority == 0xFF)
             break;
     }
 
-    if (win == 0x20)
+    if (win == WINDOWS_MAX)
         return 0xFF;
 
     bgLayer = template->priority;

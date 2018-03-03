@@ -22,6 +22,7 @@ extern const u8 EventScript_2713D1[];
 extern const u8 EventScript_2766A2[];
 extern const u8 EventScript_2766A6[];
 
+
 extern const u8 gTVBravoTrainerText00[];
 extern const u8 gTVBravoTrainerText01[];
 extern const u8 gTVBravoTrainerText02[];
@@ -381,6 +382,9 @@ extern const u8 SecretBase_RedCave1_Text_2751E1[];
 extern const u8 SecretBase_RedCave1_Text_2754F6[];
 extern const u8 SecretBase_RedCave1_Text_2758CC[];
 
+//field effects
 extern const u8 FieryPath_EventScript_2908FD[];
 extern const u8 EventScript_290CAE[];
+extern const u8 EventScript_2926F8[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

@@ -48,15 +48,6 @@ extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-struct TrainerMoney
-{
-    u8 classId;
-    u8 value;
-};
-
-extern const struct BattleMove gBattleMoves[];
-extern const u8 gTypeEffectiveness[336];
-extern const struct TrainerMoney gTrainerMoneyTable[];
 extern const u8* const gBattleScriptsForMoveEffects[];
 
 // functions
@@ -4436,31 +4427,34 @@ static void atk47_setgraphicalstatchangevalues(void)
     gBattlescriptCurrInstr++;
 }
 
-#ifdef NONMATCHING
 static void atk48_playstatchangeanimation(void)
 {
     u32 currStat = 0;
-    s16 statAnimId = 0;
-    s16 checkingStatAnimId = 0;
-    s32 changeableStats = 0;
-    u32 statsToCheck = 0;
+    u16 statAnimId = 0;
+    s32 changeableStatsCount = 0;
+    u8 statsToCheck = 0;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     statsToCheck = gBattlescriptCurrInstr[2];
 
     if (gBattlescriptCurrInstr[3] & ATK48_STAT_NEGATIVE) // goes down
     {
-        checkingStatAnimId = (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO) ? 0x2D : 0x15;
+        s16 startingStatAnimId;
+        if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+            startingStatAnimId = 0x2D;
+        else
+            startingStatAnimId = 0x15;
+
         while (statsToCheck != 0)
         {
             if (statsToCheck & 1)
             {
-                if (!(gBattlescriptCurrInstr[3] & ATK48_LOWER_FAIL_CHECK))
+                if (gBattlescriptCurrInstr[3] & ATK48_DONT_CHECK_LOWER)
                 {
                     if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
                     {
-                        statAnimId = checkingStatAnimId;
-                        changeableStats++;
+                        statAnimId = startingStatAnimId + currStat;
+                        changeableStatsCount++;
                     }
                 }
                 else if (!gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].mistTimer
@@ -4471,15 +4465,15 @@ static void atk48_playstatchangeanimation(void)
                 {
                     if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
                     {
-                        statAnimId = checkingStatAnimId;
-                        changeableStats++;
+                        statAnimId = startingStatAnimId + currStat;
+                        changeableStatsCount++;
                     }
                 }
             }
-            statsToCheck >>= 1, checkingStatAnimId++, currStat++;
+            statsToCheck >>= 1, currStat++;
         }
 
-        if (changeableStats > 1) // more than one stat, so the color is gray
+        if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
             if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
                 statAnimId = 0x3A;
@@ -4489,18 +4483,23 @@ static void atk48_playstatchangeanimation(void)
     }
     else // goes up
     {
-        checkingStatAnimId = (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO) ? 0x26 : 0xE;
+        s16 startingStatAnimId;
+        if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+            startingStatAnimId = 0x26;
+        else
+            startingStatAnimId = 0xE;
+
         while (statsToCheck != 0)
         {
             if (statsToCheck & 1 && gBattleMons[gActiveBattler].statStages[currStat] < 0xC)
             {
-                statAnimId = checkingStatAnimId;
-                changeableStats++;
+                statAnimId = startingStatAnimId + currStat;
+                changeableStatsCount++;
             }
-            statsToCheck >>= 1, checkingStatAnimId += 1, currStat++;
+            statsToCheck >>= 1, currStat++;
         }
 
-        if (changeableStats > 1) // more than one stat, so the color is gray
+        if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
             if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
                 statAnimId = 0x38;
@@ -4509,15 +4508,15 @@ static void atk48_playstatchangeanimation(void)
         }
     }
 
-    if (gBattlescriptCurrInstr[3] & ATK48_BIT_x4 && changeableStats < 2)
+    if (gBattlescriptCurrInstr[3] & ATK48_BIT_x4 && changeableStatsCount < 2)
     {
         gBattlescriptCurrInstr += 4;
     }
-    else if (changeableStats != 0 && gBattleScripting.field_1B == 0)
+    else if (changeableStatsCount != 0 && gBattleScripting.field_1B == 0)
     {
         BtlController_EmitBattleAnimation(0, B_ANIM_STATS_CHANGE, statAnimId);
         MarkBattlerForControllerExec(gActiveBattler);
-        if (gBattlescriptCurrInstr[3] & ATK48_BIT_x4 && changeableStats > 1)
+        if (gBattlescriptCurrInstr[3] & ATK48_BIT_x4 && changeableStatsCount > 1)
             gBattleScripting.field_1B = 1;
         gBattlescriptCurrInstr += 4;
     }
@@ -4526,261 +4525,6 @@ static void atk48_playstatchangeanimation(void)
         gBattlescriptCurrInstr += 4;
     }
 }
-#else
-ASM_DIRECT
-static void atk48_playstatchangeanimation(void)
-{
-    asm("\n\
-    .syntax unified\n\
-    push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x4\n\
-	movs r7, 0\n\
-	movs r0, 0\n\
-	mov r8, r0\n\
-	movs r3, 0\n\
-	ldr r5, =gBattlescriptCurrInstr\n\
-	ldr r0, [r5]\n\
-	ldrb r0, [r0, 0x1]\n\
-	str r3, [sp]\n\
-	bl GetBattlerForBattleScript\n\
-	ldr r2, =gActiveBattler\n\
-	strb r0, [r2]\n\
-	ldr r0, [r5]\n\
-	ldrb r4, [r0, 0x2]\n\
-	ldrb r1, [r0, 0x3]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	ldr r3, [sp]\n\
-	cmp r0, 0\n\
-	beq _0804BAEC\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	movs r1, 0x15\n\
-	cmp r0, 0\n\
-	beq _0804BA18\n\
-	movs r1, 0x2D\n\
-_0804BA18:\n\
-	cmp r4, 0\n\
-	beq _0804BAC0\n\
-	movs r0, 0x1\n\
-	mov r10, r0\n\
-	ldr r0, =gBattleMons + 0x18\n\
-	mov r9, r0\n\
-	lsls r5, r1, 16\n\
-_0804BA26:\n\
-	adds r0, r4, 0\n\
-	mov r1, r10\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0804BAB2\n\
-	ldr r0, =gBattlescriptCurrInstr\n\
-	ldr r0, [r0]\n\
-	ldrb r1, [r0, 0x3]\n\
-	movs r0, 0x8\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0804BA58\n\
-	ldr r0, =gActiveBattler\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x58\n\
-	muls r0, r1\n\
-	adds r0, r7, r0\n\
-	b _0804BAA0\n\
-	.pool\n\
-_0804BA58:\n\
-	ldr r6, =gActiveBattler\n\
-	ldrb r0, [r6]\n\
-	str r3, [sp]\n\
-	bl GetBattlerPosition\n\
-	mov r1, r10\n\
-	ands r1, r0\n\
-	lsls r0, r1, 1\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	ldr r1, =gSideTimers\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0x4]\n\
-	ldr r3, [sp]\n\
-	cmp r0, 0\n\
-	bne _0804BAB2\n\
-	ldr r0, =gBattleMons\n\
-	ldrb r2, [r6]\n\
-	movs r1, 0x58\n\
-	muls r2, r1\n\
-	adds r0, r2, r0\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x1D\n\
-	beq _0804BAB2\n\
-	cmp r0, 0x49\n\
-	beq _0804BAB2\n\
-	cmp r0, 0x33\n\
-	bne _0804BA96\n\
-	cmp r7, 0x6\n\
-	beq _0804BAB2\n\
-_0804BA96:\n\
-	cmp r0, 0x34\n\
-	bne _0804BA9E\n\
-	cmp r7, 0x1\n\
-	beq _0804BAB2\n\
-_0804BA9E:\n\
-	adds r0, r7, r2\n\
-_0804BAA0:\n\
-	add r0, r9\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0\n\
-	ble _0804BAB2\n\
-	lsrs r0, r5, 16\n\
-	mov r8, r0\n\
-	adds r3, 0x1\n\
-_0804BAB2:\n\
-	lsrs r4, 1\n\
-	movs r1, 0x80\n\
-	lsls r1, 9\n\
-	adds r5, r1\n\
-	adds r7, 0x1\n\
-	cmp r4, 0\n\
-	bne _0804BA26\n\
-_0804BAC0:\n\
-	ldr r0, =gBattlescriptCurrInstr\n\
-	mov r9, r0\n\
-	cmp r3, 0x1\n\
-	ble _0804BB4E\n\
-	ldr r0, [r0]\n\
-	ldrb r1, [r0, 0x3]\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	movs r1, 0x39\n\
-	mov r8, r1\n\
-	cmp r0, 0\n\
-	beq _0804BB4E\n\
-	movs r0, 0x3A\n\
-	b _0804BB4C\n\
-	.pool\n\
-_0804BAEC:\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	movs r1, 0xE\n\
-	cmp r0, 0\n\
-	beq _0804BAF8\n\
-	movs r1, 0x26\n\
-_0804BAF8:\n\
-	mov r9, r5\n\
-	cmp r4, 0\n\
-	beq _0804BB34\n\
-	ldr r6, =gBattleMons + 0x18\n\
-	adds r5, r2, 0\n\
-	lsls r2, r1, 16\n\
-_0804BB04:\n\
-	movs r0, 0x1\n\
-	ands r0, r4\n\
-	cmp r0, 0\n\
-	beq _0804BB26\n\
-	ldrb r1, [r5]\n\
-	movs r0, 0x58\n\
-	muls r0, r1\n\
-	adds r0, r7, r0\n\
-	adds r0, r6\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0xB\n\
-	bgt _0804BB26\n\
-	lsrs r1, r2, 16\n\
-	mov r8, r1\n\
-	adds r3, 0x1\n\
-_0804BB26:\n\
-	lsrs r4, 1\n\
-	movs r0, 0x80\n\
-	lsls r0, 9\n\
-	adds r2, r0\n\
-	adds r7, 0x1\n\
-	cmp r4, 0\n\
-	bne _0804BB04\n\
-_0804BB34:\n\
-	cmp r3, 0x1\n\
-	ble _0804BB4E\n\
-	mov r1, r9\n\
-	ldr r0, [r1]\n\
-	ldrb r1, [r0, 0x3]\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	movs r1, 0x37\n\
-	mov r8, r1\n\
-	cmp r0, 0\n\
-	beq _0804BB4E\n\
-	movs r0, 0x38\n\
-_0804BB4C:\n\
-	mov r8, r0\n\
-_0804BB4E:\n\
-	mov r1, r9\n\
-	ldr r2, [r1]\n\
-	ldrb r1, [r2, 0x3]\n\
-	movs r0, 0x4\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0804BB6C\n\
-	cmp r3, 0x1\n\
-	bgt _0804BB6C\n\
-	adds r0, r2, 0x4\n\
-	mov r1, r9\n\
-	b _0804BBBA\n\
-	.pool\n\
-_0804BB6C:\n\
-	cmp r3, 0\n\
-	beq _0804BBB4\n\
-	ldr r4, =gBattleScripting\n\
-	ldrb r0, [r4, 0x1B]\n\
-	cmp r0, 0\n\
-	bne _0804BBB4\n\
-	movs r0, 0\n\
-	movs r1, 0x1\n\
-	mov r2, r8\n\
-	str r3, [sp]\n\
-	bl BtlController_EmitBattleAnimation\n\
-	ldr r0, =gActiveBattler\n\
-	ldrb r0, [r0]\n\
-	bl MarkBattlerForControllerExec\n\
-	ldr r0, =gBattlescriptCurrInstr\n\
-	ldr r0, [r0]\n\
-	ldrb r1, [r0, 0x3]\n\
-	movs r0, 0x4\n\
-	ands r0, r1\n\
-	ldr r3, [sp]\n\
-	cmp r0, 0\n\
-	beq _0804BBA4\n\
-	cmp r3, 0x1\n\
-	ble _0804BBA4\n\
-	movs r0, 0x1\n\
-	strb r0, [r4, 0x1B]\n\
-_0804BBA4:\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	b _0804BBB6\n\
-	.pool\n\
-_0804BBB4:\n\
-	mov r1, r9\n\
-_0804BBB6:\n\
-	ldr r0, [r1]\n\
-	adds r0, 0x4\n\
-_0804BBBA:\n\
-	str r0, [r1]\n\
-	add sp, 0x4\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided");
-}
-#endif // NONMATCHING
 
 #define ATK49_LAST_CASE 17
 
@@ -5271,10 +5015,9 @@ static void atk4E_switchinanim(void)
 
 static void atk4F_jumpifcantswitch(void)
 {
-    s32 val = 0;
-    s32 compareVar = 0;
-    struct Pokemon *party = NULL;
-    s32 r7 = 0;
+    s32 i;
+    s32 lastMonId;
+    struct Pokemon *party;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(ATK4F_DONT_CHECK_STATUSES));
 
@@ -5294,20 +5037,20 @@ static void atk4F_jumpifcantswitch(void)
         else
             party = gPlayerParty;
 
-        val = 0;
-        if (2 & gActiveBattler)
-            val = 3;
+        i = 0;
+        if (gActiveBattler & 2)
+            i = 3;
 
-        for (compareVar = val + 3; val < compareVar; val++)
+        for (lastMonId = i + 3; i < lastMonId; i++)
         {
-            if (GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[val], MON_DATA_IS_EGG)
-             && GetMonData(&party[val], MON_DATA_HP) != 0
-             && gBattlerPartyIndexes[gActiveBattler] != val)
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
+             && gBattlerPartyIndexes[gActiveBattler] != i)
                 break;
         }
 
-        if (val == compareVar)
+        if (i == lastMonId)
             gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
         else
             gBattlescriptCurrInstr += 6;
@@ -5320,18 +5063,18 @@ static void atk4F_jumpifcantswitch(void)
             {
                 party = gPlayerParty;
 
-                val = 0;
+                i = 0;
                 if (sub_806D82C(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
-                    val = 3;
+                    i = 3;
             }
             else
             {
                 party = gEnemyParty;
 
                 if (gActiveBattler == 1)
-                    val = 0;
+                    i = 0;
                 else
-                    val = 3;
+                    i = 3;
             }
         }
         else
@@ -5341,22 +5084,21 @@ static void atk4F_jumpifcantswitch(void)
             else
                 party = gPlayerParty;
 
-
-            val = 0;
+            i = 0;
             if (sub_806D82C(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
-                val = 3;
+                i = 3;
         }
 
-        for (compareVar = val + 3; val < compareVar; val++)
+        for (lastMonId = i + 3; i < lastMonId; i++)
         {
-            if (GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[val], MON_DATA_IS_EGG)
-             && GetMonData(&party[val], MON_DATA_HP) != 0
-             && gBattlerPartyIndexes[gActiveBattler] != val)
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
+             && gBattlerPartyIndexes[gActiveBattler] != i)
                 break;
         }
 
-        if (val == compareVar)
+        if (i == lastMonId)
             gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
         else
             gBattlescriptCurrInstr += 6;
@@ -5365,58 +5107,61 @@ static void atk4F_jumpifcantswitch(void)
     {
         party = gEnemyParty;
 
-        val = 0;
-        if (gActiveBattler == 3)
-            val = 3;
+        i = 0;
+        if (gActiveBattler == B_POSITION_OPPONENT_RIGHT)
+            i = 3;
 
-        for (compareVar = val + 3; val < compareVar; val++)
+        for (lastMonId = i + 3; i < lastMonId; i++)
         {
-            if (GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[val], MON_DATA_IS_EGG)
-             && GetMonData(&party[val], MON_DATA_HP) != 0
-             && gBattlerPartyIndexes[gActiveBattler] != val)
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
+             && gBattlerPartyIndexes[gActiveBattler] != i)
                 break;
         }
 
-        if (val == compareVar)
+        if (i == lastMonId)
             gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
         else
             gBattlescriptCurrInstr += 6;
     }
     else
     {
+        u8 battlerIn1, battlerIn2;
+
         if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
         {
-            r7 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                compareVar = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
             else
-                compareVar = r7;
+                battlerIn2 = battlerIn1;
 
             party = gEnemyParty;
         }
         else
         {
-            r7 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+            battlerIn1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                compareVar = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+                battlerIn2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
             else
-                compareVar = r7;
+                battlerIn2 = battlerIn1;
 
             party = gPlayerParty;
         }
-        for (val = 0; val < 6; val++)
+
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&party[val], MON_DATA_HP) != 0
-             && GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[val], MON_DATA_IS_EGG)
-             && val != gBattlerPartyIndexes[r7] && val != gBattlerPartyIndexes[compareVar])
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
                 break;
         }
 
-        if (val == 6)
+        if (i == 6)
             gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
         else
             gBattlescriptCurrInstr += 6;
