@@ -8,11 +8,11 @@
 
 // Static type declarations
 
-struct MatchCallSusbtruct0 {
+typedef struct MatchCallSusbtruct0 {
     const u8 *text;
     u16 v4;
     u16 v6;
-};
+} match_call_sub0_t;
 
 struct MatchCallStructCommon {
     u8 type;
@@ -26,7 +26,7 @@ struct MatchCallStruct0 {
     u16 flag;
     const u8 *v4;
     const u8 *v8;
-    const struct MatchCallSusbtruct0 *vC;
+    const match_call_sub0_t *vC;
 };
 
 struct MatchCallStruct1 {
@@ -34,6 +34,8 @@ struct MatchCallStruct1 {
     u8 v1;
     u16 flag;
     u16 v4;
+    u8 fill6[10];
+    const match_call_sub0_t *v10;
 };
 
 struct MatchCallSubstruct2 {
@@ -47,7 +49,7 @@ struct MatchCallStruct2 {
     u16 flag;
     u16 v4;
     const u8 *v8;
-    const u8 *vC;
+    const match_call_sub0_t *vC;
     const struct MatchCallSubstruct2 *v10;
 };
 
@@ -65,7 +67,15 @@ struct MatchCallStruct4 {
     u16 flag;
     const u8 *v4;
     const u8 *v8;
-    const struct MatchCallSusbtruct0 *vC;
+    const match_call_sub0_t *vC;
+};
+
+struct MatchCallStruct5 {
+    u8 type;
+    u8 v1;
+    u16 flag;
+    u8 fill4[12];
+    const match_call_sub0_t *v10;
 };
 
 typedef union {
@@ -75,6 +85,7 @@ typedef union {
     struct MatchCallStruct2 *type2;
     struct MatchCallStruct3 *type3;
     struct MatchCallStruct4 *type4;
+    struct MatchCallStruct5 *type5;
 } match_call_t;
 
 struct UnkStruct_08625388 {
@@ -91,6 +102,10 @@ struct UnkStruct_08625388 {
 
 // Static ROM declarations
 
+void sub_81D1920(const match_call_sub0_t *, u8 *);
+void sub_81D199C(const match_call_sub0_t *, u16, u8 *);
+void sub_8197080(u8 *);
+
 // .rodata
 
 extern const match_call_t gUnknown_086252A8[];
@@ -100,6 +115,7 @@ extern bool32 (*const gUnknown_08625324[])(const match_call_t);
 extern bool32 (*const gUnknown_08625338[])(const match_call_t);
 extern const struct UnkStruct_08625388 gUnknown_08625388[];
 extern u32 (*const gUnknown_0862534C[])(const match_call_t);
+extern void (*const gUnknown_08625360[])(const match_call_t, u8 *);
 
 // .text
 
@@ -348,4 +364,44 @@ u32 sub_81D1894(match_call_t matchCall)
 u32 sub_81D1898(match_call_t matchCall)
 {
     return ARRAY_COUNT(gRematchTable);
+}
+
+void sub_81D189C(u32 idx, u8 *dest)
+{
+    match_call_t matchCall;
+    u32 i;
+
+    if (idx > 20)
+        return;
+    matchCall = gUnknown_086252A8[idx];
+    i = sub_81D1574(matchCall);
+    gUnknown_08625360[i](matchCall, dest);
+}
+
+void sub_81D18D0(match_call_t matchCall, u8 *dest)
+{
+    sub_81D1920(matchCall.type0->vC, dest);
+}
+
+void sub_81D18DC(match_call_t matchCall, u8 *dest)
+{
+    if (matchCall.common->type != 5)
+        sub_81D1920(matchCall.type5->v10, dest);
+    else
+        sub_81D199C(matchCall.type1->v10, matchCall.type1->v4, dest);
+}
+
+void sub_81D18FC(match_call_t matchCall, u8 *dest)
+{
+    sub_81D1920(matchCall.type2->vC, dest);
+}
+
+void sub_81D1908(match_call_t matchCall, u8 *dest)
+{
+    sub_81D1920(matchCall.type4->vC, dest);
+}
+
+void sub_81D1914(match_call_t matchCall, u8 *dest)
+{
+    sub_8197080(dest);
 }
