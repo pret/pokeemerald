@@ -113,7 +113,7 @@ void sub_812719C(u8 taskId);
 void sub_81271CC(u8 taskId);
 void sub_8127268(u8 taskId);
 void sub_8127454(u8 *dest, u16 decorId);
-void sub_8127480(u32 a0, bool8 flag, struct ListMenu *menu);
+void sub_8127480(s32 a0, bool8 flag, struct ListMenu *menu);
 void sub_81274A0(u8 a0, s32 a1, u8 a2);
 void sub_8127620(u8 taskId);
 void sub_812764C(u8 taskId);
@@ -813,7 +813,7 @@ void sub_8127454(u8 *dest, u16 decorId)
     StringAppend(dest, gDecorations[decorId].name);
 }
 
-void sub_8127480(u32 a0, bool8 flag, struct ListMenu *menu)
+void sub_8127480(s32 a0, bool8 flag, struct ListMenu *menu)
 {
     if (flag != TRUE)
     {

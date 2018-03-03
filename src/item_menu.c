@@ -128,7 +128,7 @@ void sub_81ABAC4(void);
 void sub_81ABAE0(void);
 u8 sub_81AB1F0(u8);
 void sub_81AC23C(u8);
-void bag_menu_change_item_callback(u32 a, bool8 b, struct ListMenu*);
+void bag_menu_change_item_callback(s32 a, bool8 b, struct ListMenu*);
 void sub_81AB520(u8 rboxId, int item_index_in_pocket, u8 a);
 void ItemMenu_UseOutOfBattle(u8 taskId);
 void ItemMenu_Toss(u8 taskId);
@@ -688,7 +688,7 @@ void get_name(s8 *dest, u16 itemId)
     }
 }
 
-void bag_menu_change_item_callback(u32 a, bool8 b, struct ListMenu *unused)
+void bag_menu_change_item_callback(s32 a, bool8 b, struct ListMenu *unused)
 {
     if (b != 1)
     {

@@ -6,8 +6,8 @@
 #include "main.h"
 #include "task.h"
 #include "palette.h"
-#include "list_menu.h"
 #include "window.h"
+#include "list_menu.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "menu_indicators.h"
@@ -66,7 +66,7 @@ EWRAM_DATA struct SecretBaseListMenuBuffer *gUnknown_0203A020 = NULL;
 
 void sub_80E9C9C(u8 taskId);
 void game_continue(u8 taskId);
-void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu);
+void sub_80E9DEC(s32 a0, bool8 flag, struct ListMenu *menu);
 void sub_80E9E00(u8 taskId);
 void sub_80E9E44(u8 taskId);
 void sub_80E9E90(u8 taskId);
@@ -919,7 +919,7 @@ void game_continue(u8 taskId)
     gMultiuseListMenuTemplate.maxShowed = data[3];
 }
 
-void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu)
+void sub_80E9DEC(s32 a0, bool8 flag, struct ListMenu *menu)
 {
     if (flag != TRUE)
     {

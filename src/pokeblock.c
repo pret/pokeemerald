@@ -91,7 +91,7 @@ static void sub_81362E0(void);
 static void sub_8136344(void);
 static void HandlePokeblockListMenuItems(void);
 static void sub_81363BC(void);
-static void MovePokeblockMenuCursor(u32 pkblId, bool8 arg1, struct ListMenu *arg2);
+static void MovePokeblockMenuCursor(s32 pkblId, bool8 arg1, struct ListMenu *arg2);
 static void PutPokeblockInfoText(void);
 static void HandlePokeblockMenuCursor(u16 cursorPos, u16 arg1);
 static void PutPokeblockListMenuString(u8 *dst, u16 pkblId);
@@ -322,15 +322,15 @@ static const struct ListMenuTemplate sPokeblockListMenuTemplate =
     .windowId = 1,
     .unk_11 = 0,
     .unk_12 = 1,
-    .cursor_Y = 0,
+    .cursor_X = 0,
     .upText_Y = 1,
     .cursorPal = 2,
-    .fillPal = 0,
+    .fillValue = 0,
     .cursorShadowPal = 3,
-    .unk_16_0 = FALSE,
-    .spaceBetweenItems = 32,
+    .lettersSpacing = 0,
+    .unk_16_3 = 0,
     .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
-    .unk_17_0 = 1,
+    .fontId = 1,
     .cursorKind = 1
 };
 
@@ -620,7 +620,7 @@ static void HandlePokeblockListMenuItems(void)
     sPokeblockMenu->items[i].id = LIST_B_PRESSED;
 
     gMultiuseListMenuTemplate = sPokeblockListMenuTemplate;
-    gMultiuseListMenuTemplate.unk_17_0 = 7;
+    gMultiuseListMenuTemplate.fontId = 7;
     gMultiuseListMenuTemplate.totalItems = sPokeblockMenu->itemsNo;
     gMultiuseListMenuTemplate.items = sPokeblockMenu->items;
     gMultiuseListMenuTemplate.maxShowed = sPokeblockMenu->maxShowed;
@@ -639,7 +639,7 @@ static void PutPokeblockListMenuString(u8 *dst, u16 pkblId)
     StringExpandPlaceholders(txtPtr, gText_LvVar1);
 }
 
-static void MovePokeblockMenuCursor(u32 pkblId, bool8 arg1, struct ListMenu *arg2)
+static void MovePokeblockMenuCursor(s32 pkblId, bool8 arg1, struct ListMenu *arg2)
 {
     if (arg1 != TRUE)
     {
