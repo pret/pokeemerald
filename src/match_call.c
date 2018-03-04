@@ -113,6 +113,48 @@ struct UnkStruct_08625388 {
 
 // Static ROM declarations
 
+bool32 sub_81D1628(match_call_t);
+bool32 sub_81D164C(match_call_t);
+bool32 sub_81D1670(match_call_t);
+bool32 sub_81D1694(match_call_t);
+bool32 sub_81D16CC(match_call_t);
+
+u8 sub_81D1714(match_call_t);
+u8 sub_81D1718(match_call_t);
+u8 sub_81D171C(match_call_t);
+u8 sub_81D1750(match_call_t);
+u8 sub_81D1754(match_call_t);
+
+bool32 sub_81D178C(match_call_t);
+bool32 sub_81D1790(match_call_t);
+bool32 sub_81D17C0(match_call_t);
+bool32 sub_81D17E0(match_call_t);
+bool32 sub_81D17E4(match_call_t);
+
+bool32 sub_81D1840(match_call_t);
+bool32 sub_81D1844(match_call_t);
+bool32 sub_81D1848(match_call_t);
+bool32 sub_81D184C(match_call_t);
+bool32 sub_81D1850(match_call_t);
+
+u32 sub_81D1888(match_call_t);
+u32 sub_81D188C(match_call_t);
+u32 sub_81D1890(match_call_t);
+u32 sub_81D1894(match_call_t);
+u32 sub_81D1898(match_call_t);
+
+void sub_81D18D0(match_call_t, u8 *);
+void sub_81D18DC(match_call_t, u8 *);
+void sub_81D18FC(match_call_t, u8 *);
+void sub_81D1908(match_call_t, u8 *);
+void sub_81D1914(match_call_t, u8 *);
+
+void sub_81D1AB0(match_call_t, const u8 **, const u8 **);
+void sub_81D1ABC(match_call_t, const u8 **, const u8 **);
+void sub_81D1ADC(match_call_t, const u8 **, const u8 **);
+void sub_81D1AF4(match_call_t, const u8 **, const u8 **);
+void sub_81D1B00(match_call_t, const u8 **, const u8 **);
+
 void sub_81D1920(const match_call_sub0_t *, u8 *);
 void sub_81D199C(const match_call_sub0_t *, u16, u8 *);
 void sub_8197080(u8 *);
@@ -259,7 +301,20 @@ extern const u8 gText_Glacia_Pokenav_2B35E4[];
 extern const u8 gText_Drake_Pokenav_2B368B[];
 extern const u8 gText_Wallace_Pokenav_2B3790[];
 extern const u8 gUnknown_085EFBC0[];
-
+extern const u8 gUnknown_085ED453[];
+extern const u8 gUnknown_085ED46B[];
+extern const u8 gUnknown_085ED483[];
+extern const u8 gUnknown_085ED49D[];
+extern const u8 gUnknown_085ED4B3[];
+extern const u8 gUnknown_085ED4CE[];
+extern const u8 gUnknown_085ED4E3[];
+extern const u8 gUnknown_085ED4FA[];
+extern const u8 gUnknown_085ED516[];
+extern const u8 gUnknown_085ED52F[];
+extern const u8 gUnknown_085ED547[];
+extern const u8 gUnknown_085ED563[];
+extern const u8 gUnknown_085ED579[];
+extern const u8 gUnknown_085ED58F[];
 // .rodata
 
 const match_call_sub0_t gUnknown_08624D1C[] = {
@@ -523,18 +578,72 @@ const match_call_t gUnknown_086252A8[] = {
     {.type5 = &gUnknown_08625294}
 };
 
-extern bool32 (*const gUnknown_086252FC[])(const match_call_t);
-extern u8 (*const gUnknown_08625310[])(const match_call_t);
-extern bool32 (*const gUnknown_08625324[])(const match_call_t);
-extern bool32 (*const gUnknown_08625338[])(const match_call_t);
-extern const struct UnkStruct_08625388 gUnknown_08625388[];
-extern u32 (*const gUnknown_0862534C[])(const match_call_t);
-extern void (*const gUnknown_08625360[])(const match_call_t, u8 *);
-extern void (*const gUnknown_08625374[])(const match_call_t, const u8 **, const u8 **);
+bool32 (*const gUnknown_086252FC[])(match_call_t) = {
+    sub_81D1628,
+    sub_81D164C,
+    sub_81D1670,
+    sub_81D1694,
+    sub_81D16CC
+};
+
+u8 (*const gUnknown_08625310[])(match_call_t) = {
+    sub_81D1714,
+    sub_81D1718,
+    sub_81D171C,
+    sub_81D1750,
+    sub_81D1754
+};
+
+bool32 (*const gUnknown_08625324[])(match_call_t) = {
+    sub_81D178C,
+    sub_81D1790,
+    sub_81D17C0,
+    sub_81D17E0,
+    sub_81D17E4
+};
+
+bool32 (*const gUnknown_08625338[])(match_call_t) = {
+    sub_81D1840,
+    sub_81D1844,
+    sub_81D1848,
+    sub_81D184C,
+    sub_81D1850
+};
+
+u32 (*const gUnknown_0862534C[])(match_call_t) = {
+    sub_81D1888,
+    sub_81D188C,
+    sub_81D1890,
+    sub_81D1894,
+    sub_81D1898
+};
+
+void (*const gUnknown_08625360[])(match_call_t, u8 *) = {
+    sub_81D18D0,
+    sub_81D18DC,
+    sub_81D18FC,
+    sub_81D1908,
+    sub_81D1914
+};
+
+void (*const gUnknown_08625374[])(match_call_t, const u8 **, const u8 **) = {
+    sub_81D1AB0,
+    sub_81D1ABC,
+    sub_81D1ADC,
+    sub_81D1AF4,
+    sub_81D1B00
+};
+
+const struct UnkStruct_08625388 gUnknown_08625388[] = {
+    { 7, 0x4B, 0xffff, { gUnknown_085ED453, gUnknown_085ED46B, gUnknown_085ED483, gUnknown_085ED49D } },
+    { 7, 0x4B, 0x4F6, { gUnknown_085ED453, gUnknown_085ED46B, gUnknown_085ED4B3, gUnknown_085ED4CE } },
+    { 2, 0x3c, 0xffff, { gUnknown_085ED4E3, gUnknown_085ED4FA, gUnknown_085ED516, gUnknown_085ED52F } },
+    { 3, 0x3f, 0xffff, { gUnknown_085ED547, gUnknown_085ED563, gUnknown_085ED579, gUnknown_085ED58F } }
+};
 
 // .text
 
-u32 sub_81D1574(const match_call_t matchCall)
+u32 sub_81D1574(match_call_t matchCall)
 {
     switch (matchCall.common->type)
     {
