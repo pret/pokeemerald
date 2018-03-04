@@ -86,6 +86,12 @@ struct MatchCallStruct5 {
     const match_call_sub0_t *v10;
 };
 
+#define MATCHCALLDEF(name, type_, ...) \
+const struct MatchCallStruct##type_ name = { \
+    .type = type_, \
+    __VA_ARGS__ \
+};
+
 typedef union {
     struct MatchCallStructCommon *common;
     struct MatchCallStruct0 *type0;
@@ -112,7 +118,88 @@ void sub_81D199C(const match_call_sub0_t *, u16, u8 *);
 void sub_8197080(u8 *);
 void sub_81D1B0C(u32, const u8 **, const u8 **);
 
+extern const u8 gText_MrStone_Pokenav_2B60C0[];
+extern const u8 gText_MrStone_Pokenav_2B61E6[];
+extern const u8 gText_MrStone_Pokenav_2B6302[];
+extern const u8 gText_MrStone_Pokenav_2B63A0[];
+extern const u8 gText_MrStone_Pokenav_2B64A2[];
+extern const u8 gText_MrStone_Pokenav_2B6526[];
+extern const u8 gText_MrStone_Pokenav_2B65BB[];
+extern const u8 gText_MrStone_Pokenav_2B6664[];
+extern const u8 gText_MrStone_Pokenav_2B66B1[];
+extern const u8 gText_MrStone_Pokenav_2B6703[];
+extern const u8 gText_MrStone_Pokenav_2B67ED[];
+
+extern const u8 gUnknown_085EFAEF[];
+extern const u8 gUnknown_085EFAFA[];
+
+extern const u8 gText_Norman_Pokenav_2B5719[];
+extern const u8 gText_Norman_Pokenav_2B5795[];
+extern const u8 gText_Norman_Pokenav_2B584D[];
+extern const u8 gText_Norman_Pokenav_2B58E3[];
+extern const u8 gText_Norman_Pokenav_2B5979[];
+extern const u8 gText_Norman_Pokenav_2B5A07[];
+extern const u8 gText_Norman_Pokenav_2B5A69[];
+extern const u8 gText_Norman_Pokenav_2B5ACF[];
+extern const u8 gText_Norman_Pokenav_2B5B5E[];
+
+extern const u8 gUnknown_085EFB25[];
+extern const u8 gUnknown_085EFB47[];
+
+extern const u8 gUnknown_085EFBC9[];
+extern const u8 gUnknown_085E8270[];
+
+extern const u8 gText_Mom_Pokenav_2B227B[];
+extern const u8 gText_Mom_Pokenav_2B2310[];
+extern const u8 gText_Mom_Pokenav_2B23F3[];
+
+extern const u8 gUnknown_085EFB32[];
+extern const u8 gUnknown_085EFB4B[];
+
 // .rodata
+
+const match_call_sub0_t gUnknown_08624D1C[] = {
+    { gText_MrStone_Pokenav_2B60C0, 0xFFFF,              FLAG_0x158 },
+    { gText_MrStone_Pokenav_2B61E6, FLAG_0x158,          0xFFFF },
+    { gText_MrStone_Pokenav_2B6302, FLAG_0x0BD,          0xFFFF },
+    { gText_MrStone_Pokenav_2B63A0, FLAG_0x110,          0xFFFF },
+    { gText_MrStone_Pokenav_2B64A2, FLAG_0x06A,          0xFFFF },
+    { gText_MrStone_Pokenav_2B6526, FLAG_0x4F4,          0xFFFF },
+    { gText_MrStone_Pokenav_2B65BB, FLAG_0x097,          0xFFFF },
+    { gText_MrStone_Pokenav_2B6664, FLAG_0x06F,          0xFFFF },
+    { gText_MrStone_Pokenav_2B66B1, FLAG_0x070,          0xFFFF },
+    { gText_MrStone_Pokenav_2B6703, FLAG_0x4F7,          0xFFFF },
+    { gText_MrStone_Pokenav_2B67ED, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { NULL,                         0xFFFF,              0xFFFF }
+};
+
+MATCHCALLDEF(gUnknown_08624D7C, 0, 10, 0xffff, gUnknown_085EFAEF, gUnknown_085EFAFA, gUnknown_08624D1C);
+
+const match_call_sub0_t gUnknown_08624D8C[] = {
+    { gText_Norman_Pokenav_2B5719, FLAG_0x132,           0xFFFF },
+    { gText_Norman_Pokenav_2B5795, FLAG_0x4F1,           0xFFFF },
+    { gText_Norman_Pokenav_2B584D, FLAG_0x4F3,           0xFFFF },
+    { gText_Norman_Pokenav_2B58E3, FLAG_0x4F4,           0xFFFF },
+    { gText_Norman_Pokenav_2B5979, FLAG_0x0D4,           0xFFFF },
+    { gText_Norman_Pokenav_2B5A07, 0xFFFE,               0xFFFF },
+    { gText_Norman_Pokenav_2B5A69, FLAG_SYS_GAME_CLEAR,  0xFFFF },
+    { gText_Norman_Pokenav_2B5ACF, FLAG_SYS_GAME_CLEAR,  0xFFFF },
+    { gText_Norman_Pokenav_2B5B5E, FLAG_SYS_GAME_CLEAR,  0xFFFF },
+    { NULL,                        0xFFFF,               0xFFFF }
+};
+
+MATCHCALLDEF(gUnknown_08624DDC, 5, 7, FLAG_0x132, 0x45, gUnknown_085EFB25, gUnknown_085EFB47, gUnknown_08624D8C);
+
+MATCHCALLDEF(gUnknown_08624DF0, 3, 0, FLAG_0x119, gUnknown_085EFBC9, gUnknown_085E8270)
+
+const match_call_sub0_t gUnknown_08624DFC[] = {
+    { gText_Mom_Pokenav_2B227B, 0xffff,              0xffff },
+    { gText_Mom_Pokenav_2B2310, FLAG_0x4F4,          0xffff },
+    { gText_Mom_Pokenav_2B23F3, FLAG_SYS_GAME_CLEAR, 0xffff },
+    { NULL,                     0xffff,              0xffff }
+};
+
+MATCHCALLDEF(gUnknown_08624E1C, 0, 0, FLAG_0x0D8, gUnknown_085EFB32, gUnknown_085EFB4B, gUnknown_08624DFC);
 
 extern const match_call_t gUnknown_086252A8[];
 extern bool32 (*const gUnknown_086252FC[])(const match_call_t);

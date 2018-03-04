@@ -537,6 +537,7 @@ SECTIONS {
         src/berry_fix_program.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/pokenav.o(.rodata);
+        src/match_call.o(.rodata);
         data/match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);
         src/rayquaza_scene.o(.rodata);
