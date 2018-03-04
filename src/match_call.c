@@ -726,3 +726,35 @@ ASM_DIRECT const u8 *sub_81D1B40(u32 idx, u32 offset)
                     "\tbx r1");
 }
 #endif
+
+s32 sub_81D1BD0(u32 idx)
+{
+    u32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_08625388[i].idx == idx)
+            return gUnknown_08625388[i].v2;
+    }
+    return -1;
+}
+
+bool32 sub_81D1BF8(u32 idx)
+{
+    s32 i;
+
+    for (i = 0; i < 21; i++)
+    {
+        u32 r0 = sub_81D1854(i);
+        if (r0 != REMATCH_TABLE_ENTRIES && r0 == idx)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void SetMatchCallRegisteredFlag(void)
+{
+    s32 r0 = sub_81D15CC(gSpecialVar_0x8004);
+    if (r0 >= 0)
+        FlagSet(FLAG_MATCH_CALL_REGISTERED + r0);
+}
