@@ -7947,7 +7947,7 @@ _081CAFA4:
 _081CAFC4:
 	ldrh r0, [r1, 0x1E]
 	ldr r1, =gStringVar4
-	bl sub_81D189C
+	bl MatchCall_GetMessage
 _081CAFCC:
 	ldr r0, =gStringVar4
 _081CAFCE:

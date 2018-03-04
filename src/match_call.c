@@ -29,19 +29,19 @@ struct MatchCallStruct0 {
     u8 type;
     u8 v1;
     u16 flag;
-    const u8 *v4;
-    const u8 *v8;
-    const match_call_sub0_t *vC;
+    const u8 *desc;
+    const u8 *name;
+    const match_call_sub0_t *textData;
 };
 
 struct MatchCallStruct1 {
     u8 type;
     u8 v1;
     u16 flag;
-    u16 v4;
-    const u8 *v8;
-    const u8 *vC;
-    const match_call_sub0_t *v10;
+    u16 rematchTableIdx;
+    const u8 *desc;
+    const u8 *name;
+    const match_call_sub0_t *textData;
 };
 
 struct MatchCallSubstruct2 {
@@ -53,9 +53,9 @@ struct MatchCallStruct2 {
     u8 type;
     u8 v1;
     u16 flag;
-    u16 v4;
-    const u8 *v8;
-    const match_call_sub0_t *vC;
+    u16 rematchTableIdx;
+    const u8 *desc;
+    const match_call_sub0_t *textData;
     const struct MatchCallSubstruct2 *v10;
 };
 
@@ -63,17 +63,17 @@ struct MatchCallStruct3 {
     u8 type;
     u8 v1;
     u16 flag;
-    const u8 *v4;
-    const u8 *v8;
+    const u8 *desc;
+    const u8 *name;
 };
 
 struct MatchCallStruct4 {
     u8 type;
     u8 v1;
     u16 flag;
-    const u8 *v4;
-    const u8 *v8;
-    const match_call_sub0_t *vC;
+    const u8 *desc;
+    const u8 *name;
+    const match_call_sub0_t *textData;
 };
 
 struct MatchCallStruct5 {
@@ -81,13 +81,13 @@ struct MatchCallStruct5 {
     u8 v1;
     u16 flag;
     u16 v4;
-    const u8 *v8;
-    const u8 *vC;
-    const match_call_sub0_t *v10;
+    const u8 *desc;
+    const u8 *name;
+    const match_call_sub0_t *textData;
 };
 
 #define MATCHCALLDEF(name, type_, ...) \
-const struct MatchCallStruct##type_ name = { \
+static const struct MatchCallStruct##type_ name = { \
     .type = type_, \
     __VA_ARGS__ \
 };
@@ -317,7 +317,7 @@ extern const u8 gUnknown_085ED579[];
 extern const u8 gUnknown_085ED58F[];
 // .rodata
 
-const match_call_sub0_t gUnknown_08624D1C[] = {
+static const match_call_sub0_t MrStoneTextScripts[] = {
     { gText_MrStone_Pokenav_2B60C0, 0xFFFF,              FLAG_0x158 },
     { gText_MrStone_Pokenav_2B61E6, FLAG_0x158,          0xFFFF },
     { gText_MrStone_Pokenav_2B6302, FLAG_0x0BD,          0xFFFF },
@@ -332,9 +332,9 @@ const match_call_sub0_t gUnknown_08624D1C[] = {
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(gUnknown_08624D7C, 0, 10, 0xffff, gUnknown_085EFAEF, gUnknown_085EFAFA, gUnknown_08624D1C);
+MATCHCALLDEF(MrStoneMatchCallHeader, 0, 10, 0xffff, gUnknown_085EFAEF, gUnknown_085EFAFA, MrStoneTextScripts);
 
-const match_call_sub0_t gUnknown_08624D8C[] = {
+static const match_call_sub0_t NormanTextScripts[] = {
     { gText_Norman_Pokenav_2B5719, FLAG_0x132,           0xFFFF },
     { gText_Norman_Pokenav_2B5795, FLAG_0x4F1,           0xFFFF },
     { gText_Norman_Pokenav_2B584D, FLAG_0x4F3,           0xFFFF },
@@ -347,11 +347,11 @@ const match_call_sub0_t gUnknown_08624D8C[] = {
     { NULL,                        0xFFFF,               0xFFFF }
 };
 
-MATCHCALLDEF(gUnknown_08624DDC, 5, 7, FLAG_0x132, 0x45, gUnknown_085EFB25, gUnknown_085EFB47, gUnknown_08624D8C);
+MATCHCALLDEF(NormanMatchCallHeader, 5, 7, FLAG_0x132, 0x45, gUnknown_085EFB25, gUnknown_085EFB47, NormanTextScripts);
 
-MATCHCALLDEF(gUnknown_08624DF0, 3, 0, FLAG_0x119, gUnknown_085EFBC9, gUnknown_085E8270)
+MATCHCALLDEF(ProfBirchMatchCallHeader, 3, 0, FLAG_0x119, gUnknown_085EFBC9, gUnknown_085E8270)
 
-const match_call_sub0_t gUnknown_08624DFC[] = {
+static const match_call_sub0_t gUnknown_08624DFC[] = {
     { gText_Mom_Pokenav_2B227B, 0xffff,              0xffff },
     { gText_Mom_Pokenav_2B2310, FLAG_0x4F4,          0xffff },
     { gText_Mom_Pokenav_2B23F3, FLAG_SYS_GAME_CLEAR, 0xffff },
@@ -427,13 +427,13 @@ const match_call_sub0_t gUnknown_08624F9C[] = {
 };
 
 const struct MatchCallSubstruct2 gUnknown_08624FDC[] = {
-    { 0x0324, 0x05 },
-    { 0x006F, 0xD5 },
-    { 0x035A, 0x46 },
-    { 0xFFFF, 0xD5 }
+    { FLAG_0x324, 0x05 },
+    { FLAG_0x06F, 0xD5 },
+    { FLAG_0x35A, 0x46 },
+    { 0xFFFF,     0xD5 }
 };
 
-MATCHCALLDEF(gUnknown_08624FEC, 2, 0, FLAG_0x0D6, 0x40, gUnknown_085EFB3E, gUnknown_08624F9C, gUnknown_08624FDC);
+MATCHCALLDEF(gUnknown_08624FEC, 2, 0, FLAG_0x0D6, REMATCH_WALLY_3, gUnknown_085EFB3E, gUnknown_08624F9C, gUnknown_08624FDC);
 
 const match_call_sub0_t gUnknown_08624500[] = {
     { gText_Scott_Pokenav_2B5184, 0xFFFF,              0xFFFF },
@@ -555,12 +555,12 @@ const match_call_sub0_t gUnknown_08625284[] = {
 MATCHCALLDEF(gUnknown_08625294, 5, 15, FLAG_0x1A9, 0x4D, gUnknown_085EFBC0, NULL, gUnknown_08625284);
 
 const match_call_t gUnknown_086252A8[] = {
-    {.type0 = &gUnknown_08624D7C},
-    {.type3 = &gUnknown_08624DF0},
+    {.type0 = &MrStoneMatchCallHeader},
+    {.type3 = &ProfBirchMatchCallHeader},
     {.type4 = &gUnknown_08624F8C},
     {.type4 = &gUnknown_08624EFC},
     {.type2 = &gUnknown_08624FEC},
-    {.type5 = &gUnknown_08624DDC},
+    {.type5 = &NormanMatchCallHeader},
     {.type0 = &gUnknown_08624E1C},
     {.type0 = &gUnknown_08624E6C},
     {.type0 = &gUnknown_08625040},
@@ -789,14 +789,14 @@ bool32 sub_81D178C(match_call_t matchCall)
 
 bool32 sub_81D1790(match_call_t matchCall)
 {
-    if (matchCall.type1->v4 >= REMATCH_ELITE_FOUR_ENTRIES)
+    if (matchCall.type1->rematchTableIdx >= REMATCH_ELITE_FOUR_ENTRIES)
         return FALSE;
-    return gSaveBlock1Ptr->trainerRematches[matchCall.type1->v4] ? TRUE : FALSE;
+    return gSaveBlock1Ptr->trainerRematches[matchCall.type1->rematchTableIdx] ? TRUE : FALSE;
 }
 
 bool32 sub_81D17C0(match_call_t matchCall)
 {
-    return gSaveBlock1Ptr->trainerRematches[matchCall.type2->v4] ? TRUE : FALSE;
+    return gSaveBlock1Ptr->trainerRematches[matchCall.type2->rematchTableIdx] ? TRUE : FALSE;
 }
 
 bool32 sub_81D17E0(match_call_t matchCall)
@@ -872,12 +872,12 @@ u32 sub_81D1888(match_call_t matchCall)
 
 u32 sub_81D188C(match_call_t matchCall)
 {
-    return matchCall.type1->v4;
+    return matchCall.type1->rematchTableIdx;
 }
 
 u32 sub_81D1890(match_call_t matchCall)
 {
-    return matchCall.type2->v4;
+    return matchCall.type2->rematchTableIdx;
 }
 
 u32 sub_81D1894(match_call_t matchCall)
@@ -890,7 +890,7 @@ u32 sub_81D1898(match_call_t matchCall)
     return REMATCH_TABLE_ENTRIES;
 }
 
-void sub_81D189C(u32 idx, u8 *dest)
+void MatchCall_GetMessage(u32 idx, u8 *dest)
 {
     match_call_t matchCall;
     u32 i;
@@ -904,25 +904,25 @@ void sub_81D189C(u32 idx, u8 *dest)
 
 void sub_81D18D0(match_call_t matchCall, u8 *dest)
 {
-    sub_81D1920(matchCall.type0->vC, dest);
+    sub_81D1920(matchCall.type0->textData, dest);
 }
 
 void sub_81D18DC(match_call_t matchCall, u8 *dest)
 {
     if (matchCall.common->type != 5)
-        sub_81D1920(matchCall.type5->v10, dest);
+        sub_81D1920(matchCall.type5->textData, dest);
     else
-        sub_81D199C(matchCall.type1->v10, matchCall.type1->v4, dest);
+        sub_81D199C(matchCall.type1->textData, matchCall.type1->rematchTableIdx, dest);
 }
 
 void sub_81D18FC(match_call_t matchCall, u8 *dest)
 {
-    sub_81D1920(matchCall.type2->vC, dest);
+    sub_81D1920(matchCall.type2->textData, dest);
 }
 
 void sub_81D1908(match_call_t matchCall, u8 *dest)
 {
-    sub_81D1920(matchCall.type4->vC, dest);
+    sub_81D1920(matchCall.type4->textData, dest);
 }
 
 void sub_81D1914(match_call_t matchCall, u8 *dest)
@@ -1092,7 +1092,7 @@ ASM_DIRECT void sub_81D199C(const match_call_sub0_t *sub0, u16 idx, u8 *dest)
 }
 #endif
 
-void sub_81D1A78(u32 idx, const u8 **a1, const u8 **a2)
+void sub_81D1A78(u32 idx, const u8 **desc, const u8 **name)
 {
     match_call_t matchCall;
     u32 i;
@@ -1101,48 +1101,48 @@ void sub_81D1A78(u32 idx, const u8 **a1, const u8 **a2)
         return;
     matchCall = gUnknown_086252A8[idx];
     i = sub_81D1574(matchCall);
-    gUnknown_08625374[i](matchCall, a1, a2);
+    gUnknown_08625374[i](matchCall, desc, name);
 }
 
-void sub_81D1AB0(match_call_t matchCall, const u8 **a1, const u8 **a2)
+void sub_81D1AB0(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
-    *a1 = matchCall.type0->v4;
-    *a2 = matchCall.type0->v8;
+    *desc = matchCall.type0->desc;
+    *name = matchCall.type0->name;
 }
 
-void sub_81D1ABC(match_call_t matchCall, const u8 **a1, const u8 **a2)
+void sub_81D1ABC(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
     match_call_t _matchCall = matchCall;
-    if (_matchCall.type1->vC == NULL)
-        sub_81D1B0C(_matchCall.type1->v4, a1, a2);
+    if (_matchCall.type1->name == NULL)
+        sub_81D1B0C(_matchCall.type1->rematchTableIdx, desc, name);
     else
-        *a2 = _matchCall.type1->vC;
-    *a1 = _matchCall.type1->v8;
+        *name = _matchCall.type1->name;
+    *desc = _matchCall.type1->desc;
 }
 
-void sub_81D1ADC(match_call_t matchCall, const u8 **a1, const u8 **a2)
+void sub_81D1ADC(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
-    sub_81D1B0C(matchCall.type2->v4, a1, a2);
-    *a1 = matchCall.type2->v8;
+    sub_81D1B0C(matchCall.type2->rematchTableIdx, desc, name);
+    *desc = matchCall.type2->desc;
 }
 
-void sub_81D1AF4(match_call_t matchCall, const u8 **a1, const u8 **a2)
+void sub_81D1AF4(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
-    *a1 = matchCall.type0->v4;
-    *a2 = matchCall.type0->v8;
+    *desc = matchCall.type4->desc;
+    *name = matchCall.type4->name;
 }
 
-void sub_81D1B00(match_call_t matchCall, const u8 **a1, const u8 **a2)
+void sub_81D1B00(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
-    *a1 = matchCall.type0->v4;
-    *a2 = matchCall.type0->v8;
+    *desc = matchCall.type3->desc;
+    *name = matchCall.type3->name;
 }
 
-void sub_81D1B0C(u32 idx, const u8 **a1, const u8 **a2)
+void sub_81D1B0C(u32 idx, const u8 **desc, const u8 **name)
 {
     const struct Trainer *trainer = gTrainers + sub_81D15BC(idx);
-    *a1 = gTrainerClassNames[trainer->trainerClass];
-    *a2 = trainer->trainerName;
+    *desc = gTrainerClassNames[trainer->trainerClass];
+    *name = trainer->trainerName;
 }
 
 #ifdef NONMATCHING
