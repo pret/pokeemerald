@@ -9,7 +9,7 @@ u8 CreateBerryTagSprite(u8 id, s16 x, s16 y);
 void FreeBerryTagSpritePalette(void);
 u8 CreateBerryFlavorCircleSprite(s16 x);
 void sub_80D4FAC(void);
-void RemoveBagItemIconObject(u8);
+void RemoveBagItemIconSprite(u8);
 void sub_80D4FEC(u8);
 void sub_80D4FC8(u8);
 

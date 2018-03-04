@@ -1,4 +1,5 @@
 #include "global.h"
+#include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
 #include "battle_frontier_2.h"
@@ -58,7 +59,7 @@ void load_bag_item_list_buffers(u8);
 void bag_menu_print_pocket_names(u8*, u8*);
 void bag_menu_copy_pocket_name_to_window(u32);
 void bag_menu_draw_pocket_indicator_square(u8, u8);
-void AddBagVisualObject(u8);
+void AddBagVisualSprite(u8);
 void bag_menu_add_pocket_scroll_arrow_indicators_maybe(void);
 void bag_menu_add_list_scroll_arrow_indicators_maybe(void);
 void bag_menu_prepare_tmhm_move_window(void);
@@ -69,7 +70,7 @@ void get_name(s8*, u16);
 u16 ItemIdToBattleMoveId(u16);
 void ShakeBagVisual(void);
 u16 BagGetItemIdByPocketPosition(u8, u16);
-void AddBagItemIconObject(u16, u8);
+void AddBagItemIconSprite(u16, u8);
 void bag_menu_print_description_box_text(int);
 void bag_menu_print_cursor(u8, u8);
 void bag_menu_print(u8, u8, const u8*, u8, u8, u8, u8, u8, u8);
@@ -87,8 +88,8 @@ void SwitchBagPocket(u8, s16, u16);
 bool8 sub_81AC2C0(void);
 void bag_menu_swap_items(u8);
 void SetBagVisualPocketId(u8, u8);
-void RemoveBagObject(u8);
-void AddSwitchPocketRotatingBallObject(s16);
+void RemoveBagSprite(u8);
+void AddSwitchPocketRotatingBallSprite(s16);
 void sub_81AC10C(u8);
 void sub_81AC3C0(u8);
 void sub_81AC498(u8);
@@ -251,46 +252,6 @@ const struct WindowTemplate gUnknown_086141AC[] = {
 
 // .text
 
-struct BagStruct {
-    void (*bagCallback)(void);
-    u8 location;
-    u8 pocket;
-    u8 unk6[2];
-    u16 cursorPosition[5];
-    u16 scrollPosition[5];
-};
-
-struct UnkBagStruct {
-    MainCallback unk0;
-    u8 unk4[0x800];
-    u8 unk804;
-    u8 unk805;
-    u8 unk806[10];
-    u8 unk810[7];
-    u8 unk817;
-    u8 unk818;
-    u8 unk819;
-    u8 unk81A;
-    u8 unk81B:4;
-    u8 unk81B_1:2;
-    u8 unk81B_3:1;
-    u8 unk81B_2:1;
-    u8 filler3[2];
-    u8 unk81E;
-    u8 unk81F;
-    const u8* unk820;
-    u8 unk824;
-    u8 unk825;
-    u8 filler[2];
-    u8 unk828;
-    u8 unk829[5];
-    u8 unk82E[6];
-    s16 unk834;
-    u8 filler4[0xE];
-    u8 unk844[32][32];
-    u8 filler2[4];
-};
-
 struct ListBuffer1 {
     struct ListMenuItem subBuffers[65];
 };
@@ -411,7 +372,7 @@ void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)
         gUnknown_0203CE54->unk81A = 0xFF;
         gUnknown_0203CE54->unk81E = -1;
         gUnknown_0203CE54->unk81F = -1;
-        memset(&gUnknown_0203CE54->unk804, 0xFF, 12);
+        memset(gUnknown_0203CE54->unk804, 0xFF, sizeof(gUnknown_0203CE54->unk804));
         memset(gUnknown_0203CE54->unk810, 0xFF, 10);
         SetMainCallback2(CB2_Bag);
     }
@@ -517,7 +478,7 @@ bool8 setup_bag_menu(void)
         gMain.state++;
         break;
     case 15:
-        AddBagVisualObject(gUnknown_0203CE58.pocket);
+        AddBagVisualSprite(gUnknown_0203CE58.pocket);
         gMain.state++;
         break;
     case 16:
@@ -697,11 +658,11 @@ void bag_menu_change_item_callback(u32 a, bool8 b, struct ListMenu *unused)
     }
     if (gUnknown_0203CE54->unk81A == 0xFF)
     {
-        RemoveBagItemIconObject(1 ^ gUnknown_0203CE54->unk81B_1);
+        RemoveBagItemIconSprite(1 ^ gUnknown_0203CE54->unk81B_1);
         if (a != -2)
-           AddBagItemIconObject(BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, a), gUnknown_0203CE54->unk81B_1);
+           AddBagItemIconSprite(BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, a), gUnknown_0203CE54->unk81B_1);
         else
-           AddBagItemIconObject(-1, gUnknown_0203CE54->unk81B_1);
+           AddBagItemIconSprite(-1, gUnknown_0203CE54->unk81B_1);
         gUnknown_0203CE54->unk81B_1 ^= 1;
         if (!gUnknown_0203CE54->unk81B_3)
             bag_menu_print_description_box_text(a);
@@ -1085,8 +1046,8 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
     FillBgTilemapBufferRect_Palette0(2, 11, 14, 2, 15, 16);
     schedule_bg_copy_tilemap_to_vram(2);
     SetBagVisualPocketId(pocketId, 1);
-    RemoveBagObject(1);
-    AddSwitchPocketRotatingBallObject(deltaBagPocketId);
+    RemoveBagSprite(1);
+    AddSwitchPocketRotatingBallSprite(deltaBagPocketId);
     SetTaskFuncWithFollowupFunc(taskId, sub_81AC10C, gTasks[taskId].func);
 }
 #else
@@ -1219,9 +1180,9 @@ _081AC09A:\n\
 	movs r1, 0x1\n\
 	bl SetBagVisualPocketId\n\
 	movs r0, 0x1\n\
-	bl RemoveBagObject\n\
+	bl RemoveBagSprite\n\
 	asrs r0, r5, 16\n\
-	bl AddSwitchPocketRotatingBallObject\n\
+	bl AddSwitchPocketRotatingBallSprite\n\
 	ldr r1, =sub_81AC10C\n\
 	ldr r2, =gTasks\n\
 	lsls r0, r6, 2\n\
