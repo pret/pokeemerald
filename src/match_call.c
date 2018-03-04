@@ -4,9 +4,12 @@
 #include "battle_setup.h"
 #include "event_data.h"
 #include "string_util.h"
+#include "battle.h"
 #include "gym_leader_rematch.h"
 
 #define NELEMS(a) (s32)( sizeof (a) / sizeof (*(a)) )
+
+extern const u8 gTrainerClassNames[][13];
 
 // Static type declarations
 
@@ -97,10 +100,7 @@ struct UnkStruct_08625388 {
     u16 idx;
     u16 v2;
     u16 v4;
-    const u8 *v8;
-    const u8 *vC;
-    const u8 *v10;
-    const u8 *v14;
+    const u8 *v8[4];
 };
 
 // Static RAM declarations
@@ -145,7 +145,7 @@ u32 sub_81D1574(const match_call_t matchCall)
     }
 }
 
-s32 sub_81D15BC(s32 rematchIdx)
+u32 sub_81D15BC(u32 rematchIdx)
 {
     return gRematchTable[rematchIdx].trainerIds[0];
 }
@@ -620,3 +620,109 @@ void sub_81D1B00(match_call_t matchCall, const u8 **a1, const u8 **a2)
     *a1 = matchCall.type0->v4;
     *a2 = matchCall.type0->v8;
 }
+
+void sub_81D1B0C(u32 idx, const u8 **a1, const u8 **a2)
+{
+    const struct Trainer *trainer = gTrainers + sub_81D15BC(idx);
+    *a1 = gTrainerClassNames[trainer->trainerClass];
+    *a2 = trainer->trainerName;
+}
+
+#ifdef NONMATCHING
+const u8 *sub_81D1B40(u32 idx, u32 offset)
+{
+    u32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_08625388[i].idx == idx)
+        {
+            for (; i + 1 < 4 && gUnknown_08625388[i + 1].idx == idx; i++)
+            {
+                if (!FlagGet(gUnknown_08625388[i + 1].v4))
+                    break;
+            }
+            return gUnknown_08625388[i].v8[offset];
+        }
+    }
+    return NULL;
+}
+#else
+ASM_DIRECT const u8 *sub_81D1B40(u32 idx, u32 offset)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r9\n"
+                    "\tmov r6, r8\n"
+                    "\tpush {r6,r7}\n"
+                    "\tadds r6, r0, 0\n"
+                    "\tmovs r5, 0\n"
+                    "\tldr r2, =gUnknown_08625388\n"
+                    "\tmovs r0, 0x8\n"
+                    "\tadds r0, r2\n"
+                    "\tmov r9, r0\n"
+                    "_081D1B54:\n"
+                    "\tlsls r0, r5, 1\n"
+                    "\tadds r0, r5\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, r2\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tcmp r0, r6\n"
+                    "\tbne _081D1BBC\n"
+                    "\tadds r4, r5, 0x1\n"
+                    "\tlsls r1, 2\n"
+                    "\tmov r8, r1\n"
+                    "\tcmp r4, 0x3\n"
+                    "\tbhi _081D1BA8\n"
+                    "\tlsls r0, r4, 1\n"
+                    "\tadds r0, r4\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, r2\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tcmp r0, r6\n"
+                    "\tbne _081D1BA8\n"
+                    "\tldr r7, =gUnknown_08625388\n"
+                    "_081D1B7C:\n"
+                    "\tlsls r0, r4, 1\n"
+                    "\tadds r0, r4\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r1, r7, 0x4\n"
+                    "\tadds r0, r1\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tbl FlagGet\n"
+                    "\tlsls r0, 24\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _081D1BA8\n"
+                    "\tadds r5, r4, 0\n"
+                    "\tadds r4, r5, 0x1\n"
+                    "\tcmp r4, 0x3\n"
+                    "\tbhi _081D1BA8\n"
+                    "\tlsls r0, r4, 1\n"
+                    "\tadds r0, r4\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, r7\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tcmp r0, r6\n"
+                    "\tbeq _081D1B7C\n"
+                    "_081D1BA8:\n"
+                    "\tlsls r0, r5, 1\n"
+                    "\tadds r0, r5\n"
+                    "\tlsls r0, 3\n"
+                    "\tadd r0, r8\n"
+                    "\tadd r0, r9\n"
+                    "\tldr r0, [r0]\n"
+                    "\tb _081D1BC4\n"
+                    "\t.pool\n"
+                    "_081D1BBC:\n"
+                    "\tadds r5, 0x1\n"
+                    "\tcmp r5, 0x3\n"
+                    "\tbls _081D1B54\n"
+                    "\tmovs r0, 0\n"
+                    "_081D1BC4:\n"
+                    "\tpop {r3,r4}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1");
+}
+#endif
