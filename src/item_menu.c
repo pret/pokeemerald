@@ -59,7 +59,6 @@ void load_bag_item_list_buffers(u8);
 void bag_menu_print_pocket_names(u8*, u8*);
 void bag_menu_copy_pocket_name_to_window(u32);
 void bag_menu_draw_pocket_indicator_square(u8, u8);
-void AddBagVisualSprite(u8);
 void bag_menu_add_pocket_scroll_arrow_indicators_maybe(void);
 void bag_menu_add_list_scroll_arrow_indicators_maybe(void);
 void bag_menu_prepare_tmhm_move_window(void);
@@ -68,7 +67,6 @@ void Task_WallyTutorialBagMenu(u8);
 void Task_BagMenu(u8);
 void get_name(s8*, u16);
 u16 ItemIdToBattleMoveId(u16);
-void ShakeBagVisual(void);
 u16 BagGetItemIdByPocketPosition(u8, u16);
 void AddBagItemIconSprite(u16, u8);
 void bag_menu_print_description_box_text(int);
@@ -87,9 +85,6 @@ u8 GetSwitchBagPocketDirection(void);
 void SwitchBagPocket(u8, s16, u16);
 bool8 sub_81AC2C0(void);
 void bag_menu_swap_items(u8);
-void SetBagVisualPocketId(u8, u8);
-void RemoveBagSprite(u8);
-void AddSwitchPocketRotatingBallSprite(s16);
 void sub_81AC10C(u8);
 void sub_81AC3C0(u8);
 void sub_81AC498(u8);
@@ -280,14 +275,11 @@ void (*gFieldCallback)(void);
 
 extern u8 *gPocketNamesStringsTable[];
 extern u8 gUnknown_08D9A88C[];
-extern struct CompressedSpriteSheet gUnknown_0857FB34;
-extern struct CompressedSpriteSheet gUnknown_0857FB3C;
-extern struct CompressedSpritePalette gUnknown_0857FB44;
 extern struct ListMenuTemplate gUnknown_08613F9C;
-extern u8 gMoveNames[][0xD];
+extern const u8 gMoveNames[][0xD];
 extern u8* gReturnToXStringsTable[];
 extern u32 gUnknown_0203CE5E[];
-extern u8 EventScript_2736B3[];
+extern const u8 EventScript_2736B3[];
 extern const u16 gUnknown_0860F074[];
 
 void ResetBagScrollPositions(void)
@@ -1010,12 +1002,10 @@ void ChangeBagPocketId(u8 *bagPocketId, s8 deltaBagPocketId)
         *bagPocketId += deltaBagPocketId;
 }
 
-#ifdef NONMATCHING
 void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
 {
     s16* data = gTasks[taskId].data;
     u8 pocketId;
-
 
     data[13] = 0;
     data[12] = 0;
@@ -1026,7 +1016,7 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
         ClearWindowTilemap(1);
         sub_81AE6C8(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
         schedule_bg_copy_tilemap_to_vram(0);
-        gSprites[gUnknown_0203CE54->unk806[gUnknown_0203CE54->unk81B_1 ^ 1]].invisible = 1;
+        gSprites[gUnknown_0203CE54->unk804[2 + (gUnknown_0203CE54->unk81B_1 ^ 1)]].invisible = 1;
         sub_81AB824();
     }
     pocketId = gUnknown_0203CE58.pocket;
@@ -1050,156 +1040,6 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
     AddSwitchPocketRotatingBallSprite(deltaBagPocketId);
     SetTaskFuncWithFollowupFunc(taskId, sub_81AC10C, gTasks[taskId].func);
 }
-#else
-__attribute__((naked))
-void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-	sub sp, 0xC\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	lsls r1, 16\n\
-	lsrs r5, r1, 16\n\
-	lsls r2, 16\n\
-	lsls r0, r6, 2\n\
-	adds r0, r6\n\
-	lsls r0, 3\n\
-	ldr r1, =gTasks + 0x8\n\
-	adds r4, r0, r1\n\
-	movs r0, 0\n\
-	strh r0, [r4, 0x1A]\n\
-	strh r0, [r4, 0x18]\n\
-	strh r5, [r4, 0x16]\n\
-	cmp r2, 0\n\
-	bne _081AC026\n\
-	movs r0, 0\n\
-	bl ClearWindowTilemap\n\
-	movs r0, 0x1\n\
-	bl ClearWindowTilemap\n\
-	ldrb r0, [r4]\n\
-	ldr r3, =gUnknown_0203CE58\n\
-	ldrb r2, [r3, 0x5]\n\
-	lsls r2, 1\n\
-	adds r1, r3, 0\n\
-	adds r1, 0x12\n\
-	adds r1, r2, r1\n\
-	adds r3, 0x8\n\
-	adds r2, r3\n\
-	bl sub_81AE6C8\n\
-	movs r0, 0\n\
-	bl schedule_bg_copy_tilemap_to_vram\n\
-	ldr r3, =gSprites\n\
-	ldr r0, =gUnknown_0203CE54\n\
-	ldr r2, [r0]\n\
-	ldr r1, =0x0000081b\n\
-	adds r0, r2, r1\n\
-	ldrb r1, [r0]\n\
-	lsls r1, 26\n\
-	lsrs r1, 30\n\
-	movs r0, 0x1\n\
-	eors r0, r1\n\
-	adds r2, r0\n\
-	ldr r0, =0x00000806\n\
-	adds r2, r0\n\
-	ldrb r1, [r2]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	adds r0, 0x3E\n\
-	ldrb r1, [r0]\n\
-	movs r2, 0x4\n\
-	orrs r1, r2\n\
-	strb r1, [r0]\n\
-	bl sub_81AB824\n\
-_081AC026:\n\
-	ldr r4, =gUnknown_0203CE58\n\
-	ldrb r1, [r4, 0x5]\n\
-	add r0, sp, 0x8\n\
-	strb r1, [r0]\n\
-	lsls r1, r5, 24\n\
-	asrs r1, 24\n\
-	bl ChangeBagPocketId\n\
-	lsls r0, r5, 16\n\
-	asrs r1, r0, 16\n\
-	adds r5, r0, 0\n\
-	cmp r1, 0x1\n\
-	bne _081AC07C\n\
-	ldr r2, =gPocketNamesStringsTable\n\
-	ldrb r0, [r4, 0x5]\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	ldr r0, [r0]\n\
-	add r1, sp, 0x8\n\
-	ldrb r1, [r1]\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	ldr r1, [r1]\n\
-	bl bag_menu_print_pocket_names\n\
-	movs r0, 0\n\
-	bl bag_menu_copy_pocket_name_to_window\n\
-	b _081AC09A\n\
-	.pool\n\
-_081AC07C:\n\
-	ldr r2, =gPocketNamesStringsTable\n\
-	add r0, sp, 0x8\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	ldr r0, [r0]\n\
-	ldrb r1, [r4, 0x5]\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	ldr r1, [r1]\n\
-	bl bag_menu_print_pocket_names\n\
-	movs r0, 0x8\n\
-	bl bag_menu_copy_pocket_name_to_window\n\
-_081AC09A:\n\
-	ldr r0, =gUnknown_0203CE58\n\
-	ldrb r0, [r0, 0x5]\n\
-	movs r1, 0\n\
-	bl bag_menu_draw_pocket_indicator_square\n\
-	add r0, sp, 0x8\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0x1\n\
-	bl bag_menu_draw_pocket_indicator_square\n\
-	movs r0, 0xF\n\
-	str r0, [sp]\n\
-	movs r0, 0x10\n\
-	str r0, [sp, 0x4]\n\
-	movs r0, 0x2\n\
-	movs r1, 0xB\n\
-	movs r2, 0xE\n\
-	movs r3, 0x2\n\
-	bl FillBgTilemapBufferRect_Palette0\n\
-	movs r0, 0x2\n\
-	bl schedule_bg_copy_tilemap_to_vram\n\
-	add r0, sp, 0x8\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0x1\n\
-	bl SetBagVisualPocketId\n\
-	movs r0, 0x1\n\
-	bl RemoveBagSprite\n\
-	asrs r0, r5, 16\n\
-	bl AddSwitchPocketRotatingBallSprite\n\
-	ldr r1, =sub_81AC10C\n\
-	ldr r2, =gTasks\n\
-	lsls r0, r6, 2\n\
-	adds r0, r6\n\
-	lsls r0, 3\n\
-	adds r0, r2\n\
-	ldr r2, [r0]\n\
-	adds r0, r6, 0\n\
-	bl SetTaskFuncWithFollowupFunc\n\
-	add sp, 0xC\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_81AC10C(u8 taskId)
 {

@@ -16,18 +16,23 @@ struct CompressedTilesPal
     const u8 *pal;
 };
 
-// this file's functions
-void SetBagVisualPocketId(u8 bagPocketId, bool8 isSwitchingPockets);
-void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite);
-void SpriteCB_ShakeBagVisual(struct Sprite *sprite);
-void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite);
-void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
+extern void sub_80D5860(struct Sprite *sprite);
+extern void sub_80D58F8(struct Sprite *sprite);
+extern void sub_80D5968(struct Sprite *sprite);
+extern void sub_80D5A94(struct Sprite *sprite);
+extern void sub_80D5B48(struct Sprite *sprite);
 
-// const rom data
-const u16 gUnknown_0857F564[] = INCBIN_U16("graphics/interface/bag_spinner.gbapal");
-const u8 gUnknown_0857F584[] = INCBIN_U8("graphics/interface/bag_spinner.4bpp");
-const u8 gUnknown_0857F604[] = INCBIN_U8("graphics/unused/cherry.4bpp");
-const u16 gUnknown_0857FA84[] = INCBIN_U16("graphics/unused/cherry.gbapal");
+// this file's functions
+static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite);
+static void SpriteCB_ShakeBagVisual(struct Sprite *sprite);
+static void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite);
+static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
+
+// static const rom data
+static const u16 gUnknown_0857F564[] = INCBIN_U16("graphics/interface/bag_spinner.gbapal");
+static const u8 gUnknown_0857F584[] = INCBIN_U8("graphics/interface/bag_spinner.4bpp");
+static const u8 gUnknown_0857F604[] = INCBIN_U8("graphics/unused/cherry.4bpp");
+static const u16 gUnknown_0857FA84[] = INCBIN_U16("graphics/unused/cherry.gbapal");
 
 static const struct OamData sOamData_857FAA4 =
 {
@@ -128,7 +133,7 @@ const struct CompressedSpritePalette gUnknown_0857FB44 =
     gBagPalette, 100
 };
 
-const struct SpriteTemplate gUnknown_0857FB4C =
+static const struct SpriteTemplate gUnknown_0857FB4C =
 {
     .tileTag = 100,
     .paletteTag = 100,
@@ -189,17 +194,17 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_857FB9C[] =
     sSpriteAffineAnim_857FB88,
 };
 
-const struct SpriteSheet gUnknown_0857FBA0 =
+static const struct SpriteSheet gUnknown_0857FBA0 =
 {
     gUnknown_0857F584, 0x80, 101
 };
 
-const struct SpritePalette gUnknown_0857FBA8 =
+static const struct SpritePalette gUnknown_0857FBA8 =
 {
     gUnknown_0857F564, 101
 };
 
-const struct SpriteTemplate gUnknown_0857FBB0 =
+static const struct SpriteTemplate gUnknown_0857FBB0 =
 {
     .tileTag = 101,
     .paletteTag = 101,
@@ -260,7 +265,7 @@ static const struct SpriteFrameImage sSpriteImageTable_857FBE4[] =
     {&gDecompressionBuffer[0], 0x800},
 };
 
-const struct SpriteTemplate gUnknown_0857FBEC =
+static const struct SpriteTemplate gUnknown_0857FBEC =
 {
     .tileTag = 65535,
     .paletteTag = 30020,
@@ -299,7 +304,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_857FC74[] =
     sSpriteAffineAnim_857FC3C
 };
 
-const struct SpriteTemplate gUnknown_0857FC7C =
+static const struct SpriteTemplate gUnknown_0857FC7C =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x7544,
@@ -357,8 +362,109 @@ static const struct CompressedTilesPal gBerryPicTable[] =
     {gBerryPic_Enigma, gBerryPalette_Enigma},
 };
 
-extern const struct SpriteTemplate gUnknown_0857FBEC;
-extern const struct SpriteTemplate gUnknown_0857FE10;
+const struct CompressedSpriteSheet gUnknown_0857FDEC =
+{
+    gBerryCheckCircle_Gfx, 0x800, 10000
+};
+
+const struct CompressedSpritePalette gUnknown_0857FDF4 =
+{
+    gUnknown_08D9BEF0, 10000
+};
+
+static const struct OamData sOamData_857FDFC =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_857FE04[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_857FE0C[] =
+{
+    sSpriteAnim_857FE04
+};
+
+static const struct SpriteTemplate gUnknown_0857FE10 =
+{
+    .tileTag = 10000,
+    .paletteTag = 10000,
+    .oam = &sOamData_857FDFC,
+    .anims = sSpriteAnimTable_857FE0C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct SpriteTemplate gUnknown_0857FE28 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D5860,
+};
+
+const struct SpriteTemplate gUnknown_0857FE40 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D58F8,
+};
+
+const struct SpriteTemplate gUnknown_0857FE58 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D5968,
+};
+
+const struct SpriteTemplate gUnknown_0857FE70 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D5A94,
+};
+
+const struct SpriteTemplate gUnknown_0857FE88 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D5B48,
+};
 
 // code
 void RemoveBagSprite(u8 id)
@@ -397,7 +503,7 @@ void SetBagVisualPocketId(u8 bagPocketId, bool8 isSwitchingPockets)
     }
 }
 
-void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite)
+static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite)
 {
     if (sprite->pos2.y != 0)
     {
@@ -420,7 +526,7 @@ void ShakeBagVisual(void)
     }
 }
 
-void SpriteCB_ShakeBagVisual(struct Sprite *sprite)
+static void SpriteCB_ShakeBagVisual(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
@@ -429,7 +535,7 @@ void SpriteCB_ShakeBagVisual(struct Sprite *sprite)
     }
 }
 
-void AddSwitchPocketRotatingBallSprite(u16 rotationDirection)
+void AddSwitchPocketRotatingBallSprite(s16 rotationDirection)
 {
     u8 *spriteId = &gUnknown_0203CE54->unk804[1];
     LoadSpriteSheet(&gUnknown_0857FBA0);
@@ -438,13 +544,13 @@ void AddSwitchPocketRotatingBallSprite(u16 rotationDirection)
     gSprites[*spriteId].data[0] = rotationDirection;
 }
 
-void update_switch_pocket_rotating_ball_coords(struct Sprite *sprite)
+static void update_switch_pocket_rotating_ball_coords(struct Sprite *sprite)
 {
     sprite->centerToCornerVecX = sprite->data[1] - ((sprite->data[3] + 1) & 1);
     sprite->centerToCornerVecY = sprite->data[1] - ((sprite->data[3] + 1) & 1);
 }
 
-void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite)
+static void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite)
 {
     sprite->oam.affineMode = 1;
     if (sprite->data[0] == -1)
@@ -459,7 +565,7 @@ void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite)
     sprite->callback = SpriteCB_SwitchPocketRotatingBallContinue;
 }
 
-void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite)
+static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite)
 {
     sprite->data[3]++;
     update_switch_pocket_rotating_ball_coords(sprite);
@@ -506,7 +612,7 @@ void sub_80D4FEC(u8 arg0)
     sub_8122448(&gUnknown_0203CE54->unk804[4], 136, 120, (arg0 + 1) * 16);
 }
 
-void sub_80D5018(void *mem0, void *mem1)
+static void sub_80D5018(void *mem0, void *mem1)
 {
     u8 i, j;
 
@@ -526,7 +632,7 @@ void sub_80D5018(void *mem0, void *mem1)
     }
 }
 
-void sub_80D5070(u8 berryId)
+static void sub_80D5070(u8 berryId)
 {
     struct CompressedSpritePalette pal;
 
