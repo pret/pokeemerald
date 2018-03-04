@@ -12,10 +12,6 @@
 #include "util.h"
 #include "constants/battle_ai.h"
 
-#define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
-#define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
-#define AIScriptReadPtr(ptr) (const u8*) AIScriptRead32(ptr)
-
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
 #define AI_ACTION_WATCH         0x0004
@@ -652,7 +648,7 @@ static void BattleAICmd_if_random_less_than(void)
     u16 random = Random();
 
     if (random % 256 < gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -662,7 +658,7 @@ static void BattleAICmd_if_random_greater_than(void)
     u16 random = Random();
 
     if (random % 256 > gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -672,7 +668,7 @@ static void BattleAICmd_if_random_equal(void)
     u16 random = Random();
 
     if (random % 256 == gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -682,7 +678,7 @@ static void BattleAICmd_if_random_not_equal(void)
     u16 random = Random();
 
     if (random % 256 != gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -707,7 +703,7 @@ static void BattleAICmd_if_hp_less_than(void)
         battlerId = gBattlerTarget;
 
     if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) < gAIScriptPtr[2])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
 }
@@ -722,7 +718,7 @@ static void BattleAICmd_if_hp_more_than(void)
         battlerId = gBattlerTarget;
 
     if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) > gAIScriptPtr[2])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
 }
@@ -737,7 +733,7 @@ static void BattleAICmd_if_hp_equal(void)
         battlerId = gBattlerTarget;
 
     if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) == gAIScriptPtr[2])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
 }
@@ -752,7 +748,7 @@ static void BattleAICmd_if_hp_not_equal(void)
         battlerId = gBattlerTarget;
 
     if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) != gAIScriptPtr[2])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
 }
@@ -767,10 +763,10 @@ static void BattleAICmd_if_status(void)
     else
         battlerId = gBattlerTarget;
 
-    status = AIScriptRead32(gAIScriptPtr + 2);
+    status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gBattleMons[battlerId].status1 & status) != 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
@@ -785,10 +781,10 @@ static void BattleAICmd_if_not_status(void)
     else
         battlerId = gBattlerTarget;
 
-    status = AIScriptRead32(gAIScriptPtr + 2);
+    status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gBattleMons[battlerId].status1 & status) == 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
@@ -803,10 +799,10 @@ static void BattleAICmd_if_status2(void)
     else
         battlerId = gBattlerTarget;
 
-    status = AIScriptRead32(gAIScriptPtr + 2);
+    status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gBattleMons[battlerId].status2 & status) != 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
@@ -821,10 +817,10 @@ static void BattleAICmd_if_not_status2(void)
     else
         battlerId = gBattlerTarget;
 
-    status = AIScriptRead32(gAIScriptPtr + 2);
+    status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gBattleMons[battlerId].status2 & status) == 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
@@ -839,10 +835,10 @@ static void BattleAICmd_if_status3(void)
     else
         battlerId = gBattlerTarget;
 
-    status = AIScriptRead32(gAIScriptPtr + 2);
+    status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gStatuses3[battlerId] & status) != 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
@@ -857,10 +853,10 @@ static void BattleAICmd_if_not_status3(void)
     else
         battlerId = gBattlerTarget;
 
-    status = AIScriptRead32(gAIScriptPtr + 2);
+    status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gStatuses3[battlerId] & status) == 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
@@ -876,10 +872,10 @@ static void BattleAICmd_if_side_affecting(void)
         battlerId = gBattlerTarget;
 
     side = GET_BATTLER_SIDE(battlerId);
-    status = AIScriptRead32(gAIScriptPtr + 2);
+    status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gSideStatuses[side] & status) != 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
@@ -895,10 +891,10 @@ static void BattleAICmd_if_not_side_affecting(void)
         battlerId = gBattlerTarget;
 
     side = GET_BATTLER_SIDE(battlerId);
-    status = AIScriptRead32(gAIScriptPtr + 2);
+    status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gSideStatuses[side] & status) == 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
@@ -906,7 +902,7 @@ static void BattleAICmd_if_not_side_affecting(void)
 static void BattleAICmd_if_less_than(void)
 {
     if (AI_THINKING_STRUCT->funcResult < gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -914,7 +910,7 @@ static void BattleAICmd_if_less_than(void)
 static void BattleAICmd_if_more_than(void)
 {
     if (AI_THINKING_STRUCT->funcResult > gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -922,7 +918,7 @@ static void BattleAICmd_if_more_than(void)
 static void BattleAICmd_if_equal(void)
 {
     if (AI_THINKING_STRUCT->funcResult == gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -930,80 +926,80 @@ static void BattleAICmd_if_equal(void)
 static void BattleAICmd_if_not_equal(void)
 {
     if (AI_THINKING_STRUCT->funcResult != gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
 
 static void BattleAICmd_if_less_than_ptr(void)
 {
-    const u8 *value = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *value = T1_READ_PTR(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->funcResult < *value)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
     else
         gAIScriptPtr += 9;
 }
 
 static void BattleAICmd_if_more_than_ptr(void)
 {
-    const u8 *value = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *value = T1_READ_PTR(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->funcResult > *value)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
     else
         gAIScriptPtr += 9;
 }
 
 static void BattleAICmd_if_equal_ptr(void)
 {
-    const u8 *value = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *value = T1_READ_PTR(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->funcResult == *value)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
     else
         gAIScriptPtr += 9;
 }
 
 static void BattleAICmd_if_not_equal_ptr(void)
 {
-    const u8 *value = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *value = T1_READ_PTR(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->funcResult != *value)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
     else
         gAIScriptPtr += 9;
 }
 
 static void BattleAICmd_if_move(void)
 {
-    u16 move = AIScriptRead16(gAIScriptPtr + 1);
+    u16 move = T1_READ_16(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->moveConsidered == move)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
 }
 
 static void BattleAICmd_if_not_move(void)
 {
-    u16 move = AIScriptRead16(gAIScriptPtr + 1);
+    u16 move = T1_READ_16(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->moveConsidered != move)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
 }
 
 static void BattleAICmd_if_in_bytes(void)
 {
-    const u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *ptr = T1_READ_PTR(gAIScriptPtr + 1);
 
     while (*ptr != 0xFF)
     {
         if (AI_THINKING_STRUCT->funcResult == *ptr)
         {
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
             return;
         }
         ptr++;
@@ -1013,7 +1009,7 @@ static void BattleAICmd_if_in_bytes(void)
 
 static void BattleAICmd_if_not_in_bytes(void)
 {
-    const u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *ptr = T1_READ_PTR(gAIScriptPtr + 1);
 
     while (*ptr != 0xFF)
     {
@@ -1024,18 +1020,18 @@ static void BattleAICmd_if_not_in_bytes(void)
         }
         ptr++;
     }
-    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
+    gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
 }
 
 static void BattleAICmd_if_in_hwords(void)
 {
-    const u16 *ptr = (const u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
+    const u16 *ptr = (const u16 *)T1_READ_PTR(gAIScriptPtr + 1);
 
     while (*ptr != 0xFFFF)
     {
         if (AI_THINKING_STRUCT->funcResult == *ptr)
         {
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
             return;
         }
         ptr++;
@@ -1045,7 +1041,7 @@ static void BattleAICmd_if_in_hwords(void)
 
 static void BattleAICmd_if_not_in_hwords(void)
 {
-    const u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
+    const u16 *ptr = (u16 *)T1_READ_PTR(gAIScriptPtr + 1);
 
     while (*ptr != 0xFFFF)
     {
@@ -1056,7 +1052,7 @@ static void BattleAICmd_if_not_in_hwords(void)
         }
         ptr++;
     }
-    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
+    gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
 }
 
 static void BattleAICmd_if_user_has_attacking_move(void)
@@ -1072,7 +1068,7 @@ static void BattleAICmd_if_user_has_attacking_move(void)
     if (i == 4)
         gAIScriptPtr += 5;
     else
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
 }
 
 static void BattleAICmd_if_user_has_no_attacking_moves(void)
@@ -1088,7 +1084,7 @@ static void BattleAICmd_if_user_has_no_attacking_moves(void)
     if (i != 4)
         gAIScriptPtr += 5;
     else
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
 }
 
 static void BattleAICmd_get_turn_count(void)
@@ -1237,7 +1233,7 @@ static void BattleAICmd_get_last_used_bank_move(void)
 static void BattleAICmd_if_equal_(void) // same as if_equal
 {
     if (gAIScriptPtr[1] == AI_THINKING_STRUCT->funcResult)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -1245,7 +1241,7 @@ static void BattleAICmd_if_equal_(void) // same as if_equal
 static void BattleAICmd_if_not_equal_(void) // same as if_not_equal
 {
     if (gAIScriptPtr[1] != AI_THINKING_STRUCT->funcResult)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -1253,7 +1249,7 @@ static void BattleAICmd_if_not_equal_(void) // same as if_not_equal
 static void BattleAICmd_if_user_goes(void)
 {
     if (GetWhoStrikesFirst(sBattler_AI, gBattlerTarget, TRUE) == gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -1261,7 +1257,7 @@ static void BattleAICmd_if_user_goes(void)
 static void BattleAICmd_if_user_doesnt_go(void)
 {
     if (GetWhoStrikesFirst(sBattler_AI, gBattlerTarget, TRUE) != gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -1527,7 +1523,7 @@ static void BattleAICmd_if_type_effectiveness(void)
     damageVar = gBattleMoveDamage;
 
     if (damageVar == gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -1559,7 +1555,7 @@ static void BattleAICmd_if_status_in_party(void)
 
     party = (GetBattlerSide(battlerId) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
-    statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
+    statusToCompareTo = T1_READ_32(gAIScriptPtr + 2);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -1569,7 +1565,7 @@ static void BattleAICmd_if_status_in_party(void)
 
         if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
         {
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
             return;
         }
     }
@@ -1596,7 +1592,7 @@ static void BattleAICmd_if_status_not_in_party(void)
 
     party = (GetBattlerSide(battlerId) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
-    statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
+    statusToCompareTo = T1_READ_32(gAIScriptPtr + 2);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -1610,7 +1606,7 @@ static void BattleAICmd_if_status_not_in_party(void)
         }
     }
 
-    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+    gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
 }
 
 static void BattleAICmd_get_weather(void)
@@ -1630,7 +1626,7 @@ static void BattleAICmd_get_weather(void)
 static void BattleAICmd_if_effect(void)
 {
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -1638,7 +1634,7 @@ static void BattleAICmd_if_effect(void)
 static void BattleAICmd_if_not_effect(void)
 {
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect != gAIScriptPtr[1])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
@@ -1653,7 +1649,7 @@ static void BattleAICmd_if_stat_level_less_than(void)
         battlerId = gBattlerTarget;
 
     if (gBattleMons[battlerId].statStages[gAIScriptPtr[2]] < gAIScriptPtr[3])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
@@ -1668,7 +1664,7 @@ static void BattleAICmd_if_stat_level_more_than(void)
         battlerId = gBattlerTarget;
 
     if (gBattleMons[battlerId].statStages[gAIScriptPtr[2]] > gAIScriptPtr[3])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
@@ -1683,7 +1679,7 @@ static void BattleAICmd_if_stat_level_equal(void)
         battlerId = gBattlerTarget;
 
     if (gBattleMons[battlerId].statStages[gAIScriptPtr[2]] == gAIScriptPtr[3])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
@@ -1698,7 +1694,7 @@ static void BattleAICmd_if_stat_level_not_equal(void)
         battlerId = gBattlerTarget;
 
     if (gBattleMons[battlerId].statStages[gAIScriptPtr[2]] != gAIScriptPtr[3])
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
@@ -1727,7 +1723,7 @@ static void BattleAICmd_if_can_faint(void)
         gBattleMoveDamage = 1;
 
     if (gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
 }
@@ -1754,7 +1750,7 @@ static void BattleAICmd_if_cant_faint(void)
     // this macro is missing the damage 0 = 1 assumption.
 
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
 }
@@ -1779,7 +1775,7 @@ static void BattleAICmd_if_has_move(void)
             }
             else
             {
-                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
                 return;
             }
         case AI_USER_PARTNER:
@@ -1803,7 +1799,7 @@ static void BattleAICmd_if_has_move(void)
             }
             else
             {
-                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
                 return;
             }
         case AI_TARGET:
@@ -1820,7 +1816,7 @@ static void BattleAICmd_if_has_move(void)
             }
             else
             {
-                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
                 return;
             }
     }
@@ -1847,7 +1843,7 @@ static void BattleAICmd_if_doesnt_have_move(void)
             }
             else
             {
-                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
                 return;
             }
         case AI_TARGET:
@@ -1864,7 +1860,7 @@ static void BattleAICmd_if_doesnt_have_move(void)
             }
             else
             {
-                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
                 return;
             }
     }
@@ -1886,7 +1882,7 @@ static void BattleAICmd_if_has_move_with_effect(void)
         if (i == 4)
             gAIScriptPtr += 7;
         else
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
@@ -1899,7 +1895,7 @@ static void BattleAICmd_if_has_move_with_effect(void)
         if (i == 4)
             gAIScriptPtr += 7;
         else
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         break;
     }
 }
@@ -1920,7 +1916,7 @@ static void BattleAICmd_if_doesnt_have_move_with_effect(void)
         if (i != 4)
             gAIScriptPtr += 7;
         else
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
@@ -1932,7 +1928,7 @@ static void BattleAICmd_if_doesnt_have_move_with_effect(void)
         if (i != 4)
             gAIScriptPtr += 7;
         else
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         break;
     }
 }
@@ -1953,7 +1949,7 @@ static void BattleAICmd_if_any_move_disabled_or_encored(void)
             gAIScriptPtr += 7;
             return;
         }
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         return;
     }
     else if (gAIScriptPtr[2] != 1) // ignore the macro if its not 0 or 1.
@@ -1963,7 +1959,7 @@ static void BattleAICmd_if_any_move_disabled_or_encored(void)
     }
     else if (gDisableStructs[battlerId].encoredMove != 0)
     {
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         return;
     }
     gAIScriptPtr += 7;
@@ -1976,7 +1972,7 @@ static void BattleAICmd_if_curr_move_disabled_or_encored(void)
     case 0:
         if (gDisableStructs[gActiveBattler].disabledMove == AI_THINKING_STRUCT->moveConsidered)
         {
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
             return;
         }
         gAIScriptPtr += 6;
@@ -1984,7 +1980,7 @@ static void BattleAICmd_if_curr_move_disabled_or_encored(void)
     case 1:
         if (gDisableStructs[gActiveBattler].encoredMove == AI_THINKING_STRUCT->moveConsidered)
         {
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
             return;
         }
         gAIScriptPtr += 6;
@@ -2005,7 +2001,7 @@ static void BattleAICmd_if_random_safari_flee(void)
     u8 safariFleeRate = gBattleStruct->field_7B * 5; // safari flee rate, from 0-20
 
     if ((u8)(Random() % 100) < safariFleeRate)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
 }
@@ -2048,7 +2044,7 @@ static void BattleAICmd_if_holds_item(void)
     var1 = gAIScriptPtr[3];
 
     if ((var1 | var2) == item)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
@@ -2183,12 +2179,12 @@ static void BattleAICmd_nullsub_57(void)
 static void BattleAICmd_call(void)
 {
     AIStackPushVar(gAIScriptPtr + 5);
-    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
 }
 
 static void BattleAICmd_goto(void)
 {
-    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
 }
 
 static void BattleAICmd_end(void)
@@ -2204,7 +2200,7 @@ static void BattleAICmd_if_level_cond(void)
     case 0: // greater than
         if (gBattleMons[sBattler_AI].level > gBattleMons[gBattlerTarget].level)
         {
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
             return;
         }
         gAIScriptPtr += 6;
@@ -2212,7 +2208,7 @@ static void BattleAICmd_if_level_cond(void)
     case 1: // less than
         if (gBattleMons[sBattler_AI].level < gBattleMons[gBattlerTarget].level)
         {
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
             return;
         }
         gAIScriptPtr += 6;
@@ -2220,7 +2216,7 @@ static void BattleAICmd_if_level_cond(void)
     case 2: // equal
         if (gBattleMons[sBattler_AI].level == gBattleMons[gBattlerTarget].level)
         {
-            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
             return;
         }
         gAIScriptPtr += 6;
@@ -2231,7 +2227,7 @@ static void BattleAICmd_if_level_cond(void)
 static void BattleAICmd_if_target_taunted(void)
 {
     if (gDisableStructs[gBattlerTarget].tauntTimer1 != 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
 }
@@ -2239,7 +2235,7 @@ static void BattleAICmd_if_target_taunted(void)
 static void BattleAICmd_if_target_not_taunted(void)
 {
     if (gDisableStructs[gBattlerTarget].tauntTimer1 == 0)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
 }
@@ -2247,7 +2243,7 @@ static void BattleAICmd_if_target_not_taunted(void)
 static void BattleAICmd_if_target_is_ally(void)
 {
     if ((sBattler_AI & BIT_SIDE) == (gBattlerTarget & BIT_SIDE))
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
 }
@@ -2257,7 +2253,7 @@ static void BattleAICmd_if_flash_fired(void)
     u8 battlerId = BattleAI_GetWantedBank(gAIScriptPtr[1]);
 
     if (gBattleResources->flags->flags[battlerId] & UNKNOWN_FLAG_FLASH_FIRE)
-        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }

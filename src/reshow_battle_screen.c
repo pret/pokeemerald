@@ -13,6 +13,7 @@
 #include "constants/species.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
+#include "data2.h"
 
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
@@ -25,14 +26,14 @@ extern u16 gBattle_BG3_Y;
 
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
 
-extern void sub_806A068(u16 species, u8 bankIdentity);
-extern void sub_806A12C(u16 backPicId, u8 bankIdentity);
+extern void sub_806A068(u16 species, u8 battlerPosition);
+extern void sub_806A12C(u16 backPicId, u8 battlerPosition);
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
-static bool8 LoadBattlerSpriteGfx(u8 bank);
-static void CreateBattlerSprite(u8 bank);
-static void CreateHealthboxSprite(u8 bank);
+static bool8 LoadBattlerSpriteGfx(u8 battlerId);
+static void CreateBattlerSprite(u8 battlerId);
+static void CreateHealthboxSprite(u8 battlerId);
 static void sub_80A95F4(void);
 
 void nullsub_35(void)
@@ -216,16 +217,6 @@ static bool8 LoadBattlerSpriteGfx(u8 battler)
     }
     return TRUE;
 }
-
-// todo: get rid of it once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
-extern const struct MonCoords gTrainerBackPicCoords[];
 
 static void CreateBattlerSprite(u8 battler)
 {

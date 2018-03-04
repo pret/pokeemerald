@@ -76,26 +76,26 @@ void FreeBattleResources(void)
 
 void AdjustFriendshipOnBattleFaint(u8 battlerId)
 {
-    u8 opposingBank;
+    u8 opposingBattlerId;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        u8 opposingBank2;
+        u8 opposingBattlerId2;
 
-        opposingBank = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        opposingBank2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        opposingBattlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        opposingBattlerId2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
 
-        if (gBattleMons[opposingBank2].level > gBattleMons[opposingBank].level)
-            opposingBank = opposingBank2;
+        if (gBattleMons[opposingBattlerId2].level > gBattleMons[opposingBattlerId].level)
+            opposingBattlerId = opposingBattlerId2;
     }
     else
     {
-        opposingBank = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        opposingBattlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
     }
 
-    if (gBattleMons[opposingBank].level > gBattleMons[battlerId].level)
+    if (gBattleMons[opposingBattlerId].level > gBattleMons[battlerId].level)
     {
-        if (gBattleMons[opposingBank].level - gBattleMons[battlerId].level > 29)
+        if (gBattleMons[opposingBattlerId].level - gBattleMons[battlerId].level > 29)
             AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], 8);
         else
             AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], 6);
