@@ -991,7 +991,6 @@ u8 GetSwitchBagPocketDirection(void)
     return 0;
 }
 
-
 void ChangeBagPocketId(u8 *bagPocketId, s8 deltaBagPocketId)
 {
     if (deltaBagPocketId == 1 && *bagPocketId == 4)
