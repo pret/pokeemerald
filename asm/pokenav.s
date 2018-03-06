@@ -7611,7 +7611,7 @@ _081CAD4C:
 	ldrh r5, [r4, 0x8]
 _081CAD50:
 	adds r0, r5, 0
-	bl sub_81D15F4
+	bl MatchCallFlagGetByIndex
 	cmp r0, 0
 	beq _081CAD80
 	ldrh r0, [r4, 0xA]
@@ -7834,7 +7834,7 @@ sub_81CAEBC: @ 81CAEBC
 	b _081CAEDC
 _081CAED4:
 	ldrh r0, [r1, 0x1E]
-	bl sub_81D1854
+	bl MatchCall_GetRematchTableIdx
 	adds r4, r0, 0
 _081CAEDC:
 	cmp r4, 0x4E
@@ -7883,7 +7883,7 @@ sub_81CAF04: @ 81CAF04
 _081CAF34:
 	ldrh r5, [r1, 0x1E]
 	adds r0, r5, 0
-	bl sub_81D1854
+	bl MatchCall_GetRematchTableIdx
 	adds r4, r0, 0
 	cmp r4, 0x4E
 	bne _081CAF58
@@ -7970,7 +7970,7 @@ sub_81CAFD8: @ 81CAFD8
 	cmp r0, 0
 	beq _081CB004
 	ldrh r0, [r4, 0x1E]
-	bl sub_81D1854
+	bl MatchCall_GetRematchTableIdx
 	adds r1, r0, 0
 	cmp r1, 0x4E
 	bne _081CB006
@@ -8207,11 +8207,11 @@ _081CB18A:
 	movs r4, 0
 _081CB192:
 	adds r0, r4, 0
-	bl sub_81D15F4
+	bl MatchCallFlagGetByIndex
 	cmp r0, 0
 	beq _081CB1C0
 	adds r0, r4, 0
-	bl sub_81D1854
+	bl MatchCall_GetRematchTableIdx
 	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x000009ca
