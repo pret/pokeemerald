@@ -8,17 +8,15 @@
 #include "battle_frontier_1.h"
 #include "gym_leader_rematch.h"
 
-#define NELEMS(a) (s32)( sizeof (a) / sizeof (*(a)) )
-
 extern const u8 gTrainerClassNames[][13];
 
 // Static type declarations
 
-typedef struct MatchCallSusbtruct0 {
+typedef struct MatchCallTextDataStruct {
     const u8 *text;
     u16 flag;
     u16 flag2;
-} match_call_sub0_t;
+} match_call_text_data_t;
 
 struct MatchCallStructCommon {
     u8 type;
@@ -32,7 +30,7 @@ struct MatchCallStruct0 {
     u16 flag;
     const u8 *desc;
     const u8 *name;
-    const match_call_sub0_t *textData;
+    const match_call_text_data_t *textData;
 };
 
 struct MatchCallStruct1 {
@@ -42,11 +40,11 @@ struct MatchCallStruct1 {
     u16 rematchTableIdx;
     const u8 *desc;
     const u8 *name;
-    const match_call_sub0_t *textData;
+    const match_call_text_data_t *textData;
 };
 
 struct MatchCallSubstruct2 {
-    u16 v0;
+    u16 flag;
     u8 v2;
 };
 
@@ -56,7 +54,7 @@ struct MatchCallStruct2 {
     u16 flag;
     u16 rematchTableIdx;
     const u8 *desc;
-    const match_call_sub0_t *textData;
+    const match_call_text_data_t *textData;
     const struct MatchCallSubstruct2 *v10;
 };
 
@@ -74,7 +72,7 @@ struct MatchCallStruct4 {
     u16 flag;
     const u8 *desc;
     const u8 *name;
-    const match_call_sub0_t *textData;
+    const match_call_text_data_t *textData;
 };
 
 struct MatchCallStruct5 {
@@ -84,7 +82,7 @@ struct MatchCallStruct5 {
     u16 v4;
     const u8 *desc;
     const u8 *name;
-    const match_call_sub0_t *textData;
+    const match_call_text_data_t *textData;
 };
 
 #define MATCHCALLDEF(name, type_, ...) \
@@ -114,29 +112,29 @@ struct UnkStruct_08625388 {
 
 // Static ROM declarations
 
-static bool32 sub_81D1628(match_call_t);
-static bool32 sub_81D164C(match_call_t);
-static bool32 sub_81D1670(match_call_t);
-static bool32 sub_81D1694(match_call_t);
-static bool32 sub_81D16CC(match_call_t);
+static bool32 sMatchCallGetFlag_Type0(match_call_t);
+static bool32 sMatchCallGetFlag_Type1(match_call_t);
+static bool32 sMatchCallGetFlag_Type2(match_call_t);
+static bool32 sMatchCallGetFlag_Type3(match_call_t);
+static bool32 sMatchCallGetFlag_Type4(match_call_t);
 
-u8 sub_81D1714(match_call_t);
-u8 sub_81D1718(match_call_t);
-u8 sub_81D171C(match_call_t);
-u8 sub_81D1750(match_call_t);
-u8 sub_81D1754(match_call_t);
+static u8 sub_81D1714(match_call_t);
+static u8 sub_81D1718(match_call_t);
+static u8 sub_81D171C(match_call_t);
+static u8 sub_81D1750(match_call_t);
+static u8 sub_81D1754(match_call_t);
 
-bool32 sub_81D178C(match_call_t);
-bool32 sub_81D1790(match_call_t);
-bool32 sub_81D17C0(match_call_t);
-bool32 sub_81D17E0(match_call_t);
-bool32 sub_81D17E4(match_call_t);
+static bool32 MatchCall_IsRematchable_Type0(match_call_t);
+static bool32 MatchCall_IsRematchable_Type1(match_call_t);
+static bool32 MatchCall_IsRematchable_Type2(match_call_t);
+static bool32 MatchCall_IsRematchable_Type3(match_call_t);
+static bool32 MatchCall_IsRematchable_Type4(match_call_t);
 
-bool32 sub_81D1840(match_call_t);
-bool32 sub_81D1844(match_call_t);
-bool32 sub_81D1848(match_call_t);
-bool32 sub_81D184C(match_call_t);
-bool32 sub_81D1850(match_call_t);
+static bool32 sub_81D1840(match_call_t);
+static bool32 sub_81D1844(match_call_t);
+static bool32 sub_81D1848(match_call_t);
+static bool32 sub_81D184C(match_call_t);
+static bool32 sub_81D1850(match_call_t);
 
 static u32 MatchCall_GetRematchTableIdx_Type0(match_call_t);
 static u32 MatchCall_GetRematchTableIdx_Type1(match_call_t);
@@ -150,15 +148,15 @@ static void MatchCall_GetMessage_Type2(match_call_t, u8 *);
 static void MatchCall_GetMessage_Type3(match_call_t, u8 *);
 static void MatchCall_GetMessage_Type4(match_call_t, u8 *);
 
-void sub_81D1AB0(match_call_t, const u8 **, const u8 **);
-void sub_81D1ABC(match_call_t, const u8 **, const u8 **);
-void sub_81D1ADC(match_call_t, const u8 **, const u8 **);
-void sub_81D1AF4(match_call_t, const u8 **, const u8 **);
-void sub_81D1B00(match_call_t, const u8 **, const u8 **);
+static void MatchCall_GetNameAndDesc_Type0(match_call_t, const u8 **, const u8 **);
+static void MatchCall_GetNameAndDesc_Type1(match_call_t, const u8 **, const u8 **);
+static void MatchCall_GetNameAndDesc_Type2(match_call_t, const u8 **, const u8 **);
+static void MatchCall_GetNameAndDesc_Type3(match_call_t, const u8 **, const u8 **);
+static void MatchCall_GetNameAndDesc_Type4(match_call_t, const u8 **, const u8 **);
 
-void sub_81D1920(const match_call_sub0_t *, u8 *);
-void sub_81D199C(const match_call_sub0_t *, u16, u8 *);
-void sub_81D1B0C(u32, const u8 **, const u8 **);
+static void sub_81D1920(const match_call_text_data_t *, u8 *);
+static void sub_81D199C(const match_call_text_data_t *, u16, u8 *);
+static void MatchCall_GetNameAndDescByRematchIdx(u32, const u8 **, const u8 **);
 
 extern const u8 gText_MrStone_Pokenav_2B60C0[];
 extern const u8 gText_MrStone_Pokenav_2B61E6[];
@@ -317,7 +315,7 @@ extern const u8 gMatchCall_MaySelfIntroductionText_Line1[];
 extern const u8 gMatchCall_MaySelfIntroductionText_Line2[];
 // .rodata
 
-static const match_call_sub0_t sMrStoneTextScripts[] = {
+static const match_call_text_data_t sMrStoneTextScripts[] = {
     { gText_MrStone_Pokenav_2B60C0, 0xFFFF,              FLAG_0x158 },
     { gText_MrStone_Pokenav_2B61E6, FLAG_0x158,          0xFFFF },
     { gText_MrStone_Pokenav_2B6302, FLAG_0x0BD,          0xFFFF },
@@ -334,7 +332,7 @@ static const match_call_sub0_t sMrStoneTextScripts[] = {
 
 MATCHCALLDEF(sMrStoneMatchCallHeader, 0, 10, 0xffff, gMrStoneMatchCallDesc, gMrStoneMatchCallName, sMrStoneTextScripts);
 
-static const match_call_sub0_t sNormanTextScripts[] = {
+static const match_call_text_data_t sNormanTextScripts[] = {
     { gText_Norman_Pokenav_2B5719, FLAG_0x132,           0xFFFF },
     { gText_Norman_Pokenav_2B5795, FLAG_0x4F1,           0xFFFF },
     { gText_Norman_Pokenav_2B584D, FLAG_0x4F3,           0xFFFF },
@@ -351,7 +349,7 @@ MATCHCALLDEF(sNormanMatchCallHeader, 5, 7, FLAG_0x132, 0x45, gNormanMatchCallDes
 
 MATCHCALLDEF(sProfBirchMatchCallHeader, 3, 0, FLAG_0x119, gProfBirchMatchCallDesc, gProfBirchMatchCallName)
 
-static const match_call_sub0_t sMomTextScripts[] = {
+static const match_call_text_data_t sMomTextScripts[] = {
     { gText_Mom_Pokenav_2B227B, 0xffff,              0xffff },
     { gText_Mom_Pokenav_2B2310, FLAG_0x4F4,          0xffff },
     { gText_Mom_Pokenav_2B23F3, FLAG_SYS_GAME_CLEAR, 0xffff },
@@ -360,7 +358,7 @@ static const match_call_sub0_t sMomTextScripts[] = {
 
 MATCHCALLDEF(sMomMatchCallHeader, 0, 0, FLAG_0x0D8, gMomMatchCallDesc, gMomMatchCallName, sMomTextScripts);
 
-static const match_call_sub0_t sStevenTextScripts[] = {
+static const match_call_text_data_t sStevenTextScripts[] = {
     { gText_Steven_Pokenav_2B5B95, 0xffff,              0xffff },
     { gText_Steven_Pokenav_2B5C53, FLAG_0x0C7,          0xffff },
     { gText_Steven_Pokenav_2B5CC9, FLAG_0x0D4,          0xffff },
@@ -373,7 +371,7 @@ static const match_call_sub0_t sStevenTextScripts[] = {
 
 MATCHCALLDEF(sStevenMatchCallHeader, 0, 0xd5, FLAG_0x131, gStevenMatchCallDesc, gStevenMatchCallName, sStevenTextScripts);
 
-static const match_call_sub0_t sMayTextScripts[] = {
+static const match_call_text_data_t sMayTextScripts[] = {
     { gText_May_Pokenav_2B3AB3, 0xFFFF,              0xFFFF },
     { gText_May_Pokenav_2B3B3F, FLAG_0x4F1,          0xFFFF },
     { gText_May_Pokenav_2B3C13, FLAG_0x095,          0xFFFF },
@@ -394,7 +392,7 @@ static const match_call_sub0_t sMayTextScripts[] = {
 
 MATCHCALLDEF(sMayMatchCallHeader, 4, MALE, FLAG_0x0FD, gMayBrendanMatchCallDesc, gExpandedPlaceholder_May, sMayTextScripts);
 
-static const match_call_sub0_t sBrendanTextScripts[] = {
+static const match_call_text_data_t sBrendanTextScripts[] = {
     { gText_Brendan_Pokenav_2B43EF, 0xFFFF,              0xFFFF },
     { gText_Brendan_Pokenav_2B4486, FLAG_0x4F1,          0xFFFF },
     { gText_Brendan_Pokenav_2B4560, FLAG_0x095,          0xFFFF },
@@ -415,7 +413,7 @@ static const match_call_sub0_t sBrendanTextScripts[] = {
 
 MATCHCALLDEF(sBrendanMatchCallHeader, 4, FEMALE, FLAG_0x0FD, gMayBrendanMatchCallDesc, gExpandedPlaceholder_Brendan, sBrendanTextScripts);
 
-static const match_call_sub0_t sWallyTextScripts[] = {
+static const match_call_text_data_t sWallyTextScripts[] = {
     { gText_Wally_Pokenav_2B4DE2, 0xFFFF,     0xFFFF },
     { gText_Wally_Pokenav_2B4E57, FLAG_0x0C7, 0xFFFF },
     { gText_Wally_Pokenav_2B4EA5, FLAG_0x4F3, 0xFFFF },
@@ -435,7 +433,7 @@ const struct MatchCallSubstruct2 sWallyAdditionalData[] = {
 
 MATCHCALLDEF(sWallyMatchCallHeader, 2, 0, FLAG_0x0D6, REMATCH_WALLY_3, gWallyMatchCallDesc, sWallyTextScripts, sWallyAdditionalData);
 
-static const match_call_sub0_t sScottTextScripts[] = {
+static const match_call_text_data_t sScottTextScripts[] = {
     { gText_Scott_Pokenav_2B5184, 0xFFFF,              0xFFFF },
     { gText_Scott_Pokenav_2B5275, FLAG_0x08B,          0xFFFF },
     { gText_Scott_Pokenav_2B5323, FLAG_0x097,          0xFFFF },
@@ -449,7 +447,7 @@ static const match_call_sub0_t sScottTextScripts[] = {
 
 MATCHCALLDEF(sScottMatchCallHeader, 0, 0xD5, FLAG_0x0D7, gScottMatchCallDesc, gScottMatchCallName, sScottTextScripts);
 
-static const match_call_sub0_t sRoxanneTextScripts[] = {
+static const match_call_text_data_t sRoxanneTextScripts[] = {
     { gText_Roxanne_Pokenav_2B2456, 0xFFFE,              0xFFFF },
     { gText_Roxanne_Pokenav_2B250E, 0xFFFF,              0xFFFF },
     { gText_Roxanne_Pokenav_2B25C1, 0xFFFF,              0xFFFF },
@@ -459,7 +457,7 @@ static const match_call_sub0_t sRoxanneTextScripts[] = {
 
 MATCHCALLDEF(sRoxanneMatchCallHeader, 5, 10, FLAG_0x1D3, 0x41, gRoxanneMatchCallDesc, NULL, sRoxanneTextScripts);
 
-static const match_call_sub0_t sBrawlyTextScripts[] = {
+static const match_call_text_data_t sBrawlyTextScripts[] = {
     { gText_Brawly_Pokenav_2B2659, 0xFFFE,              0xFFFF },
     { gText_Brawly_Pokenav_2B275D, 0xFFFF,              0xFFFF },
     { gText_Brawly_Pokenav_2B286F, 0xFFFF,              0xFFFF },
@@ -469,7 +467,7 @@ static const match_call_sub0_t sBrawlyTextScripts[] = {
 
 MATCHCALLDEF(sBrawlyMatchCallHeader, 5, 2, FLAG_0x1D4, 0x42, gBrawlyMatchCallDesc, NULL, sBrawlyTextScripts);
 
-static const match_call_sub0_t sWattsonTextScripts[] = {
+static const match_call_text_data_t sWattsonTextScripts[] = {
     { gText_Wattson_Pokenav_2B2912, 0xFFFE,              0xFFFF },
     { gText_Wattson_Pokenav_2B29CA, 0xFFFF,              0xFFFF },
     { gText_Wattson_Pokenav_2B2AB6, 0xFFFF,              0xFFFF },
@@ -479,7 +477,7 @@ static const match_call_sub0_t sWattsonTextScripts[] = {
 
 MATCHCALLDEF(sWattsonMatchCallHeader, 5, 9, FLAG_0x1D5, 0x43, gWattsonMatchCallDesc, NULL, sWattsonTextScripts);
 
-static const match_call_sub0_t sFlanneryTextScripts[] = {
+static const match_call_text_data_t sFlanneryTextScripts[] = {
     { gText_Flannery_Pokenav_2B2B4D, 0xFFFE,              0xFFFF },
     { gText_Flannery_Pokenav_2B2C0E, 0xFFFF,              0xFFFF },
     { gText_Flannery_Pokenav_2B2CF1, 0xFFFF,              0xFFFF },
@@ -489,7 +487,7 @@ static const match_call_sub0_t sFlanneryTextScripts[] = {
 
 MATCHCALLDEF(sFlanneryMatchCallHeader, 5, 3, FLAG_0x1D6, 0x44, gFlanneryMatchCallDesc, NULL, sFlanneryTextScripts);
 
-static const match_call_sub0_t sWinonaTextScripts[] = {
+static const match_call_text_data_t sWinonaTextScripts[] = {
     { gText_Winona_Pokenav_2B2DA4, 0xFFFE,              0xFFFF },
     { gText_Winona_Pokenav_2B2E2B, 0xFFFF,              0xFFFF },
     { gText_Winona_Pokenav_2B2EC2, 0xFFFF,              0xFFFF },
@@ -499,7 +497,7 @@ static const match_call_sub0_t sWinonaTextScripts[] = {
 
 MATCHCALLDEF(sWinonaMatchCallHeader, 5, 11, FLAG_0x1D7, 0x46, gWinonaMatchCallDesc, NULL, sWinonaTextScripts);
 
-static const match_call_sub0_t sTateLizaTextScripts[] = {
+static const match_call_text_data_t sTateLizaTextScripts[] = {
     { gText_TateLiza_Pokenav_2B2F97, 0xFFFE,              0xFFFF },
     { gText_TateLiza_Pokenav_2B306E, 0xFFFF,              0xFFFF },
     { gText_TateLiza_Pokenav_2B3158, 0xFFFF,              0xFFFF },
@@ -509,7 +507,7 @@ static const match_call_sub0_t sTateLizaTextScripts[] = {
 
 MATCHCALLDEF(sTateLizaMatchCallHeader, 5, 13, FLAG_0x1D8, 0x47, gTateLizaMatchCallDesc, NULL, sTateLizaTextScripts);
 
-static const match_call_sub0_t sJuanTextScripts[] = {
+static const match_call_text_data_t sJuanTextScripts[] = {
     { gText_Juan_Pokenav_2B3249, 0xFFFE,              0xFFFF },
     { gText_Juan_Pokenav_2B32EC, 0xFFFF,              0xFFFF },
     { gText_Juan_Pokenav_2B33AA, 0xFFFF,              0xFFFF },
@@ -519,42 +517,42 @@ static const match_call_sub0_t sJuanTextScripts[] = {
 
 MATCHCALLDEF(sJuanMatchCallHeader, 5, 14, FLAG_0x1D9, 0x48, gJuanMatchCallDesc, NULL, sJuanTextScripts);
 
-static const match_call_sub0_t sSidneyTextScripts[] = {
+static const match_call_text_data_t sSidneyTextScripts[] = {
     { gText_Sidney_Pokenav_2B34CC, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
 MATCHCALLDEF(sSidneyMatchCallHeader, 5, 15, FLAG_0x1A5, 0x49, gEliteFourMatchCallDesc, NULL, sSidneyTextScripts);
 
-static const match_call_sub0_t sPhoebeTextScripts[] = {
+static const match_call_text_data_t sPhoebeTextScripts[] = {
     { gText_Phoebe_Pokenav_2B3561, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
 MATCHCALLDEF(sPhoebeMatchCallHeader, 5, 15, FLAG_0x1A6, 0x4A, gEliteFourMatchCallDesc, NULL, sPhoebeTextScripts);
 
-static const match_call_sub0_t sGlaciaTextScripts[] = {
+static const match_call_text_data_t sGlaciaTextScripts[] = {
     { gText_Glacia_Pokenav_2B35E4, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
 MATCHCALLDEF(sGlaciaMatchCallHeader, 5, 15, FLAG_0x1A7, 0x4B, gEliteFourMatchCallDesc, NULL, sGlaciaTextScripts);
 
-static const match_call_sub0_t sDrakeTextScripts[] = {
+static const match_call_text_data_t sDrakeTextScripts[] = {
     { gText_Drake_Pokenav_2B368B, 0xFFFF, 0xFFFF },
     { NULL,                       0xFFFF, 0xFFFF }
 };
 
 MATCHCALLDEF(sDrakeMatchCallHeader, 5, 15, FLAG_0x1A8, 0x4C, gEliteFourMatchCallDesc, NULL, sDrakeTextScripts);
 
-static const match_call_sub0_t sWallaceTextScripts[] = {
+static const match_call_text_data_t sWallaceTextScripts[] = {
     { gText_Wallace_Pokenav_2B3790, 0xFFFF, 0xFFFF },
     { NULL,                         0xFFFF, 0xFFFF }
 };
 
 MATCHCALLDEF(sWallaceMatchCallHeader, 5, 15, FLAG_0x1A9, 0x4D, gChampionMatchCallDesc, NULL, sWallaceTextScripts);
 
-static const match_call_t gUnknown_086252A8[] = {
+static const match_call_t sMatchCallHeaders[] = {
     {.type0 = &sMrStoneMatchCallHeader},
     {.type3 = &sProfBirchMatchCallHeader},
     {.type4 = &sBrendanMatchCallHeader},
@@ -578,15 +576,15 @@ static const match_call_t gUnknown_086252A8[] = {
     {.type5 = &sWallaceMatchCallHeader}
 };
 
-bool32 (*const gUnknown_086252FC[])(match_call_t) = {
-    sub_81D1628,
-    sub_81D164C,
-    sub_81D1670,
-    sub_81D1694,
-    sub_81D16CC
+static bool32 (*const sMatchCallGetFlagFuncs[])(match_call_t) = {
+    sMatchCallGetFlag_Type0,
+    sMatchCallGetFlag_Type1,
+    sMatchCallGetFlag_Type2,
+    sMatchCallGetFlag_Type3,
+    sMatchCallGetFlag_Type4
 };
 
-u8 (*const gUnknown_08625310[])(match_call_t) = {
+static u8 (*const gUnknown_08625310[])(match_call_t) = {
     sub_81D1714,
     sub_81D1718,
     sub_81D171C,
@@ -594,15 +592,15 @@ u8 (*const gUnknown_08625310[])(match_call_t) = {
     sub_81D1754
 };
 
-bool32 (*const gUnknown_08625324[])(match_call_t) = {
-    sub_81D178C,
-    sub_81D1790,
-    sub_81D17C0,
-    sub_81D17E0,
-    sub_81D17E4
+static bool32 (*const sMatchCall_IsRematchableFunctions[])(match_call_t) = {
+    MatchCall_IsRematchable_Type0,
+    MatchCall_IsRematchable_Type1,
+    MatchCall_IsRematchable_Type2,
+    MatchCall_IsRematchable_Type3,
+    MatchCall_IsRematchable_Type4
 };
 
-bool32 (*const gUnknown_08625338[])(match_call_t) = {
+static bool32 (*const gUnknown_08625338[])(match_call_t) = {
     sub_81D1840,
     sub_81D1844,
     sub_81D1848,
@@ -626,12 +624,12 @@ static void (*const sMatchCall_GetMessageFunctions[])(match_call_t, u8 *) = {
     MatchCall_GetMessage_Type4
 };
 
-void (*const gUnknown_08625374[])(match_call_t, const u8 **, const u8 **) = {
-    sub_81D1AB0,
-    sub_81D1ABC,
-    sub_81D1ADC,
-    sub_81D1AF4,
-    sub_81D1B00
+static void (*const sMatchCall_GetNameAndDescFunctions[])(match_call_t, const u8 **, const u8 **) = {
+    MatchCall_GetNameAndDesc_Type0,
+    MatchCall_GetNameAndDesc_Type1,
+    MatchCall_GetNameAndDesc_Type2,
+    MatchCall_GetNameAndDesc_Type3,
+    MatchCall_GetNameAndDesc_Type4
 };
 
 static const struct UnkStruct_08625388 sMatchCallCheckPageOverrides[] = {
@@ -643,7 +641,7 @@ static const struct UnkStruct_08625388 sMatchCallCheckPageOverrides[] = {
 
 // .text
 
-u32 sub_81D1574(match_call_t matchCall)
+static u32 MatchCallGetFunctionIndex(match_call_t matchCall)
 {
     switch (matchCall.common->type)
     {
@@ -662,16 +660,16 @@ u32 sub_81D1574(match_call_t matchCall)
     }
 }
 
-u32 sub_81D15BC(u32 rematchIdx)
+u32 GetTrainerIdxByRematchIdx(u32 rematchIdx)
 {
     return gRematchTable[rematchIdx].trainerIds[0];
 }
 
-s32 sub_81D15CC(s32 trainerIdx)
+s32 GetRematchIdxByTrainerIdx(s32 trainerIdx)
 {
     s32 rematchIdx;
 
-    for (rematchIdx = 0; rematchIdx < NELEMS(gRematchTable); rematchIdx++)
+    for (rematchIdx = 0; rematchIdx < REMATCH_TABLE_ENTRIES; rematchIdx++)
     {
         if (gRematchTable[rematchIdx].trainerIds[0] == trainerIdx)
             return rematchIdx;
@@ -686,33 +684,33 @@ bool32 MatchCallFlagGetByIndex(u32 idx)
 
     if (idx > 20)
         return FALSE;
-    matchCall = gUnknown_086252A8[idx];
-    i = sub_81D1574(matchCall);
-    return gUnknown_086252FC[i](matchCall);
+    matchCall = sMatchCallHeaders[idx];
+    i = MatchCallGetFunctionIndex(matchCall);
+    return sMatchCallGetFlagFuncs[i](matchCall);
 }
 
-static bool32 sub_81D1628(match_call_t matchCall)
+static bool32 sMatchCallGetFlag_Type0(match_call_t matchCall)
 {
     if (matchCall.type0->flag == 0xffff)
         return TRUE;
     return FlagGet(matchCall.type0->flag);
 }
 
-static bool32 sub_81D164C(match_call_t matchCall)
+static bool32 sMatchCallGetFlag_Type1(match_call_t matchCall)
 {
     if (matchCall.type1->flag == 0xffff)
         return TRUE;
     return FlagGet(matchCall.type1->flag);
 }
 
-static bool32 sub_81D1670(match_call_t matchCall)
+static bool32 sMatchCallGetFlag_Type2(match_call_t matchCall)
 {
     if (matchCall.type2->flag == 0xffff)
         return TRUE;
     return FlagGet(matchCall.type2->flag);
 }
 
-static bool32 sub_81D1694(match_call_t matchCall)
+static bool32 sMatchCallGetFlag_Type3(match_call_t matchCall)
 {
     if (matchCall.type4->gender != gSaveBlock2Ptr->playerGender)
         return FALSE;
@@ -721,7 +719,7 @@ static bool32 sub_81D1694(match_call_t matchCall)
     return FlagGet(matchCall.type4->flag);
 }
 
-static bool32 sub_81D16CC(match_call_t matchCall)
+static bool32 sMatchCallGetFlag_Type4(match_call_t matchCall)
 {
     return FlagGet(matchCall.type3->flag);
 }
@@ -732,79 +730,79 @@ u8 sub_81D16DC(u32 idx)
     u32 i;
 
     if (idx > 20)
-        return FALSE;
-    matchCall = gUnknown_086252A8[idx];
-    i = sub_81D1574(matchCall);
+        return 0;
+    matchCall = sMatchCallHeaders[idx];
+    i = MatchCallGetFunctionIndex(matchCall);
     return gUnknown_08625310[i](matchCall);
 }
 
-u8 sub_81D1714(match_call_t matchCall)
+static u8 sub_81D1714(match_call_t matchCall)
 {
     return matchCall.type0->v1;
 }
 
-u8 sub_81D1718(match_call_t matchCall)
+static u8 sub_81D1718(match_call_t matchCall)
 {
     return matchCall.type1->v1;
 }
 
-u8 sub_81D171C(match_call_t matchCall)
+static u8 sub_81D171C(match_call_t matchCall)
 {
     s32 i;
 
-    for (i = 0; matchCall.type2->v10[i].v0 != 0xffff; i++)
+    for (i = 0; matchCall.type2->v10[i].flag != 0xffff; i++)
     {
-        if (!FlagGet(matchCall.type2->v10[i].v0))
+        if (!FlagGet(matchCall.type2->v10[i].flag))
             break;
     }
     return matchCall.type2->v10[i].v2;
 }
 
-u8 sub_81D1750(match_call_t matchCall)
+static u8 sub_81D1750(match_call_t matchCall)
 {
     return 0xd5;
 }
 
-u8 sub_81D1754(match_call_t matchCall)
+static u8 sub_81D1754(match_call_t matchCall)
 {
     return 0xd5;
 }
 
-bool32 sub_81D1758(u32 idx)
+bool32 MatchCall_IsRematchable(u32 idx)
 {
     match_call_t matchCall;
     u32 i;
 
     if (idx > 20)
         return 0;
-    matchCall = gUnknown_086252A8[idx];
-    i = sub_81D1574(matchCall);
-    return gUnknown_08625324[i](matchCall);
+    matchCall = sMatchCallHeaders[idx];
+    i = MatchCallGetFunctionIndex(matchCall);
+    return sMatchCall_IsRematchableFunctions[i](matchCall);
 }
 
-bool32 sub_81D178C(match_call_t matchCall)
+static bool32 MatchCall_IsRematchable_Type0(match_call_t matchCall)
 {
     return FALSE;
 }
 
-bool32 sub_81D1790(match_call_t matchCall)
+static bool32 MatchCall_IsRematchable_Type1(match_call_t matchCall)
 {
     if (matchCall.type1->rematchTableIdx >= REMATCH_ELITE_FOUR_ENTRIES)
         return FALSE;
     return gSaveBlock1Ptr->trainerRematches[matchCall.type1->rematchTableIdx] ? TRUE : FALSE;
 }
 
-bool32 sub_81D17C0(match_call_t matchCall)
+static bool32 MatchCall_IsRematchable_Type2(match_call_t matchCall)
 {
     return gSaveBlock1Ptr->trainerRematches[matchCall.type2->rematchTableIdx] ? TRUE : FALSE;
 }
 
-bool32 sub_81D17E0(match_call_t matchCall)
+static bool32 MatchCall_IsRematchable_Type3(match_call_t matchCall)
 {
     return FALSE;
 }
 
-bool32 sub_81D17E4(match_call_t matchCall)
+static bool32 MatchCall_IsRematchable_Type4(match_call_t matchCall)
 {
     return FALSE;
 }
@@ -816,8 +814,8 @@ bool32 sub_81D17E8(u32 idx)
 
     if (idx > 20)
         return FALSE;
-    matchCall = gUnknown_086252A8[idx];
-    i = sub_81D1574(matchCall);
+    matchCall = sMatchCallHeaders[idx];
+    i = MatchCallGetFunctionIndex(matchCall);
     if (gUnknown_08625338[i](matchCall))
         return TRUE;
     for (i = 0; i < 4; i++)
@@ -828,27 +826,27 @@ bool32 sub_81D17E8(u32 idx)
     return FALSE;
 }
 
-bool32 sub_81D1840(match_call_t matchCall)
+static bool32 sub_81D1840(match_call_t matchCall)
 {
     return FALSE;
 }
 
-bool32 sub_81D1844(match_call_t matchCall)
+static bool32 sub_81D1844(match_call_t matchCall)
 {
     return TRUE;
 }
 
-bool32 sub_81D1848(match_call_t matchCall)
+static bool32 sub_81D1848(match_call_t matchCall)
 {
     return TRUE;
 }
 
-bool32 sub_81D184C(match_call_t matchCall)
+static bool32 sub_81D184C(match_call_t matchCall)
 {
     return FALSE;
 }
 
-bool32 sub_81D1850(match_call_t matchCall)
+static bool32 sub_81D1850(match_call_t matchCall)
 {
     return FALSE;
 }
@@ -860,8 +858,8 @@ u32 MatchCall_GetRematchTableIdx(u32 idx)
 
     if (idx > 20)
         return REMATCH_TABLE_ENTRIES;
-    matchCall = gUnknown_086252A8[idx];
-    i = sub_81D1574(matchCall);
+    matchCall = sMatchCallHeaders[idx];
+    i = MatchCallGetFunctionIndex(matchCall);
     return sMatchCall_GetRematchTableIdxFunctions[i](matchCall);
 }
 
@@ -897,8 +895,8 @@ void MatchCall_GetMessage(u32 idx, u8 *dest)
 
     if (idx > 20)
         return;
-    matchCall = gUnknown_086252A8[idx];
-    i = sub_81D1574(matchCall);
+    matchCall = sMatchCallHeaders[idx];
+    i = MatchCallGetFunctionIndex(matchCall);
     sMatchCall_GetMessageFunctions[i](matchCall, dest);
 }
 
@@ -930,7 +928,7 @@ static void MatchCall_GetMessage_Type4(match_call_t matchCall, u8 *dest)
     sub_8197080(dest);
 }
 
-void sub_81D1920(const match_call_sub0_t *sub0, u8 *dest)
+void sub_81D1920(const match_call_text_data_t *sub0, u8 *dest)
 {
     u32 i;
     for (i = 0; sub0[i].text != NULL; i++)
@@ -950,7 +948,7 @@ void sub_81D1920(const match_call_sub0_t *sub0, u8 *dest)
 
 #ifdef NONMATCHING
 // There's some weird upmerge going on that I cannot replicate at this time.
-void sub_81D199C(const match_call_sub0_t *sub0, u16 idx, u8 *dest)
+static void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
 {
     u32 i;
     for (i = 0; sub0[i].text != NULL; i++)
@@ -982,7 +980,7 @@ void sub_81D199C(const match_call_sub0_t *sub0, u16 idx, u8 *dest)
     }
 }
 #else
-ASM_DIRECT void sub_81D199C(const match_call_sub0_t *sub0, u16 idx, u8 *dest)
+static ASM_DIRECT void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -1099,48 +1097,48 @@ void sub_81D1A78(u32 idx, const u8 **desc, const u8 **name)
 
     if (idx > 20)
         return;
-    matchCall = gUnknown_086252A8[idx];
-    i = sub_81D1574(matchCall);
-    gUnknown_08625374[i](matchCall, desc, name);
+    matchCall = sMatchCallHeaders[idx];
+    i = MatchCallGetFunctionIndex(matchCall);
+    sMatchCall_GetNameAndDescFunctions[i](matchCall, desc, name);
 }
 
-void sub_81D1AB0(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Type0(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
     *desc = matchCall.type0->desc;
     *name = matchCall.type0->name;
 }
 
-void sub_81D1ABC(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Type1(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
     match_call_t _matchCall = matchCall;
     if (_matchCall.type1->name == NULL)
-        sub_81D1B0C(_matchCall.type1->rematchTableIdx, desc, name);
+        MatchCall_GetNameAndDescByRematchIdx(_matchCall.type1->rematchTableIdx, desc, name);
     else
         *name = _matchCall.type1->name;
     *desc = _matchCall.type1->desc;
 }
 
-void sub_81D1ADC(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Type2(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
-    sub_81D1B0C(matchCall.type2->rematchTableIdx, desc, name);
+    MatchCall_GetNameAndDescByRematchIdx(matchCall.type2->rematchTableIdx, desc, name);
     *desc = matchCall.type2->desc;
 }
 
-void sub_81D1AF4(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Type3(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
     *desc = matchCall.type4->desc;
     *name = matchCall.type4->name;
 }
 
-void sub_81D1B00(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Type4(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
     *desc = matchCall.type3->desc;
     *name = matchCall.type3->name;
 }
 
-void sub_81D1B0C(u32 idx, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u8 **desc, const u8 **name)
 {
-    const struct Trainer *trainer = gTrainers + sub_81D15BC(idx);
+    const struct Trainer *trainer = gTrainers + GetTrainerIdxByRematchIdx(idx);
     *desc = gTrainerClassNames[trainer->trainerClass];
     *name = trainer->trainerName;
 }
@@ -1271,7 +1269,7 @@ bool32 sub_81D1BF8(u32 idx)
 
 void SetMatchCallRegisteredFlag(void)
 {
-    s32 r0 = sub_81D15CC(gSpecialVar_0x8004);
+    s32 r0 = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (r0 >= 0)
         FlagSet(FLAG_MATCH_CALL_REGISTERED + r0);
 }

@@ -6817,7 +6817,7 @@ sub_813B4E0: @ 813B4E0
 	push {lr}
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
-	bl sub_81D15CC
+	bl GetRematchIdxByTrainerIdx
 	cmp r0, 0
 	blt _0813B50C
 	movs r1, 0xAE

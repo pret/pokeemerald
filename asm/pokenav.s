@@ -7870,7 +7870,7 @@ sub_81CAF04: @ 81CAF04
 	cmp r0, 0
 	bne _081CAF34
 	ldrh r0, [r1, 0x1E]
-	bl sub_81D15BC
+	bl GetTrainerIdxByRematchIdx
 	adds r4, r0, 0
 	ldr r1, =gTrainers
 	lsls r0, r4, 2
@@ -7897,7 +7897,7 @@ _081CAF34:
 	.pool
 _081CAF58:
 	adds r0, r4, 0
-	bl sub_81D15BC
+	bl GetTrainerIdxByRematchIdx
 	adds r4, r0, 0
 	ldr r0, =gTrainers
 	lsls r1, r4, 2
@@ -7938,7 +7938,7 @@ _081CAFA4:
 	cmp r0, 0
 	bne _081CAFC4
 	ldrh r0, [r1, 0x1E]
-	bl sub_81D15BC
+	bl GetTrainerIdxByRematchIdx
 	ldr r1, =gStringVar4
 	bl sub_81967AC
 	strb r0, [r6]
@@ -8036,7 +8036,7 @@ sub_81CB050: @ 81CB050
 	cmp r0, 0
 	bne _081CB088
 	ldrh r0, [r2, 0x2]
-	bl sub_81D15BC
+	bl GetTrainerIdxByRematchIdx
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
