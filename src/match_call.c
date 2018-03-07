@@ -865,22 +865,22 @@ u32 MatchCall_GetRematchTableIdx(u32 idx)
     return sMatchCall_GetRematchTableIdxFunctions[i](matchCall);
 }
 
-static static u32 MatchCall_GetRematchTableIdx_Type0(match_call_t matchCall)
+static u32 MatchCall_GetRematchTableIdx_Type0(match_call_t matchCall)
 {
     return REMATCH_TABLE_ENTRIES;
 }
 
-static static u32 MatchCall_GetRematchTableIdx_Type1(match_call_t matchCall)
+static u32 MatchCall_GetRematchTableIdx_Type1(match_call_t matchCall)
 {
     return matchCall.type1->rematchTableIdx;
 }
 
-static static u32 MatchCall_GetRematchTableIdx_Type2(match_call_t matchCall)
+static u32 MatchCall_GetRematchTableIdx_Type2(match_call_t matchCall)
 {
     return matchCall.type2->rematchTableIdx;
 }
 
-static static u32 MatchCall_GetRematchTableIdx_Type3(match_call_t matchCall)
+static u32 MatchCall_GetRematchTableIdx_Type3(match_call_t matchCall)
 {
     return REMATCH_TABLE_ENTRIES;
 }
