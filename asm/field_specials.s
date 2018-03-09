@@ -4894,7 +4894,7 @@ sub_813A46C: @ 813A46C
 	lsrs r0, 24
 	mov r1, sp
 	movs r2, 0
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	ldr r1, =gUnknown_0203AB68
 	mov r0, sp
 	ldrh r0, [r0]
@@ -4903,7 +4903,7 @@ sub_813A46C: @ 813A46C
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
-	bl sub_81AE838
+	bl ListMenuGetCurrentItemArrayId
 	ldrh r0, [r4, 0x1E]
 	ldr r5, =gUnknown_0203AB6A
 	ldrh r1, [r5]
@@ -5007,7 +5007,7 @@ sub_813A570: @ 813A570
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
-	bl sub_81AE838
+	bl ListMenuGetCurrentItemArrayId
 	ldrh r0, [r4, 0x1E]
 	mov r1, sp
 	ldrh r1, [r1]
@@ -5019,7 +5019,7 @@ sub_813A570: @ 813A570
 	lsrs r0, 24
 	movs r1, 0
 	movs r2, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	ldr r0, =gUnknown_0203AB64
 	ldr r0, [r0]
 	bl Free
@@ -6012,7 +6012,7 @@ sub_813ADD4: @ 813ADD4
 	adds r4, 0x16
 	add r1, sp, 0x14
 	adds r2, r4, 0
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	ldrh r0, [r6, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6173,7 +6173,7 @@ sub_813AF48: @ 813AF48
 	lsrs r0, 24
 	movs r1, 0
 	movs r2, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	ldr r0, =gUnknown_0203AB64
 	ldr r0, [r0]
 	bl Free

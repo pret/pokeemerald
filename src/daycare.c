@@ -41,11 +41,10 @@ extern const u8 gDaycareText_PlayOther[];
 extern u8 GetCursorSelectionMonId(void);
 extern u16 ItemIdToBattleMoveId(u16);
 extern s32 ListMenuHandleInputGetItemId(u8);
-extern void sub_81AE6C8(u8, u16*, u16*);
+extern void DestroyListMenuTask(u8, u16*, u16*);
 extern void sub_819746C(u8, bool8);
 extern void NewMenuHelpers_DrawStdWindowFrame(u8, bool8);
 extern void sub_81B9328(void);
-extern void sub_81AF078(u32, bool8, struct ListMenu *);
 extern void CB2_ReturnToField(void);
 
 // this file's functions
@@ -79,18 +78,18 @@ static const struct ListMenuTemplate sDaycareListMenuLevelTemplate =
     .unk_08 = DaycarePrintMonInfo,
     .totalItems = 3,
     .maxShowed = 3,
-    .unk_10 = 0,
+    .windowId = 0,
     .unk_11 = 0,
     .unk_12 = 8,
-    .cursor_Y = 0,
+    .cursor_X = 0,
     .upText_Y = 1,
-    .cursorColor = 2,
-    .fillColor = 1,
-    .cursorShadowColor = 3,
-    .unk_16_0 = TRUE,
-    .spaceBetweenItems = 0,
-    .unk_16_7 = FALSE,
-    .unk_17_0 = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 1,
+    .unk_16_3 = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 1,
     .cursorKind = 0
 };
 
@@ -1271,7 +1270,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
             gSpecialVar_Result = 2;
             break;
         }
-        sub_81AE6C8(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
         sub_819746C(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
@@ -1280,7 +1279,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         gSpecialVar_Result = 2;
-        sub_81AE6C8(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
         sub_819746C(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
@@ -1299,7 +1298,7 @@ void ShowDaycareLevelMenu(void)
     NewMenuHelpers_DrawStdWindowFrame(windowId, FALSE);
 
     menuTemplate = sDaycareListMenuLevelTemplate;
-    menuTemplate.unk_10 = windowId;
+    menuTemplate.windowId = windowId;
     listMenuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
     CopyWindowToVram(windowId, 3);

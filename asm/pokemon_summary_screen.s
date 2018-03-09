@@ -3469,7 +3469,7 @@ sub_81C5B4C: @ 81C5B4C
 	ldr r4, =gUnknown_0203CF38
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	ldr r0, =gUnknown_0203CF2C
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -3545,7 +3545,7 @@ _081C5C12:
 	adds r1, r4, 0
 	adds r1, 0x8
 	adds r2, r4, 0x6
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	ldrh r1, [r4, 0x8]
 	ldrh r0, [r4, 0x6]
 	adds r1, r0
@@ -3572,7 +3572,7 @@ _081C5C5C:
 	mov r8, r1
 	mov r2, r8
 	subs r2, 0x2
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -4642,7 +4642,7 @@ sub_81C65CC: @ 81C65CC
 	ldrb r0, [r4]
 	adds r1, r6, 0
 	adds r2, r7, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	bl sub_81C5924
 	bl sub_81C59BC
 	bl sub_81C5314
@@ -4953,7 +4953,7 @@ sub_81C68B0: @ 81C68B0
 	ldrb r0, [r4]
 	ldr r1, =gUnknown_0203CF38
 	subs r2, r1, 0x2
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	b _081C6940
 	.pool
 _081C68F8:
@@ -4964,7 +4964,7 @@ _081C68F8:
 	ldr r4, =gUnknown_0203CF38
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	movs r0, 0
 	bl sub_81C7028
 	subs r4, 0x8
@@ -5054,7 +5054,7 @@ _081C69A8:
 	ldrb r0, [r5]
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	movs r3, 0x2
 	ldrsh r0, [r5, r3]
 	cmp r0, r4
@@ -5109,7 +5109,7 @@ sub_81C6A14: @ 81C6A14
 	ldrb r0, [r4]
 	adds r1, r5, 0
 	adds r2, r7, 0
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	movs r0, 0x2
 	ldrsh r2, [r4, r0]
 	ldrh r0, [r5]
