@@ -73,7 +73,9 @@ s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenu
     case 1:
         gUnknown_0203CE84.field_0 = ListMenuHandleInputGetItemId(gUnknown_0203CE84.field_6);
         if (gMain.newKeys & A_BUTTON)
+        {
             gUnknown_0203CE84.field_4 = 2;
+        }
         if (gMain.newKeys & B_BUTTON)
         {
             gUnknown_0203CE84.field_0 = LIST_B_PRESSED;
@@ -82,7 +84,9 @@ s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenu
         if (gUnknown_0203CE84.field_4 == 2)
         {
             if (arg2 == 0)
+            {
                 ClearWindowTilemap(gUnknown_0203CE84.field_5);
+            }
             else
             {
                 switch (arg2)
