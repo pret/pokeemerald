@@ -1985,7 +1985,7 @@ _080E0AEA:
 	adds r1, r2, r3
 	subs r3, 0x2
 	adds r2, r3
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0

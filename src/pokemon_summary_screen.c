@@ -26,6 +26,7 @@
 #include "international_string_util.h"
 #include "scanline_effect.h"
 #include "menu_helpers.h"
+#include "daycare.h"
 
 struct ContestMove
 {
@@ -3024,7 +3025,7 @@ void sub_81C31F0(u8 *a)
 {
     u8 level = gUnknown_0203CF1C->summary.metLevel;
     if (level == 0)
-        level = 5;
+        level = EGG_HATCH_LEVEL;
     ConvertIntToDecimalStringN(a, level, 0, 3);
     UnkTextUtil_SetPtrI(3, a);
 }

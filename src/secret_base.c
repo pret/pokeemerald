@@ -6,8 +6,8 @@
 #include "main.h"
 #include "task.h"
 #include "palette.h"
-#include "list_menu.h"
 #include "window.h"
+#include "list_menu.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "menu_indicators.h"
@@ -66,7 +66,7 @@ EWRAM_DATA struct SecretBaseListMenuBuffer *gUnknown_0203A020 = NULL;
 
 void sub_80E9C9C(u8 taskId);
 void game_continue(u8 taskId);
-void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu);
+void sub_80E9DEC(s32 a0, bool8 flag, struct ListMenu *menu);
 void sub_80E9E00(u8 taskId);
 void sub_80E9E44(u8 taskId);
 void sub_80E9E90(u8 taskId);
@@ -913,13 +913,13 @@ void game_continue(u8 taskId)
         data[3] = 8;
     }
     gMultiuseListMenuTemplate = gUnknown_0858D07C;
-    gMultiuseListMenuTemplate.unk_10 = data[6];
+    gMultiuseListMenuTemplate.windowId = data[6];
     gMultiuseListMenuTemplate.totalItems = data[0];
     gMultiuseListMenuTemplate.items = gUnknown_0203A020->items;
     gMultiuseListMenuTemplate.maxShowed = data[3];
 }
 
-void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu)
+void sub_80E9DEC(s32 a0, bool8 flag, struct ListMenu *menu)
 {
     if (flag != TRUE)
     {
@@ -953,14 +953,14 @@ void sub_80E9E90(u8 taskId)
 
     data = gTasks[taskId].data;
     input = ListMenuHandleInputGetItemId(data[5]);
-    sub_81AE860(data[5], &data[2], &data[1]);
+    ListMenuGetScrollAndRow(data[5], &data[2], &data[1]);
     switch (input)
     {
         case -1:
             break;
         case -2:
             PlaySE(SE_SELECT);
-            sub_81AE6C8(data[5], NULL, NULL);
+            DestroyListMenuTask(data[5], NULL, NULL);
             RemoveScrollIndicatorArrowPair(data[8]);
             sub_819746C(data[6], 0);
             ClearWindowTilemap(data[6]);
@@ -1042,7 +1042,7 @@ void sub_80EA08C(u8 taskId)
 
     data = gTasks[taskId].data;
     sub_8197434(0, 0);
-    sub_81AE6C8(data[5], &data[2], &data[1]);
+    DestroyListMenuTask(data[5], &data[2], &data[1]);
     gSaveBlock1Ptr->secretBases[data[4]].sbr_field_1_6 = 0;
     game_continue(taskId);
     sub_812225C(&data[2], &data[1], data[3], data[0]);
@@ -1061,7 +1061,7 @@ void sub_80EA13C(u8 taskId)
 
     data = gTasks[taskId].data;
     sub_8197434(0, 0);
-    sub_81AE6C8(data[5], &data[2], &data[1]);
+    DestroyListMenuTask(data[5], &data[2], &data[1]);
     sub_80E9E00(taskId);
     gTasks[taskId].func = sub_80E9E90;
 }

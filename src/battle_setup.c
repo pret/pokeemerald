@@ -32,6 +32,7 @@
 #include "overworld.h"
 #include "field_weather.h"
 #include "gym_leader_rematch.h"
+#include "field_map_obj_helpers.h"
 
 enum
 {
@@ -56,18 +57,12 @@ extern bool8 InBattlePyramid(void);
 extern bool8 InBattlePike(void);
 extern bool32 InTrainerHill(void);
 extern bool32 FieldPoisonEffectIsRunning(void);
-extern void overworld_free_bg_tilemaps(void);
 extern void prev_quest_postbuffer_cursor_backup_reset(void);
 extern void ResetPoisonStepCounter(void);
 extern void sub_81BE72C(void);
-extern void FreezeMapObjects(void);
 extern void sub_808BCF4(void);
 extern void sub_80EECC8(void);
-extern void Overworld_ClearSavedMusic(void);
-extern void CB2_WhiteOut(void);
 extern void sub_80AF6F0(void);
-extern void PlayBattleBGM(void);
-extern u8 Overworld_GetFlashLevel(void);
 extern u16 sub_81A9AA8(u8 localId);
 extern u16 sub_81D6180(u8 localId);
 extern bool8 GetBattlePyramidTrainerFlag(u8 mapObjId);

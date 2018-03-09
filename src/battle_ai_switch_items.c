@@ -9,8 +9,6 @@
 #include "util.h"
 #include "constants/items.h"
 
-extern const u8 * const gItemEffectTable[]; // todo: fix once struct is declared
-
 // this file's functions
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
 static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent);

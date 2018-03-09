@@ -23,14 +23,10 @@
 #include "pokeblock.h"
 #include "item_use.h"
 
-extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
-
-extern const u8 gText_SafariZoneMenu[];
-extern const u8 gText_WhatWillPkmnDo2[];
 
 extern void sub_81358F4(void);
 
