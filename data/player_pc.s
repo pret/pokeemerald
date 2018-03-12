@@ -5,36 +5,36 @@
 	.section .rodata
 
 	.align 2
-gUnknown_085DFEA4:: @ 85DFEA4
+gPCText_OptionDescList:: @ 85DFEA4
 	.4byte gText_TakeOutItemsFromPC
 	.4byte gText_StoreItemsInPC
 	.4byte gText_ThrowAwayItemsInPC
 	.4byte gText_GoBackPrevMenu
 
 	.align 2
-gUnknown_085DFEB4:: @ 85DFEB4
-	.4byte gText_ItemStorage,	task_pc_itemstorage
-	.4byte gText_Mailbox,		sub_816B0A8
-	.4byte gText_Decoration,	sub_816B138
-	.4byte gText_TurnOff,		sub_816B148
+sPlayerPCMenuActions:: @ 85DFEB4
+	.4byte gText_ItemStorage,	PlayerPC_ItemStorage
+	.4byte gText_Mailbox,		PlayerPC_Mailbox
+	.4byte gText_Decoration,	PlayerPC_Decoration
+	.4byte gText_TurnOff,		PlayerPC_TurnOff
 
 	.align 2
-gUnknown_085DFED4:: @ 85DFED4
+gBedroomPC_OptionOrder:: @ 85DFED4
 	.byte 0x00, 0x01, 0x02, 0x03
 
 	.align 2
-gUnknown_085DFED8:: @ 85DFED8
+gPlayerPC_OptionOrder:: @ 85DFED8
 	.byte 0x00, 0x01, 0x03, 0x00
 
 	.align 2
-gUnknown_085DFEDC:: @ 85DFEDC
-	.4byte gText_WithdrawItem,	sub_816B398
-	.4byte gText_DepositItem,	sub_816B2C8
-	.4byte gText_TossItem,		sub_816B3E4
-	.4byte gText_Cancel,		sub_816B4A4
+gPCText_ItemPCOptionsText:: @ 85DFEDC
+	.4byte gText_WithdrawItem,	ItemStorage_Withdraw
+	.4byte gText_DepositItem,	ItemStorage_Deposit
+	.4byte gText_TossItem,		ItemStorage_Toss
+	.4byte gText_Cancel,		ItemStorage_Exit
 
 	.align 2
-gUnknown_085DFEFC:: @ 85DFEFC
+gNewGamePCItems:: @ 85DFEFC
 	.2byte ITEM_POTION, 0x0001
 	.2byte 0x0000, 0x0000
 

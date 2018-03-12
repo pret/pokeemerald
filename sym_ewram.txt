@@ -805,12 +805,7 @@ gUnknown_0203BC8C: @ 203BC8C
 	.space 0x4
 
 	.include "src/use_pokeblock.o"
-
-gUnknown_0203BCB0: @ 203BCB0
-	.space 0x4
-
-gUnknown_0203BCB4: @ 203BCB4
-	.space 0x4
+	.include "src/player_pc.o"
 
 gUnknown_0203BCB8: @ 203BCB8
 	.space 0x2

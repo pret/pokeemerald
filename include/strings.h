@@ -372,4 +372,8 @@ extern const u8 gBirchDexRatingText_LessThan190[];
 extern const u8 gBirchDexRatingText_LessThan200[];
 extern const u8 gBirchDexRatingText_DexCompleted[];
 
+//player menu text
+extern const u8 gText_WhatWouldYouLike[];
+extern const u8 gText_NoMailHere[];
+
 #endif //GUARD_STRINGS_H

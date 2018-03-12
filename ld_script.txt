@@ -217,6 +217,7 @@ SECTIONS {
         src/use_pokeblock.o(.text);
         asm/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
+        src/player_pc.o(.text);
         asm/player_pc.o(.text);
         src/intro.o(.text);
         src/reset_save_heap.o(.text);
