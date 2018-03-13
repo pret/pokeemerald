@@ -2037,11 +2037,6 @@ AI_CV_Protect_ScoreUp2:
 AI_CV_Protect2:
 	if_random_less_than 128, AI_CV_Protect4
 	score -1
-
-AI_CV_Protect3:
-	get_last_used_bank_move AI_TARGET
-	get_move_effect_from_result
-	if_not_equal EFFECT_LOCK_ON, AI_CV_Protect_End
 	
 AI_CV_Protect4:
 	get_protect_count AI_USER
@@ -2050,6 +2045,11 @@ AI_CV_Protect4:
 	if_random_less_than 128, AI_CV_Protect_End
 	score -1
 	goto AI_CV_Protect_End
+	
+AI_CV_Protect3:
+	get_last_used_bank_move AI_TARGET
+	get_move_effect_from_result
+	if_not_equal EFFECT_LOCK_ON, AI_CV_Protect_End
 
 AI_CV_Protect_ScoreDown2:
 	score -2
