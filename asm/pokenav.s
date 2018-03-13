@@ -21780,7 +21780,7 @@ sub_81D1C84: @ 81D1C84
 	ldr r0, [r0, 0x10]
 	str r0, [sp]
 	str r1, [sp, 0x4]
-	ldr r0, =gUnknown_085DFF04
+	ldr r0, =gMailboxMailOptions
 	movs r1, 0x4
 	bl GetMaxWidthInMenuTable
 	lsls r0, 24

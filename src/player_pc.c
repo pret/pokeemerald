@@ -9,8 +9,10 @@
 #include "item.h"
 #include "item_menu.h"
 #include "constants/items.h"
+#include "list_menu.h"
 #include "mail.h"
 #include "main.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
@@ -23,6 +25,21 @@
 #include "task.h"
 #include "window.h"
 
+struct Struct203BCC4
+{
+    struct ListMenuItem unk0[51];
+    //u8 filler[0x118];
+    u8 unk198[51][0x18];
+    //u8 filler2[0x348];
+    u8 unk660[6];
+    u8 unk666;
+    s8 unk667;
+    u32 unk668;
+    u8 filler3[4];
+
+};
+
+extern struct Struct203BCC4 *gUnknown_0203BCC4;
 
 static EWRAM_DATA u8 *gPcItemMenuOptionOrder = NULL;
 
@@ -32,185 +49,45 @@ extern struct MailboxStruct gUnknown_0203BCB8;
 
 #define eMailboxInfo gUnknown_0203BCB8
 
-struct Struct203BCC4
-{
-    u8 filler[0x668];
-    u32 unk668;
-    u8 filler2[4];
 
-};
-
-extern struct Struct203BCC4 *gUnknown_0203BCC4;
-
-
-/*static*/void InitPlayerPCMenu(u8 taskId);
-/*static*/void PlayerPCProcessMenuInput(u8 taskId);
-/*static*/void InitItemStorageMenu(u8 taskId, u8 var);
+/*static*/ void InitPlayerPCMenu(u8 taskId);
+/*static*/ void PlayerPCProcessMenuInput(u8 taskId);
+/*static*/ void InitItemStorageMenu(u8 taskId, u8 var);
 /*static*/ void ItemStorageMenuPrint(const u8 *);
 /*static*/ void ItemStorageMenuProcessInput(u8 taskId);
-/*
-static void ItemStorage_ProcessInput(u8);
-*/
+/*static*/ void ItemStorage_ProcessInput(u8 taskId);
 /*static*/ void ItemStorage_SetItemAndMailCount(u8);
-/*
-static void ItemStorage_DoItemAction(u8);
-static void ItemStorage_GoBackToPlayerPCMenu(u8);
-static void ItemStorage_HandleQuantityRolling(u8);
-static void ItemStorage_DoItemWithdraw(u8);
-static void ItemStorage_DoItemToss(u8);
-static void ItemStorage_HandleRemoveItem(u8);
-static void ItemStorage_WaitPressHandleResumeProcessInput(u8);
-*/
+/*static*/ void ItemStorage_DoItemWithdraw(u8);
+/*static*/ void ItemStorage_DoItemToss(u8);
+/*static*/ void ItemStorage_WithdrawToss_Helper(u8 taskId, bool8 toss);
+
 /*static*/ void ItemStorage_HandleReturnToProcessInput(u8);
-/*
-static void ItemStorage_HandleResumeProcessInput(u8);
-static void ItemStorage_DoItemSwap(u8, bool8);
-static void ItemStorage_DrawItemList(u8);
-static void ItemStorage_PrintItemPcResponse(u16);
-static void ItemStorage_DrawBothListAndDescription(u8);
-static void ItemStorage_GoBackToItemPCMenu(u8, u8);
-static void ItemStorage_LoadPalette(void);
-*/
+
 /*static*/ u8 GetMailboxMailCount(void);
 
 /*static*/ void Mailbox_UpdateMailList(void);
 /*static*/ void Mailbox_DrawMailboxMenu(u8);
 /*static*/ void Mailbox_ProcessInput(u8);
-/*
-static void Mailbox_CloseScrollIndicators(void);
-static void Mailbox_PrintWhatToDoWithPlayerMailText(u8);
-static void Mailbox_TurnOff(u8);
-static void Mailbox_PrintMailOptions(u8);
-static void Mailbox_MailOptionsProcessInput(u8);
-static void Mailbox_FadeAndReadMail(u8);
-static void Mailbox_ReturnToFieldFromReadMail(void);
-static void Mailbox_DrawYesNoBeforeMove(u8);
-static void Mailbox_DoGiveMailPokeMenu(u8);
-static void Mailbox_NoPokemonForMail(u8);
-static void Mailbox_Cancel(u8);
-static void Mailbox_DrawMailMenuAndDoProcessInput(u8);
-*/
+/*static*/ void Mailbox_PrintWhatToDoWithPlayerMailText(u8);
+
 /*static*/ void PlayerPC_ItemStorage(u8 taskId);
 /*static*/ void PlayerPC_Mailbox(u8 taskId);
 /*static*/ void PlayerPC_Decoration(u8 var);
 /*static*/ void PlayerPC_TurnOff(u8 taskId);
-/*
-static void ItemStorage_Withdraw(u8);
-static void ItemStorage_Deposit(u8);
-static void ItemStorage_Toss(u8);
-*/
+
 /*static*/ void ItemStorage_Exit(u8);
-/*
-static void ItemStorage_ResumeInputFromYesToss(u8);
-static void ItemStorage_ResumeInputFromNoToss(u8);
-static void Mailbox_DoMailMoveToBag(u8);
-static void Mailbox_ReturnToInputAfterNo(u8);
-static void Mailbox_DoMailRead(u8);
-static void Mailbox_MoveToBag(u8);
-static void Mailbox_Give(u8);
-static void Mailbox_Cancel(u8);
-*/
+
 
 extern const u8 *const gPCText_OptionDescList[];
-/*
-static const u8 *const gPCText_OptionDescList[] =
-{
-    PCText_TakeOutItems,
-    PCText_StoreItems,
-    PCText_ThrowAwayItems,
-    gMenuText_GoBackToPrev
-};
-*/
-/*static*/ extern const struct MenuAction sPlayerPCMenuActions[];/* =
-{
-    { SecretBaseText_ItemStorage, PlayerPC_ItemStorage },
-    { gPCText_Mailbox, PlayerPC_Mailbox },
-    { SecretBaseText_Decoration, PlayerPC_Decoration },
-    { SecretBaseText_TurnOff, PlayerPC_TurnOff }
-};
-*/
-/*static*/ extern u8 gBedroomPC_OptionOrder[];/* =
-{
-    PLAYERPC_MENU_ITEMSTORAGE,
-    PLAYERPC_MENU_MAILBOX,
-    PLAYERPC_MENU_DECORATION,
-    PLAYERPC_MENU_TURNOFF
-};
-*/
-/*static*/ extern u8 gPlayerPC_OptionOrder[];/* =
-{
-    PLAYERPC_MENU_ITEMSTORAGE,
-    PLAYERPC_MENU_MAILBOX,
-    PLAYERPC_MENU_TURNOFF
-};
-*/
-extern const struct MenuAction gPCText_ItemPCOptionsText[];
-/*
-static const struct MenuAction2 gPCText_ItemPCOptionsText[] =
-{
-    { PCText_WithdrawItem, ItemStorage_Withdraw },
-    { PCText_DepositItem, ItemStorage_Deposit },
-    { PCText_TossItem, ItemStorage_Toss },
-    { gUnknownText_Exit, ItemStorage_Exit }
-};
-
-static const struct YesNoFuncTable ResumeFromTossYesNoFuncList[] = // ResumeFromTossYesNoFuncList
-{
-    ItemStorage_ResumeInputFromYesToss,
-    ItemStorage_ResumeInputFromNoToss
-};
-
-static const struct YesNoFuncTable ResumeFromWithdrawYesNoFuncList[] = // ResumeFromWithdrawYesNoFuncList
-{
-    Mailbox_DoMailMoveToBag,
-    Mailbox_ReturnToInputAfterNo
-};
-*/
-// the use of this struct is meant to be an ItemSlot struct, but NewGameInitPCItems refuses to match without a weird pointer access.
-/*static*/ extern const struct ItemSlot gNewGamePCItems[];/* =
-{
-    { ITEM_POTION, 1 },
-    { ITEM_NONE, 0 }
-};
-
-static const struct MenuAction2 gMailboxMailOptions[] =
-{
-    { OtherText_Read, Mailbox_DoMailRead },
-    { gOtherText_MoveToBag, Mailbox_MoveToBag },
-    { OtherText_Give, Mailbox_Give },
-    { gOtherText_CancelNoTerminator, Mailbox_Cancel }
-};
-
-static const u8 gNonSelectedItemFormattedText[] = _("{STR_VAR_1}{CLEAR_TO 80}");
-static const u8 gSelectedItemFormattedText[] = _("{COLOR RED}{STR_VAR_1}{CLEAR_TO 80}");
-static const u8 gNonSelectedItemQuantityFormatText[] = _("{STR_VAR_1}");
-static const u8 gSelectedItemQuantityFormatText[] = _("{COLOR RED}{STR_VAR_1}");
-static const u8 gUnknown_08406330[] = _("{CLEAR_TO 32}");
-*/
+/*static*/ extern const struct ItemSlot gNewGamePCItems[];
+/*static*/ extern const struct MenuAction gPCText_ItemPCOptionsText[];
+/*static*/ extern const struct MenuAction gMailboxMailOptions[];
+/*static*/ extern const struct MenuAction sPlayerPCMenuActions[];
+/*static*/ extern u8 gBedroomPC_OptionOrder[];
+/*static*/ extern u8 gPlayerPC_OptionOrder[];
 
 extern const struct WindowTemplate gUnknown_085DFF24[3];
 
-/*
-extern u8 *gUnknown_02039314;
-extern struct MenuAction gUnknown_08406298[];
-
-extern u8 gUnknown_084062B8[];
-extern u8 gUnknown_084062BC[];
-extern u8 gUnknown_0840632A[];
-extern u8 gUnknown_08406327[];
-extern u8 gUnknown_0840631E[];
-extern u8 gUnknown_08406318[];
-
-extern u8 gUnknown_030007B4;
-extern u8 unk_201FE00[];
-
-extern u8 gUnknown_08152850;
-extern u8 gUnknown_08152C75;
-
-extern u32 gUnknown_08406288[];
-extern const struct MenuAction gUnknown_084062C0[];
-extern const struct YesNoFuncTable gUnknown_084062E0;
-*/
 
 
 void NewGameInitPCItems(void)
@@ -441,7 +318,7 @@ void mapldr_080EBC0C(void)
 
 u8 sub_80D6CE4(); //count of items
 void sub_816B4DC(u8 taskId);
-void sub_816B430(u8 taskId, bool8 toss);
+
 extern const u8 gText_NoItems[];
 
 /*static*/ void ItemStorage_Withdraw(u8 taskId)
@@ -451,7 +328,7 @@ extern const u8 gText_NoItems[];
     NUM_ITEMS = sub_80D6CE4();
 
     if (NUM_ITEMS != 0)
-        sub_816B430(taskId, FALSE);
+        ItemStorage_WithdrawToss_Helper(taskId, FALSE);
     else
     {
         sub_816B4DC(taskId);
@@ -466,7 +343,7 @@ extern const u8 gText_NoItems[];
 
     NUM_ITEMS = sub_80D6CE4();
     if (NUM_ITEMS != 0)
-        sub_816B430(taskId, TRUE);
+        ItemStorage_WithdrawToss_Helper(taskId, TRUE);
     else
     {
         sub_816B4DC(taskId);
@@ -476,9 +353,9 @@ extern const u8 gText_NoItems[];
 
 void sub_816BC14(void);
 void gpu_pal_allocator_reset__manage_upper_four(void);
-void sub_816C158(u8 taskId);
 
-/*static*/ void sub_816B430(u8 taskId, bool8 toss)
+
+/*static*/ void ItemStorage_WithdrawToss_Helper(u8 taskId, bool8 toss)
 {
     u16 *data = gTasks[taskId].data;
 
@@ -493,7 +370,7 @@ void sub_816C158(u8 taskId);
     LoadListMenuArrowsGfx();
     sub_8122344(&(gUnknown_0203BCC4->unk668), 7);
     sub_8197434(0,0);
-    gTasks[taskId].func = sub_816C158;
+    gTasks[taskId].func = ItemStorage_ProcessInput;
 }
 
 
@@ -571,13 +448,11 @@ void sub_81D1E90(struct MailboxStruct *);
     sub_81D1E90(&eMailboxInfo);
 }
 
-u32 ListMenuHandleInputGetItemId(u8);
-void sub_81AE860(u8, void *, void *);
-void sub_81AE6C8(u8, void *, void *);
-void sub_816B798(u8);
+
+void Mailbox_ReturnToPlayerPC(u8);
 void RemoveScrollIndicatorArrowPair(u8);
 void sub_81D1D04(u8);
-void sub_816B730(u8);
+
 
 /*static*/ void Mailbox_ProcessInput(u8 taskId)
 {
@@ -587,7 +462,7 @@ void sub_816B730(u8);
     if(!gPaletteFade.active)
     {
         inputOptionId = ListMenuHandleInputGetItemId(data[5]);
-        sub_81AE860(data[5], &(eMailboxInfo.itemsAbove), &eMailboxInfo);
+        sub_81AE860(data[5], &(eMailboxInfo.itemsAbove), &(eMailboxInfo.cursorPos));
 
         switch(inputOptionId)
         {
@@ -596,36 +471,36 @@ void sub_816B730(u8);
             case -2:
                 PlaySE(SE_SELECT);
                 RemoveScrollIndicatorArrowPair(eMailboxInfo.unk6[3]);
-                sub_816B798(taskId);
+                Mailbox_ReturnToPlayerPC(taskId);
                 break;
             default:
                 PlaySE(SE_SELECT);
                 sub_81D1D04(0);
                 sub_81D1D04(1);
-                sub_81AE6C8(data[5], &(eMailboxInfo.itemsAbove), &eMailboxInfo);
+                sub_81AE6C8(data[5], &(eMailboxInfo.itemsAbove), &(eMailboxInfo.cursorPos));
                 schedule_bg_copy_tilemap_to_vram(0);
                 RemoveScrollIndicatorArrowPair(eMailboxInfo.unk6[3]);
-                gTasks[taskId].func = sub_816B730;
+                gTasks[taskId].func = Mailbox_PrintWhatToDoWithPlayerMailText;
                 break;
         }
     }
 }
 
 void sub_81DB554(u8 *, u8);
-void sub_816B7DC(u8);
+void Mailbox_PrintMailOptions(u8);
 extern const u8 gText_WhatToDoWithVar1sMail[];
 
-/*static*/ void sub_816B730(u8 taskId)//Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)
+/*static*/ void Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)//Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)
 {
     StringCopy(gStringVar1, gSaveBlock1Ptr->mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos].playerName);
     sub_81DB554(gStringVar1, 0);
     StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithVar1sMail);
-    DisplayItemMessageOnField(taskId, gStringVar4, sub_816B7DC);
+    DisplayItemMessageOnField(taskId, gStringVar4, Mailbox_PrintMailOptions);
 }
 
 void sub_81D1EC0(void);
 
-/*static*/ void sub_816B798(u8 taskId)//Mailbox_ReturnToPlayerPC(u8 taskId)
+/*static*/ void Mailbox_ReturnToPlayerPC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -637,22 +512,22 @@ void sub_81D1EC0(void);
     ReshowPlayerPC(taskId);
 }
 
-extern const struct MenuAction gUnknown_085DFF04[];
+extern const struct MenuAction gMailboxMailOptions[];
 
-void sub_816B82C(u8 taskId);
+void Mailbox_MailOptionsProcessInput(u8 taskId);
 
-void sub_816B7DC(u8 taskId)
+void Mailbox_PrintMailOptions(u8 taskId)
 {
     u8 r4 = sub_81D1C84(2);
-    PrintMenuTable(r4, 4, gUnknown_085DFF04);
+    PrintMenuTable(r4, 4, gMailboxMailOptions);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(r4, 4, 0);
     schedule_bg_copy_tilemap_to_vram(0);
-    gTasks[taskId].func = sub_816B82C;
+    gTasks[taskId].func = Mailbox_MailOptionsProcessInput;
 }
 
-void sub_816BBD4(u8 taskId);
+void Mailbox_Cancel(u8 taskId);
 
-void sub_816B82C(u8 taskId)
+void Mailbox_MailOptionsProcessInput(u8 taskId)
 {
     s8 inputOptionId = ProcessMenuInput_other();
 
@@ -662,41 +537,288 @@ void sub_816B82C(u8 taskId)
             break;
         case -1:
             PlaySE(SE_SELECT);
-            sub_816BBD4(taskId);
+            Mailbox_Cancel(taskId);
             break;
         default:
             PlaySE(SE_SELECT);
-            gUnknown_085DFF04[inputOptionId].func.void_u8(taskId);
+            gMailboxMailOptions[inputOptionId].func.void_u8(taskId);
             break;
     }
 }
 
-void sub_816B8A4(u8 taskId);
+void Mailbox_FadeAndReadMail(u8 taskId);
 
-void sub_816B878(u8 taskId)
+void Mailbox_DoMailRead(u8 taskId)
 {
     FadeScreen(1, 0);
-    gTasks[taskId].func = sub_816B8A4;
+    gTasks[taskId].func = Mailbox_FadeAndReadMail;
 }
 
-void sub_816B900();
+void Mailbox_ReturnToFieldFromReadMail();
 
-void sub_816B8A4(u8 taskId)
+void Mailbox_FadeAndReadMail(u8 taskId)
 {
     if(!gPaletteFade.active)
     {
         sub_81D1EC0();
         overworld_free_bg_tilemaps();
-        ReadMail(&(gSaveBlock1Ptr->mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos]), sub_816B900, TRUE);
+        ReadMail(&(gSaveBlock1Ptr->mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos]), Mailbox_ReturnToFieldFromReadMail, TRUE);
         DestroyTask(taskId);
     }
 }
 
 void pal_fill_for_maplights_or_black();
 
-void sub_816B900()
+void Mailbox_ReturnToFieldFromReadMail()
 {
     gFieldCallback = pal_fill_for_maplights_or_black;
     SetMainCallback2(CB2_ReturnToField);
 }
 
+void Mailbox_HandleReturnToProcessInput(u8 taskId);
+
+void pal_fill_for_maplights_or_black()
+{
+    u8 taskId;
+
+    sub_81973A4();
+    taskId = CreateTask(Mailbox_HandleReturnToProcessInput, 0);
+    if(sub_81D1C44(eMailboxInfo.count) == TRUE)
+        Mailbox_DrawMailboxMenu(taskId);
+    else
+        DestroyTask(taskId);
+    pal_fill_black();
+}
+
+void Mailbox_HandleReturnToProcessInput(u8 taskId)
+{
+    if(sub_80ABDFC() == TRUE)
+        gTasks[taskId].func = Mailbox_ProcessInput;
+}
+
+extern const u8 gText_MessageWillBeLost[];
+
+void Mailbox_DrawYesNoBeforeMove(u8 taskId);
+
+void Mailbox_MoveToBag(u8 taskId)
+{
+    DisplayItemMessageOnField(taskId, gText_MessageWillBeLost, Mailbox_DrawYesNoBeforeMove);
+}
+
+void Mailbox_DoMailMoveToBag(u8 taskId);
+void Mailbox_CancelMoveToBag(u8 taskId);
+void Mailbox_MoveToBagYesNoPrompt(u8 taskId);
+
+void Mailbox_DrawYesNoBeforeMove(u8 taskId)
+{
+    sub_8197930();
+    gTasks[taskId].func = Mailbox_MoveToBagYesNoPrompt;
+}
+
+void Mailbox_MoveToBagYesNoPrompt(u8 taskId)
+{
+    switch(ProcessMenuInputNoWrap_())
+    {
+        case 0:
+            Mailbox_DoMailMoveToBag(taskId);
+            break;
+        case -1:
+            PlaySE(SE_SELECT);
+        case 1:
+            Mailbox_CancelMoveToBag(taskId);
+            break;
+        case -2:
+        default:
+            break;
+    }
+}
+
+extern const u8 gText_BagIsFull[];
+extern const u8 gText_MailToBagMessageErased[];
+
+void Mailbox_DoMailMoveToBag(u8 taskId)
+{
+    struct MailStruct *mailStruct = &(gSaveBlock1Ptr->mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos]);
+    if(!AddBagItem(mailStruct->itemId, 1))
+    {
+        DisplayItemMessageOnField(taskId, gText_BagIsFull, Mailbox_Cancel);
+    }
+    else
+    {
+        DisplayItemMessageOnField(taskId, gText_MailToBagMessageErased, Mailbox_Cancel);
+        ClearMailStruct(mailStruct);
+        Mailbox_UpdateMailList();
+        eMailboxInfo.count--;
+        if(eMailboxInfo.count < (eMailboxInfo.pageItems + eMailboxInfo.itemsAbove) && eMailboxInfo.itemsAbove != 0)
+            eMailboxInfo.itemsAbove--;
+        ItemStorage_SetItemAndMailCount(taskId);
+    }
+}
+
+void Mailbox_CancelMoveToBag(u8 taskId)
+{
+    Mailbox_Cancel(taskId);
+}
+
+void Mailbox_DoGiveMailPokeMenu(u8 taskId);
+void Mailbox_NoPokemonForMail(u8 taskId);
+
+void Mailbox_Give(u8 taskId)
+{
+    if(CalculatePlayerPartyCount() == 0)
+        Mailbox_NoPokemonForMail(taskId);
+    else
+    {
+        FadeScreen(1, 0);
+        gTasks[taskId].func = Mailbox_DoGiveMailPokeMenu;
+    }
+}
+
+void sub_81B8448();
+
+void Mailbox_DoGiveMailPokeMenu(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        sub_81D1EC0();
+        overworld_free_bg_tilemaps();
+        sub_81B8448();
+        DestroyTask(taskId);
+    }
+}
+
+void Mailbox_UpdateMailListAfterDeposit(void);
+
+void Mailbox_ReturnToMailListAfterDeposit(void)
+{
+    gFieldCallback = Mailbox_UpdateMailListAfterDeposit;
+    SetMainCallback2(CB2_ReturnToField);
+}
+
+void Mailbox_UpdateMailListAfterDeposit(void)
+{
+    u8 taskId;
+    u8 prevCount;
+    taskId = CreateTask(Mailbox_HandleReturnToProcessInput, 0);
+    prevCount = eMailboxInfo.count;
+    eMailboxInfo.count = GetMailboxMailCount();
+    Mailbox_UpdateMailList();
+    if(prevCount != eMailboxInfo.count && (eMailboxInfo.count < (eMailboxInfo.pageItems + eMailboxInfo.itemsAbove))
+       && eMailboxInfo.itemsAbove != 0)
+        eMailboxInfo.itemsAbove--;
+    ItemStorage_SetItemAndMailCount(taskId);
+    sub_81973A4();
+    if(sub_81D1C44(eMailboxInfo.count) == TRUE)
+        Mailbox_DrawMailboxMenu(taskId);
+    else
+        DestroyTask(taskId);
+    pal_fill_black();
+}
+
+void Mailbox_NoPokemonForMail(u8 taskId)
+{
+    DisplayItemMessageOnField(taskId, gText_NoPokemon, Mailbox_Cancel);
+}
+
+void Mailbox_Cancel(u8 taskId)
+{
+    sub_81D1D04(2);
+    sub_8197434(0, 0);
+    Mailbox_DrawMailboxMenu(taskId);
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = Mailbox_ProcessInput;
+}
+
+void sub_816BC14(void)
+{
+    gUnknown_0203BCC4 = AllocZeroed(sizeof(struct Struct203BCC4));
+    memset(gUnknown_0203BCC4->unk660, 0xFF, 0x6);
+    gUnknown_0203BCC4->unk666 = 0xFF;
+    gUnknown_0203BCC4->unk667 = -1;
+}
+
+void sub_816BCC4(u8);
+
+void sub_816BC58(void)
+{
+    u32 i;
+
+    for(i = 0; i < 6; i++)
+        sub_816BCC4(i);
+    Free(gUnknown_0203BCC4);
+}
+
+extern const struct WindowTemplate gUnknown_085DFF5C[6];
+
+u8 sub_816BC7C(u8 a)
+{
+    u8 *windowIdLoc = &(gUnknown_0203BCC4->unk660[a]);
+    if(*windowIdLoc == 0xFF)
+    {
+        *windowIdLoc = AddWindow(&gUnknown_085DFF5C[a]);
+        SetWindowBorderStyle(*windowIdLoc, FALSE, 0x214, 0xE);
+        schedule_bg_copy_tilemap_to_vram(0);
+    }
+    return *windowIdLoc;
+}
+
+void sub_816BCC4(u8 a)
+{
+    u8 *windowIdLoc = &(gUnknown_0203BCC4->unk660[a]);
+    if(*windowIdLoc != 0xFF)
+    {
+        sub_8198070(*windowIdLoc, FALSE);
+        ClearWindowTilemap(*windowIdLoc);
+        schedule_bg_copy_tilemap_to_vram(0);
+        RemoveWindow(*windowIdLoc);
+        *windowIdLoc = 0xFF;
+    }
+}
+
+void sub_816BDC8(u8 *string, u16 itemId);
+
+extern struct ListMenuTemplate gUnknown_085DFF44;
+
+void sub_816BD04(void)
+{
+    u16 i;
+
+    for(i = 0; i < eMailboxInfo.count - 1; i++)
+    {
+        sub_816BDC8(&(gUnknown_0203BCC4->unk198[i][0]), gSaveBlock1Ptr->pcItems[i].itemId);
+        gUnknown_0203BCC4->unk0[i].name = &(gUnknown_0203BCC4->unk198[i][0]);
+        gUnknown_0203BCC4->unk0[i].id = i;
+    }
+    StringCopy(&(gUnknown_0203BCC4->unk198[i][0]) ,gText_Cancel2);
+    gUnknown_0203BCC4->unk0[i].name = &(gUnknown_0203BCC4->unk198[i][0]);
+    gUnknown_0203BCC4->unk0[i].id = -2;
+    gMultiuseListMenuTemplate = gUnknown_085DFF44;
+    gMultiuseListMenuTemplate.unk_10 = sub_816BC7C(0);
+    gMultiuseListMenuTemplate.totalItems = eMailboxInfo.count;
+    gMultiuseListMenuTemplate.items = gUnknown_0203BCC4->unk0;
+    gMultiuseListMenuTemplate.maxShowed = eMailboxInfo.pageItems;
+}
+
+void sub_816BDC8(u8 *string, u16 itemId)
+{
+    CopyItemName(itemId, string);
+}
+
+void sub_816C0C8();
+void sub_816C060(u16 itemId);
+void sub_816BEF0(s32 id);
+
+void sub_816BDDC(s32 id, bool8 b)
+{
+    if(b != TRUE)
+        PlaySE(SE_SELECT);
+    if(gUnknown_0203BCC4->unk666 == 0xFF)
+    {
+        sub_816C0C8();
+        if(id != -2)
+            sub_816C060(gSaveBlock1Ptr->pcItems[id].itemId);
+        else
+            sub_816C060(0xFFFF);
+        sub_816BEF0(id);
+    }
+}

@@ -39,11 +39,11 @@ gNewGamePCItems:: @ 85DFEFC
 	.2byte 0x0000, 0x0000
 
 	.align 2
-gUnknown_085DFF04:: @ 85DFF04
-	.4byte gText_Read,			sub_816B878
-	.4byte gText_MoveToBag,		sub_816B994
-	.4byte gText_Give2,			sub_816BABC
-	.4byte gText_Cancel2,		sub_816BBD4
+gMailboxMailOptions:: @ 85DFF04
+	.4byte gText_Read,			Mailbox_DoMailRead
+	.4byte gText_MoveToBag,		Mailbox_MoveToBag
+	.4byte gText_Give2,			Mailbox_Give
+	.4byte gText_Cancel2,		Mailbox_Cancel
 
 	.align 2
 gUnknown_085DFF24:: @ 85DFF24
