@@ -93,7 +93,7 @@ SECTIONS {
         src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         src/field_map_obj.o(.text);
-        asm/field_ground_effect.o(.text);
+		src/field_ground_effect.o(.text);
         src/field_map_obj_helpers.o(.text);
         src/field_message_box.o(.text);
         asm/map_obj_lock.o(.text);
@@ -401,7 +401,7 @@ SECTIONS {
         src/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/field_map_obj.o(.rodata);
-        data/field_ground_effect.o(.rodata);
+        src/field_ground_effect.o(.rodata);
         data/map_obj_8097404.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
