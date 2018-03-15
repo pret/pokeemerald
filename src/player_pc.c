@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/songs.h"
+#include "bg.h"
 #include "decoration.h"
 #include "event_scripts.h"
 #include "field_fadetransition.h"
@@ -7,6 +8,7 @@
 #include "field_weather.h"
 #include "international_string_util.h"
 #include "item.h"
+#include "item_icon.h"
 #include "item_menu.h"
 #include "constants/items.h"
 #include "list_menu.h"
@@ -15,11 +17,13 @@
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "menu_indicators.h"
 #include "overworld.h"
 #include "palette.h"
 #include "player_pc.h"
 #include "script.h"
 #include "sound.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -31,11 +35,10 @@ struct Struct203BCC4
     //u8 filler[0x118];
     u8 unk198[51][0x18];
     //u8 filler2[0x348];
-    u8 unk660[6];
+    u8 windowIds[6];
     u8 unk666;
-    s8 unk667;
-    u32 unk668;
-    u8 filler3[4];
+    u8 spriteId;
+    u8 spriteIds[7];
 
 };
 
@@ -45,9 +48,9 @@ static EWRAM_DATA u8 *gPcItemMenuOptionOrder = NULL;
 
 static EWRAM_DATA u8 gPcItemMenuOptionsNum = 0;
 
-extern struct MailboxStruct gUnknown_0203BCB8;
+extern struct PlayerPCItemPageStruct gUnknown_0203BCB8;
 
-#define eMailboxInfo gUnknown_0203BCB8
+#define playerPCItemPageInfo gUnknown_0203BCB8
 
 
 /*static*/ void InitPlayerPCMenu(u8 taskId);
@@ -181,18 +184,18 @@ bool8 sub_81D1C44(u8);
 /*static*/ void PlayerPC_Mailbox(u8 taskId)
 {
 
-    eMailboxInfo.count = GetMailboxMailCount();
+    playerPCItemPageInfo.count = GetMailboxMailCount();
 
-    if (eMailboxInfo.count == 0)
+    if (playerPCItemPageInfo.count == 0)
         DisplayItemMessageOnField(taskId, gText_NoMailHere, ReshowPlayerPC);
     else
     {
-        eMailboxInfo.cursorPos = 0;
-        eMailboxInfo.itemsAbove = 0;
-        eMailboxInfo.unk6[3] = 0xFF;
+        playerPCItemPageInfo.cursorPos = 0;
+        playerPCItemPageInfo.itemsAbove = 0;
+        playerPCItemPageInfo.scrollIndicatorId = 0xFF;
         Mailbox_UpdateMailList();
         ItemStorage_SetItemAndMailCount(taskId);
-        if(sub_81D1C44(eMailboxInfo.count) == TRUE)
+        if(sub_81D1C44(playerPCItemPageInfo.count) == TRUE)
         {
             sub_8197434(0, 0);
             Mailbox_DrawMailboxMenu(taskId);
@@ -361,14 +364,14 @@ void gpu_pal_allocator_reset__manage_upper_four(void);
 
     data[3] = toss;
     sub_816B4DC(taskId);
-    eMailboxInfo.cursorPos = 0;
-    eMailboxInfo.itemsAbove = 0;
-    eMailboxInfo.unk6[3] = 0xFF;
+    playerPCItemPageInfo.cursorPos = 0;
+    playerPCItemPageInfo.itemsAbove = 0;
+    playerPCItemPageInfo.scrollIndicatorId = 0xFF;
     ItemStorage_SetItemAndMailCount(taskId);
     sub_816BC14();
     gpu_pal_allocator_reset__manage_upper_four();
     LoadListMenuArrowsGfx();
-    sub_8122344(&(gUnknown_0203BCC4->unk668), 7);
+    sub_8122344(gUnknown_0203BCC4->spriteIds, 7);
     sub_8197434(0,0);
     gTasks[taskId].func = ItemStorage_ProcessInput;
 }
@@ -384,10 +387,10 @@ void gpu_pal_allocator_reset__manage_upper_four(void);
 
 /*static*/ void ItemStorage_SetItemAndMailCount(u8 taskId)
 {
-    if (eMailboxInfo.count > 7)
-        eMailboxInfo.pageItems = 8;
+    if (playerPCItemPageInfo.count > 7)
+        playerPCItemPageInfo.pageItems = 8;
     else
-        eMailboxInfo.pageItems = eMailboxInfo.count + 1;
+        playerPCItemPageInfo.pageItems = playerPCItemPageInfo.count + 1;
 }
 
 /*static*/ void sub_816B4DC(u8 taskId)
@@ -432,8 +435,8 @@ void gpu_pal_allocator_reset__manage_upper_four(void);
 
 extern const u8 gText_Mailbox[];
 u8 sub_81D1C84(u8);
-u8 sub_81D1DC0(struct MailboxStruct *);
-void sub_81D1E90(struct MailboxStruct *);
+u8 sub_81D1DC0(struct PlayerPCItemPageStruct *);
+void sub_81D1E90(struct PlayerPCItemPageStruct *);
 
 
 /*static*/ void Mailbox_DrawMailboxMenu(u8 taskId)
@@ -444,8 +447,8 @@ void sub_81D1E90(struct MailboxStruct *);
     sub_81D1C84(1);
     PrintTextOnWindow(windowId, 1, gText_Mailbox, GetStringCenterAlignXOffset(1, gText_Mailbox, 0x40), 1, 0, NULL);
     schedule_bg_copy_tilemap_to_vram(0);
-    gTasks[taskId].data[5] = sub_81D1DC0(&eMailboxInfo);
-    sub_81D1E90(&eMailboxInfo);
+    gTasks[taskId].data[5] = sub_81D1DC0(&playerPCItemPageInfo);
+    sub_81D1E90(&playerPCItemPageInfo);
 }
 
 
@@ -462,7 +465,7 @@ void sub_81D1D04(u8);
     if(!gPaletteFade.active)
     {
         inputOptionId = ListMenuHandleInputGetItemId(data[5]);
-        sub_81AE860(data[5], &(eMailboxInfo.itemsAbove), &(eMailboxInfo.cursorPos));
+        sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
 
         switch(inputOptionId)
         {
@@ -470,16 +473,16 @@ void sub_81D1D04(u8);
                 break;
             case -2:
                 PlaySE(SE_SELECT);
-                RemoveScrollIndicatorArrowPair(eMailboxInfo.unk6[3]);
+                RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
                 Mailbox_ReturnToPlayerPC(taskId);
                 break;
             default:
                 PlaySE(SE_SELECT);
                 sub_81D1D04(0);
                 sub_81D1D04(1);
-                sub_81AE6C8(data[5], &(eMailboxInfo.itemsAbove), &(eMailboxInfo.cursorPos));
+                sub_81AE6C8(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
                 schedule_bg_copy_tilemap_to_vram(0);
-                RemoveScrollIndicatorArrowPair(eMailboxInfo.unk6[3]);
+                RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
                 gTasks[taskId].func = Mailbox_PrintWhatToDoWithPlayerMailText;
                 break;
         }
@@ -492,7 +495,7 @@ extern const u8 gText_WhatToDoWithVar1sMail[];
 
 /*static*/ void Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)//Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)
 {
-    StringCopy(gStringVar1, gSaveBlock1Ptr->mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos].playerName);
+    StringCopy(gStringVar1, gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos].playerName);
     sub_81DB554(gStringVar1, 0);
     StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithVar1sMail);
     DisplayItemMessageOnField(taskId, gStringVar4, Mailbox_PrintMailOptions);
@@ -562,7 +565,7 @@ void Mailbox_FadeAndReadMail(u8 taskId)
     {
         sub_81D1EC0();
         overworld_free_bg_tilemaps();
-        ReadMail(&(gSaveBlock1Ptr->mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos]), Mailbox_ReturnToFieldFromReadMail, TRUE);
+        ReadMail(&(gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos]), Mailbox_ReturnToFieldFromReadMail, TRUE);
         DestroyTask(taskId);
     }
 }
@@ -583,7 +586,7 @@ void pal_fill_for_maplights_or_black()
 
     sub_81973A4();
     taskId = CreateTask(Mailbox_HandleReturnToProcessInput, 0);
-    if(sub_81D1C44(eMailboxInfo.count) == TRUE)
+    if(sub_81D1C44(playerPCItemPageInfo.count) == TRUE)
         Mailbox_DrawMailboxMenu(taskId);
     else
         DestroyTask(taskId);
@@ -638,7 +641,7 @@ extern const u8 gText_MailToBagMessageErased[];
 
 void Mailbox_DoMailMoveToBag(u8 taskId)
 {
-    struct MailStruct *mailStruct = &(gSaveBlock1Ptr->mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos]);
+    struct MailStruct *mailStruct = &(gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos]);
     if(!AddBagItem(mailStruct->itemId, 1))
     {
         DisplayItemMessageOnField(taskId, gText_BagIsFull, Mailbox_Cancel);
@@ -648,9 +651,9 @@ void Mailbox_DoMailMoveToBag(u8 taskId)
         DisplayItemMessageOnField(taskId, gText_MailToBagMessageErased, Mailbox_Cancel);
         ClearMailStruct(mailStruct);
         Mailbox_UpdateMailList();
-        eMailboxInfo.count--;
-        if(eMailboxInfo.count < (eMailboxInfo.pageItems + eMailboxInfo.itemsAbove) && eMailboxInfo.itemsAbove != 0)
-            eMailboxInfo.itemsAbove--;
+        playerPCItemPageInfo.count--;
+        if(playerPCItemPageInfo.count < (playerPCItemPageInfo.pageItems + playerPCItemPageInfo.itemsAbove) && playerPCItemPageInfo.itemsAbove != 0)
+            playerPCItemPageInfo.itemsAbove--;
         ItemStorage_SetItemAndMailCount(taskId);
     }
 }
@@ -700,15 +703,15 @@ void Mailbox_UpdateMailListAfterDeposit(void)
     u8 taskId;
     u8 prevCount;
     taskId = CreateTask(Mailbox_HandleReturnToProcessInput, 0);
-    prevCount = eMailboxInfo.count;
-    eMailboxInfo.count = GetMailboxMailCount();
+    prevCount = playerPCItemPageInfo.count;
+    playerPCItemPageInfo.count = GetMailboxMailCount();
     Mailbox_UpdateMailList();
-    if(prevCount != eMailboxInfo.count && (eMailboxInfo.count < (eMailboxInfo.pageItems + eMailboxInfo.itemsAbove))
-       && eMailboxInfo.itemsAbove != 0)
-        eMailboxInfo.itemsAbove--;
+    if(prevCount != playerPCItemPageInfo.count && (playerPCItemPageInfo.count < (playerPCItemPageInfo.pageItems + playerPCItemPageInfo.itemsAbove))
+       && playerPCItemPageInfo.itemsAbove != 0)
+        playerPCItemPageInfo.itemsAbove--;
     ItemStorage_SetItemAndMailCount(taskId);
     sub_81973A4();
-    if(sub_81D1C44(eMailboxInfo.count) == TRUE)
+    if(sub_81D1C44(playerPCItemPageInfo.count) == TRUE)
         Mailbox_DrawMailboxMenu(taskId);
     else
         DestroyTask(taskId);
@@ -732,9 +735,9 @@ void Mailbox_Cancel(u8 taskId)
 void sub_816BC14(void)
 {
     gUnknown_0203BCC4 = AllocZeroed(sizeof(struct Struct203BCC4));
-    memset(gUnknown_0203BCC4->unk660, 0xFF, 0x6);
+    memset(gUnknown_0203BCC4->windowIds, 0xFF, 0x6);
     gUnknown_0203BCC4->unk666 = 0xFF;
-    gUnknown_0203BCC4->unk667 = -1;
+    gUnknown_0203BCC4->spriteId = 0xFF;
 }
 
 void sub_816BCC4(u8);
@@ -752,7 +755,7 @@ extern const struct WindowTemplate gUnknown_085DFF5C[6];
 
 u8 sub_816BC7C(u8 a)
 {
-    u8 *windowIdLoc = &(gUnknown_0203BCC4->unk660[a]);
+    u8 *windowIdLoc = &(gUnknown_0203BCC4->windowIds[a]);
     if(*windowIdLoc == 0xFF)
     {
         *windowIdLoc = AddWindow(&gUnknown_085DFF5C[a]);
@@ -764,7 +767,7 @@ u8 sub_816BC7C(u8 a)
 
 void sub_816BCC4(u8 a)
 {
-    u8 *windowIdLoc = &(gUnknown_0203BCC4->unk660[a]);
+    u8 *windowIdLoc = &(gUnknown_0203BCC4->windowIds[a]);
     if(*windowIdLoc != 0xFF)
     {
         sub_8198070(*windowIdLoc, FALSE);
@@ -783,7 +786,7 @@ void sub_816BD04(void)
 {
     u16 i;
 
-    for(i = 0; i < eMailboxInfo.count - 1; i++)
+    for(i = 0; i < playerPCItemPageInfo.count - 1; i++)
     {
         sub_816BDC8(&(gUnknown_0203BCC4->unk198[i][0]), gSaveBlock1Ptr->pcItems[i].itemId);
         gUnknown_0203BCC4->unk0[i].name = &(gUnknown_0203BCC4->unk198[i][0]);
@@ -794,9 +797,9 @@ void sub_816BD04(void)
     gUnknown_0203BCC4->unk0[i].id = -2;
     gMultiuseListMenuTemplate = gUnknown_085DFF44;
     gMultiuseListMenuTemplate.unk_10 = sub_816BC7C(0);
-    gMultiuseListMenuTemplate.totalItems = eMailboxInfo.count;
+    gMultiuseListMenuTemplate.totalItems = playerPCItemPageInfo.count;
     gMultiuseListMenuTemplate.items = gUnknown_0203BCC4->unk0;
-    gMultiuseListMenuTemplate.maxShowed = eMailboxInfo.pageItems;
+    gMultiuseListMenuTemplate.maxShowed = playerPCItemPageInfo.pageItems;
 }
 
 void sub_816BDC8(u8 *string, u16 itemId)
@@ -804,7 +807,7 @@ void sub_816BDC8(u8 *string, u16 itemId)
     CopyItemName(itemId, string);
 }
 
-void sub_816C0C8();
+void sub_816C0C8(void);
 void sub_816C060(u16 itemId);
 void sub_816BEF0(s32 id);
 
@@ -818,7 +821,281 @@ void sub_816BDDC(s32 id, bool8 b)
         if(id != -2)
             sub_816C060(gSaveBlock1Ptr->pcItems[id].itemId);
         else
-            sub_816C060(0xFFFF);
+            sub_816C060(ITEMPC_GO_BACK_TO_PREV);
         sub_816BEF0(id);
     }
 }
+
+void sub_816BFE0(u8 y, u8, u8 speed);
+
+void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset)
+{
+    if(id != -2)
+    {
+        if(gUnknown_0203BCC4->unk666 != 0xFF)
+        {
+            if(gUnknown_0203BCC4->unk666 == (u8)id)
+                sub_816BFE0(yOffset, 0, 0xFF);
+            else
+                sub_816BFE0(yOffset, 0xFF, 0xFF);
+        }
+        ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->pcItems[id].quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, gText_xVar1);
+        PrintTextOnWindow(windowId, 7, gStringVar4, GetStringRightAlignXOffset(7, gStringVar4, 104), yOffset, 0xFF, NULL);
+    }
+}
+
+const u8* sub_816C228(u16);
+
+void sub_816BEF0(s32 id)
+{
+    const u8* description;
+    u8 windowId = gUnknown_0203BCC4->windowIds[1];
+
+    if(id != -2)
+        description = (u8 *)ItemId_GetDescription(gSaveBlock1Ptr->pcItems[id].itemId);
+    else
+        description = sub_816C228(0xFFFF);
+    FillWindowPixelBuffer(windowId, 17);
+    PrintTextOnWindow(windowId, 1, description, 0, 1, 0, NULL);
+}
+
+void sub_816BF60(void)
+{
+    if(playerPCItemPageInfo.scrollIndicatorId == 0xFF)
+        playerPCItemPageInfo.scrollIndicatorId = AddScrollIndicatorArrowPairParametrized(0x2, 0xB0, 0xC, 0x94, playerPCItemPageInfo.count - playerPCItemPageInfo.pageItems, 0x13F8, 0x13F8, &(playerPCItemPageInfo.itemsAbove));
+}
+
+void sub_816BF9C(void)
+{
+    if(playerPCItemPageInfo.scrollIndicatorId != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
+        playerPCItemPageInfo.scrollIndicatorId = 0xFF;
+    }
+}
+
+void sub_816BFB8(u8 a, u8 b, u8 speed)
+{
+    sub_816BFE0(ListMenuGetYCoordForPrintingArrowCursor(a), b, speed);
+}
+
+extern const u8 gUnknown_085DFF8C[3];
+
+void sub_816BFE0(u8 y, u8 b, u8 speed)
+{
+    u8 windowId = gUnknown_0203BCC4->windowIds[0];
+    if(b == 0xFF)
+        FillWindowPixelRect(windowId, 17, 0, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
+    else
+        AddTextPrinterParameterized2(windowId, 1, 0, y, 0, 0, gUnknown_085DFF8C, speed, gText_SelectorArrow2);
+}
+
+
+void sub_816C060(u16 itemId)
+{
+    u8 spriteId;
+    u8* spriteIdLoc = &(gUnknown_0203BCC4->spriteId);
+
+    if(*spriteIdLoc == 0xFF)
+    {
+        FreeSpriteTilesByTag(0x13F6);
+        FreeSpritePaletteByTag(0x13F6);
+        spriteId = AddItemIconSprite(0x13F6, 0x13F6, itemId);
+        if(spriteId != 64)
+        {
+            *spriteIdLoc = spriteId;
+            gSprites[spriteId].oam.priority = 0;
+            gSprites[spriteId].pos2.x = 24;
+            gSprites[spriteId].pos2.y = 80;
+        }
+    }
+}
+
+void sub_816C0C8(void)
+{
+    u8* spriteIdLoc = &(gUnknown_0203BCC4->spriteId);
+    if(*spriteIdLoc != 0xFF)
+    {
+        FreeSpriteTilesByTag(0x13F6);
+        FreeSpritePaletteByTag(0x13F6);
+        DestroySprite(&(gSprites[*spriteIdLoc]));
+        *spriteIdLoc = 0xFF;
+    }
+}
+
+void sub_80D6E84(void);
+void sub_812220C(struct ItemSlot *, u8, u8 *, u8 *, u8);
+
+void sub_816C110(void)
+{
+    sub_80D6E84();
+    sub_812220C(gSaveBlock1Ptr->pcItems, 50, &(playerPCItemPageInfo.pageItems), &(playerPCItemPageInfo.count), 0x8);
+}
+
+void sub_812225C(u16 *, u16 *, u8, u8);
+
+void sub_816C140(void)
+{
+    sub_812225C(&(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos), playerPCItemPageInfo.pageItems, playerPCItemPageInfo.count);
+}
+
+extern const u8 gText_TossItem[];
+extern const u8 gText_WithdrawItem[];
+
+void sub_816C30C(u8 taskId);
+
+void ItemStorage_ProcessInput(u8 taskId)
+{
+    s16 *data;
+    bool32 toss;
+    u32 i, x;
+    u8 windowId;
+    const u8* text;
+
+    data = gTasks[taskId].data;
+    for(i = 0; i <=3; i++)
+        sub_816BC7C(i);
+    toss = data[3];
+    text = gText_TossItem;
+    if(!toss)
+        text = gText_WithdrawItem;
+    x = GetStringCenterAlignXOffset(1, text, 104);
+    PrintTextOnWindow(gUnknown_0203BCC4->windowIds[3], 1, text, x, 1, 0, NULL);
+    CopyWindowToVram(gUnknown_0203BCC4->windowIds[2], 2);
+    sub_816C110();
+    sub_816C140();
+    sub_816BD04();
+    data[5] = ListMenuInit(&gMultiuseListMenuTemplate, playerPCItemPageInfo.itemsAbove, playerPCItemPageInfo.cursorPos);
+    sub_816BF60();
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = sub_816C30C;
+}
+
+extern const u8 gText_GoBackPrevMenu[];
+extern const u8 gText_WithdrawHowManyItems[];
+extern const u8 gText_WithdrawXItems[];
+extern const u8 gText_TossHowManyVar1s[];
+extern const u8 gText_ThrewAwayVar2Var1s[];
+extern const u8 gText_NoRoomInBag[];
+extern const u8 gText_TooImportantToToss[];
+extern const u8 gText_ConfirmTossItems[];
+extern const u8 gText_MoveVar1Where[];
+
+const u8* sub_816C228(u16 itemId)
+{
+    const u8 *string;
+
+    switch(itemId)
+    {
+        case ITEMPC_GO_BACK_TO_PREV:
+            string = gText_GoBackPrevMenu;
+            break;
+        case ITEMPC_HOW_MANY_TO_WITHDRAW:
+            string = gText_WithdrawHowManyItems;
+            break;
+        case ITEMPC_WITHDREW_THING:
+            string = gText_WithdrawXItems;
+            break;
+        case ITEMPC_HOW_MANY_TO_TOSS:
+            string = gText_TossHowManyVar1s;
+            break;
+        case ITEMPC_THREW_AWAY_ITEM:
+            string = gText_ThrewAwayVar2Var1s;
+            break;
+        case ITEMPC_NO_MORE_ROOM:
+            string = gText_NoRoomInBag;
+            break;
+        case ITEMPC_TOO_IMPORTANT:
+            string = gText_TooImportantToToss;
+            break;
+        case ITEMPC_OKAY_TO_THROW_AWAY:
+            string = gText_ConfirmTossItems;
+            break;
+        case ITEMPC_SWITCH_WHICH_ITEM:
+            string = gText_MoveVar1Where;
+            break;
+        default:
+            string = ItemId_GetDescription(itemId);
+            break;
+    }
+    return string;
+}
+
+void sub_816C2C0(const u8 *string)
+{
+    u8 windowId = gUnknown_0203BCC4->windowIds[1];
+    FillWindowPixelBuffer(windowId, 0x11);
+    StringExpandPlaceholders(gStringVar4, string);
+    PrintTextOnWindow(windowId, 1, gStringVar4, 0, 1, 0, NULL);
+}
+
+void sub_816C400(u8 taskId);
+void sub_816C450(u8 taskId);
+void sub_816C71C(u8 taskId);
+
+void sub_816C30C(u8 taskId)
+{
+    s16 *data;
+    s32 id;
+
+    data = gTasks[taskId].data;
+    if(gMain.newKeys & SELECT_BUTTON)
+    {
+        sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        if((playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos) != (playerPCItemPageInfo.count - 1))
+        {
+            PlaySE(SE_SELECT);
+            sub_816C450(taskId);
+        }
+    }
+    else
+    {
+        id = ListMenuHandleInputGetItemId(data[5]);
+        sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        switch(id)
+        {
+        case -1:
+            break;
+        case -2:
+            PlaySE(SE_SELECT);
+            sub_816C400(taskId);
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            sub_816C71C(taskId);
+            break;
+        }
+    }
+}
+
+void bx_battle_menu_t3(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    if(!IsDma3ManagerBusyWithBgCopy())
+    {
+        NewMenuHelpers_DrawDialogueFrame(0, 0);
+        if(!data[3])
+            InitItemStorageMenu(taskId, 0);
+        else
+            InitItemStorageMenu(taskId, 2);
+        gTasks[taskId].func = ItemStorageMenuProcessInput;
+    }
+}
+
+
+void sub_816C400(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    sub_816C0C8();
+    sub_816BF9C();
+    sub_81AE6C8(data[5], NULL, NULL);
+    sub_81223B0(gUnknown_0203BCC4->spriteIds, 7);
+    sub_816BC58();
+    gTasks[taskId].func = bx_battle_menu_t3;
+}
+

@@ -460,7 +460,7 @@ static bool8 InitPokeblockMenu(void)
         gMain.state++;
         break;
     case 10:
-        sub_8122344(&sPokeblockMenu->field_E75, FIELD_E75_COUNT);
+        sub_8122344(sPokeblockMenu->field_E75, FIELD_E75_COUNT);
         gMain.state++;
         break;
     case 11:

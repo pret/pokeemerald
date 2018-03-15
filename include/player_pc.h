@@ -64,14 +64,15 @@ enum
     ITEMPC_GO_BACK_TO_PREV
 };
 
-struct MailboxStruct
+struct PlayerPCItemPageStruct
 {
     u16 cursorPos;
     u16 itemsAbove;
     u8 pageItems;
     u8 count;
-    u8 unk6[6];
-    u8 unkC[4];
+    u8 filler[3];
+    u8 scrollIndicatorId;
+    u8 filler2[4];
 };
 
 // Exported type declarations
