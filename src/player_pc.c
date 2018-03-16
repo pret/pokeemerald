@@ -1099,3 +1099,275 @@ void sub_816C400(u8 taskId)
     gTasks[taskId].func = bx_battle_menu_t3;
 }
 
+void sub_816C690(u8);
+void sub_816C4FC(u8 taskId);
+
+void sub_816C450(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    sub_81AF15C(data[5], 16, 1);
+    gUnknown_0203BCC4->unk666 = (playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos);
+    sub_816BFB8(data[5], 0, 0);
+    sub_816C690(gUnknown_0203BCC4->unk666);
+    CopyItemName(gSaveBlock1Ptr->pcItems[gUnknown_0203BCC4->unk666].itemId, gStringVar1);
+    sub_816C2C0(sub_816C228(ITEMPC_SWITCH_WHICH_ITEM));
+    gTasks[taskId].func = sub_816C4FC;
+}
+
+void sub_816C5A0(u8 taskId, bool8 a);
+
+void sub_816C4FC(u8 taskId)
+{
+    s16 *data;
+    s32 id;
+
+    data = gTasks[taskId].data;
+    if(gMain.newKeys & SELECT_BUTTON)
+    {
+        sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        sub_816C5A0(taskId, FALSE);
+        return;
+    }
+    id = ListMenuHandleInputGetItemId(data[5]);
+    sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+    sub_81223FC(gUnknown_0203BCC4->spriteIds, 7, 0);
+    sub_816C690(playerPCItemPageInfo.cursorPos);
+    switch(id)
+    {
+    case -1:
+        break;
+    case -2:
+        if(gMain.newKeys & A_BUTTON)
+        {
+            sub_816C5A0(taskId, FALSE);
+        }
+        else
+            sub_816C5A0(taskId, TRUE);
+        break;
+    default:
+        sub_816C5A0(taskId, FALSE);
+        break;
+    }
+}
+
+
+void sub_816C5A0(u8 taskId, bool8 a)
+{
+    s16 *data;
+    s32 id;
+    u16 b;
+    u8 c;
+
+    data = gTasks[taskId].data;
+    b = (playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos);
+    PlaySE(SE_SELECT);
+    sub_81AE6C8(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+    if(!a)
+    {
+        c = gUnknown_0203BCC4->unk666;
+        if(c != b)
+        {
+            if(c != b - 1)
+            {
+                sub_80D702C(gSaveBlock1Ptr->pcItems, c, b);
+                sub_816BD04();
+            }
+
+        }
+        else
+            goto LABEL_SKIP_CURSOR_DECREMENT;
+    }
+    if (gUnknown_0203BCC4->unk666 < b)
+        playerPCItemPageInfo.cursorPos--;
+    LABEL_SKIP_CURSOR_DECREMENT:
+    sub_81223FC(gUnknown_0203BCC4->spriteIds, 7, 1);
+    gUnknown_0203BCC4->unk666 = 0xFF;
+    data[5] = ListMenuInit(&gMultiuseListMenuTemplate, playerPCItemPageInfo.itemsAbove, playerPCItemPageInfo.cursorPos);
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = sub_816C30C;
+}
+
+//void
+void sub_816C690(u8 a)
+{
+    sub_8122448(gUnknown_0203BCC4->spriteIds, 7, 128, ((a+1) * 16));
+}
+
+void sub_816C6BC(u8 windowId, u16 value, u32 mode, u8 x, u8 y, u8 n)
+{
+    ConvertIntToDecimalStringN(gStringVar1, value, mode, n);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
+    PrintTextOnWindow(windowId, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 48), y, 0, NULL);
+}
+
+void sub_816C8FC(u8 taskId);
+void sub_816C9B8(u8 taskid);
+void sub_816C818(u8 taskid);
+
+void sub_816C71C(u8 taskId)
+{
+    s16 *data;
+    u16 b;
+
+    data = gTasks[taskId].data;
+    b = (playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove);
+    sub_816BF9C();
+    data[2] = 1;
+    if(!data[3])
+    {
+        if(gSaveBlock1Ptr->pcItems[b].quantity == 1)
+        {
+            sub_816C8FC(taskId);
+            return;
+        }
+        CopyItemName(gSaveBlock1Ptr->pcItems[b].itemId, gStringVar1);
+        sub_816C2C0(sub_816C228(ITEMPC_HOW_MANY_TO_WITHDRAW));
+    }
+    else
+    {
+        if(gSaveBlock1Ptr->pcItems[b].quantity == 1)
+        {
+            sub_816C9B8(taskId);
+            return;
+        }
+        CopyItemName(gSaveBlock1Ptr->pcItems[b].itemId, gStringVar1);
+        sub_816C2C0(sub_816C228(ITEMPC_HOW_MANY_TO_TOSS));
+    }
+    sub_816C6BC(sub_816BC7C(4), data[2], STR_CONV_MODE_LEADING_ZEROS, 8, 1, 3);
+    gTasks[taskId].func = sub_816C818;
+}
+
+void sub_816CBC0(u8 taskId);
+
+void sub_816C818(u8 taskId)
+{
+    s16 *data;
+    u16 b;
+
+    data = gTasks[taskId].data;
+    b = (playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove);
+    if(AdjustQuantityAccordingToDPadInput(&(data[2]), gSaveBlock1Ptr->pcItems[b].quantity) == TRUE)
+        sub_816C6BC(sub_816BC7C(4), data[2], STR_CONV_MODE_LEADING_ZEROS, 8, 1, 3);
+    else
+    {
+        if(gMain.newKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            sub_816BCC4(4);
+            if(!data[3])
+                sub_816C8FC(taskId);
+            else
+                sub_816C9B8(taskId);
+        }
+        else if(gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            sub_816BCC4(4);
+            sub_816C2C0(sub_816C228(gSaveBlock1Ptr->pcItems[b].itemId));
+            sub_816CBC0(taskId);
+        }
+    }
+}
+
+void sub_816CB04(u8 taskId);
+void sub_816CB74(u8 taskId);
+
+void sub_816C8FC(u8 taskId)
+{
+    s16 *data;
+    u16 b;
+
+    data = gTasks[taskId].data;
+    b = (playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove);
+    if(AddBagItem(gSaveBlock1Ptr->pcItems[b].itemId, data[2]) == TRUE)
+    {
+        CopyItemName(gSaveBlock1Ptr->pcItems[b].itemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[2], STR_CONV_MODE_LEFT_ALIGN, 3);
+        sub_816C2C0(sub_816C228(ITEMPC_WITHDREW_THING));
+        gTasks[taskId].func = sub_816CB04;
+    }
+    else
+    {
+        data[2] = 0;
+        sub_816C2C0(sub_816C228(ITEMPC_NO_MORE_ROOM));
+        gTasks[taskId].func = sub_816CB74;
+    }
+}
+
+extern const struct WindowTemplate gUnknown_085DFF84;
+extern const struct YesNoFuncTable gUnknown_085DFF3C;
+
+bool8 itemid_is_unique(u16 itemId);
+
+void sub_816C9B8(u8 taskId)
+{
+    s16 *data;
+    u16 b;
+
+    data = gTasks[taskId].data;
+    b = (playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove);
+    if(!itemid_is_unique(gSaveBlock1Ptr->pcItems[b].itemId))
+    {
+        CopyItemName(gSaveBlock1Ptr->pcItems[b].itemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[2], STR_CONV_MODE_LEFT_ALIGN, 3);
+        sub_816C2C0(sub_816C228(ITEMPC_OKAY_TO_THROW_AWAY));
+        CreateYesNoMenuWithCallbacks(taskId, &gUnknown_085DFF84, 1, 0, 1, 0x214, 0xE, &gUnknown_085DFF3C);
+    }
+    else
+    {
+        data[2] = 0;
+        sub_816C2C0(sub_816C228(ITEMPC_TOO_IMPORTANT));
+        gTasks[taskId].func = sub_816CB74;
+    }
+}
+
+void sub_816CA94(u8 taskId)
+{
+    sub_816C2C0(sub_816C228(ITEMPC_THREW_AWAY_ITEM));
+    gTasks[taskId].func = sub_816CB04;
+}
+
+void sub_816CAC8(u8 taskId)
+{
+    sub_816C2C0(sub_816C228(gSaveBlock1Ptr->pcItems[(playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos)].itemId));
+    sub_816CBC0(taskId);
+}
+
+void sub_80D6E48(u8, u16);
+
+void sub_816CB04(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    if(gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        sub_80D6E48((playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove), data[2]);
+        sub_81AE6C8(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        sub_816C110();
+        sub_816C140();
+        sub_816BD04();
+        data[5] = ListMenuInit(&gMultiuseListMenuTemplate, playerPCItemPageInfo.itemsAbove, playerPCItemPageInfo.cursorPos);
+        sub_816CBC0(taskId);
+    }
+}
+
+void sub_816CB74(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    if(gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        sub_816C2C0(sub_816C228(gSaveBlock1Ptr->pcItems[(playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos)].itemId));
+        sub_816CBC0(taskId);
+    }
+}
+
+void sub_816CBC0(u8 taskId)
+{
+    sub_816BF60();
+    gTasks[taskId].func = sub_816C30C;
+}
