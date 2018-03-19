@@ -936,23 +936,8 @@ gUnknown_0203CEFC: @ 203CEFC
 gUnknown_0203CF00: @ 203CF00
 	.space 0x4
 
-gUnknown_0203CF04: @ 203CF04
-	.space 0x4
-
-gUnknown_0203CF08: @ 203CF08
-	.space 0x4
-
-gUnknown_0203CF0C: @ 203CF0C
-	.space 0x4
-
-gUnknown_0203CF10: @ 203CF10
-	.space 0x4
-
-gUnknown_0203CF14: @ 203CF14
-	.space 0x4
-
-gUnknown_0203CF18: @ 203CF18
-	.space 0x4
+	.include "src/fossil_specials.o"
+	.include "src/fldeff_groundshake.o"
 
 gUnknown_0203CF1C: @ 203CF1C
 	.space 0x4
