@@ -2719,11 +2719,17 @@ extern const u16 gFireRedMenuElements2_Pal[16];
 extern const u16 gFireRedMenuElements3_Pal[16];
 extern const u8 gFireRedMenuElements_Gfx[];
 
-//item menu graphics
+// item menu graphics
 extern const u8 gBagScreen_Gfx[];
 extern const u16 gBagScreenFemale_Pal[];
 extern const u16 gBagScreenMale_Pal[];
 extern const u8 gBagMenuHMIcon_Gfx[];
+
+// item menu icons graphics
+extern const u8 gBagMaleTiles[];
+extern const u8 gBagFemaleTiles[];
+extern const u8 gBagPalette[];
+extern const u8 gBerryCheckCircle_Gfx[];
 
 //intro graphics
 extern const u8 gIntro1SparkleGfx[];
@@ -2766,6 +2772,94 @@ extern const u8 gIntro2MayNoTurnGfx[];
 extern const u16 gIntro2BrendanNoTurnPal[];
 extern const u16 gIntro2FlygonPal[];
 extern const u8 gIntro2FlygonGfx[];
+
+// berry pics
+extern const u8 gBerryPic_Cheri[];
+extern const u8 gBerryPalette_Cheri[];
+extern const u8 gBerryPic_Chesto[];
+extern const u8 gBerryPalette_Chesto[];
+extern const u8 gBerryPic_Pecha[];
+extern const u8 gBerryPalette_Pecha[];
+extern const u8 gBerryPic_Rawst[];
+extern const u8 gBerryPalette_Rawst[];
+extern const u8 gBerryPic_Aspear[];
+extern const u8 gBerryPalette_Aspear[];
+extern const u8 gBerryPic_Leppa[];
+extern const u8 gBerryPalette_Leppa[];
+extern const u8 gBerryPic_Oran[];
+extern const u8 gBerryPalette_Oran[];
+extern const u8 gBerryPic_Persim[];
+extern const u8 gBerryPalette_Persim[];
+extern const u8 gBerryPic_Lum[];
+extern const u8 gBerryPalette_Lum[];
+extern const u8 gBerryPic_Sitrus[];
+extern const u8 gBerryPalette_Sitrus[];
+extern const u8 gBerryPic_Figy[];
+extern const u8 gBerryPalette_Figy[];
+extern const u8 gBerryPic_Wiki[];
+extern const u8 gBerryPalette_Wiki[];
+extern const u8 gBerryPic_Mago[];
+extern const u8 gBerryPalette_Mago[];
+extern const u8 gBerryPic_Aguav[];
+extern const u8 gBerryPalette_Aguav[];
+extern const u8 gBerryPic_Iapapa[];
+extern const u8 gBerryPalette_Iapapa[];
+extern const u8 gBerryPic_Razz[];
+extern const u8 gBerryPalette_Razz[];
+extern const u8 gBerryPic_Bluk[];
+extern const u8 gBerryPalette_Bluk[];
+extern const u8 gBerryPic_Nanab[];
+extern const u8 gBerryPalette_Nanab[];
+extern const u8 gBerryPic_Wepear[];
+extern const u8 gBerryPalette_Wepear[];
+extern const u8 gBerryPic_Pinap[];
+extern const u8 gBerryPalette_Pinap[];
+extern const u8 gBerryPic_Pomeg[];
+extern const u8 gBerryPalette_Pomeg[];
+extern const u8 gBerryPic_Kelpsy[];
+extern const u8 gBerryPalette_Kelpsy[];
+extern const u8 gBerryPic_Qualot[];
+extern const u8 gBerryPalette_Qualot[];
+extern const u8 gBerryPic_Hondew[];
+extern const u8 gBerryPalette_Hondew[];
+extern const u8 gBerryPic_Grepa[];
+extern const u8 gBerryPalette_Grepa[];
+extern const u8 gBerryPic_Tamato[];
+extern const u8 gBerryPalette_Tamato[];
+extern const u8 gBerryPic_Cornn[];
+extern const u8 gBerryPalette_Cornn[];
+extern const u8 gBerryPic_Magost[];
+extern const u8 gBerryPalette_Magost[];
+extern const u8 gBerryPic_Rabuta[];
+extern const u8 gBerryPalette_Rabuta[];
+extern const u8 gBerryPic_Nomel[];
+extern const u8 gBerryPalette_Nomel[];
+extern const u8 gBerryPic_Spelon[];
+extern const u8 gBerryPalette_Spelon[];
+extern const u8 gBerryPic_Pamtre[];
+extern const u8 gBerryPalette_Pamtre[];
+extern const u8 gBerryPic_Watmel[];
+extern const u8 gBerryPalette_Watmel[];
+extern const u8 gBerryPic_Durin[];
+extern const u8 gBerryPalette_Durin[];
+extern const u8 gBerryPic_Belue[];
+extern const u8 gBerryPalette_Belue[];
+extern const u8 gBerryPic_Liechi[];
+extern const u8 gBerryPalette_Liechi[];
+extern const u8 gBerryPic_Ganlon[];
+extern const u8 gBerryPalette_Ganlon[];
+extern const u8 gBerryPic_Salac[];
+extern const u8 gBerryPalette_Salac[];
+extern const u8 gBerryPic_Petaya[];
+extern const u8 gBerryPalette_Petaya[];
+extern const u8 gBerryPic_Apicot[];
+extern const u8 gBerryPalette_Apicot[];
+extern const u8 gBerryPic_Lansat[];
+extern const u8 gBerryPalette_Lansat[];
+extern const u8 gBerryPic_Starf[];
+extern const u8 gBerryPalette_Starf[];
+extern const u8 gBerryPic_Enigma[];
+extern const u8 gBerryPalette_Enigma[];
 
 //credits
 extern const u8 gCreditsCopyrightEnd_Gfx[];

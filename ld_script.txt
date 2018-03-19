@@ -136,7 +136,7 @@ SECTIONS {
         asm/fldeff_cut.o(.text);
         src/mail_data.o(.text);
         asm/map_name_popup.o(.text);
-        asm/item_menu_icons.o(.text);
+        src/item_menu_icons.o(.text);
         asm/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
         asm/item.o(.text);
@@ -247,7 +247,7 @@ SECTIONS {
         src/menu.o(.text);
         asm/battle_frontier_2.o(.text);
         src/item_menu.o(.text);
-        asm/list_menu.o(.text);
+        src/list_menu.o(.text);
         asm/menu_indicators.o(.text);
         src/unk_text_util.o(.text);
         src/save_location.o(.text);
@@ -433,6 +433,7 @@ SECTIONS {
         src/pokemon_icon.o(.rodata);
         data/fldeff_cut.o(.rodata);
         data/map_name_popup.o(.rodata);
+        src/item_menu_icons.o(.rodata);
         data/item_menu_icons.o(.rodata);
         data/contest.o(.rodata);
         data/shop.o(.rodata);

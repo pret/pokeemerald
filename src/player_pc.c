@@ -32,6 +32,7 @@
 #include "task.h"
 #include "window.h"
 
+// structures
 struct Struct203BCC4
 {
     struct ListMenuItem unk0[51];
@@ -42,8 +43,10 @@ struct Struct203BCC4
     u8 spriteIds[7];
 };
 
+// extern offset
 void (*gFieldCallback)(void);
 
+// static functions
 static void InitPlayerPCMenu(u8 taskId);
 static void PlayerPCProcessMenuInput(u8 taskId);
 static void InitItemStorageMenu(u8 taskId, u8 var);
@@ -79,6 +82,7 @@ static void Mailbox_ReturnToFieldFromReadMail(void);
 static void Mailbox_DoRedrawMailboxMenuAfterReturn(void);
 static void pal_fill_for_maplights_or_black(void);
 static void Mailbox_HandleReturnToProcessInput(u8 taskId);
+static void Mailbox_UpdateMailListAfterDeposit(void);
 
 static void ItemStorage_Withdraw(u8 taskId);
 static void ItemStorage_Deposit(u8 taskId);
@@ -119,18 +123,16 @@ static void sub_816C0C8(void);
 static void sub_816C060(u16 itemId);
 static void sub_816BEF0(s32 id);
 static void sub_816B4DC(u8 taskId);
-static void ItemStorage_DrawBothListAndDescription(u32 id, bool8 b, struct ListMenu * thisMenu);
+static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu * thisMenu);
 static void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset);
 
-
-static void Mailbox_UpdateMailListAfterDeposit(void);
-
+// EWRAM
 static EWRAM_DATA const u8 *gPcItemMenuOptionOrder = NULL;
 static EWRAM_DATA u8 gPcItemMenuOptionsNum = 0;
 EWRAM_DATA struct PlayerPCItemPageStruct playerPCItemPageInfo = {0, 0, 0, 0, {0, 0, 0}, 0};
 static EWRAM_DATA struct Struct203BCC4 *gUnknown_0203BCC4 = NULL;
 
-
+// .rodata
 static const u8 *const gPCText_OptionDescList[] =
 {
     gText_TakeOutItemsFromPC,
@@ -191,7 +193,7 @@ static const struct WindowTemplate gUnknown_085DFF24[3] =
     {0x00, 0x01, 0x01, 0x0A, 0x08, 0x0F, 0x0001}
 };
 
-static const struct YesNoFuncTable gUnknown_085DFF3C = // ResumeFromWithdrawYesNoFuncList
+static const struct YesNoFuncTable ResumeFromWithdrawYesNoFuncList = // ResumeFromWithdrawYesNoFuncList
 {
     ItemStorage_ResumeInputFromYesToss,
     ItemStorage_ResumeInputFromNoToss
@@ -199,7 +201,7 @@ static const struct YesNoFuncTable gUnknown_085DFF3C = // ResumeFromWithdrawYesN
 
 static const struct ListMenuTemplate gUnknown_085DFF44 = {
     NULL,
-    ItemStorage_DrawBothListAndDescription,
+    ItemStorage_MoveCursor,
     fish4_goto_x5_or_x6,
     0, 0,
     0, 0, 8, 0,
@@ -222,7 +224,7 @@ static const struct WindowTemplate gUnknown_085DFF84 =
 
 static const u8 gUnknown_085DFF8C[] = {0x01, 0x03, 0x02, 0x00};
 
-
+// text
 void NewGameInitPCItems(void)
 {
     u8 i;
@@ -560,7 +562,7 @@ static void Mailbox_ProcessInput(u8 taskId)
     if(!gPaletteFade.active)
     {
         inputOptionId = ListMenuHandleInputGetItemId(data[5]);
-        sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
 
         switch(inputOptionId)
         {
@@ -575,7 +577,7 @@ static void Mailbox_ProcessInput(u8 taskId)
                 PlaySE(SE_SELECT);
                 sub_81D1D04(0);
                 sub_81D1D04(1);
-                sub_81AE6C8(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+                DestroyListMenuTask(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
                 schedule_bg_copy_tilemap_to_vram(0);
                 RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
                 gTasks[taskId].func = Mailbox_PrintWhatToDoWithPlayerMailText;
@@ -598,7 +600,7 @@ static void Mailbox_ReturnToPlayerPC(u8 taskId)
 
     sub_81D1D04(0);
     sub_81D1D04(1);
-    sub_81AE6C8(data[5], NULL, NULL);
+    DestroyListMenuTask(data[5], NULL, NULL);
     schedule_bg_copy_tilemap_to_vram(0);
     sub_81D1EC0();
     ReshowPlayerPC(taskId);
@@ -846,7 +848,7 @@ void ItemStorage_RefreshListMenu(void)
     gUnknown_0203BCC4->unk0[i].name = &(gUnknown_0203BCC4->unk198[i][0]);
     gUnknown_0203BCC4->unk0[i].id = -2;
     gMultiuseListMenuTemplate = gUnknown_085DFF44;
-    gMultiuseListMenuTemplate.unk_10 = sub_816BC7C(0);
+    gMultiuseListMenuTemplate.windowId = sub_816BC7C(0);
     gMultiuseListMenuTemplate.totalItems = playerPCItemPageInfo.count;
     gMultiuseListMenuTemplate.items = gUnknown_0203BCC4->unk0;
     gMultiuseListMenuTemplate.maxShowed = playerPCItemPageInfo.pageItems;
@@ -857,7 +859,7 @@ void CopyItemName_PlayerPC(u8 *string, u16 itemId)
     CopyItemName(itemId, string);
 }
 
-static void ItemStorage_DrawBothListAndDescription(u32 id, bool8 b, struct ListMenu *thisMenu)
+static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu *thisMenu)
 {
     if(b != TRUE)
         PlaySE(SE_SELECT);
@@ -1057,7 +1059,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
     data = gTasks[taskId].data;
     if(gMain.newKeys & SELECT_BUTTON)
     {
-        sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
         if((playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos) != (playerPCItemPageInfo.count - 1))
         {
             PlaySE(SE_SELECT);
@@ -1067,7 +1069,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
     else
     {
         id = ListMenuHandleInputGetItemId(data[5]);
-        sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
         switch(id)
         {
         case -1:
@@ -1107,7 +1109,7 @@ static void ItemStorage_GoBackToPlayerPCMenu(u8 taskId)
     data = gTasks[taskId].data;
     sub_816C0C8();
     ItemStorage_RemoveScrollIndicator();
-    sub_81AE6C8(data[5], NULL, NULL);
+    DestroyListMenuTask(data[5], NULL, NULL);
     sub_81223B0(gUnknown_0203BCC4->spriteIds, 7);
     sub_816BC58();
     gTasks[taskId].func = ItemStorage_GoBackToPlayerPCMenu_InitStorage;
@@ -1135,12 +1137,12 @@ static void sub_816C4FC(u8 taskId)
     data = gTasks[taskId].data;
     if(gMain.newKeys & SELECT_BUTTON)
     {
-        sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
         ItemStorage_DoItemSwap(taskId, FALSE);
         return;
     }
     id = ListMenuHandleInputGetItemId(data[5]);
-    sub_81AE860(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+    ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
     sub_81223FC(gUnknown_0203BCC4->spriteIds, 7, 0);
     sub_816C690(playerPCItemPageInfo.cursorPos);
     switch(id)
@@ -1170,7 +1172,7 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
     data = gTasks[taskId].data;
     b = (playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos);
     PlaySE(SE_SELECT);
-    sub_81AE6C8(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+    DestroyListMenuTask(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
     if(!a)
     {
         c = gUnknown_0203BCC4->unk666;
@@ -1304,7 +1306,7 @@ static void ItemStorage_DoItemToss(u8 taskId)
         CopyItemName(gSaveBlock1Ptr->pcItems[b].itemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, data[2], STR_CONV_MODE_LEFT_ALIGN, 3);
         ItemStorage_PrintItemPcResponse(ItemStorage_GetItemPcResponse(ITEMPC_OKAY_TO_THROW_AWAY));
-        CreateYesNoMenuWithCallbacks(taskId, &gUnknown_085DFF84, 1, 0, 1, 0x214, 0xE, &gUnknown_085DFF3C);
+        CreateYesNoMenuWithCallbacks(taskId, &gUnknown_085DFF84, 1, 0, 1, 0x214, 0xE, &ResumeFromWithdrawYesNoFuncList);
     }
     else
     {
@@ -1334,7 +1336,7 @@ static void ItemStorage_HandleRemoveItem(u8 taskId)
     if(gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         sub_80D6E48((playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove), data[2]);
-        sub_81AE6C8(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
+        DestroyListMenuTask(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
         sub_816C110();
         sub_816C140();
         ItemStorage_RefreshListMenu();
