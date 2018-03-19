@@ -806,19 +806,6 @@ gUnknown_0203BC8C: @ 203BC8C
 
 	.include "src/use_pokeblock.o"
 	.include "src/player_pc.o"
-
-gUnknown_0203BCB8: @ 203BCB8
-	.space 0x2
-
-gUnknown_0203BCBA: @ 203BCBA
-	.space 0x2
-
-gUnknown_0203BCBC: @ 203BCBC
-	.space 0x8
-
-gUnknown_0203BCC4: @ 203BCC4
-	.space 0x4
-
 	.include "src/intro.o"
 	.include "src/field_region_map.o"
 

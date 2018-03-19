@@ -15442,7 +15442,7 @@ sub_81B8474: @ 81B8474
 	movs r0, 0
 	strb r0, [r1]
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_0203BCB8
+	ldr r0, =playerPCItemPageInfo
 	ldrh r1, [r0]
 	adds r1, 0x6
 	ldrh r0, [r0, 0x2]

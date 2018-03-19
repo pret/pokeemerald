@@ -493,7 +493,7 @@ SECTIONS {
         src/use_pokeblock.o(.rodata);
         data/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);
-        data/player_pc.o(.rodata);
+        src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         src/field_region_map.o(.rodata);
         data/battle_anim_8170478.o(.rodata);

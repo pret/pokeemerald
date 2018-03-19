@@ -372,8 +372,45 @@ extern const u8 gBirchDexRatingText_LessThan190[];
 extern const u8 gBirchDexRatingText_LessThan200[];
 extern const u8 gBirchDexRatingText_DexCompleted[];
 
-//player menu text
+//player pc text
 extern const u8 gText_WhatWouldYouLike[];
 extern const u8 gText_NoMailHere[];
+
+extern const u8 gText_TakeOutItemsFromPC[];
+extern const u8 gText_StoreItemsInPC[];
+extern const u8 gText_ThrowAwayItemsInPC[];
+extern const u8 gText_GoBackPrevMenu[];
+
+extern const u8 gText_ItemStorage[];
+extern const u8 gText_Mailbox[];
+extern const u8 gText_Decoration[];
+extern const u8 gText_TurnOff[];
+
+extern const u8 gText_WithdrawItem[];
+extern const u8 gText_DepositItem[];
+extern const u8 gText_TossItem[];
+extern const u8 gText_Cancel[];
+
+extern const u8 gText_Read[];
+extern const u8 gText_MoveToBag[];
+extern const u8 gText_Give2[];
+extern const u8 gText_Cancel2[];
+
+extern const u8 gText_NoItems[];
+extern const u8 gText_WhatToDoWithVar1sMail[];
+extern const u8 gText_MessageWillBeLost[];
+extern const u8 gText_BagIsFull[];
+
+extern const u8 gText_MailToBagMessageErased[];
+extern const u8 gText_GoBackPrevMenu[];
+extern const u8 gText_WithdrawHowManyItems[];
+extern const u8 gText_WithdrawXItems[];
+extern const u8 gText_TossHowManyVar1s[];
+extern const u8 gText_ThrewAwayVar2Var1s[];
+extern const u8 gText_NoRoomInBag[];
+extern const u8 gText_TooImportantToToss[];
+extern const u8 gText_ConfirmTossItems[];
+extern const u8 gText_MoveVar1Where[];
+
 
 #endif //GUARD_STRINGS_H
