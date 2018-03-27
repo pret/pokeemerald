@@ -82,6 +82,12 @@
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
 #define TEXT_COLOR_DARK_GREY    0x2
+//                              0x3
+#define TEXT_COLOR_RED          0x4
+//                              0x5
+#define TEXT_COLOR_GREEN        0x6
+//                              0x7
+#define TEXT_COLOR_BLUE         0x8
 
 // battle placeholders are located in battle_message.h
 
