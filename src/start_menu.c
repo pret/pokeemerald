@@ -530,7 +530,7 @@ void sub_809FA18(void) // Called from field_screen.s
 {
     sUnknown_02037619[0] = 0;
     sUnknown_02037619[1] = 0;
-    gUnknown_03005DB0 = &sub_809FA00;
+    gUnknown_03005DB0 = sub_809FA00;
 }
 
 void sub_809FA34(u8 taskId) // Referenced in field_screen.s and rom_8011DC0.s
@@ -1233,7 +1233,7 @@ void sub_80A0514(void) // Called from cable_club.s
 {
     if (sub_80A03E4(&gMain.state))
     {
-        CreateTask(&sub_80A0550, 0x50);
+        CreateTask(sub_80A0550, 0x50);
         SetMainCallback2(sub_80A0540);
     }
 }
@@ -1307,11 +1307,11 @@ static void sub_80A0550(u8 taskId)
             DestroyTask(taskId);
             break;
         case 5:
-            CreateTask(&sub_8153688, 0x5);
+            CreateTask(sub_8153688, 0x5);
             *step = 6;
             break;
         case 6:
-            if (!FuncIsActiveTask(&sub_8153688))
+            if (!FuncIsActiveTask(sub_8153688))
             {
                 *step = 3;
             }
@@ -1400,14 +1400,9 @@ static void sub_80A08A4(u8 taskId)
 
 void sub_80A08CC(void) // Referenced in data/specials.inc and data/scripts/maps/BattleFrontier_BattleTowerLobby.inc
 {
-    u32 taskId1;
-    u32 taskId2;
-
-    taskId1 = CreateTask(&sub_8153688, 0x5);
-    gTasks[taskId1].data[2] = 1;
-    
-    taskId2 = CreateTask(&sub_80A08A4, 0x6);
-    gTasks[taskId2].data[1] = taskId1;
+    u8 taskId = CreateTask(sub_8153688, 0x5);
+    gTasks[taskId].data[2] = 1;
+    gTasks[CreateTask(sub_80A08A4, 0x6)].data[1] = taskId;
 }
 
 static void HideStartMenuWindow(void)
