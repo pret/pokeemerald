@@ -5,6 +5,7 @@
 
 	.text
 
+/*
 	thumb_func_start sub_8160624
 sub_8160624: @ 8160624
 	push {lr}
@@ -14,7 +15,9 @@ sub_8160624: @ 8160624
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8160624
+*/
 
+/*
 	thumb_func_start sub_8160638
 sub_8160638: @ 8160638
 	push {lr}
@@ -35,7 +38,9 @@ sub_8160638: @ 8160638
 	bx r0
 	.pool
 	thumb_func_end sub_8160638
+*/
 
+/*
 	thumb_func_start sub_8160664
 sub_8160664: @ 8160664
 	push {r4,lr}
@@ -60,7 +65,9 @@ _08160688:
 	bx r0
 	.pool
 	thumb_func_end sub_8160664
+*/
 
+/*
 	thumb_func_start sub_81606A0
 sub_81606A0: @ 81606A0
 	push {r4-r6,lr}
@@ -75,7 +82,7 @@ sub_81606A0: @ 81606A0
 	str r0, [r6]
 	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
-	adds r0, 0x44
+	adds r0, 0x44 partymon
 	movs r5, 0
 	strb r1, [r0]
 	ldr r0, =sub_8160624
@@ -100,8 +107,8 @@ sub_81606A0: @ 81606A0
 	bl ListMenuInit
 	ldr r1, [r6]
 	movs r2, 0x89
-	lsls r2, 1
-	adds r1, r2
+	lsls r2, 1 //0x112
+	adds r1, r2 //partymon + 0x112
 	strb r0, [r1]
 	movs r0, 0
 	movs r1, 0
@@ -114,6 +121,7 @@ sub_81606A0: @ 81606A0
 	bx r0
 	.pool
 	thumb_func_end sub_81606A0
+*/
 
 	thumb_func_start sub_8160740
 sub_8160740: @ 8160740
