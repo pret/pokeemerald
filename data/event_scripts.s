@@ -835,7 +835,7 @@ SlateportCity_BattleTentLobby_EventScript_27134F:: @ 827134F
 SootopolisCity_MysteryEventsHouse_1F_EventScript_27134F:: @ 827134F
 TrainerHill_Entrance_EventScript_27134F:: @ 827134F
 VerdanturfTown_BattleTentLobby_EventScript_27134F:: @ 827134F
-	special sub_809FF80
+	special SaveGame
 	waitstate
 	return
 

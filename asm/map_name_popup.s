@@ -8,7 +8,7 @@
 	thumb_func_start sub_80D47D4
 sub_80D47D4: @ 80D47D4
 	push {lr}
-	bl sub_80A0934
+	bl HideStartMenu
 	bl ShowMapNamePopup
 	movs r0, 0x1
 	pop {r1}

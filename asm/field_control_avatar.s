@@ -326,7 +326,7 @@ _0809C13A:
 	beq _0809C15C
 	movs r0, 0x6
 	bl PlaySE
-	bl sub_809FA9C
+	bl ShowStartMenu
 _0809C14E:
 	movs r0, 0x1
 	b _0809C172
