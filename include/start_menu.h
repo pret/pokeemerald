@@ -3,6 +3,14 @@
 
 extern bool8 (*gMenuCallback)(void);   // Defined in sym_common.txt
 
+void sub_809FA18(void);
+void sub_809FA34(u8 taskId);
+void sub_809FA9C(void);
+void sub_809FDD4(void);
+void sub_809FF80(void);
+void sub_80A0514(void);
+void sub_80A08CC(void);
+void sub_80A0934(void);
 void AppendToList(u8* list, u8* pos, u8 newEntry);
 
 #endif // GUARD_START_MENU_H

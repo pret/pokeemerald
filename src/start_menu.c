@@ -59,31 +59,28 @@ enum
     SAVE_ERROR
 };
 
-// Text
-extern u8 BattleFrontier_BattlePyramidEmptySquare_Text_252CA7[];
-extern u8 BattleFrontier_BattlePyramidEmptySquare_Text_252CFB[];
-extern u8 gUnknown_082C87B4[];
-extern u8 gUnknown_082C8845[]; // Different save file
-extern u8 gUnknown_082C87D5[]; // Already a save file
-extern u8 gUnknown_082C8810[]; // Saving…   DON’T TURN OFF THE POWER.
-extern u8 gUnknown_082C8832[]; // {PLAYER} saved the game.
-extern u8 gUnknown_082C892A[]; // Save error.
-extern u8 gText_SavingDontTurnOffPower[];
-extern u8 gText_SavingPlayer[];
-extern u8 gText_SavingBadges[];
-extern u8 gText_SavingPokedex[];
-extern u8 gText_SavingTime[];
+EWRAM_DATA static u8 sSafariBallsWindowId = 0;
+EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
+EWRAM_DATA static u8 sStartMenuCursorPos = 0;
+EWRAM_DATA static u8 sNumStartMenuActions = 0;
+EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
+EWRAM_DATA static u8 sUnknown_02037619[2] = {0};
+
+EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
+EWRAM_DATA static u8 sSaveDialogTimer = 0;
+EWRAM_DATA static bool8 sSavingComplete = FALSE;
+EWRAM_DATA static u8 sSaveWindowId = 0;
 
 // Extern variables
 extern u8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
 extern u8 gUnknown_03005DB4;
 
+// Extern functions in uncompiled files
 extern void sub_80AF688(void);
 extern void var_800D_set_xB(void);
 extern void sub_808B864(void);
 extern void sub_808BCF4(void);
-extern void sub_80A0934(void);
 extern void sub_80BB534(void);
 extern void play_some_sound(void);
 extern void CB2_PartyMenuFromStartMenu(void);
@@ -97,79 +94,87 @@ extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
 extern void sub_81A9E90(void);
 
-bool8 sub_809FE9C(void);
-void sub_80A0888(void);
-void sub_80A06B4(void);
+// Menu action callbacks
+static bool8 StartMenuPokedexCallback(void);
+static bool8 StartMenuPokemonCallback(void);
+static bool8 StartMenuBagCallback(void);
+static bool8 StartMenuPokeNavCallback(void);
+static bool8 StartMenuPlayerNameCallback(void);
+static bool8 StartMenuSaveCallback(void);
+static bool8 StartMenuOptionCallback(void);
+static bool8 StartMenuExitCallback(void);
+static bool8 StartMenuSafariZoneRetireCallback(void);
+static bool8 StartMenuLinkModePlayerNameCallback(void);
+static bool8 StartMenuBattlePyramidRetireCallback(void);
+static bool8 StartMenuBattlePyramidBagCallback(void);
 
-// this file's functions
-static bool8 StartMenu_Pokedex(void);
-static bool8 StartMenu_Pokemon(void);
-static bool8 StartMenu_Bag(void);
-static bool8 StartMenu_PokeNav(void);
-static bool8 StartMenu_PlayerName(void);
-static bool8 StartMenu_Save(void);
-static bool8 StartMenu_Option(void);
-static bool8 StartMenu_Exit(void);
-static bool8 StartMenu_SafariZoneRetire(void);
-static bool8 StartMenu_LinkModePlayerName(void);
-static bool8 StartMenu_BattlePyramidRetire(void);
-static bool8 StartMenu_BattlePyramidBag(void);
+// Menu callbacks
+static bool8 sub_809FE28(void);
+static bool8 sub_809FE44(void);
+static bool8 sub_809FE9C(void);
+static bool8 sub_809FEB8(void);
+static bool8 sub_809FED4(void);
+static bool8 HandleStartMenuInput(void);
 
-static void BuildStartMenuActions_LinkMode(void);
-static void BuildStartMenuActions_UnionRoom(void);
-static void BuildStartMenuActions_SafariZone(void);
-static void BuildStartMenuActions_BattlePike(void);
-static void BuildStartMenuActions_BattlePyramid(void);
-static void BuildStartMenuActions_MultiBattleRoom(void);
-static void BuildStartMenuActions_Normal(void);
+// Save dialog callbacks
+static u8 sub_80A00A0(void);
+static u8 sub_80A00EC(void);
+static u8 sub_80A0108(void);
+static u8 sub_80A017C(void);
+static u8 sub_80A01B4(void);
+static u8 sub_80A01D0(void);
+static u8 sub_80A01EC(void);
+static u8 sub_80A0234(void);
+static u8 sub_80A024C(void);
+static u8 sub_80A02B0(void);
+static u8 sub_80A02D8(void);
+static u8 sub_80A02FC(void);
+static u8 sub_80A0324(void);
+static u8 sub_80A035C(void);
+static u8 sub_80A0388(void);
+static u8 sub_80A03A4(void);
 
+// Task callbacks
+static void task50_startmenu(u8 taskId);
 static void task50_save_game(u8 taskId);
+static void sub_80A0550(u8 taskId);
+static void sub_80A08A4(u8 taskId);
 
-u8 sub_809FF4C(void);
-u8 sub_80A00EC(void);
-bool8 sub_80A00A0(void);
-bool8 sub_80A0108(void);
-bool8 sub_80A017C(void);
-u8 sub_80A01B4(void);
-u8 sub_80A01D0(void);
-u8 sub_80A01EC(void);
-u8 sub_80A0234(void);
-u8 sub_80A024C(void);
-u8 sub_80A02B0(void);
-u8 sub_80A02FC(void);
-u8 sub_80A02D8(void);
-u8 sub_80A0324(void);
-void sub_80A0340(void);
-u8 sub_80A035C(void);
-u8 sub_80A0388(void);
-u8 sub_80A03A4(void);
+// Some callback
+static bool8 sub_809FA00(void);
 
-bool8 HandleStartMenuInput(void);
-
-bool32 PrintStartMenuActions(s8*, u32);
-bool32 sub_809F894(void);
-void InitStartMenu(void);
-void sub_809FF28(void);
-
-void sub_80A0540(void);
-void sub_80A0550(u8 taskId);
-
-// gMenuCallbacks
-bool8 sub_809FE28(void);
-bool8 sub_809FE44(void);
-bool8 sub_809FED4(void);
-
-// EWRAM vars
-EWRAM_DATA u8 sSafariBallsWindowId = 0;
-EWRAM_DATA u8 sBattlePyramidFloorWindowId = 0;
-EWRAM_DATA u8 sStartMenuCursorPos = 0;
-EWRAM_DATA u8 sNumStartMenuActions = 0;
-EWRAM_DATA u8 sCurrentStartMenuActions[9] = {0};
-EWRAM_DATA u8 gUnknown_02037619[2] = {0};
-EWRAM_DATA bool8 (*gUnknown_0203761C)(void) = NULL;
-EWRAM_DATA u8 gUnknown_02037620 = 0;
-EWRAM_DATA bool8 gUnknown_02037621 = FALSE;
-EWRAM_DATA u8 gSaveInfoWindowId = 0;
+// Local functions
+static void BuildStartMenuActions(void);
+static void AddStartMenuAction(u8 action);
+static void BuildNormalStartMenu(void);
+static void BuildSafariZoneStartMenu(void);
+static void BuildLinkModeStartMenu(void);
+static void BuildUnionRoomStartMenu(void);
+static void BuildBattlePikeStartMenu(void);
+static void BuildBattlePyramidStartMenu(void);
+static void BuildMultiBattleRoomStartMenu(void);
+static void DisplaySafariBallsWindow(void);
+static void DisplayPyramidFloorWindow(void);
+static void RemoveExtraStartMenuWindows(void);
+static bool32 PrintStartMenuActions(s8 *pIndex, u32 count);
+static bool32 sub_809F894(void);
+static void InitStartMenu(void);
+static void sub_809F9D0(TaskFunc followupFunc);
+static void sub_809FF28(void);
+static u8 sub_809FF4C(void);
+static void sub_809FF98(const u8 *message, u8 (*saveCallback)(void));
+static void sub_80A0014(void);
+static void sub_80A0024(void);
+static void sub_80A0030(void);
+static bool8 sub_80A003C(void);
+static bool8 sub_80A0070(void);
+static void sub_80A0340(void);
+static void sub_80A03D8(void);
+static bool32 sub_80A03E4(u8 *par1);
+static void sub_80A0540(void);
+static void sub_80A06B4(void);
+static void sub_80A0888(void);
+static void sub_80A0914(void);
 
 // const rom data
 static const struct WindowTemplate gSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
@@ -191,19 +196,19 @@ static const struct WindowTemplate gPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC
 
 const struct MenuAction sStartMenuItems[] =
 {
-    {gText_MenuPokedex, {.u8_void = StartMenu_Pokedex}},
-    {gText_MenuPokemon, {.u8_void = StartMenu_Pokemon}},
-    {gText_MenuBag, {.u8_void = StartMenu_Bag}},
-    {gText_MenuPokenav, {.u8_void = StartMenu_PokeNav}},
-    {gText_MenuPlayer, {.u8_void = StartMenu_PlayerName}},
-    {gText_MenuSave, {.u8_void = StartMenu_Save}},
-    {gText_MenuOption, {.u8_void = StartMenu_Option}},
-    {gText_MenuExit, {.u8_void = StartMenu_Exit}},
-    {gText_MenuRetire, {.u8_void = StartMenu_SafariZoneRetire}},
-    {gText_MenuPlayer, {.u8_void = StartMenu_LinkModePlayerName}},
-    {gText_MenuRest, {.u8_void = StartMenu_Save}},
-    {gText_MenuRetire, {.u8_void = StartMenu_BattlePyramidRetire}},
-    {gText_MenuBag, {.u8_void = StartMenu_BattlePyramidBag}}
+    {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
+    {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
+    {gText_MenuBag, {.u8_void = StartMenuBagCallback}},
+    {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
+    {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
+    {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
+    {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
+    {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
+    {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
+    {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
+    {gText_MenuRest, {.u8_void = StartMenuSaveCallback}},
+    {gText_MenuRetire, {.u8_void = StartMenuBattlePyramidRetireCallback}},
+    {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}}
 };
 
 const struct BgTemplate gUnknown_085105A8[] =
@@ -227,7 +232,6 @@ const struct WindowTemplate gUnknown_085105AC[] =
 
 const struct WindowTemplate gSaveInfoWindowTemplate = {0, 1, 1, 0xE, 0xA, 0xF, 8};
 
-// code
 void SetDexPokemonPokenavFlags(void) // unused
 {
     FlagSet(FLAG_SYS_POKEDEX_GET);
@@ -235,31 +239,31 @@ void SetDexPokemonPokenavFlags(void) // unused
     FlagSet(FLAG_SYS_POKENAV_GET);
 }
 
-void BuildStartMenuActions(void)
+static void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;
     if (is_c1_link_related_active() == TRUE)
-        BuildStartMenuActions_LinkMode();
+        BuildLinkModeStartMenu();
     else if (InUnionRoom() == TRUE)
-        BuildStartMenuActions_UnionRoom();
+        BuildUnionRoomStartMenu();
     else if (GetSafariZoneFlag() == TRUE)
-        BuildStartMenuActions_SafariZone();
+        BuildSafariZoneStartMenu();
     else if (InBattlePike())
-        BuildStartMenuActions_BattlePike();
+        BuildBattlePikeStartMenu();
     else if (InBattlePyramid())
-        BuildStartMenuActions_BattlePyramid();
+        BuildBattlePyramidStartMenu();
     else if (InMultiBattleRoom())
-        BuildStartMenuActions_MultiBattleRoom();
+        BuildMultiBattleRoomStartMenu();
     else
-        BuildStartMenuActions_Normal();
+        BuildNormalStartMenu();
 }
 
-void AddStartMenuAction(u8 action)
+static void AddStartMenuAction(u8 action)
 {
     AppendToList(sCurrentStartMenuActions, &sNumStartMenuActions, action);
 }
 
-static void BuildStartMenuActions_Normal(void)
+static void BuildNormalStartMenu(void)
 {
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
@@ -274,7 +278,7 @@ static void BuildStartMenuActions_Normal(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-static void BuildStartMenuActions_SafariZone(void)
+static void BuildSafariZoneStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_RETIRE_SAFARI);
     AddStartMenuAction(MENU_ACTION_POKEDEX);
@@ -285,7 +289,7 @@ static void BuildStartMenuActions_SafariZone(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-static void BuildStartMenuActions_LinkMode(void)
+static void BuildLinkModeStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
@@ -296,7 +300,7 @@ static void BuildStartMenuActions_LinkMode(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-static void BuildStartMenuActions_UnionRoom(void)
+static void BuildUnionRoomStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
@@ -307,7 +311,7 @@ static void BuildStartMenuActions_UnionRoom(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-static void BuildStartMenuActions_BattlePike(void)
+static void BuildBattlePikeStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_POKEDEX);
     AddStartMenuAction(MENU_ACTION_POKEMON);
@@ -316,7 +320,7 @@ static void BuildStartMenuActions_BattlePike(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-static void BuildStartMenuActions_BattlePyramid(void)
+static void BuildBattlePyramidStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PYRAMID_BAG);
@@ -327,7 +331,7 @@ static void BuildStartMenuActions_BattlePyramid(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-static void BuildStartMenuActions_MultiBattleRoom(void)
+static void BuildMultiBattleRoomStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
@@ -335,59 +339,64 @@ static void BuildStartMenuActions_MultiBattleRoom(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-void DisplaySafariBallsWindow(void)
+static void DisplaySafariBallsWindow(void)
 {
     sSafariBallsWindowId = AddWindow(&gSafariBallsWindowTemplate);
     PutWindowTilemap(sSafariBallsWindowId);
-    NewMenuHelpers_DrawStdWindowFrame(sSafariBallsWindowId, 0);
+    NewMenuHelpers_DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
     PrintTextOnWindow(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sSafariBallsWindowId, 2);
 }
 
-void DisplayPyramidFloorWindow(void)
+static void DisplayPyramidFloorWindow(void)
 {
     // TODO: fix location
     if (gSaveBlock2Ptr->field_CAA[4] == 7)
+    {
         sBattlePyramidFloorWindowId = AddWindow(&gPyramidFloorWindowTemplate_1);
+    }
     else
+    {
         sBattlePyramidFloorWindowId = AddWindow(&gPyramidFloorWindowTemplate_2);
+    }
+
     PutWindowTilemap(sBattlePyramidFloorWindowId);
-    NewMenuHelpers_DrawStdWindowFrame(sBattlePyramidFloorWindowId, 0);
+    NewMenuHelpers_DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
     StringCopy(gStringVar1, sPyramindFloorNames[gSaveBlock2Ptr->field_CAA[4]]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     PrintTextOnWindow(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sBattlePyramidFloorWindowId, 2);
 }
 
-void RemoveExtraStartMenuWindows(void)
+static void RemoveExtraStartMenuWindows(void)
 {
     if (GetSafariZoneFlag())
     {
-        sub_8198070(sSafariBallsWindowId, 0);
+        sub_8198070(sSafariBallsWindowId, FALSE);
         CopyWindowToVram(sSafariBallsWindowId, 2);
         RemoveWindow(sSafariBallsWindowId);
     }
     if (InBattlePyramid())
     {
-        sub_8198070(sBattlePyramidFloorWindowId, 0);
+        sub_8198070(sBattlePyramidFloorWindowId, FALSE);
         RemoveWindow(sBattlePyramidFloorWindowId);
     }
 }
 
-bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
+static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 {
     s8 index = *pIndex;
     
     do
     {
-        if (sStartMenuItems[sCurrentStartMenuActions[index]].func.u8_void == StartMenu_PlayerName) {
+        if (sStartMenuItems[sCurrentStartMenuActions[index]].func.u8_void == StartMenuPlayerNameCallback) {
             PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[sCurrentStartMenuActions[index]].text, 8, (index << 4) + 9);
         }
         else {
             StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
-            PrintTextOnWindow(GetStartMenuWindowId(), 1, gStringVar4, 8, (index << 4) + 9, 0xFF, 0);
+            PrintTextOnWindow(GetStartMenuWindowId(), 1, gStringVar4, 8, (index << 4) + 9, 0xFF, NULL);
         }
 
         index++;
@@ -404,23 +413,23 @@ bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
     return FALSE;
 }
 
-bool32 sub_809F894(void) 
+static bool32 sub_809F894(void) 
 {
-    s8 value = gUnknown_02037619[0];
+    s8 value = sUnknown_02037619[0];
     switch (value) 
     {
     case 0:
-        gUnknown_02037619[0]++;
+        sUnknown_02037619[0]++;
         break;
     case 1:
         BuildStartMenuActions();
-        gUnknown_02037619[0]++;
+        sUnknown_02037619[0]++;
         break;
     case 2:
         sub_81973A4();
         NewMenuHelpers_DrawStdWindowFrame(sub_81979C4(sNumStartMenuActions), FALSE);
-        gUnknown_02037619[1] = 0;
-        gUnknown_02037619[0]++;
+        sUnknown_02037619[1] = 0;
+        sUnknown_02037619[0]++;
         break;
     case 3:
         if (GetSafariZoneFlag() != FALSE)
@@ -431,14 +440,14 @@ bool32 sub_809F894(void)
         {
             DisplayPyramidFloorWindow();
         }
-        gUnknown_02037619[0]++;
+        sUnknown_02037619[0]++;
         break;
     case 4:
-        if (PrintStartMenuActions(&gUnknown_02037619[1], 2) == FALSE) 
+        if (PrintStartMenuActions(&sUnknown_02037619[1], 2) == FALSE) 
         {
             break;
         }
-        gUnknown_02037619[0]++;
+        sUnknown_02037619[0]++;
         break;
     case 5:
         sStartMenuCursorPos = sub_81983AC(GetStartMenuWindowId(), 1, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
@@ -451,14 +460,14 @@ bool32 sub_809F894(void)
     return FALSE;
 }
 
-void InitStartMenu(void)
+static void InitStartMenu(void)
 {
-    gUnknown_02037619[0] = 0;
-    gUnknown_02037619[1] = 0;
+    sUnknown_02037619[0] = 0;
+    sUnknown_02037619[1] = 0;
     while (!sub_809F894());
 }
 
-void task50_startmenu(u8 taskId)
+static void task50_startmenu(u8 taskId)
 {
     if (sub_809F894() == TRUE)
     {
@@ -466,14 +475,14 @@ void task50_startmenu(u8 taskId)
     }
 }
 
-void sub_809F9D0(TaskFunc followupFunc)
+static void sub_809F9D0(TaskFunc followupFunc)
 {
-    gUnknown_02037619[0] = 0;
-    gUnknown_02037619[1] = 0;
+    sUnknown_02037619[0] = 0;
+    sUnknown_02037619[1] = 0;
     SetTaskFuncWithFollowupFunc(CreateTask(&task50_startmenu, 0x50), &task50_startmenu, followupFunc);
 }
 
-bool8 sub_809FA00(void) 
+static bool8 sub_809FA00(void) 
 {
     if (sub_809F894() == FALSE)
     {
@@ -484,14 +493,14 @@ bool8 sub_809FA00(void)
     return TRUE;
 }
 
-void sub_809FA18(void)
+void sub_809FA18(void) // Called from field_screen.s
 {
-    gUnknown_02037619[0] = 0;
-    gUnknown_02037619[1] = 0;
+    sUnknown_02037619[0] = 0;
+    sUnknown_02037619[1] = 0;
     gUnknown_03005DB0 = &sub_809FA00;
 }
 
-void sub_809FA34(u8 taskId) 
+void sub_809FA34(u8 taskId) // Called from field_screen.s and rom_8011DC0.s
 {
     struct Task* task = &gTasks[taskId];
 
@@ -515,7 +524,7 @@ void sub_809FA34(u8 taskId)
     }
 }
 
-void sub_809FA9C(void) 
+void sub_809FA9C(void) // Called from overworld.c and field_control_avatar.s
 {
     if (!is_c1_link_related_active())
     {
@@ -527,7 +536,7 @@ void sub_809FA9C(void)
     ScriptContext2_Enable();
 }
 
-bool8 HandleStartMenuInput(void) // TODO callback
+static bool8 HandleStartMenuInput(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -544,19 +553,19 @@ bool8 HandleStartMenuInput(void) // TODO callback
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(5);
-        if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenu_Pokedex)
+        if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
         {
-            if (GetNationalPokedexCount(0) == FALSE) {
+            if (GetNationalPokedexCount(0) == 0) {
                 return FALSE;
             }
         }
         
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
         
-        if (gMenuCallback != StartMenu_Save 
-            && gMenuCallback != StartMenu_Exit
-            && gMenuCallback != StartMenu_SafariZoneRetire
-            && gMenuCallback != StartMenu_BattlePyramidRetire)
+        if (gMenuCallback != StartMenuSaveCallback 
+            && gMenuCallback != StartMenuExitCallback
+            && gMenuCallback != StartMenuSafariZoneRetireCallback
+            && gMenuCallback != StartMenuBattlePyramidRetireCallback)
         {
            FadeScreen(1, 0);
         }
@@ -574,7 +583,7 @@ bool8 HandleStartMenuInput(void) // TODO callback
     return FALSE;
 }
 
-static bool8 StartMenu_Pokedex(void)
+static bool8 StartMenuPokedexCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -590,7 +599,7 @@ static bool8 StartMenu_Pokedex(void)
     return FALSE;
 }
 
-static bool8 StartMenu_Pokemon(void)
+static bool8 StartMenuPokemonCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -605,7 +614,7 @@ static bool8 StartMenu_Pokemon(void)
     return FALSE;
 }
 
-static bool8 StartMenu_Bag(void)
+static bool8 StartMenuBagCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -620,7 +629,7 @@ static bool8 StartMenu_Bag(void)
     return FALSE;
 }
 
-static bool8 StartMenu_PokeNav(void)
+static bool8 StartMenuPokeNavCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -635,7 +644,7 @@ static bool8 StartMenu_PokeNav(void)
     return FALSE;
 }
 
-static bool8 StartMenu_PlayerName(void)
+static bool8 StartMenuPlayerNameCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -662,7 +671,7 @@ static bool8 StartMenu_PlayerName(void)
     return FALSE;
 }
 
-static bool8 StartMenu_Save(void)
+static bool8 StartMenuSaveCallback(void)
 {
     if (InBattlePyramid())
     {
@@ -674,7 +683,7 @@ static bool8 StartMenu_Save(void)
     return FALSE;
 }
 
-static bool8 StartMenu_Option(void)
+static bool8 StartMenuOptionCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -690,7 +699,7 @@ static bool8 StartMenu_Option(void)
     return FALSE;
 }
 
-static bool8 StartMenu_Exit(void)
+static bool8 StartMenuExitCallback(void)
 {
     RemoveExtraStartMenuWindows();
     sub_80A0934();
@@ -698,7 +707,7 @@ static bool8 StartMenu_Exit(void)
     return TRUE;
 }
 
-static bool8 StartMenu_SafariZoneRetire(void)
+static bool8 StartMenuSafariZoneRetireCallback(void)
 {
     RemoveExtraStartMenuWindows();
     sub_80A0934();
@@ -707,7 +716,7 @@ static bool8 StartMenu_SafariZoneRetire(void)
     return TRUE;
 }
 
-static bool8 StartMenu_LinkModePlayerName(void)
+static bool8 StartMenuLinkModePlayerNameCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -721,14 +730,14 @@ static bool8 StartMenu_LinkModePlayerName(void)
     return FALSE;
 }
 
-static bool8 StartMenu_BattlePyramidRetire(void)
+static bool8 StartMenuBattlePyramidRetireCallback(void)
 {
     gMenuCallback = sub_809FE9C;
 
     return FALSE;
 }
 
-void sub_809FDD4(void)
+void sub_809FDD4(void) // Called from battle_frontier_2.s
 {
     sub_8197DF8(0, 0);
     sub_80984F4();
@@ -736,7 +745,7 @@ void sub_809FDD4(void)
     ScriptContext2_Enable();
 }
 
-static bool8 StartMenu_BattlePyramidBag(void)
+static bool8 StartMenuBattlePyramidBagCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -751,7 +760,7 @@ static bool8 StartMenu_BattlePyramidBag(void)
     return FALSE;
 }
 
-bool8 sub_809FE28(void)
+static bool8 sub_809FE28(void)
 {
     sub_809FF28();
     gMenuCallback = sub_809FE44;
@@ -759,7 +768,7 @@ bool8 sub_809FE28(void)
     return FALSE;
 }
 
-bool8 sub_809FE44(void)
+static bool8 sub_809FE44(void)
 {
     switch (sub_809FF4C())
     {
@@ -782,7 +791,7 @@ bool8 sub_809FE44(void)
     return FALSE;
 }
 
-bool8 sub_809FE9C(void)
+static bool8 sub_809FE9C(void)
 {
     sub_80A0340();
     gMenuCallback = sub_809FED4;
@@ -790,7 +799,7 @@ bool8 sub_809FE9C(void)
     return FALSE;
 }
 
-bool8 sub_809FEB8(void)
+static bool8 sub_809FEB8(void)
 {
     InitStartMenu();
     gMenuCallback = HandleStartMenuInput;
@@ -798,7 +807,7 @@ bool8 sub_809FEB8(void)
     return FALSE;
 }
 
-bool8 sub_809FED4(void)
+static bool8 sub_809FED4(void)
 {
     switch (sub_809FF4C())
     {
@@ -819,38 +828,38 @@ bool8 sub_809FED4(void)
     return FALSE;
 }
 
-void sub_809FF28(void)
+static void sub_809FF28(void)
 {
     save_serialize_map();
-    gUnknown_0203761C = sub_80A00A0;
-    gUnknown_02037621 = FALSE;
+    sSaveDialogCallback = sub_80A00A0;
+    sSavingComplete = FALSE;
 }
 
-u8 sub_809FF4C(void)
+static u8 sub_809FF4C(void)
 {
     if (sub_8197224() == TRUE)
     {
         return FALSE;
     }
 
-    gUnknown_02037621 = FALSE;
-    return gUnknown_0203761C();
+    sSavingComplete = FALSE;
+    return sSaveDialogCallback();
 }
 
-void sub_809FF80(void)
+void sub_809FF80(void) // Called from cable_club.s
 {
     sub_809FF28();
     CreateTask(task50_save_game, 0x50);
 }
 
 // DisplaySaveMessageWithCallback
-void sub_809FF98(const u8 *message, u8 (*func)(void))
+static void sub_809FF98(const u8 *message, u8 (*saveCallback)(void)) // Appears to confirm save/rest/retire
 {
     StringExpandPlaceholders(gStringVar4, message);
     sub_819786C(0, TRUE);
     AddTextPrinterForMessage_2(TRUE);
-    gUnknown_02037621 = TRUE;
-    gUnknown_0203761C = func;
+    sSavingComplete = TRUE;
+    sSaveDialogCallback = saveCallback;
 }
 
 static void task50_save_game(u8 taskId)
@@ -874,30 +883,31 @@ static void task50_save_game(u8 taskId)
     EnableBothScriptContexts();
 }
 
-void sub_80A0014(void)
+static void sub_80A0014(void)
 {
     sub_8197434(0, TRUE);
 }
 
-void sub_80A0024(void)
+static void sub_80A0024(void)
 {
     sub_80A0888();
 }
 
-void sub_80A0030(void)
+static void sub_80A0030(void)
 {
-    gUnknown_02037620 = 60;
+    sSaveDialogTimer = 60;
 }
 
-bool8 sub_80A003C(void)
+static bool8 sub_80A003C(void)
 {
-    gUnknown_02037620--;
+    sSaveDialogTimer--;
+
     if (gMain.heldKeys & A_BUTTON)
     {
         PlaySE(5);
         return TRUE;
     }
-    else if (gUnknown_02037620 == 0)
+    else if (sSaveDialogTimer == 0)
     {
         return TRUE;
     }
@@ -905,11 +915,11 @@ bool8 sub_80A003C(void)
     return FALSE;
 }
 
-bool8 sub_80A0070(void)
+static bool8 sub_80A0070(void)
 {
-    if (gUnknown_02037620 != 0)
+    if (sSaveDialogTimer != 0)
     {
-        gUnknown_02037620--;
+        sSaveDialogTimer--;
     }
     else if (gMain.heldKeys & A_BUTTON)
     {
@@ -919,7 +929,7 @@ bool8 sub_80A0070(void)
     return FALSE;
 }
 
-bool8 sub_80A00A0(void) // Return u8? Ruby
+static u8 sub_80A00A0(void)
 {
     sub_819746C(GetStartMenuWindowId(), FALSE);
     remove_start_menu_window_maybe();
@@ -927,24 +937,24 @@ bool8 sub_80A00A0(void) // Return u8? Ruby
 
     if (InBattlePyramid())
     {
-        sub_809FF98(BattleFrontier_BattlePyramidEmptySquare_Text_252CA7, sub_80A00EC);
+        sub_809FF98(gText_BattlePyramidConfirmRest, sub_80A00EC);
     }
     else 
     {
-        sub_809FF98(gUnknown_082C87B4, sub_80A00EC);
+        sub_809FF98(gText_ConfirmSave, sub_80A00EC);
     }
 
-    return FALSE; // SAVE_IN_PROGRESS ?
+    return SAVE_IN_PROGRESS;
 }
 
-bool8 sub_80A00EC(void)
+static u8 sub_80A00EC(void)
 {
     sub_8197930();
-    gUnknown_0203761C = sub_80A0108;
-    return FALSE;
+    sSaveDialogCallback = sub_80A0108;
+    return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A0108(void)
+static u8 sub_80A0108(void)
 {
     switch (ProcessMenuInputNoWrap_())
     {
@@ -955,14 +965,14 @@ u8 sub_80A0108(void)
         case 2:
             if (gDifferentSaveFile == FALSE)
             {
-                gUnknown_0203761C = sub_80A017C;
+                sSaveDialogCallback = sub_80A017C;
                 return SAVE_IN_PROGRESS;
             }
 
-            gUnknown_0203761C = sub_80A0234;
+            sSaveDialogCallback = sub_80A0234;
             return SAVE_IN_PROGRESS;
         default:
-            gUnknown_0203761C = sub_80A017C;
+            sSaveDialogCallback = sub_80A017C;
             return SAVE_IN_PROGRESS;
         }
     case -1: // B Button
@@ -976,40 +986,40 @@ u8 sub_80A0108(void)
 }
 
 // A different save file exists
-u8 sub_80A017C(void)
+static u8 sub_80A017C(void)
 {
     if (gDifferentSaveFile == TRUE)
     {
-        sub_809FF98(gUnknown_082C8845, sub_80A01B4);
+        sub_809FF98(gText_DifferentSaveFile, sub_80A01B4);
     }
     else 
     {
-        sub_809FF98(gUnknown_082C87D5, sub_80A01D0);
+        sub_809FF98(gText_AlreadySavedFile, sub_80A01D0);
     }
 
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A01B4(void)
+static u8 sub_80A01B4(void)
 {
     sub_8197948(1);
-    gUnknown_0203761C = sub_80A01EC;
+    sSaveDialogCallback = sub_80A01EC;
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A01D0(void)
+static u8 sub_80A01D0(void)
 {
     sub_8197930();
-    gUnknown_0203761C = sub_80A01EC;
+    sSaveDialogCallback = sub_80A01EC;
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A01EC(void)
+static u8 sub_80A01EC(void)
 {
     switch (ProcessMenuInputNoWrap_())
     {
     case 0: // Yes
-        gUnknown_0203761C = sub_80A0234;
+        sSaveDialogCallback = sub_80A0234;
         return SAVE_IN_PROGRESS;
     case -1: // B Button
     case 1: // No
@@ -1021,13 +1031,13 @@ u8 sub_80A01EC(void)
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A0234(void)
+static u8 sub_80A0234(void)
 {
-    sub_809FF98(gUnknown_082C8810, sub_80A024C);
+    sub_809FF98(gText_SavingDontTurnOff, sub_80A024C);
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A024C(void)
+static u8 sub_80A024C(void)
 {
     u8 saveStatus;
 
@@ -1046,29 +1056,29 @@ u8 sub_80A024C(void)
 
     if (saveStatus == 1) // Save succeded
     {
-        sub_809FF98(gUnknown_082C8832, sub_80A02B0);
+        sub_809FF98(gText_PlayerSavedGame, sub_80A02B0);
     }
     else                // Save error
     {
-        sub_809FF98(gUnknown_082C892A, sub_80A02FC);
+        sub_809FF98(gText_SaveError, sub_80A02FC);
     }
 
     sub_80A0030();
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A02B0(void)
+static u8 sub_80A02B0(void)
 {
     if (!IsTextPrinterActive(0))
     {
         PlaySE(0x37); // 55
-        gUnknown_0203761C = sub_80A02D8;
+        sSaveDialogCallback = sub_80A02D8;
     }
 
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A02D8(void)
+static u8 sub_80A02D8(void)
 {
     if (!IsSEPlaying() && sub_80A003C())
     {
@@ -1081,18 +1091,18 @@ u8 sub_80A02D8(void)
     }
 }
 
-u8 sub_80A02FC(void)
+static u8 sub_80A02FC(void)
 {
     if (!IsTextPrinterActive(0))
     {
         PlaySE(0x16); // 22
-        gUnknown_0203761C = sub_80A0324;
+        sSaveDialogCallback = sub_80A0324;
     }
     
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A0324(void)
+static u8 sub_80A0324(void)
 {
     if (!sub_80A0070()) 
     {
@@ -1105,30 +1115,30 @@ u8 sub_80A0324(void)
     }
 }
 
-void sub_80A0340(void)
+static void sub_80A0340(void)
 {
-    gUnknown_0203761C = sub_80A035C;
-    gUnknown_02037621 = FALSE;
+    sSaveDialogCallback = sub_80A035C;
+    sSavingComplete = FALSE;
 }
 
-u8 sub_80A035C(void)
+static u8 sub_80A035C(void)
 {
     sub_819746C(GetStartMenuWindowId(), FALSE);
     remove_start_menu_window_maybe();
-    sub_809FF98(BattleFrontier_BattlePyramidEmptySquare_Text_252CFB, sub_80A0388);
+    sub_809FF98(gText_BattlePyramidConfirmRetire, sub_80A0388);
 
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A0388(void)
+static u8 sub_80A0388(void)
 {
     sub_8197948(1);
-    gUnknown_0203761C = sub_80A03A4;
+    sSaveDialogCallback = sub_80A03A4;
 
     return SAVE_IN_PROGRESS;
 }
 
-u8 sub_80A03A4(void)
+static u8 sub_80A03A4(void)
 {
     switch (ProcessMenuInputNoWrap_())
     {
@@ -1143,12 +1153,12 @@ u8 sub_80A03A4(void)
     return SAVE_IN_PROGRESS;
 }
 
-void sub_80A03D8(void)
+static void sub_80A03D8(void)
 {
     TransferPlttBuffer();
 }
 
-bool32 sub_80A03E4(u8 *par1)
+static bool32 sub_80A03E4(u8 *par1)
 {
     switch (*par1)
     {
@@ -1186,7 +1196,7 @@ bool32 sub_80A03E4(u8 *par1)
     return FALSE;
 }
 
-void sub_80A0514(void)
+void sub_80A0514(void) // Called from cable_club.s
 {
     if (sub_80A03E4(&gMain.state))
     {
@@ -1195,13 +1205,13 @@ void sub_80A0514(void)
     }
 }
 
-void sub_80A0540(void)
+static void sub_80A0540(void)
 {
     RunTasks();
     UpdatePaletteFade();
 }
 
-void sub_80A0550(u8 taskId)
+static void sub_80A0550(u8 taskId)
 {
     s16 *step = gTasks[taskId].data;
 
@@ -1277,7 +1287,7 @@ void sub_80A0550(u8 taskId)
     }
 }
 
-void sub_80A06B4(void)
+static void sub_80A06B4(void)
 {
     struct WindowTemplate saveInfoWindow = gSaveInfoWindowTemplate;
     u8 gender;
@@ -1290,8 +1300,8 @@ void sub_80A06B4(void)
         saveInfoWindow.height -= 2;
     }
 
-    gSaveInfoWindowId = AddWindow(&saveInfoWindow);
-    NewMenuHelpers_DrawStdWindowFrame(gSaveInfoWindowId, 0);
+    sSaveWindowId = AddWindow(&saveInfoWindow);
+    NewMenuHelpers_DrawStdWindowFrame(sSaveWindowId, FALSE);
 
     gender = gSaveBlock2Ptr->playerGender;
     color = TEXT_COLOR_RED;  // Red when gender is female, blue when male.
@@ -1304,50 +1314,50 @@ void sub_80A06B4(void)
     // Print region name
     yOffset = 1;
     sub_819A344(3, gStringVar4, TEXT_COLOR_GREEN);
-    PrintTextOnWindow(gSaveInfoWindowId, 1, gStringVar4, 0, yOffset, 0xFF, NULL);
+    PrintTextOnWindow(sSaveWindowId, 1, gStringVar4, 0, yOffset, 0xFF, NULL);
 
     // Print player name
     yOffset = 0x11;
-    PrintTextOnWindow(gSaveInfoWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
+    PrintTextOnWindow(sSaveWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
     sub_819A344(0, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    PrintPlayerNameOnWindow(gSaveInfoWindowId, gStringVar4, xOffset, yOffset);
+    PrintPlayerNameOnWindow(sSaveWindowId, gStringVar4, xOffset, yOffset);
 
     // Print badge count
     yOffset = 0x21;
-    PrintTextOnWindow(gSaveInfoWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
+    PrintTextOnWindow(sSaveWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
     sub_819A344(4, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    PrintTextOnWindow(gSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+    PrintTextOnWindow(sSaveWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
 
         // Print pokedex count
         yOffset = 0x31;
-        PrintTextOnWindow(gSaveInfoWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
+        PrintTextOnWindow(sSaveWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
         sub_819A344(1, gStringVar4, color);
         xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-        PrintTextOnWindow(gSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+        PrintTextOnWindow(sSaveWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
     }
 
     // Print play time
     yOffset += 0x10;
-    PrintTextOnWindow(gSaveInfoWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
+    PrintTextOnWindow(sSaveWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
     sub_819A344(2, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    PrintTextOnWindow(gSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+    PrintTextOnWindow(sSaveWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
-    CopyWindowToVram(gSaveInfoWindowId, 2);
+    CopyWindowToVram(sSaveWindowId, 2);
 }
 
-void sub_80A0888(void)
+static void sub_80A0888(void)
 {
-    sub_819746C(gSaveInfoWindowId, FALSE);
-    RemoveWindow(gSaveInfoWindowId);
+    sub_819746C(sSaveWindowId, FALSE);
+    RemoveWindow(sSaveWindowId);
 }
 
-void sub_80A08A4(u8 taskId)
+static void sub_80A08A4(u8 taskId)
 {
     if (!FuncIsActiveTask(sub_8153688))
     {
@@ -1356,7 +1366,7 @@ void sub_80A08A4(u8 taskId)
     }
 }
 
-void sub_80A08CC(void)
+void sub_80A08CC(void) // Referenced in data/specials.inc and data/scripts/maps/BattleFrontier_BattleTowerLobby.inc
 {
     u32 taskId1;
     u32 taskId2;
@@ -1368,7 +1378,7 @@ void sub_80A08CC(void)
     gTasks[taskId2].data[1] = taskId1;
 }
 
-void sub_80A0914(void)
+static void sub_80A0914(void)
 {
     sub_819746C(GetStartMenuWindowId(), TRUE);
     remove_start_menu_window_maybe();
@@ -1376,7 +1386,7 @@ void sub_80A0914(void)
     ScriptContext2_Disable();
 }
 
-void sub_80A0934(void)
+void sub_80A0934(void) // Called from map_name_popup.s
 {
     PlaySE(5);
     sub_80A0914();
