@@ -14,7 +14,7 @@
 extern void (*gFieldCallback)(void);
 extern struct LearnMoveStruct *gUnknown_0203BC34;
 
-// Ew, just copied from poeruby...
+// Ew, just copied from pokeruby...
 const u16 gDexArrows_Pal[] = INCBIN_U16("graphics/pokedex/arrows.gbapal");
 const u8 gDexArrows_Gfx[] = INCBIN_U8("graphics/pokedex/arrows.4bpp");
 const struct SpritePalette gUnknown_085CEBB8 = {gDexArrows_Pal, 5526};
@@ -50,6 +50,7 @@ void sub_8160664(u8 taskId)
 
 void sub_81606A0(void) //CB2_InitLearnMove
 {
+  //Less calls than pokeruby, is it normal ?
   ResetSpriteData();
   FreeAllSpritePalettes();
   ResetTasks();
@@ -57,17 +58,17 @@ void sub_81606A0(void) //CB2_InitLearnMove
 
 
   //LearnMoveStruct**
-  gUnknown_0203BC34 = AllocZeroed(0x118);//gUnknown_0203BC34 is a global pointer to LearnMoveStruct ?
   //r1 = &gSpecialVar_0x8004; //What is this global ?
   //u8* partyMon = gUnknown_0203BC34 + 0x44 //partyMon ?
   //*partyMon = r1;
+  gUnknown_0203BC34 = AllocZeroed(0x118);//gUnknown_0203BC34 is a global pointer to LearnMoveStruct ?
   gUnknown_0203BC34->partyMon = gSpecialVar_0x8004;
 
   SetVBlankCallback(sub_8160624);
   sub_81607EC();
   sub_81D2824(0);
 
-  //pointer to ?
+  //gUnknown_0203BC38 ?
   (&gUnknown_0203BC38)[0] = 0;
   (&gUnknown_0203BC38)[2] = 0;
   (&gUnknown_0203BC38)[4] = 0;
