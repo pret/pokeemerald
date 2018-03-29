@@ -14,12 +14,6 @@
 extern void (*gFieldCallback)(void);
 extern struct LearnMoveStruct *gUnknown_0203BC34;
 
-// Ew, just copied from pokeruby...
-const u16 gDexArrows_Pal[] = INCBIN_U16("graphics/pokedex/arrows.gbapal");
-const u8 gDexArrows_Gfx[] = INCBIN_U8("graphics/pokedex/arrows.4bpp");
-const struct SpritePalette gUnknown_085CEBB8 = {gDexArrows_Pal, 5526};
-const struct SpriteSheet gUnknown_085CEBB0 = {gDexArrows_Gfx, sizeof(gDexArrows_Gfx), 5525};
-
 static struct LearnMoveStruct *sLearnMoveStruct;
 static void sub_8160664(u8 taskId);
 void sub_81606A0(void); //CB2_InitLearnMove
@@ -50,6 +44,12 @@ void sub_8160664(u8 taskId)
 
 void sub_81606A0(void) //CB2_InitLearnMove
 {
+  //FIXME
+  void (*sub_81607EC)(void) = (void*)0x081607EC;
+  void (*sub_81D2824)(void*) = (void*)0x081D2824;
+  void (*sub_81610B8)(void) = (void*)0x081610B8;
+  void (*sub_8161280)(void) = (void*)0x08161280;
+
   //Less calls than pokeruby, is it normal ?
   ResetSpriteData();
   FreeAllSpritePalettes();
@@ -74,11 +74,11 @@ void sub_81606A0(void) //CB2_InitLearnMove
   (&gUnknown_0203BC38)[4] = 0;
 
   sub_8161280();
-  LoadSpriteSheet(&gUnknown_085CEBB0);
-  LoadSpritePalette(&gUnknown_085CEBB8);
+  LoadSpriteSheet(/*FIXME &gUnknown_085CEBB0*/(void*)0x085CEBB0);
+  LoadSpritePalette(/*FIXME &gUnknown_085CEBB8*/(void*)0x085CEBB8);
   sub_81610B8();
 
   ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
   FillPalette(0, 0, 2);
-  SetMainCallback2(sub_816082C);
+  SetMainCallback2(/*FIXME sub_816082C*/(void*)0x0816082C);
 }

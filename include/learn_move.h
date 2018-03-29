@@ -31,6 +31,12 @@ struct LearnMoveStruct *gUnknown_0203BC34 = NULL;
 void sub_8160624(void);
 void sub_8160638(void);
 
-const struct SpritePalette gUnknown_08402D88 = {gDexArrows_Pal, 5526};
+// Ew, just copied from pokeruby...
+//const u16 gDexArrows_Pal[] = INCBIN_U16("graphics/pokedex/arrows.gbapal");
+//const u8 gDexArrows_Gfx[] = INCBIN_U8("graphics/pokedex/arrows.4bpp");
+//const struct SpritePalette gUnknown_085CEBB8 = {gDexArrows_Pal, 5526};
+//const struct SpriteSheet gUnknown_085CEBB0 = {gDexArrows_Gfx, sizeof(gDexArrows_Gfx), 5525};
+
+void *gUnknown_0203BC38 = (void*)0x0203BC38;
 
 #endif //GUARD_LEAN_MOVE_H
