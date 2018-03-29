@@ -2776,93 +2776,27 @@ void sub_81C2C38(u8 a)
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
-
-
-#ifdef NONMATCHING
 u8 sub_81C2D2C(struct WindowTemplate *template, u8 a)
 {
-    u8 *r4 = gUnknown_0203CF1C->unk40CB;
-    if (r4[a] == 0xFF)
+    u8 *r4 = &(gUnknown_0203CF1C->unk40CB[a]);
+    if (*r4 == 0xFF)
     {
-        r4[a] = AddWindow(&template[a]);
-        FillWindowPixelBuffer(r4[a], 0);
+        *r4 = AddWindow(&template[a]);
+        FillWindowPixelBuffer(*r4, 0);
     }
-    return r4[a];
+    return *r4;
 }
-#else
-ASM_DIRECT
-u8 sub_81C2D2C(struct WindowTemplate *template, u8 a)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-	adds r3, r0, 0\n\
-	lsls r1, 24\n\
-	lsrs r2, r1, 24\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r4, =0x000040cb\n\
-	adds r1, r2, r4\n\
-	ldr r0, [r0]\n\
-	adds r4, r0, r1\n\
-	ldrb r0, [r4]\n\
-	cmp r0, 0xFF\n\
-	bne _081C2D56\n\
-	lsls r0, r2, 3\n\
-	adds r0, r3, r0\n\
-	bl AddWindow\n\
-	strb r0, [r4]\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0\n\
-	bl FillWindowPixelBuffer\n\
-_081C2D56:\n\
-	ldrb r0, [r4]\n\
-	pop {r4}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.pool\n\
-	.syntax divided\n");
-}
-#endif
 
-#ifdef NONMATCHING
 void sub_81C2D68(u8 a)
 {
-    u8 *r4 = gUnknown_0203CF1C->unk40CB;
-    if (r4[a] != 0xFF)
+    u8 *r4 = &(gUnknown_0203CF1C->unk40CB[a]);
+    if (*r4 != 0xFF)
     {
-        ClearWindowTilemap(r4[a]);
-        RemoveWindow(r4[a]);
-        r4[a] = 0xFF;
+        ClearWindowTilemap(*r4);
+        RemoveWindow(*r4);
+        *r4 = 0xFF;
     }
 }
-#else
-ASM_DIRECT
-void sub_81C2D68(u8 a)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	ldr r1, =gUnknown_0203CF1C\n\
-	ldr r2, =0x000040cb\n\
-	adds r0, r2\n\
-	ldr r1, [r1]\n\
-	adds r4, r1, r0\n\
-	ldrb r0, [r4]\n\
-	cmp r0, 0xFF\n\
-	beq _081C2D8C\n\
-	bl ClearWindowTilemap\n\
-	ldrb r0, [r4]\n\
-	bl RemoveWindow\n\
-	movs r0, 0xFF\n\
-	strb r0, [r4]\n\
-_081C2D8C:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-	.syntax divided\n");
-}
-#endif
 
 void sub_81C2D9C(u8 a)
 {
