@@ -112,11 +112,11 @@ struct UnkStruct_08625388 {
 
 // Static ROM declarations
 
-static bool32 sMatchCallGetFlag_Type0(match_call_t);
-static bool32 sMatchCallGetFlag_Type1(match_call_t);
-static bool32 sMatchCallGetFlag_Type2(match_call_t);
-static bool32 sMatchCallGetFlag_Type3(match_call_t);
-static bool32 sMatchCallGetFlag_Type4(match_call_t);
+static bool32 MatchCallGetFlag_Type0(match_call_t);
+static bool32 MatchCallGetFlag_Type1(match_call_t);
+static bool32 MatchCallGetFlag_Type2(match_call_t);
+static bool32 MatchCallGetFlag_Type3(match_call_t);
+static bool32 MatchCallGetFlag_Type4(match_call_t);
 
 static u8 sub_81D1714(match_call_t);
 static u8 sub_81D1718(match_call_t);
@@ -577,11 +577,11 @@ static const match_call_t sMatchCallHeaders[] = {
 };
 
 static bool32 (*const sMatchCallGetFlagFuncs[])(match_call_t) = {
-    sMatchCallGetFlag_Type0,
-    sMatchCallGetFlag_Type1,
-    sMatchCallGetFlag_Type2,
-    sMatchCallGetFlag_Type3,
-    sMatchCallGetFlag_Type4
+    MatchCallGetFlag_Type0,
+    MatchCallGetFlag_Type1,
+    MatchCallGetFlag_Type2,
+    MatchCallGetFlag_Type3,
+    MatchCallGetFlag_Type4
 };
 
 static u8 (*const gUnknown_08625310[])(match_call_t) = {
@@ -689,28 +689,28 @@ bool32 MatchCallFlagGetByIndex(u32 idx)
     return sMatchCallGetFlagFuncs[i](matchCall);
 }
 
-static bool32 sMatchCallGetFlag_Type0(match_call_t matchCall)
+static bool32 MatchCallGetFlag_Type0(match_call_t matchCall)
 {
     if (matchCall.type0->flag == 0xffff)
         return TRUE;
     return FlagGet(matchCall.type0->flag);
 }
 
-static bool32 sMatchCallGetFlag_Type1(match_call_t matchCall)
+static bool32 MatchCallGetFlag_Type1(match_call_t matchCall)
 {
     if (matchCall.type1->flag == 0xffff)
         return TRUE;
     return FlagGet(matchCall.type1->flag);
 }
 
-static bool32 sMatchCallGetFlag_Type2(match_call_t matchCall)
+static bool32 MatchCallGetFlag_Type2(match_call_t matchCall)
 {
     if (matchCall.type2->flag == 0xffff)
         return TRUE;
     return FlagGet(matchCall.type2->flag);
 }
 
-static bool32 sMatchCallGetFlag_Type3(match_call_t matchCall)
+static bool32 MatchCallGetFlag_Type3(match_call_t matchCall)
 {
     if (matchCall.type4->gender != gSaveBlock2Ptr->playerGender)
         return FALSE;
@@ -719,7 +719,7 @@ static bool32 sMatchCallGetFlag_Type3(match_call_t matchCall)
     return FlagGet(matchCall.type4->flag);
 }
 
-static bool32 sMatchCallGetFlag_Type4(match_call_t matchCall)
+static bool32 MatchCallGetFlag_Type4(match_call_t matchCall)
 {
     return FlagGet(matchCall.type3->flag);
 }
