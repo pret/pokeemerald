@@ -77,7 +77,7 @@ u8 sub_81979C4(u8 a1);
 u8 sub_81983AC(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos);
 void sub_819786C(u8 windowId, bool8 copyToVram);
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress);
-void remove_start_menu_window_maybe(void);
+void RemoveStartMenuWindow(void);
 void sub_8197948(u8 initialCursorPos);
 void sub_819A344(u8 a0, u8 *dest, u8 color);
 

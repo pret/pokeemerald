@@ -144,7 +144,7 @@ static void sub_80A08A4(u8 taskId);
 // Some other callback
 static bool8 sub_809FA00(void);
 
-static const struct WindowTemplate gSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
+static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
 
 static const u8* const sPyramindFloorNames[] =
 {
@@ -158,10 +158,10 @@ static const u8* const sPyramindFloorNames[] =
     gText_Peak
 };
 
-static const struct WindowTemplate gPyramidFloorWindowTemplate_2 = {0, 1, 1, 0xA, 4, 0xF, 8};
-static const struct WindowTemplate gPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC, 4, 0xF, 8};
+static const struct WindowTemplate sPyramidFloorWindowTemplate_2 = {0, 1, 1, 0xA, 4, 0xF, 8};
+static const struct WindowTemplate sPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC, 4, 0xF, 8};
 
-const struct MenuAction sStartMenuItems[] =
+static const struct MenuAction sStartMenuItems[] =
 {
     {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
     {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
@@ -178,7 +178,7 @@ const struct MenuAction sStartMenuItems[] =
     {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}}
 };
 
-const struct BgTemplate gUnknown_085105A8[] =
+static const struct BgTemplate sUnknown_085105A8[] =
 {
     {
         .bg = 0,
@@ -191,13 +191,13 @@ const struct BgTemplate gUnknown_085105A8[] =
     }
 };
 
-const struct WindowTemplate gUnknown_085105AC[] =
+static const struct WindowTemplate sUnknown_085105AC[] =
 {
     {0, 2, 0xF, 0x1A, 4, 0xF, 0x194},
     DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gSaveInfoWindowTemplate = {0, 1, 1, 0xE, 0xA, 0xF, 8};
+static const struct WindowTemplate sSaveInfoWindowTemplate = {0, 1, 1, 0xE, 0xA, 0xF, 8};
 
 // Local functions
 static void BuildStartMenuActions(void);
@@ -211,7 +211,7 @@ static void BuildBattlePyramidStartMenu(void);
 static void BuildMultiBattleRoomStartMenu(void);
 static void ShowSafariBallsWindow(void);
 static void ShowPyramidFloorWindow(void);
-static void HideExtraStartMenuWindows(void);
+static void RemoveExtraStartMenuWindows(void);
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count);
 static bool32 InitStartMenuStep(void);
 static void InitStartMenu(void);
@@ -373,7 +373,7 @@ static void BuildMultiBattleRoomStartMenu(void)
 
 static void ShowSafariBallsWindow(void)
 {
-    sSafariBallsWindowId = AddWindow(&gSafariBallsWindowTemplate);
+    sSafariBallsWindowId = AddWindow(&sSafariBallsWindowTemplate);
     PutWindowTilemap(sSafariBallsWindowId);
     NewMenuHelpers_DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -386,11 +386,11 @@ static void ShowPyramidFloorWindow(void)
 {
     if (gSaveBlock2Ptr->field_CAA[4] == 7) // TODO: fix location
     {
-        sBattlePyramidFloorWindowId = AddWindow(&gPyramidFloorWindowTemplate_1);
+        sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_1);
     }
     else
     {
-        sBattlePyramidFloorWindowId = AddWindow(&gPyramidFloorWindowTemplate_2);
+        sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_2);
     }
 
     PutWindowTilemap(sBattlePyramidFloorWindowId);
@@ -401,7 +401,7 @@ static void ShowPyramidFloorWindow(void)
     CopyWindowToVram(sBattlePyramidFloorWindowId, 2);
 }
 
-static void HideExtraStartMenuWindows(void)
+static void RemoveExtraStartMenuWindows(void)
 {
     if (GetSafariZoneFlag())
     {
@@ -608,7 +608,7 @@ static bool8 HandleStartMenuInput(void)
     
     if (gMain.newKeys & (START_BUTTON | B_BUTTON))
     {
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         HideStartMenu();
         return TRUE;
     }
@@ -622,7 +622,7 @@ static bool8 StartMenuPokedexCallback(void)
     {
         IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
         play_some_sound();
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
         SetMainCallback2(sub_80BB534); // Display pokedex
         
@@ -637,7 +637,7 @@ static bool8 StartMenuPokemonCallback(void)
     if (!gPaletteFade.active)
     {
         play_some_sound();
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
         SetMainCallback2(CB2_PartyMenuFromStartMenu); // Display party menu
         
@@ -652,7 +652,7 @@ static bool8 StartMenuBagCallback(void)
     if (!gPaletteFade.active)
     {
         play_some_sound();
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
         SetMainCallback2(CB2_BagMenuFromStartMenu); // Display bag menu
 
@@ -667,7 +667,7 @@ static bool8 StartMenuPokeNavCallback(void)
     if (!gPaletteFade.active)
     {
         play_some_sound();
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
         SetMainCallback2(CB2_PokeNav);  // Display PokeNav
 
@@ -682,7 +682,7 @@ static bool8 StartMenuPlayerNameCallback(void)
     if (!gPaletteFade.active)
     {
         play_some_sound();
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
 
         if (is_c1_link_related_active() || InUnionRoom())
@@ -708,7 +708,7 @@ static bool8 StartMenuSaveCallback(void)
 {
     if (InBattlePyramid())
     {
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
     }
 
     gMenuCallback = SaveStartCallback; // Display save menu
@@ -721,7 +721,7 @@ static bool8 StartMenuOptionCallback(void)
     if (!gPaletteFade.active)
     {
         play_some_sound();
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
         SetMainCallback2(CB2_InitOptionMenu); // Display option menu
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
@@ -734,7 +734,7 @@ static bool8 StartMenuOptionCallback(void)
 
 static bool8 StartMenuExitCallback(void)
 {
-    HideExtraStartMenuWindows();
+    RemoveExtraStartMenuWindows();
     HideStartMenu(); // Hide start menu
     
     return TRUE;
@@ -742,7 +742,7 @@ static bool8 StartMenuExitCallback(void)
 
 static bool8 StartMenuSafariZoneRetireCallback(void)
 {
-    HideExtraStartMenuWindows();
+    RemoveExtraStartMenuWindows();
     HideStartMenu();
     SafariZoneRetirePrompt();
 
@@ -783,7 +783,7 @@ static bool8 StartMenuBattlePyramidBagCallback(void)
     if (!gPaletteFade.active)
     {
         play_some_sound();
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
         SetMainCallback2(sub_81C4EFC);  // Display battle pyramid bag
 
@@ -845,7 +845,7 @@ static bool8 BattlePyramidRetireCallback(void)
     switch (RunSaveCallback())
     {
     case SAVE_SUCCESS: // No (Stay in battle pyramid)
-        HideExtraStartMenuWindows();
+        RemoveExtraStartMenuWindows();
         gMenuCallback = BattlePyramidRetireReturnCallback;
         return FALSE;
     case SAVE_IN_PROGRESS:
@@ -965,7 +965,7 @@ static bool8 SaveErrorTimer(void)
 static u8 SaveConfirmSaveCallback(void)
 {
     sub_819746C(GetStartMenuWindowId(), FALSE);
-    remove_start_menu_window_maybe();
+    RemoveStartMenuWindow();
     ShowSaveInfoWindow();
 
     if (InBattlePyramid())
@@ -1157,7 +1157,7 @@ static void InitBattlePyramidRetire(void)
 static u8 BattlePyramidConfirmRetireCallback(void)
 {
     sub_819746C(GetStartMenuWindowId(), FALSE);
-    remove_start_menu_window_maybe();
+    RemoveStartMenuWindow();
     ShowSaveMessage(gText_BattlePyramidConfirmRetire, BattlePyramidRetireYesNoCallback);
 
     return SAVE_IN_PROGRESS;
@@ -1210,8 +1210,8 @@ static bool32 sub_80A03E4(u8 *par1)
         break;
     case 2:
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_085105A8, ARRAY_COUNT(gUnknown_085105A8));
-        InitWindows(gUnknown_085105AC);
+        InitBgsFromTemplates(0, sUnknown_085105A8, ARRAY_COUNT(sUnknown_085105A8));
+        InitWindows(sUnknown_085105AC);
         box_border_load_tiles_and_pal(0, 8, 224);
         sub_81978B0(240);
         break;
@@ -1322,7 +1322,7 @@ static void sub_80A0550(u8 taskId)
 
 static void ShowSaveInfoWindow(void)
 {
-    struct WindowTemplate saveInfoWindow = gSaveInfoWindowTemplate;
+    struct WindowTemplate saveInfoWindow = sSaveInfoWindowTemplate;
     u8 gender;
     u8 color;
     u32 xOffset;
@@ -1408,7 +1408,7 @@ void sub_80A08CC(void) // Referenced in data/specials.inc and data/scripts/maps/
 static void HideStartMenuWindow(void)
 {
     sub_819746C(GetStartMenuWindowId(), TRUE);
-    remove_start_menu_window_maybe();
+    RemoveStartMenuWindow();
     sub_80984F4();
     ScriptContext2_Disable();
 }

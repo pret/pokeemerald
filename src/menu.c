@@ -483,7 +483,7 @@ u8 GetStartMenuWindowId(void)
     return gStartMenuWindowId;
 }
 
-void remove_start_menu_window_maybe(void)
+void RemoveStartMenuWindow(void)
 {
     if (gStartMenuWindowId != 0xFF)
     {
