@@ -210,6 +210,7 @@ SECTIONS {
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_815A0D4.o(.text);
         asm/learn_move.o(.text);
+        src/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);

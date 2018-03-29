@@ -1,5 +1,5 @@
-#ifndef GUARD_LEAN_MOVE_H
-#define GUARD_LEAN_MOVE_H
+#ifndef GUARD_LEARN_MOVE_H
+#define GUARD_LEARN_MOVE_H
 
 struct LearnMoveStruct
 {
@@ -39,4 +39,4 @@ void sub_8160638(void);
 
 void *gUnknown_0203BC38 = (void*)0x0203BC38;
 
-#endif //GUARD_LEAN_MOVE_H
+#endif //GUARD_LEARN_MOVE_H

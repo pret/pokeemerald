@@ -82,7 +82,7 @@ sub_81606A0: @ 81606A0
 	str r0, [r6]
 	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
-	adds r0, 0x44 partymon
+	adds r0, 0x44
 	movs r5, 0
 	strb r1, [r0]
 	ldr r0, =sub_8160624
@@ -129,7 +129,7 @@ sub_8160740: @ 8160740
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	bl clear_scheduled_bg_copies_to_vram
+	bl clear_scheduled_bg_copies_to_vram //
 	ldr r5, =gUnknown_0203BC34
 	movs r0, 0x8C
 	lsls r0, 1

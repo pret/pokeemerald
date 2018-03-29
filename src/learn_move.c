@@ -17,6 +17,7 @@ extern struct LearnMoveStruct *gUnknown_0203BC34;
 static struct LearnMoveStruct *sLearnMoveStruct;
 static void sub_8160664(u8 taskId);
 void sub_81606A0(void); //CB2_InitLearnMove
+void sub_8160740(void);
 
 void sub_8160624(void) //VBlankCB_LearnMove
 {
@@ -56,7 +57,6 @@ void sub_81606A0(void) //CB2_InitLearnMove
   ResetTasks();
   clear_scheduled_bg_copies_to_vram();
 
-
   //LearnMoveStruct**
   //r1 = &gSpecialVar_0x8004; //What is this global ?
   //u8* partyMon = gUnknown_0203BC34 + 0x44 //partyMon ?
@@ -82,3 +82,17 @@ void sub_81606A0(void) //CB2_InitLearnMove
   FillPalette(0, 0, 2);
   SetMainCallback2(/*FIXME sub_816082C*/(void*)0x0816082C);
 }
+
+/*
+void sub_8160740(void)
+{
+  ResetSpriteData();
+  FreeAllSpritePalettes();
+  ResetTasks();
+  clear_scheduled_bg_copies_to_vram();
+
+  gUnknown_0203BC34 = AllocZeroed(0x118);//gUnknown_0203BC34 is a global pointer to LearnMoveStruct ?
+  gUnknown_0203BC34->partyMon = gSpecialVar_0x8004;
+  gUnknown_0203BC34->unk2C6 = gSpecialVar_0x8005;
+}
+*/
