@@ -1,3 +1,4 @@
+
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
@@ -27,8 +28,9 @@ void NewMenuHelpers_DrawDialogueFrame(u8, u8);
 void sub_819746C(u8 windowId, bool8 copyToVram);
 void NewMenuHelpers_DrawStdWindowFrame(u8, u8);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 fgColor, u8 bgColor, u8 shadowColor);
+void PrintPlayerNameOnWindow(u8, const u8*, u16, u16);
 void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
-void sub_8197434(u8 a0, u8 a1);
+void sub_8197434(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 a0, u8 a1);
 void sub_8197930(void);
 u8 GetPlayerTextSpeed(void);
@@ -67,6 +69,16 @@ void AddItemMenuActionTextPrinters (u8, u8, u8, u8, u8, u8, u8, const struct Men
 void sub_8198DBC(u8, u8, u8, u8, u8, u8, u8, const struct MenuAction*, const u8*);
 u8 sub_8199944(u8, u8, u8, u8, u8);
 u8 sub_8199134(s8, s8);
+u8 GetStartMenuWindowId(void);
 void sub_819A2BC(u8, u8);
+u8 MoveMenuCursor(s8 cursorDelta);
+void NewMenuHelpers_DrawStdWindowFrame(u8 windowId, bool8 CopyToVram);
+u8 sub_81979C4(u8 a1);
+u8 sub_81983AC(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos);
+void sub_819786C(u8 windowId, bool8 copyToVram);
+void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress);
+void RemoveStartMenuWindow(void);
+void sub_8197948(u8 initialCursorPos);
+void sub_819A344(u8 a0, u8 *dest, u8 color);
 
 #endif // GUARD_MENU_H

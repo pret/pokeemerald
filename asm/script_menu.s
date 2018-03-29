@@ -836,7 +836,7 @@ _080E24C6:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	movs r3, 0x11
-	bl sub_819A024
+	bl PrintPlayerNameOnWindow
 	adds r0, r6, 0
 	mov r1, r8
 	movs r2, 0

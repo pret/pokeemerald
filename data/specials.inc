@@ -104,7 +104,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F8D24
 	def_special sub_80F8C7C
 	def_special sub_80B3000
-	def_special sub_809FF80
+	def_special SaveGame
 	def_special sub_80FAFF8
 	def_special easy_chat_input_maybe
 	def_special sub_811EECC

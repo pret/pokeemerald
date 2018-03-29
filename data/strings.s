@@ -3704,13 +3704,13 @@ gText_LeaderLeftEndingChat:: @ 85ED2FA
 gText_RegisteredTextChanged:: @ 85ED325
 	.string "The registered text has been changed.\nIs it okay to save the game?$"
 
-gText_AlreadySavedFile:: @ 85ED368
+gText_AlreadySavedFile_Unused:: @ 85ED368
 	.string "There is already a saved file.\nIs it okay to overwrite it?$"
 
-gText_SavingDontTurnOff:: @ 85ED3A3
+gText_SavingDontTurnOff_Unused:: @ 85ED3A3
 	.string "SAVING…\nDON’T TURN OFF THE POWER.$"
 
-gText_PlayerSavedGame:: @ 85ED3C5
+gText_PlayerSavedGame_Unused:: @ 85ED3C5
 	.string "{SPECIAL_F7 0x00} saved the game.$"
 
 gText_IfLeaderLeavesChatEnds:: @ 85ED3D8

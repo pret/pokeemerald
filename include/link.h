@@ -257,6 +257,7 @@ void sub_800AAF4(void);
 void sub_800AF18(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
 void sub_800B348(void);
 void sub_800B3A4(u32 who);
+bool32 sub_800A07C(void);
 
 extern u16 gLinkPartnersHeldKeys[6];
 extern u32 gLinkDebugSeed;

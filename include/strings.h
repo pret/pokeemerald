@@ -197,6 +197,23 @@ extern const u8 gText_Peak[];
 extern const u8 gText_SafariBallStock[];
 extern const u8 gText_BattlePyramidFloor[];
 
+// save menu texts
+extern const u8 gText_ConfirmSave[];
+extern const u8 gText_DifferentSaveFile[];
+extern const u8 gText_AlreadySavedFile[];
+extern const u8 gText_SavingDontTurnOff[];
+extern const u8 gText_PlayerSavedGame[];
+extern const u8 gText_SaveError[];
+extern const u8 gText_SavingDontTurnOffPower[];
+extern const u8 gText_SavingPlayer[];
+extern const u8 gText_SavingBadges[];
+extern const u8 gText_SavingPokedex[];
+extern const u8 gText_SavingTime[];
+
+// Battle pyramid menu texts
+extern const u8 gText_BattlePyramidConfirmRest[];
+extern const u8 gText_BattlePyramidConfirmRetire[];
+
 // option menu texts
 extern const u8 gText_TextSpeedSlow[];
 extern const u8 gText_TextSpeedMid[];

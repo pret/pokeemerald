@@ -1729,7 +1729,7 @@ _080B3248:
 	thumb_func_start sub_80B3254
 sub_80B3254: @ 80B3254
 	push {lr}
-	bl sub_809FF80
+	bl SaveGame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80B3254

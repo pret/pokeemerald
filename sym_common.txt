@@ -70,7 +70,7 @@ gUnknown_03005DEC: @ 3005DEC
 gSelectedMapObject: @ 3005DF0
 	.space 0x4
 
-gUnknown_03005DF4: @ 3005DF4
+gMenuCallback: @ 3005DF4
 	.space 0x4
 
     .include "sound.o"

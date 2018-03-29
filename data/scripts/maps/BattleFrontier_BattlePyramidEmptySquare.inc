@@ -180,12 +180,12 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88:: @ 8252C88
 BattleFrontier_BattlePyramidEmptySquare_Text_252C8D: @ 8252C8D
 	.string "This is a sample message.$"
 
-BattleFrontier_BattlePyramidEmptySquare_Text_252CA7:: @ 8252CA7
+gText_BattlePyramidConfirmRest:: @ 8252CA7
 	.string "Your BATTLE PYRAMID quest will be\n"
 	.string "saved so that you may quit for now.\l"
 	.string "Is that okay?$"
 
-BattleFrontier_BattlePyramidEmptySquare_Text_252CFB:: @ 8252CFB
+gText_BattlePyramidConfirmRetire:: @ 8252CFB
 	.string "Are you sure you want to quit your\n"
 	.string "PYRAMID quest?$"
 

@@ -25,11 +25,11 @@
 #define STD_WINDOW_PALETTE_NUM 14
 #define STD_WINDOW_BASE_TILE_NUM 0x214
 
-struct SomeUnkStruct_60F0D4
+struct MoveMenuInfoIcon
 {
-    u8 unk1;
-    u8 unk2;
-    u16 unk3;
+    u8 width;
+    u8 height;
+    u16 offset;
 };
 
 struct Menu
@@ -48,7 +48,7 @@ struct Menu
     bool8 APressMuted;
 };
 
-static EWRAM_DATA u8 gUnknown_0203CD8C = 0;
+static EWRAM_DATA u8 gStartMenuWindowId = 0;
 static EWRAM_DATA u8 gUnknown_0203CD8D = 0;
 static EWRAM_DATA struct Menu gUnknown_0203CD90 = {0};
 static EWRAM_DATA u16 gUnknown_0203CD9C = 0;
@@ -76,34 +76,36 @@ static const struct WindowTemplate gUnknown_0860F0A8 =
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
 const u8 gUnknown_0860F0D0[] = { 15, 1, 2 };
-const struct SomeUnkStruct_60F0D4 gUnknown_0860F0D4[] =
-{
-    { 12, 12, 0x00 },
-    { 32, 12, 0x20 },
-    { 32, 12, 0x64 },
-    { 32, 12, 0x60 },
-    { 32, 12, 0x80 },
-    { 32, 12, 0x48 },
-    { 32, 12, 0x44 },
-    { 32, 12, 0x6C },
-    { 32, 12, 0x68 },
-    { 32, 12, 0x88 },
-    { 32, 12, 0xA4 },
-    { 32, 12, 0x24 },
-    { 32, 12, 0x28 },
-    { 32, 12, 0x2C },
-    { 32, 12, 0x40 },
-    { 32, 12, 0x84 },
-    { 32, 12, 0x4C },
-    { 32, 12, 0xA0 },
-    { 32, 12, 0x8C },
-    { 42, 12, 0xA8 },
-    { 42, 12, 0xC0 },
-    { 42, 12, 0xC8 },
-    { 42, 12, 0xE0 },
-    { 42, 12, 0xE8 },
-    {  8,  8, 0xAE },
-    {  8,  8, 0xAF },
+
+// Table of move info icon offsets in graphics/interface_fr/menu.png
+const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
+{   // { width, height, offset }
+    { 12, 12, 0x00 },       // Unused
+    { 32, 12, 0x20 },       // Normal icon
+    { 32, 12, 0x64 },       // Fight icon
+    { 32, 12, 0x60 },       // Flying icon
+    { 32, 12, 0x80 },       // Poison icon
+    { 32, 12, 0x48 },       // Ground icon
+    { 32, 12, 0x44 },       // Rock icon
+    { 32, 12, 0x6C },       // Bug icon
+    { 32, 12, 0x68 },       // Ghost icon
+    { 32, 12, 0x88 },       // Steel icon
+    { 32, 12, 0xA4 },       // ??? (Mystery) icon
+    { 32, 12, 0x24 },       // Fire icon
+    { 32, 12, 0x28 },       // Water icon
+    { 32, 12, 0x2C },       // Grass icon
+    { 32, 12, 0x40 },       // Electric icon
+    { 32, 12, 0x84 },       // Psychic icon
+    { 32, 12, 0x4C },       // Ice icon
+    { 32, 12, 0xA0 },       // Dragon icon
+    { 32, 12, 0x8C },       // Dark icon
+    { 42, 12, 0xA8 },       // -Type- icon
+    { 42, 12, 0xC0 },       // -Power- icon
+    { 42, 12, 0xC8 },       // -Accuracy- icon
+    { 42, 12, 0xE0 },       // -PP- icon
+    { 42, 12, 0xE8 },       // -Effect- icon
+    {  8,  8, 0xAE },       // Unused (Small white pokeball)
+    {  8,  8, 0xAF },       // Unused (Small dark pokeball)
 };
 
 // Forward declarations
@@ -125,7 +127,7 @@ extern void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 void sub_81971D0(void)
 {
     InitWindows(gUnknown_0860F098);
-    gUnknown_0203CD8C = 0xFF;
+    gStartMenuWindowId = 0xFF;
     gUnknown_0203CD8D = 0xFF;
 }
 
@@ -471,22 +473,22 @@ u8 GetPlayerTextSpeed(void)
 
 u8 sub_81979C4(u8 a1)
 {
-    if (gUnknown_0203CD8C == 0xFF)
-        gUnknown_0203CD8C = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
-    return gUnknown_0203CD8C;
+    if (gStartMenuWindowId == 0xFF)
+        gStartMenuWindowId = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
+    return gStartMenuWindowId;
 }
 
 u8 GetStartMenuWindowId(void)
 {
-    return gUnknown_0203CD8C;
+    return gStartMenuWindowId;
 }
 
-void remove_start_menu_window_maybe(void)
+void RemoveStartMenuWindow(void)
 {
-    if (gUnknown_0203CD8C != 0xFF)
+    if (gStartMenuWindowId != 0xFF)
     {
-        RemoveWindow(gUnknown_0203CD8C);
-        gUnknown_0203CD8C = 0xFF;
+        RemoveWindow(gStartMenuWindowId);
+        gStartMenuWindowId = 0xFF;
     }
 }
 
@@ -1988,7 +1990,7 @@ void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 spee
     AddTextPrinter(&printer, speed, callback);
 }
 
-void sub_819A024(u8 windowId, const u8 *src, u16 a2, u16 a3)
+void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
 {
     int count = 0;
     while (gSaveBlock2Ptr->playerName[count] != EOS)
@@ -1996,7 +1998,7 @@ void sub_819A024(u8 windowId, const u8 *src, u16 a2, u16 a3)
 
     StringExpandPlaceholders(gStringVar4, src);
 
-    PrintTextOnWindow(windowId, 1, gStringVar4, a2, a3, 0xFF, 0);
+    PrintTextOnWindow(windowId, 1, gStringVar4, x, y, 0xFF, 0);
 }
 
 //Screw this function, it's long and unreferenced and ugh
@@ -2364,22 +2366,22 @@ void sub_819A2BC(u8 palOffset, u8 palId)
 
 void blit_move_info_icon(u8 windowId, u8 iconId, u16 x, u16 y)
 {
-    BlitBitmapRectToWindow(windowId, gFireRedMenuElements_Gfx + gUnknown_0860F0D4[iconId].unk3 * 32, 0, 0, 128, 128, x, y, gUnknown_0860F0D4[iconId].unk1, gUnknown_0860F0D4[iconId].unk2);
+    BlitBitmapRectToWindow(windowId, gFireRedMenuElements_Gfx + gMoveMenuInfoIcons[iconId].offset * 32, 0, 0, 128, 128, x, y, gMoveMenuInfoIcons[iconId].width, gMoveMenuInfoIcons[iconId].height);
 }
 
-void sub_819A344(u8 a0, u8 *a1, u8 a2)
+void sub_819A344(u8 a0, u8 *dest, u8 color)
 {
     s32 curFlag;
     s32 flagCount;
     u8 *endOfString;
-    u8 *string = a1;
+    u8 *string = dest;
 
     *(string++) = EXT_CTRL_CODE_BEGIN;
     *(string++) = EXT_CTRL_CODE_COLOR;
-    *(string++) = a2;
+    *(string++) = color;
     *(string++) = EXT_CTRL_CODE_BEGIN;
     *(string++) = EXT_CTRL_CODE_SHADOW;
-    *(string++) = a2 + 1;
+    *(string++) = color + 1;
 
     switch (a0)
     {
