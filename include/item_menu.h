@@ -51,6 +51,7 @@ extern struct UnkBagStruct *gUnknown_0203CE54;
 extern u16 gSpecialVar_ItemId;
 
 // Exported ROM declarations
+void sub_81AAC14(void);
 void sub_81AAC50(void);
 void sub_81AAC70(void);
 void bag_menu_mail_related(void);

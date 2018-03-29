@@ -805,25 +805,7 @@ gUnknown_0203BC8C: @ 203BC8C
 	.space 0x4
 
 	.include "src/use_pokeblock.o"
-
-gUnknown_0203BCB0: @ 203BCB0
-	.space 0x4
-
-gUnknown_0203BCB4: @ 203BCB4
-	.space 0x4
-
-gUnknown_0203BCB8: @ 203BCB8
-	.space 0x2
-
-gUnknown_0203BCBA: @ 203BCBA
-	.space 0x2
-
-gUnknown_0203BCBC: @ 203BCBC
-	.space 0x8
-
-gUnknown_0203BCC4: @ 203BCC4
-	.space 0x4
-
+	.include "src/player_pc.o"
 	.include "src/intro.o"
 	.include "src/field_region_map.o"
 
@@ -954,23 +936,8 @@ gUnknown_0203CEFC: @ 203CEFC
 gUnknown_0203CF00: @ 203CF00
 	.space 0x4
 
-gUnknown_0203CF04: @ 203CF04
-	.space 0x4
-
-gUnknown_0203CF08: @ 203CF08
-	.space 0x4
-
-gUnknown_0203CF0C: @ 203CF0C
-	.space 0x4
-
-gUnknown_0203CF10: @ 203CF10
-	.space 0x4
-
-gUnknown_0203CF14: @ 203CF14
-	.space 0x4
-
-gUnknown_0203CF18: @ 203CF18
-	.space 0x4
+	.include "src/fossil_specials.o"
+	.include "src/fldeff_groundshake.o"
 
 gUnknown_0203CF1C: @ 203CF1C
 	.space 0x4

@@ -259,7 +259,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8626:: @ 81F8626
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox gUnknown_08272D87, 4
-	special sub_816AE58
+	special BedroomPC
 	waitstate
 	releaseall
 	end

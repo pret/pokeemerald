@@ -562,7 +562,7 @@ void SecretBasePC_Cancel(u8 taskId)
     }
     else
     {
-        sub_816B060(taskId);
+        ReshowPlayerPC(taskId);
     }
 }
 

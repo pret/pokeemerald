@@ -64,5 +64,9 @@ u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 pocketPos);
 void sub_80D6FB4(struct BagPocket*);
 void sub_80D6F64(struct BagPocket*);
 void sub_80D702C(struct ItemSlot*, s16, u16);
+u8 sub_80D6CE4();
+bool8 itemid_is_unique(u16 itemId);
+void sub_80D6E48(u8, u16);
+void sub_80D6E84(void);
 
 #endif // ITEM_H

@@ -1788,7 +1788,7 @@ EventScript_271DBC:: @ 8271DBC
 EventScript_271DF9:: @ 8271DF9
 	playse SE_PC_LOGIN
 	msgbox gUnknown_082726C2, 4
-	special sub_816AE98
+	special PlayerPC
 	waitstate
 	goto EventScript_271DAC
 	end

@@ -389,4 +389,8 @@ extern const u8 FieryPath_EventScript_2908FD[];
 extern const u8 EventScript_290CAE[];
 extern const u8 EventScript_2926F8[];
 
+//player pc
+extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_1F863F[];
+extern const u8 LittlerootTown_MaysHouse_2F_EventScript_1F958F[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

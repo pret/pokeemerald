@@ -260,8 +260,8 @@ gSpecials:: @ 81DBA64
 	def_special ValidateEReaderTrainer
 	def_special sub_8139228
 	def_special sub_80F94E8
-	def_special sub_816AE58
-	def_special sub_816AE98
+	def_special BedroomPC
+	def_special PlayerPC
 	def_special FieldShowRegionMap
 	def_special sub_807E73C
 	def_special sub_807EA10

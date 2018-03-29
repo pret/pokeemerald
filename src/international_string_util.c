@@ -42,7 +42,7 @@ s32 GetMaxWidthInMenuTable(const struct MenuAction *str, s32 arg1)
     return convert_pixel_width_to_tile_width(var);
 }
 
-s32 sub_81DB3D8(const struct MenuAction *str, u8* arg1, s32 arg2)
+s32 sub_81DB3D8(const struct MenuAction *str, const u8* arg1, s32 arg2)
 {
     s32 i, var;
 
