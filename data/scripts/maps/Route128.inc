@@ -189,7 +189,7 @@ Route128_EventScript_1F6CEA:: @ 81F6CEA
 	waitmovement 0
 	msgbox Route128_Text_2A2916, 4
 	setvar VAR_0x8004, 376
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 376
 	callstd 8
 	release
@@ -214,7 +214,7 @@ Route128_EventScript_1F6D4C:: @ 81F6D4C
 	waitmovement 0
 	msgbox Route128_Text_2A2AF9, 4
 	setvar VAR_0x8004, 386
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 386
 	callstd 8
 	release

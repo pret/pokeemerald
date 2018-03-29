@@ -497,7 +497,7 @@ gSpecials:: @ 81DBA64
 	def_special ChangeBoxPokemonNickname
 	def_special get_unknown_box_id
 	def_special sub_813B21C
-	def_special sub_81D1C20
+	def_special SetMatchCallRegisteredFlag
 	def_special sub_8175280
 	def_special sub_813B2E4
 	def_special sub_813B374

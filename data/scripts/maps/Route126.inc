@@ -56,7 +56,7 @@ Route126_EventScript_1F69A3:: @ 81F69A3
 	waitmovement 0
 	msgbox Route126_Text_2A1F5A, 4
 	setvar VAR_0x8004, 377
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 377
 	callstd 8
 	release

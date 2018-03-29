@@ -49,7 +49,7 @@ gStdScripts:: @ 81DC2A0
 	.4byte Std_5
 	.4byte Std_6
 	.4byte Std_ObtainDecoration
-	.4byte Std_8
+	.4byte Std_RegisteredInMatchCall
 	.4byte Std_9
 	.4byte Std_10
 
@@ -4075,7 +4075,7 @@ Underwater3_EventScript_2742C0:: @ 82742C0
 	setescapewarp ROUTE_129, 255, 43, 20
 	return
 
-Std_8:: @ 82742C9
+Std_RegisteredInMatchCall:: @ 82742C9
 	buffertrainerclassname 0, VAR_0x8000
 	buffertrainername 1, VAR_0x8000
 	closemessage

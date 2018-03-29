@@ -281,7 +281,7 @@ Route116_EventScript_1F2F03:: @ 81F2F03
 	waitmovement 0
 	msgbox Route116_Text_29BE71, 4
 	setvar VAR_0x8004, 273
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 273
 	callstd 8
 	release
@@ -297,7 +297,7 @@ Route116_EventScript_1F2F22:: @ 81F2F22
 Route116_EventScript_1F2F35:: @ 81F2F35
 	msgbox Route116_Text_29BDEF, 4
 	setvar VAR_0x8004, 273
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 273
 	callstd 8
 	release
@@ -342,7 +342,7 @@ Route116_EventScript_1F2FDF:: @ 81F2FDF
 	waitmovement 0
 	msgbox Route116_Text_29C096, 4
 	setvar VAR_0x8004, 280
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 280
 	callstd 8
 	release
@@ -358,7 +358,7 @@ Route116_EventScript_1F2FFE:: @ 81F2FFE
 Route116_EventScript_1F3011:: @ 81F3011
 	msgbox Route116_Text_29C052, 4
 	setvar VAR_0x8004, 280
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 280
 	callstd 8
 	release
