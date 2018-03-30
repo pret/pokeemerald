@@ -22,15 +22,6 @@
 	.byte 0 @padding
 .endm
 
-gUnknown_0855D2B8:: @ 855D2B8
-	.string "{UNK_CTRL_F9 8}000$"
-
-gUnknown_0855D2BE:: @ 855D2BE
-	.incbin "graphics/pokedex/caught_ball.4bpp"
-
-sText_TenDashes:: @ 855D2FE
-	.string "----------$"
-
 	.align 2
 gUnknown_0855D30C:: @ 855D30C
 	.string "$"
