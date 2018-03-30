@@ -70,7 +70,7 @@ gUnknown_03005DEC: @ 3005DEC
 gSelectedMapObject: @ 3005DF0
 	.space 0x4
 
-gUnknown_03005DF4: @ 3005DF4
+gMenuCallback: @ 3005DF4
 	.space 0x4
 
     .include "sound.o"
@@ -142,7 +142,7 @@ gCB2_AfterEvolution: @ 30061E8
 gUnknown_030061EC: @ 30061EC
 	.space 0x4
 
-    .include"save.o"
+    .include "save.o"
 
     .space 0x8
 
@@ -155,11 +155,7 @@ gUnknown_03006294: @ 3006294
 gUnknown_03006298: @ 3006298
 	.space 0x8
 
-gUnknown_030062A0: @ 30062A0
-	.space 0x10
-
-gUnknown_030062B0: @ 30062B0
-	.space 0x2C
+    .include "intro.o"
 
 gUnknown_030062DC: @ 30062DC
 	.space 0x4
@@ -182,11 +178,7 @@ gUnknown_030062F0: @ 30062F0
 gUnknown_030062F4: @ 30062F4
 	.space 0xC
 
-gUnknown_03006300: @ 3006300
-	.space 0x10
-
-gMultiuseListMenuTemplate: @ 3006310
-	.space 0x18
+	.include "list_menu.o"
 
 gUnknown_03006328: @ 3006328
 	.space 0x48

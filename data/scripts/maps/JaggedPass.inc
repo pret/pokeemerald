@@ -115,7 +115,7 @@ JaggedPass_EventScript_2307C8:: @ 82307C8
 	special sub_80B4808
 	msgbox JaggedPass_Text_230A2C, 4
 	setvar VAR_0x8004, 474
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 474
 	callstd 8
 	release
@@ -139,7 +139,7 @@ JaggedPass_EventScript_230827:: @ 8230827
 	special sub_80B4808
 	msgbox JaggedPass_Text_230BC6, 4
 	setvar VAR_0x8004, 216
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 216
 	callstd 8
 	release

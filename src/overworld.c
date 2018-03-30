@@ -161,7 +161,7 @@ extern void FieldEffectActiveListClear(void);
 extern void SetUpFieldTasks(void);
 extern void sub_81BE6B8(void);
 extern void sub_80AAFA4(void);
-extern void sub_809FA9C(void);
+extern void ShowStartMenu(void);
 extern void sub_80AEE84(void);
 extern void mapldr_default(void);
 extern void npc_paltag_set_load(u8);
@@ -2795,7 +2795,7 @@ static void sub_8087510(void)
 static void sub_808751C(void)
 {
     PlaySE(SE_WIN_OPEN);
-    sub_809FA9C();
+    ShowStartMenu();
     ScriptContext2_Enable();
 }
 

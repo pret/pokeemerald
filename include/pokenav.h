@@ -1,5 +1,6 @@
 #ifndef GUARD_POKENAV_H
 #define GUARD_POKENAV_H
+#include "player_pc.h"
 
 bool8 sub_81D5C18(void);
 bool8 sub_81D20BC(void *arg0);
@@ -13,5 +14,12 @@ void sub_81D3480(void *arg0, u8 arg1);
 void sub_81D2754(void *arg0, void *arg1);
 void sub_81D1F84(void *arg0, void *arg1, void *arg2);
 const u8 *sub_81D62AC(void);
+u8 sub_81D1C84(u8);
+u8 sub_81D1DC0(struct PlayerPCItemPageStruct *);
+void sub_81D1E90(struct PlayerPCItemPageStruct *);
+void sub_81D1EC0(void);
+void sub_81D1D04(u8);
+bool8 sub_81D1C44(u8);
+
 
 #endif //GUARD_POKENAV_H

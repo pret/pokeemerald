@@ -51,7 +51,7 @@ gText_EggNickname:: @ 85E8264
 gText_Pokemon:: @ 85E8268
 	.string "POKéMON$"
 
-gUnknown_085E8270:: @ 85E8270
+gProfBirchMatchCallName:: @ 85E8270
 	.string "PROF. BIRCH$"
 
 gText_MainMenuNewGame:: @ 85E827C
@@ -3704,13 +3704,13 @@ gText_LeaderLeftEndingChat:: @ 85ED2FA
 gText_RegisteredTextChanged:: @ 85ED325
 	.string "The registered text has been changed.\nIs it okay to save the game?$"
 
-gText_AlreadySavedFile:: @ 85ED368
+gText_AlreadySavedFile_Unused:: @ 85ED368
 	.string "There is already a saved file.\nIs it okay to overwrite it?$"
 
-gText_SavingDontTurnOff:: @ 85ED3A3
+gText_SavingDontTurnOff_Unused:: @ 85ED3A3
 	.string "SAVING…\nDON’T TURN OFF THE POWER.$"
 
-gText_PlayerSavedGame:: @ 85ED3C5
+gText_PlayerSavedGame_Unused:: @ 85ED3C5
 	.string "{SPECIAL_F7 0x00} saved the game.$"
 
 gText_IfLeaderLeavesChatEnds:: @ 85ED3D8
@@ -3746,46 +3746,46 @@ gText_ThankYou:: @ 85ED440
 gText_ByeBye:: @ 85ED44A
 	.string "BYE-BYE!$"
 
-gUnknown_085ED453:: @ 85ED453
+gMatchCallStevenStrategyText:: @ 85ED453
 	.string "Attack the weak points!$"
 
-gUnknown_085ED46B:: @ 85ED46B
+gMatchCall_StevenTrainersPokemonText:: @ 85ED46B
 	.string "Ultimate STEEL POKéMON.$"
 
-gUnknown_085ED483:: @ 85ED483
+gMatchCall_StevenSelfIntroductionText_Line1_BeforeMeteorFallsBattle:: @ 85ED483
 	.string "I’d climb even waterfalls$"
 
-gUnknown_085ED49D:: @ 85ED49D
+gMatchCall_StevenSelfIntroductionText_Line2_BeforeMeteorFallsBattle:: @ 85ED49D
 	.string "to find a rare stone!$"
 
-gUnknown_085ED4B3:: @ 85ED4B3
+gMatchCall_StevenSelfIntroductionText_Line1_AfterMeteorFallsBattle:: @ 85ED4B3
 	.string "I’m the strongest and most$"
 
-gUnknown_085ED4CE:: @ 85ED4CE
+gMatchCall_StevenSelfIntroductionText_Line2_AfterMeteorFallsBattle:: @ 85ED4CE
 	.string "energetic after all!$"
 
-gUnknown_085ED4E3:: @ 85ED4E3
+gMatchCall_BrendanStrategyText:: @ 85ED4E3
 	.string "Battle with knowledge!$"
 
-gUnknown_085ED4FA:: @ 85ED4FA
+gMatchCall_BrendanTrainersPokemonText:: @ 85ED4FA
 	.string "I will use various POKéMON.$"
 
-gUnknown_085ED516:: @ 85ED516
+gMatchCall_BrendanSelfIntroductionText_Line1:: @ 85ED516
 	.string "I’ll be a better POKéMON$"
 
-gUnknown_085ED52F:: @ 85ED52F
+gMatchCall_BrendanSelfIntroductionText_Line2:: @ 85ED52F
 	.string "prof than my father is!$"
 
-gUnknown_085ED547:: @ 85ED547
+gMatchCall_MayStrategyText:: @ 85ED547
 	.string "I’m not so good at battles.$"
 
-gUnknown_085ED563:: @ 85ED563
+gMatchCall_MayTrainersPokemonText:: @ 85ED563
 	.string "I’ll use any POKéMON!$"
 
-gUnknown_085ED579:: @ 85ED579
+gMatchCall_MaySelfIntroductionText_Line1:: @ 85ED579
 	.string "My POKéMON and I help$"
 
-gUnknown_085ED58F:: @ 85ED58F
+gMatchCall_MaySelfIntroductionText_Line2:: @ 85ED58F
 	.string "my father’s research.$"
 
 gText_HatchedFromEgg:: @ 85ED5A5
@@ -5242,70 +5242,70 @@ gText_Confirm3:: @ 85EFAE0
 gText_Cancel4:: @ 85EFAE8
 	.string "CANCEL$"
 
-gUnknown_085EFAEF:: @ 85EFAEF
+gMrStoneMatchCallDesc:: @ 85EFAEF
 	.string "DEVON PRES$"
 
-gUnknown_085EFAFA:: @ 85EFAFA
+gMrStoneMatchCallName:: @ 85EFAFA
 	.string "MR. STONE$"
 
-gUnknown_085EFB04:: @ 85EFB04
+gStevenMatchCallDesc:: @ 85EFB04
 	.string "HARD AS ROCK$"
 
-gUnknown_085EFB11:: @ 85EFB11
+gStevenMatchCallName:: @ 85EFB11
 	.string "STEVEN$"
 
-gUnknown_085EFB18:: @ 85EFB18
+gMayBrendanMatchCallDesc:: @ 85EFB18
 	.string "RAD NEIGHBOR$"
 
-gUnknown_085EFB25:: @ 85EFB25
+gNormanMatchCallDesc:: @ 85EFB25
 	.string "RELIABLE ONE$"
 
-gUnknown_085EFB32:: @ 85EFB32
+gMomMatchCallDesc:: @ 85EFB32
 	.string "CALM & KIND$"
 
-gUnknown_085EFB3E:: @ 85EFB3E
+gWallyMatchCallDesc:: @ 85EFB3E
 	.string "{PKMN} LOVER$"
 
-gUnknown_085EFB47:: @ 85EFB47
+gNormanMatchCallName:: @ 85EFB47
 	.string "DAD$"
 
-gUnknown_085EFB4B:: @ 85EFB4B
+gMomMatchCallName:: @ 85EFB4B
 	.string "MOM$"
 
-gUnknown_085EFB4F:: @ 85EFB4F
+gScottMatchCallDesc:: @ 85EFB4F
 	.string "ELUSIVE EYES$"
 
-gUnknown_085EFB5C:: @ 85EFB5C
+gScottMatchCallName:: @ 85EFB5C
 	.string "SCOTT$"
 
-gUnknown_085EFB62:: @ 85EFB62
+gRoxanneMatchCallDesc:: @ 85EFB62
 	.string "ROCKIN’ WHIZ$"
 
-gUnknown_085EFB6F:: @ 85EFB6F
+gBrawlyMatchCallDesc:: @ 85EFB6F
 	.string "THE BIG HIT$"
 
-gUnknown_085EFB7B:: @ 85EFB7B
+gWattsonMatchCallDesc:: @ 85EFB7B
 	.string "SWELL SHOCK$"
 
-gUnknown_085EFB87:: @ 85EFB87
+gFlanneryMatchCallDesc:: @ 85EFB87
 	.string "PASSION BURN$"
 
-gUnknown_085EFB94:: @ 85EFB94
+gWinonaMatchCallDesc:: @ 85EFB94
 	.string "SKY TAMER$"
 
-gUnknown_085EFB9E:: @ 85EFB9E
+gTateLizaMatchCallDesc:: @ 85EFB9E
 	.string "MYSTIC DUO$"
 
-gUnknown_085EFBA9:: @ 85EFBA9
+gJuanMatchCallDesc:: @ 85EFBA9
 	.string "DANDY CHARM$"
 
-gUnknown_085EFBB5:: @ 85EFBB5
+gEliteFourMatchCallDesc:: @ 85EFBB5
 	.string "ELITE FOUR$"
 
-gUnknown_085EFBC0:: @ 85EFBC0
+gChampionMatchCallDesc:: @ 85EFBC0
 	.string "CHAMPION$"
 
-gUnknown_085EFBC9:: @ 85EFBC9
+gProfBirchMatchCallDesc:: @ 85EFBC9
 	.string "{PKMN} PROF.$"
 
 gText_CommStandbyAwaitingOtherPlayer:: @ 85EFBD2

@@ -606,7 +606,6 @@ u8 sub_818E06C(void)
     }
 }
 
-#ifdef NONMATCHING
 static u8 sub_818E13C(void)
 {
     u8 retval;
@@ -627,9 +626,11 @@ static u8 sub_818E13C(void)
         len = sub_818E258(gUnknown_0203CD68->playerName);
         if (len == sub_818E258(gSaveBlock2Ptr->playerName))
         {
+            u8 *name = gUnknown_0203CD68->playerName;
             for (i = 0; i < len; i ++)
             {
-                if (gUnknown_0203CD68->playerName[i] != gSaveBlock2Ptr->playerName[i])
+                name = gUnknown_0203CD68->playerName;
+                if (name[i] != gSaveBlock2Ptr->playerName[i])
                 {
                     retval = 2;
                     break;
@@ -640,85 +641,6 @@ static u8 sub_818E13C(void)
     }
     return retval;
 }
-#else
-ASM_DIRECT static u8 sub_818E13C(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmovs r7, 0x1\n"
-                    "\tldr r5, =gUnknown_0203CD68\n"
-                    "\tldr r0, =gSaveBlock1Ptr\n"
-                    "\tldr r1, [r0]\n"
-                    "\tldr r2, =0x00003b58\n"
-                    "\tadds r0, r1, r2\n"
-                    "\tstr r0, [r5]\n"
-                    "\tldrb r0, [r0, 0x18]\n"
-                    "\tcmp r0, 0xFF\n"
-                    "\tbne _0818E174\n"
-                    "\tldr r0, =gStringVar1\n"
-                    "\tldr r1, =gText_Lady2\n"
-                    "\tbl StringCopy7\n"
-                    "\tmovs r7, 0\n"
-                    "\tb _0818E1DC\n"
-                    "\t.pool\n"
-                    "_0818E174:\n"
-                    "\tldr r4, =gStringVar1\n"
-                    "\tldr r0, =0x00003b70\n"
-                    "\tadds r1, r0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl StringCopy7\n"
-                    "\tldr r0, [r5]\n"
-                    "\tadds r0, 0x2D\n"
-                    "\tldrb r1, [r0]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl ConvertInternationalString\n"
-                    "\tldr r0, [r5]\n"
-                    "\tadds r0, 0x18\n"
-                    "\tbl sub_818E258\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tldr r6, =gSaveBlock2Ptr\n"
-                    "\tldr r0, [r6]\n"
-                    "\tbl sub_818E258\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tcmp r4, r0\n"
-                    "\tbne _0818E1DC\n"
-                    "\tldr r0, [r5]\n"
-                    "\tmovs r2, 0\n"
-                    "\tcmp r2, r4\n"
-                    "\tbcs _0818E1DC\n"
-                    "\tldr r1, [r6]\n"
-                    "\tldrb r0, [r0, 0x18]\n"
-                    "\tldrb r1, [r1]\n"
-                    "\tcmp r0, r1\n"
-                    "\tbne _0818E1DA\n"
-                    "_0818E1BA:\n"
-                    "\tadds r0, r2, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r2, r0, 24\n"
-                    "\tcmp r2, r4\n"
-                    "\tbcs _0818E1DC\n"
-                    "\tldr r0, =gUnknown_0203CD68\n"
-                    "\tldr r1, [r0]\n"
-                    "\tadds r1, 0x18\n"
-                    "\tadds r1, r2\n"
-                    "\tldr r0, =gSaveBlock2Ptr\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r0, r2\n"
-                    "\tldrb r1, [r1]\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0818E1BA\n"
-                    "_0818E1DA:\n"
-                    "\tmovs r7, 0x2\n"
-                    "_0818E1DC:\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1\n"
-                    "\t.pool");
-}
-#endif
 
 static u8 sub_818E1F4(void)
 {

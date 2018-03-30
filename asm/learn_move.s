@@ -903,7 +903,7 @@ sub_8160EA0: @ 8160EA0
 	ldrb r0, [r0]
 	ldr r1, =gUnknown_0203BC38
 	adds r2, r1, 0x2
-	bl sub_81AE6C8
+	bl DestroyListMenuTask
 	bl FreeAllWindowBuffers
 	ldr r0, [r4]
 	bl Free
@@ -988,7 +988,7 @@ sub_8160F50: @ 8160F50
 	ldr r4, =gUnknown_0203BC38
 	adds r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_81AE860
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0

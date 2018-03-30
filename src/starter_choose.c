@@ -25,12 +25,6 @@
 #define STARTER_PKMN_POS_X 120
 #define STARTER_PKMN_POS_Y 64
 
-// graphics
-extern const u32 gBirchHelpGfx[];
-extern const u32 gBirchBagTilemap[];
-extern const u32 gBirchGrassTilemap[];
-extern const u16 gBirchBagGrassPal[];
-
 // text
 extern const u8 gText_BirchInTrouble[];
 extern const u8 gText_ConfirmStarterChoice[];

@@ -29,7 +29,7 @@ Route106_EventScript_1EE4ED:: @ 81EE4ED
 	waitmovement 0
 	msgbox Route106_Text_2963E3, 4
 	setvar VAR_0x8004, 339
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 339
 	callstd 8
 	release

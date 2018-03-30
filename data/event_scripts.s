@@ -49,7 +49,7 @@ gStdScripts:: @ 81DC2A0
 	.4byte Std_5
 	.4byte Std_6
 	.4byte Std_ObtainDecoration
-	.4byte Std_8
+	.4byte Std_RegisteredInMatchCall
 	.4byte Std_9
 	.4byte Std_10
 
@@ -835,7 +835,7 @@ SlateportCity_BattleTentLobby_EventScript_27134F:: @ 827134F
 SootopolisCity_MysteryEventsHouse_1F_EventScript_27134F:: @ 827134F
 TrainerHill_Entrance_EventScript_27134F:: @ 827134F
 VerdanturfTown_BattleTentLobby_EventScript_27134F:: @ 827134F
-	special sub_809FF80
+	special SaveGame
 	waitstate
 	return
 
@@ -1161,7 +1161,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x376
 	setflag FLAG_0x374
 	setflag FLAG_0x375
-	setflag FLAG_0x3C1
+	setflag FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION
 	setflag FLAG_0x378
 	setflag FLAG_0x2F0
 	setflag FLAG_0x2F5
@@ -1177,7 +1177,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x38F
 	setflag FLAG_0x393
 	setflag FLAG_0x358
-	setflag FLAG_0x390
+	setflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
 	setflag FLAG_0x2FD
 	setflag FLAG_0x398
 	setflag FLAG_0x399
@@ -1788,7 +1788,7 @@ EventScript_271DBC:: @ 8271DBC
 EventScript_271DF9:: @ 8271DF9
 	playse SE_PC_LOGIN
 	msgbox gUnknown_082726C2, 4
-	special sub_816AE98
+	special PlayerPC
 	waitstate
 	goto EventScript_271DAC
 	end
@@ -4075,7 +4075,7 @@ Underwater3_EventScript_2742C0:: @ 82742C0
 	setescapewarp ROUTE_129, 255, 43, 20
 	return
 
-Std_8:: @ 82742C9
+Std_RegisteredInMatchCall:: @ 82742C9
 	buffertrainerclassname 0, VAR_0x8000
 	buffertrainername 1, VAR_0x8000
 	closemessage

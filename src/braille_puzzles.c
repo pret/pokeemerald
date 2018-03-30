@@ -25,7 +25,7 @@ enum
 };
 
 extern u8 gBraillePuzzleCallbackFlag;
-extern u8 gUnknown_085EFE74[][2];
+extern const u8 gUnknown_085EFE74[][2];
 
 void SealedChamberShakingEffect(u8);
 void sub_8179860(void);
@@ -375,37 +375,49 @@ bool8 FldEff_UsePuzzleEffect(void)
     return FALSE;
 }
 
-// can't get this one to match due to the weird macro-like varsets with strange bitshifting.
-// to note: 0x10000 is loaded in, and its obviously supposed to be 1, but i cant get 0x80 << 9 to be loaded in without using it directly.
-// maybe there's some way of writing it that works?
-#ifdef NONMATCHING
-// ShouldDoBrailleRegicePuzzle
 bool8 ShouldDoBrailleRegicePuzzle(void)
 {
     u8 i;
 
-    if (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x43)
+    if (gSaveBlock1Ptr->location.mapGroup == 0x18
+        && gSaveBlock1Ptr->location.mapNum == 0x43)
     {
-        // _08179A1A
         if (FlagGet(FLAG_SYS_BRAILLE_WAIT) != FALSE)
             return FALSE;
-        if (FlagGet(2) == FALSE)
+        if (FlagGet(FLAG_0x002) == FALSE)
             return FALSE;
-        if (FlagGet(3) == TRUE)
+        if (FlagGet(FLAG_0x003) == TRUE)
             return FALSE;
 
         for (i = 0; i < 36; i++)
         {
-            if (gSaveBlock1Ptr->pos.x == gUnknown_085EFE74[i][0] && gSaveBlock1Ptr->pos.y == gUnknown_085EFE74[i][1])
+            u8 xPos = gUnknown_085EFE74[i][0];
+            u8 yPos = gUnknown_085EFE74[i][1];
+            if (gSaveBlock1Ptr->pos.x == xPos && gSaveBlock1Ptr->pos.y == yPos)
             {
-                if (i < 16)
-                    VarSet(0x403B, (0x10000 << i | VarGet(0x403B) << 16) >> 16); // correct
-                else if (i < 32)
-                    VarSet(0x403C, (0x10000 << (i - 16) | VarGet(0x403C) << 16) >> 16); // hmm?
-                else
-                    VarSet(0x403D, (0x10000 << (i - 32) | VarGet(0x403D) << 16) >> 16); // hmm?
+                u16 varValue;
 
-                if (VarGet(0x403B) != 0xFFFF || VarGet(0x403C) != 0xFF || VarGet(0x403D) != 0xF)
+                if (i < 16)
+                {
+                    u16 val = VarGet(0x403B);
+                    val |= 1 << i;
+                    VarSet(0x403B, val);
+                }
+                else if (i < 32)
+                {
+                    u16 val = VarGet(0x403C);
+                    val |= 1 << (i - 16);
+                    VarSet(0x403C, val);
+                }
+                else
+                {
+                    u16 val = VarGet(0x403D);
+                    val |= 1 << (i - 32);
+                    VarSet(0x403D, val);
+                }
+
+                varValue = VarGet(0x403B);
+                if (varValue != 0xFFFF || VarGet(0x403C) != varValue || VarGet(0x403D) != 0xF)
                     return FALSE;
 
                 if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)
@@ -414,170 +426,10 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
                     return FALSE;
             }
         }
+
+        FlagSet(FLAG_0x003);
+        FlagClear(FLAG_0x002);
     }
-    // TODO: Find what flags 2 and 3 are.
-    FlagSet(3);
-    FlagClear(2);
+
     return FALSE;
 }
-#else
-ASM_DIRECT
-bool8 ShouldDoBrailleRegicePuzzle(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    ldr r4, =gSaveBlock1Ptr\n\
-    ldr r0, [r4]\n\
-    ldrh r1, [r0, 0x4]\n\
-    ldr r0, =0x00004318\n\
-    cmp r1, r0\n\
-    beq _08179A1A\n\
-    b _08179B5A\n\
-_08179A1A:\n\
-    ldr r0, =0x000008b1\n\
-    bl FlagGet\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08179A28\n\
-    b _08179B5A\n\
-_08179A28:\n\
-    movs r0, 0x2\n\
-    bl FlagGet\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _08179A36\n\
-    b _08179B5A\n\
-_08179A36:\n\
-    movs r0, 0x3\n\
-    bl FlagGet\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _08179A58\n\
-    b _08179B5A\n\
-    .pool\n\
-_08179A54:\n\
-    movs r0, 0x1\n\
-    b _08179B5C\n\
-_08179A58:\n\
-    movs r5, 0\n\
-    mov r8, r4\n\
-    ldr r4, =gUnknown_085EFE74\n\
-    adds r0, r4, 0x1\n\
-    mov r12, r0\n\
-    ldr r6, =0x0000403b\n\
-    ldr r1, =0x0000403c\n\
-    mov r9, r1\n\
-_08179A68:\n\
-    lsls r0, r5, 1\n\
-    adds r1, r0, r4\n\
-    add r0, r12\n\
-    ldrb r3, [r0]\n\
-    mov r7, r8\n\
-    ldr r2, [r7]\n\
-    movs r7, 0\n\
-    ldrsh r0, [r2, r7]\n\
-    ldrb r1, [r1]\n\
-    cmp r0, r1\n\
-    bne _08179B44\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r2, r1]\n\
-    cmp r0, r3\n\
-    bne _08179B44\n\
-    cmp r5, 0xF\n\
-    bhi _08179AB0\n\
-    adds r0, r6, 0\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    movs r1, 0x80\n\
-    lsls r1, 9\n\
-    lsls r1, r5\n\
-    orrs r1, r0\n\
-    lsrs r1, 16\n\
-    adds r0, r6, 0\n\
-    bl VarSet\n\
-    b _08179AF0\n\
-    .pool\n\
-_08179AB0:\n\
-    cmp r5, 0x1F\n\
-    bhi _08179AD2\n\
-    mov r0, r9\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    adds r2, r5, 0\n\
-    subs r2, 0x10\n\
-    movs r1, 0x80\n\
-    lsls r1, 9\n\
-    lsls r1, r2\n\
-    orrs r1, r0\n\
-    lsrs r1, 16\n\
-    mov r0, r9\n\
-    bl VarSet\n\
-    b _08179AF0\n\
-_08179AD2:\n\
-    ldr r4, =0x0000403d\n\
-    adds r0, r4, 0\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    adds r2, r5, 0\n\
-    subs r2, 0x20\n\
-    movs r1, 0x80\n\
-    lsls r1, 9\n\
-    lsls r1, r2\n\
-    orrs r1, r0\n\
-    lsrs r1, 16\n\
-    adds r0, r4, 0\n\
-    bl VarSet\n\
-_08179AF0:\n\
-    ldr r0, =0x0000403b\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    ldr r0, =0x0000ffff\n\
-    cmp r4, r0\n\
-    bne _08179B5A\n\
-    ldr r0, =0x0000403c\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, r4\n\
-    bne _08179B5A\n\
-    ldr r0, =0x0000403d\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0xF\n\
-    bne _08179B5A\n\
-    ldr r0, =gSaveBlock1Ptr\n\
-    ldr r0, [r0]\n\
-    ldr r1, [r0]\n\
-    ldr r0, =0x00150008\n\
-    cmp r1, r0\n\
-    beq _08179A54\n\
-    b _08179B5A\n\
-    .pool\n\
-_08179B44:\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x23\n\
-    bls _08179A68\n\
-    movs r0, 0x3\n\
-    bl FlagSet\n\
-    movs r0, 0x2\n\
-    bl FlagClear\n\
-_08179B5A:\n\
-    movs r0, 0\n\
-_08179B5C:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided");
-}
-#endif

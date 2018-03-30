@@ -6,7 +6,7 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "battle_ai_script_commands.h"
-#include "battle_link_817C95C.h"
+#include "battle_tv.h"
 #include "pokemon.h"
 #include "link.h"
 #include "util.h"
@@ -31,9 +31,8 @@ extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
-extern const struct BattleMove gBattleMoves[];
 
-extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
+extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
 extern void sub_806A068(u16, u8);
 extern void sub_81851A8(u8 *);
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
@@ -102,7 +101,7 @@ static void LinkPartnerBufferExecCompleted(void);
 static void sub_814B554(void);
 static u32 CopyLinkPartnerMonData(u8 monId, u8 *dst);
 static void SetLinkPartnerMonData(u8 monId);
-static void sub_814CC98(u8 bank, bool8 dontClearSubstituteBit);
+static void sub_814CC98(u8 battlerId, bool8 dontClearSubstituteBit);
 static void DoSwitchOutAnimation(void);
 static void LinkPartnerDoMoveAnimation(void);
 static void sub_814DCCC(u8 taskId);
@@ -1046,35 +1045,35 @@ static void LinkPartnerHandleSwitchInAnim(void)
     gBattlerControllerFuncs[gActiveBattler] = sub_814B69C;
 }
 
-static void sub_814CC98(u8 bank, bool8 dontClearSubstituteBit)
+static void sub_814CC98(u8 battlerId, bool8 dontClearSubstituteBit)
 {
     u16 species;
 
-    ClearTemporarySpeciesSpriteData(bank, dontClearSubstituteBit);
-    gBattlerPartyIndexes[bank] = gBattleBufferA[bank][1];
-    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
-    gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);
-    sub_806A068(species, GetBattlerPosition(bank));
+    ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
+    gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
+    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+    gUnknown_03005D7C[battlerId] = CreateInvisibleSpriteWithCallback(sub_805D714);
+    sub_806A068(species, GetBattlerPosition(battlerId));
 
-    gBattlerSpriteIds[bank] = CreateSprite(
+    gBattlerSpriteIds[battlerId] = CreateSprite(
       &gUnknown_0202499C,
-      GetBattlerSpriteCoord(bank, 2),
-      GetBattlerSpriteDefault_Y(bank),
-      sub_80A82E4(bank));
+      GetBattlerSpriteCoord(battlerId, 2),
+      GetBattlerSpriteDefault_Y(battlerId),
+      sub_80A82E4(battlerId));
 
-    gSprites[gUnknown_03005D7C[bank]].data[1] = gBattlerSpriteIds[bank];
-    gSprites[gUnknown_03005D7C[bank]].data[2] = bank;
+    gSprites[gUnknown_03005D7C[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
+    gSprites[gUnknown_03005D7C[battlerId]].data[2] = battlerId;
 
-    gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
-    gSprites[gBattlerSpriteIds[bank]].data[2] = species;
-    gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
+    gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
+    gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
+    gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
 
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[bank]], gBattleMonForms[bank]);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
 
-    gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
-    gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
+    gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
 
-    gSprites[gUnknown_03005D7C[bank]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
+    gSprites[gUnknown_03005D7C[battlerId]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
 static void LinkPartnerHandleReturnMonToBall(void)
@@ -1238,7 +1237,7 @@ static void LinkPartnerHandleMoveAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             gBattlerControllerFuncs[gActiveBattler] = LinkPartnerDoMoveAnimation;
-            sub_817E0FC(move, gWeatherMoveAnim, gAnimDisableStructPtr);
+            BattleTv_SetDataBasedOnMove(move, gWeatherMoveAnim, gAnimDisableStructPtr);
         }
     }
 }
@@ -1302,7 +1301,7 @@ static void LinkPartnerHandlePrintString(void)
     BufferStringBattle(*stringId);
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
-    sub_817C95C(*stringId);
+    BattleTv_SetDataBasedOnString(*stringId);
 }
 
 static void LinkPartnerHandlePrintSelectionString(void)
@@ -1373,11 +1372,11 @@ static void LinkPartnerHandleStatusIconUpdate(void)
 {
     if (!mplay_80342A4(gActiveBattler))
     {
-        u8 bank;
+        u8 battlerId;
 
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_STATUS_ICON);
-        bank = gActiveBattler;
-        gBattleSpritesDataPtr->healthBoxesData[bank].statusAnimActive = 0;
+        battlerId = gActiveBattler;
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].statusAnimActive = 0;
         gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedStatusAnimation;
     }
 }
@@ -1666,7 +1665,7 @@ static void LinkPartnerHandleBattleAnimation(void)
         else
             gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
 
-        sub_817E32C(animationId);
+        BattleTv_SetDataBasedOnAnimation(animationId);
     }
 }
 

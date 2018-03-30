@@ -6,7 +6,7 @@
 // Exported RAM declarations
 
 // Exported ROM declarations
-void c2_copyright_1(void);
+void CB2_InitCopyrightScreenAfterBootup(void);
 void CB2_InitCopyrightScreenAfterBootup(void);
 void CB2_InitCopyrightScreenAfterTitleScreen(void);
 void sub_816F2A8(u16, u16, u16, u16);

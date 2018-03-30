@@ -320,7 +320,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox gUnknown_08272D87, 4
-	special sub_816AE58
+	special BedroomPC
 	waitstate
 	releaseall
 	end

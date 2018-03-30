@@ -4866,21 +4866,3 @@ gUnknown_0831ACDC:: @ 831ACDC
 	.align 2
 gUnknown_0831ACE0:: @ 831ACE0
 	.byte 0xe0, 0xf0, 0xf0, 0xe0, 0xe0, 0x00, 0x00, 0x00
-
-@ 831ACE8
-	.include "data/type_effectiveness.inc"
-
-@ 831AE38
-	.include "data/text/type_names.inc"
-
-@ 831AEB8
-	.include "data/trainer_money.inc"
-
-@ 831AF98
-	.include "data/text/ability_descriptions.inc"
-
-@ 831B6DB
-	.include "data/text/ability_names.inc"
-
-@ 831BAD4
-	.include "data/text/ability_description_pointers.inc"

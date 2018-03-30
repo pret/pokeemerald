@@ -92,6 +92,6 @@
 #define ATK48_STAT_NEGATIVE         0x1
 #define ATK48_STAT_BY_TWO           0x2
 #define ATK48_BIT_x4                0x4
-#define ATK48_LOWER_FAIL_CHECK      0x8
+#define ATK48_DONT_CHECK_LOWER      0x8
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

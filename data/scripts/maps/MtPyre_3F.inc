@@ -25,7 +25,7 @@ MtPyre_3F_EventScript_2317AD:: @ 82317AD
 	waitmovement 0
 	msgbox MtPyre_3F_Text_231A49, 4
 	setvar VAR_0x8004, 9
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 9
 	callstd 8
 	release

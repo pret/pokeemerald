@@ -4,18 +4,15 @@
 #include "m4a.h"
 #include "palette.h"
 #include "sound.h"
+#include "constants/songs.h"
 #include "string_util.h"
 #include "window.h"
 #include "text.h"
+#include "blit.h"
 
-extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
-extern void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
-extern void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight);
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
-extern void CopyWindowToVram(u8 windowId, u8 mode);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-extern void PlaySE(u16 songNum);
 extern u8* UnkTextUtil_GetPtrI(u8 a1);
 extern int sub_8197964();
 
@@ -27,7 +24,6 @@ static u16 gLastTextBgColor;
 static u16 gLastTextFgColor;
 static u16 gLastTextShadowColor;
 
-extern struct Main gMain;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 const struct FontInfo *gFonts;
@@ -1986,7 +1982,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
             result = TRUE;
-            PlaySE(5);
+            PlaySE(SE_SELECT);
         }
     }
     return result;
@@ -2004,7 +2000,7 @@ bool16 TextPrinterWait(struct TextPrinter *textPrinter)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
             result = TRUE;
-            PlaySE(5);
+            PlaySE(SE_SELECT);
         }
     }
     return result;

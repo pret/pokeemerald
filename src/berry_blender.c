@@ -29,6 +29,7 @@
 #include "pokeblock.h"
 #include "trig.h"
 #include "tv.h"
+#include "item_menu.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -128,7 +129,6 @@ struct BerryBlenderData
 
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern u16 gSpecialVar_ItemId;
 extern u8 gInGameOpponentsNo;
 extern u8 gUnknown_020322D5;
 extern u8 gResultsWindowId;
@@ -155,13 +155,11 @@ extern void sub_81978B0(u16);
 extern void sub_800A418(void);
 extern u8 sub_800A9D8(void);
 extern bool8 sub_800A4D8(u8);
-extern void sub_8197DF8(u8 windowId, bool8 copyToVram);
 extern void sub_809882C(u8, u16, u8);
 extern void copy_textbox_border_tile_patterns_to_vram(u8, u16, u8);
 extern void sub_81AABF0(void (*callback)(void));
 extern void sub_800B4C0(void);
 extern void ClearLinkCallback(void);
-extern void CB2_ReturnToFieldContinueScript(void);
 extern void sub_8153430(void);
 extern bool8 sub_8153474(void);
 extern void sub_80EECEC(void);

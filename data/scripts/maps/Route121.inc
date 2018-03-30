@@ -84,7 +84,7 @@ Route121_EventScript_1F5EB7:: @ 81F5EB7
 	waitmovement 0
 	msgbox Route121_Text_29F25B, 4
 	setvar VAR_0x8004, 254
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 254
 	callstd 8
 	release
@@ -124,7 +124,7 @@ Route121_EventScript_1F5F66:: @ 81F5F66
 	waitmovement 0
 	msgbox Route121_Text_29F69F, 4
 	setvar VAR_0x8004, 127
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 127
 	callstd 8
 	release
@@ -169,7 +169,7 @@ Route121_EventScript_1F6024:: @ 81F6024
 	waitmovement 0
 	msgbox Route121_Text_29F80D, 4
 	setvar VAR_0x8004, 767
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 767
 	callstd 8
 	release

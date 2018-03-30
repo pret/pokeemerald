@@ -50,7 +50,7 @@ Route115_EventScript_1F29BA:: @ 81F29BA
 	waitmovement 0
 	msgbox Route115_Text_29B2B3, 4
 	setvar VAR_0x8004, 307
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 307
 	callstd 8
 	release
@@ -80,7 +80,7 @@ Route115_EventScript_1F2A33:: @ 81F2A33
 	waitmovement 0
 	msgbox Route115_Text_29B50B, 4
 	setvar VAR_0x8004, 183
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 183
 	callstd 8
 	release
@@ -105,7 +105,7 @@ Route115_EventScript_1F2A95:: @ 81F2A95
 	waitmovement 0
 	msgbox Route115_Text_29B6AB, 4
 	setvar VAR_0x8004, 427
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 427
 	callstd 8
 	release

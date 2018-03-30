@@ -104,7 +104,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F8D24
 	def_special sub_80F8C7C
 	def_special sub_80B3000
-	def_special sub_809FF80
+	def_special SaveGame
 	def_special sub_80FAFF8
 	def_special easy_chat_input_maybe
 	def_special sub_811EECC
@@ -260,8 +260,8 @@ gSpecials:: @ 81DBA64
 	def_special ValidateEReaderTrainer
 	def_special sub_8139228
 	def_special sub_80F94E8
-	def_special sub_816AE58
-	def_special sub_816AE98
+	def_special BedroomPC
+	def_special PlayerPC
 	def_special FieldShowRegionMap
 	def_special sub_807E73C
 	def_special sub_807EA10
@@ -497,7 +497,7 @@ gSpecials:: @ 81DBA64
 	def_special ChangeBoxPokemonNickname
 	def_special get_unknown_box_id
 	def_special sub_813B21C
-	def_special sub_81D1C20
+	def_special SetMatchCallRegisteredFlag
 	def_special sub_8175280
 	def_special sub_813B2E4
 	def_special sub_813B374

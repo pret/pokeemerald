@@ -79,7 +79,7 @@ Route112_EventScript_1F1EAD:: @ 81F1EAD
 	waitmovement 0
 	msgbox Route112_Text_29993C, 4
 	setvar VAR_0x8004, 627
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 627
 	callstd 8
 	release

@@ -112,9 +112,6 @@ extern const u8 gText_Cancel4[];
 extern const u8 gText_IsThisTheCorrectTime[];
 extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
-extern const u8 gText_Draw[];
-extern const u8 gText_Loss[];
-extern const u8 gText_Win[];
 
 extern const u8 gText_Var1AteTheVar2[];
 extern const u8 gText_Var1HappilyAteVar2[];
@@ -199,6 +196,23 @@ extern const u8 gText_Floor7[];
 extern const u8 gText_Peak[];
 extern const u8 gText_SafariBallStock[];
 extern const u8 gText_BattlePyramidFloor[];
+
+// save menu texts
+extern const u8 gText_ConfirmSave[];
+extern const u8 gText_DifferentSaveFile[];
+extern const u8 gText_AlreadySavedFile[];
+extern const u8 gText_SavingDontTurnOff[];
+extern const u8 gText_PlayerSavedGame[];
+extern const u8 gText_SaveError[];
+extern const u8 gText_SavingDontTurnOffPower[];
+extern const u8 gText_SavingPlayer[];
+extern const u8 gText_SavingBadges[];
+extern const u8 gText_SavingPokedex[];
+extern const u8 gText_SavingTime[];
+
+// Battle pyramid menu texts
+extern const u8 gText_BattlePyramidConfirmRest[];
+extern const u8 gText_BattlePyramidConfirmRetire[];
 
 // option menu texts
 extern const u8 gText_TextSpeedSlow[];
@@ -348,6 +362,11 @@ extern const u8 gText_DepositedVar2Var1s[];
 extern const u8 gText_NoRoomForItems[];
 extern const u8 gText_ThreeDashes[];
 
+//party menu text
+extern const u8 gText_PkmnHPRestoredByVar2[];
+extern const u8 gText_CantBeUsedOnPkmn[];
+
+//birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];
 extern const u8 gBirchDexRatingText_LessThan20[];
 extern const u8 gBirchDexRatingText_LessThan30[];
@@ -369,5 +388,46 @@ extern const u8 gBirchDexRatingText_LessThan180[];
 extern const u8 gBirchDexRatingText_LessThan190[];
 extern const u8 gBirchDexRatingText_LessThan200[];
 extern const u8 gBirchDexRatingText_DexCompleted[];
+
+//player pc text
+extern const u8 gText_WhatWouldYouLike[];
+extern const u8 gText_NoMailHere[];
+
+extern const u8 gText_TakeOutItemsFromPC[];
+extern const u8 gText_StoreItemsInPC[];
+extern const u8 gText_ThrowAwayItemsInPC[];
+extern const u8 gText_GoBackPrevMenu[];
+
+extern const u8 gText_ItemStorage[];
+extern const u8 gText_Mailbox[];
+extern const u8 gText_Decoration[];
+extern const u8 gText_TurnOff[];
+
+extern const u8 gText_WithdrawItem[];
+extern const u8 gText_DepositItem[];
+extern const u8 gText_TossItem[];
+extern const u8 gText_Cancel[];
+
+extern const u8 gText_Read[];
+extern const u8 gText_MoveToBag[];
+extern const u8 gText_Give2[];
+extern const u8 gText_Cancel2[];
+
+extern const u8 gText_NoItems[];
+extern const u8 gText_WhatToDoWithVar1sMail[];
+extern const u8 gText_MessageWillBeLost[];
+extern const u8 gText_BagIsFull[];
+
+extern const u8 gText_MailToBagMessageErased[];
+extern const u8 gText_GoBackPrevMenu[];
+extern const u8 gText_WithdrawHowManyItems[];
+extern const u8 gText_WithdrawXItems[];
+extern const u8 gText_TossHowManyVar1s[];
+extern const u8 gText_ThrewAwayVar2Var1s[];
+extern const u8 gText_NoRoomInBag[];
+extern const u8 gText_TooImportantToToss[];
+extern const u8 gText_ConfirmTossItems[];
+extern const u8 gText_MoveVar1Where[];
+
 
 #endif //GUARD_STRINGS_H

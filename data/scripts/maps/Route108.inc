@@ -40,7 +40,7 @@ Route108_EventScript_1EE729:: @ 81EE729
 	waitmovement 0
 	msgbox Route108_Text_296FD8, 4
 	setvar VAR_0x8004, 740
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 740
 	callstd 8
 	release

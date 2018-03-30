@@ -91,7 +91,7 @@ static void sub_81362E0(void);
 static void sub_8136344(void);
 static void HandlePokeblockListMenuItems(void);
 static void sub_81363BC(void);
-static void MovePokeblockMenuCursor(u32 pkblId, bool8 arg1, struct ListMenu *arg2);
+static void MovePokeblockMenuCursor(s32 pkblId, bool8 arg1, struct ListMenu *arg2);
 static void PutPokeblockInfoText(void);
 static void HandlePokeblockMenuCursor(u16 cursorPos, u16 arg1);
 static void PutPokeblockListMenuString(u8 *dst, u16 pkblId);
@@ -319,18 +319,18 @@ static const struct ListMenuTemplate sPokeblockListMenuTemplate =
     .unk_08 = NULL,
     .totalItems = 0,
     .maxShowed = 0,
-    .unk_10 = 1,
+    .windowId = 1,
     .unk_11 = 0,
     .unk_12 = 1,
-    .cursor_Y = 0,
+    .cursor_X = 0,
     .upText_Y = 1,
-    .cursorColor = 2,
-    .fillColor = 0,
-    .cursorShadowColor = 3,
-    .unk_16_0 = FALSE,
-    .spaceBetweenItems = 32,
-    .unk_16_7 = FALSE,
-    .unk_17_0 = 1,
+    .cursorPal = 2,
+    .fillValue = 0,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .unk_16_3 = 0,
+    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
+    .fontId = 1,
     .cursorKind = 1
 };
 
@@ -460,7 +460,7 @@ static bool8 InitPokeblockMenu(void)
         gMain.state++;
         break;
     case 10:
-        sub_8122344(&sPokeblockMenu->field_E75, FIELD_E75_COUNT);
+        sub_8122344(sPokeblockMenu->field_E75, FIELD_E75_COUNT);
         gMain.state++;
         break;
     case 11:
@@ -620,7 +620,7 @@ static void HandlePokeblockListMenuItems(void)
     sPokeblockMenu->items[i].id = LIST_B_PRESSED;
 
     gMultiuseListMenuTemplate = sPokeblockListMenuTemplate;
-    gMultiuseListMenuTemplate.unk_17_0 = 7;
+    gMultiuseListMenuTemplate.fontId = 7;
     gMultiuseListMenuTemplate.totalItems = sPokeblockMenu->itemsNo;
     gMultiuseListMenuTemplate.items = sPokeblockMenu->items;
     gMultiuseListMenuTemplate.maxShowed = sPokeblockMenu->maxShowed;
@@ -639,7 +639,7 @@ static void PutPokeblockListMenuString(u8 *dst, u16 pkblId)
     StringExpandPlaceholders(txtPtr, gText_LvVar1);
 }
 
-static void MovePokeblockMenuCursor(u32 pkblId, bool8 arg1, struct ListMenu *arg2)
+static void MovePokeblockMenuCursor(s32 pkblId, bool8 arg1, struct ListMenu *arg2)
 {
     if (arg1 != TRUE)
     {
@@ -869,7 +869,7 @@ static void Task_FreeDataAndExitPokeblockCase(u8 taskId)
         if (sPokeblockMenu->caseId == PBLOCK_CASE_FEEDER || sPokeblockMenu->caseId == PBLOCK_CASE_GIVE)
             gFieldCallback = sub_80AF168;
 
-        sub_81AE6C8(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+        DestroyListMenuTask(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         sub_8136418();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -893,7 +893,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
     {
         if (gMain.newKeys & SELECT_BUTTON)
         {
-            sub_81AE860(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+            ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
             if (sSavedPokeblockData.lastItemPage + sSavedPokeblockData.lastItemPos != sPokeblockMenu->itemsNo - 1)
             {
                 PlaySE(SE_SELECT);
@@ -908,7 +908,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
             u16 oldPosition = sSavedPokeblockData.lastItemPos;
             s32 itemId = ListMenuHandleInputGetItemId(data[0]);
 
-            sub_81AE860(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+            ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
             if (oldPosition != sSavedPokeblockData.lastItemPos)
             {
                 HandlePokeblockMenuCursor(oldPosition, 5);
@@ -945,7 +945,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
     if (gMain.newKeys & SELECT_BUTTON)
     {
         PlaySE(SE_SELECT);
-        sub_81AE860(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+        ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         HandlePokeblocksSwap(taskId, FALSE);
     }
     else
@@ -954,7 +954,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
         u16 var = sSavedPokeblockData.lastItemPos;
         s32 itemId = ListMenuHandleInputGetItemId(data[0]);
 
-        sub_81AE860(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+        ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         if (i != sSavedPokeblockData.lastItemPage || var != sSavedPokeblockData.lastItemPos)
         {
             for (i = 0; i < 9; i++)
@@ -996,7 +996,7 @@ static void HandlePokeblocksSwap(u8 taskId, bool8 noSwap)
     u16 swappedFromId = sSavedPokeblockData.lastItemPage + sSavedPokeblockData.lastItemPos;
 
     sPokeblockMenu->isSwapping = FALSE;
-    sub_81AE6C8(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
+    DestroyListMenuTask(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
 
     if (!noSwap && data[2] != swappedFromId && data[2] != swappedFromId - 1)
     {
@@ -1112,7 +1112,7 @@ static void HandleErasePokeblock(u8 taskId)
         lastPos = &sSavedPokeblockData.lastItemPos;
         data = gTasks[taskId].data;
 
-        sub_81AE6C8(data[0], lastPage, lastPos);
+        DestroyListMenuTask(data[0], lastPage, lastPos);
         HandlePokeblockMenuCursor(*lastPos, 5);
         SetMenuItemsCountAndMaxShowed();
         sub_81362E0();

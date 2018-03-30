@@ -15,7 +15,7 @@ MtPyre_6F_EventScript_231D67:: @ 8231D67
 	waitmovement 0
 	msgbox MtPyre_6F_Text_231E43, 4
 	setvar VAR_0x8004, 108
-	special sub_81D1C20
+	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 108
 	callstd 8
 	release

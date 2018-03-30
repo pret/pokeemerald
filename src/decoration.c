@@ -113,7 +113,7 @@ void sub_812719C(u8 taskId);
 void sub_81271CC(u8 taskId);
 void sub_8127268(u8 taskId);
 void sub_8127454(u8 *dest, u16 decorId);
-void sub_8127480(u32 a0, bool8 flag, struct ListMenu *menu);
+void sub_8127480(s32 a0, bool8 flag, struct ListMenu *menu);
 void sub_81274A0(u8 a0, s32 a1, u8 a2);
 void sub_8127620(u8 taskId);
 void sub_812764C(u8 taskId);
@@ -562,7 +562,7 @@ void SecretBasePC_Cancel(u8 taskId)
     }
     else
     {
-        sub_816B060(taskId);
+        ReshowPlayerPC(taskId);
     }
 }
 
@@ -801,7 +801,7 @@ void sub_8127330(u8 taskId)
     sDecorPCBuffer->items[i].name = sDecorPCBuffer->names[i];
     sDecorPCBuffer->items[i].id = -2;
     gMultiuseListMenuTemplate = gUnknown_085A6BD0;
-    gMultiuseListMenuTemplate.unk_10 = sDecorMenuWindowIndices[1];
+    gMultiuseListMenuTemplate.windowId = sDecorMenuWindowIndices[1];
     gMultiuseListMenuTemplate.totalItems = sDecorPCBuffer->unk_520;
     gMultiuseListMenuTemplate.items = sDecorPCBuffer->items;
     gMultiuseListMenuTemplate.maxShowed = sDecorPCBuffer->unk_521;
@@ -813,7 +813,7 @@ void sub_8127454(u8 *dest, u16 decorId)
     StringAppend(dest, gDecorations[decorId].name);
 }
 
-void sub_8127480(u32 a0, bool8 flag, struct ListMenu *menu)
+void sub_8127480(s32 a0, bool8 flag, struct ListMenu *menu)
 {
     if (flag != TRUE)
     {
@@ -892,7 +892,7 @@ void sub_812764C(u8 taskId)
     if (!gPaletteFade.active)
     {
         input = ListMenuHandleInputGetItemId(data[13]);
-        sub_81AE860(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
+        ListMenuGetScrollAndRow(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
         switch (input)
         {
             case -1:
@@ -905,7 +905,7 @@ void sub_812764C(u8 taskId)
                 PlaySE(SE_SELECT);
                 gCurDecorationIndex = input;
                 sub_8127554();
-                sub_81AE6C8(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
+                DestroyListMenuTask(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
                 sub_8126A58(1);
                 sub_81277A8();
                 free(sDecorPCBuffer);
@@ -1074,7 +1074,7 @@ void sub_8127A8C(u8 taskId)
     data = gTasks[taskId].data;
     sub_8127554();
     sub_81277A8();
-    sub_81AE6C8(data[13], NULL, NULL);
+    DestroyListMenuTask(data[13], NULL, NULL);
     free(sDecorPCBuffer);
     sub_8126E44(taskId);
 }
@@ -2507,30 +2507,27 @@ void sub_812A040(u8 left, u8 top, u8 right, u8 bottom)
     }
 }
 
-#ifdef NONMATCHING
 void sub_812A0E8(u8 taskId)
 {
     u8 i;
     u8 xOff;
     u8 yOff;
-    u8 decor;
-    register u8 decor asm("r1");
-    struct DecorRearrangementDataBuffer *data;
+    u8 var1;
+    u32 var2;
 
     sCurDecorSelectedInRearrangement = 0;
     if (sub_8129FC8(taskId) != TRUE)
     {
-        for (i = 0; i < gUnknown_0203A17C.size; i ++)
+        for (i = 0; i < gUnknown_0203A17C.size; i++)
         {
-            decor = gUnknown_0203A17C.items[i];
-            if (decor != DECOR_NONE)
+            var1 = gUnknown_0203A17C.items[i];
+            if (var1 != DECOR_NONE)
             {
-                data = &sDecorRearrangementDataBuffer[0];
-                sub_8129D8C(decor, data);
-                if (sub_8129E74(taskId, i, data) == TRUE)
+                sub_8129D8C(var1, &sDecorRearrangementDataBuffer[0]);
+                if (sub_8129E74(taskId, i, &sDecorRearrangementDataBuffer[0]) == TRUE)
                 {
-                    data->idx = i;
-                    sCurDecorSelectedInRearrangement ++;
+                    sDecorRearrangementDataBuffer[0].idx = i;
+                    sCurDecorSelectedInRearrangement++;
                     break;
                 }
             }
@@ -2539,95 +2536,13 @@ void sub_812A0E8(u8 taskId)
         {
             xOff = gUnknown_0203A17C.pos[sDecorRearrangementDataBuffer[0].idx] >> 4;
             yOff = gUnknown_0203A17C.pos[sDecorRearrangementDataBuffer[0].idx] & 0x0F;
-            sub_812A040(xOff, yOff - sDecorRearrangementDataBuffer[0].height + 1, xOff + sDecorRearrangementDataBuffer[0].width - 1, yOff); // Arithmetic register swap at the r2 argument: `add r2, r0, r2` instead of `add r2, r2, r0`
+            var1 = yOff - sDecorRearrangementDataBuffer[0].height + 1;
+            var2 = sDecorRearrangementDataBuffer[0].width + xOff - 1;
+
+            sub_812A040(xOff, var1, var2, yOff);
         }
     }
 }
-#else
-ASM_DIRECT void sub_812A0E8(u8 taskId)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r6, r0, 24\n"
-                    "\tldr r4, =sCurDecorSelectedInRearrangement\n"
-                    "\tmovs r0, 0\n"
-                    "\tstrb r0, [r4]\n"
-                    "\tadds r0, r6, 0\n"
-                    "\tbl sub_8129FC8\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tcmp r0, 0x1\n"
-                    "\tbeq _0812A18C\n"
-                    "\tmovs r5, 0\n"
-                    "\tldr r0, =gUnknown_0203A17C\n"
-                    "\tldrb r1, [r0, 0x8]\n"
-                    "\tcmp r5, r1\n"
-                    "\tbcs _0812A15A\n"
-                    "\tadds r7, r4, 0\n"
-                    "_0812A10E:\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r0, r5\n"
-                    "\tldrb r1, [r0]\n"
-                    "\tcmp r1, 0\n"
-                    "\tbeq _0812A14C\n"
-                    "\tldr r4, =sDecorRearrangementDataBuffer\n"
-                    "\tadds r0, r1, 0\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tbl sub_8129D8C\n"
-                    "\tadds r0, r6, 0\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tadds r2, r4, 0\n"
-                    "\tbl sub_8129E74\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tcmp r0, 0x1\n"
-                    "\tbne _0812A14C\n"
-                    "\tstrb r5, [r4]\n"
-                    "\tldrb r0, [r7]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstrb r0, [r7]\n"
-                    "\tb _0812A15A\n"
-                    "\t.pool\n"
-                    "_0812A14C:\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tldr r0, =gUnknown_0203A17C\n"
-                    "\tldrb r1, [r0, 0x8]\n"
-                    "\tcmp r5, r1\n"
-                    "\tbcc _0812A10E\n"
-                    "_0812A15A:\n"
-                    "\tldr r0, =sCurDecorSelectedInRearrangement\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0812A18C\n"
-                    "\tldr r0, =gUnknown_0203A17C\n"
-                    "\tldr r2, =sDecorRearrangementDataBuffer\n"
-                    "\tldrb r1, [r2]\n"
-                    "\tldr r0, [r0, 0x4]\n"
-                    "\tadds r0, r1\n"
-                    "\tldrb r1, [r0]\n"
-                    "\tlsrs r0, r1, 4\n"
-                    "\tmovs r3, 0xF\n"
-                    "\tands r3, r1\n"
-                    "\tldrb r1, [r2, 0x2]\n"
-                    "\tsubs r1, r3, r1\n"
-                    "\tadds r1, 0x1\n"
-                    "\tlsls r1, 24\n"
-                    "\tlsrs r1, 24\n"
-                    "\tldrb r2, [r2, 0x1]\n"
-                    "\tadds r2, r0\n"
-                    "\tsubs r2, 0x1\n"
-                    "\tlsls r2, 24\n"
-                    "\tlsrs r2, 24\n"
-                    "\tbl sub_812A040\n"
-                    "_0812A18C:\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.pool");
-}
-#endif
 
 void sub_812A1A0(u8 taskId)
 {
