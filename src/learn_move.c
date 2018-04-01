@@ -30,7 +30,7 @@ void sub_8160638(void) //TeachMoveTutorMove
 {
   ScriptContext2_Enable();
   CreateTask(sub_8160664, 0xA);
-  BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+  BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
 }
 
 void sub_8160664(u8 taskId)
@@ -43,56 +43,77 @@ void sub_8160664(u8 taskId)
   }
 }
 
-void sub_81606A0(void) //CB2_InitLearnMove
-{
-  //FIXME
-  void (*sub_81607EC)(void) = (void*)0x081607EC;
-  void (*sub_81D2824)(void*) = (void*)0x081D2824;
-  void (*sub_81610B8)(void) = (void*)0x081610B8;
-  void (*sub_8161280)(void) = (void*)0x08161280;
-
-  //Less calls than pokeruby, is it normal ?
-  ResetSpriteData();
-  FreeAllSpritePalettes();
-  ResetTasks();
-  clear_scheduled_bg_copies_to_vram();
-
-  //LearnMoveStruct**
-  //r1 = &gSpecialVar_0x8004; //What is this global ?
-  //u8* partyMon = gUnknown_0203BC34 + 0x44 //partyMon ?
-  //*partyMon = r1;
-  gUnknown_0203BC34 = AllocZeroed(0x118);//gUnknown_0203BC34 is a global pointer to LearnMoveStruct ?
-  gUnknown_0203BC34->partyMon = gSpecialVar_0x8004;
-
-  SetVBlankCallback(sub_8160624);
-  sub_81607EC();
-  sub_81D2824(0);
-
-  //gUnknown_0203BC38 ?
-  (&gUnknown_0203BC38)[0] = 0;
-  (&gUnknown_0203BC38)[2] = 0;
-  (&gUnknown_0203BC38)[4] = 0;
-
-  sub_8161280();
-  LoadSpriteSheet(/*FIXME &gUnknown_085CEBB0*/(void*)0x085CEBB0);
-  LoadSpritePalette(/*FIXME &gUnknown_085CEBB8*/(void*)0x085CEBB8);
-  sub_81610B8();
-
-  ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
-  FillPalette(0, 0, 2);
-  SetMainCallback2(/*FIXME sub_816082C*/(void*)0x0816082C);
-}
-
-/*
-void sub_8160740(void)
-{
-  ResetSpriteData();
-  FreeAllSpritePalettes();
-  ResetTasks();
-  clear_scheduled_bg_copies_to_vram();
-
-  gUnknown_0203BC34 = AllocZeroed(0x118);//gUnknown_0203BC34 is a global pointer to LearnMoveStruct ?
-  gUnknown_0203BC34->partyMon = gSpecialVar_0x8004;
-  gUnknown_0203BC34->unk2C6 = gSpecialVar_0x8005;
-}
-*/
+// void sub_81606A0(void) //CB2_InitLearnMove
+// {
+//   //FIXME
+//   void (*sub_81607EC)(void) = (void*)0x081607EC;
+//   void (*sub_81D2824)(u16) = (void*)0x081D2824;
+//   void (*sub_81610B8)(void) = (void*)0x081610B8;
+//   void (*sub_8161280)(void) = (void*)0x08161280;
+// 
+//   //Less calls than pokeruby, is it normal ?
+//   ResetSpriteData();
+//   FreeAllSpritePalettes();
+//   ResetTasks();
+//   clear_scheduled_bg_copies_to_vram();
+// 
+//   //LearnMoveStruct**
+//   //r1 = &gSpecialVar_0x8004; //What is this global ?
+//   //u8* partyMon = gUnknown_0203BC34 + 0x44 //partyMon ?
+//   //*partyMon = r1;
+//   gUnknown_0203BC34 = AllocZeroed(0x118);//gUnknown_0203BC34 is a global pointer to LearnMoveStruct ?
+//   gUnknown_0203BC34->partyMon = gSpecialVar_0x8004;
+// 
+//   SetVBlankCallback(sub_8160624);
+//   sub_81607EC();
+//   sub_81D2824(0);
+// 
+//   //gUnknown_0203BC38 ?
+//   (gUnknown_0203BC38)[0] = 0;
+//   (gUnknown_0203BC38)[2] = 0;
+//   (gUnknown_0203BC38)[4] = 0;
+// 
+//   sub_8161280();
+//   LoadSpriteSheet(/*FIXME &gUnknown_085CEBB0*/(void*)0x085CEBB0);
+//   LoadSpritePalette(/*FIXME &gUnknown_085CEBB8*/(void*)0x085CEBB8);
+//   sub_81610B8();
+// 
+//   ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+//   FillPalette(0, 0, 2);
+//   SetMainCallback2(/*FIXME sub_816082C*/(void*)0x0816082C);
+// }
+// 
+// void sub_8160740(void)
+// {
+//   void (*sub_81607EC)(void) = (void*)0x081607EC;
+//   void (*sub_81D2824)(u16) = (void*)0x081D2824;
+//   void (*sub_81610B8)(void) = (void*)0x081610B8;
+//   void (*sub_8161280)(void) = (void*)0x08161280;
+// 
+//   u8 data;
+// 
+//   ResetSpriteData();
+//   FreeAllSpritePalettes();
+//   ResetTasks();
+//   clear_scheduled_bg_copies_to_vram();
+// 
+//   gUnknown_0203BC34 = AllocZeroed(0x118);//gUnknown_0203BC34 is a global pointer to LearnMoveStruct ?
+//   gUnknown_0203BC34->partyMon = gSpecialVar_0x8004; //gUnknown_0203BC34 + 68
+//   gUnknown_0203BC34->unk2C6 = gSpecialVar_0x8005; //gUnknown_0203BC34 + 69
+// 
+//   SetVBlankCallback(sub_8160624);
+//   sub_81607EC();
+// 
+//   //gUnknown_0203BC38 ?
+//   sub_81D2824(*((u8*)&gUnknown_0203BC38 + 4));
+//   sub_8161280();
+// 
+//   LoadSpriteSheet(/*FIXME &gUnknown_085CEBB0*/(void*)0x085CEBB0);
+//   LoadSpritePalette(/*FIXME &gUnknown_085CEBB8*/(void*)0x085CEBB8);
+// 
+//   data = ListMenuInit(&gMultiuseListMenuTemplate, *gUnknown_0203BC38, *((u8*)gUnknown_0203BC38 + 2));
+//   *(u8*)(gUnknown_0203BC34 + 274) = data;
+//   FillPalette(0, 0, 2);
+//   SetMainCallback2(/*FIXME sub_816082C*/(void*)0x0816082C);
+// }
+// */

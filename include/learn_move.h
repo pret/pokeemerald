@@ -37,6 +37,6 @@ void sub_8160638(void);
 //const struct SpritePalette gUnknown_085CEBB8 = {gDexArrows_Pal, 5526};
 //const struct SpriteSheet gUnknown_085CEBB0 = {gDexArrows_Gfx, sizeof(gDexArrows_Gfx), 5525};
 
-void *gUnknown_0203BC38 = (void*)0x0203BC38;
+u8 *gUnknown_0203BC38 = (void*)0x0203BC38;
 
 #endif //GUARD_LEARN_MOVE_H

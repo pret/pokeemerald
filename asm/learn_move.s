@@ -67,7 +67,6 @@ _08160688:
 	thumb_func_end sub_8160664
 */
 
-/*
 	thumb_func_start sub_81606A0
 sub_81606A0: @ 81606A0
 	push {r4-r6,lr}
@@ -121,7 +120,6 @@ sub_81606A0: @ 81606A0
 	bx r0
 	.pool
 	thumb_func_end sub_81606A0
-*/
 
 	thumb_func_start sub_8160740
 sub_8160740: @ 8160740
@@ -148,7 +146,7 @@ sub_8160740: @ 8160740
 	adds r0, 0x45
 	strb r1, [r0]
 	ldr r0, =sub_8160624
-	bl SetVBlankCallback
+	bl SetVBlankCallback	//
 	bl sub_81607EC
 	ldr r4, =gUnknown_0203BC38
 	ldrb r0, [r4, 0x4]
@@ -157,7 +155,7 @@ sub_8160740: @ 8160740
 	ldr r0, =gUnknown_085CEBB0
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085CEBB8
-	bl LoadSpritePalette
+	bl LoadSpritePalette	//
 	bl sub_81610B8
 	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r4]
