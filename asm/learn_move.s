@@ -178,6 +178,7 @@ sub_8160740: @ 8160740
 	.pool
 	thumb_func_end sub_8160740
 
+/*
 	thumb_func_start sub_81607EC
 sub_81607EC: @ 81607EC
 	push {lr}
@@ -204,7 +205,9 @@ sub_81607EC: @ 81607EC
 	bx r0
 	.pool
 	thumb_func_end sub_81607EC
+*/
 
+/*
 	thumb_func_start sub_816082C
 sub_816082C: @ 816082C
 	push {lr}
@@ -217,6 +220,7 @@ sub_816082C: @ 816082C
 	pop {r0}
 	bx r0
 	thumb_func_end sub_816082C
+*/
 
 	thumb_func_start sub_816084C
 sub_816084C: @ 816084C
