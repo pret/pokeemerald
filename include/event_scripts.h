@@ -388,6 +388,7 @@ extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
 extern const u8 FieryPath_EventScript_2908FD[];
 extern const u8 EventScript_290CAE[];
 extern const u8 EventScript_2926F8[];
+extern const u8 Route111_EventScript_2907F0[];
 
 //player pc
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_1F863F[];
