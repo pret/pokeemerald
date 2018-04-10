@@ -131,7 +131,7 @@ SECTIONS {
         asm/pokemon_storage_system.o(.text);
         src/pokemon_icon.o(.text);
         asm/pokemon_icon.o(.text);
-        asm/script_movement.o(.text);
+        src/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
         src/mail_data.o(.text);
         src/map_name_popup.o(.text);
