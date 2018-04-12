@@ -139,35 +139,35 @@ static void sub_80985BC(u8 taskId)
 
 void sub_8098630(void)
 {
-    u8 mapObjectIdArray0, mapObjectIdArray1, taskId;
-    mapObjectIdArray0 = GetChosenApproachingTrainerMapObjectId(0);
+    u8 trainerObjectId1, trainerObjectId2, taskId;
+    trainerObjectId1 = GetChosenApproachingTrainerMapObjectId(0);
     if(gNoOfApproachingTrainers == 2)
     {
-        mapObjectIdArray1 = GetChosenApproachingTrainerMapObjectId(1);
-        sub_8098074(mapObjectIdArray0, mapObjectIdArray1);
+        trainerObjectId2 = GetChosenApproachingTrainerMapObjectId(1);
+        sub_8098074(trainerObjectId1, trainerObjectId2);
         taskId = CreateTask(sub_80985BC, 80);
-        gTasks[taskId].data[2] = mapObjectIdArray0;
-        if(!gMapObjects[mapObjectIdArray0].mapobj_bit_1)
+        gTasks[taskId].data[2] = trainerObjectId1;
+        if(!gMapObjects[trainerObjectId1].mapobj_bit_1)
         {
-            FreezeMapObject(&gMapObjects[mapObjectIdArray0]);
+            FreezeMapObject(&gMapObjects[trainerObjectId1]);
             gTasks[taskId].data[1] = 1;
         }
         taskId = CreateTask(sub_80985BC, 81);
-        gTasks[taskId].data[2] = mapObjectIdArray1;
-        if(!gMapObjects[mapObjectIdArray1].mapobj_bit_1)
+        gTasks[taskId].data[2] = trainerObjectId2;
+        if(!gMapObjects[trainerObjectId2].mapobj_bit_1)
         {
-            FreezeMapObject(&gMapObjects[mapObjectIdArray1]);
+            FreezeMapObject(&gMapObjects[trainerObjectId2]);
             gTasks[taskId].data[1] = 1;
         }
     }
     else
     {
-        FreezeMapObjectsExceptOne(mapObjectIdArray0);
+        FreezeMapObjectsExceptOne(trainerObjectId1);
         taskId = CreateTask(sub_80985BC, 80);
-        gTasks[taskId].data[2] = mapObjectIdArray0;
-        if(!gMapObjects[mapObjectIdArray0].mapobj_bit_1)
+        gTasks[taskId].data[2] = trainerObjectId1;
+        if(!gMapObjects[trainerObjectId1].mapobj_bit_1)
         {
-            FreezeMapObject(&gMapObjects[mapObjectIdArray0]);
+            FreezeMapObject(&gMapObjects[trainerObjectId1]);
             gTasks[taskId].data[1] = 1;
         }
     }

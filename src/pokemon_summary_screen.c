@@ -2778,23 +2778,23 @@ void sub_81C2C38(u8 a)
 
 u8 sub_81C2D2C(struct WindowTemplate *template, u8 a)
 {
-    u8 *r4 = &(gUnknown_0203CF1C->unk40CB[a]);
-    if (*r4 == 0xFF)
+    u8 *windowIdPtr = &(gUnknown_0203CF1C->unk40CB[a]);
+    if (*windowIdPtr == 0xFF)
     {
-        *r4 = AddWindow(&template[a]);
-        FillWindowPixelBuffer(*r4, 0);
+        *windowIdPtr = AddWindow(&template[a]);
+        FillWindowPixelBuffer(*windowIdPtr, 0);
     }
-    return *r4;
+    return *windowIdPtr;
 }
 
 void sub_81C2D68(u8 a)
 {
-    u8 *r4 = &(gUnknown_0203CF1C->unk40CB[a]);
-    if (*r4 != 0xFF)
+    u8 *windowIdPtr = &(gUnknown_0203CF1C->unk40CB[a]);
+    if (*windowIdPtr != 0xFF)
     {
-        ClearWindowTilemap(*r4);
-        RemoveWindow(*r4);
-        *r4 = 0xFF;
+        ClearWindowTilemap(*windowIdPtr);
+        RemoveWindow(*windowIdPtr);
+        *windowIdPtr = 0xFF;
     }
 }
 
