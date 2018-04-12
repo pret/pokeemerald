@@ -408,14 +408,13 @@ gUnknown_02039D88: @ 2039D88
 gUnknown_02039D8C: @ 2039D8C
 	.space 0x4
 
-gUnknown_02039D90: @ 2039D90
-	.space 0x40
+	.include "src/script_movement.o"
 
 gUnknown_02039DD0: @ 2039DD0
 	.space 0x4
 
-gUnknown_02039DD4: @ 2039DD4
-	.space 0x4
+	.include "src/map_name_popup.o"
+	.space 0x3
 
 gBagPockets: @ 2039DD8
 	.space 0x28
