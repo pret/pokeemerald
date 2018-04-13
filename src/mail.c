@@ -403,11 +403,11 @@ static bool8 MailReadBuildGraphics(void)
             switch (sMailRead->animsActive)
             {
                 case 1:
-                    sub_80D2F68(icon);
+                    LoadMonIconPalette(icon);
                     sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0, 0);
                     break;
                 case 2:
-                    sub_80D2F68(icon);
+                    LoadMonIconPalette(icon);
                     sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0, 0);
                     break;
             }
@@ -540,7 +540,7 @@ static void CB2_ExitMailReadFreeVars(void)
         {
             case 1:
             case 2:
-                sub_80D2FF0(sub_80D2E84(sMailRead->mail->species));
+                FreeMonIconPalette(sub_80D2E84(sMailRead->mail->species));
                 sub_80D2EF8(&gSprites[sMailRead->monIconSprite]);
         }
         memset(sMailRead, 0, sizeof(*sMailRead));

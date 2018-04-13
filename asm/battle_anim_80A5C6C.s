@@ -1224,7 +1224,7 @@ _080A65D8:
 	bl sub_80A62DC
 _080A65DE:
 	adds r0, r4, 0
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 	pop {r4}
 	pop {r0}
 	bx r0

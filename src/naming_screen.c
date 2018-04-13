@@ -75,7 +75,7 @@ static const u8 gSpriteImage_858BCB8[] = INCBIN_U8("graphics/naming_screen/pc_ic
 static const u16 gUnknown_0858BD78[] = INCBIN_U16("graphics/naming_screen/0.gbapal");
 static const u16 gUnknown_0858BD98[] = INCBIN_U16("graphics/naming_screen/1.gbapal");
 
-static const u8 *const gUnknown_0858BDB8[] = 
+static const u8 *const gUnknown_0858BDB8[] =
 {
     gText_PkmnTransferredSomeonesPC,
     gText_PkmnTransferredLanettesPC,
@@ -85,7 +85,7 @@ static const u8 *const gUnknown_0858BDB8[] =
 
 static const u8 gUnknown_0858BDC8[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
 
-static const struct BgTemplate gUnknown_0858BE00[] = 
+static const struct BgTemplate gUnknown_0858BE00[] =
 {
     {
         .bg = 0,
@@ -226,10 +226,10 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
         gNamingScreenData->monPersonality = monPersonality;
         gNamingScreenData->destBuffer = destBuffer;
         gNamingScreenData->returnCallback = returnCallback;
-        
+
         if (templateNum == 0)
             StartTimer1();
-        
+
         SetMainCallback2(C2_NamingScreen);
     }
 }
@@ -316,15 +316,15 @@ static void sub_80E2FA4(void)
 static void NamingScreen_InitBGs(void)
 {
     u8 i;
-    
+
     DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
     DmaClear32(3, (void *)OAM, OAM_SIZE);
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
-    
+
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_0858BE00, 4);
-    
+
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -333,21 +333,21 @@ static void NamingScreen_InitBGs(void)
     ChangeBgY(2, 0, 0);
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
-    
+
     sub_81971D0();
     sub_8197200();
-    
+
     for (i = 0; i < 5; i++)
         gNamingScreenData->windows[i] = AddWindow(&gUnknown_0858BE10[i]);
-    
+
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0xC, 0x8));
-    
+
     SetBgTilemapBuffer(1, gNamingScreenData->tilemapBuffer1);
     SetBgTilemapBuffer(2, gNamingScreenData->tilemapBuffer2);
     SetBgTilemapBuffer(3, gNamingScreenData->tilemapBuffer3);
-    
+
     FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 0x20, 0x20);
     FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 0x20, 0x20);
     FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 0x20, 0x20);
@@ -511,7 +511,7 @@ static bool8 MainState_WaitFadeOutAndExit(void)
 static void DisplaySentToPCMessage(void)
 {
     u8 stringToDisplay = 0;
-    
+
     if (!sub_813B260())
     {
         StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
@@ -524,10 +524,10 @@ static void DisplaySentToPCMessage(void)
         StringCopy(gStringVar3, GetBoxNamePtr(get_unknown_box_id()));
         stringToDisplay = 2;
     }
-    
+
     if (FlagGet(FLAG_SYS_PC_LANETTE))
         stringToDisplay++;
-    
+
     StringExpandPlaceholders(gStringVar4, gUnknown_0858BDB8[stringToDisplay]);
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     gTextFlags.flag_0 = TRUE;
@@ -538,10 +538,10 @@ static void DisplaySentToPCMessage(void)
 static bool8 sub_80E3604(void)
 {
     RunTextPrinters();
-    
+
     if (!IsTextPrinterActive(0) && (gMain.newKeys & A_BUTTON))
         gNamingScreenData->state = MAIN_STATE_BEGIN_FADE_OUT;
-    
+
     return FALSE;
 }
 
@@ -562,17 +562,17 @@ static bool8 MainState_WaitPageSwap(void)
     s16 cursorX;
     s16 cursorY;
     bool32 var3;
-        
+
     if (IsPageSwapAnimNotInProgress())
     {
-        
+
         GetCursorPos(&cursorX, &cursorY);
         var3 = (cursorX == GetCurrentPageColumnCount());
-        
+
         gNamingScreenData->state = MAIN_STATE_HANDLE_INPUT;
         gNamingScreenData->currentPage++;
         gNamingScreenData->currentPage %= 3;
-        
+
         if (var3)
         {
             cursorX = GetCurrentPageColumnCount();
@@ -582,7 +582,7 @@ static bool8 MainState_WaitPageSwap(void)
             if (cursorX >= GetCurrentPageColumnCount())
                 cursorX = GetCurrentPageColumnCount() - 1;
         }
-        
+
         SetCursorPos(cursorX, cursorY);
         sub_80E4E5C();
         SetInputState(INPUT_STATE_ENABLED);
@@ -603,7 +603,7 @@ static bool8 PageSwapAnimState_1(struct Task *);
 static bool8 PageSwapAnimState_2(struct Task *);
 static bool8 PageSwapAnimState_Done(struct Task *);
 
-static bool8 (*const sPageSwapAnimStateFuncs[])(struct Task *) = 
+static bool8 (*const sPageSwapAnimStateFuncs[])(struct Task *) =
 {
     PageSwapAnimState_Init,
     PageSwapAnimState_1,
@@ -754,7 +754,7 @@ static void Task_80E39BC(u8 taskId)
         task->data[3] += task->data[4];
         task->data[6] += task->data[4];
     }
-    
+
     if (task->data[3] == 16 && task->data[6] == 22)
     {
         task->data[4] = -4;
@@ -893,7 +893,7 @@ static void CursorInit(void)
 static void SetCursorPos(s16 x, s16 y)
 {
     struct Sprite *cursorSprite = &gSprites[gNamingScreenData->cursorSpriteId];
-    
+
     if (x < gUnknown_0858BEA0[sub_80E3274()])
         cursorSprite->pos1.x = gUnknown_0858BEA3[x + sub_80E3274() * 8] + 38;
     else
@@ -909,7 +909,7 @@ static void SetCursorPos(s16 x, s16 y)
 static void GetCursorPos(s16 *x, s16 *y)
 {
     struct Sprite *cursorSprite = &gSprites[gNamingScreenData->cursorSpriteId];
-    
+
     *x = cursorSprite->data[0];
     *y = cursorSprite->data[1];
 }
@@ -1133,7 +1133,7 @@ static void CreateInputTargetIcon(void)
 
 static void TaskDummy2(void)
 {
-    
+
 }
 
 static void NamingScreen_CreatePlayerIcon(void)
@@ -1160,7 +1160,7 @@ static void NamingScreen_CreateMonIcon(void)
 {
     u8 spriteId;
 
-    sub_80D2F04();
+    LoadMonIconPalettes();
     spriteId = CreateMonIcon(gNamingScreenData->monSpecies, SpriteCallbackDummy, 0x38, 0x28, 0, gNamingScreenData->monPersonality, 1);
     gSprites[spriteId].oam.priority = 3;
 }
@@ -1331,7 +1331,7 @@ static void InputState_Disabled(struct Task *task)
 static void InputState_Enabled(struct Task *task)
 {
     task->tKeyboardEvent = 0;
-    
+
     if (gMain.newKeys & A_BUTTON)
         task->tKeyboardEvent = KBEVENT_PRESSED_A;
     else if (gMain.newKeys & B_BUTTON)
@@ -1454,7 +1454,7 @@ static void sub_80E4894(void)
 static void sub_80E48E8(void)
 {
     u8 buffer[0x20];
-    
+
     StringCopy(buffer, gSpeciesNames[gNamingScreenData->monSpecies]);
     StringAppendN(buffer, gNamingScreenData->template->title, 15);
     FillWindowPixelBuffer(gNamingScreenData->windows[3], 0x11);
@@ -1492,10 +1492,10 @@ static void sub_80E498C(void)
 
 static void TaskDummy3(void)
 {
-    
+
 }
 
-static const u8 sGenderColors[2][3] = 
+static const u8 sGenderColors[2][3] =
 {
     {0, 9, 8},
     {0, 5, 4}
@@ -1505,7 +1505,7 @@ static void sub_80E49BC(void)
 {
     u8 genderSymbol[2];
     bool8 isFemale = FALSE;
-    
+
     StringCopy(genderSymbol, gText_MaleSymbol);
 
     if (gNamingScreenData->monGender != MON_GENDERLESS)
@@ -1575,7 +1575,7 @@ static bool8 sub_80E4B54(void)
     sub_80E4D10();
     CopyBgTilemapBufferToVram(3);
     PlaySE(SE_SELECT);
-    
+
     if (GetPreviousTextCaretPosition() != gNamingScreenData->template->maxChars - 1)
         return FALSE;
     else
@@ -1633,7 +1633,7 @@ static void sub_80E4CF8(u8 bg, const void *src)
 
 static void nullsub_10(u8 a1, u8 a2)
 {
-    
+
 }
 
 static void sub_80E4D10(void)
@@ -1643,18 +1643,18 @@ static void sub_80E4D10(void)
     u16 unk2;
     u8 maxChars = gNamingScreenData->template->maxChars;
     u16 unk = gNamingScreenData->inputCharBaseXPos - 0x40;
-    
+
     FillWindowPixelBuffer(gNamingScreenData->windows[2], 0x11);
-    
+
     for (i = 0; i < maxChars; i++)
     {
         temp[0] = gNamingScreenData->textBuffer[i];
         temp[1] = gExpandedPlaceholder_Empty[0];
         unk2 = (sub_80E503C(temp[0]) == 1) ? 2 : 0;
-        
+
         PrintTextOnWindow(gNamingScreenData->windows[2], 1, temp, i * 8 + unk + unk2, 1, 0xFF, NULL);
     }
-    
+
     sub_80E498C();
     CopyWindowToVram(gNamingScreenData->windows[2], 2);
     PutWindowTilemap(gNamingScreenData->windows[2]);
@@ -1674,12 +1674,12 @@ static const struct TextColorThing sUnkColorStruct =
     }
 };
 
-static const u8 sFillValues[3] = 
+static const u8 sFillValues[3] =
 {
     0xEE, 0xDD, 0xFF
 };
 
-static const u8 *const sUnkColors[3] = 
+static const u8 *const sUnkColors[3] =
 {
     sUnkColorStruct.colors[1],
     sUnkColorStruct.colors[0],
@@ -1689,18 +1689,18 @@ static const u8 *const sUnkColors[3] =
 static void sub_80E4DE4(u8 window, u8 a1)
 {
     u8 i;
-    
+
     FillWindowPixelBuffer(window, sFillValues[a1]);
-    
+
     for (i = 0; i < 4; i++)
     {
         box_print(window, 1, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
     }
-    
+
     PutWindowTilemap(window);
 }
 
-static const u8 *const gUnknown_0858BF98[] = 
+static const u8 *const gUnknown_0858BF98[] =
 {
     gUnknown_08DD4620,
     gUnknown_08DD46E0,
@@ -1714,7 +1714,7 @@ static void sub_80E4E5C(void)
     u8 unk3;
     u8 bg1Priority = GetGpuReg(REG_OFFSET_BG1CNT) & 3;
     u8 bg2Priority = GetGpuReg(REG_OFFSET_BG2CNT) & 3;
-    
+
     if (bg1Priority > bg2Priority)
     {
         unk1 = 1;
@@ -1727,7 +1727,7 @@ static void sub_80E4E5C(void)
         unk2 = 2;
         unk3 = gNamingScreenData->windows[1];
     }
-    
+
     sub_80E4CF8(unk1, gUnknown_0858BF98[gNamingScreenData->currentPage]);
     sub_80E4DE4(unk3, sub_80E3254());
     nullsub_10(unk1, sub_80E3254());
@@ -1737,7 +1737,7 @@ static void sub_80E4E5C(void)
 static void sub_80E4EF0(void)
 {
     const u8 color[3] = { 15, 1, 2 };
-    
+
     FillWindowPixelBuffer(gNamingScreenData->windows[4], 0xFF);
     box_print(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
     PutWindowTilemap(gNamingScreenData->windows[4]);
@@ -1787,7 +1787,7 @@ static void sub_80E501C(void)
 static bool8 sub_80E503C(u8 character)
 {
     u8 i;
-    
+
     for (i = 0; gUnknown_0858BDC8[i] != EOS; i++)
     {
         if (character == gUnknown_0858BDC8[i])
@@ -1987,20 +1987,20 @@ static const struct SpriteFrameImage gUnknown_0858C080[] =
     {gSpriteImage_858BCB8, sizeof(gSpriteImage_858BCB8)},
 };
 
-static const union AnimCmd gSpriteAnim_858C090[] = 
+static const union AnimCmd gSpriteAnim_858C090[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gSpriteAnim_858C098[] = 
+static const union AnimCmd gSpriteAnim_858C098[] =
 {
     ANIMCMD_FRAME(4, 8),
     ANIMCMD_FRAME(8, 8),
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_858C0A4[] = 
+static const union AnimCmd gSpriteAnim_858C0A4[] =
 {
     ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(1, 2),
@@ -2023,7 +2023,7 @@ static const union AnimCmd *const gSpriteAnimTable_858C0BC[] =
     gSpriteAnim_858C0A4
 };
 
-static const struct SpriteTemplate gUnknown_0858C0C0 = 
+static const struct SpriteTemplate gUnknown_0858C0C0 =
 {
     .tileTag = 0x0002,
     .paletteTag = 0x0004,
@@ -2034,7 +2034,7 @@ static const struct SpriteTemplate gUnknown_0858C0C0 =
     .callback = sub_80E4084
 };
 
-static const struct SpriteTemplate gUnknown_0858C0D8 = 
+static const struct SpriteTemplate gUnknown_0858C0D8 =
 {
     .tileTag = 0x0003,
     .paletteTag = 0x0001,
@@ -2045,7 +2045,7 @@ static const struct SpriteTemplate gUnknown_0858C0D8 =
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_0858C0F0 = 
+static const struct SpriteTemplate gUnknown_0858C0F0 =
 {
     .tileTag = 0x0004,
     .paletteTag = 0x0004,
@@ -2056,7 +2056,7 @@ static const struct SpriteTemplate gUnknown_0858C0F0 =
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_0858C108 = 
+static const struct SpriteTemplate gUnknown_0858C108 =
 {
     .tileTag = 0x0000,
     .paletteTag = 0x0006,
@@ -2067,7 +2067,7 @@ static const struct SpriteTemplate gUnknown_0858C108 =
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_0858C120 = 
+static const struct SpriteTemplate gUnknown_0858C120 =
 {
     .tileTag = 0x0001,
     .paletteTag = 0x0007,
@@ -2078,7 +2078,7 @@ static const struct SpriteTemplate gUnknown_0858C120 =
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_0858C138 = 
+static const struct SpriteTemplate gUnknown_0858C138 =
 {
     .tileTag = 0x0007,
     .paletteTag = 0x0005,
@@ -2089,7 +2089,7 @@ static const struct SpriteTemplate gUnknown_0858C138 =
     .callback = sub_80E3B30
 };
 
-static const struct SpriteTemplate sSpriteTemplate_InputArrow = 
+static const struct SpriteTemplate sSpriteTemplate_InputArrow =
 {
     .tileTag = 0x000A,
     .paletteTag = 0x0003,
@@ -2100,7 +2100,7 @@ static const struct SpriteTemplate sSpriteTemplate_InputArrow =
     .callback = sub_80E3C20
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Underscore = 
+static const struct SpriteTemplate sSpriteTemplate_Underscore =
 {
     .tileTag = 0x000B,
     .paletteTag = 0x0003,
@@ -2111,7 +2111,7 @@ static const struct SpriteTemplate sSpriteTemplate_Underscore =
     .callback = sub_80E3C6C
 };
 
-static const struct SpriteTemplate gUnknown_0858C180 = 
+static const struct SpriteTemplate gUnknown_0858C180 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x0000,
@@ -2122,7 +2122,7 @@ static const struct SpriteTemplate gUnknown_0858C180 =
     .callback = SpriteCallbackDummy
 };
 
-static const u8* const gUnknown_0858C198[][4] = 
+static const u8* const gUnknown_0858C198[][4] =
 {
     {
         gUnknown_0862B88D,
