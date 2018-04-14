@@ -410,7 +410,7 @@ _081B03A6:
 	b _081B048C
 	.pool
 _081B03B8:
-	bl sub_80D2F04
+	bl LoadMonIconPalettes
 	b _081B0484
 _081B03BE:
 	bl party_menu_add_per_mon_objects
@@ -10793,7 +10793,7 @@ _081B5BD0:
 sub_81B5BDC: @ 81B5BDC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -10817,7 +10817,7 @@ _081B5C02:
 	thumb_func_start sub_81B5C08
 sub_81B5C08: @ 81B5C08
 	push {lr}
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81B5C08

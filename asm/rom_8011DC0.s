@@ -17828,7 +17828,7 @@ _0801BD1A:
 	bl CopyBgTilemapBufferToVram
 	b _0801BD86
 _0801BD34:
-	bl sub_80D2F04
+	bl LoadMonIconPalettes
 	b _0801BD86
 _0801BD3A:
 	movs r0, 0x1
@@ -17991,7 +17991,7 @@ _0801BE56:
 	.pool
 _0801BE94:
 	bl sub_801C61C
-	bl sub_80D2F9C
+	bl FreeMonIconPalettes
 	b _0801BEDA
 _0801BE9E:
 	ldr r0, =gUnknown_02022C60

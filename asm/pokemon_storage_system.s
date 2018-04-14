@@ -7034,7 +7034,7 @@ _080CAEFA:
 	thumb_func_start sub_80CAF04
 sub_80CAF04: @ 80CAF04
 	push {r4-r6,lr}
-	bl sub_80D2F04
+	bl LoadMonIconPalettes
 	movs r2, 0
 	ldr r3, =gUnknown_02039D08
 	ldr r5, =0x00000b08

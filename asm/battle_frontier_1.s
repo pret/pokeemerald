@@ -3326,7 +3326,7 @@ _0819064A:
 	adds r6, 0x1
 	cmp r6, 0xF
 	ble _0819064A
-	bl sub_80D2F04
+	bl LoadMonIconPalettes
 	ldr r0, =sub_8190CD4
 	movs r1, 0
 	bl CreateTask
@@ -3695,7 +3695,7 @@ sub_8190938: @ 8190938
 	cmp r0, 0
 	bne _0819094A
 	adds r0, r1, 0
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 _0819094A:
 	pop {r0}
 	bx r0
@@ -3710,7 +3710,7 @@ sub_8190950: @ 8190950
 	cmp r0, 0
 	bne _08190962
 	adds r0, r4, 0
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 _08190962:
 	ldrh r0, [r4, 0x22]
 	adds r1, r0, 0x4
@@ -3774,7 +3774,7 @@ sub_81909CC: @ 81909CC
 	cmp r0, 0
 	bne _081909DE
 	adds r0, r4, 0
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 _081909DE:
 	ldrh r0, [r4, 0x22]
 	subs r1, r0, 0x4
@@ -3838,7 +3838,7 @@ sub_8190A48: @ 8190A48
 	cmp r0, 0
 	bne _08190A5A
 	adds r0, r4, 0
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 _08190A5A:
 	ldrh r0, [r4, 0x20]
 	adds r1, r0, 0x4
@@ -3902,7 +3902,7 @@ sub_8190AC4: @ 8190AC4
 	cmp r0, 0
 	bne _08190AD6
 	adds r0, r4, 0
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 _08190AD6:
 	ldrh r0, [r4, 0x20]
 	subs r1, r0, 0x4
@@ -6471,7 +6471,7 @@ _0819218E:
 	adds r6, 0x1
 	cmp r6, 0xF
 	ble _08192158
-	bl sub_80D2F9C
+	bl FreeMonIconPalettes
 	ldr r4, =gUnknown_0203CD78
 	ldr r0, [r4]
 	bl Free
