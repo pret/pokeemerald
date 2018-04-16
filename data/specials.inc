@@ -137,10 +137,10 @@ gSpecials:: @ 81DBA64
 	def_special TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	def_special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	def_special TV_CheckMonOTIDEqualsPlayerID
-	def_special sub_8122998
-	def_special sub_81229C8
+	def_special BufferTrendyPhraseString
+	def_special TrendyPhraseIsOld
 	def_special sub_811EF6C
-	def_special sub_8122A30
+	def_special GetDewfordHallPaintingNameIndex
 	def_special sub_80D6EDC
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons

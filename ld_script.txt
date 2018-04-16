@@ -165,7 +165,7 @@ SECTIONS {
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
-        asm/dewford_trend.o(.text);
+        src/dewford_trend.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
         asm/cute_sketch.o(.text);
