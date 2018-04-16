@@ -5,7 +5,7 @@ DewfordTown_Hall_EventScript_1FD4D0:: @ 81FD4D0
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
-	special sub_81229C8
+	special TrendyPhraseIsOld
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_Hall_EventScript_1FD4EF
 	msgbox DewfordTown_Hall_Text_1FD818, 4
@@ -87,7 +87,7 @@ DewfordTown_Hall_EventScript_1FD590:: @ 81FD590
 DewfordTown_Hall_EventScript_1FD5A0:: @ 81FD5A0
 	lockall
 	call DewfordTown_Hall_EventScript_271E8B
-	special sub_8122A30
+	special GetDewfordHallPaintingNameIndex
 	switch VAR_RESULT
 	case 0, DewfordTown_Hall_EventScript_1FD607
 	case 4, DewfordTown_Hall_EventScript_1FD607
@@ -133,7 +133,7 @@ DewfordTown_Hall_EventScript_1FD63B:: @ 81FD63B
 
 DewfordTown_Hall_EventScript_1FD647:: @ 81FD647
 	call DewfordTown_Hall_EventScript_271E8B
-	special sub_8122A30
+	special GetDewfordHallPaintingNameIndex
 	switch VAR_RESULT
 	case 0, DewfordTown_Hall_EventScript_1FD6AD
 	case 1, DewfordTown_Hall_EventScript_1FD6AD
