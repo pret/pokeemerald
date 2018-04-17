@@ -2864,4 +2864,8 @@ extern const u8 gBerryPalette_Enigma[];
 //credits
 extern const u8 gCreditsCopyrightEnd_Gfx[];
 
+//pokenav condition marker
+extern const u8 gPokenavConditionMarker_Gfx[];
+extern const u16 gPokenavConditionMarker_Pal[];
+
 #endif //GUARD_GRAPHICS_H

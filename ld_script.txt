@@ -161,7 +161,7 @@ SECTIONS {
         asm/battle_anim_80FE840.o(.text);
         src/bike.o(.text);
         asm/easy_chat.o(.text);
-        asm/mon_markings.o(.text);
+        src/mon_markings.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
@@ -455,7 +455,7 @@ SECTIONS {
         data/battle_anim_80FE840.o(.rodata);
         src/bike.o(.rodata);
         data/easy_chat.o(.rodata);
-        data/mon_markings.o(.rodata);
+        src/mon_markings.o(.rodata);
         data/mauville_old_man.o(.rodata);
         src/mail.o(.rodata);
         data/menu_helpers.o(.rodata);

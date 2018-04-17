@@ -556,9 +556,7 @@ gUnknown_0203A11C: @ 203A11C
 
 gUnknown_0203A120: @ 203A120
 	.space 0x4
-
-gUnknown_0203A124: @ 203A124
-	.space 0x4
+	.include "src/mon_markings.o"
 
 gUnknown_0203A128: @ 203A128
 	.space 0x4
