@@ -222,7 +222,7 @@ gCamera: @ 2037334
 gUnknown_02037340: @ 2037340
 	.space 0x8
 
-gUnknown_02037348: @ 2037348
+gUnusedBikeCameraAheadPanback: @ 2037348
 	.space 0x4
 
 gUnknown_0203734C: @ 203734C

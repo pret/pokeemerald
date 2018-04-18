@@ -17,10 +17,12 @@
 #define GATE_ROT_ACW(arm, longArm) GATE_ROT(ROTATE_ANTICLOCKWISE, arm, longArm)
 #define GATE_ROT_NONE 255
 
+// static functions
 static void SpriteCallback_RotatingGate(struct Sprite *sprite);
 static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY);
 static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite);
 
+// enums
 enum
 {
     /*
@@ -178,6 +180,7 @@ enum
     PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6,
 };
 
+// structure
 struct RotatingGatePuzzle
 {
     s16 x;
@@ -192,6 +195,7 @@ struct Coords8
     s8 deltaY;
 };
 
+// .rodata
 // Fortree
 static const struct RotatingGatePuzzle sRotatingGate_FortreePuzzleConfig[] =
 {
@@ -614,10 +618,12 @@ static const u8 sRotatingGate_ArmLayout[][4 * 2] =
     },
 };
 
+// ewram
 static EWRAM_DATA u8 gRotatingGate_GateSpriteIds[ROTATING_GATE_PUZZLE_MAX] = {0};
 static EWRAM_DATA const struct RotatingGatePuzzle *gRotatingGate_PuzzleConfig = NULL;
 static EWRAM_DATA u8 gRotatingGate_PuzzleCount = 0;
 
+// text
 static s32 GetCurrentMapRotatingGatePuzzleType(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FORTREE_CITY_GYM) &&
