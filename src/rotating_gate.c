@@ -646,7 +646,7 @@ static void RotatingGate_ResetAllGateOrientations(void)
     s32 i;
     u8 *ptr;
 
-    ptr = (u8 *)GetVarPointer(0x4000);
+    ptr = (u8 *)GetVarPointer(VAR_0x4000);
 
     for (i = 0; i < gRotatingGate_PuzzleCount; i++)
     {
@@ -656,12 +656,12 @@ static void RotatingGate_ResetAllGateOrientations(void)
 
 static s32 RotatingGate_GetGateOrientation(u8 gateId)
 {
-    return ((u8 *)GetVarPointer(0x4000))[gateId];
+    return ((u8 *)GetVarPointer(VAR_0x4000))[gateId];
 }
 
 static void RotatingGate_SetGateOrientation(u8 gateId, u8 orientation)
 {
-    ((u8 *)GetVarPointer(0x4000))[gateId] = orientation;
+    ((u8 *)GetVarPointer(VAR_0x4000))[gateId] = orientation;
 }
 
 static void RotatingGate_RotateInDirection(u8 gateId, u32 rotationDirection)
@@ -671,18 +671,12 @@ static void RotatingGate_RotateInDirection(u8 gateId, u32 rotationDirection)
     if (rotationDirection == ROTATE_ANTICLOCKWISE)
     {
         if (orientation)
-        {
             orientation--;
-        }
         else
-        {
             orientation = GATE_ORIENTATION_270;
-        }
     }
     else
-    {
         orientation = ++orientation % GATE_ORIENTATION_MAX;
-    }
 
     RotatingGate_SetGateOrientation(gateId, orientation);
 }
@@ -776,8 +770,7 @@ static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY)
     return spriteId;
 }
 
-/*
-static*/ void SpriteCallback_RotatingGate(struct Sprite *sprite)
+static void SpriteCallback_RotatingGate(struct Sprite *sprite)
 {
     u8 rotationDirection;
     u8 orientation;
@@ -812,8 +805,7 @@ static*/ void SpriteCallback_RotatingGate(struct Sprite *sprite)
     sprite->data[1] = ROTATE_NONE;
 }
 
-/*
-static*/ void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite)
+static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite)
 {
     u16 x;
     s16 x2;
