@@ -203,7 +203,7 @@ SECTIONS {
         src/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
-        asm/battle_anim_sound_tasks.o(.text);
+        src/battle_anim_sound_tasks.o(.text);
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_815A0D4.o(.text);
