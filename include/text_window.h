@@ -5,11 +5,11 @@
 
 struct TilesPal
 {
-    const u32 *tiles;
+    const u8 *tiles;
     const u16 *pal;
 };
 
-extern const u32 gTextWindowFrame1_Gfx[];
+extern const u8 gTextWindowFrame1_Gfx[];
 extern const u16 gTextWindowFrame1_Pal[];
 
 const struct TilesPal* GetWindowFrameTilesPal(u8 id);

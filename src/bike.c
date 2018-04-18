@@ -12,7 +12,6 @@
 
 extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
-extern bool8 gUnknown_02037348;
 
 extern u8 sub_8093514(u8 direction);
 extern u8 sub_808B980(u8 direction);
@@ -989,7 +988,7 @@ bool8 player_should_look_direction_be_enforced_upon_movement(void)
 
 void GetOnOffBike(u8 transitionFlags)
 {
-    gUnknown_02037348 = FALSE;
+    gUnusedBikeCameraAheadPanback = FALSE;
 
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {

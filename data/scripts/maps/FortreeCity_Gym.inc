@@ -4,7 +4,7 @@ FortreeCity_Gym_MapScripts:: @ 82165AB
 	.byte 0
 
 FortreeCity_Gym_MapScript1_2165B6: @ 82165B6
-	special sub_80FBE90
+	special RotatingGate_InitPuzzle
 	end
 
 FortreeCity_Gym_MapScript2_2165BA: @ 82165BA

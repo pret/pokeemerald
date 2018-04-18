@@ -89,7 +89,7 @@ SECTIONS {
         src/overworld.o(.text);
         asm/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
-        asm/field_camera.o(.text);
+        src/field_camera.o(.text);
         src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         src/field_map_obj.o(.text);
@@ -154,14 +154,14 @@ SECTIONS {
         src/pokemon_size_record.o(.text);
         asm/fldeff_80F9BCC.o(.text);
         src/field_special_scene.o(.text);
-        asm/rotating_gate.o(.text);
+        src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80FC4F4.o(.text);
         src/item_use.o(.text);
         asm/battle_anim_80FE840.o(.text);
         src/bike.o(.text);
         asm/easy_chat.o(.text);
-        asm/mon_markings.o(.text);
+        src/mon_markings.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
@@ -450,12 +450,12 @@ SECTIONS {
         src/pokemon_size_record.o(.rodata)
         data/field_effect_misc.o(.rodata);
         data/field_special_scene.o(.rodata);
-        data/rotating_gate.o(.rodata);
+        src/rotating_gate.o(.rodata);
         data/item_use.o(.rodata);
         data/battle_anim_80FE840.o(.rodata);
         src/bike.o(.rodata);
         data/easy_chat.o(.rodata);
-        data/mon_markings.o(.rodata);
+        src/mon_markings.o(.rodata);
         data/mauville_old_man.o(.rodata);
         src/mail.o(.rodata);
         data/menu_helpers.o(.rodata);

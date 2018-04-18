@@ -15,9 +15,15 @@ struct LinkPlayerMapObject
     u8 mode;
 };
 
+// Exported RAM declarations
 extern struct WarpData gUnknown_020322DC;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 
+extern u16 *gBGTilemapBuffers1;
+extern u16 *gBGTilemapBuffers2;
+extern u16 *gBGTilemapBuffers3;
+
+// Exported ROM declarations
 extern const struct UCoords32 gUnknown_08339D64[];
 
 void DoWhiteOut(void);

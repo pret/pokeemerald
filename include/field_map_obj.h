@@ -91,6 +91,8 @@ void sub_808F23C(const struct MapObject *mapObject, u8 movementType);
 void sub_808F208(const struct MapObject *mapObject);
 void npc_coords_shift_still(struct MapObject *pObject);
 void FieldObjectMoveDestCoords(struct MapObject *pObject, u32 unk_19, s16 *pInt, s16 *pInt1);
+u8 AddCameraObject(u8 linkedSpriteId);
+void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y);
 
 // Exported data declarations
 
