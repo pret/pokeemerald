@@ -9,12 +9,7 @@
 #include "sprite.h"
 #include "text_window.h"
 
-
-#ifdef GERMAN
-#define MENU_TEXT_SPRITE_X_OFFSET 24
-#else
 #define MENU_TEXT_SPRITE_X_OFFSET 32
-#endif
 
 // static functions
 static void sub_811FC80(s16, s16, u16, u16);

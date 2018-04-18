@@ -522,15 +522,7 @@ gUnknown_0203A018: @ 203A018
 gUnknown_0203A034: @ 203A034
 	.space 0x4
 
-gUnknown_0203A038: @ 203A038
-	.space 0xC
-
-gUnknown_0203A044: @ 203A044
-	.space 0x4
-
-gUnknown_0203A048: @ 203A048
-	.space 0x4
-
+    .include "src/rotating_gate.o"
     .include "src/safari_zone.o"
 
 gUnknown_0203A0F4: @ 203A0F4
