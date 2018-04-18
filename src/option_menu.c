@@ -146,23 +146,7 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 1:
-    {
-        u8 *addr;
-        u32 size;
-
-        addr = (u8 *)VRAM;
-        size = 0x18000;
-        while (1)
-        {
-            DmaFill16(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill16(3, 0, addr, size);
-                break;
-            }
-        }
+        DmaClearLarge16(3, (void*)(VRAM), VRAM_SIZE, 0x1000);
         DmaClear32(3, OAM, OAM_SIZE);
         DmaClear16(3, PLTT, PLTT_SIZE);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
@@ -189,7 +173,6 @@ void CB2_InitOptionMenu(void)
         ShowBg(0);
         ShowBg(1);
         gMain.state++;
-    }
         break;
     case 2:
         ResetPaletteFade();
