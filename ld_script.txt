@@ -434,7 +434,7 @@ SECTIONS {
         data/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
-		src/items.o(.rodata);
+		src/item.o(.rodata);
         data/contest.o(.rodata);
         data/shop.o(.rodata);
         src/berry.o(.rodata);
