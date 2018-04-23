@@ -2,7 +2,13 @@
 #include "item.h"
 #include "item_use.h"
 #include "constants/items.h"
-//encode test
+//#include "item_data_constants.h"
+#define POCKET_ITEMS		0x01
+#define POCKET_POKE_BALLS	0x02
+#define POCKET_TM_HM		0x03
+#define POCKET_BERRIES		0x04
+#define POCKET_KEY_ITEMS	0x05
+
 const u8 gDummyItemDescription[] = _("?????$");
 //pokeballs
 const u8 gMasterBallItemDescription[] = _("The best BALL that\ncatches a POKéMON\nwithout fail.$");
@@ -364,7 +370,7 @@ const struct Item gItems[] = {
 		.type = 0,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 0,
 	},
 	
@@ -381,7 +387,7 @@ const struct Item gItems[] = {
 		.type = 1,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 1,
 	},
 	
@@ -398,7 +404,7 @@ const struct Item gItems[] = {
 		.type = 2,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 2,
 	},
 
@@ -415,7 +421,7 @@ const struct Item gItems[] = {
 		.type = 3,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 3,
 	},
 	
@@ -432,7 +438,7 @@ const struct Item gItems[] = {
 		.type = 4,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 4,
 	},
 	
@@ -449,7 +455,7 @@ const struct Item gItems[] = {
 		.type = 5,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 5,
 	},
 	
@@ -466,7 +472,7 @@ const struct Item gItems[] = {
 		.type = 6,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 6,
 	},
 	
@@ -483,7 +489,7 @@ const struct Item gItems[] = {
 		.type = 7,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 7,
 	},
 	
@@ -500,7 +506,7 @@ const struct Item gItems[] = {
 		.type = 8,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 8,
 	},
 	
@@ -517,7 +523,7 @@ const struct Item gItems[] = {
 		.type = 9,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 9,
 	},
 	
@@ -532,9 +538,9 @@ const struct Item gItems[] = {
 		.unk19 = 0,
 		.pocket = POCKET_POKE_BALLS,
 		.type = 10,
-		.ItemUseFunc fieldUseFunc = NULL,
+		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.ItemUseFunc battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 10,
 	},
 	
@@ -551,7 +557,7 @@ const struct Item gItems[] = {
 		.type = 11,
 		.fieldUseFunc = NULL,
 		.battleUsage = 2,
-		.battleUseFunc = ItemUseInBattle_Pokeball,
+		.battleUseFunc = ItemUseInBattle_PokeBall,
 		.secondaryId = 11,
 	},
 	
@@ -778,7 +784,7 @@ const struct Item gItems[] = {
 	},
 	[ITEM_FRESH_WATER] = {
 		.name = _("FRESH WATER$"),
-		.itemId = ITEM_FRESH_wATER,
+		.itemId = ITEM_FRESH_WATER,
 		.price = 200,
 		.holdEffect = 0,
 		.holdEffectParam = 50,
@@ -1213,7 +1219,7 @@ const struct Item gItems[] = {
 		.price = 200,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
-		.description = gItemDescription,
+		.description = gGreenShardItemDescription,
 		.importance = 0,
 		.unk19 = 0,
 		.pocket = POCKET_ITEMS,
@@ -1418,7 +1424,7 @@ const struct Item gItems[] = {
 		.price = 9800,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
-		.description = gHpUpItemDescription,
+		.description = gHPUpItemDescription,
 		.importance = 0,
 		.unk19 = 0,
 		.pocket = POCKET_ITEMS,
@@ -1465,7 +1471,7 @@ const struct Item gItems[] = {
 
 	[ITEM_CARBOS] = {
 		.name = _("CARBOS$"),
-		.itemId = ITEM_,
+		.itemId = ITEM_CARBOS,
 		.price = 9800,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
@@ -2926,8 +2932,8 @@ const struct Item gItems[] = {
 	},
 
 	[ITEM_WEPEAR_BERRY] = {
-		.name = _("WEAPER BERRY$"),
-		.itemId = ITEM_WEAPER_BERRY,
+		.name = _("WEPEAR BERRY$"),
+		.itemId = ITEM_WEPEAR_BERRY,
 		.price = 20,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
@@ -3542,7 +3548,7 @@ const struct Item gItems[] = {
 	},
 
 	[ITEM_KINGS_ROCK] = {
-		.name = _("KING'S ROCK$"),
+		.name = _("KING’S ROCK$"),
 		.itemId = ITEM_KINGS_ROCK,
 		.price = 100,
 		.holdEffect = 30,
@@ -3717,7 +3723,7 @@ const struct Item gItems[] = {
 		.price = 200,
 		.holdEffect = 40,
 		.holdEffectParam = 0,
-		.description = gLuckyItemDescription,
+		.description = gLuckyEggItemDescription,
 		.importance = 0,
 		.unk19 = 0,
 		.pocket = POCKET_ITEMS,
@@ -3915,7 +3921,7 @@ const struct Item gItems[] = {
 		.secondaryId = 0,
 	},
 
-	[ITEM_MYSTIC_wATER] = {
+	[ITEM_MYSTIC_WATER] = {
 		.name = _("MYSTIC WATER$"),
 		.itemId = ITEM_MYSTIC_WATER,
 		.price = 100,
@@ -4057,7 +4063,7 @@ const struct Item gItems[] = {
 		.price = 100,
 		.holdEffect = 60,
 		.holdEffectParam = 10,
-		.description = gSilScarfItemDescription,
+		.description = gSilkScarfItemDescription,
 		.importance = 0,
 		.unk19 = 0,
 		.pocket = POCKET_ITEMS,
@@ -5285,7 +5291,7 @@ const struct Item gItems[] = {
 
 	[ITEM_TM01] = {
 		.name = _("TM$01"),
-		.itemId = ITEM_01TM,
+		.itemId = ITEM_TM01,
 		.price = 3000,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
@@ -5302,7 +5308,7 @@ const struct Item gItems[] = {
 
 	[ITEM_TM02] = {
 		.name = _("TM02$"),
-		.itemId = ITEM_02TM,
+		.itemId = ITEM_TM02,
 		.price = 3000,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
@@ -5319,7 +5325,7 @@ const struct Item gItems[] = {
 
 	[ITEM_TM03] = {
 		.name = _("TM03$"),
-		.itemId = ITEM_03TM,
+		.itemId = ITEM_TM03,
 		.price = 3000,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
@@ -5374,7 +5380,7 @@ const struct Item gItems[] = {
 		.price = 3000,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
-		.description = gTMItemDescription,
+		.description = gTM06ItemDescription,
 		.importance = 0,
 		.unk19 = 0,
 		.pocket = POCKET_TM_HM,
@@ -6398,7 +6404,7 @@ const struct Item gItems[] = {
 		.price = 0,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
-		.description = gItemDescription,
+		.description = gOldAmberItemDescription,
 		.importance = 1,
 		.unk19 = 0,
 		.pocket = POCKET_KEY_ITEMS,
@@ -6462,7 +6468,7 @@ const struct Item gItems[] = {
 
 	[ITEM_DOME_FOSSIL] = {
 		.name = _("DOME FOSSIL$"),
-		.itemId = ITEM_DOME_FOSSILE,
+		.itemId = ITEM_DOME_FOSSIL,
 		.price = 0,
 		.holdEffect = 0,
 		.holdEffectParam = 0,
