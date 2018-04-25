@@ -25,17 +25,6 @@ enum
     KEYITEMS_POCKET
 };
 
-enum
-{
-    POCKET_ITEMS = 1, 
-    POCKET_POKE_BALLS,
-    POCKET_TM_HM,
-    POCKET_BERRIES,
-    POCKET_KEY_ITEMS,
-};
-#include "item_use.h"
-#include "data/text/item_descriptions.h"
-#include "data/items.h"
 u16 GetBagItemQuantity(u16* quantity)
 {
     return gSaveBlock2Ptr->encryptionKey ^ *quantity;

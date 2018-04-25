@@ -9,6 +9,9 @@
 #include "berry.h"
 #include "graphics.h"
 #include "constants/items.h"
+#include "item.h"
+#include "item_use.h"
+#include "constants/hold_effects.h"
 
 struct CompressedTilesPal
 {
@@ -465,6 +468,9 @@ const struct SpriteTemplate gUnknown_0857FE88 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_80D5B48,
 };
+
+#include "data/text/item_descriptions.h"
+//#include "data/items.h"
 
 // code
 void RemoveBagSprite(u8 id)

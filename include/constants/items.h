@@ -1,6 +1,12 @@
 #ifndef GUARD_CONSTANTS_ITEMS_H
 #define GUARD_CONSTANTS_ITEMS_H
 
+#define POCKET_ITEMS		1
+#define POCKET_POKE_BALLS	2
+#define POCKET_TM_HM		3
+#define POCKET_BERRIES		4
+#define POCKET_KEY_ITEMS	5
+
 #define ITEM_NONE 0
 
 // Balls
@@ -52,7 +58,7 @@
 #define ITEM_BERRY_JUICE 44
 #define ITEM_SACRED_ASH 45
 
-//Collectibles
+// Collectibles
 #define ITEM_SHOAL_SALT 46
 #define ITEM_SHOAL_SHELL 47
 #define ITEM_RED_SHARD 48
@@ -72,7 +78,7 @@
 #define ITEM_03D 61
 #define ITEM_03E 62
 
-//Vitamins
+// Vitamins
 #define ITEM_HP_UP 63
 #define ITEM_PROTEIN 64
 #define ITEM_IRON 65
@@ -82,9 +88,10 @@
 #define ITEM_PP_UP 69
 #define ITEM_ZINC 70
 #define ITEM_PP_MAX 71
+
 #define ITEM_048 72
 
-//Battle items
+// Battle items
 #define ITEM_GUARD_SPEC 73
 #define ITEM_DIRE_HIT 74
 #define ITEM_X_ATTACK 75
@@ -97,7 +104,7 @@
 
 #define ITEM_052 82
 
-//Field items
+// Field items
 #define ITEM_SUPER_REPEL 83
 #define ITEM_MAX_REPEL 84
 #define ITEM_ESCAPE_ROPE 85
@@ -144,7 +151,7 @@
 #define ITEM_077 119
 #define ITEM_078 120
 
-//Mail
+// Mail
 #define ITEM_ORANGE_MAIL 121
 #define ITEM_HARBOR_MAIL 122
 #define ITEM_GLITTER_MAIL 123
@@ -442,11 +449,10 @@
 #define ITEM_HM07_WATERFALL ITEM_HM07
 #define ITEM_HM08_DIVE ITEM_HM08
 
-// Unknown
 #define ITEM_15B 347
 #define ITEM_15C 348
 
-// FireRed/LeafGreen
+// FireRed/LeafGreen key items
 #define ITEM_OAKS_PARCEL 349
 #define ITEM_POKE_FLUTE 350
 #define ITEM_SECRET_KEY 351
@@ -474,7 +480,7 @@
 #define ITEM_RUBY 373
 #define ITEM_SAPPHIRE 374
 
-// Emerald
+// Emerald-specific key items
 #define ITEM_MAGMA_EMBLEM 375
 #define ITEM_OLD_SEA_MAP 376
 
