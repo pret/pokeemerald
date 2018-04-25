@@ -1071,7 +1071,7 @@ sub_808B164: @ 808B164
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80FBFD4
+	bl CheckForRotatingGatePuzzleCollisionWithoutAnimation
 	cmp r0, 0
 	beq _0808B1A2
 	movs r0, 0x8

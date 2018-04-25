@@ -223,7 +223,7 @@ gFieldEffectScript_SandDisguisePlaceholder:: @ 82DBC09
 	field_eff_end
 
 gFieldEffectScript_UseRockSmash:: @ 82DBC0F
-	field_eff_callnative oei_rocksmash
+	field_eff_callnative FldEff_UseRockSmash
 	field_eff_end
 
 gFieldEffectScript_Unknown40:: @ 82DBC15
@@ -231,7 +231,7 @@ gFieldEffectScript_Unknown40:: @ 82DBC15
 	field_eff_end
 
 gFieldEffectScript_Unknown38:: @ 82DBC1B
-	field_eff_callnative sub_8135780
+	field_eff_callnative FldEff_UseDig
 	field_eff_end
 
 gFieldEffectScript_Unknown39:: @ 82DBC21

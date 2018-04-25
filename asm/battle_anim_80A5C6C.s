@@ -554,7 +554,7 @@ _080A60E8:
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A610C
-	ldr r1, =gAnimSpeciesByBanks
+	ldr r1, =gAnimBattlerSpecies
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -1224,7 +1224,7 @@ _080A65D8:
 	bl sub_80A62DC
 _080A65DE:
 	adds r0, r4, 0
-	bl sub_80D30DC
+	bl UpdateMonIconFrame
 	pop {r4}
 	pop {r0}
 	bx r0

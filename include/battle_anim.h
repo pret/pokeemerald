@@ -47,7 +47,7 @@ extern s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
 extern u8 gAnimMoveTurn;
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
-extern u16 gAnimSpeciesByBanks[MAX_BATTLERS_COUNT];
+extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_02038440;
 
 void ClearBattleAnimationVars(void);
@@ -61,7 +61,7 @@ void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible);
 bool8 IsContest(void);
 s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
-s16 sub_80A52EC(s16 a);
+s16 KeepPanInRange(s16 a);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 
 // battle_anim_80FE840.s

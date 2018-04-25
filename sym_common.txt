@@ -30,13 +30,13 @@ gPokemonStoragePtr: @ 3005D94
 gInGameOpponentsNo: @ 3005D98
 	.space 0x4
 
-gUnknown_03005D9C: @ 3005D9C
+gBGTilemapBuffers1: @ 3005D9C
 	.space 0x4
 
-gUnknown_03005DA0: @ 3005DA0
+gBGTilemapBuffers2: @ 3005DA0
 	.space 0x4
 
-gUnknown_03005DA4: @ 3005DA4
+gBGTilemapBuffers3: @ 3005DA4
 	.space 0x4
 
 gUnknown_03005DA8: @ 3005DA8

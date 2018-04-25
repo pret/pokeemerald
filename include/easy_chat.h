@@ -35,5 +35,6 @@ bool32 sub_811F8D8(u16 word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 void ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
 bool8 ECWord_CheckIfOutsideOfValidRange(u16 word);
+u16 sub_811EE38(u16 group);
 
 #endif // GUARD_EASYCHAT_H

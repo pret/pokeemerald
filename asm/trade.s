@@ -246,7 +246,7 @@ _08077310:
 	movs r1, 0x1
 	movs r2, 0xE0
 	bl sub_809882C
-	bl sub_80D2F04
+	bl LoadMonIconPalettes
 	ldr r2, =gUnknown_0203229C
 	ldr r0, [r2]
 	adds r0, 0x69

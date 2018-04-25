@@ -123,7 +123,7 @@ EWRAM_DATA static u8 sAnimBackgroundFadeState = 0;
 EWRAM_DATA static u16 sAnimMoveIndex = 0; // set but unused.
 EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
-EWRAM_DATA u16 gAnimSpeciesByBanks[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gUnknown_02038440 = 0;
 
 // const rom data
@@ -228,15 +228,15 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             if (GetBattlerSide(i) != 0)
-                gAnimSpeciesByBanks[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
+                gAnimBattlerSpecies[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
             else
-                gAnimSpeciesByBanks[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
+                gAnimBattlerSpecies[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
         }
     }
     else
     {
         for (i = 0; i < 4; i++)
-            gAnimSpeciesByBanks[i] = gContestResources->field_18->field_0;
+            gAnimBattlerSpecies[i] = gContestResources->field_18->field_0;
     }
 
     if (!isMoveAnim)
@@ -1318,16 +1318,16 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     return pan;
 }
 
-s16 sub_80A52EC(s16 a)
+s16 KeepPanInRange(s16 panArg)
 {
-    s16 var = a;
+    s16 pan = panArg;
 
-    if (var > 63)
-        var = 63;
-    else if (var < -64)
-        var = -64;
+    if (pan > PAN_SIDE_OPPONENT)
+        pan = PAN_SIDE_OPPONENT;
+    else if (pan < PAN_SIDE_PLAYER)
+        pan = PAN_SIDE_PLAYER;
 
-    return var;
+    return pan;
 }
 
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan)

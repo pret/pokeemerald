@@ -27,6 +27,9 @@ void sub_8098044(u8);
 void UnfreezeMapObjects(void);
 void FreezeMapObjectsExceptOne(u8 mapObjectId);
 void sub_8097B78(u8, u8);
+void sub_8098074(u8 var1, u8 var2);
 void FreezeMapObjects(void);
+bool8 FreezeMapObject(struct MapObject *mapObject);
+
 
 #endif //GUARD_FIELD_MAP_OBJ_HELPERS_H

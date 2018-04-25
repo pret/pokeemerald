@@ -16,5 +16,7 @@ s32 GetMapBorderIdAt(s16, s16);
 bool32 CanCameraMoveInDirection(u8);
 u16 GetBehaviorByMetatileId(u16 metatileId);
 void sav1_camera_get_focus_coords(u16 *x, u16 *y);
+u8 MapGridGetMetatileLayerTypeAt(s32 x, s32 y);
+u8 CameraMove(s32 deltaX, s32 deltaY);
 
 #endif //GUARD_FIELDMAP_H

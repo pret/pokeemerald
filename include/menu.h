@@ -81,5 +81,8 @@ void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress);
 void RemoveStartMenuWindow(void);
 void sub_8197948(u8 initialCursorPos);
 void sub_819A344(u8 a0, u8 *dest, u8 color);
+void RemoveMapNamePopUpWindow(void);
+u8 GetMapNamePopUpWindowId(void);
+u8 AddMapNamePopUpWindow(void);
 
 #endif // GUARD_MENU_H

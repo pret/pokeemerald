@@ -912,7 +912,7 @@ void re_escape_rope(u8 taskId)
     DisplayItemMessageOnField(taskId, gStringVar4, task08_080A1C44);
 }
 
-bool8 sub_80FE314(void)
+bool8 CanUseEscapeRopeOnCurrMap(void)
 {
     if (gMapHeader.flags & 2)
         return TRUE;
@@ -922,7 +922,7 @@ bool8 sub_80FE314(void)
 
 void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 {
-    if (sub_80FE314() == TRUE)
+    if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
         gUnknown_0203A0F4 = re_escape_rope;
         SetUpItemUseOnFieldCallback(taskId);
