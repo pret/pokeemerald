@@ -470,7 +470,7 @@ const struct SpriteTemplate gUnknown_0857FE88 =
 };
 
 #include "data/text/item_descriptions.h"
-//#include "data/items.h"
+#include "data/items.h"
 
 // code
 void RemoveBagSprite(u8 id)
