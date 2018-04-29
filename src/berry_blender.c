@@ -2472,7 +2472,7 @@ static void CB2_HandleBlenderEndGame(void)
         sub_8081F94(&gSendCmd[0]);
         if (sBerryBlenderData->yesNoAnswer == 0)
         {
-            if (IsBagPocketNonEmpty(BAG_BERRIES) == FALSE) // no berries
+            if (IsBagPocketNonEmpty(POCKET_BERRIES) == FALSE) // no berries
             {
                 sBerryBlenderData->playAgainState = CANT_PLAY_NO_BERRIES;
                 gSendCmd[1] = 0x9999;

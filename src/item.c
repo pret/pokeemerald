@@ -11,17 +11,6 @@
 #include "strings.h"
 #include "load_save.h"
 
-// These constants are used in gItems
-enum
-{
-    POCKET_NONE,
-    POCKET_ITEMS,
-    POCKET_POKE_BALLS,
-    POCKET_TM_HM,
-    POCKET_BERRIES,
-    POCKET_KEY_ITEMS,
-};
-
 extern bool8 InBattlePyramid(void);
 extern u16 gUnknown_0203CF30[];
 extern const struct Item gItems[];
