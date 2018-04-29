@@ -8,6 +8,8 @@
 #include "malloc.h"
 #include "secret_base.h"
 #include "item_menu.h"
+#include "strings.h"
+#include "load_save.h"
 
 // These constants are used in gItems
 enum
@@ -20,40 +22,34 @@ enum
     POCKET_KEY_ITEMS,
 };
 
-extern void ApplyNewEncryptionKeyToHword(u16 *hword, u32 newKey);
 extern bool8 InBattlePyramid(void);
-
-extern const u8 gText_PokeBalls[];
-extern const u8 gText_Berries[];
-extern const u8 gText_Berry[];
-
+extern u16 gUnknown_0203CF30[];
 extern const struct Item gItems[];
 
 // this file's functions
-
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
-static bool8 AddPyramidBagItem(u16 itemId, u16 count);
-static bool8 RemovePyramidBagItem(u16 itemId, u16 count);
+
+// EWRAM variables
+EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
 // code
-
-u16 GetBagItemQuantity(u16 *quantity)
+static u16 GetBagItemQuantity(u16 *quantity)
 {
     return gSaveBlock2Ptr->encryptionKey ^ *quantity;
 }
 
-void SetBagItemQuantity(u16 *quantity, u16 newValue)
+static void SetBagItemQuantity(u16 *quantity, u16 newValue)
 {
     *quantity =  newValue ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-u16 GetPCItemQuantity(u16 *quantity)
+static u16 GetPCItemQuantity(u16 *quantity)
 {
     return *quantity;
 }
 
-void SetPCItemQuantity(u16 *quantity, u16 newValue)
+static void SetPCItemQuantity(u16 *quantity, u16 newValue)
 {
     *quantity = newValue;
 }
@@ -91,26 +87,26 @@ void SetBagItemsPointers(void)
     gBagPockets[BERRIES_POCKET].capacity = BAG_BERRIES_COUNT;
 }
 
-void CopyItemName(u16 itemId, u8 *string)
+void CopyItemName(u16 itemId, u8 *dst)
 {
-    StringCopy(string, ItemId_GetName(itemId));
+    StringCopy(dst, ItemId_GetName(itemId));
 }
 
-void CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity)
+void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
 {
     if (itemId == ITEM_POKE_BALL)
     {
         if (quantity < 2)
-            StringCopy(string, ItemId_GetName(ITEM_POKE_BALL));
+            StringCopy(dst, ItemId_GetName(ITEM_POKE_BALL));
         else
-            StringCopy(string, gText_PokeBalls);
+            StringCopy(dst, gText_PokeBalls);
     }
     else
     {
         if (itemId >= ITEM_CHERI_BERRY && itemId <= ITEM_ENIGMA_BERRY)
-            GetBerryCountString(string, gBerries[itemId - ITEM_CHERI_BERRY].name, quantity);
+            GetBerryCountString(dst, gBerries[itemId - ITEM_CHERI_BERRY].name, quantity);
         else
-            StringCopy(string, ItemId_GetName(itemId));
+            StringCopy(dst, ItemId_GetName(itemId));
     }
 }
 
@@ -157,12 +153,12 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
         if (gBagPockets[pocket].itemSlots[i].itemId == itemId)
         {
             u16 quantity;
-            //Does this item slot contain enough of the item?
+            // Does this item slot contain enough of the item?
             quantity = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
             if (quantity >= count)
                 return TRUE;
             count -= quantity;
-            //Does this item slot and all previous slots contain enough of the item?
+            // Does this item slot and all previous slots contain enough of the item?
             if (count == 0)
                 return TRUE;
         }
@@ -901,7 +897,7 @@ static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count)
     return FALSE;
 }
 
-static bool8 AddPyramidBagItem(u16 itemId, u16 count)
+bool8 AddPyramidBagItem(u16 itemId, u16 count)
 {
     u16 i;
 
@@ -974,9 +970,7 @@ static bool8 AddPyramidBagItem(u16 itemId, u16 count)
     }
 }
 
-extern u16 gUnknown_0203CF30[];
-
-static bool8 RemovePyramidBagItem(u16 itemId, u16 count)
+bool8 RemovePyramidBagItem(u16 itemId, u16 count)
 {
     u16 i;
 
@@ -1076,7 +1070,6 @@ const u8 *ItemId_GetDescription(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].description;
 }
-
 
 u8 ItemId_GetImportance(u16 itemId)
 {

@@ -7,6 +7,10 @@
 EWRAM_DATA static u8 sUnknown = 0;
 EWRAM_DATA static u32 sRandCount = 0;
 
+// IWRAM common
+IWRAM_DATA u32 gRngValue;
+IWRAM_DATA u32 gRng2Value;
+
 u16 Random(void)
 {
     gRngValue = 1103515245 * gRngValue + 24691;

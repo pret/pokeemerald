@@ -89,7 +89,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D873:: @ 824D873
 BattleFrontier_BattlePalaceLobby_EventScript_24D8A1:: @ 824D8A1
 	setvar VAR_0x8004, 8
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
@@ -152,7 +152,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D968:: @ 824D968
 	special sub_8195960
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceLobby_EventScript_24D817
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattlePalaceLobby_EventScript_24DB9E
 	compare VAR_0x40CE, 1
@@ -220,7 +220,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call BattleFrontier_BattlePalaceLobby_EventScript_27134F
@@ -229,7 +229,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	goto_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB7A
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DAF3:: @ 824DAF3
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -272,7 +272,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DB7A:: @ 824DB7A
 	goto BattleFrontier_BattlePalaceLobby_EventScript_24DB94
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DB91:: @ 824DB91
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DB94:: @ 824DB94
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E0D8, 4

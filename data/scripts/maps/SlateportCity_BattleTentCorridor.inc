@@ -140,7 +140,7 @@ SlateportCity_BattleTentCorridor_EventScript_209022:: @ 8209022
 	end
 
 SlateportCity_BattleTentCorridor_EventScript_209044:: @ 8209044
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 0
 	special sub_81A5E74

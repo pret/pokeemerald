@@ -450,8 +450,8 @@ OldaleTown_PokemonCenter_2F_EventScript_276F60:: @ 8276F60
 
 OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
 	special HealPlayerParty
-	special copy_player_party_to_sav1
-	special copy_bags_and_unk_data_from_save_blocks
+	special SavePlayerParty
+	special LoadPlayerBag
 	copyvar VAR_0x4087, VAR_0x8004
 	messageautoscroll OldaleTown_PokemonCenter_2F_Text_278197
 	waitmessage

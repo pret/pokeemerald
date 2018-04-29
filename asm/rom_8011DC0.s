@@ -3278,8 +3278,8 @@ sub_8014210: @ 8014210
 	lsls r6, 16
 	lsrs r6, 16
 	bl HealPlayerParty
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r5, =gLinkPlayers
 	ldr r0, =0x00002211
 	str r0, [r5, 0x14]
@@ -3646,8 +3646,8 @@ _080145F4:
 	movs r1, 0x1
 	bl sub_80143E4
 	bl HealPlayerParty
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0x19
@@ -3659,8 +3659,8 @@ _080145F4:
 _08014620:
 	bl overworld_free_bg_tilemaps
 	bl HealPlayerParty
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
@@ -3675,8 +3675,8 @@ _08014620:
 _0801464C:
 	bl overworld_free_bg_tilemaps
 	bl HealPlayerParty
-	bl copy_player_party_to_sav1
-	bl copy_bags_and_unk_data_from_save_blocks
+	bl SavePlayerParty
+	bl LoadPlayerBag
 	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4

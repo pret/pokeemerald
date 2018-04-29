@@ -414,10 +414,7 @@ gUnknown_02039DD0: @ 2039DD0
 	.space 0x4
 
 	.include "src/map_name_popup.o"
-	.space 0x3
-
-gBagPockets: @ 2039DD8
-	.space 0x28
+	.include "src/item.o"
 
 gUnknown_02039E00: @ 2039E00
 	.space 0x100
