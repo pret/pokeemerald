@@ -1,11 +1,21 @@
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef GUARD_ITEM_H
+#define GUARD_ITEM_H
+
+enum
+{
+    ITEMS_POCKET,
+    BALLS_POCKET,
+    TMHM_POCKET,
+    BERRIES_POCKET,
+    KEYITEMS_POCKET,
+    POCKETS_COUNT
+};
 
 typedef void (*ItemUseFunc)(u8);
 
 struct Item
 {
-    u8 name[14];
+    u8 name[ITEM_NAME_LENGTH];
     u16 itemId;
     u16 price;
     u8 holdEffect;
@@ -63,10 +73,14 @@ u16 itemid_get_market_price(u16 itemId);
 u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 pocketPos);
 void sub_80D6FB4(struct BagPocket*);
 void sub_80D6F64(struct BagPocket*);
-void sub_80D702C(struct ItemSlot*, s16, u16);
+void MoveItemSlotInList(struct ItemSlot* itemSlots, u32 a1, u32 a2);
 u8 sub_80D6CE4();
 bool8 itemid_is_unique(u16 itemId);
 void sub_80D6E48(u8, u16);
 void sub_80D6E84(void);
+void CompactPCItems(void);
+void SortBerriesOrTMHMs(struct BagPocket *bagPocket);
+void CompactItemsInBagPocket(struct BagPocket *bagPocket);
+const u8 *ItemId_GetName(u16 itemId);
 
-#endif // ITEM_H
+#endif // GUARD_ITEM_H

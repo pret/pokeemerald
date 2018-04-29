@@ -141,7 +141,7 @@ gSpecials:: @ 81DBA64
 	def_special TrendyPhraseIsOld
 	def_special sub_811EF6C
 	def_special GetDewfordHallPaintingNameIndex
-	def_special sub_80D6EDC
+	def_special SwapRegisteredBike
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot

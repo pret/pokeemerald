@@ -12985,7 +12985,7 @@ _081A10F4:
 	adds r1, r0
 	adds r1, 0xBA
 	ldrh r0, [r1]
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	b _081A1174
 	.pool

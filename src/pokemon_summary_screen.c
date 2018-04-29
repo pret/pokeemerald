@@ -3173,11 +3173,11 @@ void sub_81C3554(u8 taskId)
 
 void sub_81C35E4()
 {
-    u8 *text;
+    const u8 *text;
     int offset;
     if (gUnknown_0203CF1C->summary.item == ITEM_ENIGMA_BERRY && sub_81B1250() == 1 && (gUnknown_0203CF1C->unk40BE == 1 || gUnknown_0203CF1C->unk40BE == 4 || gUnknown_0203CF1C->unk40BE == 5))
     {
-        text = (u8*)ItemId_GetItem(ITEM_ENIGMA_BERRY);
+        text = ItemId_GetName(ITEM_ENIGMA_BERRY);
     }
     else if (gUnknown_0203CF1C->summary.item == ITEM_NONE)
         text = gText_None;

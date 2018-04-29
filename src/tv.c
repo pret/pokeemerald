@@ -2945,7 +2945,7 @@ static void sub_80EF40C(u8 varIdx, TVShow *show)
     {
         if (show->smartshopperShow.itemIds[i] != ITEM_NONE)
         {
-            price += itemid_get_market_price(show->smartshopperShow.itemIds[i]) * show->smartshopperShow.itemAmounts[i];
+            price += ItemId_GetPrice(show->smartshopperShow.itemIds[i]) * show->smartshopperShow.itemAmounts[i];
         }
     }
     if (show->smartshopperShow.priceReduced == TRUE)
@@ -5120,7 +5120,7 @@ static void DoTVShowTodaysSmartShopper(void)
             break;
         case 1:
             TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
-            StringCopy(gStringVar2, ItemId_GetItem(show->smartshopperShow.itemIds[0])->name);
+            StringCopy(gStringVar2, ItemId_GetName(show->smartshopperShow.itemIds[0]));
             TV_PrintIntToStringVar(2, show->smartshopperShow.itemAmounts[0]);
             sTVShowState += 1 + (Random() % 4);
             break;
@@ -5148,7 +5148,7 @@ static void DoTVShowTodaysSmartShopper(void)
             }
             break;
         case 6:
-            StringCopy(gStringVar2, ItemId_GetItem(show->smartshopperShow.itemIds[1])->name);
+            StringCopy(gStringVar2, ItemId_GetName(show->smartshopperShow.itemIds[1]));
             TV_PrintIntToStringVar(2, show->smartshopperShow.itemAmounts[1]);
             if (show->smartshopperShow.itemIds[2] != ITEM_NONE)
             {
@@ -5164,7 +5164,7 @@ static void DoTVShowTodaysSmartShopper(void)
             }
             break;
         case 7:
-            StringCopy(gStringVar2, ItemId_GetItem(show->smartshopperShow.itemIds[2])->name);
+            StringCopy(gStringVar2, ItemId_GetName(show->smartshopperShow.itemIds[2]));
             TV_PrintIntToStringVar(2, show->smartshopperShow.itemAmounts[2]);
             if (show->smartshopperShow.priceReduced == TRUE)
             {
@@ -5201,7 +5201,7 @@ static void DoTVShowTodaysSmartShopper(void)
             break;
         case 11:
             TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
-            StringCopy(gStringVar2, ItemId_GetItem(show->smartshopperShow.itemIds[0])->name);
+            StringCopy(gStringVar2, ItemId_GetName(show->smartshopperShow.itemIds[0]));
             if (show->smartshopperShow.priceReduced == TRUE)
             {
                 sTVShowState = 8;
@@ -5344,7 +5344,7 @@ static void DoTVShowPokemonTodaySuccessfulCapture(void)
             sTVShowState = 2;
             break;
         case 2:
-            StringCopy(gStringVar2, ItemId_GetItem(show->pokemonToday.ball)->name);
+            StringCopy(gStringVar2, ItemId_GetName(show->pokemonToday.ball));
             TV_PrintIntToStringVar(2, show->pokemonToday.nBallsUsed);
             if (show->pokemonToday.nBallsUsed < 4)
             {
@@ -6457,7 +6457,7 @@ static void DoTVShowHoennTreasureInvestigators(void)
     switch (state)
     {
         case 0:
-            StringCopy(gStringVar1, ItemId_GetItem(show->treasureInvestigators.item)->name);
+            StringCopy(gStringVar1, ItemId_GetName(show->treasureInvestigators.item));
             if (show->treasureInvestigators.location == MAPSEC_DYNAMIC)
             {
                 switch (show->treasureInvestigators.mapDataId)
@@ -6476,13 +6476,13 @@ static void DoTVShowHoennTreasureInvestigators(void)
             }
             break;
         case 1:
-            StringCopy(gStringVar1, ItemId_GetItem(show->treasureInvestigators.item)->name);
+            StringCopy(gStringVar1, ItemId_GetName(show->treasureInvestigators.item));
             TVShowConvertInternationalString(gStringVar2, show->treasureInvestigators.playerName, show->treasureInvestigators.language);
             GetMapName(gStringVar3, show->treasureInvestigators.location, 0);
             TVShowDone();
             break;
         case 2:
-            StringCopy(gStringVar1, ItemId_GetItem(show->treasureInvestigators.item)->name);
+            StringCopy(gStringVar1, ItemId_GetName(show->treasureInvestigators.item));
             TVShowConvertInternationalString(gStringVar2, show->treasureInvestigators.playerName, show->treasureInvestigators.language);
             TVShowDone();
             break;
@@ -6598,7 +6598,7 @@ static void DoTVShowBreakingNewsTV(void)
             break;
         case 3:
             TV_PrintIntToStringVar(0, show->breakingNews.balls);
-            StringCopy(gStringVar2, ItemId_GetItem(show->breakingNews.caughtMonBall)->name);
+            StringCopy(gStringVar2, ItemId_GetName(show->breakingNews.caughtMonBall));
             sTVShowState = 4;
             break;
         case 4:
@@ -6788,7 +6788,7 @@ static void DoTVShowPokemonLotteryWinnerFlashReport(void)
     {
         StringCopy(gStringVar2, gText_Third);
     }
-    StringCopy(gStringVar3, ItemId_GetItem(show->lottoWinner.item)->name);
+    StringCopy(gStringVar3, ItemId_GetName(show->lottoWinner.item));
     TVShowDone();
     ShowFieldMessage(sTVPokemonLotteryWinnerFlashReportTextGroup[state]);
 }
@@ -7530,7 +7530,7 @@ static void DoTVShowSecretBaseSecrets(void)
             sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 19:
-            StringCopy(gStringVar2, ItemId_GetItem(show->secretBaseSecrets.item)->name);
+            StringCopy(gStringVar2, ItemId_GetName(show->secretBaseSecrets.item));
             sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 20:
