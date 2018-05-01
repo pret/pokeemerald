@@ -184,8 +184,8 @@ SECTIONS {
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
         asm/field_specials.o(.text);
-        asm/battle_records.o(.text);
         src/battle_records.o(.text);
+        asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         asm/roulette.o(.text);

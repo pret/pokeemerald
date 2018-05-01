@@ -41,7 +41,7 @@ extern void ResetSecretBases(void);
 extern void ResetLinkContestBoolean(void);
 extern void ResetGameStats(void);
 extern void sub_8052DA8(void);
-extern void InitLinkBattleRecords(void);
+extern void ClearPlayerLinkBattleRecords(void);
 extern void ResetPokemonStorageSystem(void);
 extern void ClearBag(void);
 extern void NewGameInitPCItems(void);
@@ -178,7 +178,7 @@ void NewGameInitData(void)
     ResetLinkContestBoolean();
     ResetGameStats();
     ClearAllContestWinnerPics();
-    InitLinkBattleRecords();
+    ClearPlayerLinkBattleRecords();
     InitSeedotSizeRecord();
     InitLotadSizeRecord();
     gPlayerPartyCount = 0;

@@ -318,7 +318,7 @@ gUnknown_02039B52: @ 2039B52
 gUnknown_02039B54: @ 2039B54
 	.space 0x4
 
-gUnknown_02039B58: @ 2039B58
+gTrainerCards: @ 2039B58
 	.space 0x14
 
 gUnknown_02039B6C: @ 2039B6C
