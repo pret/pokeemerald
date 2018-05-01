@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_813BF94
-sub_813BF94: @ 813BF94
+	thumb_func_start InitLinkBattleRecord
+InitLinkBattleRecord: @ 813BF94
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -29,16 +29,16 @@ sub_813BF94: @ 813BF94
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813BF94
+	thumb_func_end InitLinkBattleRecord
 
-	thumb_func_start sub_813BFC4
-sub_813BFC4: @ 813BFC4
+	thumb_func_start InitLinkBattleRecords_
+InitLinkBattleRecords_: @ 813BFC4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0x4
 _0813BFCA:
 	adds r0, r4, 0
-	bl sub_813BF94
+	bl InitLinkBattleRecord
 	adds r4, 0x10
 	subs r5, 0x1
 	cmp r5, 0
@@ -55,10 +55,10 @@ _0813BFCA:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_813BFC4
+	thumb_func_end InitLinkBattleRecords_
 
-	thumb_func_start sub_813BFF8
-sub_813BFF8: @ 813BFF8
+	thumb_func_start GetLinkBattleRecordTotalBattles
+GetLinkBattleRecordTotalBattles: @ 813BFF8
 	adds r1, r0, 0
 	ldrh r0, [r1, 0xA]
 	ldrh r2, [r1, 0xC]
@@ -66,10 +66,10 @@ sub_813BFF8: @ 813BFF8
 	ldrh r1, [r1, 0xE]
 	adds r0, r1
 	bx lr
-	thumb_func_end sub_813BFF8
+	thumb_func_end GetLinkBattleRecordTotalBattles
 
-	thumb_func_start sub_813C008
-sub_813C008: @ 813C008
+	thumb_func_start FindLinkBattleRecord
+FindLinkBattleRecord: @ 813C008
 	push {r4-r7,lr}
 	adds r7, r1, 0
 	lsls r2, 16
@@ -98,10 +98,10 @@ _0813C036:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_813C008
+	thumb_func_end FindLinkBattleRecord
 
-	thumb_func_start sub_813C03C
-sub_813C03C: @ 813C03C
+	thumb_func_start SortLinkBattleRecords
+SortLinkBattleRecords: @ 813C03C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -129,10 +129,10 @@ _0813C04C:
 _0813C06A:
 	ldr r0, [sp, 0x14]
 	str r3, [sp, 0x10]
-	bl sub_813BFF8
+	bl GetLinkBattleRecordTotalBattles
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_813BFF8
+	bl GetLinkBattleRecordTotalBattles
 	ldr r3, [sp, 0x10]
 	cmp r4, r0
 	ble _0813C0B2
@@ -178,10 +178,10 @@ _0813C0BA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_813C03C
+	thumb_func_end SortLinkBattleRecords
 
-	thumb_func_start sub_813C0D0
-sub_813C0D0: @ 813C0D0
+	thumb_func_start UpdateLinkBattleRecord
+UpdateLinkBattleRecord: @ 813C0D0
 	push {lr}
 	adds r2, r0, 0
 	cmp r1, 0x2
@@ -233,10 +233,10 @@ _0813C12A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C0D0
+	thumb_func_end UpdateLinkBattleRecord
 
-	thumb_func_start sub_813C134
-sub_813C134: @ 813C134
+	thumb_func_start UpdateLinkBattleGameStats
+UpdateLinkBattleGameStats: @ 813C134
 	push {r4,lr}
 	cmp r0, 0x2
 	beq _0813C14E
@@ -270,10 +270,10 @@ _0813C166:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C134
+	thumb_func_end UpdateLinkBattleGameStats
 
-	thumb_func_start sub_813C170
-sub_813C170: @ 813C170
+	thumb_func_start UpdateLinkBattleRecords_
+UpdateLinkBattleRecords_: @ 813C170
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -289,13 +289,13 @@ sub_813C170: @ 813C170
 	lsrs r0, 24
 	mov r9, r0
 	mov r0, r10
-	bl sub_813C134
+	bl UpdateLinkBattleGameStats
 	adds r0, r6, 0
-	bl sub_813C03C
+	bl SortLinkBattleRecords
 	adds r0, r6, 0
 	mov r1, r8
 	adds r2, r7, 0
-	bl sub_813C008
+	bl FindLinkBattleRecord
 	adds r5, r0, 0
 	cmp r5, 0x5
 	bne _0813C1D4
@@ -303,7 +303,7 @@ sub_813C170: @ 813C170
 	adds r4, r6, 0
 	adds r4, 0x40
 	adds r0, r4, 0
-	bl sub_813BF94
+	bl InitLinkBattleRecord
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0x7
@@ -323,9 +323,9 @@ _0813C1D4:
 	lsls r0, r5, 4
 	adds r0, r6, r0
 	mov r1, r10
-	bl sub_813C0D0
+	bl UpdateLinkBattleRecord
 	adds r0, r6, 0
-	bl sub_813C03C
+	bl SortLinkBattleRecords
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -334,7 +334,7 @@ _0813C1D4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C170
+	thumb_func_end UpdateLinkBattleRecords_
 
 	thumb_func_start InitLinkBattleRecords
 InitLinkBattleRecords: @ 813C1F8
@@ -343,14 +343,14 @@ InitLinkBattleRecords: @ 813C1F8
 	ldr r0, [r0]
 	ldr r1, =0x00003150
 	adds r0, r1
-	bl sub_813BFC4
+	bl InitLinkBattleRecords_
 	pop {r0}
 	bx r0
 	.pool
 	thumb_func_end InitLinkBattleRecords
 
-	thumb_func_start sub_813C214
-sub_813C214: @ 813C214
+	thumb_func_start IncTrainerCardWins
+IncTrainerCardWins: @ 813C214
 	push {lr}
 	movs r1, 0x64
 	muls r1, r0
@@ -369,10 +369,10 @@ _0813C230:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C214
+	thumb_func_end IncTrainerCardWins
 
-	thumb_func_start sub_813C23C
-sub_813C23C: @ 813C23C
+	thumb_func_start IncTrainerCardLosses
+IncTrainerCardLosses: @ 813C23C
 	push {lr}
 	movs r1, 0x64
 	muls r1, r0
@@ -391,10 +391,10 @@ _0813C258:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C23C
+	thumb_func_end IncTrainerCardLosses
 
-	thumb_func_start sub_813C264
-sub_813C264: @ 813C264
+	thumb_func_start UpdateTrainerCardWinsLosses
+UpdateTrainerCardWinsLosses: @ 813C264
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, =gBattleOutcome
@@ -407,24 +407,24 @@ sub_813C264: @ 813C264
 	.pool
 _0813C27C:
 	eors r0, r4
-	bl sub_813C214
+	bl IncTrainerCardWins
 	adds r0, r4, 0
-	bl sub_813C23C
+	bl IncTrainerCardLosses
 	b _0813C298
 _0813C28A:
 	movs r0, 0x1
 	eors r0, r4
-	bl sub_813C23C
+	bl IncTrainerCardLosses
 	adds r0, r4, 0
-	bl sub_813C214
+	bl IncTrainerCardWins
 _0813C298:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_813C264
+	thumb_func_end UpdateTrainerCardWinsLosses
 
-	thumb_func_start sub_813C2A0
-sub_813C2A0: @ 813C2A0
+	thumb_func_start UpdateLinkBattleRecords
+UpdateLinkBattleRecords: @ 813C2A0
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -432,7 +432,7 @@ sub_813C2A0: @ 813C2A0
 	cmp r0, 0x1
 	beq _0813C2DA
 	adds r0, r4, 0
-	bl sub_813C264
+	bl UpdateTrainerCardWinsLosses
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003150
@@ -450,17 +450,17 @@ sub_813C2A0: @ 813C2A0
 	lsls r4, 24
 	lsrs r4, 24
 	str r4, [sp]
-	bl sub_813C170
+	bl UpdateLinkBattleRecords_
 _0813C2DA:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C2A0
+	thumb_func_end UpdateLinkBattleRecords
 
-	thumb_func_start sub_813C2F4
-sub_813C2F4: @ 813C2F4
+	thumb_func_start PrintLinkBattleWinsLossesDraws
+PrintLinkBattleWinsLossesDraws: @ 813C2F4
 	push {r4,lr}
 	sub sp, 0xC
 	ldr r4, =gStringVar1
@@ -513,10 +513,10 @@ sub_813C2F4: @ 813C2F4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C2F4
+	thumb_func_end PrintLinkBattleWinsLossesDraws
 
-	thumb_func_start sub_813C384
-sub_813C384: @ 813C384
+	thumb_func_start PrintLinkBattleRecord
+PrintLinkBattleRecord: @ 813C384
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -652,10 +652,10 @@ _0813C4A8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C384
+	thumb_func_end PrintLinkBattleRecord
 
-	thumb_func_start sub_813C4BC
-sub_813C4BC: @ 813C4BC
+	thumb_func_start ShowLinkBattleRecords
+ShowLinkBattleRecords: @ 813C4BC
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -696,7 +696,7 @@ sub_813C4BC: @ 813C4BC
 	ldr r1, =0x00003150
 	mov r9, r1
 	add r0, r9
-	bl sub_813C2F4
+	bl PrintLinkBattleWinsLossesDraws
 	ldr r1, =gText_WinLoseDraw
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
@@ -721,7 +721,7 @@ _0813C540:
 	adds r2, r3
 	adds r2, r4
 	ldrb r2, [r2]
-	bl sub_813C384
+	bl PrintLinkBattleRecord
 	movs r0, 0x80
 	lsls r0, 18
 	adds r6, r0
@@ -743,7 +743,7 @@ _0813C540:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C4BC
+	thumb_func_end ShowLinkBattleRecords
 
 	thumb_func_start sub_813C5A0
 sub_813C5A0: @ 813C5A0

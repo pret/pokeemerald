@@ -2171,7 +2171,7 @@ sub_80B360C: @ 80B360C
 	ldrb r0, [r0]
 	movs r5, 0x1
 	eors r0, r5
-	bl sub_813C2A0
+	bl UpdateLinkBattleRecords
 	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0

@@ -207,7 +207,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8071614
-	def_special sub_813C4BC
+	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
 	def_special sub_80F972C
