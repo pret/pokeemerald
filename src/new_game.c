@@ -20,8 +20,10 @@
 #include "tv.h"
 #include "coins.h"
 #include "text.h"
+#include "overworld.h"
+#include "mail.h"
+#include "battle_records.h"
 
-extern u8 gPlayerPartyCount;
 extern u8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
 extern u8 gUnknown_030060B0;
@@ -29,19 +31,15 @@ extern u8 gUnknown_030060B0;
 // TODO: replace those declarations with file headers
 extern u16 GetGeneratedTrainerIdLower(void);
 extern void ClearContestWinnerPicsInContestHall(void);
-extern void Overworld_SetWarpDestination(s8 mapBank, s8 mapNo, s8 warpNo, s8 xPos, s8 yPos);
 extern void warp_in(void);
 extern void sub_80BB358(void);
 extern void ResetBagScrollPositions(void);
 extern void ResetPokedex(void);
 extern void sub_8084400(void);
-extern void ClearMailData(void);
 extern void ResetGabbyAndTy(void);
 extern void ResetSecretBases(void);
 extern void ResetLinkContestBoolean(void);
-extern void ResetGameStats(void);
 extern void sub_8052DA8(void);
-extern void ClearPlayerLinkBattleRecords(void);
 extern void ResetPokemonStorageSystem(void);
 extern void ClearBag(void);
 extern void NewGameInitPCItems(void);
@@ -58,7 +56,7 @@ extern void ResetContestLinkResults(void);
 extern void ResetPokeJumpResults(void);
 extern void SetBerryPowder(u32* powder, u32 newValue);
 
-extern u8 EventScript_2715DE[];
+extern const u8 EventScript_2715DE[];
 
 void WriteUnalignedWord(u32 var, u8 *dataPtr)
 {

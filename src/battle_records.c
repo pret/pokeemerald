@@ -25,22 +25,22 @@
 extern void PrintOnTrainerHillRecordsWindow(void); // pokenav.s
 
 // this file's functions
-static void sub_813C5EC(u8 taskId);
-static void sub_813C62C(u8 taskId);
-static void sub_813C664(u8 taskId);
-static void sub_813C6A8(u8 windowId);
-static void sub_813C91C(void);
+static void Task_CloseTrainerHillRecordsOnButton(u8 taskId);
+static void Task_BeginPaletteFade(u8 taskId);
+static void Task_ExitTrainerHillRecords(u8 taskId);
+static void RemoveTrainerHillRecordsWindow(u8 windowId);
+static void CB2_ShowTrainerHillRecords(void);
 
 // EWRAM variables
 EWRAM_DATA u8 gRecordsWindowId = 0;
-EWRAM_DATA static u8 *sUnknown_0203AB78 = NULL;
+EWRAM_DATA static u8 *sTilemapBuffer = NULL;
 
 // const rom data
-const u32 gUnknown_085B3484[] = INCBIN_U32("graphics/unknown/unknown_5B3484.4bpp");
-const u16 gUnknown_085B3544[] = INCBIN_U16("graphics/unknown/unknown_5B3484.gbapal");
-const u32 gUnknown_085B3564[] = INCBIN_U32("graphics/unknown/unknown_5B3564.bin");
+static const u32 sTrainerHillWindowTileset[] = INCBIN_U32("graphics/unknown/unknown_5B3484.4bpp");
+static const u16 sTrainerHillWindowPalette[] = INCBIN_U16("graphics/unknown/unknown_5B3484.gbapal");
+static const u32 sTrainerHillWindowTilemap[] = INCBIN_U32("graphics/unknown/unknown_5B3564.bin");
 
-const struct BgTemplate gUnknown_085B3D64[] =
+static const struct BgTemplate sTrainerHillRecordsBgTemplates[] =
 {
     {
         .bg = 0,
@@ -62,16 +62,16 @@ const struct BgTemplate gUnknown_085B3D64[] =
     }
 };
 
-const struct WindowTemplate gUnknown_085B3D6C[] =
+static const struct WindowTemplate sTrainerHillRecordsWindowTemplates[] =
 {
     {0x0, 0x2, 0x1, 0x1A, 0x12, 0xF, 0x14},
     DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gUnknown_085B3D7C = {0x0, 0x2, 0x1, 0x1A, 0x11, 0xF, 0x1};
+static const struct WindowTemplate sLinkBattleRecordsWindow = {0x0, 0x2, 0x1, 0x1A, 0x11, 0xF, 0x1};
 
-const u8 gUnknown_085B3D84[] = _("-------");
-const u8 gUnknown_085B3D8C[] = _("----");
+static const u8 sText_DashesNoPlayer[] = _("-------");
+static const u8 sText_DashesNoScore[] = _("----");
 
 // code
 static void ClearLinkBattleRecord(struct LinkBattleRecord *record)
@@ -274,10 +274,10 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y, s32 lan
     if (record->wins == 0 && record->losses == 0 && record->draws == 0)
     {
         // empty slot
-        PrintTextOnWindow(gRecordsWindowId, 1, gUnknown_085B3D84,   8, (y * 8) + 1, 0, NULL);
-        PrintTextOnWindow(gRecordsWindowId, 1, gUnknown_085B3D8C,  80, (y * 8) + 1, 0, NULL);
-        PrintTextOnWindow(gRecordsWindowId, 1, gUnknown_085B3D8C, 128, (y * 8) + 1, 0, NULL);
-        PrintTextOnWindow(gRecordsWindowId, 1, gUnknown_085B3D8C, 176, (y * 8) + 1, 0, NULL);
+        PrintTextOnWindow(gRecordsWindowId, 1, sText_DashesNoPlayer,   8, (y * 8) + 1, 0, NULL);
+        PrintTextOnWindow(gRecordsWindowId, 1, sText_DashesNoScore,  80, (y * 8) + 1, 0, NULL);
+        PrintTextOnWindow(gRecordsWindowId, 1, sText_DashesNoScore, 128, (y * 8) + 1, 0, NULL);
+        PrintTextOnWindow(gRecordsWindowId, 1, sText_DashesNoScore, 176, (y * 8) + 1, 0, NULL);
     }
     else
     {
@@ -302,7 +302,7 @@ void ShowLinkBattleRecords(void)
 {
     s32 i, x;
 
-    gRecordsWindowId = AddWindow(&gUnknown_085B3D7C);
+    gRecordsWindowId = AddWindow(&sLinkBattleRecordsWindow);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, 0x11);
     StringExpandPlaceholders(gStringVar4, gText_PlayersBattleResults);
@@ -329,42 +329,42 @@ void RemoveRecordsWindow(void)
     RemoveWindow(gRecordsWindowId);
 }
 
-static void sub_813C5BC(u8 taskId)
+static void Task_TrainerHillWaitForPaletteFade(u8 taskId)
 {
     if (!gPaletteFade.active)
-        gTasks[taskId].func = sub_813C5EC;
+        gTasks[taskId].func = Task_CloseTrainerHillRecordsOnButton;
 }
 
-static void sub_813C5EC(u8 taskId)
+static void Task_CloseTrainerHillRecordsOnButton(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        task->func = sub_813C62C;
+        task->func = Task_BeginPaletteFade;
     }
 }
 
-static void sub_813C62C(u8 taskId)
+static void Task_BeginPaletteFade(u8 taskId)
 {
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-    gTasks[taskId].func = sub_813C664;
+    gTasks[taskId].func = Task_ExitTrainerHillRecords;
 }
 
-static void sub_813C664(u8 taskId)
+static void Task_ExitTrainerHillRecords(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScript);
-        Free(sUnknown_0203AB78);
-        sub_813C6A8(0);
+        Free(sTilemapBuffer);
+        RemoveTrainerHillRecordsWindow(0);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
     }
 }
 
-static void sub_813C6A8(u8 windowId)
+static void RemoveTrainerHillRecordsWindow(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, 0);
     ClearWindowTilemap(windowId);
@@ -372,7 +372,7 @@ static void sub_813C6A8(u8 windowId)
     RemoveWindow(windowId);
 }
 
-static void sub_813C6D4(void)
+static void ClearVramOamPlttRegs(void)
 {
     DmaClearLarge16(3, (void*)(VRAM), VRAM_SIZE, 0x1000);
     DmaClear32(3, OAM, OAM_SIZE);
@@ -400,7 +400,7 @@ static void sub_813C6D4(void)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 }
 
-static void sub_813C80C(void)
+static void ClearTasksAndGraphicalStructs(void)
 {
     ScanlineEffect_Stop();
     ResetTasks();
@@ -421,26 +421,26 @@ static void ResetBgCoordinates(void)
     ChangeBgY(3, 0, 0);
 }
 
-static void sub_813C880(void)
+static void SetDispcntReg(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_1D_MAP);
 }
 
-static void sub_813C890(u8 bgId)
+static void LoadTrainerHillRecordsWindowGfx(u8 bgId)
 {
-    LoadBgTiles(bgId, gUnknown_085B3484, sizeof(gUnknown_085B3484), 0);
-    CopyToBgTilemapBufferRect(bgId, gUnknown_085B3564, 0, 0, 0x20, 0x20);
-    LoadPalette(gUnknown_085B3544, 0, 0x20);
+    LoadBgTiles(bgId, sTrainerHillWindowTileset, sizeof(sTrainerHillWindowTileset), 0);
+    CopyToBgTilemapBufferRect(bgId, sTrainerHillWindowTilemap, 0, 0, 0x20, 0x20);
+    LoadPalette(sTrainerHillWindowPalette, 0, 0x20);
 }
 
-static void sub_813C8D8(void)
+static void VblankCB_TrainerHillRecords(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void sub_813C8EC(void)
+static void MainCB2_TrainerHillRecords(void)
 {
     RunTasks();
     AnimateSprites();
@@ -451,32 +451,32 @@ static void sub_813C8EC(void)
 void ShowTrainerHillRecords(void)
 {
     SetVBlankCallback(NULL);
-    SetMainCallback2(sub_813C91C);
+    SetMainCallback2(CB2_ShowTrainerHillRecords);
 }
 
-static void sub_813C91C(void)
+static void CB2_ShowTrainerHillRecords(void)
 {
     switch (gMain.state)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_813C6D4();
+        ClearVramOamPlttRegs();
         gMain.state++;
         break;
     case 1:
-        sub_813C80C();
+        ClearTasksAndGraphicalStructs();
         gMain.state++;
         break;
     case 2:
-        sUnknown_0203AB78 = AllocZeroed(0x800);
+        sTilemapBuffer = AllocZeroed(0x800);
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_085B3D64, ARRAY_COUNT(gUnknown_085B3D64));
-        SetBgTilemapBuffer(3, sUnknown_0203AB78);
+        InitBgsFromTemplates(0, sTrainerHillRecordsBgTemplates, ARRAY_COUNT(sTrainerHillRecordsBgTemplates));
+        SetBgTilemapBuffer(3, sTilemapBuffer);
         ResetBgCoordinates();
         gMain.state++;
         break;
     case 3:
-        sub_813C890(3);
+        LoadTrainerHillRecordsWindowGfx(3);
         LoadPalette(stdpal_get(0), 0xF0, 0x20);
         gMain.state++;
         break;
@@ -490,7 +490,7 @@ static void sub_813C91C(void)
         }
         break;
     case 5:
-        InitWindows(gUnknown_085B3D6C);
+        InitWindows(sTrainerHillRecordsWindowTemplates);
         DeactivateAllTextPrinters();
         gMain.state++;
         break;
@@ -499,11 +499,11 @@ static void sub_813C91C(void)
         gMain.state++;
         break;
     case 7:
-        sub_813C880();
-        SetVBlankCallback(sub_813C8D8);
+        SetDispcntReg();
+        SetVBlankCallback(VblankCB_TrainerHillRecords);
         PrintOnTrainerHillRecordsWindow();
-        CreateTask(sub_813C5BC, 8);
-        SetMainCallback2(sub_813C8EC);
+        CreateTask(Task_TrainerHillWaitForPaletteFade, 8);
+        SetMainCallback2(MainCB2_TrainerHillRecords);
         gMain.state = 0;
         break;
     }
