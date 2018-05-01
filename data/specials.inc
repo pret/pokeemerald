@@ -526,12 +526,12 @@ gSpecials:: @ 81DBA64
 	def_special sub_8139ED0
 	def_special sub_813B968
 	def_special sub_80F8B94
-	def_special sub_813C904
+	def_special ShowTrainerHillRecords
 	def_special sub_80B4808
 	def_special sub_813B9A0
 	def_special sub_81B9918
 	def_special sub_80722E0
 	def_special sub_80B45D0
-	def_special sub_813C5A0
+	def_special RemoveRecordsWindow
 	def_special sub_8139C10
 	def_special sub_80B3BC4

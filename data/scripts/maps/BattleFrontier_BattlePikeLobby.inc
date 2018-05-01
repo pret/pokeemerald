@@ -257,7 +257,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25BA80:: @ 825BA80
 	setvar VAR_0x8005, 5
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

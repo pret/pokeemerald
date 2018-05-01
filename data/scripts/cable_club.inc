@@ -789,7 +789,7 @@ gUnknown_08277365:: @ 8277365
 	setvar VAR_0x8004, 0
 	special ShowLinkBattleRecords
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

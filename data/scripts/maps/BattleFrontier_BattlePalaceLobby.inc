@@ -366,7 +366,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DC50:: @ 824DC50
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -377,7 +377,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DC69:: @ 824DC69
 	setvar VAR_0x8006, 1
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

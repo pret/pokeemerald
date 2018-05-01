@@ -30,6 +30,7 @@
 #include "trig.h"
 #include "tv.h"
 #include "item_menu.h"
+#include "battle_records.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -131,7 +132,6 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gInGameOpponentsNo;
 extern u8 gUnknown_020322D5;
-extern u8 gResultsWindowId;
 
 // graphics
 extern const u8 gBerryBlenderArrowTiles[];
@@ -3485,13 +3485,13 @@ void ShowBerryBlenderRecordWindow(void)
     u8 text[32];
 
     winTemplate = sBlenderRecordWindowTemplate;
-    gResultsWindowId = AddWindow(&winTemplate);
-    NewMenuHelpers_DrawStdWindowFrame(gResultsWindowId, 0);
-    FillWindowPixelBuffer(gResultsWindowId, 0x11);
+    gRecordsWindowId = AddWindow(&winTemplate);
+    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, 0);
+    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
 
     xPos = GetStringCenterAlignXOffset(1, gText_BlenderMaxSpeedRecord, 0x90);
-    PrintTextOnWindow(gResultsWindowId, 1, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
-    PrintTextOnWindow(gResultsWindowId, 1, gText_234Players, 4, 0x29, 0, NULL);
+    PrintTextOnWindow(gRecordsWindowId, 1, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
+    PrintTextOnWindow(gRecordsWindowId, 1, gText_234Players, 4, 0x29, 0, NULL);
 
     for (i = 0, yPos = 0x29; i < BLENDER_SCORES_NO; i++)
     {
@@ -3506,11 +3506,11 @@ void ShowBerryBlenderRecordWindow(void)
         txtPtr = StringAppend(txtPtr, sText_RPM);
 
         xPos = GetStringRightAlignXOffset(1, text, 0x8C);
-        PrintTextOnWindow(gResultsWindowId, 1, text, xPos, yPos + (i * 16), 0, NULL);
+        PrintTextOnWindow(gRecordsWindowId, 1, text, xPos, yPos + (i * 16), 0, NULL);
     }
 
-    PutWindowTilemap(gResultsWindowId);
-    CopyWindowToVram(gResultsWindowId, 3);
+    PutWindowTilemap(gRecordsWindowId);
+    CopyWindowToVram(gRecordsWindowId, 3);
 }
 
 static void sub_8083F3C(u8 taskId)
