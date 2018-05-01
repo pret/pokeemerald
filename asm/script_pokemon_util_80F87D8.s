@@ -10,7 +10,7 @@ sub_80F87D8: @ 80F87D8
 	push {r4,lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
-	ldr r1, =gUnknown_02039E00
+	ldr r1, =gContestMons
 	ldrb r3, [r1, 0x15]
 	ldr r4, =0x000013bc
 	adds r0, r2, r4
@@ -150,8 +150,8 @@ sub_80F88DC: @ 80F88DC
 	thumb_func_start sub_80F88E8
 sub_80F88E8: @ 80F88E8
 	push {lr}
-	ldr r0, =gUnknown_02039F20
-	ldr r1, =gUnknown_02039F25
+	ldr r0, =gContestFinalStandings
+	ldr r1, =gContestPlayerMonIndex
 	ldrb r2, [r1]
 	adds r0, r2, r0
 	ldrb r0, [r0]
@@ -222,7 +222,7 @@ sub_80F8970: @ 80F8970
 	mov r12, r0
 	ldr r1, =gSpecialVar_0x8006
 	mov r9, r1
-	ldr r2, =gUnknown_02039E00 + 2
+	ldr r2, =gContestMons + 2
 	mov r10, r2
 	mov r2, r12
 	mov r1, sp
@@ -413,7 +413,7 @@ ShowContestWinner: @ 80F8ADC
 	thumb_func_start sub_80F8AFC
 sub_80F8AFC: @ 80F8AFC
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -422,7 +422,7 @@ sub_80F8AFC: @ 80F8AFC
 	movs r3, 0
 	ldr r0, =gUnknown_02039F30
 	adds r4, r0, 0
-	ldr r5, =gUnknown_02039E00
+	ldr r5, =gContestMons
 	ldrb r0, [r4]
 	cmp r3, r0
 	bge _080F8B50
@@ -482,7 +482,7 @@ sub_80F8B94: @ 80F8B94
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0xC
 	strb r0, [r1]
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -594,8 +594,8 @@ sub_80F8C7C: @ 80F8C7C
 	strb r0, [r1]
 	cmp r0, 0
 	bne _080F8D18
-	ldr r0, =gUnknown_02039F20
-	ldr r1, =gUnknown_02039F25
+	ldr r0, =gContestFinalStandings
+	ldr r1, =gContestPlayerMonIndex
 	ldrb r2, [r1]
 	adds r0, r2, r0
 	ldrb r0, [r0]
@@ -675,7 +675,7 @@ _080F8D44:
 	mov r9, r0
 	movs r1, 0x3
 	mov r10, r1
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r4, =gSpecialVar_0x8006
 	ldrh r1, [r4]
 	lsls r1, 6
@@ -702,7 +702,7 @@ _080F8D44:
 	movs r1, 0
 	strh r1, [r0, 0x8]
 	strh r6, [r0, 0xA]
-	ldr r1, =gUnknown_02039F25
+	ldr r1, =gContestPlayerMonIndex
 	ldrh r0, [r4]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -758,7 +758,7 @@ _080F8DD8:
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -938,7 +938,7 @@ _080F8F98:
 	thumb_func_start sub_80F8FA0
 sub_80F8FA0: @ 80F8FA0
 	push {r4,lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -973,7 +973,7 @@ _080F8FDE:
 	thumb_func_start sub_80F8FE8
 sub_80F8FE8: @ 80F8FE8
 	push {r4,lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -1022,7 +1022,7 @@ sub_80F903C: @ 80F903C
 	thumb_func_start sub_80F905C
 sub_80F905C: @ 80F905C
 	push {lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1087,7 +1087,7 @@ _080F90D4:
 	thumb_func_start sub_80F90DC
 sub_80F90DC: @ 80F90DC
 	push {lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1110,7 +1110,7 @@ _080F90FE:
 	thumb_func_start sub_80F910C
 sub_80F910C: @ 80F910C
 	push {lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1130,7 +1130,7 @@ _080F9126:
 	thumb_func_start sub_80F9134
 sub_80F9134: @ 80F9134
 	push {lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x4
 	ands r0, r1
@@ -1148,7 +1148,7 @@ _080F914E:
 
 	thumb_func_start sub_80F9154
 sub_80F9154: @ 80F9154
-	ldr r1, =gUnknown_02039F2A
+	ldr r1, =gIsLinkContest
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
@@ -1158,7 +1158,7 @@ sub_80F9154: @ 80F9154
 	thumb_func_start sub_80F9160
 sub_80F9160: @ 80F9160
 	push {lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1

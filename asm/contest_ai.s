@@ -39,7 +39,7 @@ _081562DE:
 	strb r1, [r0]
 	ldr r0, [r2]
 	ldr r2, [r0, 0xC]
-	ldr r1, =gUnknown_02039E00
+	ldr r1, =gContestMons
 	adds r0, r2, 0
 	adds r0, 0x41
 	ldrb r0, [r0]
@@ -144,7 +144,7 @@ sub_81563B0: @ 81563B0
 	beq _081564A0
 	adds r7, r5, 0
 	ldr r6, =gAIScriptPtr
-	ldr r0, =gUnknown_02039E00 + 30
+	ldr r0, =gContestMons + 30
 	mov r8, r0
 _081563CC:
 	ldr r0, [r7]
@@ -1436,7 +1436,7 @@ _08156D9C:
 	thumb_func_start sub_8156DA0
 sub_8156DA0: @ 8156DA0
 	push {r4,lr}
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]
@@ -1615,7 +1615,7 @@ _08156EFC:
 
 	thumb_func_start sub_8156F04
 sub_8156F04: @ 8156F04
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r3, [r0, 0xC]
@@ -1714,7 +1714,7 @@ _08156FC8:
 
 	thumb_func_start sub_8156FCC
 sub_8156FCC: @ 8156FCC
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r3, [r0, 0xC]
@@ -1818,7 +1818,7 @@ _0815709C:
 	thumb_func_start sub_81570A0
 sub_81570A0: @ 81570A0
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0xC]
@@ -1923,7 +1923,7 @@ _0815716C:
 	thumb_func_start sub_8157174
 sub_8157174: @ 8157174
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0xC]
@@ -2028,7 +2028,7 @@ _08157240:
 	thumb_func_start sub_8157248
 sub_8157248: @ 8157248
 	push {r4,lr}
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r4, [r0, 0xC]
@@ -2208,7 +2208,7 @@ _081573B0:
 	thumb_func_start sub_81573B4
 sub_81573B4: @ 81573B4
 	push {r4,lr}
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r4, [r0, 0xC]
@@ -2388,7 +2388,7 @@ _0815751C:
 	thumb_func_start sub_8157520
 sub_8157520: @ 8157520
 	push {r4,r5,lr}
-	ldr r3, =gUnknown_02039E00
+	ldr r3, =gContestMons
 	ldr r5, =gContestResources
 	ldr r4, [r5]
 	ldr r1, [r4, 0xC]
@@ -2575,7 +2575,7 @@ _08157684:
 sub_8157688: @ 8157688
 	push {r4-r6,lr}
 	movs r3, 0
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
@@ -2711,7 +2711,7 @@ _08157788:
 sub_8157790: @ 8157790
 	push {r4-r6,lr}
 	movs r3, 0
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
@@ -2846,7 +2846,7 @@ _08157890:
 sub_8157898: @ 8157898
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r3, =gUnknown_02039E00
+	ldr r3, =gContestMons
 	ldr r6, =gContestResources
 	ldr r4, [r6]
 	ldr r1, [r4, 0xC]
@@ -5030,7 +5030,7 @@ sub_8158948: @ 8158948
 	push {r4-r6,lr}
 	movs r5, 0
 	movs r4, 0
-	ldr r6, =gUnknown_02039E00 + 30
+	ldr r6, =gContestMons + 30
 _08158950:
 	lsls r1, r4, 1
 	ldr r0, =gContestResources
@@ -5156,7 +5156,7 @@ sub_8158A34: @ 8158A34
 	lsls r0, 8
 	orrs r5, r0
 	movs r4, 0
-	ldr r0, =gUnknown_02039E00
+	ldr r0, =gContestMons
 	mov r12, r0
 	ldr r2, =gContestResources
 	ldr r0, [r2]

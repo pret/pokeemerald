@@ -88,8 +88,8 @@ _081D9EA4:
 _081D9EB4:
 	bl GetMonData
 	strb r0, [r4]
-	ldr r5, =gUnknown_02039E00
-	ldr r4, =gUnknown_02039F25
+	ldr r5, =gContestMons
+	ldr r4, =gContestPlayerMonIndex
 	ldrb r0, [r4]
 	lsls r0, 6
 	adds r0, r5
@@ -266,7 +266,7 @@ _081DA02A:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA0B8
-	ldr r0, =gUnknown_02039E00
+	ldr r0, =gContestMons
 	adds r1, r0, 0
 	adds r1, 0x2C
 	ldrb r2, [r1]
@@ -438,10 +438,10 @@ _081DA1A4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _081DA224
-	ldr r0, =gUnknown_02039F25
+	ldr r0, =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	lsls r0, 6
-	ldr r1, =gUnknown_02039E00
+	ldr r1, =gContestMons
 	adds r0, r1
 	movs r1, 0x40
 	bl sub_80FC4F4
@@ -466,7 +466,7 @@ _081DA1D4:
 	ldr r6, =gLinkPlayers
 _081DA1EC:
 	lsls r4, r5, 6
-	ldr r0, =gUnknown_02039E00
+	ldr r0, =gContestMons
 	adds r4, r0
 	lsls r1, r5, 8
 	ldr r0, =gBlockRecvBuffer
@@ -823,7 +823,7 @@ _081DA4CC:
 	ldr r0, =gUnknown_02039F30
 	ldrb r2, [r0]
 	lsls r0, r2, 6
-	ldr r1, =gUnknown_02039E00
+	ldr r1, =gContestMons
 	adds r0, r1
 	movs r1, 0x4
 	subs r1, r2
@@ -847,7 +847,7 @@ _081DA50C:
 	ldr r4, =gUnknown_02039F30
 	ldrb r3, [r4]
 	lsls r0, r3, 6
-	ldr r5, =gUnknown_02039E00
+	ldr r5, =gContestMons
 	adds r0, r5
 	ldr r1, =gBlockRecvBuffer
 	movs r2, 0x4

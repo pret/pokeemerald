@@ -138,6 +138,7 @@ SECTIONS {
         asm/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
         asm/item.o(.text);
+        src/contest.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
