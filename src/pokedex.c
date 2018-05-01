@@ -22,12 +22,39 @@
 #include "text_window.h"
 #include "data2.h"
 #include "string_util.h"
+#include "trig.h"
+#include "pokedex_area_screen.h"
+#include "pokedex_cry_screen.h"
+#include "strings.h"
+#include "m4a.h"
+#include "international_string_util.h"
 
 extern struct PokedexView *gUnknown_02039B4C;
 extern u16 gUnknown_02039B50;
 extern u8 gUnknown_02039B52;
+extern struct PokedexListItem *gUnknown_02039B54;
 
 extern u8 gUnknown_030060B0;
+extern MainCallback gUnknown_030060B4;
+extern u8 gUnknown_030061EC;
+
+struct PokedexEntry
+{
+    /*0x00*/ u8 categoryName[12];
+    /*0x0C*/ u16 height; //in decimeters
+    /*0x0E*/ u16 weight; //in hectograms
+    /*0x10*/ const u8 *description;
+    /*0x14*/ u16 unused;
+    /*0x16*/ u16 pokemonScale;
+    /*0x18*/ u16 pokemonOffset;
+    /*0x1A*/ u16 trainerScale;
+    /*0x1C*/ u16 trainerOffset;
+};  /*size = 0x20*/
+
+extern struct BgTemplate gUnknown_0856E630[];
+extern struct WindowTemplate gUnknown_0856E640[];
+extern const u16 gUnknown_0856E610[16];
+extern const struct PokedexEntry gPokedexEntries[];
 
 #define HOENN_DEX_COUNT 202
 #define NATIONAL_DEX_COUNT 386
@@ -90,6 +117,14 @@ enum
     DEX_MODE_NATIONAL
 };
 
+enum
+{
+    AREA_SCREEN,
+    CRY_SCREEN,
+    SIZE_SCREEN,
+    CANCEL_SCREEN,
+};
+
 // this file's functions
 void sub_80BB774(void);
 void sub_80BB78C(u8);
@@ -121,9 +156,9 @@ bool8 sub_80BD404(u8, u8, u8);
 u16 sub_80BD69C(u16, u16);
 void sub_80BD8D0(void);
 bool8 sub_80BD930(void);
-void sub_80BDA40(void);
+u8 sub_80BDA40(void);
 u16 sub_80BDA8C(u16);
-u16 sub_80BDACC(u16, u16, u16);
+u32 sub_80BDACC(u16, s16, s16);
 void sub_80BDB7C(u8);
 void sub_80BE470(struct Sprite *sprite);
 void sub_80BE604(struct Sprite *sprite);
@@ -135,8 +170,31 @@ void sub_80BE834(struct Sprite *sprite);
 void sub_80BE4E0(struct Sprite *sprite);
 u8 sub_80BE91C(struct PokedexListItem*, u8);
 bool8 sub_80BE9C4(u8);
-void sub_80BE9F8(struct PokedexListItem*, u8);
-void sub_80C09B0(u8);
+u8 sub_80BE9F8(struct PokedexListItem*, u8);
+void sub_80BEA24(u8);
+void sub_80BEDF4(u8);
+void sub_80BEFD0(u8);
+void sub_80BF038(u8);
+void sub_80BF070(u8);
+void sub_80BF0AC(u8);
+void sub_80BF1B4(u8);
+void sub_80BF1EC(u8);
+void sub_80BF250(u8);
+void sub_80BF5CC(u8);
+void sub_80BF790(u8);
+void sub_80BF7FC(u8);
+void sub_80BF82C(u8);
+void sub_80BFBB0(u8);
+void sub_80BFC78(u8);
+void sub_80BFCDC(u16);
+void sub_80BFCF4(u16);
+void sub_80BFD0C(u8, u16);
+void sub_80BFD7C(u8, u16);
+void sub_80C020C(u16, u8, u8, u8);
+void sub_80C09B0(u16);
+void sub_80C0B44(u8, u16, u8, u8);
+void sub_80C0D30(u8, u16);
+u8 sub_80C0EF8(u16, u8, u8, u8);
 u16 sub_80C0E0C(u8, u16, u16, u16);
 u8 sub_80C1258();
 
@@ -1819,3 +1877,1209 @@ u16 sub_80BD69C(u16 a, u16 b)
         gUnknown_02039B4C->unk638++;
     return a;
 }
+
+void sub_80BD8D0(void)
+{
+    u16 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u16 spriteId = gUnknown_02039B4C->unk61E[i];
+
+        if (gSprites[spriteId].pos2.x == 0 && gSprites[spriteId].pos2.y == 0 && spriteId != 0xFFFF)
+            gUnknown_02039B4C->selectedMonSpriteId = spriteId;
+    }
+}
+
+u8 sub_80BD930(void)
+{
+    u16 r2;
+    u16 r4 = gUnknown_02039B4C->selectedPokemon;
+
+    if ((gMain.newKeys & DPAD_UP) && r4)
+    {
+        r2 = r4;
+        while (r2 != 0)
+        {
+            r2 = sub_80C0E0C(1, r2, 0, gUnknown_02039B4C->pokemonListCount - 1);
+
+            if (gUnknown_02039B4C->unk0[r2].seen)
+            {
+                r4 = r2;
+                break;
+            }
+        }
+
+        if (gUnknown_02039B4C->selectedPokemon == r4)
+            return FALSE;
+        else
+        {
+            gUnknown_02039B4C->selectedPokemon = r4;
+            gUnknown_02039B4C->unk62C -= 16;
+            return TRUE;
+        }
+    }
+    else if ((gMain.newKeys & DPAD_DOWN) && r4 < gUnknown_02039B4C->pokemonListCount - 1)
+    {
+        r2 = r4;
+        while (r2 < gUnknown_02039B4C->pokemonListCount - 1)
+        {
+            r2 = sub_80C0E0C(0, r2, 0, gUnknown_02039B4C->pokemonListCount - 1);
+
+            if (gUnknown_02039B4C->unk0[r2].seen)
+            {
+                r4 = r2;
+                break;
+            }
+        }
+
+        if (gUnknown_02039B4C->selectedPokemon == r4)
+            return FALSE;
+        else
+        {
+            gUnknown_02039B4C->selectedPokemon = r4;
+            gUnknown_02039B4C->unk62C += 16;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+u8 sub_80BDA40(void)
+{
+    u16 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_02039B4C->unk61E[i] != 0xFFFF)
+        {
+            sub_818D820(gUnknown_02039B4C->unk61E[i]);
+            gUnknown_02039B4C->unk61E[i] |= 0xFFFF;
+        }
+    }
+    return FALSE;
+}
+
+u16 sub_80BDA8C(u16 a1)
+{
+    if (a1 >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[a1].dexNum == 0xFFFF)
+        return 0xFFFF;
+    else if (gUnknown_02039B4C->unk0[a1].seen)
+        return gUnknown_02039B4C->unk0[a1].dexNum;
+    else
+        return 0;
+}
+
+u32 sub_80BDACC(u16 a, s16 b, s16 c)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_02039B4C->unk61E[i] == 0xFFFF)
+        {
+            u8 spriteId = sub_80C0E9C(a, b, c, i);
+
+            gSprites[spriteId].oam.affineMode = 1;
+            gSprites[spriteId].oam.priority = 3;
+            gSprites[spriteId].data[0] = 0;
+            gSprites[spriteId].data[1] = i;
+            gSprites[spriteId].data[2] = NationalPokedexNumToSpecies(a);
+            gUnknown_02039B4C->unk61E[i] = spriteId;
+            return spriteId;
+        }
+    }
+    return 0xFFFF;
+}
+
+void sub_80BDB7C(u8 a)
+{
+    u8 spriteId;
+    u16 r5;
+
+    spriteId = CreateSprite(&gUnknown_0855D1AC, 184, 4, 0);
+    gSprites[spriteId].data[1] = 0;
+
+    spriteId = CreateSprite(&gUnknown_0855D1AC, 184, 156, 0);
+    gSprites[spriteId].data[1] = 1;
+    gSprites[spriteId].vFlip = TRUE;
+
+    CreateSprite(&gUnknown_0855D194, 230, 20, 0);
+    CreateSprite(&gUnknown_0855D1C4, 16, 120, 0);
+
+    spriteId = CreateSprite(&gUnknown_0855D1C4, 48, 120, 0);
+    StartSpriteAnim(&gSprites[spriteId], 3);
+
+    spriteId = CreateSprite(&gUnknown_0855D1C4, 16, 144, 0);
+    StartSpriteAnim(&gSprites[spriteId], 2);
+    gSprites[spriteId].data[2] = 0x80;
+
+    spriteId = CreateSprite(&gUnknown_0855D1C4, 48, 144, 0);
+    StartSpriteAnim(&gSprites[spriteId], 1);
+
+    spriteId = CreateSprite(&gUnknown_0855D1DC, 0, 80, 2);
+    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.matrixNum = 30;
+    gSprites[spriteId].data[0] = 0x1E;
+    gSprites[spriteId].data[1] = 0;
+
+    spriteId = CreateSprite(&gUnknown_0855D1DC, 0, 80, 2);
+    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.matrixNum = 31;
+    gSprites[spriteId].data[0] = 0x1F;
+    gSprites[spriteId].data[1] = 0x80;
+
+    if (a == 0)
+    {
+        u32 _a;
+        
+        if (!IsNationalPokedexEnabled())
+        {
+            CreateSprite(&gUnknown_0855D1F4, 32, 40, 1);
+
+            spriteId = CreateSprite(&gUnknown_0855D1F4, 32, 72, 1);
+            StartSpriteAnim(&gSprites[spriteId], 1);
+            _a = 0;
+
+            spriteId = CreateSprite(&gUnknown_0855D224, 24, 48, 1);
+            r5 = gUnknown_02039B4C->unk61A / 100;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            if (r5 != 0)
+                _a = 1;
+            else
+                gSprites[spriteId].invisible = TRUE;
+
+            spriteId = CreateSprite(&gUnknown_0855D224, 32, 48, 1);
+            r5 = (gUnknown_02039B4C->unk61A % 100) / 10;
+            if (r5 != 0 || _a != 0)
+                StartSpriteAnim(&gSprites[spriteId], r5);
+            else
+                gSprites[spriteId].invisible = TRUE;
+
+            spriteId = CreateSprite(&gUnknown_0855D224, 40, 48, 1);
+            r5 = (gUnknown_02039B4C->unk61A % 100) % 10;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            _a = 0;
+
+            spriteId = CreateSprite(&gUnknown_0855D224, 24, 80, 1);
+            r5 = gUnknown_02039B4C->unk61C / 100;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            if (r5 != 0)
+                _a = 1;
+            else
+                gSprites[spriteId].invisible = TRUE;
+
+            spriteId = CreateSprite(&gUnknown_0855D224, 32, 80, 1);
+            r5 = (gUnknown_02039B4C->unk61C % 100) / 10;
+            if (r5 != 0 || _a != 0)
+                StartSpriteAnim(&gSprites[spriteId], r5);
+            else
+                gSprites[spriteId].invisible = TRUE;
+
+            spriteId = CreateSprite(&gUnknown_0855D224, 40, 80, 1);
+            r5 = (gUnknown_02039B4C->unk61C % 100) % 10;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+        }
+        else
+        {
+            u16 r6;
+            
+            CreateSprite(&gUnknown_0855D1F4, 32, 40, 1);
+
+            spriteId = CreateSprite(&gUnknown_0855D1F4, 32, 76, 1);
+            StartSpriteAnim(&gSprites[spriteId], 1);
+
+            CreateSprite(&gUnknown_0855D20C, 17, 45, 1);
+            
+            spriteId = CreateSprite(&gUnknown_0855D20C, 17, 55, 1);
+            StartSpriteAnim(&gSprites[spriteId], 1);
+
+            CreateSprite(&gUnknown_0855D20C, 17, 81, 1);
+            
+            spriteId = CreateSprite(&gUnknown_0855D20C, 17, 91, 1);
+            StartSpriteAnim(&gSprites[spriteId], 1);
+            
+            r6 = GetHoennPokedexCount(0);
+            _a = 0;
+
+            spriteId = CreateSprite(&gUnknown_0855D23C, 40, 45, 1);
+            r5 = r6 / 100;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            if (r5 != 0)
+                _a = 1;
+            else
+                gSprites[spriteId].invisible = TRUE;
+
+            spriteId = CreateSprite(&gUnknown_0855D23C, 48, 45, 1);
+            r5 = (r6 % 100) / 10;
+            if (r5 != 0 || _a != 0)
+                StartSpriteAnim(&gSprites[spriteId], r5);
+            else
+                gSprites[spriteId].invisible = TRUE;
+
+            spriteId = CreateSprite(&gUnknown_0855D23C, 56, 45, 1);
+            r5 = (r6 % 100) % 10;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            
+            _a = 0;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 40, 55, 1);
+            r5 = gUnknown_02039B4C->unk61A / 100;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            if (r5 != 0)
+                _a = 1;
+            else
+                gSprites[spriteId].invisible = TRUE;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 48, 55, 1);
+            r5 = (gUnknown_02039B4C->unk61A % 100) / 10;
+            if (r5 != 0 || _a != 0)
+                StartSpriteAnim(&gSprites[spriteId], r5);
+            else
+                gSprites[spriteId].invisible = TRUE;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 56, 55, 1);
+            r5 = (gUnknown_02039B4C->unk61A % 100) % 10;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            
+            r6 = GetHoennPokedexCount(1);
+            _a = 0;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 40, 81, 1);
+            r5 = r6 / 100;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            if (r5 != 0)
+                _a = 1;
+            else
+                gSprites[spriteId].invisible = TRUE;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 48, 81, 1);
+            r5 = (r6 % 100) / 10;
+            if (r5 != 0 || _a != 0)
+                StartSpriteAnim(&gSprites[spriteId], r5);
+            else
+                gSprites[spriteId].invisible = TRUE;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 56, 81, 1);
+            r5 = (r6 % 100) % 10;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            
+            _a = 0;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 40, 91, 1);
+            r5 = gUnknown_02039B4C->unk61C / 100;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+            if (r5 != 0)
+                _a = 1;
+            else
+                gSprites[spriteId].invisible = TRUE;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 48, 91, 1);
+            r5 = (gUnknown_02039B4C->unk61C % 100) / 10;
+            if (r5 != 0 || _a != 0)
+                StartSpriteAnim(&gSprites[spriteId], r5);
+            else
+                gSprites[spriteId].invisible = TRUE;
+            
+            spriteId = CreateSprite(&gUnknown_0855D23C, 56, 91, 1);
+            r5 = (gUnknown_02039B4C->unk61C % 100) % 10;
+            StartSpriteAnim(&gSprites[spriteId], r5);
+        }
+        spriteId = CreateSprite(&gUnknown_0855D254, 136, 96, 1);
+        gSprites[spriteId].invisible = TRUE;
+    }
+    else
+    {
+        spriteId = CreateSprite(&gUnknown_0855D254, 136, 80, 1);
+        gSprites[spriteId].invisible = TRUE;
+    }
+}
+
+void nullsub_38(struct Sprite *sprite)
+{
+}
+
+void sub_80BE44C(struct Sprite *sprite)
+{
+    if (gUnknown_02039B4C->unk64A != 0)
+        DestroySprite(sprite);
+}
+
+//Move Pokemon into position for description page
+void sub_80BE470(struct Sprite *sprite)
+{
+    sprite->oam.priority = 0;
+    sprite->oam.affineMode = 0;
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    if (sprite->pos1.x != 48 || sprite->pos1.y != 56)
+    {
+        if (sprite->pos1.x > 48)
+            sprite->pos1.x--;
+        if (sprite->pos1.x < 48)
+            sprite->pos1.x++;
+
+        if (sprite->pos1.y > 56)
+            sprite->pos1.y--;
+        if (sprite->pos1.y < 56)
+            sprite->pos1.y++;
+    }
+    else
+    {
+        sprite->callback = nullsub_38;
+    }
+}
+
+void sub_80BE4E0(struct Sprite *sprite)
+{
+    u8 data1 = sprite->data[1];
+
+    if (gUnknown_02039B4C->unk64A != 0 && gUnknown_02039B4C->unk64A != 3)
+    {
+        sub_818D820(gUnknown_02039B4C->unk61E[data1]);
+        gUnknown_02039B4C->unk61E[data1] = 0xFFFF;
+    }
+    else
+    {
+        u32 var;
+
+        sprite->pos2.y = gSineTable[(u8)sprite->data[5]] * 76 / 256;
+        var = 0x10000 / gSineTable[sprite->data[5] + 0x40];
+        if (var > 0xFFFF)
+            var = 0xFFFF;
+        SetOamMatrix(sprite->data[1] + 1, 0x100, 0, 0, var);
+        sprite->oam.matrixNum = data1 + 1;
+
+        if (sprite->data[5] > -64 && sprite->data[5] < 64)
+        {
+            sprite->invisible = FALSE;
+            sprite->data[0] = 1;
+        }
+        else
+        {
+            sprite->invisible = TRUE;
+        }
+
+        if ((sprite->data[5] <= -64 || sprite->data[5] >= 64) && sprite->data[0] != 0)
+        {
+            sub_818D820(gUnknown_02039B4C->unk61E[data1]);
+            gUnknown_02039B4C->unk61E[data1] = 0xFFFF;
+        }
+    }
+}
+
+void sub_80BE604(struct Sprite *sprite)
+{
+    if (gUnknown_02039B4C->unk64A != 0 && gUnknown_02039B4C->unk64A != 3)
+        DestroySprite(sprite);
+    else
+        sprite->pos2.y = gUnknown_02039B4C->selectedPokemon * 120 / (gUnknown_02039B4C->pokemonListCount - 1);
+}
+
+void sub_80BE658(struct Sprite *sprite)
+{
+    if (gUnknown_02039B4C->unk64A != 0 && gUnknown_02039B4C->unk64A != 3)
+    {
+        DestroySprite(sprite);
+    }
+    else
+    {
+        u8 r0;
+
+        if (sprite->data[1] != 0)
+        {
+            if (gUnknown_02039B4C->selectedPokemon == gUnknown_02039B4C->pokemonListCount - 1)
+                sprite->invisible = TRUE;
+            else
+                sprite->invisible = FALSE;
+            r0 = sprite->data[2];
+        }
+        else
+        {
+            if (gUnknown_02039B4C->selectedPokemon == 0)
+                sprite->invisible = TRUE;
+            else
+                sprite->invisible = FALSE;
+            r0 = sprite->data[2] - 128;
+        }
+        sprite->pos2.y = gSineTable[r0] / 64;
+        sprite->data[2] = sprite->data[2] + 8;
+        if (gUnknown_02039B4C->menuIsOpen == 0 && gUnknown_02039B4C->menuY == 0 && sprite->invisible == 0)
+            sprite->invisible = FALSE;
+        else
+            sprite->invisible = TRUE;
+    }
+}
+
+void sub_80BE758(struct Sprite *sprite)
+{
+    if (gUnknown_02039B4C->unk64A != 0 && gUnknown_02039B4C->unk64A != 3)
+        DestroySprite(sprite);
+}
+
+void sub_80BE780(struct Sprite *sprite)
+{
+    if (gUnknown_02039B4C->unk64A != 0 && gUnknown_02039B4C->unk64A != 3)
+    {
+        DestroySprite(sprite);
+    }
+    else
+    {
+        u8 val;
+        s16 r3;
+        s16 r0;
+
+        val = gUnknown_02039B4C->unk62C + sprite->data[1];
+        r3 = gSineTable[val];
+        r0 = gSineTable[val + 0x40];
+        SetOamMatrix(sprite->data[0], r0, r3, -r3, r0);
+
+        val = gUnknown_02039B4C->unk62C + (sprite->data[1] + 0x40);
+        r3 = gSineTable[val];
+        r0 = gSineTable[val + 0x40];
+        sprite->pos2.x = r0 * 40 / 256;
+        sprite->pos2.y = r3 * 40 / 256;
+    }
+}
+
+void sub_80BE834(struct Sprite *sprite)
+{
+    if (gUnknown_02039B4C->unk64A != 0 && gUnknown_02039B4C->unk64A != 3)
+    {
+        DestroySprite(sprite);
+    }
+    else
+    {
+        u16 r1 = gUnknown_02039B4C->unk64A == 0 ? 80 : 96;
+
+        if (gUnknown_02039B4C->menuIsOpen != 0 && gUnknown_02039B4C->menuY == r1)
+        {
+            sprite->invisible = FALSE;
+            sprite->pos2.y = gUnknown_02039B4C->menuCursorPos * 16;
+            sprite->pos2.x = gSineTable[(u8)sprite->data[2]] / 64;
+            sprite->data[2] += 8;
+        }
+        else
+        {
+            sprite->invisible = TRUE;
+        }
+    }
+}
+
+void sub_80BE8DC(const u8* a, u8 b, u8 c)
+{
+    u8 sp14[3];
+    sp14[0] = 0;
+    sp14[1] = 15;
+    sp14[2] = 3;
+    
+    AddTextPrinterParameterized2(0, 1, b, c, 0, 0, sp14, -1, a);
+}
+
+u8 sub_80BE91C(struct PokedexListItem* item, u8 b)
+{
+    u8 taskId;
+    
+    gUnknown_02039B54 = item;
+    taskId = CreateTask(sub_80BEA24, 0);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 1;
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[3] = 0;
+    gTasks[taskId].data[4] = b;
+    gTasks[taskId].data[5] = 255;
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, gUnknown_0856E630, 4);
+    SetBgTilemapBuffer(3, AllocZeroed(0x800));
+    SetBgTilemapBuffer(2, AllocZeroed(0x800));
+    SetBgTilemapBuffer(1, AllocZeroed(0x800));
+    SetBgTilemapBuffer(0, AllocZeroed(0x800));
+    InitWindows(gUnknown_0856E640);
+    DeactivateAllTextPrinters();
+    
+    return taskId;
+}
+
+bool8 sub_80BE9C4(u8 taskId)
+{
+    if (gTasks[taskId].data[0] == 0 && gTasks[taskId].func == sub_80BEDF4)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+u8 sub_80BE9F8(struct PokedexListItem *item, u8 b)
+{
+    gUnknown_02039B54 = item;
+    gTasks[b].data[0] = 1;
+    gTasks[b].data[1] = 0;
+    gTasks[b].data[2] = 0;
+    gTasks[b].data[3] = 0;
+    return b;
+}
+
+void sub_80BEA24(u8 taskId)
+{
+    switch (gMain.state)
+    {
+        case 0:
+        default:
+            if (!gPaletteFade.active)
+            {
+                u16 r2;
+
+                gUnknown_02039B4C->unk64A = 1;
+                gUnknown_030060B4 = gMain.vblankCallback;
+                SetVBlankCallback(NULL);
+                r2 = 0;
+                if (gTasks[taskId].data[1] != 0)
+                    r2 += 0x1000;
+                if (gTasks[taskId].data[2] != 0)
+                    r2 |= 0x200;
+                sub_80C09B0(r2);
+                gMain.state = 1;
+            }
+            break;
+        case 1:
+            copy_decompressed_tile_data_to_vram_autofree(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
+            CopyToBgTilemapBuffer(3, gUnknown_08DC3080, 0, 0);
+            FillWindowPixelBuffer(0, 0);
+            PutWindowTilemap(0);
+            PutWindowTilemap(1);
+            sub_80C0D30(1, gUnknown_02039B54->dexNum);
+            CopyWindowToVram(1, 2);
+            gMain.state++;
+            break;
+        case 2:
+            sub_80BFCDC(0xD);
+            sub_80BFD0C(gUnknown_02039B4C->selectedScreen, 0xD);
+            sub_80BC844(gUnknown_02039B4C->unk64C_1);
+            gMain.state++;
+            break;
+        case 3:
+            gMain.state++;
+            break;
+        case 4:
+            sub_80C020C(gUnknown_02039B54->dexNum, gUnknown_02039B4C->dexMode == 0 ? 0 : 1, gUnknown_02039B54->owned, 0);
+            if (!gUnknown_02039B54->owned)
+                LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
+            CopyWindowToVram(0, 3);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(3);
+            gMain.state++;
+            break;
+        case 5:
+            if (gTasks[taskId].data[1] == 0)
+            {
+                gTasks[taskId].data[4] = (u16)sub_80C0E9C(gUnknown_02039B54->dexNum, 0x30, 0x38, 0);
+                gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+            }
+            gMain.state++;
+            break;
+        case 6:
+            {
+                u32 r3 = 0;
+
+                if (gTasks[taskId].data[2] != 0)
+                    r3 = 0x14;
+                if (gTasks[taskId].data[1] != 0)
+                    r3 |= (1 << (gSprites[gTasks[taskId].data[4]].oam.paletteNum + 16));
+                BeginNormalPaletteFade(~r3, 0, 16, 0, 0);
+                SetVBlankCallback(gUnknown_030060B4);
+                gMain.state++;
+            }
+            break;
+        case 7:
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+            SetGpuReg(REG_OFFSET_BLDY, 0);
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+            HideBg(0);
+            ShowBg(1);
+            ShowBg(2);
+            ShowBg(3);
+            gMain.state++;
+            break;
+        case 8:
+            if (!gPaletteFade.active)
+            {
+                gMain.state++;
+                if (gTasks[taskId].data[3] == 0)
+                {
+                    StopCryAndClearCrySongs();
+                    PlayCry2(NationalPokedexNumToSpecies(gUnknown_02039B54->dexNum), 0, 0x7D, 0xA);
+                }
+                else
+                {
+                    gMain.state++;
+                }
+            }
+            break;
+        case 9:
+            if (!IsCryPlayingOrClearCrySongs())
+                gMain.state++;
+            break;
+        case 10:
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].data[2] = 1;
+            gTasks[taskId].data[3] = 1;
+            gTasks[taskId].func = sub_80BEDF4;
+            gMain.state = 0;
+            break;
+    }
+}
+
+void sub_80BEDB0(void)
+{
+    void *r0;
+    FreeAllWindowBuffers();
+    r0 = GetBgTilemapBuffer(0);
+    if (r0)
+        Free(r0);
+    r0 = GetBgTilemapBuffer(1);
+    if (r0)
+        Free(r0);
+    r0 = GetBgTilemapBuffer(2);
+    if (r0)
+        Free(r0);
+    r0 = GetBgTilemapBuffer(3);
+    if (r0)
+        Free(r0);
+}
+
+void sub_80BEDF4(u8 taskId)
+{
+    if (gTasks[taskId].data[0] != 0)
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        gTasks[taskId].func = sub_80BF038;
+        PlaySE(SE_Z_SCROLL);
+        return;
+    }
+    if (gMain.newKeys & B_BUTTON)
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        gTasks[taskId].func = sub_80BF070;
+        PlaySE(SE_PC_OFF);
+        return;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        switch (gUnknown_02039B4C->selectedScreen)
+        {
+        case AREA_SCREEN:
+            BeginNormalPaletteFade(-0x15, 0, 0, 16, 0);
+            gUnknown_02039B4C->unk64E = 1;
+            gTasks[taskId].func = sub_80BEFD0;
+            PlaySE(SE_PIN);
+            break;
+        case CRY_SCREEN:
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            gUnknown_02039B4C->unk64E = 2;
+            gTasks[taskId].func = sub_80BEFD0;
+            PlaySE(SE_PIN);
+            break;
+        case SIZE_SCREEN:
+            if (!gUnknown_02039B54->owned)
+            {
+                PlaySE(SE_HAZURE);
+            }
+            else
+            {
+                BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+                gUnknown_02039B4C->unk64E = 3;
+                gTasks[taskId].func = sub_80BEFD0;
+                PlaySE(SE_PIN);
+            }
+            break;
+        case CANCEL_SCREEN:
+            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            gTasks[taskId].func = sub_80BF070;
+            PlaySE(SE_PC_OFF);
+            break;
+        }
+        return;
+    }
+    if (((gMain.newKeys & DPAD_LEFT)
+     || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+     && gUnknown_02039B4C->selectedScreen > 0)
+    {
+        gUnknown_02039B4C->selectedScreen--;
+        sub_80BFD0C(gUnknown_02039B4C->selectedScreen, 0xD);
+        PlaySE(SE_Z_PAGE);
+        return;
+    }
+    if (((gMain.newKeys & DPAD_RIGHT)
+     || ((gMain.newKeys & R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+     && gUnknown_02039B4C->selectedScreen < 3)
+    {
+        gUnknown_02039B4C->selectedScreen++;
+        sub_80BFD0C(gUnknown_02039B4C->selectedScreen, 0xD);
+        PlaySE(SE_Z_PAGE);
+        return;
+    }
+}
+
+void sub_80BEFD0(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_818D820(gTasks[taskId].data[4]);
+        switch (gUnknown_02039B4C->unk64E)
+        {
+            case 1:
+            default:
+                gTasks[taskId].func = sub_80BF0AC;
+                break;
+            case 2:
+                gTasks[taskId].func = sub_80BF250;
+                break;
+            case 3:
+                gTasks[taskId].func = sub_80BF82C;
+                break;
+        }
+    }
+}
+
+void sub_80BF038(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_818D820(gTasks[taskId].data[4]);
+        gTasks[taskId].func = sub_80BEA24;
+    }
+}
+
+void sub_80BF070(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_818D820(gTasks[taskId].data[4]);
+        sub_80BEDB0();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_80BF0AC(u8 taskId)
+{
+    switch (gMain.state)
+    {
+        case 0:
+        default:
+            if (!gPaletteFade.active)
+            {
+                gUnknown_02039B4C->unk64A = 5;
+                gUnknown_030060B4 = gMain.vblankCallback;
+                SetVBlankCallback(NULL);
+                sub_80C09B0(0x200);
+                gUnknown_02039B4C->selectedScreen = AREA_SCREEN;
+                gMain.state = 1;
+            }
+            break;
+        case 1:
+            sub_80BFCF4(0xD);
+            sub_80BFD7C(0, 0xD);
+            sub_80BC844(gUnknown_02039B4C->unk64C_1);
+            SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(13) | BGCNT_16COLOR | BGCNT_TXT256x256);
+            gMain.state++;
+            break;
+        case 2:
+            sub_813D3D8(NationalPokedexNumToSpecies(gUnknown_02039B54->dexNum), &gUnknown_02039B4C->unk64E);
+            SetVBlankCallback(gUnknown_030060B4);
+            gUnknown_02039B4C->unk64E = 0;
+            gMain.state = 0;
+            gTasks[taskId].func = sub_80BF1B4;
+            break;
+    }
+}
+
+void sub_80BF1B4(u8 taskId)
+{
+    if (gUnknown_02039B4C->unk64E != 0)
+        gTasks[taskId].func = sub_80BF1EC;
+}
+
+void sub_80BF1EC(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        switch (gUnknown_02039B4C->unk64E)
+        {
+        case 1:
+        default:
+            gTasks[taskId].func = sub_80BEA24;
+            break;
+        case 2:
+            gTasks[taskId].func = sub_80BF250;
+            break;
+        }
+    }
+}
+
+void sub_80BF250(u8 taskId)
+{
+    switch (gMain.state)
+    {
+        case 0:
+        default:
+            if (!gPaletteFade.active)
+            {
+                m4aMPlayStop(&gMPlayInfo_BGM);
+                gUnknown_02039B4C->unk64A = 6;
+                gUnknown_030060B4 = gMain.vblankCallback;
+                SetVBlankCallback(NULL);
+                sub_80C09B0(0x200);
+                gUnknown_02039B4C->selectedScreen = CRY_SCREEN;
+                gMain.state = 1;
+            }
+            break;
+        case 1:
+            copy_decompressed_tile_data_to_vram_autofree(3, &gPokedexMenu_Gfx, 0x2000, 0, 0);
+            CopyToBgTilemapBuffer(3, &gUnknown_08DC3198, 0, 0);
+            FillWindowPixelBuffer(0, 0);
+            PutWindowTilemap(0);
+            PutWindowTilemap(3);
+            PutWindowTilemap(2);
+            gMain.state++;
+            break;
+        case 2:
+            sub_80BFCF4(0xD);
+            sub_80BFD7C(1, 0xD);
+            sub_80BC844(gUnknown_02039B4C->unk64C_1);
+            gMain.state++;
+            break;
+        case 3:
+            ResetPaletteFade();
+            gMain.state++;
+            break;
+        case 4:
+            sub_80BE8DC(gText_CryOf, 0x52, 33);
+            sub_80C0B44(0, gUnknown_02039B54->dexNum, 0x52, 49);
+            gMain.state++;
+            break;
+        case 5:
+            gTasks[taskId].data[4] = sub_80C0E9C(gUnknown_02039B54->dexNum, 48, 56, 0);
+            gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+            gUnknown_030061EC = 0;
+            gMain.state++;
+            break;
+        case 6:
+            {
+                struct CryRelatedStruct sp4;
+
+                sp4.unk0 = 0x4020;
+                sp4.unk2 = 0x1F;
+                sp4.paletteNo = 8;
+                sp4.yPos = 0x1E;
+                sp4.xPos = 0xC;
+                if (sub_8145354(&sp4, 2) != 0)
+                {
+                    gMain.state++;
+                    gUnknown_030061EC = 0;
+                }
+            }
+            break;
+        case 7:
+            {
+                struct CryRelatedStruct spC;
+
+                spC.paletteNo = 9;
+                spC.xPos = 0x12;
+                spC.yPos = 3;
+                if (sub_8145850(&spC, 3) != 0)
+                    gMain.state++;
+                CopyWindowToVram(3, 2);
+                CopyWindowToVram(0, 3);
+                CopyBgTilemapBufferToVram(0);
+                CopyBgTilemapBufferToVram(1);
+                CopyBgTilemapBufferToVram(2);
+                CopyBgTilemapBufferToVram(3);
+            }
+            break;
+        case 8:
+            BeginNormalPaletteFade(-0x15, 0, 0x10, 0, 0);
+            SetVBlankCallback(gUnknown_030060B4);
+            gMain.state++;
+            break;
+        case 9:
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+            SetGpuReg(REG_OFFSET_BLDY, 0);
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+            ShowBg(0);
+            ShowBg(1);
+            ShowBg(2);
+            ShowBg(3);
+            gMain.state++;
+            break;
+        case 10:
+            gUnknown_02039B4C->unk64E = 0;
+            gMain.state = 0;
+            gTasks[taskId].func = sub_80BF5CC;
+            break;
+    }
+}
+
+void sub_80BF5CC(u8 taskId)
+{
+    sub_814545C(2);
+
+    if (IsCryPlaying())
+        sub_80BF7FC(1);
+    else
+        sub_80BF7FC(0);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        sub_80BF7FC(1);
+        sub_8145534(NationalPokedexNumToSpecies(gUnknown_02039B54->dexNum));
+        return;
+    }
+    else if (!gPaletteFade.active)
+    {
+        if (gMain.newKeys & B_BUTTON)
+        {
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            m4aMPlayContinue(&gMPlayInfo_BGM);
+            gUnknown_02039B4C->unk64E = 1;
+            gTasks[taskId].func = sub_80BF790;
+            PlaySE(SE_PC_OFF);
+            return;
+        }
+        if ((gMain.newKeys & DPAD_LEFT)
+         || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        {
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            m4aMPlayContinue(&gMPlayInfo_BGM);
+            gUnknown_02039B4C->unk64E = 2;
+            gTasks[taskId].func = sub_80BF790;
+            PlaySE(SE_Z_PAGE);
+            return;
+        }
+        if ((gMain.newKeys & DPAD_RIGHT)
+         || ((gMain.newKeys & R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        {
+            if (!gUnknown_02039B54->owned)
+            {
+                PlaySE(SE_HAZURE);
+            }
+            else
+            {
+                BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+                m4aMPlayContinue(&gMPlayInfo_BGM);
+                gUnknown_02039B4C->unk64E = 3;
+                gTasks[taskId].func = sub_80BF790;
+                PlaySE(SE_Z_PAGE);
+            }
+            return;
+        }
+    }
+}
+
+void sub_80BF790(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_8145914();
+        sub_818D820(gTasks[taskId].data[4]);
+        switch (gUnknown_02039B4C->unk64E)
+        {
+        default:
+        case 1:
+            gTasks[taskId].func = sub_80BEA24;
+            break;
+        case 2:
+            gTasks[taskId].func = sub_80BF0AC;
+            break;
+        case 3:
+            gTasks[taskId].func = sub_80BF82C;
+            break;
+        }
+    }
+}
+
+void sub_80BF7FC(u8 a)
+{
+    u16 unk;
+
+    if (a != 0)
+        unk = 0x392;
+    else
+        unk = 0x2AF;
+    LoadPalette(&unk, 0x5D, 2);
+}
+
+void sub_80BF82C(u8 taskId)
+{
+    u8 spriteId;
+
+    switch (gMain.state)
+    {
+    default:
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            gUnknown_02039B4C->unk64A = 7;
+            gUnknown_030060B4 = gMain.vblankCallback;
+            SetVBlankCallback(NULL);
+            sub_80C09B0(0x200);
+            gUnknown_02039B4C->selectedScreen = SIZE_SCREEN;
+            gMain.state = 1;
+        }
+        break;
+    case 1:
+        copy_decompressed_tile_data_to_vram_autofree(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
+        CopyToBgTilemapBuffer(3, gUnknown_08DC2E6C, 0, 0);
+        FillWindowPixelBuffer(0, 0);
+        PutWindowTilemap(0);
+        gMain.state++;
+        break;
+    case 2:
+        sub_80BFCF4(0xD);
+        sub_80BFD7C(2, 0xD);
+        sub_80BC844(gUnknown_02039B4C->unk64C_1);
+        gMain.state++;
+        break;
+    case 3:
+        {
+            u8 string[0x40];  //I hope this is the correct size
+
+            StringCopy(string, gText_SizeComparedTo);
+            StringAppend(string, gSaveBlock2Ptr->playerName);
+            sub_80BE8DC(string, GetStringCenterAlignXOffset(1, string, 0xF0), 0x79);
+            gMain.state++;
+        }
+        break;
+    case 4:
+        ResetPaletteFade();
+        gMain.state++;
+        break;
+    case 5:
+        spriteId = sub_80C0EF8(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), 152, 56, 0);
+        gSprites[spriteId].oam.affineMode = 1;
+        gSprites[spriteId].oam.matrixNum = 1;
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].pos2.y = gPokedexEntries[gUnknown_02039B54->dexNum].trainerOffset;
+        SetOamMatrix(1, gPokedexEntries[gUnknown_02039B54->dexNum].trainerScale, 0, 0, gPokedexEntries[gUnknown_02039B54->dexNum].trainerScale);
+        LoadPalette(gUnknown_0856E610, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+        gTasks[taskId].data[5] = spriteId;
+        gMain.state++;
+        break;
+    case 6:
+        spriteId = sub_80C0E9C(gUnknown_02039B54->dexNum, 88, 56, 1);
+        gSprites[spriteId].oam.affineMode = 1;
+        gSprites[spriteId].oam.matrixNum = 2;
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].pos2.y = gPokedexEntries[gUnknown_02039B54->dexNum].pokemonOffset;
+        SetOamMatrix(2, gPokedexEntries[gUnknown_02039B54->dexNum].pokemonScale, 0, 0, gPokedexEntries[gUnknown_02039B54->dexNum].pokemonScale);
+        LoadPalette(gUnknown_0856E610, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+        gTasks[taskId].data[4] = spriteId;
+        CopyWindowToVram(0, 3);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(3);
+        gMain.state++;
+        break;
+    case 7:
+        BeginNormalPaletteFade(-0x15, 0, 0x10, 0, 0);
+        SetVBlankCallback(gUnknown_030060B4);
+        gMain.state++;
+        break;
+    case 8:
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+        HideBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        ShowBg(3);
+        gMain.state++;
+        break;
+    case 9:
+        if (!gPaletteFade.active)
+        {
+            gUnknown_02039B4C->unk64E = 0;
+            gMain.state = 0;
+            gTasks[taskId].func = sub_80BFBB0;
+        }
+        break;
+    }
+}
+
+void sub_80BFBB0(u8 taskId)
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+        gUnknown_02039B4C->unk64E = 1;
+        gTasks[taskId].func = sub_80BFC78;
+        PlaySE(SE_PC_OFF);
+    }
+    else if ((gMain.newKeys & DPAD_LEFT)
+     || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    {
+        BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+        gUnknown_02039B4C->unk64E = 2;
+        gTasks[taskId].func = sub_80BFC78;
+        PlaySE(SE_Z_PAGE);
+    }
+}
+
+void sub_80BFC78(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_818D820(gTasks[taskId].data[4]);
+        sub_818D8F0(gTasks[taskId].data[5]);
+        switch (gUnknown_02039B4C->unk64E)
+        {
+        default:
+        case 1:
+            gTasks[taskId].func = sub_80BEA24;
+            break;
+        case 2:
+            gTasks[taskId].func = sub_80BF250;
+            break;
+        }
+    }
+}
+
+void sub_80BFCDC(u16 a)
+{
+    CopyToBgTilemapBuffer(1, gUnknown_08DC2F5C, 0, 0);
+}
+
+void sub_80BFCF4(u16 a)
+{
+    CopyToBgTilemapBuffer(1, gUnknown_08DC2FEC, 0, 0);
+}
+
+/* void sub_80BFD0C(u8 a, u16 unused)
+{
+    u8 i;
+    u8 j;
+    u16* r7 = GetBgTilemapBuffer(1);
+    u8 r5;
+    u16 r3;
+    
+    for (i = 0; i < 4; i++)
+    {
+        r5 = i * 7 + 1;
+        if (i == a)
+            r3 = 0x2000;
+        else
+            r3 = 0x4000;
+        
+        for (j = 0; j < 7; j++)
+        {
+            u32 r1 = (r5 + j);
+            
+            *(r7 + r1) = (*(r7 + r1) & 0xFFF) | r3;
+            *(r7 + 0x40 + r1) = (*(r7 + 0x40 + r1) & 0xFFF) | r3;
+        }
+    }
+    CopyBgTilemapBufferToVram(1);
+} */

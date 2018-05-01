@@ -2662,6 +2662,11 @@ extern const u8 gUnknown_08DC2B1C[];
 extern const u16 gPokedexHoennBg_Pal[];
 extern const u16 gPokedexText_Pal[];
 extern const u16 gPokedexNationalBg_Pal[];
+extern const u8 gUnknown_08DC3080[];
+extern const u8 gUnknown_08DC3198[];
+extern const u8 gUnknown_08DC2E6C[];
+extern const u8 gUnknown_08DC2F5C[];
+extern const u8 gUnknown_08DC2FEC[];
 
 // berry tag screen
 extern const u8 gUnknown_08D9BB44[];

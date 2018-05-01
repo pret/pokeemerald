@@ -366,6 +366,11 @@ extern const u8 gText_ThreeDashes[];
 extern const u8 gText_PkmnHPRestoredByVar2[];
 extern const u8 gText_CantBeUsedOnPkmn[];
 
+//pokedex text
+
+extern const u8 gText_CryOf[];
+extern const u8 gText_SizeComparedTo[];
+
 //birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];
 extern const u8 gBirchDexRatingText_LessThan20[];
