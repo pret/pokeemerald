@@ -90,7 +90,7 @@ sub_8120128: @ 8120128
 	thumb_func_start sub_8120154
 sub_8120154: @ 8120154
 	push {lr}
-	bl sub_81339F8
+	bl TraderSetup
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8120154
