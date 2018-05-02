@@ -401,6 +401,7 @@ struct ContestResources
     void * field_3c;
 };
 
+#define shared15800 (gHeap + 0x18000)
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
 
 extern struct ContestResources *gContestResources;

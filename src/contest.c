@@ -31,6 +31,7 @@
 #include "scanline_effect.h"
 #include "util.h"
 #include "contest_link_80F57C4.h"
+#include "dma3.h"
 
 #define DESTROY_POINTER(ptr) \
     free(ptr); \
@@ -42,14 +43,29 @@ void sub_80D7CB4(u8 taskId);
 void sub_80D7DAC(u8 taskId);
 void sub_80D7DC8(u8 taskId);
 void sub_80D7DE8(u8 taskId);
-void sub_80D80C8(u8 taskId);
-void sub_80D823C(void);
-void sub_80DBF68(void);
-void sub_80DCE58(u8);
-void sub_80DD590(void);
 bool8 sub_80D7E44(u8 *);
+void sub_80D80C8(u8 taskId);
+void sub_80D8108(u8 taskId);
+void sub_80DE350(void);
+void sub_80DDB0C(void);
+void sub_80D833C(u8 taskId);
+void sub_80D823C(void);
+u8 sub_80DB0C4(void);
+u8 sub_80DB120(void);
+void sub_80DB2BC(void);
+void sub_80DBF68(void);
+void sub_80DBF90(void);
+void sub_80DC2BC(void);
+void sub_80DC4F0(void);
+void sub_80DC594(void);
+void sub_80DC5E8(void);
+void sub_80DC7EC(void);
+void sub_80DCE58(u8);
+void sub_80DD04C(void);
+void sub_80DD590(void);
 void sub_80DE224(void);
 void vblank_cb_battle(void);
+void sub_80DEA20(void);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F00[4] = {0};
@@ -69,7 +85,7 @@ EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 EWRAM_DATA u8 gUnknown_02039F30 = 0;
 EWRAM_DATA u8 gUnknown_02039F31 = 0;
 EWRAM_DATA struct ContestResources * gContestResources = NULL;
-EWRAM_DATA u8 gUnknown_02039F38 = 0;
+EWRAM_DATA u8 sContestBgCopyFlags = 0;
 EWRAM_DATA struct ContestWinner gUnknown_02039F3C = {0};
 
 u32 gContestRngValue;
@@ -77,7 +93,7 @@ u32 gContestRngValue;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
+extern s16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
@@ -91,9 +107,10 @@ extern const u8 gContestMiscGfx[];
 extern const u8 gContestAudienceGfx[];
 extern const u8 gUnknown_08C16FA8[];
 extern const u8 gUnknown_08C16E90[];
+extern const u8 gUnknown_08C17170[];
+extern const u16 gUnknown_08587C30[];
 extern const struct BgTemplate gUnknown_08587F34[4];
 extern const struct WindowTemplate gUnknown_08587F44[];
-extern const u16 gUnknown_08587C30[];
 
 void TaskDummy1(u8 taskId)
 {
@@ -271,7 +288,7 @@ void sub_80D7B24(void)
     switch (gMain.state)
     {
         case 0:
-            gUnknown_02039F38 = 0;
+            sContestBgCopyFlags = 0;
             sub_80D7988();
             AllocateMonSpritesGfx();
             DESTROY_POINTER(gMonSpritesGfxPtr->firstDecompressed);
@@ -396,3 +413,168 @@ void sub_80D7DE8(u8 taskId)
     }
 }
 
+u8 sub_80D7E44(u8 *a)
+{
+    u16 sp0[16];
+    u16 sp20[16];
+
+    switch (*a)
+    {
+        case 0:
+            gPaletteFade.bufferTransferDisabled = TRUE;
+            RequestDma3Fill(0, (void *)VRAM, 0x8000, 1);
+            RequestDma3Fill(0, (void *)VRAM + 0x8000, 0x8000, 1);
+            RequestDma3Fill(0, (void *)VRAM + 0x10000, 0x8000, 1);
+            break;
+        case 1:
+            LZDecompressVram(gContestMiscGfx, (void *)VRAM);
+            break;
+        case 2:
+            LZDecompressVram(gContestAudienceGfx, (void *)(VRAM + 0x2000));
+            DmaCopyLarge32(3, (void *)(VRAM + 0x2000), shared15800, 0x2000, 0x1000);
+            break;
+        case 3:
+            CopyToBgTilemapBuffer(3, gUnknown_08C16FA8, 0, 0);
+            CopyBgTilemapBufferToVram(3);
+            break;
+        case 4:
+            CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
+            CopyBgTilemapBufferToVram(2);
+            DmaCopy32Defvars(3, gContestResources->field_24[2], shared18000.unk18A04, 0x800);
+            break;
+        case 5:
+            LoadCompressedPalette(gUnknown_08C16E90, 0, 0x200);
+            CpuCopy32(gPlttBufferUnfaded + 128, sp0, 16 * sizeof(u16));
+            CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, sp20, 16 * sizeof(u16));
+            CpuCopy32(sp20, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
+            CpuCopy32(sp0, gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
+            DmaCopy32Defvars(3, gPlttBufferUnfaded, shared18000.unk18004, 0x200);
+            sub_80D782C();
+            break;
+        case 6:
+            sub_80DD04C();
+            sub_80DBF90();
+            sub_80DB2BC();
+            gContestResources->field_0->unk19216 = sub_80DB120();
+            sub_80DC2BC();
+            sub_80DC4F0();
+            sub_80DC594();
+            sub_80DC5E8();
+            sub_80DC7EC();
+            gBattlerPositions[0] = 0;
+            gBattlerPositions[1] = 1;
+            gBattlerPositions[2] = 3;
+            gBattlerPositions[3] = 2;
+            gBattleTypeFlags = 0;
+            gBattlerAttacker = 2;
+            gBattlerTarget = 3;
+            gBattlerSpriteIds[gBattlerAttacker] = sub_80DB0C4();
+            sub_80DEA20();
+            CopyBgTilemapBufferToVram(3);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(1);
+            ShowBg(3);
+            ShowBg(2);
+            ShowBg(0);
+            ShowBg(1);
+            break;
+        default:
+            *a = 0;
+            return 1;
+    }
+
+    (*a)++;
+    return 0;
+}
+
+void sub_80D80C8(u8 taskId)
+{
+    gPaletteFade.bufferTransferDisabled = FALSE;
+    if (!gPaletteFade.active)
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].func = sub_80D8108;
+    }
+}
+
+
+void sub_80D8108(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (gTasks[taskId].data[1]++ <= 60)
+                break;
+            gTasks[taskId].data[1] = 0;
+            PlaySE12WithPanning(SE_C_MAKU_U, 0);
+            gTasks[taskId].data[0]++;
+            break;
+        case 1:
+            if ((gBattle_BG1_Y += 7) <= 160)
+                break;
+            gTasks[taskId].data[0]++;
+            break;
+        case 2:
+            sub_80DE350();
+            gTasks[taskId].data[0]++;
+            break;
+        case 3:
+        {
+            u16 bg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
+            u16 bg2Cnt = GetGpuReg(REG_OFFSET_BG2CNT);
+            ((struct BgCnt *)&bg0Cnt)->priority = 0;
+            ((struct BgCnt *)&bg2Cnt)->priority = 0;
+            SetGpuReg(REG_OFFSET_BG0CNT, bg0Cnt);
+            SetGpuReg(REG_OFFSET_BG2CNT, bg2Cnt);
+            sub_80DDB0C();
+            gTasks[taskId].data[0]++;
+            break;
+        }
+        case 4:
+        default:
+            if (gContestResources->field_0->unk1920A_6)
+                break;
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].func = sub_80D833C;
+            break;
+    }
+}
+
+void sub_80D823C(void)
+{
+    s32 i;
+
+    AnimateSprites();
+    RunTasks();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+
+    for (i = 0; i < 4; i++)
+    {
+        if ((sContestBgCopyFlags >> i) & 1)
+            CopyBgTilemapBufferToVram(i);
+    }
+    sContestBgCopyFlags = 0;
+}
+
+void vblank_cb_battle(void)
+{
+    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
+    SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
+    SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
+    SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
+    SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
+    SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
+    SetGpuReg(REG_OFFSET_BG3HOFS, gBattle_BG3_X);
+    SetGpuReg(REG_OFFSET_BG3VOFS, gBattle_BG3_Y);
+    SetGpuReg(REG_OFFSET_WIN0H, gBattle_WIN0H);
+    SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
+    SetGpuReg(REG_OFFSET_WIN1H, gBattle_WIN1H);
+    SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN1V);
+    TransferPlttBuffer();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    ScanlineEffect_InitHBlankDmaTransfer();
+}
