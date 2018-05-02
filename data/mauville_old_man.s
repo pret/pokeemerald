@@ -4,26 +4,6 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_0859EFF0:: @ 859EFF0
-	.4byte gText_SoPretty
-	.4byte gText_SoDarling
-	.4byte gText_SoRelaxed
-	.4byte gText_SoSunny
-	.4byte gText_SoDesirable
-	.4byte gText_SoExciting
-	.4byte gText_SoAmusing
-	.4byte gText_SoMagical
-
-gUnknown_0859F010:: @ 859F010
-	.4byte gUnknown_08294313
-	.4byte gUnknown_08294359
-	.4byte gUnknown_08294398
-	.4byte gUnknown_082943DA
-	.4byte gUnknown_0829441C
-	.4byte gUnknown_08294460
-	.4byte gUnknown_082944A0
-	.4byte gUnknown_082944D5
-
 gUnknown_0859F030:: @ 859F030
 	.4byte 0, 12, 13, 18, 19, 21
 

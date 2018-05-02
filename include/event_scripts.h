@@ -394,4 +394,24 @@ extern const u8 Route111_EventScript_2907F0[];
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_1F863F[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_1F958F[];
 
+//mauville_old_man
+extern const u8 gOtherText_Is[];
+extern const u8 gOtherText_DontYouAgree[];
+extern const u8 gText_SoPretty[];
+extern const u8 gText_SoDarling[];
+extern const u8 gText_SoRelaxed[];
+extern const u8 gText_SoSunny[];
+extern const u8 gText_SoDesirable[];
+extern const u8 gText_SoExciting[];
+extern const u8 gText_SoAmusing[];
+extern const u8 gText_SoMagical[];
+extern const u8 gUnknown_08294313[];
+extern const u8 gUnknown_08294359[];
+extern const u8 gUnknown_08294398[];
+extern const u8 gUnknown_082943DA[];
+extern const u8 gUnknown_0829441C[];
+extern const u8 gUnknown_08294460[];
+extern const u8 gUnknown_082944A0[];
+extern const u8 gUnknown_082944D5[];
+
 #endif //GUARD_EVENT_SCRIPTS_H
