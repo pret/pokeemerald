@@ -558,7 +558,7 @@ _081DA2AC:
 	adds r1, r4, 0
 	movs r2, 0x4
 	bl memcpy
-	ldr r0, =gUnknown_030060B8
+	ldr r0, =gContestRngValue
 	adds r1, r4, 0
 	movs r2, 0x4
 	bl memcpy

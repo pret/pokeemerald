@@ -405,6 +405,8 @@ struct ContestResources
 
 extern struct ContestResources *gContestResources;
 
+extern u32 gContestRngValue;
+
 bool8 IsSpeciesNotUnown(u16 species);
 void LoadContestBgAfterMoveAnim(void);
 

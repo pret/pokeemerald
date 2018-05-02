@@ -979,7 +979,7 @@ sub_80F8FE8: @ 80F8FE8
 	ands r0, r1
 	cmp r0, 0
 	beq _080F9020
-	ldr r2, =gUnknown_030060B8
+	ldr r2, =gContestRngValue
 	ldr r1, [r2]
 	ldr r0, =0x41c64e6d
 	muls r0, r1
@@ -1007,7 +1007,7 @@ _080F902A:
 
 	thumb_func_start sub_80F903C
 sub_80F903C: @ 80F903C
-	ldr r2, =gUnknown_030060B8
+	ldr r2, =gContestRngValue
 	ldr r1, [r2]
 	ldr r0, =0x41c64e6d
 	muls r0, r1

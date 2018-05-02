@@ -25,6 +25,8 @@ enum
     KEYITEMS_POCKET
 };
 
+EWRAM_DATA struct BagPocket gBagPockets[5] = {};
+
 u16 GetBagItemQuantity(u16* quantity)
 {
     return gSaveBlock2Ptr->encryptionKey ^ *quantity;

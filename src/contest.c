@@ -30,18 +30,25 @@
 #include "tv.h"
 #include "scanline_effect.h"
 #include "util.h"
+#include "contest_link_80F57C4.h"
 
 #define DESTROY_POINTER(ptr) \
     free(ptr); \
     ptr = NULL;
 
-void sub_80DD590(void);
 void sub_80D782C(void);
+void sub_80D7C7C(u8 taskId);
+void sub_80D7CB4(u8 taskId);
+void sub_80D7DAC(u8 taskId);
+void sub_80D7DC8(u8 taskId);
+void sub_80D7DE8(u8 taskId);
+void sub_80D80C8(u8 taskId);
+void sub_80D823C(void);
+void sub_80DBF68(void);
 void sub_80DCE58(u8);
+void sub_80DD590(void);
 bool8 sub_80D7E44(u8 *);
 void sub_80DE224(void);
-void sub_80D7C7C(u8 taskId);
-void sub_80D823C(void);
 void vblank_cb_battle(void);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
@@ -53,7 +60,9 @@ EWRAM_DATA u8 gContestFinalStandings[4] = {0};
 EWRAM_DATA u8 gUnknown_02039F24 = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
 EWRAM_DATA u8 gUnknown_02039F26[4] = {0};
-EWRAM_DATA bool8 gIsLinkContest = FALSE;
+EWRAM_DATA u8 gIsLinkContest = 0;
+// Bit 0: Is a link contest
+// Bit 1: Link contest uses wireless adapter
 EWRAM_DATA u8 gUnknown_02039F2B = 0;
 EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
 EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
@@ -61,6 +70,9 @@ EWRAM_DATA u8 gUnknown_02039F30 = 0;
 EWRAM_DATA u8 gUnknown_02039F31 = 0;
 EWRAM_DATA struct ContestResources * gContestResources = NULL;
 EWRAM_DATA u8 gUnknown_02039F38 = 0;
+EWRAM_DATA struct ContestWinner gUnknown_02039F3C = {0};
+
+u32 gContestRngValue;
 
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
@@ -89,7 +101,7 @@ void TaskDummy1(u8 taskId)
 
 void ResetLinkContestBoolean(void)
 {
-    gIsLinkContest = FALSE;
+    gIsLinkContest = 0;
 }
 
 void sub_80D7678(void)
@@ -306,6 +318,81 @@ void sub_80D7B24(void)
                 CreateWirelessStatusIndicatorSprite(8, 8);
             }
             break;
+    }
+}
+
+void sub_80D7C7C(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_80D7CB4;
+    }
+}
+
+void sub_80D7CB4(u8 taskId)
+{
+    if (gIsLinkContest & 1)
+    {
+        if (gIsLinkContest & 2)
+        {
+            switch (gTasks[taskId].data[0])
+            {
+                case 0:
+                    sub_80DBF68();
+                    gTasks[taskId].data[0]++;
+                    // fallthrough
+                case 1:
+                    if (sub_800A520())
+                    {
+                        sub_800ADF8();
+                        gTasks[taskId].data[0]++;
+                    }
+                    return;
+                case 2:
+                    if (sub_800A520() != TRUE)
+                        return;
+                    gTasks[taskId].data[0]++;
+                    break;
+            }
+        }
+
+        if (!gPaletteFade.active)
+        {
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            if (!(gIsLinkContest & 2))
+                sub_80DBF68();
+            CreateTask(sub_80D7DAC, 0);
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].func = TaskDummy1;
+        }
+    }
+    else
+    {
+        gTasks[taskId].func = sub_80D80C8;
+    }
+}
+
+void sub_80D7DAC(u8 taskId)
+{
+    SetTaskFuncWithFollowupFunc(taskId, sub_80FC998, sub_80D7DC8);
+}
+
+void sub_80D7DC8(u8 taskId)
+{
+    gTasks[taskId].data[0] = 1;
+    gTasks[taskId].func = sub_80D7DE8;
+}
+
+void sub_80D7DE8(u8 taskId)
+{
+    gTasks[taskId].data[0]--;
+    if (gTasks[taskId].data[0] <= 0)
+    {
+        GetMultiplayerId();  // unused return value
+        DestroyTask(taskId);
+        gTasks[gContestResources->field_0->mainTaskId].func = sub_80D80C8;
+        gRngValue = gContestRngValue;
     }
 }
 
