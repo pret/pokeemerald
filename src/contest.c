@@ -31,9 +31,18 @@
 #include "scanline_effect.h"
 #include "util.h"
 
+#define DESTROY_POINTER(ptr) \
+    free(ptr); \
+    ptr = NULL;
+
 void sub_80DD590(void);
 void sub_80D782C(void);
 void sub_80DCE58(u8);
+bool8 sub_80D7E44(u8 *);
+void sub_80DE224(void);
+void sub_80D7C7C(u8 taskId);
+void sub_80D823C(void);
+void vblank_cb_battle(void);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F00[4] = {0};
@@ -48,6 +57,10 @@ EWRAM_DATA bool8 gIsLinkContest = FALSE;
 EWRAM_DATA u8 gUnknown_02039F2B = 0;
 EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
 EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
+EWRAM_DATA u8 gUnknown_02039F30 = 0;
+EWRAM_DATA u8 gUnknown_02039F31 = 0;
+EWRAM_DATA struct ContestResources * gContestResources = NULL;
+EWRAM_DATA u8 gUnknown_02039F38 = 0;
 
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
@@ -194,3 +207,105 @@ void sub_80D787C(void)
     sub_80DD590();
     *gContestResources->field_1c = (struct ContestResourcesField1C){};
 }
+
+void sub_80D7988(void)
+{
+    gContestResources = AllocZeroed(sizeof(struct ContestResources));
+    gContestResources->field_0 = AllocZeroed(sizeof(struct Contest));
+    gContestResources->field_4 = AllocZeroed(sizeof(struct ContestantStatus) * 4);
+    gContestResources->field_8 = AllocZeroed(sizeof(struct UnknownContestStruct7));
+    gContestResources->field_C = AllocZeroed(sizeof(struct ContestAIInfo));
+    gContestResources->field_10 = AllocZeroed(sizeof(struct UnknownContestStruct5) * 4);
+    gContestResources->field_14 = AllocZeroed(sizeof(struct UnknownContestStruct4) * 4);
+    gContestResources->field_18 = AllocZeroed(sizeof(struct ContestStruct_field_18));
+    gContestResources->field_1c = AllocZeroed(sizeof(struct ContestResourcesField1C));
+    gContestResources->field_20 = AllocZeroed(sizeof(struct ContestResourcesField20));
+    gContestResources->field_24[0] = AllocZeroed(0x1000);
+    gContestResources->field_24[1] = AllocZeroed(0x1000);
+    gContestResources->field_24[2] = AllocZeroed(0x1000);
+    gContestResources->field_24[3] = AllocZeroed(0x1000);
+    gContestResources->field_34 = AllocZeroed(0x800);
+    gContestResources->field_38 = AllocZeroed(0x800);
+    gContestResources->field_3c = AllocZeroed(0x2000);
+    gUnknown_0202305C = gContestResources->field_3c;
+    gUnknown_02023060 = gContestResources->field_24[1];
+}
+
+void sub_80D7A5C(void)
+{
+    DESTROY_POINTER(gContestResources->field_0);
+    DESTROY_POINTER(gContestResources->field_4);
+    DESTROY_POINTER(gContestResources->field_8);
+    DESTROY_POINTER(gContestResources->field_C);
+    DESTROY_POINTER(gContestResources->field_10);
+    DESTROY_POINTER(gContestResources->field_14);
+    DESTROY_POINTER(gContestResources->field_18);
+    DESTROY_POINTER(gContestResources->field_1c);
+    DESTROY_POINTER(gContestResources->field_20);
+    DESTROY_POINTER(gContestResources->field_24[0]);
+    DESTROY_POINTER(gContestResources->field_24[1]);
+    DESTROY_POINTER(gContestResources->field_24[2]);
+    DESTROY_POINTER(gContestResources->field_24[3]);
+    DESTROY_POINTER(gContestResources->field_34);
+    DESTROY_POINTER(gContestResources->field_38);
+    DESTROY_POINTER(gContestResources->field_3c);
+    DESTROY_POINTER(gContestResources);
+    gUnknown_0202305C = NULL;
+    gUnknown_02023060 = NULL;
+}
+
+void sub_80D7B24(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            gUnknown_02039F38 = 0;
+            sub_80D7988();
+            AllocateMonSpritesGfx();
+            DESTROY_POINTER(gMonSpritesGfxPtr->firstDecompressed);
+            gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(0x4000);
+            SetVBlankCallback(NULL);
+            sub_80D779C();
+            sub_80D77E4();
+            sub_80D7678();
+            ScanlineEffect_Clear();
+            ResetPaletteFade();
+            gPaletteFade.bufferTransferDisabled = TRUE;
+            ResetSpriteData();
+            ResetTasks();
+            FreeAllSpritePalettes();
+            gReservedSpritePaletteCount = 4;
+            //shared18000.unk18000 = 0;
+            gHeap[0x1a000] = 0;
+            ClearBattleMonForms();
+            sub_80D787C();
+            gMain.state++;
+            break;
+        case 1:
+            gMain.state++;
+            break;
+        case 2:
+            if (sub_80D7E44(&gContestResources->field_0->unk1925D))
+            {
+                gContestResources->field_0->unk1925D = 0;
+                gMain.state++;
+            }
+            break;
+        case 3:
+            sub_80DE224();
+            gBattle_BG1_X = 0;
+            gBattle_BG1_Y = 0;
+            BeginFastPaletteFade(2);
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            SetVBlankCallback(vblank_cb_battle);
+            gContestResources->field_0->mainTaskId = CreateTask(sub_80D7C7C, 10);
+            SetMainCallback2(sub_80D823C);
+            if (gIsLinkContest & 2)
+            {
+                sub_800E0E8();
+                CreateWirelessStatusIndicatorSprite(8, 8);
+            }
+            break;
+    }
+}
+

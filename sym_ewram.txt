@@ -421,18 +421,7 @@ gBagPockets: @ 2039DD8
 
 	.include "src/contest.o"
 
-gUnknown_02039F30: @ 2039F30
-	.space 0x1
-
-gUnknown_02039F31: @ 2039F31
-	.space 0x3
-
-gContestResources: @ 2039F34
-	.space 0x4
-
-gUnknown_02039F38: @ 2039F38
-	.space 0x4
-
+	.align 2
 gUnknown_02039F3C: @ 2039F3C
 	.space 0x20
 

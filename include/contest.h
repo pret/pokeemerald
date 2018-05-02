@@ -379,6 +379,11 @@ struct ContestResourcesField1C
     u8 filler_00[0x40];
 };
 
+struct ContestResourcesField20
+{
+    u8 filler_00[0x0C];
+};
+
 struct ContestResources
 {
     struct Contest *field_0;
@@ -386,11 +391,14 @@ struct ContestResources
     struct UnknownContestStruct7 *field_8;
     struct ContestAIInfo *field_C;
     struct UnknownContestStruct5 *field_10;
-    struct UnknownContestStruct4 (*field_14)[4];
+    struct UnknownContestStruct4 *field_14;
     struct ContestStruct_field_18 *field_18;
     struct ContestResourcesField1C * field_1c;
-    u8 filler_20[4];
+    struct ContestResourcesField20 * field_20;
     u8 * field_24[4];
+    void * field_34;
+    void * field_38;
+    void * field_3c;
 };
 
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
