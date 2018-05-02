@@ -428,27 +428,49 @@ struct MailStruct
     /*0x20*/ u16 itemId;
 };
 
-struct UnkMauvilleOldManStruct
+struct MauvilleManCommon
 {
-               u8 unk_2D94;
-               u8 unk_2D95;
-    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
-    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
-    /*0x2DAE*/ u8 playerName[8];
-    /*0x2DB6*/ u8 filler_2DB6[0x3];
-    /*0x2DB9*/ u8 playerTrainerId[4];
-               u8 unk_2DBD;
+    u8 id;
+};
+
+struct MauvilleManBard
+{
+    /*0x00*/ u8 id;
+    /*0x02*/ u16 songLyrics[6];
+    /*0x0E*/ u16 temporaryLyrics[6];
+    /*0x1A*/ u8 playerName[8];
+    /*0x22*/ u8 filler_2DB6[0x3];
+    /*0x25*/ u8 playerTrainerId[4];
+    /*0x29*/ bool8 hasChangedSong;
+    /*0x2A*/ u8 language;
 }; /*size = 0x2C*/
 
-struct UnkMauvilleOldManStruct2
+struct MauvilleManStoryteller
 {
-    u8 filler0;
-    u8 unk1;
-    u8 unk2;
-    u16 mauvilleOldMan_ecArray[10];
-    u8 mauvilleOldMan_ecArray2[12];
-    u8 fillerF[0x2];
+    u8 id;
+    bool8 alreadyRecorded;
+    u8 filler2[2];
+    u8 gameStatIDs[4];
+    u8 trainerNames[4][7];
+    u8 statValues[4][4];
+};
+
+struct MauvilleManGiddy
+{
+    /*0x00*/ u8 id;
+    /*0x01*/ u8 taleCounter;
+    /*0x02*/ u8 questionNum;
+    /*0x04*/ u16 randomWords[10];
+    /*0x18*/ u8 questionList[8];
+    /*0x20*/ u8 language;
 }; /*size = 0x2C*/
+
+struct MauvilleManHipster
+{
+    u8 id;
+    bool8 alreadySpoken;
+    u8 language;
+};
 
 struct MauvilleOldManTrader
 {
@@ -460,8 +482,10 @@ struct MauvilleOldManTrader
 
 typedef union OldMan
 {
-    struct UnkMauvilleOldManStruct oldMan1;
-    struct UnkMauvilleOldManStruct2 oldMan2;
+    struct MauvilleManCommon common;
+    struct MauvilleManBard bard;
+    struct MauvilleManGiddy giddy;
+    struct MauvilleManHipster hipster;
     struct MauvilleOldManTrader trader;
     u8 filler[0x40];
 } OldMan;
