@@ -18,6 +18,7 @@
 #include "bard_music.h"
 #include "sound.h"
 #include "strings.h"
+#include "overworld.h"
 
 #define CHAR_SONG_WORD_SEPARATOR 0x37
 
@@ -35,7 +36,7 @@ void sub_8133A60(void);
 struct BardSong gUnknown_03006130;
 
 EWRAM_DATA u16 gUnknown_0203A128 = 0;
-EWRAM_DATA struct MauvilleOldMan * gUnknown_0203A12C = NULL;
+EWRAM_DATA struct MauvilleManStoryteller * gUnknown_0203A12C = NULL;
 EWRAM_DATA u8 gUnknown_0203A130 = 0;
 
 static const u16 sDefaultBardSongLyrics[6] = {
@@ -949,3 +950,138 @@ const struct Story gUnknown_0859F048[] = {
     {GAME_STAT_RODE_CABLE_CAR, 1, MauvilleCity_PokemonCenter_1F_Text_28FFDD, MauvilleCity_PokemonCenter_1F_Text_28FFFA, MauvilleCity_PokemonCenter_1F_Text_29000D},
     {GAME_STAT_ENTERED_HOT_SPRINGS, 1, MauvilleCity_PokemonCenter_1F_Text_290097, MauvilleCity_PokemonCenter_1F_Text_2900B5, MauvilleCity_PokemonCenter_1F_Text_2900CB}
 };
+
+void sub_8120E08(void) // StorytellerSetup
+{
+    s32 i;
+    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+
+    gUnknown_0203A12C->id = MAUVILLE_MAN_STORYTELLER;
+    gUnknown_0203A12C->alreadyRecorded = FALSE;
+    for (i = 0; i < 4; i++)
+    {
+        gUnknown_0203A12C->gameStatIDs[i] = 0;
+        gUnknown_0203A12C->trainerNames[0][i] = EOS;  // Maybe they meant storyteller->trainerNames[i][0] instead?
+    }
+}
+
+void sub_8120E50(void)
+{
+    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+
+    gUnknown_0203A12C->id = MAUVILLE_MAN_STORYTELLER;
+    gUnknown_0203A12C->alreadyRecorded = FALSE;
+}
+
+u32 sub_8120E74(u8 stat) // StorytellerGetGameStat
+{
+    if (stat == 50)
+        stat = 0;
+    return GetGameStat(stat);
+}
+
+const struct Story *sub_8120E88(u32 stat) // GetStoryByStat
+{
+    s32 i;
+
+    for (i = 0; i < 36; i++)
+    {
+        if (gUnknown_0859F048[i].stat == stat)
+            return &gUnknown_0859F048[i];
+    }
+    return &gUnknown_0859F048[35];
+}
+
+const u8 *sub_8120EB4(u32 stat) // GetStoryTitleByStat
+{
+    return sub_8120E88(stat)->title;
+}
+
+const u8 *sub_8120EC0(u32 stat) // GetStoryTextByStat
+{
+    return sub_8120E88(stat)->fullText;
+}
+
+const u8 *sub_8120ECC(u32 stat) // GetStoryActionByStat
+{
+    return sub_8120E88(stat)->action;
+}
+
+u8 sub_8120ED8(void) // GetFreeStorySlot
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_0203A12C->gameStatIDs[i] == 0)
+            break;
+    }
+    return i;
+}
+
+u32 sub_8120F08(u32 trainer) // StorytellerGetRecordedTrainerStat
+{
+    u8 *ptr = gUnknown_0203A12C->statValues[trainer];
+
+    return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
+}
+
+void sub_8120F2C(u32 trainer, u32 val) // StorytellerSetRecordedTrainerStat
+{
+    u8 *ptr = gUnknown_0203A12C->statValues[trainer];
+
+    ptr[0] = val;
+    ptr[1] = val >> 8;
+    ptr[2] = val >> 16;
+    ptr[3] = val >> 24;
+}
+
+bool32 sub_8120F4C(u32 trainer) // HasTrainerStatIncreased
+{
+    if (sub_8120E74(gUnknown_0203A12C->gameStatIDs[trainer]) > sub_8120F08(trainer))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_8120F7C(u32 player, void *dst) // GetStoryByStattellerPlayerName
+{
+    u8 *name = gUnknown_0203A12C->trainerNames[player];
+
+    memset(dst, EOS, 8);
+    memcpy(dst, name, 7);
+}
+
+void sub_8120FAC(u32 player, const u8 * src) // StorytellerSetPlayerName
+{
+    u8 * name = gUnknown_0203A12C->trainerNames[player];
+    memset(name, EOS, 7);
+    memcpy(name, src, 7);
+}
+
+
+void sub_8120FDC(u32 player, u32 stat) // StorytellerRecordNewStat
+{
+    gUnknown_0203A12C->gameStatIDs[player] = stat;
+    sub_8120FAC(player, gSaveBlock2Ptr->playerName);
+    sub_8120F2C(player, sub_8120E74(stat));
+    ConvertIntToDecimalStringN(gStringVar1, sub_8120E74(stat), STR_CONV_MODE_LEFT_ALIGN, 10);
+    StringCopy(gStringVar2, sub_8120ECC(stat));
+    gUnknown_0203A12C->unk34[player] = gGameLanguage;
+}
+
+void sub_8121064(u8 * arr, s32 count) // ScrambleStatList
+{
+    s32 i;
+
+    for (i = 0; i < count; i++)
+        arr[i] = i;
+    for (i = 0; i < count; i++)
+    {
+        u32 a = Random() % count;
+        u32 b = Random() % count;
+        u8 temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+}
