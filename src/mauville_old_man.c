@@ -679,54 +679,6 @@ void sub_8120B5C(void)
     VarSet(VAR_0x4010, MAP_OBJ_GFX_BARD);
 }
 
-struct Story
-{
-    u8 stat;
-    u8 minVal;
-    const u8 *title;
-    const u8 *action;
-    const u8 *fullText;
-};
-
-const struct Story gUnknown_0859F048[] = {
-    {GAME_STAT_50, 1, MauvilleCity_PokemonCenter_1F_Text_28E930, MauvilleCity_PokemonCenter_1F_Text_28E947, MauvilleCity_PokemonCenter_1F_Text_28E956},
-    {GAME_STAT_STARTED_TRENDS, 1, MauvilleCity_PokemonCenter_1F_Text_28E9D7, MauvilleCity_PokemonCenter_1F_Text_28E9EF, MauvilleCity_PokemonCenter_1F_Text_28E9FE},
-    {GAME_STAT_PLANTED_BERRIES, 1, MauvilleCity_PokemonCenter_1F_Text_28EA7D, MauvilleCity_PokemonCenter_1F_Text_28EA98, MauvilleCity_PokemonCenter_1F_Text_28EAA8},
-    {GAME_STAT_TRADED_BIKES, 1, MauvilleCity_PokemonCenter_1F_Text_28EB19, MauvilleCity_PokemonCenter_1F_Text_28EB31, MauvilleCity_PokemonCenter_1F_Text_28EB3E},
-    {GAME_STAT_GOT_INTERVIEWED, 1, MauvilleCity_PokemonCenter_1F_Text_28EBB5, MauvilleCity_PokemonCenter_1F_Text_28EBCD, MauvilleCity_PokemonCenter_1F_Text_28EBDD},
-    {GAME_STAT_TRAINER_BATTLES, 1, MauvilleCity_PokemonCenter_1F_Text_28EC60, MauvilleCity_PokemonCenter_1F_Text_28EC79, MauvilleCity_PokemonCenter_1F_Text_28EC81},
-    {GAME_STAT_POKEMON_CAPTURES, 1, MauvilleCity_PokemonCenter_1F_Text_28ED04, MauvilleCity_PokemonCenter_1F_Text_28ED21, MauvilleCity_PokemonCenter_1F_Text_28ED30},
-    {GAME_STAT_FISHING_CAPTURES, 1, MauvilleCity_PokemonCenter_1F_Text_28EDA1, MauvilleCity_PokemonCenter_1F_Text_28EDB5, MauvilleCity_PokemonCenter_1F_Text_28EDCF},
-    {GAME_STAT_HATCHED_EGGS, 1, MauvilleCity_PokemonCenter_1F_Text_28EE45, MauvilleCity_PokemonCenter_1F_Text_28EE5D, MauvilleCity_PokemonCenter_1F_Text_28EE6A},
-    {GAME_STAT_EVOLVED_POKEMON, 1, MauvilleCity_PokemonCenter_1F_Text_28EEDD, MauvilleCity_PokemonCenter_1F_Text_28EEF1, MauvilleCity_PokemonCenter_1F_Text_28EF01},
-    {GAME_STAT_USED_POKECENTER, 1, MauvilleCity_PokemonCenter_1F_Text_28EF73, MauvilleCity_PokemonCenter_1F_Text_28EF95, MauvilleCity_PokemonCenter_1F_Text_28EFAA},
-    {GAME_STAT_RESTED_AT_HOME, 1, MauvilleCity_PokemonCenter_1F_Text_28F045, MauvilleCity_PokemonCenter_1F_Text_28F05A, MauvilleCity_PokemonCenter_1F_Text_28F071},
-    {GAME_STAT_ENTERED_SAFARI_ZONE, 1, MauvilleCity_PokemonCenter_1F_Text_28F0F3, MauvilleCity_PokemonCenter_1F_Text_28F10D, MauvilleCity_PokemonCenter_1F_Text_28F125},
-    {GAME_STAT_USED_CUT, 1, MauvilleCity_PokemonCenter_1F_Text_28F1BE, MauvilleCity_PokemonCenter_1F_Text_28F1D5, MauvilleCity_PokemonCenter_1F_Text_28F1DE},
-    {GAME_STAT_USED_ROCK_SMASH, 1, MauvilleCity_PokemonCenter_1F_Text_28F24F, MauvilleCity_PokemonCenter_1F_Text_28F269, MauvilleCity_PokemonCenter_1F_Text_28F277},
-    {GAME_STAT_MOVED_SECRET_BASE, 1, MauvilleCity_PokemonCenter_1F_Text_28F2FC, MauvilleCity_PokemonCenter_1F_Text_28F314, MauvilleCity_PokemonCenter_1F_Text_28F32A},
-    {GAME_STAT_USED_SPLASH, 1, MauvilleCity_PokemonCenter_1F_Text_28F3AD, MauvilleCity_PokemonCenter_1F_Text_28F3C6, MauvilleCity_PokemonCenter_1F_Text_28F3D2},
-    {GAME_STAT_USED_STRUGGLE, 1, MauvilleCity_PokemonCenter_1F_Text_28F44B, MauvilleCity_PokemonCenter_1F_Text_28F461, MauvilleCity_PokemonCenter_1F_Text_28F47C},
-    {GAME_STAT_SLOT_JACKPOTS, 1, MauvilleCity_PokemonCenter_1F_Text_28F50C, MauvilleCity_PokemonCenter_1F_Text_28F51B, MauvilleCity_PokemonCenter_1F_Text_28F538},
-    {GAME_STAT_CONSECUTIVE_ROULETTE_WINS, 2, MauvilleCity_PokemonCenter_1F_Text_28F5BE, MauvilleCity_PokemonCenter_1F_Text_28F5D1, MauvilleCity_PokemonCenter_1F_Text_28F5F2},
-    {GAME_STAT_ENTERED_BATTLE_TOWER, 1, MauvilleCity_PokemonCenter_1F_Text_28F678, MauvilleCity_PokemonCenter_1F_Text_28F694, MauvilleCity_PokemonCenter_1F_Text_28F6B4},
-    {GAME_STAT_POKEBLOCKS, 1, MauvilleCity_PokemonCenter_1F_Text_28F751, MauvilleCity_PokemonCenter_1F_Text_28F76A, MauvilleCity_PokemonCenter_1F_Text_28F776},
-    {GAME_STAT_ENTERED_CONTEST, 1, MauvilleCity_PokemonCenter_1F_Text_28F7F6, MauvilleCity_PokemonCenter_1F_Text_28F811, MauvilleCity_PokemonCenter_1F_Text_28F822},
-    {GAME_STAT_WON_CONTEST, 1, MauvilleCity_PokemonCenter_1F_Text_28F89C, MauvilleCity_PokemonCenter_1F_Text_28F8AF, MauvilleCity_PokemonCenter_1F_Text_28F8BC},
-    {GAME_STAT_SHOPPED, 1, MauvilleCity_PokemonCenter_1F_Text_28F92F, MauvilleCity_PokemonCenter_1F_Text_28F941, MauvilleCity_PokemonCenter_1F_Text_28F949},
-    {GAME_STAT_USED_ITEMFINDER, 1, MauvilleCity_PokemonCenter_1F_Text_28F9D1, MauvilleCity_PokemonCenter_1F_Text_28F9EA, MauvilleCity_PokemonCenter_1F_Text_28F9FD},
-    {GAME_STAT_GOT_RAINED_ON, 1, MauvilleCity_PokemonCenter_1F_Text_28FA81, MauvilleCity_PokemonCenter_1F_Text_28FA99, MauvilleCity_PokemonCenter_1F_Text_28FAA7},
-    {GAME_STAT_CHECKED_POKEDEX, 1, MauvilleCity_PokemonCenter_1F_Text_28FB1D, MauvilleCity_PokemonCenter_1F_Text_28FB35, MauvilleCity_PokemonCenter_1F_Text_28FB47},
-    {GAME_STAT_RECEIVED_RIBBONS, 1, MauvilleCity_PokemonCenter_1F_Text_28FBC4, MauvilleCity_PokemonCenter_1F_Text_28FBD9, MauvilleCity_PokemonCenter_1F_Text_28FBEA},
-    {GAME_STAT_JUMPED_DOWN_LEDGES, 1, MauvilleCity_PokemonCenter_1F_Text_28FC6B, MauvilleCity_PokemonCenter_1F_Text_28FC85, MauvilleCity_PokemonCenter_1F_Text_28FC98},
-    {GAME_STAT_WATCHED_TV, 1, MauvilleCity_PokemonCenter_1F_Text_28FD1D, MauvilleCity_PokemonCenter_1F_Text_28FD35, MauvilleCity_PokemonCenter_1F_Text_28FD40},
-    {GAME_STAT_CHECKED_CLOCK, 1, MauvilleCity_PokemonCenter_1F_Text_28FDA2, MauvilleCity_PokemonCenter_1F_Text_28FDBD, MauvilleCity_PokemonCenter_1F_Text_28FDCE},
-    {GAME_STAT_WON_POKEMON_LOTTERY, 1, MauvilleCity_PokemonCenter_1F_Text_28FE57, MauvilleCity_PokemonCenter_1F_Text_28FE72, MauvilleCity_PokemonCenter_1F_Text_28FE88},
-    {GAME_STAT_USED_DAYCARE, 1, MauvilleCity_PokemonCenter_1F_Text_28FF0C, MauvilleCity_PokemonCenter_1F_Text_28FF27, MauvilleCity_PokemonCenter_1F_Text_28FF44},
-    {GAME_STAT_RODE_CABLE_CAR, 1, MauvilleCity_PokemonCenter_1F_Text_28FFDD, MauvilleCity_PokemonCenter_1F_Text_28FFFA, MauvilleCity_PokemonCenter_1F_Text_29000D},
-    {GAME_STAT_ENTERED_HOT_SPRINGS, 1, MauvilleCity_PokemonCenter_1F_Text_290097, MauvilleCity_PokemonCenter_1F_Text_2900B5, MauvilleCity_PokemonCenter_1F_Text_2900CB}
-};
-
 void sub_8120B70(union OldMan * oldMan)
 {
     s32 i;
@@ -841,3 +793,159 @@ void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
             break;
     }
 }
+
+void sub_8120CD0(union OldMan * oldMan, u32 unused, u32 a2)
+{
+    u8 sp00[8];
+    s32 i;
+    if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && a2 == LANGUAGE_JAPANESE)
+    {
+        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+
+        for (i = 0; i < 4; i++)
+        {
+            if (storyteller->gameStatIDs[i] != 0)
+            {
+                memcpy(sp00, storyteller->trainerNames[i], 7);
+                sp00[7] = EOS;
+                if (IsStringJapanese(sp00))
+                    storyteller->unk34[i] = LANGUAGE_JAPANESE;
+                else
+                    storyteller->unk34[i] = GAME_LANGUAGE;
+            }
+        }
+    }
+}
+
+void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
+{
+    u32 r2 = (r1 == LANGUAGE_JAPANESE || r1 == LANGUAGE_ENGLISH) ? 1 : 0;
+    switch (oldMan->common.id)
+    {
+        case MAUVILLE_MAN_TRADER:
+        {
+            struct MauvilleOldManTrader * trader = &oldMan->trader;
+            s32 i;
+
+            if (r2)
+            {
+                for (i = 0; i < 4; i++)
+                {
+                    u8 * str = trader->unk5[i];
+                    if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
+                    {
+                        StripExtCtrlCodes(str);
+                        trader->unk32[i] = LANGUAGE_JAPANESE;
+                    }
+                    else
+                        trader->unk32[i] = r6;
+                }
+            }
+            else
+            {
+                for (i = 0; i < 4; i++)
+                {
+                    if (trader->unk32[i] == LANGUAGE_JAPANESE)
+                    {
+                        StripExtCtrlCodes(trader->unk5[i]);
+                    }
+                }
+            }
+        }
+            break;
+        case MAUVILLE_MAN_STORYTELLER:
+        {
+
+            struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+            s32 i;
+
+            if (r2)
+            {
+                for (i = 0; i < 4; i++)
+                {
+                    if (storyteller->gameStatIDs[i] != 0)
+                        storyteller->unk34[i] = r6;
+                }
+            }
+        }
+            break;
+        case MAUVILLE_MAN_BARD:
+        {
+            struct MauvilleManBard * bard = &oldMan->bard;
+
+            if (r2)
+            {
+                bard->language = r6;
+            }
+        }
+            break;
+        case MAUVILLE_MAN_HIPSTER:
+        {
+            struct MauvilleManHipster * hipster = &oldMan->hipster;
+
+            if (r2)
+            {
+                hipster->language = r6;
+            }
+        }
+            break;
+        case MAUVILLE_MAN_GIDDY:
+        {
+            struct MauvilleManGiddy * giddy = &oldMan->giddy;
+
+            if (r2)
+            {
+                giddy->language = r6;
+            }
+        }
+            break;
+    }
+}
+
+struct Story
+{
+    u8 stat;
+    u8 minVal;
+    const u8 *title;
+    const u8 *action;
+    const u8 *fullText;
+};
+
+const struct Story gUnknown_0859F048[] = {
+    {GAME_STAT_50, 1, MauvilleCity_PokemonCenter_1F_Text_28E930, MauvilleCity_PokemonCenter_1F_Text_28E947, MauvilleCity_PokemonCenter_1F_Text_28E956},
+    {GAME_STAT_STARTED_TRENDS, 1, MauvilleCity_PokemonCenter_1F_Text_28E9D7, MauvilleCity_PokemonCenter_1F_Text_28E9EF, MauvilleCity_PokemonCenter_1F_Text_28E9FE},
+    {GAME_STAT_PLANTED_BERRIES, 1, MauvilleCity_PokemonCenter_1F_Text_28EA7D, MauvilleCity_PokemonCenter_1F_Text_28EA98, MauvilleCity_PokemonCenter_1F_Text_28EAA8},
+    {GAME_STAT_TRADED_BIKES, 1, MauvilleCity_PokemonCenter_1F_Text_28EB19, MauvilleCity_PokemonCenter_1F_Text_28EB31, MauvilleCity_PokemonCenter_1F_Text_28EB3E},
+    {GAME_STAT_GOT_INTERVIEWED, 1, MauvilleCity_PokemonCenter_1F_Text_28EBB5, MauvilleCity_PokemonCenter_1F_Text_28EBCD, MauvilleCity_PokemonCenter_1F_Text_28EBDD},
+    {GAME_STAT_TRAINER_BATTLES, 1, MauvilleCity_PokemonCenter_1F_Text_28EC60, MauvilleCity_PokemonCenter_1F_Text_28EC79, MauvilleCity_PokemonCenter_1F_Text_28EC81},
+    {GAME_STAT_POKEMON_CAPTURES, 1, MauvilleCity_PokemonCenter_1F_Text_28ED04, MauvilleCity_PokemonCenter_1F_Text_28ED21, MauvilleCity_PokemonCenter_1F_Text_28ED30},
+    {GAME_STAT_FISHING_CAPTURES, 1, MauvilleCity_PokemonCenter_1F_Text_28EDA1, MauvilleCity_PokemonCenter_1F_Text_28EDB5, MauvilleCity_PokemonCenter_1F_Text_28EDCF},
+    {GAME_STAT_HATCHED_EGGS, 1, MauvilleCity_PokemonCenter_1F_Text_28EE45, MauvilleCity_PokemonCenter_1F_Text_28EE5D, MauvilleCity_PokemonCenter_1F_Text_28EE6A},
+    {GAME_STAT_EVOLVED_POKEMON, 1, MauvilleCity_PokemonCenter_1F_Text_28EEDD, MauvilleCity_PokemonCenter_1F_Text_28EEF1, MauvilleCity_PokemonCenter_1F_Text_28EF01},
+    {GAME_STAT_USED_POKECENTER, 1, MauvilleCity_PokemonCenter_1F_Text_28EF73, MauvilleCity_PokemonCenter_1F_Text_28EF95, MauvilleCity_PokemonCenter_1F_Text_28EFAA},
+    {GAME_STAT_RESTED_AT_HOME, 1, MauvilleCity_PokemonCenter_1F_Text_28F045, MauvilleCity_PokemonCenter_1F_Text_28F05A, MauvilleCity_PokemonCenter_1F_Text_28F071},
+    {GAME_STAT_ENTERED_SAFARI_ZONE, 1, MauvilleCity_PokemonCenter_1F_Text_28F0F3, MauvilleCity_PokemonCenter_1F_Text_28F10D, MauvilleCity_PokemonCenter_1F_Text_28F125},
+    {GAME_STAT_USED_CUT, 1, MauvilleCity_PokemonCenter_1F_Text_28F1BE, MauvilleCity_PokemonCenter_1F_Text_28F1D5, MauvilleCity_PokemonCenter_1F_Text_28F1DE},
+    {GAME_STAT_USED_ROCK_SMASH, 1, MauvilleCity_PokemonCenter_1F_Text_28F24F, MauvilleCity_PokemonCenter_1F_Text_28F269, MauvilleCity_PokemonCenter_1F_Text_28F277},
+    {GAME_STAT_MOVED_SECRET_BASE, 1, MauvilleCity_PokemonCenter_1F_Text_28F2FC, MauvilleCity_PokemonCenter_1F_Text_28F314, MauvilleCity_PokemonCenter_1F_Text_28F32A},
+    {GAME_STAT_USED_SPLASH, 1, MauvilleCity_PokemonCenter_1F_Text_28F3AD, MauvilleCity_PokemonCenter_1F_Text_28F3C6, MauvilleCity_PokemonCenter_1F_Text_28F3D2},
+    {GAME_STAT_USED_STRUGGLE, 1, MauvilleCity_PokemonCenter_1F_Text_28F44B, MauvilleCity_PokemonCenter_1F_Text_28F461, MauvilleCity_PokemonCenter_1F_Text_28F47C},
+    {GAME_STAT_SLOT_JACKPOTS, 1, MauvilleCity_PokemonCenter_1F_Text_28F50C, MauvilleCity_PokemonCenter_1F_Text_28F51B, MauvilleCity_PokemonCenter_1F_Text_28F538},
+    {GAME_STAT_CONSECUTIVE_ROULETTE_WINS, 2, MauvilleCity_PokemonCenter_1F_Text_28F5BE, MauvilleCity_PokemonCenter_1F_Text_28F5D1, MauvilleCity_PokemonCenter_1F_Text_28F5F2},
+    {GAME_STAT_ENTERED_BATTLE_TOWER, 1, MauvilleCity_PokemonCenter_1F_Text_28F678, MauvilleCity_PokemonCenter_1F_Text_28F694, MauvilleCity_PokemonCenter_1F_Text_28F6B4},
+    {GAME_STAT_POKEBLOCKS, 1, MauvilleCity_PokemonCenter_1F_Text_28F751, MauvilleCity_PokemonCenter_1F_Text_28F76A, MauvilleCity_PokemonCenter_1F_Text_28F776},
+    {GAME_STAT_ENTERED_CONTEST, 1, MauvilleCity_PokemonCenter_1F_Text_28F7F6, MauvilleCity_PokemonCenter_1F_Text_28F811, MauvilleCity_PokemonCenter_1F_Text_28F822},
+    {GAME_STAT_WON_CONTEST, 1, MauvilleCity_PokemonCenter_1F_Text_28F89C, MauvilleCity_PokemonCenter_1F_Text_28F8AF, MauvilleCity_PokemonCenter_1F_Text_28F8BC},
+    {GAME_STAT_SHOPPED, 1, MauvilleCity_PokemonCenter_1F_Text_28F92F, MauvilleCity_PokemonCenter_1F_Text_28F941, MauvilleCity_PokemonCenter_1F_Text_28F949},
+    {GAME_STAT_USED_ITEMFINDER, 1, MauvilleCity_PokemonCenter_1F_Text_28F9D1, MauvilleCity_PokemonCenter_1F_Text_28F9EA, MauvilleCity_PokemonCenter_1F_Text_28F9FD},
+    {GAME_STAT_GOT_RAINED_ON, 1, MauvilleCity_PokemonCenter_1F_Text_28FA81, MauvilleCity_PokemonCenter_1F_Text_28FA99, MauvilleCity_PokemonCenter_1F_Text_28FAA7},
+    {GAME_STAT_CHECKED_POKEDEX, 1, MauvilleCity_PokemonCenter_1F_Text_28FB1D, MauvilleCity_PokemonCenter_1F_Text_28FB35, MauvilleCity_PokemonCenter_1F_Text_28FB47},
+    {GAME_STAT_RECEIVED_RIBBONS, 1, MauvilleCity_PokemonCenter_1F_Text_28FBC4, MauvilleCity_PokemonCenter_1F_Text_28FBD9, MauvilleCity_PokemonCenter_1F_Text_28FBEA},
+    {GAME_STAT_JUMPED_DOWN_LEDGES, 1, MauvilleCity_PokemonCenter_1F_Text_28FC6B, MauvilleCity_PokemonCenter_1F_Text_28FC85, MauvilleCity_PokemonCenter_1F_Text_28FC98},
+    {GAME_STAT_WATCHED_TV, 1, MauvilleCity_PokemonCenter_1F_Text_28FD1D, MauvilleCity_PokemonCenter_1F_Text_28FD35, MauvilleCity_PokemonCenter_1F_Text_28FD40},
+    {GAME_STAT_CHECKED_CLOCK, 1, MauvilleCity_PokemonCenter_1F_Text_28FDA2, MauvilleCity_PokemonCenter_1F_Text_28FDBD, MauvilleCity_PokemonCenter_1F_Text_28FDCE},
+    {GAME_STAT_WON_POKEMON_LOTTERY, 1, MauvilleCity_PokemonCenter_1F_Text_28FE57, MauvilleCity_PokemonCenter_1F_Text_28FE72, MauvilleCity_PokemonCenter_1F_Text_28FE88},
+    {GAME_STAT_USED_DAYCARE, 1, MauvilleCity_PokemonCenter_1F_Text_28FF0C, MauvilleCity_PokemonCenter_1F_Text_28FF27, MauvilleCity_PokemonCenter_1F_Text_28FF44},
+    {GAME_STAT_RODE_CABLE_CAR, 1, MauvilleCity_PokemonCenter_1F_Text_28FFDD, MauvilleCity_PokemonCenter_1F_Text_28FFFA, MauvilleCity_PokemonCenter_1F_Text_29000D},
+    {GAME_STAT_ENTERED_HOT_SPRINGS, 1, MauvilleCity_PokemonCenter_1F_Text_290097, MauvilleCity_PokemonCenter_1F_Text_2900B5, MauvilleCity_PokemonCenter_1F_Text_2900CB}
+};
