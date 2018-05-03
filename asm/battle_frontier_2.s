@@ -12985,7 +12985,7 @@ _081A10F4:
 	adds r1, r0
 	adds r1, 0xBA
 	ldrh r0, [r1]
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	b _081A1174
 	.pool
@@ -19841,7 +19841,7 @@ _081A4C4E:
 	ble _081A4C4E
 	ldr r4, =gPlayerPartyCount
 	ldrb r5, [r4]
-	bl copy_player_party_from_sav1
+	bl LoadPlayerParty
 	bl sub_8076D5C
 	movs r0, 0x1
 	bl TrySavingData
@@ -29770,7 +29770,7 @@ sub_81A9E90: @ 81A9E90
 	ldr r0, =0x0000400e
 	movs r1, 0
 	bl VarSet
-	bl copy_player_party_from_sav1
+	bl LoadPlayerParty
 _081A9EB8:
 	pop {r0}
 	bx r0

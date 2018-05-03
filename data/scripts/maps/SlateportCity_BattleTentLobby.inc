@@ -122,7 +122,7 @@ SlateportCity_BattleTentLobby_EventScript_2088AA:: @ 82088AA
 	special sub_81B9D08
 	compare VAR_RESULT, 0
 	goto_if 5, SlateportCity_BattleTentLobby_EventScript_2087E9
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox SlateportCity_BattleTentLobby_Text_2C5810, 4
 
 SlateportCity_BattleTentLobby_EventScript_2088CA:: @ 82088CA
@@ -228,7 +228,7 @@ SlateportCity_BattleTentLobby_EventScript_208A14:: @ 8208A14
 	goto SlateportCity_BattleTentLobby_EventScript_208A2E
 
 SlateportCity_BattleTentLobby_EventScript_208A2B:: @ 8208A2B
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 SlateportCity_BattleTentLobby_EventScript_208A2E:: @ 8208A2E
 	msgbox SlateportCity_BattleTentLobby_Text_2C5AA5, 4

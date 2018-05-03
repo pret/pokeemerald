@@ -76,7 +76,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2498C9:: @ 82498C9
 	msgbox BattleFrontier_BattleDomeLobby_Text_241520, 9
 	message BattleFrontier_BattleDomeLobby_Text_24A5D6
 	waitmessage
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -94,7 +94,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2498C9:: @ 82498C9
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 1
 	special sub_818E9AC
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	special HealPlayerParty
 	goto BattleFrontier_BattleDomeLobby_EventScript_249991
 
@@ -103,7 +103,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249940:: @ 8249940
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A5BF, 4
 	message BattleFrontier_BattleDomeLobby_Text_24A5D6
 	waitmessage
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -117,7 +117,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249940:: @ 8249940
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
 	special sub_818E9AC
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	special HealPlayerParty
 
 BattleFrontier_BattleDomeLobby_EventScript_249991:: @ 8249991
@@ -181,7 +181,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249A47:: @ 8249A47
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249A59:: @ 8249A59
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CFD
 	compare VAR_0x40CE, 1
@@ -245,7 +245,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call BattleFrontier_BattleDomeLobby_EventScript_27134F
@@ -256,7 +256,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 	special sub_818E9AC
 
 BattleFrontier_BattleDomeLobby_EventScript_249BC2:: @ 8249BC2
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -299,7 +299,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249C4A:: @ 8249C4A
 	goto BattleFrontier_BattleDomeLobby_EventScript_249C64
 
 BattleFrontier_BattleDomeLobby_EventScript_249C61:: @ 8249C61
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 BattleFrontier_BattleDomeLobby_EventScript_249C64:: @ 8249C64
 	msgbox BattleFrontier_BattleDomeLobby_Text_249F74, 4

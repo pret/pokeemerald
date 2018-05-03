@@ -2157,8 +2157,8 @@ sub_80B360C: @ 80B360C
 	ands r0, r1
 	str r0, [r2]
 	bl Overworld_ResetMapMusic
-	bl copy_player_party_from_sav1
-	bl copy_bags_and_unk_data_to_save_blocks
+	bl LoadPlayerParty
+	bl SavePlayerBag
 	bl sub_813BF10
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -2251,8 +2251,8 @@ sub_80B36EC: @ 80B36EC
 	cmp r0, 0x9
 	bne _080B370E
 _080B3706:
-	bl copy_player_party_from_sav1
-	bl copy_bags_and_unk_data_to_save_blocks
+	bl LoadPlayerParty
+	bl SavePlayerBag
 _080B370E:
 	movs r0, 0x7F
 	bl copy_saved_warp2_bank_and_enter_x_to_warp1

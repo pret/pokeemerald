@@ -67,7 +67,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	clearflag FLAG_SPECIAL_FLAG_0x4004
 	setvar VAR_0x8004, 8
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
 	special HealPlayerParty
@@ -97,7 +97,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 BattleFrontier_BattlePyramidLobby_EventScript_250852:: @ 8250852
 	setvar VAR_0x8004, 8
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
 	special HealPlayerParty
@@ -131,7 +131,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2508B1:: @ 82508B1
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 6
 	setvar VAR_0x40CE, 0
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox BattleFrontier_BattlePyramidLobby_Text_250F31, 4
 
 BattleFrontier_BattlePyramidLobby_EventScript_2508C8:: @ 82508C8
@@ -197,7 +197,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2509A5:: @ 82509A5
 	special sub_81A8E7C
 	setvar VAR_0x8004, 9
 	special sub_81A8E7C
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call BattleFrontier_BattlePyramidLobby_EventScript_27134F
@@ -206,7 +206,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2509A5:: @ 82509A5
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250AAA
 
 BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -249,7 +249,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250AAA:: @ 8250AAA
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250AC4
 
 BattleFrontier_BattlePyramidLobby_EventScript_250AC1:: @ 8250AC1
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 BattleFrontier_BattlePyramidLobby_EventScript_250AC4:: @ 8250AC4
 	msgbox BattleFrontier_BattlePyramidLobby_Text_250FE5, 4

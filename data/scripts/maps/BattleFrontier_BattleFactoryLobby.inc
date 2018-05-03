@@ -74,7 +74,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2584C6:: @ 82584C6
 	waitmessage
 	setvar VAR_0x8004, 8
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
 	special sub_81A5E74
@@ -89,7 +89,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258506:: @ 8258506
 	waitmessage
 	setvar VAR_0x8004, 8
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
@@ -154,7 +154,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2585DD:: @ 82585DD
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2585ED:: @ 82585ED
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587B1
 	compare VAR_0x40CE, 1
@@ -215,7 +215,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	setvar VAR_0x8006, 0
 
 BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258CB1, 4
 	closemessage
 	compare VAR_0x40CE, 0
@@ -253,7 +253,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258783:: @ 8258783
 	goto BattleFrontier_BattleFactoryLobby_EventScript_25879D
 
 BattleFrontier_BattleFactoryLobby_EventScript_25879A:: @ 825879A
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 BattleFrontier_BattleFactoryLobby_EventScript_25879D:: @ 825879D
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, 4

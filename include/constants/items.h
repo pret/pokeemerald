@@ -108,6 +108,8 @@
 #define ITEM_064 100
 #define ITEM_065 101
 #define ITEM_066 102
+
+// Unusable
 #define ITEM_TINY_MUSHROOM 103
 #define ITEM_BIG_MUSHROOM 104
 #define ITEM_069 105
@@ -126,6 +128,8 @@
 #define ITEM_076 118
 #define ITEM_077 119
 #define ITEM_078 120
+
+// Mails
 #define ITEM_ORANGE_MAIL 121
 #define ITEM_HARBOR_MAIL 122
 #define ITEM_GLITTER_MAIL 123
@@ -138,6 +142,8 @@
 #define ITEM_DREAM_MAIL 130
 #define ITEM_FAB_MAIL 131
 #define ITEM_RETRO_MAIL 132
+
+// Berries
 #define ITEM_CHERI_BERRY 133
 #define ITEM_CHESTO_BERRY 134
 #define ITEM_PECHA_BERRY 135
@@ -185,7 +191,7 @@
 #define ITEM_0B1 177
 #define ITEM_0B2 178
 
-// hold items
+// Battle Held items
 #define ITEM_BRIGHT_POWDER 179
 #define ITEM_WHITE_HERB 180
 #define ITEM_MACHO_BRACE 181
@@ -261,6 +267,8 @@
 #define ITEM_0FB 251
 #define ITEM_0FC 252
 #define ITEM_0FD 253
+
+// Contest held items
 #define ITEM_RED_SCARF 254
 #define ITEM_BLUE_SCARF 255
 #define ITEM_PINK_SCARF 256

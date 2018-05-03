@@ -76,7 +76,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	setvar VAR_0x8005, 3
 	copyvar VAR_0x8006, VAR_RESULT
 	special sub_81A703C
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 27
 	special sub_81A703C
@@ -107,7 +107,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 0
 	special sub_81A703C
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 27
 	special sub_81A703C
@@ -127,7 +127,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B868:: @ 825B868
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 5
 	setvar VAR_0x40CE, 0
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BB52, 4
 
 BattleFrontier_BattlePikeLobby_EventScript_25B87F:: @ 825B87F
@@ -192,7 +192,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call BattleFrontier_BattlePikeLobby_EventScript_27134F
@@ -201,7 +201,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	special sub_81A703C
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -242,7 +242,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25BA5C:: @ 825BA5C
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BA76
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA73:: @ 825BA73
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA76:: @ 825BA76
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4

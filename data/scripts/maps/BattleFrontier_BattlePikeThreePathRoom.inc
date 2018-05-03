@@ -45,7 +45,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	setvar VAR_0x4000, 255
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -136,7 +136,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	special sub_81A1780
 	message BattleFrontier_BattlePikeThreePathRoom_Text_25CE08
 	waitmessage
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 2
 	special sub_81A703C

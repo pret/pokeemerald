@@ -48,8 +48,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B2FD8
 	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerFieldObject
-	def_special copy_player_party_to_sav1
-	def_special copy_player_party_from_sav1
+	def_special SavePlayerParty
+	def_special LoadPlayerParty
 	def_special sub_80F9438
 	def_special sp02A_crash_sound
 	def_special FieldObjectInteractionGetBerryTreeData
@@ -141,7 +141,7 @@ gSpecials:: @ 81DBA64
 	def_special TrendyPhraseIsOld
 	def_special sub_811EF6C
 	def_special GetDewfordHallPaintingNameIndex
-	def_special sub_80D6EDC
+	def_special SwapRegisteredBike
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
@@ -341,7 +341,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B98DC
 	def_special nullsub_54
 	def_special sub_80E9B70
-	def_special copy_bags_and_unk_data_from_save_blocks
+	def_special LoadPlayerBag
 	def_special sub_80B05B4
 	def_special sub_8139754
 	def_special sub_813970C
