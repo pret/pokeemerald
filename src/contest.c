@@ -32,6 +32,10 @@
 #include "util.h"
 #include "contest_link_80F57C4.h"
 #include "dma3.h"
+#include "battle_message.h"
+#include "event_scripts.h"
+#include "strings.h"
+#include "contest_effect.h"
 
 #define DESTROY_POINTER(ptr) \
     free(ptr); \
@@ -46,26 +50,42 @@ void sub_80D7DE8(u8 taskId);
 bool8 sub_80D7E44(u8 *);
 void sub_80D80C8(u8 taskId);
 void sub_80D8108(u8 taskId);
-void sub_80DE350(void);
-void sub_80DDB0C(void);
-void sub_80D833C(u8 taskId);
+void vblank_cb_battle(void);
 void sub_80D823C(void);
+void sub_80D833C(u8 taskId);
+void sub_80D8424(u8);
+bool8 AreMovesContestCombo(u16, u16);
+void sub_80D8610(u8);
+void sub_80D880C(s8);
+void prints_contest_move_description(u16);
+void sub_80D8490(u8);
+void sub_80D8894(u8);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
 void sub_80DB2BC(void);
+void sub_80DB89C(void);
+bool8 sub_80DBCA8(u8);
 void sub_80DBF68(void);
 void sub_80DBF90(void);
 void sub_80DC2BC(void);
+void sub_80DC490(bool8);
 void sub_80DC4F0(void);
 void sub_80DC594(void);
 void sub_80DC5E8(void);
 void sub_80DC7EC(void);
+void sub_80DCD48(void);
 void sub_80DCE58(u8);
 void sub_80DD04C(void);
 void sub_80DD590(void);
+void sub_80DDB0C(void);
+bool8 sub_80DE1E8(u8);
 void sub_80DE224(void);
-void vblank_cb_battle(void);
+void sub_80DE350(void);
 void sub_80DEA20(void);
+void sub_80DEBD0(u32, u8 *, u8, u8, u8);
+void sub_80DEC30(u8 *, u8);
+bool32 sub_80DED4C(void);
+
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F00[4] = {0};
@@ -577,4 +597,87 @@ void vblank_cb_battle(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     ScanlineEffect_InitHBlankDmaTransfer();
+}
+
+void sub_80D833C(u8 taskId)
+{
+    if (gTasks[taskId].data[0] == 0)
+    {
+        gBattle_BG0_Y = 0;
+        gBattle_BG2_Y = 0;
+        sub_80DCD48();
+        DmaCopy32Defvars(3, gPlttBufferUnfaded, shared18000.unk18204, 0x400);
+        ConvertIntToDecimalStringN(gStringVar1, gContestResources->field_0->turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+        if (!sub_80DBCA8(gContestPlayerMonIndex))
+            StringCopy(gDisplayedStringBattle, gText_0827D507);
+        else
+            StringCopy(gDisplayedStringBattle, gText_0827D531);
+        sub_80DB89C();
+        StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
+        sub_80DEC30(gStringVar4, 1);
+        gTasks[taskId].data[0]++;
+    }
+    else
+    {
+        if (!sub_80DED4C())
+        {
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].func = sub_80D8424;
+        }
+    }
+}
+
+void sub_80D8424(u8 taskId)
+{
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if (!sub_80DBCA8(gContestPlayerMonIndex))
+        {
+            sub_80DC490(TRUE);
+            gTasks[taskId].func = sub_80D8490;
+        }
+        else
+        {
+            gTasks[taskId].func = sub_80D8894;
+        }
+    }
+}
+
+void sub_80D8490(u8 taskId)
+{
+    u8 i;
+    u8 sp8[32];
+
+    gBattle_BG0_Y = 0xA0;
+    gBattle_BG2_Y = 0xA0;
+
+    for (i = 0; i < 4; i++)
+    {
+        u16 move = gContestMons[gContestPlayerMonIndex].moves[i];
+        u8 *r5 = sp8;
+
+        if (gContestResources->field_4[gContestPlayerMonIndex].prevMove != MOVE_NONE
+            && sub_80DE1E8(gContestPlayerMonIndex)
+            && AreMovesContestCombo(gContestResources->field_4[gContestPlayerMonIndex].prevMove, move) != 0
+            && gContestResources->field_4[gContestPlayerMonIndex].hasJudgesAttention)
+        {
+            r5 = StringCopy(sp8, gText_ColorLightShadowDarkGrey);
+        }
+        else if (move != 0
+                 && gContestResources->field_4[gContestPlayerMonIndex].prevMove == move
+                 && gContestMoves[move].effect != CONTEST_EFFECT_REPETITION_NOT_BORING)
+        {
+            // Gray the text because it is a repeated move
+            r5 = StringCopy(sp8, gText_ColorBlue);
+        }
+        r5 = StringCopy(r5, gMoveNames[move]);
+
+        FillWindowPixelBuffer(i + 5, 0);
+        sub_80DEBD0(i + 5, sp8, 5, 1, 7);
+    }
+
+    sub_80D880C(gContestResources->field_0->playerMoveChoice);
+    prints_contest_move_description(gContestMons[gContestPlayerMonIndex].moves[gContestResources->field_0->playerMoveChoice]);
+    gTasks[taskId].func = sub_80D8610;
 }

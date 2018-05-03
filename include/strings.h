@@ -429,5 +429,7 @@ extern const u8 gText_TooImportantToToss[];
 extern const u8 gText_ConfirmTossItems[];
 extern const u8 gText_MoveVar1Where[];
 
+extern const u8 gText_ColorLightShadowDarkGrey[];
+extern const u8 gText_ColorBlue[];
 
 #endif //GUARD_STRINGS_H
