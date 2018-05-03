@@ -19,6 +19,7 @@
 #include "sound.h"
 #include "strings.h"
 #include "overworld.h"
+#include "field_message_box.h"
 
 #define CHAR_SONG_WORD_SEPARATOR 0x37
 
@@ -32,6 +33,8 @@ void sub_8120E08(void); // StorytellerSetup
 void sub_8120E50(void);
 void sub_81339F8(void); // TraderSetup
 void sub_8133A60(void);
+
+IWRAM_DATA u8 gUnknown_03001178;
 
 struct BardSong gUnknown_03006130;
 
@@ -1084,4 +1087,56 @@ void sub_8121064(u8 * arr, s32 count) // ScrambleStatList
         arr[a] = arr[b];
         arr[b] = temp;
     }
+}
+
+struct UnknownStruct_0859F288
+{
+    u32 length;
+    u32 unused2;
+};
+
+const struct UnknownStruct_0859F288 gUnknown_0859F288 = {
+    36,
+    8
+};
+
+bool8 sub_81210B8(void) // StorytellerInitializeRandomStat
+{
+    u8 arr[gUnknown_0859F288.length];
+    s32 i;
+    s32 j;
+
+    sub_8121064(arr, 36);
+    for (i = 0; i < 36; i++)
+    {
+        u8 stat = gUnknown_0859F048[arr[i]].stat;
+        u8 minVal = gUnknown_0859F048[arr[i]].minVal;
+
+        for (j = 0; j < 4; j++)
+        {
+            if (gUnknown_0203A12C->gameStatIDs[j] == stat)
+                break;
+        }
+        if (j == 4 && sub_8120E74(stat) >= minVal)
+        {
+            gUnknown_0203A12C->alreadyRecorded = TRUE;
+            if (sub_8120ED8() == 4)
+                sub_8120FDC(gUnknown_03001178, stat);
+            else
+                sub_8120FDC(sub_8120ED8(), stat);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_8121178(u32 player) // StorytellerDisplayStory
+{
+    u8 stat = gUnknown_0203A12C->gameStatIDs[player];
+
+    ConvertIntToDecimalStringN(gStringVar1, sub_8120F08(player), 0, 10);
+    StringCopy(gStringVar2, sub_8120ECC(stat));
+    sub_8120F7C(player, gStringVar3);
+    ConvertInternationalString(gStringVar3, gUnknown_0203A12C->unk34[player]);
+    ShowFieldMessage(sub_8120EC0(stat));
 }
