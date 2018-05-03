@@ -960,7 +960,7 @@ task_map_chg_seq_0807EC34: @ 80B2B94
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	ldr r1, =gUnknown_02039B58
+	ldr r1, =gTrainerCards
 	ldrh r0, [r5]
 	cmp r0, 0x1
 	bne _080B2C10
@@ -1044,7 +1044,7 @@ sub_80B2C30: @ 80B2C30
 _080B2C5C:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =gUnknown_02039B58
+	ldr r1, =gTrainerCards
 	adds r0, r1
 	lsls r1, r4, 8
 	ldr r2, =gBlockRecvBuffer
@@ -2171,7 +2171,7 @@ sub_80B360C: @ 80B360C
 	ldrb r0, [r0]
 	movs r5, 0x1
 	eors r0, r5
-	bl sub_813C2A0
+	bl UpdatePlayerLinkBattleRecords
 	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0

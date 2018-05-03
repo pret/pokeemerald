@@ -3181,7 +3181,7 @@ _08014138:
 	adds r3, r1, r0
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =gUnknown_02039B58
+	ldr r1, =gTrainerCards
 	adds r0, r1
 	ldrb r2, [r5]
 	adds r1, r3, 0
@@ -10615,7 +10615,7 @@ sub_8018220: @ 8018220
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_02039B58
+	ldr r0, =gTrainerCards
 	adds r1, r0
 	mov r8, r1
 	bl UnkTextUtil_Reset

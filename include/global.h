@@ -489,6 +489,8 @@ struct RecordMixing_UnknownStruct
     u16 unk74[0x2];
 };
 
+#define LINK_B_RECORDS_COUNT 5
+
 struct LinkBattleRecord
 {
     u8 name[8];
@@ -496,6 +498,12 @@ struct LinkBattleRecord
     u16 wins;
     u16 losses;
     u16 draws;
+};
+
+struct LinkBattleRecords
+{
+    struct LinkBattleRecord entries[LINK_B_RECORDS_COUNT];
+    u8 languages[LINK_B_RECORDS_COUNT];
 };
 
 struct RecordMixingGiftData
@@ -703,9 +711,7 @@ struct SaveBlock1
     /*0x2e64*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2e90*/ struct ContestWinner contestWinners[13]; // 0 - 5 used in contest hall, 6 - 7 unused?, 8 - 12 museum
     /*0x3030*/ struct DayCare daycare;
-    /*0x3150*/ struct LinkBattleRecord linkBattleRecords[5];
-    /*0x31A0*/ u8 unk_31A0;
-    /*0x31A1*/ u8 filler_31A1[7];
+    /*0x3150*/ struct LinkBattleRecords linkBattleRecords;
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;

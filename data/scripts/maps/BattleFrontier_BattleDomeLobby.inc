@@ -415,7 +415,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249D52:: @ 8249D52
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -426,7 +426,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249D6B:: @ 8249D6B
 	setvar VAR_0x8006, 1
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

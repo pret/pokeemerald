@@ -428,7 +428,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D42:: @ 8250D42
 	setvar VAR_0x8005, 6
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

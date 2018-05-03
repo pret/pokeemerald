@@ -636,7 +636,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFC7:: @ 823EFC7
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -647,7 +647,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFE0:: @ 823EFE0
 	setvar VAR_0x8006, 1
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -658,7 +658,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFF9:: @ 823EFF9
 	setvar VAR_0x8006, 2
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -669,7 +669,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F012:: @ 823F012
 	setvar VAR_0x8006, 3
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

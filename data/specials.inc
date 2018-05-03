@@ -207,7 +207,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8071614
-	def_special sub_813C4BC
+	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
 	def_special sub_80F972C
@@ -526,12 +526,12 @@ gSpecials:: @ 81DBA64
 	def_special sub_8139ED0
 	def_special sub_813B968
 	def_special sub_80F8B94
-	def_special sub_813C904
+	def_special ShowTrainerHillRecords
 	def_special sub_80B4808
 	def_special sub_813B9A0
 	def_special sub_81B9918
 	def_special sub_80722E0
 	def_special sub_80B45D0
-	def_special sub_813C5A0
+	def_special RemoveRecordsWindow
 	def_special sub_8139C10
 	def_special sub_80B3BC4

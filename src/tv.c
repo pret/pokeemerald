@@ -1380,13 +1380,13 @@ void PutFanClubSpecialOnTheAir(void)
     StringCopy(show->fanClubSpecial.idolName, name);
     tv_store_id_2x(show);
     show->fanClubSpecial.language = gGameLanguage;
-    if (show->fanClubSpecial.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->unk_31A0 == LANGUAGE_JAPANESE)
+    if (show->fanClubSpecial.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->linkBattleRecords.languages[0] == LANGUAGE_JAPANESE)
     {
         show->fanClubSpecial.idolNameLanguage = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->fanClubSpecial.idolNameLanguage = gSaveBlock1Ptr->unk_31A0;
+        show->fanClubSpecial.idolNameLanguage = gSaveBlock1Ptr->linkBattleRecords.languages[0];
     }
 }
 
@@ -2465,7 +2465,7 @@ bool8 sub_80EE7C0(void)
     {
         return TRUE;
     }
-    if (gSaveBlock1Ptr->linkBattleRecords[0].name[0] == EOS)
+    if (gSaveBlock1Ptr->linkBattleRecords.entries[0].name[0] == EOS)
     {
         return TRUE;
     }

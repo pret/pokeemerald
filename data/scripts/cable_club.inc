@@ -787,9 +787,9 @@ MossdeepCity_GameCorner_1F_Movement_277360: @ 8277360
 gUnknown_08277365:: @ 8277365
 	lockall
 	setvar VAR_0x8004, 0
-	special sub_813C4BC
+	special ShowLinkBattleRecords
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

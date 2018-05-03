@@ -433,5 +433,8 @@ extern const u8 gText_TooImportantToToss[];
 extern const u8 gText_ConfirmTossItems[];
 extern const u8 gText_MoveVar1Where[];
 
+extern const u8 gText_TotalRecordWLD[];
+extern const u8 gText_PlayersBattleResults[];
+extern const u8 gText_WinLoseDraw[];
 
 #endif //GUARD_STRINGS_H

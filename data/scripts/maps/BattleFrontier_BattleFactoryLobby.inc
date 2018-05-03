@@ -305,7 +305,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2587E1:: @ 82587E1
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -316,7 +316,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2587FA:: @ 82587FA
 	setvar VAR_0x8006, 1
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
