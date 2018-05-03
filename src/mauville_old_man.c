@@ -9,14 +9,24 @@
 #include "script.h"
 #include "random.h"
 #include "event_scripts.h"
+#include "task.h"
+#include "menu.h"
+#include "m4a.h"
+#include "bard_music.h"
+#include "constants/songs.h"
 
 #define CHAR_SONG_WORD_SEPARATOR 0x37
 
-void sub_8120E08(void); // StorytellerSetup
-void sub_81339F8(void); // TraderSetup
-void sub_8120B5C(void);
-void sub_81206C0(u8 a0); // StartBardSong
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+
 void sub_81204DC(void);
+void sub_81206C0(bool8 useTemporaryLyrics); // StartBardSong
+void sub_8120944(u8 taskId);
+void sub_8120B5C(void);
+void sub_8120E08(void); // StorytellerSetup
+void sub_8120E50(void);
+void sub_81339F8(void); // TraderSetup
+void sub_8133A60(void);
 
 static const u16 sDefaultBardSongLyrics[6] = {
     EC_WORD_SHAKE,
@@ -288,4 +298,242 @@ void sub_81203FC(void) // ScrSpecial_GenerateGiddyLine
         giddy->taleCounter++;
 
     gSpecialVar_Result = TRUE;
+}
+
+void sub_81204DC(void)
+{
+    struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
+    u16 arr[][2] = {
+        {EC_GROUP_POKEMON,   0},
+        {EC_GROUP_LIFESTYLE, 0},
+        {EC_GROUP_HOBBIES,   0},
+        {EC_GROUP_MOVE_1,    0},
+        {EC_GROUP_MOVE_2,    0},
+        {EC_GROUP_POKEMON_2, 0}
+    };
+    u16 i;
+    u16 r10;
+    u16 r7;
+    u16 r1;
+
+    for (i = 0; i < 8; i++)
+        giddy->questionList[i] = i;
+
+    for (i = 0; i < 8; i++)
+    {
+        r1 = Random() % (i + 1);
+        r7 = giddy->questionList[i];
+        giddy->questionList[i] = giddy->questionList[r1];
+        giddy->questionList[r1] = r7;
+    }
+
+    r10 = 0;
+    for (i = 0; i < 6; i++)
+    {
+        arr[i][1] = EasyChat_GetNumWordsInGroup(arr[i][0]);
+        r10 += arr[i][1];
+    }
+
+    giddy->questionNum = 0;
+    r7 = 0;
+    for (i = 0; i < 10; i++)
+    {
+        r1 = Random() % 10;
+        if (r1 < 3 && r7 < 8)
+        {
+            giddy->randomWords[i] = 0xFFFF;
+            r7++;
+        }
+        else
+        {
+            s16 r2 = Random() % r10;
+            for (r1 = 0; i < 6; r1++)
+                if ((r2 -= arr[r1][1]) <= 0)
+                    break;
+            if (r1 == 6)
+                r1 = 0;
+            giddy->randomWords[i] = sub_811EE90(arr[r1][0]);
+        }
+    }
+}
+void sub_8120628(void)
+{
+    struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
+
+    bard->hasChangedSong = FALSE;
+}
+
+void sub_8120640(void)
+{
+    struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
+
+    hipster->alreadySpoken = FALSE;
+}
+
+void sub_8120658(void)
+{
+    sub_8133A60();
+}
+
+void sub_8120664(void)
+{
+    sub_8120E50();
+}
+
+void sub_8120670(void) // ResetMauvilleOldManFlag
+{
+    switch (sub_81201C8())
+    {
+        case MAUVILLE_MAN_BARD:
+            sub_8120628();
+            break;
+        case MAUVILLE_MAN_HIPSTER:
+            sub_8120640();
+            break;
+        case MAUVILLE_MAN_STORYTELLER:
+            sub_8120664();
+            break;
+        case MAUVILLE_MAN_TRADER:
+            sub_8120658();
+            break;
+        case MAUVILLE_MAN_GIDDY:
+            break;
+    }
+    sub_8120B5C();
+}
+
+
+#define tState data[0]
+#define tCharIndex data[3]
+#define tCurrWord data[4]
+#define tUseTemporaryLyrics data[5]
+
+#define MACRO1(a) (((a) & 3) + (((a) / 8) & 1))
+
+void sub_81206C0(bool8 useTemporaryLyrics)
+{
+    u8 taskId = CreateTask(sub_8120944, 80);
+
+    gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
+}
+
+void sub_81206F0(struct TextSubPrinter * printer, u16 a1)
+{
+    gUnknown_03002F84 = FALSE;
+}
+
+void sub_81206FC(struct TextSubPrinter * printer, u16 a1)
+{
+    gUnknown_03002F84 = TRUE;
+}
+
+void sub_8120708(const u8 * src)
+{
+    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    PrintTextOnWindow(0, 1, src, 0, 1, 1, sub_81206FC);
+    gUnknown_03002F84 = TRUE;
+    CopyWindowToVram(0, 3);
+}
+
+void sub_8120748(struct Task *task, struct BardSong *song)
+{
+    switch (task->tState)
+    {
+        case 0:  // Initialize song
+        {
+            struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
+            u16 *lyrics;
+            s32 i;
+
+            // Copy lyrics
+            if (gSpecialVar_0x8004 == 0)
+                lyrics = bard->songLyrics;
+            else
+                lyrics = bard->temporaryLyrics;
+            for (i = 0; i < 6; i++)
+                song->lyrics[i] = lyrics[i];
+            song->currWord = 0;
+        }
+            break;
+        case 1:  // Wait for BGM to end
+            break;
+        case 2:  // Initialize word
+        {
+            u16 word = song->lyrics[song->currWord];
+            song->sound = GetWordSounds(word);
+            GetWordPhonemes(song, MACRO1(word));
+            song->currWord++;
+            if (song->sound->var00 != 0xFF)
+                song->state = 0;
+            else
+            {
+                song->state = 3;
+                song->phonemeTimer = 2;
+            }
+            break;
+        }
+        case 3:
+        case 4:
+        {
+            const struct BardSound *sound = &song->sound[song->currPhoneme];
+
+            switch (song->state)
+            {
+                case 0:
+                    song->phonemeTimer = song->phonemes[song->currPhoneme].length;
+                    if (sound->var00 <= 50)
+                    {
+                        u8 num = sound->var00 / 3;
+                        m4aSongNumStart(PH_TRAP_HELD + 3 * num);
+                    }
+                    song->state = 2;
+                    song->phonemeTimer--;
+                    break;
+                case 2:
+                    song->state = 1;
+                    if (sound->var00 <= 50)
+                    {
+                        song->volume = 0x100 + sound->volume * 16;
+                        m4aMPlayVolumeControl(&gMPlayInfo_SE2, 0xFFFF, song->volume);
+                        song->pitch = 0x200 + song->phonemes[song->currPhoneme].pitch;
+                        m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, song->pitch);
+                    }
+                    break;
+                case 1:
+                    if (song->voiceInflection > 10)
+                        song->volume -= 2;
+                    if (song->voiceInflection & 1)
+                        song->pitch += 64;
+                    else
+                        song->pitch -= 64;
+                    m4aMPlayVolumeControl(&gMPlayInfo_SE2, 0xFFFF, song->volume);
+                    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, song->pitch);
+                    song->voiceInflection++;
+                    song->phonemeTimer--;
+                    if (song->phonemeTimer == 0)
+                    {
+                        song->currPhoneme++;
+                        if (song->currPhoneme != 6 && song->sound[song->currPhoneme].var00 != 0xFF)
+                            song->state = 0;
+                        else
+                        {
+                            song->state = 3;
+                            song->phonemeTimer = 2;
+                        }
+                    }
+                    break;
+                case 3:
+                    song->phonemeTimer--;
+                    if (song->phonemeTimer == 0)
+                    {
+                        m4aMPlayStop(&gMPlayInfo_SE2);
+                        song->state = 4;
+                    }
+                    break;
+            }
+        }
+            break;
+        case 5:
+            break;
+    }
 }

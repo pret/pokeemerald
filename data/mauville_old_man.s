@@ -4,9 +4,6 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_0859F030:: @ 859F030
-	.4byte 0, 12, 13, 18, 19, 21
-
 gUnknown_0859F048:: @ 859F048
 	.4byte 0x00000132, MauvilleCity_PokemonCenter_1F_Text_28E930, MauvilleCity_PokemonCenter_1F_Text_28E947, MauvilleCity_PokemonCenter_1F_Text_28E956, 0x00000102, MauvilleCity_PokemonCenter_1F_Text_28E9D7, MauvilleCity_PokemonCenter_1F_Text_28E9EF, MauvilleCity_PokemonCenter_1F_Text_28E9FE
 	.4byte 0x00000103, MauvilleCity_PokemonCenter_1F_Text_28EA7D, MauvilleCity_PokemonCenter_1F_Text_28EA98, MauvilleCity_PokemonCenter_1F_Text_28EAA8, 0x00000104, MauvilleCity_PokemonCenter_1F_Text_28EB19, MauvilleCity_PokemonCenter_1F_Text_28EB31, MauvilleCity_PokemonCenter_1F_Text_28EB3E

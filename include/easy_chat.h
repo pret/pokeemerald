@@ -10,5 +10,7 @@ void ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 len
 bool8 ECWord_CheckIfOutsideOfValidRange(u16 word);
 u16 sub_811EE38(u16 group);
 u16 sub_811F01C(void);
+bool16 EasyChat_GetNumWordsInGroup(u8);
+u16 sub_811EE90(u16);
 
 #endif // GUARD_EASYCHAT_H
