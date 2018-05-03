@@ -13,5 +13,6 @@ enum MauvilleOldManType
 
 void SetMauvilleOldMan(void);
 u8 sub_81201C8(void);
+extern struct BardSong gUnknown_03006130;
 
 #endif // GUARD_MAUVILLE_OLD_MAN_H

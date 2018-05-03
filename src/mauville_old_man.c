@@ -1,6 +1,9 @@
 #include "global.h"
 #include "main.h"
+#include "constants/songs.h"
 #include "constants/easy_chat.h"
+#include "constants/map_objects.h"
+#include "constants/vars.h"
 #include "mauville_old_man.h"
 #include "event_data.h"
 #include "string_util.h"
@@ -13,7 +16,8 @@
 #include "menu.h"
 #include "m4a.h"
 #include "bard_music.h"
-#include "constants/songs.h"
+#include "sound.h"
+#include "strings.h"
 
 #define CHAR_SONG_WORD_SEPARATOR 0x37
 
@@ -27,6 +31,12 @@ void sub_8120E08(void); // StorytellerSetup
 void sub_8120E50(void);
 void sub_81339F8(void); // TraderSetup
 void sub_8133A60(void);
+
+struct BardSong gUnknown_03006130;
+
+EWRAM_DATA u16 gUnknown_0203A128 = 0;
+EWRAM_DATA struct MauvilleOldMan * gUnknown_0203A12C = NULL;
+EWRAM_DATA u8 gUnknown_0203A130 = 0;
 
 static const u16 sDefaultBardSongLyrics[6] = {
     EC_WORD_SHAKE,
@@ -409,6 +419,7 @@ void sub_8120670(void) // ResetMauvilleOldManFlag
 #define tUseTemporaryLyrics data[5]
 
 #define MACRO1(a) (((a) & 3) + (((a) / 8) & 1))
+#define MACRO2(a) (((a) % 4) + (((a) / 8) & 1))
 
 void sub_81206C0(bool8 useTemporaryLyrics)
 {
@@ -417,7 +428,7 @@ void sub_81206C0(bool8 useTemporaryLyrics)
     gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
 }
 
-void sub_81206F0(struct TextSubPrinter * printer, u16 a1)
+void sub_81206F0(void)
 {
     gUnknown_03002F84 = FALSE;
 }
@@ -435,7 +446,7 @@ void sub_8120708(const u8 * src)
     CopyWindowToVram(0, 3);
 }
 
-void sub_8120748(struct Task *task, struct BardSong *song)
+void sub_8120748(struct Task *task, struct BardSong *song) // BardSing
 {
     switch (task->tState)
     {
@@ -534,6 +545,299 @@ void sub_8120748(struct Task *task, struct BardSong *song)
         }
             break;
         case 5:
+            break;
+    }
+}
+
+void sub_8120944(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];  // r5
+
+    sub_8120748(task, &gUnknown_03006130);
+    switch (task->tState)
+    {
+        case 0:  // Initialize song
+            sub_8120280();
+            sub_8120708(gStringVar4);
+            task->data[1] = 0;
+            task->data[2] = 0;
+            task->tCharIndex = 0;
+            task->tCurrWord = 0;
+            FadeOutBGMTemporarily(4);
+            task->tState = 1;
+            break;
+        case 1:  // Wait for BGM to end
+            if (IsBGMPausedOrStopped())
+                task->tState = 2;
+            break;
+        case 2:  // Initialize word
+        {
+            struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
+            u8 *str = gStringVar4 + task->tCharIndex;
+            u16 wordLen = 0;
+            // Can't get it to match without hacking
+            u32 temp;
+            register s16 zero asm("r1");
+
+            while (*str != CHAR_SPACE
+                   && *str != CHAR_NEWLINE
+                   && *str != EXT_CTRL_CODE_BEGIN
+                   && *str != EOS)
+            {
+                str++;
+                wordLen++;
+            }
+            if (!task->tUseTemporaryLyrics)
+                gUnknown_0203A128 = MACRO2(bard->songLyrics[task->tCurrWord]);
+            else
+                gUnknown_0203A128 = MACRO2(bard->temporaryLyrics[task->tCurrWord]);
+            temp = gUnknown_03006130.length / wordLen;
+            zero = 0;
+            gUnknown_03006130.length = temp;
+            if (gUnknown_03006130.length <= 0)
+                gUnknown_03006130.length = 1;
+            task->tCurrWord++;
+            if (task->data[2] == 0)
+                task->tState = 3;
+            else
+                task->tState = 5;
+            task->data[1] = zero;
+        }
+            break;
+        case 5:
+            if (task->data[2] == 0)
+                task->tState = 3;
+            else
+                task->data[2]--;
+            break;
+        case 3:
+            if (gStringVar4[task->tCharIndex] == EOS)
+            {
+                FadeInBGM(6);
+                m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE2, 2);
+                EnableBothScriptContexts();
+                DestroyTask(taskId);
+            }
+            else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
+            {
+
+                sub_81206F0();
+                task->tCharIndex++;
+                task->tState = 2;
+                task->data[2] = 0;
+            }
+            else if (gStringVar4[task->tCharIndex] == CHAR_NEWLINE)
+            {
+                task->tCharIndex++;
+                task->tState = 2;
+                task->data[2] = 0;
+            }
+            else if (gStringVar4[task->tCharIndex] == EXT_CTRL_CODE_BEGIN)
+            {
+                task->tCharIndex += 2;  // skip over control codes
+                task->tState = 2;
+                task->data[2] = 8;
+            }
+            else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
+            {
+                gStringVar4[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
+                sub_81206F0();
+                task->tCharIndex++;
+                task->data[2] = 0;
+            }
+            else
+            {
+                switch (task->data[1])
+                {
+                    case 0:
+                        sub_81206F0();
+                        task->data[1]++;
+                        break;
+                    case 1:
+                        task->data[1]++;
+                        break;
+                    case 2:
+                        task->tCharIndex++;
+                        task->data[1] = 0;
+                        task->data[2] = gUnknown_03006130.length;
+                        task->tState = 4;
+                        break;
+                }
+            }
+            break;
+        case 4:
+            task->data[2]--;
+            if (task->data[2] == 0)
+                task->tState = 3;
+            break;
+    }
+    sub_8197224();
+}
+
+void sub_8120B5C(void)
+{
+    VarSet(VAR_0x4010, MAP_OBJ_GFX_BARD);
+}
+
+struct Story
+{
+    u8 stat;
+    u8 minVal;
+    const u8 *title;
+    const u8 *action;
+    const u8 *fullText;
+};
+
+const struct Story gUnknown_0859F048[] = {
+    {GAME_STAT_50, 1, MauvilleCity_PokemonCenter_1F_Text_28E930, MauvilleCity_PokemonCenter_1F_Text_28E947, MauvilleCity_PokemonCenter_1F_Text_28E956},
+    {GAME_STAT_STARTED_TRENDS, 1, MauvilleCity_PokemonCenter_1F_Text_28E9D7, MauvilleCity_PokemonCenter_1F_Text_28E9EF, MauvilleCity_PokemonCenter_1F_Text_28E9FE},
+    {GAME_STAT_PLANTED_BERRIES, 1, MauvilleCity_PokemonCenter_1F_Text_28EA7D, MauvilleCity_PokemonCenter_1F_Text_28EA98, MauvilleCity_PokemonCenter_1F_Text_28EAA8},
+    {GAME_STAT_TRADED_BIKES, 1, MauvilleCity_PokemonCenter_1F_Text_28EB19, MauvilleCity_PokemonCenter_1F_Text_28EB31, MauvilleCity_PokemonCenter_1F_Text_28EB3E},
+    {GAME_STAT_GOT_INTERVIEWED, 1, MauvilleCity_PokemonCenter_1F_Text_28EBB5, MauvilleCity_PokemonCenter_1F_Text_28EBCD, MauvilleCity_PokemonCenter_1F_Text_28EBDD},
+    {GAME_STAT_TRAINER_BATTLES, 1, MauvilleCity_PokemonCenter_1F_Text_28EC60, MauvilleCity_PokemonCenter_1F_Text_28EC79, MauvilleCity_PokemonCenter_1F_Text_28EC81},
+    {GAME_STAT_POKEMON_CAPTURES, 1, MauvilleCity_PokemonCenter_1F_Text_28ED04, MauvilleCity_PokemonCenter_1F_Text_28ED21, MauvilleCity_PokemonCenter_1F_Text_28ED30},
+    {GAME_STAT_FISHING_CAPTURES, 1, MauvilleCity_PokemonCenter_1F_Text_28EDA1, MauvilleCity_PokemonCenter_1F_Text_28EDB5, MauvilleCity_PokemonCenter_1F_Text_28EDCF},
+    {GAME_STAT_HATCHED_EGGS, 1, MauvilleCity_PokemonCenter_1F_Text_28EE45, MauvilleCity_PokemonCenter_1F_Text_28EE5D, MauvilleCity_PokemonCenter_1F_Text_28EE6A},
+    {GAME_STAT_EVOLVED_POKEMON, 1, MauvilleCity_PokemonCenter_1F_Text_28EEDD, MauvilleCity_PokemonCenter_1F_Text_28EEF1, MauvilleCity_PokemonCenter_1F_Text_28EF01},
+    {GAME_STAT_USED_POKECENTER, 1, MauvilleCity_PokemonCenter_1F_Text_28EF73, MauvilleCity_PokemonCenter_1F_Text_28EF95, MauvilleCity_PokemonCenter_1F_Text_28EFAA},
+    {GAME_STAT_RESTED_AT_HOME, 1, MauvilleCity_PokemonCenter_1F_Text_28F045, MauvilleCity_PokemonCenter_1F_Text_28F05A, MauvilleCity_PokemonCenter_1F_Text_28F071},
+    {GAME_STAT_ENTERED_SAFARI_ZONE, 1, MauvilleCity_PokemonCenter_1F_Text_28F0F3, MauvilleCity_PokemonCenter_1F_Text_28F10D, MauvilleCity_PokemonCenter_1F_Text_28F125},
+    {GAME_STAT_USED_CUT, 1, MauvilleCity_PokemonCenter_1F_Text_28F1BE, MauvilleCity_PokemonCenter_1F_Text_28F1D5, MauvilleCity_PokemonCenter_1F_Text_28F1DE},
+    {GAME_STAT_USED_ROCK_SMASH, 1, MauvilleCity_PokemonCenter_1F_Text_28F24F, MauvilleCity_PokemonCenter_1F_Text_28F269, MauvilleCity_PokemonCenter_1F_Text_28F277},
+    {GAME_STAT_MOVED_SECRET_BASE, 1, MauvilleCity_PokemonCenter_1F_Text_28F2FC, MauvilleCity_PokemonCenter_1F_Text_28F314, MauvilleCity_PokemonCenter_1F_Text_28F32A},
+    {GAME_STAT_USED_SPLASH, 1, MauvilleCity_PokemonCenter_1F_Text_28F3AD, MauvilleCity_PokemonCenter_1F_Text_28F3C6, MauvilleCity_PokemonCenter_1F_Text_28F3D2},
+    {GAME_STAT_USED_STRUGGLE, 1, MauvilleCity_PokemonCenter_1F_Text_28F44B, MauvilleCity_PokemonCenter_1F_Text_28F461, MauvilleCity_PokemonCenter_1F_Text_28F47C},
+    {GAME_STAT_SLOT_JACKPOTS, 1, MauvilleCity_PokemonCenter_1F_Text_28F50C, MauvilleCity_PokemonCenter_1F_Text_28F51B, MauvilleCity_PokemonCenter_1F_Text_28F538},
+    {GAME_STAT_CONSECUTIVE_ROULETTE_WINS, 2, MauvilleCity_PokemonCenter_1F_Text_28F5BE, MauvilleCity_PokemonCenter_1F_Text_28F5D1, MauvilleCity_PokemonCenter_1F_Text_28F5F2},
+    {GAME_STAT_ENTERED_BATTLE_TOWER, 1, MauvilleCity_PokemonCenter_1F_Text_28F678, MauvilleCity_PokemonCenter_1F_Text_28F694, MauvilleCity_PokemonCenter_1F_Text_28F6B4},
+    {GAME_STAT_POKEBLOCKS, 1, MauvilleCity_PokemonCenter_1F_Text_28F751, MauvilleCity_PokemonCenter_1F_Text_28F76A, MauvilleCity_PokemonCenter_1F_Text_28F776},
+    {GAME_STAT_ENTERED_CONTEST, 1, MauvilleCity_PokemonCenter_1F_Text_28F7F6, MauvilleCity_PokemonCenter_1F_Text_28F811, MauvilleCity_PokemonCenter_1F_Text_28F822},
+    {GAME_STAT_WON_CONTEST, 1, MauvilleCity_PokemonCenter_1F_Text_28F89C, MauvilleCity_PokemonCenter_1F_Text_28F8AF, MauvilleCity_PokemonCenter_1F_Text_28F8BC},
+    {GAME_STAT_SHOPPED, 1, MauvilleCity_PokemonCenter_1F_Text_28F92F, MauvilleCity_PokemonCenter_1F_Text_28F941, MauvilleCity_PokemonCenter_1F_Text_28F949},
+    {GAME_STAT_USED_ITEMFINDER, 1, MauvilleCity_PokemonCenter_1F_Text_28F9D1, MauvilleCity_PokemonCenter_1F_Text_28F9EA, MauvilleCity_PokemonCenter_1F_Text_28F9FD},
+    {GAME_STAT_GOT_RAINED_ON, 1, MauvilleCity_PokemonCenter_1F_Text_28FA81, MauvilleCity_PokemonCenter_1F_Text_28FA99, MauvilleCity_PokemonCenter_1F_Text_28FAA7},
+    {GAME_STAT_CHECKED_POKEDEX, 1, MauvilleCity_PokemonCenter_1F_Text_28FB1D, MauvilleCity_PokemonCenter_1F_Text_28FB35, MauvilleCity_PokemonCenter_1F_Text_28FB47},
+    {GAME_STAT_RECEIVED_RIBBONS, 1, MauvilleCity_PokemonCenter_1F_Text_28FBC4, MauvilleCity_PokemonCenter_1F_Text_28FBD9, MauvilleCity_PokemonCenter_1F_Text_28FBEA},
+    {GAME_STAT_JUMPED_DOWN_LEDGES, 1, MauvilleCity_PokemonCenter_1F_Text_28FC6B, MauvilleCity_PokemonCenter_1F_Text_28FC85, MauvilleCity_PokemonCenter_1F_Text_28FC98},
+    {GAME_STAT_WATCHED_TV, 1, MauvilleCity_PokemonCenter_1F_Text_28FD1D, MauvilleCity_PokemonCenter_1F_Text_28FD35, MauvilleCity_PokemonCenter_1F_Text_28FD40},
+    {GAME_STAT_CHECKED_CLOCK, 1, MauvilleCity_PokemonCenter_1F_Text_28FDA2, MauvilleCity_PokemonCenter_1F_Text_28FDBD, MauvilleCity_PokemonCenter_1F_Text_28FDCE},
+    {GAME_STAT_WON_POKEMON_LOTTERY, 1, MauvilleCity_PokemonCenter_1F_Text_28FE57, MauvilleCity_PokemonCenter_1F_Text_28FE72, MauvilleCity_PokemonCenter_1F_Text_28FE88},
+    {GAME_STAT_USED_DAYCARE, 1, MauvilleCity_PokemonCenter_1F_Text_28FF0C, MauvilleCity_PokemonCenter_1F_Text_28FF27, MauvilleCity_PokemonCenter_1F_Text_28FF44},
+    {GAME_STAT_RODE_CABLE_CAR, 1, MauvilleCity_PokemonCenter_1F_Text_28FFDD, MauvilleCity_PokemonCenter_1F_Text_28FFFA, MauvilleCity_PokemonCenter_1F_Text_29000D},
+    {GAME_STAT_ENTERED_HOT_SPRINGS, 1, MauvilleCity_PokemonCenter_1F_Text_290097, MauvilleCity_PokemonCenter_1F_Text_2900B5, MauvilleCity_PokemonCenter_1F_Text_2900CB}
+};
+
+void sub_8120B70(union OldMan * oldMan)
+{
+    s32 i;
+    u8 sp00[8];
+
+    switch (oldMan->common.id)
+    {
+        case MAUVILLE_MAN_TRADER:
+        {
+            struct MauvilleOldManTrader * trader = &oldMan->trader;
+            for (i = 0; i < 4; i++)
+            {
+                if (trader->unk32[i] == LANGUAGE_JAPANESE)
+                {
+                    ConvertInternationalString(trader->unk5[i], LANGUAGE_JAPANESE);
+                }
+            }
+        }
+            break;
+        case MAUVILLE_MAN_STORYTELLER:
+        {
+            struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+            for (i = 0; i < 4; i++)
+            {
+                if (storyteller->gameStatIDs[i] != 0)
+                {
+                    memcpy(sp00, storyteller->trainerNames[i], 7);
+                    sp00[7] = EOS;
+                    if (IsStringJapanese(sp00))
+                    {
+                        memset(sp00, CHAR_SPACE, 8);
+                        StringCopy(sp00, gText_Friend);
+                        memcpy(storyteller->trainerNames[i], sp00, 7);
+                        storyteller->unk34[i] = GAME_LANGUAGE;
+                    }
+                }
+            }
+        }
+            break;
+    }
+}
+
+void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
+{
+    s32 i;
+
+    switch (oldMan->common.id)
+    {
+        case MAUVILLE_MAN_TRADER:
+        {
+            struct MauvilleOldManTrader * trader = &oldMan->trader;
+
+            for (i = 0; i < 4; i++)
+            {
+                if (IsStringJapanese(trader->unk5[i]))
+                {
+                    trader->unk32[i] = r8;
+                }
+                else
+                {
+                    trader->unk32[i] = r7;
+                }
+            }
+        }
+            break;
+        case MAUVILLE_MAN_STORYTELLER:
+        {
+            struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+
+            for (i = 0; i < 4; i++)
+            {
+                if (IsStringJapanese(storyteller->trainerNames[i]))
+                {
+                    storyteller->unk34[i] = r8;
+                }
+                else
+                {
+                    storyteller->unk34[i] = r7;
+                }
+            }
+        }
+            break;
+        case MAUVILLE_MAN_BARD:
+        {
+            struct MauvilleManBard * bard = &oldMan->bard;
+
+            if (r3 == LANGUAGE_JAPANESE)
+                bard->language = r8;
+            else
+                bard->language = r7;
+        }
+            break;
+        case MAUVILLE_MAN_HIPSTER:
+        {
+            struct MauvilleManHipster * hipster = &oldMan->hipster;
+
+            if (r3 == LANGUAGE_JAPANESE)
+                hipster->language = r8;
+            else
+                hipster->language = r7;
+        }
+            break;
+        case MAUVILLE_MAN_GIDDY:
+        {
+            struct MauvilleManGiddy * giddy = &oldMan->giddy;
+
+            if (r3 == LANGUAGE_JAPANESE)
+                giddy->language = r8;
+            else
+                giddy->language = r7;
+        }
             break;
     }
 }
