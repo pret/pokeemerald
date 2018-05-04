@@ -554,7 +554,7 @@ LilycoveCity_ContestLobby_EventScript_21A77A:: @ 821A77A
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -564,7 +564,7 @@ LilycoveCity_ContestLobby_EventScript_21A784:: @ 821A784
 	setvar VAR_0x8005, 7
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

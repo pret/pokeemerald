@@ -243,7 +243,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5BE:: @ 824B5BE
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	setvar VAR_0x4000, 1
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B760, 4
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780

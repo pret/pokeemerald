@@ -250,13 +250,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_223FDA:: @ 8223FDA
 MossdeepCity_SpaceCenter_2F_EventScript_22400C:: @ 822400C
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_2725AA
 	waitmovement 0
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	fadescreen 1
 	special sub_80F9438
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if 5, MossdeepCity_SpaceCenter_2F_EventScript_224032
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	goto MossdeepCity_SpaceCenter_2F_EventScript_223FDA
 
 MossdeepCity_SpaceCenter_2F_EventScript_224032:: @ 8224032
@@ -270,7 +270,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224032:: @ 8224032
 	waitstate
 	setvar VAR_0x8004, 6
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	switch VAR_RESULT
 	case 1, MossdeepCity_SpaceCenter_2F_EventScript_224071
 	fadescreen 1

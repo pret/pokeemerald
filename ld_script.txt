@@ -137,7 +137,6 @@ SECTIONS {
         src/item_menu_icons.o(.text);
         asm/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
-        asm/item.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
@@ -184,7 +183,7 @@ SECTIONS {
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
         asm/field_specials.o(.text);
-        asm/battle_records.o(.text);
+        src/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         asm/roulette.o(.text);
@@ -473,7 +472,7 @@ SECTIONS {
         src/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         data/field_specials.o(.rodata);
-        data/battle_records.o(.rodata);
+        src/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);

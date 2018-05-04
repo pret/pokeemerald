@@ -66,7 +66,7 @@ BattleFrontier_RankingHall_EventScript_25E522:: @ 825E522
 	waitbuttonpress
 	special sub_81A4AE8
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

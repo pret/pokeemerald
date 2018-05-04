@@ -43,9 +43,6 @@
 
 #define PARTY_SIZE 6
 
-#define POKEMON_NAME_LENGTH 10
-#define OT_NAME_LENGTH 7
-
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
@@ -97,6 +94,31 @@ enum LanguageId
 #define GAME_VERSION (VERSION_EMERALD)
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
+// capacities of various saveblock objects
+#define DAYCARE_MON_COUNT   2
+#define POKEBLOCKS_COUNT    40
+#define MAP_OBJECTS_COUNT   16
+#define BERRY_TREES_COUNT   128
+#define FLAGS_COUNT         300
+#define VARS_COUNT          256
+#define MAIL_COUNT          16
+#define SECRET_BASES_COUNT  20
+#define PC_ITEMS_COUNT      50
+#define BAG_ITEMS_COUNT     30
+#define BAG_KEYITEMS_COUNT  30
+#define BAG_POKEBALLS_COUNT 16
+#define BAG_TMHM_COUNT      64
+#define BAG_BERRIES_COUNT   46
+
+#define PYRAMID_BAG_ITEMS_COUNT 10
+
+// string lengths
+#define ITEM_NAME_LENGTH    14
+#define POKEMON_NAME_LENGTH 10
+#define OT_NAME_LENGTH      7
+#define PLAYER_NAME_LENGTH  8
+#define MAIL_WORDS_COUNT    9
+
 enum
 {
     MALE,
@@ -127,15 +149,6 @@ enum
 {
     OPTIONS_BATTLE_STYLE_SHIFT,
     OPTIONS_BATTLE_STYLE_SET
-};
-
-enum
-{
-    BAG_ITEMS = 1,
-    BAG_POKEBALLS,
-    BAG_TMsHMs,
-    BAG_BERRIES,
-    BAG_KEYITEMS
 };
 
 struct Coords16
@@ -209,11 +222,11 @@ struct BerryPickingResults // possibly used in the game itself? Size may be wron
     u8 field_F;
 };
 
+// two arrays for lvl50 and open level
 struct PyramidBag
 {
-    u16 items_Lvl50[10];
-    u16 items_OpenLvl[10];
-    u8 quantity[10];
+    u16 itemId[2][PYRAMID_BAG_ITEMS_COUNT];
+    u8 quantity[2][PYRAMID_BAG_ITEMS_COUNT];
 };
 
 struct BerryCrush
@@ -222,8 +235,6 @@ struct BerryCrush
     u32 berryPowderAmount;
     u32 unk;
 };
-
-#define PLAYER_NAME_LENGTH  8
 
 struct UnknownSaveBlock2Struct
 {
@@ -303,7 +314,7 @@ struct SaveBlock2
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
     /*0xE1C*/ u8 field_E1C[16];
     /*0xE2C*/ struct PyramidBag pyramidBag;
-    /*0x???*/ u8 field_notSure[13];
+    /*0x???*/ u8 field_unkown[6];
     /*0xE6E*/ u16 battleTentWinStreak;
     /*0xE70*/ u8 field_E70[72];
     /*0xEB8*/ u16 frontierBattlePoints;
@@ -417,8 +428,6 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
-#define MAIL_WORDS_COUNT 9
-
 struct MailStruct
 {
     /*0x00*/ u16 words[MAIL_WORDS_COUNT];
@@ -481,6 +490,8 @@ struct RecordMixing_UnknownStruct
     u16 unk74[0x2];
 };
 
+#define LINK_B_RECORDS_COUNT 5
+
 struct LinkBattleRecord
 {
     u8 name[8];
@@ -488,6 +499,12 @@ struct LinkBattleRecord
     u16 wins;
     u16 losses;
     u16 draws;
+};
+
+struct LinkBattleRecords
+{
+    struct LinkBattleRecord entries[LINK_B_RECORDS_COUNT];
+    u8 languages[LINK_B_RECORDS_COUNT];
 };
 
 struct RecordMixingGiftData
@@ -531,8 +548,6 @@ struct DaycareMon
     u32 steps;
 };
 
-#define DAYCARE_MON_COUNT   2
-
 struct DayCare
 {
     struct DaycareMon mons[DAYCARE_MON_COUNT];
@@ -552,13 +567,6 @@ struct RecordMixingDayCareMail
     u32 numDaycareMons;
     bool16 holdsItem[DAYCARE_MON_COUNT];
 };
-
-#define POKEBLOCKS_COUNT    40
-#define MAP_OBJECTS_COUNT   16
-#define BERRY_TREES_COUNT   128
-#define FLAGS_COUNT         300
-#define VARS_COUNT          256
-#define MAIL_COUNT          16
 
 enum
 {
@@ -646,16 +654,16 @@ struct SaveBlock1
     /*0x32*/ u16 mapDataId;
     /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;
-    /*0x238*/ struct Pokemon playerParty[6];
+    /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
-    /*0x498*/ struct ItemSlot pcItems[50];
-    /*0x560*/ struct ItemSlot bagPocket_Items[30];
-    /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[30];
-    /*0x650*/ struct ItemSlot bagPocket_PokeBalls[16];
-    /*0x690*/ struct ItemSlot bagPocket_TMHM[64];
-    /*0x790*/ struct ItemSlot bagPocket_Berries[46];
+    /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
+    /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+    /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+    /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x988*/ u8 seen1[52];
     /*0x9BC*/ u16 berryBlenderRecords[3];
@@ -668,7 +676,7 @@ struct SaveBlock1
     /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
     /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
-    /*0x1A9C*/ struct SecretBaseRecord secretBases[20];
+    /*0x1A9C*/ struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
     /*0x271C*/ u8 playerRoomDecor[12];
     /*0x2728*/ u8 playerRoomDecorPos[12];
     /*0x2734*/ u8 decorDesk[10];
@@ -704,9 +712,7 @@ struct SaveBlock1
     /*0x2e64*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2e90*/ struct ContestWinner contestWinners[13]; // 0 - 5 used in contest hall, 6 - 7 unused?, 8 - 12 museum
     /*0x3030*/ struct DayCare daycare;
-    /*0x3150*/ struct LinkBattleRecord linkBattleRecords[5];
-    /*0x31A0*/ u8 unk_31A0;
-    /*0x31A1*/ u8 filler_31A1[7];
+    /*0x3150*/ struct LinkBattleRecords linkBattleRecords;
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;

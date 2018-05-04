@@ -74,6 +74,10 @@ extern const u8 gText_DecorationWillBeDiscarded[];
 extern const u8 gText_CantThrowAwayInUse[];
 extern const u8 gText_DecorationThrownAway[];
 
+extern const u8 gText_PokeBalls[];
+extern const u8 gText_Berries[];
+extern const u8 gText_Berry[];
+
 extern const u8 gText_Desk[];
 extern const u8 gText_Chair[];
 extern const u8 gText_Plant[];
@@ -336,7 +340,7 @@ extern const u8 gText_Var1DotVar2[];
 extern const u8 gText_ThreeMarks[];
 extern const u8 gText_FirmSlash[];
 
-//item menu screen text
+// item menu screen text
 extern const u8 gText_CloseBag[];
 extern const u8 gText_ClearTo11Var1Clear5Var2[];
 extern const u8 gText_UnkF908Var1Clear7Var2[];
@@ -362,11 +366,11 @@ extern const u8 gText_DepositedVar2Var1s[];
 extern const u8 gText_NoRoomForItems[];
 extern const u8 gText_ThreeDashes[];
 
-//party menu text
+// party menu text
 extern const u8 gText_PkmnHPRestoredByVar2[];
 extern const u8 gText_CantBeUsedOnPkmn[];
 
-//birch dex rating text
+// birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];
 extern const u8 gBirchDexRatingText_LessThan20[];
 extern const u8 gBirchDexRatingText_LessThan30[];
@@ -389,7 +393,7 @@ extern const u8 gBirchDexRatingText_LessThan190[];
 extern const u8 gBirchDexRatingText_LessThan200[];
 extern const u8 gBirchDexRatingText_DexCompleted[];
 
-//player pc text
+// player pc text
 extern const u8 gText_WhatWouldYouLike[];
 extern const u8 gText_NoMailHere[];
 
@@ -435,5 +439,8 @@ extern const u8 gText_Dennis[];
 extern const u8 gText_Roberto[];
 extern const u8 gText_FiveMarks[];
 
+extern const u8 gText_TotalRecordWLD[];
+extern const u8 gText_PlayersBattleResults[];
+extern const u8 gText_WinLoseDraw[];
 
 #endif //GUARD_STRINGS_H

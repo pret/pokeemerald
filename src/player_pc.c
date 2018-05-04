@@ -444,7 +444,7 @@ static void ItemStorage_Withdraw(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    NUM_ITEMS = sub_80D6CE4();
+    NUM_ITEMS = CountUsedPCItemSlots();
     if (NUM_ITEMS != 0)
         ItemStorage_WithdrawToss_Helper(taskId, FALSE);
     else
@@ -459,7 +459,7 @@ static void ItemStorage_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    NUM_ITEMS = sub_80D6CE4();
+    NUM_ITEMS = CountUsedPCItemSlots();
     if (NUM_ITEMS != 0)
         ItemStorage_WithdrawToss_Helper(taskId, TRUE);
     else
@@ -967,7 +967,7 @@ static void sub_816C0C8(void)
 
 static void sub_816C110(void)
 {
-    sub_80D6E84();
+    CompactPCItems();
     sub_812220C(gSaveBlock1Ptr->pcItems, 50, &(playerPCItemPageInfo.pageItems), &(playerPCItemPageInfo.count), 0x8);
 }
 
@@ -1180,7 +1180,7 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
         {
             if(c != b - 1)
             {
-                sub_80D702C(gSaveBlock1Ptr->pcItems, c, b);
+                MoveItemSlotInList(gSaveBlock1Ptr->pcItems, c, b);
                 ItemStorage_RefreshListMenu();
             }
         }
@@ -1301,7 +1301,7 @@ static void ItemStorage_DoItemToss(u8 taskId)
 
     data = gTasks[taskId].data;
     b = (playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove);
-    if(!itemid_is_unique(gSaveBlock1Ptr->pcItems[b].itemId))
+    if(!ItemId_GetImportance(gSaveBlock1Ptr->pcItems[b].itemId))
     {
         CopyItemName(gSaveBlock1Ptr->pcItems[b].itemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, data[2], STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -1335,7 +1335,7 @@ static void ItemStorage_HandleRemoveItem(u8 taskId)
     data = gTasks[taskId].data;
     if(gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        sub_80D6E48((playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove), data[2]);
+        RemovePCItem((playerPCItemPageInfo.cursorPos + playerPCItemPageInfo.itemsAbove), data[2]);
         DestroyListMenuTask(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
         sub_816C110();
         sub_816C140();

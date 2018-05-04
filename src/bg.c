@@ -965,9 +965,9 @@ void CopyBgTilemapBufferToVram(u8 bg)
     }
 }
 
-void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u8 height)
+void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height)
 {
-    void* srcCopy;
+    const void* srcCopy;
     u16 destX16;
     u16 destY16;
     u16 mode;
