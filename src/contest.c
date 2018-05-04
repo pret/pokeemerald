@@ -53,16 +53,25 @@ void sub_80D8108(u8 taskId);
 void vblank_cb_battle(void);
 void sub_80D823C(void);
 void sub_80D833C(u8 taskId);
-void sub_80D8424(u8);
-void sub_80D8610(u8);
-void sub_80D8490(u8);
+void sub_80D8424(u8 taskId);
+void sub_80D8610(u8 taskId);
+void sub_80D8490(u8 taskId);
 void sub_80D880C(s8);
 void sub_80D883C(s8);
-void sub_80D8894(u8);
+void sub_80D8894(u8 taskId);
+void sub_80D892C(u8 taskId);
+void sub_80D895C(u8 taskId);
+void sub_80D8A04(u8 taskId);
+void sub_80D8A50(u8 taskId);
+void sub_80D8A88(u8 taskId);
+void sub_80D8B38(u8 taskId);
+bool8 sub_80DA8A4(void);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
 void sub_80DB2BC(void);
 void sub_80DB89C(void);
+u16 sub_80DB8B8(u8);
+void sub_80DB918(void);
 bool8 sub_80DBCA8(u8);
 void sub_80DBF68(void);
 void sub_80DBF90(void);
@@ -77,16 +86,20 @@ void sub_80DCE58(u8);
 void sub_80DD04C(void);
 void sub_80DD590(void);
 void sub_80DDB0C(void);
+void sub_80DDBE8(void);
 bool8 sub_80DE1E8(u8);
 void sub_80DE224(void);
 void sub_80DE350(void);
+void sub_80DE69C(u8);
 void sub_80DEA20(void);
 void sub_80DEBD0(u32, u8 *, u8, u8, u8);
 void sub_80DEC30(u8 *, u8);
+void sub_80DECB8(u8, u16, u8, u8, u8, u8, u8, u8);
 bool32 sub_80DED4C(void);
+void sub_80DED60(u32);
+void sub_80FC9F8(u8);
 bool8 AreMovesContestCombo(u16, u16);
 void prints_contest_move_description(u16);
-void sub_80DECB8(u8, u16, u8, u8, u8, u8, u8, u8);
 
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
@@ -757,4 +770,95 @@ void sub_80D883C(s8 a0)
 {
     sub_80DECB8(2, 11, 0, 31 + a0 * 2, 2, 1, 17, 1);
     sub_80DECB8(2, 11, 0, 32 + a0 * 2, 2, 1, 17, 1);
+}
+
+void sub_80D8894(u8 taskId)
+{
+    if (gIsLinkContest & 1)
+    {
+        u16 var = sub_80DB8B8(gContestPlayerMonIndex);
+        u8 taskId2;
+
+        gContestResources->field_4[gContestPlayerMonIndex].currMove = var;
+        taskId2 = CreateTask(sub_80FC9F8, 0);
+        SetTaskFuncWithFollowupFunc(taskId2, sub_80FC9F8, sub_80D892C);
+        gTasks[taskId].func = TaskDummy1;
+        sub_80DBF68();
+        sub_80DC490(FALSE);
+    }
+    else
+    {
+        sub_80DB918();
+        gTasks[taskId].func = sub_80D895C;
+    }
+}
+
+void sub_80D892C(u8 taskId)
+{
+    DestroyTask(taskId);
+    gTasks[gContestResources->field_0->mainTaskId].func = sub_80D895C;
+}
+
+void sub_80D895C(u8 taskId)
+{
+    s32 i;
+
+    sub_80DB89C();
+    gBattle_BG0_Y = 0;
+    gBattle_BG2_Y = 0;
+    sub_80DC490(FALSE);
+
+    for (i = 0; i < 4; i++)
+    {
+        FillWindowPixelBuffer(5 + i, 0);
+        PutWindowTilemap(5 + i);
+        CopyWindowToVram(5 + i, 2);
+    }
+    sub_80DED60(0);
+
+    DmaCopy32Defvars(3, gPlttBufferFaded, shared18000.unk18604, 0x400);
+    LoadPalette(shared18000.unk18204, 0, 0x400);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].func = sub_80D8A04;
+}
+
+void sub_80D8A04(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] > 2)
+    {
+        gTasks[taskId].data[0] = 0;
+        if (++gTasks[taskId].data[1] == 2)
+        {
+            sub_80DDBE8();
+            sub_80DE69C(1);
+            gTasks[taskId].func = sub_80D8A50;
+        }
+    }
+}
+
+void sub_80D8A50(u8 taskId)
+{
+    if (!gContestResources->field_0->unk1920A_6 && !gContestResources->field_0->unk1920B_1)
+        gTasks[taskId].func = sub_80D8A88;
+}
+
+void sub_80D8A88(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] > 19)
+    {
+        gContestResources->field_0->unk19214 = 0;
+        gContestResources->field_0->unk1921C = gRngValue;
+        if ((gIsLinkContest & 1) && sub_80DA8A4())
+        {
+            s32 i;
+
+            for (i = 0; i + gUnknown_02039F30 < 4; i++)
+            {
+                gContestResources->field_4[gUnknown_02039F30 + i].currMove = sub_80DB8B8(gUnknown_02039F30 + i);
+            }
+        }
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_80D8B38;
+    }
 }
