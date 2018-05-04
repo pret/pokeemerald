@@ -54,11 +54,10 @@ void vblank_cb_battle(void);
 void sub_80D823C(void);
 void sub_80D833C(u8 taskId);
 void sub_80D8424(u8);
-bool8 AreMovesContestCombo(u16, u16);
 void sub_80D8610(u8);
-void sub_80D880C(s8);
-void prints_contest_move_description(u16);
 void sub_80D8490(u8);
+void sub_80D880C(s8);
+void sub_80D883C(s8);
 void sub_80D8894(u8);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
@@ -85,6 +84,9 @@ void sub_80DEA20(void);
 void sub_80DEBD0(u32, u8 *, u8, u8, u8);
 void sub_80DEC30(u8 *, u8);
 bool32 sub_80DED4C(void);
+bool8 AreMovesContestCombo(u16, u16);
+void prints_contest_move_description(u16);
+void sub_80DECB8(u8, u16, u8, u8, u8, u8, u8, u8);
 
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
@@ -680,4 +682,79 @@ void sub_80D8490(u8 taskId)
     sub_80D880C(gContestResources->field_0->playerMoveChoice);
     prints_contest_move_description(gContestMons[gContestPlayerMonIndex].moves[gContestResources->field_0->playerMoveChoice]);
     gTasks[taskId].func = sub_80D8610;
+}
+
+void sub_80D8610(u8 taskId)
+{
+    u8 numMoves = 0;
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gContestMons[gContestPlayerMonIndex].moves[i] != MOVE_NONE)
+            numMoves++;
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].func = sub_80D8894;
+    }
+    else
+    {
+        switch (gMain.newAndRepeatedKeys)
+        {
+            case B_BUTTON:
+                PlaySE(SE_SELECT);
+                sub_80DC490(FALSE);
+                ConvertIntToDecimalStringN(gStringVar1, gContestResources->field_0->turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+                if (!sub_80DBCA8(gContestPlayerMonIndex))
+                    StringCopy(gDisplayedStringBattle, gText_0827D507);
+                else
+                    StringCopy(gDisplayedStringBattle, gText_0827D531);
+                sub_80DB89C();
+                StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
+                sub_80DEC30(gStringVar4, 0);
+                gBattle_BG0_Y = 0;
+                gBattle_BG2_Y = 0;
+                gTasks[taskId].func = sub_80D8424;
+                break;
+            case DPAD_LEFT:
+            case DPAD_RIGHT:
+                break;
+            case DPAD_UP:
+                sub_80D883C(gContestResources->field_0->playerMoveChoice);
+                if (gContestResources->field_0->playerMoveChoice == 0)
+                    gContestResources->field_0->playerMoveChoice = numMoves - 1;
+                else
+                    gContestResources->field_0->playerMoveChoice--;
+                sub_80D880C(gContestResources->field_0->playerMoveChoice);
+                prints_contest_move_description(gContestMons[gContestPlayerMonIndex].moves[gContestResources->field_0->playerMoveChoice]);
+                if (numMoves > 1)
+                    PlaySE(SE_SELECT);
+                break;
+            case DPAD_DOWN:
+                sub_80D883C(gContestResources->field_0->playerMoveChoice);
+                if (gContestResources->field_0->playerMoveChoice == numMoves - 1)
+                    gContestResources->field_0->playerMoveChoice = 0;
+                else
+                    gContestResources->field_0->playerMoveChoice++;
+                sub_80D880C(gContestResources->field_0->playerMoveChoice);
+                prints_contest_move_description(gContestMons[gContestPlayerMonIndex].moves[gContestResources->field_0->playerMoveChoice]);
+                if (numMoves > 1)
+                    PlaySE(SE_SELECT);
+                break;
+        }
+    }
+}
+
+void sub_80D880C(s8 a0)
+{
+    sub_80DECB8(2, 55, 0, 31 + a0 * 2, 2, 2, 17, 1);
+}
+
+void sub_80D883C(s8 a0)
+{
+    sub_80DECB8(2, 11, 0, 31 + a0 * 2, 2, 1, 17, 1);
+    sub_80DECB8(2, 11, 0, 32 + a0 * 2, 2, 1, 17, 1);
 }
