@@ -172,7 +172,7 @@ SECTIONS {
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
-        asm/trader.o(.text);
+        src/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         src/rom6.o(.text);
@@ -465,7 +465,7 @@ SECTIONS {
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
-        data/trader.o(.rodata);
+        src/trader.o(.rodata);
         data/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);

@@ -461,10 +461,11 @@ struct UnkMauvilleOldManStruct2
 
 struct MauvilleOldManTrader
 {
-    u8 unk0;
-    u8 unk1[4];
-    u8 unk5[4][11];
-    u8 unk31;
+    /* 0x2E28 */ u8 id;
+    /* 0x2E29 */ u8 unk1[4];
+    /* 0x2E2D */ u8 unk5[4][11];
+    /* 0x2E59 */ bool8 alreadyTraded;
+    /* 0x2E5A */ u8 language[4];
 };
 
 typedef union OldMan

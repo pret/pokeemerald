@@ -124,12 +124,12 @@ gSpecials:: @ 81DBA64
 	def_special sub_81213D8
 	def_special sub_8121450
 	def_special sub_8121424
-	def_special sub_8133EC0
-	def_special sub_8133CD8
-	def_special sub_8133CF4
-	def_special sub_8133D2C
-	def_special sub_8133D8C
-	def_special sub_8133E38
+	def_special ScrSpecial_TraderMenuGetDecoration
+	def_special ScrSpecial_GetTraderTradedFlag
+	def_special ScrSpecial_DoesPlayerHaveNoDecorations
+	def_special ScrSpecial_IsDecorationFull
+	def_special ScrSpecial_TraderMenuGiveDecoration
+	def_special ScrSpecial_TraderDoDecorationTrade
 	def_special GetSeedotSizeRecordInfo
 	def_special CompareSeedotSize
 	def_special GetLotadSizeRecordInfo
