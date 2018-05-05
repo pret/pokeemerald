@@ -135,7 +135,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201873:: @ 8201873
 	special sub_81B99B4
 	compare VAR_RESULT, 0
 	goto_if 5, VerdanturfTown_BattleTentLobby_EventScript_2017EE
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C50C3, 4
 
 VerdanturfTown_BattleTentLobby_EventScript_201893:: @ 8201893
@@ -189,7 +189,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call VerdanturfTown_BattleTentLobby_EventScript_27134F
@@ -198,7 +198,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201A1D
 
 VerdanturfTown_BattleTentLobby_EventScript_2019AE:: @ 82019AE
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -235,7 +235,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201A1D:: @ 8201A1D
 	goto VerdanturfTown_BattleTentLobby_EventScript_201A37
 
 VerdanturfTown_BattleTentLobby_EventScript_201A34:: @ 8201A34
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 VerdanturfTown_BattleTentLobby_EventScript_201A37:: @ 8201A37
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C539A, 4

@@ -8861,7 +8861,7 @@ sub_80AF87C: @ 80AF87C
 	movs r0, 0x1
 	bl sub_8085540
 	bl ScriptContext2_Enable
-	bl save_serialize_npcs
+	bl SaveMapObjects
 	bl music_something
 	bl sub_80AF0B4
 	movs r0, 0x2D

@@ -236,7 +236,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E47:: @ 8259E47
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 0
 	special sub_81A5E74

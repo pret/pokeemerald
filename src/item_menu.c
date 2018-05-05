@@ -72,7 +72,7 @@ void AddBagItemIconSprite(u16, u8);
 void bag_menu_print_description_box_text(int);
 void bag_menu_print_cursor(u8, u8);
 void bag_menu_print(u8, u8, const u8*, u8, u8, u8, u8, u8, u8);
-bool8 itemid_is_unique(u16);
+bool8 ItemId_GetImportance(u16);
 u16 BagGetQuantityByPocketPosition(u8, u16);
 void sub_81AB89C(void);
 void task_close_bag_menu_2(u8);
@@ -687,7 +687,7 @@ void sub_81AB520(u8 rboxId, int item_index_in_pocket, u8 a)
             offset = GetStringRightAlignXOffset(7, gStringVar4, 0x77);
             bag_menu_print(rboxId, 7, gStringVar4, offset, a, 0, 0, -1, 0);
         }
-        else if (gUnknown_0203CE58.pocket != 4 && (unique = itemid_is_unique(itemId)) == FALSE)
+        else if (gUnknown_0203CE58.pocket != 4 && (unique = ItemId_GetImportance(itemId)) == FALSE)
         {
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, 1, 2);
             StringExpandPlaceholders(gStringVar4, gText_xVar1);
@@ -804,10 +804,10 @@ void sub_81AB9A8(u8 pocketId)
     {
         case 2:
         case 3:
-            sub_80D6FB4(pocket);
+            SortBerriesOrTMHMs(pocket);
             break;
         default:
-            sub_80D6F64(pocket);
+            CompactItemsInBagPocket(pocket);
             break;
     }
     gUnknown_0203CE54->unk829[pocketId] = 0;
@@ -847,9 +847,9 @@ void sub_81ABAE0(void)
         sub_8122298(&gUnknown_0203CE58.scrollPosition[i], &gUnknown_0203CE58.cursorPosition[i], gUnknown_0203CE54->unk82E[i], gUnknown_0203CE54->unk829[i], 8);
 }
 
-u8 sub_81ABB2C(u8 a)
+u8 sub_81ABB2C(u8 pocketId)
 {
-    return gUnknown_0203CE58.scrollPosition[a] + gUnknown_0203CE58.cursorPosition[a];
+    return gUnknown_0203CE58.scrollPosition[pocketId] + gUnknown_0203CE58.cursorPosition[pocketId];
 }
 
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u8 taskId))
@@ -1179,7 +1179,7 @@ void sub_81AC498(u8 taskId)
         sub_81AC590(taskId);
     else
     {
-        sub_80D702C(gBagPockets[gUnknown_0203CE58.pocket].itemSlots, data[1], realPos);
+        MoveItemSlotInList(gBagPockets[gUnknown_0203CE58.pocket].itemSlots, data[1], realPos);
         gUnknown_0203CE54->unk81A = -1;
         DestroyListMenuTask(data[0], scrollPos, cursorPos);
         if (data[1] < realPos)
@@ -1231,7 +1231,7 @@ void sub_81AC644(u8 unused)
             gUnknown_0203CE54->unk828 = 4;
             break;
         case 8:
-            if (!itemid_is_unique(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+            if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
             {
                 gUnknown_0203CE54->unk820 = gUnknown_0861404B;
                 gUnknown_0203CE54->unk828 = 2;
@@ -1243,7 +1243,7 @@ void sub_81AC644(u8 unused)
             }
             break;
         case 6:
-            if (!itemid_is_unique(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+            if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
             {
                 gUnknown_0203CE54->unk820 = gUnknown_0861404D;
                 gUnknown_0203CE54->unk828 = 2;
@@ -1255,7 +1255,7 @@ void sub_81AC644(u8 unused)
             }
             break;
         case 7:
-            if (!itemid_is_unique(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+            if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
             {
                 gUnknown_0203CE54->unk820 = gUnknown_0861404F;
                 gUnknown_0203CE54->unk828 = 2;
@@ -1605,7 +1605,7 @@ void ItemMenu_Give(u8 taskId)
     {
         DisplayItemMessage(taskId, 1, gText_CantWriteMail, sub_81AD350);
     }
-    else if (!itemid_is_unique(gSpecialVar_ItemId))
+    else if (!ItemId_GetImportance(gSpecialVar_ItemId))
     {
         if (CalculatePlayerPartyCount() == 0)
             bag_menu_print_there_is_no_pokemon(taskId);
@@ -1686,7 +1686,7 @@ void item_menu_type_2(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gText_Var1CantBeHeldHere);
         DisplayItemMessage(taskId, 1, gStringVar4, sub_81AD350);
     }
-    else if (gUnknown_0203CE58.pocket != 4 && !itemid_is_unique(gSpecialVar_ItemId))
+    else if (gUnknown_0203CE58.pocket != 4 && !ItemId_GetImportance(gSpecialVar_ItemId))
     {
         unknown_ItemMenu_Confirm(taskId);
     }
@@ -1700,7 +1700,7 @@ void item_menu_type_b(u8 taskId)
 {
     if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
         DisplayItemMessage(taskId, 1, gText_CantWriteMail, sub_81AD350);
-    else if (gUnknown_0203CE58.pocket != 4 && !itemid_is_unique(gSpecialVar_ItemId))
+    else if (gUnknown_0203CE58.pocket != 4 && !ItemId_GetImportance(gSpecialVar_ItemId))
         gTasks[taskId].func = unknown_ItemMenu_Confirm;
     else
         bag_menu_print_cant_be_held_msg(taskId);
@@ -1738,7 +1738,7 @@ void display_sell_item_ask_str(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
 
-    if (itemid_get_market_price(gSpecialVar_ItemId) == 0)
+    if (ItemId_GetPrice(gSpecialVar_ItemId) == 0)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gText_CantBuyKeyItem);
@@ -1765,7 +1765,7 @@ void sub_81AD680(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
 
-    ConvertIntToDecimalStringN(gStringVar1, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8], 0, 6);
+    ConvertIntToDecimalStringN(gStringVar1, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8], 0, 6);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayVar1);
     DisplayItemMessage(taskId, 1, gStringVar4, sub_81AD6E4);
 }
@@ -1790,7 +1790,7 @@ void sub_81AD730(u8 taskId)
     s16* data = gTasks[taskId].data;
     u8 windowId = bag_menu_add_window(8);
 
-    sub_81ABCC0(windowId, 1, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8]);
+    sub_81ABCC0(windowId, 1, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8]);
     bag_menu_AddMoney_window();
     gTasks[taskId].func = sub_81AD794;
 }
@@ -1801,7 +1801,7 @@ void sub_81AD794(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
-        sub_81ABCC0(gUnknown_0203CE54->unk818, data[8], (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8]);
+        sub_81ABCC0(gUnknown_0203CE54->unk818, data[8], (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8]);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
@@ -1825,7 +1825,7 @@ void sub_81AD84C(u8 taskId)
     s16* data = gTasks[taskId].data;
 
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
-    ConvertIntToDecimalStringN(gStringVar1, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8], 0, 6);
+    ConvertIntToDecimalStringN(gStringVar1, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8], 0, 6);
     StringExpandPlaceholders(gStringVar4, gText_TurnedOverVar1ForVar2);
     DisplayItemMessage(taskId, 1, gStringVar4, sub_81AD8C8);
 }
@@ -1838,7 +1838,7 @@ void sub_81AD8C8(u8 taskId)
 
     PlaySE(SE_REGI);
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
-    AddMoney(&gSaveBlock1Ptr->money, (itemid_get_market_price(gSpecialVar_ItemId) / 2) * data[8]);
+    AddMoney(&gSaveBlock1Ptr->money, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8]);
     DestroyListMenuTask(data[0], scrollPos, cursorPos);
     sub_81AB9A8(gUnknown_0203CE58.pocket);
     sub_81ABA88(gUnknown_0203CE58.pocket);
@@ -1908,7 +1908,7 @@ void sub_81ADB14(u8 taskId)
     s16* data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(1, 0);
-    if (itemid_is_unique(gSpecialVar_ItemId))
+    if (ItemId_GetImportance(gSpecialVar_ItemId))
     {
         bag_menu_print(1, 1, gText_CantStoreImportantItems, 3, 1, 0, 0, 0, 0);
         gTasks[taskId].func = sub_81ADC0C;

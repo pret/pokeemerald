@@ -89,7 +89,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255D2B:: @ 8255D2B
 BattleFrontier_BattleArenaLobby_EventScript_255D59:: @ 8255D59
 	setvar VAR_0x8004, 8
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
@@ -134,7 +134,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255DF4:: @ 8255DF4
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 3
 	setvar VAR_0x40CE, 0
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox BattleFrontier_BattleArenaLobby_Text_256166, 4
 
 BattleFrontier_BattleArenaLobby_EventScript_255E0B:: @ 8255E0B
@@ -196,7 +196,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call BattleFrontier_BattleArenaLobby_EventScript_27134F
@@ -205,7 +205,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FE1
 
 BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -248,7 +248,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255FE1:: @ 8255FE1
 	goto BattleFrontier_BattleArenaLobby_EventScript_255FFB
 
 BattleFrontier_BattleArenaLobby_EventScript_255FF8:: @ 8255FF8
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 BattleFrontier_BattleArenaLobby_EventScript_255FFB:: @ 8255FFB
 	msgbox BattleFrontier_BattleArenaLobby_Text_25621F, 4
@@ -348,7 +348,7 @@ BattleFrontier_BattleArenaLobby_EventScript_256092:: @ 8256092
 	setvar VAR_0x8005, 3
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

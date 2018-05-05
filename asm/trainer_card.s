@@ -3894,7 +3894,7 @@ _080C48F6:
 sub_80C4904: @ 80C4904
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02039B58
+	ldr r2, =gTrainerCards
 	movs r1, 0x64
 	muls r0, r1
 	adds r0, r2
@@ -4578,7 +4578,7 @@ sub_80C4E74: @ 80C4E74
 	ldr r0, [r5]
 	ldr r1, =0x00000534
 	adds r0, r1
-	ldr r2, =gUnknown_02039B58
+	ldr r2, =gTrainerCards
 	movs r1, 0x64
 	muls r1, r4
 	adds r1, r2
