@@ -522,7 +522,6 @@ SECTIONS {
         src/item_menu.o(.rodata);
         data/menu_indicators.o(.rodata);
         src/save_location.o(.rodata);
-        data/item_icon.o(.rodata);
         src/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);
