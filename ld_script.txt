@@ -1133,8 +1133,6 @@ SECTIONS {
     ALIGN(4)
     {
         data/graphics.o(gfx_data);
-		src/item_graphics.o(.rodata);
-		data/graphics2.o(gfx_data);
     } =0
 
     /* Discard everything not specifically mentioned above. */
