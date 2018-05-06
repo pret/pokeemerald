@@ -506,7 +506,7 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_GreatBall, 	gItemIconPalette_GreatBall,
 	gItemIcon_PokeBall, 	gItemIconPalette_PokeBall,
 	gItemIcon_SafariBall, 	gItemIconPalette_SafariBall,
-	gItemIcon_NetBall, 		gItemIconPalette_NetBall,
+	gItemIcon_NetBall, 	gItemIconPalette_NetBall,
 	gItemIcon_DiveBall, 	gItemIconPalette_DiveBall,
 	gItemIcon_NestBall, 	gItemIconPalette_NestBall,
 	gItemIcon_RepeatBall, 	gItemIconPalette_RepeatBall,
@@ -514,7 +514,7 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_LuxuryBall, 	gItemIconPalette_LuxuryBall,
 	gItemIcon_PremierBall, 	gItemIconPalette_LuxuryBall,
 // Medicine
-	gItemIcon_Potion, 		gItemIconPalette_Potion,
+	gItemIcon_Potion, 	gItemIconPalette_Potion,
 	gItemIcon_Antidote, 	gItemIconPalette_Antidote,
 	gItemIcon_StatusHeal, 	gItemIconPalette_BurnHeal,
 	gItemIcon_StatusHeal, 	gItemIconPalette_IceHeal,
@@ -522,38 +522,38 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_StatusHeal, 	gItemIconPalette_ParalyzeHeal,
 	gItemIcon_LargePotion, 	gItemIconPalette_FullRestore,
 	gItemIcon_LargePotion, 	gItemIconPalette_MaxPotion,
-	gItemIcon_Potion, 		gItemIconPalette_HyperPotion,
-	gItemIcon_Potion, 		gItemIconPalette_SuperPotion,
+	gItemIcon_Potion, 	gItemIconPalette_HyperPotion,
+	gItemIcon_Potion, 	gItemIconPalette_SuperPotion,
 	gItemIcon_FullHeal, 	gItemIconPalette_FullHeal,
-	gItemIcon_Revive, 		gItemIconPalette_Revive,
+	gItemIcon_Revive, 	gItemIconPalette_Revive,
 	gItemIcon_MaxRevive, 	gItemIconPalette_Revive,
 	gItemIcon_FreshWater, 	gItemIconPalette_FreshWater,
-	gItemIcon_SodaPop, 		gItemIconPalette_SodaPop,
+	gItemIcon_SodaPop, 	gItemIconPalette_SodaPop,
 	gItemIcon_Lemonade, 	gItemIconPalette_Lemonade,
 	gItemIcon_MoomooMilk, 	gItemIconPalette_MoomooMilk,
-	gItemIcon_Powder, 		gItemIconPalette_EnergyPowder,
+	gItemIcon_Powder, 	gItemIconPalette_EnergyPowder,
 	gItemIcon_EnergyRoot, 	gItemIconPalette_EnergyRoot,
-	gItemIcon_Powder, 		gItemIconPalette_HealPowder,
+	gItemIcon_Powder, 	gItemIconPalette_HealPowder,
 	gItemIcon_RevivalHerb, 	gItemIconPalette_RevivalHerb,
-	gItemIcon_Ether, 		gItemIconPalette_Ether,
-	gItemIcon_Ether, 		gItemIconPalette_MaxEther,
-	gItemIcon_Ether, 		gItemIconPalette_Elixir,
-	gItemIcon_Ether, 		gItemIconPalette_MaxElixir,
+	gItemIcon_Ether, 	gItemIconPalette_Ether,
+	gItemIcon_Ether, 	gItemIconPalette_MaxEther,
+	gItemIcon_Ether, 	gItemIconPalette_Elixir,
+	gItemIcon_Ether, 	gItemIconPalette_MaxElixir,
 	gItemIcon_LavaCookie, 	gItemIconPalette_LavaCookieAndLetter,
-	gItemIcon_Flute, 		gItemIconPalette_BlueFlute,
-	gItemIcon_Flute, 		gItemIconPalette_YellowFlute,
-	gItemIcon_Flute, 		gItemIconPalette_RedFlute,
-	gItemIcon_Flute, 		gItemIconPalette_BlackFlute,
-	gItemIcon_Flute, 		gItemIconPalette_WhiteFlute,
+	gItemIcon_Flute, 	gItemIconPalette_BlueFlute,
+	gItemIcon_Flute, 	gItemIconPalette_YellowFlute,
+	gItemIcon_Flute, 	gItemIconPalette_RedFlute,
+	gItemIcon_Flute, 	gItemIconPalette_BlackFlute,
+	gItemIcon_Flute, 	gItemIconPalette_WhiteFlute,
 	gItemIcon_BerryJuice, 	gItemIconPalette_BerryJuice,
 	gItemIcon_SacredAsh, 	gItemIconPalette_SacredAsh,
 // Collectibles
-	gItemIcon_Powder, 		gItemIconPalette_ShoalSalt,
+	gItemIcon_Powder, 	gItemIconPalette_ShoalSalt,
 	gItemIcon_ShoalShell, 	gItemIconPalette_Shell,
-	gItemIcon_Shard, 		gItemIconPalette_RedShard,
-	gItemIcon_Shard, 		gItemIconPalette_BlueShard,
-	gItemIcon_Shard, 		gItemIconPalette_YellowShard,
-	gItemIcon_Shard, 		gItemIconPalette_GreenShard,
+	gItemIcon_Shard, 	gItemIconPalette_RedShard,
+	gItemIcon_Shard, 	gItemIconPalette_BlueShard,
+	gItemIcon_Shard, 	gItemIconPalette_YellowShard,
+	gItemIcon_Shard, 	gItemIconPalette_GreenShard,
 // ????????
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
@@ -567,15 +567,15 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
 // Vitamins
-	gItemIcon_HPUp, 		gItemIconPalette_HPUp,
-	gItemIcon_Vitamin, 		gItemIconPalette_Protein,
-	gItemIcon_Vitamin, 		gItemIconPalette_Iron,
-	gItemIcon_Vitamin, 		gItemIconPalette_Carbos,
-	gItemIcon_Vitamin, 		gItemIconPalette_Calcium,
+	gItemIcon_HPUp, 	gItemIconPalette_HPUp,
+	gItemIcon_Vitamin, 	gItemIconPalette_Protein,
+	gItemIcon_Vitamin, 	gItemIconPalette_Iron,
+	gItemIcon_Vitamin, 	gItemIconPalette_Carbos,
+	gItemIcon_Vitamin, 	gItemIconPalette_Calcium,
 	gItemIcon_RareCandy, 	gItemIconPalette_RareCandy,
-	gItemIcon_PPUp, 		gItemIconPalette_PPUp,
-	gItemIcon_Vitamin, 		gItemIconPalette_Zinc,
-	gItemIcon_PPMax, 		gItemIconPalette_PPMax,
+	gItemIcon_PPUp, 	gItemIconPalette_PPUp,
+	gItemIcon_Vitamin, 	gItemIconPalette_Zinc,
+	gItemIcon_PPMax, 	gItemIconPalette_PPMax,
 // ????????
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
 // Battle items
@@ -586,15 +586,15 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_BattleStatItem, 	gItemIconPalette_XSpeed,
 	gItemIcon_BattleStatItem, 	gItemIconPalette_XAccuracy,
 	gItemIcon_BattleStatItem,	gItemIconPalette_XSpecial,
-	gItemIcon_PokeDoll,			gItemIconPalette_PokeDoll,
+	gItemIcon_PokeDoll,		gItemIconPalette_PokeDoll,
 	gItemIcon_FluffyTail, 		gItemIconPalette_FluffyTail,
 // ????????
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
 // Field items
-	gItemIcon_Repel, 		gItemIconPalette_SuperRepel,
-	gItemIcon_Repel, 		gItemIconPalette_MaxRepel,
+	gItemIcon_Repel, 	gItemIconPalette_SuperRepel,
+	gItemIcon_Repel, 	gItemIconPalette_MaxRepel,
 	gItemIcon_EscapeRope, 	gItemIconPalette_EscapeRope,
-	gItemIcon_Repel, 		gItemIconPalette_Repel,
+	gItemIcon_Repel, 	gItemIconPalette_Repel,
 // ????????
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
@@ -618,11 +618,11 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_TinyMushroom, gItemIconPalette_Mushroom,
 	gItemIcon_BigMushroom, 	gItemIconPalette_Mushroom,
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
-	gItemIcon_Pearl, 		gItemIconPalette_Pearl,
+	gItemIcon_Pearl, 	gItemIconPalette_Pearl,
 	gItemIcon_BigPearl, 	gItemIconPalette_Pearl,
 	gItemIcon_Stardust, 	gItemIconPalette_Star,
 	gItemIcon_StarPiece, 	gItemIconPalette_Star,
-	gItemIcon_Nugget, 		gItemIconPalette_Nugget,
+	gItemIcon_Nugget, 	gItemIconPalette_Nugget,
 	gItemIcon_HeartScale, 	gItemIconPalette_HeartScale,
 // ????????
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
@@ -645,7 +645,7 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_ShadowMail, 	gItemIconPalette_ShadowMail,
 	gItemIcon_TropicMail, 	gItemIconPalette_TropicMail,
 	gItemIcon_DreamMail, 	gItemIconPalette_DreamMail,
-	gItemIcon_FabMail, 		gItemIconPalette_FabMail,
+	gItemIcon_FabMail, 	gItemIconPalette_FabMail,
 	gItemIcon_RetroMail, 	gItemIconPalette_RetroMail,
 // Berries
 	gItemIcon_CheriBerry, 	gItemIconPalette_CheriBerry,
@@ -708,7 +708,7 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_SilverPowder,	gItemIconPalette_SilverPowder,
 	gItemIcon_AmuletCoin, 	gItemIconPalette_AmuletCoin,
 	gItemIcon_CleanseTag, 	gItemIconPalette_CleanseTag,
-	gItemIcon_SoulDew, 		gItemIconPalette_SoulDew,
+	gItemIcon_SoulDew, 	gItemIconPalette_SoulDew,
 	gItemIcon_DeepSeaTooth,	gItemIconPalette_DeepSeaTooth,
 	gItemIcon_DeepSeaScale,	gItemIconPalette_DeepSeaScale,
 	gItemIcon_SmokeBall, 	gItemIconPalette_SmokeBall,
@@ -725,7 +725,7 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_MiracleSeed, 	gItemIconPalette_MiracleSeed,
 	gItemIcon_BlackGlasses,	gItemIconPalette_BlackTypeEnhancingItem,
 	gItemIcon_BlackBelt, 	gItemIconPalette_BlackTypeEnhancingItem,
-	gItemIcon_Magnet, 		gItemIconPalette_Magnet,
+	gItemIcon_Magnet, 	gItemIconPalette_Magnet,
 	gItemIcon_MysticWater, 	gItemIconPalette_MysticWater,
 	gItemIcon_SharpBeak, 	gItemIconPalette_SharpBeak,
 	gItemIcon_PoisonBarb, 	gItemIconPalette_PoisonBarb,
@@ -735,14 +735,14 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_Charcoal, 	gItemIconPalette_Charcoal,
 	gItemIcon_DragonFang, 	gItemIconPalette_DragonFang,
 	gItemIcon_SilkScarf, 	gItemIconPalette_SilkScarf,
-	gItemIcon_UpGrade, 		gItemIconPalette_UpGrade,
+	gItemIcon_UpGrade, 	gItemIconPalette_UpGrade,
 	gItemIcon_ShellBell, 	gItemIconPalette_Shell,
 	gItemIcon_SeaIncense, 	gItemIconPalette_SeaIncense,
 	gItemIcon_LaxIncense, 	gItemIconPalette_LaxIncense,
 	gItemIcon_LuckyPunch, 	gItemIconPalette_LuckyPunch,
 	gItemIcon_MetalPowder, 	gItemIconPalette_MetalPowder,
 	gItemIcon_ThickClub, 	gItemIconPalette_ThickClub,
-	gItemIcon_Stick, 		gItemIconPalette_Stick,
+	gItemIcon_Stick, 	gItemIconPalette_Stick,
 // ????????
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
@@ -782,8 +782,8 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_MachBike, 		gItemIconPalette_MachBike,
 	gItemIcon_CoinCase, 		gItemIconPalette_CoinCase,
 	gItemIcon_Itemfinder, 		gItemIconPalette_Itemfinder,
-	gItemIcon_OldRod, 			gItemIconPalette_OldRod,
-	gItemIcon_GoodRod, 			gItemIconPalette_GoodRod,
+	gItemIcon_OldRod, 		gItemIconPalette_OldRod,
+	gItemIcon_GoodRod, 		gItemIconPalette_GoodRod,
 	gItemIcon_SuperRod, 		gItemIconPalette_SuperRod,
 	gItemIcon_SSTicket, 		gItemIconPalette_SSTicket,
 	gItemIcon_ContestPass, 		gItemIconPalette_ContestPass,
@@ -794,11 +794,11 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_BasementKey, 		gItemIconPalette_OldKey,
 	gItemIcon_AcroBike, 		gItemIconPalette_AcroBike,
 	gItemIcon_PokeblockCase, 	gItemIconPalette_PokeblockCase,
-	gItemIcon_Letter, 			gItemIconPalette_LavaCookieAndLetter,
+	gItemIcon_Letter, 		gItemIconPalette_LavaCookieAndLetter,
 	gItemIcon_EonTicket, 		gItemIconPalette_EonTicket,
-	gItemIcon_Orb, 				gItemIconPalette_RedOrb,
-	gItemIcon_Orb, 				gItemIconPalette_BlueOrb,
-	gItemIcon_Scanner, 			gItemIconPalette_Scanner,
+	gItemIcon_Orb, 			gItemIconPalette_RedOrb,
+	gItemIcon_Orb, 			gItemIconPalette_BlueOrb,
+	gItemIcon_Scanner, 		gItemIconPalette_Scanner,
 	gItemIcon_GoGoggles, 		gItemIconPalette_GoGoggles,
 	gItemIcon_Meteorite, 		gItemIconPalette_Meteorite,
 	gItemIcon_Room1Key, 		gItemIconPalette_Key,
@@ -811,63 +811,63 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_DevonScope, 		gItemIconPalette_DevonScope,
 // TMs/HMs
 	gItemIcon_TM, gItemIconPalette_FightingTMHM,	// TM01
-	gItemIcon_TM, gItemIconPalette_DragonTMHM,		// TM02
-	gItemIcon_TM, gItemIconPalette_WaterTMHM,		// TM03
-	gItemIcon_TM, gItemIconPalette_PsychicTMHM,		// TM04
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM05
-	gItemIcon_TM, gItemIconPalette_PoisonTMHM,		// TM06
-	gItemIcon_TM, gItemIconPalette_IceTMHM,			// TM07
+	gItemIcon_TM, gItemIconPalette_DragonTMHM,	// TM02
+	gItemIcon_TM, gItemIconPalette_WaterTMHM,	// TM03
+	gItemIcon_TM, gItemIconPalette_PsychicTMHM,	// TM04
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM05
+	gItemIcon_TM, gItemIconPalette_PoisonTMHM,	// TM06
+	gItemIcon_TM, gItemIconPalette_IceTMHM,		// TM07
 	gItemIcon_TM, gItemIconPalette_FightingTMHM,	// TM08
-	gItemIcon_TM, gItemIconPalette_GrassTMHM,		// TM09
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM10
-	gItemIcon_TM, gItemIconPalette_FireTMHM,		// TM11
-	gItemIcon_TM, gItemIconPalette_DarkTMHM,		// TM12
-	gItemIcon_TM, gItemIconPalette_IceTMHM,			// TM13
-	gItemIcon_TM, gItemIconPalette_IceTMHM,			// TM14
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM15
-	gItemIcon_TM, gItemIconPalette_PsychicTMHM,		// TM16
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM17
-	gItemIcon_TM, gItemIconPalette_WaterTMHM,		// TM18
-	gItemIcon_TM, gItemIconPalette_GrassTMHM,		// TM19
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM20
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM21
-	gItemIcon_TM, gItemIconPalette_GrassTMHM,		// TM22
-	gItemIcon_TM, gItemIconPalette_SteelTMHM,		// TM23
+	gItemIcon_TM, gItemIconPalette_GrassTMHM,	// TM09
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM10
+	gItemIcon_TM, gItemIconPalette_FireTMHM,	// TM11
+	gItemIcon_TM, gItemIconPalette_DarkTMHM,	// TM12
+	gItemIcon_TM, gItemIconPalette_IceTMHM,		// TM13
+	gItemIcon_TM, gItemIconPalette_IceTMHM,		// TM14
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM15
+	gItemIcon_TM, gItemIconPalette_PsychicTMHM,	// TM16
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM17
+	gItemIcon_TM, gItemIconPalette_WaterTMHM,	// TM18
+	gItemIcon_TM, gItemIconPalette_GrassTMHM,	// TM19
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM20
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM21
+	gItemIcon_TM, gItemIconPalette_GrassTMHM,	// TM22
+	gItemIcon_TM, gItemIconPalette_SteelTMHM,	// TM23
 	gItemIcon_TM, gItemIconPalette_ElectricTMHM,	// TM24
 	gItemIcon_TM, gItemIconPalette_ElectricTMHM,	// TM25
-	gItemIcon_TM, gItemIconPalette_GroundTMHM,		// TM26
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM27
-	gItemIcon_TM, gItemIconPalette_GroundTMHM,		// TM28
-	gItemIcon_TM, gItemIconPalette_PsychicTMHM,		// TM29
-	gItemIcon_TM, gItemIconPalette_GhostTMHM,		// TM30
+	gItemIcon_TM, gItemIconPalette_GroundTMHM,	// TM26
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM27
+	gItemIcon_TM, gItemIconPalette_GroundTMHM,	// TM28
+	gItemIcon_TM, gItemIconPalette_PsychicTMHM,	// TM29
+	gItemIcon_TM, gItemIconPalette_GhostTMHM,	// TM30
 	gItemIcon_TM, gItemIconPalette_FightingTMHM,	// TM31
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM32
-	gItemIcon_TM, gItemIconPalette_PsychicTMHM,		// TM33
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM32
+	gItemIcon_TM, gItemIconPalette_PsychicTMHM,	// TM33
 	gItemIcon_TM, gItemIconPalette_ElectricTMHM,	// TM34
-	gItemIcon_TM, gItemIconPalette_FireTMHM,		// TM35
-	gItemIcon_TM, gItemIconPalette_PoisonTMHM,		// TM36
-	gItemIcon_TM, gItemIconPalette_RockTMHM,		// TM37
-	gItemIcon_TM, gItemIconPalette_FireTMHM,		// TM38
-	gItemIcon_TM, gItemIconPalette_RockTMHM,		// TM39
-	gItemIcon_TM, gItemIconPalette_FlyingTMHM,		// TM40
-	gItemIcon_TM, gItemIconPalette_DarkTMHM,		// TM41
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM42
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM43
-	gItemIcon_TM, gItemIconPalette_PsychicTMHM,		// TM44
-	gItemIcon_TM, gItemIconPalette_NormalTMHM,		// TM45
-	gItemIcon_TM, gItemIconPalette_DarkTMHM,		// TM46
-	gItemIcon_TM, gItemIconPalette_SteelTMHM,		// TM47
-	gItemIcon_TM, gItemIconPalette_PsychicTMHM,		// TM48
-	gItemIcon_TM, gItemIconPalette_DarkTMHM,		// TM49
-	gItemIcon_TM, gItemIconPalette_FireTMHM,		// TM50
-	gItemIcon_HM, gItemIconPalette_NormalTMHM,		// HM01
-	gItemIcon_HM, gItemIconPalette_FlyingTMHM,		// HM02
-	gItemIcon_HM, gItemIconPalette_WaterTMHM,		// HM03
-	gItemIcon_HM, gItemIconPalette_NormalTMHM,		// HM04
-	gItemIcon_HM, gItemIconPalette_NormalTMHM,		// HM05
+	gItemIcon_TM, gItemIconPalette_FireTMHM,	// TM35
+	gItemIcon_TM, gItemIconPalette_PoisonTMHM,	// TM36
+	gItemIcon_TM, gItemIconPalette_RockTMHM,	// TM37
+	gItemIcon_TM, gItemIconPalette_FireTMHM,	// TM38
+	gItemIcon_TM, gItemIconPalette_RockTMHM,	// TM39
+	gItemIcon_TM, gItemIconPalette_FlyingTMHM,	// TM40
+	gItemIcon_TM, gItemIconPalette_DarkTMHM,	// TM41
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM42
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM43
+	gItemIcon_TM, gItemIconPalette_PsychicTMHM,	// TM44
+	gItemIcon_TM, gItemIconPalette_NormalTMHM,	// TM45
+	gItemIcon_TM, gItemIconPalette_DarkTMHM,	// TM46
+	gItemIcon_TM, gItemIconPalette_SteelTMHM,	// TM47
+	gItemIcon_TM, gItemIconPalette_PsychicTMHM,	// TM48
+	gItemIcon_TM, gItemIconPalette_DarkTMHM,	// TM49
+	gItemIcon_TM, gItemIconPalette_FireTMHM,	// TM50
+	gItemIcon_HM, gItemIconPalette_NormalTMHM,	// HM01
+	gItemIcon_HM, gItemIconPalette_FlyingTMHM,	// HM02
+	gItemIcon_HM, gItemIconPalette_WaterTMHM,	// HM03
+	gItemIcon_HM, gItemIconPalette_NormalTMHM,	// HM04
+	gItemIcon_HM, gItemIconPalette_NormalTMHM,	// HM05
 	gItemIcon_HM, gItemIconPalette_FightingTMHM,	// HM06
-	gItemIcon_HM, gItemIconPalette_WaterTMHM,		// HM07
-	gItemIcon_HM, gItemIconPalette_WaterTMHM,		// HM08
+	gItemIcon_HM, gItemIconPalette_WaterTMHM,	// HM07
+	gItemIcon_HM, gItemIconPalette_WaterTMHM,	// HM08
 // ????????
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
 	gItemIcon_QuestionMark, gItemIconPalette_QuestionMark,
@@ -878,26 +878,26 @@ const u8 * const gItemIconTable[][2] =
 	gItemIcon_BikeVoucher, 	gItemIconPalette_BikeVoucher,
 	gItemIcon_GoldTeeth, 	gItemIconPalette_GoldTeeth,
 	gItemIcon_OldAmber, 	gItemIconPalette_OldAmber,
-	gItemIcon_CardKey, 		gItemIconPalette_CardKey,
-	gItemIcon_LiftKey, 		gItemIconPalette_Key,
+	gItemIcon_CardKey, 	gItemIconPalette_CardKey,
+	gItemIcon_LiftKey, 	gItemIconPalette_Key,
 	gItemIcon_HelixFossil, 	gItemIconPalette_KantoFossil,
 	gItemIcon_DomeFossil, 	gItemIconPalette_KantoFossil,
 	gItemIcon_SilphScope, 	gItemIconPalette_SilphScope,
-	gItemIcon_Bicycle, 		gItemIconPalette_Bicycle,
-	gItemIcon_TownMap, 		gItemIconPalette_TownMap,
+	gItemIcon_Bicycle, 	gItemIconPalette_Bicycle,
+	gItemIcon_TownMap, 	gItemIconPalette_TownMap,
 	gItemIcon_VSSeeker, 	gItemIconPalette_VSSeeker,
 	gItemIcon_FameChecker, 	gItemIconPalette_FameChecker,
-	gItemIcon_TMCase, 		gItemIconPalette_TMCase,
+	gItemIcon_TMCase, 	gItemIconPalette_TMCase,
 	gItemIcon_BerryPouch, 	gItemIconPalette_BerryPouch,
 	gItemIcon_TeachyTV, 	gItemIconPalette_TeachyTV,
-	gItemIcon_TriPass, 		gItemIconPalette_TriPass,
+	gItemIcon_TriPass, 	gItemIconPalette_TriPass,
 	gItemIcon_RainbowPass, 	gItemIconPalette_RainbowPass,
-	gItemIcon_Tea, 			gItemIconPalette_Tea,
+	gItemIcon_Tea, 		gItemIconPalette_Tea,
 	gItemIcon_MysticTicket,	gItemIconPalette_MysticTicket,
 	gItemIcon_AuroraTicket,	gItemIconPalette_AuroraTicket,
 	gItemIcon_PowderJar, 	gItemIconPalette_PowderJar,
-	gItemIcon_Gem, 			gItemIconPalette_Ruby,
-	gItemIcon_Gem, 			gItemIconPalette_Sapphire,
+	gItemIcon_Gem, 		gItemIconPalette_Ruby,
+	gItemIcon_Gem, 		gItemIconPalette_Sapphire,
 // Emerald-only key items
 	gItemIcon_MagmaEmblem, 	gItemIconPalette_MagmaEmblem,
 	gItemIcon_OldSeaMap, 	gItemIconPalette_OldSeaMap,
