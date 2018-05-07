@@ -28718,8 +28718,8 @@ nullsub_2: @ 81D5C88
 	bx lr
 	thumb_func_end nullsub_2
 
-	thumb_func_start sub_81D5C8C
-sub_81D5C8C: @ 81D5C8C
+	thumb_func_start PrintOnTrainerHillRecordsWindow
+PrintOnTrainerHillRecordsWindow: @ 81D5C8C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -28857,7 +28857,7 @@ _081D5CD6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D5C8C
+	thumb_func_end PrintOnTrainerHillRecordsWindow
 
 	thumb_func_start free_203F458
 free_203F458: @ 81D5DF0

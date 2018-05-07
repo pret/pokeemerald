@@ -58,7 +58,7 @@ MauvilleCity_BikeShop_EventScript_20EC6D:: @ 820EC6D
 
 MauvilleCity_BikeShop_EventScript_20EC87:: @ 820EC87
 	msgbox MauvilleCity_BikeShop_Text_20F1BD, 4
-	special sub_80D6EDC
+	special SwapRegisteredBike
 	release
 	end
 

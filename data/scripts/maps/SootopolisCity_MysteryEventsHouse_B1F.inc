@@ -32,7 +32,7 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	special HealPlayerParty
 	applymovement 255, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9
 	waitmovement 0
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x4001, 1
 	warp SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F, 255, 3, 1
 	waitstate

@@ -157,7 +157,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E4D4:: @ 828E4D4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E1B1, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E503
-	special sub_8133CD8
+	special ScrSpecial_GetTraderTradedFlag
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E50D
 	message MauvilleCity_PokemonCenter_1F_Text_28E23F
@@ -176,7 +176,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E50D:: @ 828E50D
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E517:: @ 828E517
-	special sub_8133EC0
+	special ScrSpecial_TraderMenuGetDecoration
 	waitstate
 	compare VAR_0x8004, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E558
@@ -185,7 +185,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E517:: @ 828E517
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E2A9, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E56E
-	special sub_8133CF4
+	special ScrSpecial_DoesPlayerHaveNoDecorations
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E57A
 	goto MauvilleCity_PokemonCenter_1F_EventScript_28E584
@@ -215,19 +215,19 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E57A:: @ 828E57A
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E584:: @ 828E584
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E323, 4
-	special sub_8133D8C
+	special ScrSpecial_TraderMenuGiveDecoration
 	waitstate
 	compare VAR_0x8006, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5D4
 	compare VAR_0x8006, 65535
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5DE
-	special sub_8133D2C
+	special ScrSpecial_IsDecorationFull
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5EC
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E3C4, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E584
-	special sub_8133E38
+	special ScrSpecial_TraderDoDecorationTrade
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E424, 4
 	release
 	end

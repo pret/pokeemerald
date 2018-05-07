@@ -236,7 +236,7 @@ TrainerHill_Entrance_Movement_268385: @ 8268385
 TrainerHill_Entrance_EventScript_268388:: @ 8268388
 	lockall
 	fadescreen 1
-	special sub_813C904
+	special ShowTrainerHillRecords
 	waitstate
 	releaseall
 	end

@@ -109,7 +109,7 @@ static void SetupGiddy(void)
 
 static void SetupTrader(void)
 {
-    sub_81339F8();
+    TraderSetup();
 }
 
 void SetMauvilleOldMan(void)

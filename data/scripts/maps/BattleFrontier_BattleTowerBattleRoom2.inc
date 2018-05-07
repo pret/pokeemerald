@@ -153,7 +153,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249118:: @ 8249118
 	delay 48
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249121:: @ 8249121
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
 	special sub_81A1780

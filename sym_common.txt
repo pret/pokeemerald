@@ -8,24 +8,8 @@
 	.include "link_rfu.o"
     .include "rtc.o"
     .include "battle_main.o"
-
-gRngValue: @ 3005D80
-	.space 0x4
-
-gRng2Value: @ 3005D84
-	.space 0x4
-
-gFlashMemoryPresent: @ 3005D88
-	.space 0x4
-
-gSaveBlock1Ptr: @ 3005D8C
-	.space 0x4
-
-gSaveBlock2Ptr: @ 3005D90
-	.space 0x4
-
-gPokemonStoragePtr: @ 3005D94
-	.space 0x4
+    .include "random.o"
+    .include "load_save.o"
 
 gInGameOpponentsNo: @ 3005D98
 	.space 0x4

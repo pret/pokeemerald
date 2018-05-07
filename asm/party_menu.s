@@ -15368,7 +15368,7 @@ sub_81B83F0: @ 81B83F0
 	lsls r0, r1, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_80D6E48
+	bl RemovePCItem
 	b _081B8418
 	.pool
 _081B8410:
