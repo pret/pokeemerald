@@ -163,7 +163,6 @@ SECTIONS {
         asm/easy_chat.o(.text);
         src/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
-        asm/mauville_old_man.o(.text);
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
         src/dewford_trend.o(.text);

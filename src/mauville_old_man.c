@@ -20,6 +20,7 @@
 #include "strings.h"
 #include "overworld.h"
 #include "field_message_box.h"
+#include "script_menu.h"
 
 #define CHAR_SONG_WORD_SEPARATOR 0x37
 
@@ -1140,3 +1141,114 @@ void sub_8121178(u32 player) // StorytellerDisplayStory
     ConvertInternationalString(gStringVar3, gUnknown_0203A12C->unk34[player]);
     ShowFieldMessage(sub_8120EC0(stat));
 }
+
+void sub_81211EC(void) // PrintStoryList
+{
+    s32 i;
+    s32 width = GetStringWidth(1, gText_Exit, 0);
+    u8 tileWidth;
+    for (i = 0; i < 4; i++)
+    {
+        s32 curWidth;
+        u16 gameStatID = gUnknown_0203A12C->gameStatIDs[i];
+
+        if (gameStatID == 0)
+            break;
+        curWidth = GetStringWidth(1, sub_8120EB4(gameStatID), 0);
+        if (curWidth > width)
+            width = curWidth;
+    }
+    gUnknown_0203A130 = CreateWindowFromRect(0, 0, convert_pixel_width_to_tile_width(width), sub_8120ED8() * 2 + 2);
+    SetStandardWindowBorderStyle(gUnknown_0203A130, 0);
+    for (i = 0; i < 4; i++)
+    {
+        u16 gameStatID = gUnknown_0203A12C->gameStatIDs[i];
+        if (gameStatID == 0)
+            break;
+        PrintTextOnWindow(gUnknown_0203A130, 1, sub_8120EB4(gameStatID), 8, 16 * i + 1, 0xFF, NULL);
+    }
+    PrintTextOnWindow(gUnknown_0203A130, 1, gText_Exit, 8, 16 * i + 1, 0xFF, NULL);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_0203A130, sub_8120ED8() + 1, 0);
+    CopyWindowToVram(gUnknown_0203A130, 3);
+}
+
+void sub_81212FC(u8 taskId) // Task_StoryListMenu
+{
+    struct Task *task = &gTasks[taskId];
+    s32 selection;
+
+    switch (task->data[0])
+    {
+        case 0:
+            sub_81211EC();
+            task->data[0]++;
+            break;
+        case 1:
+            selection = ProcessMenuInput();
+            if (selection == -2)
+                break;
+            if (selection == -1 || selection == sub_8120ED8())
+            {
+                gSpecialVar_Result = 0;
+            }
+            else
+            {
+                gSpecialVar_Result = 1;
+                gUnknown_03001178 = selection;
+            }
+            sub_80E2A78(gUnknown_0203A130);
+            DestroyTask(taskId);
+            EnableBothScriptContexts();
+            break;
+    }
+}
+
+// Sets gSpecialVar_Result to TRUE if player selected a story
+void sub_8121388(void) // ScrSpecial_StorytellerStoryListMenu
+{
+    CreateTask(sub_81212FC, 80);
+}
+
+void sub_812139C(void) // ScrSpecial_StorytellerDisplayStory
+{
+    sub_8121178(gUnknown_03001178);
+}
+
+u8 sub_81213B0(void) // ScrSpecial_StorytellerDisplayStory
+{
+    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+    return sub_8120ED8();
+}
+
+// Returns TRUE if stat has increased
+bool8 sub_81213D8(void) // ScrSpecial_StorytellerUpdateStat
+{
+    u8 r4;
+    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+    r4 = gUnknown_0203A12C->gameStatIDs[gUnknown_03001178];
+
+    if (sub_8120F4C(gUnknown_03001178) == TRUE)
+    {
+        sub_8120FDC(gUnknown_03001178, r4);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+bool8 sub_8121424(void) // ScrSpecial_HasStorytellerAlreadyRecorded
+{
+    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+
+    if (gUnknown_0203A12C->alreadyRecorded == FALSE)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool8 sub_8121450(void) // ScrSpecial_StorytellerInitializeRandomStat
+{
+    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+    return sub_81210B8();
+}
+
