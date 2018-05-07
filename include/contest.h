@@ -401,10 +401,17 @@ struct ContestResources
     void * field_3c;
 };
 
+extern struct ContestResources *gContestResources;
+
+#define sContest (*gContestResources->field_0)
+#define sContestantStatus (gContestResources->field_4)
+#define shared192D0 (*gContestResources->field_8)
+#define eContestAI (*gContestResources->field_C)
+#define shared19328 (*gContestResources->field_10)
+#define shared19338 (*gContestResources->field_14)
+
 #define shared15800 (gHeap + 0x18000)
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
-
-extern struct ContestResources *gContestResources;
 
 extern u32 gContestRngValue;
 

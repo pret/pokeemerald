@@ -66,6 +66,21 @@ void sub_80D8A04(u8 taskId);
 void sub_80D8A50(u8 taskId);
 void sub_80D8A88(u8 taskId);
 void sub_80D8B38(u8 taskId);
+void sub_80DA110(u8);
+void sub_80DA134(struct Sprite *);
+void sub_80DA164(struct Sprite *);
+void sub_80DA198(u8);
+void sub_80DA25C(u8);
+void sub_80DA28C(u8);
+void sub_80DA31C(u8);
+void sub_80DA348(u8);
+void sub_80DA38C(u8);
+void sub_80DA3CC(u8);
+void sub_80DA464(u8);
+void sub_80DA49C(u8);
+void sub_80DA4CC(u8);
+void sub_80DE424(u8);
+void sub_80DA51C(u8);
 bool8 sub_80DA8A4(void);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
@@ -104,12 +119,10 @@ void prints_contest_move_description(u16);
 
 
 void sub_80DD080(u8);
-void sub_80DA110(u8);
 void sub_80DF080(u8);
 void sub_80DF750(void);
 void sub_80DE9DC(u8);
 u8 sub_80DB174(u16, u32, u32, u32);
-void sub_80DA134(struct Sprite *);
 void sub_80DCBE8(u8, u8);
 u8 sub_80DC9EC(u8);
 u16 sub_80DE834(u16);
@@ -130,8 +143,10 @@ void sub_80DDED0(s8, s8);
 void sub_80DDCDC(s8);
 void sub_80DDE0C(void);
 void sub_80DD940(void);
-void sub_80DA164(struct Sprite *);
-void sub_80DA198(u8);
+void sub_80DB944(void);
+void sub_80DBA18(void);
+void sub_80DC3AC(void);
+bool8 sub_80DC3C4(void);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F00[4] = {0};
@@ -177,7 +192,7 @@ extern const u8 gUnknown_08C17170[];
 extern const u16 gUnknown_08587C30[];
 extern const struct BgTemplate gUnknown_08587F34[4];
 extern const struct WindowTemplate gUnknown_08587F44[];
-
+extern const u8 *const gUnknown_08587D90[];
 extern const u8 *const gUnknown_08587F08[];
 extern const u8 *const gUnknown_08587F1C[];
 extern const u8 gText_0827D55A[];
@@ -1616,4 +1631,191 @@ void sub_80D8B38(u8 taskId)
             }
             return;
     }
+}
+
+void sub_80DA110(u8 taskId)
+{
+    sContest.unk1920B_2 = 0;
+    DestroyTask(taskId);
+}
+
+void sub_80DA134(struct Sprite *sprite)
+{
+    if (sprite->pos2.x != 0)
+    {
+        sprite->pos2.x -= 2;
+    }
+    else
+    {
+        if (++sprite->data[0] == 31)
+        {
+            sprite->data[0] = 0;
+            sprite->callback = SpriteCallbackDummy;
+        }
+    }
+}
+
+void sub_80DA164(struct Sprite *sprite)
+{
+    sprite->pos2.x -= 6;
+    if (sprite->pos1.x + sprite->pos2.x < -32)
+    {
+        sprite->callback = SpriteCallbackDummy;
+        sprite->invisible = TRUE;
+    }
+}
+
+void sub_80DA198(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        if (gIsLinkContest & 1)
+        {
+            u8 taskId2;
+
+            sContest.unk1920B_2 = 1;
+            if (sub_80DA8A4())
+            {
+                sub_80DB944();
+                sub_80DBA18();
+            }
+            taskId2 = CreateTask(sub_80FCC88, 0);
+            SetTaskFuncWithFollowupFunc(taskId2, sub_80FCC88, sub_80DA110);
+            sub_80DBF68();
+            gTasks[taskId].data[0] = 1;
+        }
+        else
+        {
+            sub_80DB944();
+            sub_80DBA18();
+            gTasks[taskId].data[0] = 2;
+        }
+        break;
+    case 1:
+        if (!sContest.unk1920B_2)
+            gTasks[taskId].data[0] = 2;
+        break;
+    case 2:
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_80DA25C;
+        break;
+    }
+}
+
+void sub_80DA25C(u8 taskId)
+{
+    sub_80DE008(FALSE);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].func = sub_80DA28C;
+}
+
+void sub_80DA28C(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        if (++gTasks[taskId].data[1] > 20)
+        {
+            sub_80DE69C(2);
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].data[0]++;
+        }
+        break;
+    case 1:
+        if (!sContest.unk1920B_1)
+        {
+            if (++gTasks[taskId].data[1] > 20)
+            {
+                gTasks[taskId].data[1] = 0;
+                gTasks[taskId].data[0]++;
+            }
+        }
+        break;
+    case 2:
+        sub_80DC3AC();
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].func = sub_80DA31C;
+        break;
+    }
+}
+
+void sub_80DA31C(u8 taskId)
+{
+    if (sub_80DC3C4())
+        gTasks[taskId].func = sub_80DA348;
+}
+
+void sub_80DA348(u8 taskId)
+{
+    DmaCopy32Defvars(3, shared18000.unk18204, gPlttBufferUnfaded, 0x400);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 2;
+    gTasks[taskId].func = sub_80DA38C;
+}
+
+void sub_80DA38C(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] > 2)
+    {
+        gTasks[taskId].data[0] = 0;
+        if (--gTasks[taskId].data[1] == 0)
+            gTasks[taskId].func = sub_80DA3CC;
+    }
+}
+
+void sub_80DA3CC(u8 taskId)
+{
+    if (gTasks[taskId].data[0] == 0)
+    {
+        u8 r4 = sContestantStatus[gContestPlayerMonIndex].attentionLevel;
+
+        sub_80DB89C();
+        StringCopy(gStringVar1, gContestMons[gContestPlayerMonIndex].nickname);
+        StringExpandPlaceholders(gStringVar4, gUnknown_08587D90[r4]);
+        sub_80DEC30(gStringVar4, 1);
+        gTasks[taskId].data[0]++;
+    }
+    else
+    {
+        if (!sub_80DED4C())
+        {
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].func = sub_80DA464;
+            sub_80DCD48();
+        }
+    }
+}
+
+void sub_80DA464(u8 taskId)
+{
+    if (gTasks[taskId].data[0]++ > 29)
+    {
+        gTasks[taskId].data[0] = 0;
+        sub_80DC3AC();
+        gTasks[taskId].func = sub_80DA49C;
+    }
+}
+
+void sub_80DA49C(u8 taskId)
+{
+    if (sub_80DC3C4())
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_80DA4CC;
+    }
+}
+
+void sub_80DA4CC(u8 taskId)
+{
+    sub_80DE224();
+    gTasks[taskId].func = sub_80DE424;
+}
+
+void sub_80DA4F4(u8 taskId)
+{
+    sub_80DE350();
+    gTasks[taskId].func = sub_80DA51C;
 }
