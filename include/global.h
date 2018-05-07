@@ -453,7 +453,7 @@ struct MauvilleManStoryteller
     u8 gameStatIDs[4];
     u8 trainerNames[4][7];
     u8 statValues[4][4];
-    u8 unk34[4];
+    u8 language[4];
 };
 
 struct MauvilleManGiddy
@@ -477,9 +477,9 @@ struct MauvilleOldManTrader
 {
     u8 unk0;
     u8 unk1[4];
-    u8 unk5[4][11];
+    u8 playerNames[4][11];
     u8 unk31;
-    u8 unk32[4];
+    u8 language[4];
 };
 
 typedef union OldMan

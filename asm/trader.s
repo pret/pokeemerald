@@ -51,8 +51,8 @@ _08133A12:
 	.pool
 	thumb_func_end sub_81339F8
 
-	thumb_func_start sub_8133A60
-sub_8133A60: @ 8133A60
+	thumb_func_start Trader_ResetFlag
+Trader_ResetFlag: @ 8133A60
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002e59
@@ -61,7 +61,7 @@ sub_8133A60: @ 8133A60
 	strb r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_8133A60
+	thumb_func_end Trader_ResetFlag
 
 	thumb_func_start sub_8133A78
 sub_8133A78: @ 8133A78

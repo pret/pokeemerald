@@ -21,27 +21,25 @@
 #include "overworld.h"
 #include "field_message_box.h"
 #include "script_menu.h"
+#include "trader.h"
 
 #define CHAR_SONG_WORD_SEPARATOR 0x37
 
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
-void sub_81204DC(void);
-void sub_81206C0(bool8 useTemporaryLyrics); // StartBardSong
-void sub_8120944(u8 taskId);
-void sub_8120B5C(void);
-void sub_8120E08(void); // StorytellerSetup
-void sub_8120E50(void);
-void sub_81339F8(void); // TraderSetup
-void sub_8133A60(void);
+static void InitGiddyTaleList(void);
+static void StartBardSong(bool8 useTemporaryLyrics);
+static void Task_BardSong(u8 taskId);
+static void StorytellerSetup(void);
+static void Storyteller_ResetFlag(void);
 
-IWRAM_DATA u8 gUnknown_03001178;
+IWRAM_DATA u8 sSelectedStory;
 
-struct BardSong gUnknown_03006130;
+struct BardSong gBardSong;
 
-EWRAM_DATA u16 gUnknown_0203A128 = 0;
-EWRAM_DATA struct MauvilleManStoryteller * gUnknown_0203A12C = NULL;
-EWRAM_DATA u8 gUnknown_0203A130 = 0;
+static EWRAM_DATA u16 sUnknownBardRelated = 0;
+static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
+static EWRAM_DATA u8 sStorytellerWindowId = 0;
 
 static const u16 sDefaultBardSongLyrics[6] = {
     EC_WORD_SHAKE,
@@ -97,7 +95,7 @@ static void SetupHipster(void)
 
 static void SetupStoryteller(void)
 {
-    sub_8120E08();
+    StorytellerSetup();
 }
 
 static void SetupGiddy(void)
@@ -138,22 +136,22 @@ void SetMauvilleOldMan(void)
             SetupGiddy();
             break;
     }
-    sub_8120B5C();
+    ScrSpecial_SetMauvilleOldManMapObjGfx();
 }
 
-u8 sub_81201C8(void) // GetCurrentMauvilleOldMan
+u8 GetCurrentMauvilleOldMan(void)
 {
     struct MauvilleManCommon *common = &gSaveBlock1Ptr->oldMan.common;
 
     return common->id;
 }
 
-void sub_81201DC(void) // ScrSpecial_GetCurrentMauvilleMan
+void ScrSpecial_GetCurrentMauvilleMan(void)
 {
-    gSpecialVar_Result = sub_81201C8();
+    gSpecialVar_Result = GetCurrentMauvilleOldMan();
 }
 
-void sub_81201F4(void) // ScrSpecial_HasBardSongBeenChanged
+void ScrSpecial_HasBardSongBeenChanged(void)
 {
     u16 *scriptResult = &gSpecialVar_Result; // why??
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
@@ -161,7 +159,7 @@ void sub_81201F4(void) // ScrSpecial_HasBardSongBeenChanged
     *scriptResult = bard->hasChangedSong;
 }
 
-void sub_8120210(void) // ScrSpecial_SaveBardSongLyrics
+void ScrSpecial_SaveBardSongLyrics(void)
 {
     u16 i;
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
@@ -178,20 +176,14 @@ void sub_8120210(void) // ScrSpecial_SaveBardSongLyrics
 }
 
 // Copies lyrics into gStringVar4
-void sub_8120280(void)
+static void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-    u16 specialVar = gSpecialVar_0x8004;  // It's a bit odd to use this temp variable, but it seems needed to match.
-    u16 *lyrics;
+    u16 * lyrics = gSpecialVar_0x8004 == 0 ? bard->songLyrics : bard->temporaryLyrics;
+    u8 * wordEnd = gStringVar4;
+    u8 * str = wordEnd;
     u16 lineNum;
-    u8 *wordEnd;
-    u8 *str;
 
-    lyrics = bard->temporaryLyrics;
-    if (specialVar == 0)
-        lyrics = bard->songLyrics;
-    wordEnd = gStringVar4;
-    str = wordEnd;
     // Put three words on each line
     for (lineNum = 0; lineNum < 2; lineNum++)
     {
@@ -233,13 +225,13 @@ void sub_8120280(void)
     }
 }
 
-void sub_8120340(void) // ScrSpecial_PlayBardSong
+void ScrSpecial_PlayBardSong(void)
 {
-    sub_81206C0(gSpecialVar_0x8004);
+    StartBardSong(gSpecialVar_0x8004);
     ScriptContext1_Stop();
 }
 
-void sub_8120358(void) // ScrSpecial_GetHipsterSpokenFlag
+void ScrSpecial_GetHipsterSpokenFlag(void)
 {
     u16 *scriptResult = &gSpecialVar_Result; // again??
     struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
@@ -247,14 +239,14 @@ void sub_8120358(void) // ScrSpecial_GetHipsterSpokenFlag
     *scriptResult = hipster->alreadySpoken;
 }
 
-void sub_8120374(void) // ScrSpecial_SetHipsterSpokenFlag
+void ScrSpecial_SetHipsterSpokenFlag(void)
 {
     struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
 
     hipster->alreadySpoken = TRUE;
 }
 
-void sub_812038C(void) // ScrSpecial_HipsterTeachWord
+void ScrSpecial_HipsterTeachWord(void)
 {
     u16 var = sub_811F01C();
 
@@ -269,7 +261,7 @@ void sub_812038C(void) // ScrSpecial_HipsterTeachWord
     }
 }
 
-void sub_81203C4(void) // ScrSpecial_GiddyShouldTellAnotherTale
+void ScrSpecial_GiddyShouldTellAnotherTale(void)
 {
     struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
 
@@ -284,12 +276,12 @@ void sub_81203C4(void) // ScrSpecial_GiddyShouldTellAnotherTale
     }
 }
 
-void sub_81203FC(void) // ScrSpecial_GenerateGiddyLine
+void ScrSpecial_GenerateGiddyLine(void)
 {
     struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
 
     if (giddy->taleCounter == 0)
-        sub_81204DC();
+        InitGiddyTaleList();
 
     if (giddy->randomWords[giddy->taleCounter] != 0xFFFF) // is not the last element of the array?
     {
@@ -315,7 +307,7 @@ void sub_81203FC(void) // ScrSpecial_GenerateGiddyLine
     gSpecialVar_Result = TRUE;
 }
 
-void sub_81204DC(void)
+static void InitGiddyTaleList(void)
 {
     struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
     u16 arr[][2] = {
@@ -371,50 +363,50 @@ void sub_81204DC(void)
         }
     }
 }
-void sub_8120628(void)
+static void ResetBardFlag(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
 
     bard->hasChangedSong = FALSE;
 }
 
-void sub_8120640(void)
+static void ResetHipsterFlag(void)
 {
     struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
 
     hipster->alreadySpoken = FALSE;
 }
 
-void sub_8120658(void)
+static void ResetTraderFlag(void)
 {
-    sub_8133A60();
+    Trader_ResetFlag();
 }
 
-void sub_8120664(void)
+static void ResetStorytellerFlag(void)
 {
-    sub_8120E50();
+    Storyteller_ResetFlag();
 }
 
-void sub_8120670(void) // ResetMauvilleOldManFlag
+void ResetMauvilleOldManFlag(void) // ResetMauvilleOldManFlag
 {
-    switch (sub_81201C8())
+    switch (GetCurrentMauvilleOldMan())
     {
         case MAUVILLE_MAN_BARD:
-            sub_8120628();
+            ResetBardFlag();
             break;
         case MAUVILLE_MAN_HIPSTER:
-            sub_8120640();
+            ResetHipsterFlag();
             break;
         case MAUVILLE_MAN_STORYTELLER:
-            sub_8120664();
+            ResetStorytellerFlag();
             break;
         case MAUVILLE_MAN_TRADER:
-            sub_8120658();
+            ResetTraderFlag();
             break;
         case MAUVILLE_MAN_GIDDY:
             break;
     }
-    sub_8120B5C();
+    ScrSpecial_SetMauvilleOldManMapObjGfx();
 }
 
 
@@ -426,32 +418,32 @@ void sub_8120670(void) // ResetMauvilleOldManFlag
 #define MACRO1(a) (((a) & 3) + (((a) / 8) & 1))
 #define MACRO2(a) (((a) % 4) + (((a) / 8) & 1))
 
-void sub_81206C0(bool8 useTemporaryLyrics)
+static void StartBardSong(bool8 useTemporaryLyrics)
 {
-    u8 taskId = CreateTask(sub_8120944, 80);
+    u8 taskId = CreateTask(Task_BardSong, 80);
 
     gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
 }
 
-void sub_81206F0(void)
+static void sub_81206F0(void)
 {
     gUnknown_03002F84 = FALSE;
 }
 
-void sub_81206FC(struct TextSubPrinter * printer, u16 a1)
+static void BardSong_TextSubPrinter(struct TextSubPrinter * printer, u16 a1)
 {
     gUnknown_03002F84 = TRUE;
 }
 
-void sub_8120708(const u8 * src)
+static void sub_8120708(const u8 * src)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    PrintTextOnWindow(0, 1, src, 0, 1, 1, sub_81206FC);
+    PrintTextOnWindow(0, 1, src, 0, 1, 1, BardSong_TextSubPrinter);
     gUnknown_03002F84 = TRUE;
     CopyWindowToVram(0, 3);
 }
 
-void sub_8120748(struct Task *task, struct BardSong *song) // BardSing
+static void BardSing(struct Task *task, struct BardSong *song)
 {
     switch (task->tState)
     {
@@ -554,15 +546,15 @@ void sub_8120748(struct Task *task, struct BardSong *song) // BardSing
     }
 }
 
-void sub_8120944(u8 taskId)
+static void Task_BardSong(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];  // r5
 
-    sub_8120748(task, &gUnknown_03006130);
+    BardSing(task, &gBardSong);
     switch (task->tState)
     {
         case 0:  // Initialize song
-            sub_8120280();
+            PrepareSongText();
             sub_8120708(gStringVar4);
             task->data[1] = 0;
             task->data[2] = 0;
@@ -593,14 +585,14 @@ void sub_8120944(u8 taskId)
                 wordLen++;
             }
             if (!task->tUseTemporaryLyrics)
-                gUnknown_0203A128 = MACRO2(bard->songLyrics[task->tCurrWord]);
+                sUnknownBardRelated = MACRO2(bard->songLyrics[task->tCurrWord]);
             else
-                gUnknown_0203A128 = MACRO2(bard->temporaryLyrics[task->tCurrWord]);
-            temp = gUnknown_03006130.length / wordLen;
+                sUnknownBardRelated = MACRO2(bard->temporaryLyrics[task->tCurrWord]);
+            temp = gBardSong.length / wordLen;
             zero = 0;
-            gUnknown_03006130.length = temp;
-            if (gUnknown_03006130.length <= 0)
-                gUnknown_03006130.length = 1;
+            gBardSong.length = temp;
+            if (gBardSong.length <= 0)
+                gBardSong.length = 1;
             task->tCurrWord++;
             if (task->data[2] == 0)
                 task->tState = 3;
@@ -664,7 +656,7 @@ void sub_8120944(u8 taskId)
                     case 2:
                         task->tCharIndex++;
                         task->data[1] = 0;
-                        task->data[2] = gUnknown_03006130.length;
+                        task->data[2] = gBardSong.length;
                         task->tState = 4;
                         break;
                 }
@@ -679,10 +671,12 @@ void sub_8120944(u8 taskId)
     sub_8197224();
 }
 
-void sub_8120B5C(void)
+void ScrSpecial_SetMauvilleOldManMapObjGfx(void)
 {
     VarSet(VAR_0x4010, MAP_OBJ_GFX_BARD);
 }
+
+// Language fixers?
 
 void sub_8120B70(union OldMan * oldMan)
 {
@@ -696,9 +690,9 @@ void sub_8120B70(union OldMan * oldMan)
             struct MauvilleOldManTrader * trader = &oldMan->trader;
             for (i = 0; i < 4; i++)
             {
-                if (trader->unk32[i] == LANGUAGE_JAPANESE)
+                if (trader->language[i] == LANGUAGE_JAPANESE)
                 {
-                    ConvertInternationalString(trader->unk5[i], LANGUAGE_JAPANESE);
+                    ConvertInternationalString(trader->playerNames[i], LANGUAGE_JAPANESE);
                 }
             }
         }
@@ -717,7 +711,7 @@ void sub_8120B70(union OldMan * oldMan)
                         memset(sp00, CHAR_SPACE, 8);
                         StringCopy(sp00, gText_Friend);
                         memcpy(storyteller->trainerNames[i], sp00, 7);
-                        storyteller->unk34[i] = GAME_LANGUAGE;
+                        storyteller->language[i] = GAME_LANGUAGE;
                     }
                 }
             }
@@ -738,13 +732,13 @@ void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
 
             for (i = 0; i < 4; i++)
             {
-                if (IsStringJapanese(trader->unk5[i]))
+                if (IsStringJapanese(trader->playerNames[i]))
                 {
-                    trader->unk32[i] = r8;
+                    trader->language[i] = r8;
                 }
                 else
                 {
-                    trader->unk32[i] = r7;
+                    trader->language[i] = r7;
                 }
             }
         }
@@ -757,11 +751,11 @@ void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
             {
                 if (IsStringJapanese(storyteller->trainerNames[i]))
                 {
-                    storyteller->unk34[i] = r8;
+                    storyteller->language[i] = r8;
                 }
                 else
                 {
-                    storyteller->unk34[i] = r7;
+                    storyteller->language[i] = r7;
                 }
             }
         }
@@ -814,9 +808,9 @@ void sub_8120CD0(union OldMan * oldMan, u32 unused, u32 a2)
                 memcpy(sp00, storyteller->trainerNames[i], 7);
                 sp00[7] = EOS;
                 if (IsStringJapanese(sp00))
-                    storyteller->unk34[i] = LANGUAGE_JAPANESE;
+                    storyteller->language[i] = LANGUAGE_JAPANESE;
                 else
-                    storyteller->unk34[i] = GAME_LANGUAGE;
+                    storyteller->language[i] = GAME_LANGUAGE;
             }
         }
     }
@@ -836,23 +830,23 @@ void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
             {
                 for (i = 0; i < 4; i++)
                 {
-                    u8 * str = trader->unk5[i];
+                    u8 * str = trader->playerNames[i];
                     if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
                     {
                         StripExtCtrlCodes(str);
-                        trader->unk32[i] = LANGUAGE_JAPANESE;
+                        trader->language[i] = LANGUAGE_JAPANESE;
                     }
                     else
-                        trader->unk32[i] = r6;
+                        trader->language[i] = r6;
                 }
             }
             else
             {
                 for (i = 0; i < 4; i++)
                 {
-                    if (trader->unk32[i] == LANGUAGE_JAPANESE)
+                    if (trader->language[i] == LANGUAGE_JAPANESE)
                     {
-                        StripExtCtrlCodes(trader->unk5[i]);
+                        StripExtCtrlCodes(trader->playerNames[i]);
                     }
                 }
             }
@@ -869,7 +863,7 @@ void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
                 for (i = 0; i < 4; i++)
                 {
                     if (storyteller->gameStatIDs[i] != 0)
-                        storyteller->unk34[i] = r6;
+                        storyteller->language[i] = r6;
                 }
             }
         }
@@ -916,7 +910,7 @@ struct Story
     const u8 *fullText;
 };
 
-const struct Story gUnknown_0859F048[] = {
+static const struct Story sStorytellerStories[] = {
     {GAME_STAT_50, 1, MauvilleCity_PokemonCenter_1F_Text_28E930, MauvilleCity_PokemonCenter_1F_Text_28E947, MauvilleCity_PokemonCenter_1F_Text_28E956},
     {GAME_STAT_STARTED_TRENDS, 1, MauvilleCity_PokemonCenter_1F_Text_28E9D7, MauvilleCity_PokemonCenter_1F_Text_28E9EF, MauvilleCity_PokemonCenter_1F_Text_28E9FE},
     {GAME_STAT_PLANTED_BERRIES, 1, MauvilleCity_PokemonCenter_1F_Text_28EA7D, MauvilleCity_PokemonCenter_1F_Text_28EA98, MauvilleCity_PokemonCenter_1F_Text_28EAA8},
@@ -955,84 +949,84 @@ const struct Story gUnknown_0859F048[] = {
     {GAME_STAT_ENTERED_HOT_SPRINGS, 1, MauvilleCity_PokemonCenter_1F_Text_290097, MauvilleCity_PokemonCenter_1F_Text_2900B5, MauvilleCity_PokemonCenter_1F_Text_2900CB}
 };
 
-void sub_8120E08(void) // StorytellerSetup
+static void StorytellerSetup(void)
 {
     s32 i;
-    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
 
-    gUnknown_0203A12C->id = MAUVILLE_MAN_STORYTELLER;
-    gUnknown_0203A12C->alreadyRecorded = FALSE;
+    sStorytellerPtr->id = MAUVILLE_MAN_STORYTELLER;
+    sStorytellerPtr->alreadyRecorded = FALSE;
     for (i = 0; i < 4; i++)
     {
-        gUnknown_0203A12C->gameStatIDs[i] = 0;
-        gUnknown_0203A12C->trainerNames[0][i] = EOS;  // Maybe they meant storyteller->trainerNames[i][0] instead?
+        sStorytellerPtr->gameStatIDs[i] = 0;
+        sStorytellerPtr->trainerNames[0][i] = EOS;  // Maybe they meant storyteller->trainerNames[i][0] instead?
     }
 }
 
-void sub_8120E50(void)
+static void Storyteller_ResetFlag(void)
 {
-    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
 
-    gUnknown_0203A12C->id = MAUVILLE_MAN_STORYTELLER;
-    gUnknown_0203A12C->alreadyRecorded = FALSE;
+    sStorytellerPtr->id = MAUVILLE_MAN_STORYTELLER;
+    sStorytellerPtr->alreadyRecorded = FALSE;
 }
 
-u32 sub_8120E74(u8 stat) // StorytellerGetGameStat
+static u32 StorytellerGetGameStat(u8 stat)
 {
     if (stat == 50)
         stat = 0;
     return GetGameStat(stat);
 }
 
-const struct Story *sub_8120E88(u32 stat) // GetStoryByStat
+static const struct Story *GetStoryByStat(u32 stat)
 {
     s32 i;
 
     for (i = 0; i < 36; i++)
     {
-        if (gUnknown_0859F048[i].stat == stat)
-            return &gUnknown_0859F048[i];
+        if (sStorytellerStories[i].stat == stat)
+            return &sStorytellerStories[i];
     }
-    return &gUnknown_0859F048[35];
+    return &sStorytellerStories[35];
 }
 
-const u8 *sub_8120EB4(u32 stat) // GetStoryTitleByStat
+static const u8 *GetStoryTitleByStat(u32 stat)
 {
-    return sub_8120E88(stat)->title;
+    return GetStoryByStat(stat)->title;
 }
 
-const u8 *sub_8120EC0(u32 stat) // GetStoryTextByStat
+static const u8 *GetStoryTextByStat(u32 stat)
 {
-    return sub_8120E88(stat)->fullText;
+    return GetStoryByStat(stat)->fullText;
 }
 
-const u8 *sub_8120ECC(u32 stat) // GetStoryActionByStat
+static const u8 *GetStoryActionByStat(u32 stat)
 {
-    return sub_8120E88(stat)->action;
+    return GetStoryByStat(stat)->action;
 }
 
-u8 sub_8120ED8(void) // GetFreeStorySlot
+static u8 GetFreeStorySlot(void)
 {
     u8 i;
 
     for (i = 0; i < 4; i++)
     {
-        if (gUnknown_0203A12C->gameStatIDs[i] == 0)
+        if (sStorytellerPtr->gameStatIDs[i] == 0)
             break;
     }
     return i;
 }
 
-u32 sub_8120F08(u32 trainer) // StorytellerGetRecordedTrainerStat
+static u32 StorytellerGetRecordedTrainerStat(u32 trainer)
 {
-    u8 *ptr = gUnknown_0203A12C->statValues[trainer];
+    u8 *ptr = sStorytellerPtr->statValues[trainer];
 
     return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
 }
 
-void sub_8120F2C(u32 trainer, u32 val) // StorytellerSetRecordedTrainerStat
+static void StorytellerSetRecordedTrainerStat(u32 trainer, u32 val)
 {
-    u8 *ptr = gUnknown_0203A12C->statValues[trainer];
+    u8 *ptr = sStorytellerPtr->statValues[trainer];
 
     ptr[0] = val;
     ptr[1] = val >> 8;
@@ -1040,41 +1034,41 @@ void sub_8120F2C(u32 trainer, u32 val) // StorytellerSetRecordedTrainerStat
     ptr[3] = val >> 24;
 }
 
-bool32 sub_8120F4C(u32 trainer) // HasTrainerStatIncreased
+static bool32 HasTrainerStatIncreased(u32 trainer)
 {
-    if (sub_8120E74(gUnknown_0203A12C->gameStatIDs[trainer]) > sub_8120F08(trainer))
+    if (StorytellerGetGameStat(sStorytellerPtr->gameStatIDs[trainer]) > StorytellerGetRecordedTrainerStat(trainer))
         return TRUE;
     else
         return FALSE;
 }
 
-void sub_8120F7C(u32 player, void *dst) // GetStoryByStattellerPlayerName
+static void GetStoryByStattellerPlayerName(u32 player, void *dst)
 {
-    u8 *name = gUnknown_0203A12C->trainerNames[player];
+    u8 *name = sStorytellerPtr->trainerNames[player];
 
     memset(dst, EOS, 8);
     memcpy(dst, name, 7);
 }
 
-void sub_8120FAC(u32 player, const u8 * src) // StorytellerSetPlayerName
+static void StorytellerSetPlayerName(u32 player, const u8 * src)
 {
-    u8 * name = gUnknown_0203A12C->trainerNames[player];
+    u8 * name = sStorytellerPtr->trainerNames[player];
     memset(name, EOS, 7);
     memcpy(name, src, 7);
 }
 
 
-void sub_8120FDC(u32 player, u32 stat) // StorytellerRecordNewStat
+static void StorytellerRecordNewStat(u32 player, u32 stat)
 {
-    gUnknown_0203A12C->gameStatIDs[player] = stat;
-    sub_8120FAC(player, gSaveBlock2Ptr->playerName);
-    sub_8120F2C(player, sub_8120E74(stat));
-    ConvertIntToDecimalStringN(gStringVar1, sub_8120E74(stat), STR_CONV_MODE_LEFT_ALIGN, 10);
-    StringCopy(gStringVar2, sub_8120ECC(stat));
-    gUnknown_0203A12C->unk34[player] = gGameLanguage;
+    sStorytellerPtr->gameStatIDs[player] = stat;
+    StorytellerSetPlayerName(player, gSaveBlock2Ptr->playerName);
+    StorytellerSetRecordedTrainerStat(player, StorytellerGetGameStat(stat));
+    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetGameStat(stat), STR_CONV_MODE_LEFT_ALIGN, 10);
+    StringCopy(gStringVar2, GetStoryActionByStat(stat));
+    sStorytellerPtr->language[player] = gGameLanguage;
 }
 
-void sub_8121064(u8 * arr, s32 count) // ScrambleStatList
+static void ScrambleStatList(u8 * arr, s32 count)
 {
     s32 i;
 
@@ -1092,57 +1086,57 @@ void sub_8121064(u8 * arr, s32 count) // ScrambleStatList
 
 struct UnknownStruct_0859F288
 {
-    u32 length;
+    s32 length;
     u32 unused2;
 };
 
-const struct UnknownStruct_0859F288 gUnknown_0859F288 = {
-    36,
-    8
+static const struct UnknownStruct_0859F288 sStorytellerStuff = {
+    ARRAY_COUNT(sStorytellerStories),
+    sizeof(sStorytellerStuff)
 };
 
-bool8 sub_81210B8(void) // StorytellerInitializeRandomStat
+static bool8 StorytellerInitializeRandomStat(void)
 {
-    u8 arr[gUnknown_0859F288.length];
+    u8 arr[sStorytellerStuff.length];
     s32 i;
     s32 j;
 
-    sub_8121064(arr, 36);
-    for (i = 0; i < 36; i++)
+    ScrambleStatList(arr, ARRAY_COUNT(sStorytellerStories));
+    for (i = 0; i < (s32)ARRAY_COUNT(sStorytellerStories); i++)
     {
-        u8 stat = gUnknown_0859F048[arr[i]].stat;
-        u8 minVal = gUnknown_0859F048[arr[i]].minVal;
+        u8 stat = sStorytellerStories[arr[i]].stat;
+        u8 minVal = sStorytellerStories[arr[i]].minVal;
 
         for (j = 0; j < 4; j++)
         {
-            if (gUnknown_0203A12C->gameStatIDs[j] == stat)
+            if (sStorytellerPtr->gameStatIDs[j] == stat)
                 break;
         }
-        if (j == 4 && sub_8120E74(stat) >= minVal)
+        if (j == 4 && StorytellerGetGameStat(stat) >= minVal)
         {
-            gUnknown_0203A12C->alreadyRecorded = TRUE;
-            if (sub_8120ED8() == 4)
-                sub_8120FDC(gUnknown_03001178, stat);
+            sStorytellerPtr->alreadyRecorded = TRUE;
+            if (GetFreeStorySlot() == 4)
+                StorytellerRecordNewStat(sSelectedStory, stat);
             else
-                sub_8120FDC(sub_8120ED8(), stat);
+                StorytellerRecordNewStat(GetFreeStorySlot(), stat);
             return TRUE;
         }
     }
     return FALSE;
 }
 
-void sub_8121178(u32 player) // StorytellerDisplayStory
+static void StorytellerDisplayStory(u32 player)
 {
-    u8 stat = gUnknown_0203A12C->gameStatIDs[player];
+    u8 stat = sStorytellerPtr->gameStatIDs[player];
 
-    ConvertIntToDecimalStringN(gStringVar1, sub_8120F08(player), 0, 10);
-    StringCopy(gStringVar2, sub_8120ECC(stat));
-    sub_8120F7C(player, gStringVar3);
-    ConvertInternationalString(gStringVar3, gUnknown_0203A12C->unk34[player]);
-    ShowFieldMessage(sub_8120EC0(stat));
+    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), 0, 10);
+    StringCopy(gStringVar2, GetStoryActionByStat(stat));
+    GetStoryByStattellerPlayerName(player, gStringVar3);
+    ConvertInternationalString(gStringVar3, sStorytellerPtr->language[player]);
+    ShowFieldMessage(GetStoryTextByStat(stat));
 }
 
-void sub_81211EC(void) // PrintStoryList
+static void PrintStoryList(void)
 {
     s32 i;
     s32 width = GetStringWidth(1, gText_Exit, 0);
@@ -1150,29 +1144,29 @@ void sub_81211EC(void) // PrintStoryList
     for (i = 0; i < 4; i++)
     {
         s32 curWidth;
-        u16 gameStatID = gUnknown_0203A12C->gameStatIDs[i];
+        u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
 
         if (gameStatID == 0)
             break;
-        curWidth = GetStringWidth(1, sub_8120EB4(gameStatID), 0);
+        curWidth = GetStringWidth(1, GetStoryTitleByStat(gameStatID), 0);
         if (curWidth > width)
             width = curWidth;
     }
-    gUnknown_0203A130 = CreateWindowFromRect(0, 0, convert_pixel_width_to_tile_width(width), sub_8120ED8() * 2 + 2);
-    SetStandardWindowBorderStyle(gUnknown_0203A130, 0);
+    sStorytellerWindowId = CreateWindowFromRect(0, 0, convert_pixel_width_to_tile_width(width), GetFreeStorySlot() * 2 + 2);
+    SetStandardWindowBorderStyle(sStorytellerWindowId, 0);
     for (i = 0; i < 4; i++)
     {
-        u16 gameStatID = gUnknown_0203A12C->gameStatIDs[i];
+        u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
         if (gameStatID == 0)
             break;
-        PrintTextOnWindow(gUnknown_0203A130, 1, sub_8120EB4(gameStatID), 8, 16 * i + 1, 0xFF, NULL);
+        PrintTextOnWindow(sStorytellerWindowId, 1, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, 0xFF, NULL);
     }
-    PrintTextOnWindow(gUnknown_0203A130, 1, gText_Exit, 8, 16 * i + 1, 0xFF, NULL);
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_0203A130, sub_8120ED8() + 1, 0);
-    CopyWindowToVram(gUnknown_0203A130, 3);
+    PrintTextOnWindow(sStorytellerWindowId, 1, gText_Exit, 8, 16 * i + 1, 0xFF, NULL);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sStorytellerWindowId, GetFreeStorySlot() + 1, 0);
+    CopyWindowToVram(sStorytellerWindowId, 3);
 }
 
-void sub_81212FC(u8 taskId) // Task_StoryListMenu
+static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
 {
     struct Task *task = &gTasks[taskId];
     s32 selection;
@@ -1180,23 +1174,23 @@ void sub_81212FC(u8 taskId) // Task_StoryListMenu
     switch (task->data[0])
     {
         case 0:
-            sub_81211EC();
+            PrintStoryList();
             task->data[0]++;
             break;
         case 1:
             selection = ProcessMenuInput();
             if (selection == -2)
                 break;
-            if (selection == -1 || selection == sub_8120ED8())
+            if (selection == -1 || selection == GetFreeStorySlot())
             {
                 gSpecialVar_Result = 0;
             }
             else
             {
                 gSpecialVar_Result = 1;
-                gUnknown_03001178 = selection;
+                sSelectedStory = selection;
             }
-            sub_80E2A78(gUnknown_0203A130);
+            sub_80E2A78(sStorytellerWindowId);
             DestroyTask(taskId);
             EnableBothScriptContexts();
             break;
@@ -1204,51 +1198,50 @@ void sub_81212FC(u8 taskId) // Task_StoryListMenu
 }
 
 // Sets gSpecialVar_Result to TRUE if player selected a story
-void sub_8121388(void) // ScrSpecial_StorytellerStoryListMenu
+void ScrSpecial_StorytellerStoryListMenu(void)
 {
-    CreateTask(sub_81212FC, 80);
+    CreateTask(Task_StoryListMenu, 80);
 }
 
-void sub_812139C(void) // ScrSpecial_StorytellerDisplayStory
+void ScrSpecial_StorytellerDisplayStory(void)
 {
-    sub_8121178(gUnknown_03001178);
+    StorytellerDisplayStory(sSelectedStory);
 }
 
-u8 sub_81213B0(void) // ScrSpecial_StorytellerDisplayStory
+u8 ScrSpecial_StorytellerGetFreeStorySlot(void)
 {
-    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
-    return sub_8120ED8();
+    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    return GetFreeStorySlot();
 }
 
 // Returns TRUE if stat has increased
-bool8 sub_81213D8(void) // ScrSpecial_StorytellerUpdateStat
+bool8 ScrSpecial_StorytellerUpdateStat(void)
 {
     u8 r4;
-    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
-    r4 = gUnknown_0203A12C->gameStatIDs[gUnknown_03001178];
+    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    r4 = sStorytellerPtr->gameStatIDs[sSelectedStory];
 
-    if (sub_8120F4C(gUnknown_03001178) == TRUE)
+    if (HasTrainerStatIncreased(sSelectedStory) == TRUE)
     {
-        sub_8120FDC(gUnknown_03001178, r4);
+        StorytellerRecordNewStat(sSelectedStory, r4);
         return TRUE;
     }
     return FALSE;
 }
 
-
-bool8 sub_8121424(void) // ScrSpecial_HasStorytellerAlreadyRecorded
+bool8 ScrSpecial_HasStorytellerAlreadyRecorded(void)
 {
-    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
 
-    if (gUnknown_0203A12C->alreadyRecorded == FALSE)
+    if (sStorytellerPtr->alreadyRecorded == FALSE)
         return FALSE;
     else
         return TRUE;
 }
 
-bool8 sub_8121450(void) // ScrSpecial_StorytellerInitializeRandomStat
+bool8 ScrSpecial_StorytellerInitializeRandomStat(void)
 {
-    gUnknown_0203A12C = &gSaveBlock1Ptr->oldMan.storyteller;
-    return sub_81210B8();
+    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    return StorytellerInitializeRandomStat();
 }
 

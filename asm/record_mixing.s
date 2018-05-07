@@ -1438,7 +1438,7 @@ _080E791A:
 	add r1, r9
 	movs r2, 0x40
 	bl memcpy
-	bl sub_8120670
+	bl ResetMauvilleOldManFlag
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
