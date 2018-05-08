@@ -7,6 +7,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/flags.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "blend_palette.h"
@@ -34,6 +35,7 @@
 #include "dma3.h"
 #include "battle_message.h"
 #include "event_scripts.h"
+#include "event_data.h"
 #include "strings.h"
 #include "contest_effect.h"
 #include "contest_link_80FC4F4.h"
@@ -91,8 +93,8 @@ void sub_80DA7A0(u8);
 void sub_80DA7EC(u8);
 void sub_80DA830(u8);
 void sub_80DA874(void);
-void sub_80DE424(u8);
 bool8 sub_80DA8A4(void);
+void sub_80DE424(u8);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
 void sub_80DB2BC(void);
@@ -130,7 +132,6 @@ void prints_contest_move_description(u16);
 void sub_80DBD18(void);
 void sub_80DF250(void);
 void sub_80DF4F8(void);
-
 void sub_80DD080(u8);
 void sub_80DF080(u8);
 void sub_80DF750(void);
@@ -160,6 +161,8 @@ void sub_80DB944(void);
 void sub_80DBA18(void);
 void sub_80DC3AC(void);
 bool8 sub_80DC3C4(void);
+void sub_80DF9D4(u8 *);
+void sub_80DF9E0(u8 *, s32);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F00[4] = {0};
@@ -223,7 +226,8 @@ extern const u8 gText_0827E817[];
 extern const u8 gText_0827E58A[];
 extern const u8 gText_0827D56F[];
 extern const u8 gText_0827D597[];
-
+extern const struct ContestPokemon gContestOpponents[96];
+extern const u8 gUnknown_085898A4[96];
 
 void TaskDummy1(u8 taskId)
 {
@@ -1961,4 +1965,153 @@ void sub_80DA874(void)
 {
     ScriptContext2_Disable();
     EnableBothScriptContexts();
+}
+
+void sub_80DA884(void)
+{
+    if (!(gIsLinkContest & 1))
+        gContestPlayerMonIndex = 3;
+}
+
+bool8 sub_80DA8A4(void)
+{
+    if (gContestPlayerMonIndex == gUnknown_02039F2B)
+        return TRUE;
+    return FALSE;
+}
+
+
+void sub_80DA8C8(u8 partyIndex)
+{
+    u8 name[20];
+    u16 heldItem;
+    s16 cool;
+    s16 beauty;
+    s16 cute;
+    s16 smart;
+    s16 tough;
+
+    StringCopy(name, gSaveBlock2Ptr->playerName);
+    if (gIsLinkContest & 1)
+    {
+        sub_80DF9D4(name);
+    }
+    memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, 8);
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        gContestMons[gContestPlayerMonIndex].trainerGfxId = MAP_OBJ_GFX_LINK_BRENDAN;
+    else
+        gContestMons[gContestPlayerMonIndex].trainerGfxId = MAP_OBJ_GFX_LINK_MAY;
+    gContestMons[gContestPlayerMonIndex].flags = 0;
+    gContestMons[gContestPlayerMonIndex].unk2C[0] = 0;
+    gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
+    GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
+    StringGetEnd10(name);
+    if (gIsLinkContest & 1)
+    {
+        sub_80DF9E0(name, GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE));
+    }
+    memcpy(gContestMons[gContestPlayerMonIndex].nickname, name, 11);
+    StringCopy(gContestMons[gContestPlayerMonIndex].nickname, name);
+    gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[partyIndex], MON_DATA_COOL);
+    gContestMons[gContestPlayerMonIndex].beauty = GetMonData(&gPlayerParty[partyIndex], MON_DATA_BEAUTY);
+    gContestMons[gContestPlayerMonIndex].cute = GetMonData(&gPlayerParty[partyIndex], MON_DATA_CUTE);
+    gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SMART);
+    gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TOUGH);
+    gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SHEEN);
+    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1);
+    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE2);
+    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE3);
+    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE4);
+    gContestMons[gContestPlayerMonIndex].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY);
+    gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID);
+
+    heldItem = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM);
+    cool   = gContestMons[gContestPlayerMonIndex].cool;
+    beauty = gContestMons[gContestPlayerMonIndex].beauty;
+    cute   = gContestMons[gContestPlayerMonIndex].cute;
+    smart  = gContestMons[gContestPlayerMonIndex].smart;
+    tough  = gContestMons[gContestPlayerMonIndex].tough;
+    if      (heldItem == ITEM_RED_SCARF)
+        cool += 20;
+    else if (heldItem == ITEM_BLUE_SCARF)
+        beauty += 20;
+    else if (heldItem == ITEM_PINK_SCARF)
+        cute += 20;
+    else if (heldItem == ITEM_GREEN_SCARF)
+        smart += 20;
+    else if (heldItem == ITEM_YELLOW_SCARF)
+        tough += 20;
+    if (cool > 255)
+        cool = 255;
+    if (beauty > 255)
+        beauty = 255;
+    if (cute > 255)
+        cute = 255;
+    if (smart > 255)
+        smart = 255;
+    if (tough > 255)
+        tough = 255;
+    gContestMons[gContestPlayerMonIndex].cool = cool;
+    gContestMons[gContestPlayerMonIndex].beauty = beauty;
+    gContestMons[gContestPlayerMonIndex].cute = cute;
+    gContestMons[gContestPlayerMonIndex].smart = smart;
+    gContestMons[gContestPlayerMonIndex].tough = tough;
+}
+
+void sub_80DAB8C(u8 contestType, u8 rank)
+{
+    s32 i;
+    u8 opponentsCount = 0;
+    u8 opponents[100];
+    bool8 r7 = FALSE;
+    const u8 * r3;
+
+    sub_80DA884();
+
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) && !(gIsLinkContest & 1))
+        r7 = TRUE;
+
+    // Find all suitable opponents
+    r3 = gUnknown_085898A4;
+    for (i = 0; i < ARRAY_COUNT(gContestOpponents); i++)
+    {
+        if (rank == gContestOpponents[i].whichRank)
+        {
+            if (r7 == TRUE)
+            {
+                if (r3[i] == 1)
+                    continue;
+            }
+            else
+            {
+                if (r3[i] == 2)
+                    continue;
+            }
+            if      (contestType == 0 && gContestOpponents[i].aiPool_Cool)
+                opponents[opponentsCount++] = i;
+            else if (contestType == 1 && gContestOpponents[i].aiPool_Beauty)
+                opponents[opponentsCount++] = i;
+            else if (contestType == 2 && gContestOpponents[i].aiPool_Cute)
+                opponents[opponentsCount++] = i;
+            else if (contestType == 3 && gContestOpponents[i].aiPool_Smart)
+                opponents[opponentsCount++] = i;
+            else if (contestType == 4 && gContestOpponents[i].aiPool_Tough)
+                opponents[opponentsCount++] = i;
+        }
+    }
+    opponents[opponentsCount] = 0xFF;
+
+    // Choose three random opponents from the list
+    for (i = 0; i < 3; i++)
+    {
+        u16 rnd = Random() % opponentsCount;
+        s32 j;
+
+        gContestMons[i] = gContestOpponents[opponents[rnd]];
+        for (j = rnd; opponents[j] != 0xFF; j++)
+            opponents[j] = opponents[j + 1];
+        opponentsCount--;
+    }
+
+    sub_80DA8C8(gUnknown_02039F24);
 }
