@@ -42,6 +42,8 @@
     free(ptr); \
     ptr = NULL;
 
+extern void (*gFieldCallback)(void);
+
 void sub_80D782C(void);
 void sub_80D7C7C(u8 taskId);
 void sub_80D7CB4(u8 taskId);
@@ -79,8 +81,17 @@ void sub_80DA3CC(u8);
 void sub_80DA464(u8);
 void sub_80DA49C(u8);
 void sub_80DA4CC(u8);
-void sub_80DE424(u8);
 void sub_80DA51C(u8);
+void sub_80DA5B4(u8);
+void sub_80DA5E8(u8);
+void sub_80DA6B4(u8);
+void sub_80DA700(u8);
+void sub_80DA740(u8);
+void sub_80DA7A0(u8);
+void sub_80DA7EC(u8);
+void sub_80DA830(u8);
+void sub_80DA874(void);
+void sub_80DE424(u8);
 bool8 sub_80DA8A4(void);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
@@ -116,7 +127,9 @@ void sub_80DED60(u32);
 void sub_80FC9F8(u8);
 bool8 AreMovesContestCombo(u16, u16);
 void prints_contest_move_description(u16);
-
+void sub_80DBD18(void);
+void sub_80DF250(void);
+void sub_80DF4F8(void);
 
 void sub_80DD080(u8);
 void sub_80DF080(u8);
@@ -209,6 +222,7 @@ extern const u8 gText_0827E7EA[];
 extern const u8 gText_0827E817[];
 extern const u8 gText_0827E58A[];
 extern const u8 gText_0827D56F[];
+extern const u8 gText_0827D597[];
 
 
 void TaskDummy1(u8 taskId)
@@ -1818,4 +1832,133 @@ void sub_80DA4F4(u8 taskId)
 {
     sub_80DE350();
     gTasks[taskId].func = sub_80DA51C;
+}
+
+void sub_80DA51C(u8 taskId)
+{
+    vu16 sp0 = GetGpuReg(REG_OFFSET_BG0CNT);
+    vu16 sp2 = GetGpuReg(REG_OFFSET_BG2CNT);
+    ((vBgCnt *)&sp0)->priority = 0;
+    ((vBgCnt *)&sp2)->priority = 0;
+    SetGpuReg(REG_OFFSET_BG0CNT, sp0);
+    SetGpuReg(REG_OFFSET_BG2CNT, sp2);
+    sContest.turnNumber++;
+    if (sContest.turnNumber == 5)
+    {
+        gTasks[taskId].func = sub_80DA5E8;
+    }
+    else
+    {
+        sub_80DDB0C();
+        gTasks[taskId].func = sub_80DA5B4;
+    }
+}
+
+void sub_80DA5B4(u8 taskId)
+{
+    if (!sContest.unk1920A_6)
+        gTasks[taskId].func = sub_80D833C;
+}
+
+void sub_80DA5E8(u8 taskId)
+{
+    s32 i;
+
+    gBattle_BG0_Y = 0;
+    gBattle_BG2_Y = 0;
+    for (i = 0; i < 4; i++)
+        gUnknown_02039F10[i] = sContestantStatus[i].unk4;
+    sub_80DBD18();
+    sub_80DB89C();
+    if (!(gIsLinkContest & 1))
+        BravoTrainerPokemonProfile_BeforeInterview1(sContestantStatus[gContestPlayerMonIndex].prevMove);
+    else
+    {
+        sub_80DF250();
+        sub_80DF4F8();
+        sub_80DF750();
+    }
+    gContestRngValue = gRngValue;
+    StringExpandPlaceholders(gStringVar4, gText_0827D597);
+    sub_80DEC30(gStringVar4, 1);
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].func = sub_80DA6B4;
+}
+
+void sub_80DA6B4(u8 taskId)
+{
+    if (!sub_80DED4C())
+    {
+        sub_80DE224();
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 160;
+        PlaySE12WithPanning(SE_C_MAKU_D, 0);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_80DA700;
+    }
+}
+
+void sub_80DA700(u8 taskId)
+{
+    gBattle_BG1_Y -= 7;
+    if (gBattle_BG1_Y < 0)
+        gBattle_BG1_Y = 0;
+    if (*(u16 *)&gBattle_BG1_Y == 0)  // Why cast?
+    {
+        gTasks[taskId].func = sub_80DA740;
+        gTasks[taskId].data[0] = 0;
+    }
+}
+
+void sub_80DA740(u8 taskId)
+{
+    if (gTasks[taskId].data[0]++ >= 50)
+    {
+        gTasks[taskId].data[0] = 0;
+        if (gIsLinkContest & 1)
+        {
+            gTasks[taskId].func = sub_80DA7A0;
+        }
+        else
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            gTasks[taskId].func = sub_80DA830;
+        }
+    }
+}
+
+void sub_80DA7A0(u8 taskId)
+{
+    u8 taskId2 = CreateTask(sub_80FCACC, 0);
+
+    SetTaskFuncWithFollowupFunc(taskId2, sub_80FCACC, sub_80DA7EC);
+    gTasks[taskId].func = TaskDummy1;
+    sub_80DBF68();
+    sub_80DC490(FALSE);
+}
+
+void sub_80DA7EC(u8 taskId)
+{
+    DestroyTask(taskId);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    gTasks[sContest.mainTaskId].func = sub_80DA830;
+}
+
+void sub_80DA830(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        DestroyTask(taskId);
+        gFieldCallback = sub_80DA874;
+        FreeAllWindowBuffers();
+        sub_80D7A5C();
+        FreeMonSpritesGfx();
+        SetMainCallback2(CB2_ReturnToField);
+    }
+}
+
+void sub_80DA874(void)
+{
+    ScriptContext2_Disable();
+    EnableBothScriptContexts();
 }
