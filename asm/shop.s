@@ -790,7 +790,7 @@ BuyMenuPrintPriceInList: @ 80E0114
 	ldr r5, =gStringVar1
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetPriceReduction
@@ -2017,7 +2017,7 @@ _080E0B32:
 	bne _080E0B80
 	lsls r0, r5, 16
 	lsrs r0, 16
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetPriceReduction
@@ -2259,7 +2259,7 @@ Task_BuyHowManyDialogueHandleInput: @ 80E0D88
 	cmp r0, 0x1
 	bne _080E0DF0
 	ldrh r0, [r5, 0xA]
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetPriceReduction

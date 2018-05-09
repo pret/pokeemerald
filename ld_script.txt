@@ -137,7 +137,6 @@ SECTIONS {
         src/item_menu_icons.o(.text);
         asm/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
-        asm/item.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
@@ -173,7 +172,7 @@ SECTIONS {
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
-        asm/trader.o(.text);
+        src/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         src/rom6.o(.text);
@@ -184,7 +183,7 @@ SECTIONS {
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
         asm/field_specials.o(.text);
-        asm/battle_records.o(.text);
+        src/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         asm/roulette.o(.text);
@@ -434,7 +433,6 @@ SECTIONS {
         data/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
-        data/item_menu_icons.o(.rodata);
         data/contest.o(.rodata);
         data/shop.o(.rodata);
         src/berry.o(.rodata);
@@ -466,14 +464,14 @@ SECTIONS {
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
-        data/trader.o(.rodata);
+        src/trader.o(.rodata);
         data/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         data/field_specials.o(.rodata);
-        data/battle_records.o(.rodata);
+        src/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
@@ -524,7 +522,6 @@ SECTIONS {
         src/item_menu.o(.rodata);
         data/menu_indicators.o(.rodata);
         src/save_location.o(.rodata);
-        data/item_icon.o(.rodata);
         src/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);

@@ -2,7 +2,6 @@
 	.include "constants/misc_constants.inc"
 	.include "constants/contest_constants.inc"
 	.include "constants/pokemon_data_constants.inc"
-	.include "constants/item_data_constants.inc"
 	.include "constants/battle_frontier_constants.inc"
 	.include "constants/map_constants.inc"
 	.include "constants/berry_constants.inc"

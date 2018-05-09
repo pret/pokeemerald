@@ -306,7 +306,7 @@ gUnknown_02039B52: @ 2039B52
 gUnknown_02039B54: @ 2039B54
 	.space 0x4
 
-gUnknown_02039B58: @ 2039B58
+gTrainerCards: @ 2039B58
 	.space 0x14
 
 gUnknown_02039B6C: @ 2039B6C
@@ -402,10 +402,7 @@ gUnknown_02039DD0: @ 2039DD0
 	.space 0x4
 
 	.include "src/map_name_popup.o"
-	.space 0x3
-
-gBagPockets: @ 2039DD8
-	.space 0x28
+	.include "src/item.o"
 
 gUnknown_02039E00: @ 2039E00
 	.space 0x100
@@ -701,11 +698,7 @@ gUnknown_0203AB6F: @ 203AB6F
 gUnknown_0203AB70: @ 203AB70
 	.space 0x4
 
-gResultsWindowId: @ 203AB74
-	.space 0x4
-
-gUnknown_0203AB78: @ 203AB78
-	.space 0x4
+    .include "src/battle_records.o"
 
 gUnknown_0203AB7C: @ 203AB7C
 	.space 0x4

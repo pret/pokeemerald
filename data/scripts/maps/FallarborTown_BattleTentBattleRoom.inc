@@ -72,7 +72,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_20097E:: @ 820097E
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	warp FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
@@ -103,8 +103,8 @@ FallarborTown_BattleTentBattleRoom_EventScript_2009B3:: @ 82009B3
 	applymovement 1, FallarborTown_BattleTentBattleRoom_Movement_200B94
 	waitmovement 0
 	msgbox FallarborTown_BattleTentBattleRoom_Text_257CE9, 4
-	special copy_player_party_from_sav1
-	special copy_player_party_to_sav1
+	special LoadPlayerParty
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -157,7 +157,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_200AF3:: @ 8200AF3
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	warp FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 	setvar VAR_0x8004, 1

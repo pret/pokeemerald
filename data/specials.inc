@@ -48,8 +48,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B2FD8
 	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerFieldObject
-	def_special copy_player_party_to_sav1
-	def_special copy_player_party_from_sav1
+	def_special SavePlayerParty
+	def_special LoadPlayerParty
 	def_special sub_80F9438
 	def_special sp02A_crash_sound
 	def_special FieldObjectInteractionGetBerryTreeData
@@ -124,12 +124,12 @@ gSpecials:: @ 81DBA64
 	def_special sub_81213D8
 	def_special sub_8121450
 	def_special sub_8121424
-	def_special sub_8133EC0
-	def_special sub_8133CD8
-	def_special sub_8133CF4
-	def_special sub_8133D2C
-	def_special sub_8133D8C
-	def_special sub_8133E38
+	def_special ScrSpecial_TraderMenuGetDecoration
+	def_special ScrSpecial_GetTraderTradedFlag
+	def_special ScrSpecial_DoesPlayerHaveNoDecorations
+	def_special ScrSpecial_IsDecorationFull
+	def_special ScrSpecial_TraderMenuGiveDecoration
+	def_special ScrSpecial_TraderDoDecorationTrade
 	def_special GetSeedotSizeRecordInfo
 	def_special CompareSeedotSize
 	def_special GetLotadSizeRecordInfo
@@ -141,7 +141,7 @@ gSpecials:: @ 81DBA64
 	def_special TrendyPhraseIsOld
 	def_special sub_811EF6C
 	def_special GetDewfordHallPaintingNameIndex
-	def_special sub_80D6EDC
+	def_special SwapRegisteredBike
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
@@ -207,7 +207,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8071614
-	def_special sub_813C4BC
+	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
 	def_special sub_80F972C
@@ -341,7 +341,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B98DC
 	def_special nullsub_54
 	def_special sub_80E9B70
-	def_special copy_bags_and_unk_data_from_save_blocks
+	def_special LoadPlayerBag
 	def_special sub_80B05B4
 	def_special sub_8139754
 	def_special sub_813970C
@@ -526,12 +526,12 @@ gSpecials:: @ 81DBA64
 	def_special sub_8139ED0
 	def_special sub_813B968
 	def_special sub_80F8B94
-	def_special sub_813C904
+	def_special ShowTrainerHillRecords
 	def_special sub_80B4808
 	def_special sub_813B9A0
 	def_special sub_81B9918
 	def_special sub_80722E0
 	def_special sub_80B45D0
-	def_special sub_813C5A0
+	def_special RemoveRecordsWindow
 	def_special sub_8139C10
 	def_special sub_80B3BC4

@@ -1218,7 +1218,7 @@ void FieldObjectInteractionRemoveBerryTree(void)
 
 u8 PlayerHasBerries(void)
 {
-    return IsBagPocketNonEmpty(BAG_BERRIES);
+    return IsBagPocketNonEmpty(POCKET_BERRIES);
 }
 
 void ResetBerryTreeSparkleFlags(void)

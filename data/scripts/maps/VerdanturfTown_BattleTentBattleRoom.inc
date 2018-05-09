@@ -59,7 +59,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023AA:: @ 82023AA
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	warp VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
@@ -81,8 +81,8 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	applymovement 1, VerdanturfTown_BattleTentBattleRoom_Movement_2725A6
 	waitmovement 0
 	msgbox VerdanturfTown_BattleTentBattleRoom_Text_24FF00, 4
-	special copy_player_party_from_sav1
-	special copy_player_party_to_sav1
+	special LoadPlayerParty
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -132,7 +132,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202501:: @ 8202501
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	warp VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 

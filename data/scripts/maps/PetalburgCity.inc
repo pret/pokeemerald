@@ -30,7 +30,7 @@ PetalburgCity_MapScript2_1DC31C: @ 81DC31C
 
 PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	lockall
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_1DC451
 	applymovement 255, PetalburgCity_Movement_1DC430
@@ -47,7 +47,7 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	setvar VAR_0x4057, 3
 	fadedefaultbgm
 	clearflag FLAG_SPECIAL_FLAG_0x4001
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x4085, 1
 	warp PETALBURG_CITY_GYM, 255, 4, 108
 	waitstate
