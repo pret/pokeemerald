@@ -10,7 +10,7 @@ MauvilleCity_PokemonCenter_1F_MapScript1_210E66: @ 8210E66
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_210E74:: @ 8210E74
-	special sub_8120B5C
+	special ScrSpecial_SetMauvilleOldManMapObjGfx
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_210E78:: @ 8210E78

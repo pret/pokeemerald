@@ -28,11 +28,9 @@
 	.include "src/script_menu.o"
 	.include "src/record_mixing.o"
 	.include "src/tv.o"
+	.include "src/mauville_old_man.o"
 
-	.space 1 @ TODO: define this u32 in mauville_old_man
-gUnknown_03001178: @ 3001178
-	.space 0x4
-
+	.align 2
 gUnknown_0300117C: @ 300117C
 	.space 0x4
 

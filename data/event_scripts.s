@@ -5887,10 +5887,10 @@ gText_SoAmusing:: @ 82942E3
 gText_SoMagical:: @ 82942F0
 	.string " so magical!$"
 
-gUnknown_082942FD:: @ 82942FD
+gOtherText_Is:: @ 82942FD
 	.string " is$"
 
-gUnknown_08294301:: @ 8294301
+gOtherText_DontYouAgree:: @ 8294301
 	.string "\n"
 	.string "Don’t you agree?$"
 

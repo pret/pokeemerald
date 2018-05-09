@@ -62,9 +62,7 @@ gUnknown_030060B8: @ 30060B8
 	.space 0x4
 
     .include "tv.o"
-
-gUnknown_03006130: @ 3006130
-	.space 0x34
+    .include "mauville_old_man.o"
 
 gUnknown_03006164: @ 3006164
 	.space 0x4

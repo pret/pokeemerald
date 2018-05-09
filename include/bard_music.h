@@ -9,7 +9,7 @@ struct BardSound
     /*0x00*/ u8 var00;
     /*0x01*/ s8 var01;
     /*0x02*/ u16 var02;
-    /*0x04*/ u16 volume;
+    /*0x04*/ s16 volume;
     /*0x06*/ u16 var06;
 };
 
@@ -39,5 +39,7 @@ struct BardSong
 // Exported ROM declarations
 
 extern const u16 gUnknown_085F5490;
+const struct BardSound *GetWordSounds(u16 word);
+void GetWordPhonemes(struct BardSong *song, u16 word);
 
 #endif //GUARD_BARD_MUSIC_H

@@ -1146,7 +1146,7 @@ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8 graphicsId)
     }
     if (graphicsId == 0x45)
     {
-        bard = sub_81201C8();
+        bard = GetCurrentMauvilleOldMan();
         return gMauvilleOldManGraphicsInfoPointers[bard];
     }
     if (graphicsId >= NUM_OBJECT_GRAPHICS_INFO)

@@ -9243,8 +9243,8 @@ _0811EA68:
 	bx r1
 	thumb_func_end sub_811EA28
 
-	thumb_func_start start_menu_is_selected_item_valid
-start_menu_is_selected_item_valid: @ 811EA6C
+	thumb_func_start EasyChat_GetNumWordsInGroup
+EasyChat_GetNumWordsInGroup: @ 811EA6C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -9273,7 +9273,7 @@ _0811EA9A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end start_menu_is_selected_item_valid
+	thumb_func_end EasyChat_GetNumWordsInGroup
 
 	thumb_func_start sub_811EAA4
 sub_811EAA4: @ 811EAA4
@@ -10145,7 +10145,7 @@ sub_811F0F8: @ 811F0F8
 sub_811F108: @ 811F108
 	push {r4-r7,lr}
 	movs r0, 0
-	bl start_menu_is_selected_item_valid
+	bl EasyChat_GetNumWordsInGroup
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
