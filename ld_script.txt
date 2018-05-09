@@ -87,7 +87,7 @@ SECTIONS {
         src/play_time.o(.text);
         src/new_game.o(.text);
         src/overworld.o(.text);
-        asm/fieldmap.o(.text);
+        src/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         src/field_camera.o(.text);
         src/field_door.o(.text);
@@ -396,7 +396,7 @@ SECTIONS {
         src/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
-        data/fieldmap.o(.rodata);
+        src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
         src/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
