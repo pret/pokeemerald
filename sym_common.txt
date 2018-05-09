@@ -39,17 +39,8 @@ gUnknown_03005DB4: @ 3005DB4
 gFieldLinkPlayerCount: @ 3005DB8
 	.space 0x8
 
-gUnknown_03005DC0: @ 3005DC0
-	.space 0x10
-
-gUnknown_03005DD0: @ 3005DD0
-	.space 0x18
-
-gUnknown_03005DE8: @ 3005DE8
-	.space 0x4
-
-gUnknown_03005DEC: @ 3005DEC
-	.space 0x4
+    .include "fieldmap.o"
+    .include "field_camera.o"
 
 gSelectedMapObject: @ 3005DF0
 	.space 0x4

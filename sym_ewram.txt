@@ -209,22 +209,10 @@ gUnknown_020322D5: @ 20322D5
 	.space 0x3
 
 	.include "src/overworld.o"
+	.include "src/fieldmap.o"
+	.include "src/field_camera.o"
 
-gUnknown_02032318: @ 2032318
-	.space 0x5000
-
-gMapHeader: @ 2037318
-	.space 0x1C
-
-gCamera: @ 2037334
-	.space 0xC
-
-gUnknown_02037340: @ 2037340
-	.space 0x8
-
-gUnusedBikeCameraAheadPanback: @ 2037348
-	.space 0x4
-
+	.align 2
 gUnknown_0203734C: @ 203734C
 	.space 0x4
 
