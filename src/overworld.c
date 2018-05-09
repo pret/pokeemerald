@@ -137,7 +137,6 @@ extern void trainer_hill_map_load_related(void);
 extern void sub_8087D74(void);
 extern void battle_pyramid_map_load_related(u8);
 extern void sub_80B00E8(u8);
-extern void UpdateTVScreensOnMap(u32, u32);
 extern void sub_80E9238(u8);
 extern void sub_81A3908(void);
 extern void sub_81AA2F8(void);
@@ -614,12 +613,12 @@ bool32 warp_data_is_not_neg_1(struct WarpData *warp)
         return TRUE;
 }
 
-const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum)
+struct MapHeader const *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum)
 {
     return gMapGroups[mapGroup][mapNum];
 }
 
-const struct MapHeader *warp1_get_mapheader(void)
+struct MapHeader const *const warp1_get_mapheader(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
 }
