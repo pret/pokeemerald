@@ -2,7 +2,7 @@
 #include "overworld.h"
 #include "bg.h"
 #include "battle_frontier_2.h"
-#include "constants/RGB.h"
+#include "constants/rgb.h"
 #include "fieldmap.h"
 #include "fldeff_80F9BCC.h"
 #include "fldeff_cut.h"
