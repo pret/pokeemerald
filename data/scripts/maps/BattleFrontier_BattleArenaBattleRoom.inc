@@ -136,8 +136,8 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257630:: @ 8257630
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BEB
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257CE9, 4
-	special copy_player_party_from_sav1
-	special copy_player_party_to_sav1
+	special LoadPlayerParty
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780

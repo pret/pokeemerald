@@ -101,7 +101,7 @@ struct MailRead
     /*0x021c*/ u8 monIconSprite;
     /*0x021d*/ u8 language;
     /*0x021e*/ bool8 playerIsSender;
-    /*0x0220*/ void (*parserSingle)(u8 *dest, u16 word);
+    /*0x0220*/ u8 * (*parserSingle)(u8 *dest, u16 word);
     /*0x0224*/ void (*parserMultiple)(u8 *dest, const u16 *src, u16 length1, u16 length2);
     /*0x0228*/ const struct MailLayout *layout;
     /*0x022c*/ u8 bg1TilemapBuffer[0x1000];

@@ -134,7 +134,7 @@ FallarborTown_BattleTentLobby_EventScript_200001:: @ 8200001
 	special sub_81B9B80
 	compare VAR_RESULT, 0
 	goto_if 5, FallarborTown_BattleTentLobby_EventScript_1FFF84
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox FallarborTown_BattleTentLobby_Text_2C47EB, 4
 
 FallarborTown_BattleTentLobby_EventScript_200021:: @ 8200021
@@ -188,7 +188,7 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call FallarborTown_BattleTentLobby_EventScript_27134F
@@ -197,7 +197,7 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	goto_eq FallarborTown_BattleTentLobby_EventScript_2001AB
 
 FallarborTown_BattleTentLobby_EventScript_20013C:: @ 820013C
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
@@ -234,7 +234,7 @@ FallarborTown_BattleTentLobby_EventScript_2001AB:: @ 82001AB
 	goto FallarborTown_BattleTentLobby_EventScript_2001C5
 
 FallarborTown_BattleTentLobby_EventScript_2001C2:: @ 82001C2
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 FallarborTown_BattleTentLobby_EventScript_2001C5:: @ 82001C5
 	msgbox FallarborTown_BattleTentLobby_Text_2C487F, 4

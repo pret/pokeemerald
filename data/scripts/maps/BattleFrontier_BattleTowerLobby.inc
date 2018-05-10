@@ -152,7 +152,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E84D:: @ 823E84D
 	waitmessage
 	setvar VAR_0x8004, 8
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 6
 	setvar VAR_0x8005, 0
@@ -240,7 +240,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E936:: @ 823E936
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 0
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_240537, 4
 
 BattleFrontier_BattleTowerLobby_EventScript_23E948:: @ 823E948
@@ -299,7 +299,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
@@ -320,7 +320,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA9F:: @ 823EA9F
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 0
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_2407E2, 4
 
 BattleFrontier_BattleTowerLobby_EventScript_23EAB1:: @ 823EAB1
@@ -379,7 +379,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
@@ -401,7 +401,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC08:: @ 823EC08
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 0
 	clearflag FLAG_0x152
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_240A8B, 4
 
 BattleFrontier_BattleTowerLobby_EventScript_23EC1D:: @ 823EC1D
@@ -460,7 +460,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
@@ -481,7 +481,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ED74:: @ 823ED74
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 0
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_240E15, 4
 
 BattleFrontier_BattleTowerLobby_EventScript_23ED86:: @ 823ED86
@@ -540,7 +540,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	closemessage
 	delay 2
 	setvar VAR_0x8004, 6
@@ -636,7 +636,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFC7:: @ 823EFC7
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -647,7 +647,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFE0:: @ 823EFE0
 	setvar VAR_0x8006, 1
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -658,7 +658,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFF9:: @ 823EFF9
 	setvar VAR_0x8006, 2
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -669,7 +669,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F012:: @ 823F012
 	setvar VAR_0x8006, 3
 	special sub_81A1780
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 
@@ -722,7 +722,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F0D0:: @ 823F0D0
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F0E3:: @ 823F0E3
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 
 BattleFrontier_BattleTowerLobby_EventScript_23F0E6:: @ 823F0E6
 	special CloseLink
@@ -733,7 +733,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F0F1:: @ 823F0F1
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F0F3:: @ 823F0F3
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	call BattleFrontier_BattleTowerLobby_EventScript_23F272
 	special sub_81A1780

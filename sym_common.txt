@@ -8,24 +8,8 @@
 	.include "link_rfu.o"
     .include "rtc.o"
     .include "battle_main.o"
-
-gRngValue: @ 3005D80
-	.space 0x4
-
-gRng2Value: @ 3005D84
-	.space 0x4
-
-gFlashMemoryPresent: @ 3005D88
-	.space 0x4
-
-gSaveBlock1Ptr: @ 3005D8C
-	.space 0x4
-
-gSaveBlock2Ptr: @ 3005D90
-	.space 0x4
-
-gPokemonStoragePtr: @ 3005D94
-	.space 0x4
+    .include "random.o"
+    .include "load_save.o"
 
 gInGameOpponentsNo: @ 3005D98
 	.space 0x4
@@ -55,17 +39,8 @@ gUnknown_03005DB4: @ 3005DB4
 gFieldLinkPlayerCount: @ 3005DB8
 	.space 0x8
 
-gUnknown_03005DC0: @ 3005DC0
-	.space 0x10
-
-gUnknown_03005DD0: @ 3005DD0
-	.space 0x18
-
-gUnknown_03005DE8: @ 3005DE8
-	.space 0x4
-
-gUnknown_03005DEC: @ 3005DEC
-	.space 0x4
+    .include "fieldmap.o"
+    .include "field_camera.o"
 
 gSelectedMapObject: @ 3005DF0
 	.space 0x4
@@ -87,9 +62,7 @@ gUnknown_030060B8: @ 30060B8
 	.space 0x4
 
     .include "tv.o"
-
-gUnknown_03006130: @ 3006130
-	.space 0x34
+    .include "mauville_old_man.o"
 
 gUnknown_03006164: @ 3006164
 	.space 0x4

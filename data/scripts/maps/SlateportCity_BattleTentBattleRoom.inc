@@ -67,7 +67,7 @@ SlateportCity_BattleTentCorridor_EventScript_209A1B:: @ 8209A1B
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	warp SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
@@ -93,7 +93,7 @@ SlateportCity_BattleTentCorridor_EventScript_209A7B:: @ 8209A7B
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special sub_81A1780
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	warp SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 @ forced stop
