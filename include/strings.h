@@ -445,5 +445,7 @@ extern const u8 gText_FiveMarks[];
 extern const u8 gText_TotalRecordWLD[];
 extern const u8 gText_PlayersBattleResults[];
 extern const u8 gText_WinLoseDraw[];
+extern const u8 gText_ColorTransparent[];
+extern const u8 gText_Slash[];
 
 #endif //GUARD_STRINGS_H

@@ -40,6 +40,7 @@
 #include "contest_effect.h"
 #include "contest_link_80FC4F4.h"
 #include "script_pokemon_util_80F87D8.h"
+#include "international_string_util.h"
 
 #define DESTROY_POINTER(ptr) \
     free(ptr); \
@@ -95,7 +96,10 @@ void sub_80DA7EC(u8);
 void sub_80DA830(u8);
 void sub_80DA874(void);
 bool8 sub_80DA8A4(void);
-void sub_80DE424(u8);
+void sub_80DAF04(u8);
+void sub_80DAF1C(u8 a0, u8 a1);
+void sub_80DAF88(u8);
+void sub_80DAFA0(u8, u8);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
 void sub_80DB2BC(void);
@@ -120,9 +124,10 @@ void sub_80DDBE8(void);
 bool8 sub_80DE1E8(u8);
 void sub_80DE224(void);
 void sub_80DE350(void);
+void sub_80DE424(u8);
 void sub_80DE69C(u8);
 void sub_80DEA20(void);
-void sub_80DEBD0(u32, u8 *, u8, u8, u8);
+void sub_80DEBD0(u32, u8 *, s32, u8, u8);
 void sub_80DEC30(const u8 *, u8);
 void sub_80DECB8(u8, u16, u8, u8, u8, u8, u8, u8);
 bool32 sub_80DED4C(void);
@@ -2384,4 +2389,55 @@ u8 sub_80DAE0C(struct Pokemon *pkmn)
     else
         retVal = 0;
     return retVal;
+}
+
+void sub_80DAEA4(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        FillWindowPixelBuffer(gUnknown_02039F26[i], 0);
+        sub_80DAF04(i);
+        sub_80DAF88(i);
+    }
+}
+
+u8 * sub_80DAED4(const u8 * src, u8 color)
+{
+    u8 * ptr = StringCopy(gDisplayedStringBattle, gText_ColorTransparent);
+    ptr[-1] = color;
+    ptr = StringCopy(ptr, src);
+
+    return ptr;
+}
+
+void sub_80DAF04(u8 a0)
+{
+    sub_80DAF1C(a0, a0 + 10);
+}
+
+void sub_80DAF1C(u8 a0, u8 a1)
+{
+    u8 buffer[32];
+    s32 offset;
+
+    StringCopy(buffer, gText_Slash);
+    StringAppend(buffer, gContestMons[a0].trainerName);
+    sub_80DAED4(buffer, a1);
+    offset = GetStringRightAlignXOffset(7, gDisplayedStringBattle, 0x60);
+    if (offset > 55)
+        offset = 55;
+    sub_80DEBD0(gUnknown_02039F26[a0], gDisplayedStringBattle, offset, 1, 7);
+}
+
+void sub_80DAF88(u8 a0)
+{
+    sub_80DAFA0(a0, a0 + 10);
+}
+
+void sub_80DAFA0(u8 a0, u8 a1)
+{
+    sub_80DAED4(gContestMons[a0].nickname, a1);
+    sub_80DEBD0(gUnknown_02039F26[a0], gDisplayedStringBattle, 5, 1, 7);
 }
