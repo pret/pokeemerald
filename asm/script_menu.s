@@ -1316,7 +1316,7 @@ _080E28CA:
 	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r1, [r4, 0xC]
-	bl sub_80B6070
+	bl FreeResourcesAndDestroySprite
 _080E28DE:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -1363,7 +1363,7 @@ ScriptMenu_ShowPokemonPic: @ 80E2900
 	asrs r2, 16
 	mov r0, r8
 	movs r3, 0
-	bl sub_80B5F84
+	bl CreateMonSprite_PicBox
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24

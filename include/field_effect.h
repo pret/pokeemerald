@@ -1,6 +1,12 @@
 #ifndef GUARD_FIELD_EFFECTS_H
 #define GUARD_FIELD_EFFECTS_H
 
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[2];
+extern const struct SpritePalette gNewGameBirchObjectPaletteInfo;
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[2];
+extern const struct SpriteTemplate gNewGameBirchObjectTemplate;
+extern const struct OamData gNewGameBirchOamAttributes;
+
 enum FieldEffectScriptIdx
 {
     FLDEFF_EXCLAMATION_MARK_ICON_1,
@@ -70,6 +76,8 @@ enum FieldEffectScriptIdx
 };
 
 extern u32 gFieldEffectArguments[8];
+extern void (*gUnknown_0203CEEC)(void);
+extern bool8 (*gUnknown_03005DB0)(void);
 
 u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
@@ -80,7 +88,12 @@ u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buf
 void sub_80B7FC8(void);
 void FieldEffectActiveListRemove(u8 id);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
-extern void (*gUnknown_0203CEEC)(void);
-extern bool8 (*gUnknown_03005DB0)(void);
+void FieldEffectActiveListAdd(u8 id);
+void FieldEffectScript_LoadTiles(u8 **script);
+void FieldEffectScript_LoadFadedPalette(u8 **script);
+void FieldEffectScript_LoadPalette(u8 **script);
+void FieldEffectScript_CallNative(u8 **script, u32 *val);
+void FieldEffectFreeTilesIfUnused(u16 tileStart);
+void FieldEffectFreePaletteIfUnused(u8 paletteNum);
 
 #endif //GUARD_FIELD_EFFECTS_H

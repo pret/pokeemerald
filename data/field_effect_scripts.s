@@ -175,7 +175,7 @@ gFieldEffectScript_DeepSandFootprints:: @ 82DBBAC
 
 gFieldEffectScript_Unknown25:: @ 82DBBB6
 	field_eff_loadfadedpal gFieldEffectObjectPaletteInfo4
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, sub_80B61A0
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_PokecenterHeal
 	field_eff_end
 
 gFieldEffectScript_Unknown26:: @ 82DBBC5
@@ -325,7 +325,7 @@ gFieldEffectScript_Unknown61:: @ 82DBCD8
 
 gFieldEffectScript_Unknown62:: @ 82DBCDE
 	field_eff_loadfadedpal gFieldEffectObjectPaletteInfo4
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo5, sub_80B62F4
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo5, FldEff_HallOfFameRecord
 	field_eff_end
 
 gFieldEffectScript_Unknown63:: @ 82DBCED

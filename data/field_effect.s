@@ -81,7 +81,7 @@ gUnknown_0855C170:: @ 855C170
 	.incbin "graphics/unknown/unknown_55C170.4bpp"
 
 	.align 2
-gUnknown_0855C1F0:: @ 855C1F0
+gFieldEffectScriptFuncs:: @ 855C1F0
 	.4byte FieldEffectCmd_loadtiles
 	.4byte FieldEffectCmd_loadfadedpal
 	.4byte FieldEffectCmd_loadpal
@@ -196,45 +196,45 @@ gUnknown_0855C300:: @ 855C300
 	.4byte gUnknown_0855C2CC
 
 	.align 2
-gUnknown_0855C304:: @ 855C304
-	spr_template 0xffff, 0x1007, gOamData_855C218, gUnknown_0855C2F8, gUnknown_855C274, gDummySpriteAffineAnimTable, sub_80B6828
+gSpriteTemplate_855C304:: @ 855C304
+	spr_template 0xffff, 0x1007, gOamData_855C218, gUnknown_0855C2F8, gUnknown_855C274, gDummySpriteAffineAnimTable, SpriteCB_PokeballGlow
 
 	.align 2
-gUnknown_0855C31C:: @ 855C31C
-	spr_template 0xffff, 0x1004, gOamData_855C220, gUnknown_0855C2F8, gUnknown_855C27C, gDummySpriteAffineAnimTable, sub_80B68AC
+gSpriteTemplate_855C31C:: @ 855C31C
+	spr_template 0xffff, 0x1004, gOamData_855C220, gUnknown_0855C2F8, gUnknown_855C27C, gDummySpriteAffineAnimTable, SpriteCB_PokecenterMonitor
 
 	.align 2
-gUnknown_0855C334:: @ 855C334
-	spr_template 0xffff, 0x1010, gOamData_855C220, gUnknown_0855C300, gUnknown_855C28C, gDummySpriteAffineAnimTable, sub_80B6970
+gSpriteTemplate_855C334:: @ 855C334
+	spr_template 0xffff, 0x1010, gOamData_855C220, gUnknown_0855C300, gUnknown_855C28C, gDummySpriteAffineAnimTable, SpriteCB_HallOfFameMonitor
 
 	.align 2
-gUnknown_0855C34C:: @ 855C34C
-	spr_template 0xffff, 0x1010, gOamData_855C26C, gUnknown_0855C300, gUnknown_855C294, gDummySpriteAffineAnimTable, sub_80B6970
+gSpriteTemplate_855C34C:: @ 855C34C
+	spr_template 0xffff, 0x1010, gOamData_855C26C, gUnknown_0855C300, gUnknown_855C294, gDummySpriteAffineAnimTable, SpriteCB_HallOfFameMonitor
 
 	.align 2
 gUnknown_0855C364:: @ 855C364
-	.4byte sub_80B6214
-	.4byte sub_80B6250
-	.4byte sub_80B628C
-	.4byte sub_80B62B4
+	.4byte PokecenterHealEffect_0
+	.4byte PokecenterHealEffect_1
+	.4byte PokecenterHealEffect_2
+	.4byte PokecenterHealEffect_3
 
 	.align 2
 gUnknown_0855C374:: @ 855C374
-	.4byte sub_80B6360
-	.4byte sub_80B63D4
-	.4byte sub_80B6404
-	.4byte sub_80B642C
+	.4byte HallOfFameRecordEffect_0
+	.4byte HallOfFameRecordEffect_1
+	.4byte HallOfFameRecordEffect_2
+	.4byte HallOfFameRecordEffect_3
 
 	.align 2
 gUnknown_0855C384:: @ 855C384
-	.4byte sub_80B64DC
-	.4byte sub_80B6574
-	.4byte sub_80B65A8
-	.4byte sub_80B66E8
-	.4byte sub_80B67DC
-	.4byte sub_80B67F8
-	.4byte sub_80B6800
-	.4byte nullsub_97
+	.4byte PokeballGlowEffect_0
+	.4byte PokeballGlowEffect_1
+	.4byte PokeballGlowEffect_2
+	.4byte PokeballGlowEffect_3
+	.4byte PokeballGlowEffect_4
+	.4byte PokeballGlowEffect_5
+	.4byte PokeballGlowEffect_6
+	.4byte PokeballGlowEffect_7
 
 	.align 1
 gUnknown_0855C3A4:: @ 855C3A4

@@ -121,6 +121,7 @@ SECTIONS {
         asm/cable_club.o(.text);
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
+        src/field_effect.o(.text);
         asm/field_effect.o(.text);
         src/scanline_effect.o(.text);
         src/option_menu.o(.text);
