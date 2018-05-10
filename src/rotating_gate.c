@@ -925,7 +925,7 @@ static s32 RotatingGate_CanRotate(u8 gateId, s16 rotationDirection)
 }
 
 #else
-ASM_DIRECT
+NAKED
 static s32 RotatingGate_CanRotate(u8 a, s16 rotationDirection)
 {
     asm(".syntax unified\n\

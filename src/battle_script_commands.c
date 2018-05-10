@@ -3608,7 +3608,7 @@ static void atk24(void)
     }
 }
 #else
-ASM_DIRECT
+NAKED
 static void atk24(void)
 {
     asm("\n\

@@ -39,6 +39,7 @@
 #include "strings.h"
 #include "contest_effect.h"
 #include "contest_link_80FC4F4.h"
+#include "script_pokemon_util_80F87D8.h"
 
 #define DESTROY_POINTER(ptr) \
     free(ptr); \
@@ -2087,15 +2088,15 @@ void sub_80DAB8C(u8 contestType, u8 rank)
                 if (r3[i] == 2)
                     continue;
             }
-            if      (contestType == 0 && gContestOpponents[i].aiPool_Cool)
+            if      (contestType == CONTEST_CATEGORY_COOL && gContestOpponents[i].aiPool_Cool)
                 opponents[opponentsCount++] = i;
-            else if (contestType == 1 && gContestOpponents[i].aiPool_Beauty)
+            else if (contestType == CONTEST_CATEGORY_BEAUTY && gContestOpponents[i].aiPool_Beauty)
                 opponents[opponentsCount++] = i;
-            else if (contestType == 2 && gContestOpponents[i].aiPool_Cute)
+            else if (contestType == CONTEST_CATEGORY_CUTE && gContestOpponents[i].aiPool_Cute)
                 opponents[opponentsCount++] = i;
-            else if (contestType == 3 && gContestOpponents[i].aiPool_Smart)
+            else if (contestType == CONTEST_CATEGORY_SMART && gContestOpponents[i].aiPool_Smart)
                 opponents[opponentsCount++] = i;
-            else if (contestType == 4 && gContestOpponents[i].aiPool_Tough)
+            else if (contestType == CONTEST_CATEGORY_TOUGH && gContestOpponents[i].aiPool_Tough)
                 opponents[opponentsCount++] = i;
         }
     }
@@ -2114,4 +2115,273 @@ void sub_80DAB8C(u8 contestType, u8 rank)
     }
 
     sub_80DA8C8(gUnknown_02039F24);
+}
+
+#ifdef NONMATCHING
+void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
+{
+    s32 i;
+    u8 opponentsCount = 0;
+    u8 opponents[100];
+    const u8 * r6;
+
+    if (gUnknown_02039F30 == 4)
+        return;
+
+    r6 = gUnknown_085898A4;
+    for (i = 0; i < ARRAY_COUNT(gContestOpponents); i++)
+    {
+        if (rank != gContestOpponents[i].whichRank)
+            continue;
+        if (isPostgame == TRUE)
+        {
+            if (r6[i] == 1)
+                continue;
+        }
+        else
+        {
+            if (r6[i] == 2)
+                continue;
+        }
+        if      (contestType == CONTEST_CATEGORY_COOL && gContestOpponents[i].aiPool_Cool)
+            opponents[opponentsCount++] = i;
+        else if (contestType == CONTEST_CATEGORY_BEAUTY && gContestOpponents[i].aiPool_Beauty)
+            opponents[opponentsCount++] = i;
+        else if (contestType == CONTEST_CATEGORY_CUTE && gContestOpponents[i].aiPool_Cute)
+            opponents[opponentsCount++] = i;
+        else if (contestType == CONTEST_CATEGORY_SMART && gContestOpponents[i].aiPool_Smart)
+            opponents[opponentsCount++] = i;
+        else if (contestType == CONTEST_CATEGORY_TOUGH && gContestOpponents[i].aiPool_Tough)
+            opponents[opponentsCount++] = i;
+    }
+    opponents[opponentsCount] = 0xFF;
+    for (i = 0; i < 4 - gUnknown_02039F30; i++)
+    {
+        u16 rnd = sub_80F903C() % opponentsCount;
+        s32 j;
+
+        gContestMons[gUnknown_02039F30 + i] = gContestOpponents[opponents[rnd]];
+        sub_80DF9D4(gContestMons[gUnknown_02039F30 + i].trainerName);
+        sub_80DF9E0(gContestMons[gUnknown_02039F30 + i].nickname, GAME_LANGUAGE);
+        for (j = rnd; opponents[j] != 0xFF; j++)
+            opponents[j] = opponents[j + 1];
+        opponentsCount--;
+    }
+}
+#else
+NAKED void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r9\n"
+                "\tmov r6, r8\n"
+                "\tpush {r6,r7}\n"
+                "\tsub sp, 0x64\n"
+                "\tmov r8, r2\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tlsls r1, 24\n"
+                "\tlsrs r2, r1, 24\n"
+                "\tmovs r7, 0\n"
+                "\tldr r0, =gUnknown_02039F30\n"
+                "\tldrb r1, [r0]\n"
+                "\tmov r9, r0\n"
+                "\tcmp r1, 0x4\n"
+                "\tbne _080DACDE\n"
+                "\tb _080DADF6\n"
+                "_080DACDE:\n"
+                "\tmovs r5, 0\n"
+                "\tldr r3, =gContestOpponents\n"
+                "\tldr r6, =gUnknown_085898A4\n"
+                "_080DACE4:\n"
+                "\tldrb r0, [r3, 0x1C]\n"
+                "\tlsls r0, 30\n"
+                "\tlsrs r0, 30\n"
+                "\tcmp r2, r0\n"
+                "\tbne _080DAD56\n"
+                "\tmov r0, r8\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _080DAD08\n"
+                "\tldrb r0, [r6]\n"
+                "\tcmp r0, 0x1\n"
+                "\tbeq _080DAD56\n"
+                "\tb _080DAD0E\n"
+                "\t.pool\n"
+                "_080DAD08:\n"
+                "\tldrb r0, [r6]\n"
+                "\tcmp r0, 0x2\n"
+                "\tbeq _080DAD56\n"
+                "_080DAD0E:\n"
+                "\tcmp r4, 0\n"
+                "\tbne _080DAD1A\n"
+                "\tldrb r0, [r3, 0x1C]\n"
+                "\tlsls r0, 29\n"
+                "\tcmp r0, 0\n"
+                "\tblt _080DAD4A\n"
+                "_080DAD1A:\n"
+                "\tcmp r4, 0x1\n"
+                "\tbne _080DAD26\n"
+                "\tldrb r0, [r3, 0x1C]\n"
+                "\tlsls r0, 28\n"
+                "\tcmp r0, 0\n"
+                "\tblt _080DAD4A\n"
+                "_080DAD26:\n"
+                "\tcmp r4, 0x2\n"
+                "\tbne _080DAD32\n"
+                "\tldrb r0, [r3, 0x1C]\n"
+                "\tlsls r0, 27\n"
+                "\tcmp r0, 0\n"
+                "\tblt _080DAD4A\n"
+                "_080DAD32:\n"
+                "\tcmp r4, 0x3\n"
+                "\tbne _080DAD3E\n"
+                "\tldrb r0, [r3, 0x1C]\n"
+                "\tlsls r0, 26\n"
+                "\tcmp r0, 0\n"
+                "\tblt _080DAD4A\n"
+                "_080DAD3E:\n"
+                "\tcmp r4, 0x4\n"
+                "\tbne _080DAD56\n"
+                "\tldrb r0, [r3, 0x1C]\n"
+                "\tlsls r0, 25\n"
+                "\tcmp r0, 0\n"
+                "\tbge _080DAD56\n"
+                "_080DAD4A:\n"
+                "\tadds r0, r7, 0\n"
+                "\tadds r1, r0, 0x1\n"
+                "\tlsls r1, 24\n"
+                "\tlsrs r7, r1, 24\n"
+                "\tadd r0, sp\n"
+                "\tstrb r5, [r0]\n"
+                "_080DAD56:\n"
+                "\tadds r3, 0x40\n"
+                "\tadds r6, 0x1\n"
+                "\tadds r5, 0x1\n"
+                "\tcmp r5, 0x5F\n"
+                "\tbls _080DACE4\n"
+                "\tmov r3, sp\n"
+                "\tadds r1, r3, r7\n"
+                "\tmovs r0, 0xFF\n"
+                "\tstrb r0, [r1]\n"
+                "\tmovs r5, 0\n"
+                "\tmov r0, r9\n"
+                "\tldrb r1, [r0]\n"
+                "\tmovs r0, 0x4\n"
+                "\tsubs r0, r1\n"
+                "\tcmp r5, r0\n"
+                "\tbge _080DADF6\n"
+                "\tldr r3, =gContestMons\n"
+                "\tmov r8, r3\n"
+                "\tmov r6, r9\n"
+                "\tmovs r0, 0x2\n"
+                "\tadd r0, r8\n"
+                "\tmov r9, r0\n"
+                "_080DAD82:\n"
+                "\tbl sub_80F903C\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r0, 16\n"
+                "\tadds r1, r7, 0\n"
+                "\tbl __modsi3\n"
+                "\tadds r1, r0, 0\n"
+                "\tlsls r1, 16\n"
+                "\tlsrs r1, 16\n"
+                "\tldrb r0, [r6]\n"
+                "\tadds r0, r5\n"
+                "\tlsls r0, 6\n"
+                "\tadd r0, r8\n"
+                "\tldr r2, =gContestOpponents\n"
+                "\tmov r3, sp\n"
+                "\tadds r4, r3, r1\n"
+                "\tldrb r1, [r4]\n"
+                "\tlsls r1, 6\n"
+                "\tadds r1, r2\n"
+                "\tmovs r2, 0x40\n"
+                "\tbl memcpy\n"
+                "\tldrb r0, [r6]\n"
+                "\tadds r0, r5\n"
+                "\tlsls r0, 6\n"
+                "\tmov r1, r8\n"
+                "\tadds r1, 0xD\n"
+                "\tadds r0, r1\n"
+                "\tbl sub_80DF9D4\n"
+                "\tldrb r0, [r6]\n"
+                "\tadds r0, r5\n"
+                "\tlsls r0, 6\n"
+                "\tadd r0, r9\n"
+                "\tmovs r1, 0x2\n"
+                "\tbl sub_80DF9E0\n"
+                "\tldrb r0, [r4]\n"
+                "\tadds r3, r5, 0x1\n"
+                "\tsubs r1, r7, 0x1\n"
+                "\tcmp r0, 0xFF\n"
+                "\tbeq _080DADE6\n"
+                "\tadds r2, r4, 0\n"
+                "_080DADDA:\n"
+                "\tldrb r0, [r2, 0x1]\n"
+                "\tstrb r0, [r2]\n"
+                "\tadds r2, 0x1\n"
+                "\tldrb r0, [r2]\n"
+                "\tcmp r0, 0xFF\n"
+                "\tbne _080DADDA\n"
+                "_080DADE6:\n"
+                "\tlsls r0, r1, 24\n"
+                "\tlsrs r7, r0, 24\n"
+                "\tadds r5, r3, 0\n"
+                "\tldrb r1, [r6]\n"
+                "\tmovs r0, 0x4\n"
+                "\tsubs r0, r1\n"
+                "\tcmp r5, r0\n"
+                "\tblt _080DAD82\n"
+                "_080DADF6:\n"
+                "\tadd sp, 0x64\n"
+                "\tpop {r3,r4}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.pool");
+}
+#endif
+
+// GetContestAvailability?
+u8 sub_80DAE0C(struct Pokemon *pkmn)
+{
+    u8 ribbon;
+    u8 retVal;
+
+    if (GetMonData(pkmn, MON_DATA_IS_EGG))
+        return 3;
+    if (GetMonData(pkmn, MON_DATA_HP) == 0)
+        return 4;
+    switch (gSpecialVar_ContestCategory)
+    {
+    case CONTEST_CATEGORY_COOL:
+        ribbon = GetMonData(pkmn, MON_DATA_COOL_RIBBON);
+        break;
+    case CONTEST_CATEGORY_BEAUTY:
+        ribbon = GetMonData(pkmn, MON_DATA_BEAUTY_RIBBON);
+        break;
+    case CONTEST_CATEGORY_CUTE:
+        ribbon = GetMonData(pkmn, MON_DATA_CUTE_RIBBON);
+        break;
+    case CONTEST_CATEGORY_SMART:
+        ribbon = GetMonData(pkmn, MON_DATA_SMART_RIBBON);
+        break;
+    case CONTEST_CATEGORY_TOUGH:
+        ribbon = GetMonData(pkmn, MON_DATA_TOUGH_RIBBON);
+        break;
+    default:
+        return 0;
+    }
+
+    // Couldn't get this to match any other way.
+    // Returns 2, 1, or 0 respectively if ribbon's rank is above, equal, or below
+    // the current contest rank.
+    if (ribbon > gSpecialVar_ContestRank)
+        retVal = 2;
+    else if (ribbon >= gSpecialVar_ContestRank)
+        retVal = 1;
+    else
+        retVal = 0;
+    return retVal;
 }

@@ -234,7 +234,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
     }
 }
 #else
-ASM_DIRECT
+NAKED
 bool8 CheckBagHasSpace(u16 itemId, u16 count)
 {
     asm_unified("push {r4-r7,lr}\n\

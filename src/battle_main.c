@@ -3591,7 +3591,7 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
     gBattleMainFunc = BattleIntroRecordMonsToDex;
 }
 #else
-ASM_DIRECT
+NAKED
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
     asm(".syntax unified\n\

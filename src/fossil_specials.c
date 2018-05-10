@@ -335,7 +335,7 @@ static void sub_81BED50(u8 taskId)
 }
 
 #else
-ASM_DIRECT
+NAKED
 static void sub_81BED50(u8 taskId)
 {
     asm("\n\
