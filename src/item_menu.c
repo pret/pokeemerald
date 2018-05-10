@@ -271,8 +271,6 @@ EWRAM_DATA struct ListBuffer2 *gUnknown_0203CE78 = 0;
 EWRAM_DATA u16 gSpecialVar_ItemId = 0;
 EWRAM_DATA struct TempWallyStruct *gUnknown_0203CE80 = 0;
 
-void (*gFieldCallback)(void);
-
 extern u8 *gPocketNamesStringsTable[];
 extern u8 gUnknown_08D9A88C[];
 extern struct ListMenuTemplate gUnknown_08613F9C;

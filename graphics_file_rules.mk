@@ -470,7 +470,7 @@ $(SLOTMACHINEGFXDIR)/reel_time_gfx.4bpp: $(SLOTMACHINEGFXDIR)/reel_time_pikachu.
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/intro_birch_beauty.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 374
+	$(GFX) $< $@ -num_tiles 822
 
 $(PSSGFXDIR)/forest_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55

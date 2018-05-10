@@ -6,8 +6,7 @@
 #include "main.h"
 #include "text.h"
 #include "new_game.h"
-
-extern void (*gFieldCallback)(void);
+#include "overworld.h"
 
 extern const u8 gText_Peekaboo[];
 

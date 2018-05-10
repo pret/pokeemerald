@@ -436,7 +436,7 @@ void Mailbox_DoRedrawMailboxMenuAfterReturn(void)
 
 static void ItemStorage_HandleReturnToProcessInput(u8 taskId)
 {
-    if (sub_80ABDFC() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         gTasks[taskId].func = ItemStorageMenuProcessInput;
 }
 
@@ -673,7 +673,7 @@ static void pal_fill_for_maplights_or_black(void)
 
 static void Mailbox_HandleReturnToProcessInput(u8 taskId)
 {
-    if(sub_80ABDFC() == TRUE)
+    if(IsWeatherNotFadingIn() == TRUE)
         gTasks[taskId].func = Mailbox_ProcessInput;
 }
 

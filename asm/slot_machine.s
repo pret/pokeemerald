@@ -5583,7 +5583,7 @@ _0812D08E:
 	lsrs r3, 24
 	adds r1, r3, 0
 	adds r2, r3, 0
-	bl sub_80B6128
+	bl MultiplyPaletteRGBComponents
 _0812D0A6:
 	pop {r4-r7}
 	pop {r0}

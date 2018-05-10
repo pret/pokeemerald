@@ -245,7 +245,7 @@ _080C72AC:
 	b _080C7318
 	.pool
 _080C730C:
-	bl sub_80ABDFC
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C7318

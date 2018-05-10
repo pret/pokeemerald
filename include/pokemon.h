@@ -482,6 +482,7 @@ extern const u8 gUnknown_08329D2A[];
 extern const u8 gStatStageRatios[][2];
 extern const u16 gUnknown_08329D54[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
+extern const struct CompressedSpritePalette gMonPaletteTable[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);

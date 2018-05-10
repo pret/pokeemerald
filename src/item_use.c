@@ -91,7 +91,6 @@ extern u8* sub_806CF78(u16);
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
 extern struct MapConnection *sub_8088A8C(s16, s16);
-extern void (*gFieldCallback)(void);
 
 void MapPostLoadHook_UseItem(void);
 void sub_80AF6D4(void);
@@ -167,7 +166,7 @@ void MapPostLoadHook_UseItem(void)
 
 void Task_CallItemUseOnFieldCallback(u8 taskId)
 {
-    if (sub_80ABDFC() == 1)
+    if (IsWeatherNotFadingIn() == 1)
         gUnknown_0203A0F4(taskId);
 }
 

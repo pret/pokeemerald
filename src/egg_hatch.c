@@ -25,6 +25,7 @@
 #include "window.h"
 #include "constants/abilities.h"
 #include "daycare.h"
+#include "overworld.h"
 #include "battle.h" // to get rid of later
 
 struct EggHatchData
@@ -43,8 +44,6 @@ struct EggHatchData
     u16 species;
     u8 textColor[3];
 };
-
-extern void (*gFieldCallback)(void);
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u8 gBattleTextboxTiles[];

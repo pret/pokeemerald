@@ -26676,7 +26676,7 @@ _081D4B3A:
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80ABE18
+	bl UpdateSpritePaletteWithWeather
 	ldrh r1, [r5, 0x10]
 	mov r0, sp
 	strh r1, [r0]

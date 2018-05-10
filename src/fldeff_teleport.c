@@ -37,7 +37,7 @@ bool8 FldEff_UseTeleport(void)
 void sub_817C94C(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_TELEPORT);
-    sub_80B7FC8();
+    CreateTeleportFieldEffectTask();
 }
 
 

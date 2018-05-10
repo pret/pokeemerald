@@ -3155,7 +3155,7 @@ SetRoute119Weather: @ 8139648
 	bl get_map_light_from_warp0
 	lsls r0, 24
 	lsrs r0, 24
-	bl is_light_level_1_2_3_5_or_6
+	bl is_map_type_1_2_3_5_or_6
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3173,7 +3173,7 @@ SetRoute123Weather: @ 8139668
 	bl get_map_light_from_warp0
 	lsls r0, 24
 	lsrs r0, 24
-	bl is_light_level_1_2_3_5_or_6
+	bl is_map_type_1_2_3_5_or_6
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
