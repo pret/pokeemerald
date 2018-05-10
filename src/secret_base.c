@@ -40,8 +40,6 @@
 #include "tv.h"
 #include "secret_base.h"
 
-extern void (*gFieldCallback)(void);
-
 extern void mapldr_default(void);
 
 // Static type declarations
@@ -416,7 +414,7 @@ bool8 sub_80E909C(void)
 void sub_80E90C8(u8 taskId)
 {
     FieldObjectTurn(&gMapObjects[gPlayerAvatar.mapObjectId], DIR_NORTH);
-    if (sub_80ABDFC() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         EnableBothScriptContexts();
         DestroyTask(taskId);

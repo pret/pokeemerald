@@ -29,6 +29,7 @@
 #include "battle_message.h"
 #include "safari_zone.h"
 #include "lilycove_lady.h"
+#include "overworld.h"
 
 #define POKEBLOCK_MAX_FEEL 99
 #define FIELD_E75_COUNT 7
@@ -70,7 +71,6 @@ enum
 };
 
 extern u16 gSpecialVar_ItemId;
-extern void (*gFieldCallback)(void);
 
 extern const u16 gUnknown_0860F074[];
 

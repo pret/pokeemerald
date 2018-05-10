@@ -40,6 +40,9 @@ void sub_808D074(u8);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
 u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
 void sub_808C114(void);
-u8 GetPlayerAvatarGraphicsIdByCurrentState();
+u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
+void SetPlayerAvatarStateMask(u8 a);
+u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
+u8 sub_8093540(u32);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

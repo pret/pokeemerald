@@ -13,5 +13,6 @@
 u8 sub_8154228(void);
 bool8 sub_8155DA0(struct MapObject *);
 void sub_8155D78(struct MapObject *);
+void sub_81555AC(u8, u8);
 
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

@@ -98,7 +98,7 @@ gFieldEffectScript_Ripple:: @ 82DBB02
 	field_eff_end
 
 gFieldEffectScript_FieldMoveShowMon:: @ 82DBB0C
-	field_eff_callnative sub_80B849C
+	field_eff_callnative FldEff_FieldMoveShowMon
 	field_eff_end
 
 gFieldEffectScript_Ash:: @ 82DBB12
@@ -110,7 +110,7 @@ gFieldEffectScript_SurfBlob:: @ 82DBB1C
 	field_eff_end
 
 gFieldEffectScript_UseSurf:: @ 82DBB22
-	field_eff_callnative sub_80B8D44
+	field_eff_callnative FldEff_UseSurf
 	field_eff_end
 
 gFieldEffectScript_GroundImpactDust:: @ 82DBB28
@@ -195,15 +195,15 @@ gFieldEffectScript_MountainDisguise:: @ 82DBBD7
 	field_eff_end
 
 gFieldEffectScript_Unknown30:: @ 82DBBDD
-	field_eff_callnative sub_80B90CC
+	field_eff_callnative FldEff_NPCFlyOut
 	field_eff_end
 
 gFieldEffectScript_UseFly:: @ 82DBBE3
-	field_eff_callnative sub_80B91A4
+	field_eff_callnative FldEff_UseFly
 	field_eff_end
 
 gFieldEffectScript_FlyIn:: @ 82DBBE9
-	field_eff_callnative sub_80B97C0
+	field_eff_callnative FldEff_FlyIn
 	field_eff_end
 
 gFieldEffectScript_ExclamationMarkIcon2:: @ 82DBBEF
@@ -247,11 +247,11 @@ gFieldEffectScript_HotSpringsWater:: @ 82DBC35
 	field_eff_end
 
 gFieldEffectScript_Unknown43:: @ 82DBC3F
-	field_eff_callnative oei_waterfall
+	field_eff_callnative FldEff_UseWaterfall
 	field_eff_end
 
 gFieldEffectScript_Unknown44:: @ 82DBC45
-	field_eff_callnative sub_80B74D0
+	field_eff_callnative FldEff_UseDive
 	field_eff_end
 
 gFieldEffectScript_Unknown45:: @ 82DBC4B
@@ -272,11 +272,11 @@ gFieldEffectScript_Unknown48:: @ 82DBC66
 	field_eff_end
 
 gFieldEffectScript_JumpOutOfAsh:: @ 82DBC6C
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, sub_80B7C48
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_PopOutOfAsh
 	field_eff_end
 
 gFieldEffectScript_Unknown50:: @ 82DBC76
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, sub_80B79F4
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_LavaridgeGymWarp
 	field_eff_end
 
 gFieldEffectScript_Unknown51:: @ 82DBC80
@@ -312,7 +312,7 @@ gFieldEffectScript_Unknown58:: @ 82DBCC2
 	field_eff_end
 
 gFieldEffectScript_FieldMoveShowMonInit:: @ 82DBCCC
-	field_eff_callnative sub_80B84F8
+	field_eff_callnative FldEff_FieldMoveShowMonInit
 	field_eff_end
 
 gFieldEffectScript_Unknown60:: @ 82DBCD2

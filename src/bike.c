@@ -13,7 +13,6 @@
 extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
 
-extern u8 sub_8093514(u8 direction);
 extern u8 sub_808B980(u8 direction);
 extern u8 sub_808B9BC(u8 direction);
 extern u8 sub_808B9A4(u8 direction);

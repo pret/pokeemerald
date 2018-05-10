@@ -23,6 +23,8 @@ extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;
 extern u16 *gBGTilemapBuffers3;
 
+extern void (*gFieldCallback)(void);
+
 // Exported ROM declarations
 extern const struct UCoords32 gUnknown_08339D64[];
 
@@ -101,7 +103,7 @@ u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
 u8 GetMapTypeByWarpData(struct WarpData *warp);
 u8 Overworld_GetMapTypeOfSaveblockLocation(void);
 u8 get_map_light_from_warp0(void);
-bool8 is_light_level_1_2_3_5_or_6(u8 mapType);
+bool8 is_map_type_1_2_3_5_or_6(u8 mapType);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
 bool8 Overworld_MapTypeIsIndoors(u8 mapType);
 u8 sav1_saved_warp2_map_get_name(void);

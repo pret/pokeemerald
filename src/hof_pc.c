@@ -7,7 +7,6 @@
 #include "script_menu.h"
 #include "task.h"
 
-extern void (*gFieldCallback)(void);
 extern void (*gUnknown_0300485C)(void);
 
 extern void Overworld_PlaySpecialMapMusic(void);

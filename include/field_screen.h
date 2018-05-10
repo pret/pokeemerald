@@ -7,7 +7,7 @@
 
 // Exported ROM declarations
 void pal_fill_black(void);
-bool8 sub_80ABDFC(void);
+bool8 IsWeatherNotFadingIn(void);
 void sub_80AF168(void);
 void UpdateWeatherPerDay(u16 days);
 void sub_80AC3D0(void);

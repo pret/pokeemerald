@@ -38,6 +38,7 @@
 #include "roamer.h"
 // #include "rotating_gate.h"
 #include "safari_zone.h"
+#include "save.h"
 #include "script.h"
 // #include "script_pokemon_80C4.h"
 #include "secret_base.h"
@@ -87,12 +88,11 @@ extern const struct MapHeader *const *const gMapGroups[];
 extern const s32 gMaxFlashLevel;
 extern const u16 gUnknown_82EC7C4[];
 
-extern u16 gSaveFileStatus;
-extern u16 gUnknown_03005DA8;
-extern bool8 (*gUnknown_03005DB0)(void);
-extern u8 gUnknown_03005DB4;
-extern u8 gFieldLinkPlayerCount;
-extern MainCallback gFieldCallback;
+u16 gUnknown_03005DA8;
+MainCallback gFieldCallback;
+bool8 (*gUnknown_03005DB0)(void);
+u8 gUnknown_03005DB4;
+u8 gFieldLinkPlayerCount;
 
 // functions
 extern void HealPlayerParty(void);
@@ -713,7 +713,7 @@ void sub_8084D5C(s16 a1, s16 a2)
 {
     u8 currMapType = Overworld_GetMapTypeOfSaveblockLocation();
     u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
-    if (is_light_level_1_2_3_5_or_6(currMapType) && is_light_level_1_2_3_5_or_6(destMapType) != TRUE)
+    if (is_map_type_1_2_3_5_or_6(currMapType) && is_map_type_1_2_3_5_or_6(destMapType) != TRUE)
         sub_8084DD4(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, a1 - 7, a2 - 6);
 }
 
@@ -872,7 +872,7 @@ static void mli0_load_map(u32 a1)
             LoadMapObjTemplatesFromHeader();
     }
 
-    v2 = is_light_level_1_2_3_5_or_6(gMapHeader.mapType);
+    v2 = is_map_type_1_2_3_5_or_6(gMapHeader.mapType);
     indoors = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
 
     sub_80EB218();
@@ -1365,7 +1365,7 @@ u8 get_map_light_from_warp0(void)
     return GetMapTypeByWarpData(&gUnknown_020322DC);
 }
 
-bool8 is_light_level_1_2_3_5_or_6(u8 mapType)
+bool8 is_map_type_1_2_3_5_or_6(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
      || mapType == MAP_TYPE_TOWN
