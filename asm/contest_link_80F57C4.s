@@ -3104,7 +3104,7 @@ sub_80F7310: @ 80F7310
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r1, =gUnknown_02039F00
+	ldr r1, =gContestMonConditions
 	lsrs r0, 23
 	adds r0, r1
 	movs r1, 0
@@ -3847,7 +3847,7 @@ _080F78E4:
 	mov r8, r5
 	mov r10, r5
 _080F78EA:
-	ldr r0, =gUnknown_02039F00
+	ldr r0, =gContestMonConditions
 	mov r1, r8
 	lsls r7, r1, 1
 	adds r0, r7, r0
@@ -5027,7 +5027,7 @@ sub_80F82B4: @ 80F82B4
 	movs r1, 0
 	movs r2, 0
 	ldr r5, =gSpecialVar_0x8004
-	ldr r4, =gUnknown_02039F00
+	ldr r4, =gContestMonConditions
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
@@ -5060,7 +5060,7 @@ _080F82DC:
 	thumb_func_start sub_80F82FC
 sub_80F82FC: @ 80F82FC
 	ldr r2, =gSpecialVar_0x8004
-	ldr r1, =gUnknown_02039F00
+	ldr r1, =gContestMonConditions
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1

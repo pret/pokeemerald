@@ -1262,7 +1262,7 @@ _080FCF80:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCFBE
-	ldr r0, =gUnknown_02039F00
+	ldr r0, =gContestMonConditions
 	movs r1, 0x8
 	bl sub_80FC4F4
 	cmp r0, 0x1
@@ -1274,7 +1274,7 @@ _080FCF9C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCFBE
-	ldr r0, =gUnknown_02039F00
+	ldr r0, =gContestMonConditions
 	ldr r1, =gUnknown_02039F2B
 	ldrb r1, [r1]
 	lsls r1, 8

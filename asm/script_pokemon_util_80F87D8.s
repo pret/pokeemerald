@@ -218,7 +218,7 @@ sub_80F8970: @ 80F8970
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r0, =gUnknown_02039F00
+	ldr r0, =gContestMonConditions
 	mov r12, r0
 	ldr r1, =gSpecialVar_0x8006
 	mov r9, r1

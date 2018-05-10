@@ -1167,7 +1167,7 @@ sub_8156B88: @ 8156B88
 	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r1, =gUnknown_02039F00
+	ldr r1, =gContestMonConditions
 	adds r0, r2, 0
 	adds r0, 0x41
 	ldrb r0, [r0]
@@ -3729,7 +3729,7 @@ sub_8157F5C: @ 8157F5C
 	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r3, [r1, 0xC]
-	ldr r2, =gUnknown_02039F00
+	ldr r2, =gContestMonConditions
 	lsrs r0, 23
 	adds r0, r2
 	adds r1, r3, 0

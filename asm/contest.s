@@ -5,330 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80DAFE0
-sub_80DAFE0: @ 80DAFE0
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	lsls r1, 24
-	lsrs r0, r1, 24
-	cmp r0, 0x4
-	bhi _080DB06C
-	lsls r0, 2
-	ldr r1, =_080DAFFC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080DAFFC:
-	.4byte _080DB010
-	.4byte _080DB028
-	.4byte _080DB040
-	.4byte _080DB050
-	.4byte _080DB06C
-_080DB010:
-	ldr r0, =gContestMons
-	lsls r2, 6
-	adds r1, r2, r0
-	adds r3, r1, 0
-	adds r3, 0x26
-	ldrb r5, [r3]
-	adds r3, 0x4
-	ldrb r4, [r3]
-	adds r1, 0x27
-	b _080DB07E
-	.pool
-_080DB028:
-	ldr r0, =gContestMons
-	lsls r2, 6
-	adds r1, r2, r0
-	adds r3, r1, 0
-	adds r3, 0x27
-	ldrb r5, [r3]
-	subs r3, 0x1
-	ldrb r4, [r3]
-	adds r1, 0x28
-	b _080DB07E
-	.pool
-_080DB040:
-	ldr r1, =gContestMons
-	lsls r2, 6
-	adds r3, r2, r1
-	adds r0, r3, 0
-	adds r0, 0x28
-	b _080DB05A
-	.pool
-_080DB050:
-	ldr r1, =gContestMons
-	lsls r2, 6
-	adds r3, r2, r1
-	adds r0, r3, 0
-	adds r0, 0x29
-_080DB05A:
-	ldrb r5, [r0]
-	subs r0, 0x1
-	ldrb r4, [r0]
-	adds r0, 0x2
-	ldrb r3, [r0]
-	adds r0, r1, 0
-	b _080DB080
-	.pool
-_080DB06C:
-	ldr r0, =gContestMons
-	lsls r2, 6
-	adds r1, r2, r0
-	adds r3, r1, 0
-	adds r3, 0x2A
-	ldrb r5, [r3]
-	subs r3, 0x1
-	ldrb r4, [r3]
-	adds r1, 0x26
-_080DB07E:
-	ldrb r3, [r1]
-_080DB080:
-	adds r1, r2, r0
-	adds r1, 0x2B
-	adds r0, r4, r3
-	ldrb r1, [r1]
-	adds r0, r1
-	asrs r0, 1
-	adds r0, r5, r0
-	lsls r0, 16
-	lsrs r0, 16
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80DAFE0
-
-	thumb_func_start sub_80DB09C
-sub_80DB09C: @ 80DB09C
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r4, 0
-	ldr r5, =gUnknown_02039F00
-_080DB0A6:
-	lsls r0, r4, 24
-	lsrs r0, 24
-	adds r1, r6, 0
-	bl sub_80DAFE0
-	strh r0, [r5]
-	adds r5, 0x2
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _080DB0A6
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80DB09C
-
-	thumb_func_start sub_80DB0C4
-sub_80DB0C4: @ 80DB0C4
-	push {r4,r5,lr}
-	ldr r0, =gUnknown_08587C00
-	bl LoadCompressedObjectPic
-	ldr r0, =gContest2Pal
-	movs r1, 0x88
-	lsls r1, 1
-	movs r2, 0x20
-	bl LoadCompressedPalette
-	ldr r0, =gSpriteTemplate_8587BE8
-	movs r1, 0x70
-	movs r2, 0x24
-	movs r3, 0x1E
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r4, =gSprites
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	adds r5, r2, r4
-	ldrb r3, [r5, 0x5]
-	movs r1, 0xF
-	ands r1, r3
-	movs r3, 0x10
-	orrs r1, r3
-	strb r1, [r5, 0x5]
-	adds r4, 0x1C
-	adds r2, r4
-	ldr r1, =SpriteCallbackDummy
-	str r1, [r2]
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80DB0C4
-
-	thumb_func_start sub_80DB120
-sub_80DB120: @ 80DB120
-	push {lr}
-	ldr r0, =gUnknown_08587C08
-	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08587C10
-	bl LoadCompressedObjectPalette
-	ldr r0, =gSpriteTemplate_8587C18
-	movs r1, 0x60
-	movs r2, 0xA
-	movs r3, 0x1D
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gSprites
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	adds r2, r1
-	movs r1, 0x3E
-	adds r1, r2
-	mov r12, r1
-	ldrb r1, [r1]
-	movs r3, 0x4
-	orrs r1, r3
-	mov r3, r12
-	strb r1, [r3]
-	ldrh r1, [r2, 0x4]
-	lsls r1, 22
-	lsrs r1, 22
-	strh r1, [r2, 0x2E]
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80DB120
-
-	thumb_func_start sub_80DB174
-sub_80DB174: @ 80DB174
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r7, r1, 0
-	adds r6, r2, 0
-	adds r4, r3, 0
-	lsls r0, 16
-	lsrs r5, r0, 16
-	adds r0, r5, 0
-	bl sub_80DE84C
-	adds r5, r0, 0
-	ldr r0, =gContestPlayerMonIndex
-	ldrb r0, [r0]
-	cmp r4, r0
-	bne _080DB1B8
-	lsls r0, r5, 3
-	ldr r1, =gMonBackPicTable
-	adds r0, r1
-	ldr r1, =gMonSpritesGfxPtr
-	ldr r1, [r1]
-	ldr r1, [r1, 0x4]
-	adds r2, r5, 0
-	adds r3, r6, 0
-	bl HandleLoadSpecialPokePic_2
-	b _080DB1CC
-	.pool
-_080DB1B8:
-	lsls r0, r5, 3
-	ldr r1, =gMonBackPicTable
-	adds r0, r1
-	ldr r1, =gMonSpritesGfxPtr
-	ldr r1, [r1]
-	ldr r1, [r1, 0x4]
-	adds r2, r5, 0
-	adds r3, r6, 0
-	bl HandleLoadSpecialPokePic_DontHandleDeoxys
-_080DB1CC:
-	adds r0, r5, 0
-	adds r1, r7, 0
-	adds r2, r6, 0
-	bl GetFrontSpritePalFromSpeciesAndPersonality
-	movs r1, 0x90
-	lsls r1, 1
-	movs r2, 0x20
-	bl LoadCompressedPalette
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_806A068
-	ldr r4, =gUnknown_0202499C
-	movs r0, 0x2
-	adds r1, r5, 0
-	movs r2, 0
-	bl sub_80A600C
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r4, 0
-	movs r1, 0x70
-	movs r3, 0x1E
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r0, =gSprites
-	mov r8, r0
-	lsls r0, r7, 4
-	adds r0, r7
-	lsls r6, r0, 2
-	mov r0, r8
-	adds r4, r6, r0
-	ldrb r1, [r4, 0x5]
-	movs r0, 0xF
-	ands r0, r1
-	movs r1, 0x20
-	orrs r0, r1
-	movs r1, 0xD
-	negs r1, r1
-	ands r0, r1
-	movs r1, 0x8
-	orrs r0, r1
-	strb r0, [r4, 0x5]
-	movs r0, 0x2
-	bl sub_80A82E4
-	adds r1, r4, 0
-	adds r1, 0x43
-	strb r0, [r1]
-	mov r0, r8
-	adds r0, 0x1C
-	adds r0, r6, r0
-	ldr r1, =SpriteCallbackDummy
-	str r1, [r0]
-	ldrb r0, [r4, 0x5]
-	lsrs r0, 4
-	strh r0, [r4, 0x2E]
-	strh r5, [r4, 0x32]
-	adds r0, r5, 0
-	bl IsSpeciesNotUnown
-	lsls r0, 24
-	cmp r0, 0
-	beq _080DB278
-	mov r0, r8
-	adds r0, 0x10
-	adds r0, r6, r0
-	ldr r1, =gUnknown_082FF6C0
-	b _080DB280
-	.pool
-_080DB278:
-	mov r0, r8
-	adds r0, 0x10
-	adds r0, r6, r0
-	ldr r1, =gUnknown_082FF694
-_080DB280:
-	str r1, [r0]
-	lsls r0, r7, 4
-	adds r0, r7
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	movs r1, 0
-	bl StartSpriteAffineAnim
-	adds r0, r7, 0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80DB174
-
 	thumb_func_start IsSpeciesNotUnown
 IsSpeciesNotUnown: @ 80DB2A8
 	push {lr}
@@ -1675,7 +1351,7 @@ sub_80DBCE0: @ 80DBCE0
 	strh r0, [r1]
 	ldr r2, =gUnknown_02039F08
 	adds r2, r4, r2
-	ldr r1, =gUnknown_02039F00
+	ldr r1, =gContestMonConditions
 	adds r4, r1
 	ldrh r4, [r4]
 	adds r0, r4
@@ -1785,7 +1461,7 @@ _080DBDB8:
 	mov r4, sp
 	ldr r6, =gUnknown_02039F08
 	ldr r2, [sp, 0x64]
-	ldr r5, =gUnknown_02039F00
+	ldr r5, =gContestMonConditions
 	ldr r3, [sp, 0x68]
 _080DBDD2:
 	mov r7, r9
@@ -3918,7 +3594,7 @@ _080DCECC:
 	movs r4, 0
 	cmp r4, r5
 	bge _080DCF48
-	ldr r7, =gUnknown_02039F00
+	ldr r7, =gContestMonConditions
 	mov r9, r7
 	lsls r0, r5, 1
 	adds r1, r0, 0
@@ -8374,11 +8050,11 @@ _080DF2EE:
 	strb r0, [r2, 0xD]
 _080DF30A:
 	movs r5, 0
-	ldr r2, =gUnknown_02039F00
+	ldr r2, =gContestMonConditions
 	add r2, r10
 	movs r6, 0
 	ldrsh r1, [r2, r6]
-	ldr r7, =gUnknown_02039F00
+	ldr r7, =gContestMonConditions
 	movs r3, 0
 	ldrsh r0, [r7, r3]
 	cmp r1, r0
@@ -8417,12 +8093,12 @@ _080DF354:
 	mov r12, r3
 	mov r8, r3
 	movs r5, 0
-	ldr r0, =gUnknown_02039F00
+	ldr r0, =gContestMonConditions
 	add r0, r10
 	movs r7, 0
 	ldrsh r6, [r0, r7]
 	str r6, [sp, 0x34]
-	ldr r2, =gUnknown_02039F00
+	ldr r2, =gContestMonConditions
 	ldr r0, =gUnknown_02039F18
 	mov r1, r10
 	adds r6, r1, r0
@@ -8665,7 +8341,7 @@ _080DF528:
 	lsls r2, r7, 1
 	lsls r4, r7, 4
 	mov r8, r4
-	ldr r1, =gUnknown_02039F00
+	ldr r1, =gContestMonConditions
 	adds r0, r2, r1
 	movs r6, 0
 	ldrsh r5, [r0, r6]

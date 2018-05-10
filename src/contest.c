@@ -41,6 +41,7 @@
 #include "contest_link_80FC4F4.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"
+#include "data2.h"
 
 #define DESTROY_POINTER(ptr) \
     free(ptr); \
@@ -102,6 +103,8 @@ void sub_80DAF88(u8);
 void sub_80DAFA0(u8, u8);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
+u8 sub_80DB174(u16, u32, u32, u32);
+u16 sub_80DE84C(u16);
 void sub_80DB2BC(void);
 void sub_80DB89C(void);
 u16 sub_80DB8B8(u8);
@@ -142,7 +145,6 @@ void sub_80DD080(u8);
 void sub_80DF080(u8);
 void sub_80DF750(void);
 void sub_80DE9DC(u8);
-u8 sub_80DB174(u16, u32, u32, u32);
 void sub_80DCBE8(u8, u8);
 u8 sub_80DC9EC(u8);
 u16 sub_80DE834(u16);
@@ -171,7 +173,7 @@ void sub_80DF9D4(u8 *);
 void sub_80DF9E0(u8 *, s32);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
-EWRAM_DATA s16 gUnknown_02039F00[4] = {0};
+EWRAM_DATA s16 gContestMonConditions[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F08[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F10[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F18[4] = {0};
@@ -234,6 +236,14 @@ extern const u8 gText_0827D56F[];
 extern const u8 gText_0827D597[];
 extern const struct ContestPokemon gContestOpponents[96];
 extern const u8 gUnknown_085898A4[96];
+extern const struct CompressedSpriteSheet gUnknown_08587C00;
+extern const u8 gContest2Pal[];
+extern const struct SpriteTemplate gSpriteTemplate_8587BE8;
+extern const struct CompressedSpriteSheet gUnknown_08587C08;
+extern const struct CompressedSpritePalette gUnknown_08587C10;
+extern const struct SpriteTemplate gSpriteTemplate_8587C18;
+extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
+extern const union AffineAnimCmd *const gUnknown_082FF694[];
 
 void TaskDummy1(u8 taskId)
 {
@@ -2440,4 +2450,103 @@ void sub_80DAFA0(u8 a0, u8 a1)
 {
     sub_80DAED4(gContestMons[a0].nickname, a1);
     sub_80DEBD0(gUnknown_02039F26[a0], gDisplayedStringBattle, 5, 1, 7);
+}
+
+u16 sub_80DAFE0(u8 who, u8 contestCategory)
+{
+    u8 statMain;
+    u8 statSub1;
+    u8 statSub2;
+
+    switch (contestCategory)
+    {
+        case CONTEST_CATEGORY_COOL:
+            statMain = gContestMons[who].cool;
+            statSub1 = gContestMons[who].tough;
+            statSub2 = gContestMons[who].beauty;
+            break;
+        case CONTEST_CATEGORY_BEAUTY:
+            statMain = gContestMons[who].beauty;
+            statSub1 = gContestMons[who].cool;
+            statSub2 = gContestMons[who].cute;
+            break;
+        case CONTEST_CATEGORY_CUTE:
+            statMain = gContestMons[who].cute;
+            statSub1 = gContestMons[who].beauty;
+            statSub2 = gContestMons[who].smart;
+            break;
+        case CONTEST_CATEGORY_SMART:
+            statMain = gContestMons[who].smart;
+            statSub1 = gContestMons[who].cute;
+            statSub2 = gContestMons[who].tough;
+            break;
+        case CONTEST_CATEGORY_TOUGH:
+        default:
+            statMain = gContestMons[who].tough;
+            statSub1 = gContestMons[who].smart;
+            statSub2 = gContestMons[who].cool;
+            break;
+    }
+    return statMain + (statSub1 + statSub2 + gContestMons[who].sheen) / 2;
+}
+
+void sub_80DB09C(u8 a0)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+        gContestMonConditions[i] = sub_80DAFE0(i, a0);
+}
+
+u8 sub_80DB0C4(void)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPic(&gUnknown_08587C00);
+    LoadCompressedPalette(gContest2Pal, 0x110, 32);
+    spriteId = CreateSprite(&gSpriteTemplate_8587BE8, 112, 36, 30);
+    gSprites[spriteId].oam.paletteNum = 1;
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    return spriteId;
+}
+
+u8 sub_80DB120(void)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPic(&gUnknown_08587C08);
+    LoadCompressedObjectPalette(&gUnknown_08587C10);
+    spriteId = CreateSprite(&gSpriteTemplate_8587C18, 96, 10, 29);
+    gSprites[spriteId].invisible = TRUE;
+    gSprites[spriteId].data[0] = gSprites[spriteId].oam.tileNum;
+    return spriteId;
+}
+
+u8 sub_80DB174(u16 species, u32 otId, u32 personality, u32 index)
+{
+    u8 spriteId;
+    species = sub_80DE84C(species);
+
+    if (index == gContestPlayerMonIndex)
+        HandleLoadSpecialPokePic_2(gMonBackPicTable + species, gMonSpritesGfxPtr->sprites[0], species, personality);
+    else
+        HandleLoadSpecialPokePic_DontHandleDeoxys(gMonBackPicTable + species, gMonSpritesGfxPtr->sprites[0], species, personality);
+
+    LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x120, 0x20);
+    sub_806A068(species, 0);
+
+    spriteId = CreateSprite(&gUnknown_0202499C, 0x70, sub_80A600C(2, species, 0), 30);
+    gSprites[spriteId].oam.paletteNum = 2;
+    gSprites[spriteId].oam.priority = 2;
+    gSprites[spriteId].subpriority = sub_80A82E4(2);
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
+    gSprites[spriteId].data[2] = species;
+    if (IsSpeciesNotUnown(species))
+        gSprites[spriteId].affineAnims = gUnknown_082FF6C0;
+    else
+        gSprites[spriteId].affineAnims = gUnknown_082FF694;
+    StartSpriteAffineAnim(gSprites + spriteId, 0);
+
+    return spriteId;
 }
