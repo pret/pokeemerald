@@ -161,7 +161,7 @@ SECTIONS {
         src/bike.o(.text);
         asm/easy_chat.o(.text);
         src/mon_markings.o(.text);
-        asm/mauville_old_man.o(.text);
+        src/mauville_old_man.o(.text);
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
         src/dewford_trend.o(.text);
@@ -454,7 +454,7 @@ SECTIONS {
         src/bike.o(.rodata);
         data/easy_chat.o(.rodata);
         src/mon_markings.o(.rodata);
-        data/mauville_old_man.o(.rodata);
+        src/mauville_old_man.o(.rodata);
         src/mail.o(.rodata);
         data/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);

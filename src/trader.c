@@ -15,7 +15,7 @@
 #include "task.h"
 #include "script_menu.h"
 
-static const u8 * const gUnknown_085B09E4[] =
+static const u8 * const sDefaultTraderNames[] =
 {
     gText_Tristan,
     gText_Philip,
@@ -23,7 +23,7 @@ static const u8 * const gUnknown_085B09E4[] =
     gText_Roberto,
 };
 
-static const u8 gTraderDecorations[] =
+static const u8 sDefaultTraderDecorations[] =
 {
     DECOR_DUSKULL_DOLL,
     DECOR_BALL_CUSHION,
@@ -41,13 +41,13 @@ void TraderSetup(void)
 
     for (i = 0; i < 4; i++)
     {
-        StringCopy(trader->unk5[i], gUnknown_085B09E4[i]);
-        trader->unk1[i] = gTraderDecorations[i];
+        StringCopy(trader->playerNames[i], sDefaultTraderNames[i]);
+        trader->decorIds[i] = sDefaultTraderDecorations[i];
         trader->language[i] = GAME_LANGUAGE;
     }
 }
 
-void sub_8133A60(void)
+void Trader_ResetFlag(void)
 {
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
     trader->alreadyTraded = FALSE;
@@ -64,10 +64,10 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     for (i = 0; i < 4; i++)
     {
         s32 curWidth;
-        if (trader->unk1[i] > NUM_DECORATIONS)
+        if (trader->decorIds[i] > NUM_DECORATIONS)
             curWidth = fiveMarksWidth;
         else
-            curWidth = GetStringWidth(1, gDecorations[trader->unk1[i]].name, 0);
+            curWidth = GetStringWidth(1, gDecorations[trader->decorIds[i]].name, 0);
         if (curWidth > windowWidth)
             windowWidth = curWidth;
     }
@@ -76,10 +76,10 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     SetWindowBorderStyle(data[3], FALSE, 0x214, 14);
     for (i = 0; i < 4; i++)
     {
-        if (trader->unk1[i] > NUM_DECORATIONS)
+        if (trader->decorIds[i] > NUM_DECORATIONS)
             PrintTextOnWindow(data[3], 1, gText_FiveMarks, 8, 16 * i + 1, 255, NULL);
         else
-            PrintTextOnWindow(data[3], 1, gDecorations[trader->unk1[i]].name, 8, 16 * i + 1, 255, NULL);
+            PrintTextOnWindow(data[3], 1, gDecorations[trader->decorIds[i]].name, 8, 16 * i + 1, 255, NULL);
     }
     PrintTextOnWindow(data[3], 1, gText_Exit, 8, 16 * i + 1, 255, NULL);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[3], 5, 0);
@@ -123,9 +123,9 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
         default:
             PlaySE(SE_SELECT);
             gSpecialVar_0x8005 = input;
-            StringCopy(gStringVar1, trader->unk5[input]);
+            StringCopy(gStringVar1, trader->playerNames[input]);
             ConvertInternationalString(gStringVar1, trader->language[input]);
-            sub_8133BE4(taskId, trader->unk1[input]);
+            sub_8133BE4(taskId, trader->decorIds[input]);
             break;
     }
 }
@@ -196,8 +196,8 @@ void ScrSpecial_TraderDoDecorationTrade(void)
 
     DecorationRemove(gSpecialVar_0x8006);
     DecorationAdd(gSpecialVar_0x8004);
-    StringCopy(trader->unk5[gSpecialVar_0x8005], gSaveBlock2Ptr->playerName);
-    trader->unk1[gSpecialVar_0x8005] = gSpecialVar_0x8006;
+    StringCopy(trader->playerNames[gSpecialVar_0x8005], gSaveBlock2Ptr->playerName);
+    trader->decorIds[gSpecialVar_0x8005] = gSpecialVar_0x8006;
     trader->language[gSpecialVar_0x8005] = GAME_LANGUAGE;
     trader->alreadyTraded = TRUE;
 }
