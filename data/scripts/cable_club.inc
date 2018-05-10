@@ -450,8 +450,8 @@ OldaleTown_PokemonCenter_2F_EventScript_276F60:: @ 8276F60
 
 OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
 	special HealPlayerParty
-	special copy_player_party_to_sav1
-	special copy_bags_and_unk_data_from_save_blocks
+	special SavePlayerParty
+	special LoadPlayerBag
 	copyvar VAR_0x4087, VAR_0x8004
 	messageautoscroll OldaleTown_PokemonCenter_2F_Text_278197
 	waitmessage
@@ -787,9 +787,9 @@ MossdeepCity_GameCorner_1F_Movement_277360: @ 8277360
 gUnknown_08277365:: @ 8277365
 	lockall
 	setvar VAR_0x8004, 0
-	special sub_813C4BC
+	special ShowLinkBattleRecords
 	waitbuttonpress
-	special sub_813C5A0
+	special RemoveRecordsWindow
 	releaseall
 	end
 

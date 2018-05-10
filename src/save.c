@@ -4,17 +4,15 @@
 #include "constants/game_stat.h"
 #include "task.h"
 #include "decompress.h"
+#include "load_save.h"
+#include "overworld.h"
 
 // for the chunk declarations
-extern struct SaveBlock2 gSaveblock2;
-extern struct SaveBlock1 gSaveblock1;
-extern struct PokemonStorage gPokemonStorage;
 
 extern struct SaveSectionLocation gRamSaveSectionLocations[0xE];
-extern u8 gDecompressionBuffer[];
-extern u32 gFlashMemoryPresent;
 extern u16 gUnknown_03006294;
 extern bool8 gSoftResetDisabled;
+extern u32 gUnknown_0203CF5C;
 
 // Divide save blocks into individual chunks to be written to flash sectors
 
@@ -24,13 +22,13 @@ extern bool8 gSoftResetDisabled;
 
 /*
  * Sector Layout:
- * 
+ *
  * Sectors 0 - 13:      Save Slot 1
  * Sectors 14 - 27:     Save Slot 2
  * Sectors 28 - 29:     Hall of Fame
  * Sector 30:           e-Reader/Mystery Gift Stuff (note: e-Reader is deprecated in Emerald US)
  * Sector 31:           Recorded Battle
- * 
+ *
  * There are two save slots for saving the player's game data. We alternate between
  * them each time the game is saved, so that if the current save slot is corrupt,
  * we can load the previous one. We also rotate the sectors in each save slot
@@ -41,7 +39,7 @@ extern bool8 gSoftResetDisabled;
 
 // (u8 *)structure was removed from the first statement of the macro in Emerald.
 // This is because malloc is used to allocate addresses so storing the raw
-// addresses should not be done in the offsets information. 
+// addresses should not be done in the offsets information.
 #define SAVEBLOCK_CHUNK(structure, chunkNum)                                \
 {                                                                           \
     chunkNum * SECTOR_DATA_SIZE,                                            \
@@ -69,8 +67,10 @@ const struct SaveSectionOffsets gSaveSectionOffsets[] =
 };
 
 extern void DoSaveFailedScreen(u8); // save_failed_screen
-extern void LoadSerializedGame(void); // load_save
 extern bool32 ProgramFlashSectorAndVerify(u8 sector, u8 *data);
+extern void save_serialize_map(void);
+extern void sub_800ADF8(void);
+extern bool8 sub_800A520(void);
 
 // iwram common
 u16 gLastWrittenSector;
@@ -656,11 +656,6 @@ void UpdateSaveAddresses(void)
     }
 }
 
-extern u32 GetGameStat(u8 index); // rom4
-extern void IncrementGameStat(u8 index); // rom4
-extern void SaveSerializedGame(void); // load_save
-extern u32 gUnknown_0203CF5C;
-
 u8 HandleSavingData(u8 saveType)
 {
     u8 i;
@@ -836,7 +831,7 @@ u16 sub_815355C(void)
     struct SaveSection* savSection;
 
     savSection = gFastSaveSection = &gSaveDataBuffer;
-    if (gFlashMemoryPresent != 1)
+    if (gFlashMemoryPresent != TRUE)
         return 0;
     UpdateSaveAddresses();
     GetSaveValidStatus(gRamSaveSectionLocations);
@@ -896,12 +891,6 @@ u32 sub_8153634(u8 sector, u8* src)
         return 0xFF;
     return 1;
 }
-
-extern void save_serialize_map(void);
-extern void sub_8076D5C(void);
-extern void sav2_gender2_inplace_and_xFE(void);
-extern void sub_800ADF8(void);
-extern bool8 sub_800A520(void);
 
 void sub_8153688(u8 taskId)
 {

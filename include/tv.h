@@ -46,5 +46,6 @@ void TV_PutSecretBaseVisitOnTheAir(void);
 bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unused, u8 sheen, u8 language);
 void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent);
 void BravoTrainerPokemonProfile_BeforeInterview1(u16 move);
+void UpdateTVScreensOnMap(int, int);
 
 #endif //GUARD_TV_H

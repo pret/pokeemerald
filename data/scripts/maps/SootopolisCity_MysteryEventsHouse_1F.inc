@@ -45,7 +45,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7:: @ 82279B7
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A0D
 	compare VAR_0x40C0, 3
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A16
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	setvar VAR_0x40C0, 0
 	releaseall
 	end
@@ -90,7 +90,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E:: @ 8227A4E
 	end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	special sub_8139238
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227BFC, 5
 	compare VAR_RESULT, 0
@@ -101,11 +101,11 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227CEB, 5
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	call SootopolisCity_MysteryEventsHouse_1F_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	special sub_80F94E8
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227D21, 4
 	closemessage
@@ -121,7 +121,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2:: @ 8227AE2
-	special copy_player_party_from_sav1
+	special LoadPlayerParty
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227C44, 4
 	release
 	end

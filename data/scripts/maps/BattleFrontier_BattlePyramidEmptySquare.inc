@@ -99,7 +99,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D:: @ 8252B8D
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 1
 	special sub_81A8E7C
-	special copy_player_party_to_sav1
+	special SavePlayerParty
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0

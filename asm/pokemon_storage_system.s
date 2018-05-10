@@ -14810,7 +14810,7 @@ _080CF020:
 	beq _080CF0AC
 	ldr r3, =0x00000d65
 	adds r4, r3
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -19057,7 +19057,7 @@ sub_80D12B8: @ 80D12B8
 	ldr r1, =0x00002234
 	adds r0, r1
 	ldrh r0, [r0]
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	pop {r1}
 	bx r1
 	.pool

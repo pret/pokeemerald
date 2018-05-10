@@ -93,8 +93,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F911:: @ 824F911
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_24FF00, 4
-	special copy_player_party_from_sav1
-	special copy_player_party_to_sav1
+	special LoadPlayerParty
+	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780

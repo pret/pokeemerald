@@ -327,7 +327,7 @@ void sub_80E8E18(void)
     VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
 }
 
-void sub_80E8EE0(struct MapEvents *events)
+void sub_80E8EE0(struct MapEvents const *events)
 {
     u16 bgEventIndex;
     u16 i;

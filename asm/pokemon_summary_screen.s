@@ -4686,7 +4686,7 @@ sub_81C6648: @ 81C6648
 	.pool
 _081C667C:
 	ldrh r0, [r5]
-	bl itemid_is_unique
+	bl ItemId_GetImportance
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C66A0
@@ -4799,7 +4799,7 @@ sub_81C674C: @ 81C674C
 	.pool
 _081C677C:
 	ldrh r0, [r5]
-	bl itemid_is_unique
+	bl ItemId_GetImportance
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C6790

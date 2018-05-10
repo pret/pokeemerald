@@ -209,22 +209,10 @@ gUnknown_020322D5: @ 20322D5
 	.space 0x3
 
 	.include "src/overworld.o"
+	.include "src/fieldmap.o"
+	.include "src/field_camera.o"
 
-gUnknown_02032318: @ 2032318
-	.space 0x5000
-
-gMapHeader: @ 2037318
-	.space 0x1C
-
-gCamera: @ 2037334
-	.space 0xC
-
-gUnknown_02037340: @ 2037340
-	.space 0x8
-
-gUnusedBikeCameraAheadPanback: @ 2037348
-	.space 0x4
-
+	.align 2
 gUnknown_0203734C: @ 203734C
 	.space 0x4
 
@@ -318,7 +306,7 @@ gUnknown_02039B52: @ 2039B52
 gUnknown_02039B54: @ 2039B54
 	.space 0x4
 
-gUnknown_02039B58: @ 2039B58
+gTrainerCards: @ 2039B58
 	.space 0x14
 
 gUnknown_02039B6C: @ 2039B6C
@@ -494,16 +482,7 @@ gUnknown_0203A11C: @ 203A11C
 gUnknown_0203A120: @ 203A120
 	.space 0x4
 	.include "src/mon_markings.o"
-
-gUnknown_0203A128: @ 203A128
-	.space 0x4
-
-gUnknown_0203A12C: @ 203A12C
-	.space 0x4
-
-gUnknown_0203A130: @ 203A130
-	.space 0x4
-
+	.include "src/mauville_old_man.o"
     .include "src/mail.o"
 
 gUnknown_0203A138: @ 203A138
@@ -658,11 +637,7 @@ gUnknown_0203AB6F: @ 203AB6F
 gUnknown_0203AB70: @ 203AB70
 	.space 0x4
 
-gResultsWindowId: @ 203AB74
-	.space 0x4
-
-gUnknown_0203AB78: @ 203AB78
-	.space 0x4
+    .include "src/battle_records.o"
 
 gUnknown_0203AB7C: @ 203AB7C
 	.space 0x4

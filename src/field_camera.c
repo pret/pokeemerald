@@ -12,6 +12,8 @@
 #include "sprite.h"
 #include "text.h"
 
+EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback = FALSE;
+
 // Static type declarations
 struct FieldCameraUnknownStruct
 {
@@ -39,6 +41,10 @@ static IWRAM_DATA s16 gUnknown_03000E28;
 static IWRAM_DATA s16 gUnknown_03000E2A;
 static IWRAM_DATA u8 gUnknown_03000E2C;
 static IWRAM_DATA void (*gUnknown_03000E30)(void);
+
+struct CameraObject gUnknown_03005DD0;
+u16 gUnknown_03005DE8;
+u16 gUnknown_03005DEC;
 
 // text
 static void move_tilemap_camera_to_upper_left_corner_(struct FieldCameraUnknownStruct *a)
