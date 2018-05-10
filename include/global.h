@@ -171,6 +171,8 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
+#define DEX_FLAGS_NO ((POKEMON_SLOTS_NUMBER / 8) + ((POKEMON_SLOTS_NUMBER % 8) ? 1 : 0))
+
 struct Pokedex
 {
     /*0x00*/ u8 order;
@@ -180,8 +182,8 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 owned[52];
-    /*0x44*/ u8 seen[52];
+    /*0x10*/ u8 owned[DEX_FLAGS_NO];
+    /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
 struct PokemonJumpResults // possibly used in the game itself?
@@ -657,7 +659,7 @@ struct SaveBlock1
     /*0x690*/ struct ItemSlot bagPocket_TMHM[64];
     /*0x790*/ struct ItemSlot bagPocket_Berries[46];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    /*0x988*/ u8 seen1[52];
+    /*0x988*/ u8 seen1[DEX_FLAGS_NO];
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 field_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
@@ -713,7 +715,7 @@ struct SaveBlock1
     /*0x322C*/ u8 field_322C[1276];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
-    /*0x3B24*/ u8 seen2[52];
+    /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3B58*/ LilycoveLady lilycoveLady;
     /*0x3B88*/ u8 filler_3B88[0x10];
     /*0x3B98*/ struct UnkSaveSubstruct_3b98 unk_3B98[20];

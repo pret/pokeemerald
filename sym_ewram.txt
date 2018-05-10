@@ -306,17 +306,7 @@ gFieldEffectArguments: @ 2038C08
 	
 	.align 2
 
-gUnknown_02039B4C: @ 2039B4C
-	.space 0x4
-
-gUnknown_02039B50: @ 2039B50
-	.space 0x2
-
-gUnknown_02039B52: @ 2039B52
-	.space 0x2
-
-gUnknown_02039B54: @ 2039B54
-	.space 0x4
+    .include "src/pokedex.o"
 
 gUnknown_02039B58: @ 2039B58
 	.space 0x14

@@ -2667,6 +2667,11 @@ extern const u8 gUnknown_08DC3198[];
 extern const u8 gUnknown_08DC2E6C[];
 extern const u8 gUnknown_08DC2F5C[];
 extern const u8 gUnknown_08DC2FEC[];
+extern const u16 gPokedexCaughtScreenFade_Pal[];
+extern const u8 gPokedexSearchMenu_Gfx[];
+extern const u8 gPokedexSearch2_Tilemap[];
+extern const u8 gPokedexSearch1_Tilemap[];
+extern const u16 gPokedexSearchMenu_Pal[];
 
 // berry tag screen
 extern const u8 gUnknown_08D9BB44[];
