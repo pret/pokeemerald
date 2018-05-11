@@ -19,6 +19,7 @@
 #include "gpu_regs.h"
 #include "trig.h"
 #include "constants/rgb.h"
+#include "constants/songs.h"
 
 #define VERSION_BANNER_SHAPE 1
 #define VERSION_BANNER_RIGHT_TILEOFFSET 64
@@ -574,7 +575,7 @@ void CB2_InitTitleScreen(void)
                                     | DISPCNT_OBJ_ON
                                     | DISPCNT_WIN0_ON
                                     | DISPCNT_OBJWIN_ON);
-        m4aSongNumStart(0x19D);
+        m4aSongNumStart(MUS_TITLE3);
         gMain.state = 5;
         break;
     case 5:

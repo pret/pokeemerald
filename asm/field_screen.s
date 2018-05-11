@@ -1764,8 +1764,8 @@ _080ABDE4:
 	.pool
 	thumb_func_end FadeScreen
 
-	thumb_func_start sub_80ABDFC
-sub_80ABDFC: @ 80ABDFC
+	thumb_func_start IsWeatherNotFadingIn
+IsWeatherNotFadingIn: @ 80ABDFC
 	ldr r0, =gUnknown_02038454
 	ldr r1, =0x000006c6
 	adds r0, r1
@@ -1777,11 +1777,11 @@ sub_80ABDFC: @ 80ABDFC
 	lsrs r0, 31
 	bx lr
 	.pool
-	thumb_func_end sub_80ABDFC
+	thumb_func_end IsWeatherNotFadingIn
 
-	thumb_func_start sub_80ABE18
-@ void sub_80ABE18(u8 a1)
-sub_80ABE18: @ 80ABE18
+	thumb_func_start UpdateSpritePaletteWithWeather
+@ void UpdateSpritePaletteWithWeather(u8 a1)
+UpdateSpritePaletteWithWeather: @ 80ABE18
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 8
@@ -1882,7 +1882,7 @@ _080ABEF4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80ABE18
+	thumb_func_end UpdateSpritePaletteWithWeather
 
 	thumb_func_start ApplyWeatherGammaShiftToPal
 ApplyWeatherGammaShiftToPal: @ 80ABF00
@@ -1939,7 +1939,7 @@ sub_80ABF4C: @ 80ABF4C
 	movs r2, 0x20
 	bl LoadPalette
 	ldrb r0, [r4]
-	bl sub_80ABE18
+	bl UpdateSpritePaletteWithWeather
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2504,8 +2504,8 @@ sub_80AC3E4: @ 80AC3E4
 	.pool
 	thumb_func_end sub_80AC3E4
 
-	thumb_func_start sub_80AC3F8
-sub_80AC3F8: @ 80AC3F8
+	thumb_func_start PreservePaletteInWeather
+PreservePaletteInWeather: @ 80AC3F8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2524,16 +2524,16 @@ sub_80AC3F8: @ 80AC3F8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80AC3F8
+	thumb_func_end PreservePaletteInWeather
 
-	thumb_func_start sub_80AC428
-sub_80AC428: @ 80AC428
+	thumb_func_start ResetPreservedPalettesInWeather
+ResetPreservedPalettesInWeather: @ 80AC428
 	ldr r1, =gUnknown_03000F50
 	ldr r0, =gUnknown_0854C250
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_80AC428
+	thumb_func_end ResetPreservedPalettesInWeather
 
 	thumb_func_start sub_80AC438
 sub_80AC438: @ 80AC438
@@ -8702,7 +8702,7 @@ sub_80AF710: @ 80AF710
 	thumb_func_start sub_80AF71C
 sub_80AF71C: @ 80AF71C
 	push {lr}
-	bl sub_80ABDFC
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

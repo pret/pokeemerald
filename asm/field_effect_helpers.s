@@ -204,7 +204,7 @@ _0815405A:
 	bl pal_patch_for_npc
 _0815406A:
 	adds r0, r4, 0
-	bl sub_80ABE18
+	bl UpdateSpritePaletteWithWeather
 _08154070:
 	pop {r4}
 	pop {r0}
@@ -227,7 +227,7 @@ npc_pal_op_A: @ 8154078
 	adds r1, r4, 0
 	bl pal_patch_for_npc
 	adds r0, r4, 0
-	bl sub_80ABE18
+	bl UpdateSpritePaletteWithWeather
 _0815409C:
 	pop {r4}
 	pop {r0}

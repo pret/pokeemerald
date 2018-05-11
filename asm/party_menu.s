@@ -10231,7 +10231,7 @@ task_launch_hm_phase_2: @ 81B5750
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80ABDFC
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -17337,7 +17337,7 @@ task_hm_without_phase_2: @ 81B93E0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80ABDFC
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B93FE

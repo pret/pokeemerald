@@ -38,8 +38,6 @@
 #include "decoration.h"
 #include "graphics.h"
 
-extern void (*gFieldCallback)(void);
-
 // Static type declarations
 
 #define OVERWORLD_PLACE_DECOR_SELECTOR_PAL_TAG 0xbe5
@@ -1294,7 +1292,7 @@ void sub_8128060(u8 taskId)
             gTasks[taskId].data[2] = 2;
             break;
         case 2:
-            if (sub_80ABDFC() == TRUE)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 gTasks[taskId].data[12] = 0;
                 sub_8128FD8(taskId);
@@ -1710,7 +1708,7 @@ void sub_8128C64(u8 taskId)
             data[2] ++;
             break;
         case 3:
-            if (sub_80ABDFC() == TRUE)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 gTasks[taskId].func = sub_812764C;
             }
@@ -2220,7 +2218,7 @@ void sub_81298EC(u8 taskId)
             gTasks[taskId].data[2] = 3;
             break;
         case 3:
-            if (sub_80ABDFC() == TRUE)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 StringExpandPlaceholders(gStringVar4, gText_DecorationReturnedToPC);
                 DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
@@ -2290,7 +2288,7 @@ void sub_8129ABC(u8 taskId)
             data[2] = 2;
             break;
         case 2:
-            if (sub_80ABDFC() == TRUE)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 data[12] = 1;
                 sub_8129B34(taskId);
@@ -2616,7 +2614,7 @@ void sub_812A2C4(u8 taskId)
             data[2] ++;
             break;
         case 3:
-            if (sub_80ABDFC() == TRUE)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 gTasks[taskId].func = sub_8126B80;
             }

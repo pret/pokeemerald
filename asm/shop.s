@@ -316,7 +316,7 @@ Task_ExitSellMenu: @ 80DFCF8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_80ABDFC
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

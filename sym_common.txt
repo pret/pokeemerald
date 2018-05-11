@@ -23,22 +23,7 @@ gBGTilemapBuffers2: @ 3005DA0
 gBGTilemapBuffers3: @ 3005DA4
 	.space 0x4
 
-gUnknown_03005DA8: @ 3005DA8
-	.space 0x4
-
-gFieldCallback: @ 3005DAC
-	
-    .include "item_menu.o"
-
-gUnknown_03005DB0: @ 3005DB0
-	.space 0x4
-
-gUnknown_03005DB4: @ 3005DB4
-	.space 0x4
-
-gFieldLinkPlayerCount: @ 3005DB8
-	.space 0x8
-
+    .include "overworld.o"
     .include "fieldmap.o"
     .include "field_camera.o"
 

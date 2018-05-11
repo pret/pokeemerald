@@ -93,6 +93,8 @@ void npc_coords_shift_still(struct MapObject *pObject);
 void FieldObjectMoveDestCoords(struct MapObject *pObject, u32 unk_19, s16 *pInt, s16 *pInt1);
 u8 AddCameraObject(u8 linkedSpriteId);
 void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y);
+u8 GetSimpleGoAnimId(u32);
+u8 sub_8093514(u32);
 
 // Exported data declarations
 
