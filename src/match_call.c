@@ -980,7 +980,7 @@ static void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
     }
 }
 #else
-static ASM_DIRECT void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
+static NAKED void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -1163,7 +1163,7 @@ const u8 *sub_81D1B40(u32 idx, u32 offset)
     return NULL;
 }
 #else
-ASM_DIRECT const u8 *sub_81D1B40(u32 idx, u32 offset)
+NAKED const u8 *sub_81D1B40(u32 idx, u32 offset)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r9\n"

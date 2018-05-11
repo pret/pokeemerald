@@ -2051,7 +2051,7 @@ u8 sub_800DD1C(u8 maxFlags)
     return 0;
 }
 #else
-ASM_DIRECT u8 sub_800DD1C(u8 maxFlags)
+NAKED u8 sub_800DD1C(u8 maxFlags)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tlsls r0, 24\n"
@@ -2897,7 +2897,7 @@ void sub_800EFB0(void)
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
 }
 #else
-ASM_DIRECT void sub_800EFB0(void)
+NAKED void sub_800EFB0(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tsub sp, 0x4\n"
@@ -3233,7 +3233,7 @@ void sub_800F638(u8 unused, u32 flags)
     }
 }
 #else
-ASM_DIRECT void sub_800F638(u8 unused, u32 flags)
+NAKED void sub_800F638(u8 unused, u32 flags)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -3601,7 +3601,7 @@ void sub_800FD14(u16 command)
     }
 }
 #else
-ASM_DIRECT void sub_800FD14(u16 command)
+NAKED void sub_800FD14(u16 command)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                     "\tlsls r0, 16\n"
@@ -4699,7 +4699,7 @@ void sub_801120C(u8 a0)
     }
 }
 #else
-ASM_DIRECT void sub_801120C(u8 a0)
+NAKED void sub_801120C(u8 a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"

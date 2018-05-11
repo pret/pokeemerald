@@ -1184,7 +1184,7 @@ static void sub_817F9F4(struct Sprite *sprite)
 }
 
 #else
-__attribute__((naked))
+NAKED
 static void sub_817F9F4(struct Sprite *sprite)
 {
     asm(".syntax unified\n\

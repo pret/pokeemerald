@@ -386,7 +386,7 @@ void sub_8159308(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 #else
-ASM_DIRECT
+NAKED
 void sub_8159308(u8 taskId)
 {
     asm_unified("	push {r4,r5,lr}\n\

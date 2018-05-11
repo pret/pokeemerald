@@ -167,4 +167,4 @@ gUnknown_03007898: @ 3007898
 	.space 0x8
 
 gUnknown_030078A0: @ 30078A0
-	.space 0x660
+	.space 0xC

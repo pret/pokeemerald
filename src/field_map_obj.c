@@ -353,7 +353,7 @@ static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u
     return slot;
 }
 #else
-static __attribute__((naked)) u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
+static NAKED u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r9\n"

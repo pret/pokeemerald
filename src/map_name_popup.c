@@ -276,7 +276,7 @@ static void sub_80D4A78(u8 bg, u8 x, u8 y, u8 deltaX, u8 deltaY, u8 unused)
     }
 }
 #else
-ASM_DIRECT
+NAKED
 static void sub_80D4A78(u8 bg, u8 x, u8 y, u8 deltaX, u8 deltaY, u8 unused)
 {
     asm("\n\
