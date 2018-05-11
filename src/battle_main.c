@@ -1830,7 +1830,7 @@ static void FreeRestoreBattleData(void)
     gScanlineEffect.state = 3;
     gMain.inBattle = 0;
     ZeroEnemyPartyMons();
-    m4aSongNumStop(0x5A);
+    m4aSongNumStop(SE_HINSI);
     FreeMonSpritesGfx();
     FreeBattleSpritesData();
     FreeBattleResources();
@@ -5224,7 +5224,7 @@ static void ReturnFromBattleToOverworld(void)
             SetRoamerInactive();
     }
 
-    m4aSongNumStop(0x5A);
+    m4aSongNumStop(SE_HINSI);
     SetMainCallback2(gMain.savedCallback);
 }
 

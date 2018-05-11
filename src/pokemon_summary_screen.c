@@ -1825,7 +1825,7 @@ void sub_81C174C(u8 taskId)
                 }
                 else
                 {
-                    PlaySE(0x20);
+                    PlaySE(SE_HAZURE);
                     sub_81C18F4(taskId);
                 }
             }

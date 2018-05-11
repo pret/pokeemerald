@@ -3357,7 +3357,7 @@ static void atk23_getexp(void)
                 if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && gBattleMons[0].hp && !gBattleStruct->wildVictorySong)
                 {
                     BattleStopLowHpSound();
-                    PlayBGM(0x161);
+                    PlayBGM(MUS_KACHI2);
                     gBattleStruct->wildVictorySong++;
                 }
 
