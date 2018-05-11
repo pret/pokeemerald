@@ -27,21 +27,7 @@
 #include "scanline_effect.h"
 #include "menu_helpers.h"
 #include "daycare.h"
-
-struct ContestMove
-{
-    u8 effect;
-    u8 type;
-    u8 comboID;
-    u8 combo[4];
-};
-
-struct ContestEffect
-{
-    u8 type;
-    u8 appeal;
-    u8 jam;
-};
+#include "contest_effect.h"
 
 extern struct UnkSummaryStruct* gUnknown_0203CF1C;
 extern struct BgTemplate gUnknown_0861CBB4;
@@ -54,7 +40,6 @@ extern struct UnkStruct_61CC04 gUnknown_0861CC10;
 extern struct UnkStruct_61CC04 gUnknown_0861CBEC;
 extern struct UnkStruct_61CC04 gUnknown_0861CBF8;
 extern u16 gSummaryScreenWindow_Tilemap[];
-extern struct ContestMove gContestMoves[];
 extern struct ContestEffect gContestEffects[];
 extern struct WindowTemplate gUnknown_0861CC24;
 extern u8 gUnknown_0861CD2C[][3];

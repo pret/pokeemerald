@@ -104,8 +104,9 @@ void sub_80DAFA0(u8, u8);
 u8 sub_80DB0C4(void);
 u8 sub_80DB120(void);
 u8 sub_80DB174(u16, u32, u32, u32);
-u16 sub_80DE84C(u16);
 void sub_80DB2BC(void);
+void prints_contest_move_description(u16);
+u16 sub_80DE84C(u16);
 void sub_80DB89C(void);
 u16 sub_80DB8B8(u8);
 void sub_80DB918(void);
@@ -137,7 +138,6 @@ bool32 sub_80DED4C(void);
 void sub_80DED60(u32);
 void sub_80FC9F8(u8);
 bool8 AreMovesContestCombo(u16, u16);
-void prints_contest_move_description(u16);
 void sub_80DBD18(void);
 void sub_80DF250(void);
 void sub_80DF4F8(void);
@@ -171,6 +171,8 @@ void sub_80DC3AC(void);
 bool8 sub_80DC3C4(void);
 void sub_80DF9D4(u8 *);
 void sub_80DF9E0(u8 *, s32);
+void sub_80DED10(u8, u16, u8, u8, u8, u8, u8);
+void sub_80DEB70(u8, const u8 *);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gContestMonConditions[4] = {0};
@@ -244,6 +246,7 @@ extern const struct CompressedSpritePalette gUnknown_08587C10;
 extern const struct SpriteTemplate gSpriteTemplate_8587C18;
 extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
+extern const u8 *const gContestEffectDescriptionPointers[];
 
 void TaskDummy1(u8 taskId)
 {
@@ -2549,4 +2552,85 @@ u8 sub_80DB174(u16 species, u32 otId, u32 personality, u32 index)
     StartSpriteAffineAnim(gSprites + spriteId, 0);
 
     return spriteId;
+}
+
+bool8 IsSpeciesNotUnown(u16 species)
+{
+    if (species == SPECIES_UNOWN)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void sub_80DB2BC(void)
+{
+    CpuCopy16(gContestResources->field_24[0], gContestResources->field_24[0] + 0x500, 0x280);
+    CpuCopy16(gContestResources->field_24[2], gContestResources->field_24[2] + 0x500, 0x280);
+}
+
+u16 sub_80DB2EC(u16 a0, u8 a1)
+{
+    u16 var;
+
+    switch (gContestEffects[gContestMoves[a0].effect].effectType)
+    {
+        case 0:
+        case 1:
+        case 8:
+            var = 0x9082;
+            break;
+        case 2:
+        case 3:
+            var = 0x9088;
+            break;
+        default:
+            var = 0x9086;
+            break;
+    }
+    var += 0x9000 + (a1 << 12);
+    return var;
+}
+
+void prints_contest_move_description(u16 a)
+{
+    u8 category;
+    u16 categoryTile;
+    u8 numHearts;
+
+    category = gContestMoves[a].contestCategory;
+    if      (category == CONTEST_CATEGORY_COOL)
+        categoryTile = 0x4040;
+    else if (category == CONTEST_CATEGORY_BEAUTY)
+        categoryTile = 0x4045;
+    else if (category == CONTEST_CATEGORY_CUTE)
+        categoryTile = 0x404A;
+    else if (category == CONTEST_CATEGORY_SMART)
+        categoryTile = 0x406A;
+    else
+        categoryTile = 0x408A;
+
+    sub_80DECB8(0, categoryTile, 0x0b, 0x1f, 0x05, 0x01, 0x11, 0x01);
+    sub_80DECB8(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
+
+    if (gContestEffects[gContestMoves[a].effect].appeal == 0xFF)
+        numHearts = 0;
+    else
+        numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
+    if (numHearts > 8)
+        numHearts = 8;
+    sub_80DED10(0, 0x5035, 0x15, 0x1f, 0x08, 0x01, 0x11);
+    sub_80DED10(0, 0x5012, 0x15, 0x1f, numHearts, 0x01, 0x11);
+
+    if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
+        numHearts = 0;
+    else
+        numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
+    if (numHearts > 8)
+        numHearts = 8;
+    sub_80DED10(0, 0x5036, 0x15, 0x20, 0x08, 0x01, 0x11);
+    sub_80DED10(0, 0x5014, 0x15, 0x20, numHearts, 0x01, 0x11);
+
+    FillWindowPixelBuffer(10, 0);
+    sub_80DEB70(10, gContestEffectDescriptionPointers[gContestMoves[a].effect]);
+    sub_80DEB70(9, gText_Slash);
 }

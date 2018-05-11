@@ -9,6 +9,14 @@ struct ContestMove
     u8 comboMoves[4];
 };
 
+struct ContestEffect
+{
+    u8 effectType;
+    u8 appeal;
+    u8 jam;
+};
+
 extern const struct ContestMove gContestMoves[];
+extern struct ContestEffect gContestEffects[];
 
 #endif //GUARD_CONTEST_EFFECT_H
