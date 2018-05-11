@@ -574,10 +574,10 @@ static void Task_EggHatchPlayBGM(u8 taskID)
         play_some_sound();
     }
     if (gTasks[taskID].data[0] == 1)
-        PlayBGM(376);
+        PlayBGM(MUS_ME_SHINKA);
     if (gTasks[taskID].data[0] > 60)
     {
-        PlayBGM(377);
+        PlayBGM(MUS_SHINKA);
         DestroyTask(taskID);
         // UB: task is destroyed, yet the value is incremented
     }
