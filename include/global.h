@@ -12,6 +12,11 @@
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 #define NAKED __attribute__((naked))
+// While this nomenclature change is being rolled out, the following
+// redundant define will be used to prevent build errors when merging
+// from master.
+// TODO: Remove this before merging the pull request.
+#define ASM_DIRECT NAKED
 
 // IDE support
 #if defined (__APPLE__) || defined (__CYGWIN__)
