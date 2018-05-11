@@ -117,7 +117,7 @@ void Unused_LZDecompressWramIndirect(const void **src, void *dest)
 }
 
 // This one (unused) function is really challenging, won't even try to decompile it.
-ASM_DIRECT
+NAKED
 void sub_803471C()
 {
     asm(".syntax unified\n\

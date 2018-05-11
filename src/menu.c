@@ -2080,7 +2080,7 @@ void sub_819A080(struct UnkStruct_819A080 *a0, struct UnkStruct_819A080 *a1, u16
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_819A080(struct UnkStruct_819A080 *a0, struct UnkStruct_819A080 *a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
 {
 	asm("push {r4-r7,lr}\n\

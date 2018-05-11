@@ -3931,7 +3931,7 @@ static void sub_80F0708(void) // FIXME: register allocation shenanigans
     }
 }
 #else
-ASM_DIRECT static void sub_80F0708(void)
+NAKED static void sub_80F0708(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r9\n"

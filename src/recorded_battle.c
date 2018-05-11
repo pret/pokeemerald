@@ -475,7 +475,7 @@ u32 MoveRecordedBattleToSaveData(void)
 }
 
 #else
-ASM_DIRECT
+NAKED
 u32 MoveRecordedBattleToSaveData(void)
 {
     asm(".syntax unified\n\

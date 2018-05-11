@@ -648,7 +648,7 @@ static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
 }
 
 #else
-ASM_DIRECT
+NAKED
 static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
 {
     asm(".syntax unified\n\

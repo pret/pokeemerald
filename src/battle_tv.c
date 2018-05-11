@@ -812,7 +812,7 @@ void TryPutLinkBattleTvShowOnAir(void)
 }
 
 #else
-ASM_DIRECT
+NAKED
 void TryPutLinkBattleTvShowOnAir(void)
 {
     asm_unified(
