@@ -5,481 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80DB4E0
-sub_80DB4E0: @ 80DB4E0
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x10
-	lsls r0, 16
-	lsrs r5, r0, 16
-	lsls r1, 24
-	lsrs r4, r1, 24
-	ldr r0, =gUnknown_02039F26
-	adds r0, r4, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	adds r0, 0x2
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r0, r4, 0
-	bl sub_80DBCA8
-	lsls r0, 24
-	cmp r0, 0
-	bne _080DB560
-	cmp r5, 0
-	beq _080DB560
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80DB2EC
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	movs r0, 0x2
-	mov r8, r0
-	str r0, [sp]
-	movs r5, 0x1
-	str r5, [sp, 0x4]
-	movs r6, 0x11
-	str r6, [sp, 0x8]
-	str r5, [sp, 0xC]
-	movs r0, 0
-	adds r1, r4, 0
-	movs r2, 0x14
-	adds r3, r7, 0
-	bl sub_80DECB8
-	adds r4, 0x10
-	lsls r4, 16
-	lsrs r4, 16
-	adds r3, r7, 0x1
-	lsls r3, 24
-	lsrs r3, 24
-	mov r0, r8
-	str r0, [sp]
-	str r5, [sp, 0x4]
-	str r6, [sp, 0x8]
-	str r5, [sp, 0xC]
-	movs r0, 0
-	adds r1, r4, 0
-	movs r2, 0x14
-	bl sub_80DECB8
-	b _080DB576
-	.pool
-_080DB560:
-	movs r0, 0x2
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x14
-	adds r3, r7, 0
-	bl sub_80DED10
-_080DB576:
-	add sp, 0x10
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DB4E0
-
-	thumb_func_start sub_80DB584
-sub_80DB584: @ 80DB584
-	push {r4,r5,lr}
-	movs r4, 0
-	movs r5, 0
-_080DB58A:
-	ldr r0, =gContestResources
-	ldr r0, [r0]
-	ldr r0, [r0, 0x4]
-	adds r0, r5, r0
-	ldrh r0, [r0, 0x6]
-	lsls r1, r4, 24
-	lsrs r1, 24
-	bl sub_80DB4E0
-	adds r5, 0x1C
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _080DB58A
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80DB584
-
-	thumb_func_start sub_80DB5B0
-sub_80DB5B0: @ 80DB5B0
-	ldr r0, =0x00002034
-	bx lr
-	.pool
-	thumb_func_end sub_80DB5B0
-
-	thumb_func_start sub_80DB5B8
-sub_80DB5B8: @ 80DB5B8
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	lsls r0, 24
-	lsrs r2, r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	mov r8, r1
-	mov r10, r8
-	ldr r0, =gContestResources
-	mov r9, r0
-	ldr r0, [r0]
-	ldr r1, [r0, 0x4]
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r7, r0, 2
-	adds r3, r7, r1
-	ldrb r0, [r3, 0x10]
-	movs r5, 0x30
-	ands r5, r0
-	cmp r5, 0
-	bne _080DB5F4
-	movs r0, 0
-	b _080DB68A
-	.pool
-_080DB5F4:
-	ldr r0, =gUnknown_02039F26
-	adds r0, r2, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	adds r0, 0x2
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r0, 0xD
-	ldrsb r0, [r3, r0]
-	movs r1, 0xA
-	bl __divsi3
-	lsls r0, 24
-	asrs r4, r0, 24
-	cmp r5, 0x10
-	bne _080DB648
-	bl sub_80DB5B0
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	movs r0, 0x1
-	str r0, [sp]
-	lsls r0, r4, 24
-	lsrs r0, 24
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r2, 0x13
-	adds r3, r6, 0
-	bl sub_80DED10
-	mov r1, r8
-	cmp r1, 0
-	beq _080DB688
-	movs r0, 0x5B
-	b _080DB672
-	.pool
-_080DB648:
-	adds r3, r6, r4
-	lsls r3, 24
-	lsrs r3, 24
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0x3
-	subs r0, r4
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x13
-	bl sub_80DED10
-	mov r0, r10
-	cmp r0, 0
-	beq _080DB688
-	movs r0, 0x26
-_080DB672:
-	bl PlaySE
-	mov r1, r9
-	ldr r0, [r1]
-	ldr r1, [r0, 0x4]
-	adds r1, r7, r1
-	ldrb r2, [r1, 0x10]
-	movs r0, 0x31
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x10]
-_080DB688:
-	movs r0, 0x1
-_080DB68A:
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80DB5B8
-
-	thumb_func_start sub_80DB69C
-sub_80DB69C: @ 80DB69C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	movs r7, 0
-	movs r0, 0x1
-	mov r10, r0
-	movs r1, 0x11
-	mov r9, r1
-	movs r0, 0
-	mov r8, r0
-_080DB6B6:
-	ldr r0, =gUnknown_02039F26
-	adds r0, r7, r0
-	ldrb r0, [r0]
-	lsls r4, r0, 2
-	adds r4, r0
-	adds r4, 0x2
-	lsls r4, 24
-	lsrs r4, 24
-	bl sub_80DB5B0
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	ldr r0, =gContestResources
-	ldr r0, [r0]
-	ldr r0, [r0, 0x4]
-	add r0, r8
-	ldrb r0, [r0, 0xD]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0xA
-	bl __divsi3
-	lsls r0, 24
-	mov r1, r10
-	str r1, [sp]
-	asrs r6, r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x4]
-	mov r0, r9
-	str r0, [sp, 0x8]
-	movs r0, 0
-	adds r1, r5, 0
-	movs r2, 0x13
-	adds r3, r4, 0
-	bl sub_80DED10
-	adds r4, r6
-	lsls r4, 24
-	lsrs r4, 24
-	mov r1, r10
-	str r1, [sp]
-	movs r0, 0x3
-	subs r0, r6
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x4]
-	mov r0, r9
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x13
-	adds r3, r4, 0
-	bl sub_80DED10
-	movs r1, 0x1C
-	add r8, r1
-	adds r7, 0x1
-	cmp r7, 0x3
-	ble _080DB6B6
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80DB69C
-
-	thumb_func_start sub_80DB748
-sub_80DB748: @ 80DB748
-	push {lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	movs r0, 0
-	cmp r1, 0x4
-	bhi _080DB78A
-	lsls r0, r1, 2
-	ldr r1, =_080DB764
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080DB764:
-	.4byte _080DB778
-	.4byte _080DB77C
-	.4byte _080DB780
-	.4byte _080DB784
-	.4byte _080DB788
-_080DB778:
-	movs r0, 0x80
-	b _080DB78A
-_080DB77C:
-	movs r0, 0x84
-	b _080DB78A
-_080DB780:
-	movs r0, 0x86
-	b _080DB78A
-_080DB784:
-	movs r0, 0x88
-	b _080DB78A
-_080DB788:
-	movs r0, 0x82
-_080DB78A:
-	movs r1, 0x90
-	lsls r1, 8
-	adds r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80DB748
-
-	thumb_func_start sub_80DB798
-sub_80DB798: @ 80DB798
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x10
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x1
-	mov r9, r1
-	movs r1, 0
-	mov r8, r1
-	ldr r1, =gUnknown_02039F26
-	adds r1, r0, r1
-	ldrb r2, [r1]
-	lsls r1, r2, 2
-	adds r1, r2
-	adds r1, 0x2
-	lsls r1, 24
-	lsrs r7, r1, 24
-	ldr r1, =gContestResources
-	ldr r1, [r1]
-	ldr r2, [r1, 0x4]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r2, r1, r2
-	ldr r0, [r2, 0x10]
-	ldr r1, =0x00ff0003
-	ands r0, r1
-	cmp r0, 0
-	bne _080DB7DC
-	ldrb r0, [r2, 0xF]
-	cmp r0, 0
-	beq _080DB7EC
-_080DB7DC:
-	movs r0, 0
-	b _080DB80E
-	.pool
-_080DB7EC:
-	ldrb r1, [r2, 0xC]
-	mov r0, r9
-	ands r0, r1
-	cmp r0, 0
-	beq _080DB7FA
-	movs r0, 0x1
-	b _080DB80E
-_080DB7FA:
-	movs r0, 0x6
-	ands r0, r1
-	cmp r0, 0
-	bne _080DB80C
-	ldrb r1, [r2, 0xB]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080DB81A
-_080DB80C:
-	movs r0, 0x2
-_080DB80E:
-	bl sub_80DB748
-	lsls r0, 16
-	lsrs r0, 16
-	mov r8, r0
-	b _080DB81E
-_080DB81A:
-	movs r0, 0
-	mov r9, r0
-_080DB81E:
-	mov r1, r9
-	cmp r1, 0
-	beq _080DB85E
-	movs r6, 0x2
-	str r6, [sp]
-	movs r4, 0x1
-	str r4, [sp, 0x4]
-	movs r5, 0x11
-	str r5, [sp, 0x8]
-	str r4, [sp, 0xC]
-	movs r0, 0
-	mov r1, r8
-	movs r2, 0x14
-	adds r3, r7, 0
-	bl sub_80DECB8
-	mov r1, r8
-	adds r1, 0x10
-	lsls r1, 16
-	lsrs r1, 16
-	adds r3, r7, 0x1
-	lsls r3, 24
-	lsrs r3, 24
-	str r6, [sp]
-	str r4, [sp, 0x4]
-	str r5, [sp, 0x8]
-	str r4, [sp, 0xC]
-	movs r0, 0
-	movs r2, 0x14
-	bl sub_80DECB8
-	b _080DB874
-_080DB85E:
-	movs r0, 0x2
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x14
-	adds r3, r7, 0
-	bl sub_80DED10
-_080DB874:
-	mov r0, r9
-	add sp, 0x10
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80DB798
-
 	thumb_func_start sub_80DB884
 sub_80DB884: @ 80DB884
 	push {r4,lr}
@@ -506,7 +31,7 @@ sub_80DB89C: @ 80DB89C
 	movs r1, 0x2
 	bl CopyWindowToVram
 	movs r0, 0
-	bl sub_80DED60
+	bl Contest_SetBgCopyFlags
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DB89C
@@ -1417,7 +942,7 @@ sub_80DBF68: @ 80DBF68
 	bl sub_80DB89C
 	ldr r0, =gUnknown_0827E8DA
 	movs r1, 0
-	bl sub_80DEC30
+	bl Contest_StartTextPrinter
 	pop {r0}
 	bx r0
 	.pool
@@ -1441,7 +966,7 @@ _080DBF9A:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x16
-	bl sub_80DED10
+	bl ContestBG_FillBoxWithTile
 	movs r0, 0xA0
 	lsls r0, 19
 	adds r5, r0
@@ -1778,7 +1303,7 @@ _080DC226:
 	str r0, [sp, 0x8]
 	movs r0, 0
 	adds r1, r6, 0
-	bl sub_80DED10
+	bl ContestBG_FillBoxWithTile
 	mov r3, r8
 	cmp r3, 0
 	ble _080DC284
@@ -3207,7 +2732,7 @@ _080DCDBC:
 	add r1, sp, 0x4
 	movs r2, 0x37
 	movs r3, 0x1
-	bl sub_80DEBD0
+	bl Contest_PrintTextToBg0WindowAt
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3250,7 +2775,7 @@ _080DCE14:
 	add r1, sp, 0x4
 	movs r2, 0x5
 	movs r3, 0x1
-	bl sub_80DEBD0
+	bl Contest_PrintTextToBg0WindowAt
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -4146,7 +3671,7 @@ _080DD52C:
 	bl sub_80DB89C
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80DEC30
+	bl Contest_StartTextPrinter
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -5640,7 +5165,7 @@ _080DE146:
 	adds r1, r4, 0
 	movs r2, 0x14
 	adds r3, r6, 0
-	bl sub_80DECB8
+	bl ContestBG_FillBoxWithIncrementingTile
 	adds r4, 0x10
 	lsls r4, 16
 	lsrs r4, 16
@@ -5659,7 +5184,7 @@ _080DE146:
 	adds r1, r4, 0
 	movs r2, 0x14
 	adds r3, r5, 0
-	bl sub_80DECB8
+	bl ContestBG_FillBoxWithIncrementingTile
 	movs r0, 0x63
 	bl PlaySE
 _080DE1CA:
@@ -5800,7 +5325,7 @@ sub_80DE224: @ 80DE224
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
 	movs r0, 0x1
-	bl sub_80DED60
+	bl Contest_SetBgCopyFlags
 	movs r5, 0
 	ldr r7, =gSprites
 	movs r6, 0x4
@@ -5863,7 +5388,7 @@ sub_80DE350: @ 80DE350
 	mov r0, sp
 	bl CpuSet
 	movs r0, 0x1
-	bl sub_80DED60
+	bl Contest_SetBgCopyFlags
 	movs r0, 0xA
 	bl GetGpuReg
 	add r3, sp, 0x4
@@ -6812,8 +6337,8 @@ _080DEB64:
 	.pool
 	thumb_func_end sub_80DEAA8
 
-	thumb_func_start sub_80DEB70
-sub_80DEB70: @ 80DEB70
+	thumb_func_start Contest_PrintTextToBg0WindowStd
+Contest_PrintTextToBg0WindowStd: @ 80DEB70
 	push {r4,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -6853,15 +6378,15 @@ sub_80DEB70: @ 80DEB70
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	movs r0, 0
-	bl sub_80DED60
+	bl Contest_SetBgCopyFlags
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DEB70
+	thumb_func_end Contest_PrintTextToBg0WindowStd
 
-	thumb_func_start sub_80DEBD0
-sub_80DEBD0: @ 80DEBD0
+	thumb_func_start Contest_PrintTextToBg0WindowAt
+Contest_PrintTextToBg0WindowAt: @ 80DEBD0
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r5, r0, 0
@@ -6901,15 +6426,15 @@ sub_80DEBD0: @ 80DEBD0
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	movs r0, 0
-	bl sub_80DED60
+	bl Contest_SetBgCopyFlags
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DEBD0
+	thumb_func_end Contest_PrintTextToBg0WindowAt
 
-	thumb_func_start sub_80DEC30
-sub_80DEC30: @ 80DEC30
+	thumb_func_start Contest_StartTextPrinter
+Contest_StartTextPrinter: @ 80DEC30
 	push {r4,r5,lr}
 	sub sp, 0x10
 	str r0, [sp]
@@ -6971,15 +6496,15 @@ _080DECA4:
 	movs r0, 0x4
 	bl PutWindowTilemap
 	movs r0, 0
-	bl sub_80DED60
+	bl Contest_SetBgCopyFlags
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DEC30
+	thumb_func_end Contest_StartTextPrinter
 
-	thumb_func_start sub_80DECB8
-sub_80DECB8: @ 80DECB8
+	thumb_func_start ContestBG_FillBoxWithIncrementingTile
+ContestBG_FillBoxWithIncrementingTile: @ 80DECB8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -7014,17 +6539,17 @@ sub_80DECB8: @ 80DECB8
 	mov r0, r8
 	bl WriteSequenceToBgTilemapBuffer
 	mov r0, r8
-	bl sub_80DED60
+	bl Contest_SetBgCopyFlags
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DECB8
+	thumb_func_end ContestBG_FillBoxWithIncrementingTile
 
-	thumb_func_start sub_80DED10
-sub_80DED10: @ 80DED10
+	thumb_func_start ContestBG_FillBoxWithTile
+ContestBG_FillBoxWithTile: @ 80DED10
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r4, [sp, 0x20]
@@ -7049,15 +6574,15 @@ sub_80DED10: @ 80DED10
 	str r6, [sp, 0x8]
 	movs r4, 0
 	str r4, [sp, 0xC]
-	bl sub_80DECB8
+	bl ContestBG_FillBoxWithIncrementingTile
 	add sp, 0x10
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DED10
+	thumb_func_end ContestBG_FillBoxWithTile
 
-	thumb_func_start sub_80DED4C
-sub_80DED4C: @ 80DED4C
+	thumb_func_start Contest_RunTextPrinters
+Contest_RunTextPrinters: @ 80DED4C
 	push {lr}
 	bl RunTextPrinters
 	movs r0, 0x4
@@ -7066,10 +6591,10 @@ sub_80DED4C: @ 80DED4C
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DED4C
+	thumb_func_end Contest_RunTextPrinters
 
-	thumb_func_start sub_80DED60
-sub_80DED60: @ 80DED60
+	thumb_func_start Contest_SetBgCopyFlags
+Contest_SetBgCopyFlags: @ 80DED60
 	ldr r2, =sContestBgCopyFlags
 	movs r1, 0x1
 	lsls r1, r0
@@ -7078,7 +6603,7 @@ sub_80DED60: @ 80DED60
 	strb r1, [r2]
 	bx lr
 	.pool
-	thumb_func_end sub_80DED60
+	thumb_func_end Contest_SetBgCopyFlags
 
 	thumb_func_start ResetContestLinkResults
 ResetContestLinkResults: @ 80DED74
@@ -8411,7 +7936,7 @@ _080DF7AE:
 	add r1, sp, 0x4
 	movs r2, 0x5
 	movs r3, 0x1
-	bl sub_80DEBD0
+	bl Contest_PrintTextToBg0WindowAt
 	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x1C]
@@ -8469,7 +7994,7 @@ _080DF80A:
 	mov r1, r9
 	movs r2, 0x5
 	movs r3, 0x1
-	bl sub_80DEBD0
+	bl Contest_PrintTextToBg0WindowAt
 	ldrb r0, [r4]
 	mov r1, sp
 	adds r1, r5
@@ -8478,7 +8003,7 @@ _080DF80A:
 	str r2, [sp]
 	movs r2, 0x37
 	movs r3, 0x1
-	bl sub_80DEBD0
+	bl Contest_PrintTextToBg0WindowAt
 	mov r1, r8
 	lsls r0, r1, 24
 	lsrs r7, r0, 24
@@ -8557,7 +8082,7 @@ _080DF8CC:
 	mov r1, r9
 	movs r2, 0x5
 	movs r3, 0x1
-	bl sub_80DEBD0
+	bl Contest_PrintTextToBg0WindowAt
 	ldrb r0, [r4]
 	mov r1, sp
 	adds r1, r5
@@ -8566,7 +8091,7 @@ _080DF8CC:
 	str r2, [sp]
 	movs r2, 0x37
 	movs r3, 0x1
-	bl sub_80DEBD0
+	bl Contest_PrintTextToBg0WindowAt
 	mov r1, r8
 	lsls r0, r1, 24
 	lsrs r7, r0, 24

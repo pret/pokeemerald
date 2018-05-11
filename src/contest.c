@@ -131,11 +131,11 @@ void sub_80DE350(void);
 void sub_80DE424(u8);
 void sub_80DE69C(u8);
 void sub_80DEA20(void);
-void sub_80DEBD0(u32, u8 *, s32, u8, u8);
-void sub_80DEC30(const u8 *, u8);
-void sub_80DECB8(u8, u16, u8, u8, u8, u8, u8, u8);
-bool32 sub_80DED4C(void);
-void sub_80DED60(u32);
+void Contest_PrintTextToBg0WindowAt(u32, u8 *, s32, u8, u8);
+void Contest_StartTextPrinter(const u8 *, u8);
+void ContestBG_FillBoxWithIncrementingTile(u8, u16, u8, u8, u8, u8, u8, u8);
+bool32 Contest_RunTextPrinters(void);
+void Contest_SetBgCopyFlags(u32);
 void sub_80FC9F8(u8);
 bool8 AreMovesContestCombo(u16, u16);
 void sub_80DBD18(void);
@@ -171,8 +171,8 @@ void sub_80DC3AC(void);
 bool8 sub_80DC3C4(void);
 void sub_80DF9D4(u8 *);
 void sub_80DF9E0(u8 *, s32);
-void sub_80DED10(u8, u16, u8, u8, u8, u8, u8);
-void sub_80DEB70(u8, const u8 *);
+void ContestBG_FillBoxWithTile(u8, u16, u8, u8, u8, u8, u8);
+void Contest_PrintTextToBg0WindowStd(u8, const u8 *);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gContestMonConditions[4] = {0};
@@ -730,12 +730,12 @@ void sub_80D833C(u8 taskId)
             StringCopy(gDisplayedStringBattle, gText_0827D531);
         sub_80DB89C();
         StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
-        sub_80DEC30(gStringVar4, 1);
+        Contest_StartTextPrinter(gStringVar4, 1);
         gTasks[taskId].data[0]++;
     }
     else
     {
-        if (!sub_80DED4C())
+        if (!Contest_RunTextPrinters())
         {
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].func = sub_80D8424;
@@ -790,7 +790,7 @@ void sub_80D8490(u8 taskId)
         r5 = StringCopy(r5, gMoveNames[move]);
 
         FillWindowPixelBuffer(i + 5, 0);
-        sub_80DEBD0(i + 5, sp8, 5, 1, 7);
+        Contest_PrintTextToBg0WindowAt(i + 5, sp8, 5, 1, 7);
     }
 
     sub_80D880C(gContestResources->field_0->playerMoveChoice);
@@ -828,7 +828,7 @@ void sub_80D8610(u8 taskId)
                     StringCopy(gDisplayedStringBattle, gText_0827D531);
                 sub_80DB89C();
                 StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
-                sub_80DEC30(gStringVar4, 0);
+                Contest_StartTextPrinter(gStringVar4, 0);
                 gBattle_BG0_Y = 0;
                 gBattle_BG2_Y = 0;
                 gTasks[taskId].func = sub_80D8424;
@@ -864,13 +864,13 @@ void sub_80D8610(u8 taskId)
 
 void sub_80D880C(s8 a0)
 {
-    sub_80DECB8(2, 55, 0, 31 + a0 * 2, 2, 2, 17, 1);
+    ContestBG_FillBoxWithIncrementingTile(2, 55, 0, 31 + a0 * 2, 2, 2, 17, 1);
 }
 
 void sub_80D883C(s8 a0)
 {
-    sub_80DECB8(2, 11, 0, 31 + a0 * 2, 2, 1, 17, 1);
-    sub_80DECB8(2, 11, 0, 32 + a0 * 2, 2, 1, 17, 1);
+    ContestBG_FillBoxWithIncrementingTile(2, 11, 0, 31 + a0 * 2, 2, 1, 17, 1);
+    ContestBG_FillBoxWithIncrementingTile(2, 11, 0, 32 + a0 * 2, 2, 1, 17, 1);
 }
 
 void sub_80D8894(u8 taskId)
@@ -915,7 +915,7 @@ void sub_80D895C(u8 taskId)
         PutWindowTilemap(5 + i);
         CopyWindowToVram(5 + i, 2);
     }
-    sub_80DED60(0);
+    Contest_SetBgCopyFlags(0);
 
     DmaCopy32Defvars(3, gPlttBufferFaded, shared18000.unk18604, 0x400);
     LoadPalette(shared18000.unk18204, 0, 0x400);
@@ -1055,12 +1055,12 @@ void sub_80D8B38(u8 taskId)
                 else
                     StringCopy(gStringVar2, gUnknown_08587F1C[gContestResources->field_4[r6].moveCategory]);
                 StringExpandPlaceholders(gStringVar4, gText_0827D55A);
-                sub_80DEC30(gStringVar4, 1);
+                Contest_StartTextPrinter(gStringVar4, 1);
                 gTasks[taskId].data[0] = 6;
             }
             return;
         case 6:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
             {
                 gContestResources->field_0->unk1925E = 0;
                 gTasks[taskId].data[0] = 7;
@@ -1138,7 +1138,7 @@ void sub_80D8B38(u8 taskId)
             }
             return;
         case 24:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
                 gTasks[taskId].data[0] = 23;
             return;
         case 48:
@@ -1250,7 +1250,7 @@ void sub_80D8B38(u8 taskId)
         }
             return;
         case 27:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
                 gTasks[taskId].data[0] = 28;
             return;
         case 28:
@@ -1313,13 +1313,13 @@ void sub_80D8B38(u8 taskId)
                     sub_80DB89C();
                     StringCopy(gStringVar1, gContestMons[r6].nickname);
                     StringExpandPlaceholders(gStringVar4, gText_0827E793);
-                    sub_80DEC30(gStringVar4, 1);
+                    Contest_StartTextPrinter(gStringVar4, 1);
                 }
                 gTasks[taskId].data[0] = 52;
             }
             return;
         case 52:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
             {
                 if (!gContestResources->field_4[r6].unk15_6)
                     gTasks[taskId].data[0] = 17;
@@ -1333,11 +1333,11 @@ void sub_80D8B38(u8 taskId)
             {
                 sub_80DB89C();
                 if (r3 == 1)
-                    sub_80DEC30(gText_0827E32E, 1);
+                    Contest_StartTextPrinter(gText_0827E32E, 1);
                 else if (r3 == 2)
-                    sub_80DEC30(gText_0827E35B, 1);
+                    Contest_StartTextPrinter(gText_0827E35B, 1);
                 else
-                    sub_80DEC30(gText_0827E38D, 1);
+                    Contest_StartTextPrinter(gText_0827E38D, 1);
                 sub_80DD720(3);
                 gTasks[taskId].data[10] = 0;
                 gTasks[taskId].data[0] = 45;
@@ -1347,7 +1347,7 @@ void sub_80D8B38(u8 taskId)
                 sub_80DB89C();
                 StringCopy(gStringVar1, gContestMons[r6].nickname);
                 StringExpandPlaceholders(gStringVar4, gText_0827E2FE);
-                sub_80DEC30(gStringVar4, 1);
+                Contest_StartTextPrinter(gStringVar4, 1);
                 sub_80DD720(2);
                 gTasks[taskId].data[10] = 0;
                 gTasks[taskId].data[0] = 45;
@@ -1361,7 +1361,7 @@ void sub_80D8B38(u8 taskId)
             }
             return;
         case 15:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
             {
                 if (++gTasks[taskId].data[10] > 50)
                 {
@@ -1390,7 +1390,7 @@ void sub_80D8B38(u8 taskId)
                 sub_80DB89C();
                 StringCopy(gStringVar1, gContestMons[r6].nickname);
                 StringExpandPlaceholders(gStringVar4, gText_0827E6E3);
-                sub_80DEC30(gStringVar4, 1);
+                Contest_StartTextPrinter(gStringVar4, 1);
                 gTasks[taskId].data[10] = 0;
                 sub_80DD720(0);
                 gTasks[taskId].data[0] = 46;
@@ -1405,7 +1405,7 @@ void sub_80D8B38(u8 taskId)
                 gTasks[taskId].data[0] = 19;
             return;
         case 19:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
             {
                 sub_80DC028(gContestResources->field_4[r6].appeal2, -gContestResources->field_4[r6].unk18, r6);
                 gContestResources->field_4[r6].appeal2 -= gContestResources->field_4[r6].unk18;
@@ -1460,7 +1460,7 @@ void sub_80D8B38(u8 taskId)
                         StringExpandPlaceholders(gStringVar4, gText_0827E717);
                     else
                         StringExpandPlaceholders(gStringVar4, gText_0827E76A);
-                    sub_80DEC30(gStringVar4, 1);
+                    Contest_StartTextPrinter(gStringVar4, 1);
                     gTasks[taskId].data[10] = 0;
                     gTasks[taskId].data[11] = 0;
                     if (r3 < 0)
@@ -1479,7 +1479,7 @@ void sub_80D8B38(u8 taskId)
                     gTasks[taskId].data[10]++;
                     break;
                 case 1:
-                    if (!gContestResources->field_0->unk1920B_0 && !sub_80DED4C())
+                    if (!gContestResources->field_0->unk1920B_0 && !Contest_RunTextPrinters())
                     {
                         sub_80DDCDC(-1);
                         gTasks[taskId].data[10]++;
@@ -1510,7 +1510,7 @@ void sub_80D8B38(u8 taskId)
             switch (gTasks[taskId].data[10])
             {
                 case 0:
-                    if (!sub_80DED4C())
+                    if (!Contest_RunTextPrinters())
                     {
                         sub_80DDED0(1, 1);
                         gTasks[taskId].data[10]++;
@@ -1570,20 +1570,20 @@ void sub_80D8B38(u8 taskId)
             StringCopy(gStringVar1, gContestMons[r6].nickname);
             StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
             StringExpandPlaceholders(gStringVar4, gText_0827E7EA);
-            sub_80DEC30(gStringVar4, 1);
+            Contest_StartTextPrinter(gStringVar4, 1);
             gTasks[taskId].data[0] = 58;
             return;
         case 58:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
             {
                 sub_80DB89C();
                 StringExpandPlaceholders(gStringVar4, gText_0827E817);
-                sub_80DEC30(gStringVar4, 1);
+                Contest_StartTextPrinter(gStringVar4, 1);
                 gTasks[taskId].data[0] = 59;
             }
             return;
         case 59:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
             {
                 sub_80DB89C();
                 gTasks[taskId].data[0] = 55;
@@ -1596,11 +1596,11 @@ void sub_80D8B38(u8 taskId)
             StringCopy(gStringVar1, gContestMons[r6].nickname);
             StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
             StringExpandPlaceholders(gStringVar4, gText_0827E58A);
-            sub_80DEC30(gStringVar4, 1);
+            Contest_StartTextPrinter(gStringVar4, 1);
             gTasks[taskId].data[0] = 34;
             return;
         case 34:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
                 gTasks[taskId].data[0] = 55;
             return;
         case 55:
@@ -1640,11 +1640,11 @@ void sub_80D8B38(u8 taskId)
             sub_80DB89C();
             StringCopy(gStringVar1, gContestMons[r6].nickname);
             StringExpandPlaceholders(gStringVar4, gText_0827D56F);
-            sub_80DEC30(gStringVar4, 1);
+            Contest_StartTextPrinter(gStringVar4, 1);
             gTasks[taskId].data[0] = 32;
             return;
         case 32:
-            if (!sub_80DED4C())
+            if (!Contest_RunTextPrinters())
                 gTasks[taskId].data[0] = 21;
             return;
         case 21:
@@ -1812,12 +1812,12 @@ void sub_80DA3CC(u8 taskId)
         sub_80DB89C();
         StringCopy(gStringVar1, gContestMons[gContestPlayerMonIndex].nickname);
         StringExpandPlaceholders(gStringVar4, gUnknown_08587D90[r4]);
-        sub_80DEC30(gStringVar4, 1);
+        Contest_StartTextPrinter(gStringVar4, 1);
         gTasks[taskId].data[0]++;
     }
     else
     {
-        if (!sub_80DED4C())
+        if (!Contest_RunTextPrinters())
         {
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].func = sub_80DA464;
@@ -1903,14 +1903,14 @@ void sub_80DA5E8(u8 taskId)
     }
     gContestRngValue = gRngValue;
     StringExpandPlaceholders(gStringVar4, gText_0827D597);
-    sub_80DEC30(gStringVar4, 1);
+    Contest_StartTextPrinter(gStringVar4, 1);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_80DA6B4;
 }
 
 void sub_80DA6B4(u8 taskId)
 {
-    if (!sub_80DED4C())
+    if (!Contest_RunTextPrinters())
     {
         sub_80DE224();
         gBattle_BG1_X = 0;
@@ -2441,7 +2441,7 @@ void sub_80DAF1C(u8 a0, u8 a1)
     offset = GetStringRightAlignXOffset(7, gDisplayedStringBattle, 0x60);
     if (offset > 55)
         offset = 55;
-    sub_80DEBD0(gUnknown_02039F26[a0], gDisplayedStringBattle, offset, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[a0], gDisplayedStringBattle, offset, 1, 7);
 }
 
 void sub_80DAF88(u8 a0)
@@ -2452,7 +2452,7 @@ void sub_80DAF88(u8 a0)
 void sub_80DAFA0(u8 a0, u8 a1)
 {
     sub_80DAED4(gContestMons[a0].nickname, a1);
-    sub_80DEBD0(gUnknown_02039F26[a0], gDisplayedStringBattle, 5, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[a0], gDisplayedStringBattle, 5, 1, 7);
 }
 
 u16 sub_80DAFE0(u8 who, u8 contestCategory)
@@ -2609,8 +2609,8 @@ void prints_contest_move_description(u16 a)
     else
         categoryTile = 0x408A;
 
-    sub_80DECB8(0, categoryTile, 0x0b, 0x1f, 0x05, 0x01, 0x11, 0x01);
-    sub_80DECB8(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
+    ContestBG_FillBoxWithIncrementingTile(0, categoryTile,        0x0b, 0x1f, 0x05, 0x01, 0x11, 0x01);
+    ContestBG_FillBoxWithIncrementingTile(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
 
     if (gContestEffects[gContestMoves[a].effect].appeal == 0xFF)
         numHearts = 0;
@@ -2618,8 +2618,8 @@ void prints_contest_move_description(u16 a)
         numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
     if (numHearts > 8)
         numHearts = 8;
-    sub_80DED10(0, 0x5035, 0x15, 0x1f, 0x08, 0x01, 0x11);
-    sub_80DED10(0, 0x5012, 0x15, 0x1f, numHearts, 0x01, 0x11);
+    ContestBG_FillBoxWithTile(0, 0x5035, 0x15, 0x1f, 0x08,      0x01, 0x11);
+    ContestBG_FillBoxWithTile(0, 0x5012, 0x15, 0x1f, numHearts, 0x01, 0x11);
 
     if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
         numHearts = 0;
@@ -2627,10 +2627,138 @@ void prints_contest_move_description(u16 a)
         numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
     if (numHearts > 8)
         numHearts = 8;
-    sub_80DED10(0, 0x5036, 0x15, 0x20, 0x08, 0x01, 0x11);
-    sub_80DED10(0, 0x5014, 0x15, 0x20, numHearts, 0x01, 0x11);
+    ContestBG_FillBoxWithTile(0, 0x5036, 0x15, 0x20, 0x08,      0x01, 0x11);
+    ContestBG_FillBoxWithTile(0, 0x5014, 0x15, 0x20, numHearts, 0x01, 0x11);
 
     FillWindowPixelBuffer(10, 0);
-    sub_80DEB70(10, gContestEffectDescriptionPointers[gContestMoves[a].effect]);
-    sub_80DEB70(9, gText_Slash);
+    Contest_PrintTextToBg0WindowStd(10, gContestEffectDescriptionPointers[gContestMoves[a].effect]);
+    Contest_PrintTextToBg0WindowStd(9, gText_Slash);
+}
+
+void sub_80DB4E0(u16 move, u8 b)
+{
+    u8 r7 = gUnknown_02039F26[b] * 5 + 2;
+
+    if (!sub_80DBCA8(b) && move != MOVE_NONE)
+    {
+        u16 tile = sub_80DB2EC(move, b);
+
+        ContestBG_FillBoxWithIncrementingTile(0, tile,      20, r7,     2, 1, 17, 1);
+        ContestBG_FillBoxWithIncrementingTile(0, tile + 16, 20, r7 + 1, 2, 1, 17, 1);
+    }
+    else
+    {
+        ContestBG_FillBoxWithTile(0, 0, 20, r7, 2, 2, 17);
+    }
+}
+
+void sub_80DB584(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80DB4E0(gContestResources->field_4[i].currMove, i);
+}
+
+u16 sub_80DB5B0(void)
+{
+    return 0x2034;
+}
+
+bool8 sub_80DB5B8(u8 contestantIdx, bool8 resetMod)
+{
+    u8 r6;
+    s32 r4;
+
+    if (sContestantStatus[contestantIdx].conditionMod == 0)
+        return FALSE;
+    r6 = gUnknown_02039F26[contestantIdx] * 5 + 2;
+    r4 = sContestantStatus[contestantIdx].condition / 10;
+    if (sContestantStatus[contestantIdx].conditionMod == 1)
+    {
+        ContestBG_FillBoxWithTile(0, sub_80DB5B0(), 19, r6, 1, r4, 17);
+        if (resetMod)
+        {
+            PlaySE(SE_EXPMAX);
+            sContestantStatus[contestantIdx].conditionMod = 0;
+        }
+    }
+    else
+    {
+        ContestBG_FillBoxWithTile(0, 0, 19, r6 + r4, 1, 3 - r4, 17);
+        if (resetMod)
+        {
+            PlaySE(SE_FU_ZAKU2);
+            sContestantStatus[contestantIdx].conditionMod = 0;
+        }
+    }
+    return TRUE;
+}
+
+void sub_80DB69C(void)
+{
+    s32 i;
+    s32 r6;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 r4 = gUnknown_02039F26[i] * 5 + 2;
+        u16 r5 = sub_80DB5B0();
+
+        r6 = sContestantStatus[i].condition / 10;
+        ContestBG_FillBoxWithTile(0, r5, 19, r4,      1, r6,     17);
+        ContestBG_FillBoxWithTile(0,  0, 19, r4 + r6, 1, 3 - r6, 17);
+    }
+}
+
+u16 sub_80DB748(u8 status)
+{
+    u16 var = 0;
+
+    switch (status)
+    {
+        case 0:
+            var = 0x80;
+            break;
+        case 1:
+            var = 0x84;
+            break;
+        case 2:
+            var = 0x86;
+            break;
+        case 3:
+            var = 0x88;
+            break;
+        case 4:
+            var = 0x82;
+            break;
+    }
+    var += 0x9000;
+    return var;
+}
+
+bool8 sub_80DB798(u8 a)
+{
+    bool8 r9 = TRUE;
+    u16 r8 = 0;
+    u8 r7 = gUnknown_02039F26[a] * 5 + 2;
+
+    if (sContestantStatus[a].resistant != 0 || sContestantStatus[a].immune != 0 || sContestantStatus[a].jamSafetyCount != 0 || sContestantStatus[a].jamReduction != 0)
+        r8 = sub_80DB748(0);
+    else if (sContestantStatus[a].nervous)
+        r8 = sub_80DB748(1);
+    else if (sContestantStatus[a].numTurnsSkipped != 0 || sContestantStatus[a].noMoreTurns)
+        r8 = sub_80DB748(2);
+    else
+        r9 = FALSE;
+    if (r9)
+    {
+        ContestBG_FillBoxWithIncrementingTile(0, r8,      20, r7,     2, 1, 17, 1);
+        ContestBG_FillBoxWithIncrementingTile(0, r8 + 16, 20, r7 + 1, 2, 1, 17, 1);
+    }
+    else
+    {
+        ContestBG_FillBoxWithTile(0, 0, 20, r7, 2, 2, 17);
+    }
+    return r9;
 }
