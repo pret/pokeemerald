@@ -163,6 +163,7 @@ SECTIONS {
         src/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
         src/mail.o(.text);
+        src/menu_helpers.o(.text);
         asm/menu_helpers.o(.text);
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
