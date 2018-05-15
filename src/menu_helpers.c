@@ -17,19 +17,85 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
-extern u8 gUnknown_0203A140;
-extern TaskFunc gUnknown_0300117C;
-extern struct YesNoFuncTable gUnknown_0203A138;
-
-extern const struct CompressedSpriteSheet gUnknown_0859F514;
-extern const struct CompressedSpritePalette gUnknown_0859F51C;
-
-extern bool32 InUnionRoom(void);
 extern bool32 sub_800B504(void);
 
+extern const u8 gBagSwapLineGfx[];
+extern const u8 gBagSwapLinePal[];
+
 // this file's functions
-void Task_ContinueTaskAfterMessagePrints(u8 taskId);
-void Task_CallYesOrNoCallback(u8 taskId);
+static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
+static void Task_CallYesOrNoCallback(u8 taskId);
+
+// EWRAM vars
+EWRAM_DATA static struct YesNoFuncTable gUnknown_0203A138 = {0};
+EWRAM_DATA static u8 gUnknown_0203A140 = 0;
+
+// IWRAM bss vars
+IWRAM_DATA static TaskFunc gUnknown_0300117C;
+
+// const rom data
+static const struct OamData sOamData_859F4E8 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_859F4F0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_859F4F8[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_859F500[] =
+{
+    ANIMCMD_FRAME(0, 0, 1, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_859F508[] =
+{
+    sSpriteAnim_859F4F0,
+    sSpriteAnim_859F4F8,
+    sSpriteAnim_859F500
+};
+
+static const struct CompressedSpriteSheet gUnknown_0859F514 =
+{
+    gBagSwapLineGfx, 0x100, 109
+};
+
+static const struct CompressedSpritePalette gUnknown_0859F51C =
+{
+    gBagSwapLinePal, 109
+};
+
+static const struct SpriteTemplate gUnknown_0859F524 =
+{
+    .tileTag = 109,
+    .paletteTag = 109,
+    .oam = &sOamData_859F4E8,
+    .anims = sSpriteAnimTable_859F508,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
 
 // code
 void ResetVramOamAndBgCntRegs(void)
@@ -82,7 +148,7 @@ bool16 RunTextPrintersRetIsActive(u8 textPrinterId)
     return IsTextPrinterActive(textPrinterId);
 }
 
-void Task_ContinueTaskAfterMessagePrints(u8 taskId)
+static void Task_ContinueTaskAfterMessagePrints(u8 taskId)
 {
     if (!RunTextPrintersRetIsActive(gUnknown_0203A140))
         gUnknown_0300117C(taskId);
@@ -101,7 +167,7 @@ void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *templa
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
-void Task_CallYesOrNoCallback(u8 taskId)
+static void Task_CallYesOrNoCallback(u8 taskId)
 {
     switch (ProcessMenuInputNoWrap_())
     {
@@ -296,105 +362,94 @@ void sub_812225C(u16 *arg0, u16 *arg1, u8 arg2, u8 arg3)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8122298(u16 *arg0, u16 *arg1, u8 arg2, u8 arg3, u8 arg4)
 {
-    if (arg2 & 1)
-    {
+    u8 i;
 
+    if (arg4 % 2 != 0)
+    {
+        if ((*arg1) >= arg4 / 2)
+        {
+            for (i = 0; i < (*arg1) - (arg4 / 2); i++)
+            {
+                if ((*arg0) + arg2 == arg3)
+                    break;
+                (*arg1)--;
+                (*arg0)++;
+            }
+        }
     }
     else
     {
-
+        if ((*arg1) >= (arg4 / 2) + 1)
+        {
+            for (i = 0; i <= (*arg1) - (arg4 / 2); i++)
+            {
+                if ((*arg0) + arg2 == arg3)
+                    break;
+                (*arg1)--;
+                (*arg0)++;
+            }
+        }
     }
 }
-#else
-NAKED
-void sub_8122298(u16 *arg0, u16 *arg1, u8 arg2, u8 arg3, u8 arg4)
-{
-    asm_unified("\n\
-                	push {r4-r7,lr}\n\
-	adds r5, r0, 0\n\
-	adds r4, r1, 0\n\
-	ldr r0, [sp, 0x14]\n\
-	lsls r2, 24\n\
-	lsrs r7, r2, 24\n\
-	lsls r3, 24\n\
-	lsrs r6, r3, 24\n\
-	lsls r2, r0, 24\n\
-	lsrs r0, r2, 24\n\
-	movs r1, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _081222F0\n\
-	lsrs r2, 25\n\
-	ldrh r0, [r4]\n\
-	cmp r0, r2\n\
-	bcc _08122322\n\
-	movs r1, 0\n\
-	subs r0, r2\n\
-	cmp r1, r0\n\
-	bge _08122322\n\
-	ldrh r0, [r5]\n\
-	adds r0, r7\n\
-	cmp r0, r6\n\
-	beq _08122322\n\
-_081222CC:\n\
-	ldrh r0, [r4]\n\
-	subs r0, 0x1\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r5]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5]\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r1, r0, 24\n\
-	ldrh r0, [r4]\n\
-	subs r0, r2\n\
-	cmp r1, r0\n\
-	bge _08122322\n\
-	ldrh r0, [r5]\n\
-	adds r0, r7\n\
-	cmp r0, r6\n\
-	bne _081222CC\n\
-	b _08122322\n\
-_081222F0:\n\
-	ldrh r3, [r4]\n\
-	lsrs r2, 25\n\
-	adds r0, r2, 0x1\n\
-	cmp r3, r0\n\
-	blt _08122322\n\
-	movs r1, 0\n\
-	subs r0, r3, r2\n\
-	b _08122316\n\
-_08122300:\n\
-	ldrh r0, [r4]\n\
-	subs r0, 0x1\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r5]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5]\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r1, r0, 24\n\
-	ldrh r0, [r4]\n\
-	subs r0, r2\n\
-_08122316:\n\
-	cmp r1, r0\n\
-	bgt _08122322\n\
-	ldrh r0, [r5]\n\
-	adds r0, r7\n\
-	cmp r0, r6\n\
-	bne _08122300\n\
-_08122322:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0");
-}
-#endif // NONMATCHING
 
 void LoadListMenuArrowsGfx(void)
 {
     LoadCompressedObjectPic(&gUnknown_0859F514);
     LoadCompressedObjectPalette(&gUnknown_0859F51C);
+}
+
+void sub_8122344(u8 *spriteIds, u8 count)
+{
+    u8 i;
+
+    for (i = 0; i < count; i++)
+    {
+        spriteIds[i] = CreateSprite(&gUnknown_0859F524, i * 16, 0, 0);
+        if (i != 0)
+            StartSpriteAnim(&gSprites[spriteIds[i]], 1);
+
+        gSprites[spriteIds[i]].invisible = 1;
+    }
+}
+
+void sub_81223B0(u8 *spriteIds, u8 count)
+{
+    u8 i;
+
+    for (i = 0; i < count; i++)
+    {
+        if (i == count - 1)
+            DestroySpriteAndFreeResources(&gSprites[spriteIds[i]]);
+        else
+            DestroySprite(&gSprites[spriteIds[i]]);
+    }
+}
+
+void sub_81223FC(u8 *spriteIds, u8 count, bool8 invisible)
+{
+    u8 i;
+
+    for (i = 0; i < count; i++)
+    {
+        gSprites[spriteIds[i]].invisible = invisible;
+    }
+}
+
+void sub_8122448(u8 *spriteIds, u8 count, s16 x, u16 y)
+{
+    u8 i;
+    bool8 unknownBit = count & 0x80;
+    count &= ~(0x80);
+
+    for (i = 0; i < count; i++)
+    {
+        if (i == count - 1 && unknownBit)
+            gSprites[spriteIds[i]].pos2.x = x - 8;
+        else
+            gSprites[spriteIds[i]].pos2.x = x;
+
+        gSprites[spriteIds[i]].pos1.y = 1 + y;
+    }
 }

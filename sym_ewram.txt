@@ -533,13 +533,7 @@ gUnknown_0203A120: @ 203A120
 	.include "src/mon_markings.o"
 	.include "src/mauville_old_man.o"
     .include "src/mail.o"
-
-gUnknown_0203A138: @ 203A138
-	.space 0x8
-
-gUnknown_0203A140: @ 203A140
-	.space 0x4
-
+    .include "src/menu_helpers.o"
 	.include "src/region_map.o"
     .include "src/decoration.o"
     .align 2
