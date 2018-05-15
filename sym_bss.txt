@@ -29,11 +29,7 @@
 	.include "src/record_mixing.o"
 	.include "src/tv.o"
 	.include "src/mauville_old_man.o"
-
-	.align 2
-gUnknown_0300117C: @ 300117C
-	.space 0x4
-
+	.include "src/menu_helpers.o"
 	.include "src/region_map.o"
 
 gUnknown_03001188: @ 3001188
