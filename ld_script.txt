@@ -245,6 +245,7 @@ SECTIONS {
         asm/battle_frontier_2.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
+        src/menu_indicators.o(.text);
         asm/menu_indicators.o(.text);
         src/unk_text_util.o(.text);
         src/save_location.o(.text);
