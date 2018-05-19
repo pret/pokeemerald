@@ -70,12 +70,12 @@ Route120_MapScript1_1F54CD: @ 81F54CD
 	end
 
 Route120_EventScript_1F54D8:: @ 81F54D8
-	getplayerxy VAR_0x4000, VAR_0x4001
-	compare VAR_0x4001, 14
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_1, 14
 	goto_if 3, Route120_EventScript_1F5503
-	compare VAR_0x4001, 60
+	compare VAR_TEMP_1, 60
 	goto_if 3, Route120_EventScript_1F5507
-	compare VAR_0x4001, 61
+	compare VAR_TEMP_1, 61
 	goto_if 4, Route120_EventScript_1F54FF
 	return
 
@@ -88,9 +88,9 @@ Route120_EventScript_1F5503:: @ 81F5503
 	return
 
 Route120_EventScript_1F5507:: @ 81F5507
-	compare VAR_0x4000, 7
+	compare VAR_TEMP_0, 7
 	goto_if 3, Route120_EventScript_1F5523
-	compare VAR_0x4000, 19
+	compare VAR_TEMP_0, 19
 	goto_if 3, Route120_EventScript_1F5503
 	goto Route120_EventScript_1F5523
 	end

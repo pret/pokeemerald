@@ -9,7 +9,7 @@ EverGrandeCity_ChampionsRoom_MapScript1_2289FF: @ 82289FF
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_228A05: @ 8228A05
-	map_script_2 VAR_0x4001, 0, EverGrandeCity_ChampionsRoom_EventScript_228A0F
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_228A0F
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_228A0F:: @ 8228A0F
@@ -17,7 +17,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228A0F:: @ 8228A0F
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_228A14: @ 8228A14
-	map_script_2 VAR_0x4001, 0, EverGrandeCity_ChampionsRoom_EventScript_228A1E
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_228A1E
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_228A1E:: @ 8228A1E
@@ -27,7 +27,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228A1E:: @ 8228A1E
 	delay 40
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_228A42
 	waitmovement 0
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EverGrandeCity_ChampionsRoom_EventScript_228A45
     releaseall
     end

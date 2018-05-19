@@ -77,8 +77,8 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220295:: @ 8220295
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202A6:: @ 82202A6
 	multichoice 16, 0, 42, 0
-	copyvar VAR_0x4001, VAR_RESULT
-	switch VAR_0x4001
+	copyvar VAR_TEMP_1, VAR_RESULT
+	switch VAR_TEMP_1
 	case 0, LilycoveCity_DepartmentStoreRooftop_EventScript_2202E4
 	case 1, LilycoveCity_DepartmentStoreRooftop_EventScript_2202EF
 	case 2, LilycoveCity_DepartmentStoreRooftop_EventScript_2202FA
@@ -87,17 +87,17 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2202A6:: @ 82202A6
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202E4:: @ 82202E4
-	setvar VAR_0x4000, 26
+	setvar VAR_TEMP_0, 26
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202EF:: @ 82202EF
-	setvar VAR_0x4000, 27
+	setvar VAR_TEMP_0, 27
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202FA:: @ 82202FA
-	setvar VAR_0x4000, 28
+	setvar VAR_TEMP_0, 28
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
@@ -126,54 +126,54 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220328:: @ 8220328
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220305
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_22030C
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220313
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220442
-	checkitemspace VAR_0x4000, 1
+	checkitemspace VAR_TEMP_0, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220450
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_22031A
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220321
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220328
 	updatemoneybox 0, 0
 	nop
-	bufferitemname 0, VAR_0x4000
+	bufferitemname 0, VAR_TEMP_0
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205A1, 4
-	giveitem VAR_0x4000, 1
-	bufferitemname 1, VAR_0x4000
+	giveitem VAR_TEMP_0, 1
+	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
 	msgbox gUnknown_08272A9A, 4
 	random 64
 	compare VAR_RESULT, 0
 	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_220436
-	checkitemspace VAR_0x4000, 1
+	checkitemspace VAR_TEMP_0, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220450
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, 4
-	giveitem VAR_0x4000, 1
-	bufferitemname 1, VAR_0x4000
+	giveitem VAR_TEMP_0, 1
+	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
 	msgbox gUnknown_08272A9A, 4
 	random 64
 	compare VAR_RESULT, 0
 	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_220436
-	checkitemspace VAR_0x4000, 1
+	checkitemspace VAR_TEMP_0, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220450
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, 4
-	giveitem VAR_0x4000, 1
-	bufferitemname 1, VAR_0x4000
+	giveitem VAR_TEMP_0, 1
+	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
 	msgbox gUnknown_08272A9A, 4
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_220436

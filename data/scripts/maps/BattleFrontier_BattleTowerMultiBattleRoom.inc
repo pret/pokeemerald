@@ -26,21 +26,21 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA:: @ 8243DDA
-	setvar VAR_0x4010, 7
-	setvar VAR_0x4011, 7
-	setvar VAR_0x4012, 7
-	setvar VAR_0x4013, 7
-	setvar VAR_0x4014, 7
-	setvar VAR_0x4015, 7
-	setvar VAR_0x4016, 7
-	setvar VAR_0x4017, 7
-	setvar VAR_0x4001, 1
-	setvar VAR_0x4003, 1
+	setvar VAR_OBJ_GFX_ID_0, 7
+	setvar VAR_OBJ_GFX_ID_1, 7
+	setvar VAR_OBJ_GFX_ID_2, 7
+	setvar VAR_OBJ_GFX_ID_3, 7
+	setvar VAR_OBJ_GFX_ID_4, 7
+	setvar VAR_OBJ_GFX_ID_5, 7
+	setvar VAR_OBJ_GFX_ID_6, 7
+	setvar VAR_OBJ_GFX_ID_7, 7
+	setvar VAR_TEMP_1, 1
+	setvar VAR_TEMP_3, 1
 	setobjectxyperm 1, 10, 2
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E14: @ 8243E14
-	map_script_2 VAR_0x4003, 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E
+	map_script_2 VAR_TEMP_3, 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E
 	.2byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E:: @ 8243E1E
@@ -48,13 +48,13 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E:: @ 8243E1E
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E23: @ 8243E23
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41
-	map_script_2 VAR_0x4003, 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E35
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41
+	map_script_2 VAR_TEMP_3, 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E35
 	.2byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E35:: @ 8243E35
 	lockall
-	setvar VAR_0x4003, 0
+	setvar VAR_TEMP_3, 0
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EB5
 	end
 
@@ -69,7 +69,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41:: @ 8243E41
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_244056, 4
 	special HealPlayerParty
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end
 
@@ -161,7 +161,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26: @ 8243F26
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F29:: @ 8243F29
 	lock
 	faceplayer
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36
 	end
 
@@ -246,49 +246,49 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_243FF2: @ 8243FF2
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FFB:: @ 8243FFB
 	lock
 	faceplayer
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_244008:: @ 8244008
 	lock
 	faceplayer
-	setvar VAR_0x4002, 2
+	setvar VAR_TEMP_2, 2
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_244015:: @ 8244015
 	lock
 	faceplayer
-	setvar VAR_0x4002, 3
+	setvar VAR_TEMP_2, 3
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_244022:: @ 8244022
 	lock
 	faceplayer
-	setvar VAR_0x4002, 4
+	setvar VAR_TEMP_2, 4
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_24402F:: @ 824402F
 	lock
 	faceplayer
-	setvar VAR_0x4002, 5
+	setvar VAR_TEMP_2, 5
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_24403C:: @ 824403C
 	lock
 	faceplayer
-	setvar VAR_0x4002, 6
+	setvar VAR_TEMP_2, 6
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_244049:: @ 8244049
 	lock
 	faceplayer
-	setvar VAR_0x4002, 7
+	setvar VAR_TEMP_2, 7
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36
 	end
 

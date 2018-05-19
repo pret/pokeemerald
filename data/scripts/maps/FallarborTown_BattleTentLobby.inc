@@ -4,20 +4,20 @@ FallarborTown_BattleTentLobby_MapScripts:: @ 81FFE66
 	.byte 0
 
 FallarborTown_BattleTentLobby_MapScript2_1FFE71: @ 81FFE71
-	map_script_2 VAR_0x4001, 0, FallarborTown_BattleTentLobby_EventScript_1FFE7B
+	map_script_2 VAR_TEMP_1, 0, FallarborTown_BattleTentLobby_EventScript_1FFE7B
 	.2byte 0
 
 FallarborTown_BattleTentLobby_EventScript_1FFE7B:: @ 81FFE7B
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 FallarborTown_BattleTentLobby_MapScript2_1FFE85: @ 81FFE85
-	map_script_2 VAR_0x4000, 0, FallarborTown_BattleTentLobby_EventScript_1FFEAF
-	map_script_2 VAR_0x4000, 1, FallarborTown_BattleTentLobby_EventScript_1FFEB8
-	map_script_2 VAR_0x4000, 2, FallarborTown_BattleTentLobby_EventScript_1FFFCD
-	map_script_2 VAR_0x4000, 3, FallarborTown_BattleTentLobby_EventScript_1FFEED
-	map_script_2 VAR_0x4000, 4, FallarborTown_BattleTentLobby_EventScript_1FFF93
+	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentLobby_EventScript_1FFEAF
+	map_script_2 VAR_TEMP_0, 1, FallarborTown_BattleTentLobby_EventScript_1FFEB8
+	map_script_2 VAR_TEMP_0, 2, FallarborTown_BattleTentLobby_EventScript_1FFFCD
+	map_script_2 VAR_TEMP_0, 3, FallarborTown_BattleTentLobby_EventScript_1FFEED
+	map_script_2 VAR_TEMP_0, 4, FallarborTown_BattleTentLobby_EventScript_1FFF93
 	.2byte 0
 
 FallarborTown_BattleTentLobby_EventScript_1FFEAF:: @ 81FFEAF
@@ -33,7 +33,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFEB8:: @ 81FFEB8
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
@@ -74,7 +74,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFF27:: @ 81FFF27
 	waitfanfare
 	msgbox FallarborTown_BattleTentLobby_Text_2C501F, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -82,7 +82,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFF73:: @ 81FFF73
 	msgbox FallarborTown_BattleTentLobby_Text_2C4F83, 4
 	waitmessage
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -107,7 +107,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFF93:: @ 81FFF93
 	waitse
 	msgbox FallarborTown_BattleTentLobby_Text_2C501F, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -124,7 +124,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFFCD:: @ 81FFFCD
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	goto FallarborTown_BattleTentLobby_EventScript_20013C
 
 FallarborTown_BattleTentLobby_EventScript_200001:: @ 8200001
@@ -174,7 +174,7 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	case 127, FallarborTown_BattleTentLobby_EventScript_2001C2
 
 FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
@@ -192,7 +192,7 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	closemessage
 	delay 2
 	call FallarborTown_BattleTentLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq FallarborTown_BattleTentLobby_EventScript_2001AB
 
@@ -205,7 +205,7 @@ FallarborTown_BattleTentLobby_EventScript_20013C:: @ 820013C
 	closemessage
 	call FallarborTown_BattleTentLobby_EventScript_2001CF
 	warp FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR, 255, 2, 7
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 

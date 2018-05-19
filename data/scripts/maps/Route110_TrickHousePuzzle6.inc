@@ -8,7 +8,7 @@ Route110_TrickHousePuzzle6_MapScript1_26DDB2: @ 826DDB2
 	end
 
 Route110_TrickHousePuzzle6_MapScript2_26DDB6: @ 826DDB6
-	map_script_2 VAR_0x4000, 16384, Route110_TrickHousePuzzle6_EventScript_26DDC0
+	map_script_2 VAR_TEMP_0, 16384, Route110_TrickHousePuzzle6_EventScript_26DDC0
 	.2byte 0
 
 Route110_TrickHousePuzzle6_EventScript_26DDC0:: @ 826DDC0

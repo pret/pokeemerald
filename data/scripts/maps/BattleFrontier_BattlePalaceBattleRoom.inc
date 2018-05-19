@@ -19,17 +19,17 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833:: @ 824F833
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F84B:: @ 824F84B
-	setvar VAR_0x4011, 100
-	setvar VAR_0x4010, 100
+	setvar VAR_OBJ_GFX_ID_1, 100
+	setvar VAR_OBJ_GFX_ID_0, 100
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F856:: @ 824F856
-	setvar VAR_0x4011, 105
-	setvar VAR_0x4010, 105
+	setvar VAR_OBJ_GFX_ID_1, 105
+	setvar VAR_OBJ_GFX_ID_0, 105
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861: @ 824F861
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B
 	.2byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B:: @ 824F86B
@@ -42,7 +42,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B:: @ 824F86B
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE9B
 	waitmovement 0
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
@@ -105,7 +105,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F911:: @ 824F911
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A:: @ 824F98A
 	setvar VAR_0x8004, 9
 	special sub_81A1780
-	copyvar VAR_0x400F, VAR_RESULT
+	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB61
 	setvar VAR_0x8004, 1
@@ -198,10 +198,10 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB3F:: @ 824FB3F
 	end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB61:: @ 824FB61
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2500DD, 4
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79:: @ 824FB79
 	message BattleFrontier_BattlePalaceBattleRoom_Text_25014A
@@ -240,7 +240,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
 	applymovement 5, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEE7
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEF2
 	waitmovement 0
-	switch VAR_0x400F
+	switch VAR_TEMP_F
 	case 2, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD3A
 	case 3, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA
 	case 4, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67
@@ -332,7 +332,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7:: @ 824FDF7
 VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7:: @ 824FDF7
 	closemessage
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
@@ -350,13 +350,13 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7:: @ 824FDF7
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_MapScript2_24FE34: @ 824FE34
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE3E
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE3E
 	.2byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE3E:: @ 824FE3E
 	hideobjectat 1, BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	applymovement 255, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90
 	removeobject 2
 	applymovement 4, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90

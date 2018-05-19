@@ -7,8 +7,8 @@ MtPyre_Exterior_MapScript1_231FD2: @ 8231FD2
 	end
 
 MtPyre_Exterior_EventScript_231FD8:: @ 8231FD8
-	getplayerxy VAR_0x4000, VAR_0x4001
-	compare VAR_0x4001, 12
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_1, 12
 	goto_if 0, MtPyre_Exterior_EventScript_231FE9
 	return
 

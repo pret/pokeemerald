@@ -4,11 +4,11 @@ BattleFrontier_BattleTowerElevator_MapScripts:: @ 82419DB
 	.byte 0
 
 BattleFrontier_BattleTowerElevator_MapScript2_2419E6: @ 82419E6
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleTowerElevator_EventScript_2419F0
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerElevator_EventScript_2419F0
 	.2byte 0
 
 BattleFrontier_BattleTowerElevator_EventScript_2419F0:: @ 82419F0
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 1, BattleFrontier_BattleTowerElevator_Movement_241A86
 	applymovement 255, BattleFrontier_BattleTowerElevator_Movement_241A8A
 	waitmovement 0
@@ -81,11 +81,11 @@ BattleFrontier_BattleTowerElevator_Movement_241A92: @ 8241A92
 	step_end
 
 BattleFrontier_BattleTowerElevator_MapScript2_241A96: @ 8241A96
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleTowerElevator_EventScript_241AA0
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerElevator_EventScript_241AA0
 	.2byte 0
 
 BattleFrontier_BattleTowerElevator_EventScript_241AA0:: @ 8241AA0
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 

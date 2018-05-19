@@ -4,20 +4,20 @@ BattleFrontier_BattleFactoryLobby_MapScripts:: @ 82583E8
 	.byte 0
 
 BattleFrontier_BattleFactoryLobby_MapScript2_2583F3: @ 82583F3
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleFactoryLobby_EventScript_2583FD
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleFactoryLobby_EventScript_2583FD
 	.2byte 0
 
 BattleFrontier_BattleFactoryLobby_EventScript_2583FD:: @ 82583FD
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 BattleFrontier_BattleFactoryLobby_MapScript2_258407: @ 8258407
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleFactoryLobby_EventScript_258431
-	map_script_2 VAR_0x4000, 1, BattleFrontier_BattleFactoryLobby_EventScript_25843A
-	map_script_2 VAR_0x4000, 2, BattleFrontier_BattleFactoryLobby_EventScript_258592
-	map_script_2 VAR_0x4000, 3, BattleFrontier_BattleFactoryLobby_EventScript_25849B
-	map_script_2 VAR_0x4000, 4, BattleFrontier_BattleFactoryLobby_EventScript_258506
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleFactoryLobby_EventScript_258431
+	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattleFactoryLobby_EventScript_25843A
+	map_script_2 VAR_TEMP_0, 2, BattleFrontier_BattleFactoryLobby_EventScript_258592
+	map_script_2 VAR_TEMP_0, 3, BattleFrontier_BattleFactoryLobby_EventScript_25849B
+	map_script_2 VAR_TEMP_0, 4, BattleFrontier_BattleFactoryLobby_EventScript_258506
 	.2byte 0
 
 BattleFrontier_BattleFactoryLobby_EventScript_258431:: @ 8258431
@@ -47,7 +47,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25843A:: @ 825843A
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -118,7 +118,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25857D:: @ 825857D
 BattleFrontier_BattleFactoryLobby_EventScript_258582:: @ 8258582
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -135,7 +135,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258592:: @ 8258592
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8006, 2
 	goto BattleFrontier_BattleFactoryLobby_EventScript_25871A
 
@@ -191,7 +191,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258653:: @ 8258653
 	case 127, BattleFrontier_BattleFactoryLobby_EventScript_25879A
 
 BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_81A5E74
 	setvar VAR_0x8004, 2
@@ -209,7 +209,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	closemessage
 	delay 2
 	call BattleFrontier_BattleFactoryLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_258783
 	setvar VAR_0x8006, 0
@@ -226,7 +226,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
 	applymovement 255, BattleFrontier_BattleFactoryLobby_Movement_2587AC
 	waitmovement 0
 	warp BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 13
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 

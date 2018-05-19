@@ -31,20 +31,20 @@ BattleFrontier_BattleTowerLobby_EventScript_23E6C1:: @ 823E6C1
 	goto BattleFrontier_BattleTowerLobby_EventScript_23E6C0
 
 BattleFrontier_BattleTowerLobby_MapScript2_23E6C9: @ 823E6C9
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleTowerLobby_EventScript_23E6D3
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerLobby_EventScript_23E6D3
 	.2byte 0
 
 BattleFrontier_BattleTowerLobby_EventScript_23E6D3:: @ 823E6D3
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 BattleFrontier_BattleTowerLobby_MapScript2_23E6DD: @ 823E6DD
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleTowerLobby_EventScript_23E707
-	map_script_2 VAR_0x4000, 1, BattleFrontier_BattleTowerLobby_EventScript_23E710
-	map_script_2 VAR_0x4000, 2, BattleFrontier_BattleTowerLobby_EventScript_23E8EE
-	map_script_2 VAR_0x4000, 3, BattleFrontier_BattleTowerLobby_EventScript_23E758
-	map_script_2 VAR_0x4000, 4, BattleFrontier_BattleTowerLobby_EventScript_23E7F2
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerLobby_EventScript_23E707
+	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattleTowerLobby_EventScript_23E710
+	map_script_2 VAR_TEMP_0, 2, BattleFrontier_BattleTowerLobby_EventScript_23E8EE
+	map_script_2 VAR_TEMP_0, 3, BattleFrontier_BattleTowerLobby_EventScript_23E758
+	map_script_2 VAR_TEMP_0, 4, BattleFrontier_BattleTowerLobby_EventScript_23E7F2
 	.2byte 0
 
 BattleFrontier_BattleTowerLobby_EventScript_23E707:: @ 823E707
@@ -69,7 +69,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E710:: @ 823E710
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	release
 	end
 
@@ -114,7 +114,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E7A5:: @ 823E7A5
 BattleFrontier_BattleTowerLobby_EventScript_23E7E2:: @ 823E7E2
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FD07, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	release
 	end
 
@@ -143,7 +143,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E830:: @ 823E830
 	call BattleFrontier_BattleTowerLobby_EventScript_23E84D
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FD07, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	release
 	end
 
@@ -288,7 +288,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_8161F74
 	setvar VAR_0x8004, 2
@@ -303,7 +303,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	closemessage
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
@@ -368,7 +368,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_8161F74
 	setvar VAR_0x8004, 2
@@ -383,7 +383,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	closemessage
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
@@ -449,7 +449,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_8161F74
 	setvar VAR_0x8004, 2
@@ -464,7 +464,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	closemessage
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
@@ -529,7 +529,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_8161F74
 	setvar VAR_0x8004, 2
@@ -547,7 +547,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_0x8005, 0
 	special sub_8161F74
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
@@ -748,7 +748,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F108:: @ 823F108
 	call BattleFrontier_BattleTowerLobby_EventScript_23F135
 	clearflag FLAG_0x077
 	warp BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 255, 1, 6
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 

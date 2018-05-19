@@ -62,24 +62,24 @@ Route111_EventScript_1F0DC2:: @ 81F0DC2
 	return
 
 Route111_EventScript_1F0DDA:: @ 81F0DDA
-	setvar VAR_0x4010, 100
+	setvar VAR_OBJ_GFX_ID_0, 100
 	return
 
 Route111_EventScript_1F0DE0:: @ 81F0DE0
-	setvar VAR_0x4010, 105
+	setvar VAR_OBJ_GFX_ID_0, 105
 	return
 
 Route111_EventScript_1F0DE6:: @ 81F0DE6
-	getplayerxy VAR_0x4000, VAR_0x4001
-	compare VAR_0x4001, 34
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_1, 34
 	goto_if 0, Route111_EventScript_1F0E25
-	compare VAR_0x4001, 107
+	compare VAR_TEMP_1, 107
 	goto_if 2, Route111_EventScript_1F0E25
-	compare VAR_0x4001, 72
+	compare VAR_TEMP_1, 72
 	goto_if 2, Route111_EventScript_1F0E22
-	compare VAR_0x4000, 2000
+	compare VAR_TEMP_0, 2000
 	goto_if 2, Route111_EventScript_1F0E25
-	compare VAR_0x4000, 8
+	compare VAR_TEMP_0, 8
 	goto_if 0, Route111_EventScript_1F0E25
 
 Route111_EventScript_1F0E22:: @ 81F0E22
@@ -208,7 +208,7 @@ Route111_EventScript_1F0F2E:: @ 81F0F2E
 	checkitem ITEM_GO_GOGGLES, 1
 	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_1F0F45
-	setvar VAR_0x4003, 1
+	setvar VAR_TEMP_3, 1
 	releaseall
 	end
 
@@ -266,7 +266,7 @@ Route111_EventScript_1F0FB0:: @ 81F0FB0
 	setweather 2
 	fadenewbgm MUS_DOORO_X1
 	doweather
-	setvar VAR_0x4003, 0
+	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_1F0FBD:: @ 81F0FBD

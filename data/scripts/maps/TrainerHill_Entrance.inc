@@ -8,7 +8,7 @@ TrainerHill_Entrance_MapScripts:: @ 82680AC
 
 TrainerHill_Entrance_MapScript1_2680C6: @ 82680C6
 	setflag FLAG_LANDMARK_TRAINER_HILL
-	getplayerxy VAR_0x400D, VAR_RESULT
+	getplayerxy VAR_TEMP_D, VAR_RESULT
 	end
 
 TrainerHill_Entrance_MapScript1_2680CF: @ 82680CF
@@ -17,7 +17,7 @@ TrainerHill_Entrance_MapScript1_2680CF: @ 82680CF
 TrainerHill_Entrance_MapScript1_2680D0: @ 82680D0
 	setvar VAR_0x8004, 4
 	special sp194_trainer_tower
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 9
 	special sp194_trainer_tower
 	compare VAR_RESULT, 0
@@ -45,7 +45,7 @@ TrainerHill_Entrance_MapScript1_26811B: @ 826811B
 	end
 
 TrainerHill_Entrance_MapScript1_268128: @ 8268128
-	compare VAR_0x400D, 17
+	compare VAR_TEMP_D, 17
 	call_if 1, TrainerHill_Entrance_EventScript_268134
 	end
 
@@ -54,10 +54,10 @@ TrainerHill_Entrance_EventScript_268134:: @ 8268134
 	return
 
 TrainerHill_Entrance_MapScript2_26813E: @ 826813E
-	map_script_2 VAR_0x4000, 0, TrainerHill_Entrance_EventScript_268182
-	map_script_2 VAR_0x400D, 17, TrainerHill_Entrance_EventScript_268160
-	map_script_2 VAR_0x4005, 1, TrainerHill_Entrance_EventScript_268229
-	map_script_2 VAR_0x4001, 1, TrainerHill_Entrance_EventScript_2C83DF
+	map_script_2 VAR_TEMP_0, 0, TrainerHill_Entrance_EventScript_268182
+	map_script_2 VAR_TEMP_D, 17, TrainerHill_Entrance_EventScript_268160
+	map_script_2 VAR_TEMP_5, 1, TrainerHill_Entrance_EventScript_268229
+	map_script_2 VAR_TEMP_1, 1, TrainerHill_Entrance_EventScript_2C83DF
 	.2byte 0
 
 TrainerHill_Entrance_EventScript_268160:: @ 8268160
@@ -68,12 +68,12 @@ TrainerHill_Entrance_EventScript_268160:: @ 8268160
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	waitse
-	setvar VAR_0x400D, 0
+	setvar VAR_TEMP_D, 0
 	releaseall
 	end
 
 TrainerHill_Entrance_EventScript_268182:: @ 8268182
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	setvar VAR_0x8004, 6
 	special sp194_trainer_tower
 	switch VAR_RESULT
@@ -173,7 +173,7 @@ TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
 	copyvar VAR_0x8005, VAR_RESULT
 	special sp194_trainer_tower
 	setvar VAR_0x40D6, 1
-	setvar VAR_0x4005, 0
+	setvar VAR_TEMP_5, 0
 	special HealPlayerParty
 	msgbox TrainerHill_Entrance_Text_26862A, 4
 	setvar VAR_0x8004, 0
@@ -182,7 +182,7 @@ TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
 	end
 
 TrainerHill_Entrance_EventScript_268314:: @ 8268314
-	setvar VAR_0x4005, 0
+	setvar VAR_TEMP_5, 0
 	msgbox TrainerHill_Entrance_Text_26866F, 4
 	closemessage
 	applymovement 255, TrainerHill_Entrance_Movement_268381
@@ -194,7 +194,7 @@ TrainerHill_Entrance_EventScript_26832E:: @ 826832E
 	msgbox TrainerHill_Entrance_Text_26851C, 4
 	setvar VAR_0x8004, 14
 	special sp194_trainer_tower
-	setvar VAR_0x4005, 1
+	setvar VAR_TEMP_5, 1
 	call TrainerHill_Entrance_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq TrainerHill_Entrance_EventScript_26835C

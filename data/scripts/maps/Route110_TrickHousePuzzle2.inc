@@ -4,21 +4,21 @@ Route110_TrickHousePuzzle2_MapScripts:: @ 826BB73
 	.byte 0
 
 Route110_TrickHousePuzzle2_MapScript1_26BB7E: @ 826BB7E
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_26BC29
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_26BC3C
-	compare VAR_0x4003, 1
+	compare VAR_TEMP_3, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_26BC4F
-	compare VAR_0x4004, 1
+	compare VAR_TEMP_4, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_26BC62
 	end
 
 Route110_TrickHousePuzzle2_MapScript1_26BBAB: @ 826BBAB
-	setvar VAR_0x4001, 0
-	setvar VAR_0x4002, 0
-	setvar VAR_0x4003, 0
-	setvar VAR_0x4004, 0
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_4, 0
 	end
 
 Route110_TrickHousePuzzle2_EventScript_26BBC0:: @ 826BBC0
@@ -35,7 +35,7 @@ Route110_TrickHousePuzzle2_EventScript_26BBD2:: @ 826BBD2
 
 Route110_TrickHousePuzzle2_EventScript_26BBDD:: @ 826BBDD
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	playse SE_PIN
 	call Route110_TrickHousePuzzle2_EventScript_26BC29
 	special DrawWholeMapView
@@ -44,7 +44,7 @@ Route110_TrickHousePuzzle2_EventScript_26BBDD:: @ 826BBDD
 
 Route110_TrickHousePuzzle2_EventScript_26BBF0:: @ 826BBF0
 	lockall
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	playse SE_PIN
 	call Route110_TrickHousePuzzle2_EventScript_26BC3C
 	special DrawWholeMapView
@@ -53,7 +53,7 @@ Route110_TrickHousePuzzle2_EventScript_26BBF0:: @ 826BBF0
 
 Route110_TrickHousePuzzle2_EventScript_26BC03:: @ 826BC03
 	lockall
-	setvar VAR_0x4003, 1
+	setvar VAR_TEMP_3, 1
 	playse SE_PIN
 	call Route110_TrickHousePuzzle2_EventScript_26BC4F
 	special DrawWholeMapView
@@ -62,7 +62,7 @@ Route110_TrickHousePuzzle2_EventScript_26BC03:: @ 826BC03
 
 Route110_TrickHousePuzzle2_EventScript_26BC16:: @ 826BC16
 	lockall
-	setvar VAR_0x4004, 1
+	setvar VAR_TEMP_4, 1
 	playse SE_PIN
 	call Route110_TrickHousePuzzle2_EventScript_26BC62
 	special DrawWholeMapView

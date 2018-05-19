@@ -17,11 +17,11 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F:: @ 8248F0F
 	checkplayergender
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29
-	setvar VAR_0x401F, 0
+	setvar VAR_OBJ_GFX_ID_F, 0
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29:: @ 8248F29
-	setvar VAR_0x401F, 89
+	setvar VAR_OBJ_GFX_ID_F, 89
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F:: @ 8248F2F
@@ -29,7 +29,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F:: @ 8248F2F
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F33: @ 8248F33
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F3D
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F3D
 	.2byte 0
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F3D:: @ 8248F3D
@@ -37,11 +37,11 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F3D:: @ 8248F3D
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F43: @ 8248F43
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D
 	.2byte 0
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D:: @ 8248F4D
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 5, BattleFrontier_BattleTowerBattleRoom2_Movement_249518
 	applymovement 6, BattleFrontier_BattleTowerBattleRoom2_Movement_24951E
 	waitmovement 0
@@ -258,8 +258,8 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB:: @ 82492DB
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2492FD:: @ 82492FD
 	compare VAR_0x40CE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_24937E
-	copyvar VAR_0x400F, VAR_RESULT
-	switch VAR_0x400F
+	copyvar VAR_TEMP_F, VAR_RESULT
+	switch VAR_TEMP_F
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249354
 	case 2, BattleFrontier_BattleTowerBattleRoom2_EventScript_24935B
 	case 3, BattleFrontier_BattleTowerBattleRoom2_EventScript_249362
@@ -298,8 +298,8 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249377:: @ 8249377
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_24937E:: @ 824937E
-	copyvar VAR_0x400F, VAR_RESULT
-	switch VAR_0x400F
+	copyvar VAR_TEMP_F, VAR_RESULT
+	switch VAR_TEMP_F
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2493CA
 	case 2, BattleFrontier_BattleTowerBattleRoom2_EventScript_2493D6
 	case 3, BattleFrontier_BattleTowerBattleRoom2_EventScript_2493E2

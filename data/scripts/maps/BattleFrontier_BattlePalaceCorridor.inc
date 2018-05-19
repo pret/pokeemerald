@@ -3,7 +3,7 @@ BattleFrontier_BattlePalaceCorridor_MapScripts:: @ 824F4A3
 	.byte 0
 
 BattleFrontier_BattlePalaceCorridor_MapScript2_24F4A9: @ 824F4A9
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3
 	.2byte 0
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3

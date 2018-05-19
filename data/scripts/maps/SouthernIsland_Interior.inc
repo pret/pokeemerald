@@ -24,13 +24,13 @@ SouthernIsland_Interior_MapScript1_242A6E: @ 8242A6E
 	end
 
 SouthernIsland_Interior_EventScript_242A8A:: @ 8242A8A
-	setvar VAR_0x4011, 188
-	setvar VAR_0x4004, 408
+	setvar VAR_OBJ_GFX_ID_1, 188
+	setvar VAR_TEMP_4, 408
 	return
 
 SouthernIsland_Interior_EventScript_242A95:: @ 8242A95
-	setvar VAR_0x4011, 187
-	setvar VAR_0x4004, 407
+	setvar VAR_OBJ_GFX_ID_1, 187
+	setvar VAR_TEMP_4, 407
 	return
 
 SouthernIsland_Interior_EventScript_242AA0:: @ 8242AA0
@@ -42,11 +42,11 @@ SouthernIsland_Interior_EventScript_242AA0:: @ 8242AA0
 	end
 
 SouthernIsland_Interior_EventScript_242AB8:: @ 8242AB8
-	setvar VAR_0x4010, 100
+	setvar VAR_OBJ_GFX_ID_0, 100
 	return
 
 SouthernIsland_Interior_EventScript_242ABE:: @ 8242ABE
-	setvar VAR_0x4010, 105
+	setvar VAR_OBJ_GFX_ID_0, 105
 	return
 
 SouthernIsland_Interior_EventScript_242AC4:: @ 8242AC4
@@ -71,7 +71,7 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	waitmovement 0
 	delay 50
 	waitse
-	playmoncry VAR_0x4004, 0
+	playmoncry VAR_TEMP_4, 0
 	delay 30
 	waitmoncry
 	addobject 2
@@ -103,12 +103,12 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 
 SouthernIsland_Interior_EventScript_242B81:: @ 8242B81
 	setflag FLAG_0x1C8
-	copyvar VAR_0x8004, VAR_0x4004
+	copyvar VAR_0x8004, VAR_TEMP_4
 	goto SouthernIsland_Interior_EventScript_273776
 	end
 
 SouthernIsland_Interior_EventScript_242B8F:: @ 8242B8F
-	copyvar VAR_0x8004, VAR_0x4004
+	copyvar VAR_0x8004, VAR_TEMP_4
 	goto SouthernIsland_Interior_EventScript_273776
 	end
 

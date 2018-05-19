@@ -13,23 +13,23 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D:: @ 825F07D
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F08A:: @ 825F08A
-	specialvar VAR_0x4001, sub_813AA04
-	compare VAR_0x4001, VAR_0x8008
+	specialvar VAR_TEMP_1, sub_813AA04
+	compare VAR_TEMP_1, VAR_0x8008
 	goto_if 4, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F0C9
 	msgbox BattleFrontier_BattlePointExchangeServiceCorner_Text_25FE86, 4
-	compare VAR_0x4002, 0
+	compare VAR_TEMP_2, 0
 	goto_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F185
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F38E
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	goto_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F4B1
 	goto BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F602
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F0C9:: @ 825F0C9
-	compare VAR_0x4002, 0
+	compare VAR_TEMP_2, 0
 	goto_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F0E5
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F0E5
 	goto BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F12A
 	end
@@ -44,7 +44,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F0E5:: @ 825F0E5
 	special sub_813A8FC
 	playse SE_REGI
 	msgbox BattleFrontier_BattlePointExchangeServiceCorner_Text_25FE45, 4
-	compare VAR_0x4002, 0
+	compare VAR_TEMP_2, 0
 	goto_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F185
 	goto BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F38E
 	end
@@ -65,7 +65,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F12A:: @ 825F12A
 	special sub_813A8FC
 	playse SE_REGI
 	msgbox BattleFrontier_BattlePointExchangeServiceCorner_Text_25FE72, 4
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	goto_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F4B1
 	goto BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F602
 	end
@@ -79,7 +79,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F166:: @ 825F166
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F173:: @ 825F173
 	lock
 	faceplayer
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	call BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F071
 	goto BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F185
 	end
@@ -198,7 +198,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F359:: @ 825F359
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F37C:: @ 825F37C
 	lock
 	faceplayer
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	call BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F071
 	goto BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F38E
 	end
@@ -267,7 +267,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F47C:: @ 825F47C
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F49F:: @ 825F49F
 	lock
 	faceplayer
-	setvar VAR_0x4002, 2
+	setvar VAR_TEMP_2, 2
 	call BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F071
 	goto BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F4B1
 	end
@@ -346,7 +346,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F5CD:: @ 825F5CD
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F5F0:: @ 825F5F0
 	lock
 	faceplayer
-	setvar VAR_0x4002, 3
+	setvar VAR_TEMP_2, 3
 	call BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F071
 	goto BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F602
 	end

@@ -4,20 +4,20 @@ BattleFrontier_BattlePalaceLobby_MapScripts:: @ 824D77E
 	.byte 0
 
 BattleFrontier_BattlePalaceLobby_MapScript2_24D789: @ 824D789
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattlePalaceLobby_EventScript_24D793
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePalaceLobby_EventScript_24D793
 	.2byte 0
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D793:: @ 824D793
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 BattleFrontier_BattlePalaceLobby_MapScript2_24D79D: @ 824D79D
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePalaceLobby_EventScript_24D7C7
-	map_script_2 VAR_0x4000, 1, BattleFrontier_BattlePalaceLobby_EventScript_24D7D0
-	map_script_2 VAR_0x4000, 2, BattleFrontier_BattlePalaceLobby_EventScript_24D908
-	map_script_2 VAR_0x4000, 3, BattleFrontier_BattlePalaceLobby_EventScript_24D817
-	map_script_2 VAR_0x4000, 4, BattleFrontier_BattlePalaceLobby_EventScript_24D873
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePalaceLobby_EventScript_24D7C7
+	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattlePalaceLobby_EventScript_24D7D0
+	map_script_2 VAR_TEMP_0, 2, BattleFrontier_BattlePalaceLobby_EventScript_24D908
+	map_script_2 VAR_TEMP_0, 3, BattleFrontier_BattlePalaceLobby_EventScript_24D817
+	map_script_2 VAR_TEMP_0, 4, BattleFrontier_BattlePalaceLobby_EventScript_24D873
 	.2byte 0
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D7C7:: @ 824D7C7
@@ -41,7 +41,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D7D0:: @ 824D7D0
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -67,7 +67,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D840:: @ 824D840
 	call BattleFrontier_BattlePalaceLobby_EventScript_24D8A1
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E0D8, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -82,7 +82,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D873:: @ 824D873
 	call BattleFrontier_BattlePalaceLobby_EventScript_24D8A1
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E0D8, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -127,7 +127,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D908:: @ 824D908
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	goto BattleFrontier_BattlePalaceLobby_EventScript_24DAF3
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D944:: @ 824D944
@@ -202,7 +202,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D9E6:: @ 824D9E6
 	case 127, BattleFrontier_BattlePalaceLobby_EventScript_24DB91
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
@@ -224,7 +224,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	closemessage
 	delay 2
 	call BattleFrontier_BattlePalaceLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB7A
 
@@ -237,7 +237,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DAF3:: @ 824DAF3
 	closemessage
 	call BattleFrontier_BattlePalaceLobby_EventScript_24DBBC
 	warp BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR, 255, 8, 13
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 

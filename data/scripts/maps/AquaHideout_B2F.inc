@@ -8,7 +8,7 @@ AquaHideout_B2F_MapScript1_233DD5: @ 8233DD5
 	end
 
 AquaHideout_B2F_EventScript_233DDF:: @ 8233DDF
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 AquaHideout_B2F_EventScript_233DE5:: @ 8233DE5
@@ -19,7 +19,7 @@ AquaHideout_B2F_EventScript_233DE5:: @ 8233DE5
 	waitmovement 0
 	applymovement VAR_0x8008, AquaHideout_B2F_Movement_27259E
 	waitmovement 0
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end
 

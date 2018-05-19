@@ -4,11 +4,11 @@ BattleFrontier_BattleFactoryPreBattleRoom_MapScripts:: @ 8259ABA
 	.byte 0
 
 BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AC5: @ 8259AC5
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259ACF
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259ACF
 	.2byte 0
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259ACF:: @ 8259ACF
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	compare VAR_0x8006, 1
 	goto_if 5, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AEA
 	setobjectxy 1, 8, 7
@@ -19,13 +19,13 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AEA:: @ 8259AEA
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AEF: @ 8259AEF
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9
 	.2byte 0
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
 	compare VAR_0x8006, 1
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 1, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1AC
 	applymovement 255, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A19A
 	waitmovement 0
