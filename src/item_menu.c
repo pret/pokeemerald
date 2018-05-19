@@ -26,7 +26,6 @@
 #include "malloc.h"
 #include "map_name_popup.h"
 #include "menu.h"
-#include "menu_indicators.h"
 #include "money.h"
 #include "overworld.h"
 #include "palette.h"

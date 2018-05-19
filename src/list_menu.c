@@ -13,6 +13,8 @@
 #include "sound.h"
 #include "constants/songs.h"
 
+// This file needs better labels and function names.
+
 struct UnknownMysteryGiftLinkMenuStruct
 {
     s32 field_0;
