@@ -7,7 +7,7 @@ struct BagStruct
     void (*bagCallback)(void);
     u8 location;
     u8 pocket;
-    u8 unk6[2];
+    u16 unk6;
     u16 cursorPosition[5];
     u16 scrollPosition[5];
 };

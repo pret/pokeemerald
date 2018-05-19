@@ -265,7 +265,7 @@ struct TempWallyStruct {
 };
 
 EWRAM_DATA struct UnkBagStruct *gUnknown_0203CE54 = 0;
-EWRAM_DATA struct BagStruct gUnknown_0203CE58 = {0, 0, 0, {0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
+EWRAM_DATA struct BagStruct gUnknown_0203CE58 = {0};
 EWRAM_DATA struct ListBuffer1 *gUnknown_0203CE74 = 0;
 EWRAM_DATA struct ListBuffer2 *gUnknown_0203CE78 = 0;
 EWRAM_DATA u16 gSpecialVar_ItemId = 0;
@@ -750,7 +750,7 @@ void sub_81AB824(void)
 void bag_menu_add_list_scroll_arrow_indicators_maybe(void)
 {
     if (gUnknown_0203CE54->unk81B != 1 && gUnknown_0203CE54->unk81F == 0xFF)
-        gUnknown_0203CE54->unk81F = AddScrollIndicatorArrowPair(&gUnknown_08614094, gUnknown_0203CE58.unk6);
+        gUnknown_0203CE54->unk81F = AddScrollIndicatorArrowPair(&gUnknown_08614094, &gUnknown_0203CE58.unk6);
 }
 
 void sub_81AB89C(void)
