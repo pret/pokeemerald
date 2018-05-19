@@ -801,26 +801,26 @@ void sub_818E564(void)
     EnableBothScriptContexts();
 }
 
-void sub_818E570(const struct LilycoveLadyQuiz *quiz)
+void sub_818E570(const LilycoveLady *lilycoveLady)
 {
     u8 i;
 
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (quiz->unk_02c < 16 && gUnknown_0203CD68->id == LILYCOVE_LADY_QUIZ)
+    if (lilycoveLady->quiz.unk_02c < 16 && gUnknown_0203CD68->id == LILYCOVE_LADY_QUIZ)
     {
         for (i = 0; i < 4; i ++)
         {
-            if (quiz->unk_02c != gUnknown_0203CD68->unk_02b)
+            if (lilycoveLady->quiz.unk_02c != gUnknown_0203CD68->unk_02b)
             {
                 break;
             }
             gUnknown_0203CD68->unk_02b = Random() % 16;
         }
-        if (quiz->unk_02c == gUnknown_0203CD68->unk_02b)
+        if (lilycoveLady->quiz.unk_02c == gUnknown_0203CD68->unk_02b)
         {
             gUnknown_0203CD68->unk_02b = (gUnknown_0203CD68->unk_02b + 1) % 16;
         }
-        gUnknown_0203CD68->unk_02c = quiz->unk_02c;
+        gUnknown_0203CD68->unk_02c = lilycoveLady->quiz.unk_02c;
     }
 }
 

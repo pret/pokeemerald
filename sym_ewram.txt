@@ -487,17 +487,7 @@ gUnknown_02039F90: @ 2039F90
 
     .include "src/naming_screen.o"
     .include "src/money.o"
-    
-    .align 2
-gUnknown_02039F9C: @ 2039F9C
-	.space 0x78
-
-gUnknown_0203A014: @ 203A014
-	.space 0x4
-
-gUnknown_0203A018: @ 203A018
-	.space 0x4
-
+    .include "src/record_mixing.o"
     .include "src/secret_base.o"
     .include "src/tv.o"
 

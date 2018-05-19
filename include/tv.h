@@ -39,11 +39,13 @@ void sub_80EECC8(void);
 void sub_80EECEC(void);
 void sub_80F1208(TVShow *shows);
 void sub_80EE44C(u8 nMonsCaught, u8 nPkblkUsed);
+void sub_80F14F8(TVShow *shows);
+size_t sub_80EF370(int value);
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unused, u8 sheen, u8 language);
 void SetPokemonAnglerSpecies(u16 species);
 void UpdateTVShowsPerDay(u16 days);
 void PutPokemonTodayCaughtOnAir(void);
 void TV_PutSecretBaseVisitOnTheAir(void);
-bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unused, u8 sheen, u8 language);
 void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent);
 void UpdateTVScreensOnMap(int, int);
 

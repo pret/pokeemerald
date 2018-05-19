@@ -4,7 +4,7 @@
 	.syntax unified
 
 	.text
-
+	
 	thumb_func_start nullsub_89
 nullsub_89: @ 80124E8
 	bx lr

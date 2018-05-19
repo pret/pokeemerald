@@ -387,7 +387,7 @@ static void ResetStorytellerFlag(void)
     Storyteller_ResetFlag();
 }
 
-void ResetMauvilleOldManFlag(void) // ResetMauvilleOldManFlag
+void ResetMauvilleOldManFlag(void)
 {
     switch (GetCurrentMauvilleOldMan())
     {

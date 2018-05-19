@@ -281,7 +281,8 @@ struct SaveBlock2
     /*0xAC*/ u32 encryptionKey;
 
         // TODO: fix and verify labels
-    /*0xB0*/ u8 field_B0[316];
+    /*0xB0*/ u8 field_B0[0x2c];
+    /*0xDC*/ u8 field_0DC[0x110];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
@@ -642,12 +643,13 @@ struct LilycoveLadyContest
     /*0x00e*/ u8 language;
 };
 
-typedef union // TODO
+typedef union
 {
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavour favour;
     struct LilycoveLadyContest contest;
     u8 id;
+    u8 pad[0x40];
 } LilycoveLady;
 
 struct WaldaPhrase
