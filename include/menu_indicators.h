@@ -28,9 +28,9 @@ struct CursorStruct
     u8 unk1;
     u16 unk2;
     u16 unk4;
-    u16 unk6;
-    u16 unk8;
-    u8 unkA;
+    u16 tileTag;
+    u16 palTag;
+    u8 palNum;
 };
 
 void Task_ScrollIndicatorArrowPairOnMainMenu(u8);

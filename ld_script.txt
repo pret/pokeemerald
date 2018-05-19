@@ -246,7 +246,6 @@ SECTIONS {
         src/item_menu.o(.text);
         src/list_menu.o(.text);
         src/menu_indicators.o(.text);
-        asm/menu_indicators.o(.text);
         src/unk_text_util.o(.text);
         src/save_location.o(.text);
         src/item_icon.o(.text);
@@ -521,7 +520,7 @@ SECTIONS {
         src/menu.o(.rodata);
         data/battle_frontier_2.o(.rodata);
         src/item_menu.o(.rodata);
-        data/menu_indicators.o(.rodata);
+        src/menu_indicators.o(.rodata);
         src/save_location.o(.rodata);
         src/item_icon.o(.rodata);
         data/party_menu.o(.rodata);

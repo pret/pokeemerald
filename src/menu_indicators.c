@@ -4,6 +4,7 @@
 #include "trig.h"
 #include "decompress.h"
 #include "palette.h"
+#include "malloc.h"
 
 struct UnkIndicatorsStruct
 {
@@ -47,6 +48,30 @@ struct UnkIndicatorsStruct2
     s16 field_1E;
 };
 
+struct UnkIndicatorsStruct3
+{
+    struct SubspriteTable subspriteTable;
+    struct Subsprite *subspritesPtr; // not a const pointer
+    u8 field_C;
+    u8 field_D;
+    u16 tileTag;
+    u16 palTag;
+    u16 field_12;
+    u16 field_14;
+    u16 field_16;
+    u16 field_18;
+    u16 field_1A;
+    u16 field_1C;
+    s16 field_1E;
+};
+
+struct UnkIndicatorsStruct4
+{
+    u8 field_0;
+    u16 tileTag;
+    u16 palTag;
+};
+
 struct UnkSmallIndicatorsStruct
 {
     u8 field_0_0:4;
@@ -54,11 +79,6 @@ struct UnkSmallIndicatorsStruct
     u8 field_1;
     u16 field_2;
 };
-
-extern const struct SpriteTemplate gUnknown_08614244;
-extern const struct UnkSmallIndicatorsStruct gUnknown_086141FC[];
-extern const u8 gUnknown_086142C8[];
-extern const u16 gUnknown_086142A8[];
 
 extern struct ArrowStruct gUnknown_0203CE8C;
 
@@ -70,6 +90,201 @@ void ListMenuUpdateRedOutlineCursorObject(u8 taskId, u16 x, u16 y);
 void ListMenuUpdateRedArrowCursorObject(u8 taskId, u16 x, u16 y);
 void ListMenuRemoveRedOutlineCursorObject(u8 taskId);
 void ListMenuRemoveRedArrowCursorObject(u8 taskId);
+void sub_81AF264(struct Sprite *sprite);
+void ObjectCB_RedArrowCursor(struct Sprite *sprite);
+
+// const rom data
+static const struct UnkSmallIndicatorsStruct gUnknown_086141FC[] =
+{
+    {0, 0, 2, 8},
+    {1, 0, 2, -8},
+    {2, 1, 2, 8},
+    {3, 1, 2, -8},
+};
+
+static const struct OamData sOamData_861420C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8614214[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_861421C[] =
+{
+    ANIMCMD_FRAME(0, 30, 1, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8614224[] =
+{
+    ANIMCMD_FRAME(4, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_861422C[] =
+{
+    ANIMCMD_FRAME(4, 30, 0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8614234[] =
+{
+    sSpriteAnim_8614214,
+    sSpriteAnim_861421C,
+    sSpriteAnim_8614224,
+    sSpriteAnim_861422C
+};
+
+static const struct SpriteTemplate gUnknown_08614244 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &sOamData_861420C,
+    .anims = sSpriteAnimTable_8614234,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81AF264,
+};
+
+static const struct Subsprite sSubsprite_861425C =
+{
+    .x = 0,
+    .y = 0,
+    .shape = 0,
+    .size = 0,
+    .tileOffset = 0,
+    .priority = 0,
+};
+
+static const struct Subsprite sSubsprite_8614260 =
+{
+    .x = 0,
+    .y = 0,
+    .shape = 0,
+    .size = 0,
+    .tileOffset = 1,
+    .priority = 0,
+};
+
+static const struct Subsprite sSubsprite_8614264 =
+{
+    .x = 0,
+    .y = 0,
+    .shape = 0,
+    .size = 0,
+    .tileOffset = 2,
+    .priority = 0,
+};
+
+static const struct Subsprite sSubsprite_8614268 =
+{
+    .x = 0,
+    .y = 0,
+    .shape = 0,
+    .size = 0,
+    .tileOffset = 3,
+    .priority = 0,
+};
+
+static const struct Subsprite sSubsprite_861426C =
+{
+    .x = 0,
+    .y = 0,
+    .shape = 0,
+    .size = 0,
+    .tileOffset = 4,
+    .priority = 0,
+};
+
+static const struct Subsprite sSubsprite_8614270 =
+{
+    .x = 0,
+    .y = 0,
+    .shape = 0,
+    .size = 0,
+    .tileOffset = 5,
+    .priority = 0,
+};
+
+static const struct Subsprite sSubsprite_8614274 =
+{
+    .x = 0,
+    .y = 0,
+    .shape = 0,
+    .size = 0,
+    .tileOffset = 6,
+    .priority = 0,
+};
+
+static const struct Subsprite sSubsprite_8614278 =
+{
+    .x = 0,
+    .y = 0,
+    .shape = 0,
+    .size = 0,
+    .tileOffset = 7,
+    .priority = 0,
+};
+
+static const struct OamData sOamData_861427C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8614284[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_861428C[] =
+{
+    sSpriteAnim_8614284
+};
+
+static const struct SpriteTemplate gUnknown_08614290 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &sOamData_861427C,
+    .anims = sSpriteAnimTable_861428C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = ObjectCB_RedArrowCursor,
+};
+
+static const u16 gUnknown_086142A8[] = INCBIN_U16("graphics/interface/red_arrow.gbapal");
+static const u8 gUnknown_086142C8[] = INCBIN_U8("graphics/interface/red_arrow_other.4bpp.lz");
+static const u8 gUnknown_08614338[] = INCBIN_U8("graphics/interface/selector_outline.4bpp.lz");
+static const u8 gUnknown_08614378[] = INCBIN_U8("graphics/interface/red_arrow.4bpp.lz");
 
 // code
 s32 sub_81AF08C(u8 taskId, u8 field)
@@ -384,4 +599,232 @@ void ListMenuRemoveCursorObject(u8 taskId, u32 cursorKind)
 void Task_RedOutlineCursor(u8 taskId)
 {
 
+}
+
+u8 ListMenuGetRedOutlineCursorSpriteCount(u16 arg0, u16 arg1)
+{
+    s32 i;
+    s32 count = 4;
+
+    if (arg0 > 16)
+    {
+        for (i = 8; i < (arg0 - 8); i += 8)
+            count += 2;
+    }
+    if (arg1 > 16)
+    {
+        for (i = 8; i < (arg1 - 8); i += 8)
+            count += 2;
+    }
+
+    return count;
+}
+
+void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 arg0, u16 arg1, struct Subsprite *subsprites)
+{
+    s32 i, j, id = 0;
+
+    subsprites[id] = sSubsprite_861425C;
+    subsprites[id].x = 136;
+    subsprites[id].y = 136;
+    id++;
+
+    subsprites[id] = sSubsprite_8614260;
+    subsprites[id].x = arg0 + 128;
+    subsprites[id].y = 136;
+    id++;
+
+    subsprites[id] = sSubsprite_8614274;
+    subsprites[id].x = 136;
+    subsprites[id].y = arg1 + 128;
+    id++;
+
+    subsprites[id] = sSubsprite_8614278;
+    subsprites[id].x = arg0 + 128;
+    subsprites[id].y = arg1 + 128;
+    id++;
+
+    if (arg0 > 16)
+    {
+        for (i = 8; i < arg0 - 8; i += 8)
+        {
+            subsprites[id] = sSubsprite_8614264;
+            subsprites[id].x = i - 120;
+            subsprites[id].y = 136;
+            id++;
+
+            subsprites[id] = sSubsprite_8614270;
+            subsprites[id].x = i - 120;
+            subsprites[id].y = arg1 + 128;
+            id++;
+        }
+    }
+
+    if (arg1 > 16)
+    {
+        for (j = 8; j < arg1 - 8; j += 8)
+        {
+            subsprites[id] = sSubsprite_8614268;
+            subsprites[id].x = 136;
+            subsprites[id].y = j - 120;
+            id++;
+
+            subsprites[id] = sSubsprite_861426C;
+            subsprites[id].x = arg0 + 128;
+            subsprites[id].y = j - 120;
+            id++;
+        }
+    }
+}
+
+u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
+{
+    struct CompressedSpriteSheet spriteSheet;
+    struct SpritePalette spritePal;
+    struct UnkIndicatorsStruct3 *data;
+    struct SpriteTemplate spriteTemplate;
+    u8 taskId;
+
+    spriteSheet.data = gUnknown_08614338;
+    spriteSheet.size = 0x100;
+    spriteSheet.tag = cursor->tileTag;
+    LoadCompressedObjectPic(&spriteSheet);
+
+    if (cursor->palTag == 0xFFFF)
+    {
+        LoadPalette(gUnknown_086142A8, (16 * cursor->palNum) + 0x100, 0x20);
+    }
+    else
+    {
+        spritePal.data = gUnknown_086142A8;
+        spritePal.tag = cursor->palTag;
+        LoadSpritePalette(&spritePal);
+    }
+
+    taskId = CreateTask(Task_RedOutlineCursor, 0);
+    data = (void*) gTasks[taskId].data;
+
+    data->tileTag = cursor->tileTag;
+    data->palTag = cursor->palTag;
+    data->subspriteTable.subspriteCount = ListMenuGetRedOutlineCursorSpriteCount(cursor->unk2, cursor->unk4);
+    data->subspriteTable.subsprites = data->subspritesPtr = Alloc(data->subspriteTable.subspriteCount * 4);
+    ListMenuSetUpRedOutlineCursorSpriteOamTable(cursor->unk2, cursor->unk4, data->subspritesPtr);
+
+    spriteTemplate = gDummySpriteTemplate;
+    spriteTemplate.tileTag = cursor->tileTag;
+    spriteTemplate.paletteTag = cursor->palTag;
+
+    data->field_C = CreateSprite(&spriteTemplate, cursor->unk0 + 120, cursor->unk1 + 120, 0);
+    SetSubspriteTables(&gSprites[data->field_C], &data->subspriteTable);
+    gSprites[data->field_C].oam.priority = 0;
+    gSprites[data->field_C].subpriority = 0;
+    gSprites[data->field_C].subspriteTableNum = 0;
+
+    if (cursor->palTag == 0xFFFF)
+    {
+        gSprites[data->field_C].oam.paletteNum = cursor->palNum;
+    }
+
+    return taskId;
+}
+
+void ListMenuUpdateRedOutlineCursorObject(u8 taskId, u16 x, u16 y)
+{
+    struct UnkIndicatorsStruct3 *data = (void*) gTasks[taskId].data;
+
+    gSprites[data->field_C].pos1.x = x + 120;
+    gSprites[data->field_C].pos1.y = y + 120;
+}
+
+void ListMenuRemoveRedOutlineCursorObject(u8 taskId)
+{
+    struct UnkIndicatorsStruct3 *data = (void*) gTasks[taskId].data;
+
+    Free(data->subspritesPtr);
+
+    if (data->tileTag != 0xFFFF)
+        FreeSpriteTilesByTag(data->tileTag);
+    if (data->palTag != 0xFFFF)
+        FreeSpritePaletteByTag(data->palTag);
+
+    DestroySprite(&gSprites[data->field_C]);
+    DestroyTask(taskId);
+}
+
+void ObjectCB_RedArrowCursor(struct Sprite *sprite)
+{
+    sprite->pos2.x = gSineTable[(u8)(sprite->data[0])] / 64;
+    sprite->data[0] += 8;
+}
+
+void Task_RedArrowCursor(u8 taskId)
+{
+
+}
+
+u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
+{
+    struct CompressedSpriteSheet spriteSheet;
+    struct SpritePalette spritePal;
+    struct UnkIndicatorsStruct4 *data;
+    struct SpriteTemplate spriteTemplate;
+    u8 taskId;
+
+    spriteSheet.data = gUnknown_08614378;
+    spriteSheet.size = 0x80;
+    spriteSheet.tag = cursor->tileTag;
+    LoadCompressedObjectPic(&spriteSheet);
+
+    if (cursor->palTag == 0xFFFF)
+    {
+        LoadPalette(gUnknown_086142A8, (16 * cursor->palNum) + 0x100, 0x20);
+    }
+    else
+    {
+        spritePal.data = gUnknown_086142A8;
+        spritePal.tag = cursor->palTag;
+        LoadSpritePalette(&spritePal);
+    }
+
+    taskId = CreateTask(Task_RedArrowCursor, 0);
+    data = (void*) gTasks[taskId].data;
+
+    data->tileTag = cursor->tileTag;
+    data->palTag = cursor->palTag;
+
+    spriteTemplate = gUnknown_08614290;
+    spriteTemplate.tileTag = cursor->tileTag;
+    spriteTemplate.paletteTag = cursor->palTag;
+
+    data->field_0 = CreateSprite(&spriteTemplate, cursor->unk0, cursor->unk1, 0);
+    gSprites[data->field_0].pos2.x = 8;
+    gSprites[data->field_0].pos2.y = 8;
+
+    if (cursor->palTag == 0xFFFF)
+    {
+        gSprites[data->field_0].oam.paletteNum = cursor->palNum;
+    }
+
+    return taskId;
+}
+
+void ListMenuUpdateRedArrowCursorObject(u8 taskId, u16 x, u16 y)
+{
+    struct UnkIndicatorsStruct4 *data = (void*) gTasks[taskId].data;
+
+    gSprites[data->field_0].pos1.x = x;
+    gSprites[data->field_0].pos1.y = y;
+}
+
+void ListMenuRemoveRedArrowCursorObject(u8 taskId)
+{
+    struct UnkIndicatorsStruct4 *data = (void*) gTasks[taskId].data;
+
+    if (data->tileTag != 0xFFFF)
+        FreeSpriteTilesByTag(data->tileTag);
+    if (data->palTag != 0xFFFF)
+        FreeSpritePaletteByTag(data->palTag);
+
+    DestroySprite(&gSprites[data->field_0]);
+    DestroyTask(taskId);
 }
