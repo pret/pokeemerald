@@ -55,21 +55,21 @@ Route111_MapWarps: @ 8529640
 
 Route111_MapCoordEvents: @ 8529668
 	coord_event 12, 62, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 11, 61, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F0A
-	coord_event 12, 61, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F0A
-	coord_event 13, 61, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F0A
+	coord_event 11, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F0A
+	coord_event 12, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F0A
+	coord_event 13, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F0A
 	coord_event 7, 63, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 12, 44, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F16
-	coord_event 13, 43, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F16
-	coord_event 14, 42, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F16
-	coord_event 16, 40, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F16
-	coord_event 14, 61, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F0A
+	coord_event 12, 44, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
+	coord_event 13, 43, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
+	coord_event 14, 42, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
+	coord_event 16, 40, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
+	coord_event 14, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F0A
 	coord_event 18, 32, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
 	coord_event 17, 31, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
 	coord_event 9, 37, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
 	coord_event 10, 36, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 17, 39, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F16
-	coord_event 18, 38, 3, 0, VAR_0x4003, 0, 0, Route111_EventScript_1F0F16
+	coord_event 17, 39, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
+	coord_event 18, 38, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
 	coord_event 8, 64, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
 	coord_event 9, 65, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
 	coord_event 10, 65, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0

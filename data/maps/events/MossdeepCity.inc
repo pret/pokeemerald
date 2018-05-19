@@ -30,10 +30,10 @@ MossdeepCity_MapWarps: @ 85271B0
 	warp_def 36, 24, 0, 0, MOSSDEEP_CITY_GAME_CORNER_1F
 
 MossdeepCity_MapCoordEvents: @ 8527200
-	coord_event 25, 25, 0, 0, VAR_0x4001, 0, 0, MossdeepCity_EventScript_1E4B38
-	coord_event 26, 25, 0, 0, VAR_0x4001, 0, 0, MossdeepCity_EventScript_1E4B38
-	coord_event 32, 27, 0, 0, VAR_0x4001, 0, 0, MossdeepCity_EventScript_1E4B38
-	coord_event 33, 27, 0, 0, VAR_0x4001, 0, 0, MossdeepCity_EventScript_1E4B38
+	coord_event 25, 25, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38
+	coord_event 26, 25, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38
+	coord_event 32, 27, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38
+	coord_event 33, 27, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38
 	coord_event 42, 21, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
 	coord_event 41, 22, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
 	coord_event 41, 23, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
