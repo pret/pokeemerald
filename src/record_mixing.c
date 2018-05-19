@@ -31,8 +31,14 @@
 #include "strings.h"
 #include "string_util.h"
 #include "record_mixing.h"
+#include "new_game.h"
 
 // Static type declarations
+
+struct UnkRecordMixingStruct
+{
+    u8 field_0[0x44];
+};
 
 struct PlayerRecordsRS {
     struct SecretBaseRecord secretBases[20];
@@ -99,7 +105,7 @@ static void sub_80E7B2C(const u8 *);
 static void sub_80E7B60(struct UnkStruct_80E7B60 *, size_t, u8, TVShow *);
 static void sub_80E7F68(u16 *item, u8 which);
 static void sub_80E7FF8(u8 taskId);
-void sub_80E8110(void *, void *);
+static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1);
 void sub_80E8468(void *, size_t, u8);
 void sub_80E89AC(void *, size_t, u8);
 void sub_80E89F8(void *dest);
@@ -206,7 +212,7 @@ void sub_80E6E24(void)
         {
             gUnknown_0203A018->unk_1210 = GetRecordMixingGift();
         }
-        sub_80E8110(gUnknown_0203A018->unk_1254, gUnknown_03001154);
+        sub_80E8110((void*) gUnknown_0203A018->unk_1254, gUnknown_03001154);
         sub_80E8260(gUnknown_0203A018->unk_12dc);
     }
 }
@@ -1521,3 +1527,55 @@ static void sub_80E7FF8(u8 taskId)
             break;
     }
 }
+
+/*
+static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1)
+{
+    s32 i, id;
+    s32 var_28, var_24, var_2C, r8;
+
+    arg0[0].field_0[0x38] = 0xFF;
+    arg0[1].field_0[0x38] = 0xFF;
+    memcpy(&arg0[0], &arg1[0], sizeof(struct UnkRecordMixingStruct));
+
+    var_28 = 0;
+    var_24 = 0;
+    var_2C = 0;
+    r8 = 0;
+    for (i = 0; i < 2; i++)
+    {
+        id = ((i + (gSaveBlock2Ptr->field_B0[2] << 0x1B >> 0x1E)) % 3) + 1;
+        if (arg1[id].field_0[0x38] != 0xFF)
+        {
+            if (ReadUnalignedWord(&arg1[id].field_0[0x34]) != ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
+            {
+                r8++;
+                var_2C = id;
+            }
+            if (ReadUnalignedWord(&arg1[id].field_0[0x34]) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
+            {
+                var_24++;
+                var_28 = id;
+            }
+        }
+    }
+
+    if (r8 == 0 && var_24 != 0)
+    {
+        r8 = var_24;
+        var_2C = var_28;
+    }
+
+    switch (r8)
+    {
+    case 1:
+        memcpy(&arg0[0], &arg1[var_2C], sizeof(struct UnkRecordMixingStruct));
+        break;
+    case 2:
+        if (Random2() > 0x3333)
+            memcpy(&arg0[1], &arg1[(gSaveBlock2Ptr->field_B0[2] << 0x1B >> 0x1E) + 1], sizeof(struct UnkRecordMixingStruct));
+        else
+            memcpy(&arg0[1], &arg1[((gSaveBlock2Ptr->field_B0[2] << 0x1B >> 0x1E) + 1) % 3 + 1], sizeof(struct UnkRecordMixingStruct));
+        break;
+    }
+}*/
