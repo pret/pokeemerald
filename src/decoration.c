@@ -21,7 +21,6 @@
 #include "list_menu.h"
 #include "menu_helpers.h"
 #include "menu.h"
-#include "menu_indicators.h"
 #include "sound.h"
 #include "event_scripts.h"
 #include "event_data.h"
