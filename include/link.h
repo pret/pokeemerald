@@ -300,7 +300,6 @@ u8 sub_800AA48(void);
 void sub_8009FAC(void);
 bool8 sub_800A4D8(u8 a0);
 u8 sub_800A9D8(void);
-bool8 sub_801048C(u8);
 u8 sub_800A0C8(s32, s32);
 
 #endif // GUARD_LINK_H

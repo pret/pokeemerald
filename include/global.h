@@ -749,7 +749,6 @@ struct SaveBlock1
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[52];
     /*0x3B58*/ LilycoveLady lilycoveLady;
-    /*0x3B88*/ u8 filler_3B88[0x10];
     /*0x3B98*/ struct UnkSaveSubstruct_3b98 unk_3B98[20];
     /*0x3C88*/ u8 filler_3C88[0xE8];
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;

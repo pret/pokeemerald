@@ -13,6 +13,7 @@
 #include "pokemon.h"
 #include "cable_club.h"
 #include "link.h"
+#include "link_rfu.h"
 #include "tv.h"
 #include "battle_tower.h"
 #include "window.h"
@@ -105,7 +106,7 @@ static void sub_80E7B2C(const u8 *);
 static void sub_80E7B60(struct UnkStruct_80E7B60 *, size_t, u8, TVShow *);
 static void sub_80E7F68(u16 *item, u8 which);
 static void sub_80E7FF8(u8 taskId);
-static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1);
+/*static*/ void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1);
 void sub_80E8468(void *, size_t, u8);
 void sub_80E89AC(void *, size_t, u8);
 void sub_80E89F8(void *dest);
