@@ -5,19 +5,19 @@ BattleFrontier_BattlePikeThreePathRoom_MapScripts:: @ 825C843
 	.byte 0
 
 BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C853: @ 825C853
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C891
-	map_script_2 VAR_0x4000, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C89A
-	map_script_2 VAR_0x4000, 2, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4
-	map_script_2 VAR_0x4005, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78
-	map_script_2 VAR_0x4005, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C891
+	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C89A
+	map_script_2 VAR_TEMP_0, 2, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4
+	map_script_2 VAR_TEMP_5, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78
+	map_script_2 VAR_TEMP_5, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97
 	.2byte 0
 
 BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C87D: @ 825C87D
-	map_script_2 VAR_0x4004, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887
+	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887
 	.2byte 0
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887:: @ 825C887
-	setvar VAR_0x4004, 1
+	setvar VAR_TEMP_4, 1
 	turnobject 255, 2
 	end
 
@@ -44,7 +44,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
@@ -170,11 +170,11 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78:: @ 825CA78
 	special sub_81A703C
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91
-	setvar VAR_0x4005, 255
+	setvar VAR_TEMP_5, 255
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91:: @ 825CA91
-	setvar VAR_0x4005, 1
+	setvar VAR_TEMP_5, 1
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97:: @ 825CA97
@@ -185,7 +185,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97:: @ 825CA97
 	releaseall
 	applymovement 2, BattleFrontier_BattlePikeThreePathRoom_Movement_25CBD5
 	waitmovement 0
-	setvar VAR_0x4005, 255
+	setvar VAR_TEMP_5, 255
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB:: @ 825CABB

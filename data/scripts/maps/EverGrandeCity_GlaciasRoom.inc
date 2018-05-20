@@ -5,7 +5,7 @@ EverGrandeCity_GlaciasRoom_MapScripts:: @ 8228412
 	.byte 0
 
 EverGrandeCity_GlaciasRoom_MapScript2_228422: @ 8228422
-	map_script_2 VAR_0x4001, 0, EverGrandeCity_GlaciasRoom_EventScript_22842C
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_GlaciasRoom_EventScript_22842C
 	.2byte 0
 
 EverGrandeCity_GlaciasRoom_EventScript_22842C:: @ 822842C

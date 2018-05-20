@@ -10,17 +10,17 @@ BattleFrontier_BattlePyramidTop_MapScript1_2550B6: @ 82550B6
 	setvar VAR_0x8005, 200
 	setvar VAR_0x8006, 0
 	special sub_81A8E7C
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_F, 1
 	end
 
 BattleFrontier_BattlePyramidTop_MapScript2_2550CE: @ 82550CE
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattlePyramidTop_EventScript_2550D8
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePyramidTop_EventScript_2550D8
 	.2byte 0
 
 BattleFrontier_BattlePyramidTop_EventScript_2550D8:: @ 82550D8
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
-	compare VAR_0x400C, 0
+	compare VAR_TEMP_C, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_2550F3
 	setobjectxyperm 2, 0, 0
 
@@ -35,10 +35,10 @@ BattleFrontier_BattlePyramidTop_MapScript1_2550F4: @ 82550F4
 	call BattleFrontier_BattlePyramidTop_EventScript_242170
 
 BattleFrontier_BattlePyramidTop_EventScript_25510C:: @ 825510C
-	copyvar VAR_0x400C, VAR_RESULT
+	copyvar VAR_TEMP_C, VAR_RESULT
 	setvar VAR_0x8004, 0
 	special sub_81A1780
-	switch VAR_0x4000
+	switch VAR_TEMP_0
 	case 0, BattleFrontier_BattlePyramidTop_EventScript_255193
 	case 1, BattleFrontier_BattlePyramidTop_EventScript_252B66
 	case 2, BattleFrontier_BattlePyramidTop_EventScript_255193
@@ -54,18 +54,18 @@ BattleFrontier_BattlePyramidTop_EventScript_25510C:: @ 825510C
 	end
 
 BattleFrontier_BattlePyramidTop_MapScript2_25516E: @ 825516E
-	map_script_2 VAR_0x400E, 0, BattleFrontier_BattlePyramidTop_EventScript_255180
-	map_script_2 VAR_0x400F, 1, BattleFrontier_BattlePyramidTop_EventScript_25518A
+	map_script_2 VAR_TEMP_E, 0, BattleFrontier_BattlePyramidTop_EventScript_255180
+	map_script_2 VAR_TEMP_F, 1, BattleFrontier_BattlePyramidTop_EventScript_25518A
 	.2byte 0
 
 BattleFrontier_BattlePyramidTop_EventScript_255180:: @ 8255180
 	playbgm MUS_PYRAMID_TOP, 0
-	setvar VAR_0x400E, 1
+	setvar VAR_TEMP_E, 1
 	end
 
 BattleFrontier_BattlePyramidTop_EventScript_25518A:: @ 825518A
 	special ShowMapNamePopup
-	setvar VAR_0x400F, 0
+	setvar VAR_TEMP_F, 0
 	end
 
 BattleFrontier_BattlePyramidTop_EventScript_255193:: @ 8255193
@@ -82,15 +82,15 @@ BattleFrontier_BattlePyramidTop_EventScript_255193:: @ 8255193
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_F, 1
 	end
 
 BattleFrontier_BattlePyramidTop_EventScript_2551D0:: @ 82551D0
 	lock
 	faceplayer
-	compare VAR_0x400D, 0
+	compare VAR_TEMP_D, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_255236
-	compare VAR_0x400C, 0
+	compare VAR_TEMP_C, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_255240
 	msgbox BattleFrontier_BattlePyramidTop_Text_255410, 4
 	closemessage
@@ -123,13 +123,13 @@ BattleFrontier_BattlePyramidTop_EventScript_255236:: @ 8255236
 BattleFrontier_BattlePyramidTop_EventScript_255240:: @ 8255240
 	msgbox BattleFrontier_BattlePyramidTop_Text_25551F, 4
 	applymovement 1, BattleFrontier_BattlePyramidTop_Movement_2553FD
-	setvar VAR_0x400D, 1
+	setvar VAR_TEMP_D, 1
 	closemessage
 	end
 
 BattleFrontier_BattlePyramidTop_EventScript_255256:: @ 8255256
 	lockall
-	switch VAR_0x400C
+	switch VAR_TEMP_C
 	case 2, BattleFrontier_BattlePyramidTop_EventScript_255335
 	case 3, BattleFrontier_BattlePyramidTop_EventScript_2552D0
 	case 4, BattleFrontier_BattlePyramidTop_EventScript_255388

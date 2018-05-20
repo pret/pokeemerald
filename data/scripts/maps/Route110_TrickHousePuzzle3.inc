@@ -5,19 +5,19 @@ Route110_TrickHousePuzzle3_MapScripts:: @ 826BED8
 
 Route110_TrickHousePuzzle3_MapScript1_26BEE3: @ 826BEE3
 	call Route110_TrickHousePuzzle3_EventScript_26BF1E
-	compare VAR_0x4009, 0
+	compare VAR_TEMP_9, 0
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF97
-	compare VAR_0x4009, 1
+	compare VAR_TEMP_9, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C232
 	end
 
 Route110_TrickHousePuzzle3_MapScript1_26BEFF: @ 826BEFF
-	setvar VAR_0x4001, 0
-	setvar VAR_0x4002, 0
-	setvar VAR_0x4003, 0
-	setvar VAR_0x4004, 0
-	setvar VAR_0x4008, 0
-	setvar VAR_0x4009, 0
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_4, 0
+	setvar VAR_TEMP_8, 0
+	setvar VAR_TEMP_9, 0
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26BF1E:: @ 826BF1E
@@ -25,13 +25,13 @@ Route110_TrickHousePuzzle3_EventScript_26BF1E:: @ 826BF1E
 	setmetatile 3, 11, 600, 0
 	setmetatile 12, 5, 600, 0
 	setmetatile 8, 2, 600, 0
-	compare VAR_0x4008, 1
+	compare VAR_TEMP_8, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF6F
-	compare VAR_0x4008, 2
+	compare VAR_TEMP_8, 2
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF79
-	compare VAR_0x4008, 3
+	compare VAR_TEMP_8, 3
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF83
-	compare VAR_0x4008, 4
+	compare VAR_TEMP_8, 4
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF8D
 	return
 
@@ -207,25 +207,25 @@ Route110_TrickHousePuzzle3_EventScript_26C232:: @ 826C232
 
 Route110_TrickHousePuzzle3_EventScript_26C4CD:: @ 826C4CD
 	lockall
-	setvar VAR_0x4008, 1
+	setvar VAR_TEMP_8, 1
 	goto Route110_TrickHousePuzzle3_EventScript_26C4FD
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C4D9:: @ 826C4D9
 	lockall
-	setvar VAR_0x4008, 2
+	setvar VAR_TEMP_8, 2
 	goto Route110_TrickHousePuzzle3_EventScript_26C4FD
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C4E5:: @ 826C4E5
 	lockall
-	setvar VAR_0x4008, 3
+	setvar VAR_TEMP_8, 3
 	goto Route110_TrickHousePuzzle3_EventScript_26C4FD
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C4F1:: @ 826C4F1
 	lockall
-	setvar VAR_0x4008, 4
+	setvar VAR_TEMP_8, 4
 	goto Route110_TrickHousePuzzle3_EventScript_26C4FD
 	end
 
@@ -237,55 +237,55 @@ Route110_TrickHousePuzzle3_EventScript_26C4FD:: @ 826C4FD
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C510:: @ 826C510
-	setvar VAR_0x4001, 0
-	setvar VAR_0x4002, 0
-	setvar VAR_0x4003, 0
-	setvar VAR_0x4004, 0
-	compare VAR_0x4008, 1
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_4, 0
+	compare VAR_TEMP_8, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C551
-	compare VAR_0x4008, 2
+	compare VAR_TEMP_8, 2
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C557
-	compare VAR_0x4008, 3
+	compare VAR_TEMP_8, 3
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C55D
-	compare VAR_0x4008, 4
+	compare VAR_TEMP_8, 4
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C563
 	return
 
 Route110_TrickHousePuzzle3_EventScript_26C551:: @ 826C551
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_26C557:: @ 826C557
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_26C55D:: @ 826C55D
-	setvar VAR_0x4003, 1
+	setvar VAR_TEMP_3, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_26C563:: @ 826C563
-	setvar VAR_0x4004, 1
+	setvar VAR_TEMP_4, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_26C569:: @ 826C569
-	compare VAR_0x4009, 1
+	compare VAR_TEMP_9, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF97
-	compare VAR_0x4009, 0
+	compare VAR_TEMP_9, 0
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C232
 	special DrawWholeMapView
-	compare VAR_0x4009, 1
+	compare VAR_TEMP_9, 1
 	goto_eq Route110_TrickHousePuzzle3_EventScript_26C599
-	compare VAR_0x4009, 0
+	compare VAR_TEMP_9, 0
 	goto_eq Route110_TrickHousePuzzle3_EventScript_26C5A0
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C599:: @ 826C599
-	setvar VAR_0x4009, 0
+	setvar VAR_TEMP_9, 0
 	releaseall
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C5A0:: @ 826C5A0
-	setvar VAR_0x4009, 1
+	setvar VAR_TEMP_9, 1
 	releaseall
 	end
 

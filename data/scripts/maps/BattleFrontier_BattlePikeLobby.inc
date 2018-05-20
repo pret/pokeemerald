@@ -4,18 +4,18 @@ BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
 	.byte 0
 
 BattleFrontier_BattlePikeLobby_MapScript2_25B6D1: @ 825B6D1
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePikeLobby_EventScript_25B707
-	map_script_2 VAR_0x4000, 1, BattleFrontier_BattlePikeLobby_EventScript_25B710
-	map_script_2 VAR_0x4000, 3, BattleFrontier_BattlePikeLobby_EventScript_25B762
-	map_script_2 VAR_0x4000, 4, BattleFrontier_BattlePikeLobby_EventScript_25B806
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeLobby_EventScript_25B707
+	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattlePikeLobby_EventScript_25B710
+	map_script_2 VAR_TEMP_0, 3, BattleFrontier_BattlePikeLobby_EventScript_25B762
+	map_script_2 VAR_TEMP_0, 4, BattleFrontier_BattlePikeLobby_EventScript_25B806
 	.2byte 0
 
 BattleFrontier_BattlePikeLobby_MapScript2_25B6F3: @ 825B6F3
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattlePikeLobby_EventScript_25B6FD
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePikeLobby_EventScript_25B6FD
 	.2byte 0
 
 BattleFrontier_BattlePikeLobby_EventScript_25B6FD:: @ 825B6FD
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
@@ -43,7 +43,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -89,7 +89,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	waitse
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -118,7 +118,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	waitse
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -171,8 +171,8 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BA73
 
 BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
-	setvar VAR_0x4000, 0
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_0, 0
+	setvar VAR_TEMP_1, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
@@ -196,7 +196,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	closemessage
 	delay 2
 	call BattleFrontier_BattlePikeLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 26
 	special sub_81A703C
 	compare VAR_RESULT, 0
@@ -213,7 +213,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	special HealPlayerParty
 	call BattleFrontier_BattlePikeLobby_EventScript_25BB49
 	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 

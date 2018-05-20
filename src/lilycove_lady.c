@@ -237,11 +237,11 @@ void sub_818D9C0(void)
 {
     LilycoveLady *lilycoveLady;
 
-    VarSet(VAR_0x4010, sUnknown_0860B07E[GetLilycoveLadyId()]);
+    VarSet(VAR_OBJ_GFX_ID_0, sUnknown_0860B07E[GetLilycoveLadyId()]);
     if (GetLilycoveLadyId() == LILYCOVE_LADY_CONTEST)
     {
         lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
-        VarSet(VAR_0x4011, sUnknown_0860B074[lilycoveLady->contest.category]);
+        VarSet(VAR_OBJ_GFX_ID_1, sUnknown_0860B074[lilycoveLady->contest.category]);
         gSpecialVar_Result = TRUE;
     }
     else

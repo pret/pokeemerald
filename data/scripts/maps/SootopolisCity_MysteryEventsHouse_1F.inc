@@ -13,7 +13,7 @@ SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E: @ 822795E
 	end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D:: @ 822797D
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setobjectxyperm 1, 3, 2
 	setobjectmovementtype 1, 8
 	setmaplayoutindex 441
@@ -78,7 +78,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A24:: @ 8227A24
 	special sub_81A1780
 	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227B46, 4
 	release

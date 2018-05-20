@@ -4,7 +4,7 @@ SlateportCity_Harbor_MapScripts:: @ 820C97D
 
 SlateportCity_Harbor_MapScript1_20C983: @ 820C983
 	setescapewarp SLATEPORT_CITY, 255, 28, 13
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	compare VAR_0x40A0, 1
 	call_if 1, SlateportCity_Harbor_EventScript_20C9A9
 	checkflag FLAG_SYS_GAME_CLEAR
@@ -331,7 +331,7 @@ SlateportCity_Harbor_EventScript_20CCF6:: @ 820CCF6
 	end
 
 SlateportCity_Harbor_EventScript_20CD00:: @ 820CD00
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_eq SlateportCity_Harbor_EventScript_20CE11
 	checkitem ITEM_SCANNER, 1
 	compare VAR_RESULT, 1
@@ -400,7 +400,7 @@ SlateportCity_Harbor_EventScript_20CE05:: @ 820CE05
 	end
 
 SlateportCity_Harbor_EventScript_20CE11:: @ 820CE11
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	msgbox SlateportCity_Harbor_Text_20D970, 4
 	release
 	end

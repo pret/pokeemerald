@@ -5,9 +5,9 @@ BattleFrontier_BattlePyramidEmptySquare_MapScripts:: @ 8252A33
 	.byte 0
 
 BattleFrontier_BattlePyramidEmptySquare_MapScript2_252A43: @ 8252A43
-	map_script_2 VAR_0x400D, 1, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A5D
-	map_script_2 VAR_0x400E, 0, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A98
-	map_script_2 VAR_0x400F, 1, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A8F
+	map_script_2 VAR_TEMP_D, 1, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A5D
+	map_script_2 VAR_TEMP_E, 0, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A98
+	map_script_2 VAR_TEMP_F, 1, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A8F
 	.2byte 0
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A5D:: @ 8252A5D
@@ -23,18 +23,18 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77:: @ 8252A77
 	delay 2
 	compare VAR_RESULT, 2
 	goto_if 5, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77
-	setvar VAR_0x400D, 0
+	setvar VAR_TEMP_D, 0
 	releaseall
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A8F:: @ 8252A8F
 	special ShowMapNamePopup
-	setvar VAR_0x400F, 0
+	setvar VAR_TEMP_F, 0
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A98:: @ 8252A98
 	playbgm MUS_PYRAMID, 0
-	setvar VAR_0x400E, 1
+	setvar VAR_TEMP_E, 1
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
@@ -42,7 +42,7 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	special sub_81A8E7C
 	setvar VAR_0x8004, 0
 	special sub_81A1780
-	switch VAR_0x4000
+	switch VAR_TEMP_0
 	case 0, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
 	case 1, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B66
 	case 2, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
@@ -64,7 +64,7 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 8
 	special sub_81A1780
-	setvar VAR_0x400D, 1
+	setvar VAR_TEMP_D, 1
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39:: @ 8252B39
 	setvar VAR_0x8004, 17
@@ -109,12 +109,12 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D:: @ 8252B8D
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_F, 1
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_MapScript1_252BCA: @ 8252BCA
 	call BattleFrontier_BattlePyramidEmptySquare_EventScript_252BD5
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_F, 1
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252BD5:: @ 8252BD5

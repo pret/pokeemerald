@@ -173,7 +173,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_29286D:: @ 829286D
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7BF1, 4
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7C35, 4
 	closemessage
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_2929BD
 	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_292866
@@ -198,7 +198,7 @@ LittlerootTown_MaysHouse_1F_EventScript_2928DC:: @ 82928DC
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F7BF1, 4
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F7C35, 4
 	closemessage
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, LittlerootTown_MaysHouse_1F_Movement_2929C1
 	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_292866
@@ -322,7 +322,7 @@ LittlerootTown_MaysHouse_1F_EventScript_2929C5:: @ 82929C5
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A19
 	checkflag FLAG_0x052
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A86
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A94
 	compare VAR_0x4092, 7
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292AB0

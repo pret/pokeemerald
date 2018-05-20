@@ -12,7 +12,7 @@ LinkContestRoom1_MapScript1_23B79B: @ 823B79B
 
 LinkContestRoom1_MapScript1_23B79F: @ 823B79F
 	call LinkContestRoom1_EventScript_23B7AF
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	call LinkContestRoom1_EventScript_23B842
 	end
 
@@ -52,7 +52,7 @@ LinkContestRoom1_EventScript_23B7FF:: @ 823B7FF
 	return
 
 LinkContestRoom1_MapScript1_23B803: @ 823B803
-	compare VAR_0x4009, 1
+	compare VAR_TEMP_9, 1
 	call_if 1, LinkContestRoom1_EventScript_23B80F
 	end
 
@@ -82,12 +82,12 @@ LinkContestRoom1_EventScript_23B834:: @ 823B834
 LinkContestRoom1_EventScript_23B842:: @ 823B842
 	call LinkContestRoom1_EventScript_23B8F8
 	call LinkContestRoom1_EventScript_23B858
-	compare VAR_0x4000, 8
+	compare VAR_TEMP_0, 8
 	goto_if 0, LinkContestRoom1_EventScript_23B842
 	return
 
 LinkContestRoom1_EventScript_23B858:: @ 823B858
-	switch VAR_0x4000
+	switch VAR_TEMP_0
 	case 1, LinkContestRoom1_EventScript_23B8AB
 	case 2, LinkContestRoom1_EventScript_23B8B6
 	case 3, LinkContestRoom1_EventScript_23B8C1
@@ -98,38 +98,38 @@ LinkContestRoom1_EventScript_23B858:: @ 823B858
 	end
 
 LinkContestRoom1_EventScript_23B8AB:: @ 823B8AB
-	copyvar VAR_0x4014, VAR_0x4001
-	addvar VAR_0x4000, 1
+	copyvar VAR_OBJ_GFX_ID_4, VAR_TEMP_1
+	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_23B8B6:: @ 823B8B6
-	copyvar VAR_0x4015, VAR_0x4001
-	addvar VAR_0x4000, 1
+	copyvar VAR_OBJ_GFX_ID_5, VAR_TEMP_1
+	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_23B8C1:: @ 823B8C1
-	copyvar VAR_0x4016, VAR_0x4001
-	addvar VAR_0x4000, 1
+	copyvar VAR_OBJ_GFX_ID_6, VAR_TEMP_1
+	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_23B8CC:: @ 823B8CC
-	copyvar VAR_0x4017, VAR_0x4001
-	addvar VAR_0x4000, 1
+	copyvar VAR_OBJ_GFX_ID_7, VAR_TEMP_1
+	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_23B8D7:: @ 823B8D7
-	copyvar VAR_0x4018, VAR_0x4001
-	addvar VAR_0x4000, 1
+	copyvar VAR_OBJ_GFX_ID_8, VAR_TEMP_1
+	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_23B8E2:: @ 823B8E2
-	copyvar VAR_0x4019, VAR_0x4001
-	addvar VAR_0x4000, 1
+	copyvar VAR_OBJ_GFX_ID_9, VAR_TEMP_1
+	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_23B8ED:: @ 823B8ED
-	copyvar VAR_0x401A, VAR_0x4001
-	addvar VAR_0x4000, 1
+	copyvar VAR_OBJ_GFX_ID_A, VAR_TEMP_1
+	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_23B8F8:: @ 823B8F8
@@ -172,131 +172,131 @@ LinkContestRoom1_EventScript_23B8F8:: @ 823B8F8
 	end
 
 LinkContestRoom1_EventScript_23BA6B:: @ 823BA6B
-	setvar VAR_0x4001, 5
+	setvar VAR_TEMP_1, 5
 	return
 
 LinkContestRoom1_EventScript_23BA71:: @ 823BA71
-	setvar VAR_0x4001, 6
+	setvar VAR_TEMP_1, 6
 	return
 
 LinkContestRoom1_EventScript_23BA77:: @ 823BA77
-	setvar VAR_0x4001, 7
+	setvar VAR_TEMP_1, 7
 	return
 
 LinkContestRoom1_EventScript_23BA7D:: @ 823BA7D
-	setvar VAR_0x4001, 8
+	setvar VAR_TEMP_1, 8
 	return
 
 LinkContestRoom1_EventScript_23BA83:: @ 823BA83
-	setvar VAR_0x4001, 10
+	setvar VAR_TEMP_1, 10
 	return
 
 LinkContestRoom1_EventScript_23BA89:: @ 823BA89
-	setvar VAR_0x4001, 11
+	setvar VAR_TEMP_1, 11
 	return
 
 LinkContestRoom1_EventScript_23BA8F:: @ 823BA8F
-	setvar VAR_0x4001, 12
+	setvar VAR_TEMP_1, 12
 	return
 
 LinkContestRoom1_EventScript_23BA95:: @ 823BA95
-	setvar VAR_0x4001, 13
+	setvar VAR_TEMP_1, 13
 	return
 
 LinkContestRoom1_EventScript_23BA9B:: @ 823BA9B
-	setvar VAR_0x4001, 14
+	setvar VAR_TEMP_1, 14
 	return
 
 LinkContestRoom1_EventScript_23BAA1:: @ 823BAA1
-	setvar VAR_0x4001, 15
+	setvar VAR_TEMP_1, 15
 	return
 
 LinkContestRoom1_EventScript_23BAA7:: @ 823BAA7
-	setvar VAR_0x4001, 17
+	setvar VAR_TEMP_1, 17
 	return
 
 LinkContestRoom1_EventScript_23BAAD:: @ 823BAAD
-	setvar VAR_0x4001, 18
+	setvar VAR_TEMP_1, 18
 	return
 
 LinkContestRoom1_EventScript_23BAB3:: @ 823BAB3
-	setvar VAR_0x4001, 19
+	setvar VAR_TEMP_1, 19
 	return
 
 LinkContestRoom1_EventScript_23BAB9:: @ 823BAB9
-	setvar VAR_0x4001, 20
+	setvar VAR_TEMP_1, 20
 	return
 
 LinkContestRoom1_EventScript_23BABF:: @ 823BABF
-	setvar VAR_0x4001, 21
+	setvar VAR_TEMP_1, 21
 	return
 
 LinkContestRoom1_EventScript_23BAC5:: @ 823BAC5
-	setvar VAR_0x4001, 22
+	setvar VAR_TEMP_1, 22
 	return
 
 LinkContestRoom1_EventScript_23BACB:: @ 823BACB
-	setvar VAR_0x4001, 25
+	setvar VAR_TEMP_1, 25
 	return
 
 LinkContestRoom1_EventScript_23BAD1:: @ 823BAD1
-	setvar VAR_0x4001, 26
+	setvar VAR_TEMP_1, 26
 	return
 
 LinkContestRoom1_EventScript_23BAD7:: @ 823BAD7
-	setvar VAR_0x4001, 27
+	setvar VAR_TEMP_1, 27
 	return
 
 LinkContestRoom1_EventScript_23BADD:: @ 823BADD
-	setvar VAR_0x4001, 47
+	setvar VAR_TEMP_1, 47
 	return
 
 LinkContestRoom1_EventScript_23BAE3:: @ 823BAE3
-	setvar VAR_0x4001, 30
+	setvar VAR_TEMP_1, 30
 	return
 
 LinkContestRoom1_EventScript_23BAE9:: @ 823BAE9
-	setvar VAR_0x4001, 31
+	setvar VAR_TEMP_1, 31
 	return
 
 LinkContestRoom1_EventScript_23BAEF:: @ 823BAEF
-	setvar VAR_0x4001, 32
+	setvar VAR_TEMP_1, 32
 	return
 
 LinkContestRoom1_EventScript_23BAF5:: @ 823BAF5
-	setvar VAR_0x4001, 33
+	setvar VAR_TEMP_1, 33
 	return
 
 LinkContestRoom1_EventScript_23BAFB:: @ 823BAFB
-	setvar VAR_0x4001, 34
+	setvar VAR_TEMP_1, 34
 	return
 
 LinkContestRoom1_EventScript_23BB01:: @ 823BB01
-	setvar VAR_0x4001, 35
+	setvar VAR_TEMP_1, 35
 	return
 
 LinkContestRoom1_EventScript_23BB07:: @ 823BB07
-	setvar VAR_0x4001, 36
+	setvar VAR_TEMP_1, 36
 	return
 
 LinkContestRoom1_EventScript_23BB0D:: @ 823BB0D
-	setvar VAR_0x4001, 37
+	setvar VAR_TEMP_1, 37
 	return
 
 LinkContestRoom1_EventScript_23BB13:: @ 823BB13
-	setvar VAR_0x4001, 38
+	setvar VAR_TEMP_1, 38
 	return
 
 LinkContestRoom1_EventScript_23BB19:: @ 823BB19
-	setvar VAR_0x4001, 44
+	setvar VAR_TEMP_1, 44
 	return
 
 LinkContestRoom1_EventScript_23BB1F:: @ 823BB1F
-	setvar VAR_0x4001, 45
+	setvar VAR_TEMP_1, 45
 	return
 
 LinkContestRoom1_EventScript_23BB25:: @ 823BB25
-	setvar VAR_0x4001, 46
+	setvar VAR_TEMP_1, 46
 	return
 
 LinkContestRoom1_EventScript_23BB2B:: @ 823BB2B
@@ -449,10 +449,10 @@ LilycoveCity_ContestLobby_EventScript_23BEB6:: @ 823BEB6
 	return
 
 LilycoveCity_ContestLobby_EventScript_23BECE:: @ 823BECE
-	setvar VAR_0x4013, 100
+	setvar VAR_OBJ_GFX_ID_3, 100
 	return
 
 LilycoveCity_ContestLobby_EventScript_23BED4:: @ 823BED4
-	setvar VAR_0x4013, 105
+	setvar VAR_OBJ_GFX_ID_3, 105
 	return
 

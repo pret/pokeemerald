@@ -11,15 +11,15 @@ NavelRock_Top_MapScript1_26911E: @ 826911E
 	end
 
 NavelRock_Top_EventScript_269131:: @ 8269131
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setflag FLAG_0x321
 	return
 
 NavelRock_Top_EventScript_26913A:: @ 826913A
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	checkflag FLAG_0x1DC
 	goto_eq NavelRock_Top_EventScript_27374E
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	clearflag FLAG_0x321
 	return
 
@@ -37,7 +37,7 @@ NavelRock_Top_EventScript_26915B:: @ 826915B
 
 NavelRock_Top_EventScript_26916F:: @ 826916F
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	special SpawnScriptFieldObject
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35

@@ -57,8 +57,8 @@ BattleFrontier_Lounge3_EventScript_261E46:: @ 8261E46
 	end
 
 BattleFrontier_Lounge3_EventScript_261E51:: @ 8261E51
-	specialvar VAR_0x4001, sub_813AA04
-	compare VAR_0x4001, VAR_0x8008
+	specialvar VAR_TEMP_1, sub_813AA04
+	compare VAR_TEMP_1, VAR_0x8008
 	goto_if 4, BattleFrontier_Lounge3_EventScript_261E75
 	msgbox BattleFrontier_Lounge3_Text_262B6E, 4
 	message BattleFrontier_Lounge3_Text_262B42

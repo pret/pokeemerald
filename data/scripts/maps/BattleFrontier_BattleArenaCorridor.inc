@@ -3,12 +3,12 @@ BattleFrontier_BattleArenaCorridor_MapScripts:: @ 82573B9
 	.byte 0
 
 BattleFrontier_BattleArenaCorridor_MapScript2_2573BF: @ 82573BF
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleArenaCorridor_EventScript_2573C9
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleArenaCorridor_EventScript_2573C9
 	.2byte 0
 
 BattleFrontier_BattleArenaCorridor_EventScript_2573C9:: @ 82573C9
 	delay 16
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 1, BattleFrontier_BattleArenaCorridor_Movement_25742F
 	applymovement 255, BattleFrontier_BattleArenaCorridor_Movement_257417
 	waitmovement 0

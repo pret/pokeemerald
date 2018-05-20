@@ -8,7 +8,7 @@ FortreeCity_Gym_MapScript1_2165B6: @ 82165B6
 	end
 
 FortreeCity_Gym_MapScript2_2165BA: @ 82165BA
-	map_script_2 VAR_0x4000, 16384, FortreeCity_Gym_EventScript_2165C4
+	map_script_2 VAR_TEMP_0, 16384, FortreeCity_Gym_EventScript_2165C4
 	.2byte 0
 
 FortreeCity_Gym_EventScript_2165C4:: @ 82165C4

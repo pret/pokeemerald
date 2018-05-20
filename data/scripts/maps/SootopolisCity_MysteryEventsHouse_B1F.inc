@@ -8,7 +8,7 @@ SootopolisCity_MysteryEventsHouse_B1F_MapScript1_227E5A: @ 8227E5A
 	end
 
 SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E: @ 8227E5E
-	map_script_2 VAR_0x4001, 0, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68
+	map_script_2 VAR_TEMP_1, 0, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68
 	.2byte 0
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
@@ -33,7 +33,7 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	applymovement 255, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9
 	waitmovement 0
 	special LoadPlayerParty
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	warp SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F, 255, 3, 1
 	waitstate
 	releaseall

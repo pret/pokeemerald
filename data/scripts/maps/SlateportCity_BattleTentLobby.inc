@@ -4,20 +4,20 @@ SlateportCity_BattleTentLobby_MapScripts:: @ 8208730
 	.byte 0
 
 SlateportCity_BattleTentLobby_MapScript2_20873B: @ 820873B
-	map_script_2 VAR_0x4001, 0, SlateportCity_BattleTentLobby_EventScript_208745
+	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentLobby_EventScript_208745
 	.2byte 0
 
 SlateportCity_BattleTentLobby_EventScript_208745:: @ 8208745
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 SlateportCity_BattleTentLobby_MapScript2_20874F: @ 820874F
-	map_script_2 VAR_0x4000, 0, SlateportCity_BattleTentLobby_EventScript_208779
-	map_script_2 VAR_0x4000, 1, SlateportCity_BattleTentLobby_EventScript_208782
-	map_script_2 VAR_0x4000, 2, SlateportCity_BattleTentLobby_EventScript_208871
-	map_script_2 VAR_0x4000, 3, SlateportCity_BattleTentLobby_EventScript_2087B7
-	map_script_2 VAR_0x4000, 4, SlateportCity_BattleTentLobby_EventScript_208837
+	map_script_2 VAR_TEMP_0, 0, SlateportCity_BattleTentLobby_EventScript_208779
+	map_script_2 VAR_TEMP_0, 1, SlateportCity_BattleTentLobby_EventScript_208782
+	map_script_2 VAR_TEMP_0, 2, SlateportCity_BattleTentLobby_EventScript_208871
+	map_script_2 VAR_TEMP_0, 3, SlateportCity_BattleTentLobby_EventScript_2087B7
+	map_script_2 VAR_TEMP_0, 4, SlateportCity_BattleTentLobby_EventScript_208837
 	.2byte 0
 
 SlateportCity_BattleTentLobby_EventScript_208779:: @ 8208779
@@ -33,7 +33,7 @@ SlateportCity_BattleTentLobby_EventScript_208782:: @ 8208782
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
@@ -94,7 +94,7 @@ SlateportCity_BattleTentLobby_EventScript_208837:: @ 8208837
 SlateportCity_BattleTentLobby_EventScript_208861:: @ 8208861
 	msgbox SlateportCity_BattleTentLobby_Text_2C5AA5, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -111,7 +111,7 @@ SlateportCity_BattleTentLobby_EventScript_208871:: @ 8208871
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8006, 2
 	goto SlateportCity_BattleTentLobby_EventScript_2089AC
 
@@ -149,7 +149,7 @@ SlateportCity_BattleTentLobby_EventScript_208906:: @ 8208906
 	case 127, SlateportCity_BattleTentLobby_EventScript_208A2B
 
 SlateportCity_BattleTentLobby_EventScript_208950:: @ 8208950
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
@@ -166,7 +166,7 @@ SlateportCity_BattleTentLobby_EventScript_208950:: @ 8208950
 	closemessage
 	delay 2
 	call SlateportCity_BattleTentLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_BattleTentLobby_EventScript_208A14
 	setvar VAR_0x8006, 0
@@ -176,7 +176,7 @@ SlateportCity_BattleTentLobby_EventScript_2089AC:: @ 82089AC
 	closemessage
 	call SlateportCity_BattleTentLobby_EventScript_2089C9
 	warp SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 255, 2, 7
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 

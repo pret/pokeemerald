@@ -3,7 +3,7 @@ EverGrandeCity_Hall2_MapScripts:: @ 822957E
 	.byte 0
 
 EverGrandeCity_Hall2_MapScript2_229584: @ 8229584
-	map_script_2 VAR_0x4001, 0, EverGrandeCity_Hall2_EventScript_22958E
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_Hall2_EventScript_22958E
 	.2byte 0
 
 EverGrandeCity_Hall2_EventScript_22958E:: @ 822958E

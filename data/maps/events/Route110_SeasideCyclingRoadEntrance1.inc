@@ -8,8 +8,8 @@ Route110_SeasideCyclingRoadEntrance1_MapWarps: @ 853E9B8
 	warp_def 13, 5, 0, 5, ROUTE_110
 
 Route110_SeasideCyclingRoadEntrance1_MapCoordEvents: @ 853E9D8
-	coord_event 7, 4, 3, 0, VAR_0x4001, 0, 0, Route110_SeasideCyclingRoadEntrance1_EventScript_26EA84
-	coord_event 5, 4, 3, 0, VAR_0x4001, 1, 0, Route110_SeasideCyclingRoadEntrance1_EventScript_26EAB6
+	coord_event 7, 4, 3, 0, VAR_TEMP_1, 0, 0, Route110_SeasideCyclingRoadEntrance1_EventScript_26EA84
+	coord_event 5, 4, 3, 0, VAR_TEMP_1, 1, 0, Route110_SeasideCyclingRoadEntrance1_EventScript_26EAB6
 
 Route110_SeasideCyclingRoadEntrance1_MapEvents:: @ 853E9F8
 	map_events Route110_SeasideCyclingRoadEntrance1_MapObjects, Route110_SeasideCyclingRoadEntrance1_MapWarps, Route110_SeasideCyclingRoadEntrance1_MapCoordEvents, 0x0

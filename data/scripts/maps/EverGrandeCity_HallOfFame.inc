@@ -4,7 +4,7 @@ EverGrandeCity_HallOfFame_MapScripts:: @ 822982C
 	.byte 0
 
 EverGrandeCity_HallOfFame_MapScript2_229837: @ 8229837
-	map_script_2 VAR_0x4001, 0, EverGrandeCity_HallOfFame_EventScript_229841
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_HallOfFame_EventScript_229841
 	.2byte 0
 
 EverGrandeCity_HallOfFame_EventScript_229841:: @ 8229841
@@ -12,7 +12,7 @@ EverGrandeCity_HallOfFame_EventScript_229841:: @ 8229841
 	end
 
 EverGrandeCity_HallOfFame_MapScript2_229846: @ 8229846
-	map_script_2 VAR_0x4001, 0, EverGrandeCity_HallOfFame_EventScript_229850
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_HallOfFame_EventScript_229850
 	.2byte 0
 
 EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
@@ -41,7 +41,7 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	dofieldeffect 62
 	waitfieldeffect 62
 	delay 40
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	call EverGrandeCity_HallOfFame_EventScript_2717C1
 	checkplayergender
 	compare VAR_RESULT, 0

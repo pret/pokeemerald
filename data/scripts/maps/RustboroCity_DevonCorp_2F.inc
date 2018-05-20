@@ -158,7 +158,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A2C:: @ 8211A2C
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211A3E:: @ 8211A3E
-	setvar VAR_0x4001, 388
+	setvar VAR_TEMP_1, 388
 	givemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A6E
@@ -207,7 +207,7 @@ RustboroCity_DevonCorp_2F_EventScript_211AD7:: @ 8211AD7
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211AE1:: @ 8211AE1
-	setvar VAR_0x4001, 390
+	setvar VAR_TEMP_1, 390
 	givemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B11

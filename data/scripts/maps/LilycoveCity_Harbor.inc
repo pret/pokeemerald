@@ -17,23 +17,23 @@ LilycoveCity_Harbor_EventScript_21E00F:: @ 821E00F
 	call LilycoveCity_Harbor_EventScript_21E22A
 	call LilycoveCity_Harbor_EventScript_21E25C
 	call LilycoveCity_Harbor_EventScript_21E2A6
-	compare VAR_0x400C, 2
+	compare VAR_TEMP_C, 2
 	goto_eq LilycoveCity_Harbor_EventScript_21E350
-	compare VAR_0x400B, 1
+	compare VAR_TEMP_B, 1
 	goto_eq LilycoveCity_Harbor_EventScript_21E2F0
-	compare VAR_0x400B, 2
+	compare VAR_TEMP_B, 2
 	goto_eq LilycoveCity_Harbor_EventScript_21E320
-	compare VAR_0x400B, 4
+	compare VAR_TEMP_B, 4
 	goto_eq LilycoveCity_Harbor_EventScript_21E350
-	compare VAR_0x400B, 8
+	compare VAR_TEMP_B, 8
 	goto_eq LilycoveCity_Harbor_EventScript_21E41D
-	compare VAR_0x400B, 0
+	compare VAR_TEMP_B, 0
 	goto_if 5, LilycoveCity_Harbor_EventScript_21E44D
 	goto LilycoveCity_Harbor_EventScript_21E080
 	end
 
 LilycoveCity_Harbor_EventScript_21E080:: @ 821E080
-	compare VAR_0x400A, 0
+	compare VAR_TEMP_A, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E557
 	msgbox LilycoveCity_Harbor_Text_21E758, 4
 	message LilycoveCity_Harbor_Text_21E7ED
@@ -107,111 +107,111 @@ LilycoveCity_Harbor_EventScript_21E171:: @ 821E171
 	end
 
 LilycoveCity_Harbor_EventScript_21E194:: @ 821E194
-	setvar VAR_0x400E, 0
+	setvar VAR_TEMP_E, 0
 	checkflag FLAG_SYS_HAS_EON_TICKET
 	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_EON_TICKET, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
-	setvar VAR_0x400E, 1
+	setvar VAR_TEMP_E, 1
 	checkflag FLAG_0x1AE
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
-	setvar VAR_0x400E, 2
+	setvar VAR_TEMP_E, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E1C6:: @ 821E1C6
-	setvar VAR_0x400D, 0
+	setvar VAR_TEMP_D, 0
 	checkflag FLAG_0x8D5
 	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_AURORA_TICKET, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
-	setvar VAR_0x400D, 1
+	setvar VAR_TEMP_D, 1
 	checkflag FLAG_0x1AF
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
-	setvar VAR_0x400D, 2
+	setvar VAR_TEMP_D, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E1F8:: @ 821E1F8
-	setvar VAR_0x400C, 0
+	setvar VAR_TEMP_C, 0
 	checkflag FLAG_0x8D6
 	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_OLD_SEA_MAP, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
-	setvar VAR_0x400C, 1
+	setvar VAR_TEMP_C, 1
 	checkflag FLAG_0x1B0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
-	setvar VAR_0x400C, 2
+	setvar VAR_TEMP_C, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E22A:: @ 821E22A
-	setvar VAR_0x4009, 0
+	setvar VAR_TEMP_9, 0
 	checkflag FLAG_0x8E0
 	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
-	setvar VAR_0x4009, 1
+	setvar VAR_TEMP_9, 1
 	checkflag FLAG_0x1DB
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
-	setvar VAR_0x4009, 2
+	setvar VAR_TEMP_9, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E25C:: @ 821E25C
-	setvar VAR_0x400B, 0
-	compare VAR_0x400E, 2
+	setvar VAR_TEMP_B, 0
+	compare VAR_TEMP_E, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E28E
-	compare VAR_0x400D, 2
+	compare VAR_TEMP_D, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E294
-	compare VAR_0x400C, 2
+	compare VAR_TEMP_C, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E29A
-	compare VAR_0x4009, 2
+	compare VAR_TEMP_9, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2A0
 	return
 
 LilycoveCity_Harbor_EventScript_21E28E:: @ 821E28E
-	addvar VAR_0x400B, 1
+	addvar VAR_TEMP_B, 1
 	return
 
 LilycoveCity_Harbor_EventScript_21E294:: @ 821E294
-	addvar VAR_0x400B, 2
+	addvar VAR_TEMP_B, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E29A:: @ 821E29A
-	addvar VAR_0x400B, 4
+	addvar VAR_TEMP_B, 4
 	return
 
 LilycoveCity_Harbor_EventScript_21E2A0:: @ 821E2A0
-	addvar VAR_0x400B, 8
+	addvar VAR_TEMP_B, 8
 	return
 
 LilycoveCity_Harbor_EventScript_21E2A6:: @ 821E2A6
-	setvar VAR_0x400A, 0
-	compare VAR_0x400E, 1
+	setvar VAR_TEMP_A, 0
+	compare VAR_TEMP_E, 1
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2D8
-	compare VAR_0x400D, 1
+	compare VAR_TEMP_D, 1
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2DE
-	compare VAR_0x400C, 1
+	compare VAR_TEMP_C, 1
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2E4
-	compare VAR_0x4009, 1
+	compare VAR_TEMP_9, 1
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2EA
 	return
 
 LilycoveCity_Harbor_EventScript_21E2D8:: @ 821E2D8
-	addvar VAR_0x400A, 1
+	addvar VAR_TEMP_A, 1
 	return
 
 LilycoveCity_Harbor_EventScript_21E2DE:: @ 821E2DE
-	addvar VAR_0x400A, 2
+	addvar VAR_TEMP_A, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E2E4:: @ 821E2E4
-	addvar VAR_0x400A, 4
+	addvar VAR_TEMP_A, 4
 	return
 
 LilycoveCity_Harbor_EventScript_21E2EA:: @ 821E2EA
-	addvar VAR_0x400A, 8
+	addvar VAR_TEMP_A, 8
 	return
 
 LilycoveCity_Harbor_EventScript_21E2F0:: @ 821E2F0

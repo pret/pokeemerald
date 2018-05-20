@@ -17,17 +17,17 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202310:: @ 8202310
 	return
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202328:: @ 8202328
-	setvar VAR_0x4011, 100
-	setvar VAR_0x4010, 100
+	setvar VAR_OBJ_GFX_ID_1, 100
+	setvar VAR_OBJ_GFX_ID_0, 100
 	return
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202333:: @ 8202333
-	setvar VAR_0x4011, 105
-	setvar VAR_0x4010, 105
+	setvar VAR_OBJ_GFX_ID_1, 105
+	setvar VAR_OBJ_GFX_ID_0, 105
 	return
 
 VerdanturfTown_BattleTentBattleRoom_MapScript2_20233E: @ 820233E
-	map_script_2 VAR_0x4000, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_202348
+	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_202348
 	.2byte 0
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202348:: @ 8202348
@@ -150,13 +150,13 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20251F:: @ 820251F
 	end
 
 VerdanturfTown_BattleTentBattleRoom_MapScript2_202541: @ 8202541
-	map_script_2 VAR_0x4001, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_20254B
+	map_script_2 VAR_TEMP_1, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_20254B
 	.2byte 0
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20254B:: @ 820254B
 	hideobjectat 1, VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_202310
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	applymovement 255, VerdanturfTown_BattleTentBattleRoom_Movement_202573
 	removeobject 2
 	end
