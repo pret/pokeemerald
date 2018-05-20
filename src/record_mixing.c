@@ -278,7 +278,7 @@ static void sub_80E715C(u8 taskId)
             gUnknown_0203A018 = malloc(sizeof(struct PlayerRecords));
             gUnknown_0203A014 = malloc(sizeof(struct PlayerRecords) * 4);
             sub_8009628(gSpecialVar_0x8005);
-            VarSet(VAR_0x4000, 1);
+            VarSet(VAR_TEMP_0, 1);
             gUnknown_03001130 = FALSE;
             sub_80E6E24();
             sub_80FB00C();
@@ -1435,7 +1435,7 @@ static void sub_80E7F68(u16 *item, u8 which)
     {
         if (!CheckBagHasItem(*item, 1) && !CheckPCHasItem(*item, 1) && AddBagItem(*item, 1))
         {
-            VarSet(VAR_0x4001, *item);
+            VarSet(VAR_TEMP_1, *item);
             StringCopy(gStringVar1, gLinkPlayers[0].name);
             if (*item == ITEM_EON_TICKET)
             {
@@ -1444,7 +1444,7 @@ static void sub_80E7F68(u16 *item, u8 which)
         }
         else
         {
-            VarSet(VAR_0x4001, ITEM_NONE);
+            VarSet(VAR_TEMP_1, ITEM_NONE);
         }
     }
 }
