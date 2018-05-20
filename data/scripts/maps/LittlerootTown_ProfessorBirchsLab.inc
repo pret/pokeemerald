@@ -335,7 +335,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA061:: @ 81FA061
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA06C:: @ 81FA06C
 	bufferspeciesname 0, SPECIES_CYNDAQUIL
-	setvar VAR_0x4001, 155
+	setvar VAR_TEMP_1, 155
 	givemon SPECIES_CYNDAQUIL, 5, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1
@@ -380,7 +380,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD:: @ 81FA0FD
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA10D:: @ 81FA10D
 	bufferspeciesname 0, SPECIES_TOTODILE
-	setvar VAR_0x4001, 158
+	setvar VAR_TEMP_1, 158
 	givemon SPECIES_TOTODILE, 5, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA142
@@ -425,7 +425,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E:: @ 81FA19E
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA1AE:: @ 81FA1AE
 	bufferspeciesname 0, SPECIES_CHIKORITA
-	setvar VAR_0x4001, 152
+	setvar VAR_TEMP_1, 152
 	givemon SPECIES_CHIKORITA, 5, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3

@@ -24,7 +24,6 @@
 #include "constants/songs.h"
 #include "sound.h"
 #include "berry.h"
-#include "menu_indicators.h"
 #include "event_data.h"
 #include "battle_message.h"
 #include "safari_zone.h"

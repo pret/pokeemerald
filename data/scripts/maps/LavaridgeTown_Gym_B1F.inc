@@ -8,28 +8,28 @@ LavaridgeTown_Gym_B1F_MapScript1_1FF884: @ 81FF884
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_1FF88F:: @ 81FF88F
-	setvar VAR_0x4007, 0
-	setvar VAR_0x4008, 0
-	setvar VAR_0x4009, 0
-	setvar VAR_0x400A, 0
+	setvar VAR_TEMP_7, 0
+	setvar VAR_TEMP_8, 0
+	setvar VAR_TEMP_9, 0
+	setvar VAR_TEMP_A, 0
 	checktrainerflag TRAINER_KEEGAN
 	goto_eq LavaridgeTown_Gym_B1F_EventScript_1FF8B1
-	setvar VAR_0x4007, 1
+	setvar VAR_TEMP_7, 1
 
 LavaridgeTown_Gym_B1F_EventScript_1FF8B1:: @ 81FF8B1
 	checktrainerflag TRAINER_JACE
 	goto_eq LavaridgeTown_Gym_B1F_EventScript_1FF8BF
-	setvar VAR_0x4008, 1
+	setvar VAR_TEMP_8, 1
 
 LavaridgeTown_Gym_B1F_EventScript_1FF8BF:: @ 81FF8BF
 	checktrainerflag TRAINER_JEFF
 	goto_eq LavaridgeTown_Gym_B1F_EventScript_1FF8CD
-	setvar VAR_0x4009, 1
+	setvar VAR_TEMP_9, 1
 
 LavaridgeTown_Gym_B1F_EventScript_1FF8CD:: @ 81FF8CD
 	checktrainerflag TRAINER_ELI
 	goto_eq LavaridgeTown_Gym_B1F_EventScript_1FF8DB
-	setvar VAR_0x400A, 1
+	setvar VAR_TEMP_A, 1
 
 LavaridgeTown_Gym_B1F_EventScript_1FF8DB:: @ 81FF8DB
 	return

@@ -8,13 +8,13 @@ RustboroCity_MapScript1_1E06C8: @ 81E06C8
 	call RustboroCity_EventScript_271ED7
 	compare VAR_0x405A, 6
 	call_if 1, RustboroCity_EventScript_1E0707
-	getplayerxy VAR_0x4000, VAR_0x4001
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_0x405A, 6
 	goto_eq RustboroCity_EventScript_1E06EC
 	end
 
 RustboroCity_EventScript_1E06EC:: @ 81E06EC
-	compare VAR_0x4000, 11
+	compare VAR_TEMP_0, 11
 	goto_eq RustboroCity_EventScript_1E06FF
 	setobjectxyperm 15, 12, 15
 	end
@@ -459,42 +459,42 @@ RustboroCity_EventScript_1E0ADD:: @ 81E0ADD
 
 RustboroCity_EventScript_1E0AF2:: @ 81E0AF2
 	waitse
-	setvar VAR_0x4001, 4
+	setvar VAR_TEMP_1, 4
 	goto RustboroCity_EventScript_1E0C5B
 	end
 
 RustboroCity_EventScript_1E0AFE:: @ 81E0AFE
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto RustboroCity_EventScript_1E0B2E
 	end
 
 RustboroCity_EventScript_1E0B0A:: @ 81E0B0A
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto RustboroCity_EventScript_1E0B2E
 	end
 
 RustboroCity_EventScript_1E0B16:: @ 81E0B16
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto RustboroCity_EventScript_1E0B2E
 	end
 
 RustboroCity_EventScript_1E0B22:: @ 81E0B22
 	lockall
-	setvar VAR_0x4001, 3
+	setvar VAR_TEMP_1, 3
 	goto RustboroCity_EventScript_1E0B2E
 	end
 
 RustboroCity_EventScript_1E0B2E:: @ 81E0B2E
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if 1, RustboroCity_EventScript_1E0B6F
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, RustboroCity_EventScript_1E0B9B
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, RustboroCity_EventScript_1E0BC7
-	compare VAR_0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if 1, RustboroCity_EventScript_1E0BF3
 	setflag FLAG_0x09F
 	setvar VAR_0x405A, 3
@@ -559,38 +559,38 @@ RustboroCity_Movement_1E0C29: @ 81E0C29
 
 RustboroCity_EventScript_1E0C2B:: @ 81E0C2B
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto RustboroCity_EventScript_1E0C5B
 	end
 
 RustboroCity_EventScript_1E0C37:: @ 81E0C37
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto RustboroCity_EventScript_1E0C5B
 	end
 
 RustboroCity_EventScript_1E0C43:: @ 81E0C43
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto RustboroCity_EventScript_1E0C5B
 	end
 
 RustboroCity_EventScript_1E0C4F:: @ 81E0C4F
 	lockall
-	setvar VAR_0x4001, 3
+	setvar VAR_TEMP_1, 3
 	goto RustboroCity_EventScript_1E0C5B
 	end
 
 RustboroCity_EventScript_1E0C5B:: @ 81E0C5B
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if 1, RustboroCity_EventScript_1E0CDC
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, RustboroCity_EventScript_1E0D08
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, RustboroCity_EventScript_1E0D34
-	compare VAR_0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if 1, RustboroCity_EventScript_1E0D60
-	compare VAR_0x4001, 4
+	compare VAR_TEMP_1, 4
 	call_if 1, RustboroCity_EventScript_1E0D96
 	msgbox RustboroCity_Text_1E194D, 4
 	giveitem_std ITEM_GREAT_BALL

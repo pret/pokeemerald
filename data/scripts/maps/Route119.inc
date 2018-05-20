@@ -30,12 +30,12 @@ Route119_EventScript_1F4466:: @ 81F4466
 	return
 
 Route119_EventScript_1F4472:: @ 81F4472
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto Route119_EventScript_1F4488
 	end
 
 Route119_EventScript_1F447D:: @ 81F447D
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto Route119_EventScript_1F4488
 	end
 
@@ -48,16 +48,16 @@ Route119_EventScript_1F4488:: @ 81F4488
 	compare VAR_RESULT, 1
 	call_if 1, Route119_EventScript_1F4506
 	delay 65
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1F46C6
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1F46D1
 	applymovement 255, Route119_Movement_2725AA
 	waitmovement 0
 	delay 30
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1F4700
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1F470F
 	removeobject 25
 	addobject 16
@@ -145,25 +145,25 @@ Route119_EventScript_1F45FF:: @ 81F45FF
 
 Route119_EventScript_1F460F:: @ 81F460F
 	closemessage
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1F4700
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1F470F
 	removeobject 16
 	addobject 25
 	delay 30
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1F46DC
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1F46EE
 	removeobject 25
 	setvar VAR_0x4072, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	delay 60
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1F46A0
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1F46A8
 	addobject 43
 	applymovement 43, Route119_Movement_1F4752
@@ -171,9 +171,9 @@ Route119_EventScript_1F460F:: @ 81F460F
 	addvar VAR_0x40D1, 1
 	msgbox Route119_Text_1F4E60, 4
 	closemessage
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1F46B0
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1F46BB
 	removeobject 43
 	releaseall

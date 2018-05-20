@@ -13,10 +13,10 @@ Route113_MapScript1_1F2161: @ 81F2161
 	end
 
 Route113_EventScript_1F216A:: @ 81F216A
-	getplayerxy VAR_0x4000, VAR_0x4001
-	compare VAR_0x4000, 19
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_0, 19
 	goto_if 0, Route113_EventScript_1F2189
-	compare VAR_0x4000, 84
+	compare VAR_TEMP_0, 84
 	goto_if 2, Route113_EventScript_1F2189
 	setweather 7
 	return

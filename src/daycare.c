@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
+#include "battle.h"
 #include "daycare.h"
 #include "string_util.h"
 #include "constants/species.h"
@@ -21,8 +22,6 @@
 
 #define EGG_MOVES_ARRAY_COUNT           10
 #define EGG_LVL_UP_MOVES_ARRAY_COUNT    50
-
-extern u16 gMoveToLearn;
 
 // text
 extern const u8 gText_MaleSymbol4[];

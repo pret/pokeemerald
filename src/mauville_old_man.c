@@ -673,7 +673,7 @@ static void Task_BardSong(u8 taskId)
 
 void ScrSpecial_SetMauvilleOldManMapObjGfx(void)
 {
-    VarSet(VAR_0x4010, MAP_OBJ_GFX_BARD);
+    VarSet(VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_BARD);
 }
 
 // Language fixers?

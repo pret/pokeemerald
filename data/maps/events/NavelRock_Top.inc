@@ -5,7 +5,7 @@ NavelRock_Top_MapWarps: @ 853DB8C
 	warp_def 13, 20, 3, 1, NAVEL_ROCK_UP_4
 
 NavelRock_Top_MapCoordEvents: @ 853DB94
-	coord_event 12, 10, 3, 0, VAR_0x4001, 0, 0, NavelRock_Top_EventScript_26916F
+	coord_event 12, 10, 3, 0, VAR_TEMP_1, 0, 0, NavelRock_Top_EventScript_26916F
 
 NavelRock_Top_MapBGEvents: @ 853DBA4
 	bg_event 12, 9, 3, 7, 0, ITEM_SACRED_ASH, 109, 0

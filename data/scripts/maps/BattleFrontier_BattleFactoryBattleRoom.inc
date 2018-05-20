@@ -14,7 +14,7 @@ BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB: @ 825ADBB
 	call_if 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE2B
 	setvar VAR_0x8004, 9
 	special sub_81A1780
-	copyvar VAR_0x400F, VAR_RESULT
+	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25ADF3
 	end
@@ -25,13 +25,13 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25ADF3:: @ 825ADF3
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE00: @ 825AE00
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE0A
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE0A
 	.2byte 0
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE0A:: @ 825AE0A
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	hideobjectat 255, BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
-	compare VAR_0x400F, 0
+	compare VAR_TEMP_F, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE24
 	hideobjectat 2, BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 
@@ -39,15 +39,15 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE24:: @ 825AE24
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE25:: @ 825AE25
-	setvar VAR_0x401F, 100
+	setvar VAR_OBJ_GFX_ID_F, 100
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE2B:: @ 825AE2B
-	setvar VAR_0x401F, 105
+	setvar VAR_OBJ_GFX_ID_F, 105
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE31: @ 825AE31
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67
 	.2byte 0
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE3B:: @ 825AE3B
@@ -62,7 +62,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE3B:: @ 825AE3B
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67:: @ 825AE67
-	compare VAR_0x400F, 0
+	compare VAR_TEMP_F, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE3B
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
 	applymovement 255, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
@@ -77,7 +77,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67:: @ 825AE67
 	waitmovement 0
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
-	compare VAR_0x400F, 0
+	compare VAR_TEMP_F, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C
 	setvar VAR_0x8004, 5
 	special sub_8195960
@@ -144,7 +144,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF85:: @ 825AF85
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25B190
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C:: @ 825AF9C
-	switch VAR_0x400F
+	switch VAR_TEMP_F
 	case 2, BattleFrontier_BattleFactoryBattleRoom_EventScript_25B051
 	case 3, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AFEF
 	case 4, BattleFrontier_BattleFactoryBattleRoom_EventScript_25B07E

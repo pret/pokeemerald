@@ -3,12 +3,12 @@ BattleFrontier_BattleDomeCorridor_MapScripts:: @ 824B0FE
 	.byte 0
 
 BattleFrontier_BattleDomeCorridor_MapScript2_24B104: @ 824B104
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleDomeCorridor_EventScript_24B10E
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleDomeCorridor_EventScript_24B10E
 	.2byte 0
 
 BattleFrontier_BattleDomeCorridor_EventScript_24B10E:: @ 824B10E
 	delay 16
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_81A1780

@@ -16,7 +16,7 @@
 #include "link.h"
 #include "main.h"
 #include "menu.h"
-#include "menu_indicators.h"
+#include "list_menu.h"
 #include "mystery_event_menu.h"
 #include "naming_screen.h"
 #include "option_menu.h"

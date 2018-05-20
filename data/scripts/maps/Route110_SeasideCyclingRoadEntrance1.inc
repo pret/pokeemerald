@@ -14,7 +14,7 @@ Route110_SeasideCyclingRoadEntrance1_EventScript_26EA84:: @ 826EA84
 	compare VAR_RESULT, 0
 	goto_eq Route110_SeasideCyclingRoadEntrance1_EventScript_26EA9F
 	setflag FLAG_SYS_CYCLING_ROAD
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end
 
@@ -33,7 +33,7 @@ Route110_SeasideCyclingRoadEntrance1_Movement_26EAB4: @ 826EAB4
 Route110_SeasideCyclingRoadEntrance1_EventScript_26EAB6:: @ 826EAB6
 	lockall
 	clearflag FLAG_SYS_CYCLING_ROAD
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	releaseall
 	end
 

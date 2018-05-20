@@ -309,7 +309,7 @@ LinkContestRoom1_EventScript_27A0F5:: @ 827A0F5
 	compare VAR_0x8006, 4
 	goto_if 5, LinkContestRoom1_EventScript_27A0F5
 	call LinkContestRoom1_EventScript_27A230
-	setvar VAR_0x4001, 6
+	setvar VAR_TEMP_1, 6
 	return
 
 LinkContestRoom1_EventScript_27A133:: @ 827A133
@@ -495,24 +495,24 @@ LinkContestRoom1_EventScript_27A34F:: @ 827A34F
 	call_if 1, LinkContestRoom1_EventScript_27A56E
 	compare VAR_0x4088, 5
 	call_if 1, LinkContestRoom1_EventScript_27A5CC
-	setvar VAR_0x4001, 9
-	setvar VAR_0x4002, 9
-	setvar VAR_0x4003, 9
-	setvar VAR_0x4004, 9
-	setvar VAR_0x4005, 9
-	setvar VAR_0x4006, 9
-	setvar VAR_0x4007, 9
-	setvar VAR_0x4008, 9
-	compare VAR_0x4000, 0
+	setvar VAR_TEMP_1, 9
+	setvar VAR_TEMP_2, 9
+	setvar VAR_TEMP_3, 9
+	setvar VAR_TEMP_4, 9
+	setvar VAR_TEMP_5, 9
+	setvar VAR_TEMP_6, 9
+	setvar VAR_TEMP_7, 9
+	setvar VAR_TEMP_8, 9
+	compare VAR_TEMP_0, 0
 	call_if 2, LinkContestRoom1_EventScript_27A3E5
-	setvar VAR_0x4001, 0
-	setvar VAR_0x4002, 0
-	setvar VAR_0x4003, 0
-	setvar VAR_0x4004, 0
-	setvar VAR_0x4005, 0
-	setvar VAR_0x4006, 0
-	setvar VAR_0x4007, 0
-	setvar VAR_0x4008, 0
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_4, 0
+	setvar VAR_TEMP_5, 0
+	setvar VAR_TEMP_6, 0
+	setvar VAR_TEMP_7, 0
+	setvar VAR_TEMP_8, 0
 	return
 
 LinkContestRoom1_EventScript_27A3E5:: @ 827A3E5
@@ -534,7 +534,7 @@ LinkContestRoom1_EventScript_27A3E5:: @ 827A3E5
 	call_if 1, LinkContestRoom1_EventScript_27A732
 	compare VAR_RESULT, 7
 	call_if 1, LinkContestRoom1_EventScript_27A756
-	compare VAR_0x4000, 0
+	compare VAR_TEMP_0, 0
 	goto_if 2, LinkContestRoom1_EventScript_27A3E5
 	waitmovement 0
 	return
@@ -556,7 +556,7 @@ LinkContestRoom1_EventScript_27A454:: @ 827A454
 	goto_if 2, LinkContestRoom1_EventScript_27A630
 	compare VAR_0x8004, 10
 	goto_if 2, LinkContestRoom1_EventScript_27A62A
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_27A4B2:: @ 827A4B2
@@ -576,7 +576,7 @@ LinkContestRoom1_EventScript_27A4B2:: @ 827A4B2
 	goto_if 2, LinkContestRoom1_EventScript_27A630
 	compare VAR_0x8004, 90
 	goto_if 2, LinkContestRoom1_EventScript_27A62A
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_27A510:: @ 827A510
@@ -596,7 +596,7 @@ LinkContestRoom1_EventScript_27A510:: @ 827A510
 	goto_if 2, LinkContestRoom1_EventScript_27A630
 	compare VAR_0x8004, 170
 	goto_if 2, LinkContestRoom1_EventScript_27A62A
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_27A56E:: @ 827A56E
@@ -616,7 +616,7 @@ LinkContestRoom1_EventScript_27A56E:: @ 827A56E
 	goto_if 2, LinkContestRoom1_EventScript_27A630
 	compare VAR_0x8004, 320
 	goto_if 2, LinkContestRoom1_EventScript_27A62A
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_27A5CC:: @ 827A5CC
@@ -636,140 +636,140 @@ LinkContestRoom1_EventScript_27A5CC:: @ 827A5CC
 	goto_if 2, LinkContestRoom1_EventScript_27A630
 	compare VAR_0x8004, 100
 	goto_if 2, LinkContestRoom1_EventScript_27A62A
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_27A62A:: @ 827A62A
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_27A630:: @ 827A630
-	setvar VAR_0x4000, 2
+	setvar VAR_TEMP_0, 2
 	return
 
 LinkContestRoom1_EventScript_27A636:: @ 827A636
-	setvar VAR_0x4000, 3
+	setvar VAR_TEMP_0, 3
 	return
 
 LinkContestRoom1_EventScript_27A63C:: @ 827A63C
-	setvar VAR_0x4000, 4
+	setvar VAR_TEMP_0, 4
 	return
 
 LinkContestRoom1_EventScript_27A642:: @ 827A642
-	setvar VAR_0x4000, 5
+	setvar VAR_TEMP_0, 5
 	return
 
 LinkContestRoom1_EventScript_27A648:: @ 827A648
-	setvar VAR_0x4000, 6
+	setvar VAR_TEMP_0, 6
 	return
 
 LinkContestRoom1_EventScript_27A64E:: @ 827A64E
-	setvar VAR_0x4000, 7
+	setvar VAR_TEMP_0, 7
 	return
 
 LinkContestRoom1_EventScript_27A654:: @ 827A654
-	setvar VAR_0x4000, 8
+	setvar VAR_TEMP_0, 8
 	return
 
 LinkContestRoom1_EventScript_27A65A:: @ 827A65A
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_eq LinkContestRoom1_EventScript_27A67D
 	applymovement 6, LinkContestRoom1_Movement_27AD11
 	playse SE_PIN
 	delay 14
-	setvar VAR_0x4001, 1
-	addvar VAR_0x4000, 65535
+	setvar VAR_TEMP_1, 1
+	addvar VAR_TEMP_0, 65535
 	return
 
 LinkContestRoom1_EventScript_27A67D:: @ 827A67D
 	return
 
 LinkContestRoom1_EventScript_27A67E:: @ 827A67E
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_eq LinkContestRoom1_EventScript_27A6A1
 	applymovement 12, LinkContestRoom1_Movement_27AD11
 	playse SE_PIN
 	delay 14
-	setvar VAR_0x4002, 1
-	addvar VAR_0x4000, 65535
+	setvar VAR_TEMP_2, 1
+	addvar VAR_TEMP_0, 65535
 	return
 
 LinkContestRoom1_EventScript_27A6A1:: @ 827A6A1
 	return
 
 LinkContestRoom1_EventScript_27A6A2:: @ 827A6A2
-	compare VAR_0x4003, 1
+	compare VAR_TEMP_3, 1
 	goto_eq LinkContestRoom1_EventScript_27A6C5
 	applymovement 7, LinkContestRoom1_Movement_27AD11
 	playse SE_PIN
 	delay 14
-	setvar VAR_0x4003, 1
-	addvar VAR_0x4000, 65535
+	setvar VAR_TEMP_3, 1
+	addvar VAR_TEMP_0, 65535
 	return
 
 LinkContestRoom1_EventScript_27A6C5:: @ 827A6C5
 	return
 
 LinkContestRoom1_EventScript_27A6C6:: @ 827A6C6
-	compare VAR_0x4004, 1
+	compare VAR_TEMP_4, 1
 	goto_eq LinkContestRoom1_EventScript_27A6E9
 	applymovement 8, LinkContestRoom1_Movement_27AD11
 	playse SE_PIN
 	delay 14
-	setvar VAR_0x4004, 1
-	addvar VAR_0x4000, 65535
+	setvar VAR_TEMP_4, 1
+	addvar VAR_TEMP_0, 65535
 	return
 
 LinkContestRoom1_EventScript_27A6E9:: @ 827A6E9
 	return
 
 LinkContestRoom1_EventScript_27A6EA:: @ 827A6EA
-	compare VAR_0x4005, 1
+	compare VAR_TEMP_5, 1
 	goto_eq LinkContestRoom1_EventScript_27A70D
 	applymovement 9, LinkContestRoom1_Movement_27AD11
 	playse SE_PIN
 	delay 14
-	setvar VAR_0x4005, 1
-	addvar VAR_0x4000, 65535
+	setvar VAR_TEMP_5, 1
+	addvar VAR_TEMP_0, 65535
 	return
 
 LinkContestRoom1_EventScript_27A70D:: @ 827A70D
 	return
 
 LinkContestRoom1_EventScript_27A70E:: @ 827A70E
-	compare VAR_0x4006, 1
+	compare VAR_TEMP_6, 1
 	goto_eq LinkContestRoom1_EventScript_27A731
 	applymovement 10, LinkContestRoom1_Movement_27AD11
 	playse SE_PIN
 	delay 14
-	setvar VAR_0x4006, 1
-	addvar VAR_0x4000, 65535
+	setvar VAR_TEMP_6, 1
+	addvar VAR_TEMP_0, 65535
 	return
 
 LinkContestRoom1_EventScript_27A731:: @ 827A731
 	return
 
 LinkContestRoom1_EventScript_27A732:: @ 827A732
-	compare VAR_0x4007, 1
+	compare VAR_TEMP_7, 1
 	goto_eq LinkContestRoom1_EventScript_27A755
 	applymovement 11, LinkContestRoom1_Movement_27AD11
 	playse SE_PIN
 	delay 14
-	setvar VAR_0x4007, 1
-	addvar VAR_0x4000, 65535
+	setvar VAR_TEMP_7, 1
+	addvar VAR_TEMP_0, 65535
 	return
 
 LinkContestRoom1_EventScript_27A755:: @ 827A755
 	return
 
 LinkContestRoom1_EventScript_27A756:: @ 827A756
-	compare VAR_0x4008, 1
+	compare VAR_TEMP_8, 1
 	goto_eq LinkContestRoom1_EventScript_27A779
 	applymovement 15, LinkContestRoom1_Movement_27AD11
 	playse SE_PIN
 	delay 14
-	setvar VAR_0x4008, 1
-	addvar VAR_0x4000, 65535
+	setvar VAR_TEMP_8, 1
+	addvar VAR_TEMP_0, 65535
 	return
 
 LinkContestRoom1_EventScript_27A779:: @ 827A779
@@ -832,11 +832,11 @@ LinkContestRoom1_EventScript_27A801:: @ 827A801
 	waitmovement 0
 	releaseall
 	call LinkContestRoom1_EventScript_27A133
-	setvar VAR_0x4009, 1
+	setvar VAR_TEMP_9, 1
 	special sub_80F910C
 	startcontest
 	special sub_80F90DC
-	setvar VAR_0x4009, 0
+	setvar VAR_TEMP_9, 0
 	lockall
 	applymovement 1, LinkContestRoom1_Movement_27AD19
 	applymovement 2, LinkContestRoom1_Movement_27AD15
@@ -888,9 +888,9 @@ LinkContestRoom1_EventScript_27A8A5:: @ 827A8A5
 	closemessage
 	releaseall
 	special sub_80F910C
-	setvar VAR_0x4009, 1
+	setvar VAR_TEMP_9, 1
 	showcontestresults
-	setvar VAR_0x4009, 0
+	setvar VAR_TEMP_9, 0
 	playbgm MUS_CON_FAN, 0
 	return
 
@@ -956,19 +956,19 @@ LinkContestRoom1_EventScript_27A987:: @ 827A987
 	return
 
 LinkContestRoom1_EventScript_27A9BC:: @ 827A9BC
-	setvar VAR_0x4003, 3
+	setvar VAR_TEMP_3, 3
 	return
 
 LinkContestRoom1_EventScript_27A9C2:: @ 827A9C2
-	setvar VAR_0x4003, 4
+	setvar VAR_TEMP_3, 4
 	return
 
 LinkContestRoom1_EventScript_27A9C8:: @ 827A9C8
-	setvar VAR_0x4003, 5
+	setvar VAR_TEMP_3, 5
 	return
 
 LinkContestRoom1_EventScript_27A9CE:: @ 827A9CE
-	setvar VAR_0x4003, 14
+	setvar VAR_TEMP_3, 14
 	return
 
 LinkContestRoom1_EventScript_27A9D4:: @ 827A9D4
@@ -978,10 +978,10 @@ LinkContestRoom1_EventScript_27A9D4:: @ 827A9D4
 	buffernumberstring 1, VAR_0x8005
 	addvar VAR_0x8005, 65535
 	call LinkContestRoom1_EventScript_27AA00
-	applymovement VAR_0x4003, LinkContestRoom1_Movement_27AD1D
+	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD1D
 	waitmovement 0
 	playse SE_W227B
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	return
 
 LinkContestRoom1_EventScript_27AA00:: @ 827AA00
@@ -996,7 +996,7 @@ LinkContestRoom1_EventScript_27AA14:: @ 827AA14
 	return
 
 LinkContestRoom1_EventScript_27AA1B:: @ 827AA1B
-	addvar VAR_0x4001, 1
+	addvar VAR_TEMP_1, 1
 	lockall
 	compare VAR_0x4088, 1
 	call_if 2, LinkContestRoom1_EventScript_27AA6F
@@ -1008,7 +1008,7 @@ LinkContestRoom1_EventScript_27AA1B:: @ 827AA1B
 	applymovement 11, LinkContestRoom1_Movement_27AD3F
 	applymovement 6, LinkContestRoom1_Movement_27AD37
 	applymovement 8, LinkContestRoom1_Movement_27AD33
-	compare VAR_0x4001, 4
+	compare VAR_TEMP_1, 4
 	goto_if 5, LinkContestRoom1_EventScript_27AA1B
 	delay 30
 	return
@@ -1094,7 +1094,7 @@ LinkContestRoom1_EventScript_27AB36:: @ 827AB36
 	call LinkContestRoom1_EventScript_27ABF8
 	call LinkContestRoom1_EventScript_27AC5E
 	playse SE_W227B
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	call LinkContestRoom1_EventScript_27AA1B
 	delay 30
 	special sub_80F88E8
@@ -1168,28 +1168,28 @@ LinkContestRoom1_EventScript_27ABF8:: @ 827ABF8
 
 LinkContestRoom1_EventScript_27AC2A:: @ 827AC2A
 	lockall
-	applymovement VAR_0x4003, LinkContestRoom1_Movement_27AD7A
+	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD7A
 	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_27AC37:: @ 827AC37
 	lockall
-	applymovement VAR_0x4003, LinkContestRoom1_Movement_27AD7E
+	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD7E
 	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_27AC44:: @ 827AC44
 	lockall
-	applymovement VAR_0x4003, LinkContestRoom1_Movement_27AD29
+	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD29
 	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_27AC51:: @ 827AC51
 	lockall
-	applymovement VAR_0x4003, LinkContestRoom1_Movement_27AD2D
+	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD2D
 	waitmovement 0
 	releaseall
 	return

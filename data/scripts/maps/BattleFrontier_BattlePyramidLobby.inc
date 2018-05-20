@@ -4,20 +4,20 @@ BattleFrontier_BattlePyramidLobby_MapScripts:: @ 8250716
 	.byte 0
 
 BattleFrontier_BattlePyramidLobby_MapScript2_250721: @ 8250721
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattlePyramidLobby_EventScript_25072B
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePyramidLobby_EventScript_25072B
 	.2byte 0
 
 BattleFrontier_BattlePyramidLobby_EventScript_25072B: @ 825072B
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 BattleFrontier_BattlePyramidLobby_MapScript2_250735: @ 8250735
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePyramidLobby_EventScript_25075F
-	map_script_2 VAR_0x4000, 1, BattleFrontier_BattlePyramidLobby_EventScript_250768
-	map_script_2 VAR_0x4000, 2, BattleFrontier_BattlePyramidLobby_EventScript_2508AC
-	map_script_2 VAR_0x4000, 3, BattleFrontier_BattlePyramidLobby_EventScript_2507B1
-	map_script_2 VAR_0x4000, 4, BattleFrontier_BattlePyramidLobby_EventScript_250852
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePyramidLobby_EventScript_25075F
+	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattlePyramidLobby_EventScript_250768
+	map_script_2 VAR_TEMP_0, 2, BattleFrontier_BattlePyramidLobby_EventScript_2508AC
+	map_script_2 VAR_TEMP_0, 3, BattleFrontier_BattlePyramidLobby_EventScript_2507B1
+	map_script_2 VAR_TEMP_0, 4, BattleFrontier_BattlePyramidLobby_EventScript_250852
 	.2byte 0
 
 BattleFrontier_BattlePyramidLobby_EventScript_25075F:: @ 825075F
@@ -44,7 +44,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250768:: @ 8250768
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -90,7 +90,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	waitse
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251BB6, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -119,7 +119,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250852:: @ 8250852
 	waitse
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251BB6, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -175,7 +175,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 	case 127, BattleFrontier_BattlePyramidLobby_EventScript_250AC1
 
 BattleFrontier_BattlePyramidLobby_EventScript_2509A5:: @ 82509A5
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
@@ -201,7 +201,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2509A5:: @ 82509A5
 	closemessage
 	delay 2
 	call BattleFrontier_BattlePyramidLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250AAA
 
@@ -220,7 +220,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
 	setvar VAR_RESULT, 0
 	special HealPlayerParty
 	warp BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 

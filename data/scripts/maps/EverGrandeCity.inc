@@ -21,7 +21,7 @@ EverGrandeCity_EventScript_1E7D3D:: @ 81E7D3D
 
 EverGrandeCity_EventScript_1E7D46:: @ 81E7D46
 	setflag FLAG_VISITED_EVER_GRANDE_CITY
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	end
 
 EverGrandeCity_Text_1E7D4F: @ 81E7D4F

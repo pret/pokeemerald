@@ -17,17 +17,17 @@ FallarborTown_BattleTentBattleRoom_EventScript_2008AF:: @ 82008AF
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008C7:: @ 82008C7
-	setvar VAR_0x4011, 100
-	setvar VAR_0x4010, 100
+	setvar VAR_OBJ_GFX_ID_1, 100
+	setvar VAR_OBJ_GFX_ID_0, 100
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008D2:: @ 82008D2
-	setvar VAR_0x4011, 105
-	setvar VAR_0x4010, 105
+	setvar VAR_OBJ_GFX_ID_1, 105
+	setvar VAR_OBJ_GFX_ID_0, 105
 	return
 
 FallarborTown_BattleTentBattleRoom_MapScript2_2008DD: @ 82008DD
-	map_script_2 VAR_0x4000, 0, FallarborTown_BattleTentBattleRoom_EventScript_2008E7
+	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentBattleRoom_EventScript_2008E7
 	.2byte 0
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008E7:: @ 82008E7
@@ -256,13 +256,13 @@ FallarborTown_BattleTentBattleRoom_Movement_200BAB: @ 8200BAB
 	step_end
 
 FallarborTown_BattleTentBattleRoom_MapScript2_200BB0: @ 8200BB0
-	map_script_2 VAR_0x4001, 0, FallarborTown_BattleTentBattleRoom_EventScript_200BBA
+	map_script_2 VAR_TEMP_1, 0, FallarborTown_BattleTentBattleRoom_EventScript_200BBA
 	.2byte 0
 
 FallarborTown_BattleTentBattleRoom_EventScript_200BBA:: @ 8200BBA
 	hideobjectat 255, FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	hideobjectat 1, FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	removeobject 3
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	end
 

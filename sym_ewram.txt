@@ -826,13 +826,7 @@ gUnknown_0203CE54: @ 203CE54
 	.align 2
     
     .include "src/item_menu.o"
-
-gUnknown_0203CE84: @ 203CE84
-	.space 0x8
-
-gUnknown_0203CE8C: @ 203CE8C
-	.space 0x10
-
+    .include "src/list_menu.o"
     .include "src/unk_text_util.o"
     .include "src/item_icon.o"
 

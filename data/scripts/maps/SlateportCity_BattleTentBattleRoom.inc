@@ -17,25 +17,25 @@ SlateportCity_BattleTentBattleRoom_EventScript_209976:: @ 8209976
 	return
 
 SlateportCity_BattleTentBattleRoom_EventScript_20998E:: @ 820998E
-	setvar VAR_0x4011, 100
+	setvar VAR_OBJ_GFX_ID_1, 100
 	return
 
 SlateportCity_BattleTentBattleRoom_EventScript_209994:: @ 8209994
-	setvar VAR_0x4011, 105
+	setvar VAR_OBJ_GFX_ID_1, 105
 	return
 
 SlateportCity_BattleTentBattleRoom_MapScript2_20999A: @ 820999A
-	map_script_2 VAR_0x4001, 0, SlateportCity_BattleTentBattleRoom_EventScript_2099A4
+	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentBattleRoom_EventScript_2099A4
 	.2byte 0
 
 SlateportCity_BattleTentBattleRoom_EventScript_2099A4:: @ 82099A4
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	hideobjectat 255, FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	hideobjectat 2, SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
 	end
 
 SlateportCity_BattleTentBattleRoom_MapScript2_2099B4: @ 82099B4
-	map_script_2 VAR_0x4000, 0, SlateportCity_BattleTentBattleRoom_EventScript_2099BE
+	map_script_2 VAR_TEMP_0, 0, SlateportCity_BattleTentBattleRoom_EventScript_2099BE
 	.2byte 0
 
 SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE

@@ -11,10 +11,10 @@ Route110_TrickHousePuzzle2_MapWarps: @ 853E1A0
 	warp_def 13, 1, 3, 0, ROUTE_110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle2_MapCoordEvents: @ 853E1B8
-	coord_event 11, 12, 3, 0, VAR_0x4001, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BBDD
-	coord_event 0, 4, 0, 0, VAR_0x4002, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BBF0
-	coord_event 14, 5, 3, 0, VAR_0x4003, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BC03
-	coord_event 7, 11, 3, 0, VAR_0x4004, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BC16
+	coord_event 11, 12, 3, 0, VAR_TEMP_1, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BBDD
+	coord_event 0, 4, 0, 0, VAR_TEMP_2, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BBF0
+	coord_event 14, 5, 3, 0, VAR_TEMP_3, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BC03
+	coord_event 7, 11, 3, 0, VAR_TEMP_4, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BC16
 
 Route110_TrickHousePuzzle2_MapBGEvents: @ 853E1F8
 	bg_event 14, 14, 0, 0, 0, Route110_TrickHousePuzzle2_EventScript_26BBC0

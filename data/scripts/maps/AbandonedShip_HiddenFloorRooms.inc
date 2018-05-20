@@ -3,20 +3,20 @@ AbandonedShip_HiddenFloorRooms_MapScripts:: @ 8238C49
 	.byte 0
 
 AbandonedShip_HiddenFloorRooms_MapScript2_238C4F: @ 8238C4F
-	map_script_2 VAR_0x4001, 0, AbandonedShip_HiddenFloorRooms_EventScript_238C59
+	map_script_2 VAR_TEMP_1, 0, AbandonedShip_HiddenFloorRooms_EventScript_238C59
 	.2byte 0
 
 AbandonedShip_HiddenFloorRooms_EventScript_238C59:: @ 8238C59
-	setvar VAR_0x4001, 1
-	getplayerxy VAR_0x4002, VAR_0x4003
-	setvar VAR_0x4004, 1
-	compare VAR_0x4002, 21
+	setvar VAR_TEMP_1, 1
+	getplayerxy VAR_TEMP_2, VAR_TEMP_3
+	setvar VAR_TEMP_4, 1
+	compare VAR_TEMP_2, 21
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CD1
-	compare VAR_0x4002, 36
+	compare VAR_TEMP_2, 36
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CD7
-	compare VAR_0x4003, 2
+	compare VAR_TEMP_3, 2
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CDD
-	switch VAR_0x4004
+	switch VAR_TEMP_4
 	case 1, AbandonedShip_HiddenFloorRooms_EventScript_238CE3
 	case 2, AbandonedShip_HiddenFloorRooms_EventScript_238D0C
 	case 3, AbandonedShip_HiddenFloorRooms_EventScript_238D0D
@@ -26,15 +26,15 @@ AbandonedShip_HiddenFloorRooms_EventScript_238C59:: @ 8238C59
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_238CD1:: @ 8238CD1
-	addvar VAR_0x4004, 1
+	addvar VAR_TEMP_4, 1
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_238CD7:: @ 8238CD7
-	addvar VAR_0x4004, 2
+	addvar VAR_TEMP_4, 2
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_238CDD:: @ 8238CDD
-	addvar VAR_0x4004, 3
+	addvar VAR_TEMP_4, 3
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_238CE3:: @ 8238CE3

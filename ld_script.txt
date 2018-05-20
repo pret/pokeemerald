@@ -103,7 +103,7 @@ SECTIONS {
         asm/field_control_avatar.o(.text);
         src/event_data.o(.text);
         src/coord_event_weather.o(.text);
-        asm/field_tasks.o(.text);
+        src/field_tasks.o(.text);
         src/clock.o(.text);
         src/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
@@ -246,7 +246,6 @@ SECTIONS {
         asm/battle_frontier_2.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
-        asm/menu_indicators.o(.text);
         src/unk_text_util.o(.text);
         src/save_location.o(.text);
         src/item_icon.o(.text);
@@ -406,7 +405,7 @@ SECTIONS {
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
-        data/field_tasks.o(.rodata);
+        src/field_tasks.o(.rodata);
         src/reset_rtc_screen.o(.rodata);
         src/start_menu.o(.rodata);
         src/tileset_anims.o(.rodata);
@@ -521,7 +520,7 @@ SECTIONS {
         src/menu.o(.rodata);
         data/battle_frontier_2.o(.rodata);
         src/item_menu.o(.rodata);
-        data/menu_indicators.o(.rodata);
+        src/list_menu.o(.rodata);
         src/save_location.o(.rodata);
         src/item_icon.o(.rodata);
         data/party_menu.o(.rodata);

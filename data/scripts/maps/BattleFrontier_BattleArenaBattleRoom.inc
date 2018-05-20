@@ -24,15 +24,15 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2574AE:: @ 82574AE
 	return
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2574C6:: @ 82574C6
-	setvar VAR_0x4011, 100
+	setvar VAR_OBJ_GFX_ID_1, 100
 	return
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2574CC:: @ 82574CC
-	setvar VAR_0x4011, 105
+	setvar VAR_OBJ_GFX_ID_1, 105
 	return
 
 BattleFrontier_BattleArenaBattleRoom_MapScript2_2574D2: @ 82574D2
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC
 	.2byte 0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC:: @ 82574DC
@@ -47,7 +47,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC:: @ 82574DC
 	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25752E
 	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_257C08
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BEB
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
@@ -148,7 +148,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257630:: @ 8257630
 BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0:: @ 82576B0
 	setvar VAR_0x8004, 9
 	special sub_81A1780
-	copyvar VAR_0x400F, VAR_RESULT
+	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_2578BC
 	setvar VAR_0x8004, 1
@@ -275,10 +275,10 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_25789A:: @ 825789A
 	end
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2578BC:: @ 82578BC
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257F45, 4
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4:: @ 82578D4
 	message BattleFrontier_BattleArenaBattleRoom_Text_257FBB
@@ -326,7 +326,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257961:: @ 8257961
 	waitmovement 0
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF2
 	waitmovement 0
-	switch VAR_0x400F
+	switch VAR_TEMP_F
 	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_257AA5
 	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F
 	case 4, BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8
@@ -425,7 +425,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257B5E:: @ 8257B5E
 BattleFrontier_BattleArenaBattleRoom_EventScript_257B6C:: @ 8257B6C
 FallarborTown_BattleTentBattleRoom_EventScript_257B6C:: @ 8257B6C
 	closemessage
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
@@ -529,7 +529,7 @@ BattleFrontier_BattleArenaBattleRoom_Movement_257C0A: @ 8257C0A
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_MapScript2_257C0C: @ 8257C0C
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257C16
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257C16
 	.2byte 0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257C16:: @ 8257C16
@@ -537,7 +537,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257C16:: @ 8257C16
 	removeobject 7
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_24BCDC
 	applymovement 255, BattleFrontier_BattleArenaBattleRoom_Movement_24C773
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257C30: @ 8257C30

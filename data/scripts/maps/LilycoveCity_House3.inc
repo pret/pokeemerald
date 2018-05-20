@@ -4,7 +4,7 @@ LilycoveCity_House3_MapScripts:: @ 821EE3C
 
 LilycoveCity_House3_MapScript1_21EE42: @ 821EE42
 	random 4
-	copyvar VAR_0x4001, VAR_RESULT
+	copyvar VAR_TEMP_1, VAR_RESULT
 	end
 
 LilycoveCity_House3_EventScript_21EE4B:: @ 821EE4B
@@ -41,7 +41,7 @@ LilycoveCity_House3_EventScript_21EE8A:: @ 821EE8A
 LilycoveCity_House3_EventScript_21EEA1:: @ 821EEA1
 	lock
 	faceplayer
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 0, LilycoveCity_House3_EventScript_21EF71
 	case 1, LilycoveCity_House3_EventScript_21EF7B
 	case 2, LilycoveCity_House3_EventScript_21EF85
@@ -51,7 +51,7 @@ LilycoveCity_House3_EventScript_21EEA1:: @ 821EEA1
 LilycoveCity_House3_EventScript_21EED5:: @ 821EED5
 	lock
 	faceplayer
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 0, LilycoveCity_House3_EventScript_21EF71
 	case 1, LilycoveCity_House3_EventScript_21EF7B
 	case 2, LilycoveCity_House3_EventScript_21EF85
@@ -61,7 +61,7 @@ LilycoveCity_House3_EventScript_21EED5:: @ 821EED5
 LilycoveCity_House3_EventScript_21EF09:: @ 821EF09
 	lock
 	faceplayer
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 0, LilycoveCity_House3_EventScript_21EF71
 	case 1, LilycoveCity_House3_EventScript_21EF7B
 	case 2, LilycoveCity_House3_EventScript_21EF85
@@ -71,7 +71,7 @@ LilycoveCity_House3_EventScript_21EF09:: @ 821EF09
 LilycoveCity_House3_EventScript_21EF3D:: @ 821EF3D
 	lock
 	faceplayer
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 0, LilycoveCity_House3_EventScript_21EF71
 	case 1, LilycoveCity_House3_EventScript_21EF7B
 	case 2, LilycoveCity_House3_EventScript_21EF85

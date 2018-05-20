@@ -41,7 +41,7 @@ FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
 
 FarawayIsland_Interior_MapScript1_267D72: @ 8267D72
 	setvar VAR_0x403A, 0
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	checkflag FLAG_0x1CA
 	call_if 0, FarawayIsland_Interior_EventScript_267D86
 	end
@@ -50,11 +50,11 @@ FarawayIsland_Interior_EventScript_267D86:: @ 8267D86
 	checkflag FLAG_0x1C7
 	goto_eq FarawayIsland_Interior_EventScript_27374E
 	clearflag FLAG_0x2CE
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	return
 
 FarawayIsland_Interior_MapScript2_267D98: @ 8267D98
-	map_script_2 VAR_0x4001, 0, FarawayIsland_Interior_EventScript_267DA2
+	map_script_2 VAR_TEMP_1, 0, FarawayIsland_Interior_EventScript_267DA2
 	.2byte 0
 
 FarawayIsland_Interior_EventScript_267DA2:: @ 8267DA2
@@ -67,7 +67,7 @@ FarawayIsland_Interior_EventScript_267DA2:: @ 8267DA2
 	applymovement 1, FarawayIsland_Interior_Movement_267DCE
 	waitmovement 0
 	moveobjectoffscreen 1
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end
 

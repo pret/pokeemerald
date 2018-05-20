@@ -6,8 +6,8 @@ SingleBattleColosseum_MapWarps: @ 8539D5C
 	warp_def 7, 8, 3, 127, NONE
 
 SingleBattleColosseum_MapCoordEvents: @ 8539D6C
-	coord_event 3, 5, 3, 0, VAR_0x4000, 0, 0, gUnknown_08277374
-	coord_event 10, 5, 3, 0, VAR_0x4000, 0, 0, gUnknown_0827737E
+	coord_event 3, 5, 3, 0, VAR_TEMP_0, 0, 0, gUnknown_08277374
+	coord_event 10, 5, 3, 0, VAR_TEMP_0, 0, 0, gUnknown_0827737E
 
 SingleBattleColosseum_MapEvents:: @ 8539D8C
 	map_events SingleBattleColosseum_MapObjects, SingleBattleColosseum_MapWarps, SingleBattleColosseum_MapCoordEvents, 0x0

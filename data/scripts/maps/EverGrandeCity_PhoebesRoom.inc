@@ -5,7 +5,7 @@ EverGrandeCity_PhoebesRoom_MapScripts:: @ 8228174
 	.byte 0
 
 EverGrandeCity_PhoebesRoom_MapScript2_228184: @ 8228184
-	map_script_2 VAR_0x4001, 0, EverGrandeCity_PhoebesRoom_EventScript_22818E
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_PhoebesRoom_EventScript_22818E
 	.2byte 0
 
 EverGrandeCity_PhoebesRoom_EventScript_22818E:: @ 822818E

@@ -6,11 +6,11 @@ BattleFrontier_BattlePikeRandomRoom1_MapScripts:: @ 825D152
 	.byte 0
 
 BattleFrontier_BattlePikeRandomRoom1_MapScript2_25D167: @ 825D167
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D171
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D171
 	.2byte 0
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D171:: @ 825D171
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	setvar VAR_0x8004, 5
 	special sub_81A703C
 	switch VAR_RESULT

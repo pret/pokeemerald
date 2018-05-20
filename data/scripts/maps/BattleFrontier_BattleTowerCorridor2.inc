@@ -17,11 +17,11 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248D71:: @ 8248D71
 	checkplayergender
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D8B
-	setvar VAR_0x401F, 0
+	setvar VAR_OBJ_GFX_ID_F, 0
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D8B:: @ 8248D8B
-	setvar VAR_0x401F, 89
+	setvar VAR_OBJ_GFX_ID_F, 89
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D91:: @ 8248D91
@@ -29,7 +29,7 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248D91:: @ 8248D91
 	return
 
 BattleFrontier_BattleTowerCorridor2_MapScript2_248D95: @ 8248D95
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleTowerCorridor2_EventScript_248D9F
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerCorridor2_EventScript_248D9F
 	.2byte 0
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D9F:: @ 8248D9F
@@ -40,7 +40,7 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248D9F:: @ 8248D9F
 	end
 
 BattleFrontier_BattleTowerCorridor2_MapScript2_248DB2: @ 8248DB2
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleTowerCorridor2_EventScript_248DBC
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerCorridor2_EventScript_248DBC
 	.2byte 0
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248DBC:: @ 8248DBC
@@ -81,7 +81,7 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248DBC:: @ 8248DBC
 	closedoor 7, 1
 	waitdooranim
 	delay 30
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	call BattleFrontier_BattleTowerCorridor2_EventScript_248E71
 	releaseall
 	end

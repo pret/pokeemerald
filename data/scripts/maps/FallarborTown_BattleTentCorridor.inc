@@ -3,12 +3,12 @@ FallarborTown_BattleTentCorridor_MapScripts:: @ 82006A7
 	.byte 0
 
 FallarborTown_BattleTentCorridor_MapScript2_2006AD: @ 82006AD
-	map_script_2 VAR_0x4000, 0, FallarborTown_BattleTentCorridor_EventScript_2006B7
+	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentCorridor_EventScript_2006B7
 	.2byte 0
 
 FallarborTown_BattleTentCorridor_EventScript_2006B7:: @ 82006B7
 	lockall
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 1, FallarborTown_BattleTentCorridor_Movement_2006FB
 	applymovement 255, FallarborTown_BattleTentCorridor_Movement_2006FB
 	waitmovement 0

@@ -10,7 +10,6 @@
 #include "list_menu.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "menu_indicators.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -592,7 +591,7 @@ void sub_80E9578(void)
 
 void sub_80E95D4(void)
 {
-    VarSet(VAR_0x401F, gUnknown_0858D060[sub_80EA20C(VarGet(VAR_0x4054))]);
+    VarSet(VAR_OBJ_GFX_ID_F, gUnknown_0858D060[sub_80EA20C(VarGet(VAR_0x4054))]);
 }
 
 void sub_80E9608(struct Coords16 *coords, struct MapEvents *events)

@@ -10,7 +10,7 @@ Route121_SafariZoneEntrance_MapWarps: @ 8533F24
 	warp_def 15, 13, 0, 0, ROUTE_121
 
 Route121_SafariZoneEntrance_MapCoordEvents: @ 8533F44
-	coord_event 8, 4, 3, 0, VAR_0x4001, 0, 0, Route121_SafariZoneEntrance_EventScript_22BC18
+	coord_event 8, 4, 3, 0, VAR_TEMP_1, 0, 0, Route121_SafariZoneEntrance_EventScript_22BC18
 
 Route121_SafariZoneEntrance_MapBGEvents: @ 8533F54
 	bg_event 15, 1, 0, 0, 0, Route121_SafariZoneEntrance_EventScript_22BD21

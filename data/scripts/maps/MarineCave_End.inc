@@ -22,7 +22,7 @@ MarineCave_End_MapScript1_23B008: @ 823B008
 
 MarineCave_End_EventScript_23B012:: @ 823B012
 	clearflag FLAG_0x30E
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 MarineCave_End_EventScript_23B01B:: @ 823B01B
@@ -41,7 +41,7 @@ MarineCave_End_EventScript_23B01B:: @ 823B01B
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, sub_8138B80
 	compare VAR_RESULT, 1
 	goto_eq MarineCave_End_EventScript_23B084

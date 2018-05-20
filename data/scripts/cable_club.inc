@@ -880,7 +880,7 @@ gUnknown_0827741D:: @ 827741D
 	setvar VAR_0x8005, 0
 	special sub_80E6BE8
 	waitstate
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if 5, RecordCorner_EventScript_277471
 	end
 
@@ -888,7 +888,7 @@ gUnknown_08277432:: @ 8277432
 	setvar VAR_0x8005, 1
 	special sub_80E6BE8
 	waitstate
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if 5, RecordCorner_EventScript_277471
 	end
 
@@ -896,7 +896,7 @@ gUnknown_08277447:: @ 8277447
 	setvar VAR_0x8005, 2
 	special sub_80E6BE8
 	waitstate
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if 5, RecordCorner_EventScript_277471
 	end
 
@@ -904,12 +904,12 @@ gUnknown_0827745C:: @ 827745C
 	setvar VAR_0x8005, 3
 	special sub_80E6BE8
 	waitstate
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if 5, RecordCorner_EventScript_277471
 	end
 
 RecordCorner_EventScript_277471:: @ 8277471
-	bufferitemname 1, VAR_0x4001
+	bufferitemname 1, VAR_TEMP_1
 	message RecordCorner_Text_27863C
 	waitmessage
 	waitbuttonpress
@@ -950,7 +950,7 @@ TradeCenter_EventScript_2774B6:: @ 82774B6
 	end
 
 RecordCorner_EventScript_2774C6:: @ 82774C6
-	compare VAR_0x4000, 0
+	compare VAR_TEMP_0, 0
 	goto_if 5, RecordCorner_EventScript_2774E0
 	special sub_8098574
 	message RecordCorner_Text_27861C
