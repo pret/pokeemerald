@@ -1,3 +1,7 @@
+include $(DEVKITARM)/base_tools
+export CPP := $(PREFIX)cpp
+export LD := $(PREFIX)ld
+
 SHELL := /bin/bash -o pipefail
 
 ROM := pokeemerald.gba
@@ -16,25 +20,16 @@ ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 
-AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
 CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
-CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
-LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 LDFLAGS = -Map ../../$(MAP)
 
-OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
-
-ifeq ($(OS),Windows_NT)
-  LIB := ../../tools/agbcc/lib/libgcc.a ../../tools/agbcc/lib/libc.a
-else
-  LIB := -L ../../tools/agbcc/lib -lgcc -lc
-endif
+LIB := -L ../../tools/agbcc/lib -lgcc -lc
 
 SHA1 := sha1sum -c
 
