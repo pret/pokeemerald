@@ -38,31 +38,35 @@
 
 struct UnkRecordMixingStruct
 {
-    u8 field_0[0x44];
+    u8 field_0[0x34];
+    u8 playerId[4];
+    u8 field_38[10];
 };
 
-struct PlayerRecordsRS {
+struct PlayerRecordsRS
+{
     struct SecretBaseRecord secretBases[20];
     TVShow tvShows[25];
     PokeNews pokeNews[16];
     OldMan oldMan;
     struct EasyChatPair easyChatPairs[5];
-    struct UnkStruct_80E7B60 dayCareMail;
+    struct RecordMixingDayCareMail dayCareMail;
     struct RSBattleTowerRecord battleTowerRecord;
     u16 filler11C8[0x32];
 };
 
-struct PlayerRecords {
+struct PlayerRecords
+{
     /* 0x0000 */ struct SecretBaseRecord secretBases[20];
     /* 0x0c80 */ TVShow tvShows[25];
     /* 0x1004 */ PokeNews pokeNews[16];
     /* 0x1044 */ OldMan oldMan;
     /* 0x1084 */ struct EasyChatPair easyChatPair[5];
-    /* 0x10ac */ struct UnkStruct_80E7B60 dayCareMail;
+    /* 0x10ac */ struct RecordMixingDayCareMail dayCareMail;
     /* 0x1124 */ union BattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 unk_1210;
     /* 0x1214 */ LilycoveLady lilycoveLady;
-    /* 0x1254 */ u8 unk_1254[0x88];
+    /* 0x1254 */ struct UnkRecordMixingStruct unk_1254[2];
     /* 0x12dc */ u8 unk_12dc[0x168];
 }; // 1444
 
@@ -74,7 +78,7 @@ IWRAM_DATA TVShow *gUnknown_03001138;
 IWRAM_DATA PokeNews *gUnknown_0300113C;
 IWRAM_DATA OldMan *gUnknown_03001140;
 IWRAM_DATA struct EasyChatPair *gUnknown_03001144;
-IWRAM_DATA struct UnkStruct_80E7B60 *gUnknown_03001148;
+IWRAM_DATA struct RecordMixingDayCareMail *gUnknown_03001148;
 IWRAM_DATA void *gUnknown_0300114C; // gSaveBlock2Ptr->field_64C
 IWRAM_DATA LilycoveLady *gUnknown_03001150;
 IWRAM_DATA void *gUnknown_03001154; // gSaveBlock2Ptr->field_0DC;
@@ -84,7 +88,7 @@ IWRAM_DATA u8 gUnknown_03001160;
 IWRAM_DATA u32 filler_03001164;
 IWRAM_DATA u32 gUnknown_03001168[3];
 
-EWRAM_DATA struct UnkStruct_80E7B60 gUnknown_02039F9C = {};
+EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02039F9C = {};
 EWRAM_DATA struct PlayerRecords *gUnknown_0203A014 = NULL;
 EWRAM_DATA struct PlayerRecords *gUnknown_0203A018 = NULL;
 
@@ -103,10 +107,10 @@ static void sub_80E78C4(OldMan *, size_t, u8);
 static void sub_80E7948(union BattleTowerRecord *, size_t, u8);
 static void sub_80E7A14(LilycoveLady *, size_t, u8);
 static void sub_80E7B2C(const u8 *);
-static void sub_80E7B60(struct UnkStruct_80E7B60 *, size_t, u8, TVShow *);
+static void sub_80E7B60(struct RecordMixingDayCareMail *, size_t, u8, TVShow *);
 static void sub_80E7F68(u16 *item, u8 which);
 static void sub_80E7FF8(u8 taskId);
-/*static*/ void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1);
+static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1);
 void sub_80E8468(void *, size_t, u8);
 void sub_80E89AC(void *, size_t, u8);
 void sub_80E89F8(void *dest);
@@ -213,8 +217,8 @@ void sub_80E6E24(void)
         {
             gUnknown_0203A018->unk_1210 = GetRecordMixingGift();
         }
-        sub_80E8110((void*) gUnknown_0203A018->unk_1254, gUnknown_03001154);
-        sub_80E8260(gUnknown_0203A018->unk_12dc);
+        sub_80E8110(gUnknown_0203A018->unk_1254, gUnknown_03001154);
+        sub_80E8260((void*)gUnknown_0203A018->unk_12dc);
     }
 }
 
@@ -688,22 +692,22 @@ static void sub_80E7A14(LilycoveLady *lilycoveLady, size_t recordSize, u8 which)
     }
 }
 
-static u8 sub_80E7A9C(struct DayCareMailRecordMixing *rmMail)
+static u8 sub_80E7A9C(struct DaycareMiscMon *rmMail)
 {
     return rmMail->mail.itemId;
 }
 
-static void sub_80E7AA4(struct UnkStruct_80E7B60 *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
+static void sub_80E7AA4(struct RecordMixingDayCareMail *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
 {
-    struct DayCareMailRecordMixing buffer;
-    struct UnkStruct_80E7B60 *_src1;
-    struct UnkStruct_80E7B60 *_src2;
+    struct DaycareMiscMon buffer;
+    struct RecordMixingDayCareMail *mail1;
+    struct RecordMixingDayCareMail *mail2;
 
-    _src1 = (void *)src + recordSize * idxs[which0][0];
-    memcpy(&buffer, &_src1->unk_00[idxs[which0][1]], sizeof(struct DayCareMailRecordMixing));
-    _src2 = (void *)src + recordSize * idxs[which1][0];
-    memcpy(&_src1->unk_00[idxs[which0][1]], &_src2->unk_00[idxs[which1][1]], sizeof(struct DayCareMailRecordMixing));
-    memcpy(&_src2->unk_00[idxs[which1][1]], &buffer, sizeof(struct DayCareMailRecordMixing));
+    mail1 = (void *)src + recordSize * idxs[which0][0];
+    memcpy(&buffer, &mail1->mail[idxs[which0][1]], sizeof(struct DaycareMiscMon));
+    mail2 = (void *)src + recordSize * idxs[which1][0];
+    memcpy(&mail1->mail[idxs[which0][1]], &mail2->mail[idxs[which1][1]], sizeof(struct DaycareMiscMon));
+    memcpy(&mail2->mail[idxs[which1][1]], &buffer, sizeof(struct DaycareMiscMon));
 }
 
 static void sub_80E7B2C(const u8 *src)
@@ -725,7 +729,7 @@ static u8 sub_80E7B54(void)
 }
 
 #ifdef NONMATCHING
-static void sub_80E7B60(struct UnkStruct_80E7B60 *src, size_t recordSize, u8 which, TVShow *shows)
+static void sub_80E7B60(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
 {
     // r9 = which
     u16 i;
@@ -738,11 +742,11 @@ static void sub_80E7B60(struct UnkStruct_80E7B60 *src, size_t recordSize, u8 whi
     u8 dcMail1;
     u8 dcMail2;
     u8 r1_80e7b54;
-    struct DayCareMailRecordMixing *recordMixingMail;
-    struct UnkStruct_80E7B60 *_src;
+    struct DaycareMiscMon *recordMixingMail;
+    struct RecordMixingDayCareMail *_src;
     u8 sp04[4];
     u8 sp08[4];
-    struct UnkStruct_80E7B60 *sp0c[4]; // -> sp+48
+    struct RecordMixingDayCareMail *sp0c[4]; // -> sp+48
     u8 sp1c[4][2]; // [][0] -> sp+4c, [][1] -> sp+50
     u8 sp24[4][2];
     // sp+2c = src
@@ -898,12 +902,12 @@ static void sub_80E7B60(struct UnkStruct_80E7B60 *src, size_t recordSize, u8 whi
             break;
     }
     _src = (void *)src + which * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].misc.mail, &_src->unk_00[0], sizeof(struct DayCareMailRecordMixing));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].misc.mail, &_src->unk_00[1], sizeof(struct DayCareMailRecordMixing));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[0].misc.mail, &_src->unk_00[0], sizeof(struct DaycareMiscMon));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[1].misc.mail, &_src->unk_00[1], sizeof(struct DaycareMiscMon));
     SeedRng(oldSeed);
 }
 #else
-__attribute__((naked)) static void sub_80E7B60(struct UnkStruct_80E7B60 *src, size_t recordSize, u8 which, TVShow *shows)
+__attribute__((naked)) static void sub_80E7B60(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -1529,15 +1533,15 @@ static void sub_80E7FF8(u8 taskId)
     }
 }
 
-/*
-static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1)
+static void sub_80E8110(struct UnkRecordMixingStruct *dst, struct UnkRecordMixingStruct *src)
 {
     s32 i, id;
-    s32 var_28, var_24, var_2C, r8;
+    s32 var_2C, var_28, var_24, r8;
 
-    arg0[0].field_0[0x38] = 0xFF;
-    arg0[1].field_0[0x38] = 0xFF;
-    memcpy(&arg0[0], &arg1[0], sizeof(struct UnkRecordMixingStruct));
+    dst[0].field_38[0] = 0xFF;
+    dst[1].field_38[0] = 0xFF;
+
+    dst[0] = src[0];
 
     var_28 = 0;
     var_24 = 0;
@@ -1545,15 +1549,15 @@ static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixi
     r8 = 0;
     for (i = 0; i < 2; i++)
     {
-        id = ((i + (gSaveBlock2Ptr->field_B0[2] << 0x1B >> 0x1E)) % 3) + 1;
-        if (arg1[id].field_0[0x38] != 0xFF)
+        id = ((i + gSaveBlock2Ptr->field_B2_1) % 3) + 1;
+        if (src[id].field_38[0] != 0xFF)
         {
-            if (ReadUnalignedWord(&arg1[id].field_0[0x34]) != ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
+            if (ReadUnalignedWord(src[id].playerId) != ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
             {
                 r8++;
                 var_2C = id;
             }
-            if (ReadUnalignedWord(&arg1[id].field_0[0x34]) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
+            if (ReadUnalignedWord(src[id].playerId) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
             {
                 var_24++;
                 var_28 = id;
@@ -1570,13 +1574,72 @@ static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixi
     switch (r8)
     {
     case 1:
-        memcpy(&arg0[0], &arg1[var_2C], sizeof(struct UnkRecordMixingStruct));
+        dst[1] = src[var_2C];
         break;
     case 2:
         if (Random2() > 0x3333)
-            memcpy(&arg0[1], &arg1[(gSaveBlock2Ptr->field_B0[2] << 0x1B >> 0x1E) + 1], sizeof(struct UnkRecordMixingStruct));
+        {
+            dst[1] = src[gSaveBlock2Ptr->field_B2_1 + 1];
+        }
         else
-            memcpy(&arg0[1], &arg1[((gSaveBlock2Ptr->field_B0[2] << 0x1B >> 0x1E) + 1) % 3 + 1], sizeof(struct UnkRecordMixingStruct));
+        {
+            dst[1] = src[((gSaveBlock2Ptr->field_B2_1 + 1) % 3 + 1)];
+        }
         break;
     }
-}*/
+}
+
+void sub_80E8260(struct UnkRecordMixingStruct2 *dst)
+{
+    s32 i, j;
+
+    for (i = 0; i < 9; i++)
+    {
+        for (j = 0; j < 2; j++)
+        {
+            CopyUnalignedWord(dst->field_0[i][j].playerId, gSaveBlock2Ptr->playerTrainerId);
+            dst->field_0[i][j].language = LANGUAGE_ENGLISH;
+            StringCopy(dst->field_0[i][j].playerName, gSaveBlock2Ptr->playerName);
+        }
+    }
+
+    for (j = 0; j < 2; j++)
+    {
+        dst->field_120[j].language = LANGUAGE_ENGLISH;
+        CopyUnalignedWord(dst->field_120[j].playerId1, gSaveBlock2Ptr->playerTrainerId);
+        CopyUnalignedWord(dst->field_120[j].playerId2, gSaveBlock2Ptr->field_EF1[j]);
+        StringCopy(dst->field_120[j].playerName1, gSaveBlock2Ptr->playerName);
+        StringCopy(dst->field_120[j].playerName2, gSaveBlock2Ptr->field_EE1[j]);
+    }
+
+    for (i = 0; i < 2; i++)
+    {
+        dst->field_0[0][i].field_4 = gSaveBlock2Ptr->field_CF0[i];
+        dst->field_0[1][i].field_4 = gSaveBlock2Ptr->field_CF4[i];
+        dst->field_0[2][i].field_4 = gSaveBlock2Ptr->field_CF8[i];
+        dst->field_0[3][i].field_4 = gSaveBlock2Ptr->field_D14[i];
+        dst->field_0[4][i].field_4 = gSaveBlock2Ptr->field_DD0[i];
+        dst->field_0[5][i].field_4 = gSaveBlock2Ptr->field_DDE[i];
+        dst->field_0[6][i].field_4 = gSaveBlock2Ptr->field_DEA[i];
+        dst->field_0[7][i].field_4 = gSaveBlock2Ptr->field_E08[i];
+        dst->field_0[8][i].field_4 = gSaveBlock2Ptr->field_E1E[i];
+
+        dst->field_120[i].field_8 = gSaveBlock2Ptr->field_CFC[i];
+    }
+}
+
+bool32 sub_80E841C(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (ReadUnalignedWord(arg0->playerId) == ReadUnalignedWord(arg1[i].playerId)
+            && arg0->field_0[2] == arg1[i].field_0[2])
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
