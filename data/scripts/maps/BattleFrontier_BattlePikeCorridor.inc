@@ -4,7 +4,7 @@ BattleFrontier_BattlePikeCorridor_MapScripts:: @ 825C771
 	.byte 0
 
 BattleFrontier_BattlePikeCorridor_MapScript2_25C77C: @ 825C77C
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePikeCorridor_EventScript_25C786
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeCorridor_EventScript_25C786
 	.2byte 0
 
 BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
@@ -37,11 +37,11 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	end
 
 BattleFrontier_BattlePikeCorridor_MapScript2_25C7F7: @ 825C7F7
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattlePikeCorridor_EventScript_25C801
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePikeCorridor_EventScript_25C801
 	.2byte 0
 
 BattleFrontier_BattlePikeCorridor_EventScript_25C801:: @ 825C801
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 

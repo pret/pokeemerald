@@ -18,7 +18,6 @@
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "menu_indicators.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -42,9 +41,6 @@ struct Struct203BCC4
     u8 spriteId;
     u8 spriteIds[7];
 };
-
-// extern offset
-void (*gFieldCallback)(void);
 
 // static functions
 static void InitPlayerPCMenu(u8 taskId);

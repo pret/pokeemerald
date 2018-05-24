@@ -2341,7 +2341,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
     return 1;
 }
 #else
-__attribute__((naked))
+NAKED
 u16 RenderText(struct TextPrinter *textPrinter)
 {
     asm("push {r4-r6,lr}\n\

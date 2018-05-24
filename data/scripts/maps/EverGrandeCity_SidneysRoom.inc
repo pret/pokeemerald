@@ -27,7 +27,7 @@ EverGrandeCity_SidneysRoom_EventScript_227F38:: @ 8227F38
 
 EverGrandeCity_DrakesRoom_MapScript2_227F3E: @ 8227F3E
 EverGrandeCity_SidneysRoom_MapScript2_227F3E: @ 8227F3E
-	map_script_2 VAR_0x4001, 0, EverGrandeCity_SidneysRoom_EventScript_227F48
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_SidneysRoom_EventScript_227F48
 	.2byte 0
 
 EverGrandeCity_SidneysRoom_EventScript_227F48:: @ 8227F48

@@ -8,29 +8,29 @@ LavaridgeTown_Gym_1F_MapScript1_1FE6FA: @ 81FE6FA
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1FE705:: @ 81FE705
-	setvar VAR_0x400B, 0
-	setvar VAR_0x400C, 0
-	setvar VAR_0x400D, 0
-	setvar VAR_0x400E, 0
-	setvar VAR_0x400F, 0
+	setvar VAR_TEMP_B, 0
+	setvar VAR_TEMP_C, 0
+	setvar VAR_TEMP_D, 0
+	setvar VAR_TEMP_E, 0
+	setvar VAR_TEMP_F, 0
 	checktrainerflag TRAINER_COLE
 	goto_eq LavaridgeTown_Gym_1F_EventScript_1FE72C
-	setvar VAR_0x400B, 1
+	setvar VAR_TEMP_B, 1
 
 LavaridgeTown_Gym_1F_EventScript_1FE72C:: @ 81FE72C
 	checktrainerflag TRAINER_GERALD
 	goto_eq LavaridgeTown_Gym_1F_EventScript_1FE73A
-	setvar VAR_0x400C, 1
+	setvar VAR_TEMP_C, 1
 
 LavaridgeTown_Gym_1F_EventScript_1FE73A:: @ 81FE73A
 	checktrainerflag TRAINER_AXLE
 	goto_eq LavaridgeTown_Gym_1F_EventScript_1FE748
-	setvar VAR_0x400D, 1
+	setvar VAR_TEMP_D, 1
 
 LavaridgeTown_Gym_1F_EventScript_1FE748:: @ 81FE748
 	checktrainerflag TRAINER_DANIELLE
 	goto_eq LavaridgeTown_Gym_1F_EventScript_1FE756
-	setvar VAR_0x400E, 1
+	setvar VAR_TEMP_E, 1
 
 LavaridgeTown_Gym_1F_EventScript_1FE756:: @ 81FE756
 	return

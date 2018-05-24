@@ -4,11 +4,11 @@ SlateportCity_BattleTentCorridor_MapScripts:: @ 8208E26
 	.byte 0
 
 SlateportCity_BattleTentCorridor_MapScript2_208E31: @ 8208E31
-	map_script_2 VAR_0x4001, 0, SlateportCity_BattleTentCorridor_EventScript_208E3B
+	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentCorridor_EventScript_208E3B
 	.2byte 0
 
 SlateportCity_BattleTentCorridor_EventScript_208E3B:: @ 8208E3B
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	compare VAR_0x8006, 1
 	goto_if 5, SlateportCity_BattleTentCorridor_EventScript_208E56
 	setobjectxy 1, 2, 2
@@ -19,13 +19,13 @@ SlateportCity_BattleTentCorridor_EventScript_208E56:: @ 8208E56
 	end
 
 SlateportCity_BattleTentCorridor_MapScript2_208E5B: @ 8208E5B
-	map_script_2 VAR_0x4000, 0, SlateportCity_BattleTentCorridor_EventScript_208E65
+	map_script_2 VAR_TEMP_0, 0, SlateportCity_BattleTentCorridor_EventScript_208E65
 	.2byte 0
 
 SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 	compare VAR_0x8006, 1
 	goto_eq SlateportCity_BattleTentCorridor_EventScript_208EEE
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 1, SlateportCity_BattleTentCorridor_Movement_209062
 	applymovement 255, SlateportCity_BattleTentCorridor_Movement_209059
 	waitmovement 0

@@ -1938,11 +1938,11 @@ RustboroCity_EventScript_271ED7:: @ 8271ED7
 	end
 
 RustboroCity_EventScript_271EEF:: @ 8271EEF
-	setvar VAR_0x4010, 105
+	setvar VAR_OBJ_GFX_ID_0, 105
 	return
 
 RustboroCity_EventScript_271EF5:: @ 8271EF5
-	setvar VAR_0x4010, 100
+	setvar VAR_OBJ_GFX_ID_0, 100
 	return
 
 LavaridgeTown_EventScript_271EFB:: @ 8271EFB
@@ -1956,11 +1956,11 @@ Route119_EventScript_271EFB:: @ 8271EFB
 	end
 
 LavaridgeTown_EventScript_271F13:: @ 8271F13
-	setvar VAR_0x4013, 106
+	setvar VAR_OBJ_GFX_ID_3, 106
 	return
 
 LavaridgeTown_EventScript_271F19:: @ 8271F19
-	setvar VAR_0x4013, 101
+	setvar VAR_OBJ_GFX_ID_3, 101
 	return
 
 EventScript_271F1F:: @ 8271F1F
@@ -1972,11 +1972,11 @@ EventScript_271F1F:: @ 8271F1F
 	end
 
 EventScript_271F37:: @ 8271F37
-	setvar VAR_0x4010, 100
+	setvar VAR_OBJ_GFX_ID_0, 100
 	return
 
 EventScript_271F3D:: @ 8271F3D
-	setvar VAR_0x4010, 105
+	setvar VAR_OBJ_GFX_ID_0, 105
 	return
 
 DewfordTown_Gym_EventScript_271F43:: @ 8271F43
@@ -2393,25 +2393,25 @@ EventScript_272274:: @ 8272274
 	waitse
 	playmoncry SPECIES_KYOGRE, 2
 	waitmoncry
-	setvar VAR_0x4005, 1
+	setvar VAR_TEMP_5, 1
 	releaseall
 	end
 
 EventScript_272283:: @ 8272283
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_2722A7
 	end
 
 EventScript_27228F:: @ 827228F
 	lockall
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	goto EventScript_2722A7
 	end
 
 EventScript_27229B:: @ 827229B
 	lockall
-	setvar VAR_0x4003, 1
+	setvar VAR_TEMP_3, 1
 	goto EventScript_2722A7
 	end
 
@@ -2429,11 +2429,11 @@ CaveOfOrigin_1F_EventScript_2722C1:: @ 82722C1
 CaveOfOrigin_UnusedRubySapphireMap1_EventScript_2722C1:: @ 82722C1
 CaveOfOrigin_UnusedRubySapphireMap2_EventScript_2722C1:: @ 82722C1
 CaveOfOrigin_UnusedRubySapphireMap3_EventScript_2722C1:: @ 82722C1
-	setvar VAR_0x4001, 1
-	setvar VAR_0x4002, 1
-	setvar VAR_0x4003, 1
-	setvar VAR_0x4004, 1
-	setvar VAR_0x4005, 1
+	setvar VAR_TEMP_1, 1
+	setvar VAR_TEMP_2, 1
+	setvar VAR_TEMP_3, 1
+	setvar VAR_TEMP_4, 1
+	setvar VAR_TEMP_5, 1
 	return
 
 Route120_EventScript_2722DB:: @ 82722DB
@@ -3522,7 +3522,7 @@ MossdeepCity_StevensHouse_EventScript_2737A0:: @ 82737A0
 Route119_WeatherInstitute_2F_EventScript_2737A0:: @ 82737A0
 RustboroCity_DevonCorp_2F_EventScript_2737A0:: @ 82737A0
 	bufferboxname 0, 16438
-	bufferspeciesname 1, VAR_0x4001
+	bufferspeciesname 1, VAR_TEMP_1
 	checkflag FLAG_SYS_PC_LANETTE
 	call_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_2737BB
 	checkflag FLAG_SYS_PC_LANETTE
@@ -13216,12 +13216,12 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3ECF:: @ 82C3ECF
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE: @ 82C3EDE
-	map_script_2 VAR_0x4004, 0, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8
+	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8
 	.2byte 0
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
-	setvar VAR_0x4011, 28
-	setvar VAR_0x4010, 28
+	setvar VAR_OBJ_GFX_ID_1, 28
+	setvar VAR_OBJ_GFX_ID_0, 28
 	setvar VAR_0x8004, 5
 	special sub_81A703C
 	compare VAR_RESULT, 3
@@ -13233,17 +13233,17 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
 	compare VAR_RESULT, 8
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F
 	hideobjectat 2, BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_1
-	setvar VAR_0x4004, 1
+	setvar VAR_TEMP_4, 1
 	turnobject 255, 2
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35:: @ 82C3F35
-	setvar VAR_0x4004, 1
+	setvar VAR_TEMP_4, 1
 	turnobject 255, 2
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F:: @ 82C3F3F
-	setvar VAR_0x4004, 1
+	setvar VAR_TEMP_4, 1
 	turnobject 255, 2
 	hideobjectat 1, BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_1
 	end
@@ -13313,26 +13313,26 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4049:: @ 82C4049
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4062:: @ 82C4062
-	setvar VAR_0x4003, 1
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_3, 1
+	setvar VAR_TEMP_2, 1
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C406D:: @ 82C406D
-	setvar VAR_0x4003, 0
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_2, 0
 	lockall
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CE36, 4
 	closemessage
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4082:: @ 82C4082
-	setvar VAR_0x4003, 1
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_3, 1
+	setvar VAR_TEMP_2, 1
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C408D:: @ 82C408D
-	setvar VAR_0x4003, 0
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_2, 0
 	lockall
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25CE36, 4
 	closemessage
@@ -13435,13 +13435,13 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	end
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4202:: @ 82C4202
-	setvar VAR_0x4003, 1
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_3, 1
+	setvar VAR_TEMP_2, 1
 	end
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C420D:: @ 82C420D
-	setvar VAR_0x4003, 0
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_2, 0
 	lockall
 	msgbox BattleFrontier_BattlePikeRandomRoom3_Text_25CE36, 4
 	closemessage
@@ -14632,7 +14632,7 @@ TrainerHill_2F_MapScript1_2C8336: @ 82C8336
 TrainerHill_3F_MapScript1_2C8336: @ 82C8336
 TrainerHill_4F_MapScript1_2C8336: @ 82C8336
 TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, 4
 	special sp194_trainer_tower
 	setvar VAR_0x8004, 1
@@ -14648,11 +14648,11 @@ TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 
 TrainerHill_1F_MapScript2_2C8372: @ 82C8372
 TrainerHill_2F_MapScript2_2C8372: @ 82C8372
-	map_script_2 VAR_0x4003, 0, TrainerHill_1F_EventScript_2C837C
+	map_script_2 VAR_TEMP_3, 0, TrainerHill_1F_EventScript_2C837C
 	.2byte 0
 
 TrainerHill_1F_EventScript_2C837C:: @ 82C837C
-	setvar VAR_0x4003, 1
+	setvar VAR_TEMP_3, 1
 @ forced stop
 
 TrainerHill_1F_MapScript2_2C8381: @ 82C8381
@@ -14660,8 +14660,8 @@ TrainerHill_2F_MapScript2_2C8381: @ 82C8381
 TrainerHill_3F_MapScript2_2C8381: @ 82C8381
 TrainerHill_4F_MapScript2_2C8381: @ 82C8381
 TrainerHill_Roof_MapScript2_2C8381: @ 82C8381
-	map_script_2 VAR_0x4002, 0, TrainerHill_1F_EventScript_2C83A6
-	map_script_2 VAR_0x4001, 1, TrainerHill_1F_EventScript_2C83DF
+	map_script_2 VAR_TEMP_2, 0, TrainerHill_1F_EventScript_2C83A6
+	map_script_2 VAR_TEMP_1, 1, TrainerHill_1F_EventScript_2C83DF
 	.2byte 0
 
 TrainerHill_1F_EventScript_2C8393:: @ 82C8393
@@ -14673,7 +14673,7 @@ TrainerHill_1F_EventScript_2C8393:: @ 82C8393
 	end
 
 TrainerHill_1F_EventScript_2C83A6:: @ 82C83A6
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	setvar VAR_0x8004, 9
 	special sp194_trainer_tower
 	compare VAR_RESULT, 1
@@ -14690,12 +14690,12 @@ TrainerHill_1F_EventScript_2C83C9:: @ 82C83C9
 	special sp194_trainer_tower
 	setvar VAR_0x8004, 5
 	special sp194_trainer_tower
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	end
 
 TrainerHill_1F_EventScript_2C83DF:: @ 82C83DF
 TrainerHill_Entrance_EventScript_2C83DF:: @ 82C83DF
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	warp TRAINER_HILL_ENTRANCE, 255, 9, 6
 	waitstate
 	end

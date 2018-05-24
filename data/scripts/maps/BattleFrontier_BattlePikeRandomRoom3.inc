@@ -5,12 +5,12 @@ BattleFrontier_BattlePikeRandomRoom3_MapScripts:: @ 825E41A
 	.byte 0
 
 BattleFrontier_BattlePikeRandomRoom3_MapScript2_25E42A: @ 825E42A
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePikeRandomRoom3_EventScript_25E43C
-	map_script_2 VAR_0x4001, 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_25E44A
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeRandomRoom3_EventScript_25E43C
+	map_script_2 VAR_TEMP_1, 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_25E44A
 	.2byte 0
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_25E43C:: @ 825E43C
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	setvar VAR_0x8004, 6
 	special sub_81A703C
 	end
@@ -25,11 +25,11 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_25E44A:: @ 825E44A
 	end
 
 BattleFrontier_BattlePikeRandomRoom3_MapScript2_25E466: @ 825E466
-	map_script_2 VAR_0x4004, 0, BattleFrontier_BattlePikeRandomRoom3_EventScript_25E470
+	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeRandomRoom3_EventScript_25E470
 	.2byte 0
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_25E470:: @ 825E470
-	setvar VAR_0x4004, 1
+	setvar VAR_TEMP_4, 1
 	turnobject 255, 2
 	end
 
@@ -45,6 +45,6 @@ BattleFrontier_BattlePikeRandomRoom3_MapScript1_25E47A: @ 825E47A
 	end
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_25E4A3:: @ 825E4A3
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	end
 

@@ -50,10 +50,10 @@ EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	lockall
 	checkflag FLAG_0x107
 	goto_eq EverGrandeCity_PokemonLeague_1F_EventScript_2296BB
-	getplayerxy VAR_0x4000, VAR_0x4001
-	compare VAR_0x4000, 11
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_0, 11
 	call_if 4, EverGrandeCity_PokemonLeague_1F_EventScript_229698
-	compare VAR_0x4000, 8
+	compare VAR_TEMP_0, 8
 	call_if 3, EverGrandeCity_PokemonLeague_1F_EventScript_2296A3
 	message EverGrandeCity_PokemonLeague_1F_Text_2296E8
 	waitmessage

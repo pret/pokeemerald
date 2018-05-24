@@ -58,6 +58,33 @@ struct UnknownListMenuWindowStruct
     u8 palNum;
 };
 
+struct ArrowStruct
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u16 unk6;
+    u16 unk8;
+    u16 tileTag;
+    u16 palTag;
+    u8 palNum;
+};
+
+struct CursorStruct
+{
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    u16 unk4;
+    u16 tileTag;
+    u16 palTag;
+    u8 palNum;
+};
+
+extern struct ArrowStruct gUnknown_0203CE8C;
 extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
 s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
@@ -74,5 +101,11 @@ void ListMenuGetScrollAndRow(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow)
 u16 ListMenuGetYCoordForPrintingArrowCursor(u8 listTaskId);
 void sub_81AF028(u8 cursorPal, u8 fillValue, u8 cursorShadowPal);
 void sub_81AF078(s32 arg0, u8 arg1, struct ListMenu *list);
+s32 sub_81AF08C(u8 taskId, u8 field);
+void sub_81AF15C(u8 taskId, u8 field, s32 value);
+u8 AddScrollIndicatorArrowPair(const struct ArrowStruct *arrowInfo, u16 *arg1);
+u8 AddScrollIndicatorArrowPairParametrized(u32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 tileTag, s32 palTag, void *arg7);
+void RemoveScrollIndicatorArrowPair(u8 taskId);
+void Task_ScrollIndicatorArrowPairOnMainMenu(u8 taskId);
 
 #endif //GUARD_LIST_MENU_H

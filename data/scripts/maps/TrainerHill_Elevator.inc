@@ -3,7 +3,7 @@ TrainerHill_Elevator_MapScripts:: @ 826934F
 	.byte 0
 
 TrainerHill_Elevator_MapScript2_269355: @ 8269355
-	map_script_2 VAR_0x4004, 0, TrainerHill_Elevator_EventScript_269375
+	map_script_2 VAR_TEMP_4, 0, TrainerHill_Elevator_EventScript_269375
 	.2byte 0
 
 TrainerHill_Elevator_EventScript_26935F:: @ 826935F

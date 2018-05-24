@@ -4,16 +4,16 @@ BattleFrontier_BattleDomePreBattleRoom_MapScripts:: @ 824B1F9
 	.byte 0
 
 BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B204: @ 824B204
-	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B20E
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B20E
 	.2byte 0
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B20E:: @ 824B20E
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
-	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222
 	.2byte 0
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
@@ -23,7 +23,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
 	special sub_81A1780
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 255, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
 	waitmovement 0
 	lockall
@@ -180,7 +180,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	closedoor 5, 1
 	waitdooranim
 	warp BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM, 255, 9, 5
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 
@@ -241,7 +241,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5BE:: @ 824B5BE
 	return
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B760, 4
 	special LoadPlayerParty
 	setvar VAR_0x8004, 3

@@ -649,7 +649,7 @@ LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	message LilycoveCity_ContestLobby_Text_27C8FD
 	waitmessage
-	specialvar VAR_0x400D, sub_80093CC
+	specialvar VAR_TEMP_D, sub_80093CC
 	multichoice 0, 0, 85, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_21A8BB
@@ -659,13 +659,13 @@ LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A8BB:: @ 821A8BB
-	setvar VAR_0x400C, 0
+	setvar VAR_TEMP_C, 0
 	goto LilycoveCity_ContestLobby_EventScript_21A8DC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A8C6:: @ 821A8C6
-	setvar VAR_0x400C, 1
-	compare VAR_0x400D, 1
+	setvar VAR_TEMP_C, 1
+	compare VAR_TEMP_D, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AAFC
 	goto LilycoveCity_ContestLobby_EventScript_21A8DC
 	end
@@ -754,18 +754,18 @@ LilycoveCity_ContestLobby_EventScript_21AA0A:: @ 821AA0A
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AA15:: @ 821AA15
-	compare VAR_0x400D, 1
+	compare VAR_TEMP_D, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AB4B
-	compare VAR_0x400D, 2
+	compare VAR_TEMP_D, 2
 	goto_if 4, LilycoveCity_ContestLobby_EventScript_21A97F
 	message LilycoveCity_ContestLobby_Text_27BF85
 	waitmessage
 	copyvar VAR_0x8004, VAR_RESULT
-	compare VAR_0x400C, 0
+	compare VAR_TEMP_C, 0
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21AABB
-	compare VAR_0x400C, 1
+	compare VAR_TEMP_C, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21AAC0
-	compare VAR_0x400C, 2
+	compare VAR_TEMP_C, 2
 	goto_if 4, LilycoveCity_ContestLobby_EventScript_21A97F
 	compare VAR_RESULT, 4
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AAD3

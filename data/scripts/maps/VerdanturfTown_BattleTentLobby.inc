@@ -4,20 +4,20 @@ VerdanturfTown_BattleTentLobby_MapScripts:: @ 82016D0
 	.byte 0
 
 VerdanturfTown_BattleTentLobby_MapScript2_2016DB: @ 82016DB
-	map_script_2 VAR_0x4001, 0, VerdanturfTown_BattleTentLobby_EventScript_2016E5
+	map_script_2 VAR_TEMP_1, 0, VerdanturfTown_BattleTentLobby_EventScript_2016E5
 	.2byte 0
 
 VerdanturfTown_BattleTentLobby_EventScript_2016E5:: @ 82016E5
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 VerdanturfTown_BattleTentLobby_MapScript2_2016EF: @ 82016EF
-	map_script_2 VAR_0x4000, 0, VerdanturfTown_BattleTentLobby_EventScript_201719
-	map_script_2 VAR_0x4000, 1, VerdanturfTown_BattleTentLobby_EventScript_201722
-	map_script_2 VAR_0x4000, 2, VerdanturfTown_BattleTentLobby_EventScript_201837
-	map_script_2 VAR_0x4000, 3, VerdanturfTown_BattleTentLobby_EventScript_201757
-	map_script_2 VAR_0x4000, 4, VerdanturfTown_BattleTentLobby_EventScript_2017FD
+	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentLobby_EventScript_201719
+	map_script_2 VAR_TEMP_0, 1, VerdanturfTown_BattleTentLobby_EventScript_201722
+	map_script_2 VAR_TEMP_0, 2, VerdanturfTown_BattleTentLobby_EventScript_201837
+	map_script_2 VAR_TEMP_0, 3, VerdanturfTown_BattleTentLobby_EventScript_201757
+	map_script_2 VAR_TEMP_0, 4, VerdanturfTown_BattleTentLobby_EventScript_2017FD
 	.2byte 0
 
 VerdanturfTown_BattleTentLobby_EventScript_201719:: @ 8201719
@@ -33,7 +33,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201722:: @ 8201722
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
@@ -74,7 +74,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201791:: @ 8201791
 	waitfanfare
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C539A, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -82,7 +82,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2017DD:: @ 82017DD
 	msgbox VerdanturfTown_BattleTentLobby_Text_24E57B, 4
 	waitmessage
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -107,7 +107,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2017FD:: @ 82017FD
 	waitse
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C539A, 4
 	closemessage
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
@@ -125,7 +125,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201837:: @ 8201837
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	goto VerdanturfTown_BattleTentLobby_EventScript_2019AE
 
 VerdanturfTown_BattleTentLobby_EventScript_201873:: @ 8201873
@@ -175,7 +175,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	case 127, VerdanturfTown_BattleTentLobby_EventScript_201A34
 
 VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
@@ -193,7 +193,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	closemessage
 	delay 2
 	call VerdanturfTown_BattleTentLobby_EventScript_27134F
-	setvar VAR_0x4000, 255
+	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201A1D
 
@@ -206,7 +206,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2019AE:: @ 82019AE
 	closemessage
 	call VerdanturfTown_BattleTentLobby_EventScript_201A41
 	warp VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR, 255, 2, 7
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 	end
 

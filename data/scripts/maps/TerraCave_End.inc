@@ -22,7 +22,7 @@ TerraCave_End_MapScript1_23B0D9: @ 823B0D9
 
 TerraCave_End_EventScript_23B0E3:: @ 823B0E3
 	clearflag FLAG_0x30F
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 TerraCave_End_EventScript_23B0EC:: @ 823B0EC
@@ -41,7 +41,7 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, sub_8138B80
 	compare VAR_RESULT, 1
 	goto_eq TerraCave_End_EventScript_23B155
