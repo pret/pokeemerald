@@ -26,6 +26,8 @@ struct UnkRecordMixingStruct2
     struct UnkRecordMixingStruct2b field_120[2];
 };
 
+
+
 // Exported RAM declarations
 
 // Exported ROM declarations

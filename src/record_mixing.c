@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "malloc.h"
 #include "random.h"
@@ -33,15 +31,10 @@
 #include "string_util.h"
 #include "record_mixing.h"
 #include "new_game.h"
+#include "daycare.h"
+#include "international_string_util.h"
 
 // Static type declarations
-
-struct UnkRecordMixingStruct
-{
-    u8 field_0[0x34];
-    u8 playerId[4];
-    u8 field_38[10];
-};
 
 struct PlayerRecordsRS
 {
@@ -67,7 +60,8 @@ struct PlayerRecords
     /* 0x1210 */ u16 unk_1210;
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct UnkRecordMixingStruct unk_1254[2];
-    /* 0x12dc */ u8 unk_12dc[0x168];
+    /* 0x12dc */ struct UnkRecordMixingStruct2 unk_12dc;
+    /* 0x1434 */ u8 field_1434[0x10];
 }; // 1444
 
 // Static RAM declarations
@@ -111,23 +105,51 @@ static void sub_80E7B60(struct RecordMixingDayCareMail *, size_t, u8, TVShow *);
 static void sub_80E7F68(u16 *item, u8 which);
 static void sub_80E7FF8(u8 taskId);
 static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1);
-void sub_80E8468(void *, size_t, u8);
-void sub_80E89AC(void *, size_t, u8);
-void sub_80E89F8(void *dest);
-void sub_80E8A54(void *src);
-void sub_80E8AC0(union BattleTowerRecord *);
+static void sub_80E8468(struct UnkRecordMixingStruct *arg0, size_t arg1, u32 arg2);
+static void sub_80E89AC(struct UnkRecordMixingStruct2 *arg0, size_t arg1, u32 arg2);
+static void sub_80E89F8(struct RecordMixingDayCareMail *dst);
+static void sub_80E8A54(struct RecordMixingDayCareMail *src);
+static void sub_80E8AC0(union BattleTowerRecord *);
 void sub_80EAF80(struct SecretBaseRecord *, size_t, u8);
 void sub_812287C(struct EasyChatPair *, size_t, u8);
-void TaskDummy4(union BattleTowerRecord *src);
+static void nullsub_1405(union BattleTowerRecord *src);
 
 // .rodata
 
-extern const u8 gUnknown_0858CF8C[];
-extern const u8 gUnknown_0858CF8E[][3];
-extern const u8 gUnknown_0858CF94[][4];
+static const u8 gUnknown_0858CF8C[] = {1, 0};
 
-extern const u8 gUnknown_0858CFB8[3][2];
-extern const u8 gUnknown_0858CFBE[3][4];
+static const u8 gUnknown_0858CF8E[][3] =
+{
+    {1, 2, 0},
+    {2, 0, 1},
+};
+
+static const u8 gUnknown_0858CF94[][4] =
+{
+    {1, 0, 3, 2},
+    {3, 0, 1, 2},
+    {2, 0, 3, 1},
+    {1, 3, 0, 2},
+    {2, 3, 0, 1},
+    {3, 2, 0, 1},
+    {1, 2, 3, 0},
+    {2, 3, 1, 0},
+    {3, 2, 1, 0},
+};
+
+static const u8 gUnknown_0858CFB8[3][2] =
+{
+    {0, 1},
+    {1, 2},
+    {2, 0},
+};
+
+static const u8 gUnknown_0858CFBE[3][4] =
+{
+    {0, 1, 2, 3},
+    {0, 2, 1, 3},
+    {0, 3, 2, 1},
+};
 
 // .text
 
@@ -146,7 +168,7 @@ void sub_80E6BF8(void)
     gUnknown_03001148 = &gUnknown_02039F9C;
     gUnknown_0300114C = gSaveBlock2Ptr->field_64C;
     gUnknown_03001150 = &gSaveBlock1Ptr->lilycoveLady;
-    gUnknown_03001154 = gSaveBlock2Ptr->field_0DC;
+    gUnknown_03001154 = gSaveBlock2Ptr->field_DC;
     gUnknown_03001158 = gSaveBlock2Ptr->field_64C;
 }
 
@@ -179,7 +201,7 @@ void sub_80E6D54(struct PlayerRecords *dest)
     sub_80E89F8(&dest->dayCareMail);
     sub_80E8A54(&dest->dayCareMail);
     sub_81659DC(gUnknown_0300114C, &dest->battleTowerRecord);
-    TaskDummy4(&dest->battleTowerRecord);
+    nullsub_1405(&dest->battleTowerRecord);
     if (GetMultiplayerId() == 0)
     {
         dest->battleTowerRecord.ruby_sapphire.unk_11c8 = GetRecordMixingGift();
@@ -218,7 +240,7 @@ void sub_80E6E24(void)
             gUnknown_0203A018->unk_1210 = GetRecordMixingGift();
         }
         sub_80E8110(gUnknown_0203A018->unk_1254, gUnknown_03001154);
-        sub_80E8260((void*)gUnknown_0203A018->unk_12dc);
+        sub_80E8260(&gUnknown_0203A018->unk_12dc);
     }
 }
 
@@ -250,8 +272,8 @@ void sub_80E6F60(u32 which)
         sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, sizeof(struct PlayerRecords), which);
         sub_80E7F68(&gUnknown_0203A014[0].unk_1210, which);
         sub_80E7A14(&gUnknown_0203A014[0].lilycoveLady, sizeof(struct PlayerRecords), which);
-        sub_80E8468(gUnknown_0203A014[0].unk_1254, sizeof(struct PlayerRecords), which);
-        sub_80E89AC(gUnknown_0203A014[0].unk_12dc, sizeof(struct PlayerRecords), which);
+        sub_80E8468(gUnknown_0203A014[0].unk_1254, sizeof(struct PlayerRecords), (u8) which);
+        sub_80E89AC(&gUnknown_0203A014[0].unk_12dc, sizeof(struct PlayerRecords), (u8) which);
     }
 }
 
@@ -692,22 +714,22 @@ static void sub_80E7A14(LilycoveLady *lilycoveLady, size_t recordSize, u8 which)
     }
 }
 
-static u8 sub_80E7A9C(struct DaycareMiscMon *rmMail)
+static u8 sub_80E7A9C(struct DayCareMail *rmMail)
 {
-    return rmMail->mail.itemId;
+    return rmMail->message.itemId;
 }
 
 static void sub_80E7AA4(struct RecordMixingDayCareMail *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
 {
-    struct DaycareMiscMon buffer;
+    struct DayCareMail buffer;
     struct RecordMixingDayCareMail *mail1;
     struct RecordMixingDayCareMail *mail2;
 
     mail1 = (void *)src + recordSize * idxs[which0][0];
-    memcpy(&buffer, &mail1->mail[idxs[which0][1]], sizeof(struct DaycareMiscMon));
+    memcpy(&buffer, &mail1->mail[idxs[which0][1]], sizeof(struct DayCareMail));
     mail2 = (void *)src + recordSize * idxs[which1][0];
-    memcpy(&mail1->mail[idxs[which0][1]], &mail2->mail[idxs[which1][1]], sizeof(struct DaycareMiscMon));
-    memcpy(&mail2->mail[idxs[which1][1]], &buffer, sizeof(struct DaycareMiscMon));
+    memcpy(&mail1->mail[idxs[which0][1]], &mail2->mail[idxs[which1][1]], sizeof(struct DayCareMail));
+    memcpy(&mail2->mail[idxs[which1][1]], &buffer, sizeof(struct DayCareMail));
 }
 
 static void sub_80E7B2C(const u8 *src)
@@ -742,7 +764,7 @@ static void sub_80E7B60(struct RecordMixingDayCareMail *src, size_t recordSize, 
     u8 dcMail1;
     u8 dcMail2;
     u8 r1_80e7b54;
-    struct DaycareMiscMon *recordMixingMail;
+    struct DayCareMail *recordMixingMail;
     struct RecordMixingDayCareMail *_src;
     u8 sp04[4];
     u8 sp08[4];
@@ -902,8 +924,8 @@ static void sub_80E7B60(struct RecordMixingDayCareMail *src, size_t recordSize, 
             break;
     }
     _src = (void *)src + which * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].misc.mail, &_src->unk_00[0], sizeof(struct DaycareMiscMon));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].misc.mail, &_src->unk_00[1], sizeof(struct DaycareMiscMon));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[0].misc.mail, &_src->unk_00[0], sizeof(struct DayCareMail));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[1].misc.mail, &_src->unk_00[1], sizeof(struct DayCareMail));
     SeedRng(oldSeed);
 }
 #else
@@ -1642,4 +1664,644 @@ bool32 sub_80E841C(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStr
     }
 
     return FALSE;
+}
+
+static void sub_80E8468(struct UnkRecordMixingStruct *arg0, size_t arg1, u32 arg2)
+{
+    s32 i, r7, r8;
+    struct UnkRecordMixingStruct *structPtr;
+    u32 data[4];
+    u32 structId;
+
+    sub_80E7830(data);
+    structPtr = (void*)(arg0) + (arg1 * data[arg2]);
+    r7 = 0;
+    r8 = 0;
+    for (i = 0; i < 2; i++)
+    {
+        if (structPtr[i].field_38[0] != 0xFF && !sub_80E841C(&structPtr[i], gSaveBlock2Ptr->field_DC))
+        {
+            r7++;
+            r8 = i;
+        }
+    }
+
+    switch (r7)
+    {
+    case 1:
+        structId = gSaveBlock2Ptr->field_B2_1 + 1;
+        gSaveBlock2Ptr->field_DC[structId] = structPtr[r8];
+        gSaveBlock2Ptr->field_B2_1 = (gSaveBlock2Ptr->field_B2_1 + 1) % 3;
+        break;
+    case 2:
+        for (i = 0; i < 2; i++)
+        {
+            structId = ((i ^ 1) + gSaveBlock2Ptr->field_B2_1) % 3 + 1;
+            gSaveBlock2Ptr->field_DC[structId] = structPtr[i];
+        }
+        gSaveBlock2Ptr->field_B2_1 = (gSaveBlock2Ptr->field_B2_1 + 2) % 3;
+        break;
+    }
+}
+
+struct UnknownRecMixingStruct
+{
+    u32 field_0;
+    u16 field_4;
+    u8 field_6[9];
+};
+
+struct UnknownRecMixingStruct2
+{
+    u32 field_0;
+    u16 field_4;
+    u16 field_6;
+    u16 field_8;
+    u8 field_A[16];
+};
+
+struct UnknownRecMixingStruct3
+{
+    u8 field_0[0x810];
+};
+
+NAKED
+void sub_80E8578(struct UnknownRecMixingStruct3 *arg0, struct UnkRecordMixingStruct2 *arg1, size_t arg2, u32 arg3, u32 arg4)
+{
+    asm_unified("	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x54\n\
+	str r0, [sp]\n\
+	ldr r0, [sp, 0x74]\n\
+	movs r4, 0\n\
+	mov r8, r4\n\
+	movs r5, 0\n\
+	str r5, [sp, 0x4]\n\
+	ldr r4, =gUnknown_03001168\n\
+	b _080E85A0\n\
+	.pool\n\
+_080E8598:\n\
+	adds r1, r2\n\
+	ldr r6, [sp, 0x4]\n\
+	adds r6, 0x1\n\
+	str r6, [sp, 0x4]\n\
+_080E85A0:\n\
+	ldr r5, [sp, 0x4]\n\
+	cmp r5, r0\n\
+	bge _080E85B6\n\
+	cmp r5, r3\n\
+	beq _080E85B0\n\
+	stm r4!, {r1}\n\
+	movs r6, 0x1\n\
+	add r8, r6\n\
+_080E85B0:\n\
+	mov r5, r8\n\
+	cmp r5, 0x3\n\
+	bne _080E8598\n\
+_080E85B6:\n\
+	movs r6, 0\n\
+	str r6, [sp, 0x4]\n\
+	subs r0, 0x1\n\
+	str r0, [sp, 0x24]\n\
+_080E85BE:\n\
+	movs r0, 0\n\
+	str r0, [sp, 0x8]\n\
+	ldr r1, [sp, 0x4]\n\
+	adds r1, 0x1\n\
+	str r1, [sp, 0x28]\n\
+	ldr r2, [sp, 0x4]\n\
+	lsls r2, 1\n\
+	str r2, [sp, 0x34]\n\
+	ldr r3, [sp, 0x4]\n\
+	adds r3, r2, r3\n\
+	str r3, [sp, 0x10]\n\
+	movs r4, 0\n\
+	str r4, [sp, 0x44]\n\
+	movs r5, 0\n\
+	str r5, [sp, 0x48]\n\
+_080E85DC:\n\
+	movs r6, 0\n\
+	mov r8, r6\n\
+	ldr r0, =gSaveBlock2Ptr\n\
+	ldr r1, [r0]\n\
+	ldr r2, [sp, 0x10]\n\
+	lsls r0, r2, 5\n\
+	ldr r3, [sp, 0x48]\n\
+	adds r0, r3, r0\n\
+	adds r3, r0, r1\n\
+	lsls r0, r2, 6\n\
+	ldr r4, [sp, 0x44]\n\
+	adds r0, r4, r0\n\
+	ldr r5, [sp]\n\
+	adds r2, r0, r5\n\
+_080E85F8:\n\
+	adds r0, r2, 0\n\
+	movs r6, 0x87\n\
+	lsls r6, 2\n\
+	adds r1, r3, r6\n\
+	ldm r1!, {r4-r6}\n\
+	stm r0!, {r4-r6}\n\
+	ldr r1, [r1]\n\
+	str r1, [r0]\n\
+	adds r3, 0x10\n\
+	adds r2, 0x10\n\
+	movs r0, 0x1\n\
+	add r8, r0\n\
+	mov r1, r8\n\
+	cmp r1, 0x2\n\
+	ble _080E85F8\n\
+	movs r2, 0\n\
+	mov r8, r2\n\
+	ldr r3, [sp, 0x24]\n\
+	cmp r8, r3\n\
+	bge _080E86DC\n\
+	ldr r4, [sp, 0x4]\n\
+	lsls r4, 5\n\
+	mov r9, r4\n\
+	ldr r5, [sp, 0x8]\n\
+	lsls r7, r5, 4\n\
+	ldr r6, [sp, 0x34]\n\
+	ldr r1, [sp, 0x4]\n\
+	adds r0, r6, r1\n\
+	lsls r0, 6\n\
+	str r0, [sp, 0x14]\n\
+	ldr r2, [sp]\n\
+	adds r0, r2, r0\n\
+	ldr r3, [sp, 0x44]\n\
+	str r3, [sp, 0x18]\n\
+	adds r0, r3\n\
+	str r0, [sp, 0x1C]\n\
+	ldr r4, [sp, 0x14]\n\
+	adds r0, r3, r4\n\
+	adds r0, r2\n\
+	adds r0, 0x30\n\
+	mov r10, r0\n\
+_080E864A:\n\
+	movs r5, 0\n\
+	str r5, [sp, 0xC]\n\
+	movs r3, 0\n\
+	mov r6, r8\n\
+	lsls r6, 2\n\
+	str r6, [sp, 0x38]\n\
+	ldr r1, [sp, 0x18]\n\
+	ldr r2, [sp, 0x14]\n\
+	adds r0, r1, r2\n\
+	ldr r4, [sp]\n\
+	adds r5, r0, r4\n\
+	ldr r0, =gUnknown_03001168\n\
+	adds r0, r6, r0\n\
+	str r0, [sp, 0x50]\n\
+_080E8666:\n\
+	lsls r0, r3, 4\n\
+	ldr r6, [sp, 0x1C]\n\
+	adds r0, r6, r0\n\
+	str r3, [sp, 0x4C]\n\
+	bl ReadUnalignedWord\n\
+	adds r4, r0, 0\n\
+	ldr r1, [sp, 0x50]\n\
+	ldr r0, [r1]\n\
+	add r0, r9\n\
+	adds r0, r7\n\
+	bl ReadUnalignedWord\n\
+	ldr r3, [sp, 0x4C]\n\
+	cmp r4, r0\n\
+	bne _080E86A8\n\
+	ldr r2, [sp, 0xC]\n\
+	adds r2, 0x1\n\
+	str r2, [sp, 0xC]\n\
+	ldr r4, [sp, 0x50]\n\
+	ldr r0, [r4]\n\
+	mov r6, r9\n\
+	adds r1, r7, r6\n\
+	adds r1, r0, r1\n\
+	ldrh r0, [r5, 0x4]\n\
+	ldrh r2, [r1, 0x4]\n\
+	cmp r0, r2\n\
+	bcs _080E86A8\n\
+	adds r0, r5, 0\n\
+	ldm r1!, {r2,r4,r6}\n\
+	stm r0!, {r2,r4,r6}\n\
+	ldr r1, [r1]\n\
+	str r1, [r0]\n\
+_080E86A8:\n\
+	adds r5, 0x10\n\
+	adds r3, 0x1\n\
+	cmp r3, 0x2\n\
+	ble _080E8666\n\
+	ldr r3, [sp, 0xC]\n\
+	cmp r3, 0\n\
+	bne _080E86CE\n\
+	ldr r0, =gUnknown_03001168\n\
+	ldr r4, [sp, 0x38]\n\
+	adds r0, r4, r0\n\
+	ldr r0, [r0]\n\
+	mov r5, r9\n\
+	adds r2, r7, r5\n\
+	mov r1, r10\n\
+	adds r0, r2\n\
+	ldm r0!, {r2,r3,r6}\n\
+	stm r1!, {r2,r3,r6}\n\
+	ldr r0, [r0]\n\
+	str r0, [r1]\n\
+_080E86CE:\n\
+	movs r4, 0x10\n\
+	add r10, r4\n\
+	movs r5, 0x1\n\
+	add r8, r5\n\
+	ldr r6, [sp, 0x24]\n\
+	cmp r8, r6\n\
+	blt _080E864A\n\
+_080E86DC:\n\
+	ldr r0, [sp, 0x44]\n\
+	adds r0, 0x60\n\
+	str r0, [sp, 0x44]\n\
+	ldr r1, [sp, 0x48]\n\
+	adds r1, 0x30\n\
+	str r1, [sp, 0x48]\n\
+	ldr r2, [sp, 0x8]\n\
+	adds r2, 0x1\n\
+	str r2, [sp, 0x8]\n\
+	cmp r2, 0x1\n\
+	bgt _080E86F4\n\
+	b _080E85DC\n\
+_080E86F4:\n\
+	ldr r3, [sp, 0x28]\n\
+	str r3, [sp, 0x4]\n\
+	cmp r3, 0x8\n\
+	bgt _080E86FE\n\
+	b _080E85BE\n\
+_080E86FE:\n\
+	movs r4, 0\n\
+	str r4, [sp, 0x8]\n\
+_080E8702:\n\
+	ldr r5, [sp, 0x8]\n\
+	adds r5, 0x1\n\
+	str r5, [sp, 0x2C]\n\
+	ldr r0, =gSaveBlock2Ptr\n\
+	ldr r1, [r0]\n\
+	movs r0, 0x54\n\
+	ldr r6, [sp, 0x8]\n\
+	muls r0, r6\n\
+	adds r3, r0, r1\n\
+	movs r0, 0xA8\n\
+	muls r0, r6\n\
+	ldr r1, [sp]\n\
+	adds r2, r0, r1\n\
+	movs r4, 0x2\n\
+	mov r8, r4\n\
+_080E8720:\n\
+	movs r5, 0xD8\n\
+	lsls r5, 3\n\
+	adds r0, r2, r5\n\
+	ldr r6, =0x0000057c\n\
+	adds r1, r3, r6\n\
+	ldm r1!, {r4-r6}\n\
+	stm r0!, {r4-r6}\n\
+	ldm r1!, {r4-r6}\n\
+	stm r0!, {r4-r6}\n\
+	ldr r1, [r1]\n\
+	str r1, [r0]\n\
+	adds r3, 0x1C\n\
+	adds r2, 0x1C\n\
+	movs r0, 0x1\n\
+	negs r0, r0\n\
+	add r8, r0\n\
+	mov r1, r8\n\
+	cmp r1, 0\n\
+	bge _080E8720\n\
+	movs r2, 0\n\
+	mov r8, r2\n\
+	ldr r3, [sp, 0x24]\n\
+	cmp r8, r3\n\
+	blt _080E8752\n\
+	b _080E885A\n\
+_080E8752:\n\
+	ldr r4, [sp, 0x8]\n\
+	lsls r1, r4, 3\n\
+	movs r0, 0xA8\n\
+	adds r5, r4, 0\n\
+	muls r5, r0\n\
+	str r5, [sp, 0x20]\n\
+	str r5, [sp, 0x3C]\n\
+	subs r1, r4\n\
+	lsls r1, 2\n\
+	mov r10, r1\n\
+_080E8766:\n\
+	movs r6, 0\n\
+	str r6, [sp, 0xC]\n\
+	mov r0, r8\n\
+	lsls r0, 2\n\
+	str r0, [sp, 0x38]\n\
+	mov r1, r8\n\
+	adds r1, 0x1\n\
+	str r1, [sp, 0x30]\n\
+	ldr r0, =gUnknown_03001168\n\
+	ldr r2, [sp, 0x38]\n\
+	adds r2, r0\n\
+	mov r9, r2\n\
+	ldr r3, [sp]\n\
+	movs r4, 0xD8\n\
+	lsls r4, 3\n\
+	adds r0, r3, r4\n\
+	ldr r5, [sp, 0x3C]\n\
+	adds r7, r5, r0\n\
+	str r6, [sp, 0x40]\n\
+	movs r3, 0x2\n\
+_080E878E:\n\
+	ldr r1, [sp, 0x20]\n\
+	movs r2, 0xD8\n\
+	lsls r2, 3\n\
+	adds r0, r1, r2\n\
+	ldr r4, [sp]\n\
+	adds r0, r4, r0\n\
+	ldr r6, [sp, 0x40]\n\
+	adds r5, r0, r6\n\
+	adds r0, r5, 0\n\
+	str r3, [sp, 0x4C]\n\
+	bl ReadUnalignedWord\n\
+	adds r4, r0, 0\n\
+	movs r6, 0x90\n\
+	lsls r6, 1\n\
+	add r6, r10\n\
+	mov r1, r9\n\
+	ldr r0, [r1]\n\
+	adds r0, r6\n\
+	bl ReadUnalignedWord\n\
+	ldr r3, [sp, 0x4C]\n\
+	cmp r4, r0\n\
+	bne _080E8808\n\
+	adds r0, r5, 0x4\n\
+	bl ReadUnalignedWord\n\
+	adds r4, r0, 0\n\
+	mov r2, r9\n\
+	ldr r0, [r2]\n\
+	adds r0, r6\n\
+	adds r0, 0x4\n\
+	bl ReadUnalignedWord\n\
+	ldr r3, [sp, 0x4C]\n\
+	cmp r4, r0\n\
+	bne _080E8808\n\
+	ldr r4, [sp, 0xC]\n\
+	adds r4, 0x1\n\
+	str r4, [sp, 0xC]\n\
+	mov r5, r9\n\
+	ldr r0, [r5]\n\
+	mov r6, r10\n\
+	adds r2, r0, r6\n\
+	movs r0, 0x94\n\
+	lsls r0, 1\n\
+	adds r1, r2, r0\n\
+	ldrh r0, [r7, 0x8]\n\
+	ldrh r1, [r1]\n\
+	cmp r0, r1\n\
+	bcs _080E8808\n\
+	adds r0, r7, 0\n\
+	movs r4, 0x90\n\
+	lsls r4, 1\n\
+	adds r1, r2, r4\n\
+	ldm r1!, {r2,r5,r6}\n\
+	stm r0!, {r2,r5,r6}\n\
+	ldm r1!, {r4-r6}\n\
+	stm r0!, {r4-r6}\n\
+	ldr r1, [r1]\n\
+	str r1, [r0]\n\
+_080E8808:\n\
+	adds r7, 0x1C\n\
+	ldr r0, [sp, 0x40]\n\
+	adds r0, 0x1C\n\
+	str r0, [sp, 0x40]\n\
+	subs r3, 0x1\n\
+	cmp r3, 0\n\
+	bge _080E878E\n\
+	ldr r1, [sp, 0xC]\n\
+	cmp r1, 0\n\
+	bne _080E8850\n\
+	mov r0, r8\n\
+	adds r0, 0x3\n\
+	lsls r1, r0, 3\n\
+	subs r1, r0\n\
+	lsls r1, 2\n\
+	ldr r2, [sp, 0x20]\n\
+	adds r1, r2\n\
+	ldr r3, [sp]\n\
+	adds r1, r3, r1\n\
+	ldr r0, =gUnknown_03001168\n\
+	ldr r4, [sp, 0x38]\n\
+	adds r0, r4, r0\n\
+	ldr r0, [r0]\n\
+	add r0, r10\n\
+	movs r5, 0xD8\n\
+	lsls r5, 3\n\
+	adds r1, r5\n\
+	movs r6, 0x90\n\
+	lsls r6, 1\n\
+	adds r0, r6\n\
+	ldm r0!, {r2-r4}\n\
+	stm r1!, {r2-r4}\n\
+	ldm r0!, {r2,r5,r6}\n\
+	stm r1!, {r2,r5,r6}\n\
+	ldr r0, [r0]\n\
+	str r0, [r1]\n\
+_080E8850:\n\
+	ldr r3, [sp, 0x30]\n\
+	mov r8, r3\n\
+	ldr r4, [sp, 0x24]\n\
+	cmp r8, r4\n\
+	blt _080E8766\n\
+_080E885A:\n\
+	ldr r5, [sp, 0x2C]\n\
+	str r5, [sp, 0x8]\n\
+	cmp r5, 0x1\n\
+	bgt _080E8864\n\
+	b _080E8702\n\
+_080E8864:\n\
+	add sp, 0x54\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+    ");
+}
+
+void sub_80E8880(struct UnknownRecMixingStruct *arg0, struct UnknownRecMixingStruct *arg1)
+{
+    s32 i, j;
+
+    for (i = 0; i < 3; i++)
+    {
+        s32 r2 = 0;
+        s32 r4 = -1;
+        for (j = 0; j < 6; j++)
+        {
+            if (arg1[j].field_4 > r2)
+            {
+                r4 = j;
+                r2 = arg1[j].field_4;
+            }
+        }
+
+        if (r4 >= 0)
+        {
+            arg0[i] = arg1[r4];
+            arg1[r4].field_4 = 0;
+        }
+    }
+}
+
+void sub_80E88CC(struct UnknownRecMixingStruct2 *arg0, struct UnknownRecMixingStruct2 *arg1)
+{
+    s32 i, j;
+
+    for (i = 0; i < 3; i++)
+    {
+        s32 r2 = 0;
+        s32 r4 = -1;
+        for (j = 0; j < 6; j++)
+        {
+            if (arg1[j].field_8 > r2)
+            {
+                r4 = j;
+                r2 = arg1[j].field_8;
+            }
+        }
+
+        if (r4 >= 0)
+        {
+            arg0[i] = arg1[r4];
+            arg1[r4].field_8 = 0;
+        }
+    }
+}
+
+NAKED
+void sub_80E8924(struct UnknownRecMixingStruct3 *arg0)
+{
+    asm_unified("push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	mov r9, r0\n\
+	movs r0, 0\n\
+	ldr r1, =gSaveBlock2Ptr\n\
+	mov r10, r1\n\
+_080E8936:\n\
+	lsls r1, r0, 1\n\
+	adds r2, r0, 0x1\n\
+	mov r8, r2\n\
+	adds r1, r0\n\
+	lsls r0, r1, 5\n\
+	movs r2, 0x87\n\
+	lsls r2, 2\n\
+	adds r7, r0, r2\n\
+	lsls r1, 6\n\
+	mov r0, r9\n\
+	adds r4, r0, r1\n\
+	movs r6, 0\n\
+	movs r5, 0x1\n\
+_080E8950:\n\
+	mov r1, r10\n\
+	ldr r0, [r1]\n\
+	adds r0, r7\n\
+	adds r0, r6\n\
+	adds r1, r4, 0\n\
+	bl sub_80E8880\n\
+	adds r4, 0x60\n\
+	adds r6, 0x30\n\
+	subs r5, 0x1\n\
+	cmp r5, 0\n\
+	bge _080E8950\n\
+	mov r0, r8\n\
+	cmp r0, 0x8\n\
+	ble _080E8936\n\
+	movs r5, 0\n\
+	ldr r4, =gSaveBlock2Ptr\n\
+_080E8972:\n\
+	movs r0, 0x54\n\
+	adds r1, r5, 0\n\
+	muls r1, r0\n\
+	ldr r2, =0x0000057c\n\
+	adds r1, r2\n\
+	ldr r0, [r4]\n\
+	adds r0, r1\n\
+	movs r1, 0xA8\n\
+	muls r1, r5\n\
+	movs r2, 0xD8\n\
+	lsls r2, 3\n\
+	adds r1, r2\n\
+	add r1, r9\n\
+	bl sub_80E88CC\n\
+	adds r5, 0x1\n\
+	cmp r5, 0x1\n\
+	ble _080E8972\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool");
+}
+
+static void sub_80E89AC(struct UnkRecordMixingStruct2 *arg0, size_t arg1, u32 arg2)
+{
+    u8 linkPlayerCount = GetLinkPlayerCount();
+    struct UnknownRecMixingStruct3 *largeStructPtr = AllocZeroed(sizeof(struct UnknownRecMixingStruct3));
+
+    sub_80E8578(largeStructPtr, arg0, arg1, arg2, linkPlayerCount);
+    sub_80E8924(largeStructPtr);
+
+    Free(largeStructPtr);
+}
+
+static void sub_80E89F8(struct RecordMixingDayCareMail *dst)
+{
+    gUnknown_02039F9C.mail[0] = gSaveBlock1Ptr->daycare.mons[0].mail;
+    gUnknown_02039F9C.mail[1] = gSaveBlock1Ptr->daycare.mons[1].mail;
+    InitDaycareMailRecordMixing(&gSaveBlock1Ptr->daycare, &gUnknown_02039F9C);
+    *dst = *gUnknown_03001148;
+}
+
+static void sub_80E8A54(struct RecordMixingDayCareMail *src)
+{
+    s32 i;
+
+    for (i = 0; i < src->numDaycareMons; i++)
+    {
+        struct DayCareMail *mail = &src->mail[i];
+        if (mail->message.itemId != 0)
+        {
+            if (mail->gameLanguage != LANGUAGE_JAPANESE)
+                PadNameString(mail->OT_name, 0xFC);
+
+            ConvertInternationalString(mail->monName, mail->monLanguage);
+        }
+    }
+}
+
+static void nullsub_1405(union BattleTowerRecord *src)
+{
+
+}
+
+static void sub_80E8AC0(union BattleTowerRecord *arg0)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        struct UnknownPokemonStruct *towerMon = &arg0->emerald.party[i];
+        if (towerMon->species != 0)
+            StripExtCtrlCodes(towerMon->nickname);
+    }
+
+    sub_8164F70(arg0);
 }

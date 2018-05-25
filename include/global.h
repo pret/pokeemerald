@@ -256,6 +256,13 @@ struct UnknownSaveBlock2Struct
     u8 field_EB;
 }; // sizeof = 0xEC
 
+struct UnkRecordMixingStruct
+{
+    u8 field_0[0x34];
+    u8 playerId[4];
+    u8 field_38[10];
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
@@ -286,7 +293,7 @@ struct SaveBlock2
     /*0xB2*/ u8 field_B2_0:3;
     /*0xB2*/ u8 field_B2_1:2;
     /*0xB3*/ u8 field_B3[0x29];
-    /*0xDC*/ u8 field_0DC[0x110];
+    /*0xDC*/ struct UnkRecordMixingStruct field_DC[4];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
@@ -605,9 +612,9 @@ struct ContestWinner
     u8 contestRank;
 };
 
-struct DaycareMiscMon
+struct DayCareMail
 {
-    struct MailStruct mail;
+    struct MailStruct message;
     u8 OT_name[OT_NAME_LENGTH + 1];
     u8 monName[POKEMON_NAME_LENGTH + 1];
     u8 gameLanguage:4;
@@ -617,7 +624,7 @@ struct DaycareMiscMon
 struct DaycareMon
 {
     struct BoxPokemon mon;
-    struct DaycareMiscMon misc;
+    struct DayCareMail mail;
     u32 steps;
 };
 
@@ -626,12 +633,6 @@ struct DayCare
     struct DaycareMon mons[DAYCARE_MON_COUNT];
     u32 offspringPersonality;
     u8 stepCounter;
-};
-
-struct DayCareMail
-{
-    /*0x00*/ struct MailStruct message;
-    /*0x24*/ u8 names[19];
 };
 
 struct RecordMixingDayCareMail
