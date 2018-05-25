@@ -186,6 +186,6 @@ gMPlayTrack_SE3: @ 3001A20
 
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"
-	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
-	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
-	.include "tools/agbcc/lib/libc.a:syscalls.o"
+	.include "*libgcc.a:dp-bit.o"
+	.include "*libgcc.a:fp-bit.o"
+	.include "*libc.a:syscalls.o"
