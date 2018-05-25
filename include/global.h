@@ -103,6 +103,8 @@ enum LanguageId
 #define VARS_COUNT          256
 #define MAIL_COUNT          16
 #define SECRET_BASES_COUNT  20
+#define TV_SHOWS_COUNT      25
+#define POKE_NEWS_COUNT     16
 #define PC_ITEMS_COUNT      50
 #define BAG_ITEMS_COUNT     30
 #define BAG_KEYITEMS_COUNT  30
@@ -263,6 +265,49 @@ struct UnkRecordMixingStruct
     u8 field_38[10];
 };
 
+struct UnknownPokemonStruct
+{
+    u16 species;
+    u16 heldItem;
+    u16 moves[4];
+    u8 level;
+    u8 ppBonuses;
+    u8 hpEV;
+    u8 attackEV;
+    u8 defenseEV;
+    u8 speedEV;
+    u8 spAttackEV;
+    u8 spDefenseEV;
+    u32 otId;
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 gap:1;
+    u32 altAbility:1;
+    u32 personality;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 friendship;
+};
+
+struct EmeraldBattleTowerRecord
+{
+    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[8];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ struct {
+        u16 easyChat[6];
+    } greeting;
+    /*0x1C*/ u8 filler_1c[0x18];
+    /*0x34*/ struct UnknownPokemonStruct party[4];
+    /*0xE4*/ u8 language;
+    /*0xE8*/ u32 checksum;
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
@@ -302,7 +347,7 @@ struct SaveBlock2
 
         // All below could be a one giant struct
 
-    /*0x64C*/ u8 field_64C[236];
+    /*0x64C*/ struct EmeraldBattleTowerRecord battleTower;
     /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
@@ -763,8 +808,8 @@ struct SaveBlock1
     /*0x????*/ u8 decorDoll[40];
     /*0x????*/ u8 decorCushion[10];
     /*0x27CA*/ u8 padding_27CA[2];
-    /*0x27CC*/ TVShow tvShows[25];
-    /*0x2B50*/ PokeNews pokeNews[16];
+    /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
+    /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];
     /*0x2B90*/ u16 outbreakPokemonSpecies;
     /*0x2B92*/ u8 outbreakLocationMapNum;
     /*0x2B93*/ u8 outbreakLocationMapGroup;

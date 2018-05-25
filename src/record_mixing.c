@@ -34,13 +34,37 @@
 #include "daycare.h"
 #include "international_string_util.h"
 
+extern void ReceiveSecretBasesData(struct SecretBaseRecord *, size_t, u8);
+extern void ReceiveEasyChatPairsData(struct EasyChatPair *, size_t, u8);
+
 // Static type declarations
+
+struct UnknownRecMixingStruct
+{
+    u32 field_0;
+    u16 field_4;
+    u8 field_6[9];
+};
+
+struct UnknownRecMixingStruct2
+{
+    u32 field_0;
+    u16 field_4;
+    u16 field_6;
+    u16 field_8;
+    u8 field_A[16];
+};
+
+struct UnknownRecMixingStruct3
+{
+    u8 field_0[0x810];
+};
 
 struct PlayerRecordsRS
 {
-    struct SecretBaseRecord secretBases[20];
-    TVShow tvShows[25];
-    PokeNews pokeNews[16];
+    struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
+    TVShow tvShows[TV_SHOWS_COUNT];
+    PokeNews pokeNews[POKE_NEWS_COUNT];
     OldMan oldMan;
     struct EasyChatPair easyChatPairs[5];
     struct RecordMixingDayCareMail dayCareMail;
@@ -48,71 +72,75 @@ struct PlayerRecordsRS
     u16 filler11C8[0x32];
 };
 
-struct PlayerRecords
+struct PlayerRecordsEmerald
 {
-    /* 0x0000 */ struct SecretBaseRecord secretBases[20];
-    /* 0x0c80 */ TVShow tvShows[25];
-    /* 0x1004 */ PokeNews pokeNews[16];
+    /* 0x0000 */ struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
+    /* 0x0c80 */ TVShow tvShows[TV_SHOWS_COUNT];
+    /* 0x1004 */ PokeNews pokeNews[POKE_NEWS_COUNT];
     /* 0x1044 */ OldMan oldMan;
-    /* 0x1084 */ struct EasyChatPair easyChatPair[5];
+    /* 0x1084 */ struct EasyChatPair easyChatPairs[5];
     /* 0x10ac */ struct RecordMixingDayCareMail dayCareMail;
-    /* 0x1124 */ union BattleTowerRecord battleTowerRecord;
+    /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 unk_1210;
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct UnkRecordMixingStruct unk_1254[2];
     /* 0x12dc */ struct UnkRecordMixingStruct2 unk_12dc;
     /* 0x1434 */ u8 field_1434[0x10];
-}; // 1444
+}; // 0x1444
+
+union PlayerRecords
+{
+    struct PlayerRecordsRS ruby;
+    struct PlayerRecordsEmerald emerald;
+};
 
 // Static RAM declarations
 
-IWRAM_DATA bool8 gUnknown_03001130;
-IWRAM_DATA struct SecretBaseRecord *gUnknown_03001134;
-IWRAM_DATA TVShow *gUnknown_03001138;
-IWRAM_DATA PokeNews *gUnknown_0300113C;
-IWRAM_DATA OldMan *gUnknown_03001140;
-IWRAM_DATA struct EasyChatPair *gUnknown_03001144;
-IWRAM_DATA struct RecordMixingDayCareMail *gUnknown_03001148;
-IWRAM_DATA void *gUnknown_0300114C; // gSaveBlock2Ptr->field_64C
-IWRAM_DATA LilycoveLady *gUnknown_03001150;
-IWRAM_DATA void *gUnknown_03001154; // gSaveBlock2Ptr->field_0DC;
-IWRAM_DATA void *gUnknown_03001158; // gSaveBlock2Ptr->field_64C
-IWRAM_DATA u32 gUnknown_0300115C;
-IWRAM_DATA u8 gUnknown_03001160;
-IWRAM_DATA u32 filler_03001164;
-IWRAM_DATA u32 gUnknown_03001168[3];
+static IWRAM_DATA bool8 gUnknown_03001130;
+static IWRAM_DATA struct SecretBaseRecord *sSecretBasesSave;
+static IWRAM_DATA TVShow *sTvShowsSave;
+static IWRAM_DATA PokeNews *sPokeNewsSave;
+static IWRAM_DATA OldMan *sOldManSave;
+static IWRAM_DATA struct EasyChatPair *sEasyChatPairsSave;
+static IWRAM_DATA struct RecordMixingDayCareMail *gUnknown_03001148;
+static IWRAM_DATA void *sBattleTowerSave;
+static IWRAM_DATA LilycoveLady *sLilycoveLadySave;
+static IWRAM_DATA void *gUnknown_03001154; // gSaveBlock2Ptr->field_0DC;
+static IWRAM_DATA void *sBattleTowerSave_Duplicate;
+static IWRAM_DATA u32 sRecordStructSize;
+static IWRAM_DATA u8 gUnknown_03001160;
+static IWRAM_DATA u32 filler_03001164;
+static IWRAM_DATA u32 gUnknown_03001168[3];
 
-EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02039F9C = {};
-EWRAM_DATA struct PlayerRecords *gUnknown_0203A014 = NULL;
-EWRAM_DATA struct PlayerRecords *gUnknown_0203A018 = NULL;
+static EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02039F9C = {0};
+static EWRAM_DATA union PlayerRecords *sReceivedRecords = NULL;
+static EWRAM_DATA union PlayerRecords *sSentRecord = NULL;
 
 // Static ROM declarations
 
-static void sub_80E715C(u8 taskId);
+static void Task_RecordMixing_Main(u8 taskId);
 static void sub_80E7324(u8 taskId);
-static void sub_80E756C(u8 taskId);
-static void sub_80E7630(u8 taskId);
-static void sub_80E77D4(u8 taskId);
-static void *sub_80E77FC(const u16 *asShort);
-static void sub_80E7808(void *records, u16 *a1);
-static u8 sub_80E7810(void);
-static void *sub_80E7820(u8);
-static void sub_80E78C4(OldMan *, size_t, u8);
-static void sub_80E7948(union BattleTowerRecord *, size_t, u8);
-static void sub_80E7A14(LilycoveLady *, size_t, u8);
+static void Task_SendPacket(u8 taskId);
+static void Task_CopyReceiveBuffer(u8 taskId);
+static void Task_SendPacket_SwitchToReceive(u8 taskId);
+static void *LoadPtrFromTaskData(const u16 *asShort);
+static void StorePtrInTaskData(void *records, u16 *a1);
+static u8 GetMultiplayerId_(void);
+static void *GetPlayerRecvBuffer(u8);
+static void ReceiveOldManData(OldMan *, size_t, u8);
+static void ReceiveBattleTowerData(void *battleTowerRecord, size_t, u8);
+static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u8);
 static void sub_80E7B2C(const u8 *);
-static void sub_80E7B60(struct RecordMixingDayCareMail *, size_t, u8, TVShow *);
+static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *, size_t, u8, TVShow *);
 static void sub_80E7F68(u16 *item, u8 which);
 static void sub_80E7FF8(u8 taskId);
 static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1);
 static void sub_80E8468(struct UnkRecordMixingStruct *arg0, size_t arg1, u32 arg2);
 static void sub_80E89AC(struct UnkRecordMixingStruct2 *arg0, size_t arg1, u32 arg2);
 static void sub_80E89F8(struct RecordMixingDayCareMail *dst);
-static void sub_80E8A54(struct RecordMixingDayCareMail *src);
-static void sub_80E8AC0(union BattleTowerRecord *);
-void sub_80EAF80(struct SecretBaseRecord *, size_t, u8);
-void sub_812287C(struct EasyChatPair *, size_t, u8);
-static void nullsub_1405(union BattleTowerRecord *src);
+static void SanitizeDayCareMailForRuby(struct RecordMixingDayCareMail *src);
+static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *arg0);
+static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *src);
 
 // .rodata
 
@@ -153,242 +181,244 @@ static const u8 gUnknown_0858CFBE[3][4] =
 
 // .text
 
+#define BUFFER_CHUNK_SIZE 200
+
 void sub_80E6BE8(void)
 {
-    sub_80B37D4(sub_80E715C);
+    sub_80B37D4(Task_RecordMixing_Main);
 }
 
-void sub_80E6BF8(void)
+// these variables were const in R/S, but had to become changeable because of saveblocks changing RAM position
+static void SetSrcLookupPointers(void)
 {
-    gUnknown_03001134 = gSaveBlock1Ptr->secretBases;
-    gUnknown_03001138 = gSaveBlock1Ptr->tvShows;
-    gUnknown_0300113C = gSaveBlock1Ptr->pokeNews;
-    gUnknown_03001140 = &gSaveBlock1Ptr->oldMan;
-    gUnknown_03001144 = gSaveBlock1Ptr->easyChatPairs;
+    sSecretBasesSave = gSaveBlock1Ptr->secretBases;
+    sTvShowsSave = gSaveBlock1Ptr->tvShows;
+    sPokeNewsSave = gSaveBlock1Ptr->pokeNews;
+    sOldManSave = &gSaveBlock1Ptr->oldMan;
+    sEasyChatPairsSave = gSaveBlock1Ptr->easyChatPairs;
     gUnknown_03001148 = &gUnknown_02039F9C;
-    gUnknown_0300114C = gSaveBlock2Ptr->field_64C;
-    gUnknown_03001150 = &gSaveBlock1Ptr->lilycoveLady;
+    sBattleTowerSave = &gSaveBlock2Ptr->battleTower;
+    sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
     gUnknown_03001154 = gSaveBlock2Ptr->field_DC;
-    gUnknown_03001158 = gSaveBlock2Ptr->field_64C;
+    sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->battleTower;
 }
 
-void sub_80E6CA0(struct PlayerRecords *dest)
+static void PrepareUnknownExchangePacket(struct PlayerRecordsRS *dest)
 {
-    memcpy(dest->secretBases, gUnknown_03001134, sizeof(struct SecretBaseRecord) * 20);
-    memcpy(dest->tvShows, gUnknown_03001138, sizeof(TVShow) * 25);
+    memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
+    memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
     sub_80F14F8(dest->tvShows);
-    memcpy(dest->pokeNews, gUnknown_0300113C, sizeof(PokeNews) * 16);
-    memcpy(&dest->oldMan, gUnknown_03001140, sizeof(OldMan));
-    memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
+    memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
+    memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
+    memcpy(dest->easyChatPairs, sEasyChatPairsSave, sizeof(dest->easyChatPairs));
     sub_80E89F8(&dest->dayCareMail);
-    sub_81659DC(gUnknown_0300114C, &dest->battleTowerRecord);
+    sub_81659DC(sBattleTowerSave, &dest->battleTowerRecord);
+
     if (GetMultiplayerId() == 0)
-    {
-        dest->battleTowerRecord.ruby_sapphire.unk_11c8 = GetRecordMixingGift();
-    }
+        dest->battleTowerRecord.unk_11c8 = GetRecordMixingGift();
 }
 
-void sub_80E6D54(struct PlayerRecords *dest)
+static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
 {
-    memcpy(dest->secretBases, gUnknown_03001134, sizeof(struct SecretBaseRecord) * 20);
+    memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
     sub_80EB18C(dest->secretBases);
-    memcpy(dest->tvShows, gUnknown_03001138, sizeof(TVShow) * 25);
+    memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
     sub_80F1208(dest->tvShows);
-    memcpy(dest->pokeNews, gUnknown_0300113C, sizeof(PokeNews) * 16);
-    memcpy(&dest->oldMan, gUnknown_03001140, sizeof(OldMan));
+    memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
+    memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
     sub_8120B70(&dest->oldMan);
-    memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
+    memcpy(dest->easyChatPairs, sEasyChatPairsSave, sizeof(dest->easyChatPairs));
     sub_80E89F8(&dest->dayCareMail);
-    sub_80E8A54(&dest->dayCareMail);
-    sub_81659DC(gUnknown_0300114C, &dest->battleTowerRecord);
-    nullsub_1405(&dest->battleTowerRecord);
+    SanitizeDayCareMailForRuby(&dest->dayCareMail);
+    sub_81659DC(sBattleTowerSave, &dest->battleTowerRecord);
+    SanitizeRubyBattleTowerRecord(&dest->battleTowerRecord);
+
     if (GetMultiplayerId() == 0)
-    {
-        dest->battleTowerRecord.ruby_sapphire.unk_11c8 = GetRecordMixingGift();
-    }
+        dest->battleTowerRecord.unk_11c8 = GetRecordMixingGift();
 }
 
-void sub_80E6E24(void)
+static void PrepareExchangePacket(void)
 {
     sub_80E9914();
     sub_80F0BB8();
-    sub_80E6BF8();
+    SetSrcLookupPointers();
+
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
-        if (sub_800A03C() == FALSE)
-        {
-            sub_80E6CA0(gUnknown_0203A018);
-        }
+        if (sub_800A03C() == 0)
+            PrepareUnknownExchangePacket(&sSentRecord->ruby);
         else
-        {
-            sub_80E6D54(gUnknown_0203A018);
-        }
+            PrepareExchangePacketForRubySapphire(&sSentRecord->ruby);
     }
     else
     {
-        memcpy(gUnknown_0203A018->secretBases, gUnknown_03001134, sizeof(struct SecretBaseRecord) * 20);
-        memcpy(gUnknown_0203A018->tvShows, gUnknown_03001138, sizeof(TVShow) * 25);
-        memcpy(gUnknown_0203A018->pokeNews, gUnknown_0300113C, sizeof(PokeNews) * 16);
-        memcpy(&gUnknown_0203A018->oldMan, gUnknown_03001140, sizeof(OldMan));
-        memcpy(&gUnknown_0203A018->lilycoveLady, gUnknown_03001150, sizeof(LilycoveLady));
-        memcpy(gUnknown_0203A018->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
-        sub_80E89F8(&gUnknown_0203A018->dayCareMail);
-        memcpy(&gUnknown_0203A018->battleTowerRecord, gUnknown_0300114C, 0xec);
-        sub_80E8AC0(&gUnknown_0203A018->battleTowerRecord);
+        memcpy(sSentRecord->emerald.secretBases, sSecretBasesSave, sizeof(sSentRecord->emerald.secretBases));
+        memcpy(sSentRecord->emerald.tvShows, sTvShowsSave, sizeof(sSentRecord->emerald.tvShows));
+        memcpy(sSentRecord->emerald.pokeNews, sPokeNewsSave, sizeof(sSentRecord->emerald.pokeNews));
+        memcpy(&sSentRecord->emerald.oldMan, sOldManSave, sizeof(sSentRecord->emerald.oldMan));
+        memcpy(&sSentRecord->emerald.lilycoveLady, sLilycoveLadySave, sizeof(sSentRecord->emerald.lilycoveLady));
+        memcpy(sSentRecord->emerald.easyChatPairs, sEasyChatPairsSave, sizeof(sSentRecord->emerald.easyChatPairs));
+        sub_80E89F8(&sSentRecord->emerald.dayCareMail);
+        memcpy(&sSentRecord->emerald.battleTowerRecord, sBattleTowerSave, sizeof(sSentRecord->emerald.battleTowerRecord));
+        SanitizeEmeraldBattleTowerRecord(&sSentRecord->emerald.battleTowerRecord);
+
         if (GetMultiplayerId() == 0)
-        {
-            gUnknown_0203A018->unk_1210 = GetRecordMixingGift();
-        }
-        sub_80E8110(gUnknown_0203A018->unk_1254, gUnknown_03001154);
-        sub_80E8260(&gUnknown_0203A018->unk_12dc);
+            sSentRecord->emerald.unk_1210 = GetRecordMixingGift();
+
+        sub_80E8110(sSentRecord->emerald.unk_1254, gUnknown_03001154);
+        sub_80E8260(&sSentRecord->emerald.unk_12dc);
     }
 }
 
-void sub_80E6F60(u32 which)
+static void ReceiveExchangePacket(u32 which)
 {
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
         // Ruby/Sapphire
-        sub_80E7B2C((void *)gUnknown_0203A014[0].tvShows);
-        sub_80EAF80(gUnknown_0203A014[0].secretBases, sizeof(struct PlayerRecordsRS), which);
-        sub_80E7B60(&gUnknown_0203A014[0].dayCareMail, sizeof(struct PlayerRecordsRS), which, gUnknown_0203A014[0].tvShows);
-        sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, sizeof(struct PlayerRecordsRS), which);
-        sub_80F01E8(gUnknown_0203A014[0].tvShows, sizeof(struct PlayerRecordsRS), which);
-        sub_80F0C7C(gUnknown_0203A014[0].pokeNews, sizeof(struct PlayerRecordsRS), which);
-        sub_80E78C4(&gUnknown_0203A014[0].oldMan, sizeof(struct PlayerRecordsRS), which);
-        sub_812287C(gUnknown_0203A014[0].easyChatPair, sizeof(struct PlayerRecordsRS), which);
-        sub_80E7F68(&gUnknown_0203A014[0].battleTowerRecord.ruby_sapphire.unk_11c8, which);
+        sub_80E7B2C((void *)sReceivedRecords->ruby.tvShows);
+        ReceiveSecretBasesData(sReceivedRecords->ruby.secretBases, sizeof(struct PlayerRecordsRS), which);
+        ReceiveDaycareMailData(&sReceivedRecords->ruby.dayCareMail, sizeof(struct PlayerRecordsRS), which, sReceivedRecords->ruby.tvShows);
+        ReceiveBattleTowerData(&sReceivedRecords->ruby.battleTowerRecord, sizeof(struct PlayerRecordsRS), which);
+        ReceiveTvShowsData(sReceivedRecords->ruby.tvShows, sizeof(struct PlayerRecordsRS), which);
+        ReceivePokeNewsData(sReceivedRecords->ruby.pokeNews, sizeof(struct PlayerRecordsRS), which);
+        ReceiveOldManData(&sReceivedRecords->ruby.oldMan, sizeof(struct PlayerRecordsRS), which);
+        ReceiveEasyChatPairsData(sReceivedRecords->ruby.easyChatPairs, sizeof(struct PlayerRecordsRS), which);
+        sub_80E7F68(&sReceivedRecords->ruby.battleTowerRecord.unk_11c8, which);
     }
     else
     {
         // Emerald
-        sub_80E7B2C((void *)gUnknown_0203A014[0].tvShows);
-        sub_80EAF80(gUnknown_0203A014[0].secretBases, sizeof(struct PlayerRecords), which);
-        sub_80F01E8(gUnknown_0203A014[0].tvShows, sizeof(struct PlayerRecords), which);
-        sub_80F0C7C(gUnknown_0203A014[0].pokeNews, sizeof(struct PlayerRecords), which);
-        sub_80E78C4(&gUnknown_0203A014[0].oldMan, sizeof(struct PlayerRecords), which);
-        sub_812287C(gUnknown_0203A014[0].easyChatPair, sizeof(struct PlayerRecords), which);
-        sub_80E7B60(&gUnknown_0203A014[0].dayCareMail, sizeof(struct PlayerRecords), which, gUnknown_0203A014[0].tvShows);
-        sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, sizeof(struct PlayerRecords), which);
-        sub_80E7F68(&gUnknown_0203A014[0].unk_1210, which);
-        sub_80E7A14(&gUnknown_0203A014[0].lilycoveLady, sizeof(struct PlayerRecords), which);
-        sub_80E8468(gUnknown_0203A014[0].unk_1254, sizeof(struct PlayerRecords), (u8) which);
-        sub_80E89AC(&gUnknown_0203A014[0].unk_12dc, sizeof(struct PlayerRecords), (u8) which);
+        sub_80E7B2C((void *)sReceivedRecords->emerald.tvShows);
+        ReceiveSecretBasesData(sReceivedRecords->emerald.secretBases, sizeof(struct PlayerRecordsEmerald), which);
+        ReceiveTvShowsData(sReceivedRecords->emerald.tvShows, sizeof(struct PlayerRecordsEmerald), which);
+        ReceivePokeNewsData(sReceivedRecords->emerald.pokeNews, sizeof(struct PlayerRecordsEmerald), which);
+        ReceiveOldManData(&sReceivedRecords->emerald.oldMan, sizeof(struct PlayerRecordsEmerald), which);
+        ReceiveEasyChatPairsData(sReceivedRecords->emerald.easyChatPairs, sizeof(struct PlayerRecordsEmerald), which);
+        ReceiveDaycareMailData(&sReceivedRecords->emerald.dayCareMail, sizeof(struct PlayerRecordsEmerald), which, sReceivedRecords->emerald.tvShows);
+        ReceiveBattleTowerData(&sReceivedRecords->emerald.battleTowerRecord, sizeof(struct PlayerRecordsEmerald), which);
+        sub_80E7F68(&sReceivedRecords->emerald.unk_1210, which);
+        ReceiveLilycoveLadyData(&sReceivedRecords->emerald.lilycoveLady, sizeof(struct PlayerRecordsEmerald), which);
+        sub_80E8468(sReceivedRecords->emerald.unk_1254, sizeof(struct PlayerRecordsEmerald), (u8) which);
+        sub_80E89AC(&sReceivedRecords->emerald.unk_12dc, sizeof(struct PlayerRecordsEmerald), (u8) which);
     }
 }
 
-void sub_80E70F4(const u8 *src)
+static void PrintTextOnRecordMixing(const u8 *src)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     PrintTextOnWindow(0, 1, src, 0, 1, 0, NULL);
     CopyWindowToVram(0, 3);
 }
 
-void sub_80E7128(u8 taskId)
+#define tCounter data[0]
+
+static void Task_RecordMixing_SoundEffect(u8 taskId)
 {
-    if (++ gTasks[taskId].data[0] == 50)
+    if (++gTasks[taskId].tCounter == 50)
     {
         PlaySE(SE_W213);
-        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].tCounter = 0;
     }
 }
 
-static void sub_80E715C(u8 taskId)
+#undef tCounter
+
+#define tState        data[0]
+#define tSndEffTaskId data[15]
+
+static void Task_RecordMixing_Main(u8 taskId)
 {
-    s16 *data;
+    s16 *data = gTasks[taskId].data;
 
-    data = gTasks[taskId].data;
-    switch (data[0])
+    switch (tState)
     {
-        case 0:
-            gUnknown_0203A018 = malloc(sizeof(struct PlayerRecords));
-            gUnknown_0203A014 = malloc(sizeof(struct PlayerRecords) * 4);
-            sub_8009628(gSpecialVar_0x8005);
-            VarSet(VAR_TEMP_0, 1);
-            gUnknown_03001130 = FALSE;
-            sub_80E6E24();
-            sub_80FB00C();
-            data[0] = 1;
-            data[10] = CreateTask(sub_80E7324, 80);
-            data[15] = CreateTask(sub_80E7128, 81);
-            break;
-        case 1:
-            if (!gTasks[data[10]].isActive)
+    case 0: // init
+        sSentRecord = malloc(sizeof(union PlayerRecords));
+        sReceivedRecords = malloc(sizeof(union PlayerRecords) * 4);
+        sub_8009628(gSpecialVar_0x8005);
+        VarSet(VAR_TEMP_0, 1);
+        gUnknown_03001130 = FALSE;
+        PrepareExchangePacket();
+        CreateRecordMixingSprite();
+        tState = 1;
+        data[10] = CreateTask(sub_80E7324, 80);
+        tSndEffTaskId = CreateTask(Task_RecordMixing_SoundEffect, 81);
+        break;
+    case 1: // wait for sub_80E7324
+        if (!gTasks[data[10]].isActive)
+        {
+            tState = 2;
+            FlagSet(FLAG_SYS_MIX_RECORD);
+            DestroyRecordMixingSprite();
+            DestroyTask(tSndEffTaskId);
+        }
+        break;
+    case 2:
+        data[10] = CreateTask(sub_80E7FF8, 10);
+        tState = 3;
+        PlaySE(SE_W226);
+        break;
+    case 3: // wait for sub_80E7FF8
+        if (!gTasks[data[10]].isActive)
+        {
+            tState = 4;
+            if (gWirelessCommType == 0)
+                data[10] = sub_80B3050();
+
+            PrintTextOnRecordMixing(gText_RecordMixingComplete);
+            data[8] = 0;
+        }
+        break;
+    case 4: // wait 60 frames
+        if (++data[8] > 60)
+            tState = 5;
+        break;
+    case 5:
+        if (!gTasks[data[10]].isActive)
+        {
+            free(sReceivedRecords);
+            free(sSentRecord);
+            sub_808729C();
+            if (gWirelessCommType != 0)
             {
-                data[0] = 2;
-                FlagSet(FLAG_SYS_MIX_RECORD);
-                sub_80FB074();
-                DestroyTask(data[15]);
+                CreateTask(sub_80AF2B4, 10);
             }
-            break;
-        case 2:
-            data[10] = CreateTask(sub_80E7FF8, 10);
-            data[0] = 3;
-            PlaySE(SE_W226);
-            break;
-        case 3:
-            if (!gTasks[data[10]].isActive)
-            {
-                data[0] = 4;
-                if (gWirelessCommType == 0)
-                {
-                    data[10] = sub_80B3050();
-                }
-                sub_80E70F4(gText_RecordMixingComplete);
-                data[8] = 0;
-            }
-            break;
-        case 4:
-            if (++ data[8] > 60)
-            {
-                data[0] = 5;
-            }
-            break;
-        case 5:
-            if (!gTasks[data[10]].isActive)
-            {
-                free(gUnknown_0203A014);
-                free(gUnknown_0203A018);
-                sub_808729C();
-                if (gWirelessCommType != 0)
-                {
-                    CreateTask(sub_80AF2B4, 10);
-                }
-                sub_8197434(0, 1);
-                DestroyTask(taskId);
-                EnableBothScriptContexts();
-            }
-            break;
+            sub_8197434(0, 1);
+            DestroyTask(taskId);
+            EnableBothScriptContexts();
+        }
+        break;
     }
 }
+
+#undef tState
+#undef tSndEffTaskId
 
 static void sub_80E7324(u8 taskId)
 {
-    u8 r4;
-    u8 taskId2;
-    struct Task *task;
+    struct Task *task = &gTasks[taskId];
 
-    task = &gTasks[taskId];
     switch (task->data[0])
     {
-        case 0:
-            sub_80E70F4(gText_MixingRecords);
-            task->data[8] = 0x708;
-            task->data[0] = 400;
-            ClearLinkCallback_2();
-            break;
-        case 100:
-            if (++ task->data[12] > 20)
-            {
-                task->data[12] = 0;
-                task->data[0] = 101;
-            }
-            break;
-        case 101:
-            r4 = GetLinkPlayerCount_2();
+    case 0:
+        PrintTextOnRecordMixing(gText_MixingRecords);
+        task->data[8] = 0x708;
+        task->data[0] = 400;
+        ClearLinkCallback_2();
+        break;
+    case 100: // wait 20 frames
+        if (++task->data[12] > 20)
+        {
+            task->data[12] = 0;
+            task->data[0] = 101;
+        }
+        break;
+    case 101:
+        {
+            u8 players = GetLinkPlayerCount_2();
             if (IsLinkMaster() == TRUE)
             {
-                if (r4 == sub_800AA48())
+                if (players == sub_800AA48())
                 {
                     PlaySE(SE_PIN);
                     task->data[0] = 201;
@@ -400,272 +430,248 @@ static void sub_80E7324(u8 taskId)
                 PlaySE(SE_BOO);
                 task->data[0] = 301;
             }
-            break;
-        case 201:
-            if (sub_800AA48() == GetLinkPlayerCount_2() && ++ task->data[12] > (GetLinkPlayerCount_2() * 30))
-            {
-                sub_800A620();
-                task->data[0] = 1;
-            }
-            break;
-        case 301:
-            if (sub_800AA48() == GetLinkPlayerCount_2())
-            {
-                task->data[0] = 1;
-            }
-            break;
-        case 400:
-            if (++ task->data[12] > 20)
-            {
-                task->data[0] = 1;
-                task->data[12] = 0;
-            }
-            break;
-        case 1:
-            if (gReceivedRemoteLinkPlayers != 0)
-            {
-                ConvertIntToDecimalStringN(gStringVar1, sub_80E7810(), STR_CONV_MODE_LEADING_ZEROS, 2);
-                task->data[0] = 5;
-            }
-            break;
-        case 2:
+        }
+        break;
+    case 201:
+        if (sub_800AA48() == GetLinkPlayerCount_2() && ++task->data[12] > (GetLinkPlayerCount_2() * 30))
+        {
+            sub_800A620();
+            task->data[0] = 1;
+        }
+        break;
+    case 301:
+        if (sub_800AA48() == GetLinkPlayerCount_2())
+            task->data[0] = 1;
+        break;
+    case 400: // wait 20 frames
+        if (++task->data[12] > 20)
+        {
+            task->data[0] = 1;
+            task->data[12] = 0;
+        }
+        break;
+    case 1: // wait for handshake
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), STR_CONV_MODE_LEADING_ZEROS, 2);
+            task->data[0] = 5;
+        }
+        break;
+    case 2:
+        {
+            u8 subTaskId;
+
             task->data[6] = GetLinkPlayerCount_2();
             task->data[0] = 0;
-            task->data[5] = sub_80E7810();
-            task->func = sub_80E756C;
+            task->data[5] = GetMultiplayerId_();
+            task->func = Task_SendPacket;
             if (Link_AnyPartnersPlayingRubyOrSapphire())
             {
-                sub_80E7808(gUnknown_0203A018, (u16 *)&task->data[2]);
-                taskId2 = CreateTask(sub_80E7630, 80);
-                task->data[10] = taskId2;
-                gTasks[taskId2].data[0] = taskId;
-                sub_80E7808(gUnknown_0203A014, (u16 *)&gTasks[taskId2].data[5]);
-                gUnknown_0300115C = sizeof(struct PlayerRecordsRS);
+                StorePtrInTaskData(sSentRecord, (u16 *)&task->data[2]);
+                subTaskId = CreateTask(Task_CopyReceiveBuffer, 80);
+                task->data[10] = subTaskId;
+                gTasks[subTaskId].data[0] = taskId;
+                StorePtrInTaskData(sReceivedRecords, (u16 *)&gTasks[subTaskId].data[5]);
+                sRecordStructSize = sizeof(struct PlayerRecordsRS);
             }
             else
             {
-                sub_80E7808(gUnknown_0203A018, (u16 *)&task->data[2]);
-                taskId2 = CreateTask(sub_80E7630, 80);
-                task->data[10] = taskId2;
-                gTasks[taskId2].data[0] = taskId;
-                sub_80E7808(gUnknown_0203A014, (u16 *)&gTasks[taskId2].data[5]);
-                gUnknown_0300115C = sizeof(struct PlayerRecords);
-            }
-            break;
-        case 5:
-            if (++ task->data[10] > 60)
-            {
-                task->data[10] = 0;
-                task->data[0] = 2;
-            }
-            break;
-    }
-}
-
-static void sub_80E756C(u8 taskId)
-{
-    struct Task *task;
-    void *dest;
-
-    task = &gTasks[taskId];
-    switch (task->data[0])
-    {
-        case 0:
-            dest = sub_80E77FC(&task->data[2]) + task->data[4] * 200;
-            memcpy(gBlockSendBuffer, dest, 200);
-            task->data[0] ++;
-            break;
-        case 1:
-            if (GetMultiplayerId() == 0)
-            {
-                sub_800A4D8(1);
-            }
-            task->data[0] ++;
-            break;
-        case 2:
-            break;
-        case 3:
-            task->data[4] ++;
-            if (task->data[4] == gUnknown_0300115C / 200 + 1)
-            {
-                task->data[0] ++;
-            }
-            else
-            {
-                task->data[0] = 0;
-            }
-            break;
-        case 4:
-            if (!gTasks[task->data[10]].isActive)
-            {
-                task->func = sub_80E77D4;
-            }
-            break;
-    }
-}
-
-static void sub_80E7630(u8 taskId)
-{
-    struct Task *task;
-    u8 status;
-    u8 counter;
-    u8 i;
-    void *dest;
-    void *src;
-
-    task = &gTasks[taskId];
-    status = GetBlockReceivedStatus();
-    counter = 0;
-    if (status == sub_800A9D8())
-    {
-        for (i = 0; i < GetLinkPlayerCount(); i ++)
-        {
-            if ((status >> i) & 0x01)
-            {
-                dest = sub_80E77FC((u16 *)&task->data[5]) + task->data[i + 1] * 200 + gUnknown_0300115C * i;
-                src = sub_80E7820(i);
-                if ((task->data[i + 1] + 1) * 200 > gUnknown_0300115C)
-                {
-                    memcpy(dest, src, gUnknown_0300115C - task->data[i + 1] * 200);
-                }
-                else
-                {
-                    memcpy(dest, src, 200);
-                }
-                ResetBlockReceivedFlag(i);
-                task->data[i + 1] ++;
-                if (task->data[i + 1] == gUnknown_0300115C / 200 + 1)
-                {
-                    counter ++;
-                }
+                StorePtrInTaskData(sSentRecord, (u16 *)&task->data[2]);
+                subTaskId = CreateTask(Task_CopyReceiveBuffer, 80);
+                task->data[10] = subTaskId;
+                gTasks[subTaskId].data[0] = taskId;
+                StorePtrInTaskData(sReceivedRecords, (u16 *)&gTasks[subTaskId].data[5]);
+                sRecordStructSize = sizeof(struct PlayerRecordsEmerald);
             }
         }
-        gTasks[task->data[0]].data[0] ++;
+        break;
+    case 5: // wait 60 frames
+        if (++task->data[10] > 60)
+        {
+            task->data[10] = 0;
+            task->data[0] = 2;
+        }
+        break;
     }
-    if (counter == GetLinkPlayerCount())
+}
+
+static void Task_SendPacket(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    // does this send the data 24 times?
+
+    switch (task->data[0])
     {
-        DestroyTask(taskId);
+    case 0: // Copy record data to send buffer
+        {
+            void *recordData = LoadPtrFromTaskData(&task->data[2]) + task->data[4] * BUFFER_CHUNK_SIZE;
+
+            memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
+            task->data[0]++;
+        }
+        break;
+    case 1:
+        if (GetMultiplayerId() == 0)
+            sub_800A4D8(1);
+        task->data[0]++;
+        break;
+    case 2:
+        break;
+    case 3:
+        task->data[4]++;
+        if (task->data[4] == sRecordStructSize / 200 + 1)
+            task->data[0]++;
+        else
+            task->data[0] = 0;
+        break;
+    case 4:
+        if (!gTasks[task->data[10]].isActive)
+            task->func = Task_SendPacket_SwitchToReceive;
+        break;
     }
+}
+
+static void Task_CopyReceiveBuffer(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u8 status = GetBlockReceivedStatus();
+    u8 handledPlayers = 0;
+
+    if (status == sub_800A9D8())
+    {
+        u8 i;
+
+        for (i = 0; i < GetLinkPlayerCount(); i++)
+        {
+            void *dest;
+            void *src;
+
+            if ((status >> i) & 1)
+            {
+                dest = LoadPtrFromTaskData((u16 *)&task->data[5]) + task->data[i + 1] * BUFFER_CHUNK_SIZE + sRecordStructSize * i;
+                src = GetPlayerRecvBuffer(i);
+                if ((task->data[i + 1] + 1) * BUFFER_CHUNK_SIZE > sRecordStructSize)
+                    memcpy(dest, src, sRecordStructSize - task->data[i + 1] * BUFFER_CHUNK_SIZE);
+                else
+                    memcpy(dest, src, BUFFER_CHUNK_SIZE);
+                ResetBlockReceivedFlag(i);
+                task->data[i + 1]++;
+                if (task->data[i + 1] == sRecordStructSize / BUFFER_CHUNK_SIZE + 1)
+                    handledPlayers++;
+            }
+        }
+        gTasks[task->data[0]].data[0]++;
+    }
+
+    if (handledPlayers == GetLinkPlayerCount())
+        DestroyTask(taskId);
 }
 
 static void sub_80E776C(u8 taskId)
 {
-    struct Task *task;
+    struct Task *task = &gTasks[taskId];
 
-    task = &gTasks[taskId];
     if (!gTasks[task->data[10]].isActive)
-    {
         DestroyTask(taskId);
-    }
 }
 
-static void sub_80E77A0(u8 taskId)
+static void Task_ReceivePacket(u8 taskId)
 {
-    struct Task *task;
+    struct Task *task = &gTasks[taskId];
 
-    task = &gTasks[taskId];
     task->func = sub_80E776C;
     if (gUnknown_03001130 == TRUE)
-    {
-        sub_80E6F60(task->data[5]);
-    }
+        ReceiveExchangePacket(task->data[5]);
 }
 
-static void sub_80E77D4(u8 taskId)
+static void Task_SendPacket_SwitchToReceive(u8 taskId)
 {
-    gTasks[taskId].func = sub_80E77A0;
+    gTasks[taskId].func = Task_ReceivePacket;
     gUnknown_03001130 = TRUE;
 }
 
-static void *sub_80E77FC(const u16 *asShort)
+static void *LoadPtrFromTaskData(const u16 *asShort)
 {
     return (void *)(asShort[0] | (asShort[1] << 16));
 }
 
-static void sub_80E7808(void *records, u16 *asShort)
+static void StorePtrInTaskData(void *records, u16 *asShort)
 {
     asShort[0] = (u32)records;
     asShort[1] = ((u32)records >> 16);
 }
 
-static u8 sub_80E7810(void)
+static u8 GetMultiplayerId_(void)
 {
     return GetMultiplayerId();
 }
 
-static void *sub_80E7820(u8 id)
+static void *GetPlayerRecvBuffer(u8 id)
 {
     return gBlockRecvBuffer[id];
 }
 
-void sub_80E7830(u32 *data)
+static void ShufflePlayerIndices(u32 *data)
 {
     u32 i;
     u32 linkTrainerId;
+    u32 players = GetLinkPlayerCount();
 
-    switch ((u32)GetLinkPlayerCount())
+    switch (players)
     {
-        case 2:
-            for (i = 0; i < 2; i ++)
-            {
-                data[i] = gUnknown_0858CF8C[i];
-            }
-            break;
-        case 3:
-            linkTrainerId = GetLinkPlayerTrainerId(0) % 2;
-            for (i = 0; i < 3; i ++)
-            {
-                data[i] = gUnknown_0858CF8E[linkTrainerId][i];
-            }
-            break;
-        case 4:
-            linkTrainerId = GetLinkPlayerTrainerId(0) % 9;
-            for (i = 0; i < 4; i ++)
-            {
-                data[i] = gUnknown_0858CF94[linkTrainerId][i];
-            }
-            break;
+    case 2:
+        for (i = 0; i < 2; i++)
+            data[i] = gUnknown_0858CF8C[i];
+        break;
+    case 3:
+        linkTrainerId = GetLinkPlayerTrainerId(0) % 2;
+        for (i = 0; i < 3; i++)
+            data[i] = gUnknown_0858CF8E[linkTrainerId][i];
+        break;
+    case 4:
+        linkTrainerId = GetLinkPlayerTrainerId(0) % 9;
+        for (i = 0; i < 4; i++)
+            data[i] = gUnknown_0858CF94[linkTrainerId][i];
+        break;
     }
 }
 
-static void sub_80E78C4(OldMan *oldMan, size_t recordSize, u8 which)
+static void ReceiveOldManData(OldMan *oldMan, size_t recordSize, u8 which)
 {
     u8 version;
     u16 language;
     OldMan *dest;
     u32 mixIndices[4];
 
-    sub_80E7830(mixIndices);
+    ShufflePlayerIndices(mixIndices);
     dest = (void *)oldMan + recordSize * mixIndices[which];
     version = gLinkPlayers[mixIndices[which]].version;
     language = gLinkPlayers[mixIndices[which]].language;
+
     if (Link_AnyPartnersPlayingRubyOrSapphire())
-    {
-        sub_8120D34(dest, version, language);
-    }
+        SanitizeReceivedRubyOldMan(dest, version, language);
     else
-    {
-        sub_8120CD0(dest, version, language);
-    }
-    memcpy(gUnknown_03001140, (void *)oldMan + recordSize * mixIndices[which], sizeof(OldMan));
+        SanitizeReceivedEmeraldOldMan(dest, version, language);
+
+    memcpy(sOldManSave, (void *)oldMan + recordSize * mixIndices[which], sizeof(OldMan));
     ResetMauvilleOldManFlag();
 }
 
-static void sub_80E7948(union BattleTowerRecord *battleTowerRecord, size_t recordSize, u8 which)
+static void ReceiveBattleTowerData(void *battleTowerRecord, size_t recordSize, u8 which)
 {
-    union BattleTowerRecord *dest;
+    struct EmeraldBattleTowerRecord *dest;
     struct UnknownPokemonStruct *btPokemon;
     u32 mixIndices[4];
     s32 i;
 
-    sub_80E7830(mixIndices);
+    ShufflePlayerIndices(mixIndices);
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
         if (sub_816587C((void *)battleTowerRecord + recordSize * mixIndices[which], (void *)battleTowerRecord + recordSize * which) == TRUE)
         {
             dest = (void *)battleTowerRecord + recordSize * which;
-            dest->emerald.language = gLinkPlayers[mixIndices[which]].language;
-            sub_8164F70(dest);
+            dest->language = gLinkPlayers[mixIndices[which]].language;
+            CalcEmeraldBattleTowerChecksum(dest);
         }
     }
     else
@@ -674,38 +680,37 @@ static void sub_80E7948(union BattleTowerRecord *battleTowerRecord, size_t recor
         dest = (void *)battleTowerRecord + recordSize * which;
         for (i = 0; i < 4; i ++)
         {
-            btPokemon = &dest->emerald.party[i];
+            btPokemon = &dest->party[i];
             if (btPokemon->species != SPECIES_NONE && IsStringJapanese(btPokemon->nickname))
-            {
                 ConvertInternationalString(btPokemon->nickname, LANGUAGE_JAPANESE);
-            }
         }
-        sub_8164F70(dest);
+        CalcEmeraldBattleTowerChecksum(dest);
     }
     sub_81628A0((void *)battleTowerRecord + recordSize * which);
 }
 
-static void sub_80E7A14(LilycoveLady *lilycoveLady, size_t recordSize, u8 which)
+static void ReceiveLilycoveLadyData(LilycoveLady *lilycoveLady, size_t recordSize, u8 which)
 {
     LilycoveLady *dest;
     u32 mixIndices[4];
 
-    sub_80E7830(mixIndices);
-    memcpy((void *)lilycoveLady + recordSize * which, gUnknown_03001150, sizeof(LilycoveLady));
+    ShufflePlayerIndices(mixIndices);
+    memcpy((void *)lilycoveLady + recordSize * which, sLilycoveLadySave, sizeof(LilycoveLady));
+
     if (GetLilycoveLadyId() == 0)
     {
         dest = malloc(sizeof(LilycoveLady));
         if (dest == NULL)
-        {
             return;
-        }
-        memcpy(dest, gUnknown_03001150, sizeof(LilycoveLady));
+
+        memcpy(dest, sLilycoveLadySave, sizeof(LilycoveLady));
     }
     else
     {
         dest = NULL;
     }
-    memcpy(gUnknown_03001150, (void *)lilycoveLady + recordSize * mixIndices[which], sizeof(LilycoveLady));
+
+    memcpy(sLilycoveLadySave, (void *)lilycoveLady + recordSize * mixIndices[which], sizeof(LilycoveLady));
     sub_818DA78();
     if (dest != NULL)
     {
@@ -735,13 +740,12 @@ static void sub_80E7AA4(struct RecordMixingDayCareMail *src, size_t recordSize, 
 static void sub_80E7B2C(const u8 *src)
 {
     u8 sum;
-    int i;
+    s32 i;
 
     sum = 0;
     for (i = 0; i < 256; i ++)
-    {
         sum += src[i];
-    }
+
     gUnknown_03001160 = sum;
 }
 
@@ -751,7 +755,7 @@ static u8 sub_80E7B54(void)
 }
 
 #ifdef NONMATCHING
-static void sub_80E7B60(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
+static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
 {
     // r9 = which
     u16 i;
@@ -929,7 +933,8 @@ static void sub_80E7B60(struct RecordMixingDayCareMail *src, size_t recordSize, 
     SeedRng(oldSeed);
 }
 #else
-__attribute__((naked)) static void sub_80E7B60(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
+NAKED
+static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t recordSize, u8 which, TVShow *shows)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -1464,9 +1469,7 @@ static void sub_80E7F68(u16 *item, u8 which)
             VarSet(VAR_TEMP_1, *item);
             StringCopy(gStringVar1, gLinkPlayers[0].name);
             if (*item == ITEM_EON_TICKET)
-            {
                 FlagSet(FLAG_SYS_HAS_EON_TICKET);
-            }
         }
         else
         {
@@ -1477,83 +1480,76 @@ static void sub_80E7F68(u16 *item, u8 which)
 
 static void sub_80E7FF8(u8 taskId)
 {
-    struct Task *task;
+    struct Task *task = &gTasks[taskId];
 
-    task = &gTasks[taskId];
     switch (task->data[0])
     {
-        case 0:
+    case 0:
+        task->data[0]++;
+        break;
+    case 1:
+        if (Link_AnyPartnersPlayingRubyOrSapphire())
+            task->data[0]++;
+        else
+            task->data[0] = 6;
+        break;
+    case 2:
+        sub_8076D5C();
+        sub_8153430();
+        task->data[0] ++;
+        break;
+    case 3:
+        if (sub_8153474())
+        {
+            sav2_gender2_inplace_and_xFE();
+            task->data[0] = 4;
+            task->data[1] = 0;
+        }
+        break;
+    case 4:
+        if (++task->data[1] > 10)
+        {
+            sub_800AC34();
             task->data[0] ++;
-            break;
-        case 1:
-            if (Link_AnyPartnersPlayingRubyOrSapphire())
+        }
+        break;
+    case 5:
+        if (gReceivedRemoteLinkPlayers == 0)
+            DestroyTask(taskId);
+        break;
+    case 6:
+        if (!sub_801048C(0))
+        {
+            CreateTask(sub_8153688, 5);
+            task->data[0] ++;
+        }
+        break;
+    case 7:
+        if (!FuncIsActiveTask(sub_8153688))
+        {
+            if (gWirelessCommType)
             {
-                task->data[0] ++;
+                sub_801048C(1);
+                task->data[0] = 8;
             }
             else
             {
-                task->data[0] = 6;
-            }
-            break;
-        case 2:
-            sub_8076D5C();
-            sub_8153430();
-            task->data[0] ++;
-            break;
-        case 3:
-            if (sub_8153474())
-            {
-                sav2_gender2_inplace_and_xFE();
                 task->data[0] = 4;
-                task->data[1] = 0;
             }
-            break;
-        case 4:
-            if (++ task->data[1] > 10)
-            {
-                sub_800AC34();
-                task->data[0] ++;
-            }
-            break;
-        case 5:
-            if (gReceivedRemoteLinkPlayers == 0)
-            {
-                DestroyTask(taskId);
-            }
-            break;
-        case 6:
-            if (!sub_801048C(0))
-            {
-                CreateTask(sub_8153688, 5);
-                task->data[0] ++;
-            }
-            break;
-        case 7:
-            if (!FuncIsActiveTask(sub_8153688))
-            {
-                if (gWirelessCommType)
-                {
-                    sub_801048C(1);
-                    task->data[0] = 8;
-                }
-                else
-                {
-                    task->data[0] = 4;
-                }
-            }
-            break;
-        case 8:
-            sub_800ADF8();
-            task->data[0] ++;
-            break;
-        case 9:
-            if (sub_800A520())
-            {
-                DestroyTask(taskId);
-            }
-            break;
+        }
+        break;
+    case 8:
+        sub_800ADF8();
+        task->data[0] ++;
+        break;
+    case 9:
+        if (sub_800A520())
+            DestroyTask(taskId);
+        break;
     }
 }
+
+// New Emerald functions
 
 static void sub_80E8110(struct UnkRecordMixingStruct *dst, struct UnkRecordMixingStruct *src)
 {
@@ -1650,7 +1646,7 @@ void sub_80E8260(struct UnkRecordMixingStruct2 *dst)
     }
 }
 
-bool32 sub_80E841C(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1)
+static bool32 sub_80E841C(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1)
 {
     s32 i;
 
@@ -1670,11 +1666,11 @@ static void sub_80E8468(struct UnkRecordMixingStruct *arg0, size_t arg1, u32 arg
 {
     s32 i, r7, r8;
     struct UnkRecordMixingStruct *structPtr;
-    u32 data[4];
+    u32 mixIndices[4];
     u32 structId;
 
-    sub_80E7830(data);
-    structPtr = (void*)(arg0) + (arg1 * data[arg2]);
+    ShufflePlayerIndices(mixIndices);
+    structPtr = (void*)(arg0) + (arg1 * mixIndices[arg2]);
     r7 = 0;
     r8 = 0;
     for (i = 0; i < 2; i++)
@@ -1704,29 +1700,8 @@ static void sub_80E8468(struct UnkRecordMixingStruct *arg0, size_t arg1, u32 arg
     }
 }
 
-struct UnknownRecMixingStruct
-{
-    u32 field_0;
-    u16 field_4;
-    u8 field_6[9];
-};
-
-struct UnknownRecMixingStruct2
-{
-    u32 field_0;
-    u16 field_4;
-    u16 field_6;
-    u16 field_8;
-    u8 field_A[16];
-};
-
-struct UnknownRecMixingStruct3
-{
-    u8 field_0[0x810];
-};
-
 NAKED
-void sub_80E8578(struct UnknownRecMixingStruct3 *arg0, struct UnkRecordMixingStruct2 *arg1, size_t arg2, u32 arg3, u32 arg4)
+static void sub_80E8578(struct UnknownRecMixingStruct3 *arg0, struct UnkRecordMixingStruct2 *arg1, size_t arg2, u32 arg3, u32 arg4)
 {
     asm_unified("	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -2130,7 +2105,7 @@ _080E8864:\n\
     ");
 }
 
-void sub_80E8880(struct UnknownRecMixingStruct *arg0, struct UnknownRecMixingStruct *arg1)
+static void sub_80E8880(struct UnknownRecMixingStruct *arg0, struct UnknownRecMixingStruct *arg1)
 {
     s32 i, j;
 
@@ -2155,7 +2130,7 @@ void sub_80E8880(struct UnknownRecMixingStruct *arg0, struct UnknownRecMixingStr
     }
 }
 
-void sub_80E88CC(struct UnknownRecMixingStruct2 *arg0, struct UnknownRecMixingStruct2 *arg1)
+static void sub_80E88CC(struct UnknownRecMixingStruct2 *arg0, struct UnknownRecMixingStruct2 *arg1)
 {
     s32 i, j;
 
@@ -2181,7 +2156,7 @@ void sub_80E88CC(struct UnknownRecMixingStruct2 *arg0, struct UnknownRecMixingSt
 }
 
 NAKED
-void sub_80E8924(struct UnknownRecMixingStruct3 *arg0)
+static void sub_80E8924(struct UnknownRecMixingStruct3 *arg0)
 {
     asm_unified("push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -2270,7 +2245,7 @@ static void sub_80E89F8(struct RecordMixingDayCareMail *dst)
     *dst = *gUnknown_03001148;
 }
 
-static void sub_80E8A54(struct RecordMixingDayCareMail *src)
+static void SanitizeDayCareMailForRuby(struct RecordMixingDayCareMail *src)
 {
     s32 i;
 
@@ -2287,21 +2262,21 @@ static void sub_80E8A54(struct RecordMixingDayCareMail *src)
     }
 }
 
-static void nullsub_1405(union BattleTowerRecord *src)
+static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *src)
 {
 
 }
 
-static void sub_80E8AC0(union BattleTowerRecord *arg0)
+static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *dst)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        struct UnknownPokemonStruct *towerMon = &arg0->emerald.party[i];
+        struct UnknownPokemonStruct *towerMon = &dst->party[i];
         if (towerMon->species != 0)
             StripExtCtrlCodes(towerMon->nickname);
     }
 
-    sub_8164F70(arg0);
+    CalcEmeraldBattleTowerChecksum(dst);
 }

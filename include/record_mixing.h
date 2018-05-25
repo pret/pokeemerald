@@ -26,12 +26,10 @@ struct UnkRecordMixingStruct2
     struct UnkRecordMixingStruct2b field_120[2];
 };
 
-
-
 // Exported RAM declarations
 
 // Exported ROM declarations
-
+void sub_80E6BE8(void);
 void sub_80E8260(struct UnkRecordMixingStruct2 *arg0);
 
 #endif //GUARD_RECORD_MIXING_H

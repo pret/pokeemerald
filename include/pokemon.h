@@ -240,33 +240,6 @@ struct PokemonStorage
     /*0x83C2*/ u8 boxWallpapers[14];
 };
 
-struct UnknownPokemonStruct
-{
-    u16 species;
-    u16 heldItem;
-    u16 moves[4];
-    u8 level;
-    u8 ppBonuses;
-    u8 hpEV;
-    u8 attackEV;
-    u8 defenseEV;
-    u8 speedEV;
-    u8 spAttackEV;
-    u8 spDefenseEV;
-    u32 otId;
-    u32 hpIV:5;
-    u32 attackIV:5;
-    u32 defenseIV:5;
-    u32 speedIV:5;
-    u32 spAttackIV:5;
-    u32 spDefenseIV:5;
-    u32 gap:1;
-    u32 altAbility:1;
-    u32 personality;
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
-    u8 friendship;
-};
-
 struct UnknownPokemonSubStruct2
 {
     u16 species;

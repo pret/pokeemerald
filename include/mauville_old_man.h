@@ -19,8 +19,8 @@ void ScrSpecial_SetMauvilleOldManMapObjGfx(void);
 u8 sub_81201C8(void);
 void sub_8120B70(OldMan *dest);
 void sub_8120670(void);
-void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6);
-void sub_8120CD0(union OldMan * oldMan, u32 unused, u32 a2);
+void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 r1, u32 r6);
+void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 unused, u32 a2);
 void ResetMauvilleOldManFlag(void);
 
 #endif // GUARD_MAUVILLE_OLD_MAN_H

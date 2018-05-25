@@ -1673,7 +1673,7 @@ void sub_80EAEF4(struct SecretBaseRecordMixer *mixers)
     sub_80EABA4(&mixers[2], 0);
 }
 
-void sub_80EAF80(void *records, size_t recordSize, u8 linkIdx)
+void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx)
 {
     struct SecretBaseRecordMixer mixers[3];
     u16 i;

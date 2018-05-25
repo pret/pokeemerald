@@ -793,11 +793,11 @@ void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
     }
 }
 
-void sub_8120CD0(union OldMan * oldMan, u32 unused, u32 a2)
+void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
     u8 sp00[8];
     s32 i;
-    if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && a2 == LANGUAGE_JAPANESE)
+    if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && language == LANGUAGE_JAPANESE)
     {
         struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
 
@@ -816,9 +816,10 @@ void sub_8120CD0(union OldMan * oldMan, u32 unused, u32 a2)
     }
 }
 
-void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
+void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
-    u32 r2 = (r1 == LANGUAGE_JAPANESE || r1 == LANGUAGE_ENGLISH) ? 1 : 0;
+    bool32 isRuby = (version == VERSION_SAPPHIRE || version == VERSION_RUBY);
+
     switch (oldMan->common.id)
     {
         case MAUVILLE_MAN_TRADER:
@@ -826,7 +827,7 @@ void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
             struct MauvilleOldManTrader * trader = &oldMan->trader;
             s32 i;
 
-            if (r2)
+            if (isRuby)
             {
                 for (i = 0; i < 4; i++)
                 {
@@ -837,7 +838,7 @@ void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
                         trader->language[i] = LANGUAGE_JAPANESE;
                     }
                     else
-                        trader->language[i] = r6;
+                        trader->language[i] = language;
                 }
             }
             else
@@ -858,12 +859,12 @@ void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
             struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
             s32 i;
 
-            if (r2)
+            if (isRuby)
             {
                 for (i = 0; i < 4; i++)
                 {
                     if (storyteller->gameStatIDs[i] != 0)
-                        storyteller->language[i] = r6;
+                        storyteller->language[i] = language;
                 }
             }
         }
@@ -872,9 +873,9 @@ void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
         {
             struct MauvilleManBard * bard = &oldMan->bard;
 
-            if (r2)
+            if (isRuby)
             {
-                bard->language = r6;
+                bard->language = language;
             }
         }
             break;
@@ -882,9 +883,9 @@ void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
         {
             struct MauvilleManHipster * hipster = &oldMan->hipster;
 
-            if (r2)
+            if (isRuby)
             {
-                hipster->language = r6;
+                hipster->language = language;
             }
         }
             break;
@@ -892,9 +893,9 @@ void sub_8120D34(union OldMan * oldMan, u32 r1, u32 r6)
         {
             struct MauvilleManGiddy * giddy = &oldMan->giddy;
 
-            if (r2)
+            if (isRuby)
             {
-                giddy->language = r6;
+                giddy->language = language;
             }
         }
             break;

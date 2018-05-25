@@ -2431,8 +2431,8 @@ sub_80FAFF8: @ 80FAFF8
 	.pool
 	thumb_func_end sub_80FAFF8
 
-	thumb_func_start sub_80FB00C
-sub_80FB00C: @ 80FB00C
+	thumb_func_start CreateRecordMixingSprite
+CreateRecordMixingSprite: @ 80FB00C
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_0858E864
 	bl LoadSpritePalette
@@ -2478,10 +2478,10 @@ _080FB06E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80FB00C
+	thumb_func_end CreateRecordMixingSprite
 
-	thumb_func_start sub_80FB074
-sub_80FB074: @ 80FB074
+	thumb_func_start DestroyRecordMixingSprite
+DestroyRecordMixingSprite: @ 80FB074
 	push {r4-r7,lr}
 	ldr r4, =gSprites
 	adds r7, r4, 0
@@ -2509,6 +2509,6 @@ _080FB098:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80FB074
+	thumb_func_end DestroyRecordMixingSprite
 
 	.align 2, 0 @ Don't pad with nop.
