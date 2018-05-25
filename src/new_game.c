@@ -119,11 +119,10 @@ void ClearAllContestWinnerPics(void)
 void sub_8084400(void)
 {
     // probably clearing one struct for battle frontier
-    CpuFill32(0, gSaveBlock2Ptr->field_64C, 2272);
+    CpuFill32(0, &gSaveBlock2Ptr->battleTower, 2272);
 
-    // those look like strings
-    gSaveBlock2Ptr->field_EE1 = 0xFF;
-    gSaveBlock2Ptr->field_EE9 = 0xFF;
+    gSaveBlock2Ptr->field_EE1[0][0] = EOS;
+    gSaveBlock2Ptr->field_EE1[1][0] = EOS;
 }
 
 void WarpToTruck(void)
