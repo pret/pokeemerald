@@ -60,7 +60,7 @@ SECTIONS {
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
-        asm/rom_8034C54.o(.text);
+        src/rom_8034C54.o(.text);
         src/battle_bg.o(.text);
         src/battle_main.o(.text);
         src/battle_util.o(.text);
@@ -371,7 +371,7 @@ SECTIONS {
         data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
-        data/battle_1.o(.rodata);
+        src/rom_8034C54.o(.rodata);
         data/data2b.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
