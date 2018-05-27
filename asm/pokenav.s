@@ -1568,7 +1568,7 @@ sub_81C7E58: @ 81C7E58
 	ldr r2, [r6]
 	mov r8, r2
 	mov r0, r8
-	bl sub_8034974
+	bl GetDecompressedDataSize
 	adds r5, r0, 0
 	lsls r4, 5
 	ldr r0, =gPokenavLeftHeader_Pal
@@ -1650,7 +1650,7 @@ sub_81C7F24: @ 81C7F24
 	adds r1, r2
 	ldr r6, [r1]
 	adds r0, r6, 0
-	bl sub_8034974
+	bl GetDecompressedDataSize
 	adds r5, r0, 0
 	lsls r4, 5
 	ldr r0, =gPokenavLeftHeader_Pal

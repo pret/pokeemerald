@@ -818,7 +818,7 @@ static bool8 LoadBerryBlenderGfx(void)
     switch (sBerryBlenderData->loadGfxState)
     {
     case 0:
-        sBerryBlenderData->tilesBuffer = AllocZeroed(sub_8034974(sBlenderCenterGfx) + 100);
+        sBerryBlenderData->tilesBuffer = AllocZeroed(GetDecompressedDataSize(sBlenderCenterGfx) + 100);
         LZDecompressWram(sBlenderCenterGfx, sBerryBlenderData->tilesBuffer);
         sBerryBlenderData->loadGfxState++;
         break;
@@ -829,7 +829,7 @@ static bool8 LoadBerryBlenderGfx(void)
         sBerryBlenderData->loadGfxState++;
         break;
     case 2:
-        LoadBgTiles(2, sBerryBlenderData->tilesBuffer, sub_8034974(sBlenderCenterGfx), 0);
+        LoadBgTiles(2, sBerryBlenderData->tilesBuffer, GetDecompressedDataSize(sBlenderCenterGfx), 0);
         sBerryBlenderData->loadGfxState++;
         break;
     case 3:
@@ -837,7 +837,7 @@ static bool8 LoadBerryBlenderGfx(void)
         sBerryBlenderData->loadGfxState++;
         break;
     case 4:
-        LoadBgTiles(1, sBerryBlenderData->tilesBuffer, sub_8034974(gUnknown_08D91DB8), 0);
+        LoadBgTiles(1, sBerryBlenderData->tilesBuffer, GetDecompressedDataSize(gUnknown_08D91DB8), 0);
         sBerryBlenderData->loadGfxState++;
         break;
     case 5:
@@ -845,7 +845,7 @@ static bool8 LoadBerryBlenderGfx(void)
         sBerryBlenderData->loadGfxState++;
         break;
     case 6:
-        CopyToBgTilemapBuffer(1, sBerryBlenderData->tilesBuffer, sub_8034974(gUnknown_08D927EC), 0);
+        CopyToBgTilemapBuffer(1, sBerryBlenderData->tilesBuffer, GetDecompressedDataSize(gUnknown_08D927EC), 0);
         CopyBgTilemapBufferToVram(1);
         sBerryBlenderData->loadGfxState++;
         break;
