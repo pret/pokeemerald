@@ -151,15 +151,14 @@ extern const u8 gText_Space[];
 extern const u8 gText_BlenderMaxSpeedRecord[];
 extern const u8 gText_234Players[];
 
-extern void sub_81978B0(u16);
 extern void sub_800A418(void);
 extern u8 sub_800A9D8(void);
-extern bool8 sub_800A4D8(u8);
 extern void sub_809882C(u8, u16, u8);
 extern void copy_textbox_border_tile_patterns_to_vram(u8, u16, u8);
 extern void sub_81AABF0(void (*callback)(void));
 extern void sub_800B4C0(void);
 extern void ClearLinkCallback(void);
+extern void sub_8009F8C(void);
 extern void sub_8153430(void);
 extern bool8 sub_8153474(void);
 extern void sub_80EECEC(void);

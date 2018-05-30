@@ -103,6 +103,8 @@ enum LanguageId
 #define VARS_COUNT          256
 #define MAIL_COUNT          16
 #define SECRET_BASES_COUNT  20
+#define TV_SHOWS_COUNT      25
+#define POKE_NEWS_COUNT     16
 #define PC_ITEMS_COUNT      50
 #define BAG_ITEMS_COUNT     30
 #define BAG_KEYITEMS_COUNT  30
@@ -256,6 +258,56 @@ struct UnknownSaveBlock2Struct
     u8 field_EB;
 }; // sizeof = 0xEC
 
+struct UnkRecordMixingStruct
+{
+    u8 field_0[0x34];
+    u8 playerId[4];
+    u8 field_38[10];
+};
+
+struct UnknownPokemonStruct
+{
+    u16 species;
+    u16 heldItem;
+    u16 moves[4];
+    u8 level;
+    u8 ppBonuses;
+    u8 hpEV;
+    u8 attackEV;
+    u8 defenseEV;
+    u8 speedEV;
+    u8 spAttackEV;
+    u8 spDefenseEV;
+    u32 otId;
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 gap:1;
+    u32 altAbility:1;
+    u32 personality;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 friendship;
+};
+
+struct EmeraldBattleTowerRecord
+{
+    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[8];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ struct {
+        u16 easyChat[6];
+    } greeting;
+    /*0x1C*/ u8 filler_1c[0x18];
+    /*0x34*/ struct UnknownPokemonStruct party[4];
+    /*0xE4*/ u8 language;
+    /*0xE8*/ u32 checksum;
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
@@ -281,7 +333,12 @@ struct SaveBlock2
     /*0xAC*/ u32 encryptionKey;
 
         // TODO: fix and verify labels
-    /*0xB0*/ u8 field_B0[316];
+    /*0xB0*/ u8 field_B0;
+    /*0xB1*/ u8 field_B1;
+    /*0xB2*/ u8 field_B2_0:3;
+    /*0xB2*/ u8 field_B2_1:2;
+    /*0xB3*/ u8 field_B3[0x29];
+    /*0xDC*/ struct UnkRecordMixingStruct field_DC[4];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
@@ -290,7 +347,7 @@ struct SaveBlock2
 
         // All below could be a one giant struct
 
-    /*0x64C*/ u8 field_64C[236];
+    /*0x64C*/ struct EmeraldBattleTowerRecord battleTower;
     /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
@@ -307,22 +364,64 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
     /*0xCAA*/ u16 field_CAA[4];
     /*0xCB2*/ u16 battlePyramidWildHeaderId;
-    /*0xCB4*/ u16 field_CB4[41];
+    /*0xCB4*/ u16 field_CB4[30];
+    /*0xCF0*/ u16 field_CF0[2];
+    /*0xCF4*/ u16 field_CF4[2];
+    /*0xCF8*/ u16 field_CF8[2];
+    /*0xCFC*/ u16 field_CFC[5];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
-    /*0xD08*/ u8 filler_D08[0x112];
+    /*0xD08*/ u8 filler_D08;
+    /*0xD09*/ u8 filler_D09;
+    /*0xD0A*/ u8 filler_D0A;
+    /*0xD0B*/ u8 filler_D0B;
+    /*0xD0C*/ u8 filler_D0C;
+    /*0xD0D*/ u8 filler_D0D;
+    /*0xD0E*/ u8 filler_D0E;
+    /*0xD0F*/ u8 filler_D0F;
+    /*0xD10*/ u8 filler_D10;
+    /*0xD11*/ u8 filler_D11;
+    /*0xD12*/ u8 filler_D12;
+    /*0xD13*/ u8 filler_D13;
+    /*0xD14*/ u16 field_D14[2];
+    /*0xD18*/ u8 field_D18[0xB8];
+    /*0xDD0*/ u16 field_DD0[2];
+    /*0xDD4*/ u16 field_DD4[2];
+    /*0xDD8*/ u16 field_DD8;
+    /*0xDDA*/ u16 field_DDA;
+    /*0xDDC*/ u16 field_DDC;
+    /*0xDDE*/ u16 field_DDE[2];
+    /*0xDE2*/ u16 field_DE2;
+    /*0xDE4*/ u16 field_DE4;
+    /*0xDE6*/ u16 field_DE6;
+    /*0xDE8*/ u16 field_DE8;
+    /*0xDEA*/ u16 field_DEA[2];
+    /*0xDEE*/ u16 field_DEE;
+    /*0xDF0*/ u16 field_DF0;
+    /*0xDF2*/ u16 field_DF2;
+    /*0xDF4*/ u16 field_DF4;
+    /*0xDF6*/ u16 field_DF6;
+    /*0xDF8*/ u16 field_DF8;
+    /*0xDFA*/ u16 field_DFA;
+    /*0xDFC*/ u16 field_DFC;
+    /*0xDFE*/ u16 field_DFE;
+    /*0xE00*/ u16 field_E00;
+    /*0xE02*/ u16 field_E02;
+    /*0xE04*/ u16 field_E04;
+    /*0xE06*/ u16 field_E06;
+    /*0xE08*/ u16 field_E08[9];
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
-    /*0xE1C*/ u8 field_E1C[16];
+    /*0xE1C*/ u16 field_E1C;
+    /*0xE1E*/ u16 field_E1E[7];
     /*0xE2C*/ struct PyramidBag pyramidBag;
     /*0x???*/ u8 field_unkown[6];
     /*0xE6E*/ u16 battleTentWinStreak;
     /*0xE70*/ u8 field_E70[72];
     /*0xEB8*/ u16 frontierBattlePoints;
     /*0xEBA*/ u8 field_EBA[39];
-    /*0xEE1*/ u8 field_EE1;
-    /*0xEE2*/ u8 field_EE2[7];
-    /*0xEE9*/ u8 field_EE9;
-    /*0xEEA*/ u8 field_EEA[66];
+    /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH];
+    /*0xEF1*/ u8 field_EF1[2][4];
+    /*0xEF9*/ u8 field_EF9[51];
     // sizeof=0xF2C
 };
 
@@ -558,9 +657,9 @@ struct ContestWinner
     u8 contestRank;
 };
 
-struct DaycareMiscMon
+struct DayCareMail
 {
-    struct MailStruct mail;
+    struct MailStruct message;
     u8 OT_name[OT_NAME_LENGTH + 1];
     u8 monName[POKEMON_NAME_LENGTH + 1];
     u8 gameLanguage:4;
@@ -570,7 +669,7 @@ struct DaycareMiscMon
 struct DaycareMon
 {
     struct BoxPokemon mon;
-    struct DaycareMiscMon misc;
+    struct DayCareMail mail;
     u32 steps;
 };
 
@@ -579,12 +678,6 @@ struct DayCare
     struct DaycareMon mons[DAYCARE_MON_COUNT];
     u32 offspringPersonality;
     u8 stepCounter;
-};
-
-struct DayCareMail
-{
-    /*0x00*/ struct MailStruct message;
-    /*0x24*/ u8 names[19];
 };
 
 struct RecordMixingDayCareMail
@@ -642,12 +735,13 @@ struct LilycoveLadyContest
     /*0x00e*/ u8 language;
 };
 
-typedef union // TODO
+typedef union
 {
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavour favour;
     struct LilycoveLadyContest contest;
     u8 id;
+    u8 pad[0x40];
 } LilycoveLady;
 
 struct WaldaPhrase
@@ -714,8 +808,8 @@ struct SaveBlock1
     /*0x????*/ u8 decorDoll[40];
     /*0x????*/ u8 decorCushion[10];
     /*0x27CA*/ u8 padding_27CA[2];
-    /*0x27CC*/ TVShow tvShows[25];
-    /*0x2B50*/ PokeNews pokeNews[16];
+    /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
+    /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];
     /*0x2B90*/ u16 outbreakPokemonSpecies;
     /*0x2B92*/ u8 outbreakLocationMapNum;
     /*0x2B93*/ u8 outbreakLocationMapGroup;
@@ -747,7 +841,6 @@ struct SaveBlock1
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[52];
     /*0x3B58*/ LilycoveLady lilycoveLady;
-    /*0x3B88*/ u8 filler_3B88[0x10];
     /*0x3B98*/ struct UnkSaveSubstruct_3b98 unk_3B98[20];
     /*0x3C88*/ u8 filler_3C88[0xE8];
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;

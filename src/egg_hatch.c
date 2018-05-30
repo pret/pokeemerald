@@ -390,13 +390,13 @@ static bool8 sub_807158C(struct DayCare *daycare, u8 daycareId)
     struct DaycareMon *daycareMon = &daycare->mons[daycareId];
 
     GetBoxMonNick(&daycareMon->mon, nick);
-    if (daycareMon->misc.mail.itemId != 0
-        && (StringCompareWithoutExtCtrlCodes(nick, daycareMon->misc.monName) != 0
-            || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->misc.OT_name) != 0))
+    if (daycareMon->mail.message.itemId != 0
+        && (StringCompareWithoutExtCtrlCodes(nick, daycareMon->mail.monName) != 0
+            || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->mail.OT_name) != 0))
     {
         StringCopy(gStringVar1, nick);
-        TVShowConvertInternationalString(gStringVar2, daycareMon->misc.OT_name, daycareMon->misc.gameLanguage);
-        TVShowConvertInternationalString(gStringVar3, daycareMon->misc.monName, daycareMon->misc.monLanguage);
+        TVShowConvertInternationalString(gStringVar2, daycareMon->mail.OT_name, daycareMon->mail.gameLanguage);
+        TVShowConvertInternationalString(gStringVar3, daycareMon->mail.monName, daycareMon->mail.monLanguage);
         return TRUE;
     }
     return FALSE;

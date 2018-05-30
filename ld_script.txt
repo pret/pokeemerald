@@ -144,7 +144,7 @@ SECTIONS {
         src/naming_screen.o(.text);
         src/money.o(.text);
         asm/contest_effect.o(.text);
-        asm/record_mixing.o(.text);
+        src/record_mixing.o(.text);
         src/secret_base.o(.text);
         src/tv.o(.text);
         asm/contest_link_80F57C4.o(.text);
@@ -439,7 +439,7 @@ SECTIONS {
         src/naming_screen.o(.rodata);
         src/money.o(.rodata);
         data/contest_effect.o(.rodata);
-        data/record_mixing.o(.rodata);
+        src/record_mixing.o(.rodata);
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
         data/contest_link_80F57C4.o(.rodata);

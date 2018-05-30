@@ -47,7 +47,7 @@ extern void sub_81B9328(void);
 extern void CB2_ReturnToField(void);
 
 // this file's functions
-static void ClearDaycareMonMisc(struct DaycareMiscMon *misc);
+static void ClearDaycareMonMail(struct DayCareMail *mail);
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
 static u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, s32 daycareSlotId, u8 y);
@@ -179,13 +179,13 @@ static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycar
     {
         u8 mailId;
 
-        StringCopy(daycareMon->misc.OT_name, gSaveBlock2Ptr->playerName);
-        GetMonNick(mon, daycareMon->misc.monName);
-        StripExtCtrlCodes(daycareMon->misc.monName);
-        daycareMon->misc.gameLanguage = LANGUAGE_ENGLISH;
-        daycareMon->misc.monLanguage = GetMonData(mon, MON_DATA_LANGUAGE);
+        StringCopy(daycareMon->mail.OT_name, gSaveBlock2Ptr->playerName);
+        GetMonNick(mon, daycareMon->mail.monName);
+        StripExtCtrlCodes(daycareMon->mail.monName);
+        daycareMon->mail.gameLanguage = LANGUAGE_ENGLISH;
+        daycareMon->mail.monLanguage = GetMonData(mon, MON_DATA_LANGUAGE);
         mailId = GetMonData(mon, MON_DATA_MAIL);
-        daycareMon->misc.mail = gSaveBlock1Ptr->mail[mailId];
+        daycareMon->mail.message = gSaveBlock1Ptr->mail[mailId];
         TakeMailFromMon(mon);
     }
 
@@ -219,10 +219,10 @@ static void ShiftDaycareSlots(struct DayCare *daycare)
         daycare->mons[0].mon = daycare->mons[1].mon;
         ZeroBoxMonData(&daycare->mons[1].mon);
 
-        daycare->mons[0].misc = daycare->mons[1].misc;
+        daycare->mons[0].mail = daycare->mons[1].mail;
         daycare->mons[0].steps = daycare->mons[1].steps;
         daycare->mons[1].steps = 0;
-        ClearDaycareMonMisc(&daycare->mons[1].misc);
+        ClearDaycareMonMail(&daycare->mons[1].mail);
     }
 }
 
@@ -277,10 +277,10 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     }
 
     gPlayerParty[PARTY_SIZE - 1] = pokemon;
-    if (daycareMon->misc.mail.itemId)
+    if (daycareMon->mail.message.itemId)
     {
-        GiveMailToMon2(&gPlayerParty[PARTY_SIZE - 1], &daycareMon->misc.mail);
-        ClearDaycareMonMisc(&daycareMon->misc);
+        GiveMailToMon2(&gPlayerParty[PARTY_SIZE - 1], &daycareMon->mail.message);
+        ClearDaycareMonMail(&daycareMon->mail);
     }
 
     ZeroBoxMonData(&daycareMon->mon);
@@ -364,23 +364,23 @@ u8 GetNumLevelsGainedFromDaycare(void)
     return 0;
 }
 
-static void ClearDaycareMonMisc(struct DaycareMiscMon *misc)
+static void ClearDaycareMonMail(struct DayCareMail *mail)
 {
     s32 i;
 
     for (i = 0; i < OT_NAME_LENGTH + 1; i++)
-        misc->OT_name[i] = 0;
+        mail->OT_name[i] = 0;
     for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
-        misc->monName[i] = 0;
+        mail->monName[i] = 0;
 
-    ClearMailStruct(&misc->mail);
+    ClearMailStruct(&mail->message);
 }
 
 static void ClearDaycareMon(struct DaycareMon *daycareMon)
 {
     ZeroBoxMonData(&daycareMon->mon);
     daycareMon->steps = 0;
-    ClearDaycareMonMisc(&daycareMon->misc);
+    ClearDaycareMonMail(&daycareMon->mail);
 }
 
 static void ClearAllDaycareData(struct DayCare *daycare)

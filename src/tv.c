@@ -3606,7 +3606,7 @@ void sub_80F01B8(void)
     FlagSet(0x396);
 }
 
-void sub_80F01E8(void *src, u32 size, u8 masterIdx)
+void ReceiveTvShowsData(void *src, u32 size, u8 masterIdx)
 {
     u8 i;
     u16 version;
@@ -4434,7 +4434,7 @@ static void sub_80F0C04(void)
     }
 }
 
-void sub_80F0C7C(void *src, u32 size, u8 masterIdx)
+void ReceivePokeNewsData(void *src, u32 size, u8 masterIdx)
 {
     u8 i;
     PokeNews (*rmBuffer2)[4][16];

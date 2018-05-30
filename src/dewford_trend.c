@@ -158,7 +158,7 @@ static void sub_8122804(struct EasyChatPair *s, u16 b, u8 c)
     }
 }
 
-void sub_812287C(void *a, u32 b, u8 unused)
+void ReceiveEasyChatPairsData(void *a, u32 b, u8 unused)
 {
     u16 i, j, r3, players;
     struct EasyChatPair *buffer1, *buffer2, *src, *dst, *foo_of_buffer2;

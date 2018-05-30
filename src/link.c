@@ -798,7 +798,7 @@ bool32 sub_800A040(void)
     return TRUE;
 }
 
-bool32 sub_800A064(void)
+bool32 Link_AnyPartnersPlayingRubyOrSapphire(void)
 {
     if (sub_8009FF8(VERSION_RUBY, VERSION_SAPPHIRE) >= 0)
     {

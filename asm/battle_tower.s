@@ -3746,7 +3746,7 @@ _08163FF4:
 	ldr r0, [r6]
 	ldr r1, =0x0000064c
 	adds r0, r1
-	bl sub_8164F70
+	bl CalcEmeraldBattleTowerChecksum
 	bl sub_8163E90
 	pop {r3,r4}
 	mov r8, r3
@@ -5484,8 +5484,8 @@ _08164F52:
 	.pool
 	thumb_func_end sub_8164ED8
 
-	thumb_func_start sub_8164F70
-sub_8164F70: @ 8164F70
+	thumb_func_start CalcEmeraldBattleTowerChecksum
+CalcEmeraldBattleTowerChecksum: @ 8164F70
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r2, 0xE8
@@ -5504,7 +5504,7 @@ _08164F7E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8164F70
+	thumb_func_end CalcEmeraldBattleTowerChecksum
 
 	thumb_func_start sub_8164F94
 sub_8164F94: @ 8164F94
@@ -6750,7 +6750,7 @@ _08165988:
 	ldr r1, [sp, 0x10]
 	bl CpuSet
 	adds r0, r5, 0
-	bl sub_8164F70
+	bl CalcEmeraldBattleTowerChecksum
 	movs r0, 0x1
 _081659BE:
 	add sp, 0x14

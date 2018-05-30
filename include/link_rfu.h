@@ -231,5 +231,6 @@ struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void);
 void sub_8011068(u8 a0);
 void sub_8011170(u32 a0);
 void sub_8011A64(u8 a0, u16 a1);
+u8 sub_801048C(bool32 a0);
 
 #endif //GUARD_LINK_RFU_H
