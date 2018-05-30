@@ -1616,14 +1616,14 @@ void sub_80E8260(struct UnkRecordMixingStruct2 *dst)
         for (j = 0; j < 2; j++)
         {
             CopyUnalignedWord(dst->field_0[i][j].playerId, gSaveBlock2Ptr->playerTrainerId);
-            dst->field_0[i][j].language = LANGUAGE_ENGLISH;
+            dst->field_0[i][j].language = GAME_LANGUAGE;
             StringCopy(dst->field_0[i][j].playerName, gSaveBlock2Ptr->playerName);
         }
     }
 
     for (j = 0; j < 2; j++)
     {
-        dst->field_120[j].language = LANGUAGE_ENGLISH;
+        dst->field_120[j].language = GAME_LANGUAGE;
         CopyUnalignedWord(dst->field_120[j].playerId1, gSaveBlock2Ptr->playerTrainerId);
         CopyUnalignedWord(dst->field_120[j].playerId2, gSaveBlock2Ptr->field_EF1[j]);
         StringCopy(dst->field_120[j].playerName1, gSaveBlock2Ptr->playerName);
