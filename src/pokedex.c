@@ -917,19 +917,7 @@ void sub_80BB534(void)
         default:
             SetVBlankCallback(NULL);
             sub_80C09B0(0);
-            addr = (u8 *)VRAM;
-            size = VRAM_SIZE;
-            while (1)
-            {
-                DmaFill16(3, 0, addr, 0x1000);
-                addr += 0x1000;
-                size -= 0x1000;
-                if (size <= 0x1000)
-                {
-                    DmaFill16(3, 0, addr, size);
-                    break;
-                }
-            }
+            DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 0x1000)
             DmaClear32(3, OAM, OAM_SIZE);
             DmaClear16(3, PLTT, PLTT_SIZE);
             gMain.state = 1;
@@ -1024,7 +1012,7 @@ void sub_80BB7D4(u8 taskId)
         else if (gMain.newKeys & SELECT_BUTTON)
         {
             PlaySE(SE_SELECT);
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].data[0] = sub_80C1258();
             gUnknown_02039B4C->unk64E = 0;
             gUnknown_02039B4C->unk62A = gUnknown_02039B4C->unk62C;
@@ -1037,7 +1025,7 @@ void sub_80BB7D4(u8 taskId)
         }
         else if (gMain.newKeys & B_BUTTON)
         {
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = sub_80BBDE8;
             PlaySE(SE_PC_OFF);
         }
@@ -1063,7 +1051,9 @@ void sub_80BBA78(u8 taskId)
 
     //If menu is not open, slide it up, on screen
     if (gUnknown_02039B4C->menuY != 80)
+    {
         gUnknown_02039B4C->menuY += 8;
+    }
     else
     {
         if (gMain.newKeys & A_BUTTON)
@@ -1089,7 +1079,7 @@ void sub_80BBA78(u8 taskId)
                     gMain.newKeys |= START_BUTTON;  //Exit menu
                     break;
                 case 3: //CLOSE POKEDEX
-                    BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                     gTasks[taskId].func = sub_80BBDE8;
                     PlaySE(SE_PC_OFF);
                     break;
@@ -1221,7 +1211,7 @@ void sub_80BBEB8(u8 taskId)
         }
         else if (gMain.newKeys & SELECT_BUTTON)
         {
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].data[0] = sub_80C1258();
             gUnknown_02039B4C->unk64E = 0;
             gTasks[taskId].func = sub_80BBD1C;
@@ -1230,7 +1220,7 @@ void sub_80BBEB8(u8 taskId)
         }
         else if (gMain.newKeys & B_BUTTON)
         {
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = sub_80BC3DC;
             PlaySE(SE_PC_OFF);
         }
@@ -1283,12 +1273,12 @@ void sub_80BC0F8(u8 taskId)
                     gMain.newKeys |= START_BUTTON;
                     break;
                 case 3: //BACK TO POKEDEX
-                    BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                     gTasks[taskId].func = sub_80BC3DC;
                     PlaySE(SE_TRACK_DOOR);
                     break;
                 case 4: //CLOSE POKEDEX
-                    BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                     gTasks[taskId].func = sub_80BC47C;
                     PlaySE(SE_PC_OFF);
                     break;
@@ -1431,7 +1421,7 @@ bool8 sub_80BC514(u8 a)
             gMain.state++;
             break;
         case 4:
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
             SetVBlankCallback(sub_80BB370);
             gMain.state++;
             break;
@@ -2640,14 +2630,14 @@ void sub_80BEDF4(u8 taskId)
 {
     if (gTasks[taskId].data[0] != 0)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = sub_80BF038;
         PlaySE(SE_Z_SCROLL);
         return;
     }
     if (gMain.newKeys & B_BUTTON)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = sub_80BF070;
         PlaySE(SE_PC_OFF);
         return;
@@ -2657,13 +2647,13 @@ void sub_80BEDF4(u8 taskId)
         switch (gUnknown_02039B4C->selectedScreen)
         {
             case AREA_SCREEN:
-                BeginNormalPaletteFade(-0x15, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB_BLACK);
                 gUnknown_02039B4C->unk64E = 1;
                 gTasks[taskId].func = sub_80BEFD0;
                 PlaySE(SE_PIN);
                 break;
             case CRY_SCREEN:
-                BeginNormalPaletteFade(-0x15, 0, 0, 0x10, RGB_BLACK);
+                BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
                 gUnknown_02039B4C->unk64E = 2;
                 gTasks[taskId].func = sub_80BEFD0;
                 PlaySE(SE_PIN);
@@ -2675,14 +2665,14 @@ void sub_80BEDF4(u8 taskId)
                 }
                 else
                 {
-                    BeginNormalPaletteFade(-0x15, 0, 0, 0x10, RGB_BLACK);
+                    BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
                     gUnknown_02039B4C->unk64E = 3;
                     gTasks[taskId].func = sub_80BEFD0;
                     PlaySE(SE_PIN);
                 }
                 break;
             case CANCEL_SCREEN:
-                BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                 gTasks[taskId].func = sub_80BF070;
                 PlaySE(SE_PC_OFF);
                 break;
@@ -2886,7 +2876,7 @@ void sub_80BF250(u8 taskId)
             }
             break;
         case 8:
-            BeginNormalPaletteFade(-0x15, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0x10, 0, RGB_BLACK);
             SetVBlankCallback(gUnknown_030060B4);
             gMain.state++;
             break;
@@ -2928,7 +2918,7 @@ void sub_80BF5CC(u8 taskId)
     {
         if (gMain.newKeys & B_BUTTON)
         {
-            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
             m4aMPlayContinue(&gMPlayInfo_BGM);
             gUnknown_02039B4C->unk64E = 1;
             gTasks[taskId].func = sub_80BF790;
@@ -2938,7 +2928,7 @@ void sub_80BF5CC(u8 taskId)
         if ((gMain.newKeys & DPAD_LEFT)
          || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
-            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
             m4aMPlayContinue(&gMPlayInfo_BGM);
             gUnknown_02039B4C->unk64E = 2;
             gTasks[taskId].func = sub_80BF790;
@@ -2954,7 +2944,7 @@ void sub_80BF5CC(u8 taskId)
             }
             else
             {
-                BeginNormalPaletteFade(-0x15, 0, 0, 0x10, RGB_BLACK);
+                BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
                 m4aMPlayContinue(&gMPlayInfo_BGM);
                 gUnknown_02039B4C->unk64E = 3;
                 gTasks[taskId].func = sub_80BF790;
@@ -2992,9 +2982,9 @@ void sub_80BF7FC(u8 a)
     u16 unk;
 
     if (a != 0)
-        unk = 0x392;
+        unk = RGB(18, 28, 0);
     else
-        unk = 0x2AF;
+        unk = RGB(15, 21, 0);
     LoadPalette(&unk, 0x5D, 2);
 }
 
@@ -3070,7 +3060,7 @@ void sub_80BF82C(u8 taskId)
             gMain.state++;
             break;
         case 7:
-            BeginNormalPaletteFade(-0x15, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0x10, 0, RGB_BLACK);
             SetVBlankCallback(gUnknown_030060B4);
             gMain.state++;
             break;
@@ -3100,7 +3090,7 @@ void sub_80BFBB0(u8 taskId)
 {
     if (gMain.newKeys & B_BUTTON)
     {
-        BeginNormalPaletteFade(-0x15, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
         gUnknown_02039B4C->unk64E = 1;
         gTasks[taskId].func = sub_80BFC78;
         PlaySE(SE_PC_OFF);
@@ -3108,7 +3098,7 @@ void sub_80BFBB0(u8 taskId)
     else if ((gMain.newKeys & DPAD_LEFT)
      || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
     {
-        BeginNormalPaletteFade(-0x15, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
         gUnknown_02039B4C->unk64E = 2;
         gTasks[taskId].func = sub_80BFC78;
         PlaySE(SE_Z_PAGE);
@@ -3388,7 +3378,7 @@ void sub_80BFE38(u8 taskId)
         case 4:
             spriteId = sub_80C0E9C(dexNum, 0x30, 0x38, 0);
             gSprites[spriteId].oam.priority = 0;
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
             SetVBlankCallback(gUnknown_030060B4);
             gTasks[taskId].data[3] = spriteId;
             gTasks[taskId].data[0]++;
@@ -4031,37 +4021,37 @@ u16 sub_80C0944(void)
 
 void sub_80C09B0(u16 a)
 {
-    if (!(a & 0x100))
+    if (!(a & DISPCNT_BG0_ON))
     {
-        ClearGpuRegBits(0, 0x100);
+        ClearGpuRegBits(0, DISPCNT_BG0_ON);
         SetGpuReg(REG_OFFSET_BG0CNT, 0);
         SetGpuReg(REG_OFFSET_BG0HOFS, 0);
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
     }
-    if (!(a & 0x200))
+    if (!(a & DISPCNT_BG1_ON))
     {
-        ClearGpuRegBits(0, 0x200);
+        ClearGpuRegBits(0, DISPCNT_BG1_ON);
         SetGpuReg(REG_OFFSET_BG1CNT, 0);
         SetGpuReg(REG_OFFSET_BG1HOFS, 0);
         SetGpuReg(REG_OFFSET_BG1VOFS, 0);
     }
-    if (!(a & 0x400))
+    if (!(a & DISPCNT_BG2_ON))
     {
-        ClearGpuRegBits(0, 0x400);
+        ClearGpuRegBits(0, DISPCNT_BG2_ON);
         SetGpuReg(REG_OFFSET_BG2CNT, 0);
         SetGpuReg(REG_OFFSET_BG2HOFS, 0);
         SetGpuReg(REG_OFFSET_BG2VOFS, 0);
     }
-    if (!(a & 0x800))
+    if (!(a & DISPCNT_BG3_ON))
     {
-        ClearGpuRegBits(0, 0x800);
+        ClearGpuRegBits(0, DISPCNT_BG3_ON);
         SetGpuReg(REG_OFFSET_BG3CNT, 0);
         SetGpuReg(REG_OFFSET_BG3HOFS, 0);
         SetGpuReg(REG_OFFSET_BG3VOFS, 0);
     }
-    if (!(a & 0x1000))
+    if (!(a & DISPCNT_OBJ_ON))
     {
-        ClearGpuRegBits(0, 0x1000);
+        ClearGpuRegBits(0, DISPCNT_OBJ_ON);
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
@@ -4105,7 +4095,7 @@ u8 sub_80C0B44(u8 a, u16 num, u8 b, u8 c)
             break;
         case 0:
             for (i = 0; i < 5; i++)
-                str[i] = 0xAE;
+                str[i] = CHAR_HYPHEN;
             break;
     }
     sub_80C0A88(a, str, b, c);
@@ -4433,7 +4423,7 @@ void sub_80C12E0(u8 taskId)
             gMain.state++;
             break;
         case 2:
-            BeginNormalPaletteFade(-1, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
             gMain.state++;
             break;
         case 3:
@@ -4796,7 +4786,7 @@ void sub_80C1BCC(u8 taskId)
 
 void sub_80C1D38(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = sub_80C1D70;
 }
 
