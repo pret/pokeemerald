@@ -5,290 +5,6 @@
 
 	.text
 	
-	thumb_func_start nullsub_89
-nullsub_89: @ 80124E8
-	bx lr
-	thumb_func_end nullsub_89
-
-	thumb_func_start sub_80124EC
-sub_80124EC: @ 80124EC
-	push {r4-r6,lr}
-	sub sp, 0x8
-	adds r4, r1, 0
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r2, 24
-	lsrs r5, r2, 24
-	adds r0, r6, 0
-	movs r1, 0x11
-	bl FillWindowPixelBuffer
-	lsls r4, 8
-	movs r0, 0x90
-	lsls r0, 6
-	cmp r4, r0
-	beq _08012588
-	cmp r4, r0
-	bgt _08012526
-	movs r0, 0x80
-	lsls r0, 2
-	cmp r4, r0
-	beq _08012538
-	movs r0, 0x80
-	lsls r0, 3
-	cmp r4, r0
-	beq _08012544
-	b _080125A6
-_08012526:
-	movs r0, 0x94
-	lsls r0, 6
-	cmp r4, r0
-	beq _08012554
-	movs r0, 0xD4
-	lsls r0, 6
-	cmp r4, r0
-	beq _08012564
-	b _080125A6
-_08012538:
-	ldr r1, =gUnknown_082EDB60
-	subs r0, r5, 0x1
-	lsls r0, 2
-	b _0801256C
-	.pool
-_08012544:
-	ldr r1, =gUnknown_082EDB60
-	subs r0, r5, 0x1
-	lsls r0, 2
-	adds r1, 0x14
-	b _0801256C
-	.pool
-_08012554:
-	ldr r1, =gUnknown_082EDB60
-	subs r0, r5, 0x1
-	lsls r0, 2
-	adds r1, 0x28
-	b _0801256C
-	.pool
-_08012564:
-	ldr r1, =gUnknown_082EDB60
-	subs r0, r5, 0x1
-	lsls r0, 2
-	adds r1, 0x3C
-_0801256C:
-	adds r0, r1
-	ldr r2, [r0]
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	adds r0, r6, 0
-	movs r1, 0x1
-	movs r3, 0
-	bl sub_80173E0
-	b _080125A6
-	.pool
-_08012588:
-	ldr r1, =gUnknown_082EDB60
-	subs r0, r5, 0x1
-	lsls r0, 2
-	adds r1, 0x50
-	adds r0, r1
-	ldr r2, [r0]
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	adds r0, r6, 0
-	movs r1, 0x1
-	movs r3, 0
-	bl sub_80173E0
-_080125A6:
-	adds r0, r6, 0
-	movs r1, 0x2
-	bl CopyWindowToVram
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80124EC
-
-	thumb_func_start sub_80125BC
-sub_80125BC: @ 80125BC
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	sub sp, 0x28
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r6, =gSaveBlock2Ptr
-	ldr r2, [r6]
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0
-	mov r8, r0
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	movs r1, 0x1
-	movs r3, 0
-	bl sub_80173E0
-	ldr r1, =gText_UnkCtrlCodeF907
-	add r0, sp, 0x8
-	bl StringCopy
-	adds r5, r0, 0
-	ldr r0, [r6]
-	adds r0, 0xA
-	bl sub_8015658
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r5, 0
-	movs r2, 0x2
-	movs r3, 0x5
-	bl ConvertIntToDecimalStringN
-	movs r0, 0x11
-	str r0, [sp]
-	mov r0, r8
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	movs r1, 0x1
-	add r2, sp, 0x8
-	movs r3, 0
-	bl sub_80173E0
-	add sp, 0x28
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80125BC
-
-	thumb_func_start sub_801262C
-sub_801262C: @ 801262C
-	push {lr}
-	lsls r1, 24
-	lsrs r1, 24
-	subs r0, r1, 0x1
-	cmp r0, 0x1B
-	bhi _080126C0
-	lsls r0, 2
-	ldr r1, =_08012648
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_08012648:
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126C0
-	.4byte _080126C0
-	.4byte _080126C0
-	.4byte _080126C0
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126C0
-	.4byte _080126C0
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126C0
-	.4byte _080126C0
-	.4byte _080126C0
-	.4byte _080126C0
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-	.4byte _080126B8
-_080126B8:
-	ldr r0, =gStringVar4
-	ldr r1, =gText_AwaitingCommunication
-	bl StringExpandPlaceholders
-_080126C0:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_801262C
-
-	thumb_func_start sub_80126CC
-sub_80126CC: @ 80126CC
-	push {lr}
-	subs r0, 0x9
-	cmp r0, 0x12
-	bhi _08012734
-	lsls r0, 2
-	ldr r1, =_080126E4
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080126E4:
-	.4byte _08012730
-	.4byte _08012730
-	.4byte _08012730
-	.4byte _08012734
-	.4byte _08012734
-	.4byte _08012734
-	.4byte _08012730
-	.4byte _08012730
-	.4byte _08012734
-	.4byte _08012734
-	.4byte _08012734
-	.4byte _08012734
-	.4byte _08012734
-	.4byte _08012734
-	.4byte _08012730
-	.4byte _08012730
-	.4byte _08012730
-	.4byte _08012730
-	.4byte _08012730
-_08012730:
-	movs r0, 0x1
-	b _08012736
-_08012734:
-	movs r0, 0
-_08012736:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80126CC
-
-	thumb_func_start BerryBlenderLinkBecomeLeader
-BerryBlenderLinkBecomeLeader: @ 801273C
-	push {lr}
-	ldr r0, =sub_8012780
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gUnknown_02022C30
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, =gTasks + 0x8
-	adds r1, r0
-	str r1, [r2]
-	ldr r0, =gUnknown_03000DA0
-	str r1, [r0]
-	movs r0, 0
-	strb r0, [r1, 0xC]
-	strb r0, [r1, 0xD]
-	ldr r1, =gSpecialVar_Result
-	strh r0, [r1]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BerryBlenderLinkBecomeLeader
 
 	thumb_func_start sub_8012780
 sub_8012780: @ 8012780
@@ -730,7 +446,7 @@ _08012BA8:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r2, [r6, 0x13]
@@ -772,7 +488,7 @@ _08012BF6:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -791,7 +507,7 @@ _08012C28:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -816,7 +532,7 @@ _08012C5C:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r2, [r6, 0x13]
@@ -890,7 +606,7 @@ _08012D04:
 	adds r4, r0, 0
 	adds r4, 0x10
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -2564,7 +2280,7 @@ sub_8013BD8: @ 8013BD8
 	adds r4, r0, 0
 	adds r4, 0x10
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -4334,7 +4050,7 @@ _08014C82:
 	ldr r0, [r5]
 	adds r0, r1
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -4353,7 +4069,7 @@ _08014CC4:
 	ldr r0, [r5]
 	adds r0, r1
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -4374,7 +4090,7 @@ _08014CF2:
 	ldr r0, [r5]
 	adds r0, r1
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r2, [r5, 0x13]
@@ -4423,7 +4139,7 @@ _08014D64:
 	adds r4, r0, 0
 	adds r4, 0x10
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -4832,7 +4548,7 @@ _080150D6:
 	adds r4, r0, 0
 	adds r4, 0x10
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -5193,7 +4909,7 @@ _08015452:
 	adds r4, r0, 0
 	adds r4, 0x10
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -5391,14 +5107,14 @@ UnionRoomSpecial: @ 801560C
 	.pool
 	thumb_func_end UnionRoomSpecial
 
-	thumb_func_start sub_8015658
-sub_8015658: @ 8015658
+	thumb_func_start ReadAsU16
+ReadAsU16: @ 8015658
 	ldrb r1, [r0, 0x1]
 	lsls r1, 8
 	ldrb r0, [r0]
 	orrs r0, r1
 	bx lr
-	thumb_func_end sub_8015658
+	thumb_func_end ReadAsU16
 
 	thumb_func_start sub_8015664
 sub_8015664: @ 8015664
@@ -7528,7 +7244,7 @@ _08016A4A:
 	ldr r0, [r5]
 	adds r0, r4
 	adds r0, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, sp
@@ -9531,7 +9247,7 @@ sub_80179AC: @ 80179AC
 	bl sub_8018404
 	adds r4, 0x2
 	adds r0, r4, 0
-	bl sub_8015658
+	bl ReadAsU16
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, sp
@@ -9563,7 +9279,7 @@ sub_80179D4: @ 80179D4
 	adds r1, r5, 0
 	bl sub_8018404
 	adds r0, r5, 0x2
-	bl sub_8015658
+	bl ReadAsU16
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
