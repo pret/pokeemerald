@@ -2651,8 +2651,27 @@ extern const u8 gBattleTerrainPalette_StadiumGlacia[];
 extern const u8 gBattleTerrainPalette_StadiumDrake[];
 extern const u8 gBattleTerrainPalette_StadiumWallace[];
 
+// pokedex
 extern const u8 gPokedexMenu2_Gfx[];
-extern const u8 gPokedexText_Pal[];
+extern const u16 gPokedexText_Pal[];
+extern const u8 gPokedexMenu_Gfx[];
+extern const u8 gUnknown_08DC2C5C[];
+extern const u8 gUnknown_08DC2DAC[];
+extern const u8 gUnknown_08DC2A08[];
+extern const u8 gUnknown_08DC2B1C[];
+extern const u16 gPokedexHoennBg_Pal[];
+extern const u16 gPokedexText_Pal[];
+extern const u16 gPokedexNationalBg_Pal[];
+extern const u8 gUnknown_08DC3080[];
+extern const u8 gUnknown_08DC3198[];
+extern const u8 gUnknown_08DC2E6C[];
+extern const u8 gUnknown_08DC2F5C[];
+extern const u8 gUnknown_08DC2FEC[];
+extern const u16 gPokedexCaughtScreenFade_Pal[];
+extern const u8 gPokedexSearchMenu_Gfx[];
+extern const u8 gPokedexSearch2_Tilemap[];
+extern const u8 gPokedexSearch1_Tilemap[];
+extern const u16 gPokedexSearchMenu_Pal[];
 
 // berry tag screen
 extern const u8 gUnknown_08D9BB44[];
