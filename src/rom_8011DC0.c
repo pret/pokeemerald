@@ -14,6 +14,16 @@
 #include "script.h"
 #include "sound.h"
 #include "constants/songs.h"
+#include "constants/game_stat.h"
+#include "trade.h"
+#include "trainer_card.h"
+#include "overworld.h"
+#include "battle.h"
+#include "load_save.h"
+#include "cable_club.h"
+#include "field_control_avatar.h"
+
+extern void HealPlayerParty(void);
 
 struct UnkStruct_Shared
 {
@@ -105,10 +115,29 @@ union UnkUnion_Main
     struct UnkStruct_Group *group;
 };
 
+struct TradeUnkStruct
+{
+    u16 field_0;
+    u16 field_2;
+    u32 field_4;
+    u32 field_8;
+    u16 field_A;
+    u16 field_C;
+    u16 field_E;
+    u16 field_10;
+    u16 field_12;
+    u32 field_14;
+};
+
+extern struct TradeUnkStruct gUnknown_02022C40;
+
 extern union UnkUnion_Main gUnknown_02022C30;
 
 extern u8 gUnknown_02022C2C;
 extern u8 gUnknown_02022C2D;
+
+extern u8 gFieldLinkPlayerCount;
+extern u8 gUnknown_03005DB4;
 
 // IWRAM vars
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
@@ -122,6 +151,7 @@ void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5)
 u16 ReadAsU16(const u8 *ptr);
 void sub_8012780(u8 taskId);
 void sub_80134E8(u8 taskId);
+void sub_8013C7C(u8 taskId);
 void sub_80175EC(struct UnkStruct_Main4 *arg0, u8 count);
 void sub_8017580(struct UnkStruct_Main0 *arg0, u8 count);
 u8 sub_8016FC0(struct UnkStruct_Main4 *arg0, u32 arg1);
@@ -135,11 +165,17 @@ void sub_80149C4(void);
 u8 sub_80132D4(struct UnkStruct_Main0 *arg0);
 void sub_80178A0(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
 u32 sub_80176E4(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
-void sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_Shared *arg1, u8 arg2);
+u8 sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_Shared *arg1, u8 arg2);
 u8 sub_8013E44(void);
 u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id);
 void sub_8013BD8(struct UnkStruct_Group *arg0, s32 id);
 void sub_80173D4(void);
+void sub_80177B8(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
+bool32 sub_8017678(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
+u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
+void sub_801807C(struct TradeUnkStruct *arg0);
+void sub_801B940(void);
+void sub_801B94C(u16);
 
 // const rom data
 extern const u8 *const gUnknown_082EDB60[][5];
@@ -914,7 +950,7 @@ void sub_80134E8(u8 taskId)
             id = ListMenuHandleInputGetItemId(data->listTaskId);
             if (gMain.newKeys & A_BUTTON && id != -1)
             {
-                // this unused variable is needed to match
+                // this unused variable along with the assignment is needed to match
                 u32 unusedVar;
                 unusedVar  = data->field_0->arr[id].unk.field_0.unk_0a_0;
 
@@ -1113,4 +1149,349 @@ void sub_80134E8(u8 taskId)
         DestroyTask(taskId);
         break;
     }
+}
+
+u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
+{
+    struct UnkStruct_x20 *structPtr = &arg0->field_0->arr[id];
+
+    if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_01_2 != 3)
+    {
+        if (!(gSaveBlock2Ptr->specialSaveWarp & 0x80))
+            return 1;
+        else if (structPtr->unk.field_0.unk_00_7)
+            return 0;
+    }
+    else
+    {
+        return 0;
+    }
+
+    return 2;
+}
+
+void sub_8013BD8(struct UnkStruct_Group *data, s32 id)
+{
+    data->field_F = id;
+    sub_800E0E8();
+    CreateWirelessStatusIndicatorSprite(0, 0);
+    sub_81AE70C(data->listTaskId);
+    sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
+    sub_8011090(gUnknown_082F0530[gSpecialVar_0x8004], 0, 1);
+    sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.playerTrainerId));
+}
+
+u8 sub_8013C40(void)
+{
+    u8 taskId;
+    struct UnkStruct_Group *dataPtr;
+
+    taskId = CreateTask(sub_8013C7C, 0);
+    gUnknown_02022C30.group = dataPtr = (void*)(gTasks[taskId].data);
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+
+    gUnknown_03000DA4 = dataPtr;
+
+    return taskId;
+}
+
+void sub_8013C7C(u8 taskId)
+{
+    struct UnkStruct_Group *data = gUnknown_02022C30.group;
+
+    switch (data->state)
+    {
+    case 0:
+        sub_8010F84(0, 0, 0);
+        sub_800B488();
+        OpenLink();
+        sub_8011C5C();
+        sub_80111B0(TRUE);
+        data->field_4 = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0x200);
+        data->state = 2;
+        break;
+    case 2:
+        sub_80175EC(data->field_4, 4);
+        sub_8017580(data->field_0, 16);
+        data->field_11 = sub_8016FC0(data->field_4, 0xFF);
+        data->field_F = 0;
+        data->state = 3;
+        break;
+    case 3:
+        if (sub_8013E44() == 1)
+            PlaySE(SE_PC_LOGIN);
+        if (gTasks[taskId].data[15] == 0xFF)
+            data->state = 10;
+        break;
+    case 10:
+        DestroyTask(data->field_11);
+        Free(data->field_0);
+        Free(data->field_4);
+        sub_800EDD4();
+        data->state++;
+        break;
+    case 11:
+        sub_800EDD4();
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+extern const u8 *const gUnknown_082F04D8[22];
+
+bool32 sub_8013D88(u32 arg0, u32 id)
+{
+    if (id == 0xFF)
+        return TRUE;
+
+    if (id <= ARRAY_COUNT(gUnknown_082F04D8)) // UB: <= may access data outside the array
+    {
+        const u8 *bytes = gUnknown_082F04D8[id];
+
+        while ((*(bytes) != 0xFF))
+        {
+            if ((*bytes) == arg0)
+                return TRUE;
+            bytes++;
+        }
+    }
+
+    return FALSE;
+}
+
+u8 sub_8013DBC(struct UnkStruct_Group *data, u32 id)
+{
+    if (data->field_0->arr[id].field_1A_0 == 1)
+    {
+        if (data->field_0->arr[id].unk.field_0.unk_0a_7 != 0)
+            return 3;
+        else if (data->field_0->arr[id].field_1A_1 != 0)
+            return 1;
+        else if (data->field_0->arr[id].field_1B != 0)
+            return 2;
+    }
+
+    return 0;
+}
+
+void sub_8013DF4(u8 arg0, u32 id, u8 arg2)
+{
+    struct UnkStruct_Group *data = gUnknown_02022C30.group;
+    u8 var = sub_8013DBC(data, id);
+
+    sub_80177B8(arg0, 8, arg2, &data->field_0->arr[id], var, id);
+}
+
+u8 sub_8013E44(void)
+{
+    struct UnkStruct_Group *data = gUnknown_02022C30.group;
+    u8 ret = 0;
+    u8 i;
+    s32 id;
+
+    for (i = 0; i < 16; i++)
+    {
+        if (data->field_0->arr[i].field_1A_0 != 0)
+        {
+            id = sub_80176E4(&data->field_0->arr[i], data->field_4->arr);
+            if (id != 0xFF)
+            {
+                if (data->field_0->arr[i].field_1A_0 == 1)
+                {
+                    if (sub_8017678(&data->field_0->arr[i], &data->field_4->arr[id]))
+                    {
+                        data->field_0->arr[i].unk = data->field_4->arr[id].unk0;
+                        data->field_0->arr[i].field_1B = 0x40;
+                        ret = 1;
+                    }
+                    else
+                    {
+                        if (data->field_0->arr[i].field_1B != 0)
+                        {
+                            data->field_0->arr[i].field_1B--;
+                            if (data->field_0->arr[i].field_1B == 0)
+                                ret = 2;
+                        }
+                    }
+                }
+                else
+                {
+                    data->field_0->arr[i].field_1A_0 = 1;
+                    data->field_0->arr[i].field_1B = 0x40;
+                    ret = 1;
+                }
+
+                data->field_0->arr[i].field_18 = 0;
+            }
+            else
+            {
+                if (data->field_0->arr[i].field_1A_0 != 2)
+                {
+                    data->field_0->arr[i].field_18++;
+                    if (data->field_0->arr[i].field_18 >= 300)
+                    {
+                        data->field_0->arr[i].field_1A_0 = 2;
+                        ret = 2;
+                    }
+                }
+            }
+        }
+    }
+
+    for (id = 0; id < 4; id++)
+    {
+        if (sub_8017734(data->field_0->arr, &data->field_4->arr[id].unk0, 16) != 0xFF)
+            ret = 1;
+    }
+
+    return ret;
+}
+
+void sub_8013F60(u8 taskId)
+{
+    sub_80773AC();
+    DestroyTask(taskId);
+}
+
+u8 sub_8013F78(void)
+{
+    u8 taskId = CreateTask(sub_8013F60, 0);
+
+    return taskId;
+}
+
+extern struct MailStruct gUnknown_020321C0[PARTY_SIZE];
+extern u8 gUnknown_02032298[2];
+
+void sub_8013F90(u8 taskId)
+{
+    u32 monId = sub_8018120(&gUnknown_02022C40, GetMultiplayerId());
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        gTasks[taskId].data[0]++;
+        SendBlock(0, &gPlayerParty[monId], sizeof(struct Pokemon));
+        break;
+    case 1:
+        if (GetBlockReceivedStatus() == 3)
+        {
+            gEnemyParty[0] = *(struct Pokemon*)(gBlockRecvBuffer[GetMultiplayerId() ^ 1]);
+            IncrementGameStat(GAME_STAT_50);
+            ResetBlockReceivedFlags();
+            gTasks[taskId].data[0]++;
+        }
+        break;
+    case 2:
+        memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, sizeof(struct MailStruct) * PARTY_SIZE + 4);
+        if (SendBlock(0, gBlockSendBuffer, sizeof(struct MailStruct) * PARTY_SIZE + 4))
+            gTasks[taskId].data[0]++;
+        break;
+    case 3:
+        if (GetBlockReceivedStatus() == 3)
+        {
+            memcpy(gUnknown_020321C0, gBlockRecvBuffer[GetMultiplayerId() ^ 1], sizeof(struct MailStruct) * PARTY_SIZE);
+            ResetBlockReceivedFlags();
+            gUnknown_02032298[0] = monId;
+            gUnknown_02032298[1] = 6;
+            gMain.savedCallback = CB2_ReturnToField;
+            SetMainCallback2(sub_807AE50);
+            sub_801807C(&gUnknown_02022C40);
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void sub_80140E0(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        if (GetMultiplayerId() == 0)
+            sub_800A4D8(2);
+        gTasks[taskId].data[0]++;
+        break;
+    case 1:
+        if (GetBlockReceivedStatus() == sub_800A9D8())
+        {
+            s32 i;
+            u16 *recvBuff;
+
+            for (i = 0; i < GetLinkPlayerCount(); i++)
+            {
+                recvBuff = gBlockRecvBuffer[i];
+                sub_80C3120(&gTrainerCards[i], recvBuff, gLinkPlayers[i].version);
+            }
+
+            if (GetLinkPlayerCount() == 2)
+            {
+                recvBuff = gBlockRecvBuffer[GetMultiplayerId() ^ 1];
+                sub_801B94C(recvBuff[48]);
+            }
+            else
+            {
+                sub_801B940();
+            }
+
+            ResetBlockReceivedFlags();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void sub_80141A4(void)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        CreateTask(sub_80140E0, 5);
+        gMain.state++;
+        break;
+    case 1:
+        if (!FuncIsActiveTask(sub_80140E0))
+            sub_80C4E74(GetMultiplayerId() ^ 1, CB2_ReturnToField);
+        break;
+    }
+
+    RunTasks();
+    RunTextPrinters();
+    AnimateSprites();
+    BuildOamBuffer();
+}
+
+void sub_8014210(u16 battleFlags)
+{
+    HealPlayerParty();
+    SavePlayerParty();
+    LoadPlayerBag();
+    gLinkPlayers[0].linkType = 0x2211;
+    gLinkPlayers[GetMultiplayerId()].lp_field_18 = GetMultiplayerId();
+    gLinkPlayers[GetMultiplayerId() ^ 1].lp_field_18 = GetMultiplayerId() ^ 1;
+    gMain.savedCallback = sub_80B360C;
+    gBattleTypeFlags = battleFlags;
+    PlayBattleBGM();
+}
+
+void sub_8014290(u16 arg0, u16 x, u16 y)
+{
+    VarSet(VAR_0x4087, arg0);
+    Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
+    saved_warp2_set_2(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
+    warp_in();
+}
+
+void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
+{
+    gSpecialVar_0x8004 = arg4;
+    VarSet(VAR_0x4087, arg4);
+    gFieldLinkPlayerCount = GetLinkPlayerCount();
+    gUnknown_03005DB4 = GetMultiplayerId();
+    sub_809D2BC();
+    Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
+    warp_in();
 }

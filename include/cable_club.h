@@ -9,5 +9,6 @@
 
 void sub_80B37D4(TaskFunc taskFunc);
 u8 sub_80B3050(void);
+void sub_80B360C(void);
 
 #endif //GUARD_CABLE_CLUB_H

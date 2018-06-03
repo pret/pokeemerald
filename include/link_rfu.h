@@ -248,5 +248,7 @@ void sub_800E084(void);
 void sub_801103C(void);
 void sub_8011C5C(void);
 void sub_80106D4(void);
+void sub_8011090(u8 a0, u32 a1, u32 a2);
+void sub_8011FC8(u8 *a0, u16 a1);
 
 #endif //GUARD_LINK_RFU_H

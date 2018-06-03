@@ -32,4 +32,7 @@ struct TrainerCard
 
 extern struct TrainerCard gTrainerCards[4];
 
+void sub_80C3120(struct TrainerCard *arg0, u16 *arg1, u8 gameVersion);
+void sub_80C4E74(u8 arg0, void (*callback)(void));
+
 #endif // GUARD_TRAINER_CARD_H
