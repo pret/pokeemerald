@@ -11,28 +11,85 @@
 #include "menu.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
+#include "script.h"
+#include "sound.h"
+#include "constants/songs.h"
 
-struct UnkStruct_02
+struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;
-    u8 field_D;
+    u8 field_xD;
     u8 field_E;
     u8 field_F;
     u8 playerName[PLAYER_NAME_LENGTH];
+};
+
+struct UnkStruct_x1C
+{
+    struct UnkStruct_Shared unk0;
+    u8 unk18;
+};
+
+struct UnkStruct_x20
+{
+    struct UnkStruct_Shared unk;
     u16 field_18;
     u8 field_1A_0:2;
     u8 field_1A_1:1;
     u8 field_1B;
+    u8 field_1D;
+    u8 field_1E;
+    u8 field_1F;
 };
 
-struct UnkStruct_01
+struct UnkStruct_Main0
 {
-    struct UnkStruct_02 *field_0;
-    void *field_4;
-    void *field_8;
+    struct UnkStruct_x20 arr[5];
+};
+
+struct UnkStruct_Main4
+{
+    struct UnkStruct_x1C arr[5];
+};
+
+struct UnkStruct_Main8
+{
+    struct UnkStruct_x20 arr[5];
+};
+
+struct UnkStruct_Leader
+{
+    struct UnkStruct_Main0 *field_0;
+    struct UnkStruct_Main4 *field_4;
+    struct UnkStruct_Main8 *field_8;
+    u8 state;
+    u8 textState;
+    u8 field_E;
+    u8 field_F;
+    u8 field_10;
+    u8 field_11;
+    u8 listTaskId;
+    u8 field_13;
+    u8 field_14;
+    u8 field_15;
+    u8 field_16;
+    u8 field_17;
+    u8 field_18;
+    u8 field_19;
+    u16 field_1A;
+};
+
+struct UnkStruct_Group
+{
+    struct UnkStruct_Main0 *field_0;
+    struct UnkStruct_Main4 *field_4;
+    u8 state;
+    u8 textState;
+    u8 field_A;
+    u8 field_B;
     u8 field_C;
     u8 field_D;
-    u8 field_E;
+    u8 listTaskId;
     u8 field_F;
     u8 field_10;
     u8 field_11;
@@ -40,18 +97,22 @@ struct UnkStruct_01
     u8 field_13;
     u8 field_14;
     u8 field_15;
-    u8 field_16;
-    u8 field_17;
 };
 
-extern struct UnkStruct_01 *gUnknown_02022C30;
+union UnkUnion_Main
+{
+    struct UnkStruct_Leader *leader;
+    struct UnkStruct_Group *group;
+};
+
+extern union UnkUnion_Main gUnknown_02022C30;
 
 extern u8 gUnknown_02022C2C;
 extern u8 gUnknown_02022C2D;
 
 // IWRAM vars
-IWRAM_DATA struct UnkStruct_01 *gUnknown_03000DA0;
-IWRAM_DATA u32 gUnknown_03000DA4;
+IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
+IWRAM_DATA struct UnkStruct_Group *gUnknown_03000DA4;
 IWRAM_DATA void *gUnknown_03000DA8;
 IWRAM_DATA void *gUnknown_03000DAC;
 IWRAM_DATA bool32 gUnknown_03000DB0;
@@ -60,24 +121,71 @@ IWRAM_DATA bool32 gUnknown_03000DB0;
 void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5);
 u16 ReadAsU16(const u8 *ptr);
 void sub_8012780(u8 taskId);
-void sub_80175EC(void *arg0, u8 count);
-void sub_8017580(void *arg0, u8 count);
-u8 sub_8016FC0(void *arg0, u32 arg1);
-bool8 sub_8017064(u8 *arg0, const u8 *str);
-void sub_801320C(struct UnkStruct_01 *arg0, u32 arg1, u32 arg2);
+void sub_80134E8(u8 taskId);
+void sub_80175EC(struct UnkStruct_Main4 *arg0, u8 count);
+void sub_8017580(struct UnkStruct_Main0 *arg0, u8 count);
+u8 sub_8016FC0(struct UnkStruct_Main4 *arg0, u32 arg1);
+bool8 PrintOnTextbox(u8 *textState, const u8 *str);
+bool8 sub_801320C(struct UnkStruct_Leader *data, u32 arg1, u32 arg2);
+u8 sub_8013398(struct UnkStruct_Main0 *arg0);
+s8 sub_80170B8(u8 *arg0, bool32 arg1);
+void sub_8018404(u8 *dest, struct UnkStruct_x20 *arg1);
+void sub_8012F64(struct UnkStruct_Leader *data);
+void sub_80149C4(void);
+u8 sub_80132D4(struct UnkStruct_Main0 *arg0);
+void sub_80178A0(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
+u32 sub_80176E4(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
+void sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_Shared *arg1, u8 arg2);
+u8 sub_8013E44(void);
+u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id);
+void sub_8013BD8(struct UnkStruct_Group *arg0, s32 id);
+void sub_80173D4(void);
 
 // const rom data
 extern const u8 *const gUnknown_082EDB60[][5];
+
 extern const u8 gText_UnkCtrlCodeF907[];
 extern const u8 gUnknown_082EDBC4[];
 extern const u8 gText_AwaitingCommunication[];
+extern const u8 gText_AwaitingLink[];
+extern const u8 gUnknown_082EDC5C[];
+extern const u8 gUnknown_082EDC9C[];
+extern const u8 gUnknown_082EDC78[];
+extern const u8 gUnknown_082EDD58[];
+extern const u8 gUnknown_082EDBE8[];
+extern const u8 gUnknown_082EDC0C[];
+extern const u8 gUnknown_082EDC34[];
+extern const u8 gUnknown_082EE560[];
+extern const u8 gUnknown_082EE57C[];
+extern const u8 gUnknown_082EFC54[];
+extern const u8 gUnknown_082EFC3C[];
+extern const u8 gUnknown_082EDE0C[];
+extern const u8 gUnknown_082EDDF4[];
+extern const u8 gUnknown_082EF7DC[];
+extern const u8 gUnknown_082EDE48[];
+extern const u8 gUnknown_082EDE64[];
+
 extern const u32 gUnknown_082F00C4[];
+
+extern const u8 gUnknown_082F0530[];
+
 extern const struct WindowTemplate gUnknown_082F00BC;
 extern const struct WindowTemplate gUnknown_082F0124;
 extern const struct WindowTemplate gUnknown_082F012C;
 extern const struct WindowTemplate gUnknown_082F011C;
+extern const struct WindowTemplate gUnknown_082F0174;
+extern const struct WindowTemplate gUnknown_082F017C;
+
 extern const struct ListMenuTemplate gUnknown_082F015C;
+extern const struct ListMenuTemplate gUnknown_082F0204;
+
 extern const u8 *const gUnknown_082F0048[];
+extern const u8 *const gUnknown_082EDDC4[];
+extern const u8 *const gUnknown_082EFB70[];
+extern const u8 *const gUnknown_082EDD50[];
+extern const u8 *const gUnknown_082EDE9C[];
+
+extern const struct UnkStruct_Shared gUnknown_082F045C[];
 
 // code
 void nullsub_89(void)
@@ -151,25 +259,26 @@ bool32 sub_80126CC(u32 caseId)
 void BerryBlenderLinkBecomeLeader(void)
 {
     u8 taskId;
-    struct UnkStruct_01 *dataPtr;
+    struct UnkStruct_Leader *dataPtr;
 
     taskId = CreateTask(sub_8012780, 0);
-    gUnknown_02022C30 = dataPtr = (void*)(gTasks[taskId].data);
+    gUnknown_02022C30.leader = dataPtr = (void*)(gTasks[taskId].data);
     gUnknown_03000DA0 = dataPtr;
 
-    dataPtr->field_C = 0;
-    dataPtr->field_D = 0;
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
     gSpecialVar_Result = 0;
 }
 
 void sub_8012780(u8 taskId)
 {
-    struct UnkStruct_01 *data = gUnknown_02022C30;
+    u32 id, val;
+    struct UnkStruct_Leader *data = gUnknown_02022C30.leader;
 
-    switch (data->field_C)
+    switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 || gSaveBlock2Ptr->frontierChosenLvl == 1)
+        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontierChosenLvl == 1)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F00C4[gSpecialVar_0x8004];
         gUnknown_02022C2D = gUnknown_082F00C4[gSpecialVar_0x8004] >> 8;
@@ -177,7 +286,7 @@ void sub_8012780(u8 taskId)
         sub_800B488();
         OpenLink();
         sub_8011C10(gUnknown_02022C2D & 0xF);
-        data->field_C = 3;
+        data->state = 3;
         break;
     case 3:
         data->field_4 = AllocZeroed(0x70);
@@ -185,11 +294,11 @@ void sub_8012780(u8 taskId)
         data->field_8 = AllocZeroed(0xA0);
         sub_80175EC(data->field_4, 4);
         sub_8017580(data->field_0, 5);
-        sub_800DF90(&data->field_0->field_0, data->field_0->playerName);
-        data->field_0->field_18 = 0;
-        data->field_0->field_1A_0 = 1;
-        data->field_0->field_1A_1 = 0;
-        data->field_0->field_1B = 0;
+        sub_800DF90(&data->field_0->arr[0].unk.field_0, data->field_0->arr[0].unk.playerName);
+        data->field_0->arr[0].field_18 = 0;
+        data->field_0->arr[0].field_1A_0 = 1;
+        data->field_0->arr[0].field_1A_1 = 0;
+        data->field_0->arr[0].field_1B = 0;
         data->field_17 = sub_8016FC0(data->field_4, 0xFF);
         data->field_10 = AddWindow(&gUnknown_082F00BC);
         switch (gUnknown_02022C2D & 0xF)
@@ -213,7 +322,7 @@ void sub_8012780(u8 taskId)
         NewMenuHelpers_DrawStdWindowFrame(data->field_F, FALSE);
         gMultiuseListMenuTemplate = gUnknown_082F015C;
         gMultiuseListMenuTemplate.windowId = data->field_F;
-        data->field_12 = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+        data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
         NewMenuHelpers_DrawStdWindowFrame(data->field_11, FALSE);
         PutWindowTilemap(data->field_11);
@@ -221,7 +330,7 @@ void sub_8012780(u8 taskId)
 
         CopyBgTilemapBufferToVram(0);
         data->field_13 = 1;
-        data->field_C = 4;
+        data->state = 4;
         break;
     case 4:
         StringCopy(gStringVar1, gUnknown_082F0048[gUnknown_02022C2C]);
@@ -238,18 +347,770 @@ void sub_8012780(u8 taskId)
         }
 
         sub_80124EC(data->field_11, gUnknown_02022C2D, data->field_13);
-        data->field_C = 5;
+        data->state = 5;
         break;
     case 5:
-        if (sub_8017064(&data->field_D, gStringVar4))
-            data->field_C = 6;
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+            data->state = 6;
         break;
     case 6:
         sub_801320C(data, 7, 10);
         if (gMain.newKeys & B_BUTTON)
         {
-            if (data->field_13)
+            if (data->field_13 == 1)
+                data->state = 23;
+            else if ((gUnknown_02022C2D & 0xF0) != 0)
+                data->state = 30;
+            else
+                data->state = 19;
         }
+        if ((gUnknown_02022C2D >> 4) != 0
+            && data->field_13 > (gUnknown_02022C2D >> 4) - 1
+            && (gUnknown_02022C2D & 0xF) != 0
+            && sub_8012240()
+            && gMain.newKeys & START_BUTTON)
+        {
+            data->state = 15;
+            sub_800EF38();
+        }
+        if (data->state == 6 && sub_80105EC())
+        {
+            data->state = 9;
+        }
+        break;
+    case 9:
+        if (!sub_80105EC())
+        {
+            data->state = 6;
+            data->field_13 = sub_8013398(data->field_0);
+        }
+        break;
+    case 10:
+        id = ((gUnknown_02022C2C & 0xF) == 2) ? 1 : 0;
+        if (PrintOnTextbox(&data->textState, gUnknown_082EDDC4[id]))
+        {
+            data->field_13 = sub_8013398(data->field_0);
+            sub_81AE70C(data->listTaskId);
+            data->state = 4;
+        }
+        break;
+    case 29:
+        id = ((gUnknown_02022C2D & 0xF) == 2) ? 0 : 1;
+        if (PrintOnTextbox(&data->textState, gUnknown_082EDDC4[id]))
+        {
+            data->state = 21;
+        }
+        break;
+    case 7:
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+        {
+            data->state = 11;
+        }
+        break;
+    case 11:
+        switch (sub_80170B8(&data->textState, sub_801064C(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName)))
+        {
+        case 0:
+            sub_800E0E8();
+            CreateWirelessStatusIndicatorSprite(0, 0);
+            data->field_19 = 5;
+            sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            data->state = 12;
+            break;
+        case 1:
+        case -1:
+            data->field_19 = 6;
+            sub_8010688(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            data->state = 12;
+            break;
+        case -3:
+            data->state = 9;
+            break;
+        }
+        break;
+    case 12:
+        val = sub_8010714(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+        if (val == 1)
+        {
+            if (data->field_19 == 5)
+            {
+                data->field_0->arr[data->field_13].field_1B = 0;
+                sub_81AE70C(data->listTaskId);
+                data->field_13++;
+                if (data->field_13 == (gUnknown_02022C2D & 0xF))
+                {
+                    if ((gUnknown_02022C2D & 0xF0) != 0 || data->field_13 == 4)
+                    {
+                        data->state = 15;
+                    }
+                    else
+                    {
+                        sub_8018404(gStringVar1, &data->field_0->arr[data->field_13 - 1]);
+                        StringExpandPlaceholders(gStringVar4, gUnknown_082EDC9C);
+                        data->state = 13;
+                    }
+
+                    sub_800EF38();
+                    sub_80124EC(data->field_11, gUnknown_02022C2D, data->field_13);
+                }
+                else
+                {
+                    data->state = 4;
+                }
+            }
+            else
+            {
+                sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId));
+                data->field_0->arr[data->field_13].field_1A_0 = 0;
+                sub_8013398(data->field_0);
+                sub_81AE70C(data->listTaskId);
+                data->state = 4;
+            }
+
+            data->field_19 = 0;
+        }
+        else if (val == 2)
+        {
+            sub_8011A64(0, 0);
+            data->state = 4;
+        }
+        break;
+    case 13:
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+            data->state = 14;
+        break;
+    case 14:
+        if (++data->field_E > 120)
+            data->state = 17;
+        break;
+    case 15:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EDC5C))
+            data->state = 16;
+        break;
+    case 16:
+        switch (sub_80170B8(&data->textState, FALSE))
+        {
+        case 0:
+            data->state = 17;
+            break;
+        case 1:
+        case -1:
+            if ((gUnknown_02022C2D & 0xF0) != 0)
+                data->state = 30;
+            else
+                data->state = 19;
+            break;
+        }
+        break;
+    case 19:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EDC78))
+            data->state = 20;
+        break;
+    case 20:
+        switch (sub_80170B8(&data->textState, FALSE))
+        {
+        case 0:
+            data->state = 23;
+            break;
+        case 1:
+        case -1:
+            if ((gUnknown_02022C2D & 0xF0) != 0)
+                data->state = 15;
+            else if (data->field_13 == (gUnknown_02022C2D & 0xF))
+                data->state = 15;
+            else
+                data->state = 4;
+            break;
+        }
+        break;
+    case 17:
+        if (!sub_801320C(data, 7, 29))
+            data->state = 18;
+        break;
+    case 18:
+        if (sub_800EF1C())
+        {
+            if (sub_800EF58(FALSE))
+            {
+                data->state = 26;
+            }
+            else
+            {
+                if (++data->field_1A > 300)
+                {
+                    data->state = 29;
+                    data->textState = 0;
+                }
+            }
+        }
+        else
+        {
+            data->state = 29;
+            data->textState = 0;
+        }
+        break;
+    case 30:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EDD58))
+            data->state = 23;
+        break;
+    case 21:
+    case 23:
+        sub_800E084();
+        sub_800EDD4();
+        sub_8012F64(data);
+        data->state++;
+        break;
+    case 24:
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+        gSpecialVar_Result = 5;
+        break;
+    case 22:
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+        gSpecialVar_Result = 8;
+        break;
+    case 26:
+        if (sub_8011A80())
+        {
+            data->state = 29;
+        }
+        else
+        {
+            if (gReceivedRemoteLinkPlayers != 0)
+            {
+                if (sub_80126CC(gUnknown_02022C2C))
+                    sub_801103C();
+                sub_8011068(1);
+                sub_80149C4();
+                sub_8012F64(data);
+                DestroyTask(taskId);
+            }
+        }
+        break;
+    }
+}
+
+void sub_8012F64(struct UnkStruct_Leader *data)
+{
+    ClearWindowTilemap(data->field_11);
+    sub_819746C(data->field_11, FALSE);
+    DestroyListMenuTask(data->listTaskId, 0, 0);
+    ClearWindowTilemap(data->field_10);
+    sub_819746C(data->field_F, FALSE);
+    CopyBgTilemapBufferToVram(0);
+    RemoveWindow(data->field_11);
+    RemoveWindow(data->field_F);
+    RemoveWindow(data->field_10);
+    DestroyTask(data->field_17);
+
+    Free(data->field_8);
+    Free(data->field_0);
+    Free(data->field_4);
+}
+
+void sub_8012FC4(u8 *dst, u8 caseId)
+{
+    switch (caseId)
+    {
+    case 1:
+    case 2:
+    case 4:
+    case 14:
+    case 28:
+        StringExpandPlaceholders(dst, gUnknown_082EDBE8);
+        break;
+    case 21:
+    case 22:
+        StringExpandPlaceholders(dst, gUnknown_082EDC0C);
+        break;
+    case 3:
+    case 9:
+    case 10:
+    case 11:
+    case 15:
+    case 16:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 27:
+        StringExpandPlaceholders(dst, gUnknown_082EDC34);
+        break;
+    }
+}
+
+void sub_8013078(u8 *dst, u8 caseId)
+{
+    switch (caseId)
+    {
+    case 65:
+    case 68:
+        StringExpandPlaceholders(dst, gUnknown_082EE560);
+        break;
+    case 69:
+    case 72:
+        StringExpandPlaceholders(dst, gUnknown_082EE57C);
+        break;
+    }
+}
+
+void sub_80130B4(u8 *dst, u8 caseId)
+{
+    switch (caseId)
+    {
+    case 1:
+    case 2:
+    case 4:
+    case 14:
+    case 21:
+    case 22:
+    case 28:
+        StringExpandPlaceholders(dst, gUnknown_082EFC3C);
+        break;
+    case 3:
+    case 9:
+    case 10:
+    case 11:
+    case 15:
+    case 16:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 27:
+        StringExpandPlaceholders(dst, gUnknown_082EFC54);
+        break;
+    }
+}
+
+void sub_8013160(u8 *dst, u8 caseId)
+{
+    switch (caseId)
+    {
+    case 1:
+    case 2:
+    case 4:
+    case 14:
+    case 21:
+    case 22:
+    case 28:
+        StringExpandPlaceholders(dst, gUnknown_082EDDF4);
+        break;
+    case 3:
+    case 9:
+    case 10:
+    case 11:
+    case 15:
+    case 16:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 27:
+        StringExpandPlaceholders(dst, gUnknown_082EDE0C);
+        break;
+    }
+}
+
+bool8 sub_801320C(struct UnkStruct_Leader *data, u32 arg1, u32 arg2)
+{
+    switch (sub_80132D4(data->field_0))
+    {
+    case 1:
+        PlaySE(SE_PC_LOGIN);
+        sub_81AE70C(data->listTaskId);
+        sub_8018404(gStringVar2, &data->field_0->arr[data->field_13]);
+        sub_8012FC4(gStringVar4, gUnknown_02022C2C);
+        data->state = arg1;
+        break;
+    case 2:
+        sub_8011A64(0, 0);
+        sub_81AE70C(data->listTaskId);
+        data->state = arg2;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void sub_8013278(u8 arg0, u32 id, u8 arg2)
+{
+    struct UnkStruct_Leader *data = gUnknown_02022C30.leader;
+    u8 var = 0;
+
+    switch (data->field_0->arr[id].field_1A_0)
+    {
+    case 1:
+        if (data->field_0->arr[id].field_1B != 0)
+            var = 2;
+        break;
+    case 2:
+        var = 1;
+        break;
+    }
+
+    sub_80178A0(arg0, 0, arg2, &data->field_0->arr[id], var, id);
+}
+
+u8 sub_80132D4(struct UnkStruct_Main0 *arg0)
+{
+    struct UnkStruct_Leader *data = gUnknown_02022C30.leader;
+    u8 ret = 0;
+    u8 i;
+    s32 id;
+
+    for (i = 1; i < 5; i++)
+    {
+        u16 var = data->field_0->arr[i].field_1A_0;
+        if (var == 1)
+        {
+            id = sub_80176E4(&data->field_0->arr[i], data->field_4->arr);
+            if (id != 0xFF)
+            {
+                data->field_0->arr[i].unk = data->field_4->arr[id].unk0;
+                data->field_0->arr[i].field_18 = var;
+            }
+            else
+            {
+                data->field_0->arr[i].field_1A_0 = 2;
+                ret = 2;
+            }
+        }
+    }
+
+    for (id = 0; id < 4; id++)
+        sub_8017734(data->field_0->arr, &data->field_4->arr[id].unk0, 5);
+
+    if (ret != 2)
+    {
+        for (id = 0; id < 5; id++)
+        {
+            if (data->field_0->arr[id].field_1B != 0)
+                ret = 1;
+        }
+    }
+
+    return ret;
+}
+
+u8 sub_8013398(struct UnkStruct_Main0 *arg0)
+{
+    struct UnkStruct_Leader *data = gUnknown_02022C30.leader;
+    u8 copiedCount;
+    s32 i;
+    u8 ret;
+
+    for (i = 0; i < 5; i++)
+        data->field_8->arr[i] = data->field_0->arr[i];
+
+    copiedCount = 0;
+    for (i = 0; i < 5; i++)
+    {
+        if (data->field_8->arr[i].field_1A_0 == 1)
+        {
+            data->field_0->arr[copiedCount] = data->field_8->arr[i];
+            copiedCount++;
+        }
+    }
+
+    ret = copiedCount;
+    for (; copiedCount < 5; copiedCount++)
+    {
+        data->field_0->arr[copiedCount].unk = gUnknown_082F045C[0];
+        data->field_0->arr[copiedCount].field_18 = 0;
+        data->field_0->arr[copiedCount].field_1A_0 = 0;
+        data->field_0->arr[copiedCount].field_1A_1 = 0;
+        data->field_0->arr[copiedCount].field_1B = 0;
+    }
+
+    for (i = 0; i < 5; i++)
+    {
+        if (data->field_0->arr[i].field_1A_0 != 1)
+            continue;
+        if (data->field_0->arr[i].field_1B != 0x40)
+            continue;
+
+        ret = i;
+        break;
+    }
+
+    return ret;
+}
+
+void BerryBlenderLinkJoinGroup(void)
+{
+    u8 taskId;
+    struct UnkStruct_Group *dataPtr;
+
+    taskId = CreateTask(sub_80134E8, 0);
+    gUnknown_02022C30.group = dataPtr = (void*)(gTasks[taskId].data);
+    gUnknown_03000DA4 = dataPtr;
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+    gSpecialVar_Result = 0;
+}
+
+void sub_80134E8(u8 taskId)
+{
+    s32 id;
+    struct UnkStruct_Group *data = gUnknown_02022C30.group;
+
+    switch (data->state)
+    {
+    case 0:
+        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontierChosenLvl == 1)
+            gSpecialVar_0x8004++;
+        gUnknown_02022C2C = gUnknown_082F0530[gSpecialVar_0x8004];
+        sub_8010F84(gUnknown_02022C2C, 0, 0);
+        sub_800B488();
+        OpenLink();
+        sub_8011C5C();
+        data->field_4 = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0x200);
+        data->state = 1;
+        break;
+    case 1:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EFB70[gSpecialVar_0x8004]))
+            data->state = 2;
+        break;
+    case 2:
+        sub_80175EC(data->field_4, 4);
+        sub_8017580(data->field_0, 16);
+        data->field_11 = sub_8016FC0(data->field_4, gSpecialVar_0x8004);
+        data->field_C = AddWindow(&gUnknown_082F00BC);
+        data->field_B = AddWindow(&gUnknown_082F0174);
+        data->field_D = AddWindow(&gUnknown_082F017C);
+
+        FillWindowPixelBuffer(data->field_C, 0x22);
+        sub_80173E0(data->field_C, 0, gUnknown_082EF7DC, 8, 1, 4);
+        PutWindowTilemap(data->field_C);
+        CopyWindowToVram(data->field_C, 2);
+
+        NewMenuHelpers_DrawStdWindowFrame(data->field_B, FALSE);
+        gMultiuseListMenuTemplate = gUnknown_082F0204;
+        gMultiuseListMenuTemplate.windowId = data->field_B;
+        data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+
+        NewMenuHelpers_DrawStdWindowFrame(data->field_D, FALSE);
+        PutWindowTilemap(data->field_D);
+        sub_80125BC(data->field_D);
+        CopyWindowToVram(data->field_D, 2);
+
+        CopyBgTilemapBufferToVram(0);
+        data->field_F = 0;
+        data->state = 3;
+        break;
+    case 3:
+        id = sub_8013E44();
+        switch (id)
+        {
+        case 1:
+            PlaySE(SE_PC_LOGIN);
+            sub_81AE70C(data->listTaskId);
+            break;
+        case 0:
+            id = ListMenuHandleInputGetItemId(data->listTaskId);
+            if (gMain.newKeys & A_BUTTON && id != -1)
+            {
+                // this unused variable is needed to match
+                u32 unusedVar;
+                unusedVar  = data->field_0->arr[id].unk.field_0.unk_0a_0;
+
+                if (data->field_0->arr[id].field_1A_0 == 1 && data->field_0->arr[id].unk.field_0.unk_0a_7 == 0)
+                {
+                    u32 var = sub_8013B8C(data, id);
+                    if (var == 0)
+                    {
+                        sub_8013BD8(data, id);
+                        data->state = 5;
+                        PlaySE(SE_PN_ON);
+                    }
+                    else
+                    {
+                        StringCopy(gStringVar4, gUnknown_082EDD50[var - 1]);
+                        data->state = 18;
+                        PlaySE(SE_PN_ON);
+                    }
+                }
+                else
+                {
+                    PlaySE(SE_WALL_HIT);
+                }
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                data->state = 10;
+            }
+            break;
+        default:
+            sub_81AE70C(data->listTaskId);
+            break;
+        }
+        break;
+    case 5:
+        sub_80130B4(gStringVar4, gUnknown_02022C2C);
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+        {
+            sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
+            data->state = 6;
+        }
+        break;
+    case 6:
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            sub_8011A64(0, 0);
+            switch (gUnknown_02022C2C)
+            {
+            case 1 ... 5:
+            case 9 ... 11:
+            case 13 ... 16:
+            case 21 ... 28:
+                data->state = 20;
+                return;
+            }
+        }
+
+        switch (sub_8011A74())
+        {
+        case 1:
+            data->state = 12;
+            break;
+        case 2:
+        case 6:
+        case 9:
+            data->state = 14;
+            break;
+        case 5:
+            sub_8013160(gStringVar4, gUnknown_02022C2C);
+            if (PrintOnTextbox(&data->textState, gStringVar4))
+            {
+                if (gUnknown_02022C2C == 28 || gUnknown_02022C2C == 14)
+                {
+                    sub_8011A64(12, 0);
+                }
+                else
+                {
+                    sub_8011A64(7, 0);
+                    StringCopy(gStringVar1, gUnknown_082F0048[gUnknown_02022C2C]);
+                    StringExpandPlaceholders(gStringVar4, gUnknown_082EDE48);
+                }
+            }
+            break;
+        case 7:
+            if (data->field_15 > 0xF0)
+            {
+                if (PrintOnTextbox(&data->textState, gStringVar4))
+                {
+                    sub_8011A64(12, 0);
+                    data->field_15 = 0;
+                }
+            }
+            else
+            {
+                switch (gUnknown_02022C2C)
+                {
+                case 1:
+                case 2:
+                case 4:
+                case 14:
+                case 28:
+                    break;
+                default:
+                    data->field_15++;
+                    break;
+                }
+            }
+            break;
+        }
+
+        if (!sub_8011A74() && gMain.newKeys & B_BUTTON)
+            data->state = 7;
+        break;
+    case 7:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EDE64))
+            data->state = 8;
+        break;
+    case 8:
+        switch (sub_80170B8(&data->textState, sub_8011A74()))
+        {
+        case 0:
+            sub_80106D4();
+            data->state = 9;
+            sub_81AE70C(data->listTaskId);
+            break;
+        case 1:
+        case -1:
+            data->state = 5;
+            sub_81AE70C(data->listTaskId);
+            break;
+        case -3:
+            data->state = 6;
+            sub_81AE70C(data->listTaskId);
+            break;
+        }
+        break;
+    case 9:
+        if (sub_8011A74())
+            data->state = 6;
+        break;
+    case 10:
+    case 12:
+    case 14:
+    case 18:
+    case 20:
+        ClearWindowTilemap(data->field_D);
+        sub_819746C(data->field_D, FALSE);
+        DestroyListMenuTask(data->listTaskId, 0, 0);
+        ClearWindowTilemap(data->field_C);
+        sub_819746C(data->field_B, FALSE);
+        CopyBgTilemapBufferToVram(0);
+        RemoveWindow(data->field_D);
+        RemoveWindow(data->field_B);
+        RemoveWindow(data->field_C);
+        DestroyTask(data->field_11);
+        Free(data->field_0);
+        Free(data->field_4);
+        data->state++;
+        break;
+    case 13:
+        sub_800E084();
+        if (PrintOnTextbox(&data->textState, gUnknown_082EDE9C[sub_8011A74()]))
+        {
+            gSpecialVar_Result = 6;
+            data->state = 23;
+        }
+        break;
+    case 11:
+        sub_800E084();
+        gSpecialVar_Result = 5;
+        data->state = 23;
+        break;
+    case 15:
+        sub_800E084();
+        if (PrintOnTextbox(&data->textState, gUnknown_082EDE9C[sub_8011A74()]))
+        {
+            gSpecialVar_Result = 8;
+            data->state = 23;
+        }
+        break;
+    case 19:
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+        {
+            gSpecialVar_Result = 8;
+            data->state = 23;
+        }
+        break;
+    case 23:
+        DestroyTask(taskId);
+        sub_80173D4();
+        sub_800EDD4();
+        break;
+    case 21:
+        sub_80149C4();
+        DestroyTask(taskId);
         break;
     }
 }

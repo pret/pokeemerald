@@ -2850,7 +2850,7 @@ void sub_800EF38(void)
     gUnknown_03005000.unk_ce7 = gUnknown_03004140.unk_00;
 }
 
-bool8 sub_800EF58(bool32 a0)
+bool32 sub_800EF58(bool32 a0)
 {
     if (gUnknown_03005000.unk_04 == 17 || a0)
     {
@@ -4104,7 +4104,7 @@ bool8 sub_8010540(void)
     return retval;
 }
 
-bool8 sub_80105EC(void)
+bool32 sub_80105EC(void)
 {
     u8 flags = 0;
     int i;
@@ -4129,7 +4129,7 @@ bool8 sub_80105EC(void)
     return FALSE;
 }
 
-bool8 sub_801064C(u16 a0, const u8 *a1)
+bool32 sub_801064C(u16 a0, const u8 *a1)
 {
     u8 r1 = sub_8011CE4(a1, a0);
     if (r1 == 0xFF)
@@ -4154,14 +4154,14 @@ void sub_80106D4(void)
     rfu_NI_setSendData(1 << gUnknown_03005000.unk_c3e, 8, &gUnknown_03005000.unk_c85, 1);
 }
 
-u8 sub_8010714(u16 a0, const u8 *a1)
+u32 sub_8010714(u16 a0, const u8 *a1)
 {
     u8 r0 = sub_8011CE4(a1, a0);
     if (r0 == 0xff)
         return 2;
     if (gUnknown_03007880[r0]->unk_0 == 0)
-        return TRUE;
-    return FALSE;
+        return 1;
+    return 0;
 }
 
 void sub_8010750(void)

@@ -232,5 +232,21 @@ void sub_8011068(u8 a0);
 void sub_8011170(u32 a0);
 void sub_8011A64(u8 a0, u16 a1);
 u8 sub_801048C(bool32 a0);
+void sub_800DF90(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2);
+void sub_8010F84(u8 a0, u32 a1, u32 a2);
+void sub_8011C10(u32 a0);
+bool32 sub_8012240(void);
+void sub_800EF38(void);
+bool32 sub_80105EC(void);
+bool32 sub_801064C(u16 a0, const u8 *a1);
+void sub_8010688(u8 a0, u16 a1, const u8 *a2);
+u32 sub_8010714(u16 a0, const u8 *a1);
+void sub_8011DC0(const u8 *a0, u16 a1);
+bool8 sub_800EF1C(void);
+bool32 sub_800EF58(bool32 a0);
+void sub_800E084(void);
+void sub_801103C(void);
+void sub_8011C5C(void);
+void sub_80106D4(void);
 
 #endif //GUARD_LINK_RFU_H

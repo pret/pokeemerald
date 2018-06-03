@@ -200,8 +200,6 @@ extern struct RfuUnk1* gUnknown_03007870[4];
 extern void* sub_82E53F4;
 extern void rfu_STC_clearAPIVariables(void);
 
-struct UnkLinkRfuStruct_02022B14;
-
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_REQ_stopMode(void);
 void rfu_waitREQComplete(void);
