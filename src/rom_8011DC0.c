@@ -26,6 +26,7 @@
 #include "party_menu.h"
 #include "field_weather.h"
 #include "palette.h"
+#include "decompress.h"
 
 extern void HealPlayerParty(void);
 
@@ -100,7 +101,7 @@ struct UnkStruct_Group
     u8 state;
     u8 textState;
     u8 field_A;
-    u8 field_B;
+    u8 listWindowId;
     u8 field_C;
     u8 field_D;
     u8 listTaskId;
@@ -113,10 +114,24 @@ struct UnkStruct_Group
     u8 field_15;
 };
 
+struct UnkStruct_URoom
+{
+    void *field_0;
+    void *field_4;
+    void *field_8;
+    void *field_C;
+    u16 field_10;
+    u16 field_12;
+    u8 field_14;
+    u8 field_15;
+    u8 field_16;
+};
+
 union UnkUnion_Main
 {
     struct UnkStruct_Leader *leader;
     struct UnkStruct_Group *group;
+    struct UnkStruct_URoom *uRoom;
 };
 
 struct TradeUnkStruct
@@ -146,7 +161,7 @@ extern u8 gUnknown_03005DB4;
 // IWRAM vars
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
 IWRAM_DATA struct UnkStruct_Group *gUnknown_03000DA4;
-IWRAM_DATA void *gUnknown_03000DA8;
+IWRAM_DATA struct UnkStruct_URoom *gUnknown_03000DA8;
 IWRAM_DATA void *gUnknown_03000DAC;
 IWRAM_DATA bool32 gUnknown_03000DB0;
 
@@ -158,9 +173,12 @@ void sub_80134E8(u8 taskId);
 void sub_8013C7C(u8 taskId);
 void sub_8014A40(u8 taskId);
 void sub_8014F48(u8 taskId);
+void sub_80152F4(u8 taskId);
+void sub_80156E0(u8 taskId);
 void sub_80175EC(struct UnkStruct_Main4 *arg0, u8 count);
 void sub_8017580(struct UnkStruct_Main0 *arg0, u8 count);
 u8 sub_8016FC0(struct UnkStruct_Main4 *arg0, u32 arg1);
+u8 sub_8016FF0(struct UnkStruct_Main4 *arg0, u32 arg1);
 bool8 PrintOnTextbox(u8 *textState, const u8 *str);
 bool8 sub_801320C(struct UnkStruct_Leader *data, u32 arg1, u32 arg2);
 u8 sub_8013398(struct UnkStruct_Main0 *arg0);
@@ -194,6 +212,7 @@ void sub_8018784(u8 windowId);
 void sub_8018884(const u8 *src);
 bool32 mevent_0814257C(u8 *textState, const u8 *str);
 s8 sub_8018B08(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
+bool32 sub_8016F1C(struct UnkStruct_x20 *arg0, s16 arg1);
 
 // const rom data
 extern const u8 *const gUnknown_082EDB60[][5];
@@ -220,6 +239,12 @@ extern const u8 gUnknown_082EDE48[];
 extern const u8 gUnknown_082EDE64[];
 extern const u8 gUnknown_082EDF40[];
 extern const u8 gText_PleaseStartOver[];
+extern const u8 gUnknown_082EF7F8[];
+extern const u8 gUnknown_082EFBC8[];
+extern const u8 gUnknown_082EFC90[];
+extern const u8 gUnknown_082EDEC4[];
+extern const u8 gUnknown_082EDF04[];
+extern const u8 gText_WirelessSearchCanceled[];
 
 extern const u32 gUnknown_082F00C4[];
 
@@ -240,6 +265,8 @@ extern const u8 *const gUnknown_082EDDC4[];
 extern const u8 *const gUnknown_082EFB70[];
 extern const u8 *const gUnknown_082EDD50[];
 extern const u8 *const gUnknown_082EDE9C[];
+extern const u8 *const gUnknown_082EDF80[];
+extern const u8 *const gUnknown_082EFD58[];
 
 extern const struct UnkStruct_Shared gUnknown_082F045C[];
 
@@ -936,7 +963,7 @@ void sub_80134E8(u8 taskId)
         sub_8017580(data->field_0, 16);
         data->field_11 = sub_8016FC0(data->field_4, gSpecialVar_0x8004);
         data->field_C = AddWindow(&gUnknown_082F00BC);
-        data->field_B = AddWindow(&gUnknown_082F0174);
+        data->listWindowId = AddWindow(&gUnknown_082F0174);
         data->field_D = AddWindow(&gUnknown_082F017C);
 
         FillWindowPixelBuffer(data->field_C, 0x22);
@@ -944,9 +971,9 @@ void sub_80134E8(u8 taskId)
         PutWindowTilemap(data->field_C);
         CopyWindowToVram(data->field_C, 2);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->field_B, FALSE);
+        NewMenuHelpers_DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = gUnknown_082F0204;
-        gMultiuseListMenuTemplate.windowId = data->field_B;
+        gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
         NewMenuHelpers_DrawStdWindowFrame(data->field_D, FALSE);
@@ -974,7 +1001,7 @@ void sub_80134E8(u8 taskId)
                 u32 unusedVar;
                 unusedVar  = data->field_0->arr[id].unk.field_0.unk_0a_0;
 
-                if (data->field_0->arr[id].field_1A_0 == 1 && data->field_0->arr[id].unk.field_0.unk_0a_7 == 0)
+                if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.unk_0a_7)
                 {
                     u32 var = sub_8013B8C(data, id);
                     if (var == 0)
@@ -1121,10 +1148,10 @@ void sub_80134E8(u8 taskId)
         sub_819746C(data->field_D, FALSE);
         DestroyListMenuTask(data->listTaskId, 0, 0);
         ClearWindowTilemap(data->field_C);
-        sub_819746C(data->field_B, FALSE);
+        sub_819746C(data->listWindowId, FALSE);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->field_D);
-        RemoveWindow(data->field_B);
+        RemoveWindow(data->listWindowId);
         RemoveWindow(data->field_C);
         DestroyTask(data->field_11);
         Free(data->field_0);
@@ -1286,7 +1313,7 @@ u8 sub_8013DBC(struct UnkStruct_Group *data, u32 id)
 {
     if (data->field_0->arr[id].field_1A_0 == 1)
     {
-        if (data->field_0->arr[id].unk.field_0.unk_0a_7 != 0)
+        if (data->field_0->arr[id].unk.field_0.unk_0a_7)
             return 3;
         else if (data->field_0->arr[id].field_1A_1 != 0)
             return 1;
@@ -1983,4 +2010,394 @@ void sub_8014EFC(u32 arg0)
     dataPtr->textState = 0;
     dataPtr->field_12 = arg0 - 21;
     gSpecialVar_Result = 0;
+}
+
+void sub_8014F48(u8 taskId)
+{
+    s32 id;
+    struct WindowTemplate winTemplate1, winTemplate2;
+    struct UnkStruct_Group *data = gUnknown_02022C30.group;
+
+    switch (data->state)
+    {
+    case 0:
+        sub_8010F84(data->field_12 + 21, 0, 0);
+        sub_800B488();
+        OpenLink();
+        sub_8011C5C();
+        data->field_4 = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0x200);
+        data->state = 1;
+        break;
+    case 1:
+        sub_8018884(gUnknown_082EF7F8);
+        data->state = 2;
+        break;
+    case 2:
+        sub_80175EC(data->field_4, 4);
+        sub_8017580(data->field_0, 16);
+        data->field_11 = sub_8016FC0(data->field_4, data->field_12 + 7);
+
+        winTemplate1 = gUnknown_082F0174;
+        winTemplate1.baseBlock = sub_8019930();
+        winTemplate1.paletteNum = 0xC;
+        data->listWindowId = AddWindow(&winTemplate1);
+
+        winTemplate2 = gUnknown_082F017C;
+        winTemplate2.paletteNum = 0xC;
+        data->field_D = AddWindow(&winTemplate2);
+
+        sub_8018784(data->listWindowId);
+        gMultiuseListMenuTemplate = gUnknown_082F0204;
+        gMultiuseListMenuTemplate.windowId = data->listWindowId;
+        data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+
+        sub_8018784(data->field_D);
+        FillWindowPixelBuffer(data->field_D, 0x11);
+        PutWindowTilemap(data->field_D);
+        sub_80125BC(data->field_D);
+        CopyWindowToVram(data->field_D, 2);
+
+        CopyBgTilemapBufferToVram(0);
+        data->field_F = 0;
+        data->state = 3;
+        break;
+    case 3:
+        id = sub_8013E44();
+        switch (id)
+        {
+        case 1:
+            PlaySE(SE_PC_LOGIN);
+        default:
+            sub_81AE70C(data->listTaskId);
+            break;
+        case 0:
+            id = ListMenuHandleInputGetItemId(data->listTaskId);
+            if (gMain.newKeys & A_BUTTON && id != -1)
+            {
+                // this unused variable along with the assignment is needed to match
+                u32 unusedVar;
+                unusedVar  = data->field_0->arr[id].unk.field_0.unk_0a_0;
+
+                if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.unk_0a_7)
+                {
+                    data->field_F = id;
+                    sub_800E0E8();
+                    CreateWirelessStatusIndicatorSprite(0, 0);
+                    sub_81AE70C(data->listTaskId);
+                    sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
+                    sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.playerTrainerId));
+                    PlaySE(SE_PN_ON);
+                    data->state = 4;
+                }
+                else
+                {
+                    PlaySE(SE_WALL_HIT);
+                }
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                data->state = 6;
+            }
+            break;
+        }
+        break;
+    case 4:
+        sub_8018884(gUnknown_082EFC3C);
+        sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
+        data->state = 5;
+        break;
+    case 5:
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            data->state = 10;
+        }
+
+        switch (sub_8011A74())
+        {
+        case 1:
+        case 2:
+        case 6:
+            data->state = 8;
+            break;
+        case 5:
+            sub_8018884(gUnknown_082EDDF4);
+            sub_8011A64(0, 0);
+            break;
+        }
+        break;
+    case 6:
+    case 8:
+    case 10:
+        DestroyListMenuTask(data->listTaskId, 0, 0);
+        CopyBgTilemapBufferToVram(0);
+        RemoveWindow(data->field_D);
+        RemoveWindow(data->listWindowId);
+        DestroyTask(data->field_11);
+        Free(data->field_0);
+        Free(data->field_4);
+        data->state++;
+        break;
+    case 9:
+        if (mevent_0814257C(&data->textState, gUnknown_082EDF80[sub_8011A74()]))
+        {
+            sub_800E084();
+            DestroyTask(taskId);
+            sub_800EDD4();
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 7:
+        sub_800E084();
+        sub_8018884(gText_PleaseStartOver);
+        DestroyTask(taskId);
+        sub_800EDD4();
+        gSpecialVar_Result = 5;
+        break;
+    case 11:
+        data->state++;
+        sub_800ADF8();
+        break;
+    case 12:
+        if (sub_800A520())
+            DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_80152A8(u32 arg0)
+{
+    u8 taskId;
+    struct UnkStruct_Group *dataPtr;
+
+    taskId = CreateTask(sub_80152F4, 0);
+    gUnknown_02022C30.group = dataPtr = (void*)(gTasks[taskId].data);
+    gUnknown_03000DA4 = dataPtr;
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+    dataPtr->field_12 = arg0 - 21;
+    gSpecialVar_Result = 0;
+}
+
+void sub_80152F4(u8 taskId)
+{
+    s32 id;
+    struct WindowTemplate winTemplate;
+    struct UnkStruct_Group *data = gUnknown_02022C30.group;
+
+    switch (data->state)
+    {
+    case 0:
+        sub_8010F84(0, 0, 0);
+        sub_800B488();
+        OpenLink();
+        sub_8011C5C();
+        data->field_4 = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0x200);
+        data->state = 1;
+        break;
+    case 1:
+        sub_8018884(gUnknown_082EFBC8);
+        data->state = 2;
+        break;
+    case 2:
+        sub_80175EC(data->field_4, 4);
+        sub_8017580(data->field_0, 16);
+        data->field_11 = sub_8016FF0(data->field_4, data->field_12 + 7);
+
+        if (data->field_13 != 0)
+        {
+            winTemplate = gUnknown_082F0174;
+            winTemplate.baseBlock = sub_8019930();
+            data->listWindowId = AddWindow(&winTemplate);
+
+            sub_8018784(data->listWindowId);
+            gMultiuseListMenuTemplate = gUnknown_082F0204;
+            gMultiuseListMenuTemplate.windowId = data->listWindowId;
+            data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+
+            CopyBgTilemapBufferToVram(0);
+        }
+
+        data->field_F = 0;
+        data->state = 3;
+        break;
+    case 3:
+        id = sub_8013E44();
+        switch (id)
+        {
+        case 1:
+            PlaySE(SE_PC_LOGIN);
+        default:
+            if (data->field_13 != 0)
+                sub_81AE70C(data->listTaskId);
+            break;
+        case 0:
+            if (data->field_13 != 0)
+                id = ListMenuHandleInputGetItemId(data->listTaskId);
+            if (data->field_14 > 120)
+            {
+                if (data->field_0->arr[0].field_1A_0 == 1 && !data->field_0->arr[0].unk.field_0.unk_0a_7)
+                {
+                    if (sub_8016F1C(&data->field_0->arr[0], data->field_12 + 7))
+                    {
+                        data->field_F = 0;
+                        data->field_14 = 0;
+                        sub_800E0E8();
+                        CreateWirelessStatusIndicatorSprite(0, 0);
+                        sub_8011FC8(data->field_0->arr[0].unk.playerName, ReadAsU16(data->field_0->arr[0].unk.field_0.playerTrainerId));
+                        PlaySE(SE_PN_ON);
+                        data->state = 4;
+                    }
+                    else
+                    {
+                        PlaySE(SE_BOO);
+                        data->state = 10;
+                    }
+                }
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                data->state = 6;
+                data->field_14 = 0;
+            }
+            data->field_14++;
+            break;
+        }
+        break;
+    case 4:
+        sub_8018884(gUnknown_082EFC90);
+        sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
+        data->state = 5;
+        break;
+    case 5:
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            data->state = 12;
+        }
+
+        switch (sub_8011A74())
+        {
+        case 1:
+        case 2:
+        case 6:
+            data->state = 8;
+            break;
+        case 5:
+            sub_8018884(gUnknown_082EDEC4);
+            sub_8011A64(0, 0);
+            break;
+        }
+        break;
+    case 6:
+    case 8:
+    case 10:
+    case 12:
+        if (data->field_13 != 0)
+        {
+            DestroyListMenuTask(data->listTaskId, 0, 0);
+            CopyBgTilemapBufferToVram(0);
+            RemoveWindow(data->listWindowId);
+        }
+        DestroyTask(data->field_11);
+        Free(data->field_0);
+        Free(data->field_4);
+        data->state++;
+        break;
+    case 9:
+        if (mevent_0814257C(&data->textState, gUnknown_082EDF04))
+        {
+            sub_800E084();
+            DestroyTask(taskId);
+            sub_800EDD4();
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 7:
+        if (mevent_0814257C(&data->textState, gText_WirelessSearchCanceled))
+        {
+            sub_800E084();
+            DestroyTask(taskId);
+            sub_800EDD4();
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 11:
+        if (mevent_0814257C(&data->textState, gUnknown_082EFD58[data->field_12]))
+        {
+            sub_800E084();
+            DestroyTask(taskId);
+            sub_800EDD4();
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 13:
+        data->state++;
+        sub_800ADF8();
+        break;
+    case 14:
+        if (sub_800A520())
+            DestroyTask(taskId);
+        break;
+    }
+}
+
+void UnionRoomSpecial(void)
+{
+    struct UnkStruct_URoom *dataPtr;
+
+    sub_8010F60();
+    CreateTask(sub_80156E0, 10);
+
+    // dumb line needed to match
+    gUnknown_02022C30.uRoom = gUnknown_02022C30.uRoom;
+
+    dataPtr = AllocZeroed(0x26C);
+    gUnknown_02022C30.uRoom = dataPtr;
+    gUnknown_03000DA8 = dataPtr;
+
+    dataPtr->field_14 = 0;
+    dataPtr->field_16 = 0;
+    dataPtr->field_10 = 0;
+    dataPtr->field_12 = 0;
+
+    gSpecialVar_Result = 0;
+    sub_819A2BC(0xD0, 1);
+}
+
+u16 ReadAsU16(const u8 *ptr)
+{
+    return (ptr[1] << 8) | (ptr[0]);
+}
+
+void sub_8015664(u32 arg0, const u8 *src)
+{
+    struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
+
+    data->field_14 = 8;
+    data->field_15 = arg0;
+    if (src != gStringVar4)
+        StringExpandPlaceholders(gStringVar4, src);
+}
+
+void sub_801568C(const u8 *src)
+{
+    struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
+
+    data->field_14 = 26;
+    if (src != gStringVar4)
+        StringExpandPlaceholders(gStringVar4, src);
+}
+
+void sub_80156B0(struct UnkStruct_URoom *data)
+{
+    memcpy(&gDecompressionBuffer[0x3F00], data->field_0, 0x100);
+}
+
+void sub_80156C8(struct UnkStruct_URoom *data)
+{
+    memcpy(data->field_0, &gDecompressionBuffer[0x3F00], 0x100);
 }
