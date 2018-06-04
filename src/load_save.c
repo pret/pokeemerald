@@ -38,7 +38,7 @@ EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
 EWRAM_DATA u8 gSaveblock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
-EWRAM_DATA u32 gLastEncryptionKey = {0};
+EWRAM_DATA u32 gLastEncryptionKey = 0;
 
 // IWRAM common
 IWRAM_DATA bool32 gFlashMemoryPresent;

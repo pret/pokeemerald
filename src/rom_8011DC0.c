@@ -15,6 +15,7 @@
 #include "sound.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
+#include "constants/maps.h"
 #include "trade.h"
 #include "trainer_card.h"
 #include "overworld.h"
@@ -22,6 +23,9 @@
 #include "load_save.h"
 #include "cable_club.h"
 #include "field_control_avatar.h"
+#include "party_menu.h"
+#include "field_weather.h"
+#include "palette.h"
 
 extern void HealPlayerParty(void);
 
@@ -30,7 +34,7 @@ struct UnkStruct_Shared
     struct UnkLinkRfuStruct_02022B14 field_0;
     u8 field_xD;
     u8 field_E;
-    u8 field_F;
+    u8 field_xF;
     u8 playerName[PLAYER_NAME_LENGTH];
 };
 
@@ -75,7 +79,7 @@ struct UnkStruct_Leader
     u8 state;
     u8 textState;
     u8 field_E;
-    u8 field_F;
+    u8 listWindowId;
     u8 field_10;
     u8 field_11;
     u8 listTaskId;
@@ -152,6 +156,8 @@ u16 ReadAsU16(const u8 *ptr);
 void sub_8012780(u8 taskId);
 void sub_80134E8(u8 taskId);
 void sub_8013C7C(u8 taskId);
+void sub_8014A40(u8 taskId);
+void sub_8014F48(u8 taskId);
 void sub_80175EC(struct UnkStruct_Main4 *arg0, u8 count);
 void sub_8017580(struct UnkStruct_Main0 *arg0, u8 count);
 u8 sub_8016FC0(struct UnkStruct_Main4 *arg0, u32 arg1);
@@ -176,6 +182,18 @@ u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
 void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801B940(void);
 void sub_801B94C(u16);
+u16 sub_801B39C(void);
+void sub_801AC54(void);
+void sub_801DD98(void);
+void sub_802A9A8(u8 monId, MainCallback callback);
+void sub_802493C(u8 monId, MainCallback callback);
+void sub_8020C70(MainCallback callback);
+void sub_80149D8(void);
+u16 sub_8019930(void);
+void sub_8018784(u8 windowId);
+void sub_8018884(const u8 *src);
+bool32 mevent_0814257C(u8 *textState, const u8 *str);
+s8 sub_8018B08(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
 
 // const rom data
 extern const u8 *const gUnknown_082EDB60[][5];
@@ -200,6 +218,8 @@ extern const u8 gUnknown_082EDDF4[];
 extern const u8 gUnknown_082EF7DC[];
 extern const u8 gUnknown_082EDE48[];
 extern const u8 gUnknown_082EDE64[];
+extern const u8 gUnknown_082EDF40[];
+extern const u8 gText_PleaseStartOver[];
 
 extern const u32 gUnknown_082F00C4[];
 
@@ -342,10 +362,10 @@ void sub_8012780(u8 taskId)
         case 2:
         case 3:
         case 4:
-            data->field_F = AddWindow(&gUnknown_082F011C);
+            data->listWindowId = AddWindow(&gUnknown_082F011C);
             break;
         case 5:
-            data->field_F = AddWindow(&gUnknown_082F0124);
+            data->listWindowId = AddWindow(&gUnknown_082F0124);
             break;
         }
         data->field_11 = AddWindow(&gUnknown_082F012C);
@@ -355,9 +375,9 @@ void sub_8012780(u8 taskId)
         PutWindowTilemap(data->field_10);
         CopyWindowToVram(data->field_10, 2);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->field_F, FALSE);
+        NewMenuHelpers_DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = gUnknown_082F015C;
-        gMultiuseListMenuTemplate.windowId = data->field_F;
+        gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
         NewMenuHelpers_DrawStdWindowFrame(data->field_11, FALSE);
@@ -633,10 +653,10 @@ void sub_8012F64(struct UnkStruct_Leader *data)
     sub_819746C(data->field_11, FALSE);
     DestroyListMenuTask(data->listTaskId, 0, 0);
     ClearWindowTilemap(data->field_10);
-    sub_819746C(data->field_F, FALSE);
+    sub_819746C(data->listWindowId, FALSE);
     CopyBgTilemapBufferToVram(0);
     RemoveWindow(data->field_11);
-    RemoveWindow(data->field_F);
+    RemoveWindow(data->listWindowId);
     RemoveWindow(data->field_10);
     DestroyTask(data->field_17);
 
@@ -1470,8 +1490,8 @@ void sub_8014210(u16 battleFlags)
     SavePlayerParty();
     LoadPlayerBag();
     gLinkPlayers[0].linkType = 0x2211;
-    gLinkPlayers[GetMultiplayerId()].lp_field_18 = GetMultiplayerId();
-    gLinkPlayers[GetMultiplayerId() ^ 1].lp_field_18 = GetMultiplayerId() ^ 1;
+    gLinkPlayers[GetMultiplayerId()].id = GetMultiplayerId();
+    gLinkPlayers[GetMultiplayerId() ^ 1].id = GetMultiplayerId() ^ 1;
     gMain.savedCallback = sub_80B360C;
     gBattleTypeFlags = battleFlags;
     PlayBattleBGM();
@@ -1494,4 +1514,473 @@ void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
     sub_809D2BC();
     Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
     warp_in();
+}
+
+void sub_8014384(void)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        CreateTask(sub_80140E0, 5);
+        gMain.state++;
+        break;
+    case 1:
+        if (!FuncIsActiveTask(sub_80140E0))
+            SetMainCallback2(sub_8086074);
+        break;
+    }
+
+    RunTasks();
+    RunTextPrinters();
+    AnimateSprites();
+    BuildOamBuffer();
+}
+
+void sub_80143E4(void *arg0, bool32 arg1)
+{
+    u16 *argAsU16Ptr = arg0;
+
+    sub_80C30A4(argAsU16Ptr);
+    if (arg1)
+        argAsU16Ptr[48] = sub_801B39C();
+    else
+        argAsU16Ptr[48] = 0;
+}
+
+void sub_801440C(u8 taskId)
+{
+    sub_801B940();
+    switch (gUnknown_02022C2C)
+    {
+    case 1 ... 4:
+    case 9 ... 11:
+    case 13:
+    case 15:
+        sub_800E3A8();
+        break;
+    }
+
+    switch (gUnknown_02022C2C)
+    {
+    case 65:
+    case 81:
+        overworld_free_bg_tilemaps();
+        gMain.savedCallback = sub_801AC54;
+        sub_81B8518(3);
+        break;
+    case 1:
+        overworld_free_bg_tilemaps();
+        sub_80143E4(gBlockSendBuffer, TRUE);
+        HealPlayerParty();
+        SavePlayerParty();
+        LoadPlayerBag();
+        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, 1);
+        SetMainCallback2(sub_8014384);
+        break;
+    case 2:
+        overworld_free_bg_tilemaps();
+        HealPlayerParty();
+        SavePlayerParty();
+        LoadPlayerBag();
+        sub_80143E4(gBlockSendBuffer, TRUE);
+        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, 2);
+        SetMainCallback2(sub_8014384);
+        break;
+    case 3:
+        overworld_free_bg_tilemaps();
+        HealPlayerParty();
+        SavePlayerParty();
+        LoadPlayerBag();
+        sub_80143E4(gBlockSendBuffer, TRUE);
+        sub_8014304(MAP_GROUP(DOUBLE_BATTLE_COLOSSEUM), MAP_NUM(DOUBLE_BATTLE_COLOSSEUM), 5, 8, 5);
+        SetMainCallback2(sub_8014384);
+        break;
+    case 4:
+        sub_80143E4(gBlockSendBuffer, TRUE);
+        overworld_free_bg_tilemaps();
+        sub_8014304(MAP_GROUP(TRADE_CENTER), MAP_NUM(TRADE_CENTER), 5, 8, 3);
+        SetMainCallback2(sub_8014384);
+        break;
+    case 15:
+        sub_80143E4(gBlockSendBuffer, TRUE);
+        overworld_free_bg_tilemaps();
+        sub_8014304(MAP_GROUP(RECORD_CORNER), MAP_NUM(RECORD_CORNER), 8, 9, 4);
+        SetMainCallback2(sub_8014384);
+        break;
+    case 68:
+        overworld_free_bg_tilemaps();
+        CreateTask(sub_8013F90, 0);
+        break;
+    case 5:
+    case 69:
+        if (GetMultiplayerId() == 0)
+        {
+            sub_800ED10();
+        }
+        else
+        {
+            sub_800ED28();
+            sub_8010F84(69, 0, 1);
+        }
+        sub_801DD98();
+        break;
+    case 8:
+    case 72:
+        sub_80143E4(gBlockSendBuffer, FALSE);
+        SetMainCallback2(sub_80141A4);
+        break;
+    case 9:
+        sub_8014290(8, 5, 1);
+        sub_802A9A8(GetCursorSelectionMonId(), CB2_LoadMap);
+        break;
+    case 10:
+        sub_8014290(7, 9, 1);
+        sub_8020C70(CB2_LoadMap);
+        break;
+    case 11:
+        sub_8014290(8, 5, 1);
+        sub_802493C(GetCursorSelectionMonId(), CB2_LoadMap);
+        break;
+    }
+
+    DestroyTask(taskId);
+    gSpecialVar_Result = 1;
+    if (gUnknown_02022C2C != 68)
+        ScriptContext2_Disable();
+}
+
+extern u8 gUnknown_0203CEF8[];
+
+void sub_8014790(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 *sendBuff = (u16*)(gBlockSendBuffer);
+
+    switch (data[0])
+    {
+    case 0:
+        gSpecialVar_Result = 1;
+        switch (gUnknown_02022C2C)
+        {
+        case 14:
+        case 28:
+            gLinkPlayers[0].linkType = 0x2211;
+            gLinkPlayers[0].id = 0;
+            gLinkPlayers[1].id = 2;
+            sendBuff[0] = GetMonData(&gPlayerParty[gUnknown_0203CEF8[0] - 1], MON_DATA_SPECIES);
+            sendBuff[1] = GetMonData(&gPlayerParty[gUnknown_0203CEF8[1] - 1], MON_DATA_SPECIES, NULL);
+            gMain.savedCallback = NULL;
+            data[0] = 4;
+            sub_800E3A8();
+            ResetBlockReceivedFlags();
+            break;
+        case 16:
+        case 23 ... 27:
+            sub_800E3A8();
+            DestroyTask(taskId);
+        default:
+            EnableBothScriptContexts();
+            data[0] = 1;
+            break;
+        }
+        break;
+    case 1:
+        if (!ScriptContext1_IsScriptSetUp())
+        {
+            FadeScreen(1, 0);
+            data[0] = 2;
+        }
+        break;
+    case 2:
+        if (!gPaletteFade.active)
+        {
+            if (gUnknown_02022C2C == 29)
+            {
+                DestroyTask(taskId);
+                SetMainCallback2(sub_80773AC);
+            }
+            else
+            {
+                sub_800ADF8();
+                data[0] = 3;
+            }
+        }
+        break;
+    case 3:
+        if (sub_800A520())
+        {
+            DestroyTask(taskId);
+            sub_80149D8();
+        }
+        break;
+    case 4:
+        if (SendBlock(0, gBlockSendBuffer, 0xE))
+            data[0] = 5;
+        break;
+    case 5:
+        if (GetBlockReceivedStatus() == 3)
+        {
+            ResetBlockReceivedFlags();
+            if (sub_80B2AF4(gBlockRecvBuffer[0], gBlockRecvBuffer[1]))
+            {
+                gSpecialVar_Result = 11;
+                data[0] = 7;
+            }
+            else
+            {
+                data[0] = 6;
+            }
+        }
+        break;
+    case 6:
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+        break;
+    case 7:
+        sub_800AC34();
+        data[0] = 8;
+        break;
+    case 8:
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            sub_800E084();
+            EnableBothScriptContexts();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void sub_80149C4(void)
+{
+    CreateTask(sub_8014790, 0);
+}
+
+void sub_80149D8(void)
+{
+    u8 taskId = CreateTask(sub_801440C, 0);
+    gTasks[taskId].data[0] = 0;
+}
+
+void sub_8014A00(u32 arg0)
+{
+    u8 taskId;
+    struct UnkStruct_Leader *dataPtr;
+
+    taskId = CreateTask(sub_8014A40, 0);
+    gUnknown_02022C30.leader = dataPtr = (void*)(gTasks[taskId].data);
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+    dataPtr->field_18 = arg0;
+    gSpecialVar_Result = 0;
+}
+
+void sub_8014A40(u8 taskId)
+{
+    struct UnkStruct_Leader *data = gUnknown_02022C30.leader;
+    struct WindowTemplate winTemplate;
+    s32 val;
+
+    switch (data->state)
+    {
+    case 0:
+        gUnknown_02022C2C = data->field_18;
+        gUnknown_02022C2D = 2;
+        sub_8010F84(data->field_18, 0, 0);
+        sub_8010FA0(FALSE, FALSE);
+        sub_800B488();
+        OpenLink();
+        sub_8011C10(2);
+        data->state = 1;
+        break;
+    case 1:
+        data->field_4 = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0xA0);
+        data->field_8 = AllocZeroed(0xA0);
+        sub_80175EC(data->field_4, 4);
+        sub_8017580(data->field_0, 5);
+        sub_800DF90(&data->field_0->arr[0].unk.field_0, data->field_0->arr[0].unk.playerName);
+        data->field_0->arr[0].field_18 = 0;
+        data->field_0->arr[0].field_1A_0 = 1;
+        data->field_0->arr[0].field_1A_1 = 0;
+        data->field_0->arr[0].field_1B = 0;
+        data->field_17 = sub_8016FC0(data->field_4, 0xFF);
+
+        winTemplate = gUnknown_082F011C;
+        winTemplate.baseBlock = sub_8019930();
+        winTemplate.paletteNum = 0xC;
+        data->listWindowId = AddWindow(&winTemplate);
+        sub_8018784(data->listWindowId);
+        gMultiuseListMenuTemplate = gUnknown_082F015C;
+        gMultiuseListMenuTemplate.windowId = data->listWindowId;
+        data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+
+        CopyBgTilemapBufferToVram(0);
+        data->field_13 = 1;
+        data->state = 2;
+        break;
+    case 2:
+        StringCopy(gStringVar1, gUnknown_082F0048[gUnknown_02022C2C]);
+        sub_801262C(gStringVar4, gUnknown_02022C2C);
+        data->state = 3;
+        break;
+    case 3:
+        sub_8018884(gStringVar4);
+        data->state = 4;
+        break;
+    case 4:
+        sub_801320C(data, 5, 6);
+        if (gMain.newKeys & B_BUTTON)
+        {
+            data->state = 13;
+            sub_800E084();
+        }
+        break;
+    case 6:
+        if (mevent_0814257C(&data->textState, gUnknown_082EDF40))
+        {
+            data->field_13 = sub_8013398(data->field_0);
+            sub_81AE70C(data->listTaskId);
+            data->state = 2;
+        }
+        break;
+    case 5:
+        data->state = 7;
+        break;
+    case 7:
+        switch (sub_8018B08(&data->textState, &data->field_14, 0, gStringVar4))
+        {
+        case 0:
+            sub_800E0E8();
+            CreateWirelessStatusIndicatorSprite(0, 0);
+            data->field_0->arr[data->field_13].field_1B = 0;
+            sub_81AE70C(data->listTaskId);
+            data->field_19 = 5;
+            sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            data->state = 8;
+            break;
+        case 1:
+        case -1:
+            data->field_19 = 6;
+            sub_8010688(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            data->state = 8;
+            break;
+        }
+        break;
+    case 8:
+        val = sub_8010714(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+        if (val == 1)
+        {
+            if (data->field_19 == 5)
+            {
+                data->field_0->arr[data->field_13].field_1B = 0;
+                sub_81AE70C(data->listTaskId);
+                data->field_13++;
+                sub_8018404(gStringVar1, &data->field_0->arr[data->field_13 - 1]);
+                StringExpandPlaceholders(gStringVar4, gUnknown_082EDC9C);
+                data->state = 9;
+                sub_800EF38();
+            }
+            else
+            {
+                sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId));
+                data->field_0->arr[data->field_13].field_1A_0 = 0;
+                sub_8013398(data->field_0);
+                sub_81AE70C(data->listTaskId);
+                data->state = 2;
+            }
+
+            data->field_19 = 0;
+        }
+        else if (val == 2)
+        {
+            sub_8011A64(0, 0);
+            data->state = 2;
+        }
+        break;
+    case 9:
+        sub_8018884(gStringVar4);
+        data->state = 10;
+        break;
+    case 10:
+        if (++data->field_E > 120)
+            data->state = 11;
+        break;
+    case 11:
+        if (!sub_801320C(data, 5, 6))
+            data->state = 12;
+        break;
+    case 12:
+        if (sub_800EF1C())
+        {
+            sub_800EF58(FALSE);
+            data->state = 15;
+        }
+        else
+        {
+            data->state = 6;
+        }
+        break;
+    case 13:
+        sub_800E084();
+        sub_800EDD4();
+        DestroyListMenuTask(data->listTaskId, 0, 0);
+        CopyBgTilemapBufferToVram(0);
+        RemoveWindow(data->listWindowId);
+        DestroyTask(data->field_17);
+        Free(data->field_8);
+        Free(data->field_0);
+        Free(data->field_4);
+        data->state++;
+        break;
+    case 14:
+        if (mevent_0814257C(&data->textState, gText_PleaseStartOver))
+        {
+            DestroyTask(taskId);
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 15:
+        if (sub_8011A74() == 1 || sub_8011A74() == 2)
+        {
+            data->state = 13;
+        }
+        else if (gReceivedRemoteLinkPlayers != 0)
+        {
+            sub_8011068(1);
+            data->state++;
+        }
+        break;
+    case 16:
+        DestroyListMenuTask(data->listTaskId, 0, 0);
+        CopyBgTilemapBufferToVram(0);
+        RemoveWindow(data->listWindowId);
+        DestroyTask(data->field_17);
+        Free(data->field_8);
+        Free(data->field_0);
+        Free(data->field_4);
+        sub_800ADF8();
+        data->state++;
+        break;
+    case 17:
+        if (sub_800A520())
+            DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_8014EFC(u32 arg0)
+{
+    u8 taskId;
+    struct UnkStruct_Group *dataPtr;
+
+    taskId = CreateTask(sub_8014F48, 0);
+    gUnknown_02022C30.group = dataPtr = (void*)(gTasks[taskId].data);
+    gUnknown_03000DA4 = dataPtr;
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+    dataPtr->field_12 = arg0 - 21;
+    gSpecialVar_Result = 0;
 }

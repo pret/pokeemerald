@@ -55,6 +55,7 @@ SECTIONS {
         src/link.o(.text);
         src/link_rfu.o(.text);
         asm/link_rfu.o(.text);
+        src/rom_8011DC0.o(.text);
         asm/rom_8011DC0.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
@@ -367,6 +368,7 @@ SECTIONS {
         src/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link_rfu.o(.rodata);
+        src/rom_8011DC0.o(.rodata);
         data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);

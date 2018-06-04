@@ -38,5 +38,6 @@ void sub_81B1F18(u8 taskId, u8 pokemonIdx, s8 a, s16 hp, TaskFunc func);
 void sub_81B1B5C(void *a, u8 b);
 u8 sub_81B1BD4();
 void sub_81B8448();
+void sub_81B8518(u8 unused);
 
 #endif // GUARD_PARTY_MENU_H
