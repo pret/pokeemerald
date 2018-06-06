@@ -3,7 +3,8 @@ dist: trusty
 sudo: false
 env:
   global:
-    - DEVKITARM=$HOME/devkitARM
+    - DEVKITPRO=$HOME
+    - DEVKITARM=$DEVKITPRO/devkitARM
 addons:
   apt:
     packages:
@@ -13,12 +14,11 @@ cache:
   apt: true
 install:
   - pushd $HOME
-  - travis_retry wget https://downloads.sourceforge.net/project/devkitpro/devkitARM/devkitARM_r47/devkitARM_r47-x86_64-linux.tar.bz2
-  - tar xf devkitARM*.tar.bz2
+  - travis_retry wget https://github.com/devkitPro/buildscripts/releases/download/devkitARM_r48/devkitARM_r48-linux.tar.xz
+  - tar xJf devkitARM*.tar.xz
   - travis_retry git clone https://github.com/pret/agbcc.git
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
   - popd
-
 matrix:
   include:
     - os: linux
