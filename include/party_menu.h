@@ -39,5 +39,7 @@ void sub_81B1B5C(void *a, u8 b);
 u8 sub_81B1BD4();
 void sub_81B8448();
 void sub_81B8518(u8 unused);
+u8 sub_81B1360(void);
+void sub_81B8904(u8 arg0, void (*callback)(void));
 
 #endif // GUARD_PARTY_MENU_H

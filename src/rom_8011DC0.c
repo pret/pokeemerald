@@ -16,6 +16,8 @@
 #include "constants/songs.h"
 #include "constants/game_stat.h"
 #include "constants/maps.h"
+#include "constants/species.h"
+#include "constants/rgb.h"
 #include "trade.h"
 #include "trainer_card.h"
 #include "overworld.h"
@@ -27,6 +29,9 @@
 #include "field_weather.h"
 #include "palette.h"
 #include "decompress.h"
+#include "start_menu.h"
+#include "data2.h"
+#include "field_screen.h"
 
 extern void HealPlayerParty(void);
 
@@ -116,15 +121,31 @@ struct UnkStruct_Group
 
 struct UnkStruct_URoom
 {
-    void *field_0;
-    void *field_4;
-    void *field_8;
-    void *field_C;
+    struct UnkStruct_Main0 *field_0;
+    struct UnkStruct_Main4 *field_4;
+    struct UnkStruct_Main0 *field_8;
+    struct UnkStruct_Main4 *field_C;
     u16 field_10;
     u16 field_12;
-    u8 field_14;
+    u8 state;
     u8 field_15;
-    u8 field_16;
+    u8 textState;
+    u8 field_17;
+    u8 field_18;
+    u8 field_19;
+    u8 field_1A;
+    u8 field_1B;
+    u8 field_1C;
+    u8 field_1D;
+    u8 field_1E;
+    u8 field_1F;
+    u8 field_20;
+    u8 spriteIds[40];
+    u8 field_4A;
+    u16 field_4C[6];
+    u8 field_58[0x98 - 0x58];
+    u16 field_98;
+    u16 field_9A;
 };
 
 union UnkUnion_Main
@@ -139,13 +160,14 @@ struct TradeUnkStruct
     u16 field_0;
     u16 field_2;
     u32 field_4;
-    u32 field_8;
+    u8 field_8;
+    u8 field_9;
     u16 field_A;
     u16 field_C;
-    u16 field_E;
-    u16 field_10;
+    u16 species;
+    u16 level;
     u16 field_12;
-    u32 field_14;
+    u32 personality;
 };
 
 extern struct TradeUnkStruct gUnknown_02022C40;
@@ -213,6 +235,38 @@ void sub_8018884(const u8 *src);
 bool32 mevent_0814257C(u8 *textState, const u8 *str);
 s8 sub_8018B08(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
 bool32 sub_8016F1C(struct UnkStruct_x20 *arg0, s16 arg1);
+u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
+void sub_8019F2C(void);
+s16 sub_8019E70(u8 *arg0, s32 arg1);
+bool32 sub_80180A0(u8 monId, struct TradeUnkStruct *arg1);
+void sub_80180E8(u8 monId, struct TradeUnkStruct *arg1);
+bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3);
+void sub_80181CC(void);
+bool32 sub_8017940(void);
+u8 sub_8016B00(void);
+void sub_801A274(struct UnkStruct_URoom *arg0);
+void sub_801A284(struct UnkStruct_URoom *arg0);
+void sub_8017FD8(struct UnkStruct_URoom *arg0);
+void sub_801689C(struct UnkStruct_URoom *arg0);
+u8 sub_80181DC(struct UnkStruct_URoom *arg0);
+bool32 sub_80168DC(struct UnkStruct_URoom *arg0);
+bool32 sub_801704C(void);
+u32 sub_8017CF8(u32 arg1, struct UnkStruct_Main0 *arg0);
+u32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 arg3);
+void sub_801818C(bool32 arg0);
+void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
+s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate);
+s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6);
+bool32 sub_8018024(void);
+u32 sub_8017984(u32 arg0);
+void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
+void sub_8017D9C(u8 *dst, u32 arg1, u32 playerGender);
+s32 sub_80179AC(struct UnkStruct_x20 *arg0);
+void sub_8017E00(u8 *dst, u8 arg1);
+void sub_8019F04(u8 *spriteIds);
+void sub_8019E3C(void);
+void sub_80173B0(void);
+s32 sub_8017D04(u32 type, u32 species);
 
 // const rom data
 extern const u8 *const gUnknown_082EDB60[][5];
@@ -245,6 +299,24 @@ extern const u8 gUnknown_082EFC90[];
 extern const u8 gUnknown_082EDEC4[];
 extern const u8 gUnknown_082EDF04[];
 extern const u8 gText_WirelessSearchCanceled[];
+extern const u8 gUnknown_082EF4FC[];
+extern const u8 gUnknown_082EF520[];
+extern const u8 gUnknown_082EF5B8[];
+extern const u8 gUnknown_082EF1EC[];
+extern const u8 gUnknown_082EF544[];
+extern const u8 gUnknown_082EF47C[];
+extern const u8 gUnknown_082EE6C8[];
+extern const u8 gUnknown_082EE004[];
+extern const u8 gUnknown_082EEBD0[];
+extern const u8 gUnknown_082EEB88[];
+extern const u8 gUnknown_082EE598[];
+extern const u8 gUnknown_082EEC14[];
+extern const u8 gUnknown_082EF590[];
+extern const u8 gUnknown_082EF20C[];
+extern const u8 gUnknown_082EF564[];
+extern const u8 gUnknown_082EF4C4[];
+extern const u8 gUnknown_082EF298[];
+extern const u8 gUnknown_082EF65C[];
 
 extern const u32 gUnknown_082F00C4[];
 
@@ -256,9 +328,17 @@ extern const struct WindowTemplate gUnknown_082F012C;
 extern const struct WindowTemplate gUnknown_082F011C;
 extern const struct WindowTemplate gUnknown_082F0174;
 extern const struct WindowTemplate gUnknown_082F017C;
+extern const struct WindowTemplate gUnknown_082F021C;
+extern const struct WindowTemplate gUnknown_082F025C;
+extern const struct WindowTemplate gUnknown_082F0294;
+extern const struct WindowTemplate gUnknown_082F034C;
 
 extern const struct ListMenuTemplate gUnknown_082F015C;
 extern const struct ListMenuTemplate gUnknown_082F0204;
+extern const struct ListMenuTemplate gUnknown_082F0244;
+extern const struct ListMenuTemplate gUnknown_082F027C;
+extern const struct ListMenuTemplate gUnknown_082F032C;
+extern const struct ListMenuTemplate gUnknown_082F03A4;
 
 extern const u8 *const gUnknown_082F0048[];
 extern const u8 *const gUnknown_082EDDC4[];
@@ -267,6 +347,14 @@ extern const u8 *const gUnknown_082EDD50[];
 extern const u8 *const gUnknown_082EDE9C[];
 extern const u8 *const gUnknown_082EDF80[];
 extern const u8 *const gUnknown_082EFD58[];
+extern const u8 *const gUnknown_082EEB80[];
+extern const u8 *const gUnknown_082EE378[];
+extern const u8 *const gUnknown_082EEC9C[];
+extern const u8 *const gUnknown_082EED3C[];
+extern const u8 *const gUnknown_082EE324[];
+
+extern const u8 *const gUnknown_082EE82C[][2];
+extern const u8 *const gUnknown_082EE24C[][2];
 
 extern const struct UnkStruct_Shared gUnknown_082F045C[];
 
@@ -2359,8 +2447,8 @@ void UnionRoomSpecial(void)
     gUnknown_02022C30.uRoom = dataPtr;
     gUnknown_03000DA8 = dataPtr;
 
-    dataPtr->field_14 = 0;
-    dataPtr->field_16 = 0;
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
     dataPtr->field_10 = 0;
     dataPtr->field_12 = 0;
 
@@ -2377,7 +2465,7 @@ void sub_8015664(u32 arg0, const u8 *src)
 {
     struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
 
-    data->field_14 = 8;
+    data->state = 8;
     data->field_15 = arg0;
     if (src != gStringVar4)
         StringExpandPlaceholders(gStringVar4, src);
@@ -2387,7 +2475,7 @@ void sub_801568C(const u8 *src)
 {
     struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
 
-    data->field_14 = 26;
+    data->state = 26;
     if (src != gStringVar4)
         StringExpandPlaceholders(gStringVar4, src);
 }
@@ -2400,4 +2488,688 @@ void sub_80156B0(struct UnkStruct_URoom *data)
 void sub_80156C8(struct UnkStruct_URoom *data)
 {
     memcpy(data->field_0, &gDecompressionBuffer[0x3F00], 0x100);
+}
+
+void sub_80156E0(u8 taskId)
+{
+    u32 var;
+    s32 var5;
+    u8 monId = 0;
+    struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
+    s16 *taskData = gTasks[taskId].data;
+
+    switch (data->state)
+    {
+    case 0:
+        data->field_4 = AllocZeroed(0x70);
+        data->field_C = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0x100);
+        data->field_8 = AllocZeroed(0x20);
+        sub_8017580(data->field_0, 8);
+        gUnknown_02022C2C = 0x40;
+        data->field_20 = sub_8016DF0(data->field_C, data->field_4, 9);
+        sub_8019F2C();
+        data->state = 1;
+        break;
+    case 1:
+        if (sub_8019E70(data->spriteIds, taskData[0]++) == 8)
+            data->state = 2;
+        break;
+    case 2:
+        sub_8010F84(0x40, 0, 0);
+        sub_8010FCC(gUnknown_02022C40.field_2, gUnknown_02022C40.field_A, gUnknown_02022C40.field_C);
+        sub_800B488();
+        OpenLink();
+        sub_8011C84();
+        sub_8017580(data->field_8, 1);
+        sub_80175EC(data->field_4, 4);
+        sub_80175EC(data->field_C, 4);
+        gSpecialVar_Result = 0;
+        data->state = 3;
+        break;
+    case 3:
+        if ((sub_81B1360() == 8 || sub_81B1360() == 9) && gUnknown_02022C40.field_0 != 0)
+        {
+            monId = GetCursorSelectionMonId();
+            switch (gUnknown_02022C40.field_0)
+            {
+            case 1:
+                sub_8011090(0x54, 0, 1);
+                if (monId >= PARTY_SIZE)
+                {
+                    sub_801807C(&gUnknown_02022C40);
+                    sub_8010FCC(0, 0, 0);
+                    sub_801568C(gUnknown_082EF4FC);
+                }
+                else if (sub_80180A0(GetCursorSelectionMonId(), &gUnknown_02022C40))
+                {
+                    sub_8015664(0x34, gUnknown_082EF47C);
+                }
+                else
+                {
+                    data->state = 55;
+                }
+                break;
+            case 2:
+                sub_80156C8(data);
+                taskData[1] = gUnknown_02022C40.field_8;
+                if (monId >= PARTY_SIZE)
+                {
+                    sub_801568C(gUnknown_082EF544);
+                }
+                else
+                {
+                    sub_8011090(0x54, 0, 1);
+                    gUnknown_02022C2C = 0x44;
+                    sub_80180E8(GetCursorSelectionMonId(), &gUnknown_02022C40);
+                    data->state = 51;
+                }
+                break;
+            }
+            gUnknown_02022C40.field_0 = 0;
+        }
+        else
+        {
+            data->state = 4;
+        }
+        break;
+    case 4:
+        if (gSpecialVar_Result != 0)
+        {
+            if (gSpecialVar_Result == 9)
+            {
+                sub_8011090(0x54, 0, 1);
+                PlaySE(SE_PC_LOGIN);
+                StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
+                data->state = 42;
+                gSpecialVar_Result = 0;
+            }
+            else if (gSpecialVar_Result == 11)
+            {
+                sub_8011090(0x54, 0, 1);
+                data->state = 23;
+                gSpecialVar_Result = 0;
+            }
+            else
+            {
+                taskData[0] = 0;
+                taskData[1] = gSpecialVar_Result - 1;
+                data->state = 24;
+                gSpecialVar_Result = 0;
+            }
+        }
+        else if (ScriptContext2_IsEnabled() == TRUE)
+        {
+            if (gMain.heldKeys & A_BUTTON)
+            {
+                if (sub_801A2A8(data->field_0, &taskData[0], &taskData[1], data->spriteIds))
+                {
+                    PlaySE(SE_SELECT);
+                    sub_80181CC();
+                    data->state = 24;
+                    break;
+                }
+                else if (sub_8017940())
+                {
+                    sub_8011090(0x54, 0, 1);
+                    PlaySE(SE_PC_LOGIN);
+                    sub_80181CC();
+                    StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
+                    data->state = 45;
+                    break;
+                }
+            }
+
+            switch (sub_8016B00())
+            {
+            case 1:
+                PlaySE(SE_PC_LOGIN);
+            case 2:
+                sub_801A274(data);
+                break;
+            case 4:
+                data->state = 11;
+                sub_80181CC();
+                sub_8010FCC(0, 0, 0);
+                sub_8011090(0x53, sub_80181DC(data), 0);
+                break;
+            }
+            sub_801A284(data);
+        }
+        break;
+    case 23:
+        if (!FuncIsActiveTask(sub_809FA34))
+        {
+            sub_8011090(0x40, 0, 0);
+            data->state = 4;
+        }
+        break;
+    case 24:
+        sub_801704C();
+        var = sub_8017CF8(taskData[1], data->field_0);
+        sub_8011090(0x54, 0, 1);
+        switch (sub_80179D4(data->field_0, taskData[0], taskData[1], var))
+        {
+        case 0:
+            data->state = 26;
+            break;
+        case 1:
+            sub_8012188(data->field_0->arr[taskData[0]].unk.playerName, &data->field_0->arr[taskData[0]].unk.field_0, gUnknown_02022C2C);
+            data->field_12 = 0;
+            data->state = 25;
+            break;
+        case 2:
+            sub_8015664(0x13, gStringVar4);
+            break;
+        }
+        break;
+    case 25:
+        sub_801704C();
+        var = sub_8011A74();
+        switch (var)
+        {
+        case 4:
+            sub_801818C(TRUE);
+            data->state = 4;
+            break;
+        case 1:
+        case 2:
+            if (sub_8011B90() == TRUE)
+                sub_801568C(gUnknown_082EE6C8);
+            else
+                sub_8015664(30, gUnknown_082EE6C8);
+
+            gUnknown_02022C2C = 0x40;
+            break;
+        }
+
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            sub_80143E4(gBlockSendBuffer, TRUE);
+            CreateTask(sub_80140E0, 5);
+            data->state = 38;
+        }
+        break;
+    case 38:
+        if (FuncIsActiveTask(sub_80140E0))
+        {
+            if (gUnknown_02022C2C == 0x44)
+                sub_8015664(31, gUnknown_082EE004);
+            else
+                data->state = 5;
+        }
+        break;
+    case 30:
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            sub_801818C(FALSE);
+            sub_801A3D0(taskData[0], taskData[1], data->field_0);
+            data->state = 2;
+        }
+        break;
+    case 6:
+        var5 = sub_8017178(&data->textState, &data->field_1B, &data->field_1C, &gUnknown_082F021C, &gUnknown_082F0244);
+        if (var5 != -1)
+        {
+            if (gReceivedRemoteLinkPlayers == 0)
+            {
+                data->state = 28;
+            }
+            else
+            {
+                data->field_98 = 0;
+                sub_8017CF8(taskData[1], data->field_0);
+                if (var5 == -2 || var5 == 0x40)
+                {
+                    data->field_4C[0] = 0x40;
+                    sub_800FE50(data->field_4C);
+                    StringCopy(gStringVar4, gUnknown_082EEB80[gLinkPlayers[0].gender]);
+                    data->state = 32;
+                }
+                else
+                {
+                    gUnknown_02022C2C = var5;
+                    gUnknown_02022C2D = var5 >> 8;
+                    if (gUnknown_02022C2C == 0x41 && !sub_8018024())
+                    {
+                        sub_8015664(5, gUnknown_082EEBD0);
+                    }
+                    else
+                    {
+                        gUnknown_02022C2C |= 0x40;
+                        data->field_4C[0] = gUnknown_02022C2C;
+                        data->state = 27;
+                    }
+                }
+            }
+        }
+        break;
+    case 28:
+        StringCopy(gStringVar4, gUnknown_082EEB88);
+        data->state = 36;
+        break;
+    case 27:
+        sub_8017FD8(data);
+        var = sub_8017CF8(taskData[1], data->field_0);
+        var5 = sub_8017984(data->field_4C[0] & 0x3F);
+        if (PrintOnTextbox(&data->textState, gUnknown_082EE82C[var5][var]))
+        {
+            taskData[3] = 0;
+            data->state = 29;
+        }
+        break;
+    case 32:
+        sub_800AC34();
+        data->state = 36;
+        break;
+    case 31:
+        data->field_4C[0] = 0x44;
+        data->field_4C[1] = gUnknown_02022C40.level;
+        sub_800FE50(data->field_4C);
+        data->state = 29;
+        break;
+    case 29:
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            StringCopy(gStringVar4, gUnknown_082EEB88);
+            data->state = 28;
+        }
+        else
+        {
+            sub_8017FD8(data);
+            if (data->field_98 == 0x51)
+            {
+                if (gUnknown_02022C2C == 8)
+                {
+                    sub_8018220(gStringVar4, data, FALSE);
+                    data->state = 40;
+                }
+                else
+                {
+                    data->state = 13;
+                }
+            }
+            else if (data->field_98 == 0x52)
+            {
+                data->state = 32;
+                sub_8017D9C(gStringVar4, gUnknown_02022C2C | 0x40, gLinkPlayers[0].gender);
+                gUnknown_02022C2C = 0;
+            }
+        }
+        break;
+    case 5:
+    case 7:
+        var5 = sub_80179AC(&data->field_0->arr[taskData[1]]);
+        var = sub_8017CF8(taskData[1], data->field_0);
+        sub_8015664(6, gUnknown_082EE24C[var][var5]);
+        break;
+    case 40:
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+        {
+            data->state = 41;
+            sub_800ADF8();
+            data->field_98 = 0;
+            data->field_9A = 0;
+        }
+        break;
+    case 41:
+        if (sub_800A520())
+        {
+            if (GetMultiplayerId() == 0)
+            {
+                StringCopy(gStringVar1, gLinkPlayers[GetMultiplayerId() ^ 1].name);
+                var5 = sub_800E540(gLinkPlayers[2].id, gLinkPlayers[2].name);
+                StringExpandPlaceholders(gStringVar4, gUnknown_082EE378[var5]);
+                data->state = 33;
+            }
+            else
+            {
+                data->state = 7;
+            }
+        }
+        break;
+    case 19:
+        var5 = sub_80170B8(&data->textState, FALSE);
+        switch (var5)
+        {
+        case 0:
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_02022C2C = 0x45;
+            sub_8011090(0x45, 0, 1);
+            sub_8012188(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.field_0, gUnknown_02022C2C);
+            data->field_12 = taskData[1];
+            data->state = 20;
+            taskData[3] = 0;
+            break;
+        case 1:
+        case -1:
+            var = sub_8017CF8(taskData[1], data->field_0);
+            sub_801568C(gUnknown_082EEC9C[var]);
+            break;
+        }
+        break;
+    case 20:
+        if (++taskData[2] >= 60)
+        {
+            data->state = 21;
+            taskData[2] = 0;
+        }
+        break;
+    case 21:
+        var = sub_8011A74();
+        switch (var)
+        {
+        case 4:
+            sub_801818C(TRUE);
+            data->state = 4;
+            break;
+        case 1:
+        case 2:
+            var = sub_8017CF8(taskData[1], data->field_0);
+            sub_8011090(0x54, 0, 1);
+            if (sub_8011B90() == TRUE)
+                sub_801568C(gUnknown_082EED3C[var]);
+            else
+                sub_8015664(30, gUnknown_082EED3C[var]);
+            break;
+        case 3:
+            data->state = 22;
+            break;
+        }
+        taskData[3]++;
+        break;
+    case 22:
+        if (sub_8011A80())
+        {
+            var = sub_8017CF8(taskData[1], data->field_0);
+            sub_8011090(0x54, 0, 1);
+            if (sub_8011B90() == TRUE)
+                sub_801568C(gUnknown_082EED3C[var]);
+            else
+                sub_8015664(30, gUnknown_082EED3C[var]);
+        }
+        if (gReceivedRemoteLinkPlayers == 0)
+            data->state = 16;
+        break;
+    case 11:
+        PlaySE(SE_PINPON);
+        data->state = 12;
+        data->field_9A = 0;
+        break;
+    case 12:
+        if (sub_8011A80())
+        {
+            sub_801818C(FALSE);
+            data->state = 2;
+        }
+        else if (gReceivedRemoteLinkPlayers == 0)
+        {
+            sub_80143E4(gBlockSendBuffer, TRUE);
+            CreateTask(sub_80140E0, 5);
+            data->state = 39;
+        }
+        break;
+    case 39:
+        sub_801689C(data);
+        if (!FuncIsActiveTask(sub_80140E0))
+        {
+            data->state = 33;
+            StringCopy(gStringVar1, gLinkPlayers[1].name);
+            var5 = sub_800E540(gLinkPlayers[1].id, gLinkPlayers[1].name);
+            StringExpandPlaceholders(gStringVar4, gUnknown_082EE324[var5]);
+        }
+        break;
+    case 33:
+        sub_801689C(data);
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+            data->state = 34;
+        break;
+    case 34:
+        sub_801689C(data);
+        if (sub_80168DC(data) && gMain.heldKeys & B_BUTTON)
+        {
+            sub_8011DE0(1);
+            StringCopy(gStringVar4, gUnknown_082EE598);
+            data->state = 36;
+        }
+        break;
+    case 35:
+        sub_8015664(9, gStringVar4);
+        break;
+    case 9:
+        switch (sub_80170B8(&data->textState, FALSE))
+        {
+        case 0:
+            data->field_4C[0] = 0x51;
+            if (gUnknown_02022C2C == 0x45)
+                sub_8011090(gUnknown_02022C2C | 0x40, sub_801100C(1), 0);
+            else
+                sub_8011090(gUnknown_02022C2C | 0x40, sub_801100C(1), 1);
+
+            data->field_8->arr[0].field_1B = 0;
+            taskData[3] = 0;
+            if (gUnknown_02022C2C == 0x41)
+            {
+                if (sub_8018024())
+                {
+                    data->field_4C[0] = 0x52;
+                    sub_800FE50(data->field_4C);
+                    data->state = 10;
+                    StringCopy(gStringVar4, gUnknown_082EEC14);
+                }
+                else
+                {
+                    sub_800FE50(data->field_4C);
+                    data->state = 13;
+                }
+            }
+            else if (gUnknown_02022C2C == 0x48)
+            {
+                sub_8018220(gStringVar4, data, 1);
+                data->state = 40;
+            }
+            else
+            {
+                sub_800FE50(data->field_4C);
+                data->state = 13;
+            }
+            break;
+        case 1:
+        case -1:
+            data->field_4C[0] = 0x52;
+            sub_800FE50(data->field_4C);
+            data->state = 10;
+            sub_8013078(gStringVar4, gUnknown_02022C2C);
+            break;
+        }
+        break;
+    case 10:
+        sub_800AC34();
+        data->state = 36;
+        break;
+    case 36:
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            gUnknown_02022C2C = 0x40;
+            sub_8015664(0x25, gStringVar4);
+            memset(data->field_4C, 0, sizeof(data->field_4C));
+            data->field_9A = 0;
+            data->field_98 = 0;
+        }
+        break;
+    case 37:
+        data->state = 2;
+        sub_801818C(FALSE);
+        break;
+    case 13:
+        sub_8017E00(gStringVar4, gUnknown_02022C2C | 0x40);
+        sub_8015664(0xE, gStringVar4);
+        break;
+    case 14:
+        sub_800ADF8();
+        data->state = 15;
+        break;
+    case 15:
+        if (sub_800A520())
+            data->state = 16;
+        break;
+    case 16:
+        Free(data->field_8);
+        Free(data->field_0);
+        Free(data->field_C);
+        Free(data->field_4);
+        DestroyTask(data->field_20);
+        sub_8019F04(data->spriteIds);
+        data->state = 17;
+        break;
+    case 17:
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
+        data->state = 18;
+        break;
+    case 18:
+        if (!UpdatePaletteFade())
+        {
+            sub_8019E3C();
+            DestroyTask(taskId);
+            Free(gUnknown_02022C30.uRoom);
+            sub_80149D8();
+        }
+        break;
+    case 42:
+        if (sub_800F7DC()->species == SPECIES_NONE)
+        {
+            data->state = 43;
+        }
+        else
+        {
+            if (sub_800F7DC()->species == SPECIES_EGG)
+            {
+                StringCopy(gStringVar4, gUnknown_082EF590);
+            }
+            else
+            {
+                StringCopy(gStringVar1, gSpeciesNames[sub_800F7DC()->species]);
+                ConvertIntToDecimalStringN(gStringVar2, sub_800F7DC()->unk_0b_1, STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringExpandPlaceholders(gStringVar4, gUnknown_082EF564);
+            }
+            sub_8015664(44, gStringVar4);
+        }
+        break;
+    case 43:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EF20C))
+            data->state = 47;
+        break;
+    case 47:
+        var5 = sub_8017178(&data->textState, &data->field_1D, &data->field_1E, &gUnknown_082F025C, &gUnknown_082F027C);
+        if (var5 != -1)
+        {
+            switch (var5)
+            {
+            case -2:
+            case 3:
+                data->state = 4;
+                sub_801818C(TRUE);
+                break;
+            case 1:
+                sub_8015664(53, gUnknown_082EF4C4);
+                break;
+            case 2:
+                sub_8015664(47, gUnknown_082EF298);
+                break;
+            }
+        }
+        break;
+    case 53:
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        data->state = 54;
+        break;
+    case 54:
+        if (!gPaletteFade.active)
+        {
+            gUnknown_02022C40.field_0 = 1;
+            gFieldCallback = sub_80AF128;
+            sub_81B8904(8, CB2_ReturnToField);
+        }
+        break;
+    case 52:
+        var5 = sub_8017178(&data->textState, &data->field_1D, &data->field_1E, &gUnknown_082F0294, &gUnknown_082F032C);
+        if (var5 != -1)
+        {
+            switch (var5)
+            {
+            case -2:
+            case 18:
+                sub_801807C(&gUnknown_02022C40);
+                sub_8010FCC(0, 0, 0);
+                sub_801568C(gUnknown_082EF4FC);
+                break;
+            default:
+                gUnknown_02022C40.field_2 = var5;
+                data->state = 55;
+                break;
+            }
+        }
+        break;
+    case 55:
+        sub_8010FCC(gUnknown_02022C40.field_2, gUnknown_02022C40.field_A, gUnknown_02022C40.field_C);
+        sub_801568C(gUnknown_082EF520);
+        break;
+    case 44:
+        switch (sub_80170B8(&data->textState, FALSE))
+        {
+        case 0:
+            data->state = 56;
+            break;
+        case 1:
+        case -1:
+            sub_801818C(TRUE);
+            data->state = 4;
+            break;
+        }
+        break;
+    case 56:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EF5B8))
+        {
+            sub_8010FCC(0, 0, 0);
+            sub_801807C(&gUnknown_02022C40);
+            sub_801818C(TRUE);
+            data->state = 4;
+        }
+        break;
+    case 45:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EF1EC))
+            data->state = 46;
+        break;
+    case 46:
+        sub_80173B0();
+        data->state = 48;
+        break;
+    case 48:
+        var5 = sub_80172A0(&data->textState, &data->field_1D, &data->field_4A, &data->field_1E, &gUnknown_082F0294, &gUnknown_082F032C, data->field_0);
+        if (var5 != -1)
+        {
+            switch (var5)
+            {
+            case -2:
+            case 8:
+                sub_801818C(TRUE);
+                data->state = 4;
+                break;
+            default:
+                sub_80173B0();
+                switch (sub_8017D04(data->field_0->arr[var5].unk.field_0.type, data->field_0->arr[var5].unk.field_0.species))
+                {
+                case 0:
+                    sub_8018404(gStringVar1, &data->field_0->arr[var5]);
+                    sub_8015664(49, gUnknown_082EF65C);
+                    taskData[1] = var5;
+                    break;
+                case 1:
+                    break;
+                }
+                break;
+            }
+        }
+        break;
+    }
 }

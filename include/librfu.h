@@ -80,8 +80,8 @@ struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
     u16 unk_01_6:2;
     u8 playerTrainerId[2];
     u8 unk_04[4];
-    u16 unk_08_0:10;
-    u16 unk_09_2:6;
+    u16 species:10;
+    u16 type:6;
     u8 unk_0a_0:7;
     u8 unk_0a_7:1;
     u8 playerGender:1;

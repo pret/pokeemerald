@@ -14,5 +14,6 @@ void UpdateWeatherPerDay(u16 days);
 void sub_80AC3D0(void);
 void sub_80AC3E4(void);
 void PreservePaletteInWeather(u8);
+void sub_80AF128(void);
 
 #endif //GUARD_FIELD_SCREEN_H
