@@ -38,9 +38,6 @@ extern void HealPlayerParty(void);
 struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;
-    u8 field_xD;
-    u8 field_E;
-    u8 field_xF;
     u8 playerName[PLAYER_NAME_LENGTH];
 };
 
@@ -119,6 +116,14 @@ struct UnkStruct_Group
     u8 field_15;
 };
 
+struct UnkStruct_8019BA8
+{
+    u8 field_0;
+    u8 field_1;
+    u8 field_2;
+    u8 field_3;
+};
+
 struct UnkStruct_URoom
 {
     struct UnkStruct_Main0 *field_0;
@@ -128,7 +133,7 @@ struct UnkStruct_URoom
     u16 field_10;
     u16 field_12;
     u8 state;
-    u8 field_15;
+    u8 stateAfterPrint;
     u8 textState;
     u8 field_17;
     u8 field_18;
@@ -141,11 +146,15 @@ struct UnkStruct_URoom
     u8 field_1F;
     u8 field_20;
     u8 spriteIds[40];
+    u8 field_49;
     u8 field_4A;
     u16 field_4C[6];
     u8 field_58[0x98 - 0x58];
     u16 field_98;
     u16 field_9A;
+    u16 field_9C;
+    u16 field_9E;
+    struct UnkStruct_8019BA8 field_A0[8];
 };
 
 union UnkUnion_Main
@@ -176,6 +185,9 @@ extern union UnkUnion_Main gUnknown_02022C30;
 
 extern u8 gUnknown_02022C2C;
 extern u8 gUnknown_02022C2D;
+extern u8 gUnknown_02022C3E;
+extern u16 gUnknown_02022C3C;
+extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38;
 
 extern u8 gFieldLinkPlayerCount;
 extern u8 gUnknown_03005DB4;
@@ -237,7 +249,7 @@ s8 sub_8018B08(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
 bool32 sub_8016F1C(struct UnkStruct_x20 *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 void sub_8019F2C(void);
-s16 sub_8019E70(u8 *arg0, s32 arg1);
+void sub_8019E70(u8 *arg0, s32 arg1);
 bool32 sub_80180A0(u8 monId, struct TradeUnkStruct *arg1);
 void sub_80180E8(u8 monId, struct TradeUnkStruct *arg1);
 bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3);
@@ -246,13 +258,13 @@ bool32 sub_8017940(void);
 u8 sub_8016B00(void);
 void sub_801A274(struct UnkStruct_URoom *arg0);
 void sub_801A284(struct UnkStruct_URoom *arg0);
-void sub_8017FD8(struct UnkStruct_URoom *arg0);
+bool32 sub_8017FD8(struct UnkStruct_URoom *arg0);
 void sub_801689C(struct UnkStruct_URoom *arg0);
 u8 sub_80181DC(struct UnkStruct_URoom *arg0);
 bool32 sub_80168DC(struct UnkStruct_URoom *arg0);
 bool32 sub_801704C(void);
 u32 sub_8017CF8(u32 arg1, struct UnkStruct_Main0 *arg0);
-u32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 arg3);
+s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender);
 void sub_801818C(bool32 arg0);
 void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
 s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate);
@@ -261,12 +273,14 @@ bool32 sub_8018024(void);
 u32 sub_8017984(u32 arg0);
 void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
 void sub_8017D9C(u8 *dst, u32 arg1, u32 playerGender);
-s32 sub_80179AC(struct UnkStruct_x20 *arg0);
+u32 sub_80179AC(struct UnkStruct_x20 *arg0);
 void sub_8017E00(u8 *dst, u8 arg1);
 void sub_8019F04(u8 *spriteIds);
 void sub_8019E3C(void);
 void sub_80173B0(void);
 s32 sub_8017D04(u32 type, u32 species);
+void sub_8017020(const u8 *src);
+void sub_8019BA8();
 
 // const rom data
 extern const u8 *const gUnknown_082EDB60[][5];
@@ -317,6 +331,8 @@ extern const u8 gUnknown_082EF564[];
 extern const u8 gUnknown_082EF4C4[];
 extern const u8 gUnknown_082EF298[];
 extern const u8 gUnknown_082EF65C[];
+extern const u8 gUnknown_082EF6E4[];
+extern const u8 gUnknown_082EF718[];
 
 extern const u32 gUnknown_082F00C4[];
 
@@ -352,8 +368,10 @@ extern const u8 *const gUnknown_082EE378[];
 extern const u8 *const gUnknown_082EEC9C[];
 extern const u8 *const gUnknown_082EED3C[];
 extern const u8 *const gUnknown_082EE324[];
+extern const u8 *const gUnknown_082EE17C[];
 
-extern const u8 *const gUnknown_082EE82C[][2];
+extern const u8 *const gUnknown_082EE82C[][4];
+
 extern const u8 *const gUnknown_082EE24C[][2];
 
 extern const struct UnkStruct_Shared gUnknown_082F045C[];
@@ -579,19 +597,19 @@ void sub_8012780(u8 taskId)
         }
         break;
     case 11:
-        switch (sub_80170B8(&data->textState, sub_801064C(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName)))
+        switch (sub_80170B8(&data->textState, sub_801064C(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName)))
         {
         case 0:
             sub_800E0E8();
             CreateWirelessStatusIndicatorSprite(0, 0);
             data->field_19 = 5;
-            sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 12;
             break;
         case 1:
         case -1:
             data->field_19 = 6;
-            sub_8010688(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            sub_8010688(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 12;
             break;
         case -3:
@@ -600,7 +618,7 @@ void sub_8012780(u8 taskId)
         }
         break;
     case 12:
-        val = sub_8010714(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+        val = sub_8010714(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
         if (val == 1)
         {
             if (data->field_19 == 5)
@@ -631,7 +649,7 @@ void sub_8012780(u8 taskId)
             }
             else
             {
-                sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId));
+                sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
                 data->field_0->arr[data->field_13].field_1A_0 = 0;
                 sub_8013398(data->field_0);
                 sub_81AE70C(data->listTaskId);
@@ -1290,11 +1308,11 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
 {
     struct UnkStruct_x20 *structPtr = &arg0->field_0->arr[id];
 
-    if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_01_2 != 3)
+    if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_00.unk_01_2 != 3)
     {
         if (!(gSaveBlock2Ptr->specialSaveWarp & 0x80))
             return 1;
-        else if (structPtr->unk.field_0.unk_00_7)
+        else if (structPtr->unk.field_0.unk_00.unk_00_7)
             return 0;
     }
     else
@@ -1313,7 +1331,7 @@ void sub_8013BD8(struct UnkStruct_Group *data, s32 id)
     sub_81AE70C(data->listTaskId);
     sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
     sub_8011090(gUnknown_082F0530[gSpecialVar_0x8004], 0, 1);
-    sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.playerTrainerId));
+    sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
 }
 
 u8 sub_8013C40(void)
@@ -1972,19 +1990,19 @@ void sub_8014A40(u8 taskId)
             data->field_0->arr[data->field_13].field_1B = 0;
             sub_81AE70C(data->listTaskId);
             data->field_19 = 5;
-            sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 8;
             break;
         case 1:
         case -1:
             data->field_19 = 6;
-            sub_8010688(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            sub_8010688(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 8;
             break;
         }
         break;
     case 8:
-        val = sub_8010714(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+        val = sub_8010714(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
         if (val == 1)
         {
             if (data->field_19 == 5)
@@ -1999,7 +2017,7 @@ void sub_8014A40(u8 taskId)
             }
             else
             {
-                sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.playerTrainerId));
+                sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
                 data->field_0->arr[data->field_13].field_1A_0 = 0;
                 sub_8013398(data->field_0);
                 sub_81AE70C(data->listTaskId);
@@ -2174,7 +2192,7 @@ void sub_8014F48(u8 taskId)
                     CreateWirelessStatusIndicatorSprite(0, 0);
                     sub_81AE70C(data->listTaskId);
                     sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
-                    sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.playerTrainerId));
+                    sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
                     PlaySE(SE_PN_ON);
                     data->state = 4;
                 }
@@ -2335,7 +2353,7 @@ void sub_80152F4(u8 taskId)
                         data->field_14 = 0;
                         sub_800E0E8();
                         CreateWirelessStatusIndicatorSprite(0, 0);
-                        sub_8011FC8(data->field_0->arr[0].unk.playerName, ReadAsU16(data->field_0->arr[0].unk.field_0.playerTrainerId));
+                        sub_8011FC8(data->field_0->arr[0].unk.playerName, ReadAsU16(data->field_0->arr[0].unk.field_0.unk_00.playerTrainerId));
                         PlaySE(SE_PN_ON);
                         data->state = 4;
                     }
@@ -2466,7 +2484,7 @@ void sub_8015664(u32 arg0, const u8 *src)
     struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
 
     data->state = 8;
-    data->field_15 = arg0;
+    data->stateAfterPrint = arg0;
     if (src != gStringVar4)
         StringExpandPlaceholders(gStringVar4, src);
 }
@@ -2492,9 +2510,9 @@ void sub_80156C8(struct UnkStruct_URoom *data)
 
 void sub_80156E0(u8 taskId)
 {
-    u32 var;
-    s32 var5;
-    u8 monId = 0;
+    u32 id = 0;
+    s32 var5 = 0;
+    u32 playerGender = 0;
     struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
     s16 *taskData = gTasks[taskId].data;
 
@@ -2508,11 +2526,13 @@ void sub_80156E0(u8 taskId)
         sub_8017580(data->field_0, 8);
         gUnknown_02022C2C = 0x40;
         data->field_20 = sub_8016DF0(data->field_C, data->field_4, 9);
+        sub_8019BA8(data->field_A0);
         sub_8019F2C();
         data->state = 1;
         break;
     case 1:
-        if (sub_8019E70(data->spriteIds, taskData[0]++) == 8)
+        sub_8019E70(data->spriteIds, taskData[0]);
+        if (++taskData[0] == 8)
             data->state = 2;
         break;
     case 2:
@@ -2530,18 +2550,18 @@ void sub_80156E0(u8 taskId)
     case 3:
         if ((sub_81B1360() == 8 || sub_81B1360() == 9) && gUnknown_02022C40.field_0 != 0)
         {
-            monId = GetCursorSelectionMonId();
+            id = GetCursorSelectionMonId();
             switch (gUnknown_02022C40.field_0)
             {
             case 1:
                 sub_8011090(0x54, 0, 1);
-                if (monId >= PARTY_SIZE)
+                if (id >= PARTY_SIZE)
                 {
                     sub_801807C(&gUnknown_02022C40);
                     sub_8010FCC(0, 0, 0);
                     sub_801568C(gUnknown_082EF4FC);
                 }
-                else if (sub_80180A0(GetCursorSelectionMonId(), &gUnknown_02022C40))
+                else if (!sub_80180A0(GetCursorSelectionMonId(), &gUnknown_02022C40))
                 {
                     sub_8015664(0x34, gUnknown_082EF47C);
                 }
@@ -2553,7 +2573,7 @@ void sub_80156E0(u8 taskId)
             case 2:
                 sub_80156C8(data);
                 taskData[1] = gUnknown_02022C40.field_8;
-                if (monId >= PARTY_SIZE)
+                if (id >= PARTY_SIZE)
                 {
                     sub_801568C(gUnknown_082EF544);
                 }
@@ -2598,9 +2618,9 @@ void sub_80156E0(u8 taskId)
                 gSpecialVar_Result = 0;
             }
         }
-        else if (ScriptContext2_IsEnabled() == TRUE)
+        else if (ScriptContext2_IsEnabled() != TRUE)
         {
-            if (gMain.heldKeys & A_BUTTON)
+            if (gMain.newKeys & A_BUTTON)
             {
                 if (sub_801A2A8(data->field_0, &taskData[0], &taskData[1], data->spriteIds))
                 {
@@ -2646,16 +2666,16 @@ void sub_80156E0(u8 taskId)
         break;
     case 24:
         sub_801704C();
-        var = sub_8017CF8(taskData[1], data->field_0);
+        playerGender = sub_8017CF8(taskData[1], data->field_0);
         sub_8011090(0x54, 0, 1);
-        switch (sub_80179D4(data->field_0, taskData[0], taskData[1], var))
+        switch (sub_80179D4(data->field_0, taskData[0], taskData[1], playerGender))
         {
         case 0:
             data->state = 26;
             break;
         case 1:
-            sub_8012188(data->field_0->arr[taskData[0]].unk.playerName, &data->field_0->arr[taskData[0]].unk.field_0, gUnknown_02022C2C);
-            data->field_12 = 0;
+            sub_8012188(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.field_0, gUnknown_02022C2C);
+            data->field_12 = id;
             data->state = 25;
             break;
         case 2:
@@ -2665,8 +2685,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 25:
         sub_801704C();
-        var = sub_8011A74();
-        switch (var)
+        switch (sub_8011A74())
         {
         case 4:
             sub_801818C(TRUE);
@@ -2683,7 +2702,7 @@ void sub_80156E0(u8 taskId)
             break;
         }
 
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (gReceivedRemoteLinkPlayers != 0)
         {
             sub_80143E4(gBlockSendBuffer, TRUE);
             CreateTask(sub_80140E0, 5);
@@ -2691,7 +2710,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 38:
-        if (FuncIsActiveTask(sub_80140E0))
+        if (!FuncIsActiveTask(sub_80140E0))
         {
             if (gUnknown_02022C2C == 0x44)
                 sub_8015664(31, gUnknown_082EE004);
@@ -2718,28 +2737,30 @@ void sub_80156E0(u8 taskId)
             else
             {
                 data->field_98 = 0;
-                sub_8017CF8(taskData[1], data->field_0);
-                if (var5 == -2 || var5 == 0x40)
+                playerGender = sub_8017CF8(taskData[1], data->field_0);
+                switch (var5)
                 {
+                case -2:
+                case 0x40:
                     data->field_4C[0] = 0x40;
                     sub_800FE50(data->field_4C);
                     StringCopy(gStringVar4, gUnknown_082EEB80[gLinkPlayers[0].gender]);
                     data->state = 32;
-                }
-                else
-                {
+                    break;
+                default:
                     gUnknown_02022C2C = var5;
-                    gUnknown_02022C2D = var5 >> 8;
+                    gUnknown_02022C2D = (u32)(var5) >> 8;
                     if (gUnknown_02022C2C == 0x41 && !sub_8018024())
                     {
                         sub_8015664(5, gUnknown_082EEBD0);
                     }
                     else
                     {
-                        gUnknown_02022C2C |= 0x40;
-                        data->field_4C[0] = gUnknown_02022C2C;
+                        data->field_4C[0] = gUnknown_02022C2C | 0x40;
+                        sub_800FE50(data->field_4C);
                         data->state = 27;
                     }
+                    break;
                 }
             }
         }
@@ -2750,9 +2771,9 @@ void sub_80156E0(u8 taskId)
         break;
     case 27:
         sub_8017FD8(data);
-        var = sub_8017CF8(taskData[1], data->field_0);
-        var5 = sub_8017984(data->field_4C[0] & 0x3F);
-        if (PrintOnTextbox(&data->textState, gUnknown_082EE82C[var5][var]))
+        playerGender = sub_8017CF8(taskData[1], data->field_0);
+        id = sub_8017984(data->field_4C[0] & 0x3F);
+        if (PrintOnTextbox(&data->textState, gUnknown_082EE82C[playerGender][id]))
         {
             taskData[3] = 0;
             data->state = 29;
@@ -2764,7 +2785,8 @@ void sub_80156E0(u8 taskId)
         break;
     case 31:
         data->field_4C[0] = 0x44;
-        data->field_4C[1] = gUnknown_02022C40.level;
+        data->field_4C[1] = gUnknown_02022C40.species;
+        data->field_4C[2] = gUnknown_02022C40.level;
         sub_800FE50(data->field_4C);
         data->state = 29;
         break;
@@ -2799,9 +2821,9 @@ void sub_80156E0(u8 taskId)
         break;
     case 5:
     case 7:
-        var5 = sub_80179AC(&data->field_0->arr[taskData[1]]);
-        var = sub_8017CF8(taskData[1], data->field_0);
-        sub_8015664(6, gUnknown_082EE24C[var][var5]);
+        id = sub_80179AC(&data->field_0->arr[taskData[1]]);
+        playerGender = sub_8017CF8(taskData[1], data->field_0);
+        sub_8015664(6, gUnknown_082EE24C[id][playerGender]);
         break;
     case 40:
         if (PrintOnTextbox(&data->textState, gStringVar4))
@@ -2818,8 +2840,8 @@ void sub_80156E0(u8 taskId)
             if (GetMultiplayerId() == 0)
             {
                 StringCopy(gStringVar1, gLinkPlayers[GetMultiplayerId() ^ 1].name);
-                var5 = sub_800E540(gLinkPlayers[2].id, gLinkPlayers[2].name);
-                StringExpandPlaceholders(gStringVar4, gUnknown_082EE378[var5]);
+                id = sub_800E540(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
+                StringExpandPlaceholders(gStringVar4, gUnknown_082EE378[id]);
                 data->state = 33;
             }
             else
@@ -2829,8 +2851,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 19:
-        var5 = sub_80170B8(&data->textState, FALSE);
-        switch (var5)
+        switch (sub_80170B8(&data->textState, FALSE))
         {
         case 0:
             CopyBgTilemapBufferToVram(0);
@@ -2843,21 +2864,20 @@ void sub_80156E0(u8 taskId)
             break;
         case 1:
         case -1:
-            var = sub_8017CF8(taskData[1], data->field_0);
-            sub_801568C(gUnknown_082EEC9C[var]);
+            playerGender = sub_8017CF8(taskData[1], data->field_0);
+            sub_801568C(gUnknown_082EEC9C[playerGender]);
             break;
         }
         break;
     case 20:
-        if (++taskData[2] >= 60)
+        if (++taskData[2] > 60)
         {
             data->state = 21;
             taskData[2] = 0;
         }
         break;
     case 21:
-        var = sub_8011A74();
-        switch (var)
+        switch (sub_8011A74())
         {
         case 4:
             sub_801818C(TRUE);
@@ -2865,12 +2885,12 @@ void sub_80156E0(u8 taskId)
             break;
         case 1:
         case 2:
-            var = sub_8017CF8(taskData[1], data->field_0);
+            playerGender = sub_8017CF8(taskData[1], data->field_0);
             sub_8011090(0x54, 0, 1);
             if (sub_8011B90() == TRUE)
-                sub_801568C(gUnknown_082EED3C[var]);
+                sub_801568C(gUnknown_082EED3C[playerGender]);
             else
-                sub_8015664(30, gUnknown_082EED3C[var]);
+                sub_8015664(30, gUnknown_082EED3C[playerGender]);
             break;
         case 3:
             data->state = 22;
@@ -2881,18 +2901,19 @@ void sub_80156E0(u8 taskId)
     case 22:
         if (sub_8011A80())
         {
-            var = sub_8017CF8(taskData[1], data->field_0);
+            playerGender = sub_8017CF8(taskData[1], data->field_0);
             sub_8011090(0x54, 0, 1);
             if (sub_8011B90() == TRUE)
-                sub_801568C(gUnknown_082EED3C[var]);
+                sub_801568C(gUnknown_082EED3C[playerGender]);
             else
-                sub_8015664(30, gUnknown_082EED3C[var]);
+                sub_8015664(30, gUnknown_082EED3C[playerGender]);
         }
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (gReceivedRemoteLinkPlayers != 0)
             data->state = 16;
         break;
     case 11:
         PlaySE(SE_PINPON);
+        sub_800EF7C();
         data->state = 12;
         data->field_9A = 0;
         break;
@@ -2902,7 +2923,7 @@ void sub_80156E0(u8 taskId)
             sub_801818C(FALSE);
             data->state = 2;
         }
-        else if (gReceivedRemoteLinkPlayers == 0)
+        else if (gReceivedRemoteLinkPlayers != 0)
         {
             sub_80143E4(gBlockSendBuffer, TRUE);
             CreateTask(sub_80140E0, 5);
@@ -2915,8 +2936,8 @@ void sub_80156E0(u8 taskId)
         {
             data->state = 33;
             StringCopy(gStringVar1, gLinkPlayers[1].name);
-            var5 = sub_800E540(gLinkPlayers[1].id, gLinkPlayers[1].name);
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EE324[var5]);
+            id = sub_800E540(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
+            StringExpandPlaceholders(gStringVar4, gUnknown_082EE324[id]);
         }
         break;
     case 33:
@@ -2926,7 +2947,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 34:
         sub_801689C(data);
-        if (sub_80168DC(data) && gMain.heldKeys & B_BUTTON)
+        if (sub_80168DC(data) && gMain.newKeys & B_BUTTON)
         {
             sub_8011DE0(1);
             StringCopy(gStringVar4, gUnknown_082EE598);
@@ -2950,7 +2971,7 @@ void sub_80156E0(u8 taskId)
             taskData[3] = 0;
             if (gUnknown_02022C2C == 0x41)
             {
-                if (sub_8018024())
+                if (!sub_8018024())
                 {
                     data->field_4C[0] = 0x52;
                     sub_800FE50(data->field_4C);
@@ -2965,6 +2986,7 @@ void sub_80156E0(u8 taskId)
             }
             else if (gUnknown_02022C2C == 0x48)
             {
+                sub_800FE50(data->field_4C);
                 sub_8018220(gStringVar4, data, 1);
                 data->state = 40;
             }
@@ -3063,19 +3085,22 @@ void sub_80156E0(u8 taskId)
         var5 = sub_8017178(&data->textState, &data->field_1D, &data->field_1E, &gUnknown_082F025C, &gUnknown_082F027C);
         if (var5 != -1)
         {
-            switch (var5)
+            if (var5 == -2 || var5 == 3)
             {
-            case -2:
-            case 3:
                 data->state = 4;
                 sub_801818C(TRUE);
-                break;
-            case 1:
-                sub_8015664(53, gUnknown_082EF4C4);
-                break;
-            case 2:
-                sub_8015664(47, gUnknown_082EF298);
-                break;
+            }
+            else
+            {
+                switch (var5)
+                {
+                case 1:
+                    sub_8015664(53, gUnknown_082EF4C4);
+                    break;
+                case 2:
+                    sub_8015664(47, gUnknown_082EF298);
+                    break;
+                }
             }
         }
         break;
@@ -3145,7 +3170,7 @@ void sub_80156E0(u8 taskId)
         data->state = 48;
         break;
     case 48:
-        var5 = sub_80172A0(&data->textState, &data->field_1D, &data->field_4A, &data->field_1E, &gUnknown_082F0294, &gUnknown_082F032C, data->field_0);
+        var5 = sub_80172A0(&data->textState, &data->field_1D, &data->field_4A, &data->field_1E, &gUnknown_082F034C, &gUnknown_082F03A4, data->field_0);
         if (var5 != -1)
         {
             switch (var5)
@@ -3165,11 +3190,70 @@ void sub_80156E0(u8 taskId)
                     taskData[1] = var5;
                     break;
                 case 1:
+                    sub_8018404(gStringVar1, &data->field_0->arr[var5]);
+                    StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.field_0.type]);
+                    sub_8015664(46, gUnknown_082EF6E4);
+                    break;
+                case 2:
+                    sub_8018404(gStringVar1, &data->field_0->arr[var5]);
+                    StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.field_0.type]);
+                    sub_8015664(46, gUnknown_082EF718);
                     break;
                 }
                 break;
             }
         }
         break;
+    case 49:
+        switch (sub_80170B8(&data->textState, FALSE))
+        {
+        case 0:
+            data->state = 50;
+            break;
+        case -1:
+        case 1:
+            sub_801818C(TRUE);
+            data->state = 4;
+            break;
+        }
+        break;
+    case 50:
+        if (PrintOnTextbox(&data->textState, gUnknown_082EF4C4))
+        {
+            gUnknown_02022C40.field_0 = 2;
+            memcpy(&gUnknown_02022C38, &data->field_0->arr[taskData[1]].unk.field_0.unk_00, sizeof(gUnknown_02022C38));
+            gUnknown_02022C3E = data->field_0->arr[taskData[1]].unk.field_0.type;
+            gUnknown_02022C3C = data->field_0->arr[taskData[1]].unk.field_0.species;
+            gFieldCallback = sub_80AF128;
+            sub_81B8904(9, CB2_ReturnToField);
+            sub_80156B0(data);
+            gUnknown_02022C40.field_8 = taskData[1];
+        }
+        break;
+    case 51:
+        gUnknown_02022C2C = 0x44;
+        sub_8012188(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.field_0, 0x44);
+        sub_8018404(gStringVar1, &data->field_0->arr[taskData[1]]);
+        sub_8017020(gUnknown_082EE17C[2]);
+        data->state = 25;
+        break;
+    case 26:
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+        {
+            sub_801818C(TRUE);
+            sub_801A3D0(taskData[0], taskData[1], data->field_0);
+            data->state = 4;
+        }
+        break;
+    case 8:
+        if (PrintOnTextbox(&data->textState, gStringVar4))
+            data->state = data->stateAfterPrint;
+        break;
     }
+}
+
+void var_800D_set_xB(void)
+{
+    if (InUnionRoom() == TRUE)
+        gSpecialVar_Result = 11;
 }

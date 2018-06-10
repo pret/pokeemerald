@@ -2126,7 +2126,7 @@ void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, int r
 
     for (i = 0; i < 2; i++)
     {
-        data->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+        data->unk_00.playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
     }
     for (i = 0; i < 4; i++)
     {
@@ -2136,14 +2136,14 @@ void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, int r
     data->playerGender = gSaveBlock2Ptr->playerGender;
     data->unk_0a_0 = r9;
     data->unk_0a_7 = r2;
-    data->unk_00_0 = 2;
-    data->unk_01_2 = 3;
-    data->unk_00_4 = 0;
-    data->unk_00_5 = 0;
-    data->unk_00_6 = 0;
-    data->unk_00_7 = FlagGet(FLAG_0x87F);
-    data->unk_01_0 = IsNationalPokedexEnabled();
-    data->unk_01_1 = FlagGet(FLAG_SYS_GAME_CLEAR);
+    data->unk_00.unk_00_0 = 2;
+    data->unk_00.unk_01_2 = 3;
+    data->unk_00.unk_00_4 = 0;
+    data->unk_00.unk_00_5 = 0;
+    data->unk_00.unk_00_6 = 0;
+    data->unk_00.unk_00_7 = FlagGet(FLAG_0x87F);
+    data->unk_00.unk_01_0 = IsNationalPokedexEnabled();
+    data->unk_00.unk_01_1 = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
 bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
@@ -2155,12 +2155,12 @@ bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
         retVal = TRUE;
         if (sub_8010454(gUnknown_03007890->unk_14[idx].unk_04) && ((gUnknown_03007890->unk_07 >> idx) & 1))
         {
-            memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, sizeof(gUnknown_03007890->unk_14[idx].unk_06));
+            memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, 0xD);
             memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
         }
         else
         {
-            memset(buff1, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_06));
+            memset(buff1, 0, 0xD);
             memset(buff2, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
         }
     }
@@ -2169,12 +2169,12 @@ bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
         retVal = FALSE;
         if (sub_8010454(gUnknown_03007890->unk_14[idx].unk_04))
         {
-            memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, sizeof(gUnknown_03007890->unk_14[idx].unk_06));
+            memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, 0xD);
             memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
         }
         else
         {
-            memset(buff1, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_06));
+            memset(buff1, 0, 0xD);
             memset(buff2, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
         }
     }
@@ -4512,14 +4512,14 @@ void sub_8010F84(u8 a0, u32 a1, u32 a2)
 
 void sub_8010FA0(bool32 a0, bool32 a1)
 {
-    gUnknown_02022B14.unk_00_4 = a0;
-    gUnknown_02022B14.unk_00_5 = a1;
+    gUnknown_02022B14.unk_00.unk_00_4 = a0;
+    gUnknown_02022B14.unk_00.unk_00_5 = a1;
 }
 
 void sub_8010FCC(u32 a0, u32 a1, u32 a2)
 {
-    gUnknown_02022B14.unk_09_2 = a0;
-    gUnknown_02022B14.unk_08_0 = a1;
+    gUnknown_02022B14.type = a0;
+    gUnknown_02022B14.species = a1;
     gUnknown_02022B14.unk_0b_1 = a2;
 }
 

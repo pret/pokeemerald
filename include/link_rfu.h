@@ -263,6 +263,6 @@ void sub_800FE50(u16 *a0);
 bool32 sub_800E540(u16 id, u8 *name);
 void sub_8011DE0(u32 arg0);
 u8 sub_801100C(int a0);
-void sub_800FE50(u16 *a0);
+void sub_800EF7C(void);
 
 #endif //GUARD_LINK_RFU_H

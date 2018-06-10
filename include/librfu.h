@@ -47,7 +47,7 @@ enum
     RFU_UNK3A,
     RFU_UNK3B,
     RFU_UNK3C,
-    RFU_STOP_MODE, //3D
+    RFU_STOP_MODE, // 3D
 };
 
 struct RfuPacket8
@@ -67,7 +67,7 @@ union RfuPacket
     struct RfuPacket8 rfuPacket8;
 };
 
-struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
+struct UnkLinkRfuStruct_02022B14Substruct
 {
     u16 unk_00_0:4;
     u16 unk_00_4:1;
@@ -79,6 +79,11 @@ struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
     u16 unk_01_2:4;
     u16 unk_01_6:2;
     u8 playerTrainerId[2];
+};
+
+struct UnkLinkRfuStruct_02022B14
+{
+    struct UnkLinkRfuStruct_02022B14Substruct unk_00;
     u8 unk_04[4];
     u16 species:10;
     u16 type:6;
