@@ -256,7 +256,14 @@ u8 sub_8096428_2(struct MapObject *, struct Sprite *);
 u8 sub_8096468(struct MapObject *, struct Sprite *);
 u8 sub_809647C(struct MapObject *, struct Sprite *);
 u8 sub_8096494(struct MapObject *, struct Sprite *);
-
+u8 sub_8097E50(struct MapObject *, struct Sprite *);
+u8 sub_80964B8(struct MapObject *, struct Sprite *);
+u8 sub_8097EF0(struct MapObject *, struct Sprite *);
+u8 sub_80980C0(struct MapObject *, struct Sprite *);
+u8 sub_80980D0(struct MapObject *, struct Sprite *);
+u8 sub_8098124(struct MapObject *, struct Sprite *);
+u8 sub_80980F4(struct MapObject *, struct Sprite *);
+u8 sub_8098108(struct MapObject *, struct Sprite *);
 
 u8 (*const gUnknown_0850DEC8[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850DED0[])(struct MapObject *, struct Sprite *);
@@ -406,16 +413,16 @@ u8 (*const gUnknown_0850DEFC[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850DF08[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850DF14[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850DF20[])(struct MapObject *, struct Sprite *);
-extern u8 (*const gUnknown_0850E854[])(struct MapObject *, struct Sprite *);
-extern u8 (*const gUnknown_0850E85C[])(struct MapObject *, struct Sprite *);
+u8 (*const gUnknown_0850E854[])(struct MapObject *, struct Sprite *);
+u8 (*const gUnknown_0850E85C[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850E3A0[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850E3AC[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850E5C4[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850E5CC[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850E5D4[])(struct MapObject *, struct Sprite *);
 u8 (*const gUnknown_0850E468[])(struct MapObject *, struct Sprite *);
-extern u8 (*const gUnknown_0850E864[])(struct MapObject *, struct Sprite *);
-extern u8 (*const gUnknown_0850E870[])(struct MapObject *, struct Sprite *);
+u8 (*const gUnknown_0850E864[])(struct MapObject *, struct Sprite *);
+u8 (*const gUnknown_0850E870[])(struct MapObject *, struct Sprite *);
 
 u8 (*const *const gUnknown_0850DC50[])(struct MapObject *, struct Sprite *) = {
 	gUnknown_0850DEC8,

@@ -46,9 +46,47 @@ struct UnkStruct_085094AC {
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
 
-// Exported RAM declarations
+#define null_object_step(name, retval) \
+bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
+void FieldObjectCB_##name(struct Sprite *sprite)\
+{\
+    FieldObjectStep(&gMapObjects[sprite->data[0]], sprite, FieldObjectCB2_##name);\
+}\
+bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    return (retval);\
+}
 
-// Exported ROM declarations
+#define field_object_step(name, table) \
+extern bool8 (*const (table)[])(struct MapObject *, struct Sprite *);\
+bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
+void FieldObjectCB_##name(struct Sprite *sprite)\
+{\
+    FieldObjectStep(&gMapObjects[sprite->data[0]], sprite, FieldObjectCB2_##name);\
+}\
+bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    return (table)[sprite->data[1]](mapObject, sprite);\
+}
+
+#define field_object_path(idx, table, sub, path, catch, coord)\
+field_object_step(GoInDirectionSequence##idx, table)\
+extern const u8 path[4];\
+bool8 sub(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    u8 route[sizeof(path)];\
+    memcpy(route, path, sizeof(path));\
+    if (mapObject->directionSequenceIndex == (catch) && mapObject->initialCoords.coord == mapObject->currentCoords.coord)\
+    {\
+        mapObject->directionSequenceIndex = (catch) + 1;\
+    }\
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, route);\
+}\
+
+struct PairedPalettes {
+    u16 tag;
+    const u16 *data;
+};
 
 extern const struct SpriteFrameImage gFieldObjectPicTable_PechaBerryTree[];
 
@@ -111,6 +149,8 @@ const u8 *GetFieldObjectScriptPointerByFieldObjectId(u8 mapObjectId);
 u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
 u8 GetFaceDirectionAnimId(u32);
 u8 GetGoSpeed0AnimId(u32);
+u8 GetGoSpeed1AnimId(u32);
+u8 GetGoSpeed3AnimId(u32);
 u8 sub_80934BC(u32);
 bool8 FieldObjectSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId);
 bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *mapObject);

@@ -1,72 +1,29 @@
-// Includes
-
 #include "global.h"
-#include "malloc.h"
-#include "sprite.h"
-#include "overworld.h"
-#include "random.h"
-#include "event_scripts.h"
+#include "event_object_movement.h"
 #include "berry.h"
-#include "palette.h"
-#include "field_player_avatar.h"
-#include "fieldmap.h"
+#include "decoration.h"
 #include "event_data.h"
-#include "rom_818CFC8.h"
-#include "rom_81BE66C.h"
-#include "mauville_old_man.h"
-#include "metatile_behavior.h"
+#include "event_scripts.h"
+#include "field_camera.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
-#include "field_camera.h"
-#include "trainer_see.h"
-#include "decoration.h"
-#include "event_object_movement.h"
+#include "field_player_avatar.h"
+#include "fieldmap.h"
+#include "malloc.h"
+#include "mauville_old_man.h"
+#include "metatile_behavior.h"
+#include "overworld.h"
+#include "palette.h"
 #include "pokenav.h"
+#include "random.h"
+#include "rom_818CFC8.h"
+#include "rom_81BE66C.h"
+#include "sprite.h"
+#include "trainer_see.h"
 #include "util.h"
 #include "constants/map_objects.h"
 
-#define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
-
-#define null_object_step(name, retval) \
-bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
-void FieldObjectCB_##name(struct Sprite *sprite)\
-{\
-    FieldObjectStep(&gMapObjects[sprite->data[0]], sprite, FieldObjectCB2_##name);\
-}\
-bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
-{\
-    return (retval);\
-}
-
-#define field_object_step(name, table) \
-extern bool8 (*const (table)[])(struct MapObject *, struct Sprite *);\
-bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
-void FieldObjectCB_##name(struct Sprite *sprite)\
-{\
-    FieldObjectStep(&gMapObjects[sprite->data[0]], sprite, FieldObjectCB2_##name);\
-}\
-bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
-{\
-    return (table)[sprite->data[1]](mapObject, sprite);\
-}
-
-#define field_object_path(idx, table, sub, path, catch, coord)\
-field_object_step(GoInDirectionSequence##idx, table)\
-extern const u8 path[4];\
-bool8 sub(struct MapObject *mapObject, struct Sprite *sprite)\
-{\
-    u8 route[sizeof(path)];\
-    memcpy(route, path, sizeof(path));\
-    if (mapObject->directionSequenceIndex == (catch) && mapObject->initialCoords.coord == mapObject->currentCoords.coord)\
-    {\
-        mapObject->directionSequenceIndex = (catch) + 1;\
-    }\
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, route);\
-}\
-
-// Static struct declarations
-
-// Static RAM declarations
+// this file was known as evobjmv.c in Game Freak's original source
 
 extern u8 gUnknown_020375B4;
 extern u16 gUnknown_020375B6;
@@ -80,16 +37,16 @@ static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 static void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 static void RemoveFieldObjectInternal (struct MapObject *);
-/*static*/ u16 GetFieldObjectFlagIdByFieldObjectId(u8);
-void sub_8096518(struct MapObject *, struct Sprite *);
+static u16 GetFieldObjectFlagIdByFieldObjectId(u8);
+static void sub_8096518(struct MapObject *, struct Sprite *);
 static void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
-/*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
-/*static*/ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
+static void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
+static struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
 static void sub_808E894(u16);
 static void RemoveFieldObjectIfOutsideView(struct MapObject *);
 static void sub_808E1B8(u8, s16, s16);
 static void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
-/*static*/ void sub_808E38C(struct MapObject *);
+static void sub_808E38C(struct MapObject *);
 static u8 sub_808E8F4(const struct SpritePalette *);
 static u8 FindFieldObjectPaletteIndexByTag(u16);
 static void sub_808EAB0(u16, u8);
@@ -98,14 +55,10 @@ static void ObjectCB_CameraObject(struct Sprite *);
 static void CameraObject_0(struct Sprite *);
 static void CameraObject_1(struct Sprite *);
 static void CameraObject_2(struct Sprite *);
-/*static*/ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count);
-void npc_reset(struct MapObject *, struct Sprite *);
-void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
+static struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count);
+static void npc_reset(struct MapObject *, struct Sprite *);
+static void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
 
-u8 GetFaceDirectionAnimId(u32);
-u8 GetGoSpeed0AnimId(u32);
-u8 GetGoSpeed1AnimId(u32);
-u8 GetGoSpeed3AnimId(u32);
 u8 sub_8093438(u32);
 u8 sub_80934BC(u32);
 u8 sub_8093514(u32);
@@ -128,27 +81,6 @@ bool8 sub_809558C(struct MapObject *, struct Sprite *);
 bool8 sub_8095B64(struct MapObject *, struct Sprite *);
 static void sub_8096530(struct MapObject *, struct Sprite *);
 static void npc_update_obj_anim_flag(struct MapObject *, struct Sprite *);
-
-// ROM data
-
-struct PairedPalettes {
-    u16 tag;
-    const u16 *data;
-};
-
-
-typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
-
-extern s16 gUnknown_0850E768[];
-extern SpriteStepFunc *const gUnknown_0850E754[];
-extern const s8 gUnknown_0850E772[];
-extern const s8 gUnknown_0850E7BA[];
-extern const s8 *const gUnknown_0850E834[];
-extern s16 gUnknown_0850E840[];
-extern u8 gUnknown_0850E846[];
-extern s16 gUnknown_0850E84A[];
-extern u8 gUnknown_0850E850[];
-
 static void FieldObjectUpdateMetatileBehaviors(struct MapObject*);
 static void GetGroundEffectFlags_Reflection(struct MapObject*, u32*);
 static void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject*, u32*);
@@ -1982,7 +1914,7 @@ static void sub_808E1B8(u8 mapObjectId, s16 x, s16 y)
     }
 }
 
-/*static*/ void sub_808E38C(struct MapObject *mapObject)
+static void sub_808E38C(struct MapObject *mapObject)
 {
     mapObject->singleMovementActive = FALSE;
     mapObject->triggerGroundEffectsOnMove = TRUE;
@@ -2591,7 +2523,7 @@ static u16 GetFieldObjectFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGrou
     return GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->flagId;
 }
 
-u16 GetFieldObjectFlagIdByFieldObjectId(u8 mapObjectId)
+static u16 GetFieldObjectFlagIdByFieldObjectId(u8 mapObjectId)
 {
     return GetFieldObjectFlagIdByLocalIdAndMap(gMapObjects[mapObjectId].localId, gMapObjects[mapObjectId].mapNum, gMapObjects[mapObjectId].mapGroup);
 }
@@ -2628,7 +2560,7 @@ u8 FieldObjectGetBerryTreeId(u8 mapObjectId)
     return gMapObjects[mapObjectId].trainerRange_berryTreeId;
 }
 
-struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+static struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     struct MapObjectTemplate *templates;
     const struct MapHeader *mapHeader;
@@ -2648,7 +2580,7 @@ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 m
     return FindFieldObjectTemplateInArrayByLocalId(localId, templates, count);
 }
 
-struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count)
+static struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count)
 {
     u8 i;
 
@@ -4523,7 +4455,7 @@ bool8 sub_809292C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
+static void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->singleMovementActive = FALSE;
     mapObject->heldMovementActive = FALSE;
@@ -4871,7 +4803,7 @@ void sub_80930E0(s16 *x, s16 *y, s16 dx, s16 dy)
     *y += dy;
 }
 
-void GetFieldObjectMovingCameraOffset(s16 *x, s16 *y)
+static void GetFieldObjectMovingCameraOffset(s16 *x, s16 *y)
 {
     *x = 0;
     *y = 0;
@@ -5109,7 +5041,7 @@ bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *spr
     return FALSE;
 }
 
-void FieldObjectSetRegularAnim(struct MapObject *mapObject, struct Sprite *sprite, u8 animId)
+static void FieldObjectSetRegularAnim(struct MapObject *mapObject, struct Sprite *sprite, u8 animId)
 {
     mapObject->movementActionId = animId;
     sprite->data[2] = 0;
@@ -5995,7 +5927,7 @@ bool8 sub_8096494(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80964B8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 sub_80964B8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     return TRUE;
 }
@@ -6024,7 +5956,7 @@ void sub_80964E8(struct MapObject *mapObject, struct Sprite *sprite)
     }
 }
 
-void sub_8096518(struct MapObject *mapObject, struct Sprite *sprite)
+static void sub_8096518(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8096530(mapObject, sprite);
     npc_update_obj_anim_flag(mapObject, sprite);
@@ -6909,6 +6841,71 @@ void oamt_npc_ministep_reset(struct Sprite *sprite, u8 a2, u8 a3)
     sprite->data[5] = 0;
 }
 
+typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
+
+static const SpriteStepFunc gUnknown_0850E6C4[] = {
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+    little_step,
+};
+
+static const SpriteStepFunc gUnknown_0850E704[] = {
+    double_little_steps,
+    double_little_steps,
+    double_little_steps,
+    double_little_steps,
+    double_little_steps,
+    double_little_steps,
+    double_little_steps,
+    double_little_steps,
+};
+
+static const SpriteStepFunc gUnknown_0850E724[] = {
+    double_little_steps,
+    triple_little_steps,
+    triple_little_steps,
+    double_little_steps,
+    triple_little_steps,
+    triple_little_steps,
+};
+
+static const SpriteStepFunc gUnknown_0850E73C[] = {
+    quad_little_steps,
+    quad_little_steps,
+    quad_little_steps,
+    quad_little_steps,
+};
+
+static const SpriteStepFunc gUnknown_0850E74C[] = {
+    oct_little_steps,
+    oct_little_steps,
+};
+
+static const SpriteStepFunc *const gUnknown_0850E754[] = {
+    gUnknown_0850E6C4,
+    gUnknown_0850E704,
+    gUnknown_0850E724,
+    gUnknown_0850E73C,
+    gUnknown_0850E74C,
+};
+
+static const s16 gUnknown_0850E768[] = {
+    16, 8, 6, 4, 2
+};
+
 bool8 obj_npc_ministep(struct Sprite *sprite)
 {
     if (sprite->data[5] >= gUnknown_0850E768[sprite->data[4]])
@@ -6947,7 +6944,29 @@ bool8 sub_80976EC(struct Sprite *sprite)
         return FALSE;
 }
 
-// new helper added here in the middle. Perhaps Game Freak kept these organized in alphebetical order or some other heirarchy?
+const s8 gUnknown_0850E772[] = {
+    1, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 1, 2, 2, 1, 2,
+    2, 1, 2, 2, 1, 2, 1, 1,
+    2, 1, 1, 2, 1, 1, 2, 1,
+    1, 2, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1,
+    0, 1, 1, 1, 0, 1, 1, 0,
+    1, 0, 1, 0, 1, 0, 0, 0,
+    0, 1, 0, 0, 0, 0, 0, 0,
+};
+
+const s8 gUnknown_0850E7BA[] = {
+     0,  0,  1,  0,  0,  1,  0,  0,
+     1,  0,  1,  1,  0,  1,  1,  0,
+     1,  1,  0,  1,  1,  0,  1,  1,
+     0,  0,  1,  0,  0,  1,  0,  0,
+     1,  0,  0,  0,  0,  0,  0,  0,
+     0,  0,  0,  0,  0,  0,  0,  0,
+     0,  0, -1,  0,  0, -1,  0,  0,
+    -1,  0, -1, -1,  0, -1, -1,  0,
+    -1, -1, -1, -1, -1, -1, -1, -2,
+};
 
 s16 sub_8097728(s16 a1)
 {
@@ -7002,6 +7021,24 @@ bool8 sub_8097758(struct Sprite *sprite)
     return result;
 }
 
+static const s8 gUnknown_0850E802[] = {
+    -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
+};
+
+static const s8 gUnknown_0850E812[] = {
+    0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
+};
+
+static const s8 gUnknown_0850E822[] = {
+    -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
+};
+
+static const s8 *const gUnknown_0850E834[] = {
+    gUnknown_0850E802,
+    gUnknown_0850E812,
+    gUnknown_0850E822
+};
+
 s16 sub_8097820(s16 a1, u8 a2)
 {
     return gUnknown_0850E834[a2][a1];
@@ -7014,6 +7051,14 @@ void sub_809783C(struct Sprite *sprite, u8 a2, u8 a3, u8 a4)
     sprite->data[5] = a4;
     sprite->data[6] = 0;
 }
+
+static const s16 gUnknown_0850E840[] = {
+    16, 16, 32,
+};
+
+static const u8 gUnknown_0850E846[] = {
+    0, 0, 1,
+};
 
 u8 sub_809785C(struct Sprite *sprite)
 {
@@ -7043,6 +7088,14 @@ u8 sub_809785C(struct Sprite *sprite)
 
     return v2;
 }
+
+static const s16 gUnknown_0850E84A[] = {
+    32, 32, 64,
+};
+
+static const u8 gUnknown_0850E850[] = {
+    1, 1, 2,
+};
 
 u8 sub_80978E4(struct Sprite *sprite)
 {
@@ -7326,7 +7379,29 @@ static void DoRippleFieldEffect(struct MapObject *mapObject, struct Sprite *spri
     FieldEffectStart(FLDEFF_RIPPLE);
 }
 
-bool32 sub_8097E50(struct MapObject *mapObject, struct Sprite *sprite)
+u8 (*const gUnknown_0850E854[])(struct MapObject *, struct Sprite *) = {
+    sub_8097E50,
+    sub_80964B8,
+};
+
+u8 (*const gUnknown_0850E85C[])(struct MapObject *, struct Sprite *) = {
+    sub_8097EF0,
+    sub_80964B8,
+};
+
+u8 (*const gUnknown_0850E864[])(struct MapObject *, struct Sprite *) = {
+    sub_80980C0,
+    sub_80980D0,
+    sub_8098124,
+};
+
+u8 (*const gUnknown_0850E870[])(struct MapObject *, struct Sprite *) = {
+    sub_80980F4,
+    sub_8098108,
+    sub_8098124,
+};
+
+u8 sub_8097E50(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u32 one;
     bool32 ableToStore = FALSE;
@@ -7373,7 +7448,7 @@ bool32 sub_8097E50(struct MapObject *mapObject, struct Sprite *sprite)
     return TRUE;
 }
 
-bool32 sub_8097EF0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 sub_8097EF0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     bool32 ableToStore;
     u8 id;
@@ -7463,14 +7538,14 @@ void sub_8098074(u8 var1, u8 var2)
     }
 }
 
-bool32 sub_80980C0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 sub_80980C0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->pos2.y = 0;
     sprite->data[2]++;
     return FALSE;
 }
 
-bool32 sub_80980D0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 sub_80980D0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->pos2.y -= 8;
 
@@ -7479,14 +7554,14 @@ bool32 sub_80980D0(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool32 sub_80980F4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 sub_80980F4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->pos2.y = -160;
     sprite->data[2]++;
     return FALSE;
 }
 
-bool32 sub_8098108(struct MapObject *mapObject, struct Sprite *sprite)
+u8 sub_8098108(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->pos2.y += 8;
 
@@ -7496,7 +7571,7 @@ bool32 sub_8098108(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 // though this function returns TRUE without doing anything, this header is required due to being in an array of functions which needs it.
-bool32 sub_8098124(struct MapObject *mapObject, struct Sprite *sprite)
+u8 sub_8098124(struct MapObject *mapObject, struct Sprite *sprite)
 {
     return TRUE;
 }
