@@ -252,8 +252,7 @@ static const u8 sTileBitAttributes[] =
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // ? 0xEF
 };
 
-// only used as default case for checking jump landing in field_ground_effect.
-bool8 ShouldDoJumpLandingDustEffect(u8 var)
+bool8 MetatileBehavior_IsATile(u8 var)
 {
     return TRUE;
 }

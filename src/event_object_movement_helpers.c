@@ -1,5 +1,4 @@
 #include "global.h"
-#include "field_ground_effect.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
 #include "event_object_movement_helpers.h"
@@ -504,7 +503,7 @@ bool32 sub_8097D9C(u8 var)
     return FALSE;
 }
 
-u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct MapObject *mapObject)
+u32 StartFieldEffectForEventObject(u8 fieldEffectId, struct MapObject *mapObject)
 {
     FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     return FieldEffectStart(fieldEffectId);
@@ -515,7 +514,7 @@ void DoShadowFieldEffect(struct MapObject *mapObject)
     if (!mapObject->hasShadow)
     {
         mapObject->hasShadow = 1;
-        oe_exec_and_other_stuff(FLDEFF_SHADOW, mapObject);
+        StartFieldEffectForEventObject(FLDEFF_SHADOW, mapObject);
     }
 }
 

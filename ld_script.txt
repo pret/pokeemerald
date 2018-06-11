@@ -93,7 +93,6 @@ SECTIONS {
         src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         src/event_object_movement.o(.text);
-        asm/field_ground_effect.o(.text);
         src/event_object_movement_helpers.o(.text);
         src/field_message_box.o(.text);
         src/map_obj_lock.o(.text);
@@ -398,7 +397,7 @@ SECTIONS {
         src/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/event_object_movement.o(.rodata);
-        data/field_ground_effect.o(.rodata);
+        src/event_object_movement.o(.rodata);
         data/map_obj_8097404.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);

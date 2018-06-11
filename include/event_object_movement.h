@@ -20,6 +20,27 @@ enum SpinnerRunnerFollowPatterns {
     RUNFOLLOW_SOUTH_EAST_WEST
 };
 
+#define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)
+#define GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE    (1 << 1)
+#define GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN   (1 << 2)
+#define GROUND_EFFECT_FLAG_LONG_GRASS_ON_MOVE    (1 << 3)
+#define GROUND_EFFECT_FLAG_ICE_REFLECTION        (1 << 4)
+#define GROUND_EFFECT_FLAG_REFLECTION            (1 << 5)
+#define GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER (1 << 6)
+#define GROUND_EFFECT_FLAG_SAND                  (1 << 7)
+#define GROUND_EFFECT_FLAG_DEEP_SAND             (1 << 8)
+#define GROUND_EFFECT_FLAG_RIPPLES               (1 << 9)
+#define GROUND_EFFECT_FLAG_PUDDLE                (1 << 10)
+#define GROUND_EFFECT_FLAG_SAND_PILE             (1 << 11)
+#define GROUND_EFFECT_FLAG_LAND_IN_TALL_GRASS    (1 << 12)
+#define GROUND_EFFECT_FLAG_LAND_IN_LONG_GRASS    (1 << 13)
+#define GROUND_EFFECT_FLAG_LAND_IN_SHALLOW_WATER (1 << 14)
+#define GROUND_EFFECT_FLAG_LAND_IN_DEEP_WATER    (1 << 15)
+#define GROUND_EFFECT_FLAG_LAND_ON_NORMAL_GROUND (1 << 16)
+#define GROUND_EFFECT_FLAG_SHORT_GRASS           (1 << 17)
+#define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
+#define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
+
 // Exported RAM declarations
 
 // Exported ROM declarations
@@ -95,6 +116,11 @@ u8 AddCameraObject(u8 linkedSpriteId);
 void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y);
 u8 GetSimpleGoAnimId(u32);
 u8 sub_8093514(u32);
+bool8 AreZCoordsCompatible(u8, u8);
+u8 ZCoordToPriority(u8);
+void FieldObjectUpdateZCoord(struct MapObject *pObject);
+void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
+bool8 IsZCoordMismatchAt(u8, s16, s16);
 
 // Exported data declarations
 

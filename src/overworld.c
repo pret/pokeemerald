@@ -10,7 +10,6 @@
 #include "field_control_avatar.h"
 #include "field_effect.h"
 #include "field_fadetransition.h"
-#include "field_ground_effect.h"
 #include "event_object_movement.h"
 #include "event_object_movement_helpers.h"
 #include "field_message_box.h"

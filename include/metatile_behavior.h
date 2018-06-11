@@ -1,7 +1,7 @@
 #ifndef GUARD_METATILE_BEHAVIOR
 #define GUARD_METATILE_BEHAVIOR
 
-bool8 ShouldDoJumpLandingDustEffect(u8);
+bool8 MetatileBehavior_IsATile(u8);
 bool8 MetatileBehavior_IsEncounterTile(u8);
 bool8 MetatileBehavior_IsJumpEast(u8);
 bool8 MetatileBehavior_IsJumpWest(u8);
