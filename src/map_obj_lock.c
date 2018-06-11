@@ -1,7 +1,6 @@
 #include "global.h"
 #include "event_data.h"
 #include "event_object_movement.h"
-#include "event_object_movement_helpers.h"
 #include "field_player_avatar.h"
 #include "map_obj_lock.h"
 #include "script_movement.h"

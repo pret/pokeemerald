@@ -286,6 +286,10 @@ enum
     DIR_NORTH,
     DIR_WEST,
     DIR_EAST,
+    DIR_SOUTHWEST,
+    DIR_SOUTHEAST,
+    DIR_NORTHWEST,
+    DIR_NORTHEAST,
 };
 
 enum

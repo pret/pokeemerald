@@ -7,7 +7,6 @@
 #include "field_camera.h"
 #include "field_effect_helpers.h"
 #include "event_object_movement.h"
-#include "event_object_movement_helpers.h"
 #include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"

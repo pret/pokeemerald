@@ -17,7 +17,6 @@
 #include "field_screen.h"
 #include "field_weather.h"
 #include "item.h"
-#include "event_object_movement_helpers.h"
 #include "mail.h"
 #include "metatile_behavior.h"
 #include "overworld.h"

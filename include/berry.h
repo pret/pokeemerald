@@ -23,9 +23,9 @@ enum
 
 #define NUM_BERRIES 44
 
-extern const u8 *const gBerryTreeFieldObjectGraphicsIdTablePointers[NUM_BERRIES];
-extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[NUM_BERRIES];
-extern const u8 *const gBerryTreePaletteSlotTablePointers[NUM_BERRIES];
+extern const u8 *const gBerryTreeFieldObjectGraphicsIdTablePointers[];
+extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[];
+extern const u8 *const gBerryTreePaletteSlotTablePointers[];
 
 void ClearEnigmaBerries(void);
 void SetEnigmaBerry(u8 *src);

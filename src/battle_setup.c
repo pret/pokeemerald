@@ -32,7 +32,6 @@
 #include "overworld.h"
 #include "field_weather.h"
 #include "gym_leader_rematch.h"
-#include "event_object_movement_helpers.h"
 
 enum
 {

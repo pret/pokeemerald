@@ -13,7 +13,6 @@
 #include "event_data.h"
 #include "rom_818CFC8.h"
 #include "rom_81BE66C.h"
-#include "event_object_movement_helpers.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "field_effect.h"
@@ -24,6 +23,7 @@
 #include "event_object_movement.h"
 #include "pokenav.h"
 #include "util.h"
+#include "constants/map_objects.h"
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
 
@@ -70,6 +70,7 @@ bool8 sub(struct MapObject *mapObject, struct Sprite *sprite)\
 
 extern u8 gUnknown_020375B4;
 extern u16 gUnknown_020375B6;
+extern u8 *gUnknown_020375B8;
 
 // Static ROM declarations
 
@@ -93,9 +94,10 @@ static u8 sub_808E8F4(const struct SpritePalette *);
 static u8 FindFieldObjectPaletteIndexByTag(u16);
 static void sub_808EAB0(u16, u8);
 static bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
-//static void CameraObject_0(struct Sprite *);
-/*static*/ void CameraObject_1(struct Sprite *);
-//static void CameraObject_2(struct Sprite *);
+static void ObjectCB_CameraObject(struct Sprite *);
+static void CameraObject_0(struct Sprite *);
+static void CameraObject_1(struct Sprite *);
+static void CameraObject_2(struct Sprite *);
 /*static*/ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count);
 void npc_reset(struct MapObject *, struct Sprite *);
 void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
@@ -129,52 +131,11 @@ static void npc_update_obj_anim_flag(struct MapObject *, struct Sprite *);
 
 // ROM data
 
-extern void (*const gUnknown_08505438[NUM_FIELD_MAP_OBJECT_TEMPLATES])(struct Sprite *);
-extern const u8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES];
-extern const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES];
-extern const struct MapObjectGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[7];
-extern const struct MapObjectGraphicsInfo *const gFieldObjectGraphicsInfoPointers[0xEF];
-extern u8 (*const gUnknown_0850D714[11])(s16, s16, s16, s16);
-
 struct PairedPalettes {
     u16 tag;
     const u16 *data;
 };
 
-extern const u8 gUnknown_084975C4[0x10];
-extern const struct SpriteTemplate gUnknown_084975D4;
-extern void (*const gUnknown_084975EC[3])(struct Sprite *);
-extern const struct SpritePalette gUnknown_0850BBC8[39];
-extern const struct PairedPalettes gUnknown_0850BD00[4];
-extern const struct PairedPalettes gUnknown_0850BD78[14];
-extern const u16 *const gUnknown_0850BE38[2];
-extern const s16 gUnknown_0850D6DC[4]; // {0x20, 0x40, 0x60, 0x80}
-extern const s16 gUnknown_0850D6EC[4];
-extern const u8 gUnknown_0850D710[4]; // {DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST}
-extern const u8 gUnknown_0850D770[2]; // {DIR_SOUTH, DIR_NORTH}
-extern const u8 gUnknown_0850D790[2]; // {DIR_WEST, DIR_EAST}
-extern const u8 gUnknown_0850D7F0[2]; // {DIR_NORTH, DIR_WEST}
-extern const u8 gUnknown_0850D808[2]; // {DIR_NORTH, DIR_EAST}
-extern const u8 gUnknown_0850D820[2]; // {DIR_SOUTH, DIR_WEST}
-extern const u8 gUnknown_0850D838[2]; // {DIR_SOUTH, DIR_EAST}
-extern const u8 gUnknown_0850D850[4];
-extern const u8 gUnknown_0850D868[4];
-extern const u8 gUnknown_0850D880[4];
-extern const u8 gUnknown_0850D898[4];
-extern const u8 gUnknown_0850D8AC[5];
-extern const u8 gUnknown_0850D8C4[5];
-extern const u8 gUnknown_0850D8E8[4];
-extern bool8 (*const gUnknown_0850DA64[11])(struct MapObject *, struct Sprite *, u8, bool8(u8));
-extern bool8 (*const gUnknown_0850DB5C[4])(u8);
-extern bool8 (*const gUnknown_0850DB6C[4])(u8);
-extern const struct Coords16 gUnknown_0850DB7C[4];
-extern const u8 gUnknown_0850DC2F[4][4];
-extern const u8 gUnknown_0850DC3F[4][4];
-extern const u8 gUnknown_0850DBA0[5];
-extern bool8 (*const *const gUnknown_0850DC50[166])(struct MapObject *, struct Sprite *);
-extern u8 (*const gUnknown_0850DEE8[5])(u8);
-extern const s16 gUnknown_0850DFBC[3];
-extern const s16 gUnknown_0850DFC2[3];
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 
@@ -189,35 +150,998 @@ extern s16 gUnknown_0850E84A[];
 extern u8 gUnknown_0850E850[];
 
 static void FieldObjectUpdateMetatileBehaviors(struct MapObject*);
-/*static*/ void GetAllGroundEffectFlags_OnBeginStep(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_Reflection(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_LongGrassOnSpawn(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_SandHeap(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_ShortGrass(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_HotSprings(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_TallGrassOnBeginStep(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_LongGrassOnBeginStep(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_Tracks(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_Puddle(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_Ripple(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_Seaweed(struct MapObject*, u32*);
-/*static*/ void GetGroundEffectFlags_JumpLanding(struct MapObject*, u32*);
-/*static*/ u8 FieldObjectCheckForReflectiveSurface(struct MapObject*);
+static void GetGroundEffectFlags_Reflection(struct MapObject*, u32*);
+static void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject*, u32*);
+static void GetGroundEffectFlags_LongGrassOnSpawn(struct MapObject*, u32*);
+static void GetGroundEffectFlags_SandHeap(struct MapObject*, u32*);
+static void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject*, u32*);
+static void GetGroundEffectFlags_ShortGrass(struct MapObject*, u32*);
+static void GetGroundEffectFlags_HotSprings(struct MapObject*, u32*);
+static void GetGroundEffectFlags_TallGrassOnBeginStep(struct MapObject*, u32*);
+static void GetGroundEffectFlags_LongGrassOnBeginStep(struct MapObject*, u32*);
+static void GetGroundEffectFlags_Tracks(struct MapObject*, u32*);
+static void GetGroundEffectFlags_Puddle(struct MapObject*, u32*);
+static void GetGroundEffectFlags_Ripple(struct MapObject*, u32*);
+static void GetGroundEffectFlags_Seaweed(struct MapObject*, u32*);
+static void GetGroundEffectFlags_JumpLanding(struct MapObject*, u32*);
+static u8 FieldObjectCheckForReflectiveSurface(struct MapObject*);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
 static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
 static void FieldObjectUpdateSubpriority(struct MapObject*, struct Sprite*);
 static void DoTracksGroundEffect_None(struct MapObject*, struct Sprite*, u8);
 static void DoTracksGroundEffect_Footprints(struct MapObject*, struct Sprite*, u8);
 static void DoTracksGroundEffect_BikeTireTracks(struct MapObject*, struct Sprite*, u8);
-/*static*/ void DoRippleFieldEffect(struct MapObject*, struct Sprite*);
+static void DoRippleFieldEffect(struct MapObject*, struct Sprite*);
 static void DoGroundEffects_OnSpawn(struct MapObject*, struct Sprite*);
 static void DoGroundEffects_OnBeginStep(struct MapObject*, struct Sprite*);
 static void DoGroundEffects_OnFinishStep(struct MapObject*, struct Sprite*);
 static void sub_8097D68(struct Sprite*);
 static void sub_8097FE4(u8);
 
+const u8 gUnknown_084975C4[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
+
+const struct SpriteTemplate gCameraSpriteTemplate = {0, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject};
+
+void (*const gCameraObjectFuncs[])(struct Sprite *) = {
+    CameraObject_0,
+    CameraObject_1,
+    CameraObject_2,
+};
+
+#include "data/field_event_obj/event_object_graphics.h"
+
+// movement type callbacks
+void (*const gUnknown_08505438[])(struct Sprite *) =
+{
+    FieldObjectCB_NoMovement1,
+    FieldObjectCB_LookRandomDirections,
+    FieldObjectCB_GoRandomDirections,
+    FieldObjectCB_RandomlyGoNorthOrSouth,
+    FieldObjectCB_RandomlyGoNorthOrSouth,
+    FieldObjectCB_RandomlyGoEastOrWest,
+    FieldObjectCB_RandomlyGoEastOrWest,
+    FieldObjectCB_FaceFixedDirection,
+    FieldObjectCB_FaceFixedDirection,
+    FieldObjectCB_FaceFixedDirection,
+    FieldObjectCB_FaceFixedDirection,
+    FieldObjectCB_NoMovement2,
+    FieldObjectCB_BerryTree,
+    FieldObjectCB_RandomlyLookNorthOrSouth,
+    FieldObjectCB_RandomlyLookEastOrWest,
+    FieldObjectCB_RandomlyLookNorthOrWest,
+    FieldObjectCB_RandomlyLookNorthOrEast,
+    FieldObjectCB_RandomlyLookSouthOrWest,
+    FieldObjectCB_RandomlyLookSouthOrEast,
+    FieldObjectCB_RandomlyLookNorthOrSouthOrWest,
+    FieldObjectCB_RandomlyLookNorthOrSouthOrEast,
+    FieldObjectCB_RandomlyLookNorthOrEastOrWest,
+    FieldObjectCB_RandomlyLookSouthOrEastOrWest,
+    FieldObjectCB_LookAroundCounterclockwise,
+    FieldObjectCB_LookAroundClockwise,
+    FieldObjectCB_AlternatelyGoInOppositeDirections,
+    FieldObjectCB_AlternatelyGoInOppositeDirections,
+    FieldObjectCB_AlternatelyGoInOppositeDirections,
+    FieldObjectCB_AlternatelyGoInOppositeDirections,
+    FieldObjectCB_GoInDirectionSequence1,
+    FieldObjectCB_GoInDirectionSequence2,
+    FieldObjectCB_GoInDirectionSequence3,
+    FieldObjectCB_GoInDirectionSequence4,
+    FieldObjectCB_GoInDirectionSequence5,
+    FieldObjectCB_GoInDirectionSequence6,
+    FieldObjectCB_GoInDirectionSequence7,
+    FieldObjectCB_GoInDirectionSequence8,
+    FieldObjectCB_GoInDirectionSequence9,
+    FieldObjectCB_GoInDirectionSequence10,
+    FieldObjectCB_GoInDirectionSequence11,
+    FieldObjectCB_GoInDirectionSequence12,
+    FieldObjectCB_GoInDirectionSequence13,
+    FieldObjectCB_GoInDirectionSequence14,
+    FieldObjectCB_GoInDirectionSequence15,
+    FieldObjectCB_GoInDirectionSequence16,
+    FieldObjectCB_GoInDirectionSequence17,
+    FieldObjectCB_GoInDirectionSequence18,
+    FieldObjectCB_GoInDirectionSequence19,
+    FieldObjectCB_GoInDirectionSequence20,
+    FieldObjectCB_GoInDirectionSequence21,
+    FieldObjectCB_GoInDirectionSequence22,
+    FieldObjectCB_GoInDirectionSequence23,
+    FieldObjectCB_GoInDirectionSequence24,
+    FieldObjectCB_CopyPlayer1,
+    FieldObjectCB_CopyPlayer1,
+    FieldObjectCB_CopyPlayer1,
+    FieldObjectCB_CopyPlayer1,
+    FieldObjectCB_TreeDisguise,
+    FieldObjectCB_MountainDisguise,
+    FieldObjectCB_CopyPlayer2,
+    FieldObjectCB_CopyPlayer2,
+    FieldObjectCB_CopyPlayer2,
+    FieldObjectCB_CopyPlayer2,
+    FieldObjectCB_Hidden1,
+    FieldObjectCB_WalkInPlace1,
+    FieldObjectCB_WalkInPlace1,
+    FieldObjectCB_WalkInPlace1,
+    FieldObjectCB_WalkInPlace1,
+    FieldObjectCB_WalkInPlace2,
+    FieldObjectCB_WalkInPlace2,
+    FieldObjectCB_WalkInPlace2,
+    FieldObjectCB_WalkInPlace2,
+    FieldObjectCB_WalkInPlace3,
+    FieldObjectCB_WalkInPlace3,
+    FieldObjectCB_WalkInPlace3,
+    FieldObjectCB_WalkInPlace3,
+    FieldObjectCB_Hidden2,
+    FieldObjectCB_WalkInPlace4,
+    FieldObjectCB_WalkInPlace4,
+    FieldObjectCB_WalkInPlace4,
+    FieldObjectCB_WalkInPlace4,
+};
+
+const u8 gRangedMovementTypes[] = {
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+};
+
+const u8 gInitialMovementTypeFacingDirections[] = {
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_NORTH,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_SOUTH,
+    DIR_EAST,
+    DIR_WEST,
+    DIR_NORTH,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_EAST,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_EAST,
+};
+
+#include "data/field_event_obj/event_object_graphics_info_pointers.h"
+#include "data/field_event_obj/field_effect_object_template_pointers.h"
+#include "data/field_event_obj/event_object_pic_tables.h"
+#include "data/field_event_obj/event_object_anims.h"
+#include "data/field_event_obj/base_oam.h"
+#include "data/field_event_obj/event_object_subsprites.h"
+#include "data/field_event_obj/event_object_graphics_info.h"
+
+const struct SpritePalette gUnknown_0850BBC8[] = {
+    {gFieldObjectPalette0,  0x1103},
+    {gFieldObjectPalette1,  0x1104},
+    {gFieldObjectPalette2,  0x1105},
+    {gFieldObjectPalette3,  0x1106},
+    {gFieldObjectPalette4,  0x1107},
+    {gFieldObjectPalette5,  0x1108},
+    {gFieldObjectPalette6,  0x1109},
+    {gFieldObjectPalette7,  0x110A},
+    {gFieldObjectPalette8,  0x1100},
+    {gFieldObjectPalette9,  0x1101},
+    {gFieldObjectPalette10, 0x1102},
+    {gFieldObjectPalette11, 0x1115},
+    {gFieldObjectPalette12, 0x110B},
+    {gFieldObjectPalette13, 0x110C},
+    {gFieldObjectPalette14, 0x110D},
+    {gFieldObjectPalette15, 0x110E},
+    {gFieldObjectPalette16, 0x110F},
+    {gFieldObjectPalette17, 0x1110},
+    {gFieldObjectPalette18, 0x1111},
+    {gFieldObjectPalette19, 0x1112},
+    {gFieldObjectPalette20, 0x1113},
+    {gFieldObjectPalette21, 0x1114},
+    {gFieldObjectPalette22, 0x1116},
+    {gFieldObjectPalette23, 0x1117},
+    {gFieldObjectPalette24, 0x1118},
+    {gFieldObjectPalette25, 0x1119},
+    {gFieldObjectPalette26, 0x111B},
+    {gFieldObjectPalette27, 0x111C},
+    {gFieldObjectPalette28, 0x111D},
+    {gFieldObjectPalette29, 0x111E},
+    {gFieldObjectPalette30, 0x111F},
+    {gFieldObjectPalette31, 0x1120},
+    {gFieldObjectPalette32, 0x1121},
+    {gFieldObjectPalette33, 0x1122},
+    {gFieldObjectPalette34, 0x1123},
+    {NULL,                  0x0000},
+};
+
+const u16 Unknown_0850BCE8[] = {
+    0x1101,
+    0x1101,
+    0x1101,
+    0x1101,
+};
+
+const u16 Unknown_0850BCF0[] = {
+    0x1111,
+    0x1111,
+    0x1111,
+    0x1111,
+};
+
+const u16 Unknown_0850BCF8[] = {
+    0x1115,
+    0x1115,
+    0x1115,
+    0x1115,
+};
+
+const struct PairedPalettes gUnknown_0850BD00[] = {
+    {0x1100, Unknown_0850BCE8},
+    {0x1110, Unknown_0850BCF0},
+    {0x1115, Unknown_0850BCF8},
+    {0x11FF, NULL},
+};
+
+const u16 Unknown_0850BD20[] = {
+    0x110C,
+    0x110C,
+    0x110C,
+    0x110C,
+};
+
+const u16 Unknown_0850BD28[] = {
+    0x110D,
+    0x110D,
+    0x110D,
+    0x110D,
+};
+
+const u16 Unknown_0850BD30[] = {
+    0x110E,
+    0x110E,
+    0x110E,
+    0x110E,
+};
+
+const u16 Unknown_0850BD38[] = {
+    0x1112,
+    0x1112,
+    0x1112,
+    0x1112,
+};
+
+const u16 Unknown_0850BD40[] = {
+    0x1113,
+    0x1113,
+    0x1113,
+    0x1113,
+};
+
+const u16 Unknown_0850BD48[] = {
+    0x1114,
+    0x1114,
+    0x1114,
+    0x1114,
+};
+
+const u16 Unknown_0850BD50[] = {
+    0x111B,
+    0x111B,
+    0x111B,
+    0x111B,
+};
+
+const u16 Unknown_0850BD58[] = {
+    0x1117,
+    0x1117,
+    0x1117,
+    0x1117,
+};
+
+const u16 Unknown_0850BD60[] = {
+    0x1119,
+    0x1119,
+    0x1119,
+    0x1119,
+};
+
+const u16 Unknown_0850BD68[] = {
+    0x1109,
+    0x1109,
+    0x1109,
+    0x1109,
+};
+
+const u16 Unknown_0850BD70[] = {
+    0x111D,
+    0x111D,
+    0x111D,
+    0x111D,
+};
+
+const struct PairedPalettes gUnknown_0850BD78[] = {
+    {4352, Unknown_0850BCE8},
+    {4368, Unknown_0850BCF0},
+    {4363, Unknown_0850BD20},
+    {4365, Unknown_0850BD28},
+    {4366, Unknown_0850BD30},
+    {4370, Unknown_0850BD38},
+    {4371, Unknown_0850BD40},
+    {4372, Unknown_0850BD48},
+    {4374, Unknown_0850BD58},
+    {4376, Unknown_0850BD60},
+    {4357, Unknown_0850BD68},
+    {4379, Unknown_0850BD50},
+    {4381, Unknown_0850BD70},
+    {4607, NULL},
+};
+
+const u16 gUnknown_0850BDE8[] = {
+    0x1100,
+    0x1101,
+    0x1103,
+    0x1104,
+    0x1105,
+    0x1106,
+    0x1107,
+    0x1108,
+    0x1109,
+    0x110A,
+};
+
+const u16 gUnknown_0850BDFC[] = {
+    0x1100,
+    0x1101,
+    0x1103,
+    0x1104,
+    0x1105,
+    0x1106,
+    0x1107,
+    0x1108,
+    0x1109,
+    0x110A,
+};
+
+const u16 gUnknown_0850BE10[] = {
+    0x1100,
+    0x1101,
+    0x1103,
+    0x1104,
+    0x1105,
+    0x1106,
+    0x1107,
+    0x1108,
+    0x1109,
+    0x110A,
+};
+
+const u16 gUnknown_0850BE24[] = {
+     0x1100,
+     0x1101,
+     0x1103,
+     0x1104,
+     0x1105,
+     0x1106,
+     0x1107,
+     0x1108,
+     0x1109,
+     0x110A,
+};
+
+
+const u16 *const gUnknown_0850BE38[] = {
+    gUnknown_0850BDE8,
+    gUnknown_0850BDFC,
+    gUnknown_0850BE10,
+    gUnknown_0850BE24,
+};
+
+#include "data/field_event_obj/berry_tree_graphics_tables.h"
+#include "data/field_event_obj/field_effect_objects.h"
+
+const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};
+const s16 gMovementDelaysLong[] =   {32, 64, 128, 192};
+const s16 gMovementDelaysShort[] =  {32, 48,  64,  80};
+
+#include "data/field_event_obj/movement_type_func_tables.h"
+
+const u8 gUnknown_0850DACC[] = {
+    0x00,
+    0x00,
+    0x01,
+    0x02,
+    0x03,
+    0x00,
+    0x00,
+    0x01,
+    0x01,
+};
+
+const u8 gUnknown_0850DAD5[] = {
+    0x04,
+    0x04,
+    0x05,
+    0x06,
+    0x07,
+    0x04,
+    0x04,
+    0x05,
+    0x05,
+};
+
+const u8 gUnknown_0850DADE[] = {
+    0x08,
+    0x08,
+    0x09,
+    0x0a,
+    0x0b,
+    0x08,
+    0x08,
+    0x09,
+    0x09,
+};
+
+const u8 gUnknown_0850DAE7[] = {
+    0x0c,
+    0x0c,
+    0x0d,
+    0x0e,
+    0x0f,
+    0x0c,
+    0x0c,
+    0x0d,
+    0x0d,
+};
+
+const u8 gUnknown_0850DAF0[] = {
+    0x10,
+    0x10,
+    0x11,
+    0x12,
+    0x13,
+    0x10,
+    0x10,
+    0x11,
+    0x11,
+};
+
+const u8 gUnknown_0850DAF9[] = {
+    0x14,
+    0x14,
+    0x15,
+    0x16,
+    0x17,
+    0x14,
+    0x14,
+    0x15,
+    0x15,
+};
+
+const u8 gUnknown_0850DB02[] = {
+    0x14,
+    0x14,
+    0x15,
+    0x16,
+    0x17,
+    0x14,
+    0x14,
+    0x15,
+    0x15,
+};
+
+const u8 gUnknown_0850DB0B[] = {
+    0x18,
+    0x18,
+    0x19,
+    0x1a,
+    0x1b,
+    0x18,
+    0x18,
+    0x19,
+    0x19,
+};
+
+const u8 gUnknown_0850DB14[] = {
+    0x1c,
+    0x1c,
+    0x1d,
+    0x1e,
+    0x1f,
+    0x1c,
+    0x1c,
+    0x1d,
+    0x1d,
+};
+
+const u8 gUnknown_0850DB1D[] = {
+    0x20,
+    0x20,
+    0x21,
+    0x22,
+    0x23,
+    0x20,
+    0x20,
+    0x21,
+    0x21,
+};
+
+const u8 gUnknown_0850DB26[] = {
+    0x24,
+    0x24,
+    0x25,
+    0x26,
+    0x27,
+    0x24,
+    0x24,
+    0x25,
+    0x25,
+};
+
+const u8 gUnknown_0850DB2F[] = {
+    0x00,
+    0x00,
+    0x01,
+    0x02,
+    0x03,
+    0x00,
+    0x00,
+    0x01,
+    0x01,
+};
+
+const u8 gUnknown_0850DB38[] = {
+    0x04,
+    0x04,
+    0x05,
+    0x06,
+    0x07,
+    0x04,
+    0x04,
+    0x05,
+    0x05,
+};
+
+const u8 gUnknown_0850DB41[] = {
+    0x08,
+    0x08,
+    0x09,
+    0x0a,
+    0x0b,
+    0x08,
+    0x08,
+    0x09,
+    0x09,
+};
+
+const u8 gUnknown_0850DB4A[] = {
+    0x14,
+    0x14,
+    0x15,
+    0x16,
+    0x17,
+    0x14,
+    0x14,
+    0x15,
+    0x15,
+};
+
+const u8 gUnknown_0850DB53[] = {
+    0x08,
+    0x08,
+    0x07,
+    0x09,
+    0x0a,
+    0x08,
+    0x08,
+    0x07,
+    0x07,
+};
+
+bool8 (*const gOppositeDirectionBlockedMetatileFuncs[])(u8) = {
+    MetatileBehavior_IsSouthBlocked,
+    MetatileBehavior_IsNorthBlocked,
+    MetatileBehavior_IsWestBlocked,
+    MetatileBehavior_IsEastBlocked
+};
+
+bool8 (*const gDirectionBlockedMetatileFuncs[])(u8) = {
+    MetatileBehavior_IsNorthBlocked,
+    MetatileBehavior_IsSouthBlocked,
+    MetatileBehavior_IsEastBlocked,
+    MetatileBehavior_IsWestBlocked
+};
+
+const struct Coords16 gDirectionToVectors[] = {
+    { 0,  0},
+    { 0,  1},
+    { 0, -1},
+    {-1,  0},
+    { 1,  0},
+    {-1,  1},
+    { 1,  1},
+    {-1, -1},
+    { 1, -1}
+};
+
+const u8 gUnknown_0850DBA0[] = {
+    0x00,
+    0x00,
+    0x01,
+    0x02,
+    0x03,
+};
+
+const u8 gUnknown_0850DBA5[] = {
+    0x04,
+    0x04,
+    0x05,
+    0x06,
+    0x07,
+};
+
+const u8 gUnknown_0850DBAA[] = {
+    0x08,
+    0x08,
+    0x09,
+    0x0a,
+    0x0b,
+};
+
+const u8 gUnknown_0850DBAF[] = {
+    0x15,
+    0x15,
+    0x16,
+    0x17,
+    0x18,
+};
+
+const u8 gUnknown_0850DBB4[] = {
+    0x29,
+    0x29,
+    0x2a,
+    0x2b,
+    0x2c,
+};
+
+const u8 gUnknown_0850DBB9[] = {
+    0x2d,
+    0x2d,
+    0x2e,
+    0x2f,
+    0x30,
+};
+
+const u8 gUnknown_0850DBBE[] = {
+    0x31,
+    0x31,
+    0x32,
+    0x33,
+    0x34,
+};
+
+const u8 gUnknown_0850DBC3[] = {
+    0x35,
+    0x35,
+    0x36,
+    0x37,
+    0x38,
+};
+
+const u8 gUnknown_0850DBC8[] = {
+    0x0c,
+    0x0c,
+    0x0d,
+    0x0e,
+    0x0f,
+};
+
+const u8 gUnknown_0850DBCD[] = {
+    0x46,
+    0x46,
+    0x47,
+    0x48,
+    0x49,
+};
+
+const u8 gUnknown_0850DBD2[] = {
+    0x4b,
+    0x4b,
+    0x4a,
+    0x4d,
+    0x4c,
+};
+
+const u8 gUnknown_0850DBD7[] = {
+    0x42,
+    0x42,
+    0x43,
+    0x44,
+    0x45,
+};
+
+const u8 gUnknown_0850DBDC[] = {
+    0x3a,
+    0x3a,
+    0x3b,
+    0x3c,
+    0x3d,
+};
+
+const u8 gUnknown_0850DBE1[] = {
+    0x19,
+    0x19,
+    0x1a,
+    0x1b,
+    0x1c,
+};
+
+const u8 gUnknown_0850DBE6[] = {
+    0x1d,
+    0x1d,
+    0x1e,
+    0x1f,
+    0x20,
+};
+
+const u8 gUnknown_0850DBEB[] = {
+    0x21,
+    0x21,
+    0x22,
+    0x23,
+    0x24,
+};
+
+const u8 gUnknown_0850DBF0[] = {
+    0x25,
+    0x25,
+    0x26,
+    0x27,
+    0x28,
+};
+
+const u8 gUnknown_0850DBF5[] = {
+    0x64,
+    0x64,
+    0x65,
+    0x66,
+    0x67,
+};
+
+const u8 gUnknown_0850DBFA[] = {
+    0x68,
+    0x68,
+    0x69,
+    0x6a,
+    0x6b,
+};
+
+const u8 gUnknown_0850DBFF[] = {
+    0x6c,
+    0x6c,
+    0x6d,
+    0x6e,
+    0x6f,
+};
+
+const u8 gUnknown_0850DC04[] = {
+    0x70,
+    0x70,
+    0x71,
+    0x72,
+    0x73,
+};
+
+const u8 gUnknown_0850DC09[] = {
+    0x74,
+    0x74,
+    0x75,
+    0x76,
+    0x77,
+};
+
+const u8 gUnknown_0850DC0E[] = {
+    0x78,
+    0x78,
+    0x79,
+    0x7a,
+    0x7b,
+};
+
+const u8 gUnknown_0850DC13[] = {
+    0x7c,
+    0x7c,
+    0x7d,
+    0x7e,
+    0x7f,
+};
+
+const u8 gUnknown_0850DC18[] = {
+    0x80,
+    0x80,
+    0x81,
+    0x82,
+    0x83,
+};
+
+const u8 gUnknown_0850DC1D[] = {
+    0x84,
+    0x84,
+    0x85,
+    0x86,
+    0x87,
+};
+
+const u8 gUnknown_0850DC22[] = {
+    0x88,
+    0x88,
+    0x89,
+    0x8a,
+    0x8b,
+};
+
+const u8 gOppositeDirections[] = {
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_EAST,
+    DIR_WEST,
+    DIR_NORTHEAST,
+    DIR_NORTHWEST,
+    DIR_SOUTHEAST,
+    DIR_SOUTHWEST,
+};
+
+const u8 gUnknown_0850DC2F[][4] = {
+    {2, 1, 4, 3},
+    {1, 2, 3, 4},
+    {3, 4, 2, 1},
+    {4, 3, 1, 2}
+};
+
+const u8 gUnknown_0850DC3F[][4] = {
+    {2, 1, 4, 3},
+    {1, 2, 3, 4},
+    {4, 3, 1, 2},
+    {3, 4, 2, 1}
+};
+
+#include "data/field_event_obj/movement_action_func_tables.h"
 
 // Code
 
@@ -1505,21 +2429,21 @@ u8 AddCameraObject(u8 linkedSpriteId)
 {
     u8 spriteId;
 
-    spriteId = CreateSprite(&gUnknown_084975D4, 0, 0, 4);
+    spriteId = CreateSprite(&gCameraSpriteTemplate, 0, 0, 4);
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].data[0] = linkedSpriteId;
     return spriteId;
 }
 
-void ObjectCB_CameraObject(struct Sprite *sprite)
+static void ObjectCB_CameraObject(struct Sprite *sprite)
 {
-    void (*callbacks[ARRAY_COUNT(gUnknown_084975EC)])(struct Sprite *);
+    void (*callbacks[ARRAY_COUNT(gCameraObjectFuncs)])(struct Sprite *);
 
-    memcpy(callbacks, gUnknown_084975EC, sizeof gUnknown_084975EC);
+    memcpy(callbacks, gCameraObjectFuncs, sizeof gCameraObjectFuncs);
     callbacks[sprite->data[1]](sprite);
 }
 
-/*static*/ void CameraObject_0(struct Sprite *sprite)
+static void CameraObject_0(struct Sprite *sprite)
 {
     sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
     sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
@@ -1528,7 +2452,7 @@ void ObjectCB_CameraObject(struct Sprite *sprite)
     CameraObject_1(sprite);
 }
 
-/*static*/ void CameraObject_1(struct Sprite *sprite)
+static void CameraObject_1(struct Sprite *sprite)
 {
     s16 x;
     s16 y;
@@ -1541,7 +2465,7 @@ void ObjectCB_CameraObject(struct Sprite *sprite)
     sprite->pos1.y = y;
 }
 
-/*static*/ void CameraObject_2(struct Sprite *sprite)
+static void CameraObject_2(struct Sprite *sprite)
 {
     sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
     sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
@@ -1879,7 +2803,7 @@ bool8 sub_808F48C(struct MapObject *mapObject, struct Sprite *sprite)
     {
         return FALSE;
     }
-    SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+    SetFieldObjectStepTimer(sprite, gMovementDelaysMedium[Random() & 0x03]);
     sprite->data[1] = 3;
     return TRUE;
 }
@@ -2199,7 +3123,7 @@ bool8 sub_808F9C8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysMedium[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2254,7 +3178,7 @@ bool8 sub_808FB08(struct MapObject *mapObject, struct Sprite *sprite)
     {
         return FALSE;
     }
-    SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+    SetFieldObjectStepTimer(sprite, gMovementDelaysMedium[Random() & 0x03]);
     sprite->data[1] = 3;
     return TRUE;
 }
@@ -2325,7 +3249,7 @@ bool8 sub_808FC8C(struct MapObject *mapObject, struct Sprite *sprite)
     {
         return FALSE;
     }
-    SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+    SetFieldObjectStepTimer(sprite, gMovementDelaysMedium[Random() & 0x03]);
     sprite->data[1] = 3;
     return TRUE;
 }
@@ -2527,7 +3451,7 @@ bool8 sub_80900D4 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysMedium[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2580,7 +3504,7 @@ bool8 sub_8090214 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysMedium[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2633,7 +3557,7 @@ bool8 sub_8090354 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysShort[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2686,7 +3610,7 @@ bool8 sub_8090494 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysShort[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2739,7 +3663,7 @@ bool8 sub_80905D4 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysShort[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2792,7 +3716,7 @@ bool8 sub_8090714 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysShort[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2845,7 +3769,7 @@ bool8 sub_8090854 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysShort[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2898,7 +3822,7 @@ bool8 sub_8090994 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysShort[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -2951,7 +3875,7 @@ bool8 sub_8090AD4 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysShort[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -3004,7 +3928,7 @@ bool8 sub_8090C14 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gMovementDelaysShort[Random() & 0x03]);
         mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
@@ -3609,7 +4533,6 @@ void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 #define dirn2anim(name, table)\
-extern const u8 table[4];\
 u8 name(u8 direction)\
 {\
     return table[direction];\
@@ -3630,15 +4553,6 @@ dirn2anim(sub_8092A0C, gUnknown_0850DB2F)
 dirn2anim(sub_8092A1C, gUnknown_0850DB38)
 dirn2anim(sub_8092A2C, gUnknown_0850DB41)
 dirn2anim(get_run_image_anim_num, gUnknown_0850DB4A)
-
-// file boundary?
-
-struct UnkStruct_085094AC {
-    const union AnimCmd *const *anims;
-    u8 animPos[4];
-};
-
-extern const struct UnkStruct_085094AC gUnknown_085094AC[];
 
 static const struct UnkStruct_085094AC *sub_8092A4C(const union AnimCmd *const *anims)
 {
@@ -3822,7 +4736,7 @@ static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, 
 
 static bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
-    if (gUnknown_0850DB5C[direction - 1](mapObject->currentMetatileBehavior) || gUnknown_0850DB6C[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
+    if (gOppositeDirectionBlockedMetatileFuncs[direction - 1](mapObject->currentMetatileBehavior) || gDirectionBlockedMetatileFuncs[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
     {
         return TRUE;
     }
@@ -3874,14 +4788,14 @@ void sub_8092EF0(u8 localId, u8 mapNum, u8 mapGroup)
 
 void MoveCoords(u8 direction, s16 *x, s16 *y)
 {
-    *x += gUnknown_0850DB7C[direction].x;
-    *y += gUnknown_0850DB7C[direction].y;
+    *x += gDirectionToVectors[direction].x;
+    *y += gDirectionToVectors[direction].y;
 }
 
 void sub_8092F60(u8 direction, s16 *x, s16 *y)
 {
-    *x += gUnknown_0850DB7C[direction].x << 4;
-    *y += gUnknown_0850DB7C[direction].y << 4;
+    *x += gDirectionToVectors[direction].x << 4;
+    *y += gDirectionToVectors[direction].y << 4;
 }
 
 void sub_8092F88(u32 dirn, s16 *x, s16 *y, s16 dx, s16 dy)
@@ -3895,7 +4809,7 @@ void sub_8092F88(u32 dirn, s16 *x, s16 *y, s16 dx, s16 dy)
     direction = dirn;
     dx_2 = dx;
     dy_2 = dy;
-    cur_x = gUnknown_0850DB7C[direction].x;
+    cur_x = gDirectionToVectors[direction].x;
     if (cur_x > 0)
     {
         *x += dx_2;
@@ -3904,7 +4818,7 @@ void sub_8092F88(u32 dirn, s16 *x, s16 *y, s16 dx, s16 dy)
     {
         *x -= dx_2;
     }
-    cur_y = gUnknown_0850DB7C[direction].y;
+    cur_y = gDirectionToVectors[direction].y;
     if (cur_y > 0)
     {
         *y += dy_2;
@@ -4096,7 +5010,6 @@ void FieldObjectStep(struct MapObject *mapObject, struct Sprite *sprite, bool8 (
 }
 
 #define dirn2anim_2(name, table) \
-extern const u8 table[5];      \
 u8 name(u32 direction)         \
 {                              \
     u8 dirn2;                  \
@@ -4144,14 +5057,12 @@ dirn2anim_2(sub_809377C, gUnknown_0850DC18);
 dirn2anim_2(sub_80937A8, gUnknown_0850DC1D);
 dirn2anim_2(d2s_08064034, gUnknown_0850DC22);
 
-extern const u8 gUnknown_0850DC27[8];
-
 u8 GetOppositeDirection(u8 direction)
 {
-    u8 directions[sizeof gUnknown_0850DC27];
+    u8 directions[sizeof gOppositeDirections];
 
-    memcpy(directions, gUnknown_0850DC27, sizeof gUnknown_0850DC27);
-    if (direction < 1 || direction > (sizeof gUnknown_0850DC27))
+    memcpy(directions, gOppositeDirections, sizeof gOppositeDirections);
+    if (direction < 1 || direction > (sizeof gOppositeDirections))
     {
         return direction;
     }
@@ -5174,7 +6085,7 @@ static void npc_update_obj_anim_flag(struct MapObject *mapObject, struct Sprite 
     GetGroundEffectFlags_HotSprings(eventObj, flags);
 }
 
-/*static*/ void GetAllGroundEffectFlags_OnBeginStep(struct MapObject *eventObj, u32 *flags)
+static void GetAllGroundEffectFlags_OnBeginStep(struct MapObject *eventObj, u32 *flags)
 {
     FieldObjectUpdateMetatileBehaviors(eventObj);
     GetGroundEffectFlags_Reflection(eventObj, flags);
@@ -5207,7 +6118,7 @@ static void FieldObjectUpdateMetatileBehaviors(struct MapObject *eventObj)
     eventObj->currentMetatileBehavior = MapGridGetMetatileBehaviorAt(eventObj->currentCoords.x, eventObj->currentCoords.y);
 }
 
-void GetGroundEffectFlags_Reflection(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_Reflection(struct MapObject *eventObj, u32 *flags)
 {
     u32 reflectionFlags[2] = { GROUND_EFFECT_FLAG_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION };
     u8 type = FieldObjectCheckForReflectiveSurface(eventObj);
@@ -5227,31 +6138,31 @@ void GetGroundEffectFlags_Reflection(struct MapObject *eventObj, u32 *flags)
     }
 }
 
-void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsTallGrass(eventObj->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN;
 }
 
-void GetGroundEffectFlags_TallGrassOnBeginStep(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_TallGrassOnBeginStep(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsTallGrass(eventObj->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE;
 }
 
-void GetGroundEffectFlags_LongGrassOnSpawn(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_LongGrassOnSpawn(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsLongGrass(eventObj->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN;
 }
 
-void GetGroundEffectFlags_LongGrassOnBeginStep(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_LongGrassOnBeginStep(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsLongGrass(eventObj->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_LONG_GRASS_ON_MOVE;
 }
 
-void GetGroundEffectFlags_Tracks(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_Tracks(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsDeepSand(eventObj->previousMetatileBehavior))
     {
@@ -5264,7 +6175,7 @@ void GetGroundEffectFlags_Tracks(struct MapObject *eventObj, u32 *flags)
     }
 }
 
-void GetGroundEffectFlags_SandHeap(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_SandHeap(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsDeepSand(eventObj->currentMetatileBehavior)
         && MetatileBehavior_IsDeepSand(eventObj->previousMetatileBehavior))
@@ -5282,7 +6193,7 @@ void GetGroundEffectFlags_SandHeap(struct MapObject *eventObj, u32 *flags)
     }
 }
 
-void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *eventObj, u32 *flags)
 {
     if ((MetatileBehavior_IsShallowFlowingWater(eventObj->currentMetatileBehavior)
          && MetatileBehavior_IsShallowFlowingWater(eventObj->previousMetatileBehavior))
@@ -5302,7 +6213,7 @@ void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *eventObj, u32 *f
     }
 }
 
-void GetGroundEffectFlags_Puddle(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_Puddle(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsPuddle(eventObj->currentMetatileBehavior)
         && MetatileBehavior_IsPuddle(eventObj->previousMetatileBehavior))
@@ -5311,13 +6222,13 @@ void GetGroundEffectFlags_Puddle(struct MapObject *eventObj, u32 *flags)
     }
 }
 
-void GetGroundEffectFlags_Ripple(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_Ripple(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_HasRipples(eventObj->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_RIPPLES;
 }
 
-void GetGroundEffectFlags_ShortGrass(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_ShortGrass(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsShortGrass(eventObj->currentMetatileBehavior)
         && MetatileBehavior_IsShortGrass(eventObj->previousMetatileBehavior))
@@ -5335,7 +6246,7 @@ void GetGroundEffectFlags_ShortGrass(struct MapObject *eventObj, u32 *flags)
     }
 }
 
-void GetGroundEffectFlags_HotSprings(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_HotSprings(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsHotSprings(eventObj->currentMetatileBehavior)
         && MetatileBehavior_IsHotSprings(eventObj->previousMetatileBehavior))
@@ -5353,13 +6264,13 @@ void GetGroundEffectFlags_HotSprings(struct MapObject *eventObj, u32 *flags)
     }
 }
 
-void GetGroundEffectFlags_Seaweed(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_Seaweed(struct MapObject *eventObj, u32 *flags)
 {
     if (MetatileBehavior_IsSeaweed(eventObj->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_SEAWEED;
 }
 
-void GetGroundEffectFlags_JumpLanding(struct MapObject *eventObj, u32 *flags)
+static void GetGroundEffectFlags_JumpLanding(struct MapObject *eventObj, u32 *flags)
 {
     typedef bool8 (*MetatileFunc)(u8);
 
@@ -5396,7 +6307,7 @@ void GetGroundEffectFlags_JumpLanding(struct MapObject *eventObj, u32 *flags)
     }
 }
 
-u8 FieldObjectCheckForReflectiveSurface(struct MapObject *eventObj)
+static u8 FieldObjectCheckForReflectiveSurface(struct MapObject *eventObj)
 {
     const struct MapObjectGraphicsInfo *info = GetFieldObjectGraphicsInfo(eventObj->graphicsId);
 
@@ -5963,32 +6874,32 @@ void UnfreezeMapObjects(void)
 
 void little_step(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += gUnknown_0850DB7C[dir].x;
-    sprite->pos1.y += gUnknown_0850DB7C[dir].y;
+    sprite->pos1.x += gDirectionToVectors[dir].x;
+    sprite->pos1.y += gDirectionToVectors[dir].y;
 }
 
 void double_little_steps(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 2 * (u16) gUnknown_0850DB7C[dir].x;
-    sprite->pos1.y += 2 * (u16) gUnknown_0850DB7C[dir].y;
+    sprite->pos1.x += 2 * (u16) gDirectionToVectors[dir].x;
+    sprite->pos1.y += 2 * (u16) gDirectionToVectors[dir].y;
 }
 
 void triple_little_steps(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 2 * (u16) gUnknown_0850DB7C[dir].x + (u16) gUnknown_0850DB7C[dir].x;
-    sprite->pos1.y += 2 * (u16) gUnknown_0850DB7C[dir].y + (u16) gUnknown_0850DB7C[dir].y;
+    sprite->pos1.x += 2 * (u16) gDirectionToVectors[dir].x + (u16) gDirectionToVectors[dir].x;
+    sprite->pos1.y += 2 * (u16) gDirectionToVectors[dir].y + (u16) gDirectionToVectors[dir].y;
 }
 
 void quad_little_steps(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 4 * (u16) gUnknown_0850DB7C[dir].x;
-    sprite->pos1.y += 4 * (u16) gUnknown_0850DB7C[dir].y;
+    sprite->pos1.x += 4 * (u16) gDirectionToVectors[dir].x;
+    sprite->pos1.y += 4 * (u16) gDirectionToVectors[dir].y;
 }
 
 void oct_little_steps(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 8 * (u16) gUnknown_0850DB7C[dir].x;
-    sprite->pos1.y += 8 * (u16) gUnknown_0850DB7C[dir].y;
+    sprite->pos1.x += 8 * (u16) gDirectionToVectors[dir].x;
+    sprite->pos1.y += 8 * (u16) gDirectionToVectors[dir].y;
 }
 
 void oamt_npc_ministep_reset(struct Sprite *sprite, u8 a2, u8 a3)
@@ -6405,7 +7316,7 @@ void DoShadowFieldEffect(struct MapObject *mapObject)
     }
 }
 
-void DoRippleFieldEffect(struct MapObject *mapObject, struct Sprite *sprite)
+static void DoRippleFieldEffect(struct MapObject *mapObject, struct Sprite *sprite)
 {
     const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
     gFieldEffectArguments[0] = sprite->pos1.x;

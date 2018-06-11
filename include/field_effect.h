@@ -230,4 +230,7 @@ void sub_80B9C28(s16*, u8);
 void sub_80B9C54(s16*, u8);
 void sub_80B9CDC(s16*, u8);
 
+void sub_80B7CAC(struct Sprite*);
+void sub_80B7A58(struct Sprite*);
+
 #endif //GUARD_FIELD_EFFECTS_H
