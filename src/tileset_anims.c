@@ -115,47 +115,47 @@ const u16 *const gTilesetAnims_General3[] = {
     gTilesetAnims_General3_Frame3
 };
 
-const u16 gUnknown_08513184[] = INCBIN_U16("data/tilesets/primary/general/anim/4/0.4bpp");
+const u16 gTilesetAnims_General4_Frame0[] = INCBIN_U16("data/tilesets/primary/general/anim/4/0.4bpp");
 
-const u16 gUnknown_085132C4[] = INCBIN_U16("data/tilesets/primary/general/anim/4/1.4bpp");
+const u16 gTilesetAnims_General4_Frame1[] = INCBIN_U16("data/tilesets/primary/general/anim/4/1.4bpp");
 
-const u16 gUnknown_08513404[] = INCBIN_U16("data/tilesets/primary/general/anim/4/2.4bpp");
+const u16 gTilesetAnims_General4_Frame2[] = INCBIN_U16("data/tilesets/primary/general/anim/4/2.4bpp");
 
-const u16 gUnknown_08513544[] = INCBIN_U16("data/tilesets/primary/general/anim/4/3.4bpp");
+const u16 gTilesetAnims_General4_Frame4[] = INCBIN_U16("data/tilesets/primary/general/anim/4/3.4bpp");
 
 const u16 *const gTilesetAnims_General4[] = {
-    gUnknown_08513184,
-    gUnknown_085132C4,
-    gUnknown_08513404,
-    gUnknown_08513544
+    gTilesetAnims_General4_Frame0,
+    gTilesetAnims_General4_Frame1,
+    gTilesetAnims_General4_Frame2,
+    gTilesetAnims_General4_Frame4
 };
 
-const u16 gUnknown_08513694[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/0.4bpp");
+const u16 gTilesetAnims_Lavaridge0_Frame0[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/0.4bpp");
 
-const u16 gUnknown_08513714[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/1.4bpp");
+const u16 gTilesetAnims_Lavaridge0_Frame1[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/1.4bpp");
 
-const u16 gUnknown_08513794[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/2.4bpp");
+const u16 gTilesetAnims_Lavaridge0_Frame2[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/2.4bpp");
 
-const u16 gUnknown_08513814[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/3.4bpp");
+const u16 gTilesetAnims_Lavaridge0_Frame3[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/3.4bpp");
 
 const u16 *const gTilesetAnims_Lavaridge0[] = {
-    gUnknown_08513694,
-    gUnknown_08513714,
-    gUnknown_08513794,
-    gUnknown_08513814
+    gTilesetAnims_Lavaridge0_Frame0,
+    gTilesetAnims_Lavaridge0_Frame1,
+    gTilesetAnims_Lavaridge0_Frame2,
+    gTilesetAnims_Lavaridge0_Frame3
 };
 
-const u16 gUnknown_085138A4[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/0.4bpp");
+const u16 gTilesetAnims_Pacifidlog0_Frame0[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/0.4bpp");
 
-const u16 gUnknown_08513C64[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/1.4bpp");
+const u16 gTilesetAnims_Pacifidlog0_Frame1[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/1.4bpp");
 
-const u16 gUnknown_08514024[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/2.4bpp");
+const u16 gTilesetAnims_Pacifidlog0_Frame2[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/2.4bpp");
 
 const u16 *const gTilesetAnims_Pacifidlog0[] = {
-    gUnknown_085138A4,
-    gUnknown_08513C64,
-    gUnknown_08514024,
-    gUnknown_08513C64
+    gTilesetAnims_Pacifidlog0_Frame0,
+    gTilesetAnims_Pacifidlog0_Frame1,
+    gTilesetAnims_Pacifidlog0_Frame2,
+    gTilesetAnims_Pacifidlog0_Frame1
 };
 
 const u16 gTilesetAnims_Underwater0_Frame0[] = INCBIN_U16("data/tilesets/secondary/underwater/anim/0.4bpp");
@@ -173,52 +173,52 @@ const u16 *const gTilesetAnims_Underwater0[] = {
     gTilesetAnims_Underwater0_Frame3
 };
 
-const u16 gUnknown_08514604[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/0.4bpp");
+const u16 gTilesetAnims_Pacifidlog1_Frame0[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/0.4bpp");
 
-const u16 gUnknown_08514704[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/1.4bpp");
+const u16 gTilesetAnims_Pacifidlog1_Frame1[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/1.4bpp");
 
-const u16 gUnknown_08514804[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/2.4bpp");
+const u16 gTilesetAnims_Pacifidlog1_Frame2[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/2.4bpp");
 
-const u16 gUnknown_08514904[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/3.4bpp");
+const u16 gTilesetAnims_Pacifidlog1_Frame3[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/3.4bpp");
 
-const u16 gUnknown_08514A04[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/4.4bpp");
+const u16 gTilesetAnims_Pacifidlog1_Frame4[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/4.4bpp");
 
-const u16 gUnknown_08514B04[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/5.4bpp");
+const u16 gTilesetAnims_Pacifidlog1_Frame5[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/5.4bpp");
 
-const u16 gUnknown_08514C04[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/6.4bpp");
+const u16 gTilesetAnims_Pacifidlog1_Frame6[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/6.4bpp");
 
-const u16 gUnknown_08514D04[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/7.4bpp");
+const u16 gTilesetAnims_Pacifidlog1_Frame7[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/7.4bpp");
 
 const u16 *const gTilesetAnims_Pacifidlog1[] = {
-    gUnknown_08514604,
-    gUnknown_08514704,
-    gUnknown_08514804,
-    gUnknown_08514904,
-    gUnknown_08514A04,
-    gUnknown_08514B04,
-    gUnknown_08514C04,
-    gUnknown_08514D04
+    gTilesetAnims_Pacifidlog1_Frame0,
+    gTilesetAnims_Pacifidlog1_Frame1,
+    gTilesetAnims_Pacifidlog1_Frame2,
+    gTilesetAnims_Pacifidlog1_Frame3,
+    gTilesetAnims_Pacifidlog1_Frame4,
+    gTilesetAnims_Pacifidlog1_Frame5,
+    gTilesetAnims_Pacifidlog1_Frame6,
+    gTilesetAnims_Pacifidlog1_Frame7
 };
 
-const u16 gUnknown_08514E24[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/0.4bpp");
+const u16 gTilesetAnims_Mauville0a_Frame0[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/0.4bpp");
 
-const u16 gUnknown_08514EA4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/1.4bpp");
+const u16 gTilesetAnims_Mauville0a_Frame1[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/1.4bpp");
 
-const u16 gUnknown_08514F24[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/2.4bpp");
+const u16 gTilesetAnims_Mauville0a_Frame2[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/2.4bpp");
 
-const u16 gUnknown_08514FA4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/3.4bpp");
+const u16 gTilesetAnims_Mauville0a_Frame3[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/3.4bpp");
 
-const u16 gUnknown_08515024[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/1/a/1.4bpp");
+const u16 gTilesetAnims_Mauville1a_Frame1[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/1/a/1.4bpp");
 
-const u16 gUnknown_085150A4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/0.4bpp");
+const u16 gTilesetAnims_Mauville0b_Frame0[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/0.4bpp");
 
-const u16 gUnknown_08515124[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/1.4bpp");
+const u16 gTilesetAnims_Mauville0b_Frame1[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/1.4bpp");
 
-const u16 gUnknown_085151A4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/2.4bpp");
+const u16 gTilesetAnims_Mauville0b_Frame2[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/2.4bpp");
 
-const u16 gUnknown_08515224[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/3.4bpp");
+const u16 gTilesetAnims_Mauville0b_Frame3[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/3.4bpp");
 
-const u16 gUnknown_085152A4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/1/b/1.4bpp");
+const u16 gTilesetAnims_Mauville1b_Frame1[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/1/b/1.4bpp");
 
 const u16 tileset_anims_space_1[16] = {};
 
@@ -245,64 +245,64 @@ u16 *const gTilesetAnims_MauvilleVDests1[] = {
 };
 
 const u16 *const gTilesetAnims_Mauville0a[] = {
-    gUnknown_08514E24,
-    gUnknown_08514E24,
-    gUnknown_08514EA4,
-    gUnknown_08514F24,
-    gUnknown_08514FA4,
-    gUnknown_08514FA4,
-    gUnknown_08514FA4,
-    gUnknown_08514FA4,
-    gUnknown_08514FA4,
-    gUnknown_08514FA4,
-    gUnknown_08514F24,
-    gUnknown_08514EA4
+    gTilesetAnims_Mauville0a_Frame0,
+    gTilesetAnims_Mauville0a_Frame0,
+    gTilesetAnims_Mauville0a_Frame1,
+    gTilesetAnims_Mauville0a_Frame2,
+    gTilesetAnims_Mauville0a_Frame3,
+    gTilesetAnims_Mauville0a_Frame3,
+    gTilesetAnims_Mauville0a_Frame3,
+    gTilesetAnims_Mauville0a_Frame3,
+    gTilesetAnims_Mauville0a_Frame3,
+    gTilesetAnims_Mauville0a_Frame3,
+    gTilesetAnims_Mauville0a_Frame2,
+    gTilesetAnims_Mauville0a_Frame1
 };
 
 const u16 *const gTilesetAnims_Mauville0b[] = {
-    gUnknown_085150A4,
-    gUnknown_085150A4,
-    gUnknown_08515124,
-    gUnknown_085151A4,
-    gUnknown_08515224,
-    gUnknown_08515224,
-    gUnknown_08515224,
-    gUnknown_08515224,
-    gUnknown_08515224,
-    gUnknown_08515224,
-    gUnknown_085151A4,
-    gUnknown_08515124
+    gTilesetAnims_Mauville0b_Frame0,
+    gTilesetAnims_Mauville0b_Frame0,
+    gTilesetAnims_Mauville0b_Frame1,
+    gTilesetAnims_Mauville0b_Frame2,
+    gTilesetAnims_Mauville0b_Frame3,
+    gTilesetAnims_Mauville0b_Frame3,
+    gTilesetAnims_Mauville0b_Frame3,
+    gTilesetAnims_Mauville0b_Frame3,
+    gTilesetAnims_Mauville0b_Frame3,
+    gTilesetAnims_Mauville0b_Frame3,
+    gTilesetAnims_Mauville0b_Frame2,
+    gTilesetAnims_Mauville0b_Frame1
 };
 
 const u16 *const gTilesetAnims_Mauville1a[] = {
-    gUnknown_08514E24,
-    gUnknown_08514E24,
-    gUnknown_08515024,
-    gUnknown_08515024
+    gTilesetAnims_Mauville0a_Frame0,
+    gTilesetAnims_Mauville0a_Frame0,
+    gTilesetAnims_Mauville1a_Frame1,
+    gTilesetAnims_Mauville1a_Frame1
 };
 
 const u16 *const gTilesetAnims_Mauville1b[] = {
-    gUnknown_085150A4,
-    gUnknown_085150A4,
-    gUnknown_085152A4,
-    gUnknown_085152A4
+    gTilesetAnims_Mauville0b_Frame0,
+    gTilesetAnims_Mauville0b_Frame0,
+    gTilesetAnims_Mauville1b_Frame1,
+    gTilesetAnims_Mauville1b_Frame1
 };
 
-const u16 gUnknown_08515404[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/0.4bpp");
+const u16 gTilesetAnims_Rustboro0_Frame0[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/0.4bpp");
 
-const u16 gUnknown_08515484[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/1.4bpp");
+const u16 gTilesetAnims_Rustboro0_Frame1[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/1.4bpp");
 
-const u16 gUnknown_08515504[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/2.4bpp");
+const u16 gTilesetAnims_Rustboro0_Frame2[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/2.4bpp");
 
-const u16 gUnknown_08515584[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/3.4bpp");
+const u16 gTilesetAnims_Rustboro0_Frame3[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/3.4bpp");
 
-const u16 gUnknown_08515604[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/4.4bpp");
+const u16 gTilesetAnims_Rustboro0_Frame4[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/4.4bpp");
 
-const u16 gUnknown_08515684[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/5.4bpp");
+const u16 gTilesetAnims_Rustboro0_Frame5[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/5.4bpp");
 
-const u16 gUnknown_08515704[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/6.4bpp");
+const u16 gTilesetAnims_Rustboro0_Frame6[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/6.4bpp");
 
-const u16 gUnknown_08515784[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/7.4bpp");
+const u16 gTilesetAnims_Rustboro0_Frame7[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/7.4bpp");
 
 u16 *const gTilesetAnims_RustboroVDests0[] = {
     (u16 *)(BG_VRAM + 0x5000),
@@ -316,14 +316,14 @@ u16 *const gTilesetAnims_RustboroVDests0[] = {
 };
 
 const u16 *const gTilesetAnims_Rustboro0[] = {
-    gUnknown_08515404,
-    gUnknown_08515484,
-    gUnknown_08515504,
-    gUnknown_08515584,
-    gUnknown_08515604,
-    gUnknown_08515684,
-    gUnknown_08515704,
-    gUnknown_08515784
+    gTilesetAnims_Rustboro0_Frame0,
+    gTilesetAnims_Rustboro0_Frame1,
+    gTilesetAnims_Rustboro0_Frame2,
+    gTilesetAnims_Rustboro0_Frame3,
+    gTilesetAnims_Rustboro0_Frame4,
+    gTilesetAnims_Rustboro0_Frame5,
+    gTilesetAnims_Rustboro0_Frame6,
+    gTilesetAnims_Rustboro0_Frame7
 };
 
 const u16 gTilesetAnims_Rustboro1_Frame0[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/1/0.4bpp");
@@ -345,13 +345,13 @@ const u16 gTilesetAnims_Lavaridge1_Cave0_Frame2[] = INCBIN_U16("data/tilesets/se
 
 const u16 gTilesetAnims_Lavaridge1_Cave0_Frame3[] = INCBIN_U16("data/tilesets/secondary/cave/anim/3.4bpp");
 
-const u16 gUnknown_08515B6C[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/0.4bpp");
+const u16 gTilesetAnims_Lavaridge1_CaveUnused_Frame0[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/0.4bpp");
 
-const u16 gUnknown_08515BEC[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/1.4bpp");
+const u16 gTilesetAnims_Lavaridge1_CaveUnused_Frame1[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/1.4bpp");
 
-const u16 gUnknown_08515C6C[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/2.4bpp");
+const u16 gTilesetAnims_Lavaridge1_CaveUnused_Frame2[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/2.4bpp");
 
-const u16 gUnknown_08515CEC[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/3.4bpp");
+const u16 gTilesetAnims_Lavaridge1_CaveUnused_Frame3[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/3.4bpp");
 
 const u16 tileset_anims_space_3[16] = {};
 
@@ -561,13 +561,13 @@ const u16 gTilesetAnims_Sootopolis0_Frame7[] = INCBIN_U16("data/tilesets/seconda
 
 const u16 tileset_anims_space_8[16] = {};
 
-const u16 gUnknown_0851E2C4[] = INCBIN_U16("data/tilesets/secondary/unused_1/0.4bpp");
+const u16 gTilesetAnims_Unused1_Frame0[] = INCBIN_U16("data/tilesets/secondary/unused_1/0.4bpp");
 
-const u16 gUnknown_0851EAC4[] = INCBIN_U16("data/tilesets/secondary/unused_1/1.4bpp");
+const u16 gTilesetAnims_Unused1_Frame1[] = INCBIN_U16("data/tilesets/secondary/unused_1/1.4bpp");
 
-const u16 gUnknown_0851F2C4[] = INCBIN_U16("data/tilesets/secondary/unused_1/2.4bpp");
+const u16 gTilesetAnims_Unused1_Frame2[] = INCBIN_U16("data/tilesets/secondary/unused_1/2.4bpp");
 
-const u16 gUnknown_0851FAC4[] = INCBIN_U16("data/tilesets/secondary/unused_1/3.4bpp");
+const u16 gTilesetAnims_Unused1_Frame3[] = INCBIN_U16("data/tilesets/secondary/unused_1/3.4bpp");
 
 const u16 *const gTilesetAnims_Sootopolis0[] = {
     gTilesetAnims_Sootopolis0_Frame0,
@@ -596,11 +596,11 @@ const u16 gTilesetAnims_BattlePyramid1_Frame2[] = INCBIN_U16("data/tilesets/seco
 
 const u16 tileset_anims_space_10[7808] = {};
 
-const u16 gUnknown_08524604[] = INCBIN_U16("data/tilesets/secondary/unused_2/0.4bpp");
+const u16 gTilesetAnims_Unused2_Frame0[] = INCBIN_U16("data/tilesets/secondary/unused_2/0.4bpp");
 
 const u16 tileset_anims_space_11[224] = {};
 
-const u16 gUnknown_08524804[] = INCBIN_U16("data/tilesets/secondary/unused_2/1.4bpp");
+const u16 gTilesetAnims_Unused2_Frame1[] = INCBIN_U16("data/tilesets/secondary/unused_2/1.4bpp");
 
 const u16 *const gTilesetAnims_BattlePyramid0[] = {
     gTilesetAnims_BattlePyramid0_Frame0,
@@ -614,16 +614,16 @@ const u16 *const gTilesetAnims_BattlePyramid1[] = {
     gTilesetAnims_BattlePyramid1_Frame2
 };
 
-extern const u16 gUnknown_08D85640[];
-extern const u16 gUnknown_08D85660[];
-extern const u16 gUnknown_08D85680[];
-extern const u16 gUnknown_08D856A0[];
+extern const u16 gTilesetAnims_BattleDomePals0_0[];
+extern const u16 gTilesetAnims_BattleDomePals0_1[];
+extern const u16 gTilesetAnims_BattleDomePals0_2[];
+extern const u16 gTilesetAnims_BattleDomePals0_3[];
 
 static const u16 *const gTilesetAnims_BattleDomePals0[] = {
-    gUnknown_08D85640,
-    gUnknown_08D85660,
-    gUnknown_08D85680,
-    gUnknown_08D856A0,
+    gTilesetAnims_BattleDomePals0_0,
+    gTilesetAnims_BattleDomePals0_1,
+    gTilesetAnims_BattleDomePals0_2,
+    gTilesetAnims_BattleDomePals0_3,
 };
 
 // .text
