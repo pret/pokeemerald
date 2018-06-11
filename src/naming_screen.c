@@ -11,7 +11,7 @@
 #include "pokemon.h"
 #include "field_specials.h"
 #include "field_player_avatar.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "event_data.h"
 #include "constants/vars.h"
 #include "constants/songs.h"

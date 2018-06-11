@@ -20,7 +20,7 @@
 #include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_effect.h"
 #include "fldeff_80F9BCC.h"
 #include "metatile_behavior.h"

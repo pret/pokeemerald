@@ -21,7 +21,7 @@
 #include "constants/items.h"
 #include "palette.h"
 #include "window.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "event_scripts.h"
 #include "trainer_see.h"
 #include "field_message_box.h"
@@ -32,7 +32,7 @@
 #include "overworld.h"
 #include "field_weather.h"
 #include "gym_leader_rematch.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement_helpers.h"
 
 enum
 {

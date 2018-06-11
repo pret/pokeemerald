@@ -106,7 +106,7 @@ gUnknown_0850E84A:: @ 850E84A
 gUnknown_0850E850:: @ 850E850
 	.byte 0x01, 0x01, 0x02, 0x00
 
-// referenced in data/field_map_obj.s
+// referenced in data/event_object_movement.s
     .align 2
 gUnknown_0850E854::
 	.4byte sub_8097E50

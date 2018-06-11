@@ -15,7 +15,7 @@
 #include "battle_frontier_2.h"
 #include "rom_818CFC8.h"
 #include "field_specials.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement_helpers.h"
 #include "script.h"
 #include "main.h"
 #include "sound.h"

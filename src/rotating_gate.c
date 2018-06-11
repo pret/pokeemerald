@@ -1,7 +1,7 @@
 #include "global.h"
 #include "bike.h"
 #include "event_data.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
 #include "sound.h"

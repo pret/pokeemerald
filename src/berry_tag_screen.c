@@ -2,7 +2,7 @@
 #include "berry_tag_screen.h"
 #include "berry.h"
 #include "decompress.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "item_menu.h"
 #include "constants/items.h"
 #include "item.h"

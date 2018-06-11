@@ -4,7 +4,7 @@
 #include "constants/songs.h"
 #include "event_data.h"
 #include "field_camera.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "malloc.h"
 #include "random.h"
 #include "roulette_util.h"

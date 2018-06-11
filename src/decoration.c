@@ -17,7 +17,7 @@
 #include "field_player_avatar.h"
 #include "field_camera.h"
 #include "field_screen.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
 #include "menu.h"

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "script_movement.h"
-#include "field_map_obj.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement.h"
+#include "event_object_movement_helpers.h"
 #include "task.h"
 #include "util.h"
 

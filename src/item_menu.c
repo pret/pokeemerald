@@ -9,7 +9,7 @@
 #include "constants/songs.h"
 #include "decompress.h"
 #include "event_data.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement_helpers.h"
 #include "field_player_avatar.h"
 #include "field_specials.h"
 #include "graphics.h"

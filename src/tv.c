@@ -26,7 +26,7 @@
 #include "lilycove_lady.h"
 #include "rom6.h"
 #include "pokedex.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "text.h"
 #include "script_menu.h"
 #include "naming_screen.h"

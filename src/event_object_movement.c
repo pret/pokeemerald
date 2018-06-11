@@ -14,7 +14,7 @@
 #include "rom_818CFC8.h"
 #include "rom_81BE66C.h"
 #include "field_ground_effect.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement_helpers.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "field_effect.h"
@@ -22,7 +22,7 @@
 #include "field_camera.h"
 #include "trainer_see.h"
 #include "decoration.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
 
@@ -174,6 +174,24 @@ extern bool8 (*const *const gUnknown_0850DC50[166])(struct MapObject *, struct S
 extern u8 (*const gUnknown_0850DEE8[5])(u8);
 extern const s16 gUnknown_0850DFBC[3];
 extern const s16 gUnknown_0850DFC2[3];
+
+/*static*/ void FieldObjectUpdateMetatileBehaviors(struct MapObject*);
+/*static*/ void GetAllGroundEffectFlags_OnBeginStep(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_Reflection(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_LongGrassOnSpawn(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_SandHeap(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_ShortGrass(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_HotSprings(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_TallGrassOnBeginStep(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_LongGrassOnBeginStep(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_Tracks(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_Puddle(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_Ripple(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_Seaweed(struct MapObject*, u32*);
+/*static*/ void GetGroundEffectFlags_JumpLanding(struct MapObject*, u32*);
+
 
 // Code
 
@@ -5116,4 +5134,43 @@ static void npc_update_obj_anim_flag(struct MapObject *mapObject, struct Sprite 
     {
         sprite->invisible = TRUE;
     }
+}
+
+/*static*/ void GetAllGroundEffectFlags_OnSpawn(struct MapObject *eventObj, u32 *flags)
+{
+    FieldObjectUpdateMetatileBehaviors(eventObj);
+    GetGroundEffectFlags_Reflection(eventObj, flags);
+    GetGroundEffectFlags_TallGrassOnSpawn(eventObj, flags);
+    GetGroundEffectFlags_LongGrassOnSpawn(eventObj, flags);
+    GetGroundEffectFlags_SandHeap(eventObj, flags);
+    GetGroundEffectFlags_ShallowFlowingWater(eventObj, flags);
+    GetGroundEffectFlags_ShortGrass(eventObj, flags);
+    GetGroundEffectFlags_HotSprings(eventObj, flags);
+}
+
+/*static*/ void GetAllGroundEffectFlags_OnBeginStep(struct MapObject *eventObj, u32 *flags)
+{
+    FieldObjectUpdateMetatileBehaviors(eventObj);
+    GetGroundEffectFlags_Reflection(eventObj, flags);
+    GetGroundEffectFlags_TallGrassOnBeginStep(eventObj, flags);
+    GetGroundEffectFlags_LongGrassOnBeginStep(eventObj, flags);
+    GetGroundEffectFlags_Tracks(eventObj, flags);
+    GetGroundEffectFlags_SandHeap(eventObj, flags);
+    GetGroundEffectFlags_ShallowFlowingWater(eventObj, flags);
+    GetGroundEffectFlags_Puddle(eventObj, flags);
+    GetGroundEffectFlags_ShortGrass(eventObj, flags);
+    GetGroundEffectFlags_HotSprings(eventObj, flags);
+}
+
+/*static*/ void GetAllGroundEffectFlags_OnFinishStep(struct MapObject *eventObj, u32 *flags)
+{
+    FieldObjectUpdateMetatileBehaviors(eventObj);
+    GetGroundEffectFlags_ShallowFlowingWater(eventObj, flags);
+    GetGroundEffectFlags_SandHeap(eventObj, flags);
+    GetGroundEffectFlags_Puddle(eventObj, flags);
+    GetGroundEffectFlags_Ripple(eventObj, flags);
+    GetGroundEffectFlags_ShortGrass(eventObj, flags);
+    GetGroundEffectFlags_HotSprings(eventObj, flags);
+    GetGroundEffectFlags_Seaweed(eventObj, flags);
+    GetGroundEffectFlags_JumpLanding(eventObj, flags);
 }
