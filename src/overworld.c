@@ -2202,7 +2202,7 @@ static void sub_8086A68(void)
 
 static void sub_8086A80(void)
 {
-    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_15 = 1;
+    gMapObjects[gPlayerAvatar.mapObjectId].trackedByCamera = 1;
     InitCameraUpdateCallback(gPlayerAvatar.spriteId);
 }
 
@@ -2921,7 +2921,7 @@ static void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
     linkPlayerMapObj->mode = 0;
 
     mapObj->active = 1;
-    mapObj->mapobj_bit_1 = a4;
+    mapObj->singleMovementActive = a4;
     mapObj->range.as_byte = 2;
     mapObj->spriteId = 64;
 
@@ -2930,12 +2930,12 @@ static void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
 
 static void InitLinkPlayerMapObjectPos(struct MapObject *mapObj, s16 x, s16 y)
 {
-    mapObj->coords2.x = x;
-    mapObj->coords2.y = y;
-    mapObj->coords3.x = x;
-    mapObj->coords3.y = y;
-    sub_8093038(x, y, &mapObj->coords1.x, &mapObj->coords1.y);
-    mapObj->coords1.x += 8;
+    mapObj->currentCoords.x = x;
+    mapObj->currentCoords.y = y;
+    mapObj->previousCoords.x = x;
+    mapObj->previousCoords.y = y;
+    sub_8093038(x, y, &mapObj->initialCoords.x, &mapObj->initialCoords.y);
+    mapObj->initialCoords.x += 8;
     FieldObjectUpdateZCoord(mapObj);
 }
 
@@ -2971,8 +2971,8 @@ static void sub_8087878(u8 linkPlayerId, u16 *x, u16 *y)
 {
     u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
     struct MapObject *mapObj = &gMapObjects[mapObjId];
-    *x = mapObj->coords2.x;
-    *y = mapObj->coords2.y;
+    *x = mapObj->currentCoords.x;
+    *y = mapObj->currentCoords.y;
 }
 
 static u8 sub_80878A0(u8 linkPlayerId)
@@ -2986,14 +2986,14 @@ static u8 sub_80878C0(u8 linkPlayerId)
 {
     u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
     struct MapObject *mapObj = &gMapObjects[mapObjId];
-    return mapObj->mapobj_unk_0B_0;
+    return mapObj->currentElevation;
 }
 
 static s32 sub_80878E4(u8 linkPlayerId)
 {
     u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
     struct MapObject *mapObj = &gMapObjects[mapObjId];
-    return 16 - (s8)mapObj->mapobj_unk_21;
+    return 16 - (s8)mapObj->directionSequenceIndex;
 }
 
 static u8 GetLinkPlayerIdAt(s16 x, s16 y)
@@ -3005,7 +3005,7 @@ static u8 GetLinkPlayerIdAt(s16 x, s16 y)
          && (gLinkPlayerMapObjects[i].mode == 0 || gLinkPlayerMapObjects[i].mode == 2))
         {
             struct MapObject *mapObj = &gMapObjects[gLinkPlayerMapObjects[i].mapObjId];
-            if (mapObj->coords2.x == x && mapObj->coords2.y == y)
+            if (mapObj->currentCoords.x == x && mapObj->currentCoords.y == y)
                 return i;
         }
     }
@@ -3021,7 +3021,7 @@ static void sub_808796C(u8 linkPlayerId, u8 a2)
     if (linkPlayerMapObj->active)
     {
         if (a2 > 10)
-            mapObj->mapobj_bit_2 = 1;
+            mapObj->triggerGroundEffectsOnMove = 1;
         else
             gUnknown_08339E00[gUnknown_08339DC8[linkPlayerMapObj->mode](linkPlayerMapObj, mapObj, a2)](linkPlayerMapObj, mapObj);
     }
@@ -3060,7 +3060,7 @@ static u8 sub_8087A20(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapOb
     }
     else
     {
-        mapObj->mapobj_unk_21 = 16;
+        mapObj->directionSequenceIndex = 16;
         npc_coords_shift(mapObj, x, y);
         FieldObjectUpdateZCoord(mapObj);
         return 1;
@@ -3080,10 +3080,10 @@ static void sub_8087AA0(struct LinkPlayerMapObject *linkPlayerMapObj, struct Map
 
 static void sub_8087AA8(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
 {
-    mapObj->mapobj_unk_21--;
+    mapObj->directionSequenceIndex--;
     linkPlayerMapObj->mode = 1;
-    MoveCoords(mapObj->range.as_byte, &mapObj->coords1.x, &mapObj->coords1.y);
-    if (!mapObj->mapobj_unk_21)
+    MoveCoords(mapObj->range.as_byte, &mapObj->initialCoords.x, &mapObj->initialCoords.y);
+    if (!mapObj->directionSequenceIndex)
     {
         npc_coords_shift_still(mapObj);
         linkPlayerMapObj->mode = 2;
@@ -3117,8 +3117,8 @@ static u8 LinkPlayerDetectCollision(u8 selfMapObjId, u8 a2, s16 x, s16 y)
     {
         if (i != selfMapObjId)
         {
-            if ((gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
-             || (gMapObjects[i].coords3.x == x && gMapObjects[i].coords3.y == y))
+            if ((gMapObjects[i].currentCoords.x == x && gMapObjects[i].currentCoords.y == y)
+             || (gMapObjects[i].previousCoords.x == x && gMapObjects[i].previousCoords.y == y))
             {
                 return 1;
             }
@@ -3140,21 +3140,21 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
         {
         case VERSION_FIRE_RED:
         case VERSION_LEAF_GREEN:
-            mapObj->spriteId = AddPseudoFieldObject(sub_808BD6C(mapObj->mapobj_bit_1), SpriteCB_LinkPlayer, 0, 0, 0);
+            mapObj->spriteId = AddPseudoFieldObject(sub_808BD6C(mapObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_RUBY:
         case VERSION_SAPPHIRE:
-            mapObj->spriteId = AddPseudoFieldObject(sub_808BD7C(mapObj->mapobj_bit_1), SpriteCB_LinkPlayer, 0, 0, 0);
+            mapObj->spriteId = AddPseudoFieldObject(sub_808BD7C(mapObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_EMERALD:
-            mapObj->spriteId = AddPseudoFieldObject(GetRivalAvatarGraphicsIdByStateIdAndGender(0, mapObj->mapobj_bit_1), SpriteCB_LinkPlayer, 0, 0, 0);
+            mapObj->spriteId = AddPseudoFieldObject(GetRivalAvatarGraphicsIdByStateIdAndGender(0, mapObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         }
 
         sprite = &gSprites[mapObj->spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = linkPlayerId;
-        mapObj->mapobj_bit_2 = 0;
+        mapObj->triggerGroundEffectsOnMove = 0;
     }
 }
 
@@ -3162,10 +3162,10 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
 {
     struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data[0]];
     struct MapObject *mapObj = &gMapObjects[linkPlayerMapObj->mapObjId];
-    sprite->pos1.x = mapObj->coords1.x;
-    sprite->pos1.y = mapObj->coords1.y;
-    SetObjectSubpriorityByZCoord(mapObj->elevation, sprite, 1);
-    sprite->oam.priority = ZCoordToPriority(mapObj->elevation);
+    sprite->pos1.x = mapObj->initialCoords.x;
+    sprite->pos1.y = mapObj->initialCoords.y;
+    SetObjectSubpriorityByZCoord(mapObj->previousElevation, sprite, 1);
+    sprite->oam.priority = ZCoordToPriority(mapObj->previousElevation);
 
 	if (!linkPlayerMapObj->mode)
         StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObj->range.as_byte));
@@ -3173,7 +3173,7 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
         StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(mapObj->range.as_byte));
 
 	sub_80979D4(sprite, 0);
-    if (mapObj->mapobj_bit_2)
+    if (mapObj->triggerGroundEffectsOnMove)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);
         sprite->data[7]++;

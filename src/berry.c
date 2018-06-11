@@ -1238,10 +1238,10 @@ void ResetBerryTreeSparkleFlags(void)
     bottom = top + 8;
     for (i = 0; i < MAP_OBJECTS_COUNT; i++)
     {
-        if (gMapObjects[i].active && gMapObjects[i].animPattern == 12)
+        if (gMapObjects[i].active && gMapObjects[i].movementType == 12)
         {
-            cam_left = gMapObjects[i].coords2.x;
-            cam_top = gMapObjects[i].coords2.y;
+            cam_left = gMapObjects[i].currentCoords.x;
+            cam_top = gMapObjects[i].currentCoords.y;
             if (left <= cam_left && cam_left <= right && top <= cam_top && cam_top <= bottom)
                 ResetBerryTreeSparkleFlag(gMapObjects[i].trainerRange_berryTreeId);
         }

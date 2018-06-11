@@ -56,9 +56,9 @@ bool8 sub(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     u8 route[sizeof(path)];\
     memcpy(route, path, sizeof(path));\
-    if (mapObject->mapobj_unk_21 == (catch) && mapObject->coords1.coord == mapObject->coords2.coord)\
+    if (mapObject->directionSequenceIndex == (catch) && mapObject->initialCoords.coord == mapObject->currentCoords.coord)\
     {\
-        mapObject->mapobj_unk_21 = (catch) + 1;\
+        mapObject->directionSequenceIndex = (catch) + 1;\
     }\
     return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, route);\
 }\
@@ -201,7 +201,7 @@ static void npc_clear_ids_and_state(struct MapObject *mapObject)
     mapObject->localId = 0xFF;
     mapObject->mapNum = -1;
     mapObject->mapGroup = -1;
-    mapObject->mapobj_unk_1C = -1;
+    mapObject->movementActionId = -1;
 }
 
 static void npcs_clear_ids_and_state(void)
@@ -278,7 +278,7 @@ u8 GetFieldObjectIdByXY(s16 x, s16 y)
 
     for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
-        if (gMapObjects[i].active && gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
+        if (gMapObjects[i].active && gMapObjects[i].currentCoords.x == x && gMapObjects[i].currentCoords.y == y)
         {
             break;
         }
@@ -333,30 +333,30 @@ static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u
     x = template->x + 7;
     y = template->y + 7;
     mapObject->active = TRUE;
-    mapObject->mapobj_bit_2 = TRUE;
+    mapObject->triggerGroundEffectsOnMove = TRUE;
     mapObject->graphicsId = template->graphicsId;
-    mapObject->animPattern = template->movementType;
+    mapObject->movementType = template->movementType;
     mapObject->localId = template->localId;
     mapObject->mapNum = mapNum;
     mapObject->mapGroup = mapGroup;
-    mapObject->coords1.x = x;
-    mapObject->coords1.y = y;
-    mapObject->coords2.x = x;
-    mapObject->coords2.y = y;
-    mapObject->coords3.x = x;
-    mapObject->coords3.y = y;
-    mapObject->mapobj_unk_0B_0 = template->elevation;
-    mapObject->elevation = template->elevation;
+    mapObject->initialCoords.x = x;
+    mapObject->initialCoords.y = y;
+    mapObject->currentCoords.x = x;
+    mapObject->currentCoords.y = y;
+    mapObject->previousCoords.x = x;
+    mapObject->previousCoords.y = y;
+    mapObject->currentElevation = template->elevation;
+    mapObject->previousElevation = template->elevation;
     // For some reason, 0x0F is placed in r9, to be used later
     mapObject->range.as_nybbles.x = template->unkA_0;
     mapObject->range.as_nybbles.y = template->unkA_4;
     mapObject->trainerType = template->unkC;
     mapObject->trainerRange_berryTreeId = template->unkE;
-    mapObject->mapobj_unk_20 = gUnknown_085055CD[template->movementType];
-    FieldObjectSetDirection(mapObject, mapObject->mapobj_unk_20);
+    mapObject->previousMovementDirection = gUnknown_085055CD[template->movementType];
+    FieldObjectSetDirection(mapObject, mapObject->previousMovementDirection);
     FieldObjectHandleDynamicGraphicsId(mapObject);
 
-    if (gUnknown_0850557C[mapObject->animPattern])
+    if (gUnknown_0850557C[mapObject->movementType])
     {
         if ((mapObject->range.as_nybbles.x) == 0)
         {
@@ -654,9 +654,9 @@ static u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, 
         paletteSlot -= 16;
         sub_808EAB0(graphicsInfo->paletteTag1, paletteSlot);
     }
-    if (mapObject->animPattern == 0x4c)
+    if (mapObject->movementType == 0x4c)
     {
-        mapObject->mapobj_bit_13 = TRUE;
+        mapObject->invisible = TRUE;
     }
     *(u16 *)&spriteTemplate->paletteTag = 0xFFFF;
     spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
@@ -666,7 +666,7 @@ static u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, 
         return NUM_FIELD_OBJECTS;
     }
     sprite = &gSprites[spriteId];
-    sub_8092FF0(mapObject->coords2.x + cameraX, mapObject->coords2.y + cameraY, &sprite->pos1.x, &sprite->pos1.y);
+    sub_8092FF0(mapObject->currentCoords.x + cameraX, mapObject->currentCoords.y + cameraY, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->pos1.x += 8;
@@ -675,12 +675,12 @@ static u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, 
     sprite->coordOffsetEnabled = TRUE;
     sprite->data[0] = mapObjectId;
     mapObject->spriteId = spriteId;
-    mapObject->mapobj_bit_12 = graphicsInfo->inanimate;
-    if (!mapObject->mapobj_bit_12)
+    mapObject->inanimate = graphicsInfo->inanimate;
+    if (!mapObject->inanimate)
     {
-        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->mapobj_unk_18));
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->facingDirection));
     }
-    SetObjectSubpriorityByZCoord(mapObject->elevation, sprite, 1);
+    SetObjectSubpriorityByZCoord(mapObject->previousElevation, sprite, 1);
     sub_8096518(mapObject, sprite);
     return mapObjectId;
 }
@@ -915,7 +915,7 @@ void SpawnFieldObjectsInView(s16 cameraX, s16 cameraY)
         {
             mapObject = &gMapObjects[i];
 
-            if (mapObject->active && !mapObject->mapobj_bit_16)
+            if (mapObject->active && !mapObject->isPlayer)
                 RemoveFieldObjectIfOutsideView(mapObject);
         }
     }
@@ -933,11 +933,11 @@ static void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
     top = gSaveBlock1Ptr->pos.y;
     bottom = gSaveBlock1Ptr->pos.y + 16;
 
-    if (mapObject->coords2.x >= left && mapObject->coords2.x <= right
-        && mapObject->coords2.y >= top && mapObject->coords2.y <= bottom)
+    if (mapObject->currentCoords.x >= left && mapObject->currentCoords.x <= right
+        && mapObject->currentCoords.y >= top && mapObject->currentCoords.y <= bottom)
         return;
-    if (mapObject->coords1.x >= left && mapObject->coords1.x <= right
-        && mapObject->coords1.y >= top && mapObject->coords1.y <= bottom)
+    if (mapObject->initialCoords.x >= left && mapObject->initialCoords.x <= right
+        && mapObject->initialCoords.y >= top && mapObject->initialCoords.y <= bottom)
         return;
     RemoveFieldObject(mapObject);
 }
@@ -982,7 +982,7 @@ static void sub_808E1B8(u8 mapObjectId, s16 x, s16 y)
     subspriteTables = NULL;
     graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
     spriteFrameImage.size = graphicsInfo->size;
-    MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(mapObject->graphicsId, mapObject->animPattern, &spriteTemplate, &subspriteTables);
+    MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(mapObject->graphicsId, mapObject->movementType, &spriteTemplate, &subspriteTables);
     spriteTemplate.images = &spriteFrameImage;
     *(u16 *)&spriteTemplate.paletteTag = 0xffff;
     paletteSlot = graphicsInfo->paletteSlot;
@@ -1004,16 +1004,16 @@ static void sub_808E1B8(u8 mapObjectId, s16 x, s16 y)
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
-        sub_8092FF0(x + mapObject->coords2.x, y + mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
+        sub_8092FF0(x + mapObject->currentCoords.x, y + mapObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
         sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
         sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
         sprite->pos1.x += 8;
         sprite->pos1.y += 16 + sprite->centerToCornerVecY;
         sprite->images = graphicsInfo->images;
-        if (mapObject->animPattern == 0x0b)
+        if (mapObject->movementType == 0x0b)
         {
             SetPlayerAvatarFieldObjectIdAndObjectId(mapObjectId, spriteId);
-            mapObject->mapobj_unk_1B = sub_8154228();
+            mapObject->warpArrowSpriteId = sub_8154228();
         }
         if (subspriteTables != NULL)
         {
@@ -1023,25 +1023,25 @@ static void sub_808E1B8(u8 mapObjectId, s16 x, s16 y)
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = mapObjectId;
         mapObject->spriteId = spriteId;
-        if (!mapObject->mapobj_bit_12 && mapObject->animPattern != 0x0b)
+        if (!mapObject->inanimate && mapObject->movementType != 0x0b)
         {
-            StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->mapobj_unk_18));
+            StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->facingDirection));
         }
         sub_808E38C(mapObject);
-        SetObjectSubpriorityByZCoord(mapObject->elevation, sprite, 1);
+        SetObjectSubpriorityByZCoord(mapObject->previousElevation, sprite, 1);
     }
 }
 
 /*static*/ void sub_808E38C(struct MapObject *mapObject)
 {
-    mapObject->mapobj_bit_1 = FALSE;
-    mapObject->mapobj_bit_2 = TRUE;
-    mapObject->mapobj_bit_22 = FALSE;
-    mapObject->mapobj_bit_17 = FALSE;
-    mapObject->mapobj_bit_18 = FALSE;
-    mapObject->mapobj_bit_19 = FALSE;
-    mapObject->mapobj_bit_20 = FALSE;
-    mapObject->mapobj_bit_21 = FALSE;
+    mapObject->singleMovementActive = FALSE;
+    mapObject->triggerGroundEffectsOnMove = TRUE;
+    mapObject->hasShadow = FALSE;
+    mapObject->hasReflection = FALSE;
+    mapObject->inShortGrass = FALSE;
+    mapObject->inShallowFlowingWater = FALSE;
+    mapObject->inSandPile = FALSE;
+    mapObject->inHotSprings = FALSE;
     FieldObjectClearAnim(mapObject);
 }
 
@@ -1081,14 +1081,14 @@ void FieldObjectSetGraphicsId(struct MapObject *mapObject, u8 graphicsId)
     sprite->anims = graphicsInfo->anims;
     sprite->subspriteTables = graphicsInfo->subspriteTables;
     sprite->oam.paletteNum = paletteSlot;
-    mapObject->mapobj_bit_12 = graphicsInfo->inanimate;
+    mapObject->inanimate = graphicsInfo->inanimate;
     mapObject->graphicsId = graphicsId;
-    sub_8093038(mapObject->coords2.x, mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
+    sub_8093038(mapObject->currentCoords.x, mapObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->pos1.x += 8;
     sprite->pos1.y += 16 + sprite->centerToCornerVecY;
-    if (mapObject->mapobj_bit_15)
+    if (mapObject->trackedByCamera)
     {
         CameraObjectReset1();
     }
@@ -1107,9 +1107,9 @@ void FieldObjectSetGraphicsIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup,
 void FieldObjectTurn(struct MapObject *mapObject, u8 direction)
 {
     FieldObjectSetDirection(mapObject, direction);
-    if (!mapObject->mapobj_bit_12)
+    if (!mapObject->inanimate)
     {
-        StartSpriteAnim(&gSprites[mapObject->spriteId], FieldObjectDirectionToImageAnimId(mapObject->mapobj_unk_18));
+        StartSpriteAnim(&gSprites[mapObject->spriteId], FieldObjectDirectionToImageAnimId(mapObject->facingDirection));
         SeekSpriteAnim(&gSprites[mapObject->spriteId], 0);
     }
 }
@@ -1134,12 +1134,12 @@ void PlayerObjectTurn(struct PlayerAvatar *playerAvatar, u8 direction)
     u8 berryStage;
     u8 berryId;
 
-    mapObject->mapobj_bit_13 = TRUE;
+    mapObject->invisible = TRUE;
     sprite->invisible = TRUE;
     berryStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
     if (berryStage != 0)
     {
-        mapObject->mapobj_bit_13 = FALSE;
+        mapObject->invisible = FALSE;
         sprite->invisible = FALSE;
         berryId = GetBerryTypeByBerryTreeId(mapObject->trainerRange_berryTreeId) - 1;
         berryStage -= 1;
@@ -1188,7 +1188,7 @@ void npc_by_local_id_and_map_set_field_1_bit_x20(u8 localId, u8 mapNum, u8 mapGr
 
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
-        gMapObjects[mapObjectId].mapobj_bit_13 = state;
+        gMapObjects[mapObjectId].invisible = state;
     }
 }
 
@@ -1208,7 +1208,7 @@ void sub_808E75C(s16 x, s16 y)
     if (mapObjectId != NUM_FIELD_OBJECTS)
     {
         mapObject = &gMapObjects[mapObjectId];
-        mapObject->mapobj_bit_2 = TRUE;
+        mapObject->triggerGroundEffectsOnMove = TRUE;
     }
 }
 
@@ -1222,7 +1222,7 @@ void sub_808E78C(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
     {
         mapObject = &gMapObjects[mapObjectId];
         sprite = &gSprites[mapObject->spriteId];
-        mapObject->mapobj_bit_26 = TRUE;
+        mapObject->fixedPriority = TRUE;
         sprite->subpriority = subpriority;
     }
 }
@@ -1235,8 +1235,8 @@ void sub_808E7E4(u8 localId, u8 mapNum, u8 mapGroup)
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
         mapObject = &gMapObjects[mapObjectId];
-        mapObject->mapobj_bit_26 = FALSE;
-        mapObject->mapobj_bit_2 = TRUE;
+        mapObject->fixedPriority = FALSE;
+        mapObject->triggerGroundEffectsOnMove = TRUE;
     }
 }
 
@@ -1359,26 +1359,26 @@ static void sub_808EAB0(u16 tag, u8 slot)
 
 void unref_sub_808EAC4(struct MapObject *mapObject, s16 x, s16 y)
 {
-    mapObject->coords3.x = mapObject->coords2.x;
-    mapObject->coords3.y = mapObject->coords2.y;
-    mapObject->coords2.x += x;
-    mapObject->coords2.y += y;
+    mapObject->previousCoords.x = mapObject->currentCoords.x;
+    mapObject->previousCoords.y = mapObject->currentCoords.y;
+    mapObject->currentCoords.x += x;
+    mapObject->currentCoords.y += y;
 }
 
 void npc_coords_shift(struct MapObject *mapObject, s16 x, s16 y)
 {
-    mapObject->coords3.x = mapObject->coords2.x;
-    mapObject->coords3.y = mapObject->coords2.y;
-    mapObject->coords2.x = x;
-    mapObject->coords2.y = y;
+    mapObject->previousCoords.x = mapObject->currentCoords.x;
+    mapObject->previousCoords.y = mapObject->currentCoords.y;
+    mapObject->currentCoords.x = x;
+    mapObject->currentCoords.y = y;
 }
 
 /*static*/ void npc_coords_set(struct MapObject *mapObject, s16 x, s16 y)
 {
-    mapObject->coords3.x = x;
-    mapObject->coords3.y = y;
-    mapObject->coords2.x = x;
-    mapObject->coords2.y = y;
+    mapObject->previousCoords.x = x;
+    mapObject->previousCoords.y = y;
+    mapObject->currentCoords.x = x;
+    mapObject->currentCoords.y = y;
 }
 
 void sub_808EB08(struct MapObject *mapObject, s16 x, s16 y)
@@ -1389,13 +1389,13 @@ void sub_808EB08(struct MapObject *mapObject, s16 x, s16 y)
     sprite = &gSprites[mapObject->spriteId];
     graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
     npc_coords_set(mapObject, x, y);
-    sub_8093038(mapObject->coords2.x, mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
+    sub_8093038(mapObject->currentCoords.x, mapObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->pos1.x += 8;
     sprite->pos1.y += 16 + sprite->centerToCornerVecY;
     sub_808E38C(mapObject);
-    if (mapObject->mapobj_bit_15)
+    if (mapObject->trackedByCamera)
     {
         CameraObjectReset1();
     }
@@ -1415,7 +1415,7 @@ void sub_808EBA8(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
 
 void npc_coords_shift_still(struct MapObject *mapObject)
 {
-    npc_coords_shift(mapObject, mapObject->coords2.x, mapObject->coords2.y);
+    npc_coords_shift(mapObject, mapObject->currentCoords.x, mapObject->currentCoords.y);
 }
 
 void UpdateFieldObjectCoordsForCameraUpdate(void)
@@ -1432,12 +1432,12 @@ void UpdateFieldObjectCoordsForCameraUpdate(void)
         {
             if (gMapObjects[i].active)
             {
-                gMapObjects[i].coords1.x -= dx;
-                gMapObjects[i].coords1.y -= dy;
-                gMapObjects[i].coords2.x -= dx;
-                gMapObjects[i].coords2.y -= dy;
-                gMapObjects[i].coords3.x -= dx;
-                gMapObjects[i].coords3.y -= dy;
+                gMapObjects[i].initialCoords.x -= dx;
+                gMapObjects[i].initialCoords.y -= dy;
+                gMapObjects[i].currentCoords.x -= dx;
+                gMapObjects[i].currentCoords.y -= dy;
+                gMapObjects[i].previousCoords.x -= dx;
+                gMapObjects[i].previousCoords.y -= dy;
             }
         }
     }
@@ -1450,7 +1450,7 @@ u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
     {
         if (gMapObjects[i].active)
         {
-            if (gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y && FieldObjectDoesZCoordMatch(&gMapObjects[i], z))
+            if (gMapObjects[i].currentCoords.x == x && gMapObjects[i].currentCoords.y == y && FieldObjectDoesZCoordMatch(&gMapObjects[i], z))
             {
                 return i;
             }
@@ -1461,7 +1461,7 @@ u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
 
 static bool8 FieldObjectDoesZCoordMatch(struct MapObject *mapObject, u8 z)
 {
-    if (mapObject->mapobj_unk_0B_0 != 0 && z != 0 && mapObject->mapobj_unk_0B_0 != z)
+    if (mapObject->currentElevation != 0 && z != 0 && mapObject->currentElevation != z)
     {
         return FALSE;
     }
@@ -1617,13 +1617,13 @@ u8 obj_unfreeze(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
 void FieldObjectSetDirection(struct MapObject *mapObject, u8 direction)
 {
     s8 d2;
-    mapObject->mapobj_unk_20 = mapObject->mapobj_unk_18;
-    if (!mapObject->mapobj_bit_9)
+    mapObject->previousMovementDirection = mapObject->facingDirection;
+    if (!mapObject->facingDirectionLocked)
     {
         d2 = direction;
-        mapObject->mapobj_unk_18 = d2;
+        mapObject->facingDirection = d2;
     }
-    mapObject->placeholder18 = direction;
+    mapObject->movementDirection = direction;
 }
 
 static const u8 *GetFieldObjectScriptPointerByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
@@ -1737,8 +1737,8 @@ void sub_808F208(const struct MapObject *mapObject)
     mapObjectTemplate = sub_808F1B4(mapObject);
     if (mapObjectTemplate != NULL)
     {
-        mapObjectTemplate->x = mapObject->coords2.x - 7;
-        mapObjectTemplate->y = mapObject->coords2.y - 7;
+        mapObjectTemplate->x = mapObject->currentCoords.x - 7;
+        mapObjectTemplate->y = mapObject->currentCoords.y - 7;
     }
 }
 
@@ -1842,7 +1842,7 @@ bool8 sub_808F44C(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808F460(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -1886,8 +1886,8 @@ bool8 sub_808F4E8(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808F534(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
-    mapObject->mapobj_bit_1 = TRUE;
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->movementDirection));
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 6;
     return TRUE;
 }
@@ -1896,7 +1896,7 @@ bool8 sub_808F564(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 1;
     }
     return FALSE;
@@ -1922,8 +1922,8 @@ bool8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
         return FALSE;
     }
     PlayerGetDestCoords(&playerX, &playerY);
-    objX = mapObject->coords2.x;
-    objY = mapObject->coords2.y;
+    objX = mapObject->currentCoords.x;
+    objY = mapObject->currentCoords.y;
     minX = objX - mapObject->trainerRange_berryTreeId;
     minY = objY - mapObject->trainerRange_berryTreeId;
     maxX = objX + mapObject->trainerRange_berryTreeId;
@@ -2138,8 +2138,8 @@ u8 GetRunningPastFacingDirection(struct MapObject *mapObject, u8 movementType)
         return 0;
     }
     PlayerGetDestCoords(&dx, &dy);
-    dx -= mapObject->coords2.x;
-    dy -= mapObject->coords2.y;
+    dx -= mapObject->currentCoords.x;
+    dy -= mapObject->currentCoords.y;
     absdx = dx;
     absdy = dy;
     if (absdx < 0)
@@ -2164,7 +2164,7 @@ bool8 sub_808F988(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808F99C(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2174,7 +2174,7 @@ bool8 sub_808F9C8(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2217,7 +2217,7 @@ bool8 sub_808FAC8(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808FADC(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2261,8 +2261,8 @@ bool8 sub_808FB64(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808FBB0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
-    mapObject->mapobj_bit_1 = TRUE;
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->movementDirection));
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 6;
     return TRUE;
 }
@@ -2271,7 +2271,7 @@ bool8 sub_808FBE0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 1;
     }
     return FALSE;
@@ -2288,7 +2288,7 @@ bool8 sub_808FC4C(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808FC60(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2332,8 +2332,8 @@ bool8 sub_808FCE8(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808FD34(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
-    mapObject->mapobj_bit_1 = TRUE;
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->movementDirection));
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 6;
     return TRUE;
 }
@@ -2342,7 +2342,7 @@ bool8 sub_808FD64(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 1;
     }
     return FALSE;
@@ -2353,7 +2353,7 @@ field_object_step(FaceFixedDirection, gUnknown_0850D794)
 bool8 sub_808FDD0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -2370,7 +2370,7 @@ bool8 sub_808FDFC(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808FE1C(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_1 = FALSE;
+    mapObject->singleMovementActive = FALSE;
     return FALSE;
 }
 
@@ -2398,15 +2398,15 @@ bool8 do_berry_tree_growth_sparkle_1 (struct MapObject *mapObject, struct Sprite
     u8 berryStage;
 
     npc_reset(mapObject, sprite);
-    mapObject->mapobj_bit_13 = TRUE;
+    mapObject->invisible = TRUE;
     sprite->invisible = TRUE;
     berryStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
     if (berryStage == 0)
     {
         if (!(sprite->data[7] & 0x0004) && sprite->animNum == 4)
         {
-            gFieldEffectArguments[0] = mapObject->coords2.x;
-            gFieldEffectArguments[1] = mapObject->coords2.y;
+            gFieldEffectArguments[0] = mapObject->currentCoords.x;
+            gFieldEffectArguments[1] = mapObject->currentCoords.y;
             gFieldEffectArguments[2] = sprite->subpriority - 1;
             gFieldEffectArguments[3] = sprite->oam.priority;
             FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
@@ -2414,7 +2414,7 @@ bool8 do_berry_tree_growth_sparkle_1 (struct MapObject *mapObject, struct Sprite
         }
         return FALSE;
     }
-    mapObject->mapobj_bit_13 = FALSE;
+    mapObject->invisible = FALSE;
     sprite->invisible = FALSE;
     berryStage --;
     if (sprite->animNum != berryStage)
@@ -2440,12 +2440,12 @@ bool8 sub_808FF48 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 do_berry_tree_growth_sparkle_2 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 3;
     sprite->data[2] = 0;
     sprite->data[7] |= 0x0002;
-    gFieldEffectArguments[0] = mapObject->coords2.x;
-    gFieldEffectArguments[1] = mapObject->coords2.y;
+    gFieldEffectArguments[0] = mapObject->currentCoords.x;
+    gFieldEffectArguments[1] = mapObject->currentCoords.y;
     gFieldEffectArguments[2] = sprite->subpriority - 1;
     gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
@@ -2455,7 +2455,7 @@ bool8 do_berry_tree_growth_sparkle_2 (struct MapObject *mapObject, struct Sprite
 bool8 sub_808FFB4 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->data[2] ++;
-    mapObject->mapobj_bit_13 = (sprite->data[2] & 0x02) >> 1;
+    mapObject->invisible = (sprite->data[2] & 0x02) >> 1;
     sprite->animPaused = TRUE;
     if (sprite->data[2] > 64)
     {
@@ -2470,7 +2470,7 @@ bool8 sub_808FFB4 (struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_8090004 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->data[2] ++;
-    mapObject->mapobj_bit_13 = (sprite->data[2] & 0x02) >> 1;
+    mapObject->invisible = (sprite->data[2] & 0x02) >> 1;
     sprite->animPaused = TRUE;
     if (sprite->data[2] > 64)
     {
@@ -2492,7 +2492,7 @@ bool8 sub_8090094 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_80900A8 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2502,7 +2502,7 @@ bool8 sub_80900D4 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2545,7 +2545,7 @@ bool8 sub_80901D4 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_80901E8 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2555,7 +2555,7 @@ bool8 sub_8090214 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2598,7 +2598,7 @@ bool8 sub_8090314 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8090328 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2608,7 +2608,7 @@ bool8 sub_8090354 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2651,7 +2651,7 @@ bool8 sub_8090454 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8090468 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2661,7 +2661,7 @@ bool8 sub_8090494 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2704,7 +2704,7 @@ bool8 sub_8090594 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_80905A8 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2714,7 +2714,7 @@ bool8 sub_80905D4 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2757,7 +2757,7 @@ bool8 sub_80906D4 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_80906E8 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2767,7 +2767,7 @@ bool8 sub_8090714 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2810,7 +2810,7 @@ bool8 sub_8090814 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8090828 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2820,7 +2820,7 @@ bool8 sub_8090854 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2863,7 +2863,7 @@ bool8 sub_8090954 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8090968 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2873,7 +2873,7 @@ bool8 sub_8090994 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2916,7 +2916,7 @@ bool8 sub_8090A94 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8090AA8 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2926,7 +2926,7 @@ bool8 sub_8090AD4 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -2969,7 +2969,7 @@ bool8 sub_8090BD4 (struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8090BE8 (struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -2979,7 +2979,7 @@ bool8 sub_8090C14 (struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 3;
     }
     return FALSE;
@@ -3016,7 +3016,7 @@ field_object_step(LookAroundCounterclockwise, gUnknown_0850D89C)
 bool8 sub_8090D14 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -3049,7 +3049,7 @@ bool8 sub_8090D90 (struct MapObject *mapObject, struct Sprite *sprite)
     direction = GetRunningPastFacingDirection(mapObject, RUNFOLLOW_ANY);
     if (direction == 0)
     {
-        direction = directions[mapObject->mapobj_unk_18];
+        direction = directions[mapObject->facingDirection];
     }
     FieldObjectSetDirection(mapObject, direction);
     sprite->data[1] = 0;
@@ -3061,7 +3061,7 @@ field_object_step(LookAroundClockwise, gUnknown_0850D8B4)
 bool8 sub_8090E18 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -3094,7 +3094,7 @@ bool8 sub_8090E94 (struct MapObject *mapObject, struct Sprite *sprite)
     direction = GetRunningPastFacingDirection(mapObject, RUNFOLLOW_ANY);
     if (direction == 0)
     {
-        direction = directions[mapObject->mapobj_unk_18];
+        direction = directions[mapObject->facingDirection];
     }
     FieldObjectSetDirection(mapObject, direction);
     sprite->data[1] = 0;
@@ -3114,8 +3114,8 @@ bool8 sub_8090F30 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
 
-    direction = gUnknown_085055CD[mapObject->animPattern];
-    if (mapObject->mapobj_unk_21)
+    direction = gUnknown_085055CD[mapObject->movementType];
+    if (mapObject->directionSequenceIndex)
     {
         direction = GetOppositeDirection(direction);
     }
@@ -3129,26 +3129,26 @@ bool8 sub_8090F68 (struct MapObject *mapObject, struct Sprite *sprite)
     bool8 blockingWay;
     u8 animId;
 
-    if (mapObject->mapobj_unk_21 && mapObject->coords1.x == mapObject->coords2.x && mapObject->coords1.y == mapObject->coords2.y)
+    if (mapObject->directionSequenceIndex && mapObject->initialCoords.x == mapObject->currentCoords.x && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
-        mapObject->mapobj_unk_21 = 0;
-        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+        mapObject->directionSequenceIndex = 0;
+        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
     }
-    blockingWay = npc_block_way__next_tile(mapObject, mapObject->placeholder18);
-    animId = GetGoSpeed0AnimId(mapObject->placeholder18);
+    blockingWay = npc_block_way__next_tile(mapObject, mapObject->movementDirection);
+    animId = GetGoSpeed0AnimId(mapObject->movementDirection);
     if (blockingWay == TRUE)
     {
-        mapObject->mapobj_unk_21 ++;
-        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
-        animId = GetGoSpeed0AnimId(mapObject->placeholder18);
-        blockingWay = npc_block_way__next_tile(mapObject, mapObject->placeholder18);
+        mapObject->directionSequenceIndex ++;
+        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
+        animId = GetGoSpeed0AnimId(mapObject->movementDirection);
+        blockingWay = npc_block_way__next_tile(mapObject, mapObject->movementDirection);
     }
     if (blockingWay)
     {
-        animId = GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18);
+        animId = GetStepInPlaceDelay16AnimId(mapObject->facingDirection);
     }
     FieldObjectSetRegularAnim(mapObject, sprite, animId);
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 3;
     return TRUE;
 }
@@ -3157,7 +3157,7 @@ bool8 sub_8091020 (struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 1;
     }
     return FALSE;
@@ -3175,26 +3175,26 @@ bool8 MoveFieldObjectInNextDirectionInSequence(struct MapObject *mapObject, stru
     u8 blockingWay;
     u8 animId;
 
-    if (mapObject->mapobj_unk_21 == 3 && mapObject->coords1.x == mapObject->coords2.x && mapObject->coords1.y == mapObject->coords2.y)
+    if (mapObject->directionSequenceIndex == 3 && mapObject->initialCoords.x == mapObject->currentCoords.x && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
-        mapObject->mapobj_unk_21 = 0;
+        mapObject->directionSequenceIndex = 0;
     }
-    FieldObjectSetDirection(mapObject, route[mapObject->mapobj_unk_21]);
-    animId = GetGoSpeed0AnimId(mapObject->placeholder18);
-    blockingWay = npc_block_way__next_tile(mapObject, mapObject->placeholder18);
+    FieldObjectSetDirection(mapObject, route[mapObject->directionSequenceIndex]);
+    animId = GetGoSpeed0AnimId(mapObject->movementDirection);
+    blockingWay = npc_block_way__next_tile(mapObject, mapObject->movementDirection);
     if (blockingWay == TRUE)
     {
-        mapObject->mapobj_unk_21 ++;
-        FieldObjectSetDirection(mapObject, route[mapObject->mapobj_unk_21]);
-        animId = GetGoSpeed0AnimId(mapObject->placeholder18);
-        blockingWay = npc_block_way__next_tile(mapObject, mapObject->placeholder18);
+        mapObject->directionSequenceIndex ++;
+        FieldObjectSetDirection(mapObject, route[mapObject->directionSequenceIndex]);
+        animId = GetGoSpeed0AnimId(mapObject->movementDirection);
+        blockingWay = npc_block_way__next_tile(mapObject, mapObject->movementDirection);
     }
     if (blockingWay)
     {
-        animId = GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18);
+        animId = GetStepInPlaceDelay16AnimId(mapObject->facingDirection);
     }
     FieldObjectSetRegularAnim(mapObject, sprite, animId);
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3203,7 +3203,7 @@ bool8 sub_8091110(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 1;
     }
     return FALSE;
@@ -3239,9 +3239,9 @@ field_object_step(CopyPlayer1, gUnknown_0850DA58)
 bool8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    if (mapObject->mapobj_unk_21 == 0)
+    if (mapObject->directionSequenceIndex == 0)
     {
-        mapObject->mapobj_unk_21 = player_get_direction_lower_nybble();
+        mapObject->directionSequenceIndex = player_get_direction_lower_nybble();
     }
     sprite->data[1] = 1;
     return TRUE;
@@ -3249,7 +3249,7 @@ bool8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Spr
 
 bool8 sub_8091EC0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.tileTransitionState == 2)
+    if (gMapObjects[gPlayerAvatar.mapObjectId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == 2)
     {
         return FALSE;
     }
@@ -3260,7 +3260,7 @@ bool8 sub_8091F20(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        mapObject->mapobj_bit_1 = FALSE;
+        mapObject->singleMovementActive = FALSE;
         sprite->data[1] = 1;
     }
     return FALSE;
@@ -3273,8 +3273,8 @@ bool8 sub_8091F48(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
 
 bool8 sub_8091F4C(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
 {
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, playerDirection)));
-    mapObject->mapobj_bit_1 = TRUE;
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, playerDirection)));
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3292,17 +3292,17 @@ bool8 sub_8091F94(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
         if (direction == 0)
         {
             direction = playerDirection;
-            direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+            direction = state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, direction);
             FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
             FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
-            mapObject->mapobj_bit_1 = TRUE;
+            mapObject->singleMovementActive = TRUE;
             sprite->data[1] = 2;
             return TRUE;
         }
     }
     else
     {
-        direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+        direction = state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     }
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(direction));
@@ -3310,7 +3310,7 @@ bool8 sub_8091F94(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
     {
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3322,14 +3322,14 @@ bool8 sub_80920A4(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    direction = state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed1AnimId(direction));
     if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
     {
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3341,14 +3341,14 @@ bool8 sub_809215C(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    direction = state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed3AnimId(direction));
     if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
     {
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3360,14 +3360,14 @@ bool8 sub_8092214(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    direction = state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetRegularAnim(mapObject, sprite, sub_8093438(direction));
     if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
     {
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3377,9 +3377,9 @@ bool8 cph_IM_DIFFERENT(struct MapObject *mapObject, struct Sprite *sprite, u8 pl
     u32 direction;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    direction = state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectSetRegularAnim(mapObject, sprite, sub_80934BC(direction));
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3391,14 +3391,14 @@ bool8 sub_8092314(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    direction = state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetRegularAnim(mapObject, sprite, sub_8093514(direction));
     if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
     {
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3410,16 +3410,16 @@ bool8 oac_hopping(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
-    x = mapObject->coords2.x;
-    y = mapObject->coords2.y;
+    direction = state_to_direction(gUnknown_085055CD[mapObject->movementType], mapObject->directionSequenceIndex, direction);
+    x = mapObject->currentCoords.x;
+    y = mapObject->currentCoords.y;
     sub_8092F88(direction, &x, &y, 2, 2);
     FieldObjectSetRegularAnim(mapObject, sprite, GetJumpLedgeAnimId(direction));
     if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
     {
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
-    mapObject->mapobj_bit_1 = TRUE;
+    mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
@@ -3428,7 +3428,7 @@ field_object_step(CopyPlayer2, gUnknown_0850DA90)
 
 bool8 mss_08062EA4(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.tileTransitionState == 2)
+    if (gMapObjects[gPlayerAvatar.mapObjectId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == 2)
     {
         return FALSE;
     }
@@ -3442,11 +3442,11 @@ void FieldObjectCB_TreeDisguise(struct Sprite *sprite)
     struct MapObject *mapObject;
 
     mapObject = &gMapObjects[sprite->data[0]];
-    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && !sprite->data[7]))
+    if (mapObject->directionSequenceIndex == 0 || (mapObject->directionSequenceIndex == 1 && !sprite->data[7]))
     {
         FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
-        mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_TREE_DISGUISE);
-        mapObject->mapobj_unk_21 = 1;
+        mapObject->fieldEffectSpriteId = FieldEffectStart(FLDEFF_TREE_DISGUISE);
+        mapObject->directionSequenceIndex = 1;
         sprite->data[7] ++;
     }
     FieldObjectStep(&gMapObjects[sprite->data[0]], sprite, sub_80925AC);
@@ -3463,11 +3463,11 @@ void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
     struct MapObject *mapObject;
 
     mapObject = &gMapObjects[sprite->data[0]];
-    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && !sprite->data[7]))
+    if (mapObject->directionSequenceIndex == 0 || (mapObject->directionSequenceIndex == 1 && !sprite->data[7]))
     {
         FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
-        mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_MOUNTAIN_DISGUISE);
-        mapObject->mapobj_unk_21 = 1;
+        mapObject->fieldEffectSpriteId = FieldEffectStart(FLDEFF_MOUNTAIN_DISGUISE);
+        mapObject->directionSequenceIndex = 1;
         sprite->data[7] ++;
     }
     FieldObjectStep(&gMapObjects[sprite->data[0]], sprite, sub_80925AC);
@@ -3480,7 +3480,7 @@ void FieldObjectCB_Hidden1(struct Sprite *sprite)
 {
     if (!sprite->data[7])
     {
-        gMapObjects[sprite->data[0]].mapobj_bit_26 = TRUE;
+        gMapObjects[sprite->data[0]].fixedPriority = TRUE;
         sprite->subspriteMode = 2;
         sprite->oam.priority = 3;
         sprite->data[7] ++;
@@ -3512,7 +3512,7 @@ field_object_step(WalkInPlace1, gUnknown_0850DAA0)
 bool8 sub_8092718(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay16AnimId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -3522,7 +3522,7 @@ field_object_step(WalkInPlace4, gUnknown_0850DAA8)
 bool8 sub_8092788(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay32AnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay32AnimId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -3532,7 +3532,7 @@ field_object_step(WalkInPlace2, gUnknown_0850DAB0)
 bool8 sub_80927F8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay8AnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay8AnimId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -3542,7 +3542,7 @@ field_object_step(WalkInPlace3, gUnknown_0850DAB8)
 bool8 sub_8092868(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay4AnimId(mapObject->mapobj_unk_18));
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay4AnimId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -3552,8 +3552,8 @@ field_object_step(Hidden2, gUnknown_0850DAC0)
 bool8 sub_80928D8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    mapObject->mapobj_bit_13 = TRUE;
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    mapObject->invisible = TRUE;
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -3569,16 +3569,16 @@ bool8 sub_809290C(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_809292C(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_1 = FALSE;
+    mapObject->singleMovementActive = FALSE;
     return FALSE;
 }
 
 void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_1 = FALSE;
-    mapObject->mapobj_bit_6 = FALSE;
-    mapObject->mapobj_bit_7 = FALSE;
-    mapObject->mapobj_unk_1C = 0xFF;
+    mapObject->singleMovementActive = FALSE;
+    mapObject->heldMovementActive = FALSE;
+    mapObject->heldMovementFinished = FALSE;
+    mapObject->movementActionId = 0xFF;
     sprite->data[1] = 0;
 }
 
@@ -3632,7 +3632,7 @@ void npc_apply_anim_looping(struct MapObject *mapObject, struct Sprite *sprite, 
 {
     const struct UnkStruct_085094AC *unk85094AC;
 
-    if (!mapObject->mapobj_bit_12)
+    if (!mapObject->inanimate)
     {
         sprite->animNum = animNum;
         unk85094AC = sub_8092A4C(sprite->anims);
@@ -3655,7 +3655,7 @@ void obj_npc_animation_step(struct MapObject *mapObject, struct Sprite *sprite, 
 {
     const struct UnkStruct_085094AC *unk85094AC;
 
-    if (!mapObject->mapobj_bit_12)
+    if (!mapObject->inanimate)
     {
         u8 animPos;
 
@@ -3692,12 +3692,12 @@ u8 sub_8092AF8(s16 x1, s16 y1, s16 x2, s16 y2)
     return DIR_SOUTH;
 }
 
-void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern)
+void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 movementType)
 {
-    mapObject->animPattern = animPattern;
-    mapObject->mapobj_unk_21 = 0;
-    mapObject->animId = 0;
-    gSprites[mapObject->spriteId].callback = gUnknown_08505438[animPattern];
+    mapObject->movementType = movementType;
+    mapObject->directionSequenceIndex = 0;
+    mapObject->playerCopyableMovement = 0;
+    gSprites[mapObject->spriteId].callback = gUnknown_08505438[movementType];
     gSprites[mapObject->spriteId].data[1] = 0;
 }
 
@@ -3708,8 +3708,8 @@ u8 npc_block_way__next_tile(struct MapObject *mapObject, u8 direction)
     s16 x;
     s16 y;
 
-    x = mapObject->coords2.x;
-    y = mapObject->coords2.y;
+    x = mapObject->currentCoords.x;
+    y = mapObject->currentCoords.y;
     MoveCoords(direction, &x, &y);
     return npc_block_way(mapObject, x, y, direction);
 }
@@ -3727,11 +3727,11 @@ u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
     {
         return 2;
     }
-    if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
+    if (mapObject->trackedByCamera && !CanCameraMoveInDirection(direction))
     {
         return 2;
     }
-    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    if (IsZCoordMismatchAt(mapObject->currentElevation, x, y))
     {
         return 3;
     }
@@ -3751,11 +3751,11 @@ u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
     {
         retval |= 1;
     }
-    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction)))
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->trackedByCamera && !CanCameraMoveInDirection(direction)))
     {
         retval |= 2;
     }
-    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    if (IsZCoordMismatchAt(mapObject->currentElevation, x, y))
     {
         retval |= 4;
     }
@@ -3775,8 +3775,8 @@ static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, 
 
     if (mapObject->range.as_nybbles.x != 0)
     {
-        left = mapObject->coords1.x - mapObject->range.as_nybbles.x;
-        right = mapObject->coords1.x + mapObject->range.as_nybbles.x;
+        left = mapObject->initialCoords.x - mapObject->range.as_nybbles.x;
+        right = mapObject->initialCoords.x + mapObject->range.as_nybbles.x;
         if (left > x || right < x)
         {
             return TRUE;
@@ -3784,8 +3784,8 @@ static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, 
     }
     if (mapObject->range.as_nybbles.y != 0)
     {
-        top = mapObject->coords1.y - mapObject->range.as_nybbles.y;
-        bottom = mapObject->coords1.y + mapObject->range.as_nybbles.y;
+        top = mapObject->initialCoords.y - mapObject->range.as_nybbles.y;
+        bottom = mapObject->initialCoords.y + mapObject->range.as_nybbles.y;
         if (top > y || bottom < y)
         {
             return TRUE;
@@ -3796,7 +3796,7 @@ static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, 
 
 static bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
-    if (gUnknown_0850DB5C[direction - 1](mapObject->mapobj_unk_1E) || gUnknown_0850DB6C[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
+    if (gUnknown_0850DB5C[direction - 1](mapObject->currentMetatileBehavior) || gUnknown_0850DB6C[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
     {
         return TRUE;
     }
@@ -3813,9 +3813,9 @@ static bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s
         curObject = &gMapObjects[i];
         if (curObject->active && curObject != mapObject)
         {
-            if ((curObject->coords2.x == x && curObject->coords2.y == y) || (curObject->coords3.x == x && curObject->coords3.y == y))
+            if ((curObject->currentCoords.x == x && curObject->currentCoords.y == y) || (curObject->previousCoords.x == x && curObject->previousCoords.y == y))
             {
-                if (AreZCoordsCompatible(mapObject->mapobj_unk_0B_0, curObject->mapobj_unk_0B_0))
+                if (AreZCoordsCompatible(mapObject->currentElevation, curObject->currentElevation))
                 {
                     return TRUE;
                 }
@@ -3958,8 +3958,8 @@ void FieldObjectMoveDestCoords(struct MapObject *mapObject, u32 dirn, s16 *x, s1
     u8 direction;
 
     direction = dirn;
-    *x = mapObject->coords2.x;
-    *y = mapObject->coords2.y;
+    *x = mapObject->currentCoords.x;
+    *y = mapObject->currentCoords.y;
     MoveCoords(direction, x, y);
 }
 
@@ -3967,7 +3967,7 @@ void FieldObjectMoveDestCoords(struct MapObject *mapObject, u32 dirn, s16 *x, s1
 
 bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *mapObject)
 {
-    if (mapObject->mapobj_bit_1 || mapObject->mapobj_bit_6)
+    if (mapObject->singleMovementActive || mapObject->heldMovementActive)
     {
         return TRUE;
     }
@@ -3976,7 +3976,7 @@ bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *ma
 
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *mapObject)
 {
-    if (mapObject->mapobj_bit_6 && mapObject->mapobj_unk_1C != 0xFF)
+    if (mapObject->heldMovementActive && mapObject->movementActionId != 0xFF)
     {
         return TRUE;
     }
@@ -3990,9 +3990,9 @@ bool8 FieldObjectSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
         return TRUE;
     }
     npc_sync_anim_pause_bits(mapObject);
-    mapObject->mapobj_unk_1C = specialAnimId;
-    mapObject->mapobj_bit_6 = TRUE;
-    mapObject->mapobj_bit_7 = FALSE;
+    mapObject->movementActionId = specialAnimId;
+    mapObject->heldMovementActive = TRUE;
+    mapObject->heldMovementFinished = FALSE;
     gSprites[mapObject->spriteId].data[2] = 0;
     return FALSE;
 }
@@ -4005,7 +4005,7 @@ void FieldObjectForceSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimI
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *mapObject)
 {
-    if (mapObject->mapobj_bit_6)
+    if (mapObject->heldMovementActive)
     {
         FieldObjectClearAnim(mapObject);
     }
@@ -4013,18 +4013,18 @@ void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *mapObject)
 
 void FieldObjectClearAnim(struct MapObject *mapObject)
 {
-    mapObject->mapobj_unk_1C = 0xFF;
-    mapObject->mapobj_bit_6 = FALSE;
-    mapObject->mapobj_bit_7 = FALSE;
+    mapObject->movementActionId = 0xFF;
+    mapObject->heldMovementActive = FALSE;
+    mapObject->heldMovementFinished = FALSE;
     gSprites[mapObject->spriteId].data[1] = 0;
     gSprites[mapObject->spriteId].data[2] = 0;
 }
 
 u8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *mapObject)
 {
-    if (mapObject->mapobj_bit_6)
+    if (mapObject->heldMovementActive)
     {
-        return mapObject->mapobj_bit_7;
+        return mapObject->heldMovementFinished;
     }
     return 0x10;
 }
@@ -4043,9 +4043,9 @@ u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *mapObject)
 
 u8 FieldObjectGetSpecialAnim(struct MapObject *mapObject)
 {
-    if (mapObject->mapobj_bit_6)
+    if (mapObject->heldMovementActive)
     {
-        return mapObject->mapobj_unk_1C;
+        return mapObject->movementActionId;
     }
     return 0xFF;
 }
@@ -4058,7 +4058,7 @@ void FieldObjectStep(struct MapObject *mapObject, struct Sprite *sprite, bool8 (
     {
         FieldObjectExecSpecialAnim(mapObject, sprite);
     }
-    else if (!mapObject->mapobj_bit_8)
+    else if (!mapObject->frozen)
     {
         while (callback(mapObject, sprite));
     }
@@ -4155,17 +4155,17 @@ static u32 state_to_direction(u8 a0, u32 a1, u32 a2)
 
 static void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (gUnknown_0850DC50[mapObject->mapobj_unk_1C][sprite->data[2]](mapObject, sprite))
+    if (gUnknown_0850DC50[mapObject->movementActionId][sprite->data[2]](mapObject, sprite))
     {
-        mapObject->mapobj_bit_7 = TRUE;
+        mapObject->heldMovementFinished = TRUE;
     }
 }
 
 bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (gUnknown_0850DC50[mapObject->mapobj_unk_1C][sprite->data[2]](mapObject, sprite))
+    if (gUnknown_0850DC50[mapObject->movementActionId][sprite->data[2]](mapObject, sprite))
     {
-        mapObject->mapobj_unk_1C = 0xFF;
+        mapObject->movementActionId = 0xFF;
         sprite->data[2] = 0;
         return TRUE;
     }
@@ -4174,7 +4174,7 @@ bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *spr
 
 void FieldObjectSetRegularAnim(struct MapObject *mapObject, struct Sprite *sprite, u8 animId)
 {
-    mapObject->mapobj_unk_1C = animId;
+    mapObject->movementActionId = animId;
     sprite->data[2] = 0;
 }
 
@@ -4184,7 +4184,7 @@ void an_look_any(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
 {
     FieldObjectSetDirection(mapObject, direction);
     npc_coords_shift_still(mapObject);
-    obj_npc_animation_step(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    obj_npc_animation_step(mapObject, sprite, get_go_image_anim_num(mapObject->facingDirection));
     sprite->animPaused = TRUE;
     sprite->data[2] = 1;
 }
@@ -4218,8 +4218,8 @@ void npc_apply_direction(struct MapObject *mapObject, struct Sprite *sprite, u8 
     s16 x;
     s16 y;
 
-    x = mapObject->coords2.x;
-    y = mapObject->coords2.y;
+    x = mapObject->currentCoords.x;
+    y = mapObject->currentCoords.y;
     FieldObjectSetDirection(mapObject, direction);
     MoveCoords(direction, &x, &y);
     npc_coords_shift(mapObject, x, y);
@@ -4229,7 +4229,7 @@ void npc_apply_direction(struct MapObject *mapObject, struct Sprite *sprite, u8 
     {
         sprite->animPaused = TRUE;
     }
-    mapObject->mapobj_bit_2 = TRUE;
+    mapObject->triggerGroundEffectsOnMove = TRUE;
     sprite->data[2] = 1;
 }
 
@@ -4239,13 +4239,13 @@ void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction
 
     memcpy(functions, gUnknown_0850DEE8, sizeof gUnknown_0850DEE8);
     npc_apply_direction(mapObject, sprite, direction, speed);
-    npc_apply_anim_looping(mapObject, sprite, functions[speed](mapObject->mapobj_unk_18));
+    npc_apply_anim_looping(mapObject, sprite, functions[speed](mapObject->facingDirection));
 }
 
 void do_run_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
 {
     npc_apply_direction(mapObject, sprite, direction, 1);
-    npc_apply_anim_looping(mapObject, sprite, get_run_image_anim_num(mapObject->mapobj_unk_18));
+    npc_apply_anim_looping(mapObject, sprite, get_run_image_anim_num(mapObject->facingDirection));
 }
 
 bool8 npc_obj_ministep_stop_on_arrival(struct MapObject *mapObject, struct Sprite *sprite)
@@ -4253,7 +4253,7 @@ bool8 npc_obj_ministep_stop_on_arrival(struct MapObject *mapObject, struct Sprit
     if (obj_npc_ministep(sprite))
     {
         npc_coords_shift_still(mapObject);
-        mapObject->mapobj_bit_3 = TRUE;
+        mapObject->triggerGroundEffectsOnStop = TRUE;
         sprite->animPaused = TRUE;
         return TRUE;
     }
@@ -4265,21 +4265,21 @@ void sub_8093AF0(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     s16 x;
     s16 y;
 
-    x = mapObject->coords2.x;
-    y = mapObject->coords2.y;
+    x = mapObject->currentCoords.x;
+    y = mapObject->currentCoords.y;
     FieldObjectSetDirection(mapObject, direction);
     MoveCoords(direction, &x, &y);
     npc_coords_shift(mapObject, x, y);
     sub_80976DC(sprite, direction);
     sprite->animPaused = FALSE;
-    mapObject->mapobj_bit_2 = TRUE;
+    mapObject->triggerGroundEffectsOnMove = TRUE;
     sprite->data[2] = 1;
 }
 
 void sub_8093B60(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
 {
     sub_8093AF0(mapObject, sprite, direction);
-    npc_apply_anim_looping(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    npc_apply_anim_looping(mapObject, sprite, get_go_image_anim_num(mapObject->facingDirection));
 }
 
 bool8 an_walk_any_2(struct MapObject *mapObject, struct Sprite *sprite)
@@ -4287,7 +4287,7 @@ bool8 an_walk_any_2(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_80976EC(sprite))
     {
         npc_coords_shift_still(mapObject);
-        mapObject->mapobj_bit_3 = TRUE;
+        mapObject->triggerGroundEffectsOnStop = TRUE;
         sprite->animPaused = TRUE;
         return TRUE;
     }
@@ -4339,18 +4339,18 @@ void sub_8093FC4(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     y = 0;
     FieldObjectSetDirection(mapObject, direction);
     sub_8092F88(direction, &x, &y, displacements[speed], displacements[speed]);
-    npc_coords_shift(mapObject, mapObject->coords2.x + x, mapObject->coords2.y + y);
+    npc_coords_shift(mapObject, mapObject->currentCoords.x + x, mapObject->currentCoords.y + y);
     sub_809783C(sprite, direction, speed, a5);
     sprite->data[2] = 1;
     sprite->animPaused = 0;
-    mapObject->mapobj_bit_2 = 1;
-    mapObject->mapobj_bit_4 = 1;
+    mapObject->triggerGroundEffectsOnMove = 1;
+    mapObject->disableCoveringGroundEffects = 1;
 }
 
 void maybe_shadow_1(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed, u8 a4)
 {
     sub_8093FC4(mapObject, sprite, direction, speed, a4);
-    npc_apply_anim_looping(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    npc_apply_anim_looping(mapObject, sprite, get_go_image_anim_num(mapObject->facingDirection));
     DoShadowFieldEffect(mapObject);
 }
 
@@ -4367,16 +4367,16 @@ u8 sub_80940C4(struct MapObject *mapObject, struct Sprite *sprite, u8 callback(s
     {
         x = 0;
         y = 0;
-        sub_8092F88(mapObject->placeholder18, &x, &y, displacements[sprite->data[4]], displacements[sprite->data[4]]);
-        npc_coords_shift(mapObject, mapObject->coords2.x + x, mapObject->coords2.y + y);
-        mapObject->mapobj_bit_2 = TRUE;
-        mapObject->mapobj_bit_4 = TRUE;
+        sub_8092F88(mapObject->movementDirection, &x, &y, displacements[sprite->data[4]], displacements[sprite->data[4]]);
+        npc_coords_shift(mapObject, mapObject->currentCoords.x + x, mapObject->currentCoords.y + y);
+        mapObject->triggerGroundEffectsOnMove = TRUE;
+        mapObject->disableCoveringGroundEffects = TRUE;
     }
     else if (result == 0xFF)
     {
         npc_coords_shift_still(mapObject);
-        mapObject->mapobj_bit_3 = TRUE;
-        mapObject->mapobj_bit_5 = TRUE;
+        mapObject->triggerGroundEffectsOnStop = TRUE;
+        mapObject->landingJump = TRUE;
         sprite->animPaused = TRUE;
     }
     return result;
@@ -4417,8 +4417,8 @@ bool8 sub_80941E0(struct MapObject *mapObject, struct Sprite *sprite)
         case 255:
             return TRUE;
         case   1:
-            FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
-            obj_npc_animation_step(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+            FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
+            obj_npc_animation_step(mapObject, sprite, get_go_image_anim_num(mapObject->facingDirection));
         default:
             return FALSE;
     }
@@ -4435,7 +4435,7 @@ bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     if (fn2(mapObject, sprite))\
     {\
-        mapObject->mapobj_bit_22 = FALSE;\
+        mapObject->hasShadow = FALSE;\
         sprite->data[2] = 2;\
         return TRUE;\
     }\
@@ -4562,7 +4562,7 @@ void npc_set_direction_and_anim__an_proceed(struct MapObject *mapObject, struct 
 
 bool8 sub_8094DAC(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, mapObject->placeholder18, sprite->animNum);
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, mapObject->movementDirection, sprite->animNum);
     return FALSE;
 }
 
@@ -4594,7 +4594,7 @@ bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
     if (sub_80941C8(mapObject, sprite))\
     {\
         sprite->data[2] = 2;\
-        mapObject->mapobj_bit_5 = FALSE;\
+        mapObject->landingJump = FALSE;\
         return TRUE;\
     }\
     return FALSE;\
@@ -4611,7 +4611,7 @@ bool8 sub_8094F38(struct MapObject *mapObject, struct Sprite *sprite)
 
     if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0, &mapObjectId))
     {
-        an_look_any(mapObject, sprite, sub_8092AF8(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[mapObjectId].coords2.x, gMapObjects[mapObjectId].coords2.y));
+        an_look_any(mapObject, sprite, sub_8092AF8(mapObject->currentCoords.x, mapObject->currentCoords.y, gMapObjects[mapObjectId].currentCoords.x, gMapObjects[mapObjectId].currentCoords.y));
     }
     sprite->data[2] = 1;
     return TRUE;
@@ -4623,7 +4623,7 @@ bool8 sub_8094F94(struct MapObject *mapObject, struct Sprite *sprite)
 
     if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0, &mapObjectId))
     {
-        an_look_any(mapObject, sprite, GetOppositeDirection(sub_8092AF8(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[mapObjectId].coords2.x, gMapObjects[mapObjectId].coords2.y)));
+        an_look_any(mapObject, sprite, GetOppositeDirection(sub_8092AF8(mapObject->currentCoords.x, mapObject->currentCoords.y, gMapObjects[mapObjectId].currentCoords.x, gMapObjects[mapObjectId].currentCoords.y)));
     }
     sprite->data[2] = 1;
     return TRUE;
@@ -4631,14 +4631,14 @@ bool8 sub_8094F94(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8094FF8(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_9 = TRUE;
+    mapObject->facingDirectionLocked = TRUE;
     sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8095008(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_9 = FALSE;
+    mapObject->facingDirectionLocked = FALSE;
     sprite->data[2] = 1;
     return TRUE;
 }
@@ -4658,7 +4658,7 @@ maybe_shadow_1_macro(sub_80953E0, maybe_shadow_1, sub_80941E0, DIR_EAST,  0, 2)
 
 bool8 sub_8095438(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    an_look_any(mapObject, sprite, gUnknown_085055CD[mapObject->animPattern]);
+    an_look_any(mapObject, sprite, gUnknown_085055CD[mapObject->movementType]);
     return TRUE;
 }
 
@@ -4670,42 +4670,42 @@ bool8 sub_8095450(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8095460(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_25 = FALSE;
+    mapObject->disableJumpLandingGroundEffect = FALSE;
     sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8095470(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_25 = TRUE;
+    mapObject->disableJumpLandingGroundEffect = TRUE;
     sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8095480(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_12 = TRUE;
+    mapObject->inanimate = TRUE;
     sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8095490(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_12 = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->inanimate;
+    mapObject->inanimate = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->inanimate;
     sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_80954BC(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_13 = TRUE;
+    mapObject->invisible = TRUE;
     sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_80954CC(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_13 = FALSE;
+    mapObject->invisible = FALSE;
     sprite->data[2] = 1;
     return TRUE;
 }
@@ -4736,12 +4736,12 @@ bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8095548(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (mapObject->animPattern == 0x3F)
+    if (mapObject->movementType == 0x3F)
     {
         sub_80B4578(mapObject);
         return FALSE;
     }
-    if (mapObject->animPattern != 0x39 && mapObject->animPattern != 0x3A)
+    if (mapObject->movementType != 0x39 && mapObject->movementType != 0x3A)
     {
         sprite->data[2] = 2;
         return TRUE;
@@ -4780,10 +4780,10 @@ bool8 sub_80955C8(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_80955EC(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_13 ^= TRUE;
+    mapObject->invisible ^= TRUE;
     if (RunFieldObjectStepTimer(sprite))
     {
-        mapObject->mapobj_bit_13 = TRUE;
+        mapObject->invisible = TRUE;
         sprite->data[2] = 3;
     }
     return FALSE;
@@ -4808,10 +4808,10 @@ bool8 sub_8095644(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8095668(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_13 ^= TRUE;
+    mapObject->invisible ^= TRUE;
     if (RunFieldObjectStepTimer(sprite))
     {
-        mapObject->mapobj_bit_13 = TRUE;
+        mapObject->invisible = TRUE;
         sprite->data[2] = 3;
     }
     return FALSE;
@@ -4819,14 +4819,14 @@ bool8 sub_8095668(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_80956A4(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_26 = TRUE;
+    mapObject->fixedPriority = TRUE;
     sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_80956B4(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_26 = FALSE;
+    mapObject->fixedPriority = FALSE;
     sprite->data[2] = 1;
     return TRUE;
 }
@@ -4850,13 +4850,13 @@ bool8 sub_80956F4(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_8095724(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_27 = TRUE;
+    mapObject->unk3_3 = TRUE;
     return TRUE;
 }
 
 bool8 sub_8095730(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    mapObject->mapobj_bit_27 = FALSE;
+    mapObject->unk3_3 = FALSE;
     return TRUE;
 }
 
@@ -4949,7 +4949,7 @@ bool8 sub_8095B0C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8097758(sprite))
     {
         npc_coords_shift_still(mapObject);
-        mapObject->mapobj_bit_3 = TRUE;
+        mapObject->triggerGroundEffectsOnStop = TRUE;
         sprite->animPaused = TRUE;
         return TRUE;
     }
@@ -5001,7 +5001,7 @@ special_anim_with_timer_2(sub_8096090, EAST,  sub_80929FC, 8, sub_809459C)
 void sub_80960C8(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed)
 {
     npc_apply_direction(mapObject, sprite, direction, speed);
-    StartSpriteAnim(sprite, sub_80929BC(mapObject->mapobj_unk_18));
+    StartSpriteAnim(sprite, sub_80929BC(mapObject->facingDirection));
     SeekSpriteAnim(sprite, 0);
 }
 
@@ -5013,7 +5013,7 @@ an_walk_any_2_macro(sub_80961C0, sub_80960C8, npc_obj_ministep_stop_on_arrival, 
 void sub_8096200(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed)
 {
     npc_apply_direction(mapObject, sprite, direction, speed);
-    npc_apply_anim_looping(mapObject, sprite, sub_80929FC(mapObject->mapobj_unk_18));
+    npc_apply_anim_looping(mapObject, sprite, sub_80929FC(mapObject->facingDirection));
 }
 
 an_walk_any_2_macro(sub_8096230, sub_8096200, npc_obj_ministep_stop_on_arrival, DIR_SOUTH, 1)
@@ -5024,7 +5024,7 @@ an_walk_any_2_macro(sub_80962F0, sub_8096200, npc_obj_ministep_stop_on_arrival, 
 void sub_8096330(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed)
 {
     npc_apply_direction(mapObject, sprite, direction, speed);
-    StartSpriteAnim(sprite, sub_80929DC(mapObject->mapobj_unk_18));
+    StartSpriteAnim(sprite, sub_80929DC(mapObject->facingDirection));
     SeekSpriteAnim(sprite, 0);
 }
 an_walk_any_2_macro(sub_8096368, sub_8096330, npc_obj_ministep_stop_on_arrival, DIR_SOUTH, 1)
@@ -5041,7 +5041,7 @@ bool8 sub_8096468(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_809647C(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_8098044(mapObject->mapobj_unk_1B);
+    sub_8098044(mapObject->warpArrowSpriteId);
     sprite->pos2.y = 0;
     sprite->data[2] = 1;
     return TRUE;
@@ -5051,7 +5051,7 @@ bool8 sub_8096494(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sprite->pos2.y == 0)
     {
-        sub_8098044(mapObject->mapobj_unk_1B);
+        sub_8098044(mapObject->warpArrowSpriteId);
         sprite->data[2] = 1;
         return TRUE;
     }
@@ -5071,7 +5071,7 @@ bool8 sub_80964BC(struct MapObject *mapObject, struct Sprite *sprite)
 
 void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (mapObject->mapobj_bit_10)
+    if (mapObject->disableAnim)
     {
         sprite->animPaused = TRUE;
     }
@@ -5079,11 +5079,11 @@ void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct 
 
 void sub_80964E8(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (mapObject->mapobj_bit_11)
+    if (mapObject->enableAnim)
     {
         sprite->animPaused = FALSE;
-        mapObject->mapobj_bit_10 = FALSE;
-        mapObject->mapobj_bit_11 = FALSE;
+        mapObject->disableAnim = FALSE;
+        mapObject->enableAnim = FALSE;
     }
 }
 
@@ -5101,7 +5101,7 @@ static void sub_8096530(struct MapObject *mapObject, struct Sprite *sprite)
     u16 y2;
     const struct MapObjectGraphicsInfo *graphicsInfo;
 
-    mapObject->mapobj_bit_14 = FALSE;
+    mapObject->offScreen = FALSE;
     graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
     if (sprite->coordOffsetEnabled)
     {
@@ -5119,18 +5119,18 @@ static void sub_8096530(struct MapObject *mapObject, struct Sprite *sprite)
     y2 += graphicsInfo->height;
     if ((s16)x >= 0x100 || (s16)x2 < -0x10)
     {
-        mapObject->mapobj_bit_14 = TRUE;
+        mapObject->offScreen = TRUE;
     }
     if ((s16)y >= 0xB0 || (s16)y2 < -0x10)
     {
-        mapObject->mapobj_bit_14 = TRUE;
+        mapObject->offScreen = TRUE;
     }
 }
 
 static void npc_update_obj_anim_flag(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
-    if (mapObject->mapobj_bit_13 || mapObject->mapobj_bit_14)
+    if (mapObject->invisible || mapObject->offScreen)
     {
         sprite->invisible = TRUE;
     }

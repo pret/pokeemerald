@@ -25,15 +25,15 @@ void sub_8097FE4(u8);
 
 bool8 FreezeMapObject(struct MapObject *mapObject)
 {
-    if (mapObject->mapobj_bit_6 || mapObject->mapobj_bit_8)
+    if (mapObject->heldMovementActive || mapObject->frozen)
     {
         return TRUE;
     }
     else
     {
-        mapObject->mapobj_bit_8 = 1;
-        mapObject->mapobj_bit_23 = gSprites[mapObject->spriteId].animPaused;
-        mapObject->mapobj_bit_24 = gSprites[mapObject->spriteId].affineAnimPaused;
+        mapObject->frozen = 1;
+        mapObject->spriteAnimPausedBackup = gSprites[mapObject->spriteId].animPaused;
+        mapObject->spriteAffineAnimPausedBackup = gSprites[mapObject->spriteId].affineAnimPaused;
         gSprites[mapObject->spriteId].animPaused = 1;
         gSprites[mapObject->spriteId].affineAnimPaused = 1;
         return FALSE;
@@ -58,11 +58,11 @@ void FreezeMapObjectsExceptOne(u8 a1)
 
 void npc_sync_anim_pause_bits(struct MapObject *mapObject)
 {
-    if (mapObject->active && mapObject->mapobj_bit_8)
+    if (mapObject->active && mapObject->frozen)
     {
-        mapObject->mapobj_bit_8 = 0;
-        gSprites[mapObject->spriteId].animPaused = mapObject->mapobj_bit_23;
-        gSprites[mapObject->spriteId].affineAnimPaused = mapObject->mapobj_bit_24;
+        mapObject->frozen = 0;
+        gSprites[mapObject->spriteId].animPaused = mapObject->spriteAnimPausedBackup;
+        gSprites[mapObject->spriteId].affineAnimPaused = mapObject->spriteAffineAnimPausedBackup;
     }
 }
 
@@ -512,9 +512,9 @@ u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct MapObject *mapObject)
 
 void DoShadowFieldEffect(struct MapObject *mapObject)
 {
-    if (!mapObject->mapobj_bit_22)
+    if (!mapObject->hasShadow)
     {
-        mapObject->mapobj_bit_22 = 1;
+        mapObject->hasShadow = 1;
         oe_exec_and_other_stuff(FLDEFF_SHADOW, mapObject);
     }
 }
@@ -568,8 +568,8 @@ bool32 sub_8097E50(struct MapObject *mapObject, struct Sprite *sprite)
 
     if (ableToStore == TRUE)
     {
-        mapObject->mapobj_bit_12 = TRUE;
-        mapObject->mapobj_bit_9 = TRUE;
+        mapObject->inanimate = TRUE;
+        mapObject->facingDirectionLocked = TRUE;
     }
 
     sprite->data[2] = 1;
@@ -596,8 +596,8 @@ bool32 sub_8097EF0(struct MapObject *mapObject, struct Sprite *sprite)
             FREE_AND_SET_NULL(gUnknown_020375B8);
         if (ableToStore == TRUE)
         {
-            mapObject->mapobj_bit_12 = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->inanimate;
-            mapObject->mapobj_bit_9 = 0;
+            mapObject->inanimate = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->inanimate;
+            mapObject->facingDirectionLocked = 0;
             sprite->animPaused = 0;
         }
     }
@@ -623,7 +623,7 @@ void sub_8097FA4(struct MapObject *mapObject)
     struct Task *task = &gTasks[taskId];
 
     StoreWordInTwoHalfwords(&task->data[0], (u32)mapObject);
-    mapObject->mapobj_unk_1B = taskId;
+    mapObject->warpArrowSpriteId = taskId;
     task->data[3] = 0xFFFF;
 }
 

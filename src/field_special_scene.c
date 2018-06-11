@@ -346,7 +346,7 @@ void sub_80FB6EC(void)
 void sub_80FB768(void)
 {
     sub_80FB6EC();
-    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = TRUE;
+    gMapObjects[gPlayerAvatar.mapObjectId].invisible = TRUE;
     pal_fill_black();
     CreateTask(Task_HandlePorthole, 80);
     ScriptContext2_Enable();

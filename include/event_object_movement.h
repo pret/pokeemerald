@@ -77,7 +77,7 @@ void MoveCoords(u8, s16 *, s16 *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
 u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
-void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern);
+void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 movementType);
 u8 npc_running_behaviour_by_direction(u8 direction);
 const u8 *GetFieldObjectScriptPointerByFieldObjectId(u8 mapObjectId);
 u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction);

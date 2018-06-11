@@ -54,7 +54,7 @@ static void sub_8098400(u8 taskId)
         sub_808B864();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gMapObjects[gSelectedMapObject].mapobj_bit_1)
+    if (!task->data[1] && !gMapObjects[gSelectedMapObject].singleMovementActive)
     {
         FreezeMapObject(&gMapObjects[gSelectedMapObject]);
         task->data[1] = 1;
@@ -81,7 +81,7 @@ void LockSelectedMapObject(void)
     u8 taskId;
     FreezeMapObjectsExceptOne(gSelectedMapObject);
     taskId = CreateTask(sub_8098400, 80);
-    if (!gMapObjects[gSelectedMapObject].mapobj_bit_1)
+    if (!gMapObjects[gSelectedMapObject].singleMovementActive)
     {
         FreezeMapObject(&gMapObjects[gSelectedMapObject]);
         gTasks[taskId].data[1] = 1;
@@ -128,7 +128,7 @@ static void sub_80985BC(u8 taskId)
         sub_808B864();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gMapObjects[mapObjectId].mapobj_bit_1)
+    if (!task->data[1] && !gMapObjects[mapObjectId].singleMovementActive)
     {
         FreezeMapObject(&gMapObjects[mapObjectId]);
         task->data[1] = 1;
@@ -147,14 +147,14 @@ void sub_8098630(void)
         sub_8098074(trainerObjectId1, trainerObjectId2);
         taskId = CreateTask(sub_80985BC, 80);
         gTasks[taskId].data[2] = trainerObjectId1;
-        if(!gMapObjects[trainerObjectId1].mapobj_bit_1)
+        if(!gMapObjects[trainerObjectId1].singleMovementActive)
         {
             FreezeMapObject(&gMapObjects[trainerObjectId1]);
             gTasks[taskId].data[1] = 1;
         }
         taskId = CreateTask(sub_80985BC, 81);
         gTasks[taskId].data[2] = trainerObjectId2;
-        if(!gMapObjects[trainerObjectId2].mapobj_bit_1)
+        if(!gMapObjects[trainerObjectId2].singleMovementActive)
         {
             FreezeMapObject(&gMapObjects[trainerObjectId2]);
             gTasks[taskId].data[1] = 1;
@@ -165,7 +165,7 @@ void sub_8098630(void)
         FreezeMapObjectsExceptOne(trainerObjectId1);
         taskId = CreateTask(sub_80985BC, 80);
         gTasks[taskId].data[2] = trainerObjectId1;
-        if(!gMapObjects[trainerObjectId1].mapobj_bit_1)
+        if(!gMapObjects[trainerObjectId1].singleMovementActive)
         {
             FreezeMapObject(&gMapObjects[trainerObjectId1]);
             gTasks[taskId].data[1] = 1;

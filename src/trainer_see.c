@@ -284,8 +284,8 @@ static u8 GetTrainerApproachDistance(struct MapObject *trainerObj)
     PlayerGetDestCoords(&x, &y);
     if (trainerObj->trainerType == 1)  // can only see in one direction
     {
-        approachDistance = sDirectionalApproachDistanceFuncs[trainerObj->mapobj_unk_18 - 1](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
-        return CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, trainerObj->mapobj_unk_18);
+        approachDistance = sDirectionalApproachDistanceFuncs[trainerObj->facingDirection - 1](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
+        return CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, trainerObj->facingDirection);
     }
     else  // can see in all directions
     {
@@ -303,10 +303,10 @@ static u8 GetTrainerApproachDistance(struct MapObject *trainerObj)
 // Returns how far south the player is from trainer. 0 if out of trainer's sight.
 static u8 GetTrainerApproachDistanceSouth(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
 {
-    if (trainerObj->coords2.x == x
-     && y > trainerObj->coords2.y
-     && y <= trainerObj->coords2.y + range)
-        return (y - trainerObj->coords2.y);
+    if (trainerObj->currentCoords.x == x
+     && y > trainerObj->currentCoords.y
+     && y <= trainerObj->currentCoords.y + range)
+        return (y - trainerObj->currentCoords.y);
     else
         return 0;
 }
@@ -314,10 +314,10 @@ static u8 GetTrainerApproachDistanceSouth(struct MapObject *trainerObj, s16 rang
 // Returns how far north the player is from trainer. 0 if out of trainer's sight.
 static u8 GetTrainerApproachDistanceNorth(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
 {
-    if (trainerObj->coords2.x == x
-     && y < trainerObj->coords2.y
-     && y >= trainerObj->coords2.y - range)
-        return (trainerObj->coords2.y - y);
+    if (trainerObj->currentCoords.x == x
+     && y < trainerObj->currentCoords.y
+     && y >= trainerObj->currentCoords.y - range)
+        return (trainerObj->currentCoords.y - y);
     else
         return 0;
 }
@@ -325,10 +325,10 @@ static u8 GetTrainerApproachDistanceNorth(struct MapObject *trainerObj, s16 rang
 // Returns how far west the player is from trainer. 0 if out of trainer's sight.
 static u8 GetTrainerApproachDistanceWest(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
 {
-    if (trainerObj->coords2.y == y
-     && x < trainerObj->coords2.x
-     && x >= trainerObj->coords2.x - range)
-        return (trainerObj->coords2.x - x);
+    if (trainerObj->currentCoords.y == y
+     && x < trainerObj->currentCoords.x
+     && x >= trainerObj->currentCoords.x - range)
+        return (trainerObj->currentCoords.x - x);
     else
         return 0;
 }
@@ -336,10 +336,10 @@ static u8 GetTrainerApproachDistanceWest(struct MapObject *trainerObj, s16 range
 // Returns how far east the player is from trainer. 0 if out of trainer's sight.
 static u8 GetTrainerApproachDistanceEast(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
 {
-    if (trainerObj->coords2.y == y
-     && x > trainerObj->coords2.x
-     && x <= trainerObj->coords2.x + range)
-        return (x - trainerObj->coords2.x);
+    if (trainerObj->currentCoords.y == y
+     && x > trainerObj->currentCoords.x
+     && x <= trainerObj->currentCoords.x + range)
+        return (x - trainerObj->currentCoords.x);
     else
         return 0;
 }
@@ -357,8 +357,8 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct MapObject *trainerObj, u8 appr
     if (approachDistance == 0)
         return 0;
 
-    x = trainerObj->coords2.x;
-    y = trainerObj->coords2.y;
+    x = trainerObj->currentCoords.x;
+    y = trainerObj->currentCoords.y;
 
     MoveCoords(direction, &x, &y);
     for (i = 0; i < approachDistance - 1; i++, MoveCoords(direction, &x, &y))
@@ -441,7 +441,7 @@ static bool8 sub_80B417C(u8 taskId, struct Task *task, struct MapObject *trainer
 
     FieldObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
-    direction = GetFaceDirectionAnimId(trainerObj->mapobj_unk_18);
+    direction = GetFaceDirectionAnimId(trainerObj->facingDirection);
     FieldObjectSetSpecialAnim(trainerObj, direction);
     task->tFuncId++;
     return TRUE;
@@ -456,9 +456,9 @@ static bool8 sub_80B41C0(u8 taskId, struct Task *task, struct MapObject *trainer
     else
     {
         task->tFuncId++;
-        if (trainerObj->animPattern == 57 || trainerObj->animPattern == 58)
+        if (trainerObj->movementType == 57 || trainerObj->movementType == 58)
             task->tFuncId = 6;
-        if (trainerObj->animPattern == 63)
+        if (trainerObj->movementType == 63)
             task->tFuncId = 8;
         return TRUE;
     }
@@ -470,7 +470,7 @@ static bool8 sub_80B4200(u8 taskId, struct Task *task, struct MapObject *trainer
     {
         if (task->tTrainerRange)
         {
-            FieldObjectSetSpecialAnim(trainerObj, GetGoSpeed0AnimId(trainerObj->mapobj_unk_18));
+            FieldObjectSetSpecialAnim(trainerObj, GetGoSpeed0AnimId(trainerObj->facingDirection));
             task->tTrainerRange--;
         }
         else
@@ -489,8 +489,8 @@ static bool8 sub_80B425C(u8 taskId, struct Task *task, struct MapObject *trainer
     if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj) && !FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
         return FALSE;
 
-    npc_set_running_behaviour_etc(trainerObj, npc_running_behaviour_by_direction(trainerObj->mapobj_unk_18));
-    sub_808F23C(trainerObj, npc_running_behaviour_by_direction(trainerObj->mapobj_unk_18));
+    npc_set_running_behaviour_etc(trainerObj, npc_running_behaviour_by_direction(trainerObj->facingDirection));
+    sub_808F23C(trainerObj, npc_running_behaviour_by_direction(trainerObj->facingDirection));
     sub_808F208(trainerObj);
 
     playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -498,7 +498,7 @@ static bool8 sub_80B425C(u8 taskId, struct Task *task, struct MapObject *trainer
         return FALSE;
 
     sub_808BCE8();
-    FieldObjectSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->mapobj_unk_18)));
+    FieldObjectSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->facingDirection)));
     task->tFuncId++;
     return FALSE;
 }
@@ -547,8 +547,8 @@ static bool8 sub_80B43E0(u8 taskId, struct Task *task, struct MapObject *trainer
 {
     if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(trainerObj))
     {
-        gFieldEffectArguments[0] = trainerObj->coords2.x;
-        gFieldEffectArguments[1] = trainerObj->coords2.y;
+        gFieldEffectArguments[0] = trainerObj->currentCoords.x;
+        gFieldEffectArguments[1] = trainerObj->currentCoords.y;
         gFieldEffectArguments[2] = gSprites[trainerObj->spriteId].subpriority - 1;
         gFieldEffectArguments[3] = 2;
         task->tOutOfAshSpriteId = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
@@ -563,13 +563,13 @@ static bool8 sub_80B4438(u8 taskId, struct Task *task, struct MapObject *trainer
 
     if (gSprites[task->tOutOfAshSpriteId].animCmdIndex == 2)
     {
-        trainerObj->mapobj_bit_26 = 0;
-        trainerObj->mapobj_bit_2 = 1;
+        trainerObj->fixedPriority = 0;
+        trainerObj->triggerGroundEffectsOnMove = 1;
 
         sprite = &gSprites[trainerObj->spriteId];
         sprite->oam.priority = 2;
         FieldObjectClearAnimIfSpecialAnimFinished(trainerObj);
-        FieldObjectSetSpecialAnim(trainerObj, sub_80934BC(trainerObj->mapobj_unk_18));
+        FieldObjectSetSpecialAnim(trainerObj, sub_80934BC(trainerObj->facingDirection));
         task->tFuncId++;
     }
 
@@ -604,13 +604,13 @@ static void sub_80B44C8(u8 taskId)
     sTrainerSeeFuncList2[task->data[0]](taskId, task, mapObj);
     if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
-        npc_set_running_behaviour_etc(mapObj, npc_running_behaviour_by_direction(mapObj->mapobj_unk_18));
-        sub_808F23C(mapObj, npc_running_behaviour_by_direction(mapObj->mapobj_unk_18));
+        npc_set_running_behaviour_etc(mapObj, npc_running_behaviour_by_direction(mapObj->facingDirection));
+        sub_808F23C(mapObj, npc_running_behaviour_by_direction(mapObj->facingDirection));
         DestroyTask(taskId);
     }
     else
     {
-        mapObj->mapobj_bit_7 = 0;
+        mapObj->heldMovementFinished = 0;
     }
 }
 
@@ -765,14 +765,14 @@ void sub_80B4808(void)
     if (gUnknown_030060AC == 1)
     {
         trainerObj = &gMapObjects[gApproachingTrainers[gUnknown_03006080].mapObjectId];
-        gUnknown_03006084[0] = GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->mapobj_unk_18));
+        gUnknown_03006084[0] = GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->facingDirection));
         gUnknown_03006084[1] = 0xFE;
         ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gUnknown_03006084);
     }
     else
     {
         trainerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-        gUnknown_03006084[0] = GetFaceDirectionAnimId(trainerObj->mapobj_unk_18);
+        gUnknown_03006084[0] = GetFaceDirectionAnimId(trainerObj->facingDirection);
         gUnknown_03006084[1] = 0xFE;
         ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gUnknown_03006084);
     }
