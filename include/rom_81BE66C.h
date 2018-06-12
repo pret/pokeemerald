@@ -6,7 +6,7 @@
 #define GUARD_ROM_81BE66C_H
 
 bool32 InTrainerHill(void);
-bool8 FieldObjectIsFarawayIslandMew(struct MapObject *);
+bool8 EventObjectIsFarawayIslandMew(struct EventObject *);
 u32 sub_81D427C(void);
 
 #endif //GUARD_ROM_81BE66C_H

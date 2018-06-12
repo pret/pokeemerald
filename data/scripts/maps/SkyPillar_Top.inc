@@ -98,10 +98,10 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	fadeoutbgm 1
 	applymovement 255, SkyPillar_Top_Movement_2725B2
 	waitmovement 0
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SkyPillar_Top_Movement_239858
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	applymovement 1, SkyPillar_Top_Movement_23983A
 	waitmovement 0
 	waitse
@@ -128,10 +128,10 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	closemessage
 	delay 20
 	fadeinbgm 1
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SkyPillar_Top_Movement_23985C
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	setvar VAR_0x405E, 5
 	setvar VAR_0x40CA, 1
 	setvar VAR_0x40D7, 1

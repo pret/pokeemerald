@@ -2,7 +2,7 @@
 #include "main.h"
 #include "constants/songs.h"
 #include "constants/easy_chat.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "constants/vars.h"
 #include "mauville_old_man.h"
 #include "event_data.h"
@@ -136,7 +136,7 @@ void SetMauvilleOldMan(void)
             SetupGiddy();
             break;
     }
-    ScrSpecial_SetMauvilleOldManMapObjGfx();
+    ScrSpecial_SetMauvilleOldManEventObjGfx();
 }
 
 u8 GetCurrentMauvilleOldMan(void)
@@ -406,7 +406,7 @@ void ResetMauvilleOldManFlag(void)
         case MAUVILLE_MAN_GIDDY:
             break;
     }
-    ScrSpecial_SetMauvilleOldManMapObjGfx();
+    ScrSpecial_SetMauvilleOldManEventObjGfx();
 }
 
 
@@ -671,9 +671,9 @@ static void Task_BardSong(u8 taskId)
     sub_8197224();
 }
 
-void ScrSpecial_SetMauvilleOldManMapObjGfx(void)
+void ScrSpecial_SetMauvilleOldManEventObjGfx(void)
 {
-    VarSet(VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_BARD);
+    VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BARD);
 }
 
 // Language fixers?

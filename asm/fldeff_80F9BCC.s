@@ -1722,7 +1722,7 @@ _080FA9CA:
 sub_80FA9D0: @ 80FA9D0
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r3, =gMapObjects
+	ldr r3, =gEventObjects
 	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
@@ -2312,15 +2312,15 @@ sub_80FAEF0: @ 80FAEF0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAF1C
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAF4E
@@ -2337,7 +2337,7 @@ _080FAF1C:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetSpecialAnim
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -2362,10 +2362,10 @@ sub_80FAF64: @ 80FAF64
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAFC8
@@ -2389,7 +2389,7 @@ sub_80FAF64: @ 80FAF64
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetSpecialAnim
 	b _080FAFC8
 	.pool
 _080FAFC4:

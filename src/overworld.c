@@ -204,7 +204,7 @@ static void sub_8086C90(void);
 static void sub_8086FA0(u16);
 static void sub_8086F38(u16*, s32);
 static u8 npc_something3(u8 a1, u8 a2);
-static u8 LinkPlayerDetectCollision(u8 selfMapObjId, u8 a2, s16 x, s16 y);
+static u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y);
 static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion);
 static void sub_8087878(u8 linkPlayerId, u16 *x, u16 *y);
 static u8 sub_80878A0(u8 linkPlayerId);
@@ -212,15 +212,15 @@ static u8 sub_80878C0(u8 linkPlayerId);
 static s32 sub_80878E4(u8 linkPlayerId);
 static u8 GetLinkPlayerIdAt(s16 x, s16 y);
 static void sub_808796C(u8 linkPlayerId, u8 a2);
-static void ZeroMapObject(struct MapObject *mapObj);
-static void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4);
-static void InitLinkPlayerMapObjectPos(struct MapObject *mapObj, s16 x, s16 y);
+static void ZeroEventObject(struct EventObject *eventObj);
+static void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4);
+static void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s16 y);
 static void sub_80877DC(u8 linkPlayerId, u8 a2);
 static void sub_808780C(u8 linkPlayerId);
 static u8 sub_8087858(u8 linkPlayerId);
 static void sub_8087584(void);
 static u32 sub_8087690(void);
-static void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj);
+static void ZeroLinkPlayerEventObject(struct LinkPlayerEventObject *linkPlayerEventObj);
 static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1);
 static u16 sub_8087480(const u8 *script);
 static void sub_8087510(void);
@@ -267,7 +267,7 @@ EWRAM_DATA static u16 sLastMapSectionId = 0;
 EWRAM_DATA static struct UnkPlayerStruct sUnknown_02032300 = {0};
 EWRAM_DATA static u16 sAmbientCrySpecies = 0;
 EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
-EWRAM_DATA struct LinkPlayerMapObject gLinkPlayerMapObjects[4] = {0};
+EWRAM_DATA struct LinkPlayerEventObject gLinkPlayerEventObjects[4] = {0};
 
 // const rom data
 static const struct WarpData sDummyWarpData =
@@ -352,22 +352,22 @@ static const struct ScanlineEffectParams gUnknown_08339DBC =
     0,
 };
 
-static u8 sub_80879D8(struct LinkPlayerMapObject *, struct MapObject *, u8);
-static u8 sub_80879F8(struct LinkPlayerMapObject *, struct MapObject *, u8);
-static u8 sub_80879FC(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_80879D8(struct LinkPlayerEventObject *, struct EventObject *, u8);
+static u8 sub_80879F8(struct LinkPlayerEventObject *, struct EventObject *, u8);
+static u8 sub_80879FC(struct LinkPlayerEventObject *, struct EventObject *, u8);
 
-static u8 (*const gUnknown_08339DC8[])(struct LinkPlayerMapObject *, struct MapObject *, u8) =
+static u8 (*const gUnknown_08339DC8[])(struct LinkPlayerEventObject *, struct EventObject *, u8) =
 {
     sub_80879D8,
     sub_80879F8,
     sub_80879FC,
 };
 
-static u8 sub_8087A1C(struct LinkPlayerMapObject *, struct MapObject *, u8);
-static u8 sub_8087A20(struct LinkPlayerMapObject *, struct MapObject *, u8);
-static u8 sub_8087A88(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_8087A1C(struct LinkPlayerEventObject *, struct EventObject *, u8);
+static u8 sub_8087A20(struct LinkPlayerEventObject *, struct EventObject *, u8);
+static u8 sub_8087A88(struct LinkPlayerEventObject *, struct EventObject *, u8);
 
-static u8 (*const gUnknown_08339DD4[])(struct LinkPlayerMapObject *, struct MapObject *, u8) =
+static u8 (*const gUnknown_08339DD4[])(struct LinkPlayerEventObject *, struct EventObject *, u8) =
 {
     sub_8087A1C,
     sub_8087A20,
@@ -382,10 +382,10 @@ static u8 (*const gUnknown_08339DD4[])(struct LinkPlayerMapObject *, struct MapO
     sub_8087A88,
 };
 
-static void sub_8087AA0(struct LinkPlayerMapObject *, struct MapObject *);
-static void sub_8087AA8(struct LinkPlayerMapObject *, struct MapObject *);
+static void sub_8087AA0(struct LinkPlayerEventObject *, struct EventObject *);
+static void sub_8087AA8(struct LinkPlayerEventObject *, struct EventObject *);
 
-static void (*const gUnknown_08339E00[])(struct LinkPlayerMapObject *, struct MapObject *) =
+static void (*const gUnknown_08339E00[])(struct LinkPlayerEventObject *, struct EventObject *) =
 {
     sub_8087AA0,
     sub_8087AA8,
@@ -501,55 +501,55 @@ void ApplyNewEncryptionKeyToGameStats(u32 newKey)
         ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->gameStats[i], newKey);
 }
 
-void LoadMapObjTemplatesFromHeader(void)
+void LoadEventObjTemplatesFromHeader(void)
 {
     // Clear map object templates
-    CpuFill32(0, gSaveBlock1Ptr->mapObjectTemplates, sizeof(gSaveBlock1Ptr->mapObjectTemplates));
+    CpuFill32(0, gSaveBlock1Ptr->eventObjectTemplates, sizeof(gSaveBlock1Ptr->eventObjectTemplates));
 
     // Copy map header events to save block
-    CpuCopy32(gMapHeader.events->mapObjects,
-              gSaveBlock1Ptr->mapObjectTemplates,
-              gMapHeader.events->mapObjectCount * sizeof(struct MapObjectTemplate));
+    CpuCopy32(gMapHeader.events->eventObjects,
+              gSaveBlock1Ptr->eventObjectTemplates,
+              gMapHeader.events->eventObjectCount * sizeof(struct EventObjectTemplate));
 }
 
-void LoadSaveblockMapObjScripts(void)
+void LoadSaveblockEventObjScripts(void)
 {
-    struct MapObjectTemplate *mapHeaderObjTemplates = gMapHeader.events->mapObjects;
-    struct MapObjectTemplate *savObjTemplates = gSaveBlock1Ptr->mapObjectTemplates;
+    struct EventObjectTemplate *mapHeaderObjTemplates = gMapHeader.events->eventObjects;
+    struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
     s32 i;
 
     for (i = 0; i < 64; i++)
         savObjTemplates[i].script = mapHeaderObjTemplates[i].script;
 }
 
-void Overworld_SetMapObjTemplateCoords(u8 localId, s16 x, s16 y)
+void Overworld_SetEventObjTemplateCoords(u8 localId, s16 x, s16 y)
 {
     s32 i;
-    struct MapObjectTemplate *savObjTemplates = gSaveBlock1Ptr->mapObjectTemplates;
+    struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
 
     for (i = 0; i < 64; i++)
     {
-        struct MapObjectTemplate *mapObjectTemplate = &savObjTemplates[i];
-        if (mapObjectTemplate->localId == localId)
+        struct EventObjectTemplate *eventObjectTemplate = &savObjTemplates[i];
+        if (eventObjectTemplate->localId == localId)
         {
-            mapObjectTemplate->x = x;
-            mapObjectTemplate->y = y;
+            eventObjectTemplate->x = x;
+            eventObjectTemplate->y = y;
             return;
         }
     }
 }
 
-void Overworld_SetMapObjTemplateMovementType(u8 localId, u8 movementType)
+void Overworld_SetEventObjTemplateMovementType(u8 localId, u8 movementType)
 {
     s32 i;
 
-    struct MapObjectTemplate *savObjTemplates = gSaveBlock1Ptr->mapObjectTemplates;
+    struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
     for (i = 0; i < 64; i++)
     {
-        struct MapObjectTemplate *mapObjectTemplate = &savObjTemplates[i];
-        if (mapObjectTemplate->localId == localId)
+        struct EventObjectTemplate *eventObjectTemplate = &savObjTemplates[i];
+        if (eventObjectTemplate->localId == localId)
         {
-            mapObjectTemplate->movementType = movementType;
+            eventObjectTemplate->movementType = movementType;
             return;
         }
     }
@@ -824,7 +824,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
 
     ApplyCurrentWarp();
     set_current_map_header_from_sav1_save_old_name();
-    LoadMapObjTemplatesFromHeader();
+    LoadEventObjTemplatesFromHeader();
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
@@ -867,7 +867,7 @@ static void mli0_load_map(u32 a1)
         else if (InTrainerHill())
             sub_81D5DF8();
         else
-            LoadMapObjTemplatesFromHeader();
+            LoadEventObjTemplatesFromHeader();
     }
 
     v2 = is_map_type_1_2_3_5_or_6(gMapHeader.mapType);
@@ -1734,9 +1734,9 @@ void CB2_ContinueSavedGame(void)
     else if (trainerHillMapId != 0 && trainerHillMapId != 6)
         sub_81D5F48();
     else
-        LoadSaveblockMapObjScripts();
+        LoadSaveblockEventObjScripts();
 
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
     DoTimeBasedEvents();
     sub_8084788();
     if (gMapHeader.mapDataId == 0x169)
@@ -2170,7 +2170,7 @@ static void sub_80869DC(void)
     gUnknown_03005DEC = 0;
     gUnknown_03005DE8 = 0;
     sub_808D438();
-    SpawnFieldObjectsInView(0, 0);
+    SpawnEventObjectsInView(0, 0);
     mapheader_run_first_tag4_script_list_match();
 }
 
@@ -2187,7 +2187,7 @@ static void mli4_mapscripts_and_other(void)
     InitPlayerAvatar(x, y, player->player_field_1, gSaveBlock2Ptr->playerGender);
     SetPlayerAvatarTransitionFlags(player->player_field_0);
     player_avatar_init_params_reset();
-    SpawnFieldObjectsInView(0, 0);
+    SpawnEventObjectsInView(0, 0);
     mapheader_run_first_tag4_script_list_match();
 }
 
@@ -2200,7 +2200,7 @@ static void sub_8086A68(void)
 
 static void sub_8086A80(void)
 {
-    gMapObjects[gPlayerAvatar.mapObjectId].trackedByCamera = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].trackedByCamera = 1;
     InitCameraUpdateCallback(gPlayerAvatar.spriteId);
 }
 
@@ -2231,7 +2231,7 @@ static void sub_8086B14(void)
 
     for (i = 0; i < gFieldLinkPlayerCount; i++)
     {
-        SpawnLinkPlayerMapObject(i, i + x, y, gLinkPlayers[i].gender);
+        SpawnLinkPlayerEventObject(i, i + x, y, gLinkPlayers[i].gender);
         CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
     }
 
@@ -2676,7 +2676,7 @@ static void sub_80872D8(s32 linkPlayerId, s32 a2, struct UnkStruct_8054FF8 *a3)
 
     a3->a = linkPlayerId;
     a3->b = (linkPlayerId == a2) ? 1 : 0;
-    a3->c = gLinkPlayerMapObjects[linkPlayerId].mode;
+    a3->c = gLinkPlayerEventObjects[linkPlayerId].mode;
     a3->d = sub_80878A0(linkPlayerId);
     sub_8087878(linkPlayerId, &x, &y);
     a3->sub.x = x;
@@ -2889,109 +2889,109 @@ static u32 sub_8087690(void)
         return gLink.sendQueue.count;
 }
 
-static void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj)
+static void ZeroLinkPlayerEventObject(struct LinkPlayerEventObject *linkPlayerEventObj)
 {
-    memset(linkPlayerMapObj, 0, sizeof(struct LinkPlayerMapObject));
+    memset(linkPlayerEventObj, 0, sizeof(struct LinkPlayerEventObject));
 }
 
-void ZeroAllLinkPlayerMapObjects(void)
+void ZeroAllLinkPlayerEventObjects(void)
 {
-    memset(gLinkPlayerMapObjects, 0, sizeof(gLinkPlayerMapObjects));
+    memset(gLinkPlayerEventObjects, 0, sizeof(gLinkPlayerEventObjects));
 }
 
-static void ZeroMapObject(struct MapObject *mapObj)
+static void ZeroEventObject(struct EventObject *eventObj)
 {
-    memset(mapObj, 0, sizeof(struct MapObject));
+    memset(eventObj, 0, sizeof(struct EventObject));
 }
 
-static void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
+static void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
 {
-    u8 mapObjId = sub_808D4F4();
-    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    u8 eventObjId = sub_808D4F4();
+    struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
 
-    ZeroLinkPlayerMapObject(linkPlayerMapObj);
-    ZeroMapObject(mapObj);
+    ZeroLinkPlayerEventObject(linkPlayerEventObj);
+    ZeroEventObject(eventObj);
 
-    linkPlayerMapObj->active = 1;
-    linkPlayerMapObj->linkPlayerId = linkPlayerId;
-    linkPlayerMapObj->mapObjId = mapObjId;
-    linkPlayerMapObj->mode = 0;
+    linkPlayerEventObj->active = 1;
+    linkPlayerEventObj->linkPlayerId = linkPlayerId;
+    linkPlayerEventObj->eventObjId = eventObjId;
+    linkPlayerEventObj->mode = 0;
 
-    mapObj->active = 1;
-    mapObj->singleMovementActive = a4;
-    mapObj->range.as_byte = 2;
-    mapObj->spriteId = 64;
+    eventObj->active = 1;
+    eventObj->singleMovementActive = a4;
+    eventObj->range.as_byte = 2;
+    eventObj->spriteId = 64;
 
-    InitLinkPlayerMapObjectPos(mapObj, x, y);
+    InitLinkPlayerEventObjectPos(eventObj, x, y);
 }
 
-static void InitLinkPlayerMapObjectPos(struct MapObject *mapObj, s16 x, s16 y)
+static void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s16 y)
 {
-    mapObj->currentCoords.x = x;
-    mapObj->currentCoords.y = y;
-    mapObj->previousCoords.x = x;
-    mapObj->previousCoords.y = y;
-    sub_8093038(x, y, &mapObj->initialCoords.x, &mapObj->initialCoords.y);
-    mapObj->initialCoords.x += 8;
-    FieldObjectUpdateZCoord(mapObj);
+    eventObj->currentCoords.x = x;
+    eventObj->currentCoords.y = y;
+    eventObj->previousCoords.x = x;
+    eventObj->previousCoords.y = y;
+    sub_8093038(x, y, &eventObj->initialCoords.x, &eventObj->initialCoords.y);
+    eventObj->initialCoords.x += 8;
+    EventObjectUpdateZCoord(eventObj);
 }
 
 static void sub_80877DC(u8 linkPlayerId, u8 a2)
 {
-    if (gLinkPlayerMapObjects[linkPlayerId].active)
+    if (gLinkPlayerEventObjects[linkPlayerId].active)
     {
-        u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
-        struct MapObject *mapObj = &gMapObjects[mapObjId];
-        mapObj->range.as_byte = a2;
+        u8 eventObjId = gLinkPlayerEventObjects[linkPlayerId].eventObjId;
+        struct EventObject *eventObj = &gEventObjects[eventObjId];
+        eventObj->range.as_byte = a2;
     }
 }
 
 static void sub_808780C(u8 linkPlayerId)
 {
-    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
-    u8 mapObjId = linkPlayerMapObj->mapObjId;
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
-    if (mapObj->spriteId != 64 )
-        DestroySprite(&gSprites[mapObj->spriteId]);
-    linkPlayerMapObj->active = 0;
-    mapObj->active = 0;
+    struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
+    u8 eventObjId = linkPlayerEventObj->eventObjId;
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
+    if (eventObj->spriteId != 64 )
+        DestroySprite(&gSprites[eventObj->spriteId]);
+    linkPlayerEventObj->active = 0;
+    eventObj->active = 0;
 }
 
 static u8 sub_8087858(u8 linkPlayerId)
 {
-    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
-    return mapObj->spriteId;
+    u8 eventObjId = gLinkPlayerEventObjects[linkPlayerId].eventObjId;
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
+    return eventObj->spriteId;
 }
 
 static void sub_8087878(u8 linkPlayerId, u16 *x, u16 *y)
 {
-    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
-    *x = mapObj->currentCoords.x;
-    *y = mapObj->currentCoords.y;
+    u8 eventObjId = gLinkPlayerEventObjects[linkPlayerId].eventObjId;
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
+    *x = eventObj->currentCoords.x;
+    *y = eventObj->currentCoords.y;
 }
 
 static u8 sub_80878A0(u8 linkPlayerId)
 {
-    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
-    return mapObj->range.as_byte;
+    u8 eventObjId = gLinkPlayerEventObjects[linkPlayerId].eventObjId;
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
+    return eventObj->range.as_byte;
 }
 
 static u8 sub_80878C0(u8 linkPlayerId)
 {
-    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
-    return mapObj->currentElevation;
+    u8 eventObjId = gLinkPlayerEventObjects[linkPlayerId].eventObjId;
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
+    return eventObj->currentElevation;
 }
 
 static s32 sub_80878E4(u8 linkPlayerId)
 {
-    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
-    return 16 - (s8)mapObj->directionSequenceIndex;
+    u8 eventObjId = gLinkPlayerEventObjects[linkPlayerId].eventObjId;
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
+    return 16 - (s8)eventObj->directionSequenceIndex;
 }
 
 static u8 GetLinkPlayerIdAt(s16 x, s16 y)
@@ -2999,11 +2999,11 @@ static u8 GetLinkPlayerIdAt(s16 x, s16 y)
     u8 i;
     for (i = 0; i < 4; i++)
     {
-        if (gLinkPlayerMapObjects[i].active
-         && (gLinkPlayerMapObjects[i].mode == 0 || gLinkPlayerMapObjects[i].mode == 2))
+        if (gLinkPlayerEventObjects[i].active
+         && (gLinkPlayerEventObjects[i].mode == 0 || gLinkPlayerEventObjects[i].mode == 2))
         {
-            struct MapObject *mapObj = &gMapObjects[gLinkPlayerMapObjects[i].mapObjId];
-            if (mapObj->currentCoords.x == x && mapObj->currentCoords.y == y)
+            struct EventObject *eventObj = &gEventObjects[gLinkPlayerEventObjects[i].eventObjId];
+            if (eventObj->currentCoords.x == x && eventObj->currentCoords.y == y)
                 return i;
         }
     }
@@ -3012,79 +3012,79 @@ static u8 GetLinkPlayerIdAt(s16 x, s16 y)
 
 static void sub_808796C(u8 linkPlayerId, u8 a2)
 {
-    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
-    u8 mapObjId = linkPlayerMapObj->mapObjId;
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
+    u8 eventObjId = linkPlayerEventObj->eventObjId;
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
 
-    if (linkPlayerMapObj->active)
+    if (linkPlayerEventObj->active)
     {
         if (a2 > 10)
-            mapObj->triggerGroundEffectsOnMove = 1;
+            eventObj->triggerGroundEffectsOnMove = 1;
         else
-            gUnknown_08339E00[gUnknown_08339DC8[linkPlayerMapObj->mode](linkPlayerMapObj, mapObj, a2)](linkPlayerMapObj, mapObj);
+            gUnknown_08339E00[gUnknown_08339DC8[linkPlayerEventObj->mode](linkPlayerEventObj, eventObj, a2)](linkPlayerEventObj, eventObj);
     }
 }
 
-static u8 sub_80879D8(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_80879D8(struct LinkPlayerEventObject *linkPlayerEventObj, struct EventObject *eventObj, u8 a3)
 {
-    return gUnknown_08339DD4[a3](linkPlayerMapObj, mapObj, a3);
+    return gUnknown_08339DD4[a3](linkPlayerEventObj, eventObj, a3);
 }
 
-static u8 sub_80879F8(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_80879F8(struct LinkPlayerEventObject *linkPlayerEventObj, struct EventObject *eventObj, u8 a3)
 {
     return 1;
 }
 
-static u8 sub_80879FC(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_80879FC(struct LinkPlayerEventObject *linkPlayerEventObj, struct EventObject *eventObj, u8 a3)
 {
-    return gUnknown_08339DD4[a3](linkPlayerMapObj, mapObj, a3);
+    return gUnknown_08339DD4[a3](linkPlayerEventObj, eventObj, a3);
 }
 
-static u8 sub_8087A1C(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8087A1C(struct LinkPlayerEventObject *linkPlayerEventObj, struct EventObject *eventObj, u8 a3)
 {
     return 0;
 }
 
-static u8 sub_8087A20(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8087A20(struct LinkPlayerEventObject *linkPlayerEventObj, struct EventObject *eventObj, u8 a3)
 {
     s16 x, y;
 
-    mapObj->range.as_byte = npc_something3(a3, mapObj->range.as_byte);
-    FieldObjectMoveDestCoords(mapObj, mapObj->range.as_byte, &x, &y);
+    eventObj->range.as_byte = npc_something3(a3, eventObj->range.as_byte);
+    EventObjectMoveDestCoords(eventObj, eventObj->range.as_byte, &x, &y);
 
-    if (LinkPlayerDetectCollision(linkPlayerMapObj->mapObjId, mapObj->range.as_byte, x, y))
+    if (LinkPlayerDetectCollision(linkPlayerEventObj->eventObjId, eventObj->range.as_byte, x, y))
     {
         return 0;
     }
     else
     {
-        mapObj->directionSequenceIndex = 16;
-        npc_coords_shift(mapObj, x, y);
-        FieldObjectUpdateZCoord(mapObj);
+        eventObj->directionSequenceIndex = 16;
+        npc_coords_shift(eventObj, x, y);
+        EventObjectUpdateZCoord(eventObj);
         return 1;
     }
 }
 
-static u8 sub_8087A88(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8087A88(struct LinkPlayerEventObject *linkPlayerEventObj, struct EventObject *eventObj, u8 a3)
 {
-    mapObj->range.as_byte = npc_something3(a3, mapObj->range.as_byte);
+    eventObj->range.as_byte = npc_something3(a3, eventObj->range.as_byte);
     return 0;
 }
 
-static void sub_8087AA0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+static void sub_8087AA0(struct LinkPlayerEventObject *linkPlayerEventObj, struct EventObject *eventObj)
 {
-    linkPlayerMapObj->mode = 0;
+    linkPlayerEventObj->mode = 0;
 }
 
-static void sub_8087AA8(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+static void sub_8087AA8(struct LinkPlayerEventObject *linkPlayerEventObj, struct EventObject *eventObj)
 {
-    mapObj->directionSequenceIndex--;
-    linkPlayerMapObj->mode = 1;
-    MoveCoords(mapObj->range.as_byte, &mapObj->initialCoords.x, &mapObj->initialCoords.y);
-    if (!mapObj->directionSequenceIndex)
+    eventObj->directionSequenceIndex--;
+    linkPlayerEventObj->mode = 1;
+    MoveCoords(eventObj->range.as_byte, &eventObj->initialCoords.x, &eventObj->initialCoords.y);
+    if (!eventObj->directionSequenceIndex)
     {
-        npc_coords_shift_still(mapObj);
-        linkPlayerMapObj->mode = 2;
+        npc_coords_shift_still(eventObj);
+        linkPlayerEventObj->mode = 2;
     }
 }
 
@@ -3108,15 +3108,15 @@ static u8 npc_something3(u8 a1, u8 a2)
     return a2;
 }
 
-static u8 LinkPlayerDetectCollision(u8 selfMapObjId, u8 a2, s16 x, s16 y)
+static u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y)
 {
     u8 i;
     for (i = 0; i < 16; i++)
     {
-        if (i != selfMapObjId)
+        if (i != selfEventObjId)
         {
-            if ((gMapObjects[i].currentCoords.x == x && gMapObjects[i].currentCoords.y == y)
-             || (gMapObjects[i].previousCoords.x == x && gMapObjects[i].previousCoords.y == y))
+            if ((gEventObjects[i].currentCoords.x == x && gEventObjects[i].currentCoords.y == y)
+             || (gEventObjects[i].previousCoords.x == x && gEventObjects[i].previousCoords.y == y))
             {
                 return 1;
             }
@@ -3127,51 +3127,51 @@ static u8 LinkPlayerDetectCollision(u8 selfMapObjId, u8 a2, s16 x, s16 y)
 
 static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
 {
-    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
-    u8 mapObjId = linkPlayerMapObj->mapObjId;
-    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
+    u8 eventObjId = linkPlayerEventObj->eventObjId;
+    struct EventObject *eventObj = &gEventObjects[eventObjId];
     struct Sprite *sprite;
 
-    if (linkPlayerMapObj->active)
+    if (linkPlayerEventObj->active)
     {
         switch (gameVersion)
         {
         case VERSION_FIRE_RED:
         case VERSION_LEAF_GREEN:
-            mapObj->spriteId = AddPseudoFieldObject(sub_808BD6C(mapObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
+            eventObj->spriteId = AddPseudoEventObject(sub_808BD6C(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_RUBY:
         case VERSION_SAPPHIRE:
-            mapObj->spriteId = AddPseudoFieldObject(sub_808BD7C(mapObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
+            eventObj->spriteId = AddPseudoEventObject(sub_808BD7C(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_EMERALD:
-            mapObj->spriteId = AddPseudoFieldObject(GetRivalAvatarGraphicsIdByStateIdAndGender(0, mapObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
+            eventObj->spriteId = AddPseudoEventObject(GetRivalAvatarGraphicsIdByStateIdAndGender(0, eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         }
 
-        sprite = &gSprites[mapObj->spriteId];
+        sprite = &gSprites[eventObj->spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = linkPlayerId;
-        mapObj->triggerGroundEffectsOnMove = 0;
+        eventObj->triggerGroundEffectsOnMove = 0;
     }
 }
 
 static void SpriteCB_LinkPlayer(struct Sprite *sprite)
 {
-    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data[0]];
-    struct MapObject *mapObj = &gMapObjects[linkPlayerMapObj->mapObjId];
-    sprite->pos1.x = mapObj->initialCoords.x;
-    sprite->pos1.y = mapObj->initialCoords.y;
-    SetObjectSubpriorityByZCoord(mapObj->previousElevation, sprite, 1);
-    sprite->oam.priority = ZCoordToPriority(mapObj->previousElevation);
+    struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[sprite->data[0]];
+    struct EventObject *eventObj = &gEventObjects[linkPlayerEventObj->eventObjId];
+    sprite->pos1.x = eventObj->initialCoords.x;
+    sprite->pos1.y = eventObj->initialCoords.y;
+    SetObjectSubpriorityByZCoord(eventObj->previousElevation, sprite, 1);
+    sprite->oam.priority = ZCoordToPriority(eventObj->previousElevation);
 
-	if (!linkPlayerMapObj->mode)
-        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObj->range.as_byte));
+	if (!linkPlayerEventObj->mode)
+        StartSpriteAnim(sprite, EventObjectDirectionToImageAnimId(eventObj->range.as_byte));
     else
-        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(mapObj->range.as_byte));
+        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(eventObj->range.as_byte));
 
 	sub_80979D4(sprite, 0);
-    if (mapObj->triggerGroundEffectsOnMove)
+    if (eventObj->triggerGroundEffectsOnMove)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);
         sprite->data[7]++;

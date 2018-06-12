@@ -406,7 +406,7 @@ void CameraUpdate(void)
     if (deltaX != 0 || deltaY != 0)
     {
         CameraMove(deltaX, deltaY);
-        UpdateFieldObjectsForCameraUpdate(deltaX, deltaY);
+        UpdateEventObjectsForCameraUpdate(deltaX, deltaY);
         RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
         ResetBerryTreeSparkleFlags();
         tilemap_move_something(&gUnknown_03000E20, deltaX * 2, deltaY * 2);
@@ -421,7 +421,7 @@ void CameraUpdate(void)
 void camera_move_and_redraw(int a, int b) //unused
 {
     CameraMove(a, b);
-    UpdateFieldObjectsForCameraUpdate(a, b);
+    UpdateEventObjectsForCameraUpdate(a, b);
     DrawWholeMapView();
     gUnknown_03005DEC -= a * 16;
     gUnknown_03005DE8 -= b * 16;

@@ -1,5 +1,5 @@
-IslandCave_MapObjects: @ 8536C74
-	object_event 1, MAP_OBJ_GFX_REGICE, 0, 0, 8, 7, 3, 8, 0, 0, 0, 0, IslandCave_EventScript_238F58, 936, 0, 0
+IslandCave_EventObjects: @ 8536C74
+	object_event 1, EVENT_OBJ_GFX_REGICE, 0, 0, 8, 7, 3, 8, 0, 0, 0, 0, IslandCave_EventScript_238F58, 936, 0, 0
 
 IslandCave_MapWarps: @ 8536C8C
 	warp_def 8, 29, 3, 0, ROUTE_105
@@ -12,5 +12,5 @@ IslandCave_MapBGEvents: @ 8536CA4
 	bg_event 9, 20, 0, 0, 0, IslandCave_EventScript_238F1D
 
 IslandCave_MapEvents:: @ 8536CC8
-	map_events IslandCave_MapObjects, IslandCave_MapWarps, 0x0, IslandCave_MapBGEvents
+	map_events IslandCave_EventObjects, IslandCave_MapWarps, 0x0, IslandCave_MapBGEvents
 

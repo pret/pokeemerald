@@ -100,7 +100,7 @@ _08153F7A:
 sub_8153F98: @ 8153F98
 	push {lr}
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	ldrh r0, [r0, 0xA]
 	subs r0, 0x2
 	lsls r0, 16
@@ -123,7 +123,7 @@ npc_pal_op: @ 8153FAC
 	movs r0, 0
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	ldrb r1, [r0, 0xC]
 	movs r0, 0x80
 	ands r0, r1
@@ -172,7 +172,7 @@ npc_pal_op_B: @ 815401C
 	lsls r1, 24
 	lsrs r4, r1, 24
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	adds r2, r0, 0
 	ldrh r1, [r2, 0x4]
 	ldr r0, =0x000011ff
@@ -217,7 +217,7 @@ npc_pal_op_A: @ 8154078
 	lsls r1, 24
 	lsrs r4, r1, 24
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	adds r2, r0, 0
 	ldrh r1, [r2, 0x4]
 	ldr r0, =0x000011ff
@@ -248,7 +248,7 @@ objc_reflection_maybe: @ 81540A8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r7, r0, r1
 	ldrb r1, [r7, 0x4]
 	lsls r0, r1, 4
@@ -578,16 +578,16 @@ oei_shadow: @ 8154340
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r2
 	ldrb r0, [r1, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	adds r4, r0, 0
 	ldr r2, =gFieldEffectObjectTemplatePointers
 	ldr r1, =gUnknown_085CDC3E
@@ -659,7 +659,7 @@ oamc_shadow: @ 81543E4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _08154412
@@ -673,7 +673,7 @@ _08154412:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x4]
 	lsls r1, r0, 4
@@ -877,7 +877,7 @@ _0815459C:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _081545F0
@@ -909,7 +909,7 @@ _08154604:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r2, r0, r1
 	ldr r0, [r2, 0x10]
 	ldr r1, [r5, 0x30]
@@ -1216,7 +1216,7 @@ _0815484C:
 	adds r1, r7, 0
 	adds r2, r6, 0
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _081548A0
@@ -1248,7 +1248,7 @@ _081548B4:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r2, r0, r1
 	ldr r0, [r2, 0x10]
 	ldr r1, [r5, 0x30]
@@ -1340,13 +1340,13 @@ sub_815496C: @ 815496C
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r5, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x78]
@@ -1428,11 +1428,11 @@ sub_8154A10: @ 8154A10
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08154A4E
-	ldr r5, =gMapObjects
+	ldr r5, =gEventObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1451,7 +1451,7 @@ _08154A4E:
 	.pool
 _08154A5C:
 	ldrb r0, [r1, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	mov r8, r0
 	mov r0, sp
 	ldrb r1, [r0]
@@ -1781,13 +1781,13 @@ sub_8154CEC: @ 8154CEC
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r5, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x34]
@@ -1800,7 +1800,7 @@ sub_8154CEC: @ 8154CEC
 	cmp r4, 0x40
 	beq _08154D76
 	ldrb r0, [r5, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	lsls r3, r4, 4
 	adds r3, r4
 	lsls r3, 2
@@ -1870,7 +1870,7 @@ sub_8154D90: @ 8154D90
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _08154DCA
@@ -1881,7 +1881,7 @@ _08154DC0:
 	b _08154E0A
 _08154DCA:
 	ldr r3, =gSprites
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -2034,13 +2034,13 @@ sub_8154EFC: @ 8154EFC
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r6, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x34]
@@ -2053,7 +2053,7 @@ sub_8154EFC: @ 8154EFC
 	cmp r5, 0x40
 	beq _08154F92
 	ldrb r0, [r6, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	adds r4, r0, 0
 	lsls r0, r5, 4
 	adds r0, r5
@@ -2123,11 +2123,11 @@ sub_8154FB4: @ 8154FB4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08154FEE
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -2242,13 +2242,13 @@ sub_81550B4: @ 81550B4
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r5, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x7C]
@@ -2328,11 +2328,11 @@ sub_8155158: @ 8155158
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08155192
-	ldr r5, =gMapObjects
+	ldr r5, =gEventObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -2351,7 +2351,7 @@ _08155192:
 	.pool
 _081551A0:
 	ldrb r0, [r1, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	mov r1, sp
 	ldrb r2, [r1]
 	lsls r1, r2, 3
@@ -2765,7 +2765,7 @@ sub_81554AC: @ 81554AC
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
 	bl CurrentMapDrawMetatileAt
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2972,7 +2972,7 @@ sub_8155658: @ 8155658
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	ldrb r0, [r4, 0x4]
 	lsls r5, r0, 4
@@ -3319,13 +3319,13 @@ sub_8155900: @ 8155900
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r6, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x74]
@@ -3338,7 +3338,7 @@ sub_8155900: @ 8155900
 	cmp r4, 0x40
 	beq _081559A4
 	ldrb r0, [r6, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	adds r5, r0, 0
 	lsls r0, r4, 4
 	adds r0, r4
@@ -3415,11 +3415,11 @@ sub_81559BC: @ 81559BC
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _081559F6
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3474,7 +3474,7 @@ _08155A46:
 	strh r6, [r4, 0x20]
 	strh r5, [r4, 0x22]
 	ldr r3, =gSprites
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3694,7 +3694,7 @@ ShowDisguiseFieldEffect: @ 8155BD0
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _08155C08
@@ -3783,7 +3783,7 @@ sub_8155C88: @ 8155C88
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _08155CB8
@@ -3793,7 +3793,7 @@ sub_8155C88: @ 8155C88
 	adds r0, r5, 0
 	bl FieldEffectStop
 _08155CB8:
-	ldr r4, =gMapObjects
+	ldr r4, =gEventObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3801,7 +3801,7 @@ _08155CB8:
 	lsls r0, 2
 	adds r0, r4
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	mov r1, sp
 	ldrb r2, [r1]
 	lsls r1, r2, 3
@@ -4514,14 +4514,14 @@ _08156212:
 	lsls r0, r7, 3
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	ldrb r0, [r4]
 	lsls r0, 31
 	cmp r0, 0
 	beq _081562B4
 	ldrb r0, [r4, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1

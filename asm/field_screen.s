@@ -8382,7 +8382,7 @@ _080AF46C:
 _080AF480:
 	movs r0, 0
 	bl sub_80AF0F4
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	adds r0, r6, 0
 	adds r1, r7, 0
 	bl PlayerGetDestCoords
@@ -8403,17 +8403,17 @@ _080AF4A4:
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
 	movs r1, 0x8
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetSpecialAnim
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _080AF54A
@@ -8434,16 +8434,16 @@ _080AF4DC:
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0x3
 	strh r0, [r5, 0x8]
 	b _080AF54A
@@ -8461,7 +8461,7 @@ _080AF520:
 	cmp r0, 0x1
 	beq _080AF54A
 _080AF536:
-	bl UnfreezeMapObjects
+	bl UnfreezeEventObjects
 	movs r0, 0x4
 	strh r0, [r5, 0x8]
 	b _080AF54A
@@ -8508,7 +8508,7 @@ _080AF580:
 _080AF58A:
 	movs r0, 0
 	bl sub_80AF0F4
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	adds r0, r6, 0
 	adds r1, r7, 0
 	bl PlayerGetDestCoords
@@ -8524,13 +8524,13 @@ _080AF5A2:
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -8540,7 +8540,7 @@ _080AF5A2:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetSpecialAnim
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _080AF60A
@@ -8550,7 +8550,7 @@ _080AF5EC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF60A
-	bl UnfreezeMapObjects
+	bl UnfreezeEventObjects
 	movs r0, 0x3
 	strh r0, [r5, 0x8]
 	b _080AF60A
@@ -8583,7 +8583,7 @@ task_map_chg_seq_0807E2CC: @ 80AF610
 	b _080AF65A
 	.pool
 _080AF634:
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	bl ScriptContext2_Enable
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -8593,7 +8593,7 @@ _080AF644:
 	bl sub_80AF71C
 	cmp r0, 0
 	beq _080AF65A
-	bl UnfreezeMapObjects
+	bl UnfreezeEventObjects
 	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
@@ -8861,7 +8861,7 @@ sub_80AF87C: @ 80AF87C
 	movs r0, 0x1
 	bl sub_8085540
 	bl ScriptContext2_Enable
-	bl SaveMapObjects
+	bl SaveEventObjects
 	bl music_something
 	bl sub_80AF0B4
 	movs r0, 0x2D
@@ -9062,7 +9062,7 @@ _080AFA34:
 	beq _080AFA6C
 	b _080AFA7C
 _080AFA3A:
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	bl ScriptContext2_Enable
 	b _080AFA64
 _080AFA44:
@@ -9133,7 +9133,7 @@ _080AFAC0:
 	.4byte _080AFBB8
 	.4byte _080AFBD4
 _080AFAD4:
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl PlayerGetDestCoords
@@ -9174,20 +9174,20 @@ _080AFB26:
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gMapObjects
+	ldr r4, =gEventObjects
 	adds r0, r4
-	bl FieldObjectClearAnimIfSpecialAnimActive
+	bl EventObjectClearAnimIfSpecialAnimActive
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -9196,7 +9196,7 @@ _080AFB26:
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x9
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetSpecialAnim
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _080AFBE8
@@ -9218,16 +9218,16 @@ _080AFB6C:
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0
 	bl sub_80AF0F4
 	movs r0, 0x3
@@ -9290,7 +9290,7 @@ _080AFC1C:
 	beq _080AFC46
 	b _080AFC56
 _080AFC22:
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	bl ScriptContext2_Enable
 	b _080AFC3E
 _080AFC2C:
@@ -9982,7 +9982,7 @@ task0A_mpl_807E31C: @ 80B0160
 	b _080B01B6
 	.pool
 _080B0184:
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	bl ScriptContext2_Enable
 	bl sub_808D194
 	ldrh r0, [r4, 0x8]
@@ -9996,7 +9996,7 @@ _080B0198:
 	bl sub_808D1B4
 	cmp r0, 0x1
 	beq _080B01B6
-	bl UnfreezeMapObjects
+	bl UnfreezeEventObjects
 	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
@@ -10033,7 +10033,7 @@ _080B01E4:
 	beq _080B022A
 	b _080B023A
 _080B01EE:
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	bl ScriptContext2_Enable
 	movs r0, 0x2D
 	bl PlaySE

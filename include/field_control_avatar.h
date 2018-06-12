@@ -30,7 +30,7 @@ u8 *sub_80682A8(struct MapPosition *, u8, u8);
 void overworld_poison_timer_set(void);
 void prev_quest_postbuffer_cursor_backup_reset(void);
 u8 *sub_8068E24(struct MapPosition *);
-u8 *GetFieldObjectScriptPointerPlayerFacing(void);
+u8 *GetEventObjectScriptPointerPlayerFacing(void);
 bool8 mapheader_trigger_activate_at__run_now(struct MapPosition *);
 bool8 sub_8068870(u16 a);
 bool8 sub_8068894(void);

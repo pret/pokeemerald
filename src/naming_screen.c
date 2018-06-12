@@ -25,7 +25,7 @@
 #include "menu.h"
 #include "text_window.h"
 #include "overworld.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 
 EWRAM_DATA static struct NamingScreenData *gNamingScreenData = NULL;
 extern u16 gKeyRepeatStartDelay;
@@ -1142,7 +1142,7 @@ static void NamingScreen_CreatePlayerIcon(void)
     u8 spriteId;
 
     rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gNamingScreenData->monSpecies);
-    spriteId = AddPseudoFieldObject(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
+    spriteId = AddPseudoEventObject(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
 }
@@ -1169,7 +1169,7 @@ static void NamingScreen_CreateWandaDadIcon(void)
 {
     u8 spriteId;
 
-    spriteId = AddPseudoFieldObject(MAP_OBJ_GFX_MAN_1, SpriteCallbackDummy, 0x38, 0x25, 0);
+    spriteId = AddPseudoEventObject(EVENT_OBJ_GFX_MAN_1, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
 }

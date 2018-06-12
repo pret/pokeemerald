@@ -1,13 +1,13 @@
-BattleFrontier_BattleTowerLobby_MapObjects: @ 853B638
-	object_event 1, MAP_OBJ_GFX_TEALA, 0, 0, 6, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23E936, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_MAN_5, 0, 0, 23, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EEE7, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_WOMAN_7, 0, 0, 17, 8, 3, 2, 17, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EFB5, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_BOY_1, 0, 0, 15, 9, 3, 2, 17, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EFBE, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_REPORTER_F, 0, 0, 11, 9, 3, 10, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_28CB96, 918, 0, 0
-	object_event 6, MAP_OBJ_GFX_HIPSTER, 0, 0, 1, 5, 3, 8, 17, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_2B688D, 701, 0, 0
-	object_event 7, MAP_OBJ_GFX_TEALA, 0, 0, 10, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EA9F, 0, 0, 0
-	object_event 8, MAP_OBJ_GFX_TEALA, 0, 0, 14, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EC08, 0, 0, 0
-	object_event 9, MAP_OBJ_GFX_TEALA, 0, 0, 18, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23ED74, 0, 0, 0
+BattleFrontier_BattleTowerLobby_EventObjects: @ 853B638
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 0, 6, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23E936, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_5, 0, 0, 23, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EEE7, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 17, 8, 3, 2, 17, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EFB5, 0, 0, 0
+	object_event 4, EVENT_OBJ_GFX_BOY_1, 0, 0, 15, 9, 3, 2, 17, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EFBE, 0, 0, 0
+	object_event 5, EVENT_OBJ_GFX_REPORTER_F, 0, 0, 11, 9, 3, 10, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_28CB96, 918, 0, 0
+	object_event 6, EVENT_OBJ_GFX_HIPSTER, 0, 0, 1, 5, 3, 8, 17, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_2B688D, 701, 0, 0
+	object_event 7, EVENT_OBJ_GFX_TEALA, 0, 0, 10, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EA9F, 0, 0, 0
+	object_event 8, EVENT_OBJ_GFX_TEALA, 0, 0, 14, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23EC08, 0, 0, 0
+	object_event 9, EVENT_OBJ_GFX_TEALA, 0, 0, 18, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23ED74, 0, 0, 0
 
 BattleFrontier_BattleTowerLobby_MapWarps: @ 853B710
 	warp_def 12, 9, 3, 0, BATTLE_FRONTIER_OUTSIDE_EAST
@@ -22,5 +22,5 @@ BattleFrontier_BattleTowerLobby_MapBGEvents: @ 853B728
 	bg_event 2, 1, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23F4BE
 
 BattleFrontier_BattleTowerLobby_MapEvents:: @ 853B764
-	map_events BattleFrontier_BattleTowerLobby_MapObjects, BattleFrontier_BattleTowerLobby_MapWarps, 0x0, BattleFrontier_BattleTowerLobby_MapBGEvents
+	map_events BattleFrontier_BattleTowerLobby_EventObjects, BattleFrontier_BattleTowerLobby_MapWarps, 0x0, BattleFrontier_BattleTowerLobby_MapBGEvents
 

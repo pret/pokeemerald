@@ -15,7 +15,7 @@ extern struct BardSong gBardSong;
 
 void SetMauvilleOldMan(void);
 u8 GetCurrentMauvilleOldMan(void);
-void ScrSpecial_SetMauvilleOldManMapObjGfx(void);
+void ScrSpecial_SetMauvilleOldManEventObjGfx(void);
 u8 sub_81201C8(void);
 void sub_8120B70(OldMan *dest);
 void sub_8120670(void);

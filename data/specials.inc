@@ -47,19 +47,19 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B3254
 	def_special sub_80B2FD8
 	def_special GetLinkPartnerNames
-	def_special SpawnLinkPartnerFieldObject
+	def_special SpawnLinkPartnerEventObject
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
 	def_special sub_80F9438
 	def_special sp02A_crash_sound
-	def_special FieldObjectInteractionGetBerryTreeData
-	def_special FieldObjectInteractionGetBerryName
-	def_special FieldObjectInteractionGetBerryCountString
+	def_special EventObjectInteractionGetBerryTreeData
+	def_special EventObjectInteractionGetBerryName
+	def_special EventObjectInteractionGetBerryCountString
 	def_special Bag_ChooseBerry
-	def_special FieldObjectInteractionPlantBerryTree
-	def_special FieldObjectInteractionPickBerryTree
-	def_special FieldObjectInteractionRemoveBerryTree
-	def_special FieldObjectInteractionWaterBerryTree
+	def_special EventObjectInteractionPlantBerryTree
+	def_special EventObjectInteractionPickBerryTree
+	def_special EventObjectInteractionRemoveBerryTree
+	def_special EventObjectInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
 	def_special GetTrainerBattleMode
@@ -115,7 +115,7 @@ gSpecials:: @ 81DBA64
 	def_special ScrSpecial_SetHipsterSpokenFlag
 	def_special ScrSpecial_HipsterTeachWord
 	def_special ScrSpecial_PlayBardSong
-	def_special ScrSpecial_SetMauvilleOldManMapObjGfx
+	def_special ScrSpecial_SetMauvilleOldManEventObjGfx
 	def_special ScrSpecial_GenerateGiddyLine
 	def_special ScrSpecial_GiddyShouldTellAnotherTale
 	def_special ScrSpecial_StorytellerGetFreeStorySlot
@@ -190,7 +190,7 @@ gSpecials:: @ 81DBA64
 	def_special IsTVShowInSearchOfTrainersAiring
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GabbyAndTySetScriptVarsToFieldObjectLocalIds
+	def_special GabbyAndTySetScriptVarsToEventObjectLocalIds
 	def_special sub_8138B80
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -286,8 +286,8 @@ gSpecials:: @ 81DBA64
 	def_special GameClear
 	def_special sub_8139A78
 	def_special nullsub_55
-	def_special SpawnScriptFieldObject
-	def_special RemoveScriptFieldObject
+	def_special SpawnScriptEventObject
+	def_special RemoveScriptEventObject
 	def_special GetPokeblockNameByMonNature
 	def_special GetSecretBaseNearbyMapName
 	def_special CheckRelicanthWailord

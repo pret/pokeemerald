@@ -11,12 +11,12 @@
 
 // Exported ROM declarations
 u8 sub_8154228(void);
-bool8 sub_8155DA0(struct MapObject *);
-void sub_8155D78(struct MapObject *);
+bool8 sub_8155DA0(struct EventObject *);
+void sub_8155D78(struct EventObject *);
 void sub_81555AC(u8, u8);
 void ash(s16, s16, u16, s16);
-void SetUpReflection(struct MapObject*, struct Sprite*, u8);
-u32 StartFieldEffectForEventObject(u8, struct MapObject*);
+void SetUpReflection(struct EventObject*, struct Sprite*, u8);
+u32 StartFieldEffectForEventObject(u8, struct EventObject*);
 u8 sub_81546C8(u8, u8, u8, s16, s16);
 void sub_8155F80(struct Sprite*);
 void oamc_shadow(struct Sprite*);

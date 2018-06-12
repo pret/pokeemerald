@@ -138,7 +138,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255256:: @ 8255256
 	special sub_81A1780
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_2552D0
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, BattleFrontier_BattlePyramidTop_Movement_25540C
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_255669, 4
@@ -185,7 +185,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255335:: @ 8255335
 	special sub_81A1780
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_255388
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, BattleFrontier_BattlePyramidTop_Movement_25540C
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_255951, 4

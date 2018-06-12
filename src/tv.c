@@ -1037,7 +1037,7 @@ u8 GabbyAndTyGetLastBattleTrivia(void)
     return 0;
 }
 
-void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void)
+void GabbyAndTySetScriptVarsToEventObjectLocalIds(void)
 {
     switch (GabbyAndTyGetBattleNum())
     {
@@ -3602,7 +3602,7 @@ void GetMomOrDadStringForTVMessage(void)
 void sub_80F01B8(void)
 {
     VarSet(VAR_0x40BC, 0);
-    RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     FlagSet(0x396);
 }
 

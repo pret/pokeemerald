@@ -1,5 +1,5 @@
 #include "global.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "constants/songs.h"
 #include "rom6.h"
 #include "braille_puzzles.h"
@@ -32,18 +32,18 @@ extern struct MapPosition gUnknown_0203AB40;
 // text
 bool8 npc_before_player_of_type(u8 a)
 {
-    u8 mapObjId;
+    u8 eventObjId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203AB40.x, &gUnknown_0203AB40.y);
     gUnknown_0203AB40.height = PlayerGetZCoord();
-    mapObjId = GetFieldObjectIdByXYZ(gUnknown_0203AB40.x, gUnknown_0203AB40.y, gUnknown_0203AB40.height);
-    if (gMapObjects[mapObjId].graphicsId != a)
+    eventObjId = GetEventObjectIdByXYZ(gUnknown_0203AB40.x, gUnknown_0203AB40.y, gUnknown_0203AB40.height);
+    if (gEventObjects[eventObjId].graphicsId != a)
     {
         return FALSE;
     }
     else
     {
-        gSpecialVar_LastTalked = gMapObjects[mapObjId].localId;
+        gSpecialVar_LastTalked = gEventObjects[eventObjId].localId;
         return TRUE;
     }
 }
@@ -56,13 +56,13 @@ u8 oei_task_add(void)
 
 static void task08_080C9820(u8 taskId)
 {
-    u8 mapObjId;
+    u8 eventObjId;
 
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
-    mapObjId = gPlayerAvatar.mapObjectId;
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gMapObjects[mapObjId])
-     || FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
+    eventObjId = gPlayerAvatar.eventObjectId;
+    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gEventObjects[eventObjId])
+     || EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[eventObjId]))
     {
         if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {
@@ -72,7 +72,7 @@ static void task08_080C9820(u8 taskId)
         else
         {
             sub_808C114();
-            FieldObjectSetSpecialAnim(&gMapObjects[mapObjId], 0x39);
+            EventObjectSetSpecialAnim(&gEventObjects[eventObjId], 0x39);
             gTasks[taskId].func = sub_813552C;
         }
     }
@@ -80,7 +80,7 @@ static void task08_080C9820(u8 taskId)
 
 static void sub_813552C(u8 taskId)
 {
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[gPlayerAvatar.mapObjectId]) == TRUE)
+    if (EventObjectCheckIfSpecialAnimFinishedOrInactive(&gEventObjects[gPlayerAvatar.eventObjectId]) == TRUE)
     {
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = sub_8135578;
@@ -100,7 +100,7 @@ static void sub_8135578(u8 taskId)
             gFieldEffectArguments[2] = 2;
         if (gFieldEffectArguments[1] == 4)
             gFieldEffectArguments[2] = 3;
-        FieldObjectSetGraphicsId(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
+        EventObjectSetGraphicsId(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
         StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectArguments[2]);
         FieldEffectActiveListRemove(6);
         gTasks[taskId].func = sub_813561C;

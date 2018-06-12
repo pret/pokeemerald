@@ -112,7 +112,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2BF:: @ 825D2BF
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E311, 4
 	closemessage
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B0
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7E2
 	waitmovement 0

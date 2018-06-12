@@ -1,20 +1,20 @@
-RustboroCity_MapObjects: @ 85267E0
-	object_event 1, MAP_OBJ_GFX_WOMAN_7, 0, 0, 22, 34, 3, 3, 16, 0, 0, 0, RustboroCity_EventScript_1E088A, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_FAT_MAN, 0, 0, 19, 13, 3, 1, 17, 0, 0, 0, RustboroCity_EventScript_1E085F, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 0, 25, 37, 3, 7, 0, 0, 0, 0, RustboroCity_EventScript_1E08DA, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 0, 21, 46, 3, 3, 16, 0, 0, 0, RustboroCity_EventScript_1E08D1, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_BOY_2, 0, 0, 12, 45, 3, 1, 0, 0, 0, 0, RustboroCity_EventScript_1E08B2, 0, 0, 0
-	object_event 6, MAP_OBJ_GFX_MAN_4, 0, 0, 26, 23, 3, 1, 17, 0, 0, 0, RustboroCity_EventScript_1E0893, 0, 0, 0
-	object_event 7, MAP_OBJ_GFX_LITTLE_BOY_2, 0, 0, 24, 51, 3, 10, 0, 0, 0, 0, RustboroCity_EventScript_1E0922, 0, 0, 0
-	object_event 8, MAP_OBJ_GFX_LITTLE_GIRL_2, 0, 0, 25, 51, 3, 9, 0, 0, 0, 0, RustboroCity_EventScript_1E0938, 0, 0, 0
-	object_event 9, MAP_OBJ_GFX_MAN_2, 0, 0, 30, 10, 3, 10, 17, 0, 0, 0, RustboroCity_EventScript_1E0ADD, 732, 0, 0
-	object_event 10, MAP_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 13, 21, 3, 10, 0, 0, 0, 0, 0x0, 731, 0, 0
-	object_event 11, MAP_OBJ_GFX_MAN_7, 0, 0, 13, 34, 3, 2, 17, 0, 0, 0, RustboroCity_EventScript_1E087E, 0, 0, 0
-	object_event 12, MAP_OBJ_GFX_ITEM_BALL, 0, 0, 36, 51, 3, 1, 0, 0, 0, 0, RustboroCity_EventScript_2910DB, 1041, 0, 0
-	object_event 13, MAP_OBJ_GFX_MAN_5, 0, 0, 19, 27, 3, 8, 16, 0, 0, 0, RustboroCity_EventScript_1E094E, 0, 0, 0
-	object_event 14, MAP_OBJ_GFX_HIPSTER, 0, 0, 16, 50, 3, 1, 17, 0, 0, 0, RustboroCity_EventScript_1E0DB8, 814, 0, 0
-	object_event 15, MAP_OBJ_GFX_SCIENTIST_1, 0, 0, 11, 15, 0, 1, 17, 0, 0, 0, 0x0, 844, 0, 0
-	object_event 16, MAP_OBJ_GFX_BOY_1, 0, 0, 31, 36, 3, 1, 16, 0, 0, 0, RustboroCity_EventScript_1E1236, 0, 0, 0
+RustboroCity_EventObjects: @ 85267E0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 22, 34, 3, 3, 16, 0, 0, 0, RustboroCity_EventScript_1E088A, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_FAT_MAN, 0, 0, 19, 13, 3, 1, 17, 0, 0, 0, RustboroCity_EventScript_1E085F, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 0, 25, 37, 3, 7, 0, 0, 0, 0, RustboroCity_EventScript_1E08DA, 0, 0, 0
+	object_event 4, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 0, 21, 46, 3, 3, 16, 0, 0, 0, RustboroCity_EventScript_1E08D1, 0, 0, 0
+	object_event 5, EVENT_OBJ_GFX_BOY_2, 0, 0, 12, 45, 3, 1, 0, 0, 0, 0, RustboroCity_EventScript_1E08B2, 0, 0, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 0, 26, 23, 3, 1, 17, 0, 0, 0, RustboroCity_EventScript_1E0893, 0, 0, 0
+	object_event 7, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 0, 24, 51, 3, 10, 0, 0, 0, 0, RustboroCity_EventScript_1E0922, 0, 0, 0
+	object_event 8, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 0, 25, 51, 3, 9, 0, 0, 0, 0, RustboroCity_EventScript_1E0938, 0, 0, 0
+	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 0, 30, 10, 3, 10, 17, 0, 0, 0, RustboroCity_EventScript_1E0ADD, 732, 0, 0
+	object_event 10, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 13, 21, 3, 10, 0, 0, 0, 0, 0x0, 731, 0, 0
+	object_event 11, EVENT_OBJ_GFX_MAN_7, 0, 0, 13, 34, 3, 2, 17, 0, 0, 0, RustboroCity_EventScript_1E087E, 0, 0, 0
+	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 36, 51, 3, 1, 0, 0, 0, 0, RustboroCity_EventScript_2910DB, 1041, 0, 0
+	object_event 13, EVENT_OBJ_GFX_MAN_5, 0, 0, 19, 27, 3, 8, 16, 0, 0, 0, RustboroCity_EventScript_1E094E, 0, 0, 0
+	object_event 14, EVENT_OBJ_GFX_HIPSTER, 0, 0, 16, 50, 3, 1, 17, 0, 0, 0, RustboroCity_EventScript_1E0DB8, 814, 0, 0
+	object_event 15, EVENT_OBJ_GFX_SCIENTIST_1, 0, 0, 11, 15, 0, 1, 17, 0, 0, 0, 0x0, 844, 0, 0
+	object_event 16, EVENT_OBJ_GFX_BOY_1, 0, 0, 31, 36, 3, 1, 16, 0, 0, 0, RustboroCity_EventScript_1E1236, 0, 0, 0
 
 RustboroCity_MapWarps: @ 8526960
 	warp_def 27, 19, 0, 0, RUSTBORO_CITY_GYM
@@ -66,5 +66,5 @@ RustboroCity_MapBGEvents: @ 8526B10
 	bg_event 12, 38, 3, 0, 0, RustboroCity_EventScript_1E0919
 
 RustboroCity_MapEvents:: @ 8526B88
-	map_events RustboroCity_MapObjects, RustboroCity_MapWarps, RustboroCity_MapCoordEvents, RustboroCity_MapBGEvents
+	map_events RustboroCity_EventObjects, RustboroCity_MapWarps, RustboroCity_MapCoordEvents, RustboroCity_MapBGEvents
 

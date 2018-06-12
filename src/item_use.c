@@ -579,15 +579,15 @@ u8 sub_80FD9B0(s16 itemX, s16 itemY)
 
 void sub_80FDA24(u8 direction)
 {
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    FieldObjectClearAnim(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    npc_sync_anim_pause_bits(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    EventObjectClearAnim(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    npc_sync_anim_pause_bits(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
     PlayerTurnInPlace(direction);
 }
 
 void sub_80FDA94(u8 taskId)
 {
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
+    if (EventObjectCheckIfSpecialAnimFinishedOrInactive(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
         DisplayItemMessageOnField(taskId, gText_ItemFinderNearby, sub_80FD5CC);
 }
 
@@ -595,7 +595,7 @@ void sub_80FDADC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
+    if (EventObjectCheckIfSpecialAnimFinishedOrInactive(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
     || data[2] == FALSE)
     {
         sub_80FDA24(gUnknown_085920E4[data[5]]);
@@ -727,8 +727,8 @@ bool8 sub_80FDE2C(void)
     u8 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     z = PlayerGetZCoord();
-    objId = GetFieldObjectIdByXYZ(x, y, z);
-    if (objId == 16 || gMapObjects[objId].graphicsId != 0xE4)
+    objId = GetEventObjectIdByXYZ(x, y, z);
+    if (objId == 16 || gEventObjects[objId].graphicsId != 0xE4)
         return FALSE;
     else
         return TRUE;

@@ -38,7 +38,7 @@ NavelRock_Top_EventScript_26915B:: @ 826915B
 NavelRock_Top_EventScript_26916F:: @ 826916F
 	lockall
 	setvar VAR_TEMP_1, 1
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
 	special sub_813B80C
@@ -59,7 +59,7 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	applymovement 127, NavelRock_Top_Movement_269234
 	applymovement 1, NavelRock_Top_Movement_26923A
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	setvar VAR_0x8004, 250
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0

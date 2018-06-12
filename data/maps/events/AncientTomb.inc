@@ -1,5 +1,5 @@
-AncientTomb_MapObjects: @ 8536CDC
-	object_event 1, MAP_OBJ_GFX_REGISTEEL, 0, 0, 8, 7, 3, 8, 0, 0, 0, 0, AncientTomb_EventScript_23905A, 937, 0, 0
+AncientTomb_EventObjects: @ 8536CDC
+	object_event 1, EVENT_OBJ_GFX_REGISTEEL, 0, 0, 8, 7, 3, 8, 0, 0, 0, 0, AncientTomb_EventScript_23905A, 937, 0, 0
 
 AncientTomb_MapWarps: @ 8536CF4
 	warp_def 8, 29, 3, 0, ROUTE_120
@@ -12,5 +12,5 @@ AncientTomb_MapBGEvents: @ 8536D0C
 	bg_event 9, 20, 0, 0, 0, AncientTomb_EventScript_239050
 
 AncientTomb_MapEvents:: @ 8536D30
-	map_events AncientTomb_MapObjects, AncientTomb_MapWarps, 0x0, AncientTomb_MapBGEvents
+	map_events AncientTomb_EventObjects, AncientTomb_MapWarps, 0x0, AncientTomb_MapBGEvents
 

@@ -505,10 +505,10 @@ _080F8BBA:
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -534,12 +534,12 @@ _080F8BBA:
 	cmp r0, 0
 	bne _080F8C2C
 	lsrs r1, r4, 16
-	ldr r0, =gFieldObjectPalette33
+	ldr r0, =gEventObjectPalette33
 	b _080F8C42
 	.pool
 _080F8C2C:
 	lsrs r1, r4, 16
-	ldr r0, =gFieldObjectPalette34
+	ldr r0, =gEventObjectPalette34
 	b _080F8C42
 	.pool
 _080F8C38:
@@ -547,7 +547,7 @@ _080F8C38:
 	cmp r0, 0
 	bne _080F8C50
 	lsrs r1, r4, 16
-	ldr r0, =gFieldObjectPalette8
+	ldr r0, =gEventObjectPalette8
 _080F8C42:
 	movs r2, 0x20
 	bl LoadPalette
@@ -555,7 +555,7 @@ _080F8C42:
 	.pool
 _080F8C50:
 	lsrs r1, r4, 16
-	ldr r0, =gFieldObjectPalette17
+	ldr r0, =gEventObjectPalette17
 	movs r2, 0x20
 	bl LoadPalette
 _080F8C5A:

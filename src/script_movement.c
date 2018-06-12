@@ -21,25 +21,25 @@ static EWRAM_DATA const u8 *gUnknown_02039D90[16] = {0};
 // text
 bool8 ScriptMovement_StartObjectMovementScript(u8 localId, u8 mapNum, u8 mapGroup, const u8 *movementScript)
 {
-    u8 mapObjId;
+    u8 eventObjId;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjId))
+    if (TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjId))
         return TRUE;
     if (!FuncIsActiveTask(sub_80D3660))
         sub_80D33AC(50);
-    return sub_80D3408(sub_80D33F4(), mapObjId, movementScript);
+    return sub_80D3408(sub_80D33F4(), eventObjId, movementScript);
 }
 
 bool8 ScriptMovement_IsObjectMovementFinished(u8 localId, u8 mapNum, u8 mapBank)
 {
-    u8 mapObjId;
+    u8 eventObjId;
     u8 r4;
     u8 r1;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapBank, &mapObjId))
+    if (TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapBank, &eventObjId))
         return TRUE;
     r4 = sub_80D33F4();
-    r1 = sub_80D3474(r4, mapObjId);
+    r1 = sub_80D3474(r4, eventObjId);
     if (r1 == 16)
         return TRUE;
     return sub_80D3584(r4, r1);
@@ -73,11 +73,11 @@ static u8 sub_80D33F4(void)
     return FindTaskIdByFunc(sub_80D3660);
 }
 
-static bool8 sub_80D3408(u8 taskId, u8 mapObjId, const u8 *movementScript)
+static bool8 sub_80D3408(u8 taskId, u8 eventObjId, const u8 *movementScript)
 {
     u8 r4;
 
-    r4 = sub_80D3474(taskId, mapObjId);
+    r4 = sub_80D3474(taskId, eventObjId);
     if (r4 != 16)
     {
         if (sub_80D3584(taskId, r4) == 0)
@@ -86,7 +86,7 @@ static bool8 sub_80D3408(u8 taskId, u8 mapObjId, const u8 *movementScript)
         }
         else
         {
-            sub_80D35DC(taskId, r4, mapObjId, movementScript);
+            sub_80D35DC(taskId, r4, eventObjId, movementScript);
             return FALSE;
         }
     }
@@ -97,7 +97,7 @@ static bool8 sub_80D3408(u8 taskId, u8 mapObjId, const u8 *movementScript)
     }
     else
     {
-        sub_80D35DC(taskId, r4, mapObjId, movementScript);
+        sub_80D35DC(taskId, r4, eventObjId, movementScript);
         return FALSE;
     }
 }
@@ -173,23 +173,23 @@ static const u8 *sub_80D35CC(u8 a)
     return gUnknown_02039D90[a];
 }
 
-static void sub_80D35DC(u8 taskId, u8 b, u8 mapObjId, const u8 *movementScript)
+static void sub_80D35DC(u8 taskId, u8 b, u8 eventObjId, const u8 *movementScript)
 {
     sub_80D352C(taskId, b);
     npc_obj_offscreen_culling_and_flag_update(b, movementScript);
-    sub_80D34E4(taskId, b, mapObjId);
+    sub_80D34E4(taskId, b, eventObjId);
 }
 
 static void UnfreezeObjects(u8 taskId)
 {
-    u8 *pMapObjId;
+    u8 *pEventObjId;
     u8 i;
 
-    pMapObjId = (u8 *)&gTasks[taskId].data[1];
-    for (i = 0; i < 16; i++, pMapObjId++)
+    pEventObjId = (u8 *)&gTasks[taskId].data[1];
+    for (i = 0; i < 16; i++, pEventObjId++)
     {
-        if (*pMapObjId != 0xFF)
-            npc_sync_anim_pause_bits(&gMapObjects[*pMapObjId]);
+        if (*pEventObjId != 0xFF)
+            npc_sync_anim_pause_bits(&gEventObjects[*pEventObjId]);
     }
 }
 
@@ -206,23 +206,23 @@ static void sub_80D3660(u8 taskId)
     }
 }
 
-static void sub_80A2490(u8 taskId, u8 b, u8 mapObjId, const u8 *d)
+static void sub_80A2490(u8 taskId, u8 b, u8 eventObjId, const u8 *d)
 {
     u8 var;
 
-    if (FieldObjectIsSpecialAnimActive(&gMapObjects[mapObjId])
-     && !FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
+    if (EventObjectIsSpecialAnimActive(&gEventObjects[eventObjId])
+     && !EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[eventObjId]))
         return;
 
     var = *d;
     if (var == 0xFE)
     {
         sub_80D355C(taskId, b);
-        FreezeMapObject(&gMapObjects[mapObjId]);
+        FreezeEventObject(&gEventObjects[eventObjId]);
     }
     else
     {
-        if (!FieldObjectSetSpecialAnim(&gMapObjects[mapObjId], var))
+        if (!EventObjectSetSpecialAnim(&gEventObjects[eventObjId], var))
         {
             d++;
             npc_obj_offscreen_culling_and_flag_update(b, d);

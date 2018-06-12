@@ -1,4 +1,4 @@
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -80,14 +80,14 @@ gSpriteTemplate_85CDBCC:: @ 85CDBCC
 	spr_template 3, 1, gOamData_85CDB94, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, nullsub_58
 
 gCableCarPlayerGraphicsIDs:: @ 85CDBE4
-	.byte MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL
-	.byte MAP_OBJ_GFX_RIVAL_MAY_NORMAL
+	.byte EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	.byte EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 
 gMtChimneyHikerGraphicsIDs:: @ 85CDBE6
-	.byte MAP_OBJ_GFX_HIKER
-	.byte MAP_OBJ_GFX_CAMPER
-	.byte MAP_OBJ_GFX_PICNICKER
-	.byte MAP_OBJ_GFX_ZIGZAGOON_1 @ not used
+	.byte EVENT_OBJ_GFX_HIKER
+	.byte EVENT_OBJ_GFX_CAMPER
+	.byte EVENT_OBJ_GFX_PICNICKER
+	.byte EVENT_OBJ_GFX_ZIGZAGOON_1 @ not used
 
 	.align 1
 gMtChimneyHikerCoords:: @ 85CDBEA

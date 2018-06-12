@@ -741,8 +741,8 @@ _0813828A:
 	.pool
 	thumb_func_end GetLinkPartnerNames
 
-	thumb_func_start SpawnLinkPartnerFieldObject
-SpawnLinkPartnerFieldObject: @ 81382A0
+	thumb_func_start SpawnLinkPartnerEventObject
+SpawnLinkPartnerEventObject: @ 81382A0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -912,7 +912,7 @@ _0813839C:
 	adds r0, r5, 0
 	adds r2, r4, 0
 	mov r3, r12
-	bl SpawnSpecialFieldObjectParametrized
+	bl SpawnSpecialEventObjectParametrized
 	adds r0, r5, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -941,7 +941,7 @@ _08138410:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SpawnLinkPartnerFieldObject
+	thumb_func_end SpawnLinkPartnerEventObject
 
 	thumb_func_start sub_813842C
 sub_813842C: @ 813842C
@@ -971,12 +971,12 @@ _08138454:
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
 	adds r0, r3, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x10
 	beq _081384E6
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
@@ -1008,15 +1008,15 @@ _081384A8:
 	beq _081384BC
 	b _081384E6
 _081384B2:
-	ldr r0, =gFieldObjectPalette33
+	ldr r0, =gEventObjectPalette33
 	b _081384C6
 	.pool
 _081384BC:
-	ldr r0, =gFieldObjectPalette34
+	ldr r0, =gEventObjectPalette34
 	b _081384C6
 	.pool
 _081384C4:
-	ldr r0, =gFieldObjectPalette8
+	ldr r0, =gEventObjectPalette8
 _081384C6:
 	movs r2, 0x80
 	lsls r2, 1
@@ -1026,7 +1026,7 @@ _081384C6:
 	b _081384E6
 	.pool
 _081384D8:
-	ldr r0, =gFieldObjectPalette17
+	ldr r0, =gEventObjectPalette17
 	movs r2, 0x80
 	lsls r2, 1
 	adds r1, r3, r2
@@ -2537,8 +2537,8 @@ _0813914A:
 	.pool
 	thumb_func_end IsGrassTypeInParty
 
-	thumb_func_start SpawnScriptFieldObject
-SpawnScriptFieldObject: @ 8139158
+	thumb_func_start SpawnScriptEventObject
+SpawnScriptEventObject: @ 8139158
 	push {lr}
 	sub sp, 0x8
 	ldr r0, =gSaveBlock1Ptr
@@ -2557,10 +2557,10 @@ SpawnScriptFieldObject: @ 8139158
 	movs r0, 0x7
 	movs r1, 0x8
 	movs r2, 0x7F
-	bl SpawnSpecialFieldObjectParametrized
+	bl SpawnSpecialEventObjectParametrized
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -2575,10 +2575,10 @@ SpawnScriptFieldObject: @ 8139158
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SpawnScriptFieldObject
+	thumb_func_end SpawnScriptEventObject
 
-	thumb_func_start RemoveScriptFieldObject
-RemoveScriptFieldObject: @ 81391AC
+	thumb_func_start RemoveScriptEventObject
+RemoveScriptEventObject: @ 81391AC
 	push {lr}
 	bl GetPlayerAvatarObjectId
 	lsls r0, 24
@@ -2589,11 +2589,11 @@ RemoveScriptFieldObject: @ 81391AC
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x7F
-	bl RemoveFieldObjectByLocalIdAndMap
+	bl RemoveEventObjectByLocalIdAndMap
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end RemoveScriptFieldObject
+	thumb_func_end RemoveScriptEventObject
 
 	thumb_func_start GetPokeblockNameByMonNature
 GetPokeblockNameByMonNature: @ 81391D0
@@ -6327,7 +6327,7 @@ sub_813B0B4: @ 813B0B4
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x1
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	cmp r4, 0
 	bne _0813B0F0
 	movs r0, 0xC4
@@ -6377,7 +6377,7 @@ _0813B13A:
 	adds r0, r5, r0
 	ldrb r2, [r0]
 	movs r0, 0x1
-	bl Overworld_SetMapObjTemplateCoords
+	bl Overworld_SetEventObjTemplateCoords
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

@@ -683,7 +683,7 @@ LilycoveCity_ContestLobby_EventScript_2941AA:: @ 82941AA
 	specialvar VAR_RESULT, GetLinkPartnerNames
 	copyvar VAR_0x8008, VAR_RESULT
 	copyvar VAR_0x8004, VAR_0x8008
-	special SpawnLinkPartnerFieldObject
+	special SpawnLinkPartnerEventObject
 	goto LilycoveCity_ContestLobby_EventScript_2941C4
 	end
 

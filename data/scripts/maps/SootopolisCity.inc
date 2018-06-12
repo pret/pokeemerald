@@ -212,10 +212,10 @@ SootopolisCity_EventScript_1E5926:: @ 81E5926
 
 SootopolisCity_EventScript_1E5946:: @ 81E5946
 	delay 60
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SootopolisCity_Movement_1E5A68
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	delay 60
 	fadescreenspeed 1, 8
 	setweather 15
@@ -269,12 +269,12 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	applymovement 10, SootopolisCity_Movement_1E5BCF
 	applymovement 9, SootopolisCity_Movement_1E5BF0
 	waitmovement 0
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 10, SootopolisCity_Movement_1E5BD6
 	applymovement 9, SootopolisCity_Movement_1E5BF7
 	applymovement 127, SootopolisCity_Movement_1E5A75
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	setvar VAR_0x405E, 2
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	releaseall
@@ -312,10 +312,10 @@ SootopolisCity_Movement_1E5A75: @ 81E5A75
 
 SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	delay 60
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SootopolisCity_Movement_1E5BA4
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	delay 60
 	fadescreenspeed 1, 8
 	setweather 15
@@ -369,12 +369,12 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	applymovement 10, SootopolisCity_Movement_1E5BCF
 	applymovement 9, SootopolisCity_Movement_1E5BF0
 	waitmovement 0
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 10, SootopolisCity_Movement_1E5BD6
 	applymovement 9, SootopolisCity_Movement_1E5BF7
 	applymovement 127, SootopolisCity_Movement_1E5BAE
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	setvar VAR_0x405E, 2
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	releaseall
@@ -502,10 +502,10 @@ SootopolisCity_EventScript_1E5BFE:: @ 81E5BFE
 
 SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	delay 60
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SootopolisCity_Movement_1E5A68
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	delay 60
 	fadescreenspeed 1, 8
 	call SootopolisCity_EventScript_1E5D82
@@ -516,7 +516,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	special sub_813B7D8
 	waitstate
 	playse SE_T_KAMI
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SootopolisCity_Movement_1E5E63
 	waitmovement 0
 	waitse
@@ -555,10 +555,10 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 
 SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	delay 60
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SootopolisCity_Movement_1E5BA4
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	delay 60
 	fadescreenspeed 1, 8
 	call SootopolisCity_EventScript_1E5D82
@@ -568,7 +568,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	setvar VAR_0x8004, 1
 	special sub_813B7D8
 	waitstate
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SootopolisCity_Movement_1E5E63
 	applymovement 255, SootopolisCity_Movement_1E5E68
 	waitmovement 0

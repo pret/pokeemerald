@@ -216,7 +216,7 @@ gUnknown_020322D5: @ 20322D5
 gUnknown_0203734C: @ 203734C
 	.space 0x4
 
-gMapObjects: @ 2037350
+gEventObjects: @ 2037350
 	.space 0x240
 
 gPlayerAvatar: @ 2037590

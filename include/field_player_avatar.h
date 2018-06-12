@@ -29,7 +29,7 @@ void PlayerAcroTurnJump(u8 a);
 void PlayerSetAnimId(u8 a, u8 b);
 bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction);
 void PlayerOnBikeCollideWithFarawayIslandMew(u8 direction);
-u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e);
+u8 CheckForEventObjectCollision(struct EventObject *a, s16 b, s16 c, u8 d, u8 e);
 u8 PlayerGetZCoord(void);
 void SetPlayerAvatarTransitionFlags(u16 a);
 void sub_808BCE8(void);

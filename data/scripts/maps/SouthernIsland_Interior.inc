@@ -66,7 +66,7 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	goto_if 0, SouthernIsland_Interior_EventScript_242B9A
 	setflag FLAG_0x0CE
 	setflag FLAG_0x002
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	applymovement 127, SouthernIsland_Interior_Movement_242BCA
 	waitmovement 0
 	delay 50
@@ -80,7 +80,7 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	applymovement 2, SouthernIsland_Interior_Movement_242BDA
 	waitmovement 0
 	delay 50
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	setvar VAR_LAST_TALKED, 2
 	compare VAR_0x40D5, 0
 	call_if 1, SouthernIsland_Interior_EventScript_242BA4

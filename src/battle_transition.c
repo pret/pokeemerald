@@ -59,7 +59,7 @@ typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 
-extern const struct OamData gFieldObjectBaseOam_32x32;
+extern const struct OamData gEventObjectBaseOam_32x32;
 
 extern void sub_80AC3D0(void);
 
@@ -753,7 +753,7 @@ static const struct SpriteTemplate gUnknown_085C8E68 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4105,
-    .oam = &gFieldObjectBaseOam_32x32,
+    .oam = &gEventObjectBaseOam_32x32,
     .anims = sSpriteAnimTable_85C8E3C,
     .images = sSpriteImageTable_85C8E2C,
     .affineAnims = sSpriteAffineAnimTable_85C8E60,
@@ -820,7 +820,7 @@ static const struct SpriteTemplate sSpriteTemplate_85C8EBC =
     .callback = sub_8148380
 };
 
-static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/map_objects/palettes/field_effect_object_palette_10.gbapal");
+static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_10.gbapal");
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
 {

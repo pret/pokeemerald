@@ -1,8 +1,8 @@
-VerdanturfTown_MapObjects: @ 8527CDC
-	object_event 1, MAP_OBJ_GFX_MAN_2, 0, 0, 4, 17, 3, 5, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB5A8, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 0, 9, 2, 3, 9, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB575, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_BOY_1, 0, 0, 7, 11, 3, 3, 16, 0, 0, 0, VerdanturfTown_EventScript_1EB5BA, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_CAMPER, 0, 0, 7, 6, 3, 5, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB5B1, 0, 0, 0
+VerdanturfTown_EventObjects: @ 8527CDC
+	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 0, 4, 17, 3, 5, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB5A8, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 0, 9, 2, 3, 9, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB575, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 0, 7, 11, 3, 3, 16, 0, 0, 0, VerdanturfTown_EventScript_1EB5BA, 0, 0, 0
+	object_event 4, EVENT_OBJ_GFX_CAMPER, 0, 0, 7, 6, 3, 5, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB5B1, 0, 0, 0
 
 VerdanturfTown_MapWarps: @ 8527D3C
 	warp_def 3, 7, 0, 0, VERDANTURF_TOWN_BATTLE_TENT_LOBBY
@@ -24,5 +24,5 @@ VerdanturfTown_MapBGEvents: @ 8527D74
 	bg_event 7, 3, 0, 0, 0, VerdanturfTown_EventScript_1EB5F4
 
 VerdanturfTown_MapEvents:: @ 8527DD4
-	map_events VerdanturfTown_MapObjects, VerdanturfTown_MapWarps, 0x0, VerdanturfTown_MapBGEvents
+	map_events VerdanturfTown_EventObjects, VerdanturfTown_MapWarps, 0x0, VerdanturfTown_MapBGEvents
 

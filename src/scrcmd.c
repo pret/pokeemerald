@@ -24,7 +24,7 @@
 #include "item.h"
 #include "lilycove_lady.h"
 #include "main.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "menu.h"
 #include "money.h"
 #include "mystery_event_script.h"
@@ -1051,7 +1051,7 @@ bool8 ScrCmd_removeobject(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    RemoveFieldObjectByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveEventObjectByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     return FALSE;
 }
 
@@ -1061,7 +1061,7 @@ bool8 ScrCmd_removeobject_at(struct ScriptContext *ctx)
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
 
-    RemoveFieldObjectByLocalIdAndMap(objectId, mapNum, mapGroup);
+    RemoveEventObjectByLocalIdAndMap(objectId, mapNum, mapGroup);
     return FALSE;
 }
 
@@ -1099,7 +1099,7 @@ bool8 ScrCmd_setobjectxyperm(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetMapObjTemplateCoords(localId, x, y);
+    Overworld_SetEventObjTemplateCoords(localId, x, y);
     return FALSE;
 }
 
@@ -1154,9 +1154,9 @@ bool8 ScrCmd_resetobjectpriority(struct ScriptContext *ctx)
 
 bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
 {
-    if (gMapObjects[gSelectedMapObject].active)
+    if (gEventObjects[gSelectedEventObject].active)
     {
-        FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject],
+        EventObjectFaceOppositeDirection(&gEventObjects[gSelectedEventObject],
           player_get_direction_lower_nybble());
     }
     return FALSE;
@@ -1167,7 +1167,7 @@ bool8 ScrCmd_turnobject(struct ScriptContext *ctx)
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 direction = ScriptReadByte(ctx);
 
-    FieldObjectTurnByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, direction);
+    EventObjectTurnByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, direction);
     return FALSE;
 }
 
@@ -1176,7 +1176,7 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 movementType = ScriptReadByte(ctx);
 
-    Overworld_SetMapObjTemplateMovementType(localId, movementType);
+    Overworld_SetEventObjTemplateMovementType(localId, movementType);
     return FALSE;
 }
 
@@ -1210,7 +1210,7 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
     }
     else
     {
-        ScriptFreezeMapObjects();
+        ScriptFreezeEventObjects();
         SetupNativeScript(ctx, sub_80983C4);
         return TRUE;
     }
@@ -1224,14 +1224,14 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
     }
     else
     {
-        if (gMapObjects[gSelectedMapObject].active)
+        if (gEventObjects[gSelectedEventObject].active)
         {
-            LockSelectedMapObject();
+            LockSelectedEventObject();
             SetupNativeScript(ctx, sub_809847C);
         }
         else
         {
-            ScriptFreezeMapObjects();
+            ScriptFreezeEventObjects();
             SetupNativeScript(ctx, sub_80983C4);
         }
         return TRUE;
@@ -1243,10 +1243,10 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
     u8 objectId;
 
     HideFieldMessageBox();
-    objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[objectId]);
     sub_80D338C();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
     return FALSE;
 }
 
@@ -1255,12 +1255,12 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     u8 objectId;
 
     HideFieldMessageBox();
-    if (gMapObjects[gSelectedMapObject].active)
-        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedMapObject]);
-    objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    if (gEventObjects[gSelectedEventObject].active)
+        EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[gSelectedEventObject]);
+    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[objectId]);
     sub_80D338C();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
     return FALSE;
 }
 
@@ -2178,7 +2178,7 @@ bool8 ScrCmd_mossdeepgym4(struct ScriptContext *ctx)
 
 bool8 ScrCmd_cmdD8(struct ScriptContext *ctx)
 {
-    gSelectedMapObject = GetCurrentApproachingTrainerMapObjectId();
+    gSelectedEventObject = GetCurrentApproachingTrainerEventObjectId();
     return FALSE;
 }
 
@@ -2190,7 +2190,7 @@ bool8 ScrCmd_cmdD9(struct ScriptContext *ctx)
     }
     else
     {
-        if (gMapObjects[gSelectedMapObject].active)
+        if (gEventObjects[gSelectedEventObject].active)
         {
             sub_8098630();
             SetupNativeScript(ctx, sub_8098734);

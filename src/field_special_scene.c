@@ -329,24 +329,24 @@ void Task_HandlePorthole(u8 taskId)
 
 void sub_80FB6EC(void)
 {
-    u8 spriteId = AddPseudoFieldObject(0x8C, SpriteCallbackDummy, 112, 80, 0);
+    u8 spriteId = AddPseudoEventObject(0x8C, SpriteCallbackDummy, 112, 80, 0);
 
     gSprites[spriteId].coordOffsetEnabled = FALSE;
 
     if (VarGet(0x40B4) == 2)
     {
-        StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(4));
+        StartSpriteAnim(&gSprites[spriteId], EventObjectDirectionToImageAnimId(4));
     }
     else
     {
-        StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(3));
+        StartSpriteAnim(&gSprites[spriteId], EventObjectDirectionToImageAnimId(3));
     }
 }
 
 void sub_80FB768(void)
 {
     sub_80FB6EC();
-    gMapObjects[gPlayerAvatar.mapObjectId].invisible = TRUE;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
     pal_fill_black();
     CreateTask(Task_HandlePorthole, 80);
     ScriptContext2_Enable();

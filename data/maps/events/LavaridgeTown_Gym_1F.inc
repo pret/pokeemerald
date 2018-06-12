@@ -1,10 +1,10 @@
-LavaridgeTown_Gym_1F_MapObjects: @ 852DE1C
-	object_event 1, MAP_OBJ_GFX_FLANNERY, 0, 0, 13, 9, 3, 8, 0, 0, 0, 0, LavaridgeTown_Gym_1F_EventScript_1FE78C, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_MAN_6, 0, 0, 3, 14, 3, 8, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE87F, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_MAN_4, 0, 0, 2, 15, 3, 8, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE900, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_MAN_6, 0, 0, 3, 10, 3, 8, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE8AF, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_GIRL_3, 0, 0, 5, 2, 3, 8, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE8E5, 0, 0, 0
-	object_event 6, MAP_OBJ_GFX_MAN_2, 0, 0, 12, 16, 3, 10, 0, 0, 0, 0, LavaridgeTown_Gym_1F_EventScript_1FE96C, 0, 0, 0
+LavaridgeTown_Gym_1F_EventObjects: @ 852DE1C
+	object_event 1, EVENT_OBJ_GFX_FLANNERY, 0, 0, 13, 9, 3, 8, 0, 0, 0, 0, LavaridgeTown_Gym_1F_EventScript_1FE78C, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 0, 3, 14, 3, 8, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE87F, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 0, 2, 15, 3, 8, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE900, 0, 0, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_6, 0, 0, 3, 10, 3, 8, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE8AF, 0, 0, 0
+	object_event 5, EVENT_OBJ_GFX_GIRL_3, 0, 0, 5, 2, 3, 8, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE8E5, 0, 0, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_2, 0, 0, 12, 16, 3, 10, 0, 0, 0, 0, LavaridgeTown_Gym_1F_EventScript_1FE96C, 0, 0, 0
 
 LavaridgeTown_Gym_1F_MapWarps: @ 852DEAC
 	warp_def 13, 18, 3, 1, LAVARIDGE_TOWN
@@ -39,5 +39,5 @@ LavaridgeTown_Gym_1F_MapBGEvents: @ 852DF7C
 	bg_event 16, 15, 0, 1, 0, LavaridgeTown_Gym_1F_EventScript_1FE99B
 
 LavaridgeTown_Gym_1F_MapEvents:: @ 852DF94
-	map_events LavaridgeTown_Gym_1F_MapObjects, LavaridgeTown_Gym_1F_MapWarps, 0x0, LavaridgeTown_Gym_1F_MapBGEvents
+	map_events LavaridgeTown_Gym_1F_EventObjects, LavaridgeTown_Gym_1F_MapWarps, 0x0, LavaridgeTown_Gym_1F_MapBGEvents
 

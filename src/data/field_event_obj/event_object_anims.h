@@ -1,7 +1,7 @@
 #ifndef GUARD_EVENT_OBJECT_ANIMS_H
 #define GUARD_EVENT_OBJECT_ANIMS_H
 
-const union AnimCmd gFieldObjectImageAnim_StayStill[] =
+const union AnimCmd gEventObjectImageAnim_StayStill[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(0, 8),
@@ -10,31 +10,31 @@ const union AnimCmd gFieldObjectImageAnim_StayStill[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpFaceSouth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpFaceSouth[] =
 {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpFaceNorth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpFaceNorth[] =
 {
     ANIMCMD_FRAME(1, 16),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpFaceWest[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpFaceWest[] =
 {
     ANIMCMD_FRAME(2, 16),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpFaceEast[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpFaceEast[] =
 {
     ANIMCMD_FRAME(2, 16, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoSouth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoSouth[] =
 {
     ANIMCMD_FRAME(3, 8),
     ANIMCMD_FRAME(0, 8),
@@ -43,7 +43,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoNorth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoNorth[] =
 {
     ANIMCMD_FRAME(4, 8),
     ANIMCMD_FRAME(1, 8),
@@ -52,7 +52,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoWest[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoWest[] =
 {
     ANIMCMD_FRAME(5, 8),
     ANIMCMD_FRAME(2, 8),
@@ -61,7 +61,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoEast[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoEast[] =
 {
     ANIMCMD_FRAME(5, 8, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
@@ -70,7 +70,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastSouth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFastSouth[] =
 {
     ANIMCMD_FRAME(3, 4),
     ANIMCMD_FRAME(0, 4),
@@ -79,7 +79,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastNorth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFastNorth[] =
 {
     ANIMCMD_FRAME(4, 4),
     ANIMCMD_FRAME(1, 4),
@@ -88,7 +88,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastWest[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFastWest[] =
 {
     ANIMCMD_FRAME(5, 4),
     ANIMCMD_FRAME(2, 4),
@@ -97,7 +97,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastEast[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFastEast[] =
 {
     ANIMCMD_FRAME(5, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
@@ -106,7 +106,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFasterSouth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFasterSouth[] =
 {
     ANIMCMD_FRAME(3, 2),
     ANIMCMD_FRAME(0, 2),
@@ -115,7 +115,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFasterSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFasterNorth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFasterNorth[] =
 {
     ANIMCMD_FRAME(4, 2),
     ANIMCMD_FRAME(1, 2),
@@ -124,7 +124,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFasterNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFasterWest[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFasterWest[] =
 {
     ANIMCMD_FRAME(5, 2),
     ANIMCMD_FRAME(2, 2),
@@ -133,7 +133,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFasterWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFasterEast[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFasterEast[] =
 {
     ANIMCMD_FRAME(5, 2, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 2, .hFlip = TRUE),
@@ -142,7 +142,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFasterEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastestSouth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFastestSouth[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_FRAME(0, 1),
@@ -151,7 +151,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastestSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastestNorth[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFastestNorth[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_FRAME(1, 1),
@@ -160,7 +160,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastestNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastestWest[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFastestWest[] =
 {
     ANIMCMD_FRAME(5, 1),
     ANIMCMD_FRAME(2, 1),
@@ -169,7 +169,7 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastestWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastestEast[] =
+const union AnimCmd gEventObjectImageAnim_QuintyPlumpGoFastestEast[] =
 {
     ANIMCMD_FRAME(5, 1, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
@@ -178,31 +178,31 @@ const union AnimCmd gFieldObjectImageAnim_QuintyPlumpGoFastestEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_FaceSouth[] =
+const union AnimCmd gEventObjectImageAnim_FaceSouth[] =
 {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_FaceNorth[] =
+const union AnimCmd gEventObjectImageAnim_FaceNorth[] =
 {
     ANIMCMD_FRAME(1, 16),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_FaceWest[] =
+const union AnimCmd gEventObjectImageAnim_FaceWest[] =
 {
     ANIMCMD_FRAME(2, 16),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_FaceEast[] =
+const union AnimCmd gEventObjectImageAnim_FaceEast[] =
 {
     ANIMCMD_FRAME(2, 16, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoSouth[] =
+const union AnimCmd gEventObjectImageAnim_GoSouth[] =
 {
     ANIMCMD_FRAME(3, 8),
     ANIMCMD_FRAME(0, 8),
@@ -211,7 +211,7 @@ const union AnimCmd gFieldObjectImageAnim_GoSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoNorth[] =
+const union AnimCmd gEventObjectImageAnim_GoNorth[] =
 {
     ANIMCMD_FRAME(5, 8),
     ANIMCMD_FRAME(1, 8),
@@ -220,7 +220,7 @@ const union AnimCmd gFieldObjectImageAnim_GoNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoWest[] =
+const union AnimCmd gEventObjectImageAnim_GoWest[] =
 {
     ANIMCMD_FRAME(7, 8),
     ANIMCMD_FRAME(2, 8),
@@ -229,7 +229,7 @@ const union AnimCmd gFieldObjectImageAnim_GoWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoEast[] =
+const union AnimCmd gEventObjectImageAnim_GoEast[] =
 {
     ANIMCMD_FRAME(7, 8, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
@@ -238,7 +238,7 @@ const union AnimCmd gFieldObjectImageAnim_GoEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFastSouth[] =
+const union AnimCmd gEventObjectImageAnim_GoFastSouth[] =
 {
     ANIMCMD_FRAME(3, 4),
     ANIMCMD_FRAME(0, 4),
@@ -247,7 +247,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFastSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFastNorth[] =
+const union AnimCmd gEventObjectImageAnim_GoFastNorth[] =
 {
     ANIMCMD_FRAME(5, 4),
     ANIMCMD_FRAME(1, 4),
@@ -256,7 +256,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFastNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFastWest[] =
+const union AnimCmd gEventObjectImageAnim_GoFastWest[] =
 {
     ANIMCMD_FRAME(7, 4),
     ANIMCMD_FRAME(2, 4),
@@ -265,7 +265,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFastWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFastEast[] =
+const union AnimCmd gEventObjectImageAnim_GoFastEast[] =
 {
     ANIMCMD_FRAME(7, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
@@ -274,7 +274,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFastEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFasterSouth[] =
+const union AnimCmd gEventObjectImageAnim_GoFasterSouth[] =
 {
     ANIMCMD_FRAME(3, 2),
     ANIMCMD_FRAME(0, 2),
@@ -283,7 +283,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFasterSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFasterNorth[] =
+const union AnimCmd gEventObjectImageAnim_GoFasterNorth[] =
 {
     ANIMCMD_FRAME(5, 2),
     ANIMCMD_FRAME(1, 2),
@@ -292,7 +292,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFasterNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFasterWest[] =
+const union AnimCmd gEventObjectImageAnim_GoFasterWest[] =
 {
     ANIMCMD_FRAME(7, 2),
     ANIMCMD_FRAME(2, 2),
@@ -301,7 +301,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFasterWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFasterEast[] =
+const union AnimCmd gEventObjectImageAnim_GoFasterEast[] =
 {
     ANIMCMD_FRAME(7, 2, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 2, .hFlip = TRUE),
@@ -310,7 +310,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFasterEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFastestSouth[] =
+const union AnimCmd gEventObjectImageAnim_GoFastestSouth[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_FRAME(0, 1),
@@ -319,7 +319,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFastestSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFastestNorth[] =
+const union AnimCmd gEventObjectImageAnim_GoFastestNorth[] =
 {
     ANIMCMD_FRAME(5, 1),
     ANIMCMD_FRAME(1, 1),
@@ -328,7 +328,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFastestNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFastestWest[] =
+const union AnimCmd gEventObjectImageAnim_GoFastestWest[] =
 {
     ANIMCMD_FRAME(7, 1),
     ANIMCMD_FRAME(2, 1),
@@ -337,7 +337,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFastestWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GoFastestEast[] =
+const union AnimCmd gEventObjectImageAnim_GoFastestEast[] =
 {
     ANIMCMD_FRAME(7, 1, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
@@ -346,7 +346,7 @@ const union AnimCmd gFieldObjectImageAnim_GoFastestEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_RunSouth[] =
+const union AnimCmd gEventObjectImageAnim_RunSouth[] =
 {
     ANIMCMD_FRAME(12, 5),
     ANIMCMD_FRAME(9, 3),
@@ -355,7 +355,7 @@ const union AnimCmd gFieldObjectImageAnim_RunSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_RunNorth[] =
+const union AnimCmd gEventObjectImageAnim_RunNorth[] =
 {
     ANIMCMD_FRAME(14, 5),
     ANIMCMD_FRAME(10, 3),
@@ -364,7 +364,7 @@ const union AnimCmd gFieldObjectImageAnim_RunNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_RunWest[] =
+const union AnimCmd gEventObjectImageAnim_RunWest[] =
 {
     ANIMCMD_FRAME(16, 5),
     ANIMCMD_FRAME(11, 3),
@@ -373,7 +373,7 @@ const union AnimCmd gFieldObjectImageAnim_RunWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_RunEast[] =
+const union AnimCmd gEventObjectImageAnim_RunEast[] =
 {
     ANIMCMD_FRAME(16, 5, .hFlip = TRUE),
     ANIMCMD_FRAME(11, 3, .hFlip = TRUE),
@@ -382,7 +382,7 @@ const union AnimCmd gFieldObjectImageAnim_RunEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_FieldMove[] =
+const union AnimCmd gEventObjectImageAnim_FieldMove[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -392,143 +392,143 @@ const union AnimCmd gFieldObjectImageAnim_FieldMove[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_GetOnOffSurfBlobSouth[] =
+const union AnimCmd gEventObjectImageAnim_GetOnOffSurfBlobSouth[] =
 {
     ANIMCMD_FRAME(9, 32),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GetOnOffSurfBlobNorth[] =
+const union AnimCmd gEventObjectImageAnim_GetOnOffSurfBlobNorth[] =
 {
     ANIMCMD_FRAME(10, 32),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GetOnOffSurfBlobWest[] =
+const union AnimCmd gEventObjectImageAnim_GetOnOffSurfBlobWest[] =
 {
     ANIMCMD_FRAME(11, 32),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_GetOnOffSurfBlobEast[] =
+const union AnimCmd gEventObjectImageAnim_GetOnOffSurfBlobEast[] =
 {
     ANIMCMD_FRAME(11, 32, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_BunnyHoppyBackWheelSouth[] =
+const union AnimCmd gEventObjectImageAnim_BunnyHoppyBackWheelSouth[] =
 {
     ANIMCMD_FRAME(9, 4),
     ANIMCMD_FRAME(10, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BunnyHoppyBackWheelNorth[] =
+const union AnimCmd gEventObjectImageAnim_BunnyHoppyBackWheelNorth[] =
 {
     ANIMCMD_FRAME(13, 4),
     ANIMCMD_FRAME(14, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BunnyHoppyBackWheelWest[] =
+const union AnimCmd gEventObjectImageAnim_BunnyHoppyBackWheelWest[] =
 {
     ANIMCMD_FRAME(17, 4),
     ANIMCMD_FRAME(18, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BunnyHoppyBackWheelEast[] =
+const union AnimCmd gEventObjectImageAnim_BunnyHoppyBackWheelEast[] =
 {
     ANIMCMD_FRAME(17, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(18, 4, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BunnyHoppyFrontWheelSouth[] =
+const union AnimCmd gEventObjectImageAnim_BunnyHoppyFrontWheelSouth[] =
 {
     ANIMCMD_FRAME(11, 4),
     ANIMCMD_FRAME(12, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BunnyHoppyFrontWheelNorth[] =
+const union AnimCmd gEventObjectImageAnim_BunnyHoppyFrontWheelNorth[] =
 {
     ANIMCMD_FRAME(15, 4),
     ANIMCMD_FRAME(16, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BunnyHoppyFrontWheelWest[] =
+const union AnimCmd gEventObjectImageAnim_BunnyHoppyFrontWheelWest[] =
 {
     ANIMCMD_FRAME(19, 4),
     ANIMCMD_FRAME(20, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BunnyHoppyFrontWheelEast[] =
+const union AnimCmd gEventObjectImageAnim_BunnyHoppyFrontWheelEast[] =
 {
     ANIMCMD_FRAME(19, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(20, 4, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_StandingWheelieBackWheelSouth[] =
+const union AnimCmd gEventObjectImageAnim_StandingWheelieBackWheelSouth[] =
 {
     ANIMCMD_FRAME(9, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_StandingWheelieBackWheelNorth[] =
+const union AnimCmd gEventObjectImageAnim_StandingWheelieBackWheelNorth[] =
 {
     ANIMCMD_FRAME(13, 4),
     ANIMCMD_FRAME(1, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_StandingWheelieBackWheelWest[] =
+const union AnimCmd gEventObjectImageAnim_StandingWheelieBackWheelWest[] =
 {
     ANIMCMD_FRAME(17, 4),
     ANIMCMD_FRAME(2, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_StandingWheelieBackWheelEast[] =
+const union AnimCmd gEventObjectImageAnim_StandingWheelieBackWheelEast[] =
 {
     ANIMCMD_FRAME(17, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_StandingWheelieFrontWheelSouth[] =
+const union AnimCmd gEventObjectImageAnim_StandingWheelieFrontWheelSouth[] =
 {
     ANIMCMD_FRAME(11, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_StandingWheelieFrontWheelNorth[] =
+const union AnimCmd gEventObjectImageAnim_StandingWheelieFrontWheelNorth[] =
 {
     ANIMCMD_FRAME(15, 4),
     ANIMCMD_FRAME(1, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_StandingWheelieFrontWheelWest[] =
+const union AnimCmd gEventObjectImageAnim_StandingWheelieFrontWheelWest[] =
 {
     ANIMCMD_FRAME(19, 4),
     ANIMCMD_FRAME(2, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_StandingWheelieFrontWheelEast[] =
+const union AnimCmd gEventObjectImageAnim_StandingWheelieFrontWheelEast[] =
 {
     ANIMCMD_FRAME(19, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_MovingWheelieSouth[] =
+const union AnimCmd gEventObjectImageAnim_MovingWheelieSouth[] =
 {
     ANIMCMD_FRAME(21, 4),
     ANIMCMD_FRAME(10, 4),
@@ -537,7 +537,7 @@ const union AnimCmd gFieldObjectImageAnim_MovingWheelieSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_MovingWheelieNorth[] =
+const union AnimCmd gEventObjectImageAnim_MovingWheelieNorth[] =
 {
     ANIMCMD_FRAME(23, 4),
     ANIMCMD_FRAME(14, 4),
@@ -546,7 +546,7 @@ const union AnimCmd gFieldObjectImageAnim_MovingWheelieNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_MovingWheelieWest[] =
+const union AnimCmd gEventObjectImageAnim_MovingWheelieWest[] =
 {
     ANIMCMD_FRAME(25, 4),
     ANIMCMD_FRAME(18, 4),
@@ -555,7 +555,7 @@ const union AnimCmd gFieldObjectImageAnim_MovingWheelieWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_MovingWheelieEast[] =
+const union AnimCmd gEventObjectImageAnim_MovingWheelieEast[] =
 {
     ANIMCMD_FRAME(25, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(18, 4, .hFlip = TRUE),
@@ -564,27 +564,27 @@ const union AnimCmd gFieldObjectImageAnim_MovingWheelieEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_BerryTreeStage0[] =
+const union AnimCmd gEventObjectImageAnim_BerryTreeStage0[] =
 {
     ANIMCMD_FRAME(0, 32),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BerryTreeStage1[] =
+const union AnimCmd gEventObjectImageAnim_BerryTreeStage1[] =
 {
     ANIMCMD_FRAME(1, 32),
     ANIMCMD_FRAME(2, 32),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BerryTreeStage2[] =
+const union AnimCmd gEventObjectImageAnim_BerryTreeStage2[] =
 {
     ANIMCMD_FRAME(3, 48),
     ANIMCMD_FRAME(4, 48),
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BerryTreeStage3[] =
+const union AnimCmd gEventObjectImageAnim_BerryTreeStage3[] =
 {
     ANIMCMD_FRAME(5, 32),
     ANIMCMD_FRAME(5, 32),
@@ -593,7 +593,7 @@ const union AnimCmd gFieldObjectImageAnim_BerryTreeStage3[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_BerryTreeStage4[] =
+const union AnimCmd gEventObjectImageAnim_BerryTreeStage4[] =
 {
     ANIMCMD_FRAME(7, 48),
     ANIMCMD_FRAME(7, 48),
@@ -602,7 +602,7 @@ const union AnimCmd gFieldObjectImageAnim_BerryTreeStage4[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_NurseBow[] =
+const union AnimCmd gEventObjectImageAnim_NurseBow[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(9, 32),
@@ -610,7 +610,7 @@ const union AnimCmd gFieldObjectImageAnim_NurseBow[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_RockBreak[] =
+const union AnimCmd gEventObjectImageAnim_RockBreak[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(1, 8),
@@ -619,7 +619,7 @@ const union AnimCmd gFieldObjectImageAnim_RockBreak[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_TreeCut[] =
+const union AnimCmd gEventObjectImageAnim_TreeCut[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(1, 6),
@@ -628,7 +628,7 @@ const union AnimCmd gFieldObjectImageAnim_TreeCut[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_TakeOutRodSouth[] =
+const union AnimCmd gEventObjectImageAnim_TakeOutRodSouth[] =
 {
     ANIMCMD_FRAME(8, 4),
     ANIMCMD_FRAME(9, 4),
@@ -637,7 +637,7 @@ const union AnimCmd gFieldObjectImageAnim_TakeOutRodSouth[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_TakeOutRodNorth[] =
+const union AnimCmd gEventObjectImageAnim_TakeOutRodNorth[] =
 {
     ANIMCMD_FRAME(4, 4),
     ANIMCMD_FRAME(5, 4),
@@ -646,7 +646,7 @@ const union AnimCmd gFieldObjectImageAnim_TakeOutRodNorth[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_TakeOutRodWest[] =
+const union AnimCmd gEventObjectImageAnim_TakeOutRodWest[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -655,7 +655,7 @@ const union AnimCmd gFieldObjectImageAnim_TakeOutRodWest[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_TakeOutRodEast[] =
+const union AnimCmd gEventObjectImageAnim_TakeOutRodEast[] =
 {
     ANIMCMD_FRAME(0, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(1, 4, .hFlip = TRUE),
@@ -664,7 +664,7 @@ const union AnimCmd gFieldObjectImageAnim_TakeOutRodEast[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_PutAwayRodSouth[] =
+const union AnimCmd gEventObjectImageAnim_PutAwayRodSouth[] =
 {
     ANIMCMD_FRAME(11, 4),
     ANIMCMD_FRAME(10, 6),
@@ -673,7 +673,7 @@ const union AnimCmd gFieldObjectImageAnim_PutAwayRodSouth[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_PutAwayRodNorth[] =
+const union AnimCmd gEventObjectImageAnim_PutAwayRodNorth[] =
 {
     ANIMCMD_FRAME(7, 4),
     ANIMCMD_FRAME(6, 6),
@@ -682,7 +682,7 @@ const union AnimCmd gFieldObjectImageAnim_PutAwayRodNorth[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_PutAwayRodWest[] =
+const union AnimCmd gEventObjectImageAnim_PutAwayRodWest[] =
 {
     ANIMCMD_FRAME(3, 4),
     ANIMCMD_FRAME(2, 4),
@@ -691,7 +691,7 @@ const union AnimCmd gFieldObjectImageAnim_PutAwayRodWest[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_PutAwayRodEast[] =
+const union AnimCmd gEventObjectImageAnim_PutAwayRodEast[] =
 {
     ANIMCMD_FRAME(3, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
@@ -700,7 +700,7 @@ const union AnimCmd gFieldObjectImageAnim_PutAwayRodEast[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_HookedPokemonSouth[] =
+const union AnimCmd gEventObjectImageAnim_HookedPokemonSouth[] =
 {
     ANIMCMD_FRAME(10, 6),
     ANIMCMD_FRAME(11, 6),
@@ -709,7 +709,7 @@ const union AnimCmd gFieldObjectImageAnim_HookedPokemonSouth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_HookedPokemonNorth[] =
+const union AnimCmd gEventObjectImageAnim_HookedPokemonNorth[] =
 {
     ANIMCMD_FRAME(6, 6),
     ANIMCMD_FRAME(7, 6),
@@ -718,7 +718,7 @@ const union AnimCmd gFieldObjectImageAnim_HookedPokemonNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_HookedPokemonWest[] =
+const union AnimCmd gEventObjectImageAnim_HookedPokemonWest[] =
 {
     ANIMCMD_FRAME(2, 6),
     ANIMCMD_FRAME(3, 6),
@@ -727,7 +727,7 @@ const union AnimCmd gFieldObjectImageAnim_HookedPokemonWest[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_HookedPokemonEast[] =
+const union AnimCmd gEventObjectImageAnim_HookedPokemonEast[] =
 {
     ANIMCMD_FRAME(2, 6, .hFlip = TRUE),
     ANIMCMD_FRAME(3, 6, .hFlip = TRUE),
@@ -736,7 +736,7 @@ const union AnimCmd gFieldObjectImageAnim_HookedPokemonEast[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gFieldObjectRotScalAnim_8508FD8[] =
+const union AffineAnimCmd gEventObjectRotScalAnim_8508FD8[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 1),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
@@ -746,7 +746,7 @@ const union AffineAnimCmd gFieldObjectRotScalAnim_8508FD8[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gFieldObjectRotScalAnim_8509008[] =
+const union AffineAnimCmd gEventObjectRotScalAnim_8509008[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 1),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
@@ -757,33 +757,33 @@ const union AffineAnimCmd gFieldObjectRotScalAnim_8509008[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gFieldObjectRotScalAnim_8509040[] =
+const union AffineAnimCmd gEventObjectRotScalAnim_8509040[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 10, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gFieldObjectRotScalAnim_8509050[] =
+const union AffineAnimCmd gEventObjectRotScalAnim_8509050[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 10, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gFieldObjectRotScalAnim_8509060[] =
+const union AffineAnimCmd gEventObjectRotScalAnim_8509060[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -1, 1),
     AFFINEANIMCMD_LOOP(8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gFieldObjectRotScalAnim_8509078[] =
+const union AffineAnimCmd gEventObjectRotScalAnim_8509078[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 1, 1),
     AFFINEANIMCMD_LOOP(8),
     AFFINEANIMCMD_END,
 };
 
-const union AnimCmd gFieldObjectImageAnim_HoOhFlapWings[] =
+const union AnimCmd gEventObjectImageAnim_HoOhFlapWings[] =
 {
     ANIMCMD_FRAME(3, 8),
     ANIMCMD_FRAME(4, 8),
@@ -792,379 +792,379 @@ const union AnimCmd gFieldObjectImageAnim_HoOhFlapWings[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_HoOhStayStill[] =
+const union AnimCmd gEventObjectImageAnim_HoOhStayStill[] =
 {
     ANIMCMD_FRAME(3, 16),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_Inanimate[] = {
-    gFieldObjectImageAnim_StayStill,
+const union AnimCmd *const gEventObjectImageAnimTable_Inanimate[] = {
+    gEventObjectImageAnim_StayStill,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_QuintyPlump[] = {
-    gFieldObjectImageAnim_QuintyPlumpFaceSouth,
-    gFieldObjectImageAnim_QuintyPlumpFaceNorth,
-    gFieldObjectImageAnim_QuintyPlumpFaceWest,
-    gFieldObjectImageAnim_QuintyPlumpFaceEast,
-    gFieldObjectImageAnim_QuintyPlumpGoSouth,
-    gFieldObjectImageAnim_QuintyPlumpGoNorth,
-    gFieldObjectImageAnim_QuintyPlumpGoWest,
-    gFieldObjectImageAnim_QuintyPlumpGoEast,
-    gFieldObjectImageAnim_QuintyPlumpGoFastSouth,
-    gFieldObjectImageAnim_QuintyPlumpGoFastNorth,
-    gFieldObjectImageAnim_QuintyPlumpGoFastWest,
-    gFieldObjectImageAnim_QuintyPlumpGoFastEast,
-    gFieldObjectImageAnim_QuintyPlumpGoFasterSouth,
-    gFieldObjectImageAnim_QuintyPlumpGoFasterNorth,
-    gFieldObjectImageAnim_QuintyPlumpGoFasterWest,
-    gFieldObjectImageAnim_QuintyPlumpGoFasterEast,
-    gFieldObjectImageAnim_QuintyPlumpGoFastestSouth,
-    gFieldObjectImageAnim_QuintyPlumpGoFastestNorth,
-    gFieldObjectImageAnim_QuintyPlumpGoFastestWest,
-    gFieldObjectImageAnim_QuintyPlumpGoFastestEast,
+const union AnimCmd *const gEventObjectImageAnimTable_QuintyPlump[] = {
+    gEventObjectImageAnim_QuintyPlumpFaceSouth,
+    gEventObjectImageAnim_QuintyPlumpFaceNorth,
+    gEventObjectImageAnim_QuintyPlumpFaceWest,
+    gEventObjectImageAnim_QuintyPlumpFaceEast,
+    gEventObjectImageAnim_QuintyPlumpGoSouth,
+    gEventObjectImageAnim_QuintyPlumpGoNorth,
+    gEventObjectImageAnim_QuintyPlumpGoWest,
+    gEventObjectImageAnim_QuintyPlumpGoEast,
+    gEventObjectImageAnim_QuintyPlumpGoFastSouth,
+    gEventObjectImageAnim_QuintyPlumpGoFastNorth,
+    gEventObjectImageAnim_QuintyPlumpGoFastWest,
+    gEventObjectImageAnim_QuintyPlumpGoFastEast,
+    gEventObjectImageAnim_QuintyPlumpGoFasterSouth,
+    gEventObjectImageAnim_QuintyPlumpGoFasterNorth,
+    gEventObjectImageAnim_QuintyPlumpGoFasterWest,
+    gEventObjectImageAnim_QuintyPlumpGoFasterEast,
+    gEventObjectImageAnim_QuintyPlumpGoFastestSouth,
+    gEventObjectImageAnim_QuintyPlumpGoFastestNorth,
+    gEventObjectImageAnim_QuintyPlumpGoFastestWest,
+    gEventObjectImageAnim_QuintyPlumpGoFastestEast,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_Standard[] = {
-    gFieldObjectImageAnim_FaceSouth,
-    gFieldObjectImageAnim_FaceNorth,
-    gFieldObjectImageAnim_FaceWest,
-    gFieldObjectImageAnim_FaceEast,
-    gFieldObjectImageAnim_GoSouth,
-    gFieldObjectImageAnim_GoNorth,
-    gFieldObjectImageAnim_GoWest,
-    gFieldObjectImageAnim_GoEast,
-    gFieldObjectImageAnim_GoFastSouth,
-    gFieldObjectImageAnim_GoFastNorth,
-    gFieldObjectImageAnim_GoFastWest,
-    gFieldObjectImageAnim_GoFastEast,
-    gFieldObjectImageAnim_GoFasterSouth,
-    gFieldObjectImageAnim_GoFasterNorth,
-    gFieldObjectImageAnim_GoFasterWest,
-    gFieldObjectImageAnim_GoFasterEast,
-    gFieldObjectImageAnim_GoFastestSouth,
-    gFieldObjectImageAnim_GoFastestNorth,
-    gFieldObjectImageAnim_GoFastestWest,
-    gFieldObjectImageAnim_GoFastestEast,
+const union AnimCmd *const gEventObjectImageAnimTable_Standard[] = {
+    gEventObjectImageAnim_FaceSouth,
+    gEventObjectImageAnim_FaceNorth,
+    gEventObjectImageAnim_FaceWest,
+    gEventObjectImageAnim_FaceEast,
+    gEventObjectImageAnim_GoSouth,
+    gEventObjectImageAnim_GoNorth,
+    gEventObjectImageAnim_GoWest,
+    gEventObjectImageAnim_GoEast,
+    gEventObjectImageAnim_GoFastSouth,
+    gEventObjectImageAnim_GoFastNorth,
+    gEventObjectImageAnim_GoFastWest,
+    gEventObjectImageAnim_GoFastEast,
+    gEventObjectImageAnim_GoFasterSouth,
+    gEventObjectImageAnim_GoFasterNorth,
+    gEventObjectImageAnim_GoFasterWest,
+    gEventObjectImageAnim_GoFasterEast,
+    gEventObjectImageAnim_GoFastestSouth,
+    gEventObjectImageAnim_GoFastestNorth,
+    gEventObjectImageAnim_GoFastestWest,
+    gEventObjectImageAnim_GoFastestEast,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_HoOh[] = {
-    gFieldObjectImageAnim_FaceSouth,
-    gFieldObjectImageAnim_FaceNorth,
-    gFieldObjectImageAnim_FaceWest,
-    gFieldObjectImageAnim_FaceEast,
-    gFieldObjectImageAnim_HoOhFlapWings,
-    gFieldObjectImageAnim_HoOhStayStill,
-    gFieldObjectImageAnim_GoWest,
-    gFieldObjectImageAnim_GoEast,
-    gFieldObjectImageAnim_GoFastSouth,
-    gFieldObjectImageAnim_GoFastNorth,
-    gFieldObjectImageAnim_GoFastWest,
-    gFieldObjectImageAnim_GoFastEast,
-    gFieldObjectImageAnim_GoFasterSouth,
-    gFieldObjectImageAnim_GoFasterNorth,
-    gFieldObjectImageAnim_GoFasterWest,
-    gFieldObjectImageAnim_GoFasterEast,
-    gFieldObjectImageAnim_GoFastestSouth,
-    gFieldObjectImageAnim_GoFastestNorth,
-    gFieldObjectImageAnim_GoFastestWest,
-    gFieldObjectImageAnim_GoFastestEast,
+const union AnimCmd *const gEventObjectImageAnimTable_HoOh[] = {
+    gEventObjectImageAnim_FaceSouth,
+    gEventObjectImageAnim_FaceNorth,
+    gEventObjectImageAnim_FaceWest,
+    gEventObjectImageAnim_FaceEast,
+    gEventObjectImageAnim_HoOhFlapWings,
+    gEventObjectImageAnim_HoOhStayStill,
+    gEventObjectImageAnim_GoWest,
+    gEventObjectImageAnim_GoEast,
+    gEventObjectImageAnim_GoFastSouth,
+    gEventObjectImageAnim_GoFastNorth,
+    gEventObjectImageAnim_GoFastWest,
+    gEventObjectImageAnim_GoFastEast,
+    gEventObjectImageAnim_GoFasterSouth,
+    gEventObjectImageAnim_GoFasterNorth,
+    gEventObjectImageAnim_GoFasterWest,
+    gEventObjectImageAnim_GoFasterEast,
+    gEventObjectImageAnim_GoFastestSouth,
+    gEventObjectImageAnim_GoFastestNorth,
+    gEventObjectImageAnim_GoFastestWest,
+    gEventObjectImageAnim_GoFastestEast,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_Groudon3[] = {
-    gFieldObjectImageAnim_FaceSouth,
-    gFieldObjectImageAnim_FaceNorth,
-    gFieldObjectImageAnim_FaceWest,
-    gFieldObjectImageAnim_FaceEast,
-    gFieldObjectImageAnim_GoSouth,
-    gFieldObjectImageAnim_GoEast,
-    gFieldObjectImageAnim_GoWest,
-    gFieldObjectImageAnim_GoEast,
-    gFieldObjectImageAnim_GoFastSouth,
-    gFieldObjectImageAnim_GoFastEast,
-    gFieldObjectImageAnim_GoFastWest,
-    gFieldObjectImageAnim_GoFastEast,
-    gFieldObjectImageAnim_GoFasterSouth,
-    gFieldObjectImageAnim_GoFasterEast,
-    gFieldObjectImageAnim_GoFasterWest,
-    gFieldObjectImageAnim_GoFasterEast,
-    gFieldObjectImageAnim_GoFastestSouth,
-    gFieldObjectImageAnim_GoFastestEast,
-    gFieldObjectImageAnim_GoFastestWest,
-    gFieldObjectImageAnim_GoFastestEast,
+const union AnimCmd *const gEventObjectImageAnimTable_Groudon3[] = {
+    gEventObjectImageAnim_FaceSouth,
+    gEventObjectImageAnim_FaceNorth,
+    gEventObjectImageAnim_FaceWest,
+    gEventObjectImageAnim_FaceEast,
+    gEventObjectImageAnim_GoSouth,
+    gEventObjectImageAnim_GoEast,
+    gEventObjectImageAnim_GoWest,
+    gEventObjectImageAnim_GoEast,
+    gEventObjectImageAnim_GoFastSouth,
+    gEventObjectImageAnim_GoFastEast,
+    gEventObjectImageAnim_GoFastWest,
+    gEventObjectImageAnim_GoFastEast,
+    gEventObjectImageAnim_GoFasterSouth,
+    gEventObjectImageAnim_GoFasterEast,
+    gEventObjectImageAnim_GoFasterWest,
+    gEventObjectImageAnim_GoFasterEast,
+    gEventObjectImageAnim_GoFastestSouth,
+    gEventObjectImageAnim_GoFastestEast,
+    gEventObjectImageAnim_GoFastestWest,
+    gEventObjectImageAnim_GoFastestEast,
 };
 
-const union AnimCmd gFieldObjectImageAnim_85091F0[] =
+const union AnimCmd gEventObjectImageAnim_85091F0[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_85091F8[] =
+const union AnimCmd gEventObjectImageAnim_85091F8[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_8509200[] =
+const union AnimCmd gEventObjectImageAnim_8509200[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_8509208[] =
+const union AnimCmd gEventObjectImageAnim_8509208[] =
 {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_8509210[] =
+const union AnimCmd gEventObjectImageAnim_8509210[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_8509218[] =
+const union AnimCmd gEventObjectImageAnim_8509218[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_8509220[] =
+const union AnimCmd gEventObjectImageAnim_8509220[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_8509228[] =
+const union AnimCmd gEventObjectImageAnim_8509228[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldObjectImageAnim_8509230[] =
+const union AnimCmd gEventObjectImageAnim_8509230[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_Rayquaza2[] = {
-    gFieldObjectImageAnim_8509218,
-    gFieldObjectImageAnim_8509220,
-    gFieldObjectImageAnim_8509228,
-    gFieldObjectImageAnim_8509230,
-    gFieldObjectImageAnim_8509200,
-    gFieldObjectImageAnim_85091F8,
-    gFieldObjectImageAnim_8509208,
-    gFieldObjectImageAnim_8509210,
-    gFieldObjectImageAnim_8509200,
-    gFieldObjectImageAnim_85091F8,
-    gFieldObjectImageAnim_85091F0,
-    gFieldObjectImageAnim_8509210,
-    gFieldObjectImageAnim_8509200,
-    gFieldObjectImageAnim_85091F8,
-    gFieldObjectImageAnim_8509208,
-    gFieldObjectImageAnim_8509210,
-    gFieldObjectImageAnim_8509200,
-    gFieldObjectImageAnim_85091F8,
-    gFieldObjectImageAnim_8509208,
-    gFieldObjectImageAnim_8509210,
+const union AnimCmd *const gEventObjectImageAnimTable_Rayquaza2[] = {
+    gEventObjectImageAnim_8509218,
+    gEventObjectImageAnim_8509220,
+    gEventObjectImageAnim_8509228,
+    gEventObjectImageAnim_8509230,
+    gEventObjectImageAnim_8509200,
+    gEventObjectImageAnim_85091F8,
+    gEventObjectImageAnim_8509208,
+    gEventObjectImageAnim_8509210,
+    gEventObjectImageAnim_8509200,
+    gEventObjectImageAnim_85091F8,
+    gEventObjectImageAnim_85091F0,
+    gEventObjectImageAnim_8509210,
+    gEventObjectImageAnim_8509200,
+    gEventObjectImageAnim_85091F8,
+    gEventObjectImageAnim_8509208,
+    gEventObjectImageAnim_8509210,
+    gEventObjectImageAnim_8509200,
+    gEventObjectImageAnim_85091F8,
+    gEventObjectImageAnim_8509208,
+    gEventObjectImageAnim_8509210,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_BrendanMayNormal[] = {
-    gFieldObjectImageAnim_FaceSouth,
-    gFieldObjectImageAnim_FaceNorth,
-    gFieldObjectImageAnim_FaceWest,
-    gFieldObjectImageAnim_FaceEast,
-    gFieldObjectImageAnim_GoSouth,
-    gFieldObjectImageAnim_GoNorth,
-    gFieldObjectImageAnim_GoWest,
-    gFieldObjectImageAnim_GoEast,
-    gFieldObjectImageAnim_GoFastSouth,
-    gFieldObjectImageAnim_GoFastNorth,
-    gFieldObjectImageAnim_GoFastWest,
-    gFieldObjectImageAnim_GoFastEast,
-    gFieldObjectImageAnim_GoFasterSouth,
-    gFieldObjectImageAnim_GoFasterNorth,
-    gFieldObjectImageAnim_GoFasterWest,
-    gFieldObjectImageAnim_GoFasterEast,
-    gFieldObjectImageAnim_GoFastestSouth,
-    gFieldObjectImageAnim_GoFastestNorth,
-    gFieldObjectImageAnim_GoFastestWest,
-    gFieldObjectImageAnim_GoFastestEast,
-    gFieldObjectImageAnim_RunSouth,
-    gFieldObjectImageAnim_RunNorth,
-    gFieldObjectImageAnim_RunWest,
-    gFieldObjectImageAnim_RunEast,
+const union AnimCmd *const gEventObjectImageAnimTable_BrendanMayNormal[] = {
+    gEventObjectImageAnim_FaceSouth,
+    gEventObjectImageAnim_FaceNorth,
+    gEventObjectImageAnim_FaceWest,
+    gEventObjectImageAnim_FaceEast,
+    gEventObjectImageAnim_GoSouth,
+    gEventObjectImageAnim_GoNorth,
+    gEventObjectImageAnim_GoWest,
+    gEventObjectImageAnim_GoEast,
+    gEventObjectImageAnim_GoFastSouth,
+    gEventObjectImageAnim_GoFastNorth,
+    gEventObjectImageAnim_GoFastWest,
+    gEventObjectImageAnim_GoFastEast,
+    gEventObjectImageAnim_GoFasterSouth,
+    gEventObjectImageAnim_GoFasterNorth,
+    gEventObjectImageAnim_GoFasterWest,
+    gEventObjectImageAnim_GoFasterEast,
+    gEventObjectImageAnim_GoFastestSouth,
+    gEventObjectImageAnim_GoFastestNorth,
+    gEventObjectImageAnim_GoFastestWest,
+    gEventObjectImageAnim_GoFastestEast,
+    gEventObjectImageAnim_RunSouth,
+    gEventObjectImageAnim_RunNorth,
+    gEventObjectImageAnim_RunWest,
+    gEventObjectImageAnim_RunEast,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_AcroBike[] = {
-    gFieldObjectImageAnim_FaceSouth,
-    gFieldObjectImageAnim_FaceNorth,
-    gFieldObjectImageAnim_FaceWest,
-    gFieldObjectImageAnim_FaceEast,
-    gFieldObjectImageAnim_GoSouth,
-    gFieldObjectImageAnim_GoNorth,
-    gFieldObjectImageAnim_GoWest,
-    gFieldObjectImageAnim_GoEast,
-    gFieldObjectImageAnim_GoFastSouth,
-    gFieldObjectImageAnim_GoFastNorth,
-    gFieldObjectImageAnim_GoFastWest,
-    gFieldObjectImageAnim_GoFastEast,
-    gFieldObjectImageAnim_GoFasterSouth,
-    gFieldObjectImageAnim_GoFasterNorth,
-    gFieldObjectImageAnim_GoFasterWest,
-    gFieldObjectImageAnim_GoFasterEast,
-    gFieldObjectImageAnim_GoFastestSouth,
-    gFieldObjectImageAnim_GoFastestNorth,
-    gFieldObjectImageAnim_GoFastestWest,
-    gFieldObjectImageAnim_GoFastestEast,
-    gFieldObjectImageAnim_BunnyHoppyBackWheelSouth,
-    gFieldObjectImageAnim_BunnyHoppyBackWheelNorth,
-    gFieldObjectImageAnim_BunnyHoppyBackWheelWest,
-    gFieldObjectImageAnim_BunnyHoppyBackWheelEast,
-    gFieldObjectImageAnim_BunnyHoppyFrontWheelSouth,
-    gFieldObjectImageAnim_BunnyHoppyFrontWheelNorth,
-    gFieldObjectImageAnim_BunnyHoppyFrontWheelWest,
-    gFieldObjectImageAnim_BunnyHoppyFrontWheelEast,
-    gFieldObjectImageAnim_StandingWheelieBackWheelSouth,
-    gFieldObjectImageAnim_StandingWheelieBackWheelNorth,
-    gFieldObjectImageAnim_StandingWheelieBackWheelWest,
-    gFieldObjectImageAnim_StandingWheelieBackWheelEast,
-    gFieldObjectImageAnim_StandingWheelieFrontWheelSouth,
-    gFieldObjectImageAnim_StandingWheelieFrontWheelNorth,
-    gFieldObjectImageAnim_StandingWheelieFrontWheelWest,
-    gFieldObjectImageAnim_StandingWheelieFrontWheelEast,
-    gFieldObjectImageAnim_MovingWheelieSouth,
-    gFieldObjectImageAnim_MovingWheelieNorth,
-    gFieldObjectImageAnim_MovingWheelieWest,
-    gFieldObjectImageAnim_MovingWheelieEast,
+const union AnimCmd *const gEventObjectImageAnimTable_AcroBike[] = {
+    gEventObjectImageAnim_FaceSouth,
+    gEventObjectImageAnim_FaceNorth,
+    gEventObjectImageAnim_FaceWest,
+    gEventObjectImageAnim_FaceEast,
+    gEventObjectImageAnim_GoSouth,
+    gEventObjectImageAnim_GoNorth,
+    gEventObjectImageAnim_GoWest,
+    gEventObjectImageAnim_GoEast,
+    gEventObjectImageAnim_GoFastSouth,
+    gEventObjectImageAnim_GoFastNorth,
+    gEventObjectImageAnim_GoFastWest,
+    gEventObjectImageAnim_GoFastEast,
+    gEventObjectImageAnim_GoFasterSouth,
+    gEventObjectImageAnim_GoFasterNorth,
+    gEventObjectImageAnim_GoFasterWest,
+    gEventObjectImageAnim_GoFasterEast,
+    gEventObjectImageAnim_GoFastestSouth,
+    gEventObjectImageAnim_GoFastestNorth,
+    gEventObjectImageAnim_GoFastestWest,
+    gEventObjectImageAnim_GoFastestEast,
+    gEventObjectImageAnim_BunnyHoppyBackWheelSouth,
+    gEventObjectImageAnim_BunnyHoppyBackWheelNorth,
+    gEventObjectImageAnim_BunnyHoppyBackWheelWest,
+    gEventObjectImageAnim_BunnyHoppyBackWheelEast,
+    gEventObjectImageAnim_BunnyHoppyFrontWheelSouth,
+    gEventObjectImageAnim_BunnyHoppyFrontWheelNorth,
+    gEventObjectImageAnim_BunnyHoppyFrontWheelWest,
+    gEventObjectImageAnim_BunnyHoppyFrontWheelEast,
+    gEventObjectImageAnim_StandingWheelieBackWheelSouth,
+    gEventObjectImageAnim_StandingWheelieBackWheelNorth,
+    gEventObjectImageAnim_StandingWheelieBackWheelWest,
+    gEventObjectImageAnim_StandingWheelieBackWheelEast,
+    gEventObjectImageAnim_StandingWheelieFrontWheelSouth,
+    gEventObjectImageAnim_StandingWheelieFrontWheelNorth,
+    gEventObjectImageAnim_StandingWheelieFrontWheelWest,
+    gEventObjectImageAnim_StandingWheelieFrontWheelEast,
+    gEventObjectImageAnim_MovingWheelieSouth,
+    gEventObjectImageAnim_MovingWheelieNorth,
+    gEventObjectImageAnim_MovingWheelieWest,
+    gEventObjectImageAnim_MovingWheelieEast,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_Surfing[] = {
-    gFieldObjectImageAnim_FaceSouth,
-    gFieldObjectImageAnim_FaceNorth,
-    gFieldObjectImageAnim_FaceWest,
-    gFieldObjectImageAnim_FaceEast,
-    gFieldObjectImageAnim_GoSouth,
-    gFieldObjectImageAnim_GoNorth,
-    gFieldObjectImageAnim_GoWest,
-    gFieldObjectImageAnim_GoEast,
-    gFieldObjectImageAnim_GoFastSouth,
-    gFieldObjectImageAnim_GoFastNorth,
-    gFieldObjectImageAnim_GoFastWest,
-    gFieldObjectImageAnim_GoFastEast,
-    gFieldObjectImageAnim_GoFasterSouth,
-    gFieldObjectImageAnim_GoFasterNorth,
-    gFieldObjectImageAnim_GoFasterWest,
-    gFieldObjectImageAnim_GoFasterEast,
-    gFieldObjectImageAnim_GoFastestSouth,
-    gFieldObjectImageAnim_GoFastestNorth,
-    gFieldObjectImageAnim_GoFastestWest,
-    gFieldObjectImageAnim_GoFastestEast,
-    gFieldObjectImageAnim_GetOnOffSurfBlobSouth,
-    gFieldObjectImageAnim_GetOnOffSurfBlobNorth,
-    gFieldObjectImageAnim_GetOnOffSurfBlobWest,
-    gFieldObjectImageAnim_GetOnOffSurfBlobEast,
+const union AnimCmd *const gEventObjectImageAnimTable_Surfing[] = {
+    gEventObjectImageAnim_FaceSouth,
+    gEventObjectImageAnim_FaceNorth,
+    gEventObjectImageAnim_FaceWest,
+    gEventObjectImageAnim_FaceEast,
+    gEventObjectImageAnim_GoSouth,
+    gEventObjectImageAnim_GoNorth,
+    gEventObjectImageAnim_GoWest,
+    gEventObjectImageAnim_GoEast,
+    gEventObjectImageAnim_GoFastSouth,
+    gEventObjectImageAnim_GoFastNorth,
+    gEventObjectImageAnim_GoFastWest,
+    gEventObjectImageAnim_GoFastEast,
+    gEventObjectImageAnim_GoFasterSouth,
+    gEventObjectImageAnim_GoFasterNorth,
+    gEventObjectImageAnim_GoFasterWest,
+    gEventObjectImageAnim_GoFasterEast,
+    gEventObjectImageAnim_GoFastestSouth,
+    gEventObjectImageAnim_GoFastestNorth,
+    gEventObjectImageAnim_GoFastestWest,
+    gEventObjectImageAnim_GoFastestEast,
+    gEventObjectImageAnim_GetOnOffSurfBlobSouth,
+    gEventObjectImageAnim_GetOnOffSurfBlobNorth,
+    gEventObjectImageAnim_GetOnOffSurfBlobWest,
+    gEventObjectImageAnim_GetOnOffSurfBlobEast,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_Nurse[] = {
-    gFieldObjectImageAnim_FaceSouth,
-    gFieldObjectImageAnim_FaceNorth,
-    gFieldObjectImageAnim_FaceWest,
-    gFieldObjectImageAnim_FaceEast,
-    gFieldObjectImageAnim_GoSouth,
-    gFieldObjectImageAnim_GoNorth,
-    gFieldObjectImageAnim_GoWest,
-    gFieldObjectImageAnim_GoEast,
-    gFieldObjectImageAnim_GoFastSouth,
-    gFieldObjectImageAnim_GoFastNorth,
-    gFieldObjectImageAnim_GoFastWest,
-    gFieldObjectImageAnim_GoFastEast,
-    gFieldObjectImageAnim_GoFasterSouth,
-    gFieldObjectImageAnim_GoFasterNorth,
-    gFieldObjectImageAnim_GoFasterWest,
-    gFieldObjectImageAnim_GoFasterEast,
-    gFieldObjectImageAnim_GoFastestSouth,
-    gFieldObjectImageAnim_GoFastestNorth,
-    gFieldObjectImageAnim_GoFastestWest,
-    gFieldObjectImageAnim_GoFastestEast,
-    gFieldObjectImageAnim_NurseBow,
+const union AnimCmd *const gEventObjectImageAnimTable_Nurse[] = {
+    gEventObjectImageAnim_FaceSouth,
+    gEventObjectImageAnim_FaceNorth,
+    gEventObjectImageAnim_FaceWest,
+    gEventObjectImageAnim_FaceEast,
+    gEventObjectImageAnim_GoSouth,
+    gEventObjectImageAnim_GoNorth,
+    gEventObjectImageAnim_GoWest,
+    gEventObjectImageAnim_GoEast,
+    gEventObjectImageAnim_GoFastSouth,
+    gEventObjectImageAnim_GoFastNorth,
+    gEventObjectImageAnim_GoFastWest,
+    gEventObjectImageAnim_GoFastEast,
+    gEventObjectImageAnim_GoFasterSouth,
+    gEventObjectImageAnim_GoFasterNorth,
+    gEventObjectImageAnim_GoFasterWest,
+    gEventObjectImageAnim_GoFasterEast,
+    gEventObjectImageAnim_GoFastestSouth,
+    gEventObjectImageAnim_GoFastestNorth,
+    gEventObjectImageAnim_GoFastestWest,
+    gEventObjectImageAnim_GoFastestEast,
+    gEventObjectImageAnim_NurseBow,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_FieldMove[] = {
-    gFieldObjectImageAnim_FieldMove,
+const union AnimCmd *const gEventObjectImageAnimTable_FieldMove[] = {
+    gEventObjectImageAnim_FieldMove,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_BerryTree[] = {
-    gFieldObjectImageAnim_BerryTreeStage0,
-    gFieldObjectImageAnim_BerryTreeStage1,
-    gFieldObjectImageAnim_BerryTreeStage2,
-    gFieldObjectImageAnim_BerryTreeStage3,
-    gFieldObjectImageAnim_BerryTreeStage4,
+const union AnimCmd *const gEventObjectImageAnimTable_BerryTree[] = {
+    gEventObjectImageAnim_BerryTreeStage0,
+    gEventObjectImageAnim_BerryTreeStage1,
+    gEventObjectImageAnim_BerryTreeStage2,
+    gEventObjectImageAnim_BerryTreeStage3,
+    gEventObjectImageAnim_BerryTreeStage4,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_BreakableRock[] = {
-    gFieldObjectImageAnim_StayStill,
-    gFieldObjectImageAnim_RockBreak,
+const union AnimCmd *const gEventObjectImageAnimTable_BreakableRock[] = {
+    gEventObjectImageAnim_StayStill,
+    gEventObjectImageAnim_RockBreak,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_CuttableTree[] = {
-    gFieldObjectImageAnim_StayStill,
-    gFieldObjectImageAnim_TreeCut,
+const union AnimCmd *const gEventObjectImageAnimTable_CuttableTree[] = {
+    gEventObjectImageAnim_StayStill,
+    gEventObjectImageAnim_TreeCut,
 };
 
-const union AnimCmd *const gFieldObjectImageAnimTable_Fishing[] = {
-    gFieldObjectImageAnim_TakeOutRodSouth,
-    gFieldObjectImageAnim_TakeOutRodNorth,
-    gFieldObjectImageAnim_TakeOutRodWest,
-    gFieldObjectImageAnim_TakeOutRodEast,
-    gFieldObjectImageAnim_PutAwayRodSouth,
-    gFieldObjectImageAnim_PutAwayRodNorth,
-    gFieldObjectImageAnim_PutAwayRodWest,
-    gFieldObjectImageAnim_PutAwayRodEast,
-    gFieldObjectImageAnim_HookedPokemonSouth,
-    gFieldObjectImageAnim_HookedPokemonNorth,
-    gFieldObjectImageAnim_HookedPokemonWest,
-    gFieldObjectImageAnim_HookedPokemonEast,
+const union AnimCmd *const gEventObjectImageAnimTable_Fishing[] = {
+    gEventObjectImageAnim_TakeOutRodSouth,
+    gEventObjectImageAnim_TakeOutRodNorth,
+    gEventObjectImageAnim_TakeOutRodWest,
+    gEventObjectImageAnim_TakeOutRodEast,
+    gEventObjectImageAnim_PutAwayRodSouth,
+    gEventObjectImageAnim_PutAwayRodNorth,
+    gEventObjectImageAnim_PutAwayRodWest,
+    gEventObjectImageAnim_PutAwayRodEast,
+    gEventObjectImageAnim_HookedPokemonSouth,
+    gEventObjectImageAnim_HookedPokemonNorth,
+    gEventObjectImageAnim_HookedPokemonWest,
+    gEventObjectImageAnim_HookedPokemonEast,
 };
 
-const union AffineAnimCmd *const gFieldObjectRotScalAnimTable_KyogreGroudon[] = {
-    gFieldObjectRotScalAnim_8508FD8,
-    gFieldObjectRotScalAnim_8509008,
-    gFieldObjectRotScalAnim_8509050,
-    gFieldObjectRotScalAnim_8509040,
-    gFieldObjectRotScalAnim_8509078,
-    gFieldObjectRotScalAnim_8509060,
+const union AffineAnimCmd *const gEventObjectRotScalAnimTable_KyogreGroudon[] = {
+    gEventObjectRotScalAnim_8508FD8,
+    gEventObjectRotScalAnim_8509008,
+    gEventObjectRotScalAnim_8509050,
+    gEventObjectRotScalAnim_8509040,
+    gEventObjectRotScalAnim_8509078,
+    gEventObjectRotScalAnim_8509060,
 };
 
 const struct UnkStruct_085094AC gUnknown_085094AC[] = {
     {
-        .anims = gFieldObjectImageAnimTable_QuintyPlump,
+        .anims = gEventObjectImageAnimTable_QuintyPlump,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gFieldObjectImageAnimTable_Standard,
+        .anims = gEventObjectImageAnimTable_Standard,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gFieldObjectImageAnimTable_BrendanMayNormal,
+        .anims = gEventObjectImageAnimTable_BrendanMayNormal,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gFieldObjectImageAnimTable_AcroBike,
+        .anims = gEventObjectImageAnimTable_AcroBike,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gFieldObjectImageAnimTable_Surfing,
+        .anims = gEventObjectImageAnimTable_Surfing,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gFieldObjectImageAnimTable_Nurse,
+        .anims = gEventObjectImageAnimTable_Nurse,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gFieldObjectImageAnimTable_Fishing,
+        .anims = gEventObjectImageAnimTable_Fishing,
         .animPos = {1, 3, 0, 2},
     },
     {

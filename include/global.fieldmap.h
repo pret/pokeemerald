@@ -1,7 +1,7 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
-#define NUM_FIELD_OBJECTS 16
+#define NUM_EVENT_OBJECTS 16
 
 enum
 {
@@ -72,7 +72,7 @@ struct BackupMapData
     u16 *map;
 };
 
-struct MapObjectTemplate
+struct EventObjectTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
@@ -133,12 +133,12 @@ struct BgEvent
 
 struct MapEvents
 {
-    u8 mapObjectCount;
+    u8 eventObjectCount;
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
 
-    struct MapObjectTemplate *mapObjects;
+    struct EventObjectTemplate *eventObjects;
     struct WarpEvent *warps;
     struct CoordEvent *coordEvents;
     struct BgEvent *bgEvents;
@@ -176,7 +176,7 @@ struct MapHeader
     /* 0x1B */ u8 battleType;
 };
 
-struct MapObject
+struct EventObject
 {
     /*0x00*/ u32 active:1;
              u32 singleMovementActive:1;
@@ -239,7 +239,7 @@ struct MapObject
     /*size = 0x24*/
 };
 
-struct MapObjectGraphicsInfo
+struct EventObjectGraphicsInfo
 {
     /*0x00*/ u16 tileTag;
     /*0x02*/ u16 paletteTag1;
@@ -320,7 +320,7 @@ struct PlayerAvatar
     /*0x02*/ u8 runningState; // this is a static running state. 00 is not moving, 01 is turn direction, 02 is moving.
     /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
     /*0x04*/ u8 spriteId;
-    /*0x05*/ u8 mapObjectId;
+    /*0x05*/ u8 eventObjectId;
     /*0x06*/ bool8 preventStep;
     /*0x07*/ u8 gender;
     /*0x08*/ u8 acroBikeState; // 00 is normal, 01 is turning, 02 is standing wheelie, 03 is hopping wheelie
@@ -342,8 +342,8 @@ struct Camera
     s32 y;
 };
 
-extern struct MapObject gMapObjects[NUM_FIELD_OBJECTS];
-extern u8 gSelectedMapObject;
+extern struct EventObject gEventObjects[NUM_EVENT_OBJECTS];
+extern u8 gSelectedEventObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;

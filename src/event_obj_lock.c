@@ -2,7 +2,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "script_movement.h"
 #include "task.h"
 #include "trainer_see.h"
@@ -38,9 +38,9 @@ bool8 sub_80983C4(void)
 }
 
 
-void ScriptFreezeMapObjects(void)
+void ScriptFreezeEventObjects(void)
 {
-    FreezeMapObjects();
+    FreezeEventObjects();
     CreateTask(sub_80983A4, 80);
 }
 
@@ -53,9 +53,9 @@ static void sub_8098400(u8 taskId)
         sub_808B864();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gMapObjects[gSelectedMapObject].singleMovementActive)
+    if (!task->data[1] && !gEventObjects[gSelectedEventObject].singleMovementActive)
     {
-        FreezeMapObject(&gMapObjects[gSelectedMapObject]);
+        FreezeEventObject(&gEventObjects[gSelectedEventObject]);
         task->data[1] = 1;
     }
     if (task->data[0] && task->data[1])
@@ -75,61 +75,61 @@ bool8 sub_809847C(void)
     }
 }
 
-void LockSelectedMapObject(void)
+void LockSelectedEventObject(void)
 {
     u8 taskId;
-    FreezeMapObjectsExceptOne(gSelectedMapObject);
+    FreezeEventObjectsExceptOne(gSelectedEventObject);
     taskId = CreateTask(sub_8098400, 80);
-    if (!gMapObjects[gSelectedMapObject].singleMovementActive)
+    if (!gEventObjects[gSelectedEventObject].singleMovementActive)
     {
-        FreezeMapObject(&gMapObjects[gSelectedMapObject]);
+        FreezeEventObject(&gEventObjects[gSelectedEventObject]);
         gTasks[taskId].data[1] = 1;
     }
 }
 
 void sub_80984F4(void)
 {
-    u8 objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    u8 objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[objectId]);
     sub_80D338C();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
 }
 
 void sub_8098524(void)
 {
     u8 objectId;
 
-    if (gMapObjects[gSelectedMapObject].active)
-        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedMapObject]);
-    objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    if (gEventObjects[gSelectedEventObject].active)
+        EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[gSelectedEventObject]);
+    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[objectId]);
     sub_80D338C();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
 }
 
 void sub_8098574(void)
 {
-    FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject], gSpecialVar_Facing);
+    EventObjectFaceOppositeDirection(&gEventObjects[gSelectedEventObject], gSpecialVar_Facing);
 }
 
 void sub_809859C(void)
 {
-    FieldObjectClearAnimIfSpecialAnimActive(&gMapObjects[gSelectedMapObject]);
+    EventObjectClearAnimIfSpecialAnimActive(&gEventObjects[gSelectedEventObject]);
 }
 
 static void sub_80985BC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u8 mapObjectId = task->data[2];
+    u8 eventObjectId = task->data[2];
 
     if (!task->data[0] && walkrun_is_standing_still() == TRUE)
     {
         sub_808B864();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gMapObjects[mapObjectId].singleMovementActive)
+    if (!task->data[1] && !gEventObjects[eventObjectId].singleMovementActive)
     {
-        FreezeMapObject(&gMapObjects[mapObjectId]);
+        FreezeEventObject(&gEventObjects[eventObjectId]);
         task->data[1] = 1;
     }
     if (task->data[0] && task->data[1])
@@ -139,34 +139,34 @@ static void sub_80985BC(u8 taskId)
 void sub_8098630(void)
 {
     u8 trainerObjectId1, trainerObjectId2, taskId;
-    trainerObjectId1 = GetChosenApproachingTrainerMapObjectId(0);
+    trainerObjectId1 = GetChosenApproachingTrainerEventObjectId(0);
     if(gNoOfApproachingTrainers == 2)
     {
-        trainerObjectId2 = GetChosenApproachingTrainerMapObjectId(1);
+        trainerObjectId2 = GetChosenApproachingTrainerEventObjectId(1);
         sub_8098074(trainerObjectId1, trainerObjectId2);
         taskId = CreateTask(sub_80985BC, 80);
         gTasks[taskId].data[2] = trainerObjectId1;
-        if(!gMapObjects[trainerObjectId1].singleMovementActive)
+        if(!gEventObjects[trainerObjectId1].singleMovementActive)
         {
-            FreezeMapObject(&gMapObjects[trainerObjectId1]);
+            FreezeEventObject(&gEventObjects[trainerObjectId1]);
             gTasks[taskId].data[1] = 1;
         }
         taskId = CreateTask(sub_80985BC, 81);
         gTasks[taskId].data[2] = trainerObjectId2;
-        if(!gMapObjects[trainerObjectId2].singleMovementActive)
+        if(!gEventObjects[trainerObjectId2].singleMovementActive)
         {
-            FreezeMapObject(&gMapObjects[trainerObjectId2]);
+            FreezeEventObject(&gEventObjects[trainerObjectId2]);
             gTasks[taskId].data[1] = 1;
         }
     }
     else
     {
-        FreezeMapObjectsExceptOne(trainerObjectId1);
+        FreezeEventObjectsExceptOne(trainerObjectId1);
         taskId = CreateTask(sub_80985BC, 80);
         gTasks[taskId].data[2] = trainerObjectId1;
-        if(!gMapObjects[trainerObjectId1].singleMovementActive)
+        if(!gEventObjects[trainerObjectId1].singleMovementActive)
         {
-            FreezeMapObject(&gMapObjects[trainerObjectId1]);
+            FreezeEventObject(&gEventObjects[trainerObjectId1]);
             gTasks[taskId].data[1] = 1;
         }
     }
