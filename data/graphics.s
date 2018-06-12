@@ -2895,19 +2895,19 @@ gUnknown_08D85620:: @ 8D85620
 	@ dome anim pals
 
 	.align 2
-gUnknown_08D85640:: @ 8D85640
+gTilesetAnims_BattleDomePals0_0:: @ 8D85640
 	.incbin "graphics/battle_frontier/dome_anim1.gbapal"
 
 	.align 2
-gUnknown_08D85660:: @ 8D85660
+gTilesetAnims_BattleDomePals0_1:: @ 8D85660
 	.incbin "graphics/battle_frontier/dome_anim2.gbapal"
 
 	.align 2
-gUnknown_08D85680:: @ 8D85680
+gTilesetAnims_BattleDomePals0_2:: @ 8D85680
 	.incbin "graphics/battle_frontier/dome_anim3.gbapal"
 
 	.align 2
-gUnknown_08D856A0:: @ 8D856A0
+gTilesetAnims_BattleDomePals0_3:: @ 8D856A0
 	.incbin "graphics/battle_frontier/dome_anim4.gbapal"
 
 	@ 8D856C0
