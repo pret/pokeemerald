@@ -8413,7 +8413,7 @@ _080AF4A4:
 	ldr r1, =gEventObjects
 	adds r0, r1
 	movs r1, 0x8
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _080AF54A
@@ -8443,7 +8443,7 @@ _080AF4DC:
 	lsls r0, 2
 	ldr r1, =gEventObjects
 	adds r0, r1
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	movs r0, 0x3
 	strh r0, [r5, 0x8]
 	b _080AF54A
@@ -8532,15 +8532,15 @@ _080AF5A2:
 	lsls r4, 2
 	ldr r0, =gEventObjects
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed0AnimId
+	bl GetWalkNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _080AF60A
@@ -9183,7 +9183,7 @@ _080AFB26:
 	lsls r0, 2
 	ldr r4, =gEventObjects
 	adds r0, r4
-	bl EventObjectClearAnimIfSpecialAnimActive
+	bl EventObjectClearHeldMovementIfActive
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
@@ -9196,7 +9196,7 @@ _080AFB26:
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x9
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _080AFBE8
@@ -9227,7 +9227,7 @@ _080AFB6C:
 	lsls r0, 2
 	ldr r1, =gEventObjects
 	adds r0, r1
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	movs r0, 0
 	bl sub_80AF0F4
 	movs r0, 0x3

@@ -1203,7 +1203,7 @@ void sub_80B16D8(void)
 {
     struct EventObject *eventObject = &gEventObjects[gSelectedEventObject];
 
-    npc_set_running_behaviour_etc(eventObject, npc_running_behaviour_by_direction(eventObject->facingDirection));
+    SetTrainerMovementType(eventObject, GetTrainerFacingDirectionMovementType(eventObject->facingDirection));
 }
 
 u8 GetTrainerBattleMode(void)

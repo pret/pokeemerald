@@ -212,7 +212,7 @@ LavaridgeTown_Movement_1EA6F8: @ 81EA6F8
 	step_end
 
 LavaridgeTown_EventScript_1EA6FA:: @ 81EA6FA
-	specialvar VAR_RESULT, player_get_direction_lower_nybble
+	specialvar VAR_RESULT, GetPlayerFacingDirection
 	compare VAR_RESULT, 1
 	goto_eq LavaridgeTown_EventScript_1EA70B
 	end

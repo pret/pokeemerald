@@ -14294,7 +14294,7 @@ sub_81963F0: @ 81963F0
 	lsls r0, 2
 	ldr r1, =gEventObjects
 	adds r0, r1
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	bl sub_80D338C
 	bl UnfreezeEventObjects
 	bl ScriptContext2_Disable

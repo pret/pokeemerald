@@ -567,7 +567,7 @@ sub_80FA004: @ 80FA004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080FA0AE
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1493,7 +1493,7 @@ sub_80FA794: @ 80FA794
 	lsls r1, 16
 	lsrs r4, r1, 16
 	adds r6, r4, 0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1815,7 +1815,7 @@ sub_80FAA7C: @ 80FAA7C
 	movs r3, 0
 	ldrsh r0, [r4, r3]
 	str r0, [r1, 0x18]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2315,29 +2315,29 @@ sub_80FAEF0: @ 80FAEF0
 	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl EventObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAF1C
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAF4E
 _080FAF1C:
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_808C228
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -2365,7 +2365,7 @@ sub_80FAF64: @ 80FAF64
 	ldr r1, =gEventObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAFC8
@@ -2381,15 +2381,15 @@ sub_80FAF64: @ 80FAF64
 	asrs r0, 16
 	cmp r0, 0x9
 	bgt _080FAFC4
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	b _080FAFC8
 	.pool
 _080FAFC4:

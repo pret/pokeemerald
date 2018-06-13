@@ -90,7 +90,7 @@ void LockSelectedEventObject(void)
 void sub_80984F4(void)
 {
     u8 objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[objectId]);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
     sub_80D338C();
     UnfreezeEventObjects();
 }
@@ -100,9 +100,9 @@ void sub_8098524(void)
     u8 objectId;
 
     if (gEventObjects[gSelectedEventObject].active)
-        EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[gSelectedEventObject]);
+        EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
     objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[objectId]);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
     sub_80D338C();
     UnfreezeEventObjects();
 }
@@ -114,7 +114,7 @@ void sub_8098574(void)
 
 void sub_809859C(void)
 {
-    EventObjectClearAnimIfSpecialAnimActive(&gEventObjects[gSelectedEventObject]);
+    EventObjectClearHeldMovementIfActive(&gEventObjects[gSelectedEventObject]);
 }
 
 static void sub_80985BC(u8 taskId)

@@ -766,7 +766,7 @@ SpawnLinkPartnerEventObject: @ 81382A0
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -1989,7 +1989,7 @@ PCTurnOnEffect_0: @ 8138D10
 	cmp r0, 0x6
 	bne _08138D7C
 	strh r5, [r4, 0xE]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -2134,7 +2134,7 @@ PCTurnOffEffect: @ 8138E2C
 	movs r6, 0
 	movs r5, 0
 	movs r4, 0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0

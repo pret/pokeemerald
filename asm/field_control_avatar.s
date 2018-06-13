@@ -189,7 +189,7 @@ sub_809C014: @ 809C014
 	strh r1, [r0]
 	ldr r0, =gSelectedEventObject
 	strb r1, [r0]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r4, sp
@@ -2452,7 +2452,7 @@ _0809D276:
 GetEventObjectScriptPointerForComparison: @ 809D280
 	push {r4,r5,lr}
 	sub sp, 0x8
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -2481,7 +2481,7 @@ GetEventObjectScriptPointerForComparison: @ 809D280
 sub_809D2BC: @ 809D2BC
 	push {r4,lr}
 	sub sp, 0x8
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	mov r4, sp
 	mov r0, sp
 	bl player_get_pos_to_and_height

@@ -2247,7 +2247,7 @@ bool8 sub_81299AC(u8 taskId)
 
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
-    player_get_direction_lower_nybble();
+    GetPlayerFacingDirection();
     sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.spriteId].data[0];
     sub_812A39C();
     gUnknown_03005DD0.spriteId = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);

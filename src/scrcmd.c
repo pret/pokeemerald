@@ -1157,7 +1157,7 @@ bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
     if (gEventObjects[gSelectedEventObject].active)
     {
         EventObjectFaceOppositeDirection(&gEventObjects[gSelectedEventObject],
-          player_get_direction_lower_nybble());
+          GetPlayerFacingDirection());
     }
     return FALSE;
 }
@@ -1244,7 +1244,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 
     HideFieldMessageBox();
     objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[objectId]);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
     sub_80D338C();
     UnfreezeEventObjects();
     return FALSE;
@@ -1256,9 +1256,9 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
 
     HideFieldMessageBox();
     if (gEventObjects[gSelectedEventObject].active)
-        EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[gSelectedEventObject]);
+        EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
     objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[objectId]);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
     sub_80D338C();
     UnfreezeEventObjects();
     return FALSE;
@@ -2238,7 +2238,7 @@ bool8 ScrCmd_warpD1(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-	sub_808D074(player_get_direction_lower_nybble());
+	sub_808D074(GetPlayerFacingDirection());
 	sub_80B0244();
     player_avatar_init_params_reset();
     return TRUE;

@@ -931,7 +931,7 @@ _08154624:
 _08154632:
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 	ldrh r1, [r5, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
@@ -1262,7 +1262,7 @@ _081548B4:
 _081548D4:
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 	ldrh r1, [r5, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
@@ -1523,7 +1523,7 @@ _08154AB2:
 	lsls r1, 29
 	lsrs r1, 31
 	adds r0, r4, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 _08154AF2:
 	add sp, 0x4
 	pop {r3}
@@ -1729,7 +1729,7 @@ sub_8154C7C: @ 8154C7C
 _08154C92:
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8154C7C
@@ -1758,7 +1758,7 @@ sub_8154CA0: @ 8154CA0
 	lsls r1, 29
 	lsrs r1, 31
 	adds r0, r4, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x38
@@ -1910,7 +1910,7 @@ _08154DCA:
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 _08154E0A:
 	add sp, 0x4
 	pop {r4}
@@ -2162,7 +2162,7 @@ _08154FFC:
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 	ldr r1, [r5, 0x10]
 	ldr r0, [r4, 0x34]
 	cmp r1, r0
@@ -2381,7 +2381,7 @@ _081551A0:
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 _081551E4:
 	add sp, 0x4
 	pop {r4,r5}
@@ -2789,7 +2789,7 @@ sub_815550C: @ 815550C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 	adds r0, r4, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
@@ -3493,7 +3493,7 @@ _08155A46:
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 _08155A76:
 	add sp, 0x4
 	pop {r4-r6}
@@ -3567,7 +3567,7 @@ sub_8155AEC: @ 8155AEC
 	strh r1, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 	ldrh r1, [r4, 0x3E]
 	ldr r0, =0x00001004
 	ands r0, r1
@@ -4460,7 +4460,7 @@ sub_8156194: @ 8156194
 _081561B2:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 	ldrh r0, [r4, 0x2E]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4492,7 +4492,7 @@ sub_81561D0: @ 81561D0
 _081561EE:
 	adds r0, r2, 0
 	movs r1, 0
-	bl sub_80979D4
+	bl UpdateEventObjectSpriteVisibility
 _081561F6:
 	pop {r0}
 	bx r0

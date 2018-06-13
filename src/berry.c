@@ -12,7 +12,7 @@ extern u8 EventObjectGetBerryTreeId(u8 eventObjectId);
 extern void sub_8092EF0(u8 mapId, u8 mapNumber, u8 mapGroup);
 extern void CB2_ChooseBerry(void);
 extern const u8* GetEventObjectScriptPointerForComparison(void);
-extern bool8 sub_8092E9C(u8, u8, u8);
+extern bool8 IsBerryTreeSparkling(u8, u8, u8);
 
 extern u16 gSpecialVar_ItemId;
 
@@ -1166,7 +1166,7 @@ void EventObjectInteractionGetBerryTreeData(void)
     unk = gSpecialVar_LastTalked;
     num = gSaveBlock1Ptr->location.mapNum;
     group = gSaveBlock1Ptr->location.mapGroup;
-    if (sub_8092E9C(unk, num, group))
+    if (IsBerryTreeSparkling(unk, num, group))
         gSpecialVar_0x8004 = 0xFF;
     else
         gSpecialVar_0x8004 = GetStageByBerryTreeId(id);

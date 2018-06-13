@@ -61,8 +61,8 @@ static void task08_080C9820(u8 taskId)
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
     eventObjId = gPlayerAvatar.eventObjectId;
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gEventObjects[eventObjId])
-     || EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[eventObjId]))
+    if (!EventObjectIsMovementOverridden(&gEventObjects[eventObjId])
+     || EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
     {
         if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {
@@ -72,7 +72,7 @@ static void task08_080C9820(u8 taskId)
         else
         {
             sub_808C114();
-            EventObjectSetSpecialAnim(&gEventObjects[eventObjId], 0x39);
+            EventObjectSetHeldMovement(&gEventObjects[eventObjId], 0x39);
             gTasks[taskId].func = sub_813552C;
         }
     }
@@ -80,7 +80,7 @@ static void task08_080C9820(u8 taskId)
 
 static void sub_813552C(u8 taskId)
 {
-    if (EventObjectCheckIfSpecialAnimFinishedOrInactive(&gEventObjects[gPlayerAvatar.eventObjectId]) == TRUE)
+    if (EventObjectCheckHeldMovementStatus(&gEventObjects[gPlayerAvatar.eventObjectId]) == TRUE)
     {
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = sub_8135578;
@@ -91,7 +91,7 @@ static void sub_8135578(u8 taskId)
 {
     if (!FieldEffectActiveListContains(6))
     {
-        gFieldEffectArguments[1] = player_get_direction_lower_nybble();
+        gFieldEffectArguments[1] = GetPlayerFacingDirection();
         if (gFieldEffectArguments[1] == 1)
             gFieldEffectArguments[2] = 0;
         if (gFieldEffectArguments[1] == 2)

@@ -234,7 +234,7 @@ gUnknown_020375B4: @ 20375B4
 gUnknown_020375B6: @ 20375B6
 	.space 0x2
 
-gUnknown_020375B8: @ 20375B8
+gLockedAnimEventObjects: @ 20375B8
 	.space 0x4
 
     .include "src/field_message_box.o"

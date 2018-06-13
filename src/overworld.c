@@ -169,7 +169,7 @@ extern const u8* sub_809C2C8(struct MapPosition *a1, u8, u8);
 extern u8 *sub_809D0F4(void*);
 extern u8 sub_808BD6C(u8);
 extern u8 sub_808BD7C(u8);
-extern void sub_80979D4(struct Sprite*, u8);
+extern void UpdateEventObjectSpriteVisibility(struct Sprite*, u8);
 
 // this file's functions
 static void Overworld_ResetStateAfterWhiteOut(void);
@@ -912,7 +912,7 @@ void player_avatar_init_params_reset(void)
 
 void walkrun_find_lowest_active_bit_in_bitfield(void)
 {
-    sUnknown_02032300.player_field_1 = player_get_direction_lower_nybble();
+    sUnknown_02032300.player_field_1 = GetPlayerFacingDirection();
 
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
         sUnknown_02032300.player_field_0 = 2;
@@ -2170,7 +2170,7 @@ static void sub_80869DC(void)
     gUnknown_03005DEC = 0;
     gUnknown_03005DE8 = 0;
     sub_808D438();
-    SpawnEventObjectsInView(0, 0);
+    TrySpawnEventObjects(0, 0);
     mapheader_run_first_tag4_script_list_match();
 }
 
@@ -2187,7 +2187,7 @@ static void mli4_mapscripts_and_other(void)
     InitPlayerAvatar(x, y, player->player_field_1, gSaveBlock2Ptr->playerGender);
     SetPlayerAvatarTransitionFlags(player->player_field_0);
     player_avatar_init_params_reset();
-    SpawnEventObjectsInView(0, 0);
+    TrySpawnEventObjects(0, 0);
     mapheader_run_first_tag4_script_list_match();
 }
 
@@ -2894,7 +2894,7 @@ static void ZeroLinkPlayerEventObject(struct LinkPlayerEventObject *linkPlayerEv
     memset(linkPlayerEventObj, 0, sizeof(struct LinkPlayerEventObject));
 }
 
-void ZeroAllLinkPlayerEventObjects(void)
+void ClearLinkPlayerEventObjects(void)
 {
     memset(gLinkPlayerEventObjects, 0, sizeof(gLinkPlayerEventObjects));
 }
@@ -2906,7 +2906,7 @@ static void ZeroEventObject(struct EventObject *eventObj)
 
 static void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
 {
-    u8 eventObjId = sub_808D4F4();
+    u8 eventObjId = GetFirstInactiveEventObjectId();
     struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
     struct EventObject *eventObj = &gEventObjects[eventObjId];
 
@@ -3059,7 +3059,7 @@ static u8 sub_8087A20(struct LinkPlayerEventObject *linkPlayerEventObj, struct E
     else
     {
         eventObj->directionSequenceIndex = 16;
-        npc_coords_shift(eventObj, x, y);
+        ShiftEventObjectCoords(eventObj, x, y);
         EventObjectUpdateZCoord(eventObj);
         return 1;
     }
@@ -3083,7 +3083,7 @@ static void sub_8087AA8(struct LinkPlayerEventObject *linkPlayerEventObj, struct
     MoveCoords(eventObj->range.as_byte, &eventObj->initialCoords.x, &eventObj->initialCoords.y);
     if (!eventObj->directionSequenceIndex)
     {
-        npc_coords_shift_still(eventObj);
+        ShiftStillEventObjectCoords(eventObj);
         linkPlayerEventObj->mode = 2;
     }
 }
@@ -3166,11 +3166,11 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     sprite->oam.priority = ZCoordToPriority(eventObj->previousElevation);
 
 	if (!linkPlayerEventObj->mode)
-        StartSpriteAnim(sprite, EventObjectDirectionToImageAnimId(eventObj->range.as_byte));
+        StartSpriteAnim(sprite, GetFaceDirectionAnimNum(eventObj->range.as_byte));
     else
-        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(eventObj->range.as_byte));
+        StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(eventObj->range.as_byte));
 
-	sub_80979D4(sprite, 0);
+	UpdateEventObjectSpriteVisibility(sprite, 0);
     if (eventObj->triggerGroundEffectsOnMove)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);

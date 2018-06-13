@@ -13609,13 +13609,13 @@ sub_8019AD8: @ 8019AD8
 	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl EventObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B30
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B30
@@ -13655,7 +13655,7 @@ sub_8019B3C: @ 8019B3C
 	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B84
@@ -13668,7 +13668,7 @@ _08019B84:
 	cmp r0, 0
 	bne _08019B96
 	adds r0, r4, 0
-	bl npc_sync_anim_pause_bits
+	bl UnfreezeEventObject
 	b _08019B9C
 _08019B96:
 	adds r0, r4, 0
@@ -14619,7 +14619,7 @@ sub_801A2A8: @ 801A2A8
 	b _0801A396
 _0801A2C4:
 	ldr r4, =gUnknown_082F076A
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4

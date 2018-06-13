@@ -189,7 +189,7 @@ static void UnfreezeObjects(u8 taskId)
     for (i = 0; i < 16; i++, pEventObjId++)
     {
         if (*pEventObjId != 0xFF)
-            npc_sync_anim_pause_bits(&gEventObjects[*pEventObjId]);
+            UnfreezeEventObject(&gEventObjects[*pEventObjId]);
     }
 }
 
@@ -210,8 +210,8 @@ static void sub_80A2490(u8 taskId, u8 b, u8 eventObjId, const u8 *d)
 {
     u8 var;
 
-    if (EventObjectIsSpecialAnimActive(&gEventObjects[eventObjId])
-     && !EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[eventObjId]))
+    if (EventObjectIsHeldMovementActive(&gEventObjects[eventObjId])
+     && !EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
         return;
 
     var = *d;
@@ -222,7 +222,7 @@ static void sub_80A2490(u8 taskId, u8 b, u8 eventObjId, const u8 *d)
     }
     else
     {
-        if (!EventObjectSetSpecialAnim(&gEventObjects[eventObjId], var))
+        if (!EventObjectSetHeldMovement(&gEventObjects[eventObjId], var))
         {
             d++;
             npc_obj_offscreen_culling_and_flag_update(b, d);

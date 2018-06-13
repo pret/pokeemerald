@@ -362,7 +362,7 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct EventObject *trainerObj, u8 ap
     MoveCoords(direction, &x, &y);
     for (i = 0; i < approachDistance - 1; i++, MoveCoords(direction, &x, &y))
     {
-        collision = sub_8092C8C(trainerObj, x, y, direction);
+        collision = GetCollisionFlagsAtCoords(trainerObj, x, y, direction);
         if (collision != 0 && (collision & COLLISION_MASK))
             return 0;
     }
@@ -373,7 +373,7 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct EventObject *trainerObj, u8 ap
     trainerObj->range.as_nybbles.x = 0;
     trainerObj->range.as_nybbles.y = 0;
 
-    collision = npc_block_way(trainerObj, x, y, direction);
+    collision = GetCollisionAtCoords(trainerObj, x, y, direction);
 
     trainerObj->range.as_nybbles.x = unk19_temp;
     trainerObj->range.as_nybbles.y = unk19b_temp;
@@ -439,16 +439,16 @@ static bool8 sub_80B417C(u8 taskId, struct Task *task, struct EventObject *train
     u8 direction;
 
     EventObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
-    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
-    direction = GetFaceDirectionAnimId(trainerObj->facingDirection);
-    EventObjectSetSpecialAnim(trainerObj, direction);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
+    direction = GetFaceDirectionMovementAction(trainerObj->facingDirection);
+    EventObjectSetHeldMovement(trainerObj, direction);
     task->tFuncId++;
     return TRUE;
 }
 
 static bool8 sub_80B41C0(u8 taskId, struct Task *task, struct EventObject *trainerObj)
 {
-    if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON_1))
+    if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON))
     {
         return FALSE;
     }
@@ -465,16 +465,16 @@ static bool8 sub_80B41C0(u8 taskId, struct Task *task, struct EventObject *train
 
 static bool8 sub_80B4200(u8 taskId, struct Task *task, struct EventObject *trainerObj)
 {
-    if (!(EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)) || EventObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (!(EventObjectIsMovementOverridden(trainerObj)) || EventObjectClearHeldMovementIfFinished(trainerObj))
     {
         if (task->tTrainerRange)
         {
-            EventObjectSetSpecialAnim(trainerObj, GetGoSpeed0AnimId(trainerObj->facingDirection));
+            EventObjectSetHeldMovement(trainerObj, GetWalkNormalMovementAction(trainerObj->facingDirection));
             task->tTrainerRange--;
         }
         else
         {
-            EventObjectSetSpecialAnim(trainerObj, 0x3E);
+            EventObjectSetHeldMovement(trainerObj, 0x3E);
             task->tFuncId++;
         }
     }
@@ -485,19 +485,19 @@ static bool8 sub_80B425C(u8 taskId, struct Task *task, struct EventObject *train
 {
     struct EventObject *playerObj;
 
-    if (EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj) && !EventObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (EventObjectIsMovementOverridden(trainerObj) && !EventObjectClearHeldMovementIfFinished(trainerObj))
         return FALSE;
 
-    npc_set_running_behaviour_etc(trainerObj, npc_running_behaviour_by_direction(trainerObj->facingDirection));
-    sub_808F23C(trainerObj, npc_running_behaviour_by_direction(trainerObj->facingDirection));
-    sub_808F208(trainerObj);
+    SetTrainerMovementType(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
+    TryOverrideTemplateCoordsForEventObject(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
+    OverrideTemplateCoordsForEventObject(trainerObj);
 
     playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj) && !EventObjectClearAnimIfSpecialAnimFinished(playerObj))
+    if (EventObjectIsMovementOverridden(playerObj) && !EventObjectClearHeldMovementIfFinished(playerObj))
         return FALSE;
 
     sub_808BCE8();
-    EventObjectSetSpecialAnim(&gEventObjects[gPlayerAvatar.eventObjectId], GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->facingDirection)));
+    EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], GetFaceDirectionMovementAction(GetOppositeDirection(trainerObj->facingDirection)));
     task->tFuncId++;
     return FALSE;
 }
@@ -506,18 +506,18 @@ static bool8 sub_80B4318(u8 taskId, struct Task *task, struct EventObject *train
 {
     struct EventObject *playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj)
-     || EventObjectClearAnimIfSpecialAnimFinished(playerObj))
+    if (!EventObjectIsMovementOverridden(playerObj)
+     || EventObjectClearHeldMovementIfFinished(playerObj))
         SwitchTaskToFollowupFunc(taskId);
     return FALSE;
 }
 
 static bool8 sub_80B435C(u8 taskId, struct Task *task, struct EventObject *trainerObj)
 {
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
-     || EventObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (!EventObjectIsMovementOverridden(trainerObj)
+     || EventObjectClearHeldMovementIfFinished(trainerObj))
     {
-        EventObjectSetSpecialAnim(trainerObj, 0x59);
+        EventObjectSetHeldMovement(trainerObj, 0x59);
         task->tFuncId++;
     }
     return FALSE;
@@ -525,7 +525,7 @@ static bool8 sub_80B435C(u8 taskId, struct Task *task, struct EventObject *train
 
 static bool8 sub_80B4390(u8 taskId, struct Task *task, struct EventObject *trainerObj)
 {
-    if (EventObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (EventObjectClearHeldMovementIfFinished(trainerObj))
         task->tFuncId = 3;
 
     return FALSE;
@@ -533,10 +533,10 @@ static bool8 sub_80B4390(u8 taskId, struct Task *task, struct EventObject *train
 
 static bool8 sub_80B43AC(u8 taskId, struct Task *task, struct EventObject *trainerObj)
 {
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
-     || EventObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (!EventObjectIsMovementOverridden(trainerObj)
+     || EventObjectClearHeldMovementIfFinished(trainerObj))
     {
-        EventObjectSetSpecialAnim(trainerObj, 0x3E);
+        EventObjectSetHeldMovement(trainerObj, 0x3E);
         task->tFuncId++;
     }
     return FALSE;
@@ -544,7 +544,7 @@ static bool8 sub_80B43AC(u8 taskId, struct Task *task, struct EventObject *train
 
 static bool8 sub_80B43E0(u8 taskId, struct Task *task, struct EventObject *trainerObj)
 {
-    if (EventObjectCheckIfSpecialAnimFinishedOrInactive(trainerObj))
+    if (EventObjectCheckHeldMovementStatus(trainerObj))
     {
         gFieldEffectArguments[0] = trainerObj->currentCoords.x;
         gFieldEffectArguments[1] = trainerObj->currentCoords.y;
@@ -567,8 +567,8 @@ static bool8 sub_80B4438(u8 taskId, struct Task *task, struct EventObject *train
 
         sprite = &gSprites[trainerObj->spriteId];
         sprite->oam.priority = 2;
-        EventObjectClearAnimIfSpecialAnimFinished(trainerObj);
-        EventObjectSetSpecialAnim(trainerObj, sub_80934BC(trainerObj->facingDirection));
+        EventObjectClearHeldMovementIfFinished(trainerObj);
+        EventObjectSetHeldMovement(trainerObj, GetJumpInPlaceMovementAction(trainerObj->facingDirection));
         task->tFuncId++;
     }
 
@@ -597,14 +597,14 @@ static void sub_80B44C8(u8 taskId)
     LoadWordFromTwoHalfwords(&task->data[1], (u32 *)&eventObj);
     if (!task->data[7])
     {
-        EventObjectClearAnim(eventObj);
+        EventObjectClearHeldMovement(eventObj);
         task->data[7]++;
     }
     sTrainerSeeFuncList2[task->data[0]](taskId, task, eventObj);
     if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
-        npc_set_running_behaviour_etc(eventObj, npc_running_behaviour_by_direction(eventObj->facingDirection));
-        sub_808F23C(eventObj, npc_running_behaviour_by_direction(eventObj->facingDirection));
+        SetTrainerMovementType(eventObj, GetTrainerFacingDirectionMovementType(eventObj->facingDirection));
+        TryOverrideTemplateCoordsForEventObject(eventObj, GetTrainerFacingDirectionMovementType(eventObj->facingDirection));
         DestroyTask(taskId);
     }
     else
@@ -659,22 +659,22 @@ void sub_80B45D0(void)
 #define sData4      data[4]
 #define sFldEffId   data[7]
 
-u8 FldEff_ExclamationMarkIcon1(void)
+u8 FldEff_ExclamationMarkIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x53);
 
     if (spriteId != MAX_SPRITES)
-        SetIconSpriteData(&gSprites[spriteId], FLDEFF_EXCLAMATION_MARK_ICON_1, 0);
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_EXCLAMATION_MARK_ICON, 0);
 
     return 0;
 }
 
-u8 FldEff_ExclamationMarkIcon2(void)
+u8 FldEff_QuestionMarkIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x52);
 
     if (spriteId != MAX_SPRITES)
-        SetIconSpriteData(&gSprites[spriteId], FLDEFF_EXCLAMATION_MARK_ICON_2, 1);
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_QUESTION_MARK_ICON, 1);
 
     return 0;
 }
@@ -764,14 +764,14 @@ void sub_80B4808(void)
     if (gUnknown_030060AC == 1)
     {
         trainerObj = &gEventObjects[gApproachingTrainers[gUnknown_03006080].eventObjectId];
-        gUnknown_03006084[0] = GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->facingDirection));
+        gUnknown_03006084[0] = GetFaceDirectionMovementAction(GetOppositeDirection(trainerObj->facingDirection));
         gUnknown_03006084[1] = 0xFE;
         ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gUnknown_03006084);
     }
     else
     {
         trainerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
-        gUnknown_03006084[0] = GetFaceDirectionAnimId(trainerObj->facingDirection);
+        gUnknown_03006084[0] = GetFaceDirectionMovementAction(trainerObj->facingDirection);
         gUnknown_03006084[1] = 0xFE;
         ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gUnknown_03006084);
     }

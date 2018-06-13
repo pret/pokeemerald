@@ -1246,7 +1246,7 @@ bool8 sub_80B6BCC(struct Task *task) // gUnknown_0855C3C8[0]
     CameraObjectReset2();
     gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
     gPlayerAvatar.preventStep = TRUE;
-    EventObjectSetSpecialAnim(playerObject, GetFaceDirectionAnimId(player_get_direction_lower_nybble()));
+    EventObjectSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
     task->data[4] = playerSprite->subspriteMode;
     playerObject->fixedPriority = 1;
     playerSprite->oam.priority = 1;
@@ -1393,9 +1393,9 @@ bool8 sub_80B6EE0(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(eventObject) || EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
-        EventObjectSetSpecialAnim(eventObject, GetFaceDirectionAnimId(player_get_direction_lower_nybble()));
+        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
         task->data[0]++;
         task->data[2] = 0;
         task->data[3] = 0;
@@ -1512,7 +1512,7 @@ bool8 sub_80B7114(struct Task *task)
     u8 behavior;
     CameraObjectReset2();
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    EventObjectSetSpecialAnim(eventObject, GetFaceDirectionAnimId(DIR_EAST));
+    EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(DIR_EAST));
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
     task->data[0]++;
@@ -1606,11 +1606,11 @@ bool8 sub_80B72F4(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         CameraObjectReset1();
         ScriptContext2_Disable();
-        EventObjectSetSpecialAnim(eventObject, GetGoSpeed0AnimId(DIR_EAST));
+        EventObjectSetHeldMovement(eventObject, GetWalkNormalMovementAction(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(sub_80B70DC));
     }
     return FALSE;
@@ -1643,9 +1643,9 @@ bool8 sub_80B73D0(struct Task *task, struct EventObject *eventObject)
 bool8 waterfall_1_do_anim_probably(struct Task *task, struct EventObject *eventObject)
 {
     ScriptContext2_Enable();
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(eventObject))
+    if (!EventObjectIsMovementOverridden(eventObject))
     {
-        EventObjectClearAnimIfSpecialAnimFinished(eventObject);
+        EventObjectClearHeldMovementIfFinished(eventObject);
         gFieldEffectArguments[0] = task->data[1];
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         task->data[0]++;
@@ -1665,14 +1665,14 @@ bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct EventObjec
 
 bool8 sub_80B7450(struct Task *task, struct EventObject *eventObject)
 {
-    EventObjectSetSpecialAnim(eventObject, GetSimpleGoAnimId(DIR_NORTH));
+    EventObjectSetHeldMovement(eventObject, GetWalkSlowMovementAction(DIR_NORTH));
     task->data[0]++;
     return FALSE;
 }
 
 bool8 sub_80B7478(struct Task *task, struct EventObject *eventObject)
 {
-    if (!EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (!EventObjectClearHeldMovementIfFinished(eventObject))
     {
         return FALSE;
     }
@@ -1899,14 +1899,14 @@ bool8 sub_80B7968(struct Task *task, struct EventObject *eventObject, struct Spr
         eventObject->invisible = 0;
         CameraObjectReset1();
         PlaySE(SE_W091);
-        EventObjectSetSpecialAnim(eventObject, sub_8093514(DIR_EAST));
+        EventObjectSetHeldMovement(eventObject, GetJumpMovementAction(DIR_EAST));
     }
     return FALSE;
 }
 
 bool8 sub_80B79BC(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
@@ -1960,7 +1960,7 @@ bool8 sub_80B7AE8(struct Task *task, struct EventObject *eventObject, struct Spr
 
 bool8 sub_80B7B18(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         if (task->data[1] > 3)
         {
@@ -1973,7 +1973,7 @@ bool8 sub_80B7B18(struct Task *task, struct EventObject *eventObject, struct Spr
         } else
         {
             task->data[1]++;
-            EventObjectSetSpecialAnim(eventObject, GetStepInPlaceDelay4AnimId(eventObject->facingDirection));
+            EventObjectSetHeldMovement(eventObject, GetWalkInPlaceFastestMovementAction(eventObject->facingDirection));
             PlaySE(SE_FU_ZUZUZU);
         }
     }
@@ -2050,7 +2050,7 @@ void sub_80B7D14(struct Task *task)
 {
     task->data[0]++;
     task->data[14] = 64;
-    task->data[15] = player_get_direction_lower_nybble();
+    task->data[15] = GetPlayerFacingDirection();
 }
 
 void sub_80B7D34(struct Task *task)
@@ -2063,11 +2063,11 @@ void sub_80B7D34(struct Task *task)
         sub_80AF0B4();
     }
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(eventObject) || EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         if (task->data[14] == 0 && !gPaletteFade.active && sub_80859A0() == TRUE)
         {
-            EventObjectSetDirection(eventObject, task->data[15]);
+            SetEventObjectDirection(eventObject, task->data[15]);
             sub_8084E14();
             warp_in();
             gFieldCallback = mapldr_080859D4;
@@ -2075,7 +2075,7 @@ void sub_80B7D34(struct Task *task)
             DestroyTask(FindTaskIdByFunc(sub_80B7CE4));
         } else if (task->data[1] == 0 || (--task->data[1]) == 0)
         {
-            EventObjectSetSpecialAnim(eventObject, GetFaceDirectionAnimId(spinDirections[eventObject->facingDirection]));
+            EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(spinDirections[eventObject->facingDirection]));
             if (task->data[2] < 12)
             {
                 task->data[2]++;
@@ -2113,7 +2113,7 @@ void sub_80B7EC4(struct Task *task)
     if (IsWeatherNotFadingIn())
     {
         task->data[0]++;
-        task->data[15] = player_get_direction_lower_nybble();
+        task->data[15] = GetPlayerFacingDirection();
     }
 }
 
@@ -2123,11 +2123,11 @@ void sub_80B7EE8(struct Task *task)
     struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
-        if (EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(eventObject) && !EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+        if (EventObjectIsMovementOverridden(eventObject) && !EventObjectClearHeldMovementIfFinished(eventObject))
         {
             return;
         }
-        if (task->data[2] >= 32 && task->data[15] == player_get_direction_lower_nybble())
+        if (task->data[2] >= 32 && task->data[15] == GetPlayerFacingDirection())
         {
             eventObject->invisible = 0;
             ScriptContext2_Disable();
@@ -2135,7 +2135,7 @@ void sub_80B7EE8(struct Task *task)
             DestroyTask(FindTaskIdByFunc(sub_80B7E94));
             return;
         }
-        EventObjectSetSpecialAnim(eventObject, GetFaceDirectionAnimId(spinDirections[eventObject->facingDirection]));
+        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(spinDirections[eventObject->facingDirection]));
         if (task->data[2] < 32)
         {
             task->data[2]++;
@@ -2174,7 +2174,7 @@ static void TeleportFieldEffectTask1(struct Task *task)
     ScriptContext2_Enable();
     FreezeEventObjects();
     CameraObjectReset2();
-    task->data[15] = player_get_direction_lower_nybble();
+    task->data[15] = GetPlayerFacingDirection();
     task->data[0]++;
 }
 
@@ -2286,7 +2286,7 @@ void sub_80B8280(struct Task *task)
         task->data[1] = 8;
         task->data[2] = 1;
         task->data[14] = sprite->subspriteMode;
-        task->data[15] = player_get_direction_lower_nybble();
+        task->data[15] = GetPlayerFacingDirection();
         PlaySE(SE_TK_WARPIN);
     }
 }
@@ -2904,10 +2904,10 @@ void sub_80B8E14(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(eventObject) || EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         sub_808C114();
-        EventObjectSetSpecialAnim(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, 0x39);
         task->data[0]++;
     }
 }
@@ -2916,7 +2916,7 @@ void sub_80B8E60(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectCheckIfSpecialAnimFinishedOrInactive(eventObject))
+    if (EventObjectCheckHeldMovementStatus(eventObject))
     {
         gFieldEffectArguments[0] = task->data[15] | 0x80000000;
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -2931,8 +2931,8 @@ void sub_80B8EA8(struct Task *task)
     {
         eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
         EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(3));
-        EventObjectClearAnimIfSpecialAnimFinished(eventObject);
-        EventObjectSetSpecialAnim(eventObject, sub_8093540(eventObject->movementDirection));
+        EventObjectClearHeldMovementIfFinished(eventObject);
+        EventObjectSetHeldMovement(eventObject, GetJumpSpecialMovementAction(eventObject->movementDirection));
         gFieldEffectArguments[0] = task->data[1];
         gFieldEffectArguments[1] = task->data[2];
         gFieldEffectArguments[2] = gPlayerAvatar.eventObjectId;
@@ -2945,11 +2945,11 @@ void sub_80B8F24(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         gPlayerAvatar.preventStep = FALSE;
         gPlayerAvatar.flags &= 0xdf;
-        EventObjectSetSpecialAnim(eventObject, GetFaceDirectionAnimId(eventObject->movementDirection));
+        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(eventObject->movementDirection));
         sub_81555AC(eventObject->fieldEffectSpriteId, 1);
         UnfreezeEventObjects();
         ScriptContext2_Disable();
@@ -3206,13 +3206,13 @@ void sub_80B9204(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(eventObject) || EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[15] = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(1);
         sub_808C114();
-        EventObjectSetSpecialAnim(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, 0x39);
         task->data[0]++;
     }
 }
@@ -3221,7 +3221,7 @@ void sub_80B925C(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[0]++;
         gFieldEffectArguments[0] = task->data[1];
@@ -3252,7 +3252,7 @@ void sub_80B92F8(struct Task *task)
         task->data[0]++;
         task->data[2] = 16;
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
-        EventObjectSetSpecialAnim(&gEventObjects[gPlayerAvatar.eventObjectId], 0x02);
+        EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], 0x02);
     }
 }
 
@@ -3260,7 +3260,7 @@ void sub_80B933C(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if ((task->data[2] == 0 || (--task->data[2]) == 0) && EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if ((task->data[2] == 0 || (--task->data[2]) == 0) && EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[0]++;
         PlaySE(SE_W019);
@@ -3277,7 +3277,7 @@ void sub_80B9390(struct Task *task)
         EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(0x03));
         StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
         eventObject->inanimate = 1;
-        EventObjectSetSpecialAnim(eventObject, 0x48);
+        EventObjectSetHeldMovement(eventObject, 0x48);
         if (task->data[15] & 0x08)
         {
             DestroySprite(&gSprites[eventObject->fieldEffectSpriteId]);
@@ -3293,7 +3293,7 @@ void sub_80B9418(struct Task *task)
     if ((++task->data[2]) >= 10)
     {
         eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-        EventObjectClearAnimIfSpecialAnimActive(eventObject);
+        EventObjectClearHeldMovementIfActive(eventObject);
         eventObject->inanimate = 0;
         eventObject->hasShadow = 0;
         sub_80B9560(task->data[1], eventObject->spriteId);
@@ -3503,7 +3503,7 @@ void sub_80B9804(struct Task *task)
 {
     struct EventObject *eventObject;
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(eventObject) || EventObjectClearAnimIfSpecialAnimFinished(eventObject))
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[0]++;
         task->data[2] = 17;
@@ -3587,14 +3587,14 @@ void sub_80B9978(struct Task *task)
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = 1;
         sub_808C114();
-        EventObjectSetSpecialAnim(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, 0x39);
         task->data[0]++;
     }
 }
 
 void sub_80B99F0(struct Task *task)
 {
-    if (EventObjectClearAnimIfSpecialAnimFinished(&gEventObjects[gPlayerAvatar.eventObjectId]))
+    if (EventObjectClearHeldMovementIfFinished(&gEventObjects[gPlayerAvatar.eventObjectId]))
     {
         task->data[0]++;
         sub_80B9794(task->data[1]);
@@ -3848,7 +3848,7 @@ bool8 sub_80B9E28(struct Sprite* sprite)
         yPos = object->currentCoords.y - 7;
         xPos = (gFieldEffectArguments[3] - xPos) * 16;
         yPos = (gFieldEffectArguments[4] - yPos) * 16;
-        npc_coords_shift(object, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
+        ShiftEventObjectCoords(object, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
         taskId = CreateTask(sub_80B9EDC, 0x50);
         gTasks[taskId].data[1] = object->spriteId;
         gTasks[taskId].data[2] = gSprites[object->spriteId].pos1.x + xPos;
@@ -3886,7 +3886,7 @@ void sub_80B9EDC(u8 taskId)
                 struct EventObject *object = &gEventObjects[data[9]];
                 sprite->pos1.x = data[2];
                 sprite->pos1.y = data[3];
-                npc_coords_shift_still(object);
+                ShiftStillEventObjectCoords(object);
                 object->triggerGroundEffectsOnStop = TRUE;
                 FieldEffectActiveListRemove(0x42);
                 DestroyTask(taskId);

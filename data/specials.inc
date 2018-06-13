@@ -297,7 +297,7 @@ gSpecials:: @ 81DBA64
 	def_special WaitWeather
 	def_special sub_8139238
 	def_special sub_8139248
-	def_special player_get_direction_lower_nybble
+	def_special GetPlayerFacingDirection
 	def_special sub_81392AC
 	def_special sub_81392D4
 	def_special sub_81392F8

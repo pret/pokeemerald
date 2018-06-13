@@ -4,9 +4,255 @@
 #define NUM_OBJECT_GRAPHICS_INFO 239
 #define SPRITE_VAR 240
 
-// Exported struct declarations
+enum
+{
+    MOVEMENT_TYPE_NONE,
+    MOVEMENT_TYPE_LOOK_AROUND,
+    MOVEMENT_TYPE_WANDER_AROUND,
+    MOVEMENT_TYPE_WANDER_UP_AND_DOWN,
+    MOVEMENT_TYPE_WANDER_DOWN_AND_UP,
+    MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT,
+    MOVEMENT_TYPE_WANDER_RIGHT_AND_LEFT,
+    MOVEMENT_TYPE_FACE_UP,
+    MOVEMENT_TYPE_FACE_DOWN,
+    MOVEMENT_TYPE_FACE_LEFT,
+    MOVEMENT_TYPE_FACE_RIGHT,
+    MOVEMENT_TYPE_PLAYER,
+    MOVEMENT_TYPE_BERRY_TREE_GROWTH,
+    MOVEMENT_TYPE_FACE_DOWN_AND_UP,
+    MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT,
+    MOVEMENT_TYPE_FACE_UP_AND_LEFT,
+    MOVEMENT_TYPE_FACE_UP_AND_RIGHT,
+    MOVEMENT_TYPE_FACE_DOWN_AND_LEFT,
+    MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT,
+    MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT,
+    MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT,
+    MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT,
+    MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT,
+    MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE,
+    MOVEMENT_TYPE_ROTATE_CLOCKWISE,
+    MOVEMENT_TYPE_WALK_UP_AND_DOWN,
+    MOVEMENT_TYPE_WALK_DOWN_AND_UP,
+    MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT,
+    MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN,
+    MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_DOWN_UP,
+    MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_RIGHT_LEFT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_UP_RIGHT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN,
+    MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_DOWN_UP,
+    MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_LEFT_RIGHT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_UP_LEFT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_DOWN_RIGHT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_RIGHT_LEFT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_UP_DOWN,
+    MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_LEFT_UP,
+    MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_DOWN_LEFT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_LEFT_RIGHT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_UP_DOWN,
+    MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_RIGHT_UP,
+    MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_RIGHT_UP,
+    MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN,
+    MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT,
+    MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN,
+    MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP,
+    MOVEMENT_TYPE_COPY_PLAYER,
+    MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE,
+    MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE,
+    MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE,
+    MOVEMENT_TYPE_TREE_DISGUISE,
+    MOVEMENT_TYPE_MOUNTAIN_DISGUISE,
+    MOVEMENT_TYPE_COPY_PLAYER_IN_GRASS,
+    MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS,
+    MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS,
+    MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS,
+    MOVEMENT_TYPE_HIDDEN,
+    MOVEMENT_TYPE_WALK_IN_PLACE_DOWN,
+    MOVEMENT_TYPE_WALK_IN_PLACE_UP,
+    MOVEMENT_TYPE_WALK_IN_PLACE_LEFT,
+    MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT,
+    MOVEMENT_TYPE_JOG_IN_PLACE_DOWN,
+    MOVEMENT_TYPE_JOG_IN_PLACE_UP,
+    MOVEMENT_TYPE_JOG_IN_PLACE_LEFT,
+    MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT,
+    MOVEMENT_TYPE_RUN_IN_PLACE_DOWN,
+    MOVEMENT_TYPE_RUN_IN_PLACE_UP,
+    MOVEMENT_TYPE_RUN_IN_PLACE_LEFT,
+    MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT,
+    MOVEMENT_TYPE_INVISIBLE,
+    MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN,
+    MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP,
+    MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT,
+    MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT,
+};
 
-enum SpinnerRunnerFollowPatterns {
+enum
+{
+    MOVEMENT_ACTION_FACE_DOWN,
+    MOVEMENT_ACTION_FACE_UP,
+    MOVEMENT_ACTION_FACE_LEFT,
+    MOVEMENT_ACTION_FACE_RIGHT,
+    MOVEMENT_ACTION_WALK_SLOW_DOWN,
+    MOVEMENT_ACTION_WALK_SLOW_UP,
+    MOVEMENT_ACTION_WALK_SLOW_LEFT,
+    MOVEMENT_ACTION_WALK_SLOW_RIGHT,
+    MOVEMENT_ACTION_WALK_NORMAL_DOWN,
+    MOVEMENT_ACTION_WALK_NORMAL_UP,
+    MOVEMENT_ACTION_WALK_NORMAL_LEFT,
+    MOVEMENT_ACTION_WALK_NORMAL_RIGHT,
+    MOVEMENT_ACTION_JUMP_2_DOWN,
+    MOVEMENT_ACTION_JUMP_2_UP,
+    MOVEMENT_ACTION_JUMP_2_LEFT,
+    MOVEMENT_ACTION_JUMP_2_RIGHT,
+    MOVEMENT_ACTION_DELAY_1,
+    MOVEMENT_ACTION_DELAY_2,
+    MOVEMENT_ACTION_DELAY_4,
+    MOVEMENT_ACTION_DELAY_8,
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_WALK_FAST_DOWN,
+    MOVEMENT_ACTION_WALK_FAST_UP,
+    MOVEMENT_ACTION_WALK_FAST_LEFT,
+    MOVEMENT_ACTION_WALK_FAST_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_UP,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_LEFT,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_RIGHT,
+    MOVEMENT_ACTION_WALK_FASTEST_DOWN,
+    MOVEMENT_ACTION_WALK_FASTEST_UP,
+    MOVEMENT_ACTION_WALK_FASTEST_LEFT,
+    MOVEMENT_ACTION_WALK_FASTEST_RIGHT,
+    MOVEMENT_ACTION_SLIDE_DOWN,
+    MOVEMENT_ACTION_SLIDE_UP,
+    MOVEMENT_ACTION_SLIDE_LEFT,
+    MOVEMENT_ACTION_SLIDE_RIGHT,
+    MOVEMENT_ACTION_PLAYER_RUN_DOWN,
+    MOVEMENT_ACTION_PLAYER_RUN_UP,
+    MOVEMENT_ACTION_PLAYER_RUN_LEFT,
+    MOVEMENT_ACTION_PLAYER_RUN_RIGHT,
+    MOVEMENT_ACTION_START_ANIM_IN_DIRECTION,
+    MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
+    MOVEMENT_ACTION_JUMP_SPECIAL_UP,
+    MOVEMENT_ACTION_JUMP_SPECIAL_LEFT,
+    MOVEMENT_ACTION_JUMP_SPECIAL_RIGHT,
+    MOVEMENT_ACTION_FACE_PLAYER,
+    MOVEMENT_ACTION_FACE_AWAY_PLAYER,
+    MOVEMENT_ACTION_LOCK_FACING_DIRECTION,
+    MOVEMENT_ACTION_UNLOCK_FACING_DIRECTION,
+    MOVEMENT_ACTION_JUMP_DOWN,
+    MOVEMENT_ACTION_JUMP_UP,
+    MOVEMENT_ACTION_JUMP_LEFT,
+    MOVEMENT_ACTION_JUMP_RIGHT,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_UP,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN_UP,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT_RIGHT,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT_LEFT,
+    MOVEMENT_ACTION_FACE_ORIGINAL_DIRECTION,
+    MOVEMENT_ACTION_NURSE_JOY_BOW_DOWN,
+    MOVEMENT_ACTION_ENABLE_JUMP_LANDING_GROUND_EFFECT,
+    MOVEMENT_ACTION_DISABLE_JUMP_LANDING_GROUND_EFFECT,
+    MOVEMENT_ACTION_DISABLE_ANIMATION,
+    MOVEMENT_ACTION_RESTORE_ANIMATION,
+    MOVEMENT_ACTION_SET_INVISIBLE,
+    MOVEMENT_ACTION_SET_VISIBLE,
+    MOVEMENT_ACTION_EMOTE_EXCLAMATION_MARK,
+    MOVEMENT_ACTION_EMOTE_QUESTION_MARK,
+    MOVEMENT_ACTION_EMOTE_HEART,
+    MOVEMENT_ACTION_REVEAL_TRAINER,
+    MOVEMENT_ACTION_ROCK_SMASH_BREAK,
+    MOVEMENT_ACTION_CUT_TREE,
+    MOVEMENT_ACTION_SET_FIXED_PRIORITY,
+    MOVEMENT_ACTION_CLEAR_FIXED_PRIORITY,
+    MOVEMENT_ACTION_INIT_AFFINE_ANIM,
+    MOVEMENT_ACTION_CLEAR_AFFINE_ANIM,
+    MOVEMENT_ACTION_UNKNOWN1,
+    MOVEMENT_ACTION_UNKNOWN2,
+    MOVEMENT_ACTION_WALK_DOWN_START_AFFINE,
+    MOVEMENT_ACTION_WALK_DOWN_AFFINE,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_RIGHT,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_UP,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_LEFT,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_RIGHT,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_UP,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_LEFT,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_UP,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_LEFT,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_RIGHT,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_UP,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_LEFT,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_RIGHT,
+    MOVEMENT_ACTION_WALK_NORMAL_DIAGONAL_UP_LEFT,
+    MOVEMENT_ACTION_WALK_NORMAL_DIAGONAL_UP_RIGHT,
+    MOVEMENT_ACTION_WALK_NORMAL_DIAGONAL_DOWN_LEFT,
+    MOVEMENT_ACTION_WALK_NORMAL_DIAGONAL_DOWN_RIGHT,
+    MOVEMENT_ACTION_WALK_SLOW_DIAGONAL_UP_LEFT,
+    MOVEMENT_ACTION_WALK_SLOW_DIAGONAL_UP_RIGHT,
+    MOVEMENT_ACTION_WALK_SLOW_DIAGONAL_DOWN_LEFT,
+    MOVEMENT_ACTION_WALK_SLOW_DIAGONAL_DOWN_RIGHT,
+    MOVEMENT_ACTION_STORE_AND_LOCK_ANIM,
+    MOVEMENT_ACTION_FREE_AND_UNLOCK_ANIM,
+    MOVEMENT_ACTION_WALK_LEFT_AFFINE,
+    MOVEMENT_ACTION_WALK_RIGHT_AFFINE,
+    MOVEMENT_ACTION_LEVITATE,
+    MOVEMENT_ACTION_STOP_LEVITATE,
+    MOVEMENT_ACTION_DESTROY_EXTRA_TASK_IF_AT_TOP,
+    MOVEMENT_ACTION_FIGURE_8,
+    MOVEMENT_ACTION_FLY_UP,
+    MOVEMENT_ACTION_FLY_DOWN,
+};
+
+enum SpinnerRunnerFollowPatterns
+{
     RUNFOLLOW_ANY,
     RUNFOLLOW_NORTH_SOUTH,
     RUNFOLLOW_EAST_WEST,
@@ -46,57 +292,49 @@ struct UnkStruct_085094AC {
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
 
-#define null_object_step(name, retval) \
-bool8 EventObjectCB2_##name(struct EventObject *, struct Sprite *);\
-void EventObjectCB_##name(struct Sprite *sprite)\
+#define movement_type_def(setup, table) \
+static u8 setup##_callback(struct EventObject *, struct Sprite *);\
+void setup(struct Sprite *sprite)\
 {\
-    EventObjectStep(&gEventObjects[sprite->data[0]], sprite, EventObjectCB2_##name);\
+    UpdateEventObjectCurrentMovement(&gEventObjects[sprite->data[0]], sprite, setup##_callback);\
 }\
-bool8 EventObjectCB2_##name(struct EventObject *eventObject, struct Sprite *sprite)\
+static u8 setup##_callback(struct EventObject *eventObject, struct Sprite *sprite)\
 {\
-    return (retval);\
+    return table[sprite->data[1]](eventObject, sprite);\
 }
 
-#define field_object_step(name, table) \
-extern bool8 (*const (table)[])(struct EventObject *, struct Sprite *);\
-bool8 EventObjectCB2_##name(struct EventObject *, struct Sprite *);\
-void EventObjectCB_##name(struct Sprite *sprite)\
+#define movement_type_empty_callback(setup) \
+static u8 setup##_callback(struct EventObject *, struct Sprite *);\
+void setup(struct Sprite *sprite)\
 {\
-    EventObjectStep(&gEventObjects[sprite->data[0]], sprite, EventObjectCB2_##name);\
+    UpdateEventObjectCurrentMovement(&gEventObjects[sprite->data[0]], sprite, setup##_callback);\
 }\
-bool8 EventObjectCB2_##name(struct EventObject *eventObject, struct Sprite *sprite)\
+static u8 setup##_callback(struct EventObject *eventObject, struct Sprite *sprite)\
 {\
-    return (table)[sprite->data[1]](eventObject, sprite);\
+    return 0;\
 }
 
-#define field_object_path(idx, table, sub, path, catch, coord)\
-field_object_step(GoInDirectionSequence##idx, table)\
-extern const u8 path[4];\
-bool8 sub(struct EventObject *eventObject, struct Sprite *sprite)\
-{\
-    u8 route[sizeof(path)];\
-    memcpy(route, path, sizeof(path));\
-    if (eventObject->directionSequenceIndex == (catch) && eventObject->initialCoords.coord == eventObject->currentCoords.coord)\
-    {\
-        eventObject->directionSequenceIndex = (catch) + 1;\
-    }\
-    return MoveEventObjectInNextDirectionInSequence(eventObject, sprite, route);\
-}\
-
-struct PairedPalettes {
+struct PairedPalettes
+{
     u16 tag;
     const u16 *data;
+};
+
+struct LockedAnimEventObjects
+{
+    u8 eventObjectIds[NUM_EVENT_OBJECTS];
+    u8 count;
 };
 
 extern const struct SpriteFrameImage gEventObjectPicTable_PechaBerryTree[];
 
 void sub_808D438(void);
-u8 get_go_image_anim_num(u8);
+u8 GetMoveDirectionAnimNum(u8);
 u8 GetEventObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetEventObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetEventObjectIdByXY(s16, s16);
-void EventObjectSetDirection(struct EventObject *, u8);
-u8 sub_808D4F4(void);
+void SetEventObjectDirection(struct EventObject *, u8);
+u8 GetFirstInactiveEventObjectId(void);
 void RemoveEventObjectByLocalIdAndMap(u8, u8, u8);
 void npc_load_two_palettes__no_record(u16, u8);
 void npc_load_two_palettes__and_record(u16, u8);
@@ -105,11 +343,11 @@ void pal_patch_for_npc(u16, u8);
 void sub_808E16C(s16, s16);
 void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat);
 void sub_8092FF0(s16, s16, s16 *, s16 *);
-u8 EventObjectDirectionToImageAnimId(u8);
+u8 GetFaceDirectionAnimNum(u8);
 void sub_80930E0(s16 *, s16 *, s16, s16);
-void EventObjectClearAnim(struct EventObject *);
-void EventObjectClearAnimIfSpecialAnimActive(struct EventObject *);
-void SpawnEventObjectsInView(s16, s16);
+void EventObjectClearHeldMovement(struct EventObject *);
+void EventObjectClearHeldMovementIfActive(struct EventObject *);
+void TrySpawnEventObjects(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
 u8 AddPseudoEventObject(u16, void (*)(struct Sprite *), s16, s16, u8);
 u8 show_sprite(u8, u8, u8);
@@ -128,50 +366,50 @@ void sub_808E7E4(u8, u8, u8);
 void sub_808E78C(u8, u8, u8, u8);
 void sub_808E75C(s16, s16);
 void EventObjectGetLocalIdAndMap(struct EventObject *eventObject, void *localId, void *mapNum, void *mapGroup);
-void npc_coords_shift(struct EventObject *, s16, s16);
+void ShiftEventObjectCoords(struct EventObject *, s16, s16);
 void sub_808EB08(struct EventObject *, s16, s16);
 void sub_808F254(u8, u8, u8);
-void EventObjectStep(struct EventObject *, struct Sprite *, bool8(struct EventObject *, struct Sprite *));
+void UpdateEventObjectCurrentMovement(struct EventObject *, struct Sprite *, bool8(struct EventObject *, struct Sprite *));
 u8 EventObjectFaceOppositeDirection(struct EventObject *, u8);
 u8 GetOppositeDirection(u8);
-u8 GetStepInPlaceDelay4AnimId(u32);
-u8 GetStepInPlaceDelay8AnimId(u32);
-u8 GetStepInPlaceDelay16AnimId(u32);
-u8 GetStepInPlaceDelay32AnimId(u32);
-u8 npc_block_way(struct EventObject *, s16, s16, u32);
+u8 GetWalkInPlaceFastestMovementAction(u32);
+u8 GetWalkInPlaceFastMovementAction(u32);
+u8 GetWalkInPlaceNormalMovementAction(u32);
+u8 GetWalkInPlaceSlowMovementAction(u32);
+u8 GetCollisionAtCoords(struct EventObject *, s16, s16, u32);
 void MoveCoords(u8, s16 *, s16 *);
-bool8 EventObjectIsSpecialAnimActive(struct EventObject *);
-u8 EventObjectClearAnimIfSpecialAnimFinished(struct EventObject *);
+bool8 EventObjectIsHeldMovementActive(struct EventObject *);
+u8 EventObjectClearHeldMovementIfFinished(struct EventObject *);
 u8 GetEventObjectIdByXYZ(u16 x, u16 y, u8 z);
-void npc_set_running_behaviour_etc(struct EventObject *eventObject, u8 movementType);
-u8 npc_running_behaviour_by_direction(u8 direction);
+void SetTrainerMovementType(struct EventObject *eventObject, u8 movementType);
+u8 GetTrainerFacingDirectionMovementType(u8 direction);
 const u8 *GetEventObjectScriptPointerByEventObjectId(u8 eventObjectId);
-u8 sub_8092C8C(struct EventObject *eventObject, s16 x, s16 y, u8 direction);
-u8 GetFaceDirectionAnimId(u32);
-u8 GetGoSpeed0AnimId(u32);
-u8 GetGoSpeed1AnimId(u32);
-u8 GetGoSpeed3AnimId(u32);
-u8 sub_80934BC(u32);
-bool8 EventObjectSetSpecialAnim(struct EventObject *eventObject, u8 specialAnimId);
-bool8 EventObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct EventObject *eventObject);
-u8 EventObjectCheckIfSpecialAnimFinishedOrInactive(struct EventObject *eventObject);
-void sub_808F23C(const struct EventObject *eventObject, u8 movementType);
-void sub_808F208(const struct EventObject *eventObject);
-void npc_coords_shift_still(struct EventObject *pObject);
+u8 GetCollisionFlagsAtCoords(struct EventObject *eventObject, s16 x, s16 y, u8 direction);
+u8 GetFaceDirectionMovementAction(u32);
+u8 GetWalkNormalMovementAction(u32);
+u8 GetWalkFastMovementAction(u32);
+u8 GetWalkFastestMovementAction(u32);
+u8 GetJumpInPlaceMovementAction(u32);
+bool8 EventObjectSetHeldMovement(struct EventObject *eventObject, u8 specialAnimId);
+bool8 EventObjectIsMovementOverridden(struct EventObject *eventObject);
+u8 EventObjectCheckHeldMovementStatus(struct EventObject *eventObject);
+void TryOverrideTemplateCoordsForEventObject(const struct EventObject *eventObject, u8 movementType);
+void OverrideTemplateCoordsForEventObject(const struct EventObject *eventObject);
+void ShiftStillEventObjectCoords(struct EventObject *pObject);
 void EventObjectMoveDestCoords(struct EventObject *pObject, u32 unk_19, s16 *pInt, s16 *pInt1);
 u8 AddCameraObject(u8 linkedSpriteId);
 void UpdateEventObjectsForCameraUpdate(s16 x, s16 y);
-u8 GetSimpleGoAnimId(u32);
-u8 sub_8093514(u32);
+u8 GetWalkSlowMovementAction(u32);
+u8 GetJumpMovementAction(u32);
 bool8 AreZCoordsCompatible(u8, u8);
 u8 ZCoordToPriority(u8);
 void EventObjectUpdateZCoord(struct EventObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 bool8 IsZCoordMismatchAt(u8, s16, s16);
-void sub_8097AC8(struct Sprite *);
-void npc_sync_anim_pause_bits(struct EventObject *);
+void UpdateEventObjectSpriteSubpriorityAndVisibility(struct Sprite *);
+void UnfreezeEventObject(struct EventObject *);
 void oamt_npc_ministep_reset(struct Sprite *, u8, u8);
-u8 sub_8097F78(struct EventObject *);
+u8 FindLockedEventObjectIndex(struct EventObject *);
 bool8 obj_npc_ministep(struct Sprite *sprite);
 bool8 sub_80976EC(struct Sprite *sprite);
 void sub_80976DC(struct Sprite *, u8);
@@ -179,262 +417,236 @@ void sub_809783C(struct Sprite *, u8, u8, u8);
 void DoShadowFieldEffect(struct EventObject *);
 u8 sub_809785C(struct Sprite *);
 u8 sub_80978E4(struct Sprite *);
-void obj_anim_image_set_and_seek(struct Sprite *, u8, u8);
-bool8 sub_80979BC(struct Sprite *);
+void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
+bool8 SpriteAnimEnded(struct Sprite *);
 void sub_8097750(struct Sprite *);
 bool8 sub_8097758(struct Sprite *);
-void sub_8097FA4(struct EventObject *);
-void sub_8098044(u8);
+void CreateLevitateMovementTask(struct EventObject *);
+void DestroyExtraMovementTask(u8);
 void UnfreezeEventObjects(void);
 void FreezeEventObjectsExceptOne(u8 eventObjectId);
 void sub_8097B78(u8, u8);
 void sub_8098074(u8 var1, u8 var2);
 void FreezeEventObjects(void);
 bool8 FreezeEventObject(struct EventObject *eventObject);
-u8 get_go_fast_image_anim_num(u8);
-u8 get_go_faster_image_anim_num(u8);
-u8 get_go_fastest_image_anim_num(u8);
+u8 GetMoveDirectionFastAnimNum(u8);
+u8 GetMoveDirectionFasterAnimNum(u8);
+u8 GetMoveDirectionFastestAnimNum(u8);
 
-void EventObjectCB_NoMovement1(struct Sprite *);
-void EventObjectCB_LookRandomDirections(struct Sprite *);
-void EventObjectCB_GoRandomDirections(struct Sprite *);
-void EventObjectCB_RandomlyGoNorthOrSouth(struct Sprite *);
-void EventObjectCB_RandomlyGoNorthOrSouth(struct Sprite *);
-void EventObjectCB_RandomlyGoEastOrWest(struct Sprite *);
-void EventObjectCB_RandomlyGoEastOrWest(struct Sprite *);
-void EventObjectCB_FaceFixedDirection(struct Sprite *);
-void EventObjectCB_FaceFixedDirection(struct Sprite *);
-void EventObjectCB_FaceFixedDirection(struct Sprite *);
-void EventObjectCB_FaceFixedDirection(struct Sprite *);
-void EventObjectCB_NoMovement2(struct Sprite *);
-void EventObjectCB_BerryTree(struct Sprite *);
-void EventObjectCB_RandomlyLookNorthOrSouth(struct Sprite *);
-void EventObjectCB_RandomlyLookEastOrWest(struct Sprite *);
-void EventObjectCB_RandomlyLookNorthOrWest(struct Sprite *);
-void EventObjectCB_RandomlyLookNorthOrEast(struct Sprite *);
-void EventObjectCB_RandomlyLookSouthOrWest(struct Sprite *);
-void EventObjectCB_RandomlyLookSouthOrEast(struct Sprite *);
-void EventObjectCB_RandomlyLookNorthOrSouthOrWest(struct Sprite *);
-void EventObjectCB_RandomlyLookNorthOrSouthOrEast(struct Sprite *);
-void EventObjectCB_RandomlyLookNorthOrEastOrWest(struct Sprite *);
-void EventObjectCB_RandomlyLookSouthOrEastOrWest(struct Sprite *);
-void EventObjectCB_LookAroundCounterclockwise(struct Sprite *);
-void EventObjectCB_LookAroundClockwise(struct Sprite *);
-void EventObjectCB_AlternatelyGoInOppositeDirections(struct Sprite *);
-void EventObjectCB_AlternatelyGoInOppositeDirections(struct Sprite *);
-void EventObjectCB_AlternatelyGoInOppositeDirections(struct Sprite *);
-void EventObjectCB_AlternatelyGoInOppositeDirections(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence1(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence2(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence3(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence4(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence5(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence6(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence7(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence8(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence9(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence10(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence11(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence12(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence13(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence14(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence15(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence16(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence17(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence18(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence19(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence20(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence21(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence22(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence23(struct Sprite *);
-void EventObjectCB_GoInDirectionSequence24(struct Sprite *);
-void EventObjectCB_CopyPlayer1(struct Sprite *);
-void EventObjectCB_CopyPlayer1(struct Sprite *);
-void EventObjectCB_CopyPlayer1(struct Sprite *);
-void EventObjectCB_CopyPlayer1(struct Sprite *);
-void EventObjectCB_TreeDisguise(struct Sprite *);
-void EventObjectCB_MountainDisguise(struct Sprite *);
-void EventObjectCB_CopyPlayer2(struct Sprite *);
-void EventObjectCB_CopyPlayer2(struct Sprite *);
-void EventObjectCB_CopyPlayer2(struct Sprite *);
-void EventObjectCB_CopyPlayer2(struct Sprite *);
-void EventObjectCB_Hidden1(struct Sprite *);
-void EventObjectCB_WalkInPlace1(struct Sprite *);
-void EventObjectCB_WalkInPlace1(struct Sprite *);
-void EventObjectCB_WalkInPlace1(struct Sprite *);
-void EventObjectCB_WalkInPlace1(struct Sprite *);
-void EventObjectCB_WalkInPlace2(struct Sprite *);
-void EventObjectCB_WalkInPlace2(struct Sprite *);
-void EventObjectCB_WalkInPlace2(struct Sprite *);
-void EventObjectCB_WalkInPlace2(struct Sprite *);
-void EventObjectCB_WalkInPlace3(struct Sprite *);
-void EventObjectCB_WalkInPlace3(struct Sprite *);
-void EventObjectCB_WalkInPlace3(struct Sprite *);
-void EventObjectCB_WalkInPlace3(struct Sprite *);
-void EventObjectCB_Hidden2(struct Sprite *);
-void EventObjectCB_WalkInPlace4(struct Sprite *);
-void EventObjectCB_WalkInPlace4(struct Sprite *);
-void EventObjectCB_WalkInPlace4(struct Sprite *);
-void EventObjectCB_WalkInPlace4(struct Sprite *);
+void MovementType_None(struct Sprite *);
+void MovementType_LookAround(struct Sprite *);
+void MovementType_WanderAround(struct Sprite *);
+void MovementType_WanderUpAndDown(struct Sprite *);
+void MovementType_WanderLeftAndRight(struct Sprite *);
+void MovementType_FaceDirection(struct Sprite *);
+void MovementType_Player(struct Sprite *);
+void MovementType_BerryTreeGrowth(struct Sprite *);
+void MovementType_FaceDownAndUp(struct Sprite *);
+void MovementType_FaceLeftAndRight(struct Sprite *);
+void MovementType_FaceUpAndLeft(struct Sprite *);
+void MovementType_FaceUpAndRight(struct Sprite *);
+void MovementType_FaceDownAndLeft(struct Sprite *);
+void MovementType_FaceDownAndRight(struct Sprite *);
+void MovementType_FaceDownUpAndLeft(struct Sprite *);
+void MovementType_FaceDownUpAndRight(struct Sprite *);
+void MovementType_FaceUpRightAndLeft(struct Sprite *);
+void MovementType_FaceDownRightAndLeft(struct Sprite *);
+void MovementType_RotateCounterclockwise(struct Sprite *);
+void MovementType_RotateClockwise(struct Sprite *);
+void MovementType_WalkBackAndForth(struct Sprite *);
+void MovementType_WalkSequenceUpRightLeftDown(struct Sprite *);
+void MovementType_WalkSequenceRightLeftDownUp(struct Sprite *);
+void MovementType_WalkSequenceDownUpRightLeft(struct Sprite *);
+void MovementType_WalkSequenceLeftDownUpRight(struct Sprite *);
+void MovementType_WalkSequenceUpLeftRightDown(struct Sprite *);
+void MovementType_WalkSequenceLeftRightDownUp(struct Sprite *);
+void MovementType_WalkSequenceDownUpLeftRight(struct Sprite *);
+void MovementType_WalkSequenceRightDownUpLeft(struct Sprite *);
+void MovementType_WalkSequenceLeftUpDownRight(struct Sprite *);
+void MovementType_WalkSequenceUpDownRightLeft(struct Sprite *);
+void MovementType_WalkSequenceRightLeftUpDown(struct Sprite *);
+void MovementType_WalkSequenceDownRightLeftUp(struct Sprite *);
+void MovementType_WalkSequenceRightUpDownLeft(struct Sprite *);
+void MovementType_WalkSequenceUpDownLeftRight(struct Sprite *);
+void MovementType_WalkSequenceLeftRightUpDown(struct Sprite *);
+void MovementType_WalkSequenceDownLeftRightUp(struct Sprite *);
+void MovementType_WalkSequenceUpLeftDownRight(struct Sprite *);
+void MovementType_WalkSequenceDownRightUpLeft(struct Sprite *);
+void MovementType_WalkSequenceLeftDownRightUp(struct Sprite *);
+void MovementType_WalkSequenceRightUpLeftDown(struct Sprite *);
+void MovementType_WalkSequenceUpRightDownLeft(struct Sprite *);
+void MovementType_WalkSequenceDownLeftUpRight(struct Sprite *);
+void MovementType_WalkSequenceLeftUpRightDown(struct Sprite *);
+void MovementType_WalkSequenceRightDownLeftUp(struct Sprite *);
+void MovementType_CopyPlayer(struct Sprite *);
+void MovementType_TreeDisguise(struct Sprite *);
+void MovementType_MountainDisguise(struct Sprite *);
+void MovementType_CopyPlayerInGrass(struct Sprite *);
+void MovementType_Hidden(struct Sprite *);
+void MovementType_WalkInPlace(struct Sprite *);
+void MovementType_JogInPlace(struct Sprite *);
+void MovementType_RunInPlace(struct Sprite *);
+void MovementType_Invisible(struct Sprite *);
+void MovementType_WalkSlowlyInPlace(struct Sprite *);
+u8 GetSlideMovementAction(u32);
+u8 GetJumpInPlaceMovementAction(u32);
+u8 GetJumpMovementAction(u32);
+u8 GetJump2MovementAction(u32);
 
-u8 sub_808F44C(struct EventObject *, struct Sprite *);
-u8 sub_808F460(struct EventObject *, struct Sprite *);
-u8 sub_808F48C(struct EventObject *, struct Sprite *);
-u8 sub_808F4C8(struct EventObject *, struct Sprite *);
-u8 sub_808F4E8(struct EventObject *, struct Sprite *);
-u8 sub_808F534(struct EventObject *, struct Sprite *);
-u8 sub_808F564(struct EventObject *, struct Sprite *);
-u8 GetRegularRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetNorthSouthRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetEastWestRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetNorthEastRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetNorthWestRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetSouthEastRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetSouthWestRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetNonEastRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetNonWestRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetNonSouthRunningPastFacingDirection(s16, s16, s16, s16);
-u8 GetNonNorthRunningPastFacingDirection(s16, s16, s16, s16);
-u8 sub_808F988(struct EventObject *, struct Sprite *);
-u8 sub_808F99C(struct EventObject *, struct Sprite *);
-u8 sub_808F9C8(struct EventObject *, struct Sprite *);
-u8 sub_808FA0C(struct EventObject *, struct Sprite *);
-u8 sub_808FA3C(struct EventObject *, struct Sprite *);
-u8 sub_808FAC8(struct EventObject *, struct Sprite *);
-u8 sub_808FADC(struct EventObject *, struct Sprite *);
-u8 sub_808FB08(struct EventObject *, struct Sprite *);
-u8 sub_808FB44(struct EventObject *, struct Sprite *);
-u8 sub_808FB64(struct EventObject *, struct Sprite *);
-u8 sub_808FBB0(struct EventObject *, struct Sprite *);
-u8 sub_808FBE0(struct EventObject *, struct Sprite *);
-u8 sub_808FC4C(struct EventObject *, struct Sprite *);
-u8 sub_808FC60(struct EventObject *, struct Sprite *);
-u8 sub_808FC8C(struct EventObject *, struct Sprite *);
-u8 sub_808FCC8(struct EventObject *, struct Sprite *);
-u8 sub_808FCE8(struct EventObject *, struct Sprite *);
-u8 sub_808FD34(struct EventObject *, struct Sprite *);
-u8 sub_808FD64(struct EventObject *, struct Sprite *);
-u8 sub_808FDD0(struct EventObject *, struct Sprite *);
-u8 sub_808FDFC(struct EventObject *, struct Sprite *);
-u8 sub_808FE1C(struct EventObject *, struct Sprite *);
-u8 do_berry_tree_growth_sparkle_1(struct EventObject *, struct Sprite *);
-u8 sub_808FF48(struct EventObject *, struct Sprite *);
-u8 do_berry_tree_growth_sparkle_2(struct EventObject *, struct Sprite *);
-u8 sub_808FFB4(struct EventObject *, struct Sprite *);
-u8 sub_8090004(struct EventObject *, struct Sprite *);
-u8 sub_8090094(struct EventObject *, struct Sprite *);
-u8 sub_80900A8(struct EventObject *, struct Sprite *);
-u8 sub_80900D4(struct EventObject *, struct Sprite *);
-u8 sub_8090118(struct EventObject *, struct Sprite *);
-u8 sub_8090148(struct EventObject *, struct Sprite *);
-u8 sub_80901D4(struct EventObject *, struct Sprite *);
-u8 sub_80901E8(struct EventObject *, struct Sprite *);
-u8 sub_8090214(struct EventObject *, struct Sprite *);
-u8 sub_8090258(struct EventObject *, struct Sprite *);
-u8 sub_8090288(struct EventObject *, struct Sprite *);
-u8 sub_8090314(struct EventObject *, struct Sprite *);
-u8 sub_8090328(struct EventObject *, struct Sprite *);
-u8 sub_8090354(struct EventObject *, struct Sprite *);
-u8 sub_8090398(struct EventObject *, struct Sprite *);
-u8 sub_80903C8(struct EventObject *, struct Sprite *);
-u8 sub_8090454(struct EventObject *, struct Sprite *);
-u8 sub_8090468(struct EventObject *, struct Sprite *);
-u8 sub_8090494(struct EventObject *, struct Sprite *);
-u8 sub_80904D8(struct EventObject *, struct Sprite *);
-u8 sub_8090508(struct EventObject *, struct Sprite *);
-u8 sub_8090594(struct EventObject *, struct Sprite *);
-u8 sub_80905A8(struct EventObject *, struct Sprite *);
-u8 sub_80905D4(struct EventObject *, struct Sprite *);
-u8 sub_8090618(struct EventObject *, struct Sprite *);
-u8 sub_8090648(struct EventObject *, struct Sprite *);
-u8 sub_80906D4(struct EventObject *, struct Sprite *);
-u8 sub_80906E8(struct EventObject *, struct Sprite *);
-u8 sub_8090714(struct EventObject *, struct Sprite *);
-u8 sub_8090758(struct EventObject *, struct Sprite *);
-u8 sub_8090788(struct EventObject *, struct Sprite *);
-u8 sub_8090814(struct EventObject *, struct Sprite *);
-u8 sub_8090828(struct EventObject *, struct Sprite *);
-u8 sub_8090854(struct EventObject *, struct Sprite *);
-u8 sub_8090898(struct EventObject *, struct Sprite *);
-u8 sub_80908C8(struct EventObject *, struct Sprite *);
-u8 sub_8090954(struct EventObject *, struct Sprite *);
-u8 sub_8090968(struct EventObject *, struct Sprite *);
-u8 sub_8090994(struct EventObject *, struct Sprite *);
-u8 sub_80909D8(struct EventObject *, struct Sprite *);
-u8 sub_8090A08(struct EventObject *, struct Sprite *);
-u8 sub_8090A94(struct EventObject *, struct Sprite *);
-u8 sub_8090AA8(struct EventObject *, struct Sprite *);
-u8 sub_8090AD4(struct EventObject *, struct Sprite *);
-u8 sub_8090B18(struct EventObject *, struct Sprite *);
-u8 sub_8090B48(struct EventObject *, struct Sprite *);
-u8 sub_8090BD4(struct EventObject *, struct Sprite *);
-u8 sub_8090BE8(struct EventObject *, struct Sprite *);
-u8 sub_8090C14(struct EventObject *, struct Sprite *);
-u8 sub_8090C58(struct EventObject *, struct Sprite *);
-u8 sub_8090C88(struct EventObject *, struct Sprite *);
-u8 sub_8090D14(struct EventObject *, struct Sprite *);
-u8 sub_8090D40(struct EventObject *, struct Sprite *);
-u8 sub_8090D64(struct EventObject *, struct Sprite *);
-u8 sub_8090D90(struct EventObject *, struct Sprite *);
-u8 sub_8090E18(struct EventObject *, struct Sprite *);
-u8 sub_8090E44(struct EventObject *, struct Sprite *);
-u8 sub_8090E68(struct EventObject *, struct Sprite *);
-u8 sub_8090E94(struct EventObject *, struct Sprite *);
-u8 sub_8090F1C(struct EventObject *, struct Sprite *);
-u8 sub_8090F30(struct EventObject *, struct Sprite *);
-u8 sub_8090F68(struct EventObject *, struct Sprite *);
-u8 sub_8091020(struct EventObject *, struct Sprite *);
-u8 sub_8091048(struct EventObject *, struct Sprite *);
-u8 sub_809117C(struct EventObject *, struct Sprite *);
-u8 sub_8091110(struct EventObject *, struct Sprite *);
-u8 sub_8091208(struct EventObject *, struct Sprite *);
-u8 sub_8091294(struct EventObject *, struct Sprite *);
-u8 sub_8091320(struct EventObject *, struct Sprite *);
-u8 sub_80913AC(struct EventObject *, struct Sprite *);
-u8 sub_8091438(struct EventObject *, struct Sprite *);
-u8 sub_80914C4(struct EventObject *, struct Sprite *);
-u8 sub_8091550(struct EventObject *, struct Sprite *);
-u8 sub_80915DC(struct EventObject *, struct Sprite *);
-u8 sub_8091668(struct EventObject *, struct Sprite *);
-u8 sub_80916F4(struct EventObject *, struct Sprite *);
-u8 sub_8091780(struct EventObject *, struct Sprite *);
-u8 sub_809180C(struct EventObject *, struct Sprite *);
-u8 sub_8091898(struct EventObject *, struct Sprite *);
-u8 sub_8091924(struct EventObject *, struct Sprite *);
-u8 sub_80919B0(struct EventObject *, struct Sprite *);
-u8 sub_8091A3C(struct EventObject *, struct Sprite *);
-u8 sub_8091AC8(struct EventObject *, struct Sprite *);
-u8 sub_8091B54(struct EventObject *, struct Sprite *);
-u8 sub_8091BE0(struct EventObject *, struct Sprite *);
-u8 sub_8091C6C(struct EventObject *, struct Sprite *);
-u8 sub_8091CF8(struct EventObject *, struct Sprite *);
-u8 sub_8091D84(struct EventObject *, struct Sprite *);
-u8 sub_8091E10(struct EventObject *, struct Sprite *);
-u8 mss_npc_reset_oampriv3_1_unk2_unk3(struct EventObject *, struct Sprite *);
-u8 sub_8091EC0(struct EventObject *, struct Sprite *);
-u8 sub_8091F20(struct EventObject *, struct Sprite *);
-bool8 sub_8091F48(struct EventObject *, struct Sprite *, u8, bool8(u8));
-bool8 sub_8091F4C(struct EventObject *, struct Sprite *, u8, bool8(u8));
-bool8 sub_8091F94(struct EventObject *, struct Sprite *, u8, bool8(u8));
-bool8 sub_80920A4(struct EventObject *, struct Sprite *, u8, bool8(u8));
-bool8 sub_809215C(struct EventObject *, struct Sprite *, u8, bool8(u8));
-bool8 sub_8092214(struct EventObject *, struct Sprite *, u8, bool8(u8));
+u8 MovementType_WanderAround_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderAround_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderAround_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderAround_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderAround_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderAround_Step5(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderAround_Step6(struct EventObject *, struct Sprite *);
+u8 GetVectorDirection(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_SouthNorth(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_WestEast(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_WestNorth(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_EastNorth(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_WestSouth(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_EastSouth(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_SouthNorthWest(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_SouthNorthEast(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_NorthWestEast(s16, s16, s16, s16);
+u8 GetLimitedVectorDirection_SouthWestEast(s16, s16, s16, s16);
+u8 MovementType_LookAround_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_LookAround_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_LookAround_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_LookAround_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_LookAround_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderUpAndDown_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderUpAndDown_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderUpAndDown_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderUpAndDown_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderUpAndDown_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderUpAndDown_Step5(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderUpAndDown_Step6(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderLeftAndRight_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderLeftAndRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderLeftAndRight_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderLeftAndRight_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderLeftAndRight_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderLeftAndRight_Step5(struct EventObject *, struct Sprite *);
+u8 MovementType_WanderLeftAndRight_Step6(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDirection_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDirection_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDirection_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_BerryTreeGrowth_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_BerryTreeGrowth_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_BerryTreeGrowth_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_BerryTreeGrowth_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_BerryTreeGrowth_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndUp_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndUp_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndUp_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndUp_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndUp_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceLeftAndRight_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceLeftAndRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceLeftAndRight_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceLeftAndRight_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceLeftAndRight_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndLeft_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndLeft_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndLeft_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndLeft_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndRight_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndRight_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndRight_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpAndRight_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndLeft_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndLeft_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndLeft_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndLeft_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndRight_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndRight_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndRight_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownAndRight_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndLeft_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndLeft_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndLeft_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndLeft_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndRight_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndRight_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndRight_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownUpAndRight_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpLeftAndRight_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpLeftAndRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpLeftAndRight_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpLeftAndRight_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceUpLeftAndRight_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownLeftAndRight_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownLeftAndRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownLeftAndRight_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownLeftAndRight_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_FaceDownLeftAndRight_Step4(struct EventObject *, struct Sprite *);
+u8 MovementType_RotateCounterclockwise_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_RotateCounterclockwise_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_RotateCounterclockwise_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_RotateCounterclockwise_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_RotateClockwise_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_RotateClockwise_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_RotateClockwise_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_RotateClockwise_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkBackAndForth_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkBackAndForth_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkBackAndForth_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkBackAndForth_Step3(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequence_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequence_Step2(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceUpRightLeftDown_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceRightLeftDownUp_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceDownUpRightLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceLeftDownUpRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceUpLeftRightDown_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceLeftRightDownUp_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceDownUpLeftRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceRightDownUpLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceLeftUpDownRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceUpDownRightLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceRightLeftUpDown_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceDownRightLeftUp_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceRightUpDownLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceUpDownLeftRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceLeftRightUpDown_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceDownLeftRightUp_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceUpLeftDownRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceDownRightUpLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceLeftDownRightUp_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceRightUpLeftDown_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceUpRightDownLeft_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceDownLeftUpRight_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceLeftUpRightDown_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSequenceRightDownLeftUp_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_CopyPlayer_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_CopyPlayer_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_CopyPlayer_Step2(struct EventObject *, struct Sprite *);
+bool8 CopyablePlayerMovement_None(struct EventObject *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_FaceDirection(struct EventObject *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_GoSpeed0(struct EventObject *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_GoSpeed1(struct EventObject *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_GoSpeed2(struct EventObject *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_Slide(struct EventObject *, struct Sprite *, u8, bool8(u8));
 bool8 cph_IM_DIFFERENT(struct EventObject *, struct Sprite *, u8, bool8(u8));
-bool8 sub_8092314(struct EventObject *, struct Sprite *, u8, bool8(u8));
-bool8 oac_hopping(struct EventObject *, struct Sprite *, u8, bool8(u8));
-u8 mss_08062EA4(struct EventObject *, struct Sprite *);
-u8 sub_80926AC(struct EventObject *, struct Sprite *);
-u8 sub_8092718(struct EventObject *, struct Sprite *);
-u8 sub_80926B8(struct EventObject *, struct Sprite *);
-u8 sub_8092788(struct EventObject *, struct Sprite *);
-u8 sub_80927F8(struct EventObject *, struct Sprite *);
-u8 sub_8092868(struct EventObject *, struct Sprite *);
-u8 sub_80928D8(struct EventObject *, struct Sprite *);
-u8 sub_809290C(struct EventObject *, struct Sprite *);
-u8 sub_809292C(struct EventObject *, struct Sprite *);
-
-// Exported data declarations
-
-extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
+bool8 CopyablePlayerMovement_GoSpeed4(struct EventObject *, struct Sprite *, u8, bool8(u8));
+bool8 CopyablePlayerMovement_Jump(struct EventObject *, struct Sprite *, u8, bool8(u8));
+u8 MovementType_CopyPlayerInGrass_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_Hidden_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkInPlace_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_MoveInPlace_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_WalkSlowlyInPlace_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_JogInPlace_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_RunInPlace_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_Invisible_Step0(struct EventObject *, struct Sprite *);
+u8 MovementType_Invisible_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_Invisible_Step2(struct EventObject *, struct Sprite *);
 
 #endif //GUARD_FIELD_EVENT_OBJ_H

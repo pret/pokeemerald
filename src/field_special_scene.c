@@ -335,11 +335,11 @@ void sub_80FB6EC(void)
 
     if (VarGet(0x40B4) == 2)
     {
-        StartSpriteAnim(&gSprites[spriteId], EventObjectDirectionToImageAnimId(4));
+        StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(4));
     }
     else
     {
-        StartSpriteAnim(&gSprites[spriteId], EventObjectDirectionToImageAnimId(3));
+        StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(3));
     }
 }
 

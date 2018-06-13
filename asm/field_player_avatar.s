@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start EventObjectCB_NoMovement2
-@ void EventObjectCB_NoMovement2(struct obj *object)
-EventObjectCB_NoMovement2: @ 808A998
+	thumb_func_start MovementType_Player
+@ void MovementType_Player(struct obj *object)
+MovementType_Player: @ 808A998
 	push {lr}
 	adds r1, r0, 0
 	movs r0, 0x2E
@@ -18,11 +18,11 @@ EventObjectCB_NoMovement2: @ 808A998
 	ldr r2, =gEventObjects
 	adds r0, r2
 	ldr r2, =EventObjectCB2_NoMovement2
-	bl EventObjectStep
+	bl UpdateEventObjectCurrentMovement
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end EventObjectCB_NoMovement2
+	thumb_func_end MovementType_Player
 
 	thumb_func_start EventObjectCB2_NoMovement2
 EventObjectCB2_NoMovement2: @ 808A9BC
@@ -93,17 +93,17 @@ TryInterruptEventObjectSpecialAnim: @ 808AA38
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r6, r5, 0
-	bl EventObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808AA92
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808AA92
 	adds r0, r4, 0
-	bl EventObjectGetSpecialAnim
+	bl EventObjectGetHeldMovementActionId
 	lsls r0, 24
 	movs r1, 0xE7
 	lsls r1, 24
@@ -123,7 +123,7 @@ _0808AA74:
 	beq _0808AA84
 _0808AA7C:
 	adds r0, r4, 0
-	bl EventObjectClearAnim
+	bl EventObjectClearHeldMovement
 	b _0808AA92
 _0808AA84:
 	adds r0, r6, 0
@@ -302,7 +302,7 @@ ForcedMovement_None: @ 808AB94
 	ldrb r1, [r0, 0x18]
 	lsls r1, 28
 	lsrs r1, 28
-	bl EventObjectSetDirection
+	bl SetEventObjectDirection
 	ldrb r1, [r4]
 	movs r0, 0xBF
 	ands r0, r1
@@ -697,7 +697,7 @@ CheckMovementInputNotOnBike: @ 808AE98
 	b _0808AED2
 	.pool
 _0808AEB0:
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -725,7 +725,7 @@ _0808AED2:
 @ void PlayerNotOnBikeNotMoving(u8 direction, u8 heldKeys)
 PlayerNotOnBikeNotMoving: @ 808AEDC
 	push {lr}
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl PlayerFaceDirection
@@ -963,7 +963,7 @@ CheckForEventObjectCollision: @ 808B094
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -1061,7 +1061,7 @@ sub_808B164: @ 808B164
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -1211,7 +1211,7 @@ sub_808B238: @ 808B238
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r7, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808B2D8
@@ -1698,7 +1698,7 @@ PlayerIsAnimActive: @ 808B63C
 	lsls r0, 2
 	ldr r1, =gEventObjects
 	adds r0, r1
-	bl EventObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1717,7 +1717,7 @@ PlayerCheckIfAnimFinishedOrInactive: @ 808B660
 	lsls r0, 2
 	ldr r1, =gEventObjects
 	adds r0, r1
-	bl EventObjectCheckIfSpecialAnimFinishedOrInactive
+	bl EventObjectCheckHeldMovementStatus
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1740,8 +1740,8 @@ player_set_x22: @ 808B684
 	.pool
 	thumb_func_end player_set_x22
 
-	thumb_func_start player_get_x22
-player_get_x22: @ 808B6A0
+	thumb_func_start PlayerGetCopyableMovement
+PlayerGetCopyableMovement: @ 808B6A0
 	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
@@ -1753,7 +1753,7 @@ player_get_x22: @ 808B6A0
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end player_get_x22
+	thumb_func_end PlayerGetCopyableMovement
 
 	thumb_func_start sub_808B6BC
 sub_808B6BC: @ 808B6BC
@@ -1768,7 +1768,7 @@ sub_808B6BC: @ 808B6BC
 	lsls r0, 2
 	ldr r2, =gEventObjects
 	adds r0, r2
-	bl EventObjectForceSetSpecialAnim
+	bl EventObjectForceSetHeldMovement
 	pop {r0}
 	bx r0
 	.pool
@@ -1796,7 +1796,7 @@ PlayerSetAnimId: @ 808B6E4
 	ldr r1, =gEventObjects
 	adds r0, r1
 	adds r1, r5, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 _0808B712:
 	pop {r4,r5}
 	pop {r0}
@@ -1810,7 +1810,7 @@ PlayerGoSpeed1: @ 808B720
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed0AnimId
+	bl GetWalkNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1825,7 +1825,7 @@ PlayerGoSpeed2: @ 808B738
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed1AnimId
+	bl GetWalkFastMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1840,7 +1840,7 @@ PlayerGoSpeed3: @ 808B750
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed2AnimId
+	bl GetRideWaterCurrentMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1855,7 +1855,7 @@ PlayerGoSpeed4: @ 808B768
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed3AnimId
+	bl GetWalkFastestMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1870,7 +1870,7 @@ PlayerRun: @ 808B780
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetRunAnimId
+	bl GetPlayerRunMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1889,7 +1889,7 @@ PlayerOnBikeCollide: @ 808B798
 	adds r0, r4, 0
 	bl PlayCollisionSoundIfNotFacingWarp
 	adds r0, r4, 0
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1905,7 +1905,7 @@ PlayerOnBikeCollideWithFarawayIslandMew: @ 808B7BC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1924,7 +1924,7 @@ PlayerNotOnBikeCollide: @ 808B7D4
 	adds r0, r4, 0
 	bl PlayCollisionSoundIfNotFacingWarp
 	adds r0, r4, 0
-	bl GetStepInPlaceDelay32AnimId
+	bl GetWalkInPlaceSlowMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1940,7 +1940,7 @@ PlayerNotOnBikeCollideWithFarawayIslandMew: @ 808B7F8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetStepInPlaceDelay32AnimId
+	bl GetWalkInPlaceSlowMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1955,7 +1955,7 @@ PlayerFaceDirection: @ 808B810
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1970,7 +1970,7 @@ PlayerTurnInPlace: @ 808B828
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetStepInPlaceDelay8AnimId
+	bl GetWalkInPlaceFastMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1989,7 +1989,7 @@ PlayerJumpLedge: @ 808B840
 	movs r0, 0xA
 	bl PlaySE
 	adds r0, r4, 0
-	bl GetJumpLedgeAnimId
+	bl GetJump2MovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
@@ -2022,7 +2022,7 @@ _0808B872:
 	ldrb r0, [r0, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_808B6BC
@@ -2038,7 +2038,7 @@ PlayerIdleWheelie: @ 808B8A8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8093648
+	bl GetAcroWheelieFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2052,7 +2052,7 @@ PlayerStartWheelie: @ 808B8C0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8093674
+	bl GetAcroPopWheelieFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2066,7 +2066,7 @@ PlayerEndWheelie: @ 808B8D8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80936A0
+	bl GetAcroEndWheelieFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2084,7 +2084,7 @@ PlayerStandingHoppingWheelie: @ 808B8F0
 	movs r0, 0x22
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_80936CC
+	bl GetAcroWheelieHopFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2103,7 +2103,7 @@ PlayerMovingHoppingWheelie: @ 808B914
 	movs r0, 0x22
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_80936F8
+	bl GetAcroWheelieHopDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2122,7 +2122,7 @@ PlayerLedgeHoppingWheelie: @ 808B938
 	movs r0, 0x22
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_8093724
+	bl GetAcroWheelieJumpDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
@@ -2141,7 +2141,7 @@ PlayerAcroTurnJump: @ 808B95C
 	movs r0, 0x22
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_80934E8
+	bl GetJumpInPlaceTurnAroundMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2160,7 +2160,7 @@ sub_808B980: @ 808B980
 	movs r0, 0x7
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_8093750
+	bl GetAcroWheelieInPlaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2175,7 +2175,7 @@ sub_808B9A4: @ 808B9A4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_809377C
+	bl GetAcroPopWheelieMoveDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2189,7 +2189,7 @@ sub_808B9BC: @ 808B9BC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80937A8
+	bl GetAcroWheelieMoveDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2203,7 +2203,7 @@ npc_use_some_d2s: @ 808B9D4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl d2s_08064034
+	bl GetAcroEndWheelieMoveDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2291,7 +2291,7 @@ GetXYCoordsOneStepInFrontOfPlayer: @ 808BA68
 	adds r0, r3
 	ldrh r0, [r0, 0x12]
 	strh r0, [r5]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
@@ -2462,9 +2462,9 @@ _0808BC30:
 	bx r1
 	thumb_func_end plaer_get_pos_including_state_based_drift
 
-	thumb_func_start player_get_direction_lower_nybble
-@ u8 player_get_direction_lower_nybble()
-player_get_direction_lower_nybble: @ 808BC38
+	thumb_func_start GetPlayerFacingDirection
+@ u8 GetPlayerFacingDirection()
+GetPlayerFacingDirection: @ 808BC38
 	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
@@ -2477,11 +2477,11 @@ player_get_direction_lower_nybble: @ 808BC38
 	lsrs r0, 28
 	bx lr
 	.pool
-	thumb_func_end player_get_direction_lower_nybble
+	thumb_func_end GetPlayerFacingDirection
 
-	thumb_func_start player_get_direction_upper_nybble
-@ u8 player_get_direction_upper_nybble()
-player_get_direction_upper_nybble: @ 808BC58
+	thumb_func_start GetPlayerMovementDirection
+@ u8 GetPlayerMovementDirection()
+GetPlayerMovementDirection: @ 808BC58
 	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
@@ -2493,7 +2493,7 @@ player_get_direction_upper_nybble: @ 808BC58
 	lsrs r0, 4
 	bx lr
 	.pool
-	thumb_func_end player_get_direction_upper_nybble
+	thumb_func_end GetPlayerMovementDirection
 
 	thumb_func_start PlayerGetZCoord
 @ u8 PlayerGetZCoord()
@@ -2586,7 +2586,7 @@ sub_808BCF4: @ 808BCF4
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl EventObjectSetDirection
+	bl SetEventObjectDirection
 	movs r0, 0x6
 	bl TestPlayerAvatarFlags
 	lsls r0, 24
@@ -2780,7 +2780,7 @@ _0808BE46:
 @ bool8 IsPlayerSurfingNorth()
 IsPlayerSurfingNorth: @ 808BE50
 	push {lr}
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2833,7 +2833,7 @@ IsPlayerFacingSurfableFishableWater: @ 808BE74
 	lsls r3, 28
 	lsrs r3, 28
 	adds r0, r4, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -3202,7 +3202,7 @@ sub_808C15C: @ 808C15C
 	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
-	bl sub_8092A0C
+	bl GetFishingDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3244,7 +3244,7 @@ sub_808C1B4: @ 808C1B4
 	mov r8, r0
 	add r4, r8
 	adds r0, r5, 0
-	bl sub_80929BC
+	bl GetAcroWheelieDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3292,7 +3292,7 @@ sub_808C228: @ 808C228
 	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
-	bl EventObjectDirectionToImageAnimId
+	bl GetFaceDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3474,49 +3474,49 @@ do_boulder_dust: @ 808C3C4
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r5, 0
-	bl EventObjectIsSpecialAnimActive
+	bl EventObjectIsHeldMovementActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C3DE
 	adds r0, r5, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 _0808C3DE:
 	adds r0, r4, 0
-	bl EventObjectIsSpecialAnimActive
+	bl EventObjectIsHeldMovementActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C3F0
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 _0808C3F0:
 	adds r0, r5, 0
-	bl EventObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808C472
 	adds r0, r4, 0
-	bl EventObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808C472
 	adds r0, r5, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	ldrb r0, [r6, 0xC]
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldrb r0, [r6, 0xC]
-	bl GetSimpleGoAnimId
+	bl GetWalkSlowMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldr r2, =gFieldEffectArguments
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
@@ -3558,19 +3558,19 @@ sub_808C484: @ 808C484
 	adds r4, r1, 0
 	adds r5, r2, 0
 	adds r0, r4, 0
-	bl EventObjectCheckIfSpecialAnimFinishedOrInactive
+	bl EventObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C4C6
 	adds r0, r5, 0
-	bl EventObjectCheckIfSpecialAnimFinishedOrInactive
+	bl EventObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C4C6
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	adds r0, r5, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
@@ -3648,7 +3648,7 @@ sub_808C544: @ 808C544
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C5A0
@@ -3657,12 +3657,12 @@ sub_808C544: @ 808C544
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_80934BC
+	bl GetJumpInPlaceMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldrh r0, [r6, 0xA]
 	adds r0, 0x1
 	strh r0, [r6, 0xA]
@@ -3772,7 +3772,7 @@ sub_808C644: @ 808C644
 	movs r2, 0x4
 	bl memcpy
 	adds r0, r5, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C6AC
@@ -3782,12 +3782,12 @@ sub_808C644: @ 808C644
 	add r0, sp
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldrb r0, [r4, 0xA]
 	cmp r6, r0
 	bne _0808C68A
@@ -3831,7 +3831,7 @@ sub_808C6BC: @ 808C6BC
 	movs r2, 0x5
 	bl memcpy
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C6EC
@@ -3840,7 +3840,7 @@ sub_808C6BC: @ 808C6BC
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	movs r0, 0x1
 	strh r0, [r5, 0x8]
 _0808C6EC:
@@ -3858,7 +3858,7 @@ sub_808C6FC: @ 808C6FC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C740
@@ -3866,12 +3866,12 @@ sub_808C6FC: @ 808C6FC
 	bl GetOppositeDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetSimpleGoAnimId
+	bl GetWalkSlowMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	bl ScriptContext2_Disable
 	ldr r1, =gPlayerAvatar
 	movs r0, 0
@@ -3939,12 +3939,12 @@ taskFF_0805D1D4: @ 808C7A8
 	ldr r1, =gEventObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl EventObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C7D4
 	adds r0, r5, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C7FC
@@ -3958,12 +3958,12 @@ _0808C7D4:
 	lsls r4, 3
 	adds r4, r0
 	ldrb r0, [r4, 0x8]
-	bl sub_8093540
+	bl GetJumpSpecialMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldr r0, =sub_808C814
 	str r0, [r4]
 _0808C7FC:
@@ -3986,7 +3986,7 @@ sub_808C814: @ 808C814
 	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C87A
@@ -4000,12 +4000,12 @@ sub_808C814: @ 808C814
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	movs r0, 0
 	strb r0, [r6, 0x6]
 	bl ScriptContext2_Disable
@@ -4142,7 +4142,7 @@ fish1: @ 808C918
 	lsls r4, 2
 	adds r4, r3
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimActive
+	bl EventObjectClearHeldMovementIfActive
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x8
 	orrs r0, r1
@@ -4373,10 +4373,10 @@ _0808CB32:
 	lsls r4, 2
 	ldr r0, =gSprites
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092A2C
+	bl GetFishingBiteDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4671,10 +4671,10 @@ fishB: @ 808CD94
 	lsls r4, 2
 	ldr r0, =gSprites
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092A1C
+	bl GetFishingNoCatchDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4719,10 +4719,10 @@ fishC: @ 808CE04
 	lsls r4, 2
 	ldr r0, =gSprites
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092A1C
+	bl GetFishingNoCatchDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4956,7 +4956,7 @@ _0808CFF0:
 	bhi _0808D022
 	movs r0, 0x8
 	strh r0, [r4, 0x24]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -5066,7 +5066,7 @@ _0808D0E8:
 	b _0808D18A
 _0808D0EE:
 	adds r0, r4, 0
-	bl EventObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808D18A
@@ -5257,12 +5257,12 @@ _0808D25E:
 	ldrsh r0, [r5, r3]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectForceSetSpecialAnim
+	bl EventObjectForceSetHeldMovement
 	movs r0, 0
 	mov r9, r0
 	strh r6, [r5, 0x2]
@@ -5414,7 +5414,7 @@ sub_808D38C: @ 808D38C
 	ble _0808D3E4
 _0808D3A8:
 	adds r0, r5, 0
-	bl EventObjectCheckIfSpecialAnimFinishedOrInactive
+	bl EventObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808D3E4
@@ -5424,12 +5424,12 @@ _0808D3A8:
 	lsrs r0, 28
 	adds r0, r4
 	ldrb r0, [r0]
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl EventObjectForceSetSpecialAnim
+	bl EventObjectForceSetHeldMovement
 	movs r0, 0
 	strh r0, [r6]
 	ldrb r0, [r5, 0x18]

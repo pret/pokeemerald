@@ -152,7 +152,7 @@ static void MovePlayerOnMachBike(u8 direction, u16 newKeys, u16 heldKeys)
 static u8 GetMachBikeTransition(u8 *dirTraveling)
 {
     // if the dir updated before this function, get the relevent new direction to check later.
-    u8 direction = player_get_direction_upper_nybble();
+    u8 direction = GetPlayerMovementDirection();
 
     // is the player standing still?
     if (*dirTraveling == 0)
@@ -296,7 +296,7 @@ static u8 CheckMovementInputAcroBike(u8 *newDirection, u16 newKeys, u16 heldKeys
 
 static u8 AcroBikeHandleInputNormal(u8 *newDirection, u16 newKeys, u16 heldKeys)
 {
-    u8 direction = player_get_direction_upper_nybble();
+    u8 direction = GetPlayerMovementDirection();
 
     gPlayerAvatar.bikeFrameCounter = 0;
     if (*newDirection == DIR_NONE)
@@ -349,7 +349,7 @@ static u8 AcroBikeHandleInputTurning(u8 *newDirection, u16 newKeys, u16 heldKeys
         Bike_SetBikeStill();
         return ACRO_TRANS_TURN_DIRECTION;
     }
-    direction = player_get_direction_upper_nybble();
+    direction = GetPlayerMovementDirection();
     if (*newDirection == AcroBike_GetJumpDirection())
     {
         Bike_SetBikeStill(); // Bike_SetBikeStill sets speed to standing, but the next line immediately overrides it. could have just reset acroBikeState to 0 here instead of wasting a jump.
@@ -378,7 +378,7 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *newDirection, u16 newKeys, u16 
     u8 direction;
     struct EventObject *playerEventObj;
 
-    direction = player_get_direction_upper_nybble();
+    direction = GetPlayerMovementDirection();
     playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
     gPlayerAvatar.runningState = NOT_MOVING;
 
@@ -425,7 +425,7 @@ static u8 AcroBikeHandleInputBunnyHop(u8 *newDirection, u16 newKeys, u16 heldKey
     u8 direction;
     struct EventObject *playerEventObj;
 
-    direction = player_get_direction_upper_nybble();
+    direction = GetPlayerMovementDirection();
     playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!(heldKeys & B_BUTTON))
     {
@@ -472,7 +472,7 @@ static u8 AcroBikeHandleInputWheelieMoving(u8 *newDirection, u16 newKeys, u16 he
     u8 direction;
     struct EventObject *playerEventObj;
 
-    direction = player_get_direction_lower_nybble();
+    direction = GetPlayerFacingDirection();
     playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!(heldKeys & B_BUTTON))
     {
@@ -527,7 +527,7 @@ static u8 AcroBikeHandleInputSidewaysJump(u8 *ptr, u16 newKeys, u16 heldKeys)
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
     playerEventObj->facingDirectionLocked = 0;
-    EventObjectSetDirection(playerEventObj, playerEventObj->facingDirection);
+    SetEventObjectDirection(playerEventObj, playerEventObj->facingDirection);
     gPlayerAvatar.acroBikeState = ACRO_STATE_NORMAL;
     return CheckMovementInputAcroBike(ptr, newKeys, heldKeys);
 }
@@ -672,7 +672,7 @@ static void AcroBikeTransition_SideJump(u8 direction)
     playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
     PlaySE(SE_JITE_PYOKO);
     playerEventObj->facingDirectionLocked = 1;
-    PlayerSetAnimId(sub_8093514(direction), 2);
+    PlayerSetAnimId(GetJumpMovementAction(direction), 2);
 }
 
 static void AcroBikeTransition_TurnJump(u8 direction)
@@ -1062,7 +1062,7 @@ void Bike_HandleBumpySlopeJump(void)
         if (MetatileBehavior_IsBumpySlope(tileBehavior))
         {
             gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
-            sub_808C1B4(player_get_direction_upper_nybble());
+            sub_808C1B4(GetPlayerMovementDirection());
         }
     }
 }

@@ -8,9 +8,9 @@ u8 GetPlayerAvatarGenderByGraphicsId(u8);
 bool8 TestPlayerAvatarFlags(u8);
 u8 GetPlayerAvatarObjectId(void);
 void PlayerGetDestCoords(s16 *, s16 *);
-u8 player_get_direction_lower_nybble(void);
-u8 player_get_direction_upper_nybble(void);
-u8 player_get_x22(void);
+u8 GetPlayerFacingDirection(void);
+u8 GetPlayerMovementDirection(void);
+u8 PlayerGetCopyableMovement(void);
 void PlayerGoSpeed1(u8);
 void PlayerGoSpeed2(u8);
 void PlayerGoSpeed3(u8);
@@ -43,6 +43,6 @@ void sub_808C114(void);
 u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
 void SetPlayerAvatarStateMask(u8 a);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
-u8 sub_8093540(u32);
+u8 GetJumpSpecialMovementAction(u32);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H
