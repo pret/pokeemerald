@@ -132,58 +132,58 @@ Route118_EventScript_1F3F4C:: @ 81F3F4C
 	return
 
 Route118_Movement_1F3F5E: @ 81F3F5E
-	step_14
-	step_28
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 Route118_Movement_1F3F61: @ 81F3F61
-	step_left
+	walk_left
 	step_end
 
 Route118_Movement_1F3F63: @ 81F3F63
-	step_right
+	walk_right
 	step_end
 
 Route118_Movement_1F3F65: @ 81F3F65
-	fast_step_down
-	step_14
-	step_down
+	jump_2_down
+	delay_16
+	walk_down
 	step_end
 
 Route118_Movement_1F3F69: @ 81F3F69
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route118_Movement_1F3F74: @ 81F3F74
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route118_Movement_1F3F7E: @ 81F3F7E
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route118_EventScript_1F3F87:: @ 81F3F87

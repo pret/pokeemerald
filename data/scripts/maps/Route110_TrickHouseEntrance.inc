@@ -304,26 +304,26 @@ Route110_TrickHouseEntrance_EventScript_269E2D:: @ 8269E2D
 
 Route110_TrickHouseEnd_Movement_269E36: @ 8269E36
 Route110_TrickHouseEntrance_Movement_269E36: @ 8269E36
-	step_01
-	step_12
-	step_02
-	step_12
-	step_00
-	step_12
-	step_03
-	step_12
+	face_up
+	delay_4
+	face_left
+	delay_4
+	face_down
+	delay_4
+	face_right
+	delay_4
 	step_end
 
 Route110_TrickHouseEnd_Movement_269E3F: @ 8269E3F
 Route110_TrickHouseEntrance_Movement_269E3F: @ 8269E3F
-	step_01
-	step_52
-	step_32
-	step_32
-	step_32
-	step_32
-	step_32
-	step_32
+	face_up
+	disable_anim
+	slide_up
+	slide_up
+	slide_up
+	slide_up
+	slide_up
+	slide_up
 	step_end
 
 Route110_TrickHouseEntrance_EventScript_269E48:: @ 8269E48
@@ -529,7 +529,7 @@ Route110_TrickHouseEntrance_EventScript_26A126:: @ 826A126
 	end
 
 Route110_TrickHouseEntrance_Movement_26A1A7: @ 826A1A7
-	step_54
+	set_invisible
 	step_end
 
 Route110_TrickHouseEntrance_EventScript_26A1A9:: @ 826A1A9

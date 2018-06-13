@@ -49,11 +49,11 @@ FortreeCity_House4_EventScript_217D06:: @ 8217D06
 	end
 
 FortreeCity_House4_Movement_217D1A: @ 8217D1A
-	step_15
-	step_15
-	step_18
-	step_25
-	step_13
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_in_place_fastest_down
+	delay_8
 	step_end
 
 FortreeCity_House4_EventScript_217D20:: @ 8217D20

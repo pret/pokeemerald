@@ -147,29 +147,29 @@ SlateportCity_BattleTentCorridor_EventScript_209044:: @ 8209044
 	goto SlateportCity_BattleTentCorridor_EventScript_208F0D
 
 SlateportCity_BattleTentCorridor_Movement_209059: @ 8209059
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SlateportCity_BattleTentCorridor_Movement_20905E: @ 820905E
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 SlateportCity_BattleTentCorridor_Movement_209062: @ 8209062
-	step_up
-	step_up
-	step_up
-	step_up
-	step_25
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
 	step_end
 
 SlateportCity_BattleTentCorridor_Movement_209068: @ 8209068
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 SlateportCity_BattleTentCorridor_Text_20906B: @ 820906B

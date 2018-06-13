@@ -54,31 +54,31 @@ FallarborTown_PokemonCenter_1F_EventScript_200C48:: @ 8200C48
 	end
 
 FallarborTown_PokemonCenter_1F_Movement_200C53: @ 8200C53
-	step_right
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_13
+	walk_right
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	step_end
 
 FallarborTown_PokemonCenter_1F_Movement_200C60: @ 8200C60
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_13
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	step_end
 
 FallarborTown_PokemonCenter_1F_Text_200C6B: @ 8200C6B

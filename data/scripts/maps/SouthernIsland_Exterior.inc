@@ -41,12 +41,12 @@ BattleFrontier_OutsideWest_EventScript_242A2C:: @ 8242A2C
 	return
 
 BattleFrontier_OutsideWest_Movement_242A37: @ 8242A37
-	step_down
+	walk_down
 	step_end
 
 BattleFrontier_OutsideWest_Movement_242A39: @ 8242A39
-	step_left
-	step_25
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 SouthernIsland_Exterior_EventScript_242A3C:: @ 8242A3C

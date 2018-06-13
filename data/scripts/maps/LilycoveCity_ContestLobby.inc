@@ -160,45 +160,45 @@ LilycoveCity_ContestLobby_EventScript_21A403:: @ 821A403
 	return
 
 LilycoveCity_ContestLobby_Movement_21A407: @ 821A407
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A40F: @ 821A40F
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A418: @ 821A418
-	step_27
+	walk_in_place_fastest_left
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A41A: @ 821A41A
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A41E: @ 821A41E
-	step_14
-	step_14
-	step_14
-	step_14
-	step_16
-	step_16
-	step_16
-	step_28
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_in_place_fastest_right
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_21A427:: @ 821A427
@@ -275,46 +275,46 @@ LilycoveCity_ContestLobby_EventScript_21A4E4:: @ 821A4E4
 	return
 
 LilycoveCity_ContestLobby_Movement_21A533: @ 821A533
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A53C: @ 821A53C
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A545: @ 821A545
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A547: @ 821A547
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A54B: @ 821A54B
-	step_14
-	step_14
-	step_14
-	step_14
-	step_16
-	step_16
-	step_16
-	step_27
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_in_place_fastest_left
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_21A554:: @ 821A554
@@ -433,47 +433,47 @@ LilycoveCity_ContestLobby_EventScript_21A670:: @ 821A670
 	return
 
 LilycoveCity_ContestLobby_Movement_21A6E8: @ 821A6E8
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A6F2: @ 821A6F2
-	step_27
-	step_left
+	walk_in_place_fastest_left
+	walk_left
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A6F5: @ 821A6F5
-	step_left
-	step_left
-	step_25
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A6F9: @ 821A6F9
-	step_down
-	step_down
-	step_26
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A6FD: @ 821A6FD
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21A706: @ 821A706
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_21A708:: @ 821A708
@@ -959,48 +959,48 @@ LilycoveCity_ContestLobby_EventScript_21AC49:: @ 821AC49
 	return
 
 LilycoveCity_ContestLobby_Movement_21ACD0: @ 821ACD0
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21ACDB: @ 821ACDB
-	step_right
+	walk_right
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21ACDD: @ 821ACDD
-	step_right
-	step_right
-	step_25
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21ACE1: @ 821ACE1
-	step_down
-	step_down
-	step_26
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21ACE5: @ 821ACE5
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
 	step_end
 
 LilycoveCity_ContestLobby_Movement_21ACEF: @ 821ACEF
-	step_27
+	walk_in_place_fastest_left
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_21ACF1:: @ 821ACF1

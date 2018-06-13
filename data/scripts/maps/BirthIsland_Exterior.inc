@@ -114,12 +114,12 @@ BirthIsland_Exterior_EventScript_268049:: @ 8268049
 	end
 
 BirthIsland_Exterior_Movement_268054: @ 8268054
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	slow_step_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
 	step_end
 

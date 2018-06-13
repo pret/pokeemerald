@@ -59,20 +59,20 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218211:: @ 8218211
 	end
 
 LilycoveCity_CoveLilyMotel_1F_Movement_218259: @ 8218259
-	step_03
-	step_40
-	step_left
-	step_41
+	face_right
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
 	step_end
 
 LilycoveCity_CoveLilyMotel_1F_Movement_21825E: @ 821825E
-	step_up
+	walk_up
 	step_end
 
 LilycoveCity_CoveLilyMotel_1F_Movement_218260: @ 8218260
-	step_00
-	step_down
-	step_01
+	face_down
+	walk_down
+	face_up
 	step_end
 
 LilycoveCity_CoveLilyMotel_1F_Text_218264: @ 8218264

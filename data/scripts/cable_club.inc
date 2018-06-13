@@ -342,8 +342,8 @@ OldaleTown_PokemonCenter_2F_EventScript_276DE0:: @ 8276DE0
 	end
 
 OldaleTown_PokemonCenter_2F_Movement_276E10: @ 8276E10
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 OldaleTown_PokemonCenter_2F_EventScript_276E13:: @ 8276E13
@@ -736,52 +736,52 @@ OldaleTown_PokemonCenter_2F_EventScript_27733F:: @ 827733F
 	end
 
 OldaleTown_PokemonCenter_2F_Movement_277349: @ 8277349
-	step_00
+	face_down
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27734B: @ 827734B
-	step_03
+	face_right
 	step_end
 
 MossdeepCity_GameCorner_1F_Movement_27734D: @ 827734D
 OldaleTown_PokemonCenter_2F_Movement_27734D: @ 827734D
-	step_02
+	face_left
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27734F: @ 827734F
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_277352: @ 8277352
-	step_right
-	step_up
-	step_up
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_277356: @ 8277356
-	step_left
-	step_up
-	step_up
+	walk_left
+	walk_up
+	walk_up
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27735A: @ 827735A
-	step_up
+	walk_up
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27735C: @ 827735C
-	step_02
+	face_left
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27735E: @ 827735E
-	step_03
+	face_right
 	step_end
 
 MossdeepCity_GameCorner_1F_Movement_277360: @ 8277360
-	step_left
-	step_up
-	step_up
-	step_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 gUnknown_08277365:: @ 8277365

@@ -26,18 +26,18 @@ VerdanturfTown_BattleTentCorridor_EventScript_20209A:: @ 820209A
 	end
 
 VerdanturfTown_BattleTentCorridor_Movement_2020DE: @ 82020DE
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 VerdanturfTown_BattleTentCorridor_Movement_2020E3: @ 82020E3
-	step_up
+	walk_up
 
 VerdanturfTown_BattleTentCorridor_Movement_2020E4: @ 82020E4
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 VerdanturfTown_BattleTentCorridor_Text_2020E7: @ 82020E7

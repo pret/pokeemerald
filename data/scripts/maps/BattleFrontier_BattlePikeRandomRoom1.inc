@@ -440,141 +440,141 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B:: @ 825D77B
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D795: @ 825D795
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D798: @ 825D798
-	step_up
-	step_up
-	step_up
-	step_54
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	set_invisible
+	walk_up
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D79E: @ 825D79E
-	step_up
-	step_54
-	step_up
+	walk_up
+	set_invisible
+	walk_up
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7A2: @ 825D7A2
-	step_down
+	walk_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7A4: @ 825D7A4
-	step_down
-	step_02
-	step_14
-	step_14
-	step_00
+	walk_down
+	face_left
+	delay_16
+	delay_16
+	face_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7AA: @ 825D7AA
-	step_15
-	step_18
-	step_18
-	step_15
-	step_17
-	step_00
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_left
+	face_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B1: @ 825D7B1
-	step_01
+	face_up
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B3: @ 825D7B3
-	step_left
+	walk_left
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B4: @ 825D7B4
-	step_03
+	face_right
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B6: @ 825D7B6
-	step_down
-	step_down
-	step_right
-	step_00
+	walk_down
+	walk_down
+	walk_right
+	face_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BB: @ 825D7BB
-	step_02
+	face_left
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BD: @ 825D7BD
-	step_03
+	face_right
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BF: @ 825D7BF
-	step_01
+	face_up
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7C1: @ 825D7C1
-	step_right
+	walk_right
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7C3: @ 825D7C3
-	step_left
+	walk_left
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7C5: @ 825D7C5
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7C8: @ 825D7C8
-	step_03
+	face_right
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7CA: @ 825D7CA
-	step_02
+	face_left
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7CC: @ 825D7CC
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_54
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	set_invisible
+	walk_up
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7D4: @ 825D7D4
-	step_up
-	step_up
-	step_up
-	step_left
-	step_up
-	step_54
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_up
+	set_invisible
+	walk_up
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DC: @ 825D7DC
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DF: @ 825D7DF
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7E2: @ 825D7E2
-	step_up
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7E7: @ 825D7E7
-	step_55
-	step_down
+	set_visible
+	walk_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D7EA: @ 825D7EA
-	step_left
-	step_03
+	walk_left
+	face_right
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D7ED:: @ 825D7ED
@@ -689,13 +689,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D96D:: @ 825D96D
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B0: @ 825D9B0
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B3: @ 825D9B3
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25D9B6: @ 825D9B6

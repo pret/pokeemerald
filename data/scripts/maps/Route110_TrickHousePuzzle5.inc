@@ -855,113 +855,113 @@ Route110_TrickHousePuzzle5_EventScript_26D5FF:: @ 826D5FF
 	return
 
 Route110_TrickHousePuzzle5_Movement_26D60A: @ 826D60A
-	step_left
+	walk_left
 	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D60C: @ 826D60C
-	step_left
-	step_left
+	walk_left
+	walk_left
 	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D60F: @ 826D60F
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D613: @ 826D613
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 
 Movement_26D618: @ 826D618
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D61E: @ 826D61E
-	step_right
+	walk_right
 	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D620: @ 826D620
-	step_right
-	step_right
+	walk_right
+	walk_right
 	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D623: @ 826D623
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D627: @ 826D627
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D62C: @ 826D62C
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route110_TrickHouseEntrance_Movement_26D632: @ 826D632
 Route110_TrickHousePuzzle5_Movement_26D632: @ 826D632
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_00
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_down
 	step_end
 
 Route110_TrickHousePuzzle5_Text_26D660: @ 826D660

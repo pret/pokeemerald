@@ -270,15 +270,15 @@ Route120_EventScript_28CFC3:: @ 828CFC3
 	end
 
 Route111_Movement_28D04D: @ 828D04D
-	step_1d
+	walk_in_place_down
 	step_end
 
 Route111_Movement_28D04F: @ 828D04F
-	step_1e
+	walk_in_place_up
 	step_end
 
 Route111_Movement_28D051: @ 828D051
-	step_1f
+	walk_in_place_left
 	step_end
 
 Route111_EventScript_28D053:: @ 828D053

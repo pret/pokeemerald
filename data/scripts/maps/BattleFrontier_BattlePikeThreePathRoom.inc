@@ -267,22 +267,22 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBC2:: @ 825CBC2
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_Movement_25CBCE: @ 825CBCE
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 BattleFrontier_BattlePikeThreePathRoom_Movement_25CBD5: @ 825CBD5
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_00
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	face_down
 	step_end
 
 BattleFrontier_BattlePikeThreePathRoom_Text_25CBDD: @ 825CBDD

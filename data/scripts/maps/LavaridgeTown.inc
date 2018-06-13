@@ -162,53 +162,53 @@ LavaridgeTown_EventScript_1EA6C9:: @ 81EA6C9
 	return
 
 LavaridgeTown_Movement_1EA6D4: @ 81EA6D4
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 LavaridgeTown_Movement_1EA6DF: @ 81EA6DF
-	step_14
-	step_13
-	step_28
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
 LavaridgeTown_Movement_1EA6E3: @ 81EA6E3
-	step_15
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
 	step_end
 
 LavaridgeTown_Movement_1EA6ED: @ 81EA6ED
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 LavaridgeTown_Movement_1EA6F4: @ 81EA6F4
-	step_left
-	step_left
-	step_up
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 LavaridgeTown_Movement_1EA6F8: @ 81EA6F8
-	step_down
+	walk_down
 	step_end
 
 LavaridgeTown_EventScript_1EA6FA:: @ 81EA6FA

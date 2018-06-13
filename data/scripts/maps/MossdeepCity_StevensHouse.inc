@@ -54,21 +54,21 @@ MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	end
 
 MossdeepCity_StevensHouse_Movement_222833: @ 8222833
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_25
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 MossdeepCity_StevensHouse_Movement_22283B: @ 822283B
-	step_up
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 MossdeepCity_StevensHouse_EventScript_222841:: @ 8222841

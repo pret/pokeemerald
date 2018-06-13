@@ -194,26 +194,26 @@ SlateportCity_BattleTentLobby_EventScript_2089C9:: @ 82089C9
 	return
 
 SlateportCity_BattleTentLobby_Movement_2089F8: @ 82089F8
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SlateportCity_BattleTentLobby_Movement_2089FC: @ 82089FC
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 SlateportCity_BattleTentLobby_Movement_2089FF: @ 82089FF
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SlateportCity_BattleTentLobby_Movement_208A03: @ 8208A03
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 SlateportCity_BattleTentLobby_EventScript_208A07:: @ 8208A07
@@ -236,10 +236,10 @@ SlateportCity_BattleTentLobby_EventScript_208A2E:: @ 8208A2E
 	end
 
 SlateportCity_BattleTentLobby_Movement_208A38:: @ 8208A38
-	step_up
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 SlateportCity_BattleTentLobby_EventScript_208A3D:: @ 8208A3D

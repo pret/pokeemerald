@@ -27,7 +27,7 @@ Route110_SeasideCyclingRoadEntrance1_EventScript_26EA9F:: @ 826EA9F
 	end
 
 Route110_SeasideCyclingRoadEntrance1_Movement_26EAB4: @ 826EAB4
-	step_left
+	walk_left
 	step_end
 
 Route110_SeasideCyclingRoadEntrance1_EventScript_26EAB6:: @ 826EAB6

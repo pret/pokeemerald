@@ -32,7 +32,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292758:: @ 8292758
 	return
 
 LittlerootTown_BrendansHouse_1F_Movement_292763: @ 8292763
-	step_up
+	walk_up
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_292765:: @ 8292765
@@ -119,33 +119,33 @@ LittlerootTown_BrendansHouse_2F_EventScript_292849:: @ 8292849
 	return
 
 LittlerootTown_BrendansHouse_2F_Movement_292850: @ 8292850
-	step_13
-	step_down
-	step_27
-	step_14
-	step_13
-	step_left
+	delay_8
+	walk_down
+	walk_in_place_fastest_left
+	delay_16
+	delay_8
+	walk_left
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_292857: @ 8292857
-	step_right
-	step_up
-	step_13
+	walk_right
+	walk_up
+	delay_8
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_29285B: @ 829285B
-	step_13
-	step_down
-	step_28
-	step_14
-	step_13
-	step_right
+	delay_8
+	walk_down
+	walk_in_place_fastest_right
+	delay_16
+	delay_8
+	walk_right
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_292862: @ 8292862
-	step_left
-	step_up
-	step_13
+	walk_left
+	walk_up
+	delay_8
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_292866:: @ 8292866
@@ -227,87 +227,87 @@ LittlerootTown_MaysHouse_1F_EventScript_29296C:: @ 829296C
 	return
 
 LittlerootTown_BrendansHouse_1F_Movement_292989: @ 8292989
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_28
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292991: @ 8292991
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_27
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292999: @ 8292999
-	step_right
+	walk_right
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_29299B: @ 829299B
-	step_left
+	walk_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_29299D: @ 829299D
-	step_27
-	step_14
-	step_14
-	step_14
-	step_14
-	step_28
-	step_14
-	step_14
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
+	delay_16
+	delay_16
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_2929A6: @ 82929A6
-	step_28
-	step_14
-	step_14
-	step_14
-	step_14
-	step_27
-	step_14
-	step_14
+	walk_in_place_fastest_right
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_2929AF: @ 82929AF
-	step_up
-	step_left
-	step_left
+	walk_up
+	walk_left
+	walk_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_2929B3: @ 82929B3
-	step_up
-	step_right
-	step_right
+	walk_up
+	walk_right
+	walk_right
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_2929B7: @ 82929B7
-	step_left
-	step_28
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_2929BA: @ 82929BA
-	step_right
-	step_27
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_2929BD: @ 82929BD
-	step_left
-	step_down
-	step_28
+	walk_left
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_2929C1: @ 82929C1
-	step_right
-	step_down
-	step_27
+	walk_right
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_2929C5:: @ 82929C5
@@ -413,31 +413,31 @@ LittlerootTown_MaysHouse_1F_EventScript_292ACD:: @ 8292ACD
 	end
 
 LittlerootTown_BrendansHouse_1F_Movement_292AE0: @ 8292AE0
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292AE6: @ 8292AE6
-	step_left
+	walk_left
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_292AE8: @ 8292AE8
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_292AEE: @ 8292AEE
-	step_right
+	walk_right
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292AF0: @ 8292AF0
-	step_up
+	walk_up
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_292AF2:: @ 8292AF2
@@ -641,74 +641,74 @@ LittlerootTown_BrendansHouse_1F_EventScript_292D9D:: @ 8292D9D
 	return
 
 LittlerootTown_BrendansHouse_1F_Movement_292DB2: @ 8292DB2
-	step_right
-	step_right
+	walk_right
+	walk_right
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DB5: @ 8292DB5
-	step_left
-	step_left
+	walk_left
+	walk_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DB8: @ 8292DB8
-	step_02
+	face_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DBA: @ 8292DBA
-	step_03
+	face_right
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DBC: @ 8292DBC
-	step_down
-	step_right
-	step_down
-	step_13
+	walk_down
+	walk_right
+	walk_down
+	delay_8
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DC1: @ 8292DC1
-	step_down
-	step_left
-	step_down
-	step_13
+	walk_down
+	walk_left
+	walk_down
+	delay_8
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DC6: @ 8292DC6
-	step_14
-	step_down
-	step_down
-	step_down
-	step_27
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DCC: @ 8292DCC
-	step_13
-	step_14
-	step_14
-	step_25
+	delay_8
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DD1: @ 8292DD1
-	step_14
-	step_down
-	step_down
-	step_down
-	step_28
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DD7: @ 8292DD7
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_26
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_292DDE: @ 8292DDE
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end

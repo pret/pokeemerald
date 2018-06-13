@@ -557,50 +557,50 @@ Route110_EventScript_1EF9A0:: @ 81EF9A0
 	return
 
 Route110_Movement_1EF9A8: @ 81EF9A8
-	step_down
-	step_left
-	step_25
+	walk_down
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 Route110_Movement_1EF9AC: @ 81EF9AC
-	step_down
+	walk_down
 	step_end
 
 Route110_Movement_1EF9AE: @ 81EF9AE
-	step_down
-	step_right
-	step_25
+	walk_down
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 Route110_Movement_1EF9B2: @ 81EF9B2
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 Route110_Movement_1EF9BA: @ 81EF9BA
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_15
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_down
 	step_end
 
 Route110_Movement_1EF9C3: @ 81EF9C3
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 Route110_EventScript_1EF9CB:: @ 81EF9CB
@@ -717,66 +717,66 @@ Route110_EventScript_1EFB25:: @ 81EFB25
 	return
 
 Route110_Movement_1EFB30: @ 81EFB30
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Route110_Movement_1EFB34: @ 81EFB34
-	step_down
-	step_left
-	step_left
-	step_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 Route110_Movement_1EFB39: @ 81EFB39
-	step_down
-	step_left
-	step_down
+	walk_down
+	walk_left
+	walk_down
 	step_end
 
 Route110_Movement_1EFB3D: @ 81EFB3D
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 Route110_Movement_1EFB40: @ 81EFB40
-	step_down
-	step_right
-	step_down
+	walk_down
+	walk_right
+	walk_down
 	step_end
 
 Route110_Movement_1EFB44: @ 81EFB44
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Route110_Movement_1EFB4B: @ 81EFB4B
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Route110_Movement_1EFB51: @ 81EFB51
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Route110_Movement_1EFB57: @ 81EFB57
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Route110_Text_1EFB5D: @ 81EFB5D

@@ -40,20 +40,20 @@ BattleFrontier_BattleTowerCorridor_EventScript_241B27:: @ 8241B27
 	end
 
 BattleFrontier_BattleTowerCorridor_Movement_241B36: @ 8241B36
-	step_right
+	walk_right
 
 BattleFrontier_BattleTowerCorridor_Movement_241B37: @ 8241B37
-	step_right
-	step_right
+	walk_right
+	walk_right
 
 BattleFrontier_BattleTowerCorridor_Movement_241B39: @ 8241B39
-	step_right
+	walk_right
 
 BattleFrontier_BattleTowerCorridor_Movement_241B3A: @ 8241B3A
-	step_right
-	step_right
-	step_right
-	step_up
-	step_54
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	set_invisible
 	step_end
 

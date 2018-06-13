@@ -274,8 +274,8 @@ Route120_EventScript_1F57AE:: @ 81F57AE
 	return
 
 Route120_Movement_1F57B9: @ 81F57B9
-	step_down
-	step_left
+	walk_down
+	walk_left
 	step_end
 
 Route120_EventScript_1F57BC:: @ 81F57BC

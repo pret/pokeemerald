@@ -280,24 +280,24 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B646:: @ 824B646
 	return
 
 BattleFrontier_BattleDomePreBattleRoom_Movement_24B64F: @ 824B64F
-	step_right
-	step_02
+	walk_right
+	face_left
 	step_end
 
 BattleFrontier_BattleDomePreBattleRoom_Movement_24B652: @ 824B652
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleDomePreBattleRoom_Movement_24B657: @ 824B657
-	step_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleDomePreBattleRoom_Movement_24B659: @ 824B659
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomePreBattleRoom_Text_24B65C: @ 824B65C

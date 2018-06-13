@@ -114,128 +114,128 @@ PetalburgWoods_EventScript_22E1A7:: @ 822E1A7
 	end
 
 PetalburgWoods_Movement_22E1B1: @ 822E1B1
-	step_01
-	step_14
-	step_12
-	step_03
-	step_14
-	step_13
-	step_02
-	step_14
-	step_13
-	step_00
-	step_14
-	step_03
-	step_14
-	step_13
-	step_01
-	step_14
+	face_up
+	delay_16
+	delay_4
+	face_right
+	delay_16
+	delay_8
+	face_left
+	delay_16
+	delay_8
+	face_down
+	delay_16
+	face_right
+	delay_16
+	delay_8
+	face_up
+	delay_16
 	step_end
 
 PetalburgWoods_Movement_22E1C2: @ 822E1C2
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 PetalburgWoods_Movement_22E1CB: @ 822E1CB
-	step_14
-	step_3e
-	step_down
-	step_down
+	delay_16
+	face_player
+	walk_down
+	walk_down
 	step_end
 
 PetalburgWoods_Movement_22E1D0: @ 822E1D0
-	step_14
-	step_3e
-	step_down
-	step_down
-	step_down
-	step_28
+	delay_16
+	face_player
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 PetalburgWoods_Movement_22E1D7: @ 822E1D7
-	step_17
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 PetalburgWoods_Movement_22E1E0: @ 822E1E0
-	step_14
-	step_14
-	step_26
+	delay_16
+	delay_16
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgWoods_Movement_22E1E4: @ 822E1E4
-	step_18
-	step_15
-	step_15
-	step_17
-	step_26
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgWoods_Movement_22E1EA: @ 822E1EA
-	step_15
-	step_18
-	step_26
+	walk_fast_down
+	walk_fast_right
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgWoods_Movement_22E1EE: @ 822E1EE
-	step_25
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_01
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	face_up
 	step_end
 
 PetalburgWoods_Movement_22E1F6: @ 822E1F6
-	step_15
-	step_15
+	walk_fast_down
+	walk_fast_down
 	step_end
 
 PetalburgWoods_Movement_22E1F9: @ 822E1F9
-	step_40
-	step_up
-	step_41
+	lock_facing_direction
+	walk_up
+	unlock_facing_direction
 	step_end
 
 PetalburgWoods_Movement_22E1FD: @ 822E1FD
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_14
-	step_14
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	delay_16
+	delay_16
 	step_end
 
 PetalburgWoods_Movement_22E205: @ 822E205
-	step_15
-	step_15
-	step_15
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end
 
 PetalburgWoods_Movement_22E209: @ 822E209
-	step_down
-	step_down
-	step_14
-	step_14
+	walk_down
+	walk_down
+	delay_16
+	delay_16
 	step_end
 
 PetalburgWoods_Movement_22E20E: @ 822E20E
-	step_down
+	walk_down
 	step_end
 
 PetalburgWoods_EventScript_22E210:: @ 822E210

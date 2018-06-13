@@ -559,7 +559,7 @@ LilycoveCity_ContestLobby_EventScript_294032:: @ 8294032
 	end
 
 LilycoveCity_ContestLobby_Movement_294053: @ 8294053
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_294055:: @ 8294055

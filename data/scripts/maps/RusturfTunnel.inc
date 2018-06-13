@@ -150,121 +150,121 @@ RusturfTunnel_EventScript_22CFFF:: @ 822CFFF
 	return
 
 RusturfTunnel_Movement_22D017: @ 822D017
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 RusturfTunnel_Movement_22D023: @ 822D023
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 RusturfTunnel_Movement_22D02F: @ 822D02F
-	step_13
-	step_26
-	step_14
-	step_14
-	step_28
+	delay_8
+	walk_in_place_fastest_up
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 RusturfTunnel_Movement_22D035: @ 822D035
-	step_left
-	step_28
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 RusturfTunnel_Movement_22D038: @ 822D038
-	step_down
-	step_26
-	step_13
-	step_28
+	walk_down
+	walk_in_place_fastest_up
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
 RusturfTunnel_Movement_22D03D: @ 822D03D
-	step_up
-	step_25
-	step_13
-	step_28
+	walk_up
+	walk_in_place_fastest_down
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
 RusturfTunnel_Movement_22D042: @ 822D042
-	step_left
-	step_28
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 RusturfTunnel_Movement_22D045: @ 822D045
-	step_right
-	step_27
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 RusturfTunnel_Movement_22D048: @ 822D048
-	step_up
-	step_28
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 RusturfTunnel_Movement_22D04B: @ 822D04B
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 RusturfTunnel_Movement_22D058: @ 822D058
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 RusturfTunnel_Movement_22D065: @ 822D065
-	step_right
+	walk_right
 	step_end
 
 RusturfTunnel_Movement_22D067: @ 822D067
-	step_22
-	step_22
-	step_16
-	step_18
+	walk_in_place_fast_up
+	walk_in_place_fast_up
+	walk_fast_up
+	walk_fast_right
 	step_end
 
 RusturfTunnel_Movement_22D06C: @ 822D06C
-	step_24
-	step_24
-	step_18
-	step_26
+	walk_in_place_fast_right
+	walk_in_place_fast_right
+	walk_fast_right
+	walk_in_place_fastest_up
 	step_end
 
 RusturfTunnel_EventScript_22D071:: @ 822D071
@@ -293,9 +293,9 @@ RusturfTunnel_EventScript_22D083:: @ 822D083
 	end
 
 RusturfTunnel_Movement_22D0AB: @ 822D0AB
-	step_40
-	step_right
-	step_41
+	lock_facing_direction
+	walk_right
+	unlock_facing_direction
 	step_end
 
 RusturfTunnel_EventScript_22D0AF:: @ 822D0AF
@@ -353,76 +353,76 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	end
 
 RusturfTunnel_Movement_22D178: @ 822D178
-	step_00
-	step_40
-	step_up
-	step_41
-	step_27
+	face_down
+	lock_facing_direction
+	walk_up
+	unlock_facing_direction
+	walk_in_place_fastest_left
 	step_end
 
 RusturfTunnel_Movement_22D17E: @ 822D17E
-	step_down
-	step_26
+	walk_down
+	walk_in_place_fastest_up
 	step_end
 
 RusturfTunnel_Movement_22D181: @ 822D181
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 RusturfTunnel_Movement_22D18B: @ 822D18B
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 RusturfTunnel_Movement_22D193: @ 822D193
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 RusturfTunnel_Movement_22D19F: @ 822D19F
-	step_14
-	step_13
-	step_12
-	step_27
+	delay_16
+	delay_8
+	delay_4
+	walk_in_place_fastest_left
 	step_end
 
 RusturfTunnel_Movement_22D1A4: @ 822D1A4
-	step_14
-	step_right
+	delay_16
+	walk_right
 	step_end
 
 RusturfTunnel_Movement_22D1A7: @ 822D1A7
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 RusturfTunnel_EventScript_22D1B1:: @ 822D1B1

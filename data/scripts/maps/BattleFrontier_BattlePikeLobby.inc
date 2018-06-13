@@ -268,12 +268,12 @@ BattleFrontier_BattlePikeLobby_EventScript_25BA94:: @ 825BA94
 	return
 
 BattleFrontier_BattlePikeLobby_Movement_25BAA6: @ 825BAA6
-	step_up
+	walk_up
 
 BattleFrontier_BattlePikeLobby_Movement_25BAA7: @ 825BAA7
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BAAB:: @ 825BAAB

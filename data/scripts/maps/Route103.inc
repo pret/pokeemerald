@@ -152,42 +152,42 @@ Route103_EventScript_1EC5A2:: @ 81EC5A2
 	end
 
 Route103_Movement_1EC5BE: @ 81EC5BE
-	step_left
-	step_down
+	walk_left
+	walk_down
 	step_end
 
 Route103_Movement_1EC5C1: @ 81EC5C1
-	fast_step_down
-	step_14
-	step_down
-	step_down
-	step_down
-	step_down
+	jump_2_down
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Route103_Movement_1EC5C8: @ 81EC5C8
-	step_14
-	step_12
-	step_27
-	step_14
-	step_25
+	delay_16
+	delay_4
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Route103_Movement_1EC5CE: @ 81EC5CE
-	step_down
+	walk_down
 	step_end
 
 Route103_Movement_1EC5D0: @ 81EC5D0
-	fast_step_down
-	step_14
-	step_down
-	step_down
-	step_down
+	jump_2_down
+	delay_16
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Route103_Movement_1EC5D6: @ 81EC5D6
-	step_14
-	step_25
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Route103_EventScript_1EC5D9:: @ 81EC5D9

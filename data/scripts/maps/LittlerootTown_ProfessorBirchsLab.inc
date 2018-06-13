@@ -142,13 +142,13 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E67:: @ 81F9E67
 	end
 
 LittlerootTown_ProfessorBirchsLab_Movement_1F9E78: @ 81F9E78
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
@@ -211,35 +211,35 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9F3C:: @ 81F9F3C
 	return
 
 LittlerootTown_ProfessorBirchsLab_Movement_1F9F46: @ 81F9F46
-	step_left
-	step_25
-	step_14
-	step_14
-	step_right
-	step_25
-	step_14
-	step_14
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_left
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	walk_right
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_ProfessorBirchsLab_Movement_1F9F58: @ 81F9F58
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_25
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9F62:: @ 81F9F62
@@ -252,13 +252,13 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9F62:: @ 81F9F62
 	end
 
 LittlerootTown_ProfessorBirchsLab_Movement_1F9F7C: @ 81F9F7C
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9F84:: @ 81F9F84
@@ -591,8 +591,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA3D7:: @ 81FA3D7
 	return
 
 LittlerootTown_ProfessorBirchsLab_Movement_1FA3E0: @ 81FA3E0
-	step_down
-	step_27
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA3E3:: @ 81FA3E3

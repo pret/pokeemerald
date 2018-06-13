@@ -462,34 +462,34 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D9C:: @ 8250D9C
 	return
 
 BattleFrontier_BattlePyramidLobby_Movement_250DC4: @ 8250DC4
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_00
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	face_down
 	step_end
 
 BattleFrontier_BattlePyramidLobby_Movement_250DCD: @ 8250DCD
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePyramidLobby_Movement_250DD5: @ 8250DD5
-	step_right
-	step_02
+	walk_right
+	face_left
 	step_end
 
 BattleFrontier_BattlePyramidLobby_Movement_250DD8: @ 8250DD8
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250DDB:: @ 8250DDB

@@ -781,29 +781,29 @@ BattleFrontier_BattleTowerLobby_EventScript_23F15B:: @ 823F15B
 	return
 
 BattleFrontier_BattleTowerLobby_Movement_23F195: @ 823F195
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleTowerLobby_Movement_23F199: @ 823F199
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerLobby_Movement_23F19C: @ 823F19C
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerLobby_Movement_23F1A0: @ 823F1A0
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_54
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1A7:: @ 823F1A7

@@ -72,51 +72,51 @@ FarawayIsland_Interior_EventScript_267DA2:: @ 8267DA2
 	end
 
 FarawayIsland_Interior_Movement_267DCE: @ 8267DCE
-	step_up
-	step_up
-	step_up
-	step_25
-	step_54
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
+	set_invisible
 	step_end
 
 FarawayIsland_Interior_Movement_267DD4: @ 8267DD4
-	step_55
+	set_visible
 	step_end
 
 FarawayIsland_Interior_Movement_267DD6: @ 8267DD6
-	step_40
-	step_16
-	step_16
-	step_41
-	step_1d
-	step_1d
+	lock_facing_direction
+	walk_fast_up
+	walk_fast_up
+	unlock_facing_direction
+	walk_in_place_down
+	walk_in_place_down
 	step_end
 
 FarawayIsland_Interior_Movement_267DDD: @ 8267DDD
-	step_40
-	step_16
-	step_16
-	step_41
-	step_1e
-	step_1e
+	lock_facing_direction
+	walk_fast_up
+	walk_fast_up
+	unlock_facing_direction
+	walk_in_place_up
+	walk_in_place_up
 	step_end
 
 FarawayIsland_Interior_Movement_267DE4: @ 8267DE4
-	step_40
-	step_16
-	step_16
-	step_41
-	step_20
-	step_20
+	lock_facing_direction
+	walk_fast_up
+	walk_fast_up
+	unlock_facing_direction
+	walk_in_place_right
+	walk_in_place_right
 	step_end
 
 FarawayIsland_Interior_Movement_267DEB: @ 8267DEB
-	step_40
-	step_16
-	step_16
-	step_41
-	step_1f
-	step_1f
+	lock_facing_direction
+	walk_fast_up
+	walk_fast_up
+	unlock_facing_direction
+	walk_in_place_left
+	walk_in_place_left
 	step_end
 
 FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2

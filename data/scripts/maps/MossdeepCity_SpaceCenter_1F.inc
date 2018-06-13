@@ -271,22 +271,22 @@ MossdeepCity_SpaceCenter_1F_EventScript_223289:: @ 8223289
 	end
 
 MossdeepCity_SpaceCenter_1F_Movement_22329A: @ 822329A
-	step_40
-	step_left
-	step_41
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
 	step_end
 
 MossdeepCity_SpaceCenter_1F_Movement_22329E: @ 822329E
-	step_40
-	step_right
-	step_41
+	lock_facing_direction
+	walk_right
+	unlock_facing_direction
 	step_end
 
 MossdeepCity_SpaceCenter_1F_Movement_2232A2: @ 82232A2
-	step_02
-	step_40
-	step_right
-	step_41
+	face_left
+	lock_facing_direction
+	walk_right
+	unlock_facing_direction
 	step_end
 
 MossdeepCity_SpaceCenter_1F_Text_2232A7: @ 82232A7

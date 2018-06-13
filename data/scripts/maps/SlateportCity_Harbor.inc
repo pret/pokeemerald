@@ -105,58 +105,58 @@ SlateportCity_Harbor_EventScript_20CAB3:: @ 820CAB3
 	return
 
 SlateportCity_Harbor_Movement_20CAC8: @ 820CAC8
-	step_14
-	step_14
-	step_43
-	step_54
+	delay_16
+	delay_16
+	jump_up
+	set_invisible
 	step_end
 
 SlateportCity_Harbor_Movement_20CACD: @ 820CACD
-	step_14
-	step_14
-	step_43
-	step_54
+	delay_16
+	delay_16
+	jump_up
+	set_invisible
 	step_end
 
 SlateportCity_Harbor_Movement_20CAD2: @ 820CAD2
-	step_14
-	step_14
-	step_14
-	step_14
-	step_right
-	step_right
-	step_right
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
 	step_end
 
 SlateportCity_Harbor_Movement_20CAE0: @ 820CAE0
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 SlateportCity_Harbor_Movement_20CAE6: @ 820CAE6
-	step_left
-	step_left
-	step_up
-	step_left
+	walk_left
+	walk_left
+	walk_up
+	walk_left
 	step_end
 
 SlateportCity_Harbor_Movement_20CAEB: @ 820CAEB
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 SlateportCity_Harbor_Movement_20CAEF: @ 820CAEF
-	step_up
+	walk_up
 	step_end
 
 SlateportCity_Harbor_EventScript_20CAF1:: @ 820CAF1
@@ -259,12 +259,12 @@ SlateportCity_Harbor_EventScript_20CC42:: @ 820CC42
 	return
 
 SlateportCity_Harbor_Movement_20CC4D: @ 820CC4D
-	step_right
-	step_26
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 SlateportCity_Harbor_Movement_20CC50: @ 820CC50
-	step_up
+	walk_up
 	step_end
 
 SlateportCity_Harbor_EventScript_20CC52:: @ 820CC52

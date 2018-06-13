@@ -394,68 +394,68 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE89:: @ 824FE89
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90: @ 824FE90
-	step_54
+	set_invisible
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FE92: @ 824FE92
-	step_55
-	step_up
-	step_up
-	step_up
-	step_up
+	set_visible
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FE97: @ 824FE97
-	step_03
+	face_right
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FE99: @ 824FE99
-	step_01
+	face_up
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FE9B: @ 824FE9B
-	step_55
-	step_up
-	step_up
-	step_up
-	step_up
+	set_visible
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEA1: @ 824FEA1
-	step_down
-	step_down
-	step_down
-	step_down
-	step_02
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	face_left
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEA7: @ 824FEA7
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC: @ 824FEAC
-	step_00
+	face_down
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAE: @ 824FEAE
-	step_55
-	slow_step_down
-	slow_step_down
-	step_02
+	set_visible
+	walk_slow_down
+	walk_slow_down
+	face_left
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEB3: @ 824FEB3
-	step_55
-	slow_step_down
+	set_visible
+	walk_slow_down
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEB6: @ 824FEB6
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	step_02
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	face_left
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FEBB:: @ 824FEBB
@@ -472,42 +472,42 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FED5:: @ 824FED5
 	end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEDF: @ 824FEDF
-	step_14
-	step_14
-	step_55
-	step_down
-	step_right
-	step_down
-	step_27
+	delay_16
+	delay_16
+	set_visible
+	walk_down
+	walk_right
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEE7: @ 824FEE7
-	step_55
-	step_15
-	step_18
-	step_15
-	step_15
-	step_15
-	step_15
-	step_15
-	step_27
-	step_14
+	set_visible
+	walk_fast_down
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_in_place_fastest_left
+	delay_16
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_24FEF2: @ 824FEF2
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_55
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	step_02
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	set_visible
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	face_left
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Text_24FF00: @ 824FF00

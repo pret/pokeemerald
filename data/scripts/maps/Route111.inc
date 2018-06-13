@@ -150,13 +150,13 @@ Route111_EventScript_1F0EA7:: @ 81F0EA7
 	end
 
 Route111_Movement_1F0EB1:: @ 81F0EB1
-	step_94
-	step_15
-	step_15
-	step_15
-	step_15
-	step_15
-	step_15
+	store_lock_anim
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end
 
 Route111_EventScript_1F0EB9:: @ 81F0EB9
@@ -247,19 +247,19 @@ Route111_EventScript_1F0F9D:: @ 81F0F9D
 	return
 
 Route111_Movement_1F0FA8: @ 81F0FA8
-	step_up
+	walk_up
 	step_end
 
 Route111_Movement_1F0FAA: @ 81F0FAA
-	step_down
+	walk_down
 	step_end
 
 Route111_Movement_1F0FAC: @ 81F0FAC
-	step_left
+	walk_left
 	step_end
 
 Route111_Movement_1F0FAE: @ 81F0FAE
-	step_right
+	walk_right
 	step_end
 
 Route111_EventScript_1F0FB0:: @ 81F0FB0
@@ -366,18 +366,18 @@ Route111_EventScript_1F1143:: @ 81F1143
 	return
 
 Route111_Movement_1F114A: @ 81F114A
-	step_26
-	step_up
+	walk_in_place_fastest_up
+	walk_up
 	step_end
 
 Route111_Movement_1F114D: @ 81F114D
-	step_down
+	walk_down
 	step_end
 
 Route111_Movement_1F114F: @ 81F114F
-	step_14
-	step_14
-	step_14
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 Route111_EventScript_1F1153:: @ 81F1153

@@ -80,99 +80,99 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	end
 
 Route128_Movement_1F6C76: @ 81F6C76
-	step_17
+	walk_fast_left
 	step_end
 
 Route128_Movement_1F6C78: @ 81F6C78
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Route128_Movement_1F6C85: @ 81F6C85
-	step_up
+	walk_up
 	step_end
 
 Route128_Movement_1F6C87: @ 81F6C87
-	step_17
+	walk_fast_left
 	step_end
 
 Route128_Movement_1F6C89: @ 81F6C89
-	step_15
-	step_27
-	step_14
-	step_28
-	step_14
-	step_14
-	step_25
+	walk_fast_down
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_right
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Route128_Movement_1F6C91: @ 81F6C91
-	step_40
-	slow_step_up
-	step_14
-	step_41
+	lock_facing_direction
+	walk_slow_up
+	delay_16
+	unlock_facing_direction
 	step_end
 
 Route128_Movement_1F6C96: @ 81F6C96
-	step_17
-	step_17
-	step_17
-	step_28
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_in_place_fastest_right
 	step_end
 
 Route128_Movement_1F6C9B: @ 81F6C9B
-	step_14
-	step_14
-	step_16
-	step_17
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	delay_16
+	delay_16
+	walk_fast_up
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 Route128_Movement_1F6CA8: @ 81F6CA8
-	step_left
-	step_left
-	step_13
-	step_12
+	walk_left
+	walk_left
+	delay_8
+	delay_4
 	step_end
 
 Route128_Movement_1F6CAD: @ 81F6CAD
-	step_left
-	step_25
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 Route128_Movement_1F6CB0: @ 81F6CB0
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 Route128_Movement_1F6CBB: @ 81F6CBB
-	step_right
-	step_25
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 Route128_EventScript_1F6CBE:: @ 81F6CBE

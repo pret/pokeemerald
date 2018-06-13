@@ -29,35 +29,35 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C79A:: @ 821C79A
 	end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_21C7F5: @ 821C7F5
-	step_13
-	step_25
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
+	delay_8
+	walk_in_place_fastest_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
 	step_end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_21C7FD: @ 821C7FD
-	step_17
-	step_17
-	step_15
-	step_15
-	step_17
-	step_15
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_down
 	step_end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_21C804: @ 821C804
-	step_down
-	step_28
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_21C807: @ 821C807
-	step_49
-	step_16
-	step_16
-	step_18
-	step_25
+	jump_in_place_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_in_place_fastest_down
 	step_end
 
 LilycoveCity_PokemonTrainerFanClub_MapScript1_21C80D: @ 821C80D

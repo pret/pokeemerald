@@ -235,32 +235,32 @@ BattleFrontier_BattlePyramidTop_EventScript_2553ED:: @ 82553ED
 	return
 
 BattleFrontier_BattlePyramidTop_Movement_2553FD: @ 82553FD
-	step_right
-	step_27
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_BattlePyramidTop_Movement_255400: @ 8255400
-	step_left
-	step_26
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 BattleFrontier_BattlePyramidTop_Movement_255403: @ 8255403
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_25
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
 	step_end
 
 BattleFrontier_BattlePyramidTop_Movement_25540A: @ 825540A
-	step_15
+	walk_fast_down
 	step_end
 
 BattleFrontier_BattlePyramidTop_Movement_25540C: @ 825540C
-	slow_step_up
-	slow_step_up
-	step_14
+	walk_slow_up
+	walk_slow_up
+	delay_16
 	step_end
 
 BattleFrontier_BattlePyramidTop_Text_255410: @ 8255410

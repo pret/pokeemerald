@@ -66,13 +66,13 @@ TerraCave_End_EventScript_23B163:: @ 823B163
 	end
 
 TerraCave_End_Movement_23B16E: @ 823B16E
-	step_5e
-	step_62
-	step_14
-	step_14
-	step_63
-	step_14
-	step_14
-	step_63
+	init_affine_anim
+	walk_down_start_affine
+	delay_16
+	delay_16
+	walk_down_affine
+	delay_16
+	delay_16
+	walk_down_affine
 	step_end
 

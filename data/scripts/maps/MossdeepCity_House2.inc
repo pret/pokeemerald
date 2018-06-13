@@ -38,19 +38,19 @@ MossdeepCity_House2_EventScript_22212F:: @ 822212F
 	return
 
 MossdeepCity_House2_Movement_22213A: @ 822213A
-	step_18
-	step_15
-	step_15
-	step_17
-	step_15
-	step_13
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_down
+	delay_8
 	step_end
 
 MossdeepCity_House2_Movement_222141: @ 8222141
-	step_15
-	step_15
-	step_15
-	step_13
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	delay_8
 	step_end
 
 MossdeepCity_House2_Text_222146: @ 8222146

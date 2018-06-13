@@ -146,42 +146,42 @@ LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	return
 
 LittlerootTown_Movement_1E7F98: @ 81E7F98
-	step_down
+	walk_down
 	step_end
 
 LittlerootTown_Movement_1E7F9A: @ 81E7F9A
-	step_down
-	step_27
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 LittlerootTown_Movement_1E7F9D: @ 81E7F9D
-	step_14
-	step_13
-	step_up
+	delay_16
+	delay_8
+	walk_up
 	step_end
 
 LittlerootTown_Movement_1E7FA1: @ 81E7FA1
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 LittlerootTown_Movement_1E7FA4: @ 81E7FA4
-	step_14
-	step_13
-	step_right
-	step_26
+	delay_16
+	delay_8
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E7FA9: @ 81E7FA9
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 LittlerootTown_Movement_1E7FAC: @ 81E7FAC
-	step_45
-	step_14
-	step_14
-	step_14
+	jump_right
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
@@ -287,41 +287,41 @@ LittlerootTown_EventScript_1E80AD:: @ 81E80AD
 	return
 
 LittlerootTown_Movement_1E80D1: @ 81E80D1
-	step_03
-	step_13
-	step_51
-	step_49
-	step_13
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_17
-	step_00
+	face_right
+	delay_8
+	disable_jump_landing_ground_effect
+	jump_in_place_right
+	delay_8
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_left
+	face_down
 	step_end
 
 LittlerootTown_Movement_1E80DF: @ 81E80DF
-	step_down
+	walk_down
 	step_end
 
 LittlerootTown_Movement_1E80E1: @ 81E80E1
-	step_right
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_25
+	walk_right
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_in_place_fastest_down
 	step_end
 
 LittlerootTown_Movement_1E80EB: @ 81E80EB
-	step_40
-	step_down
-	step_41
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
 	step_end
 
 LittlerootTown_EventScript_1E80EF:: @ 81E80EF
@@ -335,27 +335,27 @@ LittlerootTown_EventScript_1E80EF:: @ 81E80EF
 	end
 
 LittlerootTown_Movement_1E810B: @ 81E810B
-	step_03
-	step_13
-	step_51
-	step_49
-	step_13
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_18
-	step_00
+	face_right
+	delay_8
+	disable_jump_landing_ground_effect
+	jump_in_place_right
+	delay_8
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	face_down
 	step_end
 
 LittlerootTown_Movement_1E8118: @ 81E8118
-	step_left
-	step_down
-	step_left
-	step_left
-	step_left
-	step_25
+	walk_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 LittlerootTown_EventScript_1E811F:: @ 81E811F
@@ -739,153 +739,153 @@ LittlerootTown_EventScript_1E85AB:: @ 81E85AB
 	return
 
 LittlerootTown_Movement_1E85D1: @ 81E85D1
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 LittlerootTown_Movement_1E85D8: @ 81E85D8
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 LittlerootTown_Movement_1E85DF: @ 81E85DF
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 LittlerootTown_Movement_1E85E4: @ 81E85E4
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 LittlerootTown_Movement_1E85EA: @ 81E85EA
-	step_right
-	step_right
+	walk_right
+	walk_right
 	step_end
 
 LittlerootTown_Movement_1E85ED: @ 81E85ED
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 LittlerootTown_Movement_1E85F1: @ 81E85F1
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 LittlerootTown_Movement_1E85F5: @ 81E85F5
-	step_left
-	step_left
+	walk_left
+	walk_left
 	step_end
 
 LittlerootTown_Movement_1E85F8: @ 81E85F8
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 LittlerootTown_Movement_1E85FE: @ 81E85FE
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 LittlerootTown_Movement_1E8603: @ 81E8603
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 LittlerootTown_Movement_1E8609: @ 81E8609
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 LittlerootTown_Movement_1E860F: @ 81E860F
-	step_left
-	step_left
-	step_left
-	step_left
-	step_26
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E8615: @ 81E8615
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_26
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E861C: @ 81E861C
-	step_left
-	step_left
-	step_26
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E8620: @ 81E8620
-	step_left
-	step_left
-	step_left
-	step_26
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E8625: @ 81E8625
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E862A: @ 81E862A
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E862E: @ 81E862E
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E8635: @ 81E8635
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_Movement_1E863B: @ 81E863B
-	step_up
+	walk_up
 	step_end
 
 LittlerootTown_EventScript_1E863D:: @ 81E863D

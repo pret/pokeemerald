@@ -49,7 +49,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223DBF:: @ 8223DBF
 	end
 
 MossdeepCity_SpaceCenter_2F_Movement_223E07: @ 8223E07
-	step_up
+	walk_up
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
@@ -77,21 +77,21 @@ MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
 	end
 
 MossdeepCity_SpaceCenter_2F_Movement_223E81: @ 8223E81
-	step_40
-	step_left
-	step_41
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
 	step_end
 
 MossdeepCity_SpaceCenter_2F_Movement_223E85: @ 8223E85
-	step_40
-	step_down
-	step_41
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
 	step_end
 
 MossdeepCity_SpaceCenter_2F_Movement_223E89: @ 8223E89
-	step_40
-	step_right
-	step_41
+	lock_facing_direction
+	walk_right
+	unlock_facing_direction
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223E8D:: @ 8223E8D
@@ -211,27 +211,27 @@ MossdeepCity_SpaceCenter_2F_EventScript_223FBA:: @ 8223FBA
 	end
 
 MossdeepCity_SpaceCenter_2F_Movement_223FC6: @ 8223FC6
-	step_40
-	step_16
-	step_16
-	step_41
-	step_14
-	step_14
-	slow_step_down
-	slow_step_down
+	lock_facing_direction
+	walk_fast_up
+	walk_fast_up
+	unlock_facing_direction
+	delay_16
+	delay_16
+	walk_slow_down
+	walk_slow_down
 	step_end
 
 MossdeepCity_SpaceCenter_2F_Movement_223FCF: @ 8223FCF
-	step_02
-	step_40
-	step_18
-	step_18
-	step_41
-	step_14
-	step_14
-	slow_step_left
-	slow_step_left
-	step_00
+	face_left
+	lock_facing_direction
+	walk_fast_right
+	walk_fast_right
+	unlock_facing_direction
+	delay_16
+	delay_16
+	walk_slow_left
+	walk_slow_left
+	face_down
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223FDA:: @ 8223FDA

@@ -103,29 +103,29 @@ MtPyre_Summit_EventScript_232117:: @ 8232117
 	return
 
 MtPyre_Summit_Movement_23212C: @ 823212C
-	step_down
-	step_down
-	step_27
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 MtPyre_Summit_Movement_232130: @ 8232130
-	step_down
+	walk_down
 	step_end
 
 MtPyre_Summit_Movement_232132: @ 8232132
-	step_down
-	step_down
-	step_28
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 MtPyre_Summit_Movement_232136: @ 8232136
-	step_left
-	step_25
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 MtPyre_Summit_Movement_232139: @ 8232139
-	step_right
-	step_25
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 MtPyre_Summit_EventScript_23213C:: @ 823213C
@@ -316,112 +316,112 @@ MtPyre_Summit_EventScript_232392:: @ 8232392
 	return
 
 MtPyre_Summit_Movement_2323AE: @ 82323AE
-	step_14
-	step_14
-	step_28
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 MtPyre_Summit_Movement_2323B2: @ 82323B2
-	step_14
-	step_14
-	step_27
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 MtPyre_Summit_Movement_2323B6: @ 82323B6
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtPyre_Summit_Movement_2323BD: @ 82323BD
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtPyre_Summit_Movement_2323C4: @ 82323C4
-	step_14
-	step_13
-	step_left
-	step_28
-	step_14
-	step_25
+	delay_16
+	delay_8
+	walk_left
+	walk_in_place_fastest_right
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 MtPyre_Summit_Movement_2323CB: @ 82323CB
-	step_14
-	step_13
-	step_right
-	step_27
-	step_14
-	step_25
+	delay_16
+	delay_8
+	walk_right
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 MtPyre_Summit_Movement_2323D2: @ 82323D2
-	step_14
-	step_13
-	step_27
-	step_14
-	step_25
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 MtPyre_Summit_Movement_2323D8: @ 82323D8
-	step_up
-	step_up
-	step_up
-	step_left
+	walk_up
+	walk_up
+	walk_up
+	walk_left
 	step_end
 
 MtPyre_Summit_Movement_2323DD: @ 82323DD
-	step_up
-	step_up
-	step_up
-	step_28
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 MtPyre_Summit_Movement_2323E2: @ 82323E2
-	step_up
-	step_up
-	step_up
-	step_28
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 MtPyre_Summit_Movement_2323E7: @ 82323E7
-	step_14
-	step_26
+	delay_16
+	walk_in_place_fastest_up
 	step_end
 
 MtPyre_Summit_Movement_2323EA: @ 82323EA
-	step_14
-	step_25
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 MtPyre_Summit_Movement_2323ED: @ 82323ED
-	step_down
-	step_right
-	step_down
-	step_down
-	step_27
+	walk_down
+	walk_right
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 MtPyre_Summit_Movement_2323F3: @ 82323F3
-	step_down
-	step_down
-	step_down
-	step_27
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 MtPyre_Summit_Movement_2323F8: @ 82323F8
-	step_down
-	step_down
-	step_down
-	step_27
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 MtPyre_Summit_EventScript_2323FD:: @ 82323FD

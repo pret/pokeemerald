@@ -92,46 +92,46 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	end
 
 SkyPillar_Outside_Movement_2393D3: @ 82393D3
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 SkyPillar_Outside_Movement_2393DE: @ 82393DE
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SkyPillar_Outside_Movement_2393EB: @ 82393EB
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SkyPillar_Outside_EventScript_2393F8:: @ 82393F8

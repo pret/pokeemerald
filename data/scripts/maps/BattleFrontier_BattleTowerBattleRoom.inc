@@ -394,92 +394,92 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_242170:: @ 8242170
 	return
 
 BattleFrontier_BattleTowerBattleRoom_Movement_242179: @ 8242179
-	step_up
-	step_up
-	step_up
-	step_03
+	walk_up
+	walk_up
+	walk_up
+	face_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_24217E: @ 824217E
-	step_00
+	face_down
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_242180: @ 8242180
-	step_03
+	face_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_242182: @ 8242182
-	step_down
-	step_down
-	step_down
-	step_down
-	step_02
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	face_left
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_242188: @ 8242188
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_24218D: @ 824218D
-	step_right
-	step_right
-	step_right
-	step_up
+	walk_right
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_242192: @ 8242192
-	step_down
-	step_left
-	step_left
-	step_left
-	step_03
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	face_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_242198: @ 8242198
-	step_54
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_24219A: @ 824219A
-	step_55
-	step_14
-	step_up
-	step_left
-	step_left
-	step_13
+	set_visible
+	delay_16
+	walk_up
+	walk_left
+	walk_left
+	delay_8
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_2421A1: @ 82421A1
-	step_right
-	step_right
-	step_down
-	step_54
+	walk_right
+	walk_right
+	walk_down
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_2421A6: @ 82421A6
-	step_14
-	step_14
-	step_14
-	step_14
+	delay_16
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_2421AB: @ 82421AB
-	step_03
-	step_14
-	step_14
-	step_14
-	step_14
-	step_20
+	face_right
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_2421B2: @ 82421B2
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	slow_step_down
-	step_02
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	face_left
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2421B8:: @ 82421B8

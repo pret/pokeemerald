@@ -139,49 +139,49 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	end
 
 SkyPillar_Top_Movement_23983A: @ 823983A
-	step_14
-	step_23
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_1f
-	step_14
-	step_20
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
+	delay_16
+	walk_in_place_fast_left
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_left
+	delay_16
+	walk_in_place_right
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 SkyPillar_Top_Movement_23984B: @ 823984B
-	step_14
-	step_1d
-	step_13
-	step_20
-	step_13
-	step_2e
-	step_32
-	step_32
-	step_32
-	step_32
-	step_32
-	step_32
+	delay_16
+	walk_in_place_down
+	delay_8
+	walk_in_place_right
+	delay_8
+	walk_fastest_up
+	slide_up
+	slide_up
+	slide_up
+	slide_up
+	slide_up
+	slide_up
 	step_end
 
 SkyPillar_Top_Movement_239858: @ 8239858
-	slow_step_up
-	slow_step_up
-	slow_step_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
 	step_end
 
 SkyPillar_Top_Movement_23985C: @ 823985C
-	slow_step_down
-	slow_step_down
-	slow_step_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
 	step_end
 
 SkyPillar_Top_Text_239860: @ 8239860

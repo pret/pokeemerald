@@ -224,47 +224,47 @@ SSTidalCorridor_EventScript_23C219:: @ 823C219
 	end
 
 SSTidalCorridor_Movement_23C26D: @ 823C26D
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 SSTidalCorridor_Movement_23C275: @ 823C275
-	step_25
-	step_14
-	step_14
-	step_14
-	step_14
-	step_down
-	step_left
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	walk_left
 	step_end
 
 SSTidalCorridor_Movement_23C27D: @ 823C27D
-	step_14
-	step_14
-	step_14
-	step_14
-	step_13
-	step_25
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_down
 	step_end
 
 SSTidalCorridor_Movement_23C284: @ 823C284
-	step_14
-	step_right
-	step_right
-	step_26
-	step_14
-	step_27
+	delay_16
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 SSTidalCorridor_Movement_23C28B: @ 823C28B
-	step_left
-	step_left
-	step_26
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 SSTidalCorridor_Text_23C28F: @ 823C28F

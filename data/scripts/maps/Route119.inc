@@ -230,98 +230,98 @@ Route119_EventScript_1F470F:: @ 81F470F
 	return
 
 Route119_Movement_1F471E: @ 81F471E
-	step_14
-	step_28
-	step_13
-	step_26
+	delay_16
+	walk_in_place_fastest_right
+	delay_8
+	walk_in_place_fastest_up
 	step_end
 
 Route119_Movement_1F4723: @ 81F4723
-	step_14
-	step_27
-	step_13
-	step_26
+	delay_16
+	walk_in_place_fastest_left
+	delay_8
+	walk_in_place_fastest_up
 	step_end
 
 Route119_Movement_1F4728: @ 81F4728
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
 	step_end
 
 Route119_Movement_1F4732: @ 81F4732
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
 	step_end
 
 Route119_Movement_1F473D: @ 81F473D
-	step_18
-	step_16
-	step_16
-	step_16
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 Route119_Movement_1F4747: @ 81F4747
-	step_17
-	step_16
-	step_16
-	step_16
-	step_18
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 Route119_Movement_1F4752: @ 81F4752
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 Route119_Movement_1F475A: @ 81F475A
-	step_up
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Route119_Movement_1F4763: @ 81F4763
-	step_up
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Route119_EventScript_1F476B:: @ 81F476B

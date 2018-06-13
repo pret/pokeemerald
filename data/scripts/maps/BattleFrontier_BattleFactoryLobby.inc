@@ -261,17 +261,17 @@ BattleFrontier_BattleFactoryLobby_EventScript_25879D:: @ 825879D
 	end
 
 BattleFrontier_BattleFactoryLobby_Movement_2587A7: @ 82587A7
-	step_up
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleFactoryLobby_Movement_2587AC: @ 82587AC
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587B1:: @ 82587B1

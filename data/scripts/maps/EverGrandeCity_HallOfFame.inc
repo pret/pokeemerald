@@ -67,20 +67,20 @@ EverGrandeCity_HallOfFame_EventScript_2298F5:: @ 82298F5
 	end
 
 EverGrandeCity_HallOfFame_Movement_229901: @ 8229901
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 EverGrandeCity_HallOfFame_Movement_229908: @ 8229908
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 EverGrandeCity_HallOfFame_Text_22990E: @ 822990E

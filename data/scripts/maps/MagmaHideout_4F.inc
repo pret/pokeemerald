@@ -77,35 +77,35 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	end
 
 MagmaHideout_4F_Movement_23A672: @ 823A672
-	step_14
-	step_14
-	slow_step_down
-	step_14
-	step_14
-	step_14
-	slow_step_down
-	step_14
-	step_14
-	step_14
+	delay_16
+	delay_16
+	walk_slow_down
+	delay_16
+	delay_16
+	delay_16
+	walk_slow_down
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 MagmaHideout_4F_Movement_23A67D: @ 823A67D
-	step_32
-	step_32
+	slide_up
+	slide_up
 	step_end
 
 MagmaHideout_4F_Movement_23A680: @ 823A680
-	step_02
-	step_14
-	step_03
-	step_14
-	step_02
-	step_14
-	step_03
-	step_14
-	step_01
-	step_14
-	step_14
+	face_left
+	delay_16
+	face_right
+	delay_16
+	face_left
+	delay_16
+	face_right
+	delay_16
+	face_up
+	delay_16
+	delay_16
 	step_end
 
 MagmaHideout_4F_EventScript_23A68C:: @ 823A68C

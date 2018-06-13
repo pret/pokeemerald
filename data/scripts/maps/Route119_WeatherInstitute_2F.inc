@@ -175,38 +175,38 @@ Route119_WeatherInstitute_2F_EventScript_270166:: @ 8270166
 	end
 
 Route119_WeatherInstitute_2F_Movement_270170: @ 8270170
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 Route119_WeatherInstitute_2F_Movement_27017C: @ 827017C
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_2a
-	step_25
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	ride_water_current_up
+	walk_in_place_fastest_down
 	step_end
 
 Route119_WeatherInstitute_2F_Movement_270184: @ 8270184
-	step_31
-	step_27
+	slide_down
+	walk_in_place_fastest_left
 	step_end
 
 Route119_WeatherInstitute_2F_Movement_270187: @ 8270187
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route119_WeatherInstitute_2F_EventScript_27018B:: @ 827018B

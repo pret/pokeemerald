@@ -99,17 +99,17 @@ SlateportCity_BattleTentCorridor_EventScript_209A7B:: @ 8209A7B
 @ forced stop
 
 SlateportCity_BattleTentBattleRoom_Movement_209A99: @ 8209A99
-	step_up
-	step_up
-	step_up
-	step_28
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 SlateportCity_BattleTentBattleRoom_Movement_209A9E: @ 8209A9E
-	step_down
-	step_down
-	step_down
-	step_down
-	step_27
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 

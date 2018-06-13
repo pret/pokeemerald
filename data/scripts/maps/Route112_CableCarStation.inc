@@ -60,31 +60,31 @@ Route112_CableCarStation_EventScript_22AB67:: @ 822AB67
 	end
 
 Route112_CableCarStation_Movement_22AB71: @ 822AB71
-	step_up
-	step_up
-	step_right
-	step_27
+	walk_up
+	walk_up
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 Route112_CableCarStation_Movement_22AB76: @ 822AB76
-	step_14
-	step_left
-	step_down
-	step_down
+	delay_16
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Route112_CableCarStation_Movement_22AB7B: @ 822AB7B
-	step_up
-	step_up
-	step_up
-	step_14
+	walk_up
+	walk_up
+	walk_up
+	delay_16
 	step_end
 
 Route112_CableCarStation_Movement_22AB80: @ 822AB80
-	step_down
-	step_down
-	step_down
-	step_14
+	walk_down
+	walk_down
+	walk_down
+	delay_16
 	step_end
 
 Route112_CableCarStation_Text_22AB85: @ 822AB85

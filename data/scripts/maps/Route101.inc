@@ -69,138 +69,138 @@ Route101_EventScript_1EBD7A:: @ 81EBD7A
 	end
 
 Route101_Movement_1EBD90: @ 81EBD90
-	step_up
+	walk_up
 	step_end
 
 Route101_Movement_1EBD92: @ 81EBD92
-	step_right
+	walk_right
 	step_end
 
 Route101_Movement_1EBD94: @ 81EBD94
-	step_down
+	walk_down
 	step_end
 
 Route101_Movement_1EBD96: @ 81EBD96
-	step_16
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 Route101_Movement_1EBDB5: @ 81EBDB5
-	step_16
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
 	step_end
 
 Route101_Movement_1EBDBC: @ 81EBDBC
 	step_end
 
 Route101_Movement_1EBDBD: @ 81EBDBD
-	step_23
-	step_23
-	step_23
-	step_23
+	walk_in_place_fast_left
+	walk_in_place_fast_left
+	walk_in_place_fast_left
+	walk_in_place_fast_left
 	step_end
 
 Route101_Movement_1EBDC2: @ 81EBDC2
-	step_16
-	step_16
-	step_16
-	step_16
-	step_27
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_in_place_fastest_left
 	step_end
 
 Route101_Movement_1EBDC8: @ 81EBDC8
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 Route101_Movement_1EBDE7: @ 81EBDE7
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 Route101_Movement_1EBDEE: @ 81EBDEE
 	step_end
 
 Route101_Movement_1EBDEF: @ 81EBDEF
-	step_24
-	step_24
-	step_24
-	step_24
+	walk_in_place_fast_right
+	walk_in_place_fast_right
+	walk_in_place_fast_right
+	walk_in_place_fast_right
 	step_end
 
 Route101_Movement_1EBDF4: @ 81EBDF4
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 Route101_Movement_1EBDF7: @ 81EBDF7
-	step_up
-	step_left
-	step_up
+	walk_up
+	walk_left
+	walk_up
 	step_end
 
 Route101_EventScript_1EBDFB:: @ 81EBDFB
@@ -256,7 +256,7 @@ Route101_EventScript_1EBE89:: @ 81EBE89
 	return
 
 Route101_Movement_1EBE8D: @ 81EBE8D
-	step_right
+	walk_right
 	step_end
 
 Route101_Text_1EBE8F: @ 81EBE8F

@@ -94,127 +94,127 @@ PetalburgCity_EventScript_1DC3FD:: @ 81DC3FD
 	end
 
 PetalburgCity_Movement_1DC406: @ 81DC406
-	step_13
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	delay_8
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 PetalburgCity_Movement_1DC418: @ 81DC418
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 PetalburgCity_Movement_1DC41B: @ 81DC41B
-	step_13
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	delay_8
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 PetalburgCity_Movement_1DC42D: @ 81DC42D
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 PetalburgCity_Movement_1DC430: @ 81DC430
-	step_13
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_28
+	delay_8
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 PetalburgCity_Movement_1DC451: @ 81DC451
-	step_13
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_right
-	step_14
-	step_26
-	step_14
-	step_14
-	step_28
+	delay_8
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	delay_16
+	walk_in_place_fastest_up
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 PetalburgCity_EventScript_1DC476:: @ 81DC476
@@ -347,159 +347,159 @@ PetalburgCity_EventScript_1DC5FF:: @ 81DC5FF
 	return
 
 PetalburgCity_Movement_1DC611:: @ 81DC611
-	step_14
-	step_14
-	step_14
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 PetalburgCity_Movement_1DC615: @ 81DC615
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgCity_Movement_1DC61A: @ 81DC61A
-	step_right
-	step_right
+	walk_right
+	walk_right
 	step_end
 
 PetalburgCity_Movement_1DC61D: @ 81DC61D
-	step_right
-	step_right
-	step_right
-	step_25
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 PetalburgCity_Movement_1DC622: @ 81DC622
-	step_down
-	step_right
-	step_right
-	step_right
-	step_25
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 PetalburgCity_Movement_1DC628: @ 81DC628
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgCity_Movement_1DC633: @ 81DC633
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_right
-	step_26
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgCity_Movement_1DC641: @ 81DC641
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgCity_Movement_1DC64C: @ 81DC64C
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgCity_Movement_1DC658: @ 81DC658
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 PetalburgCity_Movement_1DC665: @ 81DC665
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 PetalburgCity_Movement_1DC66F: @ 81DC66F
-	step_14
-	step_14
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
+	delay_16
+	delay_16
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 PetalburgCity_Movement_1DC67C: @ 81DC67C
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 PetalburgCity_Movement_1DC686: @ 81DC686
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 PetalburgCity_EventScript_1DC691:: @ 81DC691
@@ -597,111 +597,111 @@ PetalburgCity_EventScript_1DC7C4:: @ 81DC7C4
 	return
 
 PetalburgCity_Movement_1DC7D6: @ 81DC7D6
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 PetalburgCity_Movement_1DC7DB: @ 81DC7DB
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 PetalburgCity_Movement_1DC7E0: @ 81DC7E0
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 PetalburgCity_Movement_1DC7EE: @ 81DC7EE
-	step_14
-	step_25
-	step_14
-	step_14
-	step_13
-	step_27
+	delay_16
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 PetalburgCity_Movement_1DC7F5: @ 81DC7F5
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 PetalburgCity_Movement_1DC802: @ 81DC802
-	step_14
-	step_25
-	step_14
-	step_13
-	step_27
+	delay_16
+	walk_in_place_fastest_down
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 PetalburgCity_Movement_1DC808: @ 81DC808
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 PetalburgCity_Movement_1DC815: @ 81DC815
-	step_14
-	step_25
-	step_14
-	step_13
-	step_27
+	delay_16
+	walk_in_place_fastest_down
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 PetalburgCity_Movement_1DC81B: @ 81DC81B
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 PetalburgCity_Movement_1DC828: @ 81DC828
-	step_14
-	step_26
-	step_14
-	step_13
-	step_27
+	delay_16
+	walk_in_place_fastest_up
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 PetalburgCity_EventScript_1DC82E:: @ 81DC82E

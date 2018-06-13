@@ -28,12 +28,12 @@ SafariZone_South_EventScript_23D2BD:: @ 823D2BD
 	return
 
 SafariZone_South_Movement_23D2C5: @ 823D2C5
-	step_down
+	walk_down
 	step_end
 
 SafariZone_South_Movement_23D2C7: @ 823D2C7
-	step_right
-	step_25
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 SafariZone_South_EventScript_23D2CA:: @ 823D2CA
@@ -98,22 +98,22 @@ SafariZone_South_EventScript_23D373:: @ 823D373
 	end
 
 SafariZone_South_Movement_23D385: @ 823D385
-	step_up
+	walk_up
 	step_end
 
 SafariZone_South_Movement_23D387: @ 823D387
-	step_right
-	step_26
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 SafariZone_South_Movement_23D38A: @ 823D38A
-	step_left
-	step_28
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 SafariZone_South_Movement_23D38D: @ 823D38D
-	step_down
-	step_26
+	walk_down
+	walk_in_place_fastest_up
 	step_end
 
 SafariZone_South_EventScript_23D390:: @ 823D390

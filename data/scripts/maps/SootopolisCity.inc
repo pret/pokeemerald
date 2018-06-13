@@ -281,33 +281,33 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	end
 
 SootopolisCity_Movement_1E5A68: @ 81E5A68
-	step_92
-	step_92
-	step_92
-	step_92
-	step_92
-	step_92
-	step_92
-	step_92
-	step_92
-	step_92
-	step_92
-	step_92
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
 	step_end
 
 SootopolisCity_Movement_1E5A75: @ 81E5A75
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
 	step_end
 
 SootopolisCity_EventScript_1E5A82:: @ 81E5A82
@@ -381,113 +381,113 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	end
 
 SootopolisCity_Movement_1E5BA4: @ 81E5BA4
-	step_91
-	step_91
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SootopolisCity_Movement_1E5BAE: @ 81E5BAE
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_92
-	step_92
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
 	step_end
 
 SootopolisCity_Movement_1E5BB8: @ 81E5BB8
-	step_1b
-	step_1b
-	step_1b
-	step_14
-	step_14
-	step_14
-	step_5e
-	step_96
-	step_5f
+	walk_in_place_slow_left
+	walk_in_place_slow_left
+	walk_in_place_slow_left
+	delay_16
+	delay_16
+	delay_16
+	init_affine_anim
+	walk_left_affine
+	clear_affine_anim
 	step_end
 
 SootopolisCity_Movement_1E5BC2: @ 81E5BC2
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_5e
-	step_96
-	step_5f
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	init_affine_anim
+	walk_left_affine
+	clear_affine_anim
 	step_end
 
 SootopolisCity_Movement_1E5BCF: @ 81E5BCF
-	step_40
-	step_right
-	step_14
-	step_14
-	step_14
-	step_41
+	lock_facing_direction
+	walk_right
+	delay_16
+	delay_16
+	delay_16
+	unlock_facing_direction
 	step_end
 
 SootopolisCity_Movement_1E5BD6: @ 81E5BD6
-	step_1b
-	step_1b
-	step_1b
-	step_1b
-	step_1b
-	step_1b
+	walk_in_place_slow_left
+	walk_in_place_slow_left
+	walk_in_place_slow_left
+	walk_in_place_slow_left
+	walk_in_place_slow_left
+	walk_in_place_slow_left
 	step_end
 
 SootopolisCity_Movement_1E5BDD: @ 81E5BDD
-	step_1c
-	step_1c
-	step_1c
-	step_14
-	step_14
-	step_14
-	step_18
+	walk_in_place_slow_right
+	walk_in_place_slow_right
+	walk_in_place_slow_right
+	delay_16
+	delay_16
+	delay_16
+	walk_fast_right
 	step_end
 
 SootopolisCity_Movement_1E5BE5: @ 81E5BE5
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_18
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_fast_right
 	step_end
 
 SootopolisCity_Movement_1E5BF0: @ 81E5BF0
-	step_40
-	step_left
-	step_14
-	step_14
-	step_14
-	step_41
+	lock_facing_direction
+	walk_left
+	delay_16
+	delay_16
+	delay_16
+	unlock_facing_direction
 	step_end
 
 SootopolisCity_Movement_1E5BF7: @ 81E5BF7
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
+	walk_in_place_slow_right
+	walk_in_place_slow_right
+	walk_in_place_slow_right
+	walk_in_place_slow_right
+	walk_in_place_slow_right
+	walk_in_place_slow_right
 	step_end
 
 SootopolisCity_EventScript_1E5BFE:: @ 81E5BFE
@@ -634,65 +634,65 @@ SootopolisCity_EventScript_1E5D82:: @ 81E5D82
 	return
 
 SootopolisCity_Movement_1E5E5B: @ 81E5E5B
-	step_16
-	step_2e
-	step_2e
-	step_2e
-	step_2e
-	step_2e
-	step_2e
+	walk_fast_up
+	walk_fastest_up
+	walk_fastest_up
+	walk_fastest_up
+	walk_fastest_up
+	walk_fastest_up
+	walk_fastest_up
 	step_end
 
 SootopolisCity_Movement_1E5E63: @ 81E5E63
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SootopolisCity_Movement_1E5E68: @ 81E5E68
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SootopolisCity_Movement_1E5E6D: @ 81E5E6D
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 SootopolisCity_Movement_1E5E72: @ 81E5E72
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_91
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_slow_diag_northeast
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 SootopolisCity_Movement_1E5E7F: @ 81E5E7F
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_92
-	step_92
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_slow_diag_southwest
+	walk_slow_diag_southwest
 	step_end
 
 SootopolisCity_EventScript_1E5E8D:: @ 81E5E8D
@@ -1004,267 +1004,267 @@ SootopolisCity_EventScript_1E6255:: @ 81E6255
 	return
 
 SootopolisCity_Movement_1E6267: @ 81E6267
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_25
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
 	step_end
 
 SootopolisCity_Movement_1E628C: @ 81E628C
-	step_left
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SootopolisCity_Movement_1E62B0: @ 81E62B0
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SootopolisCity_Movement_1E62D4: @ 81E62D4
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_12
-	step_27
-	step_14
-	step_14
-	step_right
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	delay_4
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 SootopolisCity_Movement_1E630E: @ 81E630E
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 SootopolisCity_Movement_1E6341: @ 81E6341
-	slow_step_left
-	step_28
+	walk_slow_left
+	walk_in_place_fastest_right
 	step_end
 
 SootopolisCity_Movement_1E6344: @ 81E6344
-	step_down
-	step_down
-	step_left
-	step_13
-	step_right
-	step_up
-	step_up
-	step_up
-	step_right
-	step_27
+	walk_down
+	walk_down
+	walk_left
+	delay_8
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 SootopolisCity_Movement_1E634F: @ 81E634F
-	step_14
-	step_14
-	step_14
-	step_13
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_28
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 SootopolisCity_Movement_1E635A: @ 81E635A
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 SootopolisCity_EventScript_1E635D:: @ 81E635D
@@ -1398,13 +1398,13 @@ SootopolisCity_EventScript_1E64E2:: @ 81E64E2
 	end
 
 SootopolisCity_Movement_1E64EC: @ 81E64EC
-	step_right
-	step_25
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 SootopolisCity_Movement_1E64EF: @ 81E64EF
-	step_left
-	step_25
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 SootopolisCity_EventScript_1E64F2:: @ 81E64F2
@@ -1454,11 +1454,11 @@ SootopolisCity_EventScript_1E654C:: @ 81E654C
 	end
 
 SootopolisCity_Movement_1E656B:: @ 81E656B
-	step_98
+	levitate
 	step_end
 
 SootopolisCity_Movement_1E656D:: @ 81E656D
-	step_9A
+	destroy_extra_task
 	step_end
 
 SootopolisCity_Text_1E656F: @ 81E656F

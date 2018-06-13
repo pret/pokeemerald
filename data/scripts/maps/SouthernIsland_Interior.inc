@@ -132,36 +132,36 @@ SouthernIsland_Interior_EventScript_242BB7:: @ 8242BB7
 	return
 
 SouthernIsland_Interior_Movement_242BCA: @ 8242BCA
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 SouthernIsland_Interior_Movement_242BCE: @ 8242BCE
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
-	step_26
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
 	step_end
 
 SouthernIsland_Interior_Movement_242BDA: @ 8242BDA
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 

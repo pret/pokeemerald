@@ -217,20 +217,20 @@ TrainerHill_Entrance_EventScript_26836A:: @ 826836A
 	end
 
 TrainerHill_Entrance_Movement_26837F: @ 826837F
-	step_03
+	face_right
 	step_end
 
 TrainerHill_Entrance_Movement_268381: @ 8268381
-	step_down
+	walk_down
 	step_end
 
 TrainerHill_Entrance_Movement_268383: @ 8268383
-	step_01
+	face_up
 	step_end
 
 TrainerHill_Entrance_Movement_268385: @ 8268385
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 TrainerHill_Entrance_EventScript_268388:: @ 8268388

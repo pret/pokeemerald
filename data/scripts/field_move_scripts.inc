@@ -43,7 +43,7 @@ Route103_EventScript_290710:: @ 8290710
 	end
 
 Route103_Movement_29071F: @ 829071F
-	step_5b
+	cut_tree
 	step_end
 
 Route103_EventScript_290721:: @ 8290721
@@ -128,7 +128,7 @@ Route111_EventScript_290829:: @ 8290829
 	end
 
 Route111_Movement_29082B: @ 829082B
-	step_5a
+	rock_smash_break
 	step_end
 
 Route111_EventScript_29082D:: @ 829082D

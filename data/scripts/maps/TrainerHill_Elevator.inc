@@ -55,33 +55,33 @@ TrainerHill_Elevator_EventScript_2693D9:: @ 82693D9
 	return
 
 TrainerHill_Elevator_Movement_2693DF: @ 82693DF
-	step_up
-	step_up
-	step_right
-	step_00
+	walk_up
+	walk_up
+	walk_right
+	face_down
 	step_end
 
 TrainerHill_Elevator_Movement_2693E4: @ 82693E4
-	step_14
-	step_left
+	delay_16
+	walk_left
 	step_end
 
 TrainerHill_Elevator_Movement_2693E7: @ 82693E7
-	step_14
-	step_down
-	step_down
+	delay_16
+	walk_down
+	walk_down
 	step_end
 
 TrainerHill_Elevator_Movement_2693EB: @ 82693EB
-	step_00
-	step_14
+	face_down
+	delay_16
 	step_end
 
 TrainerHill_Elevator_Movement_2693EE: @ 82693EE
-	step_03
+	face_right
 	step_end
 
 TrainerHill_Elevator_Movement_2693F0: @ 82693F0
-	step_00
+	face_down
 	step_end
 

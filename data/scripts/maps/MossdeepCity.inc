@@ -103,116 +103,116 @@ MossdeepCity_EventScript_1E4B41:: @ 81E4B41
 	end
 
 MossdeepCity_Movement_1E4BAD: @ 81E4BAD
-	step_14
-	step_03
-	step_14
-	step_14
-	step_14
-	step_14
-	step_02
-	step_14
-	step_14
+	delay_16
+	face_right
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	face_left
+	delay_16
+	delay_16
 	step_end
 
 MossdeepCity_Movement_1E4BB7: @ 81E4BB7
-	step_03
-	step_14
-	step_14
-	step_14
+	face_right
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 MossdeepCity_Movement_1E4BBC: @ 81E4BBC
-	step_down
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_down
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MossdeepCity_Movement_1E4BCA: @ 81E4BCA
-	step_14
-	step_13
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	delay_16
+	delay_8
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MossdeepCity_Movement_1E4BDD: @ 81E4BDD
-	step_14
-	step_13
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	delay_16
+	delay_8
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MossdeepCity_Movement_1E4BEF: @ 81E4BEF
-	step_14
-	step_13
-	step_down
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	delay_16
+	delay_8
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MossdeepCity_Movement_1E4C00: @ 81E4C00
-	step_14
-	step_13
-	step_right
-	step_right
-	step_right
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	delay_16
+	delay_8
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MossdeepCity_EventScript_1E4C10:: @ 81E4C10
@@ -281,34 +281,34 @@ MossdeepCity_EventScript_1E4CC2:: @ 81E4CC2
 	return
 
 MossdeepCity_Movement_1E4CD4: @ 81E4CD4
-	step_14
-	step_14
-	step_27
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 MossdeepCity_Movement_1E4CD8: @ 81E4CD8
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 MossdeepCity_Movement_1E4CE2: @ 81E4CE2
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 MossdeepCity_Text_1E4CED: @ 81E4CED
