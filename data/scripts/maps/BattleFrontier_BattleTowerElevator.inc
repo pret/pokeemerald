@@ -57,27 +57,27 @@ BattleFrontier_BattleTowerElevator_EventScript_241A7C:: @ 8241A7C
 	return
 
 BattleFrontier_BattleTowerElevator_Movement_241A86: @ 8241A86
-	step_up
-	step_right
-	step_00
+	walk_up
+	walk_right
+	face_down
 	step_end
 
 BattleFrontier_BattleTowerElevator_Movement_241A8A: @ 8241A8A
-	step_up
-	step_up
-	step_00
+	walk_up
+	walk_up
+	face_down
 	step_end
 
 BattleFrontier_BattleTowerElevator_Movement_241A8E: @ 8241A8E
-	step_down
-	step_down
-	step_54
+	walk_down
+	walk_down
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerElevator_Movement_241A92: @ 8241A92
-	step_right
-	step_down
-	step_down
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 BattleFrontier_BattleTowerElevator_MapScript2_241A96: @ 8241A96

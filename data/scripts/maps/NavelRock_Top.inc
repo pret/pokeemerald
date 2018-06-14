@@ -38,7 +38,7 @@ NavelRock_Top_EventScript_26915B:: @ 826915B
 NavelRock_Top_EventScript_26916F:: @ 826916F
 	lockall
 	setvar VAR_TEMP_1, 1
-	special SpawnScriptFieldObject
+	special SpawnScriptEventObject
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
 	special sub_813B80C
@@ -59,7 +59,7 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	applymovement 127, NavelRock_Top_Movement_269234
 	applymovement 1, NavelRock_Top_Movement_26923A
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveScriptEventObject
 	setvar VAR_0x8004, 250
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
@@ -92,36 +92,36 @@ NavelRock_Top_EventScript_269225:: @ 8269225
 	end
 
 NavelRock_Top_Movement_269230: @ 8269230
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 NavelRock_Top_Movement_269234: @ 8269234
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 NavelRock_Top_Movement_26923A: @ 826923A
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_1d
-	step_14
-	step_14
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_down
+	delay_16
+	delay_16
 	step_end
 
 NavelRock_Top_Movement_269243: @ 8269243
-	step_14
-	step_14
-	step_1d
-	step_1d
-	step_1d
-	step_1d
+	delay_16
+	delay_16
+	walk_in_place_down
+	walk_in_place_down
+	walk_in_place_down
+	walk_in_place_down
 	step_end
 

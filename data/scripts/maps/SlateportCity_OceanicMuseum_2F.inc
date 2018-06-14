@@ -116,103 +116,103 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BCB3:: @ 820BCB3
 	return
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCBE: @ 820BCBE
-	step_left
-	step_down
-	step_27
+	walk_left
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCC2: @ 820BCC2
-	step_up
-	step_left
-	step_left
-	step_down
-	step_27
+	walk_up
+	walk_left
+	walk_left
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCC8: @ 820BCC8
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_left
-	step_left
-	step_up
-	step_up
-	step_13
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	delay_8
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCD6: @ 820BCD6
-	step_right
+	walk_right
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCD8: @ 820BCD8
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCE2: @ 820BCE2
-	step_right
+	walk_right
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCE4: @ 820BCE4
-	step_down
-	step_right
-	step_25
+	walk_down
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCE8: @ 820BCE8
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCEF: @ 820BCEF
-	step_40
-	step_left
-	step_41
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCF3: @ 820BCF3
-	step_down
+	walk_down
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCF5: @ 820BCF5
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCFE: @ 820BCFE
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_13
-	step_15
-	step_26
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_fast_down
+	walk_in_place_fastest_up
 	step_end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD0A:: @ 820BD0A

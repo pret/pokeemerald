@@ -51,30 +51,30 @@ VictoryRoad_1F_EventScript_235DE1:: @ 8235DE1
 	end
 
 VictoryRoad_1F_Movement_235E15: @ 8235E15
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 VictoryRoad_1F_Movement_235E21: @ 8235E21
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 VictoryRoad_1F_EventScript_235E2C:: @ 8235E2C

@@ -113,60 +113,60 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248EB2:: @ 8248EB2
 	return
 
 BattleFrontier_BattleTowerCorridor2_Movement_248EBC: @ 8248EBC
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleTowerCorridor2_Movement_248EC4: @ 8248EC4
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 BattleFrontier_BattleTowerCorridor2_Movement_248ECC: @ 8248ECC
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_28
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_BattleTowerCorridor2_Movement_248ED5: @ 8248ED5
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_27
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_BattleTowerCorridor2_Movement_248EDE: @ 8248EDE
-	step_14
-	step_up
-	step_up
-	step_54
+	delay_16
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerCorridor2_Movement_248EE3: @ 8248EE3
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerCorridor2_Movement_248EE6: @ 8248EE6
-	step_down
+	walk_down
 	step_end
 

@@ -46,107 +46,107 @@ BattleFrontier_BattleDomeCorridor_EventScript_24B18F:: @ 824B18F
 	end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1A1: @ 824B1A1
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_26
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1AE: @ 824B1AE
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1B2: @ 824B1B2
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1BE: @ 824B1BE
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1C1: @ 824B1C1
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1D2: @ 824B1D2
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1D6: @ 824B1D6
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1E6: @ 824B1E6
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomeCorridor_Movement_24B1E9: @ 824B1E9
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	set_invisible
 	step_end

@@ -234,191 +234,191 @@ MauvilleCity_EventScript_1DF690:: @ 81DF690
 	end
 
 MauvilleCity_Movement_1DF6A8: @ 81DF6A8
-	step_left
-	step_left
-	step_down
-	step_down
-	step_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_left
 	step_end
 
 MauvilleCity_Movement_1DF6AE: @ 81DF6AE
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 MauvilleCity_Movement_1DF6B4: @ 81DF6B4
-	step_14
-	step_14
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_13
+	delay_16
+	delay_16
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	delay_8
 	step_end
 
 MauvilleCity_Movement_1DF6C0: @ 81DF6C0
-	step_14
-	step_14
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_13
+	delay_16
+	delay_16
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	delay_8
 	step_end
 
 MauvilleCity_Movement_1DF6CC: @ 81DF6CC
-	step_14
-	step_13
-	step_27
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 MauvilleCity_Movement_1DF6D0: @ 81DF6D0
-	step_14
-	step_14
-	step_14
-	step_27
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 MauvilleCity_Movement_1DF6D5: @ 81DF6D5
-	step_14
-	step_27
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 MauvilleCity_Movement_1DF6D8: @ 81DF6D8
-	step_14
-	step_14
-	step_27
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 MauvilleCity_Movement_1DF6DC: @ 81DF6DC
-	step_14
-	step_25
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 MauvilleCity_Movement_1DF6DF: @ 81DF6DF
-	step_14
-	step_27
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 MauvilleCity_Movement_1DF6E2: @ 81DF6E2
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 MauvilleCity_Movement_1DF6E8: @ 81DF6E8
-	step_left
-	step_down
-	step_down
-	step_left
-	step_left
+	walk_left
+	walk_down
+	walk_down
+	walk_left
+	walk_left
 	step_end
 
 MauvilleCity_Movement_1DF6EE: @ 81DF6EE
-	step_14
-	step_13
-	step_12
-	step_25
+	delay_16
+	delay_8
+	delay_4
+	walk_in_place_fastest_down
 	step_end
 
 MauvilleCity_Movement_1DF6F3: @ 81DF6F3
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 MauvilleCity_Movement_1DF6F7: @ 81DF6F7
-	step_right
-	step_up
+	walk_right
+	walk_up
 	step_end
 
 MauvilleCity_Movement_1DF6FA: @ 81DF6FA
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 MauvilleCity_Movement_1DF703: @ 81DF703
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 MauvilleCity_Movement_1DF70D: @ 81DF70D
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_26
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 MauvilleCity_Movement_1DF719: @ 81DF719
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 MauvilleCity_Movement_1DF725: @ 81DF725
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 MauvilleCity_Movement_1DF72F: @ 81DF72F
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 MauvilleCity_EventScript_1DF73A:: @ 81DF73A

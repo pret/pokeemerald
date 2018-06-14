@@ -151,21 +151,21 @@ BattleFrontier_OutsideEast_EventScript_242D60:: @ 8242D60
 	end
 
 BattleFrontier_OutsideEast_Movement_242D69: @ 8242D69
-	step_03
-	step_13
-	step_00
-	step_13
-	step_02
-	step_13
-	step_00
-	step_13
-	step_03
-	step_13
-	step_00
-	step_13
-	step_02
-	step_13
-	step_00
+	face_right
+	delay_8
+	face_down
+	delay_8
+	face_left
+	delay_8
+	face_down
+	delay_8
+	face_right
+	delay_8
+	face_down
+	delay_8
+	face_left
+	delay_8
+	face_down
 	step_end
 
 BattleFrontier_OutsideEast_EventScript_242D79:: @ 8242D79

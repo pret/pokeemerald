@@ -172,29 +172,29 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20256C:: @ 820256C
 	return
 
 VerdanturfTown_BattleTentBattleRoom_Movement_202573: @ 8202573
-	step_54
+	set_invisible
 	step_end
 
 VerdanturfTown_BattleTentBattleRoom_Movement_202575: @ 8202575
-	step_55
-	step_up
-	step_up
-	step_up
-	step_03
+	set_visible
+	walk_up
+	walk_up
+	walk_up
+	face_right
 	step_end
 
 VerdanturfTown_BattleTentBattleRoom_Movement_20257B: @ 820257B
-	step_down
-	step_down
-	step_down
-	step_down
-	step_02
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	face_left
 	step_end
 
 VerdanturfTown_BattleTentBattleRoom_Movement_202581: @ 8202581
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 

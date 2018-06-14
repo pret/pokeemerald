@@ -1,9 +1,9 @@
-Route110_TrickHousePuzzle5_MapObjects: @ 853E4C0
-	object_event 1, MAP_OBJ_GFX_MAN_1, 0, 0, 6, 17, 3, 9, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB32, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_MAN_1, 0, 0, 0, 7, 3, 10, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB53, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_MAN_1, 0, 0, 14, 10, 3, 9, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB74, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_MAN_1, 0, 0, 14, 19, 3, 9, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB95, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_MAN_1, 0, 0, 10, 4, 3, 10, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CBB6, 0, 0, 0
+Route110_TrickHousePuzzle5_EventObjects: @ 853E4C0
+	object_event 1, EVENT_OBJ_GFX_MAN_1, 0, 0, 6, 17, 3, 9, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB32, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_1, 0, 0, 0, 7, 3, 10, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB53, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_1, 0, 0, 14, 10, 3, 9, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB74, 0, 0, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_1, 0, 0, 14, 19, 3, 9, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB95, 0, 0, 0
+	object_event 5, EVENT_OBJ_GFX_MAN_1, 0, 0, 10, 4, 3, 10, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CBB6, 0, 0, 0
 
 Route110_TrickHousePuzzle5_MapWarps: @ 853E538
 	warp_def 0, 21, 3, 2, ROUTE_110_TRICK_HOUSE_ENTRANCE
@@ -38,5 +38,5 @@ Route110_TrickHousePuzzle5_MapBGEvents: @ 853E6B0
 	bg_event 11, 21, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB15
 
 Route110_TrickHousePuzzle5_MapEvents:: @ 853E6BC
-	map_events Route110_TrickHousePuzzle5_MapObjects, Route110_TrickHousePuzzle5_MapWarps, Route110_TrickHousePuzzle5_MapCoordEvents, Route110_TrickHousePuzzle5_MapBGEvents
+	map_events Route110_TrickHousePuzzle5_EventObjects, Route110_TrickHousePuzzle5_MapWarps, Route110_TrickHousePuzzle5_MapCoordEvents, Route110_TrickHousePuzzle5_MapBGEvents
 

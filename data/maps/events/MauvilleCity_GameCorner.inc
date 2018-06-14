@@ -1,16 +1,16 @@
-MauvilleCity_GameCorner_MapObjects: @ 852FF28
-	object_event 1, MAP_OBJ_GFX_WOMAN_3, 0, 0, 12, 7, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210125, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_GENTLEMAN, 0, 0, 16, 5, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_21012E, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_BEAUTY, 0, 0, 11, 2, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_20FBB9, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_BEAUTY, 0, 0, 14, 2, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_20FCF1, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_GIRL_2, 0, 0, 7, 3, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210137, 0, 0, 0
-	object_event 6, MAP_OBJ_GFX_MAN_3, 0, 0, 19, 4, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_21021D, 0, 0, 0
-	object_event 7, MAP_OBJ_GFX_OLD_MAN_2, 0, 0, 20, 8, 3, 9, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210279, 0, 0, 0
-	object_event 8, MAP_OBJ_GFX_COOK, 0, 0, 6, 8, 3, 10, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210289, 0, 0, 0
-	object_event 9, MAP_OBJ_GFX_BEAUTY, 0, 0, 13, 2, 3, 8, 17, 0, 0, 0, MauvilleCity_GameCorner_EventScript_20FE9F, 0, 0, 0
-	object_event 10, MAP_OBJ_GFX_MAN_4, 0, 0, 1, 7, 3, 10, 17, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210299, 0, 0, 0
-	object_event 11, MAP_OBJ_GFX_MANIAC, 0, 0, 9, 8, 3, 9, 17, 0, 0, 0, MauvilleCity_GameCorner_EventScript_2102B6, 0, 0, 0
-	object_event 12, MAP_OBJ_GFX_WOMAN_7, 0, 0, 4, 6, 3, 9, 17, 0, 0, 0, MauvilleCity_GameCorner_EventScript_2102C6, 0, 0, 0
+MauvilleCity_GameCorner_EventObjects: @ 852FF28
+	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 0, 12, 7, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210125, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 0, 16, 5, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_21012E, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_BEAUTY, 0, 0, 11, 2, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_20FBB9, 0, 0, 0
+	object_event 4, EVENT_OBJ_GFX_BEAUTY, 0, 0, 14, 2, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_20FCF1, 0, 0, 0
+	object_event 5, EVENT_OBJ_GFX_GIRL_2, 0, 0, 7, 3, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210137, 0, 0, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_3, 0, 0, 19, 4, 3, 8, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_21021D, 0, 0, 0
+	object_event 7, EVENT_OBJ_GFX_OLD_MAN_2, 0, 0, 20, 8, 3, 9, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210279, 0, 0, 0
+	object_event 8, EVENT_OBJ_GFX_COOK, 0, 0, 6, 8, 3, 10, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210289, 0, 0, 0
+	object_event 9, EVENT_OBJ_GFX_BEAUTY, 0, 0, 13, 2, 3, 8, 17, 0, 0, 0, MauvilleCity_GameCorner_EventScript_20FE9F, 0, 0, 0
+	object_event 10, EVENT_OBJ_GFX_MAN_4, 0, 0, 1, 7, 3, 10, 17, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210299, 0, 0, 0
+	object_event 11, EVENT_OBJ_GFX_MANIAC, 0, 0, 9, 8, 3, 9, 17, 0, 0, 0, MauvilleCity_GameCorner_EventScript_2102B6, 0, 0, 0
+	object_event 12, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 4, 6, 3, 9, 17, 0, 0, 0, MauvilleCity_GameCorner_EventScript_2102C6, 0, 0, 0
 
 MauvilleCity_GameCorner_MapWarps: @ 8530048
 	warp_def 11, 10, 3, 5, MAUVILLE_CITY
@@ -43,5 +43,5 @@ MauvilleCity_GameCorner_MapBGEvents: @ 8530058
 	bg_event 19, 8, 0, 0, 0, MauvilleCity_GameCorner_EventScript_2A5ADF
 
 MauvilleCity_GameCorner_MapEvents:: @ 8530178
-	map_events MauvilleCity_GameCorner_MapObjects, MauvilleCity_GameCorner_MapWarps, 0x0, MauvilleCity_GameCorner_MapBGEvents
+	map_events MauvilleCity_GameCorner_EventObjects, MauvilleCity_GameCorner_MapWarps, 0x0, MauvilleCity_GameCorner_MapBGEvents
 

@@ -257,26 +257,26 @@ FallarborTown_BattleTentLobby_EventScript_2001CF:: @ 82001CF
 	return
 
 FallarborTown_BattleTentLobby_Movement_2001FE: @ 82001FE
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 FallarborTown_BattleTentLobby_Movement_200202: @ 8200202
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 FallarborTown_BattleTentLobby_Movement_200205: @ 8200205
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 FallarborTown_BattleTentLobby_Movement_200209: @ 8200209
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 FallarborTown_BattleTentLobby_EventScript_20020D:: @ 820020D

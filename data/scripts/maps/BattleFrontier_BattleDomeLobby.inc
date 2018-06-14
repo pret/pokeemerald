@@ -390,22 +390,22 @@ BattleFrontier_BattleDomeLobby_EventScript_249D3F:: @ 8249D3F
 	return
 
 BattleFrontier_BattleDomeLobby_Movement_249D45: @ 8249D45
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleDomeLobby_Movement_249D4B: @ 8249D4B
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomeLobby_Movement_249D4E: @ 8249D4E
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomeLobby_EventScript_249D52:: @ 8249D52

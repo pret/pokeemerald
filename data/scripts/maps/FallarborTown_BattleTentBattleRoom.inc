@@ -203,56 +203,56 @@ FallarborTown_BattleTentBattleRoom_EventScript_200B73:: @ 8200B73
 	end
 
 FallarborTown_BattleTentBattleRoom_Movement_200B8D: @ 8200B8D
-	step_up
-	step_up
-	step_up
-	step_28
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200B92: @ 8200B92
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200B94: @ 8200B94
-	step_27
+	walk_in_place_fastest_left
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200B96: @ 8200B96
-	step_down
-	step_down
-	step_down
-	step_down
-	step_27
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200B9C: @ 8200B9C
-	step_left
+	walk_left
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200B9E: @ 8200B9E
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200BA3: @ 8200BA3
-	step_51
-	step_46
+	disable_jump_landing_ground_effect
+	jump_in_place_down
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200BA6: @ 8200BA6
-	step_down
-	step_down
-	step_down
-	step_28
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200BAB: @ 8200BAB
-	step_up
-	step_up
-	step_up
-	step_25
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
 	step_end
 
 FallarborTown_BattleTentBattleRoom_MapScript2_200BB0: @ 8200BB0

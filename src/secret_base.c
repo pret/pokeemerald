@@ -20,7 +20,7 @@
 #include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_effect.h"
 #include "fldeff_80F9BCC.h"
 #include "metatile_behavior.h"
@@ -412,7 +412,7 @@ bool8 sub_80E909C(void)
 
 void sub_80E90C8(u8 taskId)
 {
-    FieldObjectTurn(&gMapObjects[gPlayerAvatar.mapObjectId], DIR_NORTH);
+    EventObjectTurn(&gEventObjects[gPlayerAvatar.eventObjectId], DIR_NORTH);
     if (IsWeatherNotFadingIn() == TRUE)
     {
         EnableBothScriptContexts();
@@ -532,14 +532,14 @@ void sub_80E933C(void)
             category = gDecorations[roomDecor[decorIdx]].category;
             if (permission == DECORPERM_SOLID_MAT)
             {
-                for (objIdx = 0; objIdx < gMapHeader.events->mapObjectCount; objIdx ++)
+                for (objIdx = 0; objIdx < gMapHeader.events->eventObjectCount; objIdx ++)
                 {
-                    if (gMapHeader.events->mapObjects[objIdx].flagId == gSpecialVar_0x8004 + 0xAE)
+                    if (gMapHeader.events->eventObjects[objIdx].flagId == gSpecialVar_0x8004 + 0xAE)
                     {
                         break;
                     }
                 }
-                if (objIdx == gMapHeader.events->mapObjectCount)
+                if (objIdx == gMapHeader.events->eventObjectCount)
                 {
                     continue;
                 }
@@ -548,9 +548,9 @@ void sub_80E933C(void)
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                 if (MetatileBehavior_IsMB_B5(metatile) == TRUE || MetatileBehavior_IsMB_C3(metatile) == TRUE)
                 {
-                    gSpecialVar_Result = gMapHeader.events->mapObjects[objIdx].graphicsId + VAR_0x3F20;
+                    gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].graphicsId + VAR_0x3F20;
                     VarSet(gSpecialVar_Result, gDecorations[roomDecor[decorIdx]].tiles[0]);
-                    gSpecialVar_Result = gMapHeader.events->mapObjects[objIdx].localId;
+                    gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].localId;
                     FlagClear(gSpecialVar_0x8004 + 0xAE);
                     show_sprite(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
                     sub_808EBA8(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
@@ -578,12 +578,12 @@ void sub_80E9578(void)
     u8 objectEventIdx;
     u16 flagId;
 
-    for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->mapObjectCount; objectEventIdx ++)
+    for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->eventObjectCount; objectEventIdx ++)
     {
-        flagId = gMapHeader.events->mapObjects[objectEventIdx].flagId;
+        flagId = gMapHeader.events->eventObjects[objectEventIdx].flagId;
         if (flagId >= 0xAE && flagId <= 0xBB)
         {
-            RemoveFieldObjectByLocalIdAndMap(gMapHeader.events->mapObjects[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            RemoveEventObjectByLocalIdAndMap(gMapHeader.events->eventObjects[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             FlagSet(flagId);
         }
     }

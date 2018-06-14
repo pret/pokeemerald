@@ -74,12 +74,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41:: @ 8243E41
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E75: @ 8243E75
-	step_down
+	walk_down
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E77: @ 8243E77
-	step_left
-	step_25
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E7A:: @ 8243E7A
@@ -136,26 +136,26 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F08: @ 8243F08
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1A: @ 8243F1A
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1E: @ 8243F1E
-	step_right
-	step_up
-	step_54
+	walk_right
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F22: @ 8243F22
-	step_left
-	step_up
-	step_54
+	walk_left
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26: @ 8243F26
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F29:: @ 8243F29
@@ -223,24 +223,24 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF:: @ 8243FDF
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_243FEA: @ 8243FEA
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_243FF2: @ 8243FF2
-	step_17
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FFB:: @ 8243FFB

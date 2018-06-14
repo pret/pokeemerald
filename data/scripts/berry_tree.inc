@@ -1,5 +1,5 @@
 BerryTreeScript:: @ 82742F9
-	special FieldObjectInteractionGetBerryTreeData
+	special EventObjectInteractionGetBerryTreeData
 	switch VAR_0x8004
 	case 255, Route102_EventScript_27434F
 	case 0, Route102_EventScript_274359
@@ -54,7 +54,7 @@ Route102_EventScript_2743AF:: @ 82743AF
 
 Route102_EventScript_2743B1:: @ 82743B1
 	lockall
-	special FieldObjectInteractionGetBerryCountString
+	special EventObjectInteractionGetBerryCountString
 	message Route102_Text_274560
 	waitmessage
 	waitbuttonpress
@@ -62,7 +62,7 @@ Route102_EventScript_2743B1:: @ 82743B1
 
 Route102_EventScript_2743C1:: @ 82743C1
 	lockall
-	special FieldObjectInteractionGetBerryName
+	special EventObjectInteractionGetBerryName
 	message Route102_Text_274579
 	waitmessage
 	waitbuttonpress
@@ -70,7 +70,7 @@ Route102_EventScript_2743C1:: @ 82743C1
 
 Route102_EventScript_2743D1:: @ 82743D1
 	lockall
-	special FieldObjectInteractionGetBerryName
+	special EventObjectInteractionGetBerryName
 	message Route102_Text_27458A
 	waitmessage
 	waitbuttonpress
@@ -79,7 +79,7 @@ Route102_EventScript_2743D1:: @ 82743D1
 Route102_EventScript_2743E1:: @ 82743E1
 	call Route102_EventScript_2743F6
 	lockall
-	special FieldObjectInteractionGetBerryName
+	special EventObjectInteractionGetBerryName
 	message Route102_Text_2745AB
 	waitmessage
 	waitbuttonpress
@@ -105,7 +105,7 @@ Route102_EventScript_274421:: @ 8274421
 	buffernumberstring 1, VAR_0x8006
 	lock
 	faceplayer
-	special FieldObjectInteractionGetBerryCountString
+	special EventObjectInteractionGetBerryCountString
 	msgbox Route102_Text_2745EE, 5
 	compare VAR_RESULT, 1
 	goto_eq Route102_EventScript_274448
@@ -113,11 +113,11 @@ Route102_EventScript_274421:: @ 8274421
 	goto_eq Route102_EventScript_274479
 
 Route102_EventScript_274448:: @ 8274448
-	special FieldObjectInteractionPickBerryTree
+	special EventObjectInteractionPickBerryTree
 	compare VAR_0x8004, 0
 	goto_eq Route102_EventScript_274470
 	special sub_80EED34
-	special FieldObjectInteractionRemoveBerryTree
+	special EventObjectInteractionRemoveBerryTree
 	message Route102_Text_27461B
 	playfanfare MUS_ME_KINOMI
 	waitmessage
@@ -145,7 +145,7 @@ Route102_EventScript_274479:: @ 8274479
 
 Route102_EventScript_274482:: @ 8274482
 	lockall
-	special FieldObjectInteractionGetBerryTreeData
+	special EventObjectInteractionGetBerryTreeData
 	call Route102_EventScript_2744DD
 	releaseall
 	end
@@ -154,7 +154,7 @@ Route102_EventScript_27448D:: @ 827448D
 	checkitem ITEM_WAILMER_PAIL, 1
 	compare VAR_RESULT, 0
 	goto_eq Route102_EventScript_2744BE
-	special FieldObjectInteractionGetBerryName
+	special EventObjectInteractionGetBerryName
 	msgbox Route102_Text_2746E4, 5
 	compare VAR_RESULT, 1
 	goto_eq Route102_EventScript_2744C4
@@ -166,14 +166,14 @@ Route102_EventScript_2744BE:: @ 82744BE
 	end
 
 Route102_EventScript_2744C0:: @ 82744C0
-	special FieldObjectInteractionGetBerryTreeData
+	special EventObjectInteractionGetBerryTreeData
 	lockall
 
 Route102_EventScript_2744C4:: @ 82744C4
-	special FieldObjectInteractionGetBerryName
+	special EventObjectInteractionGetBerryName
 	message Route102_Text_274710
 	waitmessage
-	special FieldObjectInteractionWaterBerryTree
+	special EventObjectInteractionWaterBerryTree
 	special sub_80FAFF8
 	waitstate
 	message Route102_Text_274723
@@ -183,10 +183,10 @@ Route102_EventScript_2744C4:: @ 82744C4
 	end
 
 Route102_EventScript_2744DD:: @ 82744DD
-	special FieldObjectInteractionPlantBerryTree
+	special EventObjectInteractionPlantBerryTree
 	incrementgamestat 3
 	special sub_80EED10
-	special FieldObjectInteractionGetBerryCountString
+	special EventObjectInteractionGetBerryCountString
 	message Route102_Text_274535
 	waitmessage
 	waitbuttonpress

@@ -26,18 +26,18 @@ FallarborTown_BattleTentCorridor_EventScript_2006B7:: @ 82006B7
 	end
 
 FallarborTown_BattleTentCorridor_Movement_2006FB: @ 82006FB
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 FallarborTown_BattleTentCorridor_Movement_200700: @ 8200700
-	step_up
+	walk_up
 
 FallarborTown_BattleTentCorridor_Movement_200701: @ 8200701
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 FallarborTown_BattleTentCorridor_Text_200704: @ 8200704

@@ -415,72 +415,72 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249514:: @ 8249514
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_249518: @ 8249518
-	step_up
-	step_up
-	step_up
-	step_up
-	step_03
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	face_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_24951E: @ 824951E
-	step_left
-	step_up
-	step_up
-	step_up
-	step_03
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	face_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_249524: @ 8249524
-	step_02
+	face_left
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_249526: @ 8249526
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_249528: @ 8249528
-	step_down
-	step_down
-	step_down
-	step_down
-	step_02
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	face_left
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_24952E: @ 824952E
-	step_right
-	step_down
-	step_down
-	step_down
-	step_02
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	face_left
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_249534: @ 8249534
-	step_up
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_249539: @ 8249539
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_24953E: @ 824953E
-	step_right
-	step_right
+	walk_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_249541: @ 8249541
-	step_left
-	step_left
-	step_28
+	walk_left
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Movement_249545: @ 8249545
-	step_1f
+	walk_in_place_left
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom2_Text_249547: @ 8249547

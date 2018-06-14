@@ -140,111 +140,111 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9440:: @ 81F9440
 	return
 
 LittlerootTown_MaysHouse_2F_Movement_1F946F: @ 81F946F
-	step_down
-	step_down
-	step_28
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F9473: @ 81F9473
-	step_right
-	step_right
-	step_down
-	step_down
-	step_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F9479: @ 81F9479
-	step_up
-	step_up
-	step_up
-	step_28
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F9483: @ 81F9483
-	step_14
-	step_26
-	step_14
-	step_14
-	step_14
-	step_14
-	step_28
+	delay_16
+	walk_in_place_fastest_up
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F948B: @ 81F948B
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F948F: @ 81F948F
-	step_up
-	step_28
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_up
+	walk_in_place_fastest_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F9497: @ 81F9497
-	step_14
-	step_26
-	step_14
-	step_14
-	step_28
+	delay_16
+	walk_in_place_fastest_up
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F949D: @ 81F949D
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_25
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F94A4: @ 81F94A4
-	step_up
-	step_right
-	step_right
-	step_26
+	walk_up
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F94A9: @ 81F94A9
-	step_14
-	step_14
-	step_28
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F94AD: @ 81F94AD
-	step_right
-	step_right
-	step_down
-	step_28
+	walk_right
+	walk_right
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F94B2: @ 81F94B2
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LittlerootTown_MaysHouse_2F_Movement_1F94BB: @ 81F94BB
-	step_14
-	step_26
-	step_14
-	step_14
-	step_28
+	delay_16
+	walk_in_place_fastest_up
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F94C1:: @ 81F94C1

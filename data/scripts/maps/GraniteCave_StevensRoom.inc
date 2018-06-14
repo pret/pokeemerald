@@ -58,30 +58,30 @@ GraniteCave_StevensRoom_EventScript_22DD3C:: @ 822DD3C
 	return
 
 GraniteCave_StevensRoom_Movement_22DD45: @ 822DD45
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_13
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_8
 	step_end
 
 GraniteCave_StevensRoom_Movement_22DD4C: @ 822DD4C
-	step_14
-	step_14
-	step_14
-	step_26
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_up
 	step_end
 
 GraniteCave_StevensRoom_Movement_22DD51: @ 822DD51
-	step_left
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_13
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	delay_8
 	step_end
 
 GraniteCave_StevensRoom_Text_22DD5A: @ 822DD5A

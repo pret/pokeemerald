@@ -13887,7 +13887,7 @@ task_prev_quest: @ 81960A8
 	cmp r0, 0
 	bne _081960C2
 	bl ScriptContext2_Enable
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	bl sub_808B864
 	bl sub_808BCF4
 _081960C2:
@@ -14285,18 +14285,18 @@ sub_81963F0: @ 81963F0
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	bl sub_80D338C
-	bl UnfreezeMapObjects
+	bl UnfreezeEventObjects
 	bl ScriptContext2_Disable
 _08196446:
 	movs r0, 0x1

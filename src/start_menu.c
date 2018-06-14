@@ -15,7 +15,7 @@
 #include "battle_frontier_2.h"
 #include "rom_818CFC8.h"
 #include "field_specials.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement.h"
 #include "script.h"
 #include "main.h"
 #include "sound.h"
@@ -561,7 +561,7 @@ void ShowStartMenu(void) // Called from overworld.c and field_control_avatar.s
 {
     if (!is_c1_link_related_active())
     {
-        FreezeMapObjects();
+        FreezeEventObjects();
         sub_808B864();
         sub_808BCF4();
     }

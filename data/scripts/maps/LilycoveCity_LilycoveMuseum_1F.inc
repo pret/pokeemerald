@@ -70,22 +70,22 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218D84:: @ 8218D84
 	end
 
 LilycoveCity_LilycoveMuseum_1F_Movement_218D99: @ 8218D99
-	step_up
+	walk_up
 	step_end
 
 LilycoveCity_LilycoveMuseum_1F_Movement_218D9B: @ 8218D9B
-	step_left
-	step_up
+	walk_left
+	walk_up
 	step_end
 
 LilycoveCity_LilycoveMuseum_1F_Movement_218D9E: @ 8218D9E
-	step_right
-	step_up
+	walk_right
+	walk_up
 	step_end
 
 LilycoveCity_LilycoveMuseum_1F_Movement_218DA1: @ 8218DA1
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DA4:: @ 8218DA4

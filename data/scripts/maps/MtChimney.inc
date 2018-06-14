@@ -153,249 +153,249 @@ MtChimney_EventScript_22EF76:: @ 822EF76
 	end
 
 MtChimney_Movement_22EF83: @ 822EF83
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
 	step_end
 
 MtChimney_Movement_22EF8B: @ 822EF8B
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22EF94: @ 822EF94
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
 	step_end
 
 MtChimney_Movement_22EF9C: @ 822EF9C
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22EFA6: @ 822EFA6
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 MtChimney_Movement_22EFB8: @ 822EFB8
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 MtChimney_Movement_22EFC1: @ 822EFC1
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22EFD0: @ 822EFD0
-	step_15
-	step_15
-	step_15
-	step_15
-	step_15
-	step_15
-	step_15
-	step_15
-	step_15
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 MtChimney_Movement_22EFE9: @ 822EFE9
-	step_14
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 MtChimney_Movement_22EFF4: @ 822EFF4
-	step_14
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
+	delay_16
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22F004: @ 822F004
-	step_14
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
+	delay_16
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 MtChimney_Movement_22F015: @ 822F015
-	step_14
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_25
+	delay_16
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 MtChimney_Movement_22F01D: @ 822F01D
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22F02B: @ 822F02B
-	step_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22F02D: @ 822F02D
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22F035: @ 822F035
-	step_14
-	step_14
-	step_27
-	step_14
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22F03F: @ 822F03F
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_27
-	step_14
-	step_down
-	step_down
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
+	delay_16
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_Movement_22F04A: @ 822F04A
-	step_40
-	step_17
-	step_41
-	step_03
+	lock_facing_direction
+	walk_fast_left
+	unlock_facing_direction
+	face_right
 	step_end
 
 MtChimney_Movement_22F04F: @ 822F04F
-	step_left
-	step_28
-	step_14
+	walk_left
+	walk_in_place_fastest_right
+	delay_16
 	step_end
 
 MtChimney_EventScript_22F053:: @ 822F053

@@ -240,25 +240,25 @@ Route117_PokemonDayCare_EventScript_291F3D:: @ 8291F3D
 	end
 
 Route117_PokemonDayCare_Movement_291F47: @ 8291F47
-	step_14
-	step_14
-	step_02
-	step_14
-	step_14
-	step_03
-	step_14
-	step_14
-	step_01
-	slow_step_up
-	step_54
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_00
-	step_55
-	slow_step_down
+	delay_16
+	delay_16
+	face_left
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	delay_16
+	face_up
+	walk_slow_up
+	set_invisible
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	face_down
+	set_visible
+	walk_slow_down
 	step_end
 
 Route117_PokemonDayCare_EventScript_291F5B:: @ 8291F5B

@@ -63,59 +63,59 @@ BattleFrontier_ReceptionGate_EventScript_266229:: @ 8266229
 	end
 
 BattleFrontier_ReceptionGate_Movement_2662D2: @ 82662D2
-	step_up
-	step_up
-	step_left
-	step_left
+	walk_up
+	walk_up
+	walk_left
+	walk_left
 	step_end
 
 BattleFrontier_ReceptionGate_Movement_2662D7: @ 82662D7
-	step_14
-	step_14
-	step_14
-	step_13
-	step_28
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_ReceptionGate_Movement_2662DD: @ 82662DD
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 BattleFrontier_ReceptionGate_Movement_2662E0: @ 82662E0
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
 	step_end
 
 BattleFrontier_ReceptionGate_Movement_2662E8: @ 82662E8
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_ReceptionGate_Movement_2662F0: @ 82662F0
-	step_14
-	step_14
-	step_14
-	step_13
-	step_28
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_ReceptionGate_Movement_2662F6: @ 82662F6
-	step_14
-	step_14
-	step_14
-	step_13
-	step_27
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_ReceptionGate_EventScript_2662FC:: @ 82662FC

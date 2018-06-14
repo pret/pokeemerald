@@ -285,8 +285,8 @@ MossdeepCity_Gym_EventScript_220C26:: @ 8220C26
 	end
 
 MossdeepCity_Gym_Movement_220C30: @ 8220C30
-	step_14
-	step_14
+	delay_16
+	delay_16
 	step_end
 
 MossdeepCity_Gym_EventScript_220C33:: @ 8220C33

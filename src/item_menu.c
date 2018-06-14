@@ -9,7 +9,7 @@
 #include "constants/songs.h"
 #include "decompress.h"
 #include "event_data.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "field_specials.h"
 #include "graphics.h"
@@ -1716,7 +1716,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)
         {
             ScriptContext2_Enable();
-            FreezeMapObjects();
+            FreezeEventObjects();
             sub_808B864();
             sub_808BCF4();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;

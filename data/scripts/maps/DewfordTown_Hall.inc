@@ -241,11 +241,11 @@ DewfordTown_Hall_EventScript_1FD7C0:: @ 81FD7C0
 	return
 
 DewfordTown_Hall_Movement_1FD7D6: @ 81FD7D6
-	step_1f
+	walk_in_place_left
 	step_end
 
 DewfordTown_Hall_Movement_1FD7D8: @ 81FD7D8
-	step_20
+	walk_in_place_right
 	step_end
 
 DewfordTown_Hall_EventScript_1FD7DA:: @ 81FD7DA

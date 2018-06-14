@@ -17,7 +17,7 @@
 #include "field_player_avatar.h"
 #include "field_camera.h"
 #include "field_screen.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
 #include "menu.h"
@@ -32,7 +32,7 @@
 #include "tilesets.h"
 #include "item_icon.h"
 #include "trader.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
 #include "graphics.h"
@@ -1202,15 +1202,15 @@ void sub_8127E18(void)
         if (FlagGet(0xAE + i) == TRUE)
         {
             FlagClear(0xAE + i);
-            for (j = 0; j < gMapHeader.events->mapObjectCount; j ++)
+            for (j = 0; j < gMapHeader.events->eventObjectCount; j ++)
             {
-                if (gMapHeader.events->mapObjects[j].flagId == 0xAE + i)
+                if (gMapHeader.events->eventObjects[j].flagId == 0xAE + i)
                 {
                     break;
                 }
             }
-            VarSet(0x3F20 + gMapHeader.events->mapObjects[j].graphicsId, sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
-            gSpecialVar_0x8005 = gMapHeader.events->mapObjects[j].localId;
+            VarSet(0x3F20 + gMapHeader.events->eventObjects[j].graphicsId, sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
+            gSpecialVar_0x8005 = gMapHeader.events->eventObjects[j].localId;
             gSpecialVar_0x8006 = sCurDecorMapX;
             gSpecialVar_0x8007 = sCurDecorMapY;
             show_sprite(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
@@ -1321,11 +1321,11 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphic
     }
     if (gSaveBlock2Ptr->playerGender == MALE)
     {
-        sDecor_CameraSpriteObjectIdx2 = AddPseudoFieldObject(0xC1, SpriteCallbackDummy, v0, 0x48, 0);
+        sDecor_CameraSpriteObjectIdx2 = AddPseudoEventObject(0xC1, SpriteCallbackDummy, v0, 0x48, 0);
     }
     else
     {
-        sDecor_CameraSpriteObjectIdx2 = AddPseudoFieldObject(0xC2, SpriteCallbackDummy, v0, 0x48, 0);
+        sDecor_CameraSpriteObjectIdx2 = AddPseudoEventObject(0xC2, SpriteCallbackDummy, v0, 0x48, 0);
     }
     gSprites[sDecor_CameraSpriteObjectIdx2].oam.priority = 1;
     DestroySprite(&gSprites[sDecor_CameraSpriteObjectIdx1]);
@@ -1466,7 +1466,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    behaviorAt = GetFieldObjectIdByXYZ(curX, curY, 0);
+                    behaviorAt = GetEventObjectIdByXYZ(curX, curY, 0);
                     if (behaviorAt != 0 && behaviorAt != 16)
                     {
                         return FALSE;
@@ -1491,7 +1491,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    if (GetFieldObjectIdByXYZ(curX, curY, 0) != 16)
+                    if (GetEventObjectIdByXYZ(curX, curY, 0) != 16)
                     {
                         return FALSE;
                     }
@@ -1511,7 +1511,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 {
                     return FALSE;
                 }
-                behaviorAt = GetFieldObjectIdByXYZ(curX, curY, 0);
+                behaviorAt = GetEventObjectIdByXYZ(curX, curY, 0);
                 if (behaviorAt != 0 && behaviorAt != 16)
                 {
                     return FALSE;
@@ -1556,7 +1556,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                         return FALSE;
                     }
                 }
-                if (GetFieldObjectIdByXYZ(curX, curY, 0) != 16)
+                if (GetEventObjectIdByXYZ(curX, curY, 0) != 16)
                 {
                     return FALSE;
                 }
@@ -1990,7 +1990,7 @@ u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuf
     data->decoration = &gDecorations[decor];
     if (data->decoration->permission == DECORPERM_SOLID_MAT)
     {
-        return AddPseudoFieldObject(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
+        return AddPseudoEventObject(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
     }
     FreeSpritePaletteByTag(OVERWORLD_PLACE_DECOR_SELECTOR_PAL_TAG);
     sub_81291E8(data);
@@ -2040,7 +2040,7 @@ const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
     return gUnknown_085A6BE8[decor][mode];
 }
 
-u8 AddDecorationIconObjectFromFieldObject(u16 tilesTag, u16 paletteTag, u8 decor)
+u8 AddDecorationIconObjectFromEventObject(u16 tilesTag, u16 paletteTag, u8 decor)
 {
     u8 spriteId;
     struct SpriteSheet sheet;
@@ -2071,7 +2071,7 @@ u8 AddDecorationIconObjectFromFieldObject(u16 tilesTag, u16 paletteTag, u8 decor
     }
     else
     {
-        spriteId = AddPseudoFieldObject(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
+        spriteId = AddPseudoEventObject(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
     }
     return spriteId;
 }
@@ -2092,7 +2092,7 @@ u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u1
     }
     else if (gUnknown_085A6BE8[decor][0] == NULL)
     {
-        spriteId = AddDecorationIconObjectFromFieldObject(tilesTag, paletteTag, decor);
+        spriteId = AddDecorationIconObjectFromEventObject(tilesTag, paletteTag, decor);
         if (spriteId == MAX_SPRITES)
         {
             return MAX_SPRITES;
@@ -2141,11 +2141,11 @@ void sub_8129708(void)
     {
         gSpecialVar_0x8005 = sDecorRearrangementDataBuffer[gSpecialVar_0x8004].flagId;
         sub_81296EC(sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx);
-        for (i = 0; i < gMapHeader.events->mapObjectCount; i ++)
+        for (i = 0; i < gMapHeader.events->eventObjectCount; i ++)
         {
-            if (gMapHeader.events->mapObjects[i].flagId == gSpecialVar_0x8005)
+            if (gMapHeader.events->eventObjects[i].flagId == gSpecialVar_0x8005)
             {
-                gSpecialVar_0x8006 = gMapHeader.events->mapObjects[i].localId;
+                gSpecialVar_0x8006 = gMapHeader.events->eventObjects[i].localId;
                 break;
             }
         }
@@ -2156,11 +2156,11 @@ void sub_81297AC(void)
 {
     u8 i;
 
-    for (i = 0; i < gMapHeader.events->mapObjectCount; i ++)
+    for (i = 0; i < gMapHeader.events->eventObjectCount; i ++)
     {
-        if (gMapHeader.events->mapObjects[i].flagId == gSpecialVar_0x8004)
+        if (gMapHeader.events->eventObjects[i].flagId == gSpecialVar_0x8004)
         {
-            gSpecialVar_0x8005 = gMapHeader.events->mapObjects[i].localId;
+            gSpecialVar_0x8005 = gMapHeader.events->eventObjects[i].localId;
             break;
         }
     }
@@ -2247,17 +2247,17 @@ bool8 sub_81299AC(u8 taskId)
 
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
-    player_get_direction_lower_nybble();
+    GetPlayerFacingDirection();
     sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.spriteId].data[0];
     sub_812A39C();
     gUnknown_03005DD0.spriteId = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);
     if (gSaveBlock2Ptr->playerGender == MALE)
     {
-        sDecor_CameraSpriteObjectIdx2 = AddPseudoFieldObject(0xC1, SpriteCallbackDummy, 0x88, 0x48, 0);
+        sDecor_CameraSpriteObjectIdx2 = AddPseudoEventObject(0xC1, SpriteCallbackDummy, 0x88, 0x48, 0);
     }
     else
     {
-        sDecor_CameraSpriteObjectIdx2 = AddPseudoFieldObject(0xC2, SpriteCallbackDummy, 0x88, 0x48, 0);
+        sDecor_CameraSpriteObjectIdx2 = AddPseudoEventObject(0xC2, SpriteCallbackDummy, 0x88, 0x48, 0);
     }
     gSprites[sDecor_CameraSpriteObjectIdx2].oam.priority = 1;
     DestroySprite(&gSprites[sDecor_CameraSpriteObjectIdx1]);
@@ -2451,9 +2451,9 @@ void sub_8129F20(void)
     yOff = gUnknown_0203A17C.pos[sDecorRearrangementDataBuffer[sCurDecorSelectedInRearrangement].idx] & 0x0F;
     for (i = 0; i < 0x40; i ++)
     {
-        if (gSaveBlock1Ptr->mapObjectTemplates[i].x == xOff && gSaveBlock1Ptr->mapObjectTemplates[i].y == yOff && !FlagGet(gSaveBlock1Ptr->mapObjectTemplates[i].flagId))
+        if (gSaveBlock1Ptr->eventObjectTemplates[i].x == xOff && gSaveBlock1Ptr->eventObjectTemplates[i].y == yOff && !FlagGet(gSaveBlock1Ptr->eventObjectTemplates[i].flagId))
         {
-            sDecorRearrangementDataBuffer[sCurDecorSelectedInRearrangement].flagId = gSaveBlock1Ptr->mapObjectTemplates[i].flagId;
+            sDecorRearrangementDataBuffer[sCurDecorSelectedInRearrangement].flagId = gSaveBlock1Ptr->eventObjectTemplates[i].flagId;
             break;
         }
     }

@@ -669,214 +669,214 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C652:: @ 824C652
 
 BattleFrontier_BattleArenaBattleRoom_Movement_24C773: @ 824C773
 BattleFrontier_BattleDomeBattleRoom_Movement_24C773: @ 824C773
-	step_54
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C775: @ 824C775
-	step_55
-	step_14
-	step_up
-	step_up
-	step_up
-	step_right
+	set_visible
+	delay_16
+	walk_up
+	walk_up
+	walk_up
+	walk_right
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C77B: @ 824C77B
-	step_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C77D: @ 824C77D
-	step_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C77F: @ 824C77F
-	step_55
-	step_14
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
+	set_visible
+	delay_16
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C787: @ 824C787
-	step_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C789: @ 824C789
-	step_left
+	walk_left
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C78B: @ 824C78B
-	step_01
-	step_54
+	face_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C78E: @ 824C78E
-	step_55
-	step_up
-	step_up
-	step_up
-	step_02
-	step_13
-	step_12
-	step_00
-	step_13
-	step_12
-	step_03
-	step_13
-	step_12
-	step_01
-	step_13
-	step_12
-	step_02
-	step_14
-	step_16
-	step_16
-	step_02
-	step_13
-	step_12
-	step_00
-	step_13
-	step_12
-	step_03
-	step_13
-	step_12
-	step_01
-	step_13
-	step_12
-	step_02
-	fast_step_left
-	step_41
-	step_01
-	step_40
-	fast_step_left
-	fast_step_left
-	step_41
-	step_03
-	step_40
-	fast_step_left
-	step_41
-	step_00
-	step_11
-	step_02
-	step_13
-	step_12
-	step_01
-	step_13
-	step_12
-	step_03
-	step_13
-	step_12
-	step_00
-	step_13
-	step_12
-	step_02
-	step_12
-	step_01
-	step_12
-	step_03
-	step_12
-	step_00
-	step_12
-	step_02
-	step_11
-	step_01
-	step_11
-	step_03
-	step_11
-	step_00
-	step_11
-	step_02
-	step_40
-	step_right
-	slow_step_right
-	step_right
-	slow_step_right
-	step_41
-	step_01
-	step_14
-	step_47
-	step_47
-	step_14
-	step_right
-	step_right
-	step_right
-	step_47
-	step_14
-	step_right
-	step_down
-	step_down
-	step_02
-	step_11
-	step_01
-	step_11
-	step_03
-	step_11
-	step_00
-	step_11
-	step_02
-	step_12
-	step_left
-	step_left
+	set_visible
+	walk_up
+	walk_up
+	walk_up
+	face_left
+	delay_8
+	delay_4
+	face_down
+	delay_8
+	delay_4
+	face_right
+	delay_8
+	delay_4
+	face_up
+	delay_8
+	delay_4
+	face_left
+	delay_16
+	walk_fast_up
+	walk_fast_up
+	face_left
+	delay_8
+	delay_4
+	face_down
+	delay_8
+	delay_4
+	face_right
+	delay_8
+	delay_4
+	face_up
+	delay_8
+	delay_4
+	face_left
+	jump_2_left
+	unlock_facing_direction
+	face_up
+	lock_facing_direction
+	jump_2_left
+	jump_2_left
+	unlock_facing_direction
+	face_right
+	lock_facing_direction
+	jump_2_left
+	unlock_facing_direction
+	face_down
+	delay_2
+	face_left
+	delay_8
+	delay_4
+	face_up
+	delay_8
+	delay_4
+	face_right
+	delay_8
+	delay_4
+	face_down
+	delay_8
+	delay_4
+	face_left
+	delay_4
+	face_up
+	delay_4
+	face_right
+	delay_4
+	face_down
+	delay_4
+	face_left
+	delay_2
+	face_up
+	delay_2
+	face_right
+	delay_2
+	face_down
+	delay_2
+	face_left
+	lock_facing_direction
+	walk_right
+	walk_slow_right
+	walk_right
+	walk_slow_right
+	unlock_facing_direction
+	face_up
+	delay_16
+	jump_in_place_up
+	jump_in_place_up
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	jump_in_place_up
+	delay_16
+	walk_right
+	walk_down
+	walk_down
+	face_left
+	delay_2
+	face_up
+	delay_2
+	face_right
+	delay_2
+	face_down
+	delay_2
+	face_left
+	delay_4
+	walk_left
+	walk_left
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C7F9: @ 824C7F9
-	step_14
-	step_14
-	step_left
-	step_left
-	step_28
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_right
-	step_right
-	step_25
+	delay_16
+	delay_16
+	walk_left
+	walk_left
+	walk_in_place_fastest_right
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C829: @ 824C829
-	step_left
+	walk_left
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C82B: @ 824C82B
-	step_left
-	step_left
+	walk_left
+	walk_left
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E:: @ 824C82E
@@ -978,50 +978,50 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C938:: @ 824C938
 	return
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C94B: @ 824C94B
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_13
-	step_51
-	step_46
-	step_12
-	step_46
-	step_50
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	disable_jump_landing_ground_effect
+	jump_in_place_down
+	delay_4
+	jump_in_place_down
+	enable_jump_landing_ground_effect
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C95E: @ 824C95E
-	step_down
-	step_down
-	step_right
-	step_right
-	step_25
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C964: @ 824C964
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C969: @ 824C969
-	step_27
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_24C96B: @ 824C96B
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Text_24C970: @ 824C970

@@ -12,12 +12,11 @@
 #include "data2.h"
 #include "event_data.h"
 #include "fieldmap.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"
 #include "item.h"
-#include "field_map_obj_helpers.h"
 #include "mail.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -338,7 +337,7 @@ void sub_80FD504(u8 taskId)
             }
             else
             {
-                playerDir = player_get_direction_lower_nybble();
+                playerDir = GetPlayerFacingDirection();
                 for (i = 0; i < 4; i++)
                 {
                     if (playerDir == gUnknown_085920E4[i])
@@ -580,15 +579,15 @@ u8 sub_80FD9B0(s16 itemX, s16 itemY)
 
 void sub_80FDA24(u8 direction)
 {
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    FieldObjectClearAnim(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    npc_sync_anim_pause_bits(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    EventObjectClearHeldMovement(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    UnfreezeEventObject(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
     PlayerTurnInPlace(direction);
 }
 
 void sub_80FDA94(u8 taskId)
 {
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
+    if (EventObjectCheckHeldMovementStatus(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
         DisplayItemMessageOnField(taskId, gText_ItemFinderNearby, sub_80FD5CC);
 }
 
@@ -596,7 +595,7 @@ void sub_80FDADC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
+    if (EventObjectCheckHeldMovementStatus(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
     || data[2] == FALSE)
     {
         sub_80FDA24(gUnknown_085920E4[data[5]]);
@@ -728,8 +727,8 @@ bool8 sub_80FDE2C(void)
     u8 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     z = PlayerGetZCoord();
-    objId = GetFieldObjectIdByXYZ(x, y, z);
-    if (objId == 16 || gMapObjects[objId].graphicsId != 0xE4)
+    objId = GetEventObjectIdByXYZ(x, y, z);
+    if (objId == 16 || gEventObjects[objId].graphicsId != 0xE4)
         return FALSE;
     else
         return TRUE;

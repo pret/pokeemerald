@@ -105,30 +105,30 @@ RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	end
 
 RustboroCity_Movement_1E084E: @ 81E084E
-	step_1d
+	walk_in_place_down
 	step_end
 
 RustboroCity_Movement_1E0850: @ 81E0850
-	step_down
+	walk_down
 	step_end
 
 RustboroCity_Movement_1E0852: @ 81E0852
-	step_down
-	step_14
+	walk_down
+	delay_16
 	step_end
 
 RustboroCity_Movement_1E0855: @ 81E0855
-	step_14
-	step_left
-	step_down
-	step_down
-	step_right
-	step_26
-	step_14
+	delay_16
+	walk_left
+	walk_down
+	walk_down
+	walk_right
+	walk_in_place_fastest_up
+	delay_16
 	step_end
 
 RustboroCity_Movement_1E085D: @ 81E085D
-	step_up
+	walk_up
 	step_end
 
 RustboroCity_EventScript_1E085F:: @ 81E085F
@@ -352,100 +352,100 @@ RustboroCity_EventScript_1E0A79:: @ 81E0A79
 	return
 
 RustboroCity_Movement_1E0A8E: @ 81E0A8E
-	step_30
-	step_30
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fastest_right
+	walk_fastest_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 RustboroCity_Movement_1E0AA0: @ 81E0AA0
-	step_30
-	step_30
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
+	walk_fastest_right
+	walk_fastest_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 RustboroCity_Movement_1E0AB1: @ 81E0AB1
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 RustboroCity_Movement_1E0AB9: @ 81E0AB9
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 RustboroCity_Movement_1E0AC1: @ 81E0AC1
-	step_down
-	step_right
-	step_right
+	walk_down
+	walk_right
+	walk_right
 	step_end
 
 RustboroCity_Movement_1E0AC5: @ 81E0AC5
-	step_down
-	step_down
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_right
+	walk_right
 	step_end
 
 RustboroCity_Movement_1E0ACA: @ 81E0ACA
-	step_down
-	step_down
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_right
+	walk_right
 	step_end
 
 RustboroCity_Movement_1E0ACF: @ 81E0ACF
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
 	step_end
 
 RustboroCity_Movement_1E0AD5: @ 81E0AD5
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_25
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 RustboroCity_EventScript_1E0ADD:: @ 81E0ADD
@@ -554,7 +554,7 @@ RustboroCity_EventScript_1E0BF3:: @ 81E0BF3
 	return
 
 RustboroCity_Movement_1E0C29: @ 81E0C29
-	step_down
+	walk_down
 	step_end
 
 RustboroCity_EventScript_1E0C2B:: @ 81E0C2B
@@ -972,59 +972,59 @@ RustboroCity_EventScript_1E11FB:: @ 81E11FB
 	end
 
 RustboroCity_Movement_1E120E: @ 81E120E
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 RustboroCity_Movement_1E1215: @ 81E1215
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 RustboroCity_Movement_1E121B: @ 81E121B
-	step_down
-	step_left
-	step_left
-	step_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 RustboroCity_Movement_1E1220: @ 81E1220
-	step_down
-	step_left
-	step_down
+	walk_down
+	walk_left
+	walk_down
 	step_end
 
 RustboroCity_Movement_1E1224: @ 81E1224
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 RustboroCity_Movement_1E1227: @ 81E1227
-	step_down
-	step_right
-	step_down
+	walk_down
+	walk_right
+	walk_down
 	step_end
 
 RustboroCity_Movement_1E122B: @ 81E122B
-	step_down
-	step_right
-	step_right
-	step_down
+	walk_down
+	walk_right
+	walk_right
+	walk_down
 	step_end
 
 RustboroCity_Movement_1E1230: @ 81E1230
-	step_down
-	step_right
-	step_right
-	step_right
-	step_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_down
 	step_end
 
 RustboroCity_EventScript_1E1236:: @ 81E1236

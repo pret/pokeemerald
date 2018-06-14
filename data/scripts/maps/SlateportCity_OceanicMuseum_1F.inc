@@ -72,7 +72,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AE39:: @ 820AE39
 	end
 
 SlateportCity_OceanicMuseum_1F_Movement_20AE4B: @ 820AE4B
-	step_down
+	walk_down
 	step_end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE4D:: @ 820AE4D
@@ -210,33 +210,33 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AFB5:: @ 820AFB5
 	end
 
 SlateportCity_OceanicMuseum_1F_Movement_20AFBF: @ 820AFBF
-	step_14
-	step_13
-	step_12
-	step_25
+	delay_16
+	delay_8
+	delay_4
+	walk_in_place_fastest_down
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Movement_20AFC4: @ 820AFC4
-	step_14
-	step_25
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Movement_20AFC7: @ 820AFC7
-	step_00
-	step_15
-	step_15
-	step_15
-	step_15
-	step_13
+	face_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	delay_8
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Movement_20AFCE: @ 820AFCE
-	step_18
-	step_15
-	step_15
-	step_15
-	step_15
-	step_13
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	delay_8
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Text_20AFD5: @ 820AFD5

@@ -59,31 +59,31 @@ MtChimney_CableCarStation_EventScript_22AC9B:: @ 822AC9B
 	end
 
 MtChimney_CableCarStation_Movement_22ACA5: @ 822ACA5
-	step_up
-	step_up
-	step_left
-	step_28
+	walk_up
+	walk_up
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 MtChimney_CableCarStation_Movement_22ACAA: @ 822ACAA
-	step_14
-	step_right
-	step_down
-	step_down
+	delay_16
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 MtChimney_CableCarStation_Movement_22ACAF: @ 822ACAF
-	step_up
-	step_up
-	step_up
-	step_14
+	walk_up
+	walk_up
+	walk_up
+	delay_16
 	step_end
 
 MtChimney_CableCarStation_Movement_22ACB4: @ 822ACB4
-	step_down
-	step_down
-	step_down
-	step_14
+	walk_down
+	walk_down
+	walk_down
+	delay_16
 	step_end
 
 MtChimney_CableCarStation_Text_22ACB9: @ 822ACB9

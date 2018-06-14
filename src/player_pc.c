@@ -4,7 +4,7 @@
 #include "decoration.h"
 #include "event_scripts.h"
 #include "field_fadetransition.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_screen.h"
 #include "field_weather.h"
 #include "international_string_util.h"

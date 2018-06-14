@@ -38,7 +38,7 @@ gFieldEffectScriptPointers:: @ 82DB9D4
 	.4byte gFieldEffectScript_Unknown30
 	.4byte gFieldEffectScript_UseFly
 	.4byte gFieldEffectScript_FlyIn
-	.4byte gFieldEffectScript_ExclamationMarkIcon2
+	.4byte gFieldEffectScript_QuestionMarkIcon
 	.4byte gFieldEffectScript_FeetInFlowingWater
 	.4byte gFieldEffectScript_BikeTireTracks
 	.4byte gFieldEffectScript_SandDisguisePlaceholder
@@ -74,7 +74,7 @@ gFieldEffectScriptPointers:: @ 82DB9D4
 	.4byte gFieldEffectScript_Unknown66
 
 gFieldEffectScript_ExclamationMarkIcon1:: @ 82DBAE0
-	field_eff_callnative FldEff_ExclamationMarkIcon1
+	field_eff_callnative FldEff_ExclamationMarkIcon
 	field_eff_end
 
 gFieldEffectScript_UseCutOnTallGrass:: @ 82DBAE6
@@ -206,8 +206,8 @@ gFieldEffectScript_FlyIn:: @ 82DBBE9
 	field_eff_callnative FldEff_FlyIn
 	field_eff_end
 
-gFieldEffectScript_ExclamationMarkIcon2:: @ 82DBBEF
-	field_eff_callnative FldEff_ExclamationMarkIcon2
+gFieldEffectScript_QuestionMarkIcon:: @ 82DBBEF
+	field_eff_callnative FldEff_QuestionMarkIcon
 	field_eff_end
 
 gFieldEffectScript_FeetInFlowingWater:: @ 82DBBF5

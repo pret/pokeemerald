@@ -4,7 +4,7 @@
 #include "field_camera.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "gpu_regs.h"
 #include "menu.h"
 #include "overworld.h"
@@ -406,7 +406,7 @@ void CameraUpdate(void)
     if (deltaX != 0 || deltaY != 0)
     {
         CameraMove(deltaX, deltaY);
-        UpdateFieldObjectsForCameraUpdate(deltaX, deltaY);
+        UpdateEventObjectsForCameraUpdate(deltaX, deltaY);
         RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
         ResetBerryTreeSparkleFlags();
         tilemap_move_something(&gUnknown_03000E20, deltaX * 2, deltaY * 2);
@@ -421,7 +421,7 @@ void CameraUpdate(void)
 void camera_move_and_redraw(int a, int b) //unused
 {
     CameraMove(a, b);
-    UpdateFieldObjectsForCameraUpdate(a, b);
+    UpdateEventObjectsForCameraUpdate(a, b);
     DrawWholeMapView();
     gUnknown_03005DEC -= a * 16;
     gUnknown_03005DE8 -= b * 16;
@@ -477,7 +477,7 @@ static void CameraPanningCB_PanAhead(void)
             gUnknown_03000E2C = 0;
         }
 
-        var = player_get_direction_upper_nybble();
+        var = GetPlayerMovementDirection();
         if (var == 2)
         {
             if (gUnknown_03000E2A > -8)

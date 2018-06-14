@@ -87,7 +87,7 @@ FortreeCity_EventScript_1E2645:: @ 81E2645
 	end
 
 FortreeCity_Movement_1E2674: @ 81E2674
-	step_right
+	walk_right
 	step_end
 
 FortreeCity_Text_1E2676: @ 81E2676

@@ -101,7 +101,7 @@ enum LanguageId
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT   2
 #define POKEBLOCKS_COUNT    40
-#define MAP_OBJECTS_COUNT   16
+#define EVENT_OBJECTS_COUNT   16
 #define BERRY_TREES_COUNT   128
 #define FLAGS_COUNT         300
 #define VARS_COUNT          256
@@ -796,8 +796,8 @@ struct SaveBlock1
     /*0x9C2*/ u8 field_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[100];
-    /*0xA30*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
-    /*0xC70*/ struct MapObjectTemplate mapObjectTemplates[64];
+    /*0xA30*/ struct EventObject eventObjects[EVENT_OBJECTS_COUNT];
+    /*0xC70*/ struct EventObjectTemplate eventObjectTemplates[64];
     /*0x1270*/ u8 flags[FLAGS_COUNT];
     /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];

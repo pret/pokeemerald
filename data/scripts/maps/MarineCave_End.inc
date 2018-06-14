@@ -66,13 +66,13 @@ MarineCave_End_EventScript_23B092:: @ 823B092
 	end
 
 MarineCave_End_Movement_23B09D: @ 823B09D
-	step_5e
-	step_62
-	step_14
-	step_14
-	step_63
-	step_14
-	step_14
-	step_63
+	init_affine_anim
+	walk_down_start_affine
+	delay_16
+	delay_16
+	walk_down_affine
+	delay_16
+	delay_16
+	walk_down_affine
 	step_end
 

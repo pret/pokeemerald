@@ -86,12 +86,12 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_219808:: @ 8219808
 	end
 
 LilycoveCity_LilycoveMuseum_2F_Movement_219861: @ 8219861
-	step_27
+	walk_in_place_fastest_left
 	step_end
 
 LilycoveCity_LilycoveMuseum_2F_Movement_219863: @ 8219863
-	step_01
-	step_14
+	face_up
+	delay_16
 	step_end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219866:: @ 8219866

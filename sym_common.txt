@@ -27,7 +27,7 @@ gBGTilemapBuffers3: @ 3005DA4
     .include "fieldmap.o"
     .include "field_camera.o"
 
-gSelectedMapObject: @ 3005DF0
+gSelectedEventObject: @ 3005DF0
 	.space 0x4
 
 gMenuCallback: @ 3005DF4

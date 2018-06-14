@@ -106,10 +106,10 @@ PetalburgCity_Gym_EventScript_2049A4:: @ 82049A4
 	end
 
 PetalburgCity_Gym_Movement_2049EC: @ 82049EC
-	step_down
-	step_down
-	step_down
-	step_14
+	walk_down
+	walk_down
+	walk_down
+	delay_16
 	step_end
 
 PetalburgCity_Gym_EventScript_2049F1:: @ 82049F1
@@ -565,218 +565,218 @@ PetalburgCity_Gym_EventScript_20506C:: @ 820506C
 	return
 
 PetalburgCity_Gym_Movement_20507E: @ 820507E
-	step_down
-	step_down
-	step_left
-	step_left
-	step_down
-	step_down
-	step_26
-	step_13
-	step_1d
-	step_54
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	delay_8
+	walk_in_place_down
+	set_invisible
 	step_end
 
 PetalburgCity_Gym_Movement_205089: @ 8205089
-	step_down
-	step_down
-	step_left
-	step_left
-	step_down
-	step_down
-	step_26
-	step_13
-	step_1d
-	step_54
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	delay_8
+	walk_in_place_down
+	set_invisible
 	step_end
 
 PetalburgCity_Gym_Movement_205094: @ 8205094
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_26
-	step_13
-	step_1d
-	step_54
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	delay_8
+	walk_in_place_down
+	set_invisible
 	step_end
 
 PetalburgCity_Gym_Movement_2050A1: @ 82050A1
-	step_14
-	step_down
-	step_down
-	step_left
-	step_left
-	step_down
-	step_down
+	delay_16
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 PetalburgCity_Gym_Movement_2050A9: @ 82050A9
-	step_14
-	step_down
-	step_down
-	step_left
-	step_down
-	step_down
-	step_down
+	delay_16
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 PetalburgCity_Gym_Movement_2050B1: @ 82050B1
-	step_14
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 PetalburgCity_Gym_Movement_2050BB: @ 82050BB
-	step_up
-	step_13
-	step_28
-	step_13
-	step_27
-	step_14
-	step_26
+	walk_up
+	delay_8
+	walk_in_place_fastest_right
+	delay_8
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_up
 	step_end
 
 PetalburgCity_Gym_Movement_2050C3: @ 82050C3
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_28
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 PetalburgCity_Gym_Movement_2050CA: @ 82050CA
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 PetalburgCity_Gym_Movement_2050D0: @ 82050D0
-	step_right
-	step_right
-	step_up
-	step_up
-	step_right
-	step_right
-	step_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 PetalburgCity_Gym_Movement_2050D8: @ 82050D8
-	step_26
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_13
-	step_25
+	walk_in_place_fastest_up
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_down
 	step_end
 
 PetalburgCity_Gym_Movement_2050E1: @ 82050E1
-	step_14
-	step_up
-	step_14
-	step_13
-	step_up
-	step_right
-	step_up
-	step_up
-	step_27
+	delay_16
+	walk_up
+	delay_16
+	delay_8
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 PetalburgCity_Gym_Movement_2050EB: @ 82050EB
-	step_14
-	step_up
-	step_14
-	step_13
-	step_up
-	step_up
+	delay_16
+	walk_up
+	delay_16
+	delay_8
+	walk_up
+	walk_up
 	step_end
 
 PetalburgCity_Gym_Movement_2050F2: @ 82050F2
-	step_down
-	step_down
-	step_down
-	step_down
-	step_26
-	step_14
-	step_1d
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_down
 	step_end
 
 PetalburgCity_Gym_Movement_2050FA: @ 82050FA
-	step_down
-	step_down
-	step_right
-	step_down
-	step_26
-	step_14
-	step_1d
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_down
 	step_end
 
 PetalburgCity_Gym_Movement_205102: @ 8205102
-	step_down
-	step_down
-	step_down
-	step_26
-	step_14
-	step_1d
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_down
 	step_end
 
 PetalburgCity_Gym_Movement_205109: @ 8205109
-	step_14
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
-	step_13
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	step_end
 
 PetalburgCity_Gym_Movement_205111: @ 8205111
-	step_14
-	step_14
-	step_right
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_13
+	delay_16
+	delay_16
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	step_end
 
 PetalburgCity_Gym_Movement_20511B: @ 820511B
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
-	step_down
-	step_13
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	step_end
 
 PetalburgCity_Gym_Movement_205123: @ 8205123
-	step_25
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
-	step_right
-	step_down
-	step_13
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	delay_8
 	step_end
 
 PetalburgCity_Gym_EventScript_20512D:: @ 820512D

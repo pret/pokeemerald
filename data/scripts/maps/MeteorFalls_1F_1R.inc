@@ -92,130 +92,130 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	end
 
 MeteorFalls_1F_1R_Movement_22BEC0: @ 822BEC0
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BEC4: @ 822BEC4
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BECE: @ 822BECE
-	step_16
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BED9: @ 822BED9
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BEE0: @ 822BEE0
-	step_14
-	step_14
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	delay_16
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BEE8: @ 822BEE8
-	step_14
-	step_14
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	delay_16
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BEF0: @ 822BEF0
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BEF8: @ 822BEF8
-	step_right
-	step_right
-	step_up
-	step_up
-	step_27
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BEFE: @ 822BEFE
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BF08: @ 822BF08
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BF0D: @ 822BF0D
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BF18: @ 822BF18
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 MeteorFalls_1F_1R_Movement_22BF1D: @ 822BF1D
-	step_25
-	step_12
-	step_28
-	step_40
-	step_left
-	step_41
-	step_03
+	walk_in_place_fastest_down
+	delay_4
+	walk_in_place_fastest_right
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
+	face_right
 	step_end
 
 MeteorFalls_1F_1R_EventScript_22BF25:: @ 822BF25

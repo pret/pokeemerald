@@ -202,23 +202,23 @@ BattleFrontier_OutsideWest_EventScript_23D61E:: @ 823D61E
 	return
 
 BattleFrontier_OutsideWest_Movement_23D629: @ 823D629
-	step_25
-	step_25
+	walk_in_place_fastest_down
+	walk_in_place_fastest_down
 	step_end
 
 BattleFrontier_OutsideWest_Movement_23D62C: @ 823D62C
-	step_26
-	step_26
+	walk_in_place_fastest_up
+	walk_in_place_fastest_up
 	step_end
 
 BattleFrontier_OutsideWest_Movement_23D62F: @ 823D62F
-	step_28
-	step_28
+	walk_in_place_fastest_right
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_OutsideWest_Movement_23D632: @ 823D632
-	step_27
-	step_27
+	walk_in_place_fastest_left
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_OutsideWest_EventScript_23D635:: @ 823D635

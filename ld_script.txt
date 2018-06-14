@@ -92,11 +92,9 @@ SECTIONS {
         src/field_camera.o(.text);
         src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
-        src/field_map_obj.o(.text);
-        asm/field_ground_effect.o(.text);
-        src/field_map_obj_helpers.o(.text);
+        src/event_object_movement.o(.text);
         src/field_message_box.o(.text);
-        src/map_obj_lock.o(.text);
+        src/event_obj_lock.o(.text);
         src/text_window.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);
@@ -397,9 +395,7 @@ SECTIONS {
         src/metatile_behavior.o(.rodata);
         src/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
-        data/field_map_obj.o(.rodata);
-        data/field_ground_effect.o(.rodata);
-        data/map_obj_8097404.o(.rodata);
+        src/event_object_movement.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);

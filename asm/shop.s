@@ -1277,8 +1277,8 @@ BuyMenuDrawGraphics: @ 80E0524
 @ void BuyMenuDrawMapGraphics()
 BuyMenuDrawMapGraphics: @ 80E0570
 	push {lr}
-	bl BuyMenuCollectFieldObjectData
-	bl BuyMenuDrawFieldObjects
+	bl BuyMenuCollectEventObjectData
+	bl BuyMenuDrawEventObjects
 	bl BuyMenuDrawMapBg
 	pop {r0}
 	bx r0
@@ -1525,9 +1525,9 @@ BuyMenuDrawMapMetatileLayer: @ 80E0734
 	bx lr
 	thumb_func_end BuyMenuDrawMapMetatileLayer
 
-	thumb_func_start BuyMenuCollectFieldObjectData
-@ void BuyMenuCollectFieldObjectData()
-BuyMenuCollectFieldObjectData: @ 80E075C
+	thumb_func_start BuyMenuCollectEventObjectData
+@ void BuyMenuCollectEventObjectData()
+BuyMenuCollectEventObjectData: @ 80E075C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1584,7 +1584,7 @@ _080E07AA:
 	lsls r1, 16
 	asrs r1, 16
 	str r3, [sp, 0x10]
-	bl GetFieldObjectIdByXY
+	bl GetEventObjectIdByXY
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r3, [sp, 0x10]
@@ -1633,7 +1633,7 @@ _080E07AA:
 	lsrs r0, 24
 	mov r1, r12
 	strh r0, [r1]
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	lsls r0, r6, 3
 	adds r0, r6
 	lsls r0, 2
@@ -1716,11 +1716,11 @@ _080E08DA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end BuyMenuCollectFieldObjectData
+	thumb_func_end BuyMenuCollectEventObjectData
 
-	thumb_func_start BuyMenuDrawFieldObjects
-@ void BuyMenuDrawFieldObjects()
-BuyMenuDrawFieldObjects: @ 80E08F0
+	thumb_func_start BuyMenuDrawEventObjects
+@ void BuyMenuDrawEventObjects()
+BuyMenuDrawEventObjects: @ 80E08F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1730,7 +1730,7 @@ BuyMenuDrawFieldObjects: @ 80E08F0
 	movs r7, 0
 	ldr r0, =gUnknown_02039F70
 	mov r8, r0
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	mov r10, r1
 	ldr r2, =gSprites
 	mov r9, r2
@@ -1753,7 +1753,7 @@ _080E090A:
 	lsls r0, 2
 	add r0, r10
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetEventObjectGraphicsInfo
 	mov r4, r8
 	ldr r3, [r4]
 	ldr r2, =0x00002010
@@ -1792,7 +1792,7 @@ _080E090A:
 	str r0, [sp]
 	adds r0, r4, 0
 	ldr r1, =SpriteCallbackDummy
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
@@ -1801,7 +1801,7 @@ _080E090A:
 	mov r3, r8
 	ldr r0, [r3]
 	adds r0, r1
-	bl BuyMenuCheckIfFieldObjectOverlapsMenuBg
+	bl BuyMenuCheckIfEventObjectOverlapsMenuBg
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1850,10 +1850,10 @@ _080E09D8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end BuyMenuDrawFieldObjects
+	thumb_func_end BuyMenuDrawEventObjects
 
-	thumb_func_start BuyMenuCheckIfFieldObjectOverlapsMenuBg
-BuyMenuCheckIfFieldObjectOverlapsMenuBg: @ 80E0A14
+	thumb_func_start BuyMenuCheckIfEventObjectOverlapsMenuBg
+BuyMenuCheckIfEventObjectOverlapsMenuBg: @ 80E0A14
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x2
@@ -1877,7 +1877,7 @@ _080E0A3A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end BuyMenuCheckIfFieldObjectOverlapsMenuBg
+	thumb_func_end BuyMenuCheckIfEventObjectOverlapsMenuBg
 
 	thumb_func_start BuyMenuCopyMenuBgToBg1TilemapBuffer
 @ void BuyMenuCopyMenuBgToBg1TilemapBuffer()

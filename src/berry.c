@@ -8,11 +8,11 @@
 #include "event_data.h"
 #include "fieldmap.h"
 
-extern u8 FieldObjectGetBerryTreeId(u8 mapObjectId);
+extern u8 EventObjectGetBerryTreeId(u8 eventObjectId);
 extern void sub_8092EF0(u8 mapId, u8 mapNumber, u8 mapGroup);
 extern void CB2_ChooseBerry(void);
-extern const u8* GetFieldObjectScriptPointerForComparison(void);
-extern bool8 sub_8092E9C(u8, u8, u8);
+extern const u8* GetEventObjectScriptPointerForComparison(void);
+extern bool8 IsBerryTreeSparkling(u8, u8, u8);
 
 extern u16 gSpecialVar_ItemId;
 
@@ -904,9 +904,9 @@ struct BerryTree *GetBerryTreeInfo(u8 id)
     return &gSaveBlock1Ptr->berryTrees[id];
 }
 
-bool32 FieldObjectInteractionWaterBerryTree(void)
+bool32 EventObjectInteractionWaterBerryTree(void)
 {
-    struct BerryTree *tree = GetBerryTreeInfo(FieldObjectGetBerryTreeId(gSelectedMapObject));
+    struct BerryTree *tree = GetBerryTreeInfo(EventObjectGetBerryTreeId(gSelectedEventObject));
 
     switch (tree->stage)
     {
@@ -930,8 +930,8 @@ bool32 FieldObjectInteractionWaterBerryTree(void)
 
 bool8 IsPlayerFacingPlantedBerryTree(void)
 {
-    if (GetFieldObjectScriptPointerForComparison() == BerryTreeScript
-     && GetStageByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject)) == 0)
+    if (GetEventObjectScriptPointerForComparison() == BerryTreeScript
+     && GetStageByBerryTreeId(EventObjectGetBerryTreeId(gSelectedEventObject)) == 0)
         return TRUE;
     else
         return FALSE;
@@ -939,10 +939,10 @@ bool8 IsPlayerFacingPlantedBerryTree(void)
 
 bool8 TryToWaterBerryTree(void)
 {
-    if (GetFieldObjectScriptPointerForComparison() != BerryTreeScript)
+    if (GetEventObjectScriptPointerForComparison() != BerryTreeScript)
         return FALSE;
     else
-        return FieldObjectInteractionWaterBerryTree();
+        return EventObjectInteractionWaterBerryTree();
 }
 
 void ClearBerryTrees(void)
@@ -1152,7 +1152,7 @@ u16 GetStageDurationByBerryType(u8 berry)
     return GetBerryInfo(berry)->stageDuration * 60;
 }
 
-void FieldObjectInteractionGetBerryTreeData(void)
+void EventObjectInteractionGetBerryTreeData(void)
 {
     u8 id;
     u8 berry;
@@ -1160,13 +1160,13 @@ void FieldObjectInteractionGetBerryTreeData(void)
     u8 group;
     u8 num;
 
-    id = FieldObjectGetBerryTreeId(gSelectedMapObject);
+    id = EventObjectGetBerryTreeId(gSelectedEventObject);
     berry = GetBerryTypeByBerryTreeId(id);
     ResetBerryTreeSparkleFlag(id);
     unk = gSpecialVar_LastTalked;
     num = gSaveBlock1Ptr->location.mapNum;
     group = gSaveBlock1Ptr->location.mapGroup;
-    if (sub_8092E9C(unk, num, group))
+    if (IsBerryTreeSparkling(unk, num, group))
         gSpecialVar_0x8004 = 0xFF;
     else
         gSpecialVar_0x8004 = GetStageByBerryTreeId(id);
@@ -1175,15 +1175,15 @@ void FieldObjectInteractionGetBerryTreeData(void)
     GetBerryCountStringByBerryType(berry, gStringVar1, gSpecialVar_0x8006);
 }
 
-void FieldObjectInteractionGetBerryName(void)
+void EventObjectInteractionGetBerryName(void)
 {
-    u8 berryType = GetBerryTypeByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject));
+    u8 berryType = GetBerryTypeByBerryTreeId(EventObjectGetBerryTreeId(gSelectedEventObject));
     GetBerryNameByBerryType(berryType, gStringVar1);
 }
 
-void FieldObjectInteractionGetBerryCountString(void)
+void EventObjectInteractionGetBerryCountString(void)
 {
-    u8 treeId = FieldObjectGetBerryTreeId(gSelectedMapObject);
+    u8 treeId = EventObjectGetBerryTreeId(gSelectedEventObject);
     u8 berry = GetBerryTypeByBerryTreeId(treeId);
     u8 count = GetBerryCountByBerryTreeId(treeId);
     GetBerryCountStringByBerryType(berry, gStringVar1, count);
@@ -1194,25 +1194,25 @@ void Bag_ChooseBerry(void)
     SetMainCallback2(CB2_ChooseBerry);
 }
 
-void FieldObjectInteractionPlantBerryTree(void)
+void EventObjectInteractionPlantBerryTree(void)
 {
     u8 berry = ItemIdToBerryType(gSpecialVar_ItemId);
 
-    PlantBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject), berry, 1, TRUE);
-    FieldObjectInteractionGetBerryTreeData();
+    PlantBerryTree(EventObjectGetBerryTreeId(gSelectedEventObject), berry, 1, TRUE);
+    EventObjectInteractionGetBerryTreeData();
 }
 
-void FieldObjectInteractionPickBerryTree(void)
+void EventObjectInteractionPickBerryTree(void)
 {
-    u8 id = FieldObjectGetBerryTreeId(gSelectedMapObject);
+    u8 id = EventObjectGetBerryTreeId(gSelectedEventObject);
     u8 berry = GetBerryTypeByBerryTreeId(id);
 
     gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
 }
 
-void FieldObjectInteractionRemoveBerryTree(void)
+void EventObjectInteractionRemoveBerryTree(void)
 {
-    RemoveBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject));
+    RemoveBerryTree(EventObjectGetBerryTreeId(gSelectedEventObject));
     sub_8092EF0(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
@@ -1236,14 +1236,14 @@ void ResetBerryTreeSparkleFlags(void)
     top = cam_top + 3;
     right = cam_left + 14;
     bottom = top + 8;
-    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
-        if (gMapObjects[i].active && gMapObjects[i].animPattern == 12)
+        if (gEventObjects[i].active && gEventObjects[i].movementType == 12)
         {
-            cam_left = gMapObjects[i].coords2.x;
-            cam_top = gMapObjects[i].coords2.y;
+            cam_left = gEventObjects[i].currentCoords.x;
+            cam_top = gEventObjects[i].currentCoords.y;
             if (left <= cam_left && cam_left <= right && top <= cam_top && cam_top <= bottom)
-                ResetBerryTreeSparkleFlag(gMapObjects[i].trainerRange_berryTreeId);
+                ResetBerryTreeSparkleFlag(gEventObjects[i].trainerRange_berryTreeId);
         }
     }
 }

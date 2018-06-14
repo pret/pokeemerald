@@ -457,65 +457,65 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A18B:: @ 825A18B
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A19A: @ 825A19A
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1A0: @ 825A1A0
-	step_up
-	step_left
-	step_left
-	step_up
-	step_up
+	walk_up
+	walk_left
+	walk_left
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1A6: @ 825A1A6
-	step_up
-	step_right
-	step_right
-	step_up
-	step_up
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1AC: @ 825A1AC
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_00
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	face_down
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1B3: @ 825A1B3
-	step_left
-	step_left
-	step_up
-	step_up
-	step_54
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1B9: @ 825A1B9
-	step_right
-	step_right
-	step_up
-	step_up
-	step_54
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1BF: @ 825A1BF
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1C3: @ 825A1C3
-	step_right
-	step_right
-	step_right
-	step_00
+	walk_right
+	walk_right
+	walk_right
+	face_down
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_25A1C8: @ 825A1C8

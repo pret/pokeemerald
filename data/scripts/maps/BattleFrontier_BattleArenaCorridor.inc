@@ -25,63 +25,63 @@ BattleFrontier_BattleArenaCorridor_EventScript_2573C9:: @ 82573C9
 	end
 
 BattleFrontier_BattleArenaCorridor_Movement_257417: @ 8257417
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Movement_25742C: @ 825742C
-	step_right
-	step_54
+	walk_right
+	set_invisible
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Movement_25742F: @ 825742F
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Movement_257444: @ 8257444
-	step_27
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Movement_257446: @ 8257446
-	step_up
-	step_25
+	walk_up
+	walk_in_place_fastest_down
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Text_257449: @ 8257449

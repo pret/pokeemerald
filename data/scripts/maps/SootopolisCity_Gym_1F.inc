@@ -82,7 +82,7 @@ SootopolisCity_Gym_1F_EventScript_224F29:: @ 8224F29
 	end
 
 SootopolisCity_Gym_1F_Movement_224F42: @ 8224F42
-	step_54
+	set_invisible
 	step_end
 
 SootopolisCity_Gym_1F_EventScript_224F44:: @ 8224F44

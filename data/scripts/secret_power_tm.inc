@@ -77,31 +77,31 @@ Route111_EventScript_276680:: @ 8276680
 	end
 
 Route111_Movement_27668A: @ 827668A
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Route111_Movement_276696: @ 8276696
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 EventScript_2766A2:: @ 82766A2

@@ -15,14 +15,14 @@ Route121_SafariZoneEntrance_EventScript_22BBCB:: @ 822BBCB
 	end
 
 Route121_SafariZoneEntrance_Movement_22BBDD: @ 822BBDD
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route121_SafariZoneEntrance_EventScript_22BBE6:: @ 822BBE6
@@ -122,18 +122,18 @@ Route121_SafariZoneEntrance_EventScript_22BD06:: @ 822BD06
 	end
 
 Route121_SafariZoneEntrance_Movement_22BD16: @ 822BD16
-	step_right
+	walk_right
 	step_end
 
 Route121_SafariZoneEntrance_Movement_22BD18: @ 822BD18
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_14
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	delay_16
 	step_end
 
 Route121_SafariZoneEntrance_EventScript_22BD21:: @ 822BD21

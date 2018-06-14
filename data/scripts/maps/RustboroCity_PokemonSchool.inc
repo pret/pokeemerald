@@ -113,55 +113,55 @@ RustboroCity_PokemonSchool_EventScript_213FFB:: @ 8213FFB
 	end
 
 RustboroCity_PokemonSchool_Movement_214010: @ 8214010
-	step_left
-	step_down
-	step_down
-	step_right
-	step_25
-	step_14
-	step_14
-	step_14
-	step_down
-	step_27
-	step_14
-	step_14
-	step_right
-	step_14
-	step_14
-	step_13
-	step_up
-	step_left
-	step_left
-	step_up
-	step_up
-	step_right
+	walk_left
+	walk_down
+	walk_down
+	walk_right
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
+	walk_right
+	delay_16
+	delay_16
+	delay_8
+	walk_up
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_right
 	step_end
 
 RustboroCity_PokemonSchool_Movement_214027: @ 8214027
-	step_right
-	step_right
-	step_down
-	step_down
-	step_left
-	step_left
-	step_25
-	step_14
-	step_14
-	step_14
-	step_down
-	step_27
-	step_14
-	step_14
-	step_right
-	step_14
-	step_14
-	step_13
-	step_up
-	step_right
-	step_up
-	step_up
-	step_left
-	step_left
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
+	walk_right
+	delay_16
+	delay_16
+	delay_8
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_left
+	walk_left
 	step_end
 
 RustboroCity_PokemonSchool_EventScript_214040:: @ 8214040

@@ -63,12 +63,12 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A16:: @ 8227A16
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_227A1F: @ 8227A1F
-	step_down
+	walk_down
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_227A21: @ 8227A21
-	step_right
-	step_25
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227A24:: @ 8227A24
@@ -152,31 +152,31 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227B22:: @ 8227B22
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_227B34: @ 8227B34
-	step_14
-	step_up
-	step_up
+	delay_16
+	walk_up
+	walk_up
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_227B38: @ 8227B38
-	step_14
-	step_right
-	step_up
+	delay_16
+	walk_right
+	walk_up
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_227B3C: @ 8227B3C
-	step_14
-	step_left
-	step_up
+	delay_16
+	walk_left
+	walk_up
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_227B40: @ 8227B40
-	step_left
-	step_28
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_Movement_227B43: @ 8227B43
-	step_right
-	step_27
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227B46: @ 8227B46

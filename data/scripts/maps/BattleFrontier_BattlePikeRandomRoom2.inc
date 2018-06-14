@@ -24,8 +24,8 @@ BattleFrontier_BattlePikeRandomRoom2_EventScript_25E3A7:: @ 825E3A7
 	end
 
 BattleFrontier_BattlePikeRandomRoom2_Movement_25E3DB: @ 825E3DB
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 BattleFrontier_BattlePikeRandomRoom2_MapScript2_25E3DE: @ 825E3DE

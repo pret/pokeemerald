@@ -253,11 +253,11 @@ Route110_TrickHouseEnd_EventScript_26B041:: @ 826B041
 	end
 
 Route110_TrickHouseEnd_Movement_26B089: @ 826B089
-	step_down
+	walk_down
 	step_end
 
 Route110_TrickHouseEnd_Movement_26B08B: @ 826B08B
-	step_48
+	jump_in_place_left
 	step_end
 
 Route110_TrickHouseEnd_Text_26B08D: @ 826B08D

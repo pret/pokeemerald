@@ -261,32 +261,32 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105:: @ 825B105
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B: @ 825B17B
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_03
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	face_right
 	step_end
 
 BattleFrontier_BattleFactoryBattleRoom_Movement_25B182: @ 825B182
-	step_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleFactoryBattleRoom_Movement_25B184: @ 825B184
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_02
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	face_left
 	step_end
 
 BattleFrontier_BattleFactoryBattleRoom_Movement_25B18B: @ 825B18B
-	step_up
-	step_up
-	step_up
-	step_02
+	walk_up
+	walk_up
+	walk_up
+	face_left
 	step_end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B190:: @ 825B190

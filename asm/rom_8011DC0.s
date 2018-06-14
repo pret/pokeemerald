@@ -10551,7 +10551,7 @@ _080181BC:
 sub_80181CC: @ 80181CC
 	push {lr}
 	bl ScriptContext2_Enable
-	bl ScriptFreezeMapObjects
+	bl ScriptFreezeEventObjects
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80181CC
@@ -13578,7 +13578,7 @@ sub_8019AB8: @ 8019AB8
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl RemoveFieldObjectByLocalIdAndMap
+	bl RemoveEventObjectByLocalIdAndMap
 	pop {r0}
 	bx r0
 	.pool
@@ -13597,7 +13597,7 @@ sub_8019AD8: @ 8019AD8
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B30
@@ -13606,16 +13606,16 @@ sub_8019AD8: @ 8019AD8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B30
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B30
@@ -13643,7 +13643,7 @@ sub_8019B3C: @ 8019B3C
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B9C
@@ -13652,10 +13652,10 @@ sub_8019B3C: @ 8019B3C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B84
@@ -13668,11 +13668,11 @@ _08019B84:
 	cmp r0, 0
 	bne _08019B96
 	adds r0, r4, 0
-	bl npc_sync_anim_pause_bits
+	bl UnfreezeEventObject
 	b _08019B9C
 _08019B96:
 	adds r0, r4, 0
-	bl FreezeMapObject
+	bl FreezeEventObject
 _08019B9C:
 	movs r0, 0x1
 _08019B9E:
@@ -14619,7 +14619,7 @@ sub_801A2A8: @ 801A2A8
 	b _0801A396
 _0801A2C4:
 	ldr r4, =gUnknown_082F076A
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4

@@ -103,25 +103,25 @@ EverGrandeCity_PokemonLeague_1F_EventScript_2296BB:: @ 82296BB
 	end
 
 EverGrandeCity_PokemonLeague_1F_Movement_2296DA: @ 82296DA
-	step_down
-	step_left
-	step_26
+	walk_down
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Movement_2296DE: @ 82296DE
-	step_down
-	step_right
-	step_26
+	walk_down
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Movement_2296E2: @ 82296E2
-	step_left
-	step_25
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Movement_2296E5: @ 82296E5
-	step_right
-	step_25
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Text_2296E8: @ 82296E8

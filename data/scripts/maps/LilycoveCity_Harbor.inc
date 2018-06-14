@@ -454,16 +454,16 @@ LilycoveCity_Harbor_EventScript_21E626:: @ 821E626
 	end
 
 LilycoveCity_Harbor_Movement_21E630: @ 821E630
-	step_right
-	step_26
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LilycoveCity_Harbor_Movement_21E633: @ 821E633
-	step_up
+	walk_up
 	step_end
 
 LilycoveCity_Harbor_Movement_21E635: @ 821E635
-	step_up
+	walk_up
 	step_end
 
 LilycoveCity_Harbor_EventScript_21E637:: @ 821E637
@@ -491,16 +491,16 @@ LilycoveCity_Harbor_EventScript_21E661:: @ 821E661
 	return
 
 LilycoveCity_Harbor_Movement_21E66C: @ 821E66C
-	step_28
-	step_40
-	step_left
-	step_41
+	walk_in_place_fastest_right
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
 	step_end
 
 LilycoveCity_Harbor_Movement_21E671: @ 821E671
-	step_40
-	step_down
-	step_41
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
 	step_end
 
 LilycoveCity_Harbor_EventScript_21E675:: @ 821E675
@@ -538,43 +538,43 @@ LilycoveCity_Harbor_EventScript_21E6BA:: @ 821E6BA
 	return
 
 LilycoveCity_Harbor_Movement_21E6D3: @ 821E6D3
-	step_26
-	step_13
-	step_54
+	walk_in_place_fastest_up
+	delay_8
+	set_invisible
 	step_end
 
 LilycoveCity_Harbor_Movement_21E6D7: @ 821E6D7
-	step_14
-	step_up
-	step_14
-	step_54
+	delay_16
+	walk_up
+	delay_16
+	set_invisible
 	step_end
 
 LilycoveCity_Harbor_Movement_21E6DC: @ 821E6DC
-	step_14
-	step_14
-	step_14
-	step_right
-	step_26
-	step_14
-	step_54
+	delay_16
+	delay_16
+	delay_16
+	walk_right
+	walk_in_place_fastest_up
+	delay_16
+	set_invisible
 	step_end
 
 LilycoveCity_Harbor_Movement_21E6E4: @ 821E6E4
-	step_14
-	step_right
-	step_26
-	step_14
-	step_54
+	delay_16
+	walk_right
+	walk_in_place_fastest_up
+	delay_16
+	set_invisible
 	step_end
 
 LilycoveCity_Harbor_Movement_21E6EA: @ 821E6EA
-	step_14
-	step_14
-	step_14
-	step_up
-	step_14
-	step_54
+	delay_16
+	delay_16
+	delay_16
+	walk_up
+	delay_16
+	set_invisible
 	step_end
 
 LilycoveCity_Harbor_Text_21E6F1: @ 821E6F1

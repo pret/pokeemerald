@@ -1,18 +1,18 @@
-SlateportCity_OceanicMuseum_1F_MapObjects: @ 852F670
-	object_event 1, MAP_OBJ_GFX_BEAUTY, 0, 0, 7, 7, 3, 10, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AD96, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 18, 5, 3, 7, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE5F, 883, 0, 0
-	object_event 3, MAP_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 12, 2, 3, 7, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE68, 883, 0, 0
-	object_event 4, MAP_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 2, 8, 3, 7, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE56, 883, 0, 0
-	object_event 5, MAP_OBJ_GFX_AQUA_MEMBER_F, 0, 0, 3, 4, 3, 9, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE4D, 883, 0, 0
-	object_event 6, MAP_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 14, 4, 3, 10, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE71, 883, 0, 0
-	object_event 7, MAP_OBJ_GFX_BEAUTY, 0, 0, 12, 7, 3, 9, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AD96, 0, 0, 0
-	object_event 8, MAP_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 8, 3, 3, 8, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE7A, 883, 0, 0
-	object_event 9, MAP_OBJ_GFX_WOMAN_7, 0, 0, 4, 2, 3, 1, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AED4, 961, 0, 0
-	object_event 10, MAP_OBJ_GFX_MANIAC, 0, 0, 10, 2, 3, 7, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEDD, 961, 0, 0
-	object_event 11, MAP_OBJ_GFX_MAN_3, 0, 0, 17, 7, 3, 10, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEE6, 961, 0, 0
-	object_event 12, MAP_OBJ_GFX_LITTLE_GIRL_2, 0, 0, 18, 8, 3, 7, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEEF, 961, 0, 0
-	object_event 13, MAP_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 9, 4, 3, 21, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEF8, 965, 0, 0
-	object_event 14, MAP_OBJ_GFX_REPORTER_M, 0, 0, 7, 4, 3, 1, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_28C883, 961, 0, 0
+SlateportCity_OceanicMuseum_1F_EventObjects: @ 852F670
+	object_event 1, EVENT_OBJ_GFX_BEAUTY, 0, 0, 7, 7, 3, 10, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AD96, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 18, 5, 3, 7, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE5F, 883, 0, 0
+	object_event 3, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 12, 2, 3, 7, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE68, 883, 0, 0
+	object_event 4, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 2, 8, 3, 7, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE56, 883, 0, 0
+	object_event 5, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 0, 3, 4, 3, 9, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE4D, 883, 0, 0
+	object_event 6, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 14, 4, 3, 10, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE71, 883, 0, 0
+	object_event 7, EVENT_OBJ_GFX_BEAUTY, 0, 0, 12, 7, 3, 9, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AD96, 0, 0, 0
+	object_event 8, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 8, 3, 3, 8, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE7A, 883, 0, 0
+	object_event 9, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 4, 2, 3, 1, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AED4, 961, 0, 0
+	object_event 10, EVENT_OBJ_GFX_MANIAC, 0, 0, 10, 2, 3, 7, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEDD, 961, 0, 0
+	object_event 11, EVENT_OBJ_GFX_MAN_3, 0, 0, 17, 7, 3, 10, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEE6, 961, 0, 0
+	object_event 12, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 0, 18, 8, 3, 7, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEEF, 961, 0, 0
+	object_event 13, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 9, 4, 3, 21, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEF8, 965, 0, 0
+	object_event 14, EVENT_OBJ_GFX_REPORTER_M, 0, 0, 7, 4, 3, 1, 17, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_28C883, 961, 0, 0
 
 SlateportCity_OceanicMuseum_1F_MapWarps: @ 852F7C0
 	warp_def 9, 8, 0, 5, SLATEPORT_CITY
@@ -39,5 +39,5 @@ SlateportCity_OceanicMuseum_1F_MapBGEvents: @ 852F7F8
 	bg_event 17, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AECB
 
 SlateportCity_OceanicMuseum_1F_MapEvents:: @ 852F894
-	map_events SlateportCity_OceanicMuseum_1F_MapObjects, SlateportCity_OceanicMuseum_1F_MapWarps, SlateportCity_OceanicMuseum_1F_MapCoordEvents, SlateportCity_OceanicMuseum_1F_MapBGEvents
+	map_events SlateportCity_OceanicMuseum_1F_EventObjects, SlateportCity_OceanicMuseum_1F_MapWarps, SlateportCity_OceanicMuseum_1F_MapCoordEvents, SlateportCity_OceanicMuseum_1F_MapBGEvents
 

@@ -59,20 +59,20 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8:: @ 8227EE8
 	return
 
 SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3: @ 8227EF3
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
 	step_end
 
 SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9: @ 8227EF9
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_13
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_8
 	step_end
 

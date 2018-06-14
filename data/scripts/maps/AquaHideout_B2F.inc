@@ -53,17 +53,17 @@ AquaHideout_B2F_EventScript_233E25:: @ 8233E25
 	end
 
 AquaHideout_B2F_Movement_233E80: @ 8233E80
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 AquaHideout_B2F_Movement_233E85: @ 8233E85
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 AquaHideout_B2F_EventScript_233E8A:: @ 8233E8A

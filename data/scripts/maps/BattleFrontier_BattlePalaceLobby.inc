@@ -345,18 +345,18 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DC41:: @ 824DC41
 	return
 
 BattleFrontier_BattlePalaceLobby_Movement_24DC47: @ 824DC47
-	step_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePalaceLobby_Movement_24DC49: @ 824DC49
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattlePalaceLobby_Movement_24DC4C: @ 824DC4C
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DC50:: @ 824DC50

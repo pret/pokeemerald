@@ -33,36 +33,36 @@ Route121_EventScript_1F5E18:: @ 81F5E18
 	end
 
 Route121_Movement_1F5E59: @ 81F5E59
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Route121_Movement_1F5E62: @ 81F5E62
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Route121_Movement_1F5E6B: @ 81F5E6B
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Route121_EventScript_1F5E74:: @ 81F5E74

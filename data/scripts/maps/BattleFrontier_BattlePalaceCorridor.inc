@@ -80,54 +80,54 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F5AF:: @ 824F5AF
 	return
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5B8: @ 824F5B8
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5BD: @ 824F5BD
-	step_up
-	step_up
-	step_left
-	step_left
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5C4: @ 824F5C4
-	step_up
-	step_up
-	step_up
-	step_left
-	step_left
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5CB: @ 824F5CB
-	step_up
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5D2: @ 824F5D2
-	step_up
-	step_up
-	step_right
-	step_right
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5D9: @ 824F5D9
-	step_up
+	walk_up
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5DA: @ 824F5DA
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattlePalaceCorridor_Text_24F5DD: @ 824F5DD

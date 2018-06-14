@@ -46,21 +46,21 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C801:: @ 825C801
 	end
 
 BattleFrontier_BattlePikeCorridor_Movement_25C80B: @ 825C80B
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 BattleFrontier_BattlePikeCorridor_Movement_25C80E: @ 825C80E
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 BattleFrontier_BattlePikeCorridor_Movement_25C812: @ 825C812
-	step_up
-	step_up
-	step_left
-	step_00
+	walk_up
+	walk_up
+	walk_left
+	face_down
 	step_end
 
 BattleFrontier_BattlePikeCorridor_Text_25C817: @ 825C817

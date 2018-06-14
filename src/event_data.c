@@ -190,7 +190,7 @@ bool8 VarSet(u16 id, u16 value)
     return TRUE;
 }
 
-u8 VarGetFieldObjectGraphicsId(u8 id)
+u8 VarGetEventObjectGraphicsId(u8 id)
 {
     return VarGet(0x4010 + id);
 }

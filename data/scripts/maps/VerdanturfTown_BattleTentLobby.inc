@@ -258,20 +258,20 @@ VerdanturfTown_BattleTentLobby_EventScript_201A41:: @ 8201A41
 	return
 
 VerdanturfTown_BattleTentLobby_Movement_201A70: @ 8201A70
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 VerdanturfTown_BattleTentLobby_Movement_201A74: @ 8201A74
-	step_up
-	step_54
+	walk_up
+	set_invisible
 	step_end
 
 VerdanturfTown_BattleTentLobby_Movement_201A77: @ 8201A77
-	step_up
-	step_up
-	step_54
+	walk_up
+	walk_up
+	set_invisible
 	step_end
 
 VerdanturfTown_BattleTentLobby_EventScript_201A7B:: @ 8201A7B

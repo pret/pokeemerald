@@ -946,7 +946,7 @@ EventScript_27142F:: @ 827142F
 	return
 
 Movement_27143A: @ 827143A
-	step_59
+	reveal_trainer
 	step_end
 
 EventScript_ShowTrainerIntroMsg:: @ 827143C
@@ -1523,8 +1523,8 @@ OldaleTown_PokemonCenter_1F_EventScript_271AC5:: @ 8271AC5
 	end
 
 OldaleTown_PokemonCenter_1F_Movement_271AD0: @ 8271AD0
-	step_4f
-	step_12
+	nurse_joy_bow
+	delay_4
 	step_end
 
 Std_ObtainItem:: @ 8271AD3
@@ -2329,13 +2329,13 @@ SlateportCity_Harbor_EventScript_2721E2:: @ 82721E2
 	return
 
 SlateportCity_Harbor_Movement_2721F0: @ 82721F0
-	slow_step_right
-	slow_step_right
-	slow_step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_slow_right
+	walk_slow_right
+	walk_slow_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 PetalburgCity_Gym_EventScript_2721F8:: @ 82721F8
@@ -2371,7 +2371,7 @@ EventScript_27222B:: @ 827222B
 	return
 
 Movement_27224E: @ 827224E
-	step_up
+	walk_up
 	step_end
 
 BattleFrontier_OutsideWest_EventScript_272250:: @ 8272250
@@ -2533,27 +2533,27 @@ Route119_EventScript_2723C1:: @ 82723C1
 FortreeCity_Movement_2723C7: @ 82723C7
 Route119_Movement_2723C7: @ 82723C7
 Route120_Movement_2723C7: @ 82723C7
-	step_55
-	step_12
-	step_54
-	step_12
-	step_55
-	step_12
-	step_54
-	step_12
-	step_55
-	step_13
-	step_54
-	step_13
-	step_55
-	step_13
-	step_54
-	step_13
-	step_55
-	step_14
-	step_54
-	step_14
-	step_55
+	set_visible
+	delay_4
+	set_invisible
+	delay_4
+	set_visible
+	delay_4
+	set_invisible
+	delay_4
+	set_visible
+	delay_8
+	set_invisible
+	delay_8
+	set_visible
+	delay_8
+	set_invisible
+	delay_8
+	set_visible
+	delay_16
+	set_invisible
+	delay_16
+	set_visible
 	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2723DD:: @ 82723DD
@@ -2652,7 +2652,7 @@ EverGrandeCity_SidneysRoom_EventScript_27255F:: @ 827255F
 	return
 
 SlateportCity_Movement_272596: @ 8272596
-	step_57
+	emote_question_mark
 	step_end
 
 AquaHideout_B2F_Movement_272598: @ 8272598
@@ -2697,7 +2697,7 @@ SeafloorCavern_Room9_Movement_272598: @ 8272598
 SlateportCity_Movement_272598: @ 8272598
 SlateportCity_OceanicMuseum_1F_Movement_272598: @ 8272598
 SlateportCity_PokemonFanClub_Movement_272598: @ 8272598
-	step_56
+	emote_exclamation_mark
 	step_end
 
 BattleFrontier_BattleTowerBattleRoom_Movement_27259A: @ 827259A
@@ -2738,9 +2738,9 @@ SeafloorCavern_Room9_Movement_27259A: @ 827259A
 SlateportCity_Movement_27259A: @ 827259A
 SlateportCity_OceanicMuseum_1F_Movement_27259A: @ 827259A
 SlateportCity_PokemonFanClub_Movement_27259A: @ 827259A
-	step_14
-	step_14
-	step_14
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 AquaHideout_B2F_Movement_27259E: @ 827259E
@@ -2784,11 +2784,11 @@ SeafloorCavern_Room9_Movement_27259E: @ 827259E
 SlateportCity_Movement_27259E: @ 827259E
 SlateportCity_SternsShipyard_1F_Movement_27259E: @ 827259E
 SootopolisCity_Movement_27259E: @ 827259E
-	step_3e
+	face_player
 	step_end
 
 BattleFrontier_OutsideWest_Movement_2725A0: @ 82725A0
-	step_3f
+	face_away_player
 	step_end
 
 BattleFrontier_Lounge3_Movement_2725A2: @ 82725A2
@@ -2825,7 +2825,7 @@ SlateportCity_OceanicMuseum_2F_Movement_2725A2: @ 82725A2
 SlateportCity_SternsShipyard_1F_Movement_2725A2: @ 82725A2
 SootopolisCity_Movement_2725A2: @ 82725A2
 VerdanturfTown_Movement_2725A2: @ 82725A2
-	step_4e
+	face_original_direction
 	step_end
 
 AquaHideout_B2F_Movement_2725A4: @ 82725A4
@@ -2869,7 +2869,7 @@ SlateportCity_Movement_2725A4: @ 82725A4
 SlateportCity_OceanicMuseum_1F_Movement_2725A4: @ 82725A4
 SlateportCity_OceanicMuseum_2F_Movement_2725A4: @ 82725A4
 SootopolisCity_Movement_2725A4: @ 82725A4
-	step_27
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_BattleTowerCorridor2_Movement_2725A6: @ 82725A6
@@ -2916,7 +2916,7 @@ SlateportCity_Movement_2725A6: @ 82725A6
 SlateportCity_OceanicMuseum_2F_Movement_2725A6: @ 82725A6
 SootopolisCity_MysteryEventsHouse_1F_Movement_2725A6: @ 82725A6
 VerdanturfTown_BattleTentBattleRoom_Movement_2725A6: @ 82725A6
-	step_26
+	walk_in_place_fastest_up
 	step_end
 
 BattleFrontier_BattleFactoryBattleRoom_Movement_2725A8: @ 82725A8
@@ -2959,7 +2959,7 @@ SlateportCity_OceanicMuseum_1F_Movement_2725A8: @ 82725A8
 SlateportCity_OceanicMuseum_2F_Movement_2725A8: @ 82725A8
 SootopolisCity_Movement_2725A8: @ 82725A8
 VerdanturfTown_BattleTentBattleRoom_Movement_2725A8: @ 82725A8
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_OutsideWest_Movement_2725AA: @ 82725AA
@@ -3003,20 +3003,20 @@ SlateportCity_OceanicMuseum_2F_Movement_2725AA: @ 82725AA
 SouthernIsland_Exterior_Movement_2725AA: @ 82725AA
 VerdanturfTown_BattleTentBattleRoom_Movement_2725AA: @ 82725AA
 VictoryRoad_1F_Movement_2725AA: @ 82725AA
-	step_25
+	walk_in_place_fastest_down
 	step_end
 
 RustboroCity_Movement_2725AC: @ 82725AC
-	step_03
+	face_right
 	step_end
 
 RustboroCity_Movement_2725AE: @ 82725AE
-	step_02
+	face_left
 	step_end
 
 BattleFrontier_Mart_Movement_2725B0: @ 82725B0
 MeteorFalls_1F_1R_Movement_2725B0: @ 82725B0
-	step_00
+	face_down
 	step_end
 
 MarineCave_End_Movement_2725B2: @ 82725B2
@@ -3025,51 +3025,51 @@ Route118_Movement_2725B2: @ 82725B2
 SkyPillar_Top_Movement_2725B2: @ 82725B2
 SlateportCity_Movement_2725B2: @ 82725B2
 TerraCave_End_Movement_2725B2: @ 82725B2
-	step_01
+	face_up
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_2725B4: @ 82725B4
 MeteorFalls_1F_1R_Movement_2725B4: @ 82725B4
-	step_1d
+	walk_in_place_down
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Movement_2725B6: @ 82725B6
 BattleFrontier_BattleTowerBattleRoom_Movement_2725B6: @ 82725B6
-	step_1f
+	walk_in_place_left
 	step_end
 
 Route121_Movement_2725B8: @ 82725B8
-	step_20
+	walk_in_place_right
 	step_end
 
 EverGrandeCity_SidneysRoom_Movement_2725BA: @ 82725BA
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_2725C1: @ 82725C1
-	step_up
-	step_up
-	step_up
-	step_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 EverGrandeCity_SidneysRoom_Movement_2725C6: @ 82725C6
-	step_14
-	step_14
+	delay_16
+	delay_16
 	step_end
 
 Route110_TrickHouseEntrance_Movement_2725C9: @ 82725C9
-	step_up
+	walk_up
 	step_end
 
 Movement_2725CB:: @ 82725CB
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 EventScript_2725CE:: @ 82725CE
@@ -4564,8 +4564,8 @@ SecretBase_RedCave1_EventScript_275BAB:: @ 8275BAB
 	end
 
 SecretBase_RedCave1_Movement_275BB4: @ 8275BB4
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 EventScript_275BB7:: @ 8275BB7
@@ -6041,7 +6041,7 @@ gUnknown_082A8350:: @ 82A8350
 	end
 
 GraniteCave_B1F_Movement_2A8369: @ 82A8369
-	step_54
+	set_invisible
 	step_end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A836B:: @ 82A836B
@@ -6549,28 +6549,28 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A89AE:: @ 82A89AE
 	end
 
 LilycoveCity_PokemonCenter_1F_Movement_2A89B8: @ 82A89B8
-	step_03
-	step_13
+	face_right
+	delay_8
 	step_end
 
 LilycoveCity_PokemonCenter_1F_Movement_2A89BB: @ 82A89BB
-	step_02
-	step_13
+	face_left
+	delay_8
 	step_end
 
 LilycoveCity_PokemonCenter_1F_Movement_2A89BE: @ 82A89BE
-	step_00
+	face_down
 	step_end
 
 LilycoveCity_PokemonCenter_1F_Movement_2A89C0: @ 82A89C0
-	step_3e
+	face_player
 	step_end
 
 LilycoveCity_PokemonCenter_1F_Movement_2A89C2: @ 82A89C2
-	step_51
-	step_48
-	step_51
-	step_48
+	disable_jump_landing_ground_effect
+	jump_in_place_left
+	disable_jump_landing_ground_effect
+	jump_in_place_left
 	step_end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A89C7:: @ 82A89C7
@@ -10280,24 +10280,24 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6E93:: @ 82B6E93
 	end
 
 BattleFrontier_BattleTowerLobby_Movement_2B6E94: @ 82B6E94
-	step_18
+	walk_fast_right
 
 BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
-	step_15
-	step_15
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_54
-	step_31
-	step_31
-	step_31
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	set_invisible
+	slide_down
+	slide_down
+	slide_down
 	step_end
 
 gText_082B6EA5:: @ 82B6EA5
@@ -13480,7 +13480,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4271:: @ 82C4271
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A: @ 82C427A
 BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A: @ 82C427A
-	step_54
+	set_invisible
 	step_end
 
 LilycoveCity_ContestLobby_Text_2C427C: @ 82C427C
@@ -14701,7 +14701,7 @@ TrainerHill_Entrance_EventScript_2C83DF:: @ 82C83DF
 	end
 
 TrainerHill_1F_Movement_2C83EE:: @ 82C83EE
-	step_54
+	set_invisible
 	step_end
 
 EventScript_2C83F0:: @ 82C83F0

@@ -457,75 +457,75 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257BA9:: @ 8257BA9
 	return
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BE2: @ 8257BE2
-	step_right
-	step_right
+	walk_right
+	walk_right
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BE4: @ 8257BE4
-	step_right
+	walk_right
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BE5: @ 8257BE5
-	step_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BE7: @ 8257BE7
-	step_left
-	step_left
-	step_28
+	walk_left
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BEB: @ 8257BEB
-	step_26
+	walk_in_place_fastest_up
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BED: @ 8257BED
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BEF: @ 8257BEF
-	step_left
-	step_left
+	walk_left
+	walk_left
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BF1: @ 8257BF1
-	step_left
+	walk_left
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BF2: @ 8257BF2
-	step_left
+	walk_left
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BF4: @ 8257BF4
-	step_17
-	step_17
-	step_17
-	step_17
-	step_17
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257BFA: @ 8257BFA
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257C02: @ 8257C02
-	step_51
-	step_46
+	disable_jump_landing_ground_effect
+	jump_in_place_down
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257C05: @ 8257C05
-	step_51
-	step_47
+	disable_jump_landing_ground_effect
+	jump_in_place_up
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257C08: @ 8257C08
-	step_25
+	walk_in_place_fastest_down
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257C0A: @ 8257C0A
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_MapScript2_257C0C: @ 8257C0C
@@ -541,20 +541,20 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257C16:: @ 8257C16
 	end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257C30: @ 8257C30
-	step_down
-	step_27
-	step_14
-	step_14
-	step_14
-	step_14
-	step_up
-	step_up
-	step_27
+	walk_down
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_up
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Movement_257C3A: @ 8257C3A
-	step_down
-	step_27
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Text_257C3D: @ 8257C3D

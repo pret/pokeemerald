@@ -73,78 +73,78 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	end
 
 RustboroCity_DevonCorp_3F_Movement_21252F: @ 821252F
-	step_up
-	step_up
-	step_up
-	step_27
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 RustboroCity_DevonCorp_3F_Movement_212534: @ 8212534
-	step_right
-	step_right
-	step_right
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_27
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 RustboroCity_DevonCorp_3F_Movement_212543: @ 8212543
-	step_14
-	step_25
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 RustboroCity_DevonCorp_3F_Movement_212546: @ 8212546
-	step_right
-	step_right
-	step_right
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 RustboroCity_DevonCorp_3F_Movement_21254F: @ 821254F
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 RustboroCity_DevonCorp_3F_Movement_212558: @ 8212558
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 RustboroCity_DevonCorp_3F_Movement_212566: @ 8212566
-	step_14
-	step_14
-	step_down
-	step_down
-	step_28
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 RustboroCity_DevonCorp_3F_EventScript_21256C:: @ 821256C

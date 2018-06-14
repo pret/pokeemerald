@@ -33,8 +33,8 @@ EverGrandeCity_ChampionsRoom_EventScript_228A1E:: @ 8228A1E
     end
 
 EverGrandeCity_ChampionsRoom_Movement_228A42: @ 8228A42
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 EverGrandeCity_ChampionsRoom_EventScript_228A45:: @ 8228A45
@@ -163,66 +163,66 @@ EverGrandeCity_ChampionsRoom_EventScript_228C12:: @ 8228C12
 	return
 
 EverGrandeCity_ChampionsRoom_Movement_228C1D: @ 8228C1D
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_228C20: @ 8228C20
-	step_up
-	step_14
-	step_up
-	step_13
-	step_54
+	walk_up
+	delay_16
+	walk_up
+	delay_8
+	set_invisible
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_228C26: @ 8228C26
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_up
-	step_28
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_228C2F: @ 8228C2F
-	step_26
-	step_14
-	step_28
-	step_14
-	step_26
-	step_13
-	step_28
-	step_14
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_fastest_right
+	delay_16
+	walk_in_place_fastest_up
+	delay_8
+	walk_in_place_fastest_right
+	delay_16
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_228C38: @ 8228C38
-	step_right
-	step_up
+	walk_right
+	walk_up
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_228C3B: @ 8228C3B
-	step_up
-	step_up
-	step_25
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_228C3F: @ 8228C3F
-	step_up
-	step_13
-	step_54
+	walk_up
+	delay_8
+	set_invisible
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_228C43: @ 8228C43
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_27
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 EverGrandeCity_ChampionsRoom_Text_228C4C: @ 8228C4C

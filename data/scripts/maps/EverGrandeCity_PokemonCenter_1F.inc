@@ -61,21 +61,21 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229AC1:: @ 8229AC1
 	return
 
 EverGrandeCity_PokemonCenter_1F_Movement_229ACC: @ 8229ACC
-	step_left
-	step_down
-	step_down
-	step_left
-	step_down
-	step_down
+	walk_left
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 EverGrandeCity_PokemonCenter_1F_Movement_229AD3: @ 8229AD3
-	step_down
-	step_down
-	step_left
-	step_left
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 EverGrandeCity_PokemonCenter_1F_Text_229ADA: @ 8229ADA

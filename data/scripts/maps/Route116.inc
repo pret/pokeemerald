@@ -102,27 +102,27 @@ Route116_EventScript_1F2D39:: @ 81F2D39
 	end
 
 Route116_Movement_1F2D43: @ 81F2D43
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Route116_Movement_1F2D4C: @ 81F2D4C
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Route116_EventScript_1F2D57:: @ 81F2D57
@@ -223,28 +223,28 @@ Route116_EventScript_1F2E69:: @ 81F2E69
 	return
 
 Route116_Movement_1F2E74: @ 81F2E74
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Route116_Movement_1F2E7E: @ 81F2E7E
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Route116_EventScript_1F2E89:: @ 81F2E89
