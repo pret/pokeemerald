@@ -121,13 +121,13 @@ const u16 gTilesetAnims_General4_Frame1[] = INCBIN_U16("data/tilesets/primary/ge
 
 const u16 gTilesetAnims_General4_Frame2[] = INCBIN_U16("data/tilesets/primary/general/anim/4/2.4bpp");
 
-const u16 gTilesetAnims_General4_Frame4[] = INCBIN_U16("data/tilesets/primary/general/anim/4/3.4bpp");
+const u16 gTilesetAnims_General4_Frame3[] = INCBIN_U16("data/tilesets/primary/general/anim/4/3.4bpp");
 
 const u16 *const gTilesetAnims_General4[] = {
     gTilesetAnims_General4_Frame0,
     gTilesetAnims_General4_Frame1,
     gTilesetAnims_General4_Frame2,
-    gTilesetAnims_General4_Frame4
+    gTilesetAnims_General4_Frame3
 };
 
 const u16 gTilesetAnims_Lavaridge0_Frame0[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/0.4bpp");
