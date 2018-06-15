@@ -1,8 +1,8 @@
 MtPyre_3F_EventObjects: @ 8534EEC
-	object_event 1, EVENT_OBJ_GFX_PSYCHIC_M, 0, 0, 1, 4, 3, 18, 17, 0, 1, 4, MtPyre_3F_EventScript_231753, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_LASS, 0, 0, 11, 4, 3, 17, 17, 0, 1, 4, MtPyre_3F_EventScript_23176A, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 0, 7, 3, 1, 17, 0, 0, 0, MtPyre_3F_EventScript_29130A, 1120, 0, 0
-	object_event 4, EVENT_OBJ_GFX_WOMAN_3, 0, 0, 6, 4, 3, 14, 17, 0, 1, 4, MtPyre_3F_EventScript_231781, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_PSYCHIC_M, 0, 1, 4, 3, 18, 17, 1, 4, MtPyre_3F_EventScript_231753, 0
+	object_event 2, EVENT_OBJ_GFX_LASS, 0, 11, 4, 3, 17, 17, 1, 4, MtPyre_3F_EventScript_23176A, 0
+	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 7, 3, 1, 17, 0, 0, MtPyre_3F_EventScript_29130A, 1120
+	object_event 4, EVENT_OBJ_GFX_WOMAN_3, 0, 6, 4, 3, 14, 17, 1, 4, MtPyre_3F_EventScript_231781, 0
 
 MtPyre_3F_MapWarps: @ 8534F4C
 	warp_def 10, 1, 3, 1, MAP_MT_PYRE_2F

@@ -1,7 +1,7 @@
 MtPyre_1F_EventObjects: @ 8534D64
-	object_event 1, EVENT_OBJ_GFX_OLD_WOMAN_2, 0, 0, 21, 2, 3, 8, 17, 0, 0, 0, MtPyre_1F_EventScript_230F3F, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 0, 17, 8, 3, 7, 17, 0, 0, 0, MtPyre_1F_EventScript_230F78, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_5, 0, 0, 13, 10, 3, 9, 17, 0, 0, 0, MtPyre_1F_EventScript_230F81, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_OLD_WOMAN_2, 0, 21, 2, 3, 8, 17, 0, 0, MtPyre_1F_EventScript_230F3F, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 17, 8, 3, 7, 17, 0, 0, MtPyre_1F_EventScript_230F78, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_5, 0, 13, 10, 3, 9, 17, 0, 0, MtPyre_1F_EventScript_230F81, 0
 
 MtPyre_1F_MapWarps: @ 8534DAC
 	warp_def 17, 18, 3, 0, MAP_ROUTE122

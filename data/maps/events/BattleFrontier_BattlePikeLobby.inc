@@ -1,8 +1,8 @@
 BattleFrontier_BattlePikeLobby_EventObjects: @ 853CBB0
-	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 0, 5, 5, 3, 8, 17, 0, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25B868, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_HIKER, 0, 0, 10, 9, 3, 7, 17, 0, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BAAB, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 0, 0, 5, 3, 9, 17, 0, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BAB4, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_BEAUTY, 0, 0, 8, 9, 3, 2, 17, 0, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BABD, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 5, 5, 3, 8, 17, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25B868, 0
+	object_event 2, EVENT_OBJ_GFX_HIKER, 0, 10, 9, 3, 7, 17, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BAAB, 0
+	object_event 3, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 0, 5, 3, 9, 17, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BAB4, 0
+	object_event 4, EVENT_OBJ_GFX_BEAUTY, 0, 8, 9, 3, 2, 17, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BABD, 0
 
 BattleFrontier_BattlePikeLobby_MapWarps: @ 853CC10
 	warp_def 5, 12, 0, 0, MAP_BATTLE_FRONTIER_OUTSIDE_WEST

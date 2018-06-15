@@ -1,7 +1,7 @@
 BattleFrontier_RankingHall_EventObjects: @ 853CEB8
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 0, 24, 13, 3, 8, 17, 0, 0, 0, BattleFrontier_RankingHall_EventScript_25E52F, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 0, 4, 10, 3, 2, 17, 0, 0, 0, BattleFrontier_RankingHall_EventScript_25E54A, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_BOY_3, 0, 0, 44, 11, 3, 2, 17, 0, 0, 0, BattleFrontier_RankingHall_EventScript_25E573, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 24, 13, 3, 8, 17, 0, 0, BattleFrontier_RankingHall_EventScript_25E52F, 0
+	object_event 2, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 4, 10, 3, 2, 17, 0, 0, BattleFrontier_RankingHall_EventScript_25E54A, 0
+	object_event 3, EVENT_OBJ_GFX_BOY_3, 0, 44, 11, 3, 2, 17, 0, 0, BattleFrontier_RankingHall_EventScript_25E573, 0
 
 BattleFrontier_RankingHall_MapWarps: @ 853CF00
 	warp_def 26, 14, 3, 4, MAP_BATTLE_FRONTIER_OUTSIDE_EAST

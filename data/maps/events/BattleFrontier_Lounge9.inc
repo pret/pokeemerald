@@ -1,5 +1,5 @@
 BattleFrontier_Lounge9_EventObjects: @ 853D520
-	object_event 1, EVENT_OBJ_GFX_GIRL_2, 0, 0, 6, 3, 0, 1, 17, 0, 0, 0, 0x0, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_GIRL_2, 0, 6, 3, 0, 1, 17, 0, 0, 0x0, 0
 
 BattleFrontier_Lounge9_MapWarps: @ 853D538
 	warp_def 1, 9, 0, 11, MAP_BATTLE_FRONTIER_OUTSIDE_EAST

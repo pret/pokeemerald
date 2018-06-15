@@ -1,10 +1,10 @@
 MagmaHideout_1F_EventObjects: @ 85371CC
-	object_event 1, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 0, 4, 5, 0, 10, 17, 0, 1, 2, MagmaHideout_1F_EventScript_23988C, 857, 0, 0
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 3, 20, 0, 1, 17, 0, 0, 0, MagmaHideout_1F_EventScript_2914DE, 1151, 0, 0
-	object_event 3, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 0, 30, 20, 3, 9, 17, 0, 1, 4, MagmaHideout_1F_EventScript_2398A3, 857, 0, 0
-	object_event 4, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 0, 5, 22, 3, 1, 0, 0, 0, 0, MagmaHideout_1F_EventScript_2908BA, 17, 0, 0
-	object_event 5, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 0, 7, 22, 3, 1, 0, 0, 0, 0, MagmaHideout_1F_EventScript_2908BA, 18, 0, 0
-	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 0, 6, 23, 3, 1, 0, 0, 0, 0, MagmaHideout_1F_EventScript_2908BA, 19, 0, 0
+	object_event 1, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 4, 5, 0, 10, 17, 1, 2, MagmaHideout_1F_EventScript_23988C, 857
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 20, 0, 1, 17, 0, 0, MagmaHideout_1F_EventScript_2914DE, 1151
+	object_event 3, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 30, 20, 3, 9, 17, 1, 4, MagmaHideout_1F_EventScript_2398A3, 857
+	object_event 4, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 5, 22, 3, 1, 0, 0, 0, MagmaHideout_1F_EventScript_2908BA, 17
+	object_event 5, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 7, 22, 3, 1, 0, 0, 0, MagmaHideout_1F_EventScript_2908BA, 18
+	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 6, 23, 3, 1, 0, 0, 0, MagmaHideout_1F_EventScript_2908BA, 19
 
 MagmaHideout_1F_MapWarps: @ 853725C
 	warp_def 10, 34, 3, 4, MAP_JAGGED_PASS

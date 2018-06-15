@@ -1,11 +1,11 @@
 Route110_TrickHousePuzzle3_EventObjects: @ 853E218
-	object_event 1, EVENT_OBJ_GFX_CAMPER, 0, 0, 7, 19, 3, 8, 0, 0, 1, 2, Route110_TrickHousePuzzle3_EventScript_26C5C4, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_PICNICKER, 0, 0, 4, 4, 3, 10, 0, 0, 1, 1, Route110_TrickHousePuzzle3_EventScript_26C5DB, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_HIKER, 0, 0, 10, 10, 3, 8, 0, 0, 1, 1, Route110_TrickHousePuzzle3_EventScript_26C5F2, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 1, 2, 3, 1, 0, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_291442, 1064, 0, 0
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 4, 2, 3, 1, 0, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_291435, 1063, 0, 0
-	object_event 6, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 0, 1, 20, 3, 1, 17, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_2907A6, 21, 0, 0
-	object_event 7, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 0, 2, 21, 3, 1, 17, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_2907A6, 22, 0, 0
+	object_event 1, EVENT_OBJ_GFX_CAMPER, 0, 7, 19, 3, 8, 0, 1, 2, Route110_TrickHousePuzzle3_EventScript_26C5C4, 0
+	object_event 2, EVENT_OBJ_GFX_PICNICKER, 0, 4, 4, 3, 10, 0, 1, 1, Route110_TrickHousePuzzle3_EventScript_26C5DB, 0
+	object_event 3, EVENT_OBJ_GFX_HIKER, 0, 10, 10, 3, 8, 0, 1, 1, Route110_TrickHousePuzzle3_EventScript_26C5F2, 0
+	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 1, 2, 3, 1, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_291442, 1064
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 2, 3, 1, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_291435, 1063
+	object_event 6, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 1, 20, 3, 1, 17, 0, 0, Route110_TrickHousePuzzle3_EventScript_2907A6, 21
+	object_event 7, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 2, 21, 3, 1, 17, 0, 0, Route110_TrickHousePuzzle3_EventScript_2907A6, 22
 
 Route110_TrickHousePuzzle3_MapWarps: @ 853E2C0
 	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE

@@ -1,15 +1,15 @@
 PetalburgCity_Gym_EventObjects: @ 852EDC8
-	object_event 1, EVENT_OBJ_GFX_NORMAN, 0, 0, 4, 2, 0, 8, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_2049F1, 772, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 4, 94, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2054AA, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 0, 4, 81, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2053BA, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_4, 0, 0, 4, 42, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2053F6, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 4, 55, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2054E6, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 0, 4, 68, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_205432, 0, 0, 0
-	object_event 7, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 4, 16, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_205522, 0, 0, 0
-	object_event 8, EVENT_OBJ_GFX_MAN_4, 0, 0, 4, 29, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_20546E, 0, 0, 0
-	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 0, 3, 109, 3, 8, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_20574F, 781, 0, 0
-	object_event 10, EVENT_OBJ_GFX_WALLY, 0, 0, 4, 111, 3, 7, 0, 0, 0, 0, 0x0, 866, 0, 0
-	object_event 11, EVENT_OBJ_GFX_MAN_3, 0, 0, 1, 7, 3, 7, 17, 0, 0, 0, 0x0, 824, 0, 0
+	object_event 1, EVENT_OBJ_GFX_NORMAN, 0, 4, 2, 0, 8, 0, 0, 0, PetalburgCity_Gym_EventScript_2049F1, 772
+	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 94, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_2054AA, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 4, 81, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_2053BA, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_4, 0, 4, 42, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_2053F6, 0
+	object_event 5, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 55, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_2054E6, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 4, 68, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_205432, 0
+	object_event 7, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 16, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_205522, 0
+	object_event 8, EVENT_OBJ_GFX_MAN_4, 0, 4, 29, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_20546E, 0
+	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 3, 109, 3, 8, 0, 0, 0, PetalburgCity_Gym_EventScript_20574F, 781
+	object_event 10, EVENT_OBJ_GFX_WALLY, 0, 4, 111, 3, 7, 0, 0, 0, 0x0, 866
+	object_event 11, EVENT_OBJ_GFX_MAN_3, 0, 1, 7, 3, 7, 17, 0, 0, 0x0, 824
 
 PetalburgCity_Gym_MapWarps: @ 852EED0
 	warp_def 4, 111, 3, 2, MAP_PETALBURG_CITY

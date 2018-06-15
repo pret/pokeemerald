@@ -1,21 +1,21 @@
 MossdeepCity_EventObjects: @ 8527018
-	object_event 1, EVENT_OBJ_GFX_SAILOR, 0, 0, 38, 12, 5, 2, 17, 0, 0, 0, MossdeepCity_EventScript_1E4AD1, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 0, 50, 34, 5, 5, 1, 0, 0, 0, MossdeepCity_EventScript_1E4AF9, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 0, 32, 12, 5, 2, 17, 0, 0, 0, MossdeepCity_EventScript_1E4AB2, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 0, 26, 21, 5, 3, 16, 0, 0, 0, MossdeepCity_EventScript_1E4AF0, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_GIRL_1, 0, 0, 45, 18, 7, 9, 0, 0, 0, 0, MossdeepCity_EventScript_1E4B02, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 62, 35, 5, 1, 0, 0, 0, 0, MossdeepCity_EventScript_2910F5, 1043, 0, 0
-	object_event 7, EVENT_OBJ_GFX_MAN_1, 0, 0, 55, 5, 7, 7, 0, 0, 0, 0, MossdeepCity_EventScript_1E4C10, 0, 0, 0
-	object_event 8, EVENT_OBJ_GFX_WOMAN_1, 0, 0, 56, 21, 7, 10, 17, 0, 0, 0, MossdeepCity_EventScript_1E4B0B, 0, 0, 0
-	object_event 9, EVENT_OBJ_GFX_BOY_2, 0, 0, 23, 13, 5, 2, 17, 0, 0, 0, MossdeepCity_EventScript_1E4C26, 0, 0, 0
-	object_event 10, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 0, 44, 23, 5, 8, 17, 0, 0, 0, 0x0, 823, 0, 0
-	object_event 11, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 0, 44, 24, 5, 7, 17, 0, 0, 0, 0x0, 823, 0, 0
-	object_event 12, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 0, 44, 25, 5, 8, 17, 0, 0, 0, 0x0, 823, 0, 0
-	object_event 13, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 0, 44, 26, 5, 7, 17, 0, 0, 0, 0x0, 823, 0, 0
-	object_event 14, EVENT_OBJ_GFX_MAXIE, 0, 0, 45, 25, 5, 9, 17, 0, 0, 0, 0x0, 823, 0, 0
-	object_event 15, EVENT_OBJ_GFX_BLACK_BELT, 0, 0, 19, 25, 3, 64, 51, 0, 0, 0, MossdeepCity_EventScript_2C81EE, 0, 0, 0
-	object_event 16, EVENT_OBJ_GFX_SCOTT, 0, 0, 61, 29, 5, 17, 0, 0, 0, 0, MossdeepCity_EventScript_1E4C85, 788, 0, 0
-	object_event 17, EVENT_OBJ_GFX_BLACK_BELT, 0, 0, 31, 29, 3, 64, 51, 0, 0, 0, MossdeepCity_EventScript_1E4C7C, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_SAILOR, 0, 38, 12, 5, 2, 17, 0, 0, MossdeepCity_EventScript_1E4AD1, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 50, 34, 5, 5, 1, 0, 0, MossdeepCity_EventScript_1E4AF9, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 32, 12, 5, 2, 17, 0, 0, MossdeepCity_EventScript_1E4AB2, 0
+	object_event 4, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 26, 21, 5, 3, 16, 0, 0, MossdeepCity_EventScript_1E4AF0, 0
+	object_event 5, EVENT_OBJ_GFX_GIRL_1, 0, 45, 18, 7, 9, 0, 0, 0, MossdeepCity_EventScript_1E4B02, 0
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 62, 35, 5, 1, 0, 0, 0, MossdeepCity_EventScript_2910F5, 1043
+	object_event 7, EVENT_OBJ_GFX_MAN_1, 0, 55, 5, 7, 7, 0, 0, 0, MossdeepCity_EventScript_1E4C10, 0
+	object_event 8, EVENT_OBJ_GFX_WOMAN_1, 0, 56, 21, 7, 10, 17, 0, 0, MossdeepCity_EventScript_1E4B0B, 0
+	object_event 9, EVENT_OBJ_GFX_BOY_2, 0, 23, 13, 5, 2, 17, 0, 0, MossdeepCity_EventScript_1E4C26, 0
+	object_event 10, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 44, 23, 5, 8, 17, 0, 0, 0x0, 823
+	object_event 11, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 44, 24, 5, 7, 17, 0, 0, 0x0, 823
+	object_event 12, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 44, 25, 5, 8, 17, 0, 0, 0x0, 823
+	object_event 13, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 44, 26, 5, 7, 17, 0, 0, 0x0, 823
+	object_event 14, EVENT_OBJ_GFX_MAXIE, 0, 45, 25, 5, 9, 17, 0, 0, 0x0, 823
+	object_event 15, EVENT_OBJ_GFX_BLACK_BELT, 0, 19, 25, 3, 64, 51, 0, 0, MossdeepCity_EventScript_2C81EE, 0
+	object_event 16, EVENT_OBJ_GFX_SCOTT, 0, 61, 29, 5, 17, 0, 0, 0, MossdeepCity_EventScript_1E4C85, 788
+	object_event 17, EVENT_OBJ_GFX_BLACK_BELT, 0, 31, 29, 3, 64, 51, 0, 0, MossdeepCity_EventScript_1E4C7C, 0
 
 MossdeepCity_MapWarps: @ 85271B0
 	warp_def 28, 9, 0, 0, MAP_MOSSDEEP_CITY_HOUSE1

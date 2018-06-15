@@ -1,6 +1,6 @@
 BattleFrontier_BattlePikeThreePathRoom_EventObjects: @ 853CC80
-	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 0, 4, 10, 3, 10, 0, 0, 0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C908, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_6, 0, 0, 8, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 4, 10, 3, 10, 0, 0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C908, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_6, 0, 8, 5, 3, 8, 0, 0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB, 0
 
 BattleFrontier_BattlePikeThreePathRoom_MapCoordEvents: @ 853CCB0
 	coord_event 2, 3, 3, 0, VAR_TEMP_1, 0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_2C3F4E
