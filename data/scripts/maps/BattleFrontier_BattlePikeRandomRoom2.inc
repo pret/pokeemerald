@@ -19,7 +19,7 @@ BattleFrontier_BattlePikeRandomRoom2_EventScript_25E3A7:: @ 825E3A7
 	msgbox BattleFrontier_BattlePikeRandomRoom2_Text_25E3F2, 4
 	closemessage
 	releaseall
-	warp BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
 

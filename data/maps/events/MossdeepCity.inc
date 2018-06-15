@@ -18,16 +18,16 @@ MossdeepCity_EventObjects: @ 8527018
 	object_event 17, EVENT_OBJ_GFX_BLACK_BELT, 0, 0, 31, 29, 3, 64, 51, 0, 0, 0, MossdeepCity_EventScript_1E4C7C, 0, 0, 0
 
 MossdeepCity_MapWarps: @ 85271B0
-	warp_def 28, 9, 0, 0, MOSSDEEP_CITY_HOUSE_1
-	warp_def 38, 9, 0, 0, MOSSDEEP_CITY_GYM
-	warp_def 28, 16, 0, 0, MOSSDEEP_CITY_POKEMON_CENTER_1F
-	warp_def 67, 25, 0, 0, MOSSDEEP_CITY_HOUSE_2
-	warp_def 37, 18, 0, 0, MOSSDEEP_CITY_MART
-	warp_def 49, 6, 0, 0, MOSSDEEP_CITY_HOUSE_3
-	warp_def 19, 10, 0, 0, MOSSDEEP_CITY_STEVENS_HOUSE
-	warp_def 18, 16, 0, 1, MOSSDEEP_CITY_HOUSE_4
-	warp_def 64, 15, 0, 0, MOSSDEEP_CITY_SPACE_CENTER_1F
-	warp_def 36, 24, 0, 0, MOSSDEEP_CITY_GAME_CORNER_1F
+	warp_def 28, 9, 0, 0, MAP_MOSSDEEP_CITY_HOUSE1
+	warp_def 38, 9, 0, 0, MAP_MOSSDEEP_CITY_GYM
+	warp_def 28, 16, 0, 0, MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F
+	warp_def 67, 25, 0, 0, MAP_MOSSDEEP_CITY_HOUSE2
+	warp_def 37, 18, 0, 0, MAP_MOSSDEEP_CITY_MART
+	warp_def 49, 6, 0, 0, MAP_MOSSDEEP_CITY_HOUSE3
+	warp_def 19, 10, 0, 0, MAP_MOSSDEEP_CITY_STEVENS_HOUSE
+	warp_def 18, 16, 0, 1, MAP_MOSSDEEP_CITY_HOUSE4
+	warp_def 64, 15, 0, 0, MAP_MOSSDEEP_CITY_SPACE_CENTER_1F
+	warp_def 36, 24, 0, 0, MAP_MOSSDEEP_CITY_GAME_CORNER_1F
 
 MossdeepCity_MapCoordEvents: @ 8527200
 	coord_event 25, 25, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38

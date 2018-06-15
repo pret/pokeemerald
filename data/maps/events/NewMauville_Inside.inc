@@ -9,7 +9,7 @@ NewMauville_Inside_EventObjects: @ 85364A8
 	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 13, 10, 3, 1, 17, 0, 0, 0, NewMauville_Inside_EventScript_237849, 976, 0, 0
 
 NewMauville_Inside_MapWarps: @ 8536568
-	warp_def 32, 33, 3, 1, NEW_MAUVILLE_ENTRANCE
+	warp_def 32, 33, 3, 1, MAP_NEW_MAUVILLE_ENTRANCE
 
 NewMauville_Inside_MapCoordEvents: @ 8536570
 	coord_event 30, 38, 3, 0, VAR_TEMP_1, 0, 0, NewMauville_Inside_EventScript_237459

@@ -113,7 +113,7 @@ Route110_TrickHousePuzzle7_EventScript_26E1E2:: @ 826E1E2
 Route110_TrickHousePuzzle7_EventScript_26E1ED:: @ 826E1ED
 	lockall
 	setvar VAR_0x40B6, 1
-	warpteleport ROUTE_110_TRICK_HOUSE_PUZZLE_7, 255, 3, 19
+	warpteleport MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 255, 3, 19
 	waitstate
 	releaseall
 	end

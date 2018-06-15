@@ -12,9 +12,9 @@ MossdeepCity_SpaceCenter_1F_EventObjects: @ 8532D18
 	object_event 11, EVENT_OBJ_GFX_STEVEN, 0, 0, 1, 4, 3, 8, 17, 0, 0, 0, MossdeepCity_SpaceCenter_1F_EventScript_2231B9, 753, 0, 0
 
 MossdeepCity_SpaceCenter_1F_MapWarps: @ 8532E20
-	warp_def 7, 9, 0, 8, MOSSDEEP_CITY
-	warp_def 8, 9, 0, 8, MOSSDEEP_CITY
-	warp_def 13, 1, 0, 0, MOSSDEEP_CITY_SPACE_CENTER_2F
+	warp_def 7, 9, 0, 8, MAP_MOSSDEEP_CITY
+	warp_def 8, 9, 0, 8, MAP_MOSSDEEP_CITY
+	warp_def 13, 1, 0, 0, MAP_MOSSDEEP_CITY_SPACE_CENTER_2F
 
 MossdeepCity_SpaceCenter_1F_MapEvents:: @ 8532E38
 	map_events MossdeepCity_SpaceCenter_1F_EventObjects, MossdeepCity_SpaceCenter_1F_MapWarps, 0x0, 0x0

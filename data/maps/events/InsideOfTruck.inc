@@ -4,9 +4,9 @@ InsideOfTruck_EventObjects: @ 853A078
 	object_event 3, EVENT_OBJ_GFX_MOVING_BOX, 0, 0, 2, 3, 8, 8, 0, 0, 0, 0, InsideOfTruck_EventScript_23BF6C, 0, 0, 0
 
 InsideOfTruck_MapWarps: @ 853A0C0
-	warp_def 4, 1, 0, 127, NONE
-	warp_def 4, 2, 0, 127, NONE
-	warp_def 4, 3, 0, 127, NONE
+	warp_def 4, 1, 0, 127, MAP_NONE
+	warp_def 4, 2, 0, 127, MAP_NONE
+	warp_def 4, 3, 0, 127, MAP_NONE
 
 InsideOfTruck_MapCoordEvents: @ 853A0D8
 	coord_event 3, 1, 3, 0, VAR_0x4092, 0, 0, InsideOfTruck_EventScript_23BF04

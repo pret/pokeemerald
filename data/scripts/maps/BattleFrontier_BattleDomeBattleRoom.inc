@@ -48,7 +48,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD0A:: @ 824BD0A
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BFD5
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C970, 4
 	closemessage
-	showobjectat 13, BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
+	showobjectat 13, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	compare VAR_TEMP_F, 3
 	goto_if 5, BattleFrontier_BattleDomeBattleRoom_EventScript_24BD4E
 	compare VAR_TEMP_E, 0
@@ -188,7 +188,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0:: @ 824BEE0
 	switch VAR_RESULT
 	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 	setvar VAR_0x8006, 1
-	warp BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 255, 5, 3
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 255, 5, 3
 	waitstate
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62:: @ 824BF62
@@ -547,7 +547,7 @@ BattleFrontier_BattleDomeBattleRoom_MapScript2_24C481: @ 824C481
 	.2byte 0
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C48B:: @ 824C48B
-	hideobjectat 13, BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
+	hideobjectat 13, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C502
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC
 	setvar VAR_TEMP_1, 1
@@ -953,12 +953,12 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24C8F5:: @ 824C8F5
 	copyvar VAR_RESULT, VAR_0x40CE
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24C90F
-	warp BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 5, 11
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 5, 11
 	waitstate
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24C90F:: @ 824C90F
-	warp BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 17, 11
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 17, 11
 	waitstate
 	end
 

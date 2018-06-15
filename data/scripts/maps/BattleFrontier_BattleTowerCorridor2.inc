@@ -33,9 +33,9 @@ BattleFrontier_BattleTowerCorridor2_MapScript2_248D95: @ 8248D95
 	.2byte 0
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D9F:: @ 8248D9F
-	hideobjectat 255, BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR_2
-	hideobjectat 1, BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR_2
-	hideobjectat 4, BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR_2
+	hideobjectat 255, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
+	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
+	hideobjectat 4, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	special sub_8139980
 	end
 
@@ -51,8 +51,8 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248DBC:: @ 8248DBC
 	opendoor 1, 1
 	waitdooranim
 	clearflag FLAG_SPECIAL_FLAG_0x4002
-	showobjectat 1, BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR_2
-	showobjectat 4, BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR_2
+	showobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
+	showobjectat 4, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	applymovement 1, BattleFrontier_BattleTowerCorridor2_Movement_248EE6
 	applymovement 4, BattleFrontier_BattleTowerCorridor2_Movement_248EE6
 	waitmovement 0
@@ -98,17 +98,17 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248E71:: @ 8248E71
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248E9E:: @ 8248E9E
-	warp BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
 	waitstate
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248EA8:: @ 8248EA8
-	warp BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM_2, 255, 4, 5
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM2, 255, 4, 5
 	waitstate
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248EB2:: @ 8248EB2
-	warp BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM_2, 255, 4, 5
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM2, 255, 4, 5
 	waitstate
 	return
 

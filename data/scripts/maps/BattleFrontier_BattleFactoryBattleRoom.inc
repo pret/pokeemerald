@@ -30,10 +30,10 @@ BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE00: @ 825AE00
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE0A:: @ 825AE0A
 	setvar VAR_TEMP_1, 1
-	hideobjectat 255, BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
+	hideobjectat 255, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 	compare VAR_TEMP_F, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE24
-	hideobjectat 2, BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
+	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE24:: @ 825AE24
 	end
@@ -133,7 +133,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF43:: @ 825AF43
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF85
 	setvar VAR_0x8006, 1
-	warp BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 8
 	waitstate
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF85:: @ 825AF85
@@ -294,12 +294,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B190:: @ 825B190
 	copyvar VAR_RESULT, VAR_0x40CE
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B1AA
-	warp BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 255, 4, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 255, 4, 8
 	waitstate
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B1AA:: @ 825B1AA
-	warp BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 255, 14, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 255, 14, 8
 	waitstate
 	end
 

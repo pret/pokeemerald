@@ -10,9 +10,9 @@ BattleFrontier_BattleTowerLobby_EventObjects: @ 853B638
 	object_event 9, EVENT_OBJ_GFX_TEALA, 0, 0, 18, 5, 3, 8, 0, 0, 0, 0, BattleFrontier_BattleTowerLobby_EventScript_23ED74, 0, 0, 0
 
 BattleFrontier_BattleTowerLobby_MapWarps: @ 853B710
-	warp_def 12, 9, 3, 0, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 13, 9, 3, 0, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 6, 1, 0, 0, BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM
+	warp_def 12, 9, 3, 0, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 13, 9, 3, 0, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 6, 1, 0, 0, MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM
 
 BattleFrontier_BattleTowerLobby_MapBGEvents: @ 853B728
 	bg_event 4, 5, 0, 1, 0, BattleFrontier_BattleTowerLobby_EventScript_23EFC7

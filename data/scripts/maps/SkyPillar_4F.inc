@@ -16,6 +16,6 @@ SkyPillar_4F_EventScript_239692:: @ 8239692
 
 SkyPillar_4F_MapScript1_239696: @ 8239696
 	setstepcallback 7
-	setholewarp SKY_PILLAR_3F, 255, 0, 0
+	setholewarp MAP_SKY_PILLAR_3F, 255, 0, 0
 	end
 

@@ -458,7 +458,7 @@ Route110_TrickHousePuzzle5_EventScript_26D152:: @ 826D152
 	waitmovement 0
 	msgbox Route110_TrickHousePuzzle5_Text_26D8C9, 4
 	closemessage
-	warp ROUTE_110_TRICK_HOUSE_PUZZLE_5, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 255, 0, 21
 	waitstate
 	releaseall
 	end

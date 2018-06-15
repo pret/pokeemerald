@@ -3,6 +3,6 @@ Underwater_Route134_MapScripts:: @ 82390B5
 	.byte 0
 
 Underwater_Route134_MapScript1_2390BB: @ 82390BB
-	setdivewarp ROUTE_134, 255, 60, 31
+	setdivewarp MAP_ROUTE134, 255, 60, 31
 	end
 

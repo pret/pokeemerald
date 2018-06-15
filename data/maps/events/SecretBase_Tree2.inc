@@ -16,7 +16,7 @@ SecretBase_Tree2_EventObjects: @ 853880C
 	object_event 15, 253, 0, 0, 1, 6, 3, 8, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_Tree2_MapWarps: @ 8538974
-	warp_def 3, 14, 0, 126, NONE
+	warp_def 3, 14, 0, 126, MAP_NONE
 
 SecretBase_Tree2_MapEvents:: @ 853897C
 	map_events SecretBase_Tree2_EventObjects, SecretBase_Tree2_MapWarps, 0x0, 0x0

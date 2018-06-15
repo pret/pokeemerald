@@ -5,12 +5,12 @@ AbandonedShip_Rooms_1F_EventObjects: @ 8536764
 	object_event 4, EVENT_OBJ_GFX_YOUNGSTER, 0, 0, 10, 16, 3, 16, 17, 0, 1, 4, AbandonedShip_Rooms_1F_EventScript_237A9C, 0, 0, 0
 
 AbandonedShip_Rooms_1F_MapWarps: @ 85367C4
-	warp_def 4, 16, 3, 4, ABANDONED_SHIP_CORRIDORS_1F
-	warp_def 5, 16, 3, 4, ABANDONED_SHIP_CORRIDORS_1F
-	warp_def 4, 1, 3, 6, ABANDONED_SHIP_CORRIDORS_1F
-	warp_def 13, 16, 3, 5, ABANDONED_SHIP_CORRIDORS_1F
-	warp_def 13, 1, 3, 7, ABANDONED_SHIP_CORRIDORS_1F
-	warp_def 14, 16, 3, 5, ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 4, 16, 3, 4, MAP_ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 5, 16, 3, 4, MAP_ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 4, 1, 3, 6, MAP_ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 13, 16, 3, 5, MAP_ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 13, 1, 3, 7, MAP_ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 14, 16, 3, 5, MAP_ABANDONED_SHIP_CORRIDORS_1F
 
 AbandonedShip_Rooms_1F_MapEvents:: @ 85367F4
 	map_events AbandonedShip_Rooms_1F_EventObjects, AbandonedShip_Rooms_1F_MapWarps, 0x0, 0x0

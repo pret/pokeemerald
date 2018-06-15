@@ -1,5 +1,5 @@
 SealedChamber_InnerRoom_MapWarps: @ 8536F00
-	warp_def 10, 19, 3, 0, SEALED_CHAMBER_OUTER_ROOM
+	warp_def 10, 19, 3, 0, MAP_SEALED_CHAMBER_OUTER_ROOM
 
 SealedChamber_InnerRoom_MapBGEvents: @ 8536F08
 	bg_event 10, 4, 0, 0, 0, SealedChamber_InnerRoom_EventScript_2391F8

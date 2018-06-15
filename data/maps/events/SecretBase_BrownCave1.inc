@@ -16,7 +16,7 @@ SecretBase_BrownCave1_EventObjects: @ 8537A68
 	object_event 15, 253, 0, 0, 1, 6, 3, 8, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_BrownCave1_MapWarps: @ 8537BD0
-	warp_def 5, 7, 0, 126, NONE
+	warp_def 5, 7, 0, 126, MAP_NONE
 
 SecretBase_BrownCave1_MapEvents:: @ 8537BD8
 	map_events SecretBase_BrownCave1_EventObjects, SecretBase_BrownCave1_MapWarps, 0x0, 0x0

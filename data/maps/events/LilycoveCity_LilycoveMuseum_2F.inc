@@ -5,7 +5,7 @@ LilycoveCity_LilycoveMuseum_2F_EventObjects: @ 8531428
 	object_event 4, EVENT_OBJ_GFX_BOY_4, 0, 0, 14, 6, 3, 2, 17, 0, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_21999C, 780, 0, 0
 
 LilycoveCity_LilycoveMuseum_2F_MapWarps: @ 8531488
-	warp_def 13, 1, 0, 2, LILYCOVE_CITY_LILYCOVE_MUSEUM_1F
+	warp_def 13, 1, 0, 2, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F
 
 LilycoveCity_LilycoveMuseum_2F_MapBGEvents: @ 8531490
 	bg_event 14, 10, 0, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_21992B

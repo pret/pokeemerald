@@ -1,6 +1,7 @@
+#include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
-#include "constants/event_objects.h"
+#include "constants/maps.h"
 #include "constants/vars.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"

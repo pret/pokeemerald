@@ -22,8 +22,8 @@ Route118_EventObjects: @ 852AAB4
 	object_event 21, EVENT_OBJ_GFX_YOUNGSTER, 0, 0, 7, 7, 3, 8, 17, 0, 1, 4, Route118_EventScript_1F40A7, 0, 0, 0
 
 Route118_MapWarps: @ 852ACAC
-	warp_def 42, 6, 0, 0, TERRA_CAVE_ENTRANCE
-	warp_def 9, 6, 0, 0, TERRA_CAVE_ENTRANCE
+	warp_def 42, 6, 0, 0, MAP_TERRA_CAVE_ENTRANCE
+	warp_def 9, 6, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
 Route118_MapCoordEvents: @ 852ACBC
 	coord_event 43, 11, 3, 0, VAR_0x4071, 0, 0, Route118_EventScript_1F3E8E

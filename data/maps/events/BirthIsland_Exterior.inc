@@ -3,7 +3,7 @@ BirthIsland_Exterior_EventObjects: @ 853D7DC
 	object_event 2, EVENT_OBJ_GFX_DEOXYS, 0, 0, 15, 3, 0, 8, 17, 0, 0, 0, 0x0, 763, 0, 0
 
 BirthIsland_Exterior_MapWarps: @ 853D80C
-	warp_def 15, 24, 0, 0, BIRTH_ISLAND_HARBOR
+	warp_def 15, 24, 0, 0, MAP_BIRTH_ISLAND_HARBOR
 
 BirthIsland_Exterior_MapEvents:: @ 853D814
 	map_events BirthIsland_Exterior_EventObjects, BirthIsland_Exterior_MapWarps, 0x0, 0x0

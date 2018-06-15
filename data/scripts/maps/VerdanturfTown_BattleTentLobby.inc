@@ -205,7 +205,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2019AE:: @ 82019AE
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C56A2, 4
 	closemessage
 	call VerdanturfTown_BattleTentLobby_EventScript_201A41
-	warp VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR, 255, 2, 7
+	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR, 255, 2, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

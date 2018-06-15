@@ -91,7 +91,7 @@ BattleFrontier_BattlePyramidTop_EventScript_252B66:: @ 8252B66
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
 	special HealPlayerParty
-	warpsilent BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
 	waitstate
 	end
 
@@ -143,12 +143,12 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	setvar VAR_RESULT, 0
-	warp BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
+	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
 	waitstate
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45:: @ 8252C45
-	warp BATTLE_FRONTIER_BATTLE_PYRAMID_TOP, 255, 17, 17
+	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP, 255, 17, 17
 	waitstate
 	end
 

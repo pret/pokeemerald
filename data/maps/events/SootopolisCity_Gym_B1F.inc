@@ -11,7 +11,7 @@ SootopolisCity_Gym_B1F_EventObjects: @ 8533068
 	object_event 10, EVENT_OBJ_GFX_WOMAN_2, 0, 0, 10, 13, 3, 9, 17, 0, 1, 3, SootopolisCity_Gym_B1F_EventScript_225D43, 0, 0, 0
 
 SootopolisCity_Gym_B1F_MapWarps: @ 8533158
-	warp_def 11, 22, 3, 2, SOOTOPOLIS_CITY_GYM_1F
+	warp_def 11, 22, 3, 2, MAP_SOOTOPOLIS_CITY_GYM_1F
 
 SootopolisCity_Gym_B1F_MapEvents:: @ 8533160
 	map_events SootopolisCity_Gym_B1F_EventObjects, SootopolisCity_Gym_B1F_MapWarps, 0x0, 0x0

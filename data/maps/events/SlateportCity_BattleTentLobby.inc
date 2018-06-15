@@ -6,8 +6,8 @@ SlateportCity_BattleTentLobby_EventObjects: @ 852F408
 	object_event 5, EVENT_OBJ_GFX_WOMAN_3, 0, 0, 11, 8, 3, 9, 17, 0, 0, 0, SlateportCity_BattleTentLobby_EventScript_208A90, 0, 0, 0
 
 SlateportCity_BattleTentLobby_MapWarps: @ 852F480
-	warp_def 6, 9, 0, 3, SLATEPORT_CITY
-	warp_def 7, 9, 0, 3, SLATEPORT_CITY
+	warp_def 6, 9, 0, 3, MAP_SLATEPORT_CITY
+	warp_def 7, 9, 0, 3, MAP_SLATEPORT_CITY
 
 SlateportCity_BattleTentLobby_MapBGEvents: @ 852F490
 	bg_event 4, 5, 0, 0, 0, SlateportCity_BattleTentLobby_EventScript_208A99

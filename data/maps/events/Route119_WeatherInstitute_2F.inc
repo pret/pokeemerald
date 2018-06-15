@@ -9,7 +9,7 @@ Route119_WeatherInstitute_2F_EventObjects: @ 853EBF4
 	object_event 8, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 0, 19, 6, 3, 9, 17, 0, 1, 3, Route119_WeatherInstitute_2F_EventScript_26FF68, 890, 0, 0
 
 Route119_WeatherInstitute_2F_MapWarps: @ 853ECB4
-	warp_def 17, 1, 0, 2, ROUTE_119_WEATHER_INSTITUTE_1F
+	warp_def 17, 1, 0, 2, MAP_ROUTE119_WEATHER_INSTITUTE_1F
 
 Route119_WeatherInstitute_2F_MapEvents:: @ 853ECBC
 	map_events Route119_WeatherInstitute_2F_EventObjects, Route119_WeatherInstitute_2F_MapWarps, 0x0, 0x0

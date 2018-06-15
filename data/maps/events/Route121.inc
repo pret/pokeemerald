@@ -30,7 +30,7 @@ Route121_EventObjects: @ 852BA14
 	object_event 29, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 38, 13, 3, 1, 17, 0, 0, 0, Route121_EventScript_290FA3, 1150, 0, 0
 
 Route121_MapWarps: @ 852BCCC
-	warp_def 37, 5, 0, 2, ROUTE_121_SAFARI_ZONE_ENTRANCE
+	warp_def 37, 5, 0, 2, MAP_ROUTE121_SAFARI_ZONE_ENTRANCE
 
 Route121_MapCoordEvents: @ 852BCD4
 	coord_event 25, 5, 3, 0, VAR_0x4074, 0, 0, Route121_EventScript_1F5E18

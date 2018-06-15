@@ -8,10 +8,10 @@ VictoryRoad_B2F_EventObjects: @ 8536188
 	object_event 7, EVENT_OBJ_GFX_MAN_4, 0, 0, 25, 21, 4, 7, 17, 0, 1, 2, VictoryRoad_B2F_EventScript_236931, 0, 0, 0
 
 VictoryRoad_B2F_MapWarps: @ 8536230
-	warp_def 30, 25, 3, 0, VICTORY_ROAD_B1F
-	warp_def 43, 2, 3, 3, VICTORY_ROAD_B1F
-	warp_def 19, 12, 3, 1, VICTORY_ROAD_B1F
-	warp_def 5, 26, 3, 6, VICTORY_ROAD_B1F
+	warp_def 30, 25, 3, 0, MAP_VICTORY_ROAD_B1F
+	warp_def 43, 2, 3, 3, MAP_VICTORY_ROAD_B1F
+	warp_def 19, 12, 3, 1, MAP_VICTORY_ROAD_B1F
+	warp_def 5, 26, 3, 6, MAP_VICTORY_ROAD_B1F
 
 VictoryRoad_B2F_MapBGEvents: @ 8536250
 	bg_event 28, 5, 3, 7, 0, ITEM_ELIXIR, 82, 0

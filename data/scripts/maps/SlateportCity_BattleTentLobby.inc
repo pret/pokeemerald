@@ -175,7 +175,7 @@ SlateportCity_BattleTentLobby_EventScript_2089AC:: @ 82089AC
 	msgbox SlateportCity_BattleTentLobby_Text_2C5B8C, 4
 	closemessage
 	call SlateportCity_BattleTentLobby_EventScript_2089C9
-	warp SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 255, 2, 7
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 255, 2, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

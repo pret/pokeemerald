@@ -6,9 +6,9 @@ Route119_WeatherInstitute_1F_EventObjects: @ 853EB20
 	object_event 5, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 0, 14, 11, 3, 2, 17, 0, 0, 0, Route119_WeatherInstitute_1F_EventScript_26FAA4, 0, 0, 0
 
 Route119_WeatherInstitute_1F_MapWarps: @ 853EB98
-	warp_def 9, 12, 0, 0, ROUTE_119
-	warp_def 10, 12, 0, 0, ROUTE_119
-	warp_def 17, 1, 0, 0, ROUTE_119_WEATHER_INSTITUTE_2F
+	warp_def 9, 12, 0, 0, MAP_ROUTE119
+	warp_def 10, 12, 0, 0, MAP_ROUTE119
+	warp_def 17, 1, 0, 0, MAP_ROUTE119_WEATHER_INSTITUTE_2F
 
 Route119_WeatherInstitute_1F_MapBGEvents: @ 853EBB0
 	bg_event 1, 2, 0, 0, 0, Route119_WeatherInstitute_1F_EventScript_26FB18

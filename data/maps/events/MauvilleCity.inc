@@ -12,13 +12,13 @@ MauvilleCity_EventObjects: @ 852662C
 	object_event 11, EVENT_OBJ_GFX_SCOTT, 0, 0, 12, 14, 3, 7, 0, 0, 0, 0, 0x0, 765, 0, 0
 
 MauvilleCity_MapWarps: @ 8526734
-	warp_def 8, 5, 0, 0, MAUVILLE_CITY_GYM
-	warp_def 22, 5, 0, 0, MAUVILLE_CITY_POKEMON_CENTER_1F
-	warp_def 35, 5, 0, 0, MAUVILLE_CITY_BIKE_SHOP
-	warp_def 23, 14, 0, 0, MAUVILLE_CITY_MART
-	warp_def 32, 14, 0, 0, MAUVILLE_CITY_HOUSE_1
-	warp_def 8, 13, 0, 0, MAUVILLE_CITY_GAME_CORNER
-	warp_def 19, 14, 0, 0, MAUVILLE_CITY_HOUSE_2
+	warp_def 8, 5, 0, 0, MAP_MAUVILLE_CITY_GYM
+	warp_def 22, 5, 0, 0, MAP_MAUVILLE_CITY_POKEMON_CENTER_1F
+	warp_def 35, 5, 0, 0, MAP_MAUVILLE_CITY_BIKE_SHOP
+	warp_def 23, 14, 0, 0, MAP_MAUVILLE_CITY_MART
+	warp_def 32, 14, 0, 0, MAP_MAUVILLE_CITY_HOUSE1
+	warp_def 8, 13, 0, 0, MAP_MAUVILLE_CITY_GAME_CORNER
+	warp_def 19, 14, 0, 0, MAP_MAUVILLE_CITY_HOUSE2
 
 MauvilleCity_MapBGEvents: @ 852676C
 	bg_event 23, 5, 0, 1, 0, MauvilleCity_EventScript_271E73

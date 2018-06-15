@@ -35,14 +35,14 @@ Route104_EventObjects: @ 85282E4
 	object_event 34, EVENT_OBJ_GFX_HIPSTER, 0, 0, 17, 50, 0, 1, 17, 0, 0, 0, Route104_EventScript_1ECC9E, 719, 0, 0
 
 Route104_MapWarps: @ 8528614
-	warp_def 17, 50, 0, 0, ROUTE_104_MR_BRINEYS_HOUSE
-	warp_def 5, 18, 0, 0, ROUTE_104_PRETTY_PETAL_FLOWER_SHOP
-	warp_def 10, 30, 3, 0, PETALBURG_WOODS
-	warp_def 11, 30, 3, 1, PETALBURG_WOODS
-	warp_def 10, 38, 3, 2, PETALBURG_WOODS
-	warp_def 11, 38, 3, 3, PETALBURG_WOODS
-	warp_def 32, 42, 3, 4, PETALBURG_WOODS
-	warp_def 33, 42, 3, 5, PETALBURG_WOODS
+	warp_def 17, 50, 0, 0, MAP_ROUTE104_MR_BRINEYS_HOUSE
+	warp_def 5, 18, 0, 0, MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP
+	warp_def 10, 30, 3, 0, MAP_PETALBURG_WOODS
+	warp_def 11, 30, 3, 1, MAP_PETALBURG_WOODS
+	warp_def 10, 38, 3, 2, MAP_PETALBURG_WOODS
+	warp_def 11, 38, 3, 3, MAP_PETALBURG_WOODS
+	warp_def 32, 42, 3, 4, MAP_PETALBURG_WOODS
+	warp_def 33, 42, 3, 5, MAP_PETALBURG_WOODS
 
 Route104_MapCoordEvents: @ 8528654
 	coord_event 17, 51, 3, 0, VAR_0x4063, 1, 0, Route104_EventScript_1ECCB3

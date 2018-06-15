@@ -747,7 +747,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F108:: @ 823F108
 	goto_if 5, BattleFrontier_BattleTowerLobby_EventScript_23F108
 	call BattleFrontier_BattleTowerLobby_EventScript_23F135
 	clearflag FLAG_0x077
-	warp BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 255, 1, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 255, 1, 6
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

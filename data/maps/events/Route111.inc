@@ -47,11 +47,11 @@ Route111_EventObjects: @ 85291F0
 	object_event 46, EVENT_OBJ_GFX_FAT_MAN, 0, 0, 19, 101, 3, 7, 17, 0, 0, 0, Route111_EventScript_1F11E4, 843, 0, 0
 
 Route111_MapWarps: @ 8529640
-	warp_def 13, 113, 0, 0, ROUTE_111_WINSTRATE_FAMILYS_HOUSE
-	warp_def 29, 87, 0, 0, DESERT_RUINS
-	warp_def 26, 18, 0, 0, ROUTE_111_OLD_LADYS_REST_STOP
-	warp_def 19, 58, 0, 0, MIRAGE_TOWER_1F
-	warp_def 31, 113, 0, 0, TRAINER_HILL_ENTRANCE
+	warp_def 13, 113, 0, 0, MAP_ROUTE111_WINSTRATE_FAMILYS_HOUSE
+	warp_def 29, 87, 0, 0, MAP_DESERT_RUINS
+	warp_def 26, 18, 0, 0, MAP_ROUTE111_OLD_LADYS_REST_STOP
+	warp_def 19, 58, 0, 0, MAP_MIRAGE_TOWER_1F
+	warp_def 31, 113, 0, 0, MAP_TRAINER_HILL_ENTRANCE
 
 Route111_MapCoordEvents: @ 8529668
 	coord_event 12, 62, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD

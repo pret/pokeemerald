@@ -5,8 +5,8 @@ RustboroCity_Mart_EventObjects: @ 853080C
 	object_event 4, EVENT_OBJ_GFX_BUG_CATCHER, 0, 0, 8, 2, 3, 7, 17, 0, 0, 0, RustboroCity_Mart_EventScript_214F86, 0, 0, 0
 
 RustboroCity_Mart_MapWarps: @ 853086C
-	warp_def 3, 7, 0, 2, RUSTBORO_CITY
-	warp_def 4, 7, 0, 2, RUSTBORO_CITY
+	warp_def 3, 7, 0, 2, MAP_RUSTBORO_CITY
+	warp_def 4, 7, 0, 2, MAP_RUSTBORO_CITY
 
 RustboroCity_Mart_MapEvents:: @ 853087C
 	map_events RustboroCity_Mart_EventObjects, RustboroCity_Mart_MapWarps, 0x0, 0x0

@@ -8,11 +8,11 @@ JaggedPass_EventObjects: @ 8534AE4
 	object_event 7, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 0, 18, 25, 3, 9, 17, 0, 1, 3, JaggedPass_EventScript_23085A, 0, 0, 0
 
 JaggedPass_MapWarps: @ 8534B8C
-	warp_def 14, 40, 3, 2, ROUTE_112
-	warp_def 15, 40, 3, 3, ROUTE_112
-	warp_def 13, 5, 3, 2, MT_CHIMNEY
-	warp_def 14, 5, 3, 3, MT_CHIMNEY
-	warp_def 16, 18, 0, 0, MAGMA_HIDEOUT_1F
+	warp_def 14, 40, 3, 2, MAP_ROUTE112
+	warp_def 15, 40, 3, 3, MAP_ROUTE112
+	warp_def 13, 5, 3, 2, MAP_MT_CHIMNEY
+	warp_def 14, 5, 3, 3, MAP_MT_CHIMNEY
+	warp_def 16, 18, 0, 0, MAP_MAGMA_HIDEOUT_1F
 
 JaggedPass_MapCoordEvents: @ 8534BB4
 	coord_event 13, 15, 3, 0, 2, 0, 0, 0x0

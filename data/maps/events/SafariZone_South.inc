@@ -7,7 +7,7 @@ SafariZone_South_EventObjects: @ 853B2A4
 	object_event 6, EVENT_OBJ_GFX_CAMPER, 0, 0, 36, 17, 3, 9, 17, 0, 0, 0, SafariZone_South_EventScript_23D3A2, 717, 0, 0
 
 SafariZone_South_MapWarps: @ 853B334
-	warp_def 32, 33, 0, 0, ROUTE_121_SAFARI_ZONE_ENTRANCE
+	warp_def 32, 33, 0, 0, MAP_ROUTE121_SAFARI_ZONE_ENTRANCE
 
 SafariZone_South_MapEvents:: @ 853B33C
 	map_events SafariZone_South_EventObjects, SafariZone_South_MapWarps, 0x0, 0x0

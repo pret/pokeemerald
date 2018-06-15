@@ -1,5 +1,6 @@
 #include "constants/flags.h"
 #include "constants/items.h"
+#include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -2363,7 +2364,7 @@ EventScript_27222B:: @ 827222B
 	delay 30
 	applymovement 255, PetalburgCity_Movement_2725A6
 	waitmovement 0
-	showobjectat 255, PETALBURG_CITY
+	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
 	applymovement 255, Movement_27224E
 	waitmovement 0
@@ -2384,7 +2385,7 @@ SouthernIsland_Exterior_EventScript_272250:: @ 8272250
 	compare VAR_FACING, 3
 	call_if 1, BattleFrontier_OutsideWest_EventScript_242A2C
 	delay 30
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	call BattleFrontier_OutsideWest_EventScript_2721E2
 	return
 
@@ -4044,35 +4045,35 @@ Underwater7_EventScript_274223:: @ 8274223
 	return
 
 Underwater3_EventScript_274281:: @ 8274281
-	setescapewarp ROUTE_105, 255, 11, 29
+	setescapewarp MAP_ROUTE105, 255, 11, 29
 	return
 
 Underwater3_EventScript_27428A:: @ 827428A
-	setescapewarp ROUTE_105, 255, 21, 54
+	setescapewarp MAP_ROUTE105, 255, 21, 54
 	return
 
 Underwater3_EventScript_274293:: @ 8274293
-	setescapewarp ROUTE_125, 255, 9, 17
+	setescapewarp MAP_ROUTE125, 255, 9, 17
 	return
 
 Underwater3_EventScript_27429C:: @ 827429C
-	setescapewarp ROUTE_125, 255, 54, 19
+	setescapewarp MAP_ROUTE125, 255, 54, 19
 	return
 
 Underwater3_EventScript_2742A5:: @ 82742A5
-	setescapewarp ROUTE_127, 255, 58, 10
+	setescapewarp MAP_ROUTE127, 255, 58, 10
 	return
 
 Underwater3_EventScript_2742AE:: @ 82742AE
-	setescapewarp ROUTE_127, 255, 62, 31
+	setescapewarp MAP_ROUTE127, 255, 62, 31
 	return
 
 Underwater3_EventScript_2742B7:: @ 82742B7
-	setescapewarp ROUTE_129, 255, 17, 15
+	setescapewarp MAP_ROUTE129, 255, 17, 15
 	return
 
 Underwater3_EventScript_2742C0:: @ 82742C0
-	setescapewarp ROUTE_129, 255, 43, 20
+	setescapewarp MAP_ROUTE129, 255, 43, 20
 	return
 
 Std_RegisteredInMatchCall:: @ 82742C9
@@ -6025,7 +6026,7 @@ gUnknown_082A8337:: @ 82A8337
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
-	warphole UNDEFINED
+	warphole MAP_UNDEFINED
 	waitstate
 	end
 
@@ -13232,7 +13233,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
 	compare VAR_RESULT, 8
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F
-	hideobjectat 2, BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_1
+	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
 	setvar VAR_TEMP_4, 1
 	turnobject 255, 2
 	end
@@ -13245,7 +13246,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35:: @ 82C3F35
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F:: @ 82C3F3F
 	setvar VAR_TEMP_4, 1
 	turnobject 255, 2
-	hideobjectat 1, BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_1
+	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C3F4E:: @ 82C3F4E
@@ -13300,7 +13301,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4030:: @ 82C4030
 	applymovement 255, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49
-	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_1, 255, 4, 7
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1, 255, 4, 7
 	waitstate
 	end
 
@@ -13308,7 +13309,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4049:: @ 82C4049
 	applymovement 255, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49
-	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_3, 255, 4, 19
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3, 255, 4, 19
 	waitstate
 	end
 
@@ -13389,7 +13390,7 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144:: @ 82C4144
 	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49
-	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_2, 255, 2, 7
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM2, 255, 2, 7
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C415C:: @ 82C415C
@@ -13397,7 +13398,7 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C:: @ 82C415C
 	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49
-	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10
 	return
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
@@ -13452,7 +13453,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222:: @ 82C4222
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special sub_81A1780
-	warp BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
 
@@ -14681,7 +14682,7 @@ TrainerHill_1F_EventScript_2C83A6:: @ 82C83A6
 	end
 
 TrainerHill_1F_EventScript_2C83BF:: @ 82C83BF
-	warpsilent TRAINER_HILL_ENTRANCE, 255, 9, 6
+	warpsilent MAP_TRAINER_HILL_ENTRANCE, 255, 9, 6
 	waitstate
 	end
 
@@ -14696,7 +14697,7 @@ TrainerHill_1F_EventScript_2C83C9:: @ 82C83C9
 TrainerHill_1F_EventScript_2C83DF:: @ 82C83DF
 TrainerHill_Entrance_EventScript_2C83DF:: @ 82C83DF
 	setvar VAR_TEMP_1, 0
-	warp TRAINER_HILL_ENTRANCE, 255, 9, 6
+	warp MAP_TRAINER_HILL_ENTRANCE, 255, 9, 6
 	waitstate
 	end
 

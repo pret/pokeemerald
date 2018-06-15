@@ -205,7 +205,7 @@ MossdeepCity_Gym_EventScript_220ACC:: @ 8220ACC
 
 MossdeepCity_Gym_EventScript_220AF1:: @ 8220AF1
 	lockall
-	warp7 MOSSDEEP_CITY_GYM, 255, 7, 30
+	warp7 MAP_MOSSDEEP_CITY_GYM, 255, 7, 30
 	waitstate
 	releaseall
 	end

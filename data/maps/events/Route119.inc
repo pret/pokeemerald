@@ -44,8 +44,8 @@ Route119_EventObjects: @ 852AD6C
 	object_event 43, EVENT_OBJ_GFX_SCOTT, 0, 0, 28, 25, 3, 8, 0, 0, 0, 0, 0x0, 786, 0, 0
 
 Route119_MapWarps: @ 852B174
-	warp_def 6, 32, 0, 0, ROUTE_119_WEATHER_INSTITUTE_1F
-	warp_def 33, 109, 0, 0, ROUTE_119_HOUSE
+	warp_def 6, 32, 0, 0, MAP_ROUTE119_WEATHER_INSTITUTE_1F
+	warp_def 33, 109, 0, 0, MAP_ROUTE119_HOUSE
 
 Route119_MapCoordEvents: @ 852B184
 	coord_event 25, 31, 0, 0, VAR_0x4072, 0, 0, Route119_EventScript_1F4472

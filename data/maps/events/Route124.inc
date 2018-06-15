@@ -13,7 +13,7 @@ Route124_EventObjects: @ 852C3C4
 	object_event 12, EVENT_OBJ_GFX_SWIMMER_F, 0, 0, 69, 74, 1, 66, 17, 0, 1, 7, Route124_EventScript_1F6722, 0, 0, 0
 
 Route124_MapWarps: @ 852C4E4
-	warp_def 70, 48, 3, 0, ROUTE_124_DIVING_TREASURE_HUNTERS_HOUSE
+	warp_def 70, 48, 3, 0, MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE
 
 Route124_MapBGEvents: @ 852C4EC
 	bg_event 73, 48, 3, 0, 0, Route124_EventScript_1F657C

@@ -112,7 +112,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EB5:: @ 8243EB5
 	call BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EE4
 	closedoor 10, 1
 	waitdooranim
-	warp BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 255, 1, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 255, 1, 6
 	waitstate
 	releaseall
 	end
@@ -198,7 +198,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	call_if 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_0x152
-	warpsilent BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 10, 3
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 10, 3
 	waitstate
 	release
 	end

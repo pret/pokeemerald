@@ -3,6 +3,6 @@ MarineCave_Entrance_MapScripts:: @ 823AFD0
 	.byte 0
 
 MarineCave_Entrance_MapScript1_23AFD6: @ 823AFD6
-	setdivewarp UNDERWATER_MARINE_CAVE, 255, 9, 6
+	setdivewarp MAP_UNDERWATER_MARINE_CAVE, 255, 9, 6
 	end
 

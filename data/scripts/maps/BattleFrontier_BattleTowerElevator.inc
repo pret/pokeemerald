@@ -35,24 +35,24 @@ BattleFrontier_BattleTowerElevator_EventScript_241A28:: @ 8241A28
 	return
 
 BattleFrontier_BattleTowerElevator_EventScript_241A55:: @ 8241A55
-	warp BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR, 255, 8, 1
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR, 255, 8, 1
 	waitstate
 	return
 
 BattleFrontier_BattleTowerElevator_EventScript_241A5F:: @ 8241A5F
 	checkflag FLAG_0x152
 	goto_if 0, BattleFrontier_BattleTowerElevator_EventScript_241A7C
-	warp BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR_2, 255, 7, 2
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2, 255, 7, 2
 	waitstate
 	return
 
 BattleFrontier_BattleTowerElevator_EventScript_241A72:: @ 8241A72
-	warp BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR_2, 255, 7, 2
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2, 255, 7, 2
 	waitstate
 	return
 
 BattleFrontier_BattleTowerElevator_EventScript_241A7C:: @ 8241A7C
-	warp BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 10, 1
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 10, 1
 	waitstate
 	return
 

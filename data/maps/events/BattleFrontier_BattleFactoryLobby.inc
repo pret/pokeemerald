@@ -7,8 +7,8 @@ BattleFrontier_BattleFactoryLobby_EventObjects: @ 853C9D8
 	object_event 6, EVENT_OBJ_GFX_SCIENTIST_1, 0, 0, 14, 7, 0, 8, 17, 0, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_2585DD, 0, 0, 0
 
 BattleFrontier_BattleFactoryLobby_MapWarps: @ 853CA68
-	warp_def 9, 11, 0, 2, BATTLE_FRONTIER_OUTSIDE_WEST
-	warp_def 10, 11, 0, 2, BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 9, 11, 0, 2, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 10, 11, 0, 2, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 
 BattleFrontier_BattleFactoryLobby_MapBGEvents: @ 853CA78
 	bg_event 2, 7, 0, 1, 0, BattleFrontier_BattleFactoryLobby_EventScript_2587E1

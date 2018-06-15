@@ -3,8 +3,8 @@ FarawayIsland_Entrance_EventObjects: @ 853D710
 	object_event 2, EVENT_OBJ_GFX_SS_TIDAL, 0, 0, 13, 41, 1, 10, 0, 0, 0, 0, 0x0, 0, 0, 0
 
 FarawayIsland_Entrance_MapWarps: @ 853D740
-	warp_def 22, 7, 3, 0, FARAWAY_ISLAND_INTERIOR
-	warp_def 23, 7, 3, 1, FARAWAY_ISLAND_INTERIOR
+	warp_def 22, 7, 3, 0, MAP_FARAWAY_ISLAND_INTERIOR
+	warp_def 23, 7, 3, 1, MAP_FARAWAY_ISLAND_INTERIOR
 
 FarawayIsland_Entrance_MapCoordEvents: @ 853D750
 	coord_event 9, 18, 3, 0, 0, 0, 0, FarawayIsland_Entrance_EventScript_267C98

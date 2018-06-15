@@ -127,7 +127,7 @@ SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 	msgbox SSTidalCorridor_Text_23C64F, 4
 	checkflag FLAG_0x104
 	call_if 1, SSTidalCorridor_EventScript_23C179
-	warp LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
@@ -137,7 +137,7 @@ SSTidalCorridor_EventScript_23C15A:: @ 823C15A
 	msgbox SSTidalCorridor_Text_23C64F, 4
 	checkflag FLAG_0x104
 	call_if 1, SSTidalCorridor_EventScript_23C179
-	warp SLATEPORT_CITY_HARBOR, 255, 8, 11
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end

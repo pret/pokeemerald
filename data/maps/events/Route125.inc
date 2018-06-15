@@ -11,7 +11,7 @@ Route125_EventObjects: @ 852C50C
 	object_event 10, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 46, 17, 3, 1, 17, 0, 0, 0, Route125_EventScript_291018, 1154, 0, 0
 
 Route125_MapWarps: @ 852C5FC
-	warp_def 22, 19, 0, 0, SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
+	warp_def 22, 19, 0, 0, MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
 
 Route125_MapBGEvents: @ 852C604
 	bg_event 53, 10, 0, 8, 0, ITEM_ULTRA_BALL, 0, 0

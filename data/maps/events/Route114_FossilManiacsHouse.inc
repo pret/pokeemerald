@@ -2,9 +2,9 @@ Route114_FossilManiacsHouse_EventObjects: @ 8533CFC
 	object_event 1, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 0, 3, 2, 3, 8, 17, 0, 0, 0, Route114_FossilManiacsHouse_EventScript_22AD3A, 0, 0, 0
 
 Route114_FossilManiacsHouse_MapWarps: @ 8533D14
-	warp_def 4, 7, 0, 1, ROUTE_114
-	warp_def 5, 7, 0, 1, ROUTE_114
-	warp_def 4, 1, 0, 0, ROUTE_114_FOSSIL_MANIACS_TUNNEL
+	warp_def 4, 7, 0, 1, MAP_ROUTE114
+	warp_def 5, 7, 0, 1, MAP_ROUTE114
+	warp_def 4, 1, 0, 0, MAP_ROUTE114_FOSSIL_MANIACS_TUNNEL
 
 Route114_FossilManiacsHouse_MapBGEvents: @ 8533D2C
 	bg_event 5, 3, 0, 1, 0, Route114_FossilManiacsHouse_EventScript_22AD73

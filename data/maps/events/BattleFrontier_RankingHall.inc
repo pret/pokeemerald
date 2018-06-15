@@ -4,8 +4,8 @@ BattleFrontier_RankingHall_EventObjects: @ 853CEB8
 	object_event 3, EVENT_OBJ_GFX_BOY_3, 0, 0, 44, 11, 3, 2, 17, 0, 0, 0, BattleFrontier_RankingHall_EventScript_25E573, 0, 0, 0
 
 BattleFrontier_RankingHall_MapWarps: @ 853CF00
-	warp_def 26, 14, 3, 4, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 27, 14, 3, 4, BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 26, 14, 3, 4, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 27, 14, 3, 4, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
 
 BattleFrontier_RankingHall_MapBGEvents: @ 853CF10
 	bg_event 26, 9, 0, 1, 0, BattleFrontier_RankingHall_EventScript_25E4AA

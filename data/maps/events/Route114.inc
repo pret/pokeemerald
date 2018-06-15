@@ -28,11 +28,11 @@ Route114_EventObjects: @ 8529E68
 	object_event 27, EVENT_OBJ_GFX_FISHERMAN, 0, 0, 28, 16, 3, 17, 17, 0, 1, 3, Route114_EventScript_1F27F2, 0, 0, 0
 
 Route114_MapWarps: @ 852A0F0
-	warp_def 8, 63, 0, 0, METEOR_FALLS_1F_1R
-	warp_def 29, 5, 0, 0, ROUTE_114_FOSSIL_MANIACS_HOUSE
-	warp_def 27, 36, 0, 0, ROUTE_114_LANETTES_HOUSE
-	warp_def 6, 46, 0, 0, TERRA_CAVE_ENTRANCE
-	warp_def 7, 4, 0, 0, TERRA_CAVE_ENTRANCE
+	warp_def 8, 63, 0, 0, MAP_METEOR_FALLS_1F_1R
+	warp_def 29, 5, 0, 0, MAP_ROUTE114_FOSSIL_MANIACS_HOUSE
+	warp_def 27, 36, 0, 0, MAP_ROUTE114_LANETTES_HOUSE
+	warp_def 6, 46, 0, 0, MAP_TERRA_CAVE_ENTRANCE
+	warp_def 7, 4, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
 Route114_MapBGEvents: @ 852A118
 	bg_event 7, 64, 0, 0, 0, Route114_EventScript_1F2625

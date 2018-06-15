@@ -10,9 +10,9 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventObjects: @ 853D018
 	object_event 9, EVENT_OBJ_GFX_GIRL_1, 0, 0, 12, 10, 0, 2, 17, 0, 0, 0, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F7F1, 0, 0, 0
 
 BattleFrontier_BattlePointExchangeServiceCorner_MapWarps: @ 853D0F0
-	warp_def 7, 10, 0, 6, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 6, 10, 0, 6, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 8, 10, 0, 6, BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 7, 10, 0, 6, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 6, 10, 0, 6, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 8, 10, 0, 6, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
 
 BattleFrontier_BattlePointExchangeServiceCorner_MapEvents:: @ 853D108
 	map_events BattleFrontier_BattlePointExchangeServiceCorner_EventObjects, BattleFrontier_BattlePointExchangeServiceCorner_MapWarps, 0x0, 0x0

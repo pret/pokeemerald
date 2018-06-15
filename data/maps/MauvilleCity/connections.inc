@@ -1,8 +1,8 @@
 MauvilleCity_MapConnectionsList: @ 8486720
-	connection up, 0, ROUTE_111, 0
-	connection down, 0, ROUTE_110, 0
-	connection left, 0, ROUTE_117, 0
-	connection right, 0, ROUTE_118, 0
+	connection up, 0, MAP_ROUTE111
+	connection down, 0, MAP_ROUTE110
+	connection left, 0, MAP_ROUTE117
+	connection right, 0, MAP_ROUTE118
 
 MauvilleCity_MapConnections: @ 8486750
 	.4byte 0x4

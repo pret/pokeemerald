@@ -39,8 +39,8 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	special StartWallyTutorialBattle
 	waitstate
 	msgbox PetalburgCity_Text_1EC271, 4
-	applymovement 2, PetalburgCity_Movement_2725A4, PETALBURG_CITY
-	waitmovement 2, PETALBURG_CITY
+	applymovement 2, PetalburgCity_Movement_2725A4, MAP_PETALBURG_CITY
+	waitmovement 2, MAP_PETALBURG_CITY
 	msgbox PetalburgCity_Text_1EC297, 4
 	closemessage
 	clearflag FLAG_SPECIAL_FLAG_0x4000
@@ -49,7 +49,7 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	special LoadPlayerParty
 	setvar VAR_0x4085, 1
-	warp PETALBURG_CITY_GYM, 255, 4, 108
+	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108
 	waitstate
 	releaseall
 	end
@@ -68,13 +68,13 @@ PetalburgCity_EventScript_1DC390:: @ 81DC390
 	applymovement 255, PetalburgCity_Movement_1DC418
 	waitmovement 0
 	setflag FLAG_0x33E
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	fadedefaultbgm
 	clearflag FLAG_SPECIAL_FLAG_0x4001
-	warp PETALBURG_CITY_WALLYS_HOUSE, 255, 2, 4
+	warp MAP_PETALBURG_CITY_WALLYS_HOUSE, 255, 2, 4
 	waitstate
 	releaseall
 	end

@@ -12,10 +12,10 @@ BirthIsland_Harbor_EventScript_26805D:: @ 826805D
 	applymovement VAR_LAST_TALKED, BirthIsland_Harbor_Movement_2725AA
 	waitmovement 0
 	delay 30
-	hideobjectat 1, BIRTH_ISLAND_HARBOR
+	hideobjectat 1, MAP_BIRTH_ISLAND_HARBOR
 	setvar VAR_0x8004, 2
 	call BirthIsland_Harbor_EventScript_272250
-	warp LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end

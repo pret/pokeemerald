@@ -17,18 +17,18 @@ RustboroCity_EventObjects: @ 85267E0
 	object_event 16, EVENT_OBJ_GFX_BOY_1, 0, 0, 31, 36, 3, 1, 16, 0, 0, 0, RustboroCity_EventScript_1E1236, 0, 0, 0
 
 RustboroCity_MapWarps: @ 8526960
-	warp_def 27, 19, 0, 0, RUSTBORO_CITY_GYM
-	warp_def 13, 30, 0, 0, RUSTBORO_CITY_FLAT_1_1F
-	warp_def 16, 45, 0, 0, RUSTBORO_CITY_MART
-	warp_def 16, 38, 0, 0, RUSTBORO_CITY_POKEMON_CENTER_1F
-	warp_def 27, 34, 0, 0, RUSTBORO_CITY_POKEMON_SCHOOL
-	warp_def 11, 15, 0, 0, RUSTBORO_CITY_DEVON_CORP_1F
-	warp_def 12, 15, 0, 1, RUSTBORO_CITY_DEVON_CORP_1F
-	warp_def 33, 19, 0, 0, RUSTBORO_CITY_HOUSE_1
-	warp_def 9, 38, 0, 0, RUSTBORO_CITY_CUTTERS_HOUSE
-	warp_def 30, 28, 0, 0, RUSTBORO_CITY_HOUSE_2
-	warp_def 5, 51, 0, 0, RUSTBORO_CITY_FLAT_2_1F
-	warp_def 26, 46, 0, 0, RUSTBORO_CITY_HOUSE_3
+	warp_def 27, 19, 0, 0, MAP_RUSTBORO_CITY_GYM
+	warp_def 13, 30, 0, 0, MAP_RUSTBORO_CITY_FLAT1_1F
+	warp_def 16, 45, 0, 0, MAP_RUSTBORO_CITY_MART
+	warp_def 16, 38, 0, 0, MAP_RUSTBORO_CITY_POKEMON_CENTER_1F
+	warp_def 27, 34, 0, 0, MAP_RUSTBORO_CITY_POKEMON_SCHOOL
+	warp_def 11, 15, 0, 0, MAP_RUSTBORO_CITY_DEVON_CORP_1F
+	warp_def 12, 15, 0, 1, MAP_RUSTBORO_CITY_DEVON_CORP_1F
+	warp_def 33, 19, 0, 0, MAP_RUSTBORO_CITY_HOUSE1
+	warp_def 9, 38, 0, 0, MAP_RUSTBORO_CITY_CUTTERS_HOUSE
+	warp_def 30, 28, 0, 0, MAP_RUSTBORO_CITY_HOUSE2
+	warp_def 5, 51, 0, 0, MAP_RUSTBORO_CITY_FLAT2_1F
+	warp_def 26, 46, 0, 0, MAP_RUSTBORO_CITY_HOUSE3
 
 RustboroCity_MapCoordEvents: @ 85269C0
 	coord_event 23, 20, 3, 0, VAR_0x405A, 1, 0, RustboroCity_EventScript_1E095A

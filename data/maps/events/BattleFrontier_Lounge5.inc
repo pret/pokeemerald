@@ -5,8 +5,8 @@ BattleFrontier_Lounge5_EventObjects: @ 853D2EC
 	object_event 4, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 0, 11, 7, 0, 1, 17, 0, 0, 0, BattleFrontier_Lounge5_EventScript_264629, 0, 0, 0
 
 BattleFrontier_Lounge5_MapWarps: @ 853D34C
-	warp_def 1, 7, 0, 7, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 2, 7, 0, 7, BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 1, 7, 0, 7, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 2, 7, 0, 7, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
 
 BattleFrontier_Lounge5_MapEvents:: @ 853D35C
 	map_events BattleFrontier_Lounge5_EventObjects, BattleFrontier_Lounge5_MapWarps, 0x0, 0x0

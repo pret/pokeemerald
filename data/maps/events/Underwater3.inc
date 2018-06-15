@@ -1,6 +1,6 @@
 Underwater3_MapWarps: @ 852CF98
-	warp_def 57, 5, 0, 0, UNDERWATER_MARINE_CAVE
-	warp_def 67, 38, 0, 0, UNDERWATER_MARINE_CAVE
+	warp_def 57, 5, 0, 0, MAP_UNDERWATER_MARINE_CAVE
+	warp_def 67, 38, 0, 0, MAP_UNDERWATER_MARINE_CAVE
 
 Underwater3_MapBGEvents: @ 852CFA8
 	bg_event 12, 42, 3, 7, 0, ITEM_STAR_PIECE, 21, 0

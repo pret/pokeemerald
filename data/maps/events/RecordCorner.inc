@@ -2,10 +2,10 @@ RecordCorner_EventObjects: @ 8539DFC
 	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 0, 10, 5, 3, 8, 0, 0, 0, 0, RecordCorner_EventScript_2774C6, 0, 0, 0
 
 RecordCorner_MapWarps: @ 8539E14
-	warp_def 8, 9, 3, 127, NONE
-	warp_def 9, 9, 3, 127, NONE
-	warp_def 11, 9, 3, 127, NONE
-	warp_def 10, 9, 3, 127, NONE
+	warp_def 8, 9, 3, 127, MAP_NONE
+	warp_def 9, 9, 3, 127, MAP_NONE
+	warp_def 11, 9, 3, 127, MAP_NONE
+	warp_def 10, 9, 3, 127, MAP_NONE
 
 RecordCorner_MapCoordEvents: @ 8539E34
 	coord_event 6, 4, 3, 0, VAR_TEMP_0, 0, 0, gUnknown_0827741D

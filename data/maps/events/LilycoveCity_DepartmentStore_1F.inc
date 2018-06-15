@@ -7,10 +7,10 @@ LilycoveCity_DepartmentStore_1F_EventObjects: @ 853208C
 	object_event 6, EVENT_OBJ_GFX_AZUMARILL, 0, 0, 2, 6, 3, 1, 17, 0, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F84A, 0, 0, 0
 
 LilycoveCity_DepartmentStore_1F_MapWarps: @ 853211C
-	warp_def 8, 7, 0, 0, LILYCOVE_CITY
-	warp_def 9, 7, 0, 0, LILYCOVE_CITY
-	warp_def 16, 1, 0, 0, LILYCOVE_CITY_DEPARTMENT_STORE_2F
-	warp_def 2, 1, 0, 0, LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR
+	warp_def 8, 7, 0, 0, MAP_LILYCOVE_CITY
+	warp_def 9, 7, 0, 0, MAP_LILYCOVE_CITY
+	warp_def 16, 1, 0, 0, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F
+	warp_def 2, 1, 0, 0, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR
 
 LilycoveCity_DepartmentStore_1F_MapBGEvents: @ 853213C
 	bg_event 0, 8, 0, 1, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F85D

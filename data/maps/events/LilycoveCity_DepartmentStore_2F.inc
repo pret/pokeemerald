@@ -6,9 +6,9 @@ LilycoveCity_DepartmentStore_2F_EventObjects: @ 853215C
 	object_event 5, EVENT_OBJ_GFX_WOMAN_4, 0, 0, 7, 6, 3, 7, 0, 0, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_21FB48, 0, 0, 0
 
 LilycoveCity_DepartmentStore_2F_MapWarps: @ 85321D4
-	warp_def 16, 1, 0, 2, LILYCOVE_CITY_DEPARTMENT_STORE_1F
-	warp_def 13, 1, 0, 0, LILYCOVE_CITY_DEPARTMENT_STORE_3F
-	warp_def 2, 1, 0, 0, LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR
+	warp_def 16, 1, 0, 2, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F
+	warp_def 13, 1, 0, 0, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F
+	warp_def 2, 1, 0, 0, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR
 
 LilycoveCity_DepartmentStore_2F_MapEvents:: @ 85321EC
 	map_events LilycoveCity_DepartmentStore_2F_EventObjects, LilycoveCity_DepartmentStore_2F_MapWarps, 0x0, 0x0

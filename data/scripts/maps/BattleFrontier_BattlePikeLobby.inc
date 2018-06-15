@@ -212,7 +212,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	call BattleFrontier_BattlePikeLobby_EventScript_25BA94
 	special HealPlayerParty
 	call BattleFrontier_BattlePikeLobby_EventScript_25BB49
-	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

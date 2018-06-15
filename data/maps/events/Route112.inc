@@ -15,12 +15,12 @@ Route112_EventObjects: @ 8529974
 	object_event 14, EVENT_OBJ_GFX_WOMAN_3, 0, 0, 31, 11, 3, 15, 17, 0, 1, 3, Route112_EventScript_1F1F28, 0, 0, 0
 
 Route112_MapWarps: @ 8529AC4
-	warp_def 28, 27, 0, 0, ROUTE_112_CABLE_CAR_STATION
-	warp_def 29, 27, 0, 1, ROUTE_112_CABLE_CAR_STATION
-	warp_def 6, 46, 3, 0, JAGGED_PASS
-	warp_def 7, 46, 3, 1, JAGGED_PASS
-	warp_def 11, 36, 0, 0, FIERY_PATH
-	warp_def 22, 10, 0, 1, FIERY_PATH
+	warp_def 28, 27, 0, 0, MAP_ROUTE112_CABLE_CAR_STATION
+	warp_def 29, 27, 0, 1, MAP_ROUTE112_CABLE_CAR_STATION
+	warp_def 6, 46, 3, 0, MAP_JAGGED_PASS
+	warp_def 7, 46, 3, 1, MAP_JAGGED_PASS
+	warp_def 11, 36, 0, 0, MAP_FIERY_PATH
+	warp_def 22, 10, 0, 1, MAP_FIERY_PATH
 
 Route112_MapBGEvents: @ 8529AF4
 	bg_event 19, 44, 3, 0, 0, Route112_EventScript_1F1E4F

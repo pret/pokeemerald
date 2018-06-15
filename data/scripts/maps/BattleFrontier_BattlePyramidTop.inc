@@ -111,7 +111,7 @@ BattleFrontier_BattlePyramidTop_EventScript_25521A:: @ 825521A
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special sub_81A1780
-	warp BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
+	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
 	waitstate
 	end
 

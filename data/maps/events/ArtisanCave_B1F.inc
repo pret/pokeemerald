@@ -2,8 +2,8 @@ ArtisanCave_B1F_EventObjects: @ 8537708
 	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 32, 38, 3, 1, 17, 0, 0, 0, ArtisanCave_B1F_EventScript_2914C4, 1162, 0, 0
 
 ArtisanCave_B1F_MapWarps: @ 8537720
-	warp_def 8, 48, 0, 10, BATTLE_FRONTIER_OUTSIDE_WEST
-	warp_def 38, 5, 0, 1, ARTISAN_CAVE_1F
+	warp_def 8, 48, 0, 10, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 38, 5, 0, 1, MAP_ARTISAN_CAVE_1F
 
 ArtisanCave_B1F_MapBGEvents: @ 8537730
 	bg_event 32, 29, 0, 7, 0, ITEM_ZINC, 102, 0

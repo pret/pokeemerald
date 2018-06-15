@@ -6,9 +6,9 @@ BattleFrontier_PokemonCenter_1F_EventObjects: @ 853D55C
 	object_event 5, EVENT_OBJ_GFX_SKITTY, 0, 0, 1, 3, 3, 10, 1, 0, 0, 0, BattleFrontier_PokemonCenter_1F_EventScript_267931, 0, 0, 0
 
 BattleFrontier_PokemonCenter_1F_MapWarps: @ 853D5D4
-	warp_def 7, 8, 3, 12, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 6, 8, 3, 12, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 1, 6, 4, 0, BATTLE_FRONTIER_POKEMON_CENTER_2F
+	warp_def 7, 8, 3, 12, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 6, 8, 3, 12, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 1, 6, 4, 0, MAP_BATTLE_FRONTIER_POKEMON_CENTER_2F
 
 BattleFrontier_PokemonCenter_1F_MapEvents:: @ 853D5EC
 	map_events BattleFrontier_PokemonCenter_1F_EventObjects, BattleFrontier_PokemonCenter_1F_MapWarps, 0x0, 0x0

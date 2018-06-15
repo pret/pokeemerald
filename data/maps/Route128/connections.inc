@@ -1,8 +1,8 @@
 Route128_MapConnectionsList: @ 8486C20
-	connection up, 0, ROUTE_127, 0
-	connection down, 0, ROUTE_129, 0
-	connection right, -40, EVER_GRANDE_CITY, 0
-	connection dive, 0, UNDERWATER_4, 0
+	connection up, 0, MAP_ROUTE127
+	connection down, 0, MAP_ROUTE129
+	connection right, -40, MAP_EVER_GRANDE_CITY
+	connection dive, 0, MAP_UNDERWATER4
 
 Route128_MapConnections: @ 8486C50
 	.4byte 0x4

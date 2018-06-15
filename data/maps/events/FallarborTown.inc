@@ -5,11 +5,11 @@ FallarborTown_EventObjects: @ 8527BE0
 	object_event 4, EVENT_OBJ_GFX_AZURILL, 0, 0, 8, 12, 3, 1, 1, 0, 0, 0, FallarborTown_EventScript_1EB23D, 907, 0, 0
 
 FallarborTown_MapWarps: @ 8527C40
-	warp_def 15, 15, 0, 0, FALLARBOR_TOWN_MART
-	warp_def 8, 7, 0, 0, FALLARBOR_TOWN_BATTLE_TENT_LOBBY
-	warp_def 14, 7, 0, 0, FALLARBOR_TOWN_POKEMON_CENTER_1F
-	warp_def 6, 17, 0, 0, FALLARBOR_TOWN_HOUSE_1
-	warp_def 1, 6, 0, 0, FALLARBOR_TOWN_HOUSE_2
+	warp_def 15, 15, 0, 0, MAP_FALLARBOR_TOWN_MART
+	warp_def 8, 7, 0, 0, MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY
+	warp_def 14, 7, 0, 0, MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F
+	warp_def 6, 17, 0, 0, MAP_FALLARBOR_TOWN_HOUSE1
+	warp_def 1, 6, 0, 0, MAP_FALLARBOR_TOWN_HOUSE2
 
 FallarborTown_MapBGEvents: @ 8527C68
 	bg_event 16, 15, 0, 1, 0, FallarborTown_EventScript_271E6A

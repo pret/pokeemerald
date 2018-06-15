@@ -22,7 +22,7 @@ Route110_TrickHouseEnd_MapScript2_26ACDE: @ 826ACDE
 
 Route110_TrickHouseEnd_EventScript_26ACE8:: @ 826ACE8
 	addobject 1
-	showobjectat 1, ROUTE_110_TRICK_HOUSE_END
+	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_END
 	turnobject 1, 4
 	end
 

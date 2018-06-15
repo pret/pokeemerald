@@ -8,9 +8,9 @@ LittlerootTown_BrendansHouse_1F_EventObjects: @ 852D08C
 	object_event 7, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL, 0, 0, 8, 8, 3, 7, 17, 0, 0, 0, 0x0, 745, 0, 0
 
 LittlerootTown_BrendansHouse_1F_MapWarps: @ 852D134
-	warp_def 9, 8, 0, 1, LITTLEROOT_TOWN
-	warp_def 8, 8, 0, 1, LITTLEROOT_TOWN
-	warp_def 8, 2, 0, 0, LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
+	warp_def 9, 8, 0, 1, MAP_LITTLEROOT_TOWN
+	warp_def 8, 8, 0, 1, MAP_LITTLEROOT_TOWN
+	warp_def 8, 2, 0, 0, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 
 LittlerootTown_BrendansHouse_1F_MapCoordEvents: @ 852D14C
 	coord_event 8, 8, 0, 0, VAR_0x4092, 4, 0, LittlerootTown_BrendansHouse_1F_EventScript_1F78A3

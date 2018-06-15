@@ -242,7 +242,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	call_if 1, Route101_EventScript_1EBE85
 	compare VAR_RESULT, 1
 	call_if 1, Route101_EventScript_1EBE89
-	warp LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
+	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	release
 	end

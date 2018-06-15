@@ -24,9 +24,9 @@ Route115_EventObjects: @ 852A1BC
 	object_event 23, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 12, 14, 3, 1, 17, 0, 0, 0, Route115_EventScript_290E5E, 1144, 0, 0
 
 Route115_MapWarps: @ 852A3E4
-	warp_def 27, 37, 0, 1, METEOR_FALLS_1F_1R
-	warp_def 21, 6, 0, 0, TERRA_CAVE_ENTRANCE
-	warp_def 36, 10, 0, 0, TERRA_CAVE_ENTRANCE
+	warp_def 27, 37, 0, 1, MAP_METEOR_FALLS_1F_1R
+	warp_def 21, 6, 0, 0, MAP_TERRA_CAVE_ENTRANCE
+	warp_def 36, 10, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
 Route115_MapBGEvents: @ 852A3FC
 	bg_event 32, 6, 0, 8, 0, 72, 0, 0

@@ -35,7 +35,7 @@ BattleFrontier_BattleTowerCorridor_EventScript_241B16:: @ 8241B16
 
 BattleFrontier_BattleTowerCorridor_EventScript_241B27:: @ 8241B27
 	setvar VAR_TEMP_0, 0
-	warp BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
 	waitstate
 	end
 

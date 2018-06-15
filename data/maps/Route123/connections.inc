@@ -1,6 +1,6 @@
 Route123_MapConnectionsList: @ 8486B2C
-	connection up, 100, ROUTE_122, 0
-	connection left, 0, ROUTE_118, 0
+	connection up, 100, MAP_ROUTE122
+	connection left, 0, MAP_ROUTE118
 
 Route123_MapConnections: @ 8486B44
 	.4byte 0x2

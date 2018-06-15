@@ -5,9 +5,9 @@ BattleFrontier_BattlePikeLobby_EventObjects: @ 853CBB0
 	object_event 4, EVENT_OBJ_GFX_BEAUTY, 0, 0, 8, 9, 3, 2, 17, 0, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BABD, 0, 0, 0
 
 BattleFrontier_BattlePikeLobby_MapWarps: @ 853CC10
-	warp_def 5, 12, 0, 0, BATTLE_FRONTIER_OUTSIDE_WEST
-	warp_def 4, 12, 0, 0, BATTLE_FRONTIER_OUTSIDE_WEST
-	warp_def 6, 12, 0, 0, BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 5, 12, 0, 0, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 4, 12, 0, 0, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 6, 12, 0, 0, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 
 BattleFrontier_BattlePikeLobby_MapBGEvents: @ 853CC28
 	bg_event 8, 3, 0, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BA80

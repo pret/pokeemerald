@@ -17,9 +17,9 @@ Route113_EventObjects: @ 8529B2C
 	object_event 16, EVENT_OBJ_GFX_MAN_6, 0, 0, 7, 13, 3, 25, 49, 0, 1, 6, Route113_EventScript_1F2316, 0, 0, 0
 
 Route113_MapWarps: @ 8529CAC
-	warp_def 33, 5, 0, 0, ROUTE_113_GLASS_WORKSHOP
-	warp_def 41, 12, 0, 0, TERRA_CAVE_ENTRANCE
-	warp_def 88, 5, 0, 0, TERRA_CAVE_ENTRANCE
+	warp_def 33, 5, 0, 0, MAP_ROUTE113_GLASS_WORKSHOP
+	warp_def 41, 12, 0, 0, MAP_TERRA_CAVE_ENTRANCE
+	warp_def 88, 5, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
 Route113_MapCoordEvents: @ 8529CC4
 	coord_event 19, 11, 3, 0, 8, 0, 0, 0x0

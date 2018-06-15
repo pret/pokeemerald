@@ -16,7 +16,7 @@ SecretBase_RedCave1_EventObjects: @ 85378E4
 	object_event 15, 253, 0, 0, 1, 6, 3, 8, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_RedCave1_MapWarps: @ 8537A4C
-	warp_def 5, 7, 0, 126, NONE
+	warp_def 5, 7, 0, 126, MAP_NONE
 
 SecretBase_RedCave1_MapEvents:: @ 8537A54
 	map_events SecretBase_RedCave1_EventObjects, SecretBase_RedCave1_MapWarps, 0x0, 0x0

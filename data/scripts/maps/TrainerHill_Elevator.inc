@@ -13,7 +13,7 @@ TrainerHill_Elevator_EventScript_269360:: @ 8269360
 	applymovement 255, TrainerHill_Elevator_Movement_2693EB
 	waitmovement 0
 	releaseall
-	warp TRAINER_HILL_ROOF, 255, 15, 5
+	warp MAP_TRAINER_HILL_ROOF, 255, 15, 5
 	waitstate
 	end
 
@@ -35,7 +35,7 @@ TrainerHill_Elevator_EventScript_269375:: @ 8269375
 	delay 25
 	applymovement 255, TrainerHill_Elevator_Movement_2693E7
 	waitmovement 0
-	warp TRAINER_HILL_ENTRANCE, 255, 17, 8
+	warp MAP_TRAINER_HILL_ENTRANCE, 255, 17, 8
 	waitstate
 	end
 

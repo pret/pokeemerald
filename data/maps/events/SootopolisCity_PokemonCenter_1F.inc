@@ -5,9 +5,9 @@ SootopolisCity_PokemonCenter_1F_EventObjects: @ 8533174
 	object_event 4, EVENT_OBJ_GFX_WOMAN_1, 0, 0, 2, 3, 3, 2, 17, 0, 0, 0, SootopolisCity_PokemonCenter_1F_EventScript_2C8256, 0, 0, 0
 
 SootopolisCity_PokemonCenter_1F_MapWarps: @ 85331D4
-	warp_def 7, 8, 3, 0, SOOTOPOLIS_CITY
-	warp_def 6, 8, 3, 0, SOOTOPOLIS_CITY
-	warp_def 1, 6, 4, 0, SOOTOPOLIS_CITY_POKEMON_CENTER_2F
+	warp_def 7, 8, 3, 0, MAP_SOOTOPOLIS_CITY
+	warp_def 6, 8, 3, 0, MAP_SOOTOPOLIS_CITY
+	warp_def 1, 6, 4, 0, MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_2F
 
 SootopolisCity_PokemonCenter_1F_MapEvents:: @ 85331EC
 	map_events SootopolisCity_PokemonCenter_1F_EventObjects, SootopolisCity_PokemonCenter_1F_MapWarps, 0x0, 0x0

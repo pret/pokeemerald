@@ -3,9 +3,9 @@ MtPyre_Exterior_EventObjects: @ 85350DC
 	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 19, 40, 3, 1, 0, 0, 0, 0, MtPyre_Exterior_EventScript_29134B, 1074, 0, 0
 
 MtPyre_Exterior_MapWarps: @ 853510C
-	warp_def 10, 42, 3, 1, MT_PYRE_1F
-	warp_def 19, 10, 3, 1, MT_PYRE_SUMMIT
-	warp_def 20, 10, 3, 1, MT_PYRE_SUMMIT
+	warp_def 10, 42, 3, 1, MAP_MT_PYRE_1F
+	warp_def 19, 10, 3, 1, MAP_MT_PYRE_SUMMIT
+	warp_def 20, 10, 3, 1, MAP_MT_PYRE_SUMMIT
 
 MtPyre_Exterior_MapCoordEvents: @ 8535124
 	coord_event 24, 21, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_231FED

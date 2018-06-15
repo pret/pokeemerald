@@ -141,7 +141,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	setflag FLAG_0x35B
 	setflag FLAG_0x3B2
 	setflag FLAG_SPECIAL_FLAG_0x4000
-	warp ROUTE_128, 255, 38, 22
+	warp MAP_ROUTE128, 255, 38, 22
 	waitstate
 	releaseall
 	end

@@ -37,20 +37,20 @@ MossdeepCity_Gym_EventObjects: @ 85324EC
 	object_event 36, EVENT_OBJ_GFX_TRICK_HOUSE_STATUE, 0, 0, 23, 25, 3, 1, 17, 0, 0, 0, 0x0, 0, 0, 0
 
 MossdeepCity_Gym_MapWarps: @ 853284C
-	warp_def 6, 35, 3, 1, MOSSDEEP_CITY
-	warp_def 7, 35, 3, 1, MOSSDEEP_CITY
-	warp_def 3, 28, 0, 3, MOSSDEEP_CITY_GYM
-	warp_def 1, 23, 3, 2, MOSSDEEP_CITY_GYM
-	warp_def 7, 18, 0, 5, MOSSDEEP_CITY_GYM
-	warp_def 8, 12, 0, 4, MOSSDEEP_CITY_GYM
-	warp_def 9, 18, 0, 7, MOSSDEEP_CITY_GYM
-	warp_def 23, 20, 0, 6, MOSSDEEP_CITY_GYM
-	warp_def 1, 33, 3, 9, MOSSDEEP_CITY_GYM
-	warp_def 20, 24, 0, 8, MOSSDEEP_CITY_GYM
-	warp_def 11, 3, 0, 11, MOSSDEEP_CITY_GYM
-	warp_def 11, 35, 3, 10, MOSSDEEP_CITY_GYM
-	warp_def 13, 32, 0, 13, MOSSDEEP_CITY_GYM
-	warp_def 21, 10, 0, 12, MOSSDEEP_CITY_GYM
+	warp_def 6, 35, 3, 1, MAP_MOSSDEEP_CITY
+	warp_def 7, 35, 3, 1, MAP_MOSSDEEP_CITY
+	warp_def 3, 28, 0, 3, MAP_MOSSDEEP_CITY_GYM
+	warp_def 1, 23, 3, 2, MAP_MOSSDEEP_CITY_GYM
+	warp_def 7, 18, 0, 5, MAP_MOSSDEEP_CITY_GYM
+	warp_def 8, 12, 0, 4, MAP_MOSSDEEP_CITY_GYM
+	warp_def 9, 18, 0, 7, MAP_MOSSDEEP_CITY_GYM
+	warp_def 23, 20, 0, 6, MAP_MOSSDEEP_CITY_GYM
+	warp_def 1, 33, 3, 9, MAP_MOSSDEEP_CITY_GYM
+	warp_def 20, 24, 0, 8, MAP_MOSSDEEP_CITY_GYM
+	warp_def 11, 3, 0, 11, MAP_MOSSDEEP_CITY_GYM
+	warp_def 11, 35, 3, 10, MAP_MOSSDEEP_CITY_GYM
+	warp_def 13, 32, 0, 13, MAP_MOSSDEEP_CITY_GYM
+	warp_def 21, 10, 0, 12, MAP_MOSSDEEP_CITY_GYM
 
 MossdeepCity_Gym_MapCoordEvents: @ 85328BC
 	coord_event 2, 21, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220C67

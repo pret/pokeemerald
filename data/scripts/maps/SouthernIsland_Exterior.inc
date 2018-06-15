@@ -17,10 +17,10 @@ SouthernIsland_Exterior_EventScript_2429D2:: @ 82429D2
 	applymovement VAR_LAST_TALKED, SouthernIsland_Exterior_Movement_2725AA
 	waitmovement 0
 	delay 30
-	hideobjectat 1, SOUTHERN_ISLAND_EXTERIOR
+	hideobjectat 1, MAP_SOUTHERN_ISLAND_EXTERIOR
 	setvar VAR_0x8004, 2
 	call SouthernIsland_Exterior_EventScript_272250
-	warp LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end

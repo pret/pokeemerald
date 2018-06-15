@@ -1,7 +1,7 @@
 Route112_MapConnectionsList: @ 848699C
-	connection up, -60, ROUTE_113, 0
-	connection left, 40, LAVARIDGE_TOWN, 0
-	connection right, -20, ROUTE_111, 0
+	connection up, -60, MAP_ROUTE113
+	connection left, 40, MAP_LAVARIDGE_TOWN
+	connection right, -20, MAP_ROUTE111
 
 Route112_MapConnections: @ 84869C0
 	.4byte 0x3

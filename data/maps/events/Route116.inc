@@ -29,11 +29,11 @@ Route116_EventObjects: @ 852A4B8
 	object_event 28, EVENT_OBJ_GFX_HIKER, 0, 0, 42, 13, 3, 9, 17, 0, 1, 5, Route116_EventScript_1F306F, 0, 0, 0
 
 Route116_MapWarps: @ 852A758
-	warp_def 47, 8, 0, 0, RUSTURF_TUNNEL
-	warp_def 38, 8, 0, 0, ROUTE_116_TUNNELERS_REST_HOUSE
-	warp_def 65, 10, 0, 2, RUSTURF_TUNNEL
-	warp_def 59, 13, 0, 0, TERRA_CAVE_ENTRANCE
-	warp_def 79, 6, 0, 0, TERRA_CAVE_ENTRANCE
+	warp_def 47, 8, 0, 0, MAP_RUSTURF_TUNNEL
+	warp_def 38, 8, 0, 0, MAP_ROUTE116_TUNNELERS_REST_HOUSE
+	warp_def 65, 10, 0, 2, MAP_RUSTURF_TUNNEL
+	warp_def 59, 13, 0, 0, MAP_TERRA_CAVE_ENTRANCE
+	warp_def 79, 6, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
 Route116_MapCoordEvents: @ 852A780
 	coord_event 47, 9, 3, 0, VAR_0x406F, 1, 0, Route116_EventScript_1F2D95

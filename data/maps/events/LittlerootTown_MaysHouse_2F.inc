@@ -17,7 +17,7 @@ LittlerootTown_MaysHouse_2F_EventObjects: @ 852D480
 	object_event 16, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 5, 4, 0, 1, 17, 0, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_1F9334, 818, 0, 0
 
 LittlerootTown_MaysHouse_2F_MapWarps: @ 852D600
-	warp_def 1, 1, 0, 2, LITTLEROOT_TOWN_MAYS_HOUSE_1F
+	warp_def 1, 1, 0, 2, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F
 
 LittlerootTown_MaysHouse_2F_MapBGEvents: @ 852D608
 	bg_event 5, 1, 0, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_1F865F

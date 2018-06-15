@@ -10,11 +10,11 @@ VictoryRoad_1F_EventObjects: @ 8535E04
 	object_event 9, EVENT_OBJ_GFX_MAN_4, 0, 0, 32, 17, 3, 9, 17, 0, 1, 2, VictoryRoad_1F_EventScript_235EB8, 0, 0, 0
 
 VictoryRoad_1F_MapWarps: @ 8535EDC
-	warp_def 15, 40, 3, 2, EVER_GRANDE_CITY
-	warp_def 39, 5, 3, 3, EVER_GRANDE_CITY
-	warp_def 21, 32, 3, 5, VICTORY_ROAD_B1F
-	warp_def 42, 38, 4, 2, VICTORY_ROAD_B1F
-	warp_def 9, 14, 4, 4, VICTORY_ROAD_B1F
+	warp_def 15, 40, 3, 2, MAP_EVER_GRANDE_CITY
+	warp_def 39, 5, 3, 3, MAP_EVER_GRANDE_CITY
+	warp_def 21, 32, 3, 5, MAP_VICTORY_ROAD_B1F
+	warp_def 42, 38, 4, 2, MAP_VICTORY_ROAD_B1F
+	warp_def 9, 14, 4, 4, MAP_VICTORY_ROAD_B1F
 
 VictoryRoad_1F_MapCoordEvents: @ 8535F04
 	coord_event 2, 23, 4, 0, VAR_0x40C3, 0, 0, VictoryRoad_1F_EventScript_235DAF

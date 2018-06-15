@@ -26,10 +26,10 @@ LilycoveCity_ContestLobby_EventObjects: @ 8531534
 	object_event 25, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 0, 9, 10, 3, 10, 34, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21ACF1, 0, 0, 0
 
 LilycoveCity_ContestLobby_MapWarps: @ 853178C
-	warp_def 14, 11, 0, 4, LILYCOVE_CITY
-	warp_def 15, 11, 0, 4, LILYCOVE_CITY
-	warp_def 9, 1, 0, 0, LILYCOVE_CITY_CONTEST_HALL
-	warp_def 21, 1, 0, 1, LILYCOVE_CITY_CONTEST_HALL
+	warp_def 14, 11, 0, 4, MAP_LILYCOVE_CITY
+	warp_def 15, 11, 0, 4, MAP_LILYCOVE_CITY
+	warp_def 9, 1, 0, 0, MAP_LILYCOVE_CITY_CONTEST_HALL
+	warp_def 21, 1, 0, 1, MAP_LILYCOVE_CITY_CONTEST_HALL
 
 LilycoveCity_ContestLobby_MapBGEvents: @ 85317AC
 	bg_event 23, 5, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_294055

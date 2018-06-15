@@ -7,8 +7,8 @@ BattleFrontier_BattleDomeLobby_EventObjects: @ 853C068
 	object_event 6, EVENT_OBJ_GFX_TEALA, 0, 0, 17, 10, 0, 8, 17, 0, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249A47, 0, 0, 0
 
 BattleFrontier_BattleDomeLobby_MapWarps: @ 853C0F8
-	warp_def 11, 16, 0, 1, BATTLE_FRONTIER_OUTSIDE_WEST
-	warp_def 12, 16, 0, 1, BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 11, 16, 0, 1, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 12, 16, 0, 1, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 
 BattleFrontier_BattleDomeLobby_MapBGEvents: @ 853C108
 	bg_event 4, 10, 0, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249D52

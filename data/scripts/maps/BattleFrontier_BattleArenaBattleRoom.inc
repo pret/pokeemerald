@@ -37,7 +37,7 @@ BattleFrontier_BattleArenaBattleRoom_MapScript2_2574D2: @ 82574D2
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC:: @ 82574DC
 	lockall
-	showobjectat 8, BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
+	showobjectat 8, MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BE2
 	waitmovement 0
 	setvar VAR_0x8004, 1
@@ -113,7 +113,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257615:: @ 8257615
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special sub_81A1780
-	warp BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
 	waitstate
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257630:: @ 8257630
@@ -228,7 +228,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257852:: @ 8257852
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special sub_81A1780
-	warp BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
 	waitstate
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257870:: @ 8257870
@@ -533,7 +533,7 @@ BattleFrontier_BattleArenaBattleRoom_MapScript2_257C0C: @ 8257C0C
 	.2byte 0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257C16:: @ 8257C16
-	hideobjectat 8, BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
+	hideobjectat 8, MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
 	removeobject 7
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_24BCDC
 	applymovement 255, BattleFrontier_BattleArenaBattleRoom_Movement_24C773

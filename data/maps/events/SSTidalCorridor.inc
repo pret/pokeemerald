@@ -6,15 +6,15 @@ SSTidalCorridor_EventObjects: @ 853A158
 	object_event 5, EVENT_OBJ_GFX_SCOTT, 0, 0, 9, 10, 3, 9, 0, 0, 0, 0, 0x0, 810, 0, 0
 
 SSTidalCorridor_MapWarps: @ 853A1D0
-	warp_def 4, 9, 3, 0, SS_TIDAL_ROOMS
-	warp_def 7, 9, 3, 2, SS_TIDAL_ROOMS
-	warp_def 10, 9, 3, 4, SS_TIDAL_ROOMS
-	warp_def 13, 9, 3, 6, SS_TIDAL_ROOMS
-	warp_def 4, 3, 3, 8, SS_TIDAL_ROOMS
-	warp_def 7, 3, 3, 9, SS_TIDAL_ROOMS
-	warp_def 10, 3, 3, 10, SS_TIDAL_ROOMS
-	warp_def 13, 3, 3, 11, SS_TIDAL_ROOMS
-	warp_def 16, 2, 3, 0, SS_TIDAL_LOWER_DECK
+	warp_def 4, 9, 3, 0, MAP_SS_TIDAL_ROOMS
+	warp_def 7, 9, 3, 2, MAP_SS_TIDAL_ROOMS
+	warp_def 10, 9, 3, 4, MAP_SS_TIDAL_ROOMS
+	warp_def 13, 9, 3, 6, MAP_SS_TIDAL_ROOMS
+	warp_def 4, 3, 3, 8, MAP_SS_TIDAL_ROOMS
+	warp_def 7, 3, 3, 9, MAP_SS_TIDAL_ROOMS
+	warp_def 10, 3, 3, 10, MAP_SS_TIDAL_ROOMS
+	warp_def 13, 3, 3, 11, MAP_SS_TIDAL_ROOMS
+	warp_def 16, 2, 3, 0, MAP_SS_TIDAL_LOWER_DECK
 
 SSTidalCorridor_MapBGEvents: @ 853A218
 	bg_event 2, 1, 0, 0, 0, SSTidalCorridor_EventScript_23C17D

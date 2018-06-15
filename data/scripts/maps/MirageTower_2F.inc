@@ -6,6 +6,6 @@ MirageTower_2F_MapScripts:: @ 823AD11
 
 MirageTower_2F_MapScript1_23AD21: @ 823AD21
 	setstepcallback 7
-	setholewarp MIRAGE_TOWER_1F, 255, 0, 0
+	setholewarp MAP_MIRAGE_TOWER_1F, 255, 0, 0
 	end
 

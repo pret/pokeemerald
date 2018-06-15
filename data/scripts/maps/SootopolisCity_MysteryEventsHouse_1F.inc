@@ -115,7 +115,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227B10
 	compare VAR_FACING, 3
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227B22
-	warp SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F, 255, 3, 1
+	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F, 255, 3, 1
 	waitstate
 	release
 	end

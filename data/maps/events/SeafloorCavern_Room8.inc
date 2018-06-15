@@ -13,8 +13,8 @@ SeafloorCavern_Room8_EventObjects: @ 8535B04
 	object_event 12, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 0, 7, 4, 3, 1, 0, 0, 0, 0, SeafloorCavern_Room8_EventScript_2908BA, 28, 0, 0
 
 SeafloorCavern_Room8_MapWarps: @ 8535C24
-	warp_def 5, 2, 3, 0, SEAFLOOR_CAVERN_ROOM_9
-	warp_def 5, 12, 3, 0, SEAFLOOR_CAVERN_ROOM_3
+	warp_def 5, 2, 3, 0, MAP_SEAFLOOR_CAVERN_ROOM9
+	warp_def 5, 12, 3, 0, MAP_SEAFLOOR_CAVERN_ROOM3
 
 SeafloorCavern_Room8_MapEvents:: @ 8535C34
 	map_events SeafloorCavern_Room8_EventObjects, SeafloorCavern_Room8_MapWarps, 0x0, 0x0

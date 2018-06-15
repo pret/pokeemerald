@@ -192,7 +192,7 @@ SootopolisCity_EventScript_1E5901:: @ 81E5901
 	return
 
 SootopolisCity_MapScript1_1E590B: @ 81E590B
-	setdivewarp UNDERWATER_SOOTOPOLIS_CITY, 255, 9, 6
+	setdivewarp MAP_UNDERWATER_SOOTOPOLIS_CITY, 255, 9, 6
 	end
 
 SootopolisCity_MapScript2_1E5914: @ 81E5914
@@ -549,7 +549,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	fadenewbgm MUS_RUNECITY
 	delay 120
 	clearflag FLAG_SPECIAL_FLAG_0x4000
-	warp8 SOOTOPOLIS_CITY, 255, 43, 32
+	warp8 MAP_SOOTOPOLIS_CITY, 255, 43, 32
 	waitstate
 	end
 
@@ -602,7 +602,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	fadenewbgm MUS_NAMINORI
 	delay 120
 	clearflag FLAG_SPECIAL_FLAG_0x4000
-	warp8 SOOTOPOLIS_CITY, 255, 29, 53
+	warp8 MAP_SOOTOPOLIS_CITY, 255, 29, 53
 	waitstate
 	end
 
@@ -987,7 +987,7 @@ SootopolisCity_EventScript_1E61CC:: @ 81E61CC
 	setflag FLAG_0x133
 	applymovement 255, SootopolisCity_Movement_1E635A
 	waitmovement 0
-	warp CAVE_OF_ORIGIN_ENTRANCE, 255, 9, 20
+	warp MAP_CAVE_OF_ORIGIN_ENTRANCE, 255, 9, 20
 	waitstate
 	end
 
@@ -1448,7 +1448,7 @@ SootopolisCity_EventScript_1E654C:: @ 81E654C
 	clearflag FLAG_0x358
 	clearflag FLAG_0x394
 	setvar VAR_0x40B9, 2
-	warpsilent SOOTOPOLIS_CITY, 255, 31, 34
+	warpsilent MAP_SOOTOPOLIS_CITY, 255, 31, 34
 	waitstate
 	releaseall
 	end

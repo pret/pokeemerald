@@ -7,8 +7,8 @@ VerdanturfTown_BattleTentLobby_EventObjects: @ 852E648
 	object_event 6, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 0, 2, 8, 3, 9, 17, 0, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201AF7, 0, 0, 0
 
 VerdanturfTown_BattleTentLobby_MapWarps: @ 852E6D8
-	warp_def 6, 9, 0, 0, VERDANTURF_TOWN
-	warp_def 7, 9, 0, 0, VERDANTURF_TOWN
+	warp_def 6, 9, 0, 0, MAP_VERDANTURF_TOWN
+	warp_def 7, 9, 0, 0, MAP_VERDANTURF_TOWN
 
 VerdanturfTown_BattleTentLobby_MapBGEvents: @ 852E6E8
 	bg_event 4, 5, 0, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201B02

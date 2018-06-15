@@ -20,7 +20,7 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_25E44A:: @ 825E44A
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special sub_81A1780
-	warp BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
 

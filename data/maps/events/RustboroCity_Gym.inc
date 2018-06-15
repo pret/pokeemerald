@@ -6,8 +6,8 @@ RustboroCity_Gym_EventObjects: @ 8530538
 	object_event 5, EVENT_OBJ_GFX_HIKER, 0, 0, 1, 6, 3, 8, 17, 0, 1, 3, RustboroCity_Gym_EventScript_213011, 0, 0, 0
 
 RustboroCity_Gym_MapWarps: @ 85305B0
-	warp_def 5, 19, 0, 0, RUSTBORO_CITY
-	warp_def 6, 19, 0, 0, RUSTBORO_CITY
+	warp_def 5, 19, 0, 0, MAP_RUSTBORO_CITY
+	warp_def 6, 19, 0, 0, MAP_RUSTBORO_CITY
 
 RustboroCity_Gym_MapBGEvents: @ 85305C0
 	bg_event 2, 18, 0, 1, 0, RustboroCity_Gym_EventScript_213047

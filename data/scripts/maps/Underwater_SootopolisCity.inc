@@ -3,6 +3,6 @@ Underwater_SootopolisCity_MapScripts:: @ 822D94C
 	.byte 0
 
 Underwater_SootopolisCity_MapScript1_22D952: @ 822D952
-	setdivewarp SOOTOPOLIS_CITY, 255, 29, 53
+	setdivewarp MAP_SOOTOPOLIS_CITY, 255, 29, 53
 	end
 

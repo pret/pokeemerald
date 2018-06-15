@@ -8,10 +8,10 @@ BattleFrontier_BattlePalaceCorridor_EventObjects: @ 853C420
 	object_event 7, EVENT_OBJ_GFX_WINGULL, 0, 0, 3, 10, 0, 2, 33, 0, 0, 0, 0x0, 0, 0, 0
 
 BattleFrontier_BattlePalaceCorridor_MapWarps: @ 853C4C8
-	warp_def 8, 13, 3, 2, BATTLE_FRONTIER_BATTLE_PALACE_LOBBY
-	warp_def 9, 13, 3, 2, BATTLE_FRONTIER_BATTLE_PALACE_LOBBY
-	warp_def 6, 3, 3, 0, BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
-	warp_def 10, 3, 3, 0, BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
+	warp_def 8, 13, 3, 2, MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY
+	warp_def 9, 13, 3, 2, MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY
+	warp_def 6, 3, 3, 0, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
+	warp_def 10, 3, 3, 0, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 
 BattleFrontier_BattlePalaceCorridor_MapEvents:: @ 853C4E8
 	map_events BattleFrontier_BattlePalaceCorridor_EventObjects, BattleFrontier_BattlePalaceCorridor_MapWarps, 0x0, 0x0
