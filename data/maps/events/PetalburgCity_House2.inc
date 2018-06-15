@@ -1,6 +1,6 @@
 PetalburgCity_House2_EventObjects: @ 852F110
-	object_event 1, EVENT_OBJ_GFX_WOMAN_2, 0, 2, 5, 3, 2, 17, 0, 0, PetalburgCity_House2_EventScript_2078F3, 0
-	object_event 2, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 7, 5, 3, 8, 0, 0, 0, PetalburgCity_House2_EventScript_2078FC, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_2, 0, 2, 5, 3, 2, 1, 1, 0, 0, PetalburgCity_House2_EventScript_2078F3, 0
+	object_event 2, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 7, 5, 3, 8, 0, 0, 0, 0, PetalburgCity_House2_EventScript_2078FC, 0
 
 PetalburgCity_House2_MapWarps: @ 852F140
 	warp_def 3, 7, 0, 4, MAP_PETALBURG_CITY

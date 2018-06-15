@@ -1,10 +1,10 @@
 AquaHideout_B2F_EventObjects: @ 853552C
-	object_event 1, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 23, 19, 3, 9, 0, 0, 0, AquaHideout_B2F_EventScript_233E09, 924
-	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 23, 10, 3, 45, 52, 1, 3, AquaHideout_B2F_EventScript_233E8A, 924
-	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 13, 3, 1, 0, 0, 0, AquaHideout_B2F_EventScript_29137F, 1072
-	object_event 4, EVENT_OBJ_GFX_SUBMARINE_SHADOW, 0, 19, 20, 1, 9, 0, 0, 0, 0x0, 943
-	object_event 5, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 7, 5, 3, 10, 17, 1, 5, AquaHideout_B2F_EventScript_233EAF, 924
-	object_event 6, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 13, 5, 3, 9, 17, 1, 5, AquaHideout_B2F_EventScript_233EC6, 924
+	object_event 1, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 23, 19, 3, 9, 0, 0, 0, 0, AquaHideout_B2F_EventScript_233E09, 924
+	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 23, 10, 3, 45, 4, 3, 1, 3, AquaHideout_B2F_EventScript_233E8A, 924
+	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 13, 3, 1, 0, 0, 0, 0, AquaHideout_B2F_EventScript_29137F, 1072
+	object_event 4, EVENT_OBJ_GFX_SUBMARINE_SHADOW, 0, 19, 20, 1, 9, 0, 0, 0, 0, 0x0, 943
+	object_event 5, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 7, 5, 3, 10, 1, 1, 1, 5, AquaHideout_B2F_EventScript_233EAF, 924
+	object_event 6, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 13, 5, 3, 9, 1, 1, 1, 5, AquaHideout_B2F_EventScript_233EC6, 924
 
 AquaHideout_B2F_MapWarps: @ 85355BC
 	warp_def 18, 1, 3, 1, MAP_AQUA_HIDEOUT_B1F

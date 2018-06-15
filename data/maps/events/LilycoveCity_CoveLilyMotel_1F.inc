@@ -1,5 +1,5 @@
 LilycoveCity_CoveLilyMotel_1F_EventObjects: @ 8531134
-	object_event 1, EVENT_OBJ_GFX_MAN_1, 0, 10, 3, 3, 7, 0, 0, 0, LilycoveCity_CoveLilyMotel_1F_EventScript_218189, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_1, 0, 10, 3, 3, 7, 0, 0, 0, 0, LilycoveCity_CoveLilyMotel_1F_EventScript_218189, 0
 
 LilycoveCity_CoveLilyMotel_1F_MapWarps: @ 853114C
 	warp_def 5, 8, 0, 1, MAP_LILYCOVE_CITY

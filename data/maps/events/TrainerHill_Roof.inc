@@ -1,5 +1,5 @@
 TrainerHill_Roof_EventObjects: @ 853D9C4
-	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 12, 7, 3, 8, 17, 0, 0, TrainerHill_Roof_EventScript_268FB2, 0
+	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 12, 7, 3, 8, 1, 1, 0, 0, TrainerHill_Roof_EventScript_268FB2, 0
 
 TrainerHill_Roof_MapWarps: @ 853D9DC
 	warp_def 9, 5, 3, 1, MAP_TRAINER_HILL_4F

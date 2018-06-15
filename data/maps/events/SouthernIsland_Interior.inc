@@ -1,6 +1,6 @@
 SouthernIsland_Interior_EventObjects: @ 853B89C
-	object_event 1, EVENT_OBJ_GFX_HIPSTER, 0, 13, 12, 3, 7, 0, 0, 0, 0x0, 910
-	object_event 2, EVENT_OBJ_GFX_TRADER, 0, 13, 2, 0, 8, 0, 0, 0, 0x0, 911
+	object_event 1, EVENT_OBJ_GFX_HIPSTER, 0, 13, 12, 3, 7, 0, 0, 0, 0, 0x0, 910
+	object_event 2, EVENT_OBJ_GFX_TRADER, 0, 13, 2, 0, 8, 0, 0, 0, 0, 0x0, 911
 
 SouthernIsland_Interior_MapWarps: @ 853B8CC
 	warp_def 13, 18, 3, 0, MAP_SOUTHERN_ISLAND_EXTERIOR

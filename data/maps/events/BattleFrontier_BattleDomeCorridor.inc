@@ -1,5 +1,5 @@
 BattleFrontier_BattleDomeCorridor_EventObjects: @ 853C14C
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 23, 5, 0, 8, 17, 0, 0, 0x0, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 23, 5, 0, 8, 1, 1, 0, 0, 0x0, 0
 
 BattleFrontier_BattleDomeCorridor_MapWarps: @ 853C164
 	warp_def 6, 8, 3, 1, MAP_BATTLE_FRONTIER_OUTSIDE_WEST

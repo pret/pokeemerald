@@ -1,8 +1,8 @@
 OldaleTown_EventObjects: @ 8527854
-	object_event 1, EVENT_OBJ_GFX_GIRL_3, 0, 16, 11, 3, 9, 0, 0, 0, OldaleTown_EventScript_1E8EF3, 0
-	object_event 2, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 13, 7, 3, 8, 0, 0, 0, OldaleTown_EventScript_1E8EFC, 0
-	object_event 3, EVENT_OBJ_GFX_MANIAC, 0, 8, 9, 3, 10, 0, 0, 0, OldaleTown_EventScript_1E901F, 0
-	object_event 4, EVENT_OBJ_GFX_HIPSTER, 0, 11, 19, 3, 7, 17, 0, 0, OldaleTown_EventScript_1E9070, 979
+	object_event 1, EVENT_OBJ_GFX_GIRL_3, 0, 16, 11, 3, 9, 0, 0, 0, 0, OldaleTown_EventScript_1E8EF3, 0
+	object_event 2, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 13, 7, 3, 8, 0, 0, 0, 0, OldaleTown_EventScript_1E8EFC, 0
+	object_event 3, EVENT_OBJ_GFX_MANIAC, 0, 8, 9, 3, 10, 0, 0, 0, 0, OldaleTown_EventScript_1E901F, 0
+	object_event 4, EVENT_OBJ_GFX_HIPSTER, 0, 11, 19, 3, 7, 1, 1, 0, 0, OldaleTown_EventScript_1E9070, 979
 
 OldaleTown_MapWarps: @ 85278B4
 	warp_def 5, 7, 0, 0, MAP_OLDALE_TOWN_HOUSE1

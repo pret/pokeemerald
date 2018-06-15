@@ -1,10 +1,10 @@
 BattleFrontier_BattleDomeLobby_EventObjects: @ 853C068
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 5, 10, 0, 8, 17, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249A35, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_4, 0, 1, 11, 0, 2, 17, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249E10, 0
-	object_event 3, EVENT_OBJ_GFX_LASS, 0, 14, 14, 0, 2, 17, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249DFE, 0
-	object_event 4, EVENT_OBJ_GFX_FAT_MAN, 0, 18, 14, 0, 2, 17, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249E07, 0
-	object_event 5, EVENT_OBJ_GFX_MANIAC, 0, 8, 14, 0, 2, 17, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249DED, 0
-	object_event 6, EVENT_OBJ_GFX_TEALA, 0, 17, 10, 0, 8, 17, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249A47, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 5, 10, 0, 8, 1, 1, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249A35, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_4, 0, 1, 11, 0, 2, 1, 1, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249E10, 0
+	object_event 3, EVENT_OBJ_GFX_LASS, 0, 14, 14, 0, 2, 1, 1, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249DFE, 0
+	object_event 4, EVENT_OBJ_GFX_FAT_MAN, 0, 18, 14, 0, 2, 1, 1, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249E07, 0
+	object_event 5, EVENT_OBJ_GFX_MANIAC, 0, 8, 14, 0, 2, 1, 1, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249DED, 0
+	object_event 6, EVENT_OBJ_GFX_TEALA, 0, 17, 10, 0, 8, 1, 1, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249A47, 0
 
 BattleFrontier_BattleDomeLobby_MapWarps: @ 853C0F8
 	warp_def 11, 16, 0, 1, MAP_BATTLE_FRONTIER_OUTSIDE_WEST

@@ -1,5 +1,5 @@
 SootopolisCity_House6_EventObjects: @ 853349C
-	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 4, 3, 3, 2, 17, 0, 0, SootopolisCity_House6_EventScript_226F5C, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 4, 3, 3, 2, 1, 1, 0, 0, SootopolisCity_House6_EventScript_226F5C, 0
 
 SootopolisCity_House6_MapWarps: @ 85334B4
 	warp_def 3, 6, 0, 9, MAP_SOOTOPOLIS_CITY

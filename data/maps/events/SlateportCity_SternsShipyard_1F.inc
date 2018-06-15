@@ -1,8 +1,8 @@
 SlateportCity_SternsShipyard_1F_EventObjects: @ 852F318
-	object_event 1, EVENT_OBJ_GFX_MAN_1, 0, 5, 5, 3, 8, 0, 0, 0, SlateportCity_SternsShipyard_1F_EventScript_207F40, 0
-	object_event 2, EVENT_OBJ_GFX_SCIENTIST_1, 0, 10, 7, 3, 7, 0, 0, 0, SlateportCity_SternsShipyard_1F_EventScript_207FED, 0
-	object_event 3, EVENT_OBJ_GFX_SCIENTIST_1, 0, 18, 8, 3, 5, 1, 0, 0, SlateportCity_SternsShipyard_1F_EventScript_207FF6, 0
-	object_event 4, EVENT_OBJ_GFX_OLD_MAN_1, 0, 12, 11, 3, 2, 33, 0, 0, SlateportCity_SternsShipyard_1F_EventScript_207FFF, 869
+	object_event 1, EVENT_OBJ_GFX_MAN_1, 0, 5, 5, 3, 8, 0, 0, 0, 0, SlateportCity_SternsShipyard_1F_EventScript_207F40, 0
+	object_event 2, EVENT_OBJ_GFX_SCIENTIST_1, 0, 10, 7, 3, 7, 0, 0, 0, 0, SlateportCity_SternsShipyard_1F_EventScript_207FED, 0
+	object_event 3, EVENT_OBJ_GFX_SCIENTIST_1, 0, 18, 8, 3, 5, 1, 0, 0, 0, SlateportCity_SternsShipyard_1F_EventScript_207FF6, 0
+	object_event 4, EVENT_OBJ_GFX_OLD_MAN_1, 0, 12, 11, 3, 2, 1, 2, 0, 0, SlateportCity_SternsShipyard_1F_EventScript_207FFF, 869
 
 SlateportCity_SternsShipyard_1F_MapWarps: @ 852F378
 	warp_def 2, 14, 0, 2, MAP_SLATEPORT_CITY
