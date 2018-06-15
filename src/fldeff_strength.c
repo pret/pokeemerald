@@ -14,11 +14,11 @@ static void sub_8145E74(void);
 // text
 bool8 SetUpFieldMove_Strength(void)
 {
-    if (npc_before_player_of_type(87) == TRUE)
+    if (SetLastTalkedObjectInFrontOfPlayer(87) == TRUE)
     {
         gSpecialVar_Result = GetCursorSelectionMonId();
-        gUnknown_03005DB0 = FieldCallback_Teleport;
-        gUnknown_0203CEEC = FldEff_UseStrength;
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = FldEff_UseStrength;
         return TRUE;
     }
     return FALSE;

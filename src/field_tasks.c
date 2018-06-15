@@ -623,7 +623,7 @@ static void PerStepCallback_8069F64(u8 taskId)
     {
         data[1] = x;
         data[2] = y;
-        if (MetatileBehavior_IsAsh(MapGridGetMetatileBehaviorAt(x, y)))
+        if (MetatileBehavior_IsAshGrass(MapGridGetMetatileBehaviorAt(x, y)))
         {
             if (MapGridGetMetatileIdAt(x, y) == 0x20a)
             {

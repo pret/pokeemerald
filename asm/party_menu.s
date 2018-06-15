@@ -10199,10 +10199,10 @@ _081B5714:
 	movs r0, 0x5
 	bl PlaySE
 _081B571A:
-	ldr r0, =gUnknown_03005DB0
+	ldr r0, =gFieldCallback2
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, =gUnknown_0203CEEC
+	ldr r0, =gPostMenuFieldCallback
 	str r1, [r0]
 	adds r0, r4, 0
 	bl sub_81B1C1C
@@ -10213,8 +10213,8 @@ _081B572A:
 	.pool
 	thumb_func_end sub_81B56D8
 
-	thumb_func_start FieldCallback_Teleport
-FieldCallback_Teleport: @ 81B5738
+	thumb_func_start FieldCallback_PrepareFadeInFromMenu
+FieldCallback_PrepareFadeInFromMenu: @ 81B5738
 	push {lr}
 	bl pal_fill_black
 	ldr r0, =task_launch_hm_phase_2
@@ -10224,7 +10224,7 @@ FieldCallback_Teleport: @ 81B5738
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end FieldCallback_Teleport
+	thumb_func_end FieldCallback_PrepareFadeInFromMenu
 
 	thumb_func_start task_launch_hm_phase_2
 task_launch_hm_phase_2: @ 81B5750
@@ -10241,7 +10241,7 @@ task_launch_hm_phase_2: @ 81B5750
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [r1]
-	ldr r0, =gUnknown_0203CEEC
+	ldr r0, =gPostMenuFieldCallback
 	ldr r0, [r0]
 	bl _call_via_r0
 	adds r0, r4, 0
@@ -10345,10 +10345,10 @@ sub_81B5820: @ 81B5820
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081B585C
-	ldr r1, =gUnknown_03005DB0
-	ldr r0, =FieldCallback_Teleport
+	ldr r1, =gFieldCallback2
+	ldr r0, =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, =gUnknown_0203CEEC
+	ldr r1, =gPostMenuFieldCallback
 	ldr r0, =hm_surf_run_dp02scr
 	str r0, [r1]
 	movs r0, 0x1
@@ -10463,10 +10463,10 @@ hm_prepare_waterfall: @ 81B58F0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081B594C
-	ldr r1, =gUnknown_03005DB0
-	ldr r0, =FieldCallback_Teleport
+	ldr r1, =gFieldCallback2
+	ldr r0, =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, =gUnknown_0203CEEC
+	ldr r1, =gPostMenuFieldCallback
 	ldr r0, =hm2_waterfall
 	str r0, [r1]
 	movs r0, 0x1
@@ -10510,10 +10510,10 @@ sub_81B5974: @ 81B5974
 	b _081B599E
 	.pool
 _081B5990:
-	ldr r1, =gUnknown_03005DB0
-	ldr r0, =FieldCallback_Teleport
+	ldr r1, =gFieldCallback2
+	ldr r0, =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, =gUnknown_0203CEEC
+	ldr r1, =gPostMenuFieldCallback
 	ldr r0, =sub_81B5958
 	str r0, [r1]
 	movs r0, 0x1
@@ -17276,7 +17276,7 @@ sub_81B9354: @ 81B9354
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_03005DB0
+	ldr r2, =gFieldCallback2
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r2]
 	movs r1, 0
@@ -17308,7 +17308,7 @@ sub_81B9390: @ 81B9390
 	movs r0, 0xFF
 	strh r0, [r4]
 _081B93A6:
-	ldr r0, =gUnknown_03005DB0
+	ldr r0, =gFieldCallback2
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
 	ldr r0, =CB2_ReturnToField
@@ -17417,7 +17417,7 @@ _081B9486:
 	ldr r1, =gSpecialVar_0x8004
 	ldrb r0, [r2]
 	strh r0, [r1]
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback2
 	ldr r0, =hm_add_c3_without_phase_2
 	str r0, [r1]
 	ldr r0, =CB2_ReturnToField
@@ -17553,7 +17553,7 @@ _081B95A4:
 	lsrs r0, 24
 	strh r0, [r4]
 _081B95BA:
-	ldr r0, =gUnknown_03005DB0
+	ldr r0, =gFieldCallback2
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
 	ldr r0, =CB2_ReturnToField

@@ -530,7 +530,7 @@ void sub_809FA18(void) // Called from field_screen.s
 {
     sUnknown_02037619[0] = 0;
     sUnknown_02037619[1] = 0;
-    gUnknown_03005DB0 = sub_809FA00;
+    gFieldCallback2 = sub_809FA00;
 }
 
 void sub_809FA34(u8 taskId) // Referenced in field_screen.s and rom_8011DC0.s
