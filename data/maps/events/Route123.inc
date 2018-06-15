@@ -44,7 +44,7 @@ Route123_EventObjects: @ 852BDBC
 	object_event 43, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 57, 16, 3, 1, 17, 0, 0, 0, Route123_EventScript_290FE4, 1153, 0, 0
 
 Route123_MapWarps: @ 852C1C4
-	warp_def 22, 6, 0, 0, ROUTE_123_BERRY_MASTERS_HOUSE
+	warp_def 22, 6, 0, 0, MAP_ROUTE123_BERRY_MASTERS_HOUSE
 
 Route123_MapCoordEvents: @ 852C1CC
 	coord_event 90, 16, 3, 0, 21, 0, 0, 0x0

@@ -12,10 +12,10 @@ NavelRock_Harbor_EventScript_2690BD:: @ 82690BD
 	applymovement VAR_LAST_TALKED, NavelRock_Harbor_Movement_2725AA
 	waitmovement 0
 	delay 30
-	hideobjectat 1, NAVEL_ROCK_HARBOR
+	hideobjectat 1, MAP_NAVEL_ROCK_HARBOR
 	setvar VAR_0x8004, 2
 	call NavelRock_Harbor_EventScript_272250
-	warp LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end

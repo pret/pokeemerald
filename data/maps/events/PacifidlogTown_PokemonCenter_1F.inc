@@ -6,9 +6,9 @@ PacifidlogTown_PokemonCenter_1F_EventObjects: @ 852EA70
 	object_event 5, EVENT_OBJ_GFX_MAN_6, 0, 0, 12, 8, 3, 7, 0, 0, 0, 0, PacifidlogTown_PokemonCenter_1F_EventScript_2C82BE, 0, 0, 0
 
 PacifidlogTown_PokemonCenter_1F_MapWarps: @ 852EAE8
-	warp_def 7, 8, 3, 0, PACIFIDLOG_TOWN
-	warp_def 6, 8, 3, 0, PACIFIDLOG_TOWN
-	warp_def 1, 6, 4, 0, PACIFIDLOG_TOWN_POKEMON_CENTER_2F
+	warp_def 7, 8, 3, 0, MAP_PACIFIDLOG_TOWN
+	warp_def 6, 8, 3, 0, MAP_PACIFIDLOG_TOWN
+	warp_def 1, 6, 4, 0, MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_2F
 
 PacifidlogTown_PokemonCenter_1F_MapEvents:: @ 852EB00
 	map_events PacifidlogTown_PokemonCenter_1F_EventObjects, PacifidlogTown_PokemonCenter_1F_MapWarps, 0x0, 0x0

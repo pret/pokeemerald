@@ -5,9 +5,9 @@ FortreeCity_PokemonCenter_2F_EventObjects: @ 8530E20
 	object_event 4, EVENT_OBJ_GFX_MYSTERY_GIFT_MAN, 0, 0, 1, 2, 0, 8, 17, 0, 0, 0, FortreeCity_PokemonCenter_2F_EventScript_276B03, 702, 0, 0
 
 FortreeCity_PokemonCenter_2F_MapWarps: @ 8530E80
-	warp_def 1, 6, 4, 2, FORTREE_CITY_POKEMON_CENTER_1F
-	warp_def 5, 1, 3, 0, UNION_ROOM
-	warp_def 9, 1, 3, 0, TRADE_CENTER
+	warp_def 1, 6, 4, 2, MAP_FORTREE_CITY_POKEMON_CENTER_1F
+	warp_def 5, 1, 3, 0, MAP_UNION_ROOM
+	warp_def 9, 1, 3, 0, MAP_TRADE_CENTER
 
 FortreeCity_PokemonCenter_2F_MapEvents:: @ 8530E98
 	map_events FortreeCity_PokemonCenter_2F_EventObjects, FortreeCity_PokemonCenter_2F_MapWarps, 0x0, 0x0

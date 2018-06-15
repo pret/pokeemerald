@@ -10,12 +10,12 @@ PetalburgCity_EventObjects: @ 8525FD0
 	object_event 9, EVENT_OBJ_GFX_SCOTT, 0, 0, 13, 12, 3, 1, 17, 0, 0, 0, 0x0, 995, 0, 0
 
 PetalburgCity_MapWarps: @ 85260A8
-	warp_def 10, 19, 0, 0, PETALBURG_CITY_HOUSE_1
-	warp_def 7, 5, 0, 0, PETALBURG_CITY_WALLYS_HOUSE
-	warp_def 15, 8, 0, 0, PETALBURG_CITY_GYM
-	warp_def 20, 16, 0, 0, PETALBURG_CITY_POKEMON_CENTER_1F
-	warp_def 20, 24, 0, 0, PETALBURG_CITY_HOUSE_2
-	warp_def 25, 12, 0, 0, PETALBURG_CITY_MART
+	warp_def 10, 19, 0, 0, MAP_PETALBURG_CITY_HOUSE1
+	warp_def 7, 5, 0, 0, MAP_PETALBURG_CITY_WALLYS_HOUSE
+	warp_def 15, 8, 0, 0, MAP_PETALBURG_CITY_GYM
+	warp_def 20, 16, 0, 0, MAP_PETALBURG_CITY_POKEMON_CENTER_1F
+	warp_def 20, 24, 0, 0, MAP_PETALBURG_CITY_HOUSE2
+	warp_def 25, 12, 0, 0, MAP_PETALBURG_CITY_MART
 
 PetalburgCity_MapCoordEvents: @ 85260D8
 	coord_event 8, 10, 3, 0, VAR_0x4057, 0, 0, PetalburgCity_EventScript_1DC49A

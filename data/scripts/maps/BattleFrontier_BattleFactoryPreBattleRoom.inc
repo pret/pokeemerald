@@ -60,7 +60,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A18B
 	waitmovement 0
-	warp BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM, 255, 6, 11
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM, 255, 6, 11
 	waitstate
 	end
 

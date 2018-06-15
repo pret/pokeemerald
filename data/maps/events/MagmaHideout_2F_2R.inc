@@ -7,8 +7,8 @@ MagmaHideout_2F_2R_EventObjects: @ 853731C
 	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 14, 6, 3, 1, 17, 0, 0, 0, MagmaHideout_2F_2R_EventScript_2914F8, 1165, 0, 0
 
 MagmaHideout_2F_2R_MapWarps: @ 85373AC
-	warp_def 10, 22, 3, 0, MAGMA_HIDEOUT_2F_1R
-	warp_def 36, 4, 0, 2, MAGMA_HIDEOUT_1F
+	warp_def 10, 22, 3, 0, MAP_MAGMA_HIDEOUT_2F_1R
+	warp_def 36, 4, 0, 2, MAP_MAGMA_HIDEOUT_1F
 
 MagmaHideout_2F_2R_MapEvents:: @ 85373BC
 	map_events MagmaHideout_2F_2R_EventObjects, MagmaHideout_2F_2R_MapWarps, 0x0, 0x0

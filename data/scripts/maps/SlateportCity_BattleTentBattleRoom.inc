@@ -30,8 +30,8 @@ SlateportCity_BattleTentBattleRoom_MapScript2_20999A: @ 820999A
 
 SlateportCity_BattleTentBattleRoom_EventScript_2099A4:: @ 82099A4
 	setvar VAR_TEMP_1, 1
-	hideobjectat 255, FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
-	hideobjectat 2, SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat 255, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat 2, MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
 	end
 
 SlateportCity_BattleTentBattleRoom_MapScript2_2099B4: @ 82099B4
@@ -68,7 +68,7 @@ SlateportCity_BattleTentCorridor_EventScript_209A1B:: @ 8209A1B
 	setvar VAR_0x8006, 4
 	special sub_81A1780
 	special LoadPlayerParty
-	warp SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
 SlateportCity_BattleTentBattleRoom_EventScript_209A39:: @ 8209A39
@@ -84,7 +84,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_209A39:: @ 8209A39
 	case 3, SlateportCity_BattleTentBattleRoom_EventScript_209A7B
 @ 	case 3, SlateportCity_BattleTentCorridor_EventScript_209A7B
 	setvar VAR_0x8006, 1
-	warp SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 255, 2, 3
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 255, 2, 3
 	waitstate
 
 SlateportCity_BattleTentBattleRoom_EventScript_209A7B:: @ 8209A7B
@@ -94,7 +94,7 @@ SlateportCity_BattleTentCorridor_EventScript_209A7B:: @ 8209A7B
 	setvar VAR_0x8006, 3
 	special sub_81A1780
 	special LoadPlayerParty
-	warp SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 @ forced stop
 

@@ -204,7 +204,7 @@ FallarborTown_BattleTentLobby_EventScript_20013C:: @ 820013C
 	msgbox FallarborTown_BattleTentLobby_Text_2C4DC3, 4
 	closemessage
 	call FallarborTown_BattleTentLobby_EventScript_2001CF
-	warp FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR, 255, 2, 7
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR, 255, 2, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

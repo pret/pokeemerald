@@ -32,7 +32,7 @@ FallarborTown_BattleTentBattleRoom_MapScript2_2008DD: @ 82008DD
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008E7:: @ 82008E7
 	lockall
-	showobjectat 1, FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	showobjectat 1, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	applymovement 1, FallarborTown_BattleTentBattleRoom_Movement_200B8D
 	waitmovement 0
 	setvar VAR_0x8004, 1
@@ -73,7 +73,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_20097E:: @ 820097E
 	setvar VAR_0x8006, 4
 	special sub_81A1780
 	special LoadPlayerParty
-	warp FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
 FallarborTown_BattleTentBattleRoom_EventScript_20099C:: @ 820099C
@@ -158,7 +158,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_200AF3:: @ 8200AF3
 	setvar VAR_0x8006, 3
 	special sub_81A1780
 	special LoadPlayerParty
-	warp FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
@@ -260,8 +260,8 @@ FallarborTown_BattleTentBattleRoom_MapScript2_200BB0: @ 8200BB0
 	.2byte 0
 
 FallarborTown_BattleTentBattleRoom_EventScript_200BBA:: @ 8200BBA
-	hideobjectat 255, FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
-	hideobjectat 1, FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat 255, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat 1, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	removeobject 3
 	setvar VAR_TEMP_1, 1
 	end

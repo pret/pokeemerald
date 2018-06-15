@@ -6,8 +6,8 @@ FallarborTown_Mart_EventObjects: @ 852E2D4
 	object_event 5, EVENT_OBJ_GFX_GIRL_2, 0, 0, 7, 2, 3, 7, 0, 0, 0, 0, FallarborTown_Mart_EventScript_2C80B6, 0, 0, 0
 
 FallarborTown_Mart_MapWarps: @ 852E34C
-	warp_def 3, 7, 0, 0, FALLARBOR_TOWN
-	warp_def 4, 7, 0, 0, FALLARBOR_TOWN
+	warp_def 3, 7, 0, 0, MAP_FALLARBOR_TOWN
+	warp_def 4, 7, 0, 0, MAP_FALLARBOR_TOWN
 
 FallarborTown_Mart_MapEvents:: @ 852E35C
 	map_events FallarborTown_Mart_EventObjects, FallarborTown_Mart_MapWarps, 0x0, 0x0

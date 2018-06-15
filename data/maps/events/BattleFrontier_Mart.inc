@@ -5,8 +5,8 @@ BattleFrontier_Mart_EventObjects: @ 853D68C
 	object_event 4, EVENT_OBJ_GFX_BOY_2, 0, 0, 8, 4, 3, 9, 0, 0, 0, 0, BattleFrontier_Mart_EventScript_267B20, 0, 0, 0
 
 BattleFrontier_Mart_MapWarps: @ 853D6EC
-	warp_def 3, 7, 0, 4, BATTLE_FRONTIER_OUTSIDE_WEST
-	warp_def 4, 7, 0, 4, BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 3, 7, 0, 4, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
+	warp_def 4, 7, 0, 4, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 
 BattleFrontier_Mart_MapEvents:: @ 853D6FC
 	map_events BattleFrontier_Mart_EventObjects, BattleFrontier_Mart_MapWarps, 0x0, 0x0

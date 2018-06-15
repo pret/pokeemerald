@@ -6,9 +6,9 @@ AbandonedShip_Rooms2_1F_EventObjects: @ 85369B8
 	object_event 5, EVENT_OBJ_GFX_TUBER_F, 0, 0, 7, 2, 3, 9, 17, 0, 1, 3, AbandonedShip_Rooms2_1F_EventScript_23816F, 0, 0, 0
 
 AbandonedShip_Rooms2_1F_MapWarps: @ 8536A30
-	warp_def 4, 16, 3, 8, ABANDONED_SHIP_CORRIDORS_1F
-	warp_def 5, 16, 3, 8, ABANDONED_SHIP_CORRIDORS_1F
-	warp_def 4, 1, 3, 11, ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 4, 16, 3, 8, MAP_ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 5, 16, 3, 8, MAP_ABANDONED_SHIP_CORRIDORS_1F
+	warp_def 4, 1, 3, 11, MAP_ABANDONED_SHIP_CORRIDORS_1F
 
 AbandonedShip_Rooms2_1F_MapEvents:: @ 8536A48
 	map_events AbandonedShip_Rooms2_1F_EventObjects, AbandonedShip_Rooms2_1F_MapWarps, 0x0, 0x0

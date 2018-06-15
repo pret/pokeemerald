@@ -8,7 +8,7 @@ Route108_EventObjects: @ 8528964
 	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 42, 4, 3, 1, 17, 0, 0, 0, Route108_EventScript_290D4D, 1139, 0, 0
 
 Route108_MapWarps: @ 8528A0C
-	warp_def 29, 6, 3, 0, ABANDONED_SHIP_DECK
+	warp_def 29, 6, 3, 0, MAP_ABANDONED_SHIP_DECK
 
 Route108_MapBGEvents: @ 8528A14
 	bg_event 38, 14, 3, 7, 0, ITEM_RARE_CANDY, 86, 0

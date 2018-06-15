@@ -11,12 +11,12 @@ MeteorFalls_1F_1R_EventObjects: @ 8533F74
 	object_event 10, EVENT_OBJ_GFX_SCIENTIST_1, 0, 0, 13, 23, 3, 21, 0, 0, 0, 0, MeteorFalls_1F_1R_EventScript_22BF25, 942, 0, 0
 
 MeteorFalls_1F_1R_MapWarps: @ 8534064
-	warp_def 27, 18, 4, 0, ROUTE_114
-	warp_def 6, 39, 3, 0, ROUTE_115
-	warp_def 10, 3, 3, 0, METEOR_FALLS_1F_2R
-	warp_def 5, 4, 3, 4, METEOR_FALLS_B1F_1R
-	warp_def 26, 28, 3, 5, METEOR_FALLS_B1F_1R
-	warp_def 4, 2, 0, 0, METEOR_FALLS_STEVENS_CAVE
+	warp_def 27, 18, 4, 0, MAP_ROUTE114
+	warp_def 6, 39, 3, 0, MAP_ROUTE115
+	warp_def 10, 3, 3, 0, MAP_METEOR_FALLS_1F_2R
+	warp_def 5, 4, 3, 4, MAP_METEOR_FALLS_B1F_1R
+	warp_def 26, 28, 3, 5, MAP_METEOR_FALLS_B1F_1R
+	warp_def 4, 2, 0, 0, MAP_METEOR_FALLS_STEVENS_CAVE
 
 MeteorFalls_1F_1R_MapCoordEvents: @ 8534094
 	coord_event 14, 18, 4, 0, VAR_0x40BF, 0, 0, MeteorFalls_1F_1R_EventScript_22BD5F

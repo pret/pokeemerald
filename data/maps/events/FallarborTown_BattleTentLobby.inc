@@ -6,8 +6,8 @@ FallarborTown_BattleTentLobby_EventObjects: @ 852E370
 	object_event 5, EVENT_OBJ_GFX_SCOTT, 0, 0, 0, 7, 3, 10, 17, 0, 0, 0, FallarborTown_BattleTentLobby_EventScript_200228, 767, 0, 0
 
 FallarborTown_BattleTentLobby_MapWarps: @ 852E3E8
-	warp_def 6, 9, 0, 1, FALLARBOR_TOWN
-	warp_def 7, 9, 0, 1, FALLARBOR_TOWN
+	warp_def 6, 9, 0, 1, MAP_FALLARBOR_TOWN
+	warp_def 7, 9, 0, 1, MAP_FALLARBOR_TOWN
 
 FallarborTown_BattleTentLobby_MapBGEvents: @ 852E3F8
 	bg_event 4, 5, 0, 0, 0, FallarborTown_BattleTentLobby_EventScript_20024F

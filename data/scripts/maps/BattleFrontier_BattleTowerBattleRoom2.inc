@@ -33,7 +33,7 @@ BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F33: @ 8248F33
 	.2byte 0
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F3D:: @ 8248F3D
-	hideobjectat 255, BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM_2
+	hideobjectat 255, MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM2
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F43: @ 8248F43

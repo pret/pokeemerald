@@ -10,11 +10,11 @@ GraniteCave_B2F_EventObjects: @ 8534484
 	object_event 9, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 0, 3, 21, 3, 1, 17, 0, 0, 0, GraniteCave_B2F_EventScript_2907A6, 23, 0, 0
 
 GraniteCave_B2F_MapWarps: @ 853455C
-	warp_def 29, 13, 3, 2, GRANITE_CAVE_B1F
-	warp_def 28, 21, 3, 3, GRANITE_CAVE_B1F
-	warp_def 8, 5, 3, 4, GRANITE_CAVE_B1F
-	warp_def 12, 3, 3, 5, GRANITE_CAVE_B1F
-	warp_def 29, 2, 3, 6, GRANITE_CAVE_B1F
+	warp_def 29, 13, 3, 2, MAP_GRANITE_CAVE_B1F
+	warp_def 28, 21, 3, 3, MAP_GRANITE_CAVE_B1F
+	warp_def 8, 5, 3, 4, MAP_GRANITE_CAVE_B1F
+	warp_def 12, 3, 3, 5, MAP_GRANITE_CAVE_B1F
+	warp_def 29, 2, 3, 6, MAP_GRANITE_CAVE_B1F
 
 GraniteCave_B2F_MapBGEvents: @ 8534584
 	bg_event 28, 6, 3, 7, 0, ITEM_EVERSTONE, 48, 0

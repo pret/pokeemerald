@@ -10,8 +10,8 @@ LilycoveCity_PokemonTrainerFanClub_EventObjects: @ 8531D20
 	object_event 9, EVENT_OBJ_GFX_BOY_1, 0, 0, 11, 5, 3, 8, 17, 0, 0, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_21CD7B, 730, 0, 0
 
 LilycoveCity_PokemonTrainerFanClub_MapWarps: @ 8531DF8
-	warp_def 6, 13, 0, 5, LILYCOVE_CITY
-	warp_def 5, 13, 0, 5, LILYCOVE_CITY
+	warp_def 6, 13, 0, 5, MAP_LILYCOVE_CITY
+	warp_def 5, 13, 0, 5, MAP_LILYCOVE_CITY
 
 LilycoveCity_PokemonTrainerFanClub_MapEvents:: @ 8531E08
 	map_events LilycoveCity_PokemonTrainerFanClub_EventObjects, LilycoveCity_PokemonTrainerFanClub_MapWarps, 0x0, 0x0

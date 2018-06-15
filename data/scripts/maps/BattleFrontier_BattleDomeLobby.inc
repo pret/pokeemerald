@@ -266,7 +266,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249BC2:: @ 8249BC2
 	closemessage
 	call BattleFrontier_BattleDomeLobby_EventScript_249C6E
 	special HealPlayerParty
-	warp BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR, 255, 23, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR, 255, 23, 6
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

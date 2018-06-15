@@ -9,18 +9,18 @@ SSTidalRooms_EventObjects: @ 853A314
 	object_event 8, EVENT_OBJ_GFX_MANIAC, 0, 0, 28, 5, 3, 7, 17, 0, 0, 0, SSTidalRooms_EventScript_23C9F2, 951, 0, 0
 
 SSTidalRooms_MapWarps: @ 853A3D4
-	warp_def 4, 16, 0, 0, SS_TIDAL_CORRIDOR
-	warp_def 5, 16, 0, 0, SS_TIDAL_CORRIDOR
-	warp_def 13, 16, 0, 1, SS_TIDAL_CORRIDOR
-	warp_def 14, 16, 0, 1, SS_TIDAL_CORRIDOR
-	warp_def 22, 16, 0, 2, SS_TIDAL_CORRIDOR
-	warp_def 23, 16, 0, 2, SS_TIDAL_CORRIDOR
-	warp_def 31, 16, 0, 3, SS_TIDAL_CORRIDOR
-	warp_def 32, 16, 0, 3, SS_TIDAL_CORRIDOR
-	warp_def 4, 1, 0, 4, SS_TIDAL_CORRIDOR
-	warp_def 13, 1, 0, 5, SS_TIDAL_CORRIDOR
-	warp_def 22, 1, 0, 6, SS_TIDAL_CORRIDOR
-	warp_def 31, 1, 0, 7, SS_TIDAL_CORRIDOR
+	warp_def 4, 16, 0, 0, MAP_SS_TIDAL_CORRIDOR
+	warp_def 5, 16, 0, 0, MAP_SS_TIDAL_CORRIDOR
+	warp_def 13, 16, 0, 1, MAP_SS_TIDAL_CORRIDOR
+	warp_def 14, 16, 0, 1, MAP_SS_TIDAL_CORRIDOR
+	warp_def 22, 16, 0, 2, MAP_SS_TIDAL_CORRIDOR
+	warp_def 23, 16, 0, 2, MAP_SS_TIDAL_CORRIDOR
+	warp_def 31, 16, 0, 3, MAP_SS_TIDAL_CORRIDOR
+	warp_def 32, 16, 0, 3, MAP_SS_TIDAL_CORRIDOR
+	warp_def 4, 1, 0, 4, MAP_SS_TIDAL_CORRIDOR
+	warp_def 13, 1, 0, 5, MAP_SS_TIDAL_CORRIDOR
+	warp_def 22, 1, 0, 6, MAP_SS_TIDAL_CORRIDOR
+	warp_def 31, 1, 0, 7, MAP_SS_TIDAL_CORRIDOR
 
 SSTidalRooms_MapBGEvents: @ 853A434
 	bg_event 15, 11, 0, 0, 0, SSTidalRooms_EventScript_23CA33

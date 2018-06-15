@@ -1,7 +1,7 @@
 OldaleTown_MapConnectionsList: @ 8486614
-	connection up, 0, ROUTE_103, 0
-	connection down, 0, ROUTE_101, 0
-	connection left, 0, ROUTE_102, 0
+	connection up, 0, MAP_ROUTE103
+	connection down, 0, MAP_ROUTE101
+	connection left, 0, MAP_ROUTE102
 
 OldaleTown_MapConnections: @ 8486638
 	.4byte 0x3

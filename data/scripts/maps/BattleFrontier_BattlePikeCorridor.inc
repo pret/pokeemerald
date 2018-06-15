@@ -32,7 +32,7 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	setvar VAR_0x8006, 99
 	special sub_81A1780
 	call BattleFrontier_BattlePikeCorridor_EventScript_25BB49
-	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10
 	waitstate
 	end
 

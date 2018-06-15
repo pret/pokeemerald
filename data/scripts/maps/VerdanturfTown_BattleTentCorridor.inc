@@ -20,7 +20,7 @@ VerdanturfTown_BattleTentCorridor_EventScript_20209A:: @ 820209A
 	closedoor 2, 1
 	waitdooranim
 	setvar VAR_0x8006, 0
-	warp VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM, 255, 6, 5
+	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM, 255, 6, 5
 	waitstate
 	releaseall
 	end

@@ -41,7 +41,7 @@ BattleFrontier_BattleDomeCorridor_EventScript_24B161:: @ 824B161
 BattleFrontier_BattleDomeCorridor_EventScript_24B18F:: @ 824B18F
 	waitmovement 0
 	setvar VAR_0x8006, 0
-	warp BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 255, 5, 7
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 255, 5, 7
 	waitstate
 	end
 

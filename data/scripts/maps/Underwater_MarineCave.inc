@@ -8,6 +8,6 @@ Underwater_MarineCave_MapScript1_23AFC3: @ 823AFC3
 	end
 
 Underwater_MarineCave_MapScript1_23AFC7: @ 823AFC7
-	setdivewarp MARINE_CAVE_ENTRANCE, 255, 10, 17
+	setdivewarp MAP_MARINE_CAVE_ENTRANCE, 255, 10, 17
 	end
 

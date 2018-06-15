@@ -16,7 +16,7 @@ SecretBase_BlueCave2_EventObjects: @ 8538504
 	object_event 15, 253, 0, 0, 1, 6, 3, 8, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_BlueCave2_MapWarps: @ 853866C
-	warp_def 7, 5, 0, 126, NONE
+	warp_def 7, 5, 0, 126, MAP_NONE
 
 SecretBase_BlueCave2_MapEvents:: @ 8538674
 	map_events SecretBase_BlueCave2_EventObjects, SecretBase_BlueCave2_MapWarps, 0x0, 0x0

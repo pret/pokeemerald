@@ -46,7 +46,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A:: @ 825D20A
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special sub_81A1780
-	warp BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
 
@@ -128,7 +128,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	playse 268
 	delay 65
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D8A4
-	showobjectat 1, BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_1
+	showobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
 	delay 4
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D8E7
 	delay 4

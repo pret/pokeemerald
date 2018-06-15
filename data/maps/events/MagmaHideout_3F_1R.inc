@@ -4,9 +4,9 @@ MagmaHideout_3F_1R_EventObjects: @ 85373D0
 	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 9, 16, 0, 1, 17, 0, 0, 0, MagmaHideout_3F_1R_EventScript_291505, 1166, 0, 0
 
 MagmaHideout_3F_1R_MapWarps: @ 8537418
-	warp_def 7, 21, 0, 0, MAGMA_HIDEOUT_4F
-	warp_def 21, 9, 0, 0, MAGMA_HIDEOUT_3F_2R
-	warp_def 23, 3, 0, 2, MAGMA_HIDEOUT_2F_1R
+	warp_def 7, 21, 0, 0, MAP_MAGMA_HIDEOUT_4F
+	warp_def 21, 9, 0, 0, MAP_MAGMA_HIDEOUT_3F_2R
+	warp_def 23, 3, 0, 2, MAP_MAGMA_HIDEOUT_2F_1R
 
 MagmaHideout_3F_1R_MapEvents:: @ 8537430
 	map_events MagmaHideout_3F_1R_EventObjects, MagmaHideout_3F_1R_MapWarps, 0x0, 0x0

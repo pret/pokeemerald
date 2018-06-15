@@ -118,31 +118,31 @@ DewfordTown_EventScript_1E9656:: @ 81E9656
 
 DewfordTown_EventScript_1E9660:: @ 81E9660
 	call DewfordTown_EventScript_271E95
-	setobjectpriority 2, DEWFORD_TOWN, 0
-	setobjectpriority 255, DEWFORD_TOWN, 0
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	setobjectpriority 255, MAP_DEWFORD_TOWN, 0
 	applymovement 2, DewfordTown_Movement_1E991D
 	waitmovement 0
 	removeobject 2
 	applymovement 255, DewfordTown_Movement_1E9911
 	waitmovement 0
-	hideobjectat 255, DEWFORD_TOWN
+	hideobjectat 255, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_2720A0
 	applymovement 4, DewfordTown_Movement_1E97A2
 	applymovement 255, DewfordTown_Movement_1E97A2
 	waitmovement 0
-	showobjectat 255, ROUTE_104
+	showobjectat 255, MAP_ROUTE104
 	call DewfordTown_EventScript_2720A8
 	applymovement 255, DewfordTown_Movement_1E9914
 	waitmovement 0
-	showobjectat 255, ROUTE_104
+	showobjectat 255, MAP_ROUTE104
 	clearflag FLAG_0x2E3
 	clearflag FLAG_0x371
 	clearflag FLAG_0x2E6
 	setflag FLAG_0x2E7
-	hideobjectat 4, DEWFORD_TOWN
+	hideobjectat 4, MAP_DEWFORD_TOWN
 	setvar VAR_0x408E, 2
-	resetobjectpriority 255, DEWFORD_TOWN
-	warp ROUTE_104_MR_BRINEYS_HOUSE, 255, 5, 4
+	resetobjectpriority 255, MAP_DEWFORD_TOWN
+	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
 	copyvar VAR_0x4096, VAR_0x8008
 	waitstate
 	release
@@ -150,40 +150,40 @@ DewfordTown_EventScript_1E9660:: @ 81E9660
 
 DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	call DewfordTown_EventScript_271E95
-	setobjectpriority 2, DEWFORD_TOWN, 0
-	setobjectpriority 255, DEWFORD_TOWN, 1
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	setobjectpriority 255, MAP_DEWFORD_TOWN, 1
 	applymovement 2, DewfordTown_Movement_1E991D
 	waitmovement 0
 	removeobject 2
 	applymovement 255, DewfordTown_Movement_1E9911
 	waitmovement 0
-	hideobjectat 255, DEWFORD_TOWN
+	hideobjectat 255, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_2720A0
 	applymovement 4, DewfordTown_Movement_1E9865
 	applymovement 255, DewfordTown_Movement_1E9865
 	waitmovement 0
 	call DewfordTown_EventScript_2720A8
-	showobjectat 255, ROUTE_109
+	showobjectat 255, MAP_ROUTE109
 	applymovement 255, DewfordTown_Movement_1E9918
 	waitmovement 0
 	setobjectxyperm 2, 21, 26
 	addobject 2
-	setobjectpriority 2, ROUTE_109, 0
+	setobjectpriority 2, MAP_ROUTE109, 0
 	applymovement 2, DewfordTown_Movement_1E991F
 	waitmovement 0
 	clearflag FLAG_0x2E5
 	addobject 1
 	clearflag FLAG_0x2E8
 	setflag FLAG_0x2E7
-	hideobjectat 4, DEWFORD_TOWN
+	hideobjectat 4, MAP_DEWFORD_TOWN
 	checkflag FLAG_0x095
 	call_if 0, DewfordTown_EventScript_1E9790
 	checkflag FLAG_0x095
 	call_if 1, DewfordTown_EventScript_1E9799
 	closemessage
 	copyvar VAR_0x4096, VAR_0x8008
-	resetobjectpriority 255, DEWFORD_TOWN
-	resetobjectpriority 2, ROUTE_109
+	resetobjectpriority 255, MAP_DEWFORD_TOWN
+	resetobjectpriority 2, MAP_ROUTE109
 	moveobjectoffscreen 2
 	release
 	end

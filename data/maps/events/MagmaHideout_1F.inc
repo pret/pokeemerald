@@ -7,10 +7,10 @@ MagmaHideout_1F_EventObjects: @ 85371CC
 	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 0, 6, 23, 3, 1, 0, 0, 0, 0, MagmaHideout_1F_EventScript_2908BA, 19, 0, 0
 
 MagmaHideout_1F_MapWarps: @ 853725C
-	warp_def 10, 34, 3, 4, JAGGED_PASS
-	warp_def 25, 34, 3, 1, MAGMA_HIDEOUT_2F_1R
-	warp_def 31, 3, 0, 1, MAGMA_HIDEOUT_2F_2R
-	warp_def 20, 22, 0, 0, MAGMA_HIDEOUT_2F_3R
+	warp_def 10, 34, 3, 4, MAP_JAGGED_PASS
+	warp_def 25, 34, 3, 1, MAP_MAGMA_HIDEOUT_2F_1R
+	warp_def 31, 3, 0, 1, MAP_MAGMA_HIDEOUT_2F_2R
+	warp_def 20, 22, 0, 0, MAP_MAGMA_HIDEOUT_2F_3R
 
 MagmaHideout_1F_MapEvents:: @ 853727C
 	map_events MagmaHideout_1F_EventObjects, MagmaHideout_1F_MapWarps, 0x0, 0x0

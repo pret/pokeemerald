@@ -49,7 +49,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218D5A:: @ 8218D5A
 	lockall
 	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_218DA1
 	waitmovement 0
-	warp LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
+	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate
 	end
 
@@ -57,7 +57,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218D6F:: @ 8218D6F
 	lockall
 	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_218D9B
 	waitmovement 0
-	warp LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
+	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate
 	end
 
@@ -65,7 +65,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218D84:: @ 8218D84
 	lockall
 	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_218D9E
 	waitmovement 0
-	warp LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
+	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate
 	end
 

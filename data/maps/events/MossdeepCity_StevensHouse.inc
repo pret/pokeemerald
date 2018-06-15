@@ -4,8 +4,8 @@ MossdeepCity_StevensHouse_EventObjects: @ 8532C10
 	object_event 3, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 0, 6, 4, 3, 76, 17, 0, 0, 0, MossdeepCity_StevensHouse_EventScript_22291B, 727, 0, 0
 
 MossdeepCity_StevensHouse_MapWarps: @ 8532C58
-	warp_def 3, 7, 0, 6, MOSSDEEP_CITY
-	warp_def 4, 7, 0, 6, MOSSDEEP_CITY
+	warp_def 3, 7, 0, 6, MAP_MOSSDEEP_CITY
+	warp_def 4, 7, 0, 6, MAP_MOSSDEEP_CITY
 
 MossdeepCity_StevensHouse_MapBGEvents: @ 8532C68
 	bg_event 0, 1, 0, 0, 0, MossdeepCity_StevensHouse_EventScript_222909

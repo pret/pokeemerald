@@ -7,8 +7,8 @@ LittlerootTown_ProfessorBirchsLab_EventObjects: @ 852D64C
 	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 6, 8, 3, 8, 17, 0, 0, 0, LittlerootTown_ProfessorBirchsLab_EventScript_1FA023, 838, 0, 0
 
 LittlerootTown_ProfessorBirchsLab_MapWarps: @ 852D6DC
-	warp_def 6, 12, 0, 2, LITTLEROOT_TOWN
-	warp_def 7, 12, 0, 2, LITTLEROOT_TOWN
+	warp_def 6, 12, 0, 2, MAP_LITTLEROOT_TOWN
+	warp_def 7, 12, 0, 2, MAP_LITTLEROOT_TOWN
 
 LittlerootTown_ProfessorBirchsLab_MapBGEvents: @ 852D6EC
 	bg_event 10, 7, 0, 1, 0, LittlerootTown_ProfessorBirchsLab_EventScript_1FA3E3

@@ -3,8 +3,8 @@ SootopolisCity_LotadAndSeedotHouse_EventObjects: @ 853352C
 	object_event 2, EVENT_OBJ_GFX_HIKER, 0, 0, 5, 4, 3, 9, 0, 0, 0, 0, SootopolisCity_LotadAndSeedotHouse_EventScript_22722B, 0, 0, 0
 
 SootopolisCity_LotadAndSeedotHouse_MapWarps: @ 853355C
-	warp_def 3, 6, 0, 11, SOOTOPOLIS_CITY
-	warp_def 4, 6, 0, 11, SOOTOPOLIS_CITY
+	warp_def 3, 6, 0, 11, MAP_SOOTOPOLIS_CITY
+	warp_def 4, 6, 0, 11, MAP_SOOTOPOLIS_CITY
 
 SootopolisCity_LotadAndSeedotHouse_MapBGEvents: @ 853356C
 	bg_event 5, 1, 0, 0, 0, SootopolisCity_LotadAndSeedotHouse_EventScript_22734D

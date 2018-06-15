@@ -2,8 +2,8 @@ Route110_TrickHouseEnd_EventObjects: @ 853DEFC
 	object_event 1, EVENT_OBJ_GFX_MAN_1, 0, 0, 4, 5, 3, 10, 0, 0, 0, 0, Route110_TrickHouseEnd_EventScript_26AD17, 899, 0, 0
 
 Route110_TrickHouseEnd_MapWarps: @ 853DF14
-	warp_def 10, 1, 3, 2, ROUTE_110_TRICK_HOUSE_PUZZLE_1
-	warp_def 2, 1, 3, 0, ROUTE_110_TRICK_HOUSE_CORRIDOR
+	warp_def 10, 1, 3, 2, MAP_ROUTE110_TRICK_HOUSE_PUZZLE1
+	warp_def 2, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_CORRIDOR
 
 Route110_TrickHouseEnd_MapCoordEvents: @ 853DF24
 	coord_event 2, 2, 3, 0, VAR_TEMP_2, 0, 0, Route110_TrickHouseEnd_EventScript_26B041

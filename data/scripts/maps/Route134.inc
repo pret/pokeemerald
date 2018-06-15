@@ -3,7 +3,7 @@ Route134_MapScripts:: @ 81F7644
 	.byte 0
 
 Route134_MapScript1_1F764A: @ 81F764A
-	setdivewarp UNDERWATER_ROUTE_134, 255, 8, 6
+	setdivewarp MAP_UNDERWATER_ROUTE134, 255, 8, 6
 	end
 
 Route134_EventScript_1F7653:: @ 81F7653

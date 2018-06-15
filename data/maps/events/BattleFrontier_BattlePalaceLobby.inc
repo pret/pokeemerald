@@ -7,9 +7,9 @@ BattleFrontier_BattlePalaceLobby_EventObjects: @ 853C340
 	object_event 6, EVENT_OBJ_GFX_OLD_MAN_1, 0, 0, 19, 6, 0, 8, 17, 0, 0, 0, BattleFrontier_BattlePalaceLobby_EventScript_24D956, 0, 0, 0
 
 BattleFrontier_BattlePalaceLobby_MapWarps: @ 853C3D0
-	warp_def 12, 11, 0, 2, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 13, 11, 0, 2, BATTLE_FRONTIER_OUTSIDE_EAST
-	warp_def 5, 4, 3, 0, BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR
+	warp_def 12, 11, 0, 2, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 13, 11, 0, 2, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 5, 4, 3, 0, MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR
 
 BattleFrontier_BattlePalaceLobby_MapBGEvents: @ 853C3E8
 	bg_event 2, 7, 0, 1, 0, BattleFrontier_BattlePalaceLobby_EventScript_24DC50

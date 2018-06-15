@@ -9,7 +9,7 @@ RustboroCity_Flat1_2F_EventObjects: @ 85308EC
 	object_event 8, EVENT_OBJ_GFX_PIKACHU_DOLL, 0, 0, 9, 7, 3, 1, 17, 0, 0, 0, RustboroCity_Flat1_2F_EventScript_215246, 0, 0, 0
 
 RustboroCity_Flat1_2F_MapWarps: @ 85309AC
-	warp_def 2, 1, 0, 2, RUSTBORO_CITY_FLAT_1_1F
+	warp_def 2, 1, 0, 2, MAP_RUSTBORO_CITY_FLAT1_1F
 
 RustboroCity_Flat1_2F_MapEvents:: @ 85309B4
 	map_events RustboroCity_Flat1_2F_EventObjects, RustboroCity_Flat1_2F_MapWarps, 0x0, 0x0

@@ -6,7 +6,7 @@ BattleFrontier_BattleArenaLobby_EventObjects: @ 853C814
 	object_event 5, EVENT_OBJ_GFX_YOUNGSTER, 0, 0, 14, 10, 3, 9, 17, 0, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_2560A6, 0, 0, 0
 
 BattleFrontier_BattleArenaLobby_MapWarps: @ 853C88C
-	warp_def 7, 12, 3, 1, BATTLE_FRONTIER_OUTSIDE_EAST
+	warp_def 7, 12, 3, 1, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
 
 BattleFrontier_BattleArenaLobby_MapBGEvents: @ 853C894
 	bg_event 5, 9, 3, 1, 0, BattleFrontier_BattleArenaLobby_EventScript_256092

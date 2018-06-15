@@ -3,7 +3,7 @@ SlateportCity_Harbor_MapScripts:: @ 820C97D
 	.byte 0
 
 SlateportCity_Harbor_MapScript1_20C983: @ 820C983
-	setescapewarp SLATEPORT_CITY, 255, 28, 13
+	setescapewarp MAP_SLATEPORT_CITY, 255, 28, 13
 	setvar VAR_TEMP_1, 0
 	compare VAR_0x40A0, 1
 	call_if 1, SlateportCity_Harbor_EventScript_20C9A9
@@ -205,7 +205,7 @@ SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
 	goto_eq SlateportCity_Harbor_EventScript_20CBDD
 	setvar VAR_PORTHOLE, 1
 	call SlateportCity_Harbor_EventScript_20CBE9
-	warp SS_TIDAL_CORRIDOR, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
 	release
 	end
@@ -215,7 +215,7 @@ SlateportCity_Harbor_EventScript_20CBBA:: @ 820CBBA
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CBDD
 	call SlateportCity_Harbor_EventScript_20CBE9
-	warp BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
+	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
 	waitstate
 	release
 	end
@@ -232,13 +232,13 @@ SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_2725A6
 	waitmovement 0
 	delay 30
-	hideobjectat VAR_LAST_TALKED, SLATEPORT_CITY_HARBOR
+	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
 	compare VAR_FACING, 2
 	call_if 1, SlateportCity_Harbor_EventScript_20CC42
 	compare VAR_FACING, 4
 	call_if 1, SlateportCity_Harbor_EventScript_20CC37
 	delay 30
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 5
 	call SlateportCity_Harbor_EventScript_2721E2
 	return

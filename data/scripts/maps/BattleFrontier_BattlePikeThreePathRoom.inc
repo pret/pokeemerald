@@ -27,7 +27,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C891:: @ 825C891
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C89A:: @ 825C89A
-	warp BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
 

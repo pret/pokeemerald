@@ -20,7 +20,7 @@ BattleFrontier_BattleArenaCorridor_EventScript_2573C9:: @ 82573C9
 	applymovement 255, BattleFrontier_BattleArenaCorridor_Movement_25742C
 	waitmovement 0
 	setvar VAR_0x8006, 0
-	warp BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM, 255, 7, 5
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM, 255, 7, 5
 	waitstate
 	end
 

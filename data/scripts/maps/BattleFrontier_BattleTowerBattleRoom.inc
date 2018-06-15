@@ -491,24 +491,24 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_2421B8:: @ 82421B8
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_2421F2
 	compare VAR_RESULT, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_2421FC
-	warp BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 6, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 	end
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_2421E8:: @ 82421E8
-	warp BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 10, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 10, 6
 	waitstate
 	end
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_2421F2:: @ 82421F2
-	warp BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 14, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 14, 6
 	waitstate
 	end
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_2421FC:: @ 82421FC
 	setvar VAR_0x8004, 13
 	special sub_8161F74
-	warp BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 18, 6
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 255, 18, 6
 	waitstate
 	end
 

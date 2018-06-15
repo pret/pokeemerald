@@ -3,6 +3,6 @@ CaveOfOrigin_Entrance_MapScripts:: @ 8235759
 	.byte 0
 
 CaveOfOrigin_Entrance_MapScript1_23575F: @ 823575F
-	setescapewarp SOOTOPOLIS_CITY, 255, 31, 17
+	setescapewarp MAP_SOOTOPOLIS_CITY, 255, 31, 17
 	end
 

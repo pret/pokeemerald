@@ -6,8 +6,8 @@ LilycoveCity_Harbor_EventObjects: @ 8531E1C
 	object_event 5, EVENT_OBJ_GFX_OLD_MAN_1, 0, 0, 8, 10, 3, 8, 17, 0, 0, 0, 0x0, 748, 0, 0
 
 LilycoveCity_Harbor_MapWarps: @ 8531E94
-	warp_def 11, 14, 0, 12, LILYCOVE_CITY
-	warp_def 12, 14, 0, 12, LILYCOVE_CITY
+	warp_def 11, 14, 0, 12, MAP_LILYCOVE_CITY
+	warp_def 12, 14, 0, 12, MAP_LILYCOVE_CITY
 
 LilycoveCity_Harbor_MapEvents:: @ 8531EA4
 	map_events LilycoveCity_Harbor_EventObjects, LilycoveCity_Harbor_MapWarps, 0x0, 0x0

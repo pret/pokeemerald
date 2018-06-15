@@ -6,6 +6,6 @@ GraniteCave_B1F_MapScripts:: @ 822DC5E
 
 GraniteCave_B1F_MapScript1_22DC6E: @ 822DC6E
 	setstepcallback 7
-	setholewarp GRANITE_CAVE_B2F, 255, 0, 0
+	setholewarp MAP_GRANITE_CAVE_B2F, 255, 0, 0
 	end
 

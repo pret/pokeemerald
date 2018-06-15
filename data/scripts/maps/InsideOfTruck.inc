@@ -32,7 +32,7 @@ InsideOfTruck_EventScript_23BF20:: @ 823BF20
 	setflag FLAG_0x2DF
 	setflag FLAG_0x331
 	setvar VAR_0x408C, 1
-	setdynamicwarp LITTLEROOT_TOWN, 255, 3, 10
+	setdynamicwarp MAP_LITTLEROOT_TOWN, 255, 3, 10
 	releaseall
 	end
 
@@ -45,7 +45,7 @@ InsideOfTruck_EventScript_23BF46:: @ 823BF46
 	setflag FLAG_0x2E0
 	setflag FLAG_0x332
 	setvar VAR_0x4082, 1
-	setdynamicwarp LITTLEROOT_TOWN, 255, 12, 10
+	setdynamicwarp MAP_LITTLEROOT_TOWN, 255, 12, 10
 	releaseall
 	end
 

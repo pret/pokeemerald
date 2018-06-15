@@ -95,7 +95,7 @@ LittlerootTown_EventScript_1E7EDB:: @ 81E7EDB
 	setvar VAR_0x8005, 8
 	call LittlerootTown_EventScript_1E7F17
 	setflag FLAG_0x2F9
-	warpsilent LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
+	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
 	waitstate
 	releaseall
 	end
@@ -106,7 +106,7 @@ LittlerootTown_EventScript_1E7EF9:: @ 81E7EF9
 	setvar VAR_0x8005, 8
 	call LittlerootTown_EventScript_1E7F17
 	setflag FLAG_0x2FA
-	warpsilent LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
+	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
 	waitstate
 	releaseall
 	end
@@ -138,7 +138,7 @@ LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	waitmovement 0
 	setflag FLAG_0x2F0
 	setvar VAR_0x4092, 3
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_0x364
@@ -196,7 +196,7 @@ LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
 	clearflag FLAG_0x31B
 	delay 20
 	clearflag FLAG_SPECIAL_FLAG_0x4000
-	warp LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
+	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	releaseall
 	end
@@ -649,7 +649,7 @@ LittlerootTown_EventScript_1E84A1:: @ 81E84A1
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
@@ -661,7 +661,7 @@ LittlerootTown_EventScript_1E84C7:: @ 81E84C7
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
@@ -673,7 +673,7 @@ LittlerootTown_EventScript_1E84ED:: @ 81E84ED
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
@@ -685,7 +685,7 @@ LittlerootTown_EventScript_1E8513:: @ 81E8513
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
@@ -697,7 +697,7 @@ LittlerootTown_EventScript_1E8539:: @ 81E8539
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
@@ -709,7 +709,7 @@ LittlerootTown_EventScript_1E855F:: @ 81E855F
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
@@ -721,7 +721,7 @@ LittlerootTown_EventScript_1E8585:: @ 81E8585
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
@@ -733,7 +733,7 @@ LittlerootTown_EventScript_1E85AB:: @ 81E85AB
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
@@ -903,7 +903,7 @@ LittlerootTown_EventScript_1E863D:: @ 81E863D
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E863B
 	waitmovement 0
-	hideobjectat 4, LITTLEROOT_TOWN
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	goto LittlerootTown_EventScript_1E8686

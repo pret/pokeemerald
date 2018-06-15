@@ -219,7 +219,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
 	special sub_81A1780
 	setvar VAR_RESULT, 0
 	special HealPlayerParty
-	warp BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
+	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

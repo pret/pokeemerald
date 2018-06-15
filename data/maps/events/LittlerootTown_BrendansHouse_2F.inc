@@ -17,7 +17,7 @@ LittlerootTown_BrendansHouse_2F_EventObjects: @ 852D1A0
 	object_event 16, EVENT_OBJ_GFX_SWABLU_DOLL, 0, 0, 5, 5, 3, 1, 17, 0, 0, 0, 0x0, 815, 0, 0
 
 LittlerootTown_BrendansHouse_2F_MapWarps: @ 852D320
-	warp_def 7, 1, 0, 2, LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
+	warp_def 7, 1, 0, 2, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
 
 LittlerootTown_BrendansHouse_2F_MapBGEvents: @ 852D328
 	bg_event 0, 1, 0, 1, 0, gUnknown_081F860D

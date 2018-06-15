@@ -8,9 +8,9 @@ LittlerootTown_MaysHouse_1F_EventObjects: @ 852D36C
 	object_event 7, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL, 0, 0, 2, 8, 3, 7, 17, 0, 0, 0, 0x0, 746, 0, 0
 
 LittlerootTown_MaysHouse_1F_MapWarps: @ 852D414
-	warp_def 1, 8, 0, 0, LITTLEROOT_TOWN
-	warp_def 2, 8, 0, 0, LITTLEROOT_TOWN
-	warp_def 2, 2, 0, 0, LITTLEROOT_TOWN_MAYS_HOUSE_2F
+	warp_def 1, 8, 0, 0, MAP_LITTLEROOT_TOWN
+	warp_def 2, 8, 0, 0, MAP_LITTLEROOT_TOWN
+	warp_def 2, 2, 0, 0, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 
 LittlerootTown_MaysHouse_1F_MapCoordEvents: @ 852D42C
 	coord_event 2, 8, 0, 0, VAR_0x4092, 4, 0, LittlerootTown_MaysHouse_1F_EventScript_1F8A4C

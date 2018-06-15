@@ -1,8 +1,8 @@
 EverGrandeCity_MapWarps: @ 8527588
-	warp_def 18, 5, 0, 0, EVER_GRANDE_CITY_POKEMON_LEAGUE_1F
-	warp_def 27, 48, 0, 0, EVER_GRANDE_CITY_POKEMON_CENTER_1F
-	warp_def 18, 41, 0, 0, VICTORY_ROAD_1F
-	warp_def 18, 27, 0, 1, VICTORY_ROAD_1F
+	warp_def 18, 5, 0, 0, MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F
+	warp_def 27, 48, 0, 0, MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F
+	warp_def 18, 41, 0, 0, MAP_VICTORY_ROAD_1F
+	warp_def 18, 27, 0, 1, MAP_VICTORY_ROAD_1F
 
 EverGrandeCity_MapCoordEvents: @ 85275A8
 	coord_event 17, 58, 1, 0, VAR_TEMP_1, 0, 0, EverGrandeCity_EventScript_1E7D46

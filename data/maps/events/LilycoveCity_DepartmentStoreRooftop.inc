@@ -5,7 +5,7 @@ LilycoveCity_DepartmentStoreRooftop_EventObjects: @ 853241C
 	object_event 4, EVENT_OBJ_GFX_WOMAN_4, 0, 0, 15, 5, 3, 8, 1, 0, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_2C8186, 0, 0, 0
 
 LilycoveCity_DepartmentStoreRooftop_MapWarps: @ 853247C
-	warp_def 13, 3, 0, 2, LILYCOVE_CITY_DEPARTMENT_STORE_5F
+	warp_def 13, 3, 0, 2, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F
 
 LilycoveCity_DepartmentStoreRooftop_MapBGEvents: @ 8532484
 	bg_event 9, 1, 0, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_220295

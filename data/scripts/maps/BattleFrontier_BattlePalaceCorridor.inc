@@ -55,7 +55,7 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F553:: @ 824F553
 	waitdooranim
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F581:: @ 824F581
-	warp BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM, 255, 7, 4
+	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM, 255, 7, 4
 	waitstate
 	end
 

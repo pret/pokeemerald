@@ -179,7 +179,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	waitmovement 0
 	closedoor 5, 1
 	waitdooranim
-	warp BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM, 255, 9, 5
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM, 255, 9, 5
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

@@ -3,8 +3,8 @@ Route109_MapScripts:: @ 81EE75F
 
 Route109_EventScript_1EE760:: @ 81EE760
 	call Route109_EventScript_271E95
-	setobjectpriority 2, ROUTE_109, 0
-	setobjectpriority 255, ROUTE_109, 0
+	setobjectpriority 2, MAP_ROUTE109, 0
+	setobjectpriority 255, MAP_ROUTE109, 0
 	applymovement 2, Route109_Movement_1EE90B
 	waitmovement 0
 	removeobject 2
@@ -33,31 +33,31 @@ Route109_EventScript_1EE7C5:: @ 81EE7C5
 	end
 
 Route109_EventScript_1EE7D5:: @ 81EE7D5
-	hideobjectat 255, ROUTE_109
+	hideobjectat 255, MAP_ROUTE109
 	call Route109_EventScript_2720A0
 	applymovement 1, Route109_Movement_1EE84F
 	applymovement 255, Route109_Movement_1EE84F
 	waitmovement 0
 	delay 50
 	call Route109_EventScript_2720A8
-	showobjectat 255, DEWFORD_TOWN
+	showobjectat 255, MAP_DEWFORD_TOWN
 	applymovement 255, Route109_Movement_1EE900
 	waitmovement 0
 	addobject 4
 	clearflag FLAG_0x2E7
 	setobjectxyperm 2, 12, 8
 	addobject 2
-	setobjectpriority 2, DEWFORD_TOWN, 0
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	applymovement 2, Route109_Movement_1EE90D
 	waitmovement 0
 	clearflag FLAG_0x2E4
 	setflag FLAG_0x2E8
-	hideobjectat 1, ROUTE_109
+	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_1E9C1D, 4
 	closemessage
 	copyvar VAR_0x4096, VAR_0x8008
-	resetobjectpriority 255, ROUTE_109
-	resetobjectpriority 2, DEWFORD_TOWN
+	resetobjectpriority 255, MAP_ROUTE109
+	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	release
 	end

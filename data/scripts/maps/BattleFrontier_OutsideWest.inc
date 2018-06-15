@@ -39,7 +39,7 @@ BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D4AE
 	msgbox BattleFrontier_OutsideWest_Text_23D94B, 4
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
-	warp SLATEPORT_CITY_HARBOR, 255, 8, 11
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
@@ -50,7 +50,7 @@ BattleFrontier_OutsideWest_EventScript_23D483:: @ 823D483
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D4AE
 	msgbox BattleFrontier_OutsideWest_Text_23D94B, 4
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
-	warp LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
@@ -66,7 +66,7 @@ BattleFrontier_OutsideWest_EventScript_23D4BA:: @ 823D4BA
 	applymovement VAR_LAST_TALKED, BattleFrontier_OutsideWest_Movement_2725AA
 	waitmovement 0
 	delay 30
-	hideobjectat 3, BATTLE_FRONTIER_OUTSIDE_WEST
+	hideobjectat 3, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 	setvar VAR_0x8004, 2
 	call BattleFrontier_OutsideWest_EventScript_272250
 	return

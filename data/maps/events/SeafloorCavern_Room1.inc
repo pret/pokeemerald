@@ -6,9 +6,9 @@ SeafloorCavern_Room1_EventObjects: @ 85356F8
 	object_event 5, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 15, 10, 3, 16, 17, 0, 1, 3, SeafloorCavern_Room1_EventScript_234803, 946, 0, 0
 
 SeafloorCavern_Room1_MapWarps: @ 8535770
-	warp_def 5, 18, 3, 1, SEAFLOOR_CAVERN_ENTRANCE
-	warp_def 17, 13, 3, 0, SEAFLOOR_CAVERN_ROOM_5
-	warp_def 6, 2, 3, 0, SEAFLOOR_CAVERN_ROOM_2
+	warp_def 5, 18, 3, 1, MAP_SEAFLOOR_CAVERN_ENTRANCE
+	warp_def 17, 13, 3, 0, MAP_SEAFLOOR_CAVERN_ROOM5
+	warp_def 6, 2, 3, 0, MAP_SEAFLOOR_CAVERN_ROOM2
 
 SeafloorCavern_Room1_MapEvents:: @ 8535788
 	map_events SeafloorCavern_Room1_EventObjects, SeafloorCavern_Room1_MapWarps, 0x0, 0x0

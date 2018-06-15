@@ -87,7 +87,7 @@ Route104_MrBrineysHouse_EventScript_229E27:: @ 8229E27
 	setvar VAR_0x4063, 2
 	setflag FLAG_0x32E
 	setflag FLAG_0x2CF
-	warp ROUTE_104, 255, 13, 51
+	warp MAP_ROUTE104, 255, 13, 51
 	waitstate
 	releaseall
 	end

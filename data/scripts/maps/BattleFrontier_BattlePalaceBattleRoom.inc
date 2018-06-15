@@ -33,7 +33,7 @@ BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861: @ 824F861
 	.2byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B:: @ 824F86B
-	showobjectat 1, BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
+	showobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
@@ -233,7 +233,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE97
 	setobjectxyperm 2, 15, 1
 	addobject 2
-	hideobjectat 2, BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
+	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 	setobjectxy 2, 13, 1
 	setobjectxyperm 2, 13, 1
 	applymovement 4, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEDF
@@ -354,7 +354,7 @@ BattleFrontier_BattlePalaceBattleRoom_MapScript2_24FE34: @ 824FE34
 	.2byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE3E:: @ 824FE3E
-	hideobjectat 1, BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
+	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833
 	setvar VAR_TEMP_1, 1
 	applymovement 255, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90
@@ -462,12 +462,12 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FEBB:: @ 824FEBB
 	copyvar VAR_RESULT, VAR_0x40CE
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FED5
-	warp BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 5, 7
+	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 5, 7
 	waitstate
 	end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FED5:: @ 824FED5
-	warp BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 19, 7
+	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 19, 7
 	waitstate
 	end
 

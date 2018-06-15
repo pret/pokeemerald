@@ -9,8 +9,8 @@ FortreeCity_Gym_EventObjects: @ 8530C98
 	object_event 8, EVENT_OBJ_GFX_MAN_6, 0, 0, 1, 10, 3, 7, 17, 0, 1, 3, FortreeCity_Gym_EventScript_21671B, 0, 0, 0
 
 FortreeCity_Gym_MapWarps: @ 8530D58
-	warp_def 15, 24, 0, 2, FORTREE_CITY
-	warp_def 16, 24, 0, 2, FORTREE_CITY
+	warp_def 15, 24, 0, 2, MAP_FORTREE_CITY
+	warp_def 16, 24, 0, 2, MAP_FORTREE_CITY
 
 FortreeCity_Gym_MapBGEvents: @ 8530D68
 	bg_event 14, 21, 0, 1, 0, FortreeCity_Gym_EventScript_216751

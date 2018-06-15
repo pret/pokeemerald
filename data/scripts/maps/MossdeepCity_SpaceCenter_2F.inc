@@ -43,7 +43,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223DBF:: @ 8223DBF
 	closemessage
 	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_223E07
 	waitmovement 0
-	warp MOSSDEEP_CITY_SPACE_CENTER_1F, 255, 13, 1
+	warp MAP_MOSSDEEP_CITY_SPACE_CENTER_1F, 255, 13, 1
 	waitstate
 	releaseall
 	end

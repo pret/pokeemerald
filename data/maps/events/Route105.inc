@@ -9,7 +9,7 @@ Route105_EventObjects: @ 85286F0
 	object_event 8, EVENT_OBJ_GFX_HIKER, 0, 0, 4, 58, 3, 7, 32, 0, 1, 4, Route105_EventScript_1EE2D4, 0, 0, 0
 
 Route105_MapWarps: @ 85287B0
-	warp_def 9, 20, 0, 0, ISLAND_CAVE
+	warp_def 9, 20, 0, 0, MAP_ISLAND_CAVE
 
 Route105_MapBGEvents: @ 85287B8
 	bg_event 15, 68, 3, 7, 0, ITEM_HEART_SCALE, 89, 0

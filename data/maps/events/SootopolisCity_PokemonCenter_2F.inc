@@ -5,9 +5,9 @@ SootopolisCity_PokemonCenter_2F_EventObjects: @ 8533200
 	object_event 4, EVENT_OBJ_GFX_MYSTERY_GIFT_MAN, 0, 0, 1, 2, 0, 8, 17, 0, 0, 0, SootopolisCity_PokemonCenter_2F_EventScript_276B03, 702, 0, 0
 
 SootopolisCity_PokemonCenter_2F_MapWarps: @ 8533260
-	warp_def 1, 6, 4, 2, SOOTOPOLIS_CITY_POKEMON_CENTER_1F
-	warp_def 5, 1, 3, 0, UNION_ROOM
-	warp_def 9, 1, 3, 0, TRADE_CENTER
+	warp_def 1, 6, 4, 2, MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F
+	warp_def 5, 1, 3, 0, MAP_UNION_ROOM
+	warp_def 9, 1, 3, 0, MAP_TRADE_CENTER
 
 SootopolisCity_PokemonCenter_2F_MapEvents:: @ 8533278
 	map_events SootopolisCity_PokemonCenter_2F_EventObjects, SootopolisCity_PokemonCenter_2F_MapWarps, 0x0, 0x0

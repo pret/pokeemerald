@@ -25,7 +25,7 @@ Route109_EventObjects: @ 8528A34
 	object_event 24, EVENT_OBJ_GFX_MAN_6, 0, 0, 17, 56, 3, 80, 17, 0, 1, 3, Route109_EventScript_1EEC06, 0, 0, 0
 
 Route109_MapWarps: @ 8528C74
-	warp_def 12, 5, 0, 0, ROUTE_109_SEASHORE_HOUSE
+	warp_def 12, 5, 0, 0, MAP_ROUTE109_SEASHORE_HOUSE
 
 Route109_MapBGEvents: @ 8528C7C
 	bg_event 15, 5, 0, 0, 0, Route109_EventScript_1EEA2B

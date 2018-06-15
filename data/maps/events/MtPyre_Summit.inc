@@ -9,9 +9,9 @@ MtPyre_Summit_EventObjects: @ 85351A0
 	object_event 8, EVENT_OBJ_GFX_MAXIE, 0, 0, 23, 6, 3, 7, 17, 0, 0, 0, 0x0, 856, 0, 0
 
 MtPyre_Summit_MapWarps: @ 8535260
-	warp_def 22, 31, 3, 1, MT_PYRE_EXTERIOR
-	warp_def 23, 31, 3, 1, MT_PYRE_EXTERIOR
-	warp_def 24, 31, 3, 1, MT_PYRE_EXTERIOR
+	warp_def 22, 31, 3, 1, MAP_MT_PYRE_EXTERIOR
+	warp_def 23, 31, 3, 1, MAP_MT_PYRE_EXTERIOR
+	warp_def 24, 31, 3, 1, MAP_MT_PYRE_EXTERIOR
 
 MtPyre_Summit_MapCoordEvents: @ 8535278
 	coord_event 22, 7, 3, 0, VAR_0x40B9, 0, 0, MtPyre_Summit_EventScript_232018

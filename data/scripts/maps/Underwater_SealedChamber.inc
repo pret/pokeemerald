@@ -11,11 +11,11 @@ Underwater_SealedChamber_MapScript1_2390CA: @ 82390CA
 	goto Underwater_SealedChamber_EventScript_2390F3
 
 Underwater_SealedChamber_EventScript_2390EA:: @ 82390EA
-	setdivewarp ROUTE_134, 255, 60, 31
+	setdivewarp MAP_ROUTE134, 255, 60, 31
 	end
 
 Underwater_SealedChamber_EventScript_2390F3:: @ 82390F3
-	setdivewarp SEALED_CHAMBER_OUTER_ROOM, 255, 10, 19
+	setdivewarp MAP_SEALED_CHAMBER_OUTER_ROOM, 255, 10, 19
 	end
 
 Underwater_SealedChamber_EventScript_2390FC:: @ 82390FC

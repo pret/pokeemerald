@@ -10,7 +10,7 @@ MossdeepCity_SpaceCenter_2F_EventObjects: @ 8532E4C
 	object_event 9, EVENT_OBJ_GFX_MAXIE, 0, 0, 1, 9, 3, 7, 17, 0, 0, 0, MossdeepCity_SpaceCenter_2F_EventScript_223F6F, 862, 0, 0
 
 MossdeepCity_SpaceCenter_2F_MapWarps: @ 8532F24
-	warp_def 13, 1, 0, 2, MOSSDEEP_CITY_SPACE_CENTER_1F
+	warp_def 13, 1, 0, 2, MAP_MOSSDEEP_CITY_SPACE_CENTER_1F
 
 MossdeepCity_SpaceCenter_2F_MapEvents:: @ 8532F2C
 	map_events MossdeepCity_SpaceCenter_2F_EventObjects, MossdeepCity_SpaceCenter_2F_MapWarps, 0x0, 0x0

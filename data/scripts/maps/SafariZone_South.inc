@@ -93,7 +93,7 @@ SafariZone_South_EventScript_23D359:: @ 823D359
 SafariZone_South_EventScript_23D373:: @ 823D373
 	setvar VAR_0x40A4, 1
 	special ExitSafariMode
-	warpdoor ROUTE_121_SAFARI_ZONE_ENTRANCE, 255, 2, 5
+	warpdoor MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 255, 2, 5
 	waitstate
 	end
 

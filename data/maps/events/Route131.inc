@@ -9,7 +9,7 @@ Route131_EventObjects: @ 852CAB4
 	object_event 8, EVENT_OBJ_GFX_SWIMMER_F, 0, 0, 52, 27, 1, 25, 49, 0, 1, 5, Route131_EventScript_1F74BB, 0, 0, 0
 
 Route131_MapWarps: @ 852CB74
-	warp_def 36, 6, 3, 0, SKY_PILLAR_ENTRANCE
+	warp_def 36, 6, 3, 0, MAP_SKY_PILLAR_ENTRANCE
 
 Route131_MapEvents:: @ 852CB7C
 	map_events Route131_EventObjects, Route131_MapWarps, 0x0, 0x0

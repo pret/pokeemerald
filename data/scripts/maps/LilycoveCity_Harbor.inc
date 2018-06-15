@@ -3,7 +3,7 @@ LilycoveCity_Harbor_MapScripts:: @ 821E000
 	.byte 0
 
 LilycoveCity_Harbor_MapScript1_21E006: @ 821E006
-	setescapewarp LILYCOVE_CITY, 255, 12, 33
+	setescapewarp MAP_LILYCOVE_CITY, 255, 12, 33
 	end
 
 LilycoveCity_Harbor_EventScript_21E00F:: @ 821E00F
@@ -59,28 +59,28 @@ LilycoveCity_Harbor_EventScript_21E09F:: @ 821E09F
 
 LilycoveCity_Harbor_EventScript_21E109:: @ 821E109
 	call LilycoveCity_Harbor_EventScript_21E5CC
-	warp SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
+	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
 	waitstate
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_21E119:: @ 821E119
 	call LilycoveCity_Harbor_EventScript_21E5CC
-	warp NAVEL_ROCK_HARBOR, 255, 8, 4
+	warp MAP_NAVEL_ROCK_HARBOR, 255, 8, 4
 	waitstate
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_21E129:: @ 821E129
 	call LilycoveCity_Harbor_EventScript_21E5CC
-	warp BIRTH_ISLAND_HARBOR, 255, 8, 4
+	warp MAP_BIRTH_ISLAND_HARBOR, 255, 8, 4
 	waitstate
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_21E139:: @ 821E139
 	call LilycoveCity_Harbor_EventScript_21E5CC
-	warp FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
+	warp MAP_FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
 	waitstate
 	release
 	end
@@ -91,7 +91,7 @@ LilycoveCity_Harbor_EventScript_21E149:: @ 821E149
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	setvar VAR_PORTHOLE, 5
 	call LilycoveCity_Harbor_EventScript_21E5CC
-	warp SS_TIDAL_CORRIDOR, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
 	release
 	end
@@ -101,7 +101,7 @@ LilycoveCity_Harbor_EventScript_21E171:: @ 821E171
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	call LilycoveCity_Harbor_EventScript_21E5CC
-	warp BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
+	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
 	waitstate
 	release
 	end
@@ -226,7 +226,7 @@ LilycoveCity_Harbor_EventScript_21E2F0:: @ 821E2F0
 LilycoveCity_Harbor_EventScript_21E30F:: @ 821E30F
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E514
-	warp SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
+	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
 	waitstate
 	release
 	end
@@ -243,7 +243,7 @@ LilycoveCity_Harbor_EventScript_21E320:: @ 821E320
 LilycoveCity_Harbor_EventScript_21E33F:: @ 821E33F
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E514
-	warp BIRTH_ISLAND_HARBOR, 255, 8, 4
+	warp MAP_BIRTH_ISLAND_HARBOR, 255, 8, 4
 	waitstate
 	release
 	end
@@ -284,7 +284,7 @@ LilycoveCity_Harbor_EventScript_21E350:: @ 821E350
 	call_if 1, LilycoveCity_Harbor_EventScript_21E6BA
 	setvar VAR_0x8004, 2
 	call LilycoveCity_Harbor_EventScript_2721E2
-	warp FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
+	warp MAP_FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
 	waitstate
 	release
 	end
@@ -292,7 +292,7 @@ LilycoveCity_Harbor_EventScript_21E350:: @ 821E350
 LilycoveCity_Harbor_EventScript_21E40C:: @ 821E40C
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E514
-	warp FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
+	warp MAP_FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
 	waitstate
 	release
 	end
@@ -309,7 +309,7 @@ LilycoveCity_Harbor_EventScript_21E41D:: @ 821E41D
 LilycoveCity_Harbor_EventScript_21E43C:: @ 821E43C
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E514
-	warp NAVEL_ROCK_HARBOR, 255, 8, 4
+	warp MAP_NAVEL_ROCK_HARBOR, 255, 8, 4
 	waitstate
 	release
 	end
@@ -344,7 +344,7 @@ LilycoveCity_Harbor_EventScript_21E4B6:: @ 821E4B6
 	delay 30
 	applymovement 1, LilycoveCity_Harbor_Movement_2725AA
 	waitmovement 0
-	showobjectat 1, LILYCOVE_CITY_HARBOR
+	showobjectat 1, MAP_LILYCOVE_CITY_HARBOR
 	delay 30
 	msgbox LilycoveCity_Harbor_Text_21E842, 4
 	release
@@ -354,7 +354,7 @@ LilycoveCity_Harbor_EventScript_21E4EE:: @ 821E4EE
 	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_2725A6
 	waitmovement 0
 	delay 30
-	hideobjectat VAR_LAST_TALKED, LILYCOVE_CITY_HARBOR
+	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	delay 60
 	addobject 4
 	delay 30
@@ -372,7 +372,7 @@ LilycoveCity_Harbor_EventScript_21E514:: @ 821E514
 	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E610
 	delay 30
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 2
 	call LilycoveCity_Harbor_EventScript_2721E2
 	return
@@ -400,7 +400,7 @@ LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	setvar VAR_PORTHOLE, 5
 	call LilycoveCity_Harbor_EventScript_21E5CC
-	warp SS_TIDAL_CORRIDOR, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
 	release
 	end
@@ -410,7 +410,7 @@ LilycoveCity_Harbor_EventScript_21E59D:: @ 821E59D
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	call LilycoveCity_Harbor_EventScript_21E5CC
-	warp BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
+	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
 	waitstate
 	release
 	end
@@ -427,13 +427,13 @@ LilycoveCity_Harbor_EventScript_21E5CC:: @ 821E5CC
 	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_2725A6
 	waitmovement 0
 	delay 30
-	hideobjectat VAR_LAST_TALKED, LILYCOVE_CITY_HARBOR
+	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E61B
 	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E610
 	delay 30
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 2
 	call LilycoveCity_Harbor_EventScript_2721E2
 	return

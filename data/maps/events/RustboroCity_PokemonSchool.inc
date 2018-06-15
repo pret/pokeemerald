@@ -8,8 +8,8 @@ RustboroCity_PokemonSchool_EventObjects: @ 85305EC
 	object_event 7, EVENT_OBJ_GFX_SCOTT, 0, 0, 0, 10, 0, 7, 17, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_214040, 999, 0, 0
 
 RustboroCity_PokemonSchool_MapWarps: @ 8530694
-	warp_def 5, 10, 0, 4, RUSTBORO_CITY
-	warp_def 6, 10, 0, 4, RUSTBORO_CITY
+	warp_def 5, 10, 0, 4, MAP_RUSTBORO_CITY
+	warp_def 6, 10, 0, 4, MAP_RUSTBORO_CITY
 
 RustboroCity_PokemonSchool_MapBGEvents: @ 85306A4
 	bg_event 5, 2, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_213EA9

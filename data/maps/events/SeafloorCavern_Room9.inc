@@ -8,7 +8,7 @@ SeafloorCavern_Room9_EventObjects: @ 8535C48
 	object_event 7, EVENT_OBJ_GFX_KYOGRE_2, 0, 0, 17, 38, 3, 8, 17, 0, 0, 0, 0x0, 733, 0, 0
 
 SeafloorCavern_Room9_MapWarps: @ 8535CF0
-	warp_def 5, 4, 3, 0, SEAFLOOR_CAVERN_ROOM_8
+	warp_def 5, 4, 3, 0, MAP_SEAFLOOR_CAVERN_ROOM8
 
 SeafloorCavern_Room9_MapCoordEvents: @ 8535CF8
 	coord_event 17, 42, 3, 0, VAR_0x40A2, 0, 0, SeafloorCavern_Room9_EventScript_234DC9

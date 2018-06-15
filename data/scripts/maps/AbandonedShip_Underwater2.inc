@@ -3,6 +3,6 @@ AbandonedShip_Underwater2_MapScripts:: @ 823895D
 	.byte 0
 
 AbandonedShip_Underwater2_MapScript1_238963: @ 8238963
-	setdivewarp ABANDONED_SHIP_ROOMS_B1F, 255, 13, 7
+	setdivewarp MAP_ABANDONED_SHIP_ROOMS_B1F, 255, 13, 7
 	end
 

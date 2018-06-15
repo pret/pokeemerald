@@ -4,9 +4,9 @@ DewfordTown_PokemonCenter_1F_EventObjects: @ 852DA34
 	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 0, 5, 5, 0, 5, 18, 0, 0, 0, DewfordTown_PokemonCenter_1F_EventScript_1FC54E, 0, 0, 0
 
 DewfordTown_PokemonCenter_1F_MapWarps: @ 852DA7C
-	warp_def 7, 8, 3, 1, DEWFORD_TOWN
-	warp_def 6, 8, 3, 1, DEWFORD_TOWN
-	warp_def 1, 6, 4, 0, DEWFORD_TOWN_POKEMON_CENTER_2F
+	warp_def 7, 8, 3, 1, MAP_DEWFORD_TOWN
+	warp_def 6, 8, 3, 1, MAP_DEWFORD_TOWN
+	warp_def 1, 6, 4, 0, MAP_DEWFORD_TOWN_POKEMON_CENTER_2F
 
 DewfordTown_PokemonCenter_1F_MapEvents:: @ 852DA94
 	map_events DewfordTown_PokemonCenter_1F_EventObjects, DewfordTown_PokemonCenter_1F_MapWarps, 0x0, 0x0

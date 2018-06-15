@@ -9,9 +9,9 @@ LittlerootTown_EventObjects: @ 85276A8
 	object_event 8, EVENT_OBJ_GFX_PROF_BIRCH, 0, 0, 14, 10, 3, 7, 17, 0, 0, 0, 0x0, 795, 0, 0
 
 LittlerootTown_MapWarps: @ 8527768
-	warp_def 14, 8, 0, 1, LITTLEROOT_TOWN_MAYS_HOUSE_1F
-	warp_def 5, 8, 0, 1, LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
-	warp_def 7, 16, 0, 0, LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB
+	warp_def 14, 8, 0, 1, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F
+	warp_def 5, 8, 0, 1, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
+	warp_def 7, 16, 0, 0, MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB
 
 LittlerootTown_MapCoordEvents: @ 8527780
 	coord_event 10, 1, 3, 0, VAR_0x4050, 0, 0, LittlerootTown_EventScript_1E8091

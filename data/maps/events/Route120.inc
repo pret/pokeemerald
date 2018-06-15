@@ -45,8 +45,8 @@ Route120_EventObjects: @ 852B3F8
 	object_event 44, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 24, 33, 3, 1, 17, 0, 0, 0, Route120_EventScript_290F7C, 1148, 0, 0
 
 Route120_MapWarps: @ 852B818
-	warp_def 7, 55, 0, 0, ANCIENT_TOMB
-	warp_def 19, 23, 1, 0, SCORCHED_SLAB
+	warp_def 7, 55, 0, 0, MAP_ANCIENT_TOMB
+	warp_def 19, 23, 1, 0, MAP_SCORCHED_SLAB
 
 Route120_MapCoordEvents: @ 852B828
 	coord_event 7, 15, 0, 0, 3, 0, 0, 0x0

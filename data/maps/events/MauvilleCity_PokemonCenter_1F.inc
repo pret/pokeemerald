@@ -6,9 +6,9 @@ MauvilleCity_PokemonCenter_1F_EventObjects: @ 85301C8
 	object_event 5, EVENT_OBJ_GFX_YOUNGSTER, 0, 0, 2, 8, 3, 1, 17, 0, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_210E98, 0, 0, 0
 
 MauvilleCity_PokemonCenter_1F_MapWarps: @ 8530240
-	warp_def 7, 8, 3, 1, MAUVILLE_CITY
-	warp_def 6, 8, 3, 1, MAUVILLE_CITY
-	warp_def 1, 6, 4, 0, MAUVILLE_CITY_POKEMON_CENTER_2F
+	warp_def 7, 8, 3, 1, MAP_MAUVILLE_CITY
+	warp_def 6, 8, 3, 1, MAP_MAUVILLE_CITY
+	warp_def 1, 6, 4, 0, MAP_MAUVILLE_CITY_POKEMON_CENTER_2F
 
 MauvilleCity_PokemonCenter_1F_MapEvents:: @ 8530258
 	map_events MauvilleCity_PokemonCenter_1F_EventObjects, MauvilleCity_PokemonCenter_1F_MapWarps, 0x0, 0x0

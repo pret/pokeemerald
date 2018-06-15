@@ -21,7 +21,7 @@ Route103_EventObjects: @ 85280DC
 	object_event 20, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 64, 7, 0, 1, 17, 0, 0, 0, Route103_EventScript_290CF2, 1137, 0, 0
 
 Route103_MapWarps: @ 85282BC
-	warp_def 45, 6, 0, 0, ALTERING_CAVE
+	warp_def 45, 6, 0, 0, MAP_ALTERING_CAVE
 
 Route103_MapBGEvents: @ 85282C4
 	bg_event 11, 9, 0, 0, 0, Route103_EventScript_1EC5EB

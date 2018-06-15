@@ -5,10 +5,10 @@ OldaleTown_EventObjects: @ 8527854
 	object_event 4, EVENT_OBJ_GFX_HIPSTER, 0, 0, 11, 19, 3, 7, 17, 0, 0, 0, OldaleTown_EventScript_1E9070, 979, 0, 0
 
 OldaleTown_MapWarps: @ 85278B4
-	warp_def 5, 7, 0, 0, OLDALE_TOWN_HOUSE_1
-	warp_def 15, 16, 0, 0, OLDALE_TOWN_HOUSE_2
-	warp_def 6, 16, 0, 0, OLDALE_TOWN_POKEMON_CENTER_1F
-	warp_def 14, 6, 0, 0, OLDALE_TOWN_MART
+	warp_def 5, 7, 0, 0, MAP_OLDALE_TOWN_HOUSE1
+	warp_def 15, 16, 0, 0, MAP_OLDALE_TOWN_HOUSE2
+	warp_def 6, 16, 0, 0, MAP_OLDALE_TOWN_POKEMON_CENTER_1F
+	warp_def 14, 6, 0, 0, MAP_OLDALE_TOWN_MART
 
 OldaleTown_MapCoordEvents: @ 85278D4
 	coord_event 0, 10, 3, 0, VAR_0x4051, 0, 0, OldaleTown_EventScript_1E903F

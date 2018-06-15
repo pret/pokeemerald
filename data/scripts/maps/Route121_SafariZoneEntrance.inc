@@ -83,7 +83,7 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	special EnterSafariMode
 	setvar VAR_0x40A4, 2
 	clearflag FLAG_0x05D
-	warp SAFARI_ZONE_SOUTH, 255, 32, 33
+	warp MAP_SAFARI_ZONE_SOUTH, 255, 32, 33
 	waitstate
 	end
 

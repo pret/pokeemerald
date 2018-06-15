@@ -225,7 +225,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_2587A7
 	applymovement 255, BattleFrontier_BattleFactoryLobby_Movement_2587AC
 	waitmovement 0
-	warp BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 13
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 13
 	setvar VAR_TEMP_0, 0
 	waitstate
 	end

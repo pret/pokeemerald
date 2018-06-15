@@ -22,13 +22,13 @@ VictoryRoad_B1F_EventObjects: @ 8535F44
 	object_event 21, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 14, 20, 3, 16, 17, 0, 1, 3, VictoryRoad_B1F_EventScript_236541, 0, 0, 0
 
 VictoryRoad_B1F_MapWarps: @ 853613C
-	warp_def 30, 25, 3, 0, VICTORY_ROAD_B2F
-	warp_def 17, 16, 3, 2, VICTORY_ROAD_B2F
-	warp_def 42, 25, 3, 3, VICTORY_ROAD_1F
-	warp_def 42, 2, 4, 1, VICTORY_ROAD_B2F
-	warp_def 8, 3, 3, 4, VICTORY_ROAD_1F
-	warp_def 20, 21, 3, 2, VICTORY_ROAD_1F
-	warp_def 5, 26, 3, 3, VICTORY_ROAD_B2F
+	warp_def 30, 25, 3, 0, MAP_VICTORY_ROAD_B2F
+	warp_def 17, 16, 3, 2, MAP_VICTORY_ROAD_B2F
+	warp_def 42, 25, 3, 3, MAP_VICTORY_ROAD_1F
+	warp_def 42, 2, 4, 1, MAP_VICTORY_ROAD_B2F
+	warp_def 8, 3, 3, 4, MAP_VICTORY_ROAD_1F
+	warp_def 20, 21, 3, 2, MAP_VICTORY_ROAD_1F
+	warp_def 5, 26, 3, 3, MAP_VICTORY_ROAD_B2F
 
 VictoryRoad_B1F_MapEvents:: @ 8536174
 	map_events VictoryRoad_B1F_EventObjects, VictoryRoad_B1F_MapWarps, 0x0, 0x0

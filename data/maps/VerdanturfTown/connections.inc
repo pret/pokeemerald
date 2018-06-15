@@ -1,6 +1,6 @@
 VerdanturfTown_MapConnectionsList: @ 8486694
-	connection up, -80, ROUTE_116, 0
-	connection right, 0, ROUTE_117, 0
+	connection up, -80, MAP_ROUTE116
+	connection right, 0, MAP_ROUTE117
 
 VerdanturfTown_MapConnections: @ 84866AC
 	.4byte 0x2

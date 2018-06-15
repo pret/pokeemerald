@@ -367,14 +367,14 @@ Route104_EventScript_1ED090:: @ 81ED090
 	end
 
 Route104_EventScript_1ED099:: @ 81ED099
-	setobjectpriority 8, ROUTE_104, 0
-	setobjectpriority 255, ROUTE_104, 0
+	setobjectpriority 8, MAP_ROUTE104, 0
+	setobjectpriority 255, MAP_ROUTE104, 0
 	applymovement 8, Route104_Movement_1ED359
 	waitmovement 0
 	removeobject 8
 	applymovement 255, Route104_Movement_1ED34F
 	waitmovement 0
-	hideobjectat 255, ROUTE_104
+	hideobjectat 255, MAP_ROUTE104
 	call Route104_EventScript_2720A0
 	checkflag FLAG_0x132
 	goto_eq Route104_EventScript_1ED0D9
@@ -402,8 +402,8 @@ Route104_EventScript_1ED0EF:: @ 81ED0EF
 	delay 30
 	setflag FLAG_0x132
 	applymovement 255, Route104_Movement_1ED22A
-	applymovement 7, Route104_Movement_1ED22A, ROUTE_104
-	waitmovement 7, ROUTE_104
+	applymovement 7, Route104_Movement_1ED22A, MAP_ROUTE104
+	waitmovement 7, MAP_ROUTE104
 	waitmovement 0
 	goto Route104_EventScript_1ED139
 
@@ -412,12 +412,12 @@ Route104_EventScript_1ED139:: @ 81ED139
 	applymovement 255, Route104_Movement_1ED353
 	waitmovement 0
 	call Route104_EventScript_2720A8
-	showobjectat 255, DEWFORD_TOWN
+	showobjectat 255, MAP_DEWFORD_TOWN
 	applymovement 255, Route104_Movement_1ED355
 	waitmovement 0
 	setobjectxyperm 2, 12, 8
 	addobject 2
-	setobjectpriority 2, DEWFORD_TOWN, 0
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	clearflag FLAG_0x2E4
 	applymovement 2, Route104_Movement_1ED35C
 	waitmovement 0
@@ -425,10 +425,10 @@ Route104_EventScript_1ED139:: @ 81ED139
 	clearflag FLAG_0x2E7
 	call Route104_EventScript_2720A8
 	setflag FLAG_0x2E6
-	hideobjectat 7, ROUTE_104
+	hideobjectat 7, MAP_ROUTE104
 	copyvar VAR_0x4096, VAR_0x8008
-	resetobjectpriority 255, ROUTE_104
-	resetobjectpriority 2, DEWFORD_TOWN
+	resetobjectpriority 255, MAP_ROUTE104
+	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	setvar VAR_0x408E, 0
 	checkflag FLAG_0x0BD

@@ -111,7 +111,7 @@ Route111_MapScript2_1F0E46: @ 81F0E46
 	.2byte 0
 
 Route111_EventScript_1F0E50:: @ 81F0E50
-	hideobjectat 255, LITTLEROOT_TOWN
+	hideobjectat 255, MAP_LITTLEROOT_TOWN
 	end
 
 Route111_MapScript2_1F0E56: @ 81F0E56
@@ -127,7 +127,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	addobject 45
 	special sub_81BE7F4
 	waitstate
-	showobjectat 255, LITTLEROOT_TOWN
+	showobjectat 255, MAP_LITTLEROOT_TOWN
 	removeobject 45
 	delay 16
 	turnobject 255, 2

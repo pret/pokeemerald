@@ -27,10 +27,10 @@ FarawayIsland_Entrance_EventScript_267CA2:: @ 8267CA2
 	applymovement VAR_LAST_TALKED, FarawayIsland_Entrance_Movement_2725AA
 	waitmovement 0
 	delay 30
-	hideobjectat 1, FARAWAY_ISLAND_ENTRANCE
+	hideobjectat 1, MAP_FARAWAY_ISLAND_ENTRANCE
 	setvar VAR_0x8004, 2
 	call FarawayIsland_Entrance_EventScript_272250
-	warp LILYCOVE_CITY_HARBOR, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end

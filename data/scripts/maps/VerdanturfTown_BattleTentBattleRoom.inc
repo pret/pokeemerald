@@ -31,7 +31,7 @@ VerdanturfTown_BattleTentBattleRoom_MapScript2_20233E: @ 820233E
 	.2byte 0
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202348:: @ 8202348
-	showobjectat 1, VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
+	showobjectat 1, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	applymovement 1, VerdanturfTown_BattleTentBattleRoom_Movement_202575
 	waitmovement 0
 	setvar VAR_0x8004, 1
@@ -60,7 +60,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023AA:: @ 82023AA
 	setvar VAR_0x8006, 4
 	special sub_81A1780
 	special LoadPlayerParty
-	warp VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
@@ -133,7 +133,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202501:: @ 8202501
 	setvar VAR_0x8006, 3
 	special sub_81A1780
 	special LoadPlayerParty
-	warp VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
+	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20251F:: @ 820251F
@@ -154,7 +154,7 @@ VerdanturfTown_BattleTentBattleRoom_MapScript2_202541: @ 8202541
 	.2byte 0
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20254B:: @ 820254B
-	hideobjectat 1, VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat 1, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_202310
 	setvar VAR_TEMP_1, 1
 	applymovement 255, VerdanturfTown_BattleTentBattleRoom_Movement_202573

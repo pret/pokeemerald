@@ -6,7 +6,7 @@ MtPyre_2F_MapScripts:: @ 82310FB
 
 MtPyre_2F_MapScript1_23110B: @ 823110B
 	setstepcallback 7
-	setholewarp MT_PYRE_1F, 255, 0, 0
+	setholewarp MAP_MT_PYRE_1F, 255, 0, 0
 	end
 
 MtPyre_2F_EventScript_231116:: @ 8231116

@@ -602,7 +602,7 @@ RustboroCity_EventScript_1E0C5B:: @ 81E0C5B
 	setflag FLAG_0x2DC
 	setvar VAR_0x405A, 5
 	delay 30
-	warp RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2
+	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2
 	waitstate
 	releaseall
 	end

@@ -6,9 +6,9 @@ LilycoveCity_PokemonCenter_1F_EventObjects: @ 8531BCC
 	object_event 5, EVENT_OBJ_GFX_TRADER, 0, 0, 2, 3, 3, 8, 0, 0, 0, 0, LilycoveCity_PokemonCenter_1F_EventScript_2A89C7, 993, 0, 0
 
 LilycoveCity_PokemonCenter_1F_MapWarps: @ 8531C44
-	warp_def 7, 8, 3, 2, LILYCOVE_CITY
-	warp_def 6, 8, 3, 2, LILYCOVE_CITY
-	warp_def 1, 6, 4, 0, LILYCOVE_CITY_POKEMON_CENTER_2F
+	warp_def 7, 8, 3, 2, MAP_LILYCOVE_CITY
+	warp_def 6, 8, 3, 2, MAP_LILYCOVE_CITY
+	warp_def 1, 6, 4, 0, MAP_LILYCOVE_CITY_POKEMON_CENTER_2F
 
 LilycoveCity_PokemonCenter_1F_MapEvents:: @ 8531C5C
 	map_events LilycoveCity_PokemonCenter_1F_EventObjects, LilycoveCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
