@@ -1,10 +1,10 @@
 SeafloorCavern_Room5_EventObjects: @ 85359F8
-	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 3, 11, 3, 1, 0, 0, 0, SeafloorCavern_Room5_EventScript_2908BA, 17
-	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 4, 11, 3, 1, 0, 0, 0, SeafloorCavern_Room5_EventScript_2908BA, 18
-	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 7, 3, 1, 0, 0, 0, SeafloorCavern_Room5_EventScript_2908BA, 19
-	object_event 4, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 3, 13, 3, 1, 0, 0, 0, SeafloorCavern_Room5_EventScript_2907A6, 21
-	object_event 5, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 13, 8, 3, 1, 0, 0, 0, SeafloorCavern_Room5_EventScript_2907A6, 22
-	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 12, 8, 3, 1, 0, 0, 0, SeafloorCavern_Room5_EventScript_2908BA, 20
+	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 3, 11, 3, 1, 0, 0, 0, 0, SeafloorCavern_Room5_EventScript_2908BA, 17
+	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 4, 11, 3, 1, 0, 0, 0, 0, SeafloorCavern_Room5_EventScript_2908BA, 18
+	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 7, 3, 1, 0, 0, 0, 0, SeafloorCavern_Room5_EventScript_2908BA, 19
+	object_event 4, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 3, 13, 3, 1, 0, 0, 0, 0, SeafloorCavern_Room5_EventScript_2907A6, 21
+	object_event 5, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 13, 8, 3, 1, 0, 0, 0, 0, SeafloorCavern_Room5_EventScript_2907A6, 22
+	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 12, 8, 3, 1, 0, 0, 0, 0, SeafloorCavern_Room5_EventScript_2908BA, 20
 
 SeafloorCavern_Room5_MapWarps: @ 8535A88
 	warp_def 4, 1, 3, 1, MAP_SEAFLOOR_CAVERN_ROOM1

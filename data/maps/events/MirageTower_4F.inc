@@ -1,7 +1,7 @@
 MirageTower_4F_EventObjects: @ 8537670
-	object_event 1, EVENT_OBJ_GFX_FOSSIL, 0, 5, 4, 4, 8, 17, 0, 0, MirageTower_4F_EventScript_23AD48, 963
-	object_event 2, EVENT_OBJ_GFX_FOSSIL, 0, 7, 4, 0, 8, 17, 0, 0, MirageTower_4F_EventScript_23AD89, 964
-	object_event 3, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 6, 7, 3, 1, 17, 0, 0, MirageTower_4F_EventScript_2907A6, 17
+	object_event 1, EVENT_OBJ_GFX_FOSSIL, 0, 5, 4, 4, 8, 1, 1, 0, 0, MirageTower_4F_EventScript_23AD48, 963
+	object_event 2, EVENT_OBJ_GFX_FOSSIL, 0, 7, 4, 0, 8, 1, 1, 0, 0, MirageTower_4F_EventScript_23AD89, 964
+	object_event 3, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 6, 7, 3, 1, 1, 1, 0, 0, MirageTower_4F_EventScript_2907A6, 17
 
 MirageTower_4F_MapWarps: @ 85376B8
 	warp_def 1, 4, 3, 1, MAP_MIRAGE_TOWER_3F

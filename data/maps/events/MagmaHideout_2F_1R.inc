@@ -1,8 +1,8 @@
 MagmaHideout_2F_1R_EventObjects: @ 8537290
-	object_event 1, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 18, 19, 3, 51, 69, 1, 1, MagmaHideout_2F_1R_EventScript_239B7F, 857
-	object_event 2, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 12, 14, 3, 46, 103, 1, 3, MagmaHideout_2F_1R_EventScript_239B96, 857
-	object_event 3, EVENT_OBJ_GFX_MAGMA_MEMBER_F, 0, 8, 8, 3, 10, 17, 1, 7, MagmaHideout_2F_1R_EventScript_239B51, 857
-	object_event 4, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 21, 11, 3, 7, 17, 1, 3, MagmaHideout_2F_1R_EventScript_239B68, 857
+	object_event 1, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 18, 19, 3, 51, 5, 4, 1, 1, MagmaHideout_2F_1R_EventScript_239B7F, 857
+	object_event 2, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 12, 14, 3, 46, 7, 6, 1, 3, MagmaHideout_2F_1R_EventScript_239B96, 857
+	object_event 3, EVENT_OBJ_GFX_MAGMA_MEMBER_F, 0, 8, 8, 3, 10, 1, 1, 1, 7, MagmaHideout_2F_1R_EventScript_239B51, 857
+	object_event 4, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 21, 11, 3, 7, 1, 1, 1, 3, MagmaHideout_2F_1R_EventScript_239B68, 857
 
 MagmaHideout_2F_1R_MapWarps: @ 85372F0
 	warp_def 11, 23, 0, 0, MAP_MAGMA_HIDEOUT_2F_2R

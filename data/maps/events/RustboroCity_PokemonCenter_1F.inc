@@ -1,8 +1,8 @@
 RustboroCity_PokemonCenter_1F_EventObjects: @ 85306F4
-	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, 8, 0, 0, 0, RustboroCity_PokemonCenter_1F_EventScript_214D76, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_1, 0, 11, 2, 3, 9, 0, 0, 0, RustboroCity_PokemonCenter_1F_EventScript_214D84, 0
-	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 3, 4, 3, 2, 17, 0, 0, RustboroCity_PokemonCenter_1F_EventScript_214D8D, 0
-	object_event 4, EVENT_OBJ_GFX_GIRL_3, 0, 10, 6, 3, 10, 0, 0, 0, RustboroCity_PokemonCenter_1F_EventScript_214D96, 0
+	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, 8, 0, 0, 0, 0, RustboroCity_PokemonCenter_1F_EventScript_214D76, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_1, 0, 11, 2, 3, 9, 0, 0, 0, 0, RustboroCity_PokemonCenter_1F_EventScript_214D84, 0
+	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 3, 4, 3, 2, 1, 1, 0, 0, RustboroCity_PokemonCenter_1F_EventScript_214D8D, 0
+	object_event 4, EVENT_OBJ_GFX_GIRL_3, 0, 10, 6, 3, 10, 0, 0, 0, 0, RustboroCity_PokemonCenter_1F_EventScript_214D96, 0
 
 RustboroCity_PokemonCenter_1F_MapWarps: @ 8530754
 	warp_def 7, 8, 3, 3, MAP_RUSTBORO_CITY

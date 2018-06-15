@@ -1,6 +1,6 @@
 AbandonedShip_Corridors_1F_EventObjects: @ 85366C0
-	object_event 1, EVENT_OBJ_GFX_YOUNGSTER, 0, 17, 7, 3, 2, 17, 0, 0, AbandonedShip_Corridors_1F_EventScript_2379A5, 0
-	object_event 2, EVENT_OBJ_GFX_TUBER_M, 0, 5, 10, 3, 45, 116, 1, 3, AbandonedShip_Corridors_1F_EventScript_2379AE, 0
+	object_event 1, EVENT_OBJ_GFX_YOUNGSTER, 0, 17, 7, 3, 2, 1, 1, 0, 0, AbandonedShip_Corridors_1F_EventScript_2379A5, 0
+	object_event 2, EVENT_OBJ_GFX_TUBER_M, 0, 5, 10, 3, 45, 4, 7, 1, 3, AbandonedShip_Corridors_1F_EventScript_2379AE, 0
 
 AbandonedShip_Corridors_1F_MapWarps: @ 85366F0
 	warp_def 9, 11, 3, 2, MAP_ABANDONED_SHIP_DECK

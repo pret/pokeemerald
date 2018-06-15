@@ -1,5 +1,5 @@
 TerraCave_End_EventObjects: @ 8537850
-	object_event 1, EVENT_OBJ_GFX_GROUDON_1, 0, 17, 22, 1, 8, 17, 0, 0, 0x0, 783
+	object_event 1, EVENT_OBJ_GFX_GROUDON_1, 0, 17, 22, 1, 8, 1, 1, 0, 0, 0x0, 783
 
 TerraCave_End_MapWarps: @ 8537868
 	warp_def 5, 4, 3, 1, MAP_TERRA_CAVE_ENTRANCE

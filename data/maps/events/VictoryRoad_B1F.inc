@@ -1,25 +1,25 @@
 VictoryRoad_B1F_EventObjects: @ 8535F44
-	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 20, 5, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 19
-	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 21, 4, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 20
-	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 4, 7, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 17
-	object_event 4, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 9, 10, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 18
-	object_event 5, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 20, 26, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 23
-	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 21, 25, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 22
-	object_event 7, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 35, 6, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 30
-	object_event 8, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 19, 5, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 25
-	object_event 9, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 20, 4, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 26
-	object_event 10, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 18, 12, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 27
-	object_event 11, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 20, 25, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 28
-	object_event 12, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 21, 26, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 29
-	object_event 13, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 34, 4, 3, 1, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 31
-	object_event 14, EVENT_OBJ_GFX_MAN_4, 0, 37, 12, 3, 9, 0, 1, 3, VictoryRoad_B1F_EventScript_2364E5, 0
-	object_event 15, EVENT_OBJ_GFX_WOMAN_7, 0, 26, 16, 3, 7, 0, 1, 4, VictoryRoad_B1F_EventScript_2364FC, 0
-	object_event 16, EVENT_OBJ_GFX_WOMAN_7, 0, 5, 21, 3, 9, 0, 1, 2, VictoryRoad_B1F_EventScript_236513, 0
-	object_event 17, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 34, 3, 3, 1, 17, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 21
-	object_event 18, EVENT_OBJ_GFX_ITEM_BALL, 0, 42, 8, 4, 1, 17, 0, 0, VictoryRoad_B1F_EventScript_29149D, 1086
-	object_event 19, EVENT_OBJ_GFX_ITEM_BALL, 0, 32, 3, 3, 1, 17, 0, 0, VictoryRoad_B1F_EventScript_2914AA, 1087
-	object_event 20, EVENT_OBJ_GFX_MAN_4, 0, 14, 16, 3, 8, 17, 1, 4, VictoryRoad_B1F_EventScript_23652A, 0
-	object_event 21, EVENT_OBJ_GFX_WOMAN_7, 0, 14, 20, 3, 16, 17, 1, 3, VictoryRoad_B1F_EventScript_236541, 0
+	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 20, 5, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 19
+	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 21, 4, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 20
+	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 4, 7, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 17
+	object_event 4, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 9, 10, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 18
+	object_event 5, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 20, 26, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 23
+	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 21, 25, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 22
+	object_event 7, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 35, 6, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 30
+	object_event 8, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 19, 5, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 25
+	object_event 9, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 20, 4, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 26
+	object_event 10, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 18, 12, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 27
+	object_event 11, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 20, 25, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 28
+	object_event 12, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 21, 26, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 29
+	object_event 13, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 34, 4, 3, 1, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, 31
+	object_event 14, EVENT_OBJ_GFX_MAN_4, 0, 37, 12, 3, 9, 0, 0, 1, 3, VictoryRoad_B1F_EventScript_2364E5, 0
+	object_event 15, EVENT_OBJ_GFX_WOMAN_7, 0, 26, 16, 3, 7, 0, 0, 1, 4, VictoryRoad_B1F_EventScript_2364FC, 0
+	object_event 16, EVENT_OBJ_GFX_WOMAN_7, 0, 5, 21, 3, 9, 0, 0, 1, 2, VictoryRoad_B1F_EventScript_236513, 0
+	object_event 17, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 34, 3, 3, 1, 1, 1, 0, 0, VictoryRoad_B1F_EventScript_2907A6, 21
+	object_event 18, EVENT_OBJ_GFX_ITEM_BALL, 0, 42, 8, 4, 1, 1, 1, 0, 0, VictoryRoad_B1F_EventScript_29149D, 1086
+	object_event 19, EVENT_OBJ_GFX_ITEM_BALL, 0, 32, 3, 3, 1, 1, 1, 0, 0, VictoryRoad_B1F_EventScript_2914AA, 1087
+	object_event 20, EVENT_OBJ_GFX_MAN_4, 0, 14, 16, 3, 8, 1, 1, 1, 4, VictoryRoad_B1F_EventScript_23652A, 0
+	object_event 21, EVENT_OBJ_GFX_WOMAN_7, 0, 14, 20, 3, 16, 1, 1, 1, 3, VictoryRoad_B1F_EventScript_236541, 0
 
 VictoryRoad_B1F_MapWarps: @ 853613C
 	warp_def 30, 25, 3, 0, MAP_VICTORY_ROAD_B2F

@@ -1,6 +1,6 @@
 MossdeepCity_House1_EventObjects: @ 8532978
-	object_event 1, EVENT_OBJ_GFX_BLACK_BELT, 0, 3, 3, 3, 3, 17, 0, 0, MossdeepCity_House1_EventScript_221FD6, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_3, 0, 7, 4, 3, 9, 0, 0, 0, MossdeepCity_House1_EventScript_222006, 0
+	object_event 1, EVENT_OBJ_GFX_BLACK_BELT, 0, 3, 3, 3, 3, 1, 1, 0, 0, MossdeepCity_House1_EventScript_221FD6, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_3, 0, 7, 4, 3, 9, 0, 0, 0, 0, MossdeepCity_House1_EventScript_222006, 0
 
 MossdeepCity_House1_MapWarps: @ 85329A8
 	warp_def 3, 7, 0, 0, MAP_MOSSDEEP_CITY

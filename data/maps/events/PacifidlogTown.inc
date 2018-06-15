@@ -1,7 +1,7 @@
 PacifidlogTown_EventObjects: @ 8527DE8
-	object_event 1, EVENT_OBJ_GFX_GIRL_1, 0, 10, 23, 3, 9, 0, 0, 0, PacifidlogTown_EventScript_1EBACC, 0
-	object_event 2, EVENT_OBJ_GFX_FISHERMAN, 0, 11, 14, 3, 10, 0, 0, 0, PacifidlogTown_EventScript_1EBAD5, 0
-	object_event 3, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 9, 16, 3, 8, 0, 0, 0, PacifidlogTown_EventScript_1EBAC3, 0
+	object_event 1, EVENT_OBJ_GFX_GIRL_1, 0, 10, 23, 3, 9, 0, 0, 0, 0, PacifidlogTown_EventScript_1EBACC, 0
+	object_event 2, EVENT_OBJ_GFX_FISHERMAN, 0, 11, 14, 3, 10, 0, 0, 0, 0, PacifidlogTown_EventScript_1EBAD5, 0
+	object_event 3, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 9, 16, 3, 8, 0, 0, 0, 0, PacifidlogTown_EventScript_1EBAC3, 0
 
 PacifidlogTown_MapWarps: @ 8527E30
 	warp_def 8, 15, 0, 0, MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F

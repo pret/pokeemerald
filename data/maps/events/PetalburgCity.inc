@@ -1,13 +1,13 @@
 PetalburgCity_EventObjects: @ 8525FD0
-	object_event 1, EVENT_OBJ_GFX_WOMAN_5, 0, 16, 18, 3, 2, 17, 0, 0, PetalburgCity_EventScript_1DC3FD, 728
-	object_event 2, EVENT_OBJ_GFX_WALLY, 0, 15, 10, 3, 7, 0, 0, 0, 0x0, 726
-	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 8, 22, 3, 8, 0, 0, 0, PetalburgCity_EventScript_1DC3E6, 0
-	object_event 4, EVENT_OBJ_GFX_GENTLEMAN, 0, 20, 10, 3, 3, 16, 0, 0, PetalburgCity_EventScript_1DC488, 0
-	object_event 5, EVENT_OBJ_GFX_MAN_3, 0, 15, 10, 3, 7, 0, 0, 0, 0x0, 830
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 2, 3, 1, 0, 0, 0, PetalburgCity_EventScript_2910B4, 1039
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 28, 3, 1, 0, 0, 0, PetalburgCity_EventScript_2910C1, 1040
-	object_event 8, EVENT_OBJ_GFX_BOY_2, 0, 12, 15, 3, 1, 0, 0, 0, PetalburgCity_EventScript_1DC82E, 0
-	object_event 9, EVENT_OBJ_GFX_SCOTT, 0, 13, 12, 3, 1, 17, 0, 0, 0x0, 995
+	object_event 1, EVENT_OBJ_GFX_WOMAN_5, 0, 16, 18, 3, 2, 1, 1, 0, 0, PetalburgCity_EventScript_1DC3FD, 728
+	object_event 2, EVENT_OBJ_GFX_WALLY, 0, 15, 10, 3, 7, 0, 0, 0, 0, 0x0, 726
+	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 8, 22, 3, 8, 0, 0, 0, 0, PetalburgCity_EventScript_1DC3E6, 0
+	object_event 4, EVENT_OBJ_GFX_GENTLEMAN, 0, 20, 10, 3, 3, 0, 1, 0, 0, PetalburgCity_EventScript_1DC488, 0
+	object_event 5, EVENT_OBJ_GFX_MAN_3, 0, 15, 10, 3, 7, 0, 0, 0, 0, 0x0, 830
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 2, 3, 1, 0, 0, 0, 0, PetalburgCity_EventScript_2910B4, 1039
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 28, 3, 1, 0, 0, 0, 0, PetalburgCity_EventScript_2910C1, 1040
+	object_event 8, EVENT_OBJ_GFX_BOY_2, 0, 12, 15, 3, 1, 0, 0, 0, 0, PetalburgCity_EventScript_1DC82E, 0
+	object_event 9, EVENT_OBJ_GFX_SCOTT, 0, 13, 12, 3, 1, 1, 1, 0, 0, 0x0, 995
 
 PetalburgCity_MapWarps: @ 85260A8
 	warp_def 10, 19, 0, 0, MAP_PETALBURG_CITY_HOUSE1

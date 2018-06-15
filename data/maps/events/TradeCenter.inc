@@ -1,5 +1,5 @@
 TradeCenter_EventObjects: @ 8539DA0
-	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 9, 6, 3, 9, 0, 0, 0, TradeCenter_EventScript_2774B6, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 9, 6, 3, 9, 0, 0, 0, 0, TradeCenter_EventScript_2774B6, 0
 
 TradeCenter_MapWarps: @ 8539DB8
 	warp_def 5, 8, 3, 127, MAP_NONE
