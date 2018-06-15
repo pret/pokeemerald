@@ -1,14 +1,14 @@
 LilycoveCity_LilycoveMuseum_1F_EventObjects: @ 853124C
-	object_event 1, EVENT_OBJ_GFX_BEAUTY, 0, 0, 5, 12, 3, 10, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218CB9, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 0, 16, 2, 3, 8, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2, 775, 0, 0
-	object_event 3, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 0, 13, 7, 3, 10, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218DF5, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_ARTIST, 0, 0, 13, 10, 3, 5, 2, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218DFE, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 0, 2, 8, 3, 7, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E07, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_WOMAN_5, 0, 0, 3, 8, 3, 7, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E10, 0, 0, 0
-	object_event 7, EVENT_OBJ_GFX_WOMAN_3, 0, 0, 11, 3, 3, 2, 17, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E19, 776, 0, 0
-	object_event 8, EVENT_OBJ_GFX_ARTIST, 0, 0, 19, 3, 3, 7, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E2B, 779, 0, 0
-	object_event 9, EVENT_OBJ_GFX_FAT_MAN, 0, 0, 2, 2, 3, 2, 34, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E42, 780, 0, 0
-	object_event 10, EVENT_OBJ_GFX_PSYCHIC_M, 0, 0, 6, 2, 3, 2, 17, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E22, 778, 0, 0
+	object_event 1, EVENT_OBJ_GFX_BEAUTY, 0, 5, 12, 3, 10, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218CB9, 0
+	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 16, 2, 3, 8, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2, 775
+	object_event 3, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 13, 7, 3, 10, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218DF5, 0
+	object_event 4, EVENT_OBJ_GFX_ARTIST, 0, 13, 10, 3, 5, 2, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218DFE, 0
+	object_event 5, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 2, 8, 3, 7, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E07, 0
+	object_event 6, EVENT_OBJ_GFX_WOMAN_5, 0, 3, 8, 3, 7, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E10, 0
+	object_event 7, EVENT_OBJ_GFX_WOMAN_3, 0, 11, 3, 3, 2, 17, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E19, 776
+	object_event 8, EVENT_OBJ_GFX_ARTIST, 0, 19, 3, 3, 7, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E2B, 779
+	object_event 9, EVENT_OBJ_GFX_FAT_MAN, 0, 2, 2, 3, 2, 34, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E42, 780
+	object_event 10, EVENT_OBJ_GFX_PSYCHIC_M, 0, 6, 2, 3, 2, 17, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E22, 778
 
 LilycoveCity_LilycoveMuseum_1F_MapWarps: @ 853133C
 	warp_def 9, 13, 0, 3, MAP_LILYCOVE_CITY

@@ -1,32 +1,32 @@
 Route116_EventObjects: @ 852A4B8
-	object_event 1, EVENT_OBJ_GFX_BERRY_TREE, 0, 0, 18, 2, 3, 12, 0, 0, 0, 25, BerryTreeScript, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 0, 19, 2, 3, 12, 0, 0, 0, 26, BerryTreeScript, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_YOUNGSTER, 0, 0, 12, 7, 3, 16, 0, 0, 1, 3, Route116_EventScript_1F2E89, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 0, 21, 6, 3, 1, 0, 0, 0, 0, Route116_EventScript_2906BB, 17, 0, 0
-	object_event 5, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 0, 32, 10, 3, 1, 0, 0, 0, 0, Route116_EventScript_2906BB, 18, 0, 0
-	object_event 6, EVENT_OBJ_GFX_BUG_CATCHER, 0, 0, 13, 17, 3, 24, 0, 0, 1, 2, Route116_EventScript_1F2EA0, 0, 0, 0
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 19, 6, 3, 1, 0, 0, 0, 0, Route116_EventScript_290E85, 1019, 0, 0
-	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 10, 17, 3, 1, 0, 0, 0, 0, Route116_EventScript_290E92, 1020, 0, 0
-	object_event 9, EVENT_OBJ_GFX_BERRY_TREE, 0, 0, 20, 2, 3, 12, 0, 0, 0, 66, BerryTreeScript, 0, 0, 0
-	object_event 10, EVENT_OBJ_GFX_BERRY_TREE, 0, 0, 21, 2, 3, 12, 0, 0, 0, 67, BerryTreeScript, 0, 0, 0
-	object_event 11, EVENT_OBJ_GFX_OLD_MAN_1, 0, 0, 46, 9, 3, 1, 0, 0, 0, 0, Route116_EventScript_1F2D84, 891, 0, 0
-	object_event 12, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 0, 28, 11, 3, 1, 0, 0, 0, 0, Route116_EventScript_2906BB, 19, 0, 0
-	object_event 13, EVENT_OBJ_GFX_HIKER, 0, 0, 36, 17, 3, 15, 0, 0, 1, 3, Route116_EventScript_1F2F65, 0, 0, 0
-	object_event 14, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 0, 24, 9, 3, 1, 0, 0, 0, 0, Route116_EventScript_2906BB, 20, 0, 0
-	object_event 15, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 80, 8, 3, 1, 0, 0, 0, 0, Route116_EventScript_290E9F, 1021, 0, 0
-	object_event 16, EVENT_OBJ_GFX_LASS, 0, 0, 26, 6, 3, 10, 0, 0, 1, 2, Route116_EventScript_1F2F7C, 0, 0, 0
-	object_event 17, EVENT_OBJ_GFX_GIRL_3, 0, 0, 22, 16, 3, 13, 0, 0, 1, 3, Route116_EventScript_1F2F93, 0, 0, 0
-	object_event 18, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 0, 28, 8, 3, 7, 0, 0, 1, 4, Route116_EventScript_1F2EB7, 0, 0, 0
-	object_event 19, EVENT_OBJ_GFX_MAN_2, 0, 0, 46, 11, 3, 1, 17, 0, 0, 0, Route116_EventScript_1F2CA2, 947, 0, 0
-	object_event 20, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 55, 12, 4, 1, 17, 0, 0, 0, Route116_EventScript_290E78, 1001, 0, 0
-	object_event 21, EVENT_OBJ_GFX_BLACK_BELT, 0, 0, 38, 9, 3, 10, 17, 0, 0, 0, Route116_EventScript_1F2C70, 894, 0, 0
-	object_event 22, EVENT_OBJ_GFX_MANIAC, 0, 0, 74, 13, 3, 1, 17, 0, 0, 0, Route116_EventScript_1F2DB6, 813, 0, 0
-	object_event 23, EVENT_OBJ_GFX_WOMAN_3, 0, 0, 33, 8, 3, 7, 0, 0, 1, 1, Route116_EventScript_1F3041, 0, 0, 0
-	object_event 24, EVENT_OBJ_GFX_BOY_2, 0, 0, 33, 5, 3, 8, 0, 0, 1, 2, Route116_EventScript_1F3058, 0, 0, 0
-	object_event 25, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 34, 7, 0, 1, 17, 0, 0, 0, Route116_EventScript_290EAC, 1146, 0, 0
-	object_event 26, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 0, 30, 5, 3, 1, 17, 0, 0, 0, Route116_EventScript_2906BB, 21, 0, 0
-	object_event 27, EVENT_OBJ_GFX_YOUNGSTER, 0, 0, 36, 13, 3, 18, 17, 0, 1, 5, Route116_EventScript_1F3086, 0, 0, 0
-	object_event 28, EVENT_OBJ_GFX_HIKER, 0, 0, 42, 13, 3, 9, 17, 0, 1, 5, Route116_EventScript_1F306F, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_BERRY_TREE, 0, 18, 2, 3, 12, 0, 0, 25, BerryTreeScript, 0
+	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 19, 2, 3, 12, 0, 0, 26, BerryTreeScript, 0
+	object_event 3, EVENT_OBJ_GFX_YOUNGSTER, 0, 12, 7, 3, 16, 0, 1, 3, Route116_EventScript_1F2E89, 0
+	object_event 4, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 21, 6, 3, 1, 0, 0, 0, Route116_EventScript_2906BB, 17
+	object_event 5, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 32, 10, 3, 1, 0, 0, 0, Route116_EventScript_2906BB, 18
+	object_event 6, EVENT_OBJ_GFX_BUG_CATCHER, 0, 13, 17, 3, 24, 0, 1, 2, Route116_EventScript_1F2EA0, 0
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 6, 3, 1, 0, 0, 0, Route116_EventScript_290E85, 1019
+	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 10, 17, 3, 1, 0, 0, 0, Route116_EventScript_290E92, 1020
+	object_event 9, EVENT_OBJ_GFX_BERRY_TREE, 0, 20, 2, 3, 12, 0, 0, 66, BerryTreeScript, 0
+	object_event 10, EVENT_OBJ_GFX_BERRY_TREE, 0, 21, 2, 3, 12, 0, 0, 67, BerryTreeScript, 0
+	object_event 11, EVENT_OBJ_GFX_OLD_MAN_1, 0, 46, 9, 3, 1, 0, 0, 0, Route116_EventScript_1F2D84, 891
+	object_event 12, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 28, 11, 3, 1, 0, 0, 0, Route116_EventScript_2906BB, 19
+	object_event 13, EVENT_OBJ_GFX_HIKER, 0, 36, 17, 3, 15, 0, 1, 3, Route116_EventScript_1F2F65, 0
+	object_event 14, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 24, 9, 3, 1, 0, 0, 0, Route116_EventScript_2906BB, 20
+	object_event 15, EVENT_OBJ_GFX_ITEM_BALL, 0, 80, 8, 3, 1, 0, 0, 0, Route116_EventScript_290E9F, 1021
+	object_event 16, EVENT_OBJ_GFX_LASS, 0, 26, 6, 3, 10, 0, 1, 2, Route116_EventScript_1F2F7C, 0
+	object_event 17, EVENT_OBJ_GFX_GIRL_3, 0, 22, 16, 3, 13, 0, 1, 3, Route116_EventScript_1F2F93, 0
+	object_event 18, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 28, 8, 3, 7, 0, 1, 4, Route116_EventScript_1F2EB7, 0
+	object_event 19, EVENT_OBJ_GFX_MAN_2, 0, 46, 11, 3, 1, 17, 0, 0, Route116_EventScript_1F2CA2, 947
+	object_event 20, EVENT_OBJ_GFX_ITEM_BALL, 0, 55, 12, 4, 1, 17, 0, 0, Route116_EventScript_290E78, 1001
+	object_event 21, EVENT_OBJ_GFX_BLACK_BELT, 0, 38, 9, 3, 10, 17, 0, 0, Route116_EventScript_1F2C70, 894
+	object_event 22, EVENT_OBJ_GFX_MANIAC, 0, 74, 13, 3, 1, 17, 0, 0, Route116_EventScript_1F2DB6, 813
+	object_event 23, EVENT_OBJ_GFX_WOMAN_3, 0, 33, 8, 3, 7, 0, 1, 1, Route116_EventScript_1F3041, 0
+	object_event 24, EVENT_OBJ_GFX_BOY_2, 0, 33, 5, 3, 8, 0, 1, 2, Route116_EventScript_1F3058, 0
+	object_event 25, EVENT_OBJ_GFX_ITEM_BALL, 0, 34, 7, 0, 1, 17, 0, 0, Route116_EventScript_290EAC, 1146
+	object_event 26, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 30, 5, 3, 1, 17, 0, 0, Route116_EventScript_2906BB, 21
+	object_event 27, EVENT_OBJ_GFX_YOUNGSTER, 0, 36, 13, 3, 18, 17, 1, 5, Route116_EventScript_1F3086, 0
+	object_event 28, EVENT_OBJ_GFX_HIKER, 0, 42, 13, 3, 9, 17, 1, 5, Route116_EventScript_1F306F, 0
 
 Route116_MapWarps: @ 852A758
 	warp_def 47, 8, 0, 0, MAP_RUSTURF_TUNNEL

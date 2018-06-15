@@ -1,5 +1,5 @@
 AbandonedShip_Room_B1F_EventObjects: @ 853697C
-	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 4, 4, 3, 1, 17, 0, 0, 0, AbandonedShip_Room_B1F_EventScript_291254, 1098, 0, 0
+	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 4, 3, 1, 17, 0, 0, AbandonedShip_Room_B1F_EventScript_291254, 1098
 
 AbandonedShip_Room_B1F_MapWarps: @ 8536994
 	warp_def 4, 7, 3, 5, MAP_ABANDONED_SHIP_CORRIDORS_B1F

@@ -1,7 +1,7 @@
 MeteorFalls_1F_2R_EventObjects: @ 85340C4
-	object_event 1, EVENT_OBJ_GFX_MAN_4, 0, 0, 13, 2, 3, 8, 0, 0, 1, 1, MeteorFalls_1F_2R_EventScript_22C4DE, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 0, 6, 12, 3, 8, 17, 0, 1, 1, MeteorFalls_1F_2R_EventScript_22C540, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 0, 7, 12, 3, 8, 17, 0, 1, 1, MeteorFalls_1F_2R_EventScript_22C5A4, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_4, 0, 13, 2, 3, 8, 0, 1, 1, MeteorFalls_1F_2R_EventScript_22C4DE, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 6, 12, 3, 8, 17, 1, 1, MeteorFalls_1F_2R_EventScript_22C540, 0
+	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 7, 12, 3, 8, 17, 1, 1, MeteorFalls_1F_2R_EventScript_22C5A4, 0
 
 MeteorFalls_1F_2R_MapWarps: @ 853410C
 	warp_def 10, 29, 3, 2, MAP_METEOR_FALLS_1F_1R

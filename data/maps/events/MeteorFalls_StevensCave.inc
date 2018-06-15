@@ -1,5 +1,5 @@
 MeteorFalls_StevensCave_EventObjects: @ 85378B0
-	object_event 1, EVENT_OBJ_GFX_STEVEN, 0, 0, 19, 3, 3, 7, 17, 0, 0, 0, MeteorFalls_StevensCave_EventScript_23B182, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_STEVEN, 0, 19, 3, 3, 7, 17, 0, 0, MeteorFalls_StevensCave_EventScript_23B182, 0
 
 MeteorFalls_StevensCave_MapWarps: @ 85378C8
 	warp_def 10, 29, 3, 5, MAP_METEOR_FALLS_1F_1R

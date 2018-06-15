@@ -1,13 +1,13 @@
 AquaHideout_B1F_EventObjects: @ 8535378
-	object_event 1, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 28, 16, 3, 8, 0, 0, 1, 4, AquaHideout_B1F_EventScript_233A85, 924, 0, 0
-	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 0, 6, 6, 3, 9, 0, 0, 1, 5, AquaHideout_B1F_EventScript_233AB0, 924, 0, 0
-	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 29, 12, 3, 1, 0, 0, 0, 0, AquaHideout_B1F_EventScript_291372, 1071, 0, 0
-	object_event 4, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 0, 20, 18, 3, 23, 4, 0, 1, 4, AquaHideout_B1F_EventScript_233AD5, 924, 0, 0
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 15, 9, 3, 1, 17, 0, 0, 0, AquaHideout_B1F_EventScript_291358, 1124, 0, 0
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 16, 9, 3, 1, 17, 0, 0, 0, AquaHideout_B1F_EventScript_2339EB, 977, 0, 0
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 15, 10, 3, 1, 17, 0, 0, 0, AquaHideout_B1F_EventScript_291365, 1132, 0, 0
-	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 16, 10, 3, 1, 17, 0, 0, 0, AquaHideout_B1F_EventScript_233A38, 978, 0, 0
-	object_event 9, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 0, 28, 21, 3, 7, 17, 0, 1, 4, AquaHideout_B1F_EventScript_233AEC, 924, 0, 0
+	object_event 1, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 28, 16, 3, 8, 0, 1, 4, AquaHideout_B1F_EventScript_233A85, 924
+	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 6, 6, 3, 9, 0, 1, 5, AquaHideout_B1F_EventScript_233AB0, 924
+	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 29, 12, 3, 1, 0, 0, 0, AquaHideout_B1F_EventScript_291372, 1071
+	object_event 4, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 20, 18, 3, 23, 4, 1, 4, AquaHideout_B1F_EventScript_233AD5, 924
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 15, 9, 3, 1, 17, 0, 0, AquaHideout_B1F_EventScript_291358, 1124
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 16, 9, 3, 1, 17, 0, 0, AquaHideout_B1F_EventScript_2339EB, 977
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 15, 10, 3, 1, 17, 0, 0, AquaHideout_B1F_EventScript_291365, 1132
+	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 16, 10, 3, 1, 17, 0, 0, AquaHideout_B1F_EventScript_233A38, 978
+	object_event 9, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 28, 21, 3, 7, 17, 1, 4, AquaHideout_B1F_EventScript_233AEC, 924
 
 AquaHideout_B1F_MapWarps: @ 8535450
 	warp_def 29, 1, 3, 2, MAP_AQUA_HIDEOUT_1F

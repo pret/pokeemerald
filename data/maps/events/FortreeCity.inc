@@ -1,11 +1,11 @@
 FortreeCity_EventObjects: @ 8526B9C
-	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 0, 31, 3, 4, 1, 0, 0, 0, 0, FortreeCity_EventScript_1E25B6, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_GIRL_1, 0, 0, 32, 16, 3, 2, 17, 0, 0, 0, FortreeCity_EventScript_1E25DE, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_7, 0, 0, 32, 10, 3, 3, 16, 0, 0, 0, FortreeCity_EventScript_1E25BF, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_BOY_1, 0, 0, 11, 14, 4, 1, 0, 0, 0, 0, FortreeCity_EventScript_1E25F0, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_OLD_MAN_2, 0, 0, 8, 10, 3, 1, 0, 0, 0, 0, FortreeCity_EventScript_1E25E7, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_BOY_5, 0, 0, 9, 16, 3, 8, 0, 0, 0, 0, FortreeCity_EventScript_1E25F9, 0, 0, 0
-	object_event 7, EVENT_OBJ_GFX_KECLEON_1, 0, 0, 25, 8, 3, 76, 17, 0, 0, 0, FortreeCity_EventScript_1E2614, 969, 0, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 31, 3, 4, 1, 0, 0, 0, FortreeCity_EventScript_1E25B6, 0
+	object_event 2, EVENT_OBJ_GFX_GIRL_1, 0, 32, 16, 3, 2, 17, 0, 0, FortreeCity_EventScript_1E25DE, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_7, 0, 32, 10, 3, 3, 16, 0, 0, FortreeCity_EventScript_1E25BF, 0
+	object_event 4, EVENT_OBJ_GFX_BOY_1, 0, 11, 14, 4, 1, 0, 0, 0, FortreeCity_EventScript_1E25F0, 0
+	object_event 5, EVENT_OBJ_GFX_OLD_MAN_2, 0, 8, 10, 3, 1, 0, 0, 0, FortreeCity_EventScript_1E25E7, 0
+	object_event 6, EVENT_OBJ_GFX_BOY_5, 0, 9, 16, 3, 8, 0, 0, 0, FortreeCity_EventScript_1E25F9, 0
+	object_event 7, EVENT_OBJ_GFX_KECLEON_1, 0, 25, 8, 3, 76, 17, 0, 0, FortreeCity_EventScript_1E2614, 969
 
 FortreeCity_MapWarps: @ 8526C44
 	warp_def 5, 6, 0, 0, MAP_FORTREE_CITY_POKEMON_CENTER_1F

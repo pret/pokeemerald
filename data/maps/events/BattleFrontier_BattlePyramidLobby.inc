@@ -1,8 +1,8 @@
 BattleFrontier_BattlePyramidLobby_EventObjects: @ 853C598
-	object_event 1, EVENT_OBJ_GFX_HIKER, 0, 0, 7, 12, 4, 8, 17, 0, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_2508B1, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_HEX_MANIAC, 0, 0, 14, 13, 4, 9, 17, 0, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250ACE, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_4, 0, 0, 2, 15, 4, 2, 17, 0, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250E83, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_FAT_MAN, 0, 0, 12, 16, 4, 2, 17, 0, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250E8C, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_HIKER, 0, 7, 12, 4, 8, 17, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_2508B1, 0
+	object_event 2, EVENT_OBJ_GFX_HEX_MANIAC, 0, 14, 13, 4, 9, 17, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250ACE, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_4, 0, 2, 15, 4, 2, 17, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250E83, 0
+	object_event 4, EVENT_OBJ_GFX_FAT_MAN, 0, 12, 16, 4, 2, 17, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250E8C, 0
 
 BattleFrontier_BattlePyramidLobby_MapWarps: @ 853C5F8
 	warp_def 7, 17, 4, 3, MAP_BATTLE_FRONTIER_OUTSIDE_EAST

@@ -1,7 +1,7 @@
 RustboroCity_DevonCorp_3F_EventObjects: @ 85304BC
-	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 0, 17, 5, 3, 9, 0, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_21256C, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_2, 0, 0, 3, 5, 3, 10, 0, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_2125E1, 949, 0, 0
-	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 0, 15, 5, 3, 76, 17, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_21256C, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 17, 5, 3, 9, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_21256C, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_2, 0, 3, 5, 3, 10, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_2125E1, 949
+	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 15, 5, 3, 76, 17, 0, 0, RustboroCity_DevonCorp_3F_EventScript_21256C, 0
 
 RustboroCity_DevonCorp_3F_MapWarps: @ 8530504
 	warp_def 2, 1, 0, 1, MAP_RUSTBORO_CITY_DEVON_CORP_2F

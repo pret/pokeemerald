@@ -14,15 +14,15 @@
 	.4byte \address
 	.endm
 
-	.macro object_event index, gfx, replacement, filler1, x, y, elevation, movement_type, radius, filler2, trainer_type, sight_radius_tree_etc, script, event_flag, filler3, filler4
-	.byte \index, \gfx, \replacement, \filler1
+	.macro object_event index, gfx, replacement, x, y, elevation, movement_type, radius, trainer_type, sight_radius_tree_etc, script, event_flag
+	.byte \index, \gfx, \replacement, 0
 	.2byte \x
 	.2byte \y
-	.byte \elevation, \movement_type, \radius, \filler2
+	.byte \elevation, \movement_type, \radius, 0
     .2byte \trainer_type, \sight_radius_tree_etc
 	.4byte \script
 	.2byte \event_flag
-	.byte \filler3, \filler4
+	.2byte 0
 	inc _num_npcs
 	.endm
 

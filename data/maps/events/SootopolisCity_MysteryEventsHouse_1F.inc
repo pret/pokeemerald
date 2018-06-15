@@ -1,5 +1,5 @@
 SootopolisCity_MysteryEventsHouse_1F_EventObjects: @ 8533598
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_2, 0, 0, 6, 4, 0, 10, 0, 0, 0, 0, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A24, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_OLD_MAN_2, 0, 6, 4, 0, 10, 0, 0, 0, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A24, 0
 
 SootopolisCity_MysteryEventsHouse_1F_MapWarps: @ 85335B0
 	warp_def 3, 7, 0, 12, MAP_SOOTOPOLIS_CITY
