@@ -78,8 +78,8 @@ enum FieldEffectScriptIdx
 };
 
 extern s32 gFieldEffectArguments[8];
-extern void (*gUnknown_0203CEEC)(void);
-extern bool8 (*gUnknown_03005DB0)(void);
+extern void (*gPostMenuFieldCallback)(void);
+extern bool8 (*gFieldCallback2)(void);
 
 u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);

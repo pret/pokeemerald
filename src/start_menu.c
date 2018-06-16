@@ -90,7 +90,7 @@ extern void sub_80C4DDC(void (*)(void));
 extern void sub_80C51C4(void (*)(void));
 extern void sub_80C4E74(u8, void (*)(void));
 extern void sub_81C4EFC(void);
-extern void sub_80984F4(void);
+extern void ScriptUnfreezeEventObjects(void);
 extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
 extern void sub_81A9E90(void);
@@ -773,7 +773,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
 void sub_809FDD4(void) // Called from battle_frontier_2.s
 {
     sub_8197DF8(0, FALSE);
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     CreateStartMenuTask(sub_809FA34);
     ScriptContext2_Enable();
 }
@@ -815,7 +815,7 @@ static bool8 SaveCallback(void)
     case SAVE_SUCCESS:
     case SAVE_ERROR:    // Close start menu
         sub_8197DF8(0, TRUE);
-        sub_80984F4();
+        ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
         sub_81A9EC8();
         return TRUE;
@@ -852,7 +852,7 @@ static bool8 BattlePyramidRetireCallback(void)
         return FALSE;
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
         sub_8197DF8(0, TRUE);
-        sub_80984F4();
+        ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
         ScriptContext1_SetupScript(BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88);
         return TRUE;
@@ -1409,7 +1409,7 @@ static void HideStartMenuWindow(void)
 {
     sub_819746C(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
 }
 
