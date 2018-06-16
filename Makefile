@@ -25,7 +25,7 @@ ASFLAGS := -mcpu=arm7tdmi
 CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
+CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -undef
 
 LDFLAGS = -Map ../../$(MAP)
 
