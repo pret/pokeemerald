@@ -1575,8 +1575,8 @@ void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lv
     u8 language;
     u8 value;
 
-    if (gSaveBlock2Ptr->frontierChosenLvl != 0)
-        level = BattleFrontierGetOpponentLvl(gSaveBlock2Ptr->frontierChosenLvl);
+    if (gSaveBlock2Ptr->frontier.chosenLvl != 0)
+        level = BattleFrontierGetOpponentLvl(gSaveBlock2Ptr->frontier.chosenLvl);
     else if (lvl50)
         level = 50;
     else

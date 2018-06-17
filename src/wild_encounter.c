@@ -5102,7 +5102,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
         }
         if (gMapHeader.mapDataId == 0x169)
         {
-            headerId = gSaveBlock2Ptr->battlePyramidWildHeaderId;
+            headerId = gSaveBlock2Ptr->frontier.field_CB2;
             if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
             else if (DoWildEncounterRateTest(gBattlePyramidWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
@@ -5240,7 +5240,7 @@ bool8 SweetScentWildEncounter(void)
         }
         if (gMapHeader.mapDataId == 0x169)
         {
-            headerId = gSaveBlock2Ptr->battlePyramidWildHeaderId;
+            headerId = gSaveBlock2Ptr->frontier.field_CB2;
             if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
                 return FALSE;
 
