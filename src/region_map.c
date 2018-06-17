@@ -1603,7 +1603,7 @@ void MCB2_FlyMap(void)
             gMain.state++;
             break;
         case 3:
-            sub_809882C(0, 0x65, 0xd0);
+            LoadSav2WindowGfx(0, 0x65, 0xd0);
             clear_scheduled_bg_copies_to_vram();
             gMain.state++;
             break;

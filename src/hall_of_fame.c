@@ -89,7 +89,7 @@ extern void sub_8197434(u8, u8);
 extern u16 sub_818D97C(u8 playerGender, u8);
 extern u16 sub_818D8AC(u16, u8, s16, s16, u8, u16);
 extern const void* stdpal_get(u8);
-extern void sub_80987D4(u8, u8, u16, u8);
+extern void LoadWindowGfx(u8, u8, u16, u8);
 extern u16 sub_818D820(u16);
 extern u16 sub_818D8F0(u16);
 extern u16 sub_818D7D8(u16 species, u32 trainerId, u32 personality, u8 arg3, s16 sp0, s16 sp1, u8 sp2, u16 sp3);
@@ -725,7 +725,7 @@ static void sub_8173EE4(u8 taskId)
     ShowBg(3);
     gTasks[taskId].tPlayerSpriteID = sub_818D8AC(sub_818D97C(gSaveBlock2Ptr->playerGender, 1), 1, 120, 72, 6, 0xFFFF);
     AddWindow(&sHof_WindowTemplate);
-    sub_80987D4(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
+    LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
     LoadPalette(stdpal_get(1), 0xE0, 0x20);
     gTasks[taskId].tFrameCount = 120;
     gTasks[taskId].func = Task_Hof_WaitAndPrintPlayerInfo;

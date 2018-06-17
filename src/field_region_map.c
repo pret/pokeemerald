@@ -89,7 +89,7 @@ static void MCB2_InitRegionMapRegisters(void)
     InitBgsFromTemplates(1, gUnknown_085E5068, 2);
     InitWindows(gUnknown_085E5070);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 0x27, 0xd0);
+    LoadSav2WindowGfx(0, 0x27, 0xd0);
     clear_scheduled_bg_copies_to_vram();
     SetMainCallback2(MCB2_FieldUpdateRegionMap);
     SetVBlankCallback(VBCB_FieldUpdateRegionMap);

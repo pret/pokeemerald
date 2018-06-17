@@ -75,8 +75,8 @@ extern const u16 gUnknown_0860F074[];
 
 extern void CB2_ReturnToField(void);
 extern bool8 sub_81221EC(void);
-extern void sub_809882C(u8, u16, u8);
-extern void copy_textbox_border_tile_patterns_to_vram(u8, u16, u8);
+extern void LoadSav2WindowGfx(u8, u16, u8);
+extern void LoadMessageBoxGfx(u8, u16, u8);
 extern void sub_80AF168(void);
 
 // this file's functions
@@ -566,8 +566,8 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplatesForPokeblockMenu);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 1, 0xE0);
-    copy_textbox_border_tile_patterns_to_vram(0, 0xA, 0xD0);
+    LoadSav2WindowGfx(0, 1, 0xE0);
+    LoadMessageBoxGfx(0, 0xA, 0xD0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplatesForPokeblockMenu) - 1; i++)

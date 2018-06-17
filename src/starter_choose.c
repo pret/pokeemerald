@@ -46,7 +46,7 @@ extern const u8 gStarterChoose_LabelCoords[][2];
 extern const u8 gUnknown_085B1E0C[];
 extern const u8 gUnknown_085B1E28[][2];
 
-extern void sub_809882C(u8, u16, u8);
+extern void LoadSav2WindowGfx(u8, u16, u8);
 extern void ScanlineEffect_Stop(void);
 extern void clear_scheduled_bg_copies_to_vram(void);
 extern void dp13_810BB8C(void);
@@ -126,7 +126,7 @@ void CB2_ChooseStarter(void)
     InitWindows(gUnknown_085B1DCC);
 
     DeactivateAllTextPrinters();
-    sub_809882C(0, 0x2A8, 0xD0);
+    LoadSav2WindowGfx(0, 0x2A8, 0xD0);
     clear_scheduled_bg_copies_to_vram();
     ScanlineEffect_Stop();
     ResetTasks();

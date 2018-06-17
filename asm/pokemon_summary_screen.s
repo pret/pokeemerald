@@ -5293,11 +5293,11 @@ sub_81C6BD8: @ 81C6BD8
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xD0
-	bl copy_textbox_border_tile_patterns_to_vram
+	bl LoadMessageBoxGfx
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20

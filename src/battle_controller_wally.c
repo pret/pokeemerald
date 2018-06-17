@@ -1179,7 +1179,7 @@ static void WallyHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -1206,14 +1206,14 @@ static void WallyHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattleHandleAddTextPrinter(gText_BattleMenu, 2);
+    BattlePutTextOnWindow(gText_BattleMenu, 2);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
 
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillWallyDo);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 1);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
 }
 
 static void WallyHandleUnknownYesNoBox(void)

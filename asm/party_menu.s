@@ -4396,7 +4396,7 @@ _081B23E8:
 	movs r0, 0
 	movs r1, 0x4F
 	movs r2, 0xD0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	bl GetOverworldTextboxPalettePtr
 	movs r1, 0xE0
 	movs r2, 0x20

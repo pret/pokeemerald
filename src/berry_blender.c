@@ -153,8 +153,8 @@ extern const u8 gText_234Players[];
 
 extern void sub_800A418(void);
 extern u8 sub_800A9D8(void);
-extern void sub_809882C(u8, u16, u8);
-extern void copy_textbox_border_tile_patterns_to_vram(u8, u16, u8);
+extern void LoadSav2WindowGfx(u8, u16, u8);
+extern void LoadMessageBoxGfx(u8, u16, u8);
 extern void sub_81AABF0(void (*callback)(void));
 extern void sub_800B4C0(void);
 extern void ClearLinkCallback(void);
@@ -927,8 +927,8 @@ static void sub_807FAC8(void)
         InitBgsFromTemplates(1, sBerryBlenderBgTemplates, ARRAY_COUNT(sBerryBlenderBgTemplates));
         SetBgTilemapBuffer(1, sBerryBlenderData->tilemapBuffers[0]);
         SetBgTilemapBuffer(2, sBerryBlenderData->tilemapBuffers[1]);
-        sub_809882C(0, 1, 0xD0);
-        copy_textbox_border_tile_patterns_to_vram(0, 0x14, 0xF0);
+        LoadSav2WindowGfx(0, 1, 0xD0);
+        LoadMessageBoxGfx(0, 0x14, 0xF0);
         InitBerryBlenderWindows();
 
         sBerryBlenderData->mainState++;
@@ -1331,8 +1331,8 @@ static void sub_8080588(void)
     SetBgTilemapBuffer(1, sBerryBlenderData->tilemapBuffers[0]);
     SetBgTilemapBuffer(2, sBerryBlenderData->tilemapBuffers[1]);
 
-    sub_809882C(0, 1, 0xD0);
-    copy_textbox_border_tile_patterns_to_vram(0, 0x14, 0xF0);
+    LoadSav2WindowGfx(0, 1, 0xD0);
+    LoadMessageBoxGfx(0, 0x14, 0xF0);
     InitBerryBlenderWindows();
 
     sBerryBlenderData->field_44 = 0;

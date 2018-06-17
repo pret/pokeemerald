@@ -17,6 +17,20 @@
 #include "recorded_battle.h"
 #include "international_string_util.h"
 
+struct BattleWindowText
+{
+    u8 fillValue;
+    u8 fontId;
+    u8 x;
+    u8 y;
+    u8 letterSpacing;
+    u8 lineSpacing;
+    u8 speed;
+    u8 fgColor;
+    u8 bgColor;
+    u8 shadowColor;
+};
+
 extern u8 gBattlerAbilities[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203C7B4;
 extern struct StringInfoBattle *gStringInfo;
@@ -1351,67 +1365,590 @@ static const u16 sUnknownMoveTable[] =
 
 static const u8 sDummyWeirdStatusString[] = {EOS, EOS, EOS, EOS, EOS, EOS, EOS, EOS, 0, 0};
 
-static const u8 sUnknown_085CD42C[] =
+static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 {
-    0xFF, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x1, 0xF, 0x6, 0x0, 0x0, 0xFF, 0x1,
-    0x1, 0x1, 0x0, 0x0, 0x0, 0x1, 0xF, 0x6, 0x0, 0x0, 0xEE, 0x1, 0x0, 0x1, 0x0,
-    0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0,
-    0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD,
-    0xE, 0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE,
-    0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF,
-    0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0, 0xC, 0xE, 0xB, 0x0, 0x0,
-    0xEE, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE,
-    0x1, 0x2, 0x1, 0x0, 0x0, 0x0, 0xC, 0xE, 0xB, 0x0, 0x0, 0xEE, 0x7, 0x0,
-    0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0,
-    0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0,
-    0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD,
-    0xE, 0xF, 0x0, 0x0, 0x0, 0x1, 0x20, 0x1, 0x0, 0x0, 0x0, 0x1, 0x0, 0x2,
-    0x0, 0x0, 0xEE, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0,
-    0x0, 0xEE, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0,
-    0xEE, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE,
-    0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1,
-    0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1, 0xFF,
-    0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0x0, 0x1, 0xFF, 0x1, 0x0,
-    0x0, 0x0, 0x1, 0x0, 0x6, 0x0, 0x0, 0x0, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0x1, 0x0,
-    0x6, 0x0, 0x0, 0x0, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0x1, 0x0, 0x6, 0x0, 0x0
+	{ // 0
+		.fillValue = 0xFF,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 1,
+		.fgColor = 1,
+		.bgColor = 15,
+		.shadowColor = 6,
+	},
+	{ // 1
+		.fillValue = 0xFF,
+		.fontId = 1,
+		.x = 1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 1,
+		.bgColor = 15,
+		.shadowColor = 6,
+	},
+	{ // 2
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 3
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 4
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 5
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 6
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 7
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 12,
+		.bgColor = 14,
+		.shadowColor = 11,
+	},
+	{ // 8
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 9
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 2,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 12,
+		.bgColor = 14,
+		.shadowColor = 11,
+	},
+	{ // 10
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 11
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 12
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 13
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 14
+		.fillValue = 0x0,
+		.fontId = 1,
+		.x = 32,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 1,
+		.bgColor = 0,
+		.shadowColor = 2,
+	},
+	{ // 15
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 16
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 17
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 18
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 19
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 20
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 21
+		.fillValue = 0x0,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 1,
+		.bgColor = 0,
+		.shadowColor = 6,
+	},
+	{ // 22
+		.fillValue = 0x0,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 1,
+		.bgColor = 0,
+		.shadowColor = 6,
+	},
+	{ // 23
+		.fillValue = 0x0,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 1,
+		.bgColor = 0,
+		.shadowColor = 6,
+	},
 };
 
-static const u8 sUnknown_085CD54C[] =
+static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
 {
-    0xFF, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x1, 0xF, 0x6, 0x0, 0x0, 0xFF, 0x1,
-    0x1, 0x1, 0x0, 0x0, 0x0, 0x1, 0xF, 0x6, 0x0, 0x0, 0xEE, 0x1, 0x0, 0x1, 0x0,
-    0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0,
-    0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD,
-    0xE, 0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE,
-    0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF,
-    0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0, 0x0, 0x0, 0xC, 0xE, 0xB, 0x0, 0x0,
-    0xEE, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE,
-    0x1, 0x2, 0x1, 0x0, 0x0, 0x0, 0xC, 0xE, 0xB, 0x0, 0x0, 0xEE, 0x7, 0x0,
-    0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x7, 0x0, 0x1, 0x0,
-    0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0,
-    0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0xD,
-    0xE, 0xF, 0x0, 0x0, 0x0, 0x1, 0x20, 0x1, 0x0, 0x0, 0x0, 0x1, 0x0, 0x2,
-    0x0, 0x0, 0xEE, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0x1, 0xE, 0xF, 0x0,
-    0x0, 0xEE, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0,
-    0xEE, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE,
-    0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1,
-    0xFF, 0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1, 0xFF,
-    0x1, 0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0xEE, 0x1, 0xFF, 0x1,
-    0x0, 0x0, 0x0, 0xD, 0xE, 0xF, 0x0, 0x0, 0x11, 0x1, 0x0, 0x1, 0x0, 0x0,
-    0x1, 0x2, 0x1, 0x3, 0x0, 0x0
+	{ // 0
+		.fillValue = 0xFF,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 1,
+		.fgColor = 1,
+		.bgColor = 15,
+		.shadowColor = 6,
+	},
+	{ // 1
+		.fillValue = 0xFF,
+		.fontId = 1,
+		.x = 1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 1,
+		.bgColor = 15,
+		.shadowColor = 6,
+	},
+	{ // 2
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 3
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 4
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 5
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 6
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 7
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 12,
+		.bgColor = 14,
+		.shadowColor = 11,
+	},
+	{ // 8
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 9
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 2,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 12,
+		.bgColor = 14,
+		.shadowColor = 11,
+	},
+	{ // 10
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 11
+		.fillValue = 0xEE,
+		.fontId = 7,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 12
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 13
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 14
+		.fillValue = 0x0,
+		.fontId = 1,
+		.x = 32,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 1,
+		.bgColor = 0,
+		.shadowColor = 2,
+	},
+	{ // 15
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 1,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 16
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 17
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 18
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 19
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 20
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 21
+		.fillValue = 0xEE,
+		.fontId = 1,
+		.x = -1,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 0,
+		.fgColor = 13,
+		.bgColor = 14,
+		.shadowColor = 15,
+	},
+	{ // 22
+		.fillValue = 0x11,
+		.fontId = 1,
+		.x = 0,
+		.y = 1,
+		.letterSpacing = 0,
+		.lineSpacing = 0,
+		.speed = 1,
+		.fgColor = 2,
+		.bgColor = 1,
+		.shadowColor = 3,
+	},
 };
 
-static const u8 * const gUnknown_085CD660[] =
+static const struct BattleWindowText *const sBattleTextOnWindowsInfo[] =
 {
-    sUnknown_085CD42C, sUnknown_085CD54C
+    sTextOnWindowsInfo_Normal, sTextOnWindowsInfo_Arena
 };
 
 static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
 
+// code
 void BufferStringBattle(u16 stringID)
 {
     s32 i;
-    const u8* stringPtr = NULL;
+    const u8 *stringPtr = NULL;
 
     gStringInfo = (struct StringInfoBattle*)(&gBattleBufferA[gActiveBattler][4]);
     gLastUsedItem = gStringInfo->lastItem;
@@ -2395,47 +2932,46 @@ static void sub_814F950(u8* dst)
     }
 }
 
-void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
+void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 {
-    const u8 *r8 = gUnknown_085CD660[gBattleScripting.field_24];
-    bool32 r9;
+    const struct BattleWindowText *textInfo = sBattleTextOnWindowsInfo[gBattleScripting.windowsType];
+    bool32 toVram;
     struct TextSubPrinter textSubPrinter;
     u8 speed;
 
-    if (arg1 & 0x80)
+    if (windowId & 0x80)
     {
-        arg1 &= ~(0x80);
-        r9 = FALSE;
+        windowId &= ~(0x80);
+        toVram = FALSE;
     }
     else
     {
-        FillWindowPixelBuffer(arg1, r8[12 * arg1]);
-        r9 = TRUE;
+        FillWindowPixelBuffer(windowId, textInfo[windowId].fillValue);
+        toVram = TRUE;
     }
 
     textSubPrinter.current_text_offset = text;
-    textSubPrinter.windowId = arg1;
-    textSubPrinter.fontId = r8[(12 * arg1) + 1];
-    textSubPrinter.x = r8[(12 * arg1) + 2];
-    textSubPrinter.y = r8[(12 * arg1) + 3];
+    textSubPrinter.windowId = windowId;
+    textSubPrinter.fontId = textInfo[windowId].fontId;
+    textSubPrinter.x = textInfo[windowId].x;
+    textSubPrinter.y = textInfo[windowId].y;
     textSubPrinter.currentX = textSubPrinter.x;
     textSubPrinter.currentY = textSubPrinter.y;
-    textSubPrinter.letterSpacing = r8[(12 * arg1) + 4];
-    textSubPrinter.lineSpacing = r8[(12 * arg1) + 5];
+    textSubPrinter.letterSpacing = textInfo[windowId].letterSpacing;
+    textSubPrinter.lineSpacing = textInfo[windowId].lineSpacing;
     textSubPrinter.fontColor_l = 0;
-    textSubPrinter.fgColor = r8[(12 * arg1) + 7];
-    textSubPrinter.bgColor = r8[(12 * arg1) + 8];
-    textSubPrinter.shadowColor = r8[(12 * arg1) + 9];
+    textSubPrinter.fgColor = textInfo[windowId].fgColor;
+    textSubPrinter.bgColor = textInfo[windowId].bgColor;
+    textSubPrinter.shadowColor = textInfo[windowId].shadowColor;
 
     if (textSubPrinter.x == 0xFF)
     {
-        s32 var2;
-        u32 var = sub_80397C4(gBattleScripting.field_24, arg1);
-        var2 = GetStringCenterAlignXOffsetWithLetterSpacing(textSubPrinter.fontId, textSubPrinter.current_text_offset, var, textSubPrinter.letterSpacing);
-        textSubPrinter.x = textSubPrinter.currentX = var2;
+        u32 width = sub_80397C4(gBattleScripting.windowsType, windowId);
+        s32 alignX = GetStringCenterAlignXOffsetWithLetterSpacing(textSubPrinter.fontId, textSubPrinter.current_text_offset, width, textSubPrinter.letterSpacing);
+        textSubPrinter.x = textSubPrinter.currentX = alignX;
     }
 
-    if (arg1 == 0x16)
+    if (windowId == 0x16)
         gTextFlags.flag_1 = 0;
     else
         gTextFlags.flag_1 = 1;
@@ -2445,7 +2981,7 @@ void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
     else
         gTextFlags.flag_2 = 0;
 
-    if (arg1 == 0 || arg1 == 0x16)
+    if (windowId == 0 || windowId == 0x16)
     {
         if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
             speed = 1;
@@ -2458,16 +2994,16 @@ void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
     }
     else
     {
-        speed = r8[(12 * arg1) + 6];
+        speed = textInfo[windowId].speed;
         gTextFlags.flag_0 = 0;
     }
 
     AddTextPrinter(&textSubPrinter, speed, NULL);
 
-    if (r9)
+    if (toVram)
     {
-        PutWindowTilemap(arg1);
-        CopyWindowToVram(arg1, 3);
+        PutWindowTilemap(windowId);
+        CopyWindowToVram(windowId, 3);
     }
 }
 

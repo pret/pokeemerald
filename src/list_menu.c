@@ -337,7 +337,7 @@ s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenu
         switch (arg2)
         {
         case 2:
-            sub_809882C(gUnknown_0203CE84.field_5, tileNum, palNum);
+            LoadSav2WindowGfx(gUnknown_0203CE84.field_5, tileNum, palNum);
         case 1:
             sub_8098858(gUnknown_0203CE84.field_5, tileNum, palNum / 16);
             break;

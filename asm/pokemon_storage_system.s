@@ -1837,7 +1837,7 @@ _080C805E:
 	movs r0, 0x1
 	movs r1, 0xB
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	b _080C8198
 	.pool
 _080C808C:
@@ -6712,7 +6712,7 @@ sub_80CAC1C: @ 80CAC1C
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xD0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	movs r0, 0x20
 	str r0, [sp]
 	movs r0, 0x14

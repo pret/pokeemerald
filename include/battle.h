@@ -606,7 +606,7 @@ struct BattleScripting
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 field_23;
-    u8 field_24;
+    u8 windowsType; // 0 - normal, 1 - battle arena
     u8 multiplayerId;
 };
 

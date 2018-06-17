@@ -82,8 +82,8 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gUnknown_0203CF00[];
 
 extern const u16 gBattleTextboxPalette[]; // battle textbox palette
-extern const struct BgTemplate gUnknown_0831AA08[];
-extern const struct WindowTemplate * const gUnknown_0831ABA0[];
+extern const struct BgTemplate gBattleBgTemplates[];
+extern const struct WindowTemplate * const gBattleWindowTemplates[];
 extern const u8 gUnknown_0831ACE0[];
 extern const u8 * const gBattleScriptsForMoveEffects[];
 extern const u8 * const gBattlescriptsForBallThrow[];
@@ -652,7 +652,7 @@ static void CB2_InitBattleInternal(void)
     LoadBattleTextboxAndBackground();
     ResetSpriteData();
     ResetTasks();
-    LoadBattleEntryBackground();
+    DrawBattleEntryBackground();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
     SetVBlankCallback(VBlankCB_Battle);
@@ -2210,10 +2210,10 @@ void sub_8038D64(void)
 
         sub_80356D0();
         LoadCompressedPalette(gBattleTextboxPalette, 0, 64);
-        ApplyPlayerChosenFrameToBattleMenu();
+        LoadBattleMenuWindowGfx();
         ResetSpriteData();
         ResetTasks();
-        LoadBattleEntryBackground();
+        DrawBattleEntryBackground();
         SetGpuReg(REG_OFFSET_WINOUT, 0x37);
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 4;
@@ -2327,7 +2327,7 @@ static void sub_8038F34(void)
         if (sub_800A520() == TRUE)
         {
             sub_800ADF8();
-            BattleHandleAddTextPrinter(gText_LinkStandby3, 0);
+            BattlePutTextOnWindow(gText_LinkStandby3, 0);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -2363,25 +2363,25 @@ u32 sub_80391E0(u8 arrayId, u8 caseId)
     switch (caseId)
     {
     case 0:
-        ret = gUnknown_0831AA08[arrayId].bg;
+        ret = gBattleBgTemplates[arrayId].bg;
         break;
     case 1:
-        ret = gUnknown_0831AA08[arrayId].charBaseIndex;
+        ret = gBattleBgTemplates[arrayId].charBaseIndex;
         break;
     case 2:
-        ret = gUnknown_0831AA08[arrayId].mapBaseIndex;
+        ret = gBattleBgTemplates[arrayId].mapBaseIndex;
         break;
     case 3:
-        ret = gUnknown_0831AA08[arrayId].screenSize;
+        ret = gBattleBgTemplates[arrayId].screenSize;
         break;
     case 4:
-        ret = gUnknown_0831AA08[arrayId].paletteMode;
+        ret = gBattleBgTemplates[arrayId].paletteMode;
         break;
     case 5:
-        ret = gUnknown_0831AA08[arrayId].priority;
+        ret = gBattleBgTemplates[arrayId].priority;
         break;
     case 6:
-        ret = gUnknown_0831AA08[arrayId].baseTile;
+        ret = gBattleBgTemplates[arrayId].baseTile;
         break;
     }
 
@@ -2406,7 +2406,7 @@ static void sub_80392A8(void)
     gBattle_BG3_Y = 0;
     sub_80356D0();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-    ApplyPlayerChosenFrameToBattleMenu();
+    LoadBattleMenuWindowGfx();
 
     for (i = 0; i < 2; i++)
         LoadChosenBattleElement(i);
@@ -2453,7 +2453,7 @@ static void sub_803939C(void)
     case 3:
         if (!gPaletteFade.active)
         {
-            BattleHandleAddTextPrinter(gText_RecordBattleToPass, 0);
+            BattlePutTextOnWindow(gText_RecordBattleToPass, 0);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -2461,7 +2461,7 @@ static void sub_803939C(void)
         if (!IsTextPrinterActive(0))
         {
             HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
-            BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
+            BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xC);
             gBattleCommunication[CURSOR_POSITION] = 1;
             BattleCreateYesNoCursorAt(1);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -2515,7 +2515,7 @@ static void sub_803939C(void)
             if (gMain.field_439_x4)
             {
                 sub_800ADF8();
-                BattleHandleAddTextPrinter(gText_LinkStandby3, 0);
+                BattlePutTextOnWindow(gText_LinkStandby3, 0);
             }
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -2546,14 +2546,14 @@ static void sub_803939C(void)
         {
             PlaySE(SE_SAVE);
             BattleStringExpandPlaceholdersToDisplayedString(gText_BattleRecordedOnPass);
-            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
             gBattleCommunication[1] = 0x80;
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         else
         {
             BattleStringExpandPlaceholdersToDisplayedString(gText_BattleRecordCouldntBeSaved);
-            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
             gBattleCommunication[1] = 0x80;
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -2564,7 +2564,7 @@ static void sub_803939C(void)
             if (gMain.field_439_x4)
             {
                 sub_800ADF8();
-                BattleHandleAddTextPrinter(gText_LinkStandby3, 0);
+                BattlePutTextOnWindow(gText_LinkStandby3, 0);
             }
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -2610,7 +2610,7 @@ static void TryCorrectShedinjaLanguage(struct Pokemon *mon)
 
 u32 sub_80397C4(u32 setId, u32 tableId)
 {
-    return gUnknown_0831ABA0[setId][tableId].width * 8;
+    return gBattleWindowTemplates[setId][tableId].width * 8;
 }
 
 #define sBattler            data[0]
@@ -3885,7 +3885,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     TurnValuesCleanUp(FALSE);
     SpecialStatusesClear();
     *(&gBattleStruct->field_91) = gAbsentBattlerFlags;
-    BattleHandleAddTextPrinter(gText_EmptyString3, 0);
+    BattlePutTextOnWindow(gText_EmptyString3, 0);
     gBattleMainFunc = HandleTurnActionSelectionState;
     ResetSentPokesToOpponentValue();
 
@@ -3992,7 +3992,7 @@ void BattleTurnPassed(void)
         *(gBattleStruct->monToSwitchIntoId + i) = 6;
 
     *(&gBattleStruct->field_91) = gAbsentBattlerFlags;
-    BattleHandleAddTextPrinter(gText_EmptyString3, 0);
+    BattlePutTextOnWindow(gText_EmptyString3, 0);
     gBattleMainFunc = HandleTurnActionSelectionState;
     gRandomTurnNumber = Random();
 

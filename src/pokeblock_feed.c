@@ -59,7 +59,7 @@ extern const u16 gUnknown_0860F074[];
 
 extern bool8 sub_81221EC(void);
 extern void sub_806A068(u16, u8);
-extern void sub_809882C(u8, u16, u8);
+extern void LoadSav2WindowGfx(u8, u16, u8);
 
 // this file's functions
 static void HandleInitBackgrounds(void);
@@ -706,7 +706,7 @@ static void HandleInitWindows(void)
 {
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 1, 0xE0);
+    LoadSav2WindowGfx(0, 1, 0xE0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
     FillWindowPixelBuffer(0, 0);
     PutWindowTilemap(0);

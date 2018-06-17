@@ -620,7 +620,7 @@ static void HandleInputChooseMove(void)
                 gMultiUsePlayerCursor = gMoveSelectionCursor[gActiveBattler] + 1;
 
             MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 27);
-            BattleHandleAddTextPrinter(gText_BattleSwitchWhich, 0xB);
+            BattlePutTextOnWindow(gText_BattleSwitchWhich, 0xB);
             gBattlerControllerFuncs[gActiveBattler] = HandleMoveSwitchting;
         }
     }
@@ -1458,7 +1458,7 @@ static void MoveSelectionDisplayMoveNames(void)
     {
         MoveSelectionDestroyCursorAt(i);
         StringCopy(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
-        BattleHandleAddTextPrinter(gDisplayedStringBattle, i + 3);
+        BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
         if (moveInfo->moves[i] != MOVE_NONE)
             gNumberOfMovesToChoose++;
     }
@@ -1467,7 +1467,7 @@ static void MoveSelectionDisplayMoveNames(void)
 static void MoveSelectionDisplayPpString(void)
 {
     StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 7);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 7);
 }
 
 static void MoveSelectionDisplayPpNumber(void)
@@ -1485,7 +1485,7 @@ static void MoveSelectionDisplayPpNumber(void)
     txtPtr++;
     ConvertIntToDecimalStringN(txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
 
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 9);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 9);
 }
 
 static void MoveSelectionDisplayMoveType(void)
@@ -1502,7 +1502,7 @@ static void MoveSelectionDisplayMoveType(void)
     txtPtr++;
 
     StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 10);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 10);
 }
 
 static void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
@@ -1573,7 +1573,7 @@ static void PrintLinkStandbyMsg(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
-        BattleHandleAddTextPrinter(gText_LinkStandby, 0);
+        BattlePutTextOnWindow(gText_LinkStandby, 0);
     }
 }
 
@@ -2536,7 +2536,7 @@ static void PlayerHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
     BattleTv_SetDataBasedOnString(*stringId);
     sub_81A57E4(gActiveBattler, *stringId);
@@ -2566,14 +2566,14 @@ static void PlayerHandleChooseAction(void)
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattleTv_ClearExplosionFaintCause();
-    BattleHandleAddTextPrinter(gText_BattleMenu, 2);
+    BattlePutTextOnWindow(gText_BattleMenu, 2);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
 
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 1);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
 }
 
 static void PlayerHandleUnknownYesNoBox(void)
@@ -2581,7 +2581,7 @@ static void PlayerHandleUnknownYesNoBox(void)
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
         HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
-        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 12);
+        BattlePutTextOnWindow(gText_BattleYesNoChoice, 12);
         gMultiUsePlayerCursor = 1;
         BattleCreateYesNoCursorAt(1);
         gBattlerControllerFuncs[gActiveBattler] = PlayerHandleUnknownYesNoInput;

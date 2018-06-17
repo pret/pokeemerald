@@ -10972,11 +10972,11 @@ _08018574:
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xF0
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	movs r4, 0x20
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -15907,11 +15907,11 @@ _0801AD8C:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	bl sub_819789C
 	ldr r0, =sub_801AC40
 	bl SetVBlankCallback
@@ -27081,11 +27081,11 @@ sub_8020740: @ 8020740
 	movs r0, 0x3
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	movs r0, 0x3
 	movs r1, 0xA
 	movs r2, 0x20
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xE0
 	movs r2, 0x20
@@ -30171,7 +30171,7 @@ _0802210C:
 	ldr r4, =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	ldrb r0, [r5]
 	movs r1, 0
 	adds r2, r4, 0
@@ -30370,7 +30370,7 @@ _08022296:
 	ldr r4, =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	ldrb r0, [r6, 0x2]
 	movs r1, 0
 	adds r2, r4, 0
@@ -35221,7 +35221,7 @@ sub_80248B0: @ 80248B0
 	ldr r5, =0x0000021d
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	ldrb r4, [r4]
 	bl sub_80247BC
 	adds r3, r0, 0
@@ -41645,7 +41645,7 @@ sub_8027BEC: @ 8027BEC
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD
@@ -44214,7 +44214,7 @@ sub_802902C: @ 802902C
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xB0
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	pop {r0}
 	bx r0
 	thumb_func_end sub_802902C
@@ -54638,7 +54638,7 @@ sub_802E500: @ 802E500
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD

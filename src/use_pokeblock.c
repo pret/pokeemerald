@@ -164,7 +164,7 @@ void sub_8166380(void)
             InitBgsFromTemplates(0, gUnknown_085DFCCC, ARRAY_COUNT(gUnknown_085DFCCC));
             InitWindows(gUnknown_085DFCDC);
             DeactivateAllTextPrinters();
-            sub_809882C(0, 0x97, 0xE0);
+            LoadSav2WindowGfx(0, 0x97, 0xE0);
             gUnknown_0203BC90->field_50++;
             break;
         case 4:

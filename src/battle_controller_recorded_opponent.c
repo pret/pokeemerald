@@ -1404,7 +1404,7 @@ static void RecordedOpponentHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 

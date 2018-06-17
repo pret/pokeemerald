@@ -10101,7 +10101,7 @@ sub_81CC09C: @ 81CC09C
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x40
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x4
@@ -11351,7 +11351,7 @@ sub_81CCA1C: @ 81CCA1C
 	lsrs r0, 24
 	movs r1, 0x42
 	movs r2, 0x40
-	bl box_border_load_tiles_and_pal
+	bl LoadSav2WindowGfx_
 	ldrb r0, [r5, 0x8]
 	movs r1, 0x42
 	movs r2, 0x4
@@ -22282,7 +22282,7 @@ sub_81D2824: @ 81D2824
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20

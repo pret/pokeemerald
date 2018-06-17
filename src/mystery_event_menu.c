@@ -77,7 +77,7 @@ void CB2_InitMysteryEventMenu(void)
             FillWindowPixelBuffer(i, 0);
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
-        sub_809882C(0, 1u, 0xD0u);
+        LoadSav2WindowGfx(0, 1u, 0xD0u);
         sub_81978B0(0xE0);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);

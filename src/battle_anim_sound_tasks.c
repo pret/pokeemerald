@@ -133,13 +133,13 @@ void sub_8158D8C(u8 taskId)
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->field_18->field_0;
         else
-            DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task
+            DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
     }
     else
     {
         u8 battlerId;
 
-        // get wanted battler
+        // Get wanted battler.
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             battlerId = gBattleAnimAttacker;
         else if (gBattleAnimArgs[0] == ANIM_TARGET)
@@ -149,7 +149,7 @@ void sub_8158D8C(u8 taskId)
         else
             battlerId = BATTLE_PARTNER(gBattleAnimTarget);
 
-        // check if battler is visible
+        // Check if battler is visible.
         if ((gBattleAnimArgs[0] == ANIM_TARGET || gBattleAnimArgs[0] == ANIM_DEF_PARTNER) && !IsBattlerSpriteVisible(battlerId))
         {
             DestroyAnimVisualTask(taskId);
@@ -179,13 +179,13 @@ void sub_8158E9C(u8 taskId)
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->field_18->field_0;
         else
-            DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task
+            DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
     }
     else
     {
         u8 battlerId;
 
-        // get wanted battler
+        // Get wanted battler.
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             battlerId = gBattleAnimAttacker;
         else if (gBattleAnimArgs[0] == ANIM_TARGET)
@@ -195,7 +195,7 @@ void sub_8158E9C(u8 taskId)
         else
             battlerId = BATTLE_PARTNER(gBattleAnimTarget);
 
-        // check if battler is visible
+        // Check if battler is visible.
         if ((gBattleAnimArgs[0] == ANIM_TARGET || gBattleAnimArgs[0] == ANIM_DEF_PARTNER) && !IsBattlerSpriteVisible(battlerId))
         {
             DestroyAnimVisualTask(taskId);

@@ -634,12 +634,12 @@ sub_812AA48: @ 812AA48
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xF0
-	bl copy_textbox_border_tile_patterns_to_vram
+	bl LoadMessageBoxGfx
 	movs r1, 0x85
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	movs r0, 0
 	bl PutWindowTilemap
 	pop {r0}

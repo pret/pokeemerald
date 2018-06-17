@@ -1157,11 +1157,11 @@ BuyMenuInitWindows: @ 80E0468
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_809882C
+	bl LoadSav2WindowGfx
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xE0
-	bl copy_textbox_border_tile_patterns_to_vram
+	bl LoadMessageBoxGfx
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x1

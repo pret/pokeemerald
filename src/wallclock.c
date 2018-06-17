@@ -576,7 +576,7 @@ static void LoadWallClockGraphics(void)
     InitBgsFromTemplates(0, gUnknown_085B21FC, 3);
     InitWindows(gUnknown_085B21DC);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 0x250, 0xd0);
+    LoadSav2WindowGfx(0, 0x250, 0xd0);
     clear_scheduled_bg_copies_to_vram();
     ScanlineEffect_Stop();
     ResetTasks();

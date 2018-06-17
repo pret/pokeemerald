@@ -2103,8 +2103,8 @@ void setup_bag_menu_textboxes(void)
 
     InitWindows(gUnknown_08614174);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 1, -32);
-    copy_textbox_border_tile_patterns_to_vram(0, 10, -48);
+    LoadSav2WindowGfx(0, 1, -32);
+    LoadMessageBoxGfx(0, 10, -48);
     sub_819A2BC(-64, 1);
     LoadPalette(&gUnknown_0860F074, 0xF0, 0x20);
     for (i = 0; i < 3; i++)

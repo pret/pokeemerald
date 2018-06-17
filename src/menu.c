@@ -193,8 +193,8 @@ void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonP
 
 void sub_81973A4(void)
 {
-    copy_textbox_border_tile_patterns_to_vram(0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
-    sub_809882C(0, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM * 0x10);
+    LoadMessageBoxGfx(0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
+    LoadSav2WindowGfx(0, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM * 0x10);
 }
 
 void NewMenuHelpers_DrawDialogueFrame(u8 windowId, bool8 copyToVram)
@@ -412,7 +412,7 @@ void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram)
 
 void sub_819786C(u8 windowId, bool8 copyToVram)
 {
-    copy_textbox_border_tile_patterns_to_vram(windowId, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
+    LoadMessageBoxGfx(windowId, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
     sub_8197B1C(windowId, copyToVram, DLG_WINDOW_BASE_TILE_NUM, 0xF);
 }
 

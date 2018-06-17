@@ -427,7 +427,7 @@ static void SafariHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -454,14 +454,14 @@ static void SafariHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattleHandleAddTextPrinter(gText_SafariZoneMenu, 2);
+    BattlePutTextOnWindow(gText_SafariZoneMenu, 2);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
 
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo2);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 1);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
 }
 
 static void SafariHandleUnknownYesNoBox(void)
