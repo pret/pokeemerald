@@ -266,7 +266,7 @@ bool8 SetUpFieldMove_Cut(void)
                 tileCuttable = TRUE;
 
                 j = 0;
-                while (1)
+                do
                 {
                     if (sHyperCutStruct[i].unk2[j] == 0)
                         break;
@@ -275,9 +275,7 @@ bool8 SetUpFieldMove_Cut(void)
                         tileCuttable = FALSE;
                         break;
                     }
-                    if (++j >= 2)
-                        break;
-                }
+                } while (++j <= 1);
 
                 if (tileCuttable == TRUE)
                 {

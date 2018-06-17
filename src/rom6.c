@@ -118,14 +118,14 @@ static void sub_813561C(u8 taskId)
 
 bool8 SetUpFieldMove_RockSmash(void)
 {
-    if(ShouldDoBrailleStrengthEffect())
+    if (ShouldDoBrailleStrengthEffect())
     {
         gSpecialVar_Result = GetCursorSelectionMonId();
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = sub_8179834;
         return TRUE;
     }
-    else if (SetLastTalkedObjectInFrontOfPlayer(0x56) == TRUE)
+    else if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = sub_81356C4;
