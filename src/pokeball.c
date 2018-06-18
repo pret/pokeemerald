@@ -665,7 +665,7 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             gTasks[taskId].tCryTaskState = wantedCry + 1;
         break;
     case 1:
-        if (ShouldPlayNormalPokeCry(mon) == TRUE)
+        if (ShouldPlayNormalMonCry(mon) == TRUE)
             PlayCry3(species, pan, 0);
         else
             PlayCry3(species, pan, 11);
@@ -680,7 +680,7 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
     case 20:
         if (gTasks[taskId].tCryTaskFrames == 0)
         {
-            if (ShouldPlayNormalPokeCry(mon) == TRUE)
+            if (ShouldPlayNormalMonCry(mon) == TRUE)
                 PlayCry4(species, pan, 1);
             else
                 PlayCry4(species, pan, 12);
@@ -719,7 +719,7 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             gTasks[taskId].tCryTaskFrames--;
             break;
         }
-        if (ShouldPlayNormalPokeCry(mon) == TRUE)
+        if (ShouldPlayNormalMonCry(mon) == TRUE)
             PlayCry4(species, pan, 0);
         else
             PlayCry4(species, pan, 11);

@@ -587,7 +587,7 @@ static void SetBattlePartyIds(void)
     {
         for (i = 0; i < gBattlersCount; i++)
         {
-            for (j = 0; j < 6; j++)
+            for (j = 0; j < PARTY_SIZE; j++)
             {
                 if (i < 2)
                 {

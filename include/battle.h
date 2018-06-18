@@ -692,9 +692,9 @@ struct BattleBarInfo
 {
     u8 healthboxSpriteId;
     s32 maxValue;
-    s32 currentValue;
+    s32 oldValue;
     s32 receivedValue;
-    s32 field_10;
+    s32 currValue;
 };
 
 struct BattleSpriteData
