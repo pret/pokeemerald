@@ -1,8 +1,6 @@
-	.align 2
 SealedChamber_InnerRoom_MapBorder::
 	.incbin "data/layouts/SealedChamber_InnerRoom/border.bin"
 
-	.align 2
 SealedChamber_InnerRoom_MapBlockdata::
 	.incbin "data/layouts/SealedChamber_InnerRoom/map.bin"
 
@@ -14,3 +12,4 @@ SealedChamber_InnerRoom_Layout::
 	.4byte SealedChamber_InnerRoom_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

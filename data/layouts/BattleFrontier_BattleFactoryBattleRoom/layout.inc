@@ -1,8 +1,6 @@
-	.align 2
 BattleFrontier_BattleFactoryBattleRoom_MapBorder::
 	.incbin "data/layouts/BattleFrontier_BattleFactoryBattleRoom/border.bin"
 
-	.align 2
 BattleFrontier_BattleFactoryBattleRoom_MapBlockdata::
 	.incbin "data/layouts/BattleFrontier_BattleFactoryBattleRoom/map.bin"
 
@@ -14,3 +12,4 @@ BattleFrontier_BattleFactoryBattleRoom_Layout::
 	.4byte BattleFrontier_BattleFactoryBattleRoom_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_BattleFactory
+

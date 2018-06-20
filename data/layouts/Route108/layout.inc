@@ -1,8 +1,6 @@
-	.align 2
 Route108_MapBorder::
 	.incbin "data/layouts/Route108/border.bin"
 
-	.align 2
 Route108_MapBlockdata::
 	.incbin "data/layouts/Route108/map.bin"
 
@@ -14,3 +12,4 @@ Route108_Layout::
 	.4byte Route108_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Slateport
+

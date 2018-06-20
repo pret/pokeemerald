@@ -1,8 +1,6 @@
-	.align 2
 AbandonedShip_Underwater2_MapBorder::
 	.incbin "data/layouts/AbandonedShip_Underwater2/border.bin"
 
-	.align 2
 AbandonedShip_Underwater2_MapBlockdata::
 	.incbin "data/layouts/AbandonedShip_Underwater2/map.bin"
 
@@ -14,3 +12,4 @@ AbandonedShip_Underwater2_Layout::
 	.4byte AbandonedShip_Underwater2_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_InsideShip
+

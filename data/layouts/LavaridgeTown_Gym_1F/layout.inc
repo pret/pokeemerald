@@ -1,8 +1,6 @@
-	.align 2
 LavaridgeTown_Gym_1F_MapBorder::
 	.incbin "data/layouts/LavaridgeTown_Gym_1F/border.bin"
 
-	.align 2
 LavaridgeTown_Gym_1F_MapBlockdata::
 	.incbin "data/layouts/LavaridgeTown_Gym_1F/map.bin"
 
@@ -14,3 +12,4 @@ LavaridgeTown_Gym_1F_Layout::
 	.4byte LavaridgeTown_Gym_1F_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_LavaridgeGym
+

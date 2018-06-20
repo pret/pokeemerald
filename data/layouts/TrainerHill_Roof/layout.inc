@@ -1,8 +1,6 @@
-	.align 2
 TrainerHill_Roof_MapBorder::
 	.incbin "data/layouts/TrainerHill_Roof/border.bin"
 
-	.align 2
 TrainerHill_Roof_MapBlockdata::
 	.incbin "data/layouts/TrainerHill_Roof/map.bin"
 
@@ -14,3 +12,4 @@ TrainerHill_Roof_Layout::
 	.4byte TrainerHill_Roof_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_TrainerHill
+

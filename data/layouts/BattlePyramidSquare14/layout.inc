@@ -1,8 +1,6 @@
-	.align 2
 BattlePyramidSquare14_MapBorder::
 	.incbin "data/layouts/BattlePyramidSquare14/border.bin"
 
-	.align 2
 BattlePyramidSquare14_MapBlockdata::
 	.incbin "data/layouts/BattlePyramidSquare14/map.bin"
 
@@ -14,3 +12,4 @@ BattlePyramidSquare14_Layout::
 	.4byte BattlePyramidSquare14_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
+

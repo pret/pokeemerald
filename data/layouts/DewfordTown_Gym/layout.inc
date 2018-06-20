@@ -1,8 +1,6 @@
-	.align 2
 DewfordTown_Gym_MapBorder::
 	.incbin "data/layouts/DewfordTown_Gym/border.bin"
 
-	.align 2
 DewfordTown_Gym_MapBlockdata::
 	.incbin "data/layouts/DewfordTown_Gym/map.bin"
 
@@ -14,3 +12,4 @@ DewfordTown_Gym_Layout::
 	.4byte DewfordTown_Gym_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_DewfordGym
+

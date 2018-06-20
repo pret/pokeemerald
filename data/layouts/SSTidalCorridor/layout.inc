@@ -1,8 +1,6 @@
-	.align 2
 SSTidalCorridor_MapBorder::
 	.incbin "data/layouts/SSTidalCorridor/border.bin"
 
-	.align 2
 SSTidalCorridor_MapBlockdata::
 	.incbin "data/layouts/SSTidalCorridor/map.bin"
 
@@ -14,3 +12,4 @@ SSTidalCorridor_Layout::
 	.4byte SSTidalCorridor_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_InsideShip
+

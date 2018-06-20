@@ -1,8 +1,6 @@
-	.align 2
 IslandHarbor_MapBorder::
 	.incbin "data/layouts/IslandHarbor/border.bin"
 
-	.align 2
 IslandHarbor_MapBlockdata::
 	.incbin "data/layouts/IslandHarbor/map.bin"
 
@@ -14,3 +12,4 @@ IslandHarbor_Layout::
 	.4byte IslandHarbor_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_IslandHarbor
+

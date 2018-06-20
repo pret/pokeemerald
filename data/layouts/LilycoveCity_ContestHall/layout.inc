@@ -1,8 +1,6 @@
-	.align 2
 LilycoveCity_ContestHall_MapBorder::
 	.incbin "data/layouts/LilycoveCity_ContestHall/border.bin"
 
-	.align 2
 LilycoveCity_ContestHall_MapBlockdata::
 	.incbin "data/layouts/LilycoveCity_ContestHall/map.bin"
 
@@ -14,3 +12,4 @@ LilycoveCity_ContestHall_Layout::
 	.4byte LilycoveCity_ContestHall_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_Contest
+

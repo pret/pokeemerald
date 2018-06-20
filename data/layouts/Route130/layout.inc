@@ -1,8 +1,6 @@
-	.align 2
 Route130_MapBorder::
 	.incbin "data/layouts/Route130/border.bin"
 
-	.align 2
 Route130_MapBlockdata::
 	.incbin "data/layouts/Route130/map.bin"
 
@@ -14,3 +12,4 @@ Route130_Layout::
 	.4byte Route130_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

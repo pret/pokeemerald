@@ -1,8 +1,6 @@
-	.align 2
 Mart_MapBorder::
 	.incbin "data/layouts/Mart/border.bin"
 
-	.align 2
 Mart_MapBlockdata::
 	.incbin "data/layouts/Mart/map.bin"
 
@@ -14,3 +12,4 @@ Mart_Layout::
 	.4byte Mart_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_Shop
+

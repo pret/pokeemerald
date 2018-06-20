@@ -1,8 +1,6 @@
-	.align 2
 FallarborTown_MapBorder::
 	.incbin "data/layouts/FallarborTown/border.bin"
 
-	.align 2
 FallarborTown_MapBlockdata::
 	.incbin "data/layouts/FallarborTown/map.bin"
 
@@ -14,3 +12,4 @@ FallarborTown_Layout::
 	.4byte FallarborTown_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Fallarbor
+

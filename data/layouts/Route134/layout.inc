@@ -1,8 +1,6 @@
-	.align 2
 Route134_MapBorder::
 	.incbin "data/layouts/Route134/border.bin"
 
-	.align 2
 Route134_MapBlockdata::
 	.incbin "data/layouts/Route134/map.bin"
 
@@ -14,3 +12,4 @@ Route134_Layout::
 	.4byte Route134_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Pacifidlog
+

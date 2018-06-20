@@ -1,8 +1,6 @@
-	.align 2
 ScorchedSlab_MapBorder::
 	.incbin "data/layouts/ScorchedSlab/border.bin"
 
-	.align 2
 ScorchedSlab_MapBlockdata::
 	.incbin "data/layouts/ScorchedSlab/map.bin"
 
@@ -14,3 +12,4 @@ ScorchedSlab_Layout::
 	.4byte ScorchedSlab_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

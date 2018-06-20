@@ -1,8 +1,6 @@
-	.align 2
 FortreeCity_MapBorder::
 	.incbin "data/layouts/FortreeCity/border.bin"
 
-	.align 2
 FortreeCity_MapBlockdata::
 	.incbin "data/layouts/FortreeCity/map.bin"
 
@@ -14,3 +12,4 @@ FortreeCity_Layout::
 	.4byte FortreeCity_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Fortree
+

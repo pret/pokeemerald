@@ -1,8 +1,6 @@
-	.align 2
 SlateportCity_MapBorder::
 	.incbin "data/layouts/SlateportCity/border.bin"
 
-	.align 2
 SlateportCity_MapBlockdata::
 	.incbin "data/layouts/SlateportCity/map.bin"
 
@@ -14,3 +12,4 @@ SlateportCity_Layout::
 	.4byte SlateportCity_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Slateport
+

@@ -1,8 +1,6 @@
-	.align 2
 BattleFrontier_BattlePikeRandomRoom2_MapBorder::
 	.incbin "data/layouts/BattleFrontier_BattlePikeRandomRoom2/border.bin"
 
-	.align 2
 BattleFrontier_BattlePikeRandomRoom2_MapBlockdata::
 	.incbin "data/layouts/BattleFrontier_BattlePikeRandomRoom2/map.bin"
 
@@ -14,3 +12,4 @@ BattleFrontier_BattlePikeRandomRoom2_Layout::
 	.4byte BattleFrontier_BattlePikeRandomRoom2_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_BattlePike
+

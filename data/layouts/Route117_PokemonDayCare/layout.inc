@@ -1,8 +1,6 @@
-	.align 2
 Route117_PokemonDayCare_MapBorder::
 	.incbin "data/layouts/Route117_PokemonDayCare/border.bin"
 
-	.align 2
 Route117_PokemonDayCare_MapBlockdata::
 	.incbin "data/layouts/Route117_PokemonDayCare/map.bin"
 
@@ -14,3 +12,4 @@ Route117_PokemonDayCare_Layout::
 	.4byte Route117_PokemonDayCare_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_PokemonDayCare
+

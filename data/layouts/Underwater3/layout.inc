@@ -1,8 +1,6 @@
-	.align 2
 Underwater3_MapBorder::
 	.incbin "data/layouts/Underwater3/border.bin"
 
-	.align 2
 Underwater3_MapBlockdata::
 	.incbin "data/layouts/Underwater3/map.bin"
 
@@ -14,3 +12,4 @@ Underwater3_Layout::
 	.4byte Underwater3_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Underwater
+

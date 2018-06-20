@@ -1,8 +1,6 @@
-	.align 2
 SeafloorCavern_Room1_MapBorder::
 	.incbin "data/layouts/SeafloorCavern_Room1/border.bin"
 
-	.align 2
 SeafloorCavern_Room1_MapBlockdata::
 	.incbin "data/layouts/SeafloorCavern_Room1/map.bin"
 
@@ -14,3 +12,4 @@ SeafloorCavern_Room1_Layout::
 	.4byte SeafloorCavern_Room1_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

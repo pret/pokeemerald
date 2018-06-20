@@ -1,8 +1,6 @@
-	.align 2
 LilycoveCity_MapBorder::
 	.incbin "data/layouts/LilycoveCity/border.bin"
 
-	.align 2
 LilycoveCity_MapBlockdata::
 	.incbin "data/layouts/LilycoveCity/map.bin"
 
@@ -14,3 +12,4 @@ LilycoveCity_Layout::
 	.4byte LilycoveCity_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Lilycove
+

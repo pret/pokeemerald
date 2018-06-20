@@ -1,8 +1,6 @@
-	.align 2
 Route114_FossilManiacsTunnel_MapBorder::
 	.incbin "data/layouts/Route114_FossilManiacsTunnel/border.bin"
 
-	.align 2
 Route114_FossilManiacsTunnel_MapBlockdata::
 	.incbin "data/layouts/Route114_FossilManiacsTunnel/map.bin"
 
@@ -14,3 +12,4 @@ Route114_FossilManiacsTunnel_Layout::
 	.4byte Route114_FossilManiacsTunnel_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Fallarbor
+

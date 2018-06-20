@@ -1,8 +1,6 @@
-	.align 2
 EverGrandeCity_MapBorder::
 	.incbin "data/layouts/EverGrandeCity/border.bin"
 
-	.align 2
 EverGrandeCity_MapBlockdata::
 	.incbin "data/layouts/EverGrandeCity/map.bin"
 
@@ -14,3 +12,4 @@ EverGrandeCity_Layout::
 	.4byte EverGrandeCity_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_EverGrande
+

@@ -1,8 +1,6 @@
-	.align 2
 RustboroCity_Gym_MapBorder::
 	.incbin "data/layouts/RustboroCity_Gym/border.bin"
 
-	.align 2
 RustboroCity_Gym_MapBlockdata::
 	.incbin "data/layouts/RustboroCity_Gym/map.bin"
 
@@ -14,3 +12,4 @@ RustboroCity_Gym_Layout::
 	.4byte RustboroCity_Gym_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_RustboroGym
+

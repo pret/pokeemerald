@@ -1,8 +1,6 @@
-	.align 2
 RecordCorner_MapBorder::
 	.incbin "data/layouts/RecordCorner/border.bin"
 
-	.align 2
 RecordCorner_MapBlockdata::
 	.incbin "data/layouts/RecordCorner/map.bin"
 
@@ -14,3 +12,4 @@ RecordCorner_Layout::
 	.4byte RecordCorner_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_CableClub
+

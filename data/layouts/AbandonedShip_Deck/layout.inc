@@ -1,8 +1,6 @@
-	.align 2
 AbandonedShip_Deck_MapBorder::
 	.incbin "data/layouts/AbandonedShip_Deck/border.bin"
 
-	.align 2
 AbandonedShip_Deck_MapBlockdata::
 	.incbin "data/layouts/AbandonedShip_Deck/map.bin"
 
@@ -14,3 +12,4 @@ AbandonedShip_Deck_Layout::
 	.4byte AbandonedShip_Deck_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Facility
+

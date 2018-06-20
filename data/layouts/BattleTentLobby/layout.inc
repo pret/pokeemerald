@@ -1,8 +1,6 @@
-	.align 2
 BattleTentLobby_MapBorder::
 	.incbin "data/layouts/BattleTentLobby/border.bin"
 
-	.align 2
 BattleTentLobby_MapBlockdata::
 	.incbin "data/layouts/BattleTentLobby/map.bin"
 
@@ -14,3 +12,4 @@ BattleTentLobby_Layout::
 	.4byte BattleTentLobby_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_BattleTent
+

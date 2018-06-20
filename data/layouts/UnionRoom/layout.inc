@@ -1,8 +1,6 @@
-	.align 2
 UnionRoom_MapBorder::
 	.incbin "data/layouts/UnionRoom/border.bin"
 
-	.align 2
 UnionRoom_MapBlockdata::
 	.incbin "data/layouts/UnionRoom/map.bin"
 
@@ -14,3 +12,4 @@ UnionRoom_Layout::
 	.4byte UnionRoom_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_UnionRoom
+

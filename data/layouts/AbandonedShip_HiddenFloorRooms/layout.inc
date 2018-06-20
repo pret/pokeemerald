@@ -1,8 +1,6 @@
-	.align 2
 AbandonedShip_HiddenFloorRooms_MapBorder::
 	.incbin "data/layouts/AbandonedShip_HiddenFloorRooms/border.bin"
 
-	.align 2
 AbandonedShip_HiddenFloorRooms_MapBlockdata::
 	.incbin "data/layouts/AbandonedShip_HiddenFloorRooms/map.bin"
 
@@ -14,3 +12,4 @@ AbandonedShip_HiddenFloorRooms_Layout::
 	.4byte AbandonedShip_HiddenFloorRooms_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_InsideShip
+

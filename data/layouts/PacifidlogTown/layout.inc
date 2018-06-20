@@ -1,8 +1,6 @@
-	.align 2
 PacifidlogTown_MapBorder::
 	.incbin "data/layouts/PacifidlogTown/border.bin"
 
-	.align 2
 PacifidlogTown_MapBlockdata::
 	.incbin "data/layouts/PacifidlogTown/map.bin"
 
@@ -14,3 +12,4 @@ PacifidlogTown_Layout::
 	.4byte PacifidlogTown_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Pacifidlog
+

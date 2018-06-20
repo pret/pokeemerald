@@ -1,8 +1,6 @@
-	.align 2
 BattleFrontier_BattlePointExchangeServiceCorner_MapBorder::
 	.incbin "data/layouts/BattleFrontier_BattlePointExchangeServiceCorner/border.bin"
 
-	.align 2
 BattleFrontier_BattlePointExchangeServiceCorner_MapBlockdata::
 	.incbin "data/layouts/BattleFrontier_BattlePointExchangeServiceCorner/map.bin"
 
@@ -14,3 +12,4 @@ BattleFrontier_BattlePointExchangeServiceCorner_Layout::
 	.4byte BattleFrontier_BattlePointExchangeServiceCorner_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
+

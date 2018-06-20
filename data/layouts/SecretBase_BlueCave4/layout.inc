@@ -1,8 +1,6 @@
-	.align 2
 SecretBase_BlueCave4_MapBorder::
 	.incbin "data/layouts/SecretBase_BlueCave4/border.bin"
 
-	.align 2
 SecretBase_BlueCave4_MapBlockdata::
 	.incbin "data/layouts/SecretBase_BlueCave4/map.bin"
 
@@ -14,3 +12,4 @@ SecretBase_BlueCave4_Layout::
 	.4byte SecretBase_BlueCave4_MapBlockdata
 	.4byte gTileset_SecretBase
 	.4byte gTileset_SecretBaseBlueCave
+

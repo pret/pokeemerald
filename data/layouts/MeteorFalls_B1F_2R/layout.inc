@@ -1,8 +1,6 @@
-	.align 2
 MeteorFalls_B1F_2R_MapBorder::
 	.incbin "data/layouts/MeteorFalls_B1F_2R/border.bin"
 
-	.align 2
 MeteorFalls_B1F_2R_MapBlockdata::
 	.incbin "data/layouts/MeteorFalls_B1F_2R/map.bin"
 
@@ -14,3 +12,4 @@ MeteorFalls_B1F_2R_Layout::
 	.4byte MeteorFalls_B1F_2R_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_MeteorFalls
+

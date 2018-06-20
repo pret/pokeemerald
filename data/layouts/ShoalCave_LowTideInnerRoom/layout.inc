@@ -1,8 +1,6 @@
-	.align 2
 ShoalCave_LowTideInnerRoom_MapBorder::
 	.incbin "data/layouts/ShoalCave_LowTideInnerRoom/border.bin"
 
-	.align 2
 ShoalCave_LowTideInnerRoom_MapBlockdata::
 	.incbin "data/layouts/ShoalCave_LowTideInnerRoom/map.bin"
 
@@ -14,3 +12,4 @@ ShoalCave_LowTideInnerRoom_Layout::
 	.4byte ShoalCave_LowTideInnerRoom_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

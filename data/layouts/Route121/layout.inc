@@ -1,8 +1,6 @@
-	.align 2
 Route121_MapBorder::
 	.incbin "data/layouts/Route121/border.bin"
 
-	.align 2
 Route121_MapBlockdata::
 	.incbin "data/layouts/Route121/map.bin"
 
@@ -14,3 +12,4 @@ Route121_Layout::
 	.4byte Route121_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Lilycove
+

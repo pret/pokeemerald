@@ -1,8 +1,6 @@
-	.align 2
 NavelRock_LadderRoom1_MapBorder::
 	.incbin "data/layouts/NavelRock_LadderRoom1/border.bin"
 
-	.align 2
 NavelRock_LadderRoom1_MapBlockdata::
 	.incbin "data/layouts/NavelRock_LadderRoom1/map.bin"
 
@@ -14,3 +12,4 @@ NavelRock_LadderRoom1_Layout::
 	.4byte NavelRock_LadderRoom1_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_NavelRock
+

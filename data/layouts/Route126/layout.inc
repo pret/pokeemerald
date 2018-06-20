@@ -1,8 +1,6 @@
-	.align 2
 Route126_MapBorder::
 	.incbin "data/layouts/Route126/border.bin"
 
-	.align 2
 Route126_MapBlockdata::
 	.incbin "data/layouts/Route126/map.bin"
 
@@ -14,3 +12,4 @@ Route126_Layout::
 	.4byte Route126_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Mossdeep
+

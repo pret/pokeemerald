@@ -1,8 +1,6 @@
-	.align 2
 LavaridgeTown_MapBorder::
 	.incbin "data/layouts/LavaridgeTown/border.bin"
 
-	.align 2
 LavaridgeTown_MapBlockdata::
 	.incbin "data/layouts/LavaridgeTown/map.bin"
 
@@ -14,3 +12,4 @@ LavaridgeTown_Layout::
 	.4byte LavaridgeTown_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Lavaridge
+

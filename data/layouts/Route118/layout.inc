@@ -1,8 +1,6 @@
-	.align 2
 Route118_MapBorder::
 	.incbin "data/layouts/Route118/border.bin"
 
-	.align 2
 Route118_MapBlockdata::
 	.incbin "data/layouts/Route118/map.bin"
 
@@ -14,3 +12,4 @@ Route118_Layout::
 	.4byte Route118_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Mauville
+

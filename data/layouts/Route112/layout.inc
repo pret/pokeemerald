@@ -1,8 +1,6 @@
-	.align 2
 Route112_MapBorder::
 	.incbin "data/layouts/Route112/border.bin"
 
-	.align 2
 Route112_MapBlockdata::
 	.incbin "data/layouts/Route112/map.bin"
 
@@ -14,3 +12,4 @@ Route112_Layout::
 	.4byte Route112_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Lavaridge
+

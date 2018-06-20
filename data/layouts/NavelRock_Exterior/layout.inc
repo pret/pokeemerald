@@ -1,8 +1,6 @@
-	.align 2
 NavelRock_Exterior_MapBorder::
 	.incbin "data/layouts/NavelRock_Exterior/border.bin"
 
-	.align 2
 NavelRock_Exterior_MapBlockdata::
 	.incbin "data/layouts/NavelRock_Exterior/map.bin"
 
@@ -14,3 +12,4 @@ NavelRock_Exterior_Layout::
 	.4byte NavelRock_Exterior_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Dewford
+

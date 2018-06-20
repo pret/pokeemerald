@@ -1,8 +1,6 @@
-	.align 2
 SecretBase_YellowCave4_MapBorder::
 	.incbin "data/layouts/SecretBase_YellowCave4/border.bin"
 
-	.align 2
 SecretBase_YellowCave4_MapBlockdata::
 	.incbin "data/layouts/SecretBase_YellowCave4/map.bin"
 
@@ -14,3 +12,4 @@ SecretBase_YellowCave4_Layout::
 	.4byte SecretBase_YellowCave4_MapBlockdata
 	.4byte gTileset_SecretBase
 	.4byte gTileset_SecretBaseYellowCave
+

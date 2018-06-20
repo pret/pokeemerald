@@ -1,8 +1,6 @@
-	.align 2
 UnknownMap_25_31_MapBorder::
 	.incbin "data/layouts/UnknownMap_25_31/border.bin"
 
-	.align 2
 UnknownMap_25_31_MapBlockdata::
 	.incbin "data/layouts/UnknownMap_25_31/map.bin"
 
@@ -14,3 +12,4 @@ UnknownMap_25_31_Layout::
 	.4byte UnknownMap_25_31_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_Contest
+

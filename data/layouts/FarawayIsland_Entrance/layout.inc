@@ -1,8 +1,6 @@
-	.align 2
 FarawayIsland_Entrance_MapBorder::
 	.incbin "data/layouts/FarawayIsland_Entrance/border.bin"
 
-	.align 2
 FarawayIsland_Entrance_MapBlockdata::
 	.incbin "data/layouts/FarawayIsland_Entrance/map.bin"
 
@@ -14,3 +12,4 @@ FarawayIsland_Entrance_Layout::
 	.4byte FarawayIsland_Entrance_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Rustboro
+

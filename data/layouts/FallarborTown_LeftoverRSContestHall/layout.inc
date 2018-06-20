@@ -1,8 +1,6 @@
-	.align 2
 FallarborTown_LeftoverRSContestHall_MapBorder::
 	.incbin "data/layouts/FallarborTown_LeftoverRSContestHall/border.bin"
 
-	.align 2
 FallarborTown_LeftoverRSContestHall_MapBlockdata::
 	.incbin "data/layouts/FallarborTown_LeftoverRSContestHall/map.bin"
 
@@ -14,3 +12,4 @@ FallarborTown_LeftoverRSContestHall_Layout::
 	.4byte FallarborTown_LeftoverRSContestHall_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_Contest
+

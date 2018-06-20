@@ -1,8 +1,6 @@
-	.align 2
 Route105_MapBorder::
 	.incbin "data/layouts/Route105/border.bin"
 
-	.align 2
 Route105_MapBlockdata::
 	.incbin "data/layouts/Route105/map.bin"
 
@@ -14,3 +12,4 @@ Route105_Layout::
 	.4byte Route105_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Dewford
+

@@ -1,8 +1,6 @@
-	.align 2
 SecretBase_Shrub1_MapBorder::
 	.incbin "data/layouts/SecretBase_Shrub1/border.bin"
 
-	.align 2
 SecretBase_Shrub1_MapBlockdata::
 	.incbin "data/layouts/SecretBase_Shrub1/map.bin"
 
@@ -14,3 +12,4 @@ SecretBase_Shrub1_Layout::
 	.4byte SecretBase_Shrub1_MapBlockdata
 	.4byte gTileset_SecretBase
 	.4byte gTileset_SecretBaseShrub
+

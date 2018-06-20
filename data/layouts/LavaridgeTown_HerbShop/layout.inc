@@ -1,8 +1,6 @@
-	.align 2
 LavaridgeTown_HerbShop_MapBorder::
 	.incbin "data/layouts/LavaridgeTown_HerbShop/border.bin"
 
-	.align 2
 LavaridgeTown_HerbShop_MapBlockdata::
 	.incbin "data/layouts/LavaridgeTown_HerbShop/map.bin"
 
@@ -14,3 +12,4 @@ LavaridgeTown_HerbShop_Layout::
 	.4byte LavaridgeTown_HerbShop_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_Shop
+

@@ -1,8 +1,6 @@
-	.align 2
 MauvilleCity_BikeShop_MapBorder::
 	.incbin "data/layouts/MauvilleCity_BikeShop/border.bin"
 
-	.align 2
 MauvilleCity_BikeShop_MapBlockdata::
 	.incbin "data/layouts/MauvilleCity_BikeShop/map.bin"
 
@@ -14,3 +12,4 @@ MauvilleCity_BikeShop_Layout::
 	.4byte MauvilleCity_BikeShop_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_BikeShop
+

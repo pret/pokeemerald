@@ -1,8 +1,6 @@
-	.align 2
 CableCarStation_MapBorder::
 	.incbin "data/layouts/CableCarStation/border.bin"
 
-	.align 2
 CableCarStation_MapBlockdata::
 	.incbin "data/layouts/CableCarStation/map.bin"
 
@@ -14,3 +12,4 @@ CableCarStation_Layout::
 	.4byte CableCarStation_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Facility
+

@@ -1,8 +1,6 @@
-	.align 2
 VerdanturfTown_MapBorder::
 	.incbin "data/layouts/VerdanturfTown/border.bin"
 
-	.align 2
 VerdanturfTown_MapBlockdata::
 	.incbin "data/layouts/VerdanturfTown/map.bin"
 
@@ -14,3 +12,4 @@ VerdanturfTown_Layout::
 	.4byte VerdanturfTown_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Mauville
+

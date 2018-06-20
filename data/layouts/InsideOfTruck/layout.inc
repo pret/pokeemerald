@@ -1,8 +1,6 @@
-	.align 2
 InsideOfTruck_MapBorder::
 	.incbin "data/layouts/InsideOfTruck/border.bin"
 
-	.align 2
 InsideOfTruck_MapBlockdata::
 	.incbin "data/layouts/InsideOfTruck/map.bin"
 
@@ -14,3 +12,4 @@ InsideOfTruck_Layout::
 	.4byte InsideOfTruck_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_InsideOfTruck
+

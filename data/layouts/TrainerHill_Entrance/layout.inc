@@ -1,8 +1,6 @@
-	.align 2
 TrainerHill_Entrance_MapBorder::
 	.incbin "data/layouts/TrainerHill_Entrance/border.bin"
 
-	.align 2
 TrainerHill_Entrance_MapBlockdata::
 	.incbin "data/layouts/TrainerHill_Entrance/map.bin"
 
@@ -14,3 +12,4 @@ TrainerHill_Entrance_Layout::
 	.4byte TrainerHill_Entrance_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_TrainerHill
+

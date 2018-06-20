@@ -1,8 +1,6 @@
-	.align 2
 LinkContestRoom3_MapBorder::
 	.incbin "data/layouts/LinkContestRoom3/border.bin"
 
-	.align 2
 LinkContestRoom3_MapBlockdata::
 	.incbin "data/layouts/LinkContestRoom3/map.bin"
 
@@ -14,3 +12,4 @@ LinkContestRoom3_Layout::
 	.4byte LinkContestRoom3_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Contest
+

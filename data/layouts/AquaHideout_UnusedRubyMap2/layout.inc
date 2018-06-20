@@ -1,8 +1,6 @@
-	.align 2
 AquaHideout_UnusedRubyMap2_MapBorder::
 	.incbin "data/layouts/AquaHideout_UnusedRubyMap2/border.bin"
 
-	.align 2
 AquaHideout_UnusedRubyMap2_MapBlockdata::
 	.incbin "data/layouts/AquaHideout_UnusedRubyMap2/map.bin"
 
@@ -14,3 +12,4 @@ AquaHideout_UnusedRubyMap2_Layout::
 	.4byte AquaHideout_UnusedRubyMap2_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Facility
+

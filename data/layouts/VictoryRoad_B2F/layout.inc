@@ -1,8 +1,6 @@
-	.align 2
 VictoryRoad_B2F_MapBorder::
 	.incbin "data/layouts/VictoryRoad_B2F/border.bin"
 
-	.align 2
 VictoryRoad_B2F_MapBlockdata::
 	.incbin "data/layouts/VictoryRoad_B2F/map.bin"
 
@@ -14,3 +12,4 @@ VictoryRoad_B2F_Layout::
 	.4byte VictoryRoad_B2F_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+
