@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELDMAP_H
 #define GUARD_FIELDMAP_H
 
-extern struct BackupMapData gUnknown_03005DC0;
+extern struct BackupMapLayout gUnknown_03005DC0;
 
 u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int, int);

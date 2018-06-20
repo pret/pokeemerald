@@ -5620,7 +5620,7 @@ void SetWildMonHeldItem(void)
             var1 = 20;
             var2 = 80;
         }
-        if (gMapHeader.mapDataId == 0x1A4)
+        if (gMapHeader.mapLayoutId == 0x1A4)
         {
             s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
             if (alteringCaveId != 0)

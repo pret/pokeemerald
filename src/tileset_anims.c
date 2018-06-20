@@ -686,8 +686,8 @@ static void cur_mapheader_run_tileset1_func(void)
     sPrimaryTilesetCBCounter = 0;
     sPrimaryTilesetCBBufferSize = 0;
     sPrimaryTilesetCB = NULL;
-    if (gMapHeader.mapData->primaryTileset && gMapHeader.mapData->primaryTileset->callback)
-        gMapHeader.mapData->primaryTileset->callback();
+    if (gMapHeader.mapLayout->primaryTileset && gMapHeader.mapLayout->primaryTileset->callback)
+        gMapHeader.mapLayout->primaryTileset->callback();
 }
 
 static void cur_mapheader_run_tileset2_func(void)
@@ -695,8 +695,8 @@ static void cur_mapheader_run_tileset2_func(void)
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = 0;
     sSecondaryTilesetCB = NULL;
-    if (gMapHeader.mapData->secondaryTileset && gMapHeader.mapData->secondaryTileset->callback)
-        gMapHeader.mapData->secondaryTileset->callback();
+    if (gMapHeader.mapLayout->secondaryTileset && gMapHeader.mapLayout->secondaryTileset->callback)
+        gMapHeader.mapLayout->secondaryTileset->callback();
 }
 
 void TilesetCb_General(void)

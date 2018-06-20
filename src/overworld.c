@@ -81,7 +81,7 @@ extern const u8 gUnknown_082774EF[];
 extern const u8 gUnknown_08277509[];
 
 // vars
-extern const struct MapData *const gMapAttributes[];
+extern const struct MapLayout *const gMapLayouts[];
 extern const struct MapHeader *const *const gMapGroups[];
 extern const s32 gMaxFlashLevel;
 extern const u16 gUnknown_82EC7C4[];
@@ -97,16 +97,16 @@ extern void HealPlayerParty(void);
 extern void move_tilemap_camera_to_upper_left_corner(void);
 extern void cur_mapheader_run_tileset_funcs_after_some_cpuset(void);
 extern void DrawWholeMapView(void);
-extern void copy_map_tileset1_tileset2_to_vram(const struct MapData *);
-extern void apply_map_tileset1_tileset2_palette(const struct MapData *);
+extern void copy_map_tileset1_tileset2_to_vram(const struct MapLayout *);
+extern void apply_map_tileset1_tileset2_palette(const struct MapLayout *);
 extern void ResetCyclingRoadChallengeData(void);
 extern void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey);
 extern void mapheader_run_script_with_tag_x5(void);
 extern void ResetFieldTasksArgs(void);
 extern void sub_80A0A2C(void);
 extern void not_trainer_hill_battle_pyramid(void);
-extern void apply_map_tileset2_palette(const struct MapData *);
-extern void copy_map_tileset2_to_vram_2(const struct MapData *);
+extern void apply_map_tileset2_palette(const struct MapLayout *);
+extern void copy_map_tileset2_to_vram_2(const struct MapLayout *);
 extern void prev_quest_postbuffer_cursor_backup_reset(void);
 extern void ShowMapNamePopup(void);
 extern bool32 InTrainerHill(void);
@@ -143,8 +143,8 @@ extern void sub_80EDB44(void);
 extern void sub_81D64C0(void);
 extern void sub_81BE6AC(void);
 extern void sub_8098128(void);
-extern void copy_map_tileset1_to_vram(const struct MapData *);
-extern void copy_map_tileset2_to_vram(const struct MapData *);
+extern void copy_map_tileset1_to_vram(const struct MapLayout *);
+extern void copy_map_tileset2_to_vram(const struct MapLayout *);
 extern void FieldUpdateBgTilemapScroll(void);
 extern void TransferTilesetAnimsBuffer(void);
 extern bool32 sub_81D5F48(void);
@@ -558,17 +558,17 @@ void Overworld_SetEventObjTemplateMovementType(u8 localId, u8 movementType)
 static void mapdata_load_assets_to_gpu_and_full_redraw(void)
 {
     move_tilemap_camera_to_upper_left_corner();
-    copy_map_tileset1_tileset2_to_vram(gMapHeader.mapData);
-    apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+    copy_map_tileset1_tileset2_to_vram(gMapHeader.mapLayout);
+    apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
     DrawWholeMapView();
     cur_mapheader_run_tileset_funcs_after_some_cpuset();
 }
 
-const struct MapData *get_mapdata_header(void)
+const struct MapLayout *GetMapLayout(void)
 {
-    u16 mapDataId = gSaveBlock1Ptr->mapDataId;
-    if (mapDataId)
-        return gMapAttributes[mapDataId - 1];
+    u16 mapLayoutId = gSaveBlock1Ptr->mapLayoutId;
+    if (mapLayoutId)
+        return gMapLayouts[mapLayoutId - 1];
     return NULL;
 }
 
@@ -625,14 +625,14 @@ void set_current_map_header_from_sav1_save_old_name(void)
 {
     sLastMapSectionId = gMapHeader.regionMapSectionId;
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-    gSaveBlock1Ptr->mapDataId = gMapHeader.mapDataId;
-    gMapHeader.mapData = get_mapdata_header();
+    gSaveBlock1Ptr->mapLayoutId = gMapHeader.mapLayoutId;
+    gMapHeader.mapLayout = GetMapLayout();
 }
 
 void LoadSaveblockMapHeader(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-    gMapHeader.mapData = get_mapdata_header();
+    gMapHeader.mapLayout = GetMapLayout();
 }
 
 void update_camera_pos_from_warpid(void)
@@ -649,8 +649,8 @@ void update_camera_pos_from_warpid(void)
     }
     else
     {
-        gSaveBlock1Ptr->pos.x = gMapHeader.mapData->width / 2;
-        gSaveBlock1Ptr->pos.y = gMapHeader.mapData->height / 2;
+        gSaveBlock1Ptr->pos.x = gMapHeader.mapLayout->width / 2;
+        gSaveBlock1Ptr->pos.y = gMapHeader.mapLayout->height / 2;
     }
 }
 
@@ -837,8 +837,8 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
     not_trainer_hill_battle_pyramid();
-    copy_map_tileset2_to_vram_2(gMapHeader.mapData);
-    apply_map_tileset2_palette(gMapHeader.mapData);
+    copy_map_tileset2_to_vram_2(gMapHeader.mapLayout);
+    apply_map_tileset2_palette(gMapHeader.mapLayout);
 
     for (paletteIndex = 6; paletteIndex < 13; paletteIndex++)
         ApplyWeatherGammaShiftToPal(paletteIndex);
@@ -862,7 +862,7 @@ static void mli0_load_map(u32 a1)
     set_current_map_header_from_sav1_save_old_name();
     if (!(sUnknown_020322D8 & 1))
     {
-        if (gMapHeader.mapDataId == 0x169)
+        if (gMapHeader.mapLayoutId == 0x169)
             sub_81AA1D8();
         else if (InTrainerHill())
             sub_81D5DF8();
@@ -890,7 +890,7 @@ static void mli0_load_map(u32 a1)
     mapheader_run_script_with_tag_x3();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
-    if (gMapHeader.mapDataId == 0x169)
+    if (gMapHeader.mapLayoutId == 0x169)
         battle_pyramid_map_load_related(0);
     else if (InTrainerHill())
         trainer_hill_map_load_related();
@@ -1016,10 +1016,10 @@ u8 Overworld_GetFlashLevel(void)
     return gSaveBlock1Ptr->flashLevel;
 }
 
-void sub_8085524(u16 mapDataId)
+void sub_8085524(u16 mapLayoutId)
 {
-    gSaveBlock1Ptr->mapDataId = mapDataId;
-    gMapHeader.mapData = get_mapdata_header();
+    gSaveBlock1Ptr->mapLayoutId = mapLayoutId;
+    gMapHeader.mapLayout = GetMapLayout();
 }
 
 void sub_8085540(u8 var)
@@ -1729,7 +1729,7 @@ void CB2_ContinueSavedGame(void)
     LoadSaveblockMapHeader();
     set_warp2_warp3_to_neg_1();
     trainerHillMapId = GetCurrentTrainerHillMapId();
-    if (gMapHeader.mapDataId == 0x169)
+    if (gMapHeader.mapLayoutId == 0x169)
         sub_81AA2F8();
     else if (trainerHillMapId != 0 && trainerHillMapId != 6)
         sub_81D5F48();
@@ -1739,7 +1739,7 @@ void CB2_ContinueSavedGame(void)
     UnfreezeEventObjects();
     DoTimeBasedEvents();
     sub_8084788();
-    if (gMapHeader.mapDataId == 0x169)
+    if (gMapHeader.mapLayoutId == 0x169)
         battle_pyramid_map_load_related(1);
     else if (trainerHillMapId != 0)
         trainer_hill_map_load_related();
@@ -1859,17 +1859,17 @@ static bool32 map_loading_iteration_3(u8 *state)
         (*state)++;
         break;
     case 6:
-        copy_map_tileset1_to_vram(gMapHeader.mapData);
+        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        copy_map_tileset2_to_vram(gMapHeader.mapData);
+        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
         if (free_temp_tile_data_buffers_if_possible() != TRUE)
         {
-            apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
             (*state)++;
         }
         break;
@@ -1934,17 +1934,17 @@ static bool32 load_map_stuff(u8 *state, u32 a2)
         (*state)++;
         break;
     case 6:
-        copy_map_tileset1_to_vram(gMapHeader.mapData);
+        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        copy_map_tileset2_to_vram(gMapHeader.mapData);
+        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
         if (free_temp_tile_data_buffers_if_possible() != TRUE)
         {
-            apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
             (*state)++;
         }
         break;
@@ -2031,17 +2031,17 @@ static bool32 map_loading_iteration_2_link(u8 *state)
         (*state)++;
         break;
     case 5:
-        copy_map_tileset1_to_vram(gMapHeader.mapData);
+        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 6:
-        copy_map_tileset2_to_vram(gMapHeader.mapData);
+        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
         if (free_temp_tile_data_buffers_if_possible() != TRUE)
         {
-            apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
             (*state)++;
         }
         break;
