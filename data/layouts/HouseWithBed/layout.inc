@@ -1,8 +1,6 @@
-	.align 2
 HouseWithBed_MapBorder::
 	.incbin "data/layouts/HouseWithBed/border.bin"
 
-	.align 2
 HouseWithBed_MapBlockdata::
 	.incbin "data/layouts/HouseWithBed/map.bin"
 
@@ -14,3 +12,4 @@ HouseWithBed_Layout::
 	.4byte HouseWithBed_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
+

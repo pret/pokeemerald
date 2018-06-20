@@ -1,8 +1,6 @@
-	.align 2
 BattleFrontier_RankingHall_MapBorder::
 	.incbin "data/layouts/BattleFrontier_RankingHall/border.bin"
 
-	.align 2
 BattleFrontier_RankingHall_MapBlockdata::
 	.incbin "data/layouts/BattleFrontier_RankingHall/map.bin"
 
@@ -14,3 +12,4 @@ BattleFrontier_RankingHall_Layout::
 	.4byte BattleFrontier_RankingHall_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontierRankingHall
+

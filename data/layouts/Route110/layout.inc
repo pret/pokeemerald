@@ -1,8 +1,6 @@
-	.align 2
 Route110_MapBorder::
 	.incbin "data/layouts/Route110/border.bin"
 
-	.align 2
 Route110_MapBlockdata::
 	.incbin "data/layouts/Route110/map.bin"
 
@@ -14,3 +12,4 @@ Route110_Layout::
 	.4byte Route110_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Mauville
+

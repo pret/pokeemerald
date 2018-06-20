@@ -1,8 +1,6 @@
-	.align 2
 OldaleTown_MapBorder::
 	.incbin "data/layouts/OldaleTown/border.bin"
 
-	.align 2
 OldaleTown_MapBlockdata::
 	.incbin "data/layouts/OldaleTown/map.bin"
 
@@ -14,3 +12,4 @@ OldaleTown_Layout::
 	.4byte OldaleTown_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Petalburg
+

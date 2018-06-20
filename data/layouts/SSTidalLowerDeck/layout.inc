@@ -1,8 +1,6 @@
-	.align 2
 SSTidalLowerDeck_MapBorder::
 	.incbin "data/layouts/SSTidalLowerDeck/border.bin"
 
-	.align 2
 SSTidalLowerDeck_MapBlockdata::
 	.incbin "data/layouts/SSTidalLowerDeck/map.bin"
 
@@ -14,3 +12,4 @@ SSTidalLowerDeck_Layout::
 	.4byte SSTidalLowerDeck_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_InsideShip
+

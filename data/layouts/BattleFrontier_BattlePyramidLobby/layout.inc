@@ -1,8 +1,6 @@
-	.align 2
 BattleFrontier_BattlePyramidLobby_MapBorder::
 	.incbin "data/layouts/BattleFrontier_BattlePyramidLobby/border.bin"
 
-	.align 2
 BattleFrontier_BattlePyramidLobby_MapBlockdata::
 	.incbin "data/layouts/BattleFrontier_BattlePyramidLobby/map.bin"
 
@@ -14,3 +12,4 @@ BattleFrontier_BattlePyramidLobby_Layout::
 	.4byte BattleFrontier_BattlePyramidLobby_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
+

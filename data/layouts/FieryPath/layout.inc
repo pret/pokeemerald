@@ -1,8 +1,6 @@
-	.align 2
 FieryPath_MapBorder::
 	.incbin "data/layouts/FieryPath/border.bin"
 
-	.align 2
 FieryPath_MapBlockdata::
 	.incbin "data/layouts/FieryPath/map.bin"
 
@@ -14,3 +12,4 @@ FieryPath_Layout::
 	.4byte FieryPath_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Lavaridge
+

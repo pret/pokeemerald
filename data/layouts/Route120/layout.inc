@@ -1,8 +1,6 @@
-	.align 2
 Route120_MapBorder::
 	.incbin "data/layouts/Route120/border.bin"
 
-	.align 2
 Route120_MapBlockdata::
 	.incbin "data/layouts/Route120/map.bin"
 
@@ -14,3 +12,4 @@ Route120_Layout::
 	.4byte Route120_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Fortree
+

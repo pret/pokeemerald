@@ -1,8 +1,6 @@
-	.align 2
 LilycoveCity_DepartmentStoreRooftop_MapBorder::
 	.incbin "data/layouts/LilycoveCity_DepartmentStoreRooftop/border.bin"
 
-	.align 2
 LilycoveCity_DepartmentStoreRooftop_MapBlockdata::
 	.incbin "data/layouts/LilycoveCity_DepartmentStoreRooftop/map.bin"
 
@@ -14,3 +12,4 @@ LilycoveCity_DepartmentStoreRooftop_Layout::
 	.4byte LilycoveCity_DepartmentStoreRooftop_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_Shop
+

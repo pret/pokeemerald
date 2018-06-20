@@ -1,8 +1,6 @@
-	.align 2
 ShoalCave_HighTideEntranceRoom_MapBorder::
 	.incbin "data/layouts/ShoalCave_HighTideEntranceRoom/border.bin"
 
-	.align 2
 ShoalCave_HighTideEntranceRoom_MapBlockdata::
 	.incbin "data/layouts/ShoalCave_HighTideEntranceRoom/map.bin"
 
@@ -14,3 +12,4 @@ ShoalCave_HighTideEntranceRoom_Layout::
 	.4byte ShoalCave_HighTideEntranceRoom_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

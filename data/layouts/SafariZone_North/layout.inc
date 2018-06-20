@@ -1,8 +1,6 @@
-	.align 2
 SafariZone_North_MapBorder::
 	.incbin "data/layouts/SafariZone_North/border.bin"
 
-	.align 2
 SafariZone_North_MapBlockdata::
 	.incbin "data/layouts/SafariZone_North/map.bin"
 
@@ -14,3 +12,4 @@ SafariZone_North_Layout::
 	.4byte SafariZone_North_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Lilycove
+

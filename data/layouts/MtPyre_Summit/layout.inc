@@ -1,8 +1,6 @@
-	.align 2
 MtPyre_Summit_MapBorder::
 	.incbin "data/layouts/MtPyre_Summit/border.bin"
 
-	.align 2
 MtPyre_Summit_MapBlockdata::
 	.incbin "data/layouts/MtPyre_Summit/map.bin"
 
@@ -14,3 +12,4 @@ MtPyre_Summit_Layout::
 	.4byte MtPyre_Summit_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Facility
+

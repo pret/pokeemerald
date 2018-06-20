@@ -1,8 +1,6 @@
-	.align 2
 AncientTomb_MapBorder::
 	.incbin "data/layouts/AncientTomb/border.bin"
 
-	.align 2
 AncientTomb_MapBlockdata::
 	.incbin "data/layouts/AncientTomb/map.bin"
 
@@ -14,3 +12,4 @@ AncientTomb_Layout::
 	.4byte AncientTomb_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

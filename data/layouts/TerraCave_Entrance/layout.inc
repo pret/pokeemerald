@@ -1,8 +1,6 @@
-	.align 2
 TerraCave_Entrance_MapBorder::
 	.incbin "data/layouts/TerraCave_Entrance/border.bin"
 
-	.align 2
 TerraCave_Entrance_MapBlockdata::
 	.incbin "data/layouts/TerraCave_Entrance/map.bin"
 
@@ -14,3 +12,4 @@ TerraCave_Entrance_Layout::
 	.4byte TerraCave_Entrance_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

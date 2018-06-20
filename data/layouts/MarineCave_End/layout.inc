@@ -1,8 +1,6 @@
-	.align 2
 MarineCave_End_MapBorder::
 	.incbin "data/layouts/MarineCave_End/border.bin"
 
-	.align 2
 MarineCave_End_MapBlockdata::
 	.incbin "data/layouts/MarineCave_End/map.bin"
 
@@ -14,3 +12,4 @@ MarineCave_End_Layout::
 	.4byte MarineCave_End_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

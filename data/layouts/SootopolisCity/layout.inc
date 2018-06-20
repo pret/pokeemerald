@@ -1,8 +1,6 @@
-	.align 2
 SootopolisCity_MapBorder::
 	.incbin "data/layouts/SootopolisCity/border.bin"
 
-	.align 2
 SootopolisCity_MapBlockdata::
 	.incbin "data/layouts/SootopolisCity/map.bin"
 
@@ -14,3 +12,4 @@ SootopolisCity_Layout::
 	.4byte SootopolisCity_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Sootopolis
+

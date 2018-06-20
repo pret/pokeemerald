@@ -1,8 +1,6 @@
-	.align 2
 EverGrandeCity_HallOfFame_MapBorder::
 	.incbin "data/layouts/EverGrandeCity_HallOfFame/border.bin"
 
-	.align 2
 EverGrandeCity_HallOfFame_MapBlockdata::
 	.incbin "data/layouts/EverGrandeCity_HallOfFame/map.bin"
 
@@ -14,3 +12,4 @@ EverGrandeCity_HallOfFame_Layout::
 	.4byte EverGrandeCity_HallOfFame_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_CableClub
+

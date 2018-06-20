@@ -1,8 +1,6 @@
-	.align 2
 UnknownMap_0848144C_MapBorder::
 	.incbin "data/layouts/UnknownMap_0848144C/border.bin"
 
-	.align 2
 UnknownMap_0848144C_MapBlockdata::
 	.incbin "data/layouts/UnknownMap_0848144C/map.bin"
 
@@ -14,3 +12,4 @@ UnknownMap_0848144C_Layout::
 	.4byte UnknownMap_0848144C_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Pacifidlog
+

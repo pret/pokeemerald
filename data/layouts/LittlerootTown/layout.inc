@@ -1,8 +1,6 @@
-	.align 2
 LittlerootTown_MapBorder::
 	.incbin "data/layouts/LittlerootTown/border.bin"
 
-	.align 2
 LittlerootTown_MapBlockdata::
 	.incbin "data/layouts/LittlerootTown/map.bin"
 
@@ -14,3 +12,4 @@ LittlerootTown_Layout::
 	.4byte LittlerootTown_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Petalburg
+

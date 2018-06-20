@@ -1,8 +1,6 @@
-	.align 2
 IslandCave_MapBorder::
 	.incbin "data/layouts/IslandCave/border.bin"
 
-	.align 2
 IslandCave_MapBlockdata::
 	.incbin "data/layouts/IslandCave/map.bin"
 
@@ -14,3 +12,4 @@ IslandCave_Layout::
 	.4byte IslandCave_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

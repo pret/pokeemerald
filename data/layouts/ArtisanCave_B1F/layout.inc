@@ -1,8 +1,6 @@
-	.align 2
 ArtisanCave_B1F_MapBorder::
 	.incbin "data/layouts/ArtisanCave_B1F/border.bin"
 
-	.align 2
 ArtisanCave_B1F_MapBlockdata::
 	.incbin "data/layouts/ArtisanCave_B1F/map.bin"
 
@@ -14,3 +12,4 @@ ArtisanCave_B1F_Layout::
 	.4byte ArtisanCave_B1F_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

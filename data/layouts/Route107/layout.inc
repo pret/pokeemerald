@@ -1,8 +1,6 @@
-	.align 2
 Route107_MapBorder::
 	.incbin "data/layouts/Route107/border.bin"
 
-	.align 2
 Route107_MapBlockdata::
 	.incbin "data/layouts/Route107/map.bin"
 
@@ -14,3 +12,4 @@ Route107_Layout::
 	.4byte Route107_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Dewford
+

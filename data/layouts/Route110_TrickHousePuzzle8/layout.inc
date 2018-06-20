@@ -1,8 +1,6 @@
-	.align 2
 Route110_TrickHousePuzzle8_MapBorder::
 	.incbin "data/layouts/Route110_TrickHousePuzzle8/border.bin"
 
-	.align 2
 Route110_TrickHousePuzzle8_MapBlockdata::
 	.incbin "data/layouts/Route110_TrickHousePuzzle8/map.bin"
 
@@ -14,3 +12,4 @@ Route110_TrickHousePuzzle8_Layout::
 	.4byte Route110_TrickHousePuzzle8_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
+

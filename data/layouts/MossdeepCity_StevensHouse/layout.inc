@@ -1,8 +1,6 @@
-	.align 2
 MossdeepCity_StevensHouse_MapBorder::
 	.incbin "data/layouts/MossdeepCity_StevensHouse/border.bin"
 
-	.align 2
 MossdeepCity_StevensHouse_MapBlockdata::
 	.incbin "data/layouts/MossdeepCity_StevensHouse/map.bin"
 
@@ -14,3 +12,4 @@ MossdeepCity_StevensHouse_Layout::
 	.4byte MossdeepCity_StevensHouse_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
+

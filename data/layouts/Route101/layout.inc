@@ -1,8 +1,6 @@
-	.align 2
 Route101_MapBorder::
 	.incbin "data/layouts/Route101/border.bin"
 
-	.align 2
 Route101_MapBlockdata::
 	.incbin "data/layouts/Route101/map.bin"
 
@@ -14,3 +12,4 @@ Route101_Layout::
 	.4byte Route101_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Petalburg
+

@@ -1,8 +1,6 @@
-	.align 2
 EverGrandeCity_ShortHall_MapBorder::
 	.incbin "data/layouts/EverGrandeCity_ShortHall/border.bin"
 
-	.align 2
 EverGrandeCity_ShortHall_MapBlockdata::
 	.incbin "data/layouts/EverGrandeCity_ShortHall/map.bin"
 
@@ -14,3 +12,4 @@ EverGrandeCity_ShortHall_Layout::
 	.4byte EverGrandeCity_ShortHall_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_EliteFour
+

@@ -1,8 +1,6 @@
-	.align 2
 BattleFrontier_OutsideEast_MapBorder::
 	.incbin "data/layouts/BattleFrontier_OutsideEast/border.bin"
 
-	.align 2
 BattleFrontier_OutsideEast_MapBlockdata::
 	.incbin "data/layouts/BattleFrontier_OutsideEast/map.bin"
 
@@ -14,3 +12,4 @@ BattleFrontier_OutsideEast_Layout::
 	.4byte BattleFrontier_OutsideEast_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_BattleFrontierOutsideEast
+

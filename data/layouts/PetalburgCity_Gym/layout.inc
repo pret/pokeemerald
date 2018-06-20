@@ -1,8 +1,6 @@
-	.align 2
 PetalburgCity_Gym_MapBorder::
 	.incbin "data/layouts/PetalburgCity_Gym/border.bin"
 
-	.align 2
 PetalburgCity_Gym_MapBlockdata::
 	.incbin "data/layouts/PetalburgCity_Gym/map.bin"
 
@@ -14,3 +12,4 @@ PetalburgCity_Gym_Layout::
 	.4byte PetalburgCity_Gym_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_PetalburgGym
+

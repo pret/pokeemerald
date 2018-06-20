@@ -1,8 +1,6 @@
-	.align 2
 DewfordTown_Hall_MapBorder::
 	.incbin "data/layouts/DewfordTown_Hall/border.bin"
 
-	.align 2
 DewfordTown_Hall_MapBlockdata::
 	.incbin "data/layouts/DewfordTown_Hall/map.bin"
 
@@ -14,3 +12,4 @@ DewfordTown_Hall_Layout::
 	.4byte DewfordTown_Hall_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
+

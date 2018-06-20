@@ -1,8 +1,6 @@
-	.align 2
 Underwater_MarineCave_MapBorder::
 	.incbin "data/layouts/Underwater_MarineCave/border.bin"
 
-	.align 2
 Underwater_MarineCave_MapBlockdata::
 	.incbin "data/layouts/Underwater_MarineCave/map.bin"
 
@@ -14,3 +12,4 @@ Underwater_MarineCave_Layout::
 	.4byte Underwater_MarineCave_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Underwater
+

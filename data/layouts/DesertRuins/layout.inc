@@ -1,8 +1,6 @@
-	.align 2
 DesertRuins_MapBorder::
 	.incbin "data/layouts/DesertRuins/border.bin"
 
-	.align 2
 DesertRuins_MapBlockdata::
 	.incbin "data/layouts/DesertRuins/map.bin"
 
@@ -14,3 +12,4 @@ DesertRuins_Layout::
 	.4byte DesertRuins_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

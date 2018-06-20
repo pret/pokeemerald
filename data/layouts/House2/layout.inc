@@ -1,8 +1,6 @@
-	.align 2
 House2_MapBorder::
 	.incbin "data/layouts/House2/border.bin"
 
-	.align 2
 House2_MapBlockdata::
 	.incbin "data/layouts/House2/map.bin"
 
@@ -14,3 +12,4 @@ House2_Layout::
 	.4byte House2_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
+

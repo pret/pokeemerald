@@ -1,8 +1,6 @@
-	.align 2
 UnknownMap_08417FC4_MapBorder::
 	.incbin "data/layouts/UnknownMap_08417FC4/border.bin"
 
-	.align 2
 UnknownMap_08417FC4_MapBlockdata::
 	.incbin "data/layouts/UnknownMap_08417FC4/map.bin"
 
@@ -14,3 +12,4 @@ UnknownMap_08417FC4_Layout::
 	.4byte UnknownMap_08417FC4_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+

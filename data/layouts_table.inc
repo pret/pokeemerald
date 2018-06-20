@@ -1,5 +1,5 @@
-    .align 2
-gMapLayouts:: @ 8481DD4
+	.align 2
+gMapLayouts::
 	.4byte PetalburgCity_Layout
 	.4byte SlateportCity_Layout
 	.4byte MauvilleCity_Layout
@@ -159,9 +159,9 @@ gMapLayouts:: @ 8481DD4
 	.4byte CaveOfOrigin_Entrance_Layout
 	.4byte CaveOfOrigin_1F_Layout
 	.4byte CaveOfOrigin_UnusedRubySapphireMap1_Layout
-    .4byte CaveOfOrigin_UnusedRubySapphireMap2_Layout
-    .4byte CaveOfOrigin_UnusedRubySapphireMap3_Layout
-    .4byte CaveOfOrigin_B1F_Layout
+	.4byte CaveOfOrigin_UnusedRubySapphireMap2_Layout
+	.4byte CaveOfOrigin_UnusedRubySapphireMap3_Layout
+	.4byte CaveOfOrigin_B1F_Layout
 	.4byte VictoryRoad_1F_Layout
 	.4byte ShoalCave_LowTideEntranceRoom_Layout
 	.4byte ShoalCave_LowTideInnerRoom_Layout
@@ -169,20 +169,20 @@ gMapLayouts:: @ 8481DD4
 	.4byte ShoalCave_LowTideLowerRoom_Layout
 	.4byte ShoalCave_HighTideEntranceRoom_Layout
 	.4byte ShoalCave_HighTideInnerRoom_Layout
-    .4byte UnknownMap_0843E6C0_Layout @ unused maps
-    .4byte UnknownMap_0843E6E4_Layout
-    .4byte UnknownMap_0843E708_Layout
-    .4byte UnknownMap_0843E72C_Layout
-    .4byte UnknownMap_0843E750_Layout
-    .4byte UnknownMap_0843E774_Layout
-    .4byte UnknownMap_0843E798_Layout
-    .4byte UnknownMap_0843E7BC_Layout
-    .4byte UnknownMap_0843E7E0_Layout
-    .4byte UnknownMap_0843E804_Layout
-    .4byte UnknownMap_0843E828_Layout
-    .4byte UnknownMap_0843E84C_Layout
-    .4byte UnknownMap_0843E870_Layout
-    .4byte UnknownMap_0843E894_Layout
+	.4byte UnknownMap_0843E6C0_Layout
+	.4byte UnknownMap_0843E6E4_Layout
+	.4byte UnknownMap_0843E708_Layout
+	.4byte UnknownMap_0843E72C_Layout
+	.4byte UnknownMap_0843E750_Layout
+	.4byte UnknownMap_0843E774_Layout
+	.4byte UnknownMap_0843E798_Layout
+	.4byte UnknownMap_0843E7BC_Layout
+	.4byte UnknownMap_0843E7E0_Layout
+	.4byte UnknownMap_0843E804_Layout
+	.4byte UnknownMap_0843E828_Layout
+	.4byte UnknownMap_0843E84C_Layout
+	.4byte UnknownMap_0843E870_Layout
+	.4byte UnknownMap_0843E894_Layout
 	.4byte NewMauville_Entrance_Layout
 	.4byte NewMauville_Inside_Layout
 	.4byte AbandonedShip_Deck_Layout
@@ -241,8 +241,8 @@ gMapLayouts:: @ 8481DD4
 	.4byte SafariZone_North_Layout
 	.4byte SafariZone_Southwest_Layout
 	.4byte SafariZone_South_Layout
-    .4byte UnknownMap_08447028_Layout
- 	.4byte Route109_SeashoreHouse_Layout
+	.4byte UnknownMap_08447028_Layout
+	.4byte Route109_SeashoreHouse_Layout
 	.4byte Route110_TrickHouseEntrance_Layout
 	.4byte Route110_TrickHouseEnd_Layout
 	.4byte Route110_TrickHouseCorridor_Layout
@@ -331,114 +331,113 @@ gMapLayouts:: @ 8481DD4
 	.4byte SafariZone_RestHouse_Layout
 	.4byte SkyPillar_5F_Layout
 	.4byte SkyPillar_Top_Layout
-    .4byte BattleFrontier_BattleDomeLobby_Layout
-    .4byte BattleFrontier_BattleDomeCorridor_Layout
-    .4byte BattleFrontier_BattleDomePreBattleRoom_Layout
-    .4byte BattleFrontier_BattleDomeBattleRoom_Layout
-    .4byte MagmaHideout_1F_Layout
-    .4byte MagmaHideout_2F_1R_Layout
-    .4byte MagmaHideout_2F_2R_Layout
-    .4byte MagmaHideout_3F_1R_Layout
-    .4byte MagmaHideout_3F_2R_Layout
-    .4byte MagmaHideout_4F_Layout
-    .4byte BattleFrontier_BattlePalaceLobby_Layout
-    .4byte BattleFrontier_BattlePalaceCorridor_Layout
-    .4byte BattleFrontier_BattlePalaceBattleRoom_Layout
-    .4byte BattleFrontier_OutsideEast_Layout
-    .4byte BattleFrontier_BattleFactoryLobby_Layout
-    .4byte BattleFrontier_BattleFactoryPreBattleRoom_Layout
-    .4byte BattleFrontier_BattleFactoryBattleRoom_Layout
-    .4byte BattleFrontier_BattlePikeLobby_Layout
-    .4byte BattleFrontier_BattlePikeCorridor_Layout
-    .4byte BattleFrontier_BattlePikeThreePathRoom_Layout
-    .4byte BattleFrontier_BattlePikeRandomRoom1_Layout
-    .4byte BattleFrontier_BattlePikeRandomRoom2_Layout
-    .4byte BattleFrontier_BattleArenaLobby_Layout
-    .4byte BattleFrontier_BattleArenaCorridor_Layout
-    .4byte BattleFrontier_BattleArenaBattleRoom_Layout
-    .4byte UnknownMap_08469200_Layout
-    .4byte BattleFrontier_BattlePikeRandomRoom3_Layout
-    .4byte UnknownMap_084693AC_Layout
-    .4byte BattleFrontier_BattlePyramidLobby_Layout
-    .4byte BattleFrontier_BattlePyramidEmptySquare_Layout
-    .4byte BattlePyramidSquare01_Layout
-    .4byte BattlePyramidSquare02_Layout
-    .4byte BattlePyramidSquare03_Layout
-    .4byte BattlePyramidSquare04_Layout
-    .4byte BattlePyramidSquare05_Layout
-    .4byte BattlePyramidSquare06_Layout
-    .4byte BattlePyramidSquare07_Layout
-    .4byte BattlePyramidSquare08_Layout
-    .4byte BattlePyramidSquare09_Layout
-    .4byte BattlePyramidSquare10_Layout
-    .4byte BattlePyramidSquare11_Layout
-    .4byte BattlePyramidSquare12_Layout
-    .4byte BattlePyramidSquare13_Layout
-    .4byte BattlePyramidSquare14_Layout
-    .4byte BattlePyramidSquare15_Layout
-    .4byte BattlePyramidSquare16_Layout
-    .4byte BattleFrontier_BattlePyramidTop_Layout
-    .4byte MagmaHideout_3F_3R_Layout
-    .4byte MagmaHideout_2F_3R_Layout
-    .4byte MirageTower_1F_Layout
-    .4byte MirageTower_2F_Layout
-    .4byte MirageTower_3F_Layout
-    .4byte BattleTentLobby_Layout
-    .4byte BattleTentCorridor_Layout
-    .4byte BattleTentBattleRoom_Layout
-    .4byte VerdanturfTown_BattleTentBattleRoom_Layout
-    .4byte MirageTower_4F_Layout
-    .4byte DesertUnderpass_Layout
-    .4byte BattleFrontier_BattleTowerMultiBattleRoom_Layout
-    .4byte BattleFrontier_BattleTowerCorridor2_Layout
-    .4byte UnknownMap_08470BD8_Layout
-    .4byte UnionRoom_Layout
-    .4byte SafariZone_Northeast_Layout
-    .4byte SafariZone_Southeast_Layout
-    .4byte BattleFrontier_RankingHall_Layout
-    .4byte BattleFrontier_Lounge1_Layout
-    .4byte BattleFrontier_BattlePointExchangeServiceCorner_Layout
-    .4byte BattleFrontier_ReceptionGate_Layout
-    .4byte ArtisanCave_B1F_Layout
-    .4byte ArtisanCave_1F_Layout
-    .4byte FarawayIsland_Entrance_Layout
-    .4byte FarawayIsland_Interior_Layout
-    .4byte BirthIsland_Exterior_Layout
-    .4byte IslandHarbor_Layout
-    .4byte Underwater_MarineCave_Layout
-    .4byte MarineCave_Entrance_Layout
-    .4byte TerraCave_Entrance_Layout
-    .4byte TerraCave_End_Layout
-    .4byte Underwater6_Layout
-    .4byte Underwater7_Layout
-    .4byte Underwater5_Layout
-    .4byte MarineCave_End_Layout
-    .4byte TrainerHill_Entrance_Layout
-    .4byte TrainerHill_1F_Layout
-    .4byte TrainerHill_2F_Layout
-    .4byte TrainerHill_3F_Layout
-    .4byte TrainerHill_4F_Layout
-    .4byte TrainerHill_Roof_Layout
-    .4byte AlteringCave_Layout
-    .4byte NavelRock_Exterior_Layout
-    .4byte NavelRock_Entrance_Layout
-    .4byte NavelRock_Top_Layout
-    .4byte NavelRock_Bottom_Layout
-    .4byte NavelRock_LadderRoom1_Layout
-    .4byte NavelRock_LadderRoom2_Layout
-    .4byte NavelRock_B1F_Layout
-    .4byte NavelRock_Fork_Layout
-    .4byte BattleFrontier_Lounge2_Layout
-    .4byte BattleFrontier_ScottsHouse_Layout
-    .4byte MeteorFalls_StevensCave_Layout
-    .4byte UnknownMap_08480DAC_Layout
-    .4byte UnknownMap_08480F54_Layout
-    .4byte UnknownMap_084810FC_Layout
-    .4byte UnknownMap_084812A4_Layout
-    .4byte UnknownMap_0848144C_Layout
-    .4byte UnknownMap_084815F4_Layout
-    .4byte UnknownMap_08481B24_Layout
-    .4byte SootopolisCity_MysteryEventsHouse_1F_Layout
-    .4byte SootopolisCity_MysteryEventsHouse_B1F_Layout
-    .4byte UnknownMap_08481DBC_Layout
-
+	.4byte BattleFrontier_BattleDomeLobby_Layout
+	.4byte BattleFrontier_BattleDomeCorridor_Layout
+	.4byte BattleFrontier_BattleDomePreBattleRoom_Layout
+	.4byte BattleFrontier_BattleDomeBattleRoom_Layout
+	.4byte MagmaHideout_1F_Layout
+	.4byte MagmaHideout_2F_1R_Layout
+	.4byte MagmaHideout_2F_2R_Layout
+	.4byte MagmaHideout_3F_1R_Layout
+	.4byte MagmaHideout_3F_2R_Layout
+	.4byte MagmaHideout_4F_Layout
+	.4byte BattleFrontier_BattlePalaceLobby_Layout
+	.4byte BattleFrontier_BattlePalaceCorridor_Layout
+	.4byte BattleFrontier_BattlePalaceBattleRoom_Layout
+	.4byte BattleFrontier_OutsideEast_Layout
+	.4byte BattleFrontier_BattleFactoryLobby_Layout
+	.4byte BattleFrontier_BattleFactoryPreBattleRoom_Layout
+	.4byte BattleFrontier_BattleFactoryBattleRoom_Layout
+	.4byte BattleFrontier_BattlePikeLobby_Layout
+	.4byte BattleFrontier_BattlePikeCorridor_Layout
+	.4byte BattleFrontier_BattlePikeThreePathRoom_Layout
+	.4byte BattleFrontier_BattlePikeRandomRoom1_Layout
+	.4byte BattleFrontier_BattlePikeRandomRoom2_Layout
+	.4byte BattleFrontier_BattleArenaLobby_Layout
+	.4byte BattleFrontier_BattleArenaCorridor_Layout
+	.4byte BattleFrontier_BattleArenaBattleRoom_Layout
+	.4byte UnknownMap_08469200_Layout
+	.4byte BattleFrontier_BattlePikeRandomRoom3_Layout
+	.4byte UnknownMap_084693AC_Layout
+	.4byte BattleFrontier_BattlePyramidLobby_Layout
+	.4byte BattleFrontier_BattlePyramidEmptySquare_Layout
+	.4byte BattlePyramidSquare01_Layout
+	.4byte BattlePyramidSquare02_Layout
+	.4byte BattlePyramidSquare03_Layout
+	.4byte BattlePyramidSquare04_Layout
+	.4byte BattlePyramidSquare05_Layout
+	.4byte BattlePyramidSquare06_Layout
+	.4byte BattlePyramidSquare07_Layout
+	.4byte BattlePyramidSquare08_Layout
+	.4byte BattlePyramidSquare09_Layout
+	.4byte BattlePyramidSquare10_Layout
+	.4byte BattlePyramidSquare11_Layout
+	.4byte BattlePyramidSquare12_Layout
+	.4byte BattlePyramidSquare13_Layout
+	.4byte BattlePyramidSquare14_Layout
+	.4byte BattlePyramidSquare15_Layout
+	.4byte BattlePyramidSquare16_Layout
+	.4byte BattleFrontier_BattlePyramidTop_Layout
+	.4byte MagmaHideout_3F_3R_Layout
+	.4byte MagmaHideout_2F_3R_Layout
+	.4byte MirageTower_1F_Layout
+	.4byte MirageTower_2F_Layout
+	.4byte MirageTower_3F_Layout
+	.4byte BattleTentLobby_Layout
+	.4byte BattleTentCorridor_Layout
+	.4byte BattleTentBattleRoom_Layout
+	.4byte VerdanturfTown_BattleTentBattleRoom_Layout
+	.4byte MirageTower_4F_Layout
+	.4byte DesertUnderpass_Layout
+	.4byte BattleFrontier_BattleTowerMultiBattleRoom_Layout
+	.4byte BattleFrontier_BattleTowerCorridor2_Layout
+	.4byte UnknownMap_08470BD8_Layout
+	.4byte UnionRoom_Layout
+	.4byte SafariZone_Northeast_Layout
+	.4byte SafariZone_Southeast_Layout
+	.4byte BattleFrontier_RankingHall_Layout
+	.4byte BattleFrontier_Lounge1_Layout
+	.4byte BattleFrontier_BattlePointExchangeServiceCorner_Layout
+	.4byte BattleFrontier_ReceptionGate_Layout
+	.4byte ArtisanCave_B1F_Layout
+	.4byte ArtisanCave_1F_Layout
+	.4byte FarawayIsland_Entrance_Layout
+	.4byte FarawayIsland_Interior_Layout
+	.4byte BirthIsland_Exterior_Layout
+	.4byte IslandHarbor_Layout
+	.4byte Underwater_MarineCave_Layout
+	.4byte MarineCave_Entrance_Layout
+	.4byte TerraCave_Entrance_Layout
+	.4byte TerraCave_End_Layout
+	.4byte Underwater6_Layout
+	.4byte Underwater7_Layout
+	.4byte Underwater5_Layout
+	.4byte MarineCave_End_Layout
+	.4byte TrainerHill_Entrance_Layout
+	.4byte TrainerHill_1F_Layout
+	.4byte TrainerHill_2F_Layout
+	.4byte TrainerHill_3F_Layout
+	.4byte TrainerHill_4F_Layout
+	.4byte TrainerHill_Roof_Layout
+	.4byte AlteringCave_Layout
+	.4byte NavelRock_Exterior_Layout
+	.4byte NavelRock_Entrance_Layout
+	.4byte NavelRock_Top_Layout
+	.4byte NavelRock_Bottom_Layout
+	.4byte NavelRock_LadderRoom1_Layout
+	.4byte NavelRock_LadderRoom2_Layout
+	.4byte NavelRock_B1F_Layout
+	.4byte NavelRock_Fork_Layout
+	.4byte BattleFrontier_Lounge2_Layout
+	.4byte BattleFrontier_ScottsHouse_Layout
+	.4byte MeteorFalls_StevensCave_Layout
+	.4byte UnknownMap_08480DAC_Layout
+	.4byte UnknownMap_08480F54_Layout
+	.4byte UnknownMap_084810FC_Layout
+	.4byte UnknownMap_084812A4_Layout
+	.4byte UnknownMap_0848144C_Layout
+	.4byte UnknownMap_084815F4_Layout
+	.4byte UnknownMap_08481B24_Layout
+	.4byte SootopolisCity_MysteryEventsHouse_1F_Layout
+	.4byte SootopolisCity_MysteryEventsHouse_B1F_Layout
+	.4byte UnknownMap_08481DBC_Layout

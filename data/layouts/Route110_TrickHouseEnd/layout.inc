@@ -1,8 +1,6 @@
-	.align 2
 Route110_TrickHouseEnd_MapBorder::
 	.incbin "data/layouts/Route110_TrickHouseEnd/border.bin"
 
-	.align 2
 Route110_TrickHouseEnd_MapBlockdata::
 	.incbin "data/layouts/Route110_TrickHouseEnd/map.bin"
 
@@ -14,3 +12,4 @@ Route110_TrickHouseEnd_Layout::
 	.4byte Route110_TrickHouseEnd_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
+

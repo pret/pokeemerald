@@ -1,8 +1,6 @@
-	.align 2
 MagmaHideout_2F_3R_MapBorder::
 	.incbin "data/layouts/MagmaHideout_2F_3R/border.bin"
 
-	.align 2
 MagmaHideout_2F_3R_MapBlockdata::
 	.incbin "data/layouts/MagmaHideout_2F_3R/map.bin"
 
@@ -14,3 +12,4 @@ MagmaHideout_2F_3R_Layout::
 	.4byte MagmaHideout_2F_3R_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Lavaridge
+

@@ -1,8 +1,6 @@
-	.align 2
 Route114_MapBorder::
 	.incbin "data/layouts/Route114/border.bin"
 
-	.align 2
 Route114_MapBlockdata::
 	.incbin "data/layouts/Route114/map.bin"
 
@@ -14,3 +12,4 @@ Route114_Layout::
 	.4byte Route114_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Fallarbor
+

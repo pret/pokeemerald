@@ -1,8 +1,6 @@
-	.align 2
 SSTidalRooms_MapBorder::
 	.incbin "data/layouts/SSTidalRooms/border.bin"
 
-	.align 2
 SSTidalRooms_MapBlockdata::
 	.incbin "data/layouts/SSTidalRooms/map.bin"
 
@@ -14,3 +12,4 @@ SSTidalRooms_Layout::
 	.4byte SSTidalRooms_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_InsideShip
+

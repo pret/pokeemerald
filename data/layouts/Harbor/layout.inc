@@ -1,8 +1,6 @@
-	.align 2
 Harbor_MapBorder::
 	.incbin "data/layouts/Harbor/border.bin"
 
-	.align 2
 Harbor_MapBlockdata::
 	.incbin "data/layouts/Harbor/map.bin"
 
@@ -14,3 +12,4 @@ Harbor_Layout::
 	.4byte Harbor_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Facility
+

@@ -1,8 +1,6 @@
-	.align 2
 AbandonedShip_CaptainsOffice_MapBorder::
 	.incbin "data/layouts/AbandonedShip_CaptainsOffice/border.bin"
 
-	.align 2
 AbandonedShip_CaptainsOffice_MapBlockdata::
 	.incbin "data/layouts/AbandonedShip_CaptainsOffice/map.bin"
 
@@ -14,3 +12,4 @@ AbandonedShip_CaptainsOffice_Layout::
 	.4byte AbandonedShip_CaptainsOffice_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Facility
+

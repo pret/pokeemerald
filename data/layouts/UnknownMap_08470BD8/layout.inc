@@ -1,8 +1,6 @@
-	.align 2
 UnknownMap_08470BD8_MapBorder::
 	.incbin "data/layouts/UnknownMap_08470BD8/border.bin"
 
-	.align 2
 UnknownMap_08470BD8_MapBlockdata::
 	.incbin "data/layouts/UnknownMap_08470BD8/map.bin"
 
@@ -14,3 +12,4 @@ UnknownMap_08470BD8_Layout::
 	.4byte UnknownMap_08470BD8_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Mauville
+

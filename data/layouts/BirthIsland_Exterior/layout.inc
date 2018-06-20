@@ -1,8 +1,6 @@
-	.align 2
 BirthIsland_Exterior_MapBorder::
 	.incbin "data/layouts/BirthIsland_Exterior/border.bin"
 
-	.align 2
 BirthIsland_Exterior_MapBlockdata::
 	.incbin "data/layouts/BirthIsland_Exterior/map.bin"
 
@@ -14,3 +12,4 @@ BirthIsland_Exterior_Layout::
 	.4byte BirthIsland_Exterior_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Dewford
+

@@ -1,8 +1,6 @@
-	.align 2
 DewfordTown_MapBorder::
 	.incbin "data/layouts/DewfordTown/border.bin"
 
-	.align 2
 DewfordTown_MapBlockdata::
 	.incbin "data/layouts/DewfordTown/map.bin"
 
@@ -14,3 +12,4 @@ DewfordTown_Layout::
 	.4byte DewfordTown_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Dewford
+

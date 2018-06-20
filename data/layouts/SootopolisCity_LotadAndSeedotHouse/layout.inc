@@ -1,8 +1,6 @@
-	.align 2
 SootopolisCity_LotadAndSeedotHouse_MapBorder::
 	.incbin "data/layouts/SootopolisCity_LotadAndSeedotHouse/border.bin"
 
-	.align 2
 SootopolisCity_LotadAndSeedotHouse_MapBlockdata::
 	.incbin "data/layouts/SootopolisCity_LotadAndSeedotHouse/map.bin"
 
@@ -14,3 +12,4 @@ SootopolisCity_LotadAndSeedotHouse_Layout::
 	.4byte SootopolisCity_LotadAndSeedotHouse_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
+

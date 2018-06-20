@@ -1,8 +1,6 @@
-	.align 2
 BattleFrontier_BattlePikeLobby_MapBorder::
 	.incbin "data/layouts/BattleFrontier_BattlePikeLobby/border.bin"
 
-	.align 2
 BattleFrontier_BattlePikeLobby_MapBlockdata::
 	.incbin "data/layouts/BattleFrontier_BattlePikeLobby/map.bin"
 
@@ -14,3 +12,4 @@ BattleFrontier_BattlePikeLobby_Layout::
 	.4byte BattleFrontier_BattlePikeLobby_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_BattlePike
+

@@ -1,8 +1,6 @@
-	.align 2
 Route104_MapBorder::
 	.incbin "data/layouts/Route104/border.bin"
 
-	.align 2
 Route104_MapBlockdata::
 	.incbin "data/layouts/Route104/map.bin"
 
@@ -14,3 +12,4 @@ Route104_Layout::
 	.4byte Route104_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Rustboro
+

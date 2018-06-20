@@ -1,8 +1,6 @@
-	.align 2
 SkyPillar_Outside_MapBorder::
 	.incbin "data/layouts/SkyPillar_Outside/border.bin"
 
-	.align 2
 SkyPillar_Outside_MapBlockdata::
 	.incbin "data/layouts/SkyPillar_Outside/map.bin"
 
@@ -14,3 +12,4 @@ SkyPillar_Outside_Layout::
 	.4byte SkyPillar_Outside_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Pacifidlog
+

@@ -1,8 +1,6 @@
-	.align 2
 RustboroCity_House_MapBorder::
 	.incbin "data/layouts/RustboroCity_House/border.bin"
 
-	.align 2
 RustboroCity_House_MapBlockdata::
 	.incbin "data/layouts/RustboroCity_House/map.bin"
 
@@ -14,3 +12,4 @@ RustboroCity_House_Layouts::
 	.4byte RustboroCity_House_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
+

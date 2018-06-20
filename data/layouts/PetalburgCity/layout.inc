@@ -1,8 +1,6 @@
-	.align 2
 PetalburgCity_MapBorder::
 	.incbin "data/layouts/PetalburgCity/border.bin"
 
-	.align 2
 PetalburgCity_MapBlockdata::
 	.incbin "data/layouts/PetalburgCity/map.bin"
 
@@ -14,3 +12,4 @@ PetalburgCity_Layout::
 	.4byte PetalburgCity_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Petalburg
+
