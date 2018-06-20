@@ -1483,12 +1483,18 @@ void SwapHpBarsWithHpText(void)
     }
 }
 
+#define tBattler                data[0]
+#define tSummaryBarSpriteId     data[1]
+#define tBallIconSpriteId(n)    data[3 + n]
+#define tIsBattleStart          data[10]
+#define tData15                 data[15]
+
 u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart)
 {
     bool8 isOpponent;
     s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
     s32 i, j, var;
-    u8 barSpriteId;
+    u8 summaryBarSpriteId;
     u8 ballIconSpritesIds[PARTY_SIZE];
     u8 taskId;
 
@@ -1527,19 +1533,19 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     LoadSpritePalette(&sStatusSummaryBarSpritePal);
     LoadSpritePalette(&sStatusSummaryBallsSpritePal);
 
-    barSpriteId = CreateSprite(&sStatusSummaryBarSpriteTemplates[isOpponent], bar_X, bar_Y, 10);
-    SetSubspriteTables(&gSprites[barSpriteId], sStatusSummaryBar_SubspriteTable);
-    gSprites[barSpriteId].pos2.x = bar_pos2_X;
-    gSprites[barSpriteId].data[0] = bar_data0;
+    summaryBarSpriteId = CreateSprite(&sStatusSummaryBarSpriteTemplates[isOpponent], bar_X, bar_Y, 10);
+    SetSubspriteTables(&gSprites[summaryBarSpriteId], sStatusSummaryBar_SubspriteTable);
+    gSprites[summaryBarSpriteId].pos2.x = bar_pos2_X;
+    gSprites[summaryBarSpriteId].data[0] = bar_data0;
 
     if (isOpponent)
     {
-        gSprites[barSpriteId].pos1.x -= 96;
-        gSprites[barSpriteId].oam.matrixNum = 8;
+        gSprites[summaryBarSpriteId].pos1.x -= 96;
+        gSprites[summaryBarSpriteId].oam.matrixNum = 8;
     }
     else
     {
-        gSprites[barSpriteId].pos1.x += 96;
+        gSprites[summaryBarSpriteId].pos1.x += 96;
     }
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1555,7 +1561,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             gSprites[ballIconSpritesIds[i]].pos2.y = 0;
         }
 
-        gSprites[ballIconSpritesIds[i]].data[0] = barSpriteId;
+        gSprites[ballIconSpritesIds[i]].data[0] = summaryBarSpriteId;
 
         if (!isOpponent)
         {
@@ -1672,13 +1678,13 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     }
 
     taskId = CreateTask(TaskDummy, 5);
-    gTasks[taskId].data[0] = battlerId;
-    gTasks[taskId].data[1] = barSpriteId;
+    gTasks[taskId].tBattler = battlerId;
+    gTasks[taskId].tSummaryBarSpriteId = summaryBarSpriteId;
 
     for (i = 0; i < PARTY_SIZE; i++)
-        gTasks[taskId].data[3 + i] = ballIconSpritesIds[i];
+        gTasks[taskId].tBallIconSpriteId(i) = ballIconSpritesIds[i];
 
-    gTasks[taskId].data[10] = isBattleStart;
+    gTasks[taskId].tIsBattleStart = isBattleStart;
 
     if (isBattleStart)
     {
@@ -1691,46 +1697,46 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
 
 void sub_8073C30(u8 taskId)
 {
-    u8 sp[6];
-    u8 r7;
+    u8 ballIconSpriteIds[PARTY_SIZE];
+    bool8 isBattleStart;
     u8 summaryBarSpriteId;
     u8 battlerId;
     s32 i;
 
-    r7 = gTasks[taskId].data[10];
-    summaryBarSpriteId = gTasks[taskId].data[1];
-    battlerId = gTasks[taskId].data[0];
+    isBattleStart = gTasks[taskId].tIsBattleStart;
+    summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
+    battlerId = gTasks[taskId].tBattler;
 
     for (i = 0; i < 6; i++)
-        sp[i] = gTasks[taskId].data[3 + i];
+        ballIconSpriteIds[i] = gTasks[taskId].tBallIconSpriteId(i);
 
     SetGpuReg(REG_OFFSET_BLDCNT, 0x3F40);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x10);
 
-    gTasks[taskId].data[15] = 16;
+    gTasks[taskId].tData15 = 16;
 
-    for (i = 0; i < 6; i++)
-        gSprites[sp[i]].oam.objMode = 1;
+    for (i = 0; i < PARTY_SIZE; i++)
+        gSprites[ballIconSpriteIds[i]].oam.objMode = 1;
 
     gSprites[summaryBarSpriteId].oam.objMode = 1;
 
-    if (r7 != 0)
+    if (isBattleStart)
     {
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
             {
-                gSprites[sp[5 - i]].data[1] = 7 * i;
-                gSprites[sp[5 - i]].data[3] = 0;
-                gSprites[sp[5 - i]].data[4] = 0;
-                gSprites[sp[5 - i]].callback = sub_8074158;
+                gSprites[ballIconSpriteIds[5 - i]].data[1] = 7 * i;
+                gSprites[ballIconSpriteIds[5 - i]].data[3] = 0;
+                gSprites[ballIconSpriteIds[5 - i]].data[4] = 0;
+                gSprites[ballIconSpriteIds[5 - i]].callback = sub_8074158;
             }
             else
             {
-                gSprites[sp[i]].data[1] = 7 * i;
-                gSprites[sp[i]].data[3] = 0;
-                gSprites[sp[i]].data[4] = 0;
-                gSprites[sp[i]].callback = sub_8074158;
+                gSprites[ballIconSpriteIds[i]].data[1] = 7 * i;
+                gSprites[ballIconSpriteIds[i]].data[3] = 0;
+                gSprites[ballIconSpriteIds[i]].data[4] = 0;
+                gSprites[ballIconSpriteIds[i]].callback = sub_8074158;
             }
         }
         gSprites[summaryBarSpriteId].data[0] /= 2;
@@ -1747,12 +1753,9 @@ void sub_8073C30(u8 taskId)
 
 static void sub_8073E08(u8 taskId)
 {
-    u16 temp = gTasks[taskId].data[11]++;
-
-    if (!(temp & 1))
+    if ((gTasks[taskId].data[11]++ % 2) == 0)
     {
-        gTasks[taskId].data[15]--;
-        if (gTasks[taskId].data[15] < 0)
+        if (--gTasks[taskId].data[15] < 0)
             return;
 
         SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[15]) | ((16 - gTasks[taskId].data[15]) << 8));
@@ -1763,36 +1766,35 @@ static void sub_8073E08(u8 taskId)
 
 static void sub_8073E64(u8 taskId)
 {
-    u8 sp[6];
+    u8 ballIconSpriteIds[PARTY_SIZE];
     s32 i;
 
-    u8 battlerId = gTasks[taskId].data[0];
-    gTasks[taskId].data[15]--;
-    if (gTasks[taskId].data[15] == -1)
+    u8 battlerId = gTasks[taskId].tBattler;
+    if (--gTasks[taskId].tData15 == -1)
     {
-        u8 summaryBarSpriteId = gTasks[taskId].data[1];
+        u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
 
-        for (i = 0; i < 6; i++)
-            sp[i] = gTasks[taskId].data[3 + i];
+        for (i = 0; i < PARTY_SIZE; i++)
+            ballIconSpriteIds[i] = gTasks[taskId].tBallIconSpriteId(i);
 
         gBattleSpritesDataPtr->animationData->field_9_x1C--;
-        if (!gBattleSpritesDataPtr->animationData->field_9_x1C)
+        if (gBattleSpritesDataPtr->animationData->field_9_x1C == 0)
         {
             DestroySpriteAndFreeResources(&gSprites[summaryBarSpriteId]);
-            DestroySpriteAndFreeResources(&gSprites[sp[0]]);
+            DestroySpriteAndFreeResources(&gSprites[ballIconSpriteIds[0]]);
         }
         else
         {
             FreeSpriteOamMatrix(&gSprites[summaryBarSpriteId]);
             DestroySprite(&gSprites[summaryBarSpriteId]);
-            FreeSpriteOamMatrix(&gSprites[sp[0]]);
-            DestroySprite(&gSprites[sp[0]]);
+            FreeSpriteOamMatrix(&gSprites[ballIconSpriteIds[0]]);
+            DestroySprite(&gSprites[ballIconSpriteIds[0]]);
         }
 
-        for (i = 1; i < 6; i++)
-            DestroySprite(&gSprites[sp[i]]);
+        for (i = 1; i < PARTY_SIZE; i++)
+            DestroySprite(&gSprites[ballIconSpriteIds[i]]);
     }
-    else if (gTasks[taskId].data[15] == -3)
+    else if (gTasks[taskId].tData15 == -3)
     {
         gBattleSpritesDataPtr->healthBoxesData[battlerId].flag_x1 = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -1803,29 +1805,28 @@ static void sub_8073E64(u8 taskId)
 
 static void sub_8073F98(u8 taskId)
 {
-    u8 sp[6];
+    u8 ballIconSpriteIds[PARTY_SIZE];
     s32 i;
+    u8 battlerId = gTasks[taskId].tBattler;
 
-    u8 battlerId = gTasks[taskId].data[0];
-    gTasks[taskId].data[15]--;
-    if (gTasks[taskId].data[15] >= 0)
+    if (--gTasks[taskId].tData15 >= 0)
     {
-        SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[15]) | ((16 - gTasks[taskId].data[15]) << 8));
+        SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].tData15) | ((16 - gTasks[taskId].tData15) << 8));
     }
-    else if (gTasks[taskId].data[15] == -1)
+    else if (gTasks[taskId].tData15 == -1)
     {
-        u8 summaryBarSpriteId = gTasks[taskId].data[1];
+        u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
 
-        for (i = 0; i < 6; i++)
-            sp[i] = gTasks[taskId].data[3 + i];
+        for (i = 0; i < PARTY_SIZE; i++)
+            ballIconSpriteIds[i] = gTasks[taskId].tBallIconSpriteId(i);
 
         DestroySpriteAndFreeResources(&gSprites[summaryBarSpriteId]);
-        DestroySpriteAndFreeResources(&gSprites[sp[0]]);
+        DestroySpriteAndFreeResources(&gSprites[ballIconSpriteIds[0]]);
 
-        for (i = 1; i < 6; i++)
-            DestroySprite(&gSprites[sp[i]]);
+        for (i = 1; i < PARTY_SIZE; i++)
+            DestroySprite(&gSprites[ballIconSpriteIds[i]]);
     }
-    else if (gTasks[taskId].data[15] == -3)
+    else if (gTasks[taskId].tData15 == -3)
     {
         gBattleSpritesDataPtr->healthBoxesData[battlerId].flag_x1 = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -1833,6 +1834,12 @@ static void sub_8073F98(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+#undef tBattler
+#undef tSummaryBarSpriteId
+#undef tBallIconSpriteId
+#undef tIsBattleStart
+#undef tData15
 
 static void SpriteCB_StatusSummaryBar(struct Sprite *sprite)
 {
@@ -2253,8 +2260,8 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
     }
 }
 
-#define EXPBAR_PIXELS 64
-#define HEALTHBAR_PIXELS 48
+#define B_EXPBAR_PIXELS 64
+#define B_HEALTHBAR_PIXELS 48
 
 s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 {
@@ -2266,7 +2273,7 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
                     gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                     &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
-                    HEALTHBAR_PIXELS / 8, 1);
+                    B_HEALTHBAR_PIXELS / 8, 1);
     }
     else // exp bar
     {
@@ -2281,7 +2288,7 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
                     gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                     &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
-                    EXPBAR_PIXELS / 8, expFraction);
+                    B_EXPBAR_PIXELS / 8, expFraction);
     }
 
     if (whichBar == EXP_BAR || (whichBar == HEALTH_BAR && !gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars))
@@ -2307,11 +2314,11 @@ static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar)
                             gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                             gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                             &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
-                            array, HEALTHBAR_PIXELS / 8);
+                            array, B_HEALTHBAR_PIXELS / 8);
 
-        if (filledPixelsCount > (HEALTHBAR_PIXELS * 50 / 100)) // more than 50 % hp
+        if (filledPixelsCount > (B_HEALTHBAR_PIXELS * 50 / 100)) // more than 50 % hp
             barElementId = HEALTHBOX_GFX_HP_BAR_GREEN;
-        else if (filledPixelsCount > (HEALTHBAR_PIXELS * 20 / 100)) // more than 20% hp
+        else if (filledPixelsCount > (B_HEALTHBAR_PIXELS * 20 / 100)) // more than 20% hp
             barElementId = HEALTHBOX_GFX_HP_BAR_YELLOW;
         else
             barElementId = HEALTHBOX_GFX_HP_BAR_RED; // 20 % or less
@@ -2332,7 +2339,7 @@ static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar)
                     gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                     &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
-                    array, EXPBAR_PIXELS / 8);
+                    array, B_EXPBAR_PIXELS / 8);
         level = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_LEVEL);
         if (level == MAX_MON_LEVEL)
         {
@@ -2360,7 +2367,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     if (*currValue == -32768) // first function call
     {
         if (maxValue < scale)
-            *currValue = oldValue << 8;
+            *currValue = Q_24_8(oldValue);
         else
             *currValue = oldValue;
     }
@@ -2373,9 +2380,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
 
     if (maxValue < scale)
     {
-        s32 var = *currValue >> 8;
-
-        if (newValue == var && (*currValue & 0xFF) == 0)
+        if (newValue == Q_24_8_TO_INT(*currValue) && (*currValue & 0xFF) == 0)
             return -1;
     }
     else
@@ -2386,27 +2391,28 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
 
     if (maxValue < scale) // handle cases of max var having less pixels than the whole bar
     {
-        s32 var = (maxValue << 8) / scale;
+        s32 toAdd = Q_24_8(maxValue) / scale;
 
         if (receivedValue < 0) // fill bar right
         {
-            *currValue += var;
-            ret = *currValue >> 8;
+            *currValue += toAdd;
+            ret = Q_24_8_TO_INT(*currValue);
             if (ret >= newValue)
             {
-                *currValue = newValue << 8;
+                *currValue = Q_24_8(newValue);
                 ret = newValue;
             }
         }
         else // move bar left
         {
-            *currValue -= var;
-            ret = *currValue >> 8;
+            *currValue -= toAdd;
+            ret = Q_24_8_TO_INT(*currValue);
+            // try round up
             if ((*currValue & 0xFF) > 0)
                 ret++;
             if (ret <= newValue)
             {
-                *currValue = newValue << 8;
+                *currValue = Q_24_8(newValue);
                 ret = newValue;
             }
         }
@@ -2480,34 +2486,35 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
     return filledPixels;
 }
 
-static s16 sub_8074F28(struct TestingBar *barInfo, s32 *arg1, u16 *arg2, s32 arg3)
+// These two functions seem as if they were made for testing the health bar.
+static s16 sub_8074F28(struct TestingBar *barInfo, s32 *currValue, u16 *arg2, s32 arg3)
 {
     s16 ret, var;
 
     ret = CalcNewBarValue(barInfo->maxValue,
                     barInfo->oldValue,
                     barInfo->receivedValue,
-                    arg1, 6, 1);
-    sub_8074F88(barInfo, arg1, arg2);
+                    currValue, B_HEALTHBAR_PIXELS / 8, 1);
+    sub_8074F88(barInfo, currValue, arg2);
 
-    if (barInfo->maxValue < HEALTHBAR_PIXELS)
-        var = *arg1 >> 8;
+    if (barInfo->maxValue < B_HEALTHBAR_PIXELS)
+        var = *currValue >> 8;
     else
-        var = *arg1;
+        var = *currValue;
 
     DummiedOutFunction(barInfo->maxValue, var, arg3);
 
     return ret;
 }
 
-static void sub_8074F88(struct TestingBar *barInfo, s32 *arg1, u16 *arg2)
+static void sub_8074F88(struct TestingBar *barInfo, s32 *currValue, u16 *arg2)
 {
     u8 sp8[6];
     u16 sp10[6];
     u8 i;
 
     CalcBarFilledPixels(barInfo->maxValue, barInfo->oldValue,
-                barInfo->receivedValue, arg1, sp8, 6);
+                barInfo->receivedValue, currValue, sp8, B_HEALTHBAR_PIXELS / 8);
 
     for (i = 0; i < 6; i++)
         sp10[i] = (barInfo->unkC_0 << 12) | (barInfo->unk10 + sp8[i]);
@@ -2547,7 +2554,7 @@ u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale)
 
 u8 GetHPBarLevel(s16 hp, s16 maxhp)
 {
-    s32 result;
+    u8 result;
 
     if (hp == maxhp)
     {
@@ -2555,10 +2562,10 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp)
     }
     else
     {
-        u8 fraction = GetScaledHPFraction(hp, maxhp, 48);
-        if (fraction > 24)
+        u8 fraction = GetScaledHPFraction(hp, maxhp, B_HEALTHBAR_PIXELS);
+        if (fraction > (B_HEALTHBAR_PIXELS * 50 / 100)) // more than 50 % hp
             result = HP_BAR_GREEN;
-        else if (fraction > 9)
+        else if (fraction > (B_HEALTHBAR_PIXELS * 20 / 100)) // more than 20% hp
             result = HP_BAR_YELLOW;
         else if (fraction > 0)
             result = HP_BAR_RED;

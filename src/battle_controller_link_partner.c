@@ -88,7 +88,7 @@ static void LinkPartnerHandleIntroSlide(void);
 static void LinkPartnerHandleIntroTrainerBallThrow(void);
 static void LinkPartnerHandleDrawPartyStatusSummary(void);
 static void LinkPartnerHandleCmd49(void);
-static void LinkPartnerHandleCmd50(void);
+static void LinkPartnerHandleEndBounceEffect(void);
 static void LinkPartnerHandleSpriteInvisibility(void);
 static void LinkPartnerHandleBattleAnimation(void);
 static void LinkPartnerHandleLinkStandbyMsg(void);
@@ -159,7 +159,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkPartnerHandleIntroTrainerBallThrow,
     LinkPartnerHandleDrawPartyStatusSummary,
     LinkPartnerHandleCmd49,
-    LinkPartnerHandleCmd50,
+    LinkPartnerHandleEndBounceEffect,
     LinkPartnerHandleSpriteInvisibility,
     LinkPartnerHandleBattleAnimation,
     LinkPartnerHandleLinkStandbyMsg,
@@ -1638,7 +1638,7 @@ static void LinkPartnerHandleCmd49(void)
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleCmd50(void)
+static void LinkPartnerHandleEndBounceEffect(void)
 {
     LinkPartnerBufferExecCompleted();
 }

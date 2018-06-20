@@ -38,7 +38,7 @@ struct HallofFameMon
 
 struct HallofFameTeam
 {
-    struct HallofFameMon mon[6];
+    struct HallofFameMon mon[PARTY_SIZE];
 };
 
 struct HofGfx

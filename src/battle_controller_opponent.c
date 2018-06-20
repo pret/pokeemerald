@@ -95,7 +95,7 @@ static void OpponentHandleIntroSlide(void);
 static void OpponentHandleIntroTrainerBallThrow(void);
 static void OpponentHandleDrawPartyStatusSummary(void);
 static void OpponentHandleCmd49(void);
-static void OpponentHandleCmd50(void);
+static void OpponentHandleEndBounceEffect(void);
 static void OpponentHandleSpriteInvisibility(void);
 static void OpponentHandleBattleAnimation(void);
 static void OpponentHandleLinkStandbyMsg(void);
@@ -167,7 +167,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OpponentHandleIntroTrainerBallThrow,
     OpponentHandleDrawPartyStatusSummary,
     OpponentHandleCmd49,
-    OpponentHandleCmd50,
+    OpponentHandleEndBounceEffect,
     OpponentHandleSpriteInvisibility,
     OpponentHandleBattleAnimation,
     OpponentHandleLinkStandbyMsg,
@@ -1403,7 +1403,7 @@ static void OpponentHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             PlaySE12WithPanning(SE_POKE_DEAD, PAN_SIDE_OPPONENT);
-            gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8039934;
+            gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_FaintOpponentMon;
             gBattlerControllerFuncs[gActiveBattler] = sub_805FAC4;
         }
     }
@@ -1957,7 +1957,7 @@ static void OpponentHandleCmd49(void)
     OpponentBufferExecCompleted();
 }
 
-static void OpponentHandleCmd50(void)
+static void OpponentHandleEndBounceEffect(void)
 {
     OpponentBufferExecCompleted();
 }

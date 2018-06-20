@@ -82,8 +82,8 @@ enum
 
 struct UnusedControllerStruct
 {
-    u8 field_0 : 7;
-    u8 flag_x80 : 1;
+    u8 field_0:7;
+    u8 flag_x80:1;
 };
 
 struct HpAndStatus
@@ -161,7 +161,7 @@ enum
     CONTROLLER_INTROTRAINERBALLTHROW,
     CONTROLLER_DRAWPARTYSTATUSSUMMARY,
     CONTROLLER_49,
-    CONTROLLER_50,
+    CONTROLLER_ENDBOUNCE,
     CONTROLLER_SPRITEINVISIBILITY,
     CONTROLLER_BATTLEANIMATION,
     CONTROLLER_LINKSTANDBYMSG,
@@ -231,7 +231,7 @@ void BtlController_EmitIntroSlide(u8 bufferId, u8 terrainId);
 void BtlController_EmitIntroTrainerBallThrow(u8 bufferId);
 void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2);
 void BtlController_EmitCmd49(u8 bufferId);
-void BtlController_EmitCmd50(u8 bufferId);
+void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
 void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument);
 void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 arg2);

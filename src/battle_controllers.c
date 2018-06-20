@@ -1463,12 +1463,12 @@ void BtlController_EmitCmd49(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitCmd50(u8 bufferId)
+void BtlController_EmitEndBounceEffect(u8 bufferId)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_50;
-    sBattleBuffersTransferData[1] = CONTROLLER_50;
-    sBattleBuffersTransferData[2] = CONTROLLER_50;
-    sBattleBuffersTransferData[3] = CONTROLLER_50;
+    sBattleBuffersTransferData[0] = CONTROLLER_ENDBOUNCE;
+    sBattleBuffersTransferData[1] = CONTROLLER_ENDBOUNCE;
+    sBattleBuffersTransferData[2] = CONTROLLER_ENDBOUNCE;
+    sBattleBuffersTransferData[3] = CONTROLLER_ENDBOUNCE;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 

@@ -91,7 +91,7 @@ static void WallyHandleIntroSlide(void);
 static void WallyHandleIntroTrainerBallThrow(void);
 static void WallyHandleDrawPartyStatusSummary(void);
 static void WallyHandleCmd49(void);
-static void WallyHandleCmd50(void);
+static void WallyHandleEndBounceEffect(void);
 static void WallyHandleSpriteInvisibility(void);
 static void WallyHandleBattleAnimation(void);
 static void WallyHandleLinkStandbyMsg(void);
@@ -160,7 +160,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     WallyHandleIntroTrainerBallThrow,
     WallyHandleDrawPartyStatusSummary,
     WallyHandleCmd49,
-    WallyHandleCmd50,
+    WallyHandleEndBounceEffect,
     WallyHandleSpriteInvisibility,
     WallyHandleBattleAnimation,
     WallyHandleLinkStandbyMsg,
@@ -1522,7 +1522,7 @@ static void WallyHandleCmd49(void)
     WallyBufferExecCompleted();
 }
 
-static void WallyHandleCmd50(void)
+static void WallyHandleEndBounceEffect(void)
 {
     WallyBufferExecCompleted();
 }

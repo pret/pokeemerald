@@ -33,7 +33,7 @@
 #define B_ACTION_SAFARI_GO_NEAR         7
 #define B_ACTION_SAFARI_RUN             8
 // The exact purposes of these are unclear
-#define B_ACTION_UNKNOWN9               9
+#define B_ACTION_WALLY_THROW             9
 #define B_ACTION_EXEC_SCRIPT            10 // when executing an action
 #define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
 #define B_ACTION_FINISHED               12 // when executing an action
@@ -150,29 +150,29 @@ struct DisableStruct
     /*0x08*/ u8 protectUses;
     /*0x09*/ u8 stockpileCounter;
     /*0x0A*/ u8 substituteHP;
-    /*0x0B*/ u8 disableTimer1 : 4;
-    /*0x0B*/ u8 disableTimer2 : 4;
+    /*0x0B*/ u8 disableTimer1:4;
+    /*0x0B*/ u8 disableTimer2:4;
     /*0x0C*/ u8 encoredMovePos;
     /*0x0D*/ u8 unkD;
-    /*0x0E*/ u8 encoreTimer1 : 4;
-    /*0x0E*/ u8 encoreTimer2 : 4;
-    /*0x0F*/ u8 perishSongTimer1 : 4;
-    /*0x0F*/ u8 perishSongTimer2 : 4;
+    /*0x0E*/ u8 encoreTimer1:4;
+    /*0x0E*/ u8 encoreTimer2:4;
+    /*0x0F*/ u8 perishSongTimer1:4;
+    /*0x0F*/ u8 perishSongTimer2:4;
     /*0x10*/ u8 furyCutterCounter;
-    /*0x11*/ u8 rolloutCounter1 : 4;
-    /*0x11*/ u8 rolloutCounter2 : 4;
-    /*0x12*/ u8 chargeTimer1 : 4;
-    /*0x12*/ u8 chargeTimer2 : 4;
+    /*0x11*/ u8 rolloutCounter1:4;
+    /*0x11*/ u8 rolloutCounter2:4;
+    /*0x12*/ u8 chargeTimer1:4;
+    /*0x12*/ u8 chargeTimer2:4;
     /*0x13*/ u8 tauntTimer1:4;
     /*0x13*/ u8 tauntTimer2:4;
     /*0x14*/ u8 battlerPreventingEscape;
     /*0x15*/ u8 battlerWithSureHit;
     /*0x16*/ u8 isFirstTurn;
     /*0x17*/ u8 unk17;
-    /*0x18*/ u8 truantCounter : 1;
-    /*0x18*/ u8 truantUnknownBit : 1;
-    /*0x18*/ u8 unk18_a_2 : 2;
-    /*0x18*/ u8 unk18_b : 4;
+    /*0x18*/ u8 truantCounter:1;
+    /*0x18*/ u8 truantUnknownBit:1;
+    /*0x18*/ u8 unk18_a_2:2;
+    /*0x18*/ u8 unk18_b:4;
     /*0x19*/ u8 rechargeCounter;
     /*0x1A*/ u8 unk1A[2];
 };
@@ -201,12 +201,12 @@ struct ProtectStruct
     u32 flag2Unknown:1;         // 0x2
     u32 flinchImmobility:1;     // 0x4
     u32 notFirstStrike:1;       // 0x8
-    u32 flag_x10 : 1;           // 0x10
-    u32 flag_x20 : 1;           // 0x20
-    u32 flag_x40 : 1;           // 0x40
-    u32 flag_x80 : 1;           // 0x80
+    u32 flag_x10:1;           // 0x10
+    u32 flag_x20:1;           // 0x20
+    u32 flag_x40:1;           // 0x40
+    u32 flag_x80:1;           // 0x80
     /* field_3 */
-    u32 field3 : 8;
+    u32 field3:8;
 
     /* field_4 */ u32 physicalDmg;
     /* field_8 */ u32 specialDmg;
@@ -217,14 +217,14 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
-    u8 statLowered : 1;             // 0x1
-    u8 lightningRodRedirected : 1;  // 0x2
+    u8 statLowered:1;             // 0x1
+    u8 lightningRodRedirected:1;  // 0x2
     u8 restoredBankSprite: 1;       // 0x4
-    u8 intimidatedPoke : 1;         // 0x8
-    u8 traced : 1;                  // 0x10
-    u8 flag20 : 1;
-    u8 flag40 : 1;
-    u8 focusBanded : 1;
+    u8 intimidatedPoke:1;         // 0x8
+    u8 traced:1;                  // 0x10
+    u8 flag20:1;
+    u8 flag40:1;
+    u8 focusBanded:1;
     u8 field1[3];
     s32 dmg;
     s32 physicalDmg;
@@ -629,11 +629,11 @@ u8 GetBattlerAtPosition(u8 bank);
 
 struct BattleSpriteInfo
 {
-    u16 invisible : 1; // 0x1
-    u16 lowHpSong : 1; // 0x2
-    u16 behindSubstitute : 1; // 0x4
-    u16 flag_x8 : 1; // 0x8
-    u16 hpNumbersNoBars : 1; // 0x10
+    u16 invisible:1; // 0x1
+    u16 lowHpSong:1; // 0x2
+    u16 behindSubstitute:1; // 0x4
+    u16 flag_x8:1; // 0x8
+    u16 hpNumbersNoBars:1; // 0x10
     u16 transformSpecies;
 };
 
@@ -647,12 +647,12 @@ struct BattleAnimationInfo
     u8 field_6;
     u8 field_7;
     u8 ballThrowCaseId;
-    u8 field_9_x1 : 1;
-    u8 field_9_x2 : 1;
-    u8 field_9_x1C : 3;
-    u8 field_9_x20 : 1;
-    u8 field_9_x40 : 1;
-    u8 field_9_x80 : 1;
+    u8 field_9_x1:1;
+    u8 field_9_x2:1;
+    u8 field_9_x1C:3;
+    u8 field_9_x20:1;
+    u8 field_9_x40:1;
+    u8 field_9_x80:1;
     u8 field_A;
     u8 field_B;
     u8 field_C;
@@ -663,21 +663,21 @@ struct BattleAnimationInfo
 
 struct BattleHealthboxInfo
 {
-    u8 flag_x1 : 1;
-    u8 flag_x2 : 1;
-    u8 flag_x4 : 1;
-    u8 ballAnimActive : 1; // 0x8
-    u8 statusAnimActive : 1; // x10
-    u8 animFromTableActive : 1; // x20
-    u8 specialAnimActive : 1; //x40
-    u8 flag_x80 : 1;
-    u8 field_1_x1 : 1;
-    u8 field_1_x1E : 4;
-    u8 field_1_x20 : 1;
-    u8 field_1_x40 : 1;
-    u8 field_1_x80 : 1;
-    u8 field_2;
-    u8 field_3;
+    u8 flag_x1:1;
+    u8 healthboxIsBouncing:1;
+    u8 battlerIsBouncing:1;
+    u8 ballAnimActive:1; // 0x8
+    u8 statusAnimActive:1; // x10
+    u8 animFromTableActive:1; // x20
+    u8 specialAnimActive:1; //x40
+    u8 flag_x80:1;
+    u8 field_1_x1:1;
+    u8 field_1_x1E:4;
+    u8 field_1_x20:1;
+    u8 field_1_x40:1;
+    u8 field_1_x80:1;
+    u8 healthboxBounceSpriteId;
+    u8 battlerBounceSpriteId;
     u8 animationState;
     u8 field_5;
     u8 field_6;

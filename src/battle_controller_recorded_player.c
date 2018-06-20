@@ -90,7 +90,7 @@ static void RecordedPlayerHandleIntroSlide(void);
 static void RecordedPlayerHandleIntroTrainerBallThrow(void);
 static void RecordedPlayerHandleDrawPartyStatusSummary(void);
 static void RecordedPlayerHandleCmd49(void);
-static void RecordedPlayerHandleCmd50(void);
+static void RecordedPlayerHandleEndBounceEffect(void);
 static void RecordedPlayerHandleSpriteInvisibility(void);
 static void RecordedPlayerHandleBattleAnimation(void);
 static void RecordedPlayerHandleLinkStandbyMsg(void);
@@ -161,7 +161,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     RecordedPlayerHandleIntroTrainerBallThrow,
     RecordedPlayerHandleDrawPartyStatusSummary,
     RecordedPlayerHandleCmd49,
-    RecordedPlayerHandleCmd50,
+    RecordedPlayerHandleEndBounceEffect,
     RecordedPlayerHandleSpriteInvisibility,
     RecordedPlayerHandleBattleAnimation,
     RecordedPlayerHandleLinkStandbyMsg,
@@ -1767,7 +1767,7 @@ static void RecordedPlayerHandleCmd49(void)
     RecordedPlayerBufferExecCompleted();
 }
 
-static void RecordedPlayerHandleCmd50(void)
+static void RecordedPlayerHandleEndBounceEffect(void)
 {
     RecordedPlayerBufferExecCompleted();
 }

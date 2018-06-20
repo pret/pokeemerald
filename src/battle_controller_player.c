@@ -101,7 +101,7 @@ static void PlayerHandleIntroSlide(void);
 static void PlayerHandleIntroTrainerBallThrow(void);
 static void PlayerHandleDrawPartyStatusSummary(void);
 static void PlayerHandleCmd49(void);
-static void PlayerHandleCmd50(void);
+static void PlayerHandleEndBounceEffect(void);
 static void PlayerHandleSpriteInvisibility(void);
 static void PlayerHandleBattleAnimation(void);
 static void PlayerHandleLinkStandbyMsg(void);
@@ -188,7 +188,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerHandleIntroTrainerBallThrow,
     PlayerHandleDrawPartyStatusSummary,
     PlayerHandleCmd49,
-    PlayerHandleCmd50,
+    PlayerHandleEndBounceEffect,
     PlayerHandleSpriteInvisibility,
     PlayerHandleBattleAnimation,
     PlayerHandleLinkStandbyMsg,
@@ -250,8 +250,8 @@ static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
-    dp11b_obj_instanciate(gActiveBattler, 1, 7, 1);
-    dp11b_obj_instanciate(gActiveBattler, 0, 7, 1);
+    DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
+    DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
 
     if (gMain.newAndRepeatedKeys & DPAD_ANY && gSaveBlock2Ptr->optionsButtonMode == 2)
         gPlayerDpadHoldFrames++;
@@ -347,8 +347,8 @@ static void HandleInputChooseAction(void)
 
 static void sub_80577F0(void) // unused
 {
-    dp11b_obj_free(gActiveBattler, 1);
-    dp11b_obj_free(gActiveBattler, 0);
+    EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
+    EndBounceEffect(gActiveBattler, BOUNCE_MON);
     gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseTarget;
 }
 
@@ -358,7 +358,7 @@ static void HandleInputChooseTarget(void)
     u8 identities[4];
     memcpy(identities, sTargetIdentities, ARRAY_COUNT(sTargetIdentities));
 
-    dp11b_obj_instanciate(gMultiUsePlayerCursor, 1, 0xF, 1);
+    DoBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX, 15, 1);
 
     // what a weird loop
     i = 0;
@@ -367,7 +367,7 @@ static void HandleInputChooseTarget(void)
         do
         {
             if (i != gMultiUsePlayerCursor)
-                dp11b_obj_free(i, 1);
+                EndBounceEffect(i, BOUNCE_HEALTHBOX);
             i++;
         } while (i < gBattlersCount);
     }
@@ -382,7 +382,7 @@ static void HandleInputChooseTarget(void)
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039B2C;
         BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
-        dp11b_obj_free(gMultiUsePlayerCursor, 1);
+        EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
         PlayerBufferExecCompleted();
     }
     else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
@@ -390,9 +390,9 @@ static void HandleInputChooseTarget(void)
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039B2C;
         gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseMove;
-        dp11b_obj_instanciate(gActiveBattler, 1, 7, 1);
-        dp11b_obj_instanciate(gActiveBattler, 0, 7, 1);
-        dp11b_obj_free(gMultiUsePlayerCursor, 1);
+        DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
+        DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
+        EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
     }
     else if (gMain.newKeys & (DPAD_LEFT | DPAD_UP))
     {
@@ -3030,10 +3030,10 @@ static void PlayerHandleCmd49(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleCmd50(void)
+static void PlayerHandleEndBounceEffect(void)
 {
-    dp11b_obj_free(gActiveBattler, 1);
-    dp11b_obj_free(gActiveBattler, 0);
+    EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
+    EndBounceEffect(gActiveBattler, BOUNCE_MON);
     PlayerBufferExecCompleted();
 }
 
@@ -3072,8 +3072,8 @@ static void PlayerHandleLinkStandbyMsg(void)
         PrintLinkStandbyMsg();
         // fall through
     case 1:
-        dp11b_obj_free(gActiveBattler, 1);
-        dp11b_obj_free(gActiveBattler, 0);
+        EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
+        EndBounceEffect(gActiveBattler, BOUNCE_MON);
         break;
     case 2:
         PrintLinkStandbyMsg();
