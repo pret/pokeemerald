@@ -567,8 +567,8 @@ gMapGroup29: @ 848652C
 	.4byte Route110_TrickHousePuzzle6
 	.4byte Route110_TrickHousePuzzle7
 	.4byte Route110_TrickHousePuzzle8
-	.4byte Route110_SeasideCyclingRoadEntrance1
-	.4byte Route110_SeasideCyclingRoadEntrance2
+	.4byte Route110_SeasideCyclingRoadNorthEntrance
+	.4byte Route110_SeasideCyclingRoadSouthEntrance
 
 gMapGroup30: @ 8486560
 	.4byte Route113_GlassWorkshop
