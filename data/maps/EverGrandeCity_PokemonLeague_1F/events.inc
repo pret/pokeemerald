@@ -7,8 +7,8 @@ EverGrandeCity_PokemonLeague_1F_EventObjects: @ 8533860
 EverGrandeCity_PokemonLeague_1F_MapWarps: @ 85338C0
 	warp_def 9, 11, 3, 0, MAP_EVER_GRANDE_CITY
 	warp_def 10, 11, 3, 0, MAP_EVER_GRANDE_CITY
-	warp_def 9, 1, 3, 0, MAP_EVER_GRANDE_CITY_CORRIDOR5
-	warp_def 10, 1, 3, 0, MAP_EVER_GRANDE_CITY_CORRIDOR5
+	warp_def 9, 1, 3, 0, MAP_EVER_GRANDE_CITY_HALL5
+	warp_def 10, 1, 3, 0, MAP_EVER_GRANDE_CITY_HALL5
 	warp_def 1, 7, 4, 0, MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F
 
 EverGrandeCity_PokemonLeague_1F_MapEvents:: @ 85338E8
