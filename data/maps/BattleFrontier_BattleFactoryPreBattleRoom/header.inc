@@ -1,5 +1,5 @@
 BattleFrontier_BattleFactoryPreBattleRoom: @ 84854BC
-	.4byte BattleFrontier_BattleFactoryPreBattleRoom_MapAttributes
+	.4byte BattleFrontier_BattleFactoryPreBattleRoom_Layout
 	.4byte BattleFrontier_BattleFactoryPreBattleRoom_MapEvents
 	.4byte BattleFrontier_BattleFactoryPreBattleRoom_MapScripts
 	.4byte 0x0

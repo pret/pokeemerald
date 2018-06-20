@@ -1,5 +1,5 @@
 PacifidlogTown_House1: @ 8482F8C
-	.4byte PacifidlogTown_House1_MapAttributes
+	.4byte PacifidlogTown_House1_Layout
 	.4byte PacifidlogTown_House1_MapEvents
 	.4byte PacifidlogTown_House1_MapScripts
 	.4byte 0x0

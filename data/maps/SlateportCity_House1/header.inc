@@ -1,5 +1,5 @@
 SlateportCity_House1: @ 8483168
-	.4byte SlateportCity_House1_MapAttributes
+	.4byte HouseWithBed_Layout
 	.4byte SlateportCity_House1_MapEvents
 	.4byte SlateportCity_House1_MapScripts
 	.4byte 0x0

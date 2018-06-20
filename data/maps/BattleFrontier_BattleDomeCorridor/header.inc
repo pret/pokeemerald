@@ -1,5 +1,5 @@
 BattleFrontier_BattleDomeCorridor: @ 8485350
-	.4byte BattleFrontier_BattleDomeCorridor_MapAttributes
+	.4byte BattleFrontier_BattleDomeCorridor_Layout
 	.4byte BattleFrontier_BattleDomeCorridor_MapEvents
 	.4byte BattleFrontier_BattleDomeCorridor_MapScripts
 	.4byte 0x0

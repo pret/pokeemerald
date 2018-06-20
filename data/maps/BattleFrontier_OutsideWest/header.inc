@@ -1,5 +1,5 @@
 BattleFrontier_OutsideWest: @ 84851AC
-	.4byte BattleFrontier_OutsideWest_MapAttributes
+	.4byte BattleFrontier_OutsideWest_Layout
 	.4byte BattleFrontier_OutsideWest_MapEvents
 	.4byte BattleFrontier_OutsideWest_MapScripts
 	.4byte BattleFrontier_OutsideWest_MapConnections

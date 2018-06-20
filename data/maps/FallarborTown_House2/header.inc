@@ -1,5 +1,5 @@
 FallarborTown_House2: @ 8482E3C
-	.4byte FallarborTown_House2_MapAttributes
+	.4byte House2_Layout
 	.4byte FallarborTown_House2_MapEvents
 	.4byte FallarborTown_House2_MapScripts
 	.4byte 0x0

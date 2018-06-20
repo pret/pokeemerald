@@ -1,5 +1,5 @@
 MauvilleCity: @ 84824F0
-	.4byte MauvilleCity_MapAttributes
+	.4byte MauvilleCity_Layout
 	.4byte MauvilleCity_MapEvents
 	.4byte MauvilleCity_MapScripts
 	.4byte MauvilleCity_MapConnections

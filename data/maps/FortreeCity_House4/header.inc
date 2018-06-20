@@ -1,5 +1,5 @@
 FortreeCity_House4: @ 84835E4
-	.4byte FortreeCity_House4_MapAttributes
+	.4byte FortreeCity_House2_Layout
 	.4byte FortreeCity_House4_MapEvents
 	.4byte FortreeCity_House4_MapScripts
 	.4byte 0x0

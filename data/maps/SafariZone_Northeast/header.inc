@@ -1,5 +1,5 @@
 SafariZone_Northeast: @ 848528C
-	.4byte SafariZone_Northeast_MapAttributes
+	.4byte SafariZone_Northeast_Layout
 	.4byte SafariZone_Northeast_MapEvents
 	.4byte SafariZone_Northeast_MapScripts
 	.4byte SafariZone_Northeast_MapConnections

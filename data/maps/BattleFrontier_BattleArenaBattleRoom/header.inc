@@ -1,5 +1,5 @@
 BattleFrontier_BattleArenaBattleRoom: @ 8485484
-	.4byte BattleFrontier_BattleArenaBattleRoom_MapAttributes
+	.4byte BattleFrontier_BattleArenaBattleRoom_Layout
 	.4byte BattleFrontier_BattleArenaBattleRoom_MapEvents
 	.4byte BattleFrontier_BattleArenaBattleRoom_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 LilycoveCity_Harbor: @ 8483750
-	.4byte LilycoveCity_Harbor_MapAttributes
+	.4byte Harbor_Layout
 	.4byte LilycoveCity_Harbor_MapEvents
 	.4byte LilycoveCity_Harbor_MapScripts
 	.4byte 0x0

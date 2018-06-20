@@ -1,5 +1,5 @@
 Route115: @ 8482800
-	.4byte Route115_MapAttributes
+	.4byte Route115_Layout
 	.4byte Route115_MapEvents
 	.4byte Route115_MapScripts
 	.4byte Route115_MapConnections

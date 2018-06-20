@@ -1,5 +1,5 @@
 ArtisanCave_B1F: @ 8484994
-	.4byte ArtisanCave_B1F_MapAttributes
+	.4byte ArtisanCave_B1F_Layout
 	.4byte ArtisanCave_B1F_MapEvents
 	.4byte ArtisanCave_B1F_MapScripts
 	.4byte 0x0

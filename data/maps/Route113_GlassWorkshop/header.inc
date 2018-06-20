@@ -1,5 +1,5 @@
 Route113_GlassWorkshop: @ 8485CB8
-	.4byte Route113_GlassWorkshop_MapAttributes
+	.4byte House4_Layout
 	.4byte Route113_GlassWorkshop_MapEvents
 	.4byte Route113_GlassWorkshop_MapScripts
 	.4byte 0x0

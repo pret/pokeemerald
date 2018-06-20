@@ -1,5 +1,5 @@
 Route114_FossilManiacsTunnel: @ 8483E34
-	.4byte Route114_FossilManiacsTunnel_MapAttributes
+	.4byte Route114_FossilManiacsTunnel_Layout
 	.4byte Route114_FossilManiacsTunnel_MapEvents
 	.4byte Route114_FossilManiacsTunnel_MapScripts
 	.4byte 0x0

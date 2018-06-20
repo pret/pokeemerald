@@ -1,5 +1,5 @@
 CaveOfOrigin_UnusedRubySapphireMap2: @ 8484320
-	.4byte CaveOfOrigin_UnusedRubySapphireMap2_MapAttributes
+	.4byte CaveOfOrigin_UnusedRubySapphireMap2_Layout
 	.4byte CaveOfOrigin_UnusedRubySapphireMap2_MapEvents
 	.4byte CaveOfOrigin_UnusedRubySapphireMap2_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 FallarborTown_Mart: @ 8482D78
-	.4byte FallarborTown_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte FallarborTown_Mart_MapEvents
 	.4byte FallarborTown_Mart_MapScripts
 	.4byte 0x0

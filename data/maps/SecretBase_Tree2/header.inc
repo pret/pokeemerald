@@ -1,5 +1,5 @@
 SecretBase_Tree2: @ 8484BA8
-	.4byte SecretBase_Tree2_MapAttributes
+	.4byte SecretBase_Tree2_Layout
 	.4byte SecretBase_Tree2_MapEvents
 	.4byte SecretBase_Tree2_MapScripts
 	.4byte 0x0

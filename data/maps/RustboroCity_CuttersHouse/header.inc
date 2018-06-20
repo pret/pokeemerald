@@ -1,5 +1,5 @@
 RustboroCity_CuttersHouse: @ 8483478
-	.4byte RustboroCity_CuttersHouse_MapAttributes
+	.4byte RustboroCity_CuttersHouse_Layout
 	.4byte RustboroCity_CuttersHouse_MapEvents
 	.4byte RustboroCity_CuttersHouse_MapScripts
 	.4byte 0x0

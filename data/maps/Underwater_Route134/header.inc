@@ -1,5 +1,5 @@
 Underwater_Route134: @ 848464C
-	.4byte Underwater_Route134_MapAttributes
+	.4byte Underwater_Route134_Layout
 	.4byte Underwater_Route134_MapEvents
 	.4byte Underwater_Route134_MapScripts
 	.4byte 0x0

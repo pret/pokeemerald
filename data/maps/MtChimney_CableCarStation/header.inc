@@ -1,5 +1,5 @@
 MtChimney_CableCarStation: @ 8483DFC
-	.4byte MtChimney_CableCarStation_MapAttributes
+	.4byte CableCarStation_Layout
 	.4byte MtChimney_CableCarStation_MapEvents
 	.4byte MtChimney_CableCarStation_MapScripts
 	.4byte 0x0

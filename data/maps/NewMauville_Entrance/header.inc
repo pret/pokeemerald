@@ -1,5 +1,5 @@
 NewMauville_Entrance: @ 8484470
-	.4byte NewMauville_Entrance_MapAttributes
+	.4byte NewMauville_Entrance_Layout
 	.4byte NewMauville_Entrance_MapEvents
 	.4byte NewMauville_Entrance_MapScripts
 	.4byte 0x0

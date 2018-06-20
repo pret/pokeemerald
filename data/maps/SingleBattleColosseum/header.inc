@@ -1,5 +1,5 @@
 SingleBattleColosseum: @ 8484D30
-	.4byte SingleBattleColosseum_MapAttributes
+	.4byte SingleBattleColosseum_Layout
 	.4byte SingleBattleColosseum_MapEvents
 	.4byte SingleBattleColosseum_MapScripts
 	.4byte 0x0

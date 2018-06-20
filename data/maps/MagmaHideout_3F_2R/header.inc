@@ -1,5 +1,5 @@
 MagmaHideout_3F_2R: @ 8484898
-	.4byte MagmaHideout_3F_2R_MapAttributes
+	.4byte MagmaHideout_3F_2R_Layout
 	.4byte MagmaHideout_3F_2R_MapEvents
 	.4byte MagmaHideout_3F_2R_MapScripts
 	.4byte 0x0

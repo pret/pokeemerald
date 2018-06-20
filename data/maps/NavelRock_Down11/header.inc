@@ -1,5 +1,5 @@
 NavelRock_Down11: @ 8485AA4
-	.4byte NavelRock_Down11_MapAttributes
+	.4byte NavelRock_LadderRoom1_Layout
 	.4byte NavelRock_Down11_MapEvents
 	.4byte NavelRock_Down11_MapScripts
 	.4byte 0x0

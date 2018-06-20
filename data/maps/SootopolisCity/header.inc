@@ -1,5 +1,5 @@
 SootopolisCity: @ 848257C
-	.4byte SootopolisCity_MapAttributes
+	.4byte SootopolisCity_Layout
 	.4byte SootopolisCity_MapEvents
 	.4byte SootopolisCity_MapScripts
 	.4byte 0x0

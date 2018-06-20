@@ -1,5 +1,5 @@
 FortreeCity: @ 8482528
-	.4byte FortreeCity_MapAttributes
+	.4byte FortreeCity_Layout
 	.4byte FortreeCity_MapEvents
 	.4byte FortreeCity_MapScripts
 	.4byte FortreeCity_MapConnections

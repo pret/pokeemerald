@@ -1,5 +1,5 @@
 SlateportCity_PokemonFanClub: @ 8483184
-	.4byte SlateportCity_PokemonFanClub_MapAttributes
+	.4byte SlateportCity_PokemonFanClub_Layout
 	.4byte SlateportCity_PokemonFanClub_MapEvents
 	.4byte SlateportCity_PokemonFanClub_MapScripts
 	.4byte 0x0

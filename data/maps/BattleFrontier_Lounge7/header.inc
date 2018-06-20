@@ -1,5 +1,5 @@
 BattleFrontier_Lounge7: @ 8485698
-	.4byte BattleFrontier_Lounge7_MapAttributes
+	.4byte BattleFrontier_Lounge2_Layout
 	.4byte BattleFrontier_Lounge7_MapEvents
 	.4byte BattleFrontier_Lounge7_MapScripts
 	.4byte 0x0

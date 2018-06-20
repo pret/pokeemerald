@@ -1,5 +1,5 @@
 MossdeepCity_GameCorner_1F: @ 84839F0
-	.4byte MossdeepCity_GameCorner_1F_MapAttributes
+	.4byte MossdeepCity_GameCorner_1F_Layout
 	.4byte MossdeepCity_GameCorner_1F_MapEvents
 	.4byte MossdeepCity_GameCorner_1F_MapScripts
 	.4byte 0x0

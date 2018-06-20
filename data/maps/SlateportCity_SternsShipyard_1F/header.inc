@@ -1,5 +1,5 @@
 SlateportCity_SternsShipyard_1F: @ 84830DC
-	.4byte SlateportCity_SternsShipyard_1F_MapAttributes
+	.4byte SlateportCity_SternsShipyard_1F_Layout
 	.4byte SlateportCity_SternsShipyard_1F_MapEvents
 	.4byte SlateportCity_SternsShipyard_1F_MapScripts
 	.4byte 0x0

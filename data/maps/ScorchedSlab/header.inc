@@ -1,5 +1,5 @@
 ScorchedSlab: @ 84846BC
-	.4byte ScorchedSlab_MapAttributes
+	.4byte ScorchedSlab_Layout
 	.4byte ScorchedSlab_MapEvents
 	.4byte ScorchedSlab_MapScripts
 	.4byte 0x0

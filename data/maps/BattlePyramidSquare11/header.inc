@@ -1,5 +1,5 @@
 BattlePyramidSquare11: @ 8485078
-	.4byte BattlePyramidSquare11_MapAttributes
+	.4byte BattlePyramidSquare11_Layout
 	.4byte BattlePyramidSquare11_MapEvents
 	.4byte BattlePyramidSquare11_MapScripts
 	.4byte 0x0

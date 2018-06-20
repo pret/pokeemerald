@@ -1,5 +1,5 @@
 Route124: @ 84828FC
-	.4byte Route124_MapAttributes
+	.4byte Route124_Layout
 	.4byte Route124_MapEvents
 	.4byte Route124_MapScripts
 	.4byte Route124_MapConnections

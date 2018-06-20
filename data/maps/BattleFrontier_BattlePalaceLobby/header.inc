@@ -1,5 +1,5 @@
 BattleFrontier_BattlePalaceLobby: @ 84853A4
-	.4byte BattleFrontier_BattlePalaceLobby_MapAttributes
+	.4byte BattleFrontier_BattlePalaceLobby_Layout
 	.4byte BattleFrontier_BattlePalaceLobby_MapEvents
 	.4byte BattleFrontier_BattlePalaceLobby_MapScripts
 	.4byte 0x0

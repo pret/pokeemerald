@@ -1,5 +1,5 @@
 PetalburgCity_House2: @ 848306C
-	.4byte PetalburgCity_House2_MapAttributes
+	.4byte HouseWithBed_Layout
 	.4byte PetalburgCity_House2_MapEvents
 	.4byte PetalburgCity_House2_MapScripts
 	.4byte 0x0

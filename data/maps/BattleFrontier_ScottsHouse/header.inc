@@ -1,5 +1,5 @@
 BattleFrontier_ScottsHouse: @ 8485644
-	.4byte BattleFrontier_ScottsHouse_MapAttributes
+	.4byte BattleFrontier_ScottsHouse_Layout
 	.4byte BattleFrontier_ScottsHouse_MapEvents
 	.4byte BattleFrontier_ScottsHouse_MapScripts
 	.4byte 0x0

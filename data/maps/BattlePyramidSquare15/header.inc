@@ -1,5 +1,5 @@
 BattlePyramidSquare15: @ 84850E8
-	.4byte BattlePyramidSquare15_MapAttributes
+	.4byte BattlePyramidSquare15_Layout
 	.4byte BattlePyramidSquare15_MapEvents
 	.4byte BattlePyramidSquare15_MapScripts
 	.4byte 0x0

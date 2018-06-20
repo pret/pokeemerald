@@ -1,5 +1,5 @@
 OldaleTown_House2: @ 8482B9C
-	.4byte OldaleTown_House2_MapAttributes
+	.4byte House2_Layout
 	.4byte OldaleTown_House2_MapEvents
 	.4byte OldaleTown_House2_MapScripts
 	.4byte 0x0

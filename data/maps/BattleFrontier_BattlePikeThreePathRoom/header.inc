@@ -1,5 +1,5 @@
 BattleFrontier_BattlePikeThreePathRoom: @ 848552C
-	.4byte BattleFrontier_BattlePikeThreePathRoom_MapAttributes
+	.4byte BattleFrontier_BattlePikeThreePathRoom_Layout
 	.4byte BattleFrontier_BattlePikeThreePathRoom_MapEvents
 	.4byte BattleFrontier_BattlePikeThreePathRoom_MapScripts
 	.4byte 0x0

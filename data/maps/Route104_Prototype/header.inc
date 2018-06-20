@@ -1,5 +1,5 @@
 Route104_Prototype: @ 8485AF8
-	.4byte Route104_Prototype_MapAttributes
+	.4byte Route104_Prototype_Layout
 	.4byte Route104_Prototype_MapEvents
 	.4byte Route104_Prototype_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 AbandonedShip_Corridors_1F: @ 84844C4
-	.4byte AbandonedShip_Corridors_1F_MapAttributes
+	.4byte AbandonedShip_Corridors_1F_Layout
 	.4byte AbandonedShip_Corridors_1F_MapEvents
 	.4byte AbandonedShip_Corridors_1F_MapScripts
 	.4byte 0x0

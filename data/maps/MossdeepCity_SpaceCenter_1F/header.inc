@@ -1,5 +1,5 @@
 MossdeepCity_SpaceCenter_1F: @ 84839B8
-	.4byte MossdeepCity_SpaceCenter_1F_MapAttributes
+	.4byte MossdeepCity_SpaceCenter_1F_Layout
 	.4byte MossdeepCity_SpaceCenter_1F_MapEvents
 	.4byte MossdeepCity_SpaceCenter_1F_MapScripts
 	.4byte 0x0

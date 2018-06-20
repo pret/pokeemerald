@@ -1,5 +1,5 @@
 VerdanturfTown_BattleTentBattleRoom: @ 8482E90
-	.4byte VerdanturfTown_BattleTentBattleRoom_MapAttributes
+	.4byte VerdanturfTown_BattleTentBattleRoom_Layout
 	.4byte VerdanturfTown_BattleTentBattleRoom_MapEvents
 	.4byte VerdanturfTown_BattleTentBattleRoom_MapScripts
 	.4byte 0x0

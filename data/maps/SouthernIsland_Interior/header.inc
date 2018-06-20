@@ -1,5 +1,5 @@
 SouthernIsland_Interior: @ 8485254
-	.4byte SouthernIsland_Interior_MapAttributes
+	.4byte SouthernIsland_Interior_Layout
 	.4byte SouthernIsland_Interior_MapEvents
 	.4byte SouthernIsland_Interior_MapScripts
 	.4byte 0x0

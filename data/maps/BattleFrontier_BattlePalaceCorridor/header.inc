@@ -1,5 +1,5 @@
 BattleFrontier_BattlePalaceCorridor: @ 84853C0
-	.4byte BattleFrontier_BattlePalaceCorridor_MapAttributes
+	.4byte BattleFrontier_BattlePalaceCorridor_Layout
 	.4byte BattleFrontier_BattlePalaceCorridor_MapEvents
 	.4byte BattleFrontier_BattlePalaceCorridor_MapScripts
 	.4byte 0x0

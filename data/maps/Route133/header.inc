@@ -1,5 +1,5 @@
 Route133: @ 84829F8
-	.4byte Route133_MapAttributes
+	.4byte Route133_Layout
 	.4byte Route133_MapEvents
 	.4byte Route133_MapScripts
 	.4byte Route133_MapConnections

@@ -1,5 +1,5 @@
 GraniteCave_B1F: @ 8483FA0
-	.4byte GraniteCave_B1F_MapAttributes
+	.4byte GraniteCave_B1F_Layout
 	.4byte GraniteCave_B1F_MapEvents
 	.4byte GraniteCave_B1F_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 SlateportCity: @ 84824D4
-	.4byte SlateportCity_MapAttributes
+	.4byte SlateportCity_Layout
 	.4byte SlateportCity_MapEvents
 	.4byte SlateportCity_MapScripts
 	.4byte SlateportCity_MapConnections
