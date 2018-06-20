@@ -1,5 +1,5 @@
 MtPyre_Summit: @ 8484128
-	.4byte MtPyre_Summit_MapAttributes
+	.4byte MtPyre_Summit_Layout
 	.4byte MtPyre_Summit_MapEvents
 	.4byte MtPyre_Summit_MapScripts
 	.4byte 0x0

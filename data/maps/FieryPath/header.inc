@@ -1,5 +1,5 @@
 FieryPath: @ 8484048
-	.4byte FieryPath_MapAttributes
+	.4byte FieryPath_Layout
 	.4byte FieryPath_MapEvents
 	.4byte FieryPath_MapScripts
 	.4byte 0x0

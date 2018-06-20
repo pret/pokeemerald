@@ -1,5 +1,5 @@
 BattleFrontier_BattleTowerElevator: @ 84851E4
-	.4byte BattleFrontier_BattleTowerElevator_MapAttributes
+	.4byte BattleElevator_Layout
 	.4byte BattleFrontier_BattleTowerElevator_MapEvents
 	.4byte BattleFrontier_BattleTowerElevator_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 Route110_TrickHouseEntrance: @ 8485B4C
-	.4byte Route110_TrickHouseEntrance_MapAttributes
+	.4byte Route110_TrickHouseEntrance_Layout
 	.4byte Route110_TrickHouseEntrance_MapEvents
 	.4byte Route110_TrickHouseEntrance_MapScripts
 	.4byte 0x0

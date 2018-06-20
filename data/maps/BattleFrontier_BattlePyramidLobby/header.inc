@@ -1,5 +1,5 @@
 BattleFrontier_BattlePyramidLobby: @ 84853F8
-	.4byte BattleFrontier_BattlePyramidLobby_MapAttributes
+	.4byte BattleFrontier_BattlePyramidLobby_Layout
 	.4byte BattleFrontier_BattlePyramidLobby_MapEvents
 	.4byte BattleFrontier_BattlePyramidLobby_MapScripts
 	.4byte 0x0

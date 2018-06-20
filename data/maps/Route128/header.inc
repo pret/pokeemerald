@@ -1,5 +1,5 @@
 Route128: @ 848296C
-	.4byte Route128_MapAttributes
+	.4byte Route128_Layout
 	.4byte Route128_MapEvents
 	.4byte Route128_MapScripts
 	.4byte Route128_MapConnections

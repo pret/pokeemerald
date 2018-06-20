@@ -1,5 +1,5 @@
 Route103: @ 84826B0
-	.4byte Route103_MapAttributes
+	.4byte Route103_Layout
 	.4byte Route103_MapEvents
 	.4byte Route103_MapScripts
 	.4byte Route103_MapConnections

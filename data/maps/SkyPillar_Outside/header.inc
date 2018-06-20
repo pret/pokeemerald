@@ -1,5 +1,5 @@
 SkyPillar_Outside: @ 8484748
-	.4byte SkyPillar_Outside_MapAttributes
+	.4byte SkyPillar_Outside_Layout
 	.4byte SkyPillar_Outside_MapEvents
 	.4byte SkyPillar_Outside_MapScripts
 	.4byte 0x0

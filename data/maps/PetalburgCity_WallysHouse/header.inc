@@ -1,5 +1,5 @@
 PetalburgCity_WallysHouse: @ 8483018
-	.4byte PetalburgCity_WallysHouse_MapAttributes
+	.4byte House2_Layout
 	.4byte PetalburgCity_WallysHouse_MapEvents
 	.4byte PetalburgCity_WallysHouse_MapScripts
 	.4byte 0x0

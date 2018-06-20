@@ -1,5 +1,5 @@
 MtPyre_3F: @ 848409C
-	.4byte MtPyre_3F_MapAttributes
+	.4byte MtPyre_3F_Layout
 	.4byte MtPyre_3F_MapEvents
 	.4byte MtPyre_3F_MapScripts
 	.4byte 0x0

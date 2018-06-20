@@ -1,5 +1,5 @@
 SootopolisCity_LotadAndSeedotHouse: @ 8483B78
-	.4byte SootopolisCity_LotadAndSeedotHouse_MapAttributes
+	.4byte SootopolisCity_LotadAndSeedotHouse_Layout
 	.4byte SootopolisCity_LotadAndSeedotHouse_MapEvents
 	.4byte SootopolisCity_LotadAndSeedotHouse_MapScripts
 	.4byte 0x0

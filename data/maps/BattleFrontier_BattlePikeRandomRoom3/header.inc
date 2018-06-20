@@ -1,5 +1,5 @@
 BattleFrontier_BattlePikeRandomRoom3: @ 8485580
-	.4byte BattleFrontier_BattlePikeRandomRoom3_MapAttributes
+	.4byte BattleFrontier_BattlePikeRandomRoom3_Layout
 	.4byte BattleFrontier_BattlePikeRandomRoom3_MapEvents
 	.4byte BattleFrontier_BattlePikeRandomRoom3_MapScripts
 	.4byte 0x0

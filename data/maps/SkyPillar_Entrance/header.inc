@@ -1,5 +1,5 @@
 SkyPillar_Entrance: @ 848472C
-	.4byte SkyPillar_Entrance_MapAttributes
+	.4byte SkyPillar_Entrance_Layout
 	.4byte SkyPillar_Entrance_MapEvents
 	.4byte SkyPillar_Entrance_MapScripts
 	.4byte 0x0

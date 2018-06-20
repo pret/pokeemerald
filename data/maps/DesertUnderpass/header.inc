@@ -1,5 +1,5 @@
 DesertUnderpass: @ 8484978
-	.4byte DesertUnderpass_MapAttributes
+	.4byte DesertUnderpass_Layout
 	.4byte DesertUnderpass_MapEvents
 	.4byte DesertUnderpass_MapScripts
 	.4byte 0x0

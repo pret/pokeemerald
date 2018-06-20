@@ -1,5 +1,5 @@
 MtPyre_5F: @ 84840D4
-	.4byte MtPyre_5F_MapAttributes
+	.4byte MtPyre_5F_Layout
 	.4byte MtPyre_5F_MapEvents
 	.4byte MtPyre_5F_MapScripts
 	.4byte 0x0

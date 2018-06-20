@@ -1,5 +1,5 @@
 BattlePyramidSquare02: @ 8484F7C
-	.4byte BattlePyramidSquare02_MapAttributes
+	.4byte BattlePyramidSquare02_Layout
 	.4byte BattlePyramidSquare02_MapEvents
 	.4byte BattlePyramidSquare02_MapScripts
 	.4byte 0x0

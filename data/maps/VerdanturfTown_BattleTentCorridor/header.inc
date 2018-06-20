@@ -1,5 +1,5 @@
 VerdanturfTown_BattleTentCorridor: @ 8482E74
-	.4byte VerdanturfTown_BattleTentCorridor_MapAttributes
+	.4byte BattleTentCorridor_Layout
 	.4byte VerdanturfTown_BattleTentCorridor_MapEvents
 	.4byte VerdanturfTown_BattleTentCorridor_MapScripts
 	.4byte 0x0

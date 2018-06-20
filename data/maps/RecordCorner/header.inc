@@ -1,5 +1,5 @@
 RecordCorner: @ 8484D68
-	.4byte RecordCorner_MapAttributes
+	.4byte RecordCorner_Layout
 	.4byte RecordCorner_MapEvents
 	.4byte RecordCorner_MapScripts
 	.4byte 0x0

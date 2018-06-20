@@ -1,5 +1,5 @@
 ShoalCave_LowTideIceRoom: @ 84847D4
-	.4byte ShoalCave_LowTideIceRoom_MapAttributes
+	.4byte ShoalCave_LowTideIceRoom_Layout
 	.4byte ShoalCave_LowTideIceRoom_MapEvents
 	.4byte ShoalCave_LowTideIceRoom_MapScripts
 	.4byte 0x0

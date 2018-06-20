@@ -1,5 +1,5 @@
 RustboroCity_Flat2_3F: @ 84834E8
-	.4byte RustboroCity_Flat2_3F_MapAttributes
+	.4byte RustboroCity_Flat2_3F_Layout
 	.4byte RustboroCity_Flat2_3F_MapEvents
 	.4byte RustboroCity_Flat2_3F_MapScripts
 	.4byte 0x0

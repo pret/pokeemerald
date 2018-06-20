@@ -1,5 +1,5 @@
 Route132: @ 84829DC
-	.4byte Route132_MapAttributes
+	.4byte Route132_Layout
 	.4byte Route132_MapEvents
 	.4byte Route132_MapScripts
 	.4byte Route132_MapConnections

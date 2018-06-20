@@ -1,5 +1,5 @@
 MarineCave_End: @ 8484A04
-	.4byte MarineCave_End_MapAttributes
+	.4byte MarineCave_End_Layout
 	.4byte MarineCave_End_MapEvents
 	.4byte MarineCave_End_MapScripts
 	.4byte 0x0

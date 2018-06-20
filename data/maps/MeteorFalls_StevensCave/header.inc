@@ -1,5 +1,5 @@
 MeteorFalls_StevensCave: @ 8484A74
-	.4byte MeteorFalls_StevensCave_MapAttributes
+	.4byte MeteorFalls_StevensCave_Layout
 	.4byte MeteorFalls_StevensCave_MapEvents
 	.4byte MeteorFalls_StevensCave_MapScripts
 	.4byte 0x0

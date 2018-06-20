@@ -1,5 +1,5 @@
 Route116_TunnelersRestHouse: @ 8483E6C
-	.4byte Route116_TunnelersRestHouse_MapAttributes
+	.4byte Route116_TunnelersRestHouse_Layout
 	.4byte Route116_TunnelersRestHouse_MapEvents
 	.4byte Route116_TunnelersRestHouse_MapScripts
 	.4byte 0x0

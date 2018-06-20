@@ -1,5 +1,5 @@
 Route104_MrBrineysHouse: @ 8483D70
-	.4byte Route104_MrBrineysHouse_MapAttributes
+	.4byte Route104_MrBrineysHouse_Layout
 	.4byte Route104_MrBrineysHouse_MapEvents
 	.4byte Route104_MrBrineysHouse_MapScripts
 	.4byte 0x0

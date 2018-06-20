@@ -1,5 +1,5 @@
 BattlePyramidSquare10: @ 848505C
-	.4byte BattlePyramidSquare10_MapAttributes
+	.4byte BattlePyramidSquare10_Layout
 	.4byte BattlePyramidSquare10_MapEvents
 	.4byte BattlePyramidSquare10_MapScripts
 	.4byte 0x0

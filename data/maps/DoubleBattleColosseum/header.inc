@@ -1,5 +1,5 @@
 DoubleBattleColosseum: @ 8484D84
-	.4byte DoubleBattleColosseum_MapAttributes
+	.4byte DoubleBattleColosseum_Layout
 	.4byte DoubleBattleColosseum_MapEvents
 	.4byte DoubleBattleColosseum_MapScripts
 	.4byte 0x0

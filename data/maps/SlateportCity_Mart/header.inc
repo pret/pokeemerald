@@ -1,5 +1,5 @@
 SlateportCity_Mart: @ 8483248
-	.4byte SlateportCity_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte SlateportCity_Mart_MapEvents
 	.4byte SlateportCity_Mart_MapScripts
 	.4byte 0x0

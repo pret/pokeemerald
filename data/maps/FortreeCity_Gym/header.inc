@@ -1,5 +1,5 @@
 FortreeCity_Gym: @ 848353C
-	.4byte FortreeCity_Gym_MapAttributes
+	.4byte FortreeCity_Gym_Layout
 	.4byte FortreeCity_Gym_MapEvents
 	.4byte FortreeCity_Gym_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 RusturfTunnel: @ 8483F30
-	.4byte RusturfTunnel_MapAttributes
+	.4byte RusturfTunnel_Layout
 	.4byte RusturfTunnel_MapEvents
 	.4byte RusturfTunnel_MapScripts
 	.4byte 0x0

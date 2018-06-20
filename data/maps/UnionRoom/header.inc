@@ -1,5 +1,5 @@
 UnionRoom: @ 8485120
-	.4byte UnionRoom_MapAttributes
+	.4byte UnionRoom_Layout
 	.4byte UnionRoom_MapEvents
 	.4byte UnionRoom_MapScripts
 	.4byte 0x0

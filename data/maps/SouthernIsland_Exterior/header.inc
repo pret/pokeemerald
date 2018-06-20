@@ -1,5 +1,5 @@
 SouthernIsland_Exterior: @ 8485238
-	.4byte SouthernIsland_Exterior_MapAttributes
+	.4byte SouthernIsland_Exterior_Layout
 	.4byte SouthernIsland_Exterior_MapEvents
 	.4byte SouthernIsland_Exterior_MapScripts
 	.4byte 0x0

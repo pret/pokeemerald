@@ -1,5 +1,5 @@
 SecretBase_BrownCave1: @ 8484AAC
-	.4byte SecretBase_BrownCave1_MapAttributes
+	.4byte SecretBase_BrownCave1_Layout
 	.4byte SecretBase_BrownCave1_MapEvents
 	.4byte SecretBase_BrownCave1_MapScripts
 	.4byte 0x0

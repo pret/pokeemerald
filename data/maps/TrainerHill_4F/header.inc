@@ -1,5 +1,5 @@
 TrainerHill_4F: @ 848583C
-	.4byte TrainerHill_4F_MapAttributes
+	.4byte TrainerHill_4F_Layout
 	.4byte TrainerHill_4F_MapEvents
 	.4byte TrainerHill_4F_MapScripts
 	.4byte 0x0

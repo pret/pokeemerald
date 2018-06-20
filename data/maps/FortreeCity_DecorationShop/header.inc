@@ -1,5 +1,5 @@
 FortreeCity_DecorationShop: @ 848361C
-	.4byte FortreeCity_DecorationShop_MapAttributes
+	.4byte FortreeCity_DecorationShop_Layout
 	.4byte FortreeCity_DecorationShop_MapEvents
 	.4byte FortreeCity_DecorationShop_MapScripts
 	.4byte 0x0

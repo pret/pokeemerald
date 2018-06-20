@@ -1,5 +1,5 @@
 Underwater6: @ 8482ABC
-	.4byte Underwater6_MapAttributes
+	.4byte Underwater6_Layout
 	.4byte Underwater6_MapEvents
 	.4byte Underwater6_MapScripts
 	.4byte Underwater6_MapConnections

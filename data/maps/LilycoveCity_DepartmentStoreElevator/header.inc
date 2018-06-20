@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStoreElevator: @ 84838A0
-	.4byte LilycoveCity_DepartmentStoreElevator_MapAttributes
+	.4byte LilycoveCity_DepartmentStoreElevator_Layout
 	.4byte LilycoveCity_DepartmentStoreElevator_MapEvents
 	.4byte LilycoveCity_DepartmentStoreElevator_MapScripts
 	.4byte 0x0

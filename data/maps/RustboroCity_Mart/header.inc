@@ -1,5 +1,5 @@
 RustboroCity_Mart: @ 8483408
-	.4byte RustboroCity_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte RustboroCity_Mart_MapEvents
 	.4byte RustboroCity_Mart_MapScripts
 	.4byte 0x0
