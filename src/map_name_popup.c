@@ -228,7 +228,7 @@ static void ShowMapNamePopUpWindow(void)
 
     if(InBattlePyramid())
     {
-        if(gMapHeader.mapDataId == 0x17A)
+        if(gMapHeader.mapLayoutId == 0x17A)
         {
             withoutPrefixPtr = &(mapDisplayHeader[3]);
             mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[7];
