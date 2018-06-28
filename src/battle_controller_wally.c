@@ -90,7 +90,7 @@ static void WallyHandleFaintingCry(void);
 static void WallyHandleIntroSlide(void);
 static void WallyHandleIntroTrainerBallThrow(void);
 static void WallyHandleDrawPartyStatusSummary(void);
-static void WallyHandleCmd49(void);
+static void WallyHandleHidePartyStatusSummary(void);
 static void WallyHandleEndBounceEffect(void);
 static void WallyHandleSpriteInvisibility(void);
 static void WallyHandleBattleAnimation(void);
@@ -159,7 +159,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     WallyHandleIntroSlide,
     WallyHandleIntroTrainerBallThrow,
     WallyHandleDrawPartyStatusSummary,
-    WallyHandleCmd49,
+    WallyHandleHidePartyStatusSummary,
     WallyHandleEndBounceEffect,
     WallyHandleSpriteInvisibility,
     WallyHandleBattleAnimation,
@@ -1450,8 +1450,8 @@ static void WallyHandleIntroTrainerBallThrow(void)
     taskId = CreateTask(sub_816AC04, 5);
     gTasks[taskId].data[0] = gActiveBattler;
 
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_21;
@@ -1511,13 +1511,13 @@ static void WallyHandleDrawPartyStatusSummary(void)
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
         gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         WallyBufferExecCompleted();
     }
 }
 
-static void WallyHandleCmd49(void)
+static void WallyHandleHidePartyStatusSummary(void)
 {
     WallyBufferExecCompleted();
 }

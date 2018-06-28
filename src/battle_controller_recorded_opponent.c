@@ -90,7 +90,7 @@ static void RecordedOpponentHandleFaintingCry(void);
 static void RecordedOpponentHandleIntroSlide(void);
 static void RecordedOpponentHandleIntroTrainerBallThrow(void);
 static void RecordedOpponentHandleDrawPartyStatusSummary(void);
-static void RecordedOpponentHandleCmd49(void);
+static void RecordedOpponentHandleHidePartyStatusSummary(void);
 static void RecordedOpponentHandleEndBounceEffect(void);
 static void RecordedOpponentHandleSpriteInvisibility(void);
 static void RecordedOpponentHandleBattleAnimation(void);
@@ -162,7 +162,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     RecordedOpponentHandleIntroSlide,
     RecordedOpponentHandleIntroTrainerBallThrow,
     RecordedOpponentHandleDrawPartyStatusSummary,
-    RecordedOpponentHandleCmd49,
+    RecordedOpponentHandleHidePartyStatusSummary,
     RecordedOpponentHandleEndBounceEffect,
     RecordedOpponentHandleSpriteInvisibility,
     RecordedOpponentHandleBattleAnimation,
@@ -1658,8 +1658,8 @@ static void RecordedOpponentHandleIntroTrainerBallThrow(void)
     taskId = CreateTask(sub_8189548, 5);
     gTasks[taskId].data[0] = gActiveBattler;
 
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_70;
@@ -1704,7 +1704,7 @@ static void RecordedOpponentHandleDrawPartyStatusSummary(void)
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
         {
@@ -1738,10 +1738,10 @@ static void sub_818975C(void)
     }
 }
 
-static void RecordedOpponentHandleCmd49(void)
+static void RecordedOpponentHandleHidePartyStatusSummary(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     RecordedOpponentBufferExecCompleted();
 }
 

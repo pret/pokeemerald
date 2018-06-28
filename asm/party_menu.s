@@ -12158,7 +12158,7 @@ sub_81B672C: @ 81B672C
 	bl sub_81B1B5C
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
-	bl sub_805EAE8
+	bl HandleBattleLowHpMusicChange
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5

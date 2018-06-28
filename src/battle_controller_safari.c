@@ -80,7 +80,7 @@ static void SafariHandleFaintingCry(void);
 static void SafariHandleIntroSlide(void);
 static void SafariHandleIntroTrainerBallThrow(void);
 static void SafariHandleDrawPartyStatusSummary(void);
-static void SafariHandleCmd49(void);
+static void SafariHandleHidePartyStatusSummary(void);
 static void SafariHandleEndBounceEffect(void);
 static void SafariHandleSpriteInvisibility(void);
 static void SafariHandleBattleAnimation(void);
@@ -144,7 +144,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     SafariHandleIntroSlide,
     SafariHandleIntroTrainerBallThrow,
     SafariHandleDrawPartyStatusSummary,
-    SafariHandleCmd49,
+    SafariHandleHidePartyStatusSummary,
     SafariHandleEndBounceEffect,
     SafariHandleSpriteInvisibility,
     SafariHandleBattleAnimation,
@@ -645,7 +645,7 @@ static void SafariHandleDrawPartyStatusSummary(void)
     SafariBufferExecCompleted();
 }
 
-static void SafariHandleCmd49(void)
+static void SafariHandleHidePartyStatusSummary(void)
 {
     SafariBufferExecCompleted();
 }

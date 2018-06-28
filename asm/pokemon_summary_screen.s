@@ -1116,7 +1116,7 @@ sub_81C4778: @ 81C4778
 	bne _081C47AE
 	adds r0, r1, 0
 	adds r0, 0xC
-	bl ShouldPlayNormalPokeCry
+	bl ShouldPlayNormalMonCry
 	cmp r0, 0x1
 	bne _081C47A4
 	ldrh r0, [r4, 0x2]

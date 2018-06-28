@@ -160,7 +160,7 @@ enum
     CONTROLLER_INTROSLIDE,
     CONTROLLER_INTROTRAINERBALLTHROW,
     CONTROLLER_DRAWPARTYSTATUSSUMMARY,
-    CONTROLLER_49,
+    CONTROLLER_HIDEPARTYSTATUSSUMMARY,
     CONTROLLER_ENDBOUNCE,
     CONTROLLER_SPRITEINVISIBILITY,
     CONTROLLER_BATTLEANIMATION,
@@ -230,13 +230,13 @@ void BtlController_EmitFaintingCry(u8 bufferId);
 void BtlController_EmitIntroSlide(u8 bufferId, u8 terrainId);
 void BtlController_EmitIntroTrainerBallThrow(u8 bufferId);
 void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2);
-void BtlController_EmitCmd49(u8 bufferId);
+void BtlController_EmitHidePartyStatusSummary(u8 bufferId);
 void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
 void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument);
 void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 arg2);
 void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
-void BtlController_EmitCmd55(u8 bufferId, u8 arg1);
+void BtlController_EmitCmd55(u8 bufferId, u8 battleOutcome);
 
 // player controller
 void SetControllerToPlayer(void);

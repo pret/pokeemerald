@@ -336,20 +336,20 @@ struct BattleResults
     u8 unk5_0:1;              // 0x5
     u8 usedMasterBall:1;      // 0x5
     u8 caughtMonBall:4;       // 0x5
-    u8 unk5_6:1;              // 0x5
+    u8 shinyWildMon:1;        // 0x5
     u8 unk5_7:1;              // 0x5
     u16 playerMon1Species;    // 0x6
-    u8 playerMon1Name[11];    // 0x8
+    u8 playerMon1Name[POKEMON_NAME_LENGTH + 1];    // 0x8
     u8 battleTurnCounter;     // 0x13
-    u8 playerMon2Name[11];    // 0x14
-    u8 field_1F;              // 0x1F
+    u8 playerMon2Name[POKEMON_NAME_LENGTH + 1];    // 0x14
+    u8 pokeblockThrows;       // 0x1F
     u16 lastOpponentSpecies;  // 0x20
     u16 lastUsedMovePlayer;   // 0x22
     u16 lastUsedMoveOpponent; // 0x24
     u16 playerMon2Species;    // 0x26
     u16 caughtMonSpecies;     // 0x28
-    u8 caughtMonNick[10];     // 0x2A
-    u8 filler34[2];           // 0x34
+    u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];     // 0x2A
+    u8 filler35[1];           // 0x35
     u8 catchAttempts[11];     // 0x36
 };
 
@@ -663,13 +663,13 @@ struct BattleAnimationInfo
 
 struct BattleHealthboxInfo
 {
-    u8 flag_x1:1;
+    u8 partyStatusSummaryShown:1;
     u8 healthboxIsBouncing:1;
     u8 battlerIsBouncing:1;
     u8 ballAnimActive:1; // 0x8
     u8 statusAnimActive:1; // x10
     u8 animFromTableActive:1; // x20
-    u8 specialAnimActive:1; //x40
+    u8 specialAnimActive:1; // x40
     u8 flag_x80:1;
     u8 field_1_x1:1;
     u8 field_1_x1E:4;
@@ -733,7 +733,7 @@ extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
-extern u8 gBattleTurnOrder[MAX_BATTLERS_COUNT];
+extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gCurrentTurnActionNumber;
 extern u8 gCurrentActionFuncId;
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];

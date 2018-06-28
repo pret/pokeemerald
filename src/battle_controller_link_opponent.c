@@ -89,7 +89,7 @@ static void LinkOpponentHandleFaintingCry(void);
 static void LinkOpponentHandleIntroSlide(void);
 static void LinkOpponentHandleIntroTrainerBallThrow(void);
 static void LinkOpponentHandleDrawPartyStatusSummary(void);
-static void LinkOpponentHandleCmd49(void);
+static void LinkOpponentHandleHidePartyStatusSummary(void);
 static void LinkOpponentHandleEndBounceEffect(void);
 static void LinkOpponentHandleSpriteInvisibility(void);
 static void LinkOpponentHandleBattleAnimation(void);
@@ -161,7 +161,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentHandleIntroSlide,
     LinkOpponentHandleIntroTrainerBallThrow,
     LinkOpponentHandleDrawPartyStatusSummary,
-    LinkOpponentHandleCmd49,
+    LinkOpponentHandleHidePartyStatusSummary,
     LinkOpponentHandleEndBounceEffect,
     LinkOpponentHandleSpriteInvisibility,
     LinkOpponentHandleBattleAnimation,
@@ -1716,8 +1716,8 @@ static void LinkOpponentHandleIntroTrainerBallThrow(void)
     taskId = CreateTask(sub_8067618, 5);
     gTasks[taskId].data[0] = gActiveBattler;
 
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_28;
@@ -1762,7 +1762,7 @@ static void LinkOpponentHandleDrawPartyStatusSummary(void)
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
         {
@@ -1796,10 +1796,10 @@ static void sub_806782C(void)
     }
 }
 
-static void LinkOpponentHandleCmd49(void)
+static void LinkOpponentHandleHidePartyStatusSummary(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     LinkOpponentBufferExecCompleted();
 }
 

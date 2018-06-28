@@ -87,7 +87,7 @@ static void LinkPartnerHandleFaintingCry(void);
 static void LinkPartnerHandleIntroSlide(void);
 static void LinkPartnerHandleIntroTrainerBallThrow(void);
 static void LinkPartnerHandleDrawPartyStatusSummary(void);
-static void LinkPartnerHandleCmd49(void);
+static void LinkPartnerHandleHidePartyStatusSummary(void);
 static void LinkPartnerHandleEndBounceEffect(void);
 static void LinkPartnerHandleSpriteInvisibility(void);
 static void LinkPartnerHandleBattleAnimation(void);
@@ -158,7 +158,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkPartnerHandleIntroSlide,
     LinkPartnerHandleIntroTrainerBallThrow,
     LinkPartnerHandleDrawPartyStatusSummary,
-    LinkPartnerHandleCmd49,
+    LinkPartnerHandleHidePartyStatusSummary,
     LinkPartnerHandleEndBounceEffect,
     LinkPartnerHandleSpriteInvisibility,
     LinkPartnerHandleBattleAnimation,
@@ -1564,8 +1564,8 @@ static void LinkPartnerHandleIntroTrainerBallThrow(void)
     taskId = CreateTask(sub_814DCCC, 5);
     gTasks[taskId].data[0] = gActiveBattler;
 
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_112;
@@ -1611,7 +1611,7 @@ static void LinkPartnerHandleDrawPartyStatusSummary(void)
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
         gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
 
@@ -1631,10 +1631,10 @@ static void sub_814DE9C(void)
     }
 }
 
-static void LinkPartnerHandleCmd49(void)
+static void LinkPartnerHandleHidePartyStatusSummary(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     LinkPartnerBufferExecCompleted();
 }
 

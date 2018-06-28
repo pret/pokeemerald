@@ -188,7 +188,7 @@ static void atk5E(void);
 static void atk5F(void);
 static void atk60_incrementgamestat(void);
 static void atk61_drawpartystatussummary(void);
-static void atk62(void);
+static void atk62_hidepartystatussummary(void);
 static void atk63_jumptorandomattack(void);
 static void atk64_statusanimation(void);
 static void atk65_status2animation(void);
@@ -440,7 +440,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk5F,
     atk60_incrementgamestat,
     atk61_drawpartystatussummary,
-    atk62,
+    atk62_hidepartystatussummary,
     atk63_jumptorandomattack,
     atk64_statusanimation,
     atk65_status2animation,
@@ -989,11 +989,11 @@ static void atk00_attackcanceler(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if ((gProtectStructs[gBattleTurnOrder[i]].stealMove) && gBattleMoves[gCurrentMove].flags & FLAG_SNATCH_AFFECTED)
+        if ((gProtectStructs[gBattlerByTurnOrder[i]].stealMove) && gBattleMoves[gCurrentMove].flags & FLAG_SNATCH_AFFECTED)
         {
-            PressurePPLose(gBattlerAttacker, gBattleTurnOrder[i], MOVE_SNATCH);
-            gProtectStructs[gBattleTurnOrder[i]].stealMove = 0;
-            gBattleScripting.battler = gBattleTurnOrder[i];
+            PressurePPLose(gBattlerAttacker, gBattlerByTurnOrder[i], MOVE_SNATCH);
+            gProtectStructs[gBattlerByTurnOrder[i]].stealMove = 0;
+            gBattleScripting.battler = gBattlerByTurnOrder[i];
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_SnatchedMove;
             return;
@@ -2216,7 +2216,7 @@ u8 GetBattlerTurnOrderNum(u8 battlerId)
     s32 i;
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gBattleTurnOrder[i] == battlerId)
+        if (gBattlerByTurnOrder[i] == battlerId)
             break;
     }
     return i;
@@ -5556,7 +5556,7 @@ static void atk52_switchineffects(void)
 
             for (i = 0; i < gBattlersCount; i++)
             {
-                if (gBattleTurnOrder[i] == gActiveBattler)
+                if (gBattlerByTurnOrder[i] == gActiveBattler)
                     gActionsByTurnOrder[i] = B_ACTION_CANCEL_PARTNER;
             }
 
@@ -6021,10 +6021,10 @@ static void atk61_drawpartystatussummary(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk62(void)
+static void atk62_hidepartystatussummary(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    BtlController_EmitCmd49(0);
+    BtlController_EmitHidePartyStatusSummary(0);
     MarkBattlerForControllerExec(gActiveBattler);
 
     gBattlescriptCurrInstr += 2;
@@ -8957,7 +8957,7 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
 
         for (i = 0; i < gBattlersCount; i++)
         {
-            if (gBattleTurnOrder[i] == gBattlerTarget)
+            if (gBattlerByTurnOrder[i] == gBattlerTarget)
                 gActionsByTurnOrder[i] = 11;
         }
 

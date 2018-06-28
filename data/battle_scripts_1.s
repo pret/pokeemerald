@@ -2899,7 +2899,7 @@ BattleScript_FaintedMonTryChooseAnother::
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
 	printstring STRINGID_SWITCHINMON
-	atk62 BS_ATTACKER
+	hidepartystatussummary BS_ATTACKER
 	switchinanim BS_ATTACKER, 0x0
 	waitstate
 	switchineffects BS_ATTACKER
@@ -2910,7 +2910,7 @@ BattleScript_FaintedMonChooseAnother::
 	switchindataupdate BS_FAINTED
 	hpthresholds BS_FAINTED
 	printstring STRINGID_SWITCHINMON
-	atk62 BS_FAINTED
+	hidepartystatussummary BS_FAINTED
 	switchinanim BS_FAINTED, FALSE
 	waitstate
 	various7 BS_ATTACKER
@@ -2933,7 +2933,7 @@ BattleScript_82DA908::
 	switchindataupdate BS_FAINTED
 	hpthresholds BS_FAINTED
 	printstring STRINGID_SWITCHINMON
-	atk62 BS_FAINTED
+	hidepartystatussummary BS_FAINTED
 	switchinanim BS_FAINTED, FALSE
 	waitstate
 	switchineffects 5
@@ -3136,7 +3136,7 @@ BattleScript_DoSwitchOut::
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
 	printstring STRINGID_SWITCHINMON
-	atk62 BS_ATTACKER
+	hidepartystatussummary BS_ATTACKER
 	switchinanim BS_ATTACKER, FALSE
 	waitstate
 	switchineffects BS_ATTACKER

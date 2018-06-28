@@ -94,7 +94,7 @@ static void OpponentHandleFaintingCry(void);
 static void OpponentHandleIntroSlide(void);
 static void OpponentHandleIntroTrainerBallThrow(void);
 static void OpponentHandleDrawPartyStatusSummary(void);
-static void OpponentHandleCmd49(void);
+static void OpponentHandleHidePartyStatusSummary(void);
 static void OpponentHandleEndBounceEffect(void);
 static void OpponentHandleSpriteInvisibility(void);
 static void OpponentHandleBattleAnimation(void);
@@ -166,7 +166,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OpponentHandleIntroSlide,
     OpponentHandleIntroTrainerBallThrow,
     OpponentHandleDrawPartyStatusSummary,
-    OpponentHandleCmd49,
+    OpponentHandleHidePartyStatusSummary,
     OpponentHandleEndBounceEffect,
     OpponentHandleSpriteInvisibility,
     OpponentHandleBattleAnimation,
@@ -1865,8 +1865,8 @@ static void OpponentHandleIntroTrainerBallThrow(void)
     taskId = CreateTask(sub_8062828, 5);
     gTasks[taskId].data[0] = gActiveBattler;
 
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_26;
@@ -1916,7 +1916,7 @@ static void OpponentHandleDrawPartyStatusSummary(void)
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
 
         if (gBattleBufferA[gActiveBattler][2] != 0)
         {
@@ -1950,10 +1950,10 @@ static void sub_8062A2C(void)
     }
 }
 
-static void OpponentHandleCmd49(void)
+static void OpponentHandleHidePartyStatusSummary(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     OpponentBufferExecCompleted();
 }
 

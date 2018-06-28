@@ -1695,7 +1695,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     return taskId;
 }
 
-void sub_8073C30(u8 taskId)
+void Task_HidePartyStatusSummary(u8 taskId)
 {
     u8 ballIconSpriteIds[PARTY_SIZE];
     bool8 isBattleStart;
@@ -1707,7 +1707,7 @@ void sub_8073C30(u8 taskId)
     summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
     battlerId = gTasks[taskId].tBattler;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
         ballIconSpriteIds[i] = gTasks[taskId].tBallIconSpriteId(i);
 
     SetGpuReg(REG_OFFSET_BLDCNT, 0x3F40);
@@ -1755,12 +1755,12 @@ static void sub_8073E08(u8 taskId)
 {
     if ((gTasks[taskId].data[11]++ % 2) == 0)
     {
-        if (--gTasks[taskId].data[15] < 0)
+        if (--gTasks[taskId].tData15 < 0)
             return;
 
         SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[15]) | ((16 - gTasks[taskId].data[15]) << 8));
     }
-    if (gTasks[taskId].data[15] == 0)
+    if (gTasks[taskId].tData15 == 0)
         gTasks[taskId].func = sub_8073E64;
 }
 
@@ -1796,7 +1796,7 @@ static void sub_8073E64(u8 taskId)
     }
     else if (gTasks[taskId].tData15 == -3)
     {
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].flag_x1 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].partyStatusSummaryShown = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         DestroyTask(taskId);
@@ -1828,7 +1828,7 @@ static void sub_8073F98(u8 taskId)
     }
     else if (gTasks[taskId].tData15 == -3)
     {
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].flag_x1 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].partyStatusSummaryShown = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         DestroyTask(taskId);

@@ -525,7 +525,7 @@
 	.byte \bank
 	.endm
 
-	.macro atk62 bank
+	.macro hidepartystatussummary bank
 	.byte 0x62
 	.byte \bank
 	.endm
