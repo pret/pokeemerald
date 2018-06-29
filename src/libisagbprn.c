@@ -31,8 +31,8 @@ void AGBPrintFlush1Block(void);
 void AGBPrintInit(void)
 {
     volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    u16 *pWSCNT = (u16 *)REG_ADDR_WAITCNT;
-    u16 *pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
+    vu16 *pWSCNT = (u16 *)REG_ADDR_WAITCNT;
+    vu16 *pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
     u16 nOldWSCNT = *pWSCNT;
     *pWSCNT = WSCNT_DATA;
     *pProtect = 0x20;
@@ -45,8 +45,8 @@ void AGBPrintInit(void)
 static void AGBPutcInternal(const char cChr)
 {
     volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    u16 *pPrintBuf = (u16 *)(0x8000000 + (pPrint->m_nBank << 16));
-    u16 *pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
+    vu16 *pPrintBuf = (u16 *)(0x8000000 + (pPrint->m_nBank << 16));
+    vu16 *pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
     u16 nData = pPrintBuf[pPrint->m_nPut / 2];
     *pProtect = 0x20;
     nData = (pPrint->m_nPut & 1) ? (nData & 0xFF) | (cChr << 8) : (nData & 0xFF00) | cChr;
@@ -57,7 +57,7 @@ static void AGBPutcInternal(const char cChr)
 
 void AGBPutc(const char cChr)
 {
-    u16 *pWSCNT = (u16 *)REG_ADDR_WAITCNT;
+    vu16 *pWSCNT = (u16 *)REG_ADDR_WAITCNT;
     u16 nOldWSCNT = *pWSCNT;
     volatile struct AGBPrintStruct *pPrint;
     *pWSCNT = WSCNT_DATA;
@@ -71,7 +71,7 @@ void AGBPutc(const char cChr)
 void AGBPrint(const char *pBuf)
 {
     volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    u16 *pWSCNT = (u16 *)REG_ADDR_WAITCNT;
+    vu16 *pWSCNT = (u16 *)REG_ADDR_WAITCNT;
     u16 nOldWSCNT = *pWSCNT;
     *pWSCNT = WSCNT_DATA;
     while (*pBuf)
@@ -95,11 +95,11 @@ void AGBPrintf(const char *pBuf, ...)
 static void AGBPrintTransferDataInternal(u32 bAllData)
 {
     LPFN_PRINT_FLUSH lpfnFuncFlush;
-    u16 *pIME;
+    vu16 *pIME;
     u16 nIME;
-    u16 *pWSCNT;
+    vu16 *pWSCNT;
     u16 nOldWSCNT;
-    u16 *pProtect;
+    vu16 *pProtect;
     volatile struct AGBPrintStruct *pPrint;
 
     pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
