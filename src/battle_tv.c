@@ -9,8 +9,6 @@
 #include "battle_message.h"
 #include "tv.h"
 
-extern struct StringInfoBattle *gStringInfo;
-
 // this file's functions
 static bool8 sub_817E0B8(u16 stringId);
 static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3);
@@ -223,7 +221,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     atkSide = GetBattlerSide(gBattlerAttacker);
     defSide = GetBattlerSide(gBattlerTarget);
     effSide = GetBattlerSide(gEffectBattler);
-    scriptingSide = GetBattlerSide(gStringInfo->scrActive);
+    scriptingSide = GetBattlerSide(gBattleMsgDataPtr->scrActive);
 
     if (atkSide == B_SIDE_PLAYER)
         atkMon = &gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]];
@@ -235,7 +233,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     else
         defMon = &gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]];
 
-    moveSlot = GetBattlerMoveSlotId(gBattlerAttacker, gStringInfo->currentMove);
+    moveSlot = GetBattlerMoveSlotId(gBattlerAttacker, gBattleMsgDataPtr->currentMove);
 
     if (moveSlot >= 4 && sub_817E0B8(stringId) && stringId > BATTLESTRINGS_ID_ADDER)
     {
@@ -480,8 +478,8 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         break;
     case STRINGID_PKMNFASTASLEEP:
         if (tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].slpMonId != 0
-            && gStringInfo->currentMove != MOVE_SNORE
-            && gStringInfo->currentMove != MOVE_SLEEP_TALK)
+            && gBattleMsgDataPtr->currentMove != MOVE_SNORE
+            && gBattleMsgDataPtr->currentMove != MOVE_SLEEP_TALK)
             AddMovePoints(9, 3, tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].slpMonId - 1, tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].slpMoveSlot);
         break;
     case STRINGID_PKMNWASFROZEN:

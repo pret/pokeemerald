@@ -31,9 +31,7 @@ struct BattleWindowText
     u8 shadowColor;
 };
 
-extern u8 gBattlerAbilities[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_0203C7B4;
-extern struct StringInfoBattle *gStringInfo;
 
 extern const u8 gMoveNames[LAST_MOVE_INDEX + 1][13];
 extern const u8 gTrainerClassNames[][13];
@@ -61,11 +59,9 @@ static void ChooseMoveUsedParticle(u8 *textPtr);
 static void ChooseTypeOfMoveUsedString(u8 *dst);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
-// ewram variables
-EWRAM_DATA u8 gDisplayedStringBattle[300] = {0};
-EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
-EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
-EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT] = {0};
+// EWRAM vars
+static EWRAM_DATA u8 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 // const rom data
 // todo: make some of those names less vague: attacker/target vs pkmn, etc.
@@ -1949,24 +1945,24 @@ void BufferStringBattle(u16 stringID)
     s32 i;
     const u8 *stringPtr = NULL;
 
-    gStringInfo = (struct StringInfoBattle*)(&gBattleBufferA[gActiveBattler][4]);
-    gLastUsedItem = gStringInfo->lastItem;
-    gLastUsedAbility = gStringInfo->lastAbility;
-    gBattleScripting.battler = gStringInfo->scrActive;
-    *(&gBattleStruct->field_52) = gStringInfo->unk1605E;
-    *(&gBattleStruct->hpScale) = gStringInfo->hpScale;
-    gPotentialItemEffectBattler = gStringInfo->StringBank;
-    *(&gBattleStruct->stringMoveType) = gStringInfo->moveType;
+    gBattleMsgDataPtr = (struct BattleMsgData*)(&gBattleBufferA[gActiveBattler][4]);
+    gLastUsedItem = gBattleMsgDataPtr->lastItem;
+    gLastUsedAbility = gBattleMsgDataPtr->lastAbility;
+    gBattleScripting.battler = gBattleMsgDataPtr->scrActive;
+    *(&gBattleStruct->field_52) = gBattleMsgDataPtr->unk1605E;
+    *(&gBattleStruct->hpScale) = gBattleMsgDataPtr->hpScale;
+    gPotentialItemEffectBattler = gBattleMsgDataPtr->itemEffectBattler;
+    *(&gBattleStruct->stringMoveType) = gBattleMsgDataPtr->moveType;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        gBattlerAbilities[i] = gStringInfo->abilities[i];
+        sBattlerAbilities[i] = gBattleMsgDataPtr->abilities[i];
     }
     for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
     {
-        gBattleTextBuff1[i] = gStringInfo->textBuffs[0][i];
-        gBattleTextBuff2[i] = gStringInfo->textBuffs[1][i];
-        gBattleTextBuff3[i] = gStringInfo->textBuffs[2][i];
+        gBattleTextBuff1[i] = gBattleMsgDataPtr->textBuffs[0][i];
+        gBattleTextBuff2[i] = gBattleMsgDataPtr->textBuffs[1][i];
+        gBattleTextBuff3[i] = gBattleMsgDataPtr->textBuffs[2][i];
     }
 
     switch (stringID)
@@ -2143,10 +2139,10 @@ void BufferStringBattle(u16 stringID)
     case STRINGID_USEDMOVE: // pokemon used a move msg
         ChooseMoveUsedParticle(gBattleTextBuff1); // buff1 doesn't appear in the string, leftover from japanese move names
 
-        if (gStringInfo->currentMove > LAST_MOVE_INDEX)
+        if (gBattleMsgDataPtr->currentMove > LAST_MOVE_INDEX)
             StringCopy(gBattleTextBuff2, sATypeMove_Table[*(&gBattleStruct->stringMoveType)]);
         else
-            StringCopy(gBattleTextBuff2, gMoveNames[gStringInfo->currentMove]);
+            StringCopy(gBattleTextBuff2, gMoveNames[gBattleMsgDataPtr->currentMove]);
 
         ChooseTypeOfMoveUsedString(gBattleTextBuff2);
         stringPtr = sText_AttackerUsedX;
@@ -2431,16 +2427,16 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlerPartyIndexes[gBattleScripting.battler])
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
-                if (gStringInfo->currentMove > LAST_MOVE_INDEX)
+                if (gBattleMsgDataPtr->currentMove > LAST_MOVE_INDEX)
                     toCpy = sATypeMove_Table[gBattleStruct->stringMoveType];
                 else
-                    toCpy = gMoveNames[gStringInfo->currentMove];
+                    toCpy = gMoveNames[gBattleMsgDataPtr->currentMove];
                 break;
             case B_TXT_LAST_MOVE: // originally used move name
-                if (gStringInfo->originallyUsedMove > LAST_MOVE_INDEX)
+                if (gBattleMsgDataPtr->originallyUsedMove > LAST_MOVE_INDEX)
                     toCpy = sATypeMove_Table[gBattleStruct->stringMoveType];
                 else
-                    toCpy = gMoveNames[gStringInfo->originallyUsedMove];
+                    toCpy = gMoveNames[gBattleMsgDataPtr->originallyUsedMove];
                 break;
             case B_TXT_LAST_ITEM: // last used item
                 if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
@@ -2489,16 +2485,16 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = gAbilityNames[gLastUsedAbility];
                 break;
             case B_TXT_ATK_ABILITY: // attacker ability
-                toCpy = gAbilityNames[gBattlerAbilities[gBattlerAttacker]];
+                toCpy = gAbilityNames[sBattlerAbilities[gBattlerAttacker]];
                 break;
             case B_TXT_DEF_ABILITY: // target ability
-                toCpy = gAbilityNames[gBattlerAbilities[gBattlerTarget]];
+                toCpy = gAbilityNames[sBattlerAbilities[gBattlerTarget]];
                 break;
             case B_TXT_SCR_ACTIVE_ABILITY: // scripting active ability
-                toCpy = gAbilityNames[gBattlerAbilities[gBattleScripting.battler]];
+                toCpy = gAbilityNames[sBattlerAbilities[gBattleScripting.battler]];
                 break;
             case B_TXT_EFF_ABILITY: // effect battlerId ability
-                toCpy = gAbilityNames[gBattlerAbilities[gEffectBattler]];
+                toCpy = gAbilityNames[sBattlerAbilities[gEffectBattler]];
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
@@ -2866,7 +2862,7 @@ static void ChooseMoveUsedParticle(u8* textBuff)
     {
         if (sGrammarMoveUsedTable[i] == 0)
             counter++;
-        if (sGrammarMoveUsedTable[i++] == gStringInfo->currentMove)
+        if (sGrammarMoveUsedTable[i++] == gBattleMsgDataPtr->currentMove)
             break;
     }
 
@@ -2909,7 +2905,7 @@ static void ChooseTypeOfMoveUsedString(u8* dst)
     {
         if (sGrammarMoveUsedTable[i] == MOVE_NONE)
             counter++;
-        if (sGrammarMoveUsedTable[i++] == gStringInfo->currentMove)
+        if (sGrammarMoveUsedTable[i++] == gBattleMsgDataPtr->currentMove)
             break;
     }
 

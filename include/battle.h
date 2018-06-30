@@ -4,6 +4,7 @@
 // should they be included here or included individually by every file?
 #include "constants/battle.h"
 #include "battle_main.h"
+#include "battle_message.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
 #include "battle_ai_switch_items.h"
@@ -719,7 +720,11 @@ struct MonSpritesGfx
     void *field_17C;
 };
 
-// all battle variables are declared in battle_main.c
+// All battle variables are declared in battle_main.c
+extern u8 gDisplayedStringBattle[300];
+extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
+extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
+extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
 extern u32 gBattleTypeFlags;
 extern u8 gBattleTerrain;
 extern u32 gUnknown_02022FF4;
