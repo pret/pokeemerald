@@ -676,7 +676,7 @@ static void CB2_InitBattleInternal(void)
     }
 
     gMain.inBattle = TRUE;
-    gSaveBlock2Ptr->field_CA9_b = 0;
+    gSaveBlock2Ptr->frontier.field_CA9_b = 0;
 
     for (i = 0; i < 6; i++)
         AdjustFriendship(&gPlayerParty[i], 3);
@@ -2273,7 +2273,7 @@ static void sub_8038F34(void)
 
             for (i = 0; i < monsCount && (gLinkPlayers[i].version & 0xFF) == VERSION_EMERALD; i++);
 
-            if (!gSaveBlock2Ptr->field_CA9_b && i == monsCount)
+            if (!gSaveBlock2Ptr->frontier.field_CA9_b && i == monsCount)
             {
                 if (FlagGet(FLAG_SYS_FRONTIER_PASS))
                 {
@@ -5015,7 +5015,7 @@ static void HandleEndTurn_BattleLost(void)
             {
                 gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeitedLinkBattle;
                 gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
-                gSaveBlock2Ptr->field_CA9_b = 1;
+                gSaveBlock2Ptr->frontier.field_CA9_b = 1;
             }
             else
             {
@@ -5047,7 +5047,7 @@ static void HandleEndTurn_RanFromBattle(void)
     {
         gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = B_OUTCOME_FORFEITED;
-        gSaveBlock2Ptr->field_CA9_b = 1;
+        gSaveBlock2Ptr->frontier.field_CA9_b = 1;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
     {
@@ -5666,7 +5666,7 @@ static void HandleAction_Run(void)
         }
 
         gBattleOutcome |= B_OUTCOME_LINK_BATTLE_RAN;
-        gSaveBlock2Ptr->field_CA9_b = 1;
+        gSaveBlock2Ptr->frontier.field_CA9_b = 1;
     }
     else
     {

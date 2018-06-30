@@ -845,8 +845,8 @@ u16 CountTotalItemQuantityInBag(u16 itemId)
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count)
 {
     u8 i;
-    u16 *items = gSaveBlock2Ptr->pyramidBag.itemId[gSaveBlock2Ptr->frontierChosenLvl];
-    u8 *quantities = gSaveBlock2Ptr->pyramidBag.quantity[gSaveBlock2Ptr->frontierChosenLvl];
+    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.chosenLvl];
+    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.chosenLvl];
 
     for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
     {
@@ -867,8 +867,8 @@ static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count)
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count)
 {
     u8 i;
-    u16 *items = gSaveBlock2Ptr->pyramidBag.itemId[gSaveBlock2Ptr->frontierChosenLvl];
-    u8 *quantities = gSaveBlock2Ptr->pyramidBag.quantity[gSaveBlock2Ptr->frontierChosenLvl];
+    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.chosenLvl];
+    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.chosenLvl];
 
     for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
     {
@@ -890,8 +890,8 @@ bool8 AddPyramidBagItem(u16 itemId, u16 count)
 {
     u16 i;
 
-    u16 *items = gSaveBlock2Ptr->pyramidBag.itemId[gSaveBlock2Ptr->frontierChosenLvl];
-    u8 *quantities = gSaveBlock2Ptr->pyramidBag.quantity[gSaveBlock2Ptr->frontierChosenLvl];
+    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.chosenLvl];
+    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.chosenLvl];
 
     u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
     u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
@@ -963,8 +963,8 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
 {
     u16 i;
 
-    u16 *items = gSaveBlock2Ptr->pyramidBag.itemId[gSaveBlock2Ptr->frontierChosenLvl];
-    u8 *quantities = gSaveBlock2Ptr->pyramidBag.quantity[gSaveBlock2Ptr->frontierChosenLvl];
+    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.chosenLvl];
+    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.chosenLvl];
 
     i = gUnknown_0203CF30[3] + gUnknown_0203CF30[4];
     if (items[i] == itemId && quantities[i] >= count)

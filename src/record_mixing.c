@@ -197,10 +197,10 @@ static void SetSrcLookupPointers(void)
     sOldManSave = &gSaveBlock1Ptr->oldMan;
     sEasyChatPairsSave = gSaveBlock1Ptr->easyChatPairs;
     gUnknown_03001148 = &gUnknown_02039F9C;
-    sBattleTowerSave = &gSaveBlock2Ptr->battleTower;
+    sBattleTowerSave = &gSaveBlock2Ptr->frontier.battleTower;
     sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
     gUnknown_03001154 = gSaveBlock2Ptr->field_DC;
-    sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->battleTower;
+    sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->frontier.battleTower;
 }
 
 static void PrepareUnknownExchangePacket(struct PlayerRecordsRS *dest)
@@ -1625,24 +1625,24 @@ void sub_80E8260(struct UnkRecordMixingStruct2 *dst)
     {
         dst->field_120[j].language = GAME_LANGUAGE;
         CopyUnalignedWord(dst->field_120[j].playerId1, gSaveBlock2Ptr->playerTrainerId);
-        CopyUnalignedWord(dst->field_120[j].playerId2, gSaveBlock2Ptr->field_EF1[j]);
+        CopyUnalignedWord(dst->field_120[j].playerId2, gSaveBlock2Ptr->frontier.field_EF1[j]);
         StringCopy(dst->field_120[j].playerName1, gSaveBlock2Ptr->playerName);
-        StringCopy(dst->field_120[j].playerName2, gSaveBlock2Ptr->field_EE1[j]);
+        StringCopy(dst->field_120[j].playerName2, gSaveBlock2Ptr->frontier.field_EE1[j]);
     }
 
     for (i = 0; i < 2; i++)
     {
-        dst->field_0[0][i].field_4 = gSaveBlock2Ptr->field_CF0[i];
-        dst->field_0[1][i].field_4 = gSaveBlock2Ptr->field_CF4[i];
-        dst->field_0[2][i].field_4 = gSaveBlock2Ptr->field_CF8[i];
-        dst->field_0[3][i].field_4 = gSaveBlock2Ptr->field_D14[i];
-        dst->field_0[4][i].field_4 = gSaveBlock2Ptr->field_DD0[i];
-        dst->field_0[5][i].field_4 = gSaveBlock2Ptr->field_DDE[i];
-        dst->field_0[6][i].field_4 = gSaveBlock2Ptr->field_DEA[i];
-        dst->field_0[7][i].field_4 = gSaveBlock2Ptr->field_E08[i];
-        dst->field_0[8][i].field_4 = gSaveBlock2Ptr->field_E1E[i];
+        dst->field_0[0][i].field_4 = gSaveBlock2Ptr->frontier.field_CF0[i];
+        dst->field_0[1][i].field_4 = gSaveBlock2Ptr->frontier.field_CF4[i];
+        dst->field_0[2][i].field_4 = gSaveBlock2Ptr->frontier.field_CF8[i];
+        dst->field_0[3][i].field_4 = gSaveBlock2Ptr->frontier.field_D14[i];
+        dst->field_0[4][i].field_4 = gSaveBlock2Ptr->frontier.field_DD0[i];
+        dst->field_0[5][i].field_4 = gSaveBlock2Ptr->frontier.field_DDE[i];
+        dst->field_0[6][i].field_4 = gSaveBlock2Ptr->frontier.field_DEA[i];
+        dst->field_0[7][i].field_4 = gSaveBlock2Ptr->frontier.field_E08[i];
+        dst->field_0[8][i].field_4 = gSaveBlock2Ptr->frontier.field_E1E[i];
 
-        dst->field_120[i].field_8 = gSaveBlock2Ptr->field_CFC[i];
+        dst->field_120[i].field_8 = gSaveBlock2Ptr->frontier.field_CFC[i];
     }
 }
 

@@ -236,7 +236,7 @@ static void ShowMapNamePopUpWindow(void)
         else
         {
             withoutPrefixPtr = &(mapDisplayHeader[3]);
-            mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->battlePyramidWildHeaderId];
+            mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->frontier.field_CB2];
         }
         StringCopy(withoutPrefixPtr, mapDisplayHeaderSource);
     }
