@@ -67,7 +67,6 @@ extern bool8 sub_81B1250(void); // ?
 extern bool8 InBattlePike(void);
 extern bool8 InBattlePyramid(void);
 extern u16 GetBattlePyramidPickupItemId(void);
-extern u8 Overworld_GetMapTypeOfSaveblockLocation(void);
 extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
 
@@ -185,7 +184,7 @@ static void atk5B_yesnoboxstoplearningmove(void);
 static void atk5C_hitanimation(void);
 static void atk5D_getmoneyreward(void);
 static void atk5E(void);
-static void atk5F(void);
+static void atk5F_swapattackerwithtarget(void);
 static void atk60_incrementgamestat(void);
 static void atk61_drawpartystatussummary(void);
 static void atk62_hidepartystatussummary(void);
@@ -327,7 +326,7 @@ static void atkE9_setweatherballtype(void);
 static void atkEA_tryrecycleitem(void);
 static void atkEB_settypetoterrain(void);
 static void atkEC_pursuitrelated(void);
-static void atkEF_snatchsetbanks(void);
+static void atkEF_snatchsetbattlers(void);
 static void atkEE_removelightscreenreflect(void);
 static void atkEF_handleballthrow(void);
 static void atkF0_givecaughtmon(void);
@@ -437,7 +436,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk5C_hitanimation,
     atk5D_getmoneyreward,
     atk5E,
-    atk5F,
+    atk5F_swapattackerwithtarget,
     atk60_incrementgamestat,
     atk61_drawpartystatussummary,
     atk62_hidepartystatussummary,
@@ -579,7 +578,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkEA_tryrecycleitem,
     atkEB_settypetoterrain,
     atkEC_pursuitrelated,
-    atkEF_snatchsetbanks,
+    atkEF_snatchsetbattlers,
     atkEE_removelightscreenreflect,
     atkEF_handleballthrow,
     atkF0_givecaughtmon,
@@ -1172,7 +1171,7 @@ static void atk01_accuracycheck(void)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
         if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & WEATHER_SANDSTORM_ANY)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && type < 9)
+        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(type))
             calc = (calc * 80) / 100; // 1.2 hustle loss
 
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
@@ -4676,12 +4675,12 @@ static void atk49_moveend(void)
             gBattleScripting.atk49_state++;
             break;
         case 14: // This case looks interesting, although I am not certain what it does. Probably fine tunes edge cases.
-            if (gHitMarker & HITMARKER_PURSUIT_TRAP)
+            if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
             {
                 gActiveBattler = gBattlerAttacker;
                 gBattlerAttacker = gBattlerTarget;
                 gBattlerTarget = gActiveBattler;
-                gHitMarker &= ~(HITMARKER_PURSUIT_TRAP);
+                gHitMarker &= ~(HITMARKER_SWAP_ATTACKER_TARGET);
             }
             if (gHitMarker & HITMARKER_ATTACKSTRING_PRINTED)
             {
@@ -5950,7 +5949,7 @@ static void atk5E(void)
          if (gBattleControllerExecFlags == 0)
          {
             s32 i;
-            struct BattlePokemon* bufferPoke = (struct BattlePokemon*) &gBattleBufferB[gActiveBattler][4];
+            struct BattlePokemon *bufferPoke = (struct BattlePokemon*) &gBattleBufferB[gActiveBattler][4];
             for (i = 0; i < 4; i++)
             {
                 gBattleMons[gActiveBattler].moves[i] = bufferPoke->moves[i];
@@ -5962,16 +5961,16 @@ static void atk5E(void)
     }
 }
 
-static void atk5F(void)
+static void atk5F_swapattackerwithtarget(void)
 {
     gActiveBattler = gBattlerAttacker;
     gBattlerAttacker = gBattlerTarget;
     gBattlerTarget = gActiveBattler;
 
-    if (gHitMarker & HITMARKER_PURSUIT_TRAP)
-        gHitMarker &= ~(HITMARKER_PURSUIT_TRAP);
+    if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
+        gHitMarker &= ~(HITMARKER_SWAP_ATTACKER_TARGET);
     else
-        gHitMarker |= HITMARKER_PURSUIT_TRAP;
+        gHitMarker |= HITMARKER_SWAP_ATTACKER_TARGET;
 
     gBattlescriptCurrInstr++;
 }
@@ -5987,8 +5986,8 @@ static void atk60_incrementgamestat(void)
 static void atk61_drawpartystatussummary(void)
 {
     s32 i;
-    struct Pokemon* party;
-    struct HpAndStatus hpStatuses[6];
+    struct Pokemon *party;
+    struct HpAndStatus hpStatuses[PARTY_SIZE];
 
     if (gBattleControllerExecFlags)
         return;
@@ -6000,7 +5999,7 @@ static void atk61_drawpartystatussummary(void)
     else
         party = gEnemyParty;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_NONE
             || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
@@ -8595,7 +8594,7 @@ static void atkAE_healpartystatus(void)
 
     if (gCurrentMove == MOVE_HEAL_BELL)
     {
-        struct Pokemon* party;
+        struct Pokemon *party;
         s32 i;
 
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -8633,7 +8632,7 @@ static void atkAE_healpartystatus(void)
             }
         }
 
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
             u8 abilityBit = GetMonData(&party[i], MON_DATA_ALT_ABILITY);
@@ -10053,7 +10052,7 @@ static void atkEC_pursuitrelated(void)
     }
 }
 
-static void atkEF_snatchsetbanks(void)
+static void atkEF_snatchsetbattlers(void)
 {
     gEffectBattler = gBattlerAttacker;
 
@@ -10131,7 +10130,7 @@ static void atkEF_handleballthrow(void)
                     ballMultiplier = 10;
                 break;
             case ITEM_DIVE_BALL:
-                if (Overworld_GetMapTypeOfSaveblockLocation() == 5)
+                if (Overworld_GetMapTypeOfSaveblockLocation() == MAP_TYPE_UNDERWATER)
                     ballMultiplier = 35;
                 else
                     ballMultiplier = 10;

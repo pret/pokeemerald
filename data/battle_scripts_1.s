@@ -2873,7 +2873,7 @@ BattleScript_FaintedMonTryChooseAnother::
 	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_LINK, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_x2000000, BattleScript_FaintedMonChooseAnother
-	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID, BattleScript_FaintedMonChooseAnother
+	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonChooseAnother
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonChooseAnother
 	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, 0x1, BattleScript_FaintedMonChooseAnother
@@ -2968,7 +2968,7 @@ BattleScript_PayDayMoneyAndPickUpItems::
 
 BattleScript_LocalBattleLost::
 	jumpifbattletype BATTLE_TYPE_DOME, BattleScript_CheckDomeDrew
-	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID, BattleScript_LocalBattleLostPrintTrainersWinText
+	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifbattletype BATTLE_TYPE_x4000000, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifbattletype BATTLE_TYPE_EREADER_TRAINER, BattleScript_LocalBattleLostEnd
 	jumpifhalfword CMP_EQUAL, gTrainerBattleOpponent_A, 0x400, BattleScript_LocalBattleLostEnd
@@ -3120,10 +3120,10 @@ BattleScript_PursuitSwitchDmgSetMultihit::
 	setmultihit 0x2
 BattleScript_PursuitSwitchDmgLoop::
 	jumpifnopursuitswitchdmg BattleScript_DoSwitchOut
-	atk5F
+	swapattackerwithtarget
 	trysetdestinybondtohappen
 	call BattleScript_PursuitDmgOnSwitchOut
-	atk5F
+	swapattackerwithtarget
 BattleScript_DoSwitchOut::
 	decrementmultihit BattleScript_PursuitSwitchDmgLoop
 	switchoutabilities BS_ATTACKER
@@ -3230,7 +3230,7 @@ BattleScript_DamagingWeatherContinues::
 	playanimation2 BS_ATTACKER, sB_ANIM_ARG1, NULL
 	setbyte gBattleCommunication, 0x0
 BattleScript_DamagingWeatherLoop::
-	copyarraywithindex gBattlerAttacker, gBattleTurnOrder, gBattleCommunication, 0x1
+	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattleCommunication, 0x1
 	weatherdamage
 	jumpifword CMP_EQUAL, gBattleMoveDamage, 0x0, BattleScript_DamagingWeatherLoopIncrement
 	printfromtable gSandStormHailDmgStringIds
@@ -3710,12 +3710,12 @@ BattleScript_MagicCoatBounce::
 BattleScript_SnatchedMove::
 	attackstring
 	ppreduce
-	snatchsetbanks
+	snatchsetbattlers
 	playanimation BS_TARGET, B_ANIM_SNATCH_MOVE, NULL
 	printstring STRINGID_PKMNSNATCHEDMOVE
 	waitmessage 0x40
 	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_x800000
-	atk5F
+	swapattackerwithtarget
 	return
 
 BattleScript_EnduredMsg::

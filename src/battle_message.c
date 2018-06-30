@@ -45,7 +45,6 @@ extern const u8 gText_PkmnBoxLanettesPCFull[];
 extern const u8 gText_PkmnTransferredSomeonesPC[];
 extern const u8 gText_PkmnTransferredLanettesPC[];
 
-extern u16 sub_8068BB0(void); // pokemon_1
 extern u8 sub_81A4D00(void); // battle_frontier_2
 extern u8 GetFrontierOpponentClass(u16 trainerId); // battle_tower
 extern u8 sub_81D5530(u16 trainerId); // pokenav
@@ -58,8 +57,8 @@ extern void sub_81D572C(u8 arg0, u16 trainerId); // pokenav
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 
 // this file's functions
-static void sub_814F8F8(u8 *textPtr);
-static void sub_814F950(u8 *dst);
+static void ChooseMoveUsedParticle(u8 *textPtr);
+static void ChooseTypeOfMoveUsedString(u8 *dst);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 // ewram variables
@@ -1322,8 +1321,8 @@ static const u8 sText_LinkTrainerWantsToBattlePause[] = _("{B_20}\nwants to batt
 static const u8 sText_TwoLinkTrainersWantToBattlePause[] = _("{B_20} and {B_21}\nwant to battle!{PAUSE 49}");
 
 // This is four lists of moves which use a different attack string in Japanese
-// to the default. See the documentation for sub_814F950 for more detail.
-static const u16 sUnknownMoveTable[] =
+// to the default. See the documentation for ChooseTypeOfMoveUsedString for more detail.
+static const u16 sGrammarMoveUsedTable[] =
 {
     MOVE_SWORDS_DANCE, MOVE_STRENGTH, MOVE_GROWTH,
     MOVE_HARDEN, MOVE_MINIMIZE, MOVE_SMOKESCREEN,
@@ -2142,14 +2141,14 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case STRINGID_USEDMOVE: // pokemon used a move msg
-        sub_814F8F8(gBattleTextBuff1); // buff1 doesn't appear in the string, leftover from japanese move names?
+        ChooseMoveUsedParticle(gBattleTextBuff1); // buff1 doesn't appear in the string, leftover from japanese move names
 
         if (gStringInfo->currentMove > LAST_MOVE_INDEX)
             StringCopy(gBattleTextBuff2, sATypeMove_Table[*(&gBattleStruct->stringMoveType)]);
         else
             StringCopy(gBattleTextBuff2, gMoveNames[gStringInfo->currentMove]);
 
-        sub_814F950(gBattleTextBuff2);
+        ChooseTypeOfMoveUsedString(gBattleTextBuff2);
         stringPtr = sText_AttackerUsedX;
         break;
     case STRINGID_BATTLEEND: // battle end
@@ -2740,10 +2739,6 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
     return dstID;
 }
 
-// TODO: move these to a general header like util.h
-#define ByteRead16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
-#define ByteRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
-
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 {
     u32 srcID = 1;
@@ -2757,7 +2752,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
         switch (src[srcID])
         {
         case B_BUFF_STRING: // battle string
-            hword = ByteRead16(&src[srcID + 1]);
+            hword = T1_READ_16(&src[srcID + 1]);
             StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_ID_ADDER]);
             srcID += 3;
             break;
@@ -2768,17 +2763,17 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                 value = src[srcID + 3];
                 break;
             case 2:
-                value = ByteRead16(&src[srcID + 3]);
+                value = T1_READ_16(&src[srcID + 3]);
                 break;
             case 4:
-                value = ByteRead32(&src[srcID + 3]);
+                value = T1_READ_32(&src[srcID + 3]);
                 break;
             }
             ConvertIntToDecimalStringN(dst, value, 0, src[srcID + 2]);
             srcID += src[srcID + 1] + 3;
             break;
         case B_BUFF_MOVE: // move name
-            StringAppend(dst, gMoveNames[ByteRead16(&src[srcID + 1])]);
+            StringAppend(dst, gMoveNames[T1_READ_16(&src[srcID + 1])]);
             srcID += 3;
             break;
         case B_BUFF_TYPE: // type name
@@ -2808,7 +2803,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             srcID += 2;
             break;
         case B_BUFF_SPECIES: // species name
-            GetSpeciesName(dst, ByteRead16(&src[srcID + 1]));
+            GetSpeciesName(dst, T1_READ_16(&src[srcID + 1]));
             srcID += 3;
             break;
         case B_BUFF_MON_NICK: // poke nick without prefix
@@ -2828,7 +2823,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             srcID += 2;
             break;
         case B_BUFF_ITEM: // item name
-            hword = ByteRead16(&src[srcID + 1]);
+            hword = T1_READ_16(&src[srcID + 1]);
             if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
             {
                 if (hword == ITEM_ENIGMA_BERRY)
@@ -2839,13 +2834,19 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                         StringAppend(dst, sText_BerrySuffix);
                     }
                     else
+                    {
                         StringAppend(dst, sText_EnigmaBerry);
+                    }
                 }
                 else
+                {
                     CopyItemName(hword, dst);
+                }
             }
             else
+            {
                 CopyItemName(hword, dst);
+            }
             srcID += 3;
             break;
         }
@@ -2854,18 +2855,18 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 
 // Loads one of two text strings into the provided buffer. This is functionally
 // unused, since the value loaded into the buffer is not read; it loaded one of
-// two particles (either "は" or "の") which works in tandem with sub_814F950
+// two particles (either "は" or "の") which works in tandem with ChooseTypeOfMoveUsedString
 // below to effect changes in the meaning of the line.
-static void sub_814F8F8(u8* textBuff)
+static void ChooseMoveUsedParticle(u8* textBuff)
 {
     s32 counter = 0;
     u32 i = 0;
 
     while (counter != 4)
     {
-        if (sUnknownMoveTable[i] == 0)
+        if (sGrammarMoveUsedTable[i] == 0)
             counter++;
-        if (sUnknownMoveTable[i++] == gStringInfo->currentMove)
+        if (sGrammarMoveUsedTable[i++] == gStringInfo->currentMove)
             break;
     }
 
@@ -2879,7 +2880,7 @@ static void sub_814F8F8(u8* textBuff)
 }
 
 // Appends "!" to the text buffer `dst`. In the original Japanese this looked
-// into the table of moves at sUnknownMoveTable and varied the line accordingly.
+// into the table of moves at sGrammarMoveUsedTable and varied the line accordingly.
 //
 // sText_ExclamationMark was a plain "!", used for any attack not on the list.
 // It resulted in the translation "<NAME>'s <ATTACK>!".
@@ -2896,7 +2897,7 @@ static void sub_814F8F8(u8* textBuff)
 //
 // sText_ExclamationMark5 was " こうげき！" This resulted in a translation of
 // "<NAME>'s <ATTACK> attack!".
-static void sub_814F950(u8* dst)
+static void ChooseTypeOfMoveUsedString(u8* dst)
 {
     s32 counter = 0;
     s32 i = 0;
@@ -2906,9 +2907,9 @@ static void sub_814F950(u8* dst)
 
     while (counter != 4)
     {
-        if (sUnknownMoveTable[i] == MOVE_NONE)
+        if (sGrammarMoveUsedTable[i] == MOVE_NONE)
             counter++;
-        if (sUnknownMoveTable[i++] == gStringInfo->currentMove)
+        if (sGrammarMoveUsedTable[i++] == gStringInfo->currentMove)
             break;
     }
 

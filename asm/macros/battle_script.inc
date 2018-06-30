@@ -511,7 +511,7 @@
 	.byte \bank
 	.endm
 
-	.macro atk5F
+	.macro swapattackerwithtarget
 	.byte 0x5f
 	.endm
 
@@ -1163,7 +1163,7 @@
 	.4byte \param0
 	.endm
 
-	.macro snatchsetbanks
+	.macro snatchsetbattlers
 	.byte 0xed
 	.endm
 

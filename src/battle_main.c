@@ -561,6 +561,7 @@ static const u8 sUnknown_0831BCE0[][3] = {{0, 0, 0}, {3, 5, 0}, {2, 3, 0}, {1, 2
 static const u8 sUnknown_0831BCEF[] = {4, 3, 2, 1};
 static const u8 sUnknown_0831BCF3[] = {4, 4, 4, 4};
 
+// code
 void CB2_InitBattle(void)
 {
     MoveSaveBlocks_ResetHeap();
