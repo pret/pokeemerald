@@ -1,5 +1,5 @@
 NewMauville_Inside: @ 848448C
-	.4byte NewMauville_Inside_MapAttributes
+	.4byte NewMauville_Inside_Layout
 	.4byte NewMauville_Inside_MapEvents
 	.4byte NewMauville_Inside_MapScripts
 	.4byte 0x0

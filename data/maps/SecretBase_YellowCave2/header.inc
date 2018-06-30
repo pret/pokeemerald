@@ -1,5 +1,5 @@
 SecretBase_YellowCave2: @ 8484B8C
-	.4byte SecretBase_YellowCave2_MapAttributes
+	.4byte SecretBase_YellowCave2_Layout
 	.4byte SecretBase_YellowCave2_MapEvents
 	.4byte SecretBase_YellowCave2_MapScripts
 	.4byte 0x0

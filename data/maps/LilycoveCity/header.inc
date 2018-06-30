@@ -1,5 +1,5 @@
 LilycoveCity: @ 8482544
-	.4byte LilycoveCity_MapAttributes
+	.4byte LilycoveCity_Layout
 	.4byte LilycoveCity_MapEvents
 	.4byte LilycoveCity_MapScripts
 	.4byte LilycoveCity_MapConnections

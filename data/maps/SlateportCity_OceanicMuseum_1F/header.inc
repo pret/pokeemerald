@@ -1,5 +1,5 @@
 SlateportCity_OceanicMuseum_1F: @ 84831A0
-	.4byte SlateportCity_OceanicMuseum_1F_MapAttributes
+	.4byte SlateportCity_OceanicMuseum_1F_Layout
 	.4byte SlateportCity_OceanicMuseum_1F_MapEvents
 	.4byte SlateportCity_OceanicMuseum_1F_MapScripts
 	.4byte 0x0

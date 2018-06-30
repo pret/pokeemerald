@@ -1,5 +1,5 @@
 Route131: @ 84829C0
-	.4byte Route131_MapAttributes
+	.4byte Route131_Layout
 	.4byte Route131_MapEvents
 	.4byte Route131_MapScripts
 	.4byte Route131_MapConnections

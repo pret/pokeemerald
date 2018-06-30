@@ -1,5 +1,5 @@
 BattleFrontier_BattleFactoryLobby: @ 84854A0
-	.4byte BattleFrontier_BattleFactoryLobby_MapAttributes
+	.4byte BattleFrontier_BattleFactoryLobby_Layout
 	.4byte BattleFrontier_BattleFactoryLobby_MapEvents
 	.4byte BattleFrontier_BattleFactoryLobby_MapScripts
 	.4byte 0x0

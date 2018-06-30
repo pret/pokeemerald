@@ -1,5 +1,5 @@
 Route121: @ 84828A8
-	.4byte Route121_MapAttributes
+	.4byte Route121_Layout
 	.4byte Route121_MapEvents
 	.4byte Route121_MapScripts
 	.4byte Route121_MapConnections

@@ -1,5 +1,5 @@
 LinkContestRoom3: @ 8484E80
-	.4byte LinkContestRoom3_MapAttributes
+	.4byte LinkContestRoom3_Layout
 	.4byte LinkContestRoom3_MapEvents
 	.4byte LinkContestRoom3_MapScripts
 	.4byte 0x0

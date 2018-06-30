@@ -1,5 +1,5 @@
 BattlePyramidSquare08: @ 8485024
-	.4byte BattlePyramidSquare08_MapAttributes
+	.4byte BattlePyramidSquare08_Layout
 	.4byte BattlePyramidSquare08_MapEvents
 	.4byte BattlePyramidSquare08_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 DewfordTown_Hall: @ 8482C7C
-	.4byte DewfordTown_Hall_MapAttributes
+	.4byte DewfordTown_Hall_Layout
 	.4byte DewfordTown_Hall_MapEvents
 	.4byte DewfordTown_Hall_MapScripts
 	.4byte 0x0

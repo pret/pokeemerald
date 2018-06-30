@@ -1,5 +1,5 @@
 SafariZone_South: @ 8485190
-	.4byte SafariZone_South_MapAttributes
+	.4byte SafariZone_South_Layout
 	.4byte SafariZone_South_MapEvents
 	.4byte SafariZone_South_MapScripts
 	.4byte SafariZone_South_MapConnections

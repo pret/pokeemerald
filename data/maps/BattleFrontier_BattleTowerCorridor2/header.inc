@@ -1,5 +1,5 @@
 BattleFrontier_BattleTowerCorridor2: @ 84852FC
-	.4byte BattleFrontier_BattleTowerCorridor2_MapAttributes
+	.4byte BattleFrontier_BattleTowerCorridor2_Layout
 	.4byte BattleFrontier_BattleTowerCorridor2_MapEvents
 	.4byte BattleFrontier_BattleTowerCorridor2_MapScripts
 	.4byte 0x0

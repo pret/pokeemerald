@@ -1,5 +1,5 @@
 Route121_SafariZoneEntrance: @ 8483EA4
-	.4byte Route121_SafariZoneEntrance_MapAttributes
+	.4byte Route121_SafariZoneEntrance_Layout
 	.4byte Route121_SafariZoneEntrance_MapEvents
 	.4byte Route121_SafariZoneEntrance_MapScripts
 	.4byte 0x0

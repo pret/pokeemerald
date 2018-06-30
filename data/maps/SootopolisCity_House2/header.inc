@@ -1,5 +1,5 @@
 SootopolisCity_House2: @ 8483AD0
-	.4byte SootopolisCity_House2_MapAttributes
+	.4byte SootopolisCity_House2_Layout
 	.4byte SootopolisCity_House2_MapEvents
 	.4byte SootopolisCity_House2_MapScripts
 	.4byte 0x0

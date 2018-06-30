@@ -3821,24 +3821,24 @@ const struct WildPokemonHeader gWildMonHeaders[] =
 		.fishingMonsInfo = NULL,
 	},
 	{
-		.mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_UNUSED_RS_B1F),
-		.mapNum = MAP_NUM(CAVE_OF_ORIGIN_UNUSED_RS_B1F),
+		.mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1),
+		.mapNum = MAP_NUM(CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1),
 		.landMonsInfo = &gCaveOfOrigin_UnusedRubySapphireMap1_LandMonsInfo,
 		.waterMonsInfo = NULL,
 		.rockSmashMonsInfo = NULL,
 		.fishingMonsInfo = NULL,
 	},
 	{
-		.mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_UNUSED_RS_B2F),
-		.mapNum = MAP_NUM(CAVE_OF_ORIGIN_UNUSED_RS_B2F),
+		.mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2),
+		.mapNum = MAP_NUM(CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2),
 		.landMonsInfo = &gCaveOfOrigin_UnusedRubySapphireMap2_LandMonsInfo,
 		.waterMonsInfo = NULL,
 		.rockSmashMonsInfo = NULL,
 		.fishingMonsInfo = NULL,
 	},
 	{
-		.mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_UNUSED_RS_B3F),
-		.mapNum = MAP_NUM(CAVE_OF_ORIGIN_UNUSED_RS_B3F),
+		.mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3),
+		.mapNum = MAP_NUM(CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3),
 		.landMonsInfo = &gCaveOfOrigin_UnusedRubySapphireMap3_LandMonsInfo,
 		.waterMonsInfo = NULL,
 		.rockSmashMonsInfo = NULL,
@@ -4613,7 +4613,7 @@ static u16 GetRoute119WaterTileNum(s16 x, s16 y, u8 section)
 
     for (yCur = yMin; yCur <= yMax; yCur++)
     {
-        for (xCur = 0; xCur < gMapHeader.mapData->width; xCur++)
+        for (xCur = 0; xCur < gMapHeader.mapLayout->width; xCur++)
         {
             u8 tileBehaviorId = MapGridGetMetatileBehaviorAt(xCur + 7, yCur + 7);
             if (MetatileBehavior_IsSurfableAndNotWaterfall(tileBehaviorId) == TRUE)
@@ -4976,7 +4976,7 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
     level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
-    if (gMapHeader.mapDataId != 0x166 && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
+    if (gMapHeader.mapLayoutId != 0x166 && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
     CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
@@ -5037,7 +5037,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
     {
         u32 ability = GetMonAbility(&gPlayerParty[0]);
 
-        if (ability == ABILITY_STENCH && gMapHeader.mapDataId == 0x169)
+        if (ability == ABILITY_STENCH && gMapHeader.mapLayoutId == 0x169)
             encounterRate = encounterRate * 3 / 4;
         else if (ability == ABILITY_STENCH)
             encounterRate /= 2;
@@ -5085,7 +5085,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == 0xFFFF) // invalid
     {
-        if (gMapHeader.mapDataId == 0x166)
+        if (gMapHeader.mapLayoutId == 0x166)
         {
             headerId = GetBattlePikeWildMonHeaderId();
             if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
@@ -5100,7 +5100,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
             BattleSetup_StartBattlePikeWildBattle();
             return TRUE;
         }
-        if (gMapHeader.mapDataId == 0x169)
+        if (gMapHeader.mapLayoutId == 0x169)
         {
             headerId = gSaveBlock2Ptr->frontier.field_CB2;
             if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
@@ -5228,7 +5228,7 @@ bool8 SweetScentWildEncounter(void)
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == 0xFFFF) // invalid
     {
-        if (gMapHeader.mapDataId == 0x166)
+        if (gMapHeader.mapLayoutId == 0x166)
         {
             headerId = GetBattlePikeWildMonHeaderId();
             if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
@@ -5238,7 +5238,7 @@ bool8 SweetScentWildEncounter(void)
             BattleSetup_StartBattlePikeWildBattle();
             return TRUE;
         }
-        if (gMapHeader.mapDataId == 0x169)
+        if (gMapHeader.mapLayoutId == 0x169)
         {
             headerId = gSaveBlock2Ptr->frontier.field_CB2;
             if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)

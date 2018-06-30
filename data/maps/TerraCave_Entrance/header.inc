@@ -1,5 +1,5 @@
 TerraCave_Entrance: @ 8484A20
-	.4byte TerraCave_Entrance_MapAttributes
+	.4byte TerraCave_Entrance_Layout
 	.4byte TerraCave_Entrance_MapEvents
 	.4byte TerraCave_Entrance_MapScripts
 	.4byte 0x0

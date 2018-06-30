@@ -1,5 +1,5 @@
 BattleFrontier_BattlePointExchangeServiceCorner: @ 84855D4
-	.4byte BattleFrontier_BattlePointExchangeServiceCorner_MapAttributes
+	.4byte BattleFrontier_BattlePointExchangeServiceCorner_Layout
 	.4byte BattleFrontier_BattlePointExchangeServiceCorner_MapEvents
 	.4byte BattleFrontier_BattlePointExchangeServiceCorner_MapScripts
 	.4byte 0x0

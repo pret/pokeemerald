@@ -1,5 +1,5 @@
 BattleFrontier_Lounge9: @ 84856EC
-	.4byte BattleFrontier_Lounge9_MapAttributes
+	.4byte BattleFrontier_Lounge2_Layout
 	.4byte BattleFrontier_Lounge9_MapEvents
 	.4byte BattleFrontier_Lounge9_MapScripts
 	.4byte 0x0

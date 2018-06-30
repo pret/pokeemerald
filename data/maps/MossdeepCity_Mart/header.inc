@@ -1,5 +1,5 @@
 MossdeepCity_Mart: @ 8483948
-	.4byte MossdeepCity_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte MossdeepCity_Mart_MapEvents
 	.4byte MossdeepCity_Mart_MapScripts
 	.4byte 0x0

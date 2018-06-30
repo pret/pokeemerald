@@ -1,5 +1,5 @@
 JaggedPass: @ 848402C
-	.4byte JaggedPass_MapAttributes
+	.4byte JaggedPass_Layout
 	.4byte JaggedPass_MapEvents
 	.4byte JaggedPass_MapScripts
 	.4byte 0x0

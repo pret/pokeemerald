@@ -1,5 +1,5 @@
 MauvilleCity_PokemonCenter_1F: @ 84832F0
-	.4byte MauvilleCity_PokemonCenter_1F_MapAttributes
+	.4byte PokemonCenter_1F_Layout
 	.4byte MauvilleCity_PokemonCenter_1F_MapEvents
 	.4byte MauvilleCity_PokemonCenter_1F_MapScripts
 	.4byte 0x0

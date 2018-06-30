@@ -1,5 +1,5 @@
 Route106: @ 8482704
-	.4byte Route106_MapAttributes
+	.4byte Route106_Layout
 	.4byte Route106_MapEvents
 	.4byte Route106_MapScripts
 	.4byte Route106_MapConnections

@@ -1,5 +1,5 @@
 Underwater2: @ 8482A4C
-	.4byte Underwater2_MapAttributes
+	.4byte Underwater2_Layout
 	.4byte Underwater2_MapEvents
 	.4byte Underwater2_MapScripts
 	.4byte Underwater2_MapConnections

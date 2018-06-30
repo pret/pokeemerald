@@ -1,5 +1,5 @@
 TrainerHill_Elevator: @ 8485ADC
-	.4byte TrainerHill_Elevator_MapAttributes
+	.4byte BattleElevator_Layout
 	.4byte TrainerHill_Elevator_MapEvents
 	.4byte TrainerHill_Elevator_MapScripts
 	.4byte 0x0

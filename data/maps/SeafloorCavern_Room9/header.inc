@@ -1,5 +1,5 @@
 SeafloorCavern_Room9: @ 84842B0
-	.4byte SeafloorCavern_Room9_MapAttributes
+	.4byte SeafloorCavern_Room9_Layout
 	.4byte SeafloorCavern_Room9_MapEvents
 	.4byte SeafloorCavern_Room9_MapScripts
 	.4byte 0x0

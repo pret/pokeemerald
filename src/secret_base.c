@@ -246,16 +246,16 @@ void sub_80E8C98(void)
 
 void sub_80E8CB0(s16 *xPtr, s16 *yPtr, u16 tile)
 {
-    const struct MapData *mapData;
+    const struct MapLayout *mapLayout;
     s16 x;
     s16 y;
 
-    mapData = gMapHeader.mapData;
-    for (y = 0; y < mapData->height; y ++)
+    mapLayout = gMapHeader.mapLayout;
+    for (y = 0; y < mapLayout->height; y ++)
     {
-        for (x = 0; x < mapData->width; x ++)
+        for (x = 0; x < mapLayout->width; x ++)
         {
-            if ((mapData->map[y * mapData->width + x] & 0x3ff) == tile)
+            if ((mapLayout->map[y * mapLayout->width + x] & 0x3ff) == tile)
             {
                 *xPtr = x;
                 *yPtr = y;

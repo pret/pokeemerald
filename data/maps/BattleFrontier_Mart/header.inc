@@ -1,5 +1,5 @@
 BattleFrontier_Mart: @ 8485740
-	.4byte BattleFrontier_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte BattleFrontier_Mart_MapEvents
 	.4byte BattleFrontier_Mart_MapScripts
 	.4byte 0x0

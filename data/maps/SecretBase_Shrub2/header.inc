@@ -1,5 +1,5 @@
 SecretBase_Shrub2: @ 8484BC4
-	.4byte SecretBase_Shrub2_MapAttributes
+	.4byte SecretBase_Shrub2_Layout
 	.4byte SecretBase_Shrub2_MapEvents
 	.4byte SecretBase_Shrub2_MapScripts
 	.4byte 0x0

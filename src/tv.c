@@ -1958,7 +1958,7 @@ void sub_80EDB44(void)
             show->rivalTrainer.dexCount = GetHoennPokedexCount(0x01);
         }
         show->rivalTrainer.location = gMapHeader.regionMapSectionId;
-        show->rivalTrainer.mapDataId = gMapHeader.mapDataId;
+        show->rivalTrainer.mapLayoutId = gMapHeader.mapLayoutId;
         show->rivalTrainer.nSilverSymbols = 0;
         show->rivalTrainer.nGoldSymbols = 0;
         for (i = 0; i < 7; i ++)
@@ -2010,7 +2010,7 @@ void sub_80EDCE8(void)
         show->treasureInvestigators.active = FALSE;
         show->treasureInvestigators.item = gSpecialVar_0x8005;
         show->treasureInvestigators.location = gMapHeader.regionMapSectionId;
-        show->treasureInvestigators.mapDataId = gMapHeader.mapDataId;
+        show->treasureInvestigators.mapLayoutId = gMapHeader.mapLayoutId;
         StringCopy(show->treasureInvestigators.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->treasureInvestigators.language = gGameLanguage;
@@ -6261,7 +6261,7 @@ static void DoTVShowTodaysRivalTrainer(void)
                     sTVShowState = 8;
                     break;
                 case MAPSEC_DYNAMIC:
-                    switch (show->rivalTrainer.mapDataId)
+                    switch (show->rivalTrainer.mapLayoutId)
                     {
                         case 0x115 ... 0x117:
                             sTVShowState = 10;
@@ -6460,7 +6460,7 @@ static void DoTVShowHoennTreasureInvestigators(void)
             StringCopy(gStringVar1, ItemId_GetName(show->treasureInvestigators.item));
             if (show->treasureInvestigators.location == MAPSEC_DYNAMIC)
             {
-                switch (show->treasureInvestigators.mapDataId)
+                switch (show->treasureInvestigators.mapLayoutId)
                 {
                     case 0x115 ... 0x117:
                         sTVShowState = 2;

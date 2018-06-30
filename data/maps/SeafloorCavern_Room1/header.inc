@@ -1,5 +1,5 @@
 SeafloorCavern_Room1: @ 84841D0
-	.4byte SeafloorCavern_Room1_MapAttributes
+	.4byte SeafloorCavern_Room1_Layout
 	.4byte SeafloorCavern_Room1_MapEvents
 	.4byte SeafloorCavern_Room1_MapScripts
 	.4byte 0x0

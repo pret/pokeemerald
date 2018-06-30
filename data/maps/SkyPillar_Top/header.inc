@@ -1,5 +1,5 @@
 SkyPillar_Top: @ 848480C
-	.4byte SkyPillar_Top_MapAttributes
+	.4byte SkyPillar_Top_Layout
 	.4byte SkyPillar_Top_MapEvents
 	.4byte SkyPillar_Top_MapScripts
 	.4byte 0x0

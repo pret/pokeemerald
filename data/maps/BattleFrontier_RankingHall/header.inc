@@ -1,5 +1,5 @@
 BattleFrontier_RankingHall: @ 848559C
-	.4byte BattleFrontier_RankingHall_MapAttributes
+	.4byte BattleFrontier_RankingHall_Layout
 	.4byte BattleFrontier_RankingHall_MapEvents
 	.4byte BattleFrontier_RankingHall_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 NavelRock_Up2: @ 848591C
-	.4byte NavelRock_Up2_MapAttributes
+	.4byte NavelRock_LadderRoom2_Layout
 	.4byte NavelRock_Up2_MapEvents
 	.4byte NavelRock_Up2_MapScripts
 	.4byte 0x0

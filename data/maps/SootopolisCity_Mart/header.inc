@@ -1,5 +1,5 @@
 SootopolisCity_Mart: @ 8483A98
-	.4byte SootopolisCity_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte SootopolisCity_Mart_MapEvents
 	.4byte SootopolisCity_Mart_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 Route111_OldLadysRestStop: @ 8483DC4
-	.4byte Route111_OldLadysRestStop_MapAttributes
+	.4byte House3_Layout
 	.4byte Route111_OldLadysRestStop_MapEvents
 	.4byte Route111_OldLadysRestStop_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 OldaleTown_Mart: @ 8482BF0
-	.4byte OldaleTown_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte OldaleTown_Mart_MapEvents
 	.4byte OldaleTown_Mart_MapScripts
 	.4byte 0x0

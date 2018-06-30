@@ -1,5 +1,5 @@
 VerdanturfTown_PokemonCenter_2F: @ 8482EE4
-	.4byte VerdanturfTown_PokemonCenter_2F_MapAttributes
+	.4byte PokemonCenter_2F_Layout
 	.4byte VerdanturfTown_PokemonCenter_2F_MapEvents
 	.4byte VerdanturfTown_PokemonCenter_2F_MapScripts
 	.4byte 0x0

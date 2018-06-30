@@ -1,5 +1,5 @@
 LilycoveCity_UnusedMart: @ 8483718
-	.4byte LilycoveCity_UnusedMart_MapAttributes
+	.4byte Mart_Layout
 	.4byte LilycoveCity_UnusedMart_MapEvents
 	.4byte LilycoveCity_UnusedMart_MapScripts
 	.4byte 0x0

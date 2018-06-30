@@ -1,5 +1,5 @@
 EverGrandeCity_Hall4: @ 8483CAC
-	.4byte EverGrandeCity_Hall4_MapAttributes
+	.4byte EverGrandeCity_Hall4_Layout
 	.4byte EverGrandeCity_Hall4_MapEvents
 	.4byte EverGrandeCity_Hall4_MapScripts
 	.4byte 0x0

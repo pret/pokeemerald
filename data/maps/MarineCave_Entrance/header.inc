@@ -1,5 +1,5 @@
 MarineCave_Entrance: @ 84849E8
-	.4byte MarineCave_Entrance_MapAttributes
+	.4byte MarineCave_Entrance_Layout
 	.4byte MarineCave_Entrance_MapEvents
 	.4byte MarineCave_Entrance_MapScripts
 	.4byte 0x0

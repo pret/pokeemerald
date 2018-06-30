@@ -1,5 +1,5 @@
 EverGrandeCity_SidneysRoom: @ 8483BCC
-	.4byte EverGrandeCity_SidneysRoom_MapAttributes
+	.4byte EverGrandeCity_SidneysRoom_Layout
 	.4byte EverGrandeCity_SidneysRoom_MapEvents
 	.4byte EverGrandeCity_SidneysRoom_MapScripts
 	.4byte 0x0

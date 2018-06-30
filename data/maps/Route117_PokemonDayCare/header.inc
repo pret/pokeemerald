@@ -1,5 +1,5 @@
 Route117_PokemonDayCare: @ 8483E88
-	.4byte Route117_PokemonDayCare_MapAttributes
+	.4byte Route117_PokemonDayCare_Layout
 	.4byte Route117_PokemonDayCare_MapEvents
 	.4byte Route117_PokemonDayCare_MapScripts
 	.4byte 0x0

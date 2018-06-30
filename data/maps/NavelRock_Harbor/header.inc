@@ -1,5 +1,5 @@
 NavelRock_Harbor: @ 8485890
-	.4byte NavelRock_Harbor_MapAttributes
+	.4byte IslandHarbor_Layout
 	.4byte NavelRock_Harbor_MapEvents
 	.4byte NavelRock_Harbor_MapScripts
 	.4byte 0x0
