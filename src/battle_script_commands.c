@@ -3533,7 +3533,7 @@ static void atk24(void)
     if (gBattleControllerExecFlags)
         return;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId == STEVEN_PARTNER_ID)
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
         for (i = 0; i < 3; i++)
         {
@@ -5870,7 +5870,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     u32 lastMonLevel = 0;
     u32 moneyReward = 0;
 
-    if (trainerId == SECRET_BASE_OPPONENT)
+    if (trainerId == TRAINER_SECRET_BASE)
     {
         moneyReward = 20 * gBattleResources->secretBase->party.levels[0] * gBattleStruct->moneyMultiplier;
     }
@@ -8124,7 +8124,7 @@ static void atk9E_metronome(void)
         s32 i;
 
         gCurrentMove = (Random() & 0x1FF) + 1;
-        if (gCurrentMove > LAST_MOVE_INDEX)
+        if (gCurrentMove >= MOVES_COUNT)
             continue;
 
         for (i = 0; i < 4; i++); // ?

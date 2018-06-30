@@ -1479,7 +1479,7 @@ _08162C08:
 	ldr r0, =0x000003fe
 	cmp r4, r0
 	bne _08162C1C
-	bl sub_81A4D00
+	bl GetFrontierBrainTrainerClass
 	lsls r0, 24
 	lsrs r0, 24
 	b _08162D1E
@@ -1729,7 +1729,7 @@ _08162E54:
 	cmp r5, r0
 	bne _08162E68
 	adds r0, r6, 0
-	bl sub_81A4D50
+	bl CopyFrontierBrainTrainerName
 	b _08162F62
 	.pool
 _08162E68:

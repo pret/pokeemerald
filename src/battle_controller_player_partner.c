@@ -11,6 +11,7 @@
 #include "util.h"
 #include "main.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 #include "sound.h"
 #include "window.h"
 #include "m4a.h"
@@ -1308,9 +1309,9 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     s16 xPos, yPos;
     u32 trainerPicId;
 
-    if (gPartnerTrainerId == STEVEN_PARTNER_ID)
+    if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
-        trainerPicId = BACK_PIC_STEVEN;
+        trainerPicId = TRAINER_BACK_PIC_STEVEN;
         xPos = 90;
         yPos = (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80;
     }
@@ -1322,7 +1323,7 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     }
 
     // Use back pic only if the partner is Steven
-    if (gPartnerTrainerId == STEVEN_PARTNER_ID)
+    if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
         DecompressTrainerBackPic(trainerPicId, gActiveBattler);
         sub_806A12C(trainerPicId, GetBattlerPosition(gActiveBattler));
@@ -1793,9 +1794,9 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(void)
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
 
     paletteNum = AllocSpritePalette(0xD6F9);
-    if (gPartnerTrainerId == STEVEN_PARTNER_ID)
+    if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
-        u8 spriteId = BACK_PIC_STEVEN;
+        u8 spriteId = TRAINER_BACK_PIC_STEVEN;
         LoadCompressedPalette(gTrainerBackPicPaletteTable[spriteId].data, 0x100 + paletteNum * 16, 32);
     }
     else

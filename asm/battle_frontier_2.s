@@ -19881,7 +19881,7 @@ sub_81A4CB0: @ 81A4CB0
 	ands r0, r1
 	cmp r0, 0
 	beq _081A4CD0
-	bl sub_8185EA0
+	bl GetRecordedBattleFrontierFacility
 	lsls r0, 24
 	lsrs r0, 24
 	b _081A4CDA
@@ -19893,7 +19893,7 @@ _081A4CD0:
 	lsrs r0, 16
 _081A4CDA:
 	ldr r2, =gTrainers
-	ldr r1, =gUnknown_08611D30
+	ldr r1, =gFacilityToBrainTrainerId
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -19907,8 +19907,8 @@ _081A4CDA:
 	.pool
 	thumb_func_end sub_81A4CB0
 
-	thumb_func_start sub_81A4D00
-sub_81A4D00: @ 81A4D00
+	thumb_func_start GetFrontierBrainTrainerClass
+GetFrontierBrainTrainerClass: @ 81A4D00
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -19917,7 +19917,7 @@ sub_81A4D00: @ 81A4D00
 	ands r0, r1
 	cmp r0, 0
 	beq _081A4D20
-	bl sub_8185EA0
+	bl GetRecordedBattleFrontierFacility
 	lsls r0, 24
 	lsrs r0, 24
 	b _081A4D2A
@@ -19929,7 +19929,7 @@ _081A4D20:
 	lsrs r0, 16
 _081A4D2A:
 	ldr r2, =gTrainers
-	ldr r1, =gUnknown_08611D30
+	ldr r1, =gFacilityToBrainTrainerId
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -19941,10 +19941,10 @@ _081A4D2A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81A4D00
+	thumb_func_end GetFrontierBrainTrainerClass
 
-	thumb_func_start sub_81A4D50
-sub_81A4D50: @ 81A4D50
+	thumb_func_start CopyFrontierBrainTrainerName
+CopyFrontierBrainTrainerName: @ 81A4D50
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, =gBattleTypeFlags
@@ -19954,7 +19954,7 @@ sub_81A4D50: @ 81A4D50
 	ands r0, r1
 	cmp r0, 0
 	beq _081A4D70
-	bl sub_8185EA0
+	bl GetRecordedBattleFrontierFacility
 	lsls r0, 24
 	lsrs r0, 24
 	b _081A4D7A
@@ -19968,7 +19968,7 @@ _081A4D7A:
 	movs r3, 0
 	lsls r0, 1
 	ldr r2, =gTrainers
-	ldr r1, =gUnknown_08611D30
+	ldr r1, =gFacilityToBrainTrainerId
 	adds r0, r1
 	ldrh r1, [r0]
 	lsls r0, r1, 2
@@ -19991,7 +19991,7 @@ _081A4D90:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81A4D50
+	thumb_func_end CopyFrontierBrainTrainerName
 
 	thumb_func_start sub_81A4DB8
 sub_81A4DB8: @ 81A4DB8
@@ -20483,7 +20483,7 @@ sub_81A51A8: @ 81A51A8
 	ands r0, r1
 	cmp r0, 0
 	beq _081A51D4
-	bl sub_8185EA0
+	bl GetRecordedBattleFrontierFacility
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_8185EAC

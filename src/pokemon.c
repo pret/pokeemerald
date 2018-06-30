@@ -2488,7 +2488,7 @@ static bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battlerId)
         return FALSE;
     if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
         return FALSE;
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gTrainerBattleOpponent_A == SECRET_BASE_OPPONENT)
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         return FALSE;
     if (FlagGet(badgeFlag))
         return TRUE;
@@ -5678,7 +5678,7 @@ const u8 *GetTrainerPartnerName(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        if (gPartnerTrainerId == STEVEN_PARTNER_ID)
+        if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
         {
             return gTrainers[TRAINER_STEVEN].trainerName;
         }
@@ -5891,15 +5891,15 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 
 const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
-    if (trainerId > NO_OF_TRAINERS)
-        trainerId = 0;
+    if (trainerId >= TRAINERS_COUNT)
+        trainerId = TRAINER_NONE;
     return gTrainerClassNames[gTrainers[trainerId].trainerClass];
 }
 
 const u8 *GetTrainerNameFromId(u16 trainerId)
 {
-    if (trainerId > NO_OF_TRAINERS)
-        trainerId = 0;
+    if (trainerId >= TRAINERS_COUNT)
+        trainerId = TRAINER_NONE;
     return gTrainers[trainerId].trainerName;
 }
 

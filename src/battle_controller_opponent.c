@@ -1232,7 +1232,7 @@ static void OpponentHandleDrawTrainerPic(void)
     {
         trainerPicId = GetSecretBaseTrainerPicIndex();
     }
-    else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)
+    else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
         trainerPicId = sub_81A4CB0();
     }
@@ -1316,7 +1316,7 @@ static void OpponentHandleTrainerSlide(void)
     {
         trainerPicId = GetSecretBaseTrainerPicIndex();
     }
-    else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)
+    else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
         trainerPicId = sub_81A4CB0();
     }

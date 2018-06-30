@@ -15,6 +15,7 @@
 #include "constants/songs.h"
 #include "sound.h"
 #include "constants/moves.h"
+#include "constants/trainers.h"
 #include "window.h"
 #include "m4a.h"
 #include "palette.h"
@@ -1037,11 +1038,11 @@ static void WallyHandleReturnMonToBall(void)
 
 static void WallyHandleDrawTrainerPic(void)
 {
-    DecompressTrainerBackPic(BACK_PIC_WALLY, gActiveBattler);
-    sub_806A12C(BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
+    DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, gActiveBattler);
+    sub_806A12C(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
                                                80,
-                                               80 + 4 * (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords),
+                                               80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].coords),
                                                30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
@@ -1052,11 +1053,11 @@ static void WallyHandleDrawTrainerPic(void)
 
 static void WallyHandleTrainerSlide(void)
 {
-    DecompressTrainerBackPic(BACK_PIC_WALLY, gActiveBattler);
-    sub_806A12C(BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
+    DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, gActiveBattler);
+    sub_806A12C(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
                                                80,
-                                               80 + 4 * (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords),
+                                               80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].coords),
                                                30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
@@ -1444,7 +1445,7 @@ static void WallyHandleIntroTrainerBallThrow(void)
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
 
     paletteNum = AllocSpritePalette(0xD6F8);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[BACK_PIC_WALLY].data, 0x100 + paletteNum * 16, 32);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_WALLY].data, 0x100 + paletteNum * 16, 32);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
 
     taskId = CreateTask(sub_816AC04, 5);

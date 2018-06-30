@@ -15,6 +15,7 @@
 #include "constants/songs.h"
 #include "sound.h"
 #include "constants/moves.h"
+#include "constants/trainers.h"
 #include "window.h"
 #include "m4a.h"
 #include "palette.h"
@@ -2259,9 +2260,9 @@ static void DoSwitchOutAnimation(void)
     }
 }
 
-// some explanation here
-// in emerald it's possible to have a tag battle in the battle frontier facilities with AI
-// which use the front sprite for both the player and the partner as opposed to any other battles (including the one with Steven) that use the back pic as well as animate it
+// In emerald it's possible to have a tag battle in the battle frontier facilities with AI
+// which use the front sprite for both the player and the partner as opposed to any other battles (including the one with Steven)
+// that use an animated back pic.
 static void PlayerHandleDrawTrainerPic(void)
 {
     s16 xPos, yPos;
@@ -2272,12 +2273,12 @@ static void PlayerHandleDrawTrainerPic(void)
         if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_FIRE_RED
             || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_LEAF_GREEN)
         {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + BACK_PIC_RED;
+            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RED;
         }
         else if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_RUBY
                  || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_SAPPHIRE)
         {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + BACK_PIC_RS_BRENDAN;
+            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
         }
         else
         {
@@ -2296,7 +2297,7 @@ static void PlayerHandleDrawTrainerPic(void)
         else // first mon
             xPos = 32;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != STEVEN_PARTNER_ID)
+        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != TRAINER_STEVEN_PARTNER)
         {
             xPos = 90;
             yPos = (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 80;
@@ -2314,7 +2315,7 @@ static void PlayerHandleDrawTrainerPic(void)
     }
 
     // Use front pic table for any tag battles unless your partner is Steven.
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != STEVEN_PARTNER_ID)
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != TRAINER_STEVEN_PARTNER)
     {
         trainerPicId = PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender);
         DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
@@ -2354,12 +2355,12 @@ static void PlayerHandleTrainerSlide(void)
         if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_FIRE_RED
             || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_LEAF_GREEN)
         {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + BACK_PIC_RED;
+            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RED;
         }
         else if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_RUBY
                  || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_SAPPHIRE)
         {
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + BACK_PIC_RS_BRENDAN;
+            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
         }
         else
         {

@@ -33,7 +33,7 @@ struct BattleWindowText
 
 extern u8 gUnknown_0203C7B4;
 
-extern const u8 gMoveNames[LAST_MOVE_INDEX + 1][13];
+extern const u8 gMoveNames[MOVES_COUNT][13];
 extern const u8 gTrainerClassNames[][13];
 extern const u16 gUnknown_08D85620[];
 
@@ -43,11 +43,11 @@ extern const u8 gText_PkmnBoxLanettesPCFull[];
 extern const u8 gText_PkmnTransferredSomeonesPC[];
 extern const u8 gText_PkmnTransferredLanettesPC[];
 
-extern u8 sub_81A4D00(void); // battle_frontier_2
+extern u8 GetFrontierBrainTrainerClass(void); // battle_frontier_2
 extern u8 GetFrontierOpponentClass(u16 trainerId); // battle_tower
 extern u8 sub_81D5530(u16 trainerId); // pokenav
 extern u8 GetEreaderTrainerClassId(void); // battle_tower
-extern void sub_81A4D50(u8 *txtPtr); // battle_frontier_2
+extern void CopyFrontierBrainTrainerName(u8 *txtPtr); // battle_frontier_2
 extern void sub_81D5554(u8 *txtPtr, u16 trainerId); // pokenav
 extern void GetEreaderTrainerName(u8 *txtPtr);
 extern void sub_81A36D0(u8 arg0, u16 trainerId); // battle_frontier_2
@@ -2139,7 +2139,7 @@ void BufferStringBattle(u16 stringID)
     case STRINGID_USEDMOVE: // pokemon used a move msg
         ChooseMoveUsedParticle(gBattleTextBuff1); // buff1 doesn't appear in the string, leftover from japanese move names
 
-        if (gBattleMsgDataPtr->currentMove > LAST_MOVE_INDEX)
+        if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
             StringCopy(gBattleTextBuff2, sATypeMove_Table[*(&gBattleStruct->stringMoveType)]);
         else
             StringCopy(gBattleTextBuff2, gMoveNames[gBattleMsgDataPtr->currentMove]);
@@ -2427,13 +2427,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlerPartyIndexes[gBattleScripting.battler])
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
-                if (gBattleMsgDataPtr->currentMove > LAST_MOVE_INDEX)
+                if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
                     toCpy = sATypeMove_Table[gBattleStruct->stringMoveType];
                 else
                     toCpy = gMoveNames[gBattleMsgDataPtr->currentMove];
                 break;
             case B_TXT_LAST_MOVE: // originally used move name
-                if (gBattleMsgDataPtr->originallyUsedMove > LAST_MOVE_INDEX)
+                if (gBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT)
                     toCpy = sATypeMove_Table[gBattleStruct->stringMoveType];
                 else
                     toCpy = gMoveNames[gBattleMsgDataPtr->originallyUsedMove];
@@ -2501,8 +2501,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     toCpy = gTrainerClassNames[GetSecretBaseTrainerClass()];
                 else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
                     toCpy = gTrainerClassNames[sub_8068BB0()];
-                else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)
-                    toCpy = gTrainerClassNames[sub_81A4D00()];
+                else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
+                    toCpy = gTrainerClassNames[GetFrontierBrainTrainerClass()];
                 else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                     toCpy = gTrainerClassNames[GetFrontierOpponentClass(gTrainerBattleOpponent_A)];
                 else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
@@ -2525,9 +2525,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 {
                     toCpy = gLinkPlayers[multiplayerID ^ BIT_SIDE].name;
                 }
-                else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)
+                else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
                 {
-                    sub_81A4D50(text);
+                    CopyFrontierBrainTrainerName(text);
                     toCpy = text;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)

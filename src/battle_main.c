@@ -614,7 +614,7 @@ static void CB2_InitBattleInternal(void)
 
     gBattle_WIN0H = 240;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != STEVEN_PARTNER_ID)
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != TRAINER_STEVEN_PARTNER)
     {
         gBattle_WIN0V = 159;
         gBattle_WIN1H = 240;
@@ -1914,7 +1914,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     s32 i, j;
     u8 monsCount;
 
-    if (trainerNum == SECRET_BASE_OPPONENT)
+    if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
@@ -4982,7 +4982,7 @@ static void HandleEndTurn_BattleWon(void)
         BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
 
-        if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)
+        if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
             PlayBGM(MUS_KACHI3);
         else
             PlayBGM(MUS_KACHI1);

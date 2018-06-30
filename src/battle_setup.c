@@ -798,7 +798,7 @@ static u8 GetTrainerBattleTransition(void)
     u8 enemyLevel;
     u8 playerLevel;
 
-    if (gTrainerBattleOpponent_A == SECRET_BASE_OPPONENT)
+    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         return B_TRANSITION_CHAMPION;
 
     if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR)
@@ -1305,7 +1305,7 @@ void BattleSetup_StartTrainerBattle(void)
 
 static void CB2_EndTrainerBattle(void)
 {
-    if (gTrainerBattleOpponent_A == SECRET_BASE_OPPONENT)
+    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScript);
     }
@@ -1329,7 +1329,7 @@ static void CB2_EndTrainerBattle(void)
 
 static void CB2_EndRematchBattle(void)
 {
-    if (gTrainerBattleOpponent_A == SECRET_BASE_OPPONENT)
+    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScript);
     }
@@ -1497,7 +1497,7 @@ const u8 *GetTrainerALoseText(void)
 {
     const u8 *string;
 
-    if (gTrainerBattleOpponent_A == SECRET_BASE_OPPONENT)
+    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         string = GetSecretBaseTrainerLoseText();
     else
         string = sTrainerADefeatSpeech;

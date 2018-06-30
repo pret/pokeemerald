@@ -79,7 +79,7 @@ EWRAM_DATA static u16 sUnknown_0203C79C[4] = {0};
 EWRAM_DATA static u16 sUnknown_0203C7A4[4] = {0};
 EWRAM_DATA static u8 sUnknown_0203C7AC = 0;
 EWRAM_DATA static u8 sUnknown_0203C7AD = 0;
-EWRAM_DATA static u8 sUnknown_0203C7AE = 0;
+EWRAM_DATA static u8 sRecordedBattle_FrontierFacility = 0;
 EWRAM_DATA static u8 sUnknown_0203C7AF = 0;
 EWRAM_DATA static MainCallback sCallback2_AfterRecordedBattle = NULL;
 EWRAM_DATA u8 gUnknown_0203C7B4 = 0;
@@ -139,7 +139,7 @@ void sub_8184E58(void)
     if (sUnknown_0203C7AC == 1)
     {
         gRecordedBattleRngSeed = gRngValue;
-        sUnknown_0203C7AE = VarGet(VAR_FRONTIER_FACILITY);
+        sRecordedBattle_FrontierFacility = VarGet(VAR_FRONTIER_FACILITY);
         sUnknown_0203C7AF = sub_81A513C();
     }
     else if (sUnknown_0203C7AC == 2)
@@ -391,7 +391,7 @@ u32 MoveRecordedBattleToSaveData(void)
     battleSave->partnerId = gPartnerTrainerId;
     battleSave->field_4FA = gUnknown_0203C7B4;
     battleSave->field_4FC = gSaveBlock2Ptr->field_CA9_b;
-    battleSave->field_4FD = sUnknown_0203C7AE;
+    battleSave->field_4FD = sRecordedBattle_FrontierFacility;
     battleSave->field_4FE = sUnknown_0203C7AF;
     battleSave->battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
     battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
@@ -700,7 +700,7 @@ _081854E2:\n\
 	ldr r5, =0x000004fc\n\
 	adds r1, r7, r5\n\
 	strb r0, [r1]\n\
-	ldr r0, =sUnknown_0203C7AE\n\
+	ldr r0, =sRecordedBattle_FrontierFacility\n\
 	ldrb r1, [r0]\n\
 	adds r2, 0x3\n\
 	adds r0, r7, r2\n\
@@ -1354,7 +1354,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
     gPartnerTrainerId = src->partnerId;
     gUnknown_0203C7B4 = src->field_4FA;
     sUnknown_0203C7AD = gSaveBlock2Ptr->frontierChosenLvl;
-    sUnknown_0203C7AE = src->field_4FD;
+    sRecordedBattle_FrontierFacility = src->field_4FD;
     sUnknown_0203C7AF = src->field_4FE;
     sRecordedBattle_BattleStyle = src->battleStyle;
     sRecordedBattle_TextSpeed = src->textSpeed;
@@ -1415,9 +1415,9 @@ static void CB2_RecordedBattle(void)
     RunTasks();
 }
 
-u8 sub_8185EA0(void)
+u8 GetRecordedBattleFrontierFacility(void)
 {
-    return sUnknown_0203C7AE;
+    return sRecordedBattle_FrontierFacility;
 }
 
 u8 sub_8185EAC(void)
