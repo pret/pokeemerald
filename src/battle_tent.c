@@ -264,5 +264,5 @@ void sub_81B9E88(void)
 bool8 sub_81B9E94(void)
 {
     return (gMapHeader.regionMapSectionId == MAPSEC_SLATEPORT_CITY
-            && ((gMapHeader.mapDataId == 385) | (gMapHeader.mapDataId == 386)));
+            && ((gMapHeader.mapLayoutId == 385) | (gMapHeader.mapLayoutId == 386)));
 }
