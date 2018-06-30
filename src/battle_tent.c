@@ -9,6 +9,7 @@
 #include "random.h"
 #include "item.h"
 #include "constants/items.h"
+#include "constants/region_map_sections.h"
 
 // this file's functions
 void sub_81B99D4(void);
@@ -262,6 +263,6 @@ void sub_81B9E88(void)
 
 bool8 sub_81B9E94(void)
 {
-    return (gMapHeader.regionMapSectionId == 8
+    return (gMapHeader.regionMapSectionId == MAPSEC_SLATEPORT_CITY
             && ((gMapHeader.mapDataId == 385) | (gMapHeader.mapDataId == 386)));
 }
