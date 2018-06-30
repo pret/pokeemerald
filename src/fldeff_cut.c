@@ -352,10 +352,11 @@ static void StartCutGrassFieldEffect(void)
 bool8 FldEff_CutGrass(void)
 {
     s16 x, y;
-    u8 tileBehavior;
-    u8 i;
+    u8 i = 0;
 
-    for (i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y); i < CUT_HYPER_AREA; i++)
+    PlaySE(SE_W015);
+    PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+    for (i = 0; i < CUT_HYPER_AREA; i++)
     {
         if (sHyperCutTiles[i] == TRUE)
         {

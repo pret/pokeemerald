@@ -6,6 +6,7 @@
 #include "rom6.h"
 #include "script.h"
 #include "task.h"
+#include "constants/event_objects.h"
 
 // static functions
 static void FldEff_UseStrength(void);
