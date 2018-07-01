@@ -1,5 +1,5 @@
 BattleFrontier_BattleArenaLobby: @ 848544C
-	.4byte BattleFrontier_BattleArenaLobby_MapAttributes
+	.4byte BattleFrontier_BattleArenaLobby_Layout
 	.4byte BattleFrontier_BattleArenaLobby_MapEvents
 	.4byte BattleFrontier_BattleArenaLobby_MapScripts
 	.4byte 0x0

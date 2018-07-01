@@ -1,5 +1,5 @@
 TrainerHill_Roof: @ 8485858
-	.4byte TrainerHill_Roof_MapAttributes
+	.4byte TrainerHill_Roof_Layout
 	.4byte TrainerHill_Roof_MapEvents
 	.4byte TrainerHill_Roof_MapScripts
 	.4byte 0x0

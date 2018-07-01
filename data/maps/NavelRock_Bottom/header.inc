@@ -1,5 +1,5 @@
 NavelRock_Bottom: @ 8485AC0
-	.4byte NavelRock_Bottom_MapAttributes
+	.4byte NavelRock_Bottom_Layout
 	.4byte NavelRock_Bottom_MapEvents
 	.4byte NavelRock_Bottom_MapScripts
 	.4byte 0x0

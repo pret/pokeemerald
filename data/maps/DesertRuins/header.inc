@@ -1,5 +1,5 @@
 DesertRuins: @ 8483F68
-	.4byte DesertRuins_MapAttributes
+	.4byte DesertRuins_Layout
 	.4byte DesertRuins_MapEvents
 	.4byte DesertRuins_MapScripts
 	.4byte 0x0

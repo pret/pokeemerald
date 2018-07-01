@@ -1,5 +1,5 @@
 SecretBase_RedCave1: @ 8484A90
-	.4byte SecretBase_RedCave1_MapAttributes
+	.4byte SecretBase_RedCave1_Layout
 	.4byte SecretBase_RedCave1_MapEvents
 	.4byte SecretBase_RedCave1_MapScripts
 	.4byte 0x0

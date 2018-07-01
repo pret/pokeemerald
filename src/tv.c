@@ -1541,12 +1541,12 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     show->bravoTrainerTower.kind = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
     show->bravoTrainerTower.active = TRUE;
     StringCopy(show->bravoTrainerTower.trainerName, gSaveBlock2Ptr->playerName);
-    StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->field_BD8);
-    show->bravoTrainerTower.species = gSaveBlock2Ptr->field_BD4;
-    show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->field_BD6;
-    show->bravoTrainerTower.numFights = sub_8164FCC(gSaveBlock2Ptr->field_D07, 0);
-    show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->field_D06;
-    if (gSaveBlock2Ptr->field_D07 == 0)
+    StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->frontier.field_BD8);
+    show->bravoTrainerTower.species = gSaveBlock2Ptr->frontier.field_BD4;
+    show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->frontier.field_BD6;
+    show->bravoTrainerTower.numFights = sub_8164FCC(gSaveBlock2Ptr->frontier.field_D07, 0);
+    show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->frontier.field_D06;
+    if (gSaveBlock2Ptr->frontier.field_D07 == 0)
     {
         show->bravoTrainerTower.btLevel = 50;
     }
@@ -1557,13 +1557,13 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     show->bravoTrainerTower.interviewResponse = gSpecialVar_0x8004;
     tv_store_id_2x(show);
     show->bravoTrainerTower.language = gGameLanguage;
-    if (show->bravoTrainerTower.language == LANGUAGE_JAPANESE || gSaveBlock2Ptr->field_BEB == LANGUAGE_JAPANESE)
+    if (show->bravoTrainerTower.language == LANGUAGE_JAPANESE || gSaveBlock2Ptr->frontier.field_BEB == LANGUAGE_JAPANESE)
     {
         show->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->bravoTrainerTower.pokemonNameLanguage = gSaveBlock2Ptr->field_BEB;
+        show->bravoTrainerTower.pokemonNameLanguage = gSaveBlock2Ptr->frontier.field_BEB;
     }
 }
 
@@ -1958,7 +1958,7 @@ void sub_80EDB44(void)
             show->rivalTrainer.dexCount = GetHoennPokedexCount(0x01);
         }
         show->rivalTrainer.location = gMapHeader.regionMapSectionId;
-        show->rivalTrainer.mapDataId = gMapHeader.mapDataId;
+        show->rivalTrainer.mapLayoutId = gMapHeader.mapLayoutId;
         show->rivalTrainer.nSilverSymbols = 0;
         show->rivalTrainer.nGoldSymbols = 0;
         for (i = 0; i < 7; i ++)
@@ -1972,7 +1972,7 @@ void sub_80EDB44(void)
                 show->rivalTrainer.nGoldSymbols ++;
             }
         }
-        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontierBattlePoints;
+        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontier.frontierBattlePoints;
         StringCopy(show->rivalTrainer.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->rivalTrainer.language = gGameLanguage;
@@ -2010,7 +2010,7 @@ void sub_80EDCE8(void)
         show->treasureInvestigators.active = FALSE;
         show->treasureInvestigators.item = gSpecialVar_0x8005;
         show->treasureInvestigators.location = gMapHeader.regionMapSectionId;
-        show->treasureInvestigators.mapDataId = gMapHeader.mapDataId;
+        show->treasureInvestigators.mapLayoutId = gMapHeader.mapLayoutId;
         StringCopy(show->treasureInvestigators.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->treasureInvestigators.language = gGameLanguage;
@@ -2540,8 +2540,8 @@ void sub_80EE8C8(u16 winStreak, u8 facility)
                 show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
                 break;
             case 4:
-                show->frontier.species1 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->field_CAA[0] - 1], MON_DATA_SPECIES, NULL);
-                show->frontier.species2 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->field_CAA[1] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species1 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.field_CAA[0] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.field_CAA[1] - 1], MON_DATA_SPECIES, NULL);
                 break;
         }
         tv_store_id_3x(show);
@@ -6261,7 +6261,7 @@ static void DoTVShowTodaysRivalTrainer(void)
                     sTVShowState = 8;
                     break;
                 case MAPSEC_DYNAMIC:
-                    switch (show->rivalTrainer.mapDataId)
+                    switch (show->rivalTrainer.mapLayoutId)
                     {
                         case 0x115 ... 0x117:
                             sTVShowState = 10;
@@ -6460,7 +6460,7 @@ static void DoTVShowHoennTreasureInvestigators(void)
             StringCopy(gStringVar1, ItemId_GetName(show->treasureInvestigators.item));
             if (show->treasureInvestigators.location == MAPSEC_DYNAMIC)
             {
-                switch (show->treasureInvestigators.mapDataId)
+                switch (show->treasureInvestigators.mapLayoutId)
                 {
                     case 0x115 ... 0x117:
                         sTVShowState = 2;

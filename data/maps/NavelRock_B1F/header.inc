@@ -1,5 +1,5 @@
 NavelRock_B1F: @ 84858C8
-	.4byte NavelRock_B1F_MapAttributes
+	.4byte NavelRock_B1F_Layout
 	.4byte NavelRock_B1F_MapEvents
 	.4byte NavelRock_B1F_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 CaveOfOrigin_Entrance: @ 84842CC
-	.4byte CaveOfOrigin_Entrance_MapAttributes
+	.4byte CaveOfOrigin_Entrance_Layout
 	.4byte CaveOfOrigin_Entrance_MapEvents
 	.4byte CaveOfOrigin_Entrance_MapScripts
 	.4byte 0x0

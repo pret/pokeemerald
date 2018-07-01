@@ -30026,7 +30026,7 @@ _081AA0A6:
 	ldr r2, =0x00000169
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gMapAttributes
+	ldr r1, =gMapLayouts
 	adds r0, r1
 	ldr r6, [r0]
 	ldr r2, [r6, 0xC]

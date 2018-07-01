@@ -288,14 +288,14 @@ static void BuildNormalStartMenu(void)
     {
         AddStartMenuAction(MENU_ACTION_POKEMON);
     }
-    
+
     AddStartMenuAction(MENU_ACTION_BAG);
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
     {
         AddStartMenuAction(MENU_ACTION_POKENAV);
     }
-    
+
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
@@ -322,7 +322,7 @@ static void BuildLinkModeStartMenu(void)
     {
         AddStartMenuAction(MENU_ACTION_POKENAV);
     }
-    
+
     AddStartMenuAction(MENU_ACTION_PLAYER_LINK);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
@@ -384,18 +384,14 @@ static void ShowSafariBallsWindow(void)
 
 static void ShowPyramidFloorWindow(void)
 {
-    if (gSaveBlock2Ptr->field_CAA[4] == 7) // TODO: fix location
-    {
+    if (gSaveBlock2Ptr->frontier.field_CB2 == 7)
         sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_1);
-    }
     else
-    {
         sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_2);
-    }
 
     PutWindowTilemap(sBattlePyramidFloorWindowId);
     NewMenuHelpers_DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
-    StringCopy(gStringVar1, sPyramindFloorNames[gSaveBlock2Ptr->field_CAA[4]]);
+    StringCopy(gStringVar1, sPyramindFloorNames[gSaveBlock2Ptr->frontier.field_CB2]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     PrintTextOnWindow(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sBattlePyramidFloorWindowId, 2);
@@ -419,7 +415,7 @@ static void RemoveExtraStartMenuWindows(void)
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 {
     s8 index = *pIndex;
-    
+
     do
     {
         if (sStartMenuItems[sCurrentStartMenuActions[index]].func.u8_void == StartMenuPlayerNameCallback) {
@@ -444,11 +440,11 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
     return FALSE;
 }
 
-static bool32 InitStartMenuStep(void) 
+static bool32 InitStartMenuStep(void)
 {
     s8 value = sUnknown_02037619[0];
 
-    switch (value) 
+    switch (value)
     {
     case 0:
         sUnknown_02037619[0]++;
@@ -468,14 +464,14 @@ static bool32 InitStartMenuStep(void)
         {
             ShowSafariBallsWindow();
         }
-        if (InBattlePyramid() != FALSE) 
+        if (InBattlePyramid() != FALSE)
         {
             ShowPyramidFloorWindow();
         }
         sUnknown_02037619[0]++;
         break;
     case 4:
-        if (PrintStartMenuActions(&sUnknown_02037619[1], 2) == FALSE) 
+        if (PrintStartMenuActions(&sUnknown_02037619[1], 2) == FALSE)
         {
             break;
         }
@@ -515,7 +511,7 @@ static void CreateStartMenuTask(TaskFunc followupFunc)
     SetTaskFuncWithFollowupFunc(taskId, StartMenuTask, followupFunc);
 }
 
-static bool8 sub_809FA00(void) 
+static bool8 sub_809FA00(void)
 {
     if (InitStartMenuStep() == FALSE)
     {
@@ -537,7 +533,7 @@ void sub_809FA34(u8 taskId) // Referenced in field_screen.s and rom_8011DC0.s
 {
     struct Task* task = &gTasks[taskId];
 
-    switch(task->data[0]) 
+    switch(task->data[0])
     {
     case 0:
         if (InUnionRoom() == TRUE)
@@ -576,13 +572,13 @@ static bool8 HandleStartMenuInput(void)
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = MoveMenuCursor(-1);
     }
-    
+
     if (gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = MoveMenuCursor(1);
     }
-    
+
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
@@ -592,20 +588,20 @@ static bool8 HandleStartMenuInput(void)
                 return FALSE;
             }
         }
-        
+
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
-        
-        if (gMenuCallback != StartMenuSaveCallback 
+
+        if (gMenuCallback != StartMenuSaveCallback
             && gMenuCallback != StartMenuExitCallback
             && gMenuCallback != StartMenuSafariZoneRetireCallback
             && gMenuCallback != StartMenuBattlePyramidRetireCallback)
         {
            FadeScreen(1, 0);
         }
-        
+
         return FALSE;
     }
-    
+
     if (gMain.newKeys & (START_BUTTON | B_BUTTON))
     {
         RemoveExtraStartMenuWindows();
@@ -625,10 +621,10 @@ static bool8 StartMenuPokedexCallback(void)
         RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
         SetMainCallback2(sub_80BB534); // Display pokedex
-        
+
         return TRUE;
     }
-    
+
     return FALSE;
 }
 
@@ -640,7 +636,7 @@ static bool8 StartMenuPokemonCallback(void)
         RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
         SetMainCallback2(CB2_PartyMenuFromStartMenu); // Display party menu
-        
+
         return TRUE;
     }
 
@@ -693,7 +689,7 @@ static bool8 StartMenuPlayerNameCallback(void)
         {
             sub_80C51C4(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
         }
-        else 
+        else
         {
             sub_80C4DDC(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
         }
@@ -736,7 +732,7 @@ static bool8 StartMenuExitCallback(void)
 {
     RemoveExtraStartMenuWindows();
     HideStartMenu(); // Hide start menu
-    
+
     return TRUE;
 }
 
@@ -911,7 +907,7 @@ static void SaveGameTask(u8 taskId)
     case SAVE_IN_PROGRESS:
         return;
     }
-    
+
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
@@ -972,7 +968,7 @@ static u8 SaveConfirmSaveCallback(void)
     {
         ShowSaveMessage(gText_BattlePyramidConfirmRest, SaveYesNoCallback);
     }
-    else 
+    else
     {
         ShowSaveMessage(gText_ConfirmSave, SaveYesNoCallback);
     }
@@ -1025,7 +1021,7 @@ static u8 SaveFileExistsCallback(void)
     {
         ShowSaveMessage(gText_DifferentSaveFile, SaveConfirmOverwriteNoCallback);
     }
-    else 
+    else
     {
         ShowSaveMessage(gText_AlreadySavedFile, SaveConfirmOverwriteCallback);
     }
@@ -1082,7 +1078,7 @@ static u8 SaveDoSaveCallback(void)
         saveStatus = TrySavingData(SAVE_OVERWRITE_DIFFERENT_FILE);
         gDifferentSaveFile = FALSE;
     }
-    else 
+    else
     {
         saveStatus = TrySavingData(SAVE_NORMAL);
     }
@@ -1118,7 +1114,7 @@ static u8 SaveReturnSuccessCallback(void)
         HideSaveInfoWindow();
         return SAVE_SUCCESS;
     }
-    else 
+    else
     {
         return SAVE_IN_PROGRESS;
     }
@@ -1131,13 +1127,13 @@ static u8 SaveErrorCallback(void)
         PlaySE(SE_BOO);
         sSaveDialogCallback = SaveReturnErrorCallback;
     }
-    
+
     return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveReturnErrorCallback(void)
 {
-    if (!SaveErrorTimer()) 
+    if (!SaveErrorTimer())
     {
         return SAVE_IN_PROGRESS;
     }
@@ -1182,7 +1178,7 @@ static u8 BattlePyramidRetireInputCallback(void)
         sub_80A0014();
         return SAVE_SUCCESS;
     }
-    
+
     return SAVE_IN_PROGRESS;
 }
 
@@ -1254,8 +1250,8 @@ static void sub_80A0550(u8 taskId)
         {
         case 0:
             FillWindowPixelBuffer(0, 17);
-            AddTextPrinterParameterized(0, 
-                                        1, 
+            AddTextPrinterParameterized(0,
+                                        1,
                                         gText_SavingDontTurnOffPower,
                                         255,
                                         NULL,
@@ -1266,14 +1262,14 @@ static void sub_80A0550(u8 taskId)
             PutWindowTilemap(0);
             CopyWindowToVram(0, 3);
             BeginNormalPaletteFade(-1, 0, 16, 0, 0);
-            
+
             if (gWirelessCommType != 0 && InUnionRoom())
             {
                 if (sub_800A07C())
                 {
                     *step = 1;
                 }
-                else 
+                else
                 {
                     *step = 5;
                 }
@@ -1327,7 +1323,7 @@ static void ShowSaveInfoWindow(void)
     u8 color;
     u32 xOffset;
     u32 yOffset;
-    
+
     if (!FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         saveInfoWindow.height -= 2;
@@ -1340,7 +1336,7 @@ static void ShowSaveInfoWindow(void)
     color = TEXT_COLOR_RED;  // Red when female, blue when male.
 
     if (gender == MALE)
-    { 
+    {
         color = TEXT_COLOR_BLUE;
     }
 

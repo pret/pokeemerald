@@ -1,5 +1,5 @@
 AbandonedShip_Underwater2: @ 84845C0
-	.4byte AbandonedShip_Underwater2_MapAttributes
+	.4byte AbandonedShip_Underwater2_Layout
 	.4byte AbandonedShip_Underwater2_MapEvents
 	.4byte AbandonedShip_Underwater2_MapScripts
 	.4byte 0x0

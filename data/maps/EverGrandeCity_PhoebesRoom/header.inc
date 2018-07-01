@@ -1,5 +1,5 @@
 EverGrandeCity_PhoebesRoom: @ 8483BE8
-	.4byte EverGrandeCity_PhoebesRoom_MapAttributes
+	.4byte EverGrandeCity_PhoebesRoom_Layout
 	.4byte EverGrandeCity_PhoebesRoom_MapEvents
 	.4byte EverGrandeCity_PhoebesRoom_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 LilycoveCity_House3: @ 84837C0
-	.4byte LilycoveCity_House3_MapAttributes
+	.4byte House2_Layout
 	.4byte LilycoveCity_House3_MapEvents
 	.4byte LilycoveCity_House3_MapScripts
 	.4byte 0x0

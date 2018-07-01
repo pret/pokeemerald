@@ -1,5 +1,5 @@
 MirageTower_3F: @ 8484940
-	.4byte MirageTower_3F_MapAttributes
+	.4byte MirageTower_3F_Layout
 	.4byte MirageTower_3F_MapEvents
 	.4byte MirageTower_3F_MapScripts
 	.4byte 0x0

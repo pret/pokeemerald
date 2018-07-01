@@ -1,5 +1,5 @@
 SkyPillar_4F: @ 84847B8
-	.4byte SkyPillar_4F_MapAttributes
+	.4byte SkyPillar_4F_Layout
 	.4byte SkyPillar_4F_MapEvents
 	.4byte SkyPillar_4F_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 MauvilleCity_GameCorner: @ 84832B8
-	.4byte MauvilleCity_GameCorner_MapAttributes
+	.4byte MauvilleCity_GameCorner_Layout
 	.4byte MauvilleCity_GameCorner_MapEvents
 	.4byte MauvilleCity_GameCorner_MapScripts
 	.4byte 0x0

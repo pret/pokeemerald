@@ -1,5 +1,5 @@
 PetalburgCity_Mart: @ 84830C0
-	.4byte PetalburgCity_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte PetalburgCity_Mart_MapEvents
 	.4byte PetalburgCity_Mart_MapScripts
 	.4byte 0x0

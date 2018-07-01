@@ -1,5 +1,5 @@
 ShoalCave_LowTideStairsRoom: @ 8484400
-	.4byte ShoalCave_LowTideStairsRoom_MapAttributes
+	.4byte ShoalCave_LowTideStairsRoom_Layout
 	.4byte ShoalCave_LowTideStairsRoom_MapEvents
 	.4byte ShoalCave_LowTideStairsRoom_MapScripts
 	.4byte 0x0

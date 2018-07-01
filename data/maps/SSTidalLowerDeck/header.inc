@@ -1,5 +1,5 @@
 SSTidalLowerDeck: @ 8484F28
-	.4byte SSTidalLowerDeck_MapAttributes
+	.4byte SSTidalLowerDeck_Layout
 	.4byte SSTidalLowerDeck_MapEvents
 	.4byte SSTidalLowerDeck_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 FallarborTown_BattleTentCorridor: @ 8482DB0
-	.4byte FallarborTown_BattleTentCorridor_MapAttributes
+	.4byte BattleTentCorridor_Layout
 	.4byte FallarborTown_BattleTentCorridor_MapEvents
 	.4byte FallarborTown_BattleTentCorridor_MapScripts
 	.4byte 0x0

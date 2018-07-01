@@ -1,5 +1,5 @@
 EverGrandeCity_HallOfFame: @ 8483D00
-	.4byte EverGrandeCity_HallOfFame_MapAttributes
+	.4byte EverGrandeCity_HallOfFame_Layout
 	.4byte EverGrandeCity_HallOfFame_MapEvents
 	.4byte EverGrandeCity_HallOfFame_MapScripts
 	.4byte 0x0

@@ -1293,7 +1293,7 @@ static bool32 AllocTryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst)
 
 static void CB2_RecordedBattleEnd(void)
 {
-    gSaveBlock2Ptr->frontierChosenLvl = sUnknown_0203C7AD;
+    gSaveBlock2Ptr->frontier.chosenLvl = sUnknown_0203C7AD;
     gBattleOutcome = 0;
     gBattleTypeFlags = 0;
     gTrainerBattleOpponent_A = 0;
@@ -1353,7 +1353,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
     gTrainerBattleOpponent_B = src->opponentB;
     gPartnerTrainerId = src->partnerId;
     gUnknown_0203C7B4 = src->field_4FA;
-    sUnknown_0203C7AD = gSaveBlock2Ptr->frontierChosenLvl;
+    sUnknown_0203C7AD = gSaveBlock2Ptr->frontier.chosenLvl;
     sFrontierFacility = src->field_4FD;
     sUnknown_0203C7AF = src->field_4FE;
     sBattleStyle = src->battleStyle;
@@ -1375,7 +1375,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
         sUnknown_0203CCDC[i] = src->field_50E[i];
     }
 
-    gSaveBlock2Ptr->frontierChosenLvl = src->field_4FC;
+    gSaveBlock2Ptr->frontier.chosenLvl = src->field_4FC;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {

@@ -1,5 +1,5 @@
 Route110_TrickHousePuzzle4: @ 8485BF4
-	.4byte Route110_TrickHousePuzzle4_MapAttributes
+	.4byte Route110_TrickHousePuzzle4_Layout
 	.4byte Route110_TrickHousePuzzle4_MapEvents
 	.4byte Route110_TrickHousePuzzle4_MapScripts
 	.4byte 0x0

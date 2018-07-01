@@ -1,5 +1,5 @@
 SlateportCity_PokemonCenter_2F: @ 848322C
-	.4byte SlateportCity_PokemonCenter_2F_MapAttributes
+	.4byte PokemonCenter_2F_Layout
 	.4byte SlateportCity_PokemonCenter_2F_MapEvents
 	.4byte SlateportCity_PokemonCenter_2F_MapScripts
 	.4byte 0x0

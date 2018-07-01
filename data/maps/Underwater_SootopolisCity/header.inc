@@ -1,5 +1,5 @@
 Underwater_SootopolisCity: @ 8483F4C
-	.4byte Underwater_SootopolisCity_MapAttributes
+	.4byte Underwater_SootopolisCity_Layout
 	.4byte Underwater_SootopolisCity_MapEvents
 	.4byte Underwater_SootopolisCity_MapScripts
 	.4byte 0x0

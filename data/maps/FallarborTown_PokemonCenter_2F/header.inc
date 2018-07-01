@@ -1,5 +1,5 @@
 FallarborTown_PokemonCenter_2F: @ 8482E04
-	.4byte FallarborTown_PokemonCenter_2F_MapAttributes
+	.4byte PokemonCenter_2F_Layout
 	.4byte FallarborTown_PokemonCenter_2F_MapEvents
 	.4byte FallarborTown_PokemonCenter_2F_MapScripts
 	.4byte 0x0

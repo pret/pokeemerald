@@ -1,5 +1,5 @@
 RustboroCity: @ 848250C
-	.4byte RustboroCity_MapAttributes
+	.4byte RustboroCity_Layout
 	.4byte RustboroCity_MapEvents
 	.4byte RustboroCity_MapScripts
 	.4byte RustboroCity_MapConnections

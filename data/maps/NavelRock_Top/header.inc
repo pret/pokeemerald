@@ -1,5 +1,5 @@
 NavelRock_Top: @ 8485970
-	.4byte NavelRock_Top_MapAttributes
+	.4byte NavelRock_Top_Layout
 	.4byte NavelRock_Top_MapEvents
 	.4byte NavelRock_Top_MapScripts
 	.4byte 0x0

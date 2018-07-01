@@ -1,5 +1,5 @@
 NavelRock_Down01: @ 848598C
-	.4byte NavelRock_Down01_MapAttributes
+	.4byte NavelRock_LadderRoom1_Layout
 	.4byte NavelRock_Down01_MapEvents
 	.4byte NavelRock_Down01_MapScripts
 	.4byte 0x0

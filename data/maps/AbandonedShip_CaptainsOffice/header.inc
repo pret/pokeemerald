@@ -1,5 +1,5 @@
 AbandonedShip_CaptainsOffice: @ 84845A4
-	.4byte AbandonedShip_CaptainsOffice_MapAttributes
+	.4byte AbandonedShip_CaptainsOffice_Layout
 	.4byte AbandonedShip_CaptainsOffice_MapEvents
 	.4byte AbandonedShip_CaptainsOffice_MapScripts
 	.4byte 0x0

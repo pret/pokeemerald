@@ -1575,8 +1575,8 @@ void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lv
     u8 language;
     u8 value;
 
-    if (gSaveBlock2Ptr->frontierChosenLvl != 0)
-        level = BattleFrontierGetOpponentLvl(gSaveBlock2Ptr->frontierChosenLvl);
+    if (gSaveBlock2Ptr->frontier.chosenLvl != 0)
+        level = BattleFrontierGetOpponentLvl(gSaveBlock2Ptr->frontier.chosenLvl);
     else if (lvl50)
         level = 50;
     else
@@ -5620,7 +5620,7 @@ void SetWildMonHeldItem(void)
             var1 = 20;
             var2 = 80;
         }
-        if (gMapHeader.mapDataId == 0x1A4)
+        if (gMapHeader.mapLayoutId == 0x1A4)
         {
             s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
             if (alteringCaveId != 0)

@@ -1,5 +1,5 @@
 BirthIsland_Harbor: @ 84857B0
-	.4byte BirthIsland_Harbor_MapAttributes
+	.4byte IslandHarbor_Layout
 	.4byte BirthIsland_Harbor_MapEvents
 	.4byte BirthIsland_Harbor_MapScripts
 	.4byte 0x0

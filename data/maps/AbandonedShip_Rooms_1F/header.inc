@@ -1,5 +1,5 @@
 AbandonedShip_Rooms_1F: @ 84844E0
-	.4byte AbandonedShip_Rooms_1F_MapAttributes
+	.4byte AbandonedShip_Rooms_1F_Layout
 	.4byte AbandonedShip_Rooms_1F_MapEvents
 	.4byte AbandonedShip_Rooms_1F_MapScripts
 	.4byte 0x0
