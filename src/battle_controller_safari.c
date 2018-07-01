@@ -239,7 +239,7 @@ static void HandleInputChooseAction(void)
     }
 }
 
-static void CompleteOnBankSpriteCallbackDummy(void)
+static void CompleteOnBattlerSpriteCallbackDummy(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         SafariBufferExecCompleted();
@@ -358,9 +358,9 @@ static void SafariHandleReturnMonToBall(void)
 static void SafariHandleDrawTrainerPic(void)
 {
     DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, gActiveBattler);
-    sub_806A12C(gSaveBlock2Ptr->playerGender, GetBattlerPosition(gActiveBattler));
+    SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2Ptr->playerGender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gUnknown_0202499C,
+      &gMultiuseSpriteTemplate,
       80,
       (8 - gTrainerBackPicCoords[gSaveBlock2Ptr->playerGender].coords) * 4 + 80,
       30);
@@ -368,7 +368,7 @@ static void SafariHandleDrawTrainerPic(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_805D7AC;
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
 static void SafariHandleTrainerSlide(void)

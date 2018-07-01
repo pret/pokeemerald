@@ -300,6 +300,7 @@ u8 gNumberOfMovesToChoose;
 u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
 
 // rom const data
+static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
 
 // format: attacking type, defending type, damage multiplier
 // the multiplier is a (decimal) fixed-point number:
@@ -307,9 +308,6 @@ u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
 // 10 is ×1.0 TYPE_MUL_NORMAL
 // 05 is ×0.5 TYPE_MUL_NOT_EFFECTIVE
 // 00 is ×0.0 TYPE_MUL_NO_EFFECT
-
-static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
-
 const u8 gTypeEffectiveness[336] =
 {
     TYPE_NORMAL, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
@@ -2808,7 +2806,7 @@ void sub_8039BB4(struct Sprite *sprite)
 
 static void oac_poke_ally_(struct Sprite *sprite)
 {
-    if ((gIntroSlideFlags & 1) == 0)
+    if (!(gIntroSlideFlags & 1))
     {
         sprite->pos2.x -= 2;
         if (sprite->pos2.x == 0)

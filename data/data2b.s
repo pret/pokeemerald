@@ -235,7 +235,7 @@ gUnknown_082FF704:: @ 82FF704
 	.2byte 0x0003, 0x0000, 0xffff, 0x0000
 
 	.align 2
-gUnknown_082FF70C:: @ 82FF70C
+gPlayerMonSpriteAnimsTable:: @ 82FF70C
 	.4byte gUnknown_082FF6EC
 	.4byte gUnknown_082FF6F4
 	.4byte gUnknown_082FF6FC

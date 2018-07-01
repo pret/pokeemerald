@@ -38,7 +38,6 @@ extern struct UnusedControllerStruct gUnknown_02022D0C;
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void sub_806A068(u16, u8);
 extern void sub_81A57E4(u8 battlerId, u16 stringId);
 extern u8 GetFrontierBrainTrainerPicIndex(void);
 extern u8 sub_81D5588(u16 trainerId);
@@ -200,7 +199,7 @@ static void OpponentBufferRunCommand(void)
     }
 }
 
-static void CompleteOnBankSpriteCallbackDummy(void)
+static void CompleteOnBattlerSpriteCallbackDummy(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         OpponentBufferExecCompleted();
@@ -1128,9 +1127,9 @@ static void OpponentHandleLoadMonSprite(void)
     u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-    sub_806A068(species, GetBattlerPosition(gActiveBattler));
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
 
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                GetBattlerSpriteCoord(gActiveBattler, 2),
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                sub_80A82E4(gActiveBattler));
@@ -1163,9 +1162,9 @@ static void sub_80613DC(u8 battlerId, bool8 dontClearSubstituteBit)
     species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     gUnknown_03005D7C[battlerId] = CreateInvisibleSpriteWithCallback(sub_805D714);
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
-    sub_806A068(species, GetBattlerPosition(battlerId));
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
 
-    gBattlerSpriteIds[battlerId] = CreateSprite(&gUnknown_0202499C,
+    gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
                                         GetBattlerSpriteCoord(battlerId, 2),
                                         GetBattlerSpriteDefault_Y(battlerId),
                                         sub_80A82E4(battlerId));
@@ -1294,8 +1293,8 @@ static void OpponentHandleDrawTrainerPic(void)
     }
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
-    sub_806A12C(trainerPicId, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                xPos,
                                                (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40,
                                                sub_80A82E4(gActiveBattler));
@@ -1306,7 +1305,7 @@ static void OpponentHandleDrawTrainerPic(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_805D7AC;
 
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
 static void OpponentHandleTrainerSlide(void)
@@ -1366,8 +1365,8 @@ static void OpponentHandleTrainerSlide(void)
     }
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
-    sub_806A12C(trainerPicId, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C, 176, (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40, 0x1E);
+    SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, 176, (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40, 0x1E);
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 96;
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.x += 32;

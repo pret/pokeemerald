@@ -39,7 +39,6 @@ extern struct UnusedControllerStruct gUnknown_02022D0C;
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void sub_806A068(u16, u8);
 
 // this file's functions
 static void WallyHandleGetMonData(void);
@@ -254,7 +253,7 @@ static void WallyHandleActions(void)
     }
 }
 
-static void CompleteOnBankSpriteCallbackDummy(void)
+static void CompleteOnBattlerSpriteCallbackDummy(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         WallyBufferExecCompleted();
@@ -1039,8 +1038,8 @@ static void WallyHandleReturnMonToBall(void)
 static void WallyHandleDrawTrainerPic(void)
 {
     DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, gActiveBattler);
-    sub_806A12C(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    SetMultiuseSpriteTemplateToTrainerBack(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                80,
                                                80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].coords),
                                                30);
@@ -1048,14 +1047,14 @@ static void WallyHandleDrawTrainerPic(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_805D7AC;
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
 static void WallyHandleTrainerSlide(void)
 {
     DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, gActiveBattler);
-    sub_806A12C(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    SetMultiuseSpriteTemplateToTrainerBack(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                80,
                                                80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].coords),
                                                30);
@@ -1466,8 +1465,8 @@ static void sub_816AA80(u8 battlerId)
     gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     gUnknown_03005D7C[battlerId] = CreateInvisibleSpriteWithCallback(sub_805D714);
-    sub_806A068(species, GetBattlerPosition(battlerId));
-    gBattlerSpriteIds[battlerId] = CreateSprite(&gUnknown_0202499C,
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
+    gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
                                         GetBattlerSpriteCoord(battlerId, 2),
                                         GetBattlerSpriteDefault_Y(battlerId),
                                         sub_80A82E4(battlerId));

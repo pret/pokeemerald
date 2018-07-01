@@ -35,7 +35,7 @@ extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_81358F4(void);
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void sub_806A068(u16, u8);
+extern void SetMultiuseSpriteTemplateToPokemon(u16, u8);
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
@@ -204,7 +204,7 @@ static void PlayerPartnerBufferRunCommand(void)
     }
 }
 
-static void CompleteOnBankSpriteCallbackDummy(void)
+static void CompleteOnBattlerSpriteCallbackDummy(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         PlayerPartnerBufferExecCompleted();
@@ -1211,9 +1211,9 @@ static void PlayerPartnerHandleLoadMonSprite(void)
 
     BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
-    sub_806A068(species, GetBattlerPosition(gActiveBattler));
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
 
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                GetBattlerSpriteCoord(gActiveBattler, 2),
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                sub_80A82E4(gActiveBattler));
@@ -1241,10 +1241,10 @@ static void sub_81BD0E4(u8 battlerId, bool8 dontClearSubstituteBit)
     gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     gUnknown_03005D7C[battlerId] = CreateInvisibleSpriteWithCallback(sub_805D714);
-    sub_806A068(species, GetBattlerPosition(battlerId));
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
 
     gBattlerSpriteIds[battlerId] = CreateSprite(
-      &gUnknown_0202499C,
+      &gMultiuseSpriteTemplate,
       GetBattlerSpriteCoord(battlerId, 2),
       GetBattlerSpriteDefault_Y(battlerId),
       sub_80A82E4(battlerId));
@@ -1326,8 +1326,8 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
         DecompressTrainerBackPic(trainerPicId, gActiveBattler);
-        sub_806A12C(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C, xPos, yPos, sub_80A82E4(gActiveBattler));
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, sub_80A82E4(gActiveBattler));
 
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
         gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
@@ -1337,8 +1337,8 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     else // otherwise use front sprite
     {
         DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
-        sub_806A1C0(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C, xPos, yPos, sub_80A82E4(gActiveBattler));
+        SetMultiuseSpriteTemplateToTrainerFront(trainerPicId, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, sub_80A82E4(gActiveBattler));
 
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
         gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
@@ -1349,7 +1349,7 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
         gSprites[gBattlerSpriteIds[gActiveBattler]].hFlip = 1;
     }
 
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
 static void PlayerPartnerHandleTrainerSlide(void)

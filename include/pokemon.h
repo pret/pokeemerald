@@ -438,7 +438,7 @@ extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
-extern struct SpriteTemplate gUnknown_0202499C;
+extern struct SpriteTemplate gMultiuseSpriteTemplate;
 extern struct PokemonStorage* gPokemonStoragePtr;
 
 extern const struct BattleMove gBattleMoves[];
@@ -505,9 +505,9 @@ u8 GetDefaultMoveTarget(u8 battlerId);
 u8 GetMonGender(struct Pokemon *mon);
 u8 GetBoxMonGender(struct BoxPokemon *boxMon);
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
-void sub_806A068(u16 species, u8 battlerPosition);
-void sub_806A12C(u16 trainerSpriteId, u8 battlerPosition);
-void sub_806A1C0(u16 arg0, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToPokemon(u16 species, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToTrainerFront(u16 arg0, u8 battlerPosition);
 
 // These are full type signatures for GetMonData() and GetBoxMonData(),
 // but they are not used since some code erroneously omits the third arg.
