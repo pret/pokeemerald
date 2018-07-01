@@ -796,8 +796,8 @@ void TryPutLinkBattleTvShowOnAir(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((playerBestMonId < 3 && !sub_806D82C(gBattleScripting.multiplayerId))
-            || (playerBestMonId >= 3 && sub_806D82C(gBattleScripting.multiplayerId)))
+        if ((playerBestMonId < 3 && !GetLinkTrainerFlankId(gBattleScripting.multiplayerId))
+            || (playerBestMonId >= 3 && GetLinkTrainerFlankId(gBattleScripting.multiplayerId)))
         {
             j = (opponentBestMonId < 3) ? 0 : 1;
             PutBattleUpdateOnTheAir(sub_806EF84(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
@@ -1078,7 +1078,7 @@ _0817E5C8:\n\
 	ldr r0, =gBattleScripting\n\
 	adds r0, 0x25\n\
 	ldrb r0, [r0]\n\
-	bl sub_806D82C\n\
+	bl GetLinkTrainerFlankId\n\
 	lsls r0, 16\n\
 	cmp r0, 0\n\
 	beq _0817E630\n\
@@ -1088,7 +1088,7 @@ _0817E620:\n\
 	ldr r0, =gBattleScripting\n\
 	adds r0, 0x25\n\
 	ldrb r0, [r0]\n\
-	bl sub_806D82C\n\
+	bl GetLinkTrainerFlankId\n\
 	lsls r0, 16\n\
 	cmp r0, 0\n\
 	beq _0817E670\n\

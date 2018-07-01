@@ -70,45 +70,45 @@ static void Task_ClearBitWhenSpecialAnimDone(u8 taskId);
 static void ClearSpritesBattlerHealthboxAnimData(void);
 
 // const rom data
-static const struct CompressedSpriteSheet gUnknown_0832C0D0 =
+static const struct CompressedSpriteSheet sSpriteSheet_SinglesPlayerHealthbox =
 {
     gUnknown_08C1F1C8, 0x1000, TAG_HEALTHBOX_PLAYER1_TILE
 };
 
-static const struct CompressedSpriteSheet gUnknown_0832C0D8 =
+static const struct CompressedSpriteSheet sSpriteSheet_SinglesOpponentHealthbox =
 {
     gUnknown_08C1F46C, 0x1000, TAG_HEALTHBOX_OPPONENT1_TILE
 };
 
-static const struct CompressedSpriteSheet gUnknown_0832C0E0[2] =
+static const struct CompressedSpriteSheet sSpriteSheets_DoublesPlayerHealthbox[2] =
 {
     {gUnknown_08C1F5E8, 0x800, TAG_HEALTHBOX_PLAYER1_TILE},
     {gUnknown_08C1F5E8, 0x800, TAG_HEALTHBOX_PLAYER2_TILE}
 };
 
-static const struct CompressedSpriteSheet gUnknown_0832C0F0[2] =
+static const struct CompressedSpriteSheet sSpriteSheets_DoublesOpponentHealthbox[2] =
 {
     {gUnknown_08C1F76C, 0x800, TAG_HEALTHBOX_OPPONENT1_TILE},
     {gUnknown_08C1F76C, 0x800, TAG_HEALTHBOX_OPPONENT2_TILE}
 };
 
-static const struct CompressedSpriteSheet gUnknown_0832C100 =
+static const struct CompressedSpriteSheet sSpriteSheet_SafariHealthbox =
 {
     gUnknown_08C1F8E8, 0x1000, TAG_HEALTHBOX_SAFARI_TILE
 };
 
-static const struct CompressedSpriteSheet gUnknown_0832C108[MAX_BATTLERS_COUNT] =
+static const struct CompressedSpriteSheet sSpriteSheets_HealthBar[MAX_BATTLERS_COUNT] =
 {
-    {gBlankGfxCompressed, 0x0100, 0xd704},
-    {gBlankGfxCompressed, 0x0120, 0xd705},
-    {gBlankGfxCompressed, 0x0100, 0xd706},
-    {gBlankGfxCompressed, 0x0120, 0xd707}
+    {gBlankGfxCompressed, 0x0100, TAG_HEALTHBAR_PLAYER1_TILE},
+    {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT1_TILE},
+    {gBlankGfxCompressed, 0x0100, TAG_HEALTHBAR_PLAYER2_TILE},
+    {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT2_TILE}
 };
 
-static const struct SpritePalette gUnknown_0832C128[2] =
+static const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
 {
     {gBattleInterface_BallStatusBarPal, TAG_HEALTHBOX_PAL},
-    {gBattleInterface_BallDisplayPal, 0xd704}
+    {gBattleInterface_BallDisplayPal, TAG_HEALTHBAR_PAL}
 };
 
 // code
@@ -499,7 +499,7 @@ static void Task_ClearBitWhenSpecialAnimDone(u8 taskId)
 
 #undef tBattlerId
 
-// great function to include newly added moves that don't have animation yet
+// Great function to include newly added moves that don't have animation yet.
 bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn)
 {
     return FALSE;
@@ -679,29 +679,30 @@ void FreeTrainerFrontPicPalette(u16 frontPicId)
     FreeSpritePaletteByTag(gTrainerFrontPicPaletteTable[frontPicId].tag);
 }
 
-void sub_805DFFC(void)
+// Unused.
+void BattleLoadAllHealthBoxesGfxAtOnce(void)
 {
     u8 numberOfBattlers = 0;
     u8 i;
 
-    LoadSpritePalette(&gUnknown_0832C128[0]);
-    LoadSpritePalette(&gUnknown_0832C128[1]);
+    LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
+    LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[1]);
     if (!IsDoubleBattle())
     {
-        LoadCompressedObjectPic(&gUnknown_0832C0D0);
-        LoadCompressedObjectPic(&gUnknown_0832C0D8);
+        LoadCompressedObjectPic(&sSpriteSheet_SinglesPlayerHealthbox);
+        LoadCompressedObjectPic(&sSpriteSheet_SinglesOpponentHealthbox);
         numberOfBattlers = 2;
     }
     else
     {
-        LoadCompressedObjectPic(&gUnknown_0832C0E0[0]);
-        LoadCompressedObjectPic(&gUnknown_0832C0E0[1]);
-        LoadCompressedObjectPic(&gUnknown_0832C0F0[0]);
-        LoadCompressedObjectPic(&gUnknown_0832C0F0[1]);
+        LoadCompressedObjectPic(&sSpriteSheets_DoublesPlayerHealthbox[0]);
+        LoadCompressedObjectPic(&sSpriteSheets_DoublesPlayerHealthbox[1]);
+        LoadCompressedObjectPic(&sSpriteSheets_DoublesOpponentHealthbox[0]);
+        LoadCompressedObjectPic(&sSpriteSheets_DoublesOpponentHealthbox[1]);
         numberOfBattlers = 4;
     }
     for (i = 0; i < numberOfBattlers; i++)
-        LoadCompressedObjectPic(&gUnknown_0832C108[gBattlerPositions[i]]);
+        LoadCompressedObjectPic(&sSpriteSheets_HealthBar[gBattlerPositions[i]]);
 }
 
 bool8 BattleLoadAllHealthBoxesGfx(u8 state)
@@ -712,45 +713,45 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
     {
         if (state == 1)
         {
-            LoadSpritePalette(&gUnknown_0832C128[0]);
-            LoadSpritePalette(&gUnknown_0832C128[1]);
+            LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
+            LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[1]);
         }
         else if (!IsDoubleBattle())
         {
             if (state == 2)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-                    LoadCompressedObjectPic(&gUnknown_0832C100);
+                    LoadCompressedObjectPic(&sSpriteSheet_SafariHealthbox);
                 else
-                    LoadCompressedObjectPic(&gUnknown_0832C0D0);
+                    LoadCompressedObjectPic(&sSpriteSheet_SinglesPlayerHealthbox);
             }
             else if (state == 3)
-                LoadCompressedObjectPic(&gUnknown_0832C0D8);
+                LoadCompressedObjectPic(&sSpriteSheet_SinglesOpponentHealthbox);
             else if (state == 4)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBattlerPositions[0]]);
+                LoadCompressedObjectPic(&sSpriteSheets_HealthBar[gBattlerPositions[0]]);
             else if (state == 5)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBattlerPositions[1]]);
+                LoadCompressedObjectPic(&sSpriteSheets_HealthBar[gBattlerPositions[1]]);
             else
                 retVal = TRUE;
         }
         else
         {
             if (state == 2)
-                LoadCompressedObjectPic(&gUnknown_0832C0E0[0]);
+                LoadCompressedObjectPic(&sSpriteSheets_DoublesPlayerHealthbox[0]);
             else if (state == 3)
-                LoadCompressedObjectPic(&gUnknown_0832C0E0[1]);
+                LoadCompressedObjectPic(&sSpriteSheets_DoublesPlayerHealthbox[1]);
             else if (state == 4)
-                LoadCompressedObjectPic(&gUnknown_0832C0F0[0]);
+                LoadCompressedObjectPic(&sSpriteSheets_DoublesOpponentHealthbox[0]);
             else if (state == 5)
-                LoadCompressedObjectPic(&gUnknown_0832C0F0[1]);
+                LoadCompressedObjectPic(&sSpriteSheets_DoublesOpponentHealthbox[1]);
             else if (state == 6)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBattlerPositions[0]]);
+                LoadCompressedObjectPic(&sSpriteSheets_HealthBar[gBattlerPositions[0]]);
             else if (state == 7)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBattlerPositions[1]]);
+                LoadCompressedObjectPic(&sSpriteSheets_HealthBar[gBattlerPositions[1]]);
             else if (state == 8)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBattlerPositions[2]]);
+                LoadCompressedObjectPic(&sSpriteSheets_HealthBar[gBattlerPositions[2]]);
             else if (state == 9)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBattlerPositions[3]]);
+                LoadCompressedObjectPic(&sSpriteSheets_HealthBar[gBattlerPositions[3]]);
             else
                 retVal = TRUE;
         }

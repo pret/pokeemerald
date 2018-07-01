@@ -85,7 +85,6 @@ extern u8 gUnknown_0203CF00[];
 extern const u16 gBattleTextboxPalette[];
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
-extern const u8 gUnknown_0831ACE0[];
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
@@ -308,6 +307,9 @@ u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
 // 10 is ×1.0 TYPE_MUL_NORMAL
 // 05 is ×0.5 TYPE_MUL_NOT_EFFECTIVE
 // 00 is ×0.0 TYPE_MUL_NO_EFFECT
+
+static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
+
 const u8 gTypeEffectiveness[336] =
 {
     TYPE_NORMAL, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
@@ -561,9 +563,9 @@ const u8 * const gStatusConditionStringsTable[7][2] =
     {gStatusConditionString_LoveJpn, gText_Love}
 };
 
-static const u8 sUnknown_0831BCE0[][3] = {{0, 0, 0}, {3, 5, 0}, {2, 3, 0}, {1, 2, 0}, {1, 1, 0}};
-static const u8 sUnknown_0831BCEF[] = {4, 3, 2, 1};
-static const u8 sUnknown_0831BCF3[] = {4, 4, 4, 4};
+static const u8 sPkblToEscapeFactor[][3] = {{0, 0, 0}, {3, 5, 0}, {2, 3, 0}, {1, 2, 0}, {1, 1, 0}};
+static const u8 sGoNearCounterToCatchFactor[] = {4, 3, 2, 1};
+static const u8 sGoNearCounterToEscapeFactor[] = {4, 4, 4, 4};
 
 // code
 void CB2_InitBattle(void)
@@ -1805,7 +1807,7 @@ static void CB2_HandleStartMultiBattle(void)
             SetMainCallback2(BattleMainCB2);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
-                gTrainerBattleOpponent_A = TRAINER_OPPONENT_800;
+                gTrainerBattleOpponent_A = TRAINER_LINK_OPPONENT;
                 gBattleTypeFlags |= BATTLE_TYPE_20;
             }
         }
@@ -3051,10 +3053,10 @@ static void BattleStartClearSetData(void)
     gLeveledUpInBattle = 0;
     gAbsentBattlerFlags = 0;
     gBattleStruct->runTries = 0;
-    gBattleStruct->field_79 = 0;
-    gBattleStruct->field_7A = 0;
-    *(&gBattleStruct->field_7C) = gBaseStats[GetMonData(&gEnemyParty[0], MON_DATA_SPECIES)].catchRate * 100 / 1275;
-    gBattleStruct->field_7B = 3;
+    gBattleStruct->safariGoNearCounter = 0;
+    gBattleStruct->safariPkblThrowCounter = 0;
+    *(&gBattleStruct->safariCatchFactor) = gBaseStats[GetMonData(&gEnemyParty[0], MON_DATA_SPECIES)].catchRate * 100 / 1275;
+    gBattleStruct->safariEscapeFactor = 3;
     gBattleStruct->wildVictorySong = 0;
     gBattleStruct->moneyMultiplier = 1;
 
@@ -5746,14 +5748,14 @@ static void HandleAction_ThrowPokeblock(void)
 
     if (gBattleResults.pokeblockThrows < 0xFF)
         gBattleResults.pokeblockThrows++;
-    if (gBattleStruct->field_7A < 3)
-        gBattleStruct->field_7A++;
-    if (gBattleStruct->field_7B > 1)
+    if (gBattleStruct->safariPkblThrowCounter < 3)
+        gBattleStruct->safariPkblThrowCounter++;
+    if (gBattleStruct->safariEscapeFactor > 1)
     {
-        if (gBattleStruct->field_7B < sUnknown_0831BCE0[gBattleStruct->field_7A][gBattleCommunication[MULTISTRING_CHOOSER]])
-            gBattleStruct->field_7B = 1;
+        if (gBattleStruct->safariEscapeFactor < sPkblToEscapeFactor[gBattleStruct->safariPkblThrowCounter][gBattleCommunication[MULTISTRING_CHOOSER]])
+            gBattleStruct->safariEscapeFactor = 1;
         else
-            gBattleStruct->field_7B -= sUnknown_0831BCE0[gBattleStruct->field_7A][gBattleCommunication[MULTISTRING_CHOOSER]];
+            gBattleStruct->safariEscapeFactor -= sPkblToEscapeFactor[gBattleStruct->safariPkblThrowCounter][gBattleCommunication[MULTISTRING_CHOOSER]];
     }
 
     gBattlescriptCurrInstr = gBattlescriptsForSafariActions[2];
@@ -5766,22 +5768,22 @@ static void HandleAction_GoNear(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
 
-    gBattleStruct->field_7C += sUnknown_0831BCEF[gBattleStruct->field_79];
-    if (gBattleStruct->field_7C > 20)
-        gBattleStruct->field_7C = 20;
+    gBattleStruct->safariCatchFactor += sGoNearCounterToCatchFactor[gBattleStruct->safariGoNearCounter];
+    if (gBattleStruct->safariCatchFactor > 20)
+        gBattleStruct->safariCatchFactor = 20;
 
-    gBattleStruct->field_7B +=sUnknown_0831BCF3[gBattleStruct->field_79];
-    if (gBattleStruct->field_7B > 20)
-        gBattleStruct->field_7B = 20;
+    gBattleStruct->safariEscapeFactor += sGoNearCounterToEscapeFactor[gBattleStruct->safariGoNearCounter];
+    if (gBattleStruct->safariEscapeFactor > 20)
+        gBattleStruct->safariEscapeFactor = 20;
 
-    if (gBattleStruct->field_79 < 3)
+    if (gBattleStruct->safariGoNearCounter < 3)
     {
-        gBattleStruct->field_79++;
+        gBattleStruct->safariGoNearCounter++;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
     }
     else
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Can't get closer.
     }
     gBattlescriptCurrInstr = gBattlescriptsForSafariActions[1];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;

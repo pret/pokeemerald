@@ -6,6 +6,7 @@
 #include "text.h"
 #include "string_util.h"
 #include "constants/items.h"
+#include "constants/trainers.h"
 #include "event_data.h"
 #include "link.h"
 #include "item.h"
@@ -2074,7 +2075,7 @@ void BufferStringBattle(u16 stringID)
         }
         else
         {
-            if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_800 || gBattleTypeFlags & BATTLE_TYPE_x2000000)
+            if (gTrainerBattleOpponent_A == TRAINER_LINK_OPPONENT || gBattleTypeFlags & BATTLE_TYPE_x2000000)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = sText_LinkTrainer2WithdrewPkmn;

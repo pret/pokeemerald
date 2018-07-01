@@ -16,6 +16,7 @@
 #include "constants/songs.h"
 #include "sound.h"
 #include "constants/moves.h"
+#include "constants/trainers.h"
 #include "window.h"
 #include "m4a.h"
 #include "palette.h"
@@ -39,7 +40,7 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
 extern void sub_806A068(u16, u8);
 extern void sub_81A57E4(u8 battlerId, u16 stringId);
-extern u8 sub_81A4CB0(void);
+extern u8 GetFrontierBrainTrainerPicIndex(void);
 extern u8 sub_81D5588(u16 trainerId);
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 extern u8 GetEreaderTrainerFrontSpriteId(void);
@@ -1234,7 +1235,7 @@ static void OpponentHandleDrawTrainerPic(void)
     }
     else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
-        trainerPicId = sub_81A4CB0();
+        trainerPicId = GetFrontierBrainTrainerPicIndex();
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
     {
@@ -1318,7 +1319,7 @@ static void OpponentHandleTrainerSlide(void)
     }
     else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
-        trainerPicId = sub_81A4CB0();
+        trainerPicId = GetFrontierBrainTrainerPicIndex();
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
     {

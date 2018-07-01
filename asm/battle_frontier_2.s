@@ -19871,8 +19871,8 @@ _081A4C84:
 	.pool
 	thumb_func_end sub_81A4C30
 
-	thumb_func_start sub_81A4CB0
-sub_81A4CB0: @ 81A4CB0
+	thumb_func_start GetFrontierBrainTrainerPicIndex
+GetFrontierBrainTrainerPicIndex: @ 81A4CB0
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -19905,7 +19905,7 @@ _081A4CDA:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81A4CB0
+	thumb_func_end GetFrontierBrainTrainerPicIndex
 
 	thumb_func_start GetFrontierBrainTrainerClass
 GetFrontierBrainTrainerClass: @ 81A4D00

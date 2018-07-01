@@ -16,12 +16,6 @@
 #define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
 #define GET_BATTLER_SIDE2(battler)        (GET_BATTLER_POSITION(battler) & BIT_SIDE)
 
-#define TRAINER_OPPONENT_3FE        0x3FE
-#define TRAINER_OPPONENT_C00        0xC00
-#define TRAINER_OPPONENT_800        0x800
-#define STEVEN_PARTNER_ID           0xC03
-#define SECRET_BASE_OPPONENT        0x400
-
 // Battle Actions
 // These determine what each battler will do in a turn
 #define B_ACTION_USE_MOVE               0
@@ -429,7 +423,7 @@ struct BattleTv_Mon
 
 struct BattleTv
 {
-    struct BattleTv_Mon mon[2][6]; // [side][partyId]
+    struct BattleTv_Mon mon[2][PARTY_SIZE]; // [side][partyId]
     struct BattleTv_Position pos[2][2]; // [side][flank]
     struct BattleTv_Side side[2]; // [side]
 };
@@ -479,10 +473,10 @@ struct BattleStruct
     u8 runTries;
     u8 caughtMonNick[11];
     u8 field_78;
-    u8 field_79;
-    u8 field_7A;
-    u8 field_7B;
-    u8 field_7C;
+    u8 safariGoNearCounter;
+    u8 safariPkblThrowCounter;
+    u8 safariEscapeFactor;
+    u8 safariCatchFactor;
     u8 field_7D;
     u8 field_7E;
     u8 formToChangeInto;
@@ -526,7 +520,7 @@ struct BattleStruct
     u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
-    u8 intimidateBank;
+    u8 intimidateBattler;
     u8 switchInItemsCounter;
     u8 field_DA;
     u8 turnSideTracker;
@@ -609,18 +603,6 @@ struct BattleScripting
     u8 field_23;
     u8 windowsType; // 0 - normal, 1 - battle arena
     u8 multiplayerId;
-};
-
-enum
-{
-    BACK_PIC_BRENDAN,
-    BACK_PIC_MAY,
-    BACK_PIC_RED,
-    BACK_PIC_LEAF,
-    BACK_PIC_RS_BRENDAN,
-    BACK_PIC_RS_MAY,
-    BACK_PIC_WALLY,
-    BACK_PIC_STEVEN
 };
 
 // rom_80A5C6C

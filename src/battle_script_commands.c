@@ -3111,7 +3111,7 @@ static void atk1E_jumpifability(void)
 
     if (gBattlescriptCurrInstr[1] == BS_ATTACKER_SIDE)
     {
-        battlerId = AbilityBattleEffects(ABILITYEFFECT_CHECK_BANK_SIDE, gBattlerAttacker, ability, 0, 0);
+        battlerId = AbilityBattleEffects(ABILITYEFFECT_CHECK_BATTLER_SIDE, gBattlerAttacker, ability, 0, 0);
         if (battlerId)
         {
             gLastUsedAbility = ability;
@@ -5033,7 +5033,7 @@ static void atk4F_jumpifcantswitch(void)
                 party = gPlayerParty;
 
                 i = 0;
-                if (sub_806D82C(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
+                if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
                     i = 3;
             }
             else
@@ -5054,7 +5054,7 @@ static void atk4F_jumpifcantswitch(void)
                 party = gPlayerParty;
 
             i = 0;
-            if (sub_806D82C(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
+            if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
                 i = 3;
         }
 
@@ -5166,7 +5166,7 @@ static void atk50_openpartyscreen(void)
             {
                 if (gHitMarker & HITMARKER_FAINTED(gActiveBattler))
                 {
-                    if (sub_80423F4(gActiveBattler, 6, 6))
+                    if (HasNoMonsToSwitch(gActiveBattler, 6, 6))
                     {
                         gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                         gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -5195,7 +5195,7 @@ static void atk50_openpartyscreen(void)
             if (gBitTable[0] & hitmarkerFaintBits)
             {
                 gActiveBattler = 0;
-                if (sub_80423F4(0, 6, 6))
+                if (HasNoMonsToSwitch(0, 6, 6))
                 {
                     gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -5217,7 +5217,7 @@ static void atk50_openpartyscreen(void)
             if (gBitTable[2] & hitmarkerFaintBits && !(gBitTable[0] & hitmarkerFaintBits))
             {
                 gActiveBattler = 2;
-                if (sub_80423F4(2, 6, 6))
+                if (HasNoMonsToSwitch(2, 6, 6))
                 {
                     gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -5238,7 +5238,7 @@ static void atk50_openpartyscreen(void)
             if (gBitTable[1] & hitmarkerFaintBits)
             {
                 gActiveBattler = 1;
-                if (sub_80423F4(1, 6, 6))
+                if (HasNoMonsToSwitch(1, 6, 6))
                 {
                     gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -5260,7 +5260,7 @@ static void atk50_openpartyscreen(void)
             if (gBitTable[3] & hitmarkerFaintBits && !(gBitTable[1] & hitmarkerFaintBits))
             {
                 gActiveBattler = 3;
-                if (sub_80423F4(3, 6, 6))
+                if (HasNoMonsToSwitch(3, 6, 6))
                 {
                     gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -5323,7 +5323,7 @@ static void atk50_openpartyscreen(void)
                 if (gBitTable[2] & hitmarkerFaintBits && gBitTable[0] & hitmarkerFaintBits)
                 {
                     gActiveBattler = 2;
-                    if (sub_80423F4(2, gBattleBufferB[0][1], 6))
+                    if (HasNoMonsToSwitch(2, gBattleBufferB[0][1], 6))
                     {
                         gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                         gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -5339,7 +5339,7 @@ static void atk50_openpartyscreen(void)
                 if (gBitTable[3] & hitmarkerFaintBits && hitmarkerFaintBits & gBitTable[1])
                 {
                     gActiveBattler = 3;
-                    if (sub_80423F4(3, gBattleBufferB[1][1], 6))
+                    if (HasNoMonsToSwitch(3, gBattleBufferB[1][1], 6))
                     {
                         gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                         gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -5391,7 +5391,7 @@ static void atk50_openpartyscreen(void)
         {
             gBattlescriptCurrInstr += 6;
         }
-        else if (sub_80423F4(battlerId, 6, 6))
+        else if (HasNoMonsToSwitch(battlerId, 6, 6))
         {
             gActiveBattler = battlerId;
             gAbsentBattlerFlags |= gBitTable[gActiveBattler];
@@ -7506,7 +7506,7 @@ static void atk8F_forcerandomswitch(void)
         else if ((gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
                  || (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_x2000000))
         {
-            if (sub_806D82C(GetBattlerMultiplayerId(gBattlerTarget)) == 1)
+            if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gBattlerTarget)) == 1)
             {
                 firstMonId = 3;
                 lastMonId = 6;
@@ -9044,7 +9044,7 @@ static void atkBE_rapidspinfree(void)
     else if (gStatuses3[gBattlerAttacker] & STATUS3_LEECHSEED)
     {
         gStatuses3[gBattlerAttacker] &= ~(STATUS3_LEECHSEED);
-        gStatuses3[gBattlerAttacker] &= ~(STATUS3_LEECHSEED_BANK);
+        gStatuses3[gBattlerAttacker] &= ~(STATUS3_LEECHSEED_BATTLER);
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_LeechSeedFree;
     }
@@ -9760,7 +9760,7 @@ static void atkE1_trygetintimidatetarget(void)
 {
     u8 side;
 
-    gBattleScripting.battler = gBattleStruct->intimidateBank;
+    gBattleScripting.battler = gBattleStruct->intimidateBattler;
     side = GetBattlerSide(gBattleScripting.battler);
 
     PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gBattleMons[gBattleScripting.battler].ability)
@@ -10115,7 +10115,7 @@ static void atkEF_handleballthrow(void)
         u8 catchRate;
 
         if (gLastUsedItem == ITEM_SAFARI_BALL)
-            catchRate = gBattleStruct->field_7C * 1275 / 100;
+            catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
         else
             catchRate = gBaseStats[gBattleMons[gBattlerTarget].species].catchRate;
 

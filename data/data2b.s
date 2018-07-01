@@ -4862,7 +4862,3 @@ gUnknown_0831ACC4:: @ 831ACC4
 	.align 2
 gUnknown_0831ACDC:: @ 831ACDC
 	.4byte gUnknown_0831ACC4
-
-	.align 2
-gUnknown_0831ACE0:: @ 831ACE0
-	.byte 0xe0, 0xf0, 0xf0, 0xe0, 0xe0, 0x00, 0x00, 0x00

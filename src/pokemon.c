@@ -1964,11 +1964,11 @@ void CalculateMonStats(struct Pokemon *mon)
 
     SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
 
-    CALC_STAT(baseAttack, attackIV, attackEV, 1, MON_DATA_ATK)
-    CALC_STAT(baseDefense, defenseIV, defenseEV, 2, MON_DATA_DEF)
-    CALC_STAT(baseSpeed, speedIV, speedEV, 3, MON_DATA_SPEED)
-    CALC_STAT(baseSpAttack, spAttackIV, spAttackEV, 4, MON_DATA_SPATK)
-    CALC_STAT(baseSpDefense, spDefenseIV, spDefenseEV, 5, MON_DATA_SPDEF)
+    CALC_STAT(baseAttack, attackIV, attackEV, STAT_ATK, MON_DATA_ATK)
+    CALC_STAT(baseDefense, defenseIV, defenseEV, STAT_DEF, MON_DATA_DEF)
+    CALC_STAT(baseSpeed, speedIV, speedEV, STAT_SPEED, MON_DATA_SPEED)
+    CALC_STAT(baseSpAttack, spAttackIV, spAttackEV, STAT_SPATK, MON_DATA_SPATK)
+    CALC_STAT(baseSpDefense, spDefenseIV, spDefenseEV, STAT_SPDEF, MON_DATA_SPDEF)
 
     if (species == SPECIES_SHEDINJA)
     {
@@ -4819,21 +4819,21 @@ bool8 sub_806D7EC(void)
     return retVal;
 }
 
-bool16 sub_806D82C(u8 id)
+u16 GetLinkTrainerFlankId(u8 linkPlayerId)
 {
-    bool16 retVal = FALSE;
-    switch (gLinkPlayers[id].lp_field_18)
+    u16 flankId = 0;
+    switch (gLinkPlayers[linkPlayerId].lp_field_18)
     {
     case 0:
     case 3:
-        retVal = FALSE;
+        flankId = 0;
         break;
     case 1:
     case 2:
-        retVal = TRUE;
+        flankId = 1;
         break;
     }
-    return retVal;
+    return flankId;
 }
 
 s32 GetBattlerMultiplayerId(u16 a1)

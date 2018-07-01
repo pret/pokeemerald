@@ -13,6 +13,7 @@
 #include "util.h"
 #include "main.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 #include "sound.h"
 #include "window.h"
 #include "m4a.h"

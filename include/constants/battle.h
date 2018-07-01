@@ -130,7 +130,7 @@
 #define STATUS2_TORMENT               0x80000000
 
 // Seems like per-battler statuses. Not quite sure how to categorize these
-#define STATUS3_LEECHSEED_BANK          0x3
+#define STATUS3_LEECHSEED_BATTLER       0x3
 #define STATUS3_LEECHSEED               0x4
 #define STATUS3_ALWAYS_HITS             0x18    // two bits
 #define STATUS3_PERISH_SONG             0x20

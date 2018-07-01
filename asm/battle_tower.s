@@ -1353,7 +1353,7 @@ _08162AD0:
 	ldr r0, =0x000003fe
 	cmp r4, r0
 	bne _08162AE4
-	bl sub_81A4CB0
+	bl GetFrontierBrainTrainerPicIndex
 	lsls r0, 24
 	lsrs r0, 24
 	b _08162BCA

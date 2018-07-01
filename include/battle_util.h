@@ -8,27 +8,27 @@
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
 #define MOVE_LIMITATION_IMPRISION               (1 << 5)
 
-#define ABILITYEFFECT_ON_SWITCHIN               0x0
-#define ABILITYEFFECT_ENDTURN                   0x1
-#define ABILITYEFFECT_MOVES_BLOCK               0x2
-#define ABILITYEFFECT_ABSORBING                 0x3
-#define ABILITYEFFECT_CONTACT                   0x4
-#define ABILITYEFFECT_IMMUNITY                  0x5
-#define ABILITYEFFECT_FORECAST                  0x6
-#define ABILITYEFFECT_SYNCHRONIZE               0x7
-#define ABILITYEFFECT_ATK_SYNCHRONIZE           0x8
-#define ABILITYEFFECT_INTIMIDATE1               0x9
-#define ABILITYEFFECT_INTIMIDATE2               0xA
-#define ABILITYEFFECT_TRACE                     0xB
-#define ABILITYEFFECT_CHECK_OTHER_SIDE          0xC
-#define ABILITYEFFECT_CHECK_BANK_SIDE           0xD
-#define ABILITYEFFECT_FIELD_SPORT               0xE
-#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK   0xF
-#define ABILITYEFFECT_COUNT_OTHER_SIDE          0x10
-#define ABILITYEFFECT_COUNT_BANK_SIDE           0x11
-#define ABILITYEFFECT_COUNT_ON_FIELD            0x12
-#define ABILITYEFFECT_CHECK_ON_FIELD            0x13
-#define ABILITYEFFECT_SWITCH_IN_WEATHER         0xFF
+#define ABILITYEFFECT_ON_SWITCHIN                0x0
+#define ABILITYEFFECT_ENDTURN                    0x1
+#define ABILITYEFFECT_MOVES_BLOCK                0x2
+#define ABILITYEFFECT_ABSORBING                  0x3
+#define ABILITYEFFECT_CONTACT                    0x4
+#define ABILITYEFFECT_IMMUNITY                   0x5
+#define ABILITYEFFECT_FORECAST                   0x6
+#define ABILITYEFFECT_SYNCHRONIZE                0x7
+#define ABILITYEFFECT_ATK_SYNCHRONIZE            0x8
+#define ABILITYEFFECT_INTIMIDATE1                0x9
+#define ABILITYEFFECT_INTIMIDATE2                0xA
+#define ABILITYEFFECT_TRACE                      0xB
+#define ABILITYEFFECT_CHECK_OTHER_SIDE           0xC
+#define ABILITYEFFECT_CHECK_BATTLER_SIDE         0xD
+#define ABILITYEFFECT_FIELD_SPORT                0xE
+#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER 0xF
+#define ABILITYEFFECT_COUNT_OTHER_SIDE           0x10
+#define ABILITYEFFECT_COUNT_BATTLER_SIDE         0x11
+#define ABILITYEFFECT_COUNT_ON_FIELD             0x12
+#define ABILITYEFFECT_CHECK_ON_FIELD             0x13
+#define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ABILITY_ON_OPPOSING_FIELD(battlerId, abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, abilityId, 0, 0))
 #define ABILITY_ON_FIELD(abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, abilityId, 0, 0))
@@ -38,15 +38,6 @@
 
 #define WEATHER_HAS_EFFECT ((!ABILITY_ON_FIELD(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD(ABILITY_AIR_LOCK)))
 #define WEATHER_HAS_EFFECT2 ((!ABILITY_ON_FIELD2(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD2(ABILITY_AIR_LOCK)))
-
-#define BS_GET_TARGET                   0
-#define BS_GET_ATTACKER                 1
-#define BS_GET_EFFECT_BANK              2
-#define BS_GET_SCRIPTING_BANK           10
-#define BS_GET_PLAYER1                  11
-#define BS_GET_OPPONENT1                12
-#define BS_GET_PLAYER2                  13
-#define BS_GET_OPPONENT2                14
 
 u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move);
@@ -74,7 +65,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
 void TryClearRageStatuses(void);
 u8 AtkCanceller_UnableToUseMove(void);
-bool8 sub_80423F4(u8 battlerId, u8 r1, u8 r2);
+bool8 HasNoMonsToSwitch(u8 battlerId, u8 r1, u8 r2);
 u8 CastformDataTypeChange(u8 battlerId);
 u8 AbilityBattleEffects(u8 caseID, u8 battlerId, u8 ability, u8 special, u16 moveArg);
 void BattleScriptExecute(const u8* BS_ptr);
