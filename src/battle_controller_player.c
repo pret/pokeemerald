@@ -122,11 +122,11 @@ static void HandleMoveSwitchting(void);
 static void sub_8058FC0(void);
 static void sub_8059828(void);
 static void CompleteWhenChoseItem(void);
-static void sub_8059544(u8 taskId);
+static void Task_LaunchLvlUpAnim(u8 taskId);
 static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
 static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
 static void sub_8059400(u8 taskId);
-static void sub_80595A4(u8 taskId);
+static void Task_UpdateLvlInHealthbox(u8 taskId);
 static void PrintLinkStandbyMsg(void);
 static u32 CopyPlayerMonData(u8 monId, u8 *dst);
 static void SetPlayerMonData(u8 monId);
@@ -1143,16 +1143,16 @@ static void CompleteOnInactiveTextPrinter(void)
 
 #define tExpTask_monId      data[0]
 #define tExpTask_gainedExp  data[1]
-#define tExpTask_bank       data[2]
+#define tExpTask_battler    data[2]
 #define tExpTask_frames     data[10]
 
 static void Task_GiveExpToMon(u8 taskId)
 {
     u32 monId = (u8)(gTasks[taskId].tExpTask_monId);
-    u8 battlerId = gTasks[taskId].tExpTask_bank;
+    u8 battlerId = gTasks[taskId].tExpTask_battler;
     s16 gainedExp = gTasks[taskId].tExpTask_gainedExp;
 
-    if (IsDoubleBattle() == TRUE || monId != gBattlerPartyIndexes[battlerId]) // give exp without the expbar
+    if (IsDoubleBattle() == TRUE || monId != gBattlerPartyIndexes[battlerId]) // Give exp without moving the expbar.
     {
         struct Pokemon *mon = &gPlayerParty[monId];
         u16 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -1162,19 +1162,19 @@ static void Task_GiveExpToMon(u8 taskId)
 
         if (currExp + gainedExp >= nextLvlExp)
         {
-            u8 savedActiveBank;
+            u8 savedActiveBattler;
 
             SetMonData(mon, MON_DATA_EXP, &nextLvlExp);
             CalculateMonStats(mon);
             gainedExp -= nextLvlExp - currExp;
-            savedActiveBank = gActiveBattler;
+            savedActiveBattler = gActiveBattler;
             gActiveBattler = battlerId;
             BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELLED_UP, gainedExp);
-            gActiveBattler = savedActiveBank;
+            gActiveBattler = savedActiveBattler;
 
             if (IsDoubleBattle() == TRUE
              && ((u16)(monId) == gBattlerPartyIndexes[battlerId] || (u16)(monId) == gBattlerPartyIndexes[battlerId ^ BIT_FLANK]))
-                gTasks[taskId].func = sub_8059544;
+                gTasks[taskId].func = Task_LaunchLvlUpAnim;
             else
                 gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter;
         }
@@ -1196,7 +1196,7 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 {
     u8 monIndex = gTasks[taskId].tExpTask_monId;
     s32 gainedExp = gTasks[taskId].tExpTask_gainedExp;
-    u8 battlerId = gTasks[taskId].tExpTask_bank;
+    u8 battlerId = gTasks[taskId].tExpTask_battler;
     struct Pokemon *mon = &gPlayerParty[monIndex];
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -1221,12 +1221,12 @@ static void sub_8059400(u8 taskId)
     {
         u8 monId = gTasks[taskId].tExpTask_monId;
         s16 gainedExp = gTasks[taskId].tExpTask_gainedExp;
-        u8 battlerId = gTasks[taskId].tExpTask_bank;
-        s16 r4;
+        u8 battlerId = gTasks[taskId].tExpTask_battler;
+        s16 newExpPoints;
 
-        r4 = MoveBattleBar(battlerId, gHealthboxSpriteIds[battlerId], EXP_BAR, 0);
+        newExpPoints = MoveBattleBar(battlerId, gHealthboxSpriteIds[battlerId], EXP_BAR, 0);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[battlerId]);
-        if (r4 == -1)
+        if (newExpPoints == -1) // The bar has been filled with given exp points.
         {
             u8 level;
             s32 currExp;
@@ -1241,16 +1241,16 @@ static void sub_8059400(u8 taskId)
 
             if (currExp + gainedExp >= expOnNextLvl)
             {
-                u8 savedActiveBank;
+                u8 savedActiveBattler;
 
                 SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &expOnNextLvl);
                 CalculateMonStats(&gPlayerParty[monId]);
                 gainedExp -= expOnNextLvl - currExp;
-                savedActiveBank = gActiveBattler;
+                savedActiveBattler = gActiveBattler;
                 gActiveBattler = battlerId;
                 BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELLED_UP, gainedExp);
-                gActiveBattler = savedActiveBank;
-                gTasks[taskId].func = sub_8059544;
+                gActiveBattler = savedActiveBattler;
+                gTasks[taskId].func = Task_LaunchLvlUpAnim;
             }
             else
             {
@@ -1263,27 +1263,27 @@ static void sub_8059400(u8 taskId)
     }
 }
 
-static void sub_8059544(u8 taskId)
+static void Task_LaunchLvlUpAnim(u8 taskId)
 {
-    u8 battlerId = gTasks[taskId].tExpTask_bank;
+    u8 battlerId = gTasks[taskId].tExpTask_battler;
     u8 monIndex = gTasks[taskId].tExpTask_monId;
 
     if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[battlerId ^ BIT_FLANK])
         battlerId ^= BIT_FLANK;
 
     InitAndLaunchSpecialAnimation(battlerId, battlerId, battlerId, B_ANIM_LVL_UP);
-    gTasks[taskId].func = sub_80595A4;
+    gTasks[taskId].func = Task_UpdateLvlInHealthbox;
 }
 
-static void sub_80595A4(u8 taskId)
+static void Task_UpdateLvlInHealthbox(u8 taskId)
 {
-    u8 battlerId = gTasks[taskId].tExpTask_bank;
+    u8 battlerId = gTasks[taskId].tExpTask_battler;
 
     if (!gBattleSpritesDataPtr->healthBoxesData[battlerId].specialAnimActive)
     {
         u8 monIndex = gTasks[taskId].tExpTask_monId;
 
-        GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL);  // Unused return value
+        GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL);  // Unused return value.
 
         if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[battlerId ^ BIT_FLANK])
             UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId ^ BIT_FLANK], &gPlayerParty[monIndex], HEALTHBOX_ALL);
@@ -1300,8 +1300,8 @@ static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
     u8 battlerId;
 
     monIndex = gTasks[taskId].tExpTask_monId;
-    GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL);  // Unused return value
-    battlerId = gTasks[taskId].tExpTask_bank;
+    GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL);  // Unused return value.
+    battlerId = gTasks[taskId].tExpTask_battler;
     gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
     DestroyTask(taskId);
 }
@@ -2466,7 +2466,7 @@ static void PlayerHandleMoveAnimation(void)
         gWeatherMoveAnim = gBattleBufferA[gActiveBattler][12] | (gBattleBufferA[gActiveBattler][13] << 8);
         gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBattler][16];
         gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
-        if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
+        if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // Always returns FALSE.
         {
             PlayerBufferExecCompleted();
         }
@@ -2722,19 +2722,19 @@ static void PlayerHandleExpUpdate(void)
         u8 taskId;
 
         LoadBattleBarGfx(1);
-        GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);  // unused return value
-        expPointsToGive = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
+        GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);  // Unused return value.
+        expPointsToGive = T1_READ_16(&gBattleBufferA[gActiveBattler][2]);
         taskId = CreateTask(Task_GiveExpToMon, 10);
         gTasks[taskId].tExpTask_monId = monId;
         gTasks[taskId].tExpTask_gainedExp = expPointsToGive;
-        gTasks[taskId].tExpTask_bank = gActiveBattler;
+        gTasks[taskId].tExpTask_battler = gActiveBattler;
         gBattlerControllerFuncs[gActiveBattler] = nullsub_21;
     }
 }
 
 #undef tExpTask_monId
 #undef tExpTask_gainedExp
-#undef tExpTask_bank
+#undef tExpTask_battler
 #undef tExpTask_frames
 
 static void PlayerHandleStatusIconUpdate(void)
@@ -2971,7 +2971,7 @@ static void task05_08033660(u8 taskId)
     }
     else
     {
-        u8 savedActiveBank = gActiveBattler;
+        u8 savedActiveBattler = gActiveBattler;
 
         gActiveBattler = gTasks[taskId].data[0];
         if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
@@ -2990,7 +2990,7 @@ static void task05_08033660(u8 taskId)
             gActiveBattler ^= BIT_FLANK;
         }
         gBattlerControllerFuncs[gActiveBattler] = sub_8058B40;
-        gActiveBattler = savedActiveBank;
+        gActiveBattler = savedActiveBattler;
         DestroyTask(taskId);
     }
 }
