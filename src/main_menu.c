@@ -71,7 +71,7 @@ void task_new_game_prof_birch_speech_2(u8);
 void sub_8031BAC(u8, u8);
 void sub_8031D34(u8, u8);
 void task_new_game_prof_birch_speech_3(u8);
-void unknown_rbox_to_vram(u8, u8);
+void text_box_decoration(u8, u8);
 void sub_8032318(u8);
 void task_new_game_prof_birch_speech_4(u8);
 void task_new_game_prof_birch_speech_5(u8);
@@ -1039,7 +1039,7 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
             InitWindows(gUnknown_082FF080);
             LoadMainMenuWindowFrameTiles(0, 0xF3);
             copy_textbox_border_tile_patterns_to_vram(0, 0xFC,  0xF0);
-            unknown_rbox_to_vram(0, 1);
+            text_box_decoration(0, 1);
             PutWindowTilemap(0);
             CopyWindowToVram(0, 2);
             sub_8032318(0);
@@ -1941,7 +1941,8 @@ void sub_80323CC(u8 a, u8 b, u16 c, u16 d, u8 e, u8 f)
     CreateYesNoMenu(&sp, c, e, 0);
 }
 
-void unknown_rbox_to_vram(u8 windowId, u8 a)
+// From what I gather, this functions controls the decoration surrounding the text box -Soul
+void text_box_decoration(u8 windowId, u8 a)
 {
     CallWindowFunction(windowId, sub_8032474);
     FillWindowPixelBuffer(windowId, 17);
@@ -1971,7 +1972,7 @@ void task_new_game_prof_birch_speech_part2_1(u8 taskId)
 {
     if (gTasks[taskId].data[7]-- <= 0)
     {
-        unknown_rbox_to_vram(0, 1);
+        text_box_decoration(0, 1);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_2;
     }
 }
