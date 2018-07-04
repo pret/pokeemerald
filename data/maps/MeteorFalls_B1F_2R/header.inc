@@ -1,5 +1,5 @@
 MeteorFalls_B1F_2R: @ 8483F14
-	.4byte MeteorFalls_B1F_2R_MapAttributes
+	.4byte MeteorFalls_B1F_2R_Layout
 	.4byte MeteorFalls_B1F_2R_MapEvents
 	.4byte MeteorFalls_B1F_2R_MapScripts
 	.4byte 0x0

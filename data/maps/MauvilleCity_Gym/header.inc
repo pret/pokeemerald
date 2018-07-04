@@ -1,5 +1,5 @@
 MauvilleCity_Gym: @ 8483264
-	.4byte MauvilleCity_Gym_MapAttributes
+	.4byte MauvilleCity_Gym_Layout
 	.4byte MauvilleCity_Gym_MapEvents
 	.4byte MauvilleCity_Gym_MapScripts
 	.4byte 0x0

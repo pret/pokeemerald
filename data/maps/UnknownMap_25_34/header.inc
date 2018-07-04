@@ -1,5 +1,5 @@
 UnknownMap_25_34: @ 8484E48
-	.4byte UnknownMap_25_34_MapAttributes
+	.4byte UnknownMap_25_34_Layout
 	.4byte UnknownMap_25_34_MapEvents
 	.4byte UnknownMap_25_34_MapScripts
 	.4byte 0x0

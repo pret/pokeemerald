@@ -301,7 +301,7 @@ typedef union // size = 0x24
         /*0x06*/ u8 nGoldSymbols;
         /*0x07*/ u8 location;
         /*0x08*/ u16 battlePoints;
-        /*0x0a*/ u16 mapDataId;
+        /*0x0a*/ u16 mapLayoutId;
         /*0x0c*/ u8 language;
         /*0x0d*/ u8 filler_0d[6];
         /*0x13*/ u8 playerName[8];
@@ -326,7 +326,7 @@ typedef union // size = 0x24
         /*0x02*/ u16 item;
         /*0x04*/ u8 location;
         /*0x05*/ u8 language;
-        /*0x06*/ u16 mapDataId;
+        /*0x06*/ u16 mapLayoutId;
         /*0x08*/ u8 filler_08[11];
         /*0x13*/ u8 playerName[8];
     } treasureInvestigators;

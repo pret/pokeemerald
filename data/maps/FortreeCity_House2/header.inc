@@ -1,5 +1,5 @@
 FortreeCity_House2: @ 84835AC
-	.4byte FortreeCity_House2_MapAttributes
+	.4byte FortreeCity_House2_Layout
 	.4byte FortreeCity_House2_MapEvents
 	.4byte FortreeCity_House2_MapScripts
 	.4byte 0x0

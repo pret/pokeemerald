@@ -1,5 +1,5 @@
 MirageTower_2F: @ 8484924
-	.4byte MirageTower_2F_MapAttributes
+	.4byte MirageTower_2F_Layout
 	.4byte MirageTower_2F_MapEvents
 	.4byte MirageTower_2F_MapScripts
 	.4byte 0x0

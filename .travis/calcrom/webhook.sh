@@ -13,4 +13,4 @@ if [ ! -f $map_file ]; then
 fi
 
 output=$(perl $(dirname "$0")/calcrom.pl $build_name.map | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
-curl -d "{\"username\": \"OK\", \"avatar_url\": \"https://i.imgur.com/38BQHdd.png\", \"content\":\"\`\`\`$build_name progress:\\n$output\`\`\`\"}" -H "Content-Type: application/json" -X POST https://discordapp.com/api/webhooks/340931107060973570/$DISCORD_WEBHOOK_KEY
+curl -d "{\"username\": \"$CALCROM_DISCORD_WEBHOOK_USERNAME\", \"avatar_url\": \"$CALCROM_DISCORD_WEBHOOK_AVATAR_URL\", \"content\":\"\`\`\`$build_name progress:\\n$output\`\`\`\"}" -H "Content-Type: application/json" -X POST $CALCROM_DISCORD_WEBHOOK_URL

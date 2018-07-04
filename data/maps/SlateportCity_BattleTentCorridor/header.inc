@@ -1,5 +1,5 @@
 SlateportCity_BattleTentCorridor: @ 8483130
-	.4byte SlateportCity_BattleTentCorridor_MapAttributes
+	.4byte BattleTentCorridor_Layout
 	.4byte SlateportCity_BattleTentCorridor_MapEvents
 	.4byte SlateportCity_BattleTentCorridor_MapScripts
 	.4byte 0x0

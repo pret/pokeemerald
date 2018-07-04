@@ -1,5 +1,5 @@
 BattleFrontier_Lounge5: @ 8485660
-	.4byte BattleFrontier_Lounge5_MapAttributes
+	.4byte BattleFrontier_Lounge1_Layout
 	.4byte BattleFrontier_Lounge5_MapEvents
 	.4byte BattleFrontier_Lounge5_MapScripts
 	.4byte 0x0

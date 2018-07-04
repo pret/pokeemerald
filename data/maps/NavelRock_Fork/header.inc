@@ -1,5 +1,5 @@
 NavelRock_Fork: @ 84858E4
-	.4byte NavelRock_Fork_MapAttributes
+	.4byte NavelRock_Fork_Layout
 	.4byte NavelRock_Fork_MapEvents
 	.4byte NavelRock_Fork_MapScripts
 	.4byte 0x0

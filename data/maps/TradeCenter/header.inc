@@ -1,5 +1,5 @@
 TradeCenter: @ 8484D4C
-	.4byte TradeCenter_MapAttributes
+	.4byte TradeCenter_Layout
 	.4byte TradeCenter_MapEvents
 	.4byte TradeCenter_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 SlateportCity_BattleTentLobby: @ 8483114
-	.4byte SlateportCity_BattleTentLobby_MapAttributes
+	.4byte BattleTentLobby_Layout
 	.4byte SlateportCity_BattleTentLobby_MapEvents
 	.4byte SlateportCity_BattleTentLobby_MapScripts
 	.4byte 0x0

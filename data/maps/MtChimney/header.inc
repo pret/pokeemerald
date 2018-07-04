@@ -1,5 +1,5 @@
 MtChimney: @ 8484010
-	.4byte MtChimney_MapAttributes
+	.4byte MtChimney_Layout
 	.4byte MtChimney_MapEvents
 	.4byte MtChimney_MapScripts
 	.4byte 0x0

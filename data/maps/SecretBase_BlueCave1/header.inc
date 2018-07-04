@@ -1,5 +1,5 @@
 SecretBase_BlueCave1: @ 8484AC8
-	.4byte SecretBase_BlueCave1_MapAttributes
+	.4byte SecretBase_BlueCave1_Layout
 	.4byte SecretBase_BlueCave1_MapEvents
 	.4byte SecretBase_BlueCave1_MapScripts
 	.4byte 0x0

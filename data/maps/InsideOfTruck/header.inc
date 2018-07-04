@@ -1,5 +1,5 @@
 InsideOfTruck: @ 8484EF0
-	.4byte InsideOfTruck_MapAttributes
+	.4byte InsideOfTruck_Layout
 	.4byte InsideOfTruck_MapEvents
 	.4byte InsideOfTruck_MapScripts
 	.4byte 0x0

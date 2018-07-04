@@ -1,5 +1,5 @@
 Underwater7: @ 8482AD8
-	.4byte Underwater7_MapAttributes
+	.4byte Underwater7_Layout
 	.4byte Underwater7_MapEvents
 	.4byte Underwater7_MapScripts
 	.4byte Underwater7_MapConnections

@@ -1,5 +1,5 @@
 Route110_TrickHouseEnd: @ 8485B68
-	.4byte Route110_TrickHouseEnd_MapAttributes
+	.4byte Route110_TrickHouseEnd_Layout
 	.4byte Route110_TrickHouseEnd_MapEvents
 	.4byte Route110_TrickHouseEnd_MapScripts
 	.4byte 0x0

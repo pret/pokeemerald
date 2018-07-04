@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStoreRooftop: @ 8483884
-	.4byte LilycoveCity_DepartmentStoreRooftop_MapAttributes
+	.4byte LilycoveCity_DepartmentStoreRooftop_Layout
 	.4byte LilycoveCity_DepartmentStoreRooftop_MapEvents
 	.4byte LilycoveCity_DepartmentStoreRooftop_MapScripts
 	.4byte 0x0

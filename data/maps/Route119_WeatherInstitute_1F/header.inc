@@ -1,5 +1,5 @@
 Route119_WeatherInstitute_1F: @ 8485CF0
-	.4byte Route119_WeatherInstitute_1F_MapAttributes
+	.4byte Route119_WeatherInstitute_1F_Layout
 	.4byte Route119_WeatherInstitute_1F_MapEvents
 	.4byte Route119_WeatherInstitute_1F_MapScripts
 	.4byte 0x0

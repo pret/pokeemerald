@@ -1,5 +1,5 @@
 EverGrandeCity_DrakesRoom: @ 8483C20
-	.4byte EverGrandeCity_DrakesRoom_MapAttributes
+	.4byte EverGrandeCity_DrakesRoom_Layout
 	.4byte EverGrandeCity_DrakesRoom_MapEvents
 	.4byte EverGrandeCity_DrakesRoom_MapScripts
 	.4byte 0x0

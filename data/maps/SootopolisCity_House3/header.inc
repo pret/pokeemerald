@@ -1,5 +1,5 @@
 SootopolisCity_House3: @ 8483AEC
-	.4byte SootopolisCity_House3_MapAttributes
+	.4byte SootopolisCity_House3_Layout
 	.4byte SootopolisCity_House3_MapEvents
 	.4byte SootopolisCity_House3_MapScripts
 	.4byte 0x0

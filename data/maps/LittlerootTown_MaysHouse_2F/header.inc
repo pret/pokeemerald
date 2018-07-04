@@ -1,5 +1,5 @@
 LittlerootTown_MaysHouse_2F: @ 8482B48
-	.4byte LittlerootTown_MaysHouse_2F_MapAttributes
+	.4byte LittlerootTown_MaysHouse_2F_Layout
 	.4byte LittlerootTown_MaysHouse_2F_MapEvents
 	.4byte LittlerootTown_MaysHouse_2F_MapScripts
 	.4byte 0x0

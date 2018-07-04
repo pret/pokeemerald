@@ -1,5 +1,5 @@
 Route114_FossilManiacsHouse: @ 8483E18
-	.4byte Route114_FossilManiacsHouse_MapAttributes
+	.4byte Route114_FossilManiacsHouse_Layout
 	.4byte Route114_FossilManiacsHouse_MapEvents
 	.4byte Route114_FossilManiacsHouse_MapScripts
 	.4byte 0x0

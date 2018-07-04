@@ -1,5 +1,5 @@
 MauvilleCity_Mart: @ 8483328
-	.4byte MauvilleCity_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte MauvilleCity_Mart_MapEvents
 	.4byte MauvilleCity_Mart_MapScripts
 	.4byte 0x0

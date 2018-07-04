@@ -250,11 +250,11 @@
 #define MAP_EVER_GRANDE_CITY_GLACIAS_ROOM      (2 | (16 << 8))
 #define MAP_EVER_GRANDE_CITY_DRAKES_ROOM       (3 | (16 << 8))
 #define MAP_EVER_GRANDE_CITY_CHAMPIONS_ROOM    (4 | (16 << 8))
-#define MAP_EVER_GRANDE_CITY_CORRIDOR1         (5 | (16 << 8))
-#define MAP_EVER_GRANDE_CITY_CORRIDOR2         (6 | (16 << 8))
-#define MAP_EVER_GRANDE_CITY_CORRIDOR3         (7 | (16 << 8))
-#define MAP_EVER_GRANDE_CITY_CORRIDOR4         (8 | (16 << 8))
-#define MAP_EVER_GRANDE_CITY_CORRIDOR5         (9 | (16 << 8))
+#define MAP_EVER_GRANDE_CITY_HALL1         (5 | (16 << 8))
+#define MAP_EVER_GRANDE_CITY_HALL2         (6 | (16 << 8))
+#define MAP_EVER_GRANDE_CITY_HALL3         (7 | (16 << 8))
+#define MAP_EVER_GRANDE_CITY_HALL4         (8 | (16 << 8))
+#define MAP_EVER_GRANDE_CITY_HALL5         (9 | (16 << 8))
 #define MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F (10 | (16 << 8))
 #define MAP_EVER_GRANDE_CITY_HALL_OF_FAME      (11 | (16 << 8))
 #define MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F (12 | (16 << 8))
@@ -327,9 +327,9 @@
 #define MAP_SEAFLOOR_CAVERN_ROOM9                 (36 | (24 << 8))
 #define MAP_CAVE_OF_ORIGIN_ENTRANCE               (37 | (24 << 8))
 #define MAP_CAVE_OF_ORIGIN_1F                     (38 | (24 << 8))
-#define MAP_CAVE_OF_ORIGIN_UNUSED_RS_B1F          (39 | (24 << 8))  //
-#define MAP_CAVE_OF_ORIGIN_UNUSED_RS_B2F          (40 | (24 << 8))  // Ruby/Sapphire leftovers
-#define MAP_CAVE_OF_ORIGIN_UNUSED_RS_B3F          (41 | (24 << 8))  //
+#define MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1          (39 | (24 << 8))  //
+#define MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2          (40 | (24 << 8))  // Ruby/Sapphire leftovers
+#define MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3          (41 | (24 << 8))  //
 #define MAP_CAVE_OF_ORIGIN_B1F                    (42 | (24 << 8))
 #define MAP_VICTORY_ROAD_1F                       (43 | (24 << 8))
 #define MAP_VICTORY_ROAD_B1F                      (44 | (24 << 8))
@@ -570,8 +570,8 @@
 #define MAP_ROUTE110_TRICK_HOUSE_PUZZLE6                 (8 | (29 << 8))
 #define MAP_ROUTE110_TRICK_HOUSE_PUZZLE7                 (9 | (29 << 8))
 #define MAP_ROUTE110_TRICK_HOUSE_PUZZLE8                 (10 | (29 << 8))
-#define MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE (11 | (29 << 8))
-#define MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE (12 | (29 << 8))
+#define MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE (11 | (29 << 8))
+#define MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE (12 | (29 << 8))
 
 // Map Group 30
 #define MAP_ROUTE113_GLASS_WORKSHOP (0 | (30 << 8))

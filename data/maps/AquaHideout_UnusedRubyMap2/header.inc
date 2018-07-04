@@ -1,5 +1,5 @@
 AquaHideout_UnusedRubyMap2: @ 84846F4
-	.4byte AquaHideout_UnusedRubyMap2_MapAttributes
+	.4byte AquaHideout_UnusedRubyMap2_Layout
 	.4byte AquaHideout_UnusedRubyMap2_MapEvents
 	.4byte AquaHideout_UnusedRubyMap2_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 FarawayIsland_Entrance: @ 848575C
-	.4byte FarawayIsland_Entrance_MapAttributes
+	.4byte FarawayIsland_Entrance_Layout
 	.4byte FarawayIsland_Entrance_MapEvents
 	.4byte FarawayIsland_Entrance_MapScripts
 	.4byte 0x0

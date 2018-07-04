@@ -1,5 +1,5 @@
 BattlePyramidSquare04: @ 8484FB4
-	.4byte BattlePyramidSquare04_MapAttributes
+	.4byte BattlePyramidSquare04_Layout
 	.4byte BattlePyramidSquare04_MapEvents
 	.4byte BattlePyramidSquare04_MapScripts
 	.4byte 0x0

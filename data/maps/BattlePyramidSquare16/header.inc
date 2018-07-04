@@ -1,5 +1,5 @@
 BattlePyramidSquare16: @ 8485104
-	.4byte BattlePyramidSquare16_MapAttributes
+	.4byte BattlePyramidSquare16_Layout
 	.4byte BattlePyramidSquare16_MapEvents
 	.4byte BattlePyramidSquare16_MapScripts
 	.4byte 0x0

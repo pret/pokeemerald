@@ -1,5 +1,5 @@
 TrainerHill_Entrance: @ 84857CC
-	.4byte TrainerHill_Entrance_MapAttributes
+	.4byte TrainerHill_Entrance_Layout
 	.4byte TrainerHill_Entrance_MapEvents
 	.4byte TrainerHill_Entrance_MapScripts
 	.4byte 0x0

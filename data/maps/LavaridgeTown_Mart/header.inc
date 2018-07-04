@@ -1,5 +1,5 @@
 LavaridgeTown_Mart: @ 8482D24
-	.4byte LavaridgeTown_Mart_MapAttributes
+	.4byte Mart_Layout
 	.4byte LavaridgeTown_Mart_MapEvents
 	.4byte LavaridgeTown_Mart_MapScripts
 	.4byte 0x0

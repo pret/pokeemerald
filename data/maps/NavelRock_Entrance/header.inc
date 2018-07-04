@@ -1,5 +1,5 @@
 NavelRock_Entrance: @ 84858AC
-	.4byte NavelRock_Entrance_MapAttributes
+	.4byte NavelRock_Entrance_Layout
 	.4byte NavelRock_Entrance_MapEvents
 	.4byte NavelRock_Entrance_MapScripts
 	.4byte 0x0

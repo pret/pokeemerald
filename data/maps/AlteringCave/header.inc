@@ -1,5 +1,5 @@
 AlteringCave: @ 8484A58
-	.4byte AlteringCave_MapAttributes
+	.4byte AlteringCave_Layout
 	.4byte AlteringCave_MapEvents
 	.4byte AlteringCave_MapScripts
 	.4byte 0x0

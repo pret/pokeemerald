@@ -1,5 +1,5 @@
 BattlePyramidSquare14: @ 84850CC
-	.4byte BattlePyramidSquare14_MapAttributes
+	.4byte BattlePyramidSquare14_Layout
 	.4byte BattlePyramidSquare14_MapEvents
 	.4byte BattlePyramidSquare14_MapScripts
 	.4byte 0x0

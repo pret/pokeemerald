@@ -1,5 +1,5 @@
 EverGrandeCity_Hall3: @ 8483C90
-	.4byte EverGrandeCity_Hall3_MapAttributes
+	.4byte EverGrandeCity_ShortHall_Layout
 	.4byte EverGrandeCity_Hall3_MapEvents
 	.4byte EverGrandeCity_Hall3_MapScripts
 	.4byte 0x0

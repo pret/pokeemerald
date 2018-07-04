@@ -1,5 +1,5 @@
 BattleFrontier_BattlePyramidTop: @ 8485430
-	.4byte BattleFrontier_BattlePyramidTop_MapAttributes
+	.4byte BattleFrontier_BattlePyramidTop_Layout
 	.4byte BattleFrontier_BattlePyramidTop_MapEvents
 	.4byte BattleFrontier_BattlePyramidTop_MapScripts
 	.4byte 0x0

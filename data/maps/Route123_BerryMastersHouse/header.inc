@@ -1,5 +1,5 @@
 Route123_BerryMastersHouse: @ 8485CD4
-	.4byte Route123_BerryMastersHouse_MapAttributes
+	.4byte House2_Layout
 	.4byte Route123_BerryMastersHouse_MapEvents
 	.4byte Route123_BerryMastersHouse_MapScripts
 	.4byte 0x0

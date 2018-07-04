@@ -1,5 +1,5 @@
 MagmaHideout_4F: @ 84848B4
-	.4byte MagmaHideout_4F_MapAttributes
+	.4byte MagmaHideout_4F_Layout
 	.4byte MagmaHideout_4F_MapEvents
 	.4byte MagmaHideout_4F_MapScripts
 	.4byte 0x0

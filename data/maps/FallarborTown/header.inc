@@ -1,5 +1,5 @@
 FallarborTown: @ 8482624
-	.4byte FallarborTown_MapAttributes
+	.4byte FallarborTown_Layout
 	.4byte FallarborTown_MapEvents
 	.4byte FallarborTown_MapScripts
 	.4byte FallarborTown_MapConnections

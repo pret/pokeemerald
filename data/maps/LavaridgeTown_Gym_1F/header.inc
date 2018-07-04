@@ -1,5 +1,5 @@
 LavaridgeTown_Gym_1F: @ 8482CD0
-	.4byte LavaridgeTown_Gym_1F_MapAttributes
+	.4byte LavaridgeTown_Gym_1F_Layout
 	.4byte LavaridgeTown_Gym_1F_MapEvents
 	.4byte LavaridgeTown_Gym_1F_MapScripts
 	.4byte 0x0

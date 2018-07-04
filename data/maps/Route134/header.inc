@@ -1,5 +1,5 @@
 Route134: @ 8482A14
-	.4byte Route134_MapAttributes
+	.4byte Route134_Layout
 	.4byte Route134_MapEvents
 	.4byte Route134_MapScripts
 	.4byte Route134_MapConnections
