@@ -561,7 +561,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y)
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
     if (spriteId == 0xFFFF)
         return 0x40;
-    
+
     return spriteId;
 }
 #else
@@ -623,7 +623,7 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
         return 0x40;
-    
+
     return spriteId;
 }
 

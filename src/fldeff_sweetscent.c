@@ -24,8 +24,8 @@ void sub_81BE72C(void);
 
 bool8 SetUpFieldMove_SweetScent(void)
 {
-    gUnknown_03005DB0 = FieldCallback_Teleport;
-    gUnknown_0203CEEC = hm2_sweet_scent;
+    gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+    gPostMenuFieldCallback = hm2_sweet_scent;
     return TRUE;
 }
 
