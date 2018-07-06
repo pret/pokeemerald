@@ -30,7 +30,7 @@ static void sub_8135780(void);
 extern struct MapPosition gPlayerFacingPosition;
 
 // text
-bool8 SetLastTalkedObjectInFrontOfPlayer(u8 a)
+bool8 CheckObjectGraphicsInFrontOfPlayer(u8 a)
 {
     u8 eventObjId;
 
@@ -125,7 +125,7 @@ bool8 SetUpFieldMove_RockSmash(void)
         gPostMenuFieldCallback = sub_8179834;
         return TRUE;
     }
-    else if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
+    else if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = sub_81356C4;

@@ -19,7 +19,7 @@
 #include "constants/songs.h"
 #include "constants/abilities.h"
 
-extern bool8 SetLastTalkedObjectInFrontOfPlayer(u8);
+extern bool8 CheckObjectGraphicsInFrontOfPlayer(u8);
 extern u8 oei_task_add(void);
 extern void ScriptUnfreezeEventObjects(void);
 extern bool8 IsMewPlayingHideAndSeek(void);
@@ -183,7 +183,7 @@ bool8 SetUpFieldMove_Cut(void)
     bool8 cutTiles[CUT_NORMAL_AREA];
     bool8 ret;
 
-    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
     {
         // Standing in front of cuttable tree.
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
