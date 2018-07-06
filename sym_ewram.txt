@@ -384,10 +384,7 @@ gUnknown_02039D8C: @ 2039D8C
 	.space 0x4
 
 	.include "src/script_movement.o"
-
-gUnknown_02039DD0: @ 2039DD0
-	.space 0x4
-
+	.include "src/fldeff_cut.o"
 	.include "src/map_name_popup.o"
 	.include "src/item.o"
 
@@ -607,7 +604,7 @@ gUnknown_0203AB34: @ 203AB34
     .include "src/battle_ai_script_commands.o"
     
 .align 2
-gUnknown_0203AB40: @ 203AB40
+gPlayerFacingPosition: @ 203AB40
 	.space 0x8
 	
 	.include "src/pokeblock.o"
@@ -844,7 +841,7 @@ gUnknown_0203CEE8: @ 203CEE8
 gUnknown_0203CEE9: @ 203CEE9
 	.space 0x3
 
-gUnknown_0203CEEC: @ 203CEEC
+gPostMenuFieldCallback: @ 203CEEC
 	.space 0x4
 
 gUnknown_0203CEF0: @ 203CEF0

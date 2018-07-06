@@ -846,7 +846,7 @@ bool8 MetatileBehavior_IsBerryTreeSoil(u8 var)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsAsh(u8 var)
+bool8 MetatileBehavior_IsAshGrass(u8 var)
 {
     if (var == MB_ASHGRASS)
         return TRUE;
