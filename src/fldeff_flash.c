@@ -78,14 +78,14 @@ bool8 SetUpFieldMove_Flash(void)
     if (ShouldDoBrailleFlyEffect())
     {
         gSpecialVar_Result = GetCursorSelectionMonId();
-        gUnknown_03005DB0 = FieldCallback_Teleport;
-        gUnknown_0203CEEC = sub_8179918;
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_8179918;
         return TRUE;
     }
     else if (gMapHeader.cave == TRUE && !FlagGet(FLAG_SYS_USE_FLASH))
     {
-        gUnknown_03005DB0 = FieldCallback_Teleport;
-        gUnknown_0203CEEC = hm2_flash;
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = hm2_flash;
         return TRUE;
     }
 

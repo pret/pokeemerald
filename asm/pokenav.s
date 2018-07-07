@@ -26527,8 +26527,8 @@ _081D4A0E:
 	bx r1
 	thumb_func_end EventObjectIsFarawayIslandMew
 
-	thumb_func_start unown_chamber_related
-unown_chamber_related: @ 81D4A14
+	thumb_func_start IsMewPlayingHideAndSeek
+IsMewPlayingHideAndSeek: @ 81D4A14
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -26557,7 +26557,7 @@ _081D4A50:
 _081D4A52:
 	pop {r1}
 	bx r1
-	thumb_func_end unown_chamber_related
+	thumb_func_end IsMewPlayingHideAndSeek
 
 	thumb_func_start sub_81D4A58
 sub_81D4A58: @ 81D4A58

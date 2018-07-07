@@ -39,7 +39,7 @@ extern void sub_81C5B14(u8 taskId);
 extern u8 gText_DadsAdvice[];
 extern u8 gText_CantDismountBike[];
 extern void sub_8197434(u8 a, u8 b);
-extern void sub_80984F4(void);
+extern void ScriptUnfreezeEventObjects(void);
 extern void ItemUseOutOfBattle_TMHM(u8 a);
 extern void ItemUseOutOfBattle_EvolutionStone(u8 b);
 extern void bag_menu_mail_related(void);
@@ -197,7 +197,7 @@ void CleanUpAfterFailingToUseRegisteredKeyItemOnField(u8 taskId)
 {
     sub_8197434(0, 1);
     DestroyTask(taskId);
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
 }
 
@@ -252,7 +252,7 @@ void ItemUseOnFieldCB_Bike(u8 taskId)
         GetOnOffBike(2);
     else
         GetOnOffBike(4);
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     DestroyTask(taskId);
 }
@@ -358,7 +358,7 @@ void sub_80FD504(u8 taskId)
 void sub_80FD5CC(u8 taskId)
 {
     sub_8197434(0, 1);
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     DestroyTask(taskId);
 }
