@@ -163,7 +163,7 @@ static void HandleTurnActionSelectionState(void);
 static void RunTurnActionsFunctions(void);
 static void SetActionsAndBattlersTurnOrder(void);
 static void sub_803CDF8(void);
-static bool8 sub_803CDB8(void);
+static bool8 AllAtActionConfirmed(void);
 static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
 static void FreeResetData_ReturnToOvOrDoEvolutions(void);
 static void ReturnFromBattleToOverworld(void);
@@ -4286,8 +4286,8 @@ static void HandleTurnActionSelectionState(void)
                     MarkBattlerForControllerExec(gActiveBattler);
                     break;
                 case B_ACTION_CANCEL_PARTNER:
-                    gBattleCommunication[gActiveBattler] = 7;
-                    gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))] = 1;
+                    gBattleCommunication[gActiveBattler] = STATE_WAIT_SET_BEFORE_ACTION;
+                    gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))] = STATE_BEFORE_ACTION_CHOSEN;
                     RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
                     if (gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))].status2 & STATUS2_MULTIPLETURNS
                         || gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))].status2 & STATUS2_RECHARGE)
@@ -4330,7 +4330,7 @@ static void HandleTurnActionSelectionState(void)
                     && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[gActiveBattler] = BattleScript_AskIfWantsToForfeitMatch;
-                    gBattleCommunication[gActiveBattler] = 8;
+                    gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT_MAY_RUN;
                     *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
                     return;
@@ -4340,7 +4340,7 @@ static void HandleTurnActionSelectionState(void)
                          && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
                     BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
-                    gBattleCommunication[gActiveBattler] = 1;
+                    gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                 }
                 else if (IsRunningFromBattleImpossible()
                          && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
@@ -4382,7 +4382,7 @@ static void HandleTurnActionSelectionState(void)
                         sub_818603C(2);
                         if ((gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8)) == 0xFFFF)
                         {
-                            gBattleCommunication[gActiveBattler] = 1;
+                            gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                             RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
                         }
                         else if (TrySetCantSelectMoveBattleScript())
@@ -4412,7 +4412,7 @@ static void HandleTurnActionSelectionState(void)
                 case B_ACTION_USE_ITEM:
                     if ((gBattleBufferB[gActiveBattler][1] | (gBattleBufferB[gActiveBattler][2] << 8)) == 0)
                     {
-                        gBattleCommunication[gActiveBattler] = 1;
+                        gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                     }
                     else
                     {
@@ -4423,7 +4423,7 @@ static void HandleTurnActionSelectionState(void)
                 case B_ACTION_SWITCH:
                     if (gBattleBufferB[gActiveBattler][1] == PARTY_SIZE)
                     {
-                        gBattleCommunication[gActiveBattler] = 1;
+                        gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                         RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
                     }
                     else
@@ -4468,10 +4468,13 @@ static void HandleTurnActionSelectionState(void)
         case STATE_WAIT_ACTION_CONFIRMED_STANDBY:
             if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
             {
-                i = (sub_803CDB8() != 0);
+                if (AllAtActionConfirmed())
+                    i = TRUE;
+                else
+                    i = FALSE;
 
                 if (((gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE)) != BATTLE_TYPE_DOUBLE)
-                    || (position & BIT_FLANK)
+                    || (position & BIT_FLANK) != B_FLANK_LEFT
                     || (*(&gBattleStruct->field_91) & gBitTable[GetBattlerAtPosition(position ^ BIT_FLANK)]))
                 {
                     BtlController_EmitLinkStandbyMsg(0, 0, i);
@@ -4509,7 +4512,7 @@ static void HandleTurnActionSelectionState(void)
         case STATE_WAIT_SET_BEFORE_ACTION:
             if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
             {
-                gBattleCommunication[gActiveBattler] = 1;
+                gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
             }
             break;
         case STATE_SELECTION_SCRIPT_MAY_RUN:
@@ -4541,7 +4544,7 @@ static void HandleTurnActionSelectionState(void)
         }
     }
 
-    // check if everyone chose actions
+    // Check if everyone chose actions.
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
     {
         sub_818603C(1);
@@ -4558,17 +4561,17 @@ static void HandleTurnActionSelectionState(void)
     }
 }
 
-static bool8 sub_803CDB8(void)
+static bool8 AllAtActionConfirmed(void)
 {
-    s32 i, var;
+    s32 i, count;
 
-    for (var = 0, i = 0; i < gBattlersCount; i++)
+    for (count = 0, i = 0; i < gBattlersCount; i++)
     {
-        if (gBattleCommunication[i] == 5)
-            var++;
+        if (gBattleCommunication[i] == STATE_WAIT_ACTION_CONFIRMED)
+            count++;
     }
 
-    if (var + 1 == gBattlersCount)
+    if (count + 1 == gBattlersCount)
         return TRUE;
     else
         return FALSE;
