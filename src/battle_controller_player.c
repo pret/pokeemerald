@@ -30,6 +30,7 @@
 #include "battle_setup.h"
 #include "item_use.h"
 #include "recorded_battle.h"
+#include "party_menu.h"
 
 extern u8 gUnknown_0203CEE8;
 extern u8 gUnknown_0203CEE9;
@@ -45,7 +46,6 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void sub_81B89AC(u8 arg0);
 extern void sub_81AABB0(void);
 extern void sub_81A57E4(u8 battlerId, u16 stringId);
 extern void sub_81851A8(u8 *);
@@ -120,7 +120,7 @@ static void MoveSelectionDisplayMoveType(void);
 static void MoveSelectionDisplayMoveNames(void);
 static void HandleMoveSwitchting(void);
 static void sub_8058FC0(void);
-static void sub_8059828(void);
+static void WaitForMonSelection(void);
 static void CompleteWhenChoseItem(void);
 static void Task_LaunchLvlUpAnim(u8 taskId);
 static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
@@ -1337,21 +1337,21 @@ static void CompleteOnInactiveTextPrinter2(void)
         PlayerBufferExecCompleted();
 }
 
-static void sub_80597CC(void)
+static void OpenPartyMenuToChooseMon(void)
 {
     if (!gPaletteFade.active)
     {
-        u8 r4;
+        u8 caseId;
 
-        gBattlerControllerFuncs[gActiveBattler] = sub_8059828;
-        r4 = gTasks[gUnknown_03005D7C[gActiveBattler]].data[0];
+        gBattlerControllerFuncs[gActiveBattler] = WaitForMonSelection;
+        caseId = gTasks[gUnknown_03005D7C[gActiveBattler]].data[0];
         DestroyTask(gUnknown_03005D7C[gActiveBattler]);
         FreeAllWindowBuffers();
-        sub_81B89AC(r4);
+        OpenPartyMenuInBattle(caseId);
     }
 }
 
-static void sub_8059828(void)
+static void WaitForMonSelection(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
@@ -2655,7 +2655,7 @@ static void PlayerHandleChoosePokemon(void)
     for (i = 0; i < 3; i++)
         gUnknown_0203CF00[i] = gBattleBufferA[gActiveBattler][4 + i];
 
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA && (gBattleBufferA[gActiveBattler][1] & 0xF) != 2)
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA && (gBattleBufferA[gActiveBattler][1] & 0xF) != PARTY_CANT_SWITCH)
     {
         BtlController_EmitChosenMonReturnValue(1, gBattlerPartyIndexes[gActiveBattler] + 1, gUnknown_0203CF00);
         PlayerBufferExecCompleted();
@@ -2664,11 +2664,11 @@ static void PlayerHandleChoosePokemon(void)
     {
         gUnknown_03005D7C[gActiveBattler] = CreateTask(TaskDummy, 0xFF);
         gTasks[gUnknown_03005D7C[gActiveBattler]].data[0] = gBattleBufferA[gActiveBattler][1] & 0xF;
-        *(&gBattleStruct->field_49) = gBattleBufferA[gActiveBattler][1] >> 4;
+        *(&gBattleStruct->battlerPreventingSwitchout) = gBattleBufferA[gActiveBattler][1] >> 4;
         *(&gBattleStruct->field_8B) = gBattleBufferA[gActiveBattler][2];
-        *(&gBattleStruct->field_B0) = gBattleBufferA[gActiveBattler][3];
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-        gBattlerControllerFuncs[gActiveBattler] = sub_80597CC;
+        *(&gBattleStruct->abilityPreventingSwitchout) = gBattleBufferA[gActiveBattler][3];
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        gBattlerControllerFuncs[gActiveBattler] = OpenPartyMenuToChooseMon;
         gBattlerInMenuId = gActiveBattler;
     }
 }

@@ -51,6 +51,7 @@
 #include "decompress.h"
 #include "international_string_util.h"
 #include "pokeball.h"
+#include "party_menu.h"
 
 struct UnknownPokemonStruct4
 {
@@ -3232,7 +3233,7 @@ void FaintClearSetData(void)
 
     gProtectStructs[gActiveBattler].protected = 0;
     gProtectStructs[gActiveBattler].endured = 0;
-    gProtectStructs[gActiveBattler].onlyStruggle = 0;
+    gProtectStructs[gActiveBattler].noValidMoves = 0;
     gProtectStructs[gActiveBattler].helpingHand = 0;
     gProtectStructs[gActiveBattler].bounceMove = 0;
     gProtectStructs[gActiveBattler].stealMove = 0;
@@ -4141,11 +4142,11 @@ static void HandleTurnActionSelectionState(void)
         u8 position = GetBattlerPosition(gActiveBattler);
         switch (gBattleCommunication[gActiveBattler])
         {
-        case STATE_TURN_START_RECORD: // recorded battle related on start of every turn
+        case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
             RecordedBattle_CopyBattlerMoves();
             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
             break;
-        case STATE_BEFORE_ACTION_CHOSEN: // choose an action
+        case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
             *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
                 || (position & BIT_FLANK) == B_FLANK_LEFT
@@ -4177,7 +4178,7 @@ static void HandleTurnActionSelectionState(void)
                 }
             }
             break;
-        case STATE_WAIT_ACTION_CHOSEN: // try to perform an action
+        case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.
             if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
             {
                 RecordedBattle_SetBattlerAction(gActiveBattler, gBattleBufferB[gActiveBattler][1]);
@@ -4248,7 +4249,7 @@ static void HandleTurnActionSelectionState(void)
                         || gBattleTypeFlags & BATTLE_TYPE_ARENA
                         || gStatuses3[gActiveBattler] & STATUS3_ROOTED)
                     {
-                        BtlController_EmitChoosePokemon(0, 2, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
+                        BtlController_EmitChoosePokemon(0, PARTY_CANT_SWITCH, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                     }
                     else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
                              || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP))
@@ -4257,16 +4258,16 @@ static void HandleTurnActionSelectionState(void)
                              || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
                                  && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))
                     {
-                        BtlController_EmitChoosePokemon(0, ((i - 1) << 4) | 4, 6, gLastUsedAbility, gBattleStruct->field_60[gActiveBattler]);
+                        BtlController_EmitChoosePokemon(0, ((i - 1) << 4) | PARTY_ABILITY_PREVENTS, 6, gLastUsedAbility, gBattleStruct->field_60[gActiveBattler]);
                     }
                     else
                     {
                         if (gActiveBattler == 2 && gChosenActionByBattler[0] == B_ACTION_SWITCH)
-                            BtlController_EmitChoosePokemon(0, 0, *(gBattleStruct->monToSwitchIntoId + 0), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
+                            BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, *(gBattleStruct->monToSwitchIntoId + 0), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                         else if (gActiveBattler == 3 && gChosenActionByBattler[1] == B_ACTION_SWITCH)
-                            BtlController_EmitChoosePokemon(0, 0, *(gBattleStruct->monToSwitchIntoId + 1), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
+                            BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, *(gBattleStruct->monToSwitchIntoId + 1), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                         else
-                            BtlController_EmitChoosePokemon(0, 0, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
+                            BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                     }
                     MarkBattlerForControllerExec(gActiveBattler);
                     break;
@@ -4304,7 +4305,7 @@ static void HandleTurnActionSelectionState(void)
                         RecordedBattle_ClearBattlerAction(GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))), 1);
                     }
                     else if (gChosenActionByBattler[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))] == B_ACTION_USE_MOVE
-                             && (gProtectStructs[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))].onlyStruggle
+                             && (gProtectStructs[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))].noValidMoves
                                 || gDisableStructs[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))].encoredMove))
                     {
                         RecordedBattle_ClearBattlerAction(GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))), 1);
@@ -4705,7 +4706,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     {
         if (gChosenActionByBattler[battler1] == B_ACTION_USE_MOVE)
         {
-            if (gProtectStructs[battler1].onlyStruggle)
+            if (gProtectStructs[battler1].noValidMoves)
                 moveBattler1 = MOVE_STRUGGLE;
             else
                 moveBattler1 = gBattleMons[battler1].moves[*(gBattleStruct->chosenMovePositions + battler1)];
@@ -4715,7 +4716,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 
         if (gChosenActionByBattler[battler2] == B_ACTION_USE_MOVE)
         {
-            if (gProtectStructs[battler2].onlyStruggle)
+            if (gProtectStructs[battler2].noValidMoves)
                 moveBattler2 = MOVE_STRUGGLE;
             else
                 moveBattler2 = gBattleMons[battler2].moves[*(gBattleStruct->chosenMovePositions + battler2)];
@@ -4917,7 +4918,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
             if (gChosenMoveByBattler[gActiveBattler] == MOVE_FOCUS_PUNCH
                 && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)
-                && !(gProtectStructs[gActiveBattler].onlyStruggle))
+                && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
                 BattleScriptExecute(BattleScript_FocusPunchSetUp);
                 return;
@@ -5290,9 +5291,9 @@ static void HandleAction_UseMove(void)
     gCurrMovePos = gChosenMovePos = *(gBattleStruct->chosenMovePositions + gBattlerAttacker);
 
     // choose move
-    if (gProtectStructs[gBattlerAttacker].onlyStruggle)
+    if (gProtectStructs[gBattlerAttacker].noValidMoves)
     {
-        gProtectStructs[gBattlerAttacker].onlyStruggle = 0;
+        gProtectStructs[gBattlerAttacker].noValidMoves = 0;
         gCurrentMove = gChosenMove = MOVE_STRUGGLE;
         gHitMarker |= HITMARKER_NO_PPDEDUCT;
         *(gBattleStruct->moveTarget + gBattlerAttacker) = GetMoveTarget(MOVE_STRUGGLE, 0);

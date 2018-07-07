@@ -40,6 +40,7 @@
 #include "constants/battle_string_ids.h"
 #include "battle_setup.h"
 #include "overworld.h"
+#include "party_menu.h"
 
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
@@ -5143,7 +5144,7 @@ static void sub_804CF10(u8 arg0)
     *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = 6;
     gBattleStruct->field_93 &= ~(gBitTable[gActiveBattler]);
 
-    BtlController_EmitChoosePokemon(0, 1, arg0, 0, gBattleStruct->field_60[gActiveBattler]);
+    BtlController_EmitChoosePokemon(0, PARTY_MUST_CHOOSE_MON, arg0, 0, gBattleStruct->field_60[gActiveBattler]);
     MarkBattlerForControllerExec(gActiveBattler);
 }
 
@@ -5382,9 +5383,9 @@ static void atk50_openpartyscreen(void)
     else
     {
         if (gBattlescriptCurrInstr[1] & 0x80)
-            hitmarkerFaintBits = 0; // used here as the caseId for the EmitChoose function
+            hitmarkerFaintBits = PARTY_CHOOSE_MON; // Used here as the caseId for the EmitChoose function.
         else
-            hitmarkerFaintBits = 1;
+            hitmarkerFaintBits = PARTY_MUST_CHOOSE_MON;
 
         battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(0x80));
         if (gSpecialStatuses[battlerId].flag40)

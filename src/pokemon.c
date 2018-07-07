@@ -5582,19 +5582,19 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
     }
 }
 
-void sub_806E994(void)
+void SetMonPreventsSwitchingString(void)
 {
-    gLastUsedAbility = gBattleStruct->field_B0;
+    gLastUsedAbility = gBattleStruct->abilityPreventingSwitchout;
 
     gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
     gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;
-    gBattleTextBuff1[2] = gBattleStruct->field_49;
+    gBattleTextBuff1[2] = gBattleStruct->battlerPreventingSwitchout;
     gBattleTextBuff1[4] = B_BUFF_EOS;
 
-    if (!GetBattlerSide(gBattleStruct->field_49))
-        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->field_49]);
+    if (GetBattlerSide(gBattleStruct->battlerPreventingSwitchout) == B_SIDE_PLAYER)
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->battlerPreventingSwitchout]);
     else
-        gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->field_49];
+        gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->battlerPreventingSwitchout];
 
     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBattlerInMenuId, pokemon_order_func(gBattlerPartyIndexes[gBattlerInMenuId]))
 

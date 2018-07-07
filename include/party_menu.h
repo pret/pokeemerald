@@ -1,6 +1,8 @@
 #ifndef GUARD_PARTY_MENU_H
 #define GUARD_PARTY_MENU_H
+
 #include "task.h"
+
 enum
 {
     AILMENT_NONE,
@@ -9,6 +11,16 @@ enum
     AILMENT_SLP,
     AILMENT_FRZ,
     AILMENT_BRN
+};
+
+enum
+{
+    PARTY_CHOOSE_MON,
+    PARTY_MUST_CHOOSE_MON,
+    PARTY_CANT_SWITCH,
+    PARTY_USE_ITEM_ON,
+    PARTY_ABILITY_PREVENTS,
+    PARTY_GIVE_ITEM,
 };
 
 struct Struct203CEC8
@@ -38,5 +50,6 @@ void sub_81B1F18(u8 taskId, u8 pokemonIdx, s8 a, s16 hp, TaskFunc func);
 void sub_81B1B5C(void *a, u8 b);
 u8 sub_81B1BD4();
 void sub_81B8448();
+void OpenPartyMenuInBattle(u8 caseId);
 
 #endif // GUARD_PARTY_MENU_H

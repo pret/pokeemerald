@@ -65,6 +65,8 @@ enum
     REQUEST_TOUGH_RIBBON_BATTLE,
 };
 
+// Special arguments for Battle Controller functions.
+
 #define RESET_ACTION_MOVE_SELECTION     0
 #define RESET_ACTION_SELECTION          1
 #define RESET_MOVE_SELECTION            2
@@ -76,9 +78,10 @@ enum
 #define BALL_3_SHAKES_SUCCESS   4
 #define BALL_TRAINER_BLOCK      5
 
-#define RET_VALUE_LEVELLED_UP   11
-
 #define INSTANT_HP_BAR_DROP     32767
+
+// Special return values in gBattleBufferB from Battle Controller functions.
+#define RET_VALUE_LEVELLED_UP   11
 
 struct UnusedControllerStruct
 {

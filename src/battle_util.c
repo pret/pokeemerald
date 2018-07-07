@@ -455,12 +455,12 @@ bool8 AreAllMovesUnusable(void)
 
     if (unusable == 0xF) // All moves are unusable.
     {
-        gProtectStructs[gActiveBattler].onlyStruggle = 1;
+        gProtectStructs[gActiveBattler].noValidMoves = 1;
         gSelectionBattleScripts[gActiveBattler] = BattleScript_NoMovesLeft;
     }
     else
     {
-        gProtectStructs[gActiveBattler].onlyStruggle = 0;
+        gProtectStructs[gActiveBattler].noValidMoves = 0;
     }
 
     return (unusable == 0xF);

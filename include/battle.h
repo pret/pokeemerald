@@ -177,7 +177,7 @@ struct ProtectStruct
     /* field_0 */
     u32 protected:1;
     u32 endured:1;
-    u32 onlyStruggle:1;
+    u32 noValidMoves:1;
     u32 helpingHand:1;
     u32 bounceMove:1;
     u32 stealMove:1;
@@ -456,7 +456,7 @@ struct BattleStruct
     u8 field_46;
     u8 field_47;
     u8 focusPunchBattlerId;
-    u8 field_49;
+    u8 battlerPreventingSwitchout;
     u8 moneyMultiplier;
     u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
@@ -509,7 +509,7 @@ struct BattleStruct
     u8 field_A7;
     u16 hpOnSwitchout[2];
     u32 savedBattleTypeFlags;
-    u8 field_B0;
+    u8 abilityPreventingSwitchout;
     u8 hpScale;
     u8 synchronizeMoveEffect;
     bool8 anyMonHasTransformed;
