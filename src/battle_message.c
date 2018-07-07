@@ -1197,7 +1197,14 @@ const u8 * const gStatNamesTable2[] =
 };
 
 const u8 gText_SafariBalls[] = _("{HIGHLIGHT DARK_GREY}SAFARI BALLS");
-const u8 gText_SafariBallLeft[] = _("{HIGHLIGHT DARK_GREY}Left: $" "{HIGHLIGHT DARK_GREY}");const u8 gText_Sleep[] = _( "sleep");const u8 gText_Poison[] = _(     "poison");const u8 gText_Burn[] = _( "burn");const u8 gText_Paralysis[] = _( "paralysis");const u8 gText_Ice[] = _( "ice");const u8 gText_Confusion[] = _( "confusion");const u8 gText_Love[] = _( "love");
+const u8 gText_SafariBallLeft[] = _("{HIGHLIGHT DARK_GREY}Left: $" "{HIGHLIGHT DARK_GREY}");
+const u8 gText_Sleep[] = _("sleep");
+const u8 gText_Poison[] = _("poison");
+const u8 gText_Burn[] = _("burn");
+const u8 gText_Paralysis[] = _("paralysis");
+const u8 gText_Ice[] = _("ice");
+const u8 gText_Confusion[] = _("confusion");
+const u8 gText_Love[] = _("love");
 const u8 gText_SpaceAndSpace[] = _(" and ");
 const u8 gText_CommaSpace[] = _(", ");
 const u8 gText_Space2[] = _(" ");
