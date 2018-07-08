@@ -467,7 +467,7 @@ _080F9F54:
 	thumb_func_start sub_80F9F5C
 sub_80F9F5C: @ 80F9F5C
 	push {lr}
-	ldr r0, =gUnknown_0203AB40
+	ldr r0, =gPlayerFacingPosition
 	ldr r1, =gMapHeader
 	ldr r1, [r1, 0x4]
 	bl sub_80E9608
@@ -572,7 +572,7 @@ sub_80FA004: @ 80FA004
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _080FA0AE
-	ldr r4, =gUnknown_0203AB40
+	ldr r4, =gPlayerFacingPosition
 	adds r1, r4, 0x2
 	adds r0, r4, 0
 	bl GetXYCoordsOneStepInFrontOfPlayer
@@ -590,10 +590,10 @@ sub_80FA004: @ 80FA004
 	cmp r0, 0x1
 	bne _080FA070
 	bl sub_80F9F5C
-	ldr r1, =gUnknown_03005DB0
-	ldr r0, =FieldCallback_Teleport
+	ldr r1, =gFieldCallback2
+	ldr r0, =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, =gUnknown_0203CEEC
+	ldr r1, =gPostMenuFieldCallback
 	ldr r0, =sub_80FA0DC
 	b _080FA0C0
 	.pool
@@ -605,10 +605,10 @@ _080FA070:
 	cmp r0, 0x1
 	bne _080FA0A0
 	bl sub_80F9F5C
-	ldr r1, =gUnknown_03005DB0
-	ldr r0, =FieldCallback_Teleport
+	ldr r1, =gFieldCallback2
+	ldr r0, =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, =gUnknown_0203CEEC
+	ldr r1, =gPostMenuFieldCallback
 	ldr r0, =sub_80FA1E8
 	b _080FA0C0
 	.pool
@@ -624,10 +624,10 @@ _080FA0AE:
 	b _080FA0C4
 _080FA0B2:
 	bl sub_80F9F5C
-	ldr r1, =gUnknown_03005DB0
-	ldr r0, =FieldCallback_Teleport
+	ldr r1, =gFieldCallback2
+	ldr r0, =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, =gUnknown_0203CEEC
+	ldr r1, =gPostMenuFieldCallback
 	ldr r0, =sub_80FA34C
 _080FA0C0:
 	str r0, [r1]
@@ -824,7 +824,7 @@ sub_80FA234: @ 80FA234
 	thumb_func_start sub_80FA248
 sub_80FA248: @ 80FA248
 	push {r4,lr}
-	ldr r1, =gUnknown_0203AB40
+	ldr r1, =gPlayerFacingPosition
 	movs r2, 0
 	ldrsh r0, [r1, r2]
 	movs r2, 0x2

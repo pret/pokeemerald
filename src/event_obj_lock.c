@@ -87,7 +87,7 @@ void LockSelectedEventObject(void)
     }
 }
 
-void sub_80984F4(void)
+void ScriptUnfreezeEventObjects(void)
 {
     u8 objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
     EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);

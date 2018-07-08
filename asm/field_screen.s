@@ -8656,7 +8656,7 @@ task_mpl_807E3C8: @ 80AF6B0
 	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
-	bl sub_80984F4
+	bl ScriptUnfreezeEventObjects
 _080AF6CC:
 	pop {r4}
 	pop {r0}
