@@ -2116,9 +2116,9 @@ void setup_bag_menu_textboxes(void)
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
-void bag_menu_print(u8 a, u8 b, const u8 *str, u8 c, u8 d, u8 e, u8 f, u8 g, u8 h)
+void bag_menu_print(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 h)
 {
-    AddTextPrinterParameterized2(a, b, c, d, e, f, gUnknown_08614164[h], g, str);
+    AddTextPrinterParameterized2(windowId, fontId, left, top, letterSpacing, lineSpacing, gUnknown_08614164[h], speed, str);
 }
 
 u8 sub_81AE124(u8 a)
