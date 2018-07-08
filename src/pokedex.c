@@ -1630,14 +1630,14 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
     }
 }
 
-void sub_80BCE2C(u8 a, u8 b, const u8* str, u8 c, u8 d)
+void sub_80BCE2C(u8 windowId, u8 fontId, const u8* str, u8 left, u8 top)
 {
-    u8 sp14[3];
+    u8 color[3];
     
-    sp14[0] = 0;
-    sp14[1] = 15;
-    sp14[2] = 3;
-    AddTextPrinterParameterized2(a, b, c * 8, (d * 8) + 1, 0, 0, sp14, -1, str);
+    color[0] = 0;
+    color[1] = 15;
+    color[2] = 3;
+    AddTextPrinterParameterized2(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, -1, str);
 }
 
 void sub_80BCE84(u8 a, u16 b, u16 c)
@@ -1727,7 +1727,7 @@ void sub_80BCE84(u8 a, u16 b, u16 c)
     CopyWindowToVram(0, 2);
 }
 
-void sub_80BD154(u16 a, u8 b, u8 c, u16 unused)
+void sub_80BD154(u16 a, u8 left, u8 top, u16 unused)
 {
     u8 text[6];
     u16 r6;
@@ -1739,18 +1739,18 @@ void sub_80BD154(u16 a, u8 b, u8 c, u16 unused)
     text[2] = CHAR_0 + r6 / 100;
     text[3] = CHAR_0 + (r6 % 100) / 10;
     text[4] = CHAR_0 + (r6 % 100) % 10;
-    sub_80BCE2C(0, 7, text, b, c);
+    sub_80BCE2C(0, 7, text, left, top);
 }
 
-void sub_80BD1F4(u16 a, u8 b, u8 c, u16 unused)
+void sub_80BD1F4(u16 a, u8 x, u8 y, u16 unused)
 {
     if (a)
-        BlitBitmapToWindow(0, gUnknown_0855D2BE, b * 8, c * 8, 8, 16);
+        BlitBitmapToWindow(0, gUnknown_0855D2BE, x * 8, y * 8, 8, 16);
     else
-        FillWindowPixelRect(0, 0, b * 8, c * 8, 8, 16);
+        FillWindowPixelRect(0, 0, x * 8, y * 8, 8, 16);
 }
 
-u8 sub_80BD23C(u16 num, u8 b, u8 c)
+u8 sub_80BD23C(u16 num, u8 left, u8 top)
 {
     const u8* str;
     
@@ -1759,13 +1759,13 @@ u8 sub_80BD23C(u16 num, u8 b, u8 c)
         str = gSpeciesNames[num];
     else
         str = sText_TenDashes;
-    sub_80BCE2C(0, 7, str, b, c);
+    sub_80BCE2C(0, 7, str, left, top);
     return StringLength(str);
 }
 
-void sub_80BD28C(u8 a, u8 b, u16 unused)
+void sub_80BD28C(u8 x, u8 y, u16 unused)
 {
-    FillWindowPixelRect(0, 0, a * 8, b * 8, 0x60, 16);
+    FillWindowPixelRect(0, 0, x * 8, y * 8, 0x60, 16);
 }
 
 void sub_80BD2B4(u16 a, u16 b)
@@ -1803,7 +1803,7 @@ void sub_80BD2B4(u16 a, u16 b)
         gSprites[spriteId].callback = sub_80BE4E0;
         gSprites[spriteId].data[5] = 32;
     }
-    
+  
     sub_80BCE84(0, a, b);
     SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_02039B4C->unk62D);
 
@@ -2047,7 +2047,7 @@ u16 sub_80BDA8C(u16 a1)
         return 0;
 }
 
-u32 sub_80BDACC(u16 a, s16 b, s16 c)
+u32 sub_80BDACC(u16 num, s16 x, s16 y)
 {
     u8 i;
 
@@ -2055,13 +2055,13 @@ u32 sub_80BDACC(u16 a, s16 b, s16 c)
     {
         if (gUnknown_02039B4C->unk61E[i] == 0xFFFF)
         {
-            u8 spriteId = sub_80C0E9C(a, b, c, i);
+            u8 spriteId = sub_80C0E9C(num, x, y, i);
 
             gSprites[spriteId].oam.affineMode = 1;
             gSprites[spriteId].oam.priority = 3;
             gSprites[spriteId].data[0] = 0;
             gSprites[spriteId].data[1] = i;
-            gSprites[spriteId].data[2] = NationalPokedexNumToSpecies(a);
+            gSprites[spriteId].data[2] = NationalPokedexNumToSpecies(num);
             gUnknown_02039B4C->unk61E[i] = spriteId;
             return spriteId;
         }
@@ -2443,14 +2443,14 @@ void sub_80BE834(struct Sprite *sprite)
     }
 }
 
-void sub_80BE8DC(const u8* a, u8 b, u8 c)
+void sub_80BE8DC(const u8* str, u8 left, u8 top)
 {
-    u8 sp14[3];
-    sp14[0] = 0;
-    sp14[1] = 15;
-    sp14[2] = 3;
+    u8 color[3];
+    color[0] = 0;
+    color[1] = 15;
+    color[2] = 3;
     
-    AddTextPrinterParameterized2(0, 1, b, c, 0, 0, sp14, -1, a);
+    AddTextPrinterParameterized2(0, 1, left, top, 0, 0, color, -1, str);
 }
 
 u8 sub_80BE91C(struct PokedexListItem* item, u8 b)
@@ -3464,7 +3464,7 @@ void sub_80C01CC(struct Sprite *sprite)
         sprite->pos1.y -= 1;
 }
 
-void sub_80C020C(u32 num, u32 b, u32 c, u32 d)
+void sub_80C020C(u32 num, u32 value, u32 c, u32 d)
 {
     u8 str[0x10];
     u8 str2[0x20];
@@ -3475,11 +3475,11 @@ void sub_80C020C(u32 num, u32 b, u32 c, u32 d)
     
     if (d)
         sub_80BE8DC(gText_PokedexRegistration, GetStringCenterAlignXOffset(1, gText_PokedexRegistration, 0xF0), 0);
-    if (b == 0)
-        b = NationalToHoennOrder(num);
+    if (value == 0)
+        value = NationalToHoennOrder(num);
     else
-        b = num;
-    ConvertIntToDecimalStringN(StringCopy(str, gText_UnkCtrlF908Clear01), b, 2, 3);
+        value = num;
+    ConvertIntToDecimalStringN(StringCopy(str, gText_UnkCtrlF908Clear01), value, 2, 3);
     sub_80BE8DC(str, 0x60, 0x19);
     natNum = NationalPokedexNumToSpecies(num);
     if (natNum)
@@ -4058,17 +4058,17 @@ void sub_80C09B0(u16 a)
     }
 }
 
-void sub_80C0A88(u8 a, const u8 *b, u8 c, u8 d)
+void sub_80C0A88(u8 windowId, const u8 *str, u8 left, u8 top)
 {
-    u8 sp14[3];
-    sp14[0] = 0;
-    sp14[1] = 15;
-    sp14[2] = 3;
+    u8 color[3];
+    color[0] = 0;
+    color[1] = 15;
+    color[2] = 3;
     
-    AddTextPrinterParameterized2(a, 1, c, d, 0, 0, sp14, -1, b);
+    AddTextPrinterParameterized2(windowId, 1, left, top, 0, 0, color, -1, str);
 }
 
-void sub_80C0AC4(u8 a, u16 order, u8 b, u8 c)
+void sub_80C0AC4(u8 windowId, u16 order, u8 left, u8 top)
 {
     u8 str[4];
 
@@ -4076,10 +4076,10 @@ void sub_80C0AC4(u8 a, u16 order, u8 b, u8 c)
     str[1] = CHAR_0 + (order % 100) / 10;
     str[2] = CHAR_0 + (order % 100) % 10;
     str[3] = EOS;
-    sub_80C0A88(a, str, b, c);
+    sub_80C0A88(windowId, str, left, top);
 }
 
-u8 sub_80C0B44(u8 a, u16 num, u8 b, u8 c)
+u8 sub_80C0B44(u8 windowId, u16 num, u8 left, u8 top)
 {
     u8 str[11];
     u8 i;
@@ -4098,11 +4098,11 @@ u8 sub_80C0B44(u8 a, u16 num, u8 b, u8 c)
                 str[i] = CHAR_HYPHEN;
             break;
     }
-    sub_80C0A88(a, str, b, c);
+    sub_80C0A88(windowId, str, left, top);
     return i;
 }
 
-void sub_80C0BF0(u8 a, const u8* str, u8 b, u8 c)
+void sub_80C0BF0(u8 windowId, const u8* str, u8 left, u8 top)
 {
     u8 str2[11];
     u8 i;
@@ -4115,10 +4115,10 @@ void sub_80C0BF0(u8 a, const u8* str, u8 b, u8 c)
     for (i = 0; i < count; i++)
         str2[11 - count + i] = str[i];
     str2[11] = EOS;
-    sub_80C0A88(a, str2, b, c);
+    sub_80C0A88(windowId, str2, left, top);
 }
 
-void sub_80C0C6C(u8 a, u16 b, u8 left, u8 top)
+void sub_80C0C6C(u8 windowId, u16 b, u8 left, u8 top)
 {
     u8 str[6];
     bool8 outputted = FALSE;
@@ -4152,10 +4152,10 @@ void sub_80C0C6C(u8 a, u16 b, u8 left, u8 top)
     str[3] = CHAR_PERIOD;
     str[4] = CHAR_0 + ((b % 1000) % 100) % 10;
     str[5] = EOS;
-    sub_80C0A88(a, str, left, top);
+    sub_80C0A88(windowId, str, left, top);
 }
 
-void sub_80C0D30(u8 a0, u16 a1)
+void sub_80C0D30(u8 windowId, u16 a1)
 {
     u8 image[32 * 4];
     const u8 * r12 = gMonFootprintTable[NationalPokedexNumToSpecies(a1)];
@@ -4175,7 +4175,7 @@ void sub_80C0D30(u8 a0, u16 a1)
             r5++;
         }
     }
-    CopyToWindowPixelBuffer(a0, image, sizeof(image), 0);
+    CopyToWindowPixelBuffer(windowId, image, sizeof(image), 0);
 }
 
 void sub_80C0DC0(u16 a, u16 b)
@@ -4229,25 +4229,25 @@ u32 sub_80C0E68(u16 a)
     }
 }
 
-u16 sub_80C0E9C(u16 num, s16 a, s16 b, u16 c)
+u16 sub_80C0E9C(u16 num, s16 x, s16 y, u16 paletteSlot)
 {
     num = NationalPokedexNumToSpecies(num);
-    return sub_818D7D8(num, 8, sub_80C0E68(num), 1, a, b, c, -1);
+    return sub_818D7D8(num, 8, sub_80C0E68(num), TRUE, x, y, paletteSlot, 0xFFFF);
 }
 
-u16 sub_80C0EF8(u16 a, s16 b, s16 c, s8 d)
+u16 sub_80C0EF8(u16 species, s16 x, s16 y, s8 paletteSlot)
 {
-    return sub_818D8AC(a, 1, b, c, d, -1);
+    return sub_818D8AC(species, TRUE, x, y, paletteSlot, 0xFFFF);
 }
 
-int sub_80C0F30(u8 a, u8 b, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
+int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
 {
     u16 species;
     u16 i;
     u16 resultsCount;
     u8 types[2];
 
-    sub_80BC8D4(a, b);
+    sub_80BC8D4(dexMode, sortMode);
 
     for (i = 0, resultsCount = 0; i < NATIONAL_DEX_COUNT; i++)
     {
@@ -4361,19 +4361,19 @@ u8 sub_80C1258(void)
     return CreateTask(sub_80C12E0, 0);
 }
 
-void sub_80C1270(const u8 *str, u32 a, u32 b)
+void sub_80C1270(const u8 *str, u32 left, u32 top)
 {
-    u8 sp14[3];
+    u8 color[3];
     
-    sp14[0] = 0;
-    sp14[1] = 15;
-    sp14[2] = 2;
-    AddTextPrinterParameterized2(0, 1, a, b, 0, 0, sp14, -1, str);
+    color[0] = 0;
+    color[1] = 15;
+    color[2] = 2;
+    AddTextPrinterParameterized2(0, 1, left, top, 0, 0, color, -1, str);
 }
 
-void sub_80C12B0(u32 a, u32 b, u32 c, u32 d)
+void sub_80C12B0(u32 x, u32 y, u32 width, u32 height)
 {
-    FillWindowPixelRect(0, 0, a, b, c, d);
+    FillWindowPixelRect(0, 0, x, y, width, height);
 }
 
 void sub_80C12E0(u8 taskId)
@@ -5211,19 +5211,19 @@ void sub_80C2618(const u8* str)
     sub_80C1270(str, 8, 0x79);
 }
 
-void sub_80C2638(u32 a)
+void sub_80C2638(u32 y)
 {
-    sub_80C12B0(0x90, a * 16 + 8, 8, 16);
+    sub_80C12B0(0x90, y * 16 + 8, 8, 16);
 }
 
-void sub_80C2650(u32 a)
+void sub_80C2650(u32 left)
 {
-    sub_80C1270(gText_SelectorArrow, 0x90, a * 16 + 9);
+    sub_80C1270(gText_SelectorArrow, 0x90, left * 16 + 9);
 }
 
-void sub_80C2668(u32 a, const u8* str)
+void sub_80C2668(u32 left, const u8* str)
 {
-    sub_80C1270(str, 0x98, a * 16 + 9);
+    sub_80C1270(str, 0x98, left * 16 + 9);
 }
 
 void sub_80C267C(void)
