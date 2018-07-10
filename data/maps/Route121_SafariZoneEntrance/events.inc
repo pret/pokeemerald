@@ -1,7 +1,7 @@
 Route121_SafariZoneEntrance_EventObjects: @ 8533EDC
-	object_event 1, EVENT_OBJ_GFX_PICNICKER, 0, 17, 9, 3, 9, 0, 0, 0, 0, Route121_SafariZoneEntrance_EventScript_22BBE6, 0
-	object_event 2, EVENT_OBJ_GFX_CAMPER, 0, 10, 2, 3, 8, 0, 0, 0, 0, Route121_SafariZoneEntrance_EventScript_22BBEF, 0
-	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 8, 2, 3, 8, 0, 0, 0, 0, 0x0, 0
+	object_event 1, EVENT_OBJ_GFX_PICNICKER, 0, 17, 9, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, Route121_SafariZoneEntrance_EventScript_22BBE6, 0
+	object_event 2, EVENT_OBJ_GFX_CAMPER, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route121_SafariZoneEntrance_EventScript_22BBEF, 0
+	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 8, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 0
 
 Route121_SafariZoneEntrance_MapWarps: @ 8533F24
 	warp_def 2, 5, 0, 0, MAP_SAFARI_ZONE_SOUTH

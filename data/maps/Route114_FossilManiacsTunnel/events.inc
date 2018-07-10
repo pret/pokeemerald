@@ -1,5 +1,5 @@
 Route114_FossilManiacsTunnel_EventObjects: @ 8533D70
-	object_event 1, EVENT_OBJ_GFX_MANIAC, 0, 5, 3, 3, 7, 1, 1, 0, 0, Route114_FossilManiacsTunnel_EventScript_22AF87, 0
+	object_event 1, EVENT_OBJ_GFX_MANIAC, 0, 5, 3, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, Route114_FossilManiacsTunnel_EventScript_22AF87, 0
 
 Route114_FossilManiacsTunnel_MapWarps: @ 8533D88
 	warp_def 6, 25, 3, 2, MAP_ROUTE114_FOSSIL_MANIACS_HOUSE

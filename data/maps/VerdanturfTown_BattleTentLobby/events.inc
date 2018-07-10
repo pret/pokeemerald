@@ -1,10 +1,10 @@
 VerdanturfTown_BattleTentLobby_EventObjects: @ 852E648
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_1, 0, 6, 5, 3, 8, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201873, 0
-	object_event 2, EVENT_OBJ_GFX_GIRL_1, 0, 0, 5, 3, 2, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201A7B, 0
-	object_event 3, EVENT_OBJ_GFX_BOY_3, 0, 9, 7, 3, 2, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201ABC, 0
-	object_event 4, EVENT_OBJ_GFX_BOY_2, 0, 1, 8, 3, 10, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201AC5, 0
-	object_event 5, EVENT_OBJ_GFX_SCOTT, 0, 12, 6, 3, 9, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201AD0, 766
-	object_event 6, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 2, 8, 3, 9, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201AF7, 0
+	object_event 1, EVENT_OBJ_GFX_OLD_MAN_1, 0, 6, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201873, 0
+	object_event 2, EVENT_OBJ_GFX_GIRL_1, 0, 0, 5, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201A7B, 0
+	object_event 3, EVENT_OBJ_GFX_BOY_3, 0, 9, 7, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201ABC, 0
+	object_event 4, EVENT_OBJ_GFX_BOY_2, 0, 1, 8, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201AC5, 0
+	object_event 5, EVENT_OBJ_GFX_SCOTT, 0, 12, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201AD0, 766
+	object_event 6, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 2, 8, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201AF7, 0
 
 VerdanturfTown_BattleTentLobby_MapWarps: @ 852E6D8
 	warp_def 6, 9, 0, 0, MAP_VERDANTURF_TOWN

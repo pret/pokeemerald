@@ -1,6 +1,6 @@
 SkyPillar_Top_EventObjects: @ 8537170
-	object_event 1, EVENT_OBJ_GFX_RAYQUAZA_2, 0, 14, 7, 3, 8, 1, 1, 0, 0, 0x0, 773
-	object_event 2, EVENT_OBJ_GFX_RAYQUAZA_1, 0, 14, 6, 3, 8, 1, 1, 0, 0, SkyPillar_Top_EventScript_239722, 80
+	object_event 1, EVENT_OBJ_GFX_RAYQUAZA_2, 0, 14, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 773
+	object_event 2, EVENT_OBJ_GFX_RAYQUAZA_1, 0, 14, 6, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, SkyPillar_Top_EventScript_239722, 80
 
 SkyPillar_Top_MapWarps: @ 85371A0
 	warp_def 16, 14, 3, 1, MAP_SKY_PILLAR_5F

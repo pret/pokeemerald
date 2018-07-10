@@ -1,12 +1,12 @@
 SSTidalRooms_EventObjects: @ 853A314
-	object_event 1, EVENT_OBJ_GFX_MAN_3, 0, 4, 7, 3, 10, 0, 0, 1, 0, SSTidalRooms_EventScript_23CA49, 0
-	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 34, 11, 3, 9, 0, 0, 1, 3, SSTidalRooms_EventScript_23CA60, 0
-	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 21, 5, 3, 10, 0, 0, 1, 0, SSTidalRooms_EventScript_23CA77, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_5, 0, 5, 14, 3, 8, 0, 0, 1, 1, SSTidalRooms_EventScript_23CA8E, 0
-	object_event 5, EVENT_OBJ_GFX_WOMAN_5, 0, 4, 14, 3, 8, 0, 0, 1, 1, SSTidalRooms_EventScript_23CAA9, 0
-	object_event 6, EVENT_OBJ_GFX_BOY_4, 0, 22, 11, 3, 8, 1, 1, 1, 3, SSTidalRooms_EventScript_23CAC4, 0
-	object_event 7, EVENT_OBJ_GFX_WOMAN_3, 0, 15, 6, 3, 9, 0, 0, 1, 0, SSTidalRooms_EventScript_23CADB, 0
-	object_event 8, EVENT_OBJ_GFX_MANIAC, 0, 28, 5, 3, 7, 1, 1, 0, 0, SSTidalRooms_EventScript_23C9F2, 951
+	object_event 1, EVENT_OBJ_GFX_MAN_3, 0, 4, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 0, SSTidalRooms_EventScript_23CA49, 0
+	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 34, 11, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 3, SSTidalRooms_EventScript_23CA60, 0
+	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 21, 5, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 0, SSTidalRooms_EventScript_23CA77, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_5, 0, 5, 14, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 1, SSTidalRooms_EventScript_23CA8E, 0
+	object_event 5, EVENT_OBJ_GFX_WOMAN_5, 0, 4, 14, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 1, SSTidalRooms_EventScript_23CAA9, 0
+	object_event 6, EVENT_OBJ_GFX_BOY_4, 0, 22, 11, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 1, 3, SSTidalRooms_EventScript_23CAC4, 0
+	object_event 7, EVENT_OBJ_GFX_WOMAN_3, 0, 15, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 0, SSTidalRooms_EventScript_23CADB, 0
+	object_event 8, EVENT_OBJ_GFX_MANIAC, 0, 28, 5, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, SSTidalRooms_EventScript_23C9F2, 951
 
 SSTidalRooms_MapWarps: @ 853A3D4
 	warp_def 4, 16, 0, 0, MAP_SS_TIDAL_CORRIDOR

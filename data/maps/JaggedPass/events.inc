@@ -1,11 +1,11 @@
 JaggedPass_EventObjects: @ 8534AE4
-	object_event 1, EVENT_OBJ_GFX_HIKER, 0, 10, 8, 3, 10, 0, 0, 1, 3, JaggedPass_EventScript_230785, 0
-	object_event 2, EVENT_OBJ_GFX_CAMPER, 0, 16, 35, 3, 14, 0, 0, 1, 4, JaggedPass_EventScript_2307FB, 0
-	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 23, 24, 3, 1, 0, 0, 0, 0, JaggedPass_EventScript_291184, 1070
-	object_event 4, EVENT_OBJ_GFX_PICNICKER, 0, 9, 21, 3, 16, 1, 1, 1, 3, JaggedPass_EventScript_23079C, 0
-	object_event 5, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 16, 19, 3, 7, 1, 1, 0, 0, JaggedPass_EventScript_230718, 847
-	object_event 6, EVENT_OBJ_GFX_PICNICKER, 0, 14, 25, 3, 10, 1, 1, 1, 3, JaggedPass_EventScript_230871, 0
-	object_event 7, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 18, 25, 3, 9, 1, 1, 1, 3, JaggedPass_EventScript_23085A, 0
+	object_event 1, EVENT_OBJ_GFX_HIKER, 0, 10, 8, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 3, JaggedPass_EventScript_230785, 0
+	object_event 2, EVENT_OBJ_GFX_CAMPER, 0, 16, 35, 3, MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT, 0, 0, 1, 4, JaggedPass_EventScript_2307FB, 0
+	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 23, 24, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, JaggedPass_EventScript_291184, 1070
+	object_event 4, EVENT_OBJ_GFX_PICNICKER, 0, 9, 21, 3, MOVEMENT_TYPE_FACE_UP_AND_RIGHT, 1, 1, 1, 3, JaggedPass_EventScript_23079C, 0
+	object_event 5, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 16, 19, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, JaggedPass_EventScript_230718, 847
+	object_event 6, EVENT_OBJ_GFX_PICNICKER, 0, 14, 25, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 3, JaggedPass_EventScript_230871, 0
+	object_event 7, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 18, 25, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 3, JaggedPass_EventScript_23085A, 0
 
 JaggedPass_MapWarps: @ 8534B8C
 	warp_def 14, 40, 3, 2, MAP_ROUTE112

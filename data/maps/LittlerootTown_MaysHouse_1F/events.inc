@@ -1,11 +1,11 @@
 LittlerootTown_MaysHouse_1F_EventObjects: @ 852D36C
-	object_event 1, EVENT_OBJ_GFX_MOM, 0, 8, 6, 3, 9, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_2929C5, 759
-	object_event 2, EVENT_OBJ_GFX_VIGAROTH_FACING_AWAY, 0, 6, 5, 3, 65, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_292ABA, 754
-	object_event 3, EVENT_OBJ_GFX_VIGAROTH_CARRYING_BOX, 0, 9, 3, 3, 27, 3, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_292ACD, 755
-	object_event 4, EVENT_OBJ_GFX_WOMAN_5, 0, 8, 7, 3, 9, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1F89F3, 785
-	object_event 5, EVENT_OBJ_GFX_NORMAN, 0, 5, 6, 3, 10, 1, 1, 0, 0, 0x0, 734
-	object_event 6, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 9, 5, 3, 5, 1, 1, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1F8A3D, 736
-	object_event 7, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL, 0, 2, 8, 3, 7, 1, 1, 0, 0, 0x0, 746
+	object_event 1, EVENT_OBJ_GFX_MOM, 0, 8, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_2929C5, 759
+	object_event 2, EVENT_OBJ_GFX_VIGAROTH_FACING_AWAY, 0, 6, 5, 3, MOVEMENT_TYPE_WALK_IN_PLACE_UP, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_292ABA, 754
+	object_event 3, EVENT_OBJ_GFX_VIGAROTH_CARRYING_BOX, 0, 9, 3, 3, MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT, 3, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_292ACD, 755
+	object_event 4, EVENT_OBJ_GFX_WOMAN_5, 0, 8, 7, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1F89F3, 785
+	object_event 5, EVENT_OBJ_GFX_NORMAN, 0, 5, 6, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, 0x0, 734
+	object_event 6, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 9, 5, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 1, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1F8A3D, 736
+	object_event 7, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL, 0, 2, 8, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, 746
 
 LittlerootTown_MaysHouse_1F_MapWarps: @ 852D414
 	warp_def 1, 8, 0, 0, MAP_LITTLEROOT_TOWN

@@ -1,10 +1,10 @@
 BattleFrontier_BattleFactoryLobby_EventObjects: @ 853C9D8
-	object_event 1, EVENT_OBJ_GFX_SCIENTIST_1, 0, 4, 7, 0, 8, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_2585CB, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_1, 0, 3, 11, 0, 2, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_258813, 0
-	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 14, 11, 0, 8, 0, 0, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_25881C, 0
-	object_event 4, EVENT_OBJ_GFX_PICNICKER, 0, 13, 11, 0, 10, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_258825, 0
-	object_event 5, EVENT_OBJ_GFX_FAT_MAN, 0, 6, 10, 0, 1, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_258830, 0
-	object_event 6, EVENT_OBJ_GFX_SCIENTIST_1, 0, 14, 7, 0, 8, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_2585DD, 0
+	object_event 1, EVENT_OBJ_GFX_SCIENTIST_1, 0, 4, 7, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_2585CB, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_1, 0, 3, 11, 0, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_258813, 0
+	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 14, 11, 0, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_25881C, 0
+	object_event 4, EVENT_OBJ_GFX_PICNICKER, 0, 13, 11, 0, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_258825, 0
+	object_event 5, EVENT_OBJ_GFX_FAT_MAN, 0, 6, 10, 0, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_258830, 0
+	object_event 6, EVENT_OBJ_GFX_SCIENTIST_1, 0, 14, 7, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_BattleFactoryLobby_EventScript_2585DD, 0
 
 BattleFrontier_BattleFactoryLobby_MapWarps: @ 853CA68
 	warp_def 9, 11, 0, 2, MAP_BATTLE_FRONTIER_OUTSIDE_WEST

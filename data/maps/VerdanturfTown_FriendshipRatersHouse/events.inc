@@ -1,6 +1,6 @@
 VerdanturfTown_FriendshipRatersHouse_EventObjects: @ 852E9C8
-	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 3, 4, 3, 8, 0, 0, 0, 0, VerdanturfTown_FriendshipRatersHouse_EventScript_203031, 0
-	object_event 2, EVENT_OBJ_GFX_PIKACHU, 0, 4, 4, 3, 8, 0, 0, 0, 0, VerdanturfTown_FriendshipRatersHouse_EventScript_2030DA, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 3, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, VerdanturfTown_FriendshipRatersHouse_EventScript_203031, 0
+	object_event 2, EVENT_OBJ_GFX_PIKACHU, 0, 4, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, VerdanturfTown_FriendshipRatersHouse_EventScript_2030DA, 0
 
 VerdanturfTown_FriendshipRatersHouse_MapWarps: @ 852E9F8
 	warp_def 3, 7, 0, 5, MAP_VERDANTURF_TOWN

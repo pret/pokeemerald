@@ -1,10 +1,10 @@
 LilycoveCity_DepartmentStore_1F_EventObjects: @ 853208C
-	object_event 1, EVENT_OBJ_GFX_BEAUTY, 0, 8, 2, 3, 8, 0, 0, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F693, 0
-	object_event 2, EVENT_OBJ_GFX_BEAUTY, 0, 10, 2, 3, 8, 0, 0, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F69C, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 14, 5, 3, 2, 1, 1, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F82F, 0
-	object_event 4, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 4, 4, 3, 2, 1, 1, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F838, 0
-	object_event 5, EVENT_OBJ_GFX_MAN_3, 0, 3, 6, 3, 1, 1, 1, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F841, 0
-	object_event 6, EVENT_OBJ_GFX_AZUMARILL, 0, 2, 6, 3, 1, 1, 1, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F84A, 0
+	object_event 1, EVENT_OBJ_GFX_BEAUTY, 0, 8, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F693, 0
+	object_event 2, EVENT_OBJ_GFX_BEAUTY, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F69C, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 14, 5, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F82F, 0
+	object_event 4, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 4, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F838, 0
+	object_event 5, EVENT_OBJ_GFX_MAN_3, 0, 3, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F841, 0
+	object_event 6, EVENT_OBJ_GFX_AZUMARILL, 0, 2, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, LilycoveCity_DepartmentStore_1F_EventScript_21F84A, 0
 
 LilycoveCity_DepartmentStore_1F_MapWarps: @ 853211C
 	warp_def 8, 7, 0, 0, MAP_LILYCOVE_CITY

@@ -1,20 +1,20 @@
 Route113_EventObjects: @ 8529B2C
-	object_event 1, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 66, 12, 3, 5, 1, 0, 0, 0, Route113_EventScript_1F2193, 0
-	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 36, 10, 3, 3, 0, 1, 0, 0, Route113_EventScript_1F218A, 0
-	object_event 3, EVENT_OBJ_GFX_YOUNGSTER, 0, 62, 8, 3, 8, 0, 0, 1, 3, Route113_EventScript_1F21C0, 0
-	object_event 4, EVENT_OBJ_GFX_YOUNGSTER, 0, 21, 11, 3, 17, 0, 0, 1, 3, Route113_EventScript_1F21D7, 0
-	object_event 5, EVENT_OBJ_GFX_WOMAN_7, 0, 51, 11, 3, 23, 0, 0, 1, 2, Route113_EventScript_1F21EE, 0
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 53, 7, 3, 1, 0, 0, 0, 0, Route113_EventScript_290DDC, 1012
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 79, 5, 3, 1, 0, 0, 0, 0, Route113_EventScript_290DE9, 1013
-	object_event 8, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 29, 6, 3, 63, 0, 0, 3, 1, Route113_EventScript_1F2250, 0
-	object_event 9, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 71, 2, 3, 63, 0, 0, 3, 1, Route113_EventScript_1F22B2, 0
-	object_event 10, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 45, 6, 3, 8, 1, 1, 1, 1, Route113_EventScript_1F22C9, 0
-	object_event 11, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 46, 6, 3, 8, 1, 1, 1, 1, Route113_EventScript_1F22E4, 0
-	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 15, 15, 3, 1, 1, 1, 0, 0, Route113_EventScript_290DF6, 1143
-	object_event 13, EVENT_OBJ_GFX_MANIAC, 0, 75, 3, 3, 9, 1, 1, 1, 4, Route113_EventScript_1F2344, 0
-	object_event 14, EVENT_OBJ_GFX_CAMPER, 0, 71, 4, 3, 7, 1, 1, 1, 1, Route113_EventScript_1F232D, 0
-	object_event 15, EVENT_OBJ_GFX_PICNICKER, 0, 7, 6, 3, 26, 1, 3, 1, 6, Route113_EventScript_1F22FF, 0
-	object_event 16, EVENT_OBJ_GFX_MAN_6, 0, 7, 13, 3, 25, 1, 3, 1, 6, Route113_EventScript_1F2316, 0
+	object_event 1, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 66, 12, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, Route113_EventScript_1F2193, 0
+	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 36, 10, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, Route113_EventScript_1F218A, 0
+	object_event 3, EVENT_OBJ_GFX_YOUNGSTER, 0, 62, 8, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 3, Route113_EventScript_1F21C0, 0
+	object_event 4, EVENT_OBJ_GFX_YOUNGSTER, 0, 21, 11, 3, MOVEMENT_TYPE_FACE_DOWN_AND_LEFT, 0, 0, 1, 3, Route113_EventScript_1F21D7, 0
+	object_event 5, EVENT_OBJ_GFX_WOMAN_7, 0, 51, 11, 3, MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE, 0, 0, 1, 2, Route113_EventScript_1F21EE, 0
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 53, 7, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route113_EventScript_290DDC, 1012
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 79, 5, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route113_EventScript_290DE9, 1013
+	object_event 8, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 29, 6, 3, MOVEMENT_TYPE_HIDDEN, 0, 0, 3, 1, Route113_EventScript_1F2250, 0
+	object_event 9, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 71, 2, 3, MOVEMENT_TYPE_HIDDEN, 0, 0, 3, 1, Route113_EventScript_1F22B2, 0
+	object_event 10, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 45, 6, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 1, 1, Route113_EventScript_1F22C9, 0
+	object_event 11, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 46, 6, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 1, 1, Route113_EventScript_1F22E4, 0
+	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 15, 15, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route113_EventScript_290DF6, 1143
+	object_event 13, EVENT_OBJ_GFX_MANIAC, 0, 75, 3, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 4, Route113_EventScript_1F2344, 0
+	object_event 14, EVENT_OBJ_GFX_CAMPER, 0, 71, 4, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 1, 1, Route113_EventScript_1F232D, 0
+	object_event 15, EVENT_OBJ_GFX_PICNICKER, 0, 7, 6, 3, MOVEMENT_TYPE_WALK_DOWN_AND_UP, 1, 3, 1, 6, Route113_EventScript_1F22FF, 0
+	object_event 16, EVENT_OBJ_GFX_MAN_6, 0, 7, 13, 3, MOVEMENT_TYPE_WALK_UP_AND_DOWN, 1, 3, 1, 6, Route113_EventScript_1F2316, 0
 
 Route113_MapWarps: @ 8529CAC
 	warp_def 33, 5, 0, 0, MAP_ROUTE113_GLASS_WORKSHOP
