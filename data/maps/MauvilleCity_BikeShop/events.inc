@@ -7,8 +7,8 @@ MauvilleCity_BikeShop_MapWarps: @ 852FEB0
 	warp_def 4, 8, 0, 2, MAP_MAUVILLE_CITY
 
 MauvilleCity_BikeShop_MapBGEvents: @ 852FEC0
-	bg_event 8, 1, 0, 0, 0, MauvilleCity_BikeShop_EventScript_20ED3A
-	bg_event 11, 1, 0, 0, 0, MauvilleCity_BikeShop_EventScript_20EDAE
+	bg_event 8, 1, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_BikeShop_EventScript_20ED3A
+	bg_event 11, 1, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_BikeShop_EventScript_20EDAE
 
 MauvilleCity_BikeShop_MapEvents:: @ 852FED8
 	map_events MauvilleCity_BikeShop_EventObjects, MauvilleCity_BikeShop_MapWarps, 0x0, MauvilleCity_BikeShop_MapBGEvents

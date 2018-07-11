@@ -53,19 +53,19 @@ MossdeepCity_Gym_MapWarps: @ 853284C
 	warp_def 21, 10, 0, 12, MAP_MOSSDEEP_CITY_GYM
 
 MossdeepCity_Gym_MapCoordEvents: @ 85328BC
-	coord_event 2, 21, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220C67
-	coord_event 8, 10, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220C7D
-	coord_event 6, 7, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220C7D
-	coord_event 15, 34, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220C93
-	coord_event 23, 24, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220CA9
-	coord_event 23, 21, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220CA9
-	coord_event 8, 6, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220CBF
-	coord_event 21, 6, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220AF1
-	coord_event 3, 30, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_220C67
+	coord_event 2, 21, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220C67
+	coord_event 8, 10, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220C7D
+	coord_event 6, 7, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220C7D
+	coord_event 15, 34, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220C93
+	coord_event 23, 24, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220CA9
+	coord_event 23, 21, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220CA9
+	coord_event 8, 6, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220CBF
+	coord_event 21, 6, 0, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220AF1
+	coord_event 3, 30, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_220C67
 
 MossdeepCity_Gym_MapBGEvents: @ 853294C
-	bg_event 4, 34, 0, 1, 0, MossdeepCity_Gym_EventScript_220C33
-	bg_event 8, 34, 0, 1, 0, MossdeepCity_Gym_EventScript_220C43
+	bg_event 4, 34, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_Gym_EventScript_220C33
+	bg_event 8, 34, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_Gym_EventScript_220C43
 
 MossdeepCity_Gym_MapEvents:: @ 8532964
 	map_events MossdeepCity_Gym_EventObjects, MossdeepCity_Gym_MapWarps, MossdeepCity_Gym_MapCoordEvents, MossdeepCity_Gym_MapBGEvents

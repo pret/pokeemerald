@@ -26,20 +26,20 @@ Route118_MapWarps: @ 852ACAC
 	warp_def 9, 6, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
 Route118_MapCoordEvents: @ 852ACBC
-	coord_event 43, 11, 3, 0, VAR_0x4071, 0, 0, Route118_EventScript_1F3E8E
-	coord_event 44, 11, 3, 0, VAR_0x4071, 0, 0, Route118_EventScript_1F3EAE
-	coord_event 45, 11, 3, 0, VAR_0x4071, 0, 0, Route118_EventScript_1F3EC4
+	coord_event 43, 11, 3, VAR_0x4071, 0, Route118_EventScript_1F3E8E
+	coord_event 44, 11, 3, VAR_0x4071, 0, Route118_EventScript_1F3EAE
+	coord_event 45, 11, 3, VAR_0x4071, 0, Route118_EventScript_1F3EC4
 
 Route118_MapBGEvents: @ 852ACEC
-	bg_event 47, 14, 0, 8, 0, ITEM_MASTER_BALL, 0, 0
-	bg_event 13, 6, 0, 0, 0, Route118_EventScript_1F3E7C
-	bg_event 56, 8, 0, 0, 0, Route118_EventScript_1F3E85
-	bg_event 67, 6, 0, 8, 0, ITEM_LUXURY_BALL, 0, 0
-	bg_event 29, 5, 0, 8, 0, ITEM_HARBOR_MAIL, 0, 0
-	bg_event 47, 5, 0, 8, 0, ITEM_SPELON_BERRY, 0, 0
-	bg_event 46, 5, 0, 8, 0, ITEM_PETAYA_BERRY, 0, 0
-	bg_event 31, 13, 3, 7, 0, ITEM_IRON, 67, 0
-	bg_event 12, 14, 3, 7, 0, ITEM_HEART_SCALE, 66, 0
+	bg_secret_base_event 47, 14, 0, SECRET_BASE_RED_CAVE1_1
+	bg_event 13, 6, 0, BG_EVENT_PLAYER_FACING_ANY, Route118_EventScript_1F3E7C
+	bg_event 56, 8, 0, BG_EVENT_PLAYER_FACING_ANY, Route118_EventScript_1F3E85
+	bg_secret_base_event 67, 6, 0, SECRET_BASE_RED_CAVE2_1
+	bg_secret_base_event 29, 5, 0, SECRET_BASE_YELLOW_CAVE1_2
+	bg_secret_base_event 47, 5, 0, SECRET_BASE_TREE1_3
+	bg_secret_base_event 46, 5, 0, SECRET_BASE_TREE2_1
+	bg_hidden_item_event 31, 13, 3, ITEM_IRON, 67
+	bg_hidden_item_event 12, 14, 3, ITEM_HEART_SCALE, 66
 
 Route118_MapEvents:: @ 852AD58
 	map_events Route118_EventObjects, Route118_MapWarps, Route118_MapCoordEvents, Route118_MapBGEvents

@@ -48,51 +48,51 @@ Route119_MapWarps: @ 852B174
 	warp_def 33, 109, 0, 0, MAP_ROUTE119_HOUSE
 
 Route119_MapCoordEvents: @ 852B184
-	coord_event 25, 31, 0, 0, VAR_0x4072, 0, 0, Route119_EventScript_1F4472
-	coord_event 26, 31, 0, 0, VAR_0x4072, 0, 0, Route119_EventScript_1F447D
-	coord_event 29, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 30, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 31, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 32, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 15, 133, 3, 0, 20, 0, 0, 0x0
-	coord_event 16, 132, 3, 0, 20, 0, 0, 0x0
-	coord_event 17, 131, 3, 0, 20, 0, 0, 0x0
-	coord_event 18, 130, 3, 0, 20, 0, 0, 0x0
-	coord_event 19, 131, 3, 0, 20, 0, 0, 0x0
-	coord_event 20, 132, 3, 0, 20, 0, 0, 0x0
-	coord_event 21, 133, 3, 0, 20, 0, 0, 0x0
-	coord_event 36, 6, 3, 0, 2, 0, 0, 0x0
-	coord_event 36, 7, 3, 0, 2, 0, 0, 0x0
-	coord_event 35, 8, 3, 0, 2, 0, 0, 0x0
-	coord_event 35, 9, 3, 0, 2, 0, 0, 0x0
-	coord_event 16, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 17, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 18, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 19, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 20, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 34, 13, 3, 0, 20, 0, 0, 0x0
+	coord_event 25, 31, 0, VAR_0x4072, 0, Route119_EventScript_1F4472
+	coord_event 26, 31, 0, VAR_0x4072, 0, Route119_EventScript_1F447D
+	coord_weather_event 29, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 30, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 31, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 32, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 15, 133, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 16, 132, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 17, 131, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 18, 130, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 19, 131, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 20, 132, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 21, 133, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 36, 6, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 36, 7, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 35, 8, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 35, 9, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 16, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 17, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 18, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 19, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 20, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 34, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
 
 Route119_MapBGEvents: @ 852B2F4
-	bg_event 9, 33, 0, 0, 0, Route119_EventScript_1F477D
-	bg_event 27, 19, 0, 0, 0, Route119_EventScript_1F4774
-	bg_event 5, 2, 0, 8, 0, ITEM_DRAGON_SCALE, 0, 0
-	bg_event 4, 89, 0, 8, 0, ITEM_LIGHT_BALL, 0, 0
-	bg_event 5, 15, 0, 8, 0, ITEM_POISON_BARB, 0, 0
-	bg_event 7, 101, 3, 8, 0, ITEM_NEVER_MELT_ICE, 0, 0
-	bg_event 34, 24, 3, 8, 0, ITEM_LAX_INCENSE, 0, 0
-	bg_event 31, 73, 3, 8, 0, 231, 0, 0
-	bg_event 16, 81, 0, 8, 0, ITEM_TINY_MUSHROOM, 0, 0
-	bg_event 16, 28, 0, 8, 0, 113, 0, 0
-	bg_event 17, 82, 3, 7, 0, ITEM_CALCIUM, 5, 0
-	bg_event 38, 63, 3, 7, 0, ITEM_ULTRA_BALL, 6, 0
-	bg_event 26, 81, 0, 8, 0, ITEM_FULL_HEAL, 0, 0
-	bg_event 19, 76, 0, 8, 0, ITEM_LANSAT_BERRY, 0, 0
-	bg_event 18, 76, 0, 8, 0, ITEM_DEEP_SEA_SCALE, 0, 0
-	bg_event 4, 15, 0, 8, 0, ITEM_METAL_POWDER, 0, 0
-	bg_event 6, 2, 0, 8, 0, 233, 0, 0
-	bg_event 26, 120, 3, 7, 0, ITEM_FULL_HEAL, 68, 0
-	bg_event 20, 29, 3, 7, 0, ITEM_MAX_ETHER, 87, 0
-	bg_event 28, 9, 0, 0, 0, Route119_EventScript_1F49E3
+	bg_event 9, 33, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_1F477D
+	bg_event 27, 19, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_1F4774
+	bg_secret_base_event 5, 2, 0, SECRET_BASE_SHRUB1_1
+	bg_secret_base_event 4, 89, 0, SECRET_BASE_SHRUB1_2
+	bg_secret_base_event 5, 15, 0, SECRET_BASE_SHRUB2_1
+	bg_secret_base_event 7, 101, 3, SECRET_BASE_SHRUB2_2
+	bg_secret_base_event 34, 24, 3, SECRET_BASE_SHRUB3_1
+	bg_secret_base_event 31, 73, 3, SECRET_BASE_SHRUB4_1
+	bg_secret_base_event 16, 81, 0, SECRET_BASE_BLUE_CAVE3_3
+	bg_secret_base_event 16, 28, 0, SECRET_BASE_BLUE_CAVE4_3
+	bg_hidden_item_event 17, 82, 3, ITEM_CALCIUM, 5
+	bg_hidden_item_event 38, 63, 3, ITEM_ULTRA_BALL, 6
+	bg_secret_base_event 26, 81, 0, SECRET_BASE_RED_CAVE3_3
+	bg_secret_base_event 19, 76, 0, SECRET_BASE_TREE2_3
+	bg_secret_base_event 18, 76, 0, SECRET_BASE_TREE4_3
+	bg_secret_base_event 4, 15, 0, SECRET_BASE_SHRUB3_3
+	bg_secret_base_event 6, 2, 0, SECRET_BASE_SHRUB4_3
+	bg_hidden_item_event 26, 120, 3, ITEM_FULL_HEAL, 68
+	bg_hidden_item_event 20, 29, 3, ITEM_MAX_ETHER, 87
+	bg_event 28, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_1F49E3
 
 Route119_MapEvents:: @ 852B3E4
 	map_events Route119_EventObjects, Route119_MapWarps, Route119_MapCoordEvents, Route119_MapBGEvents

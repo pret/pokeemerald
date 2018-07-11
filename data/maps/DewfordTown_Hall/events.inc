@@ -14,8 +14,8 @@ DewfordTown_Hall_MapWarps: @ 852DD20
 	warp_def 6, 8, 0, 0, MAP_DEWFORD_TOWN
 
 DewfordTown_Hall_MapBGEvents: @ 852DD30
-	bg_event 0, 1, 3, 0, 0, DewfordTown_Hall_EventScript_1FD590
-	bg_event 7, 1, 3, 0, 0, DewfordTown_Hall_EventScript_1FD5A0
+	bg_event 0, 1, 3, BG_EVENT_PLAYER_FACING_ANY, DewfordTown_Hall_EventScript_1FD590
+	bg_event 7, 1, 3, BG_EVENT_PLAYER_FACING_ANY, DewfordTown_Hall_EventScript_1FD5A0
 
 DewfordTown_Hall_MapEvents:: @ 852DD48
 	map_events DewfordTown_Hall_EventObjects, DewfordTown_Hall_MapWarps, 0x0, DewfordTown_Hall_MapBGEvents

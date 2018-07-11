@@ -29,20 +29,20 @@ Route115_MapWarps: @ 852A3E4
 	warp_def 36, 10, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
 Route115_MapBGEvents: @ 852A3FC
-	bg_event 32, 6, 0, 8, 0, 72, 0, 0
-	bg_event 21, 18, 0, 8, 0, 62, 0, 0
-	bg_event 16, 64, 0, 0, 0, Route115_EventScript_1F297C
-	bg_event 25, 38, 3, 0, 0, Route115_EventScript_1F2985
-	bg_event 8, 30, 0, 8, 0, ITEM_CHERI_BERRY, 0, 0
-	bg_event 32, 39, 0, 8, 0, ITEM_BLACK_FLUTE, 0, 0
-	bg_event 26, 15, 0, 8, 0, 52, 0, 0
-	bg_event 23, 8, 0, 8, 0, ITEM_WHITE_FLUTE, 0, 0
-	bg_event 32, 46, 0, 8, 0, 53, 0, 0
-	bg_event 7, 20, 0, 8, 0, ITEM_STARF_BERRY, 0, 0
-	bg_event 8, 20, 0, 8, 0, ITEM_QUICK_CLAW, 0, 0
-	bg_event 25, 24, 0, 8, 0, ITEM_HP_UP, 0, 0
-	bg_event 20, 53, 0, 8, 0, ITEM_HYPER_POTION, 0, 0
-	bg_event 15, 49, 3, 7, 0, ITEM_HEART_SCALE, 97, 0
+	bg_secret_base_event 32, 6, 0, SECRET_BASE_BROWN_CAVE4_2
+	bg_secret_base_event 21, 18, 0, SECRET_BASE_BROWN_CAVE3_2
+	bg_event 16, 64, 0, BG_EVENT_PLAYER_FACING_ANY, Route115_EventScript_1F297C
+	bg_event 25, 38, 3, BG_EVENT_PLAYER_FACING_ANY, Route115_EventScript_1F2985
+	bg_secret_base_event 8, 30, 0, SECRET_BASE_YELLOW_CAVE2_3
+	bg_secret_base_event 32, 39, 0, SECRET_BASE_BROWN_CAVE1_2
+	bg_secret_base_event 26, 15, 0, SECRET_BASE_BROWN_CAVE2_2
+	bg_secret_base_event 23, 8, 0, SECRET_BASE_BROWN_CAVE1_3
+	bg_secret_base_event 32, 46, 0, SECRET_BASE_BROWN_CAVE2_3
+	bg_secret_base_event 7, 20, 0, SECRET_BASE_TREE2_4
+	bg_secret_base_event 8, 20, 0, SECRET_BASE_TREE3_3
+	bg_secret_base_event 25, 24, 0, SECRET_BASE_BROWN_CAVE3_3
+	bg_secret_base_event 20, 53, 0, SECRET_BASE_RED_CAVE3_1
+	bg_hidden_item_event 15, 49, 3, ITEM_HEART_SCALE, 97
 
 Route115_MapEvents:: @ 852A4A4
 	map_events Route115_EventObjects, Route115_MapWarps, 0x0, Route115_MapBGEvents

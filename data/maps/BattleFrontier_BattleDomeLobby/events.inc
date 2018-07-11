@@ -11,10 +11,10 @@ BattleFrontier_BattleDomeLobby_MapWarps: @ 853C0F8
 	warp_def 12, 16, 0, 1, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 
 BattleFrontier_BattleDomeLobby_MapBGEvents: @ 853C108
-	bg_event 4, 10, 0, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249D52
-	bg_event 7, 10, 0, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249D84
-	bg_event 18, 10, 0, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249D6B
-	bg_event 15, 10, 0, 0, 0, BattleFrontier_BattleDomeLobby_EventScript_249E34
+	bg_event 4, 10, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattleDomeLobby_EventScript_249D52
+	bg_event 7, 10, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattleDomeLobby_EventScript_249D84
+	bg_event 18, 10, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattleDomeLobby_EventScript_249D6B
+	bg_event 15, 10, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattleDomeLobby_EventScript_249E34
 
 BattleFrontier_BattleDomeLobby_MapEvents:: @ 853C138
 	map_events BattleFrontier_BattleDomeLobby_EventObjects, BattleFrontier_BattleDomeLobby_MapWarps, 0x0, BattleFrontier_BattleDomeLobby_MapBGEvents

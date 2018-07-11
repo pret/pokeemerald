@@ -9,8 +9,8 @@ RustboroCity_DevonCorp_1F_MapWarps: @ 85303C4
 	warp_def 14, 1, 0, 0, MAP_RUSTBORO_CITY_DEVON_CORP_2F
 
 RustboroCity_DevonCorp_1F_MapBGEvents: @ 85303DC
-	bg_event 3, 2, 0, 0, 0, RustboroCity_DevonCorp_1F_EventScript_211312
-	bg_event 8, 2, 0, 0, 0, RustboroCity_DevonCorp_1F_EventScript_211309
+	bg_event 3, 2, 0, BG_EVENT_PLAYER_FACING_ANY, RustboroCity_DevonCorp_1F_EventScript_211312
+	bg_event 8, 2, 0, BG_EVENT_PLAYER_FACING_ANY, RustboroCity_DevonCorp_1F_EventScript_211309
 
 RustboroCity_DevonCorp_1F_MapEvents:: @ 85303F4
 	map_events RustboroCity_DevonCorp_1F_EventObjects, RustboroCity_DevonCorp_1F_MapWarps, 0x0, RustboroCity_DevonCorp_1F_MapBGEvents

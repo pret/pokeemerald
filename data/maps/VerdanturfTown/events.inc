@@ -14,14 +14,14 @@ VerdanturfTown_MapWarps: @ 8527D3C
 	warp_def 17, 15, 0, 0, MAP_VERDANTURF_TOWN_HOUSE
 
 VerdanturfTown_MapBGEvents: @ 8527D74
-	bg_event 14, 3, 0, 1, 0, VerdanturfTown_EventScript_271E6A
-	bg_event 14, 6, 0, 0, 0, VerdanturfTown_EventScript_1EB5D9
-	bg_event 17, 3, 0, 1, 0, VerdanturfTown_EventScript_271E73
-	bg_event 7, 14, 0, 0, 0, VerdanturfTown_EventScript_1EB5E2
-	bg_event 13, 3, 0, 1, 0, VerdanturfTown_EventScript_271E6A
-	bg_event 18, 3, 0, 1, 0, VerdanturfTown_EventScript_271E73
-	bg_event 1, 8, 0, 0, 0, VerdanturfTown_EventScript_1EB5EB
-	bg_event 7, 3, 0, 0, 0, VerdanturfTown_EventScript_1EB5F4
+	bg_event 14, 3, 0, BG_EVENT_PLAYER_FACING_NORTH, VerdanturfTown_EventScript_271E6A
+	bg_event 14, 6, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_EventScript_1EB5D9
+	bg_event 17, 3, 0, BG_EVENT_PLAYER_FACING_NORTH, VerdanturfTown_EventScript_271E73
+	bg_event 7, 14, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_EventScript_1EB5E2
+	bg_event 13, 3, 0, BG_EVENT_PLAYER_FACING_NORTH, VerdanturfTown_EventScript_271E6A
+	bg_event 18, 3, 0, BG_EVENT_PLAYER_FACING_NORTH, VerdanturfTown_EventScript_271E73
+	bg_event 1, 8, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_EventScript_1EB5EB
+	bg_event 7, 3, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_EventScript_1EB5F4
 
 VerdanturfTown_MapEvents:: @ 8527DD4
 	map_events VerdanturfTown_EventObjects, VerdanturfTown_MapWarps, 0x0, VerdanturfTown_MapBGEvents

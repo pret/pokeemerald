@@ -10,7 +10,7 @@ MeteorFalls_1F_2R_MapWarps: @ 853410C
 	warp_def 21, 23, 3, 2, MAP_METEOR_FALLS_B1F_1R
 
 MeteorFalls_1F_2R_MapBGEvents: @ 853412C
-	bg_event 9, 58, 0, 0, 0, 0x0
+	bg_event 9, 58, 0, BG_EVENT_PLAYER_FACING_ANY, 0x0
 
 MeteorFalls_1F_2R_MapEvents:: @ 8534138
 	map_events MeteorFalls_1F_2R_EventObjects, MeteorFalls_1F_2R_MapWarps, 0x0, MeteorFalls_1F_2R_MapBGEvents

@@ -7,18 +7,18 @@ Route101_EventObjects: @ 8527E98
 	object_event 6, EVENT_OBJ_GFX_BOY_2, 0, 2, 13, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 1, 0, 0, Route101_EventScript_1EBE04, 991
 
 Route101_MapCoordEvents: @ 8527F28
-	coord_event 10, 19, 3, 0, VAR_0x4060, 1, 0, Route101_EventScript_1EBCDE
-	coord_event 11, 19, 3, 0, VAR_0x4060, 1, 0, Route101_EventScript_1EBCDE
-	coord_event 10, 18, 3, 0, VAR_0x4060, 2, 0, Route101_EventScript_1EBD4E
-	coord_event 11, 18, 3, 0, VAR_0x4060, 2, 0, Route101_EventScript_1EBD4E
-	coord_event 6, 16, 3, 0, VAR_0x4060, 2, 0, Route101_EventScript_1EBD64
-	coord_event 6, 15, 3, 0, VAR_0x4060, 2, 0, Route101_EventScript_1EBD64
-	coord_event 6, 17, 3, 0, VAR_0x4060, 2, 0, Route101_EventScript_1EBD64
-	coord_event 6, 18, 3, 0, VAR_0x4060, 2, 0, Route101_EventScript_1EBD64
-	coord_event 7, 13, 3, 0, VAR_0x4060, 2, 0, Route101_EventScript_1EBD7A
+	coord_event 10, 19, 3, VAR_0x4060, 1, Route101_EventScript_1EBCDE
+	coord_event 11, 19, 3, VAR_0x4060, 1, Route101_EventScript_1EBCDE
+	coord_event 10, 18, 3, VAR_0x4060, 2, Route101_EventScript_1EBD4E
+	coord_event 11, 18, 3, VAR_0x4060, 2, Route101_EventScript_1EBD4E
+	coord_event 6, 16, 3, VAR_0x4060, 2, Route101_EventScript_1EBD64
+	coord_event 6, 15, 3, VAR_0x4060, 2, Route101_EventScript_1EBD64
+	coord_event 6, 17, 3, VAR_0x4060, 2, Route101_EventScript_1EBD64
+	coord_event 6, 18, 3, VAR_0x4060, 2, Route101_EventScript_1EBD64
+	coord_event 7, 13, 3, VAR_0x4060, 2, Route101_EventScript_1EBD7A
 
 Route101_MapBGEvents: @ 8527FB8
-	bg_event 5, 9, 0, 0, 0, Route101_EventScript_1EBE0D
+	bg_event 5, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route101_EventScript_1EBE0D
 
 Route101_MapEvents:: @ 8527FC4
 	map_events Route101_EventObjects, 0x0, Route101_MapCoordEvents, Route101_MapBGEvents

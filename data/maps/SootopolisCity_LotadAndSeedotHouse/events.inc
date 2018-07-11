@@ -7,8 +7,8 @@ SootopolisCity_LotadAndSeedotHouse_MapWarps: @ 853355C
 	warp_def 4, 6, 0, 11, MAP_SOOTOPOLIS_CITY
 
 SootopolisCity_LotadAndSeedotHouse_MapBGEvents: @ 853356C
-	bg_event 5, 1, 0, 0, 0, SootopolisCity_LotadAndSeedotHouse_EventScript_22734D
-	bg_event 2, 1, 0, 0, 0, SootopolisCity_LotadAndSeedotHouse_EventScript_22735B
+	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_LotadAndSeedotHouse_EventScript_22734D
+	bg_event 2, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_LotadAndSeedotHouse_EventScript_22735B
 
 SootopolisCity_LotadAndSeedotHouse_MapEvents:: @ 8533584
 	map_events SootopolisCity_LotadAndSeedotHouse_EventObjects, SootopolisCity_LotadAndSeedotHouse_MapWarps, 0x0, SootopolisCity_LotadAndSeedotHouse_MapBGEvents

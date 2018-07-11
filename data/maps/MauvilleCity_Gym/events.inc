@@ -12,14 +12,14 @@ MauvilleCity_Gym_MapWarps: @ 852FE04
 	warp_def 5, 20, 0, 0, MAP_MAUVILLE_CITY
 
 MauvilleCity_Gym_MapCoordEvents: @ 852FE14
-	coord_event 4, 12, 3, 0, VAR_TEMP_0, 0, 0, MauvilleCity_Gym_EventScript_20E01E
-	coord_event 3, 9, 3, 0, VAR_TEMP_0, 0, 0, MauvilleCity_Gym_EventScript_20E043
-	coord_event 0, 15, 3, 0, VAR_TEMP_0, 0, 0, MauvilleCity_Gym_EventScript_20DFF9
-	coord_event 8, 9, 3, 0, VAR_TEMP_0, 0, 0, MauvilleCity_Gym_EventScript_20E068
+	coord_event 4, 12, 3, VAR_TEMP_0, 0, MauvilleCity_Gym_EventScript_20E01E
+	coord_event 3, 9, 3, VAR_TEMP_0, 0, MauvilleCity_Gym_EventScript_20E043
+	coord_event 0, 15, 3, VAR_TEMP_0, 0, MauvilleCity_Gym_EventScript_20DFF9
+	coord_event 8, 9, 3, VAR_TEMP_0, 0, MauvilleCity_Gym_EventScript_20E068
 
 MauvilleCity_Gym_MapBGEvents: @ 852FE54
-	bg_event 3, 18, 0, 1, 0, MauvilleCity_Gym_EventScript_20E14B
-	bg_event 6, 18, 0, 1, 0, MauvilleCity_Gym_EventScript_20E15B
+	bg_event 3, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_Gym_EventScript_20E14B
+	bg_event 6, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_Gym_EventScript_20E15B
 
 MauvilleCity_Gym_MapEvents:: @ 852FE6C
 	map_events MauvilleCity_Gym_EventObjects, MauvilleCity_Gym_MapWarps, MauvilleCity_Gym_MapCoordEvents, MauvilleCity_Gym_MapBGEvents

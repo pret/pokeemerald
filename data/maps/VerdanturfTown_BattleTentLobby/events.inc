@@ -11,7 +11,7 @@ VerdanturfTown_BattleTentLobby_MapWarps: @ 852E6D8
 	warp_def 7, 9, 0, 0, MAP_VERDANTURF_TOWN
 
 VerdanturfTown_BattleTentLobby_MapBGEvents: @ 852E6E8
-	bg_event 4, 5, 0, 0, 0, VerdanturfTown_BattleTentLobby_EventScript_201B02
+	bg_event 4, 5, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_BattleTentLobby_EventScript_201B02
 
 VerdanturfTown_BattleTentLobby_MapEvents:: @ 852E6F4
 	map_events VerdanturfTown_BattleTentLobby_EventObjects, VerdanturfTown_BattleTentLobby_MapWarps, 0x0, VerdanturfTown_BattleTentLobby_MapBGEvents

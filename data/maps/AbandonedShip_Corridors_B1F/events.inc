@@ -13,7 +13,7 @@ AbandonedShip_Corridors_B1F_MapWarps: @ 8536838
 	warp_def 8, 2, 3, 9, MAP_ABANDONED_SHIP_CORRIDORS_1F
 
 AbandonedShip_Corridors_B1F_MapBGEvents: @ 8536878
-	bg_event 11, 4, 3, 0, 0, AbandonedShip_Corridors_B1F_EventScript_237DC8
+	bg_event 11, 4, 3, BG_EVENT_PLAYER_FACING_ANY, AbandonedShip_Corridors_B1F_EventScript_237DC8
 
 AbandonedShip_Corridors_B1F_MapEvents:: @ 8536884
 	map_events AbandonedShip_Corridors_B1F_EventObjects, AbandonedShip_Corridors_B1F_MapWarps, 0x0, AbandonedShip_Corridors_B1F_MapBGEvents

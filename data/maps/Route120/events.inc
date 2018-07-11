@@ -49,41 +49,41 @@ Route120_MapWarps: @ 852B818
 	warp_def 19, 23, 1, 0, MAP_SCORCHED_SLAB
 
 Route120_MapCoordEvents: @ 852B828
-	coord_event 7, 15, 0, 0, 3, 0, 0, 0x0
-	coord_event 7, 16, 0, 0, 3, 0, 0, 0x0
-	coord_event 22, 61, 3, 0, 3, 0, 0, 0x0
-	coord_event 12, 64, 3, 0, 3, 0, 0, 0x0
-	coord_event 35, 63, 3, 0, 1, 0, 0, 0x0
-	coord_event 36, 63, 3, 0, 1, 0, 0, 0x0
-	coord_event 37, 63, 3, 0, 1, 0, 0, 0x0
-	coord_event 38, 63, 3, 0, 1, 0, 0, 0x0
-	coord_event 32, 88, 5, 0, 1, 0, 0, 0x0
-	coord_event 28, 15, 0, 0, 2, 0, 0, 0x0
-	coord_event 28, 16, 0, 0, 2, 0, 0, 0x0
-	coord_event 28, 17, 3, 0, 2, 0, 0, 0x0
-	coord_event 32, 89, 5, 0, 1, 0, 0, 0x0
-	coord_event 32, 90, 5, 0, 1, 0, 0, 0x0
-	coord_event 32, 91, 5, 0, 1, 0, 0, 0x0
-	coord_event 10, 75, 3, 0, 1, 0, 0, 0x0
-	coord_event 11, 75, 3, 0, 1, 0, 0, 0x0
-	coord_event 12, 75, 3, 0, 1, 0, 0, 0x0
-	coord_event 13, 75, 3, 0, 1, 0, 0, 0x0
+	coord_weather_event 7, 15, 0, COORD_EVENT_WEATHER_RAIN_LIGHT
+	coord_weather_event 7, 16, 0, COORD_EVENT_WEATHER_RAIN_LIGHT
+	coord_weather_event 22, 61, 3, COORD_EVENT_WEATHER_RAIN_LIGHT
+	coord_weather_event 12, 64, 3, COORD_EVENT_WEATHER_RAIN_LIGHT
+	coord_weather_event 35, 63, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 36, 63, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 37, 63, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 38, 63, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 32, 88, 5, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 28, 15, 0, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 28, 16, 0, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 28, 17, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 32, 89, 5, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 32, 90, 5, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 32, 91, 5, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 10, 75, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 11, 75, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 12, 75, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 13, 75, 3, COORD_EVENT_WEATHER_CLOUDS
 
 Route120_MapBGEvents: @ 852B958
-	bg_event 27, 3, 3, 0, 0, Route120_EventScript_1F57C5
-	bg_event 38, 88, 3, 0, 0, Route120_EventScript_1F57CE
-	bg_event 28, 62, 0, 8, 0, 101, 0, 0
-	bg_event 30, 62, 0, 8, 0, ITEM_HEART_SCALE, 0, 0
-	bg_event 26, 10, 0, 8, 0, ITEM_LUCKY_PUNCH, 0, 0
-	bg_event 29, 85, 5, 8, 0, 232, 0, 0
-	bg_event 18, 12, 0, 8, 0, ITEM_SUN_STONE, 0, 0
-	bg_event 38, 54, 0, 8, 0, ITEM_SOFT_SAND, 0, 0
-	bg_event 31, 23, 0, 8, 0, ITEM_SPELL_TAG, 0, 0
-	bg_event 9, 1, 3, 7, 0, ITEM_RARE_CANDY, 71, 0
-	bg_event 31, 11, 3, 7, 0, ITEM_REVIVE, 84, 0
-	bg_event 0, 86, 3, 7, 0, ITEM_RARE_CANDY, 69, 0
-	bg_event 24, 42, 3, 7, 0, ITEM_ZINC, 70, 0
-	bg_event 5, 76, 0, 8, 0, ITEM_HARD_STONE, 0, 0
+	bg_event 27, 3, 3, BG_EVENT_PLAYER_FACING_ANY, Route120_EventScript_1F57C5
+	bg_event 38, 88, 3, BG_EVENT_PLAYER_FACING_ANY, Route120_EventScript_1F57CE
+	bg_secret_base_event 28, 62, 0, SECRET_BASE_BLUE_CAVE3_1
+	bg_secret_base_event 30, 62, 0, SECRET_BASE_BLUE_CAVE4_1
+	bg_secret_base_event 26, 10, 0, SECRET_BASE_SHRUB3_2
+	bg_secret_base_event 29, 85, 5, SECRET_BASE_SHRUB4_2
+	bg_secret_base_event 18, 12, 0, SECRET_BASE_BLUE_CAVE2_3
+	bg_secret_base_event 38, 54, 0, SECRET_BASE_SHRUB1_3
+	bg_secret_base_event 31, 23, 0, SECRET_BASE_SHRUB2_3
+	bg_hidden_item_event 9, 1, 3, ITEM_RARE_CANDY, 71
+	bg_hidden_item_event 31, 11, 3, ITEM_REVIVE, 84
+	bg_hidden_item_event 0, 86, 3, ITEM_RARE_CANDY, 69
+	bg_hidden_item_event 24, 42, 3, ITEM_ZINC, 70
+	bg_secret_base_event 5, 76, 0, SECRET_BASE_SHRUB1_4
 
 Route120_MapEvents:: @ 852BA00
 	map_events Route120_EventObjects, Route120_MapWarps, Route120_MapCoordEvents, Route120_MapBGEvents

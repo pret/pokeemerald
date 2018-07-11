@@ -7,12 +7,12 @@ FarawayIsland_Entrance_MapWarps: @ 853D740
 	warp_def 23, 7, 3, 1, MAP_FARAWAY_ISLAND_INTERIOR
 
 FarawayIsland_Entrance_MapCoordEvents: @ 853D750
-	coord_event 9, 18, 3, 0, 0, 0, 0, FarawayIsland_Entrance_EventScript_267C98
-	coord_event 10, 20, 3, 0, 0, 0, 0, FarawayIsland_Entrance_EventScript_267C9D
-	coord_event 22, 9, 3, 0, 0, 0, 0, FarawayIsland_Entrance_EventScript_267C98
+	coord_event 9, 18, 3, 0, 0, FarawayIsland_Entrance_EventScript_267C98
+	coord_event 10, 20, 3, 0, 0, FarawayIsland_Entrance_EventScript_267C9D
+	coord_event 22, 9, 3, 0, 0, FarawayIsland_Entrance_EventScript_267C98
 
 FarawayIsland_Entrance_MapBGEvents: @ 853D780
-	bg_event 3, 32, 0, 1, 0, FarawayIsland_Entrance_EventScript_267CF1
+	bg_event 3, 32, 0, BG_EVENT_PLAYER_FACING_NORTH, FarawayIsland_Entrance_EventScript_267CF1
 
 FarawayIsland_Entrance_MapEvents:: @ 853D78C
 	map_events FarawayIsland_Entrance_EventObjects, FarawayIsland_Entrance_MapWarps, FarawayIsland_Entrance_MapCoordEvents, FarawayIsland_Entrance_MapBGEvents

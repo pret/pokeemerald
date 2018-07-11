@@ -17,11 +17,11 @@ VictoryRoad_1F_MapWarps: @ 8535EDC
 	warp_def 9, 14, 4, 4, MAP_VICTORY_ROAD_B1F
 
 VictoryRoad_1F_MapCoordEvents: @ 8535F04
-	coord_event 2, 23, 4, 0, VAR_0x40C3, 0, 0, VictoryRoad_1F_EventScript_235DAF
-	coord_event 3, 23, 4, 0, VAR_0x40C3, 0, 0, VictoryRoad_1F_EventScript_235DC8
+	coord_event 2, 23, 4, VAR_0x40C3, 0, VictoryRoad_1F_EventScript_235DAF
+	coord_event 3, 23, 4, VAR_0x40C3, 0, VictoryRoad_1F_EventScript_235DC8
 
 VictoryRoad_1F_MapBGEvents: @ 8535F24
-	bg_event 30, 39, 4, 7, 0, ITEM_ULTRA_BALL, 81, 0
+	bg_hidden_item_event 30, 39, 4, ITEM_ULTRA_BALL, 81
 
 VictoryRoad_1F_MapEvents:: @ 8535F30
 	map_events VictoryRoad_1F_EventObjects, VictoryRoad_1F_MapWarps, VictoryRoad_1F_MapCoordEvents, VictoryRoad_1F_MapBGEvents

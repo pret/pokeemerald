@@ -11,9 +11,9 @@ Route128_EventObjects: @ 852C88C
 	object_event 10, EVENT_OBJ_GFX_SWIMMER_M, 0, 101, 22, 1, MOVEMENT_TYPE_WALK_DOWN_AND_UP, 1, 3, 1, 4, Route128_EventScript_1F6DC7, 0
 
 Route128_MapBGEvents: @ 852C97C
-	bg_event 49, 9, 3, 7, 0, ITEM_HEART_SCALE, 92, 0
-	bg_event 57, 21, 3, 7, 0, ITEM_HEART_SCALE, 93, 0
-	bg_event 31, 33, 3, 7, 0, ITEM_HEART_SCALE, 94, 0
+	bg_hidden_item_event 49, 9, 3, ITEM_HEART_SCALE, 92
+	bg_hidden_item_event 57, 21, 3, ITEM_HEART_SCALE, 93
+	bg_hidden_item_event 31, 33, 3, ITEM_HEART_SCALE, 94
 
 Route128_MapEvents:: @ 852C9A0
 	map_events Route128_EventObjects, 0x0, 0x0, Route128_MapBGEvents

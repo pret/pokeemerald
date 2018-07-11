@@ -12,8 +12,8 @@ Route105_MapWarps: @ 85287B0
 	warp_def 9, 20, 0, 0, MAP_ISLAND_CAVE
 
 Route105_MapBGEvents: @ 85287B8
-	bg_event 15, 68, 3, 7, 0, ITEM_HEART_SCALE, 89, 0
-	bg_event 5, 56, 3, 7, 0, ITEM_BIG_PEARL, 111, 0
+	bg_hidden_item_event 15, 68, 3, ITEM_HEART_SCALE, 89
+	bg_hidden_item_event 5, 56, 3, ITEM_BIG_PEARL, 111
 
 Route105_MapEvents:: @ 85287D0
 	map_events Route105_EventObjects, Route105_MapWarps, 0x0, Route105_MapBGEvents

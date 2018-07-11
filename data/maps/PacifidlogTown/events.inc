@@ -12,9 +12,9 @@ PacifidlogTown_MapWarps: @ 8527E30
 	warp_def 17, 21, 0, 0, MAP_PACIFIDLOG_TOWN_HOUSE5
 
 PacifidlogTown_MapBGEvents: @ 8527E60
-	bg_event 9, 15, 0, 1, 0, PacifidlogTown_EventScript_271E73
-	bg_event 7, 16, 0, 0, 0, PacifidlogTown_EventScript_1EBADE
-	bg_event 10, 15, 0, 1, 0, PacifidlogTown_EventScript_271E73
+	bg_event 9, 15, 0, BG_EVENT_PLAYER_FACING_NORTH, PacifidlogTown_EventScript_271E73
+	bg_event 7, 16, 0, BG_EVENT_PLAYER_FACING_ANY, PacifidlogTown_EventScript_1EBADE
+	bg_event 10, 15, 0, BG_EVENT_PLAYER_FACING_NORTH, PacifidlogTown_EventScript_271E73
 
 PacifidlogTown_MapEvents:: @ 8527E84
 	map_events PacifidlogTown_EventObjects, PacifidlogTown_MapWarps, 0x0, PacifidlogTown_MapBGEvents

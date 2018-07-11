@@ -34,12 +34,12 @@ SootopolisCity_MapWarps: @ 85274C4
 	warp_def 51, 36, 0, 0, MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F
 
 SootopolisCity_MapBGEvents: @ 852752C
-	bg_event 33, 34, 3, 0, 0, SootopolisCity_EventScript_1E614B
-	bg_event 19, 29, 0, 1, 0, SootopolisCity_EventScript_271E6A
-	bg_event 44, 31, 0, 1, 0, SootopolisCity_EventScript_271E73
-	bg_event 45, 31, 0, 1, 0, SootopolisCity_EventScript_271E73
-	bg_event 18, 29, 0, 1, 0, SootopolisCity_EventScript_271E6A
-	bg_event 41, 37, 0, 0, 0, SootopolisCity_EventScript_1E6154
+	bg_event 33, 34, 3, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_EventScript_1E614B
+	bg_event 19, 29, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_271E6A
+	bg_event 44, 31, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_271E73
+	bg_event 45, 31, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_271E73
+	bg_event 18, 29, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_271E6A
+	bg_event 41, 37, 0, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_EventScript_1E6154
 
 SootopolisCity_MapEvents:: @ 8527574
 	map_events SootopolisCity_EventObjects, SootopolisCity_MapWarps, 0x0, SootopolisCity_MapBGEvents

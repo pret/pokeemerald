@@ -8,8 +8,8 @@ BattleFrontier_BattlePyramidLobby_MapWarps: @ 853C5F8
 	warp_def 7, 17, 4, 3, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
 
 BattleFrontier_BattlePyramidLobby_MapBGEvents: @ 853C600
-	bg_event 5, 12, 0, 1, 0, BattleFrontier_BattlePyramidLobby_EventScript_250D42
-	bg_event 1, 12, 0, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250E95
+	bg_event 5, 12, 0, BG_EVENT_PLAYER_FACING_NORTH, BattleFrontier_BattlePyramidLobby_EventScript_250D42
+	bg_event 1, 12, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattlePyramidLobby_EventScript_250E95
 
 BattleFrontier_BattlePyramidLobby_MapEvents:: @ 853C618
 	map_events BattleFrontier_BattlePyramidLobby_EventObjects, BattleFrontier_BattlePyramidLobby_MapWarps, 0x0, BattleFrontier_BattlePyramidLobby_MapBGEvents

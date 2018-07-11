@@ -10,7 +10,7 @@ SlateportCity_BattleTentLobby_MapWarps: @ 852F480
 	warp_def 7, 9, 0, 3, MAP_SLATEPORT_CITY
 
 SlateportCity_BattleTentLobby_MapBGEvents: @ 852F490
-	bg_event 4, 5, 0, 0, 0, SlateportCity_BattleTentLobby_EventScript_208A99
+	bg_event 4, 5, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_BattleTentLobby_EventScript_208A99
 
 SlateportCity_BattleTentLobby_MapEvents:: @ 852F49C
 	map_events SlateportCity_BattleTentLobby_EventObjects, SlateportCity_BattleTentLobby_MapWarps, 0x0, SlateportCity_BattleTentLobby_MapBGEvents

@@ -6,7 +6,7 @@ SSTidalLowerDeck_MapWarps: @ 853A2EC
 	warp_def 15, 2, 3, 8, MAP_SS_TIDAL_CORRIDOR
 
 SSTidalLowerDeck_MapBGEvents: @ 853A2F4
-	bg_event 0, 2, 0, 7, 0, ITEM_LEFTOVERS, 35, 0
+	bg_hidden_item_event 0, 2, 0, ITEM_LEFTOVERS, 35
 
 SSTidalLowerDeck_MapEvents:: @ 853A300
 	map_events SSTidalLowerDeck_EventObjects, SSTidalLowerDeck_MapWarps, 0x0, SSTidalLowerDeck_MapBGEvents

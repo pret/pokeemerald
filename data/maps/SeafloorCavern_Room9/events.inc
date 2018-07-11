@@ -11,7 +11,7 @@ SeafloorCavern_Room9_MapWarps: @ 8535CF0
 	warp_def 5, 4, 3, 0, MAP_SEAFLOOR_CAVERN_ROOM8
 
 SeafloorCavern_Room9_MapCoordEvents: @ 8535CF8
-	coord_event 17, 42, 3, 0, VAR_0x40A2, 0, 0, SeafloorCavern_Room9_EventScript_234DC9
+	coord_event 17, 42, 3, VAR_0x40A2, 0, SeafloorCavern_Room9_EventScript_234DC9
 
 SeafloorCavern_Room9_MapEvents:: @ 8535D08
 	map_events SeafloorCavern_Room9_EventObjects, SeafloorCavern_Room9_MapWarps, SeafloorCavern_Room9_MapCoordEvents, 0x0

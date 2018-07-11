@@ -11,17 +11,17 @@ OldaleTown_MapWarps: @ 85278B4
 	warp_def 14, 6, 0, 0, MAP_OLDALE_TOWN_MART
 
 OldaleTown_MapCoordEvents: @ 85278D4
-	coord_event 0, 10, 3, 0, VAR_0x4051, 0, 0, OldaleTown_EventScript_1E903F
-	coord_event 8, 19, 3, 0, VAR_0x40C7, 1, 0, OldaleTown_EventScript_1E9086
-	coord_event 9, 19, 3, 0, VAR_0x40C7, 1, 0, OldaleTown_EventScript_1E90A6
-	coord_event 10, 19, 3, 0, VAR_0x40C7, 1, 0, OldaleTown_EventScript_1E90C6
+	coord_event 0, 10, 3, VAR_0x4051, 0, OldaleTown_EventScript_1E903F
+	coord_event 8, 19, 3, VAR_0x40C7, 1, OldaleTown_EventScript_1E9086
+	coord_event 9, 19, 3, VAR_0x40C7, 1, OldaleTown_EventScript_1E90A6
+	coord_event 10, 19, 3, VAR_0x40C7, 1, OldaleTown_EventScript_1E90C6
 
 OldaleTown_MapBGEvents: @ 8527914
-	bg_event 11, 9, 0, 0, 0, OldaleTown_EventScript_1E8EEA
-	bg_event 7, 16, 0, 1, 0, OldaleTown_EventScript_271E73
-	bg_event 15, 6, 0, 1, 0, OldaleTown_EventScript_271E6A
-	bg_event 8, 16, 0, 1, 0, OldaleTown_EventScript_271E73
-	bg_event 16, 6, 0, 1, 0, OldaleTown_EventScript_271E6A
+	bg_event 11, 9, 0, BG_EVENT_PLAYER_FACING_ANY, OldaleTown_EventScript_1E8EEA
+	bg_event 7, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, OldaleTown_EventScript_271E73
+	bg_event 15, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, OldaleTown_EventScript_271E6A
+	bg_event 8, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, OldaleTown_EventScript_271E73
+	bg_event 16, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, OldaleTown_EventScript_271E6A
 
 OldaleTown_MapEvents:: @ 8527950
 	map_events OldaleTown_EventObjects, OldaleTown_MapWarps, OldaleTown_MapCoordEvents, OldaleTown_MapBGEvents

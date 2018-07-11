@@ -9,7 +9,7 @@ ShoalCave_LowTideLowerRoom_MapWarps: @ 853640C
 	warp_def 28, 11, 3, 0, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM
 
 ShoalCave_LowTideLowerRoom_MapBGEvents: @ 853642C
-	bg_event 18, 2, 3, 0, 0, ShoalCave_LowTideLowerRoom_EventScript_237176
+	bg_event 18, 2, 3, BG_EVENT_PLAYER_FACING_ANY, ShoalCave_LowTideLowerRoom_EventScript_237176
 
 ShoalCave_LowTideLowerRoom_MapEvents:: @ 8536438
 	map_events ShoalCave_LowTideLowerRoom_EventObjects, ShoalCave_LowTideLowerRoom_MapWarps, 0x0, ShoalCave_LowTideLowerRoom_MapBGEvents

@@ -43,14 +43,14 @@ BattleFrontier_OutsideEast_MapWarps: @ 853BD80
 	warp_def 28, 7, 0, 0, MAP_ARTISAN_CAVE_1F
 
 BattleFrontier_OutsideEast_MapBGEvents: @ 853BDF0
-	bg_event 13, 17, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_242C43
-	bg_event 43, 56, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_242C4C
-	bg_event 36, 34, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_242C55
-	bg_event 62, 15, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_242C5E
-	bg_event 7, 29, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_242DD7
-	bg_event 32, 13, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_242DCE
-	bg_event 4, 51, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_271E73
-	bg_event 5, 51, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_271E73
+	bg_event 13, 17, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242C43
+	bg_event 43, 56, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242C4C
+	bg_event 36, 34, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242C55
+	bg_event 62, 15, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242C5E
+	bg_event 7, 29, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242DD7
+	bg_event 32, 13, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242DCE
+	bg_event 4, 51, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_271E73
+	bg_event 5, 51, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_271E73
 
 BattleFrontier_OutsideEast_MapEvents:: @ 853BE50
 	map_events BattleFrontier_OutsideEast_EventObjects, BattleFrontier_OutsideEast_MapWarps, 0x0, BattleFrontier_OutsideEast_MapBGEvents

@@ -7,9 +7,9 @@ IslandCave_MapWarps: @ 8536C8C
 	warp_def 8, 11, 3, 1, MAP_ISLAND_CAVE
 
 IslandCave_MapBGEvents: @ 8536CA4
-	bg_event 8, 20, 0, 0, 0, IslandCave_EventScript_238EEF
-	bg_event 7, 20, 0, 0, 0, IslandCave_EventScript_238F1D
-	bg_event 9, 20, 0, 0, 0, IslandCave_EventScript_238F1D
+	bg_event 8, 20, 0, BG_EVENT_PLAYER_FACING_ANY, IslandCave_EventScript_238EEF
+	bg_event 7, 20, 0, BG_EVENT_PLAYER_FACING_ANY, IslandCave_EventScript_238F1D
+	bg_event 9, 20, 0, BG_EVENT_PLAYER_FACING_ANY, IslandCave_EventScript_238F1D
 
 IslandCave_MapEvents:: @ 8536CC8
 	map_events IslandCave_EventObjects, IslandCave_MapWarps, 0x0, IslandCave_MapBGEvents

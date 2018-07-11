@@ -8,9 +8,9 @@ MossdeepCity_GameCorner_1F_MapWarps: @ 8532F70
 	warp_def 2, 0, 0, 0, MAP_MOSSDEEP_CITY_GAME_CORNER_B1F
 
 MossdeepCity_GameCorner_1F_MapBGEvents: @ 8532F88
-	bg_event 3, 0, 0, 0, 0, MossdeepCity_GameCorner_1F_EventScript_224B5D
-	bg_event 0, 1, 0, 0, 0, MossdeepCity_GameCorner_1F_EventScript_277E9D
-	bg_event 1, 1, 0, 0, 0, MossdeepCity_GameCorner_1F_EventScript_277E96
+	bg_event 3, 0, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_GameCorner_1F_EventScript_224B5D
+	bg_event 0, 1, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_GameCorner_1F_EventScript_277E9D
+	bg_event 1, 1, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_GameCorner_1F_EventScript_277E96
 
 MossdeepCity_GameCorner_1F_MapEvents:: @ 8532FAC
 	map_events MossdeepCity_GameCorner_1F_EventObjects, MossdeepCity_GameCorner_1F_MapWarps, 0x0, MossdeepCity_GameCorner_1F_MapBGEvents

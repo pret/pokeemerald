@@ -38,11 +38,11 @@ BattleFrontier_OutsideWest_MapWarps: @ 853B590
 	warp_def 39, 55, 0, 0, MAP_ARTISAN_CAVE_B1F
 
 BattleFrontier_OutsideWest_MapBGEvents: @ 853B5E8
-	bg_event 15, 18, 0, 0, 0, BattleFrontier_OutsideWest_EventScript_23D4E2
-	bg_event 45, 30, 0, 0, 0, BattleFrontier_OutsideWest_EventScript_23D4F4
-	bg_event 16, 43, 0, 0, 0, BattleFrontier_OutsideWest_EventScript_23D4EB
-	bg_event 52, 51, 0, 0, 0, BattleFrontier_OutsideWest_EventScript_271E6A
-	bg_event 53, 51, 0, 0, 0, BattleFrontier_OutsideWest_EventScript_271E6A
+	bg_event 15, 18, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_23D4E2
+	bg_event 45, 30, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_23D4F4
+	bg_event 16, 43, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_23D4EB
+	bg_event 52, 51, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_271E6A
+	bg_event 53, 51, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_271E6A
 
 BattleFrontier_OutsideWest_MapEvents:: @ 853B624
 	map_events BattleFrontier_OutsideWest_EventObjects, BattleFrontier_OutsideWest_MapWarps, 0x0, BattleFrontier_OutsideWest_MapBGEvents

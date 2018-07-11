@@ -21,14 +21,14 @@ MauvilleCity_MapWarps: @ 8526734
 	warp_def 19, 14, 0, 0, MAP_MAUVILLE_CITY_HOUSE2
 
 MauvilleCity_MapBGEvents: @ 852676C
-	bg_event 23, 5, 0, 1, 0, MauvilleCity_EventScript_271E73
-	bg_event 11, 6, 3, 0, 0, MauvilleCity_EventScript_1DF3E0
-	bg_event 24, 14, 0, 1, 0, MauvilleCity_EventScript_271E6A
-	bg_event 25, 14, 0, 1, 0, MauvilleCity_EventScript_271E6A
-	bg_event 24, 5, 0, 1, 0, MauvilleCity_EventScript_271E73
-	bg_event 19, 7, 0, 0, 0, MauvilleCity_EventScript_1DF3D7
-	bg_event 33, 6, 0, 0, 0, MauvilleCity_EventScript_1DF3E9
-	bg_event 11, 15, 0, 0, 0, MauvilleCity_EventScript_1DF3F2
+	bg_event 23, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_EventScript_271E73
+	bg_event 11, 6, 3, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_EventScript_1DF3E0
+	bg_event 24, 14, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_EventScript_271E6A
+	bg_event 25, 14, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_EventScript_271E6A
+	bg_event 24, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_EventScript_271E73
+	bg_event 19, 7, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_EventScript_1DF3D7
+	bg_event 33, 6, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_EventScript_1DF3E9
+	bg_event 11, 15, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_EventScript_1DF3F2
 
 MauvilleCity_MapEvents:: @ 85267CC
 	map_events MauvilleCity_EventObjects, MauvilleCity_MapWarps, 0x0, MauvilleCity_MapBGEvents

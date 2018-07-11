@@ -8,8 +8,8 @@ SootopolisCity_Gym_1F_MapWarps: @ 8533024
 	warp_def 11, 22, 3, 0, MAP_SOOTOPOLIS_CITY_GYM_B1F
 
 SootopolisCity_Gym_1F_MapBGEvents: @ 853303C
-	bg_event 6, 24, 0, 0, 0, SootopolisCity_Gym_1F_EventScript_22505F
-	bg_event 10, 24, 0, 1, 0, SootopolisCity_Gym_1F_EventScript_22506F
+	bg_event 6, 24, 0, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_Gym_1F_EventScript_22505F
+	bg_event 10, 24, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_Gym_1F_EventScript_22506F
 
 SootopolisCity_Gym_1F_MapEvents:: @ 8533054
 	map_events SootopolisCity_Gym_1F_EventObjects, SootopolisCity_Gym_1F_MapWarps, 0x0, SootopolisCity_Gym_1F_MapBGEvents

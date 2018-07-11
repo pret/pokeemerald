@@ -36,20 +36,20 @@ Route116_MapWarps: @ 852A758
 	warp_def 79, 6, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
 Route116_MapCoordEvents: @ 852A780
-	coord_event 47, 9, 3, 0, VAR_0x406F, 1, 0, Route116_EventScript_1F2D95
+	coord_event 47, 9, 3, VAR_0x406F, 1, Route116_EventScript_1F2D95
 
 Route116_MapBGEvents: @ 852A790
-	bg_event 5, 10, 0, 0, 0, Route116_EventScript_1F2D57
-	bg_event 48, 9, 0, 0, 0, Route116_EventScript_1F2D60
-	bg_event 40, 9, 0, 0, 0, Route116_EventScript_1F2D69
-	bg_event 71, 4, 0, 8, 0, ITEM_FLUFFY_TAIL, 0, 0
-	bg_event 79, 11, 0, 8, 0, 91, 0, 0
-	bg_event 16, 12, 0, 0, 0, Route116_EventScript_1F2D72
-	bg_event 29, 10, 0, 0, 0, Route116_EventScript_1F2D7B
-	bg_event 56, 6, 0, 8, 0, 102, 0, 0
-	bg_event 55, 15, 0, 8, 0, 112, 0, 0
-	bg_event 22, 9, 3, 7, 0, ITEM_SUPER_POTION, 45, 0
-	bg_event 70, 13, 3, 7, 0, ITEM_BLACK_GLASSES, 96, 0
+	bg_event 5, 10, 0, BG_EVENT_PLAYER_FACING_ANY, Route116_EventScript_1F2D57
+	bg_event 48, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route116_EventScript_1F2D60
+	bg_event 40, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route116_EventScript_1F2D69
+	bg_secret_base_event 71, 4, 0, SECRET_BASE_BLUE_CAVE1_1
+	bg_secret_base_event 79, 11, 0, SECRET_BASE_BLUE_CAVE2_1
+	bg_event 16, 12, 0, BG_EVENT_PLAYER_FACING_ANY, Route116_EventScript_1F2D72
+	bg_event 29, 10, 0, BG_EVENT_PLAYER_FACING_ANY, Route116_EventScript_1F2D7B
+	bg_secret_base_event 56, 6, 0, SECRET_BASE_BLUE_CAVE3_2
+	bg_secret_base_event 55, 15, 0, SECRET_BASE_BLUE_CAVE4_2
+	bg_hidden_item_event 22, 9, 3, ITEM_SUPER_POTION, 45
+	bg_hidden_item_event 70, 13, 3, ITEM_BLACK_GLASSES, 96
 
 Route116_MapEvents:: @ 852A814
 	map_events Route116_EventObjects, Route116_MapWarps, Route116_MapCoordEvents, Route116_MapBGEvents

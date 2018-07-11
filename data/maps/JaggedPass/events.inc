@@ -15,20 +15,20 @@ JaggedPass_MapWarps: @ 8534B8C
 	warp_def 16, 18, 0, 0, MAP_MAGMA_HIDEOUT_1F
 
 JaggedPass_MapCoordEvents: @ 8534BB4
-	coord_event 13, 15, 3, 0, 2, 0, 0, 0x0
-	coord_event 21, 12, 3, 0, 8, 0, 0, 0x0
-	coord_event 14, 15, 3, 0, 2, 0, 0, 0x0
-	coord_event 18, 17, 3, 0, 2, 0, 0, 0x0
-	coord_event 22, 19, 3, 0, 2, 0, 0, 0x0
-	coord_event 21, 15, 3, 0, VAR_0x40C8, 1, 0, JaggedPass_EventScript_2306BB
-	coord_event 22, 20, 3, 0, VAR_0x40C8, 1, 0, JaggedPass_EventScript_2306BB
-	coord_event 21, 20, 3, 0, VAR_0x40C8, 1, 0, JaggedPass_EventScript_2306BB
-	coord_event 14, 15, 3, 0, VAR_0x40C8, 1, 0, JaggedPass_EventScript_2306BB
-	coord_event 13, 15, 3, 0, VAR_0x40C8, 1, 0, JaggedPass_EventScript_2306BB
+	coord_weather_event 13, 15, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 21, 12, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 14, 15, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 18, 17, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 22, 19, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_event 21, 15, 3, VAR_0x40C8, 1, JaggedPass_EventScript_2306BB
+	coord_event 22, 20, 3, VAR_0x40C8, 1, JaggedPass_EventScript_2306BB
+	coord_event 21, 20, 3, VAR_0x40C8, 1, JaggedPass_EventScript_2306BB
+	coord_event 14, 15, 3, VAR_0x40C8, 1, JaggedPass_EventScript_2306BB
+	coord_event 13, 15, 3, VAR_0x40C8, 1, JaggedPass_EventScript_2306BB
 
 JaggedPass_MapBGEvents: @ 8534C54
-	bg_event 8, 10, 3, 7, 0, ITEM_FULL_HEAL, 77, 0
-	bg_event 7, 29, 3, 7, 0, ITEM_GREAT_BALL, 76, 0
+	bg_hidden_item_event 8, 10, 3, ITEM_FULL_HEAL, 77
+	bg_hidden_item_event 7, 29, 3, ITEM_GREAT_BALL, 76
 
 JaggedPass_MapEvents:: @ 8534C6C
 	map_events JaggedPass_EventObjects, JaggedPass_MapWarps, JaggedPass_MapCoordEvents, JaggedPass_MapBGEvents

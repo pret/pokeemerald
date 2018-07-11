@@ -19,12 +19,12 @@ FortreeCity_MapWarps: @ 8526C44
 	warp_def 37, 13, 0, 0, MAP_FORTREE_CITY_DECORATION_SHOP
 
 FortreeCity_MapBGEvents: @ 8526C8C
-	bg_event 6, 9, 0, 0, 0, FortreeCity_EventScript_1E2602
-	bg_event 7, 6, 0, 1, 0, FortreeCity_EventScript_271E73
-	bg_event 5, 14, 0, 1, 0, FortreeCity_EventScript_271E6A
-	bg_event 26, 10, 0, 0, 0, FortreeCity_EventScript_1E260B
-	bg_event 6, 6, 0, 1, 0, FortreeCity_EventScript_271E73
-	bg_event 6, 14, 0, 1, 0, FortreeCity_EventScript_271E6A
+	bg_event 6, 9, 0, BG_EVENT_PLAYER_FACING_ANY, FortreeCity_EventScript_1E2602
+	bg_event 7, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, FortreeCity_EventScript_271E73
+	bg_event 5, 14, 0, BG_EVENT_PLAYER_FACING_NORTH, FortreeCity_EventScript_271E6A
+	bg_event 26, 10, 0, BG_EVENT_PLAYER_FACING_ANY, FortreeCity_EventScript_1E260B
+	bg_event 6, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, FortreeCity_EventScript_271E73
+	bg_event 6, 14, 0, BG_EVENT_PLAYER_FACING_NORTH, FortreeCity_EventScript_271E6A
 
 FortreeCity_MapEvents:: @ 8526CD4
 	map_events FortreeCity_EventObjects, FortreeCity_MapWarps, 0x0, FortreeCity_MapBGEvents

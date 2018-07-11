@@ -10,8 +10,8 @@ BattleFrontier_BattlePikeLobby_MapWarps: @ 853CC10
 	warp_def 6, 12, 0, 0, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 
 BattleFrontier_BattlePikeLobby_MapBGEvents: @ 853CC28
-	bg_event 8, 3, 0, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BA80
-	bg_event 1, 3, 0, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BAC6
+	bg_event 8, 3, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattlePikeLobby_EventScript_25BA80
+	bg_event 1, 3, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattlePikeLobby_EventScript_25BAC6
 
 BattleFrontier_BattlePikeLobby_MapEvents:: @ 853CC40
 	map_events BattleFrontier_BattlePikeLobby_EventObjects, BattleFrontier_BattlePikeLobby_MapWarps, 0x0, BattleFrontier_BattlePikeLobby_MapBGEvents

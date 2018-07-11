@@ -12,9 +12,9 @@ BattleFrontier_BattlePalaceLobby_MapWarps: @ 853C3D0
 	warp_def 5, 4, 3, 0, MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR
 
 BattleFrontier_BattlePalaceLobby_MapBGEvents: @ 853C3E8
-	bg_event 2, 7, 0, 1, 0, BattleFrontier_BattlePalaceLobby_EventScript_24DC50
-	bg_event 16, 7, 0, 1, 0, BattleFrontier_BattlePalaceLobby_EventScript_24DC69
-	bg_event 10, 4, 0, 0, 0, BattleFrontier_BattlePalaceLobby_EventScript_24DCA6
+	bg_event 2, 7, 0, BG_EVENT_PLAYER_FACING_NORTH, BattleFrontier_BattlePalaceLobby_EventScript_24DC50
+	bg_event 16, 7, 0, BG_EVENT_PLAYER_FACING_NORTH, BattleFrontier_BattlePalaceLobby_EventScript_24DC69
+	bg_event 10, 4, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattlePalaceLobby_EventScript_24DCA6
 
 BattleFrontier_BattlePalaceLobby_MapEvents:: @ 853C40C
 	map_events BattleFrontier_BattlePalaceLobby_EventObjects, BattleFrontier_BattlePalaceLobby_MapWarps, 0x0, BattleFrontier_BattlePalaceLobby_MapBGEvents

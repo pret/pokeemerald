@@ -49,22 +49,22 @@ SlateportCity_MapWarps: @ 8526514
 	warp_def 21, 44, 0, 0, MAP_SLATEPORT_CITY_HOUSE2
 
 SlateportCity_MapCoordEvents: @ 852656C
-	coord_event 10, 13, 3, 0, VAR_0x40D2, 2, 0, SlateportCity_EventScript_1DD5DC
+	coord_event 10, 13, 3, VAR_0x40D2, 2, SlateportCity_EventScript_1DD5DC
 
 SlateportCity_MapBGEvents: @ 852657C
-	bg_event 8, 19, 0, 0, 0, SlateportCity_EventScript_1DCFB2
-	bg_event 20, 19, 0, 1, 0, SlateportCity_EventScript_271E73
-	bg_event 21, 19, 0, 1, 0, SlateportCity_EventScript_271E73
-	bg_event 14, 26, 0, 1, 0, SlateportCity_EventScript_271E6A
-	bg_event 24, 12, 0, 0, 0, SlateportCity_EventScript_1DCF94
-	bg_event 15, 26, 0, 1, 0, SlateportCity_EventScript_271E6A
-	bg_event 14, 51, 0, 0, 0, SlateportCity_EventScript_1DCF8B
-	bg_event 26, 26, 0, 0, 0, SlateportCity_EventScript_1DCF79
-	bg_event 16, 22, 0, 0, 0, SlateportCity_EventScript_1DCF82
-	bg_event 8, 26, 0, 0, 0, SlateportCity_EventScript_1DCF70
-	bg_event 7, 13, 0, 0, 0, SlateportCity_EventScript_1DCF36
-	bg_event 23, 38, 0, 0, 0, SlateportCity_EventScript_1DCF3F
-	bg_event 10, 36, 0, 1, 0, SlateportCity_EventScript_1DD643
+	bg_event 8, 19, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCFB2
+	bg_event 20, 19, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_271E73
+	bg_event 21, 19, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_271E73
+	bg_event 14, 26, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_271E6A
+	bg_event 24, 12, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCF94
+	bg_event 15, 26, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_271E6A
+	bg_event 14, 51, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCF8B
+	bg_event 26, 26, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCF79
+	bg_event 16, 22, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCF82
+	bg_event 8, 26, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCF70
+	bg_event 7, 13, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCF36
+	bg_event 23, 38, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCF3F
+	bg_event 10, 36, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_1DD643
 
 SlateportCity_MapEvents:: @ 8526618
 	map_events SlateportCity_EventObjects, SlateportCity_MapWarps, SlateportCity_MapCoordEvents, SlateportCity_MapBGEvents

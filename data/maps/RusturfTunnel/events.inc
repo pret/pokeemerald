@@ -16,11 +16,11 @@ RusturfTunnel_MapWarps: @ 85342B4
 	warp_def 18, 20, 3, 2, MAP_ROUTE116
 
 RusturfTunnel_MapCoordEvents: @ 85342CC
-	coord_event 23, 4, 3, 0, 0, 0, 0, RusturfTunnel_EventScript_22D071
-	coord_event 9, 4, 3, 0, VAR_0x409A, 2, 0, RusturfTunnel_EventScript_22D083
-	coord_event 9, 5, 3, 0, VAR_0x409A, 2, 0, RusturfTunnel_EventScript_22D083
-	coord_event 25, 4, 3, 0, 0, 0, 0, RusturfTunnel_EventScript_22D077
-	coord_event 25, 5, 3, 0, 0, 0, 0, RusturfTunnel_EventScript_22D07D
+	coord_event 23, 4, 3, 0, 0, RusturfTunnel_EventScript_22D071
+	coord_event 9, 4, 3, VAR_0x409A, 2, RusturfTunnel_EventScript_22D083
+	coord_event 9, 5, 3, VAR_0x409A, 2, RusturfTunnel_EventScript_22D083
+	coord_event 25, 4, 3, 0, 0, RusturfTunnel_EventScript_22D077
+	coord_event 25, 5, 3, 0, 0, RusturfTunnel_EventScript_22D07D
 
 RusturfTunnel_MapEvents:: @ 853431C
 	map_events RusturfTunnel_EventObjects, RusturfTunnel_MapWarps, RusturfTunnel_MapCoordEvents, 0x0

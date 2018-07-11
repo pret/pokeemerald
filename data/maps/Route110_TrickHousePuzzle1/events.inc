@@ -21,7 +21,7 @@ Route110_TrickHousePuzzle1_MapWarps: @ 853E0F0
 	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle1_MapBGEvents: @ 853E108
-	bg_event 3, 16, 0, 0, 0, Route110_TrickHousePuzzle1_EventScript_26B92B
+	bg_event 3, 16, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle1_EventScript_26B92B
 
 Route110_TrickHousePuzzle1_MapEvents:: @ 853E114
 	map_events Route110_TrickHousePuzzle1_EventObjects, Route110_TrickHousePuzzle1_MapWarps, 0x0, Route110_TrickHousePuzzle1_MapBGEvents

@@ -7,8 +7,8 @@ Route114_FossilManiacsTunnel_MapWarps: @ 8533D88
 	warp_def 6, 2, 0, 0, MAP_DESERT_UNDERPASS
 
 Route114_FossilManiacsTunnel_MapCoordEvents: @ 8533DA0
-	coord_event 5, 4, 3, 0, VAR_0x40CC, 1, 0, Route114_FossilManiacsTunnel_EventScript_22AF66
-	coord_event 6, 4, 3, 0, VAR_0x40CC, 1, 0, Route114_FossilManiacsTunnel_EventScript_22AF66
+	coord_event 5, 4, 3, VAR_0x40CC, 1, Route114_FossilManiacsTunnel_EventScript_22AF66
+	coord_event 6, 4, 3, VAR_0x40CC, 1, Route114_FossilManiacsTunnel_EventScript_22AF66
 
 Route114_FossilManiacsTunnel_MapEvents:: @ 8533DC0
 	map_events Route114_FossilManiacsTunnel_EventObjects, Route114_FossilManiacsTunnel_MapWarps, Route114_FossilManiacsTunnel_MapCoordEvents, 0x0

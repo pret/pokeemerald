@@ -18,17 +18,17 @@ LavaridgeTown_MapWarps: @ 8527B2C
 	warp_def 9, 2, 3, 3, MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F
 
 LavaridgeTown_MapCoordEvents: @ 8527B5C
-	coord_event 6, 3, 3, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA6FA
+	coord_event 6, 3, 3, 0, 0, LavaridgeTown_EventScript_1EA6FA
 
 LavaridgeTown_MapBGEvents: @ 8527B6C
-	bg_event 14, 16, 0, 0, 0, LavaridgeTown_EventScript_1EA7B7
-	bg_event 7, 15, 0, 0, 0, LavaridgeTown_EventScript_1EA7AE
-	bg_event 17, 5, 0, 1, 0, LavaridgeTown_EventScript_271E6A
-	bg_event 13, 8, 0, 0, 0, LavaridgeTown_EventScript_1EA7A5
-	bg_event 10, 6, 0, 1, 0, LavaridgeTown_EventScript_271E73
-	bg_event 16, 5, 0, 1, 0, LavaridgeTown_EventScript_271E6A
-	bg_event 11, 6, 0, 1, 0, LavaridgeTown_EventScript_271E73
-	bg_event 4, 5, 3, 7, 0, ITEM_ICE_HEAL, 0, 0
+	bg_event 14, 16, 0, BG_EVENT_PLAYER_FACING_ANY, LavaridgeTown_EventScript_1EA7B7
+	bg_event 7, 15, 0, BG_EVENT_PLAYER_FACING_ANY, LavaridgeTown_EventScript_1EA7AE
+	bg_event 17, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E6A
+	bg_event 13, 8, 0, BG_EVENT_PLAYER_FACING_ANY, LavaridgeTown_EventScript_1EA7A5
+	bg_event 10, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E73
+	bg_event 16, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E6A
+	bg_event 11, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E73
+	bg_hidden_item_event 4, 5, 3, ITEM_ICE_HEAL, 0
 
 LavaridgeTown_MapEvents:: @ 8527BCC
 	map_events LavaridgeTown_EventObjects, LavaridgeTown_MapWarps, LavaridgeTown_MapCoordEvents, LavaridgeTown_MapBGEvents

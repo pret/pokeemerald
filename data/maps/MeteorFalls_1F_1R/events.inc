@@ -19,10 +19,10 @@ MeteorFalls_1F_1R_MapWarps: @ 8534064
 	warp_def 4, 2, 0, 0, MAP_METEOR_FALLS_STEVENS_CAVE
 
 MeteorFalls_1F_1R_MapCoordEvents: @ 8534094
-	coord_event 14, 18, 4, 0, VAR_0x40BF, 0, 0, MeteorFalls_1F_1R_EventScript_22BD5F
+	coord_event 14, 18, 4, VAR_0x40BF, 0, MeteorFalls_1F_1R_EventScript_22BD5F
 
 MeteorFalls_1F_1R_MapBGEvents: @ 85340A4
-	bg_event 9, 58, 0, 0, 0, 0x0
+	bg_event 9, 58, 0, BG_EVENT_PLAYER_FACING_ANY, 0x0
 
 MeteorFalls_1F_1R_MapEvents:: @ 85340B0
 	map_events MeteorFalls_1F_1R_EventObjects, MeteorFalls_1F_1R_MapWarps, MeteorFalls_1F_1R_MapCoordEvents, MeteorFalls_1F_1R_MapBGEvents

@@ -8,10 +8,10 @@ MossdeepCity_StevensHouse_MapWarps: @ 8532C58
 	warp_def 4, 7, 0, 6, MAP_MOSSDEEP_CITY
 
 MossdeepCity_StevensHouse_MapBGEvents: @ 8532C68
-	bg_event 0, 1, 0, 0, 0, MossdeepCity_StevensHouse_EventScript_222909
-	bg_event 1, 1, 0, 0, 0, MossdeepCity_StevensHouse_EventScript_222909
-	bg_event 10, 4, 3, 0, 0, MossdeepCity_StevensHouse_EventScript_222909
-	bg_event 10, 6, 3, 0, 0, MossdeepCity_StevensHouse_EventScript_222909
+	bg_event 0, 1, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_StevensHouse_EventScript_222909
+	bg_event 1, 1, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_StevensHouse_EventScript_222909
+	bg_event 10, 4, 3, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_StevensHouse_EventScript_222909
+	bg_event 10, 6, 3, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_StevensHouse_EventScript_222909
 
 MossdeepCity_StevensHouse_MapEvents:: @ 8532C98
 	map_events MossdeepCity_StevensHouse_EventObjects, MossdeepCity_StevensHouse_MapWarps, 0x0, MossdeepCity_StevensHouse_MapBGEvents

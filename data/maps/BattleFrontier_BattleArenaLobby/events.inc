@@ -9,8 +9,8 @@ BattleFrontier_BattleArenaLobby_MapWarps: @ 853C88C
 	warp_def 7, 12, 3, 1, MAP_BATTLE_FRONTIER_OUTSIDE_EAST
 
 BattleFrontier_BattleArenaLobby_MapBGEvents: @ 853C894
-	bg_event 5, 9, 3, 1, 0, BattleFrontier_BattleArenaLobby_EventScript_256092
-	bg_event 1, 7, 0, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_2560CA
+	bg_event 5, 9, 3, BG_EVENT_PLAYER_FACING_NORTH, BattleFrontier_BattleArenaLobby_EventScript_256092
+	bg_event 1, 7, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_BattleArenaLobby_EventScript_2560CA
 
 BattleFrontier_BattleArenaLobby_MapEvents:: @ 853C8AC
 	map_events BattleFrontier_BattleArenaLobby_EventObjects, BattleFrontier_BattleArenaLobby_MapWarps, 0x0, BattleFrontier_BattleArenaLobby_MapBGEvents

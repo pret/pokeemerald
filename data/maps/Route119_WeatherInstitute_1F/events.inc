@@ -11,10 +11,10 @@ Route119_WeatherInstitute_1F_MapWarps: @ 853EB98
 	warp_def 17, 1, 0, 0, MAP_ROUTE119_WEATHER_INSTITUTE_2F
 
 Route119_WeatherInstitute_1F_MapBGEvents: @ 853EBB0
-	bg_event 1, 2, 0, 0, 0, Route119_WeatherInstitute_1F_EventScript_26FB18
-	bg_event 1, 3, 0, 0, 0, Route119_WeatherInstitute_1F_EventScript_26FB18
-	bg_event 0, 2, 0, 0, 0, Route119_WeatherInstitute_1F_EventScript_26FB18
-	bg_event 0, 3, 0, 0, 0, Route119_WeatherInstitute_1F_EventScript_26FB18
+	bg_event 1, 2, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_WeatherInstitute_1F_EventScript_26FB18
+	bg_event 1, 3, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_WeatherInstitute_1F_EventScript_26FB18
+	bg_event 0, 2, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_WeatherInstitute_1F_EventScript_26FB18
+	bg_event 0, 3, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_WeatherInstitute_1F_EventScript_26FB18
 
 Route119_WeatherInstitute_1F_MapEvents:: @ 853EBE0
 	map_events Route119_WeatherInstitute_1F_EventObjects, Route119_WeatherInstitute_1F_MapWarps, 0x0, Route119_WeatherInstitute_1F_MapBGEvents

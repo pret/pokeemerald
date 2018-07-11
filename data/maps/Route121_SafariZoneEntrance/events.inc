@@ -10,10 +10,10 @@ Route121_SafariZoneEntrance_MapWarps: @ 8533F24
 	warp_def 15, 13, 0, 0, MAP_ROUTE121
 
 Route121_SafariZoneEntrance_MapCoordEvents: @ 8533F44
-	coord_event 8, 4, 3, 0, VAR_TEMP_1, 0, 0, Route121_SafariZoneEntrance_EventScript_22BC18
+	coord_event 8, 4, 3, VAR_TEMP_1, 0, Route121_SafariZoneEntrance_EventScript_22BC18
 
 Route121_SafariZoneEntrance_MapBGEvents: @ 8533F54
-	bg_event 15, 1, 0, 0, 0, Route121_SafariZoneEntrance_EventScript_22BD21
+	bg_event 15, 1, 0, BG_EVENT_PLAYER_FACING_ANY, Route121_SafariZoneEntrance_EventScript_22BD21
 
 Route121_SafariZoneEntrance_MapEvents:: @ 8533F60
 	map_events Route121_SafariZoneEntrance_EventObjects, Route121_SafariZoneEntrance_MapWarps, Route121_SafariZoneEntrance_MapCoordEvents, Route121_SafariZoneEntrance_MapBGEvents

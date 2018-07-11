@@ -10,8 +10,8 @@ RustboroCity_Gym_MapWarps: @ 85305B0
 	warp_def 6, 19, 0, 0, MAP_RUSTBORO_CITY
 
 RustboroCity_Gym_MapBGEvents: @ 85305C0
-	bg_event 2, 18, 0, 1, 0, RustboroCity_Gym_EventScript_213047
-	bg_event 8, 18, 0, 1, 0, RustboroCity_Gym_EventScript_213057
+	bg_event 2, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, RustboroCity_Gym_EventScript_213047
+	bg_event 8, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, RustboroCity_Gym_EventScript_213057
 
 RustboroCity_Gym_MapEvents:: @ 85305D8
 	map_events RustboroCity_Gym_EventObjects, RustboroCity_Gym_MapWarps, 0x0, RustboroCity_Gym_MapBGEvents

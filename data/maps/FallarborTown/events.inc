@@ -12,14 +12,14 @@ FallarborTown_MapWarps: @ 8527C40
 	warp_def 1, 6, 0, 0, MAP_FALLARBOR_TOWN_HOUSE2
 
 FallarborTown_MapBGEvents: @ 8527C68
-	bg_event 16, 15, 0, 1, 0, FallarborTown_EventScript_271E6A
-	bg_event 15, 7, 0, 1, 0, FallarborTown_EventScript_271E73
-	bg_event 6, 8, 0, 0, 0, FallarborTown_EventScript_1EB250
-	bg_event 16, 7, 0, 1, 0, FallarborTown_EventScript_271E73
-	bg_event 10, 11, 0, 0, 0, FallarborTown_EventScript_1EB259
-	bg_event 17, 15, 0, 1, 0, FallarborTown_EventScript_271E6A
-	bg_event 3, 7, 0, 0, 0, FallarborTown_EventScript_1EB262
-	bg_event 2, 15, 3, 7, 0, ITEM_NUGGET, 28, 0
+	bg_event 16, 15, 0, BG_EVENT_PLAYER_FACING_NORTH, FallarborTown_EventScript_271E6A
+	bg_event 15, 7, 0, BG_EVENT_PLAYER_FACING_NORTH, FallarborTown_EventScript_271E73
+	bg_event 6, 8, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_EventScript_1EB250
+	bg_event 16, 7, 0, BG_EVENT_PLAYER_FACING_NORTH, FallarborTown_EventScript_271E73
+	bg_event 10, 11, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_EventScript_1EB259
+	bg_event 17, 15, 0, BG_EVENT_PLAYER_FACING_NORTH, FallarborTown_EventScript_271E6A
+	bg_event 3, 7, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_EventScript_1EB262
+	bg_hidden_item_event 2, 15, 3, ITEM_NUGGET, 28
 
 FallarborTown_MapEvents:: @ 8527CC8
 	map_events FallarborTown_EventObjects, FallarborTown_MapWarps, 0x0, FallarborTown_MapBGEvents

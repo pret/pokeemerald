@@ -37,8 +37,8 @@ MtChimney_MapWarps: @ 8534A98
 	warp_def 21, 41, 3, 3, MAP_JAGGED_PASS
 
 MtChimney_MapBGEvents: @ 8534AB8
-	bg_event 14, 6, 0, 0, 0, MtChimney_EventScript_22F0E4
-	bg_event 24, 37, 3, 0, 0, MtChimney_EventScript_22F141
+	bg_event 14, 6, 0, BG_EVENT_PLAYER_FACING_ANY, MtChimney_EventScript_22F0E4
+	bg_event 24, 37, 3, BG_EVENT_PLAYER_FACING_ANY, MtChimney_EventScript_22F141
 
 MtChimney_MapEvents:: @ 8534AD0
 	map_events MtChimney_EventObjects, MtChimney_MapWarps, 0x0, MtChimney_MapBGEvents

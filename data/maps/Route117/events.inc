@@ -28,10 +28,10 @@ Route117_MapWarps: @ 852AA68
 	warp_def 51, 5, 0, 0, MAP_ROUTE117_POKEMON_DAY_CARE
 
 Route117_MapBGEvents: @ 852AA70
-	bg_event 16, 6, 0, 0, 0, Route117_EventScript_1F39B5
-	bg_event 49, 12, 0, 0, 0, Route117_EventScript_1F39BE
-	bg_event 49, 5, 0, 0, 0, Route117_EventScript_1F39C7
-	bg_event 3, 18, 3, 7, 0, ITEM_REPEL, 72, 0
+	bg_event 16, 6, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39B5
+	bg_event 49, 12, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39BE
+	bg_event 49, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39C7
+	bg_hidden_item_event 3, 18, 3, ITEM_REPEL, 72
 
 Route117_MapEvents:: @ 852AAA0
 	map_events Route117_EventObjects, Route117_MapWarps, 0x0, Route117_MapBGEvents

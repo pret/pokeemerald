@@ -22,16 +22,16 @@ PetalburgWoods_MapWarps: @ 853471C
 	warp_def 37, 38, 0, 7, MAP_ROUTE104
 
 PetalburgWoods_MapCoordEvents: @ 853474C
-	coord_event 26, 23, 3, 0, VAR_0x4098, 0, 0, PetalburgWoods_EventScript_22DFD7
-	coord_event 27, 23, 3, 0, VAR_0x4098, 0, 0, PetalburgWoods_EventScript_22E079
+	coord_event 26, 23, 3, VAR_0x4098, 0, PetalburgWoods_EventScript_22DFD7
+	coord_event 27, 23, 3, VAR_0x4098, 0, PetalburgWoods_EventScript_22E079
 
 PetalburgWoods_MapBGEvents: @ 853476C
-	bg_event 14, 32, 3, 0, 0, PetalburgWoods_EventScript_22E25B
-	bg_event 39, 35, 3, 7, 0, ITEM_POTION, 58, 0
-	bg_event 26, 6, 3, 7, 0, ITEM_TINY_MUSHROOM, 59, 0
-	bg_event 40, 29, 3, 7, 0, ITEM_TINY_MUSHROOM, 60, 0
-	bg_event 4, 19, 3, 7, 0, ITEM_POKE_BALL, 61, 0
-	bg_event 11, 8, 3, 0, 0, PetalburgWoods_EventScript_22E264
+	bg_event 14, 32, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgWoods_EventScript_22E25B
+	bg_hidden_item_event 39, 35, 3, ITEM_POTION, 58
+	bg_hidden_item_event 26, 6, 3, ITEM_TINY_MUSHROOM, 59
+	bg_hidden_item_event 40, 29, 3, ITEM_TINY_MUSHROOM, 60
+	bg_hidden_item_event 4, 19, 3, ITEM_POKE_BALL, 61
+	bg_event 11, 8, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgWoods_EventScript_22E264
 
 PetalburgWoods_MapEvents:: @ 85347B4
 	map_events PetalburgWoods_EventObjects, PetalburgWoods_MapWarps, PetalburgWoods_MapCoordEvents, PetalburgWoods_MapBGEvents

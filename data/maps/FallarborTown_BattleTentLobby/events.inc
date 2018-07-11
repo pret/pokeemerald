@@ -10,7 +10,7 @@ FallarborTown_BattleTentLobby_MapWarps: @ 852E3E8
 	warp_def 7, 9, 0, 1, MAP_FALLARBOR_TOWN
 
 FallarborTown_BattleTentLobby_MapBGEvents: @ 852E3F8
-	bg_event 4, 5, 0, 0, 0, FallarborTown_BattleTentLobby_EventScript_20024F
+	bg_event 4, 5, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_BattleTentLobby_EventScript_20024F
 
 FallarborTown_BattleTentLobby_MapEvents:: @ 852E404
 	map_events FallarborTown_BattleTentLobby_EventObjects, FallarborTown_BattleTentLobby_MapWarps, 0x0, FallarborTown_BattleTentLobby_MapBGEvents

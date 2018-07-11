@@ -11,10 +11,10 @@ TrainerHill_Entrance_MapWarps: @ 853D8EC
 	warp_def 9, 1, 3, 0, MAP_TRAINER_HILL_1F
 
 TrainerHill_Entrance_MapCoordEvents: @ 853D904
-	coord_event 9, 6, 3, 0, VAR_0x40D6, 0, 0, TrainerHill_Entrance_EventScript_268229
+	coord_event 9, 6, 3, VAR_0x40D6, 0, TrainerHill_Entrance_EventScript_268229
 
 TrainerHill_Entrance_MapBGEvents: @ 853D914
-	bg_event 8, 10, 0, 1, 0, TrainerHill_Entrance_EventScript_268388
+	bg_event 8, 10, 0, BG_EVENT_PLAYER_FACING_NORTH, TrainerHill_Entrance_EventScript_268388
 
 TrainerHill_Entrance_MapEvents:: @ 853D920
 	map_events TrainerHill_Entrance_EventObjects, TrainerHill_Entrance_MapWarps, TrainerHill_Entrance_MapCoordEvents, TrainerHill_Entrance_MapBGEvents

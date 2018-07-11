@@ -35,8 +35,8 @@ LavaridgeTown_Gym_1F_MapWarps: @ 852DEAC
 	warp_def 12, 12, 3, 23, MAP_LAVARIDGE_TOWN_GYM_B1F
 
 LavaridgeTown_Gym_1F_MapBGEvents: @ 852DF7C
-	bg_event 10, 15, 0, 1, 0, LavaridgeTown_Gym_1F_EventScript_1FE98B
-	bg_event 16, 15, 0, 1, 0, LavaridgeTown_Gym_1F_EventScript_1FE99B
+	bg_event 10, 15, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_Gym_1F_EventScript_1FE98B
+	bg_event 16, 15, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_Gym_1F_EventScript_1FE99B
 
 LavaridgeTown_Gym_1F_MapEvents:: @ 852DF94
 	map_events LavaridgeTown_Gym_1F_EventObjects, LavaridgeTown_Gym_1F_MapWarps, 0x0, LavaridgeTown_Gym_1F_MapBGEvents

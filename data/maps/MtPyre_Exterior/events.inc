@@ -8,15 +8,15 @@ MtPyre_Exterior_MapWarps: @ 853510C
 	warp_def 20, 10, 3, 1, MAP_MT_PYRE_SUMMIT
 
 MtPyre_Exterior_MapCoordEvents: @ 8535124
-	coord_event 24, 21, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_231FED
-	coord_event 25, 21, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_231FED
-	coord_event 22, 27, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_231FF2
-	coord_event 23, 28, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_231FF2
-	coord_event 26, 21, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_231FED
+	coord_event 24, 21, 3, 0, 0, MtPyre_Exterior_EventScript_231FED
+	coord_event 25, 21, 3, 0, 0, MtPyre_Exterior_EventScript_231FED
+	coord_event 22, 27, 3, 0, 0, MtPyre_Exterior_EventScript_231FF2
+	coord_event 23, 28, 3, 0, 0, MtPyre_Exterior_EventScript_231FF2
+	coord_event 26, 21, 3, 0, 0, MtPyre_Exterior_EventScript_231FED
 
 MtPyre_Exterior_MapBGEvents: @ 8535174
-	bg_event 9, 8, 0, 7, 0, ITEM_ULTRA_BALL, 29, 0
-	bg_event 16, 22, 0, 7, 0, ITEM_MAX_ETHER, 78, 0
+	bg_hidden_item_event 9, 8, 0, ITEM_ULTRA_BALL, 29
+	bg_hidden_item_event 16, 22, 0, ITEM_MAX_ETHER, 78
 
 MtPyre_Exterior_MapEvents:: @ 853518C
 	map_events MtPyre_Exterior_EventObjects, MtPyre_Exterior_MapWarps, MtPyre_Exterior_MapCoordEvents, MtPyre_Exterior_MapBGEvents

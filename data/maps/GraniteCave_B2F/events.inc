@@ -17,8 +17,8 @@ GraniteCave_B2F_MapWarps: @ 853455C
 	warp_def 29, 2, 3, 6, MAP_GRANITE_CAVE_B1F
 
 GraniteCave_B2F_MapBGEvents: @ 8534584
-	bg_event 28, 6, 3, 7, 0, ITEM_EVERSTONE, 48, 0
-	bg_event 15, 11, 3, 7, 0, ITEM_EVERSTONE, 49, 0
+	bg_hidden_item_event 28, 6, 3, ITEM_EVERSTONE, 48
+	bg_hidden_item_event 15, 11, 3, ITEM_EVERSTONE, 49
 
 GraniteCave_B2F_MapEvents:: @ 853459C
 	map_events GraniteCave_B2F_EventObjects, GraniteCave_B2F_MapWarps, 0x0, GraniteCave_B2F_MapBGEvents

@@ -54,60 +54,60 @@ Route111_MapWarps: @ 8529640
 	warp_def 31, 113, 0, 0, MAP_TRAINER_HILL_ENTRANCE
 
 Route111_MapCoordEvents: @ 8529668
-	coord_event 12, 62, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 11, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F0A
-	coord_event 12, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F0A
-	coord_event 13, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F0A
-	coord_event 7, 63, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 12, 44, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
-	coord_event 13, 43, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
-	coord_event 14, 42, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
-	coord_event 16, 40, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
-	coord_event 14, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F0A
-	coord_event 18, 32, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 17, 31, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 9, 37, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 10, 36, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 17, 39, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
-	coord_event 18, 38, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_1F0F16
-	coord_event 8, 64, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 9, 65, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 10, 65, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 11, 66, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 12, 67, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 13, 68, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 14, 69, 3, 0, 0, 0, 0, Route111_EventScript_1F0FB0
-	coord_event 10, 61, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 11, 62, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 13, 62, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 14, 62, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 17, 38, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 16, 39, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 15, 40, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 14, 41, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 13, 42, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 12, 43, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
-	coord_event 11, 44, 3, 0, 0, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 12, 62, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 11, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F0A
+	coord_event 12, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F0A
+	coord_event 13, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F0A
+	coord_event 7, 63, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 12, 44, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F16
+	coord_event 13, 43, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F16
+	coord_event 14, 42, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F16
+	coord_event 16, 40, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F16
+	coord_event 14, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F0A
+	coord_event 18, 32, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 17, 31, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 9, 37, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 10, 36, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 17, 39, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F16
+	coord_event 18, 38, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F16
+	coord_event 8, 64, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 9, 65, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 10, 65, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 11, 66, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 12, 67, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 13, 68, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 14, 69, 3, 0, 0, Route111_EventScript_1F0FB0
+	coord_event 10, 61, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 11, 62, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 13, 62, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 14, 62, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 17, 38, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 16, 39, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 15, 40, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 14, 41, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 13, 42, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 12, 43, 3, 0, 0, Route111_EventScript_1F0FBD
+	coord_event 11, 44, 3, 0, 0, Route111_EventScript_1F0FBD
 
 Route111_MapBGEvents: @ 8529888
-	bg_event 16, 114, 0, 0, 0, Route111_EventScript_1F115C
-	bg_event 24, 126, 0, 0, 0, Route111_EventScript_1F1153
-	bg_event 7, 66, 0, 0, 0, Route111_EventScript_1F1165
-	bg_event 13, 6, 0, 0, 0, Route111_EventScript_1F116E
-	bg_event 24, 36, 0, 8, 0, ITEM_FAB_MAIL, 0, 0
-	bg_event 34, 50, 0, 8, 0, ITEM_LUM_BERRY, 0, 0
-	bg_event 33, 34, 0, 8, 0, ITEM_ORANGE_MAIL, 0, 0
-	bg_event 25, 19, 0, 0, 0, Route111_EventScript_1F1177
-	bg_event 35, 1, 0, 8, 0, ITEM_POTION, 0, 0
-	bg_event 35, 31, 0, 8, 0, ITEM_POMEG_BERRY, 0, 0
-	bg_event 26, 70, 0, 7, 0, ITEM_STARDUST, 2, 0
-	bg_event 27, 27, 3, 8, 0, ITEM_REVIVAL_HERB, 0, 0
-	bg_event 7, 84, 3, 0, 0, Route111_EventScript_1F1180
-	bg_event 14, 19, 0, 8, 0, ITEM_PAMTRE_BERRY, 0, 0
-	bg_event 13, 19, 0, 8, 0, ITEM_RABUTA_BERRY, 0, 0
-	bg_event 19, 55, 0, 7, 0, ITEM_PROTEIN, 56, 0
-	bg_event 35, 66, 0, 7, 0, ITEM_RARE_CANDY, 57, 0
-	bg_event 24, 116, 0, 0, 0, Route111_EventScript_1F146C
+	bg_event 16, 114, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F115C
+	bg_event 24, 126, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F1153
+	bg_event 7, 66, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F1165
+	bg_event 13, 6, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F116E
+	bg_secret_base_event 24, 36, 0, SECRET_BASE_YELLOW_CAVE2_1
+	bg_secret_base_event 34, 50, 0, SECRET_BASE_YELLOW_CAVE3_1
+	bg_secret_base_event 33, 34, 0, SECRET_BASE_YELLOW_CAVE1_1
+	bg_event 25, 19, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F1177
+	bg_secret_base_event 35, 1, 0, SECRET_BASE_RED_CAVE2_3
+	bg_secret_base_event 35, 31, 0, SECRET_BASE_YELLOW_CAVE4_3
+	bg_hidden_item_event 26, 70, 0, ITEM_STARDUST, 2
+	bg_secret_base_event 27, 27, 3, SECRET_BASE_RED_CAVE4_3
+	bg_event 7, 84, 3, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F1180
+	bg_secret_base_event 14, 19, 0, SECRET_BASE_TREE1_4
+	bg_secret_base_event 13, 19, 0, SECRET_BASE_TREE1_1
+	bg_hidden_item_event 19, 55, 0, ITEM_PROTEIN, 56
+	bg_hidden_item_event 35, 66, 0, ITEM_RARE_CANDY, 57
+	bg_event 24, 116, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F146C
 
 Route111_MapEvents:: @ 8529960
 	map_events Route111_EventObjects, Route111_MapWarps, Route111_MapCoordEvents, Route111_MapBGEvents

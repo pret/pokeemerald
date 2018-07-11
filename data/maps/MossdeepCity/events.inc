@@ -30,26 +30,26 @@ MossdeepCity_MapWarps: @ 85271B0
 	warp_def 36, 24, 0, 0, MAP_MOSSDEEP_CITY_GAME_CORNER_1F
 
 MossdeepCity_MapCoordEvents: @ 8527200
-	coord_event 25, 25, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38
-	coord_event 26, 25, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38
-	coord_event 32, 27, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38
-	coord_event 33, 27, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_1E4B38
-	coord_event 42, 21, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
-	coord_event 41, 22, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
-	coord_event 41, 23, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
-	coord_event 41, 24, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
-	coord_event 40, 25, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
-	coord_event 40, 26, 5, 0, VAR_0x405D, 1, 0, MossdeepCity_EventScript_1E4B41
+	coord_event 25, 25, 0, VAR_TEMP_1, 0, MossdeepCity_EventScript_1E4B38
+	coord_event 26, 25, 0, VAR_TEMP_1, 0, MossdeepCity_EventScript_1E4B38
+	coord_event 32, 27, 0, VAR_TEMP_1, 0, MossdeepCity_EventScript_1E4B38
+	coord_event 33, 27, 0, VAR_TEMP_1, 0, MossdeepCity_EventScript_1E4B38
+	coord_event 42, 21, 5, VAR_0x405D, 1, MossdeepCity_EventScript_1E4B41
+	coord_event 41, 22, 5, VAR_0x405D, 1, MossdeepCity_EventScript_1E4B41
+	coord_event 41, 23, 5, VAR_0x405D, 1, MossdeepCity_EventScript_1E4B41
+	coord_event 41, 24, 5, VAR_0x405D, 1, MossdeepCity_EventScript_1E4B41
+	coord_event 40, 25, 5, VAR_0x405D, 1, MossdeepCity_EventScript_1E4B41
+	coord_event 40, 26, 5, VAR_0x405D, 1, MossdeepCity_EventScript_1E4B41
 
 MossdeepCity_MapBGEvents: @ 85272A0
-	bg_event 25, 16, 0, 0, 0, MossdeepCity_EventScript_1E4B26
-	bg_event 34, 9, 0, 0, 0, MossdeepCity_EventScript_1E4B1D
-	bg_event 29, 16, 0, 1, 0, MossdeepCity_EventScript_271E73
-	bg_event 38, 18, 0, 1, 0, MossdeepCity_EventScript_271E6A
-	bg_event 66, 16, 0, 0, 0, MossdeepCity_EventScript_1E4B2F
-	bg_event 30, 16, 0, 1, 0, MossdeepCity_EventScript_271E73
-	bg_event 39, 18, 0, 1, 0, MossdeepCity_EventScript_271E6A
-	bg_event 57, 21, 7, 0, 0, MossdeepCity_EventScript_1E4B14
+	bg_event 25, 16, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_EventScript_1E4B26
+	bg_event 34, 9, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_EventScript_1E4B1D
+	bg_event 29, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_EventScript_271E73
+	bg_event 38, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_EventScript_271E6A
+	bg_event 66, 16, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_EventScript_1E4B2F
+	bg_event 30, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_EventScript_271E73
+	bg_event 39, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_EventScript_271E6A
+	bg_event 57, 21, 7, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_EventScript_1E4B14
 
 MossdeepCity_MapEvents:: @ 8527300
 	map_events MossdeepCity_EventObjects, MossdeepCity_MapWarps, MossdeepCity_MapCoordEvents, MossdeepCity_MapBGEvents

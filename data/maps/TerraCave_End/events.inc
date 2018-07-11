@@ -5,7 +5,7 @@ TerraCave_End_MapWarps: @ 8537868
 	warp_def 5, 4, 3, 1, MAP_TERRA_CAVE_ENTRANCE
 
 TerraCave_End_MapCoordEvents: @ 8537870
-	coord_event 17, 26, 3, 0, VAR_TEMP_1, 1, 0, TerraCave_End_EventScript_23B0EC
+	coord_event 17, 26, 3, VAR_TEMP_1, 1, TerraCave_End_EventScript_23B0EC
 
 TerraCave_End_MapEvents:: @ 8537880
 	map_events TerraCave_End_EventObjects, TerraCave_End_MapWarps, TerraCave_End_MapCoordEvents, 0x0

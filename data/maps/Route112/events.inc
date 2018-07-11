@@ -23,9 +23,9 @@ Route112_MapWarps: @ 8529AC4
 	warp_def 22, 10, 0, 1, MAP_FIERY_PATH
 
 Route112_MapBGEvents: @ 8529AF4
-	bg_event 19, 44, 3, 0, 0, Route112_EventScript_1F1E4F
-	bg_event 22, 37, 0, 0, 0, Route112_EventScript_1F1E46
-	bg_event 4, 49, 0, 0, 0, Route112_EventScript_1F1E58
+	bg_event 19, 44, 3, BG_EVENT_PLAYER_FACING_ANY, Route112_EventScript_1F1E4F
+	bg_event 22, 37, 0, BG_EVENT_PLAYER_FACING_ANY, Route112_EventScript_1F1E46
+	bg_event 4, 49, 0, BG_EVENT_PLAYER_FACING_ANY, Route112_EventScript_1F1E58
 
 Route112_MapEvents:: @ 8529B18
 	map_events Route112_EventObjects, Route112_MapWarps, 0x0, Route112_MapBGEvents

@@ -32,18 +32,18 @@ LilycoveCity_ContestLobby_MapWarps: @ 853178C
 	warp_def 21, 1, 0, 1, MAP_LILYCOVE_CITY_CONTEST_HALL
 
 LilycoveCity_ContestLobby_MapBGEvents: @ 85317AC
-	bg_event 23, 5, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_294055
-	bg_event 23, 9, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_293E1E
-	bg_event 23, 1, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A753
-	bg_event 25, 1, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A75A
-	bg_event 27, 1, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A761
-	bg_event 30, 1, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A77A
-	bg_event 3, 1, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A73E
-	bg_event 5, 1, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A745
-	bg_event 7, 1, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A74C
-	bg_event 27, 5, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_293C3E
-	bg_event 27, 9, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_293D4D
-	bg_event 18, 3, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A784
+	bg_event 23, 5, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_294055
+	bg_event 23, 9, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_293E1E
+	bg_event 23, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A753
+	bg_event 25, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A75A
+	bg_event 27, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A761
+	bg_event 30, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A77A
+	bg_event 3, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A73E
+	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A745
+	bg_event 7, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A74C
+	bg_event 27, 5, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_293C3E
+	bg_event 27, 9, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_293D4D
+	bg_event 18, 3, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A784
 
 LilycoveCity_ContestLobby_MapEvents:: @ 853183C
 	map_events LilycoveCity_ContestLobby_EventObjects, LilycoveCity_ContestLobby_MapWarps, 0x0, LilycoveCity_ContestLobby_MapBGEvents

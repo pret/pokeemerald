@@ -14,10 +14,10 @@ Route125_MapWarps: @ 852C5FC
 	warp_def 22, 19, 0, 0, MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
 
 Route125_MapBGEvents: @ 852C604
-	bg_event 53, 10, 0, 8, 0, ITEM_ULTRA_BALL, 0, 0
-	bg_event 55, 11, 0, 8, 0, ITEM_HEAL_POWDER, 0, 0
-	bg_event 7, 25, 0, 8, 0, ITEM_RETRO_MAIL, 0, 0
-	bg_event 24, 32, 0, 8, 0, ITEM_PINAP_BERRY, 0, 0
+	bg_secret_base_event 53, 10, 0, SECRET_BASE_RED_CAVE1_2
+	bg_secret_base_event 55, 11, 0, SECRET_BASE_RED_CAVE4_2
+	bg_secret_base_event 7, 25, 0, SECRET_BASE_YELLOW_CAVE2_2
+	bg_secret_base_event 24, 32, 0, SECRET_BASE_YELLOW_CAVE4_2
 
 Route125_MapEvents:: @ 852C634
 	map_events Route125_EventObjects, Route125_MapWarps, 0x0, Route125_MapBGEvents

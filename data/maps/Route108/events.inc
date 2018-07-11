@@ -11,7 +11,7 @@ Route108_MapWarps: @ 8528A0C
 	warp_def 29, 6, 3, 0, MAP_ABANDONED_SHIP_DECK
 
 Route108_MapBGEvents: @ 8528A14
-	bg_event 38, 14, 3, 7, 0, ITEM_RARE_CANDY, 86, 0
+	bg_hidden_item_event 38, 14, 3, ITEM_RARE_CANDY, 86
 
 Route108_MapEvents:: @ 8528A20
 	map_events Route108_EventObjects, Route108_MapWarps, 0x0, Route108_MapBGEvents

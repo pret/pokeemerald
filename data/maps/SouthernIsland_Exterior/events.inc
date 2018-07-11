@@ -7,7 +7,7 @@ SouthernIsland_Exterior_MapWarps: @ 853B86C
 	warp_def 15, 5, 3, 1, MAP_SOUTHERN_ISLAND_INTERIOR
 
 SouthernIsland_Exterior_MapBGEvents: @ 853B87C
-	bg_event 16, 7, 3, 0, 0, SouthernIsland_Exterior_EventScript_242A3C
+	bg_event 16, 7, 3, BG_EVENT_PLAYER_FACING_ANY, SouthernIsland_Exterior_EventScript_242A3C
 
 SouthernIsland_Exterior_MapEvents:: @ 853B888
 	map_events SouthernIsland_Exterior_EventObjects, SouthernIsland_Exterior_MapWarps, 0x0, SouthernIsland_Exterior_MapBGEvents

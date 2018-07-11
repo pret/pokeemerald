@@ -39,12 +39,12 @@ LilycoveCity_ContestHall_MapWarps: @ 8531B50
 	warp_def 31, 32, 0, 3, MAP_LILYCOVE_CITY_CONTEST_LOBBY
 
 LilycoveCity_ContestHall_MapBGEvents: @ 8531B70
-	bg_event 27, 16, 0, 0, 0, LilycoveCity_ContestHall_EventScript_21B733
-	bg_event 39, 28, 0, 0, 0, LilycoveCity_ContestHall_EventScript_21B73C
-	bg_event 11, 28, 0, 0, 0, LilycoveCity_ContestHall_EventScript_21B745
-	bg_event 15, 28, 0, 0, 0, LilycoveCity_ContestHall_EventScript_21B745
-	bg_event 23, 16, 0, 0, 0, LilycoveCity_ContestHall_EventScript_21B733
-	bg_event 35, 28, 0, 0, 0, LilycoveCity_ContestHall_EventScript_21B73C
+	bg_event 27, 16, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestHall_EventScript_21B733
+	bg_event 39, 28, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestHall_EventScript_21B73C
+	bg_event 11, 28, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestHall_EventScript_21B745
+	bg_event 15, 28, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestHall_EventScript_21B745
+	bg_event 23, 16, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestHall_EventScript_21B733
+	bg_event 35, 28, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestHall_EventScript_21B73C
 
 LilycoveCity_ContestHall_MapEvents:: @ 8531BB8
 	map_events LilycoveCity_ContestHall_EventObjects, LilycoveCity_ContestHall_MapWarps, 0x0, LilycoveCity_ContestHall_MapBGEvents

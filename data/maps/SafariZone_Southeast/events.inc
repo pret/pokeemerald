@@ -6,8 +6,8 @@ SafariZone_Southeast_EventObjects: @ 853BA6C
 	object_event 5, EVENT_OBJ_GFX_CAMPER, 0, 12, 16, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, SafariZone_Southeast_EventScript_23D399, 747
 
 SafariZone_Southeast_MapBGEvents: @ 853BAE4
-	bg_event 19, 36, 3, 7, 0, ITEM_PP_UP, 108, 0
-	bg_event 32, 33, 0, 7, 0, ITEM_FULL_RESTORE, 105, 0
+	bg_hidden_item_event 19, 36, 3, ITEM_PP_UP, 108
+	bg_hidden_item_event 32, 33, 0, ITEM_FULL_RESTORE, 105
 
 SafariZone_Southeast_MapEvents:: @ 853BAFC
 	map_events SafariZone_Southeast_EventObjects, 0x0, 0x0, SafariZone_Southeast_MapBGEvents

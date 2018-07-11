@@ -24,7 +24,7 @@ Route103_MapWarps: @ 85282BC
 	warp_def 45, 6, 0, 0, MAP_ALTERING_CAVE
 
 Route103_MapBGEvents: @ 85282C4
-	bg_event 11, 9, 0, 0, 0, Route103_EventScript_1EC5EB
+	bg_event 11, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route103_EventScript_1EC5EB
 
 Route103_MapEvents:: @ 85282D0
 	map_events Route103_EventObjects, Route103_MapWarps, 0x0, Route103_MapBGEvents

@@ -13,8 +13,8 @@ FortreeCity_Gym_MapWarps: @ 8530D58
 	warp_def 16, 24, 0, 2, MAP_FORTREE_CITY
 
 FortreeCity_Gym_MapBGEvents: @ 8530D68
-	bg_event 14, 21, 0, 1, 0, FortreeCity_Gym_EventScript_216751
-	bg_event 17, 21, 0, 1, 0, FortreeCity_Gym_EventScript_216761
+	bg_event 14, 21, 0, BG_EVENT_PLAYER_FACING_NORTH, FortreeCity_Gym_EventScript_216751
+	bg_event 17, 21, 0, BG_EVENT_PLAYER_FACING_NORTH, FortreeCity_Gym_EventScript_216761
 
 FortreeCity_Gym_MapEvents:: @ 8530D80
 	map_events FortreeCity_Gym_EventObjects, FortreeCity_Gym_MapWarps, 0x0, FortreeCity_Gym_MapBGEvents

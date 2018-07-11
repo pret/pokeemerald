@@ -28,14 +28,14 @@ Route109_MapWarps: @ 8528C74
 	warp_def 12, 5, 0, 0, MAP_ROUTE109_SEASHORE_HOUSE
 
 Route109_MapBGEvents: @ 8528C7C
-	bg_event 15, 5, 0, 0, 0, Route109_EventScript_1EEA2B
-	bg_event 29, 10, 3, 0, 0, Route109_EventScript_1EEA34
-	bg_event 16, 23, 3, 7, 0, ITEM_REVIVE, 50, 0
-	bg_event 33, 5, 3, 7, 0, ITEM_HEART_SCALE, 52, 0
-	bg_event 9, 10, 3, 7, 0, ITEM_GREAT_BALL, 51, 0
-	bg_event 28, 20, 3, 7, 0, ITEM_ETHER, 64, 0
-	bg_event 13, 16, 3, 7, 0, ITEM_HEART_SCALE, 90, 0
-	bg_event 8, 42, 3, 7, 0, ITEM_HEART_SCALE, 91, 0
+	bg_event 15, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route109_EventScript_1EEA2B
+	bg_event 29, 10, 3, BG_EVENT_PLAYER_FACING_ANY, Route109_EventScript_1EEA34
+	bg_hidden_item_event 16, 23, 3, ITEM_REVIVE, 50
+	bg_hidden_item_event 33, 5, 3, ITEM_HEART_SCALE, 52
+	bg_hidden_item_event 9, 10, 3, ITEM_GREAT_BALL, 51
+	bg_hidden_item_event 28, 20, 3, ITEM_ETHER, 64
+	bg_hidden_item_event 13, 16, 3, ITEM_HEART_SCALE, 90
+	bg_hidden_item_event 8, 42, 3, ITEM_HEART_SCALE, 91
 
 Route109_MapEvents:: @ 8528CDC
 	map_events Route109_EventObjects, Route109_MapWarps, 0x0, Route109_MapBGEvents
