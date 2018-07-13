@@ -5,7 +5,7 @@ PacifidlogTown_House1: @ 8482F8C
 	.4byte 0x0
 	.2byte MUS_MINAMO
 	.2byte 77
-	.byte 6
+	.byte MAPSEC_PACIFIDLOG_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

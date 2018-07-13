@@ -5,7 +5,7 @@ Route109_SeashoreHouse: @ 8485B30
 	.4byte 0x0
 	.2byte MUS_HIGHTOWN
 	.2byte 243
-	.byte 24
+	.byte MAPSEC_ROUTE_109
 	.byte 0
 	.byte 0
 	.byte 8

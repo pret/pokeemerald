@@ -5,7 +5,7 @@ CaveOfOrigin_1F: @ 84842E8
 	.4byte 0x0
 	.2byte MUS_DAN03
 	.2byte 158
-	.byte 72
+	.byte MAPSEC_CAVE_OF_ORIGIN
 	.byte 0
 	.byte 0
 	.byte 4

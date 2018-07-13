@@ -5,7 +5,7 @@ LilycoveCity_House2: @ 84837A4
 	.4byte 0x0
 	.2byte MUS_MINAMO
 	.2byte 74
-	.byte 12
+	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

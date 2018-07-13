@@ -5,7 +5,7 @@ SafariZone_Southeast: @ 84852A8
 	.4byte SafariZone_Southeast_MapConnections
 	.2byte MUS_SAFARI
 	.2byte 395
-	.byte 57
+	.byte MAPSEC_SAFARI_ZONE
 	.byte 0
 	.byte 0
 	.byte 3

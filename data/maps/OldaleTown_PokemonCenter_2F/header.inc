@@ -5,7 +5,7 @@ OldaleTown_PokemonCenter_2F: @ 8482BD4
 	.4byte 0x0
 	.2byte MUS_POKECEN
 	.2byte 62
-	.byte 1
+	.byte MAPSEC_OLDALE_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

@@ -5,7 +5,7 @@ BattleFrontier_ScottsHouse: @ 8485644
 	.4byte 0x0
 	.2byte MUS_B_TOWER
 	.2byte 430
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

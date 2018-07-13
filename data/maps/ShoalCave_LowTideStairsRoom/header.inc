@@ -5,7 +5,7 @@ ShoalCave_LowTideStairsRoom: @ 8484400
 	.4byte 0x0
 	.2byte MUS_M_DUNGON
 	.2byte 166
-	.byte 67
+	.byte MAPSEC_SHOAL_CAVE
 	.byte 0
 	.byte 0
 	.byte 4

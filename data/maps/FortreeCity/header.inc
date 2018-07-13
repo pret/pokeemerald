@@ -5,7 +5,7 @@ FortreeCity: @ 8482528
 	.4byte FortreeCity_MapConnections
 	.2byte MUS_MACHI_S3
 	.2byte 5
-	.byte 11
+	.byte MAPSEC_FORTREE_CITY
 	.byte 0
 	.byte 2
 	.byte 2

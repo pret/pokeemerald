@@ -5,7 +5,7 @@ BattlePyramidSquare07: @ 8485008
 	.4byte 0x0
 	.2byte 65535
 	.2byte 368
-	.byte 87
+	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte 0
 	.byte 8

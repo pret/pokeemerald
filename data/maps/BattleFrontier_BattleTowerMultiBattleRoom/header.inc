@@ -5,7 +5,7 @@ BattleFrontier_BattleTowerMultiBattleRoom: @ 84852E0
 	.4byte 0x0
 	.2byte MUS_SATTOWER
 	.2byte 390
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

@@ -5,7 +5,7 @@ TrainerHill_2F: @ 8485804
 	.4byte 0x0
 	.2byte MUS_B_TOWER
 	.2byte 416
-	.byte 212
+	.byte MAPSEC_TRAINER_HILL
 	.byte 0
 	.byte 0
 	.byte 8

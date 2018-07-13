@@ -5,7 +5,7 @@ SealedChamber_OuterRoom: @ 8484684
 	.4byte 0x0
 	.2byte MUS_MABOROSI
 	.2byte 284
-	.byte 78
+	.byte MAPSEC_SEALED_CHAMBER
 	.byte 0
 	.byte 0
 	.byte 4

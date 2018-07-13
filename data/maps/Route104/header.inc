@@ -5,7 +5,7 @@ Route104: @ 84826CC
 	.4byte Route104_MapConnections
 	.2byte MUS_NEXTROAD
 	.2byte 20
-	.byte 19
+	.byte MAPSEC_ROUTE_104
 	.byte 0
 	.byte 2
 	.byte 3

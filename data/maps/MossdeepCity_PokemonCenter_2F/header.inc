@@ -5,7 +5,7 @@ MossdeepCity_PokemonCenter_2F: @ 848392C
 	.4byte 0x0
 	.2byte MUS_POKECEN
 	.2byte 62
-	.byte 13
+	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte 0
 	.byte 8

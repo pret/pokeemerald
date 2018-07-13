@@ -5,7 +5,7 @@ LavaridgeTown_Gym_1F: @ 8482CD0
 	.4byte 0x0
 	.2byte MUS_GIM
 	.2byte 69
-	.byte 3
+	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
 	.byte 6
 	.byte 8

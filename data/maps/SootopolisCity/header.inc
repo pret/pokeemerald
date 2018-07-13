@@ -5,7 +5,7 @@ SootopolisCity: @ 848257C
 	.4byte 0x0
 	.2byte MUS_RUNECITY
 	.2byte 8
-	.byte 14
+	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
 	.byte 2
 	.byte 2

@@ -5,7 +5,7 @@ Route104_MrBrineysHouse: @ 8483D70
 	.4byte 0x0
 	.2byte MUS_MACHI_S2
 	.2byte 102
-	.byte 19
+	.byte MAPSEC_ROUTE_104
 	.byte 0
 	.byte 0
 	.byte 8

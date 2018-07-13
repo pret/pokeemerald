@@ -5,7 +5,7 @@ MauvilleCity_House1: @ 848329C
 	.4byte 0x0
 	.2byte MUS_GOTOWN
 	.2byte 60
-	.byte 9
+	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

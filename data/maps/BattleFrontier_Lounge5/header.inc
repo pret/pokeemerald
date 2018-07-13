@@ -5,7 +5,7 @@ BattleFrontier_Lounge5: @ 8485660
 	.4byte 0x0
 	.2byte MUS_B_TOWER
 	.2byte 397
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

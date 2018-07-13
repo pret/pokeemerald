@@ -5,7 +5,7 @@ MirageTower_1F: @ 8484908
 	.4byte 0x0
 	.2byte MUS_TOZAN
 	.2byte 381
-	.byte 199
+	.byte MAPSEC_MIRAGE_TOWER
 	.byte 0
 	.byte 0
 	.byte 4

@@ -5,7 +5,7 @@ EverGrandeCity_HallOfFame: @ 8483D00
 	.4byte 0x0
 	.2byte MUS_EIKOU_R
 	.2byte 298
-	.byte 15
+	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

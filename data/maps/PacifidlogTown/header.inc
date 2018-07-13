@@ -5,7 +5,7 @@ PacifidlogTown: @ 848265C
 	.4byte PacifidlogTown_MapConnections
 	.2byte MUS_MINAMO
 	.2byte 16
-	.byte 6
+	.byte MAPSEC_PACIFIDLOG_TOWN
 	.byte 0
 	.byte 2
 	.byte 1

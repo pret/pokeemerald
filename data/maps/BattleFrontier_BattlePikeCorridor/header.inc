@@ -5,7 +5,7 @@ BattleFrontier_BattlePikeCorridor: @ 8485510
 	.4byte 0x0
 	.2byte MUS_B_TUBE
 	.2byte 350
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

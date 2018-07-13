@@ -5,7 +5,7 @@ VerdanturfTown_FriendshipRatersHouse: @ 8482F1C
 	.4byte 0x0
 	.2byte MUS_GOMACHI0
 	.2byte 60
-	.byte 5
+	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

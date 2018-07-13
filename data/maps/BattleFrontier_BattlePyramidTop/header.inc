@@ -5,7 +5,7 @@ BattleFrontier_BattlePyramidTop: @ 8485430
 	.4byte 0x0
 	.2byte 65535
 	.2byte 378
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

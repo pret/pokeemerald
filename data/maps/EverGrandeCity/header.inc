@@ -5,7 +5,7 @@ EverGrandeCity: @ 8482598
 	.4byte EverGrandeCity_MapConnections
 	.2byte MUS_RAINBOW
 	.2byte 9
-	.byte 15
+	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte 2
 	.byte 2

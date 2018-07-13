@@ -5,7 +5,7 @@ TerraCave_Entrance: @ 8484A20
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 408
-	.byte 205
+	.byte MAPSEC_TERRA_CAVE
 	.byte 0
 	.byte 0
 	.byte 4

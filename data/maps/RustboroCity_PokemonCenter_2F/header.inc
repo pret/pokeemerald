@@ -5,7 +5,7 @@ RustboroCity_PokemonCenter_2F: @ 84833EC
 	.4byte 0x0
 	.2byte MUS_POKECEN
 	.2byte 62
-	.byte 10
+	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte 0
 	.byte 8

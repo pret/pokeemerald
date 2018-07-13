@@ -5,7 +5,7 @@ Route116: @ 848281C
 	.4byte Route116_MapConnections
 	.2byte MUS_NEXTROAD
 	.2byte 32
-	.byte 31
+	.byte MAPSEC_ROUTE_116
 	.byte 0
 	.byte 2
 	.byte 3

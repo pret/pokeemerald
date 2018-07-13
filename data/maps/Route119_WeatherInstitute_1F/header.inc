@@ -5,7 +5,7 @@ Route119_WeatherInstitute_1F: @ 8485CF0
 	.4byte 0x0
 	.2byte MUS_GOTOWN
 	.2byte 271
-	.byte 34
+	.byte MAPSEC_ROUTE_119
 	.byte 0
 	.byte 0
 	.byte 8

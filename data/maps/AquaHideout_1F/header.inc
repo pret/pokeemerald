@@ -5,7 +5,7 @@ AquaHideout_1F: @ 8484144
 	.4byte 0x0
 	.2byte MUS_AJITO
 	.2byte 143
-	.byte 197
+	.byte MAPSEC_AQUA_HIDEOUT
 	.byte 0
 	.byte 0
 	.byte 8

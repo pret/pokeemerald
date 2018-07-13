@@ -5,7 +5,7 @@ Route110_TrickHousePuzzle8: @ 8485C64
 	.4byte 0x0
 	.2byte MUS_KARAKURI
 	.2byte 254
-	.byte 25
+	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte 0
 	.byte 8

@@ -5,7 +5,7 @@ SootopolisCity_MysteryEventsHouse_1F: @ 8483B94
 	.4byte 0x0
 	.2byte MUS_RUNECITY
 	.2byte 439
-	.byte 14
+	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
 	.byte 0
 	.byte 8

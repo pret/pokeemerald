@@ -5,7 +5,7 @@ SecretBase_Shrub4: @ 8484D14
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
 	.2byte 220
-	.byte 86
+	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte 0
 	.byte 9

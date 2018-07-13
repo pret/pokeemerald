@@ -5,7 +5,7 @@ AbandonedShip_Underwater1: @ 8484550
 	.4byte 0x0
 	.2byte MUS_DEEPDEEP
 	.2byte 192
-	.byte 61
+	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte 14
 	.byte 5

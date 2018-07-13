@@ -5,7 +5,7 @@ SeafloorCavern_Room9: @ 84842B0
 	.4byte 0x0
 	.2byte MUS_TOZAN
 	.2byte 156
-	.byte 68
+	.byte MAPSEC_SEAFLOOR_CAVERN
 	.byte 0
 	.byte 6
 	.byte 4

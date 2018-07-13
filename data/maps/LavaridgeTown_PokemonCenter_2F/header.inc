@@ -5,7 +5,7 @@ LavaridgeTown_PokemonCenter_2F: @ 8482D5C
 	.4byte 0x0
 	.2byte MUS_POKECEN
 	.2byte 62
-	.byte 3
+	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

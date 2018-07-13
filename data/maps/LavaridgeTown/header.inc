@@ -5,7 +5,7 @@ LavaridgeTown: @ 8482608
 	.4byte LavaridgeTown_MapConnections
 	.2byte MUS_MACHI_S4
 	.2byte 13
-	.byte 3
+	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
 	.byte 2
 	.byte 1

@@ -5,7 +5,7 @@ BattleFrontier_BattlePalaceBattleRoom: @ 84853DC
 	.4byte 0x0
 	.2byte MUS_B_PALACE
 	.2byte 344
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

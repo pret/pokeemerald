@@ -5,7 +5,7 @@ MauvilleCity_GameCorner: @ 84832B8
 	.4byte 0x0
 	.2byte MUS_CASINO
 	.2byte 91
-	.byte 9
+	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

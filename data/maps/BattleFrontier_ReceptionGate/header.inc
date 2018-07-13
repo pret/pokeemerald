@@ -5,7 +5,7 @@ BattleFrontier_ReceptionGate: @ 84856B4
 	.4byte 0x0
 	.2byte MUS_B_TOWER
 	.2byte 399
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

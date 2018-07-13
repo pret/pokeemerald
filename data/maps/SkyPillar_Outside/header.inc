@@ -5,7 +5,7 @@ SkyPillar_Outside: @ 8484748
 	.4byte 0x0
 	.2byte MUS_TOZAN
 	.2byte 321
-	.byte 85
+	.byte MAPSEC_SKY_PILLAR
 	.byte 0
 	.byte 0
 	.byte 3

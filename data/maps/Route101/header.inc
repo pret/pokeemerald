@@ -5,7 +5,7 @@ Route101: @ 8482678
 	.4byte Route101_MapConnections
 	.2byte MUS_DOORO1
 	.2byte 17
-	.byte 16
+	.byte MAPSEC_ROUTE_101
 	.byte 0
 	.byte 2
 	.byte 3

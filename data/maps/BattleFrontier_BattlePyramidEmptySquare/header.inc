@@ -5,7 +5,7 @@ BattleFrontier_BattlePyramidEmptySquare: @ 8485414
 	.4byte 0x0
 	.2byte 65535
 	.2byte 361
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

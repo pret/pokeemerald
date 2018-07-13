@@ -5,7 +5,7 @@ BattleFrontier_BattlePikeThreePathRoom: @ 848552C
 	.4byte 0x0
 	.2byte MUS_B_TUBE
 	.2byte 351
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

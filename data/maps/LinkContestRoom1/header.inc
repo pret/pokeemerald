@@ -5,7 +5,7 @@ LinkContestRoom1: @ 8484DA0
 	.4byte 0x0
 	.2byte MUS_CONTEST0
 	.2byte 225
-	.byte 87
+	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte 0
 	.byte 8

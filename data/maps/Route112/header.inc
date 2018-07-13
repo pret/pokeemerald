@@ -5,7 +5,7 @@ Route112: @ 84827AC
 	.4byte Route112_MapConnections
 	.2byte MUS_DOORO_X1
 	.2byte 28
-	.byte 27
+	.byte MAPSEC_ROUTE_112
 	.byte 0
 	.byte 2
 	.byte 3

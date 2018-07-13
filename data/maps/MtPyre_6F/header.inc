@@ -5,7 +5,7 @@ MtPyre_6F: @ 84840F0
 	.4byte 0x0
 	.2byte MUS_M_DUNGON
 	.2byte 142
-	.byte 65
+	.byte MAPSEC_MT_PYRE
 	.byte 0
 	.byte 0
 	.byte 8

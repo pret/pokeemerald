@@ -5,7 +5,7 @@ Route119: @ 8482870
 	.4byte Route119_MapConnections
 	.2byte MUS_GRANROAD
 	.2byte 35
-	.byte 34
+	.byte MAPSEC_ROUTE_119
 	.byte 0
 	.byte 2
 	.byte 3

@@ -5,7 +5,7 @@ LittlerootTown_ProfessorBirchsLab: @ 8482B64
 	.4byte 0x0
 	.2byte MUS_ODAMAKI
 	.2byte 58
-	.byte 0
+	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

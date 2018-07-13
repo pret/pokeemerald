@@ -5,7 +5,7 @@ FieryPath: @ 8484048
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 293
-	.byte 74
+	.byte MAPSEC_FIERY_PATH
 	.byte 0
 	.byte 0
 	.byte 4

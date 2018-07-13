@@ -5,7 +5,7 @@ MagmaHideout_1F: @ 8484828
 	.4byte 0x0
 	.2byte MUS_AJITO
 	.2byte 336
-	.byte 198
+	.byte MAPSEC_MAGMA_HIDEOUT
 	.byte 0
 	.byte 0
 	.byte 4

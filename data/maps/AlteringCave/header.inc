@@ -5,7 +5,7 @@ AlteringCave: @ 8484A58
 	.4byte 0x0
 	.2byte MUS_RG_NANADUNGEON
 	.2byte 420
-	.byte 210
+	.byte MAPSEC_ALTERING_CAVE_2
 	.byte 0
 	.byte 0
 	.byte 4

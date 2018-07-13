@@ -5,7 +5,7 @@ Route121: @ 84828A8
 	.4byte Route121_MapConnections
 	.2byte MUS_DOORO_X3
 	.2byte 37
-	.byte 36
+	.byte MAPSEC_ROUTE_121
 	.byte 0
 	.byte 2
 	.byte 3

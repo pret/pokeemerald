@@ -5,7 +5,7 @@ RustboroCity_Gym: @ 8483398
 	.4byte 0x0
 	.2byte MUS_GIM
 	.2byte 94
-	.byte 10
+	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte 0
 	.byte 8

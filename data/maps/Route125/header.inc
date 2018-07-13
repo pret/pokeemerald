@@ -5,7 +5,7 @@ Route125: @ 8482918
 	.4byte Route125_MapConnections
 	.2byte MUS_DOORO_X3
 	.2byte 41
-	.byte 40
+	.byte MAPSEC_ROUTE_125
 	.byte 0
 	.byte 2
 	.byte 6

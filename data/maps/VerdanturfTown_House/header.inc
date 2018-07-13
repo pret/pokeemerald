@@ -5,7 +5,7 @@ VerdanturfTown_House: @ 8482F38
 	.4byte 0x0
 	.2byte MUS_GOMACHI0
 	.2byte 59
-	.byte 5
+	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

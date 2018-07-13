@@ -5,7 +5,7 @@ BattleFrontier_BattleDomeLobby: @ 8485334
 	.4byte 0x0
 	.2byte MUS_B_DOME1
 	.2byte 332
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

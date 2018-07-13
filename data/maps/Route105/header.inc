@@ -5,7 +5,7 @@ Route105: @ 84826E8
 	.4byte Route105_MapConnections
 	.2byte MUS_NEXTROAD
 	.2byte 21
-	.byte 20
+	.byte MAPSEC_ROUTE_105
 	.byte 0
 	.byte 2
 	.byte 3

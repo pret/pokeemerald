@@ -5,7 +5,7 @@ MtPyre_Summit: @ 8484128
 	.4byte 0x0
 	.2byte MUS_MACHUPI
 	.2byte 303
-	.byte 65
+	.byte MAPSEC_MT_PYRE
 	.byte 0
 	.byte 6
 	.byte 3

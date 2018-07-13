@@ -5,7 +5,7 @@ NavelRock_Top: @ 8485970
 	.4byte 0x0
 	.2byte MUS_RG_NANADUNGEON
 	.2byte 423
-	.byte 211
+	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
 	.byte 11
 	.byte 4

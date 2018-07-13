@@ -5,7 +5,7 @@ ScorchedSlab: @ 84846BC
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 311
-	.byte 80
+	.byte MAPSEC_SCORCHED_SLAB
 	.byte 0
 	.byte 0
 	.byte 4

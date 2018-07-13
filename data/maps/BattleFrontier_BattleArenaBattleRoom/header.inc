@@ -5,7 +5,7 @@ BattleFrontier_BattleArenaBattleRoom: @ 8485484
 	.4byte 0x0
 	.2byte MUS_B_ARENA
 	.2byte 356
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

@@ -5,7 +5,7 @@ Route122: @ 84828C4
 	.4byte Route122_MapConnections
 	.2byte MUS_DOORO_X4
 	.2byte 38
-	.byte 37
+	.byte MAPSEC_ROUTE_122
 	.byte 0
 	.byte 2
 	.byte 3

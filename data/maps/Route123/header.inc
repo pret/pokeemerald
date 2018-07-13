@@ -5,7 +5,7 @@ Route123: @ 84828E0
 	.4byte Route123_MapConnections
 	.2byte MUS_DOORO_X4
 	.2byte 39
-	.byte 38
+	.byte MAPSEC_ROUTE_123
 	.byte 0
 	.byte 2
 	.byte 3

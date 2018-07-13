@@ -5,7 +5,7 @@ DesertUnderpass: @ 8484978
 	.4byte 0x0
 	.2byte MUS_TOZAN
 	.2byte 389
-	.byte 209
+	.byte MAPSEC_DESERT_UNDERPASS
 	.byte 0
 	.byte 0
 	.byte 4

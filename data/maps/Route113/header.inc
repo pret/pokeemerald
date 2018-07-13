@@ -5,7 +5,7 @@ Route113: @ 84827C8
 	.4byte Route113_MapConnections
 	.2byte MUS_KAZANBAI
 	.2byte 29
-	.byte 28
+	.byte MAPSEC_ROUTE_113
 	.byte 0
 	.byte 2
 	.byte 3

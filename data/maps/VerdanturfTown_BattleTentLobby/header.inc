@@ -5,7 +5,7 @@ VerdanturfTown_BattleTentLobby: @ 8482E58
 	.4byte 0x0
 	.2byte MUS_B_TOWER
 	.2byte 384
-	.byte 5
+	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

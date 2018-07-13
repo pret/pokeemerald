@@ -5,7 +5,7 @@ Route104_PrototypePrettyPetalFlowerShop: @ 8485B14
 	.4byte 0x0
 	.2byte MUS_NEXTROAD
 	.2byte 117
-	.byte 19
+	.byte MAPSEC_ROUTE_104
 	.byte 0
 	.byte 0
 	.byte 8

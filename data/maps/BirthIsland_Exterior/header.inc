@@ -5,7 +5,7 @@ BirthIsland_Exterior: @ 8485794
 	.4byte 0x0
 	.2byte 65535
 	.2byte 404
-	.byte 200
+	.byte MAPSEC_BIRTH_ISLAND_2
 	.byte 0
 	.byte 0
 	.byte 8

@@ -5,7 +5,7 @@ SecretBase_YellowCave3: @ 8484C34
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
 	.2byte 212
-	.byte 86
+	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte 0
 	.byte 9

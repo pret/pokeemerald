@@ -5,7 +5,7 @@ AncientTomb: @ 8484630
 	.4byte 0x0
 	.2byte MUS_MABOROSI
 	.2byte 281
-	.byte 83
+	.byte MAPSEC_ANCIENT_TOMB
 	.byte 0
 	.byte 0
 	.byte 4

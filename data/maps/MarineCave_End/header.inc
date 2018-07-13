@@ -5,7 +5,7 @@ MarineCave_End: @ 8484A04
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 413
-	.byte 203
+	.byte MAPSEC_MARINE_CAVE
 	.byte 0
 	.byte 6
 	.byte 4

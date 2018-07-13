@@ -5,7 +5,7 @@ Route110_SeasideCyclingRoadSouthEntrance: @ 8485C9C
 	.4byte 0x0
 	.2byte MUS_FINECITY
 	.2byte 256
-	.byte 25
+	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte 0
 	.byte 8

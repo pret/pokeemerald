@@ -5,7 +5,7 @@ SlateportCity_Harbor: @ 84831D8
 	.4byte 0x0
 	.2byte MUS_FINECITY
 	.2byte 88
-	.byte 8
+	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
 	.byte 0
 	.byte 8

@@ -5,7 +5,7 @@ FortreeCity_PokemonCenter_1F: @ 8483558
 	.4byte 0x0
 	.2byte MUS_POKECEN
 	.2byte 61
-	.byte 11
+	.byte MAPSEC_FORTREE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

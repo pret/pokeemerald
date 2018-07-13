@@ -5,7 +5,7 @@ Underwater_SootopolisCity: @ 8483F4C
 	.4byte 0x0
 	.2byte MUS_DEEPDEEP
 	.2byte 130
-	.byte 54
+	.byte MAPSEC_UNDERWATER_SOOTOPOLIS
 	.byte 0
 	.byte 14
 	.byte 5

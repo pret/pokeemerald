@@ -5,7 +5,7 @@ MauvilleCity_Gym: @ 8483264
 	.4byte 0x0
 	.2byte MUS_GIM
 	.2byte 89
-	.byte 9
+	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

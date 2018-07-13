@@ -5,7 +5,7 @@ BattleFrontier_OutsideEast: @ 84852C4
 	.4byte BattleFrontier_OutsideEast_MapConnections
 	.2byte MUS_B_FRONTIER
 	.2byte 345
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 3

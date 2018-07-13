@@ -5,7 +5,7 @@ FallarborTown_PokemonCenter_1F: @ 8482DE8
 	.4byte 0x0
 	.2byte MUS_POKECEN
 	.2byte 61
-	.byte 4
+	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

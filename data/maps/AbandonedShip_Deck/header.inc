@@ -5,7 +5,7 @@ AbandonedShip_Deck: @ 84844A8
 	.4byte 0x0
 	.2byte MUS_DAN02
 	.2byte 186
-	.byte 61
+	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte 0
 	.byte 4

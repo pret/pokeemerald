@@ -5,7 +5,7 @@ RustboroCity_Mart: @ 8483408
 	.4byte 0x0
 	.2byte MUS_FRIENDLY
 	.2byte 63
-	.byte 10
+	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte 0
 	.byte 8

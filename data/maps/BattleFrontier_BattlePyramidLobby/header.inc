@@ -5,7 +5,7 @@ BattleFrontier_BattlePyramidLobby: @ 84853F8
 	.4byte 0x0
 	.2byte MUS_PYRAMID
 	.2byte 360
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

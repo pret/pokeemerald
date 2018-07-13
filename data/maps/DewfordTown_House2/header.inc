@@ -5,7 +5,7 @@ DewfordTown_House2: @ 8482C98
 	.4byte 0x0
 	.2byte MUS_HIGHTOWN
 	.2byte 67
-	.byte 2
+	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

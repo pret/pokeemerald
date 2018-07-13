@@ -5,7 +5,7 @@ CaveOfOrigin_UnusedRubySapphireMap3: @ 848433C
 	.4byte 0x0
 	.2byte MUS_DAN03
 	.2byte 161
-	.byte 72
+	.byte MAPSEC_CAVE_OF_ORIGIN
 	.byte 1
 	.byte 6
 	.byte 4

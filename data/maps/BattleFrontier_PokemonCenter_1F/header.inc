@@ -5,7 +5,7 @@ BattleFrontier_PokemonCenter_1F: @ 8485708
 	.4byte 0x0
 	.2byte MUS_POKECEN
 	.2byte 61
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

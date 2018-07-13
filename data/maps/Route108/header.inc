@@ -5,7 +5,7 @@ Route108: @ 848273C
 	.4byte Route108_MapConnections
 	.2byte MUS_NEXTROAD
 	.2byte 24
-	.byte 23
+	.byte MAPSEC_ROUTE_108
 	.byte 0
 	.byte 2
 	.byte 3

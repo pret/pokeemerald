@@ -5,7 +5,7 @@ Route102: @ 8482694
 	.4byte Route102_MapConnections
 	.2byte MUS_DOORO1
 	.2byte 18
-	.byte 17
+	.byte MAPSEC_ROUTE_102
 	.byte 0
 	.byte 2
 	.byte 3

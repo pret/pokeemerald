@@ -5,7 +5,7 @@ ArtisanCave_1F: @ 84849B0
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 401
-	.byte 202
+	.byte MAPSEC_ARTISAN_CAVE
 	.byte 0
 	.byte 0
 	.byte 4

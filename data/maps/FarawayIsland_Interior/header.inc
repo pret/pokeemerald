@@ -5,7 +5,7 @@ FarawayIsland_Interior: @ 8485778
 	.4byte 0x0
 	.2byte MUS_DAN02
 	.2byte 403
-	.byte 201
+	.byte MAPSEC_FARAWAY_ISLAND
 	.byte 0
 	.byte 11
 	.byte 8

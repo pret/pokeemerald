@@ -5,7 +5,7 @@ SSTidalLowerDeck: @ 8484F28
 	.4byte 0x0
 	.2byte MUS_M_BOAT
 	.2byte 278
-	.byte 87
+	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte 0
 	.byte 8

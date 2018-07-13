@@ -5,7 +5,7 @@ BattleFrontier_BattlePikeRandomRoom1: @ 8485548
 	.4byte 0x0
 	.2byte MUS_B_TUBE
 	.2byte 352
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte 0
 	.byte 8

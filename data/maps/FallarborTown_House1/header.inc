@@ -5,7 +5,7 @@ FallarborTown_House1: @ 8482E20
 	.4byte 0x0
 	.2byte MUS_TONEKUSA
 	.2byte 59
-	.byte 4
+	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

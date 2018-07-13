@@ -5,7 +5,7 @@ RustboroCity_Flat2_3F: @ 84834E8
 	.4byte 0x0
 	.2byte MUS_GOTOWN
 	.2byte 296
-	.byte 10
+	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte 0
 	.byte 8
