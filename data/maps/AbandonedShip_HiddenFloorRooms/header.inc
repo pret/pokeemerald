@@ -7,7 +7,7 @@ AbandonedShip_HiddenFloorRooms: @ 84845F8
 	.2byte 310
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
-	.byte 11
+	.byte WEATHER_SHADE
 	.byte 4
 	.2byte 0
 	.byte 7

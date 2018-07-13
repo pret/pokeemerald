@@ -7,7 +7,7 @@ Route127: @ 8482950
 	.2byte 43
 	.byte MAPSEC_ROUTE_127
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 6
 	.2byte 0
 	.byte 13

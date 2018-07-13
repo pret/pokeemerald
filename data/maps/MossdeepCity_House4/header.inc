@@ -7,7 +7,7 @@ MossdeepCity_House4: @ 848399C
 	.2byte 80
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

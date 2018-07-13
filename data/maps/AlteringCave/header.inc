@@ -7,7 +7,7 @@ AlteringCave: @ 8484A58
 	.2byte 420
 	.byte MAPSEC_ALTERING_CAVE_2
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

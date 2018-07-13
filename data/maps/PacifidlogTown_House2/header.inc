@@ -7,7 +7,7 @@ PacifidlogTown_House2: @ 8482FA8
 	.2byte 78
 	.byte MAPSEC_PACIFIDLOG_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

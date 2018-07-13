@@ -7,7 +7,7 @@ FortreeCity_House1: @ 8483520
 	.2byte 99
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ SlateportCity_SternsShipyard_2F: @ 84830F8
 	.2byte 82
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

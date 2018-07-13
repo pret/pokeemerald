@@ -7,7 +7,7 @@ LilycoveCity_CoveLilyMotel_1F: @ 8483638
 	.2byte 299
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

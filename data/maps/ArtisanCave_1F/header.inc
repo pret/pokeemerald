@@ -7,7 +7,7 @@ ArtisanCave_1F: @ 84849B0
 	.2byte 401
 	.byte MAPSEC_ARTISAN_CAVE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

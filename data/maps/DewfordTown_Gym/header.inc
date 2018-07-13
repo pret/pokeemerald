@@ -7,7 +7,7 @@ DewfordTown_Gym: @ 8482C60
 	.2byte 65
 	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

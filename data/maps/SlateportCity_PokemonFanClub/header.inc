@@ -7,7 +7,7 @@ SlateportCity_PokemonFanClub: @ 8483184
 	.2byte 85
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

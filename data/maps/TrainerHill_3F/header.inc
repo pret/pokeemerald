@@ -7,7 +7,7 @@ TrainerHill_3F: @ 8485820
 	.2byte 417
 	.byte MAPSEC_TRAINER_HILL
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 4

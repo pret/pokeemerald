@@ -7,7 +7,7 @@ BattlePyramidSquare11: @ 8485078
 	.2byte 372
 	.byte MAPSEC_DYNAMIC
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

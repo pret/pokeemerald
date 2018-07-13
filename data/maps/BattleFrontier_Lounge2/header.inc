@@ -7,7 +7,7 @@ BattleFrontier_Lounge2: @ 84855F0
 	.2byte 397
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

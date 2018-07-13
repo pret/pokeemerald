@@ -7,7 +7,7 @@ MauvilleCity_BikeShop: @ 8483280
 	.2byte 90
 	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

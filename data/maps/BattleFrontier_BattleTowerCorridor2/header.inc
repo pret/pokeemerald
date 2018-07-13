@@ -7,7 +7,7 @@ BattleFrontier_BattleTowerCorridor2: @ 84852FC
 	.2byte 391
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

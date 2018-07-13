@@ -7,7 +7,7 @@ LavaridgeTown_Gym_B1F: @ 8482CEC
 	.2byte 70
 	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
-	.byte 6
+	.byte WEATHER_FOG_1
 	.byte 8
 	.2byte 0
 	.byte 0

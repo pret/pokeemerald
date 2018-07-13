@@ -7,7 +7,7 @@ SecretBase_RedCave4: @ 8484C88
 	.2byte 215
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 9
 	.2byte 0
 	.byte 12

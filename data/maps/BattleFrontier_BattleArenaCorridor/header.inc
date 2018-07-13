@@ -7,7 +7,7 @@ BattleFrontier_BattleArenaCorridor: @ 8485468
 	.2byte 355
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

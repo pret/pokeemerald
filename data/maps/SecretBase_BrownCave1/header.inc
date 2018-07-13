@@ -7,7 +7,7 @@ SecretBase_BrownCave1: @ 8484AAC
 	.2byte 198
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 9
 	.2byte 0
 	.byte 12

@@ -7,7 +7,7 @@ LittlerootTown: @ 84825B4
 	.2byte 10
 	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 1
 	.2byte 0
 	.byte 13

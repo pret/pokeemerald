@@ -7,7 +7,7 @@ NavelRock_Exterior: @ 8485874
 	.2byte 421
 	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 13

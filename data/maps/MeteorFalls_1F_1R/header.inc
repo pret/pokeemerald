@@ -7,7 +7,7 @@ MeteorFalls_1F_1R: @ 8483EC0
 	.2byte 125
 	.byte MAPSEC_METEOR_FALLS
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

@@ -7,7 +7,7 @@ Route132: @ 84829DC
 	.2byte 48
 	.byte MAPSEC_ROUTE_132
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 6
 	.2byte 0
 	.byte 13

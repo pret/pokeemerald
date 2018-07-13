@@ -7,7 +7,7 @@ PacifidlogTown_PokemonCenter_2F: @ 8482F70
 	.2byte 62
 	.byte MAPSEC_PACIFIDLOG_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

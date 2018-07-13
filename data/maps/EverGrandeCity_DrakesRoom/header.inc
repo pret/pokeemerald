@@ -7,7 +7,7 @@ EverGrandeCity_DrakesRoom: @ 8483C20
 	.2byte 114
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

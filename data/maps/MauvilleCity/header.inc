@@ -7,7 +7,7 @@ MauvilleCity: @ 84824F0
 	.2byte 3
 	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 2
 	.2byte 0
 	.byte 13

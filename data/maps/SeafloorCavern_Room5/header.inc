@@ -7,7 +7,7 @@ SeafloorCavern_Room5: @ 8484240
 	.2byte 152
 	.byte MAPSEC_SEAFLOOR_CAVERN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

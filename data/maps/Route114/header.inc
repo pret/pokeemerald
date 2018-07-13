@@ -7,7 +7,7 @@ Route114: @ 84827E4
 	.2byte 30
 	.byte MAPSEC_ROUTE_114
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 3
 	.2byte 0
 	.byte 13

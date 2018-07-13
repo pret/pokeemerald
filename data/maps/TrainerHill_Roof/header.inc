@@ -7,7 +7,7 @@ TrainerHill_Roof: @ 8485858
 	.2byte 419
 	.byte MAPSEC_TRAINER_HILL
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 4

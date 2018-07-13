@@ -7,7 +7,7 @@ Route123_BerryMastersHouse: @ 8485CD4
 	.2byte 60
 	.byte MAPSEC_ROUTE_123
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ Underwater6: @ 8482ABC
 	.2byte 410
 	.byte MAPSEC_UNDERWATER_TERRA_CAVE
 	.byte 0
-	.byte 14
+	.byte WEATHER_BUBBLES
 	.byte 5
 	.2byte 0
 	.byte 13

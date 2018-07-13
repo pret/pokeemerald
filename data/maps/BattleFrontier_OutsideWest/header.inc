@@ -7,7 +7,7 @@ BattleFrontier_OutsideWest: @ 84851AC
 	.2byte 265
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 3
 	.2byte 0
 	.byte 13

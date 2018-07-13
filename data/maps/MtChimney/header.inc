@@ -7,7 +7,7 @@ MtChimney: @ 8484010
 	.2byte 136
 	.byte MAPSEC_MT_CHIMNEY
 	.byte 0
-	.byte 7
+	.byte WEATHER_ASH
 	.byte 3
 	.2byte 0
 	.byte 13

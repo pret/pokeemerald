@@ -7,7 +7,7 @@ EverGrandeCity_ChampionsRoom: @ 8483C3C
 	.2byte 115
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

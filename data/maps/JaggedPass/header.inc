@@ -7,7 +7,7 @@ JaggedPass: @ 848402C
 	.2byte 292
 	.byte MAPSEC_JAGGED_PASS
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 3
 	.2byte 0
 	.byte 13

@@ -7,7 +7,7 @@ LavaridgeTown_HerbShop: @ 8482CB4
 	.2byte 68
 	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ SkyPillar_Entrance: @ 848472C
 	.2byte 320
 	.byte MAPSEC_SKY_PILLAR
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

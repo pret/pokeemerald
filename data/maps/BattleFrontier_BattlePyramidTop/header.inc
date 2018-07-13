@@ -7,7 +7,7 @@ BattleFrontier_BattlePyramidTop: @ 8485430
 	.2byte 378
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 4

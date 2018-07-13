@@ -7,7 +7,7 @@ SouthernIsland_Exterior: @ 8485238
 	.2byte 290
 	.byte MAPSEC_SOUTHERN_ISLAND
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 3
 	.2byte 0
 	.byte 13

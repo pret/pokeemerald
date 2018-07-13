@@ -7,7 +7,7 @@ TradeCenter: @ 8484D4C
 	.2byte 222
 	.byte MAPSEC_DYNAMIC
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

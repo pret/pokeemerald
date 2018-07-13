@@ -7,7 +7,7 @@ FallarborTown_House2: @ 8482E3C
 	.2byte 60
 	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

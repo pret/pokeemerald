@@ -7,7 +7,7 @@ FortreeCity_Mart: @ 8483590
 	.2byte 63
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

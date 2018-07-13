@@ -7,7 +7,7 @@ Route133: @ 84829F8
 	.2byte 49
 	.byte MAPSEC_ROUTE_133
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 6
 	.2byte 0
 	.byte 13

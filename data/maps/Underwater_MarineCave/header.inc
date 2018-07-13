@@ -7,7 +7,7 @@ Underwater_MarineCave: @ 84849CC
 	.2byte 406
 	.byte MAPSEC_UNDERWATER_MARINE_CAVE
 	.byte 0
-	.byte 14
+	.byte WEATHER_BUBBLES
 	.byte 5
 	.2byte 0
 	.byte 13

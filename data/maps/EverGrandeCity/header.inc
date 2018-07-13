@@ -7,7 +7,7 @@ EverGrandeCity: @ 8482598
 	.2byte 9
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 2
 	.2byte 0
 	.byte 13

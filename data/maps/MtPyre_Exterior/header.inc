@@ -7,7 +7,7 @@ MtPyre_Exterior: @ 848410C
 	.2byte 302
 	.byte MAPSEC_MT_PYRE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 3
 	.2byte 0
 	.byte 13

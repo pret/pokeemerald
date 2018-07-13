@@ -7,7 +7,7 @@ Route105: @ 84826E8
 	.2byte 21
 	.byte MAPSEC_ROUTE_105
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 3
 	.2byte 0
 	.byte 13

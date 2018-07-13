@@ -7,7 +7,7 @@ LilycoveCity_DepartmentStore_3F: @ 8483830
 	.2byte 259
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ NavelRock_Harbor: @ 8485890
 	.2byte 405
 	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

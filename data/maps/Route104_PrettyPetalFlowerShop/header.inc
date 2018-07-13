@@ -7,7 +7,7 @@ Route104_PrettyPetalFlowerShop: @ 8483D8C
 	.2byte 117
 	.byte MAPSEC_ROUTE_104
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

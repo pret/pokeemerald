@@ -7,7 +7,7 @@ FortreeCity_Gym: @ 848353C
 	.2byte 100
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

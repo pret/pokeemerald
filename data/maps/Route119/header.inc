@@ -7,7 +7,7 @@ Route119: @ 8482870
 	.2byte 35
 	.byte MAPSEC_ROUTE_119
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 3
 	.2byte 0
 	.byte 13

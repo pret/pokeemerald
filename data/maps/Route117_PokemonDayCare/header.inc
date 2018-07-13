@@ -7,7 +7,7 @@ Route117_PokemonDayCare: @ 8483E88
 	.2byte 123
 	.byte MAPSEC_ROUTE_117
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

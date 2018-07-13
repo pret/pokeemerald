@@ -7,7 +7,7 @@ MirageTower_4F: @ 848495C
 	.2byte 388
 	.byte MAPSEC_MIRAGE_TOWER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

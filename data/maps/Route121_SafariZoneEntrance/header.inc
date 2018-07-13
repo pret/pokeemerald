@@ -7,7 +7,7 @@ Route121_SafariZoneEntrance: @ 8483EA4
 	.2byte 124
 	.byte MAPSEC_ROUTE_121
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

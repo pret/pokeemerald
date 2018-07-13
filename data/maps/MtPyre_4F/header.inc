@@ -7,7 +7,7 @@ MtPyre_4F: @ 84840B8
 	.2byte 140
 	.byte MAPSEC_MT_PYRE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 8

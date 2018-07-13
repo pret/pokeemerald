@@ -7,7 +7,7 @@ OldaleTown_House1: @ 8482B80
 	.2byte 59
 	.byte MAPSEC_OLDALE_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

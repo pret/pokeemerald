@@ -7,7 +7,7 @@ BattleFrontier_BattlePyramidLobby: @ 84853F8
 	.2byte 360
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

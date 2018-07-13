@@ -7,7 +7,7 @@ OldaleTown_PokemonCenter_2F: @ 8482BD4
 	.2byte 62
 	.byte MAPSEC_OLDALE_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

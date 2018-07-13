@@ -7,7 +7,7 @@ LinkContestRoom4: @ 8484E9C
 	.2byte 234
 	.byte MAPSEC_DYNAMIC
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

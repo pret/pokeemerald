@@ -7,7 +7,7 @@ Route109_SeashoreHouse: @ 8485B30
 	.2byte 243
 	.byte MAPSEC_ROUTE_109
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

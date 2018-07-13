@@ -7,7 +7,7 @@ RustboroCity_PokemonCenter_1F: @ 84833D0
 	.2byte 61
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

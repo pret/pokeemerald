@@ -7,7 +7,7 @@ PetalburgWoods: @ 8483FF4
 	.2byte 135
 	.byte MAPSEC_PETALBURG_WOODS
 	.byte 0
-	.byte 11
+	.byte WEATHER_SHADE
 	.byte 3
 	.2byte 0
 	.byte 13

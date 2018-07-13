@@ -7,7 +7,7 @@ GraniteCave_StevensRoom: @ 8483FD8
 	.2byte 288
 	.byte MAPSEC_GRANITE_CAVE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

@@ -7,7 +7,7 @@ VerdanturfTown: @ 8482640
 	.2byte 15
 	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 1
 	.2byte 0
 	.byte 13

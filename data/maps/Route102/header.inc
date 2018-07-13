@@ -7,7 +7,7 @@ Route102: @ 8482694
 	.2byte 18
 	.byte MAPSEC_ROUTE_102
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 3
 	.2byte 0
 	.byte 13

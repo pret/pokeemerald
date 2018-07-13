@@ -7,7 +7,7 @@ Route134: @ 8482A14
 	.2byte 50
 	.byte MAPSEC_ROUTE_134
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 6
 	.2byte 0
 	.byte 13

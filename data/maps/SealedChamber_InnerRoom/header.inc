@@ -7,7 +7,7 @@ SealedChamber_InnerRoom: @ 84846A0
 	.2byte 304
 	.byte MAPSEC_SEALED_CHAMBER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

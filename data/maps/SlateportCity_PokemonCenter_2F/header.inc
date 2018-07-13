@@ -7,7 +7,7 @@ SlateportCity_PokemonCenter_2F: @ 848322C
 	.2byte 62
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

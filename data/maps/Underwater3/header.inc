@@ -7,7 +7,7 @@ Underwater3: @ 8482A68
 	.2byte 52
 	.byte MAPSEC_UNDERWATER_126
 	.byte 0
-	.byte 14
+	.byte WEATHER_BUBBLES
 	.byte 5
 	.2byte 0
 	.byte 13

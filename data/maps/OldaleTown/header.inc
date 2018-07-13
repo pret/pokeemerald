@@ -7,7 +7,7 @@ OldaleTown: @ 84825D0
 	.2byte 11
 	.byte MAPSEC_OLDALE_TOWN
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 1
 	.2byte 0
 	.byte 13

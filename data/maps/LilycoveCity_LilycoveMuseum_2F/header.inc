@@ -7,7 +7,7 @@ LilycoveCity_LilycoveMuseum_2F: @ 848368C
 	.2byte 104
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

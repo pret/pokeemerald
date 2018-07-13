@@ -7,7 +7,7 @@ VerdanturfTown_Mart: @ 8482EAC
 	.2byte 63
 	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

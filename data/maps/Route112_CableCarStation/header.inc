@@ -7,7 +7,7 @@ Route112_CableCarStation: @ 8483DE0
 	.2byte 118
 	.byte MAPSEC_ROUTE_112
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

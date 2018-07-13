@@ -7,7 +7,7 @@ TrainerHill_Elevator: @ 8485ADC
 	.2byte 266
 	.byte MAPSEC_TRAINER_HILL
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

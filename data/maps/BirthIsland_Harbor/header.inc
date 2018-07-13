@@ -7,7 +7,7 @@ BirthIsland_Harbor: @ 84857B0
 	.2byte 405
 	.byte MAPSEC_BIRTH_ISLAND_2
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ Route104: @ 84826CC
 	.2byte 20
 	.byte MAPSEC_ROUTE_104
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 3
 	.2byte 0
 	.byte 13

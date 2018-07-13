@@ -7,7 +7,7 @@ NavelRock_Top: @ 8485970
 	.2byte 423
 	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
-	.byte 11
+	.byte WEATHER_SHADE
 	.byte 4
 	.2byte 0
 	.byte 12

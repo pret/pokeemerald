@@ -7,7 +7,7 @@ VerdanturfTown_PokemonCenter_2F: @ 8482EE4
 	.2byte 62
 	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

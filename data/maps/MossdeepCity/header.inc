@@ -7,7 +7,7 @@ MossdeepCity: @ 8482560
 	.2byte 7
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 2
 	.2byte 0
 	.byte 13

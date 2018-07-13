@@ -7,7 +7,7 @@ NavelRock_Fork: @ 84858E4
 	.2byte 428
 	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 12

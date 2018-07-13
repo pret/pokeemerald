@@ -7,7 +7,7 @@ DesertRuins: @ 8483F68
 	.2byte 131
 	.byte MAPSEC_DESERT_RUINS
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

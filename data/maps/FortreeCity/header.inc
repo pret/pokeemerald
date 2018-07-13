@@ -7,7 +7,7 @@ FortreeCity: @ 8482528
 	.2byte 5
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 2
 	.2byte 0
 	.byte 13

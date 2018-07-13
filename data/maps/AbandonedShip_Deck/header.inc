@@ -7,7 +7,7 @@ AbandonedShip_Deck: @ 84844A8
 	.2byte 186
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

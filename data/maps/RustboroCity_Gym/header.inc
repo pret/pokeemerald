@@ -7,7 +7,7 @@ RustboroCity_Gym: @ 8483398
 	.2byte 94
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

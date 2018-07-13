@@ -7,7 +7,7 @@ SlateportCity_BattleTentLobby: @ 8483114
 	.2byte 384
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

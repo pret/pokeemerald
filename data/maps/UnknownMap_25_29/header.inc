@@ -7,7 +7,7 @@ UnknownMap_25_29: @ 8484DBC
 	.2byte 226
 	.byte MAPSEC_DYNAMIC
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

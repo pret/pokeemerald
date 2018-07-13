@@ -7,7 +7,7 @@ SafariZone_Southeast: @ 84852A8
 	.2byte 395
 	.byte MAPSEC_SAFARI_ZONE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 3
 	.2byte 0
 	.byte 13

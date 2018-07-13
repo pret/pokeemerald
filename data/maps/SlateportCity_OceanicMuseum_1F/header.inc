@@ -7,7 +7,7 @@ SlateportCity_OceanicMuseum_1F: @ 84831A0
 	.2byte 86
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

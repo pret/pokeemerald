@@ -7,7 +7,7 @@ FarawayIsland_Entrance: @ 848575C
 	.2byte 402
 	.byte MAPSEC_FARAWAY_ISLAND
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 13

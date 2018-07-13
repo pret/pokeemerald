@@ -7,7 +7,7 @@ NavelRock_Down02: @ 84859A8
 	.2byte 426
 	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 12

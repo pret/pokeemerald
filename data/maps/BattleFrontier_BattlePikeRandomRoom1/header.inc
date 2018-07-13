@@ -7,7 +7,7 @@ BattleFrontier_BattlePikeRandomRoom1: @ 8485548
 	.2byte 352
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 4

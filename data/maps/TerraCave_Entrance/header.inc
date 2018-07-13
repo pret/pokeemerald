@@ -7,7 +7,7 @@ TerraCave_Entrance: @ 8484A20
 	.2byte 408
 	.byte MAPSEC_TERRA_CAVE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

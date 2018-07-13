@@ -7,7 +7,7 @@ LilycoveCity_House4: @ 84837DC
 	.2byte 59
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

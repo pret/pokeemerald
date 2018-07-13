@@ -7,7 +7,7 @@ AquaHideout_UnusedRubyMap1: @ 84846D8
 	.2byte 316
 	.byte MAPSEC_AQUA_HIDEOUT
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

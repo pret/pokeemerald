@@ -7,7 +7,7 @@ MarineCave_End: @ 8484A04
 	.2byte 413
 	.byte MAPSEC_MARINE_CAVE
 	.byte 0
-	.byte 6
+	.byte WEATHER_FOG_1
 	.byte 4
 	.2byte 0
 	.byte 14

@@ -7,7 +7,7 @@ Route131: @ 84829C0
 	.2byte 47
 	.byte MAPSEC_ROUTE_131
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 6
 	.2byte 0
 	.byte 13

@@ -7,7 +7,7 @@ Route110_TrickHouseEntrance: @ 8485B4C
 	.2byte 244
 	.byte MAPSEC_ROUTE_110
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

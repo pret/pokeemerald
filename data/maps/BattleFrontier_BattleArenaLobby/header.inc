@@ -7,7 +7,7 @@ BattleFrontier_BattleArenaLobby: @ 848544C
 	.2byte 354
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

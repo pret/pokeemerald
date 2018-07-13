@@ -7,7 +7,7 @@ PetalburgCity: @ 84824B8
 	.2byte 1
 	.byte MAPSEC_PETALBURG_CITY
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 2
 	.2byte 0
 	.byte 13

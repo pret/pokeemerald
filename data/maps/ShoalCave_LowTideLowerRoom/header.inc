@@ -7,7 +7,7 @@ ShoalCave_LowTideLowerRoom: @ 848441C
 	.2byte 167
 	.byte MAPSEC_SHOAL_CAVE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

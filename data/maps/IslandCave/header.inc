@@ -7,7 +7,7 @@ IslandCave: @ 8484614
 	.2byte 280
 	.byte MAPSEC_ISLAND_CAVE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

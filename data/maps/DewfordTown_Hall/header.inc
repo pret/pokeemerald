@@ -7,7 +7,7 @@ DewfordTown_Hall: @ 8482C7C
 	.2byte 66
 	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

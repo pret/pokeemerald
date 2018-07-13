@@ -7,7 +7,7 @@ Route113_GlassWorkshop: @ 8485CB8
 	.2byte 67
 	.byte MAPSEC_ROUTE_113
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ VerdanturfTown_WandasHouse: @ 8482F00
 	.2byte 76
 	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

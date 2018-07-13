@@ -7,7 +7,7 @@ LittlerootTown_MaysHouse_1F: @ 8482B2C
 	.2byte 56
 	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

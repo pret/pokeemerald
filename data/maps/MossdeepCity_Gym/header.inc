@@ -7,7 +7,7 @@ MossdeepCity_Gym: @ 84838BC
 	.2byte 108
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

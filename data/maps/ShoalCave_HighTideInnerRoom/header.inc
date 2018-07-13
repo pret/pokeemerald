@@ -7,7 +7,7 @@ ShoalCave_HighTideInnerRoom: @ 8484454
 	.2byte 169
 	.byte MAPSEC_SHOAL_CAVE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 15

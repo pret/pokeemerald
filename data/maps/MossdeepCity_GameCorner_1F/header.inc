@@ -7,7 +7,7 @@ MossdeepCity_GameCorner_1F: @ 84839F0
 	.2byte 305
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

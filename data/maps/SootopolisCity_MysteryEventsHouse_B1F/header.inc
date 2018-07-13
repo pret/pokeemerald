@@ -7,7 +7,7 @@ SootopolisCity_MysteryEventsHouse_B1F: @ 8483BB0
 	.2byte 440
 	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ DewfordTown_PokemonCenter_2F: @ 8482C44
 	.2byte 62
 	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0
