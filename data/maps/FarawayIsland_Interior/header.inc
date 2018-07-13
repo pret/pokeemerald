@@ -8,7 +8,7 @@ FarawayIsland_Interior: @ 8485778
 	.byte MAPSEC_FARAWAY_ISLAND
 	.byte 0
 	.byte WEATHER_SHADE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 13
 	.byte 0

@@ -8,7 +8,7 @@ CaveOfOrigin_B1F: @ 8484358
 	.byte MAPSEC_CAVE_OF_ORIGIN
 	.byte 0
 	.byte WEATHER_FOG_1
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 14
 	.byte 0

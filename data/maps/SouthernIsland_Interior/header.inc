@@ -8,7 +8,7 @@ SouthernIsland_Interior: @ 8485254
 	.byte MAPSEC_SOUTHERN_ISLAND
 	.byte 0
 	.byte WEATHER_SHADE
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 13
 	.byte 0

@@ -8,7 +8,7 @@ MossdeepCity_StevensHouse: @ 8483980
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

@@ -8,7 +8,7 @@ CaveOfOrigin_UnusedRubySapphireMap2: @ 8484320
 	.byte MAPSEC_CAVE_OF_ORIGIN
 	.byte 1
 	.byte WEATHER_FOG_1
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
 	.byte 0

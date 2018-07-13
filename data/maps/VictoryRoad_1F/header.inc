@@ -8,7 +8,7 @@ VictoryRoad_1F: @ 8484374
 	.byte MAPSEC_VICTORY_ROAD
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
 	.byte 0

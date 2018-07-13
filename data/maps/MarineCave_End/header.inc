@@ -8,7 +8,7 @@ MarineCave_End: @ 8484A04
 	.byte MAPSEC_MARINE_CAVE
 	.byte 0
 	.byte WEATHER_FOG_1
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 14
 	.byte 0

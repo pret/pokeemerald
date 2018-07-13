@@ -8,7 +8,7 @@ MagmaHideout_2F_1R: @ 8484844
 	.byte MAPSEC_MAGMA_HIDEOUT
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
 	.byte 0

@@ -8,7 +8,7 @@ MarineCave_Entrance: @ 84849E8
 	.byte MAPSEC_MARINE_CAVE
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 14
 	.byte 0

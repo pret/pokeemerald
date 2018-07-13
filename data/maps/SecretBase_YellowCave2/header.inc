@@ -8,7 +8,7 @@ SecretBase_YellowCave2: @ 8484B8C
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 9
+	.byte MAP_TYPE_SECRET_BASE
 	.2byte 0
 	.byte 12
 	.byte 8

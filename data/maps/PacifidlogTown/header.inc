@@ -8,7 +8,7 @@ PacifidlogTown: @ 848265C
 	.byte MAPSEC_PACIFIDLOG_TOWN
 	.byte 0
 	.byte WEATHER_SUNNY
-	.byte 1
+	.byte MAP_TYPE_TOWN
 	.2byte 0
 	.byte 13
 	.byte 0

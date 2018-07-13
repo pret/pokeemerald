@@ -8,7 +8,7 @@ DewfordTown_House2: @ 8482C98
 	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

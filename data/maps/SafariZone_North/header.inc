@@ -8,7 +8,7 @@ SafariZone_North: @ 8485158
 	.byte MAPSEC_SAFARI_ZONE
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 13
 	.byte 0

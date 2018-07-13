@@ -8,7 +8,7 @@ SkyPillar_Top: @ 848480C
 	.byte MAPSEC_SKY_PILLAR
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 12
 	.byte 0

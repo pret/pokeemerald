@@ -8,7 +8,7 @@ Underwater7: @ 8482AD8
 	.byte MAPSEC_UNDERWATER_UNK1
 	.byte 0
 	.byte WEATHER_BUBBLES
-	.byte 5
+	.byte MAP_TYPE_UNDERWATER
 	.2byte 0
 	.byte 13
 	.byte 0

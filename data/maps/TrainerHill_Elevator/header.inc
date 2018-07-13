@@ -8,7 +8,7 @@ TrainerHill_Elevator: @ 8485ADC
 	.byte MAPSEC_TRAINER_HILL
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

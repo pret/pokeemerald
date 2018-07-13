@@ -8,7 +8,7 @@ DesertUnderpass: @ 8484978
 	.byte MAPSEC_DESERT_UNDERPASS
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
 	.byte 0

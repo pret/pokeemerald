@@ -8,7 +8,7 @@ MauvilleCity_Mart: @ 8483328
 	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

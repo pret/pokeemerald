@@ -8,7 +8,7 @@ LittlerootTown_BrendansHouse_2F: @ 8482B10
 	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

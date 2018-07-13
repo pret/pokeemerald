@@ -8,7 +8,7 @@ Route111: @ 8482790
 	.byte MAPSEC_ROUTE_111
 	.byte 0
 	.byte WEATHER_SUNNY
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 13
 	.byte 0

@@ -32,6 +32,7 @@
 #include "overworld.h"
 #include "field_weather.h"
 #include "gym_leader_rematch.h"
+#include "constants/map_types.h"
 
 enum
 {

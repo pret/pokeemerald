@@ -8,7 +8,7 @@ RecordCorner: @ 8484D68
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

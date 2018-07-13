@@ -8,7 +8,7 @@ FallarborTown_PokemonCenter_1F: @ 8482DE8
 	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

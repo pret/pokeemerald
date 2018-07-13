@@ -15,6 +15,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/map_types.h"
 
 // static functions
 static void task08_080C9820(u8 taskId);

@@ -39,6 +39,7 @@
 #include "link.h"
 #include "tv.h"
 #include "secret_base.h"
+#include "constants/map_types.h"
 
 extern void mapldr_default(void);
 

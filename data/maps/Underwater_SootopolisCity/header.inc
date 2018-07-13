@@ -8,7 +8,7 @@ Underwater_SootopolisCity: @ 8483F4C
 	.byte MAPSEC_UNDERWATER_SOOTOPOLIS
 	.byte 0
 	.byte WEATHER_BUBBLES
-	.byte 5
+	.byte MAP_TYPE_UNDERWATER
 	.2byte 0
 	.byte 13
 	.byte 0

@@ -8,7 +8,7 @@ SkyPillar_Outside: @ 8484748
 	.byte MAPSEC_SKY_PILLAR
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 13
 	.byte 0

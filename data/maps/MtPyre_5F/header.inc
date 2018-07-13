@@ -8,7 +8,7 @@ MtPyre_5F: @ 84840D4
 	.byte MAPSEC_MT_PYRE
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 8
 	.byte 0

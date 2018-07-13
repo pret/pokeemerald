@@ -8,7 +8,7 @@ JaggedPass: @ 848402C
 	.byte MAPSEC_JAGGED_PASS
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 13
 	.byte 0
