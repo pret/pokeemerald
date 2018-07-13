@@ -11,5 +11,5 @@ LittlerootTown_BrendansHouse_2F: @ 8482B10
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

@@ -11,5 +11,5 @@ FortreeCity: @ 8482528
 	.byte MAP_TYPE_CITY
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

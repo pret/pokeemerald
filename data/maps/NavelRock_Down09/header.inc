@@ -11,5 +11,5 @@ NavelRock_Down09: @ 8485A6C
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 12
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

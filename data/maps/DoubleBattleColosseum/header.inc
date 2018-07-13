@@ -11,5 +11,5 @@ DoubleBattleColosseum: @ 8484D84
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 8
+	.byte MAP_BATTLE_SCENE_FRONTIER
 

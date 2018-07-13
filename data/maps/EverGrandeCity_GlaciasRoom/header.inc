@@ -11,5 +11,5 @@ EverGrandeCity_GlaciasRoom: @ 8483C04
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 6
+	.byte MAP_BATTLE_SCENE_GLACIA
 

@@ -11,5 +11,5 @@ SlateportCity_SternsShipyard_1F: @ 84830DC
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

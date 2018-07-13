@@ -11,5 +11,5 @@ Underwater_SootopolisCity: @ 8483F4C
 	.byte MAP_TYPE_UNDERWATER
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

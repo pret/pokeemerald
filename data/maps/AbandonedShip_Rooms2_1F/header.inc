@@ -11,5 +11,5 @@ AbandonedShip_Rooms2_1F: @ 8484588
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

@@ -11,5 +11,5 @@ NavelRock_Fork: @ 84858E4
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 12
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

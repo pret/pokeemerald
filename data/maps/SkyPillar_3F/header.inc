@@ -11,5 +11,5 @@ SkyPillar_3F: @ 848479C
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

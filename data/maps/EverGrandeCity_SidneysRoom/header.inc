@@ -11,5 +11,5 @@ EverGrandeCity_SidneysRoom: @ 8483BCC
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 4
+	.byte MAP_BATTLE_SCENE_SIDNEY
 

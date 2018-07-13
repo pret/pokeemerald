@@ -11,5 +11,5 @@ SecretBase_RedCave4: @ 8484C88
 	.byte MAP_TYPE_SECRET_BASE
 	.2byte 0
 	.byte 12
-	.byte 8
+	.byte MAP_BATTLE_SCENE_FRONTIER
 

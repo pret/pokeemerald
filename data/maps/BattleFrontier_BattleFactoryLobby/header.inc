@@ -11,5 +11,5 @@ BattleFrontier_BattleFactoryLobby: @ 84854A0
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

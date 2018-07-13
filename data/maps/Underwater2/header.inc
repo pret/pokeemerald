@@ -11,5 +11,5 @@ Underwater2: @ 8482A4C
 	.byte MAP_TYPE_UNDERWATER
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

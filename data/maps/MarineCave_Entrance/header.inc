@@ -11,5 +11,5 @@ MarineCave_Entrance: @ 84849E8
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 14
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 
