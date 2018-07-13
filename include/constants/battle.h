@@ -137,8 +137,8 @@
 #define STATUS3_ON_AIR                  0x40
 #define STATUS3_UNDERGROUND             0x80
 #define STATUS3_MINIMIZED               0x100
-#define STATUS3_ROOTED                  0x400
 #define STATUS3_CHARGED_UP              0x200
+#define STATUS3_ROOTED                  0x400
 #define STATUS3_YAWN                    0x1800  // two bits
 #define STATUS3_IMPRISONED_OTHERS       0x2000
 #define STATUS3_GRUDGE                  0x4000

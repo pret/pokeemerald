@@ -1520,3 +1520,9 @@ void BtlController_EmitCmd55(u8 bufferId, u8 battleOutcome)
     sBattleBuffersTransferData[5] = sBattleBuffersTransferData[4] = sub_81850DC(&sBattleBuffersTransferData[6]);
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, sBattleBuffersTransferData[4] + 6);
 }
+
+void BtlController_EmitDebugMenu(u8 bufferId)
+{
+    sBattleBuffersTransferData[0] = CONTROLLER_DEBUGMENU;
+    PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 1);
+}

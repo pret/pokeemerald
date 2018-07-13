@@ -10,4 +10,4 @@ u16 sub_818D8F0(u16 spriteId);
 u16 sub_818D938(u16 species, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId);
 u8 sub_818D97C(u8 a0, u8 a1);
 
-#endif //GUARD_BATTLE_DOME_CARDS_H
+#endif // GUARD_BATTLE_DOME_CARDS_H
