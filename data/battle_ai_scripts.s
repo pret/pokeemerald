@@ -570,7 +570,7 @@ AI_CBM_Refresh: @ 82DC713
 	end
 
 AI_CBM_MudSport: @ 82DC71E
-	if_status3 AI_USER, STATUS3_MUDSPORT, Score_Minus10
+	if_field_status STATUS_FIELD_MUDSPORT, Score_Minus10
 	end
 
 AI_CBM_Tickle: @ 82DC729
@@ -589,7 +589,7 @@ AI_CBM_BulkUp: @ 82DC74B
 	end
 
 AI_CBM_WaterSport: @ 82DC75C
-	if_status3 AI_USER, STATUS3_WATERSPORT, Score_Minus10
+	if_field_status STATUS_FIELD_WATERSPORT, Score_Minus10
 	end
 
 AI_CBM_CalmMind: @ 82DC767

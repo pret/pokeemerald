@@ -473,8 +473,10 @@
 	.word \jumpptr
 	.endm
 
-	.macro nullsub_53
+	.macro if_field_status flag jumpptr
 	.byte 0x53
+	.word \flag
+	.word \jumpptr
 	.endm
 
 	.macro nullsub_54

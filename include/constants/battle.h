@@ -143,11 +143,14 @@
 #define STATUS3_IMPRISONED_OTHERS       0x2000
 #define STATUS3_GRUDGE                  0x4000
 #define STATUS3_CANT_SCORE_A_CRIT       0x8000
-// #define STATUS3_MUDSPORT                0x10000
-// #define STATUS3_WATERSPORT              0x20000
+#define STATUS3_GASTRO_ACID             0x10000
+#define STATUS3_EMBARGO                 0x20000
 #define STATUS3_UNDERWATER              0x40000
 #define STATUS3_INTIMIDATE_POKES        0x80000
 #define STATUS3_TRACE                   0x100000
+#define STATUS3_SMACKED_DOWN            0x200000
+#define STATUS3_ME_FIRST                0x400000
+#define STATUS3_TELEKINESIS             0x800000
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.

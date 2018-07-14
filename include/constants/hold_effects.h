@@ -97,5 +97,13 @@
 #define HOLD_EFFECT_DESTINY_KNOT   91
 #define HOLD_EFFECT_SHED_SHELL     92
 
+// Gen5 hold effects
+#define HOLD_EFFECT_FLOAT_STONE    115
+
+// Gen6 hold effects
+#define HOLD_EFFECT_FAIRY_POWER    130
+
+// Gen7 hold effects
+#define HOLD_EFFECT_PROTECTIVE_PADS 150
 
 #endif // GUARD_HOLD_EFFECTS_H

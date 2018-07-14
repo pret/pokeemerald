@@ -136,7 +136,7 @@ static void BattleAICmd_get_move_power_from_result(void);
 static void BattleAICmd_get_move_effect_from_result(void);
 static void BattleAICmd_get_protect_count(void);
 static void BattleAICmd_if_move_flag(void);
-static void BattleAICmd_nullsub_53(void);
+static void BattleAICmd_if_field_status(void);
 static void BattleAICmd_nullsub_54(void);
 static void BattleAICmd_nullsub_55(void);
 static void BattleAICmd_nullsub_56(void);
@@ -245,7 +245,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_get_move_effect_from_result,                // 0x50
     BattleAICmd_get_protect_count,                          // 0x51
     BattleAICmd_if_move_flag,                               // 0x52
-    BattleAICmd_nullsub_53,                                 // 0x53
+    BattleAICmd_if_field_status,                            // 0x53
     BattleAICmd_nullsub_54,                                 // 0x54
     BattleAICmd_nullsub_55,                                 // 0x55
     BattleAICmd_nullsub_56,                                 // 0x56
@@ -2133,8 +2133,14 @@ static void BattleAICmd_if_move_flag(void)
         gAIScriptPtr += 7;
 }
 
-static void BattleAICmd_nullsub_53(void)
+static void BattleAICmd_if_field_status(void)
 {
+    u32 fieldFlags = T1_READ_32(gAIScriptPtr + 1);
+
+    if (gFieldStatuses & fieldFlags)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
+    else
+        gAIScriptPtr += 9;
 }
 
 static void BattleAICmd_nullsub_54(void)

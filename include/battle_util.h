@@ -72,5 +72,12 @@ void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
+u32 GetBattlerAbility(u8 battlerId);
+u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating);
+u32 GetBattlerHoldEffectParam(u8 battlerId);
+bool32 IsMoveMakingContact(u16 move, u8 battlerAtk);
+bool32 IsBattlerGrounded(u8 battlerId);
+u8 GetBattleMonMoveSlot(struct BattlePokemon *battleMon, u16 move);
+u32 GetBattlerWeight(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

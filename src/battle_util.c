@@ -22,6 +22,7 @@
 #include "event_data.h"
 #include "link.h"
 #include "berry.h"
+#include "pokedex.h"
 
 extern u8 weather_get_current(void);
 
@@ -3367,5 +3368,239 @@ u8 IsMonDisobedient(void)
             gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
             return 1;
         }
+    }
+}
+
+static const u8 sAbilitiesAffectedByMoldBreaker[] =
+{
+    [ABILITY_BATTLE_ARMOR] = 1,
+    [ABILITY_CLEAR_BODY] = 1,
+    [ABILITY_DAMP] = 1,
+    [ABILITY_DRY_SKIN] = 1,
+    [ABILITY_FILTER] = 1,
+    [ABILITY_FLASH_FIRE] = 1,
+    [ABILITY_FLOWER_GIFT] = 1,
+    [ABILITY_HEATPROOF] = 1,
+    [ABILITY_HYPER_CUTTER] = 1,
+    [ABILITY_IMMUNITY] = 1,
+    [ABILITY_INNER_FOCUS] = 1,
+    [ABILITY_INSOMNIA] = 1,
+    [ABILITY_KEEN_EYE] = 1,
+    [ABILITY_LEAF_GUARD] = 1,
+    [ABILITY_LEVITATE] = 1,
+    [ABILITY_LIGHTNING_ROD] = 1,
+    [ABILITY_LIMBER] = 1,
+    [ABILITY_MAGMA_ARMOR] = 1,
+    [ABILITY_MARVEL_SCALE] = 1,
+    [ABILITY_MOTOR_DRIVE] = 1,
+    [ABILITY_OBLIVIOUS] = 1,
+    [ABILITY_OWN_TEMPO] = 1,
+    [ABILITY_SAND_VEIL] = 1,
+    [ABILITY_SHELL_ARMOR] = 1,
+    [ABILITY_SHIELD_DUST] = 1,
+    [ABILITY_SIMPLE] = 1,
+    [ABILITY_SNOW_CLOAK] = 1,
+    [ABILITY_SOLID_ROCK] = 1,
+    [ABILITY_SOUNDPROOF] = 1,
+    [ABILITY_STICKY_HOLD] = 1,
+    [ABILITY_STORM_DRAIN] = 1,
+    [ABILITY_STURDY] = 1,
+    [ABILITY_SUCTION_CUPS] = 1,
+    [ABILITY_TANGLED_FEET] = 1,
+    [ABILITY_THICK_FAT] = 1,
+    [ABILITY_UNAWARE] = 1,
+    [ABILITY_VITAL_SPIRIT] = 1,
+    [ABILITY_VOLT_ABSORB] = 1,
+    [ABILITY_WATER_ABSORB] = 1,
+    [ABILITY_WATER_VEIL] = 1,
+    [ABILITY_WHITE_SMOKE] = 1,
+    [ABILITY_WONDER_GUARD] = 1,
+    [ABILITY_BIG_PECKS] = 1,
+    [ABILITY_CONTRARY] = 1,
+    [ABILITY_FRIEND_GUARD] = 1,
+    [ABILITY_HEAVY_METAL] = 1,
+    [ABILITY_LIGHT_METAL] = 1,
+    [ABILITY_MAGIC_BOUNCE] = 1,
+    [ABILITY_MULTISCALE] = 1,
+    [ABILITY_SAP_SIPPER] = 1,
+    [ABILITY_TELEPATHY] = 1,
+    [ABILITY_WONDER_SKIN] = 1,
+    [ABILITY_AROMA_VEIL] = 1,
+    [ABILITY_BULLETPROOF] = 1,
+    [ABILITY_FLOWER_VEIL] = 1,
+    [ABILITY_FUR_COAT] = 1,
+    [ABILITY_OVERCOAT] = 1,
+    [ABILITY_SWEET_VEIL] = 1,
+    [ABILITY_DAZZLING] = 1,
+    [ABILITY_DISGUISE] = 1,
+    [ABILITY_FLUFFY] = 1,
+    [ABILITY_QUEENLY_MAJESTY] = 1,
+    [ABILITY_WATER_BUBBLE] = 1,
+};
+
+u32 GetBattlerAbility(u8 battlerId)
+{
+    if (gStatuses3[battlerId] & STATUS3_GASTRO_ACID)
+        return ABILITY_NONE;
+    else if ((gBattleMons[gBattlerAttacker].ability == ABILITY_MOLD_BREAKER
+            || gBattleMons[gBattlerAttacker].ability == ABILITY_TERAVOLT
+            || gBattleMons[gBattlerAttacker].ability == ABILITY_TURBOBLAZE)
+        && sAbilitiesAffectedByMoldBreaker[gBattleMons[battlerId].ability]
+        && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
+        && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
+        && gCurrentTurnActionNumber < gBattlersCount
+        && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
+        return ABILITY_NONE;
+	else
+		return gBattleMons[battlerId].ability;
+}
+
+u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating)
+{
+    if (checkNegating)
+    {
+        if (gStatuses3[battlerId] & STATUS3_EMBARGO)
+            return HOLD_EFFECT_NONE;
+        if (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM)
+            return HOLD_EFFECT_NONE;
+        if (gBattleMons[battlerId].ability == ABILITY_KLUTZ && !(gStatuses3[battlerId] & STATUS3_GASTRO_ACID))
+            return HOLD_EFFECT_NONE;
+    }
+
+    gPotentialItemEffectBattler = battlerId;
+
+    if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
+        return gEnigmaBerries[battlerId].holdEffect;
+    else
+        return ItemId_GetHoldEffect(gBattleMons[battlerId].item);
+}
+
+u32 GetBattlerHoldEffectParam(u8 battlerId)
+{
+    if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
+        return gEnigmaBerries[battlerId].holdEffectParam;
+    else
+        return ItemId_GetHoldEffectParam(gBattleMons[battlerId].item);
+}
+
+bool32 IsMoveMakingContact(u16 move, u8 battlerAtk)
+{
+    if (!(gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+        return FALSE;
+    else if (GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH)
+        return FALSE;
+    else if (GetBattlerHoldEffect(battlerAtk, TRUE) == HOLD_EFFECT_PROTECTIVE_PADS)
+        return FALSE;
+	else
+		return TRUE;
+}
+
+bool32 IsBattlerGrounded(u8 battlerId)
+{
+    if (GetBattlerHoldEffect(battlerId, TRUE) == HOLD_EFFECT_IRON_BALL)
+        return TRUE;
+    else if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+        return TRUE;
+    else if (gStatuses3[battlerId] & STATUS3_ROOTED)
+        return TRUE;
+    else if (gStatuses3[battlerId] & STATUS3_SMACKED_DOWN)
+        return TRUE;
+
+    else if (gStatuses3[battlerId] & STATUS3_TELEKINESIS)
+        return FALSE;
+    else if (GetBattlerAbility(battlerId) == ABILITY_LEVITATE)
+        return FALSE;
+    else if (IS_BATTLER_OF_TYPE(battlerId, TYPE_FLYING))
+        return FALSE;
+
+    else
+		return TRUE;
+}
+
+bool32 IsBattlerAlive(u8 battlerId)
+{
+    if (gBattleMons[battlerId].hp == 0)
+        return FALSE;
+    else if (battlerId >= gBattlersCount)
+        return FALSE;
+    else if (gAbsentBattlerFlags & gBitTable[battlerId])
+        return FALSE;
+	else
+		return TRUE;
+}
+
+u8 GetBattleMonMoveSlot(struct BattlePokemon *battleMon, u16 move)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (battleMon->moves[i] == move)
+            break;
+    }
+    return i;
+}
+
+u32 GetBattlerWeight(u8 battlerId)
+{
+    u32 weight = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[battlerId].species), 1);
+    u32 ability = GetBattlerAbility(battlerId);
+    u32 holdEffect = GetBattlerHoldEffect(battlerId, TRUE);
+
+    if (ability == ABILITY_HEAVY_METAL)
+        weight *= 2;
+    else if (ability == ABILITY_LIGHT_METAL)
+        weight /= 2;
+
+    if (holdEffect == HOLD_EFFECT_FLOAT_STONE)
+        weight /= 2;
+
+    if (gDisableStructs[battlerId].autonomizeCount)
+        weight -= 1000 * gDisableStructs[battlerId].autonomizeCount;
+
+    if (weight == 0)
+        weight = 1;
+
+    return weight;
+}
+
+u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc)
+{
+    u32 i;
+    u32 count = 0;
+
+    for (i = 0; i < BATTLE_STATS_NO; i++)
+    {
+        if ((i == STAT_ACC || i == STAT_EVASION) && !countEvasionAcc)
+            continue;
+        if (gBattleMons[battlerId].statStages[i] > 6) // Stat is increased.
+            count += gBattleMons[battlerId].statStages[i] - 6;
+    }
+
+    return count;
+}
+
+u32 GetMoveTargetCount(u16 move, u8 battlerAtk, u8 battlerDef)
+{
+    switch (gBattleMoves[move].target)
+    {
+    case MOVE_TARGET_BOTH:
+        return IsBattlerAlive(battlerDef)
+             + IsBattlerAlive(BATTLE_PARTNER(battlerDef));
+    case MOVE_TARGET_FOES_AND_ALLY:
+        return IsBattlerAlive(battlerDef)
+             + IsBattlerAlive(BATTLE_PARTNER(battlerDef))
+             + IsBattlerAlive(BATTLE_PARTNER(battlerAtk));
+    case MOVE_TARGET_OPPONENTS_FIELD:
+        return 1;
+    case MOVE_TARGET_DEPENDS:
+    case MOVE_TARGET_SELECTED:
+    case MOVE_TARGET_RANDOM:
+    case MOVE_TARGET_USER_OR_SELECTED:
+        return IsBattlerAlive(battlerDef);
+    case MOVE_TARGET_USER:
+        return IsBattlerAlive(battlerAtk);
+    default:
+        return 0;
     }
 }

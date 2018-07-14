@@ -171,7 +171,8 @@ struct DisableStruct
     /*0x18*/ u8 unk18_a_2:2;
     /*0x18*/ u8 unk18_b:4;
     /*0x19*/ u8 rechargeCounter;
-    /*0x1A*/ u8 unk1A[2];
+    /*0x1A*/ u8 autonomizeCount;
+    /*0x1B*/ u8 slowStartTimer;
 };
 
 struct ProtectStruct
@@ -259,6 +260,7 @@ struct FieldTimer
     u8 mistyTerrainTimer;
     u8 electricTerrainTimer;
     u8 psychicTerrainTimer;
+    u8 echoVoiceCounter;
 };
 
 struct WishFutureKnock
