@@ -467,8 +467,10 @@
 	.byte \bank
 	.endm
 
-	.macro nullsub_52
+	.macro if_move_flag flag jumpptr
 	.byte 0x52
+	.hword \flag
+	.word \jumpptr
 	.endm
 
 	.macro nullsub_53

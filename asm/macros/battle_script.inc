@@ -356,7 +356,7 @@
 	.4byte \param0
 	.endm
 
-	.macro jumpiftype2
+	.macro nop_42
 	.byte 0x42
 	.endm
 

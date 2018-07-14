@@ -135,7 +135,7 @@ static void BattleAICmd_get_move_type_from_result(void);
 static void BattleAICmd_get_move_power_from_result(void);
 static void BattleAICmd_get_move_effect_from_result(void);
 static void BattleAICmd_get_protect_count(void);
-static void BattleAICmd_nullsub_52(void);
+static void BattleAICmd_if_move_flag(void);
 static void BattleAICmd_nullsub_53(void);
 static void BattleAICmd_nullsub_54(void);
 static void BattleAICmd_nullsub_55(void);
@@ -244,7 +244,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_get_move_power_from_result,                 // 0x4F
     BattleAICmd_get_move_effect_from_result,                // 0x50
     BattleAICmd_get_protect_count,                          // 0x51
-    BattleAICmd_nullsub_52,                                 // 0x52
+    BattleAICmd_if_move_flag,                               // 0x52
     BattleAICmd_nullsub_53,                                 // 0x53
     BattleAICmd_nullsub_54,                                 // 0x54
     BattleAICmd_nullsub_55,                                 // 0x55
@@ -2123,8 +2123,14 @@ static void BattleAICmd_get_protect_count(void)
     gAIScriptPtr += 2;
 }
 
-static void BattleAICmd_nullsub_52(void)
+static void BattleAICmd_if_move_flag(void)
 {
+    u16 flag = T1_READ_16(gAIScriptPtr + 1);
+
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].flags & flag)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
 }
 
 static void BattleAICmd_nullsub_53(void)

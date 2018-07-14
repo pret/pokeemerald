@@ -78,4 +78,18 @@
 #define STAT_ACC 6 // only in battles
 #define STAT_EVASION 7 // only in battles
 
+// Move flags.
+#define FLAG_MAKES_CONTACT          0x1
+#define FLAG_PROTECT_AFFECTED       0x2
+#define FLAG_MAGICCOAT_AFFECTED     0x4
+#define FLAG_SNATCH_AFFECTED        0x8
+#define FLAG_MIRROR_MOVE_AFFECTED   0x10
+#define FLAG_KINGSROCK_AFFECTED     0x20
+#define FLAG_HIGH_CRIT              0x40
+
+// Split defines.
+#define SPLIT_PHYSICAL  0x0
+#define SPLIT_SPECIAL   0x1
+#define SPLIT_STATUS    0x2
+
 #endif // GUARD_CONSTANTS_POKEMON_H
