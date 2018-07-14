@@ -598,7 +598,7 @@ struct BattleScripting
     s32 painSplitHp;
     s32 bideDmg;
     u8 multihitString[6];
-    u8 dmgMultiplier;
+    u8 unused_E;
     u8 twoTurnsMoveStringId;
     u8 animArg1;
     u8 animArg2;

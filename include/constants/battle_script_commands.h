@@ -5,7 +5,6 @@
 #define sPAINSPLIT_HP gBattleScripting
 #define sBIDE_DMG gBattleScripting + 4
 #define sMULTIHIT_STRING gBattleScripting + 8
-#define sDMG_MULTIPLIER gBattleScripting + 0xE
 #define sTWOTURN_STRINGID gBattleScripting + 0xF
 #define sB_ANIM_ARG1 gBattleScripting + 0x10
 #define sB_ANIM_ARG2 gBattleScripting + 0x11

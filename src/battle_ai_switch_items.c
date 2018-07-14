@@ -735,7 +735,6 @@ u8 GetMostSuitableMonToSwitchInto(void)
 
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
-    gBattleScripting.dmgMultiplier = 1;
     gMoveResultFlags = 0;
     gCritMultiplier = 1;
     bestDmg = 0;

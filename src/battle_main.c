@@ -5296,7 +5296,6 @@ static void HandleAction_UseMove(void)
     }
 
     gCritMultiplier = 1;
-    gBattleScripting.dmgMultiplier = 1;
     gBattleStruct->atkCancellerTracker = 0;
     gMoveResultFlags = 0;
     gMultiHitCounter = 0;

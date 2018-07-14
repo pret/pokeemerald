@@ -304,7 +304,7 @@ static void atkD2_tryswapitems(void);
 static void atkD3_trycopyability(void);
 static void atkD4_trywish(void);
 static void atkD5_trysetroots(void);
-static void atkD6_doubledamagedealtifdamaged(void);
+static void atkD6_nop(void);
 static void atkD7_setyawn(void);
 static void atkD8_setdamagetohealthdifference(void);
 static void atkD9_scaledamagebyhealthratio(void);
@@ -556,7 +556,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkD3_trycopyability,
     atkD4_trywish,
     atkD5_trysetroots,
-    atkD6_doubledamagedealtifdamaged,
+    atkD6_nop,
     atkD7_setyawn,
     atkD8_setdamagetohealthdifference,
     atkD9_scaledamagebyhealthratio,
@@ -1286,7 +1286,7 @@ static void atk05_damagecalc(void)
     gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
                                             sideStatus, gDynamicBasePower,
                                             gBattleStruct->dynamicMoveType, gBattlerAttacker, gBattlerTarget);
-    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier * gBattleScripting.dmgMultiplier;
+    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier;
 
     if (gStatuses3[gBattlerAttacker] & STATUS3_CHARGED_UP && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
         gBattleMoveDamage *= 2;
@@ -1303,7 +1303,7 @@ void AI_CalcDmg(u8 attacker, u8 defender)
                                             sideStatus, gDynamicBasePower,
                                             gBattleStruct->dynamicMoveType, attacker, defender);
     gDynamicBasePower = 0;
-    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier * gBattleScripting.dmgMultiplier;
+    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier;
 
     if (gStatuses3[attacker] & STATUS3_CHARGED_UP && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
         gBattleMoveDamage *= 2;
@@ -3882,7 +3882,6 @@ static void atk24(void)
 static void MoveValuesCleanUp(void)
 {
     gMoveResultFlags = 0;
-    gBattleScripting.dmgMultiplier = 1;
     gCritMultiplier = 1;
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattleCommunication[6] = 0;
@@ -9492,16 +9491,8 @@ static void atkD5_trysetroots(void) // ingrain
     }
 }
 
-static void atkD6_doubledamagedealtifdamaged(void)
+static void atkD6_nop(void)
 {
-    if ((gProtectStructs[gBattlerAttacker].physicalDmg
-         && gProtectStructs[gBattlerAttacker].physicalBattlerId == gBattlerTarget)
-        || (gProtectStructs[gBattlerAttacker].specialDmg
-            && gProtectStructs[gBattlerAttacker].specialBattlerId == gBattlerTarget))
-    {
-        gBattleScripting.dmgMultiplier = 2;
-    }
-
     gBattlescriptCurrInstr++;
 }
 
@@ -9927,8 +9918,6 @@ static void atkE9_setweatherballtype(void)
 {
     if (WEATHER_HAS_EFFECT)
     {
-        if (gBattleWeather & WEATHER_ANY)
-            gBattleScripting.dmgMultiplier = 2;
         if (gBattleWeather & WEATHER_RAIN_ANY)
             *(&gBattleStruct->dynamicMoveType) = TYPE_WATER | 0x80;
         else if (gBattleWeather & WEATHER_SANDSTORM_ANY)

@@ -229,38 +229,38 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectDragonDance
 	.4byte BattleScript_EffectCamouflage
 
-BattleScript_EffectSpeedUp::
-BattleScript_EffectSpecialDefenseUp::
-BattleScript_EffectAccuracyUp::
-BattleScript_EffectAlwaysHit::
-BattleScript_EffectSpecialAttackDown::
-BattleScript_EffectSpecialDefenseDown::
-BattleScript_EffectPlaceholder43::
-BattleScript_EffectAccuracyUp2::
-BattleScript_EffectEvasionUp2::
-BattleScript_EffectSpecialAttackDown2::
-BattleScript_EffectAccuracyDown2::
-BattleScript_EffectEvasionDown2::
-BattleScript_EffectEvasionDownHit::
-BattleScript_EffectVitalThrow::
-BattleScript_EffectUnused60::
-BattleScript_EffectFalseSwipe::
-BattleScript_EffectPlaceholder103::
-BattleScript_EffectUnused6e::
-BattleScript_EffectPursuit::
-BattleScript_EffectUnused83::
-BattleScript_EffectUnused8d::
-BattleScript_EffectUnusedA3::
-BattleScript_EffectPlaceholder200::
+BattleScript_EffectSpeedUp:
+BattleScript_EffectSpecialDefenseUp:
+BattleScript_EffectAccuracyUp:
+BattleScript_EffectAlwaysHit:
+BattleScript_EffectSpecialAttackDown:
+BattleScript_EffectSpecialDefenseDown:
+BattleScript_EffectPlaceholder43:
+BattleScript_EffectAccuracyUp2:
+BattleScript_EffectEvasionUp2:
+BattleScript_EffectSpecialAttackDown2:
+BattleScript_EffectAccuracyDown2:
+BattleScript_EffectEvasionDown2:
+BattleScript_EffectEvasionDownHit:
+BattleScript_EffectVitalThrow:
+BattleScript_EffectUnused60:
+BattleScript_EffectFalseSwipe:
+BattleScript_EffectPlaceholder103:
+BattleScript_EffectUnused6e:
+BattleScript_EffectPursuit:
+BattleScript_EffectUnused83:
+BattleScript_EffectUnused8d:
+BattleScript_EffectUnusedA3:
+BattleScript_EffectPlaceholder200:
 BattleScript_EffectPlaceholder209:
 BattleScript_EffectHit::
 BattleScript_EffectLowKick:
 BattleScript_EffectFlail:
 BattleScript_EffectFacade:
+BattleScript_EffectRevenge:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
-	setbyte sDMG_MULTIPLIER, 0x2
 BattleScript_HitFromAtkCanceler::
 	attackcanceler
 BattleScript_HitFromAccCheck::
@@ -860,7 +860,6 @@ BattleScript_EffectTrap::
 	jumpifnotmove MOVE_WHIRLPOOL, BattleScript_DoWrapEffect
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_DoWrapEffect
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
-	setbyte sDMG_MULTIPLIER, 0x2
 BattleScript_DoWrapEffect::
 	setmoveeffect MOVE_EFFECT_WRAP
 	goto BattleScript_EffectHit
@@ -1850,11 +1849,11 @@ BattleScript_EffectSkullBash::
 BattleScript_SkullBashEnd::
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectTwister::
+BattleScript_EffectTwister:
 	jumpifnostatus3 BS_TARGET, STATUS3_ON_AIR, BattleScript_FlinchEffect
 	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
-	setbyte sDMG_MULTIPLIER, 0x2
-BattleScript_FlinchEffect::
+BattleScript_FlinchEffect:
+BattleScript_EffectStomp:
 	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
 
@@ -1867,11 +1866,9 @@ BattleScript_HitsAllWithUndergroundBonusLoop::
 	movevaluescleanup
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERGROUND, BattleScript_HitsAllNoUndergroundBonus
 	orword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
-	setbyte sDMG_MULTIPLIER, 0x2
 	goto BattleScript_DoHitAllWithUndergroundBonus
 BattleScript_HitsAllNoUndergroundBonus::
 	bicword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
-	setbyte sDMG_MULTIPLIER, 0x1
 BattleScript_DoHitAllWithUndergroundBonus::
 	accuracycheck BattleScript_HitAllWithUndergroundBonusMissed, ACC_CURR_MOVE
 	critcalc
@@ -1921,13 +1918,7 @@ BattleScript_EffectFutureSight::
 BattleScript_EffectGust::
 	jumpifnostatus3 BS_TARGET, STATUS3_ON_AIR, BattleScript_EffectHit
 	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
-	setbyte sDMG_MULTIPLIER, 0x2
 	goto BattleScript_EffectHit
-
-BattleScript_EffectStomp::
-	jumpifnostatus3 BS_TARGET, STATUS3_MINIMIZED, BattleScript_FlinchEffect
-	setbyte sDMG_MULTIPLIER, 0x2
-	goto BattleScript_FlinchEffect
 
 BattleScript_EffectSolarbeam::
 	jumpifabilitypresent ABILITY_CLOUD_NINE, BattleScript_SolarbeamDecideTurn
@@ -2287,11 +2278,6 @@ BattleScript_EffectFocusPunch::
 BattleScript_EffectSmellingsalt::
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
 	setmoveeffect MOVE_EFFECT_REMOVE_PARALYSIS | MOVE_EFFECT_CERTAIN
-	jumpifstatus BS_TARGET, STATUS1_PARALYSIS, BattleScript_SmellingsaltDoubleDmg
-	goto BattleScript_EffectHit
-
-BattleScript_SmellingsaltDoubleDmg::
-	setbyte sDMG_MULTIPLIER, 0x2
 	goto BattleScript_EffectHit
 
 BattleScript_EffectFollowMe::
@@ -2430,10 +2416,6 @@ BattleScript_EffectRecycle::
 	printstring STRINGID_XFOUNDONEY
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectRevenge::
-	doubledamagedealtifdamaged
-	goto BattleScript_EffectHit
 
 BattleScript_EffectBrickBreak::
 	attackcanceler
@@ -3096,7 +3078,6 @@ BattleScript_PrintFullBox::
 BattleScript_ActionSwitch::
 	hpthresholds2 BS_ATTACKER
 	printstring STRINGID_RETURNMON
-	setbyte sDMG_MULTIPLIER, 0x2
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_PursuitSwitchDmgSetMultihit
 	setmultihit 0x1
 	goto BattleScript_PursuitSwitchDmgLoop

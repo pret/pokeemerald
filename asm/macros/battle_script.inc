@@ -1052,7 +1052,7 @@
 	.4byte \param0
 	.endm
 
-	.macro doubledamagedealtifdamaged
+	.macro nop_D6
 	.byte 0xd6
 	.endm
 
