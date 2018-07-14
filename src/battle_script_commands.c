@@ -1282,33 +1282,16 @@ static void atk04_critcalc(void)
 
 static void atk05_damagecalc(void)
 {
-    u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)];
-    gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
-                                            sideStatus, gDynamicBasePower,
-                                            gBattleStruct->dynamicMoveType, gBattlerAttacker, gBattlerTarget);
-    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier;
+    u8 moveType;
 
-    if (gStatuses3[gBattlerAttacker] & STATUS3_CHARGED_UP && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
-        gBattleMoveDamage *= 2;
-    if (gProtectStructs[gBattlerAttacker].helpingHand)
-        gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
-
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gCritMultiplier);
     gBattlescriptCurrInstr++;
 }
 
 void AI_CalcDmg(u8 attacker, u8 defender)
 {
-    u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(defender)];
-    gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[attacker], &gBattleMons[defender], gCurrentMove,
-                                            sideStatus, gDynamicBasePower,
-                                            gBattleStruct->dynamicMoveType, attacker, defender);
-    gDynamicBasePower = 0;
-    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier;
-
-    if (gStatuses3[attacker] & STATUS3_CHARGED_UP && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
-        gBattleMoveDamage *= 2;
-    if (gProtectStructs[attacker].helpingHand)
-        gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
+    // To modify.
 }
 
 static void ModulateDmgByType(u8 multiplier)
@@ -7121,14 +7104,7 @@ static void atk86_stockpiletobasedamage(void)
     {
         if (gBattleCommunication[6] != 1)
         {
-            gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
-                                                    gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)], 0,
-                                                    0, gBattlerAttacker, gBattlerTarget)
-                                * gDisableStructs[gBattlerAttacker].stockpileCounter;
             gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
-
-            if (gProtectStructs[gBattlerAttacker].helpingHand)
-                gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
         }
 
         gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
@@ -9106,12 +9082,6 @@ static void atkC3_trysetfutureattack(void)
         gWishFutureKnock.futureSightMove[gBattlerTarget] = gCurrentMove;
         gWishFutureKnock.futureSightAttacker[gBattlerTarget] = gBattlerAttacker;
         gWishFutureKnock.futureSightCounter[gBattlerTarget] = 3;
-        gWishFutureKnock.futureSightDmg[gBattlerTarget] = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
-                                                    gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)], 0,
-                                                    0, gBattlerAttacker, gBattlerTarget);
-
-        if (gProtectStructs[gBattlerAttacker].helpingHand)
-            gWishFutureKnock.futureSightDmg[gBattlerTarget] = gWishFutureKnock.futureSightDmg[gBattlerTarget] * 15 / 10;
 
         if (gCurrentMove == MOVE_DOOM_DESIRE)
             gBattleCommunication[MULTISTRING_CHOOSER] = 1;

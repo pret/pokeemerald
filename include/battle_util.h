@@ -79,5 +79,6 @@ bool32 IsMoveMakingContact(u16 move, u8 battlerAtk);
 bool32 IsBattlerGrounded(u8 battlerId);
 u8 GetBattleMonMoveSlot(struct BattlePokemon *battleMon, u16 move);
 u32 GetBattlerWeight(u8 battlerId);
+s32 CalculateMoveDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, s32 fixedBasePower, bool32 isCrit);
 
 #endif // GUARD_BATTLE_UTIL_H
