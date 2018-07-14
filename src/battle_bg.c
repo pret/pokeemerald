@@ -18,6 +18,7 @@
 #include "text_window.h"
 #include "menu.h"
 #include "battle_setup.h"
+#include "constants/map_types.h"
 
 struct BattleBackground
 {

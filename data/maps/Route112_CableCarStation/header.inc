@@ -5,11 +5,11 @@ Route112_CableCarStation: @ 8483DE0
 	.4byte 0x0
 	.2byte MUS_DOORO_X1
 	.2byte 118
-	.byte 27
+	.byte MAPSEC_ROUTE_112
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

@@ -1,6 +1,6 @@
 SeafloorCavern_Room4_EventObjects: @ 8535994
-	object_event 1, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 5, 8, 3, 17, 1, 1, 1, 3, SeafloorCavern_Room4_EventScript_234C9C, 946
-	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 5, 12, 3, 7, 1, 1, 1, 3, SeafloorCavern_Room4_EventScript_234CB3, 946
+	object_event 1, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 5, 8, 3, MOVEMENT_TYPE_FACE_DOWN_AND_LEFT, 1, 1, 1, 3, SeafloorCavern_Room4_EventScript_234C9C, 946
+	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 5, 12, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 1, 3, SeafloorCavern_Room4_EventScript_234CB3, 946
 
 SeafloorCavern_Room4_MapWarps: @ 85359C4
 	warp_def 13, 1, 3, 1, MAP_SEAFLOOR_CAVERN_ROOM2
