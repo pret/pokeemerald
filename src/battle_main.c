@@ -445,6 +445,7 @@ const u8 gTypeNames[][TYPE_NAME_LENGTH + 1] =
     _("ICE"),
     _("DRAGON"),
     _("DARK"),
+    _("FAIRY"),
 };
 
 // This is a factor in how much money you get for beating a trainer.

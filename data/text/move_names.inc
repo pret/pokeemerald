@@ -354,3 +354,116 @@ gMoveNames:: @ 831977C
 	.string "WATER PULSE$", 13
 	.string "DOOM DESIRE$", 13
 	.string "PSYCHO BOOST$", 13
+	.string "Roost$", 13
+	.string "Gravity$", 13
+	.string "Miracle Eye$", 13
+	.string "Wake Up Slap$", 13
+	.string "Hammer Arm$", 13
+	.string "Gyro Ball$", 13
+	.string "Healing Wish$", 13
+	.string "Brine$", 13
+	.string "Natural Gift$", 13
+	.string "Feint$", 13
+	.string "Pluck$", 13
+	.string "Tailwind$", 13
+	.string "Acupressure$", 13
+	.string "Metal Burst$", 13
+	.string "U Turn$", 13
+	.string "Close Combat$", 13
+	.string "Payback$", 13
+	.string "Assurance$", 13
+	.string "Embargo$", 13
+	.string "Fling$", 13
+	.string "Psycho Shift$", 13
+	.string "Trump Card$", 13
+	.string "Heal Block$", 13
+	.string "Wring Out$", 13
+	.string "Power Trick$", 13
+	.string "Gastro Acid$", 13
+	.string "Lucky Chant$", 13
+	.string "Me First$", 13
+	.string "Copycat$", 13
+	.string "Power Swap$", 13
+	.string "Guard Swap$", 13
+	.string "Punishment$", 13
+	.string "Last Resort$", 13
+	.string "Worry Seed$", 13
+	.string "Sucker Punch$", 13
+	.string "Toxic Spikes$", 13
+	.string "Heart Swap$", 13
+	.string "Aqua Ring$", 13
+	.string "Magnet Rise$", 13
+	.string "Flare Blitz$", 13
+	.string "Force Palm$", 13
+	.string "Aura Sphere$", 13
+	.string "Rock Polish$", 13
+	.string "Poison Jab$", 13
+	.string "Dark Pulse$", 13
+	.string "Night Slash$", 13
+	.string "Aqua Tail$", 13
+	.string "Seed Bomb$", 13
+	.string "Air Slash$", 13
+	.string "X Scissor$", 13
+	.string "Bug Buzz$", 13
+	.string "Dragon Pulse$", 13
+	.string "Dragon Rush$", 13
+	.string "Power Gem$", 13
+	.string "Drain Punch$", 13
+	.string "Vacuum Wave$", 13
+	.string "Focus Blast$", 13
+	.string "Energy Ball$", 13
+	.string "Brave Bird$", 13
+	.string "Earth Power$", 13
+	.string "Switcheroo$", 13
+	.string "Giga Impact$", 13
+	.string "Nasty Plot$", 13
+	.string "Bullet Punch$", 13
+	.string "Avalanche$", 13
+	.string "Ice Shard$", 13
+	.string "Shadow Claw$", 13
+	.string "Thunder Fang$", 13
+	.string "Ice Fang$", 13
+	.string "Fire Fang$", 13
+	.string "Shadow Sneak$", 13
+	.string "Mud Bomb$", 13
+	.string "Psycho Cut$", 13
+	.string "Zen Headbutt$", 13
+	.string "Mirror Shot$", 13
+	.string "Flash Cannon$", 13
+	.string "Rock Climb$", 13
+	.string "Defog$", 13
+	.string "Trick Room$", 13
+	.string "Draco Meteor$", 13
+	.string "Discharge$", 13
+	.string "Lava Plume$", 13
+	.string "Leaf Storm$", 13
+	.string "Power Whip$", 13
+	.string "Rock Wrecker$", 13
+	.string "Cross Poison$", 13
+	.string "Gunk Shot$", 13
+	.string "Iron Head$", 13
+	.string "Magnet Bomb$", 13
+	.string "Stone Edge$", 13
+	.string "Captivate$", 13
+	.string "Stealth Rock$", 13
+	.string "Grass Knot$", 13
+	.string "Chatter$", 13
+	.string "Judgment$", 13
+	.string "Bug Bite$", 13
+	.string "Charge Beam$", 13
+	.string "Wood Hammer$", 13
+	.string "Aqua Jet$", 13
+	.string "Attack Order$", 13
+	.string "Defend Order$", 13
+	.string "Heal Order$", 13
+	.string "Head Smash$", 13
+	.string "Double Hit$", 13
+	.string "Roar Of Time$", 13
+	.string "Spacial Rend$", 13
+	.string "Lunar Dance$", 13
+	.string "Crush Grip$", 13
+	.string "Magma Storm$", 13
+	.string "Dark Void$", 13
+	.string "Seed Flare$", 13
+	.string "Ominous Wind$", 13
+	.string "Shadow Force$", 13
