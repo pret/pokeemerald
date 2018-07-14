@@ -438,7 +438,7 @@ static bool8 ShouldSwitch(void)
         return FALSE;
     if (ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP)) // Misses the flying type and Levitate check.
         return FALSE;
-    if (ABILITY_ON_FIELD2(ABILITY_MAGNET_PULL))
+    if (ABILITY_ON_FIELD(ABILITY_MAGNET_PULL))
     {
         if (gBattleMons[gActiveBattler].type1 == TYPE_STEEL)
             return FALSE;

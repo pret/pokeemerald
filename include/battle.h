@@ -248,6 +248,19 @@ struct SideTimer
     /*0x0B*/ u8 fieldB;
 };
 
+struct FieldTimer
+{
+    u8 mudSportTimer;
+    u8 waterSportTimer;
+    u8 wonderRoomTimer;
+    u8 magicRoomTimer;
+    u8 trickRoomTimer;
+    u8 grassyTerrainTimer;
+    u8 mistyTerrainTimer;
+    u8 electricTerrainTimer;
+    u8 psychicTerrainTimer;
+};
+
 struct WishFutureKnock
 {
     u8 futureSightCounter[MAX_BATTLERS_COUNT];
@@ -800,6 +813,8 @@ extern struct BattleHealthboxInfo *gUnknown_020244DC;
 extern u16 gBattleMovePower;
 extern u16 gMoveToLearn;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
+extern u32 gFieldStatuses;
+extern struct FieldTimer gFieldTimers;
 
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);
