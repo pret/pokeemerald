@@ -82,6 +82,7 @@ enum
     LIST_ITEM_STATUS2,
     LIST_ITEM_STATUS3,
     LIST_ITEM_SIDE_STATUS,
+    LIST_ITEM_VARIOUS,
     LIST_ITEM_COUNT
 };
 
@@ -156,6 +157,7 @@ static const u8 sText_LightScreen[] = _("Light Screen");
 static const u8 sText_Spikes[] = _("Spikes");
 static const u8 sText_Safeguard[] = _("Safeguard");
 static const u8 sText_Mist[] = _("Mist");
+static const u8 sText_ShowOpponentHP[] = _("Opponent Hp");
 
 static const u8 sText_EmptyString[] = _("");
 

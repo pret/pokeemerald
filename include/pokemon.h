@@ -364,6 +364,7 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
+    u8 split;
 };
 
 #define FLAG_MAKES_CONTACT          0x1
@@ -372,6 +373,11 @@ struct BattleMove
 #define FLAG_SNATCH_AFFECTED        0x8
 #define FLAG_MIRROR_MOVE_AFFECTED   0x10
 #define FLAG_KINGSROCK_AFFECTED     0x20
+#define FLAG_HIGH_CRIT              0x40
+
+#define SPLIT_PHYSICAL  0x0
+#define SPLIT_SPECIAL   0x1
+#define SPLIT_STATUS    0x2
 
 struct SpindaSpot
 {
