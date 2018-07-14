@@ -254,6 +254,9 @@ BattleScript_EffectUnusedA3::
 BattleScript_EffectPlaceholder200::
 BattleScript_EffectPlaceholder209:
 BattleScript_EffectHit::
+BattleScript_EffectLowKick:
+BattleScript_EffectFlail:
+BattleScript_EffectFacade:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
@@ -1368,10 +1371,6 @@ BattleScript_EffectDestinyBond::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectFlail::
-	remaininghptopower
-	goto BattleScript_EffectHit
-
 BattleScript_EffectSpite::
 	attackcanceler
 	attackstring
@@ -2277,14 +2276,6 @@ BattleScript_82DA15A::
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectFacade::
-	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, BattleScript_FacadeDoubleDmg
-	goto BattleScript_EffectHit
-
-BattleScript_FacadeDoubleDmg::
-	setbyte sDMG_MULTIPLIER, 0x2
-	goto BattleScript_EffectHit
-
 BattleScript_EffectFocusPunch::
 	attackcanceler
 	jumpifnodamage BattleScript_HitFromAccCheck
@@ -2580,14 +2571,6 @@ BattleScript_EffectSnatch::
 	printstring STRINGID_PKMNWAITSFORTARGET
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectLowKick::
-	attackcanceler
-	attackstring
-	ppreduce
-	weightdamagecalculation
-	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
-	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectSecretPower::
 	getsecretpowereffect

@@ -860,7 +860,7 @@
 	.byte 0xab
 	.endm
 
-	.macro remaininghptopower
+	.macro nop_AC
 	.byte 0xac
 	.endm
 
@@ -1085,7 +1085,7 @@
 	.4byte \param0
 	.endm
 
-	.macro weightdamagecalculation
+	.macro nop_DD
 	.byte 0xdd
 	.endm
 

@@ -262,7 +262,7 @@ static void atkA8_copymovepermanently(void);
 static void atkA9_trychoosesleeptalkmove(void);
 static void atkAA_setdestinybond(void);
 static void atkAB_trysetdestinybondtohappen(void);
-static void atkAC_remaininghptopower(void);
+static void atkAC_nop(void);
 static void atkAD_tryspiteppreduce(void);
 static void atkAE_healpartystatus(void);
 static void atkAF_cursetarget(void);
@@ -311,7 +311,7 @@ static void atkD9_scaledamagebyhealthratio(void);
 static void atkDA_tryswapabilities(void);
 static void atkDB_tryimprision(void);
 static void atkDC_trysetgrudge(void);
-static void atkDD_weightdamagecalculation(void);
+static void atkDD_nop(void);
 static void atkDE_asistattackselect(void);
 static void atkDF_trysetmagiccoat(void);
 static void atkE0_trysetsnatch(void);
@@ -514,7 +514,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkA9_trychoosesleeptalkmove,
     atkAA_setdestinybond,
     atkAB_trysetdestinybondtohappen,
-    atkAC_remaininghptopower,
+    atkAC_nop,
     atkAD_tryspiteppreduce,
     atkAE_healpartystatus,
     atkAF_cursetarget,
@@ -563,7 +563,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkDA_tryswapabilities,
     atkDB_tryimprision,
     atkDC_trysetgrudge,
-    atkDD_weightdamagecalculation,
+    atkDD_nop,
     atkDE_asistattackselect,
     atkDF_trysetmagiccoat,
     atkE0_trysetsnatch,
@@ -798,16 +798,6 @@ static const u16 sMovesForbiddenToCopy[] =
      METRONOME_FORBIDDEN_END
 };
 
-static const u8 sFlailHpScaleToPowerTable[] =
-{
-    1, 200,
-    4, 150,
-    9, 100,
-    16, 80,
-    32, 40,
-    48, 20
-};
-
 static const u16 sNaturePowerMoves[] =
 {
     MOVE_STUN_SPORE,
@@ -820,17 +810,6 @@ static const u16 sNaturePowerMoves[] =
     MOVE_SHADOW_BALL,
     MOVE_SWIFT,
     MOVE_SWIFT
-};
-
-// format: min. weight (hectograms), base power
-static const u16 sWeightToDamageTable[] =
-{
-    100, 20,
-    250, 40,
-    500, 60,
-    1000, 80,
-    2000, 100,
-    0xFFFF, 0xFFFF
 };
 
 static const u16 sPickupItems[] =
@@ -8514,18 +8493,8 @@ static void atkAB_trysetdestinybondtohappen(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkAC_remaininghptopower(void)
+static void atkAC_nop(void)
 {
-    s32 i;
-    s32 hpFraction = GetScaledHPFraction(gBattleMons[gBattlerAttacker].hp, gBattleMons[gBattlerAttacker].maxHP, 48);
-
-    for (i = 0; i < (s32) sizeof(sFlailHpScaleToPowerTable); i += 2)
-    {
-        if (hpFraction <= sFlailHpScaleToPowerTable[i])
-            break;
-    }
-
-    gDynamicBasePower = sFlailHpScaleToPowerTable[i + 1];
     gBattlescriptCurrInstr++;
 }
 
@@ -9650,20 +9619,8 @@ static void atkDC_trysetgrudge(void)
     }
 }
 
-static void atkDD_weightdamagecalculation(void)
+static void atkDD_nop(void)
 {
-    s32 i;
-    for (i = 0; sWeightToDamageTable[i] != 0xFFFF; i += 2)
-    {
-        if (sWeightToDamageTable[i] > GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1))
-            break;
-    }
-
-    if (sWeightToDamageTable[i] != 0xFFFF)
-        gDynamicBasePower = sWeightToDamageTable[i + 1];
-    else
-        gDynamicBasePower = 120;
-
     gBattlescriptCurrInstr++;
 }
 
