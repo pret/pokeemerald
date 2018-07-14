@@ -156,7 +156,7 @@ static void atk3E_end2(void);
 static void atk3F_end3(void);
 static void atk40_jumpifaffectedbyprotect(void);
 static void atk41_call(void);
-static void atk42_jumpiftype2(void);
+static void atk42_nop(void);
 static void atk43_jumpifabilitypresent(void);
 static void atk44_endselectionscript(void);
 static void atk45_playanimation(void);
@@ -408,7 +408,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk3F_end3,
     atk40_jumpifaffectedbyprotect,
     atk41_call,
-    atk42_jumpiftype2,
+    atk42_nop,
     atk43_jumpifabilitypresent,
     atk44_endselectionscript,
     atk45_playanimation,
@@ -4265,14 +4265,9 @@ static void atk41_call(void)
     gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
-static void atk42_jumpiftype2(void)
+static void atk42_nop(void)
 {
-    u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-
-    if (gBattlescriptCurrInstr[2] == gBattleMons[battlerId].type1 || gBattlescriptCurrInstr[2] == gBattleMons[battlerId].type2)
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-    else
-        gBattlescriptCurrInstr += 7;
+    gBattlescriptCurrInstr++;
 }
 
 static void atk43_jumpifabilitypresent(void)

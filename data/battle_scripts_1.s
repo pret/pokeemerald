@@ -1508,7 +1508,7 @@ BattleScript_EffectMinimize::
 	goto BattleScript_EffectStatUpAfterAtkCanceler
 
 BattleScript_EffectCurse::
-	jumpiftype2 BS_ATTACKER, TYPE_GHOST, BattleScript_GhostCurse
+	jumpiftype BS_ATTACKER, TYPE_GHOST, BattleScript_GhostCurse
 	attackcanceler
 	attackstring
 	ppreduce
