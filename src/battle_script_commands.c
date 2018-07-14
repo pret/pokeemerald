@@ -97,8 +97,8 @@ static void atk03_ppreduce(void);
 static void atk04_critcalc(void);
 static void atk05_damagecalc(void);
 static void atk06_typecalc(void);
-static void atk07_adjustnormaldamage(void);
-static void atk08_adjustnormaldamage2(void);
+static void atk07_adjustdamage(void);
+static void atk08_nop(void);
 static void atk09_attackanimation(void);
 static void atk0A_waitanimation(void);
 static void atk0B_healthbarupdate(void);
@@ -195,7 +195,7 @@ static void atk65_status2animation(void);
 static void atk66_chosenstatusanimation(void);
 static void atk67_yesnobox(void);
 static void atk68_cancelallactions(void);
-static void atk69_adjustsetdamage(void);
+static void atk69_nop(void);
 static void atk6A_removeitem(void);
 static void atk6B_atknameinbuff1(void);
 static void atk6C_drawlvlupbox(void);
@@ -349,8 +349,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk04_critcalc,
     atk05_damagecalc,
     atk06_typecalc,
-    atk07_adjustnormaldamage,
-    atk08_adjustnormaldamage2,
+    atk07_adjustdamage,
+    atk08_nop,
     atk09_attackanimation,
     atk0A_waitanimation,
     atk0B_healthbarupdate,
@@ -447,7 +447,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk66_chosenstatusanimation,
     atk67_yesnobox,
     atk68_cancelallactions,
-    atk69_adjustsetdamage,
+    atk69_nop,
     atk6A_removeitem,
     atk6B_atknameinbuff1,
     atk6C_drawlvlupbox,
@@ -1273,9 +1273,9 @@ static void atk04_critcalc(void)
      && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
      && !(gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
      && !(Random() % sCriticalHitChance[critChance]))
-        gCritMultiplier = 2;
+        gIsCriticalHit = TRUE;
     else
-        gCritMultiplier = 1;
+        gIsCriticalHit = FALSE;
 
     gBattlescriptCurrInstr++;
 }
@@ -1285,7 +1285,7 @@ static void atk05_damagecalc(void)
     u8 moveType;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
-    gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gCritMultiplier);
+    gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gIsCriticalHit, TRUE);
     gBattlescriptCurrInstr++;
 }
 
@@ -1610,120 +1610,60 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
     return flags;
 }
 
-// Multiplies the damage by a random factor between 85% to 100% inclusive
-static inline void ApplyRandomDmgMultiplier(void)
-{
-    u16 rand = Random();
-    u16 randPercent = 100 - (rand % 16);
-
-    if (gBattleMoveDamage != 0)
-    {
-        gBattleMoveDamage *= randPercent;
-        gBattleMoveDamage /= 100;
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
-    }
-}
-
-static void Unused_ApplyRandomDmgMultiplier(void)
-{
-    ApplyRandomDmgMultiplier();
-}
-
-static void atk07_adjustnormaldamage(void)
+static void atk07_adjustdamage(void)
 {
     u8 holdEffect, param;
 
-    ApplyRandomDmgMultiplier();
-
+    holdEffect = GetBattlerHoldEffect(gBattlerTarget, TRUE);
     if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
-    {
-        holdEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
         param = gEnigmaBerries[gBattlerTarget].holdEffectParam;
-    }
     else
-    {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
         param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
-    }
 
     gPotentialItemEffectBattler = gBattlerTarget;
+
+    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+        goto END;
+    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
+        goto END;
 
     if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < param)
     {
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE && !gProtectStructs[gBattlerTarget].endured
-     && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        goto END;
-
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-
-    if (gProtectStructs[gBattlerTarget].endured)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
-    }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-        gLastUsedItem = gBattleMons[gBattlerTarget].item;
-    }
-
-    END:
-        gBattlescriptCurrInstr++;
-}
-
-static void atk08_adjustnormaldamage2(void) // The same as 0x7 except it doesn't check for false swipe move effect.
-{
-    u8 holdEffect, param;
-
-    ApplyRandomDmgMultiplier();
-
-    if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
-    {
-        holdEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
-        param = gEnigmaBerries[gBattlerTarget].holdEffectParam;
-    }
-    else
-    {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
-        param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
-    }
-
-    gPotentialItemEffectBattler = gBattlerTarget;
-
-    if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < param)
+    else if (holdEffect == HOLD_EFFECT_FOCUS_SASH && BATTLER_MAX_HP(gBattlerTarget))
     {
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
-        gSpecialStatuses[gBattlerTarget].focusBanded = 1;
+        gSpecialStatuses[gBattlerTarget].focusSashed = 1;
     }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (!gProtectStructs[gBattlerTarget].endured && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
+
+    if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE
+        && !gProtectStructs[gBattlerTarget].endured
+        && !gSpecialStatuses[gBattlerTarget].focusBanded
+        && !gSpecialStatuses[gBattlerTarget].focusSashed)
         goto END;
 
+    // Handle reducing the dmg to 1 hp
     gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
 
     if (gProtectStructs[gBattlerTarget].endured)
     {
         gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
     }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
+    else if (gSpecialStatuses[gBattlerTarget].focusBanded || gSpecialStatuses[gBattlerTarget].focusSashed)
     {
         gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
         gLastUsedItem = gBattleMons[gBattlerTarget].item;
     }
 
-    END:
-        gBattlescriptCurrInstr++;
+END:
+    gBattlescriptCurrInstr++;
+}
+
+static void atk08_nop(void)
+{
+
 }
 
 static void atk09_attackanimation(void)
@@ -1952,7 +1892,7 @@ static void atk0D_critmessage(void)
 {
     if (gBattleControllerExecFlags == 0)
     {
-        if (gCritMultiplier == 2 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        if (gIsCriticalHit == TRUE && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
             PrepareStringBattle(STRINGID_CRITICALHIT, gBattlerAttacker);
             gBattleCommunication[MSG_DISPLAY] = 1;
@@ -3865,7 +3805,7 @@ static void atk24(void)
 static void MoveValuesCleanUp(void)
 {
     gMoveResultFlags = 0;
-    gCritMultiplier = 1;
+    gIsCriticalHit = FALSE;
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattleCommunication[6] = 0;
     gHitMarker &= ~(HITMARKER_DESTINYBOND);
@@ -6100,56 +6040,14 @@ static void atk68_cancelallactions(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk69_adjustsetdamage(void) // The same as 0x7, except there's no random damage multiplier.
+static void atk69_nop(void)
 {
-    u8 holdEffect, param;
-
-    if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
-    {
-        holdEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
-        param = gEnigmaBerries[gBattlerTarget].holdEffectParam;
-    }
-    else
-    {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
-        param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
-    }
-
-    gPotentialItemEffectBattler = gBattlerTarget;
-
-    if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < param)
-    {
-        RecordItemEffectBattle(gBattlerTarget, holdEffect);
-        gSpecialStatuses[gBattlerTarget].focusBanded = 1;
-    }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE && !gProtectStructs[gBattlerTarget].endured
-     && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        goto END;
-
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-
-    if (gProtectStructs[gBattlerTarget].endured)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
-    }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-        gLastUsedItem = gBattleMons[gBattlerTarget].item;
-    }
-
-    END:
-        gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr++;
 }
 
 static void atk6A_removeitem(void)
 {
-    u16* usedHeldItem;
+    u16 *usedHeldItem;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 

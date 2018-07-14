@@ -65,6 +65,7 @@ void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
 void sub_803BDA0(u8 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
+u32 GetBattlerTotalSpeedStat(u8 battlerId);
 u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);

@@ -86,6 +86,15 @@
 #define FLAG_MIRROR_MOVE_AFFECTED   0x10
 #define FLAG_KINGSROCK_AFFECTED     0x20
 #define FLAG_HIGH_CRIT              0x40
+#define FLAG_RECKLESS_BOOST         0x80
+#define FLAG_IRON_FIST_BOOST        0x100
+#define FLAG_SHEER_FORCE_BOOST      0x200
+#define FLAG_STRONG_JAW_BOOST       0x400
+#define FLAG_MEGA_LAUNCHER_BOOST    0x800
+#define FLAG_STAT_STAGES_IGNORED    0x1000
+#define FLAG_DMG_MINIMIZE           0x2000
+#define FLAG_DMG_UNDERGROUND        0x4000
+#define FLAG_DMG_UNDERWATER         0x8000
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0

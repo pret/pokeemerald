@@ -271,8 +271,7 @@ BattleScript_HitFromAtkString::
 BattleScript_HitFromCritCalc::
 	critcalc
 	damagecalc
-	typecalc
-	adjustnormaldamage
+	adjustdamage
 BattleScript_HitFromAtkAnimation::
 	attackanimation
 	waitanimation
@@ -351,8 +350,7 @@ BattleScript_EffectAbsorb::
 	ppreduce
 	critcalc
 	damagecalc
-	typecalc
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -413,8 +411,7 @@ BattleScript_82D8B96::
 	movevaluescleanup
 	critcalc
 	damagecalc
-	typecalc
-	adjustnormaldamage
+	adjustdamage
 	accuracycheck BattleScript_82D8BCF, ACC_CURR_MOVE
 	effectivenesssound
 	hitanimation BS_TARGET
@@ -463,8 +460,7 @@ BattleScript_82D8C18::
 	ppreduce
 	critcalc
 	damagecalc
-	typecalc
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -645,9 +641,8 @@ BattleScript_DoMultiHit::
 	copybyte cEFFECT_CHOOSER, sMULTIHIT_EFFECT
 	critcalc
 	damagecalc
-	typecalc
 	jumpifmovehadnoeffect BattleScript_MultiHitNoMoreHits
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -853,7 +848,7 @@ BattleScript_EffectDragonRage::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	setword gBattleMoveDamage, 40
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectTrap::
@@ -889,7 +884,7 @@ BattleScript_MoveMissedDoDamage::
 	waitmessage 0x40
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	manipulatedamage ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP
 	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
@@ -910,7 +905,7 @@ BattleScript_EffectMist::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectFocusEnergy::
+BattleScript_EffectFocusEnergy:
 	attackcanceler
 	attackstring
 	ppreduce
@@ -922,13 +917,13 @@ BattleScript_EffectFocusEnergy::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRecoil::
+BattleScript_EffectRecoil:
 	setmoveeffect MOVE_EFFECT_RECOIL_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
 	incrementgamestat 0x1B
 	goto BattleScript_EffectHit
 
-BattleScript_EffectConfuse::
+BattleScript_EffectConfuse:
 	attackcanceler
 	attackstring
 	ppreduce
@@ -1228,7 +1223,7 @@ BattleScript_EffectLevelDamage::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	dmgtolevel
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectPsywave::
@@ -1239,7 +1234,7 @@ BattleScript_EffectPsywave::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	psywavedamageeffect
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectCounter::
@@ -1249,7 +1244,7 @@ BattleScript_EffectCounter::
 	attackstring
 	ppreduce
 	typecalc2
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectEncore::
@@ -1425,8 +1420,7 @@ BattleScript_DoTripleKickAttack::
 	copyhword gDynamicBasePower, sTRIPLE_KICK_POWER
 	critcalc
 	damagecalc
-	typecalc
-	adjustnormaldamage
+	adjustdamage
 	jumpifmovehadnoeffect BattleScript_TripleKickNoMoreHits
 	attackanimation
 	waitanimation
@@ -1663,9 +1657,8 @@ BattleScript_FuryCutterHit::
 	furycuttercalc
 	critcalc
 	damagecalc
-	typecalc
 	jumpifmovehadnoeffect BattleScript_FuryCutterHit
-	adjustnormaldamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectAttract::
@@ -1751,7 +1744,7 @@ BattleScript_EffectSonicboom::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	setword gBattleMoveDamage, 20
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectMorningSun::
@@ -1831,7 +1824,7 @@ BattleScript_EffectMirrorCoat::
 	attackstring
 	ppreduce
 	typecalc2
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectSkullBash::
@@ -1873,8 +1866,7 @@ BattleScript_DoHitAllWithUndergroundBonus::
 	accuracycheck BattleScript_HitAllWithUndergroundBonusMissed, ACC_CURR_MOVE
 	critcalc
 	damagecalc
-	typecalc
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -1969,10 +1961,10 @@ BattleScript_BeatUpLoop::
 	trydobeatup BattleScript_BeatUpEnd, BattleScript_ButItFailed
 	printstring STRINGID_PKMNATTACK
 	critcalc
-	jumpifbyte CMP_NOT_EQUAL, gCritMultiplier, 0x2, BattleScript_BeatUpAttack
+	jumpifbyte CMP_NOT_EQUAL, gIsCriticalHit, TRUE, BattleScript_BeatUpAttack
 	manipulatedamage ATK80_DMG_DOUBLED
 BattleScript_BeatUpAttack::
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -2120,7 +2112,7 @@ BattleScript_EffectSpitUp::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	stockpiletobasedamage BattleScript_SpitUpFail
 	typecalc
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 BattleScript_SpitUpFail::
 	pause 0x20
@@ -2425,8 +2417,7 @@ BattleScript_EffectBrickBreak::
 	removelightscreenreflect
 	critcalc
 	damagecalc
-	typecalc
-	adjustnormaldamage
+	adjustdamage
 	jumpifbyte CMP_EQUAL, sB_ANIM_TURN, 0x0, BattleScript_BrickBreakAnim
 	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
 BattleScript_BrickBreakAnim::
@@ -2489,7 +2480,7 @@ BattleScript_EffectEndeavor::
 	jumpifmovehadnoeffect BattleScript_HitFromAtkAnimation
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	copyword gBattleMoveDamage, gHpDealt
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectEruption::
@@ -3117,8 +3108,7 @@ BattleScript_PursuitDmgOnSwitchOut::
 	ppreduce
 	critcalc
 	damagecalc
-	typecalc
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -3291,7 +3281,7 @@ BattleScript_BideAttack::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	copyword gBattleMoveDamage, sBIDE_DMG
-	adjustsetdamage
+	adjustdamage
 	setbyte sB_ANIM_TURN, 0x1
 	attackanimation
 	waitanimation
@@ -3510,7 +3500,7 @@ BattleScript_MonTookFutureAttack::
 BattleScript_CheckDoomDesireMiss::
 	accuracycheck BattleScript_FutureAttackMiss, MOVE_DOOM_DESIRE
 BattleScript_FutureAttackAnimate::
-	adjustnormaldamage2
+	adjustdamage
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_FutureHitAnimDoomDesire
 	playanimation BS_ATTACKER, B_ANIM_FUTURE_SIGHT_HIT, NULL
 	goto BattleScript_DoFutureAttackHit
@@ -3798,7 +3788,7 @@ BattleScript_MoveUsedIsConfused::
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_MoveUsedIsConfusedRet
 BattleScript_DoSelfConfusionDmg::
 	cancelmultiturnmoves BS_ATTACKER
-	adjustnormaldamage2
+	adjustdamage
 	printstring STRINGID_ITHURTCONFUSION
 	waitmessage 0x40
 	effectivenesssound

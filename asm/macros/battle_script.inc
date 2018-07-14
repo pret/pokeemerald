@@ -29,11 +29,11 @@
 	.byte 0x6
 	.endm
 
-	.macro adjustnormaldamage
+	.macro adjustdamage
 	.byte 0x7
 	.endm
 
-	.macro adjustnormaldamage2
+	.macro nop_08
 	.byte 0x8
 	.endm
 
@@ -558,7 +558,7 @@
 	.byte 0x68
 	.endm
 
-	.macro adjustsetdamage
+	.macro nop_69
 	.byte 0x69
 	.endm
 

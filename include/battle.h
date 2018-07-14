@@ -215,15 +215,15 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
-    u8 statLowered:1;             // 0x1
-    u8 lightningRodRedirected:1;  // 0x2
-    u8 restoredBankSprite: 1;       // 0x4
-    u8 intimidatedPoke:1;         // 0x8
-    u8 traced:1;                  // 0x10
+    u8 statLowered:1;
+    u8 lightningRodRedirected:1;
+    u8 restoredBankSprite: 1;
+    u8 intimidatedPoke:1;
+    u8 traced:1;
     u8 flag20:1;
     u8 flag40:1;
     u8 focusBanded:1;
-    u8 field1[3];
+    u8 focusSashed:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -563,6 +563,8 @@ struct BattleStruct
     u8 field_2A1;
     u8 field_2A2;
     u8 debugBattler;
+    u8 magnitudeBasePower;
+    u8 presentBasePower;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -576,6 +578,7 @@ struct BattleStruct
 #define IS_MOVE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
 #define IS_MOVE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
 
+#define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
@@ -759,7 +762,7 @@ extern u8 gBattlerFainted;
 extern u8 gEffectBattler;
 extern u8 gPotentialItemEffectBattler;
 extern u8 gAbsentBattlerFlags;
-extern u8 gCritMultiplier;
+extern u8 gIsCriticalHit;
 extern u8 gMultiHitCounter;
 extern const u8 *gBattlescriptCurrInstr;
 extern u32 gUnusedBattleMainVar;
