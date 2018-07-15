@@ -877,7 +877,7 @@ BuyMenuAddScrollIndicatorArrows: @ 80E01C8
 	movs r1, 0xAC
 	movs r2, 0xC
 	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r5]
 	adds r1, r4
 	strb r0, [r1]
@@ -1157,7 +1157,7 @@ BuyMenuInitWindows: @ 80E0468
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xE0

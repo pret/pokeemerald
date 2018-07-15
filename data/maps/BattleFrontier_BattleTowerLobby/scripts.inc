@@ -551,7 +551,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F3E8
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F2C5

@@ -46,7 +46,7 @@ extern const u8 gStarterChoose_LabelCoords[][2];
 extern const u8 gUnknown_085B1E0C[];
 extern const u8 gUnknown_085B1E28[][2];
 
-extern void sub_809882C(u8, u16, u8);
+extern void LoadUserWindowBorderGfx(u8, u16, u8);
 extern void ScanlineEffect_Stop(void);
 extern void clear_scheduled_bg_copies_to_vram(void);
 extern void dp13_810BB8C(void);
@@ -126,7 +126,7 @@ void CB2_ChooseStarter(void)
     InitWindows(gUnknown_085B1DCC);
 
     DeactivateAllTextPrinters();
-    sub_809882C(0, 0x2A8, 0xD0);
+    LoadUserWindowBorderGfx(0, 0x2A8, 0xD0);
     clear_scheduled_bg_copies_to_vram();
     ScanlineEffect_Stop();
     ResetTasks();
@@ -140,7 +140,7 @@ void CB2_ChooseStarter(void)
     LoadCompressedObjectPic(&gUnknown_085B1ED8[0]);
     LoadCompressedObjectPic(&gUnknown_085B1EE8[0]);
     LoadSpritePalettes(gUnknown_085B1EF8);
-    BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
 
     EnableInterrupts(DISPSTAT_VBLANK);
     SetVBlankCallback(VblankCB_StarterChoose);

@@ -59,7 +59,7 @@ extern const u16 gUnknown_0860F074[];
 
 extern bool8 sub_81221EC(void);
 extern void sub_806A068(u16, u8);
-extern void sub_809882C(u8, u16, u8);
+extern void LoadUserWindowBorderGfx(u8, u16, u8);
 
 // this file's functions
 static void HandleInitBackgrounds(void);
@@ -597,7 +597,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 13:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -706,7 +706,7 @@ static void HandleInitWindows(void)
 {
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 1, 0xE0);
+    LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
     FillWindowPixelBuffer(0, 0);
     PutWindowTilemap(0);
@@ -811,7 +811,7 @@ static void Task_ReturnAfterPaletteFade(u8 taskId)
 
 static void Task_PaletteFadeToReturn(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     gTasks[taskId].func = Task_ReturnAfterPaletteFade;
 }
 

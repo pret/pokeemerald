@@ -3157,7 +3157,7 @@ u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
             width = lineWidths[strPos];
     }
 
-    return (u8)(GetFontAttribute(fontId, 0) + letterSpacing) * width;
+    return (u8)(GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + letterSpacing) * width;
 }
 
 u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32)
@@ -3193,7 +3193,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         return 0;
 
     if (letterSpacing == -1)
-        localLetterSpacing = GetFontAttribute(fontId, 2);
+        localLetterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     else
         localLetterSpacing = letterSpacing;
 
@@ -3269,7 +3269,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                         if (func == NULL)
                             return 0;
                         if (letterSpacing == -1)
-                            localLetterSpacing = GetFontAttribute(*str, 2);
+                            localLetterSpacing = GetFontAttribute(*str, FONTATTR_LETTER_SPACING);
                         break;
                     case 0x11:
                         glyphWidth = *++str;
@@ -3497,28 +3497,28 @@ u8 GetFontAttribute(u8 fontId, u8 attributeId)
     int result = 0;
     switch (attributeId)
     {
-        case 0:
+        case FONTATTR_MAX_LETTER_WIDTH:
             result = gFontInfos[fontId].maxLetterWidth;
             break;
-        case 1:
+        case FONTATTR_MAX_LETTER_HEIGHT:
             result = gFontInfos[fontId].maxLetterHeight;
             break;
-        case 2:
+        case FONTATTR_LETTER_SPACING:
             result = gFontInfos[fontId].letterSpacing;
             break;
-        case 3:
+        case FONTATTR_LINE_SPACING:
             result = gFontInfos[fontId].lineSpacing;
             break;
-        case 4:
+        case FONTATTR_COLOR_LOWNIBBLE:
             result = gFontInfos[fontId].fontColor_l;
             break;
-        case 5:
+        case FONTATTR_COLOR_FOREGROUND:
             result = gFontInfos[fontId].fgColor;
             break;
-        case 6:
+        case FONTATTR_COLOR_BACKGROUND:
             result = gFontInfos[fontId].bgColor;
             break;
-        case 7:
+        case FONTATTR_COLOR_SHADOW:
             result = gFontInfos[fontId].shadowColor;
             break;
     }

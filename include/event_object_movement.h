@@ -104,7 +104,7 @@ void TrySpawnEventObjects(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
 u8 AddPseudoEventObject(u16, void (*)(struct Sprite *), s16, s16, u8);
 u8 show_sprite(u8, u8, u8);
-u8 SpawnSpecialEventObjectParametrized(u8, u8, u8, s16, s16, u8);
+u8 SpawnSpecialEventObjectParameterized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialEventObject(struct EventObjectTemplate *);
 void sub_8093038(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
