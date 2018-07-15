@@ -11,6 +11,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
 #include "util.h"
+#include "malloc.h"
 #include "constants/battle_ai.h"
 
 #define AI_ACTION_DONE          0x0001
@@ -624,6 +625,25 @@ static void RecordLastUsedMoveByTarget(void)
     }
 }
 
+static bool8 IsBattlerAIControlled(u8 battlerId)
+{
+    switch (GetBattlerPosition(battlerId))
+    {
+    case B_POSITION_PLAYER_LEFT:
+    default:
+        return FALSE;
+    case B_POSITION_OPPONENT_LEFT:
+        return TRUE;
+    case B_POSITION_PLAYER_RIGHT:
+        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+            return FALSE;
+        else
+            return TRUE;
+    case B_POSITION_OPPONENT_RIGHT:
+        return TRUE;
+    }
+}
+
 void ClearBattlerMoveHistory(u8 battlerId)
 {
     s32 i;
@@ -652,19 +672,115 @@ void ClearBattlerItemEffectHistory(u8 battlerId)
     BATTLE_HISTORY->itemEffects[battlerId] = 0;
 }
 
+static void SaveBattlerData(u8 battlerId)
+{
+    if (!IsBattlerAIControlled(battlerId))
+    {
+        u32 i;
+
+        AI_THINKING_STRUCT->saved[battlerId].ability = gBattleMons[battlerId].ability;
+        AI_THINKING_STRUCT->saved[battlerId].heldItem = gBattleMons[battlerId].item;
+        AI_THINKING_STRUCT->saved[battlerId].species = gBattleMons[battlerId].species;
+        for (i = 0; i < 4; i++)
+            AI_THINKING_STRUCT->saved[battlerId].moves[i] = gBattleMons[battlerId].moves[i];
+    }
+}
+
+static void SetBattlerData(u8 battlerId)
+{
+    if (!IsBattlerAIControlled(battlerId))
+    {
+        u32 i;
+
+        // Use the known battler's ability.
+        if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
+            gBattleMons[battlerId].ability = BATTLE_HISTORY->abilities[battlerId];
+        // Check if mon can only have one ability.
+        else if (gBaseStats[gBattleMons[battlerId].species].ability2 == ABILITY_NONE)
+            gBattleMons[battlerId].ability = gBaseStats[gBattleMons[battlerId].species].ability1;
+        else
+        // The ability is unknown.
+            gBattleMons[battlerId].ability = ABILITY_NONE;
+
+        if (BATTLE_HISTORY->itemEffects[battlerId] == 0)
+            gBattleMons[battlerId].item = 0;
+
+        for (i = 0; i < 4; i++)
+        {
+            if (BATTLE_HISTORY->usedMoves[battlerId].moves[i] == 0)
+                gBattleMons[battlerId].moves[i] = 0;
+        }
+    }
+}
+
+static void RestoreBattlerData(u8 battlerId)
+{
+    if (!IsBattlerAIControlled(battlerId))
+    {
+        u32 i;
+
+        gBattleMons[battlerId].ability = AI_THINKING_STRUCT->saved[battlerId].ability;
+        gBattleMons[battlerId].item = AI_THINKING_STRUCT->saved[battlerId].heldItem;
+        gBattleMons[battlerId].species = AI_THINKING_STRUCT->saved[battlerId].species;
+        for (i = 0; i < 4; i++)
+            gBattleMons[battlerId].moves[i] = AI_THINKING_STRUCT->saved[battlerId].moves[i];
+    }
+}
+
 s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    return CalculateMoveDamage(move, battlerAtk, battlerDef, gBattleMoves[move].type, 0, FALSE, FALSE);
+    s32 dmg;
+
+    SaveBattlerData(battlerAtk);
+    SaveBattlerData(battlerDef);
+
+    SetBattlerData(battlerAtk);
+    SetBattlerData(battlerDef);
+
+    dmg = CalculateMoveDamage(move, battlerAtk, battlerDef, gBattleMoves[move].type, 0, FALSE, FALSE);
+
+    RestoreBattlerData(battlerAtk);
+    RestoreBattlerData(battlerDef);
+
+    return dmg;
 }
 
 s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon *mon)
 {
-    return 0;
+    s32 dmg;
+    u32 i;
+    struct BattlePokemon *battleMons = Alloc(sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT);
+
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        battleMons[i] = gBattleMons[i];
+
+    PokemonToBattleMon(mon, &gBattleMons[battlerAtk]);
+    dmg = AI_CalcDamage(move, battlerAtk, battlerDef);
+
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        gBattleMons[i] = battleMons[i];
+
+    Free(battleMons);
+
+    return dmg;
 }
 
 u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    return CalcTypeEffectivenessMultiplier(move, gBattleMoves[move].type, battlerAtk, battlerDef, FALSE);
+    u16 typeEffectiveness;
+
+    SaveBattlerData(battlerAtk);
+    SaveBattlerData(battlerDef);
+
+    SetBattlerData(battlerAtk);
+    SetBattlerData(battlerDef);
+
+    typeEffectiveness = CalcTypeEffectivenessMultiplier(move, gBattleMoves[move].type, battlerAtk, battlerDef, FALSE);
+
+    RestoreBattlerData(battlerAtk);
+    RestoreBattlerData(battlerDef);
+
+    return typeEffectiveness;
 }
 
 static void BattleAICmd_if_random_less_than(void)

@@ -275,6 +275,14 @@ struct WishFutureKnock
     u8 knockedOffPokes[2];
 };
 
+struct AI_SavedBattleMon
+{
+    u8 ability;
+    u16 moves[4];
+    u16 heldItem;
+    u16 species;
+};
+
 struct AI_ThinkingStruct
 {
     u8 aiState;
@@ -287,6 +295,7 @@ struct AI_ThinkingStruct
     u8 aiLogicId;
     u8 filler12[6];
     u8 simulatedRNG[4];
+    struct AI_SavedBattleMon saved[4];
 };
 
 struct UsedMoves

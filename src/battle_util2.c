@@ -17,8 +17,6 @@ extern void sub_81B8FB0(u8, u8);
 
 void AllocateBattleResources(void)
 {
-    gBattleResources = gBattleResources; // something dumb needed to match
-
     if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
         sub_81D55D0();
 
