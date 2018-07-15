@@ -76,6 +76,7 @@ enum
     LIST_ITEM_MOVES,
     LIST_ITEM_ABILITY,
     LIST_ITEM_HELD_ITEM,
+    LIST_ITEM_TYPES,
     LIST_ITEM_STATS,
     LIST_ITEM_STAT_STAGES,
     LIST_ITEM_STATUS1,
@@ -158,6 +159,7 @@ static const u8 sText_Spikes[] = _("Spikes");
 static const u8 sText_Safeguard[] = _("Safeguard");
 static const u8 sText_Mist[] = _("Mist");
 static const u8 sText_ShowOpponentHP[] = _("Opponent Hp");
+static const u8 sText_Types[] = _("Types");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -216,6 +218,7 @@ static const struct ListMenuItem sMainListItems[] =
     {sText_Moves, LIST_ITEM_MOVES},
     {sText_Ability, LIST_ITEM_ABILITY},
     {sText_HeldItem, LIST_ITEM_HELD_ITEM},
+    {sText_Types, LIST_ITEM_TYPES},
     {sText_Stats, LIST_ITEM_STATS},
     {sText_StatStages, LIST_ITEM_STAT_STAGES},
     {sText_Status1, LIST_ITEM_STATUS1},
@@ -429,6 +432,7 @@ static const bool8 sHasChangeableEntries[LIST_ITEM_COUNT] =
 {
     [LIST_ITEM_MOVES] = TRUE,
     [LIST_ITEM_ABILITY] = TRUE,
+    [LIST_ITEM_TYPES] = TRUE,
     [LIST_ITEM_HELD_ITEM] = TRUE,
     [LIST_ITEM_STAT_STAGES] = TRUE,
 };
@@ -739,6 +743,9 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
     case LIST_ITEM_HELD_ITEM:
         itemsCount = 1;
         break;
+    case LIST_ITEM_TYPES:
+        itemsCount = 2;
+        break;
     case LIST_ITEM_MOVES:
         itemsCount = 4;
         break;
@@ -842,6 +849,16 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
         PadString(ItemId_GetName(gBattleMons[data->battlerId].item), text);
         printer.currentY = printer.y = sSecondaryListTemplate.upText_Y;
         AddTextPrinter(&printer, 0, NULL);
+        break;
+    case LIST_ITEM_TYPES:
+        for (i = 0; i < 2; i++)
+        {
+            u8 *types = &gBattleMons[data->battlerId].type1;
+
+            PadString(gTypeNames[types[i]], text);
+            printer.currentY = printer.y = (i * yMultiplier) + sSecondaryListTemplate.upText_Y;
+            AddTextPrinter(&printer, 0, NULL);
+        }
         break;
     case LIST_ITEM_STAT_STAGES:
         for (i = 0; i < 7; i++)
@@ -1062,6 +1079,14 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].item;
         data->modifyArrows.typeOfVal = VAL_U16;
         data->modifyArrows.currValue = gBattleMons[data->battlerId].item;
+        break;
+    case LIST_ITEM_TYPES:
+        data->modifyArrows.minValue = 0;
+        data->modifyArrows.maxValue = NUMBER_OF_MON_TYPES - 1;
+        data->modifyArrows.maxDigits = 2;
+        data->modifyArrows.modifiedValPtr = (u8*)((&gBattleMons[data->battlerId].type1) + data->currentSecondaryListItemId);
+        data->modifyArrows.typeOfVal = VAL_U8;
+        data->modifyArrows.currValue = *(u8*)((&gBattleMons[data->battlerId].type1) + data->currentSecondaryListItemId);
         break;
     case LIST_ITEM_STATS:
         data->modifyArrows.minValue = 0;
