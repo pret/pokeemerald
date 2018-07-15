@@ -940,7 +940,7 @@ void sub_80E9E44(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    data[8] = AddScrollIndicatorArrowPairParametrized(0x02, 0xbc, 0x0c, 0x94, data[0] - data[3], 0x13f8, 0x13f8, &data[2]);
+    data[8] = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xbc, 0x0c, 0x94, data[0] - data[3], 0x13f8, 0x13f8, &data[2]);
 }
 
 void sub_80E9E90(u8 taskId)

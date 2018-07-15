@@ -2,6 +2,7 @@
 #define GUARD_SPRITE_H
 
 #define MAX_SPRITES 64
+#define SPRITE_INVALID_TAG 0xFFFF
 
 struct SpriteSheet
 {
@@ -186,29 +187,29 @@ struct Sprite
     /*0x2A*/ u8 animNum;
     /*0x2B*/ u8 animCmdIndex;
     /*0x2C*/ u8 animDelayCounter:6;
-             u8 animPaused:1;
-             u8 affineAnimPaused:1;
+             bool8 animPaused:1;
+             bool8 affineAnimPaused:1;
     /*0x2D*/ u8 animLoopCounter;
 
     // general purpose data fields
     /*0x2E*/ s16 data[8];
 
-    /*0x3E*/ u16 inUse:1;               //1
-             u16 coordOffsetEnabled:1;  //2
-             u16 invisible:1;           //4
-             u16 flags_3:1;             //8
-             u16 flags_4:1;             //0x10
-             u16 flags_5:1;             //0x20
-             u16 flags_6:1;             //0x40
-             u16 flags_7:1;             //0x80
-    /*0x3F*/ u16 hFlip:1;               //1
-             u16 vFlip:1;               //2
-             u16 animBeginning:1;       //4
-             u16 affineAnimBeginning:1; //8
-             u16 animEnded:1;           //0x10
-             u16 affineAnimEnded:1;     //0x20
-             u16 usingSheet:1;          //0x40
-             u16 flags_f:1;             //0x80
+    /*0x3E*/ bool16 inUse:1;               //1
+             bool16 coordOffsetEnabled:1;  //2
+             bool16 invisible:1;           //4
+             bool16 flags_3:1;             //8
+             bool16 flags_4:1;             //0x10
+             bool16 flags_5:1;             //0x20
+             bool16 flags_6:1;             //0x40
+             bool16 flags_7:1;             //0x80
+    /*0x3F*/ bool16 hFlip:1;               //1
+             bool16 vFlip:1;               //2
+             bool16 animBeginning:1;       //4
+             bool16 affineAnimBeginning:1; //8
+             bool16 animEnded:1;           //0x10
+             bool16 affineAnimEnded:1;     //0x20
+             bool16 usingSheet:1;          //0x40
+             bool16 flags_f:1;             //0x80
 
     /*0x40*/ u16 sheetTileStart;
 

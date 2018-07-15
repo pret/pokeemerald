@@ -999,7 +999,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27751B:: @ 827751B
 	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
 	copyvar VAR_0x8007, VAR_LAST_TALKED
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277668
 	message OldaleTown_PokemonCenter_2F_Text_27940D
@@ -1108,7 +1108,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2776A4:: @ 82776A4
 	specialvar VAR_RESULT, sub_813990C
 	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276E13
 	message OldaleTown_PokemonCenter_2F_Text_279013
@@ -1396,7 +1396,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277B8A:: @ 8277B8A
 	lockall
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_27733F
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
 	goto_eq EventScript_277BB4
 	fadescreen 1
@@ -1495,7 +1495,7 @@ MossdeepCity_GameCorner_1F_EventScript_277C91:: @ 8277C91
 	faceplayer
 	message MossdeepCity_GameCorner_1F_Text_278CEB
 	waitmessage
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E48
 	delay 60

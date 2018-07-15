@@ -1270,7 +1270,7 @@ _081611D4:
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	bne _08161210
-	ldr r0, =gUnknown_0203CE8C
+	ldr r0, =gTempScrollArrowTemplate
 	adds r2, r0, 0
 	ldr r1, =gUnknown_085CEBD0
 	ldm r1!, {r3,r5,r6}

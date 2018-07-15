@@ -1080,7 +1080,7 @@ static bool8 Phase2_Blur_Func2(struct Task *task)
     {
         task->tData1 = 4;
         if (++task->tData2 == 10)
-            BeginNormalPaletteFade(-1, -1, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, 0);
         SetGpuReg(REG_OFFSET_MOSAIC, (task->tData2 & 15) * 17);
         if (task->tData2 > 14)
             task->tState++;
@@ -1107,7 +1107,7 @@ static bool8 Phase2_Swirl_Func1(struct Task *task)
 {
     sub_8149F08();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, 0);
     sub_8149F98(gScanlineEffectRegBuffers[1], sTransitionStructPtr->field_14, 0, 2, 0, 160);
 
     SetVBlankCallback(VBlankCB_Phase2_Swirl);
@@ -1162,7 +1162,7 @@ static bool8 Phase2_Shuffle_Func1(struct Task *task)
     sub_8149F08();
     ScanlineEffect_Clear();
 
-    BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, 0);
     memset(gScanlineEffectRegBuffers[1], sTransitionStructPtr->field_16, 0x140);
 
     SetVBlankCallback(VBlankCB_Phase2_Shuffle);
@@ -1973,7 +1973,7 @@ static bool8 Phase2_Ripple_Func2(struct Task *task)
     if (++task->tData3 == 81)
     {
         task->tData4++;
-        BeginNormalPaletteFade(-1, -2, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 0x10, 0);
     }
 
     if (task->tData4 != 0 && !gPaletteFade.active)
@@ -3982,7 +3982,7 @@ static bool8 Phase2_30_Func4(struct Task *task)
     if (++task->tData3 == 101)
     {
         task->tData4++;
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     }
 
     if (task->tData4 != 0 && !gPaletteFade.active)

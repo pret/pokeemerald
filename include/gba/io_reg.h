@@ -545,6 +545,35 @@
 #define BGCNT_AFF512x512        0x8000
 #define BGCNT_AFF1024x1024      0xC000
 
+// WININ/OUT
+#define WININ_WIN0_BG0      (1 << 0)
+#define WININ_WIN0_BG1      (1 << 1)
+#define WININ_WIN0_BG2      (1 << 2)
+#define WININ_WIN0_BG3      (1 << 3)
+#define WININ_WIN0_OBJ      (1 << 4)
+#define WININ_WIN0_CLR      (1 << 5)
+#define WININ_WIN1_BG0      (1 << 8)
+#define WININ_WIN1_BG1      (1 << 9)
+#define WININ_WIN1_BG2      (1 << 10)
+#define WININ_WIN1_BG3      (1 << 11)
+#define WININ_WIN1_OBJ      (1 << 12)
+#define WININ_WIN1_CLR      (1 << 13)
+
+#define WINOUT_WIN01_BG0    (1 << 0)
+#define WINOUT_WIN01_BG1    (1 << 1)
+#define WINOUT_WIN01_BG2    (1 << 2)
+#define WINOUT_WIN01_BG3    (1 << 3)
+#define WINOUT_WIN01_OBJ    (1 << 4)
+#define WINOUT_WIN01_CLR    (1 << 5)
+#define WINOUT_WINOBJ_BG0   (1 << 8)
+#define WINOUT_WINOBJ_BG1   (1 << 9)
+#define WINOUT_WINOBJ_BG2   (1 << 10)
+#define WINOUT_WINOBJ_BG3   (1 << 11)
+#define WINOUT_WINOBJ_OBJ   (1 << 12)
+#define WINOUT_WINOBJ_CLR   (1 << 13)
+
+#define WINHV_COORDS(m, n)     (((m) << 8) | (n))
+
 // BLDCNT
 // Bits 0-5 select layers for the 1st target
 #define BLDCNT_TGT1_BG0      (1 << 0)

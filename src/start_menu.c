@@ -1261,7 +1261,7 @@ static void sub_80A0550(u8 taskId)
             sub_8098858(0, 8, 14);
             PutWindowTilemap(0);
             CopyWindowToVram(0, 3);
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
 
             if (gWirelessCommType != 0 && InUnionRoom())
             {
@@ -1294,7 +1294,7 @@ static void sub_80A0550(u8 taskId)
             }
             break;
         case 3:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
             *step = 4;
             break;
         case 4:

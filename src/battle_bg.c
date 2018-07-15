@@ -75,8 +75,8 @@ void sub_80356D0(void)
 
 void ApplyPlayerChosenFrameToBattleMenu(void)
 {
-    sub_809882C(2, 0x12, 0x10);
-    sub_809882C(2, 0x22, 0x10);
+    LoadUserWindowBorderGfx(2, 0x12, 0x10);
+    LoadUserWindowBorderGfx(2, 0x22, 0x10);
     LoadCompressedPalette(gUnknown_08D85600, 0x50, 0x20);
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)

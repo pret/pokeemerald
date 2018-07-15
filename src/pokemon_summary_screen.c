@@ -541,7 +541,7 @@ bool8 sub_81BFB10(void)
         gMain.state++;
         break;
     case 24:
-        BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -761,7 +761,7 @@ void sub_81C0434()
 
 void sub_81C044C(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gTasks[taskId].func = sub_81C0484;
 }
 

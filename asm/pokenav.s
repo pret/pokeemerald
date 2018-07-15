@@ -10101,7 +10101,7 @@ sub_81CC09C: @ 81CC09C
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x40
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x4
@@ -21001,7 +21001,7 @@ sub_81D1E90: @ 81D1E90
 	movs r1, 0xC8
 	movs r2, 0xC
 	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	strb r0, [r4, 0x9]
 	add sp, 0x10
 	pop {r4}
@@ -22282,7 +22282,7 @@ sub_81D2824: @ 81D2824
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20
