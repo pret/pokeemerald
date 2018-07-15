@@ -10109,9 +10109,9 @@ _08194074:
 	lsls r0, r4, 1
 	add r0, r10
 	ldrh r0, [r0]
-	bl AI_TypeCalc
-	lsls r0, 24
-	lsrs r5, r0, 24
+	bl CalcPartyMonTypeEffectivenessMultiplier
+	ldr r5, =gMoveResultFlags
+	ldrb r5, [r5]
 	movs r0, 0x6
 	ands r0, r5
 	cmp r0, 0x6

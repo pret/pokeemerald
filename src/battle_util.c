@@ -4661,6 +4661,29 @@ static inline void MulByTypeEffectiveness(u16 *modifier, u16 move, u8 moveType, 
     MulModifier(modifier, mod);
 }
 
+static void UpdateMoveResultFlags(u16 modifier)
+{
+    if (modifier == UQ_4_12(0.0))
+    {
+        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+        gMoveResultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE);
+    }
+    else if (modifier == UQ_4_12(1.0))
+    {
+        gMoveResultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
+    }
+    else if (modifier > UQ_4_12(1.0))
+    {
+        gMoveResultFlags |= MOVE_RESULT_SUPER_EFFECTIVE;
+        gMoveResultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
+    }
+    else //if (modifier < UQ_4_12(1.0))
+    {
+        gMoveResultFlags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
+        gMoveResultFlags &= ~(MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
+    }
+}
+
 u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 battlerDef, bool32 recordAbilities)
 {
     u16 modifier = UQ_4_12(1.0);
@@ -4697,25 +4720,32 @@ u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 bat
         }
     }
 
-    if (modifier == UQ_4_12(0.0))
+    UpdateMoveResultFlags(modifier);
+    return modifier;
+}
+
+u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u8 abilityDef)
+{
+    u16 modifier = UQ_4_12(1.0);
+    u8 moveType = gBattleMoves[move].type;
+
+    if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
-        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-        gMoveResultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE);
-    }
-    else if (modifier == UQ_4_12(1.0))
-    {
-        gMoveResultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
-    }
-    else if (modifier > UQ_4_12(1.0))
-    {
-        gMoveResultFlags |= MOVE_RESULT_SUPER_EFFECTIVE;
-        gMoveResultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
-    }
-    else //if (modifier < UQ_4_12(1.0))
-    {
-        gMoveResultFlags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-        gMoveResultFlags &= ~(MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
+        MulByTypeEffectiveness(&modifier, move, moveType, 0, gBaseStats[speciesDef].type1);
+        if (gBaseStats[speciesDef].type2 != gBaseStats[speciesDef].type1)
+            MulByTypeEffectiveness(&modifier, move, moveType, 0, gBaseStats[speciesDef].type2);
+
+        if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE && !(gFieldStatuses & STATUS_FIELD_GRAVITY))
+            modifier = UQ_4_12(0.0);
+        if (abilityDef == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && gBattleMoves[move].power)
+            modifier = UQ_4_12(0.0);
     }
 
+    UpdateMoveResultFlags(modifier);
     return modifier;
+}
+
+u16 GetTypeModifier(u8 atkType, u8 defType)
+{
+    return sTypeEffectivenessTable[atkType][defType];
 }

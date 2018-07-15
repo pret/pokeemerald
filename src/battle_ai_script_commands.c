@@ -652,6 +652,21 @@ void ClearBattlerItemEffectHistory(u8 battlerId)
     BATTLE_HISTORY->itemEffects[battlerId] = 0;
 }
 
+s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
+{
+    return CalculateMoveDamage(move, battlerAtk, battlerDef, gBattleMoves[move].type, 0, FALSE, FALSE);
+}
+
+s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon *mon)
+{
+    return 0;
+}
+
+u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
+{
+    return CalcTypeEffectivenessMultiplier(move, gBattleMoves[move].type, battlerAtk, battlerDef, FALSE);
+}
+
 static void BattleAICmd_if_random_less_than(void)
 {
     u16 random = Random();
@@ -1194,9 +1209,8 @@ static void BattleAICmd_get_how_powerful_move_is(void)
                 && gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].power > 1)
             {
                 gCurrentMove = gBattleMons[sBattler_AI].moves[checkedMove];
-                AI_CalcDmg(sBattler_AI, gBattlerTarget);
-                TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
-                moveDmgs[checkedMove] = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[checkedMove] / 100;
+                moveDmgs[checkedMove] = AI_CalcDamage(gCurrentMove, sBattler_AI, gBattlerTarget);
+                moveDmgs[checkedMove] = moveDmgs[checkedMove] * AI_THINKING_STRUCT->simulatedRNG[checkedMove] / 100;
                 if (moveDmgs[checkedMove] == 0)
                     moveDmgs[checkedMove] = 1;
             }
@@ -1456,32 +1470,39 @@ static void BattleAICmd_get_highest_type_effectiveness(void)
     u8 *dynamicMoveType;
 
     gDynamicBasePower = 0;
-    dynamicMoveType = &gBattleStruct->dynamicMoveType;
-    *dynamicMoveType = 0;
+    gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
-    gIsCriticalHit = 1;
     AI_THINKING_STRUCT->funcResult = 0;
 
     for (i = 0; i < 4; i++)
     {
-        gBattleMoveDamage = 40;
         gCurrentMove = gBattleMons[sBattler_AI].moves[i];
-
         if (gCurrentMove != MOVE_NONE)
         {
-            TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+            u32 effectivenessMultiplier = AI_GetTypeEffectiveness(gCurrentMove, sBattler_AI, gBattlerTarget);
 
-            if (gBattleMoveDamage == 120) // Super effective STAB.
-                gBattleMoveDamage = AI_EFFECTIVENESS_x2;
-            if (gBattleMoveDamage == 240)
-                gBattleMoveDamage = AI_EFFECTIVENESS_x4;
-            if (gBattleMoveDamage == 30) // Not very effective STAB.
-                gBattleMoveDamage = AI_EFFECTIVENESS_x0_5;
-            if (gBattleMoveDamage == 15)
-                gBattleMoveDamage = AI_EFFECTIVENESS_x0_25;
-
-            if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
+            switch (effectivenessMultiplier)
+            {
+            case UQ_4_12(0.0):
+            default:
                 gBattleMoveDamage = AI_EFFECTIVENESS_x0;
+                break;
+            case UQ_4_12(0.25):
+                gBattleMoveDamage = AI_EFFECTIVENESS_x0_25;
+                break;
+            case UQ_4_12(0.5):
+                gBattleMoveDamage = AI_EFFECTIVENESS_x0_5;
+                break;
+            case UQ_4_12(1.0):
+                gBattleMoveDamage = AI_EFFECTIVENESS_x1;
+                break;
+            case UQ_4_12(2.0):
+                gBattleMoveDamage = AI_EFFECTIVENESS_x2;
+                break;
+            case UQ_4_12(4.0):
+                gBattleMoveDamage = AI_EFFECTIVENESS_x4;
+                break;
+            }
 
             if (AI_THINKING_STRUCT->funcResult < gBattleMoveDamage)
                 AI_THINKING_STRUCT->funcResult = gBattleMoveDamage;
@@ -1494,31 +1515,36 @@ static void BattleAICmd_get_highest_type_effectiveness(void)
 static void BattleAICmd_if_type_effectiveness(void)
 {
     u8 damageVar;
+    u32 effectivenessMultiplier;
 
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
-    gIsCriticalHit = 1;
-
-    gBattleMoveDamage = AI_EFFECTIVENESS_x1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
 
-    TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
-
-    if (gBattleMoveDamage == 120) // Super effective STAB.
-        gBattleMoveDamage = AI_EFFECTIVENESS_x2;
-    if (gBattleMoveDamage == 240)
-        gBattleMoveDamage = AI_EFFECTIVENESS_x4;
-    if (gBattleMoveDamage == 30) // Not very effective STAB.
-        gBattleMoveDamage = AI_EFFECTIVENESS_x0_5;
-    if (gBattleMoveDamage == 15)
-        gBattleMoveDamage = AI_EFFECTIVENESS_x0_25;
-
-    if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
-        gBattleMoveDamage = AI_EFFECTIVENESS_x0;
-
-    // Store gBattleMoveDamage in a u8 variable because gAIScriptPtr[1] is a u8.
-    damageVar = gBattleMoveDamage;
+    effectivenessMultiplier = AI_GetTypeEffectiveness(gCurrentMove, sBattler_AI, gBattlerTarget);
+    switch (effectivenessMultiplier)
+    {
+    case UQ_4_12(0.0):
+    default:
+        damageVar = AI_EFFECTIVENESS_x0;
+        break;
+    case UQ_4_12(0.25):
+        damageVar = AI_EFFECTIVENESS_x0_25;
+        break;
+    case UQ_4_12(0.5):
+        damageVar = AI_EFFECTIVENESS_x0_5;
+        break;
+    case UQ_4_12(1.0):
+        damageVar = AI_EFFECTIVENESS_x1;
+        break;
+    case UQ_4_12(2.0):
+        damageVar = AI_EFFECTIVENESS_x2;
+        break;
+    case UQ_4_12(4.0):
+        damageVar = AI_EFFECTIVENESS_x4;
+        break;
+    }
 
     if (damageVar == gAIScriptPtr[1])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
@@ -1578,7 +1604,7 @@ static void BattleAICmd_if_status_not_in_party(void)
     u32 statusToCompareTo;
     u8 battlerId;
 
-    switch(gAIScriptPtr[1])
+    switch (gAIScriptPtr[1])
     {
     case 1:
         battlerId = sBattler_AI;
@@ -1600,8 +1626,8 @@ static void BattleAICmd_if_status_not_in_party(void)
 
         if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
         {
-            gAIScriptPtr += 10; // UB: Still bugged in Emerald. Uncomment the return statement to fix.
-            // return;
+            gAIScriptPtr += 10;
+            return;
         }
     }
 
@@ -1700,6 +1726,8 @@ static void BattleAICmd_if_stat_level_not_equal(void)
 
 static void BattleAICmd_if_can_faint(void)
 {
+    s32 dmg;
+
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power < 2)
     {
         gAIScriptPtr += 5;
@@ -1709,18 +1737,14 @@ static void BattleAICmd_if_can_faint(void)
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
-    gIsCriticalHit = 1;
-    gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
-    AI_CalcDmg(sBattler_AI, gBattlerTarget);
-    TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
-
-    gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
+    dmg = AI_CalcDamage(AI_THINKING_STRUCT->moveConsidered, sBattler_AI, gBattlerTarget);
+    dmg = dmg * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
     // Moves always do at least 1 damage.
-    if (gBattleMoveDamage == 0)
-        gBattleMoveDamage = 1;
+    if (dmg == 0)
+        dmg = 1;
 
-    if (gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
+    if (gBattleMons[gBattlerTarget].hp <= dmg)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1728,6 +1752,8 @@ static void BattleAICmd_if_can_faint(void)
 
 static void BattleAICmd_if_cant_faint(void)
 {
+    s32 dmg;
+
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power < 2)
     {
         gAIScriptPtr += 5;
@@ -1737,16 +1763,14 @@ static void BattleAICmd_if_cant_faint(void)
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
-    gIsCriticalHit = 1;
-    gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
-    AI_CalcDmg(sBattler_AI, gBattlerTarget);
-    TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+    dmg = AI_CalcDamage(AI_THINKING_STRUCT->moveConsidered, sBattler_AI, gBattlerTarget);
+    dmg = dmg * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
-    gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
+    // Moves always do at least 1 damage.
+    if (dmg == 0)
+        dmg = 1;
 
-    // This macro is missing the damage 0 = 1 assumption.
-
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
+    if (gBattleMons[gBattlerTarget].hp > dmg)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
