@@ -594,7 +594,7 @@ LilycoveCity_ContestLobby_EventScript_2940BB:: @ 82940BB
 	call LilycoveCity_ContestLobby_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_294160
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_2941ED
 	message LilycoveCity_ContestLobby_Text_293955

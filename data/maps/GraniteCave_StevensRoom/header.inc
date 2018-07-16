@@ -5,11 +5,11 @@ GraniteCave_StevensRoom: @ 8483FD8
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 288
-	.byte 55
+	.byte MAPSEC_GRANITE_CAVE
 	.byte 0
-	.byte 0
-	.byte 4
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

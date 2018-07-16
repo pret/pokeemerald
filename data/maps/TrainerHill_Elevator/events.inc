@@ -1,5 +1,5 @@
 TrainerHill_Elevator_EventObjects: @ 853DD84
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 0, 6, 3, 8, 1, 1, 0, 0, TrainerHill_Elevator_EventScript_26935F, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 0, 6, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, TrainerHill_Elevator_EventScript_26935F, 0
 
 TrainerHill_Elevator_MapWarps: @ 853DD9C
 	warp_def 1, 6, 3, 1, MAP_TRAINER_HILL_ROOF

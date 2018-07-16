@@ -5,11 +5,11 @@ FallarborTown: @ 8482624
 	.4byte FallarborTown_MapConnections
 	.2byte MUS_TONEKUSA
 	.2byte 14
-	.byte 4
+	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
-	.byte 2
-	.byte 1
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_TOWN
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

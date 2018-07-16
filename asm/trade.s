@@ -241,11 +241,11 @@ _08077310:
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl LoadSav2WindowGfx
+	bl LoadUserWindowBorderGfx
 	bl LoadMonIconPalettes
 	ldr r2, =gUnknown_0203229C
 	ldr r0, [r2]

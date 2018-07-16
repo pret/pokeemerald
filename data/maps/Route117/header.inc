@@ -5,11 +5,11 @@ Route117: @ 8482838
 	.4byte Route117_MapConnections
 	.2byte MUS_DOORO_X1
 	.2byte 33
-	.byte 32
+	.byte MAPSEC_ROUTE_117
 	.byte 0
-	.byte 2
-	.byte 3
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

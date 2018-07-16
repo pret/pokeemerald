@@ -5,11 +5,11 @@ MtPyre_3F: @ 848409C
 	.4byte 0x0
 	.2byte MUS_M_DUNGON
 	.2byte 139
-	.byte 65
+	.byte MAPSEC_MT_PYRE
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 8
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

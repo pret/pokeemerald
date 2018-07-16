@@ -77,7 +77,7 @@ void CB2_InitMysteryEventMenu(void)
             FillWindowPixelBuffer(i, 0);
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
-        LoadSav2WindowGfx(0, 1u, 0xD0u);
+        LoadUserWindowBorderGfx(0, 1u, 0xD0u);
         sub_81978B0(0xE0);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -121,7 +121,7 @@ static void CB2_MysteryEventMenu(void)
         PutWindowTilemap(0);
         CopyWindowToVram(0, 3);
         ShowBg(0);
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         gMain.state++;
         break;
     case 1:
@@ -264,7 +264,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 15:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
         gMain.state++;
         break;
     case 16:

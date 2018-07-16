@@ -423,7 +423,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81BE79C
 	def_special sub_81BE7F4
 	def_special sub_81398C0
-	def_special sub_80093CC
+	def_special IsWirelessAdapterConnected
 	def_special BerryBlenderLinkBecomeLeader
 	def_special BerryBlenderLinkJoinGroup
 	def_special UnionRoomSpecial

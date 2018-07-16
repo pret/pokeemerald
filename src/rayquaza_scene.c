@@ -1563,7 +1563,7 @@ static void Task_DuoFightAnim(u8 taskId)
     }
 
     BlendPalettes(-1, 0x10, 0);
-    BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
     SetVBlankCallback(VBlankCB_DuoFight);
     PlaySE(SE_T_OOAME);
 }
@@ -1715,7 +1715,7 @@ static void sub_81D752C(u8 taskId)
 static void DuoFightEnd(u8 taskId, s8 palDelay)
 {
     PlaySE(SE_T_OOAME_E);
-    BeginNormalPaletteFade(-1, palDelay, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, palDelay, 0, 0x10, 0);
     gTasks[taskId].func = Task_DuoFightEnd;
 }
 
@@ -1971,7 +1971,7 @@ static void Task_HandleRayTakesFlight(u8 taskId)
     case 0:
         if (data[1] == 8)
         {
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
             data[2] = 0;
             data[3] = 30;
             data[4] = 0;
@@ -2012,7 +2012,7 @@ static void Task_HandleRayTakesFlight(u8 taskId)
             if (data[1] > 295)
             {
                 data[0]++;
-                BeginNormalPaletteFade(-1, 6, 0, 0x10, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 6, 0, 0x10, 0);
             }
         }
         break;
@@ -2174,7 +2174,7 @@ static void Task_HandleRayDescends(u8 taskId)
     case 0:
         if (data[1] == 8)
         {
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
             data[1] = 0;
             data[0]++;
         }
@@ -2219,7 +2219,7 @@ static void Task_HandleRayDescends(u8 taskId)
         }
         break;
     case 4:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
         gTasks[taskId].func = Task_RayDescendsEnd;
         break;
     }
@@ -2366,7 +2366,7 @@ static void Task_HandleRayCharges(u8 taskId)
     case 0:
         if (data[1] == 8)
         {
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
             data[1] = 0;
             data[0]++;
         }
@@ -2399,7 +2399,7 @@ static void Task_HandleRayCharges(u8 taskId)
         }
         break;
     case 3:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
         gTasks[taskId].func = Task_RayChargesEnd;
         break;
     }
@@ -2532,7 +2532,7 @@ static void Task_HandleRayChasesAway(u8 taskId)
         if (data[1] == 8)
         {
             sub_81D90A8(taskId);
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
             data[1] = 0;
             data[0]++;
         }
@@ -2574,7 +2574,7 @@ static void Task_HandleRayChasesAway(u8 taskId)
         }
         break;
     case 3:
-        BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, 0);
         gTasks[taskId].func = Task_RayChasesAwayEnd;
         break;
     }

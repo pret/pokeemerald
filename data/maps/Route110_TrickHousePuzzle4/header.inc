@@ -5,11 +5,11 @@ Route110_TrickHousePuzzle4: @ 8485BF4
 	.4byte 0x0
 	.2byte MUS_KARAKURI
 	.2byte 250
-	.byte 25
+	.byte MAPSEC_ROUTE_110
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

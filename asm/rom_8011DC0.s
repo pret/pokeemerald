@@ -679,7 +679,7 @@ _08012B3C:
 	bl sub_8013398
 	strb r0, [r6, 0x13]
 	ldrb r0, [r6, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	b _08012E5C
 	.pool
 _08012B54:
@@ -837,7 +837,7 @@ _08012C5C:
 	movs r0, 0
 	strb r0, [r1, 0x1B]
 	ldrb r0, [r6, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	ldrb r0, [r6, 0x13]
 	adds r0, 0x1
 	strb r0, [r6, 0x13]
@@ -908,7 +908,7 @@ _08012D04:
 	ldr r0, [r6]
 	bl sub_8013398
 	ldrb r0, [r6, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 _08012D40:
 	movs r0, 0x4
 	strb r0, [r6, 0xC]
@@ -1459,7 +1459,7 @@ _08013228:
 	movs r0, 0x2
 	bl PlaySE
 	ldrb r0, [r4, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	ldr r0, =gStringVar2
 	ldrb r2, [r4, 0x13]
 	lsls r2, 5
@@ -1478,7 +1478,7 @@ _0801325C:
 	movs r1, 0
 	bl sub_8011A64
 	ldrb r0, [r4, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	strb r5, [r4, 0xC]
 	movs r0, 0x1
 	b _08013272
@@ -2373,7 +2373,7 @@ _08013A70:
 	strb r0, [r6, 0x8]
 _08013A72:
 	ldrb r0, [r6, 0xE]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	b _08013B82
 _08013A7A:
 	bl sub_8011A74
@@ -2542,7 +2542,7 @@ sub_8013BD8: @ 8013BD8
 	movs r1, 0
 	bl CreateWirelessStatusIndicatorSprite
 	ldrb r0, [r4, 0xE]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	ldr r0, =gStringVar1
 	ldrb r2, [r4, 0xF]
 	lsls r2, 5
@@ -4281,7 +4281,7 @@ _08014C34:
 	bl sub_8013398
 	strb r0, [r5, 0x13]
 	ldrb r0, [r5, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 _08014C42:
 	movs r0, 0x2
 	strb r0, [r5, 0xC]
@@ -4326,7 +4326,7 @@ _08014C82:
 	adds r1, r0
 	strb r4, [r1, 0x1B]
 	ldrb r0, [r5, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	movs r0, 0x5
 	strb r0, [r5, 0x19]
 	ldrb r1, [r5, 0x13]
@@ -4396,7 +4396,7 @@ _08014CF2:
 	movs r0, 0
 	strb r0, [r1, 0x1B]
 	ldrb r0, [r5, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	ldrb r0, [r5, 0x13]
 	adds r0, 0x1
 	strb r0, [r5, 0x13]
@@ -4441,7 +4441,7 @@ _08014D64:
 	ldr r0, [r5]
 	bl sub_8013398
 	ldrb r0, [r5, 0x12]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	movs r0, 0x2
 	strb r0, [r5, 0xC]
 _08014DA4:
@@ -4784,7 +4784,7 @@ _080150B8:
 	bl PlaySE
 _080150CE:
 	ldrb r0, [r7, 0xE]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	b _080152A0
 _080150D6:
 	ldrb r0, [r7, 0xE]
@@ -4818,7 +4818,7 @@ _080150D6:
 	movs r1, 0
 	bl CreateWirelessStatusIndicatorSprite
 	ldrb r0, [r7, 0xE]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	ldr r0, =gStringVar1
 	ldrb r2, [r7, 0xF]
 	lsls r2, 5
@@ -5152,7 +5152,7 @@ _08015436:
 	b _08015604
 _0801543E:
 	ldrb r0, [r5, 0xE]
-	bl sub_81AE70C
+	bl RedrawListMenu
 	b _08015604
 _08015446:
 	ldrb r0, [r5, 0x13]
@@ -10972,11 +10972,11 @@ _08018574:
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xE0
-	bl LoadSav2WindowGfx
+	bl LoadUserWindowBorderGfx
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xF0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	movs r4, 0x20
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -15907,11 +15907,11 @@ _0801AD8C:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl LoadSav2WindowGfx
+	bl LoadUserWindowBorderGfx
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	bl sub_819789C
 	ldr r0, =sub_801AC40
 	bl SetVBlankCallback
@@ -27081,11 +27081,11 @@ sub_8020740: @ 8020740
 	movs r0, 0x3
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl LoadSav2WindowGfx
+	bl LoadUserWindowBorderGfx
 	movs r0, 0x3
 	movs r1, 0xA
 	movs r2, 0x20
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xE0
 	movs r2, 0x20
@@ -30171,7 +30171,7 @@ _0802210C:
 	ldr r4, =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	ldrb r0, [r5]
 	movs r1, 0
 	adds r2, r4, 0
@@ -30370,7 +30370,7 @@ _08022296:
 	ldr r4, =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	ldrb r0, [r6, 0x2]
 	movs r1, 0
 	adds r2, r4, 0
@@ -35221,7 +35221,7 @@ sub_80248B0: @ 80248B0
 	ldr r5, =0x0000021d
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	ldrb r4, [r4]
 	bl sub_80247BC
 	adds r3, r0, 0
@@ -41645,7 +41645,7 @@ sub_8027BEC: @ 8027BEC
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD
@@ -44214,7 +44214,7 @@ sub_802902C: @ 802902C
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xB0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	pop {r0}
 	bx r0
 	thumb_func_end sub_802902C
@@ -54638,7 +54638,7 @@ sub_802E500: @ 802E500
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl LoadSav2WindowGfx_
+	bl LoadUserWindowBorderGfx_
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD

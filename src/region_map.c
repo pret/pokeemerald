@@ -1603,7 +1603,7 @@ void MCB2_FlyMap(void)
             gMain.state++;
             break;
         case 3:
-            LoadSav2WindowGfx(0, 0x65, 0xd0);
+            LoadUserWindowBorderGfx(0, 0x65, 0xd0);
             clear_scheduled_bg_copies_to_vram();
             gMain.state++;
             break;
@@ -1849,7 +1849,7 @@ static void sub_8124D14(void)
     switch (gUnknown_0203A148->unk_004)
     {
         case 0:
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
             gUnknown_0203A148->unk_004++;
             break;
         case 1:
@@ -1896,7 +1896,7 @@ static void sub_8124E0C(void)
     switch (gUnknown_0203A148->unk_004)
     {
         case 0:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
             gUnknown_0203A148->unk_004++;
             break;
         case 1:

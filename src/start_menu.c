@@ -1208,7 +1208,7 @@ static bool32 sub_80A03E4(u8 *par1)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sUnknown_085105A8, ARRAY_COUNT(sUnknown_085105A8));
         InitWindows(sUnknown_085105AC);
-        LoadSav2WindowGfx_(0, 8, 224);
+        LoadUserWindowBorderGfx_(0, 8, 224);
         sub_81978B0(240);
         break;
     case 3:
@@ -1261,7 +1261,7 @@ static void sub_80A0550(u8 taskId)
             sub_8098858(0, 8, 14);
             PutWindowTilemap(0);
             CopyWindowToVram(0, 3);
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
 
             if (gWirelessCommType != 0 && InUnionRoom())
             {
@@ -1294,7 +1294,7 @@ static void sub_80A0550(u8 taskId)
             }
             break;
         case 3:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
             *step = 4;
             break;
         case 4:
