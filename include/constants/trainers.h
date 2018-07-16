@@ -862,9 +862,9 @@
 // Special Trainer Ids.
 #define TRAINER_FRONTIER_BRAIN      1022
 #define TRAINER_SECRET_BASE         1024
-#define TRAINER_LINK_OPPONENT       0x800
-#define TRAINER_OPPONENT_C00        0xC00
-#define TRAINER_STEVEN_PARTNER      0xC03
+#define TRAINER_LINK_OPPONENT       2048
+#define TRAINER_OPPONENT_C00        3072
+#define TRAINER_STEVEN_PARTNER      3075
 
 #define TRAINER_PIC_HIKER                  0
 #define TRAINER_PIC_AQUA_GRUNT_M           1

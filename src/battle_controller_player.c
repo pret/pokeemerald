@@ -1169,7 +1169,7 @@ static void Task_GiveExpToMon(u8 taskId)
             gainedExp -= nextLvlExp - currExp;
             savedActiveBattler = gActiveBattler;
             gActiveBattler = battlerId;
-            BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELLED_UP, gainedExp);
+            BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELED_UP, gainedExp);
             gActiveBattler = savedActiveBattler;
 
             if (IsDoubleBattle() == TRUE
@@ -1248,7 +1248,7 @@ static void sub_8059400(u8 taskId)
                 gainedExp -= expOnNextLvl - currExp;
                 savedActiveBattler = gActiveBattler;
                 gActiveBattler = battlerId;
-                BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELLED_UP, gainedExp);
+                BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELED_UP, gainedExp);
                 gActiveBattler = savedActiveBattler;
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
             }

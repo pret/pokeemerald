@@ -7,6 +7,7 @@
 #include "task.h"
 #include "field_effect.h"
 #include "constants/flags.h"
+#include "constants/maps.h"
 
 extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId); // fieldmap
 extern void DrawWholeMapView(); // field_camera
@@ -205,14 +206,25 @@ void SealedChamberShakingEffect(u8 taskId)
 // moved later in the function because it was rewritten.
 bool8 ShouldDoBrailleStrengthEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x06))
+    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH)
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(DESERT_RUINS)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(DESERT_RUINS))
     {
         if (gSaveBlock1Ptr->pos.x == 6 && gSaveBlock1Ptr->pos.y == 23)
-            { sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE; return TRUE; }
+        {
+            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            return TRUE;
+        }
         else if (gSaveBlock1Ptr->pos.x == 5 && gSaveBlock1Ptr->pos.y == 23)
-            { sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE; return TRUE; }
+        {
+            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            return TRUE;
+        }
         else if (gSaveBlock1Ptr->pos.x == 7 && gSaveBlock1Ptr->pos.y == 23)
-            { sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE; return TRUE; }
+        {
+            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            return TRUE;
+        }
     }
 
     return FALSE;

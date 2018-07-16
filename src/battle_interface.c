@@ -1710,8 +1710,8 @@ void Task_HidePartyStatusSummary(u8 taskId)
     for (i = 0; i < PARTY_SIZE; i++)
         ballIconSpriteIds[i] = gTasks[taskId].tBallIconSpriteId(i);
 
-    SetGpuReg(REG_OFFSET_BLDCNT, 0x3F40);
-    SetGpuReg(REG_OFFSET_BLDALPHA, 0x10);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
 
     gTasks[taskId].tData15 = 16;
 
