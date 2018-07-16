@@ -1643,19 +1643,19 @@ BattleScript_EffectSwagger::
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
-BattleScript_SwaggerTryConfuse::
+BattleScript_SwaggerTryConfuse:
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	seteffectprimary
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectFuryCutter::
+BattleScript_EffectFuryCutter:
 	attackcanceler
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_FuryCutterHit, ACC_CURR_MOVE
-BattleScript_FuryCutterHit::
+BattleScript_FuryCutterHit:
 	handlefurycutter
 	critcalc
 	damagecalc
