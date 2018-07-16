@@ -5,11 +5,11 @@ MarineCave_End: @ 8484A04
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 413
-	.byte 203
+	.byte MAPSEC_MARINE_CAVE
 	.byte 0
-	.byte 6
-	.byte 4
+	.byte WEATHER_FOG_1
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 14
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

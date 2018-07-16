@@ -5,11 +5,11 @@ FieryPath: @ 8484048
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 293
-	.byte 74
+	.byte MAPSEC_FIERY_PATH
 	.byte 0
-	.byte 0
-	.byte 4
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

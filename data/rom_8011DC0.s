@@ -1315,7 +1315,7 @@ gUnknown_082F0184:: @ 82F0184
 	.align 2
 gUnknown_082F0204:: @ 82F0204 struct ListMenuTemplate
 	.4byte gUnknown_082F0184
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte sub_8013DF4
 	.byte 0x10, 0x00, 0x05, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x40, 0x01
@@ -1351,7 +1351,7 @@ gUnknown_082F0264:: @ 82F0264
 	.align 2
 gUnknown_082F027C:: @ 82F027C
 	.4byte gUnknown_082F0264
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte NULL
 	.byte 0x03, 0x00, 0x03, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x00, 0x01
@@ -1384,7 +1384,7 @@ gUnknown_082F029C:: @ 82F029C
 	.align 2
 gUnknown_082F032C:: @ 82F032C
 	.4byte gUnknown_082F029C
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte NULL
 	.byte 0x12, 0x00, 0x06, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x00, 0x01
@@ -1413,7 +1413,7 @@ gUnknown_082F0354:: @ 82F0354
 	.align 2
 gUnknown_082F03A4:: @ 82F03A4
 	.4byte gUnknown_082F0354
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte sub_8017BE8
 	.byte 0x0a, 0x00, 0x06, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0xe1, 0xdf, 0x00, 0x01
@@ -1442,7 +1442,7 @@ gUnknown_082F03C4:: @ 82F03C4
 
 	.align 2
 	.4byte gUnknown_082F03C4
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte nullsub_14
 	.byte 0x10, 0x00, 0x04, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x40, 0x01
@@ -1637,7 +1637,7 @@ gUnknown_082F0620:: @ 82F0620
 	.align 2
 gUnknown_082F0638:: @ 82F0638 struct ListMenuTemplate
 	.4byte NULL
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte NULL
 	.byte 0x03, 0x00, 0x03, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x00, 0x01
@@ -1669,7 +1669,7 @@ gUnknown_082F06A0:: @ 82F06A0
 	.align 2
 gUnknown_082F06B0:: @ 82F06B0 struct ListMenuTemplate
 	.4byte gUnknown_082F0650
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte NULL
 	.byte 0x04, 0x00, 0x04, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x00, 0x01
@@ -1677,7 +1677,7 @@ gUnknown_082F06B0:: @ 82F06B0 struct ListMenuTemplate
 	.align 2
 gUnknown_082F06C8:: @ 82F06C8
 	.4byte gUnknown_082F0670
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte NULL
 	.byte 0x03, 0x00, 0x03, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x00, 0x01
@@ -1685,7 +1685,7 @@ gUnknown_082F06C8:: @ 82F06C8
 	.align 2
 gUnknown_082F06E0:: @ 82F06E0
 	.4byte gUnknown_082F0688
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte NULL
 	.byte 0x03, 0x00, 0x03, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x00, 0x01
@@ -1693,7 +1693,7 @@ gUnknown_082F06E0:: @ 82F06E0
 	.align 2
 gUnknown_082F06F8:: @ 82F06F8
 	.4byte gUnknown_082F06A0
-	.4byte sub_81AF078
+	.4byte ListMenuDefaultCursorMoveFunc
 	.4byte NULL
 	.byte 0x02, 0x00, 0x02, 0x00, 0x00, 0x00, 0x08, 0x00
 	.byte 0x21, 0x31, 0x00, 0x01

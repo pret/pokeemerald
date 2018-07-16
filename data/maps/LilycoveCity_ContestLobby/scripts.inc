@@ -649,7 +649,7 @@ LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	message LilycoveCity_ContestLobby_Text_27C8FD
 	waitmessage
-	specialvar VAR_TEMP_D, sub_80093CC
+	specialvar VAR_TEMP_D, IsWirelessAdapterConnected
 	multichoice 0, 0, 85, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_21A8BB

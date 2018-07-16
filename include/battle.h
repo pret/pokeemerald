@@ -215,11 +215,11 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
-    u8 statLowered:1;
-    u8 lightningRodRedirected:1;
-    u8 restoredBankSprite: 1;
-    u8 intimidatedPoke:1;
-    u8 traced:1;
+    u8 statLowered:1;             // 0x1
+    u8 lightningRodRedirected:1;  // 0x2
+    u8 restoredBattlerSprite: 1;  // 0x4
+    u8 intimidatedMon:1;          // 0x8
+    u8 traced:1;                  // 0x10
     u8 flag20:1;
     u8 flag40:1;
     u8 focusBanded:1;
@@ -637,8 +637,8 @@ struct BattleScripting
 
 // rom_80A5C6C
 u8 GetBattlerSide(u8 battler);
-u8 GetBattlerPosition(u8 bank);
-u8 GetBattlerAtPosition(u8 bank);
+u8 GetBattlerPosition(u8 battler);
+u8 GetBattlerAtPosition(u8 battler);
 
 struct BattleSpriteInfo
 {

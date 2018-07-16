@@ -5,11 +5,11 @@ Underwater2: @ 8482A4C
 	.4byte Underwater2_MapConnections
 	.2byte MUS_DEEPDEEP
 	.2byte 51
-	.byte 51
+	.byte MAPSEC_UNDERWATER_125
 	.byte 0
-	.byte 14
-	.byte 5
+	.byte WEATHER_BUBBLES
+	.byte MAP_TYPE_UNDERWATER
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

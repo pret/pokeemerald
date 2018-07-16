@@ -89,7 +89,7 @@ static void MCB2_InitRegionMapRegisters(void)
     InitBgsFromTemplates(1, gUnknown_085E5068, 2);
     InitWindows(gUnknown_085E5070);
     DeactivateAllTextPrinters();
-    LoadSav2WindowGfx(0, 0x27, 0xd0);
+    LoadUserWindowBorderGfx(0, 0x27, 0xd0);
     clear_scheduled_bg_copies_to_vram();
     SetMainCallback2(MCB2_FieldUpdateRegionMap);
     SetVBlankCallback(VBCB_FieldUpdateRegionMap);
@@ -130,7 +130,7 @@ static void FieldUpdateRegionMap(void)
             schedule_bg_copy_tilemap_to_vram(0);
             SetWindowBorderStyle(0, 0, 0x27, 0xd);
             PrintRegionMapSecName();
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
             sFieldRegionMapHandler->state++;
             break;
         case 2:
@@ -158,7 +158,7 @@ static void FieldUpdateRegionMap(void)
             }
             break;
         case 5:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
             sFieldRegionMapHandler->state++;
             break;
         case 6:

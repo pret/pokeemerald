@@ -34,18 +34,27 @@
 	inc _num_warps
 	.endm
 
-	.macro coord_event x, y, byte1, byte2, word1, word2, word3, script
+	.macro coord_event x, y, elevation, trigger, index, script
 	.2byte \x, \y
-	.byte \byte1, \byte2
-	.2byte \word1, \word2, \word3
+	.byte \elevation, 0
+	.2byte \trigger, \index, 0
 	.4byte \script
 	inc _num_traps
 	.endm
 
-	.macro bg_event x, y, byte, kind, word, arg6, arg7, arg8
+	.macro coord_weather_event x, y, elevation, weather
 	.2byte \x, \y
-	.byte \byte, \kind
-	.2byte \word
+	.byte \elevation, 0
+	.2byte \weather
+	.2byte 0, 0
+	.4byte 0
+	inc _num_traps
+	.endm
+
+	.macro bg_event x, y, elevation, kind, arg6, arg7, arg8
+	.2byte \x, \y
+	.byte \elevation, \kind
+	.2byte 0
 	.if \kind < 5
 	.4byte \arg6
 	.else
@@ -53,6 +62,14 @@
 	.byte \arg7, \arg8
 	.endif
 	inc _num_signs
+	.endm
+
+	.macro bg_hidden_item_event x, y, height, item, flag
+	bg_event \x, \y, \height, 7, \item, \flag, 0
+	.endm
+
+	.macro bg_secret_base_event x, y, height, secret_base_id
+	bg_event \x, \y, \height, 8, \secret_base_id, 0, 0
 	.endm
 
 	.macro map_events npcs, warps, traps, signs

@@ -5,11 +5,11 @@ EverGrandeCity_HallOfFame: @ 8483D00
 	.4byte 0x0
 	.2byte MUS_EIKOU_R
 	.2byte 298
-	.byte 15
+	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

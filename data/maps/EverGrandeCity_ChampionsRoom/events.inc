@@ -1,7 +1,7 @@
 EverGrandeCity_ChampionsRoom_EventObjects: @ 8533700
-	object_event 1, EVENT_OBJ_GFX_WALLACE, 0, 6, 5, 3, 8, 0, 0, 0, 0, 0x0, 0
-	object_event 2, EVENT_OBJ_GFX_HIPSTER, 0, 6, 12, 3, 7, 0, 0, 0, 0, 0x0, 920
-	object_event 3, EVENT_OBJ_GFX_PROF_BIRCH, 0, 6, 12, 3, 7, 0, 0, 0, 0, 0x0, 921
+	object_event 1, EVENT_OBJ_GFX_WALLACE, 0, 6, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 0
+	object_event 2, EVENT_OBJ_GFX_HIPSTER, 0, 6, 12, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 920
+	object_event 3, EVENT_OBJ_GFX_PROF_BIRCH, 0, 6, 12, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 921
 
 EverGrandeCity_ChampionsRoom_MapWarps: @ 8533748
 	warp_def 6, 12, 3, 1, MAP_EVER_GRANDE_CITY_HALL4

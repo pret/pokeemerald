@@ -3,6 +3,7 @@
 #include "bg.h"
 #include "strings.h"
 #include "text.h"
+#include "text_window.h"
 #include "menu.h"
 #include "task.h"
 #include "menu_helpers.h"
@@ -75,8 +76,6 @@ extern const u16 gUnknown_0860F074[];
 
 extern void CB2_ReturnToField(void);
 extern bool8 sub_81221EC(void);
-extern void LoadSav2WindowGfx(u8, u16, u8);
-extern void LoadMessageBoxGfx(u8, u16, u8);
 extern void sub_80AF168(void);
 
 // this file's functions
@@ -315,19 +314,19 @@ static const struct ListMenuTemplate sPokeblockListMenuTemplate =
 {
     .items = NULL,
     .moveCursorFunc = MovePokeblockMenuCursor,
-    .unk_08 = NULL,
+    .itemPrintFunc = NULL,
     .totalItems = 0,
     .maxShowed = 0,
     .windowId = 1,
-    .unk_11 = 0,
-    .unk_12 = 1,
+    .header_X = 0,
+    .item_X = 1,
     .cursor_X = 0,
     .upText_Y = 1,
     .cursorPal = 2,
     .fillValue = 0,
     .cursorShadowPal = 3,
     .lettersSpacing = 0,
-    .unk_16_3 = 0,
+    .itemVerticalPadding = 0,
     .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
     .fontId = 1,
     .cursorKind = 1
@@ -492,7 +491,7 @@ static bool8 InitPokeblockMenu(void)
         gMain.state++;
         break;
     case 18:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -566,7 +565,7 @@ static void HandleInitWindows(void)
 
     InitWindows(sWindowTemplatesForPokeblockMenu);
     DeactivateAllTextPrinters();
-    LoadSav2WindowGfx(0, 1, 0xE0);
+    LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadMessageBoxGfx(0, 0xA, 0xD0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
 
@@ -807,7 +806,7 @@ static void sub_81363BC(void)
 {
     if (sPokeblockMenu->unkTaskId == 0xFF)
     {
-        sPokeblockMenu->unkTaskId = AddScrollIndicatorArrowPairParametrized(2, 0xB0, 8, 0x98, sPokeblockMenu->itemsNo - sPokeblockMenu->maxShowed,
+        sPokeblockMenu->unkTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xB0, 8, 0x98, sPokeblockMenu->itemsNo - sPokeblockMenu->maxShowed,
                                                                             0x456, 0x456, &sSavedPokeblockData.lastItemPage);
     }
 }
@@ -855,7 +854,7 @@ static void sub_8136470(struct Sprite *sprite)
 
 static void FadePaletteAndSetTaskToClosePokeblockCase(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     gTasks[taskId].func = Task_FreeDataAndExitPokeblockCase;
 }
 

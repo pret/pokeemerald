@@ -21,6 +21,7 @@
 #include "sound.h"
 #include "trig.h"
 #include "graphics.h"
+#include "text_window.h"
 #include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
 
 struct PokeblockFeedStruct
@@ -58,7 +59,6 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
 extern bool8 sub_81221EC(void);
-extern void LoadSav2WindowGfx(u8, u16, u8);
 
 // this file's functions
 static void HandleInitBackgrounds(void);
@@ -596,7 +596,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 13:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -705,7 +705,7 @@ static void HandleInitWindows(void)
 {
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadSav2WindowGfx(0, 1, 0xE0);
+    LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
     FillWindowPixelBuffer(0, 0);
     PutWindowTilemap(0);
@@ -810,7 +810,7 @@ static void Task_ReturnAfterPaletteFade(u8 taskId)
 
 static void Task_PaletteFadeToReturn(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     gTasks[taskId].func = Task_ReturnAfterPaletteFade;
 }
 

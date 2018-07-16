@@ -838,7 +838,7 @@ void sub_8127500(void)
 {
     if (sDecorPCBuffer->unk_522 == 0xFF)
     {
-        sDecorPCBuffer->unk_522 = AddScrollIndicatorArrowPairParametrized(0x02, 0x3c, 0x0c, 0x94, sDecorPCBuffer->unk_520 - sDecorPCBuffer->unk_521, 0x6e, 0x6e, &sSecretBasePCSelectDecorPageNo);
+        sDecorPCBuffer->unk_522 = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0x3c, 0x0c, 0x94, sDecorPCBuffer->unk_520 - sDecorPCBuffer->unk_521, 0x6e, 0x6e, &sSecretBasePCSelectDecorPageNo);
     }
 }
 

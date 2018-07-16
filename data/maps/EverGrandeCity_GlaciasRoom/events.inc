@@ -1,5 +1,5 @@
 EverGrandeCity_GlaciasRoom_EventObjects: @ 8533688
-	object_event 1, EVENT_OBJ_GFX_GLACIA, 0, 6, 5, 3, 8, 0, 0, 0, 0, EverGrandeCity_GlaciasRoom_EventScript_228469, 0
+	object_event 1, EVENT_OBJ_GFX_GLACIA, 0, 6, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, EverGrandeCity_GlaciasRoom_EventScript_228469, 0
 
 EverGrandeCity_GlaciasRoom_MapWarps: @ 85336A0
 	warp_def 6, 13, 3, 1, MAP_EVER_GRANDE_CITY_HALL2

@@ -903,7 +903,7 @@ static void sub_816BEF0(s32 id)
 static void ItemStorage_StartScrollIndicator(void)
 {
     if(playerPCItemPageInfo.scrollIndicatorId == 0xFF)
-        playerPCItemPageInfo.scrollIndicatorId = AddScrollIndicatorArrowPairParametrized(0x2, 0xB0, 0xC, 0x94, playerPCItemPageInfo.count - playerPCItemPageInfo.pageItems, 0x13F8, 0x13F8, &(playerPCItemPageInfo.itemsAbove));
+        playerPCItemPageInfo.scrollIndicatorId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xB0, 0xC, 0x94, playerPCItemPageInfo.count - playerPCItemPageInfo.pageItems, 0x13F8, 0x13F8, &(playerPCItemPageInfo.itemsAbove));
 }
 
 static void ItemStorage_RemoveScrollIndicator(void)
@@ -1116,7 +1116,7 @@ static void ItemStorage_ItemSwapChoosePrompt(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    sub_81AF15C(data[5], 16, 1);
+    ListMenuSetUnkIndicatorsStructField(data[5], 16, 1);
     gUnknown_0203BCC4->unk666 = (playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos);
     sub_816BFB8(data[5], 0, 0);
     sub_816C690(gUnknown_0203BCC4->unk666);

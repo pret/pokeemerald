@@ -353,7 +353,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
             gBattlerTarget ^= BIT_FLANK;
     }
-    // There's only one choice in signle battles.
+    // There's only one choice in single battles.
     else
     {
         gBattlerTarget = sBattler_AI ^ BIT_SIDE;
@@ -905,7 +905,7 @@ static void BattleAICmd_if_status(void)
 
     status = T1_READ_32(gAIScriptPtr + 2);
 
-    if ((gBattleMons[battlerId].status1 & status))
+    if (gBattleMons[battlerId].status1 & status)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -977,7 +977,7 @@ static void BattleAICmd_if_status3(void)
 
     status = T1_READ_32(gAIScriptPtr + 2);
 
-    if ((gStatuses3[battlerId] & status))
+    if (gStatuses3[battlerId] & status)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -1014,7 +1014,7 @@ static void BattleAICmd_if_side_affecting(void)
     side = GET_BATTLER_SIDE(battlerId);
     status = T1_READ_32(gAIScriptPtr + 2);
 
-    if ((gSideStatuses[side] & status))
+    if (gSideStatuses[side] & status)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -2078,7 +2078,7 @@ static void BattleAICmd_if_curr_move_disabled_or_encored(void)
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
         else
             gAIScriptPtr += 6;
-        break;;
+        break;
     case 1:
         if (gDisableStructs[gActiveBattler].encoredMove == AI_THINKING_STRUCT->moveConsidered)
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);

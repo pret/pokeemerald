@@ -308,19 +308,19 @@ static const struct ListMenuTemplate sMainListTemplate =
 {
     .items = sMainListItems,
     .moveCursorFunc = NULL,
-    .unk_08 = NULL,
+    .itemPrintFunc = NULL,
     .totalItems = ARRAY_COUNT(sMainListItems),
     .maxShowed = 6,
     .windowId = 0,
-    .unk_11 = 0,
-    .unk_12 = 8,
+    .header_X = 0,
+    .item_X = 8,
     .cursor_X = 0,
     .upText_Y = 1,
     .cursorPal = 2,
     .fillValue = 1,
     .cursorShadowPal = 3,
     .lettersSpacing = 1,
-    .unk_16_3 = 0,
+    .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = 1,
     .cursorKind = 0
@@ -330,19 +330,19 @@ static const struct ListMenuTemplate sSecondaryListTemplate =
 {
     .items = sSecondaryListItems,
     .moveCursorFunc = NULL,
-    .unk_08 = NULL,
+    .itemPrintFunc = NULL,
     .totalItems = 0,
     .maxShowed = 0,
     .windowId = 0,
-    .unk_11 = 0,
-    .unk_12 = 8,
+    .header_X = 0,
+    .item_X = 8,
     .cursor_X = 0,
     .upText_Y = 1,
     .cursorPal = 2,
     .fillValue = 1,
     .cursorShadowPal = 3,
     .lettersSpacing = 1,
-    .unk_16_3 = 0,
+    .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = 1,
     .cursorKind = 0
@@ -816,7 +816,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
     if (!sHasChangeableEntries[data->currentMainListItemId])
         return;
 
-    yMultiplier = (GetFontAttribute(sSecondaryListTemplate.fontId, 1) + sSecondaryListTemplate.unk_16_3);
+    yMultiplier = (GetFontAttribute(sSecondaryListTemplate.fontId, 1) + sSecondaryListTemplate.itemVerticalPadding);
 
     printer.windowId = data->secondaryListWindowId;
     printer.fontId = 1;
@@ -826,8 +826,8 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
     printer.fgColor = 2;
     printer.bgColor = 1;
     printer.shadowColor = 3;
-    printer.x = sSecondaryListTemplate.unk_12;
-    printer.currentX = sSecondaryListTemplate.unk_12;
+    printer.x = sSecondaryListTemplate.item_X;
+    printer.currentX = sSecondaryListTemplate.item_X;
     printer.current_text_offset = text;
 
     switch (data->currentMainListItemId)

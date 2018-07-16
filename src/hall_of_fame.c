@@ -414,7 +414,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!sub_8175024())
         {
             SetVBlankCallback(VBlankCB_HallOfFame);
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
             gMain.state++;
         }
         break;
@@ -764,7 +764,7 @@ static void Task_Hof_ExitOnKeyPressed(u8 taskId)
 static void Task_Hof_HandlePaletteOnExit(u8 taskId)
 {
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
-    BeginNormalPaletteFade(-1, 8, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 0x10, 0);
     gTasks[taskId].func = Task_Hof_HandleExit;
 }
 

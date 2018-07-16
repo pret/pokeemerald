@@ -856,7 +856,7 @@ sub_8011AFC: @ 8011AFC
 	bl ResetPaletteFade
 	ldr r0, =sub_8011AE8
 	bl SetVBlankCallback
-	bl sub_80093CC
+	bl IsWirelessAdapterConnected
 	lsls r0, 24
 	cmp r0, 0
 	beq _08011B70

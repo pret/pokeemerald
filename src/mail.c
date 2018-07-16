@@ -417,7 +417,7 @@ static bool8 MailReadBuildGraphics(void)
             ShowBg(0);
             ShowBg(1);
             ShowBg(2);
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
             gPaletteFade.bufferTransferDisabled = FALSE;
             sMailRead->callback2 = CB2_WaitForPaletteExitOnKeyPress;
             return TRUE;
@@ -526,7 +526,7 @@ static void CB2_ExitOnKeyPress(void)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
         sMailRead->callback2 = CB2_ExitMailReadFreeVars;
     }
 }

@@ -3095,19 +3095,19 @@ static void ChooseTypeOfMoveUsedString(u8* dst)
 void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 {
     const struct BattleWindowText *textInfo = sBattleTextOnWindowsInfo[gBattleScripting.windowsType];
-    bool32 toVram;
+    bool32 copyToVram;
     struct TextSubPrinter textSubPrinter;
     u8 speed;
 
     if (windowId & 0x80)
     {
         windowId &= ~(0x80);
-        toVram = FALSE;
+        copyToVram = FALSE;
     }
     else
     {
         FillWindowPixelBuffer(windowId, textInfo[windowId].fillValue);
-        toVram = TRUE;
+        copyToVram = TRUE;
     }
 
     textSubPrinter.current_text_offset = text;
@@ -3160,7 +3160,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 
     AddTextPrinter(&textSubPrinter, speed, NULL);
 
-    if (toVram)
+    if (copyToVram)
     {
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, 3);

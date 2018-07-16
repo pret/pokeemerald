@@ -639,7 +639,7 @@ sub_812AA48: @ 812AA48
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xE0
-	bl LoadSav2WindowGfx
+	bl LoadUserWindowBorderGfx
 	movs r0, 0
 	bl PutWindowTilemap
 	pop {r0}

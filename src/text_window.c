@@ -97,9 +97,9 @@ void LoadMessageBoxGfx(u8 windowId, u16 destOffset, u8 palOffset)
     LoadPalette(GetOverworldTextboxPalettePtr(), palOffset, 0x20);
 }
 
-void LoadSav2WindowGfx_(u8 windowId, u16 destOffset, u8 palOffset)
+void LoadUserWindowBorderGfx_(u8 windowId, u16 destOffset, u8 palOffset)
 {
-    LoadSav2WindowGfx(windowId, destOffset, palOffset);
+    LoadUserWindowBorderGfx(windowId, destOffset, palOffset);
 }
 
 void LoadWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
@@ -108,7 +108,7 @@ void LoadWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
     LoadPalette(sWindowFrames[frameId].pal, palOffset, 0x20);
 }
 
-void LoadSav2WindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
+void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
     LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palOffset);
 }

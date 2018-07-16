@@ -81,7 +81,7 @@ enum
 #define INSTANT_HP_BAR_DROP     32767
 
 // Special return values in gBattleBufferB from Battle Controller functions.
-#define RET_VALUE_LEVELLED_UP   11
+#define RET_VALUE_LEVELED_UP   11
 
 struct UnusedControllerStruct
 {

@@ -1,15 +1,15 @@
 PetalburgCity_Gym_EventObjects: @ 852EDC8
-	object_event 1, EVENT_OBJ_GFX_NORMAN, 0, 4, 2, 0, 8, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_2049F1, 772
-	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 94, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2054AA, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 4, 81, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2053BA, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_4, 0, 4, 42, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2053F6, 0
-	object_event 5, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 55, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2054E6, 0
-	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 4, 68, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_205432, 0
-	object_event 7, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 16, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_205522, 0
-	object_event 8, EVENT_OBJ_GFX_MAN_4, 0, 4, 29, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_20546E, 0
-	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 3, 109, 3, 8, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_20574F, 781
-	object_event 10, EVENT_OBJ_GFX_WALLY, 0, 4, 111, 3, 7, 0, 0, 0, 0, 0x0, 866
-	object_event 11, EVENT_OBJ_GFX_MAN_3, 0, 1, 7, 3, 7, 1, 1, 0, 0, 0x0, 824
+	object_event 1, EVENT_OBJ_GFX_NORMAN, 0, 4, 2, 0, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_2049F1, 772
+	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 94, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2054AA, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 4, 81, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2053BA, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_4, 0, 4, 42, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2053F6, 0
+	object_event 5, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 55, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_2054E6, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 4, 68, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_205432, 0
+	object_event 7, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 16, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_205522, 0
+	object_event 8, EVENT_OBJ_GFX_MAN_4, 0, 4, 29, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_20546E, 0
+	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 3, 109, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_20574F, 781
+	object_event 10, EVENT_OBJ_GFX_WALLY, 0, 4, 111, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 866
+	object_event 11, EVENT_OBJ_GFX_MAN_3, 0, 1, 7, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, 824
 
 PetalburgCity_Gym_MapWarps: @ 852EED0
 	warp_def 4, 111, 3, 2, MAP_PETALBURG_CITY
@@ -52,20 +52,20 @@ PetalburgCity_Gym_MapWarps: @ 852EED0
 	warp_def 6, 7, 3, 33, MAP_PETALBURG_CITY_GYM
 
 PetalburgCity_Gym_MapBGEvents: @ 852F000
-	bg_event 1, 105, 3, 0, 0, PetalburgCity_Gym_EventScript_205137
-	bg_event 7, 105, 3, 0, 0, PetalburgCity_Gym_EventScript_205187
-	bg_event 1, 79, 3, 0, 0, PetalburgCity_Gym_EventScript_2051BC
-	bg_event 7, 79, 3, 0, 0, PetalburgCity_Gym_EventScript_2051EF
-	bg_event 1, 92, 3, 0, 0, PetalburgCity_Gym_EventScript_205222
-	bg_event 7, 92, 3, 0, 0, PetalburgCity_Gym_EventScript_205255
-	bg_event 7, 40, 3, 0, 0, PetalburgCity_Gym_EventScript_205288
-	bg_event 1, 53, 3, 0, 0, PetalburgCity_Gym_EventScript_2052BB
-	bg_event 7, 53, 3, 0, 0, PetalburgCity_Gym_EventScript_2052EE
-	bg_event 1, 66, 3, 0, 0, PetalburgCity_Gym_EventScript_205321
-	bg_event 7, 14, 3, 0, 0, PetalburgCity_Gym_EventScript_205354
-	bg_event 1, 27, 3, 0, 0, PetalburgCity_Gym_EventScript_205387
-	bg_event 1, 110, 3, 1, 0, PetalburgCity_Gym_EventScript_20576E
-	bg_event 7, 110, 3, 1, 0, PetalburgCity_Gym_EventScript_20577E
+	bg_event 1, 105, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_205137
+	bg_event 7, 105, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_205187
+	bg_event 1, 79, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_2051BC
+	bg_event 7, 79, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_2051EF
+	bg_event 1, 92, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_205222
+	bg_event 7, 92, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_205255
+	bg_event 7, 40, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_205288
+	bg_event 1, 53, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_2052BB
+	bg_event 7, 53, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_2052EE
+	bg_event 1, 66, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_205321
+	bg_event 7, 14, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_205354
+	bg_event 1, 27, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_205387
+	bg_event 1, 110, 3, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_Gym_EventScript_20576E
+	bg_event 7, 110, 3, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_Gym_EventScript_20577E
 
 PetalburgCity_Gym_MapEvents:: @ 852F0A8
 	map_events PetalburgCity_Gym_EventObjects, PetalburgCity_Gym_MapWarps, 0x0, PetalburgCity_Gym_MapBGEvents

@@ -5,11 +5,11 @@ SkyPillar_1F: @ 8484764
 	.4byte 0x0
 	.2byte MUS_TOZAN
 	.2byte 322
-	.byte 85
+	.byte MAPSEC_SKY_PILLAR
 	.byte 0
-	.byte 0
-	.byte 4
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

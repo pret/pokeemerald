@@ -194,7 +194,7 @@ void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonP
 void sub_81973A4(void)
 {
     LoadMessageBoxGfx(0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
-    LoadSav2WindowGfx(0, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM * 0x10);
+    LoadUserWindowBorderGfx(0, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM * 0x10);
 }
 
 void NewMenuHelpers_DrawDialogueFrame(u8 windowId, bool8 copyToVram)
@@ -1107,12 +1107,12 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
 
     printer.windowId = windowId;
     printer.fontId = fontId;
-    printer.fgColor = GetFontAttribute(fontId, 5);
-    printer.bgColor = GetFontAttribute(fontId, 6);
-    printer.shadowColor = GetFontAttribute(fontId, 7);
-    printer.fontColor_l = GetFontAttribute(fontId, 4);
+    printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
+    printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
+    printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
+    printer.fontColor_l = GetFontAttribute(fontId, FONTATTR_COLOR_LOWNIBBLE);
     printer.letterSpacing = letterSpacing;
-    printer.lineSpacing = GetFontAttribute(fontId, 3);
+    printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     printer.x = left;
     printer.currentX = left;
 
@@ -1129,7 +1129,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
 
 void sub_81989B8(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a5)
 {
-    AddItemMenuActionTextPrinters(windowId, fontId, GetFontAttribute(fontId, 0), 1, GetFontAttribute(fontId, 2), lineHeight, itemCount, strs, a5);
+    AddItemMenuActionTextPrinters(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, strs, a5);
 }
 
 void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
@@ -1167,20 +1167,20 @@ void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top
     printer.current_text_offset = gText_YesNo;
     printer.windowId = gUnknown_0203CD9F;
     printer.fontId = fontId;
-    printer.x = GetFontAttribute(fontId, 0) + left;
+    printer.x = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + left;
     printer.y = top;
     printer.currentX = printer.x;
     printer.currentY = printer.y;
-    printer.fgColor = GetFontAttribute(fontId, 5);
-    printer.bgColor = GetFontAttribute(fontId, 6);
-    printer.shadowColor = GetFontAttribute(fontId, 7);
-    printer.fontColor_l = GetFontAttribute(fontId, 4);
-    printer.letterSpacing = GetFontAttribute(fontId, 2);
-    printer.lineSpacing = GetFontAttribute(fontId, 3);
+    printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
+    printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
+    printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
+    printer.fontColor_l = GetFontAttribute(fontId, FONTATTR_COLOR_LOWNIBBLE);
+    printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
 
     AddTextPrinter(&printer, 0xFF, NULL);
 
-    sub_81983AC(gUnknown_0203CD9F, fontId, left, top, GetFontAttribute(fontId, 1), 2, initialCursorPos);
+    sub_81983AC(gUnknown_0203CD9F, fontId, left, top, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT), 2, initialCursorPos);
 }
 
 void sub_8198C34(const struct WindowTemplate *window, u8 fontId, u16 baseTileNum, u8 paletteNum)
