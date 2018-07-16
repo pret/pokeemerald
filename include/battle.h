@@ -805,7 +805,6 @@ extern u16 gBattleWeather;
 extern struct WishFutureKnock gWishFutureKnock;
 extern u16 gIntroSlideFlags;
 extern u8 gSentPokesToOpponent[2];
-extern u16 gDynamicBasePower;
 extern u16 gExpShareExp;
 extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern struct BattleScripting gBattleScripting;

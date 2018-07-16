@@ -710,7 +710,6 @@ u8 GetMostSuitableMonToSwitchInto(void)
         }
     }
 
-    gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
     bestDmg = 0;

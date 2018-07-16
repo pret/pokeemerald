@@ -1308,7 +1308,6 @@ static void BattleAICmd_get_how_powerful_move_is(void)
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
         && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
-        gDynamicBasePower = 0;
         *(&gBattleStruct->dynamicMoveType) = 0;
         gMoveResultFlags = 0;
 
@@ -1585,7 +1584,6 @@ static void BattleAICmd_get_highest_type_effectiveness(void)
     s32 i;
     u8 *dynamicMoveType;
 
-    gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
     AI_THINKING_STRUCT->funcResult = 0;
@@ -1633,7 +1631,6 @@ static void BattleAICmd_if_type_effectiveness(void)
     u8 damageVar;
     u32 effectivenessMultiplier;
 
-    gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1850,7 +1847,6 @@ static void BattleAICmd_if_can_faint(void)
         return;
     }
 
-    gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
     dmg = AI_CalcDamage(AI_THINKING_STRUCT->moveConsidered, sBattler_AI, gBattlerTarget);
@@ -1876,7 +1872,6 @@ static void BattleAICmd_if_cant_faint(void)
         return;
     }
 
-    gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gMoveResultFlags = 0;
     dmg = AI_CalcDamage(AI_THINKING_STRUCT->moveConsidered, sBattler_AI, gBattlerTarget);

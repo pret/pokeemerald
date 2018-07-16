@@ -258,6 +258,9 @@ BattleScript_EffectLowKick:
 BattleScript_EffectFlail:
 BattleScript_EffectFacade:
 BattleScript_EffectRevenge:
+BattleScript_EffectReturn:
+BattleScript_EffectFrustration:
+BattleScript_EffectEruption:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
@@ -1417,7 +1420,6 @@ BattleScript_DoTripleKickAttack::
 	movevaluescleanup
 	addbyte sTRIPLE_KICK_POWER, 10
 	addbyte sMULTIHIT_STRING + 4, 0x1
-	copyhword gDynamicBasePower, sTRIPLE_KICK_POWER
 	critcalc
 	damagecalc
 	adjustdamage
@@ -1622,7 +1624,7 @@ BattleScript_RolloutCheckAccuracy::
 	accuracycheck BattleScript_RolloutHit, ACC_CURR_MOVE
 BattleScript_RolloutHit::
 	typecalc2
-	rolloutdamagecalculation
+	handlerollout
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectSwagger::
@@ -1654,7 +1656,7 @@ BattleScript_EffectFuryCutter::
 	ppreduce
 	accuracycheck BattleScript_FuryCutterHit, ACC_CURR_MOVE
 BattleScript_FuryCutterHit::
-	furycuttercalc
+	handlefurycutter
 	critcalc
 	damagecalc
 	jumpifmovehadnoeffect BattleScript_FuryCutterHit
@@ -1672,13 +1674,6 @@ BattleScript_EffectAttract::
 	printstring STRINGID_PKMNFELLINLOVE
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectReturn::
-BattleScript_EffectFrustration::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	happinesstodamagecalculation
-	goto BattleScript_HitFromAtkString
 
 BattleScript_EffectPresent::
 	attackcanceler
@@ -2482,10 +2477,6 @@ BattleScript_EffectEndeavor::
 	copyword gBattleMoveDamage, gHpDealt
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
-
-BattleScript_EffectEruption::
-	scaledamagebyhealthratio
-	goto BattleScript_EffectHit
 
 BattleScript_EffectSkillSwap::
 	attackcanceler

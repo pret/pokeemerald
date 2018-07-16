@@ -266,7 +266,6 @@ EWRAM_DATA u16 gBattleWeather = 0;
 EWRAM_DATA struct WishFutureKnock gWishFutureKnock = {0};
 EWRAM_DATA u16 gIntroSlideFlags = 0;
 EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
-EWRAM_DATA u16 gDynamicBasePower = 0;
 EWRAM_DATA u16 gExpShareExp = 0;
 EWRAM_DATA struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleScripting gBattleScripting = {0};
@@ -4922,12 +4921,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 
     TryClearRageStatuses();
     gCurrentTurnActionNumber = 0;
-{
-    // something stupid needed to match
-    u8 zero;
-    gCurrentActionFuncId = gActionsByTurnOrder[(zero = 0)];
-}
-    gDynamicBasePower = 0;
+    gCurrentActionFuncId = gActionsByTurnOrder[0];
     gBattleStruct->dynamicMoveType = 0;
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
@@ -5842,7 +5836,6 @@ static void HandleAction_ActionFinished(void)
     gLastLandedMoves[gBattlerAttacker] = 0;
     gLastHitByType[gBattlerAttacker] = 0;
     gBattleStruct->dynamicMoveType = 0;
-    gDynamicBasePower = 0;
     gBattleScripting.atk49_state = 0;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;

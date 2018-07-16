@@ -269,10 +269,10 @@ static void atkAF_cursetarget(void);
 static void atkB0_trysetspikes(void);
 static void atkB1_setforesight(void);
 static void atkB2_trysetperishsong(void);
-static void atkB3_rolloutdamagecalculation(void);
+static void atkB3_handlerollout(void);
 static void atkB4_jumpifconfusedandstatmaxed(void);
-static void atkB5_furycuttercalc(void);
-static void atkB6_happinesstodamagecalculation(void);
+static void atkB5_handlefurycutter(void);
+static void atkB6_nop(void);
 static void atkB7_presentdamagecalculation(void);
 static void atkB8_setsafeguard(void);
 static void atkB9_magnitudedamagecalculation(void);
@@ -307,7 +307,7 @@ static void atkD5_trysetroots(void);
 static void atkD6_nop(void);
 static void atkD7_setyawn(void);
 static void atkD8_setdamagetohealthdifference(void);
-static void atkD9_scaledamagebyhealthratio(void);
+static void atkD9_nop(void);
 static void atkDA_tryswapabilities(void);
 static void atkDB_tryimprision(void);
 static void atkDC_trysetgrudge(void);
@@ -521,10 +521,10 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkB0_trysetspikes,
     atkB1_setforesight,
     atkB2_trysetperishsong,
-    atkB3_rolloutdamagecalculation,
+    atkB3_handlerollout,
     atkB4_jumpifconfusedandstatmaxed,
-    atkB5_furycuttercalc,
-    atkB6_happinesstodamagecalculation,
+    atkB5_handlefurycutter,
+    atkB6_nop,
     atkB7_presentdamagecalculation,
     atkB8_setsafeguard,
     atkB9_magnitudedamagecalculation,
@@ -559,7 +559,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkD6_nop,
     atkD7_setyawn,
     atkD8_setdamagetohealthdifference,
-    atkD9_scaledamagebyhealthratio,
+    atkD9_nop,
     atkDA_tryswapabilities,
     atkDB_tryimprision,
     atkDC_trysetgrudge,
@@ -8350,7 +8350,7 @@ static void atkB2_trysetperishsong(void)
         gBattlescriptCurrInstr += 5;
 }
 
-static void atkB3_rolloutdamagecalculation(void)
+static void atkB3_handlerollout(void)
 {
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
@@ -8359,27 +8359,17 @@ static void atkB3_rolloutdamagecalculation(void)
     }
     else
     {
-        s32 i;
-
-        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)) // first hit
+        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)) // First hit.
         {
             gDisableStructs[gBattlerAttacker].rolloutCounter1 = 5;
             gDisableStructs[gBattlerAttacker].rolloutCounter2 = 5;
             gBattleMons[gBattlerAttacker].status2 |= STATUS2_MULTIPLETURNS;
             gLockedMoves[gBattlerAttacker] = gCurrentMove;
         }
-        if (--gDisableStructs[gBattlerAttacker].rolloutCounter1 == 0) // last hit
+        if (--gDisableStructs[gBattlerAttacker].rolloutCounter1 == 0) // Last hit.
         {
             gBattleMons[gBattlerAttacker].status2 &= ~(STATUS2_MULTIPLETURNS);
         }
-
-        gDynamicBasePower = gBattleMoves[gCurrentMove].power;
-
-        for (i = 1; i < (5 - gDisableStructs[gBattlerAttacker].rolloutCounter1); i++)
-            gDynamicBasePower *= 2;
-
-        if (gBattleMons[gBattlerAttacker].status2 & STATUS2_DEFENSE_CURL)
-            gDynamicBasePower *= 2;
 
         gBattlescriptCurrInstr++;
     }
@@ -8394,7 +8384,7 @@ static void atkB4_jumpifconfusedandstatmaxed(void)
         gBattlescriptCurrInstr += 6;
 }
 
-static void atkB5_furycuttercalc(void)
+static void atkB5_handlefurycutter(void)
 {
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
@@ -8403,40 +8393,34 @@ static void atkB5_furycuttercalc(void)
     }
     else
     {
-        s32 i;
-
         if (gDisableStructs[gBattlerAttacker].furyCutterCounter != 5)
             gDisableStructs[gBattlerAttacker].furyCutterCounter++;
-
-        gDynamicBasePower = gBattleMoves[gCurrentMove].power;
-
-        for (i = 1; i < gDisableStructs[gBattlerAttacker].furyCutterCounter; i++)
-            gDynamicBasePower *= 2;
 
         gBattlescriptCurrInstr++;
     }
 }
 
-static void atkB6_happinesstodamagecalculation(void)
+static void atkB6_nop(void)
 {
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_RETURN)
-        gDynamicBasePower = 10 * (gBattleMons[gBattlerAttacker].friendship) / 25;
-    else // EFFECT_FRUSTRATION
-        gDynamicBasePower = 10 * (255 - gBattleMons[gBattlerAttacker].friendship) / 25;
-
     gBattlescriptCurrInstr++;
 }
 
 static void atkB7_presentdamagecalculation(void)
 {
-    s32 rand = Random() & 0xFF;
+    u32 rand = Random() & 0xFF;
 
     if (rand < 102)
-        gDynamicBasePower = 40;
+    {
+        gBattleStruct->presentBasePower = 40;
+    }
     else if (rand < 178)
-        gDynamicBasePower = 80;
+    {
+        gBattleStruct->presentBasePower = 80;
+    }
     else if (rand < 204)
-        gDynamicBasePower = 120;
+    {
+        gBattleStruct->presentBasePower = 120;
+    }
     else
     {
         gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 4;
@@ -8444,10 +8428,15 @@ static void atkB7_presentdamagecalculation(void)
             gBattleMoveDamage = 1;
         gBattleMoveDamage *= -1;
     }
+
     if (rand < 204)
+    {
         gBattlescriptCurrInstr = BattleScript_HitFromCritCalc;
+    }
     else if (gBattleMons[gBattlerTarget].maxHP == gBattleMons[gBattlerTarget].hp)
+    {
         gBattlescriptCurrInstr = BattleScript_AlreadyAtFullHp;
+    }
     else
     {
         gMoveResultFlags &= ~(MOVE_RESULT_DOESNT_AFFECT_FOE);
@@ -8475,52 +8464,52 @@ static void atkB8_setsafeguard(void)
 
 static void atkB9_magnitudedamagecalculation(void)
 {
-    s32 magnitude = Random() % 100;
+    u32 magnitude = Random() % 100;
 
     if (magnitude < 5)
     {
-        gDynamicBasePower = 10;
+        gBattleStruct->magnitudeBasePower = 10;
         magnitude = 4;
     }
     else if (magnitude < 15)
     {
-        gDynamicBasePower = 30;
+        gBattleStruct->magnitudeBasePower = 30;
         magnitude = 5;
     }
     else if (magnitude < 35)
     {
-        gDynamicBasePower = 50;
+        gBattleStruct->magnitudeBasePower = 50;
         magnitude = 6;
     }
     else if (magnitude < 65)
     {
-        gDynamicBasePower = 70;
+        gBattleStruct->magnitudeBasePower = 70;
         magnitude = 7;
     }
     else if (magnitude < 85)
     {
-        gDynamicBasePower = 90;
+        gBattleStruct->magnitudeBasePower = 90;
         magnitude = 8;
     }
     else if (magnitude < 95)
     {
-        gDynamicBasePower = 110;
+        gBattleStruct->magnitudeBasePower = 110;
         magnitude = 9;
     }
     else
     {
-        gDynamicBasePower = 150;
+        gBattleStruct->magnitudeBasePower = 150;
         magnitude = 10;
     }
 
 
-    PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 2, magnitude)
+    PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 2, magnitude);
 
     for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
         if (gBattlerTarget == gBattlerAttacker)
             continue;
-        if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget])) // a valid target was found
+        if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget])) // A valid target was found.
             break;
     }
 
@@ -8693,15 +8682,7 @@ static void atkC0_recoverbasedonsunlight(void)
 
 static void atkC1_hiddenpowercalc(void)
 {
-    u8 powerBits;
     u8 typeBits;
-
-    powerBits = ((gBattleMons[gBattlerAttacker].hpIV & 2) >> 1)
-              | ((gBattleMons[gBattlerAttacker].attackIV & 2) << 0)
-              | ((gBattleMons[gBattlerAttacker].defenseIV & 2) << 1)
-              | ((gBattleMons[gBattlerAttacker].speedIV & 2) << 2)
-              | ((gBattleMons[gBattlerAttacker].spAttackIV & 2) << 3)
-              | ((gBattleMons[gBattlerAttacker].spDefenseIV & 2) << 4);
 
     typeBits  = ((gBattleMons[gBattlerAttacker].hpIV & 1) << 0)
               | ((gBattleMons[gBattlerAttacker].attackIV & 1) << 1)
@@ -8709,8 +8690,6 @@ static void atkC1_hiddenpowercalc(void)
               | ((gBattleMons[gBattlerAttacker].speedIV & 1) << 3)
               | ((gBattleMons[gBattlerAttacker].spAttackIV & 1) << 4)
               | ((gBattleMons[gBattlerAttacker].spDefenseIV & 1) << 5);
-
-    gDynamicBasePower = (40 * powerBits) / 63 + 30;
 
     gBattleStruct->dynamicMoveType = (15 * typeBits) / 63 + 1;
     if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
@@ -9155,15 +9134,8 @@ static void atkD8_setdamagetohealthdifference(void)
     }
 }
 
-static void atkD9_scaledamagebyhealthratio(void)
+static void atkD9_nop(void)
 {
-    if (gDynamicBasePower == 0)
-    {
-        u8 power = gBattleMoves[gCurrentMove].power;
-        gDynamicBasePower = gBattleMons[gBattlerAttacker].hp * power / gBattleMons[gBattlerAttacker].maxHP;
-        if (gDynamicBasePower == 0)
-            gDynamicBasePower = 1;
-    }
     gBattlescriptCurrInstr++;
 }
 
