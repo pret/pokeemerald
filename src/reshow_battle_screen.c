@@ -11,6 +11,7 @@
 #include "link.h"
 #include "sprite.h"
 #include "constants/species.h"
+#include "constants/trainers.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
 #include "data2.h"
@@ -26,8 +27,7 @@ extern u16 gBattle_BG3_Y;
 
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
 
-extern void sub_806A068(u16 species, u8 battlerPosition);
-extern void sub_806A12C(u16 backPicId, u8 battlerPosition);
+extern void SetMultiuseSpriteTemplateToTrainerBack(u16 backPicId, u8 battlerPosition);
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
@@ -58,7 +58,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     {
     case 0:
         ScanlineEffect_Clear();
-        sub_8035658();
+        BattleInitBgsAndWindows();
         SetBgAttribute(1, BG_CTRL_ATTR_VISIBLE, 0);
         SetBgAttribute(2, BG_CTRL_ATTR_VISIBLE, 0);
         ShowBg(0);
@@ -144,20 +144,20 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         break;
     case 19:
         {
-            u8 opponentBank;
+            u8 opponentBattler;
             u16 species;
 
             LoadAndCreateEnemyShadowSprites();
 
-            opponentBank = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBank]], MON_DATA_SPECIES);
-            SetBattlerShadowSpriteCallback(opponentBank, species);
+            opponentBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBattler]], MON_DATA_SPECIES);
+            SetBattlerShadowSpriteCallback(opponentBattler, species);
 
             if (IsDoubleBattle())
             {
-                opponentBank = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBank]], MON_DATA_SPECIES);
-                SetBattlerShadowSpriteCallback(opponentBank, species);
+                opponentBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBattler]], MON_DATA_SPECIES);
+                SetBattlerShadowSpriteCallback(opponentBattler, species);
             }
 
             ActionSelectionCreateCursorAt(gActionSelectionCursor[gBattlerInMenuId], 0);
@@ -204,10 +204,10 @@ static bool8 LoadBattlerSpriteGfx(u8 battler)
             else
                 BattleLoadSubstituteOrMonSpriteGfx(battler, FALSE);
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == 0)
+        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT) // Should be checking position, not battler.
             DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, battler);
-        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == 0)
-            DecompressTrainerBackPic(BACK_PIC_WALLY, battler);
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == B_POSITION_PLAYER_LEFT) // Should be checking position, not battler.
+            DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, battler);
         else if (!gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
             BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
         else
@@ -234,8 +234,8 @@ static void CreateBattlerSprite(u8 battler)
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 return;
 
-            sub_806A068(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
-            gBattlerSpriteIds[battler] = CreateSprite(&gUnknown_0202499C, GetBattlerSpriteCoord(battler, 2), posY, sub_80A82E4(battler));
+            SetMultiuseSpriteTemplateToPokemon(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, GetBattlerSpriteCoord(battler, 2), posY, sub_80A82E4(battler));
             gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
@@ -245,21 +245,21 @@ static void CreateBattlerSprite(u8 battler)
             if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies == SPECIES_CASTFORM)
                 gSprites[gBattlerSpriteIds[battler]].anims = gMonAnimationsSpriteAnimsPtrTable[SPECIES_CASTFORM];
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == 0)
+        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT)
         {
-            sub_806A12C(gSaveBlock2Ptr->playerGender, GetBattlerPosition(B_POSITION_PLAYER_LEFT));
-            gBattlerSpriteIds[battler] = CreateSprite(&gUnknown_0202499C, 0x50,
+            SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2Ptr->playerGender, GetBattlerPosition(B_POSITION_PLAYER_LEFT));
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, 0x50,
                                                 (8 - gTrainerBackPicCoords[gSaveBlock2Ptr->playerGender].coords) * 4 + 80,
                                                  sub_80A82E4(0));
             gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == 0)
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == B_POSITION_PLAYER_LEFT)
         {
-            sub_806A12C(BACK_PIC_WALLY, GetBattlerPosition(0));
-            gBattlerSpriteIds[battler] = CreateSprite(&gUnknown_0202499C, 0x50,
-                                                (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords) * 4 + 80,
+            SetMultiuseSpriteTemplateToTrainerBack(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(0));
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, 0x50,
+                                                (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].coords) * 4 + 80,
                                                  sub_80A82E4(0));
             gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
@@ -270,8 +270,8 @@ static void CreateBattlerSprite(u8 battler)
             if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 return;
 
-            sub_806A068(GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
-            gBattlerSpriteIds[battler] = CreateSprite(&gUnknown_0202499C, GetBattlerSpriteCoord(battler, 2), posY, sub_80A82E4(battler));
+            SetMultiuseSpriteTemplateToPokemon(GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, GetBattlerSpriteCoord(battler, 2), posY, sub_80A82E4(battler));
             gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
@@ -292,9 +292,9 @@ static void CreateHealthboxSprite(u8 battler)
     {
         u8 healthboxSpriteId;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == 0)
+        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT)
             healthboxSpriteId = CreateSafariPlayerHealthboxSprites();
-        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == 0)
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && battler == B_POSITION_PLAYER_LEFT)
             return;
         else
             healthboxSpriteId = CreateBattlerHealthboxSprites(battler);

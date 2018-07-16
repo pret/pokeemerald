@@ -582,6 +582,7 @@
 #define BLDCNT_TGT1_BG3      (1 << 3)
 #define BLDCNT_TGT1_OBJ      (1 << 4)
 #define BLDCNT_TGT1_BD       (1 << 5)
+#define BLDCNT_TGT1_ALL      (BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD)
 // Bits 6-7 select the special effect
 #define BLDCNT_EFFECT_NONE      (0 << 6)   // no special effect
 #define BLDCNT_EFFECT_BLEND     (1 << 6)   // 1st+2nd targets mixed (controlled by BLDALPHA)
@@ -594,6 +595,7 @@
 #define BLDCNT_TGT2_BG3      (1 << 11)
 #define BLDCNT_TGT2_OBJ      (1 << 12)
 #define BLDCNT_TGT2_BD       (1 << 13)
+#define BLDCNT_TGT2_ALL      (BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD)
 
 // BLDALPHA
 #define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))

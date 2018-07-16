@@ -65,6 +65,8 @@ enum
     REQUEST_TOUGH_RIBBON_BATTLE,
 };
 
+// Special arguments for Battle Controller functions.
+
 #define RESET_ACTION_MOVE_SELECTION     0
 #define RESET_ACTION_SELECTION          1
 #define RESET_MOVE_SELECTION            2
@@ -76,14 +78,15 @@ enum
 #define BALL_3_SHAKES_SUCCESS   4
 #define BALL_TRAINER_BLOCK      5
 
-#define RET_VALUE_LEVELLED_UP   11
-
 #define INSTANT_HP_BAR_DROP     32767
+
+// Special return values in gBattleBufferB from Battle Controller functions.
+#define RET_VALUE_LEVELED_UP   11
 
 struct UnusedControllerStruct
 {
-    u8 field_0 : 7;
-    u8 flag_x80 : 1;
+    u8 field_0:7;
+    u8 flag_x80:1;
 };
 
 struct HpAndStatus
@@ -160,8 +163,8 @@ enum
     CONTROLLER_INTROSLIDE,
     CONTROLLER_INTROTRAINERBALLTHROW,
     CONTROLLER_DRAWPARTYSTATUSSUMMARY,
-    CONTROLLER_49,
-    CONTROLLER_50,
+    CONTROLLER_HIDEPARTYSTATUSSUMMARY,
+    CONTROLLER_ENDBOUNCE,
     CONTROLLER_SPRITEINVISIBILITY,
     CONTROLLER_BATTLEANIMATION,
     CONTROLLER_LINKSTANDBYMSG,
@@ -230,13 +233,13 @@ void BtlController_EmitFaintingCry(u8 bufferId);
 void BtlController_EmitIntroSlide(u8 bufferId, u8 terrainId);
 void BtlController_EmitIntroTrainerBallThrow(u8 bufferId);
 void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2);
-void BtlController_EmitCmd49(u8 bufferId);
-void BtlController_EmitCmd50(u8 bufferId);
+void BtlController_EmitHidePartyStatusSummary(u8 bufferId);
+void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
 void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument);
 void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 arg2);
 void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
-void BtlController_EmitCmd55(u8 bufferId, u8 arg1);
+void BtlController_EmitCmd55(u8 bufferId, u8 battleOutcome);
 
 // player controller
 void SetControllerToPlayer(void);

@@ -35,7 +35,7 @@ void ClearBehindSubstituteBit(u8 battlerId);
 void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId);
 void BattleStopLowHpSound(void);
 u8 GetMonHPBarLevel(struct Pokemon *mon);
-void sub_805EAE8(void);
+void HandleBattleLowHpMusicChange(void);
 void sub_805EB9C(u8 affineMode);
 void LoadAndCreateEnemyShadowSprites(void);
 void SpriteCB_SetInvisible(struct Sprite *sprite);
@@ -45,6 +45,6 @@ void sub_805EF14(void);
 void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
-bool32 ShouldPlayNormalPokeCry(struct Pokemon *mon);
+bool32 ShouldPlayNormalMonCry(struct Pokemon *mon);
 
 #endif // GUARD_BATTLE_GFX_SFX_UTIL

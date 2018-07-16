@@ -241,7 +241,7 @@ _08077310:
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC0
-	bl box_border_load_tiles_and_pal
+	bl LoadUserWindowBorderGfx_
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0xE0
@@ -7174,8 +7174,8 @@ _0807ADE0:
 	bl GetMonSpritePalStruct
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
-	bl sub_806A068
-	ldr r0, =gUnknown_0202499C
+	bl SetMultiuseSpriteTemplateToPokemon
+	ldr r0, =gMultiuseSpriteTemplate
 	movs r1, 0x78
 	movs r2, 0x3C
 	movs r3, 0x6

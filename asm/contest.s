@@ -6770,8 +6770,8 @@ _080DB1CC:
 	bl LoadCompressedPalette
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_806A068
-	ldr r4, =gUnknown_0202499C
+	bl SetMultiuseSpriteTemplateToPokemon
+	ldr r4, =gMultiuseSpriteTemplate
 	movs r0, 0x2
 	adds r1, r5, 0
 	movs r2, 0

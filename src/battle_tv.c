@@ -9,8 +9,6 @@
 #include "battle_message.h"
 #include "tv.h"
 
-extern struct StringInfoBattle *gStringInfo;
-
 // this file's functions
 static bool8 sub_817E0B8(u16 stringId);
 static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3);
@@ -223,7 +221,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     atkSide = GetBattlerSide(gBattlerAttacker);
     defSide = GetBattlerSide(gBattlerTarget);
     effSide = GetBattlerSide(gEffectBattler);
-    scriptingSide = GetBattlerSide(gStringInfo->scrActive);
+    scriptingSide = GetBattlerSide(gBattleMsgDataPtr->scrActive);
 
     if (atkSide == B_SIDE_PLAYER)
         atkMon = &gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]];
@@ -235,7 +233,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     else
         defMon = &gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]];
 
-    moveSlot = GetBattlerMoveSlotId(gBattlerAttacker, gStringInfo->currentMove);
+    moveSlot = GetBattlerMoveSlotId(gBattlerAttacker, gBattleMsgDataPtr->currentMove);
 
     if (moveSlot >= 4 && sub_817E0B8(stringId) && stringId > BATTLESTRINGS_ID_ADDER)
     {
@@ -480,8 +478,8 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         break;
     case STRINGID_PKMNFASTASLEEP:
         if (tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].slpMonId != 0
-            && gStringInfo->currentMove != MOVE_SNORE
-            && gStringInfo->currentMove != MOVE_SLEEP_TALK)
+            && gBattleMsgDataPtr->currentMove != MOVE_SNORE
+            && gBattleMsgDataPtr->currentMove != MOVE_SLEEP_TALK)
             AddMovePoints(9, 3, tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].slpMonId - 1, tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].slpMoveSlot);
         break;
     case STRINGID_PKMNWASFROZEN:
@@ -798,8 +796,8 @@ void TryPutLinkBattleTvShowOnAir(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((playerBestMonId < 3 && !sub_806D82C(gBattleScripting.multiplayerId))
-            || (playerBestMonId >= 3 && sub_806D82C(gBattleScripting.multiplayerId)))
+        if ((playerBestMonId < 3 && !GetLinkTrainerFlankId(gBattleScripting.multiplayerId))
+            || (playerBestMonId >= 3 && GetLinkTrainerFlankId(gBattleScripting.multiplayerId)))
         {
             j = (opponentBestMonId < 3) ? 0 : 1;
             PutBattleUpdateOnTheAir(sub_806EF84(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
@@ -1080,7 +1078,7 @@ _0817E5C8:\n\
 	ldr r0, =gBattleScripting\n\
 	adds r0, 0x25\n\
 	ldrb r0, [r0]\n\
-	bl sub_806D82C\n\
+	bl GetLinkTrainerFlankId\n\
 	lsls r0, 16\n\
 	cmp r0, 0\n\
 	beq _0817E630\n\
@@ -1090,7 +1088,7 @@ _0817E620:\n\
 	ldr r0, =gBattleScripting\n\
 	adds r0, 0x25\n\
 	ldrb r0, [r0]\n\
-	bl sub_806D82C\n\
+	bl GetLinkTrainerFlankId\n\
 	lsls r0, 16\n\
 	cmp r0, 0\n\
 	beq _0817E670\n\

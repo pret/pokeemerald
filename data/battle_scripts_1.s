@@ -2873,7 +2873,7 @@ BattleScript_FaintedMonTryChooseAnother::
 	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_LINK, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_x2000000, BattleScript_FaintedMonChooseAnother
-	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID, BattleScript_FaintedMonChooseAnother
+	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonChooseAnother
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonChooseAnother
 	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, 0x1, BattleScript_FaintedMonChooseAnother
@@ -2899,7 +2899,7 @@ BattleScript_FaintedMonTryChooseAnother::
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
 	printstring STRINGID_SWITCHINMON
-	atk62 BS_ATTACKER
+	hidepartystatussummary BS_ATTACKER
 	switchinanim BS_ATTACKER, 0x0
 	waitstate
 	switchineffects BS_ATTACKER
@@ -2910,7 +2910,7 @@ BattleScript_FaintedMonChooseAnother::
 	switchindataupdate BS_FAINTED
 	hpthresholds BS_FAINTED
 	printstring STRINGID_SWITCHINMON
-	atk62 BS_FAINTED
+	hidepartystatussummary BS_FAINTED
 	switchinanim BS_FAINTED, FALSE
 	waitstate
 	various7 BS_ATTACKER
@@ -2933,7 +2933,7 @@ BattleScript_82DA908::
 	switchindataupdate BS_FAINTED
 	hpthresholds BS_FAINTED
 	printstring STRINGID_SWITCHINMON
-	atk62 BS_FAINTED
+	hidepartystatussummary BS_FAINTED
 	switchinanim BS_FAINTED, FALSE
 	waitstate
 	switchineffects 5
@@ -2968,7 +2968,7 @@ BattleScript_PayDayMoneyAndPickUpItems::
 
 BattleScript_LocalBattleLost::
 	jumpifbattletype BATTLE_TYPE_DOME, BattleScript_CheckDomeDrew
-	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID, BattleScript_LocalBattleLostPrintTrainersWinText
+	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifbattletype BATTLE_TYPE_x4000000, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifbattletype BATTLE_TYPE_EREADER_TRAINER, BattleScript_LocalBattleLostEnd
 	jumpifhalfword CMP_EQUAL, gTrainerBattleOpponent_A, 0x400, BattleScript_LocalBattleLostEnd
@@ -3120,10 +3120,10 @@ BattleScript_PursuitSwitchDmgSetMultihit::
 	setmultihit 0x2
 BattleScript_PursuitSwitchDmgLoop::
 	jumpifnopursuitswitchdmg BattleScript_DoSwitchOut
-	atk5F
+	swapattackerwithtarget
 	trysetdestinybondtohappen
 	call BattleScript_PursuitDmgOnSwitchOut
-	atk5F
+	swapattackerwithtarget
 BattleScript_DoSwitchOut::
 	decrementmultihit BattleScript_PursuitSwitchDmgLoop
 	switchoutabilities BS_ATTACKER
@@ -3136,7 +3136,7 @@ BattleScript_DoSwitchOut::
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
 	printstring STRINGID_SWITCHINMON
-	atk62 BS_ATTACKER
+	hidepartystatussummary BS_ATTACKER
 	switchinanim BS_ATTACKER, FALSE
 	waitstate
 	switchineffects BS_ATTACKER
@@ -3230,7 +3230,7 @@ BattleScript_DamagingWeatherContinues::
 	playanimation2 BS_ATTACKER, sB_ANIM_ARG1, NULL
 	setbyte gBattleCommunication, 0x0
 BattleScript_DamagingWeatherLoop::
-	copyarraywithindex gBattlerAttacker, gBattleTurnOrder, gBattleCommunication, 0x1
+	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattleCommunication, 0x1
 	weatherdamage
 	jumpifword CMP_EQUAL, gBattleMoveDamage, 0x0, BattleScript_DamagingWeatherLoopIncrement
 	printfromtable gSandStormHailDmgStringIds
@@ -3710,12 +3710,12 @@ BattleScript_MagicCoatBounce::
 BattleScript_SnatchedMove::
 	attackstring
 	ppreduce
-	snatchsetbanks
+	snatchsetbattlers
 	playanimation BS_TARGET, B_ANIM_SNATCH_MOVE, NULL
 	printstring STRINGID_PKMNSNATCHEDMOVE
 	waitmessage 0x40
 	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_x800000
-	atk5F
+	swapattackerwithtarget
 	return
 
 BattleScript_EnduredMsg::
@@ -3991,7 +3991,7 @@ BattleScript_DrizzleActivates::
 	pause 0x20
 	printstring STRINGID_PKMNMADEITRAIN
 	waitstate
-	playanimation BS_BANK_0, B_ANIM_RAIN_CONTINUES, NULL
+	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES, NULL
 	call BattleScript_WeatherFormChanges
 	end3
 
@@ -4019,7 +4019,7 @@ BattleScript_SandstreamActivates::
 	pause 0x20
 	printstring STRINGID_PKMNSXWHIPPEDUPSANDSTORM
 	waitstate
-	playanimation BS_BANK_0, B_ANIM_SANDSTORM_CONTINUES, NULL
+	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES, NULL
 	call BattleScript_WeatherFormChanges
 	end3
 
@@ -4085,7 +4085,7 @@ BattleScript_DroughtActivates::
 	pause 0x20
 	printstring STRINGID_PKMNSXINTENSIFIEDSUN
 	waitstate
-	playanimation BS_BANK_0, B_ANIM_SUN_CONTINUES, NULL
+	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES, NULL
 	call BattleScript_WeatherFormChanges
 	end3
 
@@ -4561,8 +4561,8 @@ BattleScript_82DB973::
 	end2
 
 BattleScript_82DB992::
-	various16 BS_BANK_0
-	various17 BS_BANK_0
+	various16 BS_BATTLER_0
+	various17 BS_BATTLER_0
 	various9 BS_ATTACKER
 	various15 BS_ATTACKER
 	printstring STRINGID_TIEDOPPONENTBYREFEREE

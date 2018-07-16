@@ -11351,7 +11351,7 @@ sub_81CCA1C: @ 81CCA1C
 	lsrs r0, 24
 	movs r1, 0x42
 	movs r2, 0x40
-	bl box_border_load_tiles_and_pal
+	bl LoadUserWindowBorderGfx_
 	ldrb r0, [r5, 0x8]
 	movs r1, 0x42
 	movs r2, 0x4

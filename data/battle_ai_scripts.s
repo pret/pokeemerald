@@ -3382,11 +3382,11 @@ AI_Safari_Flee:
 	flee
 
 AI_FirstBattle:
-	if_hp_equal AI_TARGET, 20, BattleAIScript_82DE34D
-	if_hp_less_than AI_TARGET, 20, BattleAIScript_82DE34D
+	if_hp_equal AI_TARGET, 20, AI_FirstBattle_Flee
+	if_hp_less_than AI_TARGET, 20, AI_FirstBattle_Flee
 	end
 
-BattleAIScript_82DE34D:
+AI_FirstBattle_Flee:
 	flee
 
 AI_Ret:

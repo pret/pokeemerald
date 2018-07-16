@@ -11,6 +11,7 @@
 #include "util.h"
 #include "main.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 #include "sound.h"
 #include "window.h"
 #include "m4a.h"
@@ -34,7 +35,7 @@ extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_81358F4(void);
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void sub_806A068(u16, u8);
+extern void SetMultiuseSpriteTemplateToPokemon(u16, u8);
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
@@ -87,8 +88,8 @@ static void PlayerPartnerHandleFaintingCry(void);
 static void PlayerPartnerHandleIntroSlide(void);
 static void PlayerPartnerHandleIntroTrainerBallThrow(void);
 static void PlayerPartnerHandleDrawPartyStatusSummary(void);
-static void PlayerPartnerHandleCmd49(void);
-static void PlayerPartnerHandleCmd50(void);
+static void PlayerPartnerHandleHidePartyStatusSummary(void);
+static void PlayerPartnerHandleEndBounceEffect(void);
 static void PlayerPartnerHandleSpriteInvisibility(void);
 static void PlayerPartnerHandleBattleAnimation(void);
 static void PlayerPartnerHandleLinkStandbyMsg(void);
@@ -164,8 +165,8 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerPartnerHandleIntroSlide,
     PlayerPartnerHandleIntroTrainerBallThrow,
     PlayerPartnerHandleDrawPartyStatusSummary,
-    PlayerPartnerHandleCmd49,
-    PlayerPartnerHandleCmd50,
+    PlayerPartnerHandleHidePartyStatusSummary,
+    PlayerPartnerHandleEndBounceEffect,
     PlayerPartnerHandleSpriteInvisibility,
     PlayerPartnerHandleBattleAnimation,
     PlayerPartnerHandleLinkStandbyMsg,
@@ -203,7 +204,7 @@ static void PlayerPartnerBufferRunCommand(void)
     }
 }
 
-static void CompleteOnBankSpriteCallbackDummy(void)
+static void CompleteOnBattlerSpriteCallbackDummy(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         PlayerPartnerBufferExecCompleted();
@@ -294,7 +295,7 @@ static void sub_81BB1D4(void)
 
 static void CompleteOnHealthbarDone(void)
 {
-    s16 hpValue = sub_8074AA0(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
+    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
@@ -344,7 +345,7 @@ static void Task_GiveExpToMon(u8 taskId)
             gainedExp -= nextLvlExp - currExp;
             savedActiveBank = gActiveBattler;
             gActiveBattler = battlerId;
-            BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELLED_UP, gainedExp);
+            BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELED_UP, gainedExp);
             gActiveBattler = savedActiveBank;
 
             if (IsDoubleBattle() == TRUE
@@ -399,7 +400,7 @@ static void sub_81BB4E4(u8 taskId)
         u8 battlerId = gTasks[taskId].tExpTask_bank;
         s16 r4;
 
-        r4 = sub_8074AA0(battlerId, gHealthboxSpriteIds[battlerId], EXP_BAR, 0);
+        r4 = MoveBattleBar(battlerId, gHealthboxSpriteIds[battlerId], EXP_BAR, 0);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[battlerId]);
         if (r4 == -1)
         {
@@ -423,7 +424,7 @@ static void sub_81BB4E4(u8 taskId)
                 gainedExp -= expOnNextLvl - currExp;
                 savedActiveBank = gActiveBattler;
                 gActiveBattler = battlerId;
-                BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELLED_UP, gainedExp);
+                BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELED_UP, gainedExp);
                 gActiveBattler = savedActiveBank;
                 gTasks[taskId].func = sub_81BB628;
             }
@@ -1210,9 +1211,9 @@ static void PlayerPartnerHandleLoadMonSprite(void)
 
     BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
-    sub_806A068(species, GetBattlerPosition(gActiveBattler));
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
 
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                GetBattlerSpriteCoord(gActiveBattler, 2),
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                sub_80A82E4(gActiveBattler));
@@ -1240,10 +1241,10 @@ static void sub_81BD0E4(u8 battlerId, bool8 dontClearSubstituteBit)
     gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     gUnknown_03005D7C[battlerId] = CreateInvisibleSpriteWithCallback(sub_805D714);
-    sub_806A068(species, GetBattlerPosition(battlerId));
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
 
     gBattlerSpriteIds[battlerId] = CreateSprite(
-      &gUnknown_0202499C,
+      &gMultiuseSpriteTemplate,
       GetBattlerSpriteCoord(battlerId, 2),
       GetBattlerSpriteDefault_Y(battlerId),
       sub_80A82E4(battlerId));
@@ -1308,9 +1309,9 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     s16 xPos, yPos;
     u32 trainerPicId;
 
-    if (gPartnerTrainerId == STEVEN_PARTNER_ID)
+    if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
-        trainerPicId = BACK_PIC_STEVEN;
+        trainerPicId = TRAINER_BACK_PIC_STEVEN;
         xPos = 90;
         yPos = (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80;
     }
@@ -1322,11 +1323,11 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     }
 
     // Use back pic only if the partner is Steven
-    if (gPartnerTrainerId == STEVEN_PARTNER_ID)
+    if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
         DecompressTrainerBackPic(trainerPicId, gActiveBattler);
-        sub_806A12C(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C, xPos, yPos, sub_80A82E4(gActiveBattler));
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, sub_80A82E4(gActiveBattler));
 
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
         gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
@@ -1336,8 +1337,8 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     else // otherwise use front sprite
     {
         DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
-        sub_806A1C0(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C, xPos, yPos, sub_80A82E4(gActiveBattler));
+        SetMultiuseSpriteTemplateToTrainerFront(trainerPicId, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, sub_80A82E4(gActiveBattler));
 
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
         gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
@@ -1348,7 +1349,7 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
         gSprites[gBattlerSpriteIds[gActiveBattler]].hFlip = 1;
     }
 
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
 static void PlayerPartnerHandleTrainerSlide(void)
@@ -1492,7 +1493,7 @@ static void PlayerPartnerHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
 }
 
@@ -1793,9 +1794,9 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(void)
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
 
     paletteNum = AllocSpritePalette(0xD6F9);
-    if (gPartnerTrainerId == STEVEN_PARTNER_ID)
+    if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
-        u8 spriteId = BACK_PIC_STEVEN;
+        u8 spriteId = TRAINER_BACK_PIC_STEVEN;
         LoadCompressedPalette(gTrainerBackPicPaletteTable[spriteId].data, 0x100 + paletteNum * 16, 32);
     }
     else
@@ -1810,8 +1811,8 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(void)
     taskId = CreateTask(sub_81BE2C8, 5);
     gTasks[taskId].data[0] = gActiveBattler;
 
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_77;
@@ -1857,7 +1858,7 @@ static void PlayerPartnerHandleDrawPartyStatusSummary(void)
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
         gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
 
@@ -1877,14 +1878,14 @@ static void sub_81BE498(void)
     }
 }
 
-static void PlayerPartnerHandleCmd49(void)
+static void PlayerPartnerHandleHidePartyStatusSummary(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleCmd50(void)
+static void PlayerPartnerHandleEndBounceEffect(void)
 {
     PlayerPartnerBufferExecCompleted();
 }

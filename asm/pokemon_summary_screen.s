@@ -1092,7 +1092,7 @@ _081C4750:
 	bl LoadCompressedObjectPalette
 	ldrh r0, [r4, 0x4]
 	movs r1, 0x1
-	bl sub_806A068
+	bl SetMultiuseSpriteTemplateToPokemon
 _081C4768:
 	ldrh r0, [r6]
 	adds r0, 0x1
@@ -1116,7 +1116,7 @@ sub_81C4778: @ 81C4778
 	bne _081C47AE
 	adds r0, r1, 0
 	adds r0, 0xC
-	bl ShouldPlayNormalPokeCry
+	bl ShouldPlayNormalMonCry
 	cmp r0, 0x1
 	bne _081C47A4
 	ldrh r0, [r4, 0x2]
@@ -1144,7 +1144,7 @@ sub_81C47B4: @ 81C47B4
 	ldr r0, =gUnknown_0203CF1C
 	ldr r6, [r0]
 	adds r6, 0x70
-	ldr r0, =gUnknown_0202499C
+	ldr r0, =gMultiuseSpriteTemplate
 	movs r1, 0x28
 	movs r2, 0x40
 	movs r3, 0x5
@@ -5297,7 +5297,7 @@ sub_81C6BD8: @ 81C6BD8
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xD0
-	bl copy_textbox_border_tile_patterns_to_vram
+	bl LoadMessageBoxGfx
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20

@@ -857,7 +857,14 @@
 #define TRAINER_BRENDAN_16      853
 #define TRAINER_MAY_16          854
 
-#define NO_OF_TRAINERS          854
+#define TRAINERS_COUNT          855
+
+// Special Trainer Ids.
+#define TRAINER_FRONTIER_BRAIN      1022
+#define TRAINER_SECRET_BASE         1024
+#define TRAINER_LINK_OPPONENT       2048
+#define TRAINER_OPPONENT_C00        3072
+#define TRAINER_STEVEN_PARTNER      3075
 
 #define TRAINER_PIC_HIKER                  0
 #define TRAINER_PIC_AQUA_GRUNT_M           1
@@ -952,6 +959,15 @@
 #define TRAINER_PIC_LEAF                  90
 #define TRAINER_PIC_RUBY_SAPPHIRE_BRENDAN 91
 #define TRAINER_PIC_RUBY_SAPPHIRE_MAY     92
+
+#define TRAINER_BACK_PIC_BRENDAN                0
+#define TRAINER_BACK_PIC_MAY                    1
+#define TRAINER_BACK_PIC_RED                    2
+#define TRAINER_BACK_PIC_LEAF                   3
+#define TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN  4
+#define TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY      5
+#define TRAINER_BACK_PIC_WALLY                  6
+#define TRAINER_BACK_PIC_STEVEN                 7
 
 #define FACILITY_CLASS_HIKER           0x0
 #define FACILITY_CLASS_TEAM_AQUA_1     0x1
