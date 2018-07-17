@@ -57,12 +57,10 @@ extern const u8 gText_NickHatchPrompt[];
 
 extern u8 sav1_map_get_name(void);
 extern void TVShowConvertInternationalString(u8* str1, u8* str2, u8);
-extern void sub_806A068(u16, u8);
 extern void FadeScreen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
 extern void sub_80AF168(void);
 extern void ScanlineEffect_Stop(void);
-extern void CB2_ReturnToField(void);
 extern void play_some_sound(void);
 extern void DoNamingScreen(u8, const u8*, u16, u8, u32, MainCallback);
 extern u16 sub_80D22D0(void);
@@ -437,8 +435,8 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
         }
         break;
     case 1:
-        sub_806A068(GetMonSpritePalStruct(mon)->tag, r5);
-        spriteID = CreateSprite(&gUnknown_0202499C, 120, 75, 6);
+        SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, r5);
+        spriteID = CreateSprite(&gMultiuseSpriteTemplate, 120, 75, 6);
         gSprites[spriteID].invisible = 1;
         gSprites[spriteID].callback = SpriteCallbackDummy;
         break;
@@ -593,7 +591,7 @@ static void CB2_EggHatch_1(void)
     switch (sEggHatchData->CB2_state)
     {
     case 0:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         sEggHatchData->eggSpriteID = CreateSprite(&sSpriteTemplate_EggHatch, 120, 75, 5);
         ShowBg(0);
         ShowBg(1);
@@ -655,7 +653,7 @@ static void CB2_EggHatch_1(void)
     case 9:
         if (!IsTextPrinterActive(sEggHatchData->windowId))
         {
-            sub_809882C(sEggHatchData->windowId, 0x140, 0xE0);
+            LoadUserWindowBorderGfx(sEggHatchData->windowId, 0x140, 0xE0);
             CreateYesNoMenu(&sYesNoWinTemplate, 0x140, 0xE, 0);
             sEggHatchData->CB2_state++;
         }
@@ -676,7 +674,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 11:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
         sEggHatchData->CB2_state++;
         break;
     case 12:
@@ -786,7 +784,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
 {
     s16 i;
     if (sprite->data[0] == 0)
-        BeginNormalPaletteFade(-1, -1, 0, 0x10, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, 0xFFFF);
     if (sprite->data[0] < 4u)
     {
         for (i = 0; i <= 3; i++)
@@ -810,7 +808,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
         StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
     }
     if (sprite->data[0] == 8)
-        BeginNormalPaletteFade(-1, -1, 0x10, 0, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0x10, 0, 0xFFFF);
     if (sprite->data[0] <= 9)
         gSprites[sEggHatchData->pokeSpriteID].pos1.y -= 1;
     if (sprite->data[0] > 40)

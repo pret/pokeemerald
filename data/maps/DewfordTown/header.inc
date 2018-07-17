@@ -5,11 +5,11 @@ DewfordTown: @ 84825EC
 	.4byte DewfordTown_MapConnections
 	.2byte MUS_HIGHTOWN
 	.2byte 12
-	.byte 2
+	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
-	.byte 2
-	.byte 1
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_TOWN
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

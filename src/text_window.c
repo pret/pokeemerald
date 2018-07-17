@@ -91,26 +91,26 @@ const struct TilesPal *GetWindowFrameTilesPal(u8 id)
         return &sWindowFrames[id];
 }
 
-void copy_textbox_border_tile_patterns_to_vram(u8 windowId, u16 destOffset, u8 palOffset)
+void LoadMessageBoxGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_PRIORITY), gMessageBox_Gfx, 0x1C0, destOffset);
     LoadPalette(GetOverworldTextboxPalettePtr(), palOffset, 0x20);
 }
 
-void box_border_load_tiles_and_pal(u8 windowId, u16 destOffset, u8 palOffset)
+void LoadUserWindowBorderGfx_(u8 windowId, u16 destOffset, u8 palOffset)
 {
-    sub_809882C(windowId, destOffset, palOffset);
+    LoadUserWindowBorderGfx(windowId, destOffset, palOffset);
 }
 
-void sub_80987D4(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
+void LoadWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_PRIORITY), sWindowFrames[frameId].tiles, 0x120, destOffset);
     LoadPalette(sWindowFrames[frameId].pal, palOffset, 0x20);
 }
 
-void sub_809882C(u8 windowId, u16 destOffset, u8 palOffset)
+void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
-    sub_80987D4(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palOffset);
+    LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palOffset);
 }
 
 void sub_8098858(u8 windowId, u16 tileNum, u8 palNum)

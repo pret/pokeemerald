@@ -18,6 +18,7 @@
 #include "text_window.h"
 #include "menu.h"
 #include "battle_setup.h"
+#include "constants/map_types.h"
 
 struct BattleBackground
 {
@@ -31,8 +32,8 @@ struct BattleBackground
 extern const struct SpriteTemplate gUnknown_0831A9D0;
 extern const struct SpriteTemplate gUnknown_0831A9E8;
 extern const struct CompressedSpriteSheet gUnknown_0831AA00;
-extern const struct BgTemplate gUnknown_0831AA08[4];
-extern const struct WindowTemplate *gUnknown_0831ABA0[];
+extern const struct BgTemplate gBattleBgTemplates[4];
+extern const struct WindowTemplate *const gBattleWindowTemplates[];
 extern const struct BattleBackground gBattleTerrainTable[];
 
 extern u16 gBattle_BG1_X;
@@ -42,23 +43,23 @@ extern u16 gBattle_BG2_Y;
 
 extern u8 GetCurrentMapBattleScene(void);
 
-void sub_8035658(void)
+void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_0831AA08, ARRAY_COUNT(gUnknown_0831AA08));
+    InitBgsFromTemplates(0, gBattleBgTemplates, ARRAY_COUNT(gBattleBgTemplates));
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
-        gBattleScripting.field_24 = 1;
+        gBattleScripting.windowsType = 1;
         SetBgTilemapBuffer(1, gUnknown_02023060);
         SetBgTilemapBuffer(2, gUnknown_02023060);
     }
     else
     {
-        gBattleScripting.field_24 = 0;
+        gBattleScripting.windowsType = 0;
     }
 
-    InitWindows(gUnknown_0831ABA0[gBattleScripting.field_24]);
+    InitWindows(gBattleWindowTemplates[gBattleScripting.windowsType]);
     DeactivateAllTextPrinters();
 }
 
@@ -66,23 +67,23 @@ void sub_80356D0(void)
 {
     DisableInterrupts(INTR_FLAG_HBLANK);
     EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
-    sub_8035658();
+    BattleInitBgsAndWindows();
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON | DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
 }
 
-void ApplyPlayerChosenFrameToBattleMenu(void)
+void LoadBattleMenuWindowGfx(void)
 {
-    sub_809882C(2, 0x12, 0x10);
-    sub_809882C(2, 0x22, 0x10);
+    LoadUserWindowBorderGfx(2, 0x12, 0x10);
+    LoadUserWindowBorderGfx(2, 0x22, 0x10);
     LoadCompressedPalette(gUnknown_08D85600, 0x50, 0x20);
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
         sub_81978B0(0x70);
-        copy_textbox_border_tile_patterns_to_vram(0, 0x30, 0x70);
+        LoadMessageBoxGfx(0, 0x30, 0x70);
         gPlttBufferUnfaded[0x76] = 0;
         CpuCopy16(&gPlttBufferUnfaded[0x76], &gPlttBufferFaded[0x76], 2);
     }
@@ -193,12 +194,12 @@ void LoadBattleTextboxAndBackground(void)
     CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
     CopyBgTilemapBufferToVram(0);
     LoadCompressedPalette(gBattleTextboxPalette, 0, 0x40);
-    ApplyPlayerChosenFrameToBattleMenu();
+    LoadBattleMenuWindowGfx();
 
     DrawMainBattleBackground();
 }
 
-static void sub_8035AE4(u8 taskId, u8 bank, u8 bgId, u8 destX, u8 destY)
+static void sub_8035AE4(u8 taskId, u8 battlerId, u8 bgId, u8 destX, u8 destY)
 {
     s32 i;
     u16 var = 0;
@@ -208,7 +209,7 @@ static void sub_8035AE4(u8 taskId, u8 bank, u8 bgId, u8 destX, u8 destY)
     {
         if (gTasks[taskId].data[5] != 0)
         {
-            switch (bank)
+            switch (battlerId)
             {
             case 0:
                 var = 0x3F & gTasks[taskId].data[3];
@@ -226,7 +227,7 @@ static void sub_8035AE4(u8 taskId, u8 bank, u8 bgId, u8 destX, u8 destY)
         }
         else
         {
-            switch (bank)
+            switch (battlerId)
             {
             case 0:
                 var = 0x3F & gTasks[taskId].data[3];
@@ -253,7 +254,7 @@ static void sub_8035AE4(u8 taskId, u8 bank, u8 bgId, u8 destX, u8 destY)
     }
     else
     {
-        if (bank == gBattleScripting.multiplayerId)
+        if (battlerId == gBattleScripting.multiplayerId)
             var = gTasks[taskId].data[3];
         else
             var = gTasks[taskId].data[4];
@@ -272,7 +273,7 @@ static void sub_8035C4C(void)
 {
     if (gBattleOutcome == B_OUTCOME_DREW)
     {
-        BattleHandleAddTextPrinter(gText_Draw, 0x15);
+        BattlePutTextOnWindow(gText_Draw, 0x15);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
@@ -281,20 +282,20 @@ static void sub_8035C4C(void)
             switch (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18)
             {
             case 0:
-                BattleHandleAddTextPrinter(gText_Win, 0x16);
-                BattleHandleAddTextPrinter(gText_Loss, 0x17);
+                BattlePutTextOnWindow(gText_Win, 0x16);
+                BattlePutTextOnWindow(gText_Loss, 0x17);
                 break;
             case 1:
-                BattleHandleAddTextPrinter(gText_Win, 0x17);
-                BattleHandleAddTextPrinter(gText_Loss, 0x16);
+                BattlePutTextOnWindow(gText_Win, 0x17);
+                BattlePutTextOnWindow(gText_Loss, 0x16);
                 break;
             case 2:
-                BattleHandleAddTextPrinter(gText_Win, 0x16);
-                BattleHandleAddTextPrinter(gText_Loss, 0x17);
+                BattlePutTextOnWindow(gText_Win, 0x16);
+                BattlePutTextOnWindow(gText_Loss, 0x17);
                 break;
             case 3:
-                BattleHandleAddTextPrinter(gText_Win, 0x17);
-                BattleHandleAddTextPrinter(gText_Loss, 0x16);
+                BattlePutTextOnWindow(gText_Win, 0x17);
+                BattlePutTextOnWindow(gText_Loss, 0x16);
                 break;
             }
         }
@@ -303,20 +304,20 @@ static void sub_8035C4C(void)
             switch (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18)
             {
             case 0:
-                BattleHandleAddTextPrinter(gText_Win, 0x17);
-                BattleHandleAddTextPrinter(gText_Loss, 0x16);
+                BattlePutTextOnWindow(gText_Win, 0x17);
+                BattlePutTextOnWindow(gText_Loss, 0x16);
                 break;
             case 1:
-                BattleHandleAddTextPrinter(gText_Win, 0x16);
-                BattleHandleAddTextPrinter(gText_Loss, 0x17);
+                BattlePutTextOnWindow(gText_Win, 0x16);
+                BattlePutTextOnWindow(gText_Loss, 0x17);
                 break;
             case 2:
-                BattleHandleAddTextPrinter(gText_Win, 0x17);
-                BattleHandleAddTextPrinter(gText_Loss, 0x16);
+                BattlePutTextOnWindow(gText_Win, 0x17);
+                BattlePutTextOnWindow(gText_Loss, 0x16);
                 break;
             case 3:
-                BattleHandleAddTextPrinter(gText_Win, 0x16);
-                BattleHandleAddTextPrinter(gText_Loss, 0x17);
+                BattlePutTextOnWindow(gText_Win, 0x16);
+                BattlePutTextOnWindow(gText_Loss, 0x17);
                 break;
             }
         }
@@ -325,26 +326,26 @@ static void sub_8035C4C(void)
     {
         if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 != 0)
         {
-            BattleHandleAddTextPrinter(gText_Win, 0x17);
-            BattleHandleAddTextPrinter(gText_Loss, 0x16);
+            BattlePutTextOnWindow(gText_Win, 0x17);
+            BattlePutTextOnWindow(gText_Loss, 0x16);
         }
         else
         {
-            BattleHandleAddTextPrinter(gText_Win, 0x16);
-            BattleHandleAddTextPrinter(gText_Loss, 0x17);
+            BattlePutTextOnWindow(gText_Win, 0x16);
+            BattlePutTextOnWindow(gText_Loss, 0x17);
         }
     }
     else
     {
         if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 != 0)
         {
-            BattleHandleAddTextPrinter(gText_Win, 0x16);
-            BattleHandleAddTextPrinter(gText_Loss, 0x17);
+            BattlePutTextOnWindow(gText_Win, 0x16);
+            BattlePutTextOnWindow(gText_Loss, 0x17);
         }
         else
         {
-            BattleHandleAddTextPrinter(gText_Win, 0x17);
-            BattleHandleAddTextPrinter(gText_Loss, 0x16);
+            BattlePutTextOnWindow(gText_Win, 0x17);
+            BattlePutTextOnWindow(gText_Loss, 0x16);
         }
     }
 }
@@ -368,19 +369,19 @@ void sub_8035D74(u8 taskId)
                 switch (linkPlayer->lp_field_18)
                 {
                 case 0:
-                    BattleHandleAddTextPrinter(name, 0x11);
+                    BattlePutTextOnWindow(name, 0x11);
                     sub_8035AE4(taskId, linkPlayer->lp_field_18, 1, 2, 4);
                     break;
                 case 1:
-                    BattleHandleAddTextPrinter(name, 0x12);
+                    BattlePutTextOnWindow(name, 0x12);
                     sub_8035AE4(taskId, linkPlayer->lp_field_18, 2, 2, 4);
                     break;
                 case 2:
-                    BattleHandleAddTextPrinter(name, 0x13);
+                    BattlePutTextOnWindow(name, 0x13);
                     sub_8035AE4(taskId, linkPlayer->lp_field_18, 1, 2, 8);
                     break;
                 case 3:
-                    BattleHandleAddTextPrinter(name, 0x14);
+                    BattlePutTextOnWindow(name, 0x14);
                     sub_8035AE4(taskId, linkPlayer->lp_field_18, 2, 2, 8);
                     break;
                 }
@@ -396,10 +397,10 @@ void sub_8035D74(u8 taskId)
                 opponentId = playerId, playerId = opponentId_copy;
 
             name = gLinkPlayers[playerId].name;
-            BattleHandleAddTextPrinter(name, 0xF);
+            BattlePutTextOnWindow(name, 0xF);
 
             name = gLinkPlayers[opponentId].name;
-            BattleHandleAddTextPrinter(name, 0x10);
+            BattlePutTextOnWindow(name, 0x10);
 
             sub_8035AE4(taskId, playerId, 1, 2, 7);
             sub_8035AE4(taskId, opponentId, 2, 2, 7);
@@ -457,7 +458,7 @@ void sub_8035D74(u8 taskId)
     }
 }
 
-void LoadBattleEntryBackground(void)
+void DrawBattleEntryBackground(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
@@ -478,7 +479,7 @@ void LoadBattleEntryBackground(void)
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_EREADER_TRAINER))
     {
-        if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || gPartnerTrainerId == STEVEN_PARTNER_ID)
+        if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
         {
             LZDecompressVram(gBattleTerrainAnimTiles_Building, (void*)(VRAM + 0x4000));
             LZDecompressVram(gBattleTerrainAnimTilemap_Building, (void*)(VRAM + 0xE000));
@@ -740,7 +741,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         break;
     case 6:
-        ApplyPlayerChosenFrameToBattleMenu();
+        LoadBattleMenuWindowGfx();
         break;
     default:
         ret = TRUE;

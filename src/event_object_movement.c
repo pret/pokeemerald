@@ -21,6 +21,7 @@
 #include "sprite.h"
 #include "trainer_see.h"
 #include "util.h"
+#include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
@@ -1537,7 +1538,7 @@ u8 SpawnSpecialEventObject(struct EventObjectTemplate *eventObjectTemplate)
     return TrySpawnEventObject(eventObjectTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
 }
 
-u8 SpawnSpecialEventObjectParametrized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z)
+u8 SpawnSpecialEventObjectParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z)
 {
     struct EventObjectTemplate eventObjectTemplate;
 

@@ -57,6 +57,7 @@
 #include "malloc.h"
 #include "gpu_regs.h"
 #include "link_rfu.h"
+#include "constants/map_types.h"
 
 // event scripts
 extern const u8 EventScript_WhiteOut[];
@@ -88,7 +89,7 @@ extern const u16 gUnknown_82EC7C4[];
 
 u16 gUnknown_03005DA8;
 MainCallback gFieldCallback;
-bool8 (*gUnknown_03005DB0)(void);
+bool8 (*gFieldCallback2)(void);
 u8 gUnknown_03005DB4;
 u8 gFieldLinkPlayerCount;
 
@@ -1518,15 +1519,15 @@ void sub_8085E94(void *a0)
 
 static bool8 map_post_load_hook_exec(void)
 {
-    if (gUnknown_03005DB0 != NULL)
+    if (gFieldCallback2 != NULL)
     {
-        if (!gUnknown_03005DB0())
+        if (!gFieldCallback2())
         {
             return FALSE;
         }
         else
         {
-            gUnknown_03005DB0 = NULL;
+            gFieldCallback2 = NULL;
             gFieldCallback = NULL;
         }
     }
@@ -1554,7 +1555,7 @@ void CB2_NewGame(void)
     ScriptContext1_Init();
     ScriptContext2_Disable();
     gFieldCallback = ExecuteTruckSequence;
-    gUnknown_03005DB0 = NULL;
+    gFieldCallback2 = NULL;
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
@@ -1684,7 +1685,7 @@ void c2_8056854(void)
 void CB2_ReturnToFieldWithOpenMenu(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gUnknown_03005DB0 = sub_80AF6A4;
+    gFieldCallback2 = sub_80AF6A4;
     CB2_ReturnToField();
 }
 

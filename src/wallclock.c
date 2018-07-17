@@ -576,7 +576,7 @@ static void LoadWallClockGraphics(void)
     InitBgsFromTemplates(0, gUnknown_085B21FC, 3);
     InitWindows(gUnknown_085B21DC);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 0x250, 0xd0);
+    LoadUserWindowBorderGfx(0, 0x250, 0xd0);
     clear_scheduled_bg_copies_to_vram();
     ScanlineEffect_Stop();
     ResetTasks();
@@ -589,7 +589,7 @@ static void LoadWallClockGraphics(void)
 
 static void WallClockInit(void)
 {
-    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetVBlankCallback(WallClockVblankCallback);
     SetMainCallback2(WallClockMainCallback);
@@ -782,7 +782,7 @@ static void Task_SetClock4(u8 taskId)
 static void Task_SetClock5(u8 taskId)
 {
     RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gTasks[taskId].func = Task_SetClock6;
 }
 
@@ -814,7 +814,7 @@ static void Task_ViewClock2(u8 taskId)
 
 static void Task_ViewClock3(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gTasks[taskId].func = Task_ViewClock4;
 }
 

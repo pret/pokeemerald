@@ -16,7 +16,7 @@ void sub_81851A8(u8 *arg0);
 bool32 CanCopyRecordedBattleSaveData(void);
 u32 MoveRecordedBattleToSaveData(void);
 void PlayRecordedBattle(void (*CB2_After)(void));
-u8 sub_8185EA0(void);
+u8 GetRecordedBattleFrontierFacility(void);
 u8 sub_8185EAC(void);
 void RecordedBattle_SaveParties(void);
 u8 GetActiveBattlerLinkPlayerGender(void);

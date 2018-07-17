@@ -5,11 +5,11 @@ FarawayIsland_Interior: @ 8485778
 	.4byte 0x0
 	.2byte MUS_DAN02
 	.2byte 403
-	.byte 201
+	.byte MAPSEC_FARAWAY_ISLAND
 	.byte 0
-	.byte 11
-	.byte 8
+	.byte WEATHER_SHADE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

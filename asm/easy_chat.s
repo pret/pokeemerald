@@ -5988,7 +5988,7 @@ sub_811D0BC: @ 811D0BC
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE

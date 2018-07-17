@@ -1024,7 +1024,7 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
 
 static u16 SanitizeItemId(u16 itemId)
 {
-    if (itemId >= ITEM_LAST_ID + 1)
+    if (itemId >= ITEMS_COUNT)
         return ITEM_NONE;
     else
         return itemId;

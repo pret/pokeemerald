@@ -58,8 +58,8 @@ struct RecordedBattleSave
     u8 field_4FC;
     u8 field_4FD;
     u8 field_4FE;
-    u8 battleStyle : 1;
-    u8 textSpeed : 3;
+    u8 battleStyle:1;
+    u8 textSpeed:3;
     u32 AI_scripts;
     u8 field_504[8];
     u8 field_50C;
@@ -79,19 +79,19 @@ EWRAM_DATA static u16 sUnknown_0203C79C[4] = {0};
 EWRAM_DATA static u16 sUnknown_0203C7A4[4] = {0};
 EWRAM_DATA static u8 sUnknown_0203C7AC = 0;
 EWRAM_DATA static u8 sUnknown_0203C7AD = 0;
-EWRAM_DATA static u8 sUnknown_0203C7AE = 0;
+EWRAM_DATA static u8 sFrontierFacility = 0;
 EWRAM_DATA static u8 sUnknown_0203C7AF = 0;
 EWRAM_DATA static MainCallback sCallback2_AfterRecordedBattle = NULL;
 EWRAM_DATA u8 gUnknown_0203C7B4 = 0;
 EWRAM_DATA static u8 sUnknown_0203C7B5 = 0;
-EWRAM_DATA static u8 sRecordedBattle_BattleStyle = 0;
-EWRAM_DATA static u8 sRecordedBattle_TextSpeed = 0;
-EWRAM_DATA static u32 sRecordedBattle_BattleFlags = 0;
-EWRAM_DATA static u32 sRecordedBattle_AI_Scripts = 0;
+EWRAM_DATA static u8 sBattleStyle = 0;
+EWRAM_DATA static u8 sTextSpeed = 0;
+EWRAM_DATA static u32 sBattleFlags = 0;
+EWRAM_DATA static u32 sAI_Scripts = 0;
 EWRAM_DATA static struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
-EWRAM_DATA static u16 sRecordedBattle_PlayerMonMoves[2][4] = {0};
-EWRAM_DATA static struct PlayerInfo sRecordedBattle_Players[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u16 sPlayerMonMoves[2][4] = {0};
+EWRAM_DATA static struct PlayerInfo sPlayers[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sUnknown_0203CCD0 = 0;
 EWRAM_DATA static u8 sUnknown_0203CCD1[8] = {0};
 EWRAM_DATA static u8 sUnknown_0203CCD9 = 0;
@@ -126,8 +126,8 @@ void sub_8184DA4(u8 arg0)
             {
                 sBattleRecords[i][j] |= 0xFF;
             }
-            sRecordedBattle_BattleFlags = gBattleTypeFlags;
-            sRecordedBattle_AI_Scripts = gBattleResources->ai->aiFlags;
+            sBattleFlags = gBattleTypeFlags;
+            sAI_Scripts = gBattleResources->ai->aiFlags;
         }
     }
 }
@@ -139,7 +139,7 @@ void sub_8184E58(void)
     if (sUnknown_0203C7AC == 1)
     {
         gRecordedBattleRngSeed = gRngValue;
-        sUnknown_0203C7AE = VarGet(VAR_FRONTIER_FACILITY);
+        sFrontierFacility = VarGet(VAR_FRONTIER_FACILITY);
         sUnknown_0203C7AF = sub_81A513C();
     }
     else if (sUnknown_0203C7AC == 2)
@@ -157,37 +157,37 @@ void sub_8184E58(void)
 
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            sRecordedBattle_Players[i].trainerId = gLinkPlayers[i].trainerId;
-            sRecordedBattle_Players[i].gender = gLinkPlayers[i].gender;
-            sRecordedBattle_Players[i].battlerId = gLinkPlayers[i].lp_field_18;
-            sRecordedBattle_Players[i].language = gLinkPlayers[i].language;
+            sPlayers[i].trainerId = gLinkPlayers[i].trainerId;
+            sPlayers[i].gender = gLinkPlayers[i].gender;
+            sPlayers[i].battlerId = gLinkPlayers[i].lp_field_18;
+            sPlayers[i].language = gLinkPlayers[i].language;
 
             if (i < linkPlayersCount)
             {
                 StringCopy(text, gLinkPlayers[i].name);
                 StripExtCtrlCodes(text);
-                StringCopy(sRecordedBattle_Players[i].name, text);
+                StringCopy(sPlayers[i].name, text);
             }
             else
             {
                 for (j = 0; j < PLAYER_NAME_LENGTH; j++)
-                    sRecordedBattle_Players[i].name[j] = gLinkPlayers[i].name[j];
+                    sPlayers[i].name[j] = gLinkPlayers[i].name[j];
             }
         }
     }
     else
     {
-        sRecordedBattle_Players[0].trainerId = (gSaveBlock2Ptr->playerTrainerId[0])
+        sPlayers[0].trainerId = (gSaveBlock2Ptr->playerTrainerId[0])
                                     | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
                                     | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
                                     | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
-        sRecordedBattle_Players[0].gender = gSaveBlock2Ptr->playerGender;
-        sRecordedBattle_Players[0].battlerId = 0;
-        sRecordedBattle_Players[0].language = gGameLanguage;
+        sPlayers[0].gender = gSaveBlock2Ptr->playerGender;
+        sPlayers[0].battlerId = 0;
+        sPlayers[0].language = gGameLanguage;
 
         for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-            sRecordedBattle_Players[0].name[i] = gSaveBlock2Ptr->playerName[i];
+            sPlayers[0].name[i] = gSaveBlock2Ptr->playerName[i];
     }
 }
 
@@ -214,12 +214,12 @@ void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
 
 u8 RecordedBattle_GetBattlerAction(u8 battlerId)
 {
-    // trying to read past array or invalid action byte, battle is over
+    // Trying to read past array or invalid action byte, battle is over.
     if (sRecordedBytesNo[battlerId] >= BATTLER_RECORD_SIZE || sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] == 0xFF)
     {
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED; // hah
         ResetPaletteFadeControl();
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
         return -1;
     }
@@ -345,37 +345,37 @@ u32 MoveRecordedBattleToSaveData(void)
     {
         for (j = 0; j < PLAYER_NAME_LENGTH; j++)
         {
-            battleSave->playersName[i][j] = sRecordedBattle_Players[i].name[j];
+            battleSave->playersName[i][j] = sPlayers[i].name[j];
         }
-        battleSave->playersGender[i] = sRecordedBattle_Players[i].gender;
-        battleSave->playersLanguage[i] = sRecordedBattle_Players[i].language;
-        battleSave->playersBattlers[i] = sRecordedBattle_Players[i].battlerId;
-        battleSave->playersTrainerId[i] = sRecordedBattle_Players[i].trainerId;
+        battleSave->playersGender[i] = sPlayers[i].gender;
+        battleSave->playersLanguage[i] = sPlayers[i].language;
+        battleSave->playersBattlers[i] = sPlayers[i].battlerId;
+        battleSave->playersTrainerId[i] = sPlayers[i].trainerId;
     }
 
     battleSave->rngSeed = gRecordedBattleRngSeed;
 
-    if (sRecordedBattle_BattleFlags & BATTLE_TYPE_LINK)
+    if (sBattleFlags & BATTLE_TYPE_LINK)
     {
-        battleSave->battleFlags = (sRecordedBattle_BattleFlags & ~(BATTLE_TYPE_LINK | BATTLE_TYPE_20));
+        battleSave->battleFlags = (sBattleFlags & ~(BATTLE_TYPE_LINK | BATTLE_TYPE_20));
         battleSave->battleFlags |= BATTLE_TYPE_x2000000;
 
-        if (sRecordedBattle_BattleFlags & BATTLE_TYPE_WILD)
+        if (sBattleFlags & BATTLE_TYPE_WILD)
         {
             battleSave->battleFlags |= BATTLE_TYPE_x80000000;
         }
-        else if (sRecordedBattle_BattleFlags & BATTLE_TYPE_MULTI)
+        else if (sBattleFlags & BATTLE_TYPE_MULTI)
         {
-            switch (sRecordedBattle_Players[0].battlerId)
+            switch (sPlayers[0].battlerId)
             {
             case 0:
             case 2:
-                if (!(sRecordedBattle_Players[gUnknown_0203C7B4].battlerId & 1))
+                if (!(sPlayers[gUnknown_0203C7B4].battlerId & 1))
                     battleSave->battleFlags |= BATTLE_TYPE_x80000000;
                 break;
             case 1:
             case 3:
-                if ((sRecordedBattle_Players[gUnknown_0203C7B4].battlerId & 1))
+                if ((sPlayers[gUnknown_0203C7B4].battlerId & 1))
                     battleSave->battleFlags |= BATTLE_TYPE_x80000000;
                 break;
             }
@@ -383,19 +383,19 @@ u32 MoveRecordedBattleToSaveData(void)
     }
     else
     {
-        battleSave->battleFlags = sRecordedBattle_BattleFlags;
+        battleSave->battleFlags = sBattleFlags;
     }
 
     battleSave->opponentA = gTrainerBattleOpponent_A;
     battleSave->opponentB = gTrainerBattleOpponent_B;
     battleSave->partnerId = gPartnerTrainerId;
     battleSave->field_4FA = gUnknown_0203C7B4;
-    battleSave->field_4FC = gSaveBlock2Ptr->frontier.field_CA9_b;
-    battleSave->field_4FD = sUnknown_0203C7AE;
+    battleSave->field_4FC = gSaveBlock2Ptr->field_CA9_b;
+    battleSave->field_4FD = sFrontierFacility;
     battleSave->field_4FE = sUnknown_0203C7AF;
     battleSave->battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
     battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
-    battleSave->AI_scripts = sRecordedBattle_AI_Scripts;
+    battleSave->AI_scripts = sAI_Scripts;
 
     /* Can't match it without proper knowledge of the Saveblock 2.
     if (gTrainerBattleOpponent_A >= 300 && gTrainerBattleOpponent_A <= 399)
@@ -525,7 +525,7 @@ _0818535E:\n\
 	lsls r3, 3\n\
 	adds r3, r7, r3\n\
 	str r3, [sp, 0x8]\n\
-	ldr r5, =sRecordedBattle_Players\n\
+	ldr r5, =sPlayers\n\
 	mov r8, r6\n\
 	mov r12, r6\n\
 	movs r4, 0x96\n\
@@ -536,7 +536,7 @@ _0818535E:\n\
 	adds r4, r7, r0\n\
 _081853AC:\n\
 	lsls r1, r6, 3\n\
-	ldr r0, =sRecordedBattle_Players\n\
+	ldr r0, =sPlayers\n\
 	adds r0, 0x4\n\
 	mov r3, r8\n\
 	adds r2, r3, r0\n\
@@ -578,7 +578,7 @@ _081853BA:\n\
 	ldr r5, =gRecordedBattleRngSeed\n\
 	ldr r0, [r5]\n\
 	str r0, [r1]\n\
-	ldr r0, =sRecordedBattle_BattleFlags\n\
+	ldr r0, =sBattleFlags\n\
 	ldr r2, [r0]\n\
 	movs r0, 0x2\n\
 	ands r0, r2\n\
@@ -608,7 +608,7 @@ _08185454:\n\
 	ands r2, r0\n\
 	cmp r2, 0\n\
 	beq _081854E2\n\
-	ldr r2, =sRecordedBattle_Players\n\
+	ldr r2, =sPlayers\n\
 	ldrh r0, [r2, 0xE]\n\
 	cmp r0, 0x1\n\
 	beq _081854A8\n\
@@ -630,7 +630,7 @@ _0818547E:\n\
 	lsls r0, r1, 2\n\
 	adds r0, r1\n\
 	lsls r0, 2\n\
-	ldr r4, =sRecordedBattle_Players\n\
+	ldr r4, =sPlayers\n\
 	adds r0, r4\n\
 	ldrh r1, [r0, 0xE]\n\
 	movs r0, 0x1\n\
@@ -647,7 +647,7 @@ _081854A8:\n\
 	lsls r0, r1, 2\n\
 	adds r0, r1\n\
 	lsls r0, 2\n\
-	ldr r1, =sRecordedBattle_Players\n\
+	ldr r1, =sPlayers\n\
 	adds r0, r1\n\
 	ldrh r1, [r0, 0xE]\n\
 	movs r0, 0x1\n\
@@ -700,7 +700,7 @@ _081854E2:\n\
 	ldr r5, =0x000004fc\n\
 	adds r1, r7, r5\n\
 	strb r0, [r1]\n\
-	ldr r0, =sUnknown_0203C7AE\n\
+	ldr r0, =sFrontierFacility\n\
 	ldrb r1, [r0]\n\
 	adds r2, 0x3\n\
 	adds r0, r7, r2\n\
@@ -735,7 +735,7 @@ _081854E2:\n\
 	movs r2, 0xA0\n\
 	lsls r2, 3\n\
 	adds r1, r7, r2\n\
-	ldr r3, =sRecordedBattle_AI_Scripts\n\
+	ldr r3, =sAI_Scripts\n\
 	ldr r0, [r3]\n\
 	str r0, [r1]\n\
 	ldr r4, =0xfffffed4\n\
@@ -1354,11 +1354,11 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
     gPartnerTrainerId = src->partnerId;
     gUnknown_0203C7B4 = src->field_4FA;
     sUnknown_0203C7AD = gSaveBlock2Ptr->frontier.chosenLvl;
-    sUnknown_0203C7AE = src->field_4FD;
+    sFrontierFacility = src->field_4FD;
     sUnknown_0203C7AF = src->field_4FE;
-    sRecordedBattle_BattleStyle = src->battleStyle;
-    sRecordedBattle_TextSpeed = src->textSpeed;
-    sRecordedBattle_AI_Scripts = src->AI_scripts;
+    sBattleStyle = src->battleStyle;
+    sTextSpeed = src->textSpeed;
+    sAI_Scripts = src->AI_scripts;
 
     for (i = 0; i < 8; i++)
     {
@@ -1415,9 +1415,9 @@ static void CB2_RecordedBattle(void)
     RunTasks();
 }
 
-u8 sub_8185EA0(void)
+u8 GetRecordedBattleFrontierFacility(void)
 {
-    return sUnknown_0203C7AE;
+    return sFrontierFacility;
 }
 
 u8 sub_8185EAC(void)
@@ -1480,12 +1480,12 @@ u8 sub_8185FAC(void)
 
 u8 GetBattleStyleInRecordedBattle(void)
 {
-    return sRecordedBattle_BattleStyle;
+    return sBattleStyle;
 }
 
 u8 GetTextSpeedInRecordedBattle(void)
 {
-    return sRecordedBattle_TextSpeed;
+    return sTextSpeed;
 }
 
 void RecordedBattle_CopyBattlerMoves(void)
@@ -1501,7 +1501,7 @@ void RecordedBattle_CopyBattlerMoves(void)
 
     for (i = 0; i < 4; i++)
     {
-        sRecordedBattle_PlayerMonMoves[gActiveBattler / 2][i] = gBattleMons[gActiveBattler].moves[i];
+        sPlayerMonMoves[gActiveBattler / 2][i] = gBattleMons[gActiveBattler].moves[i];
     }
 }
 
@@ -1522,7 +1522,7 @@ void sub_818603C(u8 arg0)
             {
                 for (j = 0; j < 4; j++)
                 {
-                    if (gBattleMons[battlerId].moves[j] != sRecordedBattle_PlayerMonMoves[battlerId / 2][j])
+                    if (gBattleMons[battlerId].moves[j] != sPlayerMonMoves[battlerId / 2][j])
                         break;
                 }
                 if (j != 4) // player's mon's move has been changed
@@ -1532,7 +1532,7 @@ void sub_818603C(u8 arg0)
                     {
                         for (k = 0; k < 4; k++)
                         {
-                            if (gBattleMons[battlerId].moves[j] == sRecordedBattle_PlayerMonMoves[battlerId / 2][k])
+                            if (gBattleMons[battlerId].moves[j] == sPlayerMonMoves[battlerId / 2][k])
                             {
                                 RecordedBattle_SetBattlerAction(battlerId, k);
                                 break;
@@ -1612,7 +1612,7 @@ void sub_818603C(u8 arg0)
 
 u32 GetAiScriptsInRecordedBattle(void)
 {
-    return sRecordedBattle_AI_Scripts;
+    return sAI_Scripts;
 }
 
 void sub_8186444(void)

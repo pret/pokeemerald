@@ -1,5 +1,5 @@
 ArtisanCave_1F_EventObjects: @ 8537774
-	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 14, 5, 3, 1, 1, 1, 0, 0, ArtisanCave_1F_EventScript_2914D1, 1163
+	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 14, 5, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, ArtisanCave_1F_EventScript_2914D1, 1163
 
 ArtisanCave_1F_MapWarps: @ 853778C
 	warp_def 10, 17, 0, 13, MAP_BATTLE_FRONTIER_OUTSIDE_EAST

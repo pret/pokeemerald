@@ -356,7 +356,7 @@ static bool8 sub_81DAB4C(struct Task *task)
     {
         if (task->data[3] == 31)
         {
-            BeginNormalPaletteFade(-1, -1, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, 0);
             task->tState++;
         }
         else

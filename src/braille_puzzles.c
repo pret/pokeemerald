@@ -7,6 +7,7 @@
 #include "task.h"
 #include "field_effect.h"
 #include "constants/flags.h"
+#include "constants/maps.h"
 
 extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId); // fieldmap
 extern void DrawWholeMapView(); // field_camera
@@ -14,7 +15,6 @@ extern void SetCameraPanningCallback(void ( *callback)()); // field_camera
 extern void InstallCameraPanAheadCallback(void);
 extern void SetCameraPanning(s16 x, s16 y);
 extern u8 GetCursorSelectionMonId(void);
-extern void FieldEffectActiveListRemove(u8 id); // field_effect
 extern u8 oei_task_add(void);
 
 // why do this, GF?
@@ -24,7 +24,8 @@ enum
     FLY_PUZZLE
 };
 
-extern u8 gBraillePuzzleCallbackFlag;
+EWRAM_DATA static u8 sBraillePuzzleCallbackFlag = 0;
+
 extern const u8 gUnknown_085EFE74[][2];
 
 void SealedChamberShakingEffect(u8);
@@ -205,14 +206,25 @@ void SealedChamberShakingEffect(u8 taskId)
 // moved later in the function because it was rewritten.
 bool8 ShouldDoBrailleStrengthEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x06))
+    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH)
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(DESERT_RUINS)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(DESERT_RUINS))
     {
         if (gSaveBlock1Ptr->pos.x == 6 && gSaveBlock1Ptr->pos.y == 23)
-            { gBraillePuzzleCallbackFlag = STRENGTH_PUZZLE; return TRUE; }
+        {
+            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            return TRUE;
+        }
         else if (gSaveBlock1Ptr->pos.x == 5 && gSaveBlock1Ptr->pos.y == 23)
-            { gBraillePuzzleCallbackFlag = STRENGTH_PUZZLE; return TRUE; }
+        {
+            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            return TRUE;
+        }
         else if (gSaveBlock1Ptr->pos.x == 7 && gSaveBlock1Ptr->pos.y == 23)
-            { gBraillePuzzleCallbackFlag = STRENGTH_PUZZLE; return TRUE; }
+        {
+            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            return TRUE;
+        }
     }
 
     return FALSE;
@@ -249,7 +261,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
     if (!FlagGet(FLAG_SYS_BRAILLE_FLY) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x44))
     {
         if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 25)
-            { gBraillePuzzleCallbackFlag = FLY_PUZZLE; return TRUE; }
+            { sBraillePuzzleCallbackFlag = FLY_PUZZLE; return TRUE; }
     }
     return FALSE;
 }
@@ -362,7 +374,7 @@ bool8 FldEff_UsePuzzleEffect(void)
 {
     u8 taskId = oei_task_add();
 
-    if (gBraillePuzzleCallbackFlag == FLY_PUZZLE)
+    if (sBraillePuzzleCallbackFlag == FLY_PUZZLE)
     {
         gTasks[taskId].data[8] = (u32)UseFlyAncientTomb_Callback >> 16;
         gTasks[taskId].data[9] = (u32)UseFlyAncientTomb_Callback;

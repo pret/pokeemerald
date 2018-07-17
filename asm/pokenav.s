@@ -10101,7 +10101,7 @@ sub_81CC09C: @ 81CC09C
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x40
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x4
@@ -11351,7 +11351,7 @@ sub_81CCA1C: @ 81CCA1C
 	lsrs r0, 24
 	movs r1, 0x42
 	movs r2, 0x40
-	bl box_border_load_tiles_and_pal
+	bl LoadUserWindowBorderGfx_
 	ldrb r0, [r5, 0x8]
 	movs r1, 0x42
 	movs r2, 0x4
@@ -21001,7 +21001,7 @@ sub_81D1E90: @ 81D1E90
 	movs r1, 0xC8
 	movs r2, 0xC
 	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	strb r0, [r4, 0x9]
 	add sp, 0x10
 	pop {r4}
@@ -22282,7 +22282,7 @@ sub_81D2824: @ 81D2824
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20
@@ -26527,8 +26527,8 @@ _081D4A0E:
 	bx r1
 	thumb_func_end EventObjectIsFarawayIslandMew
 
-	thumb_func_start unown_chamber_related
-unown_chamber_related: @ 81D4A14
+	thumb_func_start IsMewPlayingHideAndSeek
+IsMewPlayingHideAndSeek: @ 81D4A14
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -26557,7 +26557,7 @@ _081D4A50:
 _081D4A52:
 	pop {r1}
 	bx r1
-	thumb_func_end unown_chamber_related
+	thumb_func_end IsMewPlayingHideAndSeek
 
 	thumb_func_start sub_81D4A58
 sub_81D4A58: @ 81D4A58

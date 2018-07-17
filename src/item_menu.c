@@ -209,7 +209,7 @@ const struct YesNoFuncTable gUnknown_08614084 = {BagMenuActuallyToss, BagMenuCan
 
 const struct YesNoFuncTable gUnknown_0861408C = {sub_81AD84C, sub_81AD6FC};
 
-const struct ArrowStruct gUnknown_08614094 = {0, 0x1C, 16, 1, 100, 16, -1, -1, 0x6F, 0x6F, 0};
+const struct ScrollArrowsTemplate gUnknown_08614094 = {SCROLL_ARROW_LEFT, 0x1C, 16, SCROLL_ARROW_RIGHT, 100, 16, -1, -1, 0x6F, 0x6F, 0};
 
 const u8 gUnknown_086140A4[] = INCBIN_U8("graphics/interface/select_button.4bpp");
 
@@ -488,7 +488,7 @@ bool8 setup_bag_menu(void)
         gMain.state++;
         break;
     case 20:
-        BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
@@ -733,7 +733,7 @@ void bag_menu_print_cursor(u8 a, u8 b)
 void bag_menu_add_pocket_scroll_arrow_indicators_maybe(void)
 {
     if (gUnknown_0203CE54->unk81E == 0xFF)
-        gUnknown_0203CE54->unk81E = AddScrollIndicatorArrowPairParametrized(2, 0xAC, 12, 0x94, gUnknown_0203CE54->unk829[gUnknown_0203CE58.pocket] - gUnknown_0203CE54->unk82E[gUnknown_0203CE58.pocket], 0x6E, 0x6E, &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket]);
+        gUnknown_0203CE54->unk81E = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xAC, 12, 0x94, gUnknown_0203CE54->unk829[gUnknown_0203CE58.pocket] - gUnknown_0203CE54->unk82E[gUnknown_0203CE58.pocket], 0x6E, 0x6E, &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket]);
 }
 
 void sub_81AB824(void)
@@ -771,7 +771,7 @@ void free_bag_item_list_buffers(void)
 
 void unknown_ItemMenu_Confirm(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gTasks[taskId].func = task_close_bag_menu_2;
 }
 
@@ -1114,7 +1114,7 @@ void bag_menu_swap_items(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
 
-    sub_81AF15C(data[0], 16, 1);
+    ListMenuSetUnkIndicatorsStructField(data[0], 16, 1);
     data[1] = gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket] + gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket];
     gUnknown_0203CE54->unk81A = data[1];
     CopyItemName(BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, data[1]), gStringVar1);
@@ -2078,7 +2078,7 @@ void bag_menu_print_pocket_names(u8 *pocketName1, u8 *pocketName2)
         offset = GetStringCenterAlignXOffset(1, pocketName2, 0x40);
         bag_menu_print(windowId, 1, pocketName2, offset + 0x40, 1, 0, 0, -1, 1);
     }
-    CpuCopy32((u8*)GetWindowAttribute(windowId, 7), gUnknown_0203CE54->unk844, 0x400);
+    CpuCopy32((u8*)GetWindowAttribute(windowId, WINDOW_TILE_DATA), gUnknown_0203CE54->unk844, 0x400);
     RemoveWindow(windowId);
 }
 
@@ -2090,7 +2090,7 @@ void bag_menu_copy_pocket_name_to_window(u32 a)
     if (a > 8)
         a = 8;
     r4 = &gUnknown_0203CE54->unk844;
-    windowAttribute = (u8*)GetWindowAttribute(2, 7);
+    windowAttribute = (u8*)GetWindowAttribute(2, WINDOW_TILE_DATA);
     CpuCopy32(r4[0][a], windowAttribute, 0x100);
     b = a + 16;
     CpuCopy32(r4[0][b], windowAttribute + 0x100, 0x100);
@@ -2103,8 +2103,8 @@ void setup_bag_menu_textboxes(void)
 
     InitWindows(gUnknown_08614174);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 1, -32);
-    copy_textbox_border_tile_patterns_to_vram(0, 10, -48);
+    LoadUserWindowBorderGfx(0, 1, -32);
+    LoadMessageBoxGfx(0, 10, -48);
     sub_819A2BC(-64, 1);
     LoadPalette(&gUnknown_0860F074, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
@@ -2116,9 +2116,9 @@ void setup_bag_menu_textboxes(void)
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
-void bag_menu_print(u8 a, u8 b, const u8 *str, u8 c, u8 d, u8 e, u8 f, u8 g, u8 h)
+void bag_menu_print(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 h)
 {
-    AddTextPrinterParameterized2(a, b, c, d, e, f, gUnknown_08614164[h], g, str);
+    AddTextPrinterParameterized2(windowId, fontId, left, top, letterSpacing, lineSpacing, gUnknown_08614164[h], speed, str);
 }
 
 u8 sub_81AE124(u8 a)

@@ -15,6 +15,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/map_types.h"
 
 // static functions
 static void task08_080C9820(u8 taskId);
@@ -27,16 +28,16 @@ static void hm2_dig(void);
 static void sub_8135780(void);
 
 // extern RAM loc
-extern struct MapPosition gUnknown_0203AB40;
+extern struct MapPosition gPlayerFacingPosition;
 
 // text
-bool8 npc_before_player_of_type(u8 a)
+bool8 CheckObjectGraphicsInFrontOfPlayer(u8 a)
 {
     u8 eventObjId;
 
-    GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203AB40.x, &gUnknown_0203AB40.y);
-    gUnknown_0203AB40.height = PlayerGetZCoord();
-    eventObjId = GetEventObjectIdByXYZ(gUnknown_0203AB40.x, gUnknown_0203AB40.y, gUnknown_0203AB40.height);
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+    gPlayerFacingPosition.height = PlayerGetZCoord();
+    eventObjId = GetEventObjectIdByXYZ(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.height);
     if (gEventObjects[eventObjId].graphicsId != a)
     {
         return FALSE;
@@ -50,7 +51,7 @@ bool8 npc_before_player_of_type(u8 a)
 
 u8 oei_task_add(void)
 {
-    GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203AB40.x, &gUnknown_0203AB40.y);
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     return CreateTask(task08_080C9820, 8);
 }
 
@@ -118,17 +119,17 @@ static void sub_813561C(u8 taskId)
 
 bool8 SetUpFieldMove_RockSmash(void)
 {
-    if(ShouldDoBrailleStrengthEffect())
+    if (ShouldDoBrailleStrengthEffect())
     {
         gSpecialVar_Result = GetCursorSelectionMonId();
-        gUnknown_03005DB0 = FieldCallback_Teleport;
-        gUnknown_0203CEEC = sub_8179834;
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_8179834;
         return TRUE;
     }
-    else if (npc_before_player_of_type(0x56) == TRUE)
+    else if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
     {
-        gUnknown_03005DB0 = FieldCallback_Teleport;
-        gUnknown_0203CEEC = sub_81356C4;
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_81356C4;
         return TRUE;
     }
     else
@@ -164,8 +165,8 @@ bool8 SetUpFieldMove_Dig(void)
 {
     if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
-        gUnknown_03005DB0 = FieldCallback_Teleport;
-        gUnknown_0203CEEC = hm2_dig;
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = hm2_dig;
         return TRUE;
     }
     else

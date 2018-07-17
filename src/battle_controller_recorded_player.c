@@ -36,7 +36,6 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void sub_806A068(u16, u8);
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
@@ -89,8 +88,8 @@ static void RecordedPlayerHandleFaintingCry(void);
 static void RecordedPlayerHandleIntroSlide(void);
 static void RecordedPlayerHandleIntroTrainerBallThrow(void);
 static void RecordedPlayerHandleDrawPartyStatusSummary(void);
-static void RecordedPlayerHandleCmd49(void);
-static void RecordedPlayerHandleCmd50(void);
+static void RecordedPlayerHandleHidePartyStatusSummary(void);
+static void RecordedPlayerHandleEndBounceEffect(void);
 static void RecordedPlayerHandleSpriteInvisibility(void);
 static void RecordedPlayerHandleBattleAnimation(void);
 static void RecordedPlayerHandleLinkStandbyMsg(void);
@@ -160,8 +159,8 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     RecordedPlayerHandleIntroSlide,
     RecordedPlayerHandleIntroTrainerBallThrow,
     RecordedPlayerHandleDrawPartyStatusSummary,
-    RecordedPlayerHandleCmd49,
-    RecordedPlayerHandleCmd50,
+    RecordedPlayerHandleHidePartyStatusSummary,
+    RecordedPlayerHandleEndBounceEffect,
     RecordedPlayerHandleSpriteInvisibility,
     RecordedPlayerHandleBattleAnimation,
     RecordedPlayerHandleLinkStandbyMsg,
@@ -190,7 +189,7 @@ static void RecordedPlayerBufferRunCommand(void)
     }
 }
 
-static void CompleteOnBankSpriteCallbackDummy(void)
+static void CompleteOnBattlerSpriteCallbackDummy(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         RecordedPlayerBufferExecCompleted();
@@ -363,7 +362,7 @@ static void sub_818A064(void)
 
 static void CompleteOnHealthbarDone(void)
 {
-    s16 hpValue = sub_8074AA0(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
+    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
@@ -1107,9 +1106,9 @@ static void RecordedPlayerHandleLoadMonSprite(void)
 
     BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
-    sub_806A068(species, GetBattlerPosition(gActiveBattler));
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
 
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C,
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                GetBattlerSpriteCoord(gActiveBattler, 2),
                                                GetBattlerSpriteDefault_Y(gActiveBattler),
                                                sub_80A82E4(gActiveBattler));
@@ -1137,10 +1136,10 @@ static void sub_818BA6C(u8 battlerId, bool8 dontClearSubstituteBit)
     gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     gUnknown_03005D7C[battlerId] = CreateInvisibleSpriteWithCallback(sub_805D714);
-    sub_806A068(species, GetBattlerPosition(battlerId));
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
 
     gBattlerSpriteIds[battlerId] = CreateSprite(
-      &gUnknown_0202499C,
+      &gMultiuseSpriteTemplate,
       GetBattlerSpriteCoord(battlerId, 2),
       GetBattlerSpriteDefault_Y(battlerId),
       sub_80A82E4(battlerId));
@@ -1242,8 +1241,8 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     {
         trainerPicId = PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender);
         DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
-        sub_806A1C0(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C, xPos, yPos, sub_80A82E4(gActiveBattler));
+        SetMultiuseSpriteTemplateToTrainerFront(trainerPicId, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, sub_80A82E4(gActiveBattler));
 
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
         gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
@@ -1256,8 +1255,8 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     else
     {
         DecompressTrainerBackPic(trainerPicId, gActiveBattler);
-        sub_806A12C(trainerPicId, GetBattlerPosition(gActiveBattler));
-        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gUnknown_0202499C, xPos, yPos, sub_80A82E4(gActiveBattler));
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, sub_80A82E4(gActiveBattler));
 
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
         gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
@@ -1265,7 +1264,7 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
         gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_805D7AC;
     }
 
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
 static void RecordedPlayerHandleTrainerSlide(void)
@@ -1409,7 +1408,7 @@ static void RecordedPlayerHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -1693,8 +1692,8 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
     taskId = CreateTask(sub_818CC24, 5);
     gTasks[taskId].data[0] = gActiveBattler;
 
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_120;
@@ -1740,7 +1739,7 @@ static void RecordedPlayerHandleDrawPartyStatusSummary(void)
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
         gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
 
@@ -1760,14 +1759,14 @@ static void sub_818CDF4(void)
     }
 }
 
-static void RecordedPlayerHandleCmd49(void)
+static void RecordedPlayerHandleHidePartyStatusSummary(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x1)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8073C30;
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     RecordedPlayerBufferExecCompleted();
 }
 
-static void RecordedPlayerHandleCmd50(void)
+static void RecordedPlayerHandleEndBounceEffect(void)
 {
     RecordedPlayerBufferExecCompleted();
 }

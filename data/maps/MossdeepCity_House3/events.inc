@@ -1,5 +1,5 @@
 MossdeepCity_House3_EventObjects: @ 8532BD4
-	object_event 1, EVENT_OBJ_GFX_FISHERMAN, 0, 4, 4, 3, 10, 0, 0, 0, 0, MossdeepCity_House3_EventScript_2225C3, 0
+	object_event 1, EVENT_OBJ_GFX_FISHERMAN, 0, 4, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MossdeepCity_House3_EventScript_2225C3, 0
 
 MossdeepCity_House3_MapWarps: @ 8532BEC
 	warp_def 3, 7, 0, 5, MAP_MOSSDEEP_CITY

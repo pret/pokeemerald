@@ -90,7 +90,7 @@ extern void sub_80C4DDC(void (*)(void));
 extern void sub_80C51C4(void (*)(void));
 extern void sub_80C4E74(u8, void (*)(void));
 extern void sub_81C4EFC(void);
-extern void sub_80984F4(void);
+extern void ScriptUnfreezeEventObjects(void);
 extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
 extern void sub_81A9E90(void);
@@ -526,7 +526,7 @@ void sub_809FA18(void) // Called from field_screen.s
 {
     sUnknown_02037619[0] = 0;
     sUnknown_02037619[1] = 0;
-    gUnknown_03005DB0 = sub_809FA00;
+    gFieldCallback2 = sub_809FA00;
 }
 
 void sub_809FA34(u8 taskId) // Referenced in field_screen.s and rom_8011DC0.s
@@ -769,7 +769,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
 void sub_809FDD4(void) // Called from battle_frontier_2.s
 {
     sub_8197DF8(0, FALSE);
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     CreateStartMenuTask(sub_809FA34);
     ScriptContext2_Enable();
 }
@@ -811,7 +811,7 @@ static bool8 SaveCallback(void)
     case SAVE_SUCCESS:
     case SAVE_ERROR:    // Close start menu
         sub_8197DF8(0, TRUE);
-        sub_80984F4();
+        ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
         sub_81A9EC8();
         return TRUE;
@@ -848,7 +848,7 @@ static bool8 BattlePyramidRetireCallback(void)
         return FALSE;
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
         sub_8197DF8(0, TRUE);
-        sub_80984F4();
+        ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
         ScriptContext1_SetupScript(BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88);
         return TRUE;
@@ -1208,7 +1208,7 @@ static bool32 sub_80A03E4(u8 *par1)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sUnknown_085105A8, ARRAY_COUNT(sUnknown_085105A8));
         InitWindows(sUnknown_085105AC);
-        box_border_load_tiles_and_pal(0, 8, 224);
+        LoadUserWindowBorderGfx_(0, 8, 224);
         sub_81978B0(240);
         break;
     case 3:
@@ -1261,7 +1261,7 @@ static void sub_80A0550(u8 taskId)
             sub_8098858(0, 8, 14);
             PutWindowTilemap(0);
             CopyWindowToVram(0, 3);
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
 
             if (gWirelessCommType != 0 && InUnionRoom())
             {
@@ -1294,7 +1294,7 @@ static void sub_80A0550(u8 taskId)
             }
             break;
         case 3:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
             *step = 4;
             break;
         case 4:
@@ -1405,7 +1405,7 @@ static void HideStartMenuWindow(void)
 {
     sub_819746C(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
 }
 

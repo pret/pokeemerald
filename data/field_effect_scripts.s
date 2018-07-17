@@ -78,11 +78,11 @@ gFieldEffectScript_ExclamationMarkIcon1:: @ 82DBAE0
 	field_eff_end
 
 gFieldEffectScript_UseCutOnTallGrass:: @ 82DBAE6
-	field_eff_callnative sub_80D3A6C
+	field_eff_callnative FldEff_UseCutOnGrass
 	field_eff_end
 
 gFieldEffectScript_UseCutOnTree:: @ 82DBAEC
-	field_eff_callnative sub_80D3ABC
+	field_eff_callnative FldEff_UseCutOnTree
 	field_eff_end
 
 gFieldEffectScript_Shadow:: @ 82DBAF2
@@ -308,7 +308,7 @@ gFieldEffectScript_Unknown57:: @ 82DBCB8
 	field_eff_end
 
 gFieldEffectScript_Unknown58:: @ 82DBCC2
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo6, sub_80D3B00
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo6, FldEff_CutGrass
 	field_eff_end
 
 gFieldEffectScript_FieldMoveShowMonInit:: @ 82DBCCC

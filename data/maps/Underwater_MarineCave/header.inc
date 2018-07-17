@@ -5,11 +5,11 @@ Underwater_MarineCave: @ 84849CC
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 406
-	.byte 204
+	.byte MAPSEC_UNDERWATER_MARINE_CAVE
 	.byte 0
-	.byte 14
-	.byte 5
+	.byte WEATHER_BUBBLES
+	.byte MAP_TYPE_UNDERWATER
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

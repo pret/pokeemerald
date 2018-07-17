@@ -21,6 +21,7 @@
 #include "sound.h"
 #include "trig.h"
 #include "graphics.h"
+#include "text_window.h"
 #include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
 
 struct PokeblockFeedStruct
@@ -58,8 +59,6 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
 extern bool8 sub_81221EC(void);
-extern void sub_806A068(u16, u8);
-extern void sub_809882C(u8, u16, u8);
 
 // this file's functions
 static void HandleInitBackgrounds(void);
@@ -597,7 +596,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 13:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -661,7 +660,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         palette = GetMonSpritePalStructFromOtIdPersonality(species, trainerId, personality);
 
         LoadCompressedObjectPalette(palette);
-        sub_806A068(palette->tag, 1);
+        SetMultiuseSpriteTemplateToPokemon(palette->tag, 1);
         sPokeblockFeed->loadGfxState++;
         break;
     case 2:
@@ -706,7 +705,7 @@ static void HandleInitWindows(void)
 {
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    sub_809882C(0, 1, 0xE0);
+    LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
     FillWindowPixelBuffer(0, 0);
     PutWindowTilemap(0);
@@ -811,7 +810,7 @@ static void Task_ReturnAfterPaletteFade(u8 taskId)
 
 static void Task_PaletteFadeToReturn(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     gTasks[taskId].func = Task_ReturnAfterPaletteFade;
 }
 
@@ -827,7 +826,7 @@ static void Task_PaletteFadeToReturn(u8 taskId)
 static u8 CreateMonSprite(struct Pokemon* mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2);
-    u8 spriteId = CreateSprite(&gUnknown_0202499C, 48, 80, 2);
+    u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, 48, 80, 2);
 
     sPokeblockFeed->species = species;
     sPokeblockFeed->monSpriteId_ = spriteId;

@@ -1,5 +1,5 @@
 FallarborTown_House2_EventObjects: @ 852E60C
-	object_event 1, EVENT_OBJ_GFX_FAT_MAN, 0, 4, 4, 3, 8, 0, 0, 0, 0, FallarborTown_House2_EventScript_201383, 0
+	object_event 1, EVENT_OBJ_GFX_FAT_MAN, 0, 4, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, FallarborTown_House2_EventScript_201383, 0
 
 FallarborTown_House2_MapWarps: @ 852E624
 	warp_def 3, 7, 0, 4, MAP_FALLARBOR_TOWN

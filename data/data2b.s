@@ -235,7 +235,7 @@ gUnknown_082FF704:: @ 82FF704
 	.2byte 0x0003, 0x0000, 0xffff, 0x0000
 
 	.align 2
-gUnknown_082FF70C:: @ 82FF70C
+gPlayerMonSpriteAnimsTable:: @ 82FF70C
 	.4byte gUnknown_082FF6EC
 	.4byte gUnknown_082FF6F4
 	.4byte gUnknown_082FF6FC
@@ -4684,7 +4684,7 @@ gUnknown_0831AA00:: @ 831AA00
 	obj_tiles gUnknown_08D77B0C, 0x1000, 0x2710
 
 	.align 2
-gUnknown_0831AA08:: @ 831AA08
+gBattleBgTemplates:: @ 831AA08
 	.4byte 0x00000580, 0x000005c5, 0x000013e6, 0x000033ab
 
 	.align 2
@@ -4743,7 +4743,7 @@ gUnknown_0831AAE0:: @ 831AAE0
 	null_window_template
 
 	.align 2
-gUnknown_0831ABA0:: @ 831ABA0
+gBattleWindowTemplates:: @ 831ABA0
 	.4byte gUnknown_0831AA18
 	.4byte gUnknown_0831AAE0
 
@@ -4862,7 +4862,3 @@ gUnknown_0831ACC4:: @ 831ACC4
 	.align 2
 gUnknown_0831ACDC:: @ 831ACDC
 	.4byte gUnknown_0831ACC4
-
-	.align 2
-gUnknown_0831ACE0:: @ 831ACE0
-	.byte 0xe0, 0xf0, 0xf0, 0xe0, 0xe0, 0x00, 0x00, 0x00

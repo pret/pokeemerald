@@ -912,7 +912,7 @@ _0813839C:
 	adds r0, r5, 0
 	adds r2, r4, 0
 	mov r3, r12
-	bl SpawnSpecialEventObjectParametrized
+	bl SpawnSpecialEventObjectParameterized
 	adds r0, r5, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -2557,7 +2557,7 @@ SpawnScriptEventObject: @ 8139158
 	movs r0, 0x7
 	movs r1, 0x8
 	movs r2, 0x7F
-	bl SpawnSpecialEventObjectParametrized
+	bl SpawnSpecialEventObjectParameterized
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gEventObjects

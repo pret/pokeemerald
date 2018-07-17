@@ -44,7 +44,7 @@ gBattlescriptsForSafariActions:: @ 82DBD58
 	.4byte BattleScript_ActionWatchesCarefully
 	.4byte BattleScript_ActionGetNear
 	.4byte BattleScript_ActionThrowPokeblock
-	.4byte BattleScript_82DBEE3
+	.4byte BattleScript_ActionWallyThrow
 
 BattleScript_BallThrow::
 	jumpifword CMP_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_WALLY_TUTORIAL, BattleScript_BallThrowByWally
@@ -176,17 +176,17 @@ BattleScript_RunByUsingItem::
 	setbyte gBattleOutcome, B_OUTCOME_RAN
 	finishturn
 
-BattleScript_ActionWatchesCarefully::
+BattleScript_ActionWatchesCarefully:
 	printstring STRINGID_PKMNWATCHINGCAREFULLY
 	waitmessage 0x40
 	end2
 
-BattleScript_ActionGetNear::
+BattleScript_ActionGetNear:
 	printfromtable gSafariGetNearStringIds
 	waitmessage 0x40
 	end2
 
-BattleScript_ActionThrowPokeblock::
+BattleScript_ActionThrowPokeblock:
 	printstring STRINGID_THREWPOKEBLOCKATPKMN
 	waitmessage 0x40
 	playanimation BS_ATTACKER, B_ANIM_x4, NULL
@@ -194,7 +194,7 @@ BattleScript_ActionThrowPokeblock::
 	waitmessage 0x40
 	end2
 
-BattleScript_82DBEE3::
+BattleScript_ActionWallyThrow:
 	printstring STRINGID_RETURNMON
 	waitmessage 0x40
 	returnatktoball
