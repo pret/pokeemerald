@@ -173,6 +173,10 @@ struct DisableStruct
     /*0x19*/ u8 rechargeCounter;
     /*0x1A*/ u8 autonomizeCount;
     /*0x1B*/ u8 slowStartTimer;
+    u8 embargoTimer;
+    u8 magnetRiseTimer;
+    u8 telekinesisTimer;
+    u8 healBlockTimer;
 };
 
 struct ProtectStruct

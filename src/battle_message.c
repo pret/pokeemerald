@@ -574,6 +574,21 @@ static const u8 sText_PostponeTargetMove[] =_("{B_DEF_NAME_WITH_PREFIX}’s move
 static const u8 sText_ReflectTargetsType[] =_("{B_ATK_NAME_WITH_PREFIX}’s type\nchanged to match the {B_DEF_NAME_WITH_PREFIX}’s!");
 static const u8 sText_TransferHeldItem[] =_("{B_DEF_NAME_WITH_PREFIX} recieved {B_LAST_ITEM}\nfrom {B_ATK_NAME_WITH_PREFIX}");
 
+// These strings are currently placeholders, to be fixed.
+static const u8 sText_EmbargoEnds[] = _("");
+static const u8 sText_MagnetRiseEnds[] = _("");
+static const u8 sText_HealBlockEnds[] = _("");
+static const u8 sText_TelekinesisEnds[] = _("");
+static const u8 sText_TailwindEnds[] = _("");
+static const u8 sText_LuckyChantEnds[] = _("");
+static const u8 sText_TrickRoomEnds[] = _("");
+static const u8 sText_WonderRoomEnds[] = _("");
+static const u8 sText_MagicRoomEnds[] = _("");
+static const u8 sText_MudSportEnds[] = _("");
+static const u8 sText_WaterSportEnds[] = _("");
+static const u8 sText_GravityEnds[] = _("");
+static const u8 sText_AquaRingHeal[] = _("");
+
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
     sText_Trainer1LoseText, // 12
@@ -997,6 +1012,19 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_PostponeTargetMove, // 429
     sText_ReflectTargetsType, // 430
     sText_TransferHeldItem, // 431
+    sText_EmbargoEnds, // 432
+    sText_MagnetRiseEnds, // 433
+    sText_HealBlockEnds, // 434
+    sText_TelekinesisEnds, // 435
+    sText_TailwindEnds, // 436
+    sText_LuckyChantEnds, // 437
+    sText_TrickRoomEnds, // 438
+    sText_WonderRoomEnds, // 439
+    sText_MagicRoomEnds, // 440
+    sText_MudSportEnds, // 441
+    sText_WaterSportEnds, // 442
+    sText_GravityEnds, // 443
+    sText_AquaRingHeal, // 444
 };
 
 const u16 gMissStringIds[] =

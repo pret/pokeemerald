@@ -286,5 +286,10 @@ extern const u8 BattleScript_ActionWatchesCarefully[];
 extern const u8 BattleScript_ActionGetNear[];
 extern const u8 BattleScript_ActionThrowPokeblock[];
 extern const u8 BattleScript_82DBEE3[];
+extern const u8 BattleScript_EmbargoEndTurn[];
+extern const u8 BattleScript_MagnetRiseEndTurn[];
+extern const u8 BattleScript_TelekinesisEndTurn[];
+extern const u8 BattleScript_HealBlockEndTurn[];
+extern const u8 BattleScript_AquaRingHeal[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

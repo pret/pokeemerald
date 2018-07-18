@@ -999,14 +999,41 @@ u8 UpdateTurnCounters(void)
     return (gBattleMainFunc != BattleTurnPassed);
 }
 
-#define TURNBASED_MAX_CASE 19
-
-u8 TurnBasedEffects(void)
+enum
 {
-    u8 effect = 0;
+    ENDTURN_INGRAIN,
+    ENDTURN_AQUA_RING,
+    ENDTURN_ABILITIES,
+	ENDTURN_ITEMS1,
+	ENDTURN_LEECH_SEED,
+	ENDTURN_POISON,
+	ENDTURN_BAD_POISON,
+	ENDTURN_BURN,
+	ENDTURN_NIGHTMARES,
+	ENDTURN_CURSE,
+	ENDTURN_WRAP,
+	ENDTURN_UPROAR,
+	ENDTURN_THRASH,
+	ENDTURN_DISABLE,
+	ENDTURN_ENCORE,
+	ENDTURN_MAGNET_RISE,
+	ENDTURN_TELEKINESIS,
+	ENDTURN_HEALBLOCK,
+	ENDTURN_EMBARGO,
+	ENDTURN_LOCK_ON,
+	ENDTURN_CHARGE,
+	ENDTURN_TAUNT,
+	ENDTURN_YAWN,
+	ENDTURN_ITEMS2,
+	ENDTURN_BATTLER_COUNT
+};
+
+u8 DoBattlerEndTurnEffects(void)
+{
+    u8 effect = FALSE;
 
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
-    while (gBattleStruct->turnEffectsBattlerId < gBattlersCount && gBattleStruct->turnEffectsTracker <= TURNBASED_MAX_CASE)
+    while (gBattleStruct->turnEffectsBattlerId < gBattlersCount && gBattleStruct->turnEffectsTracker <= ENDTURN_BATTLER_COUNT)
     {
         gActiveBattler = gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->turnEffectsBattlerId];
         if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
@@ -1017,9 +1044,10 @@ u8 TurnBasedEffects(void)
         {
             switch (gBattleStruct->turnEffectsTracker)
             {
-            case 0:  // ingrain
+            case ENDTURN_INGRAIN:  // ingrain
                 if ((gStatuses3[gActiveBattler] & STATUS3_ROOTED)
-                 && gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP
+                 && !BATTLER_MAX_HP(gActiveBattler)
+                 && !(gStatuses3[gActiveBattler] & STATUS3_HEAL_BLOCK)
                  && gBattleMons[gActiveBattler].hp != 0)
                 {
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
@@ -1031,22 +1059,37 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 1:  // end turn abilities
+            case ENDTURN_AQUA_RING:  // aqua ring
+                if ((gStatuses3[gActiveBattler] & STATUS3_AQUA_RING)
+                 && !BATTLER_MAX_HP(gActiveBattler)
+                 && !(gStatuses3[gActiveBattler] & STATUS3_HEAL_BLOCK)
+                 && gBattleMons[gActiveBattler].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    gBattleMoveDamage *= -1;
+                    BattleScriptExecute(BattleScript_AquaRingHeal);
+                    effect++;
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_ABILITIES:  // end turn abilities
                 if (AbilityBattleEffects(ABILITYEFFECT_ENDTURN, gActiveBattler, 0, 0, 0))
                     effect++;
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 2:  // item effects
+            case ENDTURN_ITEMS1:  // item effects
                 if (ItemBattleEffects(1, gActiveBattler, 0))
                     effect++;
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 18:  // item effects again
+            case ENDTURN_ITEMS2:  // item effects again
                 if (ItemBattleEffects(1, gActiveBattler, 1))
                     effect++;
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 3:  // leech seed
+            case ENDTURN_LEECH_SEED:  // leech seed
                 if ((gStatuses3[gActiveBattler] & STATUS3_LEECHSEED)
                  && gBattleMons[gStatuses3[gActiveBattler] & STATUS3_LEECHSEED_BATTLER].hp != 0
                  && gBattleMons[gActiveBattler].hp != 0)
@@ -1062,7 +1105,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 4:  // poison
+            case ENDTURN_POISON:  // poison
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON) && gBattleMons[gActiveBattler].hp != 0)
                 {
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
@@ -1073,7 +1116,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 5:  // toxic poison
+            case ENDTURN_BAD_POISON:  // toxic poison
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON) && gBattleMons[gActiveBattler].hp != 0)
                 {
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
@@ -1087,7 +1130,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 6:  // burn
+            case ENDTURN_BURN:  // burn
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_BURN) && gBattleMons[gActiveBattler].hp != 0)
                 {
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
@@ -1098,7 +1141,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 7:  // spooky nightmares
+            case ENDTURN_NIGHTMARES:  // spooky nightmares
                 if ((gBattleMons[gActiveBattler].status2 & STATUS2_NIGHTMARE) && gBattleMons[gActiveBattler].hp != 0)
                 {
                     // R/S does not perform this sleep check, which causes the nightmare effect to
@@ -1118,7 +1161,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 8:  // curse
+            case ENDTURN_CURSE:  // curse
                 if ((gBattleMons[gActiveBattler].status2 & STATUS2_CURSED) && gBattleMons[gActiveBattler].hp != 0)
                 {
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 4;
@@ -1129,7 +1172,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 9:  // wrap
+            case ENDTURN_WRAP:  // wrap
                 if ((gBattleMons[gActiveBattler].status2 & STATUS2_WRAPPED) && gBattleMons[gActiveBattler].hp != 0)
                 {
                     gBattleMons[gActiveBattler].status2 -= 0x2000;
@@ -1162,7 +1205,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 10:  // uproar
+            case ENDTURN_UPROAR:  // uproar
                 if (gBattleMons[gActiveBattler].status2 & STATUS2_UPROAR)
                 {
                     for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
@@ -1211,7 +1254,7 @@ u8 TurnBasedEffects(void)
                 if (effect != 2)
                     gBattleStruct->turnEffectsTracker++;
                 break;
-            case 11:  // thrash
+            case ENDTURN_THRASH:  // thrash
                 if (gBattleMons[gActiveBattler].status2 & STATUS2_LOCK_CONFUSE)
                 {
                     gBattleMons[gActiveBattler].status2 -= 0x400;
@@ -1233,7 +1276,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 12:  // disable
+            case ENDTURN_DISABLE:  // disable
                 if (gDisableStructs[gActiveBattler].disableTimer1 != 0)
                 {
                     s32 i;
@@ -1256,7 +1299,7 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 13:  // encore
+            case ENDTURN_ENCORE:  // encore
                 if (gDisableStructs[gActiveBattler].encoreTimer1 != 0)
                 {
                     if (gBattleMons[gActiveBattler].moves[gDisableStructs[gActiveBattler].encoredMovePos] != gDisableStructs[gActiveBattler].encoredMove)  // pokemon does not have the encored move anymore
@@ -1275,22 +1318,22 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 14:  // lock-on decrement
+            case ENDTURN_LOCK_ON:  // lock-on decrement
                 if (gStatuses3[gActiveBattler] & STATUS3_ALWAYS_HITS)
                     gStatuses3[gActiveBattler] -= 0x8;
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 15:  // charge
+            case ENDTURN_CHARGE:  // charge
                 if (gDisableStructs[gActiveBattler].chargeTimer1 && --gDisableStructs[gActiveBattler].chargeTimer1 == 0)
                     gStatuses3[gActiveBattler] &= ~STATUS3_CHARGED_UP;
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 16:  // taunt
+            case ENDTURN_TAUNT:  // taunt
                 if (gDisableStructs[gActiveBattler].tauntTimer1)
                     gDisableStructs[gActiveBattler].tauntTimer1--;
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 17:  // yawn
+            case ENDTURN_YAWN:  // yawn
                 if (gStatuses3[gActiveBattler] & STATUS3_YAWN)
                 {
                     gStatuses3[gActiveBattler] -= 0x800;
@@ -1309,7 +1352,63 @@ u8 TurnBasedEffects(void)
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
-            case 19:  // done
+            case ENDTURN_EMBARGO:
+                if (gStatuses3[gActiveBattler] & STATUS3_EMBARGO)
+                {
+                    if (gDisableStructs[gActiveBattler].embargoTimer != 0)
+                        gDisableStructs[gActiveBattler].embargoTimer--;
+                    if (gDisableStructs[gActiveBattler].embargoTimer == 0)
+                    {
+                        gStatuses3[gActiveBattler] &= ~(STATUS3_EMBARGO);
+                        BattleScriptExecute(BattleScript_EmbargoEndTurn);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_MAGNET_RISE:
+                if (gStatuses3[gActiveBattler] & STATUS3_MAGNET_RISE)
+                {
+                    if (gDisableStructs[gActiveBattler].magnetRiseTimer != 0)
+                        gDisableStructs[gActiveBattler].magnetRiseTimer--;
+                    if (gDisableStructs[gActiveBattler].magnetRiseTimer == 0)
+                    {
+                        gStatuses3[gActiveBattler] &= ~(STATUS3_MAGNET_RISE);
+                        BattleScriptExecute(BattleScript_MagnetRiseEndTurn);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_TELEKINESIS:
+                if (gStatuses3[gActiveBattler] & STATUS3_TELEKINESIS)
+                {
+                    if (gDisableStructs[gActiveBattler].telekinesisTimer != 0)
+                        gDisableStructs[gActiveBattler].telekinesisTimer--;
+                    if (gDisableStructs[gActiveBattler].telekinesisTimer == 0)
+                    {
+                        gStatuses3[gActiveBattler] &= ~(STATUS3_TELEKINESIS);
+                        BattleScriptExecute(BattleScript_TelekinesisEndTurn);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_HEALBLOCK:
+                if (gStatuses3[gActiveBattler] & STATUS3_HEAL_BLOCK)
+                {
+                    if (gDisableStructs[gActiveBattler].healBlockTimer != 0)
+                        gDisableStructs[gActiveBattler].healBlockTimer--;
+                    if (gDisableStructs[gActiveBattler].healBlockTimer == 0)
+                    {
+                        gStatuses3[gActiveBattler] &= ~(STATUS3_HEAL_BLOCK);
+                        BattleScriptExecute(BattleScript_HealBlockEndTurn);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_BATTLER_COUNT:  // done
                 gBattleStruct->turnEffectsTracker = 0;
                 gBattleStruct->turnEffectsBattlerId++;
                 break;
@@ -3692,6 +3791,8 @@ bool32 IsBattlerGrounded(u8 battlerId)
         return TRUE;
 
     else if (gStatuses3[battlerId] & STATUS3_TELEKINESIS)
+        return FALSE;
+    else if (gStatuses3[battlerId] & STATUS3_MAGNET_RISE)
         return FALSE;
     else if (GetBattlerAbility(battlerId) == ABILITY_LEVITATE)
         return FALSE;

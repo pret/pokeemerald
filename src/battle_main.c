@@ -3968,7 +3968,7 @@ void BattleTurnPassed(void)
     {
         if (UpdateTurnCounters())
             return;
-        if (TurnBasedEffects())
+        if (DoBattlerEndTurnEffects())
             return;
     }
     if (HandleFaintedMonActions())

@@ -3588,11 +3588,17 @@ BattleScript_WishButFullHp::
 BattleScript_IngrainTurnHeal::
 	playanimation BS_ATTACKER, B_ANIM_INGRAIN_HEAL, NULL
 	printstring STRINGID_PKMNABSORBEDNUTRIENTS
+BattleScript_TurnHeal:
 	waitmessage 0x40
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	end2
+	
+BattleScript_AquaRingHeal::
+	playanimation BS_ATTACKER, B_ANIM_INGRAIN_HEAL, NULL
+	printstring STRINGID_AQUARINGHEAL
+	goto BattleScript_TurnHeal
 
 BattleScript_PrintMonIsRooted::
 	pause 0x20
@@ -3861,6 +3867,26 @@ BattleScript_YawnMakesAsleep::
 	updatestatusicon BS_EFFECT_BATTLER
 	waitstate
 	makevisible BS_EFFECT_BATTLER
+	end2
+	
+BattleScript_EmbargoEndTurn::
+	printstring STRINGID_EMBARGOENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_MagnetRiseEndTurn::
+	printstring STRINGID_MAGNETRISEENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_TelekinesisEndTurn::
+	printstring STRINGID_TELEKINESISENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_HealBlockEndTurn::
+	printstring STRINGID_HEALBLOCKENDS
+	waitmessage 0x40
 	end2
 
 BattleScript_MoveEffectPoison::
