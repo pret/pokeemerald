@@ -31,7 +31,13 @@ LDFLAGS = -Map ../../$(MAP)
 
 LIB := -L ../../tools/agbcc/lib -lgcc -lc
 
-SHA1 := sha1sum -c
+ifeq ($(OS),Windows_NT)
+	SHA1 := sha1sum -c
+else ifeq ($(shell uname -s),Darwin)
+	SHA1 := shasum -c
+else
+	SHA1 := sha1sum -c
+endif
 
 GFX := tools/gbagfx/gbagfx
 AIF := tools/aif2pcm/aif2pcm
