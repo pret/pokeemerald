@@ -160,6 +160,11 @@ static const u8 sText_Safeguard[] = _("Safeguard");
 static const u8 sText_Mist[] = _("Mist");
 static const u8 sText_ShowOpponentHP[] = _("Opponent Hp");
 static const u8 sText_Types[] = _("Types");
+static const u8 sText_GastroAcid[] = _("Gastro Acid");
+static const u8 sText_SmackDown[] = _("Smacked Down");
+static const u8 sText_Unburden[] = _("Unburden");
+static const u8 sText_MiracleEye[] = _("Miracle Eye");
+static const u8 sText_AquaRing[] = _("Aqua Ring");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -211,6 +216,19 @@ static const struct BitfieldInfo sStatus3Bitfield[] =
     {/*Imprison*/ 1, 13},
     // Grudge 1, 14,
     {/*No Crit*/ 1, 15},
+    {/*Gastro Acid*/ 1, 16},
+    // Embargo 1, 17,
+    // Underwater 1, 18,
+    // Intimidated Mons 1, 19,
+    // Traced 1, 20,
+    {/*Smacked Down*/ 1, 21},
+    // Me First 1, 22,
+    // Telekinesis 1, 23,
+    {/*Unburden*/ 1, 24},
+    {/*Miracle Eyed*/ 1, 25},
+    // Magnet Rise 1, 26,
+    // Heal Block 1, 27,
+    {/*Aqua Ring*/ 1, 28},
 };
 
 static const struct ListMenuItem sMainListItems[] =
@@ -279,6 +297,11 @@ static const struct ListMenuItem sStatus3ListItems[] =
     {sText_Yawned, 4},
     {sText_Imprisoned, 5},
     {sText_NoCrit, 6},
+    {sText_GastroAcid, 7},
+    {sText_SmackDown, 8},
+    {sText_Unburden, 9},
+    {sText_MiracleEye, 10},
+    {sText_AquaRing, 11},
 };
 
 static const struct ListMenuItem sSideStatusListItems[] =
