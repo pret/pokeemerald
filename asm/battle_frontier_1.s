@@ -2563,9 +2563,7 @@ sub_818FFC0: @ 818FFC0
 	cmp r3, r0
 	beq _0818FFF0
 	ldr r0, =gBattleMoves
-	lsls r1, r3, 1
-	adds r1, r3
-	lsls r1, 2
+	lsls r1, r3, 4
 	adds r3, r1, r0
 	ldrb r0, [r3, 0x1]
 	cmp r0, 0
@@ -10002,9 +10000,7 @@ _08193F8C:
 	lsls r1, 1
 	add r1, r10
 	ldrh r2, [r1]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
+	lsls r1, r2, 4
 	adds r1, r0
 	ldrb r6, [r1, 0x1]
 	cmp r6, 0

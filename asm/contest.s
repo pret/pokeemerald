@@ -13856,9 +13856,7 @@ sub_80DEAA8: @ 80DEAA8
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, =gBattleMoves
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
+	lsls r1, r0, 4
 	adds r1, r2
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0x20

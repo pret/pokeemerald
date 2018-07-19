@@ -203,9 +203,7 @@ _081C3FD0:
 _081C3FEC:
 	ldr r4, =gStringVar1
 	ldr r1, =gBattleMoves
-	lsls r0, r5, 1
-	adds r0, r5
-	lsls r0, 2
+	lsls r0, r5, 4
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
 	adds r0, r4, 0
@@ -724,9 +722,7 @@ _081C442E:
 	cmp r0, 0
 	beq _081C4468
 	adds r1, r0, 0
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
+	lsls r0, r1, 4
 	adds r0, r6
 	ldrb r0, [r0, 0x2]
 	lsls r2, r4, 28
@@ -836,9 +832,7 @@ _081C4514:
 	bne _081C4540
 	ldr r2, =gBattleMoves
 	ldrh r1, [r3]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
+	lsls r0, r1, 4
 	adds r0, r2
 	ldrb r0, [r0, 0x2]
 	movs r1, 0x55
