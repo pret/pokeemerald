@@ -137,7 +137,8 @@ struct UnknownFlags
     u32 flags[4];
 };
 
-#define UNKNOWN_FLAG_FLASH_FIRE 1
+#define RESOURCE_FLAG_FLASH_FIRE    0x1
+#define RESOURCE_FLAG_ROOST         0x2
 
 struct DisableStruct
 {
@@ -578,6 +579,7 @@ struct BattleStruct
     u8 debugBattler;
     u8 magnitudeBasePower;
     u8 presentBasePower;
+    u8 roostTypes[MAX_BATTLERS_COUNT][3];
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

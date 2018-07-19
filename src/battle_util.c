@@ -1025,6 +1025,7 @@ enum
 	ENDTURN_TAUNT,
 	ENDTURN_YAWN,
 	ENDTURN_ITEMS2,
+	ENDTURN_ROOST,
 	ENDTURN_BATTLER_COUNT
 };
 
@@ -1405,6 +1406,15 @@ u8 DoBattlerEndTurnEffects(void)
                         BattleScriptExecute(BattleScript_HealBlockEndTurn);
                         effect++;
                     }
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_ROOST: // Return flying type.
+                if (gBattleResources->flags->flags[gActiveBattler] & RESOURCE_FLAG_ROOST)
+                {
+                    gBattleResources->flags->flags[gActiveBattler] &= ~(RESOURCE_FLAG_ROOST);
+                    gBattleMons[gActiveBattler].type1 = gBattleStruct->roostTypes[gActiveBattler][0];
+                    gBattleMons[gActiveBattler].type2 = gBattleStruct->roostTypes[gActiveBattler][1];
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;
@@ -2338,7 +2348,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[battler].status1 & STATUS1_FREEZE))
                     {
-                        if (!(gBattleResources->flags->flags[battler] & UNKNOWN_FLAG_FLASH_FIRE))
+                        if (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_FLASH_FIRE))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBattlerAttacker].notFirstStrike)
@@ -2346,7 +2356,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
 
-                            gBattleResources->flags->flags[battler] |= UNKNOWN_FLAG_FLASH_FIRE;
+                            gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_FLASH_FIRE;
                             effect = 2;
                         }
                         else
@@ -4387,7 +4397,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
             MulModifier(&modifier, UQ_4_12(0.5));
         break;
     case ABILITY_FLASH_FIRE:
-        if (moveType == TYPE_FIRE && gBattleResources->flags->flags[battlerAtk] & UNKNOWN_FLAG_FLASH_FIRE)
+        if (moveType == TYPE_FIRE && gBattleResources->flags->flags[battlerAtk] & RESOURCE_FLAG_FLASH_FIRE)
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_SWARM:
