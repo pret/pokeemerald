@@ -67,7 +67,7 @@ player_step: @ 808A9C0
 	adds r0, r5, 0
 	bl npc_clear_strange_bits
 	bl DoPlayerAvatarTransition
-	bl TryDoMetatileBehaviorForcedMovment
+	bl TryDoMetatileBehaviorForcedMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808AA26
@@ -211,9 +211,9 @@ _0808AB0A:
 	.pool
 	thumb_func_end PlayerAllowForcedMovementIfMovingSameDirection
 
-	thumb_func_start TryDoMetatileBehaviorForcedMovment
-@ bool8 TryDoMetatileBehaviorForcedMovment()
-TryDoMetatileBehaviorForcedMovment: @ 808AB14
+	thumb_func_start TryDoMetatileBehaviorForcedMovement
+@ bool8 TryDoMetatileBehaviorForcedMovement()
+TryDoMetatileBehaviorForcedMovement: @ 808AB14
 	push {r4,lr}
 	ldr r4, =gUnknown_08497444
 	bl GetForcedMovementByMetatileBehavior
@@ -228,7 +228,7 @@ TryDoMetatileBehaviorForcedMovment: @ 808AB14
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end TryDoMetatileBehaviorForcedMovment
+	thumb_func_end TryDoMetatileBehaviorForcedMovement
 
 	thumb_func_start GetForcedMovementByMetatileBehavior
 @ u8 GetForcedMovementByMetatileBehavior()
@@ -3305,6 +3305,7 @@ sub_808C228: @ 808C228
 	thumb_func_end sub_808C228
 
 	thumb_func_start sub_808C280
+@ void sub_808C280(struct EventObject *playerEventObj);
 sub_808C280: @ 808C280
 	push {r4-r7,lr}
 	mov r7, r9
