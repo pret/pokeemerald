@@ -4,6 +4,16 @@
 #include "event_object_movement.h"
 #include "bike.h"
 
+extern bool8 (*const gUnknown_08497444[])(void);
+extern bool8 (*const gUnknown_084973FC[])(u8);
+
+void sub_808C5B0(void);
+void sub_808C4D8(void);
+void PlayerJumpLedge(u8);
+u8 CheckForPlayerAvatarCollision(u8);
+void PlayerGoSpeed1(u8);
+void PlayerGoSpeed2(u8);
+void PlayerGoSpeed3(u8);
 static u8 EventObjectCB2_NoMovement2();
 void sub_808C280(struct EventObject *); //struct EventObject *playerEventObj
 bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *, u8);
@@ -15,6 +25,7 @@ void MovePlayerAvatarUsingKeypadInput(u8, u16, u16);
 void PlayerAllowForcedMovementIfMovingSameDirection();
 void MovePlayerNotOnBike(u8 a, u16 b);
 u8 sub_808B028(u8);
+u8 GetForcedMovementByMetatileBehavior();
 
 void MovementType_Player(struct Sprite *sprite)
 {
@@ -124,4 +135,180 @@ void PlayerAllowForcedMovementIfMovingSameDirection(void)
 {
     if (gPlayerAvatar.runningState == MOVING)
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_5;
+}
+
+bool8 TryDoMetatileBehaviorForcedMovement()
+{
+	return gUnknown_08497444[GetForcedMovementByMetatileBehavior()]();
+}
+
+u8 GetForcedMovementByMetatileBehavior(void)
+{
+    u8 i;
+
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_5))
+    {
+        u8 metatileBehavior = gEventObjects[gPlayerAvatar.eventObjectId].currentMetatileBehavior;
+
+        for (i = 0; i < 18; i++)
+        {
+            if (gUnknown_084973FC[i](metatileBehavior))
+                return i + 1;
+        }
+    }
+    return 0;
+}
+
+bool8 ForcedMovement_None(void)
+{
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_6)
+    {
+        struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+
+        playerEventObj->facingDirectionLocked = 0;
+        playerEventObj->enableAnim = 1;
+        SetEventObjectDirection(playerEventObj, playerEventObj->facingDirection);
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_6;
+    }
+    return FALSE;
+}
+
+static u8 DoForcedMovement(u8 direction, void (*b)(u8))
+{
+    struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
+    u8 collisionType = CheckForPlayerAvatarCollision(direction);
+
+    playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
+    if (collisionType != 0)
+    {
+        ForcedMovement_None();
+        if (collisionType <= 4)
+        {
+            return 0;
+        }
+        else
+        {
+            if (collisionType == COLLISION_LEDGE_JUMP)
+                PlayerJumpLedge(direction);
+            playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
+            playerAvatar->runningState = MOVING;
+            return 1;
+        }
+    }
+    else
+    {
+        playerAvatar->runningState = MOVING;
+        b(direction);
+        return 1;
+    }
+}
+
+u8 DoForcedMovementInCurrentDirection(void (*a)(u8))
+{
+    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+
+    playerEventObj->disableAnim = 1;
+    return DoForcedMovement(playerEventObj->movementDirection, a);
+}
+
+bool8 ForcedMovement_Slip(void)
+{
+    return DoForcedMovementInCurrentDirection(PlayerGoSpeed2);
+}
+
+bool8 ForcedMovement_WalkSouth(void)
+{
+    return DoForcedMovement(DIR_SOUTH, PlayerGoSpeed1);
+}
+
+bool8 ForcedMovement_WalkNorth(void)
+{
+    return DoForcedMovement(DIR_NORTH, PlayerGoSpeed1);
+}
+
+bool8 ForcedMovement_WalkWest(void)
+{
+    return DoForcedMovement(DIR_WEST, PlayerGoSpeed1);
+}
+
+bool8 ForcedMovement_WalkEast(void)
+{
+    return DoForcedMovement(DIR_EAST, PlayerGoSpeed1);
+}
+
+bool8 ForcedMovement_PushedSouthByCurrent(void)
+{
+    return DoForcedMovement(DIR_SOUTH, PlayerGoSpeed3);
+}
+
+bool8 ForcedMovement_PushedNorthByCurrent(void)
+{
+    return DoForcedMovement(DIR_NORTH, PlayerGoSpeed3);
+}
+
+bool8 ForcedMovement_PushedWestByCurrent(void)
+{
+    return DoForcedMovement(DIR_WEST, PlayerGoSpeed3);
+}
+
+bool8 ForcedMovement_PushedEastByCurrent(void)
+{
+    return DoForcedMovement(DIR_EAST, PlayerGoSpeed3);
+}
+
+u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
+{
+    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+
+    playerEventObj->disableAnim = 1;
+    playerEventObj->facingDirectionLocked = 1;
+    return DoForcedMovement(direction, b);
+}
+
+bool8 ForcedMovement_SlideSouth(void)
+{
+    return ForcedMovement_Slide(DIR_SOUTH, PlayerGoSpeed2);
+}
+
+bool8 ForcedMovement_SlideNorth(void)
+{
+    return ForcedMovement_Slide(DIR_NORTH, PlayerGoSpeed2);
+}
+
+bool8 ForcedMovement_SlideWest(void)
+{
+    return ForcedMovement_Slide(DIR_WEST, PlayerGoSpeed2);
+}
+
+bool8 ForcedMovement_SlideEast(void)
+{
+    return ForcedMovement_Slide(DIR_EAST, PlayerGoSpeed2);
+}
+
+bool8 ForcedMovement_0xBB(void)
+{
+    sub_808C4D8();
+    return TRUE;
+}
+
+bool8 ForcedMovement_0xBC(void)
+{
+    sub_808C5B0();
+    return TRUE;
+}
+
+bool8 ForcedMovement_MuddySlope(void)
+{
+    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+
+    if (playerEventObj->movementDirection != DIR_NORTH || GetPlayerSpeed() <= 3)
+    {
+        Bike_UpdateBikeCounterSpeed(0);
+        playerEventObj->facingDirectionLocked = 1;
+        return DoForcedMovement(1, PlayerGoSpeed2);
+    }
+    else
+    {
+        return FALSE;
+    }
 }
