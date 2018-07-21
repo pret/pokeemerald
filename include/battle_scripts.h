@@ -291,5 +291,8 @@ extern const u8 BattleScript_MagnetRiseEndTurn[];
 extern const u8 BattleScript_TelekinesisEndTurn[];
 extern const u8 BattleScript_HealBlockEndTurn[];
 extern const u8 BattleScript_AquaRingHeal[];
+extern const u8 BattleScript_AuroraVeilEnds[];
+extern const u8 BattleScript_LuckyChantEnds[];
+extern const u8 BattleScript_TailwindEnds[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

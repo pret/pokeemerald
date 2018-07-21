@@ -111,7 +111,10 @@ enum
     LIST_SIDE_LIGHTSCREEN,
     LIST_SIDE_SPIKES,
     LIST_SIDE_SAFEGUARD,
-    LIST_SIDE_MIST
+    LIST_SIDE_MIST,
+    LIST_SIDE_AURORA_VEIL,
+    LIST_SIDE_LUCKY_CHANT,
+    LIST_SIDE_TAILWIND
 };
 
 // const rom data
@@ -165,6 +168,9 @@ static const u8 sText_SmackDown[] = _("Smacked Down");
 static const u8 sText_Unburden[] = _("Unburden");
 static const u8 sText_MiracleEye[] = _("Miracle Eye");
 static const u8 sText_AquaRing[] = _("Aqua Ring");
+static const u8 sText_AuroraVeil[] = _("Aurora Veil");
+static const u8 sText_LuckyChant[] = _("Lucky Chant");
+static const u8 sText_Tailwind[] = _("Tailwind");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -311,6 +317,9 @@ static const struct ListMenuItem sSideStatusListItems[] =
     {sText_Spikes, LIST_SIDE_SPIKES},
     {sText_Safeguard, LIST_SIDE_SAFEGUARD},
     {sText_Mist, LIST_SIDE_MIST},
+    {sText_AuroraVeil, LIST_SIDE_AURORA_VEIL},
+    {sText_LuckyChant, LIST_SIDE_LUCKY_CHANT},
+    {sText_Tailwind, LIST_SIDE_TAILWIND},
 };
 
 static const struct ListMenuItem sSecondaryListItems[] =
@@ -1066,6 +1075,36 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
             sideTimer->mistBattlerId = data->battlerId;
         }
         return &sideTimer->mistTimer;
+    case LIST_SIDE_AURORA_VEIL:
+        if (changeStatus)
+        {
+            if (statusTrue)
+                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_AURORA_VEIL;
+            else
+                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_AURORA_VEIL);
+            sideTimer->auroraVeilBattlerId = data->battlerId;
+        }
+        return &sideTimer->auroraVeilTimer;
+    case LIST_SIDE_LUCKY_CHANT:
+        if (changeStatus)
+        {
+            if (statusTrue)
+                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LUCKY_CHANT;
+            else
+                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_LUCKY_CHANT);
+            sideTimer->luckyChantBattlerId = data->battlerId;
+        }
+        return &sideTimer->luckyChantTimer;
+    case LIST_SIDE_TAILWIND:
+        if (changeStatus)
+        {
+            if (statusTrue)
+                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_TAILWIND;
+            else
+                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_TAILWIND);
+            sideTimer->tailwindBattlerId = data->battlerId;
+        }
+        return &sideTimer->tailwindTimer;
     default:
         return NULL;
     }

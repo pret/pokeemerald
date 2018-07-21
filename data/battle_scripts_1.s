@@ -3222,6 +3222,21 @@ BattleScript_SideStatusWoreOff::
 	printstring STRINGID_PKMNSXWOREOFF
 	waitmessage 0x40
 	end2
+	
+BattleScript_AuroraVeilEnds::
+	printstring STRINGID_AURORAVEILENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_LuckyChantEnds::
+	printstring STRINGID_LUCKYCHANTENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_TailwindEnds::
+	printstring STRINGID_TAILWINDENDS
+	waitmessage 0x40
+	end2
 
 BattleScript_SafeguardProtected::
 	pause 0x20

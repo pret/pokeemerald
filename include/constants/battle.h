@@ -197,6 +197,7 @@
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 #define SIDE_STATUS_TAILWIND         (1 << 10)
 #define SIDE_STATUS_AURORA_VEIL      (1 << 11)
+#define SIDE_STATUS_LUCKY_CHANT      (1 << 12)
 
 // Field affecting statuses.
 #define STATUS_FIELD_MAGIC_ROOM         0x1

@@ -573,14 +573,12 @@ static const u8 sText_FreedFromSkyDrop[] =_("{B_DEF_NAME_WITH_PREFIX} was freed\
 static const u8 sText_PostponeTargetMove[] =_("{B_DEF_NAME_WITH_PREFIX}’s move\nwas postponed!");
 static const u8 sText_ReflectTargetsType[] =_("{B_ATK_NAME_WITH_PREFIX}’s type\nchanged to match the {B_DEF_NAME_WITH_PREFIX}’s!");
 static const u8 sText_TransferHeldItem[] =_("{B_DEF_NAME_WITH_PREFIX} recieved {B_LAST_ITEM}\nfrom {B_ATK_NAME_WITH_PREFIX}");
-
-// These strings are currently placeholders, to be fixed.
 static const u8 sText_EmbargoEnds[] = _("{B_DEF_NAME_WITH_PREFIX}can\nuse items again!");
 static const u8 sText_MagnetRiseEnds[] = _("{B_ATK_NAME_WITH_PREFIX}’s electromagnetism\nwore off!");
 static const u8 sText_HealBlockEnds[] = _("{B_DEF_NAME_WITH_PREFIX}’s Heal Block\nwore off!");
 static const u8 sText_TelekinesisEnds[] = _("{B_DEF_NAME_WITH_PREFIX} was freed\nfrom the telekinesis!");
-static const u8 sText_TailwindEnds[] = _("The tailwind petered out!");
-static const u8 sText_LuckyChantEnds[] = _("Lucky Chant wore off!");
+static const u8 sText_TailwindEnds[] = _("{B_ATK_TEAM}’s tailwind\n petered out!");
+static const u8 sText_LuckyChantEnds[] = _("{B_ATK_TEAM}’s Lucky Chant\n wore off!");
 static const u8 sText_TrickRoomEnds[] = _("The twisted dimensions returned to\nnormal!");
 static const u8 sText_WonderRoomEnds[] = _("Wonder Room wore off, and\nDefense and Sp. Def stats returned to normal!");
 static const u8 sText_MagicRoomEnds[] = _("Magic Room wore off, and\nheld items’ effects returned to normal!");
@@ -588,6 +586,9 @@ static const u8 sText_MudSportEnds[] = _("The effects of Mud Sport have faded.")
 static const u8 sText_WaterSportEnds[] = _("The effects of Water Sport have faded.");
 static const u8 sText_GravityEnds[] = _("Gravity returned to normal!");
 static const u8 sText_AquaRingHeal[] = _("Aqua Ring restored\n{B_ATK_NAME_WITH_PREFIX}’s HP!");
+
+// These strings are currently placeholders, to be fixed.
+static const u8 sText_AuroraVeilEnds[] = _("");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1455,6 +1456,8 @@ const u8 gText_RecordBattleToPass[] = _("Would you like to record your battle\no
 const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}’s battle result was recorded\non the FRONTIER PASS.");
 static const u8 sText_LinkTrainerWantsToBattlePause[] = _("{B_20}\nwants to battle!{PAUSE 49}");
 static const u8 sText_TwoLinkTrainersWantToBattlePause[] = _("{B_20} and {B_21}\nwant to battle!{PAUSE 49}");
+static const u8 sText_YourTeam[] = _("Your team");
+static const u8 sText_OpposingTeam[] = _("The opposing team");
 
 // This is four lists of moves which use a different attack string in Japanese
 // to the default. See the documentation for ChooseTypeOfMoveUsedString for more detail.
@@ -2890,6 +2893,12 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                         toCpy = BattleStringGetTrainerClass(gTrainerBattleOpponent_A);
                     break;
                 }
+                break;
+            case B_TXT_ATK_TEAM:
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                    toCpy = sText_YourTeam;
+                else
+                    toCpy = sText_OpposingTeam;
                 break;
             }
 

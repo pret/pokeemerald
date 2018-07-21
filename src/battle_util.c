@@ -748,8 +748,11 @@ enum
 	ENDTURN_ORDER,
 	ENDTURN_REFLECT,
 	ENDTURN_LIGHT_SCREEN,
+	ENDTURN_AURORA_VEIL,
 	ENDTURN_MIST,
+	ENDTURN_LUCKY_CHANT,
 	ENDTURN_SAFEGUARD,
+	ENDTURN_TAILWIND,
 	ENDTURN_WISH,
 	ENDTURN_RAIN,
 	ENDTURN_SANDSTORM,
@@ -845,6 +848,30 @@ u8 DoFieldEndTurnEffects(void)
                 gBattleStruct->turnEffectsSide = 0;
             }
             break;
+        case ENDTURN_AURORA_VEIL:
+            while (gBattleStruct->turnEffectsSide < 2)
+            {
+                side = gBattleStruct->turnEffectsSide;
+                gActiveBattler = gBattlerAttacker = gSideTimers[side].auroraVeilBattlerId;
+                if (gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL)
+                {
+                    if (--gSideTimers[side].auroraVeilTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_AURORA_VEIL;
+                        BattleScriptExecute(BattleScript_AuroraVeilEnds);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnEffectsSide++;
+                if (effect)
+                    break;
+            }
+            if (!effect)
+            {
+                gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnEffectsSide = 0;
+            }
+            break;
         case ENDTURN_MIST:
             while (gBattleStruct->turnEffectsSide < 2)
             {
@@ -880,6 +907,54 @@ u8 DoFieldEndTurnEffects(void)
                     {
                         gSideStatuses[side] &= ~SIDE_STATUS_SAFEGUARD;
                         BattleScriptExecute(BattleScript_SafeguardEnds);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnEffectsSide++;
+                if (effect)
+                    break;
+            }
+            if (!effect)
+            {
+                gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnEffectsSide = 0;
+            }
+            break;
+        case ENDTURN_LUCKY_CHANT:
+            while (gBattleStruct->turnEffectsSide < 2)
+            {
+                side = gBattleStruct->turnEffectsSide;
+                gActiveBattler = gBattlerAttacker = gSideTimers[side].luckyChantBattlerId;
+                if (gSideStatuses[side] & SIDE_STATUS_LUCKY_CHANT)
+                {
+                    if (--gSideTimers[side].luckyChantTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_LUCKY_CHANT;
+                        BattleScriptExecute(BattleScript_LuckyChantEnds);
+                        effect++;
+                    }
+                }
+                gBattleStruct->turnEffectsSide++;
+                if (effect)
+                    break;
+            }
+            if (!effect)
+            {
+                gBattleStruct->turnCountersTracker++;
+                gBattleStruct->turnEffectsSide = 0;
+            }
+            break;
+        case ENDTURN_TAILWIND:
+            while (gBattleStruct->turnEffectsSide < 2)
+            {
+                side = gBattleStruct->turnEffectsSide;
+                gActiveBattler = gBattlerAttacker = gSideTimers[side].tailwindBattlerId;
+                if (gSideStatuses[side] & SIDE_STATUS_TAILWIND)
+                {
+                    if (--gSideTimers[side].tailwindTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_TAILWIND;
+                        BattleScriptExecute(BattleScript_TailwindEnds);
                         effect++;
                     }
                 }

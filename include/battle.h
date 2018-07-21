@@ -258,6 +258,8 @@ struct SideTimer
     u8 auroraVeilBattlerId;
     u8 tailwindTimer;
     u8 tailwindBattlerId;
+    u8 luckyChantTimer;
+    u8 luckyChantBattlerId;
 };
 
 struct FieldTimer
