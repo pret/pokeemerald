@@ -758,13 +758,21 @@ enum
 	ENDTURN_SANDSTORM,
 	ENDTURN_SUN,
 	ENDTURN_HAIL,
+	ENDTURN_WATER_SPORT,
+	ENDTURN_MUD_SPORT,
+	ENDTURN_TRICK_ROOM,
+	ENDTURN_WONDER_ROOM,
+	ENDTURN_MAGIC_ROOM,
+	ENDTURN_ELECTRIC_TERRAIN,
+	ENDTURN_MISTY_TERRAIN,
+	ENDTURN_GRASSY_TERRAIN,
+	ENDTURN_PSYCHIC_TERRAIN,
 	ENDTURN_FIELD_COUNT,
 };
 
 u8 DoFieldEndTurnEffects(void)
 {
     u8 effect = 0;
-    s32 i;
 
     for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount && gAbsentBattlerFlags & gBitTable[gBattlerAttacker]; gBattlerAttacker++)
     {
@@ -775,6 +783,7 @@ u8 DoFieldEndTurnEffects(void)
 
     do
     {
+        s32 i;
         u8 side;
 
         switch (gBattleStruct->turnCountersTracker)
@@ -1077,11 +1086,93 @@ u8 DoFieldEndTurnEffects(void)
             }
             gBattleStruct->turnCountersTracker++;
             break;
+        case ENDTURN_TRICK_ROOM:
+            if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && --gFieldTimers.trickRoomTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_TRICK_ROOM);
+                BattleScriptExecute(BattleScript_TrickRoomEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_WONDER_ROOM:
+            if (gFieldStatuses & STATUS_FIELD_WONDER_ROOM && --gFieldTimers.wonderRoomTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_WONDER_ROOM);
+                BattleScriptExecute(BattleScript_WonderRoomEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_MAGIC_ROOM:
+            if (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM && --gFieldTimers.magicRoomTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_MAGIC_ROOM);
+                BattleScriptExecute(BattleScript_MagicRoomEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_ELECTRIC_TERRAIN:
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && --gFieldTimers.electricTerrainTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_ELECTRIC_TERRAIN);
+                BattleScriptExecute(BattleScript_ElectricTerrainEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_MISTY_TERRAIN:
+            if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && --gFieldTimers.mistyTerrainTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN);
+                BattleScriptExecute(BattleScript_MistyTerrainEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_GRASSY_TERRAIN:
+            if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && --gFieldTimers.grassyTerrainTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_GRASSY_TERRAIN);
+                BattleScriptExecute(BattleScript_GrassyTerrainEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_PSYCHIC_TERRAIN:
+            if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN && --gFieldTimers.psychicTerrainTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_PSYCHIC_TERRAIN);
+                BattleScriptExecute(BattleScript_PsychicTerrainEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_WATER_SPORT:
+            if (gFieldStatuses & STATUS_FIELD_WATERSPORT && --gFieldTimers.waterSportTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_WATERSPORT);
+                BattleScriptExecute(BattleScript_WaterSportEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_MUD_SPORT:
+            if (gFieldStatuses & STATUS_FIELD_MUDSPORT && --gFieldTimers.mudSportTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_MUDSPORT);
+                BattleScriptExecute(BattleScript_MudSportEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
         case ENDTURN_FIELD_COUNT:
             effect++;
             break;
         }
     } while (effect == 0);
+
     return (gBattleMainFunc != BattleTurnPassed);
 }
 

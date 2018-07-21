@@ -294,5 +294,14 @@ extern const u8 BattleScript_AquaRingHeal[];
 extern const u8 BattleScript_AuroraVeilEnds[];
 extern const u8 BattleScript_LuckyChantEnds[];
 extern const u8 BattleScript_TailwindEnds[];
+extern const u8 BattleScript_TrickRoomEnds[];
+extern const u8 BattleScript_WonderRoomEnds[];
+extern const u8 BattleScript_MagicRoomEnds[];
+extern const u8 BattleScript_ElectricTerrainEnds[];
+extern const u8 BattleScript_MistyTerrainEnds[];
+extern const u8 BattleScript_GrassyTerrainEnds[];
+extern const u8 BattleScript_PsychicTerrainEnds[];
+extern const u8 BattleScript_MudSportEnds[];
+extern const u8 BattleScript_WaterSportEnds[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

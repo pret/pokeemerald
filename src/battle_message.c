@@ -589,6 +589,10 @@ static const u8 sText_AquaRingHeal[] = _("Aqua Ring restored\n{B_ATK_NAME_WITH_P
 
 // These strings are currently placeholders, to be fixed.
 static const u8 sText_AuroraVeilEnds[] = _("");
+static const u8 sText_ElectricTerrainEnds[] = _("");
+static const u8 sText_MistyTerrainEnds[] = _("");
+static const u8 sText_PsychicTerrainEnds[] = _("");
+static const u8 sText_GrassyTerrainEnds[] = _("");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1026,6 +1030,11 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_WaterSportEnds, // 442
     sText_GravityEnds, // 443
     sText_AquaRingHeal, // 444
+    sText_AuroraVeilEnds, // 445
+    sText_ElectricTerrainEnds, // 446
+    sText_MistyTerrainEnds, // 447
+    sText_PsychicTerrainEnds, // 448
+    sText_GrassyTerrainEnds, // 449
 };
 
 const u16 gMissStringIds[] =

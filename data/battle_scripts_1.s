@@ -3237,6 +3237,51 @@ BattleScript_TailwindEnds::
 	printstring STRINGID_TAILWINDENDS
 	waitmessage 0x40
 	end2
+	
+BattleScript_TrickRoomEnds::
+	printstring STRINGID_TRICKROOMENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_WonderRoomEnds::
+	printstring STRINGID_WONDERROOMENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_MagicRoomEnds::
+	printstring STRINGID_MAGICROOMENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_ElectricTerrainEnds::
+	printstring STRINGID_ELECTRICTERRAINENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_MistyTerrainEnds::
+	printstring STRINGID_MISTYTERRAINENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_GrassyTerrainEnds::
+	printstring STRINGID_GRASSYTERRAINENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_PsychicTerrainEnds::
+	printstring STRINGID_PSYCHICTERRAINENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_MudSportEnds::
+	printstring STRINGID_MUDSPORTENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_WaterSportEnds::
+	printstring STRINGID_WATERSPORTENDS
+	waitmessage 0x40
+	end2
 
 BattleScript_SafeguardProtected::
 	pause 0x20
