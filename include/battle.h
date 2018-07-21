@@ -251,7 +251,13 @@ struct SideTimer
     /*0x08*/ u8 followmeTimer;
     /*0x09*/ u8 followmeTarget;
     /*0x0A*/ u8 spikesAmount;
-    /*0x0B*/ u8 fieldB;
+    u8 toxicSpikesAmount;
+    bool8 stealthRock;
+    bool8 stickyWeb;
+    u8 auroraVeilTimer;
+    u8 auroraVeilBattlerId;
+    u8 tailwindTimer;
+    u8 tailwindBattlerId;
 };
 
 struct FieldTimer
@@ -554,7 +560,7 @@ struct BattleStruct
     u8 intimidateBattler;
     u8 switchInItemsCounter;
     u8 field_DA;
-    u8 turnSideTracker;
+    u8 turnEffectsSide;
     u8 fillerDC[0xDF-0xDC];
     u8 field_DF;
     u8 mirrorMoveArrays[32];

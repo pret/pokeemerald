@@ -743,7 +743,22 @@ u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
     return imprisionedMoves;
 }
 
-u8 UpdateTurnCounters(void)
+enum
+{
+	ENDTURN_ORDER,
+	ENDTURN_REFLECT,
+	ENDTURN_LIGHT_SCREEN,
+	ENDTURN_MIST,
+	ENDTURN_SAFEGUARD,
+	ENDTURN_WISH,
+	ENDTURN_RAIN,
+	ENDTURN_SANDSTORM,
+	ENDTURN_SUN,
+	ENDTURN_HAIL,
+	ENDTURN_FIELD_COUNT,
+};
+
+u8 DoFieldEndTurnEffects(void)
 {
     u8 effect = 0;
     s32 i;
@@ -761,7 +776,7 @@ u8 UpdateTurnCounters(void)
 
         switch (gBattleStruct->turnCountersTracker)
         {
-        case 0:
+        case ENDTURN_ORDER:
             for (i = 0; i < gBattlersCount; i++)
             {
                 gBattlerByTurnOrder[i] = i;
@@ -776,17 +791,13 @@ u8 UpdateTurnCounters(void)
                 }
             }
 
-            // It's stupid, but won't match without it
-            {
-                u8* var = &gBattleStruct->turnCountersTracker;
-                (*var)++;
-                gBattleStruct->turnSideTracker = 0;
-            }
+            gBattleStruct->turnCountersTracker++;
+            gBattleStruct->turnEffectsSide = 0;
             // fall through
-        case 1:
-            while (gBattleStruct->turnSideTracker < 2)
+        case ENDTURN_REFLECT:
+            while (gBattleStruct->turnEffectsSide < 2)
             {
-                side = gBattleStruct->turnSideTracker;
+                side = gBattleStruct->turnEffectsSide;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].reflectBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_REFLECT)
                 {
@@ -798,20 +809,20 @@ u8 UpdateTurnCounters(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnSideTracker++;
+                gBattleStruct->turnEffectsSide++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnSideTracker = 0;
+                gBattleStruct->turnEffectsSide = 0;
             }
             break;
-        case 2:
-            while (gBattleStruct->turnSideTracker < 2)
+        case ENDTURN_LIGHT_SCREEN:
+            while (gBattleStruct->turnEffectsSide < 2)
             {
-                side = gBattleStruct->turnSideTracker;
+                side = gBattleStruct->turnEffectsSide;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].lightscreenBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_LIGHTSCREEN)
                 {
@@ -824,20 +835,20 @@ u8 UpdateTurnCounters(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnSideTracker++;
+                gBattleStruct->turnEffectsSide++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnSideTracker = 0;
+                gBattleStruct->turnEffectsSide = 0;
             }
             break;
-        case 3:
-            while (gBattleStruct->turnSideTracker < 2)
+        case ENDTURN_MIST:
+            while (gBattleStruct->turnEffectsSide < 2)
             {
-                side = gBattleStruct->turnSideTracker;
+                side = gBattleStruct->turnEffectsSide;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].mistBattlerId;
                 if (gSideTimers[side].mistTimer != 0
                  && --gSideTimers[side].mistTimer == 0)
@@ -848,20 +859,20 @@ u8 UpdateTurnCounters(void)
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_MIST);
                     effect++;
                 }
-                gBattleStruct->turnSideTracker++;
+                gBattleStruct->turnEffectsSide++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnSideTracker = 0;
+                gBattleStruct->turnEffectsSide = 0;
             }
             break;
-        case 4:
-            while (gBattleStruct->turnSideTracker < 2)
+        case ENDTURN_SAFEGUARD:
+            while (gBattleStruct->turnEffectsSide < 2)
             {
-                side = gBattleStruct->turnSideTracker;
+                side = gBattleStruct->turnEffectsSide;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].safeguardBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_SAFEGUARD)
                 {
@@ -872,20 +883,20 @@ u8 UpdateTurnCounters(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnSideTracker++;
+                gBattleStruct->turnEffectsSide++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnSideTracker = 0;
+                gBattleStruct->turnEffectsSide = 0;
             }
             break;
-        case 5:
-            while (gBattleStruct->turnSideTracker < gBattlersCount)
+        case ENDTURN_WISH:
+            while (gBattleStruct->turnEffectsSide < gBattlersCount)
             {
-                gActiveBattler = gBattlerByTurnOrder[gBattleStruct->turnSideTracker];
+                gActiveBattler = gBattlerByTurnOrder[gBattleStruct->turnEffectsSide];
                 if (gWishFutureKnock.wishCounter[gActiveBattler] != 0
                  && --gWishFutureKnock.wishCounter[gActiveBattler] == 0
                  && gBattleMons[gActiveBattler].hp != 0)
@@ -894,7 +905,7 @@ u8 UpdateTurnCounters(void)
                     BattleScriptExecute(BattleScript_WishComesTrue);
                     effect++;
                 }
-                gBattleStruct->turnSideTracker++;
+                gBattleStruct->turnEffectsSide++;
                 if (effect)
                     break;
             }
@@ -903,7 +914,7 @@ u8 UpdateTurnCounters(void)
                 gBattleStruct->turnCountersTracker++;
             }
             break;
-        case 6:
+        case ENDTURN_RAIN:
             if (gBattleWeather & WEATHER_RAIN_ANY)
             {
                 if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
@@ -933,7 +944,7 @@ u8 UpdateTurnCounters(void)
             }
             gBattleStruct->turnCountersTracker++;
             break;
-        case 7:
+        case ENDTURN_SANDSTORM:
             if (gBattleWeather & WEATHER_SANDSTORM_ANY)
             {
                 if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
@@ -953,7 +964,7 @@ u8 UpdateTurnCounters(void)
             }
             gBattleStruct->turnCountersTracker++;
             break;
-        case 8:
+        case ENDTURN_SUN:
             if (gBattleWeather & WEATHER_SUN_ANY)
             {
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
@@ -971,8 +982,8 @@ u8 UpdateTurnCounters(void)
             }
             gBattleStruct->turnCountersTracker++;
             break;
-        case 9:
-            if (gBattleWeather & WEATHER_HAIL)
+        case ENDTURN_HAIL:
+            if (gBattleWeather & WEATHER_HAIL_ANY)
             {
                 if (--gWishFutureKnock.weatherDuration == 0)
                 {
@@ -991,7 +1002,7 @@ u8 UpdateTurnCounters(void)
             }
             gBattleStruct->turnCountersTracker++;
             break;
-        case 10:
+        case ENDTURN_FIELD_COUNT:
             effect++;
             break;
         }

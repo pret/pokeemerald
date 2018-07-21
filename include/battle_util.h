@@ -56,7 +56,7 @@ u8 TrySetCantSelectMoveBattleScript(void);
 u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check);
 bool8 AreAllMovesUnusable(void);
 u8 GetImprisonedMovesCount(u8 battlerId, u16 move);
-u8 UpdateTurnCounters(void);
+u8 DoFieldEndTurnEffects(void);
 u8 DoBattlerEndTurnEffects(void);
 bool8 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
