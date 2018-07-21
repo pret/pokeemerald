@@ -99,7 +99,7 @@ static void atk04_critcalc(void);
 static void atk05_damagecalc(void);
 static void atk06_typecalc(void);
 static void atk07_adjustdamage(void);
-static void atk08_nop(void);
+static void atk08_multihitresultmessage(void);
 static void atk09_attackanimation(void);
 static void atk0A_waitanimation(void);
 static void atk0B_healthbarupdate(void);
@@ -351,7 +351,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk05_damagecalc,
     atk06_typecalc,
     atk07_adjustdamage,
-    atk08_nop,
+    atk08_multihitresultmessage,
     atk09_attackanimation,
     atk0A_waitanimation,
     atk0B_healthbarupdate,
@@ -1380,18 +1380,15 @@ static void atk07_adjustdamage(void)
 {
     u8 holdEffect, param;
 
-    holdEffect = GetBattlerHoldEffect(gBattlerTarget, TRUE);
-    if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
-        param = gEnigmaBerries[gBattlerTarget].holdEffectParam;
-    else
-        param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
-
-    gPotentialItemEffectBattler = gBattlerTarget;
-
     if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
         goto END;
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
         goto END;
+
+    holdEffect = GetBattlerHoldEffect(gBattlerTarget, TRUE);
+    param = GetBattlerHoldEffectParam(gBattlerTarget);
+
+    gPotentialItemEffectBattler = gBattlerTarget;
 
     if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < param)
     {
@@ -1403,14 +1400,20 @@ static void atk07_adjustdamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusSashed = 1;
     }
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_STURDY && BATTLER_MAX_HP(gBattlerTarget))
+    {
+        RecordAbilityBattle(gBattlerTarget, ABILITY_STURDY);
+        gSpecialStatuses[gBattlerTarget].sturdied = 1;
+    }
 
     if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE
         && !gProtectStructs[gBattlerTarget].endured
         && !gSpecialStatuses[gBattlerTarget].focusBanded
-        && !gSpecialStatuses[gBattlerTarget].focusSashed)
+        && !gSpecialStatuses[gBattlerTarget].focusSashed
+        && !gSpecialStatuses[gBattlerTarget].sturdied)
         goto END;
 
-    // Handle reducing the dmg to 1 hp
+    // Handle reducing the dmg to 1 hp.
     gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
 
     if (gProtectStructs[gBattlerTarget].endured)
@@ -1422,14 +1425,45 @@ static void atk07_adjustdamage(void)
         gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
         gLastUsedItem = gBattleMons[gBattlerTarget].item;
     }
+    else if (gSpecialStatuses[gBattlerTarget].sturdied)
+    {
+        gMoveResultFlags |= MOVE_RESULT_STURDIED;
+        gLastUsedAbility = ABILITY_STURDY;
+    }
 
 END:
     gBattlescriptCurrInstr++;
 }
 
-static void atk08_nop(void)
+static void atk08_multihitresultmessage(void)
 {
+    if (gBattleControllerExecFlags)
+        return;
 
+    if (!(gMoveResultFlags & MOVE_RESULT_FAILED) && !(gMoveResultFlags & MOVE_RESULT_FOE_ENDURED))
+    {
+        if (gMoveResultFlags & MOVE_RESULT_STURDIED)
+        {
+            gMoveResultFlags &= ~(MOVE_RESULT_STURDIED | MOVE_RESULT_FOE_HUNG_ON);
+            gSpecialStatuses[gBattlerTarget].sturdied = 0; // Delete this line to make Sturdy last for the duration of the whole move turn.
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_SturdiedMsg;
+            return;
+        }
+        else if (gMoveResultFlags & MOVE_RESULT_FOE_HUNG_ON)
+        {
+            gLastUsedItem = gBattleMons[gBattlerTarget].item;
+            gPotentialItemEffectBattler = gBattlerTarget;
+            gMoveResultFlags &= ~(MOVE_RESULT_STURDIED | MOVE_RESULT_FOE_HUNG_ON);
+            gSpecialStatuses[gBattlerTarget].focusBanded = 0; // Delete this line to make Focus Band last for the duration of the whole move turn.
+            gSpecialStatuses[gBattlerTarget].focusSashed = 0; // Delete this line to make Focus Sash last for the duration of the whole move turn.
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_HangedOnMsg;
+            return;
+        }
+    }
+
+    gBattlescriptCurrInstr++;
 }
 
 static void atk09_attackanimation(void)
@@ -1692,6 +1726,7 @@ static void atk0E_effectivenesssound(void)
         case MOVE_RESULT_FOE_ENDURED:
         case MOVE_RESULT_ONE_HIT_KO:
         case MOVE_RESULT_FOE_HUNG_ON:
+        case MOVE_RESULT_STURDIED:
         default:
             if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
             {
@@ -1729,7 +1764,7 @@ static void atk0F_resultmessage(void)
     else
     {
         gBattleCommunication[MSG_DISPLAY] = 1;
-        switch (gMoveResultFlags & (u8)(~(MOVE_RESULT_MISSED)))
+        switch (gMoveResultFlags & (~MOVE_RESULT_MISSED))
         {
         case MOVE_RESULT_SUPER_EFFECTIVE:
             stringId = STRINGID_SUPEREFFECTIVE;
@@ -1768,6 +1803,14 @@ static void atk0F_resultmessage(void)
                 gMoveResultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_OneHitKOMsg;
+                return;
+            }
+            else if (gMoveResultFlags & MOVE_RESULT_STURDIED)
+            {
+                gMoveResultFlags &= ~(MOVE_RESULT_STURDIED | MOVE_RESULT_FOE_ENDURED | MOVE_RESULT_FOE_HUNG_ON);
+                gSpecialStatuses[gBattlerTarget].sturdied = 0;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_SturdiedMsg;
                 return;
             }
             else if (gMoveResultFlags & MOVE_RESULT_FOE_ENDURED)

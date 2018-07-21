@@ -442,10 +442,10 @@ BattleScript_82D8BCF::
 	end
 
 BattleScript_82D8BEA::
-	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED
 	attackanimation
 	waitanimation
-	orbyte gMoveResultFlags, MOVE_RESULT_MISSED
+	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED
 	return
 
 BattleScript_EffectDreamEater::
@@ -492,7 +492,7 @@ BattleScript_EffectMirrorMove::
 	pause 0x40
 	trymirrormove
 	ppreduce
-	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	printstring STRINGID_MIRRORMOVEFAILED
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
@@ -655,6 +655,7 @@ BattleScript_DoMultiHit::
 	datahpupdate BS_TARGET
 	critmessage
 	waitmessage 0x40
+	multihitresultmessage
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 0x1
 	addbyte sMULTIHIT_STRING + 4, 0x1
@@ -839,7 +840,7 @@ BattleScript_EffectSuperFang::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	damagetohalftargethp
 	goto BattleScript_HitFromAtkAnimation
 
@@ -849,7 +850,7 @@ BattleScript_EffectDragonRage::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	setword gBattleMoveDamage, 40
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -889,12 +890,12 @@ BattleScript_MoveMissedDoDamage::
 	typecalc
 	adjustdamage
 	manipulatedamage ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP
-	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER, FALSE, NULL
-	orbyte gMoveResultFlags, MOVE_RESULT_MISSED
+	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectMist::
@@ -1224,7 +1225,7 @@ BattleScript_EffectLevelDamage::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	dmgtolevel
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -1235,7 +1236,7 @@ BattleScript_EffectPsywave::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	psywavedamageeffect
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -1443,7 +1444,7 @@ BattleScript_DoTripleKickAttack::
 BattleScript_TripleKickNoMoreHits::
 	pause 0x20
 	jumpifbyte CMP_EQUAL, sMULTIHIT_STRING + 4, 0x0, BattleScript_TripleKickPrintStrings
-	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED
 BattleScript_TripleKickPrintStrings::
 	resultmessage
 	waitmessage 0x40
@@ -1737,7 +1738,7 @@ BattleScript_EffectSonicboom::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	setword gBattleMoveDamage, 20
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -2065,14 +2066,14 @@ BattleScript_ButItFailedPpReduce::
 	ppreduce
 BattleScript_ButItFailed::
 	pause 0x20
-	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	resultmessage
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
 BattleScript_NotAffected::
 	pause 0x20
-	orbyte gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
+	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	resultmessage
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
@@ -2414,7 +2415,7 @@ BattleScript_EffectBrickBreak::
 	damagecalc
 	adjustdamage
 	jumpifbyte CMP_EQUAL, sB_ANIM_TURN, 0x0, BattleScript_BrickBreakAnim
-	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
 BattleScript_BrickBreakAnim::
 	attackanimation
 	waitanimation
@@ -2473,7 +2474,7 @@ BattleScript_EffectEndeavor::
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
 	typecalc
 	jumpifmovehadnoeffect BattleScript_HitFromAtkAnimation
-	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	copyword gBattleMoveDamage, gHpDealt
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -2656,7 +2657,7 @@ BattleScript_TickleEnd::
 
 BattleScript_CantLowerMultipleStats::
 	pause 0x20
-	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	printstring STRINGID_STATSWONTDECREASE2
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
@@ -2742,7 +2743,7 @@ BattleScript_CalmMindEnd::
 
 BattleScript_CantRaiseMultipleStats::
 	pause 0x20
-	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	printstring STRINGID_STATSWONTINCREASE2
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
@@ -3330,7 +3331,7 @@ BattleScript_BideAttack::
 	waitmessage 0x40
 	accuracycheck BattleScript_MoveMissed, ACC_CURR_MOVE
 	typecalc
-	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	copyword gBattleMoveDamage, sBIDE_DMG
 	adjustdamage
 	setbyte sB_ANIM_TURN, 0x1
@@ -3572,16 +3573,16 @@ BattleScript_FutureAttackEnd::
 	moveend 0x1, 0x0
 	setbyte sMOVEEND_STATE, 0xB
 	moveend 0x2, 0xE
-	setbyte gMoveResultFlags, 0
+	sethword gMoveResultFlags, 0
 	end2
 
 BattleScript_FutureAttackMiss::
 	pause 0x20
-	setbyte gMoveResultFlags, 0
-	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
+	sethword gMoveResultFlags, 0
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	resultmessage
 	waitmessage 0x40
-	setbyte gMoveResultFlags, 0
+	sethword gMoveResultFlags, 0
 	end2
 
 BattleScript_NoMovesLeft::
@@ -3732,6 +3733,11 @@ BattleScript_SnatchedMove::
 
 BattleScript_EnduredMsg::
 	printstring STRINGID_PKMNENDUREDHIT
+	waitmessage 0x40
+	return
+	
+BattleScript_SturdiedMsg::
+	printstring STRINGID_ENDUREDSTURDY
 	waitmessage 0x40
 	return
 
@@ -4151,7 +4157,7 @@ BattleScript_MoveHPDrain::
 	datahpupdate BS_TARGET
 	printstring STRINGID_PKMNRESTOREDHPUSING
 	waitmessage 0x40
-	orbyte gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
+	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	goto BattleScript_MoveEnd
 
 BattleScript_MonMadeMoveUseless_PPLoss::
@@ -4161,7 +4167,7 @@ BattleScript_MonMadeMoveUseless::
 	pause 0x20
 	printstring STRINGID_PKMNSXMADEYUSELESS
 	waitmessage 0x40
-	orbyte gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
+	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	goto BattleScript_MoveEnd
 
 BattleScript_FlashFireBoost_PPLoss::

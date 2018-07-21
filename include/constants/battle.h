@@ -220,6 +220,7 @@
 #define MOVE_RESULT_FAILED             (1 << 5)
 #define MOVE_RESULT_FOE_ENDURED        (1 << 6)
 #define MOVE_RESULT_FOE_HUNG_ON        (1 << 7)
+#define MOVE_RESULT_STURDIED           (1 << 8)
 #define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
 // Battle Weather flags

@@ -33,7 +33,7 @@
 	.byte 0x7
 	.endm
 
-	.macro nop_08
+	.macro multihitresultmessage
 	.byte 0x8
 	.endm
 
