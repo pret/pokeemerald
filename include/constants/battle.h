@@ -198,6 +198,8 @@
 #define SIDE_STATUS_TAILWIND         (1 << 10)
 #define SIDE_STATUS_AURORA_VEIL      (1 << 11)
 #define SIDE_STATUS_LUCKY_CHANT      (1 << 12)
+#define SIDE_STATUS_TOXIC_SPIKES     (1 << 13)
+#define SIDE_STATUS_STEALTH_ROCK     (1 << 14)
 
 // Field affecting statuses.
 #define STATUS_FIELD_MAGIC_ROOM         0x1

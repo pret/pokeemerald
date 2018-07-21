@@ -560,7 +560,7 @@
 
 	.macro setgravity ptr
 	.byte 0x69
-	.word \ptr
+	.4byte \ptr
 	.endm
 
 	.macro removeitem bank
@@ -864,7 +864,7 @@
 
 	.macro settailwind ptr
 	.byte 0xac
-	.word \ptr
+	.4byte \ptr
 	.endm
 
 	.macro tryspiteppreduce param0
@@ -911,7 +911,7 @@
 
 	.macro setembargo ptr
 	.byte 0xb6
-	.word \ptr
+	.4byte \ptr
 	.endm
 
 	.macro presentdamagecalculation
@@ -1051,14 +1051,14 @@
 	.4byte \param1
 	.endm
 
-	.macro trysetroots param0
+	.macro settoxicspikes ptr
 	.byte 0xd5
-	.4byte \param0
+	.4byte \ptr
 	.endm
 
-	.macro setaquaring ptr
+	.macro setgastroacid ptr
 	.byte 0xd6
-	.word \ptr
+	.4byte \ptr
 	.endm
 
 	.macro setyawn param0
@@ -1071,7 +1071,7 @@
 	.4byte \param0
 	.endm
 
-	.macro nop_D9
+	.macro setroom
 	.byte 0xd9
 	.endm
 
@@ -1085,13 +1085,15 @@
 	.4byte \param0
 	.endm
 
-	.macro trysetgrudge param0
+	.macro setstealthrock param0
 	.byte 0xdc
 	.4byte \param0
 	.endm
 
-	.macro nop_DD
+	.macro setuserstatus3 flags ptr
 	.byte 0xdd
+	.4byte \flags
+	.4byte \ptr
 	.endm
 
 	.macro asistattackselect param0
@@ -1214,6 +1216,11 @@
 	.macro trainerslideout param0
 	.byte 0xf8
 	.byte \param0
+	.endm
+	
+	.macro settelekinesis ptr
+	.byte 0xf9
+	.4byte \ptr
 	.endm
 	
 @ various command changed to more readable macros

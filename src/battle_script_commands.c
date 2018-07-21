@@ -304,15 +304,15 @@ static void atkD1_trysethelpinghand(void);
 static void atkD2_tryswapitems(void);
 static void atkD3_trycopyability(void);
 static void atkD4_trywish(void);
-static void atkD5_trysetroots(void);
-static void atkD6_setaquaring(void);
+static void atkD5_settoxicspikes(void);
+static void atkD6_setgastroacid(void);
 static void atkD7_setyawn(void);
 static void atkD8_setdamagetohealthdifference(void);
-static void atkD9_nop(void);
+static void atkD9_setroom(void);
 static void atkDA_tryswapabilities(void);
 static void atkDB_tryimprision(void);
-static void atkDC_trysetgrudge(void);
-static void atkDD_nop(void);
+static void atkDC_setstealthrock(void);
+static void atkDD_setuserstatus3(void);
 static void atkDE_asistattackselect(void);
 static void atkDF_trysetmagiccoat(void);
 static void atkE0_trysetsnatch(void);
@@ -340,6 +340,7 @@ static void atkF5_removeattackerstatus1(void);
 static void atkF6_finishaction(void);
 static void atkF7_finishturn(void);
 static void atkF8_trainerslideout(void);
+static void atkF9_settelekinesis(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -556,15 +557,15 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkD2_tryswapitems,
     atkD3_trycopyability,
     atkD4_trywish,
-    atkD5_trysetroots,
-    atkD6_setaquaring,
+    atkD5_settoxicspikes,
+    atkD6_setgastroacid,
     atkD7_setyawn,
     atkD8_setdamagetohealthdifference,
-    atkD9_nop,
+    atkD9_setroom,
     atkDA_tryswapabilities,
     atkDB_tryimprision,
-    atkDC_trysetgrudge,
-    atkDD_nop,
+    atkDC_setstealthrock,
+    atkDD_setuserstatus3,
     atkDE_asistattackselect,
     atkDF_trysetmagiccoat,
     atkE0_trysetsnatch,
@@ -591,7 +592,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF5_removeattackerstatus1,
     atkF6_finishaction,
     atkF7_finishturn,
-    atkF8_trainerslideout
+    atkF8_trainerslideout,
+    atkF9_settelekinesis,
 };
 
 struct StatFractions
@@ -9206,29 +9208,40 @@ static void atkD4_trywish(void)
     }
 }
 
-static void atkD5_trysetroots(void) // ingrain
+static void atkD5_settoxicspikes(void)
 {
-    if (gStatuses3[gBattlerAttacker] & STATUS3_ROOTED)
+    u8 targetSide = GetBattlerSide(gBattlerTarget);
+    if (gSideTimers[targetSide].toxicSpikesAmount >= 2)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
     else
     {
-        gStatuses3[gBattlerAttacker] |= STATUS3_ROOTED;
+        gSideTimers[targetSide].toxicSpikesAmount++;
+        gSideStatuses[targetSide] |= SIDE_STATUS_TOXIC_SPIKES;
         gBattlescriptCurrInstr += 5;
     }
 }
 
-static void atkD6_setaquaring(void)
+static void atkD6_setgastroacid(void)
 {
-    if (gStatuses3[gBattlerAttacker] & STATUS3_AQUA_RING)
+    switch (gBattleMons[gBattlerTarget].ability)
     {
+    case ABILITY_MULTITYPE:
+    case ABILITY_STANCE_CHANGE:
+    case ABILITY_SCHOOLING:
+    case ABILITY_COMATOSE:
+    case ABILITY_SHIELDS_DOWN:
+    case ABILITY_DISGUISE:
+    case ABILITY_RKS_SYSTEM:
+    case ABILITY_BATTLE_BOND:
+    case ABILITY_POWER_CONSTRUCT:
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-    }
-    else
-    {
-        gStatuses3[gBattlerAttacker] |= STATUS3_AQUA_RING;
+        break;
+    default:
+        gStatuses3[gBattlerTarget] |= STATUS3_GASTRO_ACID;
         gBattlescriptCurrInstr += 5;
+        break;
     }
 }
 
@@ -9259,8 +9272,39 @@ static void atkD8_setdamagetohealthdifference(void)
     }
 }
 
-static void atkD9_nop(void)
+static void HandleRoomMove(u32 statusFlag, u8 *timer, u8 stringId)
 {
+    if (gFieldStatuses & statusFlag)
+    {
+        gFieldStatuses &= ~(statusFlag);
+        *timer = 0;
+        gBattleCommunication[MULTISTRING_CHOOSER] = stringId + 1;
+    }
+    else
+    {
+        gFieldStatuses |= statusFlag;
+        *timer = 5;
+        gBattleCommunication[MULTISTRING_CHOOSER] = stringId;
+    }
+}
+
+static void atkD9_setroom(void)
+{
+    switch (gCurrentMove)
+    {
+    case MOVE_TRICK_ROOM:
+        HandleRoomMove(STATUS_FIELD_TRICK_ROOM, &gFieldTimers.trickRoomTimer, 0);
+        break;
+    case MOVE_WONDER_ROOM:
+        HandleRoomMove(STATUS_FIELD_WONDER_ROOM, &gFieldTimers.wonderRoomTimer, 2);
+        break;
+    case MOVE_MAGIC_ROOM:
+        HandleRoomMove(STATUS_FIELD_MAGIC_ROOM, &gFieldTimers.magicRoomTimer, 4);
+        break;
+    default:
+        gBattleCommunication[MULTISTRING_CHOOSER] = 6;
+        break;
+    }
     gBattlescriptCurrInstr++;
 }
 
@@ -9280,7 +9324,7 @@ static void atkDA_tryswapabilities(void) // skill swap
         gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
         gBattleMons[gBattlerTarget].ability = abilityAtk;
 
-            gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr += 5;
     }
 }
 
@@ -9321,27 +9365,38 @@ static void atkDB_tryimprision(void)
                 }
             }
         }
-        if (battlerId == gBattlersCount) // In Generation 3 games, Imprison fails if the user doesn't share any moves with any of the foes
+        if (battlerId == gBattlersCount) // In Generation 3 games, Imprison fails if the user doesn't share any moves with any of the foes.
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
 }
 
-static void atkDC_trysetgrudge(void)
+static void atkDC_setstealthrock(void)
 {
-    if (gStatuses3[gBattlerAttacker] & STATUS3_GRUDGE)
+    u8 targetSide = GetBattlerSide(gBattlerTarget);
+    if (gSideStatuses[targetSide] & SIDE_STATUS_STEALTH_ROCK)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
     else
     {
-        gStatuses3[gBattlerAttacker] |= STATUS3_GRUDGE;
+        gSideStatuses[targetSide] |= SIDE_STATUS_STEALTH_ROCK;
         gBattlescriptCurrInstr += 5;
     }
 }
 
-static void atkDD_nop(void)
+static void atkDD_setuserstatus3(void)
 {
-    gBattlescriptCurrInstr++;
+    u32 flags = T1_READ_32(gBattlescriptCurrInstr + 1);
+
+    if (gStatuses3[gBattlerAttacker] & flags)
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
+    }
+    else
+    {
+        gStatuses3[gBattlerAttacker] |= flags;
+        gBattlescriptCurrInstr += 9;
+    }
 }
 
 static void atkDE_asistattackselect(void)
@@ -9356,7 +9411,7 @@ static void atkDE_asistattackselect(void)
     else
         party = gPlayerParty;
 
-    for (monId = 0; monId < 6; monId++)
+    for (monId = 0; monId < PARTY_SIZE; monId++)
     {
         if (monId == gBattlerPartyIndexes[gBattlerAttacker])
             continue;
@@ -10175,4 +10230,20 @@ static void atkF8_trainerslideout(void)
     MarkBattlerForControllerExec(gActiveBattler);
 
     gBattlescriptCurrInstr += 2;
+}
+
+static void atkF9_settelekinesis(void)
+{
+    if (gStatuses3[gBattlerTarget] & (STATUS3_TELEKINESIS | STATUS3_ROOTED | STATUS3_SMACKED_DOWN)
+        || gFieldStatuses & STATUS_FIELD_GRAVITY
+        || (gBattleMons[gBattlerTarget].species == SPECIES_DIGLETT || gBattleMons[gBattlerTarget].species == SPECIES_DUGTRIO))
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+    else
+    {
+        gStatuses3[gBattlerTarget] |= STATUS3_TELEKINESIS;
+        gDisableStructs[gBattlerTarget].telekinesisTimer = 3;
+        gBattlescriptCurrInstr += 5;
+    }
 }

@@ -237,7 +237,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAssurance
 	.4byte BattleScript_EffectTrump_card
 	.4byte BattleScript_EffectAcrobatics
-	.4byte BattleScript_EffectHeat_crash
+	.4byte BattleScript_EffectHeatCrash
 	.4byte BattleScript_EffectPunishment
 	.4byte BattleScript_EffectStoredPower
 	.4byte BattleScript_EffectElectroBall
@@ -257,12 +257,90 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectTailwind
 	.4byte BattleScript_EffectEmbargo
 	.4byte BattleScript_EffectAquaRing
+	.4byte BattleScript_EffectTrickRoom
+	.4byte BattleScript_EffectWonderRoom
+	.4byte BattleScript_EffectMagicRoom
+	.4byte BattleScript_EffectMagnetRise
+	.4byte BattleScript_EffectToxicSpikes
+	.4byte BattleScript_EffectGastroAcid
+	.4byte BattleScript_EffectStealthRock
+	.4byte BattleScript_EffectTelekinesis
+	
+BattleScript_EffectTelekinesis:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, NO_ACC_CALC_CHECK_LOCK_ON
+	attackstring
+	ppreduce
+	settelekinesis BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNIDENTIFIED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectStealthRock:
+	attackcanceler
+	attackstring
+	ppreduce
+	setstealthrock STRINGID_POINTEDSTONESFLOAT
+	attackanimation
+	waitanimation
+	printstring STRINGID_POISONSPIKESSCATTERED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectGastroAcid:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	setgastroacid BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSABILITYSUPPRESSED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectToxicSpikes:
+	attackcanceler
+	attackstring
+	ppreduce
+	settoxicspikes BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_POISONSPIKESSCATTERED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectMagnetRise:
+	attackcanceler
+	attackstring
+	ppreduce
+	setuserstatus3 STATUS3_MAGNET_RISE BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNLEVITATEDONELECTROMAGNETISM
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectTrickRoom:
+BattleScript_EffectWonderRoom:
+BattleScript_EffectMagicRoom:
+	attackcanceler
+	attackstring
+	ppreduce
+	setroom
+	attackanimation
+	waitanimation
+	printfromtable gRoomsStringIds
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectAquaRing:
 	attackcanceler
 	attackstring
 	ppreduce
-	setaquaring BattleScript_ButItFailed
+	setuserstatus3 STATUS3_AQUA_RING BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNSURROUNDEDWITHVEILOFWATER
@@ -319,18 +397,8 @@ BattleScript_EffectRoost:
 	setroost
 	goto BattleScript_PresentHealTarget
 
-BattleScript_EffectSpeedUp:
-BattleScript_EffectSpecialDefenseUp:
-BattleScript_EffectAccuracyUp:
 BattleScript_EffectAlwaysHit:
-BattleScript_EffectSpecialAttackDown:
-BattleScript_EffectSpecialDefenseDown:
 BattleScript_EffectPlaceholder43:
-BattleScript_EffectAccuracyUp2:
-BattleScript_EffectEvasionUp2:
-BattleScript_EffectSpecialAttackDown2:
-BattleScript_EffectAccuracyDown2:
-BattleScript_EffectEvasionDown2:
 BattleScript_EffectEvasionDownHit:
 BattleScript_EffectVitalThrow:
 BattleScript_EffectUnused60:
@@ -360,7 +428,7 @@ BattleScript_EffectHex:
 BattleScript_EffectAssurance:
 BattleScript_EffectTrump_card:
 BattleScript_EffectAcrobatics:
-BattleScript_EffectHeat_crash:
+BattleScript_EffectHeatCrash:
 BattleScript_EffectPunishment:
 BattleScript_EffectStoredPower:
 BattleScript_EffectElectroBall:
@@ -621,6 +689,18 @@ BattleScript_EffectDefenseUp::
 BattleScript_EffectSpecialAttackUp::
 	setstatchanger STAT_SPATK, 1, FALSE
 	goto BattleScript_EffectStatUp
+	
+BattleScript_EffectSpeedUp:
+	setstatchanger STAT_SPEED, 1, FALSE
+	goto BattleScript_EffectStatUp
+
+BattleScript_EffectSpecialDefenseUp:
+	setstatchanger STAT_SPDEF, 1, FALSE
+	goto BattleScript_EffectStatUp
+
+BattleScript_EffectAccuracyUp:
+	setstatchanger STAT_ACC, 1, FALSE
+	goto BattleScript_EffectStatUp
 
 BattleScript_EffectEvasionUp::
 	setstatchanger STAT_EVASION, 1, FALSE
@@ -651,25 +731,33 @@ BattleScript_StatUp::
 	waitmessage 0x40
 	return
 
-BattleScript_EffectAttackDown::
+BattleScript_EffectAttackDown:
 	setstatchanger STAT_ATK, 1, TRUE
 	goto BattleScript_EffectStatDown
 
-BattleScript_EffectDefenseDown::
+BattleScript_EffectDefenseDown:
 	setstatchanger STAT_DEF, 1, TRUE
 	goto BattleScript_EffectStatDown
 
-BattleScript_EffectSpeedDown::
+BattleScript_EffectSpeedDown:
 	setstatchanger STAT_SPEED, 1, TRUE
 	goto BattleScript_EffectStatDown
 
-BattleScript_EffectAccuracyDown::
+BattleScript_EffectAccuracyDown:
 	setstatchanger STAT_ACC, 1, TRUE
 	goto BattleScript_EffectStatDown
+	
+BattleScript_EffectSpecialAttackDown:
+	setstatchanger STAT_SPATK, 1, TRUE
+	goto BattleScript_EffectStatDown
 
-BattleScript_EffectEvasionDown::
+BattleScript_EffectSpecialDefenseDown:
+	setstatchanger STAT_SPDEF, 1, TRUE
+	goto BattleScript_EffectStatDown
+
+BattleScript_EffectEvasionDown:
 	setstatchanger STAT_EVASION, 1, TRUE
-BattleScript_EffectStatDown::
+BattleScript_EffectStatDown:
 	attackcanceler
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailedAtkStringPpReduce
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
@@ -1083,6 +1171,14 @@ BattleScript_EffectSpecialAttackUp2::
 BattleScript_EffectSpecialDefenseUp2::
 	setstatchanger STAT_SPDEF, 2, FALSE
 	goto BattleScript_EffectStatUp
+	
+BattleScript_EffectAccuracyUp2:
+	setstatchanger STAT_ACC, 2, FALSE
+	goto BattleScript_EffectStatUp
+
+BattleScript_EffectEvasionUp2:
+	setstatchanger STAT_EVASION, 2, FALSE
+	goto BattleScript_EffectStatUp
 
 BattleScript_EffectTransform::
 	attackcanceler
@@ -1095,20 +1191,32 @@ BattleScript_EffectTransform::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectAttackDown2::
+BattleScript_EffectAttackDown2:
 	setstatchanger STAT_ATK, 2, TRUE
 	goto BattleScript_EffectStatDown
 
-BattleScript_EffectDefenseDown2::
+BattleScript_EffectDefenseDown2:
 	setstatchanger STAT_DEF, 2, TRUE
 	goto BattleScript_EffectStatDown
 
-BattleScript_EffectSpeedDown2::
+BattleScript_EffectSpeedDown2:
 	setstatchanger STAT_SPEED, 2, TRUE
 	goto BattleScript_EffectStatDown
 
-BattleScript_EffectSpecialDefenseDown2::
+BattleScript_EffectSpecialDefenseDown2:
 	setstatchanger STAT_SPDEF, 2, TRUE
+	goto BattleScript_EffectStatDown
+	
+BattleScript_EffectSpecialAttackDown2:
+	setstatchanger STAT_SPATK, 2, TRUE
+	goto BattleScript_EffectStatDown
+
+BattleScript_EffectAccuracyDown2:
+	setstatchanger STAT_ACC, 2, TRUE
+	goto BattleScript_EffectStatDown
+
+BattleScript_EffectEvasionDown2:
+	setstatchanger STAT_EVASION, 2, TRUE
 	goto BattleScript_EffectStatDown
 
 BattleScript_EffectReflect::
@@ -2471,7 +2579,7 @@ BattleScript_EffectWish::
 	waitanimation
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectAssist::
+BattleScript_EffectAssist:
 	attackcanceler
 	attackstring
 	asistattackselect BattleScript_ButItFailedPpReduce
@@ -2481,22 +2589,22 @@ BattleScript_EffectAssist::
 	setbyte sB_ANIM_TARGETS_HIT, 0x0
 	jumptorandomattack TRUE
 
-BattleScript_EffectIngrain::
+BattleScript_EffectIngrain:
 	attackcanceler
 	attackstring
 	ppreduce
-	trysetroots BattleScript_ButItFailed
+	setuserstatus3 STATUS3_ROOTED BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNPLANTEDROOTS
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSuperpower::
+BattleScript_EffectSuperpower:
 	setmoveeffect MOVE_EFFECT_ATK_DEF_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
-BattleScript_EffectMagicCoat::
+BattleScript_EffectMagicCoat:
 	attackcanceler
 	trysetmagiccoat BattleScript_ButItFailedAtkStringPpReduce
 	attackstring
@@ -2615,7 +2723,7 @@ BattleScript_EffectImprison::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRefresh::
+BattleScript_EffectRefresh:
 	attackcanceler
 	attackstring
 	ppreduce
@@ -2627,18 +2735,18 @@ BattleScript_EffectRefresh::
 	updatestatusicon BS_ATTACKER
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectGrudge::
+BattleScript_EffectGrudge:
 	attackcanceler
 	attackstring
 	ppreduce
-	trysetgrudge BattleScript_ButItFailed
+	setuserstatus3 STATUS3_GRUDGE BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNWANTSGRUDGE
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSnatch::
+BattleScript_EffectSnatch:
 	attackcanceler
 	trysetsnatch BattleScript_ButItFailedAtkStringPpReduce
 	attackstring

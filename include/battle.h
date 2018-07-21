@@ -253,8 +253,6 @@ struct SideTimer
     /*0x09*/ u8 followmeTarget;
     /*0x0A*/ u8 spikesAmount;
     u8 toxicSpikesAmount;
-    bool8 stealthRock;
-    bool8 stickyWeb;
     u8 auroraVeilTimer;
     u8 auroraVeilBattlerId;
     u8 tailwindTimer;
