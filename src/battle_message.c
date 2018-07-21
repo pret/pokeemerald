@@ -575,19 +575,19 @@ static const u8 sText_ReflectTargetsType[] =_("{B_ATK_NAME_WITH_PREFIX}’s type
 static const u8 sText_TransferHeldItem[] =_("{B_DEF_NAME_WITH_PREFIX} recieved {B_LAST_ITEM}\nfrom {B_ATK_NAME_WITH_PREFIX}");
 
 // These strings are currently placeholders, to be fixed.
-static const u8 sText_EmbargoEnds[] = _("");
-static const u8 sText_MagnetRiseEnds[] = _("");
-static const u8 sText_HealBlockEnds[] = _("");
-static const u8 sText_TelekinesisEnds[] = _("");
-static const u8 sText_TailwindEnds[] = _("");
-static const u8 sText_LuckyChantEnds[] = _("");
-static const u8 sText_TrickRoomEnds[] = _("");
-static const u8 sText_WonderRoomEnds[] = _("");
-static const u8 sText_MagicRoomEnds[] = _("");
-static const u8 sText_MudSportEnds[] = _("");
-static const u8 sText_WaterSportEnds[] = _("");
-static const u8 sText_GravityEnds[] = _("");
-static const u8 sText_AquaRingHeal[] = _("");
+static const u8 sText_EmbargoEnds[] = _("{B_DEF_NAME_WITH_PREFIX}can\nuse items again!");
+static const u8 sText_MagnetRiseEnds[] = _("{B_ATK_NAME_WITH_PREFIX}’s electromagnetism\nwore off!");
+static const u8 sText_HealBlockEnds[] = _("{B_DEF_NAME_WITH_PREFIX}’s Heal Block\nwore off!");
+static const u8 sText_TelekinesisEnds[] = _("{B_DEF_NAME_WITH_PREFIX} was freed\nfrom the telekinesis!");
+static const u8 sText_TailwindEnds[] = _("The tailwind petered out!");
+static const u8 sText_LuckyChantEnds[] = _("Lucky Chant wore off!");
+static const u8 sText_TrickRoomEnds[] = _("The twisted dimensions returned to\nnormal!");
+static const u8 sText_WonderRoomEnds[] = _("Wonder Room wore off, and\nDefense and Sp. Def stats returned to normal!");
+static const u8 sText_MagicRoomEnds[] = _("Magic Room wore off, and\nheld items’ effects returned to normal!");
+static const u8 sText_MudSportEnds[] = _("The effects of Mud Sport have faded.");
+static const u8 sText_WaterSportEnds[] = _("The effects of Water Sport have faded.");
+static const u8 sText_GravityEnds[] = _("Gravity returned to normal!");
+static const u8 sText_AquaRingHeal[] = _("Aqua Ring restored\n{B_ATK_NAME_WITH_PREFIX}’s HP!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
