@@ -76,6 +76,7 @@ enum
     LIST_ITEM_MOVES,
     LIST_ITEM_ABILITY,
     LIST_ITEM_HELD_ITEM,
+    LIST_ITEM_PP,
     LIST_ITEM_TYPES,
     LIST_ITEM_STATS,
     LIST_ITEM_STAT_STAGES,
@@ -171,6 +172,7 @@ static const u8 sText_AquaRing[] = _("Aqua Ring");
 static const u8 sText_AuroraVeil[] = _("Aurora Veil");
 static const u8 sText_LuckyChant[] = _("Lucky Chant");
 static const u8 sText_Tailwind[] = _("Tailwind");
+static const u8 sText_PP[] = _("PP");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -242,6 +244,7 @@ static const struct ListMenuItem sMainListItems[] =
     {sText_Moves, LIST_ITEM_MOVES},
     {sText_Ability, LIST_ITEM_ABILITY},
     {sText_HeldItem, LIST_ITEM_HELD_ITEM},
+    {sText_PP, LIST_ITEM_PP},
     {sText_Types, LIST_ITEM_TYPES},
     {sText_Stats, LIST_ITEM_STATS},
     {sText_StatStages, LIST_ITEM_STAT_STAGES},
@@ -463,6 +466,7 @@ static const u8 sBitsToMaxDigit[] =
 static const bool8 sHasChangeableEntries[LIST_ITEM_COUNT] =
 {
     [LIST_ITEM_MOVES] = TRUE,
+    [LIST_ITEM_PP] = TRUE,
     [LIST_ITEM_ABILITY] = TRUE,
     [LIST_ITEM_TYPES] = TRUE,
     [LIST_ITEM_HELD_ITEM] = TRUE,
@@ -779,6 +783,7 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
         itemsCount = 2;
         break;
     case LIST_ITEM_MOVES:
+    case LIST_ITEM_PP:
         itemsCount = 4;
         break;
     case LIST_ITEM_STATS:
@@ -865,6 +870,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
     switch (data->currentMainListItemId)
     {
     case LIST_ITEM_MOVES:
+    case LIST_ITEM_PP:
         for (i = 0; i < 4; i++)
         {
             PadString(gMoveNames[gBattleMons[data->battlerId].moves[i]], text);
@@ -1133,6 +1139,14 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId];
         data->modifyArrows.typeOfVal = VAL_U16;
         data->modifyArrows.currValue = gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId];
+        break;
+    case LIST_ITEM_PP:
+        data->modifyArrows.minValue = 0;
+        data->modifyArrows.maxValue = CalculatePPWithBonus(gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId], gBattleMons[data->battlerId].ppBonuses, data->currentSecondaryListItemId);
+        data->modifyArrows.maxDigits = 2;
+        data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].pp[data->currentSecondaryListItemId];
+        data->modifyArrows.typeOfVal = VAL_U8;
+        data->modifyArrows.currValue = gBattleMons[data->battlerId].pp[data->currentSecondaryListItemId];
         break;
     case LIST_ITEM_HELD_ITEM:
         data->modifyArrows.minValue = 0;
