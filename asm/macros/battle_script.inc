@@ -1223,6 +1223,16 @@
 	.4byte \ptr
 	.endm
 	
+	.macro swapstatstages stat
+	.byte 0xfa
+	.byte \stat
+	.endm
+	
+	.macro averagestats stat
+	.byte 0xfb
+	.byte \stat
+	.endm
+	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves bank
 	various \bank, VARIOUS_CANCEL_MULTI_TURN_MOVES

@@ -265,6 +265,81 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectGastroAcid
 	.4byte BattleScript_EffectStealthRock
 	.4byte BattleScript_EffectTelekinesis
+	.4byte BattleScript_EffectPowerSwap
+	.4byte BattleScript_EffectGuardSwap
+	.4byte BattleScript_EffectHeartSwap
+	.4byte BattleScript_EffectPowerSplit
+	.4byte BattleScript_EffectGuardSplit
+	
+BattleScript_EffectPowerSplit:
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	averagestats STAT_ATK
+	averagestats STAT_SPATK
+	attackanimation
+	waitanimation
+	printstring STRINGID_SHAREDITSPOWER
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectGuardSplit:
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	averagestats STAT_DEF
+	averagestats STAT_SPDEF
+	attackanimation
+	waitanimation
+	printstring STRINGID_SHAREDITSGUARD
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectHeartSwap:
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	swapstatstages STAT_ATK
+	swapstatstages STAT_DEF
+	swapstatstages STAT_SPEED
+	swapstatstages STAT_SPATK
+	swapstatstages STAT_SPDEF
+	swapstatstages STAT_EVASION
+	swapstatstages STAT_ACC
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSWITCHEDSTATCHANGES
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectPowerSwap:
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	swapstatstages STAT_ATK
+	swapstatstages STAT_SPATK
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSWITCHEDSTATCHANGES
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectGuardSwap:
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	swapstatstages STAT_DEF
+	swapstatstages STAT_SPDEF
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSWITCHEDSTATCHANGES
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectTelekinesis:
 	attackcanceler
@@ -2700,7 +2775,7 @@ BattleScript_EffectEndeavor::
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
-BattleScript_EffectSkillSwap::
+BattleScript_EffectSkillSwap:
 	attackcanceler
 	attackstring
 	ppreduce

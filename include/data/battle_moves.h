@@ -5656,7 +5656,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_POWER_SPLIT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_POWER_SPLIT,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,

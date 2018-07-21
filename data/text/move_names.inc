@@ -467,3 +467,96 @@ gMoveNames:: @ 831977C
 	.string "Seed Flare$", 13
 	.string "Ominous Wind$", 13
 	.string "Shadow Force$", 13
+	.string "Hone Claws$", 13
+	.string "Wide Guard$", 13
+	.string "Guard Split$", 13
+	.string "Power Split$", 13
+	.string "Wonder Room$", 13
+	.string "Psyshock$", 13
+	.string "Venoshock$", 13
+	.string "Autotomize$", 13
+	.string "Rage Powder$", 13
+	.string "Telekinesis$", 13
+	.string "Magic Room$", 13
+	.string "Smack Down$", 13
+	.string "Storm Throw$", 13
+	.string "Flame Burst$", 13
+	.string "Sludge Wave$", 13
+	.string "Quiver Dance$", 13
+	.string "Heavy Slam$", 13
+	.string "Synchronoise$", 13
+	.string "Electro Ball$", 13
+	.string "Soak$", 13
+	.string "Flame Charge$", 13
+	.string "Coil$", 13
+	.string "Low Sweep$", 13
+	.string "Acid Spray$", 13
+	.string "Foul Play$", 13
+	.string "Simple Beam$", 13
+	.string "Entrainment$", 13
+	.string "After You$", 13
+	.string "Round$", 13
+	.string "Echoed Voice$", 13
+	.string "Chip Away$", 13
+	.string "Clear Smog$", 13
+	.string "Stored Power$", 13
+	.string "Quick Guard$", 13
+	.string "Ally Switch$", 13
+	.string "Scald$", 13
+	.string "Shell Smash$", 13
+	.string "Heal Pulse$", 13
+	.string "Hex$", 13
+	.string "Sky Drop$", 13
+	.string "Shift Gear$", 13
+	.string "Circle Throw$", 13
+	.string "Incinerate$", 13
+	.string "Quash$", 13
+	.string "Acrobatics$", 13
+	.string "Reflect Type$", 13
+	.string "Retaliate$", 13
+	.string "Final Gambit$", 13
+	.string "Bestow$", 13
+	.string "Inferno$", 13
+	.string "Water Pledge$", 13
+	.string "Fire Pledge$", 13
+	.string "Grass Pledge$", 13
+	.string "Volt Switch$", 13
+	.string "Struggle Bug$", 13
+	.string "Bulldoze$", 13
+	.string "Frost Breath$", 13
+	.string "Dragon Tail$", 13
+	.string "Work Up$", 13
+	.string "Electroweb$", 13
+	.string "Wild Charge$", 13
+	.string "Drill Run$", 13
+	.string "Dual Chop$", 13
+	.string "Heart Stamp$", 13
+	.string "Horn Leech$", 13
+	.string "Sacred Sword$", 13
+	.string "Razor Shell$", 13
+	.string "Heat Crash$", 13
+	.string "Leaf Tornado$", 13
+	.string "Steamroller$", 13
+	.string "Cotton Guard$", 13
+	.string "Night Daze$", 13
+	.string "Psystrike$", 13
+	.string "Tail Slap$", 13
+	.string "Hurricane$", 13
+	.string "Head Charge$", 13
+	.string "Gear Grind$", 13
+	.string "Searing Shot$", 13
+	.string "Techno Blast$", 13
+	.string "Relic Song$", 13
+	.string "Secret Sword$", 13
+	.string "Glaciate$", 13
+	.string "Bolt Strike$", 13
+	.string "Blue Flare$", 13
+	.string "Fiery Dance$", 13
+	.string "Freeze Shock$", 13
+	.string "Ice Burn$", 13
+	.string "Snarl$", 13
+	.string "Icicle Crash$", 13
+	.string "V Create$", 13
+	.string "Fusion Flare$", 13
+	.string "Fusion Bolt$", 13
+	.string "Flying Press$", 13

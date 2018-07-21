@@ -341,6 +341,8 @@ static void atkF6_finishaction(void);
 static void atkF7_finishturn(void);
 static void atkF8_trainerslideout(void);
 static void atkF9_settelekinesis(void);
+static void atkFA_swapstatstages(void);
+static void atkFB_averagestats(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -594,6 +596,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF7_finishturn,
     atkF8_trainerslideout,
     atkF9_settelekinesis,
+    atkFA_swapstatstages,
+    atkFB_averagestats,
 };
 
 struct StatFractions
@@ -10246,4 +10250,29 @@ static void atkF9_settelekinesis(void)
         gDisableStructs[gBattlerTarget].telekinesisTimer = 3;
         gBattlescriptCurrInstr += 5;
     }
+}
+
+static void atkFA_swapstatstages(void)
+{
+    u8 statId = T1_READ_8(gBattlescriptCurrInstr + 1);
+    s8 atkStatStage = gBattleMons[gBattlerAttacker].statStages[statId];
+    s8 defStatStage = gBattleMons[gBattlerTarget].statStages[statId];
+
+    gBattleMons[gBattlerAttacker].statStages[statId] = defStatStage;
+    gBattleMons[gBattlerTarget].statStages[statId] = atkStatStage;
+
+    gBattlescriptCurrInstr += 2;
+}
+
+static void atkFB_averagestats(void)
+{
+    u8 statId = T1_READ_8(gBattlescriptCurrInstr + 1);
+    u16 atkStat = *(u16*)((&gBattleMons[gBattlerAttacker].attack) + (statId - 1));
+    u16 defStat = *(u16*)((&gBattleMons[gBattlerTarget].attack) + (statId - 1));
+    u16 average = (atkStat + defStat) / 2;
+
+    *(u16*)((&gBattleMons[gBattlerAttacker].attack) + (statId - 1)) = average;
+    *(u16*)((&gBattleMons[gBattlerTarget].attack) + (statId - 1)) = average;
+
+    gBattlescriptCurrInstr += 2;
 }
