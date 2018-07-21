@@ -304,5 +304,6 @@ extern const u8 BattleScript_PsychicTerrainEnds[];
 extern const u8 BattleScript_MudSportEnds[];
 extern const u8 BattleScript_WaterSportEnds[];
 extern const u8 BattleScript_SturdiedMsg[];
+extern const u8 BattleScript_GravityEnds[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

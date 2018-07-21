@@ -228,6 +228,96 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectCalmMind
 	.4byte BattleScript_EffectDragonDance
 	.4byte BattleScript_EffectCamouflage
+	.4byte BattleScript_EffectPledge
+	.4byte BattleScript_EffectFling
+	.4byte BattleScript_EffectNaturalGift
+	.4byte BattleScript_EffectWakeUpSlap
+	.4byte BattleScript_EffectWringOut
+	.4byte BattleScript_EffectHex
+	.4byte BattleScript_EffectAssurance
+	.4byte BattleScript_EffectTrump_card
+	.4byte BattleScript_EffectAcrobatics
+	.4byte BattleScript_EffectHeat_crash
+	.4byte BattleScript_EffectPunishment
+	.4byte BattleScript_EffectStoredPower
+	.4byte BattleScript_EffectElectroBall
+	.4byte BattleScript_EffectGyroBall
+	.4byte BattleScript_EffectEchoedVoice
+	.4byte BattleScript_EffectPayback
+	.4byte BattleScript_EffectRound
+	.4byte BattleScript_EffectBrine
+	.4byte BattleScript_EffectVenoshock
+	.4byte BattleScript_EffectRetalitate
+	.4byte BattleScript_EffectBulldoze
+	.4byte BattleScript_EffectFoulPlay
+	.4byte BattleScript_EffectPsyshock
+	.4byte BattleScript_EffectRoost
+	.4byte BattleScript_EffectGravity
+	.4byte BattleScript_EffectMircleEye
+	.4byte BattleScript_EffectTailwind
+	.4byte BattleScript_EffectEmbargo
+	.4byte BattleScript_EffectAquaRing
+	
+BattleScript_EffectAquaRing:
+	attackcanceler
+	attackstring
+	ppreduce
+	setaquaring BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSURROUNDEDWITHVEILOFWATER
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectEmbargo:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	setembargo BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNIDENTIFIED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectTailwind:
+	attackcanceler
+	attackstring
+	ppreduce
+	settailwind BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_TAILWINDBLEW
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectMircleEye:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	setmiracleeye BattleScript_ButItFailed
+	goto BattleScript_IdentifiedFoe
+	
+BattleScript_EffectGravity:
+	attackcanceler
+	attackstring
+	ppreduce
+	setgravity BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_GRAVITYINTENSIFIED 
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectRoost:
+	attackcanceler
+	attackstring
+	ppreduce
+	tryhealhalfhealth BattleScript_AlreadyAtFullHp, BS_TARGET
+	setroost
+	goto BattleScript_PresentHealTarget
 
 BattleScript_EffectSpeedUp:
 BattleScript_EffectSpecialDefenseUp:
@@ -261,6 +351,29 @@ BattleScript_EffectRevenge:
 BattleScript_EffectReturn:
 BattleScript_EffectFrustration:
 BattleScript_EffectEruption:
+BattleScript_EffectPledge:
+BattleScript_EffectFling:
+BattleScript_EffectNaturalGift:
+BattleScript_EffectWakeUpSlap:
+BattleScript_EffectWringOut:
+BattleScript_EffectHex:
+BattleScript_EffectAssurance:
+BattleScript_EffectTrump_card:
+BattleScript_EffectAcrobatics:
+BattleScript_EffectHeat_crash:
+BattleScript_EffectPunishment:
+BattleScript_EffectStoredPower:
+BattleScript_EffectElectroBall:
+BattleScript_EffectGyroBall:
+BattleScript_EffectEchoedVoice:
+BattleScript_EffectPayback:
+BattleScript_EffectRound:
+BattleScript_EffectBrine:
+BattleScript_EffectVenoshock:
+BattleScript_EffectRetalitate:
+BattleScript_EffectBulldoze:
+BattleScript_EffectFoulPlay:
+BattleScript_EffectPsyshock:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
@@ -1581,6 +1694,7 @@ BattleScript_EffectForesight::
 	attackstring
 	ppreduce
 	setforesight
+BattleScript_IdentifiedFoe:
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNIDENTIFIED
@@ -2086,7 +2200,6 @@ BattleScript_EffectUproar::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_UproarHit
 	ppreduce
 BattleScript_UproarHit::
-	nop
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectStockpile::
@@ -3281,6 +3394,11 @@ BattleScript_MudSportEnds::
 	
 BattleScript_WaterSportEnds::
 	printstring STRINGID_WATERSPORTENDS
+	waitmessage 0x40
+	end2
+	
+BattleScript_GravityEnds::
+	printstring STRINGID_GRAVITYENDS
 	waitmessage 0x40
 	end2
 

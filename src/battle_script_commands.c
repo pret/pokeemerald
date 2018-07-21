@@ -157,7 +157,7 @@ static void atk3E_end2(void);
 static void atk3F_end3(void);
 static void atk40_jumpifaffectedbyprotect(void);
 static void atk41_call(void);
-static void atk42_nop(void);
+static void atk42_setroost(void);
 static void atk43_jumpifabilitypresent(void);
 static void atk44_endselectionscript(void);
 static void atk45_playanimation(void);
@@ -196,7 +196,7 @@ static void atk65_status2animation(void);
 static void atk66_chosenstatusanimation(void);
 static void atk67_yesnobox(void);
 static void atk68_cancelallactions(void);
-static void atk69_nop(void);
+static void atk69_setgravity(void);
 static void atk6A_removeitem(void);
 static void atk6B_atknameinbuff1(void);
 static void atk6C_drawlvlupbox(void);
@@ -222,7 +222,7 @@ static void atk7F_setseeded(void);
 static void atk80_manipulatedamage(void);
 static void atk81_trysetrest(void);
 static void atk82_jumpifnotfirstturn(void);
-static void atk83_nop(void);
+static void atk83_setmiracleeye(void);
 static void atk84_jumpifcantmakeasleep(void);
 static void atk85_stockpile(void);
 static void atk86_stockpiletobasedamage(void);
@@ -263,7 +263,7 @@ static void atkA8_copymovepermanently(void);
 static void atkA9_trychoosesleeptalkmove(void);
 static void atkAA_setdestinybond(void);
 static void atkAB_trysetdestinybondtohappen(void);
-static void atkAC_nop(void);
+static void atkAC_settailwind(void);
 static void atkAD_tryspiteppreduce(void);
 static void atkAE_healpartystatus(void);
 static void atkAF_cursetarget(void);
@@ -273,7 +273,7 @@ static void atkB2_trysetperishsong(void);
 static void atkB3_handlerollout(void);
 static void atkB4_jumpifconfusedandstatmaxed(void);
 static void atkB5_handlefurycutter(void);
-static void atkB6_nop(void);
+static void atkB6_setembargo(void);
 static void atkB7_presentdamagecalculation(void);
 static void atkB8_setsafeguard(void);
 static void atkB9_magnitudedamagecalculation(void);
@@ -305,7 +305,7 @@ static void atkD2_tryswapitems(void);
 static void atkD3_trycopyability(void);
 static void atkD4_trywish(void);
 static void atkD5_trysetroots(void);
-static void atkD6_nop(void);
+static void atkD6_setaquaring(void);
 static void atkD7_setyawn(void);
 static void atkD8_setdamagetohealthdifference(void);
 static void atkD9_nop(void);
@@ -409,7 +409,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk3F_end3,
     atk40_jumpifaffectedbyprotect,
     atk41_call,
-    atk42_nop,
+    atk42_setroost,
     atk43_jumpifabilitypresent,
     atk44_endselectionscript,
     atk45_playanimation,
@@ -448,7 +448,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk66_chosenstatusanimation,
     atk67_yesnobox,
     atk68_cancelallactions,
-    atk69_nop,
+    atk69_setgravity,
     atk6A_removeitem,
     atk6B_atknameinbuff1,
     atk6C_drawlvlupbox,
@@ -474,7 +474,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk80_manipulatedamage,
     atk81_trysetrest,
     atk82_jumpifnotfirstturn,
-    atk83_nop,
+    atk83_setmiracleeye,
     atk84_jumpifcantmakeasleep,
     atk85_stockpile,
     atk86_stockpiletobasedamage,
@@ -515,7 +515,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkA9_trychoosesleeptalkmove,
     atkAA_setdestinybond,
     atkAB_trysetdestinybondtohappen,
-    atkAC_nop,
+    atkAC_settailwind,
     atkAD_tryspiteppreduce,
     atkAE_healpartystatus,
     atkAF_cursetarget,
@@ -525,7 +525,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkB3_handlerollout,
     atkB4_jumpifconfusedandstatmaxed,
     atkB5_handlefurycutter,
-    atkB6_nop,
+    atkB6_setembargo,
     atkB7_presentdamagecalculation,
     atkB8_setsafeguard,
     atkB9_magnitudedamagecalculation,
@@ -557,7 +557,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkD3_trycopyability,
     atkD4_trywish,
     atkD5_trysetroots,
-    atkD6_nop,
+    atkD6_setaquaring,
     atkD7_setyawn,
     atkD8_setdamagetohealthdifference,
     atkD9_nop,
@@ -3975,8 +3975,36 @@ static void atk41_call(void)
     gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
-static void atk42_nop(void)
+static void atk42_setroost(void)
 {
+    gBattleResources->flags->flags[gBattlerAttacker] |= RESOURCE_FLAG_ROOST;
+
+    // Pure flying type.
+    if (gBattleMons[gBattlerAttacker].type1 == TYPE_FLYING && gBattleMons[gBattlerAttacker].type2 == TYPE_FLYING)
+    {
+        gBattleStruct->roostTypes[gBattlerAttacker][0] = TYPE_FLYING;
+        gBattleStruct->roostTypes[gBattlerAttacker][1] = TYPE_FLYING;
+        gBattleStruct->roostTypes[gBattlerAttacker][2] = TYPE_FLYING;
+        SET_BATTLER_TYPE(gBattlerAttacker, TYPE_NORMAL);
+    }
+    // Dual Type with Flying Type.
+    else if ((gBattleMons[gBattlerAttacker].type1 == TYPE_FLYING && gBattleMons[gBattlerAttacker].type2 != TYPE_FLYING)
+           ||(gBattleMons[gBattlerAttacker].type2 == TYPE_FLYING && gBattleMons[gBattlerAttacker].type1 != TYPE_FLYING))
+    {
+        gBattleStruct->roostTypes[gBattlerAttacker][0] = gBattleMons[gBattlerAttacker].type1;
+        gBattleStruct->roostTypes[gBattlerAttacker][1] = gBattleMons[gBattlerAttacker].type2;
+        if (gBattleMons[gBattlerAttacker].type1 == TYPE_FLYING)
+            gBattleMons[gBattlerAttacker].type1 = TYPE_MYSTERY;
+        if (gBattleMons[gBattlerAttacker].type2 == TYPE_FLYING)
+            gBattleMons[gBattlerAttacker].type2 = TYPE_MYSTERY;
+    }
+    // Non-flying type.
+    else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FLYING))
+    {
+        gBattleStruct->roostTypes[gBattlerAttacker][0] = gBattleMons[gBattlerAttacker].type1;
+        gBattleStruct->roostTypes[gBattlerAttacker][1] = gBattleMons[gBattlerAttacker].type2;
+    }
+
     gBattlescriptCurrInstr++;
 }
 
@@ -5849,9 +5877,24 @@ static void atk68_cancelallactions(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk69_nop(void)
+static void atk69_setgravity(void)
 {
-    gBattlescriptCurrInstr++;
+    if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+    else
+    {
+        u32 i;
+
+        gFieldStatuses |= STATUS_FIELD_GRAVITY;
+        gFieldTimers.gravityTimer = 5;
+
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+            gStatuses3[i] &= ~(STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS | STATUS3_ON_AIR);
+
+        gBattlescriptCurrInstr += 5;
+    }
 }
 
 static void atk6A_removeitem(void)
@@ -6728,9 +6771,17 @@ static void atk82_jumpifnotfirstturn(void)
         gBattlescriptCurrInstr = failJump;
 }
 
-static void atk83_nop(void)
+static void atk83_setmiracleeye(void)
 {
-    gBattlescriptCurrInstr++;
+    if (!(gStatuses3[gBattlerTarget] & STATUS3_MIRACLE_EYED))
+    {
+        gStatuses3[gBattlerTarget] |= STATUS3_MIRACLE_EYED;
+        gBattlescriptCurrInstr += 5;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
 }
 
 bool8 UproarWakeUpCheck(u8 battlerId)
@@ -8175,9 +8226,21 @@ static void atkAB_trysetdestinybondtohappen(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkAC_nop(void)
+static void atkAC_settailwind(void)
 {
-    gBattlescriptCurrInstr++;
+    u8 side = GetBattlerSide(gBattlerAttacker);
+
+    if (!(gSideStatuses[side] & SIDE_STATUS_TAILWIND))
+    {
+        gSideStatuses[side] |= SIDE_STATUS_TAILWIND;
+        gSideTimers[side].tailwindBattlerId = gBattlerAttacker;
+        gSideTimers[side].tailwindTimer = 3;
+        gBattlescriptCurrInstr += 5;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
 }
 
 static void atkAD_tryspiteppreduce(void)
@@ -8445,9 +8508,18 @@ static void atkB5_handlefurycutter(void)
     }
 }
 
-static void atkB6_nop(void)
+static void atkB6_setembargo(void)
 {
-    gBattlescriptCurrInstr++;
+    if (gStatuses3[gBattlerTarget] & STATUS3_EMBARGO)
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+    else
+    {
+        gStatuses3[gBattlerTarget] |= STATUS3_EMBARGO;
+        gDisableStructs[gBattlerTarget].embargoTimer = 5;
+        gBattlescriptCurrInstr += 5;
+    }
 }
 
 static void atkB7_presentdamagecalculation(void)
@@ -9147,9 +9219,17 @@ static void atkD5_trysetroots(void) // ingrain
     }
 }
 
-static void atkD6_nop(void)
+static void atkD6_setaquaring(void)
 {
-    gBattlescriptCurrInstr++;
+    if (gStatuses3[gBattlerAttacker] & STATUS3_AQUA_RING)
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+    else
+    {
+        gStatuses3[gBattlerAttacker] |= STATUS3_AQUA_RING;
+        gBattlescriptCurrInstr += 5;
+    }
 }
 
 static void atkD7_setyawn(void)

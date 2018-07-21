@@ -758,6 +758,7 @@ enum
 	ENDTURN_SANDSTORM,
 	ENDTURN_SUN,
 	ENDTURN_HAIL,
+	ENDTURN_GRAVITY,
 	ENDTURN_WATER_SPORT,
 	ENDTURN_MUD_SPORT,
 	ENDTURN_TRICK_ROOM,
@@ -1163,6 +1164,15 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~(STATUS_FIELD_MUDSPORT);
                 BattleScriptExecute(BattleScript_MudSportEnds);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_GRAVITY:
+            if (gFieldStatuses & STATUS_FIELD_GRAVITY && --gFieldTimers.gravityTimer == 0)
+            {
+                gFieldStatuses &= ~(STATUS_FIELD_GRAVITY);
+                BattleScriptExecute(BattleScript_GravityEnds);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;

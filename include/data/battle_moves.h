@@ -4264,7 +4264,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ROOST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ROOST,
 		.power = 0,
 		.type = TYPE_FLYING,
 		.accuracy = 0,
@@ -4276,7 +4276,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GRAVITY
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_GRAVITY,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -4288,7 +4288,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_MIRACLE_EYE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_MIRACLE_EYE,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -4396,7 +4396,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_TAILWIND
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_TAILWIND,
 		.power = 0,
 		.type = TYPE_FLYING,
 		.accuracy = 0,
@@ -4480,7 +4480,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_EMBARGO
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_EMBARGO,
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4708,7 +4708,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_AQUA_RING
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_AQUA_RING,
 		.power = 0,
 		.type = TYPE_WATER,
 		.accuracy = 0,

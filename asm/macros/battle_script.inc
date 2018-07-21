@@ -356,7 +356,7 @@
 	.4byte \param0
 	.endm
 
-	.macro nop_42
+	.macro setroost
 	.byte 0x42
 	.endm
 
@@ -558,8 +558,9 @@
 	.byte 0x68
 	.endm
 
-	.macro nop_69
+	.macro setgravity ptr
 	.byte 0x69
+	.word \ptr
 	.endm
 
 	.macro removeitem bank
@@ -676,8 +677,9 @@
 	.4byte \param0
 	.endm
 
-	.macro nop
+	.macro setmiracleeye ptr
 	.byte 0x83
+	.4byte \ptr
 	.endm
 
 	.macro jumpifcantmakeasleep param0
@@ -860,8 +862,9 @@
 	.byte 0xab
 	.endm
 
-	.macro nop_AC
+	.macro settailwind ptr
 	.byte 0xac
+	.word \ptr
 	.endm
 
 	.macro tryspiteppreduce param0
@@ -906,8 +909,9 @@
 	.byte 0xb5
 	.endm
 
-	.macro nop_B6
+	.macro setembargo ptr
 	.byte 0xb6
+	.word \ptr
 	.endm
 
 	.macro presentdamagecalculation
@@ -1052,8 +1056,9 @@
 	.4byte \param0
 	.endm
 
-	.macro nop_D6
+	.macro setaquaring ptr
 	.byte 0xd6
+	.word \ptr
 	.endm
 
 	.macro setyawn param0
