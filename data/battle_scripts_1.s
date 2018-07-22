@@ -4645,6 +4645,11 @@ BattleScript_AttackerAbilityStatRaise::
 BattleScript_AttackerAbilityStatRaiseEnd3::
 	call BattleScript_AttackerAbilityStatRaise
 	end3
+	
+BattleScript_SwitchInAbilityMsg::
+	printfromtable gSwitchInAbilityStringIds
+	waitmessage 0x40
+	end3
 
 BattleScript_RoughSkinActivates::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000

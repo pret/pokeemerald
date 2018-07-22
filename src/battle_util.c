@@ -2380,7 +2380,53 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
             }
             break;
+        case ABILITY_MOLD_BREAKER:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_TERAVOLT:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_TURBOBLAZE:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_SLOW_START:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_UNNERVE:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
         case ABILITY_DOWNLOAD:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
                 u8 statId;
                 u32 opposingBattler = BATTLE_OPPOSITE(battler);
@@ -2406,6 +2452,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     statId = STAT_SPATK;
                 else
                     statId = STAT_ATK;
+
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
 
                 if (gBattleMons[battler].statStages[statId] != 0xC)
                 {
@@ -2469,18 +2517,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             break;
         case ABILITY_CLOUD_NINE:
         case ABILITY_AIR_LOCK:
+            // that's a weird choice for a variable, why not use i or battler?
+            for (target1 = 0; target1 < gBattlersCount; target1++)
             {
-                // that's a weird choice for a variable, why not use i or battler?
-                for (target1 = 0; target1 < gBattlersCount; target1++)
+                effect = CastformDataTypeChange(target1);
+                if (effect != 0)
                 {
-                    effect = CastformDataTypeChange(target1);
-                    if (effect != 0)
-                    {
-                        BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                        gBattleScripting.battler = target1;
-                        *(&gBattleStruct->formToChangeInto) = effect - 1;
-                        break;
-                    }
+                    BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
+                    gBattleScripting.battler = target1;
+                    *(&gBattleStruct->formToChangeInto) = effect - 1;
+                    break;
                 }
             }
             break;

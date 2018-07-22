@@ -231,6 +231,7 @@ struct SpecialStatus
     u8 focusSashed:1;
     u8 sturdied:1;
     u8 stormDrainRedirected:1;
+    u8 switchInAbilityDone:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;

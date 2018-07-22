@@ -598,6 +598,24 @@ static const u8 sText_GrassyTerrainEnds[] = _("");
 static const u8 sText_AngryPointActivates[] = _("");
 static const u8 sText_PoisonHealHpUp[] = _("");
 static const u8 sText_BadDreamsDmg[] = _("");
+static const u8 sText_MoldBreakerEnters[] = _("");
+static const u8 sText_TeravoltEnters[] = _("");
+static const u8 sText_TurboblazeEnters[] = _("");
+static const u8 sText_SlowStartEnters[] = _("");
+static const u8 sText_SlowStartEnd[] = _("");
+static const u8 sText_SolarPowerHpDrop[] = _("");
+static const u8 sText_AftermathDmg[] = _("");
+static const u8 sText_AnticipationActivates[] = _("");
+static const u8 sText_ForewarnActivates[] = _("");
+static const u8 sText_IceBodyHpGain[] = _("");
+static const u8 sText_SnowWarningHail[] = _("");
+static const u8 sText_FriskActivates[] = _("");
+static const u8 sText_UnnerveEnters[] = _("");
+static const u8 sText_HarvestBerry[] = _("");
+static const u8 sText_MoxieAtkRise[] = _("");
+static const u8 sText_MagicBounceActivates[] = _("");
+static const u8 sText_ProteanTypeChange[] = _("");
+static const u8 sText_SymbiosisItemPass[] = _("");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1045,6 +1063,29 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_AttackerAbilityRaisedStat, // 452
     sText_PoisonHealHpUp, // 453
     sText_BadDreamsDmg, // 454
+    sText_MoldBreakerEnters,
+    sText_TeravoltEnters,
+    sText_TurboblazeEnters,
+    sText_SlowStartEnters,
+    sText_SlowStartEnd,
+    sText_SolarPowerHpDrop,
+    sText_AftermathDmg,
+    sText_AnticipationActivates,
+    sText_ForewarnActivates,
+    sText_IceBodyHpGain,
+    sText_SnowWarningHail,
+    sText_FriskActivates,
+    sText_UnnerveEnters,
+    sText_HarvestBerry,
+    sText_MoxieAtkRise,
+    sText_MagicBounceActivates,
+    sText_ProteanTypeChange,
+    sText_SymbiosisItemPass,
+};
+
+const u16 gSwitchInAbilityStringIds[] =
+{
+    STRINGID_MOLDBREAKERENTERS, STRINGID_TERAVOLTENTERS, STRINGID_TURBOBLAZEENTERS, STRINGID_SLOWSTARTENTERS, STRINGID_UNNERVEENTERS
 };
 
 const u16 gMissStringIds[] =
