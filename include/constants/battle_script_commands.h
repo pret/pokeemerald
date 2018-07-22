@@ -79,6 +79,7 @@
 #define ATK80_DMG_CHANGE_SIGN                               0
 #define ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP     1
 #define ATK80_DMG_DOUBLED                                   2
+#define ATK80_1_8_TARGET_HP                                 3
 
 // atk4F, a flag used for the jumpifcantswitch command
 #define ATK4F_DONT_CHECK_STATUSES   0x80

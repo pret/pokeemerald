@@ -344,6 +344,7 @@ static void atkF9_settelekinesis(void);
 static void atkFA_swapstatstages(void);
 static void atkFB_averagestats(void);
 static void atkFC_jumpifoppositegenders(void);
+static void atkFD_trygetbaddreamstarget(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -600,6 +601,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkFA_swapstatstages,
     atkFB_averagestats,
     atkFC_jumpifoppositegenders,
+    atkFD_trygetbaddreamstarget,
 };
 
 struct StatFractions
@@ -6787,6 +6789,11 @@ static void atk80_manipulatedamage(void)
     case ATK80_DMG_DOUBLED:
         gBattleMoveDamage *= 2;
         break;
+    case ATK80_1_8_TARGET_HP:
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 8;
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+        break;
     }
 
     gBattlescriptCurrInstr += 2;
@@ -10335,6 +10342,23 @@ static void atkFC_jumpifoppositegenders(void)
     u32 defGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerTarget].species, gBattleMons[gBattlerTarget].personality);
 
     if ((atkGender == MON_MALE && defGender == MON_FEMALE) || (atkGender == MON_FEMALE && defGender == MON_MALE))
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    else
+        gBattlescriptCurrInstr += 5;
+}
+
+static void atkFD_trygetbaddreamstarget(void)
+{
+    u8 badDreamsMonSide = GetBattlerSide(gBattlerAttacker);
+    for (;gBattlerTarget < gBattlersCount; gBattlerTarget++)
+    {
+        if (GetBattlerSide(gBattlerTarget) == badDreamsMonSide)
+            continue;
+        if (gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP && IsBattlerAlive(gBattlerTarget))
+            break;
+    }
+
+    if (gBattlerTarget >= gBattlersCount)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
         gBattlescriptCurrInstr += 5;

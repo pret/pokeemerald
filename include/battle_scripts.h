@@ -312,5 +312,6 @@ extern const u8 BattleScript_AngryPointActivates[];
 extern const u8 BattleScript_AttackerAbilityStatRaise[];
 extern const u8 BattleScript_AttackerAbilityStatRaiseEnd3[];
 extern const u8 BattleScript_PoisonHealActivates[];
+extern const u8 BattleScript_BadDreamsActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

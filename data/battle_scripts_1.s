@@ -4461,6 +4461,24 @@ BattleScript_DroughtActivates::
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES, NULL
 	call BattleScript_WeatherFormChanges
 	end3
+	
+BattleScript_BadDreamsActivates::
+	setbyte gBattlerTarget, 0
+BattleScript_BadDreamsLoop:
+	trygetbaddreamstarget BattleScript_BadDreamsEnd
+	dmg_1_8_targethp
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	printstring STRINGID_BADDREAMSDMG
+	waitmessage 0x40
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	tryfaintmon BS_TARGET, FALSE, NULL
+	atk24 BattleScript_BadDreamsIncrement
+BattleScript_BadDreamsIncrement:
+	addbyte gBattlerTarget, 1
+	goto BattleScript_BadDreamsLoop
+BattleScript_BadDreamsEnd:
+	end3
 
 BattleScript_TookAttack::
 	attackstring

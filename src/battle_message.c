@@ -597,6 +597,7 @@ static const u8 sText_PsychicTerrainEnds[] = _("");
 static const u8 sText_GrassyTerrainEnds[] = _("");
 static const u8 sText_AngryPointActivates[] = _("");
 static const u8 sText_PoisonHealHpUp[] = _("");
+static const u8 sText_BadDreamsDmg[] = _("");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1043,6 +1044,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_AngryPointActivates, // 451
     sText_AttackerAbilityRaisedStat, // 452
     sText_PoisonHealHpUp, // 453
+    sText_BadDreamsDmg, // 454
 };
 
 const u16 gMissStringIds[] =

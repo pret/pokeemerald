@@ -1238,6 +1238,11 @@
 	.4byte \ptr
 	.endm
 	
+	.macro trygetbaddreamstarget ptr
+	.byte 0xfd
+	.4byte \ptr
+	.endm
+	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves bank
 	various \bank, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1430,4 +1435,8 @@
 	
 	.macro jumpifnotbattletype flags, jumpptr
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
+	.endm
+	
+	.macro dmg_1_8_targethp
+	manipulatedamage ATK80_1_8_TARGET_HP
 	.endm
