@@ -1,15 +1,15 @@
 LilycoveCity_Harbor: @ 8483750
-	.4byte LilycoveCity_Harbor_MapAttributes
+	.4byte Harbor_Layout
 	.4byte LilycoveCity_Harbor_MapEvents
 	.4byte LilycoveCity_Harbor_MapScripts
 	.4byte 0x0
 	.2byte MUS_MINAMO
 	.2byte 88
-	.byte 12
+	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

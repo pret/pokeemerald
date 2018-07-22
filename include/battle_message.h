@@ -1,8 +1,9 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
-// for 0xFD
+#define TEXT_BUFF_ARRAY_COUNT   16
 
+// for 0xFD
 #define B_TXT_BUFF1 0x0
 #define B_TXT_BUFF2 0x1
 #define B_TXT_COPY_VAR_1 0x2
@@ -194,7 +195,7 @@
     textVar[4] = B_BUFF_EOS;                                    \
 }
 
-struct StringInfoBattle
+struct BattleMsgData
 {
     u16 currentMove;
     u16 originallyUsedMove;
@@ -203,25 +204,20 @@ struct StringInfoBattle
     u8 scrActive;
     u8 unk1605E;
     u8 hpScale;
-    u8 StringBank;
+    u8 itemEffectBattler;
     u8 moveType;
-    u8 abilities[4];
-    u8 textBuffs[3][0x10];
+    u8 abilities[MAX_BATTLERS_COUNT];
+    u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
 };
 
 void BufferStringBattle(u16 stringID);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src);
 u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
-void BattleHandleAddTextPrinter(const u8* text, u8 arg1);
+void BattlePutTextOnWindow(const u8* text, u8 arg1);
 void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 
-#define TEXT_BUFF_ARRAY_COUNT   16
-
-extern u8 gDisplayedStringBattle[300];
-extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
-extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
-extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
+extern struct BattleMsgData *gBattleMsgDataPtr;
 
 extern const u8* const gBattleStringsTable[];
 extern const u8* const gStatNamesTable[];
@@ -252,6 +248,13 @@ extern const u8 gText_BattleSwitchWhich4[];
 extern const u8 gText_BattleSwitchWhich5[];
 extern const u8 gText_SafariBalls[];
 extern const u8 gText_SafariBallLeft[];
+extern const u8 gText_Sleep[];
+extern const u8 gText_Poison[];
+extern const u8 gText_Burn[];
+extern const u8 gText_Paralysis[];
+extern const u8 gText_Ice[];
+extern const u8 gText_Confusion[];
+extern const u8 gText_Love[];
 extern const u8 gText_SpaceAndSpace[];
 extern const u8 gText_CommaSpace[];
 extern const u8 gText_Space2[];

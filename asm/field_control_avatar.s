@@ -187,9 +187,9 @@ sub_809C014: @ 809C014
 	ldr r0, =gSpecialVar_LastTalked
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gSelectedMapObject
+	ldr r0, =gSelectedEventObject
 	strb r1, [r0]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r4, sp
@@ -479,13 +479,13 @@ TryGetScriptOnPressingA: @ 809C270
 	adds r7, r4, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl TryGetMapObjectScript
+	bl TryGetEventObjectScript
 	cmp r0, 0
 	bne _0809C2BC
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl TryGetInvisibleMapObjectScript
+	bl TryGetInvisibleEventObjectScript
 	cmp r0, 0
 	bne _0809C2BC
 	adds r0, r6, 0
@@ -547,12 +547,12 @@ _0809C2F0:
 	lsrs r1, 16
 _0809C30E:
 	ldrb r2, [r4, 0x4]
-	bl GetFieldObjectIdByXYZ
+	bl GetEventObjectIdByXYZ
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x10
 	beq _0809C32E
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	lsls r2, r3, 3
 	adds r0, r2, r3
 	lsls r0, 2
@@ -567,7 +567,7 @@ _0809C32E:
 	.pool
 _0809C33C:
 	movs r4, 0
-	ldr r1, =gLinkPlayerMapObjects
+	ldr r1, =gLinkPlayerEventObjects
 _0809C340:
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -580,7 +580,7 @@ _0809C34C:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0809C340
-	ldr r0, =gSelectedMapObject
+	ldr r0, =gSelectedEventObject
 	strb r3, [r0]
 	ldr r1, =gSpecialVar_LastTalked
 	adds r0, r2, r3
@@ -591,7 +591,7 @@ _0809C34C:
 	ldr r0, =gSpecialVar_Facing
 	strh r6, [r0]
 	adds r0, r3, 0
-	bl GetFieldObjectScriptPointerByFieldObjectId
+	bl GetEventObjectScriptPointerByEventObjectId
 _0809C36E:
 	pop {r4-r6}
 	pop {r1}
@@ -599,8 +599,8 @@ _0809C36E:
 	.pool
 	thumb_func_end sub_809C2C8
 
-	thumb_func_start TryGetMapObjectScript
-TryGetMapObjectScript: @ 809C384
+	thumb_func_start TryGetEventObjectScript
+TryGetEventObjectScript: @ 809C384
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -610,12 +610,12 @@ TryGetMapObjectScript: @ 809C384
 	ldrh r0, [r5]
 	ldrh r1, [r5, 0x2]
 	ldrb r2, [r5, 0x4]
-	bl GetFieldObjectIdByXYZ
+	bl GetEventObjectIdByXYZ
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x10
 	beq _0809C3B4
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	lsls r2, r4, 3
 	adds r0, r2, r4
 	lsls r0, 2
@@ -647,12 +647,12 @@ _0809C3B4:
 	lsls r1, 16
 	lsrs r1, 16
 	ldrb r2, [r5, 0x4]
-	bl GetFieldObjectIdByXYZ
+	bl GetEventObjectIdByXYZ
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x10
 	beq _0809C400
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	lsls r2, r4, 3
 	adds r0, r2, r4
 	lsls r0, 2
@@ -666,7 +666,7 @@ _0809C400:
 	b _0809C44E
 	.pool
 _0809C40C:
-	ldr r0, =gSelectedMapObject
+	ldr r0, =gSelectedEventObject
 	strb r4, [r0]
 	ldr r1, =gSpecialVar_LastTalked
 	adds r0, r2, r4
@@ -684,7 +684,7 @@ _0809C40C:
 	.pool
 _0809C43C:
 	adds r0, r4, 0
-	bl GetFieldObjectScriptPointerByFieldObjectId
+	bl GetEventObjectScriptPointerByEventObjectId
 _0809C442:
 	adds r1, r0, 0
 	ldr r0, =gSpecialVar_LastTalked
@@ -696,11 +696,11 @@ _0809C44E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end TryGetMapObjectScript
+	thumb_func_end TryGetEventObjectScript
 
-	thumb_func_start TryGetInvisibleMapObjectScript
-@ signed int TryGetInvisibleMapObjectScript(int a1, int a2, u8 playerFacingDirection)
-TryGetInvisibleMapObjectScript: @ 809C458
+	thumb_func_start TryGetInvisibleEventObjectScript
+@ signed int TryGetInvisibleEventObjectScript(int a1, int a2, u8 playerFacingDirection)
+TryGetInvisibleEventObjectScript: @ 809C458
 	push {r4,r5,lr}
 	lsls r2, 24
 	lsrs r5, r2, 24
@@ -715,7 +715,7 @@ TryGetInvisibleMapObjectScript: @ 809C458
 	lsrs r2, 16
 	ldrb r3, [r0, 0x4]
 	adds r0, r4, 0
-	bl FindInvisibleMapObjectByPosition
+	bl FindInvisibleEventObjectByPosition
 	cmp r0, 0
 	beq _0809C4CC
 	ldr r2, [r0, 0x8]
@@ -799,7 +799,7 @@ _0809C532:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end TryGetInvisibleMapObjectScript
+	thumb_func_end TryGetInvisibleEventObjectScript
 
 	thumb_func_start TryGetMetatileBehaviorScript
 TryGetMetatileBehaviorScript: @ 809C538
@@ -2261,9 +2261,9 @@ sub_809D0F4: @ 809D0F4
 	.pool
 	thumb_func_end sub_809D0F4
 
-	thumb_func_start FindInvisibleMapObjectByPosition
-@ int FindInvisibleMapObjectByPosition(struct mapheader *mapHeader, u16 x, u16 y, u8 elevation)
-FindInvisibleMapObjectByPosition: @ 809D11C
+	thumb_func_start FindInvisibleEventObjectByPosition
+@ int FindInvisibleEventObjectByPosition(struct mapheader *mapHeader, u16 x, u16 y, u8 elevation)
+FindInvisibleEventObjectByPosition: @ 809D11C
 	push {r4-r7,lr}
 	lsls r1, 16
 	lsrs r7, r1, 16
@@ -2308,7 +2308,7 @@ _0809D164:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end FindInvisibleMapObjectByPosition
+	thumb_func_end FindInvisibleEventObjectByPosition
 
 	thumb_func_start dive_warp
 dive_warp: @ 809D16C
@@ -2447,12 +2447,12 @@ _0809D276:
 	bx r1
 	thumb_func_end sub_809D1E8
 
-	thumb_func_start GetFieldObjectScriptPointerForComparison
-@ u8 *GetFieldObjectScriptPointerForComparison()
-GetFieldObjectScriptPointerForComparison: @ 809D280
+	thumb_func_start GetEventObjectScriptPointerForComparison
+@ u8 *GetEventObjectScriptPointerForComparison()
+GetEventObjectScriptPointerForComparison: @ 809D280
 	push {r4,r5,lr}
 	sub sp, 0x8
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -2470,18 +2470,18 @@ GetFieldObjectScriptPointerForComparison: @ 809D280
 	lsrs r1, 24
 	mov r0, sp
 	adds r2, r4, 0
-	bl TryGetMapObjectScript
+	bl TryGetEventObjectScript
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectScriptPointerForComparison
+	thumb_func_end GetEventObjectScriptPointerForComparison
 
 	thumb_func_start sub_809D2BC
 sub_809D2BC: @ 809D2BC
 	push {r4,lr}
 	sub sp, 0x8
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	mov r4, sp
 	mov r0, sp
 	bl player_get_pos_to_and_height

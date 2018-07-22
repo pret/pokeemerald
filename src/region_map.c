@@ -891,8 +891,8 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
         case 6:
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
             gRegionMap->playerIsInCave = FALSE;
-            mapWidth = gMapHeader.mapData->width;
-            mapHeight = gMapHeader.mapData->height;
+            mapWidth = gMapHeader.mapLayout->width;
+            mapHeight = gMapHeader.mapLayout->height;
             x = gSaveBlock1Ptr->pos.x;
             y = gSaveBlock1Ptr->pos.y;
             if (gRegionMap->mapSecId == MAPSEC_UNDERWATER_128 || gRegionMap->mapSecId == MAPSEC_UNDERWATER_MARINE_CAVE)
@@ -907,8 +907,8 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
                 gRegionMap->playerIsInCave = TRUE;
-                mapWidth = mapHeader->mapData->width;
-                mapHeight = mapHeader->mapData->height;
+                mapWidth = mapHeader->mapLayout->width;
+                mapHeight = mapHeader->mapLayout->height;
                 x = gSaveBlock1Ptr->warp4.x;
                 y = gSaveBlock1Ptr->warp4.y;
             }
@@ -926,8 +926,8 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             mapHeader = Overworld_GetMapHeaderByGroupAndId((u16)gSaveBlock1Ptr->warp2.mapGroup, (u16)gSaveBlock1Ptr->warp2.mapNum);
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             gRegionMap->playerIsInCave = TRUE;
-            mapWidth = mapHeader->mapData->width;
-            mapHeight = mapHeader->mapData->height;
+            mapWidth = mapHeader->mapLayout->width;
+            mapHeight = mapHeader->mapLayout->height;
             x = gSaveBlock1Ptr->warp2.x;
             y = gSaveBlock1Ptr->warp2.y;
             break;
@@ -953,8 +953,8 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             {
                 gRegionMap->playerIsInCave = FALSE;
             }
-            mapWidth = mapHeader->mapData->width;
-            mapHeight = mapHeader->mapData->height;
+            mapWidth = mapHeader->mapLayout->width;
+            mapHeight = mapHeader->mapLayout->height;
             x = storedWarp->x;
             y = storedWarp->y;
             break;
@@ -1068,14 +1068,14 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
             mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;
-            dimensionScale = mapHeader->mapData->width / gRegionMapEntries[gRegionMap->mapSecId].width;
+            dimensionScale = mapHeader->mapLayout->width / gRegionMapEntries[gRegionMap->mapSecId].width;
             if (dimensionScale == 0)
                 dimensionScale = 1;
             x = xOnMap / dimensionScale;
             if (x >= gRegionMapEntries[gRegionMap->mapSecId].width)
                 x = gRegionMapEntries[gRegionMap->mapSecId].width - 1;
 
-            dimensionScale = mapHeader->mapData->height / gRegionMapEntries[gRegionMap->mapSecId].height;
+            dimensionScale = mapHeader->mapLayout->height / gRegionMapEntries[gRegionMap->mapSecId].height;
             if (dimensionScale == 0)
                 dimensionScale = 1;
             y = yOnMap / dimensionScale;
@@ -1603,7 +1603,7 @@ void MCB2_FlyMap(void)
             gMain.state++;
             break;
         case 3:
-            sub_809882C(0, 0x65, 0xd0);
+            LoadUserWindowBorderGfx(0, 0x65, 0xd0);
             clear_scheduled_bg_copies_to_vram();
             gMain.state++;
             break;
@@ -1849,7 +1849,7 @@ static void sub_8124D14(void)
     switch (gUnknown_0203A148->unk_004)
     {
         case 0:
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
             gUnknown_0203A148->unk_004++;
             break;
         case 1:
@@ -1896,7 +1896,7 @@ static void sub_8124E0C(void)
     switch (gUnknown_0203A148->unk_004)
     {
         case 0:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
             gUnknown_0203A148->unk_004++;
             break;
         case 1:

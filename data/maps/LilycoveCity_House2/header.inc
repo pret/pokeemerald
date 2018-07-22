@@ -1,15 +1,15 @@
 LilycoveCity_House2: @ 84837A4
-	.4byte LilycoveCity_House2_MapAttributes
+	.4byte LilycoveCity_House2_Layout
 	.4byte LilycoveCity_House2_MapEvents
 	.4byte LilycoveCity_House2_MapScripts
 	.4byte 0x0
 	.2byte MUS_MINAMO
 	.2byte 74
-	.byte 12
+	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

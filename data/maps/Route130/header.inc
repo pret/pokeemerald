@@ -1,15 +1,15 @@
 Route130: @ 84829A4
-	.4byte Route130_MapAttributes
+	.4byte Route130_Layout
 	.4byte Route130_MapEvents
 	.4byte Route130_MapScripts
 	.4byte Route130_MapConnections
 	.2byte MUS_GRANROAD
 	.2byte 263
-	.byte 45
+	.byte MAPSEC_ROUTE_130
 	.byte 0
-	.byte 2
-	.byte 6
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_6
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

@@ -93,11 +93,9 @@ SECTIONS {
         src/field_camera.o(.text);
         src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
-        src/field_map_obj.o(.text);
-        asm/field_ground_effect.o(.text);
-        src/field_map_obj_helpers.o(.text);
+        src/event_object_movement.o(.text);
         src/field_message_box.o(.text);
-        src/map_obj_lock.o(.text);
+        src/event_obj_lock.o(.text);
         src/text_window.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);
@@ -131,7 +129,7 @@ SECTIONS {
         asm/pokemon_storage_system.o(.text);
         src/pokemon_icon.o(.text);
         src/script_movement.o(.text);
-        asm/fldeff_cut.o(.text);
+        src/fldeff_cut.o(.text);
         src/mail_data.o(.text);
         src/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
@@ -249,6 +247,7 @@ SECTIONS {
         src/save_location.o(.text);
         src/item_icon.o(.text);
         asm/party_menu.o(.text);
+        src/battle_tent.o(.text);
         asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
@@ -399,9 +398,7 @@ SECTIONS {
         src/metatile_behavior.o(.rodata);
         src/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
-        data/field_map_obj.o(.rodata);
-        data/field_ground_effect.o(.rodata);
-        data/map_obj_8097404.o(.rodata);
+        src/event_object_movement.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
@@ -430,7 +427,7 @@ SECTIONS {
         src/pokemon_storage_system.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
         src/pokemon_icon.o(.rodata);
-        data/fldeff_cut.o(.rodata);
+        src/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
         data/contest.o(.rodata);
@@ -524,7 +521,7 @@ SECTIONS {
         src/save_location.o(.rodata);
         src/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
-        data/battle_tent.o(.rodata);
+        src/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
         src/unk_81BAD84.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);

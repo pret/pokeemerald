@@ -174,9 +174,7 @@ gBattle_WIN1H: @ 2022E28
 gBattle_WIN1V: @ 2022E2A
 	.space 0x2
 
-    .include "src/battle_message.o"
 	.include "src/battle_main.o"
-
 	.include "src/pokemon.o"
 	.include "src/random.o"
 	.include "src/daycare.o"
@@ -216,7 +214,7 @@ gUnknown_020322D5: @ 20322D5
 gUnknown_0203734C: @ 203734C
 	.space 0x4
 
-gMapObjects: @ 2037350
+gEventObjects: @ 2037350
 	.space 0x240
 
 gPlayerAvatar: @ 2037590
@@ -234,7 +232,7 @@ gUnknown_020375B4: @ 20375B4
 gUnknown_020375B6: @ 20375B6
 	.space 0x2
 
-gUnknown_020375B8: @ 20375B8
+gLockedAnimEventObjects: @ 20375B8
 	.space 0x4
 
     .include "src/field_message_box.o"
@@ -288,9 +286,6 @@ gUnknown_02038BC6: @ 2038BC6
     .include "src/field_effect.o"
     .include "src/scanline_effect.o"
     .include "src/option_menu.o"
-	
-	.align 2
-
     .include "src/pokedex.o"
 
 gTrainerCards: @ 2039B58
@@ -384,10 +379,7 @@ gUnknown_02039D8C: @ 2039D8C
 	.space 0x4
 
 	.include "src/script_movement.o"
-
-gUnknown_02039DD0: @ 2039DD0
-	.space 0x4
-
+	.include "src/fldeff_cut.o"
 	.include "src/map_name_popup.o"
 	.include "src/item.o"
 
@@ -607,7 +599,7 @@ gUnknown_0203AB34: @ 203AB34
     .include "src/battle_ai_script_commands.o"
     
 .align 2
-gUnknown_0203AB40: @ 203AB40
+gPlayerFacingPosition: @ 203AB40
 	.space 0x8
 	
 	.include "src/pokeblock.o"
@@ -684,12 +676,7 @@ gUnknown_0203AB98: @ 203AB98
 
     .include "src/coins.o"
     .include "src/battle_transition.o"
-
-gBattlerAbilities: @ 203ABA4
-	.space 0x4
-
-gStringInfo: @ 203ABA8
-	.space 0x4
+    .include "src/battle_message.o"
 
 gUnknown_0203ABAC: @ 203ABAC
 	.space 0x4
@@ -740,10 +727,6 @@ gUnknown_0203BC8C: @ 203BC8C
 	.include "src/player_pc.o"
 	.include "src/intro.o"
 	.include "src/field_region_map.o"
-
-gUnknown_0203BCD4: @ 203BCD4
-	.space 0x4
-
     .include "src/hall_of_fame.o"
     .include "src/credits.o"
     .include "src/lottery_corner.o"
@@ -751,10 +734,7 @@ gUnknown_0203BCD4: @ 203BCD4
     .include "src/berry_tag_screen.o"
     .include "src/mystery_event_menu.o"
     .include "src/save_failed_screen.o"
-
-gBraillePuzzleCallbackFlag: @ 203BD14
-	.space 0x4
-
+    .include "src/braille_puzzles.o"
 	.include "src/pokeblock_feed.o"
 	.include "src/intro_credits_graphics.o"
     .include "src/recorded_battle.o"
@@ -844,7 +824,7 @@ gUnknown_0203CEE8: @ 203CEE8
 gUnknown_0203CEE9: @ 203CEE9
 	.space 0x3
 
-gUnknown_0203CEEC: @ 203CEEC
+gPostMenuFieldCallback: @ 203CEEC
 	.space 0x4
 
 gUnknown_0203CEF0: @ 203CEF0

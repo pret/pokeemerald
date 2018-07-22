@@ -33,12 +33,12 @@ struct HallofFameMon
     u32 personality;
     u16 species:9;
     u16 lvl:7;
-    u8 nick[10];
+    u8 nick[POKEMON_NAME_LENGTH];
 };
 
 struct HallofFameTeam
 {
-    struct HallofFameMon mon[6];
+    struct HallofFameMon mon[PARTY_SIZE];
 };
 
 struct HofGfx
@@ -49,11 +49,11 @@ struct HofGfx
     u8 tilemap2[0x1000];
 };
 
+static EWRAM_DATA u32 sUnknown_0203BCD4 = 0;
 static EWRAM_DATA struct HallofFameTeam *sHofMonPtr = NULL;
 static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
 extern bool8 gHasHallOfFameRecords;
-extern u32 gUnknown_0203BCD4;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern MainCallback gGameContinueCallback;
 extern u32 gDamagedSaveSectors;
@@ -89,7 +89,7 @@ extern void sub_8197434(u8, u8);
 extern u16 sub_818D97C(u8 playerGender, u8);
 extern u16 sub_818D8AC(u16, u8, s16, s16, u8, u16);
 extern const void* stdpal_get(u8);
-extern void sub_80987D4(u8, u8, u16, u8);
+extern void LoadWindowGfx(u8, u8, u16, u8);
 extern u16 sub_818D820(u16);
 extern u16 sub_818D8F0(u16);
 extern u16 sub_818D7D8(u16 species, u32 trainerId, u32 personality, u8 arg3, s16 sp0, s16 sp1, u8 sp2, u16 sp3);
@@ -414,7 +414,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!sub_8175024())
         {
             SetVBlankCallback(VBlankCB_HallOfFame);
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
             gMain.state++;
         }
         break;
@@ -490,7 +490,7 @@ static void Task_Hof_InitMonData(u8 taskId)
         }
     }
 
-    gUnknown_0203BCD4 = 0;
+    sUnknown_0203BCD4 = 0;
     gTasks[taskId].tDisplayedMonId = 0;
     gTasks[taskId].tPlayerSpriteID = 0xFF;
 
@@ -648,11 +648,11 @@ static void Task_Hof_TryDisplayAnotherMon(u8 taskId)
     }
     else
     {
-        gUnknown_0203BCD4 |= (0x10000 << gSprites[gTasks[taskId].tMonSpriteId(currPokeID)].oam.paletteNum);
+        sUnknown_0203BCD4 |= (0x10000 << gSprites[gTasks[taskId].tMonSpriteId(currPokeID)].oam.paletteNum);
         if (gTasks[taskId].tDisplayedMonId <= 4 && currMon[1].species != SPECIES_NONE) // there is another pokemon to display
         {
             gTasks[taskId].tDisplayedMonId++;
-            BeginNormalPaletteFade(gUnknown_0203BCD4, 0, 12, 12, 0x63B0);
+            BeginNormalPaletteFade(sUnknown_0203BCD4, 0, 12, 12, 0x63B0);
             gSprites[gTasks[taskId].tMonSpriteId(currPokeID)].oam.priority = 1;
             gTasks[taskId].func = Task_Hof_DisplayMon;
         }
@@ -696,7 +696,7 @@ static void sub_8173DC0(u8 taskId)
             if (gTasks[taskId].tMonSpriteId(i) != 0xFF)
                 gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 1;
         }
-        BeginNormalPaletteFade(gUnknown_0203BCD4, 0, 12, 12, 0x63B0);
+        BeginNormalPaletteFade(sUnknown_0203BCD4, 0, 12, 12, 0x63B0);
         FillWindowPixelBuffer(0, 0);
         CopyWindowToVram(0, 3);
         gTasks[taskId].tFrameCount = 7;
@@ -725,7 +725,7 @@ static void sub_8173EE4(u8 taskId)
     ShowBg(3);
     gTasks[taskId].tPlayerSpriteID = sub_818D8AC(sub_818D97C(gSaveBlock2Ptr->playerGender, 1), 1, 120, 72, 6, 0xFFFF);
     AddWindow(&sHof_WindowTemplate);
-    sub_80987D4(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
+    LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
     LoadPalette(stdpal_get(1), 0xE0, 0x20);
     gTasks[taskId].tFrameCount = 120;
     gTasks[taskId].func = Task_Hof_WaitAndPrintPlayerInfo;
@@ -764,7 +764,7 @@ static void Task_Hof_ExitOnKeyPressed(u8 taskId)
 static void Task_Hof_HandlePaletteOnExit(u8 taskId)
 {
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
-    BeginNormalPaletteFade(-1, 8, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 0x10, 0);
     gTasks[taskId].func = Task_Hof_HandleExit;
 }
 
@@ -923,7 +923,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
         savedTeams++;
 
     currMon = &savedTeams->mon[0];
-    gUnknown_0203BCD4 = 0;
+    sUnknown_0203BCD4 = 0;
     gTasks[taskId].tCurrMonId = 0;
     gTasks[taskId].tMonNo = 0;
 
@@ -998,8 +998,8 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
 
     currMonID = gTasks[taskId].tMonSpriteId(gTasks[taskId].tCurrMonId);
     gSprites[currMonID].oam.priority = 0;
-    gUnknown_0203BCD4 = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
-    BlendPalettesUnfaded(gUnknown_0203BCD4, 0xC, 0x63B0);
+    sUnknown_0203BCD4 = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
+    BlendPalettesUnfaded(sUnknown_0203BCD4, 0xC, 0x63B0);
 
     currMon = &savedTeams->mon[gTasks[taskId].tCurrMonId];
     if (currMon->species != SPECIES_EGG)

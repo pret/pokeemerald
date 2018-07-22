@@ -12444,7 +12444,7 @@ _081A0C8E:
 sub_81A0C9C: @ 81A0C9C
 	push {lr}
 	bl ScriptContext2_Enable
-	bl FreezeMapObjects
+	bl FreezeEventObjects
 	bl sub_808B864
 	bl sub_808BCF4
 	movs r0, 0
@@ -19871,8 +19871,8 @@ _081A4C84:
 	.pool
 	thumb_func_end sub_81A4C30
 
-	thumb_func_start sub_81A4CB0
-sub_81A4CB0: @ 81A4CB0
+	thumb_func_start GetFrontierBrainTrainerPicIndex
+GetFrontierBrainTrainerPicIndex: @ 81A4CB0
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -19881,7 +19881,7 @@ sub_81A4CB0: @ 81A4CB0
 	ands r0, r1
 	cmp r0, 0
 	beq _081A4CD0
-	bl sub_8185EA0
+	bl GetRecordedBattleFrontierFacility
 	lsls r0, 24
 	lsrs r0, 24
 	b _081A4CDA
@@ -19893,7 +19893,7 @@ _081A4CD0:
 	lsrs r0, 16
 _081A4CDA:
 	ldr r2, =gTrainers
-	ldr r1, =gUnknown_08611D30
+	ldr r1, =gFacilityToBrainTrainerId
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -19905,10 +19905,10 @@ _081A4CDA:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81A4CB0
+	thumb_func_end GetFrontierBrainTrainerPicIndex
 
-	thumb_func_start sub_81A4D00
-sub_81A4D00: @ 81A4D00
+	thumb_func_start GetFrontierBrainTrainerClass
+GetFrontierBrainTrainerClass: @ 81A4D00
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -19917,7 +19917,7 @@ sub_81A4D00: @ 81A4D00
 	ands r0, r1
 	cmp r0, 0
 	beq _081A4D20
-	bl sub_8185EA0
+	bl GetRecordedBattleFrontierFacility
 	lsls r0, 24
 	lsrs r0, 24
 	b _081A4D2A
@@ -19929,7 +19929,7 @@ _081A4D20:
 	lsrs r0, 16
 _081A4D2A:
 	ldr r2, =gTrainers
-	ldr r1, =gUnknown_08611D30
+	ldr r1, =gFacilityToBrainTrainerId
 	lsls r0, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -19941,10 +19941,10 @@ _081A4D2A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81A4D00
+	thumb_func_end GetFrontierBrainTrainerClass
 
-	thumb_func_start sub_81A4D50
-sub_81A4D50: @ 81A4D50
+	thumb_func_start CopyFrontierBrainTrainerName
+CopyFrontierBrainTrainerName: @ 81A4D50
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, =gBattleTypeFlags
@@ -19954,7 +19954,7 @@ sub_81A4D50: @ 81A4D50
 	ands r0, r1
 	cmp r0, 0
 	beq _081A4D70
-	bl sub_8185EA0
+	bl GetRecordedBattleFrontierFacility
 	lsls r0, 24
 	lsrs r0, 24
 	b _081A4D7A
@@ -19968,7 +19968,7 @@ _081A4D7A:
 	movs r3, 0
 	lsls r0, 1
 	ldr r2, =gTrainers
-	ldr r1, =gUnknown_08611D30
+	ldr r1, =gFacilityToBrainTrainerId
 	adds r0, r1
 	ldrh r1, [r0]
 	lsls r0, r1, 2
@@ -19991,7 +19991,7 @@ _081A4D90:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81A4D50
+	thumb_func_end CopyFrontierBrainTrainerName
 
 	thumb_func_start sub_81A4DB8
 sub_81A4DB8: @ 81A4DB8
@@ -20483,7 +20483,7 @@ sub_81A51A8: @ 81A51A8
 	ands r0, r1
 	cmp r0, 0
 	beq _081A51D4
-	bl sub_8185EA0
+	bl GetRecordedBattleFrontierFacility
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_8185EAC
@@ -20646,29 +20646,29 @@ _081A5328:
 	ldr r4, =gDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0xF
-	bl BattleHandleAddTextPrinter
+	bl BattlePutTextOnWindow
 	ldr r0, =gText_Vs
 	movs r1, 0x10
-	bl BattleHandleAddTextPrinter
+	bl BattlePutTextOnWindow
 	ldr r0, =gText_OpponentMon1Name
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	adds r0, r4, 0
 	movs r1, 0x11
-	bl BattleHandleAddTextPrinter
+	bl BattlePutTextOnWindow
 	ldr r0, =gText_Mind
 	movs r1, 0x12
-	bl BattleHandleAddTextPrinter
+	bl BattlePutTextOnWindow
 	ldr r0, =gText_Skill
 	movs r1, 0x13
-	bl BattleHandleAddTextPrinter
+	bl BattlePutTextOnWindow
 	ldr r0, =gText_Body
 	movs r1, 0x14
-	bl BattleHandleAddTextPrinter
+	bl BattlePutTextOnWindow
 	ldr r0, =gText_Judgement
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl BattleHandleAddTextPrinter
+	bl BattlePutTextOnWindow
 	b _081A553E
 	.pool
 _081A53B4:
@@ -20752,7 +20752,7 @@ _081A5464:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x15
-	bl BattleHandleAddTextPrinter
+	bl BattlePutTextOnWindow
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
@@ -27213,16 +27213,16 @@ _081A896E:
 	movs r0, 0xFF
 	movs r1, 0
 	movs r2, 0
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	bl sub_80D338C
 	pop {r4}
 	pop {r0}
@@ -27355,7 +27355,7 @@ _081A8A74:
 	ldr r2, [r6]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x10
@@ -27511,14 +27511,14 @@ _081A8BB4:
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x10
 	bne _081A8BDC
 	b _081A8D32
 _081A8BDC:
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2
@@ -28521,8 +28521,8 @@ sub_81A9424: @ 81A9424
 	lsls r1, 4
 	adds r1, r0
 	mov r8, r1
-	ldr r2, =gMapObjects
-	ldr r0, =gSelectedMapObject
+	ldr r2, =gEventObjects
+	ldr r0, =gSelectedEventObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -28569,8 +28569,8 @@ _081A9488:
 	mov r9, r0
 _081A94AE:
 	ldr r3, =gUnknown_08613ED8
-	ldr r2, =gMapObjects
-	ldr r0, =gSelectedMapObject
+	ldr r2, =gEventObjects
+	ldr r0, =gSelectedEventObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -29181,7 +29181,7 @@ sub_81A9998: @ 81A9998
 	mov r8, r0
 	ldr r1, =0x0000028e
 	mov r12, r1
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	mov r9, r0
 _081A99CC:
 	movs r2, 0
@@ -29194,7 +29194,7 @@ _081A99CE:
 	cmp r0, r12
 	bne _081A9A8A
 	adds r2, 0x7
-	ldr r0, =gSelectedMapObject
+	ldr r0, =gSelectedEventObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -29322,7 +29322,7 @@ GetBattlePyramidTrainerFlag: @ 81A9AC4
 	ldr r1, =0x00000e2a
 	adds r2, r1
 	ldr r4, =gBitTable
-	ldr r3, =gMapObjects
+	ldr r3, =gEventObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -29354,8 +29354,8 @@ sub_81A9B04: @ 81A9B04
 	cmp r0, 0
 	beq _081A9B2E
 	movs r0, 0x1
-	bl GetChosenApproachingTrainerMapObjectId
-	ldr r1, =gSelectedMapObject
+	bl GetChosenApproachingTrainerEventObjectId
+	ldr r1, =gSelectedEventObject
 	strb r0, [r1]
 	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
@@ -29376,9 +29376,9 @@ sub_81A9B44: @ 81A9B44
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r3, 0
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	mov r12, r0
-	ldr r6, =gSelectedMapObject
+	ldr r6, =gSelectedEventObject
 	ldr r1, =gSaveBlock1Ptr
 	mov r10, r1
 	ldr r7, =gSaveBlock2Ptr
@@ -30026,7 +30026,7 @@ _081AA0A6:
 	ldr r2, =0x00000169
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gMapAttributes
+	ldr r1, =gMapLayouts
 	adds r0, r1
 	ldr r6, [r0]
 	ldr r2, [r6, 0xC]

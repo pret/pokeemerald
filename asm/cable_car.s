@@ -1956,7 +1956,7 @@ _08150D86:
 	str r2, [sp]
 	movs r2, 0xC8
 	movs r3, 0x49
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -2062,7 +2062,7 @@ _08150E68:
 	str r2, [sp]
 	movs r2, 0x80
 	movs r3, 0x27
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -2195,7 +2195,7 @@ _08150F3E:
 	ldrsh r3, [r3, r4]
 	movs r4, 0x6A
 	str r4, [sp]
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40

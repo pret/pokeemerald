@@ -431,7 +431,7 @@ gUnknown_08615D7E:: @ 8615D7E
 
 	.align 2
 gUnknown_08615D9C:: @ 8615D9C
-	.4byte sub_80D3718, 0x00000007
+	.4byte SetUpFieldMove_Cut, 0x00000007
 	.4byte SetUpFieldMove_Flash, 0x0000000d
 	.4byte SetUpFieldMove_RockSmash, 0x0000000d
 	.4byte SetUpFieldMove_Strength, 0x0000000d

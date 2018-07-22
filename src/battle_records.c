@@ -348,7 +348,7 @@ static void Task_CloseTrainerHillRecordsOnButton(u8 taskId)
 
 static void Task_BeginPaletteFade(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     gTasks[taskId].func = Task_ExitTrainerHillRecords;
 }
 
@@ -495,7 +495,7 @@ static void CB2_ShowTrainerHillRecords(void)
         gMain.state++;
         break;
     case 6:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         gMain.state++;
         break;
     case 7:

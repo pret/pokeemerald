@@ -35,11 +35,17 @@
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
 
+// Converts a number to Q24.8 fixed-point format
+#define Q_24_8(n)  ((s32)((n) * 256))
+
 // Converts a Q8.8 fixed-point format number to a regular integer
 #define Q_8_8_TO_INT(n) ((int)((n) / 256))
 
 // Converts a Q4.12 fixed-point format number to a regular integer
 #define Q_4_12_TO_INT(n)  ((int)((n) / 4096))
+
+// Converts a Q24.8 fixed-point format number to a regular integer
+#define Q_24_8_TO_INT(n) ((int)((n) >> 8))
 
 #define PARTY_SIZE 6
 
@@ -101,7 +107,7 @@ enum LanguageId
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT   2
 #define POKEBLOCKS_COUNT    40
-#define MAP_OBJECTS_COUNT   16
+#define EVENT_OBJECTS_COUNT   16
 #define BERRY_TREES_COUNT   128
 #define FLAGS_COUNT         300
 #define VARS_COUNT          256
@@ -314,62 +320,30 @@ struct EmeraldBattleTowerRecord
     /*0xE8*/ u32 checksum;
 };
 
-struct SaveBlock2
+struct BattleFrontier
 {
-    /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
-    /*0x08*/ u8 playerGender; // MALE, FEMALE
-    /*0x09*/ u8 specialSaveWarp;
-    /*0x0A*/ u8 playerTrainerId[4];
-    /*0x0E*/ u16 playTimeHours;
-    /*0x10*/ u8 playTimeMinutes;
-    /*0x11*/ u8 playTimeSeconds;
-    /*0x12*/ u8 playTimeVBlanks;
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-             u16 optionsBattleSceneOff:1; // whether battle animations are disabled
-             u16 regionMapZoom:1; // whether the map is zoomed in
-    /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u8 filler_90[0x8];
-    /*0x98*/ struct Time localTimeOffset;
-    /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xA8*/ u32 field_A8;
-    /*0xAC*/ u32 encryptionKey;
-
-        // TODO: fix and verify labels
-    /*0xB0*/ u8 field_B0;
-    /*0xB1*/ u8 field_B1;
-    /*0xB2*/ u8 field_B2_0:3;
-    /*0xB2*/ u8 field_B2_1:2;
-    /*0xB3*/ u8 field_B3[0x29];
-    /*0xDC*/ struct UnkRecordMixingStruct field_DC[4];
-    /*0x1EC*/ struct BerryCrush berryCrush;
-    /*0x1FC*/ struct PokemonJumpResults pokeJump;
-    /*0x20C*/ struct BerryPickingResults berryPick;
-    /*0x21C*/ u8 field_21C[1032];
-    /*0x624*/ u16 contestLinkResults[20]; // 4 positions for 5 categories, possibly a struct or a 2d array
-
-        // All below could be a one giant struct
-
     /*0x64C*/ struct EmeraldBattleTowerRecord battleTower;
     /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
     /*0xBD8*/ u8 field_BD8[11];
-    /*0xBE3*/ u8 filler_BE3[8];
+    /*0xBE3*/ u8 field_BE3[8];
     /*0xBEB*/ u8 field_BEB;
-    /*0xBE3*/ u8 filler_BEC[189];
-    /*0xCA9*/ u8 frontierChosenLvl : 2; // 0x1, 0x2 -> 0x3
-    /*0xCA9*/ u8 field_CA9_a : 1;   // 0x4
-    /*0xCA9*/ u8 field_CA9_b : 1;   // 0x8
-    /*0xCA9*/ u8 field_CA9_c : 1;   // 0x10
-    /*0xCA9*/ u8 field_CA9_d : 1;   // 0x20
-    /*0xCA9*/ u8 field_CA9_e : 1;   // 0x40
-    /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
+    /*0xBEC*/ u8 filler_BEC[16];
+    /*0xBFC*/ u16 ecwords_BFC[6];
+    /*0xC08*/ u16 ecwords_C08[6];
+    /*0xC14*/ u16 ecwords_C14[6];
+    /*0xC20*/ u8 filler_C20[0x88];
+    /*0xCA8*/ u8 field_CA8;
+    /*0xCA9*/ u8 chosenLvl:2; // 0x1, 0x2 -> 0x3
+    /*0xCA9*/ u8 field_CA9_a:1;   // 0x4
+    /*0xCA9*/ u8 field_CA9_b:1;   // 0x8
+    /*0xCA9*/ u8 field_CA9_c:1;   // 0x10
+    /*0xCA9*/ u8 field_CA9_d:1;   // 0x20
+    /*0xCA9*/ u8 field_CA9_e:1;   // 0x40
+    /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
     /*0xCAA*/ u16 field_CAA[4];
-    /*0xCB2*/ u16 battlePyramidWildHeaderId;
+    /*0xCB2*/ u16 field_CB2;
     /*0xCB4*/ u16 field_CB4[30];
     /*0xCF0*/ u16 field_CF0[2];
     /*0xCF4*/ u16 field_CF4[2];
@@ -416,20 +390,60 @@ struct SaveBlock2
     /*0xE04*/ u16 field_E04;
     /*0xE06*/ u16 field_E06;
     /*0xE08*/ u16 field_E08[9];
-    /*0xE1A*/ u16 battlePyramidFloor; // possibly?
+    /*0xE1A*/ u16 field_E1A;
     /*0xE1C*/ u16 field_E1C;
     /*0xE1E*/ u16 field_E1E[7];
     /*0xE2C*/ struct PyramidBag pyramidBag;
-    /*0x???*/ u8 field_unkown[6];
-    /*0xE6E*/ u16 battleTentWinStreak;
+    /*0xE58*/ u16 field_E58;
+    /*0xE6A*/ u16 field_E6A;
+    /*0xE6C*/ u16 field_E6C;
+    /*0xE6E*/ u16 field_E6E;
     /*0xE70*/ u8 field_E70[72];
     /*0xEB8*/ u16 frontierBattlePoints;
     /*0xEBA*/ u8 field_EBA[39];
     /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH];
     /*0xEF1*/ u8 field_EF1[2][4];
     /*0xEF9*/ u8 field_EF9[51];
-    // sizeof=0xF2C
 };
+
+struct SaveBlock2
+{
+    /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
+    /*0x08*/ u8 playerGender; // MALE, FEMALE
+    /*0x09*/ u8 specialSaveWarp;
+    /*0x0A*/ u8 playerTrainerId[4];
+    /*0x0E*/ u16 playTimeHours;
+    /*0x10*/ u8 playTimeMinutes;
+    /*0x11*/ u8 playTimeSeconds;
+    /*0x12*/ u8 playTimeVBlanks;
+    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
+    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
+             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
+             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+             u16 optionsBattleSceneOff:1; // whether battle animations are disabled
+             u16 regionMapZoom:1; // whether the map is zoomed in
+    /*0x18*/ struct Pokedex pokedex;
+    /*0x90*/ u8 filler_90[0x8];
+    /*0x98*/ struct Time localTimeOffset;
+    /*0xA0*/ struct Time lastBerryTreeUpdate;
+    /*0xA8*/ u32 field_A8;
+    /*0xAC*/ u32 encryptionKey;
+
+        // TODO: fix and verify labels
+    /*0xB0*/ u8 field_B0;
+    /*0xB1*/ u8 field_B1;
+    /*0xB2*/ u8 field_B2_0:3;
+    /*0xB2*/ u8 field_B2_1:2;
+    /*0xB3*/ u8 field_B3[0x29];
+    /*0xDC*/ struct UnkRecordMixingStruct field_DC[4];
+    /*0x1EC*/ struct BerryCrush berryCrush;
+    /*0x1FC*/ struct PokemonJumpResults pokeJump;
+    /*0x20C*/ struct BerryPickingResults berryPick;
+    /*0x21C*/ u8 field_21C[1032];
+    /*0x624*/ u16 contestLinkResults[20]; // 4 positions for 5 categories, possibly a struct or a 2d array
+    /*0x64C*/ struct BattleFrontier frontier;
+}; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
@@ -777,7 +791,7 @@ struct SaveBlock1
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 filler_2F;
     /*0x30*/ u8 flashLevel;
-    /*0x32*/ u16 mapDataId;
+    /*0x32*/ u16 mapLayoutId;
     /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;
     /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
@@ -796,8 +810,8 @@ struct SaveBlock1
     /*0x9C2*/ u8 field_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[100];
-    /*0xA30*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
-    /*0xC70*/ struct MapObjectTemplate mapObjectTemplates[64];
+    /*0xA30*/ struct EventObject eventObjects[EVENT_OBJECTS_COUNT];
+    /*0xC70*/ struct EventObjectTemplate eventObjectTemplates[64];
     /*0x1270*/ u8 flags[FLAGS_COUNT];
     /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
@@ -859,7 +873,7 @@ struct MapPosition
 {
     s16 x;
     s16 y;
-    u8 height;
+    s8 height;
 };
 
 struct UnkStruct_8054FF8

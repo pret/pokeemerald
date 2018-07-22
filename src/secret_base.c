@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "constants/bg_event_constants.h"
 #include "constants/decorations.h"
 #include "malloc.h"
 #include "main.h"
@@ -20,7 +21,7 @@
 #include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_effect.h"
 #include "fldeff_80F9BCC.h"
 #include "metatile_behavior.h"
@@ -38,6 +39,7 @@
 #include "link.h"
 #include "tv.h"
 #include "secret_base.h"
+#include "constants/map_types.h"
 
 extern void mapldr_default(void);
 
@@ -246,16 +248,16 @@ void sub_80E8C98(void)
 
 void sub_80E8CB0(s16 *xPtr, s16 *yPtr, u16 tile)
 {
-    const struct MapData *mapData;
+    const struct MapLayout *mapLayout;
     s16 x;
     s16 y;
 
-    mapData = gMapHeader.mapData;
-    for (y = 0; y < mapData->height; y ++)
+    mapLayout = gMapHeader.mapLayout;
+    for (y = 0; y < mapLayout->height; y ++)
     {
-        for (x = 0; x < mapData->width; x ++)
+        for (x = 0; x < mapLayout->width; x ++)
         {
-            if ((mapData->map[y * mapData->width + x] & 0x3ff) == tile)
+            if ((mapLayout->map[y * mapLayout->width + x] & 0x3ff) == tile)
             {
                 *xPtr = x;
                 *yPtr = y;
@@ -335,7 +337,7 @@ void sub_80E8EE0(struct MapEvents const *events)
 
     for (bgEventIndex = 0; bgEventIndex < events->bgEventCount; bgEventIndex ++)
     {
-        if (events->bgEvents[bgEventIndex].kind == 8)
+        if (events->bgEvents[bgEventIndex].kind == BG_EVENT_SECRET_BASE)
         {
             for (j = 0; j < 20; j ++)
             {
@@ -412,7 +414,7 @@ bool8 sub_80E909C(void)
 
 void sub_80E90C8(u8 taskId)
 {
-    FieldObjectTurn(&gMapObjects[gPlayerAvatar.mapObjectId], DIR_NORTH);
+    EventObjectTurn(&gEventObjects[gPlayerAvatar.eventObjectId], DIR_NORTH);
     if (IsWeatherNotFadingIn() == TRUE)
     {
         EnableBothScriptContexts();
@@ -532,14 +534,14 @@ void sub_80E933C(void)
             category = gDecorations[roomDecor[decorIdx]].category;
             if (permission == DECORPERM_SOLID_MAT)
             {
-                for (objIdx = 0; objIdx < gMapHeader.events->mapObjectCount; objIdx ++)
+                for (objIdx = 0; objIdx < gMapHeader.events->eventObjectCount; objIdx ++)
                 {
-                    if (gMapHeader.events->mapObjects[objIdx].flagId == gSpecialVar_0x8004 + 0xAE)
+                    if (gMapHeader.events->eventObjects[objIdx].flagId == gSpecialVar_0x8004 + 0xAE)
                     {
                         break;
                     }
                 }
-                if (objIdx == gMapHeader.events->mapObjectCount)
+                if (objIdx == gMapHeader.events->eventObjectCount)
                 {
                     continue;
                 }
@@ -548,9 +550,9 @@ void sub_80E933C(void)
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                 if (MetatileBehavior_IsMB_B5(metatile) == TRUE || MetatileBehavior_IsMB_C3(metatile) == TRUE)
                 {
-                    gSpecialVar_Result = gMapHeader.events->mapObjects[objIdx].graphicsId + VAR_0x3F20;
+                    gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].graphicsId + VAR_0x3F20;
                     VarSet(gSpecialVar_Result, gDecorations[roomDecor[decorIdx]].tiles[0]);
-                    gSpecialVar_Result = gMapHeader.events->mapObjects[objIdx].localId;
+                    gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].localId;
                     FlagClear(gSpecialVar_0x8004 + 0xAE);
                     show_sprite(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
                     sub_808EBA8(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
@@ -578,12 +580,12 @@ void sub_80E9578(void)
     u8 objectEventIdx;
     u16 flagId;
 
-    for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->mapObjectCount; objectEventIdx ++)
+    for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->eventObjectCount; objectEventIdx ++)
     {
-        flagId = gMapHeader.events->mapObjects[objectEventIdx].flagId;
+        flagId = gMapHeader.events->eventObjects[objectEventIdx].flagId;
         if (flagId >= 0xAE && flagId <= 0xBB)
         {
-            RemoveFieldObjectByLocalIdAndMap(gMapHeader.events->mapObjects[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            RemoveEventObjectByLocalIdAndMap(gMapHeader.events->eventObjects[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             FlagSet(flagId);
         }
     }
@@ -600,7 +602,7 @@ void sub_80E9608(struct Coords16 *coords, struct MapEvents *events)
 
     for (bgEventIdx = 0; bgEventIdx < events->bgEventCount; bgEventIdx ++)
     {
-        if (events->bgEvents[bgEventIdx].kind == 8 && coords->x == events->bgEvents[bgEventIdx].x + 7 && coords->y == events->bgEvents[bgEventIdx].y + 7)
+        if (events->bgEvents[bgEventIdx].kind == BG_EVENT_SECRET_BASE && coords->x == events->bgEvents[bgEventIdx].x + 7 && coords->y == events->bgEvents[bgEventIdx].y + 7)
         {
             sCurSecretBaseId = events->bgEvents[bgEventIdx].bgUnion.secretBaseId;
             break;
@@ -780,7 +782,7 @@ void sub_80E9AD0(void)
     events = gMapHeader.events;
     for (i = 0; i < events->bgEventCount; i ++)
     {
-        if (events->bgEvents[i].kind == 8 && gSaveBlock1Ptr->secretBases[0].secretBaseId == events->bgEvents[i].bgUnion.secretBaseId)
+        if (events->bgEvents[i].kind == BG_EVENT_SECRET_BASE && gSaveBlock1Ptr->secretBases[0].secretBaseId == events->bgEvents[i].bgUnion.secretBaseId)
         {
             tile = MapGridGetMetatileIdAt(events->bgEvents[i].x + 7, events->bgEvents[i].y + 7);
             for (j = 0; j < 7; j ++)
@@ -940,7 +942,7 @@ void sub_80E9E44(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    data[8] = AddScrollIndicatorArrowPairParametrized(0x02, 0xbc, 0x0c, 0x94, data[0] - data[3], 0x13f8, 0x13f8, &data[2]);
+    data[8] = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xbc, 0x0c, 0x94, data[0] - data[3], 0x13f8, 0x13f8, &data[2]);
 }
 
 void sub_80E9E90(u8 taskId)

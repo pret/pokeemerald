@@ -4,7 +4,7 @@
 #include "constants/songs.h"
 #include "event_data.h"
 #include "field_camera.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "malloc.h"
 #include "random.h"
 #include "roulette_util.h"
@@ -179,17 +179,17 @@ void sub_81BE7F4(void)
 
 static void sub_81BE808(u8 taskId)
 {
-    u8 mapObjectIdBuffer;
-    struct MapObject *fieldMapObject;
-    struct MapObject *playerAvatarMapObject;
+    u8 eventObjectIdBuffer;
+    struct EventObject *fieldEventObject;
+    struct EventObject *playerAvatarEventObject;
 
-    TryGetFieldObjectIdByLocalIdAndMap(0x2D, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjectIdBuffer);
-    fieldMapObject = &(gMapObjects[mapObjectIdBuffer]);
-    gSprites[fieldMapObject->spriteId].pos2.y += 4;
-    playerAvatarMapObject = &(gMapObjects[gPlayerAvatar.mapObjectId]);
+    TryGetEventObjectIdByLocalIdAndMap(0x2D, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &eventObjectIdBuffer);
+    fieldEventObject = &(gEventObjects[eventObjectIdBuffer]);
+    gSprites[fieldEventObject->spriteId].pos2.y += 4;
+    playerAvatarEventObject = &(gEventObjects[gPlayerAvatar.eventObjectId]);
 
-    if((gSprites[fieldMapObject->spriteId].pos1.y + gSprites[fieldMapObject->spriteId].pos2.y) >=
-       (gSprites[playerAvatarMapObject->spriteId].pos1.y + gSprites[playerAvatarMapObject->spriteId].pos2.y))
+    if((gSprites[fieldEventObject->spriteId].pos1.y + gSprites[fieldEventObject->spriteId].pos2.y) >=
+       (gSprites[playerAvatarEventObject->spriteId].pos1.y + gSprites[playerAvatarEventObject->spriteId].pos2.y))
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();

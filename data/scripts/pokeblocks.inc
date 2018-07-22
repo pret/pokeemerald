@@ -573,7 +573,7 @@ LilycoveCity_ContestLobby_EventScript_294032: @ 8294032
 	end
 
 LilycoveCity_ContestLobby_Movement_294053: @ 8294053
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 EventScript_PblockLink:: @ 8294055
@@ -608,7 +608,7 @@ EventScript_PblocLink_TryConnect: @ 82940BB
 	call LilycoveCity_ContestLobby_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq EventScript_PblocLink_End
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_2941ED
 	message Text_PblockLink_Searching
@@ -697,7 +697,7 @@ EventScript_PblocLink_SpawnPartners: @ 82941AA
 	specialvar VAR_RESULT, GetLinkPartnerNames
 	copyvar VAR_0x8008, VAR_RESULT
 	copyvar VAR_0x8004, VAR_0x8008
-	special SpawnLinkPartnerFieldObject
+	special SpawnLinkPartnerEventObject
 	goto EventScript_PblocLink_Arrived
 	end
 

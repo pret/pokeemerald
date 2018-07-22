@@ -219,7 +219,7 @@ const u8 gUnknown_082ED224[] = {
 
 // .text
 
-bool8 sub_80093CC(void)
+bool8 IsWirelessAdapterConnected(void)
 {
     sub_800B488();
     sub_800E700();
@@ -444,7 +444,7 @@ static void LinkTestProcessKeyInput(void)
     }
     if (gMain.newKeys & L_BUTTON)
     {
-        BeginNormalPaletteFade(-1, 0, 16, 0, 2);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 2);
     }
     if (gMain.newKeys & START_BUTTON)
     {

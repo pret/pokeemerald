@@ -1092,7 +1092,7 @@ _081C4750:
 	bl LoadCompressedObjectPalette
 	ldrh r0, [r4, 0x4]
 	movs r1, 0x1
-	bl sub_806A068
+	bl SetMultiuseSpriteTemplateToPokemon
 _081C4768:
 	ldrh r0, [r6]
 	adds r0, 0x1
@@ -1116,7 +1116,7 @@ sub_81C4778: @ 81C4778
 	bne _081C47AE
 	adds r0, r1, 0
 	adds r0, 0xC
-	bl ShouldPlayNormalPokeCry
+	bl ShouldPlayNormalMonCry
 	cmp r0, 0x1
 	bne _081C47A4
 	ldrh r0, [r4, 0x2]
@@ -1144,7 +1144,7 @@ sub_81C47B4: @ 81C47B4
 	ldr r0, =gUnknown_0203CF1C
 	ldr r6, [r0]
 	adds r6, 0x70
-	ldr r0, =gUnknown_0202499C
+	ldr r0, =gMultiuseSpriteTemplate
 	movs r1, 0x28
 	movs r2, 0x40
 	movs r3, 0x5
@@ -2070,7 +2070,7 @@ sub_81C4F44: @ 81C4F44
 	cmp r0, 0
 	bne _081C4F6E
 	bl overworld_free_bg_tilemaps
-	ldr r0, =gUnknown_03005DB0
+	ldr r0, =gFieldCallback2
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
 	ldr r1, =CB2_ReturnToField
@@ -2869,7 +2869,7 @@ sub_81C5674: @ 81C5674
 	movs r1, 0xAC
 	movs r2, 0xC
 	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	ldr r2, =0x00000816
 	adds r1, r2
@@ -4868,7 +4868,7 @@ sub_81C67CC: @ 81C67CC
 	ldrb r0, [r5]
 	movs r1, 0x10
 	movs r2, 0x1
-	bl sub_81AF15C
+	bl ListMenuSetUnkIndicatorsStructField
 	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	movs r0, 0x2
@@ -5293,11 +5293,11 @@ sub_81C6BD8: @ 81C6BD8
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xD0
-	bl copy_textbox_border_tile_patterns_to_vram
+	bl LoadMessageBoxGfx
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20

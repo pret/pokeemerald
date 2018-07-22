@@ -1248,186 +1248,186 @@ LinkContestRoom1_EventScript_27ACDF:: @ 827ACDF
 	return
 
 LinkContestRoom1_Movement_27AD09: @ 827AD09
-	step_down
+	walk_down
 	step_end
 
 LinkContestRoom1_Movement_27AD0B: @ 827AD0B
-	step_40
-	step_up
-	step_41
+	lock_facing_direction
+	walk_up
+	unlock_facing_direction
 	step_end
 
 LinkContestRoom1_Movement_27AD0F: @ 827AD0F
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 LinkContestRoom1_Movement_27AD11: @ 827AD11
-	step_58
+	emote_heart
 	step_end
 
 LinkContestRoom1_Movement_27AD13: @ 827AD13
-	step_25
+	walk_in_place_fastest_down
 	step_end
 
 LinkContestRoom1_Movement_27AD15: @ 827AD15
-	step_left
-	step_left
-	step_25
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 LinkContestRoom1_Movement_27AD19: @ 827AD19
-	step_right
-	step_right
-	step_25
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 LinkContestRoom1_Movement_27AD1D: @ 827AD1D
-	step_up
-	step_25
+	walk_up
+	walk_in_place_fastest_down
 	step_end
 
 LinkContestRoom1_Movement_27AD20: @ 827AD20
-	step_14
-	step_14
+	delay_16
+	delay_16
 	step_end
 
 LinkContestRoom1_Movement_27AD23: @ 827AD23
-	step_28
+	walk_in_place_fastest_right
 	step_end
 
 LinkContestRoom1_Movement_27AD25: @ 827AD25
-	step_27
+	walk_in_place_fastest_left
 	step_end
 
 LinkContestRoom1_Movement_27AD27: @ 827AD27
-	step_25
+	walk_in_place_fastest_down
 	step_end
 
 LinkContestRoom1_Movement_27AD29: @ 827AD29
-	step_left
-	step_left
-	step_up
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 LinkContestRoom1_Movement_27AD2D: @ 827AD2D
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
 	step_end
 
 LinkContestRoom1_Movement_27AD33: @ 827AD33
-	step_02
-	step_14
-	step_4e
+	face_left
+	delay_16
+	face_original_direction
 	step_end
 
 LinkContestRoom1_Movement_27AD37: @ 827AD37
-	step_01
-	step_14
-	step_4e
+	face_up
+	delay_16
+	face_original_direction
 	step_end
 
 LinkContestRoom1_Movement_27AD3B: @ 827AD3B
-	step_03
-	step_14
-	step_4e
+	face_right
+	delay_16
+	face_original_direction
 	step_end
 
 LinkContestRoom1_Movement_27AD3F: @ 827AD3F
-	step_00
-	step_14
-	step_4e
+	face_down
+	delay_16
+	face_original_direction
 	step_end
 
 LinkContestRoom1_Movement_27AD43: @ 827AD43
-	step_01
+	face_up
 	step_end
 
 LinkContestRoom1_Movement_27AD45: @ 827AD45
-	step_01
-	step_14
-	step_28
+	face_up
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 LinkContestRoom1_Movement_27AD49: @ 827AD49
-	step_27
-	step_14
-	step_14
-	step_25
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 LinkContestRoom1_Movement_27AD4E: @ 827AD4E
-	step_14
-	step_14
-	step_25
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 LinkContestRoom1_Movement_27AD52: @ 827AD52
-	step_up
-	step_right
-	step_right
-	step_right
-	step_26
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LinkContestRoom1_Movement_27AD58: @ 827AD58
-	step_17
-	step_17
-	step_17
-	step_15
-	step_26
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
+	walk_in_place_fastest_up
 	step_end
 
 LinkContestRoom1_Movement_27AD5E: @ 827AD5E
-	step_up
-	step_right
-	step_26
+	walk_up
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 LinkContestRoom1_Movement_27AD62: @ 827AD62
-	step_17
-	step_15
-	step_26
+	walk_fast_left
+	walk_fast_down
+	walk_in_place_fastest_up
 	step_end
 
 LinkContestRoom1_Movement_27AD66: @ 827AD66
-	step_up
-	step_left
-	step_26
+	walk_up
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 LinkContestRoom1_Movement_27AD6A: @ 827AD6A
-	step_18
-	step_15
-	step_26
+	walk_fast_right
+	walk_fast_down
+	walk_in_place_fastest_up
 	step_end
 
 LinkContestRoom1_Movement_27AD6E: @ 827AD6E
-	step_up
-	step_left
-	step_left
-	step_left
-	step_26
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 LinkContestRoom1_Movement_27AD74: @ 827AD74
-	step_18
-	step_18
-	step_18
-	step_15
-	step_26
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_in_place_fastest_up
 	step_end
 
 LinkContestRoom1_Movement_27AD7A: @ 827AD7A
-	step_right
-	step_right
-	step_up
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 LinkContestRoom1_Movement_27AD7E: @ 827AD7E
-	step_up
+	walk_up
 	step_end
 
 LinkContestRoom1_EventScript_27AD80:: @ 827AD80

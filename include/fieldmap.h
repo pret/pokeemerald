@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELDMAP_H
 #define GUARD_FIELDMAP_H
 
-extern struct BackupMapData gUnknown_03005DC0;
+extern struct BackupMapLayout gUnknown_03005DC0;
 
 u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int, int);
@@ -14,6 +14,7 @@ int CanCameraMoveInDirection(int direction);
 u16 GetBehaviorByMetatileId(u16 metatileId);
 void sav1_camera_get_focus_coords(u16 *x, u16 *y);
 u8 MapGridGetMetatileLayerTypeAt(s32 x, s32 y);
+u8 MapGridGetZCoordAt(int x, int y);
 u8 CameraMove(s32 deltaX, s32 deltaY);
 void mapheader_copy_mapdata_with_padding(struct MapHeader *mapHeader);
 void map_copy_with_padding(u16 *map, u16 width, u16 height);

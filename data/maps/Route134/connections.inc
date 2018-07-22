@@ -1,6 +1,6 @@
 Route134_MapConnectionsList: @ 8486D04
-	connection left, 0, SLATEPORT_CITY, 0
-	connection right, 0, ROUTE_133, 0
+	connection left, 0, MAP_SLATEPORT_CITY
+	connection right, 0, MAP_ROUTE133
 
 Route134_MapConnections: @ 8486D1C
 	.4byte 0x2

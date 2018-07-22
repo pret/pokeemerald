@@ -25,6 +25,10 @@ struct TrainerMoney
 #define TYPE_FORESIGHT  0xFE
 #define TYPE_ENDTABLE   0xFF
 
+// defines for the 'DoBounceEffect' function
+#define BOUNCE_MON          0x0
+#define BOUNCE_HEALTHBOX    0x1
+
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
 void CB2_QuitRecordedBattle(void);
@@ -38,15 +42,15 @@ u32 sub_80391E0(u8 arrayId, u8 caseId);
 u32 sub_80397C4(u32 setId, u32 tableId);
 void oac_poke_opponent(struct Sprite *sprite);
 void SpriteCallbackDummy_2(struct Sprite *sprite);
-void sub_8039934(struct Sprite *sprite);
+void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
 void sub_8039AD8(struct Sprite *sprite);
 void sub_8039B2C(struct Sprite *sprite);
 void sub_8039B58(struct Sprite *sprite);
 void sub_8039BB4(struct Sprite *sprite);
 void sub_80105DC(struct Sprite *sprite);
 void sub_8039C00(struct Sprite *sprite);
-void dp11b_obj_instanciate(u8 battlerId, u8 b, s8 c, s8 d);
-void dp11b_obj_free(u8 battlerId, bool8 b);
+void DoBounceEffect(u8 battlerId, u8 b, s8 c, s8 d);
+void EndBounceEffect(u8 battlerId, bool8 b);
 void sub_8039E44(struct Sprite *sprite);
 void sub_8039E60(struct Sprite *sprite);
 void sub_8039E84(struct Sprite *sprite);
@@ -80,6 +84,6 @@ extern const u8 gStatusConditionString_IceJpn[8];
 extern const u8 gStatusConditionString_ConfusionJpn[8];
 extern const u8 gStatusConditionString_LoveJpn[8];
 
-extern const u8 * const gStatusConditionStringsTable[7][2];
+extern const u8 *const gStatusConditionStringsTable[7][2];
 
 #endif // GUARD_BATTLE_MAIN_H

@@ -5988,7 +5988,7 @@ sub_811D0BC: @ 811D0BC
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
@@ -8988,7 +8988,7 @@ _0811E852:
 	adds r1, r5, 0
 	movs r2, 0x4C
 	movs r3, 0x28
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -9019,7 +9019,7 @@ _0811E8A0:
 	adds r1, r5, 0
 	movs r2, 0x34
 	movs r3, 0x28
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40

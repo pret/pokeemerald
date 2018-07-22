@@ -228,7 +228,7 @@ static void ShowMapNamePopUpWindow(void)
 
     if(InBattlePyramid())
     {
-        if(gMapHeader.mapDataId == 0x17A)
+        if(gMapHeader.mapLayoutId == 0x17A)
         {
             withoutPrefixPtr = &(mapDisplayHeader[3]);
             mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[7];
@@ -236,7 +236,7 @@ static void ShowMapNamePopUpWindow(void)
         else
         {
             withoutPrefixPtr = &(mapDisplayHeader[3]);
-            mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->battlePyramidWildHeaderId];
+            mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->frontier.field_CB2];
         }
         StringCopy(withoutPrefixPtr, mapDisplayHeaderSource);
     }
@@ -463,7 +463,7 @@ static void LoadMapNamePopUpWindowBg(void)
     }
     popUpThemeId = gRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
-    LoadBgTiles(GetWindowAttribute(popupWindowId, 0), &(gMapPopUp_Outline_Table[popUpThemeId][0]), 0x400, 0x21D);
+    LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_PRIORITY), &(gMapPopUp_Outline_Table[popUpThemeId][0]), 0x400, 0x21D);
     CallWindowFunction(popupWindowId, sub_80D4A78);
     PutWindowTilemap(popupWindowId);
     if(gMapHeader.weather == WEATHER_BUBBLES)

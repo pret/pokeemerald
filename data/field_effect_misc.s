@@ -27,7 +27,7 @@ gSpriteImage_858DB78:: @ 858DB78
 
 	.align 2
 gFieldEffectObjectPalette7:: @ 858DC18
-	.incbin "graphics/map_objects/palettes/field_effect_object_palette_07.gbapal"
+	.incbin "graphics/event_objects/palettes/field_effect_object_palette_07.gbapal"
 
     .align 2
 gSpriteImage_858DC38:: @ 858DC38
@@ -75,7 +75,7 @@ gSpriteImage_858E138:: @ 858E138
 
 	.align 2
 gFieldEffectObjectPalette8:: @ 858E1B8
-	.incbin "graphics/map_objects/palettes/field_effect_object_palette_08.gbapal"
+	.incbin "graphics/event_objects/palettes/field_effect_object_palette_08.gbapal"
 
     .align 2
 gSpriteImage_858E1D8:: @ 858E1D8
@@ -240,5 +240,5 @@ gSpriteAnimTable_858E87C:: @ 858E87C
 
     .align 2
 gUnknown_0858E880:: @ 858E880
-	spr_template 0xffff, 0x1000, gFieldObjectBaseOam_32x8, gSpriteAnimTable_858E87C, gUnknown_0858E84C, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0xffff, 0x1000, gEventObjectBaseOam_32x8, gSpriteAnimTable_858E87C, gUnknown_0858E84C, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_METATILE_BEHAVIOR
 #define GUARD_METATILE_BEHAVIOR
 
-bool8 ShouldDoJumpLandingDustEffect(u8);
+bool8 MetatileBehavior_IsATile(u8);
 bool8 MetatileBehavior_IsEncounterTile(u8);
 bool8 MetatileBehavior_IsJumpEast(u8);
 bool8 MetatileBehavior_IsJumpWest(u8);
@@ -74,7 +74,7 @@ bool8 MetatileBehavior_IsPuddle(u8);
 bool8 MetatileBehavior_IsTallGrass(u8);
 bool8 MetatileBehavior_IsLongGrass(u8);
 bool8 MetatileBehavior_IsBerryTreeSoil(u8);
-bool8 MetatileBehavior_IsAsh(u8);
+bool8 MetatileBehavior_IsAshGrass(u8);
 bool8 MetatileBehavior_IsUnusedFootprintMetatile(u8);
 bool8 MetatileBehavior_IsBridge(u8);
 u8 MetatileBehavior_GetBridgeSth(u8);

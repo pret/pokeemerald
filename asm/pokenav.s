@@ -10101,7 +10101,7 @@ sub_81CC09C: @ 81CC09C
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x40
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x4
@@ -11351,7 +11351,7 @@ sub_81CCA1C: @ 81CCA1C
 	lsrs r0, 24
 	movs r1, 0x42
 	movs r2, 0x40
-	bl box_border_load_tiles_and_pal
+	bl LoadUserWindowBorderGfx_
 	ldrb r0, [r5, 0x8]
 	movs r1, 0x42
 	movs r2, 0x4
@@ -21001,7 +21001,7 @@ sub_81D1E90: @ 81D1E90
 	movs r1, 0xC8
 	movs r2, 0xC
 	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	strb r0, [r4, 0x9]
 	add sp, 0x10
 	pop {r4}
@@ -22282,7 +22282,7 @@ sub_81D2824: @ 81D2824
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_809882C
+	bl LoadUserWindowBorderGfx
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20
@@ -25584,7 +25584,7 @@ sub_81D4258: @ 81D4258
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x1
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetEventObjectIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r0, [r0]
 	add sp, 0x4
@@ -25606,7 +25606,7 @@ sub_81D427C: @ 81D427C
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	adds r5, r1, r2
 	ldr r4, =gUnknown_030012F8
 	ldr r3, =gPlayerAvatar
@@ -25644,7 +25644,7 @@ _081D42CA:
 	mov r8, r0
 	cmp r0, 0x3
 	bls _081D42CA
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -25700,7 +25700,7 @@ _081D4356:
 _081D4360:
 	movs r4, 0
 	mov r8, r4
-	ldr r6, =gMapObjects
+	ldr r6, =gEventObjects
 	mov r10, r6
 _081D4368:
 	ldr r3, =gPlayerAvatar
@@ -25718,7 +25718,7 @@ _081D4368:
 	ldrsh r2, [r4, r6]
 	movs r6, 0
 	ldrsh r0, [r0, r6]
-	ldr r6, =gMapObjects
+	ldr r6, =gEventObjects
 	mov r9, r6
 	mov r12, r3
 	adds r7, r1, 0
@@ -25866,7 +25866,7 @@ _081D449E:
 	ldrsh r1, [r4, r3]
 	movs r3, 0
 	ldrsh r0, [r0, r3]
-	ldr r3, =gMapObjects
+	ldr r3, =gEventObjects
 	mov r9, r3
 	mov r12, r2
 	cmp r1, r0
@@ -26124,7 +26124,7 @@ _081D46D0:
 	ldrsh r0, [r0, r3]
 	cmp r0, 0
 	bne _081D476E
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -26149,7 +26149,7 @@ _081D46D0:
 	beq _081D470C
 	b _081D447C
 _081D470C:
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -26203,7 +26203,7 @@ _081D476E:
 	ldrsh r0, [r0, r2]
 	cmp r0, 0
 	bne _081D480C
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -26228,7 +26228,7 @@ _081D476E:
 	beq _081D47AA
 	b _081D45AA
 _081D47AA:
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -26299,7 +26299,7 @@ sub_81D4834: @ 81D4834
 	lsls r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r3, =gMapObjects
+	ldr r3, =gEventObjects
 	ldr r1, =gPlayerAvatar
 	ldrb r2, [r1, 0x5]
 	lsls r1, r2, 3
@@ -26350,7 +26350,7 @@ sub_81D4890: @ 81D4890
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r1, r0
 	movs r1, 0
 	ldr r3, =gUnknown_030012FC
@@ -26503,9 +26503,9 @@ _081D49E0:
 	bx r0
 	thumb_func_end sub_81D4998
 
-	thumb_func_start FieldObjectIsFarawayIslandMew
-@ bool8 FieldObjectIsFarawayIslandMew(struct npc_state *fieldObject)
-FieldObjectIsFarawayIslandMew: @ 81D49E8
+	thumb_func_start EventObjectIsFarawayIslandMew
+@ bool8 EventObjectIsFarawayIslandMew(struct npc_state *eventObject)
+EventObjectIsFarawayIslandMew: @ 81D49E8
 	push {lr}
 	adds r2, r0, 0
 	ldr r0, =gSaveBlock1Ptr
@@ -26525,10 +26525,10 @@ _081D4A0C:
 _081D4A0E:
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectIsFarawayIslandMew
+	thumb_func_end EventObjectIsFarawayIslandMew
 
-	thumb_func_start unown_chamber_related
-unown_chamber_related: @ 81D4A14
+	thumb_func_start IsMewPlayingHideAndSeek
+IsMewPlayingHideAndSeek: @ 81D4A14
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -26557,7 +26557,7 @@ _081D4A50:
 _081D4A52:
 	pop {r1}
 	bx r1
-	thumb_func_end unown_chamber_related
+	thumb_func_end IsMewPlayingHideAndSeek
 
 	thumb_func_start sub_81D4A58
 sub_81D4A58: @ 81D4A58
@@ -26598,7 +26598,7 @@ sub_81D4A90: @ 81D4A90
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r5, r1, r0
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x21
@@ -29331,7 +29331,7 @@ sub_81D6180: @ 81D6180
 	thumb_func_end sub_81D6180
 
 	thumb_func_start GetTrainerHillTrainerFlag
-@ u8 GetTrainerHillTrainerFlag(u8 fieldObjectId)
+@ u8 GetTrainerHillTrainerFlag(u8 eventObjectId)
 GetTrainerHillTrainerFlag: @ 81D619C
 	push {r4,lr}
 	adds r4, r0, 0
@@ -29340,7 +29340,7 @@ GetTrainerHillTrainerFlag: @ 81D619C
 	bl sub_81D5520
 	lsls r0, 24
 	lsrs r0, 23
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	lsls r1, r4, 3
 	adds r1, r4
 	lsls r1, 2

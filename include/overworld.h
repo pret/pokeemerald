@@ -7,17 +7,17 @@ struct UnkPlayerStruct
     u8 player_field_1;
 };
 
-struct LinkPlayerMapObject
+struct LinkPlayerEventObject
 {
     u8 active;
     u8 linkPlayerId;
-    u8 mapObjId;
+    u8 eventObjId;
     u8 mode;
 };
 
 // Exported RAM declarations
 extern struct WarpData gUnknown_020322DC;
-extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
+extern struct LinkPlayerEventObject gLinkPlayerEventObjects[4];
 
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;
@@ -37,11 +37,11 @@ void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
 void SetGameStat(u8 index, u32 value);
 void ApplyNewEncryptionKeyToGameStats(u32 newKey);
-void LoadMapObjTemplatesFromHeader(void);
-void LoadSaveblockMapObjScripts(void);
-void Overworld_SetMapObjTemplateCoords(u8 localId, s16 x, s16 y);
-void Overworld_SetMapObjTemplateMovementType(u8 localId, u8 movementType);
-const struct MapData *get_mapdata_header(void);
+void LoadEventObjTemplatesFromHeader(void);
+void LoadSaveblockEventObjScripts(void);
+void Overworld_SetEventObjTemplateCoords(u8 localId, s16 x, s16 y);
+void Overworld_SetEventObjTemplateMovementType(u8 localId, u8 movementType);
+const struct MapLayout *GetMapLayout(void);
 void ApplyCurrentWarp(void);
 void set_warp2_warp3_to_neg_1(void);
 void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -82,7 +82,7 @@ bool32 Overworld_IsBikingAllowed(void);
 void SetDefaultFlashLevel(void);
 void Overworld_SetFlashLevel(s32 flashLevel);
 u8 Overworld_GetFlashLevel(void);
-void sub_8085524(u16 mapDataId);
+void sub_8085524(u16 mapLayoutId);
 void sub_8085540(u8 var);
 u8 sub_808554C(void);
 u16 GetLocationMusic(struct WarpData *warp);
@@ -141,6 +141,6 @@ bool32 sub_8087598(void);
 bool32 sub_80875C8(void);
 bool32 sub_8087634(void);
 bool32 sub_808766C(void);
-void ZeroAllLinkPlayerMapObjects(void);
+void ClearLinkPlayerEventObjects(void);
 
 #endif // GUARD_OVERWORLD_H

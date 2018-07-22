@@ -213,7 +213,7 @@ Route120_EventScript_28CF36:: @ 828CF36
 
 Route111_EventScript_28CF56:: @ 828CF56
 	special GabbyAndTyBeforeInterview
-	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
+	special GabbyAndTySetScriptVarsToEventObjectLocalIds
 	compare VAR_FACING, 2
 	call_if 1, Route111_EventScript_28CF94
 	compare VAR_FACING, 1
@@ -247,7 +247,7 @@ Route111_EventScript_28CFC3:: @ 828CFC3
 Route118_EventScript_28CFC3:: @ 828CFC3
 Route120_EventScript_28CFC3:: @ 828CFC3
 	special GabbyAndTyBeforeInterview
-	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
+	special GabbyAndTySetScriptVarsToEventObjectLocalIds
 	compare VAR_FACING, 2
 	call_if 1, Route111_EventScript_28CF94
 	compare VAR_FACING, 1
@@ -270,15 +270,15 @@ Route120_EventScript_28CFC3:: @ 828CFC3
 	end
 
 Route111_Movement_28D04D: @ 828D04D
-	step_1d
+	walk_in_place_down
 	step_end
 
 Route111_Movement_28D04F: @ 828D04F
-	step_1e
+	walk_in_place_up
 	step_end
 
 Route111_Movement_28D051: @ 828D051
-	step_1f
+	walk_in_place_left
 	step_end
 
 Route111_EventScript_28D053:: @ 828D053

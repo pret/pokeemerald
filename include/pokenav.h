@@ -21,6 +21,7 @@ void sub_81D1EC0(void);
 void sub_81D1D04(u8);
 bool8 sub_81D1C44(u8);
 void sub_81D5FB4(u16*);
+bool8 sub_81D4A58(struct EventObject*);
 
 
 #endif //GUARD_POKENAV_H

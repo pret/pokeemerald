@@ -1,6 +1,6 @@
 Underwater4_MapConnectionsList: @ 8486DC4
-	connection up, 0, UNDERWATER_3, 0
-	connection emerge, 0, ROUTE_128, 0
+	connection up, 0, MAP_UNDERWATER3
+	connection emerge, 0, MAP_ROUTE128
 
 Underwater4_MapConnections: @ 8486DDC
 	.4byte 0x2

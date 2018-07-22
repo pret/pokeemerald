@@ -1,5 +1,6 @@
 #include "constants/moves.h"
 #include "constants/species.h"
+#include "constants/trainers.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -1049,8 +1050,10 @@ gUnknown_08611D08:: @ 8611D08
 	.4byte gUnknown_085EE3C4
 
 	.align 1
-gUnknown_08611D30:: @ 8611D30
-	.2byte 0x0325, 0x0326, 0x0327, 0x0328, 0x0329, 0x032a, 0x032b, 0x0000
+gFacilityToBrainTrainerId:: @ 8611D30
+	.2byte TRAINER_ANABEL, TRAINER_TUCKER, TRAINER_SPENSER
+	.2byte TRAINER_GRETA, TRAINER_NOLAND, TRAINER_LUCY
+	.2byte TRAINER_BRANDON
 
 	.align 2
 gUnknown_08611D40:: @ 8611D40
@@ -1454,43 +1457,43 @@ gUnknown_08612690:: @ 8612690
 	.4byte 0x00000400, 0x00000800
 
 gUnknown_08612698:: @ 8612698
-	step_94
-	step_right
-	step_95
+	store_lock_anim
+	walk_right
+	free_unlock_anim
 	step_end
 
 gUnknown_0861269C:: @ 861269C
-	step_94
-	step_down
-	step_95
+	store_lock_anim
+	walk_down
+	free_unlock_anim
 	step_end
 
 gUnknown_086126A0:: @ 86126A0
-	step_94
-	step_left
-	step_95
+	store_lock_anim
+	walk_left
+	free_unlock_anim
 	step_end
 
 gUnknown_086126A4:: @ 86126A4
-	step_94
-	step_up
-	step_95
+	store_lock_anim
+	walk_up
+	free_unlock_anim
 	step_end
 
 gUnknown_086126A8:: @ 86126A8
-	step_03
+	face_right
 	step_end
 
 gUnknown_086126AA:: @ 86126AA
-	step_00
+	face_down
 	step_end
 
 gUnknown_086126AC:: @ 86126AC
-	step_02
+	face_left
 	step_end
 
 gUnknown_086126AE:: @ 86126AE
-	step_01
+	face_up
 	step_end
 
 @ 86126B0

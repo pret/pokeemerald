@@ -1,15 +1,15 @@
 BirthIsland_Harbor: @ 84857B0
-	.4byte BirthIsland_Harbor_MapAttributes
+	.4byte IslandHarbor_Layout
 	.4byte BirthIsland_Harbor_MapEvents
 	.4byte BirthIsland_Harbor_MapScripts
 	.4byte 0x0
 	.2byte 65535
 	.2byte 405
-	.byte 200
+	.byte MAPSEC_BIRTH_ISLAND_2
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

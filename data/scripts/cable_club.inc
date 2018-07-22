@@ -342,8 +342,8 @@ OldaleTown_PokemonCenter_2F_EventScript_276DE0:: @ 8276DE0
 	end
 
 OldaleTown_PokemonCenter_2F_Movement_276E10: @ 8276E10
-	step_up
-	step_up
+	walk_up
+	walk_up
 	step_end
 
 OldaleTown_PokemonCenter_2F_EventScript_276E13:: @ 8276E13
@@ -468,14 +468,14 @@ OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
 	waitdooranim
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 9, 1
 	waitdooranim
 	release
 	compare VAR_0x8004, 5
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277036
 	special sub_809D2BC
-	warp SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
+	warp MAP_SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
 	special sub_80AF948
 	waitstate
 	end
@@ -487,7 +487,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27702B:: @ 827702B
 
 OldaleTown_PokemonCenter_2F_EventScript_277036:: @ 8277036
 	special sub_809D2BC
-	warp DOUBLE_BATTLE_COLOSSEUM, 255, 5, 8
+	warp MAP_DOUBLE_BATTLE_COLOSSEUM, 255, 5, 8
 	special sub_80AF948
 	waitstate
 	end
@@ -572,12 +572,12 @@ OldaleTown_PokemonCenter_2F_EventScript_27713A:: @ 827713A
 	waitdooranim
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 9, 1
 	waitdooranim
 	release
 	special sub_809D2BC
-	setwarp TRADE_CENTER, 255, 5, 8
+	setwarp MAP_TRADE_CENTER, 255, 5, 8
 	special sub_80AF948
 	waitstate
 	end
@@ -647,12 +647,12 @@ OldaleTown_PokemonCenter_2F_EventScript_27724C:: @ 827724C
 	waitdooranim
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 9, 1
 	waitdooranim
 	release
 	special sub_809D2BC
-	setwarp RECORD_CORNER, 255, 8, 9
+	setwarp MAP_RECORD_CORNER, 255, 8, 9
 	special sub_80AF948
 	waitstate
 	end
@@ -736,52 +736,52 @@ OldaleTown_PokemonCenter_2F_EventScript_27733F:: @ 827733F
 	end
 
 OldaleTown_PokemonCenter_2F_Movement_277349: @ 8277349
-	step_00
+	face_down
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27734B: @ 827734B
-	step_03
+	face_right
 	step_end
 
 MossdeepCity_GameCorner_1F_Movement_27734D: @ 827734D
 OldaleTown_PokemonCenter_2F_Movement_27734D: @ 827734D
-	step_02
+	face_left
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27734F: @ 827734F
-	step_down
-	step_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_277352: @ 8277352
-	step_right
-	step_up
-	step_up
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_277356: @ 8277356
-	step_left
-	step_up
-	step_up
+	walk_left
+	walk_up
+	walk_up
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27735A: @ 827735A
-	step_up
+	walk_up
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27735C: @ 827735C
-	step_02
+	face_left
 	step_end
 
 OldaleTown_PokemonCenter_2F_Movement_27735E: @ 827735E
-	step_03
+	face_right
 	step_end
 
 MossdeepCity_GameCorner_1F_Movement_277360: @ 8277360
-	step_left
-	step_up
-	step_up
-	step_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 gUnknown_08277365:: @ 8277365
@@ -999,7 +999,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27751B:: @ 827751B
 	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
 	copyvar VAR_0x8007, VAR_LAST_TALKED
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277668
 	message OldaleTown_PokemonCenter_2F_Text_27940D
@@ -1046,12 +1046,12 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	waitdooranim
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 5, 1
 	waitdooranim
 	special sub_8018090
 	special sub_809D2BC
-	warpteleport2 UNION_ROOM, 255, 7, 11
+	warpteleport2 MAP_UNION_ROOM, 255, 7, 11
 	waitstate
 	special UnionRoomSpecial
 	waitstate
@@ -1108,7 +1108,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2776A4:: @ 82776A4
 	specialvar VAR_RESULT, sub_813990C
 	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276E13
 	message OldaleTown_PokemonCenter_2F_Text_279013
@@ -1385,7 +1385,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277B3A:: @ 8277B3A
 	waitdooranim
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -1396,7 +1396,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277B8A:: @ 8277B8A
 	lockall
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_27733F
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
 	goto_eq EventScript_277BB4
 	fadescreen 1
@@ -1495,7 +1495,7 @@ MossdeepCity_GameCorner_1F_EventScript_277C91:: @ 8277C91
 	faceplayer
 	message MossdeepCity_GameCorner_1F_Text_278CEB
 	waitmessage
-	specialvar VAR_RESULT, sub_80093CC
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E48
 	delay 60
@@ -1595,7 +1595,7 @@ MossdeepCity_GameCorner_1F_EventScript_277E0E:: @ 8277E0E
 	closemessage
 	applymovement 255, MossdeepCity_GameCorner_1F_Movement_277360
 	waitmovement 0
-	hideobjectat 255, PETALBURG_CITY
+	hideobjectat 255, MAP_PETALBURG_CITY
 	release
 	waitstate
 	end

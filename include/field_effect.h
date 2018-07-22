@@ -11,7 +11,7 @@ extern const struct OamData gNewGameBirchOamAttributes;
 
 enum FieldEffectScriptIdx
 {
-    FLDEFF_EXCLAMATION_MARK_ICON_1,
+    FLDEFF_EXCLAMATION_MARK_ICON,
     FLDEFF_USE_CUT_ON_GRASS,
     FLDEFF_USE_CUT_ON_TREE,
     FLDEFF_SHADOW,
@@ -44,7 +44,7 @@ enum FieldEffectScriptIdx
     FLDEFF_NPCFLY_OUT,
     FLDEFF_USE_FLY,
     FLDEFF_FLY_IN,
-    FLDEFF_EXCLAMATION_MARK_ICON_2,
+    FLDEFF_QUESTION_MARK_ICON,
     FLDEFF_FEET_IN_FLOWING_WATER,
     FLDEFF_BIKE_TIRE_TRACKS,
     FLDEFF_SAND_DISGUISE,
@@ -78,8 +78,8 @@ enum FieldEffectScriptIdx
 };
 
 extern s32 gFieldEffectArguments[8];
-extern void (*gUnknown_0203CEEC)(void);
-extern bool8 (*gUnknown_03005DB0)(void);
+extern void (*gPostMenuFieldCallback)(void);
+extern bool8 (*gFieldCallback2)(void);
 
 u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
@@ -148,33 +148,33 @@ bool8 sub_80B7270(struct Task *);
 bool8 sub_80B72D0(struct Task *);
 bool8 sub_80B72F4(struct Task *);
 
-bool8 sub_80B73D0(struct Task *, struct MapObject *);
-bool8 waterfall_1_do_anim_probably(struct Task *, struct MapObject *);
-bool8 waterfall_2_wait_anim_finish_probably(struct Task *, struct MapObject *);
-bool8 sub_80B7450(struct Task *, struct MapObject *);
-bool8 sub_80B7478(struct Task *, struct MapObject *);
+bool8 sub_80B73D0(struct Task *, struct EventObject *);
+bool8 waterfall_1_do_anim_probably(struct Task *, struct EventObject *);
+bool8 waterfall_2_wait_anim_finish_probably(struct Task *, struct EventObject *);
+bool8 sub_80B7450(struct Task *, struct EventObject *);
+bool8 sub_80B7478(struct Task *, struct EventObject *);
 
 bool8 dive_1_lock(struct Task *);
 bool8 dive_2_unknown(struct Task *);
 bool8 dive_3_unknown(struct Task *);
 
-bool8 sub_80B764C(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B7684(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B76B8(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B7704(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B77F8(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B7814(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80B764C(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B7684(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B76B8(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B7704(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B77F8(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B7814(struct Task *, struct EventObject *, struct Sprite *);
 
-bool8 sub_80B78EC(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B791C(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B7968(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B79BC(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80B78EC(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B791C(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B7968(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B79BC(struct Task *, struct EventObject *, struct Sprite *);
 
-bool8 sub_80B7AE8(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B7B18(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B7B94(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B7BCC(struct Task *, struct MapObject *, struct Sprite *);
-bool8 sub_80B7BF4(struct Task *, struct MapObject *, struct Sprite *);
+bool8 sub_80B7AE8(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B7B18(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B7B94(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B7BCC(struct Task *, struct EventObject *, struct Sprite *);
+bool8 sub_80B7BF4(struct Task *, struct EventObject *, struct Sprite *);
 
 void sub_80B7D14(struct Task *);
 void sub_80B7D34(struct Task *);
@@ -229,5 +229,8 @@ void sub_80B9A60(struct Task *);
 void sub_80B9C28(s16*, u8);
 void sub_80B9C54(s16*, u8);
 void sub_80B9CDC(s16*, u8);
+
+void sub_80B7CAC(struct Sprite*);
+void sub_80B7A58(struct Sprite*);
 
 #endif //GUARD_FIELD_EFFECTS_H

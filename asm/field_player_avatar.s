@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start FieldObjectCB_NoMovement2
-@ void FieldObjectCB_NoMovement2(struct obj *object)
-FieldObjectCB_NoMovement2: @ 808A998
+	thumb_func_start MovementType_Player
+@ void MovementType_Player(struct obj *object)
+MovementType_Player: @ 808A998
 	push {lr}
 	adds r1, r0, 0
 	movs r0, 0x2E
@@ -15,20 +15,20 @@ FieldObjectCB_NoMovement2: @ 808A998
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	adds r0, r2
-	ldr r2, =FieldObjectCB2_NoMovement2
-	bl FieldObjectStep
+	ldr r2, =EventObjectCB2_NoMovement2
+	bl UpdateEventObjectCurrentMovement
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end FieldObjectCB_NoMovement2
+	thumb_func_end MovementType_Player
 
-	thumb_func_start FieldObjectCB2_NoMovement2
-FieldObjectCB2_NoMovement2: @ 808A9BC
+	thumb_func_start EventObjectCB2_NoMovement2
+EventObjectCB2_NoMovement2: @ 808A9BC
 	movs r0, 0
 	bx lr
-	thumb_func_end FieldObjectCB2_NoMovement2
+	thumb_func_end EventObjectCB2_NoMovement2
 
 	thumb_func_start player_step
 @ void player_step(int dpad_direction, int buttons_new, int buttons_held)
@@ -48,7 +48,7 @@ player_step: @ 808A9C0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
 	bl sub_808C280
@@ -60,7 +60,7 @@ player_step: @ 808A9C0
 	bl Bike_TryAcroBikeHistoryUpdate
 	adds r0, r5, 0
 	mov r1, r8
-	bl TryInterruptFieldObjectSpecialAnim
+	bl TryInterruptEventObjectSpecialAnim
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808AA26
@@ -85,25 +85,25 @@ _0808AA26:
 	.pool
 	thumb_func_end player_step
 
-	thumb_func_start TryInterruptFieldObjectSpecialAnim
-@ bool8 TryInterruptFieldObjectSpecialAnim(struct npc_state *fieldObject, u8 direction)
-TryInterruptFieldObjectSpecialAnim: @ 808AA38
+	thumb_func_start TryInterruptEventObjectSpecialAnim
+@ bool8 TryInterruptEventObjectSpecialAnim(struct npc_state *eventObject, u8 direction)
+TryInterruptEventObjectSpecialAnim: @ 808AA38
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r6, r5, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808AA92
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808AA92
 	adds r0, r4, 0
-	bl FieldObjectGetSpecialAnim
+	bl EventObjectGetHeldMovementActionId
 	lsls r0, 24
 	movs r1, 0xE7
 	lsls r1, 24
@@ -123,7 +123,7 @@ _0808AA74:
 	beq _0808AA84
 _0808AA7C:
 	adds r0, r4, 0
-	bl FieldObjectClearAnim
+	bl EventObjectClearHeldMovement
 	b _0808AA92
 _0808AA84:
 	adds r0, r6, 0
@@ -138,10 +138,10 @@ _0808AA94:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end TryInterruptFieldObjectSpecialAnim
+	thumb_func_end TryInterruptEventObjectSpecialAnim
 
 	thumb_func_start npc_clear_strange_bits
-@ void npc_clear_strange_bits(struct npc_state *fieldObject)
+@ void npc_clear_strange_bits(struct npc_state *eventObject)
 npc_clear_strange_bits: @ 808AA9C
 	ldrb r2, [r0, 0x1]
 	movs r1, 0x11
@@ -240,7 +240,7 @@ GetForcedMovementByMetatileBehavior: @ 808AB38
 	ands r0, r1
 	cmp r0, 0
 	bne _0808AB8A
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -290,7 +290,7 @@ ForcedMovement_None: @ 808AB94
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
 	ldrb r2, [r0, 0x1]
 	movs r1, 0x3
@@ -302,7 +302,7 @@ ForcedMovement_None: @ 808AB94
 	ldrb r1, [r0, 0x18]
 	lsls r1, 28
 	lsrs r1, 28
-	bl FieldObjectSetDirection
+	bl SetEventObjectDirection
 	ldrb r1, [r4]
 	movs r0, 0xBF
 	ands r0, r1
@@ -386,7 +386,7 @@ DoForcedMovementInCurrentDirection: @ 808AC58
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	adds r0, r2
 	ldrb r2, [r0, 0x1]
 	movs r3, 0x4
@@ -528,7 +528,7 @@ ForcedMovement_Slide: @ 808AD60
 	lsls r2, r3, 3
 	adds r2, r3
 	lsls r2, 2
-	ldr r3, =gMapObjects
+	ldr r3, =gEventObjects
 	adds r2, r3
 	ldrb r3, [r2, 0x1]
 	movs r4, 0x4
@@ -623,7 +623,7 @@ ForcedMovement_MuddySlope: @ 808AE10
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x18]
 	movs r0, 0xF0
@@ -697,7 +697,7 @@ CheckMovementInputNotOnBike: @ 808AE98
 	b _0808AED2
 	.pool
 _0808AEB0:
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -725,7 +725,7 @@ _0808AED2:
 @ void PlayerNotOnBikeNotMoving(u8 direction, u8 heldKeys)
 PlayerNotOnBikeNotMoving: @ 808AEDC
 	push {lr}
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl PlayerFaceDirection
@@ -809,7 +809,7 @@ _0808AF68:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808AFB0
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -848,7 +848,7 @@ CheckForPlayerAvatarCollision: @ 808AFBC
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	ldrh r1, [r4, 0x10]
 	add r0, sp, 0x4
@@ -877,7 +877,7 @@ CheckForPlayerAvatarCollision: @ 808AFBC
 	str r0, [sp]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl CheckForFieldObjectCollision
+	bl CheckForEventObjectCollision
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x8
@@ -899,7 +899,7 @@ sub_808B028: @ 808B028
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	ldrh r1, [r4, 0x10]
 	add r0, sp, 0x4
@@ -938,9 +938,9 @@ sub_808B028: @ 808B028
 	.pool
 	thumb_func_end sub_808B028
 
-	thumb_func_start CheckForFieldObjectCollision
-@ u8 CheckForFieldObjectCollision(struct npc_state *fieldObject, u16 x, u16 y, u8 direction, u8 metatileBehavior)
-CheckForFieldObjectCollision: @ 808B094
+	thumb_func_start CheckForEventObjectCollision
+@ u8 CheckForEventObjectCollision(struct npc_state *eventObject, u16 x, u16 y, u8 direction, u8 metatileBehavior)
+CheckForEventObjectCollision: @ 808B094
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -963,7 +963,7 @@ CheckForFieldObjectCollision: @ 808B094
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -1043,7 +1043,7 @@ _0808B152:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end CheckForFieldObjectCollision
+	thumb_func_end CheckForEventObjectCollision
 
 	thumb_func_start sub_808B164
 sub_808B164: @ 808B164
@@ -1061,7 +1061,7 @@ sub_808B164: @ 808B164
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -1120,7 +1120,7 @@ sub_808B1BC: @ 808B1BC
 	lsrs r0, r5, 16
 	lsrs r1, r4, 16
 	movs r2, 0x3
-	bl GetFieldObjectIdByXYZ
+	bl GetEventObjectIdByXYZ
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x10
@@ -1182,12 +1182,12 @@ sub_808B238: @ 808B238
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl GetFieldObjectIdByXY
+	bl GetEventObjectIdByXY
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x10
 	beq _0808B2D8
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	lsls r1, r6, 3
 	adds r1, r6
 	lsls r1, 2
@@ -1211,7 +1211,7 @@ sub_808B238: @ 808B238
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r7, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808B2D8
@@ -1290,7 +1290,7 @@ IsPlayerCollidingWithFarawayIslandMew: @ 808B324
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2
-	ldr r5, =gMapObjects
+	ldr r5, =gEventObjects
 	adds r3, r1, r5
 	ldrh r2, [r3, 0x10]
 	mov r1, sp
@@ -1305,7 +1305,7 @@ IsPlayerCollidingWithFarawayIslandMew: @ 808B324
 	movs r0, 0x1
 	movs r1, 0x39
 	movs r2, 0x1A
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetEventObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r6, r4, 0
@@ -1401,7 +1401,7 @@ _0808B3F4:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
 	ldr r1, [r2]
 	bl _call_via_r1
@@ -1423,13 +1423,13 @@ _0808B428:
 	thumb_func_end DoPlayerAvatarTransition
 
 	thumb_func_start PlayerAvatarTransition_Dummy
-@ void PlayerAvatarTransition_Dummy(struct npc_state *fieldObject)
+@ void PlayerAvatarTransition_Dummy(struct npc_state *eventObject)
 PlayerAvatarTransition_Dummy: @ 808B43C
 	bx lr
 	thumb_func_end PlayerAvatarTransition_Dummy
 
 	thumb_func_start PlayerAvatarTransition_Normal
-@ void PlayerAvatarTransition_Normal(struct npc_state *fieldObject)
+@ void PlayerAvatarTransition_Normal(struct npc_state *eventObject)
 PlayerAvatarTransition_Normal: @ 808B440
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1439,11 +1439,11 @@ PlayerAvatarTransition_Normal: @ 808B440
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl FieldObjectTurn
+	bl EventObjectTurn
 	movs r0, 0x1
 	bl SetPlayerAvatarStateMask
 	pop {r4}
@@ -1452,7 +1452,7 @@ PlayerAvatarTransition_Normal: @ 808B440
 	thumb_func_end PlayerAvatarTransition_Normal
 
 	thumb_func_start PlayerAvatarTransition_MachBike
-@ void PlayerAvatarTransition_MachBike(struct npc_state *fieldObject)
+@ void PlayerAvatarTransition_MachBike(struct npc_state *eventObject)
 PlayerAvatarTransition_MachBike: @ 808B46C
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1462,11 +1462,11 @@ PlayerAvatarTransition_MachBike: @ 808B46C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl FieldObjectTurn
+	bl EventObjectTurn
 	movs r0, 0x2
 	bl SetPlayerAvatarStateMask
 	movs r0, 0
@@ -1478,7 +1478,7 @@ PlayerAvatarTransition_MachBike: @ 808B46C
 	thumb_func_end PlayerAvatarTransition_MachBike
 
 	thumb_func_start PlayerAvatarTransition_AcroBike
-@ void PlayerAvatarTransition_AcroBike(struct npc_state *fieldObject)
+@ void PlayerAvatarTransition_AcroBike(struct npc_state *eventObject)
 PlayerAvatarTransition_AcroBike: @ 808B4A0
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1488,11 +1488,11 @@ PlayerAvatarTransition_AcroBike: @ 808B4A0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl FieldObjectTurn
+	bl EventObjectTurn
 	movs r0, 0x4
 	bl SetPlayerAvatarStateMask
 	movs r0, 0
@@ -1505,7 +1505,7 @@ PlayerAvatarTransition_AcroBike: @ 808B4A0
 	thumb_func_end PlayerAvatarTransition_AcroBike
 
 	thumb_func_start PlayerAvatarTransition_Surfing
-@ void PlayerAvatarTransition_Surfing(struct npc_state *fieldObject)
+@ void PlayerAvatarTransition_Surfing(struct npc_state *eventObject)
 PlayerAvatarTransition_Surfing: @ 808B4D8
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1515,11 +1515,11 @@ PlayerAvatarTransition_Surfing: @ 808B4D8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl FieldObjectTurn
+	bl EventObjectTurn
 	movs r0, 0x8
 	bl SetPlayerAvatarStateMask
 	ldr r1, =gFieldEffectArguments
@@ -1546,7 +1546,7 @@ PlayerAvatarTransition_Surfing: @ 808B4D8
 	thumb_func_end PlayerAvatarTransition_Surfing
 
 	thumb_func_start PlayerAvatarTransition_Underwater
-@ void PlayerAvatarTransition_Underwater(struct npc_state *fieldObject)
+@ void PlayerAvatarTransition_Underwater(struct npc_state *eventObject)
 PlayerAvatarTransition_Underwater: @ 808B534
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1556,11 +1556,11 @@ PlayerAvatarTransition_Underwater: @ 808B534
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl FieldObjectTurn
+	bl EventObjectTurn
 	movs r0, 0x10
 	bl SetPlayerAvatarStateMask
 	ldrb r0, [r4, 0x4]
@@ -1572,7 +1572,7 @@ PlayerAvatarTransition_Underwater: @ 808B534
 	thumb_func_end PlayerAvatarTransition_Underwater
 
 	thumb_func_start PlayerAvatarTransition_ReturnToField
-@ void PlayerAvatarTransition_ReturnToField(struct npc_state *fieldObject)
+@ void PlayerAvatarTransition_ReturnToField(struct npc_state *eventObject)
 PlayerAvatarTransition_ReturnToField: @ 808B568
 	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2]
@@ -1621,7 +1621,7 @@ _0808B5B6:
 	thumb_func_start player_is_anim_in_certain_ranges
 player_is_anim_in_certain_ranges: @ 808B5BC
 	push {lr}
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -1696,9 +1696,9 @@ PlayerIsAnimActive: @ 808B63C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1715,9 +1715,9 @@ PlayerCheckIfAnimFinishedOrInactive: @ 808B660
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl EventObjectCheckHeldMovementStatus
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1727,7 +1727,7 @@ PlayerCheckIfAnimFinishedOrInactive: @ 808B660
 
 	thumb_func_start player_set_x22
 player_set_x22: @ 808B684
-	ldr r3, =gMapObjects
+	ldr r3, =gEventObjects
 	ldr r1, =gPlayerAvatar
 	ldrb r2, [r1, 0x5]
 	lsls r1, r2, 3
@@ -1740,9 +1740,9 @@ player_set_x22: @ 808B684
 	.pool
 	thumb_func_end player_set_x22
 
-	thumb_func_start player_get_x22
-player_get_x22: @ 808B6A0
-	ldr r2, =gMapObjects
+	thumb_func_start PlayerGetCopyableMovement
+PlayerGetCopyableMovement: @ 808B6A0
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -1753,7 +1753,7 @@ player_get_x22: @ 808B6A0
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end player_get_x22
+	thumb_func_end PlayerGetCopyableMovement
 
 	thumb_func_start sub_808B6BC
 sub_808B6BC: @ 808B6BC
@@ -1766,9 +1766,9 @@ sub_808B6BC: @ 808B6BC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	adds r0, r2
-	bl FieldObjectForceSetSpecialAnim
+	bl EventObjectForceSetHeldMovement
 	pop {r0}
 	bx r0
 	.pool
@@ -1793,10 +1793,10 @@ PlayerSetAnimId: @ 808B6E4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
 	adds r1, r5, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 _0808B712:
 	pop {r4,r5}
 	pop {r0}
@@ -1810,7 +1810,7 @@ PlayerGoSpeed1: @ 808B720
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed0AnimId
+	bl GetWalkNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1825,7 +1825,7 @@ PlayerGoSpeed2: @ 808B738
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed1AnimId
+	bl GetWalkFastMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1840,7 +1840,7 @@ PlayerGoSpeed3: @ 808B750
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed2AnimId
+	bl GetRideWaterCurrentMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1855,7 +1855,7 @@ PlayerGoSpeed4: @ 808B768
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetGoSpeed3AnimId
+	bl GetWalkFastestMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1870,7 +1870,7 @@ PlayerRun: @ 808B780
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetRunAnimId
+	bl GetPlayerRunMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1889,7 +1889,7 @@ PlayerOnBikeCollide: @ 808B798
 	adds r0, r4, 0
 	bl PlayCollisionSoundIfNotFacingWarp
 	adds r0, r4, 0
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1905,7 +1905,7 @@ PlayerOnBikeCollideWithFarawayIslandMew: @ 808B7BC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1924,7 +1924,7 @@ PlayerNotOnBikeCollide: @ 808B7D4
 	adds r0, r4, 0
 	bl PlayCollisionSoundIfNotFacingWarp
 	adds r0, r4, 0
-	bl GetStepInPlaceDelay32AnimId
+	bl GetWalkInPlaceSlowMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1940,7 +1940,7 @@ PlayerNotOnBikeCollideWithFarawayIslandMew: @ 808B7F8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetStepInPlaceDelay32AnimId
+	bl GetWalkInPlaceSlowMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1955,7 +1955,7 @@ PlayerFaceDirection: @ 808B810
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1970,7 +1970,7 @@ PlayerTurnInPlace: @ 808B828
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetStepInPlaceDelay8AnimId
+	bl GetWalkInPlaceFastMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1989,7 +1989,7 @@ PlayerJumpLedge: @ 808B840
 	movs r0, 0xA
 	bl PlaySE
 	adds r0, r4, 0
-	bl GetJumpLedgeAnimId
+	bl GetJump2MovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
@@ -2013,7 +2013,7 @@ _0808B872:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808B89A
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2022,7 +2022,7 @@ _0808B872:
 	ldrb r0, [r0, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_808B6BC
@@ -2038,7 +2038,7 @@ PlayerIdleWheelie: @ 808B8A8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8093648
+	bl GetAcroWheelieFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2052,7 +2052,7 @@ PlayerStartWheelie: @ 808B8C0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8093674
+	bl GetAcroPopWheelieFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2066,7 +2066,7 @@ PlayerEndWheelie: @ 808B8D8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80936A0
+	bl GetAcroEndWheelieFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2084,7 +2084,7 @@ PlayerStandingHoppingWheelie: @ 808B8F0
 	movs r0, 0x22
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_80936CC
+	bl GetAcroWheelieHopFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2103,7 +2103,7 @@ PlayerMovingHoppingWheelie: @ 808B914
 	movs r0, 0x22
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_80936F8
+	bl GetAcroWheelieHopDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2122,7 +2122,7 @@ PlayerLedgeHoppingWheelie: @ 808B938
 	movs r0, 0x22
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_8093724
+	bl GetAcroWheelieJumpDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
@@ -2141,7 +2141,7 @@ PlayerAcroTurnJump: @ 808B95C
 	movs r0, 0x22
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_80934E8
+	bl GetJumpInPlaceTurnAroundMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2160,7 +2160,7 @@ sub_808B980: @ 808B980
 	movs r0, 0x7
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_8093750
+	bl GetAcroWheelieInPlaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2175,7 +2175,7 @@ sub_808B9A4: @ 808B9A4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_809377C
+	bl GetAcroPopWheelieMoveDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2189,7 +2189,7 @@ sub_808B9BC: @ 808B9BC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80937A8
+	bl GetAcroWheelieMoveDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2203,7 +2203,7 @@ npc_use_some_d2s: @ 808B9D4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl d2s_08064034
+	bl GetAcroEndWheelieMoveDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -2219,7 +2219,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 808B9EC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2275,7 +2275,7 @@ GetXYCoordsOneStepInFrontOfPlayer: @ 808BA68
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	ldr r3, =gMapObjects
+	ldr r3, =gEventObjects
 	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
@@ -2291,7 +2291,7 @@ GetXYCoordsOneStepInFrontOfPlayer: @ 808BA68
 	adds r0, r3
 	ldrh r0, [r0, 0x12]
 	strh r0, [r5]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
@@ -2307,7 +2307,7 @@ GetXYCoordsOneStepInFrontOfPlayer: @ 808BA68
 @ void PlayerGetDestCoords(u16 *x, u16 *y)
 PlayerGetDestCoords: @ 808BAAC
 	push {r4,r5,lr}
-	ldr r5, =gMapObjects
+	ldr r5, =gEventObjects
 	ldr r4, =gPlayerAvatar
 	ldrb r3, [r4, 0x5]
 	lsls r2, r3, 3
@@ -2339,7 +2339,7 @@ plaer_get_pos_including_state_based_drift: @ 808BADC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r3, r0, r1
 	ldrb r1, [r3]
 	movs r0, 0xC0
@@ -2462,10 +2462,10 @@ _0808BC30:
 	bx r1
 	thumb_func_end plaer_get_pos_including_state_based_drift
 
-	thumb_func_start player_get_direction_lower_nybble
-@ u8 player_get_direction_lower_nybble()
-player_get_direction_lower_nybble: @ 808BC38
-	ldr r2, =gMapObjects
+	thumb_func_start GetPlayerFacingDirection
+@ u8 GetPlayerFacingDirection()
+GetPlayerFacingDirection: @ 808BC38
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2477,12 +2477,12 @@ player_get_direction_lower_nybble: @ 808BC38
 	lsrs r0, 28
 	bx lr
 	.pool
-	thumb_func_end player_get_direction_lower_nybble
+	thumb_func_end GetPlayerFacingDirection
 
-	thumb_func_start player_get_direction_upper_nybble
-@ u8 player_get_direction_upper_nybble()
-player_get_direction_upper_nybble: @ 808BC58
-	ldr r2, =gMapObjects
+	thumb_func_start GetPlayerMovementDirection
+@ u8 GetPlayerMovementDirection()
+GetPlayerMovementDirection: @ 808BC58
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2493,12 +2493,12 @@ player_get_direction_upper_nybble: @ 808BC58
 	lsrs r0, 4
 	bx lr
 	.pool
-	thumb_func_end player_get_direction_upper_nybble
+	thumb_func_end GetPlayerMovementDirection
 
 	thumb_func_start PlayerGetZCoord
 @ u8 PlayerGetZCoord()
 PlayerGetZCoord: @ 808BC74
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2521,7 +2521,7 @@ sub_808BC90: @ 808BC90
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r0, r1
 	lsls r3, 16
 	asrs r3, 16
@@ -2578,7 +2578,7 @@ sub_808BCF4: @ 808BCF4
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	adds r0, r4, 0
 	bl npc_clear_strange_bits
@@ -2586,7 +2586,7 @@ sub_808BCF4: @ 808BCF4
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl SetEventObjectDirection
 	movs r0, 0x6
 	bl TestPlayerAvatarFlags
 	lsls r0, 24
@@ -2780,7 +2780,7 @@ _0808BE46:
 @ bool8 IsPlayerSurfingNorth()
 IsPlayerSurfingNorth: @ 808BE50
 	push {lr}
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -2809,7 +2809,7 @@ IsPlayerFacingSurfableFishableWater: @ 808BE74
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	ldrh r1, [r4, 0x10]
 	mov r0, sp
@@ -2833,7 +2833,7 @@ IsPlayerFacingSurfableFishableWater: @ 808BE74
 	lsls r3, 28
 	lsrs r3, 28
 	adds r0, r4, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -3053,14 +3053,14 @@ InitPlayerAvatar: @ 808BFE0
 	strh r3, [r0, 0xE]
 	str r3, [sp, 0x10]
 	strh r3, [r0, 0x14]
-	bl SpawnSpecialFieldObject
+	bl SpawnSpecialEventObject
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	lsls r4, r5, 3
 	adds r4, r5
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	ldrb r0, [r4, 0x2]
 	movs r1, 0x1
@@ -3070,7 +3070,7 @@ InitPlayerAvatar: @ 808BFE0
 	strb r0, [r4, 0x1B]
 	adds r0, r4, 0
 	mov r1, r9
-	bl FieldObjectTurn
+	bl EventObjectTurn
 	bl ClearPlayerAvatarInfo
 	ldr r0, =gPlayerAvatar
 	strb r6, [r0, 0x2]
@@ -3097,7 +3097,7 @@ sub_808C0A8: @ 808C0A8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r6, =gMapObjects
+	ldr r6, =gEventObjects
 	ldr r5, =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r1, r0, 3
@@ -3152,7 +3152,7 @@ sub_808C114: @ 808C114
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	movs r0, 0x5
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -3160,7 +3160,7 @@ sub_808C114: @ 808C114
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3186,7 +3186,7 @@ sub_808C15C: @ 808C15C
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	movs r0, 0x6
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -3194,7 +3194,7 @@ sub_808C15C: @ 808C15C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r0, [r6, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -3202,7 +3202,7 @@ sub_808C15C: @ 808C15C
 	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
-	bl sub_8092A0C
+	bl GetFishingDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3227,7 +3227,7 @@ sub_808C1B4: @ 808C1B4
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	movs r0, 0x2
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -3235,7 +3235,7 @@ sub_808C1B4: @ 808C1B4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r0, [r6, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -3244,7 +3244,7 @@ sub_808C1B4: @ 808C1B4
 	mov r8, r0
 	add r4, r8
 	adds r0, r5, 0
-	bl sub_80929BC
+	bl GetAcroWheelieDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3276,7 +3276,7 @@ sub_808C228: @ 808C228
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r4, r0
 	movs r0, 0x7
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -3284,7 +3284,7 @@ sub_808C228: @ 808C228
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r0, [r6, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -3292,7 +3292,7 @@ sub_808C228: @ 808C228
 	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
-	bl FieldObjectDirectionToImageAnimId
+	bl GetFaceDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3414,7 +3414,7 @@ taskFF_bump_boulder: @ 808C34C
 	lsrs r0, 24
 	ldr r6, =gUnknown_08497530
 	ldr r2, =gTasks
-	ldr r5, =gMapObjects
+	ldr r5, =gEventObjects
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3474,49 +3474,49 @@ do_boulder_dust: @ 808C3C4
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r5, 0
-	bl FieldObjectIsSpecialAnimActive
+	bl EventObjectIsHeldMovementActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C3DE
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 _0808C3DE:
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimActive
+	bl EventObjectIsHeldMovementActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C3F0
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 _0808C3F0:
 	adds r0, r5, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808C472
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808C472
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	ldrb r0, [r6, 0xC]
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldrb r0, [r6, 0xC]
-	bl GetSimpleGoAnimId
+	bl GetWalkSlowMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldr r2, =gFieldEffectArguments
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
@@ -3558,19 +3558,19 @@ sub_808C484: @ 808C484
 	adds r4, r1, 0
 	adds r5, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl EventObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C4C6
 	adds r0, r5, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl EventObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C4C6
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
@@ -3625,7 +3625,7 @@ _0808C50A:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r1, r0
 	ldr r2, [r2]
 	adds r0, r4, 0
@@ -3648,7 +3648,7 @@ sub_808C544: @ 808C544
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C5A0
@@ -3657,12 +3657,12 @@ sub_808C544: @ 808C544
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_80934BC
+	bl GetJumpInPlaceMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldrh r0, [r6, 0xA]
 	adds r0, 0x1
 	strh r0, [r6, 0xA]
@@ -3726,7 +3726,7 @@ _0808C5E2:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	adds r1, r0
 	ldr r2, [r2]
 	adds r0, r4, 0
@@ -3772,7 +3772,7 @@ sub_808C644: @ 808C644
 	movs r2, 0x4
 	bl memcpy
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C6AC
@@ -3782,12 +3782,12 @@ sub_808C644: @ 808C644
 	add r0, sp
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldrb r0, [r4, 0xA]
 	cmp r6, r0
 	bne _0808C68A
@@ -3831,7 +3831,7 @@ sub_808C6BC: @ 808C6BC
 	movs r2, 0x5
 	bl memcpy
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C6EC
@@ -3840,7 +3840,7 @@ sub_808C6BC: @ 808C6BC
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	movs r0, 0x1
 	strh r0, [r5, 0x8]
 _0808C6EC:
@@ -3858,7 +3858,7 @@ sub_808C6FC: @ 808C6FC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C740
@@ -3866,12 +3866,12 @@ sub_808C6FC: @ 808C6FC
 	bl GetOppositeDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetSimpleGoAnimId
+	bl GetWalkSlowMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	bl ScriptContext2_Disable
 	ldr r1, =gPlayerAvatar
 	movs r0, 0
@@ -3936,15 +3936,15 @@ taskFF_0805D1D4: @ 808C7A8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl EventObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C7D4
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C7FC
@@ -3958,12 +3958,12 @@ _0808C7D4:
 	lsls r4, 3
 	adds r4, r0
 	ldrb r0, [r4, 0x8]
-	bl sub_8093540
+	bl GetJumpSpecialMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	ldr r0, =sub_808C814
 	str r0, [r4]
 _0808C7FC:
@@ -3983,10 +3983,10 @@ sub_808C814: @ 808C814
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C87A
@@ -3996,16 +3996,16 @@ sub_808C814: @ 808C814
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetSpecialAnim
+	bl EventObjectSetHeldMovement
 	movs r0, 0
 	strb r0, [r6, 0x6]
 	bl ScriptContext2_Disable
@@ -4127,7 +4127,7 @@ fish1: @ 808C918
 	ldrh r1, [r6]
 	adds r1, r0
 	strh r1, [r5, 0x22]
-	ldr r3, =gMapObjects
+	ldr r3, =gEventObjects
 	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
@@ -4142,7 +4142,7 @@ fish1: @ 808C918
 	lsls r4, 2
 	adds r4, r3
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimActive
+	bl EventObjectClearHeldMovementIfActive
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x8
 	orrs r0, r1
@@ -4373,10 +4373,10 @@ _0808CB32:
 	lsls r4, 2
 	ldr r0, =gSprites
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092A2C
+	bl GetFishingBiteDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4579,18 +4579,18 @@ _0808CCBC:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	mov r8, r0
 	add r4, r8
 	ldrh r1, [r5, 0x24]
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl FieldObjectTurn
+	bl EventObjectTurn
 	ldrb r1, [r7]
 	movs r0, 0x8
 	ands r0, r1
@@ -4671,10 +4671,10 @@ fishB: @ 808CD94
 	lsls r4, 2
 	ldr r0, =gSprites
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092A1C
+	bl GetFishingNoCatchDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4719,10 +4719,10 @@ fishC: @ 808CE04
 	lsls r4, 2
 	ldr r0, =gSprites
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8092A1C
+	bl GetFishingNoCatchDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4792,18 +4792,18 @@ fishE: @ 808CE8C
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gMapObjects
+	ldr r0, =gEventObjects
 	mov r8, r0
 	add r4, r8
 	ldrh r1, [r6, 0x24]
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetGraphicsId
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl FieldObjectTurn
+	bl EventObjectTurn
 	ldrb r1, [r5]
 	movs r0, 0x8
 	ands r0, r1
@@ -4858,7 +4858,7 @@ fishF: @ 808CF2C
 	ldr r0, =gPlayerAvatar
 	strb r1, [r0, 0x6]
 	bl ScriptContext2_Disable
-	bl UnfreezeMapObjects
+	bl UnfreezeEventObjects
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434
@@ -4956,7 +4956,7 @@ _0808CFF0:
 	bhi _0808D022
 	movs r0, 0x8
 	strh r0, [r4, 0x24]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -4984,7 +4984,7 @@ _0808D03A:
 	ands r0, r1
 	cmp r0, 0
 	beq _0808D05E
-	ldr r2, =gMapObjects
+	ldr r2, =gEventObjects
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5037,7 +5037,7 @@ sub_808D094: @ 808D094
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
@@ -5066,7 +5066,7 @@ _0808D0E8:
 	b _0808D18A
 _0808D0EE:
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl EventObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808D18A
@@ -5217,7 +5217,7 @@ sub_808D1FC: @ 808D1FC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gMapObjects
+	ldr r1, =gEventObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
@@ -5257,12 +5257,12 @@ _0808D25E:
 	ldrsh r0, [r5, r3]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectForceSetSpecialAnim
+	bl EventObjectForceSetHeldMovement
 	movs r0, 0
 	mov r9, r0
 	strh r6, [r5, 0x2]
@@ -5414,7 +5414,7 @@ sub_808D38C: @ 808D38C
 	ble _0808D3E4
 _0808D3A8:
 	adds r0, r5, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl EventObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808D3E4
@@ -5424,12 +5424,12 @@ _0808D3A8:
 	lsrs r0, 28
 	adds r0, r4
 	ldrb r0, [r0]
-	bl GetFaceDirectionAnimId
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl FieldObjectForceSetSpecialAnim
+	bl EventObjectForceSetHeldMovement
 	movs r0, 0
 	strh r0, [r6]
 	ldrb r0, [r5, 0x18]

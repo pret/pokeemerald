@@ -468,7 +468,7 @@ void sub_8012780(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontierChosenLvl == 1)
+        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.chosenLvl == 1)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F00C4[gSpecialVar_0x8004];
         gUnknown_02022C2D = gUnknown_082F00C4[gSpecialVar_0x8004] >> 8;
@@ -580,7 +580,7 @@ void sub_8012780(u8 taskId)
         if (PrintOnTextbox(&data->textState, gUnknown_082EDDC4[id]))
         {
             data->field_13 = sub_8013398(data->field_0);
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             data->state = 4;
         }
         break;
@@ -625,7 +625,7 @@ void sub_8012780(u8 taskId)
             if (data->field_19 == 5)
             {
                 data->field_0->arr[data->field_13].field_1B = 0;
-                sub_81AE70C(data->listTaskId);
+                RedrawListMenu(data->listTaskId);
                 data->field_13++;
                 if (data->field_13 == (gUnknown_02022C2D & 0xF))
                 {
@@ -653,7 +653,7 @@ void sub_8012780(u8 taskId)
                 sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
                 data->field_0->arr[data->field_13].field_1A_0 = 0;
                 sub_8013398(data->field_0);
-                sub_81AE70C(data->listTaskId);
+                RedrawListMenu(data->listTaskId);
                 data->state = 4;
             }
 
@@ -909,14 +909,14 @@ bool8 sub_801320C(struct UnkStruct_Leader *data, u32 arg1, u32 arg2)
     {
     case 1:
         PlaySE(SE_PC_LOGIN);
-        sub_81AE70C(data->listTaskId);
+        RedrawListMenu(data->listTaskId);
         sub_8018404(gStringVar2, &data->field_0->arr[data->field_13]);
         sub_8012FC4(gStringVar4, gUnknown_02022C2C);
         data->state = arg1;
         break;
     case 2:
         sub_8011A64(0, 0);
-        sub_81AE70C(data->listTaskId);
+        RedrawListMenu(data->listTaskId);
         data->state = arg2;
         return TRUE;
     }
@@ -1050,7 +1050,7 @@ void sub_80134E8(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontierChosenLvl == 1)
+        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.chosenLvl == 1)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F0530[gSpecialVar_0x8004];
         sub_8010F84(gUnknown_02022C2C, 0, 0);
@@ -1098,7 +1098,7 @@ void sub_80134E8(u8 taskId)
         {
         case 1:
             PlaySE(SE_PC_LOGIN);
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             break;
         case 0:
             id = ListMenuHandleInputGetItemId(data->listTaskId);
@@ -1135,7 +1135,7 @@ void sub_80134E8(u8 taskId)
             }
             break;
         default:
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             break;
         }
         break;
@@ -1229,16 +1229,16 @@ void sub_80134E8(u8 taskId)
         case 0:
             sub_80106D4();
             data->state = 9;
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             break;
         case 1:
         case -1:
             data->state = 5;
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             break;
         case -3:
             data->state = 6;
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             break;
         }
         break;
@@ -1329,7 +1329,7 @@ void sub_8013BD8(struct UnkStruct_Group *data, s32 id)
     data->field_F = id;
     sub_800E0E8();
     CreateWirelessStatusIndicatorSprite(0, 0);
-    sub_81AE70C(data->listTaskId);
+    RedrawListMenu(data->listTaskId);
     sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
     sub_8011090(gUnknown_082F0530[gSpecialVar_0x8004], 0, 1);
     sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
@@ -1975,7 +1975,7 @@ void sub_8014A40(u8 taskId)
         if (mevent_0814257C(&data->textState, gUnknown_082EDF40))
         {
             data->field_13 = sub_8013398(data->field_0);
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             data->state = 2;
         }
         break;
@@ -1989,7 +1989,7 @@ void sub_8014A40(u8 taskId)
             sub_800E0E8();
             CreateWirelessStatusIndicatorSprite(0, 0);
             data->field_0->arr[data->field_13].field_1B = 0;
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             data->field_19 = 5;
             sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 8;
@@ -2009,7 +2009,7 @@ void sub_8014A40(u8 taskId)
             if (data->field_19 == 5)
             {
                 data->field_0->arr[data->field_13].field_1B = 0;
-                sub_81AE70C(data->listTaskId);
+                RedrawListMenu(data->listTaskId);
                 data->field_13++;
                 sub_8018404(gStringVar1, &data->field_0->arr[data->field_13 - 1]);
                 StringExpandPlaceholders(gStringVar4, gUnknown_082EDC9C);
@@ -2021,7 +2021,7 @@ void sub_8014A40(u8 taskId)
                 sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
                 data->field_0->arr[data->field_13].field_1A_0 = 0;
                 sub_8013398(data->field_0);
-                sub_81AE70C(data->listTaskId);
+                RedrawListMenu(data->listTaskId);
                 data->state = 2;
             }
 
@@ -2176,7 +2176,7 @@ void sub_8014F48(u8 taskId)
         case 1:
             PlaySE(SE_PC_LOGIN);
         default:
-            sub_81AE70C(data->listTaskId);
+            RedrawListMenu(data->listTaskId);
             break;
         case 0:
             id = ListMenuHandleInputGetItemId(data->listTaskId);
@@ -2191,7 +2191,7 @@ void sub_8014F48(u8 taskId)
                     data->field_F = id;
                     sub_800E0E8();
                     CreateWirelessStatusIndicatorSprite(0, 0);
-                    sub_81AE70C(data->listTaskId);
+                    RedrawListMenu(data->listTaskId);
                     sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
                     sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
                     PlaySE(SE_PN_ON);
@@ -2339,7 +2339,7 @@ void sub_80152F4(u8 taskId)
             PlaySE(SE_PC_LOGIN);
         default:
             if (data->field_13 != 0)
-                sub_81AE70C(data->listTaskId);
+                RedrawListMenu(data->listTaskId);
             break;
         case 0:
             if (data->field_13 != 0)

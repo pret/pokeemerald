@@ -1,7 +1,7 @@
 #ifndef GUARD_DATA_BATTLE_MOVES
 #define GUARD_DATA_BATTLE_MOVES
 
-const struct BattleMove gBattleMoves[LAST_MOVE_INDEX + 1] =
+const struct BattleMove gBattleMoves[MOVES_COUNT] =
 {
     { // MOVE_NONE
 		.effect = EFFECT_HIT,

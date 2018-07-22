@@ -80,7 +80,7 @@ static const u8 gShellArmorAbilityDescription[] = _("Blocks critical hits.");
 static const u8 gCacophonyAbilityDescription[] = _("Avoids sound-based moves.");
 static const u8 gAirLockAbilityDescription[] = _("Negates weather effects.");
 
-const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1] =
+const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
     _("-------"),
 	_("STENCH"),
@@ -162,7 +162,7 @@ const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1] =
 	_("AIR LOCK"),
 };
 
-const u8 *const gAbilityDescriptionPointers[] =
+const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
     gNoneAbilityDescription,
     gStenchAbilityDescription,

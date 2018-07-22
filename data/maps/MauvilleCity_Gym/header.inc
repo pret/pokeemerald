@@ -1,15 +1,15 @@
 MauvilleCity_Gym: @ 8483264
-	.4byte MauvilleCity_Gym_MapAttributes
+	.4byte MauvilleCity_Gym_Layout
 	.4byte MauvilleCity_Gym_MapEvents
 	.4byte MauvilleCity_Gym_MapScripts
 	.4byte 0x0
 	.2byte MUS_GIM
 	.2byte 89
-	.byte 9
+	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 1
+	.byte MAP_BATTLE_SCENE_GYM
 

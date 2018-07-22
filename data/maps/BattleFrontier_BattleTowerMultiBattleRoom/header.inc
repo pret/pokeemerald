@@ -1,15 +1,15 @@
 BattleFrontier_BattleTowerMultiBattleRoom: @ 84852E0
-	.4byte BattleFrontier_BattleTowerMultiBattleRoom_MapAttributes
+	.4byte BattleFrontier_BattleTowerMultiBattleRoom_Layout
 	.4byte BattleFrontier_BattleTowerMultiBattleRoom_MapEvents
 	.4byte BattleFrontier_BattleTowerMultiBattleRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_SATTOWER
 	.2byte 390
-	.byte 58
+	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 4
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

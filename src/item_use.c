@@ -5,6 +5,7 @@
 #include "berry.h"
 #include "bike.h"
 #include "coins.h"
+#include "constants/bg_event_constants.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -12,12 +13,11 @@
 #include "data2.h"
 #include "event_data.h"
 #include "fieldmap.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"
 #include "item.h"
-#include "field_map_obj_helpers.h"
 #include "mail.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -40,7 +40,7 @@ extern void sub_81C5B14(u8 taskId);
 extern u8 gText_DadsAdvice[];
 extern u8 gText_CantDismountBike[];
 extern void sub_8197434(u8 a, u8 b);
-extern void sub_80984F4(void);
+extern void ScriptUnfreezeEventObjects(void);
 extern void ItemUseOutOfBattle_TMHM(u8 a);
 extern void ItemUseOutOfBattle_EvolutionStone(u8 b);
 extern void bag_menu_mail_related(void);
@@ -198,7 +198,7 @@ void CleanUpAfterFailingToUseRegisteredKeyItemOnField(u8 taskId)
 {
     sub_8197434(0, 1);
     DestroyTask(taskId);
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
 }
 
@@ -253,7 +253,7 @@ void ItemUseOnFieldCB_Bike(u8 taskId)
         GetOnOffBike(2);
     else
         GetOnOffBike(4);
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     DestroyTask(taskId);
 }
@@ -338,7 +338,7 @@ void sub_80FD504(u8 taskId)
             }
             else
             {
-                playerDir = player_get_direction_lower_nybble();
+                playerDir = GetPlayerFacingDirection();
                 for (i = 0; i < 4; i++)
                 {
                     if (playerDir == gUnknown_085920E4[i])
@@ -359,7 +359,7 @@ void sub_80FD504(u8 taskId)
 void sub_80FD5CC(u8 taskId)
 {
     sub_8197434(0, 1);
-    sub_80984F4();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     DestroyTask(taskId);
 }
@@ -372,7 +372,7 @@ bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u8 taskId)
     gTasks[taskId].data[2] = FALSE;
     for (i = 0; i < events->bgEventCount; i++)
     {
-        if (events->bgEvents[i].kind == 7 && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + 0x1F4))
+        if (events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + 0x1F4))
         {
             distanceX = (u16)events->bgEvents[i].x + 7;
             newDistanceX = distanceX - x;
@@ -399,7 +399,7 @@ bool8 sub_80FD6D4(const struct MapEvents *events, s16 x, s16 y)
 
     for (i = 0; i < bgEventCount; i++)
     {
-        if (bgEvent[i].kind == 7 && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
+        if (bgEvent[i].kind == BG_EVENT_HIDDEN_ITEM && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
         {
             if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + 0x1F4))
                 return TRUE;
@@ -425,23 +425,23 @@ bool8 sub_80FD730(struct MapConnection *connection, int x, int y)
     case 2:
         localOffset = connection->offset + 7;
         localX = x - localOffset;
-        localLength = mapHeader->mapData->height - 7;
+        localLength = mapHeader->mapLayout->height - 7;
         localY = localLength + y; // additions are reversed for some reason
         break;
     case 1:
         localOffset = connection->offset + 7;
         localX = x - localOffset;
-        localLength = gMapHeader.mapData->height + 7;
+        localLength = gMapHeader.mapLayout->height + 7;
         localY = y - localLength;
         break;
     case 3:
-        localLength = mapHeader->mapData->width - 7;
+        localLength = mapHeader->mapLayout->width - 7;
         localX = localLength + x; // additions are reversed for some reason
         localOffset = connection->offset + 7;
         localY = y - localOffset;
         break;
     case 4:
-        localLength = gMapHeader.mapData->width + 7;
+        localLength = gMapHeader.mapLayout->width + 7;
         localX = x - localLength;
         localOffset = connection->offset + 7;
         localY = y - localOffset;
@@ -456,8 +456,8 @@ void sub_80FD7C8(u8 taskId)
 {
     s16 x, y;
     s16 curX, curY;
-    s16 width = gMapHeader.mapData->width + 7;
-    s16 height = gMapHeader.mapData->height + 7;
+    s16 width = gMapHeader.mapLayout->width + 7;
+    s16 height = gMapHeader.mapLayout->height + 7;
 
     s16 var1 = 7;
     s16 var2 = 7;
@@ -580,15 +580,15 @@ u8 sub_80FD9B0(s16 itemX, s16 itemY)
 
 void sub_80FDA24(u8 direction)
 {
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    FieldObjectClearAnim(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    npc_sync_anim_pause_bits(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    EventObjectClearHeldMovement(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    UnfreezeEventObject(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
     PlayerTurnInPlace(direction);
 }
 
 void sub_80FDA94(u8 taskId)
 {
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
+    if (EventObjectCheckHeldMovementStatus(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
         DisplayItemMessageOnField(taskId, gText_ItemFinderNearby, sub_80FD5CC);
 }
 
@@ -596,7 +596,7 @@ void sub_80FDADC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
+    if (EventObjectCheckHeldMovementStatus(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
     || data[2] == FALSE)
     {
         sub_80FDA24(gUnknown_085920E4[data[5]]);
@@ -728,8 +728,8 @@ bool8 sub_80FDE2C(void)
     u8 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     z = PlayerGetZCoord();
-    objId = GetFieldObjectIdByXYZ(x, y, z);
-    if (objId == 16 || gMapObjects[objId].graphicsId != 0xE4)
+    objId = GetEventObjectIdByXYZ(x, y, z);
+    if (objId == 16 || gEventObjects[objId].graphicsId != 0xE4)
         return FALSE;
     else
         return TRUE;

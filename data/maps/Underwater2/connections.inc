@@ -1,7 +1,7 @@
 Underwater2_MapConnectionsList: @ 8486D6C
-	connection up, 0, UNDERWATER_1, 0
-	connection right, 0, UNDERWATER_3, 0
-	connection emerge, 0, ROUTE_126, 0
+	connection up, 0, MAP_UNDERWATER1
+	connection right, 0, MAP_UNDERWATER3
+	connection emerge, 0, MAP_ROUTE126
 
 Underwater2_MapConnections: @ 8486D90
 	.4byte 0x3
