@@ -245,7 +245,7 @@ LilycoveCity_ContestLobby_Text_293BB4: @ 8293BB4
 	.string "But, I don’t have any to spare today.\n"
 	.string "Sorry about that.$"
 
-EventScript_Pblock1_Ask: @ 8293C3E
+EventScript_Pblock1_Ask:: @ 8293C3E
 	lockall
 	checkflag FLAG_0x340
 	goto_if 0, LilycoveCity_ContestLobby_EventScript_293EFB
@@ -332,7 +332,7 @@ EventScript_Pblock1_NoPokeblock: @ 8293D43
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_293D4D: @ 8293D4D
+LilycoveCity_ContestLobby_EventScript_293D4D:: @ 8293D4D
 	lockall
 	setvar VAR_0x8009, 2
 	applymovement 10, LilycoveCity_ContestLobby_Movement_2725A2
@@ -396,7 +396,7 @@ LilycoveCity_ContestLobby_EventScript_293E14: @ 8293E14
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_293E1E: @ 8293E1E
+LilycoveCity_ContestLobby_EventScript_293E1E:: @ 8293E1E
 	lockall
 	setvar VAR_0x8008, 15
 	setvar VAR_0x8009, 3
@@ -513,19 +513,19 @@ LilycoveCity_ContestLobby_EventScript_293F98: @ 8293F98
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_293FA2: @ 8293FA2
+LilycoveCity_ContestLobby_EventScript_293FA2:: @ 8293FA2
 	msgbox LilycoveCity_ContestLobby_Text_2937F9, 2
 	end
 
-LilycoveCity_ContestLobby_EventScript_293FAB: @ 8293FAB
+LilycoveCity_ContestLobby_EventScript_293FAB:: @ 8293FAB
 	msgbox LilycoveCity_ContestLobby_Text_293842, 2
 	end
 
-LilycoveCity_ContestLobby_EventScript_293FB4: @ 8293FB4
+LilycoveCity_ContestLobby_EventScript_293FB4:: @ 8293FB4
 	msgbox LilycoveCity_ContestLobby_Text_29388F, 2
 	end
 
-LilycoveCity_ContestLobby_EventScript_293FBD: @ 8293FBD
+LilycoveCity_ContestLobby_EventScript_293FBD:: @ 8293FBD
 	setvar VAR_0x8008, 15
 	goto LilycoveCity_ContestLobby_EventScript_293FC8
 	end
@@ -576,7 +576,7 @@ LilycoveCity_ContestLobby_Movement_294053: @ 8294053
 	step_28
 	step_end
 
-EventScript_PblockLink: @ 8294055
+EventScript_PblockLink:: @ 8294055
 	lockall
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0

@@ -81,7 +81,7 @@ struct UnkLinkRfuStruct_02022B14Substruct
     u8 playerTrainerId[2];
 };
 
-struct UnkLinkRfuStruct_02022B14
+struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
 {
     struct UnkLinkRfuStruct_02022B14Substruct unk_00;
     u8 unk_04[4];

@@ -304,7 +304,7 @@ void LinkTestScreen(void)
 
 void sub_8009628(u8 a0)
 {
-    gLocalLinkPlayer.lp_field_18 = a0;
+    gLocalLinkPlayer.id = a0;
 }
 
 static void InitLocalLinkPlayer(void)

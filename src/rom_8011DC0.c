@@ -38,6 +38,7 @@ extern void HealPlayerParty(void);
 struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;
+    u8 needingPadding[3];
     u8 playerName[PLAYER_NAME_LENGTH];
 };
 
@@ -2508,6 +2509,8 @@ void sub_80156C8(struct UnkStruct_URoom *data)
     memcpy(data->field_0, &gDecompressionBuffer[0x3F00], 0x100);
 }
 
+// Cannot match, please fix later.
+/*
 void sub_80156E0(u8 taskId)
 {
     u32 id = 0;
@@ -3257,3 +3260,5 @@ void var_800D_set_xB(void)
     if (InUnionRoom() == TRUE)
         gSpecialVar_Result = 11;
 }
+
+*/

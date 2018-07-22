@@ -1752,7 +1752,7 @@ bool8 sub_80688F8(u8 caseId, u8 battlerId)
             return FALSE;
         if (!gMain.inBattle)
             return FALSE;
-        if (gLinkPlayers[GetMultiplayerId()].lp_field_18 == battlerId)
+        if (gLinkPlayers[GetMultiplayerId()].id == battlerId)
             return FALSE;
         break;
     case 2:
@@ -1774,7 +1774,7 @@ bool8 sub_80688F8(u8 caseId, u8 battlerId)
                 return FALSE;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
-                if (gLinkPlayers[GetMultiplayerId()].lp_field_18 == battlerId)
+                if (gLinkPlayers[GetMultiplayerId()].id == battlerId)
                     return FALSE;
             }
             else
@@ -4805,7 +4805,7 @@ void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
 bool8 sub_806D7EC(void)
 {
     bool8 retVal = FALSE;
-    switch (gLinkPlayers[GetMultiplayerId()].lp_field_18)
+    switch (gLinkPlayers[GetMultiplayerId()].id)
     {
     case 0:
     case 3:
@@ -4822,7 +4822,7 @@ bool8 sub_806D7EC(void)
 bool16 sub_806D82C(u8 id)
 {
     bool16 retVal = FALSE;
-    switch (gLinkPlayers[id].lp_field_18)
+    switch (gLinkPlayers[id].id)
     {
     case 0:
     case 3:
@@ -4840,7 +4840,7 @@ s32 GetBattlerMultiplayerId(u16 a1)
 {
     s32 id;
     for (id = 0; id < MAX_LINK_PLAYERS; id++)
-        if (gLinkPlayers[id].lp_field_18 == a1)
+        if (gLinkPlayers[id].id == a1)
             break;
     return id;
 }
@@ -5691,7 +5691,7 @@ const u8 *GetTrainerPartnerName(void)
     else
     {
         u8 id = GetMultiplayerId();
-        return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].lp_field_18 ^ 2)].name;
+        return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
     }
 }
 
@@ -5821,7 +5821,7 @@ u8 sub_806EF08(u8 arg0)
     s32 i;
     s32 var = 0;
     u8 multiplayerId = GetMultiplayerId();
-    switch (gLinkPlayers[multiplayerId].lp_field_18)
+    switch (gLinkPlayers[multiplayerId].id)
     {
     case 0:
     case 2:
@@ -5834,7 +5834,7 @@ u8 sub_806EF08(u8 arg0)
     }
     for (i = 0; i < 4; i++)
     {
-        if (gLinkPlayers[i].lp_field_18 == (s16)(var))
+        if (gLinkPlayers[i].id == (s16)(var))
             break;
     }
     return i;
@@ -5844,7 +5844,7 @@ u8 sub_806EF84(u8 arg0, u8 arg1)
 {
     s32 i;
     s32 var = 0;
-    switch (gLinkPlayers[arg1].lp_field_18)
+    switch (gLinkPlayers[arg1].id)
     {
     case 0:
     case 2:
@@ -5857,7 +5857,7 @@ u8 sub_806EF84(u8 arg0, u8 arg1)
     }
     for (i = 0; i < 4; i++)
     {
-        if (gLinkPlayers[i].lp_field_18 == (s16)(var))
+        if (gLinkPlayers[i].id == (s16)(var))
             break;
     }
     return i;
