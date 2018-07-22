@@ -4679,16 +4679,20 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     u8 strikesFirst = 0;
     u32 speedBattler1 = 0, speedBattler2 = 0;
     u16 moveBattler1 = 0, moveBattler2 = 0;
+    u32 holdEffectBattler1 = 0, holdEffectBattler2 = 0;
+    bool32 quickClawBattler1 = FALSE, quickClawBattler2 = FALSE;
 
     speedBattler1 = GetBattlerTotalSpeedStat(battler1);
-    if (GetBattlerHoldEffect(battler1, TRUE) == HOLD_EFFECT_QUICK_CLAW
+    holdEffectBattler1 = GetBattlerHoldEffect(battler1, TRUE);
+    if (holdEffectBattler1 == HOLD_EFFECT_QUICK_CLAW
         && gRandomTurnNumber < (0xFFFF * GetBattlerHoldEffectParam(battler1)) / 100)
-        speedBattler1 = UINT_MAX;
+        quickClawBattler1 = TRUE;
 
     speedBattler2 = GetBattlerTotalSpeedStat(battler2);
-    if (GetBattlerHoldEffect(battler2, TRUE) == HOLD_EFFECT_QUICK_CLAW
+    holdEffectBattler2 = GetBattlerHoldEffect(battler2, TRUE);
+    if (holdEffectBattler2 == HOLD_EFFECT_QUICK_CLAW
         && gRandomTurnNumber < (0xFFFF * GetBattlerHoldEffectParam(battler2)) / 100)
-        speedBattler2 = UINT_MAX;
+        quickClawBattler2 = TRUE;
 
     if (ignoreChosenMoves)
     {
@@ -4718,34 +4722,58 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
             moveBattler2 = MOVE_NONE;
     }
 
-    // both move priorities are different than 0
-    if (gBattleMoves[moveBattler1].priority != 0 || gBattleMoves[moveBattler2].priority != 0)
+
+    if (gBattleMoves[moveBattler1].priority == gBattleMoves[moveBattler2].priority)
     {
-        // both priorities are the same
-        if (gBattleMoves[moveBattler1].priority == gBattleMoves[moveBattler2].priority)
+        // QUICK CLAW - always first
+        // LAGGING TAIL - always last
+        // STALL - always last
+
+        if (quickClawBattler1 && !quickClawBattler2)
+            strikesFirst = 0;
+        else if (quickClawBattler2 && !quickClawBattler1)
+            strikesFirst = 1;
+        else if (holdEffectBattler1 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler2 != HOLD_EFFECT_LAGGING_TAIL)
+            strikesFirst = 1;
+        else if (holdEffectBattler2 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler1 != HOLD_EFFECT_LAGGING_TAIL)
+            strikesFirst = 0;
+        else if (GetBattlerAbility(battler1) == ABILITY_STALL && GetBattlerAbility(battler2) != ABILITY_STALL)
+            strikesFirst = 1;
+        else if (GetBattlerAbility(battler2) == ABILITY_STALL && GetBattlerAbility(battler1) != ABILITY_STALL)
+            strikesFirst = 0;
+        else
         {
             if (speedBattler1 == speedBattler2 && Random() & 1)
+            {
                 strikesFirst = 2; // same speeds, same priorities
+            }
             else if (speedBattler1 < speedBattler2)
-                strikesFirst = 1; // battler2 has more speed
-
-            // else battler1 has more speed
+            {
+                // battler2 has more speed
+                if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+                    strikesFirst = 0;
+                else
+                    strikesFirst = 1;
+            }
+            else
+            {
+                // battler1 has more speed
+                if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+                    strikesFirst = 1;
+                else
+                    strikesFirst = 0;
+            }
         }
-        else if (gBattleMoves[moveBattler1].priority < gBattleMoves[moveBattler2].priority)
-            strikesFirst = 1; // battler2's move has greater priority
-
-        // else battler1's move has greater priority
     }
-    // both priorities are equal to 0
+    else if (gBattleMoves[moveBattler1].priority < gBattleMoves[moveBattler2].priority)
+    {
+        strikesFirst = 1; // battler2's move has greater priority
+    }
     else
     {
-        if (speedBattler1 == speedBattler2 && Random() & 1)
-            strikesFirst = 2; // same speeds, same priorities
-        else if (speedBattler1 < speedBattler2)
-            strikesFirst = 1; // battler2 has more speed
-
-        // else battler1 has more speed
+        strikesFirst = 0; // battler1's move has greater priority
     }
+
 
     return strikesFirst;
 }
