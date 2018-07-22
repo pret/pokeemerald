@@ -589,7 +589,7 @@
 	.byte \bank
 	.endm
 
-	.macro recordlastability bank
+	.macro recordability bank
 	.byte 0x70
 	.byte \bank
 	.endm
@@ -1345,6 +1345,14 @@
 	
 	.macro playtrainerdefeatbgm bank
 	various \bank, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.endm
+	
+	.macro stattextbuffer battler
+	various \battler, VARIOUS_STAT_TEXT_BUFFER
+	.endm
+	
+	.macro switchinabilities battler
+	various \battler, VARIOUS_SWITCHIN_ABILITIES
 	.endm
 	
 @ helpful macros

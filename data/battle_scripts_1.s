@@ -4108,6 +4108,16 @@ BattleScript_DoTurnDmg::
 	atk24 BattleScript_DoTurnDmgEnd
 BattleScript_DoTurnDmgEnd::
 	end2
+	
+BattleScript_PoisonHealActivates::
+	printstring STRINGID_POISONHEALHPUP
+	waitmessage 0x40
+	recordability BS_ATTACKER
+	statusanimation BS_ATTACKER
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	end2
 
 BattleScript_BurnTurnDmg::
 	printstring STRINGID_PKMNHURTBYBURN
@@ -4142,7 +4152,20 @@ BattleScript_MoveUsedIsParalyzed::
 BattleScript_MoveUsedFlinched::
 	printstring STRINGID_PKMNFLINCHED
 	waitmessage 0x40
+	jumpifability BS_ATTACKER ABILITY_STEADFAST BattleScript_TryActivateSteadFast
+BattleScript_MoveUsedFlinchedEnd:
 	goto BattleScript_MoveEnd
+BattleScript_TryActivateSteadFast:
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_MoveUsedFlinchedEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_MoveUsedFlinchedEnd
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	setbyte gBattleCommunication STAT_SPEED
+	stattextbuffer BS_ATTACKER
+	printstring STRINGID_TARGETABILITYSTATRAISE
+	waitmessage 0x40
+	goto BattleScript_MoveUsedFlinchedEnd
 
 BattleScript_PrintUproarOverTurns::
 	printfromtable gUproarOverTurnStringIds
@@ -4354,6 +4377,7 @@ BattleScript_TraceActivates::
 	pause 0x20
 	printstring STRINGID_PKMNTRACED
 	waitmessage 0x40
+	switchinabilities BS_ATTACKER
 	end3
 
 BattleScript_RainDishActivates::
@@ -4470,6 +4494,18 @@ BattleScript_MoveHPDrain::
 	waitmessage 0x40
 	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	goto BattleScript_MoveEnd
+	
+BattleScript_MoveStatDrain_PPLoss::
+	ppreduce
+BattleScript_MoveStatDrain::
+	attackstring
+	pause 0x20
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_TARGETABILITYSTATRAISE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 
 BattleScript_MonMadeMoveUseless_PPLoss::
 	ppreduce
@@ -4563,6 +4599,34 @@ BattleScript_ColorChangeActivates::
 	printstring STRINGID_PKMNCHANGEDTYPEWITH
 	waitmessage 0x40
 	return
+	
+BattleScript_AngryPointActivates::
+	setbyte sB_ANIM_ARG1 0x38
+	setbyte sB_ANIM_ARG2 0x0
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_ANGRYPOINTACTIVATES
+	waitmessage 0x40
+	return
+	
+BattleScript_TargetAbilityStatRaise::
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_TARGETABILITYSTATRAISE
+	waitmessage 0x40
+	return
+	
+BattleScript_AttackerAbilityStatRaise::
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_ATTACKERABILITYSTATRAISE
+	waitmessage 0x40
+	return
+	
+BattleScript_AttackerAbilityStatRaiseEnd3::
+	call BattleScript_AttackerAbilityStatRaise
+	end3
 
 BattleScript_RoughSkinActivates::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000

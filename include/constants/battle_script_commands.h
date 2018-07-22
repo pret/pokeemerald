@@ -72,6 +72,8 @@
 #define VARIOUS_RETURN_OPPONENT_MON2            20
 #define VARIOUS_SET_TELEPORT_OUTCOME            25
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
+#define VARIOUS_STAT_TEXT_BUFFER                27
+#define VARIOUS_SWITCHIN_ABILITIES              28
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

@@ -431,7 +431,7 @@ static const u8 sText_FoePkmnPrefix3[] = _("Foe");
 static const u8 sText_AllyPkmnPrefix2[] = _("Ally");
 static const u8 sText_FoePkmnPrefix4[] = _("Foe");
 static const u8 sText_AllyPkmnPrefix3[] = _("Ally");
-static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}");
+static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF3}!");
 static const u8 sText_ExclamationMark[] = _("!");
 static const u8 sText_ExclamationMark2[] = _("!");
 static const u8 sText_ExclamationMark3[] = _("!");
@@ -586,6 +586,8 @@ static const u8 sText_MudSportEnds[] = _("The effects of Mud Sport have faded.")
 static const u8 sText_WaterSportEnds[] = _("The effects of Water Sport have faded.");
 static const u8 sText_GravityEnds[] = _("Gravity returned to normal!");
 static const u8 sText_AquaRingHeal[] = _("Aqua Ring restored\n{B_ATK_NAME_WITH_PREFIX}’s HP!");
+static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\n raised its {B_BUFF1}!");
+static const u8 sText_AttackerAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\n raised its {B_BUFF1}!");
 
 // These strings are currently placeholders, to be fixed.
 static const u8 sText_AuroraVeilEnds[] = _("");
@@ -593,6 +595,8 @@ static const u8 sText_ElectricTerrainEnds[] = _("");
 static const u8 sText_MistyTerrainEnds[] = _("");
 static const u8 sText_PsychicTerrainEnds[] = _("");
 static const u8 sText_GrassyTerrainEnds[] = _("");
+static const u8 sText_AngryPointActivates[] = _("");
+static const u8 sText_PoisonHealHpUp[] = _("");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1035,6 +1039,10 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_MistyTerrainEnds, // 447
     sText_PsychicTerrainEnds, // 448
     sText_GrassyTerrainEnds, // 449
+    sText_TargetAbilityRaisedStat, // 450
+    sText_AngryPointActivates, // 451
+    sText_AttackerAbilityRaisedStat, // 452
+    sText_PoisonHealHpUp, // 453
 };
 
 const u16 gMissStringIds[] =
@@ -2297,14 +2305,11 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case STRINGID_USEDMOVE: // pokemon used a move msg
-        ChooseMoveUsedParticle(gBattleTextBuff1); // buff1 doesn't appear in the string, leftover from japanese move names
-
         if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
-            StringCopy(gBattleTextBuff2, sATypeMove_Table[*(&gBattleStruct->stringMoveType)]);
+            StringCopy(gBattleTextBuff3, sATypeMove_Table[*(&gBattleStruct->stringMoveType)]);
         else
-            StringCopy(gBattleTextBuff2, gMoveNames[gBattleMsgDataPtr->currentMove]);
+            StringCopy(gBattleTextBuff3, gMoveNames[gBattleMsgDataPtr->currentMove]);
 
-        ChooseTypeOfMoveUsedString(gBattleTextBuff2);
         stringPtr = sText_AttackerUsedX;
         break;
     case STRINGID_BATTLEEND: // battle end

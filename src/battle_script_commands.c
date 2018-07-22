@@ -203,7 +203,7 @@ static void atk6C_drawlvlupbox(void);
 static void atk6D_resetsentmonsvalue(void);
 static void atk6E_setatktoplayer0(void);
 static void atk6F_makevisible(void);
-static void atk70_recordlastability(void);
+static void atk70_recordability(void);
 static void atk71_buffermovetolearn(void);
 static void atk72_jumpifplayerran(void);
 static void atk73_hpthresholds(void);
@@ -459,7 +459,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk6D_resetsentmonsvalue,
     atk6E_setatktoplayer0,
     atk6F_makevisible,
-    atk70_recordlastability,
+    atk70_recordability,
     atk71_buffermovetolearn,
     atk72_jumpifplayerran,
     atk73_hpthresholds,
@@ -1013,22 +1013,23 @@ static void atk00_attackcanceler(void)
     }
 }
 
-static void JumpIfMoveFailed(u8 adder, u16 move)
+static bool32 JumpIfMoveFailed(u8 adder, u16 move)
 {
-    const u8 *BS_ptr = gBattlescriptCurrInstr + adder;
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
         gLastLandedMoves[gBattlerTarget] = 0;
         gLastHitByType[gBattlerTarget] = 0;
-        BS_ptr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        return TRUE;
     }
     else
     {
         TrySetDestinyBondToHappen();
         if (AbilityBattleEffects(ABILITYEFFECT_ABSORBING, gBattlerTarget, 0, 0, move))
-            return;
+            return TRUE;
     }
-    gBattlescriptCurrInstr = BS_ptr;
+    gBattlescriptCurrInstr += adder;
+    return FALSE;
 }
 
 static void atk40_jumpifaffectedbyprotect(void)
@@ -1058,7 +1059,7 @@ bool8 JumpIfMoveAffectedByProtect(u16 move)
     return affected;
 }
 
-static bool8 AccuracyCalcHelper(u16 move)
+static bool32 AccuracyCalcHelper(u16 move)
 {
     if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
     {
@@ -1068,6 +1069,18 @@ static bool8 AccuracyCalcHelper(u16 move)
     else if (gBattleMoves[move].effect == EFFECT_TOXIC && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON))
     {
         JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
+    else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD)
+    {
+        if (!JumpIfMoveFailed(7, move))
+            RecordAbilityBattle(gBattlerAttacker, ABILITY_NO_GUARD);
+        return TRUE;
+    }
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_NO_GUARD)
+    {
+        if (!JumpIfMoveFailed(7, move))
+            RecordAbilityBattle(gBattlerTarget, ABILITY_NO_GUARD);
         return TRUE;
     }
 
@@ -6242,11 +6255,11 @@ static void atk6F_makevisible(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk70_recordlastability(void)
+static void atk70_recordability(void)
 {
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    RecordAbilityBattle(gActiveBattler, gLastUsedAbility);
-    gBattlescriptCurrInstr += 1; // UB: Should be + 2, one byte for command and one byte for battlerId argument.
+    u8 battler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    RecordAbilityBattle(battler, gBattleMons[battler].ability);
+    gBattlescriptCurrInstr += 2;
 }
 
 void BufferMoveToLearnIntoBattleTextBuff2(void)
@@ -6502,6 +6515,13 @@ static void atk76_various(void)
         BtlController_EmitPlayFanfareOrBGM(0, MUS_KACHI1, TRUE);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
+    case VARIOUS_STAT_TEXT_BUFFER:
+        PREPARE_STAT_BUFFER(gBattleTextBuff1, gBattleCommunication[0]);
+        break;
+    case VARIOUS_SWITCHIN_ABILITIES:
+        gBattlescriptCurrInstr += 3;
+        AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0);
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -7158,6 +7178,9 @@ static void atk8D_setmultihitcounter(void)
             gMultiHitCounter = (Random() & 3) + 2;
         else
             gMultiHitCounter += 2;
+
+        if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SKILL_LINK)
+            gMultiHitCounter = 5;
     }
 
     gBattlescriptCurrInstr += 2;
