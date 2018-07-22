@@ -1233,6 +1233,11 @@
 	.byte \stat
 	.endm
 	
+	.macro jumpifoppositegenders ptr
+	.byte 0xfc
+	.4byte \ptr
+	.endm
+	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves bank
 	various \bank, VARIOUS_CANCEL_MULTI_TURN_MOVES

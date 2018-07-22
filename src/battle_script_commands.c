@@ -343,6 +343,7 @@ static void atkF8_trainerslideout(void);
 static void atkF9_settelekinesis(void);
 static void atkFA_swapstatstages(void);
 static void atkFB_averagestats(void);
+static void atkFC_jumpifoppositegenders(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -598,6 +599,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF9_settelekinesis,
     atkFA_swapstatstages,
     atkFB_averagestats,
+    atkFC_jumpifoppositegenders,
 };
 
 struct StatFractions
@@ -1063,6 +1065,11 @@ static bool8 AccuracyCalcHelper(u16 move)
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
+    else if (gBattleMoves[move].effect == EFFECT_TOXIC && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON))
+    {
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
 
     if (!(gHitMarker & HITMARKER_IGNORE_ON_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
     {
@@ -1116,9 +1123,9 @@ static void atk01_accuracycheck(void)
     }
     else
     {
-        u8 type, moveAcc, holdEffect, param;
-        s8 buff;
-        u16 calc;
+        u8 type, moveAcc, atkHoldEffect, atkParam, defHoldEffect, defParam, atkAbility, defAbility;
+        s8 buff, accStage, evasionStage;
+        u32 calc;
 
         if (move == 0)
             move = gCurrentMove;
@@ -1130,16 +1137,22 @@ static void atk01_accuracycheck(void)
         if (AccuracyCalcHelper(move))
             return;
 
-        if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
-        {
-            u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-            buff = acc;
-        }
+        atkAbility = GetBattlerAbility(gBattlerAttacker);
+        defAbility = GetBattlerAbility(gBattlerTarget);
+
+        accStage = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
+        evasionStage = gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
+        if (atkAbility == ABILITY_UNAWARE)
+            evasionStage = 6;
+        if (gBattleMoves[move].flags & FLAG_STAT_STAGES_IGNORED)
+            evasionStage = 6;
+        if (defAbility == ABILITY_UNAWARE)
+            accStage = 6;
+
+        if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT || gStatuses3[gBattlerTarget] & STATUS3_MIRACLE_EYED)
+            buff = accStage;
         else
-        {
-            u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-            buff = acc + 6 - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
-        }
+            buff = accStage + 6 - evasionStage;
 
         if (buff < 0)
             buff = 0;
@@ -1154,29 +1167,37 @@ static void atk01_accuracycheck(void)
         calc = sAccuracyStageRatios[buff].dividend * moveAcc;
         calc /= sAccuracyStageRatios[buff].divisor;
 
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_COMPOUND_EYES)
+        if (atkAbility == ABILITY_COMPOUND_EYES)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
-        if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & WEATHER_SANDSTORM_ANY)
-            calc = (calc * 80) / 100; // 1.2 sand veil loss
+        else if (atkAbility == ABILITY_VICTORY_STAR)
+            calc = (calc * 110) / 100; // 1.1 victory star boost
+        if (IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)) && GetBattlerAbility(BATTLE_PARTNER(gBattlerAttacker)) == ABILITY_VICTORY_STAR)
+            calc = (calc * 110) / 100; // 1.1 ally's victory star boost
 
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
+        if (defAbility == ABILITY_SAND_VEIL && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY)
+            calc = (calc * 80) / 100; // 1.2 sand veil loss
+        else if (defAbility == ABILITY_SNOW_CLOAK && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_HAIL_ANY)
+            calc = (calc * 80) / 100; // 1.2 snow cloak loss
+        else if (defAbility == ABILITY_TANGLED_FEET && gBattleMons[gBattlerTarget].status2 & STATUS2_CONFUSION)
+            calc = (calc * 50) / 100; // 1.5 tangled feet loss
+
+        if (atkAbility == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
             calc = (calc * 80) / 100; // 1.2 hustle loss
 
-        if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
-        {
-            holdEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
-            param = gEnigmaBerries[gBattlerTarget].holdEffectParam;
-        }
-        else
-        {
-            holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
-            param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
-        }
-
+        defHoldEffect = GetBattlerHoldEffect(gBattlerTarget, TRUE);
+        defParam = GetBattlerHoldEffectParam(gBattlerTarget);
         gPotentialItemEffectBattler = gBattlerTarget;
 
-        if (holdEffect == HOLD_EFFECT_EVASION_UP)
-            calc = (calc * (100 - param)) / 100;
+        atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+        atkParam = GetBattlerHoldEffectParam(gBattlerAttacker);
+
+        if (defHoldEffect == HOLD_EFFECT_EVASION_UP)
+            calc = (calc * (100 - defParam)) / 100;
+
+        if (atkHoldEffect == HOLD_EFFECT_WIDE_LENS)
+            calc = (calc * (100 + atkParam)) / 100;
+        else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget));
+            calc = (calc * (100 + atkParam)) / 100;
 
         // final calculation
         if ((Random() % 100 + 1) > calc)
@@ -10275,4 +10296,15 @@ static void atkFB_averagestats(void)
     *(u16*)((&gBattleMons[gBattlerTarget].attack) + (statId - 1)) = average;
 
     gBattlescriptCurrInstr += 2;
+}
+
+static void atkFC_jumpifoppositegenders(void)
+{
+    u32 atkGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerAttacker].species, gBattleMons[gBattlerAttacker].personality);
+    u32 defGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerTarget].species, gBattleMons[gBattlerTarget].personality);
+
+    if ((atkGender == MON_MALE && defGender == MON_FEMALE) || (atkGender == MON_FEMALE && defGender == MON_MALE))
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    else
+        gBattlescriptCurrInstr += 5;
 }

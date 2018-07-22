@@ -145,7 +145,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectPursuit
 	.4byte BattleScript_EffectRapidSpin
 	.4byte BattleScript_EffectSonicboom
-	.4byte BattleScript_EffectUnused83
+	.4byte BattleScript_EffectCaptivate
 	.4byte BattleScript_EffectMorningSun
 	.4byte BattleScript_EffectSynthesis
 	.4byte BattleScript_EffectMoonlight
@@ -471,6 +471,16 @@ BattleScript_EffectRoost:
 	tryhealhalfhealth BattleScript_AlreadyAtFullHp, BS_TARGET
 	setroost
 	goto BattleScript_PresentHealTarget
+	
+BattleScript_EffectCaptivate:
+	setstatchanger STAT_SPATK, 2, TRUE
+	attackcanceler
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifoppositegenders BattleScript_CaptivateCheckAcc
+	goto BattleScript_ButItFailedAtkStringPpReduce
+BattleScript_CaptivateCheckAcc:
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	goto BattleScript_StatDownFromAttackString
 
 BattleScript_EffectAlwaysHit:
 BattleScript_EffectPlaceholder43:
@@ -481,7 +491,6 @@ BattleScript_EffectFalseSwipe:
 BattleScript_EffectPlaceholder103:
 BattleScript_EffectUnused6e:
 BattleScript_EffectPursuit:
-BattleScript_EffectUnused83:
 BattleScript_EffectUnused8d:
 BattleScript_EffectUnusedA3:
 BattleScript_EffectPlaceholder200:
@@ -836,6 +845,7 @@ BattleScript_EffectStatDown:
 	attackcanceler
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailedAtkStringPpReduce
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+BattleScript_StatDownFromAttackString:
 	attackstring
 	ppreduce
 	statbuffchange 0x1, BattleScript_StatDownEnd
