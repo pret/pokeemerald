@@ -178,6 +178,7 @@ struct DisableStruct
     u8 magnetRiseTimer;
     u8 telekinesisTimer;
     u8 healBlockTimer;
+    u8 laserFocusTimer;
 };
 
 struct ProtectStruct

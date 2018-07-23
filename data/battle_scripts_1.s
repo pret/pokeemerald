@@ -117,7 +117,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSpite
 	.4byte BattleScript_EffectFalseSwipe
 	.4byte BattleScript_EffectHealBell
-	.4byte BattleScript_EffectPlaceholder103
+	.4byte BattleScript_EffectAlwaysCrit
 	.4byte BattleScript_EffectTripleKick
 	.4byte BattleScript_EffectThief
 	.4byte BattleScript_EffectMeanLook
@@ -488,7 +488,7 @@ BattleScript_EffectEvasionDownHit:
 BattleScript_EffectVitalThrow:
 BattleScript_EffectUnused60:
 BattleScript_EffectFalseSwipe:
-BattleScript_EffectPlaceholder103:
+BattleScript_EffectAlwaysCrit:
 BattleScript_EffectUnused6e:
 BattleScript_EffectPursuit:
 BattleScript_EffectUnused8d:

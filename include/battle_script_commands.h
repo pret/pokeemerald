@@ -4,6 +4,7 @@
 #define WINDOW_CLEAR            0x1
 #define WINDOW_x80              0x80
 
+s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbility);
 u8 GetBattlerTurnOrderNum(u8 battlerId);
 void SetMoveEffect(bool8 primary, u8 certain);
 void BattleDestroyYesNoCursorAt(u8 cursorPosition);

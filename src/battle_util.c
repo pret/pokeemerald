@@ -1209,6 +1209,7 @@ enum
 	ENDTURN_EMBARGO,
 	ENDTURN_LOCK_ON,
 	ENDTURN_CHARGE,
+	ENDTURN_LASER_FOCUS,
 	ENDTURN_TAUNT,
 	ENDTURN_YAWN,
 	ENDTURN_ITEMS2,
@@ -1578,6 +1579,16 @@ u8 DoBattlerEndTurnEffects(void)
                         BattleScriptExecute(BattleScript_YawnMakesAsleep);
                         effect++;
                     }
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_LASER_FOCUS:
+                if (gStatuses3[gActiveBattler] & STATUS3_LASER_FOCUS)
+                {
+                    if (gDisableStructs[gActiveBattler].laserFocusTimer != 0)
+                        gDisableStructs[gActiveBattler].laserFocusTimer--;
+                    if (gDisableStructs[gActiveBattler].laserFocusTimer == 0)
+                        gStatuses3[gActiveBattler] &= ~(STATUS3_LASER_FOCUS);
                 }
                 gBattleStruct->turnEffectsTracker++;
                 break;

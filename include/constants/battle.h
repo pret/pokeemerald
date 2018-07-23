@@ -156,6 +156,7 @@
 #define STATUS3_MAGNET_RISE             0x4000000
 #define STATUS3_HEAL_BLOCK              0x8000000
 #define STATUS3_AQUA_RING               0x10000000
+#define STATUS3_LASER_FOCUS             0x20000000
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.

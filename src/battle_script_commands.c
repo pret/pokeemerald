@@ -627,9 +627,6 @@ static const struct StatFractions sAccuracyStageRatios[] =
     {  3,   1}, // +6
 };
 
-// The chance is 1/N for each stage.
-static const u16 sCriticalHitChance[] = {16, 8, 4, 3, 2};
-
 static const u32 sStatusFlagsForMoveEffects[] =
 {
     0x00000000,
@@ -1298,33 +1295,62 @@ static void atk03_ppreduce(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk04_critcalc(void)
+s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbility)
 {
-    u8 holdEffect;
-    u16 item, critChance;
+    s32 critChance = 0;
+    u32 abilityAtk = GetBattlerAbility(gBattlerAttacker);
+    u32 abilityDef = GetBattlerAbility(gBattlerTarget);
 
-    item = gBattleMons[gBattlerAttacker].item;
-
-    if (item == ITEM_ENIGMA_BERRY)
-        holdEffect = gEnigmaBerries[gBattlerAttacker].holdEffect;
+    if (gSideStatuses[battlerDef] & SIDE_STATUS_LUCKY_CHANT
+        || gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
+    {
+        critChance = -1;
+    }
+    else if (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR)
+    {
+        if (recordAbility)
+            RecordAbilityBattle(battlerDef, abilityDef);
+        critChance = -1;
+    }
+    else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
+             || gBattleMoves[move].effect == EFFECT_ALWAYS_CRIT
+             || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
+    {
+        critChance = 4;
+    }
     else
-        holdEffect = ItemId_GetHoldEffect(item);
+    {
+        u32 holdEffectAtk = GetBattlerHoldEffect(battlerAtk, TRUE);
 
-    gPotentialItemEffectBattler = gBattlerAttacker;
-
-    critChance  = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0)
-                + ((gBattleMoves[gCurrentMove].flags & FLAG_HIGH_CRIT) != 0)
-                + (holdEffect == HOLD_EFFECT_SCOPE_LENS)
-                + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
-                + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD);
+        critChance  = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0)
+                    + ((gBattleMoves[gCurrentMove].flags & FLAG_HIGH_CRIT) != 0)
+                    + (holdEffectAtk == HOLD_EFFECT_SCOPE_LENS)
+                    + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
+                    + 2 * (holdEffectAtk == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD)
+                    + (abilityAtk == ABILITY_SUPER_LUCK);
+    }
 
     if (critChance > 4)
         critChance = 4;
 
-    if ((gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR)
-     && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
-     && !(gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
-     && !(Random() % sCriticalHitChance[critChance]))
+    return critChance;
+}
+
+// The chance is 1/N for each stage.
+static const u8 sCriticalHitChanceGen3[] = {16, 8, 4, 3, 2}; // Gens 2,3,4,5
+static const u8 sCriticalHitChanceGen6[] = {16, 8, 2, 1, 1};
+static const u8 sCriticalHitChanceGen7[] = {24, 8, 2, 1, 1};
+
+static void atk04_critcalc(void)
+{
+    s32 critChance = CalcCritChanceStage(gBattlerAttacker, gBattlerTarget, gCurrentMove, TRUE);
+    gPotentialItemEffectBattler = gBattlerAttacker;
+
+    if (gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
+        gIsCriticalHit = FALSE;
+    else if (critChance == -1)
+        gIsCriticalHit = FALSE;
+    else if (Random() % sCriticalHitChanceGen3[critChance] == 0)
         gIsCriticalHit = TRUE;
     else
         gIsCriticalHit = FALSE;
