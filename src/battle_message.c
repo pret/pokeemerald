@@ -543,7 +543,7 @@ static const u8 sText_PkmnsAbilitySuppressed[] = _("{B_DEF_NAME_WITH_PREFIX}’s
 static const u8 sText_ShieldedFromCriticalHits[] = _("The {B_CURRENT_MOVE} shielded your\nteam from critical hits!");
 static const u8 sText_SwitchedAtkAndSpAtk[] = _("{B_ATK_NAME_WITH_PREFIX} switched all its\nchanges to its Attack and\pSp. Atk with the target!");
 static const u8 sText_SwitchedDefAndSpDef[] = _("{B_ATK_NAME_WITH_PREFIX} switched all its\nchanges to its Defense and\pSp. Def with the target!");
-static const u8 sText_PkmnAcquiredAbility[] = _("{B_DEF_NAME_WITH_PREFIX} acquired\n{B_DEF_ABILITY}!");
+static const u8 sText_PkmnAcquiredAbility[] = _("{B_DEF_NAME_WITH_PREFIX} acquired\n{B_LAST_ABILITY}!");
 static const u8 sText_PoisonSpikesScattered[] = _("Poison Spikes were scattered\nall around the foe’s team’s\pfeet!");
 static const u8 sText_PkmnSwitchedStatChanges[] = _("{B_ATK_NAME_WITH_PREFIX} switched stat changes\nwith the target!");
 static const u8 sText_PkmnSurroundedWithVeilOfWater[] = _("{B_ATK_NAME_WITH_PREFIX} surrounded itself\nwith a veil of water!");
@@ -590,32 +590,32 @@ static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}’
 static const u8 sText_AttackerAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\n raised its {B_BUFF1}!");
 
 // These strings are currently placeholders, to be fixed.
-static const u8 sText_AuroraVeilEnds[] = _("");
-static const u8 sText_ElectricTerrainEnds[] = _("");
-static const u8 sText_MistyTerrainEnds[] = _("");
-static const u8 sText_PsychicTerrainEnds[] = _("");
-static const u8 sText_GrassyTerrainEnds[] = _("");
-static const u8 sText_AngryPointActivates[] = _("");
-static const u8 sText_PoisonHealHpUp[] = _("");
-static const u8 sText_BadDreamsDmg[] = _("");
-static const u8 sText_MoldBreakerEnters[] = _("");
-static const u8 sText_TeravoltEnters[] = _("");
-static const u8 sText_TurboblazeEnters[] = _("");
-static const u8 sText_SlowStartEnters[] = _("");
-static const u8 sText_SlowStartEnd[] = _("");
-static const u8 sText_SolarPowerHpDrop[] = _("");
-static const u8 sText_AftermathDmg[] = _("");
-static const u8 sText_AnticipationActivates[] = _("");
-static const u8 sText_ForewarnActivates[] = _("");
-static const u8 sText_IceBodyHpGain[] = _("");
-static const u8 sText_SnowWarningHail[] = _("");
-static const u8 sText_FriskActivates[] = _("");
-static const u8 sText_UnnerveEnters[] = _("");
-static const u8 sText_HarvestBerry[] = _("");
-static const u8 sText_MoxieAtkRise[] = _("");
-static const u8 sText_MagicBounceActivates[] = _("");
-static const u8 sText_ProteanTypeChange[] = _("");
-static const u8 sText_SymbiosisItemPass[] = _("");
+static const u8 sText_AuroraVeilEnds[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nwore off!");
+static const u8 sText_ElectricTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
+static const u8 sText_MistyTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
+static const u8 sText_PsychicTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
+static const u8 sText_GrassyTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
+static const u8 sText_AngryPointActivates[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY} maxed\nits attack!");
+static const u8 sText_PoisonHealHpUp[] = _("The poisoning healed {B_ATK_NAME_WITH_PREFIX}\na little bit!");
+static const u8 sText_BadDreamsDmg[] = _("The {B_DEF_NAME_WITH_PREFIX} is tormented\nby {B_DEF_ABILITY}!");
+static const u8 sText_MoldBreakerEnters[] = _("The {B_DEF_NAME_WITH_PREFIX} breaks the mold!");
+static const u8 sText_TeravoltEnters[] = _("{B_ATK_NAME_WITH_PREFIX} is radiating a bursting aura!");
+static const u8 sText_TurboblazeEnters[] = _("{B_ATK_NAME_WITH_PREFIX} is radiating a blazing aura!");
+static const u8 sText_SlowStartEnters[] = _("{B_ATK_NAME_WITH_PREFIX} can't get it going!");
+static const u8 sText_SlowStartEnd[] = _("{B_ATK_NAME_WITH_PREFIX} finally got its act together!");
+static const u8 sText_SolarPowerHpDrop[] = _("The {B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\ntakes its toll!");
+static const u8 sText_AftermathDmg[] = _("The {B_DEF_NAME_WITH_PREFIX}\nsuffers the {B_DEF_ABILITY}!");
+static const u8 sText_AnticipationActivates[] = _("The {B_ATK_NAME_WITH_PREFIX} shuddered in {B_ATK_ABILITY}!");
+static const u8 sText_ForewarnActivates[] = _("{B_ATK_ABILITY} alerted the {B_ATK_NAME_WITH_PREFIX} to the\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");
+static const u8 sText_IceBodyHpGain[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nhealed it a little bit!");
+static const u8 sText_SnowWarningHail[] = _("It started to hail!");
+static const u8 sText_FriskActivates[] = _("{B_ATK_NAME_WITH_PREFIX} frisked {B_DEF_NAME_WITH_PREFIX} and\nfound its {B_LAST_ITEM}!");
+static const u8 sText_UnnerveEnters[] = _("{B_ATK_NAME_WITH_PREFIX} is too nervous to eat Berries!");
+static const u8 sText_HarvestBerry[] = _("{B_ATK_NAME_WITH_PREFIX} harvested its {B_LAST_ITEM}!");
+static const u8 sText_MoxieAtkRise[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY} raised its Attack!");
+static const u8 sText_MagicBounceActivates[] = _("The {B_DEF_NAME_WITH_PREFIX} bounced the\n{B_ATK_NAME_WITH_PREFIX} back!");
+static const u8 sText_ProteanTypeChange[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY} transformed\nit into the {B_BUFF1} type!");
+static const u8 sText_SymbiosisItemPass[] = _("{B_ATK_NAME_WITH_PREFIX} passed its {B_LAST_ITEM}\nto {B_SCR_ACTIVE_NAME_WITH_PREFIX} through {B_ATK_ABILITY}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -3116,7 +3116,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 
 // Loads one of two text strings into the provided buffer. This is functionally
 // unused, since the value loaded into the buffer is not read; it loaded one of
-// two particles (either "は" or "の") which works in tandem with ChooseTypeOfMoveUsedString
+// two particles (either "?" or "?") which works in tandem with ChooseTypeOfMoveUsedString
 // below to effect changes in the meaning of the line.
 static void ChooseMoveUsedParticle(u8* textBuff)
 {
@@ -3146,17 +3146,17 @@ static void ChooseMoveUsedParticle(u8* textBuff)
 // sText_ExclamationMark was a plain "!", used for any attack not on the list.
 // It resulted in the translation "<NAME>'s <ATTACK>!".
 //
-// sText_ExclamationMark2 was "を つかった！". This resulted in the translation
+// sText_ExclamationMark2 was "? ????!". This resulted in the translation
 // "<NAME> used <ATTACK>!", which was used for all attacks in English.
 //
-// sText_ExclamationMark3 was "した！". This was used for those moves whose
+// sText_ExclamationMark3 was "??!". This was used for those moves whose
 // names were verbs, such as Recover, and resulted in translations like "<NAME>
 // recovered itself!".
 //
-// sText_ExclamationMark4 was "を した！" This resulted in a translation of
+// sText_ExclamationMark4 was "? ??!" This resulted in a translation of
 // "<NAME> did an <ATTACK>!".
 //
-// sText_ExclamationMark5 was " こうげき！" This resulted in a translation of
+// sText_ExclamationMark5 was " ????!" This resulted in a translation of
 // "<NAME>'s <ATTACK> attack!".
 static void ChooseTypeOfMoveUsedString(u8* dst)
 {
