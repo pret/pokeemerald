@@ -4300,7 +4300,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_WAKE_UP_SLAP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_WAKE_UP_SLAP,
 		.power = 70,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -4324,7 +4324,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_GYRO_BALL
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_GYRO_BALL,
 		.power = 1,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -4348,7 +4348,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_BRINE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_BRINE,
 		.power = 65,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -4360,7 +4360,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_NATURAL_GIFT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_NATURAL_GIFT,
 		.power = 1,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -4456,7 +4456,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_PAYBACK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PAYBACK,
 		.power = 50,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4468,7 +4468,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ASSURANCE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ASSURANCE,
 		.power = 60,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4492,7 +4492,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_FLING
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FLING,
 		.power = 1,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4516,7 +4516,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TRUMP_CARD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_TRUMP_CARD,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -4540,7 +4540,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_WRING_OUT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_WRING_OUT,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -4564,7 +4564,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GASTRO_ACID
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_GASTRO_ACID,
 		.power = 0,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -4612,7 +4612,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_POWER_SWAP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_POWER_SWAP,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -4624,7 +4624,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GUARD_SWAP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_GUARD_SWAP,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -4636,7 +4636,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_PUNISHMENT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PUNISHMENT,
 		.power = 60,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4684,7 +4684,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_TOXIC_SPIKES
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_TOXIC_SPIKES,
 		.power = 0,
 		.type = TYPE_POISON,
 		.accuracy = 0,
@@ -4696,7 +4696,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEART_SWAP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HEART_SWAP,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -4720,7 +4720,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_MAGNET_RISE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_MAGNET_RISE,
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 0,
@@ -5200,7 +5200,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TRICK_ROOM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_TRICK_TOOM,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -5356,7 +5356,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_STEALTH_ROCK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_STEALTH_ROCK,
 		.power = 0,
 		.type = TYPE_ROCK,
 		.accuracy = 0,
@@ -5644,7 +5644,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GUARD_SPLIT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_GUARD_SPLIT,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -5668,7 +5668,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_WONDER_ROOM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_WONDER_ROOM,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -5680,7 +5680,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_PSYSHOCK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PSYSHOCK,
 		.power = 80,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -5692,7 +5692,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_VENOSHOCK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_VENOSHOCK,
 		.power = 65,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -5728,7 +5728,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TELEKINESIS
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_TELEKINESIS,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -5740,7 +5740,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_MAGIC_ROOM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_MAGIC_ROOM,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -5836,7 +5836,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ELECTRO_BALL
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ELECTRO_BALL,
 		.power = 1,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -5908,7 +5908,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FOUL_PLAY
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FOUL_PLAY,
 		.power = 95,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -5956,7 +5956,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ROUND
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ROUND,
 		.power = 60,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5968,7 +5968,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ECHOED_VOICE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ECHOED_VOICE,
 		.power = 40,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6004,7 +6004,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_STORED_POWER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_STORED_POWER,
 		.power = 20,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -6076,7 +6076,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEX
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HEX,
 		.power = 65,
 		.type = TYPE_GHOST,
 		.accuracy = 100,
@@ -6148,7 +6148,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ACROBATICS
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ACROBATICS,
 		.power = 55,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
@@ -6172,7 +6172,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_RETALIATE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_RETALITATE,
 		.power = 70,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6220,7 +6220,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_WATER_PLEDGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLEDGE,
 		.power = 80,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -6280,7 +6280,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_BULLDOZE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_BULLDOZE,
 		.power = 60,
 		.type = TYPE_GROUND,
 		.accuracy = 100,
@@ -6424,7 +6424,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HEAT_CRASH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HEAT_CRASH,
 		.power = 1,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
