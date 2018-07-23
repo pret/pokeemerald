@@ -752,6 +752,7 @@ static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
         else
             isCrit = FALSE;
         break;
+    case -2:
     case 3:
     case 4:
         isCrit = TRUE;

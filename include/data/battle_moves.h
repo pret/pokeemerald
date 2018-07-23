@@ -4660,7 +4660,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_WORRY_SEED
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_WORRY_SEED,
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -5764,7 +5764,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_STORM_THROW
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ALWAYS_CRIT,
 		.power = 60,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -6292,7 +6292,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FROST_BREATH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ALWAYS_CRIT,
 		.power = 60,
 		.type = TYPE_ICE,
 		.accuracy = 90,

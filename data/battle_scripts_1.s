@@ -177,7 +177,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectStockpile
 	.4byte BattleScript_EffectSpitUp
 	.4byte BattleScript_EffectSwallow
-	.4byte BattleScript_EffectUnusedA3
+	.4byte BattleScript_EffectWorrySeed
 	.4byte BattleScript_EffectHail
 	.4byte BattleScript_EffectTorment
 	.4byte BattleScript_EffectFlatter
@@ -271,6 +271,18 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectPowerSplit
 	.4byte BattleScript_EffectGuardSplit
 	
+BattleScript_EffectWorrySeed:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	tryworryseed BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNACQUIREDABILITY
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
 BattleScript_EffectPowerSplit:
 	attackcanceler
 	attackstring
@@ -357,10 +369,10 @@ BattleScript_EffectStealthRock:
 	attackcanceler
 	attackstring
 	ppreduce
-	setstealthrock STRINGID_POINTEDSTONESFLOAT
+	setstealthrock BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	printstring STRINGID_POISONSPIKESSCATTERED
+	printstring STRINGID_POINTEDSTONESFLOAT
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 	
@@ -492,7 +504,6 @@ BattleScript_EffectAlwaysCrit:
 BattleScript_EffectUnused6e:
 BattleScript_EffectPursuit:
 BattleScript_EffectUnused8d:
-BattleScript_EffectUnusedA3:
 BattleScript_EffectPlaceholder200:
 BattleScript_EffectPlaceholder209:
 BattleScript_EffectHit::

@@ -1243,6 +1243,11 @@
 	.4byte \ptr
 	.endm
 	
+	.macro tryworryseed ptr
+	.byte 0xfe
+	.4byte \ptr
+	.endm
+	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves bank
 	various \bank, VARIOUS_CANCEL_MULTI_TURN_MOVES

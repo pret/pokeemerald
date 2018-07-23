@@ -345,6 +345,7 @@ static void atkFA_swapstatstages(void);
 static void atkFB_averagestats(void);
 static void atkFC_jumpifoppositegenders(void);
 static void atkFD_trygetbaddreamstarget(void);
+static void atkFE_tryworryseed(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -602,6 +603,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkFB_averagestats,
     atkFC_jumpifoppositegenders,
     atkFD_trygetbaddreamstarget,
+    atkFE_tryworryseed,
 };
 
 struct StatFractions
@@ -1316,7 +1318,7 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
              || gBattleMoves[move].effect == EFFECT_ALWAYS_CRIT
              || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
     {
-        critChance = 4;
+        critChance = -2;
     }
     else
     {
@@ -1350,6 +1352,8 @@ static void atk04_critcalc(void)
         gIsCriticalHit = FALSE;
     else if (critChance == -1)
         gIsCriticalHit = FALSE;
+    else if (critChance == -2)
+        gIsCriticalHit = TRUE;
     else if (Random() % sCriticalHitChanceGen3[critChance] == 0)
         gIsCriticalHit = TRUE;
     else
@@ -10399,4 +10403,21 @@ static void atkFD_trygetbaddreamstarget(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
         gBattlescriptCurrInstr += 5;
+}
+
+static void atkFE_tryworryseed(void)
+{
+    switch (gBattleMons[gBattlerTarget].ability)
+    {
+    case ABILITY_INSOMNIA:
+    case ABILITY_MULTITYPE:
+    case ABILITY_TRUANT:
+    case ABILITY_STANCE_CHANGE:
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        break;
+    default:
+        gBattleMons[gBattlerTarget].ability = ABILITY_INSOMNIA;
+        gBattlescriptCurrInstr += 5;
+        break;
+    }
 }
