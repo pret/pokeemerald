@@ -214,7 +214,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSecretPower
 	.4byte BattleScript_EffectDoubleEdge
 	.4byte BattleScript_EffectTeeterDance
-	.4byte BattleScript_EffectPlaceholder200
+	.4byte BattleScript_EffectHitEscape
 	.4byte BattleScript_EffectMudSport
 	.4byte BattleScript_EffectPoisonFang
 	.4byte BattleScript_EffectWeatherBall
@@ -493,6 +493,48 @@ BattleScript_EffectCaptivate:
 BattleScript_CaptivateCheckAcc:
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	goto BattleScript_StatDownFromAttackString
+	
+BattleScript_EffectHitEscape:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	jumpifmovehadnoeffect BattleScript_MoveEnd
+	seteffectwithchance
+	tryfaintmon BS_TARGET, FALSE, NULL
+	setbyte sMOVEEND_STATE, 0x0
+	moveend 0x0, 0x0
+	atk24 BattleScript_HitEscapeEnd
+	jumpifbyte CMP_NOT_EQUAL gBattleOutcome 0 BattleScript_HitEscapeEnd
+	jumpifcantswitch ATK4F_DONT_CHECK_STATUSES | BS_ATTACKER, BattleScript_HitEscapeEnd
+	openpartyscreen 0x1, BattleScript_HitEscapeEnd
+	switchoutabilities BS_ATTACKER
+	waitstate
+	switchhandleorder BS_ATTACKER, 0x2
+	returntoball BS_ATTACKER
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+BattleScript_HitEscapeEnd:
+	end
 
 BattleScript_EffectAlwaysHit:
 BattleScript_EffectPlaceholder43:
@@ -504,7 +546,6 @@ BattleScript_EffectAlwaysCrit:
 BattleScript_EffectUnused6e:
 BattleScript_EffectPursuit:
 BattleScript_EffectUnused8d:
-BattleScript_EffectPlaceholder200:
 BattleScript_EffectPlaceholder209:
 BattleScript_EffectHit::
 BattleScript_EffectLowKick:

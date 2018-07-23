@@ -4432,7 +4432,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_U_TURN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT_ESCAPE,
 		.power = 70,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -6256,7 +6256,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_VOLT_SWITCH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT_ESCAPE,
 		.power = 70,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
