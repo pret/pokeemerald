@@ -74,6 +74,8 @@
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
 #define VARIOUS_STAT_TEXT_BUFFER                27
 #define VARIOUS_SWITCHIN_ABILITIES              28
+#define VARIOUS_SAVE_TARGET                     29
+#define VARIOUS_RESTORE_TARGET                  30
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

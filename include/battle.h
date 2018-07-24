@@ -257,6 +257,7 @@ struct SideTimer
     /*0x0A*/ u8 spikesAmount;
     u8 toxicSpikesAmount;
     u8 stealthRockAmount;
+    u8 stickyWebAmount;
     u8 auroraVeilTimer;
     u8 auroraVeilBattlerId;
     u8 tailwindTimer;
@@ -592,6 +593,7 @@ struct BattleStruct
     u8 magnitudeBasePower;
     u8 presentBasePower;
     u8 roostTypes[MAX_BATTLERS_COUNT][3];
+    u8 savedBattlerTarget;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

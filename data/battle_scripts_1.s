@@ -3854,6 +3854,26 @@ BattleScript_ToxicSpikesPoisoned::
 	updatestatusicon BS_SCRIPTING
 	waitstate
 	return
+	
+BattleScript_StickyWebOnSwitchIn::
+	savetarget
+	copybyte gBattlerTarget sBANK
+	printstring STRINGID_STICKYWEBSWITCHIN
+	waitmessage 0x40
+	statbuffchange 0x1, BattleScript_StickyWebOnSwitchInEnd
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, 0x2, BattleScript_StickyWebOnSwitchInStatAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_StickyWebOnSwitchInEnd
+	pause 0x20
+	goto BattleScript_StickyWebOnSwitchInPrintStatMsg
+BattleScript_StickyWebOnSwitchInStatAnim:
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_StickyWebOnSwitchInPrintStatMsg:
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+BattleScript_StickyWebOnSwitchInEnd:
+	restoretarget
+	return
 
 BattleScript_PerishSongTakesLife::
 	printstring STRINGID_PKMNPERISHCOUNTFELL

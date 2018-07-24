@@ -617,6 +617,7 @@ static const u8 sText_SymbiosisItemPass[] = _("{B_ATK_NAME_WITH_PREFIX} passed i
 static const u8 sText_StealthRockDmg[] = _("Pointed stones dug into\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}!");
 static const u8 sText_ToxicSpikesAbsorbed[] = _("");
 static const u8 sText_ToxicSpikesPoisoned[] = _("");
+static const u8 sText_StickyWebSwitchIn[] = _("");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1085,6 +1086,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_StealthRockDmg,
     sText_ToxicSpikesAbsorbed,
     sText_ToxicSpikesPoisoned,
+    sText_StickyWebSwitchIn,
 };
 
 const u16 gDmgHazardsStringIds[] =

@@ -1365,6 +1365,14 @@
 	various \battler, VARIOUS_SWITCHIN_ABILITIES
 	.endm
 	
+	.macro savetarget
+	various BS_TARGET, VARIOUS_SAVE_TARGET
+	.endm
+	
+	.macro restoretarget
+	various BS_TARGET, VARIOUS_RESTORE_TARGET
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

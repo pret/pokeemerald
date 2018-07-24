@@ -118,6 +118,7 @@ enum
     LIST_SIDE_TAILWIND,
     LIST_SIDE_STEALTH_ROCK,
     LIST_SIDE_TOXIC_SPIKES,
+    LIST_SIDE_STICKY_WEB,
 };
 
 // const rom data
@@ -177,6 +178,7 @@ static const u8 sText_Tailwind[] = _("Tailwind");
 static const u8 sText_PP[] = _("PP");
 static const u8 sText_StealthRock[] = _("Stealth Rock");
 static const u8 sText_ToxicSpikes[] = _("Toxic Spikes");
+static const u8 sText_StickyWeb[] = _("Sticky Web");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -329,6 +331,7 @@ static const struct ListMenuItem sSideStatusListItems[] =
     {sText_Tailwind, LIST_SIDE_TAILWIND},
     {sText_StealthRock, LIST_SIDE_STEALTH_ROCK},
     {sText_ToxicSpikes, LIST_SIDE_TOXIC_SPIKES},
+    {sText_StickyWeb, LIST_SIDE_STICKY_WEB},
 };
 
 static const struct ListMenuItem sSecondaryListItems[] =
@@ -1135,6 +1138,15 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
                 *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_TOXIC_SPIKES);
         }
         return &sideTimer->toxicSpikesAmount;
+    case LIST_SIDE_STICKY_WEB:
+        if (changeStatus)
+        {
+            if (statusTrue)
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_STICKY_WEB;
+            else
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_STICKY_WEB);
+        }
+        return &sideTimer->stickyWebAmount;
     default:
         return NULL;
     }
@@ -1243,7 +1255,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
 
         if (data->currentSecondaryListItemId == LIST_SIDE_SPIKES)
             data->modifyArrows.maxValue = 3;
-        else if (data->currentSecondaryListItemId == LIST_SIDE_STEALTH_ROCK)
+        else if (data->currentSecondaryListItemId == LIST_SIDE_STEALTH_ROCK || data->currentSecondaryListItemId == LIST_SIDE_STICKY_WEB)
             data->modifyArrows.maxValue = 1;
         else
             data->modifyArrows.maxValue = 9;

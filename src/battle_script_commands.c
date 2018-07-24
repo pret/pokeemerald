@@ -5395,6 +5395,16 @@ static void atk52_switchineffects(void)
             }
         }
     }
+    else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STICKY_WEB_DAMAGED)
+        && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STICKY_WEB)
+        && IsBattlerGrounded(gActiveBattler))
+    {
+        gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_STICKY_WEB_DAMAGED;
+        gBattleScripting.battler = gActiveBattler;
+        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_StickyWebOnSwitchIn;
+    }
     else
     {
         if (gBattleMons[gActiveBattler].ability == ABILITY_TRUANT && !gDisableStructs[gActiveBattler].truantUnknownBit)
@@ -6606,6 +6616,12 @@ static void atk76_various(void)
         gBattlescriptCurrInstr += 3;
         AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0);
         return;
+    case VARIOUS_SAVE_TARGET:
+        gBattleStruct->savedBattlerTarget = gBattlerTarget;
+        break;
+    case VARIOUS_RESTORE_TARGET:
+        gBattlerTarget = gBattleStruct->savedBattlerTarget;
+        break;
     }
 
     gBattlescriptCurrInstr += 3;
