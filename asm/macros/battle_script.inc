@@ -150,7 +150,7 @@
 	.macro jumpifsideaffecting bank, sidestatus, param2
 	.byte 0x1f
 	.byte \bank
-	.2byte \sidestatus
+	.4byte \sidestatus
 	.4byte \param2
 	.endm
 

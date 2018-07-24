@@ -1428,11 +1428,9 @@ static void TrySetBattleSeminarShow(void)
         powerOverride = 0;
         if (ShouldCalculateDamage(gCurrentMove, &dmgByMove[i], &powerOverride))
         {
-            u8 moveResultFlags;
-            u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)];
             gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, gBattleMoves[gCurrentMove].type, powerOverride, FALSE, FALSE);
             dmgByMove[i] = gBattleMoveDamage;
-            if (dmgByMove[i] == 0 && !(moveResultFlags & MOVE_RESULT_NO_EFFECT))
+            if (dmgByMove[i] == 0 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
                 dmgByMove[i] = 1;
         }
     }

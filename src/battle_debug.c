@@ -1036,9 +1036,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_REFLECT;
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_REFLECT;
             else
-                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_REFLECT);
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_REFLECT);
             sideTimer->reflectBattlerId = data->battlerId;
         }
         return &sideTimer->reflectTimer;
@@ -1046,9 +1046,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LIGHTSCREEN;
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LIGHTSCREEN;
             else
-                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_LIGHTSCREEN);
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_LIGHTSCREEN);
             sideTimer->lightscreenBattlerId = data->battlerId;
         }
         return &sideTimer->lightscreenTimer;
@@ -1056,18 +1056,18 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_SPIKES;
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_SPIKES;
             else
-                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_SPIKES);
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_SPIKES);
         }
         return &sideTimer->spikesAmount;
     case LIST_SIDE_SAFEGUARD:
         if (changeStatus)
         {
             if (statusTrue)
-                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_SAFEGUARD;
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_SAFEGUARD;
             else
-                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_SAFEGUARD);
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_SAFEGUARD);
             sideTimer->safeguardBattlerId = data->battlerId;
         }
         return &sideTimer->safeguardTimer;
@@ -1075,9 +1075,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_MIST;
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_MIST;
             else
-                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_MIST);
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_MIST);
             sideTimer->mistBattlerId = data->battlerId;
         }
         return &sideTimer->mistTimer;
@@ -1085,9 +1085,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_AURORA_VEIL;
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_AURORA_VEIL;
             else
-                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_AURORA_VEIL);
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_AURORA_VEIL);
             sideTimer->auroraVeilBattlerId = data->battlerId;
         }
         return &sideTimer->auroraVeilTimer;
@@ -1095,9 +1095,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LUCKY_CHANT;
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_LUCKY_CHANT;
             else
-                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_LUCKY_CHANT);
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_LUCKY_CHANT);
             sideTimer->luckyChantBattlerId = data->battlerId;
         }
         return &sideTimer->luckyChantTimer;
@@ -1105,9 +1105,9 @@ static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus,
         if (changeStatus)
         {
             if (statusTrue)
-                *(u16*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_TAILWIND;
+                *(u32*)(data->modifyArrows.modifiedValPtr) |= SIDE_STATUS_TAILWIND;
             else
-                *(u16*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_TAILWIND);
+                *(u32*)(data->modifyArrows.modifiedValPtr) &= ~(SIDE_STATUS_TAILWIND);
             sideTimer->tailwindBattlerId = data->battlerId;
         }
         return &sideTimer->tailwindTimer;

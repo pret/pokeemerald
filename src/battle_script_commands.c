@@ -2942,21 +2942,21 @@ static void atk1E_jumpifability(void)
 static void atk1F_jumpifsideaffecting(void)
 {
     u8 side;
-    u16 flags;
-    const u8* jumpPtr;
+    u32 flags;
+    const u8 *jumpPtr;
 
     if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
         side = GET_BATTLER_SIDE(gBattlerAttacker);
     else
         side = GET_BATTLER_SIDE(gBattlerTarget);
 
-    flags = T2_READ_16(gBattlescriptCurrInstr + 2);
-    jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 4);
+    flags = T2_READ_32(gBattlescriptCurrInstr + 2);
+    jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
 
     if (gSideStatuses[side] & flags)
         gBattlescriptCurrInstr = jumpPtr;
     else
-        gBattlescriptCurrInstr += 8;
+        gBattlescriptCurrInstr += 10;
 }
 
 static void atk20_jumpifstat(void)
