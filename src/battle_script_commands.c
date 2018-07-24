@@ -2765,7 +2765,7 @@ static void atk19_tryfaintmon(void)
 
             BattleScriptPop();
             gBattlescriptCurrInstr = BS_ptr;
-            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED);
+            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED);
         }
         else
         {
@@ -5315,6 +5315,22 @@ static void atk51_switchhandleorder(void)
     gBattlescriptCurrInstr += 3;
 }
 
+static void SetDmgHazardsBattlescript(u8 battlerId, u8 multistringId)
+{
+    gBattleMons[battlerId].status2 &= ~(STATUS2_DESTINY_BOND);
+    gHitMarker &= ~(HITMARKER_DESTINYBOND);
+    gBattleScripting.battler = battlerId;
+    gBattleCommunication[MULTISTRING_CHOOSER] = multistringId;
+
+    BattleScriptPushCursor();
+    if (gBattlescriptCurrInstr[1] == BS_TARGET)
+        gBattlescriptCurrInstr = BattleScript_DmgHazardsOnTarget;
+    else if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
+        gBattlescriptCurrInstr = BattleScript_DmgHazardsOnAttacker;
+    else
+        gBattlescriptCurrInstr = BattleScript_DmgHazardsOnFaintedBattler;
+}
+
 static void atk52_switchineffects(void)
 {
     s32 i;
@@ -5327,30 +5343,57 @@ static void atk52_switchineffects(void)
 
     if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
         && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
-        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
-        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
+        && IsBattlerGrounded(gActiveBattler))
     {
-        u8 spikesDmg;
-
-        gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_SPIKES_DAMAGED;
-
-        gBattleMons[gActiveBattler].status2 &= ~(STATUS2_DESTINY_BOND);
-        gHitMarker &= ~(HITMARKER_DESTINYBOND);
-
-        spikesDmg = (5 - gSideTimers[GetBattlerSide(gActiveBattler)].spikesAmount) * 2;
+        u8 spikesDmg = (5 - gSideTimers[GetBattlerSide(gActiveBattler)].spikesAmount) * 2;
         gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (spikesDmg);
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
-        gBattleScripting.battler = gActiveBattler;
-        BattleScriptPushCursor();
+        gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_SPIKES_DAMAGED;
+        SetDmgHazardsBattlescript(gActiveBattler, 0);
+    }
+    else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEALTH_ROCK_DAMAGED)
+        && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_STEALTH_ROCK))
+    {
+        gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_STEALTH_ROCK_DAMAGED;
+        gBattleMoveDamage = GetStealthHazardDamage(gBattleMoves[MOVE_STEALTH_ROCK].type, gActiveBattler);
 
-        if (gBattlescriptCurrInstr[1] == BS_TARGET)
-            gBattlescriptCurrInstr = BattleScript_SpikesOnTarget;
-        else if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
-            gBattlescriptCurrInstr = BattleScript_SpikesOnAttacker;
+        if (gBattleMoveDamage != 0)
+            SetDmgHazardsBattlescript(gActiveBattler, 1);
+    }
+    else if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TOXIC_SPIKES_DAMAGED)
+        && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_TOXIC_SPIKES)
+        && IsBattlerGrounded(gActiveBattler))
+    {
+        gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_TOXIC_SPIKES_DAMAGED;
+        if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_POISON)) // Absorb the toxic spikes.
+        {
+            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_TOXIC_SPIKES);
+            gSideTimers[GetBattlerSide(gActiveBattler)].toxicSpikesAmount = 0;
+            gBattleScripting.battler = gActiveBattler;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_ToxicSpikesAbsorbed;
+        }
         else
-            gBattlescriptCurrInstr = BattleScript_SpikesOnFaintedBattler;
+        {
+            if (!(gBattleMons[gActiveBattler].status1 & STATUS1_ANY)
+                && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)
+                && GetBattlerAbility(gActiveBattler) != ABILITY_IMMUNITY
+                && !(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SAFEGUARD))
+            {
+                if (gSideTimers[GetBattlerSide(gActiveBattler)].toxicSpikesAmount >= 2)
+                    gBattleMons[gActiveBattler].status1 |= STATUS1_TOXIC_POISON;
+                else
+                    gBattleMons[gActiveBattler].status1 |= STATUS1_POISON;
+
+                BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                MarkBattlerForControllerExec(gActiveBattler);
+                gBattleScripting.battler = gActiveBattler;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_ToxicSpikesPoisoned;
+            }
+        }
     }
     else
     {
@@ -5362,7 +5405,7 @@ static void atk52_switchineffects(void)
         if (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0) == 0 &&
             ItemBattleEffects(0, gActiveBattler, 0) == 0)
         {
-            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED);
+            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED);
 
             for (i = 0; i < gBattlersCount; i++)
             {
@@ -9484,6 +9527,7 @@ static void atkDC_setstealthrock(void)
     else
     {
         gSideStatuses[targetSide] |= SIDE_STATUS_STEALTH_ROCK;
+        gSideTimers[targetSide].stealthRockAmount = 1;
         gBattlescriptCurrInstr += 5;
     }
 }

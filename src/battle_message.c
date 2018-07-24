@@ -588,8 +588,6 @@ static const u8 sText_GravityEnds[] = _("Gravity returned to normal!");
 static const u8 sText_AquaRingHeal[] = _("Aqua Ring restored\n{B_ATK_NAME_WITH_PREFIX}’s HP!");
 static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\n raised its {B_BUFF1}!");
 static const u8 sText_AttackerAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\n raised its {B_BUFF1}!");
-
-// These strings are currently placeholders, to be fixed.
 static const u8 sText_AuroraVeilEnds[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}\nwore off!");
 static const u8 sText_ElectricTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
 static const u8 sText_MistyTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
@@ -616,6 +614,9 @@ static const u8 sText_MoxieAtkRise[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_AB
 static const u8 sText_MagicBounceActivates[] = _("The {B_DEF_NAME_WITH_PREFIX} bounced the\n{B_ATK_NAME_WITH_PREFIX} back!");
 static const u8 sText_ProteanTypeChange[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_ABILITY} transformed\nit into the {B_BUFF1} type!");
 static const u8 sText_SymbiosisItemPass[] = _("{B_ATK_NAME_WITH_PREFIX} passed its {B_LAST_ITEM}\nto {B_SCR_ACTIVE_NAME_WITH_PREFIX} through {B_ATK_ABILITY}!");
+static const u8 sText_StealthRockDmg[] = _("Pointed stones dug into\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}!");
+static const u8 sText_ToxicSpikesAbsorbed[] = _("");
+static const u8 sText_ToxicSpikesPoisoned[] = _("");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1081,6 +1082,14 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_MagicBounceActivates,
     sText_ProteanTypeChange,
     sText_SymbiosisItemPass,
+    sText_StealthRockDmg,
+    sText_ToxicSpikesAbsorbed,
+    sText_ToxicSpikesPoisoned,
+};
+
+const u16 gDmgHazardsStringIds[] =
+{
+    STRINGID_PKMNHURTBYSPIKES, STRINGID_STEALTHROCKDMG
 };
 
 const u16 gSwitchInAbilityStringIds[] =

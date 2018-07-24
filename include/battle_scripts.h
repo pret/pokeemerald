@@ -78,11 +78,11 @@ extern const u8 BattleScript_SelectingDisabledMoveInPalace[];
 extern const u8 BattleScript_SelectingUnusableMoveInPalace[];
 extern const u8 BattleScript_EncoredNoMore[];
 extern const u8 BattleScript_DestinyBondTakesLife[];
-extern const u8 BattleScript_SpikesOnAttacker[];
+extern const u8 BattleScript_DmgHazardsOnAttacker[];
 extern const u8 BattleScript_82DAE7A[];
-extern const u8 BattleScript_SpikesOnTarget[];
+extern const u8 BattleScript_DmgHazardsOnTarget[];
 extern const u8 BattleScript_82DAEB1[];
-extern const u8 BattleScript_SpikesOnFaintedBattler[];
+extern const u8 BattleScript_DmgHazardsOnFaintedBattler[];
 extern const u8 BattleScript_82DAEE8[];
 extern const u8 BattleScript_82DAEFE[];
 extern const u8 BattleScript_PerishSongTakesLife[];
@@ -314,5 +314,7 @@ extern const u8 BattleScript_AttackerAbilityStatRaiseEnd3[];
 extern const u8 BattleScript_PoisonHealActivates[];
 extern const u8 BattleScript_BadDreamsActivates[];
 extern const u8 BattleScript_SwitchInAbilityMsg[];
+extern const u8 BattleScript_ToxicSpikesPoisoned[];
+extern const u8 BattleScript_ToxicSpikesAbsorbed[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

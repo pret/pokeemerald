@@ -3789,57 +3789,70 @@ BattleScript_DestinyBondTakesLife::
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 	return
 
-BattleScript_SpikesOnAttacker::
+BattleScript_DmgHazardsOnAttacker::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
-	call BattleScript_PrintHurtBySpikes
+	call BattleScript_PrintHurtByDmgHazards
 	tryfaintmon BS_ATTACKER, FALSE, NULL
-	tryfaintmon BS_ATTACKER, TRUE, BattleScript_SpikesOnAttackerFainted
+	tryfaintmon BS_ATTACKER, TRUE, BattleScript_DmgHazardsOnAttackerFainted
 	return
 
-BattleScript_SpikesOnAttackerFainted::
+BattleScript_DmgHazardsOnAttackerFainted::
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp BS_ATTACKER
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
 	goto BattleScript_HandleFaintedMon
 
-BattleScript_SpikesOnTarget::
+BattleScript_DmgHazardsOnTarget::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
-	call BattleScript_PrintHurtBySpikes
+	call BattleScript_PrintHurtByDmgHazards
 	tryfaintmon BS_TARGET, FALSE, NULL
-	tryfaintmon BS_TARGET, TRUE, BattleScript_SpikesOnTargetFainted
+	tryfaintmon BS_TARGET, TRUE, BattleScript_DmgHazardsOnTargetFainted
 	return
 
-BattleScript_SpikesOnTargetFainted::
+BattleScript_DmgHazardsOnTargetFainted::
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp BS_TARGET
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
 	goto BattleScript_HandleFaintedMon
 
-BattleScript_SpikesOnFaintedBattler::
+BattleScript_DmgHazardsOnFaintedBattler::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate BS_FAINTED
 	datahpupdate BS_FAINTED
-	call BattleScript_PrintHurtBySpikes
+	call BattleScript_PrintHurtByDmgHazards
 	tryfaintmon BS_FAINTED, FALSE, NULL
-	tryfaintmon BS_FAINTED, TRUE, BattleScript_SpikesOnFaintedBattlerFainted
+	tryfaintmon BS_FAINTED, TRUE, BattleScript_DmgHazardsOnFaintedBattlerFainted
 	return
 
-BattleScript_SpikesOnFaintedBattlerFainted::
+BattleScript_DmgHazardsOnFaintedBattlerFainted::
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp BS_FAINTED
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
 	goto BattleScript_HandleFaintedMon
 
-BattleScript_PrintHurtBySpikes::
-	printstring STRINGID_PKMNHURTBYSPIKES
+BattleScript_PrintHurtByDmgHazards::
+	printfromtable gDmgHazardsStringIds
 	waitmessage 0x40
+	return
+	
+BattleScript_ToxicSpikesAbsorbed::
+	printstring STRINGID_TOXICSPIKESABSORBED
+	waitmessage 0x40
+	return
+	
+BattleScript_ToxicSpikesPoisoned::
+	printstring STRINGID_TOXICSPIKESPOISONED
+	waitmessage 0x40
+	statusanimation BS_SCRIPTING
+	updatestatusicon BS_SCRIPTING
+	waitstate
 	return
 
 BattleScript_PerishSongTakesLife::

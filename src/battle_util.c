@@ -5230,3 +5230,50 @@ u16 GetTypeModifier(u8 atkType, u8 defType)
 {
     return sTypeEffectivenessTable[atkType][defType];
 }
+
+s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId)
+{
+    u8 type1 = gBattleMons[battlerId].type1;
+    u8 type2 = gBattleMons[battlerId].type2;
+    u32 maxHp = gBattleMons[battlerId].maxHP;
+    s32 dmg = 0;
+    u16 modifier = UQ_4_12(1.0);
+
+    MulModifier(&modifier, GetTypeModifier(hazardType, type1));
+    if (type2 != type1)
+        MulModifier(&modifier, GetTypeModifier(hazardType, type2));
+
+    switch (modifier)
+    {
+    case UQ_4_12(0.0):
+        dmg = 0;
+        break;
+    case UQ_4_12(0.25):
+        dmg = maxHp / 32;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(0.5):
+        dmg = maxHp / 16;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(1.0):
+        dmg = maxHp / 8;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(2.0):
+        dmg = maxHp / 4;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(4.0):
+        dmg = maxHp / 2;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    }
+
+    return dmg;
+}
