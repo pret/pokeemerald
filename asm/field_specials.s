@@ -1906,7 +1906,7 @@ _08138C7E:
 	thumb_func_start CB2_FieldShowRegionMap
 CB2_FieldShowRegionMap: @ 8138C84
 	push {lr}
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl sub_817018C
 	pop {r0}
 	bx r0
@@ -7153,14 +7153,14 @@ sub_813B7D8: @ 813B7D8
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0813B7F8
-	ldr r2, =CB2_ReturnToFieldContinueScript
+	ldr r2, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	movs r0, 0
 	movs r1, 0x1
 	bl DoRayquazaScene
 	b _0813B802
 	.pool
 _0813B7F8:
-	ldr r2, =CB2_ReturnToFieldContinueScript
+	ldr r2, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	movs r0, 0x1
 	movs r1, 0
 	bl DoRayquazaScene

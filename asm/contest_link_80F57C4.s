@@ -1825,7 +1825,7 @@ _080F6884:
 	adds r0, r5, 0
 	bl DestroyTask
 	bl FreeAllWindowBuffers
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	bl sub_80F7E64
 _080F68A8:

@@ -356,7 +356,7 @@ static void Task_ExitTrainerHillRecords(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         Free(sTilemapBuffer);
         RemoveTrainerHillRecordsWindow(0);
         FreeAllWindowBuffers();

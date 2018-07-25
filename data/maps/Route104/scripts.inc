@@ -1115,11 +1115,11 @@ Route104_Text_1EDA8C: @ 81EDA8C
 
 Route104_Text_1EDAA1: @ 81EDAA1
 	.string "ROUTE 1O4\n"
-	.string "{0x7C} PETALBURG CITY$"
+	.string "{RIGHT_ARROW} PETALBURG CITY$"
 
 Route104_Text_1EDABC: @ 81EDABC
 	.string "ROUTE 1O4\n"
-	.string "{0x79} RUSTBORO CITY$"
+	.string "{UP_ARROW} RUSTBORO CITY$"
 
 Route104_Text_1EDAD6: @ 81EDAD6
 	.string "PRETTY PETAL FLOWER SHOP$"

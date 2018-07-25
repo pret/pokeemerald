@@ -112,8 +112,8 @@ Route102_Text_1EC32E: @ 81EC32E
 
 Route102_Text_1EC35B: @ 81EC35B
 	.string "ROUTE 102\n"
-	.string "{0x7C} OLDALE TOWN$"
+	.string "{RIGHT_ARROW} OLDALE TOWN$"
 
 Route102_Text_1EC373: @ 81EC373
 	.string "ROUTE 102\n"
-	.string "{0x7B} PETALBURG CITY$"
+	.string "{LEFT_ARROW} PETALBURG CITY$"

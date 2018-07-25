@@ -3172,7 +3172,7 @@ _08163A3C:
 _08163A74:
 	bl sub_816537C
 _08163A78:
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	add sp, 0x4
 	pop {r4-r6}

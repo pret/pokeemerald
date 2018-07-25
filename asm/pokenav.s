@@ -66,7 +66,7 @@ sub_81C72BC: @ 81C72BC
 	str r0, [r4]
 	cmp r0, 0
 	bne _081C72F0
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	b _081C7320
 	.pool
@@ -351,7 +351,7 @@ _081C752C:
 	bl sub_81C7334
 	cmp r4, 0
 	beq _081C755C
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	b _081C7562
 	.pool
@@ -16941,17 +16941,17 @@ sub_81CF7F4: @ 81CF7F4
 	mov r8, r0
 	bl sub_81CF0F0
 	adds r7, r0, 0
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r4, =gStringVar1
 	movs r0, 0
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0xFF
 	strb r0, [r4]
 	ldr r5, =gStringVar2
 	ldr r1, =gText_NumberF700
 	adds r0, r5, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	mov r1, r8
 	ldrb r0, [r1, 0x8]
 	movs r1, 0x1
@@ -19854,14 +19854,14 @@ sub_81D0E84: @ 81D0E84
 	movs r2, 0
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r4, =gStringVar4
 	ldr r1, =gText_RibbonsF700
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldrb r0, [r5, 0xA]
 	movs r1, 0x44
 	bl FillWindowPixelBuffer

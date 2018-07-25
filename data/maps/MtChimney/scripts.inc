@@ -765,7 +765,7 @@ MtChimney_Text_22FFC0: @ 822FFC0
 	.string "It makes no response whatsoever.$"
 
 MtChimney_Text_22FFFA: @ 822FFFA
-	.string "{0x7A} JAGGED PATH\n"
+	.string "{DOWN_ARROW} JAGGED PATH\n"
 	.string "LAVARIDGE TOWN AHEAD$"
 
 MtChimney_Text_23001D: @ 823001D

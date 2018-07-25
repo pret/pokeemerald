@@ -2689,7 +2689,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
         if (gReceivedRemoteLinkPlayers == 0)
         {
             FREE_AND_SET_NULL(sBerryBlenderData);
-            SetMainCallback2(CB2_ReturnToFieldContinueScript);
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         }
         break;
     }
@@ -2739,7 +2739,7 @@ static void CB2_HandlePlayerPlayAgainChoice(void)
             if (sBerryBlenderData->playAgainState == PLAY_AGAIN_OK)
                 SetMainCallback2(DoBerryBlending);
             else
-                SetMainCallback2(CB2_ReturnToFieldContinueScript);
+                SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 
             FreeAllWindowBuffers();
             UnsetBgTilemapBuffer(2);

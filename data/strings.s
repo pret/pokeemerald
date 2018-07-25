@@ -140,27 +140,27 @@ gUnknown_085E852C:: @ 85E852C
 
 	.align 2
 gUnknown_085E8538:: @ 85E8538
-	.string "{UNK_CTRL_F80A}PICK {UNK_CTRL_F800}OK$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}OK$"
 
 	.align 2
 gUnknown_085E8544:: @ 85E8544
-	.string "{UNK_CTRL_F800}NEXT$"
+	.string "{A_BUTTON}NEXT$"
 
 	.align 2
 gUnknown_085E854C:: @ 85E854C
-	.string "{UNK_CTRL_F800}NEXT {UNK_CTRL_F801}BACK$"
+	.string "{A_BUTTON}NEXT {B_BUTTON}BACK$"
 
 	.align 2
 gText_PickNextCancel:: @ 85E855C
-	.string "{UNK_CTRL_F80A}PICK {UNK_CTRL_F800}NEXT {UNK_CTRL_F801}CANCEL$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}NEXT {B_BUTTON}CANCEL$"
 
 	.align 2
 gText_PickCancel:: @ 85E8574
-	.string "{UNK_CTRL_F80A}PICK {UNK_CTRL_F800}{UNK_CTRL_F801}CANCEL$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}{B_BUTTON}CANCEL$"
 
 	.align 2
 gText_UnkCtrlF800Exit:: @ 85E8588
-	.string "{UNK_CTRL_F800}EXIT$"
+	.string "{A_BUTTON}EXIT$"
 
 gText_BirchBoy:: @ 85E858F
 	.string "BOY$"
@@ -616,7 +616,7 @@ gText_LevelSymbol:: @ 85E8D4D
 	.string "{LV}$"
 
 gText_UnkCtrlF908Clear01:: @ 85E8D4F
-	.string "{UNK_CTRL_F908}{CLEAR 0x01}$"
+	.string "{NO}{CLEAR 0x01}$"
 
 gUnknown_085E8D55:: @ 85E8D55
 	.string "+$"
@@ -625,7 +625,7 @@ gUnknown_085E8D57:: @ 85E8D57
 	.string "{RIGHT_ARROW}$"
 
 gText_UnkCtrlF907F908:: @ 85E8D59
-	.string "{UNK_CTRL_F907}{UNK_CTRL_F908}$"
+	.string "{ID}{NO}$"
 
 gText_Space:: @ 85E8D5E
 	.string " $"
@@ -807,7 +807,7 @@ gPocketNamesStringsTable:: @ 85E91FC
 
 	.align 2
 gText_UnkF908Var1Clear7Var2:: @ 85E9210
-	.string "{UNK_CTRL_F908}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}$"
+	.string "{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}$"
 
 gText_ClearTo11Var1Clear5Var2:: @ 85E921A
 	.string "{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}$"
@@ -824,7 +824,7 @@ gText_Var1DotVar2:: @ 85E9233
 	.include "data/text/berry_firmness_strings.inc"
 
 gText_UnkF908Var1Var2:: @ 85E9263
-	.string "{UNK_CTRL_F908}{STR_VAR_1} {STR_VAR_2}$"
+	.string "{NO}{STR_VAR_1} {STR_VAR_2}$"
 
 gText_BerryTag:: @ 85E926B
 	.string "BERRY TAG$"
@@ -1453,28 +1453,28 @@ gText_HMMovesCantBeForgotten2:: @ 85EA4CB
 	.string "HM moves can’t be\nforgotten now.$"
 
 gText_XNatureMetAtYZ:: @ 85EA4EC
-	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nmet at {UNK_CTRL_F905}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01},\n{SPECIAL_F7 0x00}{SPECIAL_F7 0x04}{SPECIAL_F7 0x01}.$"
+	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nmet at {LV_2}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01},\n{SPECIAL_F7 0x00}{SPECIAL_F7 0x04}{SPECIAL_F7 0x01}.$"
 
 gText_XNatureHatchedAtYZ:: @ 85EA516
-	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nhatched at {UNK_CTRL_F905}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01},\n{SPECIAL_F7 0x00}{SPECIAL_F7 0x04}{SPECIAL_F7 0x01}.$"
+	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nhatched at {LV_2}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01},\n{SPECIAL_F7 0x00}{SPECIAL_F7 0x04}{SPECIAL_F7 0x01}.$"
 
 gText_XNatureObtainedInTrade:: @ 85EA544
 	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nobtained in a trade.$"
 
 gText_XNatureFatefulEncounter:: @ 85EA56A
-	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nobtained in a fateful\nencounter at {UNK_CTRL_F905}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01}.$"
+	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nobtained in a fateful\nencounter at {LV_2}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01}.$"
 
 gText_XNatureProbablyMetAt:: @ 85EA5A8
-	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nprobably met at {UNK_CTRL_F905}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01},\n{SPECIAL_F7 0x00}{SPECIAL_F7 0x04}{SPECIAL_F7 0x01}.$"
+	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nprobably met at {LV_2}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01},\n{SPECIAL_F7 0x00}{SPECIAL_F7 0x04}{SPECIAL_F7 0x01}.$"
 
 gText_XNature:: @ 85EA5DB
 	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature$"
 
 gText_XNatureMetSomewhereAt:: @ 85EA5EB
-	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nmet somewhere at {UNK_CTRL_F905}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01}.$"
+	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nmet somewhere at {LV_2}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01}.$"
 
 gText_XNatureHatchedSomewhereAt:: @ 85EA617
-	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nhatched somewhere at {UNK_CTRL_F905}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01}.$"
+	.string "{SPECIAL_F7 0x00}{SPECIAL_F7 0x02}{SPECIAL_F7 0x01}{SPECIAL_F7 0x05} nature,\nhatched somewhere at {LV_2}{SPECIAL_F7 0x00}{SPECIAL_F7 0x03}{SPECIAL_F7 0x01}.$"
 
 gText_OddEggFoundByCouple:: @ 85EA647
 	.string "An odd POKéMON EGG found\nby the DAY CARE couple.$"
@@ -2815,37 +2815,37 @@ gUnknown_085EBED5:: @ 85EBED5
 	.string "{CLEAR 0x80}$"
 
 gUnknown_085EBED9:: @ 85EBED9
-	.string "{UNK_CTRL_F800}ZOOM {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}ZOOM {B_BUTTON}CANCEL$"
 
 gUnknown_085EBEE9:: @ 85EBEE9
-	.string "{UNK_CTRL_F800}FULL {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}FULL {B_BUTTON}CANCEL$"
 
 gUnknown_085EBEF9:: @ 85EBEF9
-	.string "{UNK_CTRL_F800}CONDITION {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}CONDITION {B_BUTTON}CANCEL$"
 
 gUnknown_085EBF0E:: @ 85EBF0E
-	.string "{UNK_CTRL_F800}MARKINGS {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}MARKINGS {B_BUTTON}CANCEL$"
 
 gUnknown_085EBF22:: @ 85EBF22
-	.string "{UNK_CTRL_F800}SELECT MARK {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}SELECT MARK {B_BUTTON}CANCEL$"
 
 gUnknown_085EBF39:: @ 85EBF39
-	.string "{UNK_CTRL_F800}MENU {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}MENU {B_BUTTON}CANCEL$"
 
 gUnknown_085EBF49:: @ 85EBF49
-	.string "{UNK_CTRL_F800}OK {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}OK {B_BUTTON}CANCEL$"
 
 gUnknown_085EBF57:: @ 85EBF57
-	.string "{UNK_CTRL_F801}CANCEL$"
+	.string "{B_BUTTON}CANCEL$"
 
 gUnknown_085EBF60:: @ 85EBF60
-	.string "{UNK_CTRL_F800}RIBBONS {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}RIBBONS {B_BUTTON}CANCEL$"
 
 gUnknown_085EBF73:: @ 85EBF73
-	.string "{UNK_CTRL_F800}CHECK {UNK_CTRL_F801}CANCEL$"
+	.string "{A_BUTTON}CHECK {B_BUTTON}CANCEL$"
 
 gUnknown_085EBF84:: @ 85EBF84
-	.string "{UNK_CTRL_F801}CANCEL$"
+	.string "{B_BUTTON}CANCEL$"
 
 gText_NatureSlash:: @ 85EBF8D
 	.string "NATURE/$"
@@ -3738,7 +3738,7 @@ gText_Sorry:: @ 85ED434
 	.string "SORRY$"
 
 gText_YayUnkF9F9:: @ 85ED43A
-	.string "YAY{UNK_CTRL_F9F9}$"
+	.string "YAY{EMOJI_BIGSMILE}$"
 
 gText_ThankYou:: @ 85ED440
 	.string "THANK YOU$"
@@ -4049,7 +4049,7 @@ gText_BerryPickingResults:: @ 85EDD49
 	.string "Announcing BERRY-PICKING results!$"
 
 gText_10P30P50P50P:: @ 85EDD6B
-	.string "{CLEAR_TO 0x03}10P{CLEAR_TO 0x2B}30P{CLEAR_TO 0x53}50P{CLEAR_TO 0x77}{UNK_CTRL_F9DD}50P$"
+	.string "{CLEAR_TO 0x03}10P{CLEAR_TO 0x2B}30P{CLEAR_TO 0x53}50P{CLEAR_TO 0x77}{EMOJI_MINUS}50P$"
 
 gText_AnnouncingRankings:: @ 85EDD86
 	.string "Announcing rankings!$"
@@ -4154,14 +4154,14 @@ gJPText_MysteryGift:: @ 85EDFBF
 	.string "ふしぎなもらいもの$" @ "fushiginamoraimono" ("Mystery Gift" in Japanese)
 
 gJPText_DecideStop:: @ 85EDFC9
-	.string "{UNK_CTRL_F800}けってい {UNK_CTRL_F801}やめる$" @ "{UNK_CTRL_F800}kettei {UNK_CTRL_F801}yameru" ("{UNK_CTRL_F800}decide {UNK_CTRL_F801}stop" in Japanese)
+	.string "{A_BUTTON}けってい {B_BUTTON}やめる$" @ "{A_BUTTON}kettei {B_BUTTON}yameru" ("{A_BUTTON}decide {B_BUTTON}stop" in Japanese)
 
 gUnknown_085EDFD6:: @ 85EDFD6
-	.string "カードeリーダー{UNK_CTRL_F9 0x04}　で\n"
+	.string "カードeリーダー{PLUS}　で\n"
 	.string "ふしぎなもらいものを　よみこみます$"
 
 gUnknown_085EDFF5:: @ 85EDFF5
-	.string "カードeリーダー{UNK_CTRL_F9 0x04}の　メニューから\n"
+	.string "カードeリーダー{PLUS}の　メニューから\n"
 	.string "‘つうしん’を　えらび$"
 
 gUnknown_085EE014:: @ 85EE014
@@ -4169,7 +4169,7 @@ gUnknown_085EE014:: @ 85EE014
 	.string "を　せんたく　してください$"
 
 gUnknown_085EE035:: @ 85EE035
-	.string "カードeリーダー{UNK_CTRL_F9 0x04}の　‘つうしん’を\n"
+	.string "カードeリーダー{PLUS}の　‘つうしん’を\n"
 	.string "えらんで　Aボタンを　おしてください$"
 
 gUnknown_085EE05C:: @ 85EE05C
@@ -4180,7 +4180,7 @@ gUnknown_085EE06B:: @ 85EE06B
 	.string "ちゅうし　しました$"
 
 gUnknown_085EE080:: @ 85EE080
-	.string "カードeリーダー{UNK_CTRL_F9 0x04}と\n"
+	.string "カードeリーダー{PLUS}と\n"
 	.string "つうしん　できません$"
 
 gUnknown_085EE097:: @ 85EE097
@@ -4195,7 +4195,7 @@ gUnknown_085EE0BF:: @ 85EE0BF
 	.string "はじめから　やりなおして　ください$"
 
 gUnknown_085EE0DC:: @ 85EE0DC
-	.string "カードeリーダー{UNK_CTRL_F9 0x04}　に\n"
+	.string "カードeリーダー{PLUS}　に\n"
 	.string "カードを　よみこませて　ください$"
 
 gUnknown_085EE0FA:: @ 85EE0FA
@@ -4631,7 +4631,7 @@ gUnknown_085EEA6B:: @ 85EEA6B
 	.string "SP. DEF$"
 
 gText_UnkCtrlF904:: @ 85EEA73
-	.string "{UNK_CTRL_F904}$"
+	.string "{PLUS}$"
 
 gText_Dash:: @ 85EEA76
 	.string "-$"
@@ -4658,7 +4658,7 @@ gText_TellHimTheWords:: @ 85EEAE2
 	.string "Tell him the words.$"
 
 gText_MoveOkBack:: @ 85EEAF6
-	.string "{UNK_CTRL_F80C}MOVE  {UNK_CTRL_F800}OK  {UNK_CTRL_F801}BACK$"
+	.string "{DPAD_NONE}MOVE  {A_BUTTON}OK  {B_BUTTON}BACK$"
 
 gText_CallCantBeMadeHere:: @ 85EEB0B
 	.string "A call can’t be made from here.$"
@@ -5080,11 +5080,11 @@ gText_MysteryGift:: @ 85EF654
 
 	.align 2
 gText_PickOKExit:: @ 85EF664
-	.string "{UNK_CTRL_F80A}PICK {UNK_CTRL_F800}OK {UNK_CTRL_F801}EXIT$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}EXIT$"
 
 	.align 2
 gText_PickOKCancel:: @ 85EF678
-	.string "{UNK_CTRL_F80A}PICK {UNK_CTRL_F800}OK {UNK_CTRL_F801}CANCEL$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}CANCEL$"
 
 gText_PlayersBattleResults:: @ 85EF68D
 	.string "{PLAYER}’s BATTLE RESULTS$"

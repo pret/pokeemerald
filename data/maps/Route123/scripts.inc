@@ -201,11 +201,11 @@ Route123_Text_1F64CF: @ 81F64CF
 	.string "POKéMON. I’m like a tree doctor.$"
 
 Route123_Text_1F6511: @ 81F6511
-	.string "{0x7C} ROUTE 123\n"
-	.string "{0x7B} ROUTE 118$"
+	.string "{RIGHT_ARROW} ROUTE 123\n"
+	.string "{LEFT_ARROW} ROUTE 118$"
 
 Route123_Text_1F6529: @ 81F6529
-	.string "{0x79} MT. PYRE\n"
+	.string "{UP_ARROW} MT. PYRE\n"
 	.string "“Forbidden to the faint of heart.”$"
 
 Route123_Text_1F6557: @ 81F6557

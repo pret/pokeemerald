@@ -31,7 +31,7 @@ extern void IncrementGameStat(u8 index);
 extern void ScriptContext1_SetupScript(u8*);
 extern void ScriptContext2_RunNewScript(u8*);
 extern void CB2_ReturnToField(void);
-extern void CB2_ReturnToFieldContinueScript(void);
+extern void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 extern void CB2_LoadMap(void);
 extern void sub_80AF6F0(void);
 extern void ScriptContext1_Stop(void);
@@ -125,7 +125,7 @@ void CB2_EndSafariBattle(void)
     {
         ScriptContext1_SetupScript(EventScript_2A4B9B);
         ScriptContext1_Stop();
-        SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }
 

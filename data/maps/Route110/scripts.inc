@@ -951,7 +951,7 @@ Route110_Text_1F0755: @ 81F0755
 
 Route110_Text_1F0812: @ 81F0812
 	.string "ROUTE 110\n"
-	.string "{0x7A} SLATEPORT CITY$"
+	.string "{DOWN_ARROW} SLATEPORT CITY$"
 
 Route110_Text_1F082D: @ 81F082D
 	.string "SEASIDE CYCLING ROAD$"
@@ -965,14 +965,14 @@ Route110_Text_1F0842: @ 81F0842
 
 Route110_Text_1F08CD: @ 81F08CD
 	.string "ROUTE 110\n"
-	.string "{0x7B} ROUTE 103$"
+	.string "{LEFT_ARROW} ROUTE 103$"
 
 Route110_Text_1F08E3: @ 81F08E3
 	.string "SEASIDE PARKING$"
 
 Route110_Text_1F08F3: @ 81F08F3
 	.string "ROUTE 110\n"
-	.string "{0x79} MAUVILLE CITY$"
+	.string "{UP_ARROW} MAUVILLE CITY$"
 
 Route110_Text_1F090D: @ 81F090D
 	.string "TRAINER TIPS\p"
@@ -987,7 +987,7 @@ Route110_Text_1F0992: @ 81F0992
 	.string "by pressing SELECT.$"
 
 Route110_Text_1F09DB: @ 81F09DB
-	.string "“Three steps {0x7C} and two steps {0x79}\n"
+	.string "“Three steps {RIGHT_ARROW} and two steps {UP_ARROW}\n"
 	.string "to reach the wondrous TRICK HOUSE.”$"
 
 Route110_Text_1F0A1E: @ 81F0A1E

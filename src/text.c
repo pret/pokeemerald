@@ -13,7 +13,7 @@
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-extern u8* UnkTextUtil_GetPtrI(u8 a1);
+extern u8* DynamicPlaceholderTextUtil_GetPlaceholderPtr(u8 a1);
 extern int sub_8197964();
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
@@ -3227,7 +3227,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 }
             case 0xF7:
                 if (bufferPointer == NULL)
-                    bufferPointer = UnkTextUtil_GetPtrI(*++str);
+                    bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
                 while (*bufferPointer != 0xFF)
                 {
                     glyphWidth = func(*bufferPointer++, isJapanese);
