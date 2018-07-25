@@ -577,9 +577,7 @@ u8 sub_808B238(s16 x, s16 y, u8 direction)
     {
         u8 eventObjectId = GetEventObjectIdByXY(x, y);
 
-        if (eventObjectId != 16)
-        {
-            if (gEventObjects[eventObjectId].graphicsId == 0x57)
+            if (eventObjectId != 16 && gEventObjects[eventObjectId].graphicsId == 0x57)
             {
                 x = gEventObjects[eventObjectId].currentCoords.x;
                 y = gEventObjects[eventObjectId].currentCoords.y;
@@ -591,7 +589,6 @@ u8 sub_808B238(s16 x, s16 y, u8 direction)
                     return 1;
                 }
             }
-        }
     }
     return 0;
 }
