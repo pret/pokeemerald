@@ -10,6 +10,7 @@
 #include "fieldmap.h"
 #include "overworld.h"
 #include "rotating_gate.h"
+#include "constants/event_object_movement_constants.h"
 
 bool8 ForcedMovement_None(void);
 bool8 ForcedMovement_Slip(void);
@@ -178,7 +179,7 @@ bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *playerEventObj, u8 
      && !EventObjectClearHeldMovementIfFinished(playerEventObj))
     {
         u8 heldMovementActionId = EventObjectGetHeldMovementActionId(playerEventObj);
-        if (heldMovementActionId > 24 && heldMovementActionId < 29)
+        if (heldMovementActionId > MOVEMENT_ACTION_WALK_FAST_RIGHT && heldMovementActionId < MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN)
         {
             if (direction == DIR_NONE)
             {
