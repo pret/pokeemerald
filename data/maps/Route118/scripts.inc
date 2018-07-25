@@ -310,9 +310,9 @@ Route118_Text_1F4367: @ 81F4367
 
 Route118_Text_1F43F4: @ 81F43F4
 	.string "ROUTE 118\n"
-	.string "{0x7B} MAUVILLE CITY$"
+	.string "{LEFT_ARROW} MAUVILLE CITY$"
 
 Route118_Text_1F440E: @ 81F440E
 	.string "ROUTE 118\n"
-	.string "{0x79} ROUTE 119$"
+	.string "{UP_ARROW} ROUTE 119$"
 

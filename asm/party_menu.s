@@ -16021,7 +16021,7 @@ sub_81B892C: @ 81B892C
 	str r0, [sp]
 	ldr r0, =sub_81B1370
 	str r0, [sp, 0x4]
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -16042,7 +16042,7 @@ sub_81B8958: @ 81B8958
 	str r0, [sp]
 	ldr r0, =sub_81B1370
 	str r0, [sp, 0x4]
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [sp, 0x8]
 	movs r0, 0xB
 	movs r1, 0

@@ -797,7 +797,7 @@ gUnknown_0203CE54: @ 203CE54
     
     .include "src/item_menu.o"
     .include "src/list_menu.o"
-    .include "src/unk_text_util.o"
+    .include "src/dynamic_placeholder_text_util.o"
     .include "src/item_icon.o"
 
 gUnknown_0203CEC4: @ 203CEC4

@@ -622,7 +622,7 @@ Route119_Text_1F52B9: @ 81F52B9
 
 Route119_Text_1F530E: @ 81F530E
 	.string "ROUTE 119\n"
-	.string "{0x7C} FORTREE CITY$"
+	.string "{RIGHT_ARROW} FORTREE CITY$"
 
 Route119_Text_1F5327: @ 81F5327
 	.string "WEATHER INSTITUTE$"

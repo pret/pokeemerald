@@ -220,11 +220,11 @@ Route117_Text_1F3D41: @ 81F3D41
 
 Route117_Text_1F3D58: @ 81F3D58
 	.string "ROUTE 117\n"
-	.string "{0x7B} VERDANTURF TOWN$"
+	.string "{LEFT_ARROW} VERDANTURF TOWN$"
 
 Route117_Text_1F3D74: @ 81F3D74
 	.string "ROUTE 117\n"
-	.string "{0x7C} MAUVILLE CITY$"
+	.string "{RIGHT_ARROW} MAUVILLE CITY$"
 
 Route117_Text_1F3D8E: @ 81F3D8E
 	.string "POKéMON DAY CARE\n"

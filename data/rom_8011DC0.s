@@ -53,7 +53,7 @@ gText_Colon:: @ 82ED8C8
 
 	.align 2
 gText_UnkCtrlCodeF907:: @ 82ED8CC
-	.string "{UNK_CTRL_F907}$"
+	.string "{ID}$"
 
 	.align 2
 gText_PleaseStartOver:: @ 82ED8D0
@@ -194,7 +194,7 @@ gUnknown_082EDB60:: @ 82EDB60
 
 	.align 2
 gUnknown_082EDBC4:: @ 82EDBC4
-	.string "{UNK_CTRL_F801}CANCEL$"
+	.string "{B_BUTTON}CANCEL$"
 
 	.align 2
 	.string "ため\nさんかしゃ ぼしゅうちゅう です！$" @ "tame\nsankasha boshuuchuu desu!"
@@ -889,7 +889,7 @@ gUnknown_082EF7D0:: @ 82EF7D0
 
 	.align 2
 gUnknown_082EF7DC:: @ 82EF7DC
-	.string "{UNK_CTRL_F80A}CHOOSE  {UNK_CTRL_F800}JOIN  {UNK_CTRL_F801}CANCEL$"
+	.string "{DPAD_UPDOWN}CHOOSE  {A_BUTTON}JOIN  {B_BUTTON}CANCEL$"
 
 	.align 2
 gUnknown_082EF7F8:: @ 82EF7F8

@@ -4785,14 +4785,14 @@ _08017F8A:
 	lsls r0, r4, 24
 	lsrs r0, 24
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	adds r5, 0x10
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08017F8A
 	ldr r1, =gUnknown_082EE47C
 	adds r0, r7, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _08017FB4
 	.pool
 _08017FAC:
@@ -5157,7 +5157,7 @@ sub_8018220: @ 8018220
 	ldr r0, =gTrainerCards
 	adds r1, r0
 	mov r8, r1
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	mov r6, r9
 	adds r6, 0xC0
 	bl sub_8068BB0
@@ -5171,11 +5171,11 @@ sub_8018220: @ 8018220
 	bl StringCopy
 	movs r0, 0
 	adds r1, r6, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	mov r1, r8
 	adds r1, 0x30
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r4, 0xBA
 	lsls r4, 1
 	add r4, r9
@@ -5189,7 +5189,7 @@ sub_8018220: @ 8018220
 	bl StringCopy
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	mov r5, r9
 	adds r5, 0xDE
 	mov r0, r8
@@ -5200,7 +5200,7 @@ sub_8018220: @ 8018220
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x3
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r2, 0xED
 	add r2, r9
 	mov r10, r2
@@ -5220,16 +5220,16 @@ sub_8018220: @ 8018220
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x4
 	mov r1, r10
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r4, 0xD2
 	lsls r4, 1
 	add r4, r9
 	ldr r1, =gUnknown_082EFF64
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, =gStringVar4
 	adds r1, r4, 0
 	bl StringCopy
@@ -5246,7 +5246,7 @@ _0801830C:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	adds r1, r6, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	mov r2, r8
 	ldrh r1, [r2, 0x16]
 	cmp r1, r4
@@ -5261,7 +5261,7 @@ _08018328:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	mov r0, r8
 	ldrh r1, [r0, 0x20]
 	adds r0, r5, 0
@@ -5270,7 +5270,7 @@ _08018328:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x3
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r7, 0
 	movs r6, 0x80
 	lsls r6, 19
@@ -5283,7 +5283,7 @@ _08018360:
 	bl CopyEasyChatWord
 	lsrs r0, r6, 24
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r2, 0x80
 	lsls r2, 17
 	adds r6, r2
@@ -5297,7 +5297,7 @@ _08018360:
 	add r4, r9
 	ldr r1, =gUnknown_082EFFA4
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r5, =gStringVar4
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -5307,7 +5307,7 @@ _08018360:
 	bne _080183D0
 	ldr r1, =gUnknown_082F0020
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -5324,7 +5324,7 @@ _080183D0:
 	adds r1, r0
 	ldr r1, [r1]
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -9437,7 +9437,7 @@ sub_801A43C: @ 801A43C
 	bl LoadPalette
 	movs r0, 0xF0
 	bl sub_81978B0
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0x20
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -9480,7 +9480,7 @@ _0801A58C:
 	ldr r0, =gUnknown_03000DAC
 	ldr r0, [r0]
 	bl Free
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
@@ -18714,10 +18714,10 @@ _0801F020:
 	ldrb r1, [r4, 0x8]
 	cmp r0, r1
 	beq _0801F0A8
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, =gText_F700JoinedChat
 	b _0801F094
 	.pool
@@ -18754,14 +18754,14 @@ _0801F07A:
 	ldrb r5, [r5]
 	cmp r0, r5
 	beq _0801F0A8
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, =gText_F700LeftChat
 _0801F094:
 	adds r0, r6, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x1
 	b _0801F0AA
 	.pool
@@ -20234,11 +20234,11 @@ sub_801FBF8: @ 801FBF8
 	beq _0801FC38
 	b _0801FC42
 _0801FC08:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_801F1D0
 	adds r1, r0, 0
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0x5
 	movs r1, 0
 	bl sub_801FF18
@@ -20395,11 +20395,11 @@ sub_801FD30: @ 801FD30
 	beq _0801FD74
 	b _0801FD7E
 _0801FD40:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0x9
 	movs r1, 0
 	bl sub_801FF18
@@ -20703,7 +20703,7 @@ _0801FF98:
 	adds r0, r1, 0
 	adds r0, 0x22
 	ldr r1, [r4]
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, [r5]
 	adds r6, r0, 0
 	adds r6, 0x22
@@ -23982,7 +23982,7 @@ _08021A92:
 	lsls r4, 2
 	str r4, [sp, 0x24]
 _08021A98:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r0, [sp, 0x10]
 	cmp r0, 0x1
 	beq _08021B48
@@ -24241,10 +24241,10 @@ _08021CC8:
 	ldr r0, [sp, 0xC]
 	adds r1, r0, r1
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, =gStringVar4
 	adds r1, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r1, [sp, 0xC]
 	movs r2, 0xDD
 	lsls r2, 1
@@ -40292,7 +40292,7 @@ _08029DA0:
 	movs r1, 0x1
 	adds r2, r5, 0
 	bl PrintTextOnWindow
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_802762C
 	lsls r0, 16
 	lsrs r0, 16
@@ -40301,11 +40301,11 @@ _08029DA0:
 	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r7, =gStringVar4
 	ldr r1, =gText_FirstPlacePrize
 	adds r0, r7, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, [r4]
 	add r0, r10
 	ldrb r0, [r0]
@@ -40326,7 +40326,7 @@ _08029DA0:
 	beq _08029EC8
 	cmp r4, 0x3
 	beq _08029EC8
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_802762C
 	lsls r0, 16
 	lsrs r0, 16
@@ -40334,12 +40334,12 @@ _08029DA0:
 	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	cmp r4, 0x2
 	bne _08029E9C
 	ldr r1, =gText_CantHoldAnyMore
 	adds r0, r7, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _08029EA8
 	.pool
 _08029E9C:
@@ -40347,7 +40347,7 @@ _08029E9C:
 	bne _08029EA8
 	ldr r1, =gText_FilledStorageSpace
 	adds r0, r7, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _08029EA8:
 	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
@@ -47507,19 +47507,19 @@ sub_802D7E8: @ 802D7E8
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r1, [r5]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, [r5]
 	adds r1, 0x66
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r5]
 	adds r0, 0xA6
 	ldr r1, =gText_AwesomeWonF701F700
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x8
 	movs r2, 0x16
@@ -47564,15 +47564,15 @@ sub_802D884: @ 802D884
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl CopyItemName
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, =gText_FilledStorageSpace2
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x8
 	movs r2, 0x16
@@ -47617,15 +47617,15 @@ sub_802D8FC: @ 802D8FC
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl CopyItemName
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, =gText_CantHoldMore
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x9
 	movs r2, 0x16

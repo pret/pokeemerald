@@ -812,7 +812,7 @@ const struct WindowTemplate sWindowTemplates_0855D2A8[] =
     DUMMY_WIN_TEMPLATE
 };
 
-const u8 gUnknown_0855D2B8[] = _("{UNK_CTRL_F9 8}000");
+const u8 gUnknown_0855D2B8[] = _("{NO}000");
 const u8 gUnknown_0855D2BE[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 const u8 sText_TenDashes[] = _("----------");
 

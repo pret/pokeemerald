@@ -1,11 +1,11 @@
 #include "global.h"
 #include "text.h"
-#include "unk_text_util.h"
+#include "dynamic_placeholder_text_util.h"
 #include "string_util.h"
 
 static EWRAM_DATA const u8 *sStringPointers[8] = {};
 
-void UnkTextUtil_Reset(void)
+void DynamicPlaceholderTextUtil_Reset(void)
 {
     const u8 **ptr;
     u8 *fillval;
@@ -20,7 +20,7 @@ void UnkTextUtil_Reset(void)
     } while ((int)ptr2 >= (int)ptr);
 }
 
-void UnkTextUtil_SetPtrI(u8 idx, const u8 *ptr)
+void DynamicPlaceholderTextUtil_SetPlaceholderPtr(u8 idx, const u8 *ptr)
 {
     if (idx < ARRAY_COUNT(sStringPointers))
     {
@@ -28,7 +28,7 @@ void UnkTextUtil_SetPtrI(u8 idx, const u8 *ptr)
     }
 }
 
-u8 *UnkTextUtil_StringExpandPlaceholders(u8 *dest, const u8 *src)
+u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
 {
     while (*src != EOS)
     {
@@ -50,7 +50,7 @@ u8 *UnkTextUtil_StringExpandPlaceholders(u8 *dest, const u8 *src)
     return dest;
 }
 
-const u8 *UnkTextUtil_GetPtrI(u8 idx)
+const u8 *DynamicPlaceholderTextUtil_GetPlaceholderPtr(u8 idx)
 {
     return sStringPointers[idx];
 }

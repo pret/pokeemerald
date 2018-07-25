@@ -1321,7 +1321,7 @@ _0819AFB8:
 	bl Free
 	str r5, [r7]
 	bl FreeAllWindowBuffers
-	ldr r0, =sub_80861B0
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	adds r0, r6, 0
 	bl DestroyTask
@@ -4491,7 +4491,7 @@ _0819CAA4:
 	bl Free
 	str r5, [r7]
 	bl FreeAllWindowBuffers
-	ldr r0, =sub_80861B0
+	ldr r0, =CB2_ReturnToFieldContinueScript
 	bl SetMainCallback2
 	adds r0, r6, 0
 	bl DestroyTask

@@ -676,7 +676,7 @@ Route111_Text_1F186E: @ 81F186E
 
 Route111_Text_1F18CE: @ 81F18CE
 	.string "ROUTE 111\n"
-	.string "{0x7A} MAUVILLE CITY$"
+	.string "{DOWN_ARROW} MAUVILLE CITY$"
 
 Route111_Text_1F18E8: @ 81F18E8
 	.string "“Our family’s hearts beat as one!”\n"
@@ -684,11 +684,11 @@ Route111_Text_1F18E8: @ 81F18E8
 
 Route111_Text_1F1921: @ 81F1921
 	.string "ROUTE 111\n"
-	.string "{0x7B} ROUTE 112$"
+	.string "{LEFT_ARROW} ROUTE 112$"
 
 Route111_Text_1F1937: @ 81F1937
 	.string "ROUTE 111\n"
-	.string "{0x7B} ROUTE 113$"
+	.string "{LEFT_ARROW} ROUTE 113$"
 
 Route111_Text_1F194D: @ 81F194D
 	.string "OLD LADY’S REST STOP\n"
@@ -750,7 +750,7 @@ Route111_Text_1F1CCA: @ 81F1CCA
 	.string "the bike shop in MAUVILLE.$"
 
 Route111_Text_1F1D61: @ 81F1D61
-	.string "{0x7C} TRAINER HILL ENTRANCE\p"
+	.string "{RIGHT_ARROW} TRAINER HILL ENTRANCE\p"
 	.string "“Scale the heights, you hot-blooded\n"
 	.string "TRAINERS!”$"
 
