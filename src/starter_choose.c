@@ -9,6 +9,7 @@
 #include "main.h"
 #include "window.h"
 #include "text.h"
+#include "text_window.h"
 #include "decompress.h"
 #include "menu.h"
 #include "sound.h"
@@ -18,6 +19,7 @@
 #include "data2.h"
 #include "international_string_util.h"
 #include "trig.h"
+#include "scanline_effect.h"
 
 #define STARTER_MON_COUNT   3
 
@@ -46,13 +48,10 @@ extern const u8 gStarterChoose_LabelCoords[][2];
 extern const u8 gUnknown_085B1E0C[];
 extern const u8 gUnknown_085B1E28[][2];
 
-extern void LoadUserWindowBorderGfx(u8, u16, u8);
-extern void ScanlineEffect_Stop(void);
 extern void clear_scheduled_bg_copies_to_vram(void);
 extern void dp13_810BB8C(void);
 extern void do_scheduled_bg_tilemap_copies_to_vram(void);
 extern u16 sub_818D820(u16);
-extern const u16 *GetOverworldTextboxPalettePtr(void);
 extern u8 sub_818D3E4(u16 species, u32 trainerId, u32 personality, u8 flags, s16 x, s16 y, u8, u16);
 
 // this file's functions

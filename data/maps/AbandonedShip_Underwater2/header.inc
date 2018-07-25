@@ -5,11 +5,11 @@ AbandonedShip_Underwater2: @ 84845C0
 	.4byte 0x0
 	.2byte MUS_DEEPDEEP
 	.2byte 196
-	.byte 61
+	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
-	.byte 14
-	.byte 5
+	.byte WEATHER_BUBBLES
+	.byte MAP_TYPE_UNDERWATER
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

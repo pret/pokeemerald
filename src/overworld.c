@@ -57,6 +57,7 @@
 #include "malloc.h"
 #include "gpu_regs.h"
 #include "link_rfu.h"
+#include "constants/map_types.h"
 
 // event scripts
 extern const u8 EventScript_WhiteOut[];

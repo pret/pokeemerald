@@ -1208,7 +1208,7 @@ static bool32 sub_80A03E4(u8 *par1)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sUnknown_085105A8, ARRAY_COUNT(sUnknown_085105A8));
         InitWindows(sUnknown_085105AC);
-        box_border_load_tiles_and_pal(0, 8, 224);
+        LoadUserWindowBorderGfx_(0, 8, 224);
         sub_81978B0(240);
         break;
     case 3:

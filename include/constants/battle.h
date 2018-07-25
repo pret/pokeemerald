@@ -130,7 +130,7 @@
 #define STATUS2_TORMENT               0x80000000
 
 // Seems like per-battler statuses. Not quite sure how to categorize these
-#define STATUS3_LEECHSEED_BANK          0x3
+#define STATUS3_LEECHSEED_BATTLER       0x3
 #define STATUS3_LEECHSEED               0x4
 #define STATUS3_ALWAYS_HITS             0x18    // two bits
 #define STATUS3_PERISH_SONG             0x20
@@ -159,7 +159,7 @@
 #define HITMARKER_NO_ATTACKSTRING       0x00000200
 #define HITMARKER_ATTACKSTRING_PRINTED  0x00000400
 #define HITMARKER_NO_PPDEDUCT           0x00000800
-#define HITMARKER_PURSUIT_TRAP          0x00001000
+#define HITMARKER_SWAP_ATTACKER_TARGET  0x00001000
 #define HITMARKER_IGNORE_SAFEGUARD      0x00002000
 #define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
 #define HITMARKER_RUN                   0x00008000

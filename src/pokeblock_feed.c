@@ -21,6 +21,7 @@
 #include "sound.h"
 #include "trig.h"
 #include "graphics.h"
+#include "text_window.h"
 #include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
 
 struct PokeblockFeedStruct
@@ -58,8 +59,6 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
 extern bool8 sub_81221EC(void);
-extern void sub_806A068(u16, u8);
-extern void LoadUserWindowBorderGfx(u8, u16, u8);
 
 // this file's functions
 static void HandleInitBackgrounds(void);
@@ -661,7 +660,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         palette = GetMonSpritePalStructFromOtIdPersonality(species, trainerId, personality);
 
         LoadCompressedObjectPalette(palette);
-        sub_806A068(palette->tag, 1);
+        SetMultiuseSpriteTemplateToPokemon(palette->tag, 1);
         sPokeblockFeed->loadGfxState++;
         break;
     case 2:
@@ -827,7 +826,7 @@ static void Task_PaletteFadeToReturn(u8 taskId)
 static u8 CreateMonSprite(struct Pokemon* mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2);
-    u8 spriteId = CreateSprite(&gUnknown_0202499C, 48, 80, 2);
+    u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, 48, 80, 2);
 
     sPokeblockFeed->species = species;
     sPokeblockFeed->monSpriteId_ = spriteId;

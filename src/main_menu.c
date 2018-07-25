@@ -1066,7 +1066,7 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
         {
             InitWindows(gUnknown_082FF080);
             LoadMainMenuWindowFrameTiles(0, 0xF3);
-            copy_textbox_border_tile_patterns_to_vram(0, 0xFC,  0xF0);
+            LoadMessageBoxGfx(0, 0xFC,  0xF0);
             unknown_rbox_to_vram(0, 1);
             PutWindowTilemap(0);
             CopyWindowToVram(0, 2);
@@ -1593,7 +1593,7 @@ void new_game_prof_birch_speech_part2_start(void)
     SetMainCallback2(CB2_MainMenu);
     InitWindows(gUnknown_082FF080);
     LoadMainMenuWindowFrameTiles(0, 0xF3);
-    copy_textbox_border_tile_patterns_to_vram(0, 0xFC, 0xF0);
+    LoadMessageBoxGfx(0, 0xFC, 0xF0);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }

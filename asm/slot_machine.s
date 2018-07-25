@@ -634,7 +634,7 @@ sub_812AA48: @ 812AA48
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xF0
-	bl copy_textbox_border_tile_patterns_to_vram
+	bl LoadMessageBoxGfx
 	movs r1, 0x85
 	lsls r1, 2
 	movs r0, 0

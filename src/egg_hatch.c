@@ -57,12 +57,10 @@ extern const u8 gText_NickHatchPrompt[];
 
 extern u8 sav1_map_get_name(void);
 extern void TVShowConvertInternationalString(u8* str1, u8* str2, u8);
-extern void sub_806A068(u16, u8);
 extern void FadeScreen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
 extern void sub_80AF168(void);
 extern void ScanlineEffect_Stop(void);
-extern void CB2_ReturnToField(void);
 extern void play_some_sound(void);
 extern void DoNamingScreen(u8, const u8*, u16, u8, u32, MainCallback);
 extern u16 sub_80D22D0(void);
@@ -437,8 +435,8 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
         }
         break;
     case 1:
-        sub_806A068(GetMonSpritePalStruct(mon)->tag, r5);
-        spriteID = CreateSprite(&gUnknown_0202499C, 120, 75, 6);
+        SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, r5);
+        spriteID = CreateSprite(&gMultiuseSpriteTemplate, 120, 75, 6);
         gSprites[spriteID].invisible = 1;
         gSprites[spriteID].callback = SpriteCallbackDummy;
         break;

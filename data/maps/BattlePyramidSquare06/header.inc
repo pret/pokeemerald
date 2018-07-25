@@ -5,11 +5,11 @@ BattlePyramidSquare06: @ 8484FEC
 	.4byte 0x0
 	.2byte 65535
 	.2byte 367
-	.byte 87
+	.byte MAPSEC_DYNAMIC
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 1
+	.byte MAP_BATTLE_SCENE_GYM
 

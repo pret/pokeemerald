@@ -62,7 +62,6 @@ extern const u8 gText_CommunicationStandby5[];
 
 extern void sub_80356D0(void);
 extern void sub_807B154(void);
-extern void sub_806A068(u16, u8);
 extern void sub_807F19C(void);
 extern void sub_807B140(void);
 extern void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
@@ -280,9 +279,9 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     pokePal = GetMonSpritePalStructFromOtIdPersonality(currSpecies, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x110, 0x20);
 
-    sub_806A068(currSpecies, 1);
-    gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->preEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+    SetMultiuseSpriteTemplateToPokemon(currSpecies, 1);
+    gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoStructPtr->preEvoSpriteID = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 1;
@@ -295,9 +294,9 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     pokePal = GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
-    sub_806A068(speciesToEvolve, 3);
-    gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+    SetMultiuseSpriteTemplateToPokemon(speciesToEvolve, 3);
+    gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 2;
     gSprites[ID].invisible = 1;
@@ -373,9 +372,9 @@ static void CB2_EvolutionSceneLoadGraphics(void)
 
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
-    sub_806A068(postEvoSpecies, 3);
-    gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 3);
+    gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 2;
@@ -450,9 +449,9 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         {
             u8 ID;
 
-            sub_806A068(postEvoSpecies, 1);
-            gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
-            sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+            SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 1);
+            gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+            sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
             gSprites[ID].callback = SpriteCallbackDummy_2;
             gSprites[ID].oam.paletteNum = 2;
@@ -509,9 +508,9 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     pokePal = GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
-    sub_806A068(speciesToEvolve, 1);
-    gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+    SetMultiuseSpriteTemplateToPokemon(speciesToEvolve, 1);
+    gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 2;
@@ -635,7 +634,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (!gPaletteFade.active)
         {
             StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
-            BattleHandleAddTextPrinter(gStringVar4, 0);
+            BattlePutTextOnWindow(gStringVar4, 0);
             gTasks[taskID].tState++;
         }
         break;
@@ -731,7 +730,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (IsCryFinished())
         {
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
-            BattleHandleAddTextPrinter(gStringVar4, 0);
+            BattlePutTextOnWindow(gStringVar4, 0);
             PlayBGM(MUS_FANFA5);
             gTasks[taskID].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
@@ -818,7 +817,7 @@ static void Task_EvolutionScene(u8 taskID)
             else // Fire Red leftover probably
                 StringExpandPlaceholders(gStringVar4, gText_PkmnStoppedEvolving);
 
-            BattleHandleAddTextPrinter(gStringVar4, 0);
+            BattlePutTextOnWindow(gStringVar4, 0);
             gTasks[taskID].tEvoWasStopped = TRUE;
             gTasks[taskID].tState = 15;
         }
@@ -829,7 +828,7 @@ static void Task_EvolutionScene(u8 taskID)
             BufferMoveToLearnIntoBattleTextBuff2();
             PlayFanfare(MUS_FANFA1);
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_ID_ADDER]);
-            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
             gTasks[taskID].tState++;
         }
@@ -846,7 +845,7 @@ static void Task_EvolutionScene(u8 taskID)
             {
                 BufferMoveToLearnIntoBattleTextBuff2();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE1 - BATTLESTRINGS_ID_ADDER]);
-                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -854,7 +853,7 @@ static void Task_EvolutionScene(u8 taskID)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE2 - BATTLESTRINGS_ID_ADDER]);
-                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -862,7 +861,7 @@ static void Task_EvolutionScene(u8 taskID)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_ID_ADDER]);
-                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
                 gTasks[taskID].tData7 = 5;
                 gTasks[taskID].tData8 = 10;
                 gTasks[taskID].tLearnMoveState++;
@@ -871,7 +870,7 @@ static void Task_EvolutionScene(u8 taskID)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
-                BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
+                BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xC);
                 gTasks[taskID].tLearnMoveState++;
                 sEvoCursorPos = 0;
                 BattleCreateYesNoCursorAt(0);
@@ -939,7 +938,7 @@ static void Task_EvolutionScene(u8 taskID)
                     if (IsHMMove2(move))
                     {
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_ID_ADDER]);
-                        BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                        BattlePutTextOnWindow(gDisplayedStringBattle, 0);
                         gTasks[taskID].tLearnMoveState = 12;
                     }
                     else
@@ -955,14 +954,14 @@ static void Task_EvolutionScene(u8 taskID)
             break;
         case 7:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_123POOF - BATTLESTRINGS_ID_ADDER]);
-            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
             gTasks[taskID].tLearnMoveState++;
             break;
         case 8:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNFORGOTMOVE - BATTLESTRINGS_ID_ADDER]);
-                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
                 gTasks[taskID].tLearnMoveState++;
             }
             break;
@@ -970,20 +969,20 @@ static void Task_EvolutionScene(u8 taskID)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_ANDELLIPSIS - BATTLESTRINGS_ID_ADDER]);
-                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                BattlePutTextOnWindow(gDisplayedStringBattle, 0);
                 gTasks[taskID].tState = 20;
             }
             break;
         case 10:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_STOPLEARNINGMOVE - BATTLESTRINGS_ID_ADDER]);
-            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
             gTasks[taskID].tData7 = 11;
             gTasks[taskID].tData8 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 11:
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_DIDNOTLEARNMOVE - BATTLESTRINGS_ID_ADDER]);
-            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
             gTasks[taskID].tState = 15;
             break;
         case 12:

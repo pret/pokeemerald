@@ -21,6 +21,7 @@
 #include "sprite.h"
 #include "trainer_see.h"
 #include "util.h"
+#include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 
 // this file was known as evobjmv.c in Game Freak's original source

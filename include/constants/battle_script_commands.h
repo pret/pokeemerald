@@ -37,7 +37,7 @@
 #define BS_ATTACKER                 1
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
-#define BS_BANK_0                   7
+#define BS_BATTLER_0                7
 #define BS_ATTACKER_WITH_PARTNER    4 // for atk98_status_icon_update
 #define BS_ATTACKER_SIDE            8 // for atk1E_jumpifability
 #define BS_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability

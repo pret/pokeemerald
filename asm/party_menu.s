@@ -12158,7 +12158,7 @@ sub_81B672C: @ 81B672C
 	bl sub_81B1B5C
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
-	bl sub_805EAE8
+	bl HandleBattleLowHpMusicChange
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -16079,8 +16079,8 @@ _081B89A6:
 	bx r1
 	thumb_func_end sub_81B8984
 
-	thumb_func_start sub_81B89AC
-sub_81B89AC: @ 81B89AC
+	thumb_func_start OpenPartyMenuInBattle
+OpenPartyMenuInBattle: @ 81B89AC
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -16107,7 +16107,7 @@ sub_81B89AC: @ 81B89AC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81B89AC
+	thumb_func_end OpenPartyMenuInBattle
 
 	thumb_func_start sub_81B89F0
 sub_81B89F0: @ 81B89F0
@@ -16288,7 +16288,7 @@ _081B8B94:
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x4
 	bne _081B8BA8
-	bl sub_806E994
+	bl SetMonPreventsSwitchingString
 	b _081B8C46
 	.pool
 _081B8BA8:

@@ -1,5 +1,6 @@
 #include "constants/moves.h"
 #include "constants/species.h"
+#include "constants/trainers.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -1049,8 +1050,10 @@ gUnknown_08611D08:: @ 8611D08
 	.4byte gUnknown_085EE3C4
 
 	.align 1
-gUnknown_08611D30:: @ 8611D30
-	.2byte 0x0325, 0x0326, 0x0327, 0x0328, 0x0329, 0x032a, 0x032b, 0x0000
+gFacilityToBrainTrainerId:: @ 8611D30
+	.2byte TRAINER_ANABEL, TRAINER_TUCKER, TRAINER_SPENSER
+	.2byte TRAINER_GRETA, TRAINER_NOLAND, TRAINER_LUCY
+	.2byte TRAINER_BRANDON
 
 	.align 2
 gUnknown_08611D40:: @ 8611D40

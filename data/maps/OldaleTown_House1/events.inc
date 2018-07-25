@@ -1,5 +1,5 @@
 OldaleTown_House1_EventObjects: @ 852D7B4
-	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 6, 4, 3, 2, 1, 1, 0, 0, OldaleTown_House1_EventScript_1FBE86, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 6, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, OldaleTown_House1_EventScript_1FBE86, 0
 
 OldaleTown_House1_MapWarps: @ 852D7CC
 	warp_def 3, 8, 0, 0, MAP_OLDALE_TOWN

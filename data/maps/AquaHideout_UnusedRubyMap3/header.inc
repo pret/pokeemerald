@@ -5,11 +5,11 @@ AquaHideout_UnusedRubyMap3: @ 8484710
 	.4byte 0x0
 	.2byte MUS_AJITO
 	.2byte 318
-	.byte 197
+	.byte MAPSEC_AQUA_HIDEOUT
 	.byte 0
-	.byte 0
-	.byte 4
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
-	.byte 2
+	.byte MAP_BATTLE_SCENE_MAGMA
 

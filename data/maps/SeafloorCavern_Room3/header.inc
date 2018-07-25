@@ -5,11 +5,11 @@ SeafloorCavern_Room3: @ 8484208
 	.4byte 0x0
 	.2byte MUS_TOZAN
 	.2byte 150
-	.byte 68
+	.byte MAPSEC_SEAFLOOR_CAVERN
 	.byte 0
-	.byte 0
-	.byte 4
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

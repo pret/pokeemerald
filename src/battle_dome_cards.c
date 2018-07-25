@@ -16,14 +16,15 @@ extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const union AffineAnimCmd *const gUnknown_082FF618[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
-extern const union AnimCmd *const gUnknown_082FF70C[];
+extern const union AnimCmd *const gPlayerMonSpriteAnimsTable[];
 extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[NUM_SPECIES];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
 extern const u8 gFacilityClassToPicIndex[];
 
 // Static type declarations
 
-struct BattleDomeCard {
+struct BattleDomeCard
+{
     u8 *frames;
     struct SpriteFrameImage *images;
     u16 paletteTag;
@@ -41,10 +42,12 @@ static EWRAM_DATA struct BattleDomeCard gUnknown_0203CD04[8] = {};
 // .rodata
 
 static const struct BattleDomeCard gUnknown_0860B058 = {};
-static const struct OamData gUnknown_0860B064 = {
+static const struct OamData gUnknown_0860B064 =
+{
     .size = 3
 };
-static const struct OamData gUnknown_0860B06C = {
+static const struct OamData gUnknown_0860B06C =
+{
     .affineMode = 1, .size = 3
 };
 
@@ -158,7 +161,7 @@ static void uns_builder_assign_animtable1(bool8 isTrainer)
 {
     if (!isTrainer)
     {
-        gUnknown_0203CCEC.anims = gUnknown_082FF70C;
+        gUnknown_0203CCEC.anims = gPlayerMonSpriteAnimsTable;
     }
     else
     {

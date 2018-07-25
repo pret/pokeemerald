@@ -5,11 +5,11 @@ MeteorFalls_1F_1R: @ 8483EC0
 	.4byte 0x0
 	.2byte MUS_DAN03
 	.2byte 125
-	.byte 63
+	.byte MAPSEC_METEOR_FALLS
 	.byte 0
-	.byte 0
-	.byte 4
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 15
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 

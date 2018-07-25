@@ -5,11 +5,11 @@ NavelRock_Exterior: @ 8485874
 	.4byte 0x0
 	.2byte MUS_RG_NANASHIMA
 	.2byte 421
-	.byte 211
+	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 13
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
 
