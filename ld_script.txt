@@ -499,7 +499,7 @@ SECTIONS {
         src/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);
-        data/strings.o(.rodata);
+        src/strings.o(.rodata);
         src/berry_tag_screen.o(.rodata);
         src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
