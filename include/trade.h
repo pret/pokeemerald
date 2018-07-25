@@ -7,6 +7,8 @@
 
 // Exported ROM declarations
 
-int sub_807A728(void);
+s32 sub_807A728(void);
+void sub_80773AC(void);
+void sub_807AE50(void);
 
 #endif //GUARD_TRADE_H
