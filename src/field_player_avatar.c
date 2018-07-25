@@ -162,101 +162,51 @@ void player_step(u8 direction, u16 newKeys, u16 heldKeys)
         }
     }
 }
-#ifdef NONMATCHING
+
 bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *playerEventObj, u8 direction)
 {
+    #ifdef NONMATCHING
+        u8 r5 = direction;
+        u8 r6 = direction;
+    #else
+        u8 r5 = direction;
+        register u8 r6 asm("r6") = direction;
+    #endif
+    //a very bad HACK 
+
     if (EventObjectIsMovementOverridden(playerEventObj)
      && !EventObjectClearHeldMovementIfFinished(playerEventObj))
     {
         u8 heldMovementActionId = EventObjectGetHeldMovementActionId(playerEventObj);
         if (heldMovementActionId > 24 && heldMovementActionId < 29)
         {
-            if(direction == DIR_NONE)
+            if (direction == DIR_NONE)
+            {
+                return TRUE;
+            }
+
+            if (playerEventObj->movementDirection != r5)
             {
                 EventObjectClearHeldMovement(playerEventObj);
                 return FALSE;
             }
-            else if(playerEventObj->movementDirection != direction)
-            {
-                return TRUE;
-            }
-            else if(sub_808B028(direction) == FALSE)
+
+            if (!sub_808B028(r6))
             {
                 EventObjectClearHeldMovement(playerEventObj);
                 return FALSE;
             }
-            else
-            {
-                return TRUE;
-            }
         }
-        else
-        {
-            return TRUE;
-        }
+
+        return TRUE;
     }
+
     return FALSE;
 }
-#else
-NAKED
-bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *playerEventObj, u8 direction)
-{
-    asm_unified("push {r4-r6,lr}\n\
-	adds r4, r0, 0\n\
-	lsls r1, 24\n\
-	lsrs r5, r1, 24\n\
-	adds r6, r5, 0\n\
-	bl EventObjectIsMovementOverridden\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _0808AA92\n\
-	adds r0, r4, 0\n\
-	bl EventObjectClearHeldMovementIfFinished\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _0808AA92\n\
-	adds r0, r4, 0\n\
-	bl EventObjectGetHeldMovementActionId\n\
-	lsls r0, 24\n\
-	movs r1, 0xE7\n\
-	lsls r1, 24\n\
-	adds r0, r1\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x3\n\
-	bhi _0808AA70\n\
-	cmp r5, 0\n\
-	bne _0808AA74\n\
-_0808AA70:\n\
-	movs r0, 0x1\n\
-	b _0808AA94\n\
-_0808AA74:\n\
-	ldrb r0, [r4, 0x18]\n\
-	lsrs r0, 4\n\
-	cmp r0, r5\n\
-	beq _0808AA84\n\
-_0808AA7C:\n\
-	adds r0, r4, 0\n\
-	bl EventObjectClearHeldMovement\n\
-	b _0808AA92\n\
-_0808AA84:\n\
-	adds r0, r6, 0\n\
-	bl sub_808B028\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _0808AA7C\n\
-	b _0808AA70\n\
-_0808AA92:\n\
-	movs r0, 0\n\
-_0808AA94:\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1");
-}
-#endif
 
 void npc_clear_strange_bits(struct EventObject *eventObj)
 {
-	eventObj->inanimate = 0;
+    eventObj->inanimate = 0;
     eventObj->disableAnim = 0;
     eventObj->facingDirectionLocked = 0;
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
@@ -491,14 +441,14 @@ void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 {
     u8 r0 = CheckForPlayerAvatarCollision(direction);
 
-    if(r0 != 0)
+    if (r0 != 0)
     {
-        if(r0 == 6)
+        if (r0 == 6)
         {
             PlayerJumpLedge(direction);
             return;
         }
-        else if(r0 == 4 && IsPlayerCollidingWithFarawayIslandMew(direction) != 0)
+        else if (r0 == 4 && IsPlayerCollidingWithFarawayIslandMew(direction) != 0)
         {
             PlayerNotOnBikeCollideWithFarawayIslandMew(direction);
             return;
@@ -507,7 +457,7 @@ void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         {
             u8 r4 = r0 - 5;
 
-            if(r4 > 3)
+            if (r4 > 3)
             {
                 PlayerNotOnBikeCollide(direction);
                 return;
@@ -521,7 +471,7 @@ void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
     {
-		// speed 2 is fast, same speed as running
+	// speed 2 is fast, same speed as running
         PlayerGoSpeed2(direction);
         return;
     }
@@ -605,20 +555,20 @@ bool8 sub_808B1BC(s16 x, s16 y, u8 direction)
      && GetEventObjectIdByXYZ(x, y, 3) == 16)
     {
         sub_808C750(direction);
-        return 1;
+        return TRUE;
     }
     else
     {
-        return 0;
+        return FALSE;
     }
 }
 
 bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
 {
     if (GetLedgeJumpDirection(x, y, z) != 0)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 u8 sub_808B238(s16 x, s16 y, u8 direction)
