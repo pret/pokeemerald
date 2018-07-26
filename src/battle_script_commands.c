@@ -1182,8 +1182,11 @@ static void atk01_accuracycheck(void)
             buff = 0xC;
 
         moveAcc = gBattleMoves[move].accuracy;
-        // check Thunder on sunny weather
+        // Check Thunder on sunny weather.
         if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY && gBattleMoves[move].effect == EFFECT_THUNDER)
+            moveAcc = 50;
+        // Check Wonder Skin.
+        if (defAbility == ABILITY_WONDER_SKIN && gBattleMoves[move].power == 0)
             moveAcc = 50;
 
         calc = sAccuracyStageRatios[buff].dividend * moveAcc;
@@ -7737,6 +7740,7 @@ static void atk96_weatherdamage(void)
                 && ability != ABILITY_SAND_VEIL
                 && ability != ABILITY_SAND_FORCE
                 && ability != ABILITY_SAND_RUSH
+                && ability != ABILITY_OVERCOAT
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {
@@ -7762,6 +7766,7 @@ static void atk96_weatherdamage(void)
             }
             else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
                 && ability != ABILITY_SNOW_CLOAK
+                && ability != ABILITY_OVERCOAT
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {
@@ -9703,11 +9708,19 @@ static void atkE2_switchoutabilities(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
-    switch (gBattleMons[gActiveBattler].ability)
+    switch (GetBattlerAbility(gActiveBattler))
     {
     case ABILITY_NATURAL_CURE:
         gBattleMons[gActiveBattler].status1 = 0;
         BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, gBitTable[*(gBattleStruct->field_58 + gActiveBattler)], 4, &gBattleMons[gActiveBattler].status1);
+        MarkBattlerForControllerExec(gActiveBattler);
+        break;
+    case ABILITY_REGENERATOR:
+        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 3;
+        gBattleMoveDamage += gBattleMons[gActiveBattler].hp;
+        if (gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
+            gBattleMons[gActiveBattler].maxHP = gBattleMons[gActiveBattler].maxHP;
+        BtlController_EmitSetMonData(0, REQUEST_HP_BATTLE, gBitTable[*(gBattleStruct->field_58 + gActiveBattler)], 2, &gBattleMoveDamage);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
     }

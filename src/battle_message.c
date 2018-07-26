@@ -586,8 +586,9 @@ static const u8 sText_MudSportEnds[] = _("The effects of Mud Sport have faded.")
 static const u8 sText_WaterSportEnds[] = _("The effects of Water Sport have faded.");
 static const u8 sText_GravityEnds[] = _("Gravity returned to normal!");
 static const u8 sText_AquaRingHeal[] = _("Aqua Ring restored\n{B_ATK_NAME_WITH_PREFIX}’s HP!");
-static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\n raised its {B_BUFF1}!");
-static const u8 sText_AttackerAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\n raised its {B_BUFF1}!");
+static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}\nraised its {B_BUFF1}!");
+static const u8 sText_TargetAbilityLoweredStat[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}\nlowered its {B_BUFF1}!");
+static const u8 sText_AttackerAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sText_AuroraVeilEnds[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}\nwore off!");
 static const u8 sText_ElectricTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
 static const u8 sText_MistyTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
@@ -621,6 +622,9 @@ static const u8 sText_StickyWebSwitchIn[] = _("");
 static const u8 sText_HealingWishCameTrue[] = _("The healing wish came true\nfor {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_HealingWishHealed[] = _("{B_ATK_NAME_WITH_PREFIX} regained health!");
 static const u8 sText_LunarDanceCameTrue[] = _("{B_ATK_NAME_WITH_PREFIX} became cloaked\nin mystical moonlight!");
+static const u8 sText_CursedBodyDisabled[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_BUFF1} was disabled\nby {B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}!");
+static const u8 sText_AttackerAquiredAbility[] = _("{B_ATK_NAME_WITH_PREFIX} acquired {B_LAST_ABILITY}!");
+static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_BUFF1}\nwon’t go higher!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1093,6 +1097,10 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_HealingWishCameTrue,
     sText_HealingWishHealed,
     sText_LunarDanceCameTrue,
+    sText_CursedBodyDisabled,
+    sText_AttackerAquiredAbility,
+    sText_TargetAbilityLoweredStat,
+    sText_TargetStatWontGoHigher,
 };
 
 const u16 gHealingWishStringIds[] =

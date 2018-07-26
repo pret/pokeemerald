@@ -2615,6 +2615,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+            case ABILITY_SOLAR_POWER:
+                if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_SolarPowerActivates);
+                    gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    effect++;
+                }
+                break;
             }
         }
         break;
@@ -2741,6 +2751,88 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     case ABILITYEFFECT_CONTACT: // 4
         switch (gLastUsedAbility)
         {
+        case ABILITY_JUSTIFIED:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && TARGET_TURN_DAMAGED
+             && IsBattlerAlive(battler)
+             && moveType == TYPE_DARK
+             && gBattleMons[battler].statStages[STAT_ATK] != 0xC)
+            {
+                gBattleMons[battler].statStages[STAT_ATK]++;
+                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaise;
+                effect++;
+            }
+            break;
+        case ABILITY_RATTLED:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && TARGET_TURN_DAMAGED
+             && IsBattlerAlive(battler)
+             && (moveType == TYPE_DARK || moveType == TYPE_BUG || moveType == TYPE_GHOST)
+             && gBattleMons[battler].statStages[STAT_SPEED] != 0xC)
+            {
+                gBattleMons[battler].statStages[STAT_SPEED]++;
+                SET_STATCHANGER(STAT_SPEED, 1, FALSE);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaise;
+                effect++;
+            }
+            break;
+        case ABILITY_WEAK_ARMOR:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && TARGET_TURN_DAMAGED
+             && IsBattlerAlive(battler)
+             && (gBattleMons[battler].statStages[STAT_SPEED] != 0xC || gBattleMons[battler].statStages[STAT_DEF] != 0))
+            {
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_WeakArmorActivates;
+                effect++;
+            }
+            break;
+        case ABILITY_CURSED_BODY:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && TARGET_TURN_DAMAGED
+             && gDisableStructs[gBattlerAttacker].disabledMove == MOVE_NONE
+             && IsBattlerAlive(gBattlerAttacker)
+             && ((i = GetBattleMonMoveSlot(&gBattleMons[gBattlerAttacker], gChosenMove)) != 4)
+             && (Random() % 3) == 0)
+            {
+                gDisableStructs[gBattlerAttacker].disabledMove = gChosenMove;
+                gDisableStructs[gBattlerAttacker].disableTimer1 = 4;
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, gChosenMove);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_CursedBodyActivates;
+                effect++;
+            }
+            break;
+        case ABILITY_MUMMY:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && IsBattlerAlive(gBattlerAttacker)
+             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+            {
+                switch (gBattleMons[gBattlerAttacker].ability)
+                {
+                case ABILITY_MUMMY:
+                case ABILITY_BATTLE_BOND:
+                case ABILITY_COMATOSE:
+                case ABILITY_DISGUISE:
+                case ABILITY_MULTITYPE:
+                case ABILITY_POWER_CONSTRUCT:
+                case ABILITY_RKS_SYSTEM:
+                case ABILITY_SCHOOLING:
+                case ABILITY_SHIELDS_DOWN:
+                case ABILITY_STANCE_CHANGE:
+                    break;
+                default:
+                    gLastUsedAbility = gBattleMons[gBattlerAttacker].ability = ABILITY_MUMMY;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_MummyActivates;
+                    effect++;
+                    break;
+                }
+            }
+            break;
         case ABILITY_ANGER_POINT:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gIsCriticalHit
@@ -2770,13 +2862,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
         case ABILITY_ROUGH_SKIN:
+        case ABILITY_IRON_BARBS:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
              && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
             {
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
                 BattleScriptPushCursor();

@@ -4523,6 +4523,15 @@ BattleScript_RainDishActivates::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	end3
+	
+BattleScript_SolarPowerActivates::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_SOLARPOWERHPDROP
+	waitmessage 0x40
+	tryfaintmon BS_ATTACKER, FALSE, NULL
+	end3
 
 BattleScript_SandstreamActivates::
 	pause 0x20
@@ -4754,6 +4763,16 @@ BattleScript_ColorChangeActivates::
 	waitmessage 0x40
 	return
 	
+BattleScript_CursedBodyActivates::
+	printstring STRINGID_CUSEDBODYDISABLED
+	waitmessage 0x40
+	return
+	
+BattleScript_MummyActivates::
+	printstring STRINGID_ATTACKERACQUIREDABILITY
+	waitmessage 0x40
+	return
+	
 BattleScript_AngryPointActivates::
 	setbyte sB_ANIM_ARG1 0x38
 	setbyte sB_ANIM_ARG2 0x0
@@ -4768,6 +4787,37 @@ BattleScript_TargetAbilityStatRaise::
 	waitanimation
 	printstring STRINGID_TARGETABILITYSTATRAISE
 	waitmessage 0x40
+	return
+	
+BattleScript_WeakArmorActivates::
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange 0x1, BattleScript_WeakArmorActivatesSpeed
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, 0x2, BattleScript_WeakArmorDefAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_WeakArmorActivatesSpeed
+	pause 0x10
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+	goto BattleScript_WeakArmorActivatesSpeed
+BattleScript_WeakArmorDefAnim:
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_TARGETABILITYSTATLOWER
+	waitmessage 0x40
+BattleScript_WeakArmorActivatesSpeed:
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange 0x1, BattleScript_WeakArmorActivatesEnd
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, 0x2, BattleScript_WeakArmorSpeedAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_WeakArmorActivatesEnd
+	pause 0x10
+	printstring STRINGID_TARGETSTATWONTGOHIGHER
+	waitmessage 0x40
+	goto BattleScript_WeakArmorActivatesEnd
+BattleScript_WeakArmorSpeedAnim:
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_TARGETABILITYSTATRAISE
+	waitmessage 0x40
+BattleScript_WeakArmorActivatesEnd:
 	return
 	
 BattleScript_AttackerAbilityStatRaise::
