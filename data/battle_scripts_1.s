@@ -155,7 +155,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectDefenseUpHit
 	.4byte BattleScript_EffectAttackUpHit
 	.4byte BattleScript_EffectAllStatsUpHit
-	.4byte BattleScript_EffectUnused8d
+	.4byte BattleScript_EffectFellStinger
 	.4byte BattleScript_EffectBellyDrum
 	.4byte BattleScript_EffectPsychUp
 	.4byte BattleScript_EffectMirrorCoat
@@ -590,7 +590,7 @@ BattleScript_EffectUnused60:
 BattleScript_EffectFalseSwipe:
 BattleScript_EffectAlwaysCrit:
 BattleScript_EffectPursuit:
-BattleScript_EffectUnused8d:
+BattleScript_EffectFellStinger:
 BattleScript_EffectPlaceholder209:
 BattleScript_EffectHit::
 BattleScript_EffectLowKick:
@@ -3202,6 +3202,7 @@ BattleScript_FaintTarget::
 	cleareffectsonfaint BS_TARGET
 	printstring STRINGID_TARGETFAINTED
 	tryactivatemoxie BS_ATTACKER
+	tryactivatefellstinger BS_ATTACKER
 	return
 
 BattleScript_GiveExp::
@@ -4827,6 +4828,16 @@ BattleScript_AttackerAbilityStatRaise::
 	waitanimation
 	printstring STRINGID_ATTACKERABILITYSTATRAISE
 	waitmessage 0x40
+	return
+	
+BattleScript_FellStingerRaisesStat::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_FellStingerRaisesAtkEnd
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 0x1, BattleScript_FellStingerRaisesAtkEnd
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_FellStingerRaisesAtkEnd:
 	return
 	
 BattleScript_AttackerAbilityStatRaiseEnd3::

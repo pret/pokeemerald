@@ -1389,6 +1389,10 @@
 	various \battler, VARIOUS_TRY_ACTIVATE_MOXIE
 	.endm
 	
+	.macro tryactivatefellstinger battler
+	various \battler, VARIOUS_TRY_ACTIVATE_FELL_STINGER
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

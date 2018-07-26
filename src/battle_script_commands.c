@@ -6160,6 +6160,20 @@ static void atk75_useitemonopponent(void)
     gBattlescriptCurrInstr += 1;
 }
 
+static bool32 HasAttackerFaintedTarget(void)
+{
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+        && gBattleMoves[gCurrentMove].power != 0
+        && (gLastHitBy[gBattlerTarget] == 0xFF || gLastHitBy[gBattlerTarget] == gBattlerAttacker)
+        && gBattleStruct->moveTarget[gBattlerAttacker] == gBattlerTarget
+        && gBattlerTarget != gBattlerAttacker
+        && gCurrentTurnActionNumber == GetBattlerTurnOrderNum(gBattlerAttacker)
+        && gChosenMove == gChosenMoveByBattler[gBattlerAttacker])
+        return TRUE;
+    else
+        return FALSE;
+}
+
 static void atk76_various(void)
 {
     u8 side;
@@ -6372,10 +6386,7 @@ static void atk76_various(void)
         break;
     case VARIOUS_TRY_ACTIVATE_MOXIE:
         if (GetBattlerAbility(gActiveBattler) == ABILITY_MOXIE
-            && (gLastHitBy[gBattlerTarget] == 0xFF || gLastHitBy[gBattlerTarget] == gBattlerAttacker)
-            && gBattleStruct->moveTarget[gBattlerAttacker] == gBattlerTarget
-            && gBattlerTarget != gBattlerAttacker
-            && gCurrentTurnActionNumber == GetBattlerTurnOrderNum(gBattlerAttacker)
+            && HasAttackerFaintedTarget()
             && !IsBattleLostForPlayer()
             && !IsBattleWonForPlayer()
             && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 0xC)
@@ -6385,6 +6396,24 @@ static void atk76_various(void)
             PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
             BattleScriptPush(gBattlescriptCurrInstr + 3);
             gBattlescriptCurrInstr = BattleScript_AttackerAbilityStatRaise;
+            return;
+        }
+        break;
+    case VARIOUS_TRY_ACTIVATE_FELL_STINGER:
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_FELL_STINGER
+            && HasAttackerFaintedTarget()
+            && !IsBattleLostForPlayer()
+            && !IsBattleWonForPlayer()
+            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 0xC)
+        {
+            if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] >= 0xB)
+                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+            else
+                SET_STATCHANGER(STAT_ATK, 2, FALSE);
+
+            PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
+            BattleScriptPush(gBattlescriptCurrInstr + 3);
+            gBattlescriptCurrInstr = BattleScript_FellStingerRaisesStat;
             return;
         }
         break;

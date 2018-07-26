@@ -321,5 +321,6 @@ extern const u8 BattleScript_SolarPowerActivates[];
 extern const u8 BattleScript_CursedBodyActivates[];
 extern const u8 BattleScript_MummyActivates[];
 extern const u8 BattleScript_WeakArmorActivates[];
+extern const u8 BattleScript_FellStingerRaisesStat[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -6784,7 +6784,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_FELL_STINGER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FELL_STINGER,
 		.power = 50,
 		.type = TYPE_BUG,
 		.accuracy = 100,
