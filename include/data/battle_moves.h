@@ -4336,7 +4336,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HEALING_WISH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HEALING_WISH,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -5536,7 +5536,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_LUNAR_DANCE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HEALING_WISH,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,

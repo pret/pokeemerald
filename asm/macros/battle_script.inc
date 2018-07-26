@@ -1373,6 +1373,18 @@
 	various BS_TARGET, VARIOUS_RESTORE_TARGET
 	.endm
 	
+	.macro instanthpdrop battler
+	various \battler, VARIOUS_INSTANT_HP_DROP
+	.endm
+	
+	.macro clearstatus battler
+	various \battler, VARIOUS_CLEAR_STATUS
+	.endm
+	
+	.macro restorepp battler
+	various \battler, VARIOUS_RESTORE_PP
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
@@ -1430,6 +1442,10 @@
 	jumpifhalfword CMP_NOT_EQUAL, gCurrentMove, \move, \jumpptr
 	.endm
 	
+	.macro jumpifnotchosenmove move, jumpptr
+	jumpifhalfword CMP_NOT_EQUAL, gChosenMove, \move, \jumpptr
+	.endm
+	
 	.macro jumpifstatus3 bank, status, jumpptr
 	jumpifstatus3condition \bank, \status, 0x0, \jumpptr
 	.endm
@@ -1452,4 +1468,8 @@
 	
 	.macro dmg_1_8_targethp
 	manipulatedamage ATK80_1_8_TARGET_HP
+	.endm
+	
+	.macro dmgtomaxattackerhp
+	manipulatedamage ATK80_FULL_ATTACKER_HP
 	.endm

@@ -618,6 +618,9 @@ static const u8 sText_StealthRockDmg[] = _("Pointed stones dug into\n{B_SCR_ACTI
 static const u8 sText_ToxicSpikesAbsorbed[] = _("");
 static const u8 sText_ToxicSpikesPoisoned[] = _("");
 static const u8 sText_StickyWebSwitchIn[] = _("");
+static const u8 sText_HealingWishCameTrue[] = _("The healing wish came true\nfor {B_ATK_NAME_WITH_PREFIX}!");
+static const u8 sText_HealingWishHealed[] = _("{B_ATK_NAME_WITH_PREFIX} regained health!");
+static const u8 sText_LunarDanceCameTrue[] = _("{B_ATK_NAME_WITH_PREFIX} became cloaked\nin mystical moonlight!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1087,6 +1090,14 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_ToxicSpikesAbsorbed,
     sText_ToxicSpikesPoisoned,
     sText_StickyWebSwitchIn,
+    sText_HealingWishCameTrue,
+    sText_HealingWishHealed,
+    sText_LunarDanceCameTrue,
+};
+
+const u16 gHealingWishStringIds[] =
+{
+    STRINGID_HEALINGWISHCAMETRUE, STRINGID_LUNARDANCECAMETRUE
 };
 
 const u16 gDmgHazardsStringIds[] =

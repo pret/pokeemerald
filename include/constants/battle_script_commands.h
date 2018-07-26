@@ -76,12 +76,16 @@
 #define VARIOUS_SWITCHIN_ABILITIES              28
 #define VARIOUS_SAVE_TARGET                     29
 #define VARIOUS_RESTORE_TARGET                  30
+#define VARIOUS_INSTANT_HP_DROP                 31
+#define VARIOUS_CLEAR_STATUS                    32
+#define VARIOUS_RESTORE_PP                    33
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0
 #define ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP     1
 #define ATK80_DMG_DOUBLED                                   2
 #define ATK80_1_8_TARGET_HP                                 3
+#define ATK80_FULL_ATTACKER_HP                              4
 
 // atk4F, a flag used for the jumpifcantswitch command
 #define ATK4F_DONT_CHECK_STATUSES   0x80

@@ -101,6 +101,7 @@ static void OpponentHandleBattleAnimation(void);
 static void OpponentHandleLinkStandbyMsg(void);
 static void OpponentHandleResetActionMoveSelection(void);
 static void OpponentHandleCmd55(void);
+static void OpponentHandleDebugMenu(void);
 static void nullsub_91(void);
 
 static void OpponentBufferRunCommand(void);
@@ -173,6 +174,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OpponentHandleLinkStandbyMsg,
     OpponentHandleResetActionMoveSelection,
     OpponentHandleCmd55,
+    OpponentHandleDebugMenu,
     nullsub_91
 };
 
@@ -2004,6 +2006,11 @@ static void OpponentHandleCmd55(void)
         gMain.callback1 = gPreBattleCallback1;
         SetMainCallback2(gMain.savedCallback);
     }
+    OpponentBufferExecCompleted();
+}
+
+static void OpponentHandleDebugMenu(void)
+{
     OpponentBufferExecCompleted();
 }
 

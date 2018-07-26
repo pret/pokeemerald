@@ -124,7 +124,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectNightmare
 	.4byte BattleScript_EffectMinimize
 	.4byte BattleScript_EffectCurse
-	.4byte BattleScript_EffectUnused6e
+	.4byte BattleScript_EffectHealingWish
 	.4byte BattleScript_EffectProtect
 	.4byte BattleScript_EffectSpikes
 	.4byte BattleScript_EffectForesight
@@ -270,6 +270,52 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectHeartSwap
 	.4byte BattleScript_EffectPowerSplit
 	.4byte BattleScript_EffectGuardSplit
+	
+BattleScript_EffectHealingWish:
+	attackcanceler
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	instanthpdrop BS_ATTACKER
+	setatkhptozero
+	tryfaintmon BS_ATTACKER, FALSE, NULL
+	jumpifcantswitch ATK4F_DONT_CHECK_STATUSES | BS_ATTACKER, BattleScript_EffectHealingWishEnd
+	openpartyscreen 0x1, BattleScript_EffectHealingWishEnd
+	switchoutabilities BS_ATTACKER
+	waitstate
+	switchhandleorder BS_ATTACKER, 0x2
+	returnatktoball
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, TRUE
+	waitstate
+	setbyte cMULTISTRING_CHOOSER 0
+	jumpifnotchosenmove MOVE_LUNAR_DANCE BattleScript_EffectHealingWishNewMon
+	setbyte cMULTISTRING_CHOOSER 1
+	restorepp BS_ATTACKER
+BattleScript_EffectHealingWishNewMon:
+	printfromtable gHealingWishStringIds
+	waitmessage 0x40
+	playanimation BS_ATTACKER, B_ANIM_WISH_HEAL, NULL
+	waitanimation
+	dmgtomaxattackerhp
+	manipulatedamage ATK80_DMG_CHANGE_SIGN
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	clearstatus BS_ATTACKER
+	waitstate
+	updatestatusicon BS_ATTACKER
+	waitstate
+	printstring STRINGID_HEALINGWISHHEALED
+	waitmessage 0x40
+	switchineffects BS_ATTACKER
+BattleScript_EffectHealingWishEnd:
+	setbyte sMOVEEND_STATE, 0x0
+	moveend 0x0, 0x0
+	end
 	
 BattleScript_EffectWorrySeed:
 	attackcanceler
@@ -543,7 +589,6 @@ BattleScript_EffectVitalThrow:
 BattleScript_EffectUnused60:
 BattleScript_EffectFalseSwipe:
 BattleScript_EffectAlwaysCrit:
-BattleScript_EffectUnused6e:
 BattleScript_EffectPursuit:
 BattleScript_EffectUnused8d:
 BattleScript_EffectPlaceholder209:
@@ -2073,7 +2118,7 @@ BattleScript_EffectBatonPass::
 	jumpifcantswitch ATK4F_DONT_CHECK_STATUSES | BS_ATTACKER, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	openpartyscreen 0x1, BattleScript_ButItFailed
+	openpartyscreen BS_ATTACKER, BattleScript_ButItFailed
 	switchoutabilities BS_ATTACKER
 	waitstate
 	switchhandleorder BS_ATTACKER, 0x2
