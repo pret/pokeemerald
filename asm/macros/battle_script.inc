@@ -1385,6 +1385,10 @@
 	various \battler, VARIOUS_RESTORE_PP
 	.endm
 	
+	.macro tryactivatemoxie battler
+	various \battler, VARIOUS_TRY_ACTIVATE_MOXIE
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

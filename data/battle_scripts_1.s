@@ -3201,6 +3201,7 @@ BattleScript_FaintTarget::
 	dofaintanimation BS_TARGET
 	cleareffectsonfaint BS_TARGET
 	printstring STRINGID_TARGETFAINTED
+	tryactivatemoxie BS_ATTACKER
 	return
 
 BattleScript_GiveExp::

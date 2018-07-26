@@ -78,7 +78,8 @@
 #define VARIOUS_RESTORE_TARGET                  30
 #define VARIOUS_INSTANT_HP_DROP                 31
 #define VARIOUS_CLEAR_STATUS                    32
-#define VARIOUS_RESTORE_PP                    33
+#define VARIOUS_RESTORE_PP                      33
+#define VARIOUS_TRY_ACTIVATE_MOXIE              34
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0
