@@ -24,6 +24,7 @@
 #include "link.h"
 #include "berry.h"
 #include "pokedex.h"
+#include "constants/battle_config.h"
 
 extern u8 weather_get_current(void);
 
@@ -1070,9 +1071,9 @@ u8 DoFieldEndTurnEffects(void)
         case ENDTURN_HAIL:
             if (gBattleWeather & WEATHER_HAIL_ANY)
             {
-                if (--gWishFutureKnock.weatherDuration == 0)
+                if (!(gBattleWeather & WEATHER_HAIL_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
-                    gBattleWeather &= ~WEATHER_HAIL;
+                    gBattleWeather &= ~WEATHER_HAIL_TEMPORARY;
                     gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
                 }
                 else
@@ -2311,7 +2312,39 @@ u8 CastformDataTypeChange(u8 battler)
     return formChange;
 }
 
-// The largest function in the game, but even it could not save itself from decompiling.
+static const u16 sWeatherFlagsInfo[][3] =
+{
+    [ENUM_WEATHER_RAIN] = {WEATHER_RAIN_TEMPORARY, WEATHER_RAIN_PERMANENT, HOLD_EFFECT_DAMP_ROCK},
+    [ENUM_WEATHER_SUN] = {WEATHER_SUN_TEMPORARY, WEATHER_SUN_PERMANENT, HOLD_EFFECT_HEAT_ROCK},
+    [ENUM_WEATHER_SANDSTORM] = {WEATHER_SANDSTORM_TEMPORARY, WEATHER_SANDSTORM_PERMANENT, HOLD_EFFECT_SMOOTH_ROCK},
+    [ENUM_WEATHER_HAIL] = {WEATHER_HAIL_TEMPORARY, WEATHER_HAIL_PERMANENT, HOLD_EFFECT_ICY_ROCK},
+};
+
+bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
+{
+    if (viaAbility && B_ABILITY_WEATHER <= GEN_5
+        && !(gBattleWeather & sWeatherFlagsInfo[weatherEnumId][1]))
+    {
+        gBattleWeather = (sWeatherFlagsInfo[weatherEnumId][0] | sWeatherFlagsInfo[weatherEnumId][1]);
+        return TRUE;
+    }
+    else if (B_ABILITY_WEATHER > GEN_5
+        && !(gBattleWeather & (sWeatherFlagsInfo[weatherEnumId][0] | sWeatherFlagsInfo[weatherEnumId][1])))
+    {
+        gBattleWeather = (sWeatherFlagsInfo[weatherEnumId][0]);
+        if (GetBattlerHoldEffect(battler, TRUE) == sWeatherFlagsInfo[weatherEnumId][2])
+            gWishFutureKnock.weatherDuration = 8;
+        else
+            gWishFutureKnock.weatherDuration = 5;
+
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg)
 {
     u8 effect = 0;
@@ -2477,28 +2510,33 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
         case ABILITY_DRIZZLE:
-            if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_RAIN, TRUE))
             {
-                gBattleWeather = (WEATHER_RAIN_PERMANENT | WEATHER_RAIN_TEMPORARY);
                 BattleScriptPushCursorAndCallback(BattleScript_DrizzleActivates);
                 gBattleScripting.battler = battler;
                 effect++;
             }
             break;
         case ABILITY_SAND_STREAM:
-            if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT))
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_SANDSTORM, TRUE))
             {
-                gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
-                BattleScriptPushCursorAndCallback(BattleScript_SandstreamActivates);
+                BattleScriptPushCursorAndCallback(BattleScript_DrizzleActivates);
                 gBattleScripting.battler = battler;
                 effect++;
             }
             break;
         case ABILITY_DROUGHT:
-            if (!(gBattleWeather & WEATHER_SUN_PERMANENT))
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_SUN, TRUE))
             {
-                gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
                 BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
+                gBattleScripting.battler = battler;
+                effect++;
+            }
+            break;
+        case ABILITY_SNOW_WARNING:
+            if (TryChangeBattleWeather(battler, ENUM_WEATHER_HAIL, TRUE))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivates);
                 gBattleScripting.battler = battler;
                 effect++;
             }

@@ -42,6 +42,7 @@
 #include "battle_setup.h"
 #include "overworld.h"
 #include "party_menu.h"
+#include "constants/battle_config.h"
 
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
@@ -1342,9 +1343,13 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
 }
 
 // The chance is 1/N for each stage.
-static const u8 sCriticalHitChanceGen3[] = {16, 8, 4, 3, 2}; // Gens 2,3,4,5
-static const u8 sCriticalHitChanceGen6[] = {16, 8, 2, 1, 1};
-static const u8 sCriticalHitChanceGen7[] = {24, 8, 2, 1, 1};
+#if B_CRIT_CHANCE == GEN_7
+    static const u8 sCriticalHitChance[] = {24, 8, 2, 1, 1};
+#elif B_CRIT_CHANCE == GEN_6
+    static const u8 sCriticalHitChance[] = {16, 8, 2, 1, 1};
+#else
+    static const u8 sCriticalHitChance[] = {16, 8, 4, 3, 2}; // Gens 2,3,4,5
+#endif // B_CRIT_CHANCE
 
 static void atk04_critcalc(void)
 {
@@ -1357,7 +1362,7 @@ static void atk04_critcalc(void)
         gIsCriticalHit = FALSE;
     else if (critChance == -2)
         gIsCriticalHit = TRUE;
-    else if (Random() % sCriticalHitChanceGen3[critChance] == 0)
+    else if (Random() % sCriticalHitChance[critChance] == 0)
         gIsCriticalHit = TRUE;
     else
         gIsCriticalHit = FALSE;
@@ -6390,7 +6395,7 @@ static void atk76_various(void)
             && HasAttackerFaintedTarget()
             && !IsBattleLostForPlayer()
             && !IsBattleWonForPlayer()
-            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 0xC)
+            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
         {
             gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
             SET_STATCHANGER(STAT_ATK, 1, FALSE);
@@ -6405,10 +6410,12 @@ static void atk76_various(void)
             && HasAttackerFaintedTarget()
             && !IsBattleLostForPlayer()
             && !IsBattleWonForPlayer()
-            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 0xC)
+            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
         {
-            if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] >= 0xB)
+            if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] >= 11)
                 SET_STATCHANGER(STAT_ATK, 1, FALSE);
+            else if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] <= 9 && B_FELL_STINGER_STAT_RAISE == GEN_7)
+                SET_STATCHANGER(STAT_ATK, 3, FALSE);
             else
                 SET_STATCHANGER(STAT_ATK, 2, FALSE);
 
@@ -6601,16 +6608,14 @@ static void atk7C_trymirrormove(void)
 
 static void atk7D_setrain(void)
 {
-    if (gBattleWeather & WEATHER_RAIN_ANY)
+    if (!TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_RAIN, FALSE))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
     }
     else
     {
-        gBattleWeather = WEATHER_RAIN_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        gWishFutureKnock.weatherDuration = 5;
     }
     gBattlescriptCurrInstr++;
 }
@@ -7478,16 +7483,14 @@ static void atk94_damagetohalftargethp(void) // super fang
 
 static void atk95_setsandstorm(void)
 {
-    if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+    if (!TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SANDSTORM, FALSE))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
     }
     else
     {
-        gBattleWeather = WEATHER_SANDSTORM_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-        gWishFutureKnock.weatherDuration = 5;
     }
     gBattlescriptCurrInstr++;
 }
@@ -8645,16 +8648,14 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
 
 static void atkBB_setsunny(void)
 {
-    if (gBattleWeather & WEATHER_SUN_ANY)
+    if (!TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SUN, FALSE))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
     }
     else
     {
-        gBattleWeather = WEATHER_SUN_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = 4;
-        gWishFutureKnock.weatherDuration = 5;
     }
 
     gBattlescriptCurrInstr++;
@@ -8911,16 +8912,14 @@ static void atkC7_setminimize(void)
 
 static void atkC8_sethail(void)
 {
-    if (gBattleWeather & WEATHER_HAIL_ANY)
+    if (!TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_HAIL, FALSE))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
     }
     else
     {
-        gBattleWeather = WEATHER_HAIL;
         gBattleCommunication[MULTISTRING_CHOOSER] = 5;
-        gWishFutureKnock.weatherDuration = 5;
     }
 
     gBattlescriptCurrInstr++;
