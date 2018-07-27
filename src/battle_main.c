@@ -52,6 +52,7 @@
 #include "international_string_util.h"
 #include "pokeball.h"
 #include "party_menu.h"
+#include "constants\battle_config.h"
 
 struct UnknownPokemonStruct4
 {
@@ -4674,13 +4675,39 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     return speed;
 }
 
+static s8 GetMovePriority(u8 battlerId)
+{
+    s8 priority;
+    u16 move;
+
+    if (gProtectStructs[battlerId].noValidMoves)
+        move = MOVE_STRUGGLE;
+    else
+        move = gBattleMons[battlerId].moves[*(gBattleStruct->chosenMovePositions + battlerId)];
+
+    priority = gBattleMoves[move].priority;
+    if (GetBattlerAbility(battlerId) == ABILITY_GALE_WINGS
+        && gBattleMoves[move].type == TYPE_FLYING
+        && (B_GALE_WINGS == GEN_6 || BATTLER_MAX_HP(battlerId)))
+    {
+        priority++;
+    }
+    else if (GetBattlerAbility(battlerId) == ABILITY_PRANKSTER
+        && gBattleMoves[move].split == SPLIT_STATUS)
+    {
+        priority++;
+    }
+
+    return priority;
+}
+
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
     u8 strikesFirst = 0;
     u32 speedBattler1 = 0, speedBattler2 = 0;
-    u16 moveBattler1 = 0, moveBattler2 = 0;
     u32 holdEffectBattler1 = 0, holdEffectBattler2 = 0;
     bool32 quickClawBattler1 = FALSE, quickClawBattler2 = FALSE;
+    s8 priority1 = 0, priority2 = 0;
 
     speedBattler1 = GetBattlerTotalSpeedStat(battler1);
     holdEffectBattler1 = GetBattlerHoldEffect(battler1, TRUE);
@@ -4694,36 +4721,15 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         && gRandomTurnNumber < (0xFFFF * GetBattlerHoldEffectParam(battler2)) / 100)
         quickClawBattler2 = TRUE;
 
-    if (ignoreChosenMoves)
-    {
-        moveBattler1 = MOVE_NONE;
-        moveBattler2 = MOVE_NONE;
-    }
-    else
+    if (!ignoreChosenMoves)
     {
         if (gChosenActionByBattler[battler1] == B_ACTION_USE_MOVE)
-        {
-            if (gProtectStructs[battler1].noValidMoves)
-                moveBattler1 = MOVE_STRUGGLE;
-            else
-                moveBattler1 = gBattleMons[battler1].moves[*(gBattleStruct->chosenMovePositions + battler1)];
-        }
-        else
-            moveBattler1 = MOVE_NONE;
-
+            priority1 = GetMovePriority(battler1);
         if (gChosenActionByBattler[battler2] == B_ACTION_USE_MOVE)
-        {
-            if (gProtectStructs[battler2].noValidMoves)
-                moveBattler2 = MOVE_STRUGGLE;
-            else
-                moveBattler2 = gBattleMons[battler2].moves[*(gBattleStruct->chosenMovePositions + battler2)];
-        }
-        else
-            moveBattler2 = MOVE_NONE;
+            priority2 = GetMovePriority(battler2);
     }
 
-
-    if (gBattleMoves[moveBattler1].priority == gBattleMoves[moveBattler2].priority)
+    if (priority1 == priority2)
     {
         // QUICK CLAW - always first
         // LAGGING TAIL - always last
@@ -4765,7 +4771,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
             }
         }
     }
-    else if (gBattleMoves[moveBattler1].priority < gBattleMoves[moveBattler2].priority)
+    else if (priority1 < priority2)
     {
         strikesFirst = 1; // battler2's move has greater priority
     }
