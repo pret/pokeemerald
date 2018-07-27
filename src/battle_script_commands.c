@@ -6383,6 +6383,7 @@ static void atk76_various(void)
         }
         data[i] = gBattleMons[gActiveBattler].ppBonuses;
         BtlController_EmitSetMonData(0, REQUEST_PP_DATA_BATTLE, 0, 5, data);
+        MarkBattlerForControllerExec(gActiveBattler);
         break;
     case VARIOUS_TRY_ACTIVATE_MOXIE:
         if (GetBattlerAbility(gActiveBattler) == ABILITY_MOXIE
