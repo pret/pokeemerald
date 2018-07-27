@@ -6479,7 +6479,7 @@ _0819218E:
 	mov r0, r9
 	cmp r0, 0
 	bne _081921C4
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	b _081921FC
 	.pool
@@ -9537,7 +9537,7 @@ _08193B84:
 	ldr r0, [r4]
 	bl Free
 	str r6, [r4]
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	ldr r1, =gTasks
 	lsls r0, r5, 2
@@ -11316,7 +11316,7 @@ _08194B24:
 	ands r0, r1
 	cmp r0, 0
 	bne _08194B3C
-	ldr r0, =CB2_ReturnToFieldContinueScript
+	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask

@@ -159,7 +159,7 @@ void sub_8184E58(void)
         {
             sPlayers[i].trainerId = gLinkPlayers[i].trainerId;
             sPlayers[i].gender = gLinkPlayers[i].gender;
-            sPlayers[i].battlerId = gLinkPlayers[i].lp_field_18;
+            sPlayers[i].battlerId = gLinkPlayers[i].id;
             sPlayers[i].language = gLinkPlayers[i].language;
 
             if (i < linkPlayersCount)
@@ -1340,7 +1340,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
         }
         gLinkPlayers[i].gender = src->playersGender[i];
         gLinkPlayers[i].language = src->playersLanguage[i];
-        gLinkPlayers[i].lp_field_18 = src->playersBattlers[i];
+        gLinkPlayers[i].id = src->playersBattlers[i];
         gLinkPlayers[i].trainerId = src->playersTrainerId[i];
 
         if (var)
@@ -1453,7 +1453,7 @@ u8 GetActiveBattlerLinkPlayerGender(void)
 
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
-        if (gLinkPlayers[i].lp_field_18 == gActiveBattler)
+        if (gLinkPlayers[i].id == gActiveBattler)
             break;
     }
 

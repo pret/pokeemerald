@@ -297,5 +297,5 @@ Route101_Text_1EC04A: @ 81EC04A
 
 Route101_Text_1EC0C8: @ 81EC0C8
 	.string "ROUTE 101\n"
-	.string "{0x79} OLDALE TOWN$"
+	.string "{UP_ARROW} OLDALE TOWN$"
 

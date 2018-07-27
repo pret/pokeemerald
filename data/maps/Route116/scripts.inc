@@ -482,7 +482,7 @@ Route116_Text_1F375E: @ 81F375E
 
 Route116_Text_1F379D: @ 81F379D
 	.string "ROUTE 116\n"
-	.string "{0x7B} RUSTBORO CITY$"
+	.string "{LEFT_ARROW} RUSTBORO CITY$"
 
 Route116_Text_1F37B7: @ 81F37B7
 	.string "RUSTURF TUNNEL\n"

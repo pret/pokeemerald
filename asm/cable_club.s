@@ -2586,7 +2586,7 @@ sp02A_crash_sound: @ 80B39BC
 	push {lr}
 	ldr r0, =gSpecialVar_0x8006
 	ldrb r0, [r0]
-	ldr r1, =CB2_ReturnToFieldContinueScript
+	ldr r1, =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl sub_80C4E74
 	pop {r0}
 	bx r0

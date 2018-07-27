@@ -108,10 +108,10 @@ struct TrainerMonItemCustomMoves
 
 union TrainerMonPtr
 {
-    struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
-    struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
-    struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
-    struct TrainerMonItemCustomMoves *ItemCustomMoves;
+    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
+    const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
+    const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
+    const struct TrainerMonItemCustomMoves *ItemCustomMoves;
 };
 
 struct Trainer

@@ -459,8 +459,8 @@ Route119_Text_1F5D63: @ 81F5D63
 
 Route120_Text_1F5DCB: @ 81F5DCB
 	.string "ROUTE 120\n"
-	.string "{0x7B} FORTREE CITY$"
+	.string "{LEFT_ARROW} FORTREE CITY$"
 
 Route120_Text_1F5DE4: @ 81F5DE4
-	.string "{0x7C} ROUTE 121\n"
-	.string "{0x7B} ROUTE 120$"
+	.string "{RIGHT_ARROW} ROUTE 121\n"
+	.string "{LEFT_ARROW} ROUTE 120$"

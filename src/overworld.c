@@ -1689,14 +1689,14 @@ void CB2_ReturnToFieldWithOpenMenu(void)
     CB2_ReturnToField();
 }
 
-void sub_80861B0(void)
+void CB2_ReturnToFieldContinueScript(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_80AF188;
     CB2_ReturnToField();
 }
 
-void CB2_ReturnToFieldContinueScript(void)
+void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_80AF168;

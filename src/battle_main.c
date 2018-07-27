@@ -830,7 +830,7 @@ static void SetAllPlayersBerryData(void)
             for (i = 0; i < numPlayers; i++)
             {
                 src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
-                battlerId = gLinkPlayers[i].lp_field_18;
+                battlerId = gLinkPlayers[i].id;
 
                 for (j = 0; j < BERRY_NAME_COUNT - 1; j++)
                     gEnigmaBerries[battlerId].name[j] = src->name[j];
@@ -967,8 +967,8 @@ static void CB2_HandleStartBattle(void)
 
                     if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
                     {
-                        gLinkPlayers[0].lp_field_18 = 0;
-                        gLinkPlayers[1].lp_field_18 = 1;
+                        gLinkPlayers[0].id = 0;
+                        gLinkPlayers[1].id = 1;
                     }
 
                     SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->field_180, 32);
@@ -1155,10 +1155,10 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             {
                 u8 language;
 
-                gLinkPlayers[0].lp_field_18 = 0;
-                gLinkPlayers[1].lp_field_18 = 2;
-                gLinkPlayers[2].lp_field_18 = 1;
-                gLinkPlayers[3].lp_field_18 = 3;
+                gLinkPlayers[0].id = 0;
+                gLinkPlayers[1].id = 2;
+                gLinkPlayers[2].id = 1;
+                gLinkPlayers[3].id = 3;
                 GetFrontierTrainerName(gLinkPlayers[2].name, gTrainerBattleOpponent_A);
                 GetFrontierTrainerName(gLinkPlayers[3].name, gTrainerBattleOpponent_B);
                 sub_8165B88(&language, gTrainerBattleOpponent_A);
@@ -1216,7 +1216,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             ResetBlockReceivedFlags();
-            if (gLinkPlayers[playerMultiplayerId].lp_field_18 != 0)
+            if (gLinkPlayers[playerMultiplayerId].id != 0)
             {
                 memcpy(gPlayerParty, gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
                 memcpy(gPlayerParty + 3, gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon) * 2);
@@ -1240,7 +1240,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             ResetBlockReceivedFlags();
-            if (gLinkPlayers[playerMultiplayerId].lp_field_18 != 0)
+            if (gLinkPlayers[playerMultiplayerId].id != 0)
             {
                 memcpy(gPlayerParty + 2, gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon));
                 memcpy(gPlayerParty + 5, gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon));
@@ -1431,8 +1431,8 @@ static void CB2_PreInitMultiBattle(void)
 
                 if (numPlayers == 4)
                 {
-                    if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[playerMultiplierId].lp_field_18 & 1))
-                        || (gLinkPlayers[i].lp_field_18 & 1 && gLinkPlayers[playerMultiplierId].lp_field_18 & 1))
+                    if ((!(gLinkPlayers[i].id & 1) && !(gLinkPlayers[playerMultiplierId].id & 1))
+                        || (gLinkPlayers[i].id & 1 && gLinkPlayers[playerMultiplierId].id & 1))
                     {
                         memcpy(gUnknown_02022FF8, gBlockRecvBuffer[i], sizeof(struct UnknownPokemonStruct4) * 3);
                     }
@@ -1592,7 +1592,7 @@ static void CB2_HandleStartMultiBattle(void)
             for (id = 0; id < MAX_LINK_PLAYERS; id++)
             {
                 sub_8185F90(gBlockRecvBuffer[id][1]);
-                switch (gLinkPlayers[id].lp_field_18)
+                switch (gLinkPlayers[id].id)
                 {
                 case 0:
                     gTasks[var].data[3] |= gBlockRecvBuffer[id][1] & 0x3F;
@@ -1629,7 +1629,7 @@ static void CB2_HandleStartMultiBattle(void)
             {
                 if (id == playerMultiplayerId)
                 {
-                    switch (gLinkPlayers[id].lp_field_18)
+                    switch (gLinkPlayers[id].id)
                     {
                     case 0:
                     case 3:
@@ -1643,10 +1643,10 @@ static void CB2_HandleStartMultiBattle(void)
                 }
                 else
                 {
-                    if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerMultiplayerId].lp_field_18 & 1))
-                     || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerMultiplayerId].lp_field_18 & 1)))
+                    if ((!(gLinkPlayers[id].id & 1) && !(gLinkPlayers[playerMultiplayerId].id & 1))
+                     || ((gLinkPlayers[id].id & 1) && (gLinkPlayers[playerMultiplayerId].id & 1)))
                     {
-                        switch (gLinkPlayers[id].lp_field_18)
+                        switch (gLinkPlayers[id].id)
                         {
                         case 0:
                         case 3:
@@ -1660,7 +1660,7 @@ static void CB2_HandleStartMultiBattle(void)
                     }
                     else
                     {
-                        switch (gLinkPlayers[id].lp_field_18)
+                        switch (gLinkPlayers[id].id)
                         {
                         case 0:
                         case 3:
@@ -1692,7 +1692,7 @@ static void CB2_HandleStartMultiBattle(void)
             {
                 if (id == playerMultiplayerId)
                 {
-                    switch (gLinkPlayers[id].lp_field_18)
+                    switch (gLinkPlayers[id].id)
                     {
                     case 0:
                     case 3:
@@ -1706,10 +1706,10 @@ static void CB2_HandleStartMultiBattle(void)
                 }
                 else
                 {
-                    if ((!(gLinkPlayers[id].lp_field_18 & 1) && !(gLinkPlayers[playerMultiplayerId].lp_field_18 & 1))
-                     || ((gLinkPlayers[id].lp_field_18 & 1) && (gLinkPlayers[playerMultiplayerId].lp_field_18 & 1)))
+                    if ((!(gLinkPlayers[id].id & 1) && !(gLinkPlayers[playerMultiplayerId].id & 1))
+                     || ((gLinkPlayers[id].id & 1) && (gLinkPlayers[playerMultiplayerId].id & 1)))
                     {
-                        switch (gLinkPlayers[id].lp_field_18)
+                        switch (gLinkPlayers[id].id)
                         {
                         case 0:
                         case 3:
@@ -1723,7 +1723,7 @@ static void CB2_HandleStartMultiBattle(void)
                     }
                     else
                     {
-                        switch (gLinkPlayers[id].lp_field_18)
+                        switch (gLinkPlayers[id].id)
                         {
                         case 0:
                         case 3:
@@ -2097,7 +2097,7 @@ static void sub_8038B94(u8 taskId)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        switch (gLinkPlayers[r2].lp_field_18)
+        switch (gLinkPlayers[r2].id)
         {
         case 0:
         case 2:
