@@ -2587,6 +2587,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             gBattlerAttacker = battler;
             switch (gLastUsedAbility)
             {
+            case ABILITY_HARVEST:
+                if (((WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY) || Random() % 2 == 0)
+                 && gBattleMons[battler].item == ITEM_NONE
+                 && gBattleStruct->changedItems[battler] == ITEM_NONE
+                 && ItemId_GetPocket(gBattleStruct->usedHeldItems[battler]) == POCKET_BERRIES)
+                {
+                    gLastUsedItem = gBattleStruct->changedItems[battler] = gBattleStruct->usedHeldItems[battler];
+                    gBattleStruct->usedHeldItems[battler] = ITEM_NONE;
+                    BattleScriptPushCursorAndCallback(BattleScript_HarvestActivates);
+                    effect++;
+                }
+                break;
             case ABILITY_RAIN_DISH:
                 if (WEATHER_HAS_EFFECT
                  && (gBattleWeather & WEATHER_RAIN_ANY)

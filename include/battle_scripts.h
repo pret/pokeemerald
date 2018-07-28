@@ -323,5 +323,6 @@ extern const u8 BattleScript_MummyActivates[];
 extern const u8 BattleScript_WeakArmorActivates[];
 extern const u8 BattleScript_FellStingerRaisesStat[];
 extern const u8 BattleScript_SnowWarningActivates[];
+extern const u8 BattleScript_HarvestActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

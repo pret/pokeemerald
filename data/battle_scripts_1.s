@@ -4528,6 +4528,12 @@ BattleScript_RainDishActivates::
 	datahpupdate BS_ATTACKER
 	end3
 	
+BattleScript_HarvestActivates::
+	pause 0x5
+	printstring STRINGID_HARVESTBERRY
+	waitmessage 0x40
+	end3
+	
 BattleScript_SolarPowerActivates::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate BS_ATTACKER
