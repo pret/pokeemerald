@@ -4324,6 +4324,7 @@ static void atk49_moveend(void)
             break;
         case 17: // Clear bits active just while using a move.
             gProtectStructs[gBattlerAttacker].usesBouncedMove = 0;
+            gBattleStruct->ateBoost[gBattlerAttacker] = 0;
             gBattleScripting.atk49_state++;
             break;
         case ATK49_LAST_CASE:

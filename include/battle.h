@@ -593,6 +593,7 @@ struct BattleStruct
     u8 presentBasePower;
     u8 roostTypes[MAX_BATTLERS_COUNT][3];
     u8 savedBattlerTarget;
+    bool8 ateBoost[MAX_BATTLERS_COUNT];
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

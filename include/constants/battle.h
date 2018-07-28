@@ -216,6 +216,7 @@
 #define STATUS_FIELD_MISTY_TERRAIN      0x80
 #define STATUS_FIELD_ELECTRIC_TERRAIN   0x100
 #define STATUS_FIELD_PSYCHIC_TERRAIN    0x200
+#define STATUS_FIELD_ION_DELUGE         0x400
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED             (1 << 0)

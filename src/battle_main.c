@@ -5295,6 +5295,8 @@ static void HandleAction_UseMove(void)
 {
     u8 side;
     u8 var = 4;
+    u32 attackerAbility;
+    u32 ateType;
 
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
 
@@ -5509,6 +5511,34 @@ static void HandleAction_UseMove(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         sub_81A56E8(gBattlerAttacker);
+
+    attackerAbility = GetBattlerAbility(gBattlerAttacker);
+    // Set move type.
+    if (gFieldStatuses & STATUS_FIELD_ION_DELUGE) // All moves become Electric-type this turn.
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | TYPE_ELECTRIC;
+    }
+    else if (gBattleMoves[gChosenMove].type == TYPE_NORMAL
+             && gBattleMoves[gChosenMove].effect != EFFECT_HIDDEN_POWER
+             && gBattleMoves[gChosenMove].effect != EFFECT_WEATHER_BALL
+             && ((attackerAbility == ABILITY_PIXILATE && (ateType = TYPE_FAIRY))
+                 || (attackerAbility == ABILITY_REFRIGERATE && (ateType = TYPE_ICE))
+                 || (attackerAbility == ABILITY_AERILATE && (ateType = TYPE_FLYING))
+                 || ((attackerAbility == ABILITY_GALVANIZE) && (ateType = TYPE_ELECTRIC))
+                )
+             )
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | ateType;
+        gBattleStruct->ateBoost[gBattlerAttacker] = 1;
+    }
+    else if (gBattleMoves[gChosenMove].type != TYPE_NORMAL
+             && gBattleMoves[gChosenMove].effect != EFFECT_HIDDEN_POWER
+             && gBattleMoves[gChosenMove].effect != EFFECT_WEATHER_BALL
+             && attackerAbility == ABILITY_NORMALIZE)
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | TYPE_NORMAL;
+        gBattleStruct->ateBoost[gBattlerAttacker] = 1;
+    }
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
