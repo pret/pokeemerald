@@ -401,7 +401,7 @@
 	.byte \param1
 	.endm
 
-	.macro typecalc2
+	.macro nop_4A
 	.byte 0x4a
 	.endm
 

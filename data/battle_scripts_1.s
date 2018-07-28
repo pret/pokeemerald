@@ -1650,7 +1650,8 @@ BattleScript_EffectCounter::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
-	typecalc2
+	typecalc
+	bichalfword gMoveResultFlags, MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
@@ -2028,7 +2029,7 @@ BattleScript_EffectRollout::
 BattleScript_RolloutCheckAccuracy::
 	accuracycheck BattleScript_RolloutHit, ACC_CURR_MOVE
 BattleScript_RolloutHit::
-	typecalc2
+	typecalc
 	handlerollout
 	goto BattleScript_HitFromCritCalc
 
@@ -2223,7 +2224,8 @@ BattleScript_EffectMirrorCoat::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
-	typecalc2
+	typecalc
+	bichalfword gMoveResultFlags, MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
@@ -2826,7 +2828,7 @@ BattleScript_BrickBreakAnim::
 	printstring STRINGID_THEWALLSHATTERED
 	waitmessage 0x40
 BattleScript_BrickBreakDoHit::
-	typecalc2
+	typecalc
 	effectivenesssound
 	hitanimation BS_TARGET
 	waitstate
