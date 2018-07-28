@@ -625,6 +625,7 @@ static const u8 sText_LunarDanceCameTrue[] = _("{B_ATK_NAME_WITH_PREFIX} became 
 static const u8 sText_CursedBodyDisabled[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_BUFF1} was disabled\nby {B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}!");
 static const u8 sText_AttackerAquiredAbility[] = _("{B_ATK_NAME_WITH_PREFIX} acquired {B_LAST_ABILITY}!");
 static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_BUFF1}\nwon’t go higher!");
+static const u8 sText_PkmnMoveBouncedViaAbility[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_CURRENT_MOVE} was\nbounced back by {B_DEF_NAME_WITH_PREFIX}’s\l{B_DEF_ABILITY}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1101,6 +1102,12 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_AttackerAquiredAbility,
     sText_TargetAbilityLoweredStat,
     sText_TargetStatWontGoHigher,
+    sText_PkmnMoveBouncedViaAbility,
+};
+
+const u16 gMagicCoatBounceStringIds[] =
+{
+    STRINGID_PKMNMOVEBOUNCED, STRINGID_PKMNMOVEBOUNCEDABILITY
 };
 
 const u16 gHealingWishStringIds[] =

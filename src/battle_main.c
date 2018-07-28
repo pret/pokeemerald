@@ -52,7 +52,7 @@
 #include "international_string_util.h"
 #include "pokeball.h"
 #include "party_menu.h"
-#include "constants\battle_config.h"
+#include "constants/battle_config.h"
 
 struct UnknownPokemonStruct4
 {

@@ -968,10 +968,25 @@ static void atk00_attackcanceler(void)
 
     gHitMarker |= HITMARKER_OBEYS;
 
-    if (gProtectStructs[gBattlerTarget].bounceMove && gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED)
+    if (gProtectStructs[gBattlerTarget].bounceMove
+        && gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED
+        && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
     {
         PressurePPLose(gBattlerAttacker, gBattlerTarget, MOVE_MAGIC_COAT);
         gProtectStructs[gBattlerTarget].bounceMove = 0;
+        gProtectStructs[gBattlerTarget].usesBouncedMove = 1;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
+        return;
+    }
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE
+             && gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED
+             && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
+    {
+        RecordAbilityBattle(gBattlerTarget, ABILITY_MAGIC_BOUNCE);
+        gProtectStructs[gBattlerTarget].usesBouncedMove = 1;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
         return;
@@ -4031,7 +4046,7 @@ static void atk48_playstatchangeanimation(void)
     }
 }
 
-#define ATK49_LAST_CASE 17
+#define ATK49_LAST_CASE 18
 
 static void atk49_moveend(void)
 {
@@ -4305,6 +4320,10 @@ static void atk49_moveend(void)
                     gHitMarker |= HITMARKER_NO_ATTACKSTRING;
                 }
             }
+            gBattleScripting.atk49_state++;
+            break;
+        case 17: // Clear bits active just while using a move.
+            gProtectStructs[gBattlerAttacker].usesBouncedMove = 0;
             gBattleScripting.atk49_state++;
             break;
         case ATK49_LAST_CASE:

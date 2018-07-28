@@ -4163,7 +4163,7 @@ BattleScript_MagicCoatBounce::
 	attackstring
 	ppreduce
 	pause 0x20
-	printstring STRINGID_PKMNMOVEBOUNCED
+	printfromtable gMagicCoatBounceStringIds
 	waitmessage 0x40
 	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_x800000
 	setmagiccoattarget BS_ATTACKER
