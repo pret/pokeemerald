@@ -3329,51 +3329,41 @@ enum
     ITEM_STATS_CHANGE, // 5
 };
 
+// second argument is 1/X of current hp compared to max hp
+static bool32 HasEnoughHpToEatBerry(u8 battlerId, u32 hpFraction)
+{
+    if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / hpFraction)
+    {
+        return TRUE;
+    }
+    else if (hpFraction <= 4 && GetBattlerAbility(battlerId) == ABILITY_GLUTTONY
+             && gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2)
+    {
+        RecordAbilityBattle(battlerId, ABILITY_GLUTTONY);
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 {
     int i = 0;
     u8 effect = ITEM_NO_EFFECT;
     u8 changedPP = 0;
-    u8 battlerHoldEffect, atkHoldEffect, defHoldEffect;
-    u8 battlerHoldEffectParam, atkHoldEffectParam, defHoldEffectParam;
-    u16 atkItem, defItem;
+    u8 battlerHoldEffect, atkHoldEffect;
+    u8 battlerHoldEffectParam, atkHoldEffectParam;
+    u16 atkItem;
 
     gLastUsedItem = gBattleMons[battlerId].item;
-    if (gLastUsedItem == ITEM_ENIGMA_BERRY)
-    {
-        battlerHoldEffect = gEnigmaBerries[battlerId].holdEffect;
-        battlerHoldEffectParam = gEnigmaBerries[battlerId].holdEffectParam;
-    }
-    else
-    {
-        battlerHoldEffect = ItemId_GetHoldEffect(gLastUsedItem);
-        battlerHoldEffectParam = ItemId_GetHoldEffectParam(gLastUsedItem);
-    }
+    battlerHoldEffect = GetBattlerHoldEffect(battlerId, TRUE);
+    battlerHoldEffectParam = GetBattlerHoldEffectParam(battlerId);
 
     atkItem = gBattleMons[gBattlerAttacker].item;
-    if (atkItem == ITEM_ENIGMA_BERRY)
-    {
-        atkHoldEffect = gEnigmaBerries[gBattlerAttacker].holdEffect;
-        atkHoldEffectParam = gEnigmaBerries[gBattlerAttacker].holdEffectParam;
-    }
-    else
-    {
-        atkHoldEffect = ItemId_GetHoldEffect(atkItem);
-        atkHoldEffectParam = ItemId_GetHoldEffectParam(atkItem);
-    }
-
-    // def variables are unused
-    defItem = gBattleMons[gBattlerTarget].item;
-    if (defItem == ITEM_ENIGMA_BERRY)
-    {
-        defHoldEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
-        defHoldEffectParam = gEnigmaBerries[gBattlerTarget].holdEffectParam;
-    }
-    else
-    {
-        defHoldEffect = ItemId_GetHoldEffect(defItem);
-        defHoldEffectParam = ItemId_GetHoldEffectParam(defItem);
-    }
+    atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+    atkHoldEffectParam = GetBattlerHoldEffectParam(gBattlerAttacker);
 
     switch (caseID)
     {
@@ -3409,7 +3399,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             switch (battlerHoldEffect)
             {
             case HOLD_EFFECT_RESTORE_HP:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2 && !moveTurn)
+                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
                 {
                     gBattleMoveDamage = battlerHoldEffectParam;
                     if (gBattleMons[battlerId].hp + battlerHoldEffectParam > gBattleMons[battlerId].maxHP)
@@ -3488,7 +3478,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 break;
             // nice copy/paste there gamefreak, making a function for confuse berries was too much eh?
             case HOLD_EFFECT_CONFUSE_SPICY:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2 && !moveTurn)
+                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
                 {
                     PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SPICY);
 
@@ -3506,7 +3496,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_CONFUSE_DRY:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2 && !moveTurn)
+                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
                 {
                     PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_DRY);
 
@@ -3524,7 +3514,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_CONFUSE_SWEET:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2 && !moveTurn)
+                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
                 {
                     PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SWEET);
 
@@ -3542,7 +3532,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_CONFUSE_BITTER:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2 && !moveTurn)
+                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
                 {
                     PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_BITTER);
 
@@ -3560,7 +3550,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_CONFUSE_SOUR:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2 && !moveTurn)
+                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
                 {
                     PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SOUR);
 
@@ -3579,7 +3569,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 break;
             // copy/paste again, smh
             case HOLD_EFFECT_ATTACK_UP:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam && !moveTurn && gBattleMons[battlerId].statStages[STAT_ATK] < 0xC)
+                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_ATK] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
                 {
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
@@ -3593,7 +3583,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_DEFENSE_UP:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam && !moveTurn && gBattleMons[battlerId].statStages[STAT_DEF] < 0xC)
+                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_DEF] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
                 {
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_DEF);
 
@@ -3606,7 +3596,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_SPEED_UP:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam && !moveTurn && gBattleMons[battlerId].statStages[STAT_SPEED] < 0xC)
+                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_SPEED] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
                 {
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPEED);
 
@@ -3619,7 +3609,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_SP_ATTACK_UP:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam && !moveTurn && gBattleMons[battlerId].statStages[STAT_SPATK] < 0xC)
+                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_SPATK] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
                 {
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPATK);
 
@@ -3632,7 +3622,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_SP_DEFENSE_UP:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam && !moveTurn && gBattleMons[battlerId].statStages[STAT_SPDEF] < 0xC)
+                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_SPDEF] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
                 {
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPDEF);
 
@@ -3645,7 +3635,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_CRITICAL_UP:
-                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam && !moveTurn && !(gBattleMons[battlerId].status2 & STATUS2_FOCUS_ENERGY))
+                if (!moveTurn && !(gBattleMons[battlerId].status2 & STATUS2_FOCUS_ENERGY) && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
                 {
                     gBattleMons[battlerId].status2 |= STATUS2_FOCUS_ENERGY;
                     BattleScriptExecute(BattleScript_BerryFocusEnergyEnd2);
@@ -3653,14 +3643,14 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_RANDOM_STAT_UP:
-                if (!moveTurn && gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam)
+                if (!moveTurn)
                 {
                     for (i = 0; i < 5; i++)
                     {
                         if (gBattleMons[battlerId].statStages[STAT_ATK + i] < 0xC)
                             break;
                     }
-                    if (i != 5)
+                    if (i != 5 && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
                     {
                         do
                         {
@@ -3817,16 +3807,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         for (battlerId = 0; battlerId < gBattlersCount; battlerId++)
         {
             gLastUsedItem = gBattleMons[battlerId].item;
-            if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
-            {
-                battlerHoldEffect = gEnigmaBerries[battlerId].holdEffect;
-                battlerHoldEffectParam = gEnigmaBerries[battlerId].holdEffectParam;
-            }
-            else
-            {
-                battlerHoldEffect = ItemId_GetHoldEffect(gLastUsedItem);
-                battlerHoldEffectParam = ItemId_GetHoldEffectParam(gLastUsedItem);
-            }
+            battlerHoldEffect = GetBattlerHoldEffect(battlerId, TRUE);
+            battlerHoldEffectParam = GetBattlerHoldEffectParam(battlerId);
             switch (battlerHoldEffect)
             {
             case HOLD_EFFECT_CURE_PAR:
@@ -3946,7 +3928,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     gPotentialItemEffectBattler = battlerId;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_WhiteHerbRet;
-                    return effect; // unnecessary return
+                    return effect;
                 }
                 break;
             }
