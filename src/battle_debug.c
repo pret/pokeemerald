@@ -1264,11 +1264,13 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         {
             data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].hp;
             data->modifyArrows.currValue = gBattleMons[data->battlerId].hp;
+            data->modifyArrows.minValue = 1;
             data->modifyArrows.maxValue = gBattleMons[data->battlerId].maxHP;
         }
         else if (data->currentSecondaryListItemId == 1)
         {
             data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].maxHP;
+            data->modifyArrows.minValue = gBattleMons[data->battlerId].hp;
             data->modifyArrows.currValue = gBattleMons[data->battlerId].maxHP;
         }
         else
