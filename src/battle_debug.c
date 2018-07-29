@@ -85,6 +85,7 @@ enum
     LIST_ITEM_STATUS3,
     LIST_ITEM_SIDE_STATUS,
     LIST_ITEM_AI,
+    LIST_ITEM_VARIOUS,
     LIST_ITEM_COUNT
 };
 
@@ -103,7 +104,8 @@ enum
     VAL_BITFIELD_8,
     VAL_BITFIELD_16,
     VAL_BITFIELD_32,
-    VAR_SIDE_STATUS
+    VAR_SIDE_STATUS,
+    VAR_SHOW_HP,
 };
 
 enum
@@ -119,6 +121,11 @@ enum
     LIST_SIDE_STEALTH_ROCK,
     LIST_SIDE_TOXIC_SPIKES,
     LIST_SIDE_STICKY_WEB,
+};
+
+enum
+{
+    VARIOUS_SHOW_HP,
 };
 
 // const rom data
@@ -186,6 +193,8 @@ static const u8 sText_TryFaint[] = _("Try Faint");
 static const u8 sText_SetUpFirstTurn[] = _("Setup 1 turn");
 static const u8 sText_Risky[] = _("Risky");
 static const u8 sText_StrongestMove[] = _("Most dmg move");
+static const u8 sText_Various[] = _("Various");
+static const u8 sText_ShowHP[] = _("Show HP");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -277,6 +286,12 @@ static const struct ListMenuItem sMainListItems[] =
     {sText_Status3, LIST_ITEM_STATUS3},
     {sText_SideStatus, LIST_ITEM_SIDE_STATUS},
     {sText_AI, LIST_ITEM_AI},
+    {sText_Various, LIST_ITEM_VARIOUS},
+};
+
+static const struct ListMenuItem sVariousListItems[] =
+{
+    {sText_ShowHP, VARIOUS_SHOW_HP},
 };
 
 static const struct ListMenuItem sAIListItems[] =
@@ -852,6 +867,10 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
         itemsCount = ARRAY_COUNT(sAIListItems);
         data->bitfield = sAIBitfield;
         break;
+    case LIST_ITEM_VARIOUS:
+        listTemplate.items = sVariousListItems;
+        itemsCount = ARRAY_COUNT(sVariousListItems);
+        break;
     case LIST_ITEM_SIDE_STATUS:
         listTemplate.items = sSideStatusListItems;
         itemsCount = ARRAY_COUNT(sSideStatusListItems);
@@ -1023,6 +1042,9 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
         break;
     case VAR_SIDE_STATUS:
         *GetSideStatusValue(data, TRUE, data->modifyArrows.currValue != 0) = data->modifyArrows.currValue;
+        break;
+    case VAR_SHOW_HP:
+        (*(struct BattleSpriteInfo*)(data->modifyArrows.modifiedValPtr)).hpNumbersNoBars = data->modifyArrows.currValue;
         break;
     }
     data->battlerWasChanged[data->battlerId] = TRUE;
@@ -1263,6 +1285,17 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + STAT_ATK];
         data->modifyArrows.typeOfVal = VAL_U8;
         data->modifyArrows.currValue = gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + STAT_ATK];
+        break;
+    case LIST_ITEM_VARIOUS:
+        if (data->currentSecondaryListItemId == VARIOUS_SHOW_HP)
+        {
+            data->modifyArrows.minValue = 0;
+            data->modifyArrows.maxValue = 1;
+            data->modifyArrows.maxDigits = 1;
+            data->modifyArrows.modifiedValPtr = &gBattleSpritesDataPtr->battlerData[data->battlerId];
+            data->modifyArrows.typeOfVal = VAR_SHOW_HP;
+            data->modifyArrows.currValue = gBattleSpritesDataPtr->battlerData[data->battlerId].hpNumbersNoBars;
+        }
         break;
     case LIST_ITEM_STATUS1:
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].status1;
