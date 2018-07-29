@@ -4312,7 +4312,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HAMMER_ARM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPEED_DOWN,
 		.power = 100,
 		.type = TYPE_FIGHTING,
 		.accuracy = 90,
@@ -4372,7 +4372,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FEINT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 30,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -4384,7 +4384,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_PLUCK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Bug Bite and Pluck should have the same move effect)
 		.power = 60,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
@@ -4408,7 +4408,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ACUPRESSURE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -4420,7 +4420,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_METAL_BURST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Counters 1.5x damage)
 		.power = 0,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -4444,7 +4444,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CLOSE_COMBAT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 120,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -4504,7 +4504,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_PSYCHO_SHIFT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -4528,7 +4528,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_HEAL_BLOCK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -4552,7 +4552,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_POWER_TRICK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -4576,7 +4576,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_LUCKY_CHANT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -4588,7 +4588,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ME_FIRST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -4600,7 +4600,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_COPYCAT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -4648,7 +4648,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_LAST_RESORT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 140,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -4672,7 +4672,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SUCKER_PUNCH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 70,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4732,7 +4732,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_FLARE_BLITZ
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 120,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -4744,7 +4744,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FORCE_PALM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PARALYZE_HIT,
 		.power = 60,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -4756,7 +4756,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_AURA_SPHERE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ALWAYS_HIT,
 		.power = 80,
 		.type = TYPE_FIGHTING,
 		.accuracy = 0,
@@ -4768,7 +4768,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ROCK_POLISH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPEED_UP_2,
 		.power = 0,
 		.type = TYPE_ROCK,
 		.accuracy = 0,
@@ -4780,7 +4780,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_POISON_JAB
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_POISON_HIT,
 		.power = 80,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -4792,7 +4792,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DARK_PULSE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FLINCH_HIT,
 		.power = 80,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4804,7 +4804,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_NIGHT_SLASH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 70,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4816,7 +4816,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_AQUA_TAIL
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 90,
 		.type = TYPE_WATER,
 		.accuracy = 90,
@@ -4828,7 +4828,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SEED_BOMB
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 80,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -4840,7 +4840,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_AIR_SLASH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FLINCH_HIT,
 		.power = 75,
 		.type = TYPE_FLYING,
 		.accuracy = 95,
@@ -4852,7 +4852,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_X_SCISSOR
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 80,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -4864,7 +4864,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_BUG_BUZZ
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
 		.power = 90,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -4876,7 +4876,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DRAGON_PULSE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 85,
 		.type = TYPE_DRAGON,
 		.accuracy = 100,
@@ -4888,7 +4888,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DRAGON_RUSH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FLINCH_HIT,
 		.power = 100,
 		.type = TYPE_DRAGON,
 		.accuracy = 75,
@@ -4900,7 +4900,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_POWER_GEM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 80,
 		.type = TYPE_ROCK,
 		.accuracy = 100,
@@ -4912,7 +4912,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DRAIN_PUNCH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ABSORB,
 		.power = 75,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -4924,7 +4924,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_VACUUM_WAVE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 40,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -4936,7 +4936,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FOCUS_BLAST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
 		.power = 120,
 		.type = TYPE_FIGHTING,
 		.accuracy = 70,
@@ -4948,7 +4948,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ENERGY_BALL
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
 		.power = 90,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -4960,7 +4960,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_BRAVE_BIRD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_DOUBLE_EDGE,
 		.power = 120,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
@@ -4972,7 +4972,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_EARTH_POWER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
 		.power = 90,
 		.type = TYPE_GROUND,
 		.accuracy = 100,
@@ -4984,7 +4984,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SWITCHEROO
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_TRICK,
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -4996,7 +4996,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GIGA_IMPACT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_RECHARGE,
 		.power = 150,
 		.type = TYPE_NORMAL,
 		.accuracy = 90,
@@ -5008,7 +5008,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_NASTY_PLOT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_UP_2,
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 0,
@@ -5020,7 +5020,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_BULLET_PUNCH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 40,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -5032,7 +5032,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_AVALANCHE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_REVENGE,
 		.power = 60,
 		.type = TYPE_ICE,
 		.accuracy = 100,
@@ -5044,7 +5044,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ICE_SHARD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 40,
 		.type = TYPE_ICE,
 		.accuracy = 100,
@@ -5056,7 +5056,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SHADOW_CLAW
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 70,
 		.type = TYPE_GHOST,
 		.accuracy = 100,
@@ -5068,7 +5068,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_THUNDER_FANG
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (10% paralyze AND 10% flinch)
 		.power = 65,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 95,
@@ -5080,7 +5080,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ICE_FANG
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (10% paralyze AND 10% flinch)
 		.power = 65,
 		.type = TYPE_ICE,
 		.accuracy = 95,
@@ -5092,7 +5092,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FIRE_FANG
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (10% paralyze AND 10% flinch)
 		.power = 65,
 		.type = TYPE_FIRE,
 		.accuracy = 95,
@@ -5104,7 +5104,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SHADOW_SNEAK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 40,
 		.type = TYPE_GHOST,
 		.accuracy = 100,
@@ -5116,7 +5116,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_MUD_BOMB
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ACCURACY_DOWN_HIT,
 		.power = 65,
 		.type = TYPE_GROUND,
 		.accuracy = 85,
@@ -5128,7 +5128,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_PSYCHO_CUT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 70,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -5140,7 +5140,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ZEN_HEADBUTT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FLINCH_HIT,
 		.power = 80,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 90,
@@ -5152,7 +5152,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_MIRROR_SHOT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ACCURACY_DOWN_HIT,
 		.power = 65,
 		.type = TYPE_STEEL,
 		.accuracy = 85,
@@ -5164,7 +5164,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FLASH_CANNON
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN,
 		.power = 80,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -5176,7 +5176,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ROCK_CLIMB
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_CONFUSE_HIT,
 		.power = 90,
 		.type = TYPE_NORMAL,
 		.accuracy = 85,
@@ -5188,7 +5188,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DEFOG
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FLYING,
 		.accuracy = 0,
@@ -5212,7 +5212,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DRACO_METEOR
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_DOWN_2, 
 		.power = 130,
 		.type = TYPE_DRAGON,
 		.accuracy = 90,
@@ -5224,7 +5224,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DISCHARGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PARALYZE_HIT,
 		.power = 80,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -5236,7 +5236,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_LAVA_PLUME
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_BURN_HIT,
 		.power = 80,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -5248,7 +5248,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_LEAF_STORM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_DOWN_2,
 		.power = 130,
 		.type = TYPE_GRASS,
 		.accuracy = 90,
@@ -5260,7 +5260,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_POWER_WHIP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 120,
 		.type = TYPE_GRASS,
 		.accuracy = 85,
@@ -5272,7 +5272,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ROCK_WRECKER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_RECHARGE,
 		.power = 150,
 		.type = TYPE_ROCK,
 		.accuracy = 90,
@@ -5284,7 +5284,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CROSS_POISON
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_POISON_HIT,
 		.power = 70,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -5296,7 +5296,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_GUNK_SHOT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_POISON_HIT,
 		.power = 120,
 		.type = TYPE_POISON,
 		.accuracy = 80,
@@ -5308,7 +5308,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_IRON_HEAD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FLINCH_HIT,
 		.power = 80,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -5320,7 +5320,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_MAGNET_BOMB
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ALWAYS_HIT,
 		.power = 60,
 		.type = TYPE_STEEL,
 		.accuracy = 0,
@@ -5332,7 +5332,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_STONE_EDGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 100,
 		.type = TYPE_ROCK,
 		.accuracy = 80,
@@ -5344,7 +5344,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CAPTIVATE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5368,7 +5368,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GRASS_KNOT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_LOW_KICK,
 		.power = 1,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -5380,7 +5380,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CHATTER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_CONFUSE_HIT,
 		.power = 65,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
@@ -5392,7 +5392,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_JUDGMENT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 100,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5404,7 +5404,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_BUG_BITE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Bug Bite and Pluck should have the same move effect)
 		.power = 60,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -5416,7 +5416,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CHARGE_BEAM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_UP,
 		.power = 50,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 90,
@@ -5428,7 +5428,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_WOOD_HAMMER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_RECOIL,
 		.power = 120,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -5440,7 +5440,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_AQUA_JET
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 40,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -5452,7 +5452,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ATTACK_ORDER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 90,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -5464,7 +5464,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DEFEND_ORDER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 0,
@@ -5476,7 +5476,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEAL_ORDER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_RESTORE_HP,
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 0,
@@ -5488,7 +5488,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEAD_SMASH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (1/2 recoil instead of 1/3 recoil)
 		.power = 150,
 		.type = TYPE_ROCK,
 		.accuracy = 80,
@@ -5500,7 +5500,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DOUBLE_HIT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_DOUBLE_HIT,
 		.power = 35,
 		.type = TYPE_NORMAL,
 		.accuracy = 90,
@@ -5512,7 +5512,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ROAR_OF_TIME
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_RECHARGE,
 		.power = 150,
 		.type = TYPE_DRAGON,
 		.accuracy = 90,
@@ -5524,7 +5524,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SPACIAL_REND
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 100,
 		.type = TYPE_DRAGON,
 		.accuracy = 95,
@@ -5548,7 +5548,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_CRUSH_GRIP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_WRING_OUT,
 		.power = 1,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5560,7 +5560,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_MAGMA_STORM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_TRAP,
 		.power = 100,
 		.type = TYPE_FIRE,
 		.accuracy = 75,
@@ -5572,7 +5572,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DARK_VOID
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SLEEP,
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 50,
@@ -5584,7 +5584,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SEED_FLARE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN_2,
 		.power = 120,
 		.type = TYPE_GRASS,
 		.accuracy = 85,
@@ -5596,7 +5596,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_OMINOUS_WIND
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ALL_STATS_UP_HIT,
 		.power = 60,
 		.type = TYPE_GHOST,
 		.accuracy = 100,
@@ -5620,7 +5620,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HONE_CLAWS
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 0,
@@ -5632,7 +5632,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_WIDE_GUARD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_ROCK,
 		.accuracy = 0,
@@ -5704,7 +5704,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_AUTOTOMIZE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (raises the user's Speed stat by two stages BUT also decreases the user's weight by 100kg)
 		.power = 0,
 		.type = TYPE_STEEL,
 		.accuracy = 0,
@@ -5716,7 +5716,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_RAGE_POWDER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FOLLOW_ME,
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 0,
@@ -5752,7 +5752,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SMACK_DOWN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 50,
 		.type = TYPE_ROCK,
 		.accuracy = 100,
@@ -5776,7 +5776,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FLAME_BURST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 70,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -5788,7 +5788,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SLUDGE_WAVE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_POISON_HIT,
 		.power = 95,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -5800,7 +5800,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_QUIVER_DANCE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 0,
@@ -5812,7 +5812,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEAVY_SLAM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 1,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -5824,7 +5824,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SYNCHRONOISE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 120,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -5848,7 +5848,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SOAK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -5860,7 +5860,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_FLAME_CHARGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPEED_UP,
 		.power = 50,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -5872,7 +5872,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_COIL
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_POISON,
 		.accuracy = 0,
@@ -5884,7 +5884,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_LOW_SWEEP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPEED_DOWN_HIT,
 		.power = 65,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -5896,7 +5896,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ACID_SPRAY
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 40,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -5920,7 +5920,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SIMPLE_BEAM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5932,7 +5932,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ENTRAINMENT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5944,7 +5944,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_AFTER_YOU
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -5956,7 +5956,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ROUND
-		.effect = EFFECT_ROUND,
+		.effect = EFFECT_ROUND, // Needs a custom move effect
 		.power = 60,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5980,7 +5980,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CHIP_AWAY
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 70,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5992,7 +5992,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CLEAR_SMOG
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Always bypasses accuracy, but same as Haze)
 		.power = 50,
 		.type = TYPE_POISON,
 		.accuracy = 0,
@@ -6016,7 +6016,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_QUICK_GUARD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FIGHTING,
 		.accuracy = 0,
@@ -6028,7 +6028,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ALLY_SWITCH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -6040,7 +6040,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SCALD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209,  // Needs a custom move effect (30% burn + always thaws ice even if it misses)
 		.power = 80,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -6052,7 +6052,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SHELL_SMASH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -6064,7 +6064,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEAL_PULSE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (always bypasses accuracy checks)
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -6088,7 +6088,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SKY_DROP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 60,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
@@ -6100,7 +6100,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SHIFT_GEAR
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_STEEL,
 		.accuracy = 0,
@@ -6112,7 +6112,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_CIRCLE_THROW
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (similar to whirlwind, but different)
 		.power = 60,
 		.type = TYPE_FIGHTING,
 		.accuracy = 90,
@@ -6124,7 +6124,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_INCINERATE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 60,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -6136,7 +6136,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_QUASH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -6160,7 +6160,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_REFLECT_TYPE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -6184,7 +6184,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FINAL_GAMBIT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 1,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -6196,7 +6196,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_BESTOW
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -6208,7 +6208,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_INFERNO
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_BURN_HIT,
 		.power = 100,
 		.type = TYPE_FIRE,
 		.accuracy = 50,
@@ -6220,7 +6220,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_WATER_PLEDGE
-		.effect = EFFECT_PLEDGE,
+		.effect = EFFECT_PLEDGE
 		.power = 80,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -6232,7 +6232,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FIRE_PLEDGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLEDGE
 		.power = 80,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -6244,7 +6244,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_GRASS_PLEDGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLEDGE
 		.power = 80,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -6268,7 +6268,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_STRUGGLE_BUG
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
 		.power = 50,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -6304,7 +6304,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DRAGON_TAIL
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 60,
 		.type = TYPE_DRAGON,
 		.accuracy = 90,
@@ -6316,7 +6316,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_WORK_UP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -6328,7 +6328,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ELECTROWEB
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPEED_DOWN_HIT,
 		.power = 55,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 95,
@@ -6340,7 +6340,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_WILD_CHARGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (recoil damage but 1/4 instead of 1/3)
 		.power = 90,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -6352,7 +6352,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DRILL_RUN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 80,
 		.type = TYPE_GROUND,
 		.accuracy = 95,
@@ -6364,7 +6364,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DUAL_CHOP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_DOUBLE_HIT,
 		.power = 40,
 		.type = TYPE_DRAGON,
 		.accuracy = 90,
@@ -6376,7 +6376,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HEART_STAMP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FLINCH_HIT,
 		.power = 60,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -6388,7 +6388,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HORN_LEECH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ABSORB,
 		.power = 75,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -6400,7 +6400,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SACRED_SWORD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 90,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -6412,7 +6412,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_RAZOR_SHELL
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_DEFENSE_DOWN_HIT,
 		.power = 75,
 		.type = TYPE_WATER,
 		.accuracy = 95,
@@ -6424,7 +6424,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HEAT_CRASH
-		.effect = EFFECT_HEAT_CRASH,
+		.effect = EFFECT_HEAT_CRASH, // Needs a custom move effect (maybe the same as heavy slam?)
 		.power = 1,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -6436,7 +6436,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_LEAF_TORNADO
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ACCURACY_DOWN_HIT,
 		.power = 65,
 		.type = TYPE_GRASS,
 		.accuracy = 90,
@@ -6448,7 +6448,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_STEAMROLLER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 65,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -6460,7 +6460,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_COTTON_GUARD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 0,
@@ -6472,7 +6472,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_NIGHT_DAZE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ACCURACY_DOWN_HIT,
 		.power = 85,
 		.type = TYPE_DARK,
 		.accuracy = 95,
@@ -6484,7 +6484,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_PSYSTRIKE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PSYSHOCK,
 		.power = 100,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -6496,7 +6496,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_TAIL_SLAP
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (different percentages for hitting compared to doubleslap)
 		.power = 25,
 		.type = TYPE_NORMAL,
 		.accuracy = 85,
@@ -6508,7 +6508,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HURRICANE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 110,
 		.type = TYPE_FLYING,
 		.accuracy = 70,
@@ -6520,7 +6520,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_HEAD_CHARGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (same as WILD_CHARGE)
 		.power = 120,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6532,7 +6532,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_GEAR_GRIND
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_DOUBLE_HIT,
 		.power = 50,
 		.type = TYPE_STEEL,
 		.accuracy = 85,
@@ -6544,7 +6544,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SEARING_SHOT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (30% burn, does not affect opponents with BULLETPROOF)
 		.power = 100,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -6556,7 +6556,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_TECHNO_BLAST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 120,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6568,7 +6568,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_RELIC_SONG
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SLEEP,
 		.power = 75,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6580,7 +6580,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SECRET_SWORD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PSYSHOCK,
 		.power = 85,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -6592,7 +6592,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_GLACIATE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPEED_DOWN_HIT,
 		.power = 65,
 		.type = TYPE_ICE,
 		.accuracy = 95,
@@ -6604,7 +6604,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_BOLT_STRIKE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PARALYZE_HIT,
 		.power = 130,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 85,
@@ -6616,7 +6616,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_BLUE_FLARE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_BURN_HIT,
 		.power = 130,
 		.type = TYPE_FIRE,
 		.accuracy = 85,
@@ -6628,7 +6628,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FIERY_DANCE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_UP,
 		.power = 80,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -6640,7 +6640,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FREEZE_SHOCK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 140,
 		.type = TYPE_ICE,
 		.accuracy = 90,
@@ -6652,7 +6652,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ICE_BURN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 140,
 		.type = TYPE_ICE,
 		.accuracy = 90,
@@ -6664,7 +6664,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SNARL
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
 		.power = 55,
 		.type = TYPE_DARK,
 		.accuracy = 95,
@@ -6676,7 +6676,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ICICLE_CRASH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FLINCH_HIT,
 		.power = 85,
 		.type = TYPE_ICE,
 		.accuracy = 90,
@@ -6688,7 +6688,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_V_CREATE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 180,
 		.type = TYPE_FIRE,
 		.accuracy = 95,
@@ -6700,7 +6700,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FUSION_FLARE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 100,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -6712,7 +6712,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FUSION_BOLT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 100,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -6724,7 +6724,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FLYING_PRESS
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 100,
 		.type = TYPE_FIGHTING,
 		.accuracy = 95,
@@ -6736,7 +6736,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_MAT_BLOCK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FIGHTING,
 		.accuracy = 0,
@@ -6748,7 +6748,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_BELCH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 120,
 		.type = TYPE_POISON,
 		.accuracy = 90,
@@ -6760,7 +6760,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ROTOTILLER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_GROUND,
 		.accuracy = 0,
@@ -6772,7 +6772,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_STICKY_WEB
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 0,
@@ -6808,7 +6808,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_TRICK_OR_TREAT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_GHOST,
 		.accuracy = 100,
@@ -6820,7 +6820,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_NOBLE_ROAR
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6832,7 +6832,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ION_DELUGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 0,
@@ -6844,7 +6844,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_PARABOLIC_CHARGE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ABSORB,
 		.power = 65,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -6856,7 +6856,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FOREST_S_CURSE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -6868,7 +6868,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_PETAL_BLIZZARD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 90,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -6880,7 +6880,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FREEZE_DRY
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 70,
 		.type = TYPE_ICE,
 		.accuracy = 100,
@@ -6892,7 +6892,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DISARMING_VOICE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 40,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -6904,7 +6904,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_PARTING_SHOT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -6916,7 +6916,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TOPSY_TURVY
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 0,
@@ -6928,7 +6928,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DRAINING_KISS
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (restores 75% HP instead of 50% HP)
 		.power = 50,
 		.type = TYPE_FAIRY,
 		.accuracy = 100,
@@ -6940,7 +6940,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CRAFTY_SHIELD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -6952,7 +6952,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_FLOWER_SHIELD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -6964,7 +6964,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GRASSY_TERRAIN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 0,
@@ -6976,7 +6976,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_MISTY_TERRAIN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -6988,7 +6988,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ELECTRIFY
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 0,
@@ -7000,7 +7000,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_PLAY_ROUGH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ATTACK_DOWN_HIT,
 		.power = 90,
 		.type = TYPE_FAIRY,
 		.accuracy = 90,
@@ -7012,7 +7012,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FAIRY_WIND
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 40,
 		.type = TYPE_FAIRY,
 		.accuracy = 100,
@@ -7024,7 +7024,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_MOONBLAST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
 		.power = 95,
 		.type = TYPE_FAIRY,
 		.accuracy = 100,
@@ -7036,7 +7036,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_BOOMBURST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Doesn't affect pokemon with SOUNDPROOF)
 		.power = 140,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -7048,7 +7048,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FAIRY_LOCK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -7060,7 +7060,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_KING_S_SHIELD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect, as it changes Aegislash's form
 		.power = 0,
 		.type = TYPE_STEEL,
 		.accuracy = 0,
@@ -7072,7 +7072,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_PLAY_NICE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -7084,7 +7084,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_CONFIDE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -7096,7 +7096,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DIAMOND_STORM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 100,
 		.type = TYPE_ROCK,
 		.accuracy = 95,
@@ -7108,7 +7108,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_STEAM_ERUPTION
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Same as SCALD)
 		.power = 110,
 		.type = TYPE_WATER,
 		.accuracy = 95,
@@ -7120,7 +7120,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_HYPERSPACE_HOLE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Same as SCALD)
 		.power = 80,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -7132,7 +7132,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_WATER_SHURIKEN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Same with tail slap, HOWEVER If Battle Bond is activated, Water Shuriken's power rises from 15 to 20, and it always hits three times, giving it an average power of 60)
 		.power = 15,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -7144,7 +7144,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_MYSTICAL_FIRE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
 		.power = 75,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -7156,7 +7156,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SPIKY_SHIELD
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 0,
@@ -7168,7 +7168,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_AROMATIC_MIST
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -7180,7 +7180,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_EERIE_IMPULSE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Lowers TARGET's (not user's) special attack by 2 stages)
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -7192,7 +7192,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_VENOM_DRENCH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -7204,7 +7204,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_POWDER
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -7216,7 +7216,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GEOMANCY
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -7228,7 +7228,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_MAGNETIC_FLUX
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 0,
@@ -7240,7 +7240,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HAPPY_HOUR
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -7252,7 +7252,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ELECTRIC_TERRAIN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 0,
@@ -7264,7 +7264,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DAZZLING_GLEAM
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 80,
 		.type = TYPE_FAIRY,
 		.accuracy = 100,
@@ -7276,7 +7276,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CELEBRATE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -7288,7 +7288,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HOLD_HANDS
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -7300,7 +7300,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_BABY_DOLL_EYES
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ATTACK_DOWN,
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 100,
@@ -7312,7 +7312,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_NUZZLE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PARALYZE_HIT,
 		.power = 20,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -7324,7 +7324,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_HOLD_BACK
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_FALSE_SWIPE,
 		.power = 40,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -7336,7 +7336,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_INFESTATION
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 20,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -7348,7 +7348,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_POWER_UP_PUNCH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_ATTACK_UP_HIT,
 		.power = 40,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -7360,7 +7360,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_OBLIVION_WING
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Restores 75% of damage dealt back to user)
 		.power = 80,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
@@ -7372,7 +7372,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_THOUSAND_ARROWS
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 90,
 		.type = TYPE_GROUND,
 		.accuracy = 100,
@@ -7384,7 +7384,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_THOUSAND_WAVES
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (not sure if this is like Mean Look lol, might be)
 		.power = 90,
 		.type = TYPE_GROUND,
 		.accuracy = 100,
@@ -7396,7 +7396,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_LAND_S_WRATH
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 90,
 		.type = TYPE_GROUND,
 		.accuracy = 100,
@@ -7408,7 +7408,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_LIGHT_OF_RUIN
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (same as HEAD_SMASH)
 		.power = 140,
 		.type = TYPE_FAIRY,
 		.accuracy = 90,
@@ -7420,7 +7420,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ORIGIN_PULSE
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 110,
 		.type = TYPE_WATER,
 		.accuracy = 85,
@@ -7432,7 +7432,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_PRECIPICE_BLADES
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_HIT,
 		.power = 120,
 		.type = TYPE_GROUND,
 		.accuracy = 85,
@@ -7444,7 +7444,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DRAGON_ASCENT
-		.effect = EFFECT_PLACEHOLDER_209,
+		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
 		.power = 120,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
