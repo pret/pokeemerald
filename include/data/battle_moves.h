@@ -5212,7 +5212,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DRACO_METEOR
-		.effect = EFFECT_SPECIAL_ATTACK_DOWN_2, 
+		.effect = EFFECT_OVERHEAT,
 		.power = 130,
 		.type = TYPE_DRAGON,
 		.accuracy = 90,
@@ -5248,7 +5248,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_LEAF_STORM
-		.effect = EFFECT_SPECIAL_ATTACK_DOWN_2,
+		.effect = EFFECT_OVERHEAT,
 		.power = 130,
 		.type = TYPE_GRASS,
 		.accuracy = 90,
@@ -5344,7 +5344,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CAPTIVATE
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
+		.effect = EFFECT_CAPTIVATE,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5980,7 +5980,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CHIP_AWAY
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
+		.effect = EFFECT_HIT
 		.power = 70,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5988,7 +5988,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_STAT_STAGES_IGNORED,
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CLEAR_SMOG
@@ -6400,7 +6400,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SACRED_SWORD
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
+		.effect = EFFECT_HIT,
 		.power = 90,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -6408,7 +6408,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_STAT_STAGES_IGNORED,
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_RAZOR_SHELL
@@ -7180,7 +7180,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_EERIE_IMPULSE
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Lowers TARGET's (not user's) special attack by 2 stages)
+		.effect = EFFECT_SPECIAL_ATTACK_DOWN_2,
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
