@@ -531,6 +531,7 @@ SECTIONS {
         src/fossil_specials.o(.rodata);
         src/fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
+        src/pokemon_summary_screen.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);

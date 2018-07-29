@@ -348,7 +348,101 @@ struct UnkSummaryStruct
     u8 unk40EF;
     s16 unk40F0;
     u8 unk_filler4[6];
+    u8 splitIconSpriteId;
 };
+
+#define SPLIT_ICONS_TAG 0xD00D
+
+static const u16 sSplitIconsPal[] = INCBIN_U16("graphics/misc/split_icons.gbapal");
+static const u8 sSplitIconsTiles[] = INCBIN_U8("graphics/misc/split_icons.4bpp");
+
+static const struct OamData sOamData_SplitIcons =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteSheet sSpriteSheet_SplitIcons =
+{
+    .data = sSplitIconsTiles,
+    .size = 400,
+    .tag = SPLIT_ICONS_TAG,
+};
+
+static const struct SpritePalette sSpritePal_SplitIcons =
+{
+    .data = sSplitIconsPal,
+    .tag = SPLIT_ICONS_TAG
+};
+
+static const union AnimCmd sSpriteAnim_SplitIcon0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_SplitIcon1[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_SplitIcon2[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_SplitIcons[] =
+{
+    sSpriteAnim_SplitIcon0,
+    sSpriteAnim_SplitIcon1,
+    sSpriteAnim_SplitIcon2,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_SplitIcons =
+{
+    .tileTag = SPLIT_ICONS_TAG,
+    .paletteTag = SPLIT_ICONS_TAG,
+    .oam = &sOamData_SplitIcons,
+    .anims = sSpriteAnimTable_SplitIcons,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static u8 ShowSplitIcon(u8 split)
+{
+    if (IndexOfSpritePaletteTag(SPLIT_ICONS_TAG) == 0xFF)
+        LoadSpritePalette(&sSpritePal_SplitIcons);
+    if (GetSpriteTileStartByTag(SPLIT_ICONS_TAG) == 0xFFFF)
+        LoadSpriteSheet(&sSpriteSheet_SplitIcons);
+    if (gUnknown_0203CF1C->splitIconSpriteId == 0xFF)
+        gUnknown_0203CF1C->splitIconSpriteId = CreateSprite(&sSpriteTemplate_SplitIcons, 48, 129, 0);
+
+    StartSpriteAnim(&gSprites[gUnknown_0203CF1C->splitIconSpriteId], split);
+    return gUnknown_0203CF1C->splitIconSpriteId;
+}
+
+static void DestroySplitIcon(void)
+{
+    FreeSpritePaletteByTag(SPLIT_ICONS_TAG);
+    FreeSpriteTilesByTag(SPLIT_ICONS_TAG);
+    if (gUnknown_0203CF1C->splitIconSpriteId != 0xFF)
+        DestroySprite(&gSprites[gUnknown_0203CF1C->splitIconSpriteId]);
+    gUnknown_0203CF1C->splitIconSpriteId = 0xFF;
+}
 
 void sub_81BF8EC(u8 a, void *b, u8 c, u8 d, void *e)
 {
@@ -359,6 +453,7 @@ void sub_81BF8EC(u8 a, void *b, u8 c, u8 d, void *e)
     gUnknown_0203CF1C->unk40BE = c;
     gUnknown_0203CF1C->unk40BF = d;
     gUnknown_0203CF1C->unk4 = e;
+    gUnknown_0203CF1C->splitIconSpriteId = 0xFF;
     if (a == 2)
         gUnknown_0203CF1C->unk40BD = 1;
     else
@@ -1255,6 +1350,7 @@ void sub_81C1070(s16 *a, s8 b, u8 *c)
     {
         ClearWindowTilemap(14);
         ClearWindowTilemap(15);
+        DestroySplitIcon();
         schedule_bg_copy_tilemap_to_vram(0);
         sub_81C1DA4(0, 3);
         sub_81C1EFC(0, 3, 0);
@@ -1279,6 +1375,7 @@ void sub_81C11F4(u8 taskId)
     {
         ClearWindowTilemap(14);
         ClearWindowTilemap(15);
+        DestroySplitIcon();
         sub_81C1DA4(0, 3);
         sub_81C1EFC(0, 3, 0);
     }
@@ -3522,6 +3619,7 @@ void sub_81C3C5C(u16 move)
     u8 *text;
     if (move != 0)
     {
+        ShowSplitIcon(gBattleMoves[move].split);
         FillWindowPixelRect(14, 0, 0x35, 0, 0x13, 0x20);
         if (gBattleMoves[move].power <= 1)
             text = gText_ThreeDashes;
