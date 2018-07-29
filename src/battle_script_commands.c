@@ -4479,16 +4479,16 @@ static void atk48_playstatchangeanimation(void)
         }
     }
 
-    if (gBattlescriptCurrInstr[3] & ATK48_BIT_x4 && changeableStatsCount < 2)
+    if (gBattlescriptCurrInstr[3] & ATK48_ONLY_MULTIPLE && changeableStatsCount < 2)
     {
         gBattlescriptCurrInstr += 4;
     }
-    else if (changeableStatsCount != 0 && gBattleScripting.field_1B == 0)
+    else if (changeableStatsCount != 0 && !gBattleScripting.statAnimPlayed)
     {
         BtlController_EmitBattleAnimation(0, B_ANIM_STATS_CHANGE, statAnimId);
         MarkBattlerForControllerExec(gActiveBattler);
-        if (gBattlescriptCurrInstr[3] & ATK48_BIT_x4 && changeableStatsCount > 1)
-            gBattleScripting.field_1B = 1;
+        if (gBattlescriptCurrInstr[3] & ATK48_ONLY_MULTIPLE && changeableStatsCount > 1)
+            gBattleScripting.statAnimPlayed = TRUE;
         gBattlescriptCurrInstr += 4;
     }
     else

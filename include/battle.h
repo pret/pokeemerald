@@ -592,7 +592,7 @@ struct BattleScripting
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
-    u8 field_1B;
+    bool8 statAnimPlayed;
     u8 atk23_state;
     u8 battleStyle;
     u8 atk6C_state;
