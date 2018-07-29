@@ -594,6 +594,8 @@ struct BattleStruct
     u8 roostTypes[MAX_BATTLERS_COUNT][3];
     u8 savedBattlerTarget;
     bool8 ateBoost[MAX_BATTLERS_COUNT];
+    u32 debugAIFlags;
+    bool8 notfirstTimeAIFlags;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

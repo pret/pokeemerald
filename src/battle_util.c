@@ -1215,6 +1215,7 @@ enum
 	ENDTURN_YAWN,
 	ENDTURN_ITEMS2,
 	ENDTURN_ROOST,
+	ENDTURN_ELECTRIFY,
 	ENDTURN_BATTLER_COUNT
 };
 
@@ -1656,6 +1657,10 @@ u8 DoBattlerEndTurnEffects(void)
                     gBattleMons[gActiveBattler].type1 = gBattleStruct->roostTypes[gActiveBattler][0];
                     gBattleMons[gActiveBattler].type2 = gBattleStruct->roostTypes[gActiveBattler][1];
                 }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_ELECTRIFY:
+                gStatuses3[gActiveBattler] &= ~(STATUS3_ELECTRIFIED);
                 gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_BATTLER_COUNT:  // done

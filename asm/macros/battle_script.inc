@@ -958,7 +958,7 @@
 	.4byte \param0
 	.endm
 
-	.macro hiddenpowercalc
+	.macro nop_C1
 	.byte 0xc1
 	.endm
 
@@ -1148,7 +1148,7 @@
 	.4byte \param0
 	.endm
 
-	.macro setweatherballtype
+	.macro nop_E9
 	.byte 0xe9
 	.endm
 

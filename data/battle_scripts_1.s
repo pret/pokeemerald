@@ -623,6 +623,8 @@ BattleScript_EffectRetalitate:
 BattleScript_EffectBulldoze:
 BattleScript_EffectFoulPlay:
 BattleScript_EffectPsyshock:
+BattleScript_EffectWeatherBall:
+BattleScript_EffectHiddenPower:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
@@ -2157,10 +2159,6 @@ BattleScript_EffectMoonlight::
 	recoverbasedonsunlight BattleScript_AlreadyAtFullHp
 	goto BattleScript_PresentHealTarget
 
-BattleScript_EffectHiddenPower::
-	hiddenpowercalc
-	goto BattleScript_EffectHit
-
 BattleScript_EffectRainDance::
 	attackcanceler
 	attackstring
@@ -3022,10 +3020,6 @@ BattleScript_EffectWaterSport::
 
 BattleScript_EffectPoisonFang::
 	setmoveeffect MOVE_EFFECT_TOXIC
-	goto BattleScript_EffectHit
-
-BattleScript_EffectWeatherBall::
-	setweatherballtype
 	goto BattleScript_EffectHit
 
 BattleScript_EffectOverheat::

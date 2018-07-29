@@ -70,6 +70,7 @@ u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
+void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
 
 extern const u8 gTypeEffectiveness[336];
 extern const u8 gTypeNames[][TYPE_NAME_LENGTH + 1];

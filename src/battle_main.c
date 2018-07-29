@@ -4936,6 +4936,8 @@ static void SpecialStatusesClear(void)
 
 static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 {
+    u32 i;
+
     if (!(gHitMarker & HITMARKER_RUN))
     {
         while (gBattleStruct->focusPunchBattlerId < gBattlersCount)
@@ -4957,6 +4959,8 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     gCurrentTurnActionNumber = 0;
     gCurrentActionFuncId = gActionsByTurnOrder[0];
     gBattleStruct->dynamicMoveType = 0;
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        gBattleStruct->ateBoost[i] = FALSE;
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
@@ -5291,12 +5295,80 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
+void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
+{
+    u32 moveType, ateType, attackerAbility;
+
+    if (move == MOVE_STRUGGLE)
+        return;
+
+    if (gBattleMoves[move].effect == EFFECT_WEATHER_BALL)
+    {
+        if (WEATHER_HAS_EFFECT)
+        {
+            if (gBattleWeather & WEATHER_RAIN_ANY)
+                *(&gBattleStruct->dynamicMoveType) = TYPE_WATER | 0x80;
+            else if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+                *(&gBattleStruct->dynamicMoveType) = TYPE_ROCK | 0x80;
+            else if (gBattleWeather & WEATHER_SUN_ANY)
+                *(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | 0x80;
+            else if (gBattleWeather & WEATHER_HAIL_ANY)
+                *(&gBattleStruct->dynamicMoveType) = TYPE_ICE | 0x80;
+            else
+                *(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | 0x80;
+        }
+    }
+    else if (gBattleMoves[move].effect == EFFECT_HIDDEN_POWER)
+    {
+        u8 typeBits  = ((gBattleMons[battlerAtk].hpIV & 1) << 0)
+                     | ((gBattleMons[battlerAtk].attackIV & 1) << 1)
+                     | ((gBattleMons[battlerAtk].defenseIV & 1) << 2)
+                     | ((gBattleMons[battlerAtk].speedIV & 1) << 3)
+                     | ((gBattleMons[battlerAtk].spAttackIV & 1) << 4)
+                     | ((gBattleMons[battlerAtk].spDefenseIV & 1) << 5);
+
+        gBattleStruct->dynamicMoveType = (15 * typeBits) / 63 + 1;
+        if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
+            gBattleStruct->dynamicMoveType++;
+        gBattleStruct->dynamicMoveType |= 0xC0;
+    }
+
+    attackerAbility = GetBattlerAbility(battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+    if ((gFieldStatuses & STATUS_FIELD_ION_DELUGE && moveType == TYPE_NORMAL)
+        || gStatuses3[battlerAtk] & STATUS3_ELECTRIFIED)
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | TYPE_ELECTRIC;
+    }
+    else if (gBattleMoves[move].type == TYPE_NORMAL
+             && gBattleMoves[move].effect != EFFECT_HIDDEN_POWER
+             && gBattleMoves[move].effect != EFFECT_WEATHER_BALL
+             && ((attackerAbility == ABILITY_PIXILATE && (ateType = TYPE_FAIRY))
+                 || (attackerAbility == ABILITY_REFRIGERATE && (ateType = TYPE_ICE))
+                 || (attackerAbility == ABILITY_AERILATE && (ateType = TYPE_FLYING))
+                 || ((attackerAbility == ABILITY_GALVANIZE) && (ateType = TYPE_ELECTRIC))
+                )
+             )
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | ateType;
+        gBattleStruct->ateBoost[battlerAtk] = 1;
+    }
+    else if (gBattleMoves[move].type != TYPE_NORMAL
+             && gBattleMoves[move].effect != EFFECT_HIDDEN_POWER
+             && gBattleMoves[move].effect != EFFECT_WEATHER_BALL
+             && attackerAbility == ABILITY_NORMALIZE)
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | TYPE_NORMAL;
+        gBattleStruct->ateBoost[battlerAtk] = 1;
+    }
+}
+
 static void HandleAction_UseMove(void)
 {
     u8 side;
     u8 var = 4;
     u32 attackerAbility;
-    u32 ateType;
+    u32 ateType, moveType;
 
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
 
@@ -5483,7 +5555,7 @@ static void HandleAction_UseMove(void)
         }
     }
 
-    // choose battlescript
+    // Choose battlescript.
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE
         && gProtectStructs[gBattlerAttacker].flag_x10)
     {
@@ -5512,33 +5584,8 @@ static void HandleAction_UseMove(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         sub_81A56E8(gBattlerAttacker);
 
-    attackerAbility = GetBattlerAbility(gBattlerAttacker);
-    // Set move type.
-    if (gFieldStatuses & STATUS_FIELD_ION_DELUGE) // All moves become Electric-type this turn.
-    {
-        gBattleStruct->dynamicMoveType = 0x80 | TYPE_ELECTRIC;
-    }
-    else if (gBattleMoves[gChosenMove].type == TYPE_NORMAL
-             && gBattleMoves[gChosenMove].effect != EFFECT_HIDDEN_POWER
-             && gBattleMoves[gChosenMove].effect != EFFECT_WEATHER_BALL
-             && ((attackerAbility == ABILITY_PIXILATE && (ateType = TYPE_FAIRY))
-                 || (attackerAbility == ABILITY_REFRIGERATE && (ateType = TYPE_ICE))
-                 || (attackerAbility == ABILITY_AERILATE && (ateType = TYPE_FLYING))
-                 || ((attackerAbility == ABILITY_GALVANIZE) && (ateType = TYPE_ELECTRIC))
-                )
-             )
-    {
-        gBattleStruct->dynamicMoveType = 0x80 | ateType;
-        gBattleStruct->ateBoost[gBattlerAttacker] = 1;
-    }
-    else if (gBattleMoves[gChosenMove].type != TYPE_NORMAL
-             && gBattleMoves[gChosenMove].effect != EFFECT_HIDDEN_POWER
-             && gBattleMoves[gChosenMove].effect != EFFECT_WEATHER_BALL
-             && attackerAbility == ABILITY_NORMALIZE)
-    {
-        gBattleStruct->dynamicMoveType = 0x80 | TYPE_NORMAL;
-        gBattleStruct->ateBoost[gBattlerAttacker] = 1;
-    }
+    // Set dynamic move type.
+    SetTypeBeforeUsingMove(gChosenMove, gBattlerAttacker);
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
