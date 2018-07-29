@@ -2429,6 +2429,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
             }
             break;
+        case ABILITY_IMPOSTER:
+            if (IsBattlerAlive(BATTLE_OPPOSITE(battler))
+                && !(gBattleMons[BATTLE_OPPOSITE(battler)].status2 & (STATUS2_TRANSFORMED | STATUS2_SUBSTITUTE))
+                && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
+            {
+                gBattlerTarget = BATTLE_OPPOSITE(battler);
+                BattleScriptPushCursorAndCallback(BattleScript_ImposterActivates);
+                effect++;
+            }
+            break;
         case ABILITY_MOLD_BREAKER:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {

@@ -4858,6 +4858,14 @@ BattleScript_SwitchInAbilityMsg::
 	printfromtable gSwitchInAbilityStringIds
 	waitmessage 0x40
 	end3
+	
+BattleScript_ImposterActivates::
+	transformdataexecution
+	playmoveanimation BS_ATTACKER MOVE_TRANSFORM
+	waitanimation
+	printstring STRINGID_IMPOSTERTRANSFORM
+	waitmessage 0x40
+	end3
 
 BattleScript_RoughSkinActivates::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000

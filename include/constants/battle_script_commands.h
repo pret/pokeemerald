@@ -81,6 +81,7 @@
 #define VARIOUS_RESTORE_PP                      33
 #define VARIOUS_TRY_ACTIVATE_MOXIE              34
 #define VARIOUS_TRY_ACTIVATE_FELL_STINGER       35
+#define VARIOUS_PLAY_MOVE_ANIMATION             36
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

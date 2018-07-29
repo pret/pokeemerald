@@ -1393,6 +1393,11 @@
 	various \battler, VARIOUS_TRY_ACTIVATE_FELL_STINGER
 	.endm
 	
+	.macro playmoveanimation battler move
+	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
+	.2byte \move
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

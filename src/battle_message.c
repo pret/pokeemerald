@@ -626,6 +626,7 @@ static const u8 sText_CursedBodyDisabled[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_
 static const u8 sText_AttackerAquiredAbility[] = _("{B_ATK_NAME_WITH_PREFIX} acquired {B_LAST_ABILITY}!");
 static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_BUFF1}\nwon’t go higher!");
 static const u8 sText_PkmnMoveBouncedViaAbility[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_CURRENT_MOVE} was\nbounced back by {B_DEF_NAME_WITH_PREFIX}’s\l{B_DEF_ABILITY}!");
+static const u8 sText_ImposterTransform[] = _("{B_ATK_NAME_WITH_PREFIX} transformed into\n{B_DEF_NAME_WITH_PREFIX} using {B_LAST_ABILITY}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1103,6 +1104,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_TargetAbilityLoweredStat,
     sText_TargetStatWontGoHigher,
     sText_PkmnMoveBouncedViaAbility,
+    sText_ImposterTransform,
 };
 
 const u16 gMagicCoatBounceStringIds[] =

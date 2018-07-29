@@ -6355,6 +6355,11 @@ static void atk76_various(void)
             return;
         }
         break;
+    case VARIOUS_PLAY_MOVE_ANIMATION:
+        BtlController_EmitMoveAnimation(0, T1_READ_16(gBattlescriptCurrInstr + 3), gBattleScripting.animTurn, 0, 0, gBattleMons[gActiveBattler].friendship, &gDisableStructs[gActiveBattler], gMultiHitCounter);
+        MarkBattlerForControllerExec(gActiveBattler);
+        gBattlescriptCurrInstr += 5;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
