@@ -4528,7 +4528,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_HEAL_BLOCK
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
+		.effect = EFFECT_HEAL_BLOCK,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -5812,7 +5812,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEAVY_SLAM
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
+		.effect = EFFECT_HEAT_CRASH,
 		.power = 1,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -5980,7 +5980,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CHIP_AWAY
-		.effect = EFFECT_HIT
+		.effect = EFFECT_HIT,
 		.power = 70,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6220,7 +6220,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_WATER_PLEDGE
-		.effect = EFFECT_PLEDGE
+		.effect = EFFECT_PLEDGE,
 		.power = 80,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -6232,7 +6232,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FIRE_PLEDGE
-		.effect = EFFECT_PLEDGE
+		.effect = EFFECT_PLEDGE,
 		.power = 80,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -6244,7 +6244,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_GRASS_PLEDGE
-		.effect = EFFECT_PLEDGE
+		.effect = EFFECT_PLEDGE,
 		.power = 80,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -6448,7 +6448,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_STEAMROLLER
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
+		.effect = EFFECT_FLINCH_MINIMIZE_HIT,
 		.power = 65,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -6496,7 +6496,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_TAIL_SLAP
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (different percentages for hitting compared to doubleslap)
+		.effect = EFFECT_MULTI_HIT,
 		.power = 25,
 		.type = TYPE_NORMAL,
 		.accuracy = 85,
@@ -7036,7 +7036,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_BOOMBURST
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect (Doesn't affect pokemon with SOUNDPROOF)
+		.effect = EFFECT_HIT,
 		.power = 140,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -7084,7 +7084,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_CONFIDE
-		.effect = EFFECT_PLACEHOLDER_209, // Needs a custom move effect
+		.effect = EFFECT_SPECIAL_ATTACK_DOWN,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,

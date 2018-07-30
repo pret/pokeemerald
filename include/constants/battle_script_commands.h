@@ -47,7 +47,6 @@
 #define BS_OPPONENT2                14
 
 // atk 01, accuracy calc
-#define NO_ACC_CALC 0xFFFE
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
 #define ACC_CURR_MOVE 0
 

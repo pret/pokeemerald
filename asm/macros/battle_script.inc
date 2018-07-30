@@ -401,8 +401,9 @@
 	.byte \param1
 	.endm
 
-	.macro nop_4A
+	.macro sethealblock ptr
 	.byte 0x4a
+	.4byte \ptr
 	.endm
 
 	.macro returnatktoball

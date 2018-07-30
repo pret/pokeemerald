@@ -57,7 +57,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSuperFang
 	.4byte BattleScript_EffectDragonRage
 	.4byte BattleScript_EffectTrap
-	.4byte BattleScript_EffectPlaceholder43
+	.4byte BattleScript_EffectHealBlock
 	.4byte BattleScript_EffectDoubleHit
 	.4byte BattleScript_EffectRecoilIfMiss
 	.4byte BattleScript_EffectMist
@@ -540,6 +540,18 @@ BattleScript_CaptivateCheckAcc:
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	goto BattleScript_StatDownFromAttackString
 	
+BattleScript_EffectHealBlock:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	sethealblock BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNPREVENTEDFROMHEALING
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
 BattleScript_EffectHitEscape:
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
@@ -583,7 +595,6 @@ BattleScript_HitEscapeEnd:
 	end
 
 BattleScript_EffectAlwaysHit:
-BattleScript_EffectPlaceholder43:
 BattleScript_EffectEvasionDownHit:
 BattleScript_EffectVitalThrow:
 BattleScript_EffectUnused60:
@@ -1875,7 +1886,7 @@ BattleScript_EffectMeanLook::
 	attackcanceler
 	attackstring
 	ppreduce
-	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	jumpifstatus2 BS_TARGET, STATUS2_ESCAPE_PREVENTION, BattleScript_ButItFailed
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	attackanimation

@@ -166,7 +166,7 @@ static void atk46_playanimation2(void);
 static void atk47_setgraphicalstatchangevalues(void);
 static void atk48_playstatchangeanimation(void);
 static void atk49_moveend(void);
-static void atk4A_nop(void);
+static void atk4A_sethealblock(void);
 static void atk4B_returnatktoball(void);
 static void atk4C_getswitchedmondata(void);
 static void atk4D_switchindataupdate(void);
@@ -424,7 +424,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk47_setgraphicalstatchangevalues,
     atk48_playstatchangeanimation,
     atk49_moveend,
-    atk4A_nop,
+    atk4A_sethealblock,
     atk4B_returnatktoball,
     atk4C_getswitchedmondata,
     atk4D_switchindataupdate,
@@ -1150,11 +1150,11 @@ static void atk01_accuracycheck(void)
 {
     u16 move = T2_READ_16(gBattlescriptCurrInstr + 5);
 
-    if (move == 0xFFFE || move == 0xFFFF)
+    if (move == NO_ACC_CALC_CHECK_LOCK_ON || gBattleMoves[move].accuracy == 0)
     {
-        if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && move == 0xFFFF && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
+        if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
             gBattlescriptCurrInstr += 7;
-        else if (gStatuses3[gBattlerTarget] & (STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+        else if (gStatuses3[gBattlerTarget] & (STATUS3_SEMI_INVULNERABLE))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         else if (!JumpIfMoveAffectedByProtect(0))
             gBattlescriptCurrInstr += 7;
@@ -4356,9 +4356,18 @@ static void atk49_moveend(void)
         gBattlescriptCurrInstr += 3;
 }
 
-static void atk4A_nop(void)
+static void atk4A_sethealblock(void)
 {
-    gBattlescriptCurrInstr++;
+    if (gStatuses3[gBattlerTarget] & STATUS3_HEAL_BLOCK)
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+    else
+    {
+        gStatuses3[gBattlerTarget] |= STATUS3_HEAL_BLOCK;
+        gDisableStructs[gBattlerTarget].healBlockTimer = 5;
+        gBattlescriptCurrInstr += 5;
+    }
 }
 
 static void atk4B_returnatktoball(void)
