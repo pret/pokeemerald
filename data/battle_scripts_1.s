@@ -4082,6 +4082,32 @@ BattleScript_MoveUsedIsTaunted::
 BattleScript_SelectingNotAllowedMoveTauntInPalace::
 	printstring STRINGID_PKMNCANTUSEMOVETAUNT
 	goto BattleScript_SelectingUnusableMoveInPalace
+	
+BattleScript_SelectingNotAllowedMoveGravity::
+	printselectionstring STRINGID_GRAVITYPREVENTSUSAGE
+	endselectionscript
+
+BattleScript_MoveUsedGravityPrevents::
+	printstring STRINGID_GRAVITYPREVENTSUSAGE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
+BattleScript_SelectingNotAllowedMoveGravityInPalace::
+	printstring STRINGID_GRAVITYPREVENTSUSAGE
+	goto BattleScript_SelectingUnusableMoveInPalace
+	
+BattleScript_SelectingNotAllowedMoveHealBlock::
+	printselectionstring STRINGID_GRAVITYPREVENTSUSAGE
+	endselectionscript
+
+BattleScript_MoveUsedHealBlockPrevents::
+	printstring STRINGID_GRAVITYPREVENTSUSAGE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
+BattleScript_SelectingNotAllowedMoveHealBlockInPalace::
+	printstring STRINGID_GRAVITYPREVENTSUSAGE
+	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_WishComesTrue::
 	trywish 0x1, BattleScript_WishButFullHp
@@ -5085,6 +5111,10 @@ BattleScript_ItemHealHP_Ret::
 
 BattleScript_SelectingNotAllowedMoveChoiceItem::
 	printselectionstring STRINGID_ITEMALLOWSONLYYMOVE
+	endselectionscript
+	
+BattleScript_SelectingNotAllowedMoveAssaultVest::
+	printselectionstring STRINGID_ASSAULTVESTDOESNTALLOW
 	endselectionscript
 
 BattleScript_HangedOnMsg::

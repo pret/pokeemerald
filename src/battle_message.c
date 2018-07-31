@@ -628,6 +628,12 @@ static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}’s
 static const u8 sText_PkmnMoveBouncedViaAbility[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_CURRENT_MOVE} was\nbounced back by {B_DEF_NAME_WITH_PREFIX}’s\l{B_DEF_ABILITY}!");
 static const u8 sText_ImposterTransform[] = _("{B_ATK_NAME_WITH_PREFIX} transformed into\n{B_DEF_NAME_WITH_PREFIX} using {B_LAST_ABILITY}!");
 
+// New selection strings, they must end with "\p".
+// Use {B_LAST_ITEM} and {B_CURRENT_MOVE}.
+static const u8 sText_AssaultVestDoesntAllow[] = _("\p");
+static const u8 sText_GravityPreventsUsage[] = _("\p");
+static const u8 sText_HealBlockPreventsUsage[] = _("\p");
+
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
     sText_Trainer1LoseText, // 12
@@ -1105,6 +1111,9 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_TargetStatWontGoHigher,
     sText_PkmnMoveBouncedViaAbility,
     sText_ImposterTransform,
+    sText_AssaultVestDoesntAllow,
+    sText_GravityPreventsUsage,
+    sText_HealBlockPreventsUsage,
 };
 
 const u16 gMagicCoatBounceStringIds[] =

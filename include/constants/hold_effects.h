@@ -113,4 +113,6 @@
 // Gen7 hold effects
 #define HOLD_EFFECT_PROTECTIVE_PADS 150
 
+#define HOLD_EFFECT_CHOICE(holdEffect)((holdEffect == HOLD_EFFECT_CHOICE_BAND || holdEffect == HOLD_EFFECT_CHOICE_SCARF || holdEffect == HOLD_EFFECT_CHOICE_SPECS))
+
 #endif // GUARD_HOLD_EFFECTS_H

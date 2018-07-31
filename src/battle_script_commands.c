@@ -4146,7 +4146,7 @@ static void atk49_moveend(void)
             gBattleScripting.atk49_state++;
             break;
         case 6: // update choice band move
-            if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
+            if (!(gHitMarker & HITMARKER_OBEYS) || !HOLD_EFFECT_CHOICE(holdEffectAtk)
                 || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
                     goto LOOP;
             if ((gBattleMoves[gChosenMove].effect == EFFECT_BATON_PASS
@@ -7483,7 +7483,9 @@ static void atk96_weatherdamage(void)
         {
             if (ability == ABILITY_ICE_BODY
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
-                && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
+                && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER)
+                && !BATTLER_MAX_HP(gBattlerAttacker)
+                && !gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK)
             {
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
                 if (gBattleMoveDamage == 0)
@@ -7493,6 +7495,7 @@ static void atk96_weatherdamage(void)
             else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
                 && ability != ABILITY_SNOW_CLOAK
                 && ability != ABILITY_OVERCOAT
+                && ability != ABILITY_ICE_BODY
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {
