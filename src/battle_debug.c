@@ -195,6 +195,10 @@ static const u8 sText_Risky[] = _("Risky");
 static const u8 sText_StrongestMove[] = _("Most dmg move");
 static const u8 sText_Various[] = _("Various");
 static const u8 sText_ShowHP[] = _("Show HP");
+static const u8 sText_PreferBatonPass[] = _("Baton Pass");
+static const u8 sText_InDoubles[] = _("In Doubles");
+static const u8 sText_HpAware[] = _("HP aware");
+static const u8 sText_Unknown[] = _("Unknown");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -269,6 +273,10 @@ static const struct BitfieldInfo sAIBitfield[] =
     {/*Set up first turn*/ 1, 3},
     {/*Risky*/ 1, 4},
     {/*Prefer Strongest Move*/ 1, 5},
+    {/*Prefer Baton Pass*/ 1, 6},
+    {/*In Doubles*/ 1, 7},
+    {/*Hp aware*/ 1, 8},
+    {/*Unknown*/ 1, 9},
 };
 
 
@@ -302,6 +310,10 @@ static const struct ListMenuItem sAIListItems[] =
     {sText_SetUpFirstTurn, 3},
     {sText_Risky, 4},
     {sText_StrongestMove, 5},
+    {sText_PreferBatonPass, 6},
+    {sText_InDoubles, 7},
+    {sText_HpAware, 8},
+    // {sText_Unknown, 9},
 };
 
 static const struct ListMenuItem sStatsListItems[] =
