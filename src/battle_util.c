@@ -5380,6 +5380,8 @@ static inline void MulByTypeEffectiveness(u16 *modifier, u16 move, u8 moveType, 
         mod = UQ_4_12(1.0);
     if (move == MOVE_FREEZE_DRY && defType == TYPE_WATER)
         mod = UQ_4_12(2.0);
+    if (moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(battlerDef))
+        mod = UQ_4_12(1.0);
 
     MulModifier(modifier, mod);
 }
