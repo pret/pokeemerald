@@ -79,7 +79,6 @@ extern u16 get_unknown_box_id(void);
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
-static void CheckWonderGuardAndLevitate(void);
 static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8, const u8* BS_ptr);
 static bool32 IsMonGettingExpSentOut(void);
 static void sub_804F17C(void);
@@ -1150,6 +1149,9 @@ static void atk01_accuracycheck(void)
 {
     u16 move = T2_READ_16(gBattlescriptCurrInstr + 5);
 
+    if (move == ACC_CURR_MOVE)
+        move = gCurrentMove;
+
     if (move == NO_ACC_CALC_CHECK_LOCK_ON || gBattleMoves[move].accuracy == 0)
     {
         if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
@@ -1164,9 +1166,6 @@ static void atk01_accuracycheck(void)
         u8 type, moveAcc, atkHoldEffect, atkParam, defHoldEffect, defParam, atkAbility, defAbility;
         s8 buff, accStage, evasionStage;
         u32 calc;
-
-        if (move == 0)
-            move = gCurrentMove;
 
         GET_MOVE_TYPE(move, type);
 
@@ -1250,7 +1249,7 @@ static void atk01_accuracycheck(void)
             else
                 gBattleCommunication[6] = 0;
 
-            CheckWonderGuardAndLevitate();
+            CalcTypeEffectivenessMultiplier(move, type, gBattlerAttacker, gBattlerTarget, TRUE);
         }
         JumpIfMoveFailed(7, move);
     }
@@ -1402,81 +1401,6 @@ static void atk06_typecalc(void)
     CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, TRUE);
 
     gBattlescriptCurrInstr++;
-}
-
-static void CheckWonderGuardAndLevitate(void)
-{
-    u8 flags = 0;
-    s32 i = 0;
-    u8 moveType;
-
-    if (gCurrentMove == MOVE_STRUGGLE || !gBattleMoves[gCurrentMove].power)
-        return;
-
-    GET_MOVE_TYPE(gCurrentMove, moveType);
-
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
-    {
-        gLastUsedAbility = ABILITY_LEVITATE;
-        gBattleCommunication[6] = moveType;
-        RecordAbilityBattle(gBattlerTarget, ABILITY_LEVITATE);
-        return;
-    }
-
-    while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-    {
-        if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-        {
-            if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
-                break;
-            i += 3;
-            continue;
-        }
-        if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-        {
-            // check no effect
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1
-                && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-            {
-                gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
-            }
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
-                gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2 &&
-                TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-            {
-                gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
-            }
-
-            // check super effective
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1 && TYPE_EFFECT_MULTIPLIER(i) == 20)
-                flags |= 1;
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-             && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-             && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
-                flags |= 1;
-
-            // check not very effective
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1 && TYPE_EFFECT_MULTIPLIER(i) == 5)
-                flags |= 2;
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-             && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-             && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
-                flags |= 2;
-        }
-        i += 3;
-    }
-
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2)
-    {
-        if (((flags & 2) || !(flags & 1)) && gBattleMoves[gCurrentMove].power)
-        {
-            gLastUsedAbility = ABILITY_WONDER_GUARD;
-            gBattleCommunication[6] = 3;
-            RecordAbilityBattle(gBattlerTarget, ABILITY_WONDER_GUARD);
-        }
-    }
 }
 
 static void atk07_adjustdamage(void)
@@ -1812,7 +1736,7 @@ static void atk0E_effectivenesssound(void)
     gActiveBattler = gBattlerTarget;
     if (!(gMoveResultFlags & MOVE_RESULT_MISSED))
     {
-        switch (gMoveResultFlags & (u8)(~(MOVE_RESULT_MISSED)))
+        switch (gMoveResultFlags & (~(MOVE_RESULT_MISSED)))
         {
         case MOVE_RESULT_SUPER_EFFECTIVE:
             BtlController_EmitPlaySE(0, SE_KOUKA_H);
