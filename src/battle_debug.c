@@ -106,6 +106,7 @@ enum
     VAL_BITFIELD_32,
     VAR_SIDE_STATUS,
     VAR_SHOW_HP,
+    VAR_SUBSTITUTE,
 };
 
 enum
@@ -126,6 +127,7 @@ enum
 enum
 {
     VARIOUS_SHOW_HP,
+    VARIOUS_SUBSTITUTE_HP,
 };
 
 // const rom data
@@ -153,6 +155,7 @@ static const u8 sText_Transformed[] = _("Transformed");
 static const u8 sText_Recharge[] = _("Recharge");
 static const u8 sText_Rage[] = _("Rage");
 static const u8 sText_Substitute[] = _("Substitute");
+static const u8 sText_SubstituteHp[] = _("Substitute HP");
 static const u8 sText_DestinyBond[] = _("Destiny Bond");
 static const u8 sText_CantEscape[] = _("Cant Escape");
 static const u8 sText_Nightmare[] = _("Nightmare");
@@ -300,6 +303,7 @@ static const struct ListMenuItem sMainListItems[] =
 static const struct ListMenuItem sVariousListItems[] =
 {
     {sText_ShowHP, VARIOUS_SHOW_HP},
+    {sText_SubstituteHp, VARIOUS_SUBSTITUTE_HP},
 };
 
 static const struct ListMenuItem sAIListItems[] =
@@ -1058,6 +1062,19 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
     case VAR_SHOW_HP:
         (*(struct BattleSpriteInfo*)(data->modifyArrows.modifiedValPtr)).hpNumbersNoBars = data->modifyArrows.currValue;
         break;
+    case VAR_SUBSTITUTE:
+        *(u8*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        if (*(u8*)(data->modifyArrows.modifiedValPtr) == 0)
+        {
+            gBattleMons[data->battlerId].status2 &= ~(STATUS2_SUBSTITUTE);
+            gBattleSpritesDataPtr->battlerData[data->battlerId].behindSubstitute = 0;
+        }
+        else
+        {
+            gBattleMons[data->battlerId].status2 |= STATUS2_SUBSTITUTE;
+            gBattleSpritesDataPtr->battlerData[data->battlerId].behindSubstitute = 1;
+        }
+        break;
     }
     data->battlerWasChanged[data->battlerId] = TRUE;
 }
@@ -1309,6 +1326,15 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
             data->modifyArrows.modifiedValPtr = &gBattleSpritesDataPtr->battlerData[data->battlerId];
             data->modifyArrows.typeOfVal = VAR_SHOW_HP;
             data->modifyArrows.currValue = gBattleSpritesDataPtr->battlerData[data->battlerId].hpNumbersNoBars;
+        }
+        else if (data->currentSecondaryListItemId == VARIOUS_SUBSTITUTE_HP)
+        {
+            data->modifyArrows.minValue = 0;
+            data->modifyArrows.maxValue = 255;
+            data->modifyArrows.maxDigits = 3;
+            data->modifyArrows.modifiedValPtr = &gDisableStructs[data->battlerId].substituteHP;
+            data->modifyArrows.typeOfVal = VAR_SUBSTITUTE;
+            data->modifyArrows.currValue = gDisableStructs[data->battlerId].substituteHP;
         }
         break;
     case LIST_ITEM_STATUS1:

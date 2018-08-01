@@ -7682,11 +7682,7 @@ static void atk9E_metronome(void)
     {
         s32 i;
 
-        gCurrentMove = (Random() & 0x1FF) + 1;
-        if (gCurrentMove >= MOVES_COUNT)
-            continue;
-
-        for (i = 0; i < 4; i++); // ?
+        gCurrentMove = (Random() % MOVES_COUNT) + 1;
 
         i = -1;
         while (1)
