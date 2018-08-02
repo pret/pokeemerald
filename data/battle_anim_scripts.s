@@ -10484,7 +10484,7 @@ AnimScript_82D7ECA:
 	end
 
 Anim_StatChange:
-	createvisualtask sub_80AA18C, 0x5
+	createvisualtask AnimTask_StatsChange, 0x5
 	waitforvisualfinish
 	end
 
