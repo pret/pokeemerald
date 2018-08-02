@@ -324,7 +324,7 @@ static void atkE5_pickup(void);
 static void atkE6_docastformchangeanimation(void);
 static void atkE7_trycastformdatachange(void);
 static void atkE8_settypebasedhalvers(void);
-static void atkE9_nop(void);
+static void atkE9_jumpifsubstituteblocks(void);
 static void atkEA_tryrecycleitem(void);
 static void atkEB_settypetoterrain(void);
 static void atkEC_pursuitrelated(void);
@@ -582,7 +582,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkE6_docastformchangeanimation,
     atkE7_trycastformdatachange,
     atkE8_settypebasedhalvers,
-    atkE9_nop,
+    atkE9_jumpifsubstituteblocks,
     atkEA_tryrecycleitem,
     atkEB_settypetoterrain,
     atkEC_pursuitrelated,
@@ -1407,7 +1407,7 @@ static void atk07_adjustdamage(void)
 {
     u8 holdEffect, param;
 
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+    if (DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
         goto END;
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
         goto END;
@@ -1562,7 +1562,7 @@ static void atk0B_healthbarupdate(void)
     {
         gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
-        if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
+        if (DoesSubstituteBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove) && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
         {
             PrepareStringBattle(STRINGID_SUBSTITUTEDAMAGED, gActiveBattler);
         }
@@ -1606,7 +1606,7 @@ static void atk0C_datahpupdate(void)
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
     {
         gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
+        if (DoesSubstituteBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove) && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
         {
             if (gDisableStructs[gActiveBattler].substituteHP >= gBattleMoveDamage)
             {
@@ -2002,7 +2002,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
         && gBattleCommunication[MOVE_EFFECT_BYTE] != MOVE_EFFECT_STEAL_ITEM)
         INCREMENT_RESET_RETURN
 
-    if (gBattleMons[gEffectBattler].status2 & STATUS2_SUBSTITUTE && affectsUser != MOVE_EFFECT_AFFECTS_USER)
+    if (DoesSubstituteBlockMove(gBattlerAttacker, gEffectBattler, gCurrentMove) && affectsUser != MOVE_EFFECT_AFFECTS_USER)
         INCREMENT_RESET_RETURN
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] <= 6) // status change
@@ -5321,7 +5321,7 @@ static void atk5C_hitanimation(void)
     {
         gBattlescriptCurrInstr += 2;
     }
-    else if (!(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE) || !(gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE) || gDisableStructs[gActiveBattler].substituteHP == 0)
+    else if (!(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE) || !(DoesSubstituteBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove)) || gDisableStructs[gActiveBattler].substituteHP == 0)
     {
         BtlController_EmitHitAnimation(0);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -7828,7 +7828,7 @@ static void atkA4_trysetencore(void)
 
 static void atkA5_painsplitdmgcalc(void)
 {
-    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE))
+    if (!(DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)))
     {
         s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + gBattleMons[gBattlerTarget].hp) / 2;
         s32 painSplitHp = gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - hpDiff;
@@ -9537,9 +9537,24 @@ static void atkE8_settypebasedhalvers(void) // water and mud sport
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
-static void atkE9_nop(void)
+bool32 DoesSubstituteBlockMove(u8 battlerAtk, u8 battlerDef, u32 move)
 {
-    gBattlescriptCurrInstr++;
+    if (!(gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE))
+        return FALSE;
+    else if (gBattleMoves[move].flags & FLAG_SOUND && B_SOUND_SUBSTITUTE >= GEN_6)
+        return FALSE;
+    else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+static void atkE9_jumpifsubstituteblocks(void)
+{
+    if (DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    else
+        gBattlescriptCurrInstr += 5;
 }
 
 static void atkEA_tryrecycleitem(void)

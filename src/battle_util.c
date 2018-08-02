@@ -29,11 +29,6 @@
 extern u8 weather_get_current(void);
 
 // rom const data
-static const u16 sSoundMovesTable[] =
-{
-    MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
-    MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, 0xFFFF
-};
 
 static const u8 sAbilitiesAffectedByMoldBreaker[] =
 {
@@ -2777,24 +2772,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         }
         break;
     case ABILITYEFFECT_MOVES_BLOCK: // 2
-        if (gLastUsedAbility == ABILITY_SOUNDPROOF)
+        if (gLastUsedAbility == ABILITY_SOUNDPROOF && gBattleMoves[move].flags & FLAG_SOUND)
         {
-            for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
-            {
-                if (sSoundMovesTable[i] == move)
-                    break;
-            }
-            if (sSoundMovesTable[i] != 0xFFFF)
-            {
-                if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
-                    gHitMarker |= HITMARKER_NO_PPDEDUCT;
-                gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
-                effect = 1;
-            }
+            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
+                gHitMarker |= HITMARKER_NO_PPDEDUCT;
+            gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
+            effect = 1;
         }
         break;
     case ABILITYEFFECT_ABSORBING: // 3
-        if (move)
+        if (move != MOVE_NONE)
         {
             u8 statId;
             switch (gLastUsedAbility)

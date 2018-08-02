@@ -552,7 +552,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_BOTH,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ROAR
@@ -564,7 +564,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = -6,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SING
@@ -576,7 +576,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SUPERSONIC
@@ -588,7 +588,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SONIC_BOOM
@@ -1248,7 +1248,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DOUBLE_TEAM
@@ -2088,7 +2088,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 30,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CURSE
@@ -2352,7 +2352,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 0,
-		.flags = 0,
+		.flags = FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ICY_WIND
@@ -2592,7 +2592,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 0,
-		.flags = FLAG_SNATCH_AFFECTED,
+		.flags = FLAG_SNATCH_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_RETURN
@@ -3048,7 +3048,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_RANDOM,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_STOCKPILE
@@ -3660,7 +3660,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_BOTH,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_POISON_FANG
@@ -3840,7 +3840,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GRASS_WHISTLE
@@ -3852,7 +3852,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TICKLE
@@ -4872,7 +4872,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 10,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DRAGON_PULSE
@@ -5388,7 +5388,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_JUDGMENT
@@ -5976,7 +5976,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CHIP_AWAY
@@ -6576,7 +6576,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 10,
 		.target = MOVE_TARGET_BOTH,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SECRET_SWORD
@@ -6672,7 +6672,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_BOTH,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ICICLE_CRASH
@@ -6828,7 +6828,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ION_DELUGE
@@ -6900,7 +6900,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_BOTH,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_PARTING_SHOT
@@ -6912,7 +6912,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TOPSY_TURVY
@@ -7044,7 +7044,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_FOES_AND_ALLY,
 		.priority = 0,
-		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FAIRY_LOCK
@@ -7092,7 +7092,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+		.flags = FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DIAMOND_STORM

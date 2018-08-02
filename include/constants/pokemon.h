@@ -95,6 +95,7 @@
 #define FLAG_DMG_MINIMIZE           0x2000
 #define FLAG_DMG_UNDERGROUND        0x4000
 #define FLAG_DMG_UNDERWATER         0x8000
+#define FLAG_SOUND                  0x10000
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0

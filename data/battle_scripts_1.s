@@ -533,7 +533,7 @@ BattleScript_EffectRoost:
 BattleScript_EffectCaptivate:
 	setstatchanger STAT_SPATK, 2, TRUE
 	attackcanceler
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifsubstituteblocks BattleScript_ButItFailedAtkStringPpReduce
 	jumpifoppositegenders BattleScript_CaptivateCheckAcc
 	goto BattleScript_ButItFailedAtkStringPpReduce
 BattleScript_CaptivateCheckAcc:
@@ -686,7 +686,7 @@ BattleScript_EffectSleep::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_AlreadyAsleep
 	jumpifcantmakeasleep BattleScript_CantMakeAsleep
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
@@ -825,7 +825,7 @@ BattleScript_82D8BEA::
 
 BattleScript_EffectDreamEater::
 	attackcanceler
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_82D8C0E
+	jumpifsubstituteblocks BattleScript_82D8C0E
 	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_82D8C18
 BattleScript_82D8C0E::
 	attackstring
@@ -953,7 +953,7 @@ BattleScript_EffectEvasionDown:
 	setstatchanger STAT_EVASION, 1, TRUE
 BattleScript_EffectStatDown:
 	attackcanceler
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailedAtkStringPpReduce
+	jumpifsubstituteblocks BattleScript_ButItFailedAtkStringPpReduce
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 BattleScript_StatDownFromAttackString:
 	attackstring
@@ -1112,7 +1112,7 @@ BattleScript_EffectToxic::
 	attackstring
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_IMMUNITY, BattleScript_ImmunityProtected
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_POISON, BattleScript_AlreadyPoisoned
 	jumpifstatus BS_TARGET, STATUS1_TOXIC_POISON, BattleScript_AlreadyPoisoned
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
@@ -1328,7 +1328,7 @@ BattleScript_EffectConfuse:
 	attackstring
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_AlreadyConfused
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -1431,7 +1431,7 @@ BattleScript_EffectPoison::
 	attackstring
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_IMMUNITY, BattleScript_ImmunityProtected
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_POISON, BattleScript_AlreadyPoisoned
 	jumpifstatus BS_TARGET, STATUS1_TOXIC_POISON, BattleScript_AlreadyPoisoned
 	jumpiftype BS_TARGET, TYPE_POISON, BattleScript_NotAffected
@@ -1452,7 +1452,7 @@ BattleScript_EffectParalyze::
 	attackstring
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_LIMBER, BattleScript_LimberProtected
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	typecalc
 	jumpifmovehadnoeffect BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_PARALYSIS, BattleScript_AlreadyParalyzed
@@ -1579,7 +1579,7 @@ BattleScript_EffectMimic::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	mimicattackcopy BattleScript_ButItFailed
 	attackanimation
@@ -1603,7 +1603,7 @@ BattleScript_EffectLeechSeed::
 	attackstring
 	pause 0x20
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	accuracycheck BattleScript_DoLeechSeed, ACC_CURR_MOVE
 BattleScript_DoLeechSeed::
 	setseeded
@@ -1732,7 +1732,7 @@ BattleScript_EffectLockOn::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	setalwayshitflag
 	attackanimation
@@ -1745,7 +1745,6 @@ BattleScript_EffectSketch::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	copymovepermanently BattleScript_ButItFailed
 	attackanimation
 	waitanimation
@@ -1888,7 +1887,7 @@ BattleScript_EffectMeanLook::
 	ppreduce
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	jumpifstatus2 BS_TARGET, STATUS2_ESCAPE_PREVENTION, BattleScript_ButItFailed
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_PREVENT_ESCAPE
@@ -1901,7 +1900,7 @@ BattleScript_EffectNightmare::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus2 BS_TARGET, STATUS2_NIGHTMARE, BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_NightmareWorked
 	goto BattleScript_ButItFailed
@@ -1956,7 +1955,6 @@ BattleScript_DoGhostCurse::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	cursetarget BattleScript_ButItFailed
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
@@ -2049,7 +2047,7 @@ BattleScript_RolloutHit::
 
 BattleScript_EffectSwagger::
 	attackcanceler
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MakeMoveMissed
+	jumpifsubstituteblocks BattleScript_MakeMoveMissed
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
@@ -2574,7 +2572,7 @@ BattleScript_EffectTorment::
 
 BattleScript_EffectFlatter::
 	attackcanceler
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MakeMoveMissed
+	jumpifsubstituteblocks BattleScript_MakeMoveMissed
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
@@ -2599,7 +2597,7 @@ BattleScript_EffectWillOWisp::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
 	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
@@ -2634,7 +2632,7 @@ BattleScript_EffectMemento::
 	setatkhptozero
 	attackanimation
 	waitanimation
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_82DA148
+	jumpifsubstituteblocks BattleScript_82DA148
 	setbyte sFIELD_1B, 0x0
 	playstatchangeanimation BS_TARGET, 0x12, 0x7
 	playstatchangeanimation BS_TARGET, 0x2, 0x3
@@ -2679,7 +2677,7 @@ BattleScript_EffectFocusPunch::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSmellingsalt::
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
+	jumpifsubstituteblocks BattleScript_EffectHit
 	setmoveeffect MOVE_EFFECT_REMOVE_PARALYSIS | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
@@ -2741,7 +2739,7 @@ BattleScript_EffectTrick::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	tryswapitems BattleScript_ButItFailed
 	attackanimation
@@ -2858,7 +2856,7 @@ BattleScript_EffectYawn::
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_PrintBankAbilityMadeIneffective
 	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_PrintBankAbilityMadeIneffective
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	jumpifcantmakeasleep BattleScript_ButItFailed
@@ -2970,7 +2968,7 @@ BattleScript_TeeterDanceLoop::
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	jumpifbyteequal gBattlerAttacker, gBattlerTarget, BattleScript_TeeterDanceLoopIncrement
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_TeeterDanceOwnTempoPrevents
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_TeeterDanceSubstitutePrevents
+	jumpifsubstituteblocks BattleScript_TeeterDanceSubstitutePrevents
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_TeeterDanceAlreadyConfused
 	jumpifhasnohp BS_TARGET, BattleScript_TeeterDanceLoopIncrement
 	accuracycheck BattleScript_TeeterDanceMissed, ACC_CURR_MOVE

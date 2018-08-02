@@ -1149,8 +1149,9 @@
 	.4byte \param0
 	.endm
 
-	.macro nop_E9
+	.macro jumpifsubstituteblocks ptr
 	.byte 0xe9
+	.4byte \ptr
 	.endm
 
 	.macro tryrecycleitem param0

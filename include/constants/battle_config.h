@@ -11,5 +11,6 @@
 #define B_FELL_STINGER_STAT_RAISE   GEN_6 // Gen6 Atk+2, Gen7 Atk+3.
 #define B_ABILITY_WEATHER           GEN_6 // Up to gen5 - weather induced by abilities such as Drought or Drizzle lasted till the battle's end or weather change by a move. From Gen6 onwards, weather caused by abilities lasts the same amount of turns as induced from a move.
 #define B_GALE_WINGS                GEN_6 // Gen7 requires full hp.
+#define B_SOUND_SUBSTITUTE          GEN_6 // Starting from gen6 sound moves bypass Substitute.
 
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H
