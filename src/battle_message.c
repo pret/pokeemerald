@@ -627,6 +627,7 @@ static const u8 sText_AttackerAquiredAbility[] = _("{B_ATK_NAME_WITH_PREFIX} acq
 static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_BUFF1}\nwon’t go higher!");
 static const u8 sText_PkmnMoveBouncedViaAbility[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_CURRENT_MOVE} was\nbounced back by {B_DEF_NAME_WITH_PREFIX}’s\l{B_DEF_ABILITY}!");
 static const u8 sText_ImposterTransform[] = _("{B_ATK_NAME_WITH_PREFIX} transformed into\n{B_DEF_NAME_WITH_PREFIX} using {B_LAST_ABILITY}!");
+static const u8 sText_NotDoneYet[] = _("This move effect is not done yet!\p");
 
 // New selection strings, they must end with "\p".
 // Use {B_LAST_ITEM} and {B_CURRENT_MOVE}.
@@ -1114,6 +1115,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_AssaultVestDoesntAllow,
     sText_GravityPreventsUsage,
     sText_HealBlockPreventsUsage,
+    sText_NotDoneYet,
 };
 
 const u16 gMagicCoatBounceStringIds[] =
@@ -1488,7 +1490,8 @@ static const u8 sATypeMove_Table[][17] =
     _("a PSYCHIC move"),
     _("an ICE move"),
     _("a DRAGON move"),
-    _("a DARK move")
+    _("a DARK move"),
+    _("a FAIRY move"),
 };
 
 const u8 gText_BattleTourney[] = _("BATTLE TOURNEY");

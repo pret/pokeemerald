@@ -223,7 +223,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectCosmicPower
 	.4byte BattleScript_EffectSkyUppercut
 	.4byte BattleScript_EffectBulkUp
-	.4byte BattleScript_EffectPlaceholder209
+	.4byte BattleScript_EffectPlaceholder
 	.4byte BattleScript_EffectWaterSport
 	.4byte BattleScript_EffectCalmMind
 	.4byte BattleScript_EffectDragonDance
@@ -593,6 +593,11 @@ BattleScript_EffectHitEscape:
 	switchineffects BS_ATTACKER
 BattleScript_HitEscapeEnd:
 	end
+	
+BattleScript_EffectPlaceholder:
+	attackcanceler
+	printstring STRINGID_NOTDONEYET
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectAlwaysHit:
 BattleScript_EffectEvasionDownHit:
@@ -602,7 +607,6 @@ BattleScript_EffectFalseSwipe:
 BattleScript_EffectAlwaysCrit:
 BattleScript_EffectPursuit:
 BattleScript_EffectFellStinger:
-BattleScript_EffectPlaceholder209:
 BattleScript_EffectHit::
 BattleScript_EffectLowKick:
 BattleScript_EffectFlail:
