@@ -206,7 +206,7 @@ void CFile::TryConvertString()
             {
                 m_pos += stringParser.ParseString(m_pos, s, length);
             }
-            catch (std::runtime_error e)
+            catch (std::runtime_error& e)
             {
                 RaiseError(e.what());
             }
