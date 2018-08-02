@@ -2636,7 +2636,7 @@ BattleScript_EffectMemento::
 	setatkhptozero
 	attackanimation
 	waitanimation
-	jumpifsubstituteblocks BattleScript_82DA148
+	jumpifsubstituteblocks BattleScript_EffectMementoPrintNoEffect
 	setbyte sSTAT_ANIM_PLAYED, FALSE
 	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_SPATK, ATK48_STAT_NEGATIVE | ATK48_STAT_BY_TWO | ATK48_ONLY_MULTIPLE
 	playstatchangeanimation BS_TARGET, BIT_ATK, ATK48_STAT_NEGATIVE | ATK48_STAT_BY_TWO
