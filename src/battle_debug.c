@@ -19,6 +19,7 @@
 #include "list_menu.h"
 #include "malloc.h"
 #include "string_util.h"
+#include "util.h"
 #include "data2.h"
 #include "reset_rtc_screen.h"
 #include "reshow_battle_screen.h"
@@ -107,6 +108,7 @@ enum
     VAR_SIDE_STATUS,
     VAR_SHOW_HP,
     VAR_SUBSTITUTE,
+    VAR_IN_LOVE,
 };
 
 enum
@@ -128,6 +130,7 @@ enum
 {
     VARIOUS_SHOW_HP,
     VARIOUS_SUBSTITUTE_HP,
+    VARIOUS_IN_LOVE,
 };
 
 // const rom data
@@ -202,6 +205,7 @@ static const u8 sText_PreferBatonPass[] = _("Baton Pass");
 static const u8 sText_InDoubles[] = _("In Doubles");
 static const u8 sText_HpAware[] = _("HP aware");
 static const u8 sText_Unknown[] = _("Unknown");
+static const u8 sText_InLove[] = _("In Love");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -304,6 +308,7 @@ static const struct ListMenuItem sVariousListItems[] =
 {
     {sText_ShowHP, VARIOUS_SHOW_HP},
     {sText_SubstituteHp, VARIOUS_SUBSTITUTE_HP},
+    {sText_InLove, VARIOUS_IN_LOVE},
 };
 
 static const struct ListMenuItem sAIListItems[] =
@@ -1075,6 +1080,19 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
             gBattleSpritesDataPtr->battlerData[data->battlerId].behindSubstitute = 1;
         }
         break;
+    case VAR_IN_LOVE:
+        if (data->modifyArrows.currValue)
+        {
+            if (IsBattlerAlive(BATTLE_OPPOSITE(data->battlerId)))
+                gBattleMons[data->battlerId].status2 |= STATUS2_INFATUATED_WITH(BATTLE_OPPOSITE(data->battlerId));
+            else
+                gBattleMons[data->battlerId].status2 |= STATUS2_INFATUATED_WITH(BATTLE_PARTNER(BATTLE_OPPOSITE(data->battlerId)));
+        }
+        else
+        {
+            gBattleMons[data->battlerId].status2 &= ~(STATUS2_INFATUATION);
+        }
+        break;
     }
     data->battlerWasChanged[data->battlerId] = TRUE;
 }
@@ -1335,6 +1353,15 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
             data->modifyArrows.modifiedValPtr = &gDisableStructs[data->battlerId].substituteHP;
             data->modifyArrows.typeOfVal = VAR_SUBSTITUTE;
             data->modifyArrows.currValue = gDisableStructs[data->battlerId].substituteHP;
+        }
+        else if (data->currentSecondaryListItemId == VARIOUS_IN_LOVE)
+        {
+            data->modifyArrows.minValue = 0;
+            data->modifyArrows.maxValue = 1;
+            data->modifyArrows.maxDigits = 1;
+            data->modifyArrows.modifiedValPtr = NULL;
+            data->modifyArrows.typeOfVal = VAR_IN_LOVE;
+            data->modifyArrows.currValue = (gBattleMons[data->battlerId].status2 & STATUS2_INFATUATION) != 0;
         }
         break;
     case LIST_ITEM_STATUS1:

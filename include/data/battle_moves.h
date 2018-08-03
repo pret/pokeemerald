@@ -5464,7 +5464,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DEFEND_ORDER
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_COSMIC_POWER,
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 0,
@@ -7361,7 +7361,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_OBLIVION_WING
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (Restores 75% of damage dealt back to user)
+		.effect = EFFECT_ABSORB,
 		.power = 80,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
@@ -7371,6 +7371,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
 		.split = SPLIT_SPECIAL,
+		.argument = 75, // restores 75% HP instead of 50% HP
 	},
 	{ // MOVE_THOUSAND_ARROWS
 		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
