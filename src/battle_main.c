@@ -3036,6 +3036,8 @@ static void BattleStartClearSetData(void)
         gHitMarker |= HITMARKER_NO_ANIMATIONS;
 
     gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
+	gBattleScripting.expOnCatch = (B_EXP_CATCH >= GEN_6);
+	gBattleScripting.monCaught = FALSE;
 
     gMultiHitCounter = 0;
     gBattleOutcome = 0;

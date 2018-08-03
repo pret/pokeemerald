@@ -5,6 +5,7 @@
 #define sPAINSPLIT_HP gBattleScripting
 #define sBIDE_DMG gBattleScripting + 4
 #define sMULTIHIT_STRING gBattleScripting + 8
+#define sEXP_CATCH gBattleScripting + 0xE
 #define sTWOTURN_STRINGID gBattleScripting + 0xF
 #define sB_ANIM_ARG1 gBattleScripting + 0x10
 #define sB_ANIM_ARG2 gBattleScripting + 0x11
@@ -27,6 +28,7 @@
 #define sFIELD_23 gBattleScripting + 0x23
 #define sFIELD_24 gBattleScripting + 0x24
 #define sMULTIPLAYER_ID gBattleScripting + 0x25
+#define sMON_CAUGHT gBattleScripting + 0x26
 
 #define cEFFECT_CHOOSER gBattleCommunication + 3
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5

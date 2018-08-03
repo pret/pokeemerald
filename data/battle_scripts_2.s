@@ -2,6 +2,7 @@
 #include "constants/battle_script_commands.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_string_ids.h"
+#include "constants/battle_config.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 	.include "asm/macros.inc"
@@ -61,10 +62,16 @@ BattleScript_SafariBallThrow::
 	handleballthrow
 
 BattleScript_SuccessBallThrow::
+	setbyte sMON_CAUGHT, TRUE
 	jumpifhalfword CMP_EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_PrintCaughtMonInfo
 	incrementgamestat 0xB
 BattleScript_PrintCaughtMonInfo::
 	printstring STRINGID_GOTCHAPKMNCAUGHT
+	jumpifbyte CMP_NOT_EQUAL, sEXP_CATCH, TRUE, BattleScript_TryPrintCaughtMonInfo
+	setbyte sGIVEEXP_STATE, 0x0
+	getexp BS_TARGET
+	sethword gBattle_BG2_X, 0x0
+BattleScript_TryPrintCaughtMonInfo:
 	trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
 	printstring STRINGID_PKMNDATAADDEDTODEX
 	waitstate
