@@ -227,7 +227,7 @@ static void atk84_jumpifcantmakeasleep(void);
 static void atk85_stockpile(void);
 static void atk86_stockpiletobasedamage(void);
 static void atk87_stockpiletohpheal(void);
-static void atk88_negativedamage(void);
+static void atk88_setdrainedhp(void);
 static void atk89_statbuffchange(void);
 static void atk8A_normalisebuffs(void);
 static void atk8B_setbide(void);
@@ -485,7 +485,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk85_stockpile,
     atk86_stockpiletobasedamage,
     atk87_stockpiletohpheal,
-    atk88_negativedamage,
+    atk88_setdrainedhp,
     atk89_statbuffchange,
     atk8A_normalisebuffs,
     atk8B_setbide,
@@ -6739,9 +6739,13 @@ static void atk87_stockpiletohpheal(void)
     }
 }
 
-static void atk88_negativedamage(void)
+static void atk88_setdrainedhp(void)
 {
-    gBattleMoveDamage = -(gHpDealt / 2);
+    if (gBattleMoves[gCurrentMove].argument != 0)
+        gBattleMoveDamage = -(gHpDealt * gBattleMoves[gCurrentMove].argument / 100);
+    else
+        gBattleMoveDamage = -(gHpDealt / 2);
+
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = -1;
 

@@ -702,7 +702,7 @@
 	.4byte \param0
 	.endm
 
-	.macro negativedamage
+	.macro setdrainedhp
 	.byte 0x88
 	.endm
 

@@ -744,7 +744,7 @@ BattleScript_EffectAbsorb::
 	waitmessage 0x40
 	resultmessage
 	waitmessage 0x40
-	negativedamage
+	setdrainedhp
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_AbsorbLiquidOoze
 	setbyte cMULTISTRING_CHOOSER, 0x0
@@ -854,7 +854,7 @@ BattleScript_82D8C18::
 	waitmessage 0x40
 	resultmessage
 	waitmessage 0x40
-	negativedamage
+	setdrainedhp
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER

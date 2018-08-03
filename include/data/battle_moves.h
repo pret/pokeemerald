@@ -6928,7 +6928,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DRAINING_KISS
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (restores 75% HP instead of 50% HP)
+		.effect = EFFECT_ABSORB,
 		.power = 50,
 		.type = TYPE_FAIRY,
 		.accuracy = 100,
@@ -6937,7 +6937,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
-		.split = SPLIT_SPECIAL,
+		.split = SPLIT_SPECIAL, // restores 75% HP instead of 50% HP
+		.argument = 75,
 	},
 	{ // MOVE_CRAFTY_SHIELD
 		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
