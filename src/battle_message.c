@@ -633,6 +633,8 @@ static const u8 sText_QuashSuccess[] = _("");
 static const u8 sText_PkmnBlewAwayToxicSpikes[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nTOXIC SPIKES!");
 static const u8 sText_PkmnBlewAwayStickyWeb[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nSTICKY WEB!");
 static const u8 sText_PkmnBlewAwayStealthRock[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nSTEALTH ROCK!");
+static const u8 sText_IonDelugeOn[] = _("");
+static const u8 sText_TopsyTurvySwitchedStats[] = _("");
 
 // New selection strings, they must end with "\p".
 // Use {B_LAST_ITEM} and {B_CURRENT_MOVE}.
@@ -1126,6 +1128,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_PkmnBlewAwayToxicSpikes,
     sText_PkmnBlewAwayStickyWeb,
     sText_PkmnBlewAwayStealthRock,
+    sText_IonDelugeOn,
+    sText_TopsyTurvySwitchedStats,
 };
 
 const u16 gMagicCoatBounceStringIds[] =

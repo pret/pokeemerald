@@ -1440,6 +1440,10 @@
 	.4byte \ptr
 	.endm
 	
+	.macro invertstatstages battler
+	various \battler, VARIOUS_INVERT_STAT_STAGES
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

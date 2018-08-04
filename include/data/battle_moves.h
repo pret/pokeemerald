@@ -6832,7 +6832,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ION_DELUGE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_ION_DELUGE,
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 0,
@@ -6880,7 +6880,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FREEZE_DRY
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_FREEZE_DRY,
 		.power = 70,
 		.type = TYPE_ICE,
 		.accuracy = 100,
@@ -6916,7 +6916,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TOPSY_TURVY
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_TOPSY_TURVY,
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 0,

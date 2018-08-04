@@ -848,6 +848,7 @@ enum
 	ENDTURN_MISTY_TERRAIN,
 	ENDTURN_GRASSY_TERRAIN,
 	ENDTURN_PSYCHIC_TERRAIN,
+	ENDTURN_ION_DELUGE,
 	ENDTURN_FIELD_COUNT,
 };
 
@@ -1255,6 +1256,10 @@ u8 DoFieldEndTurnEffects(void)
                 BattleScriptExecute(BattleScript_GravityEnds);
                 effect++;
             }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_ION_DELUGE:
+            gFieldStatuses &= ~(STATUS_FIELD_ION_DELUGE);
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_FIELD_COUNT:
@@ -5410,7 +5415,7 @@ static inline void MulByTypeEffectiveness(u16 *modifier, u16 move, u8 moveType, 
         mod = UQ_4_12(1.0);
     if (moveType == TYPE_PSYCHIC && defType == TYPE_DARK && gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED)
         mod = UQ_4_12(1.0);
-    if (move == MOVE_FREEZE_DRY && defType == TYPE_WATER)
+    if (gBattleMoves[move].effect == EFFECT_FREEZE_DRY && defType == TYPE_WATER)
         mod = UQ_4_12(2.0);
     if (moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(battlerDef))
         mod = UQ_4_12(1.0);

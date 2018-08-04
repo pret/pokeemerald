@@ -6430,6 +6430,15 @@ static void atk76_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_INVERT_STAT_STAGES:
+        for (i = 0; i < BATTLE_STATS_NO; i++)
+        {
+            if (gBattleMons[gActiveBattler].statStages[i] < 6) // Negative becomes positive.
+                gBattleMons[gActiveBattler].statStages[i] = 6 + (6 - gBattleMons[gActiveBattler].statStages[i]);
+            else if (gBattleMons[gActiveBattler].statStages[i] > 6) // Positive becomes negative.
+                gBattleMons[gActiveBattler].statStages[i] = 6 - (gBattleMons[gActiveBattler].statStages[i] - 6);
+        }
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

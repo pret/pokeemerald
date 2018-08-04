@@ -279,6 +279,41 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectEntrainment
 	.4byte BattleScript_EffectHealPulse
 	.4byte BattleScript_EffectQuash
+	.4byte BattleScript_EffectIonDeluge
+	.4byte BattleScript_EffectFreezeDry
+	.4byte BattleScript_EffectTopsyTurvy
+	
+BattleScript_EffectTopsyTurvy:
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_ATK, 6, BattleScript_EffectTopsyTurvyWorks
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_DEF, 6, BattleScript_EffectTopsyTurvyWorks
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_SPATK, 6, BattleScript_EffectTopsyTurvyWorks
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_SPDEF, 6, BattleScript_EffectTopsyTurvyWorks
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_SPEED, 6, BattleScript_EffectTopsyTurvyWorks
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_ACC, 6, BattleScript_EffectTopsyTurvyWorks
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_EVASION, 6, BattleScript_ButItFailed
+BattleScript_EffectTopsyTurvyWorks:
+	attackanimation
+	waitanimation
+	invertstatstages BS_TARGET
+	printstring STRINGID_TOPSYTURVYSWITCHEDSTATS
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectIonDeluge:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	orword gFieldStatuses, STATUS_FIELD_ION_DELUGE
+	attackanimation
+	waitanimation
+	printstring STRINGID_IONDELUGEON
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectQuash:
 	attackcanceler
@@ -740,6 +775,7 @@ BattleScript_EffectFoulPlay:
 BattleScript_EffectPsyshock:
 BattleScript_EffectWeatherBall:
 BattleScript_EffectHiddenPower:
+BattleScript_EffectFreezeDry:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER

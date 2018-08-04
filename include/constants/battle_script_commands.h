@@ -90,6 +90,7 @@
 #define VARIOUS_SET_LAST_USED_ABILITY           41
 #define VARIOUS_TRY_HEAL_PULSE                  42
 #define VARIOUS_TRY_QUASH                       43
+#define VARIOUS_INVERT_STAT_STAGES              44
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0
