@@ -85,6 +85,11 @@
 #define VARIOUS_PLAY_MOVE_ANIMATION             36
 #define VARIOUS_SET_LUCKY_CHANT                 37
 #define VARIOUS_SUCKER_PUNCH_CHECK              38
+#define VARIOUS_SET_SIMPLE_BEAM                 39
+#define VARIOUS_TRY_ENTRAINMENT                 40
+#define VARIOUS_SET_LAST_USED_ABILITY           41
+#define VARIOUS_TRY_HEAL_PULSE                  42
+#define VARIOUS_TRY_QUASH                       43
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

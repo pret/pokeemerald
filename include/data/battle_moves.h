@@ -5896,7 +5896,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_ACID_SPRAY
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2,
 		.power = 40,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -5920,7 +5920,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SIMPLE_BEAM
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SIMPLE_BEAM,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5932,7 +5932,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ENTRAINMENT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_ENTRAINMENT,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6064,7 +6064,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEAL_PULSE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (always bypasses accuracy checks)
+		.effect = EFFECT_HEAL_PULSE,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -6136,7 +6136,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_QUASH
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_QUASH,
 		.power = 0,
 		.type = TYPE_DARK,
 		.accuracy = 100,

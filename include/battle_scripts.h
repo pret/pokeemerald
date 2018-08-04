@@ -332,5 +332,8 @@ extern const u8 BattleScript_SelectingNotAllowedMoveGravityInPalace[];
 extern const u8 BattleScript_SelectingNotAllowedMoveHealBlock[];
 extern const u8 BattleScript_MoveUsedHealBlockPrevents[];
 extern const u8 BattleScript_SelectingNotAllowedMoveHealBlockInPalace[];
+extern const u8 BattleScript_ToxicSpikesFree[];
+extern const u8 BattleScript_StickyWebFree[];
+extern const u8 BattleScript_StealthRockFree[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

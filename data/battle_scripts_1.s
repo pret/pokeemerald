@@ -274,6 +274,63 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectMetalBurst
 	.4byte BattleScript_EffectLuckyChant
 	.4byte BattleScript_EffectSuckerPunch
+	.4byte BattleScript_EffectSpecialDefenseDownHit2
+	.4byte BattleScript_EffectSimpleBeam
+	.4byte BattleScript_EffectEntrainment
+	.4byte BattleScript_EffectHealPulse
+	.4byte BattleScript_EffectQuash
+	
+BattleScript_EffectQuash:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	tryquash BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_QUASHSUCCESS
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectHealPulse:
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	jumpifsubstituteblocks BattleScript_ButItFailed
+	tryhealpulse BS_TARGET, BattleScript_AlreadyAtFullHp
+	attackanimation
+	waitanimation
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectEntrainment:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	tryentrainment BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	setlastusedability BS_TARGET
+	printstring STRINGID_PKMNACQUIREDABILITY
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectSimpleBeam:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	setabilitysimple BS_TARGET, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNACQUIREDSIMPLE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectSuckerPunch:
 	attackcanceler
@@ -1546,6 +1603,10 @@ BattleScript_EffectSpecialAttackDownHit::
 
 BattleScript_EffectSpecialDefenseDownHit::
 	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_1
+	goto BattleScript_EffectHit
+	
+BattleScript_EffectSpecialDefenseDownHit2::
+	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_2
 	goto BattleScript_EffectHit
 
 BattleScript_EffectAccuracyDownHit::
@@ -4042,6 +4103,21 @@ BattleScript_LeechSeedFree::
 
 BattleScript_SpikesFree::
 	printstring STRINGID_PKMNBLEWAWAYSPIKES
+	waitmessage 0x40
+	return
+	
+BattleScript_ToxicSpikesFree::
+	printstring STRINGID_PKMNBLEWAWAYTOXICSPIKES
+	waitmessage 0x40
+	return
+	
+BattleScript_StickyWebFree::
+	printstring STRINGID_PKMNBLEWAWAYSTICKYWEB
+	waitmessage 0x40
+	return
+	
+BattleScript_StealthRockFree::
+	printstring STRINGID_PKMNBLEWAWAYSTEALTHROCK
 	waitmessage 0x40
 	return
 

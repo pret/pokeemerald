@@ -6061,7 +6061,7 @@ static bool32 HasAttackerFaintedTarget(void)
 static void atk76_various(void)
 {
     u8 side;
-    s32 i;
+    s32 i, j;
     u8 data[10];
 
     if (gBattleControllerExecFlags)
@@ -6329,6 +6329,106 @@ static void atk76_various(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;
+        return;
+    case VARIOUS_SET_SIMPLE_BEAM:
+        switch (gBattleMons[gActiveBattler].ability)
+        {
+        case ABILITY_SIMPLE:
+        case ABILITY_TRUANT:
+        case ABILITY_STANCE_CHANGE:
+        case ABILITY_MULTITYPE:
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            break;
+        default:
+            gBattleMons[gActiveBattler].ability = ABILITY_SIMPLE;
+            gBattlescriptCurrInstr += 7;
+            break;
+        }
+        return;
+    case VARIOUS_TRY_ENTRAINMENT:
+        switch (gBattleMons[gBattlerTarget].ability)
+        {
+        case ABILITY_TRUANT:
+        case ABILITY_MULTITYPE:
+        case ABILITY_STANCE_CHANGE:
+        case ABILITY_SCHOOLING:
+        case ABILITY_COMATOSE:
+        case ABILITY_SHIELDS_DOWN:
+        case ABILITY_DISGUISE:
+        case ABILITY_RKS_SYSTEM:
+        case ABILITY_BATTLE_BOND:
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            return;
+        }
+        switch (gBattleMons[gBattlerAttacker].ability)
+        {
+        case ABILITY_TRACE:
+        case ABILITY_FORECAST:
+        case ABILITY_FLOWER_GIFT:
+        case ABILITY_ZEN_MODE:
+        case ABILITY_ILLUSION:
+        case ABILITY_IMPOSTER:
+        case ABILITY_POWER_OF_ALCHEMY:
+        case ABILITY_RECEIVER:
+        case ABILITY_DISGUISE:
+        case ABILITY_POWER_CONSTRUCT:
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            return;
+        }
+        if (gBattleMons[gBattlerTarget].ability == gBattleMons[gBattlerAttacker].ability)
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        else
+        {
+            gBattleMons[gBattlerTarget].ability = gBattleMons[gBattlerAttacker].ability;
+            gBattlescriptCurrInstr += 7;
+        }
+        return;
+    case VARIOUS_SET_LAST_USED_ABILITY:
+        gLastUsedAbility = gBattleMons[gActiveBattler].ability;
+        break;
+    case VARIOUS_TRY_HEAL_PULSE:
+        if (BATTLER_MAX_HP(gActiveBattler))
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        else
+        {
+            if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MEGA_LAUNCHER && gBattleMoves[gCurrentMove].flags & FLAG_MEGA_LAUNCHER_BOOST)
+                gBattleMoveDamage = -(gBattleMons[gActiveBattler].maxHP * 75 / 100);
+            else
+                gBattleMoveDamage = -(gBattleMons[gActiveBattler].maxHP / 2);
+
+            if (gBattleMoveDamage == 0)
+                gBattleMoveDamage = -1;
+            gBattlescriptCurrInstr += 7;
+        }
+        return;
+    case VARIOUS_TRY_QUASH:
+        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        else
+        {
+            for (i = 0; i < gBattlersCount; i++)
+                data[i] = gBattlerByTurnOrder[i];
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (data[i] == gBattlerTarget)
+                {
+                    for (j = i + 1; j < gBattlersCount; j++)
+                        data[i++] = data[j];
+                }
+                else
+                {
+                    gBattlerByTurnOrder[i] = data[i];
+                }
+            }
+            gBattlerByTurnOrder[gBattlersCount - 1] = gBattlerTarget;
+            gBattlescriptCurrInstr += 7;
+        }
         return;
     }
 
@@ -8606,6 +8706,8 @@ static void atkBD_copyfoestats(void) // psych up
 
 static void atkBE_rapidspinfree(void)
 {
+    u8 atkSide = GetBattlerSide(gBattlerAttacker);
+
     if (gBattleMons[gBattlerAttacker].status2 & STATUS2_WRAPPED)
     {
         gBattleScripting.battler = gBattlerTarget;
@@ -8628,12 +8730,33 @@ static void atkBE_rapidspinfree(void)
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_LeechSeedFree;
     }
-    else if (gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_SPIKES)
+    else if (gSideStatuses[atkSide] & SIDE_STATUS_SPIKES)
     {
-        gSideStatuses[GetBattlerSide(gBattlerAttacker)] &= ~(SIDE_STATUS_SPIKES);
-        gSideTimers[GetBattlerSide(gBattlerAttacker)].spikesAmount = 0;
+        gSideStatuses[atkSide] &= ~(SIDE_STATUS_SPIKES);
+        gSideTimers[atkSide].spikesAmount = 0;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_SpikesFree;
+    }
+    else if (gSideStatuses[atkSide] & SIDE_STATUS_TOXIC_SPIKES)
+    {
+        gSideStatuses[atkSide] &= ~(SIDE_STATUS_TOXIC_SPIKES);
+        gSideTimers[atkSide].toxicSpikesAmount = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_ToxicSpikesFree;
+    }
+    else if (gSideStatuses[atkSide] & SIDE_STATUS_STICKY_WEB)
+    {
+        gSideStatuses[atkSide] &= ~(SIDE_STATUS_STICKY_WEB);
+        gSideTimers[atkSide].stickyWebAmount = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_StickyWebFree;
+    }
+    else if (gSideStatuses[atkSide] & SIDE_STATUS_STEALTH_ROCK)
+    {
+        gSideStatuses[atkSide] &= ~(SIDE_STATUS_STEALTH_ROCK);
+        gSideTimers[atkSide].stealthRockAmount = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_StealthRockFree;
     }
     else
     {

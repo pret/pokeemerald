@@ -1416,6 +1416,30 @@
 	.4byte \ptr
 	.endm
 	
+	.macro setabilitysimple battler ptr
+	various \battler VARIOUS_SET_SIMPLE_BEAM
+	.4byte \ptr
+	.endm
+	
+	.macro tryentrainment ptr
+	various BS_ATTACKER, VARIOUS_TRY_ENTRAINMENT
+	.4byte \ptr
+	.endm
+	
+	.macro setlastusedability battler
+	various \battler, VARIOUS_SET_LAST_USED_ABILITY
+	.endm
+	
+	.macro tryhealpulse battler ptr
+	various \battler, VARIOUS_TRY_HEAL_PULSE
+	.4byte \ptr
+	.endm
+	
+	.macro tryquash ptr
+	various BS_ATTACKER, VARIOUS_TRY_QUASH
+	.4byte \ptr
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
