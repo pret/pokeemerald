@@ -284,7 +284,7 @@ static void atkBD_copyfoestats(void);
 static void atkBE_rapidspinfree(void);
 static void atkBF_setdefensecurlbit(void);
 static void atkC0_recoverbasedonsunlight(void);
-static void atkC1_nop(void);
+static void atkC1_setstickyweb(void);
 static void atkC2_selectfirstvalidtarget(void);
 static void atkC3_trysetfutureattack(void);
 static void atkC4_trydobeatup(void);
@@ -346,6 +346,7 @@ static void atkFB_averagestats(void);
 static void atkFC_jumpifoppositegenders(void);
 static void atkFD_trygetbaddreamstarget(void);
 static void atkFE_tryworryseed(void);
+static void atkFF_metalburstdamagecalculator(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -542,7 +543,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkBE_rapidspinfree,
     atkBF_setdefensecurlbit,
     atkC0_recoverbasedonsunlight,
-    atkC1_nop,
+    atkC1_setstickyweb,
     atkC2_selectfirstvalidtarget,
     atkC3_trysetfutureattack,
     atkC4_trydobeatup,
@@ -604,6 +605,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkFC_jumpifoppositegenders,
     atkFD_trygetbaddreamstarget,
     atkFE_tryworryseed,
+    atkFF_metalburstdamagecalculator,
 };
 
 struct StatFractions
@@ -6307,6 +6309,27 @@ static void atk76_various(void)
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr += 5;
         return;
+    case VARIOUS_SET_LUCKY_CHANT:
+        if (!(gSideStatuses[GET_BATTLER_SIDE(gActiveBattler)] & SIDE_STATUS_LUCKY_CHANT))
+        {
+            gSideStatuses[GET_BATTLER_SIDE(gActiveBattler)] |= SIDE_STATUS_LUCKY_CHANT;
+            gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].luckyChantBattlerId = gActiveBattler;
+            gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].luckyChantTimer = 5;
+            gBattlescriptCurrInstr += 7;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        return;
+    case VARIOUS_SUCKER_PUNCH_CHECK:
+        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else if (gBattleMoves[gBattleMons[gBattlerTarget].moves[gBattleStruct->chosenMovePositions[gBattlerTarget]]].power == 0)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -8649,9 +8672,19 @@ static void atkC0_recoverbasedonsunlight(void)
     }
 }
 
-static void atkC1_nop(void)
+static void atkC1_setstickyweb(void)
 {
-    gBattlescriptCurrInstr++;
+    u8 targetSide = GetBattlerSide(gBattlerTarget);
+    if (gSideStatuses[targetSide] & SIDE_STATUS_STICKY_WEB)
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+    else
+    {
+        gSideStatuses[targetSide] |= SIDE_STATUS_STICKY_WEB;
+        gSideTimers[targetSide].stickyWebAmount = 1;
+        gBattlescriptCurrInstr += 5;
+    }
 }
 
 static void atkC2_selectfirstvalidtarget(void)
@@ -10161,3 +10194,42 @@ static void atkFE_tryworryseed(void)
         break;
     }
 }
+
+static void atkFF_metalburstdamagecalculator(void)
+{
+    u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
+    u8 sideTarget = 0;
+
+    if (gProtectStructs[gBattlerAttacker].physicalDmg
+        && sideAttacker != (sideTarget = GetBattlerSide(gProtectStructs[gBattlerAttacker].physicalBattlerId))
+        && gBattleMons[gProtectStructs[gBattlerAttacker].physicalBattlerId].hp)
+    {
+        gBattleMoveDamage = gProtectStructs[gBattlerAttacker].physicalDmg * 150 / 100;
+
+        if (gSideTimers[sideTarget].followmeTimer && gBattleMons[gSideTimers[sideTarget].followmeTarget].hp)
+            gBattlerTarget = gSideTimers[sideTarget].followmeTarget;
+        else
+            gBattlerTarget = gProtectStructs[gBattlerAttacker].physicalBattlerId;
+
+        gBattlescriptCurrInstr += 5;
+    }
+    else if (gProtectStructs[gBattlerAttacker].specialDmg
+             && sideAttacker != (sideTarget = GetBattlerSide(gProtectStructs[gBattlerAttacker].specialBattlerId))
+             && gBattleMons[gProtectStructs[gBattlerAttacker].specialBattlerId].hp)
+    {
+        gBattleMoveDamage = gProtectStructs[gBattlerAttacker].specialDmg * 150 / 100;
+
+        if (gSideTimers[sideTarget].followmeTimer && gBattleMons[gSideTimers[sideTarget].followmeTarget].hp)
+            gBattlerTarget = gSideTimers[sideTarget].followmeTarget;
+        else
+            gBattlerTarget = gProtectStructs[gBattlerAttacker].specialBattlerId;
+
+        gBattlescriptCurrInstr += 5;
+    }
+    else
+    {
+        gSpecialStatuses[gBattlerAttacker].flag20 = 1;
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+}
+

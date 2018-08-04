@@ -4420,7 +4420,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_METAL_BURST
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (Counters 1.5x damage)
+		.effect = EFFECT_METAL_BURST,
 		.power = 0,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -4576,7 +4576,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_LUCKY_CHANT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_LUCKY_CHANT,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -4672,7 +4672,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SUCKER_PUNCH
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SUCKER_PUNCH,
 		.power = 70,
 		.type = TYPE_DARK,
 		.accuracy = 100,
@@ -6772,7 +6772,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_STICKY_WEB
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_STICKY_WEB,
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 0,

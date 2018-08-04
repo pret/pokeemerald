@@ -270,6 +270,38 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectHeartSwap
 	.4byte BattleScript_EffectPowerSplit
 	.4byte BattleScript_EffectGuardSplit
+	.4byte BattleScript_EffectStickyWeb
+	.4byte BattleScript_EffectMetalBurst
+	.4byte BattleScript_EffectLuckyChant
+	.4byte BattleScript_EffectSuckerPunch
+	
+BattleScript_EffectSuckerPunch:
+	attackcanceler
+	suckerpunchcheck BattleScript_ButItFailedAtkStringPpReduce
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	goto BattleScript_HitFromAtkString
+	
+BattleScript_EffectLuckyChant:
+	attackcanceler
+	attackstring
+	ppreduce
+	setluckychant BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_SHIELDEDFROMCRITICALHITS
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectMetalBurst:
+	attackcanceler
+	metalburstdamagecalculator BattleScript_ButItFailedAtkStringPpReduce
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	typecalc
+	bichalfword gMoveResultFlags, MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE
+	adjustdamage
+	goto BattleScript_HitFromAtkAnimation
 	
 BattleScript_EffectHealingWish:
 	attackcanceler
@@ -419,6 +451,17 @@ BattleScript_EffectStealthRock:
 	attackanimation
 	waitanimation
 	printstring STRINGID_POINTEDSTONESFLOAT
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectStickyWeb:
+	attackcanceler
+	attackstring
+	ppreduce
+	setstickyweb BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_STICKYWEBUSED
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 	

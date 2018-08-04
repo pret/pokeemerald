@@ -959,8 +959,9 @@
 	.4byte \param0
 	.endm
 
-	.macro nop_C1
+	.macro setstickyweb ptr
 	.byte 0xc1
+	.4byte \ptr
 	.endm
 
 	.macro selectfirstvalidtarget
@@ -1250,6 +1251,11 @@
 	.4byte \ptr
 	.endm
 	
+	.macro metalburstdamagecalculator ptr
+	.byte 0xff
+	.4byte \ptr
+	.endm
+	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves bank
 	various \bank, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1398,6 +1404,16 @@
 	.macro playmoveanimation battler move
 	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
 	.2byte \move
+	.endm
+	
+	.macro setluckychant battler ptr
+	various \battler VARIOUS_SET_LUCKY_CHANT
+	.4byte \ptr
+	.endm
+	
+	.macro suckerpunchcheck ptr
+	various BS_ATTACKER, VARIOUS_SUCKER_PUNCH_CHECK
+	.4byte \ptr
 	.endm
 	
 @ helpful macros

@@ -83,6 +83,8 @@
 #define VARIOUS_TRY_ACTIVATE_MOXIE              34
 #define VARIOUS_TRY_ACTIVATE_FELL_STINGER       35
 #define VARIOUS_PLAY_MOVE_ANIMATION             36
+#define VARIOUS_SET_LUCKY_CHANT                 37
+#define VARIOUS_SUCKER_PUNCH_CHECK              38
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

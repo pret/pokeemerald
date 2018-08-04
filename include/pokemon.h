@@ -353,9 +353,11 @@ struct BaseStats
             u8 noFlip : 1;
 };
 
+// Argument and effect field are temporarily switched till functions referencing gBattleMoves are decompiled.
+
 struct BattleMove
 {
-    u8 effect;
+    u8 argument;
     u8 power;
     u8 type;
     u8 accuracy;
@@ -365,7 +367,7 @@ struct BattleMove
     s8 priority;
     u32 flags;
     u8 split;
-    u8 argument;
+    u16 effect;
 };
 
 struct SpindaSpot

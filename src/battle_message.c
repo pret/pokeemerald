@@ -628,6 +628,7 @@ static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}’s
 static const u8 sText_PkmnMoveBouncedViaAbility[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_CURRENT_MOVE} was\nbounced back by {B_DEF_NAME_WITH_PREFIX}’s\l{B_DEF_ABILITY}!");
 static const u8 sText_ImposterTransform[] = _("{B_ATK_NAME_WITH_PREFIX} transformed into\n{B_DEF_NAME_WITH_PREFIX} using {B_LAST_ABILITY}!");
 static const u8 sText_NotDoneYet[] = _("This move effect is not done yet!\p");
+static const u8 sText_StickyWebUsed[] = _("");
 
 // New selection strings, they must end with "\p".
 // Use {B_LAST_ITEM} and {B_CURRENT_MOVE}.
@@ -1116,6 +1117,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_GravityPreventsUsage,
     sText_HealBlockPreventsUsage,
     sText_NotDoneYet,
+    sText_StickyWebUsed,
 };
 
 const u16 gMagicCoatBounceStringIds[] =
