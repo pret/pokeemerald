@@ -289,6 +289,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAttackAccUp
 	.4byte BattleScript_EffectAttackSpAttackUp
 	.4byte BattleScript_EffectHurricane
+	.4byte BattleScript_EffectTwoTypedMove
 	
 BattleScript_EffectAttackSpAttackUp:
 	attackcanceler
@@ -847,6 +848,7 @@ BattleScript_EffectPsyshock:
 BattleScript_EffectWeatherBall:
 BattleScript_EffectHiddenPower:
 BattleScript_EffectFreezeDry:
+BattleScript_EffectTwoTypedMove:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER

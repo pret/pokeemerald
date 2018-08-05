@@ -6724,7 +6724,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FLYING_PRESS
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_TWO_TYPED_MOVE,
 		.power = 100,
 		.type = TYPE_FIGHTING,
 		.accuracy = 95,
@@ -6734,6 +6734,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_DMG_MINIMIZE,
 		.split = SPLIT_PHYSICAL,
+		.argument = TYPE_FLYING,
 	},
 	{ // MOVE_MAT_BLOCK
 		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect

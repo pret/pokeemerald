@@ -5447,41 +5447,50 @@ static void UpdateMoveResultFlags(u16 modifier)
     }
 }
 
+static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 battlerAtk, u8 battlerDef, bool32 recordAbilities, u16 modifier)
+{
+    u32 atkAbility = GetBattlerAbility(battlerAtk);
+    MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type1, atkAbility);
+    if (gBattleMons[battlerDef].type2 != gBattleMons[battlerDef].type1)
+        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type2, atkAbility);
+
+    if (moveType == TYPE_GROUND && !IsBattlerGrounded(battlerDef))
+    {
+        modifier = UQ_4_12(0.0);
+        if (recordAbilities && GetBattlerAbility(battlerDef) == ABILITY_LEVITATE)
+        {
+            gLastUsedAbility = ABILITY_LEVITATE;
+            gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
+            gLastLandedMoves[battlerDef] = 0;
+            gBattleCommunication[6] = moveType;
+            RecordAbilityBattle(battlerDef, ABILITY_LEVITATE);
+        }
+    }
+    if (GetBattlerAbility(battlerDef) == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && gBattleMoves[move].power)
+    {
+        modifier = UQ_4_12(0.0);
+        if (recordAbilities)
+        {
+            gLastUsedAbility = ABILITY_WONDER_GUARD;
+            gMoveResultFlags |= MOVE_RESULT_MISSED;
+            gLastLandedMoves[battlerDef] = 0;
+            gBattleCommunication[6] = 3;
+            RecordAbilityBattle(battlerDef, ABILITY_WONDER_GUARD);
+        }
+    }
+
+    return modifier;
+}
+
 u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 battlerDef, bool32 recordAbilities)
 {
     u16 modifier = UQ_4_12(1.0);
 
     if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
-        u32 atkAbility = GetBattlerAbility(battlerAtk);
-        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type1, atkAbility);
-        if (gBattleMons[battlerDef].type2 != gBattleMons[battlerDef].type1)
-            MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type2, atkAbility);
-
-        if (moveType == TYPE_GROUND && !IsBattlerGrounded(battlerDef))
-        {
-            modifier = UQ_4_12(0.0);
-            if (recordAbilities && GetBattlerAbility(battlerDef) == ABILITY_LEVITATE)
-            {
-                gLastUsedAbility = ABILITY_LEVITATE;
-                gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
-                gLastLandedMoves[battlerDef] = 0;
-                gBattleCommunication[6] = moveType;
-                RecordAbilityBattle(battlerDef, ABILITY_LEVITATE);
-            }
-        }
-        if (GetBattlerAbility(battlerDef) == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && gBattleMoves[move].power)
-        {
-            modifier = UQ_4_12(0.0);
-            if (recordAbilities)
-            {
-                gLastUsedAbility = ABILITY_WONDER_GUARD;
-                gMoveResultFlags |= MOVE_RESULT_MISSED;
-                gLastLandedMoves[battlerDef] = 0;
-                gBattleCommunication[6] = 3;
-                RecordAbilityBattle(battlerDef, ABILITY_WONDER_GUARD);
-            }
-        }
+        modifier = CalcTypeEffectivenessMultiplierInternal(move, moveType, battlerAtk, battlerDef, recordAbilities, modifier);
+        if (gBattleMoves[move].effect == EFFECT_TWO_TYPED_MOVE)
+            modifier = CalcTypeEffectivenessMultiplierInternal(move, gBattleMoves[move].argument, battlerAtk, battlerDef, recordAbilities, modifier);
     }
 
     UpdateMoveResultFlags(modifier);
