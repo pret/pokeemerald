@@ -92,6 +92,7 @@
 #define VARIOUS_TRY_QUASH                       43
 #define VARIOUS_INVERT_STAT_STAGES              44
 #define VARIOUS_SET_TERRAIN                     45
+#define VARIOUS_TRY_ME_FIRST                    46
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

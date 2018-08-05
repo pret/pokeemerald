@@ -290,6 +290,17 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAttackSpAttackUp
 	.4byte BattleScript_EffectHurricane
 	.4byte BattleScript_EffectTwoTypedMove
+	.4byte BattleScript_EffectMeFirst
+	
+BattleScript_EffectMeFirst:
+	attackcanceler
+	attackstring
+	trymefirst BattleScript_ButItFailedPpReduce
+	attackanimation
+	waitanimation
+	setbyte sB_ANIM_TURN, 0x0
+	setbyte sB_ANIM_TARGETS_HIT, 0x0
+	jumptorandomattack TRUE
 	
 BattleScript_EffectAttackSpAttackUp:
 	attackcanceler

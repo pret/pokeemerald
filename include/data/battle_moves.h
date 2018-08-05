@@ -4588,7 +4588,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ME_FIRST
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_ME_FIRST,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,

@@ -4265,6 +4265,7 @@ static void atk49_moveend(void)
         case 17: // Clear bits active just while using a move.
             gProtectStructs[gBattlerAttacker].usesBouncedMove = 0;
             gBattleStruct->ateBoost[gBattlerAttacker] = 0;
+            gStatuses3[gBattlerAttacker] &= ~(STATUS3_ME_FIRST);
             gBattleScripting.atk49_state++;
             break;
         case ATK49_LAST_CASE:
@@ -6479,6 +6480,37 @@ static void atk76_various(void)
         break;
     case VARIOUS_SET_TERRAIN:
         HandleTerrainMove(gBattleMoves[gCurrentMove].effect);
+        return;
+    case VARIOUS_TRY_ME_FIRST:
+        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else if (gBattleMoves[gBattleMons[gBattlerTarget].moves[gBattleStruct->chosenMovePositions[gBattlerTarget]]].power == 0)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+        {
+            u16 move = gBattleMons[gBattlerTarget].moves[gBattleStruct->chosenMovePositions[gBattlerTarget]];
+            switch (move)
+            {
+            case MOVE_STRUGGLE:
+            case MOVE_CHATTER:
+            case MOVE_FOCUS_PUNCH:
+            case MOVE_THIEF:
+            case MOVE_COVET:
+            case MOVE_COUNTER:
+            case MOVE_MIRROR_COAT:
+            case MOVE_METAL_BURST:
+            case MOVE_ME_FIRST:
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+                break;
+            default:
+                gRandomMove = move;
+                gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
+                gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+                gStatuses3[gBattlerAttacker] |= STATUS3_ME_FIRST;
+                gBattlescriptCurrInstr += 7;
+                break;
+            }
+        }
         return;
     }
 
