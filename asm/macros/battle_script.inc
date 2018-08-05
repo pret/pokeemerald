@@ -1444,6 +1444,11 @@
 	various \battler, VARIOUS_INVERT_STAT_STAGES
 	.endm
 	
+	.macro setterrain ptr
+	various BS_ATTACKER, VARIOUS_SET_TERRAIN
+	.4byte \ptr
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

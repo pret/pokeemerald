@@ -282,6 +282,24 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectIonDeluge
 	.4byte BattleScript_EffectFreezeDry
 	.4byte BattleScript_EffectTopsyTurvy
+	.4byte BattleScript_EffectMistyTerrain
+	.4byte BattleScript_EffectGrassyTerrain
+	.4byte BattleScript_EffectElectricTerrain
+	.4byte BattleScript_EffectPsychicTerrain
+	
+BattleScript_EffectMistyTerrain:
+BattleScript_EffectGrassyTerrain:
+BattleScript_EffectElectricTerrain:
+BattleScript_EffectPsychicTerrain:
+	attackcanceler
+	attackstring
+	ppreduce
+	setterrain BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printfromtable gTerrainStringIds
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectTopsyTurvy:
 	attackcanceler

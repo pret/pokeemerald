@@ -5200,7 +5200,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TRICK_ROOM
-		.effect = EFFECT_TRICK_TOOM,
+		.effect = EFFECT_TRICK_ROOM,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -6965,7 +6965,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GRASSY_TERRAIN
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_GRASSY_TERRAIN,
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 0,
@@ -6977,7 +6977,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_MISTY_TERRAIN
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_MISTY_TERRAIN,
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -7253,7 +7253,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ELECTRIC_TERRAIN
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_ELECTRIC_TERRAIN,
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 0,

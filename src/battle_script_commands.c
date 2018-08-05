@@ -6058,6 +6058,44 @@ static bool32 HasAttackerFaintedTarget(void)
         return FALSE;
 }
 
+static void HandleTerrainMove(u32 moveEffect)
+{
+    u32 statusFlag = 0;
+    u8 *timer = NULL;
+
+    switch (moveEffect)
+    {
+    case EFFECT_MISTY_TERRAIN:
+        statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.mistyTerrainTimer;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        break;
+    case EFFECT_GRASSY_TERRAIN:
+        statusFlag = STATUS_FIELD_GRASSY_TERRAIN, timer = &gFieldTimers.grassyTerrainTimer;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        break;
+    case EFFECT_ELECTRIC_TERRAIN:
+        statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN, timer = &gFieldTimers.electricTerrainTimer;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+        break;
+    case EFFECT_PSYCHIC_TERRAIN:
+        statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.psychicTerrainTimer;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+        break;
+    }
+
+    if (gFieldStatuses & statusFlag || statusFlag == 0)
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+    }
+    else
+    {
+        gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | EFFECT_ELECTRIC_TERRAIN | EFFECT_PSYCHIC_TERRAIN);
+        gFieldStatuses |= statusFlag;
+        *timer = 5;
+        gBattlescriptCurrInstr += 7;
+    }
+}
+
 static void atk76_various(void)
 {
     u8 side;
@@ -6439,6 +6477,9 @@ static void atk76_various(void)
                 gBattleMons[gActiveBattler].statStages[i] = 6 - (gBattleMons[gActiveBattler].statStages[i] - 6);
         }
         break;
+    case VARIOUS_SET_TERRAIN:
+        HandleTerrainMove(gBattleMoves[gCurrentMove].effect);
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -9289,15 +9330,15 @@ static void HandleRoomMove(u32 statusFlag, u8 *timer, u8 stringId)
 
 static void atkD9_setroom(void)
 {
-    switch (gCurrentMove)
+    switch (gBattleMoves[gCurrentMove].effect)
     {
-    case MOVE_TRICK_ROOM:
+    case EFFECT_TRICK_ROOM:
         HandleRoomMove(STATUS_FIELD_TRICK_ROOM, &gFieldTimers.trickRoomTimer, 0);
         break;
-    case MOVE_WONDER_ROOM:
+    case EFFECT_WONDER_ROOM:
         HandleRoomMove(STATUS_FIELD_WONDER_ROOM, &gFieldTimers.wonderRoomTimer, 2);
         break;
-    case MOVE_MAGIC_ROOM:
+    case EFFECT_MAGIC_ROOM:
         HandleRoomMove(STATUS_FIELD_MAGIC_ROOM, &gFieldTimers.magicRoomTimer, 4);
         break;
     default:
