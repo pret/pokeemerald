@@ -286,7 +286,60 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectGrassyTerrain
 	.4byte BattleScript_EffectElectricTerrain
 	.4byte BattleScript_EffectPsychicTerrain
+	.4byte BattleScript_EffectAttackAccUp
+	.4byte BattleScript_EffectAttackSpAttackUp
+	.4byte BattleScript_EffectHurricane
 	
+BattleScript_EffectAttackSpAttackUp:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, 0xC, BattleScript_AttackSpAttackUpDoMoveAnim
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPATK, 0xC, BattleScript_CantRaiseMultipleStats
+BattleScript_AttackSpAttackUpDoMoveAnim::
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_SPATK | BIT_SPDEF, 0x0
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_AttackSpAttackUpTrySpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AttackSpAttackUpTrySpDef
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_AttackSpAttackUpTrySpDef::
+	setstatchanger STAT_SPATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_AttackSpAttackUpEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AttackSpAttackUpEnd
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_AttackSpAttackUpEnd:
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectAttackAccUp:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, 0xC, BattleScript_AttackAccUpDoMoveAnim
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ACC, 0xC, BattleScript_CantRaiseMultipleStats
+BattleScript_AttackAccUpDoMoveAnim::
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_SPATK | BIT_SPDEF, 0x0
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_AttackAccUpTrySpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AttackAccUpTrySpDef
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_AttackAccUpTrySpDef::
+	setstatchanger STAT_ACC, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_AttackAccUpEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AttackAccUpEnd
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_AttackAccUpEnd:
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectMistyTerrain:
 BattleScript_EffectGrassyTerrain:
 BattleScript_EffectElectricTerrain:
@@ -2501,12 +2554,17 @@ BattleScript_SolarbeamOnFirstTurn::
 	ppreduce
 	goto BattleScript_TwoTurnMovesSecondTurn
 
-BattleScript_EffectThunder::
+BattleScript_EffectThunder:
 	setmoveeffect MOVE_EFFECT_PARALYSIS
 	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
 	goto BattleScript_EffectHit
+	
+BattleScript_EffectHurricane:
+	setmoveeffect MOVE_EFFECT_CONFUSION
+	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
+	goto BattleScript_EffectHit
 
-BattleScript_EffectTeleport::
+BattleScript_EffectTeleport:
 	attackcanceler
 	attackstring
 	ppreduce

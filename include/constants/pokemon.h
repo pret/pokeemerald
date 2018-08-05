@@ -96,6 +96,7 @@
 #define FLAG_DMG_UNDERGROUND        0x4000
 #define FLAG_DMG_UNDERWATER         0x8000
 #define FLAG_SOUND                  0x10000
+#define FLAG_BALLISTIC              0x20000
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0
