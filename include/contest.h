@@ -1,6 +1,21 @@
 #ifndef GUARD_CONTEST_H
 #define GUARD_CONTEST_H
 
+struct ContestMove
+{
+    u8 effect;
+    u8 contestCategory:3;
+    u8 comboStarterId;
+    u8 comboMoves[4];
+};
+
+struct ContestEffect
+{
+    u8 effectType;
+    u8 appeal;
+    u8 jam;
+};
+
 struct ContestStruct_02039E00
 {
     u16 unk_00;

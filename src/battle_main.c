@@ -3964,9 +3964,9 @@ void BattleTurnPassed(void)
     TurnValuesCleanUp(TRUE);
     if (gBattleOutcome == 0)
     {
-        if (UpdateTurnCounters())
+        if (DoFieldEndTurnEffects())
             return;
-        if (TurnBasedEffects())
+        if (DoBattlerEndTurnEffects())
             return;
     }
     if (HandleFaintedMonActions())
@@ -4008,7 +4008,7 @@ void BattleTurnPassed(void)
         gChosenMoveByBattler[i] = MOVE_NONE;
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
 
     *(&gBattleStruct->field_91) = gAbsentBattlerFlags;
