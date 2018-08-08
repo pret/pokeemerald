@@ -689,7 +689,7 @@ void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
 
 void sub_8084CCC(u8 a1)
 {
-    const struct HealLocation *warp = GetHealLocationPointer(a1);
+    const struct HealLocation *warp = GetHealLocation(a1);
 
     if (warp)
         Overworld_SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
@@ -702,7 +702,7 @@ void Overworld_SetWarpDestToLastHealLoc(void)
 
 void Overworld_SetHealLocationWarp(u8 healLocationId)
 {
-    const struct HealLocation *healLocation = GetHealLocationPointer(healLocationId);
+    const struct HealLocation *healLocation = GetHealLocation(healLocationId);
 
     if (healLocation != NULL)
         SetWarpData(&gSaveBlock1Ptr->lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
@@ -761,7 +761,7 @@ void sub_8084F2C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 
 void sub_8084F6C(u8 a1)
 {
-    const struct HealLocation *warp = GetHealLocationPointer(a1);
+    const struct HealLocation *warp = GetHealLocation(a1);
     if (warp)
         SetWarpData(&gSaveBlock1Ptr->warp1, warp->group, warp->map, -1, warp->x, warp->y);
 }
