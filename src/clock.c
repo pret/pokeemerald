@@ -83,7 +83,7 @@ static void UpdatePerMinute(struct Time *localTime)
 static void ReturnFromStartWallClock(void)
 {
     InitTimeBasedEvents();
-    SetMainCallback2(CB2_ReturnToFieldContinueScript);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void StartWallClock(void)

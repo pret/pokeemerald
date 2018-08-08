@@ -498,7 +498,7 @@ gUnknown_08610970:: @ 8610970
 	.string "LAMONT$", 8
 	.string "XAV$", 8
 	.string "ORFEO$", 8
-	.string "J{0xf3}RGEN$", 8 @accent?
+	.string "JÜRGEN$", 8
 	.string "JORGE$", 8
 	.byte 0x90, 0xE5
 	.2byte 0x19

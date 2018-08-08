@@ -623,8 +623,8 @@ _080AA186:
 	bx r0
 	thumb_func_end sub_80AA124
 
-	thumb_func_start sub_80AA18C
-sub_80AA18C: @ 80AA18C
+	thumb_func_start AnimTask_StatsChange
+AnimTask_StatsChange: @ 80AA18C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -853,7 +853,7 @@ _080AA352:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80AA18C
+	thumb_func_end AnimTask_StatsChange
 
 	thumb_func_start LaunchStatusAnimation
 LaunchStatusAnimation: @ 80AA364

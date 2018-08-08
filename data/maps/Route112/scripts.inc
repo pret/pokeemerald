@@ -133,7 +133,7 @@ Route112_Text_1F204E: @ 81F204E
 
 Route112_Text_1F20C1: @ 81F20C1
 	.string "MT. CHIMNEY CABLE CAR\n"
-	.string "“A short walk {0x79} way!”$"
+	.string "“A short walk {UP_ARROW} way!”$"
 
 Route112_Text_1F20ED: @ 81F20ED
 	.string "MT. CHIMNEY\p"
@@ -142,5 +142,5 @@ Route112_Text_1F20ED: @ 81F20ED
 
 Route112_Text_1F2138: @ 81F2138
 	.string "ROUTE 112\n"
-	.string "{0x7B} LAVARIDGE TOWN$"
+	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
 

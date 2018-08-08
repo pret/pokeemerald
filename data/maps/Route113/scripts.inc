@@ -157,11 +157,11 @@ Route113_Text_1F23CA: @ 81F23CA
 
 Route113_Text_1F2440: @ 81F2440
 	.string "ROUTE 113\n"
-	.string "{0x7C} ROUTE 111$"
+	.string "{RIGHT_ARROW} ROUTE 111$"
 
 Route113_Text_1F2456: @ 81F2456
 	.string "ROUTE 113\n"
-	.string "{0x7B} FALLARBOR TOWN$"
+	.string "{LEFT_ARROW} FALLARBOR TOWN$"
 
 Route113_Text_1F2471: @ 81F2471
 	.string "TRAINER TIPS\p"

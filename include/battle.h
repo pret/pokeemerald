@@ -106,10 +106,10 @@ struct TrainerMonItemCustomMoves
 
 union TrainerMonPtr
 {
-    struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
-    struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
-    struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
-    struct TrainerMonItemCustomMoves *ItemCustomMoves;
+    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
+    const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
+    const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
+    const struct TrainerMonItemCustomMoves *ItemCustomMoves;
 };
 
 struct Trainer
@@ -568,10 +568,11 @@ struct BattleStruct
 }
 
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
+#define GET_STAT_BUFF_VALUE2(n)((n & 0xF0))
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
 
-#define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
+#define SET_STAT_BUFF_VALUE(n)((((n) << 4) & 0xF0))
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
 
@@ -592,7 +593,7 @@ struct BattleScripting
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
-    u8 field_1B;
+    bool8 statAnimPlayed;
     u8 atk23_state;
     u8 battleStyle;
     u8 atk6C_state;
