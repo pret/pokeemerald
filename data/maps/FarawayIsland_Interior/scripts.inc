@@ -11,7 +11,7 @@ FarawayIsland_Interior_MapScript1_267D0F: @ 8267D0F
 	end
 
 FarawayIsland_Interior_EventScript_267D19:: @ 8267D19
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq FarawayIsland_Interior_EventScript_267D4B
 	compare VAR_RESULT, 4
@@ -33,7 +33,7 @@ FarawayIsland_Interior_MapScript1_267D54: @ 8267D54
 	end
 
 FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, FarawayIsland_Interior_EventScript_27374E
 	removeobject VAR_LAST_TALKED
@@ -148,7 +148,7 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq FarawayIsland_Interior_EventScript_267E96
 	compare VAR_RESULT, 4

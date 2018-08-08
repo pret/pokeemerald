@@ -63,7 +63,7 @@ static const struct WindowTemplate gUnknown_085E5070[] = {
 
 // .text
 
-void sub_817018C(MainCallback callback)
+void FieldInitRegionMap(MainCallback callback)
 {
     SetVBlankCallback(NULL);
     sFieldRegionMapHandler = malloc(sizeof(*sFieldRegionMapHandler));

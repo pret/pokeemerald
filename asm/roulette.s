@@ -4948,7 +4948,7 @@ sub_8142CD0: @ 8142CD0
 	sub sp, 0x8
 	ldr r4, =gUnknown_085B7488
 	ldr r0, [r4]
-	ldr r5, =0x0201c000
+	ldr r5, =gDecompressionBuffer
 	adds r1, r5, 0
 	bl LZ77UnCompWram
 	str r5, [sp]
@@ -5575,7 +5575,7 @@ sub_81431E4: @ 81431E4
 	sub sp, 0xC
 	ldr r4, =gUnknown_085B741C
 	ldr r0, [r4]
-	ldr r5, =0x0201c000
+	ldr r5, =gDecompressionBuffer
 	adds r1, r5, 0
 	bl LZ77UnCompWram
 	str r5, [sp, 0x4]
@@ -5720,7 +5720,7 @@ sub_8143314: @ 8143314
 	push {r7}
 	sub sp, 0x8
 	movs r5, 0
-	ldr r7, =0x0201c000
+	ldr r7, =gDecompressionBuffer
 	mov r6, sp
 _08143322:
 	ldr r0, =gUnknown_085B7750
@@ -6448,7 +6448,7 @@ sub_814391C: @ 814391C
 	sub sp, 0x8
 	ldr r4, =gUnknown_085B7948
 	ldr r0, [r4]
-	ldr r5, =0x0201c000
+	ldr r5, =gDecompressionBuffer
 	adds r1, r5, 0
 	bl LZ77UnCompWram
 	str r5, [sp]

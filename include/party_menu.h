@@ -54,5 +54,6 @@ void sub_81B8518(u8 unused);
 u8 sub_81B1360(void);
 void sub_81B8904(u8 arg0, void (*callback)(void));
 void OpenPartyMenuInBattle(u8 caseId);
+u16 ItemIdToBattleMoveId(u16 itemId);
 
 #endif // GUARD_PARTY_MENU_H

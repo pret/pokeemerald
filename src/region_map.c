@@ -52,7 +52,7 @@ static EWRAM_DATA struct {
     /*0x88c*/ u8 unk_88c[0x1c0];
     /*0xa4c*/ u8 unk_a4c[0x26];
     /*0xa72*/ bool8 unk_a72;
-} *gUnknown_0203A148 = NULL; // a74
+} *sFlyMap = NULL; // a74
 
 static bool32 gUnknown_03001180;
 static bool32 gUnknown_03001184;
@@ -1578,8 +1578,8 @@ void MCB2_FlyMap(void)
             SetGpuReg(REG_OFFSET_BG2HOFS, 0);
             SetGpuReg(REG_OFFSET_BG3HOFS, 0);
             SetGpuReg(REG_OFFSET_BG3VOFS, 0);
-            gUnknown_0203A148 = malloc(sizeof(*gUnknown_0203A148));
-            if (gUnknown_0203A148 == NULL)
+            sFlyMap = malloc(sizeof(*sFlyMap));
+            if (sFlyMap == NULL)
             {
                 SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
             }
@@ -1608,11 +1608,11 @@ void MCB2_FlyMap(void)
             gMain.state++;
             break;
         case 4:
-            InitRegionMap(&gUnknown_0203A148->regionMap, FALSE);
+            InitRegionMap(&sFlyMap->regionMap, FALSE);
             CreateRegionMapCursor(0, 0);
             CreateRegionMapPlayerIcon(1, 1);
-            gUnknown_0203A148->mapSecId = gUnknown_0203A148->regionMap.mapSecId;
-            StringFill(gUnknown_0203A148->unk_a4c, CHAR_SPACE, 16);
+            sFlyMap->mapSecId = sFlyMap->regionMap.mapSecId;
+            StringFill(sFlyMap->unk_a4c, CHAR_SPACE, 16);
             gUnknown_03001180 = TRUE;
             sub_8124904();
             gMain.state++;
@@ -1664,7 +1664,7 @@ static void sub_81248C0(void)
 
 static void sub_81248D4(void)
 {
-    gUnknown_0203A148->unk_000();
+    sFlyMap->unk_000();
     AnimateSprites();
     BuildOamBuffer();
     do_scheduled_bg_tilemap_copies_to_vram();
@@ -1672,8 +1672,8 @@ static void sub_81248D4(void)
 
 static void sub_81248F4(void callback(void))
 {
-    gUnknown_0203A148->unk_000 = callback;
-    gUnknown_0203A148->unk_004 = 0;
+    sFlyMap->unk_000 = callback;
+    sFlyMap->unk_004 = 0;
 }
 
 static void sub_8124904(void)
@@ -1682,21 +1682,21 @@ static void sub_8124904(void)
     bool32 flag;
     const u8 *name;
 
-    if (gUnknown_0203A148->regionMap.iconDrawType > MAPSECTYPE_NONE && gUnknown_0203A148->regionMap.iconDrawType <= MAPSECTYPE_BATTLE_FRONTIER)
+    if (sFlyMap->regionMap.iconDrawType > MAPSECTYPE_NONE && sFlyMap->regionMap.iconDrawType <= MAPSECTYPE_BATTLE_FRONTIER)
     {
         flag = FALSE;
         for (i = 0; i < 1; i++)
         {
-            if (gUnknown_0203A148->regionMap.mapSecId == gUnknown_085A1EDC[i].mapSecId)
+            if (sFlyMap->regionMap.mapSecId == gUnknown_085A1EDC[i].mapSecId)
             {
                 if (FlagGet(gUnknown_085A1EDC[i].flag))
                 {
-                    StringLength(gUnknown_085A1EDC[i].name[gUnknown_0203A148->regionMap.posWithinMapSec]);
+                    StringLength(gUnknown_085A1EDC[i].name[sFlyMap->regionMap.posWithinMapSec]);
                     flag = TRUE;
                     sub_8198070(0, FALSE);
                     SetWindowBorderStyle(1, FALSE, 0x65, 0x0d);
-                    PrintTextOnWindow(1, 1, gUnknown_0203A148->regionMap.mapSecName, 0, 1, 0, NULL);
-                    name = gUnknown_085A1EDC[i].name[gUnknown_0203A148->regionMap.posWithinMapSec];
+                    PrintTextOnWindow(1, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
+                    name = gUnknown_085A1EDC[i].name[sFlyMap->regionMap.posWithinMapSec];
                     PrintTextOnWindow(1, 1, name, GetStringRightAlignXOffset(1, name, 0x60), 0x11, 0, NULL);
                     schedule_bg_copy_tilemap_to_vram(0);
                     gUnknown_03001180 = TRUE;
@@ -1715,7 +1715,7 @@ static void sub_8124904(void)
             {
                 FillWindowPixelBuffer(0, 0x11);
             }
-            PrintTextOnWindow(0, 1, gUnknown_0203A148->regionMap.mapSecName, 0, 1, 0, NULL);
+            PrintTextOnWindow(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             gUnknown_03001180 = FALSE;
         }
@@ -1739,8 +1739,8 @@ static void sub_8124A70(void)
 {
     struct SpriteSheet sheet;
 
-    LZ77UnCompWram(sUnknown_085A1D68, gUnknown_0203A148->unk_88c);
-    sheet.data = gUnknown_0203A148->unk_88c;
+    LZ77UnCompWram(sUnknown_085A1D68, sFlyMap->unk_88c);
+    sheet.data = sFlyMap->unk_88c;
     sheet.size = 0x1c0;
     sheet.tag = 2;
     LoadSpriteSheet(&sheet);
@@ -1829,7 +1829,7 @@ static void sub_8124BE4(void)
 
 static void sub_8124CBC(struct Sprite *sprite)
 {
-    if (gUnknown_0203A148->regionMap.mapSecId == sprite->data[0])
+    if (sFlyMap->regionMap.mapSecId == sprite->data[0])
     {
         if (++sprite->data[1] > 16)
         {
@@ -1846,11 +1846,11 @@ static void sub_8124CBC(struct Sprite *sprite)
 
 static void sub_8124D14(void)
 {
-    switch (gUnknown_0203A148->unk_004)
+    switch (sFlyMap->unk_004)
     {
         case 0:
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-            gUnknown_0203A148->unk_004++;
+            sFlyMap->unk_004++;
             break;
         case 1:
             if (!UpdatePaletteFade())
@@ -1863,7 +1863,7 @@ static void sub_8124D14(void)
 
 static void sub_8124D64(void)
 {
-    if (gUnknown_0203A148->unk_004 == 0)
+    if (sFlyMap->unk_004 == 0)
     {
         switch (sub_81230AC())
         {
@@ -1875,16 +1875,16 @@ static void sub_8124D64(void)
                 sub_8124904();
                 break;
             case INPUT_EVENT_A_BUTTON:
-                if (gUnknown_0203A148->regionMap.iconDrawType == MAPSECTYPE_CITY_CANFLY || gUnknown_0203A148->regionMap.iconDrawType == MAPSECTYPE_BATTLE_FRONTIER)
+                if (sFlyMap->regionMap.iconDrawType == MAPSECTYPE_CITY_CANFLY || sFlyMap->regionMap.iconDrawType == MAPSECTYPE_BATTLE_FRONTIER)
                 {
                     m4aSongNumStart(SE_SELECT);
-                    gUnknown_0203A148->unk_a72 = TRUE;
+                    sFlyMap->unk_a72 = TRUE;
                     sub_81248F4(sub_8124E0C);
                 }
                 break;
             case INPUT_EVENT_B_BUTTON:
                 m4aSongNumStart(SE_SELECT);
-                gUnknown_0203A148->unk_a72 = FALSE;
+                sFlyMap->unk_a72 = FALSE;
                 sub_81248F4(sub_8124E0C);
                 break;
         }
@@ -1893,19 +1893,19 @@ static void sub_8124D64(void)
 
 static void sub_8124E0C(void)
 {
-    switch (gUnknown_0203A148->unk_004)
+    switch (sFlyMap->unk_004)
     {
         case 0:
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-            gUnknown_0203A148->unk_004++;
+            sFlyMap->unk_004++;
             break;
         case 1:
             if (!UpdatePaletteFade())
             {
                 FreeRegionMapIconResources();
-                if (gUnknown_0203A148->unk_a72)
+                if (sFlyMap->unk_a72)
                 {
-                    switch (gUnknown_0203A148->regionMap.mapSecId)
+                    switch (sFlyMap->regionMap.mapSecId)
                     {
                         case MAPSEC_SOUTHERN_ISLAND:
                             sub_8084CCC(0x15);
@@ -1917,16 +1917,16 @@ static void sub_8124E0C(void)
                             sub_8084CCC(gSaveBlock2Ptr->playerGender == MALE ? 0x0C : 0x0D);
                             break;
                         case MAPSEC_EVER_GRANDE_CITY:
-                            sub_8084CCC(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && gUnknown_0203A148->regionMap.posWithinMapSec == 0 ? 0x14 : 0x0B);
+                            sub_8084CCC(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && sFlyMap->regionMap.posWithinMapSec == 0 ? 0x14 : 0x0B);
                             break;
                         default:
-                            if (sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2] != 0)
+                            if (sUnknown_085A1E3C[sFlyMap->regionMap.mapSecId][2] != 0)
                             {
-                                sub_8084CCC(sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2]);
+                                sub_8084CCC(sUnknown_085A1E3C[sFlyMap->regionMap.mapSecId][2]);
                             }
                             else
                             {
-                                warp1_set_2(sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][0], sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][1], -1);
+                                warp1_set_2(sUnknown_085A1E3C[sFlyMap->regionMap.mapSecId][0], sUnknown_085A1E3C[sFlyMap->regionMap.mapSecId][1], -1);
                             }
                             break;
                     }
@@ -1936,10 +1936,10 @@ static void sub_8124E0C(void)
                 {
                     SetMainCallback2(sub_81B58A8);
                 }
-                if (gUnknown_0203A148 != NULL)
+                if (sFlyMap != NULL)
                 {
-                    free(gUnknown_0203A148);
-                    gUnknown_0203A148 = NULL;
+                    free(sFlyMap);
+                    sFlyMap = NULL;
                 }
                 FreeAllWindowBuffers();
             }

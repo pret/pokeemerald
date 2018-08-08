@@ -409,7 +409,7 @@ MauvilleCity_GameCorner_EventScript_210137:: @ 8210137
 	msgbox MauvilleCity_GameCorner_Text_210750, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210209
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, MauvilleCity_GameCorner_EventScript_21017C
 	case 1, MauvilleCity_GameCorner_EventScript_2101A6
 	case 2, MauvilleCity_GameCorner_EventScript_2101D0
@@ -540,7 +540,7 @@ MauvilleCity_GameCorner_EventScript_2102D6:: @ 82102D6
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -551,7 +551,7 @@ MauvilleCity_GameCorner_EventScript_2102F6:: @ 82102F6
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -562,7 +562,7 @@ MauvilleCity_GameCorner_EventScript_210316:: @ 8210316
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 2
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -573,7 +573,7 @@ MauvilleCity_GameCorner_EventScript_210336:: @ 8210336
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 3
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -584,7 +584,7 @@ MauvilleCity_GameCorner_EventScript_210356:: @ 8210356
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 4
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -595,7 +595,7 @@ MauvilleCity_GameCorner_EventScript_210376:: @ 8210376
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 5
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -606,7 +606,7 @@ MauvilleCity_GameCorner_EventScript_210396:: @ 8210396
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 6
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -617,7 +617,7 @@ MauvilleCity_GameCorner_EventScript_2103B6:: @ 82103B6
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 7
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -628,7 +628,7 @@ MauvilleCity_GameCorner_EventScript_2103D6:: @ 82103D6
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 8
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -639,7 +639,7 @@ MauvilleCity_GameCorner_EventScript_2103F6:: @ 82103F6
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 9
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -650,7 +650,7 @@ MauvilleCity_GameCorner_EventScript_210416:: @ 8210416
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 10
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end
@@ -661,7 +661,7 @@ MauvilleCity_GameCorner_EventScript_210436:: @ 8210436
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 11
-	specialvar VAR_RESULT, sub_8139248
+	specialvar VAR_RESULT, GetSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end

@@ -2356,8 +2356,8 @@ RusturfTunnel_EventScript_272216:: @ 8272216
 	removeobject 10
 	clearflag FLAG_0x328
 	clearflag FLAG_0x3D8
-	setvar VAR_0x409A, 6
-	setflag FLAG_0x0C7
+	setvar VAR_RUSTURF_TUNNEL_STATE, 6
+	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
 EventScript_27222B:: @ 827222B
@@ -2517,7 +2517,7 @@ Route119_EventScript_272365:: @ 8272365
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq Route119_EventScript_2723C1
 	compare VAR_RESULT, 4

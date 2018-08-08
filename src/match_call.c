@@ -360,7 +360,7 @@ MATCHCALLDEF(sMomMatchCallHeader, 0, 0, FLAG_0x0D8, gMomMatchCallDesc, gMomMatch
 
 static const match_call_text_data_t sStevenTextScripts[] = {
     { gText_Steven_Pokenav_2B5B95, 0xffff,              0xffff },
-    { gText_Steven_Pokenav_2B5C53, FLAG_0x0C7,          0xffff },
+    { gText_Steven_Pokenav_2B5C53, FLAG_RUSTURF_TUNNEL_OPENED,          0xffff },
     { gText_Steven_Pokenav_2B5CC9, FLAG_0x0D4,          0xffff },
     { gText_Steven_Pokenav_2B5DB4, FLAG_0x070,          0xffff },
     { gText_Steven_Pokenav_2B5E26, FLAG_0x4F6,          0xffff },
@@ -415,7 +415,7 @@ MATCHCALLDEF(sBrendanMatchCallHeader, 4, FEMALE, FLAG_0x0FD, gMayBrendanMatchCal
 
 static const match_call_text_data_t sWallyTextScripts[] = {
     { gText_Wally_Pokenav_2B4DE2, 0xFFFF,     0xFFFF },
-    { gText_Wally_Pokenav_2B4E57, FLAG_0x0C7, 0xFFFF },
+    { gText_Wally_Pokenav_2B4E57, FLAG_RUSTURF_TUNNEL_OPENED, 0xFFFF },
     { gText_Wally_Pokenav_2B4EA5, FLAG_0x4F3, 0xFFFF },
     { gText_Wally_Pokenav_2B4F41, FLAG_0x097, 0xFFFF },
     { gText_Wally_Pokenav_2B4FF3, FLAG_0x06F, 0xFFFF },

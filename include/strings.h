@@ -462,4 +462,14 @@ extern const u8 gText_TotalRecordWLD[];
 extern const u8 gText_PlayersBattleResults[];
 extern const u8 gText_WinLoseDraw[];
 
+extern const u8 gText_99TimesPlus[];
+extern const u8 gText_1MinutePlus[];
+extern const u8 gText_SpaceSeconds[];
+extern const u8 gText_SpaceTimes[];
+
+extern const u8 gText_BigGuy[];
+extern const u8 gText_BigGirl[];
+extern const u8 gText_Son[];
+extern const u8 gText_Daughter[];
+
 #endif //GUARD_STRINGS_H

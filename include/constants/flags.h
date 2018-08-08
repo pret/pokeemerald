@@ -199,7 +199,7 @@
 #define FLAG_0x0C4               0xC4
 #define FLAG_0x0C5               0xC5
 #define FLAG_0x0C6               0xC6
-#define FLAG_0x0C7               0xC7
+#define FLAG_RUSTURF_TUNNEL_OPENED               0xC7
 #define FLAG_0x0C8               0xC8
 #define FLAG_0x0C9               0xC9
 #define FLAG_0x0CA               0xCA
@@ -532,10 +532,10 @@
 #define FLAG_0x210               0x210
 #define FLAG_0x211               0x211
 #define FLAG_0x212               0x212
-#define FLAG_0x213               0x213
-#define FLAG_0x214               0x214
-#define FLAG_0x215               0x215
-#define FLAG_0x216               0x216
+#define FLAG_HIDDEN_ITEM_1F               0x213
+#define FLAG_HIDDEN_ITEM_20               0x214
+#define FLAG_HIDDEN_ITEM_21               0x215
+#define FLAG_HIDDEN_ITEM_22               0x216
 #define FLAG_0x217               0x217
 #define FLAG_0x218               0x218
 #define FLAG_0x219               0x219
@@ -597,7 +597,7 @@
 #define FLAG_0x251               0x251
 #define FLAG_0x252               0x252
 #define FLAG_0x253               0x253
-#define FLAG_0x254               0x254
+#define FLAG_HIDDEN_ITEM_BLACK_GLASSES               0x254
 #define FLAG_0x255               0x255
 #define FLAG_0x256               0x256
 #define FLAG_0x257               0x257
@@ -932,8 +932,8 @@
 #define FLAG_0x3A0               0x3A0
 #define FLAG_0x3A1               0x3A1
 #define FLAG_0x3A2               0x3A2
-#define FLAG_0x3A3               0x3A3
-#define FLAG_0x3A4               0x3A4
+#define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1               0x3A3
+#define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2               0x3A4
 #define FLAG_0x3A5               0x3A5
 #define FLAG_0x3A6               0x3A6
 #define FLAG_0x3A7               0x3A7
