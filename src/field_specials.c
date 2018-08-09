@@ -13,16 +13,22 @@
 #include "field_region_map.h"
 #include "field_specials.h"
 #include "field_weather.h"
+#include "international_string_util.h"
 #include "link.h"
+#include "list_menu.h"
+#include "malloc.h"
+#include "menu.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "random.h"
 #include "region_map.h"
 #include "rom_8011DC0.h"
 #include "rtc.h"
 #include "script.h"
+#include "script_menu.h"
 #include "sound.h"
 #include "starter_choose.h"
 #include "string_util.h"
@@ -31,6 +37,7 @@
 #include "text.h"
 #include "tv.h"
 #include "wallclock.h"
+#include "window.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
 #include "constants/maps.h"
@@ -44,6 +51,18 @@ EWRAM_DATA u8 gBikeCollisions = 0;
 EWRAM_DATA u32 gBikeCyclingTimer = 0;
 EWRAM_DATA u8 gUnknown_0203AB5C = 0;
 EWRAM_DATA u8 gUnknown_0203AB5D = 0;
+EWRAM_DATA u8 gUnknown_0203AB5E = 0;
+EWRAM_DATA u16 gUnknown_0203AB60 = 0;
+EWRAM_DATA u16 gUnknown_0203AB62 = 0;
+EWRAM_DATA struct ListMenuItem *gUnknown_0203AB64 = NULL;
+EWRAM_DATA u16 gUnknown_0203AB68 = 0;
+EWRAM_DATA u16 gUnknown_0203AB6A = 0;
+EWRAM_DATA u8 gUnknown_0203AB6C = 0;
+EWRAM_DATA u8 gUnknown_0203AB6D = 0;
+EWRAM_DATA u8 gUnknown_0203AB6E = 0;
+EWRAM_DATA u8 gUnknown_0203AB6F = 0;
+
+struct ListMenuTemplate gUnknown_030061D0;
 
 extern const u16 gEventObjectPalette8[];
 extern const u16 gEventObjectPalette17[];
@@ -1626,6 +1645,44 @@ void sub_8139980(void)
     SetCameraPanning(8, 0);
 }
 
+void sub_8139AF4(u8 taskId);
+void sub_8139C2C(u16 a1, u8 a2);
+
+const struct WindowTemplate gUnknown_085B2BAC = {
+    .priority = 0,
+    .tilemapLeft = 21,
+    .tilemapTop = 1,
+    .width = 8,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 8,
+};
+
+const u8 *const gElevatorFloorsTable[] = {
+	gText_B4F,
+	gText_B3F,
+	gText_B2F,
+	gText_B1F,
+	gText_1F,
+	gText_2F,
+	gText_3F,
+	gText_4F,
+	gText_5F,
+	gText_6F,
+	gText_7F,
+	gText_8F,
+	gText_9F,
+	gText_10F,
+	gText_11F,
+	gText_Rooftop
+};
+
+const u16 gUnknown_085B2BF4[] = { 0x0329, 0x032a, 0x032b, 0x0331, 0x0332, 0x0333, 0x0339, 0x033a, 0x033b };
+const u16 gUnknown_085B2C06[] = { 0x0329, 0x032b, 0x032a, 0x0331, 0x0333, 0x0332, 0x0339, 0x033b, 0x033a };
+const u8 gUnknown_085B2C18[] = { 0x08, 0x10, 0x18, 0x20, 0x26, 0x2e, 0x34, 0x38, 0x39 };
+const u8 gUnknown_085B2C21[] = { 0x03, 0x06, 0x09, 0x0c, 0x0f, 0x12, 0x15, 0x18, 0x1b };
+const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xffff };
+
 void SetDepartmentStoreFloorVar(void)
 {
     u8 deptStoreFloor;
@@ -1654,4 +1711,1008 @@ void SetDepartmentStoreFloorVar(void)
             break;
     }
     VarSet(VAR_DEPT_STORE_FLOOR, deptStoreFloor);
+}
+
+u16 sub_81399F4(void)
+{
+    gUnknown_0203AB60 = 0;
+    gUnknown_0203AB62 = 0;
+
+    if (gSaveBlock1Ptr->warp2.mapGroup == 13)
+    {
+        switch (gSaveBlock1Ptr->warp2.mapNum)
+        {
+            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
+                gUnknown_0203AB60 = 0;
+                gUnknown_0203AB62 = 0;
+                break;
+            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
+                gUnknown_0203AB60 = 0;
+                gUnknown_0203AB62 = 1;
+                break;
+            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
+                gUnknown_0203AB60 = 0;
+                gUnknown_0203AB62 = 2;
+                break;
+            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
+                gUnknown_0203AB60 = 0;
+                gUnknown_0203AB62 = 3;
+                break;
+            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
+                gUnknown_0203AB60 = 0;
+                gUnknown_0203AB62 = 4;
+                break;
+        }
+    }
+
+    return gUnknown_0203AB62;
+}
+
+void ShakeScreenInElevator(void)
+{
+    s16 *data = gTasks[CreateTask(sub_8139AF4, 9)].data;
+    u16 floorDelta;
+
+    data[1] = 0;
+    data[2] = 0;
+    data[4] = 1;
+
+    if (gSpecialVar_0x8005 > gSpecialVar_0x8006)
+    {
+        floorDelta = gSpecialVar_0x8005 - gSpecialVar_0x8006;
+        data[6] = 1;
+    }
+    else
+    {
+        floorDelta = gSpecialVar_0x8006 - gSpecialVar_0x8005;
+        data[6] = 0;
+    }
+
+    if (floorDelta > 8)
+        floorDelta = 8;
+    
+    data[5] = gUnknown_085B2C18[floorDelta];
+
+    SetCameraPanningCallback(NULL);
+    sub_8139C2C(floorDelta, data[6]);
+    PlaySE(SE_ELEBETA);
+}
+
+void sub_8139AF4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[1]++;
+    if (data[1] % 3 == 0)
+    {
+        data[1] = 0;
+        data[2]++;
+        data[4] = -data[4];
+        SetCameraPanning(0, data[4]);
+        if (data[2] == data[5])
+        {
+            PlaySE(SE_PINPON);
+            DestroyTask(taskId);
+            EnableBothScriptContexts();
+            InstallCameraPanAheadCallback();
+        }
+    }
+}
+
+void sub_8139B60(void)
+{
+    int xPos;
+    
+    gUnknown_0203AB5E = AddWindow(&gUnknown_085B2BAC);
+    SetStandardWindowBorderStyle(gUnknown_0203AB5E, 0);
+    
+    xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
+    PrintTextOnWindow(gUnknown_0203AB5E, 1, gText_ElevatorNowOn, xPos, 1, 0xFF, NULL);
+    
+    xPos = GetStringCenterAlignXOffset(1, gElevatorFloorsTable[gSpecialVar_0x8005], 64);
+    PrintTextOnWindow(gUnknown_0203AB5E, 1, gElevatorFloorsTable[gSpecialVar_0x8005], xPos, 17, 0xFF, NULL);
+    
+    PutWindowTilemap(gUnknown_0203AB5E);
+    CopyWindowToVram(gUnknown_0203AB5E, 3);
+}
+
+void sub_8139C10(void)
+{
+    sub_8198070(gUnknown_0203AB5E, TRUE);
+    RemoveWindow(gUnknown_0203AB5E);
+}
+
+void sub_8139C80(u8 taskId);
+
+void sub_8139C2C(u16 a1, u8 a2)
+{
+    if (FuncIsActiveTask(sub_8139C80) != TRUE)
+    {
+        u8 taskId = CreateTask(sub_8139C80, 8);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = a2;
+        gTasks[taskId].data[3] = gUnknown_085B2C21[a1];
+    }
+}
+
+// Annoyingly close but compiler wants to add all the parts of the index into the arrays
+// first and then shift by one, whereas we need each individual part to shift and then be added.
+#ifdef NONMATCHING
+void sub_8139C80(u8 taskId)
+{
+    u8 x, y;
+    s16 *data = gTasks[taskId].data;
+
+    if (data[1] == 6)
+    {
+        data[0]++;
+        if (data[2] == 0)
+        {
+            for (y = 0; y < 3; y++)
+            {
+                for (x = 0; x < 3; x++)
+                {
+                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2BF4[y * 3 + data[0] % 3] | 0xC00);
+                }
+            }
+        }
+        else
+        {
+            for (y = 0; y < 3; y++)
+            {
+                for (x = 0; x < 3; x++)
+                {
+                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2C06[y * 3 + data[0] % 3] | 0xC00);
+                }
+            }
+        }
+        DrawWholeMapView();
+        data[1] = 0;
+        if (data[0] == data[3])
+        {
+            DestroyTask(taskId);
+        }
+    }
+    data[1]++;
+}
+#else
+NAKED
+void sub_8139C80(u8 taskId)
+{
+    asm_unified("push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x4\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	str r0, [sp]\n\
+	lsls r0, 2\n\
+	ldr r1, [sp]\n\
+	adds r0, r1\n\
+	lsls r0, 3\n\
+	ldr r1, =gTasks + 0x8\n\
+	adds r6, r0, r1\n\
+	movs r2, 0x2\n\
+	ldrsh r0, [r6, r2]\n\
+	cmp r0, 0x6\n\
+	bne _08139D7C\n\
+	ldrh r0, [r6]\n\
+	adds r0, 0x1\n\
+	strh r0, [r6]\n\
+	movs r1, 0x4\n\
+	ldrsh r0, [r6, r1]\n\
+	cmp r0, 0\n\
+	bne _08139D10\n\
+	movs r1, 0\n\
+	ldr r2, =gUnknown_085B2BF4\n\
+	mov r10, r2\n\
+_08139CBA:\n\
+	movs r5, 0\n\
+	adds r7, r1, 0x7\n\
+	lsls r0, r1, 1\n\
+	adds r2, r1, 0x1\n\
+	mov r8, r2\n\
+	adds r0, r1\n\
+	lsls r0, 1\n\
+	mov r9, r0\n\
+_08139CCA:\n\
+	adds r4, r5, 0\n\
+	adds r4, 0x8\n\
+	movs r1, 0\n\
+	ldrsh r0, [r6, r1]\n\
+	movs r1, 0x3\n\
+	bl __modsi3\n\
+	lsls r0, 16\n\
+	asrs r0, 15\n\
+	add r0, r9\n\
+	add r0, r10\n\
+	ldrh r0, [r0]\n\
+	movs r1, 0xC0\n\
+	lsls r1, 4\n\
+	adds r2, r1, 0\n\
+	orrs r2, r0\n\
+	adds r0, r4, 0\n\
+	adds r1, r7, 0\n\
+	bl MapGridSetMetatileIdAt\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, 0x2\n\
+	bls _08139CCA\n\
+	mov r2, r8\n\
+	lsls r0, r2, 24\n\
+	lsrs r1, r0, 24\n\
+	cmp r1, 0x2\n\
+	bls _08139CBA\n\
+	b _08139D62\n\
+	.pool\n\
+_08139D10:\n\
+	movs r1, 0\n\
+	ldr r0, =gUnknown_085B2C06\n\
+	mov r10, r0\n\
+_08139D16:\n\
+	movs r5, 0\n\
+	adds r7, r1, 0x7\n\
+	lsls r0, r1, 1\n\
+	adds r2, r1, 0x1\n\
+	mov r8, r2\n\
+	adds r0, r1\n\
+	lsls r0, 1\n\
+	mov r9, r0\n\
+_08139D26:\n\
+	adds r4, r5, 0\n\
+	adds r4, 0x8\n\
+	movs r1, 0\n\
+	ldrsh r0, [r6, r1]\n\
+	movs r1, 0x3\n\
+	bl __modsi3\n\
+	lsls r0, 16\n\
+	asrs r0, 15\n\
+	add r0, r9\n\
+	add r0, r10\n\
+	ldrh r0, [r0]\n\
+	movs r1, 0xC0\n\
+	lsls r1, 4\n\
+	adds r2, r1, 0\n\
+	orrs r2, r0\n\
+	adds r0, r4, 0\n\
+	adds r1, r7, 0\n\
+	bl MapGridSetMetatileIdAt\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, 0x2\n\
+	bls _08139D26\n\
+	mov r2, r8\n\
+	lsls r0, r2, 24\n\
+	lsrs r1, r0, 24\n\
+	cmp r1, 0x2\n\
+	bls _08139D16\n\
+_08139D62:\n\
+	bl DrawWholeMapView\n\
+	movs r0, 0\n\
+	strh r0, [r6, 0x2]\n\
+	movs r0, 0\n\
+	ldrsh r1, [r6, r0]\n\
+	movs r2, 0x6\n\
+	ldrsh r0, [r6, r2]\n\
+	cmp r1, r0\n\
+	bne _08139D7C\n\
+	ldr r0, [sp]\n\
+	bl DestroyTask\n\
+_08139D7C:\n\
+	ldrh r0, [r6, 0x2]\n\
+	adds r0, 0x1\n\
+	strh r0, [r6, 0x2]\n\
+	add sp, 0x4\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool");
+}
+#endif // NAKED
+
+void sub_8139D98(void)
+{
+    u8 i;
+    u32 ivStorage[6];
+
+    ivStorage[0] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
+    ivStorage[1] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
+    ivStorage[2] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
+    ivStorage[3] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
+    ivStorage[4] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
+    ivStorage[5] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
+
+    gSpecialVar_0x8005 = 0;
+
+    for (i = 0; i < ARRAY_COUNT(ivStorage); i++)
+    {
+        gSpecialVar_0x8005 += ivStorage[i];
+    }
+
+    gSpecialVar_0x8006 = 0;
+    gSpecialVar_0x8007 = ivStorage[0];  // HP IV
+
+    for (i = 1; i < 6; i++)
+    {
+        if (ivStorage[gSpecialVar_0x8006] < ivStorage[i])
+        {
+            gSpecialVar_0x8006 = i;
+            gSpecialVar_0x8007 = ivStorage[i];
+        }
+        else if (ivStorage[gSpecialVar_0x8006] == ivStorage[i])
+        {
+            u16 randomNumber = Random();
+            if ((randomNumber & 1) != 0)
+            {
+                gSpecialVar_0x8006 = i;
+                gSpecialVar_0x8007 = ivStorage[i];
+            }
+        }
+    }
+}
+
+bool32 warp0_in_pokecenter(void)
+{
+    int i;
+    u16 map = (gUnknown_020322DC.mapGroup << 8) + gUnknown_020322DC.mapNum;
+
+    for (i = 0; gUnknown_085B2C2A[i] != 0xFFFF; i++)
+    {
+        if (gUnknown_085B2C2A[i] == map)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 sub_8139ED0(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void UpdateFrontierManiac(u16 a0)
+{
+    u16 *var = GetVarPointer(VAR_FRONTIER_MANIAC_FACILITY);
+    *var += a0;
+    *var %= 10;
+}
+
+const u8 *const gUnknown_085B2C50[][3] = {
+    { BattleFrontier_Lounge2_Text_260971, BattleFrontier_Lounge2_Text_260A1E, BattleFrontier_Lounge2_Text_260AE7 },
+    { BattleFrontier_Lounge2_Text_2619AC, BattleFrontier_Lounge2_Text_261A91, BattleFrontier_Lounge2_Text_261B0C },
+    { BattleFrontier_Lounge2_Text_261B95, BattleFrontier_Lounge2_Text_261B95, BattleFrontier_Lounge2_Text_261B95 },
+    { BattleFrontier_Lounge2_Text_261C1A, BattleFrontier_Lounge2_Text_261C1A, BattleFrontier_Lounge2_Text_261C1A },
+    { BattleFrontier_Lounge2_Text_260BC4, BattleFrontier_Lounge2_Text_260C6D, BattleFrontier_Lounge2_Text_260D3A },
+    { BattleFrontier_Lounge2_Text_260E1E, BattleFrontier_Lounge2_Text_260EC7, BattleFrontier_Lounge2_Text_260F74 },
+    { BattleFrontier_Lounge2_Text_2614E6, BattleFrontier_Lounge2_Text_261591, BattleFrontier_Lounge2_Text_26166F },
+    { BattleFrontier_Lounge2_Text_261282, BattleFrontier_Lounge2_Text_261329, BattleFrontier_Lounge2_Text_261403 },
+    { BattleFrontier_Lounge2_Text_261026, BattleFrontier_Lounge2_Text_2610CC, BattleFrontier_Lounge2_Text_261194 },
+    { BattleFrontier_Lounge2_Text_26174D, BattleFrontier_Lounge2_Text_2617F9, BattleFrontier_Lounge2_Text_2618C4 },
+};
+
+const u8 gUnknown_085B2CC8[][2] = {
+    { 0x15, 0x38 },
+ 	{ 0x15, 0x23 },
+ 	{ 0xff, 0xff },
+ 	{ 0xff, 0xff },
+ 	{ 0x02, 0x04 },
+ 	{ 0x07, 0x15 },
+ 	{ 0x07, 0x15 },
+ 	{ 0x0e, 0x1c },
+ 	{ 0x0d, 0x70 },
+    { 0x07, 0x38 }
+};
+
+void sub_8139F20(void)
+{
+    u8 i;
+    u16 unk = 0;
+    u16 var = VarGet(VAR_FRONTIER_MANIAC_FACILITY);
+    switch (var)
+    {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            if (gSaveBlock2Ptr->frontier.field_CE0[var][0] >= gSaveBlock2Ptr->frontier.field_CE0[var][1])
+            {
+                unk = gSaveBlock2Ptr->frontier.field_CE0[var][0];
+            }
+            else
+            {
+                unk = gSaveBlock2Ptr->frontier.field_CE0[var][1];
+            }
+            break;
+        case 4:
+            if (gSaveBlock2Ptr->frontier.field_D0C[0] >= gSaveBlock2Ptr->frontier.field_D0C[1])
+            {
+                unk = gSaveBlock2Ptr->frontier.field_D0C[0];
+            }
+            else
+            {
+                unk = gSaveBlock2Ptr->frontier.field_D0C[1];
+            }
+            break;
+        case 5:
+            if (gSaveBlock2Ptr->frontier.field_DE2[0] >= gSaveBlock2Ptr->frontier.field_DE2[1])
+            {
+                unk = gSaveBlock2Ptr->frontier.field_DE2[0];
+            }
+            else
+            {
+                unk = gSaveBlock2Ptr->frontier.field_DE2[1];
+            }
+            break;
+        case 6:
+            if (gSaveBlock2Ptr->frontier.field_DC8[0] >= gSaveBlock2Ptr->frontier.field_DC8[1])
+            {
+                unk = gSaveBlock2Ptr->frontier.field_DC8[0];
+            }
+            else
+            {
+                unk = gSaveBlock2Ptr->frontier.field_DC8[1];
+            }
+            break;
+        case 7:
+            if (gSaveBlock2Ptr->frontier.field_DDA[0] >= gSaveBlock2Ptr->frontier.field_DDA[1])
+            {
+                unk = gSaveBlock2Ptr->frontier.field_DDA[0];
+            }
+            else
+            {
+                unk = gSaveBlock2Ptr->frontier.field_DDA[1];
+            }
+            break;
+        case 8:
+            if (gSaveBlock2Ptr->frontier.field_E04[0] >= gSaveBlock2Ptr->frontier.field_E04[1])
+            {
+                unk = gSaveBlock2Ptr->frontier.field_E04[0];
+            }
+            else
+            {
+                unk = gSaveBlock2Ptr->frontier.field_E04[1];
+            }
+            break;
+        case 9:
+            if (gSaveBlock2Ptr->frontier.field_E1A[0] >= gSaveBlock2Ptr->frontier.field_E1A[1])
+            {
+                unk = gSaveBlock2Ptr->frontier.field_E1A[0];
+            }
+            else
+            {
+                unk = gSaveBlock2Ptr->frontier.field_E1A[1];
+            }
+            break;
+    }
+
+    for (i = 0; i < 2 && gUnknown_085B2CC8[var][i] < unk; i++);
+
+    ShowFieldMessage(gUnknown_085B2C50[var][i]);
+}
+
+const u16 gUnknown_085B2CDC[] = {
+    0x0007, 0x000e, 0x0015, 0x001c, 0x0023, 0x0031, 0x003f, 0x004d, 0x005b, 0x0000
+};
+
+void sub_813A080(void)
+{
+    u8 i;
+    u16 var = VarGet(VAR_0x40CE);
+    u8 chosenLevel = gSaveBlock2Ptr->frontier.chosenLvl;
+
+    if (var == 2 && !FlagGet(FLAG_0x152))
+    {
+        gSpecialVar_0x8005 = 5;
+        gSpecialVar_0x8006 = 4;
+        return;
+    }
+
+    for (i = 0; i < 9; i++)
+    {
+        if (gUnknown_085B2CDC[i] > gSaveBlock2Ptr->frontier.field_CE0[var][chosenLevel])
+        {
+            gSpecialVar_0x8005 = 4;
+            gSpecialVar_0x8006 = i + 5;
+            return;
+        }
+    }
+
+    gSpecialVar_0x8005 = 4;
+    gSpecialVar_0x8006 = 12;
+}
+
+void sub_813A2DC(u8 taskId);
+
+void sub_813A128(void)
+{
+    u8 taskId = CreateTask(sub_813A2DC, 8);
+    struct Task *task = &gTasks[taskId];
+    task->data[11] = gSpecialVar_0x8004;
+
+    switch (gSpecialVar_0x8004)
+    {
+        case 0:
+            task->data[0] = 1;
+            task->data[1] = 1;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 1;
+            task->data[5] = 1;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 1:
+            task->data[0] = 5;
+            task->data[1] = 8;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 9;
+            task->data[5] = 10;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 2:
+            task->data[0] = 6;
+            task->data[1] = 12;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 7;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 3:
+            task->data[0] = 6;
+            task->data[1] = 11;
+            task->data[2] = 14;
+            task->data[3] = 1;
+            task->data[4] = 15;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 4:
+            task->data[0] = 6;
+            task->data[1] = 6;
+            task->data[2] = 14;
+            task->data[3] = 1;
+            task->data[4] = 15;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 5:
+            task->data[0] = 6;
+            task->data[1] = 7;
+            task->data[2] = 14;
+            task->data[3] = 1;
+            task->data[4] = 15;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 6:
+            task->data[0] = 6;
+            task->data[1] = 10;
+            task->data[2] = 14;
+            task->data[3] = 1;
+            task->data[4] = 15;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 7:
+            task->data[0] = 6;
+            task->data[1] = 12;
+            task->data[2] = 15;
+            task->data[3] = 1;
+            task->data[4] = 14;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 8:
+            task->data[0] = 6;
+            task->data[1] = 10;
+            task->data[2] = 17;
+            task->data[3] = 1;
+            task->data[4] = 11;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 9:
+        case 10:
+            task->data[0] = 6;
+            task->data[1] = 11;
+            task->data[2] = 15;
+            task->data[3] = 1;
+            task->data[4] = 14;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 11:
+            task->data[0] = 6;
+            task->data[1] = 7;
+            task->data[2] = 19;
+            task->data[3] = 1;
+            task->data[4] = 10;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 12:
+            task->data[0] = 6;
+            task->data[1] = 7;
+            task->data[2] = 17;
+            task->data[3] = 1;
+            task->data[4] = 12;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        default:
+            gSpecialVar_Result = 0x7F;
+            DestroyTask(taskId);
+            break;
+    }
+}
+
+void sub_813AA60(u16 a0, u16 a1);
+void sub_813ACE8(u8 a0, u16 a1);
+void sub_813A42C(void);
+
+const u8 *const gUnknown_085B2CF0[][16] = {
+    {
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_BlueFlute,
+        gText_YellowFlute,
+        gText_RedFlute,
+        gText_WhiteFlute,
+        gText_BlackFlute,
+        gText_PrettyChair,
+        gText_PrettyDesk,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_0Pts,
+        gText_10Pts,
+        gText_20Pts,
+        gText_30Pts,
+        gText_40Pts,
+        gText_50Pts,
+        gText_60Pts,
+        gText_70Pts,
+        gText_80Pts,
+        gText_90Pts,
+        gText_100Pts,
+        gText_QuestionMark,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_KissPoster16BP,
+        gText_KissCushion32BP,
+        gText_SmoochumDoll32BP,
+        gText_TogepiDoll48BP,
+        gText_MeowthDoll48BP,
+        gText_ClefairyDoll48BP,
+        gText_DittoDoll48BP,
+        gText_CyndaquilDoll80BP,
+        gText_ChikoritaDoll80BP,
+        gText_TotodileDoll80BP,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_LaprasDoll128BP,
+        gText_SnorlaxDoll128BP,
+        gText_VenusaurDoll256BP,
+        gText_CharizardDoll256BP,
+        gText_BlastoiseDoll256BP,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_Protein1BP,
+        gText_Calcium1BP,
+        gText_Iron1BP,
+        gText_Zinc1BP,
+        gText_Carbos1BP,
+        gText_HpUp1BP,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_Leftovers48BP,
+        gText_WhiteHerb48BP,
+        gText_QuickClaw48BP,
+        gText_MentalHerb48BP,
+        gText_BrightPowder64BP,
+        gText_ChoiceBand64BP,
+        gText_KingsRock64BP,
+        gText_FocusBand64BP,
+        gText_ScopeLens64BP,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_EnergyPowder50,
+        gText_EnergyRoot80,
+        gText_HealPowder50,
+        gText_RevivalHerb300,
+        gText_Protein1000,
+        gText_Iron1000,
+        gText_Carbos1000,
+        gText_Calcium1000,
+        gText_Zinc1000,
+        gText_HPUp1000,
+        gText_PPUp3000,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_BattleTower2,
+        gText_BattleDome,
+        gText_BattlePalace,
+        gText_BattleArena,
+        gText_BattleFactory,
+        gText_BattlePike,
+        gText_BattlePyramid,
+        gText_RankingHall,
+        gText_ExchangeService,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_Softboiled16BP,
+        gText_SeismicToss24BP,
+        gText_DreamEater24BP,
+        gText_MegaPunch24BP,
+        gText_MegaKick48BP,
+        gText_BodySlam48BP,
+        gText_RockSlide48BP,
+        gText_Counter48BP,
+        gText_ThunderWave48BP,
+        gText_SwordsDance48BP,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_DefenseCurl16BP,
+        gText_Snore24BP,
+        gText_MudSlap24BP,
+        gText_Swift24BP,
+        gText_IcyWind24BP,
+        gText_Endure48BP,
+        gText_PsychUp48BP,
+        gText_IcePunch48BP,
+        gText_ThunderPunch48BP,
+        gText_FirePunch48BP,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_SlateportCity,
+        gText_BattleFrontier,
+        gText_SouthernIsland,
+        gText_NavelRock,
+        gText_BirthIsland,
+        gText_FarawayIsland,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        gText_BattleTrainers,
+        gText_BattleBasics,
+        gText_PokemonNature,
+        gText_PokemonMoves,
+        gText_Underpowered,
+        gText_WhenInDanger,
+        gText_Exit,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    }
+};
+
+void sub_813A4EC(u8 taskId);
+void sub_813A694(u8 taskId);
+
+void sub_813A2DC(u8 taskId)
+{
+    u32 unk1;
+    u8 i, windowId;
+    struct WindowTemplate template;
+    struct Task *task = &gTasks[taskId];
+
+    ScriptContext2_Enable();
+    gUnknown_0203AB68 = 0;
+    gUnknown_0203AB6C = 0x40;
+    sub_813AA60(task->data[11], 0);
+    sub_813ACE8(task->data[11], 0);
+    gUnknown_0203AB64 = AllocZeroed(task->data[1] * 8);
+    gUnknown_0203AB6A = 0;
+    sub_813A42C();
+
+    for (unk1 = 0, i = 0; i < task->data[1]; i++)
+    {
+        const u8 *text = gUnknown_085B2CF0[gSpecialVar_0x8004][i];
+        gUnknown_0203AB64[i].name = text;
+        gUnknown_0203AB64[i].id = i;
+        unk1 = display_text_and_get_width(text, unk1);
+    }
+
+    task->data[4] = convert_pixel_width_to_tile_width(unk1);
+    
+    if (task->data[2] + task->data[4] > 0x1D) 
+    {
+        int unk2 = 0x1D - task->data[4];
+        if (unk2 < 0)
+        {
+            task->data[2] = 0;
+        }
+        else
+        {
+            task->data[2] = unk2;
+        }
+    }
+
+    template = CreateWindowTemplate(0, task->data[2], task->data[3], task->data[4], task->data[5], 0xF, 0x64);
+    windowId = AddWindow(&template);
+    task->data[13] = windowId;
+    SetStandardWindowBorderStyle(windowId, 0);
+
+    gUnknown_030061D0.totalItems = task->data[1];
+    gUnknown_030061D0.maxShowed = task->data[0];
+    gUnknown_030061D0.windowId = task->data[13];
+
+    sub_813A694(taskId);
+    task->data[14] = ListMenuInit(&gUnknown_030061D0, task->data[7], task->data[8]);
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = sub_813A4EC;
+}
+
+void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+
+void sub_813A42C(void)
+{
+    gUnknown_030061D0.items = gUnknown_0203AB64;
+    gUnknown_030061D0.moveCursorFunc = sub_813A46C;
+    gUnknown_030061D0.itemPrintFunc = NULL;
+    gUnknown_030061D0.totalItems = 1;
+    gUnknown_030061D0.maxShowed = 1;
+    gUnknown_030061D0.windowId = 0;
+    gUnknown_030061D0.header_X = 0;
+    gUnknown_030061D0.item_X = 8;
+    gUnknown_030061D0.cursor_X = 0;
+    gUnknown_030061D0.upText_Y = 1;
+    gUnknown_030061D0.cursorPal = 2;
+    gUnknown_030061D0.fillValue = 1;
+    gUnknown_030061D0.cursorShadowPal = 3;
+    gUnknown_030061D0.lettersSpacing = 0;
+    gUnknown_030061D0.itemVerticalPadding = 0;
+    gUnknown_030061D0.scrollMultiple = 0;
+    gUnknown_030061D0.fontId = 1;
+    gUnknown_030061D0.cursorKind = 0;
+}
+
+void sub_813A4EC(u8 taskId);
+void sub_813AA60(u16 a0, u16 a1);
+void sub_813AC44(u16 a0, u16 a1);
+void sub_813AD34(u8 a0, u16 a1);
+
+void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+{
+    u8 taskId;
+    PlaySE(SE_SELECT);
+    taskId = FindTaskIdByFunc(sub_813A4EC);
+    if (taskId != 0xFF)
+    {
+        u16 misc;
+        struct Task *task = &gTasks[taskId];
+        ListMenuGetScrollAndRow(task->data[14], &misc, NULL);
+        gUnknown_0203AB68 = misc;
+        ListMenuGetCurrentItemArrayId(task->data[14], &misc);
+        sub_813AC44(task->data[11], gUnknown_0203AB6A);
+        sub_813AA60(task->data[11], misc);
+        sub_813AD34(task->data[11], misc);
+        gUnknown_0203AB6A = misc;
+    }
 }

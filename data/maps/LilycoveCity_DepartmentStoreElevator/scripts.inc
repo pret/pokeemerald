@@ -118,7 +118,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_2207E5:: @ 82207E5
 	applymovement VAR_LAST_TALKED, LilycoveCity_DepartmentStoreElevator_Movement_2725AA
 	waitmovement 0
 	waitse
-	special sub_8139A78
+	special ShakeScreenInElevator
 	waitstate
 	setflag FLAG_0x002
 	return

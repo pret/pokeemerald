@@ -1143,7 +1143,7 @@ void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8
     template->baseBlock = baseBlock;
 }
 
-struct WindowTemplate sub_8198A50(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
+struct WindowTemplate CreateWindowTemplate(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
 {
     struct WindowTemplate template;
     SetWindowTemplateFields(&template, bg, left, top, width, height, paletteNum, baseBlock);

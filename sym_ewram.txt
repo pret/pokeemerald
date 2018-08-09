@@ -605,36 +605,6 @@ gPlayerFacingPosition: @ 203AB40
 	.include "src/pokeblock.o"
 	.include "src/field_specials.o"
 
-gUnknown_0203AB5E: @ 203AB5E
-	.space 0x2
-
-gUnknown_0203AB60: @ 203AB60
-	.space 0x2
-
-gUnknown_0203AB62: @ 203AB62
-	.space 0x2
-
-gUnknown_0203AB64: @ 203AB64
-	.space 0x4
-
-gUnknown_0203AB68: @ 203AB68
-	.space 0x2
-
-gUnknown_0203AB6A: @ 203AB6A
-	.space 0x2
-
-gUnknown_0203AB6C: @ 203AB6C
-	.space 0x1
-
-gUnknown_0203AB6D: @ 203AB6D
-	.space 0x1
-
-gUnknown_0203AB6E: @ 203AB6E
-	.space 0x1
-
-gUnknown_0203AB6F: @ 203AB6F
-	.space 0x1
-
 gUnknown_0203AB70: @ 203AB70
 	.space 0x4
 

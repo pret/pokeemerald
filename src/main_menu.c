@@ -1965,7 +1965,7 @@ void sub_80323CC(u8 a, u8 b, u16 c, u16 d, u8 e, u8 f)
 {
     struct WindowTemplate sp;
 
-    sp = sub_8198A50(0, a + 1, b + 1, 5, 4, f, d);
+    sp = CreateWindowTemplate(0, a + 1, b + 1, 5, 4, f, d);
     CreateYesNoMenu(&sp, c, e, 0);
 }
 

@@ -284,7 +284,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80FB7A4
 	def_special DoSoftReset
 	def_special GameClear
-	def_special sub_8139A78
+	def_special ShakeScreenInElevator
 	def_special nullsub_55
 	def_special SpawnScriptEventObject
 	def_special RemoveScriptEventObject

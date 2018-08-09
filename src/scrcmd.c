@@ -1515,7 +1515,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     xText = (xWindow - xText - 1) * 8 + 3;
     yText = (yText - yWindow - 1) * 8;
 
-    winTemplate = sub_8198A50(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
+    winTemplate = CreateWindowTemplate(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
     gUnknown_03000F30 = AddWindow(&winTemplate);
     LoadUserWindowBorderGfx(gUnknown_03000F30, 0x214, 0xE0);
     NewMenuHelpers_DrawStdWindowFrame(gUnknown_03000F30, 0);

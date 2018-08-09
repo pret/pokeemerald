@@ -51,7 +51,7 @@ void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
 void reset_temp_tile_data_buffers(void);
 void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, u16 offset, u8 mode);
 bool8 free_temp_tile_data_buffers_if_possible(void);
-struct WindowTemplate sub_8198A50(u8, u8, u8, u8, u8, u8, u16);
+struct WindowTemplate CreateWindowTemplate(u8, u8, u8, u8, u8, u8, u16);
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
 void copy_decompressed_tile_data_to_vram_autofree(u8 bgId, const void *src, int size, u16 offset, u8 mode);
 s8 ProcessMenuInputNoWrap_(void);
