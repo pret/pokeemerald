@@ -3584,7 +3584,259 @@ void set_unknown_box_id(u8 id)
     gUnknown_0203AB6F = id;
 }
 
-u8 get_unknown_box_id(void)
+u16 get_unknown_box_id(void)
 {
     return gUnknown_0203AB6F;
 }
+
+bool32 sub_813B21C(void)
+{
+    if (FlagGet(FLAG_SYS_STORAGE_UNKNOWN_FLAG) == FALSE)
+    {
+        if (StorageGetCurrentBox() != VarGet(VAR_STORAGE_UNKNOWN))
+        {
+            FlagSet(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_813B260(void)
+{
+    int box;
+    int i;
+    set_unknown_box_id(VarGet(VAR_STORAGE_UNKNOWN));
+    box = StorageGetCurrentBox();
+    do
+    {
+        for (i = 0; i < IN_BOX_COUNT; i++)
+        {
+            if (GetBoxMonData(GetBoxedMonPtr(box, i), MON_DATA_SPECIES, 0) == 0)
+            {
+                if (get_unknown_box_id() != box)
+                {
+                    FlagClear(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
+                }
+                VarSet(VAR_STORAGE_UNKNOWN, box);
+                return sub_813B21C();
+            }
+        }
+
+        if (++box == TOTAL_BOXES_COUNT)
+        {
+            box = 0;
+        }
+    } while (box != StorageGetCurrentBox());
+    return FALSE;
+}
+
+void sub_813B2E4(void)
+{
+    u16 randomValue = Random();
+    VarSet(VAR_0x4038, 0);
+
+    if (FlagGet(FLAG_0x1BE) == TRUE)
+    {
+        VarSet(VAR_0x4037, (randomValue & 7) + 1);
+    }
+    else if (FlagGet(FLAG_0x1BF) == TRUE)
+    {
+        VarSet(VAR_0x4037, (randomValue & 7) + 9);
+    }
+    else if ((randomValue & 1) == 0)
+    {
+        randomValue = Random();
+        VarSet(VAR_0x4037, (randomValue & 7) + 1);
+    }
+    else
+    {
+        randomValue = Random();
+        VarSet(VAR_0x4037, (randomValue & 7) + 9);
+    }
+}
+
+const u8 gUnknown_085B3400[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+
+bool32 sub_813B374(void)
+{
+    u16 var = VarGet(VAR_0x4037);
+
+    GetMapName(gStringVar1, gUnknown_085B3400[var - 1], 0);
+    
+    if (var < 9)
+    {
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
+const u8 gUnknown_085B3410[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+
+// last parts of switch statements insist on merging
+#ifdef NONMATCHING
+bool32 sub_813B3B0(void)
+{
+    u16 var1 = VarGet(VAR_0x4038);
+    u16 var2 = VarGet(VAR_0x4037);
+
+    if (var2 != 0)
+    {
+        if (++var1 > 999)
+        {
+            VarSet(VAR_0x4038, 0);
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
+            {
+                switch (gSaveBlock1Ptr->location.mapNum)
+                {
+                    case MAP_NUM(UNDERWATER_MARINE_CAVE):
+                    case MAP_NUM(MARINE_CAVE_ENTRANCE):
+                    case MAP_NUM(MARINE_CAVE_END):
+                    case MAP_NUM(TERRA_CAVE_ENTRANCE):
+                    case MAP_NUM(TERRA_CAVE_END):
+                        VarSet(VAR_0x4039, 1);
+                        return FALSE;
+                    default:
+                        break;
+                }
+            }
+            
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER3))
+            {
+                switch (gSaveBlock1Ptr->location.mapNum)
+                {
+                    case MAP_NUM(UNDERWATER3):
+                    case MAP_NUM(UNDERWATER5):
+                    case MAP_NUM(UNDERWATER6):
+                    case MAP_NUM(UNDERWATER7):
+                        VarSet(VAR_0x4039, 1);
+                        return FALSE;
+                    default:
+                        break;
+                }
+            }
+
+            if (gSaveBlock1Ptr->location.mapNum == gUnknown_085B3410[var2 - 1] &&
+                gSaveBlock1Ptr->location.mapGroup == 0)
+            {
+                return TRUE;
+            }
+            else
+            {
+                VarSet(VAR_0x4037, 0);
+                return FALSE;
+            }
+        }
+        else
+        {
+            VarSet(VAR_0x4038, var1);
+            return FALSE;
+        }
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+#else
+NAKED
+bool32 sub_813B3B0(void)
+{
+    asm_unified("push {r4-r6,lr}\n\
+	ldr r5, =0x00004038\n\
+	adds r0, r5, 0\n\
+	bl VarGet\n\
+	lsls r0, 16\n\
+	lsrs r4, r0, 16\n\
+	ldr r0, =0x00004037\n\
+	bl VarGet\n\
+	lsls r0, 16\n\
+	lsrs r6, r0, 16\n\
+	cmp r6, 0\n\
+	beq _0813B47C\n\
+	adds r0, r4, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r4, r0, 16\n\
+	ldr r0, =0x000003e7\n\
+	cmp r4, r0\n\
+	bls _0813B474\n\
+	adds r0, r5, 0\n\
+	movs r1, 0\n\
+	bl VarSet\n\
+	ldr r0, =gSaveBlock1Ptr\n\
+	ldr r1, [r0]\n\
+	movs r0, 0x4\n\
+	ldrsb r0, [r1, r0]\n\
+	cmp r0, 0x18\n\
+	bne _0813B414\n\
+	movs r0, 0x5\n\
+	ldrsb r0, [r1, r0]\n\
+	cmp r0, 0x69\n\
+	bgt _0813B414\n\
+	cmp r0, 0x65\n\
+	blt _0813B414\n\
+	ldr r0, =0x00004039\n\
+	movs r1, 0x1\n\
+	b _0813B478\n\
+	.pool\n\
+_0813B414:\n\
+	ldr r0, =gSaveBlock1Ptr\n\
+	ldr r2, [r0]\n\
+	movs r1, 0x4\n\
+	ldrsb r1, [r2, r1]\n\
+	adds r3, r0, 0\n\
+	cmp r1, 0\n\
+	bne _0813B444\n\
+	movs r0, 0x5\n\
+	ldrsb r0, [r2, r0]\n\
+	cmp r0, 0x34\n\
+	beq _0813B436\n\
+	cmp r0, 0x34\n\
+	blt _0813B444\n\
+	cmp r0, 0x38\n\
+	bgt _0813B444\n\
+	cmp r0, 0x36\n\
+	blt _0813B444\n\
+_0813B436:\n\
+	ldr r0, =0x00004039\n\
+	movs r1, 0x1\n\
+	b _0813B478\n\
+	.pool\n\
+_0813B444:\n\
+	ldr r3, [r3]\n\
+	movs r2, 0x5\n\
+	ldrsb r2, [r3, r2]\n\
+	ldr r1, =gUnknown_085B3410\n\
+	subs r0, r6, 0x1\n\
+	adds r0, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r2, r0\n\
+	bne _0813B468\n\
+	movs r0, 0x4\n\
+	ldrsb r0, [r3, r0]\n\
+	cmp r0, 0\n\
+	bne _0813B468\n\
+	movs r0, 0x1\n\
+	b _0813B47E\n\
+	.pool\n\
+_0813B468:\n\
+	ldr r0, =0x00004037\n\
+	movs r1, 0\n\
+	b _0813B478\n\
+	.pool\n\
+_0813B474:\n\
+	adds r0, r5, 0\n\
+	adds r1, r4, 0\n\
+_0813B478:\n\
+	bl VarSet\n\
+_0813B47C:\n\
+	movs r0, 0\n\
+_0813B47E:\n\
+	pop {r4-r6}\n\
+	pop {r1}\n\
+	bx r1");
+}
+#endif // NONMATCHING
