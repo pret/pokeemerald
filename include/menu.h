@@ -84,5 +84,6 @@ void sub_819A344(u8 a0, u8 *dest, u8 color);
 void RemoveMapNamePopUpWindow(void);
 u8 GetMapNamePopUpWindowId(void);
 u8 AddMapNamePopUpWindow(void);
+void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing);
 
 #endif // GUARD_MENU_H

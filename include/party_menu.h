@@ -34,6 +34,8 @@ struct Struct203CEC8
 
 extern struct Struct203CEC8 gUnknown_0203CEC8;
 
+extern const u16 gUnknown_0861500C[];
+
 bool8 pokemon_has_move(struct Pokemon *, u16);
 void sub_81B58A8(void);
 void DoWallyTutorialBagMenu(void);
