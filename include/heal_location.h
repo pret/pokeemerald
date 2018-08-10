@@ -1,8 +1,6 @@
 #ifndef GUARD_HEAL_LOCATION_H
 #define GUARD_HEAL_LOCATION_H
 
-#include "sprite.h"
-
 struct HealLocation
 {
     s8 group;

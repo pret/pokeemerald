@@ -4,7 +4,7 @@ MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8210E5B
 	.byte 0
 
 MauvilleCity_PokemonCenter_1F_MapScript1_210E66: @ 8210E66
-	setrespawn 5
+	setrespawn HEAL_LOCATION_MAUVILLE_CITY
 	call MauvilleCity_PokemonCenter_1F_EventScript_2718DE
 	goto MauvilleCity_PokemonCenter_1F_EventScript_210E74
 	end

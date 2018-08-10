@@ -4,7 +4,7 @@ SlateportCity_PokemonCenter_1F_MapScripts:: @ 820DABF
 	.byte 0
 
 SlateportCity_PokemonCenter_1F_MapScript1_20DACA: @ 820DACA
-	setrespawn 4
+	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	call SlateportCity_PokemonCenter_1F_EventScript_2718DE
 	end
 

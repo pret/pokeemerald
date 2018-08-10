@@ -4,7 +4,7 @@ EverGrandeCity_PokemonLeague_1F_MapScripts:: @ 82295D2
 	.byte 0
 
 EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD: @ 82295DD
-	setrespawn 20
+	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_2
 	setflag FLAG_LANDMARK_POKEMON_LEAGUE
 	checkflag FLAG_0x107
 	call_if 0, EverGrandeCity_PokemonLeague_1F_EventScript_2295ED
