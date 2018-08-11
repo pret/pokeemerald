@@ -244,7 +244,7 @@ static const u16 Unknown_085A1D48[] = INCBIN_U16("graphics/pokenav/fly_target_ic
 
 static const u8 sUnknown_085A1D68[] = INCBIN_U8("graphics/pokenav/fly_target_icons.4bpp.lz");
 
-static const u8 sUnknown_085A1E3C[][3] = {
+static const u8 sMapHealLocations[][3] = {
     {MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},
     {MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), HEAL_LOCATION_OLDALE_TOWN},
     {MAP_GROUP(DEWFORD_TOWN), MAP_NUM(DEWFORD_TOWN), HEAL_LOCATION_DEWFORD_TOWN},
@@ -1922,13 +1922,13 @@ static void sub_8124E0C(void)
                             sub_8084CCC(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && gUnknown_0203A148->regionMap.posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_2 : HEAL_LOCATION_EVER_GRANDE_CITY_1);
                             break;
                         default:
-                            if (sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2] != 0)
+                            if (sMapHealLocations[gUnknown_0203A148->regionMap.mapSecId][2] != 0)
                             {
-                                sub_8084CCC(sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2]);
+                                sub_8084CCC(sMapHealLocations[gUnknown_0203A148->regionMap.mapSecId][2]);
                             }
                             else
                             {
-                                warp1_set_2(sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][0], sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][1], -1);
+                                warp1_set_2(sMapHealLocations[gUnknown_0203A148->regionMap.mapSecId][0], sMapHealLocations[gUnknown_0203A148->regionMap.mapSecId][1], -1);
                             }
                             break;
                     }
