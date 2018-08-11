@@ -2089,7 +2089,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     s32 level = GetLevelFromBoxMonExp(boxMon);
     s32 i;
 
-    for (i = 0; gLevelUpLearnsets[species][i] != (u16)-1; i++)
+    for (i = 0; gLevelUpLearnsets[species][i] != LEVEL_UP_END; i++)
     {
         u16 moveLevel;
         u16 move;
@@ -2101,7 +2101,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 
         move = (gLevelUpLearnsets[species][i] & 0x1FF);
 
-        if (GiveMoveToBoxMon(boxMon, move) == (u16)-1)
+        if (GiveMoveToBoxMon(boxMon, move) == 0xFFFF)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
     }
 }
@@ -2123,7 +2123,7 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
         while ((gLevelUpLearnsets[species][sLearningMoveTableID] & 0xFE00) != (level << 9))
         {
             sLearningMoveTableID++;
-            if (gLevelUpLearnsets[species][sLearningMoveTableID] == 0xFFFF)
+            if (gLevelUpLearnsets[species][sLearningMoveTableID] == LEVEL_UP_END)
                 return 0;
         }
     }
