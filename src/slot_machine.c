@@ -21,7 +21,7 @@
 #include "tv.h"
 #include "text_window.h"
 #include "constants/rgb.h"
-#include "menu.h"
+#include "main_menu.h"
 
 enum
 {
@@ -155,13 +155,13 @@ bool8 sub_81020C8(struct Task *task);
 /*static*/bool8 sub_8102344(struct Task *task);
 /*static*/bool8 sub_810239C(struct Task *task);
 /*static*/bool8 sub_81023B8(struct Task *task);
-/*static*/bool8 sub_81023E0(struct Task *task);
+/*static*/bool8 sub_81023E0_(struct Task *task);
 /*static*/bool8 sub_81023FC(struct Task *task);
 /*static*/bool8 sub_8102424(struct Task *task);
 /*static*/bool8 sub_8102460(struct Task *task);
 /*static*/void sub_8102484(void);
 /*static*/void sub_81024F0(void);
-/*static*/bool8 sub_8102540(void);
+/*static*/bool8 sub_8102540_(void);
 /*static*/u8 sub_8102578(void);
 /*static*/u16 dp15_jump_random_unknown(void);
 /*static*/u8 sub_81025BC(void);
@@ -539,9 +539,33 @@ void SlotMachineSetup_3_0(void)
     ResetTasks();
 }
 
+extern u16 *gUnknown_0203AAC8;
 extern u16 *gUnknown_0203AACC;
 extern u16 *gUnknown_0203AAD0;
 extern u16 *gUnknown_0203AADC;
+extern void *gUnknown_0203AAF4;
+extern void *gUnknown_0203AAF8;
+extern void *gUnknown_0203AAFC;
+extern void *gUnknown_0203AB00;
+extern void *gUnknown_0203AB04;
+extern void *gUnknown_0203AB08;
+extern void *gUnknown_0203AB0C;
+extern void *gUnknown_0203AB10;
+extern void *gUnknown_0203AB14;
+extern void *gUnknown_0203AB18;
+extern void *gUnknown_0203AB1C;
+extern void *gUnknown_0203AB20;
+extern void *gUnknown_0203AB24;
+extern void *gUnknown_0203AB28;
+extern void *gUnknown_0203AAE4;
+extern void *gUnknown_0203AAE8;
+extern void *gUnknown_0203AAEC;
+extern void *gUnknown_0203AAF0;
+extern void *gUnknown_0203AAD4;
+extern void *gUnknown_0203AAD8;
+extern void *gUnknown_0203AAE0;
+extern void *gUnknown_0203AB2C;
+extern void *gUnknown_0203AB30;
 
 void SlotMachineSetup_4_0(void)
 {
@@ -694,6 +718,9 @@ bool8 sub_8101E3C(struct Task *task)
 }
 
 extern const u8 gText_YouDontHaveThreeCoins[];
+extern const u8 gText_QuitTheGame[];
+extern const u8 gText_YouveGot9999Coins[];
+extern const u8 gText_YouveRunOutOfCoins[];
 
 bool8 sub_8101F44(struct Task *task)
 {
@@ -884,4 +911,456 @@ bool8 sub_81021FC(struct Task *task)
         }
     }
     return FALSE;
+}
+
+bool8 sub_8102264(struct Task *task)
+{
+    if (!sub_81040C8())
+    {
+        sSlotMachine->state = 19;
+        if (sSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
+        {
+            sSlotMachine->state = 9;
+            if (sSlotMachine->unk0A)
+            {
+                sub_8104CAC(4);
+                sSlotMachine->state = 18;
+            }
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_81022A0(struct Task *task)
+{
+    if (sub_8104E18())
+    {
+        sSlotMachine->state = 19;
+        if (sSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
+        {
+            sSlotMachine->state = 9;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_81022CC(struct Task *task)
+{
+    sub_8103D8C(0);
+    sub_8103D8C(1);
+    sub_8103D8C(2);
+    sSlotMachine->state = 2;
+    return FALSE;
+}
+
+bool8 sub_81022F0(struct Task *task)
+{
+    if (++task->data[1] > 64)
+    {
+        task->data[1] = 0;
+        sSlotMachine->state = 19;
+    }
+    return FALSE;
+}
+
+bool8 sub_8102318(struct Task *task)
+{
+    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    PrintTextOnWindow(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
+    CopyWindowToVram(0, 3);
+    sub_80323CC(0x15, 7, 0x214, 0x180, 0xE, 0xF);
+    sSlotMachine->state = 22;
+    return FALSE;
+}
+
+bool8 sub_8102344(struct Task *task)
+{
+    s8 input = ProcessMenuInputNoWrap_();
+    if (input == 0)
+    {
+        sub_8197434(0, TRUE);
+        sub_8103D8C(0);
+        sub_8103D8C(1);
+        sub_8103D8C(2);
+        sSlotMachine->coins += sSlotMachine->bet;
+        sSlotMachine->state = 27;
+    }
+    else if (input == 1 || input == -1)
+    {
+        sub_8197434(0, TRUE);
+        sSlotMachine->state = 5;
+    }
+    return FALSE;
+}
+
+bool8 sub_810239C(struct Task *task)
+{
+    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    PrintTextOnWindow(0, 1, gText_YouveGot9999Coins, 0, 1, 0, 0);
+    CopyWindowToVram(0, 3);
+    sSlotMachine->state = 24;
+    return FALSE;
+}
+
+bool8 sub_81023B8(struct Task *task)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        sub_8197434(0, TRUE);
+        sSlotMachine->state = 5;
+    }
+    return FALSE;
+}
+
+bool8 sub_81023E0_(struct Task *task)
+{
+    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    PrintTextOnWindow(0, 1, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
+    CopyWindowToVram(0, 3);
+    sSlotMachine->state = 26;
+    return FALSE;
+}
+
+bool8 sub_81023FC(struct Task *task)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        sub_8197434(0, TRUE);
+        sSlotMachine->state = 27;
+    }
+    return FALSE;
+}
+
+bool8 sub_8102424(struct Task *task)
+{
+    SetCoins(sSlotMachine->coins);
+    sub_80EDD78(GetCoins());
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+    sSlotMachine->state++;
+    return FALSE;
+}
+
+bool8 sub_8102460(struct Task *task)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(sSlotMachine->prevMainCb);
+        FREE_AND_SET_NULL(gUnknown_0203AAF4);
+        FREE_AND_SET_NULL(gUnknown_0203AAF8);
+        FREE_AND_SET_NULL(gUnknown_0203AAFC);
+        FREE_AND_SET_NULL(gUnknown_0203AB00);
+        FREE_AND_SET_NULL(gUnknown_0203AB04);
+        FREE_AND_SET_NULL(gUnknown_0203AB08);
+        FREE_AND_SET_NULL(gUnknown_0203AB0C);
+        FREE_AND_SET_NULL(gUnknown_0203AB10);
+        FREE_AND_SET_NULL(gUnknown_0203AB14);
+        FREE_AND_SET_NULL(gUnknown_0203AB18);
+        FREE_AND_SET_NULL(gUnknown_0203AB1C);
+        FREE_AND_SET_NULL(gUnknown_0203AB20);
+        FREE_AND_SET_NULL(gUnknown_0203AB24);
+        FREE_AND_SET_NULL(gUnknown_0203AB28);
+        if (gUnknown_0203AAE4 != NULL)
+            FREE_AND_SET_NULL(gUnknown_0203AAE4);
+        if (gUnknown_0203AAE8 != NULL)
+            FREE_AND_SET_NULL(gUnknown_0203AAE8);
+        if (gUnknown_0203AAEC != NULL)
+            FREE_AND_SET_NULL(gUnknown_0203AAEC);
+        if (gUnknown_0203AAF0 != NULL)
+            FREE_AND_SET_NULL(gUnknown_0203AAF0);
+        FREE_AND_SET_NULL(gUnknown_0203AAC8);
+        FREE_AND_SET_NULL(gUnknown_0203AACC);
+        FREE_AND_SET_NULL(gUnknown_0203AAD0);
+        FREE_AND_SET_NULL(gUnknown_0203AAD4);
+        FREE_AND_SET_NULL(gUnknown_0203AAD8);
+        FREE_AND_SET_NULL(gUnknown_0203AADC);
+        FREE_AND_SET_NULL(gUnknown_0203AAE0);
+        FREE_AND_SET_NULL(gUnknown_0203AB2C);
+        FREE_AND_SET_NULL(gUnknown_0203AB30);
+
+        FREE_AND_SET_NULL(sSlotMachine);
+    }
+    return FALSE;
+}
+
+void sub_8102484(void)
+{
+    u8 r3;
+
+    if (sSlotMachine->unk0A == 0)
+    {
+        if (!(sSlotMachine->unk04 & 0xc0))
+        {
+            if (sub_8102540_())
+            {
+                r3 = sub_8102578();
+                if (r3 != 3)
+                {
+                    sSlotMachine->unk04 |= gUnknown_083ECE42[r3];
+                    if (r3 != 1)
+                    {
+                        return;
+                    }
+                }
+            }
+            r3 = sub_81025BC();
+            if (r3 != 5)
+            {
+                sSlotMachine->unk04 |= gUnknown_083ECE48[r3];
+            }
+        }
+    }
+}
+
+void sub_81024F0(void)
+{
+    sSlotMachine->unk06 = 0;
+    if (sSlotMachine->unk04)
+        sSlotMachine->unk06 = 1;
+}
+
+u8 sub_810250C(u8 a0)
+{
+    u8 i;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (a0 & 1)
+            return gUnknown_083ECE3A[i];
+        a0 >>= 1;
+    }
+    return 0;
+}
+
+bool8 sub_8102540_(void)
+{
+    u8 rval = Random();
+    if (gUnknown_083ECD04[sSlotMachine->unk01][sSlotMachine->bet - 1] > rval)
+        return TRUE;
+    return FALSE;
+}
+
+extern const u8 gUnknown_083ECD16[][6];
+extern const u8 gUnknown_083ECD28[][6];
+extern const u8 gUnknown_083ECD46[][17];
+extern const u8 gUnknown_083ECDAC[][17];
+
+u8 sub_8102578(void)
+{
+    s16 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        s16 rval = Random() & 0xff;
+        s16 value = gUnknown_083ECD16[i][sSlotMachine->unk01];
+        if (value > rval)
+            break;
+    }
+    return i;
+}
+
+u8 sub_81025BC(void)
+{
+    s16 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        s16 rval = Random() & 0xff;
+        s16 r3 = gUnknown_083ECD28[i][sSlotMachine->unk01];
+        if (i == 0 && sSlotMachine->unk03 == 1)
+        {
+            r3 += 10;
+            if (r3 > 0x100)
+                r3 = 0x100;
+        }
+        else if (i == 4 && sSlotMachine->unk03 == 1)
+        {
+            r3 -= 10;
+            if (r3 < 0)
+                r3 = 0;
+        }
+        if (r3 > rval)
+            break;
+    }
+    return i;
+}
+
+u8 sub_810264C(u8 a0)
+{
+    if (sSlotMachine->unk03 == 0)
+        return gUnknown_083ECD46[a0][sSlotMachine->pikaPower];
+    else
+        return gUnknown_083ECDAC[a0][sSlotMachine->pikaPower];
+}
+
+void sub_8102680(void)
+{
+    u8 rval;
+    s16 i;
+
+    sSlotMachine->unk05 = 0;
+    rval = Random();
+    if (rval < sub_810264C(0))
+        return;
+    for (i = 5; i > 0; i--)
+    {
+        rval = Random();
+        if (rval < sub_810264C(i))
+            break;
+    }
+    sSlotMachine->unk05 = i;
+}
+
+extern const u16 gUnknown_083ECE12[];
+extern const u16 gUnknown_083ECE1C[][2];
+extern const u16 gUnknown_083ECE30[];
+extern const u16 sSlotMatchFlags[];
+extern const u16 sSlotPayouts[];
+
+bool8 sub_81026DC(u16 a0)
+{
+    u16 rval = Random() & 0xff;
+    if (rval < gUnknown_083ECE12[a0])
+        return TRUE;
+    else
+        return FALSE;
+}
+
+u16 dp15_jump_random_unknown(void)
+{
+    u8 r4 = 0;
+    u8 rval;
+    u8 value;
+    if (sSlotMachine->unk10 >= 300)
+        r4 = 4;
+    else if (sSlotMachine->unk10 >= 250)
+        r4 = 3;
+    else if (sSlotMachine->unk10 >= 200)
+        r4 = 2;
+    else if (sSlotMachine->unk10 >= 150)
+        r4 = 1;
+    rval = Random() % 100;
+    value = gUnknown_083ECE1C[r4][0];
+    if (rval < value)
+        return 4;
+    rval = Random() % 100;
+    value = gUnknown_083ECE1C[r4][1] + gUnknown_083ECE30[sSlotMachine->unk0B];
+    if (rval < value)
+        return 2;
+    return 8;
+}
+
+void CheckMatch(void)
+{
+    sSlotMachine->matchedSymbols = 0;
+    CheckMatch_CenterRow();
+    if (sSlotMachine->bet > 1)
+        CheckMatch_TopAndBottom();
+    if (sSlotMachine->bet > 2)
+        CheckMatch_Diagonals();
+}
+
+void CheckMatch_CenterRow(void)
+{
+    u8 c1, c2, c3, match;
+
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 2);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 2);
+    match = GetMatchFromSymbolsInRow(c1, c2, c3);
+    if (match != SLOT_MACHINE_MATCHED_NONE)
+    {
+        sSlotMachine->payout += sSlotPayouts[match];
+        sSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
+        sub_8103E04(0);
+    }
+}
+
+void CheckMatch_TopAndBottom(void)
+{
+    u8 c1, c2, c3, match;
+
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 1);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 1);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 1);
+    match = GetMatchFromSymbolsInRow(c1, c2, c3);
+    if (match != SLOT_MACHINE_MATCHED_NONE)
+    {
+        if (match == SLOT_MACHINE_MATCHED_1CHERRY)
+            match = SLOT_MACHINE_MATCHED_2CHERRY;
+        sSlotMachine->payout += sSlotPayouts[match];
+        sSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
+        sub_8103E04(1);
+    }
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 3);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 3);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 3);
+    match = GetMatchFromSymbolsInRow(c1, c2, c3);
+    if (match != SLOT_MACHINE_MATCHED_NONE)
+    {
+        if (match == SLOT_MACHINE_MATCHED_1CHERRY)
+            match = SLOT_MACHINE_MATCHED_2CHERRY;
+        sSlotMachine->payout += sSlotPayouts[match];
+        sSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
+        sub_8103E04(2);
+    }
+}
+
+void CheckMatch_Diagonals(void)
+{
+    u8 c1, c2, c3, match;
+
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 1);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 3);
+    match = GetMatchFromSymbolsInRow(c1, c2, c3);
+    if (match != SLOT_MACHINE_MATCHED_NONE)
+    {
+        if (match != SLOT_MACHINE_MATCHED_1CHERRY)
+        {
+            sSlotMachine->payout += sSlotPayouts[match];
+            sSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
+        }
+        sub_8103E04(3);
+    }
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 3);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 1);
+    match = GetMatchFromSymbolsInRow(c1, c2, c3);
+    if (match != SLOT_MACHINE_MATCHED_NONE)
+    {
+        if (match != SLOT_MACHINE_MATCHED_1CHERRY)
+        {
+            sSlotMachine->payout += sSlotPayouts[match];
+            sSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
+        }
+        sub_8103E04(4);
+    }
+}
+
+extern const u8 sSym2Match[];
+
+u8 GetMatchFromSymbolsInRow(u8 c1, u8 c2, u8 c3)
+{
+    if (c1 == c2 && c1 == c3)
+        return sSym2Match[c1];
+    if (c1 == SLOT_MACHINE_TAG_7_RED && c2 == SLOT_MACHINE_TAG_7_RED && c3 == SLOT_MACHINE_TAG_7_BLUE)
+        return SLOT_MACHINE_MATCHED_777_MIXED;
+    if (c1 == SLOT_MACHINE_TAG_7_BLUE && c2 == SLOT_MACHINE_TAG_7_BLUE && c3 == SLOT_MACHINE_TAG_7_RED)
+        return SLOT_MACHINE_MATCHED_777_MIXED;
+    if (c1 == SLOT_MACHINE_TAG_CHERRY)
+        return SLOT_MACHINE_MATCHED_1CHERRY;
+    return SLOT_MACHINE_MATCHED_NONE;
+}
+
+void sub_8102A24(void)
+{
+    sub_8102A64(CreateTask(sub_8102A64, 4));
+}
+
+bool8 sub_8102A44(void)
+{
+    if (FindTaskIdByFunc(sub_8102A64) == 0xff)
+        return TRUE;
+    else
+        return FALSE;
 }

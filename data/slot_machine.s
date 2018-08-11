@@ -20,36 +20,36 @@ gUnknown_085A7444:: @ 85A7444
 gUnknown_085A744C:: @ 85A744C
 	.byte 3, 1, 2, 0
 
-gUnknown_085A7450:: @ 85A7450
-	.4byte sub_812AB04
-	.4byte sub_812AB38
-	.4byte sub_812AB60
-	.4byte sub_812ABA8
-	.4byte sub_812ABC8
-	.4byte sub_812ABF8
-	.4byte sub_812ACF4
-	.4byte sub_812AD34
-	.4byte sub_812AD60
-	.4byte sub_812AD80
-	.4byte sub_812ADF4
-	.4byte sub_812AE24
-	.4byte sub_812AE4C
-	.4byte sub_812AE88
-	.4byte sub_812AEC4
-	.4byte sub_812AFFC
-	.4byte sub_812B01C
-	.4byte sub_812B094
-	.4byte sub_812B0D8
-	.4byte sub_812B108
-	.4byte sub_812B130
-	.4byte sub_812B158
-	.4byte sub_812B1B0
-	.4byte sub_812B214
-	.4byte sub_812B254
-	.4byte sub_812B280
-	.4byte sub_812B2C0
-	.4byte sub_812B2EC
-	.4byte sub_812B32C
+gUnknown_083ECAAC:: @ 85A7450
+	.4byte sub_8101D5C
+	.4byte sub_8101D8C
+	.4byte sub_8101DB0
+	.4byte sub_8101DF4
+	.4byte sub_8101E10
+	.4byte sub_8101E3C
+	.4byte sub_8101F44
+	.4byte sub_8101F60
+	.4byte sub_8101F88
+	.4byte sub_8101FA4
+	.4byte sub_8102008
+	.4byte sub_8102034
+	.4byte sub_8102058
+	.4byte sub_8102090
+	.4byte sub_81020C8
+	.4byte sub_81021E0
+	.4byte sub_81021FC
+	.4byte sub_8102264
+	.4byte sub_81022A0
+	.4byte sub_81022CC
+	.4byte sub_81022F0
+	.4byte sub_8102318
+	.4byte sub_8102344
+	.4byte sub_810239C
+	.4byte sub_81023B8
+	.4byte sub_81023E0_
+	.4byte sub_81023FC
+	.4byte sub_8102424
+	.4byte sub_8102460
 
 gUnknown_085A74C4:: @ 85A74C4
 	.4byte sub_812BB34
@@ -203,10 +203,10 @@ gUnknown_085A766E:: @ 85A766E
 gUnknown_085A76AD:: @ 85A76AD
 	.byte 1, 0, 5, 4, 3, 2, 0
 
-gUnknown_085A76B4:: @ 85A76B4
+gUnknown_083ECCF8:: @ 85A76B4
 	.2byte 0, 6, 0, 10, 0, 2
 
-gUnknown_085A76C0:: @ 85A76C0
+gUnknown_083ECD04:: @ 85A76C0
 	.byte 1, 1, 12
 	.byte 1, 1, 14
 	.byte 2, 2, 14
@@ -214,19 +214,19 @@ gUnknown_085A76C0:: @ 85A76C0
 	.byte 2, 3, 16
 	.byte 3, 3, 16
 
-gUnknown_085A76D2:: @ 85A76D2
+gUnknown_083ECD16:: @ 85A76D2
 	.byte 0x19, 0x19, 0x1E, 0x28, 0x28, 0x32
 	.byte 0x19, 0x19, 0x1E, 0x1E, 0x23, 0x23
 	.byte 0x19, 0x19, 0x1E, 0x19, 0x19, 0x1E
 
-gUnknown_085A76E4:: @ 85A76E4
+gUnknown_083ECD28:: @ 85A76E4
 	.byte 0x14, 0x19, 0x19, 0x14, 0x19, 0x19
 	.byte 0xC, 0xF, 0xF, 0x12, 0x13, 0x16
 	.byte 0x19, 0x19, 0x19, 0x1E, 0x1E, 0x28
 	.byte 0x19, 0x19, 0x14, 0x14, 0xF, 0xF
 	.byte 0x28, 0x28, 0x23, 0x23, 0x28, 0x28
 
-gUnknown_085A7702:: @ 85A7702
+gUnknown_083ECD46:: @ 85A7702
 	.byte 0xF3, 0xF3, 0xF3, 0x50, 0x50, 0x50, 0x50, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x5, 0x5, 0x5, 0x5
 	.byte 0x5, 0x5, 0x5, 0x96, 0x96, 0x96, 0x96, 0x82, 0x82, 0x82, 0x82, 0x82, 0x82, 0x64, 0x64, 0x64, 0x5
 	.byte 0x4, 0x4, 0x4, 0x14, 0x14, 0x14, 0x14, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x64, 0x64, 0x64, 0x28
@@ -234,7 +234,7 @@ gUnknown_085A7702:: @ 85A7702
 	.byte 0x1, 0x1, 0x1, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x5, 0x5, 0x5, 0x64
 	.byte 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x6
 
-gUnknown_085A7768:: @ 85A7768
+gUnknown_083ECDAC:: @ 85A7768
 	.byte 0xF3, 0xF3, 0xF3, 0xC8, 0xC8, 0xC8, 0xC8, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0x46, 0x46, 0x46, 0x05
 	.byte 0x05, 0x05, 0x05, 0x19, 0x19, 0x19, 0x19, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x02, 0x02, 0x02, 0x06
 	.byte 0x04, 0x04, 0x04, 0x19, 0x19, 0x19, 0x19, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x28, 0x28, 0x28, 0x23
@@ -242,45 +242,45 @@ gUnknown_085A7768:: @ 85A7768
 	.byte 0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x28, 0x28, 0x28, 0x64
 	.byte 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x04, 0x04, 0x04, 0x3C
 
-gUnknown_085A77CE:: @ 85A77CE
+gUnknown_083ECE12:: @ 85A77CE
 	.2byte 0x80, 0xAF, 0xC8, 0xE1, 0x100
 
-gUnknown_085A77D8:: @ 85A77D8
+gUnknown_083ECE1C:: @ 85A77D8
 	.byte 10, 0, 5, 0
 	.byte 10, 0, 10, 0
 	.byte 10, 0, 15, 0
 	.byte 10, 0, 25, 0
 	.byte 10, 0, 35, 0
 
-gUnknown_085A77EC:: @ 85A77EC
+gUnknown_083ECE30:: @ 85A77EC
 	.byte 0, 0
 	.byte 5, 0
 	.byte 10, 0
 	.byte 15, 0
 	.byte 20, 0
 
-gUnknown_085A77F6:: @ 85A77F6
+gUnknown_083ECE3A:: @ 85A77F6
 	.byte 6, 4, 3, 2, 5, 0, 0, 0
 
-gUnknown_085A77FE:: @ 85A77FE
+gUnknown_083ECE42:: @ 85A77FE
 	.byte 0x80, 0
 	.byte 0x20, 0
 	.byte 0x40, 0
 
-gUnknown_085A7804:: @ 85A7804
+gUnknown_083ECE48:: @ 85A7804
 	.byte 16, 0
 	.byte 8, 0
 	.byte 4, 0
 	.byte 2, 0
 	.byte 1, 0
 
-gUnknown_085A780E:: @ 85A780E
+sSym2Match:: @ 85A780E
 	.byte 7, 8, 4, 3, 0, 5, 2, 0
 
-gUnknown_085A7816:: @ 85A7816
+sSlotMatchFlags:: @ 85A7816
 	.2byte 1, 2, 4, 8, 16, 32, 64, 128, 256
 
-gUnknown_085A7828:: @ 85A7828
+sSlotPayouts:: @ 85A7828
 	.2byte 2, 4, 0, 6, 12, 3, 0x5A, 0x12C, 0x12C
 
 gUnknown_085A783A:: @ 85A783A

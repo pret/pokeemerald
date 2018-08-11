@@ -593,7 +593,7 @@ gUnknown_0203AB2C: @ 203AB2C
 gUnknown_0203AB30: @ 203AB30
 	.space 0x4
 
-gUnknown_0203AB34: @ 203AB34
+sSlotMachine: @ 203AB34
 	.space 0x4
 
     .include "src/battle_ai_script_commands.o"
