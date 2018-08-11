@@ -382,61 +382,9 @@ gUnknown_02039D8C: @ 2039D8C
 	.include "src/fldeff_cut.o"
 	.include "src/map_name_popup.o"
 	.include "src/item.o"
+	.include "src/contest.o"
 
-gUnknown_02039E00: @ 2039E00
-	.space 0x100
-
-gUnknown_02039F00: @ 2039F00
-	.space 0x8
-
-gUnknown_02039F08: @ 2039F08
-	.space 0x8
-
-gUnknown_02039F10: @ 2039F10
-	.space 0x8
-
-gUnknown_02039F18: @ 2039F18
-	.space 0x8
-
-gUnknown_02039F20: @ 2039F20
-	.space 0x4
-
-gUnknown_02039F24: @ 2039F24
-	.space 0x1
-
-gUnknown_02039F25: @ 2039F25
-	.space 0x1
-
-gUnknown_02039F26: @ 2039F26
-	.space 0x4
-
-gUnknown_02039F2A: @ 2039F2A
-	.space 0x1
-
-gUnknown_02039F2B: @ 2039F2B
-	.space 0x1
-
-gSpecialVar_ContestCategory: @ 2039F2C
-	.space 0x2
-
-gSpecialVar_ContestRank: @ 2039F2E
-	.space 0x2
-
-gUnknown_02039F30: @ 2039F30
-	.space 0x1
-
-gUnknown_02039F31: @ 2039F31
-	.space 0x3
-
-gContestResources: @ 2039F34
-	.space 0x4
-
-gUnknown_02039F38: @ 2039F38
-	.space 0x4
-
-gUnknown_02039F3C: @ 2039F3C
-	.space 0x20
-
+	.align 2
 gUnknown_02039F5C: @ 2039F5C
 	.space 0x1
 

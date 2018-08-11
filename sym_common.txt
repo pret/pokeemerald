@@ -43,9 +43,7 @@ gUnknown_030060B0: @ 30060B0
 gUnknown_030060B4: @ 30060B4
 	.space 0x4
 
-gUnknown_030060B8: @ 30060B8
-	.space 0x4
-
+	.include "contest.o"
     .include "tv.o"
     .include "mauville_old_man.o"
 
