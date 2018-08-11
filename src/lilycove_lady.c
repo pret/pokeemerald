@@ -508,7 +508,7 @@ static void sub_818DF00(void)
     {
         gUnknown_0203CD68->unk_002[i] = gUnknown_0860B1A4[v0][i];
     }
-    gUnknown_0203CD68->unk_014 = sUnknown_0860B1E4[v0];
+    gUnknown_0203CD68->unk_014[0] = sUnknown_0860B1E4[v0];
     gUnknown_0203CD68->itemId = sUnknown_0860B204[v0];
     gUnknown_0203CD68->unk_02b = v0;
     gUnknown_0203CD68->playerName[0] = EOS;
@@ -525,8 +525,8 @@ static void SetLilycoveQuizLady(void)
     {
         gUnknown_0203CD68->unk_002[i] = -1;
     }
-    gUnknown_0203CD68->unk_014 = -1;
-    gUnknown_0203CD68->unk_016 = -1;
+    gUnknown_0203CD68->unk_014[0] = -1;
+    gUnknown_0203CD68->unk_016[0] = -1;
     for (i = 0; i < 4; i ++)
     {
         gUnknown_0203CD68->playerTrainerId[i] = 0;
@@ -544,7 +544,7 @@ static void sub_818E004(void)
     gUnknown_0203CD68->id = LILYCOVE_LADY_QUIZ;
     gUnknown_0203CD68->phase = 0;
     gUnknown_0203CD68->unk_02a = 0;
-    gUnknown_0203CD68->unk_016 = -1;
+    gUnknown_0203CD68->unk_016[0] = -1;
 }
 
 u8 sub_818E038(void)
@@ -572,7 +572,7 @@ u8 sub_818E06C(void)
     struct LilycoveLadyQuiz *quiz;
 
     quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (sub_811F8D8(quiz->unk_014) == 0)
+    if (sub_811F8D8(quiz->unk_014[0]) == 0)
    {
         i = quiz->unk_02b;
         do
@@ -586,7 +586,7 @@ u8 sub_818E06C(void)
         {
             quiz->unk_002[j] = gUnknown_0860B1A4[i][j];
         }
-        quiz->unk_014 = sUnknown_0860B1E4[i];
+        quiz->unk_014[0] = sUnknown_0860B1E4[i];
         quiz->itemId = sUnknown_0860B204[i];
         quiz->unk_02b = i;
         quiz->playerName[0] = EOS;
@@ -699,8 +699,8 @@ void sub_818E2FC(void)
 bool8 sub_818E308(void)
 {
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    CopyEasyChatWord(gStringVar1, gUnknown_0203CD68->unk_014);
-    CopyEasyChatWord(gStringVar2, gUnknown_0203CD68->unk_016);
+    CopyEasyChatWord(gStringVar1, gUnknown_0203CD68->unk_014[0]);
+    CopyEasyChatWord(gStringVar2, gUnknown_0203CD68->unk_016[0]);
     return StringCompare(gStringVar1, gStringVar2) ? FALSE : TRUE;
 }
 
@@ -725,7 +725,7 @@ void sub_818E39C(void)
 void sub_818E3BC(void)
 {
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->unk_016 = -1;
+    gUnknown_0203CD68->unk_016[0] = -1;
 }
 
 void sub_818E3E0(void)
@@ -756,7 +756,7 @@ void sub_818E430(void)
     {
         gUnknown_0203CD68->unk_002[i] = -1;
     }
-    gUnknown_0203CD68->unk_014 = -1;
+    gUnknown_0203CD68->unk_014[0] = -1;
 }
 
 void sub_818E47C(void)
@@ -793,7 +793,7 @@ void sub_818E510(void)
 void sub_818E538(void)
 {
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    CopyEasyChatWord(gStringVar3, gUnknown_0203CD68->unk_014);
+    CopyEasyChatWord(gStringVar3, gUnknown_0203CD68->unk_014[0]);
 }
 
 void sub_818E564(void)

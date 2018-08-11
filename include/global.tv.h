@@ -91,7 +91,7 @@ typedef union // size = 0x24
         /*0x0E*/ u8 pokemonNameLanguage;
         /*0x0F*/ u8 filler_0F[1];
         /*0x10*/ u8 nickname[8];
-        /*0x18*/ u8 filler_18[4];
+        /*0x18*/ u16 words18[2];
         /*0x1C*/ u16 words[4];
     } fanclubOpinions;
 
@@ -99,7 +99,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 pad02[4];
+        /*0x02*/ u16 words[2];
         /*0x06*/ u16 var06;
         /*0x08*/ u8 pad_08[3];
         /*0x0b*/ u8 string_0b[12];
