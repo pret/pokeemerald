@@ -57,7 +57,6 @@ extern u8 gUnknown_0861CE7B[];
 extern struct WindowTemplate gUnknown_0861CCEC;
 extern struct WindowTemplate gUnknown_0861CD14;
 extern const u8 *const gContestEffectDescriptionPointers[];
-extern const u8 *const gMoveDescriptionPointers[];
 
 void sub_81C488C(u8 a);
 extern u8 sub_81221EC();
@@ -342,6 +341,10 @@ struct UnkSummaryStruct
     u8 unk_filler4[6];
 };
 
+// const rom data
+#include "data/text/move_descriptions.h"
+
+// code
 void sub_81BF8EC(u8 a, void *b, u8 c, u8 d, void *e)
 {
     u8 byte;
