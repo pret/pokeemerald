@@ -294,6 +294,49 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSpeedUpHit
 	.4byte BattleScript_EffectQuiverDance
 	.4byte BattleScript_EffectCoil
+	.4byte BattleScript_EffectElectrify
+	.4byte BattleScript_EffectScald
+	.4byte BattleScript_EffectReflectType
+	.4byte BattleScript_EffectSoak
+	
+BattleScript_EffectSoak:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifability BS_TARGET, ABILITY_MULTITYPE, BattleScript_ButItFailed
+	jumpifability BS_TARGET, ABILITY_RKS_SYSTEM, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	trysoak BattleScript_ButItFailed
+	printstring STRINGID_TRANSFORMEDINTOWATERTYPE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectReflectType:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	tryreflecttype BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_REFLECTTARGETSTYPE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectElectrify:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	tryelectrify BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_TARGETELECTRIFIED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectCoil:
 	attackcanceler
@@ -1056,6 +1099,7 @@ BattleScript_AbsorbTryFainting::
 
 BattleScript_EffectBurnHit::
 BattleScript_EffectBlazeKick::
+BattleScript_EffectScald:
 	setmoveeffect MOVE_EFFECT_BURN
 	goto BattleScript_EffectHit
 

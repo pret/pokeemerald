@@ -5848,7 +5848,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SOAK
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SOAK,
 		.power = 0,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -6040,7 +6040,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SCALD
-		.effect = EFFECT_PLACEHOLDER,  // Needs a custom move effect (30% burn + always thaws ice even if it misses)
+		.effect = EFFECT_SCALD,
 		.power = 80,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -6160,7 +6160,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_REFLECT_TYPE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_REFLECT_TYPE,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -6990,7 +6990,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ELECTRIFY
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_ELECTRIFY,
 		.power = 0,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 0,

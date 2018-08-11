@@ -1459,6 +1459,21 @@
 	.4byte \ptr
 	.endm
 	
+	.macro tryelectrify ptr
+	various BS_ATTACKER, VARIOUS_TRY_ELECTRIFY
+	.4byte \ptr
+	.endm
+	
+	.macro tryreflecttype ptr
+	various BS_ATTACKER, VARIOUS_TRY_REFLECT_TYPE
+	.4byte \ptr
+	.endm
+	
+	.macro trysoak ptr
+	various BS_ATTACKER, VARIOUS_TRY_SOAK
+	.4byte \ptr
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

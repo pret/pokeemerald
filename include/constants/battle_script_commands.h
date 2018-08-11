@@ -94,6 +94,9 @@
 #define VARIOUS_SET_TERRAIN                     45
 #define VARIOUS_TRY_ME_FIRST                    46
 #define VARIOUS_JUMP_IF_BATTLE_END              47
+#define VARIOUS_TRY_ELECTRIFY                   48
+#define VARIOUS_TRY_REFLECT_TYPE                49
+#define VARIOUS_TRY_SOAK                        50
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

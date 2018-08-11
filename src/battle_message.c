@@ -641,6 +641,7 @@ static const u8 sText_TerrainBecomesMisty[] = _("");
 static const u8 sText_TerrainBecomesGrassy[] = _("");
 static const u8 sText_TerrainBecomesElectric[] = _("");
 static const u8 sText_TerrainBecomesPsychic[] = _("");
+static const u8 sText_TargetElectrified[] = _("");
 
 // New selection strings, they must end with "\p".
 // Use {B_LAST_ITEM} and {B_CURRENT_MOVE}.
@@ -1140,6 +1141,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_TerrainBecomesGrassy,
     sText_TerrainBecomesElectric,
     sText_TerrainBecomesPsychic,
+    sText_TargetElectrified,
 };
 
 const u16 gTerrainStringIds[] =
