@@ -108,28 +108,28 @@ gSpecials:: @ 81DBA64
 	def_special sub_80FAFF8
 	def_special easy_chat_input_maybe
 	def_special sub_811EECC
-	def_special ScrSpecial_GetCurrentMauvilleMan
-	def_special ScrSpecial_HasBardSongBeenChanged
-	def_special ScrSpecial_SaveBardSongLyrics
-	def_special ScrSpecial_GetHipsterSpokenFlag
-	def_special ScrSpecial_SetHipsterSpokenFlag
-	def_special ScrSpecial_HipsterTeachWord
-	def_special ScrSpecial_PlayBardSong
-	def_special ScrSpecial_SetMauvilleOldManEventObjGfx
-	def_special ScrSpecial_GenerateGiddyLine
-	def_special ScrSpecial_GiddyShouldTellAnotherTale
-	def_special ScrSpecial_StorytellerGetFreeStorySlot
-	def_special ScrSpecial_StorytellerDisplayStory
-	def_special ScrSpecial_StorytellerStoryListMenu
-	def_special ScrSpecial_StorytellerUpdateStat
-	def_special ScrSpecial_StorytellerInitializeRandomStat
-	def_special ScrSpecial_HasStorytellerAlreadyRecorded
-	def_special ScrSpecial_TraderMenuGetDecoration
-	def_special ScrSpecial_GetTraderTradedFlag
-	def_special ScrSpecial_DoesPlayerHaveNoDecorations
-	def_special ScrSpecial_IsDecorationFull
-	def_special ScrSpecial_TraderMenuGiveDecoration
-	def_special ScrSpecial_TraderDoDecorationTrade
+	def_special Special_GetCurrentMauvilleMan
+	def_special Special_HasBardSongBeenChanged
+	def_special Special_SaveBardSongLyrics
+	def_special Special_GetHipsterSpokenFlag
+	def_special Special_SetHipsterSpokenFlag
+	def_special Special_HipsterTeachWord
+	def_special Special_PlayBardSong
+	def_special Special_SetMauvilleOldManEventObjGfx
+	def_special Special_GenerateGiddyLine
+	def_special Special_GiddyShouldTellAnotherTale
+	def_special Special_StorytellerGetFreeStorySlot
+	def_special Special_StorytellerDisplayStory
+	def_special Special_StorytellerStoryListMenu
+	def_special Special_StorytellerUpdateStat
+	def_special Special_StorytellerInitializeRandomStat
+	def_special Special_HasStorytellerAlreadyRecorded
+	def_special Special_TraderMenuGetDecoration
+	def_special Special_GetTraderTradedFlag
+	def_special Special_DoesPlayerHaveNoDecorations
+	def_special Special_IsDecorationFull
+	def_special Special_TraderMenuGiveDecoration
+	def_special Special_TraderDoDecorationTrade
 	def_special GetSeedotSizeRecordInfo
 	def_special CompareSeedotSize
 	def_special GetLotadSizeRecordInfo
@@ -273,7 +273,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowBerryBlenderRecordWindow
 	def_special ResetTrickHouseEndRoomFlag
 	def_special SetTrickHouseEndRoomFlag
-	def_special ScrSpecial_CreatePCMenu
+	def_special Special_CreatePCMenu
 	def_special AccessHallOfFamePC
 	def_special Special_ShowDiploma
 	def_special CheckLeadMonCool

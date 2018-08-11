@@ -676,9 +676,9 @@ _080E2360:
 	.pool
 	thumb_func_end sub_80E2308
 
-	thumb_func_start ScrSpecial_CreatePCMenu
-@ bool ScrSpecial_CreatePCMenu()
-ScrSpecial_CreatePCMenu: @ 80E236C
+	thumb_func_start Special_CreatePCMenu
+@ bool Special_CreatePCMenu()
+Special_CreatePCMenu: @ 80E236C
 	push {lr}
 	ldr r0, =sub_80E2058
 	bl FuncIsActiveTask
@@ -698,7 +698,7 @@ _080E2394:
 _080E2396:
 	pop {r1}
 	bx r1
-	thumb_func_end ScrSpecial_CreatePCMenu
+	thumb_func_end Special_CreatePCMenu
 
 	thumb_func_start CreatePCMenu
 CreatePCMenu: @ 80E239C

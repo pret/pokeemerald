@@ -1,5 +1,5 @@
 MauvilleCity_PokemonCenter_1F_EventScript_28E066:: @ 828E066
-	special ScrSpecial_GetCurrentMauvilleMan
+	special Special_GetCurrentMauvilleMan
 	switch VAR_RESULT
 	case 0, MauvilleCity_PokemonCenter_1F_EventScript_28E0A6
 	case 1, MauvilleCity_PokemonCenter_1F_EventScript_28E167
@@ -20,9 +20,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E0A6:: @ 828E0A6
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E0C7:: @ 828E0C7
 	setvar VAR_0x8004, 0
-	special ScrSpecial_PlayBardSong
+	special Special_PlayBardSong
 	delay 60
-	special ScrSpecial_HasBardSongBeenChanged
+	special Special_HasBardSongBeenChanged
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E0F4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_2903E6, 4
@@ -51,12 +51,12 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E113:: @ 828E113
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E15D
 	msgbox MauvilleCity_PokemonCenter_1F_Text_2904C1, 4
 	setvar VAR_0x8004, 1
-	special ScrSpecial_PlayBardSong
+	special Special_PlayBardSong
 	delay 60
 	msgbox MauvilleCity_PokemonCenter_1F_Text_2904EB, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E113
-	special ScrSpecial_SaveBardSongLyrics
+	special Special_SaveBardSongLyrics
 	msgbox MauvilleCity_PokemonCenter_1F_Text_290514, 4
 	release
 	end
@@ -71,7 +71,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E167:: @ 828E167
 	faceplayer
 	setflag FLAG_SYS_HIPSTER_MEET
 	msgbox MauvilleCity_PokemonCenter_1F_Text_29054C, 4
-	special ScrSpecial_GetHipsterSpokenFlag
+	special Special_GetHipsterSpokenFlag
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E18C
 	msgbox MauvilleCity_PokemonCenter_1F_Text_290598, 4
@@ -79,7 +79,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E167:: @ 828E167
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E18C:: @ 828E18C
-	special ScrSpecial_HipsterTeachWord
+	special Special_HipsterTeachWord
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E1A4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_290602, 4
@@ -88,7 +88,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E18C:: @ 828E18C
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E1A4:: @ 828E1A4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_290666, 4
-	special ScrSpecial_SetHipsterSpokenFlag
+	special Special_SetHipsterSpokenFlag
 	release
 	end
 
@@ -157,7 +157,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E4D4:: @ 828E4D4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E1B1, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E503
-	special ScrSpecial_GetTraderTradedFlag
+	special Special_GetTraderTradedFlag
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E50D
 	message MauvilleCity_PokemonCenter_1F_Text_28E23F
@@ -176,7 +176,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E50D:: @ 828E50D
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E517:: @ 828E517
-	special ScrSpecial_TraderMenuGetDecoration
+	special Special_TraderMenuGetDecoration
 	waitstate
 	compare VAR_0x8004, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E558
@@ -185,7 +185,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E517:: @ 828E517
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E2A9, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E56E
-	special ScrSpecial_DoesPlayerHaveNoDecorations
+	special Special_DoesPlayerHaveNoDecorations
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E57A
 	goto MauvilleCity_PokemonCenter_1F_EventScript_28E584
@@ -215,19 +215,19 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E57A:: @ 828E57A
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E584:: @ 828E584
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E323, 4
-	special ScrSpecial_TraderMenuGiveDecoration
+	special Special_TraderMenuGiveDecoration
 	waitstate
 	compare VAR_0x8006, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5D4
 	compare VAR_0x8006, 65535
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5DE
-	special ScrSpecial_IsDecorationFull
+	special Special_IsDecorationFull
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5EC
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E3C4, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E584
-	special ScrSpecial_TraderDoDecorationTrade
+	special Special_TraderDoDecorationTrade
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E424, 4
 	release
 	end
@@ -813,20 +813,20 @@ MauvilleCity_PokemonCenter_1F_EventScript_29014A:: @ 829014A
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E5F6, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290219
-	specialvar VAR_RESULT, ScrSpecial_StorytellerGetFreeStorySlot
+	specialvar VAR_RESULT, Special_StorytellerGetFreeStorySlot
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_2901DA
 	message MauvilleCity_PokemonCenter_1F_Text_28E673
 	waitmessage
-	special ScrSpecial_StorytellerStoryListMenu
+	special Special_StorytellerStoryListMenu
 	waitstate
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_2901B7
 	setvar VAR_0x8008, 1
-	special ScrSpecial_StorytellerDisplayStory
+	special Special_StorytellerDisplayStory
 	waitmessage
 	waitbuttonpress
-	specialvar VAR_RESULT, ScrSpecial_StorytellerUpdateStat
+	specialvar VAR_RESULT, Special_StorytellerUpdateStat
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_2901BD
 	goto MauvilleCity_PokemonCenter_1F_EventScript_29020F
@@ -837,7 +837,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_2901B7:: @ 82901B7
 
 MauvilleCity_PokemonCenter_1F_EventScript_2901BD:: @ 82901BD
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E78A, 4
-	specialvar VAR_RESULT, ScrSpecial_HasStorytellerAlreadyRecorded
+	specialvar VAR_RESULT, Special_HasStorytellerAlreadyRecorded
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_29022D
 	goto MauvilleCity_PokemonCenter_1F_EventScript_2901E2
@@ -849,7 +849,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_2901E2:: @ 82901E2
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E7EE, 5
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290219
-	specialvar VAR_RESULT, ScrSpecial_StorytellerInitializeRandomStat
+	specialvar VAR_RESULT, Special_StorytellerInitializeRandomStat
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_29020F
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E881, 4
@@ -903,7 +903,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_2902F6:: @ 82902F6
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_290317:: @ 8290317
-	special ScrSpecial_GiddyShouldTellAnotherTale
+	special Special_GiddyShouldTellAnotherTale
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290359
 	compare VAR_RESULT, 0
@@ -911,7 +911,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_290317:: @ 8290317
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_290331:: @ 8290331
-	special ScrSpecial_GiddyShouldTellAnotherTale
+	special Special_GiddyShouldTellAnotherTale
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_29034B
 	compare VAR_RESULT, 0
@@ -924,7 +924,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_29034B:: @ 829034B
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_290359:: @ 8290359
-	special ScrSpecial_GenerateGiddyLine
+	special Special_GenerateGiddyLine
 	special ShowFieldMessageStringVar4
 	waitmessage
 	yesnobox 20, 8

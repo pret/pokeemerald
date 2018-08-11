@@ -136,7 +136,7 @@ void SetMauvilleOldMan(void)
             SetupGiddy();
             break;
     }
-    ScrSpecial_SetMauvilleOldManEventObjGfx();
+    Special_SetMauvilleOldManEventObjGfx();
 }
 
 u8 GetCurrentMauvilleOldMan(void)
@@ -146,12 +146,12 @@ u8 GetCurrentMauvilleOldMan(void)
     return common->id;
 }
 
-void ScrSpecial_GetCurrentMauvilleMan(void)
+void Special_GetCurrentMauvilleMan(void)
 {
     gSpecialVar_Result = GetCurrentMauvilleOldMan();
 }
 
-void ScrSpecial_HasBardSongBeenChanged(void)
+void Special_HasBardSongBeenChanged(void)
 {
     u16 *scriptResult = &gSpecialVar_Result; // why??
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
@@ -159,7 +159,7 @@ void ScrSpecial_HasBardSongBeenChanged(void)
     *scriptResult = bard->hasChangedSong;
 }
 
-void ScrSpecial_SaveBardSongLyrics(void)
+void Special_SaveBardSongLyrics(void)
 {
     u16 i;
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
@@ -225,13 +225,13 @@ static void PrepareSongText(void)
     }
 }
 
-void ScrSpecial_PlayBardSong(void)
+void Special_PlayBardSong(void)
 {
     StartBardSong(gSpecialVar_0x8004);
     ScriptContext1_Stop();
 }
 
-void ScrSpecial_GetHipsterSpokenFlag(void)
+void Special_GetHipsterSpokenFlag(void)
 {
     u16 *scriptResult = &gSpecialVar_Result; // again??
     struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
@@ -239,14 +239,14 @@ void ScrSpecial_GetHipsterSpokenFlag(void)
     *scriptResult = hipster->alreadySpoken;
 }
 
-void ScrSpecial_SetHipsterSpokenFlag(void)
+void Special_SetHipsterSpokenFlag(void)
 {
     struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
 
     hipster->alreadySpoken = TRUE;
 }
 
-void ScrSpecial_HipsterTeachWord(void)
+void Special_HipsterTeachWord(void)
 {
     u16 var = sub_811F01C();
 
@@ -261,7 +261,7 @@ void ScrSpecial_HipsterTeachWord(void)
     }
 }
 
-void ScrSpecial_GiddyShouldTellAnotherTale(void)
+void Special_GiddyShouldTellAnotherTale(void)
 {
     struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
 
@@ -276,7 +276,7 @@ void ScrSpecial_GiddyShouldTellAnotherTale(void)
     }
 }
 
-void ScrSpecial_GenerateGiddyLine(void)
+void Special_GenerateGiddyLine(void)
 {
     struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
 
@@ -406,7 +406,7 @@ void ResetMauvilleOldManFlag(void)
         case MAUVILLE_MAN_GIDDY:
             break;
     }
-    ScrSpecial_SetMauvilleOldManEventObjGfx();
+    Special_SetMauvilleOldManEventObjGfx();
 }
 
 
@@ -671,7 +671,7 @@ static void Task_BardSong(u8 taskId)
     sub_8197224();
 }
 
-void ScrSpecial_SetMauvilleOldManEventObjGfx(void)
+void Special_SetMauvilleOldManEventObjGfx(void)
 {
     VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BARD);
 }
@@ -1199,24 +1199,24 @@ static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
 }
 
 // Sets gSpecialVar_Result to TRUE if player selected a story
-void ScrSpecial_StorytellerStoryListMenu(void)
+void Special_StorytellerStoryListMenu(void)
 {
     CreateTask(Task_StoryListMenu, 80);
 }
 
-void ScrSpecial_StorytellerDisplayStory(void)
+void Special_StorytellerDisplayStory(void)
 {
     StorytellerDisplayStory(sSelectedStory);
 }
 
-u8 ScrSpecial_StorytellerGetFreeStorySlot(void)
+u8 Special_StorytellerGetFreeStorySlot(void)
 {
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
     return GetFreeStorySlot();
 }
 
 // Returns TRUE if stat has increased
-bool8 ScrSpecial_StorytellerUpdateStat(void)
+bool8 Special_StorytellerUpdateStat(void)
 {
     u8 r4;
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
@@ -1230,7 +1230,7 @@ bool8 ScrSpecial_StorytellerUpdateStat(void)
     return FALSE;
 }
 
-bool8 ScrSpecial_HasStorytellerAlreadyRecorded(void)
+bool8 Special_HasStorytellerAlreadyRecorded(void)
 {
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
 
@@ -1240,7 +1240,7 @@ bool8 ScrSpecial_HasStorytellerAlreadyRecorded(void)
         return TRUE;
 }
 
-bool8 ScrSpecial_StorytellerInitializeRandomStat(void)
+bool8 Special_StorytellerInitializeRandomStat(void)
 {
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
     return StorytellerInitializeRandomStat();

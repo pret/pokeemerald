@@ -10,7 +10,7 @@
 extern void (*gUnknown_0300485C)(void);
 
 extern void Overworld_PlaySpecialMapMusic(void);
-extern bool16 ScrSpecial_CreatePCMenu(void);
+extern bool16 Special_CreatePCMenu(void);
 extern void ScriptMenu_DisplayPCStartupPrompt(void);
 
 static void ReshowPCMenuAfterHallOfFamePC(void);
@@ -32,7 +32,7 @@ static void ReshowPCMenuAfterHallOfFamePC(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
-    ScrSpecial_CreatePCMenu();
+    Special_CreatePCMenu();
     ScriptMenu_DisplayPCStartupPrompt();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
     CreateTask(Task_WaitForPaletteFade, 10);

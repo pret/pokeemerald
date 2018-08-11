@@ -1772,7 +1772,7 @@ EventScript_271D92:: @ 8271D92
 EventScript_271DAC:: @ 8271DAC
 	message gUnknown_0827266F
 	waitmessage
-	special ScrSpecial_CreatePCMenu
+	special Special_CreatePCMenu
 	waitstate
 	goto EventScript_271DBC
 	end
