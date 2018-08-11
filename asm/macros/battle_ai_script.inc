@@ -469,8 +469,8 @@
 
 	.macro if_move_flag flag jumpptr
 	.byte 0x52
-	.hword \flag
-	.word \jumpptr
+	.2byte \flag
+	.4byte \jumpptr
 	.endm
 
 	.macro if_field_status flag jumpptr
@@ -479,16 +479,20 @@
 	.word \jumpptr
 	.endm
 
-	.macro nullsub_54
+	.macro get_move_accuracy
 	.byte 0x54
 	.endm
 
-	.macro nullsub_55
+	.macro call_if_eq value, ptr
 	.byte 0x55
+	.2byte \value
+	.4byte \ptr
 	.endm
 
-	.macro nullsub_56
-	.byte 0x56
+	.macro call_if_move_flag flag ptr
+	.byte 0x52
+	.2byte \flag
+	.4byte \ptr
 	.endm
 
 	.macro nullsub_57
@@ -620,4 +624,9 @@
 	
 	.macro if_any_move_encored bank, ptr
 	if_any_move_disabled_or_encored \bank, 1, \ptr
+	.endm
+	
+	.macro call_if_always_hit ptr
+	get_move_accuracy
+	call_if_eq 0, \ptr
 	.endm

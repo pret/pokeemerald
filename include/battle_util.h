@@ -60,7 +60,7 @@ u8 DoFieldEndTurnEffects(void);
 u8 DoBattlerEndTurnEffects(void);
 bool8 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
-void TryClearRageStatuses(void);
+void TryClearRageAndFuryCutter(void);
 u8 AtkCanceller_UnableToUseMove(void);
 bool8 HasNoMonsToSwitch(u8 battlerId, u8 r1, u8 r2);
 u8 CastformDataTypeChange(u8 battlerId);

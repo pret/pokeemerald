@@ -138,9 +138,9 @@ static void BattleAICmd_get_move_effect_from_result(void);
 static void BattleAICmd_get_protect_count(void);
 static void BattleAICmd_if_move_flag(void);
 static void BattleAICmd_if_field_status(void);
-static void BattleAICmd_nullsub_54(void);
-static void BattleAICmd_nullsub_55(void);
-static void BattleAICmd_nullsub_56(void);
+static void BattleAICmd_get_move_accuracy(void);
+static void BattleAICmd_call_if_eq(void);
+static void BattleAICmd_call_if_move_flag(void);
 static void BattleAICmd_nullsub_57(void);
 static void BattleAICmd_call(void);
 static void BattleAICmd_goto(void);
@@ -247,9 +247,9 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_get_protect_count,                          // 0x51
     BattleAICmd_if_move_flag,                               // 0x52
     BattleAICmd_if_field_status,                            // 0x53
-    BattleAICmd_nullsub_54,                                 // 0x54
-    BattleAICmd_nullsub_55,                                 // 0x55
-    BattleAICmd_nullsub_56,                                 // 0x56
+    BattleAICmd_get_move_accuracy,                          // 0x54
+    BattleAICmd_call_if_eq,                                 // 0x55
+    BattleAICmd_call_if_move_flag,                          // 0x56
     BattleAICmd_nullsub_57,                                 // 0x57
     BattleAICmd_call,                                       // 0x58
     BattleAICmd_goto,                                       // 0x59
@@ -2255,12 +2255,7 @@ static void BattleAICmd_get_used_held_item(void)
     else
         battlerId = gBattlerTarget;
 
-    // This is likely a leftover from Ruby's code and its ugly ewram access.
-    #ifdef NONMATCHING
-        AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[battlerId];
-    #else
-        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + offsetof(struct BattleStruct, usedHeldItems) + (battlerId * 2));
-    #endif // NONMATCHING
+    AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[battlerId];
 
     gAIScriptPtr += 2;
 }
@@ -2320,16 +2315,39 @@ static void BattleAICmd_if_field_status(void)
         gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_nullsub_54(void)
+static void BattleAICmd_get_move_accuracy(void)
 {
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].accuracy;
+
+    gAIScriptPtr++;
 }
 
-static void BattleAICmd_nullsub_55(void)
+static void BattleAICmd_call_if_eq(void)
 {
+    if (AI_THINKING_STRUCT->funcResult == T1_READ_16(gAIScriptPtr + 1))
+    {
+        AIStackPushVar(gAIScriptPtr + 7);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    }
+    else
+    {
+        gAIScriptPtr += 7;
+    }
 }
 
-static void BattleAICmd_nullsub_56(void)
+static void BattleAICmd_call_if_move_flag(void)
 {
+    u16 flag = T1_READ_16(gAIScriptPtr + 1);
+
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].flags & flag)
+    {
+        AIStackPushVar(gAIScriptPtr + 7);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    }
+    else
+    {
+        gAIScriptPtr += 7;
+    }
 }
 
 static void BattleAICmd_nullsub_57(void)

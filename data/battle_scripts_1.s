@@ -31,7 +31,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSpecialDefenseUp
 	.4byte BattleScript_EffectAccuracyUp
 	.4byte BattleScript_EffectEvasionUp
-	.4byte BattleScript_EffectAlwaysHit
+	.4byte BattleScript_EffectUnused17
 	.4byte BattleScript_EffectAttackDown
 	.4byte BattleScript_EffectDefenseDown
 	.4byte BattleScript_EffectSpeedDown
@@ -291,6 +291,11 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectHurricane
 	.4byte BattleScript_EffectTwoTypedMove
 	.4byte BattleScript_EffectMeFirst
+	.4byte BattleScript_EffectSpeedUpHit
+	
+BattleScript_EffectSpeedUpHit:
+	setmoveeffect MOVE_EFFECT_SPD_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
 	
 BattleScript_EffectMeFirst:
 	attackcanceler
@@ -794,7 +799,7 @@ BattleScript_EffectHitEscape:
 	tryfaintmon BS_TARGET, FALSE, NULL
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
-	atk24 BattleScript_HitEscapeEnd
+	jumpifbattleend BattleScript_HitEscapeEnd
 	jumpifbyte CMP_NOT_EQUAL gBattleOutcome 0 BattleScript_HitEscapeEnd
 	jumpifcantswitch ATK4F_DONT_CHECK_STATUSES | BS_ATTACKER, BattleScript_HitEscapeEnd
 	openpartyscreen 0x1, BattleScript_HitEscapeEnd
@@ -817,7 +822,7 @@ BattleScript_EffectPlaceholder:
 	printstring STRINGID_NOTDONEYET
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectAlwaysHit:
+BattleScript_EffectUnused17:
 BattleScript_EffectEvasionDownHit:
 BattleScript_EffectVitalThrow:
 BattleScript_EffectUnused60:
@@ -1671,7 +1676,7 @@ BattleScript_EffectPoison::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectParalyze::
+BattleScript_EffectParalyze:
 	attackcanceler
 	attackstring
 	ppreduce
@@ -1684,6 +1689,7 @@ BattleScript_EffectParalyze::
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_PARALYSIS
@@ -1692,7 +1698,7 @@ BattleScript_EffectParalyze::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_AlreadyParalyzed::
+BattleScript_AlreadyParalyzed:
 	various23 BS_ATTACKER
 	pause 0x20
 	printstring STRINGID_PKMNISALREADYPARALYZED
@@ -2219,11 +2225,12 @@ BattleScript_EffectSpikes::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectForesight::
+BattleScript_EffectForesight:
 	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	jumpifstatus2 BS_TARGET, STATUS2_FORESIGHT, BattleScript_ButItFailed
 	setforesight
 BattleScript_IdentifiedFoe:
 	attackanimation

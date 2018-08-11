@@ -1945,13 +1945,15 @@ bool8 HandleFaintedMonActions(void)
     return FALSE;
 }
 
-void TryClearRageStatuses(void)
+void TryClearRageAndFuryCutter(void)
 {
     s32 i;
     for (i = 0; i < gBattlersCount; i++)
     {
         if ((gBattleMons[i].status2 & STATUS2_RAGE) && gChosenMoveByBattler[i] != MOVE_RAGE)
             gBattleMons[i].status2 &= ~(STATUS2_RAGE);
+        if (gDisableStructs[i].furyCutterCounter != 0 && gChosenMoveByBattler[i] != MOVE_FURY_CUTTER)
+            gDisableStructs[i].furyCutterCounter = 0;
     }
 }
 
@@ -5008,7 +5010,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         else
             atkStat = gBattleMons[battlerAtk].spAttack;
 
-        atkStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
+        atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
     }
 
     // critical hits ignore attack stat's stage drops

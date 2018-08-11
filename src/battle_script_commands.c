@@ -1138,7 +1138,8 @@ static bool32 AccuracyCalcHelper(u16 move)
     gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
 
     if ((WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY) && (gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE))
-     || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW))
+     || (gBattleMoves[move].effect == EFFECT_VITAL_THROW)
+     || (gBattleMoves[move].accuracy == 0))
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
@@ -1154,7 +1155,7 @@ static void atk01_accuracycheck(void)
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
 
-    if (move == NO_ACC_CALC_CHECK_LOCK_ON || gBattleMoves[move].accuracy == 0)
+    if (move == NO_ACC_CALC_CHECK_LOCK_ON)
     {
         if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
             gBattlescriptCurrInstr += 7;
@@ -6511,6 +6512,12 @@ static void atk76_various(void)
                 break;
             }
         }
+        return;
+    case VARIOUS_JUMP_IF_BATTLE_END:
+        if (IsBattleLostForPlayer() || IsBattleWonForPlayer())
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
         return;
     }
 

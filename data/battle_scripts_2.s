@@ -128,6 +128,7 @@ BattleScript_OpponentUsesHealItem::
 	playse SE_KAIFUKU
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	useitemonopponent
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER

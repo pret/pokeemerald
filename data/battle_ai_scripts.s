@@ -656,6 +656,8 @@ Score_Plus10:
 
 AI_TryToFaint:
 	if_target_is_ally AI_Ret
+	call_if_always_hit AI_CV_AlwaysHit
+	call_if_move_flag FLAG_HIGH_CRIT, AI_CV_HighCrit
 	if_effect EFFECT_HIT, AI_CV_Hit
 	if_effect EFFECT_SLEEP, AI_CV_Sleep
 	if_effect EFFECT_ABSORB, AI_CV_Absorb
@@ -669,7 +671,6 @@ AI_TryToFaint:
 	if_effect EFFECT_SPECIAL_DEFENSE_UP, AI_CV_SpDefUp
 	if_effect EFFECT_ACCURACY_UP, AI_CV_AccuracyUp
 	if_effect EFFECT_EVASION_UP, AI_CV_EvasionUp
-	if_effect EFFECT_ALWAYS_HIT, AI_CV_AlwaysHit
 	if_effect EFFECT_ATTACK_DOWN, AI_CV_AttackDown
 	if_effect EFFECT_DEFENSE_DOWN, AI_CV_DefenseDown
 	if_effect EFFECT_SPEED_DOWN, AI_CV_SpeedDown
@@ -779,7 +780,6 @@ AI_TryToFaint:
 	end
 
 AI_CV_Hit:
-	if_move_flag FLAG_HIGH_CRIT AI_CV_HighCrit
 	end
 
 AI_CV_Sleep: @ 82DCA92

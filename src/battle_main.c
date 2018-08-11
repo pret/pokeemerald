@@ -3008,6 +3008,9 @@ static void BattleStartClearSetData(void)
         gPalaceSelectionBattleScripts[i] = 0;
     }
 
+    gFieldStatuses = 0;
+    memset(&gFieldTimers, 0, sizeof(gFieldTimers));
+
     for (i = 0; i < 2; i++)
     {
         gSideStatuses[i] = 0;
@@ -4960,7 +4963,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
         }
     }
 
-    TryClearRageStatuses();
+    TryClearRageAndFuryCutter();
     gCurrentTurnActionNumber = 0;
     gCurrentActionFuncId = gActionsByTurnOrder[0];
     gBattleStruct->dynamicMoveType = 0;
