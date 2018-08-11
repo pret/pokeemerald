@@ -1110,10 +1110,10 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x2DE
 	setflag FLAG_0x351
 	setflag FLAG_0x32F
-	setflag FLAG_0x315
-	setflag FLAG_0x316
-	setflag FLAG_0x317
-	setflag FLAG_0x318
+	setflag FLAG_HIDE_FANCLUB_OLD_LADY
+	setflag FLAG_HIDE_FANCLUB_BOY
+	setflag FLAG_HIDE_FANCLUB_LITTLE_BOY
+	setflag FLAG_HIDE_FANCLUB_LADY
 	setflag FLAG_0x2DA
 	setflag FLAG_0x31D
 	setflag FLAG_0x31E

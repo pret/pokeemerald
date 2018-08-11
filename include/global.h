@@ -163,6 +163,16 @@ enum
     OPTIONS_BATTLE_STYLE_SET
 };
 
+struct Coords8 {
+    s8 x;
+    s8 y;
+};
+
+struct UCoords8 {
+    u8 x;
+    u8 y;
+};
+
 struct Coords16
 {
     s16 x;

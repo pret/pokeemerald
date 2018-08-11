@@ -174,11 +174,11 @@ gSpecials:: @ 81DBA64
 	def_special GetFirstFreePokeblockSlot
 	def_special DoBerryBlending
 	def_special sub_8142BC8
-	def_special sub_813BD60
-	def_special sub_813BCA8
-	def_special sub_813BDB4
+	def_special ShouldMoveLilycoveFanClubMember
+	def_special GetNumMovedLilycoveFanClubMembers
+	def_special BufferStreakTrainerText
 	def_special sub_813BA30
-	def_special sub_813BCE8
+	def_special UpdateMovedLilycoveFanClubMembers
 	def_special sub_813BF60
 	def_special sub_813BA60
 	def_special sub_813BF7C

@@ -81,8 +81,8 @@
 #define VAR_ALTERING_CAVE_WILD_SET 0x403E
 #define VAR_0x403F                 0x403F
 #define VAR_DAYS                   0x4040
-#define VAR_0x4041                 0x4041
-#define VAR_0x4042                 0x4042
+#define VAR_FANCLUB_UNKNOWN_1                 0x4041
+#define VAR_FANCLUB_UNKNOWN_2                 0x4042
 #define VAR_DEPT_STORE_FLOOR       0x4043
 #define VAR_0x4044                 0x4044
 #define VAR_POKELOT_PRIZE          0x4045
@@ -165,7 +165,7 @@
 #define VAR_0x4092                 0x4092
 #define VAR_0x4093                 0x4093
 #define VAR_0x4094                 0x4094
-#define VAR_0x4095                 0x4095
+#define VAR_LILYCOVE_FAN_CLUB_STATE                 0x4095
 #define VAR_0x4096                 0x4096
 #define VAR_0x4097                 0x4097
 #define VAR_0x4098                 0x4098

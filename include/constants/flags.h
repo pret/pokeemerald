@@ -790,10 +790,10 @@
 #define FLAG_0x312               0x312
 #define FLAG_0x313               0x313
 #define FLAG_0x314               0x314
-#define FLAG_0x315               0x315
-#define FLAG_0x316               0x316
-#define FLAG_0x317               0x317
-#define FLAG_0x318               0x318
+#define FLAG_HIDE_FANCLUB_OLD_LADY               0x315
+#define FLAG_HIDE_FANCLUB_BOY               0x316
+#define FLAG_HIDE_FANCLUB_LITTLE_BOY               0x317
+#define FLAG_HIDE_FANCLUB_LADY               0x318
 #define FLAG_0x319               0x319
 #define FLAG_0x31A               0x31A
 #define FLAG_0x31B               0x31B

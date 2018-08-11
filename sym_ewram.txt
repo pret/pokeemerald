@@ -604,10 +604,6 @@ gPlayerFacingPosition: @ 203AB40
 	
 	.include "src/pokeblock.o"
 	.include "src/field_specials.o"
-
-gUnknown_0203AB70: @ 203AB70
-	.space 0x4
-
     .include "src/battle_records.o"
 
 gUnknown_0203AB7C: @ 203AB7C

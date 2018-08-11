@@ -753,4 +753,13 @@ extern const u8 BattleFrontier_Lounge7_Text_26615F[];
 extern const u8 BattleFrontier_Lounge7_Text_266185[];
 extern const u8 BattleFrontier_Lounge7_Text_2661B5[];
 
+extern const u8 gText_YourPartnerHasRetired[];
+
+extern const u8 gText_Wallace[];
+extern const u8 gText_Steven[];
+extern const u8 gText_Brawly[];
+extern const u8 gText_Winona[];
+extern const u8 gText_Phoebe[];
+extern const u8 gText_Glacia[];
+
 #endif //GUARD_STRINGS_H

@@ -2,6 +2,7 @@
 #include "main.h"
 #include "battle.h"
 #include "battle_tower.h"
+#include "cable_club.h"
 #include "data2.h"
 #include "decoration.h"
 #include "diploma.h"
@@ -13,6 +14,7 @@
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_region_map.h"
+#include "field_screen.h"
 #include "field_specials.h"
 #include "field_weather.h"
 #include "international_string_util.h"
@@ -20,6 +22,7 @@
 #include "link.h"
 #include "list_menu.h"
 #include "malloc.h"
+#include "match_call.h"
 #include "menu.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -27,6 +30,7 @@
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
+#include "rayquaza_scene.h"
 #include "region_map.h"
 #include "rom_8011DC0.h"
 #include "rtc.h"
@@ -64,6 +68,7 @@ EWRAM_DATA u8 gUnknown_0203AB6C = 0;
 EWRAM_DATA u8 gUnknown_0203AB6D = 0;
 EWRAM_DATA u8 gUnknown_0203AB6E = 0;
 EWRAM_DATA u8 gUnknown_0203AB6F = 0;
+EWRAM_DATA u32 gUnknown_0203AB70 = 0;
 
 struct ListMenuTemplate gUnknown_030061D0;
 
@@ -73,9 +78,51 @@ extern const u16 gEventObjectPalette33[];
 extern const u16 gEventObjectPalette34[];
 
 extern void LoadPalette(const void *src, u32 offset, u16 size); // incorrect signature, needed to match
+extern void BlendPalettes(u32, u8, u16);
+
+void UpdateMovedLilycoveFanClubMembers(void);
+void sub_813BF60(void);
+u16 GetNumMovedLilycoveFanClubMembers(void);
 
 static void RecordCyclingRoadResults(u32, u8);
 static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum);
+static void Task_PetalburgGym(u8);
+static void PetalburgGymFunc(u8, u16);
+static void Task_PCTurnOnEffect(u8);
+static void PCTurnOnEffect_0(struct Task *);
+static void PCTurnOnEffect_1(s16, s8, s8);
+static void PCTurnOffEffect(void);
+static void Task_LotteryCornerComputerEffect(u8);
+static void LotteryCornerComputerEffect(struct Task *);
+static void sub_81395BC(u8 taskId);
+static void sub_8139620(u8 taskId);
+static void sub_8139AF4(u8 taskId);
+static void sub_8139C2C(u16 a1, u8 a2);
+static void sub_8139C80(u8 taskId);
+static void sub_813A2DC(u8 taskId);
+static void sub_813AA60(u16 a0, u16 a1);
+static void sub_813ACE8(u8 a0, u16 a1);
+static void sub_813A42C(void);
+static void sub_813A4EC(u8 taskId);
+static void sub_813A694(u8 taskId);
+static void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+static void sub_813AC44(u16 a0, u16 a1);
+static void sub_813AD34(u8 a0, u16 a1);
+static void sub_813A570(u8 taskId);
+static void sub_813A738(u8 taskId);
+static void sub_813A600(u8 taskId);
+static void sub_813A664(u8 taskId);
+static void sub_813ABD4(u16 a0);
+static void task_deoxys_sound(u8 taskId);
+static void sub_813B0B4(u8 a0);
+static void sub_813B160(u8 taskId);
+static void sub_813B57C(u8 taskId);
+static void sub_813B824(u8 taskId);
+static void _fwalk(u8 taskId);
+static u8 sub_813BF44(void);
+static void sub_813BD84(void);
+static u16 sub_813BB74(void);
+static void sub_813BE30(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
 
 void Special_ShowDiploma(void)
 {
@@ -572,12 +619,7 @@ static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEvent
     }
 }
 
-struct Coords8 {
-    u8 x;
-    u8 y;
-};
-
-const struct Coords8 gUnknown_085B2B68[] = {
+static const struct UCoords8 gUnknown_085B2B68[] = {
     { 7, 22},
     {11, 19},
     {10, 16},
@@ -699,7 +741,7 @@ void MauvilleGymSpecial2(void)
 void MauvilleGymSpecial3(void)
 {
     int i, x, y;
-    const struct Coords8 *switchCoords = gUnknown_085B2B68;
+    const struct UCoords8 *switchCoords = gUnknown_085B2B68;
     for (i = ARRAY_COUNT(gUnknown_085B2B68) - 1; i >= 0; i--)
     {
         MapGridSetMetatileIdAt(switchCoords->x, switchCoords->y, 0x206);
@@ -753,10 +795,8 @@ void MauvilleGymSpecial3(void)
     }
 }
 
-static void Task_PetalburgGym(u8);
-static void PetalburgGymFunc(u8, u16);
-const u8 gUnknown_085B2B78[] = {0, 1, 1, 1, 1};
-const u16 gUnknown_085B2B7E[] = {0x218, 0x219, 0x21a, 0x21b, 0x21c};
+static const u8 gUnknown_085B2B78[] = {0, 1, 1, 1, 1};
+static const u16 gUnknown_085B2B7E[] = {0x218, 0x219, 0x21a, 0x21b, 0x21c};
 
 void PetalburgGymSpecial1(void)
 {
@@ -956,7 +996,7 @@ u8 GetLeadMonFriendshipScore(void)
     return 0;
 }
 
-void CB2_FieldShowRegionMap(void)
+static void CB2_FieldShowRegionMap(void)
 {
     FieldInitRegionMap(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
@@ -965,10 +1005,6 @@ void FieldShowRegionMap(void)
 {
     SetMainCallback2(CB2_FieldShowRegionMap);
 }
-
-static void Task_PCTurnOnEffect(u8);
-static void PCTurnOnEffect_0(struct Task *);
-static void PCTurnOnEffect_1(s16, s8, s8);
 
 void DoPCTurnOnEffect(void)
 {
@@ -1063,8 +1099,6 @@ static void PCTurnOnEffect_1(s16 flag, s8 dx, s8 dy)
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | 0xc00);
 }
 
-static void PCTurnOffEffect(void);
-
 void DoPCTurnOffEffect(void)
 {
     PCTurnOffEffect();
@@ -1106,9 +1140,6 @@ static void PCTurnOffEffect(void)
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | 0xc00);
     DrawWholeMapView();
 }
-
-static void Task_LotteryCornerComputerEffect(u8);
-static void LotteryCornerComputerEffect(struct Task *);
 
 void DoLotteryCornerComputerEffect(void)
 {
@@ -1279,12 +1310,12 @@ void BufferEReaderTrainerName(void)
     GetEreaderTrainerName(gStringVar1);
 }
 
-const u8 gUnknown_085B2B88[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
-const u8 gUnknown_085B2B94[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
-const u8 gUnknown_085B2BA0[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
-
 u16 GetSlotMachineId(void)
 {
+    static const u8 gUnknown_085B2B88[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
+    static const u8 gUnknown_085B2B94[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
+    static const u8 gUnknown_085B2BA0[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
+
     u32 v0 = gSaveBlock1Ptr->easyChatPairs[0].unk0_0 + gSaveBlock1Ptr->easyChatPairs[0].unk2 + gUnknown_085B2B88[gSpecialVar_0x8004];
     if (GetPriceReduction(2))
     {
@@ -1436,9 +1467,6 @@ bool8 IsPokerusInParty(void)
     return TRUE;
 }
 
-static void sub_81395BC(u8 taskId);
-static void sub_8139620(u8 taskId);
-
 void sub_8139560(void)
 {
     u8 taskId = CreateTask(sub_81395BC, 9);
@@ -1486,7 +1514,7 @@ void SetRoute119Weather(void)
 {
     if (is_map_type_1_2_3_5_or_6(get_map_light_from_warp0()) != TRUE)
     {
-        SetSav1Weather(0x14);
+        SetSav1Weather(20);
     }
 }
 
@@ -1494,7 +1522,7 @@ void SetRoute123Weather(void)
 {
     if (is_map_type_1_2_3_5_or_6(get_map_light_from_warp0()) != TRUE)
     {
-        SetSav1Weather(0x15);
+        SetSav1Weather(21);
     }
 }
 
@@ -1545,7 +1573,9 @@ u16 SetPacifidlogTMReceivedDay(void)
 bool8 MonOTNameMatchesPlayer(void)
 {
     if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE) != GAME_LANGUAGE)
+    {
         return TRUE;    // huh?
+    }
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
     if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
@@ -1648,9 +1678,6 @@ void sub_8139980(void)
     SetCameraPanning(8, 0);
 }
 
-void sub_8139AF4(u8 taskId);
-void sub_8139C2C(u16 a1, u8 a2);
-
 const struct WindowTemplate gUnknown_085B2BAC = {
     .priority = 0,
     .tilemapLeft = 21,
@@ -1682,9 +1709,6 @@ const u8 *const gElevatorFloorsTable[] = {
 
 const u16 gUnknown_085B2BF4[] = { 0x0329, 0x032a, 0x032b, 0x0331, 0x0332, 0x0333, 0x0339, 0x033a, 0x033b };
 const u16 gUnknown_085B2C06[] = { 0x0329, 0x032b, 0x032a, 0x0331, 0x0333, 0x0332, 0x0339, 0x033b, 0x033a };
-const u8 gUnknown_085B2C18[] = { 0x08, 0x10, 0x18, 0x20, 0x26, 0x2e, 0x34, 0x38, 0x39 };
-const u8 gUnknown_085B2C21[] = { 0x03, 0x06, 0x09, 0x0c, 0x0f, 0x12, 0x15, 0x18, 0x1b };
-const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xffff };
 
 void SetDepartmentStoreFloorVar(void)
 {
@@ -1753,6 +1777,8 @@ u16 sub_81399F4(void)
 
 void ShakeScreenInElevator(void)
 {
+    static const u8 gUnknown_085B2C18[] = { 0x08, 0x10, 0x18, 0x20, 0x26, 0x2e, 0x34, 0x38, 0x39 };
+
     s16 *data = gTasks[CreateTask(sub_8139AF4, 9)].data;
     u16 floorDelta;
 
@@ -1781,7 +1807,7 @@ void ShakeScreenInElevator(void)
     PlaySE(SE_ELEBETA);
 }
 
-void sub_8139AF4(u8 taskId)
+static void sub_8139AF4(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     data[1]++;
@@ -1824,10 +1850,10 @@ void sub_8139C10(void)
     RemoveWindow(gUnknown_0203AB5E);
 }
 
-void sub_8139C80(u8 taskId);
-
-void sub_8139C2C(u16 a1, u8 a2)
+static void sub_8139C2C(u16 a1, u8 a2)
 {
+    static const u8 gUnknown_085B2C21[] = { 0x03, 0x06, 0x09, 0x0c, 0x0f, 0x12, 0x15, 0x18, 0x1b };
+
     if (FuncIsActiveTask(sub_8139C80) != TRUE)
     {
         u8 taskId = CreateTask(sub_8139C80, 8);
@@ -1841,7 +1867,7 @@ void sub_8139C2C(u16 a1, u8 a2)
 // Annoyingly close but compiler wants to add all the parts of the index into the arrays
 // first and then shift by one, whereas we need each individual part to shift and then be added.
 #ifdef NONMATCHING
-void sub_8139C80(u8 taskId)
+static void sub_8139C80(u8 taskId)
 {
     u8 x, y;
     s16 *data = gTasks[taskId].data;
@@ -1880,7 +1906,7 @@ void sub_8139C80(u8 taskId)
 }
 #else
 NAKED
-void sub_8139C80(u8 taskId)
+static void sub_8139C80(u8 taskId)
 {
     asm_unified("push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -2064,6 +2090,8 @@ void sub_8139D98(void)
 
 bool32 warp0_in_pokecenter(void)
 {
+    static const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xffff };
+
     int i;
     u16 map = (gUnknown_020322DC.mapGroup << 8) + gUnknown_020322DC.mapNum;
 
@@ -2092,34 +2120,34 @@ void UpdateFrontierManiac(u16 a0)
     *var %= 10;
 }
 
-const u8 *const gUnknown_085B2C50[][3] = {
-    { BattleFrontier_Lounge2_Text_260971, BattleFrontier_Lounge2_Text_260A1E, BattleFrontier_Lounge2_Text_260AE7 },
-    { BattleFrontier_Lounge2_Text_2619AC, BattleFrontier_Lounge2_Text_261A91, BattleFrontier_Lounge2_Text_261B0C },
-    { BattleFrontier_Lounge2_Text_261B95, BattleFrontier_Lounge2_Text_261B95, BattleFrontier_Lounge2_Text_261B95 },
-    { BattleFrontier_Lounge2_Text_261C1A, BattleFrontier_Lounge2_Text_261C1A, BattleFrontier_Lounge2_Text_261C1A },
-    { BattleFrontier_Lounge2_Text_260BC4, BattleFrontier_Lounge2_Text_260C6D, BattleFrontier_Lounge2_Text_260D3A },
-    { BattleFrontier_Lounge2_Text_260E1E, BattleFrontier_Lounge2_Text_260EC7, BattleFrontier_Lounge2_Text_260F74 },
-    { BattleFrontier_Lounge2_Text_2614E6, BattleFrontier_Lounge2_Text_261591, BattleFrontier_Lounge2_Text_26166F },
-    { BattleFrontier_Lounge2_Text_261282, BattleFrontier_Lounge2_Text_261329, BattleFrontier_Lounge2_Text_261403 },
-    { BattleFrontier_Lounge2_Text_261026, BattleFrontier_Lounge2_Text_2610CC, BattleFrontier_Lounge2_Text_261194 },
-    { BattleFrontier_Lounge2_Text_26174D, BattleFrontier_Lounge2_Text_2617F9, BattleFrontier_Lounge2_Text_2618C4 },
-};
-
-const u8 gUnknown_085B2CC8[][2] = {
-    { 0x15, 0x38 },
- 	{ 0x15, 0x23 },
- 	{ 0xff, 0xff },
- 	{ 0xff, 0xff },
- 	{ 0x02, 0x04 },
- 	{ 0x07, 0x15 },
- 	{ 0x07, 0x15 },
- 	{ 0x0e, 0x1c },
- 	{ 0x0d, 0x70 },
-    { 0x07, 0x38 }
-};
-
 void sub_8139F20(void)
 {
+    static const u8 *const gUnknown_085B2C50[][3] = {
+        { BattleFrontier_Lounge2_Text_260971, BattleFrontier_Lounge2_Text_260A1E, BattleFrontier_Lounge2_Text_260AE7 },
+        { BattleFrontier_Lounge2_Text_2619AC, BattleFrontier_Lounge2_Text_261A91, BattleFrontier_Lounge2_Text_261B0C },
+        { BattleFrontier_Lounge2_Text_261B95, BattleFrontier_Lounge2_Text_261B95, BattleFrontier_Lounge2_Text_261B95 },
+        { BattleFrontier_Lounge2_Text_261C1A, BattleFrontier_Lounge2_Text_261C1A, BattleFrontier_Lounge2_Text_261C1A },
+        { BattleFrontier_Lounge2_Text_260BC4, BattleFrontier_Lounge2_Text_260C6D, BattleFrontier_Lounge2_Text_260D3A },
+        { BattleFrontier_Lounge2_Text_260E1E, BattleFrontier_Lounge2_Text_260EC7, BattleFrontier_Lounge2_Text_260F74 },
+        { BattleFrontier_Lounge2_Text_2614E6, BattleFrontier_Lounge2_Text_261591, BattleFrontier_Lounge2_Text_26166F },
+        { BattleFrontier_Lounge2_Text_261282, BattleFrontier_Lounge2_Text_261329, BattleFrontier_Lounge2_Text_261403 },
+        { BattleFrontier_Lounge2_Text_261026, BattleFrontier_Lounge2_Text_2610CC, BattleFrontier_Lounge2_Text_261194 },
+        { BattleFrontier_Lounge2_Text_26174D, BattleFrontier_Lounge2_Text_2617F9, BattleFrontier_Lounge2_Text_2618C4 },
+    };
+
+    static const u8 gUnknown_085B2CC8[][2] = {
+        { 0x15, 0x38 },
+        { 0x15, 0x23 },
+        { 0xff, 0xff },
+        { 0xff, 0xff },
+        { 0x02, 0x04 },
+        { 0x07, 0x15 },
+        { 0x07, 0x15 },
+        { 0x0e, 0x1c },
+        { 0x0d, 0x70 },
+        { 0x07, 0x38 }
+    };
+
     u8 i;
     u16 unk = 0;
     u16 var = VarGet(VAR_FRONTIER_MANIAC_FACILITY);
@@ -2205,12 +2233,12 @@ void sub_8139F20(void)
     ShowFieldMessage(gUnknown_085B2C50[var][i]);
 }
 
-const u16 gUnknown_085B2CDC[] = {
-    0x0007, 0x000e, 0x0015, 0x001c, 0x0023, 0x0031, 0x003f, 0x004d, 0x005b, 0x0000
-};
-
 void sub_813A080(void)
 {
+    static const u16 gUnknown_085B2CDC[] = {
+        0x0007, 0x000e, 0x0015, 0x001c, 0x0023, 0x0031, 0x003f, 0x004d, 0x005b, 0x0000
+    };
+
     u8 i;
     u16 var = VarGet(VAR_0x40CE);
     u8 chosenLevel = gSaveBlock2Ptr->frontier.chosenLvl;
@@ -2235,8 +2263,6 @@ void sub_813A080(void)
     gSpecialVar_0x8005 = 4;
     gSpecialVar_0x8006 = 12;
 }
-
-void sub_813A2DC(u8 taskId);
 
 void sub_813A128(void)
 {
@@ -2374,11 +2400,7 @@ void sub_813A128(void)
     }
 }
 
-void sub_813AA60(u16 a0, u16 a1);
-void sub_813ACE8(u8 a0, u16 a1);
-void sub_813A42C(void);
-
-const u8 *const gUnknown_085B2CF0[][16] = {
+static const u8 *const gUnknown_085B2CF0[][16] = {
     {
         gText_Exit,
         NULL,
@@ -2615,10 +2637,7 @@ const u8 *const gUnknown_085B2CF0[][16] = {
     }
 };
 
-void sub_813A4EC(u8 taskId);
-void sub_813A694(u8 taskId);
-
-void sub_813A2DC(u8 taskId)
+static void sub_813A2DC(u8 taskId)
 {
     u32 unk1;
     u8 i, windowId;
@@ -2672,9 +2691,7 @@ void sub_813A2DC(u8 taskId)
     gTasks[taskId].func = sub_813A4EC;
 }
 
-void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-
-void sub_813A42C(void)
+static void sub_813A42C(void)
 {
     gUnknown_030061D0.items = gUnknown_0203AB64;
     gUnknown_030061D0.moveCursorFunc = sub_813A46C;
@@ -2696,12 +2713,7 @@ void sub_813A42C(void)
     gUnknown_030061D0.cursorKind = 0;
 }
 
-void sub_813A4EC(u8 taskId);
-void sub_813AA60(u16 a0, u16 a1);
-void sub_813AC44(u16 a0, u16 a1);
-void sub_813AD34(u8 a0, u16 a1);
-
-void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     u8 taskId;
     PlaySE(SE_SELECT);
@@ -2720,13 +2732,9 @@ void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
     }
 }
 
-void sub_813A570(u8 taskId);
-void sub_813A738(u8 taskId);
-void sub_813A600(u8 taskId);
-
 // stupid r5<->r6 swap
 #ifdef NONMATCHING
-void sub_813A4EC(u8 taskId)
+static void sub_813A4EC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s32 itemId = ListMenuHandleInputGetItemId(task->data[14]);
@@ -2743,25 +2751,22 @@ void sub_813A4EC(u8 taskId)
     default:
         gSpecialVar_Result = itemId;
         PlaySE(SE_SELECT);
-        if (task->data[6])
+        if (!task->data[6] || itemId == task->data[1] - 1)
         {
-            if (itemId == task->data[1] - 1)
-            {
-                sub_813A570(taskId);
-            }
-            else
-            {
-                sub_813A738(taskId);
-                task->func = sub_813A600;
-                EnableBothScriptContexts();
-            }
+            sub_813A570(taskId);
+        }
+        else
+        {
+            sub_813A738(taskId);
+            task->func = sub_813A600;
+            EnableBothScriptContexts();
         }
         break;
     }
 }
 #else
 NAKED
-void sub_813A4EC(u8 taskId)
+static void sub_813A4EC(u8 taskId)
 {
     asm_unified("push {r4-r6,lr}\n\
 	lsls r0, 24\n\
@@ -2826,7 +2831,7 @@ _0813A566:\n\
 }
 #endif // NONMATCHING
 
-void sub_813A570(u8 taskId)
+static void sub_813A570(u8 taskId)
 {
     u16 array;
     struct Task *task = &gTasks[taskId];
@@ -2843,9 +2848,7 @@ void sub_813A570(u8 taskId)
     EnableBothScriptContexts();
 }
 
-void sub_813A664(u8 taskId);
-
-void sub_813A600(u8 taskId)
+static void sub_813A600(u8 taskId)
 {
     switch (gTasks[taskId].data[6])
     {
@@ -2872,29 +2875,29 @@ void sub_813A630(void)
     }
 }
 
-void sub_813A664(u8 taskId)
+static void sub_813A664(u8 taskId)
 {
     ScriptContext2_Enable();
     sub_813A694(taskId);
     gTasks[taskId].func = sub_813A4EC;
 }
 
-const struct ScrollArrowsTemplate gUnknown_085B3030 = {
-    .firstArrowType = 2,
-    .firstX = 0,
-    .firstY = 0,
-    .secondArrowType = 3,
-    .secondX = 0,
-    .secondY = 0,
-    .fullyUpThreshold = 0,
-    .fullyDownThreshold = 0,
-    .tileTag = 2000,
-    .palTag = 100,
-    .palNum = 0
-};
-
-void sub_813A694(u8 taskId)
+static void sub_813A694(u8 taskId)
 {
+    static const struct ScrollArrowsTemplate gUnknown_085B3030 = {
+        .firstArrowType = 2,
+        .firstX = 0,
+        .firstY = 0,
+        .secondArrowType = 3,
+        .secondX = 0,
+        .secondY = 0,
+        .fullyUpThreshold = 0,
+        .fullyDownThreshold = 0,
+        .tileTag = 2000,
+        .palTag = 100,
+        .palNum = 0
+    };
+
     struct Task *task = &gTasks[taskId];
     struct ScrollArrowsTemplate template = gUnknown_085B3030;
     if (task->data[0] != task->data[1])
@@ -2909,7 +2912,7 @@ void sub_813A694(u8 taskId)
     }
 }
 
-void sub_813A738(u8 taskId)
+static void sub_813A738(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     if (task->data[0] != task->data[1])
@@ -2939,36 +2942,36 @@ void sub_813A76C(void)
     }
 }
 
-const u8 *const gUnknown_085B3040[] = {
-    BattleFrontier_Lounge5_Text_26468D,
-    BattleFrontier_Lounge5_Text_2646E5,
-    BattleFrontier_Lounge5_Text_264741,
-    BattleFrontier_Lounge5_Text_2647A4,
-    BattleFrontier_Lounge5_Text_2647FC,
-    BattleFrontier_Lounge5_Text_264858,
-    BattleFrontier_Lounge5_Text_2648BE,
-    BattleFrontier_Lounge5_Text_264916,
-    BattleFrontier_Lounge5_Text_264972,
-    BattleFrontier_Lounge5_Text_2649D5,
-    BattleFrontier_Lounge5_Text_264A3F,
-    BattleFrontier_Lounge5_Text_264A9B,
-    BattleFrontier_Lounge5_Text_264AF3,
-    BattleFrontier_Lounge5_Text_264B5D,
-    BattleFrontier_Lounge5_Text_2648BE,
-    BattleFrontier_Lounge5_Text_264BC3,
-    BattleFrontier_Lounge5_Text_264C36,
-    BattleFrontier_Lounge5_Text_2648BE,
-    BattleFrontier_Lounge5_Text_264C95,
-    BattleFrontier_Lounge5_Text_264D01,
-    BattleFrontier_Lounge5_Text_264D6B,
-    BattleFrontier_Lounge5_Text_264DD7,
-    BattleFrontier_Lounge5_Text_264E33,
-    BattleFrontier_Lounge5_Text_264E8F,
-    BattleFrontier_Lounge5_Text_2648BE,
-};
-
 void sub_813A7B8(void)
 {
+    static const u8 *const gUnknown_085B3040[] = {
+        BattleFrontier_Lounge5_Text_26468D,
+        BattleFrontier_Lounge5_Text_2646E5,
+        BattleFrontier_Lounge5_Text_264741,
+        BattleFrontier_Lounge5_Text_2647A4,
+        BattleFrontier_Lounge5_Text_2647FC,
+        BattleFrontier_Lounge5_Text_264858,
+        BattleFrontier_Lounge5_Text_2648BE,
+        BattleFrontier_Lounge5_Text_264916,
+        BattleFrontier_Lounge5_Text_264972,
+        BattleFrontier_Lounge5_Text_2649D5,
+        BattleFrontier_Lounge5_Text_264A3F,
+        BattleFrontier_Lounge5_Text_264A9B,
+        BattleFrontier_Lounge5_Text_264AF3,
+        BattleFrontier_Lounge5_Text_264B5D,
+        BattleFrontier_Lounge5_Text_2648BE,
+        BattleFrontier_Lounge5_Text_264BC3,
+        BattleFrontier_Lounge5_Text_264C36,
+        BattleFrontier_Lounge5_Text_2648BE,
+        BattleFrontier_Lounge5_Text_264C95,
+        BattleFrontier_Lounge5_Text_264D01,
+        BattleFrontier_Lounge5_Text_264D6B,
+        BattleFrontier_Lounge5_Text_264DD7,
+        BattleFrontier_Lounge5_Text_264E33,
+        BattleFrontier_Lounge5_Text_264E8F,
+        BattleFrontier_Lounge5_Text_2648BE,
+    };
+
     u8 nature;
 
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
@@ -2987,52 +2990,52 @@ void UpdateFrontierGambler(u16 a0)
     *var %= 12;
 }
 
-const u8 *const gUnknown_085B30A4[] = {
-    BattleFrontier_Lounge3_Text_262261,
-    BattleFrontier_Lounge3_Text_26230D,
-    BattleFrontier_Lounge3_Text_2623B9,
-    BattleFrontier_Lounge3_Text_262464,
-    BattleFrontier_Lounge3_Text_26250E,
-    BattleFrontier_Lounge3_Text_2625B8,
-    BattleFrontier_Lounge3_Text_26266A,
-    BattleFrontier_Lounge3_Text_26271C,
-    BattleFrontier_Lounge3_Text_2627C9,
-    BattleFrontier_Lounge3_Text_262876,
-    BattleFrontier_Lounge3_Text_26291A,
-    BattleFrontier_Lounge3_Text_2629BC,
-};
-
 void sub_813A820(void)
 {
+    static const u8 *const gUnknown_085B30A4[] = {
+        BattleFrontier_Lounge3_Text_262261,
+        BattleFrontier_Lounge3_Text_26230D,
+        BattleFrontier_Lounge3_Text_2623B9,
+        BattleFrontier_Lounge3_Text_262464,
+        BattleFrontier_Lounge3_Text_26250E,
+        BattleFrontier_Lounge3_Text_2625B8,
+        BattleFrontier_Lounge3_Text_26266A,
+        BattleFrontier_Lounge3_Text_26271C,
+        BattleFrontier_Lounge3_Text_2627C9,
+        BattleFrontier_Lounge3_Text_262876,
+        BattleFrontier_Lounge3_Text_26291A,
+        BattleFrontier_Lounge3_Text_2629BC,
+    };
+
     u16 var = VarGet(VAR_FRONTIER_GAMBLER_FACILITY);
     ShowFieldMessage(gUnknown_085B30A4[var]);
     VarSet(VAR_FRONTIER_GAMBLER_SET_FACILITY_F, var);
 }
 
-const u8 *const gUnknown_085B30D4[] = {
-    BattleFrontier_Lounge3_Text_262C04,
-    BattleFrontier_Lounge3_Text_262C90,
-    BattleFrontier_Lounge3_Text_262D1C,
-    BattleFrontier_Lounge3_Text_262DA7,
-    BattleFrontier_Lounge3_Text_262E34,
-    BattleFrontier_Lounge3_Text_262EC1,
-    BattleFrontier_Lounge3_Text_262F56,
-    BattleFrontier_Lounge3_Text_262FEB,
-    BattleFrontier_Lounge3_Text_263078,
-    BattleFrontier_Lounge3_Text_263105,
-    BattleFrontier_Lounge3_Text_26318C,
-    BattleFrontier_Lounge3_Text_263211,
-};
-
 void sub_813A854(void)
 {
+    static const u8 *const gUnknown_085B30D4[] = {
+        BattleFrontier_Lounge3_Text_262C04,
+        BattleFrontier_Lounge3_Text_262C90,
+        BattleFrontier_Lounge3_Text_262D1C,
+        BattleFrontier_Lounge3_Text_262DA7,
+        BattleFrontier_Lounge3_Text_262E34,
+        BattleFrontier_Lounge3_Text_262EC1,
+        BattleFrontier_Lounge3_Text_262F56,
+        BattleFrontier_Lounge3_Text_262FEB,
+        BattleFrontier_Lounge3_Text_263078,
+        BattleFrontier_Lounge3_Text_263105,
+        BattleFrontier_Lounge3_Text_26318C,
+        BattleFrontier_Lounge3_Text_263211,
+    };
+
     ShowFieldMessage(gUnknown_085B30D4[VarGet(VAR_FRONTIER_GAMBLER_SET_FACILITY_F)]);
 }
 
-const u16 gUnknown_085B3104[] = {0x0000, 0x0001, 0x0002, 0x0100, 0x0101, 0x0400, 0x0401, 0x0200, 0x0201, 0x0300, 0x0500, 0x0600};
-
 void sub_813A878(u8 a0)
 {
+    static const u16 gUnknown_085B3104[] = {0x0000, 0x0001, 0x0002, 0x0100, 0x0101, 0x0400, 0x0401, 0x0200, 0x0201, 0x0300, 0x0500, 0x0600};
+
     u16 var1 = VarGet(VAR_0x40CE);
     u16 var2 = VarGet(VAR_FRONTIER_GAMBLER_SET_FACILITY_F);
     u16 var3 = VarGet(VAR_FRONTIER_FACILITY);
@@ -3062,18 +3065,18 @@ void sub_813A8FC(void)
     PrintTextOnWindow(gUnknown_0203AB6D, 1, string, x, 1, 0, NULL);
 }
 
-const struct WindowTemplate gUnknown_085B311C = {
-    .priority = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 6,
-    .height = 2,
-    .paletteNum = 15,
-    .baseBlock = 8,
-};
-
 void sub_813A958(void)
 {
+    static const struct WindowTemplate gUnknown_085B311C = {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 8,
+    };
+
     gUnknown_0203AB6D = AddWindow(&gUnknown_085B311C);
     SetStandardWindowBorderStyle(gUnknown_0203AB6D, 0);
     sub_813A8FC();
@@ -3115,18 +3118,18 @@ u16 sub_813AA04(void)
     return gSaveBlock2Ptr->frontier.frontierBattlePoints;
 }
 
-const struct WindowTemplate gUnknown_085B3124 = {
-    .priority = 0,
-    .tilemapLeft = 2,
-    .tilemapTop = 9,
-    .width = 4,
-    .height = 4,
-    .paletteNum = 15,
-    .baseBlock = 20,
-};
-
 void sub_813AA18(void)
 {
+    static const struct WindowTemplate gUnknown_085B3124 = {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 9,
+        .width = 4,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 20,
+    };
+
     gUnknown_0203AB6E = AddWindow(&gUnknown_085B3124);
     SetStandardWindowBorderStyle(gUnknown_0203AB6E, 0);
     CopyWindowToVram(gUnknown_0203AB6E, 2);
@@ -3138,61 +3141,59 @@ void sub_813AA44(void)
     RemoveWindow(gUnknown_0203AB6E);
 }
 
-const u16 gUnknown_085B312C[] = { 0x004b, 0x0067, 0x0057, 0x004f, 0x0054, 0x0055, 0x0056, 0x0050, 0x0051, 0x0052, 0xffff };
-const u16 gUnknown_085B3142[] = { 0x0071, 0x006f, 0x0072, 0x0073, 0x0074, 0xffff };
-const u16 gUnknown_085B314E[] = { 0x0040, 0x0043, 0x0041, 0x0046, 0x0042, 0x003f, 0xffff };
-const u16 gUnknown_085B315C[] = { 0x00c8, 0x00b4, 0x00b7, 0x00b9, 0x00b3, 0x00ba, 0x00bb, 0x00c4, 0x00c6, 0xffff };
-
-const u8 *const gUnknown_085B3170[] = {
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2601D0,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_260201,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26022F,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26025B,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_260287,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2602B5,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2602E0,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26030F,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26033E,
-    gText_Exit,
-};
-
-const u8 *const gUnknown_085B319C[] = {
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-    gText_Exit
-};
-
-const u8 *const gUnknown_085B31B4[] = {
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_260397,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2603BE,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2603E6,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26040E,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_260436,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26045C,
-    gText_Exit
-};
-
-const u8 *const gUnknown_085B31D0[] = {
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26047A,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2604AC,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2604D8,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_26050F,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_260542,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_260575,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2605A8,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_2605E2,
-    BattleFrontier_BattlePointExchangeServiceCorner_Text_260613,
-    gText_Exit
-};
-
-void sub_813ABD4(u16 a0);
-
-void sub_813AA60(u16 a0, u16 a1)
+static void sub_813AA60(u16 a0, u16 a1)
 {
+    static const u16 gUnknown_085B312C[] = { 0x004b, 0x0067, 0x0057, 0x004f, 0x0054, 0x0055, 0x0056, 0x0050, 0x0051, 0x0052, 0xffff };
+    static const u16 gUnknown_085B3142[] = { 0x0071, 0x006f, 0x0072, 0x0073, 0x0074, 0xffff };
+    static const u16 gUnknown_085B314E[] = { 0x0040, 0x0043, 0x0041, 0x0046, 0x0042, 0x003f, 0xffff };
+    static const u16 gUnknown_085B315C[] = { 0x00c8, 0x00b4, 0x00b7, 0x00b9, 0x00b3, 0x00ba, 0x00bb, 0x00c4, 0x00c6, 0xffff };
+
+    static const u8 *const gUnknown_085B3170[] = {
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2601D0,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_260201,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26022F,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26025B,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_260287,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2602B5,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2602E0,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26030F,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26033E,
+        gText_Exit,
+    };
+
+    static const u8 *const gUnknown_085B319C[] = {
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
+        gText_Exit
+    };
+
+    static const u8 *const gUnknown_085B31B4[] = {
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_260397,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2603BE,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2603E6,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26040E,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_260436,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26045C,
+        gText_Exit
+    };
+
+    static const u8 *const gUnknown_085B31D0[] = {
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26047A,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2604AC,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2604D8,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_26050F,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_260542,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_260575,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2605A8,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_2605E2,
+        BattleFrontier_BattlePointExchangeServiceCorner_Text_260613,
+        gText_Exit
+    };
+
     if (a0 > 2 && a0 < 7)
     {
         FillWindowPixelRect(0, 0x11, 0, 0, 216, 32);
@@ -3236,7 +3237,7 @@ void sub_813AA60(u16 a0, u16 a1)
     }
 }
 
-void sub_813ABD4(u16 a0)
+static void sub_813ABD4(u16 a0)
 {
     FreeSpriteTilesByTag(5500);
     FreeSpritePaletteByTag(5500);
@@ -3250,7 +3251,7 @@ void sub_813ABD4(u16 a0)
     }
 }
 
-void sub_813AC44(u16 a0, u16 unused)
+static void sub_813AC44(u16 a0, u16 unused)
 {
     if (gUnknown_0203AB6C != MAX_SPRITES)
     {
@@ -3264,8 +3265,8 @@ void sub_813AC44(u16 a0, u16 unused)
     }
 }
 
-const u16 gUnknown_085B31F8[] = { 0x0087, 0x0045, 0x008a, 0x0005, 0x0019, 0x0022, 0x009d, 0x0044, 0x0056, 0x000e };
-const u16 gUnknown_085B320C[] = { 0x006f, 0x00ad, 0x00bd, 0x0081, 0x00c4, 0x00cb, 0x00f4, 0x0008, 0x0009, 0x0007 };
+static const u16 gUnknown_085B31F8[] = { 0x0087, 0x0045, 0x008a, 0x0005, 0x0019, 0x0022, 0x009d, 0x0044, 0x0056, 0x000e };
+static const u16 gUnknown_085B320C[] = { 0x006f, 0x00ad, 0x00bd, 0x0081, 0x00c4, 0x00cb, 0x00f4, 0x0008, 0x0009, 0x0007 };
 
 void sub_813AC7C(void)
 {
@@ -3279,18 +3280,18 @@ void sub_813AC7C(void)
     }
 }
 
-const struct WindowTemplate gUnknown_085B3220 = {
-    .priority = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 7,
-    .width = 12,
-    .height = 6,
-    .paletteNum = 15,
-    .baseBlock = 28,
-};
-
-void sub_813ACE8(u8 a0, u16 a1)
+static void sub_813ACE8(u8 a0, u16 a1)
 {
+    static const struct WindowTemplate gUnknown_085B3220 = {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 7,
+        .width = 12,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 28,
+    };
+
     if (a0 == 9 || a0 == 10)
     {
         if (gSpecialVar_0x8006 == 0)
@@ -3302,36 +3303,36 @@ void sub_813ACE8(u8 a0, u16 a1)
     }
 }
 
-const u8 *const gUnknown_085B3228[] = {
-    BattleFrontier_Lounge7_Text_265E30,
-    BattleFrontier_Lounge7_Text_265E5B,
-    BattleFrontier_Lounge7_Text_265E8A,
-    BattleFrontier_Lounge7_Text_265EC0,
-    BattleFrontier_Lounge7_Text_265EED,
-    BattleFrontier_Lounge7_Text_265F1C,
-    BattleFrontier_Lounge7_Text_265F47,
-    BattleFrontier_Lounge7_Text_265F77,
-    BattleFrontier_Lounge7_Text_265FAA,
-    BattleFrontier_Lounge7_Text_265FDD,
-    gText_Exit,
-};
-
-const u8 *const gUnknown_085B3254[] = {
-    BattleFrontier_Lounge7_Text_26600A,
-    BattleFrontier_Lounge7_Text_26603E,
-    BattleFrontier_Lounge7_Text_266070,
-    BattleFrontier_Lounge7_Text_2660A6,
-    BattleFrontier_Lounge7_Text_2660D0,
-    BattleFrontier_Lounge7_Text_2660FF,
-    BattleFrontier_Lounge7_Text_26612D,
-    BattleFrontier_Lounge7_Text_26615F,
-    BattleFrontier_Lounge7_Text_266185,
-    BattleFrontier_Lounge7_Text_2661B5,
-    gText_Exit,
-};
-
-void sub_813AD34(u8 a0, u16 a1)
+static void sub_813AD34(u8 a0, u16 a1)
 {
+    static const u8 *const gUnknown_085B3228[] = {
+        BattleFrontier_Lounge7_Text_265E30,
+        BattleFrontier_Lounge7_Text_265E5B,
+        BattleFrontier_Lounge7_Text_265E8A,
+        BattleFrontier_Lounge7_Text_265EC0,
+        BattleFrontier_Lounge7_Text_265EED,
+        BattleFrontier_Lounge7_Text_265F1C,
+        BattleFrontier_Lounge7_Text_265F47,
+        BattleFrontier_Lounge7_Text_265F77,
+        BattleFrontier_Lounge7_Text_265FAA,
+        BattleFrontier_Lounge7_Text_265FDD,
+        gText_Exit,
+    };
+
+    static const u8 *const gUnknown_085B3254[] = {
+        BattleFrontier_Lounge7_Text_26600A,
+        BattleFrontier_Lounge7_Text_26603E,
+        BattleFrontier_Lounge7_Text_266070,
+        BattleFrontier_Lounge7_Text_2660A6,
+        BattleFrontier_Lounge7_Text_2660D0,
+        BattleFrontier_Lounge7_Text_2660FF,
+        BattleFrontier_Lounge7_Text_26612D,
+        BattleFrontier_Lounge7_Text_26615F,
+        BattleFrontier_Lounge7_Text_266185,
+        BattleFrontier_Lounge7_Text_2661B5,
+        gText_Exit,
+    };
+
     if (a0 == 9 || a0 == 10)
     {
         FillWindowPixelRect(gUnknown_0203AB5E, 0x11, 0, 0, 96, 48);
@@ -3429,14 +3430,12 @@ void sub_813AF48(void)
     }
 }
 
-void task_deoxys_sound(u8 taskId);
-
 void sub_813AFC8(void)
 {
     CreateTask(task_deoxys_sound, 8);
 }
 
-const u16 gUnknown_085B3280[][16] = {
+static const u16 gUnknown_085B3280[][16] = {
     INCBIN_U16("graphics/misc/deoxys1.gbapal"),
     INCBIN_U16("graphics/misc/deoxys2.gbapal"),
     INCBIN_U16("graphics/misc/deoxys3.gbapal"),
@@ -3450,7 +3449,7 @@ const u16 gUnknown_085B3280[][16] = {
     INCBIN_U16("graphics/misc/deoxys11.gbapal"),
 };
 
-const u8 gUnknown_085B33E0[][2] = {
+static const u8 gUnknown_085B33E0[][2] = {
     { 0x0f, 0x0c },
     { 0x0b, 0x0e },
     { 0x0f, 0x08 },
@@ -3464,12 +3463,10 @@ const u8 gUnknown_085B33E0[][2] = {
     { 0x0f, 0x0a },
 };
 
-const u8 gUnknown_085B33F6[] = { 0x04, 0x08, 0x08, 0x08, 0x04, 0x04, 0x04, 0x06, 0x03, 0x03 };
-
-void sub_813B0B4(u8 a0);
-
-void task_deoxys_sound(u8 taskId)
+static void task_deoxys_sound(u8 taskId)
 {
+    static const u8 gUnknown_085B33F6[] = { 0x04, 0x08, 0x08, 0x08, 0x04, 0x04, 0x04, 0x06, 0x03, 0x03 };
+
     if (FlagGet(FLAG_0x8D4) == TRUE)
     {
         gSpecialVar_Result = 3;
@@ -3507,9 +3504,7 @@ void task_deoxys_sound(u8 taskId)
     }
 }
 
-void sub_813B160(u8 taskId);
-
-void sub_813B0B4(u8 a0)
+static void sub_813B0B4(u8 a0)
 {
     u8 eventObjectId;
     LoadPalette(&gUnknown_085B3280[a0], 0x1A0, 8);
@@ -3545,7 +3540,7 @@ void sub_813B0B4(u8 a0)
     Overworld_SetEventObjTemplateCoords(1, gUnknown_085B33E0[a0][0], gUnknown_085B33E0[a0][1]);
 }
 
-void sub_813B160(u8 taskId)
+static void sub_813B160(u8 taskId)
 {
     if (FieldEffectActiveListContains(FLDEFF_66) == FALSE)
     {
@@ -3570,8 +3565,6 @@ void increment_var_x4026_on_birth_island_modulo_100(void)
         }
     }
 }
-
-extern void BlendPalettes(u32, u8, u16);
 
 void sub_813B1D0(void)
 {
@@ -3656,10 +3649,10 @@ void sub_813B2E4(void)
     }
 }
 
-const u8 gUnknown_085B3400[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
-
 bool32 sub_813B374(void)
 {
+    static const u8 gUnknown_085B3400[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+
     u16 var = VarGet(VAR_0x4037);
 
     GetMapName(gStringVar1, gUnknown_085B3400[var - 1], 0);
@@ -3674,169 +3667,663 @@ bool32 sub_813B374(void)
     }
 }
 
-const u8 gUnknown_085B3410[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
-
-// last parts of switch statements insist on merging
-#ifdef NONMATCHING
 bool32 sub_813B3B0(void)
 {
+    static const u8 gUnknown_085B3410[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+
     u16 var1 = VarGet(VAR_0x4038);
     u16 var2 = VarGet(VAR_0x4037);
 
-    if (var2 != 0)
+    if (!var2)
     {
-        if (++var1 > 999)
-        {
-            VarSet(VAR_0x4038, 0);
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
-            {
-                switch (gSaveBlock1Ptr->location.mapNum)
-                {
-                    case MAP_NUM(UNDERWATER_MARINE_CAVE):
-                    case MAP_NUM(MARINE_CAVE_ENTRANCE):
-                    case MAP_NUM(MARINE_CAVE_END):
-                    case MAP_NUM(TERRA_CAVE_ENTRANCE):
-                    case MAP_NUM(TERRA_CAVE_END):
-                        VarSet(VAR_0x4039, 1);
-                        return FALSE;
-                    default:
-                        break;
-                }
-            }
-            
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER3))
-            {
-                switch (gSaveBlock1Ptr->location.mapNum)
-                {
-                    case MAP_NUM(UNDERWATER3):
-                    case MAP_NUM(UNDERWATER5):
-                    case MAP_NUM(UNDERWATER6):
-                    case MAP_NUM(UNDERWATER7):
-                        VarSet(VAR_0x4039, 1);
-                        return FALSE;
-                    default:
-                        break;
-                }
-            }
+        return FALSE;
+    }
 
-            if (gSaveBlock1Ptr->location.mapNum == gUnknown_085B3410[var2 - 1] &&
-                gSaveBlock1Ptr->location.mapGroup == 0)
+    if (++var1 > 999)
+    {
+        VarSet(VAR_0x4038, 0);
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
+        {
+            switch (gSaveBlock1Ptr->location.mapNum)
             {
-                return TRUE;
+                case MAP_NUM(UNDERWATER_MARINE_CAVE):
+                case MAP_NUM(MARINE_CAVE_ENTRANCE):
+                case MAP_NUM(MARINE_CAVE_END):
+                case MAP_NUM(TERRA_CAVE_ENTRANCE):
+                case MAP_NUM(TERRA_CAVE_END):
+                    VarSet(VAR_0x4039, 1);
+                    return FALSE;
+                default:
+                    break;
             }
-            else
+        }
+        
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER3))
+        {
+            switch (gSaveBlock1Ptr->location.mapNum)
             {
-                VarSet(VAR_0x4037, 0);
-                return FALSE;
+                case MAP_NUM(UNDERWATER3):
+                case MAP_NUM(UNDERWATER5):
+                case MAP_NUM(UNDERWATER6):
+                case MAP_NUM(UNDERWATER7):
+                    VarSet(VAR_0x4039, 1);
+                    return FALSE;
+                default:
+                    break;
             }
+        }
+
+        if (gSaveBlock1Ptr->location.mapNum == gUnknown_085B3410[var2 - 1] &&
+            gSaveBlock1Ptr->location.mapGroup == 0)
+        {
+            return TRUE;
         }
         else
         {
-            VarSet(VAR_0x4038, var1);
+            VarSet(VAR_0x4037, 0);
             return FALSE;
         }
     }
     else
     {
+        VarSet(VAR_0x4038, var1);
         return FALSE;
     }
 }
-#else
-NAKED
-bool32 sub_813B3B0(void)
+
+void sub_813B484(void)
 {
-    asm_unified("push {r4-r6,lr}\n\
-	ldr r5, =0x00004038\n\
-	adds r0, r5, 0\n\
-	bl VarGet\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	ldr r0, =0x00004037\n\
-	bl VarGet\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	cmp r6, 0\n\
-	beq _0813B47C\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	ldr r0, =0x000003e7\n\
-	cmp r4, r0\n\
-	bls _0813B474\n\
-	adds r0, r5, 0\n\
-	movs r1, 0\n\
-	bl VarSet\n\
-	ldr r0, =gSaveBlock1Ptr\n\
-	ldr r1, [r0]\n\
-	movs r0, 0x4\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r0, 0x18\n\
-	bne _0813B414\n\
-	movs r0, 0x5\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r0, 0x69\n\
-	bgt _0813B414\n\
-	cmp r0, 0x65\n\
-	blt _0813B414\n\
-	ldr r0, =0x00004039\n\
-	movs r1, 0x1\n\
-	b _0813B478\n\
-	.pool\n\
-_0813B414:\n\
-	ldr r0, =gSaveBlock1Ptr\n\
-	ldr r2, [r0]\n\
-	movs r1, 0x4\n\
-	ldrsb r1, [r2, r1]\n\
-	adds r3, r0, 0\n\
-	cmp r1, 0\n\
-	bne _0813B444\n\
-	movs r0, 0x5\n\
-	ldrsb r0, [r2, r0]\n\
-	cmp r0, 0x34\n\
-	beq _0813B436\n\
-	cmp r0, 0x34\n\
-	blt _0813B444\n\
-	cmp r0, 0x38\n\
-	bgt _0813B444\n\
-	cmp r0, 0x36\n\
-	blt _0813B444\n\
-_0813B436:\n\
-	ldr r0, =0x00004039\n\
-	movs r1, 0x1\n\
-	b _0813B478\n\
-	.pool\n\
-_0813B444:\n\
-	ldr r3, [r3]\n\
-	movs r2, 0x5\n\
-	ldrsb r2, [r3, r2]\n\
-	ldr r1, =gUnknown_085B3410\n\
-	subs r0, r6, 0x1\n\
-	adds r0, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r2, r0\n\
-	bne _0813B468\n\
-	movs r0, 0x4\n\
-	ldrsb r0, [r3, r0]\n\
-	cmp r0, 0\n\
-	bne _0813B468\n\
-	movs r0, 0x1\n\
-	b _0813B47E\n\
-	.pool\n\
-_0813B468:\n\
-	ldr r0, =0x00004037\n\
-	movs r1, 0\n\
-	b _0813B478\n\
-	.pool\n\
-_0813B474:\n\
-	adds r0, r5, 0\n\
-	adds r1, r4, 0\n\
-_0813B478:\n\
-	bl VarSet\n\
-_0813B47C:\n\
-	movs r0, 0\n\
-_0813B47E:\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1");
+    sub_80AB104(2);
 }
-#endif // NONMATCHING
+
+bool32 sub_813B490(void)
+{
+    static const u8 gUnknown_085B3420[][3] = {
+        { 0x02, 0x04, 0x01 },
+        { 0x04, 0x04, 0x01 },
+        { 0x05, 0x00, 0x01 },
+        { 0x06, 0x03, 0x01 },
+        { 0x08, 0x06, 0x01 },
+        { 0x09, 0x0d, 0x01 },
+        { 0x0a, 0x07, 0x01 },
+        { 0x0b, 0x07, 0x01 },
+        { 0x0c, 0x04, 0x01 },
+        { 0x0e, 0x05, 0x01 },
+        { 0x0f, 0x04, 0x01 },
+        { 0x1a, 0x37, 0x01 }
+    };
+
+    u8 i;
+    for (i = 0; i < 12; i++)
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == gUnknown_085B3420[i][0])
+        {
+            if (gSaveBlock1Ptr->location.mapNum == gUnknown_085B3420[i][1])
+            {
+                return gUnknown_085B3420[i][2];
+            }
+        }
+    }
+    return TRUE;
+}
+
+bool32 sub_813B4E0(void)
+{
+    int index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
+    if (index >= 0)
+    {
+        if (FlagGet(FLAG_MATCH_CALL_REGISTERED + index) == TRUE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 sub_813B514(void)
+{
+    if (!VarGet(VAR_0x403F))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_813B534(void)
+{
+    gUnknown_0203AB70 = gBattleTypeFlags;
+    gBattleTypeFlags = 0;
+    if (!gReceivedRemoteLinkPlayers)
+    {
+        CreateTask(sub_80B3AF8, 5);
+    }
+}
+
+void sub_813B568(void)
+{
+    CreateTask(sub_813B57C, 5);
+}
+
+static void sub_813B57C(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (!FuncIsActiveTask(sub_80B3AF8))
+            {
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_800A520() == TRUE)
+            {
+                if (GetMultiplayerId() == 0)
+                {
+                    gTasks[taskId].data[0]++;
+                }
+                else
+                {
+                    SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_0x8004, 2);
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            break;
+        case 2:
+            if ((GetBlockReceivedStatus() & 2) != 0)
+            {
+                if (GetMultiplayerId() == 0)
+                {
+                    gSpecialVar_0x8005 = gBlockRecvBuffer[1][0];
+                    ResetBlockReceivedFlag(1);
+                    if (gSpecialVar_0x8004 == 1 && gSpecialVar_0x8005 == 1)
+                    {
+                        gSpecialVar_Result = 1;
+                    }
+                    else if (gSpecialVar_0x8004 == 0 && gSpecialVar_0x8005 == 1)
+                    {
+                        gSpecialVar_Result = 2;
+                    }
+                    else if (gSpecialVar_0x8004 == 1 && gSpecialVar_0x8005 == 0)
+                    {
+                        gSpecialVar_Result = 3;
+                    }
+                    else
+                    {
+                        gSpecialVar_Result = 0;
+                    }
+                }
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 3:
+            if (sub_800A520() == TRUE)
+            {
+                if (GetMultiplayerId() != 0)
+                {
+                    gTasks[taskId].data[0]++;
+                }
+                else
+                {
+                    SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_Result, 2);
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            break;
+        case 4:
+            if ((GetBlockReceivedStatus() & 1) != 0)
+            {
+                if (GetMultiplayerId() != 0)
+                {
+                    gSpecialVar_Result = gBlockRecvBuffer[0][0];
+                    ResetBlockReceivedFlag(0);
+                    gTasks[taskId].data[0]++;
+                }
+                else
+                {
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            break;
+        case 5:
+            if (GetMultiplayerId() == 0)
+            {
+                if (gSpecialVar_Result == 2)
+                {
+                    ShowFieldAutoScrollMessage(gText_YourPartnerHasRetired);
+                }
+            }
+            else
+            {
+                if (gSpecialVar_Result == 3)
+                {
+                    ShowFieldAutoScrollMessage(gText_YourPartnerHasRetired);
+                }
+            }
+            gTasks[taskId].data[0]++;
+            break;
+        case 6:
+            if (!IsTextPrinterActive(0))
+            {
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 7:
+            if (sub_800A520() == 1)
+            {
+                sub_800ADF8();
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 8:
+            if (sub_800A520() == 1)
+            {
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 9:
+            if (gWirelessCommType == 0)
+            {
+                sub_800AC34();
+            }
+            gBattleTypeFlags = gUnknown_0203AB70;
+            EnableBothScriptContexts();
+            DestroyTask(taskId);
+            break;
+    }
+}
+
+void sub_813B7D8(void)
+{
+    if (gSpecialVar_0x8004 == 0)
+    {
+        DoRayquazaScene(0, TRUE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    }
+    else
+    {
+        DoRayquazaScene(1, FALSE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    }
+}
+
+void sub_813B80C(void)
+{
+    CreateTask(sub_813B824, 8);
+    PlaySE(SE_W017);
+}
+
+static void sub_813B824(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    data[1]++;
+    if (data[1] == gSpecialVar_0x8005)
+    {
+        data[0]++;
+        data[1] = 0;
+        PlaySE(SE_W017);
+    }
+
+    if (data[0] == gSpecialVar_0x8004 - 1)
+    {
+        DestroyTask(taskId);
+    }
+}
+
+void sub_813B880(void)
+{
+    u8 taskId = CreateTask(_fwalk, 8);
+    gTasks[taskId].data[0] = 4;
+    gTasks[taskId].data[1] = 4;
+    gTasks[taskId].data[2] = 4;
+    gTasks[taskId].data[3] = 0;
+}
+
+static void _fwalk(u8 taskId)
+{
+    u8 x, y;
+    s16 *data = gTasks[taskId].data;
+
+    data[data[3]]--;
+    if (data[data[3]] == 0)
+    {
+        for (y = 0; y < 4; y++)
+        {
+            for (x = 0; x < 3; x++)
+            {
+                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + 6, gSaveBlock1Ptr->pos.y + y + 4, x + 0x201 + y * 8 + data[3] * 32);
+            }
+        }
+        DrawWholeMapView();
+        data[3]++;
+        if (data[3] == 3)
+        {
+            DestroyTask(taskId);
+            EnableBothScriptContexts();
+        }
+    }
+}
+
+void sub_813B968(void)
+{
+    gSpecialVar_Result = gSpecialVar_0x8004 / 7;
+    gSpecialVar_Result -= (gSpecialVar_Result / 20) * 20;
+}
+
+void sub_813B9A0(void)
+{
+    if (gSaveBlock1Ptr->lastHealLocation.mapGroup == MAP_GROUP(DEWFORD_TOWN) && gSaveBlock1Ptr->lastHealLocation.mapNum == MAP_NUM(DEWFORD_TOWN))
+    {
+        Overworld_SetHealLocationWarp(3);
+    }
+}
+
+bool32 sub_813B9C0(void)
+{
+    static const u16 gUnknown_085B3444[] = {
+        MAP_OLDALE_TOWN_POKEMON_CENTER_1F,
+        MAP_DEWFORD_TOWN_POKEMON_CENTER_1F,
+        MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F,
+        MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F,
+        MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F,
+        MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F,
+        MAP_PETALBURG_CITY_POKEMON_CENTER_1F,
+        MAP_SLATEPORT_CITY_POKEMON_CENTER_1F,
+        MAP_MAUVILLE_CITY_POKEMON_CENTER_1F,
+        MAP_RUSTBORO_CITY_POKEMON_CENTER_1F,
+        MAP_FORTREE_CITY_POKEMON_CENTER_1F,
+        MAP_LILYCOVE_CITY_POKEMON_CENTER_1F,
+        MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F,
+        MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F,
+        MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F,
+        MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,
+        MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
+        MAP_SINGLE_BATTLE_COLOSSEUM,
+        MAP_TRADE_CENTER,
+        MAP_RECORD_CORNER,
+        MAP_DOUBLE_BATTLE_COLOSSEUM,
+        0xffff
+    };
+
+    int i;
+    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
+
+    for (i = 0; gUnknown_085B3444[i] != 0xFFFF; i++)
+    {
+        if (gUnknown_085B3444[i] == map)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void ResetFanClub(void)
+{
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = 0;
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = 0;
+}
+
+void sub_813BA30(void)
+{
+    if (sub_813BF44() != 0)
+    {
+        UpdateMovedLilycoveFanClubMembers();
+        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+    }
+}
+
+void sub_813BA60(void)
+{
+    if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1))
+    {
+        sub_813BF60();
+        sub_813BD84();
+        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+        FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
+        FlagClear(FLAG_HIDE_FANCLUB_BOY);
+        FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
+        FlagClear(FLAG_HIDE_FANCLUB_LADY);
+        FlagClear(FLAG_0x2DA);
+        VarSet(VAR_LILYCOVE_FAN_CLUB_STATE, 1);
+    }
+}
+
+u8 sub_813BADC(u8 a0)
+{
+    static const u8 gUnknown_085B3470[] = { 0x02, 0x01, 0x02, 0x01 };
+
+    if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
+    {
+        if ((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7F) + gUnknown_085B3470[a0] > 19)
+        {
+            if (GetNumMovedLilycoveFanClubMembers() < 3)
+            {
+                sub_813BB74();
+                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] &= 0xFF80;
+            }
+            else
+            {
+                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0xFF80) | 0x14;
+            }
+        }
+        else
+        {
+            gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] += gUnknown_085B3470[a0];
+        }
+    }
+
+    return gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7F;
+}
+
+static u16 sub_813BB74(void)
+{
+    static const u8 gUnknown_085B3474[] = { 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+
+    u8 i;
+    u8 retVal = 0;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B3474[i]) & 1))
+        {
+            retVal = i;
+            if ((Random() & 1) != 0)
+            {
+                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 1 << gUnknown_085B3474[retVal];
+                return retVal;
+            }
+        }
+    }
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 1 << gUnknown_085B3474[retVal];
+    return retVal;
+}
+
+static u16 sub_813BC00(void)
+{
+    static const u8 gUnknown_085B347C[] = { 0x08, 0x0d, 0x0e, 0x0b, 0x0a, 0x0c, 0x0f, 0x09 };
+
+    u8 i;
+    u8 retVal = 0;
+
+    if (GetNumMovedLilycoveFanClubMembers() == 1)
+    {
+        return 0;
+    }
+
+    for (i = 0; i < 8; i++)
+    {
+        if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B347C[i]) & 1) != 0)
+        {
+            retVal = i;
+            if ((Random() & 1) != 0)
+            {
+                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= 1 << gUnknown_085B347C[retVal];
+                return retVal;
+            }
+        }
+    }
+    
+    if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B347C[retVal]) & 1))
+    {
+        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= 1 << gUnknown_085B347C[retVal];
+    }
+
+    return retVal;
+}
+
+u16 GetNumMovedLilycoveFanClubMembers(void)
+{
+    u8 i;
+    u8 retVal = 0;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> (i + 8)) & 1) != 0)
+        {
+            retVal++;
+        }
+    }
+
+    return retVal;
+}
+
+void UpdateMovedLilycoveFanClubMembers(void)
+{
+    u8 i = 0;
+    if (gSaveBlock2Ptr->playTimeHours < 999)
+    {
+        while (TRUE)
+        {
+            if (GetNumMovedLilycoveFanClubMembers() < 5)
+            {
+                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+                break;
+            }
+            else if (i == 8)
+            {
+                break;
+            }
+            else if (gSaveBlock2Ptr->playTimeHours - gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] < 12)
+            {
+                return;
+            }
+            sub_813BC00();
+            gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] += 12;
+            i++;
+        }
+    }
+}
+
+bool8 ShouldMoveLilycoveFanClubMember(void)
+{
+    return (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gSpecialVar_0x8004) & 1;
+}
+
+static void sub_813BD84(void)
+{
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x2000;
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x100;
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x400;
+}
+
+void BufferStreakTrainerText(void)
+{
+    u8 a = 0;
+    u8 b = 0;
+    switch (gSpecialVar_0x8004)
+    {
+        case 8:
+            break;
+        case 9:
+            break;
+        case 10:
+            a = 0;
+            b = 3;
+            break;
+        case 11:
+            a = 0;
+            b = 1;
+            break;
+        case 12:
+            a = 1;
+            b = 0;
+            break;
+        case 13:
+            a = 0;
+            b = 4;
+            break;
+        case 14:
+            a = 1;
+            b = 5;
+            break;
+        case 15:
+            break;
+    }
+    sub_813BE30(&gSaveBlock1Ptr->linkBattleRecords, a, b);
+}
+
+static void sub_813BE30(struct LinkBattleRecords *linkRecords, u8 a, u8 b)
+{
+    struct LinkBattleRecord *record = &linkRecords->entries[a];
+    if (record->name[0] == EOS)
+    {
+        switch (b)
+        {
+            case 0:
+                StringCopy(gStringVar1, gText_Wallace);
+                break;
+            case 1:
+                StringCopy(gStringVar1, gText_Steven);
+                break;
+            case 2:
+                StringCopy(gStringVar1, gText_Brawly);
+                break;
+            case 3:
+                StringCopy(gStringVar1, gText_Winona);
+                break;
+            case 4:
+                StringCopy(gStringVar1, gText_Phoebe);
+                break;
+            case 5:
+                StringCopy(gStringVar1, gText_Glacia);
+                break;
+            default:
+                StringCopy(gStringVar1, gText_Wallace);
+                break;
+        }
+    }
+    else
+    {
+        StringCopyN(gStringVar1, record->name, 7);
+        gStringVar1[7] = EOS;
+        ConvertInternationalString(gStringVar1, linkRecords->languages[a]);
+    }
+}
+
+void sub_813BF10(void)
+{
+    if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
+    {
+        sub_813BA30();
+        if (gBattleOutcome == 1)
+        {
+            sub_813BB74();
+        }
+        else
+        {
+            sub_813BC00();
+        }
+    }
+}
+
+static bool8 sub_813BF44(void)
+{
+    return (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1;
+}
+
+void sub_813BF60(void)
+{
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x80;
+}
+
+u8 sub_813BF7C(void)
+{
+    return sub_813BADC(gSpecialVar_0x8004);
+}
