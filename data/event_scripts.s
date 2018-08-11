@@ -5,6 +5,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/vars.h"
+#include "constants/heal_locations.h"
 #include "constants/trainers.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
@@ -3346,7 +3347,7 @@ EventScript_2736D9:: @ 82736D9
 	end
 
 EventScript_2736F4:: @ 82736F4
-	setrespawn 16
+	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
 	return
 
 EventScript_2736F8:: @ 82736F8

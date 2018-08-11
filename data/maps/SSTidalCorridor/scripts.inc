@@ -123,7 +123,7 @@ SSTidalCorridor_EventScript_23C119:: @ 823C119
 	end
 
 SSTidalCorridor_EventScript_23C13B:: @ 823C13B
-	setrespawn 8
+	setrespawn HEAL_LOCATION_LILYCOVE_CITY
 	msgbox SSTidalCorridor_Text_23C64F, 4
 	checkflag FLAG_0x104
 	call_if 1, SSTidalCorridor_EventScript_23C179
@@ -133,7 +133,7 @@ SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 	end
 
 SSTidalCorridor_EventScript_23C15A:: @ 823C15A
-	setrespawn 4
+	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	msgbox SSTidalCorridor_Text_23C64F, 4
 	checkflag FLAG_0x104
 	call_if 1, SSTidalCorridor_EventScript_23C179
