@@ -45,8 +45,8 @@ Route110_MapWarps: @ 8529050
 	warp_def 19, 88, 0, 2, MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE
 
 Route110_MapCoordEvents: @ 8529080
-	coord_event 28, 92, 3, VAR_0x40A9, 2, Route110_EventScript_1EF661
-	coord_event 29, 92, 3, VAR_0x40A9, 2, Route110_EventScript_1EF661
+	coord_event 28, 92, 3, VAR_CYCLING_CHALLENGE_STATE, 2, Route110_EventScript_1EF661
+	coord_event 29, 92, 3, VAR_CYCLING_CHALLENGE_STATE, 2, Route110_EventScript_1EF661
 	coord_event 33, 56, 3, VAR_0x4069, 0, Route110_EventScript_1EF74D
 	coord_event 34, 56, 3, VAR_0x4069, 0, Route110_EventScript_1EF758
 	coord_event 35, 56, 3, VAR_0x4069, 0, Route110_EventScript_1EF763

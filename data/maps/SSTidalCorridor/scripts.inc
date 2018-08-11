@@ -4,15 +4,15 @@ SSTidalCorridor_MapScripts:: @ 823BFCF
 
 SSTidalCorridor_MapScript2_23BFD5: @ 823BFD5
 	map_script_2 VAR_0x40D4, 0, SSTidalCorridor_EventScript_23C219
-	map_script_2 VAR_PORTHOLE, 1, SSTidalCorridor_EventScript_23BFFF
-	map_script_2 VAR_PORTHOLE, 5, SSTidalCorridor_EventScript_23C015
-	map_script_2 VAR_PORTHOLE, 9, SSTidalCorridor_EventScript_23C067
-	map_script_2 VAR_PORTHOLE, 10, SSTidalCorridor_EventScript_23C07D
+	map_script_2 VAR_PORTHOLE_STATE, 1, SSTidalCorridor_EventScript_23BFFF
+	map_script_2 VAR_PORTHOLE_STATE, 5, SSTidalCorridor_EventScript_23C015
+	map_script_2 VAR_PORTHOLE_STATE, 9, SSTidalCorridor_EventScript_23C067
+	map_script_2 VAR_PORTHOLE_STATE, 10, SSTidalCorridor_EventScript_23C07D
 	.2byte 0
 
 SSTidalCorridor_EventScript_23BFFF:: @ 823BFFF
 	special SetSSTidalFlag
-	setvar VAR_PORTHOLE, 2
+	setvar VAR_PORTHOLE_STATE, 2
 	lockall
 	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_23C462, 4
@@ -20,7 +20,7 @@ SSTidalCorridor_EventScript_23BFFF:: @ 823BFFF
 	end
 
 SSTidalCorridor_EventScript_23C015:: @ 823C015
-	setvar VAR_PORTHOLE, 6
+	setvar VAR_PORTHOLE_STATE, 6
 	lockall
 	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_23C4E3, 4
@@ -29,28 +29,28 @@ SSTidalCorridor_EventScript_23C015:: @ 823C015
 
 SSTidalRooms_EventScript_23C028:: @ 823C028
 	special SetSSTidalFlag
-	setvar VAR_PORTHOLE, 7
+	setvar VAR_PORTHOLE_STATE, 7
 	playse SE_PINPON
 	msgbox SSTidalRooms_Text_23C462, 4
 	return
 
 SSTidalRooms_EventScript_23C03C:: @ 823C03C
 	special ResetSSTidalFlag
-	setvar VAR_PORTHOLE, 4
+	setvar VAR_PORTHOLE_STATE, 4
 	playse SE_PINPON
 	msgbox SSTidalRooms_Text_23C553, 4
 	return
 
 SSTidalCorridor_EventScript_23C050:: @ 823C050
-	compare VAR_PORTHOLE, 2
+	compare VAR_PORTHOLE_STATE, 2
 	goto_eq SSTidalCorridor_EventScript_23C067
-	compare VAR_PORTHOLE, 7
+	compare VAR_PORTHOLE_STATE, 7
 	goto_eq SSTidalCorridor_EventScript_23C07D
 	end
 
 SSTidalCorridor_EventScript_23C067:: @ 823C067
 	special ResetSSTidalFlag
-	setvar VAR_PORTHOLE, 3
+	setvar VAR_PORTHOLE_STATE, 3
 	lockall
 	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_23C4E3, 4
@@ -59,7 +59,7 @@ SSTidalCorridor_EventScript_23C067:: @ 823C067
 
 SSTidalCorridor_EventScript_23C07D:: @ 823C07D
 	special ResetSSTidalFlag
-	setvar VAR_PORTHOLE, 8
+	setvar VAR_PORTHOLE_STATE, 8
 	lockall
 	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_23C50F, 4
@@ -68,13 +68,13 @@ SSTidalCorridor_EventScript_23C07D:: @ 823C07D
 
 SSTidalRooms_EventScript_23C093:: @ 823C093
 	special ResetSSTidalFlag
-	setvar VAR_PORTHOLE, 8
+	setvar VAR_PORTHOLE_STATE, 8
 	playse SE_PINPON
 	msgbox SSTidalRooms_Text_23C50F, 4
 	return
 
 SSTidalRooms_EventScript_23C0A7:: @ 823C0A7
-	switch VAR_PORTHOLE
+	switch VAR_PORTHOLE_STATE
 	case 2, SSTidalRooms_EventScript_23C03C
 	case 3, SSTidalRooms_EventScript_23C03C
 	case 6, SSTidalRooms_EventScript_23C028
@@ -114,9 +114,9 @@ SSTidalCorridor_EventScript_23C110:: @ 823C110
 SSTidalCorridor_EventScript_23C119:: @ 823C119
 	lock
 	faceplayer
-	compare VAR_PORTHOLE, 4
+	compare VAR_PORTHOLE_STATE, 4
 	goto_eq SSTidalCorridor_EventScript_23C13B
-	compare VAR_PORTHOLE, 8
+	compare VAR_PORTHOLE_STATE, 8
 	goto_eq SSTidalCorridor_EventScript_23C15A
 	msgbox SSTidalCorridor_Text_23C596, 4
 	release
@@ -148,9 +148,9 @@ SSTidalCorridor_EventScript_23C179:: @ 823C179
 
 SSTidalCorridor_EventScript_23C17D:: @ 823C17D
 	lockall
-	compare VAR_PORTHOLE, 2
+	compare VAR_PORTHOLE_STATE, 2
 	goto_eq SSTidalCorridor_EventScript_23C19E
-	compare VAR_PORTHOLE, 7
+	compare VAR_PORTHOLE_STATE, 7
 	goto_eq SSTidalCorridor_EventScript_23C19E
 	msgbox SSTidalCorridor_Text_23C6C3, 4
 	releaseall

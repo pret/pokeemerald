@@ -74,7 +74,10 @@ enum FieldEffectScriptIdx
     FLDEFF_USE_FLY_ANCIENT_TOMB,
     FLDEFF_PCTURN_ON,
     FLDEFF_HALL_OF_FAME_RECORD,
-    FLDEFF_USE_TELEPORT
+    FLDEFF_USE_TELEPORT,
+    FLDEFF_64,
+    FLDEFF_65,
+    FLDEFF_66,
 };
 
 extern s32 gFieldEffectArguments[8];

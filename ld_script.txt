@@ -180,7 +180,7 @@ SECTIONS {
         src/time_events.o(.text);
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
-        asm/field_specials.o(.text);
+        src/field_specials.o(.text);
         src/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
@@ -469,7 +469,7 @@ SECTIONS {
         src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
-        data/field_specials.o(.rodata);
+        src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);

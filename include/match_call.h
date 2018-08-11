@@ -10,4 +10,6 @@ enum {
     MATCH_CALL_TYPE_GYMLEADER_ELITEFOUR
 };
 
+s32 GetRematchIdxByTrainerIdx(s32 trainerIdx);
+
 #endif //GUARD_MATCH_CALL_H

@@ -11843,7 +11843,7 @@ sub_81A0784: @ 81A0784
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_8198A50
+	bl CreateWindowTemplate
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]

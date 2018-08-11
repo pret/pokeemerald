@@ -10,7 +10,7 @@ SkyPillar_Top_MapScript1_2396C8: @ 82396C8
 	end
 
 SkyPillar_Top_EventScript_2396D2:: @ 82396D2
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, SkyPillar_Top_EventScript_27374E
 	removeobject VAR_LAST_TALKED
@@ -56,7 +56,7 @@ SkyPillar_Top_EventScript_239722:: @ 8239722
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq SkyPillar_Top_EventScript_239768
 	compare VAR_RESULT, 4

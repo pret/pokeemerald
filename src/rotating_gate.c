@@ -189,12 +189,6 @@ struct RotatingGatePuzzle
     u8 orientation;
 };
 
-struct Coords8
-{
-    s8 deltaX;
-    s8 deltaY;
-};
-
 // .rodata
 // Fortree
 static const struct RotatingGatePuzzle sRotatingGate_FortreePuzzleConfig[] =

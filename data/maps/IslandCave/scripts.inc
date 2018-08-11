@@ -10,7 +10,7 @@ IslandCave_MapScript1_238E3A: @ 8238E3A
 	end
 
 IslandCave_EventScript_238E44:: @ 8238E44
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, IslandCave_EventScript_27374E
 	removeobject VAR_LAST_TALKED
@@ -107,7 +107,7 @@ IslandCave_EventScript_238F58:: @ 8238F58
 	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq IslandCave_EventScript_238F9F
 	compare VAR_RESULT, 4

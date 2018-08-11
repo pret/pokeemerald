@@ -48,5 +48,6 @@ void PutPokemonTodayCaughtOnAir(void);
 void TV_PutSecretBaseVisitOnTheAir(void);
 void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent);
 void UpdateTVScreensOnMap(int, int);
+void TV_PrintIntToStringVar(u8 varIdx, int value);
 
 #endif //GUARD_TV_H

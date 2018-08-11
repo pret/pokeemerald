@@ -50,7 +50,7 @@ TrainerHill_Elevator_EventScript_2693D4:: @ 82693D4
 
 TrainerHill_Elevator_EventScript_2693D9:: @ 82693D9
 	waitse
-	special sub_8139A78
+	special ShakeScreenInElevator
 	waitstate
 	return
 

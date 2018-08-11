@@ -8,5 +8,6 @@
 // Exported ROM declarations
 
 void sub_8018438(void);
+u16 mevent_081445C0(u8);
 
 #endif //GUARD_rom_8011DC0_H
