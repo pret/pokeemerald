@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 86181C1
-	.include "data/text/move_descriptions.inc"
-
 @ 861CAAC
 	.include "data/text/nature_names.inc"
 
