@@ -1241,11 +1241,11 @@ gUnknown_08C17980:: @ 8C17980
 	.incbin "graphics/unknown/unknown_C17980.bin.lz"
 
 	.align 2
-gUnknown_08C17AB0:: @ 8C17AB0
+gContestMiscGfx:: @ 8C17AB0
 	.incbin "graphics/contest/misc.4bpp.lz"
 
 	.align 2
-gUnknown_08C1850C:: @ 8C1850C
+gContestAudienceGfx:: @ 8C1850C
 	.incbin "graphics/contest/audience.4bpp.lz"
 
 	.align 2

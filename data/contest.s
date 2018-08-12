@@ -352,7 +352,7 @@ gUnknown_08587FA4:: @ 8587FA4
 	
 
 	.align 2
-gUnknown_085880A4:: @ 85880A4
+gContestOpponents:: @ 85880A4
 	.include "data/contest_opponents.inc"
 
 gUnknown_085898A4:: @ 85898A4
