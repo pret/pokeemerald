@@ -31,7 +31,7 @@ LDFLAGS = -Map ../../$(MAP)
 
 LIB := -L ../../tools/agbcc/lib -lgcc -lc
 
-SHA1SUM := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
+SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := tools/gbagfx/gbagfx
 AIF := tools/aif2pcm/aif2pcm
 MID := $(abspath tools/mid2agb/mid2agb)
