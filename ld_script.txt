@@ -92,6 +92,7 @@ SECTIONS {
         src/metatile_behavior.o(.text);
         src/field_camera.o(.text);
         src/field_door.o(.text);
+        src/field_player_avatar.o(.text);
         asm/field_player_avatar.o(.text);
         src/event_object_movement.o(.text);
         src/field_message_box.o(.text);
@@ -135,6 +136,7 @@ SECTIONS {
         src/item_menu_icons.o(.text);
         asm/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
+        src/contest.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
@@ -157,6 +159,7 @@ SECTIONS {
         src/item_use.o(.text);
         asm/battle_anim_80FE840.o(.text);
         src/bike.o(.text);
+        src/easy_chat.o(.text);
         asm/easy_chat.o(.text);
         src/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
@@ -167,6 +170,7 @@ SECTIONS {
         src/region_map.o(.text);
         asm/cute_sketch.o(.text);
         src/decoration.o(.text);
+        src/slot_machine.o(.text);
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
@@ -180,7 +184,7 @@ SECTIONS {
         src/time_events.o(.text);
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
-        asm/field_specials.o(.text);
+        src/field_specials.o(.text);
         src/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
@@ -400,6 +404,7 @@ SECTIONS {
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
         src/field_door.o(.rodata);
+        src/field_player_avatar.o(.rodata);
         data/field_player_avatar.o(.rodata);
         src/event_object_movement.o(.rodata);
         src/text_window.o(.rodata);
@@ -461,6 +466,7 @@ SECTIONS {
         src/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/decoration.o(.rodata);
+        src/slot_machine.o(.rodata);
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
@@ -470,7 +476,7 @@ SECTIONS {
         src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
-        data/field_specials.o(.rodata);
+        src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);

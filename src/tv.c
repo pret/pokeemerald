@@ -1448,8 +1448,8 @@ void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1)
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
-        show->contestLiveUpdates.winningSpecies = gUnknown_02039E00[a1].unk_00;
-        StringCopy(show->contestLiveUpdates.winningTrainerName, gUnknown_02039E00[a1].unk_0d);
+        show->contestLiveUpdates.winningSpecies = gContestMons[a1].species;
+        StringCopy(show->contestLiveUpdates.winningTrainerName, gContestMons[a1].trainerName);
         StripExtCtrlCodes(show->contestLiveUpdates.winningTrainerName);
         show->contestLiveUpdates.appealFlags2 = a0;
         if (a1 + 1 > gUnknown_02039F30)

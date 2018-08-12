@@ -3,14 +3,14 @@ Route110_SeasideCyclingRoadSouthEntrance_MapScripts:: @ 826EBA1
 	.byte 0
 
 Route110_SeasideCyclingRoadSouthEntrance_MapScript1_26EBA7: @ 826EBA7
-	compare VAR_0x40A9, 3
+	compare VAR_CYCLING_CHALLENGE_STATE, 3
 	call_if 1, Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE
-	compare VAR_0x40A9, 2
+	compare VAR_CYCLING_CHALLENGE_STATE, 2
 	call_if 1, Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE
 	end
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE:: @ 826EBBE
-	setvar VAR_0x40A9, 1
+	setvar VAR_CYCLING_CHALLENGE_STATE, 1
 	return
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBC4:: @ 826EBC4
@@ -33,7 +33,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBD0:: @ 826EBD0
 	end
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBF6:: @ 826EBF6
-	setvar VAR_0x40A9, 1
+	setvar VAR_CYCLING_CHALLENGE_STATE, 1
 	return
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBFC:: @ 826EBFC
@@ -50,7 +50,7 @@ Route110_SeasideCyclingRoadSouthEntrance_Movement_26EC11: @ 826EC11
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EC13:: @ 826EC13
 	lockall
-	setvar VAR_0x40A9, 0
+	setvar VAR_CYCLING_CHALLENGE_STATE, 0
 	clearflag FLAG_SYS_CYCLING_ROAD
 	setvar VAR_TEMP_1, 0
 	releaseall

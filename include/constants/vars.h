@@ -49,13 +49,13 @@
 #define VAR_RECYCLE_GOODS          0x4020
 #define VAR_REPEL_STEP_COUNT       0x4021
 #define VAR_ICE_STEP_COUNT         0x4022
-#define VAR_FIRST_POKE             0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
+#define VAR_STARTER_MON            0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
 #define VAR_MIRAGE_RND_H           0x4024
 #define VAR_MIRAGE_RND_L           0x4025
 #define VAR_SECRET_BASE_MAP        0x4026
-#define VAR_0x4027                 0x4027
-#define VAR_0x4028                 0x4028
-#define VAR_0x4029                 0x4029
+#define VAR_CYCLING_ROAD_RECORD_COLLISIONS                 0x4027
+#define VAR_CYCLING_ROAD_RECORD_TIME_L                 0x4028
+#define VAR_CYCLING_ROAD_RECORD_TIME_H                 0x4029
 #define VAR_HAPPINESS_STEP_COUNTER 0x402A
 #define VAR_POISON_STEP_COUNTER    0x402B
 #define VAR_RESET_RTC_ENABLE       0x402C
@@ -81,8 +81,8 @@
 #define VAR_ALTERING_CAVE_WILD_SET 0x403E
 #define VAR_0x403F                 0x403F
 #define VAR_DAYS                   0x4040
-#define VAR_0x4041                 0x4041
-#define VAR_0x4042                 0x4042
+#define VAR_FANCLUB_UNKNOWN_1                 0x4041
+#define VAR_FANCLUB_UNKNOWN_2                 0x4042
 #define VAR_DEPT_STORE_FLOOR       0x4043
 #define VAR_0x4044                 0x4044
 #define VAR_POKELOT_PRIZE          0x4045
@@ -165,12 +165,12 @@
 #define VAR_0x4092                 0x4092
 #define VAR_0x4093                 0x4093
 #define VAR_0x4094                 0x4094
-#define VAR_0x4095                 0x4095
+#define VAR_LILYCOVE_FAN_CLUB_STATE                 0x4095
 #define VAR_0x4096                 0x4096
 #define VAR_0x4097                 0x4097
 #define VAR_0x4098                 0x4098
 #define VAR_0x4099                 0x4099
-#define VAR_0x409A                 0x409A
+#define VAR_RUSTURF_TUNNEL_STATE                 0x409A
 #define VAR_0x409B                 0x409B
 #define VAR_0x409C                 0x409C
 #define VAR_0x409D                 0x409D
@@ -185,7 +185,7 @@
 #define VAR_0x40A6                 0x40A6
 #define VAR_0x40A7                 0x40A7
 #define VAR_0x40A8                 0x40A8
-#define VAR_0x40A9                 0x40A9
+#define VAR_CYCLING_CHALLENGE_STATE                 0x40A9
 #define VAR_0x40AA                 0x40AA
 #define VAR_0x40AB                 0x40AB
 #define VAR_0x40AC                 0x40AC
@@ -196,7 +196,7 @@
 #define VAR_0x40B1                 0x40B1
 #define VAR_0x40B2                 0x40B2
 #define VAR_WEATHER_INSTITUTE_STATE                 0x40B3
-#define VAR_PORTHOLE               0x40B4
+#define VAR_PORTHOLE_STATE               0x40B4
 #define VAR_0x40B5                 0x40B5
 #define VAR_0x40B6                 0x40B6
 #define VAR_0x40B7                 0x40B7
@@ -210,7 +210,7 @@
 #define VAR_0x40BF                 0x40BF
 #define VAR_0x40C0                 0x40C0
 #define VAR_0x40C1                 0x40C1
-#define VAR_0x40C2                 0x40C2
+#define VAR_PACIFIDLOG_TM_RECEIVED_DAY                 0x40C2
 #define VAR_0x40C3                 0x40C3
 #define VAR_0x40C4                 0x40C4
 #define VAR_0x40C5                 0x40C5
@@ -273,6 +273,7 @@
 #define VAR_0x40FE                 0x40FE
 #define VAR_0x40FF                 0x40FF
 
+#define SPECIAL_VARS_START 0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.
 #define VAR_0x8000                 0x8000

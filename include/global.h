@@ -169,6 +169,16 @@ enum
     OPTIONS_BATTLE_STYLE_SET
 };
 
+struct Coords8 {
+    s8 x;
+    s8 y;
+};
+
+struct UCoords8 {
+    u8 x;
+    u8 y;
+};
+
 struct Coords16
 {
     s16 x;
@@ -350,7 +360,8 @@ struct BattleFrontier
     /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
     /*0xCAA*/ u16 field_CAA[4];
     /*0xCB2*/ u16 field_CB2;
-    /*0xCB4*/ u16 field_CB4[30];
+    /*0xCB4*/ u16 field_CB4[22];
+    /*0xCE0*/ u16 field_CE0[4][2];
     /*0xCF0*/ u16 field_CF0[2];
     /*0xCF4*/ u16 field_CF4[2];
     /*0xCF8*/ u16 field_CF8[2];
@@ -361,24 +372,21 @@ struct BattleFrontier
     /*0xD09*/ u8 filler_D09;
     /*0xD0A*/ u8 filler_D0A;
     /*0xD0B*/ u8 filler_D0B;
-    /*0xD0C*/ u8 filler_D0C;
-    /*0xD0D*/ u8 filler_D0D;
-    /*0xD0E*/ u8 filler_D0E;
-    /*0xD0F*/ u8 filler_D0F;
+    /*0xD0C*/ u16 field_D0C[2];
     /*0xD10*/ u8 filler_D10;
     /*0xD11*/ u8 filler_D11;
     /*0xD12*/ u8 filler_D12;
     /*0xD13*/ u8 filler_D13;
     /*0xD14*/ u16 field_D14[2];
-    /*0xD18*/ u8 field_D18[0xB8];
+    /*0xD18*/ u8 field_D18[0xB0];
+    /*0xDC8*/ u16 field_DC8[2];
+    /*0xDCC*/ u8 filler_DCC[4];
     /*0xDD0*/ u16 field_DD0[2];
     /*0xDD4*/ u16 field_DD4[2];
     /*0xDD8*/ u16 field_DD8;
-    /*0xDDA*/ u16 field_DDA;
-    /*0xDDC*/ u16 field_DDC;
+    /*0xDDA*/ u16 field_DDA[2];
     /*0xDDE*/ u16 field_DDE[2];
-    /*0xDE2*/ u16 field_DE2;
-    /*0xDE4*/ u16 field_DE4;
+    /*0xDE2*/ u16 field_DE2[2];
     /*0xDE6*/ u16 field_DE6;
     /*0xDE8*/ u16 field_DE8;
     /*0xDEA*/ u16 field_DEA[2];
@@ -393,11 +401,9 @@ struct BattleFrontier
     /*0xDFE*/ u16 field_DFE;
     /*0xE00*/ u16 field_E00;
     /*0xE02*/ u16 field_E02;
-    /*0xE04*/ u16 field_E04;
-    /*0xE06*/ u16 field_E06;
+    /*0xE04*/ u16 field_E04[2];
     /*0xE08*/ u16 field_E08[9];
-    /*0xE1A*/ u16 field_E1A;
-    /*0xE1C*/ u16 field_E1C;
+    /*0xE1A*/ u16 field_E1A[2];
     /*0xE1E*/ u16 field_E1E[7];
     /*0xE2C*/ struct PyramidBag pyramidBag;
     /*0xE58*/ u16 field_E58;
@@ -761,7 +767,7 @@ struct LilycoveLadyContest
     /*0x00e*/ u8 language;
 };
 
-typedef union
+typedef union // 3b58
 {
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavour favour;

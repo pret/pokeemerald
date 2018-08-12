@@ -1585,7 +1585,7 @@ sub_81C7E58: @ 81C7E58
 	adds r0, r4, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r4, =0x0201c000
+	ldr r4, =gDecompressionBuffer
 	mov r0, r8
 	adds r1, r4, 0
 	bl LZ77UnCompWram
@@ -1667,7 +1667,7 @@ sub_81C7F24: @ 81C7F24
 	adds r0, r4, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r4, =0x0201d000
+	ldr r4, =gDecompressionBuffer+0x1000
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl LZ77UnCompWram
@@ -27034,7 +27034,7 @@ _081D4E1C:
 	thumb_func_start sub_81D4E30
 sub_81D4E30: @ 81D4E30
 	push {lr}
-	ldr r0, =0x0201c000
+	ldr r0, =gDecompressionBuffer
 	movs r2, 0x80
 	lsls r2, 6
 	movs r1, 0
@@ -27655,7 +27655,7 @@ _081D5386:
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D5390:
-	ldr r0, =0x0201c000
+	ldr r0, =gDecompressionBuffer
 	bl sub_81D3920
 	strb r0, [r4, 0xE]
 	ldrb r0, [r4, 0xE]
@@ -27681,7 +27681,7 @@ _081D53C0:
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D53C6:
-	ldr r0, =0x0201c000
+	ldr r0, =gDecompressionBuffer
 	bl sub_81D3AB0
 	cmp r0, 0
 	beq _081D53EC

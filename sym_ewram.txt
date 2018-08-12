@@ -382,61 +382,9 @@ gUnknown_02039D8C: @ 2039D8C
 	.include "src/fldeff_cut.o"
 	.include "src/map_name_popup.o"
 	.include "src/item.o"
+	.include "src/contest.o"
 
-gUnknown_02039E00: @ 2039E00
-	.space 0x100
-
-gUnknown_02039F00: @ 2039F00
-	.space 0x8
-
-gUnknown_02039F08: @ 2039F08
-	.space 0x8
-
-gUnknown_02039F10: @ 2039F10
-	.space 0x8
-
-gUnknown_02039F18: @ 2039F18
-	.space 0x8
-
-gUnknown_02039F20: @ 2039F20
-	.space 0x4
-
-gUnknown_02039F24: @ 2039F24
-	.space 0x1
-
-gUnknown_02039F25: @ 2039F25
-	.space 0x1
-
-gUnknown_02039F26: @ 2039F26
-	.space 0x4
-
-gUnknown_02039F2A: @ 2039F2A
-	.space 0x1
-
-gUnknown_02039F2B: @ 2039F2B
-	.space 0x1
-
-gSpecialVar_ContestCategory: @ 2039F2C
-	.space 0x2
-
-gSpecialVar_ContestRank: @ 2039F2E
-	.space 0x2
-
-gUnknown_02039F30: @ 2039F30
-	.space 0x1
-
-gUnknown_02039F31: @ 2039F31
-	.space 0x3
-
-gContestResources: @ 2039F34
-	.space 0x4
-
-gUnknown_02039F38: @ 2039F38
-	.space 0x4
-
-gUnknown_02039F3C: @ 2039F3C
-	.space 0x20
-
+	.align 2
 gUnknown_02039F5C: @ 2039F5C
 	.space 0x1
 
@@ -593,7 +541,7 @@ gUnknown_0203AB2C: @ 203AB2C
 gUnknown_0203AB30: @ 203AB30
 	.space 0x4
 
-gUnknown_0203AB34: @ 203AB34
+sSlotMachine: @ 203AB34
 	.space 0x4
 
     .include "src/battle_ai_script_commands.o"
@@ -603,55 +551,7 @@ gPlayerFacingPosition: @ 203AB40
 	.space 0x8
 	
 	.include "src/pokeblock.o"
-
-gBikeCyclingChallenge: @ 203AB54
-	.space 0x1
-
-gBikeCollisions: @ 203AB55
-	.space 0x3
-
-gUnknown_0203AB58: @ 203AB58
-	.space 0x4
-
-gUnknown_0203AB5C: @ 203AB5C
-	.space 0x1
-
-gUnknown_0203AB5D: @ 203AB5D
-	.space 0x1
-
-gUnknown_0203AB5E: @ 203AB5E
-	.space 0x2
-
-gUnknown_0203AB60: @ 203AB60
-	.space 0x2
-
-gUnknown_0203AB62: @ 203AB62
-	.space 0x2
-
-gUnknown_0203AB64: @ 203AB64
-	.space 0x4
-
-gUnknown_0203AB68: @ 203AB68
-	.space 0x2
-
-gUnknown_0203AB6A: @ 203AB6A
-	.space 0x2
-
-gUnknown_0203AB6C: @ 203AB6C
-	.space 0x1
-
-gUnknown_0203AB6D: @ 203AB6D
-	.space 0x1
-
-gUnknown_0203AB6E: @ 203AB6E
-	.space 0x1
-
-gUnknown_0203AB6F: @ 203AB6F
-	.space 0x1
-
-gUnknown_0203AB70: @ 203AB70
-	.space 0x4
-
+	.include "src/field_specials.o"
     .include "src/battle_records.o"
 
 gUnknown_0203AB7C: @ 203AB7C

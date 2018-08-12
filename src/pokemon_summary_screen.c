@@ -29,6 +29,7 @@
 #include "daycare.h"
 #include "data2.h"
 #include "contest.h"
+#include "contest_effect.h"
 
 extern struct UnkSummaryStruct* gUnknown_0203CF1C;
 extern struct BgTemplate gUnknown_0861CBB4;
@@ -41,7 +42,6 @@ extern struct UnkStruct_61CC04 gUnknown_0861CC10;
 extern struct UnkStruct_61CC04 gUnknown_0861CBEC;
 extern struct UnkStruct_61CC04 gUnknown_0861CBF8;
 extern u16 gSummaryScreenWindow_Tilemap[];
-extern struct ContestMove gContestMoves[];
 extern struct ContestEffect gContestEffects[];
 extern struct WindowTemplate gUnknown_0861CC24;
 extern u8 gUnknown_0861CD2C[][3];
@@ -57,7 +57,6 @@ extern u8 gUnknown_0861CE7B[];
 extern struct WindowTemplate gUnknown_0861CCEC;
 extern struct WindowTemplate gUnknown_0861CD14;
 extern const u8 *const gContestEffectDescriptionPointers[];
-extern const u8 *const gMoveDescriptionPointers[];
 
 void sub_81C488C(u8 a);
 extern u8 sub_81221EC();
@@ -343,6 +342,7 @@ struct UnkSummaryStruct
     u8 splitIconSpriteId;
 };
 
+// const rom data
 #define SPLIT_ICONS_TAG 0xD00D
 
 static const u16 sSplitIconsPal[] = INCBIN_U16("graphics/misc/split_icons.gbapal");
@@ -414,6 +414,9 @@ static const struct SpriteTemplate sSpriteTemplate_SplitIcons =
     .callback = SpriteCallbackDummy
 };
 
+#include "data/text/move_descriptions.h"
+
+// code
 static u8 ShowSplitIcon(u8 split)
 {
     if (IndexOfSpritePaletteTag(SPLIT_ICONS_TAG) == 0xFF)

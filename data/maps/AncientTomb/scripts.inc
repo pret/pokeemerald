@@ -10,7 +10,7 @@ AncientTomb_MapScript1_238FC3: @ 8238FC3
 	end
 
 AncientTomb_EventScript_238FCD:: @ 8238FCD
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, AncientTomb_EventScript_27374E
 	removeobject VAR_LAST_TALKED
@@ -75,7 +75,7 @@ AncientTomb_EventScript_23905A:: @ 823905A
 	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq AncientTomb_EventScript_2390A1
 	compare VAR_RESULT, 4

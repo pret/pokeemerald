@@ -25,7 +25,7 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 PacifidlogTown_House2_EventScript_2037DE:: @ 82037DE
 	checkflag FLAG_0x12B
 	goto_if 0, PacifidlogTown_House2_EventScript_27374E
-	specialvar VAR_RESULT, sub_813970C
+	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
 	compare VAR_RESULT, 0
 	call_if 1, PacifidlogTown_House2_EventScript_203812
 	return
@@ -49,7 +49,7 @@ PacifidlogTown_House2_EventScript_203816:: @ 8203816
 	compare VAR_RESULT, 0
 	goto_eq PacifidlogTown_House2_EventScript_272054
 	setflag FLAG_0x12B
-	special sub_8139754
+	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_203A85, 4
 	release
 	end
@@ -65,13 +65,13 @@ PacifidlogTown_House2_EventScript_20384F:: @ 820384F
 	compare VAR_RESULT, 0
 	goto_eq PacifidlogTown_House2_EventScript_272054
 	setflag FLAG_0x12B
-	special sub_8139754
+	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_203A85, 4
 	release
 	end
 
 PacifidlogTown_House2_EventScript_20387E:: @ 820387E
-	specialvar VAR_RESULT, sub_813970C
+	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
 	buffernumberstring 0, VAR_RESULT
 	msgbox PacifidlogTown_House2_Text_203AF4, 4
 	release

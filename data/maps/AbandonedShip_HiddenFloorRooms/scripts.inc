@@ -43,7 +43,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238CE3:: @ 8238CE3
 	setfieldeffectargument 1, 10
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	specialvar VAR_RESULT, sub_81392F8
+	specialvar VAR_RESULT, FoundAbandonedShipRoom4Key
 	compare VAR_RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DD3
 	waitfieldeffect 54
@@ -54,7 +54,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D0C:: @ 8238D0C
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_238D0D:: @ 8238D0D
-	specialvar VAR_RESULT, sub_81392AC
+	specialvar VAR_RESULT, FoundAbandonedShipRoom1Key
 	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_HiddenFloorRooms_EventScript_238D32
 	delay 20
@@ -77,7 +77,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D33:: @ 8238D33
 	setfieldeffectargument 1, 3
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	specialvar VAR_RESULT, sub_8139320
+	specialvar VAR_RESULT, FoundAbandonedShipRoom6Key
 	compare VAR_RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DE3
 	waitfieldeffect 54
@@ -98,7 +98,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D6B:: @ 8238D6B
 	setfieldeffectargument 1, 6
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	specialvar VAR_RESULT, sub_81392D4
+	specialvar VAR_RESULT, FoundAbandonedShipRoom2Key
 	compare VAR_RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DC3
 	waitfieldeffect 54

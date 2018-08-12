@@ -107,4 +107,6 @@ u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 
+u8 sub_80A600C(u8, u16, u8);
+
 #endif // GUARD_BATTLE_ANIM_H

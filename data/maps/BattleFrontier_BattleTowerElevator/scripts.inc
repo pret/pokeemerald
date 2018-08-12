@@ -14,7 +14,7 @@ BattleFrontier_BattleTowerElevator_EventScript_2419F0:: @ 82419F0
 	waitmovement 0
 	special sub_813A080
 	waitse
-	special sub_8139A78
+	special ShakeScreenInElevator
 	waitstate
 	delay 48
 	applymovement 1, BattleFrontier_BattleTowerElevator_Movement_241A8E

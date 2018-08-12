@@ -255,7 +255,7 @@ LilycoveCity_EventScript_1E2DF8:: @ 81E2DF8
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_EventScript_1E2E5A
 	msgbox LilycoveCity_Text_1E3234, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_1E2EDE
 	case 1, LilycoveCity_EventScript_1E2EEE
 	case 2, LilycoveCity_EventScript_1E2EFE
@@ -286,7 +286,7 @@ LilycoveCity_EventScript_1E2E6B:: @ 81E2E6B
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_EventScript_1E2ECD
 	msgbox LilycoveCity_Text_1E373C, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_1E2F0E
 	case 1, LilycoveCity_EventScript_1E2F1E
 	case 2, LilycoveCity_EventScript_1E2F2E
