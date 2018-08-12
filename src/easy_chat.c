@@ -166,7 +166,7 @@ static void sub_811A2FC(u8 taskId)
     {
     case 0:
         SetVBlankCallback(sub_811A290);
-        BlendPalettes(-1, 16, 0);
+        BlendPalettes(0xFFFFFFFF, 16, 0);
         BeginNormalPaletteFade(-1, -1, 16, 0, 0);
         data[EZCHAT_TASK_STATE] = 5;
         break;
@@ -341,7 +341,7 @@ void easy_chat_input_maybe(void)
         sizeParam = 2;
         break;
     case 15:
-        words = gSaveBlock1Ptr->lilycoveLady.quiz.unk_016;
+        words = &gSaveBlock1Ptr->lilycoveLady.quiz.unk_016;
         break;
     case 16:
         return;
@@ -349,7 +349,7 @@ void easy_chat_input_maybe(void)
         words = gSaveBlock1Ptr->lilycoveLady.quiz.unk_002;
         break;
     case 18:
-        words = gSaveBlock1Ptr->lilycoveLady.quiz.unk_014;
+        words = &gSaveBlock1Ptr->lilycoveLady.quiz.unk_014;
         break;
     case 19:
         words = (u16 *)&gSaveBlock2Ptr->field_DC[0].field_0[0x28];
@@ -378,7 +378,7 @@ static void sub_811A7E4(void)
         if (!gPaletteFade.active)
         {
             lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
-            lilycoveLady->quiz.unk_016[0] = -1;
+            lilycoveLady->quiz.unk_016 = -1;
             overworld_free_bg_tilemaps();
             sub_811A8F0();
         }
@@ -420,7 +420,7 @@ static void sub_811A8A4(u16 word)
 
 void sub_811A8CC(void)
 {
-    sub_811A20C(0xF, gSaveBlock1Ptr->lilycoveLady.quiz.unk_016, CB2_ReturnToFieldContinueScript, 3);
+    sub_811A20C(0xF, &gSaveBlock1Ptr->lilycoveLady.quiz.unk_016, CB2_ReturnToFieldContinueScript, 3);
 }
 
 void sub_811A8F0(void)
@@ -430,7 +430,7 @@ void sub_811A8F0(void)
 
 void sub_811A914(void)
 {
-    sub_811A20C(0x12, gSaveBlock1Ptr->lilycoveLady.quiz.unk_014, CB2_ReturnToFieldContinueScript, 3);
+    sub_811A20C(0x12, &gSaveBlock1Ptr->lilycoveLady.quiz.unk_014, CB2_ReturnToFieldContinueScript, 3);
 }
 
 void sub_811A938(void)
@@ -494,10 +494,7 @@ static bool8 EasyChat_AllocateResources(u8 kind, u16 *words, u8 sizeParam)
 static void EasyChat_FreeResources(void)
 {
     if (gUnknown_0203A118 != NULL)
-    {
-        free(gUnknown_0203A118);
-        gUnknown_0203A118 = NULL;
-    }
+        FREE_AND_SET_NULL(gUnknown_0203A118);
 }
 
 static u16 sub_811AAAC(void)

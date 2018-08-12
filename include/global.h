@@ -719,8 +719,8 @@ struct LilycoveLadyQuiz
     /*0x000*/ u8 id;
     /*0x001*/ u8 phase;
     /*0x002*/ u16 unk_002[9];
-    /*0x014*/ u16 unk_014[1];
-    /*0x016*/ u16 unk_016[1];
+    /*0x014*/ u16 unk_014;
+    /*0x016*/ u16 unk_016;
     /*0x018*/ u8 playerName[8];
     /*0x020*/ u16 playerTrainerId[4];
     /*0x028*/ u16 itemId;
