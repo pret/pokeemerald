@@ -1,6 +1,7 @@
 #ifndef GUARD_POKENAV_H
 #define GUARD_POKENAV_H
 #include "player_pc.h"
+#include "list_menu.h"
 
 bool8 sub_81D5C18(void);
 bool8 sub_81D20BC(void *arg0);

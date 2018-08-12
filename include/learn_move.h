@@ -2,6 +2,6 @@
 #define GUARD_LEARN_MOVE_H
 
 void TeachMoveTutorMove(void);
-void sub_816137C(s32);
+void ShowHideHearts(s32);
 
 #endif //GUARD_LEARN_MOVE_H

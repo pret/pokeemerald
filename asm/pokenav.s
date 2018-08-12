@@ -22585,7 +22585,7 @@ sub_81D2ACC: @ 81D2ACC
 	push {r7}
 	sub sp, 0xC
 	adds r4, r0, 0
-	bl sub_816137C
+	bl ShowHideHearts
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
