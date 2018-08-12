@@ -4,12 +4,12 @@ RusturfTunnel_MapScripts:: @ 822CE27
 	.byte 0
 
 RusturfTunnel_MapScript2_22CE32: @ 822CE32
-	map_script_2 VAR_0x409A, 4, RusturfTunnel_EventScript_22CEAE
-	map_script_2 VAR_0x409A, 5, RusturfTunnel_EventScript_22CEAE
+	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 4, RusturfTunnel_EventScript_22CEAE
+	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 5, RusturfTunnel_EventScript_22CEAE
 	.2byte 0
 
 RusturfTunnel_MapScript1_22CE44: @ 822CE44
-	compare VAR_0x409A, 2
+	compare VAR_RUSTURF_TUNNEL_STATE, 2
 	call_if 1, RusturfTunnel_EventScript_22CE50
 	end
 
@@ -288,7 +288,7 @@ RusturfTunnel_EventScript_22D083:: @ 822D083
 	waitmovement 0
 	moveobjectoffscreen 6
 	moveobjectoffscreen 7
-	setvar VAR_0x409A, 3
+	setvar VAR_RUSTURF_TUNNEL_STATE, 3
 	releaseall
 	end
 

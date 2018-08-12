@@ -88,6 +88,6 @@ static void ReturnFromStartWallClock(void)
 
 void StartWallClock(void)
 {
-    SetMainCallback2(Cb2_StartWallClock);
+    SetMainCallback2(CB2_StartWallClock);
     gMain.savedCallback = ReturnFromStartWallClock;
 }

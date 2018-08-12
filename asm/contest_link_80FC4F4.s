@@ -11,7 +11,7 @@ sub_80FC4F4: @ 80FC4F4
 	adds r2, r0, 0
 	lsls r4, r1, 16
 	lsrs r4, 16
-	ldr r5, =0x0201c000
+	ldr r5, =gDecompressionBuffer
 	adds r0, r5, 0
 	adds r1, r2, 0
 	adds r2, r4, 0

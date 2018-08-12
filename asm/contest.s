@@ -2629,7 +2629,7 @@ sub_80DCCD8: @ 80DCCD8
 	thumb_func_start sub_80DCD08
 sub_80DCD08: @ 80DCD08
 	push {lr}
-	ldr r0, =0x02000000
+	ldr r0, =gHeap
 	movs r1, 0xD0
 	lsls r1, 9
 	adds r2, r0, r1
@@ -2668,7 +2668,7 @@ sub_80DCD48: @ 80DCD48
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080DCE44
-	ldr r0, =0x02000000
+	ldr r0, =gHeap
 	movs r1, 0xD0
 	lsls r1, 9
 	adds r0, r1
@@ -3057,7 +3057,7 @@ sub_80DD04C: @ 80DD04C
 	movs r4, 0
 	movs r5, 0xA0
 _080DD052:
-	ldr r0, =0x0201a004
+	ldr r0, =gHeap+0x1A004
 	adds r0, r5, r0
 	ldr r1, =gUnknown_02039F26
 	adds r1, r4, r1
@@ -4769,7 +4769,7 @@ sub_80DDE30: @ 80DDE30
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080DDE78
-	ldr r0, =0x02019000
+	ldr r0, =gHeap+0x19000
 	ldr r1, =0x06002000
 	movs r2, 0x80
 	lsls r2, 5
@@ -4778,7 +4778,7 @@ sub_80DDE30: @ 80DDE30
 	b _080DDE8C
 	.pool
 _080DDE78:
-	ldr r0, =0x02018000
+	ldr r0, =gHeap+0x18000
 	ldr r1, =0x06002000
 	movs r2, 0x80
 	lsls r2, 5
@@ -7835,7 +7835,7 @@ sub_80DF704: @ 80DF704
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r0, =0x02000000
+	ldr r0, =gHeap
 	movs r1, 0xD0
 	lsls r1, 9
 	adds r2, r0, r1
@@ -7886,7 +7886,7 @@ sub_80DF750: @ 80DF750
 	bne _080DF766
 	b _080DF924
 _080DF766:
-	ldr r0, =0x02000000
+	ldr r0, =gHeap
 	movs r1, 0xD0
 	lsls r1, 9
 	adds r0, r1
@@ -7911,7 +7911,7 @@ _080DF784:
 	lsrs r7, r0, 24
 	cmp r7, 0x3
 	bls _080DF784
-	ldr r0, =0x02000000
+	ldr r0, =gHeap
 	movs r1, 0xD0
 	lsls r1, 9
 	adds r0, r1

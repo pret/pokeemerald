@@ -21,7 +21,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	waitmessage
 	special RetrieveLotteryNumber
 	copyvar VAR_0x8008, VAR_RESULT
-	special sub_81397C4
+	special BufferLottoTicketNumber
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A650B, 4
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_2725A8
 	waitmovement 0

@@ -89,8 +89,7 @@ gUnknown_030061C0: @ 30061C0
 gUnknown_030061C4: @ 30061C4
 	.space 0xC
 
-gUnknown_030061D0: @ 30061D0
-	.space 0x18
+    .include "field_specials.o"
 
 gCB2_AfterEvolution: @ 30061E8
 	.space 0x4

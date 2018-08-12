@@ -185,6 +185,7 @@ bool8 FreezeEventObject(struct EventObject *eventObject);
 u8 GetMoveDirectionFastAnimNum(u8);
 u8 GetMoveDirectionFasterAnimNum(u8);
 u8 GetMoveDirectionFastestAnimNum(u8);
+void CameraObjectSetFollowedObjectId(u8 objectId);
 
 void MovementType_None(struct Sprite *);
 void MovementType_LookAround(struct Sprite *);

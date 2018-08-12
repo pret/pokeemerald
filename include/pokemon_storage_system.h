@@ -9,5 +9,7 @@ struct BoxPokemon *GetBoxedMonPtr(u8, u8);
 void SetBoxMonNickFromAnyBox(u8, u8, u8 *);
 void CompactPartySlots(void);
 u32 GetBoxMonDataFromAnyBox(u8 boxId, u8 monPosition, u32 request);
+bool8 CheckFreePokemonStorageSpace(void);
+u8 StorageGetCurrentBox(void);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

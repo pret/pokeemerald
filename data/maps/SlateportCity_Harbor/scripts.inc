@@ -203,7 +203,7 @@ SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
 	msgbox SlateportCity_Harbor_Text_20CF93, 5
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CBDD
-	setvar VAR_PORTHOLE, 1
+	setvar VAR_PORTHOLE_STATE, 1
 	call SlateportCity_Harbor_EventScript_20CBE9
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate

@@ -9,7 +9,7 @@ MarineCave_End_MapScript1_23AFEA: @ 823AFEA
 	end
 
 MarineCave_End_EventScript_23AFF4:: @ 823AFF4
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, MarineCave_End_EventScript_27374E
 	removeobject 1
@@ -42,7 +42,7 @@ MarineCave_End_EventScript_23B01B:: @ 823B01B
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq MarineCave_End_EventScript_23B084
 	compare VAR_RESULT, 4

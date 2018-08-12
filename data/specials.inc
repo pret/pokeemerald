@@ -174,11 +174,11 @@ gSpecials:: @ 81DBA64
 	def_special GetFirstFreePokeblockSlot
 	def_special DoBerryBlending
 	def_special sub_8142BC8
-	def_special sub_813BD60
-	def_special sub_813BCA8
-	def_special sub_813BDB4
+	def_special ShouldMoveLilycoveFanClubMember
+	def_special GetNumMovedLilycoveFanClubMembers
+	def_special BufferStreakTrainerText
 	def_special sub_813BA30
-	def_special sub_813BCE8
+	def_special UpdateMovedLilycoveFanClubMembers
 	def_special sub_813BF60
 	def_special sub_813BA60
 	def_special sub_813BF7C
@@ -191,7 +191,7 @@ gSpecials:: @ 81DBA64
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
 	def_special GabbyAndTySetScriptVarsToEventObjectLocalIds
-	def_special sub_8138B80
+	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
 	def_special RejectEggFromDayCare
@@ -227,7 +227,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowPokedexRatingMessage
 	def_special DoPCTurnOnEffect
 	def_special DoPCTurnOffEffect
-	def_special sub_8139994
+	def_special SetDepartmentStoreFloorVar
 	def_special DoLotteryCornerComputerEffect
 	def_special EndLotteryCornerComputerEffect
 	def_special sub_81B951C
@@ -258,7 +258,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B9D08
 	def_special sub_80F9490
 	def_special ValidateEReaderTrainer
-	def_special sub_8139228
+	def_special GetBestBattleTowerStreak
 	def_special sub_80F94E8
 	def_special BedroomPC
 	def_special PlayerPC
@@ -284,7 +284,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80FB7A4
 	def_special DoSoftReset
 	def_special GameClear
-	def_special sub_8139A78
+	def_special ShakeScreenInElevator
 	def_special nullsub_55
 	def_special SpawnScriptEventObject
 	def_special RemoveScriptEventObject
@@ -295,20 +295,20 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B0534
 	def_special sub_80B058C
 	def_special WaitWeather
-	def_special sub_8139238
-	def_special sub_8139248
+	def_special BufferEReaderTrainerName
+	def_special GetSlotMachineId
 	def_special GetPlayerFacingDirection
-	def_special sub_81392AC
-	def_special sub_81392D4
-	def_special sub_81392F8
-	def_special sub_8139320
+	def_special FoundAbandonedShipRoom1Key
+	def_special FoundAbandonedShipRoom2Key
+	def_special FoundAbandonedShipRoom4Key
+	def_special FoundAbandonedShipRoom6Key
 	def_special LeadMonHasEffortRibbon
 	def_special GiveLeadMonEffortRibbon
 	def_special Special_AreLeadMonEVsMaxedOut
 	def_special sub_8098574
 	def_special sub_809859C
 	def_special InitRoamer
-	def_special sub_81393FC
+	def_special TryUpdateRusturfTunnelState
 	def_special IsGrassTypeInParty
 	def_special sub_80AFC60
 	def_special PutZigzagoonInPlayerParty
@@ -326,7 +326,7 @@ gSpecials:: @ 81DBA64
 	def_special StartRegiBattle
 	def_special sub_80B16D8
 	def_special DoSealedChamberShakingEffect2
-	def_special sub_8139634
+	def_special FoundBlackGlasses
 	def_special sub_80AC81C
 	def_special sp13E_warp_to_last_warp
 	def_special sp13F_fall_to_last_warp
@@ -343,11 +343,11 @@ gSpecials:: @ 81DBA64
 	def_special sub_80E9B70
 	def_special LoadPlayerBag
 	def_special sub_80B05B4
-	def_special sub_8139754
-	def_special sub_813970C
+	def_special SetPacifidlogTMReceivedDay
+	def_special GetDaysUntilPacifidlogTMAvailable
 	def_special sub_80C08E4
-	def_special sub_8139770
-	def_special sub_81397C4
+	def_special MonOTNameMatchesPlayer
+	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
 	def_special sub_80F9370
 	def_special sub_80F8FE8

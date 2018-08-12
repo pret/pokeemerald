@@ -466,4 +466,304 @@ extern const u8 gText_WinLoseDraw[];
 extern const u8 gText_ColorTransparent[];
 extern const u8 gText_Slash[];
 
+extern const u8 gText_99TimesPlus[];
+extern const u8 gText_1MinutePlus[];
+extern const u8 gText_SpaceSeconds[];
+extern const u8 gText_SpaceTimes[];
+
+extern const u8 gText_BigGuy[];
+extern const u8 gText_BigGirl[];
+extern const u8 gText_Son[];
+extern const u8 gText_Daughter[];
+
+extern const u8 gText_1F[];
+extern const u8 gText_2F[];
+extern const u8 gText_3F[];
+extern const u8 gText_4F[];
+extern const u8 gText_5F[];
+extern const u8 gText_6F[];
+extern const u8 gText_7F[];
+extern const u8 gText_8F[];
+extern const u8 gText_9F[];
+extern const u8 gText_10F[];
+extern const u8 gText_11F[];
+extern const u8 gText_B1F[];
+extern const u8 gText_B2F[];
+extern const u8 gText_B3F[];
+extern const u8 gText_B4F[];
+extern const u8 gText_Rooftop[];
+extern const u8 gText_ElevatorNowOn[];
+
+extern const u8 gText_Exit[];
+
+extern const u8 gText_BlueFlute[];
+extern const u8 gText_YellowFlute[];
+extern const u8 gText_RedFlute[];
+extern const u8 gText_WhiteFlute[];
+extern const u8 gText_BlackFlute[];
+extern const u8 gText_PrettyChair[];
+extern const u8 gText_PrettyDesk[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_0Pts[];
+extern const u8 gText_10Pts[];
+extern const u8 gText_20Pts[];
+extern const u8 gText_30Pts[];
+extern const u8 gText_40Pts[];
+extern const u8 gText_50Pts[];
+extern const u8 gText_60Pts[];
+extern const u8 gText_70Pts[];
+extern const u8 gText_80Pts[];
+extern const u8 gText_90Pts[];
+extern const u8 gText_100Pts[];
+extern const u8 gText_QuestionMark[];
+
+extern const u8 gText_KissPoster16BP[];
+extern const u8 gText_KissCushion32BP[];
+extern const u8 gText_SmoochumDoll32BP[];
+extern const u8 gText_TogepiDoll48BP[];
+extern const u8 gText_MeowthDoll48BP[];
+extern const u8 gText_ClefairyDoll48BP[];
+extern const u8 gText_DittoDoll48BP[];
+extern const u8 gText_CyndaquilDoll80BP[];
+extern const u8 gText_ChikoritaDoll80BP[];
+extern const u8 gText_TotodileDoll80BP[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_LaprasDoll128BP[];
+extern const u8 gText_SnorlaxDoll128BP[];
+extern const u8 gText_VenusaurDoll256BP[];
+extern const u8 gText_CharizardDoll256BP[];
+extern const u8 gText_BlastoiseDoll256BP[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_Protein1BP[];
+extern const u8 gText_Calcium1BP[];
+extern const u8 gText_Iron1BP[];
+extern const u8 gText_Zinc1BP[];
+extern const u8 gText_Carbos1BP[];
+extern const u8 gText_HpUp1BP[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_Leftovers48BP[];
+extern const u8 gText_WhiteHerb48BP[];
+extern const u8 gText_QuickClaw48BP[];
+extern const u8 gText_MentalHerb48BP[];
+extern const u8 gText_BrightPowder64BP[];
+extern const u8 gText_ChoiceBand64BP[];
+extern const u8 gText_KingsRock64BP[];
+extern const u8 gText_FocusBand64BP[];
+extern const u8 gText_ScopeLens64BP[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_EnergyPowder50[];
+extern const u8 gText_EnergyRoot80[];
+extern const u8 gText_HealPowder50[];
+extern const u8 gText_RevivalHerb300[];
+extern const u8 gText_Protein1000[];
+extern const u8 gText_Iron1000[];
+extern const u8 gText_Carbos1000[];
+extern const u8 gText_Calcium1000[];
+extern const u8 gText_Zinc1000[];
+extern const u8 gText_HPUp1000[];
+extern const u8 gText_PPUp3000[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_BattleTower2[];
+extern const u8 gText_BattleDome[];
+extern const u8 gText_BattlePalace[];
+extern const u8 gText_BattleArena[];
+extern const u8 gText_BattleFactory[];
+extern const u8 gText_BattlePike[];
+extern const u8 gText_BattlePyramid[];
+extern const u8 gText_RankingHall[];
+extern const u8 gText_ExchangeService[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_Softboiled16BP[];
+extern const u8 gText_SeismicToss24BP[];
+extern const u8 gText_DreamEater24BP[];
+extern const u8 gText_MegaPunch24BP[];
+extern const u8 gText_MegaKick48BP[];
+extern const u8 gText_BodySlam48BP[];
+extern const u8 gText_RockSlide48BP[];
+extern const u8 gText_Counter48BP[];
+extern const u8 gText_ThunderWave48BP[];
+extern const u8 gText_SwordsDance48BP[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_DefenseCurl16BP[];
+extern const u8 gText_Snore24BP[];
+extern const u8 gText_MudSlap24BP[];
+extern const u8 gText_Swift24BP[];
+extern const u8 gText_IcyWind24BP[];
+extern const u8 gText_Endure48BP[];
+extern const u8 gText_PsychUp48BP[];
+extern const u8 gText_IcePunch48BP[];
+extern const u8 gText_ThunderPunch48BP[];
+extern const u8 gText_FirePunch48BP[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_SlateportCity[];
+extern const u8 gText_BattleFrontier[];
+extern const u8 gText_SouthernIsland[];
+extern const u8 gText_NavelRock[];
+extern const u8 gText_BirthIsland[];
+extern const u8 gText_FarawayIsland[];
+extern const u8 gText_Exit[];
+
+extern const u8 gText_BattleTrainers[];
+extern const u8 gText_BattleBasics[];
+extern const u8 gText_PokemonNature[];
+extern const u8 gText_PokemonMoves[];
+extern const u8 gText_Underpowered[];
+extern const u8 gText_WhenInDanger[];
+extern const u8 gText_Exit[];
+
+extern const u8 BattleFrontier_Lounge2_Text_260971[];
+extern const u8 BattleFrontier_Lounge2_Text_260A1E[];
+extern const u8 BattleFrontier_Lounge2_Text_260AE7[];
+extern const u8 BattleFrontier_Lounge2_Text_2619AC[];
+extern const u8 BattleFrontier_Lounge2_Text_261A91[];
+extern const u8 BattleFrontier_Lounge2_Text_261B0C[];
+extern const u8 BattleFrontier_Lounge2_Text_261B95[];
+extern const u8 BattleFrontier_Lounge2_Text_261B95[];
+extern const u8 BattleFrontier_Lounge2_Text_261B95[];
+extern const u8 BattleFrontier_Lounge2_Text_261C1A[];
+extern const u8 BattleFrontier_Lounge2_Text_261C1A[];
+extern const u8 BattleFrontier_Lounge2_Text_261C1A[];
+extern const u8 BattleFrontier_Lounge2_Text_260BC4[];
+extern const u8 BattleFrontier_Lounge2_Text_260C6D[];
+extern const u8 BattleFrontier_Lounge2_Text_260D3A[];
+extern const u8 BattleFrontier_Lounge2_Text_260E1E[];
+extern const u8 BattleFrontier_Lounge2_Text_260EC7[];
+extern const u8 BattleFrontier_Lounge2_Text_260F74[];
+extern const u8 BattleFrontier_Lounge2_Text_2614E6[];
+extern const u8 BattleFrontier_Lounge2_Text_261591[];
+extern const u8 BattleFrontier_Lounge2_Text_26166F[];
+extern const u8 BattleFrontier_Lounge2_Text_261282[];
+extern const u8 BattleFrontier_Lounge2_Text_261329[];
+extern const u8 BattleFrontier_Lounge2_Text_261403[];
+extern const u8 BattleFrontier_Lounge2_Text_261026[];
+extern const u8 BattleFrontier_Lounge2_Text_2610CC[];
+extern const u8 BattleFrontier_Lounge2_Text_261194[];
+extern const u8 BattleFrontier_Lounge2_Text_26174D[];
+extern const u8 BattleFrontier_Lounge2_Text_2617F9[];
+extern const u8 BattleFrontier_Lounge2_Text_2618C4[];
+
+extern const u8 BattleFrontier_Lounge5_Text_26468D[];
+extern const u8 BattleFrontier_Lounge5_Text_2646E5[];
+extern const u8 BattleFrontier_Lounge5_Text_264741[];
+extern const u8 BattleFrontier_Lounge5_Text_2647A4[];
+extern const u8 BattleFrontier_Lounge5_Text_2647FC[];
+extern const u8 BattleFrontier_Lounge5_Text_264858[];
+extern const u8 BattleFrontier_Lounge5_Text_2648BE[];
+extern const u8 BattleFrontier_Lounge5_Text_264916[];
+extern const u8 BattleFrontier_Lounge5_Text_264972[];
+extern const u8 BattleFrontier_Lounge5_Text_2649D5[];
+extern const u8 BattleFrontier_Lounge5_Text_264A3F[];
+extern const u8 BattleFrontier_Lounge5_Text_264A9B[];
+extern const u8 BattleFrontier_Lounge5_Text_264AF3[];
+extern const u8 BattleFrontier_Lounge5_Text_264B5D[];
+extern const u8 BattleFrontier_Lounge5_Text_2648BE[];
+extern const u8 BattleFrontier_Lounge5_Text_264BC3[];
+extern const u8 BattleFrontier_Lounge5_Text_264C36[];
+extern const u8 BattleFrontier_Lounge5_Text_2648BE[];
+extern const u8 BattleFrontier_Lounge5_Text_264C95[];
+extern const u8 BattleFrontier_Lounge5_Text_264D01[];
+extern const u8 BattleFrontier_Lounge5_Text_264D6B[];
+extern const u8 BattleFrontier_Lounge5_Text_264DD7[];
+extern const u8 BattleFrontier_Lounge5_Text_264E33[];
+extern const u8 BattleFrontier_Lounge5_Text_264E8F[];
+extern const u8 BattleFrontier_Lounge5_Text_2648BE[];
+
+extern const u8 BattleFrontier_Lounge3_Text_262261[];
+extern const u8 BattleFrontier_Lounge3_Text_26230D[];
+extern const u8 BattleFrontier_Lounge3_Text_2623B9[];
+extern const u8 BattleFrontier_Lounge3_Text_262464[];
+extern const u8 BattleFrontier_Lounge3_Text_26250E[];
+extern const u8 BattleFrontier_Lounge3_Text_2625B8[];
+extern const u8 BattleFrontier_Lounge3_Text_26266A[];
+extern const u8 BattleFrontier_Lounge3_Text_26271C[];
+extern const u8 BattleFrontier_Lounge3_Text_2627C9[];
+extern const u8 BattleFrontier_Lounge3_Text_262876[];
+extern const u8 BattleFrontier_Lounge3_Text_26291A[];
+extern const u8 BattleFrontier_Lounge3_Text_2629BC[];
+
+extern const u8 BattleFrontier_Lounge3_Text_262C04[];
+extern const u8 BattleFrontier_Lounge3_Text_262C90[];
+extern const u8 BattleFrontier_Lounge3_Text_262D1C[];
+extern const u8 BattleFrontier_Lounge3_Text_262DA7[];
+extern const u8 BattleFrontier_Lounge3_Text_262E34[];
+extern const u8 BattleFrontier_Lounge3_Text_262EC1[];
+extern const u8 BattleFrontier_Lounge3_Text_262F56[];
+extern const u8 BattleFrontier_Lounge3_Text_262FEB[];
+extern const u8 BattleFrontier_Lounge3_Text_263078[];
+extern const u8 BattleFrontier_Lounge3_Text_263105[];
+extern const u8 BattleFrontier_Lounge3_Text_26318C[];
+extern const u8 BattleFrontier_Lounge3_Text_263211[];
+
+extern const u8 gText_BP[];
+
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2601D0[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260201[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26022F[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26025B[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260287[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2602B5[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2602E0[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26030F[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26033E[];
+
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C[];
+
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260397[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2603BE[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2603E6[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26040E[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260436[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26045C[];
+
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26047A[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2604AC[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2604D8[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26050F[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260542[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260575[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2605A8[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2605E2[];
+extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260613[];
+
+extern const u8 BattleFrontier_Lounge7_Text_265E30[];
+extern const u8 BattleFrontier_Lounge7_Text_265E5B[];
+extern const u8 BattleFrontier_Lounge7_Text_265E8A[];
+extern const u8 BattleFrontier_Lounge7_Text_265EC0[];
+extern const u8 BattleFrontier_Lounge7_Text_265EED[];
+extern const u8 BattleFrontier_Lounge7_Text_265F1C[];
+extern const u8 BattleFrontier_Lounge7_Text_265F47[];
+extern const u8 BattleFrontier_Lounge7_Text_265F77[];
+extern const u8 BattleFrontier_Lounge7_Text_265FAA[];
+extern const u8 BattleFrontier_Lounge7_Text_265FDD[];
+
+extern const u8 BattleFrontier_Lounge7_Text_26600A[];
+extern const u8 BattleFrontier_Lounge7_Text_26603E[];
+extern const u8 BattleFrontier_Lounge7_Text_266070[];
+extern const u8 BattleFrontier_Lounge7_Text_2660A6[];
+extern const u8 BattleFrontier_Lounge7_Text_2660D0[];
+extern const u8 BattleFrontier_Lounge7_Text_2660FF[];
+extern const u8 BattleFrontier_Lounge7_Text_26612D[];
+extern const u8 BattleFrontier_Lounge7_Text_26615F[];
+extern const u8 BattleFrontier_Lounge7_Text_266185[];
+extern const u8 BattleFrontier_Lounge7_Text_2661B5[];
+
+extern const u8 gText_YourPartnerHasRetired[];
+
+extern const u8 gText_Wallace[];
+extern const u8 gText_Steven[];
+extern const u8 gText_Brawly[];
+extern const u8 gText_Winona[];
+extern const u8 gText_Phoebe[];
+extern const u8 gText_Glacia[];
+
 #endif //GUARD_STRINGS_H
