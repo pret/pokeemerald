@@ -25,14 +25,13 @@ ASFLAGS := -mcpu=arm7tdmi
 CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
+CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -undef
 
 LDFLAGS = -Map ../../$(MAP)
 
 LIB := -L ../../tools/agbcc/lib -lgcc -lc
 
-SHA1 := sha1sum -c
-
+SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := tools/gbagfx/gbagfx
 AIF := tools/aif2pcm/aif2pcm
 MID := $(abspath tools/mid2agb/mid2agb)
