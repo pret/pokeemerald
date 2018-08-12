@@ -6,63 +6,6 @@
 	.section .rodata
 	.align 2, 0
 
-
-gUnknown_084973FC:: @ 84973FC
-	.4byte MetatileBehavior_IsTrickHouseSlipperyFloor
-	.4byte MetatileBehavior_IsIce_2
-	.4byte MetatileBehavior_IsWalkSouth
-	.4byte MetatileBehavior_IsWalkNorth
-	.4byte MetatileBehavior_IsWalkWest
-	.4byte MetatileBehavior_IsWalkEast
-	.4byte MetatileBehavior_IsSouthwardCurrent
-	.4byte MetatileBehavior_IsNorthwardCurrent
-	.4byte MetatileBehavior_IsWestwardCurrent
-	.4byte MetatileBehavior_IsEastwardCurrent
-	.4byte MetatileBehavior_IsSlideSouth
-	.4byte MetatileBehavior_IsSlideNorth
-	.4byte MetatileBehavior_IsSlideWest
-	.4byte MetatileBehavior_IsSlideEast
-	.4byte MetatileBehavior_IsWaterfall
-	.4byte MetatileBehavior_IsSecretBaseJumpMat
-	.4byte MetatileBehavior_IsSecretBaseSpinMat
-	.4byte MetatileBehavior_IsMuddySlope
-
-gUnknown_08497444:: @ 8497444
-	.4byte ForcedMovement_None
-	.4byte ForcedMovement_Slip
-	.4byte ForcedMovement_Slip
-	.4byte ForcedMovement_WalkSouth
-	.4byte ForcedMovement_WalkNorth
-	.4byte ForcedMovement_WalkWest
-	.4byte ForcedMovement_WalkEast
-	.4byte ForcedMovement_PushedSouthByCurrent
-	.4byte ForcedMovement_PushedNorthByCurrent
-	.4byte ForcedMovement_PushedWestByCurrent
-	.4byte ForcedMovement_PushedEastByCurrent
-	.4byte ForcedMovement_SlideSouth
-	.4byte ForcedMovement_SlideNorth
-	.4byte ForcedMovement_SlideWest
-	.4byte ForcedMovement_SlideEast
-	.4byte ForcedMovement_PushedSouthByCurrent
-	.4byte ForcedMovement_0xBB
-	.4byte ForcedMovement_0xBC
-	.4byte ForcedMovement_MuddySlope
-
-gUnknown_08497490:: @ 8497490
-	.4byte PlayerNotOnBikeNotMoving
-	.4byte PlayerNotOnBikeTurningInPlace
-	.4byte PlayerNotOnBikeMoving
-
-gUnknown_0849749C:: @ 849749C
-	.4byte MetatileBehavior_IsBumpySlope
-	.4byte MetatileBehavior_IsIsolatedVerticalRail
-	.4byte MetatileBehavior_IsIsolatedHorizontalRail
-	.4byte MetatileBehavior_IsVerticalRail
-	.4byte MetatileBehavior_IsHorizontalRail
-
-gUnknown_084974B0:: @ 84974B0
-	.byte 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x00, 0x00, 0x00
-
 gUnknown_084974B8:: @ 84974B8
 	.4byte PlayerAvatarTransition_Normal
 	.4byte PlayerAvatarTransition_MachBike
@@ -158,4 +101,3 @@ gUnknown_084975B0:: @ 84975B0
 
 gUnknown_084975BC:: @ 84975BC
 	.byte 0x01, 0x03, 0x04, 0x02, 0x01, 0x00, 0x00, 0x00
-

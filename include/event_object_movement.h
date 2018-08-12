@@ -146,6 +146,7 @@ u8 GetJumpInPlaceMovementAction(u32);
 bool8 EventObjectSetHeldMovement(struct EventObject *eventObject, u8 specialAnimId);
 bool8 EventObjectIsMovementOverridden(struct EventObject *eventObject);
 u8 EventObjectCheckHeldMovementStatus(struct EventObject *eventObject);
+u8 EventObjectGetHeldMovementActionId(struct EventObject *eventObject);
 void TryOverrideTemplateCoordsForEventObject(const struct EventObject *eventObject, u8 movementType);
 void OverrideTemplateCoordsForEventObject(const struct EventObject *eventObject);
 void ShiftStillEventObjectCoords(struct EventObject *pObject);
@@ -185,6 +186,7 @@ bool8 FreezeEventObject(struct EventObject *eventObject);
 u8 GetMoveDirectionFastAnimNum(u8);
 u8 GetMoveDirectionFasterAnimNum(u8);
 u8 GetMoveDirectionFastestAnimNum(u8);
+u8 GetLedgeJumpDirection(s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8 objectId);
 
 void MovementType_None(struct Sprite *);
