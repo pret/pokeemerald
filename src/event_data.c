@@ -25,7 +25,7 @@ EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA static u8 gUnknown_020375FC[16] = {0};
 
-extern u16 * const gSpecialVars[];
+extern u16 *const gSpecialVars[];
 
 extern void sub_80BB358(void);
 
@@ -166,10 +166,10 @@ u16 *GetVarPointer(u16 id)
 {
     if (id < VARS_START)
         return NULL;
-    else if (id < VAR_0x8000)
+    else if (id < SPECIAL_VARS_START)
         return &gSaveBlock1Ptr->vars[id - VARS_START];
 	else
-		return gSpecialVars[id - VAR_0x8000];
+		return gSpecialVars[id - SPECIAL_VARS_START];
 }
 
 u16 VarGet(u16 id)
@@ -198,10 +198,10 @@ u8 *GetFlagPointer(u16 id)
 {
     if (id == 0)
         return NULL;
-    else if (id < FLAG_SPECIAL_FLAG_0x4000)
+    else if (id < SPECIAL_FLAGS_START)
         return &gSaveBlock1Ptr->flags[id / 8];
 	else
-		return &gUnknown_020375FC[(id - FLAG_SPECIAL_FLAG_0x4000) / 8];
+		return &gUnknown_020375FC[(id - SPECIAL_FLAGS_START) / 8];
 }
 
 u8 FlagSet(u16 id)
