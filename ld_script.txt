@@ -204,6 +204,7 @@ SECTIONS {
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_815A0D4.o(.text);
+        src/learn_move.o(.text);
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
@@ -486,6 +487,7 @@ SECTIONS {
         src/battle_controller_safari.o(.rodata);
         data/battle_anim_815A0D4.o(.rodata);
         data/learn_move.o(.rodata);
+        src/learn_move.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
