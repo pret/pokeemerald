@@ -1570,6 +1570,7 @@
 #define FLAG_0x95E               (SYSTEM_FLAGS + 0xFE)
 #define FLAG_0x95F               (SYSTEM_FLAGS + 0xFF)
 
+#define SPECIAL_FLAGS_START 0x4000
 // SPECIAL FLAGS (unknown purpose)
 #define FLAG_SPECIAL_FLAG_0x4000    0x4000
 #define FLAG_SPECIAL_FLAG_0x4001    0x4001
