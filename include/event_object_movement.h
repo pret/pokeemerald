@@ -187,6 +187,7 @@ u8 GetMoveDirectionFastAnimNum(u8);
 u8 GetMoveDirectionFasterAnimNum(u8);
 u8 GetMoveDirectionFastestAnimNum(u8);
 u8 GetLedgeJumpDirection(s16, s16, u8);
+void CameraObjectSetFollowedObjectId(u8 objectId);
 
 void MovementType_None(struct Sprite *);
 void MovementType_LookAround(struct Sprite *);
