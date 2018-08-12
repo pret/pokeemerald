@@ -26,5 +26,6 @@ void sub_81D2BF4(u8 *);
 u16 sub_81D2C3C(void);
 void sub_81D2C50(void);
 u8 sub_81D28C8(const struct ListMenuItem *items, u16 numChoices);
+void sub_81D2824(u16);
 
 #endif //GUARD_POKENAV_H

@@ -168,8 +168,8 @@ u16 *GetVarPointer(u16 id)
         return NULL;
     else if (id < SPECIAL_VARS_START)
         return &gSaveBlock1Ptr->vars[id - VARS_START];
-	else
-		return gSpecialVars[id - SPECIAL_VARS_START];
+    else
+        return gSpecialVars[id - SPECIAL_VARS_START];
 }
 
 u16 VarGet(u16 id)
@@ -200,8 +200,8 @@ u8 *GetFlagPointer(u16 id)
         return NULL;
     else if (id < SPECIAL_FLAGS_START)
         return &gSaveBlock1Ptr->flags[id / 8];
-	else
-		return &gUnknown_020375FC[(id - SPECIAL_FLAGS_START) / 8];
+    else
+        return &gUnknown_020375FC[(id - SPECIAL_FLAGS_START) / 8];
 }
 
 u8 FlagSet(u16 id)
