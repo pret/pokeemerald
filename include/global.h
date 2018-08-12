@@ -761,7 +761,7 @@ struct LilycoveLadyContest
     /*0x00e*/ u8 language;
 };
 
-typedef union
+typedef union // 3b58
 {
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavour favour;
