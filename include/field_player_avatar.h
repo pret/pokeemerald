@@ -45,4 +45,22 @@ void SetPlayerAvatarStateMask(u8 a);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
 u8 GetJumpSpecialMovementAction(u32);
 
+bool8 ForcedMovement_None(void);
+bool8 ForcedMovement_Slip(void);
+bool8 ForcedMovement_WalkSouth(void);
+bool8 ForcedMovement_WalkNorth(void);
+bool8 ForcedMovement_WalkWest(void);
+bool8 ForcedMovement_WalkEast(void);
+bool8 ForcedMovement_PushedSouthByCurrent(void);
+bool8 ForcedMovement_PushedNorthByCurrent(void);
+bool8 ForcedMovement_PushedWestByCurrent(void);
+bool8 ForcedMovement_PushedEastByCurrent(void);
+bool8 ForcedMovement_SlideSouth(void);
+bool8 ForcedMovement_SlideNorth(void);
+bool8 ForcedMovement_SlideWest(void);
+bool8 ForcedMovement_SlideEast(void);
+bool8 ForcedMovement_0xBB(void);
+bool8 ForcedMovement_0xBC(void);
+bool8 ForcedMovement_MuddySlope(void);
+
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

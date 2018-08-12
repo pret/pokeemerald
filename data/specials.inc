@@ -71,7 +71,7 @@ gSpecials:: @ 81DBA64
 	def_special ShouldTryRematchBattle
 	def_special IsTrainerReadyForRematch
 	def_special BattleSetup_StartRematchBattle
-	def_special sub_80C7578
+	def_special ShowPokemonStorageSystem
 	def_special HasEnoughMonsForDoubleBattle
 	def_special TurnOffTVScreen
 	def_special DoTVShow

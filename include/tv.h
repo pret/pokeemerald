@@ -47,6 +47,7 @@ void UpdateTVShowsPerDay(u16 days);
 void PutPokemonTodayCaughtOnAir(void);
 void TV_PutSecretBaseVisitOnTheAir(void);
 void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent);
+void BravoTrainerPokemonProfile_BeforeInterview1(u16 move);
 void UpdateTVScreensOnMap(int, int);
 void TV_PrintIntToStringVar(u8 varIdx, int value);
 
