@@ -4,7 +4,7 @@ PetalburgCity_PokemonCenter_1F_MapScripts:: @ 82079E8
 	.byte 0
 
 PetalburgCity_PokemonCenter_1F_MapScript1_2079F3: @ 82079F3
-	setrespawn 3
+	setrespawn HEAL_LOCATION_PETALBURG_CITY
 	call PetalburgCity_PokemonCenter_1F_EventScript_2718DE
 	end
 
@@ -35,11 +35,11 @@ PetalburgCity_PokemonCenter_1F_EventScript_207A1C:: @ 8207A1C
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A38:: @ 8207A38
-	compare VAR_FIRST_POKE, 0
+	compare VAR_STARTER_MON, 0
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A5B
-	compare VAR_FIRST_POKE, 1
+	compare VAR_STARTER_MON, 1
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A64
-	compare VAR_FIRST_POKE, 2
+	compare VAR_STARTER_MON, 2
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A6D
 	release
 	end

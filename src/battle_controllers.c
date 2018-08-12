@@ -264,67 +264,67 @@ static void InitSinglePlayerBtlControllers(void)
 
                 for (var = gUnknown_0203C7B4, i = 0; i < MAX_BATTLERS_COUNT; i++)
                 {
-                    switch (gLinkPlayers[i].lp_field_18)
+                    switch (gLinkPlayers[i].id)
                     {
                     case 0:
                     case 3:
-                        sub_81B8D64(gLinkPlayers[i].lp_field_18, 0);
+                        sub_81B8D64(gLinkPlayers[i].id, 0);
                         break;
                     case 1:
                     case 2:
-                        sub_81B8D64(gLinkPlayers[i].lp_field_18, 1);
+                        sub_81B8D64(gLinkPlayers[i].id, 1);
                         break;
                     }
 
                     if (i == var)
                     {
-                        gBattlerControllerFuncs[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedPlayer;
-                        switch (gLinkPlayers[i].lp_field_18)
+                        gBattlerControllerFuncs[gLinkPlayers[i].id] = SetControllerToRecordedPlayer;
+                        switch (gLinkPlayers[i].id)
                         {
                         case 0:
                         case 3:
-                            gBattlerPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_PLAYER_LEFT;
-                            gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
+                            gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_PLAYER_LEFT;
+                            gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                             break;
                         case 1:
                         case 2:
-                            gBattlerPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_PLAYER_RIGHT;
-                            gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
+                            gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_PLAYER_RIGHT;
+                            gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                             break;
                         }
                     }
-                    else if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[var].lp_field_18 & 1))
-                            || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[var].lp_field_18 & 1)))
+                    else if ((!(gLinkPlayers[i].id & 1) && !(gLinkPlayers[var].id & 1))
+                            || ((gLinkPlayers[i].id & 1) && (gLinkPlayers[var].id & 1)))
                     {
-                        gBattlerControllerFuncs[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedPlayer;
-                        switch (gLinkPlayers[i].lp_field_18)
+                        gBattlerControllerFuncs[gLinkPlayers[i].id] = SetControllerToRecordedPlayer;
+                        switch (gLinkPlayers[i].id)
                         {
                         case 0:
                         case 3:
-                            gBattlerPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_PLAYER_LEFT;
-                            gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
+                            gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_PLAYER_LEFT;
+                            gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                             break;
                         case 1:
                         case 2:
-                            gBattlerPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_PLAYER_RIGHT;
-                            gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
+                            gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_PLAYER_RIGHT;
+                            gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                             break;
                         }
                     }
                     else
                     {
-                        gBattlerControllerFuncs[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedOpponent;
-                        switch (gLinkPlayers[i].lp_field_18)
+                        gBattlerControllerFuncs[gLinkPlayers[i].id] = SetControllerToRecordedOpponent;
+                        switch (gLinkPlayers[i].id)
                         {
                         case 0:
                         case 3:
-                            gBattlerPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_OPPONENT_LEFT;
-                            gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
+                            gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_OPPONENT_LEFT;
+                            gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                             break;
                         case 1:
                         case 2:
-                            gBattlerPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_OPPONENT_RIGHT;
-                            gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
+                            gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_OPPONENT_RIGHT;
+                            gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                             break;
                         }
                     }
@@ -506,69 +506,69 @@ static void InitLinkBtlControllers(void)
 
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            switch (gLinkPlayers[i].lp_field_18)
+            switch (gLinkPlayers[i].id)
             {
             case 0:
             case 3:
-                sub_81B8D64(gLinkPlayers[i].lp_field_18, 0);
+                sub_81B8D64(gLinkPlayers[i].id, 0);
                 break;
             case 1:
             case 2:
-                sub_81B8D64(gLinkPlayers[i].lp_field_18, 1);
+                sub_81B8D64(gLinkPlayers[i].id, 1);
                 break;
             }
 
             if (i == multiplayerId)
             {
-                gBattlerControllerFuncs[gLinkPlayers[i].lp_field_18] = SetControllerToPlayer;
-                switch (gLinkPlayers[i].lp_field_18)
+                gBattlerControllerFuncs[gLinkPlayers[i].id] = SetControllerToPlayer;
+                switch (gLinkPlayers[i].id)
                 {
                 case 0:
                 case 3:
-                    gBattlerPositions[gLinkPlayers[i].lp_field_18] = 0;
-                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
+                    gBattlerPositions[gLinkPlayers[i].id] = 0;
+                    gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                     break;
                 case 1:
                 case 2:
-                    gBattlerPositions[gLinkPlayers[i].lp_field_18] = 2;
-                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
+                    gBattlerPositions[gLinkPlayers[i].id] = 2;
+                    gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                     break;
                 }
             }
             else
             {
-                if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[multiplayerId].lp_field_18 & 1))
-                 || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[multiplayerId].lp_field_18 & 1)))
+                if ((!(gLinkPlayers[i].id & 1) && !(gLinkPlayers[multiplayerId].id & 1))
+                 || ((gLinkPlayers[i].id & 1) && (gLinkPlayers[multiplayerId].id & 1)))
                 {
-                    gBattlerControllerFuncs[gLinkPlayers[i].lp_field_18] = SetControllerToLinkPartner;
-                    switch (gLinkPlayers[i].lp_field_18)
+                    gBattlerControllerFuncs[gLinkPlayers[i].id] = SetControllerToLinkPartner;
+                    switch (gLinkPlayers[i].id)
                     {
                     case 0:
                     case 3:
-                        gBattlerPositions[gLinkPlayers[i].lp_field_18] = 0;
-                        gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
+                        gBattlerPositions[gLinkPlayers[i].id] = 0;
+                        gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                         break;
                     case 1:
                     case 2:
-                        gBattlerPositions[gLinkPlayers[i].lp_field_18] = 2;
-                        gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
+                        gBattlerPositions[gLinkPlayers[i].id] = 2;
+                        gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                         break;
                     }
                 }
                 else
                 {
-                    gBattlerControllerFuncs[gLinkPlayers[i].lp_field_18] = SetControllerToLinkOpponent;
-                    switch (gLinkPlayers[i].lp_field_18)
+                    gBattlerControllerFuncs[gLinkPlayers[i].id] = SetControllerToLinkOpponent;
+                    switch (gLinkPlayers[i].id)
                     {
                     case 0:
                     case 3:
-                        gBattlerPositions[gLinkPlayers[i].lp_field_18] = 1;
-                        gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
+                        gBattlerPositions[gLinkPlayers[i].id] = 1;
+                        gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                         break;
                     case 1:
                     case 2:
-                        gBattlerPositions[gLinkPlayers[i].lp_field_18] = 3;
-                        gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
+                        gBattlerPositions[gLinkPlayers[i].id] = 3;
+                        gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                         break;
                     }
                 }

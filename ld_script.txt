@@ -55,6 +55,7 @@ SECTIONS {
         src/link.o(.text);
         src/link_rfu.o(.text);
         asm/link_rfu.o(.text);
+        src/rom_8011DC0.o(.text);
         asm/rom_8011DC0.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
@@ -180,7 +181,7 @@ SECTIONS {
         src/time_events.o(.text);
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
-        asm/field_specials.o(.text);
+        src/field_specials.o(.text);
         src/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
@@ -243,7 +244,7 @@ SECTIONS {
         asm/battle_frontier_2.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
-        src/unk_text_util.o(.text);
+        src/dynamic_placeholder_text_util.o(.text);
         src/save_location.o(.text);
         src/item_icon.o(.text);
         asm/party_menu.o(.text);
@@ -367,11 +368,14 @@ SECTIONS {
         src/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link_rfu.o(.rodata);
+        src/rom_8011DC0.o(.rodata);
         data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         src/rom_8034C54.o(.rodata);
         data/data2b.o(.rodata);
+        src/battle_data.o(.rodata);
+        data/data2c.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
@@ -467,7 +471,7 @@ SECTIONS {
         src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
-        data/field_specials.o(.rodata);
+        src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
@@ -497,7 +501,7 @@ SECTIONS {
         src/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);
-        data/strings.o(.rodata);
+        src/strings.o(.rodata);
         src/berry_tag_screen.o(.rodata);
         src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
@@ -528,6 +532,7 @@ SECTIONS {
         src/fossil_specials.o(.rodata);
         src/fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
+        src/pokemon_summary_screen.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);

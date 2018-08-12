@@ -4,7 +4,7 @@ EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 8229A34
 	.byte 0
 
 EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F: @ 8229A3F
-	setrespawn 11
+	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_1
 	checkflag FLAG_0x1CF
 	call_if 0, EverGrandeCity_PokemonCenter_1F_EventScript_229A4C
 	end

@@ -39,7 +39,7 @@ struct UnkIndicatorsStruct
 struct ScrollIndicatorPair
 {
     u8 field_0;
-    u16 *currItemPtr;
+    u16 *scrollOffset;
     u16 fullyUpThreshold;
     u16 fullyDownThreshold;
     u8 topSpriteId;
@@ -1064,7 +1064,7 @@ static u8 AddScrollIndicatorArrowObject(u8 arrowDir, u8 x, u8 y, u16 tileTag, u1
 #undef tFrequency
 #undef tSinePos
 
-u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16 *currItemPtr)
+u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16 *scrollOffset)
 {
     struct CompressedSpriteSheet spriteSheet;
     struct SpritePalette spritePal;
@@ -1091,7 +1091,7 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
     data = (void*) gTasks[taskId].data;
 
     data->field_0 = 0;
-    data->currItemPtr = currItemPtr;
+    data->scrollOffset = scrollOffset;
     data->fullyUpThreshold = arrowInfo->fullyUpThreshold;
     data->fullyDownThreshold = arrowInfo->fullyDownThreshold;
     data->tileTag = arrowInfo->tileTag;
@@ -1108,7 +1108,7 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
     return taskId;
 }
 
-u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u16 *currItemPtr)
+u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u16 *scrollOffset)
 {
     if (arrowType == SCROLL_ARROW_UP || arrowType == SCROLL_ARROW_DOWN)
     {
@@ -1135,13 +1135,13 @@ u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 fi
     gTempScrollArrowTemplate.palTag = palTag;
     gTempScrollArrowTemplate.palNum = 0;
 
-    return AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, currItemPtr);
+    return AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, scrollOffset);
 }
 
 static void Task_ScrollIndicatorArrowPair(u8 taskId)
 {
     struct ScrollIndicatorPair *data = (void*) gTasks[taskId].data;
-    u16 currItem = (*data->currItemPtr);
+    u16 currItem = (*data->scrollOffset);
 
     if (currItem == data->fullyUpThreshold && currItem != 0xFFFF)
         gSprites[data->topSpriteId].invisible = TRUE;

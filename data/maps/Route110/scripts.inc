@@ -11,7 +11,7 @@ Route110_MapScript1_1EF279: @ 81EF279
 Route110_MapScript1_1EF27D: @ 81EF27D
 	call Route110_EventScript_271ED7
 	call Route110_EventScript_271EFB
-	compare VAR_0x40A9, 1
+	compare VAR_CYCLING_CHALLENGE_STATE, 1
 	call_if 1, Route110_EventScript_1EF293
 	end
 
@@ -20,12 +20,12 @@ Route110_EventScript_1EF293:: @ 81EF293
 	return
 
 Route110_MapScript2_1EF297: @ 81EF297
-	map_script_2 VAR_0x40A9, 1, Route110_EventScript_1EF2A1
+	map_script_2 VAR_CYCLING_CHALLENGE_STATE, 1, Route110_EventScript_1EF2A1
 	.2byte 0
 
 Route110_EventScript_1EF2A1:: @ 81EF2A1
 	special Special_BeginCyclingRoadChallenge
-	setvar VAR_0x40A9, 2
+	setvar VAR_CYCLING_CHALLENGE_STATE, 2
 	return
 
 Route110_EventScript_1EF2AA:: @ 81EF2AA
@@ -148,7 +148,7 @@ Route110_EventScript_1EF3B7:: @ 81EF3B7
 	specialvar VAR_RESULT, GetPlayerAvatarBike
 	compare VAR_RESULT, 1
 	goto_eq Route110_EventScript_1EF3E8
-	compare VAR_0x40A9, 0
+	compare VAR_CYCLING_CHALLENGE_STATE, 0
 	goto_eq Route110_EventScript_1EF3DE
 	msgbox Route110_Text_1F06FB, 4
 	release
@@ -368,7 +368,7 @@ Route110_EventScript_1EF735:: @ 81EF735
 	end
 
 Route110_EventScript_1EF743:: @ 81EF743
-	setvar VAR_0x40A9, 3
+	setvar VAR_CYCLING_CHALLENGE_STATE, 3
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	return
@@ -426,7 +426,7 @@ Route110_EventScript_1EF7E6:: @ 81EF7E6
 
 Route110_EventScript_1EF7EB:: @ 81EF7EB
 	msgbox Route110_Text_1EFC48, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, Route110_EventScript_1EF81A
 	case 1, Route110_EventScript_1EF82A
 	case 2, Route110_EventScript_1EF83A
@@ -456,7 +456,7 @@ Route110_EventScript_1EF84A:: @ 81EF84A
 
 Route110_EventScript_1EF865:: @ 81EF865
 	msgbox Route110_Text_1EFE3F, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, Route110_EventScript_1EF894
 	case 1, Route110_EventScript_1EF8A4
 	case 2, Route110_EventScript_1EF8B4
@@ -951,7 +951,7 @@ Route110_Text_1F0755: @ 81F0755
 
 Route110_Text_1F0812: @ 81F0812
 	.string "ROUTE 110\n"
-	.string "{0x7A} SLATEPORT CITY$"
+	.string "{DOWN_ARROW} SLATEPORT CITY$"
 
 Route110_Text_1F082D: @ 81F082D
 	.string "SEASIDE CYCLING ROAD$"
@@ -965,14 +965,14 @@ Route110_Text_1F0842: @ 81F0842
 
 Route110_Text_1F08CD: @ 81F08CD
 	.string "ROUTE 110\n"
-	.string "{0x7B} ROUTE 103$"
+	.string "{LEFT_ARROW} ROUTE 103$"
 
 Route110_Text_1F08E3: @ 81F08E3
 	.string "SEASIDE PARKING$"
 
 Route110_Text_1F08F3: @ 81F08F3
 	.string "ROUTE 110\n"
-	.string "{0x79} MAUVILLE CITY$"
+	.string "{UP_ARROW} MAUVILLE CITY$"
 
 Route110_Text_1F090D: @ 81F090D
 	.string "TRAINER TIPS\p"
@@ -987,7 +987,7 @@ Route110_Text_1F0992: @ 81F0992
 	.string "by pressing SELECT.$"
 
 Route110_Text_1F09DB: @ 81F09DB
-	.string "“Three steps {0x7C} and two steps {0x79}\n"
+	.string "“Three steps {RIGHT_ARROW} and two steps {UP_ARROW}\n"
 	.string "to reach the wondrous TRICK HOUSE.”$"
 
 Route110_Text_1F0A1E: @ 81F0A1E

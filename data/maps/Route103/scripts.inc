@@ -38,7 +38,7 @@ Route103_EventScript_1EC3DA:: @ 81EC3DA
 	applymovement 2, Route103_Movement_27259A
 	waitmovement 0
 	msgbox Route103_Text_1EC7DE, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_1EC48E
 	case 1, Route103_EventScript_1EC49E
 	case 2, Route103_EventScript_1EC4AE
@@ -55,7 +55,7 @@ Route103_EventScript_1EC434:: @ 81EC434
 	applymovement 2, Route103_Movement_27259A
 	waitmovement 0
 	msgbox Route103_Text_1EC9CE, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_1EC4BE
 	case 1, Route103_EventScript_1EC4CE
 	case 2, Route103_EventScript_1EC4DE
@@ -364,5 +364,5 @@ Route103_Text_1ECBB5: @ 81ECBB5
 
 Route103_Text_1ECC1A: @ 81ECC1A
 	.string "ROUTE 103\n"
-	.string "{0x7A} OLDALE TOWN$"
+	.string "{DOWN_ARROW} OLDALE TOWN$"
 

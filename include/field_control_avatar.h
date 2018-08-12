@@ -37,5 +37,6 @@ bool8 sub_8068894(void);
 bool8 sub_8068A64(struct MapPosition *, u16);
 u8 sub_8068F18(void);
 bool8 dive_warp(struct MapPosition *position, u16 b);
+void sub_809D2BC(void);
 
 #endif // GUARD_FIELDCONTROLAVATAR_H

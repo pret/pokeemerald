@@ -1813,7 +1813,7 @@ gUnknown_086235C8:: @ 86235C8
 	.align 2
 
 gUnknown_086235D4:: @ 86235D4
-	.string "{0x77}$"
+	.string "{UNK_SPACER}$"
 	.align 2
 
 gUnknown_086235D8:: @ 86235D8
@@ -1860,7 +1860,7 @@ gUnknown_086237E8:: @ 86237E8
 	.align 2
 
 gUnknown_086237F4:: @ 86237F4
-	.string "{0x77}$"
+	.string "{UNK_SPACER}$"
 	.align 2
 
 gUnknown_086237F8:: @ 86237F8
@@ -1942,7 +1942,7 @@ gUnknown_08624BD8:: @ 8624BD8
 	.align 2
 
 gUnknown_08624BE4:: @ 8624BE4
-	.string "{0x77}$"
+	.string "{UNK_SPACER}$"
 	.align 2
 
 gUnknown_08624BE8:: @ 8624BE8

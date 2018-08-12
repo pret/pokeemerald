@@ -877,7 +877,7 @@ LilycoveCity_ContestLobby_EventScript_21ABA0:: @ 821ABA0
 	return
 
 LilycoveCity_ContestLobby_EventScript_21ABA6:: @ 821ABA6
-	message LilycoveCity_ContestLobby_Text_27C1EA
+	message Text_DecideLinkLeader
 	waitmessage
 	multichoice 16, 6, 81, 0
 	switch VAR_RESULT

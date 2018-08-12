@@ -13,7 +13,6 @@ extern const u8 gText_Peekaboo[];
 extern u8 *GetWaldaPhrasePtr(void);
 extern bool32 IsWaldaPhraseEmpty(void);
 extern void sub_80AF168(void);
-extern void CB2_ReturnToField(void);
 extern void SetWaldaPhrase(const u8 *src);
 extern void SetWaldaWallpaperPatternId(u8 patternId);
 extern void SetWaldaWallpaperIconId(u8 iconId);

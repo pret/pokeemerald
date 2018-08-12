@@ -631,7 +631,7 @@ static void CB2_EggHatch_1(void)
         GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_HatchedFromEgg);
         EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 3, 0xFF);
-        PlayFanfare(371);
+        PlayFanfare(MUS_FANFA5);
         sEggHatchData->CB2_state++;
         PutWindowTilemap(sEggHatchData->windowId);
         CopyWindowToVram(sEggHatchData->windowId, 3);

@@ -91,7 +91,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E:: @ 8227A4E
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	special SavePlayerParty
-	special sub_8139238
+	special BufferEReaderTrainerName
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227BFC, 5
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2

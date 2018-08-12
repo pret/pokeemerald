@@ -9,7 +9,7 @@ Route119_MapScript1_1F442F: @ 81F442F
 	end
 
 Route119_EventScript_1F4439:: @ 81F4439
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, Route119_EventScript_27374E
 	removeobject VAR_LAST_TALKED
@@ -80,7 +80,7 @@ Route119_EventScript_1F4506:: @ 81F4506
 
 Route119_EventScript_1F450B:: @ 81F450B
 	msgbox Route119_Text_1F49FD, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, Route119_EventScript_1F453A
 	case 1, Route119_EventScript_1F454A
 	case 2, Route119_EventScript_1F455A
@@ -110,7 +110,7 @@ Route119_EventScript_1F456A:: @ 81F456A
 
 Route119_EventScript_1F4585:: @ 81F4585
 	msgbox Route119_Text_1F4C9A, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, Route119_EventScript_1F45B4
 	case 1, Route119_EventScript_1F45C4
 	case 2, Route119_EventScript_1F45D4
@@ -622,7 +622,7 @@ Route119_Text_1F52B9: @ 81F52B9
 
 Route119_Text_1F530E: @ 81F530E
 	.string "ROUTE 119\n"
-	.string "{0x7C} FORTREE CITY$"
+	.string "{RIGHT_ARROW} FORTREE CITY$"
 
 Route119_Text_1F5327: @ 81F5327
 	.string "WEATHER INSTITUTE$"

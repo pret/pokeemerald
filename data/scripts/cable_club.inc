@@ -1906,7 +1906,7 @@ MossdeepCity_GameCorner_1F_Text_278BF1: @ 8278BF1
 	.string "Command DODRIO’s three heads to\n"
 	.string "catch falling BERRIES.\p"
 	.string "Press right, up, or left on the\n"
-	.string "{0xF9}Ç Control Pad to move the heads.\p"
+	.string "{PLUS} Control Pad to move the heads.\p"
 	.string "To play this game, you must have\n"
 	.string "a DODRIO.$"
 

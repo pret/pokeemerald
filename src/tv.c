@@ -3454,7 +3454,7 @@ void ChangePokemonNickname(void)
 void ChangePokemonNickname_CB(void)
 {
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
-    CB2_ReturnToFieldContinueScript();
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
 void ChangeBoxPokemonNickname(void)
@@ -3470,7 +3470,7 @@ void ChangeBoxPokemonNickname(void)
 void ChangeBoxPokemonNickname_CB(void)
 {
     SetBoxMonNickFromAnyBox(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
-    CB2_ReturnToFieldContinueScript();
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
 void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)

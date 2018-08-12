@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 86181C1
-	.include "data/text/move_descriptions.inc"
-
 @ 861CAAC
 	.include "data/text/nature_names.inc"
 
@@ -137,7 +134,7 @@ gUnknown_0861CE8E:: @ 861CE8E
 	.string "{SPECIAL_F7 0x02}$"
 
 gUnknown_0861CE97:: @ 861CE97
-	.string "{UNK_CTRL_F9 0x06}{SPECIAL_F7 0x00}/{SPECIAL_F7 0x01}$"
+	.string "{PP}{SPECIAL_F7 0x00}/{SPECIAL_F7 0x01}$"
 
 	.align 2
 gOamData_861CEA0:: @ 861CEA0

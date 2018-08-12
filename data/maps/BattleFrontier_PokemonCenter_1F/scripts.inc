@@ -4,7 +4,7 @@ BattleFrontier_PokemonCenter_1F_MapScripts:: @ 82678F9
 	.byte 0
 
 BattleFrontier_PokemonCenter_1F_MapScript1_267904: @ 8267904
-	setrespawn 22
+	setrespawn HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_267908:: @ 8267908

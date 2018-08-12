@@ -279,7 +279,7 @@ static void sub_8035C4C(void)
     {
         if (gBattleOutcome == B_OUTCOME_WON)
         {
-            switch (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18)
+            switch (gLinkPlayers[gBattleScripting.multiplayerId].id)
             {
             case 0:
                 BattlePutTextOnWindow(gText_Win, 0x16);
@@ -301,7 +301,7 @@ static void sub_8035C4C(void)
         }
         else
         {
-            switch (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18)
+            switch (gLinkPlayers[gBattleScripting.multiplayerId].id)
             {
             case 0:
                 BattlePutTextOnWindow(gText_Win, 0x17);
@@ -324,7 +324,7 @@ static void sub_8035C4C(void)
     }
     else if (gBattleOutcome == B_OUTCOME_WON)
     {
-        if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 != 0)
+        if (gLinkPlayers[gBattleScripting.multiplayerId].id != 0)
         {
             BattlePutTextOnWindow(gText_Win, 0x17);
             BattlePutTextOnWindow(gText_Loss, 0x16);
@@ -337,7 +337,7 @@ static void sub_8035C4C(void)
     }
     else
     {
-        if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 != 0)
+        if (gLinkPlayers[gBattleScripting.multiplayerId].id != 0)
         {
             BattlePutTextOnWindow(gText_Win, 0x16);
             BattlePutTextOnWindow(gText_Loss, 0x17);
@@ -366,23 +366,23 @@ void sub_8035D74(u8 taskId)
                 name = gLinkPlayers[i].name;
                 linkPlayer = &gLinkPlayers[i];
 
-                switch (linkPlayer->lp_field_18)
+                switch (linkPlayer->id)
                 {
                 case 0:
                     BattlePutTextOnWindow(name, 0x11);
-                    sub_8035AE4(taskId, linkPlayer->lp_field_18, 1, 2, 4);
+                    sub_8035AE4(taskId, linkPlayer->id, 1, 2, 4);
                     break;
                 case 1:
                     BattlePutTextOnWindow(name, 0x12);
-                    sub_8035AE4(taskId, linkPlayer->lp_field_18, 2, 2, 4);
+                    sub_8035AE4(taskId, linkPlayer->id, 2, 2, 4);
                     break;
                 case 2:
                     BattlePutTextOnWindow(name, 0x13);
-                    sub_8035AE4(taskId, linkPlayer->lp_field_18, 1, 2, 8);
+                    sub_8035AE4(taskId, linkPlayer->id, 1, 2, 8);
                     break;
                 case 3:
                     BattlePutTextOnWindow(name, 0x14);
-                    sub_8035AE4(taskId, linkPlayer->lp_field_18, 2, 2, 8);
+                    sub_8035AE4(taskId, linkPlayer->id, 2, 2, 8);
                     break;
                 }
             }
@@ -393,7 +393,7 @@ void sub_8035D74(u8 taskId)
             u8 opponentId = playerId ^ BIT_SIDE;
             u8 opponentId_copy = opponentId;
 
-            if (gLinkPlayers[playerId].lp_field_18 != 0)
+            if (gLinkPlayers[playerId].id != 0)
                 opponentId = playerId, playerId = opponentId_copy;
 
             name = gLinkPlayers[playerId].name;

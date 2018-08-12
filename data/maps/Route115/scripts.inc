@@ -154,7 +154,7 @@ Route115_Text_1F2B55: @ 81F2B55
 
 Route115_Text_1F2BC9: @ 81F2BC9
 	.string "ROUTE 115\n"
-	.string "{0x7A} RUSTBORO CITY$"
+	.string "{DOWN_ARROW} RUSTBORO CITY$"
 
 Route115_Text_1F2BE3: @ 81F2BE3
 	.string "METEOR FALLS\n"

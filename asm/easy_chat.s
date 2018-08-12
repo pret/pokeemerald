@@ -623,7 +623,7 @@ _0811A7C2:
 	bl overworld_free_bg_tilemaps
 	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
-	ldr r2, =sub_80861B0
+	ldr r2, =CB2_ReturnToFieldContinueScript
 	adds r1, r4, 0
 	adds r3, r5, 0
 	bl sub_811A20C
@@ -760,7 +760,7 @@ sub_811A8CC: @ 811A8CC
 	ldr r1, [r0]
 	ldr r0, =0x00003b6e
 	adds r1, r0
-	ldr r2, =sub_80861B0
+	ldr r2, =CB2_ReturnToFieldContinueScript
 	movs r0, 0xF
 	movs r3, 0x3
 	bl sub_811A20C
@@ -776,7 +776,7 @@ sub_811A8F0: @ 811A8F0
 	ldr r1, [r0]
 	ldr r0, =0x00003b5a
 	adds r1, r0
-	ldr r2, =sub_80861B0
+	ldr r2, =CB2_ReturnToFieldContinueScript
 	movs r0, 0x10
 	movs r3, 0x3
 	bl sub_811A20C
@@ -792,7 +792,7 @@ sub_811A914: @ 811A914
 	ldr r1, [r0]
 	ldr r0, =0x00003b6c
 	adds r1, r0
-	ldr r2, =sub_80861B0
+	ldr r2, =CB2_ReturnToFieldContinueScript
 	movs r0, 0x12
 	movs r3, 0x3
 	bl sub_811A20C
@@ -808,7 +808,7 @@ sub_811A938: @ 811A938
 	ldr r1, [r0]
 	ldr r0, =0x00003b5a
 	adds r1, r0
-	ldr r2, =sub_80861B0
+	ldr r2, =CB2_ReturnToFieldContinueScript
 	movs r0, 0x11
 	movs r3, 0x3
 	bl sub_811A20C
@@ -3691,7 +3691,7 @@ sub_811BDF0: @ 811BDF0
 	adds r6, r0, 0
 	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r0, =0x00003b70
 	adds r5, r4, r0
 	adds r0, r5, 0
@@ -3707,17 +3707,17 @@ sub_811BDF0: @ 811BDF0
 	bl TVShowConvertInternationalString
 	movs r0, 0
 	mov r1, sp
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	b _0811BE3C
 	.pool
 _0811BE34:
 	ldr r1, =gText_Lady
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 _0811BE3C:
 	ldr r1, =gText_F700sQuiz
 	adds r0, r6, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	add sp, 0x20
 	pop {r4-r6}
 	pop {r0}

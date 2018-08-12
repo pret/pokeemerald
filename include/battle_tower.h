@@ -42,5 +42,6 @@ void sub_81628A0(union BattleTowerRecord *);
 void sub_8162614(u16 trainerId, u8);
 void ConvertBattleFrontierTrainerSpeechToString(u16 *words);
 void GetFrontierTrainerName(u8 *dest, u16 trainerIdx);
+void GetEreaderTrainerName(u8 *dest);
 
 #endif //GUARD_BATTLE_TOWER_H

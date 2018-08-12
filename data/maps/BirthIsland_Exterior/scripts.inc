@@ -37,7 +37,7 @@ BirthIsland_Exterior_MapScript1_267F65: @ 8267F65
 	end
 
 BirthIsland_Exterior_EventScript_267F6F:: @ 8267F6F
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, BirthIsland_Exterior_EventScript_27374E
 	removeobject 2
@@ -91,7 +91,7 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq BirthIsland_Exterior_EventScript_26803B
 	compare VAR_RESULT, 4

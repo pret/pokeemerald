@@ -4,7 +4,7 @@ FortreeCity_PokemonCenter_1F_MapScripts:: @ 82173D8
 	.byte 0
 
 FortreeCity_PokemonCenter_1F_MapScript1_2173E3: @ 82173E3
-	setrespawn 7
+	setrespawn HEAL_LOCATION_FORTREE_CITY
 	end
 
 FortreeCity_PokemonCenter_1F_EventScript_2173E7:: @ 82173E7

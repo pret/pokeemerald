@@ -47,7 +47,7 @@ enum
     RFU_UNK3A,
     RFU_UNK3B,
     RFU_UNK3C,
-    RFU_STOP_MODE, //3D
+    RFU_STOP_MODE, // 3D
 };
 
 struct RfuPacket8
@@ -67,7 +67,7 @@ union RfuPacket
     struct RfuPacket8 rfuPacket8;
 };
 
-struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
+struct UnkLinkRfuStruct_02022B14Substruct
 {
     u16 unk_00_0:4;
     u16 unk_00_4:1;
@@ -79,9 +79,14 @@ struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
     u16 unk_01_2:4;
     u16 unk_01_6:2;
     u8 playerTrainerId[2];
+};
+
+struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
+{
+    struct UnkLinkRfuStruct_02022B14Substruct unk_00;
     u8 unk_04[4];
-    u16 unk_08_0:10;
-    u16 unk_09_2:6;
+    u16 species:10;
+    u16 type:6;
     u8 unk_0a_0:7;
     u8 unk_0a_7:1;
     u8 playerGender:1;
@@ -199,8 +204,6 @@ extern struct RfuUnk2* gUnknown_03007880[4];
 extern struct RfuUnk1* gUnknown_03007870[4];
 extern void* sub_82E53F4;
 extern void rfu_STC_clearAPIVariables(void);
-
-struct UnkLinkRfuStruct_02022B14;
 
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_REQ_stopMode(void);

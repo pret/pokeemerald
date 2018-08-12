@@ -301,7 +301,7 @@ void sub_81AABB0(void)
 
 void CB2_ChooseBerry(void)
 {
-    GoToBagMenu(4, 3, sub_80861B0);
+    GoToBagMenu(4, 3, CB2_ReturnToFieldContinueScript);
 }
 
 void sub_81AABF0(void(*callback)(void))

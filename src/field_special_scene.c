@@ -272,7 +272,7 @@ bool8 sub_80FB59C(void)
 void Task_HandlePorthole(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *var = GetVarPointer(VAR_PORTHOLE);
+    u16 *var = GetVarPointer(VAR_PORTHOLE_STATE);
     struct WarpData *location = &gSaveBlock1Ptr->location;
 
     switch (data[0])

@@ -169,7 +169,7 @@ Route116_EventScript_1F2DB6:: @ 81F2DB6
 	checkitem ITEM_BLACK_GLASSES, 1
 	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2DF1
-	specialvar VAR_RESULT, sub_8139634
+	specialvar VAR_RESULT, FoundBlackGlasses
 	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2DE2
 	msgbox Route116_Text_1F3657, 4
@@ -185,7 +185,7 @@ Route116_EventScript_1F2DE2:: @ 81F2DE2
 Route116_EventScript_1F2DF1:: @ 81F2DF1
 	msgbox Route116_Text_1F3657, 4
 	msgbox Route116_Text_1F3688, 4
-	specialvar VAR_RESULT, sub_8139634
+	specialvar VAR_RESULT, FoundBlackGlasses
 	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2E1B
 	msgbox Route116_Text_1F375E, 4
@@ -482,7 +482,7 @@ Route116_Text_1F375E: @ 81F375E
 
 Route116_Text_1F379D: @ 81F379D
 	.string "ROUTE 116\n"
-	.string "{0x7B} RUSTBORO CITY$"
+	.string "{LEFT_ARROW} RUSTBORO CITY$"
 
 Route116_Text_1F37B7: @ 81F37B7
 	.string "RUSTURF TUNNEL\n"
