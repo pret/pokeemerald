@@ -319,7 +319,7 @@ void Task_FadeToSlotMachine(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -487,10 +487,10 @@ void SlotMachineSetup_2_1(void)
     SetGpuReg(REG_OFFSET_BG2VOFS, 0);
     SetGpuReg(REG_OFFSET_BG3HOFS, 0);
     SetGpuReg(REG_OFFSET_BG3VOFS, 0);
-    SetGpuReg(REG_OFFSET_WININ, 0x3f);
-    SetGpuReg(REG_OFFSET_WINOUT, 0x3f);
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_OBJ);
-    SetGpuReg(REG_OFFSET_BLDALPHA, 0x809);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 8));
 }
 
 extern const s16 gUnknown_083ECCF8[][2];
