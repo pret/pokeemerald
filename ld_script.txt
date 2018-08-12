@@ -170,6 +170,7 @@ SECTIONS {
         src/region_map.o(.text);
         asm/cute_sketch.o(.text);
         src/decoration.o(.text);
+        src/slot_machine.o(.text);
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
@@ -464,6 +465,7 @@ SECTIONS {
         src/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/decoration.o(.rodata);
+        src/slot_machine.o(.rodata);
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
