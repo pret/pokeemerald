@@ -42,10 +42,7 @@
 #include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"
 #include "data2.h"
-
-#define DESTROY_POINTER(ptr) \
-    free(ptr); \
-    ptr = NULL;
+#include "constants/rgb.h"
 
 extern void (*gFieldCallback)(void);
 
@@ -265,8 +262,8 @@ void sub_80D7678(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
-    SetGpuReg(REG_OFFSET_WININ, 0x3F3F);
-    SetGpuReg(REG_OFFSET_WINOUT, 0x3F3F);
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR);
+    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG0 | WINOUT_WINOBJ_BG1 | WINOUT_WINOBJ_BG2 | WINOUT_WINOBJ_BG3 | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
 
     gBattle_BG0_X = 0;
@@ -333,10 +330,10 @@ void sub_80D782C(void)
     s32 i;
 
     LoadPalette(gUnknown_08587C30, 0xf0, 0x20);
-    FillPalette(0, 0, 2);
+    FillPalette(RGB_BLACK, 0, 2);
     for (i = 10; i < 14; i++)
         LoadPalette(gPlttBufferUnfaded + 241, 240 + i, 2);
-    FillPalette(0x7E3F, 0xF3, 2);
+    FillPalette(RGB(31, 17, 31), 0xF3, 2);
 }
 
 void sub_80D787C(void)
@@ -398,23 +395,23 @@ void sub_80D7988(void)
 
 void sub_80D7A5C(void)
 {
-    DESTROY_POINTER(gContestResources->field_0);
-    DESTROY_POINTER(gContestResources->field_4);
-    DESTROY_POINTER(gContestResources->field_8);
-    DESTROY_POINTER(gContestResources->field_C);
-    DESTROY_POINTER(gContestResources->field_10);
-    DESTROY_POINTER(gContestResources->field_14);
-    DESTROY_POINTER(gContestResources->field_18);
-    DESTROY_POINTER(gContestResources->field_1c);
-    DESTROY_POINTER(gContestResources->field_20);
-    DESTROY_POINTER(gContestResources->field_24[0]);
-    DESTROY_POINTER(gContestResources->field_24[1]);
-    DESTROY_POINTER(gContestResources->field_24[2]);
-    DESTROY_POINTER(gContestResources->field_24[3]);
-    DESTROY_POINTER(gContestResources->field_34);
-    DESTROY_POINTER(gContestResources->field_38);
-    DESTROY_POINTER(gContestResources->field_3c);
-    DESTROY_POINTER(gContestResources);
+    FREE_AND_SET_NULL(gContestResources->field_0);
+    FREE_AND_SET_NULL(gContestResources->field_4);
+    FREE_AND_SET_NULL(gContestResources->field_8);
+    FREE_AND_SET_NULL(gContestResources->field_C);
+    FREE_AND_SET_NULL(gContestResources->field_10);
+    FREE_AND_SET_NULL(gContestResources->field_14);
+    FREE_AND_SET_NULL(gContestResources->field_18);
+    FREE_AND_SET_NULL(gContestResources->field_1c);
+    FREE_AND_SET_NULL(gContestResources->field_20);
+    FREE_AND_SET_NULL(gContestResources->field_24[0]);
+    FREE_AND_SET_NULL(gContestResources->field_24[1]);
+    FREE_AND_SET_NULL(gContestResources->field_24[2]);
+    FREE_AND_SET_NULL(gContestResources->field_24[3]);
+    FREE_AND_SET_NULL(gContestResources->field_34);
+    FREE_AND_SET_NULL(gContestResources->field_38);
+    FREE_AND_SET_NULL(gContestResources->field_3c);
+    FREE_AND_SET_NULL(gContestResources);
     gUnknown_0202305C = NULL;
     gUnknown_02023060 = NULL;
 }
@@ -427,7 +424,7 @@ void sub_80D7B24(void)
             sContestBgCopyFlags = 0;
             sub_80D7988();
             AllocateMonSpritesGfx();
-            DESTROY_POINTER(gMonSpritesGfxPtr->firstDecompressed);
+            FREE_AND_SET_NULL(gMonSpritesGfxPtr->firstDecompressed);
             gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(0x4000);
             SetVBlankCallback(NULL);
             sub_80D779C();
