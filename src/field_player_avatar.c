@@ -11,67 +11,36 @@
 #include "overworld.h"
 #include "rotating_gate.h"
 #include "constants/event_object_movement_constants.h"
+#include "field_player_avatar.h"
 
-bool8 ForcedMovement_None(void);
-bool8 ForcedMovement_Slip(void);
-bool8 ForcedMovement_WalkSouth(void);
-bool8 ForcedMovement_WalkNorth(void);
-bool8 ForcedMovement_WalkWest(void);
-bool8 ForcedMovement_WalkEast(void);
-bool8 ForcedMovement_PushedSouthByCurrent(void);
-bool8 ForcedMovement_PushedNorthByCurrent(void);
-bool8 ForcedMovement_PushedWestByCurrent(void);
-bool8 ForcedMovement_PushedEastByCurrent(void);
-bool8 ForcedMovement_SlideSouth(void);
-bool8 ForcedMovement_SlideNorth(void);
-bool8 ForcedMovement_SlideWest(void);
-bool8 ForcedMovement_SlideEast(void);
-bool8 ForcedMovement_0xBB(void);
-bool8 ForcedMovement_0xBC(void);
-bool8 ForcedMovement_MuddySlope(void);
-
-void task_add_bump_boulder(u8, u8);
-u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z);
-bool32 CheckForRotatingGatePuzzleCollisionWithoutAnimation(u8, s16, s16); // from rotating_gate.c
-bool8 ShouldJumpLedge(s16, s16, u8);
-bool8 sub_808B1BC(s16, s16, u8);
-u8 sub_808B164(struct EventObject *, s16, s16, u8, u8);
-u8 CheckForEventObjectCollision(struct EventObject *, s16, s16, u8, u8);
-u8 sub_808B238(s16, s16, u8);
-void check_acro_bike_metatile(s16, s16, u8, u8 *);
-void PlayerNotOnBikeCollide(u8);
-void PlayerNotOnBikeCollideWithFarawayIslandMew(u8);
-bool8 IsPlayerCollidingWithFarawayIslandMew(u8);
-void PlayerRun(u8);
-void PlayerTurnInPlace(u8);
-void PlayerFaceDirection(u8);
-u8 GetPlayerFacingDirection(void);
-void MovePlayerNotOnBike(u8, u16);
-u8 CheckMovementInputNotOnBike(u8);
-u8 GetPlayerMovementDirection(void);
-void sub_808C5B0(void);
-void sub_808C4D8(void);
-void PlayerJumpLedge(u8);
-u8 CheckForPlayerAvatarCollision(u8);
-void PlayerGoSpeed1(u8);
-void PlayerGoSpeed2(u8);
-void PlayerGoSpeed3(u8);
+extern void task_add_bump_boulder(u8, u8);
+static bool8 ShouldJumpLedge(s16, s16, u8);
+static bool8 sub_808B1BC(s16, s16, u8);
+static u8 sub_808B164(struct EventObject *, s16, s16, u8, u8);
+static u8 sub_808B238(s16, s16, u8);
+static void check_acro_bike_metatile(s16, s16, u8, u8 *);
+extern void PlayerNotOnBikeCollide(u8);
+extern void PlayerNotOnBikeCollideWithFarawayIslandMew(u8);
+extern void PlayerRun(u8); 
+static void MovePlayerNotOnBike(u8, u16);
+static u8 CheckMovementInputNotOnBike(u8);
+extern void sub_808C5B0(void);
+extern void sub_808C4D8(void);
+static u8 CheckForPlayerAvatarCollision(u8);
 static u8 EventObjectCB2_NoMovement2();
-void sub_808C280(struct EventObject *); //struct EventObject *playerEventObj
-bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *, u8);
+extern void sub_808C280(struct EventObject *); 
+static bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *, u8);
 void npc_clear_strange_bits(struct EventObject *);
-u8 EventObjectGetHeldMovementActionId(struct EventObject *);
-void DoPlayerAvatarTransition(void);
-bool8 TryDoMetatileBehaviorForcedMovement();
-void MovePlayerAvatarUsingKeypadInput(u8, u16, u16);
-void PlayerAllowForcedMovementIfMovingSameDirection();
-void MovePlayerNotOnBike(u8 a, u16 b);
-u8 sub_808B028(u8);
-u8 GetForcedMovementByMetatileBehavior();
-void PlayerNotOnBikeNotMoving(u8, u16);
-void PlayerNotOnBikeTurningInPlace(u8, u16);
-void PlayerNotOnBikeMoving(u8, u16);
-void sub_808C750(u8);
+extern void DoPlayerAvatarTransition(void); 
+static bool8 TryDoMetatileBehaviorForcedMovement();
+static void MovePlayerAvatarUsingKeypadInput(u8, u16, u16);
+static void PlayerAllowForcedMovementIfMovingSameDirection();
+static u8 sub_808B028(u8);
+static u8 GetForcedMovementByMetatileBehavior();
+static void PlayerNotOnBikeNotMoving(u8, u16);
+static void PlayerNotOnBikeTurningInPlace(u8, u16);
+static void PlayerNotOnBikeMoving(u8, u16);
+extern void sub_808C750(u8);
 
 static bool8 (*const gUnknown_084973FC[])(u8) =
 {
@@ -94,6 +63,7 @@ static bool8 (*const gUnknown_084973FC[])(u8) =
     MetatileBehavior_IsSecretBaseSpinMat,
     MetatileBehavior_IsMuddySlope,
 };
+
 static bool8 (*const gUnknown_08497444[])(void) =
 {
     ForcedMovement_None,
@@ -116,6 +86,7 @@ static bool8 (*const gUnknown_08497444[])(void) =
     ForcedMovement_0xBC,
     ForcedMovement_MuddySlope,
 };
+
 static void (*const gUnknown_08497490[])(u8, u16) =
 {
     PlayerNotOnBikeNotMoving,
@@ -131,6 +102,7 @@ static bool8 (*const gUnknown_0849749C[])(u8) =
     MetatileBehavior_IsVerticalRail,
     MetatileBehavior_IsHorizontalRail,
 };
+
 static const u8 gUnknown_084974B0[] = {9, 10, 11, 12, 13, 0, 0, 0};
 
 void MovementType_Player(struct Sprite *sprite)
@@ -164,7 +136,7 @@ void player_step(u8 direction, u16 newKeys, u16 heldKeys)
     }
 }
 
-bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *playerEventObj, u8 direction)
+static bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *playerEventObj, u8 direction)
 {
     #ifdef NONMATCHING
         u8 r5 = direction;
@@ -213,7 +185,7 @@ void npc_clear_strange_bits(struct EventObject *eventObj)
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
 }
 
-void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
+static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
      || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
@@ -222,18 +194,18 @@ void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
         MovePlayerNotOnBike(direction, heldKeys);
 }
 
-void PlayerAllowForcedMovementIfMovingSameDirection(void)
+static void PlayerAllowForcedMovementIfMovingSameDirection(void)
 {
     if (gPlayerAvatar.runningState == MOVING)
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_5;
 }
 
-bool8 TryDoMetatileBehaviorForcedMovement()
+static bool8 TryDoMetatileBehaviorForcedMovement()
 {
 	return gUnknown_08497444[GetForcedMovementByMetatileBehavior()]();
 }
 
-u8 GetForcedMovementByMetatileBehavior(void)
+static u8 GetForcedMovementByMetatileBehavior(void)
 {
     u8 i;
 
@@ -404,12 +376,12 @@ bool8 ForcedMovement_MuddySlope(void)
     }
 }
 
-void MovePlayerNotOnBike(u8 direction, u16 heldKeys)
+static void MovePlayerNotOnBike(u8 direction, u16 heldKeys)
 {
     gUnknown_08497490[CheckMovementInputNotOnBike(direction)](direction, heldKeys);
 }
 
-u8 CheckMovementInputNotOnBike(u8 direction)
+static u8 CheckMovementInputNotOnBike(u8 direction)
 {
     if (direction == DIR_NONE)
     {
@@ -428,17 +400,17 @@ u8 CheckMovementInputNotOnBike(u8 direction)
     }
 }
 
-void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
+static void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
 {
     PlayerFaceDirection(GetPlayerFacingDirection());
 }
 
-void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys)
+static void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys)
 {
     PlayerTurnInPlace(direction);
 }
 
-void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
+static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 {
     u8 r0 = CheckForPlayerAvatarCollision(direction);
 
@@ -490,7 +462,7 @@ void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     }
 }
 
-u8 CheckForPlayerAvatarCollision(u8 direction)
+static u8 CheckForPlayerAvatarCollision(u8 direction)
 {
     s16 x, y;
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
@@ -501,7 +473,7 @@ u8 CheckForPlayerAvatarCollision(u8 direction)
     return CheckForEventObjectCollision(playerEventObj, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
 }
 
-u8 sub_808B028(u8 direction)
+static u8 sub_808B028(u8 direction)
 {
     s16 x, y;
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
@@ -536,7 +508,7 @@ u8 CheckForEventObjectCollision(struct EventObject *a, s16 x, s16 y, u8 directio
     return collision;
 }
 
-u8 sub_808B164(struct EventObject *a, s16 x, s16 y, u8 direction, u8 e)
+static u8 sub_808B164(struct EventObject *a, s16 x, s16 y, u8 direction, u8 e)
 {
     u8 collision = GetCollisionAtCoords(a, x, y, direction);
 
@@ -549,7 +521,7 @@ u8 sub_808B164(struct EventObject *a, s16 x, s16 y, u8 direction, u8 e)
     return collision;
 }
 
-bool8 sub_808B1BC(s16 x, s16 y, u8 direction)
+static bool8 sub_808B1BC(s16 x, s16 y, u8 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
      && MapGridGetZCoordAt(x, y) == 3
@@ -564,7 +536,7 @@ bool8 sub_808B1BC(s16 x, s16 y, u8 direction)
     }
 }
 
-bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
+static bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
 {
     if (GetLedgeJumpDirection(x, y, z) != 0)
         return TRUE;
@@ -572,7 +544,7 @@ bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
         return FALSE;
 }
 
-u8 sub_808B238(s16 x, s16 y, u8 direction)
+static u8 sub_808B238(s16 x, s16 y, u8 direction)
 {
     if (FlagGet(FLAG_SYS_USE_STRENGTH))
     {
@@ -594,7 +566,7 @@ u8 sub_808B238(s16 x, s16 y, u8 direction)
     return 0;
 }
 
-void check_acro_bike_metatile(s16 unused1, s16 unused2, u8 c, u8 *d)
+static void check_acro_bike_metatile(s16 unused1, s16 unused2, u8 c, u8 *d)
 {
     u8 i;
 
