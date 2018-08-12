@@ -3329,7 +3329,7 @@ sub_8157C48: @ 8157C48
 	bl sub_81564AC
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80DBCA8
+	bl Contest_IsMonsTurnDisabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _08157C74

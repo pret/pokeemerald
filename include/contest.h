@@ -414,8 +414,15 @@ extern struct ContestResources *gContestResources;
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
 
 extern u32 gContestRngValue;
+extern u8 gUnknown_02039F26[4];
 
 bool8 IsSpeciesNotUnown(u16 species);
 void LoadContestBgAfterMoveAnim(void);
+void SetContestantEffectStringID(u8 a, u8 b);
+void SetContestantEffectStringID2(u8 a, u8 b);
+void MakeContestantNervous(u8 p);
+bool8 Contest_IsMonsTurnDisabled(u8 a);
+bool8 sub_80DE1E8(u8 a);
+void SetStartledString(u8 a, u8 b);
 
 #endif //GUARD_CONTEST_H
