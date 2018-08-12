@@ -64,4 +64,4 @@ cd ../pokeemerald
 ./build_tools.sh
 ```
 
-And build the ROM with `make -j4`.
+And build the ROM with `make`.
