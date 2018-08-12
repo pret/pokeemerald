@@ -1362,7 +1362,7 @@ void task_new_game_prof_birch_speech_part2_3(u8 taskId)
 
 void task_new_game_prof_birch_speech_part2_4(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
         case 0:
             PlaySE(SE_SELECT);
@@ -1802,7 +1802,7 @@ void sub_8031D74(void)
 
 s8 sub_8031DB4(void)
 {
-    return ProcessMenuInputNoWrapAround();
+    return Menu_ProcessInputNoWrapAround();
 }
 
 void set_default_player_name(u8 nameId)

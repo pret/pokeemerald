@@ -3349,7 +3349,7 @@ sub_8078EF8: @ 8078EF8
 sub_8078F50: @ 8078F50
 	push {lr}
 	sub sp, 0x4
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1
@@ -3695,7 +3695,7 @@ _0807920E:
 	thumb_func_start sub_8079218
 sub_8079218: @ 8079218
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3797,7 +3797,7 @@ _080792D8:
 	thumb_func_start sub_80792E4
 sub_80792E4: @ 80792E4
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

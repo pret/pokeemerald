@@ -11771,7 +11771,7 @@ sub_81A070C: @ 81A070C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _081A0730
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	b _081A0734
 	.pool
 _081A0730:

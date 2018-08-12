@@ -1581,7 +1581,7 @@ sub_812B158: @ 812B158
 	thumb_func_start sub_812B1B0
 sub_812B1B0: @ 812B1B0
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

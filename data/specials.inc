@@ -235,7 +235,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B9770
 	def_special sub_81B9718
 	def_special sub_81B96D0
-	def_special sub_8160638
+	def_special TeachMoveTutorMove
 	def_special GetRecordedCyclingRoadResults
 	def_special Special_BeginCyclingRoadChallenge
 	def_special GetPlayerAvatarBike

@@ -3040,7 +3040,7 @@ sub_81C5F68: @ 81C5F68
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _081C5FD0
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2

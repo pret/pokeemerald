@@ -384,7 +384,7 @@ void sub_81BF8EC(u8 a, void *b, u8 c, u8 d, void *e)
     SetMainCallback2(sub_81BFAE4);
 }
 
-void sub_81BFA38(void *a, u8 b, u8 c, void *d, u16 e)
+void ShowSelectMovePokemonSummaryScreen(void *a, u8 b, u8 c, void *d, u16 e)
 {
     sub_81BF8EC(3, a, b, c, d);
     gUnknown_0203CF1C->unk40C4 = e;

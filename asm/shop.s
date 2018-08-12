@@ -137,7 +137,7 @@ Task_ShopMenu: @ 80DFB88
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r2, r0, 24
 	movs r0, 0x2

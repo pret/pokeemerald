@@ -258,7 +258,7 @@ static void Task_StarterChoose5(u8 taskId)
 {
     u8 spriteId;
 
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:  // YES
         // Return the starter choice and exit.

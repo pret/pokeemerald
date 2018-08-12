@@ -22,6 +22,9 @@ void sub_81D1D04(u8);
 bool8 sub_81D1C44(u8);
 void sub_81D5FB4(u16*);
 bool8 sub_81D4A58(struct EventObject*);
-
+void sub_81D2BF4(u8 *);
+u16 sub_81D2C3C(void);
+void sub_81D2C50(void);
+u8 sub_81D28C8(const struct ListMenuItem *items, u16 numChoices);
 
 #endif //GUARD_POKENAV_H
