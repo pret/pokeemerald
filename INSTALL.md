@@ -37,47 +37,31 @@ You can then build pokeemerald using `make` in the MSYS environment provided wit
 
 Installing pokeemerald on a Mac requires macOS >= 10.12 (Sierra or higher).
 
-To get pokeemerald up and running, run the following commands in Terminal:
+Download a [devkitPRO pacman](https://github.com/devkitPro/pacman/releases/tag/v1.0.0)
 
-Make sure you have the right compilers.
+Run the following commands in Terminal:
+
 
 ```
 xcode-select --install
-```
-   
-Download a [devkitPRO pacman](https://github.com/devkitPro/pacman/releases/tag/v1.0.0) package (`.pkg`) and install using the native Installer.
 
-This will install the devkitPRO package in `/opt/devkitpro`.
-
-You must install devkitARM using
-
-```
 sudo dkp-pacman -S devkitARM 
-```
 
-Then set environment variables 
-
-```
 export DEVKITPRO=/opt/devkitpro
 echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
 export DEVKITARM=$DEVKITPRO/devkitARM
 echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
-```
+echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
 
-Now download and install the game's compiler from <https://github.com/pret/agbcc>. You should download and unpack the `.zip` and move the folder to the same folder holding pokeemerald. 
+git clone https://github.com/pret/pokeemerald
+git clone https://github.com/pret/agbcc
 
-```
-cd /PATH/TO/agbcc/
+cd agbcc/
 ./build.sh
-./install.sh /PATH/TO/pokeemerald 
-```
+./install.sh ../pokeemerald 
 
-Build the necessary tools
-```
-cd /PATH/TO/pokeemerald
+cd ../pokeemerald
 ./build_tools.sh
 ```
-And finally the ROM should be ready to build
-```
-make
-```
+
+And build the ROM with `make -j4`.
