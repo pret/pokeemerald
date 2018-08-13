@@ -1,5 +1,6 @@
 #include "global.h"
 #include "random.h"
+#include "constants/moves.h"
 #include "contest.h"
 #include "contest_effect.h"
 
@@ -158,13 +159,16 @@ static void ContestEffect_StartlePrevMons(void)
     u8 idx = 0;
     u8 a = shared192D0.contestant;
 
-    if (shared192D0.turnOrder[a] != 0) {
-        int i;
-        int j = 0;
+    if (shared192D0.turnOrder[a] != 0)
+    {
+        int i, j;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0, j = 0; i < 4; i++)
+        {
             if (shared192D0.turnOrder[a] > shared192D0.turnOrder[i])
                 shared192D0.jamQueue[j++] = i;
+        }
+
         shared192D0.jamQueue[j] = 0xFF;
         idx = WasAtLeastOneOpponentJammed();
     }
@@ -185,6 +189,7 @@ static void ContestEffect_StartlePrevMon2(void)
         jam = 40;
     else
         jam = 60;
+
     shared192D0.jam = jam;
     ContestEffect_StartleFrontMon();
 }
@@ -193,7 +198,7 @@ static void ContestEffect_StartlePrevMon2(void)
 static void ContestEffect_StartlePrevMons2(void)
 {
     u8 numStartled = 0;
-    u8 contestant = shared192D0.contestant;
+    register u32 contestant asm("r5") = shared192D0.contestant;
 
     if (shared192D0.turnOrder[contestant] != 0)
     {
@@ -203,11 +208,11 @@ static void ContestEffect_StartlePrevMons2(void)
         {
             if (shared192D0.turnOrder[contestant] > shared192D0.turnOrder[i])
             {
+                u8 rval, jam;
+
                 shared192D0.jamQueue[0] = i;
                 shared192D0.jamQueue[1] = 0xFF;
-                {
-                u8 rval = Random() % 10;
-                int jam;
+                rval = Random() % 10;
 
                 if (rval == 0)
                     jam = 0;
@@ -221,8 +226,9 @@ static void ContestEffect_StartlePrevMons2(void)
                     jam = 40;
                 else
                     jam = 60;
+
                 shared192D0.jam = jam;
-                }
+
                 if (WasAtLeastOneOpponentJammed())
                     numStartled++;
             }
@@ -1124,16 +1130,20 @@ static bool8 WasAtLeastOneOpponentJammed(void)
                 shared192D0.jam2 = 10;
                 SetContestantEffectStringID(contestant, CONTEST_STRING_LITTLE_DISTRACTED);
             }
-            else if ((shared192D0.jam2 -= sContestantStatus[contestant].jamReduction) <= 0)
-            {
-                shared192D0.jam2 = 0;
-                SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
-            }
             else
             {
-                JamContestant(contestant, shared192D0.jam2);
-                SetStartledString(contestant, shared192D0.jam2);
-                jamBuffer[contestant] = shared192D0.jam2;
+                shared192D0.jam2 -= sContestantStatus[contestant].jamReduction;
+                if (shared192D0.jam2 <= 0)
+                {
+                    shared192D0.jam2 = 0;
+                    SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
+                }
+                else
+                {
+                    JamContestant(contestant, shared192D0.jam2);
+                    SetStartledString(contestant, shared192D0.jam2);
+                    jamBuffer[contestant] = shared192D0.jam2;
+                }
             }
         }
     }
