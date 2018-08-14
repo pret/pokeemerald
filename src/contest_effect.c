@@ -197,9 +197,10 @@ static void ContestEffect_StartlePrevMon2(void)
 static void ContestEffect_StartlePrevMons2(void)
 {
     u8 numStartled = 0;
-    register u32 contestant asm("r5") = shared192D0.contestant;
+    u8 contestant = shared192D0.contestant;
+    u8 turnOrder = shared192D0.turnOrder[contestant];
 
-    if (shared192D0.turnOrder[contestant] != 0)
+    if (turnOrder != 0)
     {
         int i;
 
