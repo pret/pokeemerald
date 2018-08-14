@@ -624,160 +624,40 @@ static void ContestEffect_QualityDependsOnTiming(void)
     sContestantStatus[shared192D0.contestant].appeal2 = appeal;
 }
 
-#ifdef NONMATCHING
-// Not even close, send help
-// Works well if it’s the same type as the one before.
 static void ContestEffect_BetterIfSameType(void)
 {
-    s8 r4;
-    s8 r2;
+    s8 turnOrder = shared192D0.turnOrder[shared192D0.contestant];
+    s8 i = turnOrder - 1, j;
+    u16 move;
 
-    for (r4 = shared192D0.turnOrder[shared192D0.contestant]; r4 > 0; r4--)
+    if (turnOrder == 0)
+        return;
+
+    while (1)
     {
-        for (r2 = 0; r2 < 4; r2++)
+        for (j = 0; j < 4; j++)
         {
-            if (shared192D0.turnOrder[r2] == r4 - 1)
+            if (shared192D0.turnOrder[j] == i)
                 break;
         }
-        if (!(sContestantStatus[r2].noMoreTurns || sContestantStatus[r2].nervous || sContestantStatus[r2].numTurnsSkipped))
+        if (sContestantStatus[j].noMoreTurns || sContestantStatus[j].nervous || sContestantStatus[j].numTurnsSkipped)
         {
-            u16 move = sContestantStatus[shared192D0.contestant].currMove;
-
-            if (gContestMoves[move].contestCategory == gContestMoves[sContestantStatus[r2].currMove].contestCategory)
-            {
-                sContestantStatus[shared192D0.contestant].appeal2 += gContestEffects[gContestMoves[move].effect].appeal * 2;
-                SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_SAME_TYPE_GOOD);
-            }
+            if (--i < 0)
+                return;
+        }
+        else
+        {
             break;
         }
     }
+
+    move = sContestantStatus[shared192D0.contestant].currMove;
+    if (gContestMoves[move].contestCategory == gContestMoves[sContestantStatus[j].currMove].contestCategory)
+    {
+        sContestantStatus[shared192D0.contestant].appeal2 += gContestEffects[gContestMoves[move].effect].appeal * 2;
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_SAME_TYPE_GOOD);
+    }
 }
-#else
-NAKED void ContestEffect_BetterIfSameType(void)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	ldr r2, =gContestResources\n\
-	ldr r0, [r2]\n\
-	ldr r3, [r0, 0x8]\n\
-	ldrb r0, [r3, 0x11]\n\
-	adds r0, r3, r0\n\
-	movs r1, 0\n\
-	ldrsb r1, [r0, r1]\n\
-	subs r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	mov r8, r2\n\
-	cmp r1, 0\n\
-	beq _080E61F8\n\
-	mov r7, r8\n\
-	ldrb r6, [r3]\n\
-_080E6140:\n\
-	movs r2, 0\n\
-	lsls r0, r4, 24\n\
-	asrs r1, r0, 24\n\
-	adds r5, r0, 0\n\
-	cmp r6, r1\n\
-	beq _080E616A\n\
-	ldr r4, =gContestResources\n\
-_080E614E:\n\
-	lsls r0, r2, 24\n\
-	movs r2, 0x80\n\
-	lsls r2, 17\n\
-	adds r0, r2\n\
-	lsrs r2, r0, 24\n\
-	asrs r3, r0, 24\n\
-	cmp r3, 0x3\n\
-	bgt _080E616A\n\
-	ldr r0, [r4]\n\
-	ldr r0, [r0, 0x8]\n\
-	adds r0, r3\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r1\n\
-	bne _080E614E\n\
-_080E616A:\n\
-	ldr r0, [r7]\n\
-	lsls r3, r2, 24\n\
-	asrs r1, r3, 24\n\
-	ldr r2, [r0, 0x4]\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	lsls r0, 2\n\
-	adds r2, r0, r2\n\
-	ldrb r1, [r2, 0xB]\n\
-	movs r0, 0x80\n\
-	ands r0, r1\n\
-	mov r12, r3\n\
-	cmp r0, 0\n\
-	bne _080E6190\n\
-	ldrb r1, [r2, 0xC]\n\
-	movs r0, 0x7\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080E61A4\n\
-_080E6190:\n\
-	movs r1, 0xFF\n\
-	lsls r1, 24\n\
-	adds r0, r5, r1\n\
-	lsrs r4, r0, 24\n\
-	cmp r0, 0\n\
-	blt _080E61F8\n\
-	b _080E6140\n\
-	.pool\n\
-_080E61A4:\n\
-	mov r2, r8\n\
-	ldr r6, [r2]\n\
-	ldr r0, [r6, 0x8]\n\
-	ldrb r1, [r0, 0x11]\n\
-	ldr r4, [r6, 0x4]\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	lsls r0, 2\n\
-	adds r5, r0, r4\n\
-	ldrh r0, [r5, 0x6]\n\
-	ldr r3, =gContestMoves\n\
-	lsls r0, 3\n\
-	adds r7, r0, r3\n\
-	ldrb r2, [r7, 0x1]\n\
-	lsls r2, 29\n\
-	mov r0, r12\n\
-	asrs r1, r0, 24\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r4\n\
-	ldrh r0, [r0, 0x6]\n\
-	lsls r0, 3\n\
-	adds r0, r3\n\
-	ldrb r0, [r0, 0x1]\n\
-	lsls r0, 29\n\
-	cmp r2, r0\n\
-	bne _080E61F8\n\
-	ldr r1, =gContestEffects\n\
-	ldrb r0, [r7]\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0x1]\n\
-	lsls r0, 1\n\
-	ldrh r1, [r5, 0x2]\n\
-	adds r0, r1\n\
-	strh r0, [r5, 0x2]\n\
-	ldr r0, [r6, 0x8]\n\
-	ldrb r0, [r0, 0x11]\n\
-	movs r1, 0x1F\n\
-	bl SetContestantEffectStringID\n\
-_080E61F8:\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\
-                ");
-}
-#endif
 
 // Works well if different in type than the one before.
 static void ContestEffect_BetterIfDiffType(void)
