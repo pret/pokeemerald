@@ -67,12 +67,11 @@ bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove)
     nextMoveComboMoves[3] = gContestMoves[nextMove].comboMoves[3];
 
     if (lastMoveComboStarterId == 0)
-        return 0;
-
-    if (lastMoveComboStarterId == nextMoveComboMoves[0] || lastMoveComboStarterId == nextMoveComboMoves[1] || lastMoveComboStarterId == nextMoveComboMoves[2] || lastMoveComboStarterId == nextMoveComboMoves[3])
+        return FALSE;
+    else if (lastMoveComboStarterId == nextMoveComboMoves[0] || lastMoveComboStarterId == nextMoveComboMoves[1] || lastMoveComboStarterId == nextMoveComboMoves[2] || lastMoveComboStarterId == nextMoveComboMoves[3])
         return gComboStarterLookupTable[lastMoveComboStarterId];
-
-    return 0;
+    else
+        return FALSE;
 }
 
 // A highly appealing move.
