@@ -42,7 +42,6 @@ extern struct UnkStruct_61CC04 gUnknown_0861CC10;
 extern struct UnkStruct_61CC04 gUnknown_0861CBEC;
 extern struct UnkStruct_61CC04 gUnknown_0861CBF8;
 extern u16 gSummaryScreenWindow_Tilemap[];
-extern struct ContestEffect gContestEffects[];
 extern struct WindowTemplate gUnknown_0861CC24;
 extern u8 gUnknown_0861CD2C[][3];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
