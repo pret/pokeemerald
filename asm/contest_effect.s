@@ -951,7 +951,7 @@ _080E5B00:
 	bne _080E5B38
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80DBCA8
+	bl Contest_IsMonsTurnDisabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E5B38
