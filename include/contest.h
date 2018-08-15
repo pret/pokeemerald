@@ -341,7 +341,8 @@ struct UnknownContestStruct7
     u8 contestant;
 };
 
-struct ContestAIInfo {
+struct ContestAIInfo
+{
     /*0x00*/ u8 aiState;
     /*0x02*/ u16 unk2;
     /*0x04*/ u8 unk4;
@@ -352,9 +353,9 @@ struct ContestAIInfo {
     /*0x14*/ u32 flags;
     /*0x18*/ s16 scriptResult;
     /*0x1A*/ s16 scriptArr[3];
-    /*0x20*/ u32 stack[8];
-    /*0x40*/ u8 unk40;
-    /*0x41*/ u8 unk41;
+    /*0x20*/ const u8 *stack[8];
+    /*0x40*/ u8 stackSize;
+    /*0x41*/ u8 contestantId;
 };
 
 struct UnknownContestStruct5
