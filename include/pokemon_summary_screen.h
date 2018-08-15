@@ -2,6 +2,6 @@
 #define GUARD_POKEMON_SUMMARY_SCREEN_H
 
 void sub_81C4F98(u8, void(*)(void));
-void ShowSelectMovePokemonSummaryScreen(struct Pokemon *a, u8 b, u8 c, void *d, u16 e);
+void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
 
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

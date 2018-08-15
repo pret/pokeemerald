@@ -83,6 +83,6 @@ void CompactPartySlots(void);
 u32 GetBoxMonDataFromAnyBox(u8 boxId, u8 monPosition, u32 request);
 bool8 CheckFreePokemonStorageSpace(void);
 u8 StorageGetCurrentBox(void);
-u8 sub_80D214C(struct BoxPokemon* a, u8 b, u8 c, u8 d);
+u8 sub_80D214C(struct BoxPokemon *a, u8 b, u8 c, u8 d);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

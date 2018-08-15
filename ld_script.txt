@@ -540,7 +540,7 @@ SECTIONS {
         src/berry_fix_program.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);
-        data/unk_pokedex_area_screen_helper.o(.rodata);
+        data/battle_pyramid.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);

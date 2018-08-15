@@ -4,22 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_0861D1A0:: @ 861D1A0
-	.incbin "graphics/interface/region_map.8bpp.lz"
-
-	.align 2
-gUnknown_0861DEF4:: @ 861DEF4
-	.incbin "graphics/interface/region_map.bin.lz"
-
-	.align 2
-gUnknown_0861E208:: @ 861E208
-	.incbin "graphics/interface/region_map_affine.8bpp.lz"
-
-	.align 2
-gUnknown_0861EF64:: @ 861EF64
-	.incbin "graphics/interface/region_map_affine.bin.lz"
-
-	.align 2
 gUnknown_0861F2B4:: @ 861F2B4
 	.4byte 0x000011f0, 0x000001e1, 0x000021de
 

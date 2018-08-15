@@ -45,13 +45,12 @@
 
 static EWRAM_DATA struct UnkSummaryStruct
 {
-    /*0x00*/ union
-    {
+    /*0x00*/ union {
         struct Pokemon *mons;
         struct BoxPokemon *boxMons;
     } monList;
-    /*0x04*/ void (*callback)(void);
-    /*0x08*/ struct Sprite *markingsSpriteId;
+    /*0x04*/ MainCallback callback;
+    /*0x08*/ struct Sprite *markingsSprite;
     /*0x0C*/ struct Pokemon currentMon;
     /*0x70*/ struct PokeSummary
     {
@@ -3936,20 +3935,20 @@ void sub_81C4984(struct Pokemon *mon)
 {
     struct Sprite *sprite = sub_811FF94(30003, 30003, gUnknown_0861D120);
 
-    gUnknown_0203CF1C->markingsSpriteId = sprite;
+    gUnknown_0203CF1C->markingsSprite = sprite;
 
     if (sprite != NULL)
     {
         StartSpriteAnim(sprite, GetMonData(mon, MON_DATA_MARKINGS));
-        gUnknown_0203CF1C->markingsSpriteId->pos1.x = 60;
-        gUnknown_0203CF1C->markingsSpriteId->pos1.y = 26;
-        gUnknown_0203CF1C->markingsSpriteId->oam.priority = 1;
+        gUnknown_0203CF1C->markingsSprite->pos1.x = 60;
+        gUnknown_0203CF1C->markingsSprite->pos1.y = 26;
+        gUnknown_0203CF1C->markingsSprite->oam.priority = 1;
     }
 }
 
 void sub_81C49E0(struct Pokemon *mon)
 {
-    DestroySprite(gUnknown_0203CF1C->markingsSpriteId);
+    DestroySprite(gUnknown_0203CF1C->markingsSprite);
     FreeSpriteTilesByTag(30003);
     sub_81C4984(mon);
 }
