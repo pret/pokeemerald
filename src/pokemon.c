@@ -89,7 +89,7 @@ extern u8 GetTrainerEncounterMusicIdInBattlePyramind(u16 trainerOpponentId);
 extern u8 sub_81D63C8(u16 trainerOpponentId);
 extern u8 GetFrontierOpponentClass(u16 trainerId);
 extern void GetFrontierTrainerName(u8* dest, u16 trainerId);
-extern void sub_81C488C(u8);
+extern void SummaryScreen_SetUnknownTaskId(u8);
 
 // this file's functions
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
@@ -6967,7 +6967,7 @@ static void Task_PokemonSummaryAnimateAfterDelay(u8 taskId)
     if (--gTasks[taskId].data[3] == 0)
     {
         StartMonSummaryAnimation(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].data[2]);
-        sub_81C488C(0xFF);
+        SummaryScreen_SetUnknownTaskId(0xFF);
         DestroyTask(taskId);
     }
 }
@@ -7034,7 +7034,7 @@ void PokemonSummaryDoMonAnimation(struct Sprite* sprite, u16 species, bool8 oneF
         STORE_PTR_IN_TASK(sprite, taskId, 0);
         gTasks[taskId].data[2] = sMonFrontAnimIdsTable[species - 1];
         gTasks[taskId].data[3] = sMonAnimationDelayTable[species - 1];
-        sub_81C488C(taskId);
+        SummaryScreen_SetUnknownTaskId(taskId);
         SetSpriteCB_MonAnimDummy(sprite);
     }
     else

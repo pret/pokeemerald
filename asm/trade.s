@@ -3499,7 +3499,7 @@ sub_807905C: @ 807905C
 	ldr r0, =sub_8077B74
 	str r0, [sp]
 	movs r0, 0x1
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 	b _080790C0
 	.pool
 _080790A4:
@@ -3515,7 +3515,7 @@ _080790A4:
 	ldr r0, =sub_8077B74
 	str r0, [sp]
 	movs r0, 0x1
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 _080790C0:
 	bl FreeAllWindowBuffers
 _080790C4:

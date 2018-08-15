@@ -18,6 +18,7 @@ struct ContestEffect
 
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
+extern const u8 *const gContestEffectDescriptionPointers[];
 
 bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove);
 

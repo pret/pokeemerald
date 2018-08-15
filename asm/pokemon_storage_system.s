@@ -3685,7 +3685,7 @@ _080C9EB4:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl sub_81BFA80
+	bl ShowPokemonSummaryScreenSet40EF
 	b _080C9F56
 	.pool
 _080C9F04:
@@ -3695,7 +3695,7 @@ _080C9F04:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 	b _080C9F56
 	.pool
 _080C9F1C:
