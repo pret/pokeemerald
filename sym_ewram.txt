@@ -615,7 +615,7 @@ gUnknown_0203ABB8: @ 203ABB8
 gUnknown_0203BC88: @ 203BC88
 	.space 0x4
 
-gUnknown_0203BC8C: @ 203BC8C
+gFacilityTrainerMons: @ 203BC8C
 	.space 0x4
 
 	.include "src/use_pokeblock.o"

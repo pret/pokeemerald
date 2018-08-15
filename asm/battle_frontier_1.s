@@ -6,991 +6,11 @@
 	.text
 
 
-	thumb_func_start sub_818F9B0
-sub_818F9B0: @ 818F9B0
-	push {lr}
-	ldr r0, =gStringVar1
-	ldr r2, =gRoundsStringTable
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	ldr r3, =0x00000cb2
-	adds r1, r3
-	ldrh r1, [r1]
-	lsls r1, 2
-	adds r1, r2
-	ldr r1, [r1]
-	bl StringCopy
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818F9B0
 
-	thumb_func_start sub_818F9E0
-sub_818F9E0: @ 818F9E0
-	push {lr}
-	ldr r0, =gStringVar1
-	ldr r2, =gRoundsStringTable
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	ldr r3, =0x00000cb2
-	adds r1, r3
-	ldrh r1, [r1]
-	lsls r1, 2
-	adds r1, r2
-	ldr r1, [r1]
-	bl StringCopy
-	ldr r0, =gStringVar2
-	ldr r1, =gTrainerBattleOpponent_A
-	ldrh r1, [r1]
-	bl sub_8195898
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818F9E0
 
-	thumb_func_start sub_818FA20
-sub_818FA20: @ 818FA20
-	push {r4,r5,lr}
-	ldr r1, =gUnknown_0203CD70
-	movs r0, 0
-	str r0, [r1]
-	ldr r4, =gPlayerParty
-	adds r0, r4, 0
-	movs r1, 0x3A
-	movs r2, 0
-	bl GetMonData
-	ldr r5, =gUnknown_0203CD74
-	str r0, [r5]
-	adds r4, 0x64
-	adds r0, r4, 0
-	movs r1, 0x3A
-	movs r2, 0
-	bl GetMonData
-	ldr r1, [r5]
-	adds r1, r0
-	str r1, [r5]
-	bl CalculatePlayerPartyCount
-	ldr r0, =gTrainerBattleOpponent_A
-	ldrh r0, [r0]
-	bl sub_8195358
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_818FBDC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818FA20
 
-	thumb_func_start sub_818FA74
-sub_818FA74: @ 818FA74
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x30
-	adds r5, r2, 0
-	str r3, [sp, 0x14]
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x10]
-	lsls r1, 16
-	lsrs r1, 16
-	str r1, [sp, 0x28]
-	lsls r5, 24
-	lsrs r5, 24
-	add r0, sp, 0xC
-	movs r1, 0x1
-	negs r1, r1
-	strb r1, [r0]
-	ldr r0, [sp, 0x28]
-	bl sub_8190168
-	adds r6, r0, 0
-	lsls r6, 24
-	lsrs r6, 24
-	str r6, [sp, 0x2C]
-	bl sub_8165C40
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	movs r0, 0x64
-	ldr r4, [sp, 0x10]
-	adds r3, r4, 0
-	muls r3, r0
-	str r3, [sp, 0x18]
-	ldr r6, =gEnemyParty
-	adds r0, r3, r6
-	ldr r7, =gSaveBlock2Ptr
-	ldr r4, [r7]
-	lsls r5, 1
-	ldr r3, [sp, 0x28]
-	lsls r1, r3, 1
-	adds r1, r3
-	lsls r1, 1
-	adds r1, r5, r1
-	ldr r6, =0x00000d64
-	adds r4, r6
-	adds r4, r1
-	ldrh r3, [r4]
-	ldr r7, =gUnknown_0203BC8C
-	ldr r7, [r7]
-	mov r8, r7
-	lsls r3, 4
-	add r3, r8
-	ldrh r1, [r3]
-	ldrb r3, [r3, 0xC]
-	ldr r6, [sp, 0x2C]
-	str r6, [sp]
-	ldrh r4, [r4]
-	lsls r4, 4
-	add r4, r8
-	ldrb r4, [r4, 0xB]
-	str r4, [sp, 0x4]
-	ldr r7, [sp, 0x14]
-	str r7, [sp, 0x8]
-	bl CreateMonWithEVSpreadPersonalityOTID
-	add r0, sp, 0xC
-	movs r1, 0x1
-	negs r1, r1
-	strb r1, [r0]
-	movs r6, 0
-	ldr r2, [sp, 0x18]
-	str r2, [sp, 0x1C]
-	mov r10, r5
-	ldr r3, =0x00000d64
-	mov r9, r3
-	ldr r3, =gUnknown_0203BC8C
-	mov r4, r10
-	str r4, [sp, 0x20]
-_0818FB18:
-	ldr r7, =gSaveBlock2Ptr
-	ldr r1, [r7]
-	ldr r2, [sp, 0x28]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 1
-	mov r8, r0
-	mov r5, r10
-	add r5, r8
-	add r1, r9
-	adds r1, r5
-	ldrh r0, [r1]
-	ldr r1, [r3]
-	lsls r0, 4
-	adds r0, r1
-	lsls r4, r6, 1
-	adds r0, 0x2
-	adds r0, r4
-	ldrh r1, [r0]
-	lsls r2, r6, 24
-	lsrs r2, 24
-	mov r12, r2
-	ldr r7, [sp, 0x1C]
-	ldr r2, =gEnemyParty
-	adds r0, r7, r2
-	mov r2, r12
-	str r3, [sp, 0x24]
-	bl SetMonMoveSlot
-	ldr r7, =gSaveBlock2Ptr
-	ldr r0, [r7]
-	add r0, r9
-	adds r0, r5
-	ldrh r0, [r0]
-	ldr r3, [sp, 0x24]
-	ldr r1, [r3]
-	lsls r0, 4
-	adds r0, r1
-	adds r0, 0x2
-	adds r0, r4
-	ldrh r0, [r0]
-	cmp r0, 0xDA
-	bne _0818FB74
-	movs r1, 0
-	add r0, sp, 0xC
-	strb r1, [r0]
-_0818FB74:
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0818FB18
-	movs r0, 0x64
-	ldr r1, [sp, 0x10]
-	adds r4, r1, 0
-	muls r4, r0
-	ldr r0, =gEnemyParty
-	adds r4, r0
-	adds r0, r4, 0
-	movs r1, 0x20
-	add r2, sp, 0xC
-	bl SetMonData
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldr r1, [sp, 0x20]
-	add r1, r8
-	ldr r2, =0x00000d64
-	adds r0, r2
-	adds r0, r1
-	ldrh r0, [r0]
-	ldr r1, =gUnknown_0203BC8C
-	ldr r1, [r1]
-	lsls r0, 4
-	adds r0, r1
-	ldrb r2, [r0, 0xA]
-	lsls r2, 1
-	ldr r0, =gBattleFrontierHeldItems
-	adds r2, r0
-	adds r0, r4, 0
-	movs r1, 0xC
-	bl SetMonData
-	add sp, 0x30
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818FA74
-
-	thumb_func_start sub_818FBDC
-sub_818FBDC: @ 818FBDC
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 16
-	lsrs r0, 16
-	mov r8, r0
-	movs r6, 0
-	bl ZeroEnemyPartyMons
-	mov r0, r8
-	bl sub_818FC78
-	adds r5, r0, 0
-	bl Random
-	adds r4, r0, 0
-	bl Random
-	lsls r4, 16
-	lsrs r7, r4, 16
-	lsls r0, 16
-	orrs r7, r0
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xA
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x5
-	bls _0818FC46
-	movs r4, 0
-_0818FC20:
-	movs r0, 0x1
-	ands r0, r5
-	cmp r0, 0
-	beq _0818FC3C
-	lsls r2, r4, 24
-	lsrs r2, 24
-	adds r0, r6, 0
-	mov r1, r8
-	adds r3, r7, 0
-	bl sub_818FA74
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-_0818FC3C:
-	asrs r5, 1
-	adds r4, 0x1
-	cmp r4, 0x2
-	ble _0818FC20
-	b _0818FC6C
-_0818FC46:
-	movs r4, 0x2
-_0818FC48:
-	movs r0, 0x4
-	ands r0, r5
-	cmp r0, 0
-	beq _0818FC64
-	lsls r2, r4, 24
-	lsrs r2, 24
-	adds r0, r6, 0
-	mov r1, r8
-	adds r3, r7, 0
-	bl sub_818FA74
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-_0818FC64:
-	lsls r5, 1
-	subs r4, 0x1
-	cmp r4, 0
-	bge _0818FC48
-_0818FC6C:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_818FBDC
-
-	thumb_func_start sub_818FC78
-sub_818FC78: @ 818FC78
-	push {r4,r5,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	adds r5, r4, 0
-	bl Random
-	movs r1, 0x1
-	ands r1, r0
-	cmp r1, 0
-	beq _0818FCA2
-	adds r0, r4, 0
-	movs r1, 0
-	bl sub_818FCBC
-	cmp r0, 0
-	bne _0818FCB6
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl sub_818FDB8
-	b _0818FCB6
-_0818FCA2:
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_818FDB8
-	cmp r0, 0
-	bne _0818FCB6
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl sub_818FCBC
-_0818FCB6:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_818FC78
-
-	thumb_func_start sub_818FCBC
-sub_818FCBC: @ 818FCBC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x1C
-	lsls r0, 16
-	lsrs r0, 16
-	mov r8, r0
-	lsls r1, 24
-	lsrs r1, 24
-	str r1, [sp, 0xC]
-	movs r0, 0
-	mov r9, r0
-	mov r1, r8
-	lsls r1, 2
-	str r1, [sp, 0x18]
-_0818FCDE:
-	mov r2, r9
-	lsls r0, r2, 2
-	mov r2, sp
-	adds r1, r2, r0
-	movs r0, 0
-	str r0, [r1]
-	movs r7, 0
-	mov r0, r9
-	adds r0, 0x1
-	str r0, [sp, 0x14]
-	adds r5, r1, 0
-	mov r1, r9
-	lsls r1, 1
-	str r1, [sp, 0x10]
-_0818FCFA:
-	movs r6, 0
-	adds r2, r7, 0x1
-	mov r10, r2
-_0818FD00:
-	ldr r0, =gSaveBlock2Ptr
-	ldr r1, [r0]
-	ldr r2, [sp, 0x18]
-	adds r0, r1, r2
-	ldr r2, =0x00000d24
-	adds r0, r2
-	ldrh r0, [r0]
-	lsls r0, 22
-	lsrs r0, 22
-	ldr r2, =0x000003fe
-	cmp r0, r2
-	bne _0818FD3C
-	mov r1, r9
-	lsls r0, r1, 24
-	lsls r1, r7, 24
-	lsrs r0, 24
-	lsrs r1, 24
-	bl sub_81A5060
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	b _0818FD60
-	.pool
-_0818FD3C:
-	mov r2, r8
-	lsls r0, r2, 1
-	add r0, r8
-	lsls r0, 1
-	ldr r2, [sp, 0x10]
-	adds r0, r2, r0
-	ldr r2, =0x00000d64
-	adds r1, r2
-	adds r1, r0
-	ldrh r0, [r1]
-	ldr r1, =gUnknown_0203BC8C
-	ldr r1, [r1]
-	lsls r0, 4
-	adds r0, r1
-	lsls r1, r7, 1
-	adds r0, 0x2
-	adds r0, r1
-	ldrh r4, [r0]
-_0818FD60:
-	movs r0, 0x64
-	muls r0, r6
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	adds r1, r0, 0
-	adds r0, r4, 0
-	movs r2, 0
-	bl sub_818FFC0
-	ldr r1, [r5]
-	adds r1, r0
-	str r1, [r5]
-	adds r6, 0x1
-	cmp r6, 0x2
-	ble _0818FD00
-	mov r7, r10
-	cmp r7, 0x3
-	ble _0818FCFA
-	ldr r0, [sp, 0x14]
-	mov r9, r0
-	cmp r0, 0x2
-	ble _0818FCDE
-	mov r0, sp
-	ldr r1, [sp, 0xC]
-	bl sub_818FEB4
-	add sp, 0x1C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_818FCBC
-
-	thumb_func_start sub_818FDB8
-sub_818FDB8: @ 818FDB8
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x1C
-	lsls r0, 16
-	lsrs r0, 16
-	mov r8, r0
-	lsls r1, 24
-	lsrs r1, 24
-	str r1, [sp, 0xC]
-	movs r0, 0
-	mov r9, r0
-	mov r1, r8
-	lsls r1, 2
-	str r1, [sp, 0x18]
-_0818FDDA:
-	mov r2, r9
-	lsls r0, r2, 2
-	mov r2, sp
-	adds r1, r2, r0
-	movs r0, 0
-	str r0, [r1]
-	movs r7, 0
-	mov r0, r9
-	adds r0, 0x1
-	str r0, [sp, 0x14]
-	adds r5, r1, 0
-	mov r1, r9
-	lsls r1, 1
-	str r1, [sp, 0x10]
-_0818FDF6:
-	movs r6, 0
-	adds r2, r7, 0x1
-	mov r10, r2
-_0818FDFC:
-	ldr r0, =gSaveBlock2Ptr
-	ldr r1, [r0]
-	ldr r2, [sp, 0x18]
-	adds r0, r1, r2
-	ldr r2, =0x00000d24
-	adds r0, r2
-	ldrh r0, [r0]
-	lsls r0, 22
-	lsrs r0, 22
-	ldr r2, =0x000003fe
-	cmp r0, r2
-	bne _0818FE38
-	mov r1, r9
-	lsls r0, r1, 24
-	lsls r1, r7, 24
-	lsrs r0, 24
-	lsrs r1, 24
-	bl sub_81A5060
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	b _0818FE5C
-	.pool
-_0818FE38:
-	mov r2, r8
-	lsls r0, r2, 1
-	add r0, r8
-	lsls r0, 1
-	ldr r2, [sp, 0x10]
-	adds r0, r2, r0
-	ldr r2, =0x00000d64
-	adds r1, r2
-	adds r1, r0
-	ldrh r0, [r1]
-	ldr r1, =gUnknown_0203BC8C
-	ldr r1, [r1]
-	lsls r0, 4
-	adds r0, r1
-	lsls r1, r7, 1
-	adds r0, 0x2
-	adds r0, r1
-	ldrh r4, [r0]
-_0818FE5C:
-	movs r0, 0x64
-	muls r0, r6
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	adds r1, r0, 0
-	adds r0, r4, 0
-	movs r2, 0x1
-	bl sub_818FFC0
-	ldr r1, [r5]
-	adds r1, r0
-	str r1, [r5]
-	adds r6, 0x1
-	cmp r6, 0x2
-	ble _0818FDFC
-	mov r7, r10
-	cmp r7, 0x3
-	ble _0818FDF6
-	ldr r0, [sp, 0x14]
-	mov r9, r0
-	cmp r0, 0x2
-	ble _0818FDDA
-	mov r0, sp
-	ldr r1, [sp, 0xC]
-	bl sub_818FEB4
-	add sp, 0x1C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_818FDB8
-
-	thumb_func_start sub_818FEB4
-sub_818FEB4: @ 818FEB4
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x18
-	mov r10, r0
-	lsls r1, 24
-	lsrs r1, 24
-	movs r0, 0
-	str r0, [sp, 0xC]
-	movs r3, 0x2
-	add r0, sp, 0x8
-_0818FECE:
-	str r3, [r0]
-	subs r0, 0x4
-	subs r3, 0x1
-	cmp r3, 0
-	bge _0818FECE
-	mov r3, r10
-	ldr r2, [r3]
-	ldr r0, [r3, 0x4]
-	cmp r2, r0
-	bne _0818FF20
-	ldr r0, [r3, 0x8]
-	cmp r2, r0
-	bne _0818FF20
-	cmp r1, 0
-	beq _0818FFAA
-	movs r3, 0
-	ldr r4, =gBitTable
-_0818FEF0:
-	str r3, [sp, 0x14]
-	bl Random
-	movs r1, 0x3
-	ands r1, r0
-	ldr r3, [sp, 0x14]
-	cmp r1, 0x3
-	beq _0818FF16
-	lsls r0, r1, 2
-	adds r0, r4
-	ldr r1, [r0]
-	ldr r0, [sp, 0xC]
-	ands r0, r1
-	cmp r0, 0
-	bne _0818FF16
-	ldr r0, [sp, 0xC]
-	orrs r0, r1
-	str r0, [sp, 0xC]
-	adds r3, 0x1
-_0818FF16:
-	cmp r3, 0x2
-	bne _0818FEF0
-	b _0818FFAA
-	.pool
-_0818FF20:
-	movs r3, 0
-	mov r9, sp
-	mov r8, r10
-_0818FF26:
-	adds r2, r3, 0x1
-	cmp r2, 0x2
-	bgt _0818FF84
-	mov r6, r8
-	mov r7, r9
-	lsls r0, r2, 2
-	mov r1, sp
-	adds r5, r0, r1
-	mov r1, r10
-	adds r4, r0, r1
-_0818FF3A:
-	ldr r0, [r6]
-	ldr r1, [r4]
-	cmp r0, r1
-	bge _0818FF4E
-	str r1, [r6]
-	str r0, [r4]
-	ldr r1, [r7]
-	ldr r0, [r5]
-	str r0, [r7]
-	str r1, [r5]
-_0818FF4E:
-	ldr r1, [r6]
-	ldr r0, [r4]
-	cmp r1, r0
-	bne _0818FF7A
-	str r2, [sp, 0x10]
-	str r3, [sp, 0x14]
-	bl Random
-	movs r1, 0x1
-	ands r1, r0
-	ldr r2, [sp, 0x10]
-	ldr r3, [sp, 0x14]
-	cmp r1, 0
-	beq _0818FF7A
-	ldr r1, [r6]
-	ldr r0, [r4]
-	str r0, [r6]
-	str r1, [r4]
-	ldr r1, [r7]
-	ldr r0, [r5]
-	str r0, [r7]
-	str r1, [r5]
-_0818FF7A:
-	adds r5, 0x4
-	adds r4, 0x4
-	adds r2, 0x1
-	cmp r2, 0x2
-	ble _0818FF3A
-_0818FF84:
-	movs r4, 0x4
-	add r9, r4
-	add r8, r4
-	adds r3, 0x1
-	cmp r3, 0x1
-	ble _0818FF26
-	ldr r2, =gBitTable
-	mov r1, sp
-	movs r3, 0x1
-_0818FF96:
-	ldm r1!, {r0}
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ldr r4, [sp, 0xC]
-	orrs r4, r0
-	str r4, [sp, 0xC]
-	subs r3, 0x1
-	cmp r3, 0
-	bge _0818FF96
-_0818FFAA:
-	ldr r0, [sp, 0xC]
-	add sp, 0x18
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_818FEB4
-
-	thumb_func_start sub_818FFC0
-sub_818FFC0: @ 818FFC0
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x8
-	adds r3, r0, 0
-	adds r4, r1, 0
-	str r2, [sp]
-	movs r6, 0
-	movs r2, 0x14
-	cmp r3, 0
-	beq _0818FFF0
-	ldr r0, =0x0000ffff
-	cmp r3, r0
-	beq _0818FFF0
-	ldr r0, =gBattleMoves
-	lsls r1, r3, 1
-	adds r1, r3
-	lsls r1, 2
-	adds r3, r1, r0
-	ldrb r0, [r3, 0x1]
-	cmp r0, 0
-	bne _0818FFFC
-_0818FFF0:
-	movs r0, 0
-	b _08190156
-	.pool
-_0818FFFC:
-	ldr r1, =gBaseStats
-	lsls r0, r4, 3
-	subs r0, r4
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0, 0x6]
-	mov r10, r1
-	ldrb r1, [r0, 0x7]
-	mov r9, r1
-	ldrb r0, [r0, 0x16]
-	mov r8, r0
-	ldrb r3, [r3, 0x2]
-	str r3, [sp, 0x4]
-	cmp r0, 0x1A
-	bne _0819002C
-	cmp r3, 0x4
-	bne _0819002C
-	ldr r0, [sp]
-	cmp r0, 0x1
-	bne _081900AA
-	movs r2, 0x8
-	b _081900A4
-	.pool
-_0819002C:
-	ldr r0, =gTypeEffectiveness
-	adds r1, r6, r0
-	ldrb r0, [r1]
-	ldr r7, =gTypeEffectiveness
-	cmp r0, 0xFF
-	beq _081900A4
-	adds r4, r1, 0
-_0819003A:
-	ldrb r0, [r4]
-	cmp r0, 0xFE
-	beq _08190096
-	ldrb r0, [r4]
-	ldr r1, [sp, 0x4]
-	cmp r0, r1
-	bne _08190096
-	ldrb r0, [r4, 0x1]
-	adds r5, r6, 0x1
-	cmp r0, r10
-	bne _0819006C
-	adds r1, r6, 0x2
-	mov r0, r8
-	cmp r0, 0x19
-	bne _0819005E
-	ldrb r0, [r4, 0x2]
-	cmp r0, 0x28
-	bne _0819006C
-_0819005E:
-	adds r0, r1, r7
-	ldrb r0, [r0]
-	muls r0, r2
-	movs r1, 0xA
-	bl __divsi3
-	adds r2, r0, 0
-_0819006C:
-	adds r0, r5, r7
-	ldrb r0, [r0]
-	cmp r0, r9
-	bne _08190096
-	cmp r10, r9
-	beq _08190096
-	adds r1, r6, 0x2
-	mov r0, r8
-	cmp r0, 0x19
-	bne _08190088
-	adds r0, r1, r7
-	ldrb r0, [r0]
-	cmp r0, 0x28
-	bne _08190096
-_08190088:
-	adds r0, r1, r7
-	ldrb r0, [r0]
-	muls r0, r2
-	movs r1, 0xA
-	bl __divsi3
-	adds r2, r0, 0
-_08190096:
-	adds r4, 0x3
-	adds r6, 0x3
-	ldr r1, =gTypeEffectiveness
-	adds r0, r6, r1
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	bne _0819003A
-_081900A4:
-	ldr r0, [sp]
-	cmp r0, 0x1
-	beq _081900E0
-_081900AA:
-	ldr r1, [sp]
-	cmp r1, 0x1
-	bgt _081900BC
-	cmp r1, 0
-	beq _081900C4
-	b _08190154
-	.pool
-_081900BC:
-	ldr r0, [sp]
-	cmp r0, 0x2
-	beq _08190114
-	b _08190154
-_081900C4:
-	cmp r2, 0xA
-	beq _08190146
-	cmp r2, 0xA
-	ble _08190146
-	cmp r2, 0x28
-	beq _0819014A
-	cmp r2, 0x28
-	bgt _081900DA
-	cmp r2, 0x14
-	beq _08190104
-	b _08190146
-_081900DA:
-	cmp r2, 0x50
-	bne _08190146
-	b _08190100
-_081900E0:
-	cmp r2, 0xA
-	beq _08190104
-	cmp r2, 0xA
-	bgt _081900F2
-	cmp r2, 0
-	beq _08190100
-	cmp r2, 0x5
-	beq _0819014A
-	b _08190146
-_081900F2:
-	cmp r2, 0x28
-	beq _08190108
-	cmp r2, 0x28
-	ble _08190146
-	cmp r2, 0x50
-	beq _0819010E
-	b _08190146
-_08190100:
-	movs r2, 0x8
-	b _08190154
-_08190104:
-	movs r2, 0x2
-	b _08190154
-_08190108:
-	movs r2, 0x2
-	negs r2, r2
-	b _08190154
-_0819010E:
-	movs r2, 0x4
-	negs r2, r2
-	b _08190154
-_08190114:
-	cmp r2, 0xA
-	beq _08190146
-	cmp r2, 0xA
-	bgt _08190126
-	cmp r2, 0
-	beq _0819013A
-	cmp r2, 0x5
-	beq _08190140
-	b _08190146
-_08190126:
-	cmp r2, 0x28
-	beq _0819014E
-	cmp r2, 0x28
-	bgt _08190134
-	cmp r2, 0x14
-	beq _0819014A
-	b _08190146
-_08190134:
-	cmp r2, 0x50
-	beq _08190152
-	b _08190146
-_0819013A:
-	movs r2, 0x10
-	negs r2, r2
-	b _08190154
-_08190140:
-	movs r2, 0x8
-	negs r2, r2
-	b _08190154
-_08190146:
-	movs r2, 0
-	b _08190154
-_0819014A:
-	movs r2, 0x4
-	b _08190154
-_0819014E:
-	movs r2, 0xC
-	b _08190154
-_08190152:
-	movs r2, 0x14
-_08190154:
-	adds r0, r2, 0
-_08190156:
-	add sp, 0x8
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_818FFC0
-
-	thumb_func_start sub_8190168
-sub_8190168: @ 8190168
+	thumb_func_start GetDomeTrainerMonIvs
+GetDomeTrainerMonIvs: @ 8190168
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1020,7 +40,7 @@ _0819019A:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8190168
+	thumb_func_end GetDomeTrainerMonIvs
 
 	thumb_func_start sub_81901A0
 sub_81901A0: @ 81901A0
@@ -1292,7 +312,7 @@ sub_81903B8: @ 81903B8
 	bl sub_81902AC
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	strh r0, [r4, 0xA]
 	strh r5, [r4, 0xC]
 	strh r5, [r4, 0xE]
@@ -5282,7 +4302,7 @@ _08192690:
 	adds r0, r3
 	adds r0, r5
 	ldrh r1, [r0]
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r0, [r0]
 	lsls r1, 4
 	adds r1, r0
@@ -5538,7 +4558,7 @@ _081928E4:
 	adds r1, r2
 	adds r1, r0
 	ldrh r1, [r1]
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r0, [r0]
 	lsls r1, 4
 _081928FA:
@@ -5683,7 +4703,7 @@ _08192A20:
 	add r1, r12
 	adds r1, r0
 	ldrh r0, [r1]
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r1, [r1]
 	lsls r0, 4
 	adds r0, r1
@@ -5919,7 +4939,7 @@ _08192C0C:
 	bge _08192C0C
 	b _08192D70
 _08192C24:
-	ldr r4, =gUnknown_0203BC8C
+	ldr r4, =gFacilityTrainerMons
 	mov r10, r4
 	ldr r1, [sp, 0x3C]
 	ldr r2, [sp, 0x20]
@@ -6965,7 +5985,7 @@ _08193490:
 	adds r2, r1
 	adds r2, r0
 	ldrh r1, [r2]
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r0, [r0]
 	lsls r1, 4
 	adds r1, r0
@@ -7114,7 +6134,7 @@ _081935D8:
 	adds r2, r1
 	adds r2, r0
 	ldrh r1, [r2]
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r0, [r0]
 	lsls r1, 4
 	adds r1, r0
@@ -7974,7 +6994,7 @@ sub_8193D7C: @ 8193D7C
 	bne _08193E10
 	ldr r5, =gTrainerBattleOpponent_A
 	ldrh r0, [r5]
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	ldr r4, =gSaveBlock2Ptr
 	ldr r2, [r4]
 	lsls r0, 2
@@ -7986,7 +7006,7 @@ sub_8193D7C: @ 8193D7C
 	orrs r0, r1
 	strb r0, [r2]
 	ldrh r0, [r5]
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	ldr r1, [r4]
 	lsls r0, 2
 	adds r0, r1, r0
@@ -8005,7 +7025,7 @@ sub_8193D7C: @ 8193D7C
 	orrs r1, r2
 	strb r1, [r0]
 	ldrh r0, [r5]
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	ldr r2, [r4]
 	lsls r0, 1
 	movs r3, 0xEC
@@ -8027,7 +7047,7 @@ sub_8193D7C: @ 8193D7C
 _08193E10:
 	ldr r5, =0x000003ff
 	adds r0, r5, 0
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	ldr r4, =gSaveBlock2Ptr
 	ldr r2, [r4]
 	lsls r0, 2
@@ -8039,7 +7059,7 @@ _08193E10:
 	orrs r0, r1
 	strb r0, [r2]
 	adds r0, r5, 0
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	ldr r1, [r4]
 	lsls r0, 2
 	adds r0, r1, r0
@@ -8057,7 +7077,7 @@ _08193E10:
 	orrs r1, r2
 	strb r1, [r0]
 	adds r0, r5, 0
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	ldr r1, [r4]
 	lsls r0, 1
 	movs r3, 0xEC
@@ -8076,7 +7096,7 @@ _08193E10:
 	bne _08193E92
 _08193E78:
 	adds r0, r5, 0
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	ldr r2, [r4]
 	lsls r0, 2
 	adds r2, r0
@@ -8127,7 +7147,7 @@ sub_8193ED0: @ 8193ED0
 	str r0, [sp, 0x54]
 	movs r1, 0
 	str r1, [sp, 0x58]
-	bl sub_8165C40
+	bl GetFrontierEnemyMonLevel
 	movs r2, 0
 	str r2, [sp, 0x50]
 	add r3, sp, 0x30
@@ -8193,7 +7213,7 @@ _08193F60:
 	adds r1, r3, r5
 	adds r1, r0
 	ldrh r0, [r1]
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r1, [r1]
 	lsls r0, 4
 	adds r0, r1
@@ -8266,7 +7286,7 @@ _08193FEE:
 	adds r0, r4
 	add r0, r8
 	ldrh r4, [r0]
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	ldr r0, [r3]
 	lsls r4, 4
 	adds r4, r0
@@ -9729,7 +8749,7 @@ sub_8194CE4: @ 8194CE4
 
 	thumb_func_start sub_8194D48
 sub_8194D48: @ 8194D48
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gBattleFrontierMons
 	str r0, [r1]
 	ldr r1, =gUnknown_0203BC88
@@ -9909,10 +8929,10 @@ sub_8194EC0: @ 8194EC0
 	push {r4,lr}
 	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	adds r4, r0, 0
 	ldr r0, =0x000003ff
-	bl sub_8195358
+	bl TrainerIdToTournamentId
 	cmp r4, r0
 	ble _08194EE8
 	ldr r1, =gSpecialVar_Result
@@ -10141,7 +9161,7 @@ _0819509E:
 	bge _081950F4
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	mov r9, r1
 	ldr r2, [sp, 0x8]
 	mov r8, r2
@@ -10189,7 +9209,7 @@ _081950F4:
 	ldr r2, [sp, 0x2C]
 	add r2, sp
 	adds r2, 0x8
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	ldr r1, [r3]
 	lsls r0, r5, 4
 	adds r0, r1
@@ -10260,7 +9280,7 @@ _08195182:
 	ldrh r0, [r0]
 	lsls r0, 22
 	lsrs r0, 22
-	bl sub_8190168
+	bl GetDomeTrainerMonIvs
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -10278,7 +9298,7 @@ _081951AA:
 	adds r0, r2
 	adds r0, r4
 	ldrh r1, [r0]
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	ldr r0, [r3]
 	lsls r1, 4
 	adds r1, r0
@@ -10312,7 +9332,7 @@ _081951AA:
 	adds r0, r1
 	adds r0, r4
 	ldrh r0, [r0]
-	ldr r2, =gUnknown_0203BC8C
+	ldr r2, =gFacilityTrainerMons
 	ldr r1, [r2]
 	lsls r0, 4
 	adds r0, r1
@@ -10465,8 +9485,8 @@ _0819533E:
 	.pool
 	thumb_func_end sub_8194F58
 
-	thumb_func_start sub_8195358
-sub_8195358: @ 8195358
+	thumb_func_start TrainerIdToTournamentId
+TrainerIdToTournamentId: @ 8195358
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -10501,7 +9521,7 @@ _0819538E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8195358
+	thumb_func_end TrainerIdToTournamentId
 
 	thumb_func_start sub_81953A0
 sub_81953A0: @ 81953A0
@@ -10768,7 +9788,7 @@ _081955B0:
 	ldr r2, [sp, 0x38]
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	mov r8, r3
 	ldr r2, [r3]
 	lsls r0, 4
@@ -10873,7 +9893,7 @@ _08195682:
 	mov r2, r8
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	ldr r5, =gUnknown_0203BC8C
+	ldr r5, =gFacilityTrainerMons
 	mov r9, r5
 	ldr r2, [r5]
 	lsls r0, 4
@@ -11121,7 +10141,7 @@ sub_8195898: @ 8195898
 	lsls r1, 16
 	lsrs r5, r1, 16
 	movs r4, 0
-	bl sub_8165C40
+	bl GetFrontierEnemyMonLevel
 	ldr r0, =0x000003fe
 	cmp r5, r0
 	bne _081958B8

@@ -2,47 +2,56 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_frontier_1.h"
+#include "battle_message.h"
 #include "event_data.h"
 #include "overworld.h"
 #include "util.h"
 #include "malloc.h"
+#include "string_util.h"
+#include "random.h"
 #include "constants/species.h"
+#include "constants/moves.h"
+#include "constants/trainers.h"
+#include "constants/abilities.h"
 
 struct Unknown_0203BC8C_Struct
 {
-    u16 field_0;
-    u8 field_2;
-    u8 field_3;
-    u8 field_4;
-    u8 field_5;
-    u8 field_6;
-    u8 field_7;
-    u8 field_8;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
-    u8 field_C;
-    u8 field_D;
-    u8 field_E;
+    u16 species;
+    u16 moves[4];
+    u8 itemTableId;
+    u8 evSpread;
+    u8 nature;
 };
 
-extern struct Unknown_0203BC8C_Struct *gUnknown_0203BC8C;
+extern struct Unknown_0203BC8C_Struct *gFacilityTrainerMons;
 
 extern void sub_81B8558(void);
 extern u32 sub_81A39C4(void);
 extern u16 sub_8162548(u8, u8);
 extern u16 sub_8163524(u16);
-extern u8 sub_8165C40(void);
+extern u8 GetFrontierEnemyMonLevel(void);
+extern void sub_8195898(u8 *dst, u16 trainerId);
+extern u16 sub_81A5060(u8, u8);
 
 extern u8 gUnknown_0203CEF8[];
+extern u32 gUnknown_0203CD70;
+extern u32 gUnknown_0203CD74;
 
 extern void (* const gUnknown_0860D090[])(void);
 extern const u32 gUnknown_0860D0EC[][2];
 extern const u32 gUnknown_0860D0FC[][2];
+extern const u16 gBattleFrontierHeldItems[];
 
 // This file's functions.
-u8 sub_8190168(u16);
+u8 GetDomeTrainerMonIvs(u16 trainerId);
 void sub_818F720(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats);
+void CreateDomeTrainerMons(u16 tournamentTrainerId);
+u16 TrainerIdToTournamentId(u16 trainerId);
+s32 sub_818FC78(u16 tournamentTrainerId);
+s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1);
+s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1);
+s32 sub_818FFC0(s32 move, s32 species, s32 arg2);
+s32 sub_818FEB4(s32 *arr, bool8 arg1);
 
 // code
 void sub_818E9AC(void)
@@ -219,14 +228,14 @@ void sub_818F02C(void)
 
     gSaveBlock2Ptr->frontier.field_D0A = gSaveBlock2Ptr->frontier.chosenLvl + 1;
     gSaveBlock2Ptr->frontier.field_D0B = VarGet(VAR_0x40CE) + 1;
-    gSaveBlock2Ptr->frontier.field_D24[0].unk0 = 0x3FF;
-    gSaveBlock2Ptr->frontier.field_D24[0].unk1 = 0;
-    gSaveBlock2Ptr->frontier.field_D24[0].unk2 = 0;
-    gSaveBlock2Ptr->frontier.field_D24[0].unk3 = 0;
+    gSaveBlock2Ptr->frontier.domeTrainers[0].trainerId = 0x3FF;
+    gSaveBlock2Ptr->frontier.domeTrainers[0].unk1 = 0;
+    gSaveBlock2Ptr->frontier.domeTrainers[0].unk2 = 0;
+    gSaveBlock2Ptr->frontier.domeTrainers[0].unk3 = 0;
 
     for (i = 0; i < 3; i++)
     {
-        gSaveBlock2Ptr->frontier.field_D64[i] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_SPECIES, NULL);
+        gSaveBlock2Ptr->frontier.domeMonId[i] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_SPECIES, NULL);
         for (j = 0; j < 4; j++)
             gSaveBlock2Ptr->frontier.field_EFC[i].moves[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_MOVE1 + j, NULL);
         for (j = 0; j < 6; j++)
@@ -247,12 +256,12 @@ void sub_818F02C(void)
                 val = sub_8162548(sub_81A39C4(), 0);
                 for (k = 1; k < l; k++)
                 {
-                    if (gSaveBlock2Ptr->frontier.field_D24[k].unk0 == val)
+                    if (gSaveBlock2Ptr->frontier.domeTrainers[k].trainerId == val)
                         break;
                 }
                 if (k != l)
                 {
-                    gSaveBlock2Ptr->frontier.field_D24[var_28].unk0 = val;
+                    gSaveBlock2Ptr->frontier.domeTrainers[var_28].trainerId = val;
                     break;
                 }
             }
@@ -264,12 +273,12 @@ void sub_818F02C(void)
                 val = sub_8162548(sub_81A39C4() + 1, 0);
                 for (k = 1; k < l; k++)
                 {
-                    if (gSaveBlock2Ptr->frontier.field_D24[k].unk0 == val)
+                    if (gSaveBlock2Ptr->frontier.domeTrainers[k].trainerId == val)
                         break;
                 }
                 if (k != l)
                 {
-                    gSaveBlock2Ptr->frontier.field_D24[var_28].unk0 = val;
+                    gSaveBlock2Ptr->frontier.domeTrainers[var_28].trainerId = val;
                     break;
                 }
             }
@@ -283,24 +292,24 @@ void sub_818F02C(void)
                 val2 = sub_8163524(val);
                 for (i = 0; i < l; i++)
                 {
-                    if (gSaveBlock2Ptr->frontier.field_D64[i] == val2)
+                    if (gSaveBlock2Ptr->frontier.domeMonId[i] == val2)
                         break;
-                    if (var_54 == gUnknown_0203BC8C[val2].field_0)
+                    if (var_54 == gFacilityTrainerMons[val2].field_0)
                         break;
-                    if (var_50 == gUnknown_0203BC8C[val2].field_0)
+                    if (var_50 == gFacilityTrainerMons[val2].field_0)
                         break;
-                    if (gUnknown_0203BC8C[gSaveBlock2Ptr->frontier.field_D64[i]].field_A == gUnknown_0203BC8C[val2].field_A)
+                    if (gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[i]].field_A == gFacilityTrainerMons[val2].field_A)
                         break;
                 }
             } while (i != var_38);
 
-            gSaveBlock2Ptr->frontier.field_D64[var_24] = val2;
-            array[var_38] = gUnknown_0203BC8C[val2].field_0;
+            gSaveBlock2Ptr->frontier.domeMonId[var_24] = val2;
+            array[var_38] = gFacilityTrainerMons[val2].field_0;
         }
 
-        gSaveBlock2Ptr->frontier.field_D24[var_28].unk1 = 0;
-        gSaveBlock2Ptr->frontier.field_D24[var_28].unk2 = 0;
-        gSaveBlock2Ptr->frontier.field_D24[var_28].unk3 = 0;
+        gSaveBlock2Ptr->frontier.domeTrainers[var_28].unk1 = 0;
+        gSaveBlock2Ptr->frontier.domeTrainers[var_28].unk2 = 0;
+        gSaveBlock2Ptr->frontier.domeTrainers[var_28].unk3 = 0;
     }
 
     for (i = 0; i < 3; i++)
@@ -323,7 +332,7 @@ void sub_818F02C(void)
         monTypesBits >>= 1;
     }
 
-    var_48 = sub_8165C40();
+    var_48 = GetFrontierEnemyMonLevel();
     var_44[0] += (monTypesCount * var_48) / 20;
 
     for (i = 0; i < 16; i++)
@@ -331,10 +340,10 @@ void sub_818F02C(void)
         u8 r8;
 
         var_44[i + 1] = 0;
-        r8 = sub_8190168(gSaveBlock2Ptr->frontier.field_D24[i].unk0);
+        r8 = GetDomeTrainerMonIvs(gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId);
         for (j = 0; j < 3; j++)
         {
-            sub_818F720(gSaveBlock2Ptr->frontier.field_D64[i]);
+            sub_818F720(gSaveBlock2Ptr->frontier.domeMonId[i]);
         }
     }
 
@@ -659,7 +668,7 @@ _0818F2D4:\n\
 	ldrh r3, [r4]\n\
 	cmp r3, r6\n\
 	beq _0818F300\n\
-	ldr r2, =gUnknown_0203BC8C\n\
+	ldr r2, =gFacilityTrainerMons\n\
 	ldr r1, [r2]\n\
 	lsls r0, r6, 4\n\
 	adds r2, r0, r1\n\
@@ -692,7 +701,7 @@ _0818F300:\n\
 	ldr r2, [sp, 0x28]\n\
 	add r2, sp\n\
 	adds r2, 0x8\n\
-	ldr r0, =gUnknown_0203BC8C\n\
+	ldr r0, =gFacilityTrainerMons\n\
 	ldr r1, [r0]\n\
 	lsls r0, r6, 4\n\
 	adds r0, r1\n\
@@ -856,7 +865,7 @@ _0818F462:\n\
 	subs r5, 0x1\n\
 	cmp r5, 0\n\
 	bge _0818F458\n\
-	bl sub_8165C40\n\
+	bl GetFrontierEnemyMonLevel\n\
 	lsls r0, 24\n\
 	lsrs r0, 24\n\
 	str r0, [sp, 0x14]\n\
@@ -888,7 +897,7 @@ _0818F494:\n\
 	ldrh r0, [r0]\n\
 	lsls r0, 22\n\
 	lsrs r0, 22\n\
-	bl sub_8190168\n\
+	bl GetDomeTrainerMonIvs\n\
 	lsls r0, 24\n\
 	lsrs r0, 24\n\
 	mov r8, r0\n\
@@ -906,7 +915,7 @@ _0818F4BC:\n\
 	adds r0, r2\n\
 	adds r0, r4\n\
 	ldrh r1, [r0]\n\
-	ldr r3, =gUnknown_0203BC8C\n\
+	ldr r3, =gFacilityTrainerMons\n\
 	ldr r0, [r3]\n\
 	lsls r1, 4\n\
 	adds r1, r0\n\
@@ -940,7 +949,7 @@ _0818F4BC:\n\
 	adds r0, r1\n\
 	adds r0, r4\n\
 	ldrh r0, [r0]\n\
-	ldr r2, =gUnknown_0203BC8C\n\
+	ldr r2, =gFacilityTrainerMons\n\
 	ldr r1, [r2]\n\
 	lsls r0, 4\n\
 	adds r0, r1\n\
@@ -1228,8 +1237,347 @@ void sub_818F904(s32 id1, s32 id2, u16 *dst)
     u16 temp;
 
     SWAP_16(dst[id1], dst[id2]);
-    SWAP_16(gSaveBlock2Ptr->frontier.field_D24[id1].unk0, gSaveBlock2Ptr->frontier.field_D24[id2].unk0);
+    SWAP_16(gSaveBlock2Ptr->frontier.domeTrainers[id1].trainerId, gSaveBlock2Ptr->frontier.domeTrainers[id2].trainerId);
 
     for (i = 0; i < 3; i++)
-        SWAP_16(gSaveBlock2Ptr->frontier.field_D64[id1][i], gSaveBlock2Ptr->frontier.field_D64[id2][i]);
+        SWAP_16(gSaveBlock2Ptr->frontier.domeMonId[id1][i], gSaveBlock2Ptr->frontier.domeMonId[id2][i]);
 }
+
+void sub_818F9B0(void)
+{
+    StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.field_CB2]);
+}
+
+void sub_818F9E0(void)
+{
+    StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.field_CB2]);
+    sub_8195898(gStringVar2, gTrainerBattleOpponent_A);
+}
+
+void sub_818FA20(void)
+{
+    gUnknown_0203CD70 = 0;
+    gUnknown_0203CD74 =  GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL);
+    gUnknown_0203CD74 += GetMonData(&gPlayerParty[1], MON_DATA_MAX_HP, NULL);
+    CalculatePlayerPartyCount();
+    CreateDomeTrainerMons(TrainerIdToTournamentId(gTrainerBattleOpponent_A));
+}
+
+void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
+{
+    s32 i;
+    u8 happiness = 0xFF;
+    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // UB: Should be using trainerId instead of tournamentTrainerId. As a result, all Pokemon have ivs of 3.
+    u8 level = GetFrontierEnemyMonLevel();
+    CreateMonWithEVSpreadPersonalityOTID(&gEnemyParty[monPartyId],
+                                         gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].species,
+                                         level,
+                                         gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].nature,
+                                         fixedIv,
+                                         gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].evSpread, otId);
+
+    happiness = 0xFF;
+    for (i = 0; i < 4; i++)
+    {
+        SetMonMoveSlot(&gEnemyParty[monPartyId],
+                       gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].moves[i], i);
+        if (gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].moves[i] == MOVE_FRUSTRATION)
+            happiness = 0;
+    }
+
+    SetMonData(&gEnemyParty[monPartyId], MON_DATA_FRIENDSHIP, &happiness);
+    SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM,
+               &gBattleFrontierHeldItems[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].itemTableId]);
+}
+
+void CreateDomeTrainerMons(u16 tournamentTrainerId)
+{
+    u8 monsCount = 0;
+    u32 otId = 0;
+    s32 i, bits;
+
+    ZeroEnemyPartyMons();
+    bits = sub_818FC78(tournamentTrainerId);
+    otId = Random32();
+    if (Random() % 10 > 5)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            if (bits & 1)
+            {
+                CreateDomeMon(monsCount, tournamentTrainerId, i, otId);
+                monsCount++;
+            }
+            bits >>= 1;
+        }
+    }
+    else
+    {
+        for (i = 2; i >= 0; i--)
+        {
+            if (bits & 4)
+            {
+                CreateDomeMon(monsCount, tournamentTrainerId, i, otId);
+                monsCount++;
+            }
+            bits <<= 1;
+        }
+    }
+}
+
+s32 sub_818FC78(u16 tournamentTrainerId)
+{
+    s32 bits;
+    if (Random() & 1)
+    {
+        bits = sub_818FCBC(tournamentTrainerId, FALSE);
+        if (bits == 0)
+            bits = sub_818FDB8(tournamentTrainerId, TRUE);
+    }
+    else
+    {
+        bits = sub_818FDB8(tournamentTrainerId, FALSE);
+        if (bits == 0)
+            bits = sub_818FCBC(tournamentTrainerId, TRUE);
+    }
+
+    return bits;
+}
+
+s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
+{
+    s32 i, moveId, playerMonId;
+    s32 array[3];
+
+    for (i = 0; i < 3; i++)
+    {
+        array[i] = 0;
+        for (moveId = 0; moveId < 4; moveId++)
+        {
+            for (playerMonId = 0; playerMonId < 3; playerMonId++)
+            {
+                if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
+                {
+                    array[i] += sub_818FFC0(sub_81A5060(i, moveId),
+                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 0);
+                }
+                else
+                {
+                    array[i] += sub_818FFC0(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][i]].moves[moveId],
+                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 0);
+                }
+            }
+        }
+    }
+    return sub_818FEB4(array, arg1);
+}
+
+s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
+{
+    s32 i, moveId, playerMonId;
+    s32 array[3];
+
+    for (i = 0; i < 3; i++)
+    {
+        array[i] = 0;
+        for (moveId = 0; moveId < 4; moveId++)
+        {
+            for (playerMonId = 0; playerMonId < 3; playerMonId++)
+            {
+                if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
+                {
+                    array[i] += sub_818FFC0(sub_81A5060(i, moveId),
+                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 1);
+                }
+                else
+                {
+                    array[i] += sub_818FFC0(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][i]].moves[moveId],
+                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 1);
+                }
+            }
+        }
+    }
+    return sub_818FEB4(array, arg1);
+}
+
+s32 sub_818FEB4(s32 *arr, bool8 arg1)
+{
+    s32 i, j;
+    s32 bits = 0;
+    s32 array[3];
+
+    for (i = 0; i < 3; i++)
+        array[i] = i;
+
+    if (arr[0] == arr[1] && arr[0] == arr[2])
+    {
+        if (arg1)
+        {
+            i = 0;
+            while (i != 2)
+            {
+                u32 rand = Random() & 3;
+                if (rand != 3 && !(bits & gBitTable[rand]))
+                {
+                    bits |= gBitTable[rand];
+                    i++;
+                }
+            }
+        }
+    }
+    else
+    {
+        for (i = 0; i < 2; i++)
+        {
+            for (j = i + 1; j < 3; j++)
+            {
+                s32 temp;
+
+                if (arr[i] < arr[j])
+                {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+
+                    temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+
+                if (arr[i] == arr[j] && (Random() & 1))
+                {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+
+                    temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+
+        for (i = 0; i < 2; i++)
+        {
+            bits |= gBitTable[array[i]];
+        }
+    }
+
+    return bits;
+}
+
+/*
+s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
+{
+    u8 type1, type2, ability, moveType;
+    s32 i = 0;
+    s32 typePower = 20;
+
+    if (move == MOVE_NONE || move == 0xFFFF || gBattleMoves[move].power == 0)
+        return 0;
+
+    type1 = gBaseStats[species].type1;
+    type2 = gBaseStats[species].type2;
+    ability = gBaseStats[species].ability1;
+    moveType = gBattleMoves[move].type;
+
+    if (ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    {
+        if (arg2 == 1)
+            typePower = 8;
+    }
+    else
+    {
+        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
+        {
+            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
+            {
+                i += 3;
+                continue;
+            }
+            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+            {
+                // BUG: * 2 is not necessary and makes the condition always false if the ability is wonder guard.
+                if (TYPE_EFFECT_DEF_TYPE(i) == type1 && (ability != ABILITY_WONDER_GUARD || TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE * 2))
+                    typePower = (TYPE_EFFECT_MULTIPLIER(i) * typePower) / 10;
+                if (TYPE_EFFECT_DEF_TYPE(i) == type2 && type1 != type2 && (ability != ABILITY_WONDER_GUARD || TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE * 2))
+                    typePower = (TYPE_EFFECT_MULTIPLIER(i) * typePower) / 10;
+            }
+            i += 3;
+        }
+    }
+
+    switch (arg2)
+    {
+    case 0:
+        switch (typePower)
+        {
+        case 10:
+        case 5:
+        case 0:
+        default:
+            typePower = 0;
+            break;
+        case 20:
+            typePower = 2;
+            break;
+        case 40:
+            typePower = 4;
+            break;
+        case 80:
+            typePower = 8;
+            break;
+        }
+        break;
+    case 1:
+        switch (typePower)
+        {
+        default:
+        case 20:
+            typePower = 0;
+            break;
+        case 5:
+            typePower = 4;
+            break;
+        case 0:
+            typePower = 8;
+            break;
+        case 10:
+            typePower = 2;
+            break;
+        case 40:
+            typePower = -2;
+            break;
+        case 80:
+            typePower = -4;
+            break;
+        }
+        break;
+    case 2:
+        switch (typePower)
+        {
+        case 0:
+            typePower = -16;
+            break;
+        case 5:
+            typePower = -8;
+            break;
+        case 10:
+        default:
+            typePower = 0;
+            break;
+        case 20:
+            typePower = 4;
+            break;
+        case 40:
+            typePower = 12;
+            break;
+        case 80:
+            typePower = 20;
+            break;
+        }
+        break;
+    }
+
+    return typePower;
+}*/
