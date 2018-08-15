@@ -406,7 +406,7 @@ extern struct ContestResources *gContestResources;
 #define sContest (*gContestResources->field_0)
 #define sContestantStatus (gContestResources->field_4)
 #define shared192D0 (*gContestResources->field_8)
-#define eContestAI (*gContestResources->field_C)
+#define eContestAI (gContestResources->field_C)
 #define shared19328 (*gContestResources->field_10)
 #define shared19338 (*gContestResources->field_14)
 
@@ -417,5 +417,12 @@ extern u32 gContestRngValue;
 
 bool8 IsSpeciesNotUnown(u16 species);
 void LoadContestBgAfterMoveAnim(void);
+void SetContestantEffectStringID(u8 a, u8 b);
+void SetContestantEffectStringID2(u8 a, u8 b);
+void MakeContestantNervous(u8 p);
+bool8 Contest_IsMonsTurnDisabled(u8 a);
+bool8 sub_80DE1E8(u8 a);
+void SetStartledString(u8 a, u8 b);
+s8 Contest_GetMoveExcitement(u16);
 
 #endif //GUARD_CONTEST_H
