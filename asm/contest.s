@@ -43,7 +43,7 @@ sub_80DB8B8: @ 80DB8B8
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	adds r0, r4, 0
-	bl sub_80DBCA8
+	bl Contest_IsMonsTurnDisabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB8D0
@@ -55,8 +55,8 @@ _080DB8D0:
 	cmp r4, r0
 	beq _080DB8F4
 	adds r0, r4, 0
-	bl sub_81562C4
-	bl sub_8156324
+	bl ContestAI_ResetAI
+	bl ContestAI_GetActionToUse
 	lsls r0, 24
 	ldr r2, =gContestMons
 	lsrs r0, 23
@@ -533,7 +533,7 @@ _080DBC3C:
 	ldr r0, [r3, 0x4]
 	adds r0, r4, r0
 	ldrh r0, [r0, 0x6]
-	bl sub_80DD9F0
+	bl Contest_GetMoveExcitement
 	ldr r1, [r5]
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x1]
@@ -568,8 +568,8 @@ _080DBC3C:
 	.pool
 	thumb_func_end sub_80DBAA0
 
-	thumb_func_start sub_80DBCA8
-sub_80DBCA8: @ 80DBCA8
+	thumb_func_start Contest_IsMonsTurnDisabled
+Contest_IsMonsTurnDisabled: @ 80DBCA8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -599,7 +599,7 @@ _080DBCD8:
 _080DBCDA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DBCA8
+	thumb_func_end Contest_IsMonsTurnDisabled
 
 	thumb_func_start sub_80DBCE0
 sub_80DBCE0: @ 80DBCE0
@@ -3425,7 +3425,7 @@ _080DD334:
 	ldr r0, [r0, 0x4]
 	adds r0, r4, r0
 	ldrh r0, [r0, 0x6]
-	bl sub_80DD9F0
+	bl Contest_GetMoveExcitement
 	ldr r1, [r5]
 	ldr r1, [r1, 0x10]
 	strb r0, [r1]
@@ -4213,8 +4213,8 @@ _080DD9C8:
 	.pool
 	thumb_func_end sub_80DD940
 
-	thumb_func_start sub_80DD9F0
-sub_80DD9F0: @ 80DD9F0
+	thumb_func_start Contest_GetMoveExcitement
+Contest_GetMoveExcitement: @ 80DD9F0
 	lsls r0, 16
 	ldr r3, =gUnknown_085899EC
 	ldr r1, =gContestMoves
@@ -4233,7 +4233,7 @@ sub_80DD9F0: @ 80DD9F0
 	ldrsb r0, [r1, r0]
 	bx lr
 	.pool
-	thumb_func_end sub_80DD9F0
+	thumb_func_end Contest_GetMoveExcitement
 
 	thumb_func_start sub_80DDA20
 sub_80DDA20: @ 80DDA20
@@ -5136,7 +5136,7 @@ _080DE146:
 	beq _080DE1CA
 	lsls r0, r7, 24
 	lsrs r0, 24
-	bl sub_80DBCA8
+	bl Contest_IsMonsTurnDisabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DE1CA
