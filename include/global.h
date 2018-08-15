@@ -330,6 +330,21 @@ struct EmeraldBattleTowerRecord
     /*0xE8*/ u32 checksum;
 };
 
+struct FrontierMonData
+{
+    u16 moves[4];
+    u8 evs[6];
+    u8 nature;
+};
+
+struct FrontierUnkStruct1
+{
+    u16 unk0:10;
+    u16 unk1:1;
+    u16 unk2:2;
+    u16 unk3:3;
+};
+
 struct BattleFrontier
 {
     /*0x64C*/ struct EmeraldBattleTowerRecord battleTower;
@@ -352,9 +367,11 @@ struct BattleFrontier
     /*0xCA9*/ u8 field_CA9_d:1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e:1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[4];
+    /*0xCAA*/ u16 field_CAA[3];
+    /*0xCB0*/ u16 field_CB0;
     /*0xCB2*/ u16 field_CB2;
-    /*0xCB4*/ u16 field_CB4[22];
+    /*0xCB4*/ u16 field_CB4[20];
+    /*0xCDC*/ u32 field_CDC;
     /*0xCE0*/ u16 field_CE0[4][2];
     /*0xCF0*/ u16 field_CF0[2];
     /*0xCF4*/ u16 field_CF4[2];
@@ -362,17 +379,33 @@ struct BattleFrontier
     /*0xCFC*/ u16 field_CFC[5];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
-    /*0xD08*/ u8 filler_D08;
+    /*0xD08*/ u8 field_D08_0:1;
+    /*0xD08*/ u8 field_D08_1:1;
+    /*0xD08*/ u8 field_D08_2:1;
+    /*0xD08*/ u8 field_D08_3:1;
+    /*0xD08*/ u8 field_D08_4:1;
+    /*0xD08*/ u8 field_D08_5:1;
+    /*0xD08*/ u8 field_D08_6:1;
+    /*0xD08*/ u8 field_D08_7:1;
     /*0xD09*/ u8 filler_D09;
-    /*0xD0A*/ u8 filler_D0A;
-    /*0xD0B*/ u8 filler_D0B;
-    /*0xD0C*/ u16 field_D0C[2];
-    /*0xD10*/ u8 filler_D10;
-    /*0xD11*/ u8 filler_D11;
-    /*0xD12*/ u8 filler_D12;
-    /*0xD13*/ u8 filler_D13;
+    /*0xD0A*/ u8 field_D0A;
+    /*0xD0B*/ u8 field_D0B;
+    /*0xD0C*/ u16 field_D0C[2][2];
     /*0xD14*/ u16 field_D14[2];
-    /*0xD18*/ u8 field_D18[0xB0];
+    /*0xD18*/ u8 field_D18;
+    /*0xD19*/ u8 field_D19;
+    /*0xD1A*/ u8 field_D1A;
+    /*0xD1B*/ u8 field_D1B;
+    /*0xD1C*/ u8 field_D1C;
+    /*0xD1D*/ u8 field_D1D;
+    /*0xD1E*/ u8 field_D1E;
+    /*0xD1F*/ u8 field_D1F;
+    /*0xD20*/ u8 field_D20;
+    /*0xD21*/ u8 field_D21;
+    /*0xD22*/ u8 field_D22;
+    /*0xD23*/ u8 field_D23;
+    /*0xD24*/ struct FrontierUnkStruct1 field_D24[16];
+    /*0xD64*/ u16 field_D64[16][3];
     /*0xDC8*/ u16 field_DC8[2];
     /*0xDCC*/ u8 filler_DCC[4];
     /*0xDD0*/ u16 field_DD0[2];
@@ -409,7 +442,10 @@ struct BattleFrontier
     /*0xEBA*/ u8 field_EBA[39];
     /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH];
     /*0xEF1*/ u8 field_EF1[2][4];
-    /*0xEF9*/ u8 field_EF9[51];
+    /*0xEF9*/ u8 field_EF9;
+    /*0xEFA*/ u8 field_EFA;
+    /*0xEFB*/ u8 field_EFB;
+    /*0xEFC*/ struct FrontierMonData field_EFC[3];
 };
 
 struct SaveBlock2
