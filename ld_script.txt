@@ -262,7 +262,9 @@ SECTIONS {
         asm/fossil_specials.o(.text);
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
-        asm/pokemon_summary_screen.o(.text);
+        src/unk_pokedex_area_screen_helper.o(.text);
+        src/battle_pyramid.o(.text);
+        asm/battle_pyramid.o(.text);
         asm/pokenav.o(.text);
         src/match_call.o(.text);
         asm/pokenav.o(.text.after.match.call);
@@ -537,7 +539,8 @@ SECTIONS {
         src/fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
-        data/pokemon_summary_screen.o(.rodata);
+        src/unk_pokedex_area_screen_helper.o(.rodata);
+        data/unk_pokedex_area_screen_helper.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);

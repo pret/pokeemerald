@@ -57,5 +57,8 @@ u8 sub_81B1360(void);
 void sub_81B8904(u8 arg0, void (*callback)(void));
 void OpenPartyMenuInBattle(u8 caseId);
 u16 ItemIdToBattleMoveId(u16 itemId);
+u8 sub_81B205C(struct Pokemon* a);
+u8 sub_81B6D14(u16 a);
+bool8 hm_add_c3_without_phase_2(void);
 
 #endif // GUARD_PARTY_MENU_H

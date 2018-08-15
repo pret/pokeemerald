@@ -18,5 +18,6 @@ struct ContestEffect
 
 extern const struct ContestMove gContestMoves[];
 extern struct ContestEffect gContestEffects[];
+extern const u8 *const gContestEffectDescriptionPointers[];
 
 #endif //GUARD_CONTEST_EFFECT_H
