@@ -1466,10 +1466,9 @@ s32 sub_818FEB4(s32 *arr, bool8 arg1)
     return bits;
 }
 
-/*
 s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
 {
-    u8 type1, type2, ability, moveType;
+    s32 type1, type2, ability, moveType;
     s32 i = 0;
     s32 typePower = 20;
 
@@ -1488,22 +1487,25 @@ s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
     }
     else
     {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
+        while (gTypeEffectiveness[i + 0] != TYPE_ENDTABLE)
         {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
+            if (gTypeEffectiveness[i + 0] == TYPE_FORESIGHT)
             {
                 i += 3;
-                continue;
             }
-            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+            else
             {
-                // BUG: * 2 is not necessary and makes the condition always false if the ability is wonder guard.
-                if (TYPE_EFFECT_DEF_TYPE(i) == type1 && (ability != ABILITY_WONDER_GUARD || TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE * 2))
-                    typePower = (TYPE_EFFECT_MULTIPLIER(i) * typePower) / 10;
-                if (TYPE_EFFECT_DEF_TYPE(i) == type2 && type1 != type2 && (ability != ABILITY_WONDER_GUARD || TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE * 2))
-                    typePower = (TYPE_EFFECT_MULTIPLIER(i) * typePower) / 10;
+                u8 val = gTypeEffectiveness[i + 0];
+                if (val == moveType)
+                {
+                    // BUG: * 2 is not necessary and makes the condition always false if the ability is wonder guard.
+                    if (gTypeEffectiveness[i + 1] == type1 && (ability != ABILITY_WONDER_GUARD || gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE * 2))
+                        typePower = (gTypeEffectiveness[i + 2] * typePower) / 10;
+                    if (gTypeEffectiveness[i + 1] == type2 && type1 != type2 && (ability != ABILITY_WONDER_GUARD || gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE * 2))
+                        typePower = (gTypeEffectiveness[i + 2] * typePower) / 10;
+                }
+                i += 3;
             }
-            i += 3;
         }
     }
 
@@ -1580,4 +1582,4 @@ s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
     }
 
     return typePower;
-}*/
+}
