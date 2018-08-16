@@ -440,10 +440,17 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
                     MakeContestantNervous(contestantIds[i]);
                     SetContestantEffectStringID(contestantIds[i], CONTEST_STRING_NERVOUS);
                     numUnnerved++;
-                } else
+                }
+                else
+                {
                     contestantUnnerved = TRUE;
-            } else
+                }
+            }
+            else
+            {
                 contestantUnnerved = TRUE;
+            }
+
             if (contestantUnnerved)
             {
                 contestantUnnerved = FALSE;
@@ -542,8 +549,11 @@ static void ContestEffect_AppealAsGoodAsPrevOnes(void)
     }
     if (appealSum < 0)
         appealSum = 0;
+
     if (shared192D0.turnOrder[shared192D0.contestant] == 0 || appealSum == 0)
+    {
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_NOT_WELL);
+    }
     else
     {
         sContestantStatus[shared192D0.contestant].appeal2 += appealSum / 2;
@@ -567,7 +577,9 @@ static void ContestEffect_AppealAsGoodAsPrevOne(void)
         }
     }
     if (shared192D0.turnOrder[shared192D0.contestant] == 0 || appeal <= 0)
+    {
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_NOT_WELL2);
+    }
     else
     {
         sContestantStatus[shared192D0.contestant].appeal2 += appeal;
@@ -716,7 +728,9 @@ static void ContestEffect_ImproveConditionPreventNervousness(void)
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_CONDITION_ROSE);
     }
     else
+    {
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_NO_CONDITION_IMPROVE);
+    }
 }
 
 // The appeal works well if the user’s condition is good.
@@ -988,8 +1002,10 @@ static bool8 CanUnnerveContestant(u8 i)
     {
         return TRUE;
     }
-
-    return FALSE;
+    else
+    {
+        return FALSE;
+    }
 }
 
 static bool8 WasAtLeastOneOpponentJammed(void)

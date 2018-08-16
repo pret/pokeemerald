@@ -1,6 +1,3 @@
-#ifndef POKEEMERALD_CONTEST_MOVES_H
-#define POKEEMERALD_CONTEST_MOVES_H
-
 const struct ContestMove gContestMoves[MOVES_COUNT] =
 {
 	[MOVE_NONE] = {0},
@@ -3009,5 +3006,3 @@ void (*const gContestEffectFuncs[])(void) =
     ContestEffect_BetterWhenAudienceExcited,
     ContestEffect_DontExciteAudience,
 };
-
-#endif // POKEEMERALD_CONTEST_MOVES_H
