@@ -3382,4 +3382,24 @@ extern const u8 gCreditsCopyrightEnd_Gfx[];
 extern const u8 gPokenavConditionMarker_Gfx[];
 extern const u16 gPokenavConditionMarker_Pal[];
 
+extern const u8 gUnknown_08D9862C[];
+extern const u8 gUnknown_08D98CC8[];
+extern const u8 gUnknown_08D987FC[];
+extern const u8 gUnknown_08D9898C[];
+extern const u8 gUnknown_08D98B28[];
+extern const u8 gUnknown_08D9853C[];
+extern const u8 gUnknown_08D85620[];
+extern const u16 gSummaryScreenWindow_Tilemap[];
+extern const u16 gMoveTypes_Pal[];
+extern const u8 gUnknown_08D97D0C[];
+
+extern const u16 gSummaryScreenPowAcc_Tilemap[];
+extern const u16 gUnknown_08DC3C34[];
+
+extern const u8 gMoveTypes_Gfx[];
+extern const u8 gUnknown_08D97BEC[];
+extern const u8 gUnknown_08D97CF4[];
+extern const u8 gStatusGfx_Icons[];
+extern const u8 gStatusPal_Icons[];
+
 #endif //GUARD_GRAPHICS_H

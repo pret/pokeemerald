@@ -2436,7 +2436,7 @@ static void CB2_HandleBlenderEndGame(void)
         sBerryBlenderData->gameEndState++;
         break;
     case 10:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 1:
         case -1:

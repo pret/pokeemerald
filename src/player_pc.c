@@ -272,7 +272,7 @@ static void PlayerPCProcessMenuInput(u8 taskId)
     if(gPcItemMenuOptionsNum > 3)
         inputOptionId = ProcessMenuInput();
     else
-        inputOptionId = ProcessMenuInputNoWrapAround();
+        inputOptionId = Menu_ProcessInputNoWrapAround();
 
     switch(inputOptionId)
     {
@@ -686,7 +686,7 @@ static void Mailbox_DrawYesNoBeforeMove(u8 taskId)
 
 static void Mailbox_MoveToBagYesNoPrompt(u8 taskId)
 {
-    switch(ProcessMenuInputNoWrap_())
+    switch(Menu_ProcessInputNoWrap_())
     {
         case 0:
             Mailbox_DoMailMoveToBag(taskId);

@@ -1904,7 +1904,7 @@ _080C8F0C:
 	adds r0, 0x1
 	strb r0, [r1]
 _080C8F22:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -2628,7 +2628,7 @@ _080C9584:
 	b _080C9664
 	.pool
 _080C95A4:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3422,7 +3422,7 @@ _080C9C78:
 	b _080C9CAA
 	.pool
 _080C9C8C:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3553,7 +3553,7 @@ _080C9DAC:
 	b _080C9DE0
 	.pool
 _080C9DC0:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3685,7 +3685,7 @@ _080C9EB4:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl sub_81BFA80
+	bl ShowPokemonSummaryScreenSet40EF
 	b _080C9F56
 	.pool
 _080C9F04:
@@ -3695,7 +3695,7 @@ _080C9F04:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 	b _080C9F56
 	.pool
 _080C9F1C:

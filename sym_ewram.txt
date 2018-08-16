@@ -603,19 +603,14 @@ gUnknown_0203ABB8: @ 203ABB8
 	.space 0x4
 
     .include "src/save.o"
-    
+
 .space 0x4 /*unused var?*/
 
 	.include "src/mystery_event_script.o"
 
-gUnknown_0203BC34: @ 203BC34
-	.space 0x4
-
-gUnknown_0203BC38: @ 203BC38
-	.space 0x8
-
+	.include "src/learn_move.o"
 	.include "src/decoration_inventory.o"
-    .include "src/roamer.o"
+	.include "src/roamer.o"
 
 gUnknown_0203BC88: @ 203BC88
 	.space 0x4
@@ -744,30 +739,9 @@ gUnknown_0203CF00: @ 203CF00
 
 	.include "src/fossil_specials.o"
 	.include "src/fldeff_groundshake.o"
-
-gUnknown_0203CF1C: @ 203CF1C
-	.space 0x4
-
-gUnknown_0203CF20: @ 203CF20
-	.space 0x1
-
-gUnknown_0203CF21: @ 203CF21
-	.space 0x3
-
-gUnknown_0203CF24: @ 203CF24
-	.space 0x4
-
-gUnknown_0203CF28: @ 203CF28
-	.space 0x4
-
-gUnknown_0203CF2C: @ 203CF2C
-	.space 0x4
-
-gUnknown_0203CF30: @ 203CF30
-	.space 0x8
-
-gUnknown_0203CF38: @ 203CF38
-	.space 0x4
+	.include "src/pokemon_summary_screen.o"
+	.include "src/unk_pokedex_area_screen_helper.o"
+	.include "src/battle_pyramid.o"
 
 gUnknown_0203CF3C: @ 203CF3C
 	.space 0x4

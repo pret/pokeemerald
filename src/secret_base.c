@@ -997,7 +997,7 @@ void sub_80E9FB0(u8 taskId)
 {
     s8 input;
 
-    input = ProcessMenuInputNoWrapAround();
+    input = Menu_ProcessInputNoWrapAround();
     switch (input)
     {
         case -1:

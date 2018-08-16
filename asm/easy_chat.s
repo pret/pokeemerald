@@ -369,7 +369,7 @@ _0811AF86:
 	thumb_func_start sub_811AF8C
 sub_811AF8C: @ 811AF8C
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -418,7 +418,7 @@ _0811AFE6:
 	thumb_func_start sub_811AFEC
 sub_811AFEC: @ 811AFEC
 	push {r4,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -461,7 +461,7 @@ _0811B03A:
 	thumb_func_start sub_811B040
 sub_811B040: @ 811B040
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -566,7 +566,7 @@ sub_811B0E8: @ 811B0E8
 	thumb_func_start sub_811B0F8
 sub_811B0F8: @ 811B0F8
 	push {r4,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

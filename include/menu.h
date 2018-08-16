@@ -46,7 +46,7 @@ void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs);
 u8 InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 windowId, u8 numItems, u8 initialCursorPos);
 u8 GetMenuCursorPos(void);
 s8 ProcessMenuInput(void);
-s8 ProcessMenuInputNoWrapAround(void);
+s8 Menu_ProcessInputNoWrapAround(void);
 void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
 void reset_temp_tile_data_buffers(void);
 void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, u16 offset, u8 mode);
@@ -54,7 +54,7 @@ bool8 free_temp_tile_data_buffers_if_possible(void);
 struct WindowTemplate CreateWindowTemplate(u8, u8, u8, u8, u8, u8, u16);
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
 void copy_decompressed_tile_data_to_vram_autofree(u8 bgId, const void *src, int size, u16 offset, u8 mode);
-s8 ProcessMenuInputNoWrap_(void);
+s8 Menu_ProcessInputNoWrap_(void);
 s8 ProcessMenuInput_other(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
@@ -85,5 +85,7 @@ void RemoveMapNamePopUpWindow(void);
 u8 GetMapNamePopUpWindowId(void);
 u8 AddMapNamePopUpWindow(void);
 void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing);
+void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
+void sub_8199D3C(void *ptr, int delta, int width, int height, bool32 is8BPP);
 
 #endif // GUARD_MENU_H

@@ -1,6 +1,8 @@
 #ifndef GUARD_LIST_MENU_H
 #define GUARD_LIST_MENU_H
 
+#include "window.h"
+
 #define LIST_NOTHING_CHOSEN -1
 #define LIST_B_PRESSED -2
 #define LIST_HEADER -3
