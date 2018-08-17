@@ -512,7 +512,7 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 2:
-        copy_decompressed_tile_data_to_vram_autofree(0, gBattleTextboxTiles, 0, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
         CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
         LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
         gMain.state++;

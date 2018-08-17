@@ -1377,7 +1377,7 @@ bool8 sub_80BC514(u8 a)
             SetBgTilemapBuffer(2, AllocZeroed(0x800));
             SetBgTilemapBuffer(1, AllocZeroed(0x800));
             SetBgTilemapBuffer(0, AllocZeroed(0x800));
-            copy_decompressed_tile_data_to_vram_autofree(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
+            DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(1, gUnknown_08DC2C5C, 0, 0);
             CopyToBgTilemapBuffer(3, gUnknown_08DC2DAC, 0, 0);
             if (a == 0)
@@ -2518,7 +2518,7 @@ void sub_80BEA24(u8 taskId)
             }
             break;
         case 1:
-            copy_decompressed_tile_data_to_vram_autofree(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
+            DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gUnknown_08DC3080, 0, 0);
             FillWindowPixelBuffer(0, 0);
             PutWindowTilemap(0);
@@ -2813,7 +2813,7 @@ void sub_80BF250(u8 taskId)
             }
             break;
         case 1:
-            copy_decompressed_tile_data_to_vram_autofree(3, &gPokedexMenu_Gfx, 0x2000, 0, 0);
+            DecompressAndLoadBgGfxUsingHeap(3, &gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, &gUnknown_08DC3198, 0, 0);
             FillWindowPixelBuffer(0, 0);
             PutWindowTilemap(0);
@@ -3007,7 +3007,7 @@ void sub_80BF82C(u8 taskId)
             }
             break;
         case 1:
-            copy_decompressed_tile_data_to_vram_autofree(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
+            DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gUnknown_08DC2E6C, 0, 0);
             FillWindowPixelBuffer(0, 0);
             PutWindowTilemap(0);
@@ -3354,7 +3354,7 @@ void sub_80BFE38(u8 taskId)
             }
             break;
         case 1:
-            copy_decompressed_tile_data_to_vram_autofree(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
+            DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gUnknown_08DC3080, 0, 0);
             FillWindowPixelBuffer(0, 0);
             PutWindowTilemap(0);
@@ -4397,7 +4397,7 @@ void sub_80C12E0(u8 taskId)
                 InitWindows(gUnknown_0856F008);
                 DeactivateAllTextPrinters();
                 PutWindowTilemap(0);
-                copy_decompressed_tile_data_to_vram_autofree(3, gPokedexSearchMenu_Gfx, 0x2000, 0, 0);
+                DecompressAndLoadBgGfxUsingHeap(3, gPokedexSearchMenu_Gfx, 0x2000, 0, 0);
                 
                 if (!IsNationalPokedexEnabled())
                     CopyToBgTilemapBuffer(3, gPokedexSearch2_Tilemap, 0, 0);

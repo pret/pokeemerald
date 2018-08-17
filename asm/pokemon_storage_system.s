@@ -3805,7 +3805,7 @@ sub_80C9FEC: @ 80C9FEC
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, =gUnknown_08572174
 	ldr r1, =0x0600f800
 	bl LZ77UnCompVram
@@ -3844,7 +3844,7 @@ sub_80CA044: @ 80CA044
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, =gUnknown_085722A0
 	ldr r5, =gUnknown_02039D08
 	ldr r1, [r5]

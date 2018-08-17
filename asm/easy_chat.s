@@ -2706,7 +2706,7 @@ _0811C044:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, =gEasyChatWindow_Tilemap
 	movs r0, 0x3
 	movs r2, 0
@@ -2732,7 +2732,7 @@ _0811C090:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 	b _0811C124

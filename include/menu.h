@@ -53,7 +53,7 @@ void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, 
 bool8 free_temp_tile_data_buffers_if_possible(void);
 struct WindowTemplate CreateWindowTemplate(u8, u8, u8, u8, u8, u8, u16);
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
-void copy_decompressed_tile_data_to_vram_autofree(u8 bgId, const void *src, int size, u16 offset, u8 mode);
+void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, int size, u16 offset, u8 mode);
 s8 Menu_ProcessInputNoWrap_(void);
 s8 ProcessMenuInput_other(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);

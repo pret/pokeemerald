@@ -9,6 +9,16 @@
 #include "malloc.h"
 #include "string_util.h"
 #include "random.h"
+#include "task.h"
+#include "main.h"
+#include "gpu_regs.h"
+#include "text.h"
+#include "bg.h"
+#include "window.h"
+#include "palette.h"
+#include "decompress.h"
+#include "menu.h"
+#include "pokemon_icon.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
@@ -23,6 +33,12 @@ struct Unknown_0203BC8C_Struct
     u8 nature;
 };
 
+struct Unknown_0203CD78_Struct
+{
+    u8 arr[16];
+    u8 unk_11;
+};
+
 extern struct Unknown_0203BC8C_Struct *gFacilityTrainerMons;
 
 extern void sub_81B8558(void);
@@ -32,10 +48,22 @@ extern u16 sub_8163524(u16);
 extern u8 GetFrontierEnemyMonLevel(void);
 extern void sub_8195898(u8 *dst, u16 trainerId);
 extern u16 sub_81A5060(u8, u8);
+extern void sub_8162614(u16, u8);
+extern void sub_81A4C30(void);
+extern u16 sub_818D8F0(u16);
 
 extern u8 gUnknown_0203CEF8[];
 extern u32 gUnknown_0203CD70;
 extern u32 gUnknown_0203CD74;
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG3_X;
+extern u16 gBattle_BG3_Y;
+extern struct Unknown_0203CD78_Struct *gUnknown_0203CD78;
 
 extern void (* const gUnknown_0860D090[])(void);
 extern const u32 gUnknown_0860D0EC[][2];
@@ -52,6 +80,13 @@ s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1);
 s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1);
 s32 sub_818FFC0(s32 move, s32 species, s32 arg2);
 s32 sub_818FEB4(s32 *arr, bool8 arg1);
+u16 sub_81902AC(void);
+void sub_8190400(u8 taskId);
+void sub_8190CD4(u8 taskId);
+void sub_8194B54(void);
+void sub_8194B70(void);
+void sub_819314C(u8, u8);
+void sub_81924E0(u8, u8);
 
 // code
 void sub_818E9AC(void)
@@ -62,14 +97,14 @@ void sub_818E9AC(void)
 void sub_818E9CC(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
-    u32 id = VarGet(VAR_0x40CE);
+    u32 battleMode = VarGet(VAR_0x40CE);
 
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
     gSaveBlock2Ptr->frontier.field_CB2 = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = 0;
     gSaveBlock2Ptr->frontier.field_CA9_b = 0;
-    if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_0860D0EC[id][lvlMode]))
-        gSaveBlock2Ptr->frontier.field_D0C[id][lvlMode] = 0;
+    if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_0860D0EC[battleMode][lvlMode]))
+        gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode] = 0;
 
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
@@ -78,15 +113,15 @@ void sub_818E9CC(void)
 void sub_818EA84(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
-    u32 id = VarGet(VAR_0x40CE);
+    u32 battleMode = VarGet(VAR_0x40CE);
 
     switch (gSpecialVar_0x8005)
     {
     case 0:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D0C[id][lvlMode];
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode];
         break;
     case 1:
-        gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.field_CDC & gUnknown_0860D0EC[id][lvlMode]) != 0);
+        gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.field_CDC & gUnknown_0860D0EC[battleMode][lvlMode]) != 0);
         break;
     case 2:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_0;
@@ -146,18 +181,18 @@ void sub_818EA84(void)
 void sub_818ED28(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
-    u32 id = VarGet(VAR_0x40CE);
+    u32 battleMode = VarGet(VAR_0x40CE);
 
     switch (gSpecialVar_0x8005)
     {
     case 0:
-        gSaveBlock2Ptr->frontier.field_D0C[id][lvlMode] = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode] = gSpecialVar_0x8006;
         break;
     case 1:
         if (gSpecialVar_0x8006)
-            gSaveBlock2Ptr->frontier.field_CDC |= gUnknown_0860D0EC[id][lvlMode];
+            gSaveBlock2Ptr->frontier.field_CDC |= gUnknown_0860D0EC[battleMode][lvlMode];
         else
-            gSaveBlock2Ptr->frontier.field_CDC &= gUnknown_0860D0FC[id][lvlMode];
+            gSaveBlock2Ptr->frontier.field_CDC &= gUnknown_0860D0FC[battleMode][lvlMode];
         break;
     case 2:
         gSaveBlock2Ptr->frontier.field_D08_0 = gSpecialVar_0x8006;
@@ -1267,7 +1302,7 @@ void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u
 {
     s32 i;
     u8 happiness = 0xFF;
-    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // UB: Should be using trainerId instead of tournamentTrainerId. As a result, all Pokemon have ivs of 3.
+    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Should be using trainerId instead of tournamentTrainerId. As a result, all Pokemon have ivs of 3.
     u8 level = GetFrontierEnemyMonLevel();
     CreateMonWithEVSpreadPersonalityOTID(&gEnemyParty[monPartyId],
                                          gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].species,
@@ -1466,6 +1501,8 @@ s32 sub_818FEB4(s32 *arr, bool8 arg1)
     return bits;
 }
 
+// Functionally equivalent, while loop is impossible to match.
+#ifdef NONMATCHING
 s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
 {
     s32 type1, type2, ability, moveType;
@@ -1582,4 +1619,757 @@ s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
     }
 
     return typePower;
+}
+#else
+NAKED
+s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
+{
+    asm_unified("\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x8\n\
+	adds r3, r0, 0\n\
+	adds r4, r1, 0\n\
+	str r2, [sp]\n\
+	movs r6, 0\n\
+	movs r2, 0x14\n\
+	cmp r3, 0\n\
+	beq _0818FFF0\n\
+	ldr r0, =0x0000ffff\n\
+	cmp r3, r0\n\
+	beq _0818FFF0\n\
+	ldr r0, =gBattleMoves\n\
+	lsls r1, r3, 1\n\
+	adds r1, r3\n\
+	lsls r1, 2\n\
+	adds r3, r1, r0\n\
+	ldrb r0, [r3, 0x1]\n\
+	cmp r0, 0\n\
+	bne _0818FFFC\n\
+_0818FFF0:\n\
+	movs r0, 0\n\
+	b _08190156\n\
+	.pool\n\
+_0818FFFC:\n\
+	ldr r1, =gBaseStats\n\
+	lsls r0, r4, 3\n\
+	subs r0, r4\n\
+	lsls r0, 2\n\
+	adds r0, r1\n\
+	ldrb r1, [r0, 0x6]\n\
+	mov r10, r1\n\
+	ldrb r1, [r0, 0x7]\n\
+	mov r9, r1\n\
+	ldrb r0, [r0, 0x16]\n\
+	mov r8, r0\n\
+	ldrb r3, [r3, 0x2]\n\
+	str r3, [sp, 0x4]\n\
+	cmp r0, 0x1A\n\
+	bne _0819002C\n\
+	cmp r3, 0x4\n\
+	bne _0819002C\n\
+	ldr r0, [sp]\n\
+	cmp r0, 0x1\n\
+	bne _081900AA\n\
+	movs r2, 0x8\n\
+	b _081900A4\n\
+	.pool\n\
+_0819002C:\n\
+	ldr r0, =gTypeEffectiveness\n\
+	adds r1, r6, r0\n\
+	ldrb r0, [r1]\n\
+	ldr r7, =gTypeEffectiveness\n\
+	cmp r0, 0xFF\n\
+	beq _081900A4\n\
+	adds r4, r1, 0\n\
+_0819003A:\n\
+	ldrb r0, [r4]\n\
+	cmp r0, 0xFE\n\
+	beq _08190096\n\
+	ldrb r0, [r4]\n\
+	ldr r1, [sp, 0x4]\n\
+	cmp r0, r1\n\
+	bne _08190096\n\
+	ldrb r0, [r4, 0x1]\n\
+	adds r5, r6, 0x1\n\
+	cmp r0, r10\n\
+	bne _0819006C\n\
+	adds r1, r6, 0x2\n\
+	mov r0, r8\n\
+	cmp r0, 0x19\n\
+	bne _0819005E\n\
+	ldrb r0, [r4, 0x2]\n\
+	cmp r0, 0x28\n\
+	bne _0819006C\n\
+_0819005E:\n\
+	adds r0, r1, r7\n\
+	ldrb r0, [r0]\n\
+	muls r0, r2\n\
+	movs r1, 0xA\n\
+	bl __divsi3\n\
+	adds r2, r0, 0\n\
+_0819006C:\n\
+	adds r0, r5, r7\n\
+	ldrb r0, [r0]\n\
+	cmp r0, r9\n\
+	bne _08190096\n\
+	cmp r10, r9\n\
+	beq _08190096\n\
+	adds r1, r6, 0x2\n\
+	mov r0, r8\n\
+	cmp r0, 0x19\n\
+	bne _08190088\n\
+	adds r0, r1, r7\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0x28\n\
+	bne _08190096\n\
+_08190088:\n\
+	adds r0, r1, r7\n\
+	ldrb r0, [r0]\n\
+	muls r0, r2\n\
+	movs r1, 0xA\n\
+	bl __divsi3\n\
+	adds r2, r0, 0\n\
+_08190096:\n\
+	adds r4, 0x3\n\
+	adds r6, 0x3\n\
+	ldr r1, =gTypeEffectiveness\n\
+	adds r0, r6, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0xFF\n\
+	bne _0819003A\n\
+_081900A4:\n\
+	ldr r0, [sp]\n\
+	cmp r0, 0x1\n\
+	beq _081900E0\n\
+_081900AA:\n\
+	ldr r1, [sp]\n\
+	cmp r1, 0x1\n\
+	bgt _081900BC\n\
+	cmp r1, 0\n\
+	beq _081900C4\n\
+	b _08190154\n\
+	.pool\n\
+_081900BC:\n\
+	ldr r0, [sp]\n\
+	cmp r0, 0x2\n\
+	beq _08190114\n\
+	b _08190154\n\
+_081900C4:\n\
+	cmp r2, 0xA\n\
+	beq _08190146\n\
+	cmp r2, 0xA\n\
+	ble _08190146\n\
+	cmp r2, 0x28\n\
+	beq _0819014A\n\
+	cmp r2, 0x28\n\
+	bgt _081900DA\n\
+	cmp r2, 0x14\n\
+	beq _08190104\n\
+	b _08190146\n\
+_081900DA:\n\
+	cmp r2, 0x50\n\
+	bne _08190146\n\
+	b _08190100\n\
+_081900E0:\n\
+	cmp r2, 0xA\n\
+	beq _08190104\n\
+	cmp r2, 0xA\n\
+	bgt _081900F2\n\
+	cmp r2, 0\n\
+	beq _08190100\n\
+	cmp r2, 0x5\n\
+	beq _0819014A\n\
+	b _08190146\n\
+_081900F2:\n\
+	cmp r2, 0x28\n\
+	beq _08190108\n\
+	cmp r2, 0x28\n\
+	ble _08190146\n\
+	cmp r2, 0x50\n\
+	beq _0819010E\n\
+	b _08190146\n\
+_08190100:\n\
+	movs r2, 0x8\n\
+	b _08190154\n\
+_08190104:\n\
+	movs r2, 0x2\n\
+	b _08190154\n\
+_08190108:\n\
+	movs r2, 0x2\n\
+	negs r2, r2\n\
+	b _08190154\n\
+_0819010E:\n\
+	movs r2, 0x4\n\
+	negs r2, r2\n\
+	b _08190154\n\
+_08190114:\n\
+	cmp r2, 0xA\n\
+	beq _08190146\n\
+	cmp r2, 0xA\n\
+	bgt _08190126\n\
+	cmp r2, 0\n\
+	beq _0819013A\n\
+	cmp r2, 0x5\n\
+	beq _08190140\n\
+	b _08190146\n\
+_08190126:\n\
+	cmp r2, 0x28\n\
+	beq _0819014E\n\
+	cmp r2, 0x28\n\
+	bgt _08190134\n\
+	cmp r2, 0x14\n\
+	beq _0819014A\n\
+	b _08190146\n\
+_08190134:\n\
+	cmp r2, 0x50\n\
+	beq _08190152\n\
+	b _08190146\n\
+_0819013A:\n\
+	movs r2, 0x10\n\
+	negs r2, r2\n\
+	b _08190154\n\
+_08190140:\n\
+	movs r2, 0x8\n\
+	negs r2, r2\n\
+	b _08190154\n\
+_08190146:\n\
+	movs r2, 0\n\
+	b _08190154\n\
+_0819014A:\n\
+	movs r2, 0x4\n\
+	b _08190154\n\
+_0819014E:\n\
+	movs r2, 0xC\n\
+	b _08190154\n\
+_08190152:\n\
+	movs r2, 0x14\n\
+_08190154:\n\
+	adds r0, r2, 0\n\
+_08190156:\n\
+	add sp, 0x8\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n\
+                ");
+}
+#endif // NONMATCHING
+
+u8 GetDomeTrainerMonIvs(u16 trainerId)
+{
+    u8 fixedIv;
+    if (trainerId <= 99)
+        fixedIv = 3;
+    else if (trainerId <= 119)
+        fixedIv = 6;
+    else if (trainerId <= 139)
+        fixedIv = 9;
+    else if (trainerId <= 159)
+        fixedIv = 12;
+    else if (trainerId <= 179)
+        fixedIv = 15;
+    else if (trainerId <= 199)
+        fixedIv = 18;
+    else if (trainerId <= 219)
+        fixedIv = 21;
+    else
+        fixedIv = 31;
+
+    return fixedIv;
+}
+
+extern const u8 gUnknown_0860D10C[][4];
+extern const u8 gUnknown_0860D14C[];
+
+s32 sub_81901A0(s32 arg0, s32 trainerId)
+{
+    s32 i, j, val;
+
+    for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+    {
+        if (gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId == trainerId)
+            break;
+    }
+
+    if (arg0 != 0)
+    {
+        if (arg0 == 3)
+            val = gUnknown_0860D10C[i][arg0] + 8;
+        else
+            val = gUnknown_0860D10C[i][arg0] + 4;
+
+        for (j = gUnknown_0860D10C[i][arg0]; j < val; j++)
+        {
+            if (gUnknown_0860D14C[j] != i && !gSaveBlock2Ptr->frontier.domeTrainers[gUnknown_0860D14C[j]].unk1)
+                break;
+        }
+
+        if (j != val)
+            return gUnknown_0860D14C[j];
+        else
+            return 0xFF;
+    }
+    else
+    {
+        if (!gSaveBlock2Ptr->frontier.domeTrainers[gUnknown_0860D10C[i][0]].unk1)
+            return gUnknown_0860D10C[i][0];
+        else
+            return 0xFF;
+    }
+}
+
+void sub_8190298(void)
+{
+    gTrainerBattleOpponent_A = sub_81902AC();
+}
+
+u16 sub_81902AC(void)
+{
+    return gSaveBlock2Ptr->frontier.domeTrainers[sub_81901A0(gSaveBlock2Ptr->frontier.field_CB2, 0x3FF)].trainerId;
+}
+
+void sub_81902E4(void)
+{
+    sub_8162614(gTrainerBattleOpponent_A, 0);
+}
+
+void sub_81902F8(void)
+{
+    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    VarSet(VAR_TEMP_0, 0);
+    gSaveBlock2Ptr->frontier.field_CA9_a = 1;
+    sub_81A4C30();
+}
+
+void sub_819033C(void)
+{
+    u8 lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
+    u8 battleMode = VarGet(VAR_0x40CE);
+
+    if (gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode] < 999)
+        gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode]++;
+    if (gSaveBlock2Ptr->frontier.field_D1C[battleMode][lvlMode] < 999)
+        gSaveBlock2Ptr->frontier.field_D1C[battleMode][lvlMode]++;
+
+    if (gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode] > gSaveBlock2Ptr->frontier.field_D14[battleMode][lvlMode])
+        gSaveBlock2Ptr->frontier.field_D14[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode];
+}
+
+void sub_81903B8(void)
+{
+    u8 taskId = CreateTask(sub_8190400, 0);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = TrainerIdToTournamentId(sub_81902AC());
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[3] = 0;
+
+    SetMainCallback2(sub_8194B54);
+}
+
+extern const struct BgTemplate gUnknown_0860CE84[4];
+extern const struct WindowTemplate gUnknown_0860CEB4[];
+extern const u8 gUnknown_08D83D50[];
+extern const u8 gUnknown_08D84970[];
+extern const u8 gUnknown_08D84F00[];
+extern const u8 gUnknown_08D85444[];
+extern const u8 gUnknown_08D85358[];
+extern const u8 gUnknown_08D85600[];
+extern const u8 gUnknown_08D854C8[];
+extern const struct CompressedSpriteSheet gUnknown_0860CF50;
+extern const struct SpriteTemplate gUnknown_0860D068;
+extern const struct SpriteTemplate gUnknown_0860D050;
+
+void sub_8190400(u8 taskId)
+{
+    s32 i;
+    s32 r5 = gTasks[taskId].data[1];
+    s32 r9 = gTasks[taskId].data[2];
+    s32 r7 = gTasks[taskId].data[3];
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        SetHBlankCallback(NULL);
+        SetVBlankCallback(NULL);
+        EnableInterrupts(INTR_FLAG_VBLANK);
+        CpuFill32(0, (void *)VRAM, VRAM_SIZE);
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, gUnknown_0860CE84, ARRAY_COUNT(gUnknown_0860CE84));
+        InitWindows(gUnknown_0860CEB4);
+        DeactivateAllTextPrinters();
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 0;
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+        gBattle_BG3_X = 0;
+        gBattle_BG3_Y = 0;
+        if (r9 == 2)
+            gBattle_BG2_X = 0, gBattle_BG2_Y = 0;
+        else
+            gBattle_BG2_X = 0, gBattle_BG2_Y = 160;
+
+        gTasks[taskId].data[0]++;
+        break;
+    case 1:
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        SetGpuReg(REG_OFFSET_MOSAIC, 0);
+        SetGpuReg(REG_OFFSET_WIN0H, 0);
+        SetGpuReg(REG_OFFSET_WIN0V, 0);
+        SetGpuReg(REG_OFFSET_WIN1H, 0);
+        SetGpuReg(REG_OFFSET_WIN1V, 0);
+        SetGpuReg(REG_OFFSET_WININ, 0);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
+        ResetPaletteFade();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 4;
+        gTasks[taskId].data[0]++;
+        break;
+    case 2:
+        DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D83D50, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D84970, 0x2000, 0, 1);
+        DecompressAndLoadBgGfxUsingHeap(3, gUnknown_08D84F00, 0x800, 0, 1);
+        LoadCompressedObjectPic(&gUnknown_0860CF50);
+        LoadCompressedPalette(gUnknown_08D85358, 0, 0x200);
+        LoadCompressedPalette(gUnknown_08D85444, 0x100, 0x200);
+        LoadCompressedPalette(gUnknown_08D85600, 0xF0, 0x20);
+        if (r9 == 2)
+            LoadCompressedPalette(gUnknown_08D854C8, 0x50, 0x20);
+        CpuFill32(0, gPlttBufferFaded, 0x400);
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        ShowBg(3);
+        gTasks[taskId].data[0]++;
+        break;
+    case 3:
+        SetVBlankCallback(sub_8194B70);
+        gUnknown_0203CD78 = AllocZeroed(sizeof(*gUnknown_0203CD78));
+        for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+            gUnknown_0203CD78->arr[i] |= 0xFF;
+        LoadMonIconPalettes();
+        i = CreateTask(sub_8190CD4, 0);
+        gTasks[i].data[0] = 0;
+        gTasks[i].data[2] = 0;
+        gTasks[i].data[3] = r9;
+        gTasks[i].data[4] = r7;
+        if (r9 == 2)
+        {
+            sub_819314C(0, r5);
+            gUnknown_0203CD78->arr[16] = 1;
+        }
+        else
+        {
+            sub_81924E0(0, r5);
+        }
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
+        if (r9 != 0)
+        {
+            r7 = CreateSprite(&gUnknown_0860D068, 120, 4, 0);
+            StartSpriteAnim(&gSprites[r7], 0);
+            gSprites[r7].data[0] = i;
+
+            r7 = CreateSprite(&gUnknown_0860D068, 120, 156, 0);
+            StartSpriteAnim(&gSprites[r7], 1);
+            gSprites[r7].data[0] = i;
+
+            r7 = CreateSprite(&gUnknown_0860D050, 6, 80, 0);
+            StartSpriteAnim(&gSprites[r7], 0);
+            gSprites[r7].data[0] = i;
+            gSprites[r7].data[1] = 0;
+            if (r9 == 1)
+                gSprites[r7].invisible = 1;
+
+            r7 = CreateSprite(&gUnknown_0860D050, 234, 80, 0);
+            StartSpriteAnim(&gSprites[r7], 1);
+            gSprites[r7].data[0] = i;
+            gSprites[r7].data[1] = 1;
+        }
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_8190790(struct Sprite *sprite)
+{
+    sprite->pos1.y += 4;
+    if (sprite->data[0] != 0)
+    {
+        if (sprite->pos1.y >= -32)
+            sprite->invisible = 0;
+        if (++sprite->data[1] == 40)
+            sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        if (sprite->pos1.y >= 192)
+        {
+            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sub_818D8F0(sprite->data[3]);
+        }
+    }
+}
+
+void sub_81907F8(struct Sprite *sprite)
+{
+    sprite->pos1.y -= 4;
+    if (sprite->data[0] != 0)
+    {
+        if (sprite->pos1.y <= 192)
+            sprite->invisible = 0;
+        if (++sprite->data[1] == 40)
+            sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        if (sprite->pos1.y <= -32)
+        {
+            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sub_818D8F0(sprite->data[3]);
+        }
+    }
+}
+
+void sub_8190860(struct Sprite *sprite)
+{
+    sprite->pos1.x += 4;
+    if (sprite->data[0] != 0)
+    {
+        if (sprite->pos1.x >= -32)
+            sprite->invisible = 0;
+        if (++sprite->data[1] == 64)
+            sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        if (sprite->pos1.x >= 272)
+        {
+            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sub_818D8F0(sprite->data[3]);
+        }
+    }
+}
+
+void sub_81908CC(struct Sprite *sprite)
+{
+    sprite->pos1.x -= 4;
+    if (sprite->data[0] != 0)
+    {
+        if (sprite->pos1.x <= 272)
+            sprite->invisible = 0;
+        if (++sprite->data[1] == 64)
+            sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        if (sprite->pos1.x <= -32)
+        {
+            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sub_818D8F0(sprite->data[3]);
+        }
+    }
+}
+
+void sub_8190938(struct Sprite *sprite)
+{
+    if (!sprite->data[3])
+        UpdateMonIconFrame(sprite);
+}
+
+void sub_8190950(struct Sprite *sprite)
+{
+    if (!sprite->data[3])
+        UpdateMonIconFrame(sprite);
+    sprite->pos1.y += 4;
+    if (sprite->data[0] != 0)
+    {
+        if (sprite->pos1.y >= -16)
+            sprite->invisible = 0;
+        if (++sprite->data[1] == 40)
+            sprite->callback = sub_8190938;
+    }
+    else
+    {
+        if (sprite->pos1.y >= 176)
+        {
+            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sub_80D2EF8(sprite);
+        }
+    }
+}
+
+void sub_81909CC(struct Sprite *sprite)
+{
+    if (!sprite->data[3])
+        UpdateMonIconFrame(sprite);
+    sprite->pos1.y -= 4;
+    if (sprite->data[0] != 0)
+    {
+        if (sprite->pos1.y <= 176)
+            sprite->invisible = 0;
+        if (++sprite->data[1] == 40)
+            sprite->callback = sub_8190938;
+    }
+    else
+    {
+        if (sprite->pos1.y <= -16)
+        {
+            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sub_80D2EF8(sprite);
+        }
+    }
+}
+
+void sub_8190A48(struct Sprite *sprite)
+{
+    if (!sprite->data[3])
+        UpdateMonIconFrame(sprite);
+    sprite->pos1.x += 4;
+    if (sprite->data[0] != 0)
+    {
+        if (sprite->pos1.x >= -16)
+            sprite->invisible = 0;
+        if (++sprite->data[1] == 64)
+            sprite->callback = sub_8190938;
+    }
+    else
+    {
+        if (sprite->pos1.x >= 256)
+        {
+            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sub_80D2EF8(sprite);
+        }
+    }
+}
+
+void sub_8190AC4(struct Sprite *sprite)
+{
+    if (!sprite->data[3])
+        UpdateMonIconFrame(sprite);
+    sprite->pos1.x -= 4;
+    if (sprite->data[0] != 0)
+    {
+        if (sprite->pos1.x <= 256)
+            sprite->invisible = 0;
+        if (++sprite->data[1] == 64)
+            sprite->callback = sub_8190938;
+    }
+    else
+    {
+        if (sprite->pos1.x <= -16)
+        {
+            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sub_80D2EF8(sprite);
+        }
+    }
+}
+
+extern const u8 gUnknown_0860D080[];
+
+void sub_8190B40(struct Sprite *sprite)
+{
+    s32 taskId1 = sprite->data[0];
+    s32 arrId = gTasks[gTasks[taskId1].data[4]].data[1];
+    s32 tournmanetTrainerId = gUnknown_0860D080[arrId];
+    s32 r12 = gSaveBlock2Ptr->frontier.field_CB2;
+
+    if (gTasks[taskId1].data[3] == 1)
+    {
+        if (sprite->data[1])
+        {
+            if ((gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].unk1
+                && gUnknown_0203CD78->arr[16] - 1 < gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].unk2))
+            {
+                sprite->invisible = 0;
+            }
+            else if (!gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].unk1
+                     && gUnknown_0203CD78->arr[16] - 1 < r12)
+            {
+                sprite->invisible = 0;
+            }
+            else
+            {
+                if (gTasks[taskId1].data[0] == 2)
+                    sprite->invisible = 1;
+            }
+        }
+        else
+        {
+            if (gUnknown_0203CD78->arr[16] != 0)
+            {
+                sprite->invisible = 0;
+            }
+            else
+            {
+                if (gTasks[taskId1].data[0] == 2)
+                    sprite->invisible = 1;
+            }
+        }
+    }
+    else
+    {
+        if (sprite->data[1])
+        {
+            if (gUnknown_0203CD78->arr[16] > 1)
+            {
+                if (gTasks[taskId1].data[0] == 2)
+                    sprite->invisible = 1;
+            }
+            else
+            {
+                sprite->invisible = 0;
+            }
+        }
+        else
+        {
+            if (gUnknown_0203CD78->arr[16] != 0)
+            {
+                sprite->invisible = 0;
+            }
+            else
+            {
+                if (gTasks[taskId1].data[0] == 2)
+                    sprite->invisible = 1;
+            }
+        }
+    }
+}
+
+void sub_8190C6C(struct Sprite *sprite)
+{
+    s32 taskId1 = sprite->data[0];
+
+    if (gTasks[taskId1].data[3] == 1)
+    {
+        if (gUnknown_0203CD78->arr[16] != 0)
+        {
+            if (gTasks[taskId1].data[0] == 2)
+                sprite->invisible = 1;
+        }
+        else
+        {
+            sprite->invisible = 0;
+        }
+    }
+    else
+    {
+        if (gUnknown_0203CD78->arr[16] != 1)
+        {
+            if (gTasks[taskId1].data[0] == 2)
+                sprite->invisible = 1;
+        }
+        else
+        {
+            sprite->invisible = 0;
+        }
+    }
 }
