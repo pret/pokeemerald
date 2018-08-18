@@ -36,21 +36,22 @@ struct Unknown_0203BC8C_Struct
 struct Unknown_0203CD78_Struct
 {
     u8 arr[16];
-    u8 unk_11;
+    u8 unk_10;
+    u8 unk_11[3];
 };
-
-extern struct Unknown_0203BC8C_Struct *gFacilityTrainerMons;
 
 extern void sub_81B8558(void);
 extern u32 sub_81A39C4(void);
 extern u16 sub_8162548(u8, u8);
-extern u16 sub_8163524(u16);
+extern u16 RandomizeFacilityTrainerMonId(u16);
 extern u8 GetFrontierEnemyMonLevel(void);
 extern void sub_8195898(u8 *dst, u16 trainerId);
 extern u16 sub_81A5060(u8, u8);
 extern void sub_8162614(u16, u8);
 extern void sub_81A4C30(void);
 extern u16 sub_818D8F0(u16);
+extern bool8 sub_81A3610(void);
+extern u16 sub_81A4FF0(u8);
 
 extern u8 gUnknown_0203CEF8[];
 extern u32 gUnknown_0203CD70;
@@ -63,16 +64,37 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
+extern struct Unknown_0203BC8C_Struct *gFacilityTrainerMons;
 extern struct Unknown_0203CD78_Struct *gUnknown_0203CD78;
 
 extern void (* const gUnknown_0860D090[])(void);
 extern const u32 gUnknown_0860D0EC[][2];
 extern const u32 gUnknown_0860D0FC[][2];
 extern const u16 gBattleFrontierHeldItems[];
+extern const u8 gUnknown_0860D10C[][4];
+extern const u8 gUnknown_0860D14C[];
+extern const struct BgTemplate gUnknown_0860CE84[4];
+extern const struct WindowTemplate gUnknown_0860CEB4[];
+extern const struct CompressedSpriteSheet gUnknown_0860CF50;
+extern const struct SpriteTemplate gUnknown_0860D068;
+extern const struct SpriteTemplate gUnknown_0860D050;
+extern const u8 gUnknown_0860D080[];
+extern const u8 gUnknown_0860D15C[];
+extern const u8 gUnknown_0860D3F1[][2];
+
+// gfx
+extern const u8 gUnknown_08D83D50[];
+extern const u8 gUnknown_08D84970[];
+extern const u8 gUnknown_08D84F00[];
+extern const u8 gUnknown_08D85444[];
+extern const u8 gUnknown_08D85358[];
+extern const u8 gUnknown_08D85600[];
+extern const u8 gUnknown_08D854C8[];
 
 // This file's functions.
 u8 GetDomeTrainerMonIvs(u16 trainerId);
-void sub_818F720(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats);
+void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray);
+void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats);
 void CreateDomeTrainerMons(u16 tournamentTrainerId);
 u16 TrainerIdToTournamentId(u16 trainerId);
 s32 sub_818FC78(u16 tournamentTrainerId);
@@ -83,10 +105,13 @@ s32 sub_818FEB4(s32 *arr, bool8 arg1);
 u16 sub_81902AC(void);
 void sub_8190400(u8 taskId);
 void sub_8190CD4(u8 taskId);
+void sub_8194220(u8 taskId);
 void sub_8194B54(void);
 void sub_8194B70(void);
 void sub_819314C(u8, u8);
 void sub_81924E0(u8, u8);
+u8 sub_819221C(u8 taskId);
+s32 sub_8192F08(u8, u8*);
 
 // code
 void sub_818E9AC(void)
@@ -244,33 +269,34 @@ void sub_818ED28(void)
     }
 }
 
-#ifdef NONMATCHING
-// Not even close, this function is insane.
-void sub_818F02C(void)
+void SetDomeTrainersAndMons(void)
 {
-    s32 i, j, k, l;
-    u32 array[16];
-    u32 var_28;
-    u32 var_24;
-    s32 var_38;
+    s32 i, j, k;
+    s32 monLevel;
+    s32 species[3];
     s32 monTypesBits, monTypesCount;
-    u32 var_54 = 0;
-    u32 var_50 = 0;
-    u32 var_4C = 0;
-    u32 *var_40 = AllocZeroed(0x20);
-    u16 *var_44 = AllocZeroed(0x18);
-    u32 var_48;
+    s32 trainerId;
+    s32 monTournamentId;
+    u16 *statSums;
+    s32 *statValues;
+    u8 ivs = 0;
+
+    species[0] = 0;
+    species[1] = 0;
+    species[2] = 0;
+    statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
+    statValues = AllocZeroed(sizeof(s32) * 6);
 
     gSaveBlock2Ptr->frontier.field_D0A = gSaveBlock2Ptr->frontier.chosenLvl + 1;
     gSaveBlock2Ptr->frontier.field_D0B = VarGet(VAR_0x40CE) + 1;
-    gSaveBlock2Ptr->frontier.domeTrainers[0].trainerId = 0x3FF;
+    gSaveBlock2Ptr->frontier.domeTrainers[0].trainerId = TRAINER_PLAYER;
     gSaveBlock2Ptr->frontier.domeTrainers[0].unk1 = 0;
     gSaveBlock2Ptr->frontier.domeTrainers[0].unk2 = 0;
     gSaveBlock2Ptr->frontier.domeTrainers[0].unk3 = 0;
 
     for (i = 0; i < 3; i++)
     {
-        gSaveBlock2Ptr->frontier.domeMonId[i] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_SPECIES, NULL);
+        gSaveBlock2Ptr->frontier.domeMonId[0][i] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_SPECIES, NULL);
         for (j = 0; j < 4; j++)
             gSaveBlock2Ptr->frontier.field_EFC[i].moves[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_MOVE1 + j, NULL);
         for (j = 0; j < 6; j++)
@@ -279,939 +305,165 @@ void sub_818F02C(void)
         gSaveBlock2Ptr->frontier.field_EFC[i].nature = GetNature(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1]);
     }
 
-    var_28 = 4;
-    var_24 = 6;
-    for (l = j; l < 16; l++)
+    for (i = 1; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
-        u16 val;
-        if (l > 5)
+        if (i > 5)
         {
-            while (1)
+            do
             {
-                val = sub_8162548(sub_81A39C4(), 0);
-                for (k = 1; k < l; k++)
+                trainerId = sub_8162548(sub_81A39C4(), 0);
+                for (j = 1; j < i; j++)
                 {
-                    if (gSaveBlock2Ptr->frontier.domeTrainers[k].trainerId == val)
+                    if (gSaveBlock2Ptr->frontier.domeTrainers[j].trainerId == trainerId)
                         break;
                 }
-                if (k != l)
-                {
-                    gSaveBlock2Ptr->frontier.domeTrainers[var_28].trainerId = val;
-                    break;
-                }
-            }
+            } while (j != i);
+            gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId = trainerId;
         }
         else
         {
-            while (1)
-            {
-                val = sub_8162548(sub_81A39C4() + 1, 0);
-                for (k = 1; k < l; k++)
-                {
-                    if (gSaveBlock2Ptr->frontier.domeTrainers[k].trainerId == val)
-                        break;
-                }
-                if (k != l)
-                {
-                    gSaveBlock2Ptr->frontier.domeTrainers[var_28].trainerId = val;
-                    break;
-                }
-            }
-        }
-
-        for (var_38 = 0; var_38 < 3; var_38++)
-        {
-            u16 val2;
             do
             {
-                val2 = sub_8163524(val);
-                for (i = 0; i < l; i++)
+                trainerId = sub_8162548(sub_81A39C4() + 1, 0);
+                for (j = 1; j < i; j++)
                 {
-                    if (gSaveBlock2Ptr->frontier.domeMonId[i] == val2)
-                        break;
-                    if (var_54 == gFacilityTrainerMons[val2].field_0)
-                        break;
-                    if (var_50 == gFacilityTrainerMons[val2].field_0)
-                        break;
-                    if (gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[i]].field_A == gFacilityTrainerMons[val2].field_A)
+                    if (gSaveBlock2Ptr->frontier.domeTrainers[j].trainerId == trainerId)
                         break;
                 }
-            } while (i != var_38);
-
-            gSaveBlock2Ptr->frontier.domeMonId[var_24] = val2;
-            array[var_38] = gFacilityTrainerMons[val2].field_0;
+            } while (j != i);
+            gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId = trainerId;
         }
 
-        gSaveBlock2Ptr->frontier.domeTrainers[var_28].unk1 = 0;
-        gSaveBlock2Ptr->frontier.domeTrainers[var_28].unk2 = 0;
-        gSaveBlock2Ptr->frontier.domeTrainers[var_28].unk3 = 0;
+        for (j = 0; j < 3; j++)
+        {
+            // Make sure the mon is valid.
+            do
+            {
+                monTournamentId = RandomizeFacilityTrainerMonId(trainerId);
+                for (k = 0; k < j; k++)
+                {
+                    s32 checkingMonId = gSaveBlock2Ptr->frontier.domeMonId[i][k];
+                    if (checkingMonId == monTournamentId
+                        || species[0] == gFacilityTrainerMons[monTournamentId].species
+                        || species[1] == gFacilityTrainerMons[monTournamentId].species
+                        || gFacilityTrainerMons[checkingMonId].itemTableId == gFacilityTrainerMons[monTournamentId].itemTableId)
+                        break;
+                }
+            } while (k != j);
+
+            gSaveBlock2Ptr->frontier.domeMonId[i][j] = monTournamentId;
+            species[j] = gFacilityTrainerMons[monTournamentId].species;
+        }
+
+        gSaveBlock2Ptr->frontier.domeTrainers[i].unk1 = 0;
+        gSaveBlock2Ptr->frontier.domeTrainers[i].unk2 = 0;
+        gSaveBlock2Ptr->frontier.domeTrainers[i].unk3 = 0;
     }
 
+    monTypesBits = 0;
+    statSums[0] = 0;
     for (i = 0; i < 3; i++)
     {
-        struct Pokemon *mon = &gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1];
-        var_44[0] += GetMonData(mon, MON_DATA_ATK, NULL);
-        var_44[0] += GetMonData(mon, MON_DATA_DEF, NULL);
-        var_44[0] += GetMonData(mon, MON_DATA_SPATK, NULL);
-        var_44[0] += GetMonData(mon, MON_DATA_SPDEF, NULL);
-        var_44[0] += GetMonData(mon, MON_DATA_SPEED, NULL);
-        var_44[0] += GetMonData(mon, MON_DATA_MAX_HP, NULL);
-        monTypesBits |= gBitTable[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].type1];
-        monTypesBits |= gBitTable[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].type2];
+        trainerId = gSaveBlock2Ptr->frontier.field_CAA[i] - 1; // Great variable choice, gamefreak.
+        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_ATK, NULL);
+        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_DEF, NULL);
+        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPATK, NULL);
+        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPDEF, NULL);
+        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPEED, NULL);
+        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_MAX_HP, NULL);
+        monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type1];
+        monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type2];
     }
 
-    for (monTypesCount = 0, i = 0; i < 31; i++)
+    for (monTypesCount = 0, j = 0; j < 32; j++)
     {
         if (monTypesBits & 1)
             monTypesCount++;
         monTypesBits >>= 1;
     }
 
-    var_48 = GetFrontierEnemyMonLevel();
-    var_44[0] += (monTypesCount * var_48) / 20;
+    monLevel = GetFrontierEnemyMonLevel();
+    statSums[0] += (monTypesCount * monLevel) / 20;
 
-    for (i = 0; i < 16; i++)
+    for (i = 1; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
-        u8 r8;
-
-        var_44[i + 1] = 0;
-        r8 = GetDomeTrainerMonIvs(gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId);
+        monTypesBits = 0;
+        statSums[i] = 0;
+        ivs = GetDomeTrainerMonIvs(gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId);
         for (j = 0; j < 3; j++)
         {
-            sub_818F720(gSaveBlock2Ptr->frontier.domeMonId[i]);
+            CalcDomeMonStats(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[i][j]].species,
+                             monLevel, ivs,
+                             gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[i][j]].evSpread,
+                             gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[i][j]].nature,
+                             statValues);
+
+            statSums[i] += statValues[STAT_ATK];
+            statSums[i] += statValues[STAT_DEF];
+            statSums[i] += statValues[STAT_SPATK];
+            statSums[i] += statValues[STAT_SPDEF];
+            statSums[i] += statValues[STAT_SPEED];
+            statSums[i] += statValues[STAT_HP];
+            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[i][j]].species].type1];
+            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[i][j]].species].type2];
+        }
+
+        for (monTypesCount = 0, j = 0; j < 32; j++)
+        {
+            if (monTypesBits & 1)
+                monTypesCount++;
+            monTypesBits >>= 1;
+        }
+        statSums[i] += (monTypesCount * monLevel) / 20;
+    }
+
+    for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT - 1; i++)
+    {
+        for (j = i + 1; j < DOME_TOURNAMENT_TRAINERS_COUNT; j++)
+        {
+            if (statSums[i] < statSums[j])
+            {
+                SwapDomeTrainers(i, j, statSums);
+            }
+            else
+            {
+                if (statSums[i] == statSums[j])
+                {
+                    if (gSaveBlock2Ptr->frontier.domeTrainers[j].trainerId == TRAINER_PLAYER)
+                        SwapDomeTrainers(i, j, statSums);
+                    else if (gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId > gSaveBlock2Ptr->frontier.domeTrainers[j].trainerId)
+                        SwapDomeTrainers(i, j, statSums);
+                }
+            }
         }
     }
 
-    Free(var_44);
-    Free(var_40);
+    if (sub_81A3610())
+    {
+        for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+        {
+            if (gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId == TRAINER_PLAYER)
+                break;
+        }
+
+        if (gUnknown_0860D3F1[i][0] != 0)
+        {
+            j = 0;
+            gSaveBlock2Ptr->frontier.domeTrainers[j].trainerId = TRAINER_FRONTIER_BRAIN;
+        }
+        else
+        {
+            j = 1;
+            gSaveBlock2Ptr->frontier.domeTrainers[j].trainerId = TRAINER_FRONTIER_BRAIN;
+        }
+
+        for (i = 0; i < 3; i++)
+            gSaveBlock2Ptr->frontier.domeMonId[j][i] = sub_81A4FF0(i);
+    }
+
+    Free(statSums);
+    Free(statValues);
 }
-#else
-NAKED
-void sub_818F02C(void)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x3C\n\
-	movs r0, 0\n\
-	str r0, [sp, 0x8]\n\
-	str r0, [sp, 0xC]\n\
-	str r0, [sp, 0x10]\n\
-	movs r0, 0x20\n\
-	bl AllocZeroed\n\
-	str r0, [sp, 0x18]\n\
-	movs r0, 0x18\n\
-	bl AllocZeroed\n\
-	str r0, [sp, 0x1C]\n\
-	ldr r4, =gSaveBlock2Ptr\n\
-	ldr r1, [r4]\n\
-	ldr r2, =0x00000ca9\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 30\n\
-	lsrs r0, 30\n\
-	adds r0, 0x1\n\
-	ldr r3, =0x00000d0a\n\
-	adds r1, r3\n\
-	strb r0, [r1]\n\
-	ldr r0, =0x000040ce\n\
-	bl VarGet\n\
-	ldr r1, [r4]\n\
-	adds r0, 0x1\n\
-	ldr r5, =0x00000d0b\n\
-	adds r1, r5\n\
-	strb r0, [r1]\n\
-	ldr r2, [r4]\n\
-	ldr r7, =0x00000d24\n\
-	adds r3, r2, r7\n\
-	ldrh r0, [r3]\n\
-	ldr r5, =0x000003ff\n\
-	adds r1, r5, 0\n\
-	orrs r0, r1\n\
-	strh r0, [r3]\n\
-	ldr r3, =0x00000d25\n\
-	adds r2, r3\n\
-	ldrb r1, [r2]\n\
-	movs r0, 0x5\n\
-	negs r0, r0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	ldr r1, [r4]\n\
-	adds r1, r3\n\
-	ldrb r2, [r1]\n\
-	movs r0, 0x19\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	strb r0, [r1]\n\
-	ldr r1, [r4]\n\
-	adds r1, r3\n\
-	ldrb r2, [r1]\n\
-	movs r0, 0x1F\n\
-	ands r0, r2\n\
-	strb r0, [r1]\n\
-	movs r7, 0\n\
-	mov r10, r7\n\
-	mov r8, r4\n\
-	ldr r0, =gBattleScripting + 0x14\n\
-	mov r9, r0\n\
-	movs r4, 0\n\
-_0818F0BA:\n\
-	mov r1, r8\n\
-	ldr r0, [r1]\n\
-	ldr r2, =0x00000caa\n\
-	adds r0, r2\n\
-	adds r0, r4\n\
-	ldrh r0, [r0]\n\
-	movs r3, 0x64\n\
-	muls r0, r3\n\
-	add r0, r9\n\
-	movs r1, 0xB\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	mov r5, r8\n\
-	ldr r1, [r5]\n\
-	ldr r7, =0x00000d64\n\
-	adds r1, r7\n\
-	adds r1, r4\n\
-	strh r0, [r1]\n\
-	movs r5, 0\n\
-	mov r0, r10\n\
-	lsls r7, r0, 4\n\
-	adds r6, r7, 0\n\
-_0818F0E8:\n\
-	mov r1, r8\n\
-	ldr r0, [r1]\n\
-	ldr r2, =0x00000caa\n\
-	adds r0, r2\n\
-	adds r0, r4\n\
-	ldrh r0, [r0]\n\
-	movs r3, 0x64\n\
-	muls r0, r3\n\
-	add r0, r9\n\
-	adds r1, r5, 0\n\
-	adds r1, 0xD\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	mov r2, r8\n\
-	ldr r1, [r2]\n\
-	ldr r3, =0x00000efc\n\
-	adds r1, r3\n\
-	adds r1, r6\n\
-	strh r0, [r1]\n\
-	adds r6, 0x2\n\
-	adds r5, 0x1\n\
-	cmp r5, 0x3\n\
-	ble _0818F0E8\n\
-	movs r5, 0\n\
-	ldr r6, =gSaveBlock2Ptr\n\
-_0818F11C:\n\
-	ldr r0, [r6]\n\
-	ldr r1, =0x00000caa\n\
-	adds r0, r1\n\
-	adds r0, r4\n\
-	ldrh r0, [r0]\n\
-	movs r2, 0x64\n\
-	muls r0, r2\n\
-	add r0, r9\n\
-	adds r1, r5, 0\n\
-	adds r1, 0x1A\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	ldr r1, [r6]\n\
-	adds r2, r5, r7\n\
-	ldr r3, =0x00000f04\n\
-	adds r1, r3\n\
-	adds r1, r2\n\
-	strb r0, [r1]\n\
-	adds r5, 0x1\n\
-	cmp r5, 0x5\n\
-	ble _0818F11C\n\
-	mov r5, r8\n\
-	ldr r0, [r5]\n\
-	ldr r1, =0x00000caa\n\
-	adds r0, r1\n\
-	adds r0, r4\n\
-	ldrh r0, [r0]\n\
-	movs r2, 0x64\n\
-	muls r0, r2\n\
-	add r0, r9\n\
-	bl GetNature\n\
-	ldr r1, [r5]\n\
-	adds r1, r7\n\
-	ldr r3, =0x00000f0a\n\
-	adds r1, r3\n\
-	strb r0, [r1]\n\
-	adds r4, 0x2\n\
-	movs r5, 0x1\n\
-	add r10, r5\n\
-	mov r7, r10\n\
-	cmp r7, 0x2\n\
-	ble _0818F0BA\n\
-	mov r10, r5\n\
-	movs r0, 0x4\n\
-	str r0, [sp, 0x34]\n\
-	movs r1, 0x6\n\
-	str r1, [sp, 0x38]\n\
-_0818F17E:\n\
-	mov r2, r10\n\
-	cmp r2, 0x5\n\
-	ble _0818F22C\n\
-_0818F184:\n\
-	bl sub_81A39C4\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	movs r1, 0\n\
-	bl sub_8162548\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	movs r5, 0x1\n\
-	cmp r5, r10\n\
-	bge _0818F1CA\n\
-	ldr r3, =gSaveBlock2Ptr\n\
-	ldr r0, [r3]\n\
-	ldr r7, =0x00000d28\n\
-	adds r0, r7\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 22\n\
-	lsrs r0, 22\n\
-	adds r2, r3, 0\n\
-	cmp r0, r4\n\
-	beq _0818F1CA\n\
-	ldr r3, =0x00000d24\n\
-_0818F1B2:\n\
-	adds r5, 0x1\n\
-	cmp r5, r10\n\
-	bge _0818F1CA\n\
-	ldr r0, [r2]\n\
-	lsls r1, r5, 2\n\
-	adds r0, r1\n\
-	adds r0, r3\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 22\n\
-	lsrs r0, 22\n\
-	cmp r0, r4\n\
-	bne _0818F1B2\n\
-_0818F1CA:\n\
-	cmp r5, r10\n\
-	bne _0818F184\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r3, [r0]\n\
-	ldr r1, [sp, 0x34]\n\
-	adds r3, r1\n\
-	ldr r2, =0x00000d24\n\
-	adds r3, r2\n\
-	ldr r5, =0x000003ff\n\
-	adds r0, r5, 0\n\
-	adds r2, r4, 0\n\
-	ands r2, r0\n\
-	ldrh r0, [r3]\n\
-	ldr r7, =0xfffffc00\n\
-	adds r1, r7, 0\n\
-	b _0818F292\n\
-	.pool\n\
-_0818F22C:\n\
-	bl sub_81A39C4\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	movs r1, 0\n\
-	bl sub_8162548\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	movs r5, 0x1\n\
-	cmp r5, r10\n\
-	bge _0818F274\n\
-	ldr r1, =gSaveBlock2Ptr\n\
-	ldr r0, [r1]\n\
-	ldr r2, =0x00000d28\n\
-	adds r0, r2\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 22\n\
-	lsrs r0, 22\n\
-	adds r2, r1, 0\n\
-	cmp r0, r4\n\
-	beq _0818F274\n\
-	ldr r3, =0x00000d24\n\
-_0818F25C:\n\
-	adds r5, 0x1\n\
-	cmp r5, r10\n\
-	bge _0818F274\n\
-	ldr r0, [r2]\n\
-	lsls r1, r5, 2\n\
-	adds r0, r1\n\
-	adds r0, r3\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 22\n\
-	lsrs r0, 22\n\
-	cmp r0, r4\n\
-	bne _0818F25C\n\
-_0818F274:\n\
-	cmp r5, r10\n\
-	bne _0818F22C\n\
-	ldr r5, =gSaveBlock2Ptr\n\
-	ldr r3, [r5]\n\
-	ldr r7, [sp, 0x34]\n\
-	adds r3, r7\n\
-	ldr r0, =0x00000d24\n\
-	adds r3, r0\n\
-	ldr r1, =0x000003ff\n\
-	adds r0, r1, 0\n\
-	adds r2, r4, 0\n\
-	ands r2, r0\n\
-	ldrh r0, [r3]\n\
-	ldr r5, =0xfffffc00\n\
-	adds r1, r5, 0\n\
-_0818F292:\n\
-	ands r0, r1\n\
-	orrs r0, r2\n\
-	strh r0, [r3]\n\
-	movs r5, 0\n\
-	lsls r4, 16\n\
-	str r4, [sp, 0x2C]\n\
-	ldr r7, [sp, 0x38]\n\
-	str r7, [sp, 0x20]\n\
-_0818F2A2:\n\
-	lsls r0, r5, 1\n\
-	mov r9, r0\n\
-	adds r1, r5, 0x1\n\
-	str r1, [sp, 0x24]\n\
-	lsls r2, r5, 2\n\
-	str r2, [sp, 0x28]\n\
-_0818F2AE:\n\
-	ldr r3, [sp, 0x2C]\n\
-	lsrs r0, r3, 16\n\
-	bl sub_8163524\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	movs r7, 0\n\
-	cmp r7, r5\n\
-	bge _0818F300\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r0, [r0]\n\
-	ldr r1, [sp, 0x8]\n\
-	mov r8, r1\n\
-	ldr r2, [sp, 0xC]\n\
-	mov r12, r2\n\
-	ldr r3, =0x00000d64\n\
-	adds r0, r3\n\
-	ldr r1, [sp, 0x20]\n\
-	adds r4, r1, r0\n\
-_0818F2D4:\n\
-	ldrh r3, [r4]\n\
-	cmp r3, r6\n\
-	beq _0818F300\n\
-	ldr r2, =gFacilityTrainerMons\n\
-	ldr r1, [r2]\n\
-	lsls r0, r6, 4\n\
-	adds r2, r0, r1\n\
-	ldrh r0, [r2]\n\
-	cmp r8, r0\n\
-	beq _0818F300\n\
-	cmp r12, r0\n\
-	beq _0818F300\n\
-	lsls r0, r3, 4\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0xA]\n\
-	ldrb r2, [r2, 0xA]\n\
-	cmp r0, r2\n\
-	beq _0818F300\n\
-	adds r4, 0x2\n\
-	adds r7, 0x1\n\
-	cmp r7, r5\n\
-	blt _0818F2D4\n\
-_0818F300:\n\
-	cmp r7, r5\n\
-	bne _0818F2AE\n\
-	ldr r3, =gSaveBlock2Ptr\n\
-	ldr r0, [r3]\n\
-	ldr r1, [sp, 0x38]\n\
-	add r1, r9\n\
-	ldr r5, =0x00000d64\n\
-	adds r0, r5\n\
-	adds r0, r1\n\
-	strh r6, [r0]\n\
-	ldr r2, [sp, 0x28]\n\
-	add r2, sp\n\
-	adds r2, 0x8\n\
-	ldr r0, =gFacilityTrainerMons\n\
-	ldr r1, [r0]\n\
-	lsls r0, r6, 4\n\
-	adds r0, r1\n\
-	ldrh r0, [r0]\n\
-	str r0, [r2]\n\
-	ldr r5, [sp, 0x24]\n\
-	cmp r5, 0x2\n\
-	ble _0818F2A2\n\
-	ldr r2, [r3]\n\
-	ldr r7, [sp, 0x34]\n\
-	adds r2, r7\n\
-	ldr r0, =0x00000d25\n\
-	adds r2, r0\n\
-	ldrb r0, [r2]\n\
-	movs r3, 0x5\n\
-	negs r3, r3\n\
-	adds r1, r3, 0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	ldr r5, =gSaveBlock2Ptr\n\
-	ldr r2, [r5]\n\
-	adds r2, r7\n\
-	ldr r7, =0x00000d25\n\
-	adds r2, r7\n\
-	ldrb r0, [r2]\n\
-	subs r3, 0x14\n\
-	adds r1, r3, 0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	ldr r1, [r5]\n\
-	ldr r5, [sp, 0x34]\n\
-	adds r1, r5\n\
-	adds r1, r7\n\
-	ldrb r2, [r1]\n\
-	movs r0, 0x1F\n\
-	ands r0, r2\n\
-	strb r0, [r1]\n\
-	adds r5, 0x4\n\
-	str r5, [sp, 0x34]\n\
-	ldr r7, [sp, 0x38]\n\
-	adds r7, 0x6\n\
-	str r7, [sp, 0x38]\n\
-	movs r0, 0x1\n\
-	add r10, r0\n\
-	mov r1, r10\n\
-	cmp r1, 0xF\n\
-	bgt _0818F37C\n\
-	b _0818F17E\n\
-_0818F37C:\n\
-	movs r7, 0\n\
-	ldr r2, [sp, 0x18]\n\
-	strh r7, [r2]\n\
-	movs r3, 0\n\
-	mov r10, r3\n\
-	ldr r6, =gBitTable\n\
-	ldr r5, =gBaseStats\n\
-_0818F38A:\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r0, [r0]\n\
-	mov r2, r10\n\
-	lsls r1, r2, 1\n\
-	ldr r3, =0x00000caa\n\
-	adds r0, r3\n\
-	adds r0, r1\n\
-	ldrh r0, [r0]\n\
-	subs r4, r0, 0x1\n\
-	movs r0, 0x64\n\
-	muls r4, r0\n\
-	ldr r0, =gPlayerParty\n\
-	adds r4, r0\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x3B\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	ldr r2, [sp, 0x18]\n\
-	ldrh r1, [r2]\n\
-	adds r1, r0\n\
-	strh r1, [r2]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x3C\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	ldr r3, [sp, 0x18]\n\
-	ldrh r1, [r3]\n\
-	adds r1, r0\n\
-	strh r1, [r3]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x3E\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	ldr r2, [sp, 0x18]\n\
-	ldrh r1, [r2]\n\
-	adds r1, r0\n\
-	strh r1, [r2]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x3F\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	ldr r3, [sp, 0x18]\n\
-	ldrh r1, [r3]\n\
-	adds r1, r0\n\
-	strh r1, [r3]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x3D\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	ldr r2, [sp, 0x18]\n\
-	ldrh r1, [r2]\n\
-	adds r1, r0\n\
-	strh r1, [r2]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x3A\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	ldr r3, [sp, 0x18]\n\
-	ldrh r1, [r3]\n\
-	adds r1, r0\n\
-	strh r1, [r3]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0xB\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	lsls r1, r0, 3\n\
-	subs r1, r0\n\
-	lsls r1, 2\n\
-	adds r1, r5\n\
-	ldrb r0, [r1, 0x6]\n\
-	lsls r0, 2\n\
-	adds r0, r6\n\
-	ldr r0, [r0]\n\
-	orrs r7, r0\n\
-	adds r0, r4, 0\n\
-	movs r1, 0xB\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	lsls r1, r0, 3\n\
-	subs r1, r0\n\
-	lsls r1, 2\n\
-	adds r1, r5\n\
-	ldrb r0, [r1, 0x7]\n\
-	lsls r0, 2\n\
-	adds r0, r6\n\
-	ldr r0, [r0]\n\
-	orrs r7, r0\n\
-	movs r0, 0x1\n\
-	add r10, r0\n\
-	mov r1, r10\n\
-	cmp r1, 0x2\n\
-	ble _0818F38A\n\
-	movs r4, 0\n\
-	movs r1, 0x1\n\
-	movs r5, 0x1F\n\
-_0818F458:\n\
-	adds r0, r7, 0\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0818F462\n\
-	adds r4, 0x1\n\
-_0818F462:\n\
-	asrs r7, 1\n\
-	subs r5, 0x1\n\
-	cmp r5, 0\n\
-	bge _0818F458\n\
-	bl GetFrontierEnemyMonLevel\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp, 0x14]\n\
-	adds r2, r0, 0\n\
-	adds r0, r4, 0\n\
-	muls r0, r2\n\
-	movs r1, 0x14\n\
-	bl __divsi3\n\
-	ldr r3, [sp, 0x18]\n\
-	ldrh r1, [r3]\n\
-	adds r1, r0\n\
-	strh r1, [r3]\n\
-	movs r5, 0x1\n\
-	mov r10, r5\n\
-	adds r6, r3, 0\n\
-	adds r6, 0x2\n\
-	movs r7, 0x2\n\
-	str r7, [sp, 0x30]\n\
-_0818F494:\n\
-	movs r7, 0\n\
-	strh r7, [r6]\n\
-	ldr r1, =gSaveBlock2Ptr\n\
-	ldr r0, [r1]\n\
-	mov r2, r10\n\
-	lsls r1, r2, 2\n\
-	adds r0, r1\n\
-	ldr r3, =0x00000d24\n\
-	adds r0, r3\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 22\n\
-	lsrs r0, 22\n\
-	bl GetDomeTrainerMonIvs\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	movs r5, 0\n\
-	ldr r0, [sp, 0x30]\n\
-	mov r9, r0\n\
-_0818F4BC:\n\
-	ldr r1, =gSaveBlock2Ptr\n\
-	ldr r0, [r1]\n\
-	mov r4, r9\n\
-	add r4, r10\n\
-	adds r4, r5\n\
-	lsls r4, 1\n\
-	ldr r2, =0x00000d64\n\
-	adds r0, r2\n\
-	adds r0, r4\n\
-	ldrh r1, [r0]\n\
-	ldr r3, =gFacilityTrainerMons\n\
-	ldr r0, [r3]\n\
-	lsls r1, 4\n\
-	adds r1, r0\n\
-	ldrh r0, [r1]\n\
-	ldrb r3, [r1, 0xB]\n\
-	ldrb r1, [r1, 0xC]\n\
-	str r1, [sp]\n\
-	ldr r1, [sp, 0x1C]\n\
-	str r1, [sp, 0x4]\n\
-	ldr r1, [sp, 0x14]\n\
-	mov r2, r8\n\
-	bl sub_818F720\n\
-	ldr r2, [sp, 0x1C]\n\
-	ldr r1, [r2, 0x4]\n\
-	ldrh r0, [r6]\n\
-	adds r0, r1\n\
-	ldr r1, [r2, 0x8]\n\
-	adds r0, r1\n\
-	ldr r1, [r2, 0x10]\n\
-	adds r0, r1\n\
-	ldr r1, [r2, 0x14]\n\
-	adds r0, r1\n\
-	ldr r1, [r2, 0xC]\n\
-	adds r0, r1\n\
-	ldr r1, [r2]\n\
-	adds r0, r1\n\
-	strh r0, [r6]\n\
-	ldr r3, =gSaveBlock2Ptr\n\
-	ldr r0, [r3]\n\
-	ldr r1, =0x00000d64\n\
-	adds r0, r1\n\
-	adds r0, r4\n\
-	ldrh r0, [r0]\n\
-	ldr r2, =gFacilityTrainerMons\n\
-	ldr r1, [r2]\n\
-	lsls r0, 4\n\
-	adds r0, r1\n\
-	ldrh r0, [r0]\n\
-	lsls r1, r0, 3\n\
-	subs r1, r0\n\
-	lsls r1, 2\n\
-	ldr r3, =gBaseStats\n\
-	adds r1, r3\n\
-	ldrb r0, [r1, 0x6]\n\
-	lsls r0, 2\n\
-	ldr r2, =gBitTable\n\
-	adds r0, r2\n\
-	ldr r0, [r0]\n\
-	orrs r7, r0\n\
-	ldrb r0, [r1, 0x7]\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	ldr r0, [r0]\n\
-	orrs r7, r0\n\
-	adds r5, 0x1\n\
-	cmp r5, 0x2\n\
-	ble _0818F4BC\n\
-	movs r4, 0\n\
-	movs r1, 0x1\n\
-	movs r5, 0x1F\n\
-_0818F54C:\n\
-	adds r0, r7, 0\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0818F556\n\
-	adds r4, 0x1\n\
-_0818F556:\n\
-	asrs r7, 1\n\
-	subs r5, 0x1\n\
-	cmp r5, 0\n\
-	bge _0818F54C\n\
-	ldr r3, [sp, 0x14]\n\
-	adds r0, r4, 0\n\
-	muls r0, r3\n\
-	movs r1, 0x14\n\
-	bl __divsi3\n\
-	ldrh r1, [r6]\n\
-	adds r1, r0\n\
-	strh r1, [r6]\n\
-	adds r6, 0x2\n\
-	ldr r5, [sp, 0x30]\n\
-	adds r5, 0x2\n\
-	str r5, [sp, 0x30]\n\
-	movs r7, 0x1\n\
-	add r10, r7\n\
-	mov r0, r10\n\
-	cmp r0, 0xF\n\
-	ble _0818F494\n\
-	movs r1, 0\n\
-	mov r10, r1\n\
-	ldr r2, =0x000003ff\n\
-	mov r8, r2\n\
-_0818F58A:\n\
-	mov r5, r10\n\
-	adds r5, 0x1\n\
-	adds r7, r5, 0\n\
-	cmp r5, 0xF\n\
-	bgt _0818F626\n\
-	mov r3, r10\n\
-	lsls r0, r3, 1\n\
-	ldr r1, [sp, 0x18]\n\
-	adds r6, r0, r1\n\
-	lsls r0, r5, 1\n\
-	adds r4, r0, r1\n\
-_0818F5A0:\n\
-	ldrh r1, [r6]\n\
-	ldrh r0, [r4]\n\
-	cmp r1, r0\n\
-	bcc _0818F5C2\n\
-	cmp r1, r0\n\
-	bne _0818F61E\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r1, [r0]\n\
-	lsls r0, r5, 2\n\
-	adds r0, r1, r0\n\
-	ldr r2, =0x00000d24\n\
-	adds r0, r2\n\
-	ldrh r0, [r0]\n\
-	lsls r2, r0, 22\n\
-	lsrs r0, r2, 22\n\
-	cmp r0, r8\n\
-	bne _0818F602\n\
-_0818F5C2:\n\
-	mov r0, r10\n\
-	adds r1, r5, 0\n\
-	ldr r2, [sp, 0x18]\n\
-	bl sub_818F904\n\
-	b _0818F600\n\
-	.pool\n\
-_0818F600:\n\
-	b _0818F61E\n\
-_0818F602:\n\
-	mov r3, r10\n\
-	lsls r0, r3, 2\n\
-	adds r0, r1, r0\n\
-	ldr r1, =0x00000d24\n\
-	adds r0, r1\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 22\n\
-	cmp r0, r2\n\
-	bls _0818F61E\n\
-	mov r0, r10\n\
-	adds r1, r5, 0\n\
-	ldr r2, [sp, 0x18]\n\
-	bl sub_818F904\n\
-_0818F61E:\n\
-	adds r4, 0x2\n\
-	adds r5, 0x1\n\
-	cmp r5, 0xF\n\
-	ble _0818F5A0\n\
-_0818F626:\n\
-	mov r10, r7\n\
-	mov r2, r10\n\
-	cmp r2, 0xE\n\
-	ble _0818F58A\n\
-	bl sub_81A3610\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _0818F6EE\n\
-	movs r3, 0\n\
-	mov r10, r3\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r1, [r0]\n\
-	ldr r4, =0x00000d24\n\
-	adds r1, r4\n\
-	ldrh r1, [r1]\n\
-	lsls r1, 22\n\
-	lsrs r1, 22\n\
-	ldr r3, =0x000003ff\n\
-	adds r2, r0, 0\n\
-	ldr r6, =gUnknown_0860D3F1\n\
-	cmp r1, r3\n\
-	beq _0818F674\n\
-	adds r5, r2, 0\n\
-_0818F656:\n\
-	movs r7, 0x1\n\
-	add r10, r7\n\
-	mov r0, r10\n\
-	cmp r0, 0xF\n\
-	bgt _0818F674\n\
-	ldr r0, [r5]\n\
-	mov r7, r10\n\
-	lsls r1, r7, 2\n\
-	adds r0, r1\n\
-	adds r0, r4\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 22\n\
-	lsrs r0, 22\n\
-	cmp r0, r3\n\
-	bne _0818F656\n\
-_0818F674:\n\
-	mov r1, r10\n\
-	lsls r0, r1, 1\n\
-	adds r0, r6\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _0818F6AC\n\
-	movs r5, 0\n\
-	ldr r2, [r2]\n\
-	ldr r3, =0x00000d24\n\
-	adds r2, r3\n\
-	ldrh r1, [r2]\n\
-	ldr r0, =0xfffffc00\n\
-	ands r0, r1\n\
-	ldr r7, =0x000003fe\n\
-	adds r1, r7, 0\n\
-	b _0818F6BE\n\
-	.pool\n\
-_0818F6AC:\n\
-	movs r5, 0x1\n\
-	ldr r2, [r2]\n\
-	ldr r0, =0x00000d28\n\
-	adds r2, r0\n\
-	ldrh r1, [r2]\n\
-	ldr r0, =0xfffffc00\n\
-	ands r0, r1\n\
-	ldr r3, =0x000003fe\n\
-	adds r1, r3, 0\n\
-_0818F6BE:\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	movs r7, 0\n\
-	mov r10, r7\n\
-	lsls r0, r5, 1\n\
-	adds r0, r5\n\
-	lsls r4, r0, 1\n\
-_0818F6CC:\n\
-	mov r1, r10\n\
-	lsls r0, r1, 24\n\
-	lsrs r0, 24\n\
-	bl sub_81A4FF0\n\
-	ldr r1, =gSaveBlock2Ptr\n\
-	ldr r1, [r1]\n\
-	ldr r2, =0x00000d64\n\
-	adds r1, r2\n\
-	adds r1, r4\n\
-	strh r0, [r1]\n\
-	adds r4, 0x2\n\
-	movs r3, 0x1\n\
-	add r10, r3\n\
-	mov r5, r10\n\
-	cmp r5, 0x2\n\
-	ble _0818F6CC\n\
-_0818F6EE:\n\
-	ldr r0, [sp, 0x18]\n\
-	bl Free\n\
-	ldr r0, [sp, 0x1C]\n\
-	bl Free\n\
-	add sp, 0x3C\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-\n\
-        ");
-}
-#endif // NONMATCHING
 
 #define CALC_STAT(base, statIndex)                                                          \
 {                                                                                           \
@@ -1220,7 +472,7 @@ _0818F6EE:\n\
     stats[statIndex] = (u8) ModifyStatByNature(nature, stats[statIndex], statIndex);        \
 }
 
-void sub_818F720(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats)
+void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats)
 {
     s32 i, count;
     u8 bits;
@@ -1266,12 +518,12 @@ void sub_818F720(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *sta
     y = temp;           \
 }
 
-void sub_818F904(s32 id1, s32 id2, u16 *dst)
+void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray)
 {
     s32 i;
     u16 temp;
 
-    SWAP_16(dst[id1], dst[id2]);
+    SWAP_16(statsArray[id1], statsArray[id2]);
     SWAP_16(gSaveBlock2Ptr->frontier.domeTrainers[id1].trainerId, gSaveBlock2Ptr->frontier.domeTrainers[id2].trainerId);
 
     for (i = 0; i < 3; i++)
@@ -1885,9 +1137,6 @@ u8 GetDomeTrainerMonIvs(u16 trainerId)
     return fixedIv;
 }
 
-extern const u8 gUnknown_0860D10C[][4];
-extern const u8 gUnknown_0860D14C[];
-
 s32 sub_81901A0(s32 arg0, s32 trainerId)
 {
     s32 i, j, val;
@@ -1932,7 +1181,7 @@ void sub_8190298(void)
 
 u16 sub_81902AC(void)
 {
-    return gSaveBlock2Ptr->frontier.domeTrainers[sub_81901A0(gSaveBlock2Ptr->frontier.field_CB2, 0x3FF)].trainerId;
+    return gSaveBlock2Ptr->frontier.domeTrainers[sub_81901A0(gSaveBlock2Ptr->frontier.field_CB2, TRAINER_PLAYER)].trainerId;
 }
 
 void sub_81902E4(void)
@@ -1972,19 +1221,6 @@ void sub_81903B8(void)
 
     SetMainCallback2(sub_8194B54);
 }
-
-extern const struct BgTemplate gUnknown_0860CE84[4];
-extern const struct WindowTemplate gUnknown_0860CEB4[];
-extern const u8 gUnknown_08D83D50[];
-extern const u8 gUnknown_08D84970[];
-extern const u8 gUnknown_08D84F00[];
-extern const u8 gUnknown_08D85444[];
-extern const u8 gUnknown_08D85358[];
-extern const u8 gUnknown_08D85600[];
-extern const u8 gUnknown_08D854C8[];
-extern const struct CompressedSpriteSheet gUnknown_0860CF50;
-extern const struct SpriteTemplate gUnknown_0860D068;
-extern const struct SpriteTemplate gUnknown_0860D050;
 
 void sub_8190400(u8 taskId)
 {
@@ -2065,7 +1301,7 @@ void sub_8190400(u8 taskId)
         if (r9 == 2)
         {
             sub_819314C(0, r5);
-            gUnknown_0203CD78->arr[16] = 1;
+            gUnknown_0203CD78->unk_10 = 1;
         }
         else
         {
@@ -2273,8 +1509,6 @@ void sub_8190AC4(struct Sprite *sprite)
     }
 }
 
-extern const u8 gUnknown_0860D080[];
-
 void sub_8190B40(struct Sprite *sprite)
 {
     s32 taskId1 = sprite->data[0];
@@ -2287,12 +1521,12 @@ void sub_8190B40(struct Sprite *sprite)
         if (sprite->data[1])
         {
             if ((gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].unk1
-                && gUnknown_0203CD78->arr[16] - 1 < gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].unk2))
+                && gUnknown_0203CD78->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].unk2))
             {
                 sprite->invisible = 0;
             }
             else if (!gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].unk1
-                     && gUnknown_0203CD78->arr[16] - 1 < r12)
+                     && gUnknown_0203CD78->unk_10 - 1 < r12)
             {
                 sprite->invisible = 0;
             }
@@ -2304,7 +1538,7 @@ void sub_8190B40(struct Sprite *sprite)
         }
         else
         {
-            if (gUnknown_0203CD78->arr[16] != 0)
+            if (gUnknown_0203CD78->unk_10 != 0)
             {
                 sprite->invisible = 0;
             }
@@ -2319,7 +1553,7 @@ void sub_8190B40(struct Sprite *sprite)
     {
         if (sprite->data[1])
         {
-            if (gUnknown_0203CD78->arr[16] > 1)
+            if (gUnknown_0203CD78->unk_10 > 1)
             {
                 if (gTasks[taskId1].data[0] == 2)
                     sprite->invisible = 1;
@@ -2331,7 +1565,7 @@ void sub_8190B40(struct Sprite *sprite)
         }
         else
         {
-            if (gUnknown_0203CD78->arr[16] != 0)
+            if (gUnknown_0203CD78->unk_10 != 0)
             {
                 sprite->invisible = 0;
             }
@@ -2350,7 +1584,7 @@ void sub_8190C6C(struct Sprite *sprite)
 
     if (gTasks[taskId1].data[3] == 1)
     {
-        if (gUnknown_0203CD78->arr[16] != 0)
+        if (gUnknown_0203CD78->unk_10 != 0)
         {
             if (gTasks[taskId1].data[0] == 2)
                 sprite->invisible = 1;
@@ -2362,7 +1596,7 @@ void sub_8190C6C(struct Sprite *sprite)
     }
     else
     {
-        if (gUnknown_0203CD78->arr[16] != 1)
+        if (gUnknown_0203CD78->unk_10 != 1)
         {
             if (gTasks[taskId1].data[0] == 2)
                 sprite->invisible = 1;
@@ -2371,5 +1605,720 @@ void sub_8190C6C(struct Sprite *sprite)
         {
             sprite->invisible = 0;
         }
+    }
+}
+
+void sub_8190CD4(u8 taskId)
+{
+    s32 i;
+    s32 var;
+    s32 r9 = gTasks[taskId].data[3];
+    s32 taskId2 = gTasks[taskId].data[4];
+    s32 arg, arg2;
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+            gTasks[taskId].data[0] = 1;
+        }
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            gTasks[taskId].data[0] = 2;
+        break;
+    case 2:
+        i = sub_819221C(taskId);
+        switch (i)
+        {
+        case 9:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            gTasks[taskId].data[0] = 8;
+            break;
+        case 1 ... 8:
+            gTasks[taskId].data[5] = i;
+            if (gTasks[taskId].data[2] != 0)
+                var = 9;
+            else
+                var = 0;
+
+            for (i = var; i < var + 9; i++)
+            {
+                CopyWindowToVram(i, 2);
+                FillWindowPixelBuffer(i, 0);
+            }
+            gTasks[taskId].data[0] = 3;
+            break;
+        case 0:
+            break;
+        }
+        break;
+    case 3:
+        i = gTasks[taskId].data[5];
+        switch (i)
+        {
+        case 1:
+        case 5:
+            if (gTasks[taskId].data[2])
+            {
+                gBattle_BG0_X = 0;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = 0;
+                gBattle_BG1_Y = 160;
+            }
+            else
+            {
+                gBattle_BG0_X = 0;
+                gBattle_BG0_Y = 160;
+                gBattle_BG1_X = 0;
+                gBattle_BG1_Y = 0;
+            }
+
+            if (i == 1)
+            {
+                if (gUnknown_0203CD78->unk_10 == 0)
+                {
+                    gBattle_BG2_X = 0;
+                    gBattle_BG2_Y = 320;
+                    arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    sub_81924E0(gTasks[taskId].data[2] | 0x10, arg);
+                }
+                else
+                {
+                    gBattle_BG2_X = 256;
+                    gBattle_BG2_Y = 0;
+                    arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    sub_81924E0(gTasks[taskId].data[2] | 0x10, arg);
+                    gUnknown_0203CD78->unk_10 = 0;
+                }
+            }
+            else
+            {
+                if (gUnknown_0203CD78->unk_10 == 0)
+                {
+                    arg2 = gTasks[taskId2].data[1] - 16;
+                    sub_8192F08(arg2, gUnknown_0203CD78->unk_11);
+                    gBattle_BG2_X = 0;
+                    gBattle_BG2_Y = 320;
+                    arg = gUnknown_0203CD78->unk_11[0];
+                    sub_81924E0(gTasks[taskId].data[2] | 0x10, arg);
+                }
+                else if (gUnknown_0203CD78->unk_10 == 2)
+                {
+                    arg2 = gTasks[taskId2].data[1] - 16;
+                    sub_8192F08(arg2, gUnknown_0203CD78->unk_11);
+                    gBattle_BG2_X = 0;
+                    gBattle_BG2_Y = 320;
+                    arg = gUnknown_0203CD78->unk_11[1];
+                    sub_81924E0(gTasks[taskId].data[2] | 0x10, arg);
+                }
+                else
+                {
+                    gBattle_BG2_X = 256;
+                    gBattle_BG2_Y = 160;
+                    arg2 = gTasks[taskId2].data[1] - 16;
+                    sub_819314C(gTasks[taskId].data[2] | 0x10, arg2);
+                }
+            }
+
+            for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
+            {
+                if (i < 2)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190790;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190950;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+            for (i = DOME_TOURNAMENT_TRAINERS_COUNT / 2; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+            {
+                if (i < 10)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190790;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190950;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+
+            gTasks[taskId].data[0] = 4;
+            gTasks[taskId].data[5] = 0;
+            break;
+        case 2:
+        case 6:
+            if (gTasks[taskId].data[2])
+            {
+                gBattle_BG0_X = 0;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = 0;
+                gBattle_BG1_Y = -160;
+            }
+            else
+            {
+                gBattle_BG0_X = 0;
+                gBattle_BG0_Y = -160;
+                gBattle_BG1_X = 0;
+                gBattle_BG1_Y = 0;
+            }
+
+            if (i == 2)
+            {
+                if (gUnknown_0203CD78->unk_10 == 0)
+                {
+                    gBattle_BG2_X = 0;
+                    gBattle_BG2_Y = 160;
+                    arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    sub_81924E0(gTasks[taskId].data[2] | 4, arg);
+                }
+                else
+                {
+                    gBattle_BG2_X = 0;
+                    gBattle_BG2_Y = 0;
+                    arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    sub_81924E0(gTasks[taskId].data[2] | 4, arg);
+                    gUnknown_0203CD78->unk_10 = 0;
+                }
+            }
+            else
+            {
+                if (gUnknown_0203CD78->unk_10 == 0)
+                {
+                    arg2 = gTasks[taskId2].data[1] - 16;
+                    sub_8192F08(arg2, gUnknown_0203CD78->unk_11);
+                    gBattle_BG2_X = 0;
+                    gBattle_BG2_Y = 160;
+                    arg = gUnknown_0203CD78->unk_11[0];
+                    sub_81924E0(gTasks[taskId].data[2] | 4, arg);
+                }
+                else if (gUnknown_0203CD78->unk_10 == 2)
+                {
+                    arg2 = gTasks[taskId2].data[1] - 16;
+                    sub_8192F08(arg2, gUnknown_0203CD78->unk_11);
+                    gBattle_BG2_X = 0;
+                    gBattle_BG2_Y = 160;
+                    arg = gUnknown_0203CD78->unk_11[1];
+                    sub_81924E0(gTasks[taskId].data[2] | 4, arg);
+                }
+                else
+                {
+                    gBattle_BG2_X = 256;
+                    gBattle_BG2_Y = 0;
+                    arg2 = gTasks[taskId2].data[1] - 16;
+                    sub_819314C(gTasks[taskId].data[2] | 4, arg2);
+                }
+            }
+
+            for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
+            {
+                if (i < 2)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_81907F8;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_81909CC;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+            for (i = DOME_TOURNAMENT_TRAINERS_COUNT / 2; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+            {
+                if (i < 10)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_81907F8;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_81909CC;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+
+            gTasks[taskId].data[0] = 5;
+            gTasks[taskId].data[5] = 0;
+            break;
+        case 3:
+            if (gTasks[taskId].data[2])
+            {
+                gBattle_BG0_X = 0;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = 256;
+                gBattle_BG1_Y = 0;
+            }
+            else
+            {
+                gBattle_BG0_X = 256;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = 0;
+                gBattle_BG1_Y = 0;
+            }
+
+            if (gUnknown_0203CD78->unk_10 == 0)
+            {
+                gBattle_BG2_X = 256;
+                gBattle_BG2_Y = 160;
+                arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                sub_81924E0(gTasks[taskId].data[2] | 8, arg);
+            }
+            else
+            {
+                gBattle_BG2_X = 256;
+                gBattle_BG2_Y = 0;
+                arg = gUnknown_0860D15C[(gTasks[taskId2].data[1] * 4) + (gUnknown_0203CD78->unk_10 - 1)];
+                sub_819314C(gTasks[taskId].data[2] | 8, arg);
+            }
+
+            for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
+            {
+                if (i < 2)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190860;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190A48;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+            for (i = DOME_TOURNAMENT_TRAINERS_COUNT / 2; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+            {
+                if (i < 10)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190860;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190A48;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+
+            gTasks[taskId].data[0] = 6;
+            gTasks[taskId].data[5] = 0;
+            break;
+        case 7:
+            if (gTasks[taskId].data[2])
+            {
+                gBattle_BG0_X = 0;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = 256;
+                gBattle_BG1_Y = 0;
+            }
+            else
+            {
+                gBattle_BG0_X = 256;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = 0;
+                gBattle_BG1_Y = 0;
+            }
+
+            if (gUnknown_0203CD78->unk_10 == 0)
+            {
+                gBattle_BG2_X = 256;
+                gBattle_BG2_Y = 160;
+                arg = gUnknown_0203CD78->unk_11[0];
+                sub_81924E0(gTasks[taskId].data[2] | 8, arg);
+            }
+            else
+            {
+                gBattle_BG2_X = 0;
+                gBattle_BG2_Y = 160;
+                arg2 = gTasks[taskId2].data[1] - 16;
+                sub_819314C(gTasks[taskId].data[2] | 8, arg2);
+            }
+
+            for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
+            {
+                if (i < 2)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190860;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190A48;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+            for (i = DOME_TOURNAMENT_TRAINERS_COUNT / 2; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+            {
+                if (i < 10)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190860;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190A48;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+
+            gTasks[taskId].data[0] = 6;
+            gTasks[taskId].data[5] = 0;
+            break;
+        case 4:
+            if (gTasks[taskId].data[2])
+            {
+                gBattle_BG0_X = 0;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = -256;
+                gBattle_BG1_Y = 0;
+            }
+            else
+            {
+                gBattle_BG0_X = -256;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = 0;
+                gBattle_BG1_Y = 0;
+            }
+
+            if (gUnknown_0203CD78->unk_10 == 1)
+            {
+                gBattle_BG2_X = 0;
+                gBattle_BG2_Y = 160;
+            }
+            else
+            {
+                gBattle_BG2_X = 0;
+                gBattle_BG2_Y = 0;
+            }
+            arg = gUnknown_0860D15C[(gUnknown_0203CD78->unk_10 - 1) + (gTasks[taskId2].data[1] * 4)];
+            sub_819314C(gTasks[taskId].data[2] | 2, arg);
+
+            for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
+            {
+                if (i < 2)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_81908CC;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190AC4;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+            for (i = DOME_TOURNAMENT_TRAINERS_COUNT / 2; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+            {
+                if (i < 10)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_81908CC;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190AC4;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+
+            gTasks[taskId].data[0] = 7;
+            gTasks[taskId].data[5] = 0;
+            break;
+        case 8:
+            if (gTasks[taskId].data[2])
+            {
+                gBattle_BG0_X = 0;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = -256;
+                gBattle_BG1_Y = 0;
+            }
+            else
+            {
+                gBattle_BG0_X = -256;
+                gBattle_BG0_Y = 0;
+                gBattle_BG1_X = 0;
+                gBattle_BG1_Y = 0;
+            }
+
+            if (gUnknown_0203CD78->unk_10 == 2)
+            {
+                gBattle_BG2_X = 256;
+                gBattle_BG2_Y = 160;
+                arg = gUnknown_0203CD78->unk_11[1];
+                sub_81924E0(gTasks[taskId].data[2] | 2, arg);
+            }
+            else
+            {
+                gBattle_BG2_X = 0;
+                gBattle_BG2_Y = 160;
+                arg2 = gTasks[taskId2].data[1] - 16;
+                sub_819314C(gTasks[taskId].data[2] | 2, arg2);
+            }
+
+            for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
+            {
+                if (i < 2)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_81908CC;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190AC4;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+            for (i = DOME_TOURNAMENT_TRAINERS_COUNT / 2; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+            {
+                if (i < 10)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_81908CC;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                    }
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    {
+                        gSprites[gUnknown_0203CD78->arr[i]].callback = sub_8190AC4;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
+                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                    }
+                }
+            }
+
+            gTasks[taskId].data[0] = 7;
+            gTasks[taskId].data[5] = 0;
+            break;
+        }
+        break;
+    case 4:
+        if (++gTasks[taskId].data[5] != 41)
+        {
+            gBattle_BG0_Y -= 4;
+            gBattle_BG1_Y -= 4;
+            gBattle_BG2_Y -= 4;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 2;
+        }
+        break;
+    case 5:
+        if (++gTasks[taskId].data[5] != 41)
+        {
+            gBattle_BG0_Y += 4;
+            gBattle_BG1_Y += 4;
+            gBattle_BG2_Y += 4;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 2;
+        }
+        break;
+    case 6:
+        if (++gTasks[taskId].data[5] != 65)
+        {
+            gBattle_BG0_X -= 4;
+            gBattle_BG1_X -= 4;
+            gBattle_BG2_X -= 4;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 2;
+        }
+        break;
+    case 7:
+        if (++gTasks[taskId].data[5] != 65)
+        {
+            gBattle_BG0_X += 4;
+            gBattle_BG1_X += 4;
+            gBattle_BG2_X += 4;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 2;
+        }
+        break;
+    case 8:
+        if (!gPaletteFade.active)
+        {
+            for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
+            {
+                if (i < 2)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                        sub_818D8F0(gUnknown_0203CD78->arr[i]);
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                        sub_80D2EF8(&gSprites[gUnknown_0203CD78->arr[i]]);
+                }
+            }
+            for (i = DOME_TOURNAMENT_TRAINERS_COUNT / 2; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
+            {
+                if (i < 10)
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                        sub_818D8F0(gUnknown_0203CD78->arr[i]);
+                }
+                else
+                {
+                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                        sub_80D2EF8(&gSprites[gUnknown_0203CD78->arr[i]]);
+                }
+            }
+
+            FreeMonIconPalettes();
+            FREE_AND_SET_NULL(gUnknown_0203CD78);
+            FreeAllWindowBuffers();
+            if (r9 == 0)
+            {
+                SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+            }
+            else
+            {
+                i = CreateTask(sub_8194220, 0);
+                gTasks[i].data[0] = 0;
+                gTasks[i].data[1] = 0;
+                gTasks[i].data[2] = 3;
+                gTasks[i].data[3] = gTasks[taskId].data[4];
+                gTasks[i].data[4] = gTasks[taskId2].data[6];
+            }
+            DestroyTask(taskId);
+        }
+        break;
     }
 }
