@@ -18,11 +18,19 @@
 #include "palette.h"
 #include "decompress.h"
 #include "menu.h"
+#include "sound.h"
 #include "pokemon_icon.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
 #include "constants/abilities.h"
+#include "constants/songs.h"
+
+#define DOME_ROUND1 0
+#define DOME_ROUND2 1
+#define DOME_QUARTERFINAL 1 // Different name for the same round.
+#define DOME_SEMIFINAL 2
+#define DOME_FINAL 3
 
 struct Unknown_0203BC8C_Struct
 {
@@ -80,6 +88,9 @@ extern const struct SpriteTemplate gUnknown_0860D068;
 extern const struct SpriteTemplate gUnknown_0860D050;
 extern const u8 gUnknown_0860D080[];
 extern const u8 gUnknown_0860D15C[];
+extern const u8 gUnknown_0860D1A0[];
+extern const u8 gUnknown_0860D19C[];
+extern const u8 gUnknown_0860D1C0[];
 extern const u8 gUnknown_0860D3F1[][2];
 
 // gfx
@@ -102,7 +113,7 @@ s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1);
 s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1);
 s32 sub_818FFC0(s32 move, s32 species, s32 arg2);
 s32 sub_818FEB4(s32 *arr, bool8 arg1);
-u16 sub_81902AC(void);
+u16 TrainerIdOfPlayerOpponent(void);
 void sub_8190400(u8 taskId);
 void sub_8190CD4(u8 taskId);
 void sub_8194220(u8 taskId);
@@ -269,7 +280,7 @@ void sub_818ED28(void)
     }
 }
 
-void SetDomeTrainersAndMons(void)
+void InitDomeTrainers(void)
 {
     s32 i, j, k;
     s32 monLevel;
@@ -1137,7 +1148,7 @@ u8 GetDomeTrainerMonIvs(u16 trainerId)
     return fixedIv;
 }
 
-s32 sub_81901A0(s32 arg0, s32 trainerId)
+s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
 {
     s32 i, j, val;
 
@@ -1147,14 +1158,14 @@ s32 sub_81901A0(s32 arg0, s32 trainerId)
             break;
     }
 
-    if (arg0 != 0)
+    if (roundId != DOME_ROUND1)
     {
-        if (arg0 == 3)
-            val = gUnknown_0860D10C[i][arg0] + 8;
+        if (roundId == DOME_FINAL)
+            val = gUnknown_0860D10C[i][roundId] + 8;
         else
-            val = gUnknown_0860D10C[i][arg0] + 4;
+            val = gUnknown_0860D10C[i][roundId] + 4;
 
-        for (j = gUnknown_0860D10C[i][arg0]; j < val; j++)
+        for (j = gUnknown_0860D10C[i][roundId]; j < val; j++)
         {
             if (gUnknown_0860D14C[j] != i && !gSaveBlock2Ptr->frontier.domeTrainers[gUnknown_0860D14C[j]].unk1)
                 break;
@@ -1176,12 +1187,12 @@ s32 sub_81901A0(s32 arg0, s32 trainerId)
 
 void sub_8190298(void)
 {
-    gTrainerBattleOpponent_A = sub_81902AC();
+    gTrainerBattleOpponent_A = TrainerIdOfPlayerOpponent();
 }
 
-u16 sub_81902AC(void)
+u16 TrainerIdOfPlayerOpponent(void)
 {
-    return gSaveBlock2Ptr->frontier.domeTrainers[sub_81901A0(gSaveBlock2Ptr->frontier.field_CB2, TRAINER_PLAYER)].trainerId;
+    return gSaveBlock2Ptr->frontier.domeTrainers[TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.field_CB2, TRAINER_PLAYER)].trainerId;
 }
 
 void sub_81902E4(void)
@@ -1211,11 +1222,11 @@ void sub_819033C(void)
         gSaveBlock2Ptr->frontier.field_D14[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode];
 }
 
-void sub_81903B8(void)
+void ShowDomeOpponentInfo(void)
 {
     u8 taskId = CreateTask(sub_8190400, 0);
     gTasks[taskId].data[0] = 0;
-    gTasks[taskId].data[1] = TrainerIdToTournamentId(sub_81902AC());
+    gTasks[taskId].data[1] = TrainerIdToTournamentId(TrainerIdOfPlayerOpponent());
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].data[3] = 0;
 
@@ -2321,4 +2332,113 @@ void sub_8190CD4(u8 taskId)
         }
         break;
     }
+}
+
+u8 sub_819221C(u8 taskId)
+{
+    u8 retVal = 0;
+    s32 taskId2 = gTasks[taskId].data[4];
+    s32 r5 = gTasks[taskId2].data[1];
+    u8 r10 = gUnknown_0860D080[r5];
+    u16 roundId = gSaveBlock2Ptr->frontier.field_CB2;
+
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        retVal = 9;
+
+    if (gTasks[taskId].data[3] != 0)
+    {
+        if (gTasks[taskId].data[3] == 1)
+        {
+            if (gMain.newKeys & DPAD_UP && gUnknown_0203CD78->unk_10 == 0)
+            {
+                if (r5 == 0)
+                    r5 = 15;
+                else
+                    r5--;
+                retVal = 1;
+            }
+            else if (gMain.newKeys & DPAD_DOWN && gUnknown_0203CD78->unk_10 != 0)
+            {
+                if (r5 == 15)
+                    r5 = 0;
+                else
+                    r5++;
+                retVal = 2;
+            }
+            else if (gMain.newKeys & DPAD_LEFT && gUnknown_0203CD78->unk_10 != 0)
+            {
+                gUnknown_0203CD78->unk_10--;
+                retVal = 3;
+            }
+            else if (gMain.newKeys & DPAD_RIGHT)
+            {
+                if (gSaveBlock2Ptr->frontier.domeTrainers[r10].unk1 && gUnknown_0203CD78->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[r10].unk2)
+                {
+                    gUnknown_0203CD78->unk_10++;
+                    retVal = 4;
+                }
+                if (!gSaveBlock2Ptr->frontier.domeTrainers[r10].unk1 && gUnknown_0203CD78->unk_10 - 1 < roundId)
+                {
+                    gUnknown_0203CD78->unk_10++;
+                    retVal = 4;
+                }
+            }
+
+            if (retVal == 9)
+            {
+                if (gUnknown_0203CD78->unk_10 != 0)
+                    gTasks[taskId2].data[1] = gUnknown_0860D1A0[(r5 / 2) * 4 + (gUnknown_0203CD78->unk_10 - 1)];
+                else
+                    gTasks[taskId2].data[1] = r5;
+            }
+        }
+        else
+        {
+            if (gMain.newKeys & DPAD_UP && gUnknown_0203CD78->unk_10 == 1)
+            {
+                if (r5 == 16)
+                    r5 = gUnknown_0860D19C[roundId];
+                else
+                    r5--;
+                retVal = 5;
+            }
+            else if (gMain.newKeys & DPAD_DOWN && gUnknown_0203CD78->unk_10 == 1)
+            {
+                if (r5 == gUnknown_0860D19C[roundId])
+                    r5 = 16;
+                else
+                    r5++;
+                retVal = 6;
+            }
+            else if (gMain.newKeys & DPAD_LEFT && gUnknown_0203CD78->unk_10 != 0)
+            {
+                retVal = 7;
+                gUnknown_0203CD78->unk_10--;
+            }
+            else if (gMain.newKeys & DPAD_RIGHT && (gUnknown_0203CD78->unk_10 == 0 || gUnknown_0203CD78->unk_10 == 1))
+            {
+                retVal = 8;
+                gUnknown_0203CD78->unk_10++;
+            }
+
+            if (retVal == 9)
+            {
+                if (gUnknown_0203CD78->unk_10 == 0)
+                    gTasks[taskId2].data[1] = gUnknown_0860D1C0[gUnknown_0203CD78->unk_11[0]];
+                else if (gUnknown_0203CD78->unk_10 == 2)
+                    gTasks[taskId2].data[1] = gUnknown_0860D1C0[gUnknown_0203CD78->unk_11[1]];
+                else
+                    gTasks[taskId2].data[1] = r5;
+            }
+        }
+
+        if (retVal != 0 && retVal != 9)
+        {
+            PlaySE(SE_SELECT);
+            gTasks[taskId2].data[1] = r5;
+            gTasks[taskId].data[2] ^= 1;
+        }
+    }
+
+    return retVal;
 }

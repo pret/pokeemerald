@@ -393,7 +393,7 @@ gUnknown_0860D090:: @ 860D090
 	.4byte sub_818F9B0
 	.4byte sub_818F9E0
 	.4byte sub_818FA20
-	.4byte sub_81903B8
+	.4byte ShowDomeOpponentInfo
 	.4byte sub_81938A4
 	.4byte sub_81938E0
 	.4byte sub_8190298
@@ -409,7 +409,7 @@ gUnknown_0860D090:: @ 860D090
 	.4byte sub_8194EC0
 	.4byte sub_8194EF8
 	.4byte sub_8194F58
-	.4byte sub_818F02C
+	.4byte InitDomeTrainers
 
 	.align 2
 gUnknown_0860D0EC:: @ 860D0EC

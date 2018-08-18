@@ -2545,8 +2545,8 @@ _081634D4:
 	.pool
 	thumb_func_end sub_8163444
 
-	thumb_func_start sub_8163524
-sub_8163524: @ 8163524
+	thumb_func_start RandomizeFacilityTrainerMonId
+RandomizeFacilityTrainerMonId: @ 8163524
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -2598,7 +2598,7 @@ _08163580:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8163524
+	thumb_func_end RandomizeFacilityTrainerMonId
 
 	thumb_func_start sub_8163590
 sub_8163590: @ 8163590
@@ -4186,7 +4186,7 @@ _081643A8:
 	str r0, [sp, 0x28]
 _081643C0:
 	mov r0, r8
-	bl sub_8163524
+	bl RandomizeFacilityTrainerMonId
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r0, 0x1

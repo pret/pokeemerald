@@ -5,6 +5,7 @@
 
 // Special Trainer Ids.
 #define TRAINER_FRONTIER_BRAIN      1022
+#define TRAINER_PLAYER              1023
 #define TRAINER_SECRET_BASE         1024
 #define TRAINER_LINK_OPPONENT       2048
 #define TRAINER_OPPONENT_C00        3072
