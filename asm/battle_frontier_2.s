@@ -2935,7 +2935,7 @@ sub_819BD70: @ 819BD70
 	adds r0, r5, 0
 	mov r2, r8
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r1, [r6]
 	movs r2, 0xA6
 	lsls r2, 2
@@ -3053,7 +3053,7 @@ sub_819BE34: @ 819BE34
 	adds r0, r5, 0
 	mov r2, r9
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r1, [r6]
 	movs r2, 0xA6
 	lsls r2, 2
@@ -3166,7 +3166,7 @@ _0819BF48:
 	adds r0, r5, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	mov r2, r9
 	ldr r1, [r2]
 	add r1, r8
@@ -3846,19 +3846,19 @@ sub_819C568: @ 819C568
 	lsls r1, 2
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r0, [r4]
 	movs r1, 0xA6
 	lsls r1, 2
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r0, [r4]
 	movs r1, 0xA7
 	lsls r1, 2
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r0, =sub_819C2D4
 	movs r1, 0x1
 	bl CreateTask
@@ -6709,7 +6709,7 @@ _0819DDA8:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl FreeAllSpritePalettes
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	ldr r0, =gFrontierFactorySelectMenu_Gfx
 	ldr r5, =gUnknown_0203CE40
 	ldr r1, [r5]
@@ -9315,7 +9315,7 @@ sub_819F304: @ 819F304
 	adds r0, r5, 0
 	mov r1, r9
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r1, [r6]
 	adds r1, 0x2C
 	strb r0, [r1]
@@ -9370,7 +9370,7 @@ sub_819F3F8: @ 819F3F8
 	lsrs r5, 24
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r0, =sub_819F7B4
 	movs r1, 0x1
 	bl CreateTask
@@ -9403,7 +9403,7 @@ sub_819F444: @ 819F444
 	adds r6, r1, 0
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r5, =gSprites
 	lsls r4, 16
 	lsrs r1, r4, 24
@@ -9996,7 +9996,7 @@ _0819F908:
 	adds r0, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r2, =gUnknown_03001284
 	ldr r1, [r2]
 	adds r1, 0x2C

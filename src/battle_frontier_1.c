@@ -20,6 +20,7 @@
 #include "menu.h"
 #include "sound.h"
 #include "pokemon_icon.h"
+#include "trainer_pokemon_sprites.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
@@ -57,7 +58,6 @@ extern void sub_8195898(u8 *dst, u16 trainerId);
 extern u16 sub_81A5060(u8, u8);
 extern void sub_8162614(u16, u8);
 extern void sub_81A4C30(void);
-extern u16 sub_818D8F0(u16);
 extern bool8 sub_81A3610(void);
 extern u16 sub_81A4FF0(u8);
 
@@ -1361,7 +1361,7 @@ void sub_8190790(struct Sprite *sprite)
         if (sprite->pos1.y >= 192)
         {
             gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
-            sub_818D8F0(sprite->data[3]);
+            FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
 }
@@ -1381,7 +1381,7 @@ void sub_81907F8(struct Sprite *sprite)
         if (sprite->pos1.y <= -32)
         {
             gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
-            sub_818D8F0(sprite->data[3]);
+            FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
 }
@@ -1401,7 +1401,7 @@ void sub_8190860(struct Sprite *sprite)
         if (sprite->pos1.x >= 272)
         {
             gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
-            sub_818D8F0(sprite->data[3]);
+            FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
 }
@@ -1421,7 +1421,7 @@ void sub_81908CC(struct Sprite *sprite)
         if (sprite->pos1.x <= -32)
         {
             gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
-            sub_818D8F0(sprite->data[3]);
+            FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
 }
@@ -2290,7 +2290,7 @@ void sub_8190CD4(u8 taskId)
                 if (i < 2)
                 {
                     if (gUnknown_0203CD78->arr[i] != 0xFF)
-                        sub_818D8F0(gUnknown_0203CD78->arr[i]);
+                        FreeAndDestroyTrainerPicSprite(gUnknown_0203CD78->arr[i]);
                 }
                 else
                 {
@@ -2303,7 +2303,7 @@ void sub_8190CD4(u8 taskId)
                 if (i < 10)
                 {
                     if (gUnknown_0203CD78->arr[i] != 0xFF)
-                        sub_818D8F0(gUnknown_0203CD78->arr[i]);
+                        FreeAndDestroyTrainerPicSprite(gUnknown_0203CD78->arr[i]);
                 }
                 else
                 {
@@ -2345,100 +2345,108 @@ u8 sub_819221C(u8 taskId)
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         retVal = 9;
 
-    if (gTasks[taskId].data[3] != 0)
+    if (gTasks[taskId].data[3] == 0)
+        return retVal;
+
+    if (gTasks[taskId].data[3] == 1)
     {
-        if (gTasks[taskId].data[3] == 1)
+        if (gMain.newKeys & DPAD_UP && gUnknown_0203CD78->unk_10 == 0)
         {
-            if (gMain.newKeys & DPAD_UP && gUnknown_0203CD78->unk_10 == 0)
-            {
-                if (r5 == 0)
-                    r5 = 15;
-                else
-                    r5--;
-                retVal = 1;
-            }
-            else if (gMain.newKeys & DPAD_DOWN && gUnknown_0203CD78->unk_10 != 0)
-            {
-                if (r5 == 15)
-                    r5 = 0;
-                else
-                    r5++;
-                retVal = 2;
-            }
-            else if (gMain.newKeys & DPAD_LEFT && gUnknown_0203CD78->unk_10 != 0)
-            {
-                gUnknown_0203CD78->unk_10--;
-                retVal = 3;
-            }
-            else if (gMain.newKeys & DPAD_RIGHT)
-            {
-                if (gSaveBlock2Ptr->frontier.domeTrainers[r10].unk1 && gUnknown_0203CD78->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[r10].unk2)
-                {
-                    gUnknown_0203CD78->unk_10++;
-                    retVal = 4;
-                }
-                if (!gSaveBlock2Ptr->frontier.domeTrainers[r10].unk1 && gUnknown_0203CD78->unk_10 - 1 < roundId)
-                {
-                    gUnknown_0203CD78->unk_10++;
-                    retVal = 4;
-                }
-            }
-
-            if (retVal == 9)
-            {
-                if (gUnknown_0203CD78->unk_10 != 0)
-                    gTasks[taskId2].data[1] = gUnknown_0860D1A0[(r5 / 2) * 4 + (gUnknown_0203CD78->unk_10 - 1)];
-                else
-                    gTasks[taskId2].data[1] = r5;
-            }
+            if (r5 == 0)
+                r5 = 15;
+            else
+                r5--;
+            retVal = 1;
         }
-        else
+        else if (gMain.newKeys & DPAD_DOWN && gUnknown_0203CD78->unk_10 == 0)
         {
-            if (gMain.newKeys & DPAD_UP && gUnknown_0203CD78->unk_10 == 1)
+            if (r5 == 15)
+                r5 = 0;
+            else
+                r5++;
+            retVal = 2;
+        }
+        else if (gMain.newKeys & DPAD_LEFT && gUnknown_0203CD78->unk_10 != 0)
+        {
+            gUnknown_0203CD78->unk_10--;
+            retVal = 3;
+        }
+        else if (gMain.newKeys & DPAD_RIGHT)
+        {
+            if (gSaveBlock2Ptr->frontier.domeTrainers[r10].unk1 && gUnknown_0203CD78->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[r10].unk2)
             {
-                if (r5 == 16)
-                    r5 = gUnknown_0860D19C[roundId];
-                else
-                    r5--;
-                retVal = 5;
-            }
-            else if (gMain.newKeys & DPAD_DOWN && gUnknown_0203CD78->unk_10 == 1)
-            {
-                if (r5 == gUnknown_0860D19C[roundId])
-                    r5 = 16;
-                else
-                    r5++;
-                retVal = 6;
-            }
-            else if (gMain.newKeys & DPAD_LEFT && gUnknown_0203CD78->unk_10 != 0)
-            {
-                retVal = 7;
-                gUnknown_0203CD78->unk_10--;
-            }
-            else if (gMain.newKeys & DPAD_RIGHT && (gUnknown_0203CD78->unk_10 == 0 || gUnknown_0203CD78->unk_10 == 1))
-            {
-                retVal = 8;
                 gUnknown_0203CD78->unk_10++;
+                retVal = 4;
             }
-
-            if (retVal == 9)
+            if (!gSaveBlock2Ptr->frontier.domeTrainers[r10].unk1 && gUnknown_0203CD78->unk_10 - 1 < roundId)
             {
-                if (gUnknown_0203CD78->unk_10 == 0)
-                    gTasks[taskId2].data[1] = gUnknown_0860D1C0[gUnknown_0203CD78->unk_11[0]];
-                else if (gUnknown_0203CD78->unk_10 == 2)
-                    gTasks[taskId2].data[1] = gUnknown_0860D1C0[gUnknown_0203CD78->unk_11[1]];
-                else
-                    gTasks[taskId2].data[1] = r5;
+                gUnknown_0203CD78->unk_10++;
+                retVal = 4;
             }
         }
 
-        if (retVal != 0 && retVal != 9)
+        if (retVal == 9)
         {
-            PlaySE(SE_SELECT);
-            gTasks[taskId2].data[1] = r5;
-            gTasks[taskId].data[2] ^= 1;
+            if (gUnknown_0203CD78->unk_10 != 0)
+                gTasks[taskId2].data[1] = gUnknown_0860D1A0[(r5 / 2) * 4 + (gUnknown_0203CD78->unk_10 - 1)];
+            else
+                gTasks[taskId2].data[1] = r5;
+        }
+    }
+    else
+    {
+        if (gMain.newKeys & DPAD_UP && gUnknown_0203CD78->unk_10 == 1)
+        {
+            if (r5 == 16)
+                r5 = gUnknown_0860D19C[roundId];
+            else
+                r5--;
+            retVal = 5;
+        }
+        else if (gMain.newKeys & DPAD_DOWN && gUnknown_0203CD78->unk_10 == 1)
+        {
+            if (r5 == gUnknown_0860D19C[roundId])
+                r5 = 16;
+            else
+                r5++;
+            retVal = 6;
+        }
+        else if (gMain.newKeys & DPAD_LEFT && gUnknown_0203CD78->unk_10 != 0)
+        {
+            retVal = 7;
+            gUnknown_0203CD78->unk_10--;
+        }
+        else if (gMain.newKeys & DPAD_RIGHT && (gUnknown_0203CD78->unk_10 == 0 || gUnknown_0203CD78->unk_10 == 1))
+        {
+            retVal = 8;
+            gUnknown_0203CD78->unk_10++;
+        }
+
+        if (retVal == 9)
+        {
+            if (gUnknown_0203CD78->unk_10 == 0)
+                gTasks[taskId2].data[1] = gUnknown_0860D1C0[gUnknown_0203CD78->unk_11[0]];
+            else if (gUnknown_0203CD78->unk_10 == 2)
+                gTasks[taskId2].data[1] = gUnknown_0860D1C0[gUnknown_0203CD78->unk_11[1]];
+            else
+                gTasks[taskId2].data[1] = r5;
         }
     }
 
+    if (retVal != 0 && retVal != 9)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId2].data[1] = r5;
+        gTasks[taskId].data[2] ^= 1;
+    }
+
+
     return retVal;
 }
+
+/*
+void sub_81924E0(u8 arg0, u8 arg1)
+{
+
+}
+*/

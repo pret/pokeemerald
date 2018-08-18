@@ -121,7 +121,7 @@ _081925B6:
 	ldr r1, =0x0000ffff
 	str r1, [sp, 0x4]
 	movs r1, 0x1
-	bl sub_818D8AC
+	bl CreateTrainerPicSprite
 	ldr r1, =gUnknown_0203CD78
 	ldr r1, [r1]
 	adds r1, r5
@@ -1701,7 +1701,7 @@ _081932F8:
 	ldr r1, =0x0000ffff
 	str r1, [sp, 0x4]
 	movs r1, 0x1
-	bl sub_818D8AC
+	bl CreateTrainerPicSprite
 	ldr r1, =gUnknown_0203CD78
 	ldr r1, [r1]
 	ldr r2, [sp, 0x3C]
@@ -1789,7 +1789,7 @@ _081933B8:
 	ldr r1, =0x0000ffff
 	str r1, [sp, 0x4]
 	movs r1, 0x1
-	bl sub_818D8AC
+	bl CreateTrainerPicSprite
 	ldr r1, =gUnknown_0203CD78
 	ldr r1, [r1]
 	add r1, r9

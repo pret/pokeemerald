@@ -633,7 +633,7 @@ gFacilityTrainerMons: @ 203BC8C
 	.include "src/pokeblock_feed.o"
 	.include "src/intro_credits_graphics.o"
     .include "src/recorded_battle.o"
-    .include "src/battle_dome_cards.o"
+    .include "src/trainer_pokemon_sprites.o"
     .include "src/lilycove_lady.o"
 
 gUnknown_0203CD70: @ 203CD70
