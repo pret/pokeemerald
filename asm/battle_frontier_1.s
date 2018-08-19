@@ -101,7 +101,7 @@ _08192598:
 	ldr r3, [sp, 0x24]
 	cmp r3, r0
 	bne _081925AC
-	bl sub_8195910
+	bl GetDomeBrainTrainerPicId
 	b _081925B2
 	.pool
 _081925AC:
@@ -316,7 +316,7 @@ _08192784:
 	ldr r1, [sp, 0x24]
 	cmp r1, r0
 	bne _08192798
-	bl sub_8195924
+	bl GetDomeBrainTrainerClass
 	b _0819279E
 	.pool
 _08192798:
@@ -373,7 +373,7 @@ _08192800:
 	bne _08192824
 	ldr r4, =gStringVar2
 	adds r0, r4, 0
-	bl sub_8195938
+	bl CopyDomeBrainTrainerName
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -383,7 +383,7 @@ _08192824:
 	ldr r4, =gStringVar2
 	ldr r1, [sp, 0x24]
 	adds r0, r4, 0
-	bl sub_8195898
+	bl CopyDomeOpponentName
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -1296,13 +1296,13 @@ _08192F9C:
 	cmp r0, r9
 	bne _08192FB0
 	ldr r0, =gStringVar1
-	bl sub_8195938
+	bl CopyDomeBrainTrainerName
 	b _08192FB8
 	.pool
 _08192FB0:
 	lsrs r1, 22
 	ldr r0, =gStringVar1
-	bl sub_8195898
+	bl CopyDomeOpponentName
 _08192FB8:
 	movs r2, 0x1
 	add r8, r2
@@ -1442,13 +1442,13 @@ _081930E0:
 	cmp r1, r0
 	bne _081930F8
 	ldr r0, =gStringVar1
-	bl sub_8195938
+	bl CopyDomeBrainTrainerName
 	b _08193100
 	.pool
 _081930F8:
 	lsrs r1, 22
 	ldr r0, =gStringVar1
-	bl sub_8195898
+	bl CopyDomeOpponentName
 _08193100:
 	mov r0, r8
 	cmp r0, 0x2
@@ -1683,7 +1683,7 @@ _081932D4:
 	ldr r0, =0x000003fe
 	cmp r1, r0
 	bne _081932E4
-	bl sub_8195910
+	bl GetDomeBrainTrainerPicId
 	b _081932EC
 	.pool
 _081932E4:
@@ -1765,7 +1765,7 @@ _08193388:
 	ldr r0, =0x000003fe
 	cmp r1, r0
 	bne _081933A4
-	bl sub_8195910
+	bl GetDomeBrainTrainerPicId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [sp, 0x7C]
@@ -2207,14 +2207,14 @@ _0819375C:
 	cmp r1, r0
 	bne _08193774
 	ldr r0, =gStringVar1
-	bl sub_8195938
+	bl CopyDomeBrainTrainerName
 	b _0819377E
 	.pool
 _08193774:
 	ldr r0, =gStringVar1
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_8195898
+	bl CopyDomeOpponentName
 _0819377E:
 	add r0, sp, 0xC
 	movs r4, 0x2
@@ -2262,14 +2262,14 @@ _081937E4:
 	cmp r1, r0
 	bne _081937F8
 	adds r0, r5, 0
-	bl sub_8195938
+	bl CopyDomeBrainTrainerName
 	b _08193802
 	.pool
 _081937F8:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r5, 0
-	bl sub_8195898
+	bl CopyDomeOpponentName
 _08193802:
 	ldr r0, =gStringVar1
 	str r0, [sp, 0xC]
@@ -3800,7 +3800,7 @@ _0819456C:
 	lsls r1, 22
 	lsrs r1, 22
 	ldr r0, =gDisplayedStringBattle
-	bl sub_8195898
+	bl CopyDomeOpponentName
 	mov r2, r10
 	cmp r2, 0x1
 	bne _081945C4
@@ -4342,7 +4342,7 @@ _08194A1C:
 	lsls r1, 22
 	lsrs r1, 22
 	mov r0, r9
-	bl sub_8195898
+	bl CopyDomeOpponentName
 	mov r0, r8
 	ldr r2, [r0]
 	adds r0, r2, r5
@@ -4895,7 +4895,7 @@ _08194F2A:
 	ldrh r1, [r1]
 	lsls r1, 22
 	lsrs r1, 22
-	bl sub_8195898
+	bl CopyDomeOpponentName
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6041,8 +6041,8 @@ _0819587E:
 	.pool
 	thumb_func_end sub_8195438
 
-	thumb_func_start sub_8195898
-sub_8195898: @ 8195898
+	thumb_func_start CopyDomeOpponentName
+CopyDomeOpponentName: @ 8195898
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -6053,7 +6053,7 @@ sub_8195898: @ 8195898
 	cmp r5, r0
 	bne _081958B8
 	adds r0, r6, 0
-	bl sub_8195938
+	bl CopyDomeBrainTrainerName
 	b _08195902
 	.pool
 _081958B8:
@@ -6099,30 +6099,30 @@ _08195902:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8195898
+	thumb_func_end CopyDomeOpponentName
 
-	thumb_func_start sub_8195910
-sub_8195910: @ 8195910
+	thumb_func_start GetDomeBrainTrainerPicId
+GetDomeBrainTrainerPicId: @ 8195910
 	ldr r0, =gTrainers
 	ldr r1, =0x00007df3
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_8195910
+	thumb_func_end GetDomeBrainTrainerPicId
 
-	thumb_func_start sub_8195924
-sub_8195924: @ 8195924
+	thumb_func_start GetDomeBrainTrainerClass
+GetDomeBrainTrainerClass: @ 8195924
 	ldr r0, =gTrainers
 	ldr r1, =0x00007df1
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_8195924
+	thumb_func_end GetDomeBrainTrainerClass
 
-	thumb_func_start sub_8195938
-sub_8195938: @ 8195938
+	thumb_func_start CopyDomeBrainTrainerName
+CopyDomeBrainTrainerName: @ 8195938
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -6142,7 +6142,7 @@ _08195940:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8195938
+	thumb_func_end CopyDomeBrainTrainerName
 
 	thumb_func_start sub_8195960
 sub_8195960: @ 8195960

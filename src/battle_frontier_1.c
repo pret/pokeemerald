@@ -20,6 +20,8 @@
 #include "menu.h"
 #include "sound.h"
 #include "pokemon_icon.h"
+#include "data2.h"
+#include "international_string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "constants/species.h"
 #include "constants/moves.h"
@@ -54,12 +56,16 @@ extern u32 sub_81A39C4(void);
 extern u16 sub_8162548(u8, u8);
 extern u16 RandomizeFacilityTrainerMonId(u16);
 extern u8 GetFrontierEnemyMonLevel(void);
-extern void sub_8195898(u8 *dst, u16 trainerId);
+extern void CopyDomeOpponentName(u8 *dst, u16 trainerId);
 extern u16 sub_81A5060(u8, u8);
+extern u8 sub_81A50F0(u8, u8);
+extern u8 sub_81A50B0(u8);
 extern void sub_8162614(u16, u8);
 extern void sub_81A4C30(void);
 extern bool8 sub_81A3610(void);
 extern u16 sub_81A4FF0(u8);
+extern u8 GetFrontierTrainerFrontSpriteId(u16);
+extern u8 GetFrontierOpponentClass(u16);
 
 extern u8 gUnknown_0203CEF8[];
 extern u32 gUnknown_0203CD70;
@@ -90,8 +96,17 @@ extern const u8 gUnknown_0860D080[];
 extern const u8 gUnknown_0860D15C[];
 extern const u8 gUnknown_0860D1A0[];
 extern const u8 gUnknown_0860D19C[];
+extern const u8 gUnknown_0860D349[];
 extern const u8 gUnknown_0860D1C0[];
+extern const u8 gUnknown_0860D343[];
+extern const u8 gUnknown_0860D340[];
+extern const u8 gUnknown_0860D346[];
+extern const u8 gUnknown_0860B358[][16];
+extern const u8 gUnknown_0860C988[31][16];
 extern const u8 gUnknown_0860D3F1[][2];
+extern const u8 *const gBattleDomePotentialPointers[];
+extern const u8 *const gBattleDomeOpponentStylePointers[];
+extern const u8 *const gBattleDomeOpponentStatsPointers[];
 
 // gfx
 extern const u8 gUnknown_08D83D50[];
@@ -101,6 +116,9 @@ extern const u8 gUnknown_08D85444[];
 extern const u8 gUnknown_08D85358[];
 extern const u8 gUnknown_08D85600[];
 extern const u8 gUnknown_08D854C8[];
+
+// text
+extern const u8 gTrainerClassNames[][0xD];
 
 // This file's functions.
 u8 GetDomeTrainerMonIvs(u16 trainerId);
@@ -120,9 +138,13 @@ void sub_8194220(u8 taskId);
 void sub_8194B54(void);
 void sub_8194B70(void);
 void sub_819314C(u8, u8);
-void sub_81924E0(u8, u8);
+void sub_81924E0(u8, u8 trainerTournamentId);
 u8 sub_819221C(u8 taskId);
 s32 sub_8192F08(u8, u8*);
+u8 GetDomeBrainTrainerPicId(void);
+u8 GetDomeBrainTrainerClass(void);
+void CopyDomeBrainTrainerName(u8 *dst);
+void CopyDomeOpponentName(u8 *dst, u16 trainerId);
 
 // code
 void sub_818E9AC(void)
@@ -549,7 +571,7 @@ void sub_818F9B0(void)
 void sub_818F9E0(void)
 {
     StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.field_CB2]);
-    sub_8195898(gStringVar2, gTrainerBattleOpponent_A);
+    CopyDomeOpponentName(gStringVar2, gTrainerBattleOpponent_A);
 }
 
 void sub_818FA20(void)
@@ -2444,9 +2466,363 @@ u8 sub_819221C(u8 taskId)
     return retVal;
 }
 
-/*
-void sub_81924E0(u8 arg0, u8 arg1)
+void sub_81924E0(u8 arg0, u8 trainerTournamentId)
 {
+    s32 i, j, k;
+    s16 *allocatedArray;
+    struct TextSubPrinter textPrinter;
+    s32 trainerId;
+    s32 windowId;
+    s32 x, y;
+    u8 palSlot;
+    u8 nature;
 
+    j = 0;
+    windowId = 0;
+    x = 0;
+    y = 0;
+    palSlot = 0;
+    allocatedArray = AllocZeroed(sizeof(s16) * 18);
+    trainerId = gSaveBlock2Ptr->frontier.domeTrainers[trainerTournamentId].trainerId;
+
+    if (arg0 & 1)
+        j = 8, windowId = 9, palSlot = 2;
+    if (arg0 & 2)
+        x = 256;
+    if (arg0 & 4)
+        y = 160;
+    if (arg0 & 8)
+        x = -256;
+    if (arg0 & 0x10)
+        y = -160;
+
+    if (trainerId == TRAINER_PLAYER)
+        gUnknown_0203CD78->arr[j] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+    else if (trainerId == TRAINER_FRONTIER_BRAIN)
+        gUnknown_0203CD78->arr[j] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+    else
+        gUnknown_0203CD78->arr[j] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+
+    if (arg0 & 0x1E)
+        gSprites[gUnknown_0203CD78->arr[j]].invisible = 1;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (trainerId == TRAINER_PLAYER)
+            gUnknown_0203CD78->arr[i + 2 + j] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
+                                                                  sub_8190938,
+                                                                  x | gUnknown_0860D340[i],
+                                                                  y + gUnknown_0860D343[i],
+                                                                  0, 0, TRUE);
+        else if (trainerId == TRAINER_FRONTIER_BRAIN)
+            gUnknown_0203CD78->arr[i + 2 + j] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
+                                                                  sub_8190938,
+                                                                  x | gUnknown_0860D340[i],
+                                                                  y + gUnknown_0860D343[i],
+                                                                  0, 0, TRUE);
+        else
+            gUnknown_0203CD78->arr[i + 2 + j] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].species,
+                                                                  sub_8190938,
+                                                                  x | gUnknown_0860D340[i],
+                                                                  y + gUnknown_0860D343[i],
+                                                                  0, 0, TRUE);
+        gSprites[gUnknown_0203CD78->arr[i + 2 + j]].oam.priority = 0;
+        if (arg0 & 0x1E)
+            gSprites[gUnknown_0203CD78->arr[i + 2 + j]].invisible = 1;
+    }
+    textPrinter.fontId = 2;
+    textPrinter.x = 0;
+    textPrinter.y = 0;
+    textPrinter.currentX = 0;
+    textPrinter.currentY = 0;
+    textPrinter.letterSpacing = 2;
+    textPrinter.lineSpacing = 0;
+    textPrinter.fontColor_l = 0;
+    textPrinter.fgColor = 14;
+    textPrinter.bgColor = 0;
+    textPrinter.shadowColor = 13;
+
+    i = 0;
+    if (trainerId == TRAINER_PLAYER)
+        j = gFacilityClassToTrainerClass[FACILITY_CLASS_PKMN_TRAINER_BRENDAN];
+    else if (trainerId == TRAINER_FRONTIER_BRAIN)
+        j = GetDomeBrainTrainerClass();
+    else
+        j = GetFrontierOpponentClass(trainerId);
+
+    for (;gTrainerClassNames[j][i] != EOS; i++)
+        gStringVar1[i] = gTrainerClassNames[j][i];
+    gStringVar1[i] = CHAR_SPACE;
+    gStringVar1[i + 1] = EOS;
+
+    if (trainerId == TRAINER_PLAYER)
+    {
+        StringAppend(gStringVar1, gSaveBlock2Ptr->playerName);
+    }
+    else if (trainerId == TRAINER_FRONTIER_BRAIN)
+    {
+        CopyDomeBrainTrainerName(gStringVar2);
+        StringAppend(gStringVar1, gStringVar2);
+    }
+    else
+    {
+        CopyDomeOpponentName(gStringVar2, trainerId);
+        StringAppend(gStringVar1, gStringVar2);
+    }
+
+    textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, gStringVar1, 0xD0, textPrinter.letterSpacing);
+    textPrinter.current_text_offset = gStringVar1;
+    textPrinter.windowId = windowId;
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+    AddTextPrinter(&textPrinter, 0, NULL);
+    textPrinter.letterSpacing = 0;
+
+    for (i = 0; i < 3; i++)
+    {
+        textPrinter.currentY = gUnknown_0860D346[i];
+        if (trainerId == TRAINER_PLAYER)
+            textPrinter.current_text_offset = gSpeciesNames[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]];
+        else if (trainerId == TRAINER_FRONTIER_BRAIN)
+            textPrinter.current_text_offset = gSpeciesNames[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]];
+        else
+            textPrinter.current_text_offset = gSpeciesNames[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].species];
+
+        textPrinter.windowId = windowId + i + 1;
+        if (i == 1)
+            textPrinter.currentX = 7;
+        else
+            textPrinter.currentX = 0;
+
+        j = i + 1;
+        PutWindowTilemap(windowId + j);
+        CopyWindowToVram(windowId + j, 3);
+        AddTextPrinter(&textPrinter, 0, NULL);
+    }
+
+    PutWindowTilemap(windowId + 4);
+    CopyWindowToVram(windowId + 4, 3);
+    if (trainerId == TRAINER_FRONTIER_BRAIN)
+        textPrinter.current_text_offset = gBattleDomePotentialPointers[16];
+    else
+        textPrinter.current_text_offset = gBattleDomePotentialPointers[trainerTournamentId];
+
+    textPrinter.fontId = 1;
+    textPrinter.windowId = windowId + 4;
+    textPrinter.currentX = 0;
+    textPrinter.y = 4;
+    textPrinter.currentY = 4;
+    AddTextPrinter(&textPrinter, 0, NULL);
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            for (k = 0; k < DOME_TOURNAMENT_TRAINERS_COUNT; k++)
+            {
+                if (trainerId == TRAINER_FRONTIER_BRAIN)
+                    allocatedArray[k] += gUnknown_0860B358[sub_81A5060(i, j)][k];
+                else if (trainerId == TRAINER_PLAYER)
+                    allocatedArray[k] += gUnknown_0860B358[gSaveBlock2Ptr->frontier.field_EFC[i].moves[j]][k];
+                else
+                    allocatedArray[k] += gUnknown_0860B358[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].moves[j]][k];
+            }
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gUnknown_0860C988); i++)
+    {
+        s32 r4 = 0;
+
+        for (k = 0, j = 0; j < DOME_TOURNAMENT_TRAINERS_COUNT; j++)
+        {
+            if (gUnknown_0860C988[i][j] != 0)
+            {
+                r4++;
+                if (allocatedArray[j] != 0 && allocatedArray[j] >= gUnknown_0860C988[i][j])
+                    k++;
+            }
+        }
+        if (r4 == k)
+            break;
+    }
+
+    textPrinter.current_text_offset = gBattleDomeOpponentStylePointers[i];
+    textPrinter.y = 20;
+    textPrinter.currentY = 20;
+    AddTextPrinter(&textPrinter, 0, NULL);
+
+    for (i = 0; i < 18; i++)
+        allocatedArray[i] = 0;
+
+    if (trainerId == TRAINER_FRONTIER_BRAIN || trainerId == TRAINER_PLAYER)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            for (j = 0; j < 6; j++)
+            {
+                if (trainerId == TRAINER_FRONTIER_BRAIN)
+                    allocatedArray[j] = sub_81A50F0(i, j);
+                else
+                    allocatedArray[j] = gSaveBlock2Ptr->frontier.field_EFC[i].evs[j];
+            }
+            allocatedArray[6] += allocatedArray[0];
+            for (j = 0; j < 5; j++)
+            {
+                if (trainerId == TRAINER_FRONTIER_BRAIN)
+                    nature = sub_81A50B0(i);
+                else
+                    nature = gSaveBlock2Ptr->frontier.field_EFC[i].nature;
+
+                if (gNatureStatTable[nature][j] > 0)
+                {
+                    allocatedArray[j + 7] += (allocatedArray[j + 1] * 110) / 100;
+                }
+                else if (gNatureStatTable[nature][j] < 0)
+                {
+                    allocatedArray[j + 7] += (allocatedArray[j + 1] * 90) / 100;
+                    allocatedArray[j + 13]++;
+                }
+                else
+                {
+                    allocatedArray[j + 7] += allocatedArray[j + 1];
+                }
+            }
+        }
+        for (j = 0, i = 0; i < 6; i++)
+            j += allocatedArray[6 + i];
+        for (i = 0; i < 6; i++)
+            allocatedArray[i] = (allocatedArray[6 + i] * 100) / j;
+    }
+    else
+    {
+        for (i = 0; i < 3; i++)
+        {
+            s32 evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].evSpread;
+            for (k = 0, j = 0; j < 6; j++)
+            {
+                allocatedArray[j] = 0;
+                if (evBits & 1)
+                    k++;
+                evBits >>= 1;
+            }
+            k = 510 / k;
+            evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].evSpread;
+            for (j = 0; j < 6; j++)
+            {
+                if (evBits & 1)
+                    allocatedArray[j] = k;
+                evBits >>= 1;
+            }
+
+            allocatedArray[6] += allocatedArray[0];
+            for (j = 0; j < 5; j++)
+            {
+                nature = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].nature;
+                if (gNatureStatTable[nature][j] > 0)
+                {
+                    allocatedArray[j + 7] += (allocatedArray[j + 1] * 110) / 100;
+                }
+                else if (gNatureStatTable[nature][j] < 0)
+                {
+                    allocatedArray[j + 7] += (allocatedArray[j + 1] * 90) / 100;
+                    allocatedArray[j + 13]++;
+                }
+                else
+                {
+                    allocatedArray[j + 7] += allocatedArray[j + 1];
+                }
+            }
+        }
+        for (j = 0, i = 0; i < 6; i++)
+            j += allocatedArray[i + 6];
+        for (i = 0; i < 6; i++)
+            allocatedArray[i] = (allocatedArray[6 + i] * 100) / j;
+    }
+
+    for (i = 0, j = 0, k = 0; k < 6; k++)
+    {
+        if (allocatedArray[k] > 29)
+        {
+            if (i == 2)
+            {
+                if (allocatedArray[6] < allocatedArray[k])
+                {
+                    s16 var_24 = allocatedArray[7];
+                    if (allocatedArray[7] < allocatedArray[k])
+                    {
+                        if (allocatedArray[6] < allocatedArray[7])
+                        {
+                            allocatedArray[6] = var_24;
+                            allocatedArray[7] = k;
+                        }
+                        else
+                        {
+                            allocatedArray[7] = k;
+                        }
+                    }
+                    else
+                    {
+                        allocatedArray[6] = var_24;
+                        allocatedArray[7] = k;
+                    }
+                }
+                else
+                {
+                    if (allocatedArray[7] < allocatedArray[k])
+                        allocatedArray[7] = k;
+                }
+            }
+            else
+            {
+                allocatedArray[i + 7] = k;
+                i++;
+            }
+        }
+        if (allocatedArray[k] == 0)
+        {
+            if (j == 2)
+            {
+                if (allocatedArray[k + 12] >= 2
+                    || ((allocatedArray[k + 12] == 1 && (allocatedArray[12 + allocatedArray[8]] != 0 || allocatedArray[12 + allocatedArray[9]] == 0))
+                       )
+                    )
+                {
+                    allocatedArray[8] = allocatedArray[9];
+                    allocatedArray[9] = k;
+                }
+                else if (allocatedArray[k + 12] == 1 && allocatedArray[12 + allocatedArray[8]] == 0)
+                {
+                    allocatedArray[8] = allocatedArray[9];
+                    allocatedArray[9] = k;
+                }
+                else if (allocatedArray[k + 12] == 1 && allocatedArray[12 + allocatedArray[9]] == 0)
+                {
+                    allocatedArray[9] = k;
+                }
+            }
+            else
+            {
+                allocatedArray[j + 8] = k;
+                j++;
+            }
+        }
+    }
+
+    if (i == 2)
+        i = gUnknown_0860D349[allocatedArray[6]] + (allocatedArray[7] - (allocatedArray[6] + 1));
+    else if (i == 1)
+        i = allocatedArray[6] + 15;
+    else if (j == 2)
+        i = gUnknown_0860D349[allocatedArray[8]] + (allocatedArray[9] - (allocatedArray[8] + 1)) + 21;
+    else if (j == 1)
+        i = allocatedArray[8] + 36;
+    else
+        i = 42;
+
+    textPrinter.current_text_offset = gBattleDomeOpponentStatsPointers[i];
+    textPrinter.y = 36;
+    textPrinter.currentY = 36;
+    AddTextPrinter(&textPrinter, 0, NULL);
+    Free(allocatedArray);
 }
-*/
