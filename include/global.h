@@ -431,7 +431,14 @@ struct BattleFrontier
     /*0xE6E*/ u16 field_E6E;
     /*0xE70*/ u8 field_E70[72];
     /*0xEB8*/ u16 frontierBattlePoints;
-    /*0xEBA*/ u8 field_EBA[39];
+    /*0xEBA*/ u8 field_EBA;
+    /*0xEBB*/ u8 field_EBB;
+    /*0xEBC*/ u8 field_EBC;
+    /*0xEBD*/ u8 field_EBD;
+    /*0xEBE*/ u8 field_EBE;
+    /*0xEBF*/ u8 field_EBF;
+    /*0xEC0*/ u16 field_EC0[16];
+    /*0xEE0*/ u8 field_EE0;
     /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH];
     /*0xEF1*/ u8 field_EF1[2][4];
     /*0xEF9*/ u8 field_EF9;
