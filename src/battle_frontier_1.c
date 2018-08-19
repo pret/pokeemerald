@@ -138,7 +138,7 @@ void sub_8194220(u8 taskId);
 void sub_8194B54(void);
 void sub_8194B70(void);
 void sub_819314C(u8, u8);
-void sub_81924E0(u8, u8 trainerTournamentId);
+static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId);
 u8 sub_819221C(u8 taskId);
 s32 sub_8192F08(u8, u8*);
 u8 GetDomeBrainTrainerPicId(void);
@@ -1338,7 +1338,7 @@ void sub_8190400(u8 taskId)
         }
         else
         {
-            sub_81924E0(0, r5);
+            DisplayTrainerInfoOnCard(0, r5);
         }
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
         if (r9 != 0)
@@ -1647,7 +1647,7 @@ void sub_8190CD4(u8 taskId)
     s32 var;
     s32 r9 = gTasks[taskId].data[3];
     s32 taskId2 = gTasks[taskId].data[4];
-    s32 arg, arg2;
+    s32 trainerTournamentId, arg2;
 
     switch (gTasks[taskId].data[0])
     {
@@ -1715,15 +1715,15 @@ void sub_8190CD4(u8 taskId)
                 {
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
-                    arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
-                    sub_81924E0(gTasks[taskId].data[2] | 0x10, arg);
+                    trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
                 }
                 else
                 {
                     gBattle_BG2_X = 256;
                     gBattle_BG2_Y = 0;
-                    arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
-                    sub_81924E0(gTasks[taskId].data[2] | 0x10, arg);
+                    trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
                     gUnknown_0203CD78->unk_10 = 0;
                 }
             }
@@ -1735,8 +1735,8 @@ void sub_8190CD4(u8 taskId)
                     sub_8192F08(arg2, gUnknown_0203CD78->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
-                    arg = gUnknown_0203CD78->unk_11[0];
-                    sub_81924E0(gTasks[taskId].data[2] | 0x10, arg);
+                    trainerTournamentId = gUnknown_0203CD78->unk_11[0];
+                    DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
                 }
                 else if (gUnknown_0203CD78->unk_10 == 2)
                 {
@@ -1744,8 +1744,8 @@ void sub_8190CD4(u8 taskId)
                     sub_8192F08(arg2, gUnknown_0203CD78->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
-                    arg = gUnknown_0203CD78->unk_11[1];
-                    sub_81924E0(gTasks[taskId].data[2] | 0x10, arg);
+                    trainerTournamentId = gUnknown_0203CD78->unk_11[1];
+                    DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
                 }
                 else
                 {
@@ -1831,15 +1831,15 @@ void sub_8190CD4(u8 taskId)
                 {
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
-                    arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
-                    sub_81924E0(gTasks[taskId].data[2] | 4, arg);
+                    trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
                 }
                 else
                 {
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 0;
-                    arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
-                    sub_81924E0(gTasks[taskId].data[2] | 4, arg);
+                    trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
                     gUnknown_0203CD78->unk_10 = 0;
                 }
             }
@@ -1851,8 +1851,8 @@ void sub_8190CD4(u8 taskId)
                     sub_8192F08(arg2, gUnknown_0203CD78->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
-                    arg = gUnknown_0203CD78->unk_11[0];
-                    sub_81924E0(gTasks[taskId].data[2] | 4, arg);
+                    trainerTournamentId = gUnknown_0203CD78->unk_11[0];
+                    DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
                 }
                 else if (gUnknown_0203CD78->unk_10 == 2)
                 {
@@ -1860,8 +1860,8 @@ void sub_8190CD4(u8 taskId)
                     sub_8192F08(arg2, gUnknown_0203CD78->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
-                    arg = gUnknown_0203CD78->unk_11[1];
-                    sub_81924E0(gTasks[taskId].data[2] | 4, arg);
+                    trainerTournamentId = gUnknown_0203CD78->unk_11[1];
+                    DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
                 }
                 else
                 {
@@ -1944,15 +1944,15 @@ void sub_8190CD4(u8 taskId)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 160;
-                arg = gUnknown_0860D080[gTasks[taskId2].data[1]];
-                sub_81924E0(gTasks[taskId].data[2] | 8, arg);
+                trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 8, trainerTournamentId);
             }
             else
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 0;
-                arg = gUnknown_0860D15C[(gTasks[taskId2].data[1] * 4) + (gUnknown_0203CD78->unk_10 - 1)];
-                sub_819314C(gTasks[taskId].data[2] | 8, arg);
+                trainerTournamentId = gUnknown_0860D15C[(gTasks[taskId2].data[1] * 4) + (gUnknown_0203CD78->unk_10 - 1)];
+                sub_819314C(gTasks[taskId].data[2] | 8, trainerTournamentId);
             }
 
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
@@ -2027,8 +2027,8 @@ void sub_8190CD4(u8 taskId)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 160;
-                arg = gUnknown_0203CD78->unk_11[0];
-                sub_81924E0(gTasks[taskId].data[2] | 8, arg);
+                trainerTournamentId = gUnknown_0203CD78->unk_11[0];
+                DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 8, trainerTournamentId);
             }
             else
             {
@@ -2116,8 +2116,8 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG2_X = 0;
                 gBattle_BG2_Y = 0;
             }
-            arg = gUnknown_0860D15C[(gUnknown_0203CD78->unk_10 - 1) + (gTasks[taskId2].data[1] * 4)];
-            sub_819314C(gTasks[taskId].data[2] | 2, arg);
+            trainerTournamentId = gUnknown_0860D15C[(gUnknown_0203CD78->unk_10 - 1) + (gTasks[taskId2].data[1] * 4)];
+            sub_819314C(gTasks[taskId].data[2] | 2, trainerTournamentId);
 
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
             {
@@ -2191,8 +2191,8 @@ void sub_8190CD4(u8 taskId)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 160;
-                arg = gUnknown_0203CD78->unk_11[1];
-                sub_81924E0(gTasks[taskId].data[2] | 2, arg);
+                trainerTournamentId = gUnknown_0203CD78->unk_11[1];
+                DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 2, trainerTournamentId);
             }
             else
             {
@@ -2462,79 +2462,81 @@ u8 sub_819221C(u8 taskId)
         gTasks[taskId].data[2] ^= 1;
     }
 
-
     return retVal;
 }
 
-void sub_81924E0(u8 arg0, u8 trainerTournamentId)
+static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
 {
-    s32 i, j, k;
-    s16 *allocatedArray;
     struct TextSubPrinter textPrinter;
-    s32 trainerId;
-    s32 windowId;
-    s32 x, y;
-    u8 palSlot;
-    u8 nature;
-
-    j = 0;
-    windowId = 0;
-    x = 0;
-    y = 0;
-    palSlot = 0;
-    allocatedArray = AllocZeroed(sizeof(s16) * 18);
+    s32 i, j, k;
+    s32 trainerId = 0;
+    u8 nature = 0;
+    s32 arrId = 0;
+    s32 windowId = 0;
+    s32 x = 0, y = 0;
+    u8 palSlot = 0;
+    s16 *allocatedArray = AllocZeroed(sizeof(s16) * 18);
     trainerId = gSaveBlock2Ptr->frontier.domeTrainers[trainerTournamentId].trainerId;
 
-    if (arg0 & 1)
-        j = 8, windowId = 9, palSlot = 2;
-    if (arg0 & 2)
+    if (flags & 1)
+        arrId = 8, windowId = 9, palSlot = 2;
+    if (flags & 2)
         x = 256;
-    if (arg0 & 4)
+    if (flags & 4)
         y = 160;
-    if (arg0 & 8)
+    if (flags & 8)
         x = -256;
-    if (arg0 & 0x10)
+    if (flags & 0x10)
         y = -160;
 
     if (trainerId == TRAINER_PLAYER)
-        gUnknown_0203CD78->arr[j] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
-        gUnknown_0203CD78->arr[j] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
     else
-        gUnknown_0203CD78->arr[j] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
 
-    if (arg0 & 0x1E)
-        gSprites[gUnknown_0203CD78->arr[j]].invisible = 1;
+    if (flags & 0x1E)
+        gSprites[gUnknown_0203CD78->arr[arrId]].invisible = 1;
 
     for (i = 0; i < 3; i++)
     {
         if (trainerId == TRAINER_PLAYER)
-            gUnknown_0203CD78->arr[i + 2 + j] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
+        {
+            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
                                                                   sub_8190938,
                                                                   x | gUnknown_0860D340[i],
                                                                   y + gUnknown_0860D343[i],
                                                                   0, 0, TRUE);
+            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+        }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            gUnknown_0203CD78->arr[i + 2 + j] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
+        {
+            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
                                                                   sub_8190938,
                                                                   x | gUnknown_0860D340[i],
                                                                   y + gUnknown_0860D343[i],
                                                                   0, 0, TRUE);
+            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+        }
         else
-            gUnknown_0203CD78->arr[i + 2 + j] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].species,
+        {
+            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].species,
                                                                   sub_8190938,
                                                                   x | gUnknown_0860D340[i],
                                                                   y + gUnknown_0860D343[i],
                                                                   0, 0, TRUE);
-        gSprites[gUnknown_0203CD78->arr[i + 2 + j]].oam.priority = 0;
-        if (arg0 & 0x1E)
-            gSprites[gUnknown_0203CD78->arr[i + 2 + j]].invisible = 1;
+            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+        }
+
+        if (flags & 0x1E)
+            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].invisible = 1;
     }
     textPrinter.fontId = 2;
     textPrinter.x = 0;
     textPrinter.y = 0;
-    textPrinter.currentX = 0;
-    textPrinter.currentY = 0;
+    textPrinter.currentX = textPrinter.x;
+    textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 2;
     textPrinter.lineSpacing = 0;
     textPrinter.fontColor_l = 0;
@@ -2588,15 +2590,14 @@ void sub_81924E0(u8 arg0, u8 trainerTournamentId)
         else
             textPrinter.current_text_offset = gSpeciesNames[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].species];
 
-        textPrinter.windowId = windowId + i + 1;
+        textPrinter.windowId = 1 + i + windowId;
         if (i == 1)
             textPrinter.currentX = 7;
         else
             textPrinter.currentX = 0;
 
-        j = i + 1;
-        PutWindowTilemap(windowId + j);
-        CopyWindowToVram(windowId + j, 3);
+        PutWindowTilemap(1 + i + windowId);
+        CopyWindowToVram(1 + i + windowId, 3);
         AddTextPrinter(&textPrinter, 0, NULL);
     }
 
@@ -2748,12 +2749,11 @@ void sub_81924E0(u8 arg0, u8 trainerTournamentId)
             {
                 if (allocatedArray[6] < allocatedArray[k])
                 {
-                    s16 var_24 = allocatedArray[7];
                     if (allocatedArray[7] < allocatedArray[k])
                     {
                         if (allocatedArray[6] < allocatedArray[7])
                         {
-                            allocatedArray[6] = var_24;
+                            allocatedArray[6] = allocatedArray[7];
                             allocatedArray[7] = k;
                         }
                         else
@@ -2763,7 +2763,7 @@ void sub_81924E0(u8 arg0, u8 trainerTournamentId)
                     }
                     else
                     {
-                        allocatedArray[6] = var_24;
+                        allocatedArray[6] = allocatedArray[7];
                         allocatedArray[7] = k;
                     }
                 }
@@ -2775,7 +2775,7 @@ void sub_81924E0(u8 arg0, u8 trainerTournamentId)
             }
             else
             {
-                allocatedArray[i + 7] = k;
+                allocatedArray[i + 6] = k;
                 i++;
             }
         }
@@ -2784,7 +2784,7 @@ void sub_81924E0(u8 arg0, u8 trainerTournamentId)
             if (j == 2)
             {
                 if (allocatedArray[k + 12] >= 2
-                    || ((allocatedArray[k + 12] == 1 && (allocatedArray[12 + allocatedArray[8]] != 0 || allocatedArray[12 + allocatedArray[9]] == 0))
+                    || ((allocatedArray[k + 12] == 1 && allocatedArray[12 + allocatedArray[8]] == 0 && allocatedArray[12 + allocatedArray[9]] == 0)
                        )
                     )
                 {
