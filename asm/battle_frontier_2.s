@@ -20049,7 +20049,7 @@ sub_81A4E04: @ 81A4E04
 	bl sub_81953A0
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_818FC78
+	bl GetTrainerMonCountInBits
 	adds r4, r0, 0
 	b _081A4E46
 	.pool
