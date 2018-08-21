@@ -23,6 +23,7 @@
 #include "data2.h"
 #include "international_string_util.h"
 #include "trainer_pokemon_sprites.h"
+#include "scanline_effect.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
@@ -80,6 +81,7 @@ extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 extern struct Unknown_0203BC8C_Struct *gFacilityTrainerMons;
 extern struct Unknown_0203CD78_Struct *gUnknown_0203CD78;
+extern void *gUnknown_0203CD7C;
 
 extern void (* const gUnknown_0860D090[])(void);
 extern const u32 gUnknown_0860D0EC[][2];
@@ -109,6 +111,8 @@ extern const u8 gUnknown_0860D3A8[];
 extern const u8 gUnknown_0860D3AB[];
 extern const u8 gUnknown_0860D3AE[];
 extern const u8 gUnknown_0860D3B1[];
+extern const u8 gUnknown_0860D080[];
+extern const u8 gUnknown_0860CBF1[][5][4];
 extern const u8 *const gBattleDomePotentialPointers[];
 extern const u8 *const gBattleDomeOpponentStylePointers[];
 extern const u8 *const gBattleDomeOpponentStatsPointers[];
@@ -144,7 +148,7 @@ void sub_8190CD4(u8 taskId);
 void sub_8194220(u8 taskId);
 void sub_8194B54(void);
 void sub_8194B70(void);
-static void DrawMatchInfoOnCard(u8 flags, u8 matchNo);
+static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo);
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId);
 u8 sub_819221C(u8 taskId);
 s32 sub_8192F08(u8, u8*);
@@ -152,6 +156,8 @@ u8 GetDomeBrainTrainerPicId(void);
 u8 GetDomeBrainTrainerClass(void);
 void CopyDomeBrainTrainerName(u8 *dst);
 void CopyDomeOpponentName(u8 *dst, u16 trainerId);
+void sub_8194D48(void);
+u8 sub_8193BDC(u8 taskId);
 
 // const rom data
 ALIGNED(4)
@@ -1701,7 +1707,7 @@ void sub_8190400(u8 taskId)
         gTasks[i].data[4] = r7;
         if (r9 == 2)
         {
-            DrawMatchInfoOnCard(0, r5);
+            DisplayMatchInfoOnCard(0, r5);
             gUnknown_0203CD78->unk_10 = 1;
         }
         else
@@ -2127,7 +2133,7 @@ void sub_8190CD4(u8 taskId)
                     gBattle_BG2_X = 256;
                     gBattle_BG2_Y = 160;
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    DrawMatchInfoOnCard(gTasks[taskId].data[2] | 0x10, matchNo);
+                    DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 0x10, matchNo);
                 }
             }
 
@@ -2243,7 +2249,7 @@ void sub_8190CD4(u8 taskId)
                     gBattle_BG2_X = 256;
                     gBattle_BG2_Y = 0;
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    DrawMatchInfoOnCard(gTasks[taskId].data[2] | 4, matchNo);
+                    DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 4, matchNo);
                 }
             }
 
@@ -2327,7 +2333,7 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 0;
                 matchNo = gUnknown_0860D15C[(gTasks[taskId2].data[1] * 4) + (gUnknown_0203CD78->unk_10 - 1)];
-                DrawMatchInfoOnCard(gTasks[taskId].data[2] | 8, matchNo);
+                DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 8, matchNo);
             }
 
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
@@ -2410,7 +2416,7 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG2_X = 0;
                 gBattle_BG2_Y = 160;
                 matchNo = gTasks[taskId2].data[1] - 16;
-                DrawMatchInfoOnCard(gTasks[taskId].data[2] | 8, matchNo);
+                DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 8, matchNo);
             }
 
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
@@ -2492,7 +2498,7 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG2_Y = 0;
             }
             matchNo = gUnknown_0860D15C[(gUnknown_0203CD78->unk_10 - 1) + (gTasks[taskId2].data[1] * 4)];
-            DrawMatchInfoOnCard(gTasks[taskId].data[2] | 2, matchNo);
+            DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 2, matchNo);
 
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
             {
@@ -2574,7 +2580,7 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG2_X = 0;
                 gBattle_BG2_Y = 160;
                 matchNo = gTasks[taskId2].data[1] - 16;
-                DrawMatchInfoOnCard(gTasks[taskId].data[2] | 2, matchNo);
+                DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 2, matchNo);
             }
 
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
@@ -3264,7 +3270,7 @@ s32 sub_8192F08(u8 arg0, u8 *arg1)
         return retVal + 1;
 }
 
-static void DrawMatchInfoOnCard(u8 flags, u8 matchNo)
+static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 {
     struct TextSubPrinter textPrinter;
     s32 tournamentIds[2];
@@ -3471,4 +3477,166 @@ static void DrawMatchInfoOnCard(u8 flags, u8 matchNo)
     PutWindowTilemap(windowId + 5);
     CopyWindowToVram(windowId + 5, 3);
     AddTextPrinter(&textPrinter, 0, NULL);
+}
+
+void sub_81938A4(void)
+{
+    u8 taskId = CreateTask(sub_8194220, 0);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = 2;
+    gTasks[taskId].data[4] = 0;
+    SetMainCallback2(sub_8194B54);
+}
+
+void sub_81938E0(void)
+{
+    u8 taskId;
+
+    sub_8194D48();
+    gSaveBlock2Ptr->frontier.chosenLvl = gSaveBlock2Ptr->frontier.field_D0A - 1;
+    gSaveBlock2Ptr->frontier.field_CB2 = 3;
+    taskId = CreateTask(sub_8194220, 0);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = 2;
+    gTasks[taskId].data[4] = 1;
+    SetMainCallback2(sub_8194B54);
+}
+
+void sub_819395C(u8 taskId)
+{
+    u8 newTaskId = 0;
+    s32 spriteId = gTasks[taskId].data[1];
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+            gTasks[taskId].data[0] = 1;
+            StartSpriteAnim(&gSprites[spriteId], 1);
+        }
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            gTasks[taskId].data[0] = 2;
+        break;
+    case 2:
+        switch (sub_8193BDC(taskId))
+        {
+        case 0:
+        default:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            gTasks[taskId].data[0] = 7;
+            break;
+        case 1:
+            break;
+        case 2:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            gTasks[taskId].data[0] = 3;
+            break;
+        case 3:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            gTasks[taskId].data[0] = 5;
+            break;
+        }
+        break;
+    case 3:
+        if (!gPaletteFade.active)
+        {
+            FreeAllWindowBuffers();
+            ScanlineEffect_Stop();
+            FREE_AND_SET_NULL(gUnknown_0203CD7C);
+            newTaskId = CreateTask(sub_8190400, 0);
+            gTasks[newTaskId].data[0] = 0;
+            gTasks[newTaskId].data[1] = gUnknown_0860D080[spriteId];
+            gTasks[newTaskId].data[2] = 1;
+            gTasks[newTaskId].data[3] = taskId;
+
+            gTasks[taskId].data[0] = 4;
+            gUnknown_0203CD78->unk_10 = 0;
+        }
+        break;
+    case 4:
+        break;
+    case 5:
+        if (!gPaletteFade.active)
+        {
+            FreeAllWindowBuffers();
+            ScanlineEffect_Stop();
+            FREE_AND_SET_NULL(gUnknown_0203CD7C);
+            newTaskId = CreateTask(sub_8190400, 0);
+            gTasks[newTaskId].data[0] = 0;
+            gTasks[newTaskId].data[1] = spriteId - 16;
+            gTasks[newTaskId].data[2] = 2;
+            gTasks[newTaskId].data[3] = taskId;
+
+            gTasks[taskId].data[0] = 6;
+        }
+        break;
+    case 6:
+        break;
+    case 7:
+        if (!gPaletteFade.active)
+        {
+            FreeAllWindowBuffers();
+            ScanlineEffect_Stop();
+            FREE_AND_SET_NULL(gUnknown_0203CD7C);
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+            DestroyTask(gTasks[taskId].data[7]);
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+u8 sub_8193BDC(u8 taskId)
+{
+    u8 retVal = 1;
+    s32 arrId = 4;
+    s32 spriteId = gTasks[taskId].data[1];
+    s32 roundId = gSaveBlock2Ptr->frontier.field_CB2;
+
+    if (gMain.newKeys == B_BUTTON || (gMain.newKeys & A_BUTTON && spriteId == 31))
+    {
+        PlaySE(SE_SELECT);
+        retVal = 0;
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        if (spriteId < 16)
+        {
+            PlaySE(SE_SELECT);
+            retVal = 2;
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            retVal = 3;
+        }
+    }
+    else
+    {
+        if (gMain.newKeys == DPAD_UP && gUnknown_0860CBF1[spriteId][roundId][0] != 0xFF)
+            arrId = 0;
+        else if (gMain.newKeys == DPAD_DOWN && gUnknown_0860CBF1[spriteId][roundId][1] != 0xFF)
+            arrId = 1;
+        else if (gMain.newKeys == DPAD_LEFT && gUnknown_0860CBF1[spriteId][roundId][2] != 0xFF)
+            arrId = 2;
+        else if (gMain.newKeys == DPAD_RIGHT && gUnknown_0860CBF1[spriteId][roundId][3] != 0xFF)
+            arrId = 3;
+    }
+
+    if (arrId != 4)
+    {
+        PlaySE(SE_SELECT);
+        StartSpriteAnim(&gSprites[spriteId], 0);
+        spriteId = gUnknown_0860CBF1[spriteId][roundId][arrId];
+        StartSpriteAnim(&gSprites[spriteId], 1);
+        gTasks[taskId].data[1] = spriteId;
+    }
+
+    return retVal;
 }
