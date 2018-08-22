@@ -2438,9 +2438,16 @@ extern const u8 gMonBackPic_UnownQuestionMark[];
 extern const u8 gMonIcon_UnownQuestionMark[];
 
 extern const u8 gMonFrontPic_CircledQuestionMark[];
+extern const u8 gMonBackPic_CircledQuestionMark[];
+extern const u8 gMonPalette_CircledQuestionMark[];
+extern const u8 gMonShinyPalette_CircledQuestionMark[];
 extern const u8 gMonIcon_QuestionMark[];
 extern const u8 gMonFrontPic_DoubleQuestionMark[];
+extern const u8 gMonBackPic_DoubleQuestionMark[];
+extern const u8 gMonPalette_DoubleQuestionMark[];
+extern const u8 gMonShinyPalette_DoubleQuestionMark[];
 extern const u8 gMonFrontPic_Egg[];
+extern const u8 gMonStillFrontPic_Egg[];
 extern const u8 gMonIcon_Egg[];
 extern const u16 gMonIconPalettes[][16];
 
