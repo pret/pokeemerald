@@ -253,7 +253,7 @@ static void sub_81C4D18(u8 a);
 #include "data/text/move_descriptions.h"
 #include "data/text/nature_names.h"
 
-static const struct BgTemplate gUnknown_0861CBB4[] = 
+static const struct BgTemplate gUnknown_0861CBB4[] =
 {
     {
         .bg = 0,
@@ -526,13 +526,13 @@ static const union AnimCmd *const gSpriteAnimTable_861CF60[] = {
     gSpriteAnim_861CF50,
     gSpriteAnim_861CF58,
 };
-static const struct CompressedSpriteSheet gUnknown_0861CFBC = 
+static const struct CompressedSpriteSheet gUnknown_0861CFBC =
 {
     .data = gMoveTypes_Gfx,
     .size = 0x1700,
     .tag = 30002
 };
-static const struct SpriteTemplate gUnknown_0861CFC4 = 
+static const struct SpriteTemplate gUnknown_0861CFC4 =
 {
     .tileTag = 30002,
     .paletteTag = 30002,
@@ -622,7 +622,7 @@ static const struct CompressedSpritePalette gUnknown_0861D07C =
     .data = gUnknown_08D97CF4,
     .tag = 30000
 };
-static const struct SpriteTemplate gUnknown_0861D084 = 
+static const struct SpriteTemplate gUnknown_0861D084 =
 {
     .tileTag = 30000,
     .paletteTag = 30000,
@@ -696,7 +696,7 @@ static const struct CompressedSpritePalette gUnknown_0861D100 =
     .data = gStatusPal_Icons,
     .tag = 30001
 };
-static const struct SpriteTemplate gUnknown_0861D108 = 
+static const struct SpriteTemplate gUnknown_0861D108 =
 {
     .tileTag = 30001,
     .paletteTag = 30001,
@@ -722,7 +722,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
         pssData->isBoxMon = TRUE;
     else
         pssData->isBoxMon = FALSE;
-    
+
     switch (mode)
     {
     case PSS_MODE_NORMAL:
@@ -747,7 +747,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
 
     if (gMonSpritesGfxPtr == 0)
         sub_806F2AC(0, 0);
-    
+
     SetMainCallback2(SummaryScreen_LoadingCB2);
 }
 
@@ -1029,7 +1029,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
             sum->isEgg = TRUE;
         else
             sum->isEgg = GetMonData(a, MON_DATA_IS_EGG);
-        
+
         break;
     case 1:
         for (i = 0; i < 4; i++)
@@ -1384,7 +1384,7 @@ static void sub_81C0A8C(u8 taskId, s8 b)
         return;
     else if (b == 1 && pssData->currPageIndex == pssData->maxPageIndex)
         return;
-    
+
     PlaySE(SE_SELECT);
     sub_81C2C38(pssData->currPageIndex);
     pssData->currPageIndex += b;
@@ -1751,7 +1751,7 @@ static void SwapMonMoves(struct Pokemon *mon, u8 moveIndex1, u8 moveIndex2)
     SetMonData(mon, MON_DATA_PP1 + moveIndex1, &move2pp);
     SetMonData(mon, MON_DATA_PP1 + moveIndex2, &move1pp);
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
-    
+
     summary->moves[moveIndex1] = move2;
     summary->moves[moveIndex2] = move1;
 
@@ -1786,7 +1786,7 @@ static void SwapBoxMonMoves(struct BoxPokemon *mon, u8 moveIndex1, u8 moveIndex2
     SetBoxMonData(mon, MON_DATA_PP1 + moveIndex1, &move2pp);
     SetBoxMonData(mon, MON_DATA_PP1 + moveIndex2, &move1pp);
     SetBoxMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
-    
+
     summary->moves[moveIndex1] = move2;
     summary->moves[moveIndex2] = move1;
 
@@ -2289,10 +2289,10 @@ static void sub_81C240C(u16 move)
     if (move != MOVE_NONE)
     {
         effectValue = gContestEffects[gContestMoves[move].effect].appeal;
-        
+
         if (effectValue != 0xFF)
             effectValue /= 10;
-        
+
         for (i = 0; i < 8; i++)
         {
             if (effectValue != 0xFF && i < effectValue)
@@ -2309,7 +2309,7 @@ static void sub_81C240C(u16 move)
 
         if (effectValue != 0xFF)
             effectValue /= 10;
-        
+
         for (i = 0; i < 8; i++)
         {
             if (effectValue != 0xFF && i < effectValue)
@@ -2458,21 +2458,21 @@ static void PrintPageNamesAndStatsPageToWindows(void)
         iconXPos = 0;
     PrintAOrBButtonIcon(4, FALSE, iconXPos);
     SummaryScreen_PrintTextOnWindow(4, gText_Cancel2, stringXPos, 1, 0, 0);
-    
+
     stringXPos = GetStringRightAlignXOffset(1, gText_Info, 0x3E);
     iconXPos = stringXPos - 16;
     if (iconXPos < 0)
         iconXPos = 0;
     PrintAOrBButtonIcon(5, FALSE, iconXPos);
     SummaryScreen_PrintTextOnWindow(5, gText_Info, stringXPos, 1, 0, 0);
-    
+
     stringXPos = GetStringRightAlignXOffset(1, gText_Switch, 0x3E);
     iconXPos = stringXPos - 16;
     if (iconXPos < 0)
         iconXPos = 0;
     PrintAOrBButtonIcon(6, FALSE, iconXPos);
     SummaryScreen_PrintTextOnWindow(6, gText_Switch, stringXPos, 1, 0, 0);
-    
+
     SummaryScreen_PrintTextOnWindow(8, gText_RentalPkmn, 0, 1, 0, 1);
     SummaryScreen_PrintTextOnWindow(9, gText_TypeSlash, 0, 1, 0, 0);
     statsXPos = 6 + GetStringCenterAlignXOffset(1, gText_HP4, 42);
@@ -2733,7 +2733,7 @@ static void BufferMonTrainerMemo(void)
 {
     struct PokeSummary *sum = &pssData->summary;
     const u8 *text;
-    
+
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gUnknown_0861CE74);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_0861CE7B);
@@ -2886,7 +2886,7 @@ static void PrintEggState(void)
         text = gText_EggWillTakeSomeTime;
     else
         text = gText_EggWillTakeALongTime;
-    
+
     SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 2), text, 0, 1, 0, 0);
 }
 
@@ -3013,14 +3013,14 @@ static void BufferLeftColumnStats(void)
     ConvertIntToDecimalStringN(maxHPString, pssData->summary.maxHP, 1, 3);
     ConvertIntToDecimalStringN(attackString, pssData->summary.atk, 1, 7);
     ConvertIntToDecimalStringN(defenseString, pssData->summary.def, 1, 7);
-    
+
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, currentHPString);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, maxHPString);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, attackString);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, defenseString);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_0861CE82);
-    
+
     Free(currentHPString);
     Free(maxHPString);
     Free(attackString);
@@ -3037,7 +3037,7 @@ static void BufferRightColumnStats(void)
     ConvertIntToDecimalStringN(gStringVar1, pssData->summary.spatk, 1, 3);
     ConvertIntToDecimalStringN(gStringVar2, pssData->summary.spdef, 1, 3);
     ConvertIntToDecimalStringN(gStringVar3, pssData->summary.speed, 1, 3);
-    
+
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar2);
@@ -3065,7 +3065,7 @@ static void PrintExpPointsNextLevel(void)
         expToNextLevel = gExperienceTables[gBaseStats[sum->species].growthRate][sum->level + 1] - sum->exp;
     else
         expToNextLevel = 0;
-    
+
     ConvertIntToDecimalStringN(gStringVar1, expToNextLevel, 1, 6);
     offset = GetStringRightAlignXOffset(1, gStringVar1, 42) + 2;
     SummaryScreen_PrintTextOnWindow(windowId, gStringVar1, offset, 17, 0, 0);
@@ -3660,7 +3660,7 @@ static void sub_81C48F0(void)
     sub_806EE98();
 
     paletteIndex = (gSprites[pssData->spriteIds[0]].oam.paletteNum * 16) | 0x100;
-    
+
     for (i = 0; i < 16; i++)
     {
         gPlttBufferUnfaded[(u16)(i + paletteIndex)] = gPlttBufferFaded[(u16)(i + paletteIndex)];

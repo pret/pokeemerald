@@ -3233,7 +3233,7 @@ _080DD166:
 	ands r0, r2
 	strb r0, [r1, 0x15]
 _080DD1B4:
-	ldr r0, =gContestEffectFunctionTable
+	ldr r0, =gContestEffectFuncs
 	add r0, r9
 	ldr r0, [r0]
 	bl _call_via_r0
@@ -3506,8 +3506,8 @@ _080DD3C4:
 	.pool
 	thumb_func_end sub_80DD080
 
-	thumb_func_start sub_80DD3D4
-sub_80DD3D4: @ 80DD3D4
+	thumb_func_start SetContestantEffectStringID
+SetContestantEffectStringID: @ 80DD3D4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gContestResources
@@ -3520,10 +3520,10 @@ sub_80DD3D4: @ 80DD3D4
 	strb r1, [r2, 0x13]
 	bx lr
 	.pool
-	thumb_func_end sub_80DD3D4
+	thumb_func_end SetContestantEffectStringID
 
-	thumb_func_start sub_80DD3F0
-sub_80DD3F0: @ 80DD3F0
+	thumb_func_start SetContestantEffectStringID2
+SetContestantEffectStringID2: @ 80DD3F0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gContestResources
@@ -3536,10 +3536,10 @@ sub_80DD3F0: @ 80DD3F0
 	strb r1, [r2, 0x14]
 	bx lr
 	.pool
-	thumb_func_end sub_80DD3F0
+	thumb_func_end SetContestantEffectStringID2
 
-	thumb_func_start sub_80DD40C
-sub_80DD40C: @ 80DD40C
+	thumb_func_start SetStartledString
+SetStartledString: @ 80DD40C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3550,36 +3550,36 @@ sub_80DD40C: @ 80DD40C
 	cmp r1, 0x3B
 	bls _080DD426
 	movs r1, 0x35
-	bl sub_80DD3D4
+	bl SetContestantEffectStringID
 	b _080DD456
 _080DD426:
 	cmp r1, 0x27
 	bls _080DD432
 	movs r1, 0x34
-	bl sub_80DD3D4
+	bl SetContestantEffectStringID
 	b _080DD456
 _080DD432:
 	cmp r1, 0x1D
 	bls _080DD43E
 	movs r1, 0x33
-	bl sub_80DD3D4
+	bl SetContestantEffectStringID
 	b _080DD456
 _080DD43E:
 	cmp r1, 0x13
 	bls _080DD44A
 	movs r1, 0x32
-	bl sub_80DD3D4
+	bl SetContestantEffectStringID
 	b _080DD456
 _080DD44A:
 	cmp r2, 0x9
 	bls _080DD456
 	adds r0, r3, 0
 	movs r1, 0x31
-	bl sub_80DD3D4
+	bl SetContestantEffectStringID
 _080DD456:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80DD40C
+	thumb_func_end SetStartledString
 
 	thumb_func_start sub_80DD45C
 sub_80DD45C: @ 80DD45C
@@ -3678,8 +3678,8 @@ _080DD52C:
 	.pool
 	thumb_func_end sub_80DD45C
 
-	thumb_func_start sub_80DD560
-sub_80DD560: @ 80DD560
+	thumb_func_start MakeContestantNervous
+MakeContestantNervous: @ 80DD560
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3703,7 +3703,7 @@ sub_80DD560: @ 80DD560
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80DD560
+	thumb_func_end MakeContestantNervous
 
 	thumb_func_start sub_80DD590
 sub_80DD590: @ 80DD590

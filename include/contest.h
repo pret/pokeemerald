@@ -415,6 +415,7 @@ extern struct ContestResources *gContestResources;
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
 
 extern u32 gContestRngValue;
+extern u8 gUnknown_02039F26[4];
 
 bool8 IsSpeciesNotUnown(u16 species);
 void LoadContestBgAfterMoveAnim(void);
