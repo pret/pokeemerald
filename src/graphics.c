@@ -1,6 +1,6 @@
 #include "global.h"
 
-const u8 gBattleTextboxTiles[] = INCBIN_U8("graphics/interface/menu.4bpp.lz"); // menu window and arrows
+const u8 gBattleTextboxTiles[] = INCBIN_U8("graphics/interface/menu.4bpp.lz");
 const u8 gBattleTextboxPalette[] = INCBIN_U8("graphics/interface/menu.gbapal.lz");
 const u16 gBattleTextboxTilemap[] = INCBIN_U16("graphics/interface/menu_map.bin.lz");
 
@@ -16,43 +16,7 @@ const u8 gUnusedPal_OldCharmap[] = INCBIN_U8("graphics/unused/old_charmap.gbapal
 const u8 gSmokescreenImpactTiles[] = INCBIN_U8("graphics/battle_anims/sprites/smokescreen_impact.4bpp.lz");
 const u8 gSmokescreenImpactPalette[] = INCBIN_U8("graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz");
 
-const u8 gInterfaceGfx_PokeBall[] = INCBIN_U8("graphics/interface/ball/poke.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_PokeBall[] = INCBIN_U8("graphics/interface/ball/poke.gbapal.lz");
-
-const u8 gInterfaceGfx_GreatBall[] = INCBIN_U8("graphics/interface/ball/great.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_GreatBall[] = INCBIN_U8("graphics/interface/ball/great.gbapal.lz");
-
-const u8 gInterfaceGfx_SafariBall[] = INCBIN_U8("graphics/interface/ball/safari.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_SafariBall[] = INCBIN_U8("graphics/interface/ball/safari.gbapal.lz");
-
-const u8 gInterfaceGfx_UltraBall[] = INCBIN_U8("graphics/interface/ball/ultra.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_UltraBall[] = INCBIN_U8("graphics/interface/ball/ultra.gbapal.lz");
-
-const u8 gInterfaceGfx_MasterBall[] = INCBIN_U8("graphics/interface/ball/master.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_MasterBall[] = INCBIN_U8("graphics/interface/ball/master.gbapal.lz");
-
-const u8 gInterfaceGfx_NetBall[] = INCBIN_U8("graphics/interface/ball/net.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_NetBall[] = INCBIN_U8("graphics/interface/ball/net.gbapal.lz");
-
-const u8 gInterfaceGfx_DiveBall[] = INCBIN_U8("graphics/interface/ball/dive.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_DiveBall[] = INCBIN_U8("graphics/interface/ball/dive.gbapal.lz");
-
-const u8 gInterfaceGfx_NestBall[] = INCBIN_U8("graphics/interface/ball/nest.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_NestBall[] = INCBIN_U8("graphics/interface/ball/nest.gbapal.lz");
-
-const u8 gInterfaceGfx_RepeatBall[] = INCBIN_U8("graphics/interface/ball/repeat.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_RepeatBall[] = INCBIN_U8("graphics/interface/ball/repeat.gbapal.lz");
-
-const u8 gInterfaceGfx_TimerBall[] = INCBIN_U8("graphics/interface/ball/timer.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_TimerBall[] = INCBIN_U8("graphics/interface/ball/timer.gbapal.lz");
-
-const u8 gInterfaceGfx_LuxuryBall[] = INCBIN_U8("graphics/interface/ball/luxury.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_LuxuryBall[] = INCBIN_U8("graphics/interface/ball/luxury.gbapal.lz");
-
-const u8 gInterfaceGfx_PremierBall[] = INCBIN_U8("graphics/interface/ball/premier.4bpp.lz"); // 0xBC
-const u8 gInterfacePal_PremierBall[] = INCBIN_U8("graphics/interface/ball/premier.gbapal.lz");
-
-const u8 gOpenPokeballGfx[] = INCBIN_U8("graphics/interface/ball_open.4bpp.lz");
+#include "graphics/interface_pokeballs.h"
 
 const u8 gBlankGfxCompressed[] = INCBIN_U8("graphics/interface/blank.4bpp.lz");
 
@@ -199,8 +163,6 @@ const u8 gBattleAnimSpriteSheet_044[] = INCBIN_U8("graphics/battle_anims/sprites
 
 const u8 gBattleAnimSpritePalette_045[] = INCBIN_U8("graphics/battle_anims/sprites/045.gbapal.lz");
 const u8 gBattleAnimSpriteSheet_045[] = INCBIN_U8("graphics/battle_anims/sprites/045.4bpp.lz");
-
-// two unused window frames.
 
 const u8 gUnknown_08C08F0C[] = INCBIN_U8("graphics/battle_interface/unused_window.4bpp.lz");
 const u8 gUnknown_08C093C8[] = INCBIN_U8("graphics/battle_interface/unused_window.gbapal.lz");
@@ -1000,94 +962,7 @@ const u8 gUnknown_08D77AE4[] = INCBIN_U8("graphics/battle_transitions/vs_frame.g
 
 const u8 gUnknown_08D77B0C[] = INCBIN_U8("graphics/battle_transitions/vs.4bpp.lz");
 
-const u8 gBattleTerrainTiles_TallGrass[] = INCBIN_U8("graphics/battle_terrain/tall_grass/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_TallGrass[] = INCBIN_U8("graphics/battle_terrain/tall_grass/palette.gbapal.lz");
-const u16 gBattleTerrainTilemap_TallGrass[] = INCBIN_U16("graphics/battle_terrain/tall_grass/map.bin.lz");
-
-const u8 gBattleTerrainTiles_LongGrass[] = INCBIN_U8("graphics/battle_terrain/long_grass/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_LongGrass[] = INCBIN_U8("graphics/battle_terrain/long_grass/palette.gbapal.lz");
-const u16 gBattleTerrainTilemap_LongGrass[] = INCBIN_U16("graphics/battle_terrain/long_grass/map.bin.lz");
-
-const u8 gBattleTerrainTiles_Sand[] = INCBIN_U8("graphics/battle_terrain/sand/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_Sand[] = INCBIN_U8("graphics/battle_terrain/sand/palette.gbapal.lz");
-const u16 gBattleTerrainTilemap_Sand[] = INCBIN_U16("graphics/battle_terrain/sand/map.bin.lz");
-
-const u8 gBattleTerrainTiles_Underwater[] = INCBIN_U8("graphics/battle_terrain/underwater/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_Underwater[] = INCBIN_U8("graphics/battle_terrain/underwater/palette.gbapal.lz");
-const u16 gBattleTerrainTilemap_Underwater[] = INCBIN_U16("graphics/battle_terrain/underwater/map.bin.lz");
-
-const u8 gBattleTerrainTiles_Water[] = INCBIN_U8("graphics/battle_terrain/water/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_Water[] = INCBIN_U8("graphics/battle_terrain/water/palette.gbapal.lz");
-const u16 gBattleTerrainTilemap_Water[] = INCBIN_U16("graphics/battle_terrain/water/map.bin.lz");
-
-const u8 gBattleTerrainTiles_PondWater[] = INCBIN_U8("graphics/battle_terrain/pond_water/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_PondWater[] = INCBIN_U8("graphics/battle_terrain/pond_water/palette.gbapal.lz");
-const u16 gBattleTerrainTilemap_PondWater[] = INCBIN_U16("graphics/battle_terrain/pond_water/map.bin.lz");
-
-const u8 gBattleTerrainTiles_Rock[] = INCBIN_U8("graphics/battle_terrain/rock/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_Rock[] = INCBIN_U8("graphics/battle_terrain/rock/palette.gbapal.lz");
-const u16 gBattleTerrainTilemap_Rock[] = INCBIN_U16("graphics/battle_terrain/rock/map.bin.lz");
-
-const u8 gBattleTerrainTiles_Cave[] = INCBIN_U8("graphics/battle_terrain/cave/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_Cave[] = INCBIN_U8("graphics/battle_terrain/cave/palette.gbapal.lz");
-const u16 gBattleTerrainTilemap_Cave[] = INCBIN_U16("graphics/battle_terrain/cave/map.bin.lz");
-
-const u8 gBattleTerrainPalette_Plain[] = INCBIN_U8("graphics/battle_terrain/plain/palette.gbapal.lz");
-
-const u8 gBattleTerrainTiles_Building[] = INCBIN_U8("graphics/battle_terrain/building/tiles.4bpp.lz");
-const u8 gBattleTerrainPalette_Frontier[] = INCBIN_U8("graphics/battle_terrain/stadium/battle_frontier.gbapal.lz"); // this is also used for link battles
-const u16 gBattleTerrainTilemap_Building[] = INCBIN_U16("graphics/battle_terrain/building/map.bin.lz");
-
-const u8 gBattleTerrainTiles_Stadium[] = INCBIN_U8("graphics/battle_terrain/stadium/tiles.4bpp.lz");
-const u16 gBattleTerrainTilemap_Stadium[] = INCBIN_U16("graphics/battle_terrain/stadium/map.bin.lz");
-
-const u8 gBattleTerrainTiles_Rayquaza[] = INCBIN_U8("graphics/battle_terrain/sky/tiles.4bpp.lz");
-const u16 gBattleTerrainTilemap_Rayquaza[] = INCBIN_U16("graphics/battle_terrain/sky/map.bin.lz");
-
-const u8 gBattleTerrainPalette_Building[] = INCBIN_U8("graphics/battle_terrain/building/palette.gbapal.lz");
-
-const u8 gBattleTerrainPalette_Kyogre[] = INCBIN_U8("graphics/battle_terrain/water/kyogre.gbapal.lz");
-const u8 gBattleTerrainPalette_Groudon[] = INCBIN_U8("graphics/battle_terrain/cave/groudon.gbapal.lz");
-const u8 gBattleTerrainPalette_BuildingGym[] = INCBIN_U8("graphics/battle_terrain/building/palette2.gbapal.lz");
-const u8 gBattleTerrainPalette_BuildingLeader[] = INCBIN_U8("graphics/battle_terrain/building/palette3.gbapal.lz");
-const u8 gBattleTerrainPalette_StadiumAqua[] = INCBIN_U8("graphics/battle_terrain/stadium/palette1.gbapal.lz");
-const u8 gBattleTerrainPalette_StadiumMagma[] = INCBIN_U8("graphics/battle_terrain/stadium/palette2.gbapal.lz");
-const u8 gBattleTerrainPalette_StadiumSidney[] = INCBIN_U8("graphics/battle_terrain/stadium/palette3.gbapal.lz");
-const u8 gBattleTerrainPalette_StadiumPhoebe[] = INCBIN_U8("graphics/battle_terrain/stadium/palette4.gbapal.lz");
-const u8 gBattleTerrainPalette_StadiumGlacia[] = INCBIN_U8("graphics/battle_terrain/stadium/palette5.gbapal.lz");
-const u8 gBattleTerrainPalette_StadiumDrake[] = INCBIN_U8("graphics/battle_terrain/stadium/palette6.gbapal.lz");
-const u8 gBattleTerrainPalette_StadiumWallace[] = INCBIN_U8("graphics/battle_terrain/stadium/palette7.gbapal.lz");
-const u8 gBattleTerrainPalette_Rayquaza[] = INCBIN_U8("graphics/battle_terrain/sky/palette.gbapal.lz");
-
-const u8 gBattleTerrainAnimTiles_TallGrass[] = INCBIN_U8("graphics/battle_terrain/tall_grass/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_TallGrass[] = INCBIN_U16("graphics/battle_terrain/tall_grass/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_LongGrass[] = INCBIN_U8("graphics/battle_terrain/long_grass/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_LongGrass[] = INCBIN_U16("graphics/battle_terrain/long_grass/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_Sand[] = INCBIN_U8("graphics/battle_terrain/sand/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_Sand[] = INCBIN_U16("graphics/battle_terrain/sand/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_Underwater[] = INCBIN_U8("graphics/battle_terrain/underwater/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_Underwater[] = INCBIN_U16("graphics/battle_terrain/underwater/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_Water[] = INCBIN_U8("graphics/battle_terrain/water/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_Water[] = INCBIN_U16("graphics/battle_terrain/water/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_PondWater[] = INCBIN_U8("graphics/battle_terrain/pond_water/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_PondWater[] = INCBIN_U16("graphics/battle_terrain/pond_water/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_Rock[] = INCBIN_U8("graphics/battle_terrain/rock/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_Rock[] = INCBIN_U16("graphics/battle_terrain/rock/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_Cave[] = INCBIN_U8("graphics/battle_terrain/cave/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_Cave[] = INCBIN_U16("graphics/battle_terrain/cave/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_Building[] = INCBIN_U8("graphics/battle_terrain/building/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_Building[] = INCBIN_U16("graphics/battle_terrain/building/anim_map.bin.lz");
-
-const u8 gBattleTerrainAnimTiles_Rayquaza[] = INCBIN_U8("graphics/battle_terrain/sky/anim_tiles.4bpp.lz");
-const u16 gBattleTerrainAnimTilemap_Rayquaza[] = INCBIN_U16("graphics/battle_terrain/sky/anim_map.bin.lz");
+#include "graphics/battle_terrain.h"
 
 const u8 gUnknown_08D82F10[] = INCBIN_U8("graphics/battle_frontier/tourney_bg.4bpp.lz");
 const u8 gUnknown_08D834FC[] = INCBIN_U8("graphics/battle_frontier/tourney_line.4bpp.lz"); // the red glow mask for the tourney advancement lines
@@ -1128,56 +1003,7 @@ const u16 gUnknown_08D856C8[] = INCBIN_U16("graphics/battle_frontier/pyramid_lig
 const u16 gUnknown_08D857A8[] = INCBIN_U16("graphics/battle_frontier/battle_tilemap1.bin.lz");
 const u16 gUnknown_08D85A1C[] = INCBIN_U16("graphics/battle_frontier/battle_tilemap2.bin.lz");
 
-// Intro
-
-const u16 gIntro1GameFreakTextFadePal[] = INCBIN_U16("graphics/intro/intro1_text.gbapal"); // game freak text blue fade
-const u16 gIntro2BrendanNoTurnPal[] = INCBIN_U16("graphics/intro/intro2_brendan_noturn.gbapal");
-const u16 gIntro3BgPal[] = INCBIN_U16("graphics/intro/intro3.gbapal");
-const u16 gIntro2VolbeatPal[] = INCBIN_U16("graphics/intro/intro2_volbeat.gbapal");
-const u16 gIntro2TorchicPal[] = INCBIN_U16("graphics/intro/intro2_torchic.gbapal");
-const u16 gIntro2ManectricPal[] = INCBIN_U16("graphics/intro/intro2_manectric.gbapal");
-const u16 gIntro2FlygonPal[] = INCBIN_U16("graphics/intro/intro2_flygon.gbapal");
-
-const u8 gIntro2VolbeatGfx[] = INCBIN_U8("graphics/intro/intro2_volbeat.4bpp.lz");
-const u8 gIntro2TorchicGfx[] = INCBIN_U8("graphics/intro/intro2_torchic.4bpp.lz");
-const u8 gIntro2ManectricGfx[] = INCBIN_U8("graphics/intro/intro2_manectric.4bpp.lz");
-const u8 gIntro2FlygonGfx[] = INCBIN_U8("graphics/intro/intro2_flygon.4bpp.lz");
-const u8 gIntro2BrendanNoTurnGfx[] = INCBIN_U8("graphics/intro/intro2_brendan_noturn.4bpp.lz");
-const u8 gIntro2MayNoTurnGfx[] = INCBIN_U8("graphics/intro/intro2_may_noturn.4bpp.lz");
-
-const u16 gIntro3GroudonGfx[] = INCBIN_U16("graphics/intro/intro3_groudon.8bpp.lz");
-const u16 gIntro3GroudonTilemap[] = INCBIN_U16("graphics/intro/intro3_groudon.bin.lz");
-
-const u16 gIntro3KyogreGfx[] = INCBIN_U16("graphics/intro/intro3_kyogre.8bpp.lz");
-const u16 gIntro3KyogreTilemap[] = INCBIN_U16("graphics/intro/intro3_kyogre.bin.lz");
-
-const u8 gIntro3LegendBgGfx[] = INCBIN_U8("graphics/intro/legend_bg.4bpp.lz"); // groudon/kyogre/bg
-
-const u16 gIntro3GroudonBgTilemap[] = INCBIN_U16("graphics/intro/legend_bg1.bin.lz");
-const u16 gIntro3KyogreBgTilemap[] = INCBIN_U16("graphics/intro/legend_bg2.bin.lz");
-
-const u8 gIntro3CloudsGfx[] = INCBIN_U8("graphics/intro/intro3_clouds.4bpp.lz");
-const u16 gIntro3Clouds1Tilemap[] = INCBIN_U16("graphics/intro/intro3_clouds1.bin.lz");
-const u16 gIntro3Clouds2Tilemap[] = INCBIN_U16("graphics/intro/intro3_clouds2.bin.lz");
-const u16 gIntro3Clouds3Tilemap[] = INCBIN_U16("graphics/intro/intro3_clouds3.bin.lz");
-
-const u8 gIntro3LightningGfx[] = INCBIN_U8("graphics/intro/intro3_lightning.4bpp.lz");
-const u16 gIntro3LightningPal[] = INCBIN_U16("graphics/intro/intro3_lightning.gbapal");
-
-const u8 gIntro3RayquazaGfx[] = INCBIN_U8("graphics/intro/intro3_rayquaza.4bpp.lz");
-const u16 gIntro3RayquazaTilemap[] = INCBIN_U16("graphics/intro/intro3_rayquaza.bin.lz");
-
-const u16 gUnknown_D8C374[] = INCBIN_U16("graphics/unknown/unknown_D8C374.bin.lz");
-const u16 gUnknown_D8C5C4[] = INCBIN_U16("graphics/unknown/unknown_D8C5C4.bin.lz");
-
-const u8 gIntro3Clouds2Gfx[] = INCBIN_U8("graphics/intro/intro3_clouds2.4bpp.lz"); //clouds 2, during the rayquaza flash
-const u16 gIntro3Clouds4Tilemap[] = INCBIN_U16("graphics/intro/intro3_clouds4.bin.lz");
-
-const u8 gIntro2BubblesGfx[] = INCBIN_U8("graphics/intro/intro2_bubbles.4bpp.lz");
-const u16 gIntro2BubblesPal[] = INCBIN_U16("graphics/intro/intro2_bubbles.gbapal");
-
-const u8 gIntro1FlygonGfx[] = INCBIN_U8("graphics/intro/intro1_flygon.4bpp.lz");
-const u8 gIntro1SparkleGfx[] = INCBIN_U8("graphics/intro/intro1_sparkle.4bpp.lz");
+#include "graphics/intro_scene.h"
 
 const u8 gBattleAnimSpriteSheet_261[] = INCBIN_U8("graphics/battle_anims/sprites/261.4bpp.lz");
 
@@ -1393,81 +1219,7 @@ const u8 gPokeblockGold_Pal[] = INCBIN_U8("graphics/pokeblock/gold.gbapal.lz");
 const u16 gUnknown_08D9BA44[] = INCBIN_U16("graphics/interface/pokeblock_feeding_bg_map.bin.lz");
 
 #include "graphics/berries.h"
-
-const u8 gRaySceneGroudon_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/groudon.4bpp.lz");
-const u8 gRaySceneGroudon2_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/groudon_shoulder.4bpp.lz");
-const u8 gRaySceneGroudon3_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/groudon_claw.4bpp.lz");
-
-const u8 gRaySceneKyogre_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/kyogre.4bpp.lz");
-const u8 gRaySceneKyogre2_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/kyogre_shoulder.4bpp.lz");
-const u8 gRaySceneKyogre3_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/kyogre_fin.4bpp.lz");
-
-const u8 gRaySceneGroudon_Pal[] = INCBIN_U8("graphics/rayquaza_scene/groudon.gbapal.lz");
-const u8 gRaySceneKyogre_Pal[] = INCBIN_U8("graphics/rayquaza_scene/kyogre.gbapal.lz");
-
-const u8 gRaySceneClouds_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/clouds.4bpp.lz");
-const u8 gRaySceneClouds_Pal[] = INCBIN_U8("graphics/rayquaza_scene/clouds.gbapal.lz"); // pal 1 clouds, pal 2 rain
-const u16 gRaySceneClouds1_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/clouds1.bin.lz");
-const u16 gRaySceneClouds2_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/clouds2.bin.lz");
-const u16 gRaySceneClouds3_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/clouds3.bin.lz");
-
-const u8 gRaySceneSmoke_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/smoke.4bpp.lz");
-const u8 gRaySceneSmoke_Pal[] = INCBIN_U8("graphics/rayquaza_scene/smoke.gbapal.lz");
-
-const u16 gRaySceneRayquaza_Gfx[] = INCBIN_U16("graphics/rayquaza_scene/rayquaza.8bpp.lz");
-const u8 gRaySceneRayquaza_Pal[] = INCBIN_U8("graphics/rayquaza_scene/rayquaza.gbapal.lz");
-const u16 gRaySceneRayquaza_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/rayquaza.bin.lz");
-
-const u8 gRaySceneOvercast_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/overcast.4bpp.lz"); // uses pal 2 of gRaySceneRayquaza_Pal
-const u16 gRaySceneOvercast_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/overcast.bin.lz");
-
-const u8 gRaySceneRayquazaFly1_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/rayquaza_fly1.4bpp.lz");
-const u8 gRaySceneRayquazaTail_Gfx[] = INCBIN_U8( "graphics/rayquaza_scene/rayquaza_tail_fix.4bpp.lz"); // for some reason there are an extra 0xC bytes at the end of the original 4bpp, so in order to produce the correct lz, we have to cat the bytes at the end with a make rule. not sure why those bytes are there, it may have been a bug in Game Freak's software.
-
-const u8 gRaySceneOvercast2_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/overcast2.4bpp.lz");
-
-const u8 gRaySceneRayquazaLight_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/rayquaza_light.4bpp.lz"); // uses pal 2 of gRaySceneOvercast2_Pal
-
-const u8 gRaySceneOvercast2_Pal[] = INCBIN_U8("graphics/rayquaza_scene/overcast2.gbapal.lz");
-const u16 gRaySceneOvercast2_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/overcast2.bin.lz");
-
-const u8 gRaySceneRayquazaLight_Tilemap[] = INCBIN_U8("graphics/rayquaza_scene/rayquaza_light.bin.lz");
-
-const u8 gRaySceneChaseBg_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/chase_bg.4bpp.lz");
-const u16 gRaySceneChaseBg_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/chase_bg.bin.lz");
-
-const u8 gRaySceneChaseStreaks_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/chase_streaks.4bpp.lz");
-const u16 gRaySceneChaseStreaks_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/chase_streaks.bin.lz");
-
-const u8 gRaySceneRayquazaChase_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/rayquaza_chase.4bpp.lz");
-const u16 gRayChaseRayquazaChase_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/rayquaza_chase.bin.lz");
-const u16 gRayChaseRayquazaChase2_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/rayquaza_chase2.bin.lz");
-
-const u8 gRaySceneChase_Pal[] = INCBIN_U8("graphics/rayquaza_scene/chase.gbapal.lz");
-
-const u8 gRaySceneGroudonLeft_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/groudon_left.4bpp.lz");
-const u8 gRaySceneGroudonTail_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/groudon_tail.4bpp.lz");
-
-const u8 gRaySceneKyogreRight_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/kyogre_right.4bpp.lz");
-
-const u8 gRaySceneRayquazaHover_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/rayquaza_hover.4bpp.lz");
-const u8 gRaySceneRayquazaFlyIn_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/rayquaza_flyin.4bpp.lz");
-
-const u8 gRaySceneSplash_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/splash.4bpp.lz");
-
-const u8 gRaySceneGroudonLeft_Pal[] = INCBIN_U8("graphics/rayquaza_scene/groudon_left.gbapal.lz");
-const u8 gRaySceneKyogreRight_Pal[] = INCBIN_U8("graphics/rayquaza_scene/kyogre_right.gbapal.lz");
-const u8 gRaySceneRayquazaHover_Pal[] = INCBIN_U8("graphics/rayquaza_scene/rayquaza_hover.gbapal.lz");
-
-const u8 gRaySceneSplash_Pal[] = INCBIN_U8("graphics/rayquaza_scene/splash.gbapal.lz");
-
-const u8 gRaySceneHushBg_Gfx[] = INCBIN_U8("graphics/rayquaza_scene/hush_bg.4bpp.lz");
-const u16 gRaySceneHushRing_Gfx[] = INCBIN_U16("graphics/rayquaza_scene/hush_ring.8bpp.lz");
-const u16 gRaySceneHushBg_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/hush_bg.bin.lz");
-const u16 gRaySceneHushRing_Tilemap[] = INCBIN_U16("graphics/rayquaza_scene/hush_ring.bin.lz");
-const u16 gRaySceneHushRing_Map[] = INCBIN_U16("graphics/rayquaza_scene/hush_ring_map.bin.lz");
-const u8 gRaySceneHushBg_Pal[] = INCBIN_U8("graphics/rayquaza_scene/hush_bg.gbapal.lz");
-
+#include "graphics/rayquaza_scene.h"
 #include "graphics/items.h"
 #include "graphics/decorations.h"
 
@@ -1496,46 +1248,7 @@ const u8 gRouletteCreditTiles[] = INCBIN_U8("graphics/roulette/credit.4bpp.lz");
 const u8 gRouletteNumbersTiles[] = INCBIN_U8("graphics/roulette/numbers.4bpp.lz");
 const u8 gRouletteMultiplierTiles[] = INCBIN_U8("graphics/roulette/multiplier.4bpp.lz");
 
-const u16 gMailPalette_Orange[] = INCBIN_U16("graphics/mail/orange/palette.gbapal");
-const u16 gMailPalette_Harbor[] = INCBIN_U16("graphics/mail/harbor/palette.gbapal");
-const u16 gMailPalette_Glitter[] = INCBIN_U16("graphics/mail/glitter/palette.gbapal");
-const u16 gMailPalette_Mech[] = INCBIN_U16("graphics/mail/mech/palette.gbapal");
-const u16 gMailPalette_Wood[] = INCBIN_U16("graphics/mail/wood/palette.gbapal");
-const u16 gMailPalette_Wave[] = INCBIN_U16("graphics/mail/wave/palette.gbapal");
-const u16 gMailPalette_Bead[] = INCBIN_U16("graphics/mail/bead/palette.gbapal");
-const u16 gMailPalette_Shadow[] = INCBIN_U16("graphics/mail/shadow/palette.gbapal");
-const u16 gMailPalette_Tropic[] = INCBIN_U16("graphics/mail/tropic/palette.gbapal");
-const u16 gMailPalette_Dream[] = INCBIN_U16("graphics/mail/dream/palette.gbapal");
-const u16 gMailPalette_Fab[] = INCBIN_U16("graphics/mail/fab/palette.gbapal");
-const u16 gMailPalette_Retro[] = INCBIN_U16("graphics/mail/retro/palette.gbapal");
-
-const u8 gMailTiles_Orange[] = INCBIN_U8("graphics/mail/orange/tiles.4bpp.lz");
-const u8 gMailTiles_Harbor[] = INCBIN_U8("graphics/mail/harbor/tiles.4bpp.lz");
-const u8 gMailTiles_Glitter[] = INCBIN_U8("graphics/mail/glitter/tiles.4bpp.lz");
-const u8 gMailTiles_Mech[] = INCBIN_U8("graphics/mail/mech/tiles.4bpp.lz");
-const u8 gMailTiles_Wood[] = INCBIN_U8("graphics/mail/wood/tiles.4bpp.lz");
-const u8 gMailTiles_Wave[] = INCBIN_U8("graphics/mail/wave/tiles.4bpp.lz");
-const u8 gMailTiles_Bead[] = INCBIN_U8("graphics/mail/bead/tiles.4bpp.lz");
-const u8 gMailTiles_Shadow[] = INCBIN_U8("graphics/mail/shadow/tiles.4bpp.lz");
-const u8 gMailTiles_Tropic[] = INCBIN_U8("graphics/mail/tropic/tiles.4bpp.lz");
-const u8 gMailTiles_Dream[] = INCBIN_U8("graphics/mail/dream/tiles.4bpp.lz");
-const u8 gMailTiles_Fab[] = INCBIN_U8("graphics/mail/fab/tiles.4bpp.lz");
-const u8 gMailTiles_Retro[] = INCBIN_U8("graphics/mail/retro/tiles.4bpp.lz");
-
-const u16 gMailTilemap_Orange[] = INCBIN_U16("graphics/mail/orange/map.bin.lz");
-const u16 gMailTilemap_Harbor[] = INCBIN_U16("graphics/mail/harbor/map.bin.lz");
-const u16 gMailTilemap_Glitter[] = INCBIN_U16("graphics/mail/glitter/map.bin.lz");
-const u16 gMailTilemap_Mech[] = INCBIN_U16("graphics/mail/mech/map.bin.lz");
-const u16 gMailTilemap_Wood[] = INCBIN_U16("graphics/mail/wood/map.bin.lz");
-const u16 gMailTilemap_Wave[] = INCBIN_U16("graphics/mail/wave/map.bin.lz");
-const u16 gMailTilemap_Bead[] = INCBIN_U16("graphics/mail/bead/map.bin.lz");
-const u16 gMailTilemap_Shadow[] = INCBIN_U16("graphics/mail/shadow/map.bin.lz");
-const u16 gMailTilemap_Tropic[] = INCBIN_U16("graphics/mail/tropic/map.bin.lz");
-const u16 gMailTilemap_Dream[] = INCBIN_U16("graphics/mail/dream/map.bin.lz");
-const u16 gMailTilemap_Fab[] = INCBIN_U16("graphics/mail/fab/map.bin.lz");
-const u16 gMailTilemap_Retro[] = INCBIN_U16("graphics/mail/retro/map.bin.lz");
-
-// OK
+#include "graphics/mail.h"
 
 const u16 gFrontierFactorySelectMenu_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_menu1.gbapal");
 const u16 gFrontierFactorySelectMenu_Pal2[] = INCBIN_U16("graphics/battle_frontier/factory_menu2.gbapal");
@@ -1711,68 +1424,7 @@ const u8 gUsePokeblockGraph_Gfx[] = INCBIN_U8("graphics/pokeblock/use_screen/gra
 const u16 gUsePokeblockGraph_Tilemap[] = INCBIN_U16("graphics/pokeblock/use_screen/graph.bin.lz");
 const u16 gUsePokeblockNatureWin_Pal[] = INCBIN_U16("graphics/pokeblock/use_screen/nature.gbapal");
 
-// slot machine
-
-const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/menu.gbapal");
-const u8 gSlotMachineMenu_Gfx[] = INCBIN_U8("graphics/slot_machine/menu.4bpp.lz");
-const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
-
-const u16 gUnknown_08DCEC70[] = INCBIN_U16("graphics/slot_machine/slots_layout.bin");
-
-const u16 gUnknown_08DCF170[] = INCBIN_U16("graphics/slot_machine/reel_symbols/1.gbapal");
-
-const u16 gUnknown_08DCF190[] = INCBIN_U16("graphics/slot_machine/reel_pikachu.gbapal");
-
-const u16 gUnknown_08DCF1B0[] = INCBIN_U16("graphics/slot_machine/shadow.gbapal");
-
-const u16 gSlotMachineReelTime_Pal[] = INCBIN_U16("graphics/slot_machine/reel_time.gbapal");
-
-const u16 gUnknown_08DCF1F0[] = INCBIN_U16("graphics/slot_machine/smoke.gbapal"); // also duck and pika aura
-
-const u16 gUnknown_08DCF210[] = INCBIN_U16("graphics/slot_machine/reel_time_explosion/0.gbapal");
-
-const u16 gUnknown_08DCF230[] = INCBIN_U16("graphics/slot_machine/spr6.gbapal");
-
-const u8 gSlotMachineReelSymbol1Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/1.4bpp");
-const u8 gSlotMachineReelSymbol2Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/2.4bpp");
-const u8 gSlotMachineReelSymbol3Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/3.4bpp");
-const u8 gSlotMachineReelSymbol4Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/4.4bpp");
-const u8 gSlotMachineReelSymbol5Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/5.4bpp");
-const u8 gSlotMachineReelSymbol6Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/6.4bpp");
-const u8 gSlotMachineReelSymbol7Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/7.4bpp");
-
-const u8 gSlotMachineReelTime_Gfx[] = INCBIN_U8("graphics/slot_machine/reel_time.4bpp.lz");
-
-const u8 gSlotMachineNumber0Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/0.4bpp");
-const u8 gSlotMachineNumber1Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/1.4bpp");
-const u8 gSlotMachineNumber2Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/2.4bpp");
-const u8 gSlotMachineNumber3Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/3.4bpp");
-const u8 gSlotMachineNumber4Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/4.4bpp");
-const u8 gSlotMachineNumber5Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/5.4bpp");
-const u8 gSlotMachineNumber6Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/6.4bpp");
-const u8 gSlotMachineNumber7Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/7.4bpp");
-const u8 gSlotMachineNumber8Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/8.4bpp");
-const u8 gSlotMachineNumber9Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/9.4bpp");
-
-const u8 gSlotMachineReelTimeBolt[] = INCBIN_U8("graphics/slot_machine/bolt.4bpp");
-const u8 gSlotMachineReelTimeDuck[] = INCBIN_U8("graphics/slot_machine/duck.4bpp");
-const u8 gSlotMachineReelTimeSmoke[] = INCBIN_U8("graphics/slot_machine/smoke.4bpp");
-
-const u8 gSlotMachineReelTimeNumber0[] = INCBIN_U8("graphics/slot_machine/reel_time_numbers/0.4bpp");
-const u8 gSlotMachineReelTimeNumber1[] = INCBIN_U8("graphics/slot_machine/reel_time_numbers/1.4bpp");
-const u8 gSlotMachineReelTimeNumber2[] = INCBIN_U8("graphics/slot_machine/reel_time_numbers/2.4bpp");
-const u8 gSlotMachineReelTimeNumber3[] = INCBIN_U8("graphics/slot_machine/reel_time_numbers/3.4bpp");
-const u8 gSlotMachineReelTimeNumber4[] = INCBIN_U8("graphics/slot_machine/reel_time_numbers/4.4bpp");
-const u8 gSlotMachineReelTimeNumber5[] = INCBIN_U8("graphics/slot_machine/reel_time_numbers/5.4bpp");
-
-const u8 gSlotMachineReelTimeLargeBolt0[] = INCBIN_U8("graphics/slot_machine/large_bolt/0.4bpp");
-const u8 gSlotMachineReelTimeLargeBolt1[] = INCBIN_U8("graphics/slot_machine/large_bolt/1.4bpp");
-
-const u8 gSlotMachineReelTimeExplosion0[] = INCBIN_U8("graphics/slot_machine/reel_time_explosion/0.4bpp");
-const u8 gSlotMachineReelTimeExplosion1[] = INCBIN_U8("graphics/slot_machine/reel_time_explosion/1.4bpp");
-
-const u8 gSlotMachineReelTimeShadow[] = INCBIN_U8("graphics/slot_machine/shadow.4bpp");
-const u8 gSlotMachineReelTimePikaAura[] = INCBIN_U8("graphics/slot_machine/pika_aura.4bpp");
+#include "graphics/slot_machine.h"
 
 const u16 gUnknown_08DD19F8[] = INCBIN_U16("graphics/unknown/unknown_DD19F8.bin");
 
@@ -1833,22 +1485,25 @@ const u16 gUnknown_08DD4C4C[] = INCBIN_U16("graphics/link/link_winedge.bin.lz");
 
 const u8 gUnknown_08DD4CF8[] = INCBIN_U8("graphics/interface/unk_change_case.4bpp.lz");
 
-const u16 gTilesetPalettes_General[] = INCBIN_U16("data/tilesets/primary/general/palettes/00.gbapal");
-const u16 gTilesetPalettes_General1[] = INCBIN_U16("data/tilesets/primary/general/palettes/01.gbapal");
-const u16 gTilesetPalettes_General2[] = INCBIN_U16("data/tilesets/primary/general/palettes/02.gbapal");
-const u16 gTilesetPalettes_General3[] = INCBIN_U16("data/tilesets/primary/general/palettes/03.gbapal");
-const u16 gTilesetPalettes_General4[] = INCBIN_U16("data/tilesets/primary/general/palettes/04.gbapal");
-const u16 gTilesetPalettes_General5[] = INCBIN_U16("data/tilesets/primary/general/palettes/05.gbapal");
-const u16 gTilesetPalettes_General6[] = INCBIN_U16("data/tilesets/primary/general/palettes/06.gbapal");
-const u16 gTilesetPalettes_General7[] = INCBIN_U16("data/tilesets/primary/general/palettes/07.gbapal");
-const u16 gTilesetPalettes_General8[] = INCBIN_U16("data/tilesets/primary/general/palettes/08.gbapal");
-const u16 gTilesetPalettes_General9[] = INCBIN_U16("data/tilesets/primary/general/palettes/09.gbapal");
-const u16 gTilesetPalettes_General10[] = INCBIN_U16("data/tilesets/primary/general/palettes/10.gbapal");
-const u16 gTilesetPalettes_General11[] = INCBIN_U16("data/tilesets/primary/general/palettes/11.gbapal");
-const u16 gTilesetPalettes_General12[] = INCBIN_U16("data/tilesets/primary/general/palettes/12.gbapal");
-const u16 gTilesetPalettes_General13[] = INCBIN_U16("data/tilesets/primary/general/palettes/13.gbapal");
-const u16 gTilesetPalettes_General14[] = INCBIN_U16("data/tilesets/primary/general/palettes/14.gbapal");
-const u16 gTilesetPalettes_General15[] = INCBIN_U16("data/tilesets/primary/general/palettes/15.gbapal");
+const u16 gTilesetPalettes_General[][16] = 
+{
+    INCBIN_U16("data/tilesets/primary/general/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general/palettes/15.gbapal"),
+};
 
 const u8 gTilesetTiles_General[] = INCBIN_U8("data/tilesets/primary/general/tiles.4bpp.lz");
 
@@ -1861,31 +1516,7 @@ const u8 gTradeGba_Gfx[] = INCBIN_U8("graphics/link/gba.4bpp");
 // 8DD8760
 asm(".space 0x20"); //blank palette??
 
-// berry fix program
-
-const u16 gBerryFixGameboy_Pal[] = INCBIN_U16("graphics/berry_fix/gba_small.gbapal");
-const u8 gBerryFixGameboy_Gfx[] = INCBIN_U8("graphics/berry_fix/gba_small.4bpp.lz");
-const u16 gBerryFixGameboy_Tilemap[] = INCBIN_U16("graphics/berry_fix/gba_small.bin.lz");
-
-const u16 gBerryFixGameboyLogo_Pal[] = INCBIN_U16("graphics/berry_fix/logo.gbapal");
-const u8 gBerryFixGameboyLogo_Gfx[] = INCBIN_U8("graphics/berry_fix/logo.4bpp.lz");
-const u16 gBerryFixGameboyLogo_Tilemap[] = INCBIN_U16("graphics/berry_fix/logo.bin.lz");
-
-const u16 gBerryFixGbaTransfer_Pal[] = INCBIN_U16("graphics/berry_fix/gba_transfer.gbapal");
-const u8 gBerryFixGbaTransfer_Gfx[] = INCBIN_U8("graphics/berry_fix/gba_transfer.4bpp.lz");
-const u16 gBerryFixGbaTransfer_Tilemap[] = INCBIN_U16("graphics/berry_fix/gba_transfer.bin.lz");
-
-const u16 gBerryFixGbaTransferHighlight_Pal[] = INCBIN_U16("graphics/berry_fix/gba_transfer_highlight.gbapal");
-const u8 gBerryFixGbaTransferHighlight_Gfx[] = INCBIN_U8("graphics/berry_fix/gba_transfer_highlight.4bpp.lz");
-const u16 gBerryFixGbaTransferHighlight_Tilemap[] = INCBIN_U16("graphics/berry_fix/gba_transfer_highlight.bin.lz");
-
-const u16 gBerryFixGbaTransferError_Pal[] = INCBIN_U16("graphics/berry_fix/gba_transfer_error.gbapal");
-const u8 gBerryFixGbaTransferError_Gfx[] = INCBIN_U8("graphics/berry_fix/gba_transfer_error.4bpp.lz");
-const u16 gBerryFixGbaTransferError_Tilemap[] = INCBIN_U16("graphics/berry_fix/gba_transfer_error.bin.lz");
-
-const u16 gBerryFixWindow_Pal[] = INCBIN_U16("graphics/berry_fix/window.gbapal");
-const u8 gBerryFixWindow_Gfx[] = INCBIN_U8("graphics/berry_fix/window.4bpp.lz");
-const u16 gBerryFixWindow_Tilemap[] = INCBIN_U16("graphics/berry_fix/window.bin.lz");
+#include "graphics/berry_fix.h"
 
 // more trade stuff?
 
@@ -1910,14 +1541,20 @@ const u8 gWallpaperIcon_Cross[] = INCBIN_U8("graphics/pokemon_storage/cross_icon
 const u8 gWallpaperIcon_Bolt[] = INCBIN_U8("graphics/pokemon_storage/bolt_icon.4bpp.lz");
 const u8 gWallpaperIcon_Plusle[] = INCBIN_U8("graphics/pokemon_storage/plusle_icon.4bpp.lz");
 
-const u16 gWallpaperPalettes_Horizontal[] = INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal");
-const u16 gWallpaperPalettes_Horizontal2[] = INCBIN_U16("graphics/pokemon_storage/horizontal_bg.gbapal");
+const u16 gWallpaperPalettes_Horizontal[][16] =
+{
+    INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/horizontal_bg.gbapal"),
+};
 
 const u8 gWallpaperTiles_Horizontal[] = INCBIN_U8("graphics/pokemon_storage/horizontal.4bpp.lz");
 const u16 gWallpaperTilemap_Horizontal[] = INCBIN_U16("graphics/pokemon_storage/horizontal.bin.lz");
 
-const u16 gWallpaperPalettes_Ribbon[] = INCBIN_U16("graphics/pokemon_storage/ribbon_frame.gbapal");
-const u16 gWallpaperPalettes_Ribbon2[] = INCBIN_U16("graphics/pokemon_storage/ribbon_bg.gbapal");
+const u16 gWallpaperPalettes_Ribbon[][16] =
+{
+    INCBIN_U16("graphics/pokemon_storage/ribbon_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/ribbon_bg.gbapal"),
+};
 
 const u8 gWallpaperTiles_Ribbon[] = INCBIN_U8("graphics/pokemon_storage/ribbon.4bpp.lz");
 const u16 gWallpaperTilemap_Ribbon[] = INCBIN_U16("graphics/pokemon_storage/ribbon.bin.lz");
@@ -1928,9 +1565,12 @@ const u16 gUnknown_08DDE010[] = INCBIN_U16("graphics/pokenav/ribbons.gbapal");
 const u8 gUnknown_08DDE030[] = INCBIN_U8("graphics/pokenav/ribbons.4bpp.lz");
 const u16 gUnknown_08DDE12C[] = INCBIN_U16("graphics/pokenav/ribbons.bin.lz");
 
-const u16 gMonIconPalettes[] = INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal");
-const u16 gMonIconPalettes1[] = INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_1.gbapal");
-const u16 gMonIconPalettes2[] = INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_2.gbapal");
+const u16 gMonIconPalettes[][16] =
+{
+    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_1.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_2.gbapal"),
+};
 
 const u16 gTitleScreenBgPalettes[] = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal");
 const u16 gTitleScreenBgPalettes2[] = INCBIN_U16("graphics/title_screen/rayquaza_and_clouds.gbapal");
