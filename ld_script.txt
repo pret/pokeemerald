@@ -1141,6 +1141,7 @@ SECTIONS {
     gfx_data :
     ALIGN(4)
     {
+        src/graphics.o(.rodata);
         data/graphics.o(gfx_data);
     } =0
 
