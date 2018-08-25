@@ -362,7 +362,7 @@ struct BattleFrontier
     /*0xC14*/ u16 ecwords_C14[6];
     /*0xC20*/ u8 filler_C20[0x88];
     /*0xCA8*/ u8 field_CA8;
-    /*0xCA9*/ u8 chosenLvl:2; // 0x1, 0x2 -> 0x3
+    /*0xCA9*/ u8 lvlMode:2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a:1;   // 0x4
     /*0xCA9*/ u8 field_CA9_b:1;   // 0x8
     /*0xCA9*/ u8 field_CA9_c:1;   // 0x10

@@ -634,18 +634,7 @@ gFacilityTrainerMons: @ 203BC8C
     .include "src/recorded_battle.o"
     .include "src/trainer_pokemon_sprites.o"
     .include "src/lilycove_lady.o"
-
-gUnknown_0203CD70: @ 203CD70
-	.space 0x4
-
-gUnknown_0203CD74: @ 203CD74
-	.space 0x4
-
-gUnknown_0203CD78: @ 203CD78
-	.space 0x4
-
-gUnknown_0203CD7C: @ 203CD7C
-	.space 0x4
+    .include "src/battle_dome.o"
 
 gUnknown_0203CD80: @ 203CD80
 	.space 0x8

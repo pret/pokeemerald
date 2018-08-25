@@ -13,6 +13,7 @@
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
 #include "constants/songs.h"
+#include "constants/battle_frontier.h"
 #include "string_util.h"
 #include "text.h"
 #include "link.h"
@@ -1575,8 +1576,8 @@ void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lv
     u8 language;
     u8 value;
 
-    if (gSaveBlock2Ptr->frontier.chosenLvl != 0)
-        level = BattleFrontierGetOpponentLvl(gSaveBlock2Ptr->frontier.chosenLvl);
+    if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
+        level = BattleFrontierGetOpponentLvl(gSaveBlock2Ptr->frontier.lvlMode);
     else if (lvl50)
         level = 50;
     else

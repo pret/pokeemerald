@@ -242,7 +242,7 @@ SECTIONS {
         src/battle_controller_recorded_player.o(.text);
         src/trainer_pokemon_sprites.o(.text);
         src/lilycove_lady.o(.text);
-        src/battle_frontier_1.o(.text);
+        src/battle_dome.o(.text);
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
         asm/battle_frontier_2.o(.text);
@@ -522,7 +522,7 @@ SECTIONS {
         src/battle_controller_recorded_player.o(.rodata);
         src/trainer_pokemon_sprites.o(.rodata);
         src/lilycove_lady.o(.rodata);
-        src/battle_frontier_1.o(.rodata);
+        src/battle_dome.o(.rodata);
         data/battle_frontier_1.o(.rodata);
         src/menu.o(.rodata);
         data/battle_frontier_2.o(.rodata);

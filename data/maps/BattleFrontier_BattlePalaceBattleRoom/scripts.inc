@@ -459,7 +459,7 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_24FEB6: @ 824FEB6
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FEBB:: @ 824FEBB
-	copyvar VAR_RESULT, VAR_0x40CE
+	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FED5
 	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 5, 7

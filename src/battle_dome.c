@@ -1,7 +1,7 @@
 #include "global.h"
+#include "battle_dome.h"
 #include "battle.h"
 #include "battle_setup.h"
-#include "battle_frontier_1.h"
 #include "battle_tower.h"
 #include "battle_message.h"
 #include "event_data.h"
@@ -30,6 +30,7 @@
 #include "constants/trainers.h"
 #include "constants/abilities.h"
 #include "constants/songs.h"
+#include "constants/battle_frontier.h"
 
 #define DOME_ROUND1 0
 #define DOME_ROUND2 1
@@ -47,11 +48,18 @@ struct FacilityMon
     u8 nature;
 };
 
-struct Unknown_0203CD78_Struct
+struct BattleDomeStruct
 {
-    u8 arr[16];
+    u8 arr[DOME_TOURNAMENT_TRAINERS_COUNT];
     u8 unk_10;
     u8 unk_11[3];
+};
+
+struct UnkStruct_860DD10
+{
+    u8 x;
+    u8 y;
+    u16 src;
 };
 
 extern void sub_81B8558(void);
@@ -59,7 +67,6 @@ extern u32 sub_81A39C4(void);
 extern u16 sub_8162548(u8, u8);
 extern u16 RandomizeFacilityTrainerMonId(u16);
 extern u8 GetFrontierEnemyMonLevel(void);
-extern void CopyDomeTrainerName(u8 *dst, u16 trainerId);
 extern u16 sub_81A5060(u8 monId, u8 moveSlotId);
 extern u8 sub_81A50F0(u8, u8);
 extern u8 sub_81A50B0(u8);
@@ -72,8 +79,6 @@ extern u8 GetFrontierOpponentClass(u16);
 extern void sub_80F94E8(void);
 
 extern u8 gUnknown_0203CEF8[];
-extern u32 gUnknown_0203CD70;
-extern u32 gUnknown_0203CD74;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG1_X;
@@ -83,8 +88,6 @@ extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 extern const struct FacilityMon *gFacilityTrainerMons;
-extern struct Unknown_0203CD78_Struct *gUnknown_0203CD78;
-extern u8 *gUnknown_0203CD7C;
 
 extern void (* const gUnknown_0860D090[])(void);
 extern const u32 gUnknown_0860D0EC[][2];
@@ -124,6 +127,15 @@ extern const u8 *const gBattleDomeWinStringsPointers[];
 extern const u8 *const gBattleDomeMatchNumberPointers[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
+extern const struct BgTemplate gUnknown_0860CE74[4];
+extern const struct WindowTemplate gUnknown_0860CE94[];
+extern const u8 gUnknown_0860D411[][2];
+extern const struct SpriteTemplate gUnknown_0860CFA8;
+extern const struct SpriteTemplate gUnknown_0860D008;
+extern const struct SpriteTemplate gUnknown_0860CFD8;
+extern const struct ScanlineEffectParams gUnknown_0860CF44;
+extern const struct UnkStruct_860DD10 *gUnknown_0860DD10[][4];
+extern const u8 gUnknown_0860DE10[][4];
 
 // gfx
 extern const u8 gUnknown_08D83D50[];
@@ -142,42 +154,47 @@ extern const u8 gUnknown_08D83C3C[];
 extern const u8 gTrainerClassNames[][0xD];
 
 // This file's functions.
-u8 GetDomeTrainerMonIvs(u16 trainerId);
-void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray);
-void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats);
-void CreateDomeTrainerMons(u16 tournamentTrainerId);
+static u8 GetDomeTrainerMonIvs(u16 trainerId);
+static void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray);
+static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats);
+static void CreateDomeTrainerMons(u16 tournamentTrainerId);
+static s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1);
+static s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1);
+static s32 sub_818FFC0(s32 move, s32 species, s32 arg2);
+static s32 sub_818FEB4(s32 *arr, bool8 arg1);
+static void sub_8190400(u8 taskId);
+static void sub_8190CD4(u8 taskId);
+static u8 sub_819221C(u8 taskId);
+void sub_8194D48(void);
 static s32 TrainerIdToTournamentId(u16 trainerId);
-s32 GetTrainerMonCountInBits(u16 tournamentTrainerId);
-s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1);
-s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1);
-s32 sub_818FFC0(s32 move, s32 species, s32 arg2);
-s32 sub_818FEB4(s32 *arr, bool8 arg1);
-u16 TrainerIdOfPlayerOpponent(void);
-void sub_8190400(u8 taskId);
-void sub_8190CD4(u8 taskId);
-void sub_8194220(u8 taskId);
-void sub_8194950(u8 taskId);
+static u16 TrainerIdOfPlayerOpponent(void);
+static void sub_8194220(u8 taskId);
+static void sub_8194950(u8 taskId);
 static void CB2_BattleDome(void);
 static void VblankCb0_BattleDome(void);
 static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo);
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId);
-u8 sub_819221C(u8 taskId);
-s32 sub_8192F08(u8, u8*);
-u8 GetDomeBrainTrainerPicId(void);
-u8 GetDomeBrainTrainerClass(void);
-void CopyDomeBrainTrainerName(u8 *dst);
-void CopyDomeTrainerName(u8 *dst, u16 trainerId);
-void sub_8194D48(void);
-void sub_8194BEC(void);
+static s32 sub_8192F08(u8, u8*);
+static u8 GetDomeBrainTrainerPicId(void);
+static u8 GetDomeBrainTrainerClass(void);
+static void CopyDomeBrainTrainerName(u8 *dst);
+static void CopyDomeTrainerName(u8 *dst, u16 trainerId);
+static void HblankCb_BattleDome(void);
 static void VblankCb1_BattleDome(void);
-u8 sub_8193BDC(u8 taskId);
-void DecideRoundWinners(u8 roundId);
-u8 sub_81953E8(u8 tournamentId, u8);
-void sub_81948EC(u8, u8);
+static u8 sub_8193BDC(u8 taskId);
+static void DecideRoundWinners(u8 roundId);
+static u8 sub_81953E8(u8 tournamentId, u8);
+static void sub_81948EC(u8, u8);
 
-// const rom data
+// EWRAM variables.
+EWRAM_DATA u32 gUnknown_0203CD70 = 0;
+static EWRAM_DATA u32 gUnknown_0203CD74 = 0;
+static EWRAM_DATA struct BattleDomeStruct *sBattleDomeStruct = {0};
+static EWRAM_DATA u8 *sTilemapBuffer = NULL;
+
+// Const rom data.
 ALIGNED(4)
-static const u8 sMovePoints[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS_COUNT] =
+static const u8 sMovePointsForDomeTrainers[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS_COUNT] =
 {
 	[MOVE_NONE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	[MOVE_POUND] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
@@ -537,15 +554,15 @@ static const u8 sMovePoints[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS_COUNT] =
 };
 
 // code
-void sub_818E9AC(void)
+void CallBattleDomeFunction(void)
 {
     gUnknown_0860D090[gSpecialVar_0x8004]();
 }
 
 void sub_818E9CC(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
-    u32 battleMode = VarGet(VAR_0x40CE);
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
     gSaveBlock2Ptr->frontier.field_CB2 = 0;
@@ -560,8 +577,8 @@ void sub_818E9CC(void)
 
 void sub_818EA84(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
-    u32 battleMode = VarGet(VAR_0x40CE);
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (gSpecialVar_0x8005)
     {
@@ -584,7 +601,7 @@ void sub_818EA84(void)
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_3;
         break;
     case 6:
-        if (VarGet(VAR_0x40CE) == 1)
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode)
                 gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_5;
@@ -600,7 +617,7 @@ void sub_818EA84(void)
         }
         break;
     case 7:
-        if (VarGet(VAR_0x40CE) == 1)
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode)
                 gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_7;
@@ -628,8 +645,8 @@ void sub_818EA84(void)
 
 void sub_818ED28(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
-    u32 battleMode = VarGet(VAR_0x40CE);
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (gSpecialVar_0x8005)
     {
@@ -655,7 +672,7 @@ void sub_818ED28(void)
         gSaveBlock2Ptr->frontier.field_D08_3 = gSpecialVar_0x8006;
         break;
     case 6:
-        if (VarGet(VAR_0x40CE) == 1)
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode)
                 gSaveBlock2Ptr->frontier.field_D08_5 = gSpecialVar_0x8006;
@@ -671,7 +688,7 @@ void sub_818ED28(void)
         }
         break;
     case 7:
-        if (VarGet(VAR_0x40CE) == 1)
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode)
                 gSaveBlock2Ptr->frontier.field_D08_7 = gSpecialVar_0x8006;
@@ -710,8 +727,8 @@ void InitDomeTrainers(void)
     statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(s32) * 6);
 
-    gSaveBlock2Ptr->frontier.field_D0A = gSaveBlock2Ptr->frontier.chosenLvl + 1;
-    gSaveBlock2Ptr->frontier.field_D0B = VarGet(VAR_0x40CE) + 1;
+    gSaveBlock2Ptr->frontier.field_D0A = gSaveBlock2Ptr->frontier.lvlMode + 1;
+    gSaveBlock2Ptr->frontier.field_D0B = VarGet(VAR_FRONTIER_BATTLE_MODE) + 1;
     gSaveBlock2Ptr->frontier.domeTrainers[0].trainerId = TRAINER_PLAYER;
     gSaveBlock2Ptr->frontier.domeTrainers[0].isEliminated = 0;
     gSaveBlock2Ptr->frontier.domeTrainers[0].eliminatedAt = 0;
@@ -895,7 +912,7 @@ void InitDomeTrainers(void)
     stats[statIndex] = (u8) ModifyStatByNature(nature, stats[statIndex], statIndex);        \
 }
 
-void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats)
+static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats)
 {
     s32 i, count;
     u8 bits;
@@ -941,7 +958,7 @@ void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32
     y = temp;           \
 }
 
-void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray)
+static void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray)
 {
     s32 i;
     u16 temp;
@@ -973,7 +990,7 @@ void sub_818FA20(void)
     CreateDomeTrainerMons(TrainerIdToTournamentId(gTrainerBattleOpponent_A));
 }
 
-void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
+static void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
 {
     s32 i;
     u8 happiness = 0xFF;
@@ -1000,7 +1017,7 @@ void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u
                &gBattleFrontierHeldItems[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].itemTableId]);
 }
 
-void CreateDomeTrainerMons(u16 tournamentTrainerId)
+static void CreateDomeTrainerMons(u16 tournamentTrainerId)
 {
     u8 monsCount = 0;
     u32 otId = 0;
@@ -1054,7 +1071,7 @@ s32 GetTrainerMonCountInBits(u16 tournamentTrainerId)
     return bits;
 }
 
-s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
+static s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
 {
     s32 i, moveId, playerMonId;
     s32 array[3];
@@ -1082,7 +1099,7 @@ s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
     return sub_818FEB4(array, arg1);
 }
 
-s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
+static s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
 {
     s32 i, moveId, playerMonId;
     s32 array[3];
@@ -1110,7 +1127,7 @@ s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
     return sub_818FEB4(array, arg1);
 }
 
-s32 sub_818FEB4(s32 *arr, bool8 arg1)
+static s32 sub_818FEB4(s32 *arr, bool8 arg1)
 {
     s32 i, j;
     s32 bits = 0;
@@ -1178,7 +1195,7 @@ s32 sub_818FEB4(s32 *arr, bool8 arg1)
 
 // Functionally equivalent, while loop is impossible to match.
 #ifdef NONMATCHING
-s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
+static s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
 {
     s32 type1, type2, ability, moveType;
     s32 i = 0;
@@ -1297,7 +1314,7 @@ s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
 }
 #else
 NAKED
-s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
+static s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
 {
     asm_unified("\n\
 	push {r4-r7,lr}\n\
@@ -1537,7 +1554,7 @@ _08190156:\n\
 }
 #endif // NONMATCHING
 
-u8 GetDomeTrainerMonIvs(u16 trainerId)
+static u8 GetDomeTrainerMonIvs(u16 trainerId)
 {
     u8 fixedIv;
     if (trainerId <= 99)
@@ -1560,7 +1577,7 @@ u8 GetDomeTrainerMonIvs(u16 trainerId)
     return fixedIv;
 }
 
-s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
+static s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
 {
     s32 i, j, val;
 
@@ -1602,7 +1619,7 @@ void sub_8190298(void)
     gTrainerBattleOpponent_A = TrainerIdOfPlayerOpponent();
 }
 
-u16 TrainerIdOfPlayerOpponent(void)
+static u16 TrainerIdOfPlayerOpponent(void)
 {
     return gSaveBlock2Ptr->frontier.domeTrainers[TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.field_CB2, TRAINER_PLAYER)].trainerId;
 }
@@ -1622,8 +1639,8 @@ void sub_81902F8(void)
 
 void sub_819033C(void)
 {
-    u8 lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
-    u8 battleMode = VarGet(VAR_0x40CE);
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     if (gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode] < 999)
         gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode]++;
@@ -1645,7 +1662,7 @@ void ShowDomeOpponentInfo(void)
     SetMainCallback2(CB2_BattleDome);
 }
 
-void sub_8190400(u8 taskId)
+static void sub_8190400(u8 taskId)
 {
     s32 i;
     s32 r5 = gTasks[taskId].data[1];
@@ -1712,9 +1729,9 @@ void sub_8190400(u8 taskId)
         break;
     case 3:
         SetVBlankCallback(VblankCb0_BattleDome);
-        gUnknown_0203CD78 = AllocZeroed(sizeof(*gUnknown_0203CD78));
+        sBattleDomeStruct = AllocZeroed(sizeof(*sBattleDomeStruct));
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
-            gUnknown_0203CD78->arr[i] |= 0xFF;
+            sBattleDomeStruct->arr[i] |= 0xFF;
         LoadMonIconPalettes();
         i = CreateTask(sub_8190CD4, 0);
         gTasks[i].data[0] = 0;
@@ -1724,7 +1741,7 @@ void sub_8190400(u8 taskId)
         if (r9 == 2)
         {
             DisplayMatchInfoOnCard(0, r5);
-            gUnknown_0203CD78->unk_10 = 1;
+            sBattleDomeStruct->unk_10 = 1;
         }
         else
         {
@@ -1776,7 +1793,7 @@ static void SpriteCb_TrainerIconCardScrollUp(struct Sprite *sprite)
     {
         if (sprite->pos1.y >= 192)
         {
-            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
             FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
@@ -1796,7 +1813,7 @@ static void SpriteCb_TrainerIconCardScrollDown(struct Sprite *sprite)
     {
         if (sprite->pos1.y <= -32)
         {
-            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
             FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
@@ -1816,7 +1833,7 @@ static void SpriteCb_TrainerIconCardScrollLeft(struct Sprite *sprite)
     {
         if (sprite->pos1.x >= 272)
         {
-            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
             FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
@@ -1836,7 +1853,7 @@ static void SpriteCb_TrainerIconCardScrollRight(struct Sprite *sprite)
     {
         if (sprite->pos1.x <= -32)
         {
-            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
             FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
@@ -1866,7 +1883,7 @@ static void SpriteCb_MonIconCardScrollUp(struct Sprite *sprite)
     {
         if (sprite->pos1.y >= 176)
         {
-            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
             sub_80D2EF8(sprite);
         }
     }
@@ -1888,7 +1905,7 @@ static void SpriteCb_MonIconCardScrollDown(struct Sprite *sprite)
     {
         if (sprite->pos1.y <= -16)
         {
-            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
             sub_80D2EF8(sprite);
         }
     }
@@ -1910,7 +1927,7 @@ static void SpriteCb_MonIconCardScrollLeft(struct Sprite *sprite)
     {
         if (sprite->pos1.x >= 256)
         {
-            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
             sub_80D2EF8(sprite);
         }
     }
@@ -1932,7 +1949,7 @@ static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
     {
         if (sprite->pos1.x <= -16)
         {
-            gUnknown_0203CD78->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
             sub_80D2EF8(sprite);
         }
     }
@@ -1950,12 +1967,12 @@ void sub_8190B40(struct Sprite *sprite)
         if (sprite->data[1])
         {
             if ((gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].isEliminated
-                && gUnknown_0203CD78->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].eliminatedAt))
+                && sBattleDomeStruct->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].eliminatedAt))
             {
                 sprite->invisible = 0;
             }
             else if (!gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].isEliminated
-                     && gUnknown_0203CD78->unk_10 - 1 < r12)
+                     && sBattleDomeStruct->unk_10 - 1 < r12)
             {
                 sprite->invisible = 0;
             }
@@ -1967,7 +1984,7 @@ void sub_8190B40(struct Sprite *sprite)
         }
         else
         {
-            if (gUnknown_0203CD78->unk_10 != 0)
+            if (sBattleDomeStruct->unk_10 != 0)
             {
                 sprite->invisible = 0;
             }
@@ -1982,7 +1999,7 @@ void sub_8190B40(struct Sprite *sprite)
     {
         if (sprite->data[1])
         {
-            if (gUnknown_0203CD78->unk_10 > 1)
+            if (sBattleDomeStruct->unk_10 > 1)
             {
                 if (gTasks[taskId1].data[0] == 2)
                     sprite->invisible = 1;
@@ -1994,7 +2011,7 @@ void sub_8190B40(struct Sprite *sprite)
         }
         else
         {
-            if (gUnknown_0203CD78->unk_10 != 0)
+            if (sBattleDomeStruct->unk_10 != 0)
             {
                 sprite->invisible = 0;
             }
@@ -2013,7 +2030,7 @@ void sub_8190C6C(struct Sprite *sprite)
 
     if (gTasks[taskId1].data[3] == 1)
     {
-        if (gUnknown_0203CD78->unk_10 != 0)
+        if (sBattleDomeStruct->unk_10 != 0)
         {
             if (gTasks[taskId1].data[0] == 2)
                 sprite->invisible = 1;
@@ -2025,7 +2042,7 @@ void sub_8190C6C(struct Sprite *sprite)
     }
     else
     {
-        if (gUnknown_0203CD78->unk_10 != 1)
+        if (sBattleDomeStruct->unk_10 != 1)
         {
             if (gTasks[taskId1].data[0] == 2)
                 sprite->invisible = 1;
@@ -2037,7 +2054,7 @@ void sub_8190C6C(struct Sprite *sprite)
     }
 }
 
-void sub_8190CD4(u8 taskId)
+static void sub_8190CD4(u8 taskId)
 {
     s32 i;
     s32 windowId = 0;
@@ -2108,7 +2125,7 @@ void sub_8190CD4(u8 taskId)
 
             if (i == 1)
             {
-                if (gUnknown_0203CD78->unk_10 == 0)
+                if (sBattleDomeStruct->unk_10 == 0)
                 {
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
@@ -2121,27 +2138,27 @@ void sub_8190CD4(u8 taskId)
                     gBattle_BG2_Y = 0;
                     trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
-                    gUnknown_0203CD78->unk_10 = 0;
+                    sBattleDomeStruct->unk_10 = 0;
                 }
             }
             else
             {
-                if (gUnknown_0203CD78->unk_10 == 0)
+                if (sBattleDomeStruct->unk_10 == 0)
                 {
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    sub_8192F08(matchNo, gUnknown_0203CD78->unk_11);
+                    sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
-                    trainerTournamentId = gUnknown_0203CD78->unk_11[0];
+                    trainerTournamentId = sBattleDomeStruct->unk_11[0];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
                 }
-                else if (gUnknown_0203CD78->unk_10 == 2)
+                else if (sBattleDomeStruct->unk_10 == 2)
                 {
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    sub_8192F08(matchNo, gUnknown_0203CD78->unk_11);
+                    sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
-                    trainerTournamentId = gUnknown_0203CD78->unk_11[1];
+                    trainerTournamentId = sBattleDomeStruct->unk_11[1];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
                 }
                 else
@@ -2157,23 +2174,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollUp;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollUp;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollUp;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollUp;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2181,23 +2198,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollUp;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollUp;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollUp;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollUp;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2224,7 +2241,7 @@ void sub_8190CD4(u8 taskId)
 
             if (i == 2)
             {
-                if (gUnknown_0203CD78->unk_10 == 0)
+                if (sBattleDomeStruct->unk_10 == 0)
                 {
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
@@ -2237,27 +2254,27 @@ void sub_8190CD4(u8 taskId)
                     gBattle_BG2_Y = 0;
                     trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
-                    gUnknown_0203CD78->unk_10 = 0;
+                    sBattleDomeStruct->unk_10 = 0;
                 }
             }
             else
             {
-                if (gUnknown_0203CD78->unk_10 == 0)
+                if (sBattleDomeStruct->unk_10 == 0)
                 {
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    sub_8192F08(matchNo, gUnknown_0203CD78->unk_11);
+                    sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
-                    trainerTournamentId = gUnknown_0203CD78->unk_11[0];
+                    trainerTournamentId = sBattleDomeStruct->unk_11[0];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
                 }
-                else if (gUnknown_0203CD78->unk_10 == 2)
+                else if (sBattleDomeStruct->unk_10 == 2)
                 {
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    sub_8192F08(matchNo, gUnknown_0203CD78->unk_11);
+                    sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
-                    trainerTournamentId = gUnknown_0203CD78->unk_11[1];
+                    trainerTournamentId = sBattleDomeStruct->unk_11[1];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
                 }
                 else
@@ -2273,23 +2290,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollDown;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollDown;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollDown;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollDown;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2297,23 +2314,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollDown;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollDown;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollDown;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollDown;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2337,7 +2354,7 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG1_Y = 0;
             }
 
-            if (gUnknown_0203CD78->unk_10 == 0)
+            if (sBattleDomeStruct->unk_10 == 0)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 160;
@@ -2348,7 +2365,7 @@ void sub_8190CD4(u8 taskId)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 0;
-                matchNo = gUnknown_0860D15C[(gTasks[taskId2].data[1] * 4) + (gUnknown_0203CD78->unk_10 - 1)];
+                matchNo = gUnknown_0860D15C[(gTasks[taskId2].data[1] * 4) + (sBattleDomeStruct->unk_10 - 1)];
                 DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 8, matchNo);
             }
 
@@ -2356,23 +2373,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2380,23 +2397,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2420,11 +2437,11 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG1_Y = 0;
             }
 
-            if (gUnknown_0203CD78->unk_10 == 0)
+            if (sBattleDomeStruct->unk_10 == 0)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 160;
-                trainerTournamentId = gUnknown_0203CD78->unk_11[0];
+                trainerTournamentId = sBattleDomeStruct->unk_11[0];
                 DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 8, trainerTournamentId);
             }
             else
@@ -2439,23 +2456,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2463,23 +2480,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2503,7 +2520,7 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG1_Y = 0;
             }
 
-            if (gUnknown_0203CD78->unk_10 == 1)
+            if (sBattleDomeStruct->unk_10 == 1)
             {
                 gBattle_BG2_X = 0;
                 gBattle_BG2_Y = 160;
@@ -2513,30 +2530,30 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG2_X = 0;
                 gBattle_BG2_Y = 0;
             }
-            matchNo = gUnknown_0860D15C[(gUnknown_0203CD78->unk_10 - 1) + (gTasks[taskId2].data[1] * 4)];
+            matchNo = gUnknown_0860D15C[(sBattleDomeStruct->unk_10 - 1) + (gTasks[taskId2].data[1] * 4)];
             DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 2, matchNo);
 
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
             {
                 if (i < 2)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2544,23 +2561,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2584,11 +2601,11 @@ void sub_8190CD4(u8 taskId)
                 gBattle_BG1_Y = 0;
             }
 
-            if (gUnknown_0203CD78->unk_10 == 2)
+            if (sBattleDomeStruct->unk_10 == 2)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 160;
-                trainerTournamentId = gUnknown_0203CD78->unk_11[1];
+                trainerTournamentId = sBattleDomeStruct->unk_11[1];
                 DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 2, trainerTournamentId);
             }
             else
@@ -2603,23 +2620,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2627,23 +2644,23 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[3] = gUnknown_0203CD78->arr[i];
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].data[3] = sBattleDomeStruct->arr[i];
                     }
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
                     {
-                        gSprites[gUnknown_0203CD78->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[0] = gTasks[taskId].data[2];
-                        gSprites[gUnknown_0203CD78->arr[i]].data[1] = 0;
-                        gSprites[gUnknown_0203CD78->arr[i]].data[2] = i;
+                        gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
+                        gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
+                        gSprites[sBattleDomeStruct->arr[i]].data[1] = 0;
+                        gSprites[sBattleDomeStruct->arr[i]].data[2] = i;
                     }
                 }
             }
@@ -2708,31 +2725,31 @@ void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
-                        FreeAndDestroyTrainerPicSprite(gUnknown_0203CD78->arr[i]);
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                        FreeAndDestroyTrainerPicSprite(sBattleDomeStruct->arr[i]);
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
-                        sub_80D2EF8(&gSprites[gUnknown_0203CD78->arr[i]]);
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                        sub_80D2EF8(&gSprites[sBattleDomeStruct->arr[i]]);
                 }
             }
             for (i = DOME_TOURNAMENT_TRAINERS_COUNT / 2; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
             {
                 if (i < 10)
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
-                        FreeAndDestroyTrainerPicSprite(gUnknown_0203CD78->arr[i]);
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                        FreeAndDestroyTrainerPicSprite(sBattleDomeStruct->arr[i]);
                 }
                 else
                 {
-                    if (gUnknown_0203CD78->arr[i] != 0xFF)
-                        sub_80D2EF8(&gSprites[gUnknown_0203CD78->arr[i]]);
+                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                        sub_80D2EF8(&gSprites[sBattleDomeStruct->arr[i]]);
                 }
             }
 
             FreeMonIconPalettes();
-            FREE_AND_SET_NULL(gUnknown_0203CD78);
+            FREE_AND_SET_NULL(sBattleDomeStruct);
             FreeAllWindowBuffers();
             if (r9 == 0)
             {
@@ -2753,7 +2770,7 @@ void sub_8190CD4(u8 taskId)
     }
 }
 
-u8 sub_819221C(u8 taskId)
+static u8 sub_819221C(u8 taskId)
 {
     u8 retVal = 0;
     s32 taskId2 = gTasks[taskId].data[4];
@@ -2769,7 +2786,7 @@ u8 sub_819221C(u8 taskId)
 
     if (gTasks[taskId].data[3] == 1)
     {
-        if (gMain.newKeys & DPAD_UP && gUnknown_0203CD78->unk_10 == 0)
+        if (gMain.newKeys & DPAD_UP && sBattleDomeStruct->unk_10 == 0)
         {
             if (r5 == 0)
                 r5 = 15;
@@ -2777,7 +2794,7 @@ u8 sub_819221C(u8 taskId)
                 r5--;
             retVal = 1;
         }
-        else if (gMain.newKeys & DPAD_DOWN && gUnknown_0203CD78->unk_10 == 0)
+        else if (gMain.newKeys & DPAD_DOWN && sBattleDomeStruct->unk_10 == 0)
         {
             if (r5 == 15)
                 r5 = 0;
@@ -2785,36 +2802,36 @@ u8 sub_819221C(u8 taskId)
                 r5++;
             retVal = 2;
         }
-        else if (gMain.newKeys & DPAD_LEFT && gUnknown_0203CD78->unk_10 != 0)
+        else if (gMain.newKeys & DPAD_LEFT && sBattleDomeStruct->unk_10 != 0)
         {
-            gUnknown_0203CD78->unk_10--;
+            sBattleDomeStruct->unk_10--;
             retVal = 3;
         }
         else if (gMain.newKeys & DPAD_RIGHT)
         {
-            if (gSaveBlock2Ptr->frontier.domeTrainers[r10].isEliminated && gUnknown_0203CD78->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[r10].eliminatedAt)
+            if (gSaveBlock2Ptr->frontier.domeTrainers[r10].isEliminated && sBattleDomeStruct->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[r10].eliminatedAt)
             {
-                gUnknown_0203CD78->unk_10++;
+                sBattleDomeStruct->unk_10++;
                 retVal = 4;
             }
-            if (!gSaveBlock2Ptr->frontier.domeTrainers[r10].isEliminated && gUnknown_0203CD78->unk_10 - 1 < roundId)
+            if (!gSaveBlock2Ptr->frontier.domeTrainers[r10].isEliminated && sBattleDomeStruct->unk_10 - 1 < roundId)
             {
-                gUnknown_0203CD78->unk_10++;
+                sBattleDomeStruct->unk_10++;
                 retVal = 4;
             }
         }
 
         if (retVal == 9)
         {
-            if (gUnknown_0203CD78->unk_10 != 0)
-                gTasks[taskId2].data[1] = gUnknown_0860D1A0[r5 / 2][gUnknown_0203CD78->unk_10 - 1];
+            if (sBattleDomeStruct->unk_10 != 0)
+                gTasks[taskId2].data[1] = gUnknown_0860D1A0[r5 / 2][sBattleDomeStruct->unk_10 - 1];
             else
                 gTasks[taskId2].data[1] = r5;
         }
     }
     else
     {
-        if (gMain.newKeys & DPAD_UP && gUnknown_0203CD78->unk_10 == 1)
+        if (gMain.newKeys & DPAD_UP && sBattleDomeStruct->unk_10 == 1)
         {
             if (r5 == 16)
                 r5 = gUnknown_0860D19C[roundId];
@@ -2822,7 +2839,7 @@ u8 sub_819221C(u8 taskId)
                 r5--;
             retVal = 5;
         }
-        else if (gMain.newKeys & DPAD_DOWN && gUnknown_0203CD78->unk_10 == 1)
+        else if (gMain.newKeys & DPAD_DOWN && sBattleDomeStruct->unk_10 == 1)
         {
             if (r5 == gUnknown_0860D19C[roundId])
                 r5 = 16;
@@ -2830,23 +2847,23 @@ u8 sub_819221C(u8 taskId)
                 r5++;
             retVal = 6;
         }
-        else if (gMain.newKeys & DPAD_LEFT && gUnknown_0203CD78->unk_10 != 0)
+        else if (gMain.newKeys & DPAD_LEFT && sBattleDomeStruct->unk_10 != 0)
         {
             retVal = 7;
-            gUnknown_0203CD78->unk_10--;
+            sBattleDomeStruct->unk_10--;
         }
-        else if (gMain.newKeys & DPAD_RIGHT && (gUnknown_0203CD78->unk_10 == 0 || gUnknown_0203CD78->unk_10 == 1))
+        else if (gMain.newKeys & DPAD_RIGHT && (sBattleDomeStruct->unk_10 == 0 || sBattleDomeStruct->unk_10 == 1))
         {
             retVal = 8;
-            gUnknown_0203CD78->unk_10++;
+            sBattleDomeStruct->unk_10++;
         }
 
         if (retVal == 9)
         {
-            if (gUnknown_0203CD78->unk_10 == 0)
-                gTasks[taskId2].data[1] = gUnknown_0860D1C0[gUnknown_0203CD78->unk_11[0]];
-            else if (gUnknown_0203CD78->unk_10 == 2)
-                gTasks[taskId2].data[1] = gUnknown_0860D1C0[gUnknown_0203CD78->unk_11[1]];
+            if (sBattleDomeStruct->unk_10 == 0)
+                gTasks[taskId2].data[1] = gUnknown_0860D1C0[sBattleDomeStruct->unk_11[0]];
+            else if (sBattleDomeStruct->unk_10 == 2)
+                gTasks[taskId2].data[1] = gUnknown_0860D1C0[sBattleDomeStruct->unk_11[1]];
             else
                 gTasks[taskId2].data[1] = r5;
         }
@@ -2887,47 +2904,47 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         y = -160;
 
     if (trainerId == TRAINER_PLAYER)
-        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
-        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
     else
-        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[gUnknown_0203CD78->arr[arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[arrId]].invisible = 1;
 
     for (i = 0; i < 3; i++)
     {
         if (trainerId == TRAINER_PLAYER)
         {
-            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
+            sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D340[i],
                                                                   y + gUnknown_0860D343[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {
-            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
+            sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D340[i],
                                                                   y + gUnknown_0860D343[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
         else
         {
-            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].species,
+            sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].species,
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D340[i],
                                                                   y + gUnknown_0860D343[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
 
         if (flags & 0x1E)
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = 1;
     }
     textPrinter.fontId = 2;
     textPrinter.x = 0;
@@ -3019,11 +3036,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
             for (k = 0; k < DOME_TOURNAMENT_TRAINERS_COUNT; k++)
             {
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
-                    allocatedArray[k] += sMovePoints[sub_81A5060(i, j)][k];
+                    allocatedArray[k] += sMovePointsForDomeTrainers[sub_81A5060(i, j)][k];
                 else if (trainerId == TRAINER_PLAYER)
-                    allocatedArray[k] += sMovePoints[gSaveBlock2Ptr->frontier.field_EFC[i].moves[j]][k];
+                    allocatedArray[k] += sMovePointsForDomeTrainers[gSaveBlock2Ptr->frontier.field_EFC[i].moves[j]][k];
                 else
-                    allocatedArray[k] += sMovePoints[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].moves[j]][k];
+                    allocatedArray[k] += sMovePointsForDomeTrainers[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].moves[j]][k];
             }
         }
     }
@@ -3224,7 +3241,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     Free(allocatedArray);
 }
 
-s32 sub_8192F08(u8 arg0, u8 *arg1)
+static s32 sub_8192F08(u8 arg0, u8 *arg1)
 {
     s32 i;
     u8 tournamentId;
@@ -3311,10 +3328,10 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         y = -160;
 
     // Copy trainers information to handy arrays.
-    winStringId = sub_8192F08(matchNo, gUnknown_0203CD78->unk_11);
+    winStringId = sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
     for (i = 0; i < 2; i++)
     {
-        tournamentIds[i] = gUnknown_0203CD78->unk_11[i];
+        tournamentIds[i] = sBattleDomeStruct->unk_11[i];
         trainerIds[i] = gSaveBlock2Ptr->frontier.domeTrainers[tournamentIds[i]].trainerId;
         if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentIds[i]].eliminatedAt <= gUnknown_0860D3C4[matchNo][2]
             && gSaveBlock2Ptr->frontier.domeTrainers[tournamentIds[i]].isEliminated)
@@ -3325,67 +3342,67 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 
     // Draw first trainer sprite.
     if (trainerIds[0] == TRAINER_PLAYER)
-        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
+        sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
     else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
-        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
+        sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
     else
-        gUnknown_0203CD78->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[0]), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
+        sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[0]), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[gUnknown_0203CD78->arr[arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[arrId]].invisible = 1;
     if (lost[0])
-        gSprites[gUnknown_0203CD78->arr[arrId]].oam.paletteNum = 3;
+        gSprites[sBattleDomeStruct->arr[arrId]].oam.paletteNum = 3;
 
     // Draw second trainer sprite.
     if (trainerIds[1] == TRAINER_PLAYER)
-        gUnknown_0203CD78->arr[1 + arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
+        sBattleDomeStruct->arr[1 + arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
     else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
-        gUnknown_0203CD78->arr[1 + arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
+        sBattleDomeStruct->arr[1 + arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
     else
-        gUnknown_0203CD78->arr[1 + arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[1]), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
+        sBattleDomeStruct->arr[1 + arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[1]), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[gUnknown_0203CD78->arr[1 + arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[1 + arrId]].invisible = 1;
     if (lost[1])
-        gSprites[gUnknown_0203CD78->arr[1 + arrId]].oam.paletteNum = 3;
+        gSprites[sBattleDomeStruct->arr[1 + arrId]].oam.paletteNum = 3;
 
     // Draw first trainer's pokemon icons.
     for (i = 0; i < 3; i++)
     {
         if (trainerIds[0] == TRAINER_PLAYER)
         {
-            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i],
+            sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i],
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D3A8[i],
                                                                   y + gUnknown_0860D3AB[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
         else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
         {
-            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i],
+            sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i],
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D3A8[i],
                                                                   y + gUnknown_0860D3AB[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
         else
         {
-            gUnknown_0203CD78->arr[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i]].species,
+            sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i]].species,
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D3A8[i],
                                                                   y + gUnknown_0860D3AB[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
 
         if (flags & 0x1E)
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = 1;
         if (lost[0])
         {
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].oam.paletteNum = 3;
-            gSprites[gUnknown_0203CD78->arr[2 + i + arrId]].sMonIconStill = TRUE;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.paletteNum = 3;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].sMonIconStill = TRUE;
         }
     }
 
@@ -3394,38 +3411,38 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     {
         if (trainerIds[1] == TRAINER_PLAYER)
         {
-            gUnknown_0203CD78->arr[5 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i],
+            sBattleDomeStruct->arr[5 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i],
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D3AE[i],
                                                                   y + gUnknown_0860D3B1[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[5 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.priority = 0;
         }
         else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
         {
-            gUnknown_0203CD78->arr[5 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i],
+            sBattleDomeStruct->arr[5 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i],
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D3AE[i],
                                                                   y + gUnknown_0860D3B1[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[5 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.priority = 0;
         }
         else
         {
-            gUnknown_0203CD78->arr[5 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i]].species,
+            sBattleDomeStruct->arr[5 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i]].species,
                                                                   SpriteCb_MonIcon,
                                                                   x | gUnknown_0860D3AE[i],
                                                                   y + gUnknown_0860D3B1[i],
                                                                   0, 0, TRUE);
-            gSprites[gUnknown_0203CD78->arr[5 + i + arrId]].oam.priority = 0;
+            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.priority = 0;
         }
 
         if (flags & 0x1E)
-            gSprites[gUnknown_0203CD78->arr[5 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].invisible = 1;
         if (lost[1])
         {
-            gSprites[gUnknown_0203CD78->arr[5 + i + arrId]].oam.paletteNum = 3;
-            gSprites[gUnknown_0203CD78->arr[5 + i + arrId]].sMonIconStill = TRUE;
+            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.paletteNum = 3;
+            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].sMonIconStill = TRUE;
         }
     }
 
@@ -3510,7 +3527,7 @@ void sub_81938E0(void)
     u8 taskId;
 
     sub_8194D48();
-    gSaveBlock2Ptr->frontier.chosenLvl = gSaveBlock2Ptr->frontier.field_D0A - 1;
+    gSaveBlock2Ptr->frontier.lvlMode = gSaveBlock2Ptr->frontier.field_D0A - 1;
     gSaveBlock2Ptr->frontier.field_CB2 = 3;
     taskId = CreateTask(sub_8194220, 0);
     gTasks[taskId].data[0] = 0;
@@ -3564,7 +3581,7 @@ void sub_819395C(u8 taskId)
         {
             FreeAllWindowBuffers();
             ScanlineEffect_Stop();
-            FREE_AND_SET_NULL(gUnknown_0203CD7C);
+            FREE_AND_SET_NULL(sTilemapBuffer);
             newTaskId = CreateTask(sub_8190400, 0);
             gTasks[newTaskId].data[0] = 0;
             gTasks[newTaskId].data[1] = gUnknown_0860D080[spriteId];
@@ -3572,7 +3589,7 @@ void sub_819395C(u8 taskId)
             gTasks[newTaskId].data[3] = taskId;
 
             gTasks[taskId].data[0] = 4;
-            gUnknown_0203CD78->unk_10 = 0;
+            sBattleDomeStruct->unk_10 = 0;
         }
         break;
     case 4:
@@ -3582,7 +3599,7 @@ void sub_819395C(u8 taskId)
         {
             FreeAllWindowBuffers();
             ScanlineEffect_Stop();
-            FREE_AND_SET_NULL(gUnknown_0203CD7C);
+            FREE_AND_SET_NULL(sTilemapBuffer);
             newTaskId = CreateTask(sub_8190400, 0);
             gTasks[newTaskId].data[0] = 0;
             gTasks[newTaskId].data[1] = spriteId - 16;
@@ -3599,7 +3616,7 @@ void sub_819395C(u8 taskId)
         {
             FreeAllWindowBuffers();
             ScanlineEffect_Stop();
-            FREE_AND_SET_NULL(gUnknown_0203CD7C);
+            FREE_AND_SET_NULL(sTilemapBuffer);
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             DestroyTask(gTasks[taskId].data[7]);
             DestroyTask(taskId);
@@ -3608,7 +3625,7 @@ void sub_819395C(u8 taskId)
     }
 }
 
-u8 sub_8193BDC(u8 taskId)
+static u8 sub_8193BDC(u8 taskId)
 {
     u8 retVal = 1;
     s32 arrId = 4;
@@ -3691,7 +3708,7 @@ void sub_8193D7C(void)
     }
 }
 
-u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roundId)
+static u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roundId)
 {
     s32 i, j, k;
     s32 moveScores[4 * 3];
@@ -3804,15 +3821,7 @@ u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roundId)
     return moveIds[j];
 }
 
-extern const struct BgTemplate gUnknown_0860CE74[4];
-extern const struct WindowTemplate gUnknown_0860CE94[];
-extern const u8 gUnknown_0860D411[][2];
-extern const struct SpriteTemplate gUnknown_0860CFA8;
-extern const struct SpriteTemplate gUnknown_0860D008;
-extern const struct SpriteTemplate gUnknown_0860CFD8;
-extern const struct ScanlineEffectParams gUnknown_0860CF44;
-
-void sub_8194220(u8 taskId)
+static void sub_8194220(u8 taskId)
 {
     s32 i;
     struct TextSubPrinter textPrinter;
@@ -3857,9 +3866,9 @@ void sub_8194220(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 2:
-        gUnknown_0203CD7C = AllocZeroed(0x800);
-        LZDecompressWram(gUnknown_08D83900, gUnknown_0203CD7C);
-        SetBgTilemapBuffer(1, gUnknown_0203CD7C);
+        sTilemapBuffer = AllocZeroed(0x800);
+        LZDecompressWram(gUnknown_08D83900, sTilemapBuffer);
+        SetBgTilemapBuffer(1, sTilemapBuffer);
         CopyBgTilemapBufferToVram(1);
         DecompressAndLoadBgGfxUsingHeap(1, gUnknown_08D82F10, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D834FC, 0x2000, 0, 0);
@@ -3997,7 +4006,7 @@ void sub_8194220(u8 taskId)
         CopyWindowToVram(0, 3);
         CopyWindowToVram(1, 3);
         CopyWindowToVram(2, 3);
-        SetHBlankCallback(sub_8194BEC);
+        SetHBlankCallback(HblankCb_BattleDome);
         SetVBlankCallback(VblankCb1_BattleDome);
         if (r4 == 2)
         {
@@ -4037,20 +4046,10 @@ void sub_8194220(u8 taskId)
     }
 }
 
-struct UnkStruct_860DD10
-{
-    u8 x;
-    u8 y;
-    u16 src;
-};
-
-extern struct UnkStruct_860DD10 *gUnknown_0860DD10[][4];
-extern const u8 gUnknown_0860DE10[][4];
-
-void sub_81948EC(u8 tournamentId, u8 arg1)
+static void sub_81948EC(u8 tournamentId, u8 arg1)
 {
     s32 i;
-    struct UnkStruct_860DD10 *structPtr = gUnknown_0860DD10[tournamentId][arg1];
+    const struct UnkStruct_860DD10 *structPtr = gUnknown_0860DD10[tournamentId][arg1];
 
     for (i = 0; i < gUnknown_0860DE10[tournamentId][arg1]; i++)
         CopyToBgTilemapBufferRect_ChangePalette(1, &structPtr[i].src, structPtr[i].x, structPtr[i].y, 1, 1, 0x11);
@@ -4058,7 +4057,7 @@ void sub_81948EC(u8 tournamentId, u8 arg1)
     CopyBgTilemapBufferToVram(1);
 }
 
-void sub_8194950(u8 taskId)
+static void sub_8194950(u8 taskId)
 {
     s32 i;
     struct TextSubPrinter textPrinter;
@@ -4157,7 +4156,7 @@ static void VblankCb0_BattleDome(void)
     *(vu32*)(REG_ADDR_WIN0H) = ((win0H << 16) | (win1H));   \
 }
 
-void sub_8194BEC(void)
+static void HblankCb_BattleDome(void)
 {
     register u32 vCount asm("r0") = REG_VCOUNT;
     register u32 vCount_ asm("r1") = vCount;
@@ -4319,8 +4318,8 @@ void sub_8194F58(void)
 
     statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(s32) * 6);
-    lvlMode = gSaveBlock2Ptr->frontier.chosenLvl;
-    gSaveBlock2Ptr->frontier.chosenLvl = 0;
+    lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    gSaveBlock2Ptr->frontier.lvlMode = 0;
     // This one, I'd like to call a 'C fakematching'.
     {
         u8 one;
@@ -4428,7 +4427,7 @@ void sub_8194F58(void)
 	for (i = 0; i < 4; i++)
         DecideRoundWinners(i);
 
-    gSaveBlock2Ptr->frontier.chosenLvl = lvlMode;
+    gSaveBlock2Ptr->frontier.lvlMode = lvlMode;
 }
 
 static s32 TrainerIdToTournamentId(u16 trainerId)
@@ -4458,7 +4457,7 @@ s32 TrainerIdToDomeTournamentId(u16 trainerId)
     return i;
 }
 
-u8 sub_81953E8(u8 tournamentId, u8 arg1)
+static u8 sub_81953E8(u8 tournamentId, u8 arg1)
 {
     u8 arr[2];
     sub_8192F08(gUnknown_0860D1A0[gUnknown_0860D1C0[tournamentId] / 2][arg1] - 16, arr);
@@ -4468,7 +4467,7 @@ u8 sub_81953E8(u8 tournamentId, u8 arg1)
         return arr[0];
 }
 
-void DecideRoundWinners(u8 roundId)
+static void DecideRoundWinners(u8 roundId)
 {
     s32 i;
     s32 moveSlot, monId1, monId2;
@@ -4578,7 +4577,7 @@ void DecideRoundWinners(u8 roundId)
     }
 }
 
-void CopyDomeTrainerName(u8 *dst, u16 trainerId)
+static void CopyDomeTrainerName(u8 *dst, u16 trainerId)
 {
     s32 i = 0;
     GetFrontierEnemyMonLevel(); // Unused return value.
@@ -4603,17 +4602,17 @@ void CopyDomeTrainerName(u8 *dst, u16 trainerId)
     }
 }
 
-u8 GetDomeBrainTrainerPicId(void)
+static u8 GetDomeBrainTrainerPicId(void)
 {
     return gTrainers[TRAINER_TUCKER].trainerPic;
 }
 
-u8 GetDomeBrainTrainerClass(void)
+static u8 GetDomeBrainTrainerClass(void)
 {
     return gTrainers[TRAINER_TUCKER].trainerClass;
 }
 
-void CopyDomeBrainTrainerName(u8 *dst)
+static void CopyDomeBrainTrainerName(u8 *dst)
 {
     s32 i;
 

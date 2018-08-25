@@ -244,7 +244,7 @@ gSpecials:: @ 81DBA64
 	def_special GetLeadMonFriendshipScore
 	def_special sub_81A1780
 	def_special sub_8161F74
-	def_special sub_818E9AC
+	def_special CallBattleDomeFunction
 	def_special sub_8195960
 	def_special sub_8165360
 	def_special sub_8163AC4

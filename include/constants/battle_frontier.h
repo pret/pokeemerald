@@ -10,4 +10,14 @@
 #define FRONTIER_FACILITY_PIKE 5
 #define FRONTIER_FACILITY_PYRAMID 6
 
+// Battle Frontier lvl modes.
+#define FRONTIER_LVL_50 0
+#define FRONTIER_LVL_OPEN 1
+
+// Battle Frontier battle modes.
+#define FRONTIER_MODE_SINGLES 0
+#define FRONTIER_MODE_DOUBLES 1
+#define FRONTIER_MODE_MULTIS 2
+#define FRONTIER_MODE_LINK_MULTIS 3
+
 #endif // GUARD_CONSTANTS_BATTLE_FRONTIER_H

@@ -52,6 +52,7 @@
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/vars.h"
+#include "constants/battle_frontier.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -1667,7 +1668,7 @@ bool8 InMultiBattleRoom(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM) &&
-        VarGet(VAR_0x40CE) == 2)
+        VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS)
         return TRUE;
     return FALSE;
 }
@@ -2240,10 +2241,10 @@ void sub_813A080(void)
     };
 
     u8 i;
-    u16 var = VarGet(VAR_0x40CE);
-    u8 chosenLevel = gSaveBlock2Ptr->frontier.chosenLvl;
+    u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    if (var == 2 && !FlagGet(FLAG_0x152))
+    if (battleMode == 2 && !FlagGet(FLAG_0x152))
     {
         gSpecialVar_0x8005 = 5;
         gSpecialVar_0x8006 = 4;
@@ -2252,7 +2253,7 @@ void sub_813A080(void)
 
     for (i = 0; i < 9; i++)
     {
-        if (gUnknown_085B2CDC[i] > gSaveBlock2Ptr->frontier.field_CE0[var][chosenLevel])
+        if (gUnknown_085B2CDC[i] > gSaveBlock2Ptr->frontier.field_CE0[battleMode][lvlMode])
         {
             gSpecialVar_0x8005 = 4;
             gSpecialVar_0x8006 = i + 5;
@@ -3036,13 +3037,13 @@ void sub_813A878(u8 a0)
 {
     static const u16 gUnknown_085B3104[] = {0x0000, 0x0001, 0x0002, 0x0100, 0x0101, 0x0400, 0x0401, 0x0200, 0x0201, 0x0300, 0x0500, 0x0600};
 
-    u16 var1 = VarGet(VAR_0x40CE);
+    u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u16 var2 = VarGet(VAR_FRONTIER_GAMBLER_SET_FACILITY_F);
-    u16 var3 = VarGet(VAR_FRONTIER_FACILITY);
+    u16 frontierFacilityId = VarGet(VAR_FRONTIER_FACILITY);
 
     if (VarGet(VAR_FRONTIER_GAMBLER_PLACED_BET_F) == 1)
     {
-        if (gUnknown_085B3104[var2] == (var3 << 8) + var1)
+        if (gUnknown_085B3104[var2] == (frontierFacilityId << 8) + battleMode)
         {
             if (a0 != 0)
             {

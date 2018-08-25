@@ -133,7 +133,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255DF4:: @ 8255DF4
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 3
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleArenaLobby_Text_256166, 4
 
