@@ -14195,7 +14195,7 @@ sub_81A1B1C: @ 81A1B1C
 
 	thumb_func_start sub_81A1B28
 sub_81A1B28: @ 81A1B28
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	bx lr
@@ -17391,7 +17391,7 @@ _081A370C:
 	ldr r0, =0x0000012b
 	cmp r3, r0
 	bhi _081A3738
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	adds r1, r3, 0
 	muls r1, r0
@@ -17443,7 +17443,7 @@ _081A3794:
 	ldr r0, =0x0000012b
 	cmp r3, r0
 	bhi _081A37B8
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	adds r1, r3, 0
 	muls r1, r0
@@ -17511,7 +17511,7 @@ _081A3844:
 	ldr r0, =0x0000012b
 	cmp r3, r0
 	bhi _081A3868
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	adds r1, r3, 0
 	muls r1, r0
@@ -20046,7 +20046,7 @@ sub_81A4E04: @ 81A4E04
 	cmp r0, 0x1
 	bne _081A4E44
 	ldr r0, =0x000003fe
-	bl sub_81953A0
+	bl TrainerIdToDomeTournamentId
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetTrainerMonCountInBits
@@ -22329,7 +22329,7 @@ sub_81A61B0: @ 81A61B0
 	ldrh r0, [r1]
 	movs r1, 0x7
 	bl __udivsi3
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	ldr r1, =gBattleFrontierTrainers
 	str r1, [r2]
 	ldr r5, =0x00000cb2
@@ -23050,7 +23050,7 @@ sub_81A67EC: @ 81A67EC
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4C
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	mov r0, sp
@@ -26455,7 +26455,7 @@ _081A831A:
 	bne _081A82D2
 	ldr r5, =gTrainerBattleOpponent_A
 	strh r4, [r5]
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	ldrh r0, [r5]
@@ -26500,7 +26500,7 @@ sub_81A8374: @ 81A8374
 	bl __udivsi3
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	lsls r7, r5, 24
@@ -26667,7 +26667,7 @@ sub_81A84EC: @ 81A84EC
 	ldr r0, =0x0000012b
 	cmp r1, r0
 	bhi _081A8542
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -26684,7 +26684,7 @@ _081A8524:
 	ldr r0, =0x0000012b
 	cmp r1, r0
 	bhi _081A8542
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -28498,7 +28498,7 @@ _081A940A:
 
 	thumb_func_start sub_81A9414
 sub_81A9414: @ 81A9414
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	bx lr
@@ -28534,7 +28534,7 @@ sub_81A9424: @ 81A9424
 	lsrs r5, r0, 16
 	movs r6, 0
 	ldr r2, =gUnknown_08613C1C
-	ldr r0, =gUnknown_0203BC88
+	ldr r0, =gFacilityTrainers
 	ldr r1, [r0]
 	movs r0, 0x34
 	muls r0, r5
@@ -28554,7 +28554,7 @@ _081A9488:
 	ldr r4, =gUnknown_08613C1C
 	lsls r3, r6, 1
 	adds r2, r3, r4
-	ldr r0, =gUnknown_0203BC88
+	ldr r0, =gFacilityTrainers
 	ldr r1, [r0]
 	movs r0, 0x34
 	muls r0, r5
@@ -29795,7 +29795,7 @@ sub_81A9EDC: @ 81A9EDC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r1, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -29812,7 +29812,7 @@ sub_81A9EFC: @ 81A9EFC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r1, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -29829,7 +29829,7 @@ sub_81A9F1C: @ 81A9F1C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r1, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -29848,7 +29848,7 @@ GetTrainerEncounterMusicIdInBattlePyramind: @ 81A9F3C
 	lsrs r0, 16
 	movs r4, 0
 	ldr r3, =gFacilityClassToTrainerClass
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r2, [r1]
 	movs r1, 0x34
 	muls r0, r1

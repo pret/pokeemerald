@@ -340,8 +340,8 @@ struct FrontierMonData
 struct BattleDomeTrainer
 {
     u16 trainerId:10;
-    u16 unk1:1;
-    u16 unk2:2;
+    u16 isEliminated:1;
+    u16 eliminatedAt:2;
     u16 unk3:3;
 };
 

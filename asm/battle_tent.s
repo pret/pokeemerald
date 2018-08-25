@@ -14,7 +14,7 @@ sub_81B9EC0: @ 81B9EC0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x3C
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gSlateportBattleTentTrainers
 	str r0, [r1]
 	add r0, sp, 0xC
@@ -205,7 +205,7 @@ sub_81BA040: @ 81BA040
 	sub sp, 0x10
 	movs r0, 0
 	mov r10, r0
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gSlateportBattleTentTrainers
 	str r0, [r1]
 	ldr r1, =gFacilityTrainerMons
@@ -261,7 +261,7 @@ _081BA0AA:
 	ldr r2, =gTrainerBattleOpponent_A
 	strh r3, [r2]
 	ldrh r3, [r2]
-	ldr r4, =gUnknown_0203BC88
+	ldr r4, =gFacilityTrainers
 	ldr r1, [r4]
 	movs r0, 0x34
 	muls r0, r3

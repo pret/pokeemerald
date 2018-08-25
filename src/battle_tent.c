@@ -11,7 +11,7 @@
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 
-// this file's functions
+// This file's functions.
 void sub_81B99D4(void);
 void sub_81B9A28(void);
 void sub_81B9A44(void);
@@ -115,7 +115,7 @@ void sub_81B9A60(void)
 void sub_81B9A90(void)
 {
     if (gTrainerBattleOpponent_A < 300)
-        ConvertBattleFrontierTrainerSpeechToString(gUnknown_0203BC88[gTrainerBattleOpponent_A].speechBefore);
+        ConvertBattleFrontierTrainerSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
 }
 
 void sub_81B9ABC(void)
