@@ -107,7 +107,7 @@ u16 sub_80DE84C(u16);
 void sub_80DB89C(void);
 u16 sub_80DB8B8(u8);
 void sub_80DB918(void);
-bool8 sub_80DBCA8(u8);
+bool8 Contest_IsMonsTurnDisabled(u8);
 void sub_80DBF68(void);
 void sub_80DBF90(void);
 void sub_80DC2BC(void);
@@ -721,7 +721,7 @@ void sub_80D833C(u8 taskId)
         sub_80DCD48();
         DmaCopy32Defvars(3, gPlttBufferUnfaded, shared18000.unk18204, 0x400);
         ConvertIntToDecimalStringN(gStringVar1, gContestResources->field_0->turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
-        if (!sub_80DBCA8(gContestPlayerMonIndex))
+        if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
             StringCopy(gDisplayedStringBattle, gText_0827D507);
         else
             StringCopy(gDisplayedStringBattle, gText_0827D531);
@@ -745,7 +745,7 @@ void sub_80D8424(u8 taskId)
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if (!sub_80DBCA8(gContestPlayerMonIndex))
+        if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
         {
             sub_80DC490(TRUE);
             gTasks[taskId].func = sub_80D8490;
@@ -819,7 +819,7 @@ void sub_80D8610(u8 taskId)
                 PlaySE(SE_SELECT);
                 sub_80DC490(FALSE);
                 ConvertIntToDecimalStringN(gStringVar1, gContestResources->field_0->turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
-                if (!sub_80DBCA8(gContestPlayerMonIndex))
+                if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
                     StringCopy(gDisplayedStringBattle, gText_0827D507);
                 else
                     StringCopy(gDisplayedStringBattle, gText_0827D531);
@@ -2636,7 +2636,7 @@ void sub_80DB4E0(u16 move, u8 b)
 {
     u8 r7 = gUnknown_02039F26[b] * 5 + 2;
 
-    if (!sub_80DBCA8(b) && move != MOVE_NONE)
+    if (!Contest_IsMonsTurnDisabled(b) && move != MOVE_NONE)
     {
         u16 tile = sub_80DB2EC(move, b);
 

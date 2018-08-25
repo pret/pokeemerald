@@ -2,6 +2,7 @@
 #define GUARD_MENU_HELPERS_H
 
 #include "task.h"
+#include "window.h"
 
 // Exported type declarations
 
