@@ -6750,10 +6750,10 @@ static void atk76_various(void)
             }
         }
         break;
-    case 21:
+    case VARIOUS_VOLUME_DOWN:
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x55);
         break;
-    case 22:
+    case VARIOUS_VOLUME_UP:
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         break;
     case 23:
