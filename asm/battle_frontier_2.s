@@ -20059,7 +20059,7 @@ _081A4E46:
 	bl ZeroEnemyPartyMons
 	movs r1, 0
 	str r1, [sp, 0x18]
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x1C]
@@ -23702,7 +23702,7 @@ sub_81A6CD0: @ 81A6CD0
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x24]
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
@@ -29517,7 +29517,7 @@ _081A9C56:
 	bl SetMonData
 	cmp r5, 0
 	beq _081A9CD4
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, [sp, 0x10]

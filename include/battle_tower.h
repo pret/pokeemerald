@@ -32,7 +32,17 @@ struct BattleFrontierTrainer
     u16 *btMonPool;
 };
 
+struct FacilityMon
+{
+    u16 species;
+    u16 moves[4];
+    u8 itemTableId;
+    u8 evSpread;
+    u8 nature;
+};
+
 extern const struct BattleFrontierTrainer *gFacilityTrainers;
+extern const struct FacilityMon *gFacilityTrainerMons;
 
 u16 sub_8164FCC(u8, u8);
 void sub_81659DC(struct RSBattleTowerRecord *a0, struct RSBattleTowerRecord *a1);

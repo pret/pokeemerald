@@ -2188,13 +2188,13 @@ void sub_8139F20(void)
             }
             break;
         case 6:
-            if (gSaveBlock2Ptr->frontier.field_DC8[0] >= gSaveBlock2Ptr->frontier.field_DC8[1])
+            if (gSaveBlock2Ptr->frontier.field_DC8[0][0] >= gSaveBlock2Ptr->frontier.field_DC8[0][1])
             {
-                unk = gSaveBlock2Ptr->frontier.field_DC8[0];
+                unk = gSaveBlock2Ptr->frontier.field_DC8[0][0];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.field_DC8[1];
+                unk = gSaveBlock2Ptr->frontier.field_DC8[0][1];
             }
             break;
         case 7:

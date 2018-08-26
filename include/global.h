@@ -337,6 +337,12 @@ struct FrontierMonData
     u8 nature;
 };
 
+struct Struct_field_E70
+{
+    u16 monId;
+    u8 unk2[9];
+};
+
 struct BattleDomeTrainer
 {
     u16 trainerId:10;
@@ -398,10 +404,8 @@ struct BattleFrontier
     /*0xD24*/ struct BattleDomeTrainer domeTrainers[DOME_TOURNAMENT_TRAINERS_COUNT];
     /*0xD64*/ u16 domeMonId[DOME_TOURNAMENT_TRAINERS_COUNT][3];
     /*0xD64*/ u16 field_DC4[2];
-    /*0xDC8*/ u16 field_DC8[2];
-    /*0xDCC*/ u8 filler_DCC[4];
-    /*0xDD0*/ u16 field_DD0[2];
-    /*0xDD4*/ u16 field_DD4[2];
+    /*0xDC8*/ u16 field_DC8[2][2];
+    /*0xDD0*/ u16 field_DD0[2][2];
     /*0xDD8*/ u16 field_DD8;
     /*0xDDA*/ u16 field_DDA[2];
     /*0xDDE*/ u16 field_DDE[2];
@@ -429,7 +433,7 @@ struct BattleFrontier
     /*0xE6A*/ u16 field_E6A;
     /*0xE6C*/ u16 field_E6C;
     /*0xE6E*/ u16 field_E6E;
-    /*0xE70*/ u8 field_E70[72];
+    /*0xE70*/ struct Struct_field_E70 field_E70[6];
     /*0xEB8*/ u16 frontierBattlePoints;
     /*0xEBA*/ u8 field_EBA;
     /*0xEBB*/ u8 field_EBB;

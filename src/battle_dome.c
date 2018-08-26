@@ -39,15 +39,6 @@
 #define DOME_FINAL 3
 #define DOME_ROUNDS_COUNT 4
 
-struct FacilityMon
-{
-    u16 species;
-    u16 moves[4];
-    u8 itemTableId;
-    u8 evSpread;
-    u8 nature;
-};
-
 struct BattleDomeStruct
 {
     u8 arr[DOME_TOURNAMENT_TRAINERS_COUNT];
@@ -66,7 +57,7 @@ extern void sub_81B8558(void);
 extern u32 sub_81A39C4(void);
 extern u16 sub_8162548(u8, u8);
 extern u16 RandomizeFacilityTrainerMonId(u16);
-extern u8 GetFrontierEnemyMonLevel(void);
+extern u8 GetFacilityEnemyMonLevel(void);
 extern u16 sub_81A5060(u8 monId, u8 moveSlotId);
 extern u8 sub_81A50F0(u8, u8);
 extern u8 sub_81A50B0(u8);
@@ -87,7 +78,6 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern const struct FacilityMon *gFacilityTrainerMons;
 
 extern void (* const gUnknown_0860D090[])(void);
 extern const u32 gUnknown_0860D0EC[][2];
@@ -822,7 +812,7 @@ void InitDomeTrainers(void)
         monTypesBits >>= 1;
     }
 
-    monLevel = GetFrontierEnemyMonLevel();
+    monLevel = GetFacilityEnemyMonLevel();
     statSums[0] += (monTypesCount * monLevel) / 20;
 
     for (i = 1; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
@@ -995,7 +985,7 @@ static void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentM
     s32 i;
     u8 happiness = 0xFF;
     u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Should be using trainerId instead of tournamentTrainerId. As a result, all Pokemon have ivs of 3.
-    u8 level = GetFrontierEnemyMonLevel();
+    u8 level = GetFacilityEnemyMonLevel();
     CreateMonWithEVSpreadPersonalityOTID(&gEnemyParty[monPartyId],
                                          gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].species,
                                          level,
@@ -3716,7 +3706,7 @@ static u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roun
     u16 bestScore = 0;
     u16 bestId = 0;
     s32 movePower = 0;
-    GetFrontierEnemyMonLevel(); // Unused return variable.
+    GetFacilityEnemyMonLevel(); // Unused return variable.
 
     // Calc move points of all 4 moves for all 3 pokemon hitting all 3 target mons.
     for (i = 0; i < 3; i++)
@@ -4580,7 +4570,7 @@ static void DecideRoundWinners(u8 roundId)
 static void CopyDomeTrainerName(u8 *dst, u16 trainerId)
 {
     s32 i = 0;
-    GetFrontierEnemyMonLevel(); // Unused return value.
+    GetFacilityEnemyMonLevel(); // Unused return value.
 
     if (trainerId == TRAINER_FRONTIER_BRAIN)
     {

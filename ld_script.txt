@@ -243,6 +243,7 @@ SECTIONS {
         src/trainer_pokemon_sprites.o(.text);
         src/lilycove_lady.o(.text);
         src/battle_dome.o(.text);
+        src/battle_frontier_1.o(.text);
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
         asm/battle_frontier_2.o(.text);

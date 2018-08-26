@@ -11,6 +11,10 @@
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 
+extern const struct BattleFrontierTrainer gSlateportBattleTentTrainers[];
+extern const struct FacilityMon gSlateportBattleTentMons[];
+extern const u16 gBattleFrontierHeldItems[];
+
 // This file's functions.
 void sub_81B99D4(void);
 void sub_81B9A28(void);
@@ -51,7 +55,7 @@ void (*const gUnknown_086160B4[])(void) =
     sub_81B9B28
 };
 
-const u16 gUnknown_086160D4[] = {ITEM_NEST_BALL, ITEM_NONE};
+static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
 
 void (*const gUnknown_086160D8[])(void) =
 {
@@ -64,7 +68,7 @@ void (*const gUnknown_086160D8[])(void) =
     sub_81B9CF0
 };
 
-const u16 gUnknown_086160F4[] = {ITEM_HYPER_POTION, ITEM_NONE};
+static const u16 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
 
 void (*const gUnknown_086160F8[])(void) =
 {
@@ -80,7 +84,7 @@ void (*const gUnknown_086160F8[])(void) =
     sub_81B9EC0
 };
 
-const u16 gUnknown_08616120[] = {ITEM_FULL_HEAL, ITEM_NONE};
+static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
 
 // code
 void sub_81B99B4(void)
@@ -128,7 +132,7 @@ void sub_81B9ABC(void)
 
 void sub_81B9B00(void)
 {
-    gSaveBlock2Ptr->frontier.field_E6A = gUnknown_086160D4[Random() % 1];
+    gSaveBlock2Ptr->frontier.field_E6A = sVerdanturfTentRewards[Random() % ARRAY_COUNT(sVerdanturfTentRewards)];
 }
 
 void sub_81B9B28(void)
@@ -178,7 +182,7 @@ void sub_81B9C2C(void)
 
 void sub_81B9C70(void)
 {
-    gSaveBlock2Ptr->frontier.field_E6C = gUnknown_086160F4[Random() % 1];
+    gSaveBlock2Ptr->frontier.field_E6C = sFallarborTentRewards[Random() % ARRAY_COUNT(sFallarborTentRewards)];
 }
 
 void sub_81B9C98(void)
@@ -233,7 +237,7 @@ void sub_81B9DB4(void)
 
 void sub_81B9DF8(void)
 {
-    gSaveBlock2Ptr->frontier.field_E6E = gUnknown_08616120[Random() % 1];
+    gSaveBlock2Ptr->frontier.field_E6E = sSlateportTentRewards[Random() % ARRAY_COUNT(sSlateportTentRewards)];
 }
 
 void sub_81B9E20(void)
@@ -266,3 +270,70 @@ bool8 sub_81B9E94(void)
     return (gMapHeader.regionMapSectionId == MAPSEC_SLATEPORT_CITY
             && ((gMapHeader.mapLayoutId == 385) | (gMapHeader.mapLayoutId == 386)));
 }
+
+// This function was written very...oddly.
+/*
+void sub_81B9EC0(void)
+{
+    s32 i, j;
+    u16 currMonId, currSpecies;
+    u16 species[PARTY_SIZE];
+    u16 monIds[PARTY_SIZE];
+    u16 heldItems[PARTY_SIZE];
+    s32 var;
+
+    gFacilityTrainers = gSlateportBattleTentTrainers;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        species[i] = 0;
+        monIds[i] = 0;
+        heldItems[i] = 0;
+    }
+    gFacilityTrainerMons = gSlateportBattleTentMons;
+
+    currSpecies = 0;
+    i = 0;
+    while (i != PARTY_SIZE)
+    {
+        // Cannot have two pokemon of the same species.
+        currMonId = Random() % 70;
+        j = 0;
+        var = 0 + i;
+        while (j < var && monIds[j] != currMonId)
+        {
+            if (species[j] == gFacilityTrainerMons[currMonId].species)
+            {
+                if (currSpecies == 0)
+                    currSpecies = gFacilityTrainerMons[currMonId].species;
+                else
+                    break;
+            }
+            j++;
+        }
+        if (j != var)
+            continue;
+
+        // Cannot have two same held items.
+        for (j = 0; j < var; j++)
+        {
+            if (heldItems[j] == 0)
+                continue;
+            if (heldItems[j] == gBattleFrontierHeldItems[gFacilityTrainerMons[currMonId].itemTableId])
+            {
+                if (gFacilityTrainerMons[currMonId].species == currSpecies)
+                    currSpecies = 0;
+                else
+                    break;
+            }
+        }
+        if (j != var)
+            continue;
+
+        gSaveBlock2Ptr->frontier.field_E70[var].monId = currMonId;
+        species[var] = gFacilityTrainerMons[currMonId].species;
+        heldItems[var] = gBattleFrontierHeldItems[gFacilityTrainerMons[currMonId].itemTableId];
+        monIds[var] = currMonId;
+        i++;
+    }
+}
+*/

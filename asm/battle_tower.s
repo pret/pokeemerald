@@ -391,7 +391,7 @@ _081622B2:
 	adds r4, r1, r0
 	mov r0, r10
 	str r2, [sp, 0x38]
-	bl BattleFrontierGetOpponentLvl
+	bl GetFrontierEnemyMonLevel
 	ldrb r1, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -551,7 +551,7 @@ _08162414:
 	bl __udivsi3
 	lsls r0, 16
 	lsrs r5, r0, 16
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	subs r4, 0x2
 	cmp r4, 0x1
 	bhi _08162488
@@ -784,7 +784,7 @@ sub_8162614: @ 8162614
 	adds r6, r4, 0
 	lsls r1, 24
 	lsrs r5, r1, 24
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r0, 0xFA
 	lsls r0, 1
 	cmp r4, r0
@@ -962,7 +962,7 @@ sub_81627A4: @ 81627A4
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r0, 0xFA
 	lsls r0, 1
 	cmp r4, r0
@@ -1335,7 +1335,7 @@ GetFrontierTrainerFrontSpriteId: @ 8162AA0
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r0, 0xFA
 	lsls r0, 1
 	cmp r4, r0
@@ -1462,7 +1462,7 @@ GetFrontierOpponentClass: @ 8162BD8
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r0, 0xFA
 	lsls r0, 1
 	cmp r4, r0
@@ -1602,7 +1602,7 @@ sub_8162D34: @ 8162D34
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r0, 0xFA
 	lsls r0, 1
 	cmp r4, r0
@@ -1704,7 +1704,7 @@ GetFrontierTrainerName: @ 8162E20
 	lsls r1, 16
 	lsrs r5, r1, 16
 	movs r4, 0
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r0, 0xFA
 	lsls r0, 1
 	cmp r5, r0
@@ -1854,7 +1854,7 @@ sub_8162F68: @ 8162F68
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r0, 0xFA
 	lsls r0, 1
 	cmp r4, r0
@@ -2025,7 +2025,7 @@ sub_81630C4: @ 81630C4
 	add r4, sp, 0x14
 	movs r0, 0xFF
 	strb r0, [r4]
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
@@ -2551,7 +2551,7 @@ RandomizeFacilityTrainerMonId: @ 8163524
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, =gFacilityTrainers
@@ -2728,7 +2728,7 @@ _081636A4:
 	movs r0, 0x1F
 _081636A6:
 	str r0, [sp, 0x18]
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x14]
@@ -3029,7 +3029,7 @@ _0816390A:
 	thumb_func_start sub_8163914
 sub_8163914: @ 8163914
 	push {lr}
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -3979,7 +3979,7 @@ _081641E6:
 	lsls r0, r1, 24
 	lsrs r0, 24
 	str r2, [sp, 0x18]
-	bl BattleFrontierGetOpponentLvl
+	bl GetFrontierEnemyMonLevel
 	ldrb r1, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4091,7 +4091,7 @@ sub_81642A0: @ 81642A0
 	movs r2, 0
 	bl GetMonData
 	str r0, [sp, 0x20]
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r7, 0
 	ldr r0, [sp, 0x18]
 	lsls r0, 24
@@ -4464,7 +4464,7 @@ _081645B8:
 	lsls r0, r1, 24
 	lsrs r0, 24
 	str r3, [sp, 0x48]
-	bl BattleFrontierGetOpponentLvl
+	bl GetFrontierEnemyMonLevel
 	ldrb r1, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4556,7 +4556,7 @@ sub_81646BC: @ 81646BC
 	movs r0, 0
 	mov r9, r0
 	mov r10, r0
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	movs r0, 0xFA
 	lsls r0, 1
 	cmp r5, r0
@@ -4705,7 +4705,7 @@ sub_8164828: @ 8164828
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	bl sub_81A39C4
 	lsls r0, 16
 	lsrs r0, 16
@@ -6073,7 +6073,7 @@ sub_8165404: @ 8165404
 	sub sp, 0x70
 	lsls r0, 16
 	lsrs r7, r0, 16
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	ldr r0, =0x00000c03
 	cmp r7, r0
 	beq _08165420
@@ -6228,7 +6228,7 @@ _08165564:
 	bls _0816556C
 	b _081656E8
 _0816556C:
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x50]
@@ -7083,8 +7083,8 @@ _08165C2A:
 	.pool
 	thumb_func_end sub_8165B88
 
-	thumb_func_start GetFrontierEnemyMonLevel
-GetFrontierEnemyMonLevel: @ 8165C40
+	thumb_func_start GetFacilityEnemyMonLevel
+GetFacilityEnemyMonLevel: @ 8165C40
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -7104,20 +7104,20 @@ GetFrontierEnemyMonLevel: @ 8165C40
 	ldrb r0, [r2]
 	lsls r0, 30
 	lsrs r0, 30
-	bl BattleFrontierGetOpponentLvl
+	bl GetFrontierEnemyMonLevel
 	b _08165C88
 	.pool
 _08165C84:
-	bl sub_8165D78
+	bl GetTentEnemyMonLevel
 _08165C88:
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end GetFrontierEnemyMonLevel
+	thumb_func_end GetFacilityEnemyMonLevel
 
-	thumb_func_start BattleFrontierGetOpponentLvl
-BattleFrontierGetOpponentLvl: @ 8165C90
+	thumb_func_start GetFrontierEnemyMonLevel
+GetFrontierEnemyMonLevel: @ 8165C90
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -7138,7 +7138,7 @@ _08165CA2:
 _08165CB0:
 	pop {r1}
 	bx r1
-	thumb_func_end BattleFrontierGetOpponentLvl
+	thumb_func_end GetFrontierEnemyMonLevel
 
 	thumb_func_start sub_8165CB4
 sub_8165CB4: @ 8165CB4
@@ -7246,8 +7246,8 @@ _08165D72:
 	bx r1
 	thumb_func_end sub_8165D40
 
-	thumb_func_start sub_8165D78
-sub_8165D78: @ 8165D78
+	thumb_func_start GetTentEnemyMonLevel
+GetTentEnemyMonLevel: @ 8165D78
 	push {lr}
 	ldr r0, =0x000040cf
 	bl VarGet
@@ -7300,7 +7300,7 @@ _08165E02:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8165D78
+	thumb_func_end GetTentEnemyMonLevel
 
 	thumb_func_start sub_8165E18
 sub_8165E18: @ 8165E18
@@ -7384,7 +7384,7 @@ sub_8165EA4: @ 8165EA4
 	lsls r2, 24
 	lsrs r2, 24
 	str r2, [sp, 0x1C]
-	bl sub_8165D78
+	bl GetTentEnemyMonLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
@@ -7756,7 +7756,7 @@ sub_8166188: @ 8166188
 	ands r0, r1
 	cmp r0, 0
 	beq _081661E8
-	bl GetFrontierEnemyMonLevel
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	movs r5, 0
 	ldr r7, =gBaseStats

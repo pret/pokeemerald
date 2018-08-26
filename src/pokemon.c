@@ -81,8 +81,7 @@ extern void set_unknown_box_id(u8);
 extern void sub_803FA70(u8 battlerId);
 extern u8 sav1_map_get_name(void);
 extern const u8 *sub_81A1650(u8, u8 language);
-extern u8 BattleFrontierGetOpponentLvl(u8);
-extern u16 FacilityClassToPicIndex(u16);
+extern u8 GetFrontierEnemyMonLevel(u8);
 extern bool8 InBattlePyramid(void);
 extern bool8 InBattlePike(void);
 extern bool8 sub_806F104(void);
@@ -956,7 +955,7 @@ const u16 gHoennToNationalOrder[] = // Assigns Hoenn Dex Pokémon (Using Nationa
     NATIONAL_DEX_BLAZIKEN,      // HOENN_DEX_BLAZIKEN
     NATIONAL_DEX_MUDKIP,        // HOENN_DEX_MUDKIP
     NATIONAL_DEX_MARSHTOMP,     // HOENN_DEX_MARSHTOMP
-    NATIONAL_DEX_SWAMPERT,      // HOENN_DEX_SWAMPERT   
+    NATIONAL_DEX_SWAMPERT,      // HOENN_DEX_SWAMPERT
     NATIONAL_DEX_POOCHYENA,     // HOENN_DEX_POOCHYENA
     NATIONAL_DEX_MIGHTYENA,     // HOENN_DEX_MIGHTYENA
     NATIONAL_DEX_ZIGZAGOON,     // HOENN_DEX_ZIGZAGOON
@@ -2821,7 +2820,7 @@ void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lv
     u8 value;
 
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
-        level = BattleFrontierGetOpponentLvl(gSaveBlock2Ptr->frontier.lvlMode);
+        level = GetFrontierEnemyMonLevel(gSaveBlock2Ptr->frontier.lvlMode);
     else if (lvl50)
         level = 50;
     else
@@ -2885,7 +2884,7 @@ void sub_8068528(struct Pokemon *mon, const struct UnknownPokemonStruct2 *src, u
 
     CreateMon(mon,
               src->mons[monId].species,
-              BattleFrontierGetOpponentLvl(src->field_0_1 - 1),
+              GetFrontierEnemyMonLevel(src->field_0_1 - 1),
               0x1F,
               TRUE,
               personality,
