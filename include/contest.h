@@ -341,7 +341,8 @@ struct UnknownContestStruct7
     u8 contestant;
 };
 
-struct ContestAIInfo {
+struct ContestAIInfo
+{
     /*0x00*/ u8 aiState;
     /*0x02*/ u16 unk2;
     /*0x04*/ u8 unk4;
@@ -352,9 +353,9 @@ struct ContestAIInfo {
     /*0x14*/ u32 flags;
     /*0x18*/ s16 scriptResult;
     /*0x1A*/ s16 scriptArr[3];
-    /*0x20*/ u32 stack[8];
-    /*0x40*/ u8 unk40;
-    /*0x41*/ u8 unk41;
+    /*0x20*/ const u8 *stack[8];
+    /*0x40*/ u8 stackSize;
+    /*0x41*/ u8 contestantId;
 };
 
 struct UnknownContestStruct5
@@ -406,7 +407,7 @@ extern struct ContestResources *gContestResources;
 #define sContest (*gContestResources->field_0)
 #define sContestantStatus (gContestResources->field_4)
 #define shared192D0 (*gContestResources->field_8)
-#define eContestAI (*gContestResources->field_C)
+#define eContestAI (gContestResources->field_C)
 #define shared19328 (*gContestResources->field_10)
 #define shared19338 (*gContestResources->field_14)
 
@@ -414,8 +415,16 @@ extern struct ContestResources *gContestResources;
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
 
 extern u32 gContestRngValue;
+extern u8 gUnknown_02039F26[4];
 
 bool8 IsSpeciesNotUnown(u16 species);
 void LoadContestBgAfterMoveAnim(void);
+void SetContestantEffectStringID(u8 a, u8 b);
+void SetContestantEffectStringID2(u8 a, u8 b);
+void MakeContestantNervous(u8 p);
+bool8 Contest_IsMonsTurnDisabled(u8 a);
+bool8 sub_80DE1E8(u8 a);
+void SetStartledString(u8 a, u8 b);
+s8 Contest_GetMoveExcitement(u16);
 
 #endif //GUARD_CONTEST_H

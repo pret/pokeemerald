@@ -6796,7 +6796,7 @@ sub_81B3828: @ 81B3828
 	ldr r0, =sub_81B3894
 	str r0, [sp]
 	movs r0, 0x1
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 	b _081B3880
 	.pool
 _081B3868:
@@ -6810,7 +6810,7 @@ _081B3868:
 	ldr r0, =sub_81B3894
 	str r0, [sp]
 	movs r0, 0
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 _081B3880:
 	add sp, 0x4
 	pop {r4}
@@ -17663,7 +17663,7 @@ sub_81B968C: @ 81B968C
 	ldr r0, =CB2_ReturnToField
 	str r0, [sp]
 	movs r0, 0x3
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
