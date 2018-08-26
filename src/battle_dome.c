@@ -89,53 +89,11 @@ extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 extern const struct FacilityMon *gFacilityTrainerMons;
 
-extern void (* const gUnknown_0860D090[])(void);
-extern const u32 gUnknown_0860D0EC[][2];
-extern const u32 gUnknown_0860D0FC[][2];
 extern const u16 gBattleFrontierHeldItems[];
-extern const u8 gUnknown_0860D10C[][4];
-extern const u8 gUnknown_0860D14C[];
-extern const struct BgTemplate gUnknown_0860CE84[4];
-extern const struct WindowTemplate gUnknown_0860CEB4[];
-extern const struct CompressedSpriteSheet gUnknown_0860CF50[];
-extern const struct SpriteTemplate gUnknown_0860D068;
-extern const struct SpriteTemplate gUnknown_0860D050;
-extern const u8 gUnknown_0860D080[];
-extern const u8 gUnknown_0860D15C[];
-extern const u8 gUnknown_0860D1A0[][4];
-extern const u8 gUnknown_0860D19C[];
-extern const u8 gUnknown_0860D349[];
-extern const u8 gUnknown_0860D1C0[];
-extern const u8 gUnknown_0860D343[];
-extern const u8 gUnknown_0860D340[];
-extern const u8 gUnknown_0860D346[];
-extern const u8 gUnknown_0860C988[31][16];
-extern const u8 gUnknown_0860D3F1[][2];
-extern const u8 gUnknown_0860D3C4[][3];
-extern const u8 gUnknown_0860D3B4[];
-extern const u8 gUnknown_0860D3A8[];
-extern const u8 gUnknown_0860D3AB[];
-extern const u8 gUnknown_0860D3AE[];
-extern const u8 gUnknown_0860D3B1[];
-extern const u8 gUnknown_0860D080[];
 extern const u8 gUnknown_08D83900[];
-extern const u8 gUnknown_0860CBF1[][5][4];
-extern const u8 *const gBattleDomePotentialPointers[];
-extern const u8 *const gBattleDomeOpponentStylePointers[];
-extern const u8 *const gBattleDomeOpponentStatsPointers[];
-extern const u8 *const gBattleDomeWinStringsPointers[];
-extern const u8 *const gBattleDomeMatchNumberPointers[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const struct BgTemplate gUnknown_0860CE74[4];
-extern const struct WindowTemplate gUnknown_0860CE94[];
-extern const u8 gUnknown_0860D411[][2];
 extern const struct SpriteTemplate gUnknown_0860CFA8;
-extern const struct SpriteTemplate gUnknown_0860D008;
-extern const struct SpriteTemplate gUnknown_0860CFD8;
-extern const struct ScanlineEffectParams gUnknown_0860CF44;
-extern const struct UnkStruct_860DD10 *gUnknown_0860DD10[][4];
-extern const u8 gUnknown_0860DE10[][4];
 
 // gfx
 extern const u8 gUnknown_08D83D50[];
@@ -149,9 +107,125 @@ extern const u8 gUnknown_08D82F10[];
 extern const u8 gUnknown_08D834FC[];
 extern const u8 gUnknown_08D83B2C[];
 extern const u8 gUnknown_08D83C3C[];
+extern const u8 gBattleFrontierGfx_DomeOptions[];
 
 // text
 extern const u8 gTrainerClassNames[][0xD];
+
+extern const u8 gBattleDomeOpponentPotential1[];
+extern const u8 gBattleDomeOpponentPotential2[];
+extern const u8 gBattleDomeOpponentPotential3[];
+extern const u8 gBattleDomeOpponentPotential4[];
+extern const u8 gBattleDomeOpponentPotential5[];
+extern const u8 gBattleDomeOpponentPotential6[];
+extern const u8 gBattleDomeOpponentPotential7[];
+extern const u8 gBattleDomeOpponentPotential8[];
+extern const u8 gBattleDomeOpponentPotential9[];
+extern const u8 gBattleDomeOpponentPotential10[];
+extern const u8 gBattleDomeOpponentPotential11[];
+extern const u8 gBattleDomeOpponentPotential12[];
+extern const u8 gBattleDomeOpponentPotential13[];
+extern const u8 gBattleDomeOpponentPotential14[];
+extern const u8 gBattleDomeOpponentPotential15[];
+extern const u8 gBattleDomeOpponentPotential16[];
+extern const u8 gBattleDomeOpponentPotential17[];
+extern const u8 gBattleDomeOpponentStyle1[];
+extern const u8 gBattleDomeOpponentStyle2[];
+extern const u8 gBattleDomeOpponentStyle3[];
+extern const u8 gBattleDomeOpponentStyle4[];
+extern const u8 gBattleDomeOpponentStyle5[];
+extern const u8 gBattleDomeOpponentStyle6[];
+extern const u8 gBattleDomeOpponentStyle7[];
+extern const u8 gBattleDomeOpponentStyle8[];
+extern const u8 gBattleDomeOpponentStyle9[];
+extern const u8 gBattleDomeOpponentStyle10[];
+extern const u8 gBattleDomeOpponentStyle11[];
+extern const u8 gBattleDomeOpponentStyle12[];
+extern const u8 gBattleDomeOpponentStyle13[];
+extern const u8 gBattleDomeOpponentStyle14[];
+extern const u8 gBattleDomeOpponentStyle15[];
+extern const u8 gBattleDomeOpponentStyle16[];
+extern const u8 gBattleDomeOpponentStyle17[];
+extern const u8 gBattleDomeOpponentStyle18[];
+extern const u8 gBattleDomeOpponentStyle19[];
+extern const u8 gBattleDomeOpponentStyle20[];
+extern const u8 gBattleDomeOpponentStyle21[];
+extern const u8 gBattleDomeOpponentStyle22[];
+extern const u8 gBattleDomeOpponentStyle23[];
+extern const u8 gBattleDomeOpponentStyle24[];
+extern const u8 gBattleDomeOpponentStyle25[];
+extern const u8 gBattleDomeOpponentStyle26[];
+extern const u8 gBattleDomeOpponentStyle27[];
+extern const u8 gBattleDomeOpponentStyle28[];
+extern const u8 gBattleDomeOpponentStyleUnused1[];
+extern const u8 gBattleDomeOpponentStyleUnused2[];
+extern const u8 gBattleDomeOpponentStyleUnused3[];
+extern const u8 gBattleDomeOpponentStyleUnused4[];
+extern const u8 gBattleDomeOpponentStats1[];
+extern const u8 gBattleDomeOpponentStats2[];
+extern const u8 gBattleDomeOpponentStats3[];
+extern const u8 gBattleDomeOpponentStats4[];
+extern const u8 gBattleDomeOpponentStats5[];
+extern const u8 gBattleDomeOpponentStats6[];
+extern const u8 gBattleDomeOpponentStats7[];
+extern const u8 gBattleDomeOpponentStats8[];
+extern const u8 gBattleDomeOpponentStats9[];
+extern const u8 gBattleDomeOpponentStats10[];
+extern const u8 gBattleDomeOpponentStats11[];
+extern const u8 gBattleDomeOpponentStats12[];
+extern const u8 gBattleDomeOpponentStats13[];
+extern const u8 gBattleDomeOpponentStats14[];
+extern const u8 gBattleDomeOpponentStats15[];
+extern const u8 gBattleDomeOpponentStats16[];
+extern const u8 gBattleDomeOpponentStats17[];
+extern const u8 gBattleDomeOpponentStats18[];
+extern const u8 gBattleDomeOpponentStats19[];
+extern const u8 gBattleDomeOpponentStats20[];
+extern const u8 gBattleDomeOpponentStats21[];
+extern const u8 gBattleDomeOpponentStats22[];
+extern const u8 gBattleDomeOpponentStats23[];
+extern const u8 gBattleDomeOpponentStats24[];
+extern const u8 gBattleDomeOpponentStats25[];
+extern const u8 gBattleDomeOpponentStats26[];
+extern const u8 gBattleDomeOpponentStats27[];
+extern const u8 gBattleDomeOpponentStats28[];
+extern const u8 gBattleDomeOpponentStats29[];
+extern const u8 gBattleDomeOpponentStats30[];
+extern const u8 gBattleDomeOpponentStats31[];
+extern const u8 gBattleDomeOpponentStats32[];
+extern const u8 gBattleDomeOpponentStats33[];
+extern const u8 gBattleDomeOpponentStats34[];
+extern const u8 gBattleDomeOpponentStats35[];
+extern const u8 gBattleDomeOpponentStats36[];
+extern const u8 gBattleDomeOpponentStats37[];
+extern const u8 gBattleDomeOpponentStats38[];
+extern const u8 gBattleDomeOpponentStats39[];
+extern const u8 gBattleDomeOpponentStats40[];
+extern const u8 gBattleDomeOpponentStats41[];
+extern const u8 gBattleDomeOpponentStats42[];
+extern const u8 gBattleDomeOpponentStats43[];
+extern const u8 gBattleDomeMatchNumber1[];
+extern const u8 gBattleDomeMatchNumber2[];
+extern const u8 gBattleDomeMatchNumber3[];
+extern const u8 gBattleDomeMatchNumber4[];
+extern const u8 gBattleDomeMatchNumber5[];
+extern const u8 gBattleDomeMatchNumber6[];
+extern const u8 gBattleDomeMatchNumber7[];
+extern const u8 gBattleDomeMatchNumber8[];
+extern const u8 gBattleDomeMatchNumber9[];
+extern const u8 gBattleDomeMatchNumber10[];
+extern const u8 gBattleDomeMatchNumber11[];
+extern const u8 gBattleDomeMatchNumber12[];
+extern const u8 gBattleDomeMatchNumber13[];
+extern const u8 gBattleDomeMatchNumber14[];
+extern const u8 gBattleDomeMatchNumber15[];
+extern const u8 gBattleDomeWinStrings1[];
+extern const u8 gBattleDomeWinStrings2[];
+extern const u8 gBattleDomeWinStrings3[];
+extern const u8 gBattleDomeWinStrings4[];
+extern const u8 gBattleDomeWinStrings5[];
+extern const u8 gBattleDomeWinStrings6[];
+extern const u8 gBattleDomeWinStrings7[];
 
 // This file's functions.
 static u8 GetDomeTrainerMonIvs(u16 trainerId);
@@ -186,6 +260,32 @@ static void DecideRoundWinners(u8 roundId);
 static u8 sub_81953E8(u8 tournamentId, u8);
 static void sub_81948EC(u8, u8);
 
+void sub_8190B40(struct Sprite *sprite);
+void sub_8190C6C(struct Sprite *sprite);
+
+void sub_818E9CC(void);
+void sub_818EA84(void);
+void sub_818ED28(void);
+void sub_818F9B0(void);
+void sub_818F9E0(void);
+void sub_818FA20(void);
+void ShowDomeOpponentInfo(void);
+void sub_81938A4(void);
+void sub_81938E0(void);
+void sub_8190298(void);
+void sub_81902E4(void);
+void sub_8193D40(void);
+void sub_8193D7C(void);
+void sub_81902F8(void);
+void sub_819033C(void);
+void sub_8194D68(void);
+void sub_8194E44(void);
+void sub_8194EB4(void);
+void sub_8194EC0(void);
+void sub_8194EF8(void);
+void sub_8194F58(void);
+void InitDomeTrainers(void);
+
 // EWRAM variables.
 EWRAM_DATA u32 gUnknown_0203CD70 = 0;
 static EWRAM_DATA u32 gUnknown_0203CD74 = 0;
@@ -193,7 +293,7 @@ static EWRAM_DATA struct BattleDomeStruct *sBattleDomeStruct = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
 
 // Const rom data.
-ALIGNED(4)
+
 static const u8 sMovePointsForDomeTrainers[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS_COUNT] =
 {
 	[MOVE_NONE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -551,6 +651,1721 @@ static const u8 sMovePointsForDomeTrainers[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS
 	[MOVE_WATER_PULSE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
 	[MOVE_DOOM_DESIRE] = {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0},
 	[MOVE_PSYCHO_BOOST] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1},
+};
+
+static const u8 gUnknown_0860C988[31][16] =
+{
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0},
+    {1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+    {3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0},
+    {0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+};
+static const u8 sUnusedArray[] =
+{
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0,
+    0, 0, 3, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 2,
+    0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+    0, 2, 253, 0, 0, 0, 0, 0, 253, 0, 0, 0, 0, 0, 253, 0,
+    0, 0, 0, 0, 253, 0, 0, 0, 0, 0, 253, 254, 0, 0, 0, 0,
+    0, 254, 0, 0, 0, 0, 0, 254, 0, 0, 0, 0, 0, 254, 0, 0,
+    0, 0, 0, 254, 0, 0, 0, 0, 0,
+};
+
+static const u8 gUnknown_0860CBF1[][5][4]=
+{
+    {{0x07, 0x01, 0x08, 0x10}, {0x07, 0x01, 0x08, 0x10}, {0x07, 0x01, 0x08, 0x10}, {0x07, 0x01, 0x08, 0x10}, {0x07, 0x01, 0x08, 0x10}},
+    {{0x00, 0x02, 0x09, 0x10}, {0x00, 0x02, 0x09, 0x10}, {0x00, 0x02, 0x09, 0x10}, {0x00, 0x02, 0x09, 0x10}, {0x00, 0x02, 0x09, 0x10}},
+    {{0x01, 0x03, 0x0a, 0x11}, {0x01, 0x03, 0x0a, 0x11}, {0x01, 0x03, 0x0a, 0x11}, {0x01, 0x03, 0x0a, 0x11}, {0x01, 0x03, 0x0a, 0x11}},
+    {{0x02, 0x04, 0x0b, 0x11}, {0x02, 0x04, 0x0b, 0x11}, {0x02, 0x04, 0x0b, 0x11}, {0x02, 0x04, 0x0b, 0x11}, {0x02, 0x04, 0x0b, 0x11}},
+    {{0x03, 0x05, 0x0c, 0x12}, {0x03, 0x05, 0x0c, 0x12}, {0x03, 0x05, 0x0c, 0x12}, {0x03, 0x05, 0x0c, 0x12}, {0x03, 0x05, 0x0c, 0x12}},
+    {{0x04, 0x06, 0x0d, 0x12}, {0x04, 0x06, 0x0d, 0x12}, {0x04, 0x06, 0x0d, 0x12}, {0x04, 0x06, 0x0d, 0x12}, {0x04, 0x06, 0x0d, 0x12}},
+    {{0x05, 0x07, 0x0e, 0x13}, {0x05, 0x07, 0x0e, 0x13}, {0x05, 0x07, 0x0e, 0x13}, {0x05, 0x07, 0x0e, 0x13}, {0x05, 0x07, 0x0e, 0x13}},
+    {{0x06, 0x00, 0x0f, 0x13}, {0x06, 0x00, 0x0f, 0x13}, {0x06, 0x00, 0x0f, 0x13}, {0x06, 0x00, 0x0f, 0x13}, {0x06, 0x00, 0x0f, 0x13}},
+    {{0x1f, 0x09, 0x14, 0x1f}, {0x1f, 0x09, 0x14, 0x1f}, {0x1f, 0x09, 0x14, 0x1f}, {0x1f, 0x09, 0x14, 0x1f}, {0x1f, 0x09, 0x14, 0x1f}},
+    {{0x08, 0x0a, 0x14, 0x01}, {0x08, 0x0a, 0x14, 0x01}, {0x08, 0x0a, 0x14, 0x01}, {0x08, 0x0a, 0x14, 0x01}, {0x08, 0x0a, 0x14, 0x01}},
+    {{0x09, 0x0b, 0x15, 0x02}, {0x09, 0x0b, 0x15, 0x02}, {0x09, 0x0b, 0x15, 0x02}, {0x09, 0x0b, 0x15, 0x02}, {0x09, 0x0b, 0x15, 0x02}},
+    {{0x0a, 0x0c, 0x15, 0x03}, {0x0a, 0x0c, 0x15, 0x03}, {0x0a, 0x0c, 0x15, 0x03}, {0x0a, 0x0c, 0x15, 0x03}, {0x0a, 0x0c, 0x15, 0x03}},
+    {{0x0b, 0x0d, 0x16, 0x04}, {0x0b, 0x0d, 0x16, 0x04}, {0x0b, 0x0d, 0x16, 0x04}, {0x0b, 0x0d, 0x16, 0x04}, {0x0b, 0x0d, 0x16, 0x04}},
+    {{0x0c, 0x0e, 0x16, 0x05}, {0x0c, 0x0e, 0x16, 0x05}, {0x0c, 0x0e, 0x16, 0x05}, {0x0c, 0x0e, 0x16, 0x05}, {0x0c, 0x0e, 0x16, 0x05}},
+    {{0x0d, 0x0f, 0x17, 0x06}, {0x0d, 0x0f, 0x17, 0x06}, {0x0d, 0x0f, 0x17, 0x06}, {0x0d, 0x0f, 0x17, 0x06}, {0x0d, 0x0f, 0x17, 0x06}},
+    {{0x0e, 0x1f, 0x17, 0x07}, {0x0e, 0x1f, 0x17, 0x07}, {0x0e, 0x1f, 0x17, 0x07}, {0x0e, 0x1f, 0x17, 0x07}, {0x0e, 0x1f, 0x17, 0x07}},
+    {{0x13, 0x11, 0x00, 0x14}, {0x13, 0x11, 0x00, 0x18}, {0x13, 0x11, 0x00, 0x18}, {0x13, 0x11, 0x00, 0x18}, {0x13, 0x11, 0x00, 0x18}},
+    {{0x10, 0x12, 0x02, 0x15}, {0x10, 0x12, 0x02, 0x18}, {0x10, 0x12, 0x02, 0x18}, {0x10, 0x12, 0x02, 0x18}, {0x10, 0x12, 0x02, 0x18}},
+    {{0x11, 0x13, 0x04, 0x16}, {0x11, 0x13, 0x04, 0x19}, {0x11, 0x13, 0x04, 0x19}, {0x11, 0x13, 0x04, 0x19}, {0x11, 0x13, 0x04, 0x19}},
+    {{0x12, 0x10, 0x06, 0x17}, {0x12, 0x10, 0x06, 0x19}, {0x12, 0x10, 0x06, 0x19}, {0x12, 0x10, 0x06, 0x19}, {0x12, 0x10, 0x06, 0x19}},
+    {{0x17, 0x15, 0x10, 0x08}, {0x17, 0x15, 0x1a, 0x08}, {0x17, 0x15, 0x1a, 0x08}, {0x17, 0x15, 0x1a, 0x08}, {0x17, 0x15, 0x1a, 0x08}},
+    {{0x14, 0x16, 0x11, 0x0a}, {0x14, 0x16, 0x1a, 0x0a}, {0x14, 0x16, 0x1a, 0x0a}, {0x14, 0x16, 0x1a, 0x0a}, {0x14, 0x16, 0x1a, 0x0a}},
+    {{0x15, 0x17, 0x12, 0x0c}, {0x15, 0x17, 0x1b, 0x0c}, {0x15, 0x17, 0x1b, 0x0c}, {0x15, 0x17, 0x1b, 0x0c}, {0x15, 0x17, 0x1b, 0x0c}},
+    {{0x16, 0x14, 0x13, 0x0e}, {0x16, 0x14, 0x1b, 0x0e}, {0x16, 0x14, 0x1b, 0x0e}, {0x16, 0x14, 0x1b, 0x0e}, {0x16, 0x14, 0x1b, 0x0e}},
+    {{0xff, 0xff, 0xff, 0xff}, {0x19, 0x19, 0x10, 0x1a}, {0x19, 0x19, 0x10, 0x1c}, {0x19, 0x19, 0x10, 0x1c}, {0x19, 0x19, 0x10, 0x1c}},
+    {{0xff, 0xff, 0xff, 0xff}, {0x18, 0x18, 0x12, 0x1b}, {0x18, 0x18, 0x12, 0x1c}, {0x18, 0x18, 0x12, 0x1c}, {0x18, 0x18, 0x12, 0x1c}},
+    {{0xff, 0xff, 0xff, 0xff}, {0x1b, 0x1b, 0x18, 0x14}, {0x1b, 0x1b, 0x1d, 0x14}, {0x1b, 0x1b, 0x1d, 0x14}, {0x1b, 0x1b, 0x1d, 0x14}},
+    {{0xff, 0xff, 0xff, 0xff}, {0x1a, 0x1a, 0x19, 0x16}, {0x1a, 0x1a, 0x1d, 0x16}, {0x1a, 0x1a, 0x1d, 0x16}, {0x1a, 0x1a, 0x1d, 0x16}},
+    {{0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0x18, 0x1d}, {0xff, 0xff, 0x18, 0x1e}, {0xff, 0xff, 0x18, 0x1e}},
+    {{0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0x1c, 0x1a}, {0xff, 0xff, 0x1e, 0x1a}, {0xff, 0xff, 0x1e, 0x1a}},
+    {{0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0x1c, 0x1d}, {0xff, 0xff, 0x1c, 0x1d}},
+    {{0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}},
+};
+static const u8 gUnused_0860CBF1[] = {0x00, 0x00, 0x00};
+
+static const struct BgTemplate gUnknown_0860CE74[4] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+};
+
+static const struct BgTemplate gUnknown_0860CE84[4] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 20,
+        .screenSize = 3,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 24,
+        .screenSize = 3,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 28,
+        .screenSize = 3,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 7,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+};
+
+static const struct WindowTemplate gUnknown_0860CE94[] = 
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 3,
+        .width = 8,
+        .height = 16,
+        .paletteNum = 15,
+        .baseBlock = 16,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 3,
+        .width = 8,
+        .height = 16,
+        .paletteNum = 15,
+        .baseBlock = 144,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 8,
+        .tilemapTop = 1,
+        .width = 14,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 272,
+    },
+    DUMMY_WIN_TEMPLATE,
+};
+
+static const struct WindowTemplate gUnknown_0860CEB4[] = 
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 2,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 1,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 5,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 53,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 19,
+        .tilemapTop = 7,
+        .width = 9,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 69,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 10,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 96,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 12,
+        .width = 26,
+        .height = 7,
+        .paletteNum = 15,
+        .baseBlock = 112,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 5,
+        .tilemapTop = 2,
+        .width = 23,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 294,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 5,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 340,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 5,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 356,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 16,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 372,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 2,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 1,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 16,
+        .tilemapTop = 5,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 53,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 19,
+        .tilemapTop = 7,
+        .width = 9,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 69,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 16,
+        .tilemapTop = 10,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 96,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 12,
+        .width = 26,
+        .height = 7,
+        .paletteNum = 15,
+        .baseBlock = 112,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 5,
+        .tilemapTop = 2,
+        .width = 23,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 294,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 5,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 340,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 20,
+        .tilemapTop = 5,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 356,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 16,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 372,
+    },
+};
+
+static const struct ScanlineEffectParams gUnknown_0860CF44 = 
+{
+    .dmaDest = (void *)REG_ADDR_BG3CNT,
+    .dmaControl = 0xa2600001,
+    .initState = 1,
+};
+
+static const struct CompressedSpriteSheet gUnknown_0860CF50[] =
+{
+    gBattleFrontierGfx_DomeOptions, 0x0600, 0x0000,
+    NULL
+};
+
+static const struct CompressedSpritePalette gUnknown_0860CF60[] =
+{
+    gUnknown_08D85444, 0x0000,
+    NULL
+};
+
+static const struct OamData gUnknown_0860CF70 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_0860CF78 = 
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 1,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_0860CF80 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 2,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_0860CF88 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 2,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 2,
+    .affineParam = 0,
+};
+
+static const union AnimCmd gUnknown_0860CF90[] =
+{
+    ANIMCMD_FRAME(20, 1),
+    ANIMCMD_END,
+};
+static const union AnimCmd gUnknown_0860CF98[] =
+{
+    ANIMCMD_FRAME(24, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd * const gUnknown_0860CFA0[] =
+{
+    gUnknown_0860CF90,
+    gUnknown_0860CF98,
+};
+
+static const struct SpriteTemplate gUnknown_0860CFA8 = {0x0000, 0xffff, &gUnknown_0860CF70, gUnknown_0860CFA0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+static const union AnimCmd gUnknown_0860CFC0[] =
+{
+    ANIMCMD_FRAME(8, 1), 
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_0860CFC8[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd * const gUnknown_0860CFD0[] =
+{
+    gUnknown_0860CFC0,
+    gUnknown_0860CFC8,
+};
+
+static const struct SpriteTemplate gUnknown_0860CFD8 = {0x0000, 0xffff, &gUnknown_0860CF78, gUnknown_0860CFD0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+static const union AnimCmd gUnknown_0860CFF0[] =
+{
+    ANIMCMD_FRAME(40, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_0860CFF8[] =
+{
+    ANIMCMD_FRAME(32, 1),
+    ANIMCMD_END,
+ };
+
+static const union AnimCmd * const gUnknown_0860D000[] =
+{
+    gUnknown_0860CFF0,
+    gUnknown_0860CFF8,
+};
+
+static const struct SpriteTemplate gUnknown_0860D008 = {0x0000, 0xffff, &gUnknown_0860CF78, gUnknown_0860D000, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+static const union AnimCmd gUnknown_0860D020[] =
+{
+    ANIMCMD_FRAME(18, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_0860D028[] =
+{
+    ANIMCMD_FRAME(18, 129, .vFlip = TRUE),
+    ANIMCMD_END,
+ };
+ 
+static const union AnimCmd gUnknown_0860D030[] =
+{
+    ANIMCMD_FRAME(16, 65, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_0860D038[] =
+{
+    ANIMCMD_FRAME(16, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd * const gUnknown_0860D040[] =
+{
+    gUnknown_0860D020,
+    gUnknown_0860D028,
+};
+
+static const union AnimCmd * const gUnknown_0860D048[] =
+{
+    gUnknown_0860D030,
+    gUnknown_0860D038,
+};
+
+static const struct SpriteTemplate gUnknown_0860D050 = {0x0000, 0xffff, &gUnknown_0860CF88, gUnknown_0860D048, NULL, gDummySpriteAffineAnimTable, sub_8190B40};
+static const struct SpriteTemplate gUnknown_0860D068 = {0x0000, 0xffff, &gUnknown_0860CF80, gUnknown_0860D040, NULL, gDummySpriteAffineAnimTable, sub_8190C6C};
+
+static const u8 gUnknown_0860D080[] = {0x00, 0x08, 0x0c, 0x04, 0x07, 0x0f, 0x0b, 0x03, 0x02, 0x0a, 0x0e, 0x06, 0x05, 0x0d, 0x09, 0x01};
+
+static void (* const gUnknown_0860D090[])(void) =
+{
+    sub_818E9CC,
+    sub_818EA84,
+    sub_818ED28,
+    sub_818F9B0,
+    sub_818F9E0,
+    sub_818FA20,
+    ShowDomeOpponentInfo,
+    sub_81938A4,
+    sub_81938E0,
+    sub_8190298,
+    sub_81902E4,
+    sub_8193D40,
+    sub_8193D7C,
+    sub_81902F8,
+    sub_819033C,
+    sub_8194D48,
+    sub_8194D68,
+    sub_8194E44,
+    sub_8194EB4,
+    sub_8194EC0,
+    sub_8194EF8,
+    sub_8194F58,
+    InitDomeTrainers,
+};
+
+static const u32 gUnknown_0860D0EC[][2] =
+{
+    {0x00000004, 0x00000008},
+    {0x00100000, 0x00200000},
+};
+
+static const u32 gUnknown_0860D0FC[][2] =
+{
+    {0xfffffffb, 0xfffffff7},
+    {0xffefffff, 0xffdfffff},
+};
+
+static const u8 gUnknown_0860D10C[][4] =
+{
+    {0x08, 0x00, 0x04, 0x08},
+    {0x09, 0x0c, 0x08, 0x00},
+    {0x0a, 0x08, 0x0c, 0x00},
+    {0x0b, 0x04, 0x00, 0x08},
+    {0x0c, 0x00, 0x04, 0x08},
+    {0x0d, 0x0c, 0x08, 0x00},
+    {0x0e, 0x08, 0x0c, 0x00},
+    {0x0f, 0x04, 0x00, 0x08},
+    {0x00, 0x00, 0x04, 0x08},
+    {0x01, 0x0c, 0x08, 0x00},
+    {0x02, 0x08, 0x0c, 0x00},
+    {0x03, 0x04, 0x00, 0x08},
+    {0x04, 0x00, 0x04, 0x08},
+    {0x05, 0x0c, 0x08, 0x00},
+    {0x06, 0x08, 0x0c, 0x00},
+    {0x07, 0x04, 0x00, 0x08},
+};
+
+static const u8 gUnknown_0860D14C[] = {0x00, 0x08, 0x04, 0x0c, 0x07, 0x0f, 0x03, 0x0b, 0x02, 0x0a, 0x06, 0x0e, 0x05, 0x0d, 0x01, 0x09};
+
+static const u8 gUnknown_0860D15C[] =
+{
+    0x00, 0x08, 0x0c, 0x0e, 0x00, 0x08, 0x0c, 0x0e,
+    0x01, 0x08, 0x0c, 0x0e, 0x01, 0x08, 0x0c, 0x0e,
+    0x02, 0x09, 0x0c, 0x0e, 0x02, 0x09, 0x0c, 0x0e,
+    0x03, 0x09, 0x0c, 0x0e, 0x03, 0x09, 0x0c, 0x0e,
+    0x04, 0x0a, 0x0d, 0x0e, 0x04, 0x0a, 0x0d, 0x0e,
+    0x05, 0x0a, 0x0d, 0x0e, 0x05, 0x0a, 0x0d, 0x0e,
+    0x06, 0x0b, 0x0d, 0x0e, 0x06, 0x0b, 0x0d, 0x0e,
+    0x07, 0x0b, 0x0d, 0x0e, 0x07, 0x0b, 0x0d, 0x0e,
+};
+
+static const u8 gUnknown_0860D19C[] = {0x17, 0x1b, 0x1d, 0x1e};
+
+static const u8 gUnknown_0860D1A0[][4] =
+{
+    {0x10, 0x18, 0x1c, 0x1e},
+    {0x11, 0x18, 0x1c, 0x1e},
+    {0x12, 0x19, 0x1c, 0x1e},
+    {0x13, 0x19, 0x1c, 0x1e},
+    {0x14, 0x1a, 0x1d, 0x1e},
+    {0x15, 0x1a, 0x1d, 0x1e},
+    {0x16, 0x1b, 0x1d, 0x1e},
+    {0x17, 0x1b, 0x1d, 0x1e},
+};
+
+static const u8 gUnknown_0860D1C0[] = {0x00, 0x0f, 0x08, 0x07, 0x03, 0x0c, 0x0b, 0x04, 0x01, 0x0e, 0x09, 0x06, 0x02, 0x0d, 0x0a, 0x05};
+
+static const u8 *const gBattleDomePotentialPointers[] =
+{
+    gBattleDomeOpponentPotential1,
+    gBattleDomeOpponentPotential2,
+    gBattleDomeOpponentPotential3,
+    gBattleDomeOpponentPotential4,
+    gBattleDomeOpponentPotential5,
+    gBattleDomeOpponentPotential6,
+    gBattleDomeOpponentPotential7,
+    gBattleDomeOpponentPotential8,
+    gBattleDomeOpponentPotential9,
+    gBattleDomeOpponentPotential10,
+    gBattleDomeOpponentPotential11,
+    gBattleDomeOpponentPotential12,
+    gBattleDomeOpponentPotential13,
+    gBattleDomeOpponentPotential14,
+    gBattleDomeOpponentPotential15,
+    gBattleDomeOpponentPotential16,
+    gBattleDomeOpponentPotential17,
+};
+
+static const u8 *const gBattleDomeOpponentStylePointers[] =
+{
+    gBattleDomeOpponentStyle1,
+    gBattleDomeOpponentStyle2,
+    gBattleDomeOpponentStyle3,
+    gBattleDomeOpponentStyle4,
+    gBattleDomeOpponentStyle5,
+    gBattleDomeOpponentStyle6,
+    gBattleDomeOpponentStyle7,
+    gBattleDomeOpponentStyle8,
+    gBattleDomeOpponentStyle9,
+    gBattleDomeOpponentStyle10,
+    gBattleDomeOpponentStyle11,
+    gBattleDomeOpponentStyle12,
+    gBattleDomeOpponentStyle13,
+    gBattleDomeOpponentStyle14,
+    gBattleDomeOpponentStyle15,
+    gBattleDomeOpponentStyle16,
+    gBattleDomeOpponentStyle17,
+    gBattleDomeOpponentStyle18,
+    gBattleDomeOpponentStyle19,
+    gBattleDomeOpponentStyle20,
+    gBattleDomeOpponentStyle21,
+    gBattleDomeOpponentStyle22,
+    gBattleDomeOpponentStyle23,
+    gBattleDomeOpponentStyle24,
+    gBattleDomeOpponentStyle25,
+    gBattleDomeOpponentStyle26,
+    gBattleDomeOpponentStyle27,
+    gBattleDomeOpponentStyle28,
+    gBattleDomeOpponentStyleUnused1,
+    gBattleDomeOpponentStyleUnused2,
+    gBattleDomeOpponentStyleUnused3,
+    gBattleDomeOpponentStyleUnused4,
+};
+
+static const u8 *const gBattleDomeOpponentStatsPointers[] =
+{
+    gBattleDomeOpponentStats1,
+    gBattleDomeOpponentStats2,
+    gBattleDomeOpponentStats3,
+    gBattleDomeOpponentStats4,
+    gBattleDomeOpponentStats5,
+    gBattleDomeOpponentStats6,
+    gBattleDomeOpponentStats7,
+    gBattleDomeOpponentStats8,
+    gBattleDomeOpponentStats9,
+    gBattleDomeOpponentStats10,
+    gBattleDomeOpponentStats11,
+    gBattleDomeOpponentStats12,
+    gBattleDomeOpponentStats13,
+    gBattleDomeOpponentStats14,
+    gBattleDomeOpponentStats15,
+    gBattleDomeOpponentStats16,
+    gBattleDomeOpponentStats17,
+    gBattleDomeOpponentStats18,
+    gBattleDomeOpponentStats19,
+    gBattleDomeOpponentStats20,
+    gBattleDomeOpponentStats21,
+    gBattleDomeOpponentStats22,
+    gBattleDomeOpponentStats23,
+    gBattleDomeOpponentStats24,
+    gBattleDomeOpponentStats25,
+    gBattleDomeOpponentStats26,
+    gBattleDomeOpponentStats27,
+    gBattleDomeOpponentStats28,
+    gBattleDomeOpponentStats29,
+    gBattleDomeOpponentStats30,
+    gBattleDomeOpponentStats31,
+    gBattleDomeOpponentStats32,
+    gBattleDomeOpponentStats33,
+    gBattleDomeOpponentStats34,
+    gBattleDomeOpponentStats35,
+    gBattleDomeOpponentStats36,
+    gBattleDomeOpponentStats37,
+    gBattleDomeOpponentStats38,
+    gBattleDomeOpponentStats39,
+    gBattleDomeOpponentStats40,
+    gBattleDomeOpponentStats41,
+    gBattleDomeOpponentStats42,
+    gBattleDomeOpponentStats43,
+};
+
+static const u8 gUnknown_0860D340[] = {0x68, 0x88, 0x68};
+static const u8 gUnknown_0860D343[] = {0x26, 0x3e, 0x4e};
+static const u8 gUnknown_0860D346[] = {0x00, 0x04, 0x00};
+
+static const u8 gUnknown_0860D349[] = {0x00, 0x05, 0x09, 0x0c, 0x0e, 0x00, 0x00};
+
+static const u8 *const gBattleDomeMatchNumberPointers[] =
+{
+    gBattleDomeMatchNumber1,
+    gBattleDomeMatchNumber2,
+    gBattleDomeMatchNumber3,
+    gBattleDomeMatchNumber4,
+    gBattleDomeMatchNumber5,
+    gBattleDomeMatchNumber6,
+    gBattleDomeMatchNumber7,
+    gBattleDomeMatchNumber8,
+    gBattleDomeMatchNumber9,
+    gBattleDomeMatchNumber10,
+    gBattleDomeMatchNumber11,
+    gBattleDomeMatchNumber12,
+    gBattleDomeMatchNumber13,
+    gBattleDomeMatchNumber14,
+    gBattleDomeMatchNumber15,
+};
+
+static const u8 *const gBattleDomeWinStringsPointers[] =
+{
+    gBattleDomeWinStrings1,
+    gBattleDomeWinStrings2,
+    gBattleDomeWinStrings3,
+    gBattleDomeWinStrings4,
+    gBattleDomeWinStrings5,
+    gBattleDomeWinStrings6,
+    gBattleDomeWinStrings7,
+};
+
+static const u8 gUnknown_0860D3A8[] = {0x60, 0x60, 0x60};
+static const u8 gUnknown_0860D3AB[] = {0x38, 0x50, 0x68};
+static const u8 gUnknown_0860D3AE[] = {0x90, 0x90, 0x90};
+static const u8 gUnknown_0860D3B1[] = {0x38, 0x50, 0x68};
+
+static const u8 gUnknown_0860D3B4[] = {0x00, 0x08, 0x0c, 0x04, 0x07, 0x0f, 0x0b, 0x03, 0x02, 0x0a, 0x0e, 0x06, 0x05, 0x0d, 0x09, 0x01};
+
+static const u8 gUnknown_0860D3C4[][3] =
+{
+    {0x00, 0x02, 0x00},
+    {0x02, 0x02, 0x00},
+    {0x04, 0x02, 0x00},
+    {0x06, 0x02, 0x00},
+    {0x08, 0x02, 0x00},
+    {0x0a, 0x02, 0x00},
+    {0x0c, 0x02, 0x00},
+    {0x0e, 0x02, 0x00},
+    {0x00, 0x04, 0x01},
+    {0x04, 0x04, 0x01},
+    {0x08, 0x04, 0x01},
+    {0x0c, 0x04, 0x01},
+    {0x00, 0x08, 0x02},
+    {0x08, 0x08, 0x02},
+    {0x00, 0x10, 0x03},
+};
+
+static const u8 gUnknown_0860D3F1[][2] = 
+{
+    {0x00, 0x00},
+    {0x01, 0x70},
+    {0x01, 0x00},
+    {0x00, 0x70},
+    {0x00, 0x30},
+    {0x01, 0x40},
+    {0x01, 0x30},
+    {0x00, 0x40},
+    {0x00, 0x10},
+    {0x01, 0x60},
+    {0x01, 0x10},
+    {0x00, 0x60},
+    {0x00, 0x20},
+    {0x01, 0x50},
+    {0x01, 0x20},
+    {0x00, 0x50},
+};
+
+static const u8 gUnknown_0860D411[][2] =
+{
+    {0x44, 0x21},
+    {0x44, 0x31},
+    {0x44, 0x41},
+    {0x44, 0x51},
+    {0x44, 0x61},
+    {0x44, 0x71},
+    {0x44, 0x81},
+    {0x44, 0x91},
+    {0xac, 0x21},
+    {0xac, 0x31},
+    {0xac, 0x41},
+    {0xac, 0x51},
+    {0xac, 0x61},
+    {0xac, 0x71},
+    {0xac, 0x81},
+    {0xac, 0x91},
+    {0x57, 0x29},
+    {0x57, 0x49},
+    {0x57, 0x69},
+    {0x57, 0x89},
+    {0x99, 0x29},
+    {0x99, 0x49},
+    {0x99, 0x69},
+    {0x99, 0x89},
+    {0x5f, 0x39},
+    {0x5f, 0x79},
+    {0x91, 0x39},
+    {0x91, 0x79},
+    {0x67, 0x59},
+    {0x89, 0x59},
+    {0x78, 0x59},
+};
+const u8 sExtraByte = 0x00;
+
+static const struct UnkStruct_860DD10 gUnknown_0860d450[] =
+{
+    {.src = 0x6021, .y = 0x04, .x = 0x09},
+    {.src = 0x6023, .y = 0x04, .x = 0x0a},
+    {.src = 0x6047, .y = 0x05, .x = 0x0a},
+    {.src = 0x6043, .y = 0x05, .x = 0x0b},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d460[] =
+{
+    {.src = 0x6021, .y = 0x04, .x = 0x09},
+    {.src = 0x6023, .y = 0x04, .x = 0x0a},
+    {.src = 0x6047, .y = 0x05, .x = 0x0a},
+    {.src = 0x6023, .y = 0x05, .x = 0x0b},
+    {.src = 0x6027, .y = 0x06, .x = 0x0b},
+    {.src = 0x6047, .y = 0x07, .x = 0x0b},
+    {.src = 0x6043, .y = 0x07, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d47c[] =
+{
+    {.src = 0x6021, .y = 0x04, .x = 0x09},
+    {.src = 0x6023, .y = 0x04, .x = 0x0a},
+    {.src = 0x6047, .y = 0x05, .x = 0x0a},
+    {.src = 0x6023, .y = 0x05, .x = 0x0b},
+    {.src = 0x6027, .y = 0x06, .x = 0x0b},
+    {.src = 0x6047, .y = 0x07, .x = 0x0b},
+    {.src = 0x6023, .y = 0x07, .x = 0x0c},
+    {.src = 0x6027, .y = 0x08, .x = 0x0c},
+    {.src = 0x6027, .y = 0x09, .x = 0x0c},
+    {.src = 0x6027, .y = 0x0a, .x = 0x0c},
+    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d4a8[] =
+{
+    {.src = 0x6021, .y = 0x04, .x = 0x09},
+    {.src = 0x6023, .y = 0x04, .x = 0x0a},
+    {.src = 0x6047, .y = 0x05, .x = 0x0a},
+    {.src = 0x6023, .y = 0x05, .x = 0x0b},
+    {.src = 0x6027, .y = 0x06, .x = 0x0b},
+    {.src = 0x6047, .y = 0x07, .x = 0x0b},
+    {.src = 0x6023, .y = 0x07, .x = 0x0c},
+    {.src = 0x6027, .y = 0x08, .x = 0x0c},
+    {.src = 0x6027, .y = 0x09, .x = 0x0c},
+    {.src = 0x6027, .y = 0x0a, .x = 0x0c},
+    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+    {.src = 0x602c, .y = 0x0b, .x = 0x0d},
+    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d4dc[] =
+{
+    {.src = 0x6021, .y = 0x06, .x = 0x09},
+    {.src = 0x6021, .y = 0x06, .x = 0x0a},
+    {.src = 0x6027, .y = 0x05, .x = 0x0a},
+    {.src = 0x6043, .y = 0x05, .x = 0x0b},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d4ec[] =
+{
+    {.src = 0x6021, .y = 0x06, .x = 0x09},
+    {.src = 0x6021, .y = 0x06, .x = 0x0a},
+    {.src = 0x6027, .y = 0x05, .x = 0x0a},
+    {.src = 0x6023, .y = 0x05, .x = 0x0b},
+    {.src = 0x6027, .y = 0x06, .x = 0x0b},
+    {.src = 0x6047, .y = 0x07, .x = 0x0b},
+    {.src = 0x6043, .y = 0x07, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d508[] =
+{
+    {.src = 0x6021, .y = 0x06, .x = 0x09},
+    {.src = 0x6021, .y = 0x06, .x = 0x0a},
+    {.src = 0x6027, .y = 0x05, .x = 0x0a},
+    {.src = 0x6023, .y = 0x05, .x = 0x0b},
+    {.src = 0x6027, .y = 0x06, .x = 0x0b},
+    {.src = 0x6047, .y = 0x07, .x = 0x0b},
+    {.src = 0x6023, .y = 0x07, .x = 0x0c},
+    {.src = 0x6027, .y = 0x08, .x = 0x0c},
+    {.src = 0x6027, .y = 0x09, .x = 0x0c},
+    {.src = 0x6027, .y = 0x0a, .x = 0x0c},
+    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d534[] =
+{
+    {.src = 0x6021, .y = 0x06, .x = 0x09},
+    {.src = 0x6021, .y = 0x06, .x = 0x0a},
+    {.src = 0x6027, .y = 0x05, .x = 0x0a},
+    {.src = 0x6023, .y = 0x05, .x = 0x0b},
+    {.src = 0x6027, .y = 0x06, .x = 0x0b},
+    {.src = 0x6047, .y = 0x07, .x = 0x0b},
+    {.src = 0x6023, .y = 0x07, .x = 0x0c},
+    {.src = 0x6027, .y = 0x08, .x = 0x0c},
+    {.src = 0x6027, .y = 0x09, .x = 0x0c},
+    {.src = 0x6027, .y = 0x0a, .x = 0x0c},
+    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+    {.src = 0x602c, .y = 0x0b, .x = 0x0d},
+    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d568[] =
+{
+    {.src = 0x6021, .y = 0x08, .x = 0x09},
+    {.src = 0x6023, .y = 0x08, .x = 0x0a},
+    {.src = 0x6047, .y = 0x09, .x = 0x0a},
+    {.src = 0x6021, .y = 0x09, .x = 0x0b},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d578[] =
+{
+    {.src = 0x6021, .y = 0x08, .x = 0x09},
+    {.src = 0x6023, .y = 0x08, .x = 0x0a},
+    {.src = 0x6047, .y = 0x09, .x = 0x0a},
+    {.src = 0x6021, .y = 0x09, .x = 0x0b},
+    {.src = 0x6027, .y = 0x08, .x = 0x0b},
+    {.src = 0x6027, .y = 0x07, .x = 0x0b},
+    {.src = 0x6043, .y = 0x07, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d594[] =
+{
+    {.src = 0x6021, .y = 0x08, .x = 0x09},
+    {.src = 0x6023, .y = 0x08, .x = 0x0a},
+    {.src = 0x6047, .y = 0x09, .x = 0x0a},
+    {.src = 0x6021, .y = 0x09, .x = 0x0b},
+    {.src = 0x6027, .y = 0x08, .x = 0x0b},
+    {.src = 0x6027, .y = 0x07, .x = 0x0b},
+    {.src = 0x6023, .y = 0x07, .x = 0x0c},
+    {.src = 0x6027, .y = 0x08, .x = 0x0c},
+    {.src = 0x6027, .y = 0x09, .x = 0x0c},
+    {.src = 0x6027, .y = 0x0a, .x = 0x0c},
+    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d5c0[] =
+{
+    {.src = 0x6021, .y = 0x08, .x = 0x09},
+    {.src = 0x6023, .y = 0x08, .x = 0x0a},
+    {.src = 0x6047, .y = 0x09, .x = 0x0a},
+    {.src = 0x6021, .y = 0x09, .x = 0x0b},
+    {.src = 0x6027, .y = 0x08, .x = 0x0b},
+    {.src = 0x6027, .y = 0x07, .x = 0x0b},
+    {.src = 0x6023, .y = 0x07, .x = 0x0c},
+    {.src = 0x6027, .y = 0x08, .x = 0x0c},
+    {.src = 0x6027, .y = 0x09, .x = 0x0c},
+    {.src = 0x6027, .y = 0x0a, .x = 0x0c},
+    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+    {.src = 0x602c, .y = 0x0b, .x = 0x0d},
+    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d5f4[] =
+{
+    {.src = 0x6021, .y = 0x0a, .x = 0x09},
+    {.src = 0x6021, .y = 0x0a, .x = 0x0a},
+    {.src = 0x6027, .y = 0x09, .x = 0x0a},
+    {.src = 0x6021, .y = 0x09, .x = 0x0b},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d604[] =
+{
+    {.src = 0x6021, .y = 0x0a, .x = 0x09},
+    {.src = 0x6021, .y = 0x0a, .x = 0x0a},
+    {.src = 0x6027, .y = 0x09, .x = 0x0a},
+    {.src = 0x6021, .y = 0x09, .x = 0x0b},
+    {.src = 0x6027, .y = 0x08, .x = 0x0b},
+    {.src = 0x6027, .y = 0x07, .x = 0x0b},
+    {.src = 0x6043, .y = 0x07, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d620[] =
+{
+    {.src = 0x6021, .y = 0x0a, .x = 0x09},
+    {.src = 0x6021, .y = 0x0a, .x = 0x0a},
+    {.src = 0x6027, .y = 0x09, .x = 0x0a},
+    {.src = 0x6021, .y = 0x09, .x = 0x0b},
+    {.src = 0x6027, .y = 0x08, .x = 0x0b},
+    {.src = 0x6027, .y = 0x07, .x = 0x0b},
+    {.src = 0x6023, .y = 0x07, .x = 0x0c},
+    {.src = 0x6027, .y = 0x08, .x = 0x0c},
+    {.src = 0x6027, .y = 0x09, .x = 0x0c},
+    {.src = 0x6027, .y = 0x0a, .x = 0x0c},
+    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d64c[] =
+{
+    {.src = 0x6021, .y = 0x0a, .x = 0x09},
+    {.src = 0x6021, .y = 0x0a, .x = 0x0a},
+    {.src = 0x6027, .y = 0x09, .x = 0x0a},
+    {.src = 0x6021, .y = 0x09, .x = 0x0b},
+    {.src = 0x6027, .y = 0x08, .x = 0x0b},
+    {.src = 0x6027, .y = 0x07, .x = 0x0b},
+    {.src = 0x6023, .y = 0x07, .x = 0x0c},
+    {.src = 0x6027, .y = 0x08, .x = 0x0c},
+    {.src = 0x6027, .y = 0x09, .x = 0x0c},
+    {.src = 0x6027, .y = 0x0a, .x = 0x0c},
+    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+    {.src = 0x602c, .y = 0x0b, .x = 0x0d},
+    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d680[] =
+{
+    {.src = 0x6021, .y = 0x0c, .x = 0x09},
+    {.src = 0x6023, .y = 0x0c, .x = 0x0a},
+    {.src = 0x6047, .y = 0x0d, .x = 0x0a},
+    {.src = 0x6043, .y = 0x0d, .x = 0x0b},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d690[] =
+{
+    {.src = 0x6021, .y = 0x0c, .x = 0x09},
+    {.src = 0x6023, .y = 0x0c, .x = 0x0a},
+    {.src = 0x6047, .y = 0x0d, .x = 0x0a},
+    {.src = 0x6023, .y = 0x0d, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0e, .x = 0x0b},
+    {.src = 0x6047, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d6ac[] =
+{
+    {.src = 0x6021, .y = 0x0c, .x = 0x09},
+    {.src = 0x6023, .y = 0x0c, .x = 0x0a},
+    {.src = 0x6047, .y = 0x0d, .x = 0x0a},
+    {.src = 0x6023, .y = 0x0d, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0e, .x = 0x0b},
+    {.src = 0x6047, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+    {.src = 0x6033, .y = 0x0e, .x = 0x0c},
+    {.src = 0x6032, .y = 0x0d, .x = 0x0c},
+    {.src = 0x6031, .y = 0x0c, .x = 0x0c},
+    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d6d8[] =
+{
+    {.src = 0x6021, .y = 0x0c, .x = 0x09},
+    {.src = 0x6023, .y = 0x0c, .x = 0x0a},
+    {.src = 0x6047, .y = 0x0d, .x = 0x0a},
+    {.src = 0x6023, .y = 0x0d, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0e, .x = 0x0b},
+    {.src = 0x6047, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+    {.src = 0x6033, .y = 0x0e, .x = 0x0c},
+    {.src = 0x6032, .y = 0x0d, .x = 0x0c},
+    {.src = 0x6031, .y = 0x0c, .x = 0x0c},
+    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+    {.src = 0x602c, .y = 0x0b, .x = 0x0d},
+    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d70c[] =
+{
+    {.src = 0x6021, .y = 0x0e, .x = 0x09},
+    {.src = 0x6021, .y = 0x0e, .x = 0x0a},
+    {.src = 0x6027, .y = 0x0d, .x = 0x0a},
+    {.src = 0x6043, .y = 0x0d, .x = 0x0b},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d71c[] =
+{
+    {.src = 0x6021, .y = 0x0e, .x = 0x09},
+    {.src = 0x6021, .y = 0x0e, .x = 0x0a},
+    {.src = 0x6027, .y = 0x0d, .x = 0x0a},
+    {.src = 0x6023, .y = 0x0d, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0e, .x = 0x0b},
+    {.src = 0x6047, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d738[] =
+{
+    {.src = 0x6021, .y = 0x0e, .x = 0x09},
+    {.src = 0x6021, .y = 0x0e, .x = 0x0a},
+    {.src = 0x6027, .y = 0x0d, .x = 0x0a},
+    {.src = 0x6023, .y = 0x0d, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0e, .x = 0x0b},
+    {.src = 0x6047, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+    {.src = 0x6033, .y = 0x0e, .x = 0x0c},
+    {.src = 0x6032, .y = 0x0d, .x = 0x0c},
+    {.src = 0x6031, .y = 0x0c, .x = 0x0c},
+    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d764[] =
+{
+    {.src = 0x6021, .y = 0x0e, .x = 0x09},
+    {.src = 0x6021, .y = 0x0e, .x = 0x0a},
+    {.src = 0x6027, .y = 0x0d, .x = 0x0a},
+    {.src = 0x6023, .y = 0x0d, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0e, .x = 0x0b},
+    {.src = 0x6047, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+    {.src = 0x6033, .y = 0x0e, .x = 0x0c},
+    {.src = 0x6032, .y = 0x0d, .x = 0x0c},
+    {.src = 0x6031, .y = 0x0c, .x = 0x0c},
+    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+    {.src = 0x602c, .y = 0x0b, .x = 0x0d},
+    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d798[] =
+{
+    {.src = 0x6021, .y = 0x10, .x = 0x09},
+    {.src = 0x6023, .y = 0x10, .x = 0x0a},
+    {.src = 0x6047, .y = 0x11, .x = 0x0a},
+    {.src = 0x6021, .y = 0x11, .x = 0x0b},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d7a8[] =
+{
+    {.src = 0x6021, .y = 0x10, .x = 0x09},
+    {.src = 0x6023, .y = 0x10, .x = 0x0a},
+    {.src = 0x6047, .y = 0x11, .x = 0x0a},
+    {.src = 0x6021, .y = 0x11, .x = 0x0b},
+    {.src = 0x6027, .y = 0x10, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d7c4[] =
+{
+    {.src = 0x6021, .y = 0x10, .x = 0x09},
+    {.src = 0x6023, .y = 0x10, .x = 0x0a},
+    {.src = 0x6047, .y = 0x11, .x = 0x0a},
+    {.src = 0x6021, .y = 0x11, .x = 0x0b},
+    {.src = 0x6027, .y = 0x10, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+    {.src = 0x6033, .y = 0x0e, .x = 0x0c},
+    {.src = 0x6032, .y = 0x0d, .x = 0x0c},
+    {.src = 0x6031, .y = 0x0c, .x = 0x0c},
+    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d7f0[] =
+{
+    {.src = 0x6021, .y = 0x10, .x = 0x09},
+    {.src = 0x6023, .y = 0x10, .x = 0x0a},
+    {.src = 0x6047, .y = 0x11, .x = 0x0a},
+    {.src = 0x6021, .y = 0x11, .x = 0x0b},
+    {.src = 0x6027, .y = 0x10, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+    {.src = 0x6033, .y = 0x0e, .x = 0x0c},
+    {.src = 0x6032, .y = 0x0d, .x = 0x0c},
+    {.src = 0x6031, .y = 0x0c, .x = 0x0c},
+    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+    {.src = 0x602c, .y = 0x0b, .x = 0x0d},
+    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d824[] =
+{
+    {.src = 0x602b, .y = 0x12, .x = 0x09},
+    {.src = 0x602b, .y = 0x12, .x = 0x0a},
+    {.src = 0x6027, .y = 0x11, .x = 0x0a},
+    {.src = 0x6021, .y = 0x11, .x = 0x0b},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d834[] =
+{
+    {.src = 0x602b, .y = 0x12, .x = 0x09},
+    {.src = 0x602b, .y = 0x12, .x = 0x0a},
+    {.src = 0x6027, .y = 0x11, .x = 0x0a},
+    {.src = 0x6021, .y = 0x11, .x = 0x0b},
+    {.src = 0x6027, .y = 0x10, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d850[] =
+{
+    {.src = 0x602b, .y = 0x12, .x = 0x09},
+    {.src = 0x602b, .y = 0x12, .x = 0x0a},
+    {.src = 0x6027, .y = 0x11, .x = 0x0a},
+    {.src = 0x6021, .y = 0x11, .x = 0x0b},
+    {.src = 0x6027, .y = 0x10, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+    {.src = 0x6033, .y = 0x0e, .x = 0x0c},
+    {.src = 0x6032, .y = 0x0d, .x = 0x0c},
+    {.src = 0x6031, .y = 0x0c, .x = 0x0c},
+    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d87c[] =
+{
+    {.src = 0x602b, .y = 0x12, .x = 0x09},
+    {.src = 0x602b, .y = 0x12, .x = 0x0a},
+    {.src = 0x6027, .y = 0x11, .x = 0x0a},
+    {.src = 0x6021, .y = 0x11, .x = 0x0b},
+    {.src = 0x6027, .y = 0x10, .x = 0x0b},
+    {.src = 0x6027, .y = 0x0f, .x = 0x0b},
+    {.src = 0x6021, .y = 0x0f, .x = 0x0c},
+    {.src = 0x6033, .y = 0x0e, .x = 0x0c},
+    {.src = 0x6032, .y = 0x0d, .x = 0x0c},
+    {.src = 0x6031, .y = 0x0c, .x = 0x0c},
+    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+    {.src = 0x602c, .y = 0x0b, .x = 0x0d},
+    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d8b0[] =
+{
+    {.src = 0x6021, .y = 0x04, .x = 0x14},
+    {.src = 0x6025, .y = 0x04, .x = 0x13},
+    {.src = 0x6049, .y = 0x05, .x = 0x13},
+    {.src = 0x6045, .y = 0x05, .x = 0x12},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d8c0[] =
+{
+    {.src = 0x6021, .y = 0x04, .x = 0x14},
+    {.src = 0x6025, .y = 0x04, .x = 0x13},
+    {.src = 0x6049, .y = 0x05, .x = 0x13},
+    {.src = 0x6025, .y = 0x05, .x = 0x12},
+    {.src = 0x6029, .y = 0x06, .x = 0x12},
+    {.src = 0x6049, .y = 0x07, .x = 0x12},
+    {.src = 0x6045, .y = 0x07, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d8dc[] =
+{
+    {.src = 0x6021, .y = 0x04, .x = 0x14},
+    {.src = 0x6025, .y = 0x04, .x = 0x13},
+    {.src = 0x6049, .y = 0x05, .x = 0x13},
+    {.src = 0x6025, .y = 0x05, .x = 0x12},
+    {.src = 0x6029, .y = 0x06, .x = 0x12},
+    {.src = 0x6049, .y = 0x07, .x = 0x12},
+    {.src = 0x6025, .y = 0x07, .x = 0x11},
+    {.src = 0x6029, .y = 0x08, .x = 0x11},
+    {.src = 0x6029, .y = 0x09, .x = 0x11},
+    {.src = 0x6029, .y = 0x0a, .x = 0x11},
+    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d908[] =
+{
+    {.src = 0x6021, .y = 0x04, .x = 0x14},
+    {.src = 0x6025, .y = 0x04, .x = 0x13},
+    {.src = 0x6049, .y = 0x05, .x = 0x13},
+    {.src = 0x6025, .y = 0x05, .x = 0x12},
+    {.src = 0x6029, .y = 0x06, .x = 0x12},
+    {.src = 0x6049, .y = 0x07, .x = 0x12},
+    {.src = 0x6025, .y = 0x07, .x = 0x11},
+    {.src = 0x6029, .y = 0x08, .x = 0x11},
+    {.src = 0x6029, .y = 0x09, .x = 0x11},
+    {.src = 0x6029, .y = 0x0a, .x = 0x11},
+    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+    {.src = 0x602f, .y = 0x0b, .x = 0x10},
+    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d93c[] =
+{
+    {.src = 0x6021, .y = 0x06, .x = 0x14},
+    {.src = 0x6021, .y = 0x06, .x = 0x13},
+    {.src = 0x6029, .y = 0x05, .x = 0x13},
+    {.src = 0x6045, .y = 0x05, .x = 0x12},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d94c[] =
+{
+    {.src = 0x6021, .y = 0x06, .x = 0x14},
+    {.src = 0x6021, .y = 0x06, .x = 0x13},
+    {.src = 0x6029, .y = 0x05, .x = 0x13},
+    {.src = 0x6025, .y = 0x05, .x = 0x12},
+    {.src = 0x6029, .y = 0x06, .x = 0x12},
+    {.src = 0x6049, .y = 0x07, .x = 0x12},
+    {.src = 0x6045, .y = 0x07, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d968[] =
+{
+    {.src = 0x6021, .y = 0x06, .x = 0x14},
+    {.src = 0x6021, .y = 0x06, .x = 0x13},
+    {.src = 0x6029, .y = 0x05, .x = 0x13},
+    {.src = 0x6025, .y = 0x05, .x = 0x12},
+    {.src = 0x6029, .y = 0x06, .x = 0x12},
+    {.src = 0x6049, .y = 0x07, .x = 0x12},
+    {.src = 0x6025, .y = 0x07, .x = 0x11},
+    {.src = 0x6029, .y = 0x08, .x = 0x11},
+    {.src = 0x6029, .y = 0x09, .x = 0x11},
+    {.src = 0x6029, .y = 0x0a, .x = 0x11},
+    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d994[] =
+{
+    {.src = 0x6021, .y = 0x06, .x = 0x14},
+    {.src = 0x6021, .y = 0x06, .x = 0x13},
+    {.src = 0x6029, .y = 0x05, .x = 0x13},
+    {.src = 0x6025, .y = 0x05, .x = 0x12},
+    {.src = 0x6029, .y = 0x06, .x = 0x12},
+    {.src = 0x6049, .y = 0x07, .x = 0x12},
+    {.src = 0x6025, .y = 0x07, .x = 0x11},
+    {.src = 0x6029, .y = 0x08, .x = 0x11},
+    {.src = 0x6029, .y = 0x09, .x = 0x11},
+    {.src = 0x6029, .y = 0x0a, .x = 0x11},
+    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+    {.src = 0x602f, .y = 0x0b, .x = 0x10},
+    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d9c8[] =
+{
+    {.src = 0x6021, .y = 0x08, .x = 0x14},
+    {.src = 0x6025, .y = 0x08, .x = 0x13},
+    {.src = 0x6049, .y = 0x09, .x = 0x13},
+    {.src = 0x6021, .y = 0x09, .x = 0x12},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d9d8[] =
+{
+    {.src = 0x6021, .y = 0x08, .x = 0x14},
+    {.src = 0x6025, .y = 0x08, .x = 0x13},
+    {.src = 0x6049, .y = 0x09, .x = 0x13},
+    {.src = 0x6021, .y = 0x09, .x = 0x12},
+    {.src = 0x6029, .y = 0x08, .x = 0x12},
+    {.src = 0x6029, .y = 0x07, .x = 0x12},
+    {.src = 0x6045, .y = 0x07, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860d9f4[] =
+{
+    {.src = 0x6021, .y = 0x08, .x = 0x14},
+    {.src = 0x6025, .y = 0x08, .x = 0x13},
+    {.src = 0x6049, .y = 0x09, .x = 0x13},
+    {.src = 0x6021, .y = 0x09, .x = 0x12},
+    {.src = 0x6029, .y = 0x08, .x = 0x12},
+    {.src = 0x6029, .y = 0x07, .x = 0x12},
+    {.src = 0x6025, .y = 0x07, .x = 0x11},
+    {.src = 0x6029, .y = 0x08, .x = 0x11},
+    {.src = 0x6029, .y = 0x09, .x = 0x11},
+    {.src = 0x6029, .y = 0x0a, .x = 0x11},
+    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860da20[] =
+{
+    {.src = 0x6021, .y = 0x08, .x = 0x14},
+    {.src = 0x6025, .y = 0x08, .x = 0x13},
+    {.src = 0x6049, .y = 0x09, .x = 0x13},
+    {.src = 0x6021, .y = 0x09, .x = 0x12},
+    {.src = 0x6029, .y = 0x08, .x = 0x12},
+    {.src = 0x6029, .y = 0x07, .x = 0x12},
+    {.src = 0x6025, .y = 0x07, .x = 0x11},
+    {.src = 0x6029, .y = 0x08, .x = 0x11},
+    {.src = 0x6029, .y = 0x09, .x = 0x11},
+    {.src = 0x6029, .y = 0x0a, .x = 0x11},
+    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+    {.src = 0x602f, .y = 0x0b, .x = 0x10},
+    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860da54[] =
+{
+    {.src = 0x6021, .y = 0x0a, .x = 0x14},
+    {.src = 0x6021, .y = 0x0a, .x = 0x13},
+    {.src = 0x6029, .y = 0x09, .x = 0x13},
+    {.src = 0x6021, .y = 0x09, .x = 0x12},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860da64[] =
+{
+    {.src = 0x6021, .y = 0x0a, .x = 0x14},
+    {.src = 0x6021, .y = 0x0a, .x = 0x13},
+    {.src = 0x6029, .y = 0x09, .x = 0x13},
+    {.src = 0x6021, .y = 0x09, .x = 0x12},
+    {.src = 0x6029, .y = 0x08, .x = 0x12},
+    {.src = 0x6029, .y = 0x07, .x = 0x12},
+    {.src = 0x6045, .y = 0x07, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860da80[] =
+{
+    {.src = 0x6021, .y = 0x0a, .x = 0x14},
+    {.src = 0x6021, .y = 0x0a, .x = 0x13},
+    {.src = 0x6029, .y = 0x09, .x = 0x13},
+    {.src = 0x6021, .y = 0x09, .x = 0x12},
+    {.src = 0x6029, .y = 0x08, .x = 0x12},
+    {.src = 0x6029, .y = 0x07, .x = 0x12},
+    {.src = 0x6025, .y = 0x07, .x = 0x11},
+    {.src = 0x6029, .y = 0x08, .x = 0x11},
+    {.src = 0x6029, .y = 0x09, .x = 0x11},
+    {.src = 0x6029, .y = 0x0a, .x = 0x11},
+    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860daac[] =
+{
+    {.src = 0x6021, .y = 0x0a, .x = 0x14},
+    {.src = 0x6021, .y = 0x0a, .x = 0x13},
+    {.src = 0x6029, .y = 0x09, .x = 0x13},
+    {.src = 0x6021, .y = 0x09, .x = 0x12},
+    {.src = 0x6029, .y = 0x08, .x = 0x12},
+    {.src = 0x6029, .y = 0x07, .x = 0x12},
+    {.src = 0x6025, .y = 0x07, .x = 0x11},
+    {.src = 0x6029, .y = 0x08, .x = 0x11},
+    {.src = 0x6029, .y = 0x09, .x = 0x11},
+    {.src = 0x6029, .y = 0x0a, .x = 0x11},
+    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+    {.src = 0x602f, .y = 0x0b, .x = 0x10},
+    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dae0[] =
+{
+    {.src = 0x6021, .y = 0x0c, .x = 0x14},
+    {.src = 0x6025, .y = 0x0c, .x = 0x13},
+    {.src = 0x6049, .y = 0x0d, .x = 0x13},
+    {.src = 0x6045, .y = 0x0d, .x = 0x12},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860daf0[] =
+{
+    {.src = 0x6021, .y = 0x0c, .x = 0x14},
+    {.src = 0x6025, .y = 0x0c, .x = 0x13},
+    {.src = 0x6049, .y = 0x0d, .x = 0x13},
+    {.src = 0x6025, .y = 0x0d, .x = 0x12},
+    {.src = 0x6029, .y = 0x0e, .x = 0x12},
+    {.src = 0x6049, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860db0c[] =
+{
+    {.src = 0x6021, .y = 0x0c, .x = 0x14},
+    {.src = 0x6025, .y = 0x0c, .x = 0x13},
+    {.src = 0x6049, .y = 0x0d, .x = 0x13},
+    {.src = 0x6025, .y = 0x0d, .x = 0x12},
+    {.src = 0x6029, .y = 0x0e, .x = 0x12},
+    {.src = 0x6049, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+    {.src = 0x6038, .y = 0x0e, .x = 0x11},
+    {.src = 0x6037, .y = 0x0d, .x = 0x11},
+    {.src = 0x6036, .y = 0x0c, .x = 0x11},
+    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860db38[] =
+{
+    {.src = 0x6021, .y = 0x0c, .x = 0x14},
+    {.src = 0x6025, .y = 0x0c, .x = 0x13},
+    {.src = 0x6049, .y = 0x0d, .x = 0x13},
+    {.src = 0x6025, .y = 0x0d, .x = 0x12},
+    {.src = 0x6029, .y = 0x0e, .x = 0x12},
+    {.src = 0x6049, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+    {.src = 0x6038, .y = 0x0e, .x = 0x11},
+    {.src = 0x6037, .y = 0x0d, .x = 0x11},
+    {.src = 0x6036, .y = 0x0c, .x = 0x11},
+    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+    {.src = 0x602f, .y = 0x0b, .x = 0x10},
+    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860db6c[] =
+{
+    {.src = 0x6021, .y = 0x0e, .x = 0x14},
+    {.src = 0x6021, .y = 0x0e, .x = 0x13},
+    {.src = 0x6029, .y = 0x0d, .x = 0x13},
+    {.src = 0x6045, .y = 0x0d, .x = 0x12},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860db7c[] =
+{
+    {.src = 0x6021, .y = 0x0e, .x = 0x14},
+    {.src = 0x6021, .y = 0x0e, .x = 0x13},
+    {.src = 0x6029, .y = 0x0d, .x = 0x13},
+    {.src = 0x6025, .y = 0x0d, .x = 0x12},
+    {.src = 0x6029, .y = 0x0e, .x = 0x12},
+    {.src = 0x6049, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860db98[] =
+{
+    {.src = 0x6021, .y = 0x0e, .x = 0x14},
+    {.src = 0x6021, .y = 0x0e, .x = 0x13},
+    {.src = 0x6029, .y = 0x0d, .x = 0x13},
+    {.src = 0x6025, .y = 0x0d, .x = 0x12},
+    {.src = 0x6029, .y = 0x0e, .x = 0x12},
+    {.src = 0x6049, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+    {.src = 0x6038, .y = 0x0e, .x = 0x11},
+    {.src = 0x6037, .y = 0x0d, .x = 0x11},
+    {.src = 0x6036, .y = 0x0c, .x = 0x11},
+    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dbc4[] =
+{
+    {.src = 0x6021, .y = 0x0e, .x = 0x14},
+    {.src = 0x6021, .y = 0x0e, .x = 0x13},
+    {.src = 0x6029, .y = 0x0d, .x = 0x13},
+    {.src = 0x6025, .y = 0x0d, .x = 0x12},
+    {.src = 0x6029, .y = 0x0e, .x = 0x12},
+    {.src = 0x6049, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+    {.src = 0x6038, .y = 0x0e, .x = 0x11},
+    {.src = 0x6037, .y = 0x0d, .x = 0x11},
+    {.src = 0x6036, .y = 0x0c, .x = 0x11},
+    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+    {.src = 0x602f, .y = 0x0b, .x = 0x10},
+    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dbf8[] =
+{
+    {.src = 0x6021, .y = 0x10, .x = 0x14},
+    {.src = 0x6025, .y = 0x10, .x = 0x13},
+    {.src = 0x6049, .y = 0x11, .x = 0x13},
+    {.src = 0x6021, .y = 0x11, .x = 0x12},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dc08[] =
+{
+    {.src = 0x6021, .y = 0x10, .x = 0x14},
+    {.src = 0x6025, .y = 0x10, .x = 0x13},
+    {.src = 0x6049, .y = 0x11, .x = 0x13},
+    {.src = 0x6021, .y = 0x11, .x = 0x12},
+    {.src = 0x6029, .y = 0x10, .x = 0x12},
+    {.src = 0x6029, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dc24[] =
+{
+    {.src = 0x6021, .y = 0x10, .x = 0x14},
+    {.src = 0x6025, .y = 0x10, .x = 0x13},
+    {.src = 0x6049, .y = 0x11, .x = 0x13},
+    {.src = 0x6021, .y = 0x11, .x = 0x12},
+    {.src = 0x6029, .y = 0x10, .x = 0x12},
+    {.src = 0x6029, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+    {.src = 0x6038, .y = 0x0e, .x = 0x11},
+    {.src = 0x6037, .y = 0x0d, .x = 0x11},
+    {.src = 0x6036, .y = 0x0c, .x = 0x11},
+    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dc50[] =
+{
+    {.src = 0x6021, .y = 0x10, .x = 0x14},
+    {.src = 0x6025, .y = 0x10, .x = 0x13},
+    {.src = 0x6049, .y = 0x11, .x = 0x13},
+    {.src = 0x6021, .y = 0x11, .x = 0x12},
+    {.src = 0x6029, .y = 0x10, .x = 0x12},
+    {.src = 0x6029, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+    {.src = 0x6038, .y = 0x0e, .x = 0x11},
+    {.src = 0x6037, .y = 0x0d, .x = 0x11},
+    {.src = 0x6036, .y = 0x0c, .x = 0x11},
+    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+    {.src = 0x602f, .y = 0x0b, .x = 0x10},
+    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dc84[] =
+{
+    {.src = 0x602b, .y = 0x12, .x = 0x14},
+    {.src = 0x602b, .y = 0x12, .x = 0x13},
+    {.src = 0x6029, .y = 0x11, .x = 0x13},
+    {.src = 0x6021, .y = 0x11, .x = 0x12},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dc94[] =
+{
+    {.src = 0x602b, .y = 0x12, .x = 0x14},
+    {.src = 0x602b, .y = 0x12, .x = 0x13},
+    {.src = 0x6029, .y = 0x11, .x = 0x13},
+    {.src = 0x6021, .y = 0x11, .x = 0x12},
+    {.src = 0x6029, .y = 0x10, .x = 0x12},
+    {.src = 0x6029, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dcb0[] =
+{
+    {.src = 0x602b, .y = 0x12, .x = 0x14},
+    {.src = 0x602b, .y = 0x12, .x = 0x13},
+    {.src = 0x6029, .y = 0x11, .x = 0x13},
+    {.src = 0x6021, .y = 0x11, .x = 0x12},
+    {.src = 0x6029, .y = 0x10, .x = 0x12},
+    {.src = 0x6029, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+    {.src = 0x6038, .y = 0x0e, .x = 0x11},
+    {.src = 0x6037, .y = 0x0d, .x = 0x11},
+    {.src = 0x6036, .y = 0x0c, .x = 0x11},
+    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+};
+
+static const struct UnkStruct_860DD10 gUnknown_0860dcdc[] =
+{
+    {.src = 0x602b, .y = 0x12, .x = 0x14},
+    {.src = 0x602b, .y = 0x12, .x = 0x13},
+    {.src = 0x6029, .y = 0x11, .x = 0x13},
+    {.src = 0x6021, .y = 0x11, .x = 0x12},
+    {.src = 0x6029, .y = 0x10, .x = 0x12},
+    {.src = 0x6029, .y = 0x0f, .x = 0x12},
+    {.src = 0x6021, .y = 0x0f, .x = 0x11},
+    {.src = 0x6038, .y = 0x0e, .x = 0x11},
+    {.src = 0x6037, .y = 0x0d, .x = 0x11},
+    {.src = 0x6036, .y = 0x0c, .x = 0x11},
+    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+    {.src = 0x602f, .y = 0x0b, .x = 0x10},
+    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+};
+
+static const struct UnkStruct_860DD10 * const gUnknown_0860DD10[][4] =
+{
+    {gUnknown_0860d450, gUnknown_0860d460, gUnknown_0860d47c, gUnknown_0860d4a8},
+    {gUnknown_0860dc84, gUnknown_0860dc94, gUnknown_0860dcb0, gUnknown_0860dcdc},
+    {gUnknown_0860d8b0, gUnknown_0860d8c0, gUnknown_0860d8dc, gUnknown_0860d908},
+    {gUnknown_0860d824, gUnknown_0860d834, gUnknown_0860d850, gUnknown_0860d87c},
+    {gUnknown_0860d5f4, gUnknown_0860d604, gUnknown_0860d620, gUnknown_0860d64c},
+    {gUnknown_0860dae0, gUnknown_0860daf0, gUnknown_0860db0c, gUnknown_0860db38},
+    {gUnknown_0860da54, gUnknown_0860da64, gUnknown_0860da80, gUnknown_0860daac},
+    {gUnknown_0860d680, gUnknown_0860d690, gUnknown_0860d6ac, gUnknown_0860d6d8},
+    {gUnknown_0860d4dc, gUnknown_0860d4ec, gUnknown_0860d508, gUnknown_0860d534},
+    {gUnknown_0860dbf8, gUnknown_0860dc08, gUnknown_0860dc24, gUnknown_0860dc50},
+    {gUnknown_0860d93c, gUnknown_0860d94c, gUnknown_0860d968, gUnknown_0860d994},
+    {gUnknown_0860d798, gUnknown_0860d7a8, gUnknown_0860d7c4, gUnknown_0860d7f0},
+    {gUnknown_0860d568, gUnknown_0860d578, gUnknown_0860d594, gUnknown_0860d5c0},
+    {gUnknown_0860db6c, gUnknown_0860db7c, gUnknown_0860db98, gUnknown_0860dbc4},
+    {gUnknown_0860d9c8, gUnknown_0860d9d8, gUnknown_0860d9f4, gUnknown_0860da20},
+    {gUnknown_0860d70c, gUnknown_0860d71c, gUnknown_0860d738, gUnknown_0860d764},
+};
+
+static const u8 gUnknown_0860DE10[][4] =
+{
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
+    {0x04, 0x07, 0x0b, 0x0d},
 };
 
 // code
