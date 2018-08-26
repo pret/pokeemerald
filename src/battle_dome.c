@@ -224,7 +224,7 @@ static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 natu
 static void CreateDomeTrainerMons(u16 tournamentTrainerId);
 static s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1);
 static s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1);
-static s32 sub_818FFC0(s32 move, s32 species, s32 arg2);
+static s32 GetTypeEffectivenessPoints(s32 move, s32 species, s32 arg2);
 static s32 sub_818FEB4(s32 *arr, bool8 arg1);
 static void sub_8190400(u8 taskId);
 static void sub_8190CD4(u8 taskId);
@@ -1276,24 +1276,24 @@ static const u32 gUnknown_0860D0FC[][2] =
     {0xffefffff, 0xffdfffff},
 };
 
-static const u8 gUnknown_0860D10C[DOME_TOURNAMENT_TRAINERS_COUNT][DOME_ROUNDS_COUNT] =
+static const u8 sIdToOpponentId[DOME_TOURNAMENT_TRAINERS_COUNT][DOME_ROUNDS_COUNT] =
 {
-    {0x08, 0x00, 0x04, 0x08},
-    {0x09, 0x0c, 0x08, 0x00},
-    {0x0a, 0x08, 0x0c, 0x00},
-    {0x0b, 0x04, 0x00, 0x08},
-    {0x0c, 0x00, 0x04, 0x08},
-    {0x0d, 0x0c, 0x08, 0x00},
-    {0x0e, 0x08, 0x0c, 0x00},
-    {0x0f, 0x04, 0x00, 0x08},
-    {0x00, 0x00, 0x04, 0x08},
-    {0x01, 0x0c, 0x08, 0x00},
-    {0x02, 0x08, 0x0c, 0x00},
-    {0x03, 0x04, 0x00, 0x08},
-    {0x04, 0x00, 0x04, 0x08},
-    {0x05, 0x0c, 0x08, 0x00},
-    {0x06, 0x08, 0x0c, 0x00},
-    {0x07, 0x04, 0x00, 0x08},
+    [0]  = {8,  0,  4, 8},
+    [1]  = {9,  12, 8, 0},
+    [2]  = {10, 8,  12, 0},
+    [3]  = {11, 4,  0, 8},
+    [4]  = {12, 0,  4, 8},
+    [5]  = {13, 12, 8, 0},
+    [6]  = {14, 8,  12, 0},
+    [7]  = {15, 4,  0, 8},
+    [8]  = {0,  0,  4, 8},
+    [9]  = {1,  12, 8, 0},
+    [10] = {2,  8,  12, 0},
+    [11] = {3,  4,  0, 8},
+    [12] = {4,  0,  4, 8},
+    [13] = {5,  12, 8, 0},
+    [14] = {6,  8,  12, 0},
+    [15] = {7,  4,  0, 8},
 };
 
 static const u8 gUnknown_0860D14C[] = {0x00, 0x08, 0x04, 0x0c, 0x07, 0x0f, 0x03, 0x0b, 0x02, 0x0a, 0x06, 0x0e, 0x05, 0x0d, 0x01, 0x09};
@@ -2943,12 +2943,12 @@ static s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
             {
                 if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
-                    array[i] += sub_818FFC0(sub_81A5060(i, moveId),
+                    array[i] += GetTypeEffectivenessPoints(sub_81A5060(i, moveId),
                                             GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 0);
                 }
                 else
                 {
-                    array[i] += sub_818FFC0(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][i]].moves[moveId],
+                    array[i] += GetTypeEffectivenessPoints(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][i]].moves[moveId],
                                             GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 0);
                 }
             }
@@ -2971,12 +2971,12 @@ static s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
             {
                 if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
-                    array[i] += sub_818FFC0(sub_81A5060(i, moveId),
+                    array[i] += GetTypeEffectivenessPoints(sub_81A5060(i, moveId),
                                             GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 1);
                 }
                 else
                 {
-                    array[i] += sub_818FFC0(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][i]].moves[moveId],
+                    array[i] += GetTypeEffectivenessPoints(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][i]].moves[moveId],
                                             GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 1);
                 }
             }
@@ -3051,23 +3051,30 @@ static s32 sub_818FEB4(s32 *arr, bool8 arg1)
     return bits;
 }
 
+#define TYPE_x0     0
+#define TYPE_x0_25  5
+#define TYPE_x0_50  10
+#define TYPE_x1     20
+#define TYPE_x2     40
+#define TYPE_x4     80
+
 // Functionally equivalent, while loop is impossible to match.
 #ifdef NONMATCHING
-static s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
+static s32 GetTypeEffectivenessPoints(s32 move, s32 targetSpecies, s32 arg2)
 {
-    s32 type1, type2, ability, moveType;
+    s32 defType1, defType2, defAbility, moveType;
     s32 i = 0;
-    s32 typePower = 20;
+    s32 typePower = TYPE_x1;
 
     if (move == MOVE_NONE || move == 0xFFFF || gBattleMoves[move].power == 0)
         return 0;
 
-    type1 = gBaseStats[species].type1;
-    type2 = gBaseStats[species].type2;
-    ability = gBaseStats[species].ability1;
+    defType1 = gBaseStats[targetSpecies].type1;
+    defType2 = gBaseStats[targetSpecies].type2;
+    defAbility = gBaseStats[targetSpecies].ability1;
     moveType = gBattleMoves[move].type;
 
-    if (ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
         if (arg2 == 1)
             typePower = 8;
@@ -3086,9 +3093,9 @@ static s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
                 if (val == moveType)
                 {
                     // BUG: * 2 is not necessary and makes the condition always false if the ability is wonder guard.
-                    if (gTypeEffectiveness[i + 1] == type1 && (ability != ABILITY_WONDER_GUARD || gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE * 2))
+                    if (gTypeEffectiveness[i + 1] == defType1 && (defAbility != ABILITY_WONDER_GUARD || gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE * 2))
                         typePower = (gTypeEffectiveness[i + 2] * typePower) / 10;
-                    if (gTypeEffectiveness[i + 1] == type2 && type1 != type2 && (ability != ABILITY_WONDER_GUARD || gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE * 2))
+                    if (gTypeEffectiveness[i + 1] == defType2 && defType1 != defType2 && (defAbility != ABILITY_WONDER_GUARD || gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE * 2))
                         typePower = (gTypeEffectiveness[i + 2] * typePower) / 10;
                 }
                 i += 3;
@@ -3145,23 +3152,23 @@ static s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
     case 2:
         switch (typePower)
         {
-        case 0:
+        case TYPE_x0:
             typePower = -16;
             break;
-        case 5:
+        case TYPE_x0_25:
             typePower = -8;
             break;
-        case 10:
+        case TYPE_x0_50:
         default:
             typePower = 0;
             break;
-        case 20:
+        case TYPE_x1:
             typePower = 4;
             break;
-        case 40:
+        case TYPE_x2:
             typePower = 12;
             break;
-        case 80:
+        case TYPE_x4:
             typePower = 20;
             break;
         }
@@ -3172,7 +3179,7 @@ static s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
 }
 #else
 NAKED
-static s32 sub_818FFC0(s32 move, s32 species, s32 arg2)
+static s32 GetTypeEffectivenessPoints(s32 move, s32 species, s32 arg2)
 {
     asm_unified("\n\
 	push {r4-r7,lr}\n\
@@ -3448,11 +3455,11 @@ static s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
     if (roundId != DOME_ROUND1)
     {
         if (roundId == DOME_FINAL)
-            val = gUnknown_0860D10C[i][roundId] + 8;
+            val = sIdToOpponentId[i][roundId] + 8;
         else
-            val = gUnknown_0860D10C[i][roundId] + 4;
+            val = sIdToOpponentId[i][roundId] + 4;
 
-        for (j = gUnknown_0860D10C[i][roundId]; j < val; j++)
+        for (j = sIdToOpponentId[i][roundId]; j < val; j++)
         {
             if (gUnknown_0860D14C[j] != i && !gSaveBlock2Ptr->frontier.domeTrainers[gUnknown_0860D14C[j]].isEliminated)
                 break;
@@ -3465,8 +3472,8 @@ static s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
     }
     else
     {
-        if (!gSaveBlock2Ptr->frontier.domeTrainers[gUnknown_0860D10C[i][roundId]].isEliminated)
-            return gUnknown_0860D10C[i][roundId];
+        if (!gSaveBlock2Ptr->frontier.domeTrainers[sIdToOpponentId[i][roundId]].isEliminated)
+            return sIdToOpponentId[i][roundId];
         else
             return 0xFF;
     }
@@ -6366,7 +6373,7 @@ static void DecideRoundWinners(u8 roundId)
                 {
                     for (monId2 = 0; monId2 < 3; monId2++)
                     {
-                        points1 += sub_818FFC0(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentId1][monId1]].moves[moveSlot],
+                        points1 += GetTypeEffectivenessPoints(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentId1][monId1]].moves[moveSlot],
                                                 gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentId2][monId2]].species, 2);
                     }
                 }
@@ -6389,7 +6396,7 @@ static void DecideRoundWinners(u8 roundId)
                 {
                     for (monId2 = 0; monId2 < 3; monId2++)
                     {
-                        points2 += sub_818FFC0(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentId2][monId1]].moves[moveSlot],
+                        points2 += GetTypeEffectivenessPoints(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentId2][monId1]].moves[moveSlot],
                                                 gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentId1][monId2]].species, 2);
                     }
                 }
