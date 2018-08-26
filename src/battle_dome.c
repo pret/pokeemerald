@@ -1105,7 +1105,16 @@ static const union AnimCmd * const gUnknown_0860CFA0[] =
     gUnknown_0860CF98,
 };
 
-static const struct SpriteTemplate gUnknown_0860CFA8 = {0x0000, 0xffff, &gUnknown_0860CF70, gUnknown_0860CFA0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_0860CFA8 =
+{
+    .tileTag = 0x0000,
+    .paletteTag = 0xffff,
+    .oam = &gUnknown_0860CF70,
+    .anims = gUnknown_0860CFA0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+   .callback = SpriteCallbackDummy
+};
 
 static const union AnimCmd gUnknown_0860CFC0[] =
 {
@@ -1125,7 +1134,16 @@ static const union AnimCmd * const gUnknown_0860CFD0[] =
     gUnknown_0860CFC8,
 };
 
-static const struct SpriteTemplate gUnknown_0860CFD8 = {0x0000, 0xffff, &gUnknown_0860CF78, gUnknown_0860CFD0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_0860CFD8 =
+{
+    .tileTag = 0x0000,
+    .paletteTag = 0xffff,
+    .oam = &gUnknown_0860CF78,
+    .anims = gUnknown_0860CFD0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 static const union AnimCmd gUnknown_0860CFF0[] =
 {
@@ -1145,7 +1163,16 @@ static const union AnimCmd * const gUnknown_0860D000[] =
     gUnknown_0860CFF8,
 };
 
-static const struct SpriteTemplate gUnknown_0860D008 = {0x0000, 0xffff, &gUnknown_0860CF78, gUnknown_0860D000, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_0860D008 =
+{
+    .tileTag = 0x0000,
+    .paletteTag = 0xffff,
+    .oam = &gUnknown_0860CF78,
+    .anims = gUnknown_0860D000,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 static const union AnimCmd gUnknown_0860D020[] =
 {
@@ -1183,8 +1210,27 @@ static const union AnimCmd * const gUnknown_0860D048[] =
     gUnknown_0860D038,
 };
 
-static const struct SpriteTemplate gUnknown_0860D050 = {0x0000, 0xffff, &gUnknown_0860CF88, gUnknown_0860D048, NULL, gDummySpriteAffineAnimTable, sub_8190B40};
-static const struct SpriteTemplate gUnknown_0860D068 = {0x0000, 0xffff, &gUnknown_0860CF80, gUnknown_0860D040, NULL, gDummySpriteAffineAnimTable, sub_8190C6C};
+static const struct SpriteTemplate gUnknown_0860D050 =
+{
+    .tileTag = 0x0000,
+    .paletteTag = 0xffff,
+    .oam = &gUnknown_0860CF88,
+    .anims = gUnknown_0860D048,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8190B40
+};
+
+static const struct SpriteTemplate gUnknown_0860D068 =
+{
+    .tileTag = 0x0000,
+    .paletteTag = 0xffff,
+    .oam = &gUnknown_0860CF80,
+    .anims = gUnknown_0860D040,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8190C6C
+};
 
 static const u8 gUnknown_0860D080[DOME_TOURNAMENT_TRAINERS_COUNT] =
 {
