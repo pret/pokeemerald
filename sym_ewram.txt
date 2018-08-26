@@ -729,7 +729,7 @@ gUnknown_0203CF00: @ 203CF00
 	.include "src/fldeff_groundshake.o"
 	.include "src/pokemon_summary_screen.o"
 	.include "src/unk_pokedex_area_screen_helper.o"
-	.include "src/battle_pyramid.o"
+	.include "src/battle_pyramid_bag.o"
 
 gUnknown_0203CF3C: @ 203CF3C
 	.space 0x4

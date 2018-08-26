@@ -212,6 +212,7 @@ SECTIONS {
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
+        src/battle_tower.o(.text);
         asm/battle_tower.o(.text);
         src/use_pokeblock.o(.text);
         asm/use_pokeblock.o(.text);
@@ -265,8 +266,8 @@ SECTIONS {
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
         src/unk_pokedex_area_screen_helper.o(.text);
-        src/battle_pyramid.o(.text);
-        asm/battle_pyramid.o(.text);
+        src/battle_pyramid_bag.o(.text);
+        asm/battle_pyramid_bag.o(.text);
         asm/pokenav.o(.text);
         src/match_call.o(.text);
         asm/pokenav.o(.text.after.match.call);
@@ -544,7 +545,7 @@ SECTIONS {
         src/berry_fix_program.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);
-        data/battle_pyramid.o(.rodata);
+        data/battle_pyramid_bag.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);
