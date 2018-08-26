@@ -1,8 +1,14 @@
 #include "global.h"
+#include "data2.h"
 #include "graphics.h"
 
 extern const union AnimCmd gAnimCmd_General_Frame0[];
 extern const union AnimCmd AnimCmd_82FF540[];
+
+#include "data/pokemon_graphics/unknown_anims.h"
+#include "data/pokemon_graphics/front_pic_coordinates.h"
+#include "data/pokemon_graphics/still_front_pic_table.h"
+#include "data/pokemon_graphics/back_pic_coordinates.h"
 
 #include "data/pokemon_graphics/back_pic_table.h"
 #include "data/pokemon_graphics/palette_table.h"

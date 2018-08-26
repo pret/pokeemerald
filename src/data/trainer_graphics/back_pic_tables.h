@@ -1,13 +1,13 @@
-const u8 gTrainerBackPicCoords[] =
+const struct MonCoords gTrainerBackPicCoords[] =
 {
-    8, 4, 0, 0,
-    8, 4, 0, 0,
-    8, 5, 0, 0,
-    8, 5, 0, 0,
-    8, 4, 0, 0,
-    8, 4, 0, 0,
-    8, 4, 0, 0,
-    8, 4, 0, 0,
+    {8, 4},
+    {8, 4},
+    {8, 5},
+    {8, 5},
+    {8, 4},
+    {8, 4},
+    {8, 4},
+    {8, 4},
 };
 
 const struct CompressedSpriteSheet gTrainerBackPicTable[] =
