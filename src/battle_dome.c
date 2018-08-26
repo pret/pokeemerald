@@ -80,7 +80,6 @@ extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 
 extern const u16 gBattleFrontierHeldItems[];
-extern const u8 gUnknown_08D83900[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 extern const struct SpriteTemplate gUnknown_0860CFA8;
@@ -97,6 +96,7 @@ extern const u8 gUnknown_08D82F10[];
 extern const u8 gUnknown_08D834FC[];
 extern const u8 gUnknown_08D83B2C[];
 extern const u8 gUnknown_08D83C3C[];
+extern const u8 gUnknown_08D83900[];
 extern const u8 gBattleFrontierGfx_DomeOptions[];
 
 // text
@@ -229,7 +229,7 @@ static s32 sub_818FEB4(s32 *arr, bool8 arg1);
 static void sub_8190400(u8 taskId);
 static void sub_8190CD4(u8 taskId);
 static u8 sub_819221C(u8 taskId);
-void sub_8194D48(void);
+static void sub_8194D48(void);
 static s32 TrainerIdToTournamentId(u16 trainerId);
 static u16 TrainerIdOfPlayerOpponent(void);
 static void sub_8194220(u8 taskId);
@@ -249,32 +249,30 @@ static u8 sub_8193BDC(u8 taskId);
 static void DecideRoundWinners(u8 roundId);
 static u8 sub_81953E8(u8 tournamentId, u8);
 static void sub_81948EC(u8, u8);
-
-void sub_8190B40(struct Sprite *sprite);
-void sub_8190C6C(struct Sprite *sprite);
-
-void sub_818E9CC(void);
-void sub_818EA84(void);
-void sub_818ED28(void);
-void sub_818F9B0(void);
-void sub_818F9E0(void);
-void sub_818FA20(void);
-void ShowDomeOpponentInfo(void);
-void sub_81938A4(void);
-void sub_81938E0(void);
-void sub_8190298(void);
-void sub_81902E4(void);
-void sub_8193D40(void);
-void sub_8193D7C(void);
-void sub_81902F8(void);
-void sub_819033C(void);
-void sub_8194D68(void);
-void sub_8194E44(void);
-void sub_8194EB4(void);
-void sub_8194EC0(void);
-void sub_8194EF8(void);
-void sub_8194F58(void);
-void InitDomeTrainers(void);
+static void sub_8190B40(struct Sprite *sprite);
+static void sub_8190C6C(struct Sprite *sprite);
+static void sub_818E9CC(void);
+static void sub_818EA84(void);
+static void sub_818ED28(void);
+static void sub_818F9B0(void);
+static void sub_818F9E0(void);
+static void sub_818FA20(void);
+static void ShowDomeOpponentInfo(void);
+static void sub_81938A4(void);
+static void sub_81938E0(void);
+static void sub_8190298(void);
+static void sub_81902E4(void);
+static void sub_8193D40(void);
+static void sub_8193D7C(void);
+static void sub_81902F8(void);
+static void sub_819033C(void);
+static void sub_8194D68(void);
+static void sub_8194E44(void);
+static void sub_8194EB4(void);
+static void sub_8194EC0(void);
+static void sub_8194EF8(void);
+static void sub_8194F58(void);
+static void InitDomeTrainers(void);
 
 // EWRAM variables.
 EWRAM_DATA u32 gUnknown_0203CD70 = 0;
@@ -283,7 +281,6 @@ static EWRAM_DATA struct BattleDomeStruct *sBattleDomeStruct = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
 
 // Const rom data.
-
 static const u8 sMovePointsForDomeTrainers[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS_COUNT] =
 {
 	[MOVE_NONE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -643,7 +640,7 @@ static const u8 sMovePointsForDomeTrainers[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS
 	[MOVE_PSYCHO_BOOST] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1},
 };
 
-static const u8 gUnknown_0860C988[31][16] =
+static const u8 gUnknown_0860C988[][DOME_TOURNAMENT_TRAINERS_COUNT] =
 {
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0},
@@ -724,7 +721,6 @@ static const u8 gUnknown_0860CBF1[][5][4]=
     {{0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0xff, 0xff}, {0xff, 0xff, 0x1c, 0x1d}, {0xff, 0xff, 0x1c, 0x1d}},
     {{0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}},
 };
-static const u8 gUnused_0860CBF1[] = {0x00, 0x00, 0x00};
 
 static const struct BgTemplate gUnknown_0860CE74[4] =
 {
@@ -806,7 +802,7 @@ static const struct BgTemplate gUnknown_0860CE84[4] =
     },
 };
 
-static const struct WindowTemplate gUnknown_0860CE94[] = 
+static const struct WindowTemplate gUnknown_0860CE94[] =
 {
     {
         .priority = 0,
@@ -838,7 +834,7 @@ static const struct WindowTemplate gUnknown_0860CE94[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const struct WindowTemplate gUnknown_0860CEB4[] = 
+static const struct WindowTemplate gUnknown_0860CEB4[] =
 {
     {
         .priority = 0,
@@ -1002,9 +998,10 @@ static const struct WindowTemplate gUnknown_0860CEB4[] =
         .paletteNum = 15,
         .baseBlock = 372,
     },
+    // UB: No DUMMY_WIN_TEMPLATE at the array's end.
 };
 
-static const struct ScanlineEffectParams gUnknown_0860CF44 = 
+static const struct ScanlineEffectParams gUnknown_0860CF44 =
 {
     .dmaDest = (void *)REG_ADDR_BG3CNT,
     .dmaControl = 0xa2600001,
@@ -1013,14 +1010,14 @@ static const struct ScanlineEffectParams gUnknown_0860CF44 =
 
 static const struct CompressedSpriteSheet gUnknown_0860CF50[] =
 {
-    gBattleFrontierGfx_DomeOptions, 0x0600, 0x0000,
-    NULL
+    {gBattleFrontierGfx_DomeOptions, 0x0600, 0x0000},
+    {},
 };
 
 static const struct CompressedSpritePalette gUnknown_0860CF60[] =
 {
-    gUnknown_08D85444, 0x0000,
-    NULL
+    {gUnknown_08D85444, 0x0000},
+    {},
 };
 
 static const struct OamData gUnknown_0860CF70 =
@@ -1040,7 +1037,7 @@ static const struct OamData gUnknown_0860CF70 =
     .affineParam = 0,
 };
 
-static const struct OamData gUnknown_0860CF78 = 
+static const struct OamData gUnknown_0860CF78 =
 {
     .y = 0,
     .affineMode = 0,
@@ -1112,7 +1109,7 @@ static const struct SpriteTemplate gUnknown_0860CFA8 = {0x0000, 0xffff, &gUnknow
 
 static const union AnimCmd gUnknown_0860CFC0[] =
 {
-    ANIMCMD_FRAME(8, 1), 
+    ANIMCMD_FRAME(8, 1),
     ANIMCMD_END,
 };
 
@@ -1161,7 +1158,7 @@ static const union AnimCmd gUnknown_0860D028[] =
     ANIMCMD_FRAME(18, 129, .vFlip = TRUE),
     ANIMCMD_END,
  };
- 
+
 static const union AnimCmd gUnknown_0860D030[] =
 {
     ANIMCMD_FRAME(16, 65, .hFlip = TRUE),
@@ -1189,7 +1186,10 @@ static const union AnimCmd * const gUnknown_0860D048[] =
 static const struct SpriteTemplate gUnknown_0860D050 = {0x0000, 0xffff, &gUnknown_0860CF88, gUnknown_0860D048, NULL, gDummySpriteAffineAnimTable, sub_8190B40};
 static const struct SpriteTemplate gUnknown_0860D068 = {0x0000, 0xffff, &gUnknown_0860CF80, gUnknown_0860D040, NULL, gDummySpriteAffineAnimTable, sub_8190C6C};
 
-static const u8 gUnknown_0860D080[] = {0x00, 0x08, 0x0c, 0x04, 0x07, 0x0f, 0x0b, 0x03, 0x02, 0x0a, 0x0e, 0x06, 0x05, 0x0d, 0x09, 0x01};
+static const u8 gUnknown_0860D080[DOME_TOURNAMENT_TRAINERS_COUNT] =
+{
+    0x00, 0x08, 0x0c, 0x04, 0x07, 0x0f, 0x0b, 0x03, 0x02, 0x0a, 0x0e, 0x06, 0x05, 0x0d, 0x09, 0x01
+};
 
 static void (* const gUnknown_0860D090[])(void) =
 {
@@ -1230,7 +1230,7 @@ static const u32 gUnknown_0860D0FC[][2] =
     {0xffefffff, 0xffdfffff},
 };
 
-static const u8 gUnknown_0860D10C[][4] =
+static const u8 gUnknown_0860D10C[DOME_TOURNAMENT_TRAINERS_COUNT][DOME_ROUNDS_COUNT] =
 {
     {0x08, 0x00, 0x04, 0x08},
     {0x09, 0x0c, 0x08, 0x00},
@@ -1252,16 +1252,24 @@ static const u8 gUnknown_0860D10C[][4] =
 
 static const u8 gUnknown_0860D14C[] = {0x00, 0x08, 0x04, 0x0c, 0x07, 0x0f, 0x03, 0x0b, 0x02, 0x0a, 0x06, 0x0e, 0x05, 0x0d, 0x01, 0x09};
 
-static const u8 gUnknown_0860D15C[] =
+static const u8 gUnknown_0860D15C[][4] =
 {
-    0x00, 0x08, 0x0c, 0x0e, 0x00, 0x08, 0x0c, 0x0e,
-    0x01, 0x08, 0x0c, 0x0e, 0x01, 0x08, 0x0c, 0x0e,
-    0x02, 0x09, 0x0c, 0x0e, 0x02, 0x09, 0x0c, 0x0e,
-    0x03, 0x09, 0x0c, 0x0e, 0x03, 0x09, 0x0c, 0x0e,
-    0x04, 0x0a, 0x0d, 0x0e, 0x04, 0x0a, 0x0d, 0x0e,
-    0x05, 0x0a, 0x0d, 0x0e, 0x05, 0x0a, 0x0d, 0x0e,
-    0x06, 0x0b, 0x0d, 0x0e, 0x06, 0x0b, 0x0d, 0x0e,
-    0x07, 0x0b, 0x0d, 0x0e, 0x07, 0x0b, 0x0d, 0x0e,
+    {0x00, 0x08, 0x0c, 0x0e},
+    {0x00, 0x08, 0x0c, 0x0e},
+    {0x01, 0x08, 0x0c, 0x0e},
+    {0x01, 0x08, 0x0c, 0x0e},
+    {0x02, 0x09, 0x0c, 0x0e},
+    {0x02, 0x09, 0x0c, 0x0e},
+    {0x03, 0x09, 0x0c, 0x0e},
+    {0x03, 0x09, 0x0c, 0x0e},
+    {0x04, 0x0a, 0x0d, 0x0e},
+    {0x04, 0x0a, 0x0d, 0x0e},
+    {0x05, 0x0a, 0x0d, 0x0e},
+    {0x05, 0x0a, 0x0d, 0x0e},
+    {0x06, 0x0b, 0x0d, 0x0e},
+    {0x06, 0x0b, 0x0d, 0x0e},
+    {0x07, 0x0b, 0x0d, 0x0e},
+    {0x07, 0x0b, 0x0d, 0x0e},
 };
 
 static const u8 gUnknown_0860D19C[] = {0x17, 0x1b, 0x1d, 0x1e};
@@ -1384,8 +1392,8 @@ static const u8 *const gBattleDomeOpponentStatsPointers[] =
     gBattleDomeOpponentStats43,
 };
 
-static const u8 gUnknown_0860D340[] = {0x68, 0x88, 0x68};
-static const u8 gUnknown_0860D343[] = {0x26, 0x3e, 0x4e};
+static const u8 sInfoTrainerMonX[] = {0x68, 0x88, 0x68};
+static const u8 sInfoTrainerMonY[] = {0x26, 0x3e, 0x4e};
 static const u8 gUnknown_0860D346[] = {0x00, 0x04, 0x00};
 
 static const u8 gUnknown_0860D349[] = {0x00, 0x05, 0x09, 0x0c, 0x0e, 0x00, 0x00};
@@ -1420,10 +1428,10 @@ static const u8 *const gBattleDomeWinStringsPointers[] =
     gBattleDomeWinStrings7,
 };
 
-static const u8 gUnknown_0860D3A8[] = {0x60, 0x60, 0x60};
-static const u8 gUnknown_0860D3AB[] = {0x38, 0x50, 0x68};
-static const u8 gUnknown_0860D3AE[] = {0x90, 0x90, 0x90};
-static const u8 gUnknown_0860D3B1[] = {0x38, 0x50, 0x68};
+static const u8 sFirstTrainerMonX[] = {0x60, 0x60, 0x60};
+static const u8 sFirstTrainerMonY[] = {0x38, 0x50, 0x68};
+static const u8 sSecondTrainerMonX[] = {0x90, 0x90, 0x90};
+static const u8 sSecondTrainerMonY[] = {0x38, 0x50, 0x68};
 
 static const u8 gUnknown_0860D3B4[] = {0x00, 0x08, 0x0c, 0x04, 0x07, 0x0f, 0x0b, 0x03, 0x02, 0x0a, 0x0e, 0x06, 0x05, 0x0d, 0x09, 0x01};
 
@@ -1446,7 +1454,7 @@ static const u8 gUnknown_0860D3C4[][3] =
     {0x00, 0x10, 0x03},
 };
 
-static const u8 gUnknown_0860D3F1[][2] = 
+static const u8 gUnknown_0860D3F1[][2] =
 {
     {0x00, 0x00},
     {0x01, 0x70},
@@ -1500,7 +1508,6 @@ static const u8 gUnknown_0860D411[][2] =
     {0x89, 0x59},
     {0x78, 0x59},
 };
-const u8 sExtraByte = 0x00;
 
 static const struct UnkStruct_860DD10 gUnknown_0860d450[] =
 {
@@ -2318,7 +2325,7 @@ static const struct UnkStruct_860DD10 gUnknown_0860dcdc[] =
     {.src = 0x602e, .y = 0x0b, .x = 0x0f},
 };
 
-static const struct UnkStruct_860DD10 * const gUnknown_0860DD10[][4] =
+static const struct UnkStruct_860DD10 * const gUnknown_0860DD10[DOME_TOURNAMENT_TRAINERS_COUNT][4] =
 {
     {gUnknown_0860d450, gUnknown_0860d460, gUnknown_0860d47c, gUnknown_0860d4a8},
     {gUnknown_0860dc84, gUnknown_0860dc94, gUnknown_0860dcb0, gUnknown_0860dcdc},
@@ -2338,7 +2345,7 @@ static const struct UnkStruct_860DD10 * const gUnknown_0860DD10[][4] =
     {gUnknown_0860d70c, gUnknown_0860d71c, gUnknown_0860d738, gUnknown_0860d764},
 };
 
-static const u8 gUnknown_0860DE10[][4] =
+static const u8 gUnknown_0860DE10[DOME_TOURNAMENT_TRAINERS_COUNT][4] =
 {
     {0x04, 0x07, 0x0b, 0x0d},
     {0x04, 0x07, 0x0b, 0x0d},
@@ -2364,7 +2371,7 @@ void CallBattleDomeFunction(void)
     gUnknown_0860D090[gSpecialVar_0x8004]();
 }
 
-void sub_818E9CC(void)
+static void sub_818E9CC(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2380,7 +2387,7 @@ void sub_818E9CC(void)
     gTrainerBattleOpponent_A = 0;
 }
 
-void sub_818EA84(void)
+static void sub_818EA84(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2448,7 +2455,7 @@ void sub_818EA84(void)
     }
 }
 
-void sub_818ED28(void)
+static void sub_818ED28(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2514,7 +2521,7 @@ void sub_818ED28(void)
     }
 }
 
-void InitDomeTrainers(void)
+static void InitDomeTrainers(void)
 {
     s32 i, j, k;
     s32 monLevel;
@@ -2775,18 +2782,18 @@ static void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray)
         SWAP_16(gSaveBlock2Ptr->frontier.domeMonId[id1][i], gSaveBlock2Ptr->frontier.domeMonId[id2][i]);
 }
 
-void sub_818F9B0(void)
+static void sub_818F9B0(void)
 {
     StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.field_CB2]);
 }
 
-void sub_818F9E0(void)
+static void sub_818F9E0(void)
 {
     StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.field_CB2]);
     CopyDomeTrainerName(gStringVar2, gTrainerBattleOpponent_A);
 }
 
-void sub_818FA20(void)
+static void sub_818FA20(void)
 {
     gUnknown_0203CD70 = 0;
     gUnknown_0203CD74 =  GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL);
@@ -3419,7 +3426,7 @@ static s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
     }
 }
 
-void sub_8190298(void)
+static void sub_8190298(void)
 {
     gTrainerBattleOpponent_A = TrainerIdOfPlayerOpponent();
 }
@@ -3429,12 +3436,12 @@ static u16 TrainerIdOfPlayerOpponent(void)
     return gSaveBlock2Ptr->frontier.domeTrainers[TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.field_CB2, TRAINER_PLAYER)].trainerId;
 }
 
-void sub_81902E4(void)
+static void sub_81902E4(void)
 {
     sub_8162614(gTrainerBattleOpponent_A, 0);
 }
 
-void sub_81902F8(void)
+static void sub_81902F8(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -3442,7 +3449,7 @@ void sub_81902F8(void)
     sub_81A4C30();
 }
 
-void sub_819033C(void)
+static void sub_819033C(void)
 {
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -3456,7 +3463,7 @@ void sub_819033C(void)
         gSaveBlock2Ptr->frontier.field_D14[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.field_D0C[battleMode][lvlMode];
 }
 
-void ShowDomeOpponentInfo(void)
+static void ShowDomeOpponentInfo(void)
 {
     u8 taskId = CreateTask(sub_8190400, 0);
     gTasks[taskId].data[0] = 0;
@@ -3760,7 +3767,7 @@ static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
     }
 }
 
-void sub_8190B40(struct Sprite *sprite)
+static void sub_8190B40(struct Sprite *sprite)
 {
     s32 taskId1 = sprite->data[0];
     s32 arrId = gTasks[gTasks[taskId1].data[4]].data[1];
@@ -3829,7 +3836,7 @@ void sub_8190B40(struct Sprite *sprite)
     }
 }
 
-void sub_8190C6C(struct Sprite *sprite)
+static void sub_8190C6C(struct Sprite *sprite)
 {
     s32 taskId1 = sprite->data[0];
 
@@ -4170,7 +4177,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 0;
-                matchNo = gUnknown_0860D15C[(gTasks[taskId2].data[1] * 4) + (sBattleDomeStruct->unk_10 - 1)];
+                matchNo = gUnknown_0860D15C[gTasks[taskId2].data[1]][sBattleDomeStruct->unk_10 - 1];
                 DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 8, matchNo);
             }
 
@@ -4335,7 +4342,7 @@ static void sub_8190CD4(u8 taskId)
                 gBattle_BG2_X = 0;
                 gBattle_BG2_Y = 0;
             }
-            matchNo = gUnknown_0860D15C[(sBattleDomeStruct->unk_10 - 1) + (gTasks[taskId2].data[1] * 4)];
+            matchNo = gUnknown_0860D15C[gTasks[taskId2].data[1]][sBattleDomeStruct->unk_10 - 1];
             DisplayMatchInfoOnCard(gTasks[taskId].data[2] | 2, matchNo);
 
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT / 2; i++)
@@ -4724,8 +4731,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         {
             sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D340[i],
-                                                                  y + gUnknown_0860D343[i],
+                                                                  x | sInfoTrainerMonX[i],
+                                                                  y + sInfoTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
@@ -4733,8 +4740,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         {
             sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i],
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D340[i],
-                                                                  y + gUnknown_0860D343[i],
+                                                                  x | sInfoTrainerMonX[i],
+                                                                  y + sInfoTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
@@ -4742,8 +4749,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         {
             sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].species,
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D340[i],
-                                                                  y + gUnknown_0860D343[i],
+                                                                  x | sInfoTrainerMonX[i],
+                                                                  y + sInfoTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
@@ -5178,8 +5185,8 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         {
             sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i],
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D3A8[i],
-                                                                  y + gUnknown_0860D3AB[i],
+                                                                  x | sFirstTrainerMonX[i],
+                                                                  y + sFirstTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
@@ -5187,8 +5194,8 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         {
             sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i],
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D3A8[i],
-                                                                  y + gUnknown_0860D3AB[i],
+                                                                  x | sFirstTrainerMonX[i],
+                                                                  y + sFirstTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
@@ -5196,8 +5203,8 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         {
             sBattleDomeStruct->arr[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[0]][i]].species,
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D3A8[i],
-                                                                  y + gUnknown_0860D3AB[i],
+                                                                  x | sFirstTrainerMonX[i],
+                                                                  y + sFirstTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.priority = 0;
         }
@@ -5218,8 +5225,8 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         {
             sBattleDomeStruct->arr[5 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i],
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D3AE[i],
-                                                                  y + gUnknown_0860D3B1[i],
+                                                                  x | sSecondTrainerMonX[i],
+                                                                  y + sSecondTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.priority = 0;
         }
@@ -5227,8 +5234,8 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         {
             sBattleDomeStruct->arr[5 + i + arrId] = CreateMonIcon(gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i],
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D3AE[i],
-                                                                  y + gUnknown_0860D3B1[i],
+                                                                  x | sSecondTrainerMonX[i],
+                                                                  y + sSecondTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.priority = 0;
         }
@@ -5236,8 +5243,8 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         {
             sBattleDomeStruct->arr[5 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentIds[1]][i]].species,
                                                                   SpriteCb_MonIcon,
-                                                                  x | gUnknown_0860D3AE[i],
-                                                                  y + gUnknown_0860D3B1[i],
+                                                                  x | sSecondTrainerMonX[i],
+                                                                  y + sSecondTrainerMonY[i],
                                                                   0, 0, TRUE);
             gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.priority = 0;
         }
@@ -5317,7 +5324,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     AddTextPrinter(&textPrinter, 0, NULL);
 }
 
-void sub_81938A4(void)
+static void sub_81938A4(void)
 {
     u8 taskId = CreateTask(sub_8194220, 0);
     gTasks[taskId].data[0] = 0;
@@ -5327,7 +5334,7 @@ void sub_81938A4(void)
     SetMainCallback2(CB2_BattleDome);
 }
 
-void sub_81938E0(void)
+static void sub_81938E0(void)
 {
     u8 taskId;
 
@@ -5342,7 +5349,7 @@ void sub_81938E0(void)
     SetMainCallback2(CB2_BattleDome);
 }
 
-void sub_819395C(u8 taskId)
+static void sub_819395C(u8 taskId)
 {
     u8 newTaskId = 0;
     s32 spriteId = gTasks[taskId].data[1];
@@ -5479,7 +5486,7 @@ static u8 sub_8193BDC(u8 taskId)
     return retVal;
 }
 
-void sub_8193D40(void)
+static void sub_8193D40(void)
 {
     u8 taskId = CreateTask(sub_8194220, 0);
     gTasks[taskId].data[0] = 0;
@@ -5489,7 +5496,7 @@ void sub_8193D40(void)
     SetMainCallback2(CB2_BattleDome);
 }
 
-void sub_8193D7C(void)
+static void sub_8193D7C(void)
 {
     s32 i;
 
@@ -6032,13 +6039,13 @@ static void VblankCb1_BattleDome(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void sub_8194D48(void)
+static void sub_8194D48(void)
 {
     gFacilityTrainerMons = gBattleFrontierMons;
     gFacilityTrainers = gBattleFrontierTrainers;
 }
 
-void sub_8194D68(void)
+static void sub_8194D68(void)
 {
     s32 i, moveSlot;
 
@@ -6064,7 +6071,7 @@ void sub_8194D68(void)
     }
 }
 
-void sub_8194E44(void)
+static void sub_8194E44(void)
 {
     s32 i;
 
@@ -6076,12 +6083,12 @@ void sub_8194E44(void)
     }
 }
 
-void sub_8194EB4(void)
+static void sub_8194EB4(void)
 {
     sub_80F94E8();
 }
 
-void sub_8194EC0(void)
+static void sub_8194EC0(void)
 {
     if (TrainerIdToTournamentId(gTrainerBattleOpponent_A) > TrainerIdToTournamentId(TRAINER_PLAYER))
         gSpecialVar_Result = 1;
@@ -6089,7 +6096,7 @@ void sub_8194EC0(void)
         gSpecialVar_Result = 2;
 }
 
-void sub_8194EF8(void)
+static void sub_8194EF8(void)
 {
     s32 i;
 
@@ -6102,7 +6109,7 @@ void sub_8194EF8(void)
     CopyDomeTrainerName(gStringVar1, gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId);
 }
 
-void sub_8194F58(void)
+static void sub_8194F58(void)
 {
     s32 i, j, k;
     s32 monLevel;
