@@ -11,8 +11,8 @@ struct MonCoords
     u8 y_offset;
 };
 
-extern struct MonCoords gTrainerBackPicCoords[];
-extern struct MonCoords gTrainerFrontPicCoords[];
+extern const struct MonCoords gTrainerBackPicCoords[];
+extern const struct MonCoords gTrainerFrontPicCoords[];
 
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[][MOVE_NAME_LENGTH + 1];
