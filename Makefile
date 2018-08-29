@@ -2,6 +2,11 @@ include $(DEVKITARM)/base_tools
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
 
+TITLE       := POKEMON EMER
+GAME_CODE   := BPEE
+MAKER_CODE  := 01
+REVISION    := 0
+
 SHELL := /bin/bash -o pipefail
 
 ROM := pokeemerald.gba
@@ -165,5 +170,6 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
 
 $(ROM): $(ELF)
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+	$(OBJCOPY) -O binary $< $@
+	gbafix $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION)
 
