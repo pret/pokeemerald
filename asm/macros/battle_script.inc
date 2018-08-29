@@ -45,14 +45,14 @@
 	.byte 0xa
 	.endm
 
-	.macro healthbarupdate bank
+	.macro healthbarupdate battler
 	.byte 0xb
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro datahpupdate bank
+	.macro datahpupdate battler
 	.byte 0xc
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro critmessage
@@ -104,38 +104,38 @@
 	.byte 0x17
 	.endm
 
-	.macro clearstatusfromeffect bank
+	.macro clearstatusfromeffect battler
 	.byte 0x18
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro tryfaintmon bank, param1, param2
+	.macro tryfaintmon battler, param1, param2
 	.byte 0x19
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
 
-	.macro dofaintanimation bank
+	.macro dofaintanimation battler
 	.byte 0x1a
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro cleareffectsonfaint bank
+	.macro cleareffectsonfaint battler
 	.byte 0x1b
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro jumpifstatus bank, status1, param2
+	.macro jumpifstatus battler, status1, param2
 	.byte 0x1c
-	.byte \bank
+	.byte \battler
 	.4byte \status1
 	.4byte \param2
 	.endm
 
-	.macro jumpifstatus2 bank, status2, param2
+	.macro jumpifstatus2 battler, status2, param2
 	.byte 0x1d
-	.byte \bank
+	.byte \battler
 	.4byte \status2
 	.4byte \param2
 	.endm
@@ -147,40 +147,40 @@
 	.4byte \param2
 	.endm
 
-	.macro jumpifsideaffecting bank, sidestatus, param2
+	.macro jumpifsideaffecting battler, sidestatus, param2
 	.byte 0x1f
-	.byte \bank
+	.byte \battler
 	.2byte \sidestatus
 	.4byte \param2
 	.endm
 
-	.macro jumpifstat bank, ifflag, stat, param3, param4
+	.macro jumpifstat battler, ifflag, stat, param3, param4
 	.byte 0x20
-	.byte \bank
+	.byte \battler
 	.byte \ifflag
 	.byte \stat
 	.byte \param3
 	.4byte \param4
 	.endm
 
-	.macro jumpifstatus3condition bank, status3, param2, param3
+	.macro jumpifstatus3condition battler, status3, param2, param3
 	.byte 0x21
-	.byte \bank
+	.byte \battler
 	.4byte \status3
 	.byte \param2
 	.4byte \param3
 	.endm
 
-	.macro jumpiftype bank, type, param2
+	.macro jumpiftype battler, type, param2
 	.byte 0x22
-	.byte \bank
+	.byte \battler
 	.byte \type
 	.4byte \param2
 	.endm
 
-	.macro getexp bank
+	.macro getexp battler
 	.byte 0x23
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro atk24 param0
@@ -325,9 +325,9 @@
 	.byte 0x3a
 	.endm
 
-	.macro healthbar_update bank
+	.macro healthbar_update battler
 	.byte 0x3b
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro return
@@ -356,9 +356,9 @@
 	.4byte \param0
 	.endm
 
-	.macro jumpiftype2 bank, type, param2
+	.macro jumpiftype2 battler, type, param2
 	.byte 0x42
-	.byte \bank
+	.byte \battler
 	.byte \type
 	.4byte \param2
 	.endm
@@ -373,16 +373,16 @@
 	.byte 0x44
 	.endm
 
-	.macro playanimation bank, param1, param2
+	.macro playanimation battler, param1, param2
 	.byte 0x45
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
 
-	.macro playanimation2 bank, param1, param2
+	.macro playanimation2 battler, param1, param2
 	.byte 0x46
-	.byte \bank
+	.byte \battler
 	.4byte \param1
 	.4byte \param2
 	.endm
@@ -391,9 +391,9 @@
 	.byte 0x47
 	.endm
 
-	.macro playstatchangeanimation bank, param1, param2
+	.macro playstatchangeanimation battler, param1, param2
 	.byte 0x48
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.byte \param2
 	.endm
@@ -412,25 +412,25 @@
 	.byte 0x4b
 	.endm
 
-	.macro getswitchedmondata bank
+	.macro getswitchedmondata battler
 	.byte 0x4c
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro switchindataupdate bank
+	.macro switchindataupdate battler
 	.byte 0x4d
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro switchinanim bank, dontclearsubstitutebit
+	.macro switchinanim battler, dontclearsubstitutebit
 	.byte 0x4e
-	.byte \bank
+	.byte \battler
 	.byte \dontclearsubstitutebit
 	.endm
 
-	.macro jumpifcantswitch bank, param1
+	.macro jumpifcantswitch battler, param1
 	.byte 0x4f
-	.byte \bank
+	.byte \battler
 	.4byte \param1
 	.endm
 
@@ -440,20 +440,20 @@
 	.4byte \param1
 	.endm
 
-	.macro switchhandleorder bank, param1
+	.macro switchhandleorder battler, param1
 	.byte 0x51
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.endm
 
-	.macro switchineffects bank
+	.macro switchineffects battler
 	.byte 0x52
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro trainerslidein bank
+	.macro trainerslidein battler
 	.byte 0x53
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro playse param0
@@ -466,18 +466,18 @@
 	.2byte \param0
 	.endm
 
-	.macro playfaintcry bank
+	.macro playfaintcry battler
 	.byte 0x56
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro atk57
 	.byte 0x57
 	.endm
 
-	.macro returntoball bank
+	.macro returntoball battler
 	.byte 0x58
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro handlelearnnewmove param0, param1, param2
@@ -497,18 +497,18 @@
 	.4byte \param0
 	.endm
 
-	.macro hitanimation bank
+	.macro hitanimation battler
 	.byte 0x5c
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro getmoneyreward
 	.byte 0x5d
 	.endm
 
-	.macro atk5E bank
+	.macro atk5E battler
 	.byte 0x5e
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro swapattackerwithtarget
@@ -520,14 +520,14 @@
 	.byte \param0
 	.endm
 
-	.macro drawpartystatussummary bank
+	.macro drawpartystatussummary battler
 	.byte 0x61
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro hidepartystatussummary bank
+	.macro hidepartystatussummary battler
 	.byte 0x62
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro jumptorandomattack param0
@@ -535,20 +535,20 @@
 	.byte \param0
 	.endm
 
-	.macro statusanimation bank
+	.macro statusanimation battler
 	.byte 0x64
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro status2animation bank, status2
+	.macro status2animation battler, status2
 	.byte 0x65
-	.byte \bank
+	.byte \battler
 	.4byte \status2
 	.endm
 
-	.macro chosenstatusanimation bank, param1, param2
+	.macro chosenstatusanimation battler, param1, param2
 	.byte 0x66
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
@@ -565,9 +565,9 @@
 	.byte 0x69
 	.endm
 
-	.macro removeitem bank
+	.macro removeitem battler
 	.byte 0x6a
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro atknameinbuff1
@@ -586,14 +586,14 @@
 	.byte 0x6e
 	.endm
 
-	.macro makevisible bank
+	.macro makevisible battler
 	.byte 0x6f
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro recordlastability bank
+	.macro recordlastability battler
 	.byte 0x70
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro buffermovetolearn
@@ -605,23 +605,23 @@
 	.4byte \param0
 	.endm
 
-	.macro hpthresholds bank
+	.macro hpthresholds battler
 	.byte 0x73
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro hpthresholds2 bank
+	.macro hpthresholds2 battler
 	.byte 0x74
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro useitemonopponent
 	.byte 0x75
 	.endm
 
-	.macro various bank, param1
+	.macro various battler, param1
 	.byte 0x76
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.endm
 
@@ -642,10 +642,10 @@
 	.4byte \param0
 	.endm
 
-	.macro tryhealhalfhealth param0, bank
+	.macro tryhealhalfhealth param0, battler
 	.byte 0x7b
 	.4byte \param0
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro trymirrormove
@@ -773,9 +773,9 @@
 	.4byte \param0
 	.endm
 
-	.macro updatestatusicon bank
+	.macro updatestatusicon battler
 	.byte 0x98
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro setmist
@@ -1112,14 +1112,14 @@
 	.4byte \param0
 	.endm
 
-	.macro switchoutabilities bank
+	.macro switchoutabilities battler
 	.byte 0xe2
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro jumpifhasnohp bank, param1
+	.macro jumpifhasnohp battler, param1
 	.byte 0xe3
-	.byte \bank
+	.byte \battler
 	.4byte \param1
 	.endm
 
@@ -1215,112 +1215,112 @@
 	.endm
 	
 @ various command changed to more readable macros
-	.macro cancelmultiturnmoves bank
-	various \bank, VARIOUS_CANCEL_MULTI_TURN_MOVES
+	.macro cancelmultiturnmoves battler
+	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
 	
-	.macro setmagiccoattarget bank
-	various \bank, VARIOUS_SET_MAGIC_COAT_TARGET
+	.macro setmagiccoattarget battler
+	various \battler, VARIOUS_SET_MAGIC_COAT_TARGET
 	.endm
 	
-	.macro getifcantrunfrombattle bank
-	various \bank, VARIOUS_IS_RUNNING_IMPOSSIBLE
+	.macro getifcantrunfrombattle battler
+	various \battler, VARIOUS_IS_RUNNING_IMPOSSIBLE
 	.endm
 	
-	.macro getmovetarget bank
-	various \bank, VARIOUS_GET_MOVE_TARGET
+	.macro getmovetarget battler
+	various \battler, VARIOUS_GET_MOVE_TARGET
 	.endm
 	
-	.macro various4 bank
-	various \bank, 4
+	.macro various4 battler
+	various \battler, 4
 	.endm
 	
-	.macro resetintrimidatetracebits bank
-	various \bank, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
+	.macro resetintrimidatetracebits battler
+	various \battler, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
 	.endm
 	
-	.macro updatechoicemoveonlvlup bank
-	various \bank, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
+	.macro updatechoicemoveonlvlup battler
+	various \battler, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
 	.endm
 	
-	.macro various7 bank
-	various \bank, 7
+	.macro various7 battler
+	various \battler, 7
 	.endm
 	
-	.macro various8 bank
-	various \bank, 8
+	.macro various8 battler
+	various \battler, 8
 	.endm
 	
-	.macro various9 bank
-	various \bank, 9
+	.macro various9 battler
+	various \battler, 9
 	.endm
 	
-	.macro various10 bank
-	various \bank, 10
+	.macro various10 battler
+	various \battler, 10
 	.endm
 	
-	.macro various11 bank
-	various \bank, 11
+	.macro various11 battler
+	various \battler, 11
 	.endm
 	
-	.macro various12 bank
-	various \bank, 12
+	.macro various12 battler
+	various \battler, 12
 	.endm
 	
-	.macro forfeityesnobox bank
-	various \bank, VARIOUS_EMIT_YESNOBOX
+	.macro forfeityesnobox battler
+	various \battler, VARIOUS_EMIT_YESNOBOX
 	.endm
 	
-	.macro various14 bank
-	various \bank, 14
+	.macro various14 battler
+	various \battler, 14
 	.endm
 	
-	.macro various15 bank
-	various \bank, 15
+	.macro various15 battler
+	various \battler, 15
 	.endm
 	
-	.macro various16 bank
-	various \bank, 16
+	.macro various16 battler
+	various \battler, 16
 	.endm
 	
-	.macro various17 bank
-	various \bank, 17
+	.macro various17 battler
+	various \battler, 17
 	.endm
 	
-	.macro waitcry bank
-	various \bank, VARIOUS_WAIT_CRY
+	.macro waitcry battler
+	various \battler, VARIOUS_WAIT_CRY
 	.endm
 	
-	.macro returnopponentmon1toball bank
-	various \bank, VARIOUS_RETURN_OPPONENT_MON1
+	.macro returnopponentmon1toball battler
+	various \battler, VARIOUS_RETURN_OPPONENT_MON1
 	.endm
 	
-	.macro returnopponentmon2toball bank
-	various \bank, VARIOUS_RETURN_OPPONENT_MON2
+	.macro returnopponentmon2toball battler
+	various \battler, VARIOUS_RETURN_OPPONENT_MON2
 	.endm
 	
-	.macro various21 bank
-	various \bank, 21
+	.macro volumedown
+	various BS_ATTACKER, VARIOUS_VOLUME_DOWN
 	.endm
 	
-	.macro various22 bank
-	various \bank, 22
+	.macro volumeup
+	various BS_ATTACKER, VARIOUS_VOLUME_UP
 	.endm
 	
-	.macro various23 bank
-	various \bank, 23
+	.macro various23 battler
+	various \battler, 23
 	.endm
 	
-	.macro various24 bank
-	various \bank, 24
+	.macro various24 battler
+	various \battler, 24
 	.endm
 	
-	.macro setoutcomeonteleport bank
-	various \bank, VARIOUS_SET_TELEPORT_OUTCOME
+	.macro setoutcomeonteleport battler
+	various \battler, VARIOUS_SET_TELEPORT_OUTCOME
 	.endm
 	
-	.macro playtrainerdefeatbgm bank
-	various \bank, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.macro playtrainerdefeatbgm battler
+	various \battler, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
 	.endm
 	
 @ helpful macros
@@ -1332,12 +1332,12 @@
 	setbyte cEFFECT_CHOOSER \effect
 	.endm
 	
-	.macro chosenstatus1animation bank, status
-	chosenstatusanimation \bank 0x0 \status
+	.macro chosenstatus1animation battler, status
+	chosenstatusanimation \battler 0x0 \status
 	.endm
 	
-	.macro chosenstatus2animation bank, status
-	chosenstatusanimation \bank 0x1 \status
+	.macro chosenstatus2animation battler, status
+	chosenstatusanimation \battler 0x1 \status
 	.endm
 	
 	.macro sethword dst, value
@@ -1380,12 +1380,12 @@
 	jumpifhalfword CMP_NOT_EQUAL, gCurrentMove, \move, \jumpptr
 	.endm
 	
-	.macro jumpifstatus3 bank, status, jumpptr
-	jumpifstatus3condition \bank, \status, 0x0, \jumpptr
+	.macro jumpifstatus3 battler, status, jumpptr
+	jumpifstatus3condition \battler, \status, 0x0, \jumpptr
 	.endm
 	
-	.macro jumpifnostatus3 bank, status, jumpptr
-	jumpifstatus3condition \bank, \status, 0x1, \jumpptr
+	.macro jumpifnostatus3 battler, status, jumpptr
+	jumpifstatus3condition \battler, \status, 0x1, \jumpptr
 	.endm
 	
 	.macro jumpifmovehadnoeffect jumpptr

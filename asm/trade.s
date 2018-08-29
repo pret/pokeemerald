@@ -7609,7 +7609,7 @@ sub_807B170: @ 807B170
 	mov r1, r10
 	movs r2, 0
 	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, =gBattleTextboxTilemap
 	mov r8, r0
 	ldr r4, =gDecompressionBuffer
@@ -7633,7 +7633,7 @@ sub_807B170: @ 807B170
 	mov r1, r10
 	movs r2, 0
 	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	mov r0, r8
 	adds r1, r4, 0
 	bl LZDecompressWram

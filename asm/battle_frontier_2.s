@@ -1867,7 +1867,7 @@ sub_819B484: @ 819B484
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x18]
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gBattleFrontierMons
 	str r0, [r1]
 	ldrb r1, [r4]
@@ -1948,7 +1948,7 @@ _0819B572:
 	ldr r0, [r2]
 	adds r0, r4
 	adds r0, 0x8
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r2, [r1]
 	lsls r5, 4
 	adds r2, r5, r2
@@ -1973,7 +1973,7 @@ _0819B5B8:
 	ldr r0, [r3]
 	adds r0, r4
 	adds r0, 0x8
-	ldr r5, =gUnknown_0203BC8C
+	ldr r5, =gFacilityTrainerMons
 	ldr r1, [r5]
 	adds r1, r7, r1
 	lsls r2, r6, 1
@@ -2045,7 +2045,7 @@ sub_819B63C: @ 819B63C
 	add r0, sp, 0xC
 	movs r1, 0
 	strb r1, [r0]
-	ldr r2, =gUnknown_0203BC8C
+	ldr r2, =gFacilityTrainerMons
 	ldr r0, =gSlateportBattleTentMons
 	str r0, [r2]
 	ldr r0, =gSaveBlock2Ptr
@@ -2089,7 +2089,7 @@ _0819B678:
 	adds r4, 0xC
 	adds r0, r4
 	adds r0, 0x8
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	ldr r2, [r3]
 	mov r7, r8
 	lsls r5, r7, 4
@@ -2114,7 +2114,7 @@ _0819B6D4:
 	ldr r0, [r1]
 	adds r0, r4
 	adds r0, 0x8
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	ldr r2, [r3]
 	mov r3, r8
 	lsls r1, r3, 4
@@ -2145,7 +2145,7 @@ _0819B6D4:
 	ldr r0, [r2]
 	adds r0, r4
 	adds r0, 0x8
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	ldr r1, [r3]
 	adds r1, r5, r1
 	ldrb r2, [r1, 0xA]
@@ -2935,7 +2935,7 @@ sub_819BD70: @ 819BD70
 	adds r0, r5, 0
 	mov r2, r8
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r1, [r6]
 	movs r2, 0xA6
 	lsls r2, 2
@@ -3053,7 +3053,7 @@ sub_819BE34: @ 819BE34
 	adds r0, r5, 0
 	mov r2, r9
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r1, [r6]
 	movs r2, 0xA6
 	lsls r2, 2
@@ -3166,7 +3166,7 @@ _0819BF48:
 	adds r0, r5, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	mov r2, r9
 	ldr r1, [r2]
 	add r1, r8
@@ -3846,19 +3846,19 @@ sub_819C568: @ 819C568
 	lsls r1, 2
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r0, [r4]
 	movs r1, 0xA6
 	lsls r1, 2
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r0, [r4]
 	movs r1, 0xA7
 	lsls r1, 2
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r0, =sub_819C2D4
 	movs r1, 0x1
 	bl CreateTask
@@ -3936,7 +3936,7 @@ sub_819C5D0: @ 819C5D0
 sub_819C634: @ 819C634
 	push {r4-r7,lr}
 	lsls r0, 16
-	ldr r2, =gUnknown_0203BC8C
+	ldr r2, =gFacilityTrainerMons
 	ldr r1, [r2]
 	lsrs r0, 12
 	adds r0, r1
@@ -6709,7 +6709,7 @@ _0819DDA8:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl FreeAllSpritePalettes
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	ldr r0, =gFrontierFactorySelectMenu_Gfx
 	ldr r5, =gUnknown_0203CE40
 	ldr r1, [r5]
@@ -9315,7 +9315,7 @@ sub_819F304: @ 819F304
 	adds r0, r5, 0
 	mov r1, r9
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r1, [r6]
 	adds r1, 0x2C
 	strb r0, [r1]
@@ -9370,7 +9370,7 @@ sub_819F3F8: @ 819F3F8
 	lsrs r5, 24
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r0, =sub_819F7B4
 	movs r1, 0x1
 	bl CreateTask
@@ -9403,7 +9403,7 @@ sub_819F444: @ 819F444
 	adds r6, r1, 0
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	ldr r5, =gSprites
 	lsls r4, 16
 	lsrs r1, r4, 24
@@ -9996,7 +9996,7 @@ _0819F908:
 	adds r0, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	ldr r2, =gUnknown_03001284
 	ldr r1, [r2]
 	adds r1, 0x2C
@@ -14195,7 +14195,7 @@ sub_81A1B1C: @ 81A1B1C
 
 	thumb_func_start sub_81A1B28
 sub_81A1B28: @ 81A1B28
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	bx lr
@@ -17391,7 +17391,7 @@ _081A370C:
 	ldr r0, =0x0000012b
 	cmp r3, r0
 	bhi _081A3738
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	adds r1, r3, 0
 	muls r1, r0
@@ -17443,7 +17443,7 @@ _081A3794:
 	ldr r0, =0x0000012b
 	cmp r3, r0
 	bhi _081A37B8
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	adds r1, r3, 0
 	muls r1, r0
@@ -17511,7 +17511,7 @@ _081A3844:
 	ldr r0, =0x0000012b
 	cmp r3, r0
 	bhi _081A3868
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	adds r1, r3, 0
 	muls r1, r0
@@ -20046,10 +20046,10 @@ sub_81A4E04: @ 81A4E04
 	cmp r0, 0x1
 	bne _081A4E44
 	ldr r0, =0x000003fe
-	bl sub_81953A0
+	bl TrainerIdToDomeTournamentId
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_818FC78
+	bl GetTrainerMonCountInBits
 	adds r4, r0, 0
 	b _081A4E46
 	.pool
@@ -20059,7 +20059,7 @@ _081A4E46:
 	bl ZeroEnemyPartyMons
 	movs r1, 0
 	str r1, [sp, 0x18]
-	bl sub_8165C40
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x1C]
@@ -22329,7 +22329,7 @@ sub_81A61B0: @ 81A61B0
 	ldrh r0, [r1]
 	movs r1, 0x7
 	bl __udivsi3
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	ldr r1, =gBattleFrontierTrainers
 	str r1, [r2]
 	ldr r5, =0x00000cb2
@@ -22413,7 +22413,7 @@ _081A627A:
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
-	ldr r4, =gUnknown_0203BC8C
+	ldr r4, =gFacilityTrainerMons
 	ldr r2, [r4]
 	lsls r1, r0, 4
 	adds r0, r1, r2
@@ -22458,7 +22458,7 @@ _081A62D0:
 	cmp r0, r5
 	beq _081A6302
 	adds r6, r4, 0
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	mov r12, r3
 	mov r5, r8
 	ldr r3, [sp, 0x14]
@@ -22493,7 +22493,7 @@ _081A631C:
 	ldrh r1, [r3]
 	cmp r1, 0
 	beq _081A6336
-	ldr r6, =gUnknown_0203BC8C
+	ldr r6, =gFacilityTrainerMons
 	ldr r0, [r6]
 	ldr r6, [sp, 0x24]
 	adds r0, r6, r0
@@ -22512,7 +22512,7 @@ _081A633E:
 	cmp r2, r4
 	bne _081A636E
 	lsls r4, r7, 1
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r1, [r0]
 	add r1, r8
 	ldrh r0, [r1]
@@ -22573,12 +22573,12 @@ sub_81A63CC: @ 81A63CC
 	ands r0, r1
 	cmp r0, 0x2
 	beq _081A63FC
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gBattleFrontierMons
 	b _081A6400
 	.pool
 _081A63FC:
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gSlateportBattleTentMons
 _081A6400:
 	str r0, [r1]
@@ -22637,7 +22637,7 @@ _081A6408:
 	adds r1, r2
 	strb r0, [r1]
 	ldrh r1, [r6]
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r0, [r0]
 	lsls r1, 4
 	adds r1, r0
@@ -22679,7 +22679,7 @@ sub_81A64C4: @ 81A64C4
 	ands r0, r1
 	cmp r0, 0x2
 	bne _081A6500
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gSlateportBattleTentMons
 	str r0, [r1]
 	movs r2, 0x1E
@@ -22687,7 +22687,7 @@ sub_81A64C4: @ 81A64C4
 	b _081A6518
 	.pool
 _081A6500:
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gBattleFrontierMons
 	str r0, [r1]
 	ldrb r1, [r2]
@@ -22712,7 +22712,7 @@ _081A6522:
 	mov r1, sp
 	adds r1, 0x12
 	str r1, [sp, 0x1C]
-	ldr r2, =gUnknown_0203BC8C
+	ldr r2, =gFacilityTrainerMons
 	mov r9, r2
 _081A6534:
 	ldr r4, =gSaveBlock2Ptr
@@ -22879,7 +22879,7 @@ _081A666C:
 _081A667A:
 	movs r2, 0
 	mov r8, r2
-	ldr r4, =gUnknown_0203BC8C
+	ldr r4, =gFacilityTrainerMons
 	mov r9, r4
 _081A6682:
 	ldr r5, =gSaveBlock2Ptr
@@ -23050,7 +23050,7 @@ sub_81A67EC: @ 81A67EC
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4C
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	mov r0, sp
@@ -23113,7 +23113,7 @@ _081A681A:
 	bne _081A6878
 	movs r2, 0x1
 _081A6878:
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gBattleFrontierMons
 	str r0, [r1]
 	mov r1, r9
@@ -23166,7 +23166,7 @@ _081A68F2:
 	bl sub_81A6EF0
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r1, [r0]
 	lsls r2, r7, 4
 	adds r4, r2, r1
@@ -23226,7 +23226,7 @@ _081A6964:
 	ldrh r4, [r5]
 	cmp r4, 0
 	beq _081A6994
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, [r1]
 	mov r2, r9
 	adds r1, r2, r0
@@ -23262,7 +23262,7 @@ _081A699C:
 	lsls r0, 4
 	adds r1, r0
 	strh r7, [r1]
-	ldr r2, =gUnknown_0203BC8C
+	ldr r2, =gFacilityTrainerMons
 	ldr r1, [r2]
 	add r1, r9
 	ldrh r0, [r1]
@@ -23307,7 +23307,7 @@ sub_81A6A08: @ 81A6A08
 	mov r7, r8
 	push {r7}
 	sub sp, 0x18
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gBattleFrontierMons
 	str r0, [r1]
 	movs r4, 0
@@ -23326,7 +23326,7 @@ _081A6A1E:
 	movs r4, 0
 	ldr r0, =gUnknown_03006298
 	mov r8, r0
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r6, [r0]
 	ldr r1, =gBaseStats
 	mov r12, r1
@@ -23423,7 +23423,7 @@ sub_81A6AEC: @ 81A6AEC
 	push {r4-r7,lr}
 	sub sp, 0x8
 	movs r7, 0
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gBattleFrontierMons
 	str r0, [r1]
 	movs r4, 0
@@ -23445,7 +23445,7 @@ _081A6B0E:
 	ldrh r6, [r0]
 	movs r5, 0
 _081A6B18:
-	ldr r0, =gUnknown_0203BC8C
+	ldr r0, =gFacilityTrainerMons
 	ldr r1, [r0]
 	lsls r0, r6, 4
 	adds r0, r1
@@ -23590,12 +23590,12 @@ sub_81A6C1C: @ 81A6C1C
 	ands r0, r1
 	cmp r0, 0x2
 	beq _081A6C48
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gBattleFrontierMons
 	b _081A6C4C
 	.pool
 _081A6C48:
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, =gSlateportBattleTentMons
 _081A6C4C:
 	str r0, [r1]
@@ -23615,7 +23615,7 @@ _081A6C50:
 	lsls r1, 4
 	adds r2, r1
 	ldrh r2, [r2]
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r1, [r1]
 	lsls r2, 4
 	adds r2, r1
@@ -23702,7 +23702,7 @@ sub_81A6CD0: @ 81A6CD0
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x24]
-	bl sub_8165C40
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
@@ -23727,7 +23727,7 @@ _081A6D4C:
 	bl sub_81A6EF0
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r7, =gUnknown_0203BC8C
+	ldr r7, =gFacilityTrainerMons
 	ldr r1, [r7]
 	lsls r0, r5, 4
 	adds r0, r1
@@ -23775,7 +23775,7 @@ _081A6DA8:
 	cmp r4, r9
 	bge _081A6DDC
 	add r2, sp, 0xC
-	ldr r7, =gUnknown_0203BC8C
+	ldr r7, =gFacilityTrainerMons
 	ldr r0, [r7]
 	lsls r1, r5, 4
 	adds r0, r1, r0
@@ -23784,7 +23784,7 @@ _081A6DA8:
 	ldrh r0, [r0]
 	cmp r2, r0
 	beq _081A6DDC
-	ldr r6, =gUnknown_0203BC8C
+	ldr r6, =gFacilityTrainerMons
 	adds r3, r7, 0
 	add r2, sp, 0xC
 _081A6DC8:
@@ -23805,7 +23805,7 @@ _081A6DDC:
 	cmp r4, r9
 	bge _081A6E0C
 	ldr r7, =gBattleFrontierHeldItems
-	ldr r6, =gUnknown_0203BC8C
+	ldr r6, =gFacilityTrainerMons
 	add r2, sp, 0x14
 	lsls r3, r5, 4
 _081A6DEE:
@@ -23833,7 +23833,7 @@ _081A6E0C:
 	mov r1, sp
 	adds r1, r2
 	adds r1, 0xC
-	ldr r3, =gUnknown_0203BC8C
+	ldr r3, =gFacilityTrainerMons
 	ldr r4, [r3]
 	lsls r5, 4
 	mov r8, r5
@@ -23875,7 +23875,7 @@ _081A6E0C:
 	add r0, r9
 	mov r8, r0
 _081A6E6E:
-	ldr r1, =gUnknown_0203BC8C
+	ldr r1, =gFacilityTrainerMons
 	ldr r0, [r1]
 	adds r0, r7, r0
 	lsls r1, r4, 1
@@ -23898,7 +23898,7 @@ _081A6E6E:
 	movs r1, 0x20
 	mov r2, r10
 	bl SetMonData
-	ldr r2, =gUnknown_0203BC8C
+	ldr r2, =gFacilityTrainerMons
 	ldr r0, [r2]
 	adds r0, r7, r0
 	ldrb r2, [r0, 0xA]
@@ -26455,7 +26455,7 @@ _081A831A:
 	bne _081A82D2
 	ldr r5, =gTrainerBattleOpponent_A
 	strh r4, [r5]
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	ldrh r0, [r5]
@@ -26500,7 +26500,7 @@ sub_81A8374: @ 81A8374
 	bl __udivsi3
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	lsls r7, r5, 24
@@ -26667,7 +26667,7 @@ sub_81A84EC: @ 81A84EC
 	ldr r0, =0x0000012b
 	cmp r1, r0
 	bhi _081A8542
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -26684,7 +26684,7 @@ _081A8524:
 	ldr r0, =0x0000012b
 	cmp r1, r0
 	bhi _081A8542
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r0, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -28498,7 +28498,7 @@ _081A940A:
 
 	thumb_func_start sub_81A9414
 sub_81A9414: @ 81A9414
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r0, =gBattleFrontierTrainers
 	str r0, [r1]
 	bx lr
@@ -28534,7 +28534,7 @@ sub_81A9424: @ 81A9424
 	lsrs r5, r0, 16
 	movs r6, 0
 	ldr r2, =gUnknown_08613C1C
-	ldr r0, =gUnknown_0203BC88
+	ldr r0, =gFacilityTrainers
 	ldr r1, [r0]
 	movs r0, 0x34
 	muls r0, r5
@@ -28554,7 +28554,7 @@ _081A9488:
 	ldr r4, =gUnknown_08613C1C
 	lsls r3, r6, 1
 	adds r2, r3, r4
-	ldr r0, =gUnknown_0203BC88
+	ldr r0, =gFacilityTrainers
 	ldr r1, [r0]
 	movs r0, 0x34
 	muls r0, r5
@@ -29517,7 +29517,7 @@ _081A9C56:
 	bl SetMonData
 	cmp r5, 0
 	beq _081A9CD4
-	bl sub_8165C40
+	bl GetFacilityEnemyMonLevel
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, [sp, 0x10]
@@ -29795,7 +29795,7 @@ sub_81A9EDC: @ 81A9EDC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r1, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -29812,7 +29812,7 @@ sub_81A9EFC: @ 81A9EFC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r1, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -29829,7 +29829,7 @@ sub_81A9F1C: @ 81A9F1C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_0203BC88
+	ldr r2, =gFacilityTrainers
 	movs r1, 0x34
 	muls r1, r0
 	ldr r0, [r2]
@@ -29848,7 +29848,7 @@ GetTrainerEncounterMusicIdInBattlePyramind: @ 81A9F3C
 	lsrs r0, 16
 	movs r4, 0
 	ldr r3, =gFacilityClassToTrainerClass
-	ldr r1, =gUnknown_0203BC88
+	ldr r1, =gFacilityTrainers
 	ldr r2, [r1]
 	movs r1, 0x34
 	muls r0, r1

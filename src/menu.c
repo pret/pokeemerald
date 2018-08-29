@@ -1801,7 +1801,7 @@ void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, 
     return NULL;
 }
 
-void copy_decompressed_tile_data_to_vram_autofree(u8 bgId, const void *src, int size, u16 offset, u8 mode)
+void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, int size, u16 offset, u8 mode)
 {
     int sizeOut;
     void *ptr = malloc_and_decompress(src, &sizeOut);

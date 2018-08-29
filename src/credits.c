@@ -12,7 +12,7 @@
 #include "gpu_regs.h"
 #include "m4a.h"
 #include "constants/rgb.h"
-#include "battle_dome_cards.h"
+#include "trainer_pokemon_sprites.h"
 #include "starter_choose.h"
 #include "decompress.h"
 #include "intro_credits_graphics.h"
@@ -1197,7 +1197,6 @@ void sub_8175620(void)
     u8 taskIdA;
     s16 taskIdC;
     u8 taskIdB;
-    u16 savedIme;
 
     sub_8175CE4();
     SetVBlankCallback(NULL);
@@ -1333,7 +1332,7 @@ static void sub_81758E4(u8 taskIdA)
         u16 *temp;
 
         ResetSpriteData();
-        dp13_810BB8C();
+        ResetAllPicSprites();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
         LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
@@ -2164,7 +2163,7 @@ static void sub_8177050(struct Sprite *sprite)
 {
     if (gUnknown_0203BD28)
     {
-        sub_818D820(sprite->data[6]);
+        FreeAndDestroyMonPicSprite(sprite->data[6]);
         return;
     }
 
@@ -2242,7 +2241,7 @@ static void sub_8177050(struct Sprite *sprite)
     case 10:
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        sub_818D820(sprite->data[6]);
+        FreeAndDestroyMonPicSprite(sprite->data[6]);
         break;
     }
 }

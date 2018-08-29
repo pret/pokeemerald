@@ -212,6 +212,7 @@ SECTIONS {
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
+        src/battle_tower.o(.text);
         asm/battle_tower.o(.text);
         src/use_pokeblock.o(.text);
         asm/use_pokeblock.o(.text);
@@ -240,8 +241,10 @@ SECTIONS {
         src/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
-        src/battle_dome_cards.o(.text);
+        src/trainer_pokemon_sprites.o(.text);
         src/lilycove_lady.o(.text);
+        src/battle_dome.o(.text);
+        src/battle_frontier_1.o(.text);
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
         asm/battle_frontier_2.o(.text);
@@ -263,8 +266,8 @@ SECTIONS {
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
         src/unk_pokedex_area_screen_helper.o(.text);
-        src/battle_pyramid.o(.text);
-        asm/battle_pyramid.o(.text);
+        src/battle_pyramid_bag.o(.text);
+        asm/battle_pyramid_bag.o(.text);
         asm/pokenav.o(.text);
         src/match_call.o(.text);
         asm/pokenav.o(.text.after.match.call);
@@ -522,8 +525,9 @@ SECTIONS {
         src/pokemon_animation.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);
-        src/battle_dome_cards.o(.rodata);
+        src/trainer_pokemon_sprites.o(.rodata);
         src/lilycove_lady.o(.rodata);
+        src/battle_dome.o(.rodata);
         data/battle_frontier_1.o(.rodata);
         src/menu.o(.rodata);
         data/battle_frontier_2.o(.rodata);
@@ -541,7 +545,7 @@ SECTIONS {
         src/berry_fix_program.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);
-        data/battle_pyramid.o(.rodata);
+        data/battle_pyramid_bag.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);

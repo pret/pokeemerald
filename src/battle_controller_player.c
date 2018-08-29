@@ -31,13 +31,13 @@
 #include "item_use.h"
 #include "recorded_battle.h"
 #include "party_menu.h"
+#include "battle_dome.h"
 
 extern u8 gUnknown_0203CEE8;
 extern u8 gUnknown_0203CEE9;
 extern u8 gUnknown_0203CF00[];
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern s32 gUnknown_0203CD70;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct SpriteTemplate gMultiuseSpriteTemplate;

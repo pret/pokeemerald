@@ -3929,7 +3929,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
         StopCryAndClearCrySongs();
-        BattleScriptExecute(BattleScript_82DB8BE);
+        BattleScriptExecute(BattleScript_ArenaTurnBeginning);
     }
 }
 
@@ -4019,7 +4019,7 @@ void BattleTurnPassed(void)
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         BattleScriptExecute(BattleScript_82DB881);
     else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_DA == 0)
-        BattleScriptExecute(BattleScript_82DB8BE);
+        BattleScriptExecute(BattleScript_ArenaTurnBeginning);
 }
 
 u8 IsRunningFromBattleImpossible(void)

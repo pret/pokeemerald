@@ -137,7 +137,7 @@ SlateportCity_BattleTentLobby_EventScript_2088CA:: @ 82088CA
 
 SlateportCity_BattleTentLobby_EventScript_208906:: @ 8208906
 	setvar VAR_FRONTIER_FACILITY, 4
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 2
