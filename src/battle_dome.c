@@ -31,6 +31,7 @@
 #include "constants/abilities.h"
 #include "constants/songs.h"
 #include "constants/battle_frontier.h"
+#include "constants/rgb.h"
 
 #define DOME_ROUND1 0
 #define DOME_ROUND2 1
@@ -2784,7 +2785,7 @@ static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 natu
             count++;
     }
 
-    resultingEvs = 510 / count;
+    resultingEvs = MAX_TOTAL_EVS / count;
     for (i = 0; i < 6; bits <<= 1, i++)
     {
         evs[i] = 0;
@@ -3933,7 +3934,7 @@ static void sub_8190CD4(u8 taskId)
     case 0:
         if (!gPaletteFade.active)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
             gTasks[taskId].data[0] = 1;
         }
         break;
@@ -3946,7 +3947,7 @@ static void sub_8190CD4(u8 taskId)
         switch (i)
         {
         case 9:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].data[0] = 8;
             break;
         case 1 ... 8:
@@ -4986,7 +4987,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
                     k++;
                 evBits >>= 1;
             }
-            k = 510 / k;
+            k = MAX_TOTAL_EVS / k;
             evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[trainerTournamentId][i]].evSpread;
             for (j = 0; j < 6; j++)
             {
@@ -5412,7 +5413,7 @@ static void sub_819395C(u8 taskId)
     case 0:
         if (!gPaletteFade.active)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
             gTasks[taskId].data[0] = 1;
             StartSpriteAnim(&gSprites[spriteId], 1);
         }
@@ -5426,17 +5427,17 @@ static void sub_819395C(u8 taskId)
         {
         case 0:
         default:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].data[0] = 7;
             break;
         case 1:
             break;
         case 2:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].data[0] = 3;
             break;
         case 3:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].data[0] = 5;
             break;
         }
@@ -5930,7 +5931,7 @@ static void sub_8194950(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
@@ -5978,7 +5979,7 @@ static void sub_8194950(u8 taskId)
     case 3:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].data[0] = 4;
         }
         break;
@@ -6029,44 +6030,44 @@ static void HblankCb_BattleDome(void)
     {
         if (vCount < 50)
         {
-            REG_WININ = 0x3B3B;
-            SET_WIN0H_WIN1H(0x989B, 0x5558);
+            REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+            SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
             return;
         }
         else if (vCount > 57)
         {
             if (vCount < 75)
             {
-                REG_WININ = 0x3B3B;
-                SET_WIN0H_WIN1H(0x9098, 0x5860);
+                REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+                SET_WIN0H_WIN1H(WINHV_COORDS(144, 152), WINHV_COORDS(88, 96));
                 return;
             }
             else if (vCount < 82)
             {
-                REG_WININ = 0x3B3B;
-                SET_WIN0H_WIN1H(0x989B, 0x5558);
+                REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+                SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
                 return;
             }
             else if (vCount > 94)
             {
                 if (vCount < 103)
                 {
-                    REG_WININ = 0x3737;
-                    SET_WIN0H_WIN1H(0x989B, 0x5558);
+                    REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+                    SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
                     return;
                 }
                 else if (vCount < 119)
                 {
-                    REG_WININ = 0x3737;
-                    SET_WIN0H_WIN1H(0x9098, 0x5860);
+                    REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+                    SET_WIN0H_WIN1H(WINHV_COORDS(144, 152), WINHV_COORDS(88, 96));
                     return;
                 }
                 else if (vCount > 126)
                 {
                     if (vCount_ < 135)
                     {
-                        REG_WININ = 0x3737;
-                        SET_WIN0H_WIN1H(0x989B, 0x5558);
+                        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+                        SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
                         return;
                     }
                 }
@@ -6074,7 +6075,7 @@ static void HblankCb_BattleDome(void)
         }
     }
 
-    REG_WININ = 0x3F3F;
+    REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
     SET_WIN0H_WIN1H(0, 0);
 }
 
