@@ -2810,23 +2810,16 @@ static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 natu
     CALC_STAT(baseSpDefense, STAT_SPDEF);
 }
 
-#define SWAP_16(x, y)   \
-{                       \
-    temp = x;           \
-    x = y;              \
-    y = temp;           \
-}
-
 static void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray)
 {
     s32 i;
     u16 temp;
 
-    SWAP_16(statsArray[id1], statsArray[id2]);
-    SWAP_16(gSaveBlock2Ptr->frontier.domeTrainers[id1].trainerId, gSaveBlock2Ptr->frontier.domeTrainers[id2].trainerId);
+    SWAP(statsArray[id1], statsArray[id2], temp);
+    SWAP(gSaveBlock2Ptr->frontier.domeTrainers[id1].trainerId, gSaveBlock2Ptr->frontier.domeTrainers[id2].trainerId, temp);
 
     for (i = 0; i < 3; i++)
-        SWAP_16(gSaveBlock2Ptr->frontier.domeMonId[id1][i], gSaveBlock2Ptr->frontier.domeMonId[id2][i]);
+        SWAP(gSaveBlock2Ptr->frontier.domeMonId[id1][i], gSaveBlock2Ptr->frontier.domeMonId[id2][i], temp);
 }
 
 static void sub_818F9B0(void)

@@ -752,9 +752,8 @@ u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 pocketPos)
 
 static void SwapItemSlots(struct ItemSlot *a, struct ItemSlot *b)
 {
-    struct ItemSlot temp = *a;
-    *a = *b;
-    *b = temp;
+    struct ItemSlot temp;
+	SWAP(*a, *b, temp);
 }
 
 void CompactItemsInBagPocket(struct BagPocket *bagPocket)

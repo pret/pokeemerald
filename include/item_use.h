@@ -1,8 +1,6 @@
 #ifndef GUARD_ITEM_USE_H
 #define GUARD_ITEM_USE_H
 
-extern u16 gSpecialVar_ItemId;
-
 void ItemUseOutOfBattle_Mail(u8);
 void ItemUseOutOfBattle_Bike(u8);
 void ItemUseOnFieldCB_Bike(u8);
@@ -53,5 +51,6 @@ void ItemUseInBattle_EnigmaBerry(u8);
 void ItemUseOutOfBattle_CannotUse(u8);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 void sub_80FDD10(u8);
+void DisplayItemMessageInBattlePyramid(u8 taskId, const u8* str, void(*callback)(u8 taskId));
 
 #endif // GUARD_ITEM_USE_H

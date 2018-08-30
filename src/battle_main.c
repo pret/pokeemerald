@@ -4596,13 +4596,10 @@ static void sub_803CDF8(void)
 
 void SwapTurnOrder(u8 id1, u8 id2)
 {
-    u32 temp = gActionsByTurnOrder[id1];
-    gActionsByTurnOrder[id1] = gActionsByTurnOrder[id2];
-    gActionsByTurnOrder[id2] = temp;
-
-    temp = gBattlerByTurnOrder[id1];
-    gBattlerByTurnOrder[id1] = gBattlerByTurnOrder[id2];
-    gBattlerByTurnOrder[id2] = temp;
+	u32 temp;
+	
+	SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
+	SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
 
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)

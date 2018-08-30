@@ -27,6 +27,13 @@
 
 #define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))
 
+#define SWAP(a, b, temp)    \
+{                           \
+    temp = a;               \
+    a = b;                  \
+    b = temp;               \
+}
+
 // useful math macros
 
 // Converts a number to Q8.8 fixed-point format
