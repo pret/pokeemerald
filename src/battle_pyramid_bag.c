@@ -87,7 +87,7 @@ static u8 sub_81C6D24(u8 windowArrayId);
 static void sub_81C6D6C(u8 windowArrayId);
 static void sub_81C5EAC(u8 windowId);
 static void sub_81C5F08(u8 windowId, u8 horizontalCount, u8 verticalCount);
-static bool8 IsAValidMenuAction(s8 arg0);
+static bool8 IsValidMenuAction(s8 arg0);
 static void sub_81C6DAC(u8 taskId, const struct YesNoFuncTable *yesNoTable);
 static void sub_81C6CEC(u8 windowId);
 static void sub_81C704C(u8 y);
@@ -842,7 +842,7 @@ static void HandleMenuActionInput(u8 taskId)
         s8 id = GetMenuCursorPos();
         if (gMain.newKeys & DPAD_UP)
         {
-            if (id > 0 && IsAValidMenuAction(id - 2))
+            if (id > 0 && IsValidMenuAction(id - 2))
             {
                 PlaySE(SE_SELECT);
                 sub_8199134(0, -1);
@@ -850,7 +850,7 @@ static void HandleMenuActionInput(u8 taskId)
         }
         else if (gMain.newKeys & DPAD_DOWN)
         {
-            if (id < gPyramidBagResources->menuActionsCount - 2 && IsAValidMenuAction(id + 2))
+            if (id < gPyramidBagResources->menuActionsCount - 2 && IsValidMenuAction(id + 2))
             {
                 PlaySE(SE_SELECT);
                 sub_8199134(0, 1);
@@ -858,7 +858,7 @@ static void HandleMenuActionInput(u8 taskId)
         }
         else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
         {
-            if (id & 1 && IsAValidMenuAction(id - 1))
+            if (id & 1 && IsValidMenuAction(id - 1))
             {
                 PlaySE(SE_SELECT);
                 sub_8199134(-1, 0);
@@ -866,7 +866,7 @@ static void HandleMenuActionInput(u8 taskId)
         }
         else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
         {
-            if (!(id & 1) && IsAValidMenuAction(id + 1))
+            if (!(id & 1) && IsValidMenuAction(id + 1))
             {
                 PlaySE(SE_SELECT);
                 sub_8199134(1, 0);
@@ -886,7 +886,7 @@ static void HandleMenuActionInput(u8 taskId)
     }
 }
 
-static bool8 IsAValidMenuAction(s8 actionTableId)
+static bool8 IsValidMenuAction(s8 actionTableId)
 {
     if (actionTableId < 0)
         return FALSE;
