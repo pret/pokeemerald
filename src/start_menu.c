@@ -33,6 +33,7 @@
 #include "international_string_util.h"
 #include "constants/songs.h"
 #include "field_player_avatar.h"
+#include "battle_pyramid_bag.h"
 
 // Menu actions
 enum
@@ -73,12 +74,11 @@ EWRAM_DATA static u8 sSaveDialogTimer = 0;
 EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
 
-// Extern variables
+// Extern variables.
 extern u8 gDifferentSaveFile;
-extern u16 gSaveFileStatus;
 extern u8 gUnknown_03005DB4;
 
-// Extern functions in uncompiled files
+// Extern functions in not decompiled files.
 extern void sub_80AF688(void);
 extern void var_800D_set_xB(void);
 extern void sub_808B864(void);
@@ -89,7 +89,6 @@ extern void CB2_PokeNav(void);
 extern void sub_80C4DDC(void (*)(void));
 extern void sub_80C51C4(void (*)(void));
 extern void sub_80C4E74(u8, void (*)(void));
-extern void sub_81C4EFC(void);
 extern void ScriptUnfreezeEventObjects(void);
 extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
@@ -781,7 +780,7 @@ static bool8 StartMenuBattlePyramidBagCallback(void)
         play_some_sound();
         RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
-        SetMainCallback2(sub_81C4EFC);  // Display battle pyramid bag
+        SetMainCallback2(CB2_PyramidBagMenuFromStartMenu);
 
         return TRUE;
     }

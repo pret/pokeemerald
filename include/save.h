@@ -32,7 +32,7 @@ struct SaveSectionOffsets
 };
 
 // Emerald changes this definition to be the sectors per slot.
-#define NUM_SECTORS_PER_SLOT 16 // move to save.h
+#define NUM_SECTORS_PER_SLOT 16
 
 #define UNKNOWN_CHECK_VALUE 0x8012025
 
