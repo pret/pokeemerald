@@ -33,8 +33,8 @@
 #include "pokeblock.h"
 #include "menu.h"
 #include "item_menu.h"
+#include "battle_pyramid_bag.h"
 
-extern void(**gUnknown_0203CF2C)(void);
 extern void(*gUnknown_0203A0F4)(u8 taskId);
 extern void(*gUnknown_085920D8[])(void);
 extern void (*gUnknown_03006328)(u8, u16, TaskFunc);
@@ -122,7 +122,7 @@ void SetUpItemUseCallback(u8 taskId)
     }
     else
     {
-        *gUnknown_0203CF2C = gUnknown_085920D8[type];
+        gPyramidBagResources->callback2 = gUnknown_085920D8[type];
         sub_81C5B14(taskId);
     }
 }
@@ -987,7 +987,7 @@ void sub_80FE54C(u8 taskId)
     }
     else
     {
-        *gUnknown_0203CF2C = sub_81B89F0;
+        gPyramidBagResources->callback2 = sub_81B89F0;
         sub_81C5B14(taskId);
     }
 }

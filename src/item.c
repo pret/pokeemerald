@@ -10,6 +10,7 @@
 #include "item_menu.h"
 #include "strings.h"
 #include "load_save.h"
+#include "battle_pyramid_bag.h"
 
 extern bool8 InBattlePyramid(void);
 extern u16 gUnknown_0203CF30[];
@@ -965,7 +966,7 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
     u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
-    i = gUnknown_0203CF30[3] + gUnknown_0203CF30[4];
+    i = gPyramidBagCursorData.cursorPosition + gPyramidBagCursorData.scrollPosition;
     if (items[i] == itemId && quantities[i] >= count)
     {
         quantities[i] -= count;

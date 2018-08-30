@@ -11626,7 +11626,7 @@ c2_815ABFC: @ 81B6254
 	bl GoToBagMenu
 	b _081B6276
 _081B626C:
-	ldr r0, =gUnknown_0203CF30
+	ldr r0, =gPyramidBagCursorData
 	ldr r1, [r0]
 	movs r0, 0x4
 	bl sub_81C4F98
