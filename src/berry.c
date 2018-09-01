@@ -1076,8 +1076,8 @@ u16 BerryTypeToItemId(u16 berry)
 
 void GetBerryNameByBerryType(u8 berry, u8 *string)
 {
-    memcpy(string, GetBerryInfo(berry)->name, BERRY_NAME_COUNT - 1);
-    string[BERRY_NAME_COUNT - 1] = EOS;
+    memcpy(string, GetBerryInfo(berry)->name, BERRY_NAME_LENGTH);
+    string[BERRY_NAME_LENGTH] = EOS;
 }
 
 void GetBerryCountStringByBerryType(u8 berry, u8* dest, u32 berryCount)

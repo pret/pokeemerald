@@ -107,7 +107,7 @@ static s32 FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name
 
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
     {
-        if (!StringCompareN(records[i].name, name, OT_NAME_LENGTH) && records[i].trainerId == trainerId)
+        if (!StringCompareN(records[i].name, name, PLAYER_NAME_LENGTH) && records[i].trainerId == trainerId)
             return i;
     }
 
@@ -198,7 +198,7 @@ static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 
     {
         index = LINK_B_RECORDS_COUNT - 1;
         ClearLinkBattleRecord(&records->entries[index]);
-        StringCopyN(records->entries[index].name, name, OT_NAME_LENGTH);
+        StringCopyN(records->entries[index].name, name, PLAYER_NAME_LENGTH);
         records->entries[index].trainerId = trainerId;
         records->languages[index] = gLinkPlayers[battlerId].language;
     }

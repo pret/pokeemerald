@@ -6,7 +6,7 @@ struct RSBattleTowerRecord
     /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
     /*0x01*/ u8 trainerClass;
     /*0x02*/ u16 winStreak;
-    /*0x04*/ u8 name[8];
+    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[4];
     /*0x10*/ struct {
         u16 easyChat[6];
@@ -22,10 +22,12 @@ union BattleTowerRecord
     struct EmeraldBattleTowerRecord emerald;
 };
 
+#define FRONTIER_TRAINER_NAME_LENGTH 7
+
 struct BattleFrontierTrainer
 {
     u32 facilityClass;
-    u8 trainerName[8];
+    u8 trainerName[FRONTIER_TRAINER_NAME_LENGTH + 1];
     u16 speechBefore[6];
     u16 speechWin[6];
     u16 speechLose[6];
