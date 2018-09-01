@@ -4,6 +4,239 @@
 	.syntax unified
 
 	.text
+	
+
+
+	thumb_func_start sub_81C7078
+sub_81C7078: @ 81C7078
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	adds r4, r1, 0
+	bl is_c1_link_related_active
+	cmp r0, 0
+	bne _081C7090
+	ldr r0, =sub_81C7170
+	b _081C7092
+	.pool
+_081C7090:
+	ldr r0, =sub_81C71E4
+_081C7092:
+	lsls r1, r4, 24
+	lsrs r1, 24
+	bl CreateTask
+	lsls r0, 24
+	lsrs r4, r0, 24
+	adds r0, r4, 0
+	movs r1, 0x1
+	adds r2, r5, 0
+	bl SetWordTaskArg
+	ldr r1, =gTasks
+	lsls r0, r4, 2
+	adds r0, r4
+	lsls r0, 3
+	adds r0, r1
+	ldr r2, =gUnknown_0203CF3C
+	ldrb r1, [r2]
+	strh r1, [r0, 0xE]
+	ldrb r0, [r2]
+	adds r1, r0, 0x1
+	strb r1, [r2]
+	lsls r0, 24
+	lsrs r0, 8
+	orrs r0, r4
+	pop {r4,r5}
+	pop {r1}
+	bx r1
+	.pool
+	thumb_func_end sub_81C7078
+
+	thumb_func_start sub_81C70D8
+sub_81C70D8: @ 81C70D8
+	push {lr}
+	ldr r1, =0x0000ffff
+	ands r1, r0
+	lsrs r3, r0, 16
+	ldr r2, =gTasks
+	lsls r0, r1, 2
+	adds r0, r1
+	lsls r0, 3
+	adds r1, r0, r2
+	ldrb r0, [r1, 0x4]
+	cmp r0, 0
+	beq _081C711C
+	ldr r2, [r1]
+	ldr r0, =sub_81C7170
+	cmp r2, r0
+	beq _081C70FE
+	ldr r0, =sub_81C71E4
+	cmp r2, r0
+	bne _081C711C
+_081C70FE:
+	movs r2, 0xE
+	ldrsh r0, [r1, r2]
+	cmp r0, r3
+	bne _081C711C
+	movs r0, 0x1
+	b _081C711E
+	.pool
+_081C711C:
+	movs r0, 0
+_081C711E:
+	pop {r1}
+	bx r1
+	thumb_func_end sub_81C70D8
+
+	thumb_func_start sub_81C7124
+sub_81C7124: @ 81C7124
+	push {r4-r6,lr}
+	adds r6, r0, 0
+	movs r5, 0
+	ldr r4, =gTasks
+_081C712C:
+	ldrb r0, [r4, 0x4]
+	cmp r0, 0
+	beq _081C7160
+	ldr r1, [r4]
+	ldr r0, =sub_81C7170
+	cmp r1, r0
+	beq _081C7140
+	ldr r0, =sub_81C71E4
+	cmp r1, r0
+	bne _081C7160
+_081C7140:
+	lsls r0, r5, 24
+	lsrs r0, 24
+	movs r1, 0x1
+	bl GetWordTaskArg
+	cmp r0, r6
+	bne _081C7160
+	movs r0, 0x1
+	b _081C716A
+	.pool
+_081C7160:
+	adds r4, 0x28
+	adds r5, 0x1
+	cmp r5, 0xF
+	ble _081C712C
+	movs r0, 0
+_081C716A:
+	pop {r4-r6}
+	pop {r1}
+	bx r1
+	thumb_func_end sub_81C7124
+
+	thumb_func_start sub_81C7170
+sub_81C7170: @ 81C7170
+	push {r4-r7,lr}
+	lsls r0, 24
+	lsrs r5, r0, 24
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl GetWordTaskArg
+	adds r6, r0, 0
+	lsls r0, r5, 2
+	adds r0, r5
+	lsls r0, 3
+	ldr r1, =gTasks + 0x8
+	adds r4, r0, r1
+	movs r7, 0
+_081C718C:
+	movs r1, 0
+	ldrsh r0, [r4, r1]
+	bl _call_via_r6
+	cmp r0, 0x4
+	bhi _081C71D6
+	lsls r0, 2
+	ldr r1, =_081C71AC
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.pool
+	.align 2, 0
+_081C71AC:
+	.4byte _081C71C6
+	.4byte _081C71C0
+	.4byte _081C71DE
+	.4byte _081C71DA
+	.4byte _081C71CE
+_081C71C0:
+	ldrh r0, [r4]
+	adds r0, 0x1
+	b _081C71D8
+_081C71C6:
+	ldrh r0, [r4]
+	adds r0, 0x1
+	strh r0, [r4]
+	b _081C71DE
+_081C71CE:
+	adds r0, r5, 0
+	bl DestroyTask
+	b _081C71DE
+_081C71D6:
+	subs r0, 0x5
+_081C71D8:
+	strh r0, [r4]
+_081C71DA:
+	cmp r7, 0
+	beq _081C718C
+_081C71DE:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_81C7170
+
+	thumb_func_start sub_81C71E4
+sub_81C71E4: @ 81C71E4
+	push {r4,r5,lr}
+	lsls r0, 24
+	lsrs r5, r0, 24
+	bl sub_8087598
+	cmp r0, 0
+	bne _081C724A
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl GetWordTaskArg
+	adds r2, r0, 0
+	lsls r0, r5, 2
+	adds r0, r5
+	lsls r0, 3
+	ldr r1, =gTasks + 0x8
+	adds r4, r0, r1
+	movs r1, 0
+	ldrsh r0, [r4, r1]
+	bl _call_via_r2
+	cmp r0, 0x4
+	bhi _081C7246
+	lsls r0, 2
+	ldr r1, =_081C7224
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.pool
+	.align 2, 0
+_081C7224:
+	.4byte _081C7238
+	.4byte _081C7238
+	.4byte _081C724A
+	.4byte _081C724A
+	.4byte _081C723E
+_081C7238:
+	ldrh r0, [r4]
+	adds r0, 0x1
+	b _081C7248
+_081C723E:
+	adds r0, r5, 0
+	bl DestroyTask
+	b _081C724A
+_081C7246:
+	subs r0, 0x5
+_081C7248:
+	strh r0, [r4]
+_081C724A:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_81C71E4
 
 	thumb_func_start CB2_PokeNav
 CB2_PokeNav: @ 81C7250
@@ -20169,7 +20402,7 @@ sub_81D1148: @ 81D1148
 	add r2, sp, 0x8
 	mov r0, sp
 	bl sub_81D0760
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	movs r0, 0x28
 	movs r1, 0x68
 	bl sub_81D1184
@@ -20187,7 +20420,7 @@ sub_81D1148: @ 81D1148
 sub_81D1178: @ 81D1178
 	push {lr}
 	ldrh r0, [r0, 0x10]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81D1178
@@ -20213,7 +20446,7 @@ sub_81D1184: @ 81D1184
 	ldr r3, =0x0000ffff
 	str r3, [sp, 0xC]
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =gSprites
@@ -20256,7 +20489,7 @@ sub_81D11FC: @ 81D11FC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x10]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	movs r5, 0x20
 	negs r5, r5
 	adds r0, r5, 0
@@ -22583,7 +22816,7 @@ sub_81D2ACC: @ 81D2ACC
 	push {r7}
 	sub sp, 0xC
 	adds r4, r0, 0
-	bl sub_816137C
+	bl ShowHideHearts
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

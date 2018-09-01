@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "pokemon.h"
 #include "text.h"
+#include "text_window.h"
 #include "malloc.h"
 #include "gpu_regs.h"
 #include "main.h"
@@ -26,6 +27,7 @@
 #include "event_data.h"
 #include "overworld.h"
 #include "menu.h"
+#include "trainer_pokemon_sprites.h"
 
 struct HallofFameMon
 {
@@ -81,18 +83,10 @@ extern const u8 gText_MainMenuTime[];
 extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
 
-extern void NewMenuHelpers_DrawDialogueFrame(u8, u8);
 extern void sub_8175620(void);
 extern u8 TrySavingData(u8);
-extern u8 sub_818D3E4(u16 species, u32 trainerId, u32 personality, u8 flags, s16 x, s16 y, u8, u16);
 extern void sub_8197434(u8, u8);
 extern u16 sub_818D97C(u8 playerGender, u8);
-extern u16 sub_818D8AC(u16, u8, s16, s16, u8, u16);
-extern const void* stdpal_get(u8);
-extern void LoadWindowGfx(u8, u8, u16, u8);
-extern u16 sub_818D820(u16);
-extern u16 sub_818D8F0(u16);
-extern u16 sub_818D7D8(u16 species, u32 trainerId, u32 personality, u8 arg3, s16 sp0, s16 sp1, u8 sp2, u16 sp3);
 extern void sub_8198204(u8 *dst, const u8 *src, u8, u8, u8);
 extern bool8 sub_80F9C30(void);
 extern void sub_8198314(void);
@@ -102,8 +96,6 @@ extern void sub_80F9BF4(u16, u16, u8);
 extern void sub_81980F0(u8, u8, u8, u8, u16);
 extern void sub_80F9BCC(u16, u16, u8);
 extern bool8 sub_80F9C1C(void);
-extern u16 SpeciesToPokedexNum(u16 species);
-extern void dp13_810BB8C(void);
 extern void sub_81971D0(void);
 extern void sub_8197200(void);
 extern void sub_8152254(void);
@@ -611,7 +603,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
     if (currMon->species == SPECIES_EGG)
         field6 += 10;
 
-    spriteId = sub_818D3E4(currMon->species, currMon->tid, currMon->personality, 1, xPos, yPos, currMonId, 0xFFFF);
+    spriteId = CreatePicSprite2(currMon->species, currMon->tid, currMon->personality, 1, xPos, yPos, currMonId, 0xFFFF);
     gSprites[spriteId].tDestinationX = field4;
     gSprites[spriteId].tDestinationY = field6;
     gSprites[spriteId].data[0] = 0;
@@ -723,7 +715,7 @@ static void sub_8173EE4(u8 taskId)
     ShowBg(0);
     ShowBg(1);
     ShowBg(3);
-    gTasks[taskId].tPlayerSpriteID = sub_818D8AC(sub_818D97C(gSaveBlock2Ptr->playerGender, 1), 1, 120, 72, 6, 0xFFFF);
+    gTasks[taskId].tPlayerSpriteID = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), 1, 120, 72, 6, 0xFFFF);
     AddWindow(&sHof_WindowTemplate);
     LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
     LoadPalette(stdpal_get(1), 0xE0, 0x20);
@@ -780,11 +772,11 @@ static void Task_Hof_HandleExit(u8 taskId)
             if (spriteId != 0xFF)
             {
                 FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
-                sub_818D820(spriteId);
+                FreeAndDestroyMonPicSprite(spriteId);
             }
         }
 
-        sub_818D8F0(gTasks[taskId].tPlayerSpriteID);
+        FreeAndDestroyTrainerPicSprite(gTasks[taskId].tPlayerSpriteID);
         HideBg(0);
         HideBg(1);
         HideBg(3);
@@ -956,7 +948,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
             if (currMon->species == SPECIES_EGG)
                 posY += 10;
 
-            spriteId = sub_818D7D8(currMon->species, currMon->tid, currMon->personality, 1, posX, posY, i, 0xFFFF);
+            spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, 1, posX, posY, i, 0xFFFF);
             gSprites[spriteId].oam.priority = 1;
             gTasks[taskId].tMonSpriteId(i) = spriteId;
         }
@@ -1026,7 +1018,7 @@ static void Task_HofPC_HandleInput(u8 taskId)
                 u8 spriteId = gTasks[taskId].tMonSpriteId(i);
                 if (spriteId != 0xFF)
                 {
-                    sub_818D820(spriteId);
+                    FreeAndDestroyMonPicSprite(spriteId);
                     gTasks[taskId].tMonSpriteId(i) = 0xFF;
                 }
             }
@@ -1087,7 +1079,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
             u16 spriteId = gTasks[taskId].tMonSpriteId(i);
             if (spriteId != 0xFF)
             {
-                sub_818D820(spriteId);
+                FreeAndDestroyMonPicSprite(spriteId);
                 gTasks[taskId].tMonSpriteId(i) = 0xFF;
             }
         }
@@ -1305,7 +1297,7 @@ static void sub_8174F70(void)
     ResetTasks();
     ResetSpriteData();
     reset_temp_tile_data_buffers();
-    dp13_810BB8C();
+    ResetAllPicSprites();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
     LoadCompressedObjectPic(&sHallOfFame_ConfettiSpriteSheet);

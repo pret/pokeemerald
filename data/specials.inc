@@ -235,7 +235,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B9770
 	def_special sub_81B9718
 	def_special sub_81B96D0
-	def_special sub_8160638
+	def_special TeachMoveTutorMove
 	def_special GetRecordedCyclingRoadResults
 	def_special Special_BeginCyclingRoadChallenge
 	def_special GetPlayerAvatarBike
@@ -244,7 +244,7 @@ gSpecials:: @ 81DBA64
 	def_special GetLeadMonFriendshipScore
 	def_special sub_81A1780
 	def_special sub_8161F74
-	def_special sub_818E9AC
+	def_special CallBattleDomeFunction
 	def_special sub_8195960
 	def_special sub_8165360
 	def_special sub_8163AC4

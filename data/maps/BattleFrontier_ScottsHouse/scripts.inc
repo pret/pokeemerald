@@ -110,7 +110,7 @@ BattleFrontier_ScottsHouse_EventScript_263811:: @ 8263811
 	end
 
 BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
@@ -153,7 +153,7 @@ BattleFrontier_ScottsHouse_EventScript_2638AA:: @ 82638AA
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0

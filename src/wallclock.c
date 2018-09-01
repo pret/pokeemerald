@@ -763,7 +763,7 @@ static void Task_SetClock3(u8 taskId)
 
 static void Task_SetClock4(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
         case 0:
             PlaySE(SE_SELECT);

@@ -126,7 +126,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B868:: @ 825B868
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 5
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	special SavePlayerParty
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BB52, 4
 

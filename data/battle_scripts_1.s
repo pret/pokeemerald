@@ -5538,18 +5538,18 @@ BattleScript_82DB89D::
 	setbyte gBattleCommunication + 1, 0x0
 	end2
 
-BattleScript_82DB8BE::
+BattleScript_ArenaTurnBeginning::
 	waitcry BS_ATTACKER
-	various21 BS_ATTACKER
-	playse 0x109
+	volumedown
+	playse SE_HANTEI1
 	pause 0x8
-	playse 0x109
+	playse SE_HANTEI1
 	various14 BS_ATTACKER
 	various16 8
 	various17 8
 	pause 0x40
 	various15 BS_ATTACKER
-	various22 BS_ATTACKER
+	volumeup
 	end2
 	
 BattleScript_82DB8E0::
@@ -5566,7 +5566,7 @@ BattleScript_82DB8F3::
 	waitstate
 	makevisible BS_OPPONENT1
 	waitstate
-	various21 BS_ATTACKER
+	volumedown
 	playse 0x109
 	pause 0x8
 	playse 0x109

@@ -975,7 +975,7 @@ bool8 sub_8102318(struct Task *task)
 
 bool8 sub_8102344(struct Task *task)
 {
-    s8 input = ProcessMenuInputNoWrap_();
+    s8 input = Menu_ProcessInputNoWrap_();
     if (input == 0)
     {
         sub_8197434(0, TRUE);

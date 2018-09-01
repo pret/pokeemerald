@@ -1042,7 +1042,7 @@ static void Task_HandlePokeblockOptionsInput(u8 taskId)
     if (sub_81221EC() == TRUE)
         return;
 
-    itemId = ProcessMenuInputNoWrapAround();
+    itemId = Menu_ProcessInputNoWrapAround();
     if (itemId == MENU_NOTHING_CHOSEN)
     {
         return;

@@ -512,7 +512,7 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 2:
-        copy_decompressed_tile_data_to_vram_autofree(0, gBattleTextboxTiles, 0, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
         CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
         LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
         gMain.state++;
@@ -659,7 +659,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 10:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar3);

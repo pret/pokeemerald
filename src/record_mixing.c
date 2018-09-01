@@ -1635,8 +1635,8 @@ void sub_80E8260(struct UnkRecordMixingStruct2 *dst)
         dst->field_0[0][i].field_4 = gSaveBlock2Ptr->frontier.field_CF0[i];
         dst->field_0[1][i].field_4 = gSaveBlock2Ptr->frontier.field_CF4[i];
         dst->field_0[2][i].field_4 = gSaveBlock2Ptr->frontier.field_CF8[i];
-        dst->field_0[3][i].field_4 = gSaveBlock2Ptr->frontier.field_D14[i];
-        dst->field_0[4][i].field_4 = gSaveBlock2Ptr->frontier.field_DD0[i];
+        dst->field_0[3][i].field_4 = gSaveBlock2Ptr->frontier.field_D14[0][i];
+        dst->field_0[4][i].field_4 = gSaveBlock2Ptr->frontier.field_DD0[0][i];
         dst->field_0[5][i].field_4 = gSaveBlock2Ptr->frontier.field_DDE[i];
         dst->field_0[6][i].field_4 = gSaveBlock2Ptr->frontier.field_DEA[i];
         dst->field_0[7][i].field_4 = gSaveBlock2Ptr->frontier.field_E08[i];

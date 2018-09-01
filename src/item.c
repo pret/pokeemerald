@@ -10,6 +10,7 @@
 #include "item_menu.h"
 #include "strings.h"
 #include "load_save.h"
+#include "battle_pyramid_bag.h"
 
 extern bool8 InBattlePyramid(void);
 extern u16 gUnknown_0203CF30[];
@@ -752,9 +753,8 @@ u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 pocketPos)
 
 static void SwapItemSlots(struct ItemSlot *a, struct ItemSlot *b)
 {
-    struct ItemSlot temp = *a;
-    *a = *b;
-    *b = temp;
+    struct ItemSlot temp;
+    SWAP(*a, *b, temp);
 }
 
 void CompactItemsInBagPocket(struct BagPocket *bagPocket)
@@ -845,8 +845,8 @@ u16 CountTotalItemQuantityInBag(u16 itemId)
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count)
 {
     u8 i;
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.chosenLvl];
-    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.chosenLvl];
+    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
     for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
     {
@@ -867,8 +867,8 @@ static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count)
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count)
 {
     u8 i;
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.chosenLvl];
-    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.chosenLvl];
+    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
     for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
     {
@@ -890,8 +890,8 @@ bool8 AddPyramidBagItem(u16 itemId, u16 count)
 {
     u16 i;
 
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.chosenLvl];
-    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.chosenLvl];
+    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
     u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
     u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
@@ -963,10 +963,10 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
 {
     u16 i;
 
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.chosenLvl];
-    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.chosenLvl];
+    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
-    i = gUnknown_0203CF30[3] + gUnknown_0203CF30[4];
+    i = gPyramidBagCursorData.cursorPosition + gPyramidBagCursorData.scrollPosition;
     if (items[i] == itemId && quantities[i] >= count)
     {
         quantities[i] -= count;

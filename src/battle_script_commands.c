@@ -56,7 +56,7 @@ extern const u8* const gBattleScriptsForMoveEffects[];
 // functions
 extern void sub_81A5718(u8 battlerId); // battle frontier 2
 extern void sub_81A56B4(void); // battle frontier 2
-extern void sub_81BFA38(struct Pokemon* party, u8 monPartyId, u8 monCount, void (*callback)(void), u16 move); // pokemon summary screen
+extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon* party, u8 monPartyId, u8 monCount, void (*callback)(void), u16 move); // pokemon summary screen
 extern u8 sub_81C1B94(void); // pokemon summary screen
 extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokenav.s
 extern void sub_81D3640(u8 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
@@ -5203,7 +5203,7 @@ static void atk5A_yesnoboxlearnmove(void)
         if (!gPaletteFade.active)
         {
             FreeAllWindowBuffers();
-            sub_81BFA38(gPlayerParty, gBattleStruct->expGetterMonId, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
+            ShowSelectMovePokemonSummaryScreen(gPlayerParty, gBattleStruct->expGetterMonId, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
             gBattleScripting.learnMoveState++;
         }
         break;
@@ -6254,10 +6254,10 @@ static void atk76_various(void)
             }
         }
         break;
-    case 21:
+    case VARIOUS_VOLUME_DOWN:
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x55);
         break;
-    case 22:
+    case VARIOUS_VOLUME_UP:
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         break;
     case 23:

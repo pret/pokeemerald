@@ -2920,7 +2920,7 @@ _080170E0:
 	negs r0, r0
 	b _08017110
 _080170F2:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r2, 0x80
@@ -6278,7 +6278,7 @@ _08018BD6:
 	b _08018C3E
 	.pool
 _08018BE4:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r6, r0, 24
 	movs r1, 0x80
@@ -7909,7 +7909,7 @@ bgid_upload_textbox_1: @ 8019938
 	lsls r2, 1
 	movs r3, 0
 	str r3, [sp]
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -9386,7 +9386,7 @@ sub_801A43C: @ 801A43C
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, =gWirelessInfoScreenTilemap
 	movs r0, 0x1
 	movs r2, 0
@@ -28890,7 +28890,7 @@ _0802426A:
 	bl sub_8197930
 	b _080242D0
 _08024270:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -47811,7 +47811,7 @@ _0802DA84:
 	thumb_func_start sub_802DA8C
 sub_802DA8C: @ 802DA8C
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}

@@ -4,7 +4,9 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "battle_frontier_1.h"
+
+extern bool32 sub_8196094(void);
+extern void sub_8196080(u8*);
 
 EWRAM_DATA u8 gUnknown_020375BC = 0;
 
@@ -23,7 +25,7 @@ void sub_8098128(void)
 void sub_8098154(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch (task->data[0])
     {
         case 0:
@@ -61,12 +63,12 @@ bool8 ShowFieldMessage(u8 *str)
         return FALSE;
     textbox_fdecode_auto_and_task_add(str, 1);
     gUnknown_020375BC = 2;
-    return TRUE; 
+    return TRUE;
 }
 
 void sub_8098214(u8 taskId)
 {
-    if (sub_8196094() == 0)
+    if (!sub_8196094())
     {
         gUnknown_020375BC = 0;
         DestroyTask(taskId);

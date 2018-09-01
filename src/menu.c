@@ -986,7 +986,7 @@ s8 ProcessMenuInput(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-s8 ProcessMenuInputNoWrapAround(void)
+s8 Menu_ProcessInputNoWrapAround(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
 
@@ -1044,7 +1044,7 @@ s8 ProcessMenuInput_other(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-s8 ProcessMenuInputNoWrapAround_other(void)
+s8 Menu_ProcessInputNoWrapAround_other(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
 
@@ -1187,9 +1187,9 @@ void sub_8198C34(const struct WindowTemplate *window, u8 fontId, u16 baseTileNum
     sub_8198AF8(window, fontId, 0, 1, baseTileNum, paletteNum, 0);
 }
 
-s8 ProcessMenuInputNoWrap_(void)
+s8 Menu_ProcessInputNoWrap_(void)
 {
-    s8 result = ProcessMenuInputNoWrapAround();
+    s8 result = Menu_ProcessInputNoWrapAround();
     if (result != MENU_NOTHING_CHOSEN)
         sub_8198C78();
     return result;
@@ -1801,7 +1801,7 @@ void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, 
     return NULL;
 }
 
-void copy_decompressed_tile_data_to_vram_autofree(u8 bgId, const void *src, int size, u16 offset, u8 mode)
+void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, int size, u16 offset, u8 mode)
 {
     int sizeOut;
     void *ptr = malloc_and_decompress(src, &sizeOut);

@@ -5,9 +5,6 @@
 
 	.text
 
-
-
-
 	thumb_func_start sub_8102A64
 sub_8102A64: @ 812BAFC
 	push {r4,r5,lr}

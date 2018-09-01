@@ -66,7 +66,7 @@ extern void sub_807F19C(void);
 extern void sub_807B140(void);
 extern void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 extern void Overworld_PlaySpecialMapMusic(void);
-extern void sub_81BFA38(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
+extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
 extern u8 sub_81C1B94(void);
 extern void sub_807F1A8(u8 arg0, const u8 *arg1, u8 arg2);
 extern void sub_800E084(void);
@@ -918,7 +918,7 @@ static void Task_EvolutionScene(u8 taskID)
             if (!gPaletteFade.active)
             {
                 FreeAllWindowBuffers();
-                sub_81BFA38(gPlayerParty, gTasks[taskID].tPartyID,
+                ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskID].tPartyID,
                             gPlayerPartyCount - 1, CB2_EvolutionSceneLoadGraphics,
                             gMoveToLearn);
                 gTasks[taskID].tLearnMoveState++;
@@ -1222,7 +1222,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             }
             break;
         case 4:
-            switch (ProcessMenuInputNoWrap_())
+            switch (Menu_ProcessInputNoWrap_())
             {
             case 0:
                 sEvoCursorPos = 0;
@@ -1252,7 +1252,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 Free(GetBgTilemapBuffer(0));
                 FreeAllWindowBuffers();
 
-                sub_81BFA38(gPlayerParty, gTasks[taskID].tPartyID,
+                ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskID].tPartyID,
                             gPlayerPartyCount - 1, CB2_TradeEvolutionSceneLoadGraphics,
                             gMoveToLearn);
                 gTasks[taskID].tLearnMoveState++;
@@ -1484,7 +1484,7 @@ static void InitMovingBackgroundTask(bool8 isLink)
 
     LoadPalette(sUnknown_085B51E4, 0xA0, 0x20);
 
-    copy_decompressed_tile_data_to_vram_autofree(1, sUnknown_085B4134, FALSE, 0, 0);
+    DecompressAndLoadBgGfxUsingHeap(1, sUnknown_085B4134, FALSE, 0, 0);
     CopyToBgTilemapBuffer(1, sUnknown_085B482C, 0, 0);
     CopyToBgTilemapBuffer(outerBgId, sUnknown_085B4D10, 0, 0);
     CopyBgTilemapBufferToVram(1);

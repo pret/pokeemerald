@@ -1,8 +1,6 @@
-
-// Includes
 #include "global.h"
 #include "field_effect.h"
-#include "battle_dome_cards.h"
+#include "trainer_pokemon_sprites.h"
 #include "decompress.h"
 #include "field_camera.h"
 #include "field_effect_helpers.h"
@@ -557,7 +555,7 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 #ifdef NONMATCHING
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y)
 {
-    u16 spriteId = sub_818D7D8(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
+    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
     if (spriteId == 0xFFFF)
         return 0x40;
@@ -590,7 +588,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y)
 	movs r1, 0\n\
 	adds r2, r3, 0\n\
 	movs r3, 0x1\n\
-	bl sub_818D7D8\n\
+	bl CreateMonPicSprite_HandleDeoxys\n\
 	lsls r0, 16\n\
 	lsrs r5, r0, 16\n\
 	ldrh r0, [r4, 0x4]\n\
@@ -619,7 +617,7 @@ _080B5FDE:\n\
 u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
 {
     const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
-    u16 spriteId = sub_818D7D8(species, d, g, 1, x, y, 0, spritePalette->tag);
+    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, d, g, 1, x, y, 0, spritePalette->tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
         return 0x40;
@@ -634,7 +632,7 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
     {
         FreeOamMatrix(sprite->oam.matrixNum);
     }
-    sub_818D820(spriteId);
+    FreeAndDestroyMonPicSprite(spriteId);
 }
 
 #ifdef NONMATCHING
