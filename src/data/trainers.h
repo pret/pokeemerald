@@ -4249,7 +4249,7 @@ const struct Trainer gTrainers[] = {
         .trainerPic = TRAINER_PIC_WINSTRATE_F,
         .trainerName = _("ISABEL"),
         .items = {ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
-        .doubleBattle = 1,
+        .doubleBattle = FALSE,
         .aiFlags = 0x1,
         .partySize = 2,
         .party = {.ItemDefaultMoves = gTrainerParty_Isabel2 }
