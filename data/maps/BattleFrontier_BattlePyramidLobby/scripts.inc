@@ -130,7 +130,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2508B1:: @ 82508B1
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 6
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	special SavePlayerParty
 	msgbox BattleFrontier_BattlePyramidLobby_Text_250F31, 4
 

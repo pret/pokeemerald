@@ -21,7 +21,7 @@
 #include "pokeball.h"
 #include "data2.h"
 #include "pokeblock.h"
-#include "item_use.h"
+#include "item_menu.h"
 
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;

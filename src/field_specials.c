@@ -52,6 +52,7 @@
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/vars.h"
+#include "constants/battle_frontier.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -1645,7 +1646,7 @@ bool8 sub_81398C0(void)
         StringCopy(gStringVar2, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
         return TRUE;
     }
-    
+
     return FALSE;
 }
 
@@ -1667,7 +1668,7 @@ bool8 InMultiBattleRoom(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM) &&
-        VarGet(VAR_0x40CE) == 2)
+        VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS)
         return TRUE;
     return FALSE;
 }
@@ -1799,7 +1800,7 @@ void ShakeScreenInElevator(void)
 
     if (floorDelta > 8)
         floorDelta = 8;
-    
+
     data[5] = gUnknown_085B2C18[floorDelta];
 
     SetCameraPanningCallback(NULL);
@@ -1830,16 +1831,16 @@ static void sub_8139AF4(u8 taskId)
 void sub_8139B60(void)
 {
     int xPos;
-    
+
     gUnknown_0203AB5E = AddWindow(&gUnknown_085B2BAC);
     SetStandardWindowBorderStyle(gUnknown_0203AB5E, 0);
-    
+
     xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
     PrintTextOnWindow(gUnknown_0203AB5E, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
-    
+
     xPos = GetStringCenterAlignXOffset(1, gElevatorFloorsTable[gSpecialVar_0x8005], 64);
     PrintTextOnWindow(gUnknown_0203AB5E, 1, gElevatorFloorsTable[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
-    
+
     PutWindowTilemap(gUnknown_0203AB5E);
     CopyWindowToVram(gUnknown_0203AB5E, 3);
 }
@@ -2167,13 +2168,13 @@ void sub_8139F20(void)
             }
             break;
         case 4:
-            if (gSaveBlock2Ptr->frontier.field_D0C[0] >= gSaveBlock2Ptr->frontier.field_D0C[1])
+            if (gSaveBlock2Ptr->frontier.field_D0C[0][0] >= gSaveBlock2Ptr->frontier.field_D0C[0][1])
             {
-                unk = gSaveBlock2Ptr->frontier.field_D0C[0];
+                unk = gSaveBlock2Ptr->frontier.field_D0C[0][0];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.field_D0C[1];
+                unk = gSaveBlock2Ptr->frontier.field_D0C[0][1];
             }
             break;
         case 5:
@@ -2187,13 +2188,13 @@ void sub_8139F20(void)
             }
             break;
         case 6:
-            if (gSaveBlock2Ptr->frontier.field_DC8[0] >= gSaveBlock2Ptr->frontier.field_DC8[1])
+            if (gSaveBlock2Ptr->frontier.field_DC8[0][0] >= gSaveBlock2Ptr->frontier.field_DC8[0][1])
             {
-                unk = gSaveBlock2Ptr->frontier.field_DC8[0];
+                unk = gSaveBlock2Ptr->frontier.field_DC8[0][0];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.field_DC8[1];
+                unk = gSaveBlock2Ptr->frontier.field_DC8[0][1];
             }
             break;
         case 7:
@@ -2240,10 +2241,10 @@ void sub_813A080(void)
     };
 
     u8 i;
-    u16 var = VarGet(VAR_0x40CE);
-    u8 chosenLevel = gSaveBlock2Ptr->frontier.chosenLvl;
+    u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    if (var == 2 && !FlagGet(FLAG_0x152))
+    if (battleMode == 2 && !FlagGet(FLAG_0x152))
     {
         gSpecialVar_0x8005 = 5;
         gSpecialVar_0x8006 = 4;
@@ -2252,7 +2253,7 @@ void sub_813A080(void)
 
     for (i = 0; i < 9; i++)
     {
-        if (gUnknown_085B2CDC[i] > gSaveBlock2Ptr->frontier.field_CE0[var][chosenLevel])
+        if (gUnknown_085B2CDC[i] > gSaveBlock2Ptr->frontier.field_CE0[battleMode][lvlMode])
         {
             gSpecialVar_0x8005 = 4;
             gSpecialVar_0x8006 = i + 5;
@@ -2662,8 +2663,8 @@ static void sub_813A2DC(u8 taskId)
     }
 
     task->data[4] = convert_pixel_width_to_tile_width(unk1);
-    
-    if (task->data[2] + task->data[4] > 0x1D) 
+
+    if (task->data[2] + task->data[4] > 0x1D)
     {
         int unk2 = 0x1D - task->data[4];
         if (unk2 < 0)
@@ -3036,13 +3037,13 @@ void sub_813A878(u8 a0)
 {
     static const u16 gUnknown_085B3104[] = {0x0000, 0x0001, 0x0002, 0x0100, 0x0101, 0x0400, 0x0401, 0x0200, 0x0201, 0x0300, 0x0500, 0x0600};
 
-    u16 var1 = VarGet(VAR_0x40CE);
+    u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u16 var2 = VarGet(VAR_FRONTIER_GAMBLER_SET_FACILITY_F);
-    u16 var3 = VarGet(VAR_FRONTIER_FACILITY);
+    u16 frontierFacilityId = VarGet(VAR_FRONTIER_FACILITY);
 
     if (VarGet(VAR_FRONTIER_GAMBLER_PLACED_BET_F) == 1)
     {
-        if (gUnknown_085B3104[var2] == (var3 << 8) + var1)
+        if (gUnknown_085B3104[var2] == (frontierFacilityId << 8) + battleMode)
         {
             if (a0 != 0)
             {
@@ -3363,7 +3364,7 @@ void sub_813ADD4(void)
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->data[14], &scrollOffset, &selectedRow);
         SetStandardWindowBorderStyle(task->data[13], 0);
-        
+
         for (i = 0; i < 6; i++)
         {
             sub_8199F74(task->data[13], 1, gUnknown_085B2CF0[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
@@ -3381,7 +3382,7 @@ void sub_813AEB4(void)
     u16 temp1 = 0;
     u16 temp2 = 0;
     gSpecialVar_0x8005 = 0;
-    
+
     temp1 = VarGet(VAR_TEMP_E);
     temp2 = VarGet(VAR_TEMP_D);
 
@@ -3509,7 +3510,7 @@ static void sub_813B0B4(u8 a0)
     u8 eventObjectId;
     LoadPalette(&gUnknown_085B3280[a0], 0x1A0, 8);
     TryGetEventObjectIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &eventObjectId);
-    
+
     if (a0 == 0)
     {
         PlaySE(SE_W109);
@@ -3656,7 +3657,7 @@ bool32 sub_813B374(void)
     u16 var = VarGet(VAR_0x4037);
 
     GetMapName(gStringVar1, gUnknown_085B3400[var - 1], 0);
-    
+
     if (var < 9)
     {
         return FALSE;
@@ -3697,7 +3698,7 @@ bool32 sub_813B3B0(void)
                     break;
             }
         }
-        
+
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER3))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
@@ -4159,7 +4160,7 @@ static u16 sub_813BC00(void)
             }
         }
     }
-    
+
     if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B347C[retVal]) & 1))
     {
         gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= 1 << gUnknown_085B347C[retVal];

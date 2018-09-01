@@ -1484,7 +1484,7 @@ static void InitMovingBackgroundTask(bool8 isLink)
 
     LoadPalette(sUnknown_085B51E4, 0xA0, 0x20);
 
-    copy_decompressed_tile_data_to_vram_autofree(1, sUnknown_085B4134, FALSE, 0, 0);
+    DecompressAndLoadBgGfxUsingHeap(1, sUnknown_085B4134, FALSE, 0, 0);
     CopyToBgTilemapBuffer(1, sUnknown_085B482C, 0, 0);
     CopyToBgTilemapBuffer(outerBgId, sUnknown_085B4D10, 0, 0);
     CopyBgTilemapBufferToVram(1);

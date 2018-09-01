@@ -607,15 +607,14 @@ gUnknown_0203ABB8: @ 203ABB8
 .space 0x4 /*unused var?*/
 
 	.include "src/mystery_event_script.o"
-
 	.include "src/learn_move.o"
 	.include "src/decoration_inventory.o"
 	.include "src/roamer.o"
 
-gUnknown_0203BC88: @ 203BC88
+gFacilityTrainers: @ 203BC88
 	.space 0x4
 
-gUnknown_0203BC8C: @ 203BC8C
+gFacilityTrainerMons: @ 203BC8C
 	.space 0x4
 
 	.include "src/use_pokeblock.o"
@@ -633,20 +632,9 @@ gUnknown_0203BC8C: @ 203BC8C
 	.include "src/pokeblock_feed.o"
 	.include "src/intro_credits_graphics.o"
     .include "src/recorded_battle.o"
-    .include "src/battle_dome_cards.o"
+    .include "src/trainer_pokemon_sprites.o"
     .include "src/lilycove_lady.o"
-
-gUnknown_0203CD70: @ 203CD70
-	.space 0x4
-
-gUnknown_0203CD74: @ 203CD74
-	.space 0x4
-
-gUnknown_0203CD78: @ 203CD78
-	.space 0x4
-
-gUnknown_0203CD7C: @ 203CD7C
-	.space 0x4
+    .include "src/battle_dome.o"
 
 gUnknown_0203CD80: @ 203CD80
 	.space 0x8
@@ -741,7 +729,7 @@ gUnknown_0203CF00: @ 203CF00
 	.include "src/fldeff_groundshake.o"
 	.include "src/pokemon_summary_screen.o"
 	.include "src/unk_pokedex_area_screen_helper.o"
-	.include "src/battle_pyramid.o"
+	.include "src/battle_pyramid_bag.o"
 
 gUnknown_0203CF3C: @ 203CF3C
 	.space 0x4

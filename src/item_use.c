@@ -29,44 +29,26 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "strings.h"
+#include "pokeblock.h"
+#include "menu.h"
+#include "item_menu.h"
+#include "battle_pyramid_bag.h"
 
-extern void(**gUnknown_0203CE54)(void);
-extern void(**gUnknown_0203CF2C)(void);
 extern void(*gUnknown_0203A0F4)(u8 taskId);
 extern void(*gUnknown_085920D8[])(void);
 extern void (*gUnknown_03006328)(u8, u16, TaskFunc);
 extern void unknown_ItemMenu_Confirm(u8 taskId);
 extern void sub_81C5B14(u8 taskId);
-extern u8 gText_DadsAdvice[];
-extern u8 gText_CantDismountBike[];
-extern void sub_8197434(u8 a, u8 b);
 extern void ScriptUnfreezeEventObjects(void);
 extern void ItemUseOutOfBattle_TMHM(u8 a);
 extern void ItemUseOutOfBattle_EvolutionStone(u8 b);
-extern void bag_menu_mail_related(void);
-extern void OpenPokeblockCase(u8 a, void(*b)(void));
-extern void overworld_free_bg_tilemaps(void);
-extern bool32 Overworld_IsBikingAllowed(void);
 extern bool8 IsPlayerFacingSurfableFishableWater(void);
 extern bool8 sub_81221AC(void);
-extern u8 gText_ItemFinderNothing[];
-extern u8 gText_ItemFinderNearby[];
-extern u8 gText_ItemFinderOnTop[];
-extern u8 gText_CoinCase[];
-extern u8 gText_PowderQty[];
 extern u8 gUnknown_085920E4[];
 extern u8 Route102_EventScript_274482[];
 extern u8 Route102_EventScript_2744C0[];
 extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
-extern u8 gText_BootedUpHM[];
-extern u8 gText_BootedUpTM[];
-extern u8 gText_TMHMContainedVar1[];
-extern u8 gText_PlayerUsedVar2[];
-extern u8 gText_RepelEffectsLingered[];
-extern u8 gText_UsedVar2WildLured[];
-extern u8 gText_UsedVar2WildRepelled[];
-extern u8 gText_BoxFull[];
-extern u8 gText_WontHaveEffect[];
 extern int sub_80247BC(void);
 extern struct MapHeader* mapconnection_get_mapheader(struct MapConnection *connection);
 extern void SetUpItemUseCallback(u8 taskId);
@@ -86,7 +68,6 @@ extern void sub_81C59BC(void);
 extern void sub_81AB9A8(u8);
 extern void sub_81ABA88(u8);
 extern void sub_80B7CC8(void);
-extern void Overworld_ResetStateAfterDigEscRope(void);
 extern u8* sub_806CF78(u16);
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
@@ -115,8 +96,7 @@ void sub_80FE124(u8 taskId);
 void sub_80FE164(u8 taskId);
 
 void DisplayItemMessage(u8 taskId, u8 a, const u8* str, void(*callback)(u8 taskId));
-void DisplayItemMessageInBattlePyramid(u8 taskId, u8* str, void(*callback)(u8 taskId));
-void DisplayItemMessageOnField(u8 taskId, u8* str, void(*callback)(u8 taskId));
+void DisplayItemMessageOnField(u8 taskId, const u8* str, void(*callback)(u8 taskId));
 void sub_81C6714(u8 taskId);
 void CleanUpAfterFailingToUseRegisteredKeyItemOnField(u8 taskId);
 void StartFishing(u8 a);
@@ -137,12 +117,12 @@ void SetUpItemUseCallback(u8 taskId)
         type = ItemId_GetType(gSpecialVar_ItemId) - 1;
     if (!InBattlePyramid())
     {
-        *gUnknown_0203CE54 = gUnknown_085920D8[type];
+        gUnknown_0203CE54->unk0 = gUnknown_085920D8[type];
         unknown_ItemMenu_Confirm(taskId);
     }
     else
     {
-        *gUnknown_0203CF2C = gUnknown_085920D8[type];
+        gPyramidBagResources->callback2 = gUnknown_085920D8[type];
         sub_81C5B14(taskId);
     }
 }
@@ -221,7 +201,7 @@ void sub_80FD254()
 
 void ItemUseOutOfBattle_Mail(u8 taskId)
 {
-    *gUnknown_0203CE54 = sub_80FD254;
+    gUnknown_0203CE54->unk0 = sub_80FD254;
     unknown_ItemMenu_Confirm(taskId);
 }
 
@@ -617,7 +597,7 @@ void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
     }
     else if (gTasks[taskId].data[3] != TRUE)
     {
-        *gUnknown_0203CE54 = sub_80FDBEC;
+        gUnknown_0203CE54->unk0 = sub_80FDBEC;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -679,7 +659,7 @@ void sub_80FDD10(u8 taskId)
     {
         gUnknown_0203A0F4 = sub_80FDD74;
         gFieldCallback = MapPostLoadHook_UseItem;
-        *gUnknown_0203CE54 = CB2_ReturnToField;
+        gUnknown_0203CE54->unk0 = CB2_ReturnToField;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -1002,12 +982,12 @@ void sub_80FE54C(u8 taskId)
 {
     if (!InBattlePyramid())
     {
-        *gUnknown_0203CE54 = sub_81B89F0;
+        gUnknown_0203CE54->unk0 = sub_81B89F0;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
     {
-        *gUnknown_0203CF2C = sub_81B89F0;
+        gPyramidBagResources->callback2 = sub_81B89F0;
         sub_81C5B14(taskId);
     }
 }

@@ -951,7 +951,7 @@ void copy_tileset_patterns_to_vram2(struct Tileset const *tileset, u16 numTiles,
         if (!tileset->isCompressed)
             LoadBgTiles(2, tileset->tiles, numTiles * 32, offset);
         else
-            copy_decompressed_tile_data_to_vram_autofree(2, tileset->tiles, numTiles * 32, offset, 0);
+            DecompressAndLoadBgGfxUsingHeap(2, tileset->tiles, numTiles * 32, offset, 0);
     }
 }
 

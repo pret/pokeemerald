@@ -18,6 +18,7 @@
 #include "constants/maps.h"
 #include "constants/species.h"
 #include "constants/rgb.h"
+#include "constants/battle_frontier.h"
 #include "trade.h"
 #include "trainer_card.h"
 #include "overworld.h"
@@ -468,7 +469,7 @@ void sub_8012780(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.chosenLvl == 1)
+        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F00C4[gSpecialVar_0x8004];
         gUnknown_02022C2D = gUnknown_082F00C4[gSpecialVar_0x8004] >> 8;
@@ -1050,7 +1051,7 @@ void sub_80134E8(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.chosenLvl == 1)
+        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F0530[gSpecialVar_0x8004];
         sub_8010F84(gUnknown_02022C2C, 0, 0);

@@ -256,7 +256,7 @@ extern const u8 BattleScript_82DB87D[];
 extern const u8 BattleScript_82DB881[];
 extern const u8 BattleScript_82DB887[];
 extern const u8 BattleScript_82DB89D[];
-extern const u8 BattleScript_82DB8BE[];
+extern const u8 BattleScript_ArenaTurnBeginning[];
 extern const u8 BattleScript_82DB8E0[];
 extern const u8 BattleScript_82DB8F3[];
 extern const u8 BattleScript_82DB973[];

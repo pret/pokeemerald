@@ -7909,7 +7909,7 @@ bgid_upload_textbox_1: @ 8019938
 	lsls r2, 1
 	movs r3, 0
 	str r3, [sp]
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -9386,7 +9386,7 @@ sub_801A43C: @ 801A43C
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, =gWirelessInfoScreenTilemap
 	movs r0, 0x1
 	movs r2, 0

@@ -151,7 +151,7 @@ extern void TransferTilesetAnimsBuffer(void);
 extern bool32 sub_81D5F48(void);
 extern u8 GetCurrentTrainerHillMapId(void);
 extern bool8 warp0_in_pokecenter(void);
-extern void dp13_810BB8C(void);
+extern void ResetAllPicSprites(void);
 extern void FieldEffectActiveListClear(void);
 extern void SetUpFieldTasks(void);
 extern void sub_81BE6B8(void);
@@ -2149,7 +2149,7 @@ static void sub_8086988(u32 a1)
     ResetSpriteData();
     ResetPaletteFade();
     ScanlineEffect_Clear();
-    dp13_810BB8C();
+    ResetAllPicSprites();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
     if (!a1)
