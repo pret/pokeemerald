@@ -938,14 +938,14 @@ void StartMonSummaryAnimation(struct Sprite *sprite, u8 frontAnimId)
 
 void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
 {
-    u8 nature, taskId, animId, bank;
+    u8 nature, taskId, animId, battlerId;
 
     taskId = CreateTask(Task_HandleMonAnimation, 128);
     gTasks[taskId].tPtrLO = (u32)(sprite) >> 0x10;
     gTasks[taskId].tPtrHI = (u32)(sprite);
 
-    bank = sprite->data[0];
-    nature = GetNature(&gPlayerParty[gBattlerPartyIndexes[bank]]);
+    battlerId = sprite->data[0];
+    nature = GetNature(&gPlayerParty[gBattlerPartyIndexes[battlerId]]);
 
     animId = 3 * backAnimSet + sBackAnimNatureModTable[nature];
     gTasks[taskId].tAnimId = sBackAnimationIds[animId];

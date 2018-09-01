@@ -188,7 +188,7 @@ static bool8 sub_8083380(void);
 static void sub_808074C(void);
 static void Blender_PrintPlayerNames(void);
 static void sub_8080588(void);
-static void Blender_SetBankBerryData(u8 bank, u16 itemId);
+static void Blender_SetParticipantBerryData(u8 participantId, u16 itemId);
 static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s32 speed, s32 caseId);
 static void sub_8080DF8(void);
 static void sub_8082E84(void);
@@ -1391,7 +1391,7 @@ static void Blender_SetOpponentsBerryData(u16 playerBerryItemId, u8 playersNum, 
             if (var <= 4)
                 opponentBerryId -= 5;
         }
-        Blender_SetBankBerryData(i + 1, opponentBerryId + FIRST_BERRY_INDEX);
+        Blender_SetParticipantBerryData(i + 1, opponentBerryId + FIRST_BERRY_INDEX);
     }
 }
 
@@ -1454,7 +1454,7 @@ static void sub_80808D4(void)
     case 0:
         sub_800B4C0();
         sub_8080588();
-        Blender_SetBankBerryData(0, gSpecialVar_ItemId);
+        Blender_SetParticipantBerryData(0, gSpecialVar_ItemId);
         Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[0], gSpecialVar_ItemId);
         Blender_SetOpponentsBerryData(gSpecialVar_ItemId, sBerryBlenderData->playersNo, &sBerryBlenderData->blendedBerries[0]);
 
@@ -2956,10 +2956,10 @@ static void sub_8082F9C(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-static void Blender_SetBankBerryData(u8 bank, u16 itemId)
+static void Blender_SetParticipantBerryData(u8 participantId, u16 itemId)
 {
-    sBerryBlenderData->chosenItemId[bank] = itemId;
-    Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[bank], itemId);
+    sBerryBlenderData->chosenItemId[participantId] = itemId;
+    Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[participantId], itemId);
 }
 
 static void sub_8083010(struct Sprite* sprite)
