@@ -5,6 +5,7 @@
 #include "constants/moves.h"
 #include "constants/species.h"
 #include "constants/trainers.h"
+#include "constants/battle_ai.h"
 
 #include "data/trainer_parties.h"
 #include "data/text/trainer_class_names.h"
