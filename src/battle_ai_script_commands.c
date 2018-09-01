@@ -153,6 +153,8 @@ static void BattleAICmd_is_of_type(void);
 static void BattleAICmd_if_target_is_ally(void);
 static void BattleAICmd_if_flash_fired(void);
 static void BattleAICmd_if_holds_item(void);
+static void BattleAICmd_get_ally_chosen_move(void);
+static void BattleAICmd_if_has_no_attacking_moves(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -262,6 +264,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_check_ability,                              // 0x60
     BattleAICmd_if_flash_fired,                             // 0x61
     BattleAICmd_if_holds_item,                              // 0x62
+    BattleAICmd_get_ally_chosen_move,                       // 0x63
+    BattleAICmd_if_has_no_attacking_moves,                  // 0x64
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -379,7 +383,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
         else
            AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE || gTrainers[gTrainerBattleOpponent_A].doubleBattle)
             AI_THINKING_STRUCT->aiFlags |= AI_SCRIPT_DOUBLE_BATTLE; // Act smart in doubles and don't attack your partner.
 
         gBattleStruct->debugAIFlags = AI_THINKING_STRUCT->aiFlags;
@@ -2452,4 +2456,44 @@ static bool8 AIStackPop(void)
     {
         return FALSE;
     }
+}
+
+static void BattleAICmd_get_ally_chosen_move(void)
+{
+    u8 partnerBattler = BATTLE_PARTNER(sBattler_AI);
+    if (!IsBattlerAlive(partnerBattler) || !IsBattlerAIControlled(partnerBattler))
+        AI_THINKING_STRUCT->funcResult = 0;
+    else if (partnerBattler > sBattler_AI) // Battler with the lower id chooses the move first.
+        AI_THINKING_STRUCT->funcResult = 0;
+    else
+        AI_THINKING_STRUCT->funcResult = gBattleMons[partnerBattler].moves[gBattleStruct->chosenMovePositions[partnerBattler]];
+
+    gAIScriptPtr++;
+}
+
+static void BattleAICmd_if_has_no_attacking_moves(void)
+{
+    s32 i;
+    u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    if (IsBattlerAIControlled(battlerId))
+    {
+        for (i = 0; i < 4; i++)
+        {
+            if (gBattleMons[battlerId].moves[i] != 0 && gBattleMoves[gBattleMons[battlerId].moves[i]].power != 0)
+                break;
+        }
+    }
+    else
+    {
+        for (i = 0; i < 4; i++)
+        {
+            if (BATTLE_HISTORY->usedMoves[battlerId].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[battlerId].moves[i]].power != 0)
+                break;
+        }
+    }
+
+    if (i == 4)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
 }

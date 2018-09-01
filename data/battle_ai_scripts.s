@@ -2943,8 +2943,35 @@ BattleAIScript_82DDF7B:
 
 BattleAIScript_82DDFB3:
 	end
-
+	
+AI_ConsiderAllyChosenMove:
+	get_ally_chosen_move
+	if_equal 0, AI_ConsiderAllyChosenMoveRet
+	get_move_effect_from_result
+	if_equal EFFECT_HELPING_HAND, AI_PartnerChoseHelpingHand	
+AI_ConsiderAllyChosenMoveRet:
+	end
+	
+AI_PartnerChoseHelpingHand:
+	@ Do not use a status move if you know your move's power will be boosted
+	get_considered_move_power
+	if_equal 0, Score_Minus3
+	end
+	
+AI_ConsiderAllyKnownMoves:
+	@ If ally already chose a move, there is nothing to do here.
+	get_ally_chosen_move
+	if_not_equal 0, AI_Ret
+	if_move MOVE_HELPING_HAND, AI_HelpingHandInDoubles
+	end
+	
+AI_HelpingHandInDoubles:
+	if_has_no_attacking_moves AI_USER_PARTNER, Score_Minus3
+	end
+	
 AI_DoubleBattle:
+	call AI_ConsiderAllyChosenMove
+	call AI_ConsiderAllyKnownMoves
 	if_target_is_ally AI_TryOnAlly
 	if_move MOVE_SKILL_SWAP, BattleAIScript_82DE04B
 	get_curr_move_type

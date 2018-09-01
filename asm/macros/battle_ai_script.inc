@@ -559,6 +559,16 @@
 	.4byte \param2
 	.endm
 	
+	.macro get_ally_chosen_move bank
+	.byte 0x63
+	.endm
+	
+	.macro if_has_no_attacking_moves bank, param1
+	.byte 0x64
+	.byte \bank
+	.4byte \param1
+	.endm
+	
 @ useful script macros
 	.macro get_curr_move_type
 	get_type AI_TYPE_MOVE
