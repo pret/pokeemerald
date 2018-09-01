@@ -737,7 +737,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
     if (IsEnigmaBerryValid() == TRUE)
     {
-        for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+        for (i = 0; i < BERRY_NAME_LENGTH; i++)
             battleBerry->name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
         battleBerry->name[i] = EOS;
 
@@ -751,7 +751,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
     {
         const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY));
 
-        for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+        for (i = 0; i < BERRY_NAME_LENGTH; i++)
             battleBerry->name[i] = berryData->name[i];
         battleBerry->name[i] = EOS;
 
@@ -772,7 +772,7 @@ static void SetAllPlayersBerryData(void)
     {
         if (IsEnigmaBerryValid() == TRUE)
         {
-            for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+            for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
                 gEnigmaBerries[0].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
                 gEnigmaBerries[2].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
@@ -795,7 +795,7 @@ static void SetAllPlayersBerryData(void)
         {
             const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY));
 
-            for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+            for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
                 gEnigmaBerries[0].name[i] = berryData->name[i];
                 gEnigmaBerries[2].name[i] = berryData->name[i];
@@ -833,7 +833,7 @@ static void SetAllPlayersBerryData(void)
                 src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
                 battlerId = gLinkPlayers[i].id;
 
-                for (j = 0; j < BERRY_NAME_COUNT - 1; j++)
+                for (j = 0; j < BERRY_NAME_LENGTH; j++)
                     gEnigmaBerries[battlerId].name[j] = src->name[j];
                 gEnigmaBerries[battlerId].name[j] = EOS;
 
@@ -850,7 +850,7 @@ static void SetAllPlayersBerryData(void)
             {
                 src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
 
-                for (j = 0; j < BERRY_NAME_COUNT - 1; j++)
+                for (j = 0; j < BERRY_NAME_LENGTH; j++)
                 {
                     gEnigmaBerries[i].name[j] = src->name[j];
                     gEnigmaBerries[i + 2].name[j] = src->name[j];
@@ -3899,7 +3899,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     // Check all switch in items having effect from the fastest mon to slowest.
     while (gBattleStruct->switchInItemsCounter < gBattlersCount)
     {
-        if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter], 0) != 0)
+        if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter], FALSE))
             effect++;
 
         gBattleStruct->switchInItemsCounter++;

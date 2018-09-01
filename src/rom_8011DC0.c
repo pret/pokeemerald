@@ -40,7 +40,7 @@ struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;
     u8 needingPadding[3];
-    u8 playerName[PLAYER_NAME_LENGTH];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
 };
 
 struct UnkStruct_x1C

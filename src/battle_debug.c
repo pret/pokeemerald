@@ -275,8 +275,8 @@ static const struct BitfieldInfo sStatus3Bitfield[] =
 static const struct BitfieldInfo sAIBitfield[] =
 {
     {/*Check bad move*/ 1, 0},
-    {/*Viability*/ 1, 1},
-    {/*Try To Faint*/ 1, 2},
+    {/*Try To Faint*/ 1, 1},
+    {/*Viability*/ 1, 2},
     {/*Set up first turn*/ 1, 3},
     {/*Risky*/ 1, 4},
     {/*Prefer Strongest Move*/ 1, 5},
@@ -314,8 +314,8 @@ static const struct ListMenuItem sVariousListItems[] =
 static const struct ListMenuItem sAIListItems[] =
 {
     {sText_NoBadMoves, 0},
-    {sText_Viability, 1},
-    {sText_TryFaint, 2},
+    {sText_TryFaint, 1},
+    {sText_Viability, 2},
     {sText_SetUpFirstTurn, 3},
     {sText_Risky, 4},
     {sText_StrongestMove, 5},

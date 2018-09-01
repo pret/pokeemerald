@@ -12,7 +12,7 @@
 #define ABILITYEFFECT_ENDTURN                    0x1
 #define ABILITYEFFECT_MOVES_BLOCK                0x2
 #define ABILITYEFFECT_ABSORBING                  0x3
-#define ABILITYEFFECT_CONTACT                    0x4
+#define ABILITYEFFECT_MOVE_END                   0x4
 #define ABILITYEFFECT_IMMUNITY                   0x5
 #define ABILITYEFFECT_FORECAST                   0x6
 #define ABILITYEFFECT_SYNCHRONIZE                0x7
@@ -33,6 +33,8 @@
 #define ABILITY_ON_FIELD(abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, abilityId, 0, 0))
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
+#define ITEMEFFECT_MOVE_END                     0x3
+#define ITEMEFFECT_KINGSROCK_SHELLBELL          0x4
 
 #define WEATHER_HAS_EFFECT ((!ABILITY_ON_FIELD(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD(ABILITY_AIR_LOCK)))
 

@@ -6448,12 +6448,12 @@ static void CopyDomeTrainerName(u8 *dst, u16 trainerId)
     {
         if (trainerId == TRAINER_PLAYER)
         {
-            for (i = 0; i < OT_NAME_LENGTH; i++)
+            for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 dst[i] = gSaveBlock2Ptr->playerName[i];
         }
         else if (trainerId < 300)
         {
-            for (i = 0; i < 7; i++)
+            for (i = 0; i < FRONTIER_TRAINER_NAME_LENGTH; i++)
                 dst[i] = gFacilityTrainers[trainerId].trainerName[i];
         }
         dst[i] = EOS;
@@ -6474,7 +6474,7 @@ static void CopyDomeBrainTrainerName(u8 *dst)
 {
     s32 i;
 
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < FRONTIER_TRAINER_NAME_LENGTH; i++)
         dst[i] = gTrainers[TRAINER_TUCKER].trainerName[i];
     dst[i] = EOS;
 }

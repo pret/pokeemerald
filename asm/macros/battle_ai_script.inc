@@ -27,86 +27,86 @@
 	.byte \param0
 	.endm
 
-	.macro if_hp_less_than bank, param1, param2
+	.macro if_hp_less_than battler, param1, param2
 	.byte 0x5
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
 
-	.macro if_hp_more_than bank, param1, param2
+	.macro if_hp_more_than battler, param1, param2
 	.byte 0x6
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
 
-	.macro if_hp_equal bank, param1, param2
+	.macro if_hp_equal battler, param1, param2
 	.byte 0x7
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
 
-	.macro if_hp_not_equal bank, param1, param2
+	.macro if_hp_not_equal battler, param1, param2
 	.byte 0x8
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
 
-	.macro if_status bank, status1, param2
+	.macro if_status battler, status1, param2
 	.byte 0x9
-	.byte \bank
+	.byte \battler
 	.4byte \status1
 	.4byte \param2
 	.endm
 
-	.macro if_not_status bank, status1, param2
+	.macro if_not_status battler, status1, param2
 	.byte 0xa
-	.byte \bank
+	.byte \battler
 	.4byte \status1
 	.4byte \param2
 	.endm
 
-	.macro if_status2 bank, status2, param2
+	.macro if_status2 battler, status2, param2
 	.byte 0xb
-	.byte \bank
+	.byte \battler
 	.4byte \status2
 	.4byte \param2
 	.endm
 
-	.macro if_not_status2 bank, status2, param2
+	.macro if_not_status2 battler, status2, param2
 	.byte 0xc
-	.byte \bank
+	.byte \battler
 	.4byte \status2
 	.4byte \param2
 	.endm
 
-	.macro if_status3 bank, status3, param2
+	.macro if_status3 battler, status3, param2
 	.byte 0xd
-	.byte \bank
+	.byte \battler
 	.4byte \status3
 	.4byte \param2
 	.endm
 
-	.macro if_not_status3 bank, status3, param2
+	.macro if_not_status3 battler, status3, param2
 	.byte 0xe
-	.byte \bank
+	.byte \battler
 	.4byte \status3
 	.4byte \param2
 	.endm
 
-	.macro if_side_affecting bank, sidestatus, param2
+	.macro if_side_affecting battler, sidestatus, param2
 	.byte 0xf
-	.byte \bank
+	.byte \battler
 	.4byte \sidestatus
 	.4byte \param2
 	.endm
 
-	.macro if_not_side_affecting bank, sidestatus, param2
+	.macro if_not_side_affecting battler, sidestatus, param2
 	.byte 0x10
-	.byte \bank
+	.byte \battler
 	.4byte \sidestatus
 	.4byte \param2
 	.endm
@@ -222,9 +222,9 @@
 	.byte 0x24
 	.endm
 
-	.macro get_last_used_bank_move bank
+	.macro get_last_used_bank_move battler
 	.byte 0x25
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro if_equal_ param0, param1
@@ -259,9 +259,9 @@
 	.byte 0x2b
 	.endm
 
-	.macro count_usable_party_mons bank
+	.macro count_usable_party_mons battler
 	.byte 0x2c
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro get_considered_move
@@ -272,9 +272,9 @@
 	.byte 0x2e
 	.endm
 
-	.macro get_ability bank
+	.macro get_ability battler
 	.byte 0x2f
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro get_highest_type_effectiveness
@@ -295,16 +295,16 @@
 	.byte 0x33
 	.endm
 
-	.macro if_status_in_party bank, status1, param2
+	.macro if_status_in_party battler, status1, param2
 	.byte 0x34
-	.byte \bank
+	.byte \battler
 	.4byte \status1
 	.4byte \param2
 	.endm
 
-	.macro if_status_not_in_party bank, status1, param2
+	.macro if_status_not_in_party battler, status1, param2
 	.byte 0x35
-	.byte \bank
+	.byte \battler
 	.4byte \status1
 	.4byte \param2
 	.endm
@@ -325,33 +325,33 @@
 	.4byte \param1
 	.endm
 
-	.macro if_stat_level_less_than bank, stat, param2, param3
+	.macro if_stat_level_less_than battler, stat, param2, param3
 	.byte 0x39
-	.byte \bank
+	.byte \battler
 	.byte \stat
 	.byte \param2
 	.4byte \param3
 	.endm
 
-	.macro if_stat_level_more_than bank, stat, param2, param3
+	.macro if_stat_level_more_than battler, stat, param2, param3
 	.byte 0x3a
-	.byte \bank
+	.byte \battler
 	.byte \stat
 	.byte \param2
 	.4byte \param3
 	.endm
 
-	.macro if_stat_level_equal bank, stat, param2, param3
+	.macro if_stat_level_equal battler, stat, param2, param3
 	.byte 0x3b
-	.byte \bank
+	.byte \battler
 	.byte \stat
 	.byte \param2
 	.4byte \param3
 	.endm
 
-	.macro if_stat_level_not_equal bank, stat, param2, param3
+	.macro if_stat_level_not_equal battler, stat, param2, param3
 	.byte 0x3c
-	.byte \bank
+	.byte \battler
 	.byte \stat
 	.byte \param2
 	.4byte \param3
@@ -367,37 +367,37 @@
 	.4byte \param0
 	.endm
 
-	.macro if_has_move bank, param1, param2
+	.macro if_has_move battler, param1, param2
 	.byte 0x3f
-	.byte \bank
+	.byte \battler
 	.2byte \param1
 	.4byte \param2
 	.endm
 
-	.macro if_doesnt_have_move bank, param1, param2
+	.macro if_doesnt_have_move battler, param1, param2
 	.byte 0x40
-	.byte \bank
+	.byte \battler
 	.2byte \param1
 	.4byte \param2
 	.endm
 
-	.macro if_has_move_with_effect bank, param1, param2
+	.macro if_has_move_with_effect battler, param1, param2
 	.byte 0x41
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
 
-	.macro if_doesnt_have_move_with_effect bank, param1, param2
+	.macro if_doesnt_have_move_with_effect battler, param1, param2
 	.byte 0x42
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
 
-	.macro if_any_move_disabled_or_encored bank, param1, param2
+	.macro if_any_move_disabled_or_encored battler, param1, param2
 	.byte 0x43
-	.byte \bank
+	.byte \battler
 	.byte \param1
 	.4byte \param2
 	.endm
@@ -421,33 +421,33 @@
 	.byte 0x47
 	.endm
 
-	.macro get_hold_effect bank
+	.macro get_hold_effect battler
 	.byte 0x48
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro get_gender bank
+	.macro get_gender battler
 	.byte 0x49
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro is_first_turn_for bank
+	.macro is_first_turn_for battler
 	.byte 0x4a
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro get_stockpile_count bank
+	.macro get_stockpile_count battler
 	.byte 0x4b
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro is_double_battle
 	.byte 0x4c
 	.endm
 
-	.macro get_used_held_item bank
+	.macro get_used_held_item battler
 	.byte 0x4d
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro get_move_type_from_result
@@ -462,9 +462,9 @@
 	.byte 0x50
 	.endm
 
-	.macro get_protect_count bank
+	.macro get_protect_count battler
 	.byte 0x51
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro if_move_flag flag jumpptr
@@ -534,27 +534,27 @@
 	.4byte \param0
 	.endm
 
-	.macro is_of_type bank, type
+	.macro is_of_type battler, type
 	.byte 0x5f
-	.byte \bank
+	.byte \battler
 	.byte \type
 	.endm
 
-	.macro check_ability bank, ability
+	.macro check_ability battler, ability
 	.byte 0x60
-	.byte \bank
+	.byte \battler
 	.byte \ability
 	.endm
 
-	.macro if_flash_fired bank, param1
+	.macro if_flash_fired battler, param1
 	.byte 0x61
-	.byte \bank
+	.byte \battler
 	.4byte \param1
 	.endm
 
-	.macro if_holds_item bank, param1, param2
+	.macro if_holds_item battler, param1, param2
 	.byte 0x62
-	.byte \bank
+	.byte \battler
 	.2byte \param1
 	.4byte \param2
 	.endm
@@ -590,23 +590,23 @@
 	get_type AI_TYPE2_TARGET
 	.endm
 	
-	.macro if_ability bank, ability, ptr
-	check_ability \bank, \ability
+	.macro if_ability battler, ability, ptr
+	check_ability \battler, \ability
 	if_equal 1, \ptr
 	.endm
 	
-	.macro if_no_ability bank, ability, ptr
-	check_ability \bank, \ability
+	.macro if_no_ability battler, ability, ptr
+	check_ability \battler, \ability
 	if_equal 0, \ptr
 	.endm
 	
-	.macro if_type bank, type, ptr
-	is_of_type \bank, \type
+	.macro if_type battler, type, ptr
+	is_of_type \battler, \type
 	if_equal 1, \ptr
 	.endm
 
-	.macro if_no_type bank, type, ptr
-	is_of_type \bank, \type
+	.macro if_no_type battler, type, ptr
+	is_of_type \battler, \type
 	if_equal 0, \ptr
 	.endm
 	
@@ -628,12 +628,12 @@
 	if_equal 0, \ptr
 	.endm
 
-	.macro if_any_move_disabled bank, ptr
-	if_any_move_disabled_or_encored \bank, 0, \ptr
+	.macro if_any_move_disabled battler, ptr
+	if_any_move_disabled_or_encored \battler, 0, \ptr
 	.endm
 	
-	.macro if_any_move_encored bank, ptr
-	if_any_move_disabled_or_encored \bank, 1, \ptr
+	.macro if_any_move_encored battler, ptr
+	if_any_move_disabled_or_encored \battler, 1, \ptr
 	.endm
 	
 	.macro call_if_always_hit ptr

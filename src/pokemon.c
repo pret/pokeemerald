@@ -3835,7 +3835,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     {
         retVal = 0;
 
-        while (retVal < OT_NAME_LENGTH)
+        while (retVal < PLAYER_NAME_LENGTH)
         {
             data[retVal] = boxMon->otName[retVal];
             retVal++;
@@ -4203,7 +4203,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_OT_NAME:
     {
         s32 i;
-        for (i = 0; i < OT_NAME_LENGTH; i++)
+        for (i = 0; i < PLAYER_NAME_LENGTH; i++)
             boxMon->otName[i] = data[i];
         break;
     }
@@ -6502,7 +6502,7 @@ s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {
-    u8 otName[OT_NAME_LENGTH + 1];
+    u8 otName[PLAYER_NAME_LENGTH + 1];
     u32 otId;
     GetMonData(mon, MON_DATA_OT_NAME, otName);
     otId = GetMonData(mon, MON_DATA_OT_ID, 0);
