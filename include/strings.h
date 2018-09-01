@@ -151,8 +151,6 @@ extern const u8 gMenuText_Confirm[];
 extern const u8 gMenuText_Show[];
 extern const u8 gMenuText_Give2[];
 
-extern const u8 gText_Cancel2[];
-
 extern const u8 gText_WithdrawPokemon[];
 extern const u8 gText_WithdrawMonDescription[];
 extern const u8 gText_DepositPokemon[];
@@ -842,5 +840,10 @@ extern const u8 gText_OneDash[];
 extern const u8 gText_TwoDashes[];
 
 extern const u8 *const gReturnToXStringsTable2[];
+
+extern const u8 gText_CanIHelpWithAnythingElse[];
+extern const u8 gText_AnythingElseICanHelp[];
+extern const u8 gText_QuitShopping[];
+extern const u8 gText_PokedollarVar1[];
 
 #endif //GUARD_STRINGS_H

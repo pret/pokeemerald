@@ -5,862 +5,19 @@
 
 	.text
 
-	thumb_func_start CreateShopMenu
-@ s8 CreateShopMenu(s8 type)
-CreateShopMenu: @ 80DFA78
-	push {r4,r5,lr}
-	sub sp, 0x10
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl ScriptContext2_Enable
-	ldr r5, =gUnknown_02039F60
-	strb r4, [r5, 0xF]
-	cmp r4, 0
-	bne _080DFACC
-	ldr r0, =gUnknown_08589A38
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [sp]
-	str r1, [sp, 0x4]
-	ldr r4, =gUnknown_08589A10
-	adds r0, r4, 0
-	movs r1, 0x3
-	bl GetMaxWidthInMenuTable
-	lsls r0, 24
-	ldr r2, =0x00ffffff
-	ldr r1, [sp]
-	ands r1, r2
-	orrs r1, r0
-	str r1, [sp]
-	mov r0, sp
-	bl AddWindow
-	strb r0, [r5, 0xE]
-	str r4, [r5, 0x4]
-	movs r5, 0x3
-	b _080DFAF8
-	.pool
-_080DFACC:
-	ldr r0, =gUnknown_08589A38
-	ldr r1, [r0, 0xC]
-	ldr r0, [r0, 0x8]
-	str r0, [sp, 0x8]
-	str r1, [sp, 0xC]
-	ldr r4, =gUnknown_08589A28
-	adds r0, r4, 0
-	movs r1, 0x2
-	bl GetMaxWidthInMenuTable
-	lsls r0, 24
-	ldr r2, =0x00ffffff
-	ldr r1, [sp, 0x8]
-	ands r1, r2
-	orrs r1, r0
-	str r1, [sp, 0x8]
-	add r0, sp, 0x8
-	bl AddWindow
-	strb r0, [r5, 0xE]
-	str r4, [r5, 0x4]
-	movs r5, 0x2
-_080DFAF8:
-	ldr r4, =gUnknown_02039F60
-	ldrb r0, [r4, 0xE]
-	movs r1, 0
-	bl SetStandardWindowBorderStyle
-	ldrb r0, [r4, 0xE]
-	ldr r2, [r4, 0x4]
-	adds r1, r5, 0
-	bl PrintMenuTable
-	ldrb r0, [r4, 0xE]
-	adds r1, r5, 0
-	movs r2, 0
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
-	ldrb r0, [r4, 0xE]
-	bl PutWindowTilemap
-	ldrb r0, [r4, 0xE]
-	movs r1, 0x1
-	bl CopyWindowToVram
-	ldr r0, =Task_ShopMenu
-	movs r1, 0x8
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x10
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end CreateShopMenu
-
-	thumb_func_start SetShopMenuCallback
-@ void SetShopMenuCallback()
-SetShopMenuCallback: @ 80DFB4C
-	ldr r1, =gUnknown_02039F60
-	str r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end SetShopMenuCallback
-
-	thumb_func_start SetShopItemsForSale
-@ int SetShopItemsForSale(s16 *itemsForSale)
-SetShopItemsForSale: @ 80DFB58
-	push {lr}
-	adds r1, r0, 0
-	movs r2, 0
-	ldr r3, =gUnknown_02039F60
-	str r1, [r3, 0x8]
-	strh r2, [r3, 0xC]
-	ldrh r0, [r1]
-	cmp r0, 0
-	beq _080DFB80
-_080DFB6A:
-	ldrh r0, [r3, 0xC]
-	adds r0, 0x1
-	strh r0, [r3, 0xC]
-	adds r0, r2, 0x1
-	lsls r0, 16
-	lsrs r2, r0, 16
-	lsls r0, r2, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r0, 0
-	bne _080DFB6A
-_080DFB80:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SetShopItemsForSale
-
-	thumb_func_start Task_ShopMenu
-@ void Task_ShopMenu(u8 taskId)
-Task_ShopMenu: @ 80DFB88
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r5, r4, 0
-	bl Menu_ProcessInputNoWrapAround
-	lsls r0, 24
-	asrs r2, r0, 24
-	movs r0, 0x2
-	negs r0, r0
-	cmp r2, r0
-	beq _080DFBC4
-	adds r0, 0x1
-	cmp r2, r0
-	bne _080DFBB4
-	movs r0, 0x5
-	bl PlaySE
-	adds r0, r4, 0
-	bl HandleShopMenuQuit
-	b _080DFBC4
-_080DFBB4:
-	ldr r0, =gUnknown_02039F60
-	ldr r1, [r0, 0x4]
-	lsls r0, r2, 3
-	adds r0, r1
-	ldr r1, [r0, 0x4]
-	adds r0, r5, 0
-	bl _call_via_r1
-_080DFBC4:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Task_ShopMenu
-
-	thumb_func_start HandleShopMenuBuy
-@ void HandleShopMenuBuy(u8 taskId)
-HandleShopMenuBuy: @ 80DFBD0
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r2, =gTasks + 0x8
-	adds r4, r1, r2
-	ldr r3, =CB2_InitBuyMenu
-	lsrs r0, r3, 16
-	strh r0, [r4, 0x10]
-	strh r3, [r4, 0x12]
-	subs r2, 0x8
-	adds r1, r2
-	ldr r0, =Task_GoToBuyOrSellMenu
-	str r0, [r1]
-	movs r0, 0x1
-	movs r1, 0
-	bl FadeScreen
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end HandleShopMenuBuy
-
-	thumb_func_start HandleShopMenuSell
-@ void HandleShopMenuSell(u8 taskId)
-HandleShopMenuSell: @ 80DFC0C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r2, =gTasks + 0x8
-	adds r4, r1, r2
-	ldr r3, =CB2_GoToSellMenu
-	lsrs r0, r3, 16
-	strh r0, [r4, 0x10]
-	strh r3, [r4, 0x12]
-	subs r2, 0x8
-	adds r1, r2
-	ldr r0, =Task_GoToBuyOrSellMenu
-	str r0, [r1]
-	movs r0, 0x1
-	movs r1, 0
-	bl FadeScreen
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end HandleShopMenuSell
-
-	thumb_func_start CB2_ExitSellMenu
-@ int CB2_ExitSellMenu()
-CB2_ExitSellMenu: @ 80DFC48
-	push {lr}
-	ldr r0, =gFieldCallback
-	ldr r1, =MapPostLoadHook_ExitBuyOrSellMenu
-	str r1, [r0]
-	ldr r0, =CB2_ReturnToField
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CB2_ExitSellMenu
-
-	thumb_func_start HandleShopMenuQuit
-@ void HandleShopMenuQuit(u8 taskId)
-HandleShopMenuQuit: @ 80DFC68
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r5, =gUnknown_02039F60
-	ldrb r0, [r5, 0xE]
-	movs r1, 0x2
-	bl sub_8198070
-	ldrb r0, [r5, 0xE]
-	bl RemoveWindow
-	bl SaveRecordedItemPurchasesForTVShow
-	bl ScriptContext2_Disable
-	adds r0, r4, 0
-	bl DestroyTask
-	ldr r5, [r5]
-	cmp r5, 0
-	beq _080DFC98
-	bl _call_via_r5
-_080DFC98:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end HandleShopMenuQuit
-
-	thumb_func_start Task_GoToBuyOrSellMenu
-@ int Task_GoToBuyOrSellMenu(u8 taskId)
-Task_GoToBuyOrSellMenu: @ 80DFCA4
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080DFCD2
-	adds r0, r2, 0
-	bl DestroyTask
-	ldrh r0, [r4, 0x10]
-	lsls r0, 16
-	ldrh r1, [r4, 0x12]
-	orrs r0, r1
-	bl SetMainCallback2
-_080DFCD2:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Task_GoToBuyOrSellMenu
-
-	thumb_func_start MapPostLoadHook_ExitBuyOrSellMenu
-@ void MapPostLoadHook_ExitBuyOrSellMenu()
-MapPostLoadHook_ExitBuyOrSellMenu: @ 80DFCE0
-	push {lr}
-	bl pal_fill_black
-	ldr r0, =Task_ExitSellMenu
-	movs r1, 0x8
-	bl CreateTask
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end MapPostLoadHook_ExitBuyOrSellMenu
-
-	thumb_func_start Task_ExitSellMenu
-@ void Task_ExitSellMenu(u8 taskId)
-Task_ExitSellMenu: @ 80DFCF8
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r5, r4, 0
-	bl IsWeatherNotFadingIn
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080DFD36
-	ldr r0, =gUnknown_02039F60
-	ldrb r0, [r0, 0xF]
-	cmp r0, 0x2
-	bne _080DFD2C
-	ldr r1, =gText_CanIHelpWithAnythingElse
-	ldr r2, =ReturnToShopMenuAfterExitingSellMenu
-	adds r0, r4, 0
-	bl DisplayItemMessageOnField
-	b _080DFD36
-	.pool
-_080DFD2C:
-	ldr r1, =gText_AnythingElseICanHelp
-	ldr r2, =ReturnToShopMenuAfterExitingSellMenu
-	adds r0, r5, 0
-	bl DisplayItemMessageOnField
-_080DFD36:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Task_ExitSellMenu
-
-	thumb_func_start ReturnToShopMenuAfterExitingSellMenu
-@ void ReturnToShopMenuAfterExitingSellMenu(u8 taskId)
-ReturnToShopMenuAfterExitingSellMenu: @ 80DFD44
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, =gUnknown_02039F60
-	ldrb r0, [r0, 0xF]
-	bl CreateShopMenu
-	adds r0, r4, 0
-	bl DestroyTask
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ReturnToShopMenuAfterExitingSellMenu
-
-	thumb_func_start CB2_BuyMenu
-@ void CB2_BuyMenu()
-CB2_BuyMenu: @ 80DFD64
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end CB2_BuyMenu
-
-	thumb_func_start VBlankCB_BuyMenu
-@ void VBlankCB_BuyMenu()
-VBlankCB_BuyMenu: @ 80DFD80
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end VBlankCB_BuyMenu
-
-	thumb_func_start CB2_InitBuyMenu
-@ void CB2_InitBuyMenu()
-CB2_InitBuyMenu: @ 80DFD94
-	push {r4,r5,lr}
-	sub sp, 0xC
-	ldr r0, =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r5, r0, r1
-	ldrb r4, [r5]
-	cmp r4, 0
-	beq _080DFE20
-	cmp r4, 0x1
-	bne _080DFDAC
-	b _080DFEE4
-_080DFDAC:
-	bl BuyMenuDrawGraphics
-	bl BuyMenuAddScrollIndicatorArrows
-	ldr r0, =Task_BuyMenu
-	movs r1, 0x8
-	bl CreateTask
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, =gMultiuseListMenuTemplate
-	movs r1, 0
-	movs r2, 0
-	bl ListMenuInit
-	ldr r2, =gTasks
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r2
-	lsls r0, 24
-	lsrs r0, 24
-	movs r5, 0
-	strh r0, [r1, 0x16]
-	movs r4, 0x1
-	negs r4, r4
-	adds r0, r4, 0
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	str r5, [sp]
-	adds r0, r4, 0
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, =VBlankCB_BuyMenu
-	bl SetVBlankCallback
-	ldr r0, =CB2_BuyMenu
-	bl SetMainCallback2
-	b _080DFEF4
-	.pool
-_080DFE20:
-	bl SetVBlankHBlankCallbacksToNull
-	str r4, [sp, 0x8]
-	movs r1, 0xE0
-	lsls r1, 19
-	ldr r2, =0x01000100
-	add r0, sp, 0x8
-	bl CpuFastSet
-	bl ScanlineEffect_Stop
-	bl reset_temp_tile_data_buffers
-	bl FreeAllSpritePalettes
-	bl ResetPaletteFade
-	bl ResetSpriteData
-	bl ResetTasks
-	bl clear_scheduled_bg_copies_to_vram
-	ldr r4, =gUnknown_02039F70
-	ldr r0, =0x000020b0
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r1, =0x0000200b
-	adds r0, r1
-	movs r1, 0xFF
-	strb r1, [r0]
-	ldr r0, [r4]
-	ldr r1, =0x0000200d
-	adds r0, r1
-	movs r1, 0x1
-	negs r1, r1
-	strb r1, [r0]
-	ldr r0, [r4]
-	ldr r1, =0x0000200e
-	adds r0, r1
-	movs r1, 0x1
-	negs r1, r1
-	strb r1, [r0]
-	bl BuyMenuBuildListMenuTemplate
-	bl BuyMenuInitBgs
-	movs r4, 0x20
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect_Palette0
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect_Palette0
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	movs r0, 0x2
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect_Palette0
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	movs r0, 0x3
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect_Palette0
-	bl BuyMenuInitWindows
-	bl BuyMenuDecompressBgGraphics
-	b _080DFEEE
-	.pool
-_080DFEE4:
-	bl free_temp_tile_data_buffers_if_possible
-	lsls r0, 24
-	cmp r0, 0
-	bne _080DFEF4
-_080DFEEE:
-	ldrb r0, [r5]
-	adds r0, 0x1
-	strb r0, [r5]
-_080DFEF4:
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end CB2_InitBuyMenu
-
-	thumb_func_start BuyMenuFreeMemory
-@ void BuyMenuFreeMemory()
-BuyMenuFreeMemory: @ 80DFEFC
-	push {lr}
-	ldr r0, =gUnknown_02039F70
-	ldr r0, [r0]
-	bl Free
-	ldr r0, =gUnknown_02039F74
-	ldr r0, [r0]
-	bl Free
-	ldr r0, =gUnknown_02039F78
-	ldr r0, [r0]
-	bl Free
-	bl FreeAllWindowBuffers
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BuyMenuFreeMemory
-
-	thumb_func_start BuyMenuBuildListMenuTemplate
-@ void BuyMenuBuildListMenuTemplate()
-BuyMenuBuildListMenuTemplate: @ 80DFF2C
-	push {r4-r7,lr}
-	ldr r7, =gUnknown_02039F74
-	ldr r4, =gUnknown_02039F60
-	ldrh r0, [r4, 0xC]
-	adds r0, 0x1
-	lsls r0, 3
-	bl Alloc
-	str r0, [r7]
-	ldr r5, =gUnknown_02039F78
-	ldrh r0, [r4, 0xC]
-	adds r0, 0x1
-	lsls r0, 4
-	bl Alloc
-	str r0, [r5]
-	movs r6, 0
-	ldrh r0, [r4, 0xC]
-	cmp r6, r0
-	bcs _080DFF78
-_080DFF54:
-	lsls r1, r6, 3
-	ldr r0, [r7]
-	adds r0, r1
-	ldr r2, [r4, 0x8]
-	lsls r1, r6, 1
-	adds r1, r2
-	ldrh r1, [r1]
-	lsls r3, r6, 4
-	ldr r2, [r5]
-	adds r2, r3
-	bl BuyMenuSetListEntry
-	adds r0, r6, 0x1
-	lsls r0, 16
-	lsrs r6, r0, 16
-	ldrh r2, [r4, 0xC]
-	cmp r6, r2
-	bcc _080DFF54
-_080DFF78:
-	ldr r4, =gUnknown_02039F78
-	lsls r5, r6, 4
-	ldr r0, [r4]
-	adds r0, r5
-	ldr r1, =gText_Cancel2
-	bl StringCopy
-	ldr r2, =gUnknown_02039F74
-	ldr r0, [r2]
-	lsls r1, r6, 3
-	adds r1, r0
-	ldr r0, [r4]
-	adds r0, r5
-	str r0, [r1]
-	movs r0, 0x2
-	negs r0, r0
-	str r0, [r1, 0x4]
-	ldr r3, =gMultiuseListMenuTemplate
-	adds r1, r3, 0
-	ldr r0, =gUnknown_08589A48
-	ldm r0!, {r4-r6}
-	stm r1!, {r4-r6}
-	ldm r0!, {r4-r6}
-	stm r1!, {r4-r6}
-	ldr r0, [r2]
-	str r0, [r3]
-	ldr r0, =gUnknown_02039F60
-	ldrh r0, [r0, 0xC]
-	adds r1, r0, 0x1
-	strh r1, [r3, 0xC]
-	lsls r0, r1, 16
-	lsrs r0, 16
-	cmp r0, 0x8
-	bls _080DFFDC
-	movs r0, 0x8
-	strh r0, [r3, 0xE]
-	b _080DFFDE
-	.pool
-_080DFFDC:
-	strh r1, [r3, 0xE]
-_080DFFDE:
-	ldr r0, =gUnknown_02039F70
-	ldr r0, [r0]
-	ldr r1, =gMultiuseListMenuTemplate
-	ldrh r1, [r1, 0xE]
-	ldr r2, =0x00002004
-	adds r0, r2
-	strh r1, [r0]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BuyMenuBuildListMenuTemplate
-
-	thumb_func_start BuyMenuSetListEntry
-@ void BuyMenuSetListEntry(struct ListMenuEntry *entry, u16 code, u8 *str)
-BuyMenuSetListEntry: @ 80E0000
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	adds r5, r2, 0
-	lsls r1, 16
-	lsrs r4, r1, 16
-	ldr r0, =gUnknown_02039F60
-	ldrb r0, [r0, 0xF]
-	cmp r0, 0
-	bne _080E0020
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl CopyItemName
-	b _080E002C
-	.pool
-_080E0020:
-	lsls r1, r4, 5
-	ldr r0, =gDecorations + 1
-	adds r1, r0
-	adds r0, r5, 0
-	bl StringCopy
-_080E002C:
-	str r5, [r6]
-	str r4, [r6, 0x4]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BuyMenuSetListEntry
-
-	thumb_func_start BuyMenuPrintItemDescriptionAndShowItemIcon
-@ void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 menuEntryCode, bool8 isInitialSelection, struct ListMenu *listMenu)
-BuyMenuPrintItemDescriptionAndShowItemIcon: @ 80E003C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	adds r7, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	cmp r1, 0x1
-	beq _080E0054
-	movs r0, 0x5
-	bl PlaySE
-_080E0054:
-	movs r0, 0x2
-	negs r0, r0
-	cmp r7, r0
-	beq _080E0078
-	lsls r4, r7, 16
-	lsrs r0, r4, 16
-	ldr r1, =gUnknown_02039F70
-	ldr r1, [r1]
-	ldr r2, =0x0000200c
-	adds r1, r2
-	ldrb r1, [r1]
-	bl BuyMenuAddItemIcon
-	b _080E008A
-	.pool
-_080E0078:
-	ldr r0, =0x0000ffff
-	ldr r1, =gUnknown_02039F70
-	ldr r1, [r1]
-	ldr r2, =0x0000200c
-	adds r1, r2
-	ldrb r1, [r1]
-	bl BuyMenuAddItemIcon
-	lsls r4, r7, 16
-_080E008A:
-	lsrs r4, 16
-	mov r8, r4
-	ldr r6, =gUnknown_02039F70
-	ldr r0, [r6]
-	ldr r5, =0x0000200c
-	adds r0, r5
-	ldrb r0, [r0]
-	movs r4, 0x1
-	adds r1, r4, 0
-	eors r1, r0
-	mov r0, r8
-	bl BuyMenuRemoveItemIcon
-	ldr r1, [r6]
-	adds r1, r5
-	ldrb r0, [r1]
-	eors r0, r4
-	strb r0, [r1]
-	movs r0, 0x2
-	negs r0, r0
-	cmp r7, r0
-	beq _080E00E8
-	ldr r0, =gUnknown_02039F60
-	ldrb r0, [r0, 0xF]
-	cmp r0, 0
-	bne _080E00D8
-	mov r0, r8
-	bl ItemId_GetDescription
-	adds r4, r0, 0
-	b _080E00EA
-	.pool
-_080E00D8:
-	ldr r0, =gDecorations
-	lsls r1, r7, 5
-	adds r0, 0x18
-	adds r1, r0
-	ldr r4, [r1]
-	b _080E00EA
-	.pool
-_080E00E8:
-	ldr r4, =gText_QuitShopping
-_080E00EA:
-	movs r0, 0x2
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	movs r0, 0
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0x2
-	adds r1, r4, 0
-	movs r2, 0x3
-	movs r3, 0x1
-	bl BuyMenuPrint
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BuyMenuPrintItemDescriptionAndShowItemIcon
-
-	thumb_func_start BuyMenuPrintPriceInList
-@ void BuyMenuPrintPriceInList(u8 windowId, s32 menuEntryCode, u8 y)
-BuyMenuPrintPriceInList: @ 80E0114
-	push {r4-r7,lr}
-	sub sp, 0x14
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r2, 24
-	lsrs r7, r2, 24
-	movs r0, 0x2
-	negs r0, r0
-	cmp r1, r0
-	beq _080E01AC
-	ldr r0, =gUnknown_02039F60
-	ldrb r0, [r0, 0xF]
-	cmp r0, 0
-	bne _080E0164
-	ldr r5, =gStringVar1
-	lsls r0, r1, 16
-	lsrs r0, 16
-	bl ItemId_GetPrice
-	adds r4, r0, 0
-	movs r0, 0x1
-	bl GetPriceReduction
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r0, 24
-	lsrs r0, 24
-	asrs r4, r0
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0
-	movs r3, 0x5
-	bl ConvertIntToDecimalStringN
-	b _080E0176
-	.pool
-_080E0164:
-	ldr r0, =gStringVar1
-	ldr r2, =gDecorations
-	lsls r1, 5
-	adds r1, r2
-	ldrh r1, [r1, 0x14]
-	movs r2, 0
-	movs r3, 0x5
-	bl ConvertIntToDecimalStringN
-_080E0176:
-	ldr r4, =gStringVar4
-	ldr r1, =gText_PokedollarVar1
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	movs r0, 0x7
-	adds r1, r4, 0
-	movs r2, 0x78
-	bl GetStringRightAlignXOffset
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	movs r0, 0
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_08589AB3
-	str r0, [sp, 0x8]
-	movs r0, 0x1
-	negs r0, r0
-	str r0, [sp, 0xC]
-	str r4, [sp, 0x10]
-	adds r0, r6, 0
-	movs r1, 0x7
-	adds r3, r7, 0
-	bl AddTextPrinterParameterized2
-_080E01AC:
-	add sp, 0x14
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BuyMenuPrintPriceInList
-
 	thumb_func_start BuyMenuAddScrollIndicatorArrows
 @ void BuyMenuAddScrollIndicatorArrows()
 BuyMenuAddScrollIndicatorArrows: @ 80E01C8
 	push {r4,r5,lr}
 	sub sp, 0x10
-	ldr r5, =gUnknown_02039F70
+	ldr r5, =gShopDataPtr
 	ldr r2, [r5]
 	ldr r4, =0x0000200b
 	adds r0, r2, r4
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	bne _080E0206
-	ldr r0, =gUnknown_02039F60
+	ldr r0, =gMartInfo
 	ldrh r1, [r0, 0xC]
 	adds r0, r1, 0x1
 	cmp r0, 0x8
@@ -893,7 +50,7 @@ _080E0206:
 @ void BuyMenuRemoveScrollIndicatorArrows()
 BuyMenuRemoveScrollIndicatorArrows: @ 80E0224
 	push {r4,lr}
-	ldr r4, =gUnknown_02039F70
+	ldr r4, =gShopDataPtr
 	ldr r0, [r4]
 	ldr r2, =0x0000200b
 	adds r1, r0, r2
@@ -950,7 +107,7 @@ BuyMenuAddItemIcon: @ 80E0284
 	lsrs r2, r0, 16
 	lsls r1, 24
 	lsrs r3, r1, 24
-	ldr r0, =gUnknown_02039F70
+	ldr r0, =gShopDataPtr
 	ldr r4, =0x0000200d
 	adds r1, r3, r4
 	ldr r0, [r0]
@@ -958,7 +115,7 @@ BuyMenuAddItemIcon: @ 80E0284
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	bne _080E0310
-	ldr r0, =gUnknown_02039F60
+	ldr r0, =gMartInfo
 	ldrb r0, [r0, 0xF]
 	cmp r0, 0
 	beq _080E02AE
@@ -1016,7 +173,7 @@ BuyMenuRemoveItemIcon: @ 80E031C
 	push {r4,r5,lr}
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r0, =gUnknown_02039F70
+	ldr r0, =gShopDataPtr
 	ldr r2, =0x0000200d
 	adds r1, r4, r2
 	ldr r0, [r0]
@@ -1056,7 +213,7 @@ BuyMenuInitBgs: @ 80E036C
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
-	ldr r4, =gUnknown_02039F70
+	ldr r4, =gShopDataPtr
 	ldr r1, [r4]
 	movs r0, 0x80
 	lsls r0, 4
@@ -1134,7 +291,7 @@ BuyMenuDecompressBgGraphics: @ 80E0424
 	movs r0, 0x1
 	bl decompress_and_copy_tile_data_to_vram
 	ldr r0, =gBuyMenuFrame_Tilemap
-	ldr r1, =gUnknown_02039F70
+	ldr r1, =gShopDataPtr
 	ldr r1, [r1]
 	bl LZDecompressWram
 	ldr r0, =gMenuMoneyPal
@@ -1427,7 +584,7 @@ _080E0690:
 	beq _080E06F8
 	b _080E0728
 _080E0696:
-	ldr r6, =gUnknown_02039F70
+	ldr r6, =gShopDataPtr
 	ldr r0, [r6]
 	movs r2, 0xC0
 	lsls r2, 5
@@ -1446,7 +603,7 @@ _080E0696:
 	b _080E06E2
 	.pool
 _080E06C0:
-	ldr r6, =gUnknown_02039F70
+	ldr r6, =gShopDataPtr
 	ldr r0, [r6]
 	movs r2, 0x80
 	lsls r2, 5
@@ -1472,7 +629,7 @@ _080E06E2:
 	b _080E0728
 	.pool
 _080E06F8:
-	ldr r6, =gUnknown_02039F70
+	ldr r6, =gShopDataPtr
 	ldr r0, [r6]
 	movs r2, 0x80
 	lsls r2, 5
@@ -1542,7 +699,7 @@ BuyMenuCollectEventObjectData: @ 80E075C
 	adds r1, r4, 0
 	bl GetXYCoordsOneStepInFrontOfPlayer
 	movs r7, 0
-	ldr r5, =gUnknown_02039F70
+	ldr r5, =gShopDataPtr
 	ldr r3, =0x00002010
 	movs r2, 0x10
 _080E0780:
@@ -1560,7 +717,7 @@ _080E0780:
 	bls _080E0780
 	movs r7, 0
 	str r4, [sp, 0x8]
-	ldr r1, =gUnknown_02039F70
+	ldr r1, =gShopDataPtr
 	mov r9, r1
 	mov r2, sp
 	str r2, [sp, 0x4]
@@ -1728,7 +885,7 @@ BuyMenuDrawEventObjects: @ 80E08F0
 	push {r5-r7}
 	sub sp, 0x4
 	movs r7, 0
-	ldr r0, =gUnknown_02039F70
+	ldr r0, =gShopDataPtr
 	mov r8, r0
 	ldr r1, =gEventObjects
 	mov r10, r1
@@ -1883,7 +1040,7 @@ _080E0A3A:
 @ void BuyMenuCopyMenuBgToBg1TilemapBuffer()
 BuyMenuCopyMenuBgToBg1TilemapBuffer: @ 80E0A40
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_02039F70
+	ldr r0, =gShopDataPtr
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 4
@@ -1921,7 +1078,7 @@ _080E0A6A:
 @ bool8 BuyMenuCheckForOverlapWithMenuBg(u16 x, u16 y)
 BuyMenuCheckForOverlapWithMenuBg: @ 80E0A88
 	push {lr}
-	ldr r2, =gUnknown_02039F70
+	ldr r2, =gShopDataPtr
 	ldr r2, [r2]
 	lsls r0, 1
 	lsls r1, 6
@@ -1979,7 +1136,7 @@ _080E0AEA:
 	bl ListMenuHandleInputGetItemId
 	adds r5, r0, 0
 	ldrb r0, [r4, 0xE]
-	ldr r7, =gUnknown_02039F70
+	ldr r7, =gShopDataPtr
 	ldr r2, [r7]
 	ldr r3, =0x00002008
 	adds r1, r2, r3
@@ -2011,7 +1168,7 @@ _080E0B32:
 	ldrb r0, [r4, 0xE]
 	movs r1, 0x2
 	bl BuyMenuPrintCursor
-	ldr r0, =gUnknown_02039F60
+	ldr r0, =gMartInfo
 	ldrb r0, [r0, 0xF]
 	cmp r0, 0
 	bne _080E0B80
@@ -2049,7 +1206,7 @@ _080E0B92:
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	ldr r2, =gUnknown_02039F70
+	ldr r2, =gShopDataPtr
 	mov r8, r2
 	ldr r1, [r2]
 	movs r7, 0x80
@@ -2065,7 +1222,7 @@ _080E0B92:
 	b _080E0C28
 	.pool
 _080E0BD0:
-	ldr r4, =gUnknown_02039F60
+	ldr r4, =gMartInfo
 	ldrb r0, [r4, 0xF]
 	cmp r0, 0
 	bne _080E0C38
@@ -2199,7 +1356,7 @@ Task_BuyHowManyDialogueInit: @ 80E0CA4
 	lsls r1, 3
 	adds r0, r1
 	bl GetMoney
-	ldr r1, =gUnknown_02039F70
+	ldr r1, =gShopDataPtr
 	ldr r4, [r1]
 	movs r2, 0x80
 	lsls r2, 6
@@ -2248,7 +1405,7 @@ Task_BuyHowManyDialogueHandleInput: @ 80E0D88
 	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	adds r0, r5, 0x2
-	ldr r7, =gUnknown_02039F70
+	ldr r7, =gShopDataPtr
 	ldr r1, [r7]
 	ldr r2, =0x0000200a
 	adds r1, r2
@@ -2389,7 +1546,7 @@ BuyMenuTryMakePurchase: @ 80E0EDC
 	adds r4, r0, r1
 	movs r0, 0x1
 	bl PutWindowTilemap
-	ldr r6, =gUnknown_02039F60
+	ldr r6, =gMartInfo
 	ldrb r0, [r6, 0xF]
 	cmp r0, 0
 	bne _080E0F40
@@ -2459,7 +1616,7 @@ BuyMenuSubtractMoney: @ 80E0F88
 	movs r4, 0x92
 	lsls r4, 3
 	adds r0, r4
-	ldr r1, =gUnknown_02039F70
+	ldr r1, =gShopDataPtr
 	ldr r1, [r1]
 	movs r2, 0x80
 	lsls r2, 6
@@ -2475,7 +1632,7 @@ BuyMenuSubtractMoney: @ 80E0F88
 	movs r0, 0
 	movs r2, 0
 	bl PrintMoneyAmountInMoneyBox
-	ldr r0, =gUnknown_02039F60
+	ldr r0, =gMartInfo
 	ldrb r0, [r0, 0xF]
 	cmp r0, 0
 	bne _080E0FF0
@@ -2623,7 +1780,7 @@ BuyMenuPrintItemQuantityAndPrice: @ 80E10EC
 	movs r0, 0x4
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_02039F70
+	ldr r0, =gShopDataPtr
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 6
