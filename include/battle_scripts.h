@@ -207,6 +207,7 @@ extern const u8 BattleScript_ActionSelectionItemsCantBeUsed[];
 extern const u8 BattleScript_ArenaTurnBeginning[];
 extern const u8 BattleScript_82DB881[];
 extern const u8 BattleScript_82DB8F3[];
+extern const u8 BattleScript_82DAA0B[];
 extern const u8 BattleScript_AskIfWantsToForfeitMatch[];
 extern const u8 BattleScript_PrintPlayerForfeited[];
 extern const u8 BattleScript_PrintPlayerForfeitedLinkBattle[];

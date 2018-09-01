@@ -368,7 +368,7 @@ static void ClearDaycareMonMail(struct DayCareMail *mail)
 {
     s32 i;
 
-    for (i = 0; i < OT_NAME_LENGTH + 1; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
         mail->OT_name[i] = 0;
     for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
         mail->monName[i] = 0;

@@ -1354,7 +1354,7 @@ bool8 sub_80EA904(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
 {
     u8 i;
 
-    for (i = 0; i < OT_NAME_LENGTH && (sbr1->trainerName[i] != EOS || sbr2->trainerName[i] != EOS); i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH && (sbr1->trainerName[i] != EOS || sbr2->trainerName[i] != EOS); i++)
     {
         if (sbr1->trainerName[i] != sbr2->trainerName[i])
         {
@@ -1509,7 +1509,7 @@ bool8 DoesSecretBaseBelongToPlayer(struct SecretBaseRecord *secretBase)
             return FALSE;
     }
 
-    for (i = 0; i < OT_NAME_LENGTH && (secretBase->trainerName[i] != EOS || gSaveBlock2Ptr->playerName[i] != EOS); i ++)
+    for (i = 0; i < PLAYER_NAME_LENGTH && (secretBase->trainerName[i] != EOS || gSaveBlock2Ptr->playerName[i] != EOS); i ++)
     {
         if (secretBase->trainerName[i] != gSaveBlock2Ptr->playerName[i])
             return FALSE;

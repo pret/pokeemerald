@@ -51,7 +51,7 @@ enum
 struct BlenderBerry
 {
     u16 itemId;
-    u8 name[BERRY_NAME_COUNT];
+    u8 name[BERRY_NAME_LENGTH + 1];
     u8 flavors[FLAVOR_COUNT];
     u8 smoothness;
 };
