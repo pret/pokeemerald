@@ -159,7 +159,6 @@ extern void sub_80AAFA4(void);
 extern void ShowStartMenu(void);
 extern void sub_80AEE84(void);
 extern void mapldr_default(void);
-extern void npc_paltag_set_load(u8);
 extern void sub_8088B3C(u16, u16);
 extern bool32 sub_800F0B8(void);
 extern bool32 sub_8009F3C(void);
@@ -2153,9 +2152,9 @@ static void sub_8086988(u32 a1)
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
     if (!a1)
-        npc_paltag_set_load(0);
+        InitEventObjectPalettes(0);
     else
-        npc_paltag_set_load(1);
+        InitEventObjectPalettes(1);
 
     FieldEffectActiveListClear();
     sub_80AAFA4();

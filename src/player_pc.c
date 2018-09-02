@@ -558,7 +558,7 @@ static void ItemStorage_WithdrawToss_Helper(u8 taskId, bool8 toss)
     playerPCItemPageInfo.scrollIndicatorId = 0xFF;
     ItemStorage_SetItemAndMailCount(taskId);
     sub_816BC14();
-    gpu_pal_allocator_reset__manage_upper_four();
+    FreeAndReserveObjectSpritePalettes();
     LoadListMenuArrowsGfx();
     sub_8122344(gUnknown_0203BCC4->spriteIds, 7);
     sub_8197434(0,0);

@@ -26,9 +26,9 @@
 
 // this file was known as evobjmv.c in Game Freak's original source
 
-extern u8 gUnknown_020375B4;
-extern u16 gUnknown_020375B6;
-extern struct LockedAnimEventObjects *gLockedAnimEventObjects;
+EWRAM_DATA u8 sCurrentReflectionType = 0;
+EWRAM_DATA u16 sCurrentSpecialObjectPaletteTag = 0;
+EWRAM_DATA struct LockedAnimEventObjects *gLockedAnimEventObjects = {0};
 
 static void MoveCoordsInDirection(u32, s16 *, s16 *, s16, s16);
 static bool8 EventObjectExecSingleMovementAction(struct EventObject *, struct Sprite *);
@@ -102,7 +102,7 @@ static struct EventObjectTemplate *FindEventObjectTemplateByLocalId(u8 localId, 
 static void ClearEventObjectMovement(struct EventObject *, struct Sprite *);
 static void EventObjectSetSingleMovement(struct EventObject *, struct Sprite *, u8);
 
-const u8 gUnknown_084975C4[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
+const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
 const struct SpriteTemplate gCameraSpriteTemplate = {0, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject};
 
@@ -376,7 +376,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #include "data/field_event_obj/event_object_subsprites.h"
 #include "data/field_event_obj/event_object_graphics_info.h"
 
-const struct SpritePalette gUnknown_0850BBC8[] = {
+const struct SpritePalette sEventObjectSpritePalettes[] = {
     {gEventObjectPalette0,  0x1103},
     {gEventObjectPalette1,  0x1104},
     {gEventObjectPalette2,  0x1105},
@@ -415,7 +415,7 @@ const struct SpritePalette gUnknown_0850BBC8[] = {
     {NULL,                  0x0000},
 };
 
-const u16 Unknown_0850BCE8[] = {
+const u16 gPlayerReflectionPaletteTags[] = {
     0x1101,
     0x1101,
     0x1101,
@@ -429,115 +429,115 @@ const u16 Unknown_0850BCF0[] = {
     0x1111,
 };
 
-const u16 Unknown_0850BCF8[] = {
+const u16 gPlayerUnderwaterReflectionPaletteTags[] = {
     0x1115,
     0x1115,
     0x1115,
     0x1115,
 };
 
-const struct PairedPalettes gUnknown_0850BD00[] = {
-    {0x1100, Unknown_0850BCE8},
+const struct PairedPalettes gPlayerReflectionPaletteSets[] = {
+    {0x1100, gPlayerReflectionPaletteTags},
     {0x1110, Unknown_0850BCF0},
-    {0x1115, Unknown_0850BCF8},
+    {0x1115, gPlayerUnderwaterReflectionPaletteTags},
     {0x11FF, NULL},
 };
 
-const u16 Unknown_0850BD20[] = {
+const u16 gQuintyPlumpReflectionPaletteTags[] = {
     0x110C,
     0x110C,
     0x110C,
     0x110C,
 };
 
-const u16 Unknown_0850BD28[] = {
+const u16 gTruckReflectionPaletteTags[] = {
     0x110D,
     0x110D,
     0x110D,
     0x110D,
 };
 
-const u16 Unknown_0850BD30[] = {
+const u16 gVigorothMoverReflectionPaletteTags[] = {
     0x110E,
     0x110E,
     0x110E,
     0x110E,
 };
 
-const u16 Unknown_0850BD38[] = {
+const u16 gMovingBoxReflectionPaletteTags[] = {
     0x1112,
     0x1112,
     0x1112,
     0x1112,
 };
 
-const u16 Unknown_0850BD40[] = {
+const u16 gCableCarReflectionPaletteTags[] = {
     0x1113,
     0x1113,
     0x1113,
     0x1113,
 };
 
-const u16 Unknown_0850BD48[] = {
+const u16 gSSTidalReflectionPaletteTags[] = {
     0x1114,
     0x1114,
     0x1114,
     0x1114,
 };
 
-const u16 Unknown_0850BD50[] = {
+const u16 gSubmarineShadowReflectionPaletteTags[] = {
     0x111B,
     0x111B,
     0x111B,
     0x111B,
 };
 
-const u16 Unknown_0850BD58[] = {
+const u16 Unknown_0850BD58[] = { // Kyogre2?
     0x1117,
     0x1117,
     0x1117,
     0x1117,
 };
 
-const u16 Unknown_0850BD60[] = {
+const u16 Unknown_0850BD60[] = { // Groudon2?
     0x1119,
     0x1119,
     0x1119,
     0x1119,
 };
 
-const u16 Unknown_0850BD68[] = {
+const u16 Unknown_0850BD68[] = { // Invisible Keckleon?
     0x1109,
     0x1109,
     0x1109,
     0x1109,
 };
 
-const u16 Unknown_0850BD70[] = {
+const u16 gRedLeafReflectionPaletteTags[] = {
     0x111D,
     0x111D,
     0x111D,
     0x111D,
 };
 
-const struct PairedPalettes gUnknown_0850BD78[] = {
-    {4352, Unknown_0850BCE8},
+const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
+    {4352, gPlayerReflectionPaletteTags},
     {4368, Unknown_0850BCF0},
-    {4363, Unknown_0850BD20},
-    {4365, Unknown_0850BD28},
-    {4366, Unknown_0850BD30},
-    {4370, Unknown_0850BD38},
-    {4371, Unknown_0850BD40},
-    {4372, Unknown_0850BD48},
+    {4363, gQuintyPlumpReflectionPaletteTags},
+    {4365, gTruckReflectionPaletteTags},
+    {4366, gVigorothMoverReflectionPaletteTags},
+    {4370, gMovingBoxReflectionPaletteTags},
+    {4371, gCableCarReflectionPaletteTags},
+    {4372, gSSTidalReflectionPaletteTags},
     {4374, Unknown_0850BD58},
     {4376, Unknown_0850BD60},
     {4357, Unknown_0850BD68},
-    {4379, Unknown_0850BD50},
-    {4381, Unknown_0850BD70},
+    {4379, gSubmarineShadowReflectionPaletteTags},
+    {4381, gRedLeafReflectionPaletteTags},
     {4607, NULL},
 };
 
-const u16 gUnknown_0850BDE8[] = {
+const u16 gObjectPaletteTags0[] = {
     0x1100,
     0x1101,
     0x1103,
@@ -550,7 +550,7 @@ const u16 gUnknown_0850BDE8[] = {
     0x110A,
 };
 
-const u16 gUnknown_0850BDFC[] = {
+const u16 gObjectPaletteTags1[] = {
     0x1100,
     0x1101,
     0x1103,
@@ -563,7 +563,7 @@ const u16 gUnknown_0850BDFC[] = {
     0x110A,
 };
 
-const u16 gUnknown_0850BE10[] = {
+const u16 gObjectPaletteTags2[] = {
     0x1100,
     0x1101,
     0x1103,
@@ -576,7 +576,7 @@ const u16 gUnknown_0850BE10[] = {
     0x110A,
 };
 
-const u16 gUnknown_0850BE24[] = {
+const u16 gObjectPaletteTags3[] = {
      0x1100,
      0x1101,
      0x1103,
@@ -590,11 +590,11 @@ const u16 gUnknown_0850BE24[] = {
 };
 
 
-const u16 *const gUnknown_0850BE38[] = {
-    gUnknown_0850BDE8,
-    gUnknown_0850BDFC,
-    gUnknown_0850BE10,
-    gUnknown_0850BE24,
+const u16 *const gObjectPaletteTagSets[] = {
+    gObjectPaletteTags0,
+    gObjectPaletteTags1,
+    gObjectPaletteTags2,
+    gObjectPaletteTags3,
 };
 
 #include "data/field_event_obj/berry_tree_graphics_tables.h"
@@ -1461,11 +1461,11 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjectTempl
     paletteSlot = graphicsInfo->paletteSlot;
     if (paletteSlot == 0)
     {
-        npc_load_two_palettes__no_record(graphicsInfo->paletteTag1, 0);
+        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag1, 0);
     }
     else if (paletteSlot == 10)
     {
-        npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, 10);
+        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, 10);
     }
     else if (paletteSlot >= 16)
     {
@@ -1653,7 +1653,7 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
         sprite->data[1] = z;
         if (graphicsInfo->paletteSlot == 10)
         {
-            npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+            LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
         }
         else if (graphicsInfo->paletteSlot >= 16)
         {
@@ -1806,11 +1806,11 @@ static void sub_808E1B8(u8 eventObjectId, s16 x, s16 y)
     paletteSlot = graphicsInfo->paletteSlot;
     if (paletteSlot == 0)
     {
-        npc_load_two_palettes__no_record(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
     }
     else if (paletteSlot == 10)
     {
-        npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
     }
     else if (paletteSlot >= 16)
     {
@@ -1882,11 +1882,11 @@ void EventObjectSetGraphicsId(struct EventObject *eventObject, u8 graphicsId)
     paletteSlot = graphicsInfo->paletteSlot;
     if (paletteSlot == 0)
     {
-        pal_patch_for_npc(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        PatchObjectPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
     }
     else if (paletteSlot == 10)
     {
-        npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
     }
     else if (paletteSlot >= 16)
     {
@@ -1980,14 +1980,14 @@ const struct EventObjectGraphicsInfo *GetEventObjectGraphicsInfo(u8 graphicsId)
     {
         graphicsId = VarGetEventObjectGraphicsId(graphicsId - SPRITE_VAR);
     }
-    if (graphicsId == 0x45)
+    if (graphicsId == EVENT_OBJ_GFX_BARD)
     {
         bard = GetCurrentMauvilleOldMan();
         return gMauvilleOldManGraphicsInfoPointers[bard];
     }
     if (graphicsId >= NUM_OBJECT_GRAPHICS_INFO)
     {
-        graphicsId = 0x05; // LittleBoy1
+        graphicsId = EVENT_OBJ_GFX_LITTLE_BOY_1;
     }
     return gEventObjectGraphicsInfoPointers[graphicsId];
 }
@@ -2071,7 +2071,7 @@ void sub_808E82C(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
     }
 }
 
-void gpu_pal_allocator_reset__manage_upper_four(void)
+void FreeAndReserveObjectSpritePalettes(void)
 {
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 12;
@@ -2084,7 +2084,7 @@ static void sub_808E894(u16 paletteTag)
     paletteSlot = FindEventObjectPaletteIndexByTag(paletteTag);
     if (paletteSlot != 0x11ff) // always true
     {
-        sub_808E8F4(&gUnknown_0850BBC8[paletteSlot]);
+        sub_808E8F4(&sEventObjectSpritePalettes[paletteSlot]);
     }
 }
 
@@ -2107,19 +2107,19 @@ static u8 sub_808E8F4(const struct SpritePalette *spritePalette)
     return LoadSpritePalette(spritePalette);
 }
 
-void pal_patch_for_npc(u16 paletteTag, u8 paletteSlot)
+void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
 {
     u16 paletteIdx;
 
     paletteIdx = FindEventObjectPaletteIndexByTag(paletteTag);
-    LoadPalette(gUnknown_0850BBC8[paletteIdx].data, 16 * paletteSlot + 256, 0x20);
+    LoadPalette(sEventObjectSpritePalettes[paletteIdx].data, 16 * paletteSlot + 256, 0x20);
 }
 
-void pal_patch_for_npc_range(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
+void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
 {
     while (minSlot < maxSlot)
     {
-        pal_patch_for_npc(*paletteTags, minSlot);
+        PatchObjectPalette(*paletteTags, minSlot);
         paletteTags++;
         minSlot++;
     }
@@ -2129,9 +2129,9 @@ static u8 FindEventObjectPaletteIndexByTag(u16 tag)
 {
     u8 i;
 
-    for (i = 0; gUnknown_0850BBC8[i].tag != 0x11ff; i++)
+    for (i = 0; sEventObjectSpritePalettes[i].tag != 0x11ff; i++)
     {
-        if (gUnknown_0850BBC8[i].tag == tag)
+        if (sEventObjectSpritePalettes[i].tag == tag)
         {
             return i;
         }
@@ -2139,32 +2139,32 @@ static u8 FindEventObjectPaletteIndexByTag(u16 tag)
     return 0xff;
 }
 
-void npc_load_two_palettes__no_record(u16 tag, u8 slot)
+void LoadPlayerObjectReflectionPalette(u16 tag, u8 slot)
 {
     u8 i;
 
-    pal_patch_for_npc(tag, slot);
-    for (i = 0; gUnknown_0850BD00[i].tag != 0x11ff; i++)
+    PatchObjectPalette(tag, slot);
+    for (i = 0; gPlayerReflectionPaletteSets[i].tag != 0x11ff; i++)
     {
-        if (gUnknown_0850BD00[i].tag == tag)
+        if (gPlayerReflectionPaletteSets[i].tag == tag)
         {
-            pal_patch_for_npc(gUnknown_0850BD00[i].data[gUnknown_020375B4], gUnknown_084975C4[slot]);
+            PatchObjectPalette(gPlayerReflectionPaletteSets[i].data[sCurrentReflectionType], gReflectionEffectPaletteMap[slot]);
             return;
         }
     }
 }
 
-void npc_load_two_palettes__and_record(u16 tag, u8 slot)
+void LoadSpecialObjectReflectionPalette(u16 tag, u8 slot)
 {
     u8 i;
 
-    gUnknown_020375B6 = tag;
-    pal_patch_for_npc(tag, slot);
-    for (i = 0; gUnknown_0850BD78[i].tag != 0x11ff; i++)
+    sCurrentSpecialObjectPaletteTag = tag;
+    PatchObjectPalette(tag, slot);
+    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != 0x11ff; i++)
     {
-        if (gUnknown_0850BD78[i].tag == tag)
+        if (gSpecialObjectReflectionPaletteSets[i].tag == tag)
         {
-            pal_patch_for_npc(gUnknown_0850BD78[i].data[gUnknown_020375B4], gUnknown_084975C4[slot]);
+            PatchObjectPalette(gSpecialObjectReflectionPaletteSets[i].data[sCurrentReflectionType], gReflectionEffectPaletteMap[slot]);
             return;
         }
     }
@@ -2172,7 +2172,7 @@ void npc_load_two_palettes__and_record(u16 tag, u8 slot)
 
 static void sub_808EAB0(u16 tag, u8 slot)
 {
-    pal_patch_for_npc(tag, slot);
+    PatchObjectPalette(tag, slot);
 }
 
 void unref_sub_808EAC4(struct EventObject *eventObject, s16 x, s16 y)
@@ -2191,7 +2191,7 @@ void ShiftEventObjectCoords(struct EventObject *eventObject, s16 x, s16 y)
     eventObject->currentCoords.y = y;
 }
 
-/*static*/ void npc_coords_set(struct EventObject *eventObject, s16 x, s16 y)
+/*static*/ void SetEventObjectCoords(struct EventObject *eventObject, s16 x, s16 y)
 {
     eventObject->previousCoords.x = x;
     eventObject->previousCoords.y = y;
@@ -2206,7 +2206,7 @@ void sub_808EB08(struct EventObject *eventObject, s16 x, s16 y)
 
     sprite = &gSprites[eventObject->spriteId];
     graphicsInfo = GetEventObjectGraphicsInfo(eventObject->graphicsId);
-    npc_coords_set(eventObject, x, y);
+    SetEventObjectCoords(eventObject, x, y);
     sub_8093038(eventObject->currentCoords.x, eventObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
@@ -2414,7 +2414,7 @@ u8 CopySprite(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
     return i;
 }
 
-u8 obj_unfreeze(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
+u8 CreateCopySpriteAt(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
 {
     s16 i;
 
@@ -2610,35 +2610,35 @@ void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat)
     }
 }
 
-void npc_paltag_set_load(u8 palSlot)
+void InitEventObjectPalettes(u8 palSlot)
 {
-    gpu_pal_allocator_reset__manage_upper_four();
-    gUnknown_020375B6 = 0x11ff;
-    gUnknown_020375B4 = palSlot;
+    FreeAndReserveObjectSpritePalettes();
+    sCurrentSpecialObjectPaletteTag = 0x11ff;
+    sCurrentReflectionType = palSlot;
     if (palSlot == 1)
     {
-        pal_patch_for_npc_range(gUnknown_0850BE38[gUnknown_020375B4], 0, 6);
+        PatchObjectPaletteRange(gObjectPaletteTagSets[sCurrentReflectionType], 0, 6);
         gReservedSpritePaletteCount = 8;
     }
     else
     {
-        pal_patch_for_npc_range(gUnknown_0850BE38[gUnknown_020375B4], 0, 10);
+        PatchObjectPaletteRange(gObjectPaletteTagSets[sCurrentReflectionType], 0, 10);
     }
 }
 
-u16 npc_paltag_by_palslot(u8 palSlot)
+u16 GetObjectPaletteTag(u8 palSlot)
 {
     u8 i;
 
     if (palSlot < 10)
     {
-        return gUnknown_0850BE38[gUnknown_020375B4][palSlot];
+        return gObjectPaletteTagSets[sCurrentReflectionType][palSlot];
     }
-    for (i = 0; gUnknown_0850BD78[i].tag != 0x11ff; i++)
+    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != 0x11ff; i++)
     {
-        if (gUnknown_0850BD78[i].tag == gUnknown_020375B6)
+        if (gSpecialObjectReflectionPaletteSets[i].tag == sCurrentSpecialObjectPaletteTag)
         {
-            return gUnknown_0850BD78[i].data[gUnknown_020375B4];
+            return gSpecialObjectReflectionPaletteSets[i].data[sCurrentReflectionType];
         }
     }
     return 0x11ff;
