@@ -182,9 +182,9 @@ const struct BgTemplate gUnknown_08613F90[3] =
 
 const struct ListMenuTemplate gUnknown_08613F9C =
 {
-    NULL,
-    bag_menu_change_item_callback,
-    sub_81AB520,
+    .items = NULL,
+    .moveCursorFunc = bag_menu_change_item_callback,
+    .itemPrintFunc = sub_81AB520,
     .totalItems = 0,
     .maxShowed = 0,
     .windowId = 0,
