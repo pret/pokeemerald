@@ -322,18 +322,72 @@ static const struct BgTemplate sBerryBlenderBgTemplates[3] =
 
 static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
 {
-    {0, 1, 6, 7, 2, 0xE, 0x28},
-    {0, 0x16, 6, 7, 2, 0xE, 0x36},
-    {0, 1, 0xC, 7, 2, 0xE, 0x44},
-    {0, 0x16, 0xC, 7, 2, 0xE, 0x52},
-    {0, 2, 0xF, 0x1B, 4, 0xE, 0x60},
-    {0, 5, 3, 0x15, 0xE, 0xE, 0x60},
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 6,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x28,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 6,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x36,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 12,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x44,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 12,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x52,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 14,
+        .baseBlock = 0x60,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 5,
+        .tilemapTop = 3,
+        .width = 21,
+        .height = 14,
+        .paletteNum = 14,
+        .baseBlock = 0x60,
+    },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sBlender_YesNoWindowTemplate =
 {
-    0, 0x15, 9, 5, 4, 0xE, 0xCC
+    .priority = 0,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 14,
+    .baseBlock = 0xCC
 };
 
 static const s8 sUnknown_083399C0[][2] =
