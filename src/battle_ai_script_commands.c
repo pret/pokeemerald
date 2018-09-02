@@ -155,6 +155,8 @@ static void BattleAICmd_if_flash_fired(void);
 static void BattleAICmd_if_holds_item(void);
 static void BattleAICmd_get_ally_chosen_move(void);
 static void BattleAICmd_if_has_no_attacking_moves(void);
+static void BattleAICmd_get_hazards_count(void);
+static void BattleAICmd_if_doesnt_hold_berry(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -266,6 +268,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_holds_item,                              // 0x62
     BattleAICmd_get_ally_chosen_move,                       // 0x63
     BattleAICmd_if_has_no_attacking_moves,                  // 0x64
+    BattleAICmd_get_hazards_count,                          // 0x65
+    BattleAICmd_if_doesnt_hold_berry,                       // 0x66
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -1815,18 +1819,18 @@ static void BattleAICmd_get_weather(void)
 
 static void BattleAICmd_if_effect(void)
 {
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == gAIScriptPtr[1])
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == T1_READ_16(gAIScriptPtr + 1))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
-        gAIScriptPtr += 6;
+        gAIScriptPtr += 7;
 }
 
 static void BattleAICmd_if_not_effect(void)
 {
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect != gAIScriptPtr[1])
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect != T1_READ_16(gAIScriptPtr + 1))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
-        gAIScriptPtr += 6;
+        gAIScriptPtr += 7;
 }
 
 static void BattleAICmd_if_stat_level_less_than(void)
@@ -2047,8 +2051,7 @@ static void BattleAICmd_if_has_move_with_effect(void)
     case AI_TARGET_PARTNER:
         for (i = 0; i < 4; i++)
         {
-            // UB: checks sBattler_AI instead of gBattlerTarget.
-            if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+            if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
                 break;
         }
         if (i == 4)
@@ -2184,18 +2187,13 @@ static void BattleAICmd_if_holds_item(void)
 {
     u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
     u16 item;
-    u8 var1, var2;
 
     if ((battlerId & BIT_SIDE) == (sBattler_AI & BIT_SIDE))
         item = gBattleMons[battlerId].item;
     else
         item = BATTLE_HISTORY->itemEffects[battlerId];
 
-    // UB: doesn't properly read an unaligned u16
-    var2 = gAIScriptPtr[2];
-    var1 = gAIScriptPtr[3];
-
-    if ((var1 | var2) == item)
+    if (T1_READ_16(gAIScriptPtr + 2) == item)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -2301,12 +2299,12 @@ static void BattleAICmd_get_protect_count(void)
 
 static void BattleAICmd_if_move_flag(void)
 {
-    u16 flag = T1_READ_16(gAIScriptPtr + 1);
+    u32 flag = T1_READ_32(gAIScriptPtr + 1);
 
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].flags & flag)
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
     else
-        gAIScriptPtr += 7;
+        gAIScriptPtr += 9;
 }
 
 static void BattleAICmd_if_field_status(void)
@@ -2341,16 +2339,16 @@ static void BattleAICmd_call_if_eq(void)
 
 static void BattleAICmd_call_if_move_flag(void)
 {
-    u16 flag = T1_READ_16(gAIScriptPtr + 1);
+    u32 flag = T1_READ_32(gAIScriptPtr + 1);
 
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].flags & flag)
     {
-        AIStackPushVar(gAIScriptPtr + 7);
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+        AIStackPushVar(gAIScriptPtr + 9);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
     }
     else
     {
-        gAIScriptPtr += 7;
+        gAIScriptPtr += 9;
     }
 }
 
@@ -2493,7 +2491,41 @@ static void BattleAICmd_if_has_no_attacking_moves(void)
     }
 
     if (i == 4)
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
-        gAIScriptPtr += 5;
+        gAIScriptPtr += 6;
+}
+
+static void BattleAICmd_get_hazards_count(void)
+{
+    u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u8 side = GetBattlerSide(battlerId);
+
+    switch (T1_READ_16(gAIScriptPtr + 2))
+    {
+    case EFFECT_SPIKES:
+        AI_THINKING_STRUCT->funcResult = gSideTimers[side].spikesAmount;
+        break;
+    case EFFECT_TOXIC_SPIKES:
+        AI_THINKING_STRUCT->funcResult = gSideTimers[side].toxicSpikesAmount;
+        break;
+    }
+
+    gAIScriptPtr += 4;
+}
+
+static void BattleAICmd_if_doesnt_hold_berry(void)
+{
+    u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u16 item;
+
+    if (IsBattlerAIControlled(battlerId))
+        item = gBattleMons[battlerId].item;
+    else
+        item = BATTLE_HISTORY->itemEffects[battlerId];
+
+    if (ItemId_GetPocket(item) == POCKET_BERRIES)
+        gAIScriptPtr += 6;
+    else
+        T1_READ_PTR(gAIScriptPtr + 2);
 }
