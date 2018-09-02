@@ -357,7 +357,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .height = 2,
         .paletteNum = 7,
         .baseBlock = 89,
-        },
+    },
     {
         .priority = 0,
         .tilemapLeft = 22,
