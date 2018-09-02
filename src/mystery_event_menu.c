@@ -42,8 +42,24 @@ static const struct BgTemplate sBgTemplates[] =
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
-    {0, 4, 15, 22, 4, 14, 20},
-    {0, 7, 6, 16, 4, 14, 0x6C},
+    {
+        .priority = 0,
+        .tilemapLeft = 4,
+        .tilemapTop = 15,
+        .width = 22,
+        .height = 4,
+        .paletteNum = 14,
+        .baseBlock = 20
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 7,
+        .tilemapTop = 6,
+        .width = 16,
+        .height = 4,
+        .paletteNum = 14,
+        .baseBlock = 0x6C
+    },
     DUMMY_WIN_TEMPLATE
 };
 

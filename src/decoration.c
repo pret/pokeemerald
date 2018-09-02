@@ -214,22 +214,67 @@ void (*const SecretBasePC_SelectedDecorActions[][2])(u8 taskId) = {
    }
 };
 
-const struct WindowTemplate gUnknown_085A6B90[4] = {
-    { 0,  1,  1, 18,  8, 15, 0x0001 },
-    { 0,  1,  1, 13, 18, 13, 0x0091 },
-    { 0, 17,  1, 12,  2, 15, 0x017b },
-    { 0, 16, 13, 13,  6, 15, 0x0193 }
+const struct WindowTemplate gUnknown_085A6B90[4] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 18,
+        .height = 8,
+        .paletteNum = 15,
+        .baseBlock = 0x0001
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 13,
+        .height = 18,
+        .paletteNum = 13,
+        .baseBlock = 0x0091
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 1,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x017b
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 13,
+        .width = 13,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 0x0193
+    }
 };
 
 const u16 gUnknown_085A6BB0[] = INCBIN_U16("graphics/decorations/unk_85a6bb0.gbapal");
 
-const struct ListMenuTemplate gUnknown_085A6BD0 = {
-    NULL,
-    sub_8127480,
-    sub_81274A0,
-    0, 0,
-    0, 0, 8, 0,
-    9, 2, 1, 3, FALSE, 0, FALSE, 7
+const struct ListMenuTemplate gUnknown_085A6BD0 =
+{
+    .items = NULL,
+    .moveCursorFunc = sub_8127480,
+    .itemPrintFunc = sub_81274A0,
+    .totalItems = 0,
+    .maxShowed = 0,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 9,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = FALSE,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = FALSE,
+    .fontId = 7
 };
 
 #include "data/decoration/icon.h"
