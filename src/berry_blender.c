@@ -844,7 +844,16 @@ static const u8 sUnknown_08339CD2[] =
     0x05, 0x03, 0x03, 0x03, 0x02, 0x02, 0x03, 0x03, 0x03, 0x03, 0x02
 };
 
-static const struct WindowTemplate sBlenderRecordWindowTemplate = {0, 6, 4, 0x12, 0xB, 0xF, 8};
+static const struct WindowTemplate sBlenderRecordWindowTemplate =
+{
+    .priority = 0,
+    .tilemapLeft = 6,
+    .tilemapTop = 4,
+    .width = 18,
+    .height = 11,
+    .paletteNum = 15,
+    .baseBlock = 8
+};
 
 // code
 
