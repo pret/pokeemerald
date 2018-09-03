@@ -4502,7 +4502,7 @@ _081B24C0:
 	adds r0, r5, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _081B2540
 	.pool
 _081B2514:
@@ -4525,7 +4525,7 @@ _081B2514:
 	adds r0, r5, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _081B2540:
 	adds r0, r5, 0
 	bl PutWindowTilemap
@@ -5108,7 +5108,7 @@ sub_81B2A3C: @ 81B2A3C
 	str r1, [sp, 0x8]
 	movs r1, 0
 	adds r2, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -5804,7 +5804,7 @@ _081B2FF2:
 	ldr r1, [r1]
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _081B3018:
 	add sp, 0xC
 	pop {r3}

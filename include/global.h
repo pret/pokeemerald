@@ -344,7 +344,9 @@ struct FrontierMonData
 struct Struct_field_E70
 {
     u16 monId;
-    u8 unk2[9];
+    u32 personality;
+    u8 ivs;
+    u8 abilityBit;
 };
 
 struct BattleDomeTrainer
@@ -413,9 +415,7 @@ struct BattleFrontier
     /*0xDD8*/ u16 field_DD8;
     /*0xDDA*/ u16 field_DDA[2];
     /*0xDDE*/ u16 field_DDE[2];
-    /*0xDE2*/ u16 field_DE2[2];
-    /*0xDE6*/ u16 field_DE6;
-    /*0xDE8*/ u16 field_DE8;
+    /*0xDE2*/ u16 field_DE2[2][2];
     /*0xDEA*/ u16 field_DEA[2];
     /*0xDEE*/ u16 field_DEE;
     /*0xDF0*/ u16 field_DF0;

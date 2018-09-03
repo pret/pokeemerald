@@ -2572,7 +2572,7 @@ sub_8167BA0: @ 8167BA0
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08167C46:
 	mov r2, r8
 	cmp r2, 0

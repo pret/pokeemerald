@@ -301,10 +301,10 @@ static void CreateStarterPokemonLabel(u8 selection)
     FillWindowPixelBuffer(sStarterChooseWindowId, 0);
 
     width = GetStringCenterAlignXOffset(7, text, 0x68);
-    box_print(sStarterChooseWindowId, 7, width, 1, gUnknown_085B1E0C, 0, text);
+    AddTextPrinterParameterized3(sStarterChooseWindowId, 7, width, 1, gUnknown_085B1E0C, 0, text);
 
     width = GetStringCenterAlignXOffset(1, speciesName, 0x68);
-    box_print(sStarterChooseWindowId, 1, width, 0x11, gUnknown_085B1E0C, 0, speciesName);
+    AddTextPrinterParameterized3(sStarterChooseWindowId, 1, width, 0x11, gUnknown_085B1E0C, 0, speciesName);
 
     PutWindowTilemap(sStarterChooseWindowId);
     schedule_bg_copy_tilemap_to_vram(0);

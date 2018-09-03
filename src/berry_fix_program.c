@@ -250,19 +250,19 @@ static void berry_fix_gpu_set(void)
 
     width = GetStringWidth(0, sUnknown_08617E9B, 0);
     left = (0x78 - width) / 2;
-    box_print(2, 0, left, 3, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E9B);
+    AddTextPrinterParameterized3(2, 0, left, 3, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E9B);
 
     width = GetStringWidth(0, sUnknown_08617E8D, 0);
     left = (0x78 - width) / 2 + 0x78;
-    box_print(2, 0, left, 3, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E8D);
+    AddTextPrinterParameterized3(2, 0, left, 3, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E8D);
 
     width = GetStringWidth(0, sUnknown_08617E8D, 0);
     left = (0x70 - width) / 2;
-    box_print(3, 0, left, 0, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E8D);
+    AddTextPrinterParameterized3(3, 0, left, 0, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E8D);
 
     width = GetStringWidth(1, sUnknown_08617E78, 0);
     left = (0xD0 - width) / 2;
-    box_print(0, 1, left, 2, sUnknown_08618158, TEXT_SPEED_FF, sUnknown_08617E78);
+    AddTextPrinterParameterized3(0, 1, left, 2, sUnknown_08618158, TEXT_SPEED_FF, sUnknown_08617E78);
 
     CopyWindowToVram(2, 2);
     CopyWindowToVram(3, 2);
@@ -292,7 +292,7 @@ static void berry_fix_text_print(int scene)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     FillWindowPixelBuffer(1, 0xAA);
-    box_print(1, 1, 0, 0, sUnknown_08618158, -1, gUnknown_08618160[scene]);
+    AddTextPrinterParameterized3(1, 1, 0, 0, sUnknown_08618158, -1, gUnknown_08618160[scene]);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
     switch (scene)

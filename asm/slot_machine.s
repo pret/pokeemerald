@@ -4527,7 +4527,7 @@ sub_812DD78: @ 812DD78
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x5
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	movs r1, 0x3
 	bl CopyWindowToVram

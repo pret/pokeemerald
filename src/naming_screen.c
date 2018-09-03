@@ -1515,7 +1515,7 @@ static void sub_80E49BC(void)
             StringCopy(genderSymbol, gText_FemaleSymbol);
             isFemale = TRUE;
         }
-        box_print(gNamingScreenData->windows[2], 1, 0x68, 1, sGenderColors[isFemale], -1, genderSymbol);
+        AddTextPrinterParameterized3(gNamingScreenData->windows[2], 1, 0x68, 1, sGenderColors[isFemale], -1, genderSymbol);
     }
 }
 
@@ -1694,7 +1694,7 @@ static void sub_80E4DE4(u8 window, u8 a1)
 
     for (i = 0; i < 4; i++)
     {
-        box_print(window, 1, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
+        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
     }
 
     PutWindowTilemap(window);
@@ -1739,7 +1739,7 @@ static void sub_80E4EF0(void)
     const u8 color[3] = { 15, 1, 2 };
 
     FillWindowPixelBuffer(gNamingScreenData->windows[4], 0xFF);
-    box_print(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
+    AddTextPrinterParameterized3(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
     PutWindowTilemap(gNamingScreenData->windows[4]);
     CopyWindowToVram(gNamingScreenData->windows[4], 3);
 }

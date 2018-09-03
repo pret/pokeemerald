@@ -4588,7 +4588,7 @@ _080798BC:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r6, sp, 0x28
 	adds r0, r6, 0
 	ldr r1, [sp, 0x60]
@@ -4847,7 +4847,7 @@ sub_8079B84: @ 8079B84
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0

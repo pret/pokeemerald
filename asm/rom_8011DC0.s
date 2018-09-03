@@ -12955,7 +12955,7 @@ _0801C1D0:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, [r7]
 	movs r1, 0xDA
 	lsls r1, 1
@@ -12996,7 +12996,7 @@ _0801C22E:
 	adds r0, r5, 0
 	movs r1, 0x3
 	movs r3, 0x11
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r2, [r7]
 	ldr r0, [r2, 0x4]
 	mov r9, r6
@@ -13023,7 +13023,7 @@ _0801C266:
 	movs r1, 0x1
 	movs r2, 0xA6
 	movs r3, 0x11
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0801C498
 	.pool
 _0801C2A0:
@@ -13064,7 +13064,7 @@ _0801C2A2:
 	lsrs r0, r2, 24
 	movs r1, 0x3
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r4, 0x1
 	lsls r4, 24
 	lsrs r0, r4, 24
@@ -13104,7 +13104,7 @@ _0801C304:
 	adds r0, r5, 0
 	movs r1, 0x3
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r2, [r7]
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x3
@@ -13137,7 +13137,7 @@ _0801C304:
 	adds r0, r5, 0
 	movs r1, 0x3
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r9, r6
 	b _0801C498
 	.pool
@@ -13202,7 +13202,7 @@ _0801C3CE:
 	ldr r0, [sp, 0x10]
 	movs r1, 0x3
 	ldr r3, [sp, 0x14]
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r7]
 	adds r0, r1, r5
 	ldr r2, =0x00000306
@@ -13240,7 +13240,7 @@ _0801C3CE:
 	ldr r0, [sp, 0x10]
 	movs r1, 0x3
 	ldr r3, [sp, 0x14]
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r7]
 	adds r1, r4
 	adds r1, 0x2A
@@ -14515,7 +14515,7 @@ _0801CEEC:
 	str r4, [sp, 0x8]
 	movs r1, 0x3
 	movs r3, 0x6
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0801CF1C:
 	ldr r6, =gUnknown_02022C78
 	ldr r4, [r6]
@@ -14550,7 +14550,7 @@ _0801CF1C:
 	str r4, [sp, 0x8]
 	movs r1, 0x3
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -20926,7 +20926,7 @@ _08020154:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -21004,7 +21004,7 @@ _08020206:
 	movs r0, 0x2
 	movs r1, 0
 	lsrs r2, r5, 24
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r4, 0x4
 	adds r7, 0x1
 	adds r0, r6, 0
@@ -21043,7 +21043,7 @@ _08020248:
 	movs r4, 0x80
 	lsls r4, 19
 	lsrs r2, r4, 24
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0x1
 	str r0, [sp, 0x48]
 	adds r6, 0xC
@@ -21094,7 +21094,7 @@ _080202AC:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r2, r7, 0
 	add r0, sp, 0xC
 	str r0, [sp]
@@ -21106,7 +21106,7 @@ _080202AC:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08020300:
 	ldr r7, [sp, 0x48]
 	mov r4, r10
@@ -21299,7 +21299,7 @@ sub_8020420: @ 8020420
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -23909,7 +23909,7 @@ sub_80219C8: @ 80219C8
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -24217,7 +24217,7 @@ _08021C5E:
 	ldr r1, =gStringVar4
 	str r1, [sp, 0x8]
 	movs r1, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r3, [sp, 0x18]
 	ldr r2, [sp, 0xC]
 	ldrb r2, [r2, 0x8]
@@ -24260,7 +24260,7 @@ _08021CC8:
 	str r2, [sp, 0x8]
 	movs r1, 0x2
 	movs r2, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	lsls r0, r5, 24
 	lsrs r5, r0, 24
 	ldr r3, [sp, 0xC]
@@ -24324,7 +24324,7 @@ sub_8021D34: @ 8021D34
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, =gText_SpaceSec
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -24345,7 +24345,7 @@ sub_8021D34: @ 8021D34
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x9F
 	lsls r0, 1
 	add r0, r8
@@ -24386,7 +24386,7 @@ sub_8021D34: @ 8021D34
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, =gText_SpaceMin
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -24406,7 +24406,7 @@ sub_8021D34: @ 8021D34
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x9E
 	lsls r0, 1
 	add r0, r8
@@ -24437,7 +24437,7 @@ sub_8021D34: @ 8021D34
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0
 	adds r0, 0xE
 	lsls r0, 24
@@ -24452,7 +24452,7 @@ sub_8021D34: @ 8021D34
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, =gText_TimesPerSec
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -24474,7 +24474,7 @@ sub_8021D34: @ 8021D34
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r4, r8
 	ldrb r2, [r4, 0x16]
 	ldrh r0, [r4, 0x16]
@@ -24555,7 +24555,7 @@ _08021F0A:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _08021FDE
 	.pool
 _08021FC4:
@@ -24570,7 +24570,7 @@ _08021FC4:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08021FDE:
 	adds r0, r7, 0
 	adds r0, 0xE
@@ -24591,7 +24591,7 @@ _08021FDE:
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, =gStringVar1
 	ldr r4, [sp, 0x10]
 	ldrh r1, [r4, 0x8]
@@ -24620,7 +24620,7 @@ _08021FDE:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -24942,7 +24942,7 @@ _080222D0:
 	movs r1, 0x1
 	adds r2, r7, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, =gText_PressingSpeedRankings
 	mov r10, r0
 	movs r0, 0x1
@@ -24962,7 +24962,7 @@ _080222D0:
 	movs r1, 0x1
 	adds r2, r7, 0
 	movs r3, 0x11
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x29
 	mov r10, r0
 _08022336:
@@ -24985,7 +24985,7 @@ _08022336:
 	movs r1, 0x1
 	movs r2, 0
 	mov r3, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	ldr r1, =gText_TimesPerSec
 	movs r2, 0x1
@@ -25005,7 +25005,7 @@ _08022336:
 	movs r1, 0x1
 	adds r2, r7, 0
 	mov r3, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r2, 0
 	mov r0, r9
 	lsls r4, r0, 1
@@ -25078,7 +25078,7 @@ _080223CA:
 	movs r1, 0x1
 	adds r2, r7, 0
 	mov r3, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [sp, 0x10]
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -39391,7 +39391,7 @@ _0802955A:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r10
 	ldr r0, [r2]
 	add r0, r9
@@ -39677,7 +39677,7 @@ _080297CC:
 	movs r1, 0x1
 	movs r2, 0x1C
 	adds r3, r6, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	mov r1, r9
 	movs r2, 0
@@ -39908,7 +39908,7 @@ _080299F2:
 	str r6, [sp, 0x8]
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0
 	mov r8, r5
 	mov r0, r9
@@ -39971,7 +39971,7 @@ _08029A36:
 	mov r1, r10
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _08029B10
 	.pool
 _08029AE0:
@@ -47951,7 +47951,7 @@ sub_802DB8C: @ 802DB8C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -47961,7 +47961,7 @@ sub_802DB8C: @ 802DB8C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -48390,7 +48390,7 @@ sub_802DED8: @ 802DED8
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, [r6]
 	adds r0, 0x1C
 	add r0, r8

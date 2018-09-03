@@ -1471,7 +1471,7 @@ sub_81C7BA4: @ 81C7BA4
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -3707,7 +3707,7 @@ sub_81C8CB4: @ 81C8CB4
 	str r2, [sp, 0x4]
 	str r6, [sp, 0x8]
 	movs r2, 0x8
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81C8C64
@@ -3835,7 +3835,7 @@ sub_81C8DBC: @ 81C8DBC
 	movs r1, 0x7
 	movs r2, 0x2
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldrh r0, [r6, 0x8]
 	lsls r4, 1
 	ldrb r1, [r6, 0x4]
@@ -7078,7 +7078,7 @@ sub_81CA714: @ 81CA714
 	str r6, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -7116,7 +7116,7 @@ sub_81CA770: @ 81CA770
 	str r6, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -20108,7 +20108,7 @@ sub_81D0E84: @ 81D0E84
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldrb r0, [r5, 0xA]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -20155,7 +20155,7 @@ _081D0F2E:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x80
 	lsls r0, 21
 	adds r5, r0
@@ -20195,7 +20195,7 @@ _081D0F7C:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x80
 	lsls r0, 21
 	adds r6, r0
@@ -24413,7 +24413,7 @@ _081D36CA:
 	movs r1, 0x1
 	movs r2, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	lsls r0, r7, 1
 	mov r4, sp
 	adds r4, r0
@@ -24436,7 +24436,7 @@ _081D3704:
 	movs r1, 0x1
 	movs r2, 0x38
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	ldrsh r1, [r4, r0]
 	adds r0, r1, 0
@@ -24467,7 +24467,7 @@ _081D373A:
 	mov r0, r8
 	movs r1, 0x1
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0x1
 	lsls r0, 16
 	lsrs r7, r0, 16
@@ -24585,7 +24585,7 @@ _081D3808:
 	movs r1, 0x1
 	movs r2, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r4, 0x38
 	lsls r4, 24
 	lsrs r4, 24
@@ -24599,7 +24599,7 @@ _081D3808:
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -28979,7 +28979,7 @@ PrintOnTrainerHillRecordsWindow: @ 81D5C8C
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0x12
 	movs r0, 0
 	mov r8, r0
@@ -29002,7 +29002,7 @@ _081D5CD6:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r7, 0xF
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, =0x00003718
@@ -29068,7 +29068,7 @@ _081D5CD6:
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r7, 0x11
 	movs r1, 0x1
 	add r8, r1

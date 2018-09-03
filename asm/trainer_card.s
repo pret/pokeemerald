@@ -1747,7 +1747,7 @@ sub_80C3574: @ 80C3574
 	movs r1, 0x1
 	movs r2, 0x14
 	movs r3, 0x1C
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _080C35FA
 	.pool
 _080C35E0:
@@ -1762,7 +1762,7 @@ _080C35E0:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0x21
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C35FA:
 	add sp, 0x2C
 	pop {r4,r5}
@@ -1818,7 +1818,7 @@ _080C365C:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x2C
 	pop {r4}
 	pop {r0}
@@ -1848,7 +1848,7 @@ sub_80C3684: @ 80C3684
 	movs r1, 0x1
 	movs r2, 0x14
 	movs r3, 0x38
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _080C36DE
 	.pool
 _080C36C4:
@@ -1863,7 +1863,7 @@ _080C36C4:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0x39
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C36DE:
 	ldr r0, =gStringVar1
 	ldr r4, =gUnknown_02039CE8
@@ -1910,7 +1910,7 @@ _080C3740:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -1964,7 +1964,7 @@ sub_80C378C: @ 80C378C
 	movs r1, 0x1
 	movs r2, 0x14
 	movs r3, 0x48
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _080C37F6
 	.pool
 _080C37DC:
@@ -1979,7 +1979,7 @@ _080C37DC:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0x49
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C37F6:
 	ldr r5, =gStringVar4
 	ldr r4, =gUnknown_02039CE8
@@ -2025,7 +2025,7 @@ _080C3854:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C386E:
 	add sp, 0xC
 	pop {r4,r5}
@@ -2060,7 +2060,7 @@ sub_80C3880: @ 80C3880
 	movs r1, 0x1
 	movs r2, 0x14
 	movs r3, 0x58
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _080C38E2
 	.pool
 _080C38C8:
@@ -2075,7 +2075,7 @@ _080C38C8:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0x59
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C38E2:
 	ldr r0, =gUnknown_02039CE8
 	ldr r1, [r0]
@@ -2159,7 +2159,7 @@ _080C395C:
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r7, 0x12
 	lsls r2, r7, 24
 	lsrs r2, 24
@@ -2177,7 +2177,7 @@ _080C395C:
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r7, r10
 	mov r0, r9
 	adds r1, r6, 0
@@ -2194,7 +2194,7 @@ _080C395C:
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -2235,7 +2235,7 @@ sub_80C3A18: @ 80C3A18
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0x8
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r7]
 	adds r1, 0x19
 	movs r0, 0x1
@@ -2256,7 +2256,7 @@ sub_80C3A18: @ 80C3A18
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, =gUnknown_0856FB4A
 	mov r8, r0
 	ldr r1, [r7]
@@ -2271,7 +2271,7 @@ sub_80C3A18: @ 80C3A18
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0x8
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r7]
 	adds r1, 0x33
 	movs r0, 0x1
@@ -2292,7 +2292,7 @@ sub_80C3A18: @ 80C3A18
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C3ACE:
 	add sp, 0xC
 	pop {r3}
@@ -2363,7 +2363,7 @@ sub_80C3B50: @ 80C3B50
 	movs r1, 0x1
 	movs r2, 0x88
 	movs r3, 0x9
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _080C3BB6
 	.pool
 _080C3B8C:
@@ -2385,7 +2385,7 @@ _080C3B8C:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0x9
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C3BB6:
 	add sp, 0xC
 	pop {r4}
@@ -2470,7 +2470,7 @@ sub_80C3C34: @ 80C3C34
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, =gUnknown_0856FB57
 	ldr r0, [r6]
 	adds r0, r5
@@ -2492,7 +2492,7 @@ sub_80C3C34: @ 80C3C34
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -6361,7 +6361,7 @@ _080C5DC2:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x5
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, =gText_BattleRecord
 	movs r0, 0x1
 	adds r1, r4, 0
@@ -6376,7 +6376,7 @@ _080C5DC2:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0x5
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r6, [sp]
 	mov r0, r8
 	str r0, [sp, 0x4]
@@ -6386,7 +6386,7 @@ _080C5DC2:
 	movs r1, 0x8
 	movs r2, 0x5
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, =gStringVar4
 	ldr r5, =gUnknown_02039CEC
 	ldr r0, [r5]
@@ -6408,7 +6408,7 @@ _080C5DC2:
 	movs r0, 0x2
 	movs r1, 0x8
 	movs r3, 0x10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r5]
 	ldrh r0, [r1, 0x8]
 	subs r0, 0x5
@@ -6476,7 +6476,7 @@ sub_80C5ED0: @ 80C5ED0
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _080C5F3A
 	.pool
 _080C5F18:
@@ -6495,7 +6495,7 @@ _080C5F18:
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C5F3A:
 	movs r0, 0x3
 	movs r1, 0x3
@@ -7983,7 +7983,7 @@ _080C6BB8:
 	movs r0, 0x1
 	movs r1, 0x7
 	movs r2, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _080C6C0E
 	.pool
 _080C6BF0:
@@ -8000,7 +8000,7 @@ _080C6BF0:
 	movs r0, 0x1
 	movs r1, 0x7
 	movs r2, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080C6C0E:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -8024,7 +8024,7 @@ _080C6C0E:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r4, 0
 _080C6C40:
 	adds r0, r4, 0
@@ -8084,7 +8084,7 @@ _080C6C94:
 	movs r0, 0x1
 	movs r1, 0x7
 	movs r2, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r5, =gUnknown_02039CF4
 	ldr r1, [r5]
 	ldrb r3, [r1, 0x10]
@@ -8104,7 +8104,7 @@ _080C6C94:
 	movs r0, 0x1
 	movs r1, 0x7
 	movs r2, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r5]
 	ldr r2, [r1, 0x4]
 	ldrb r0, [r1, 0x10]
@@ -8148,7 +8148,7 @@ _080C6C94:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r4, 0
 _080C6D4A:
 	adds r0, r4, 0

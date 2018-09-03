@@ -799,7 +799,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
         PutWindowTilemap(gUnknown_0203CDA0);
         FillWindowPixelBuffer(gUnknown_0203CDA0, 0xFF);
         width = GetStringWidth(0, string, 0);
-        box_print(gUnknown_0203CDA0,
+        AddTextPrinterParameterized3(gUnknown_0203CDA0,
                   0,
                   0xEC - (GetWindowAttribute(gUnknown_0203CDA0, WINDOW_TILEMAP_LEFT) * 8) - a2 - width,
                   1,
@@ -835,7 +835,7 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
         if (string2 != NULL)
         {
             width = GetStringWidth(0, string2, 0);
-            box_print(gUnknown_0203CDA0,
+            AddTextPrinterParameterized3(gUnknown_0203CDA0,
                       0,
                       0xEC - (GetWindowAttribute(gUnknown_0203CDA0, WINDOW_TILEMAP_LEFT) * 8) - a4 - width,
                       1,
@@ -1925,7 +1925,7 @@ void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)
     RequestDma3Fill(a1 << 24 | a1 << 16 | a1 << 8 | a1, addr + VRAM, a3 * temp, 1);
 }
 
-void box_print(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str)
+void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str)
 {
     struct TextSubPrinter printer;
 

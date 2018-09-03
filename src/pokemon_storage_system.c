@@ -627,12 +627,12 @@ void sub_80C7BE4(void)
     FillWindowPixelBuffer(windowId, 0x44);
 
     center = GetStringCenterAlignXOffset(1, boxName, 0x40);
-    box_print(windowId, 1, center, 1, gUnknown_08571734, TEXT_SPEED_FF, boxName);
+    AddTextPrinterParameterized3(windowId, 1, center, 1, gUnknown_08571734, TEXT_SPEED_FF, boxName);
 
     ConvertIntToDecimalStringN(text, nPokemonInBox, 1, 2);
     StringAppend(text, gUnknown_08571737);
     center = GetStringCenterAlignXOffset(1, text, 0x40);
-    box_print(windowId, 1, center, 0x11, gUnknown_08571734, TEXT_SPEED_FF, text);
+    AddTextPrinterParameterized3(windowId, 1, center, 0x11, gUnknown_08571734, TEXT_SPEED_FF, text);
 
     winTileData = GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     CpuCopy32((void *)winTileData, (void *)OBJ_VRAM0 + 0x100 + (GetSpriteTileStartByTag(gUnknown_02039D04->unk_0240) * 32), 0x400);
