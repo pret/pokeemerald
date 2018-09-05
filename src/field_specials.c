@@ -269,7 +269,7 @@ u16 GetRecordedCyclingRoadResults(void) {
 }
 
 void UpdateCyclingRoadState(void) {
-    if (gUnknown_020322DC.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE) && gUnknown_020322DC.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE))
+    if (gLastUsedWarp.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE))
     {
         return;
     }
@@ -2094,7 +2094,7 @@ bool32 warp0_in_pokecenter(void)
     static const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xffff };
 
     int i;
-    u16 map = (gUnknown_020322DC.mapGroup << 8) + gUnknown_020322DC.mapNum;
+    u16 map = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
 
     for (i = 0; gUnknown_085B2C2A[i] != 0xFFFF; i++)
     {

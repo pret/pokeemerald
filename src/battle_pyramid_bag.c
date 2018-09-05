@@ -193,20 +193,92 @@ static const u8 sColorTable[][3] =
 
 static const struct WindowTemplate gUnknown_0861F328[] =
 {
-    {0x00, 0x0e, 0x02, 0x0f, 0x10, 0x0f, 0x001e},
-    {0x00, 0x00, 0x0d, 0x0e, 0x06, 0x0f, 0x010e},
-    {0x01, 0x02, 0x0f, 0x1b, 0x04, 0x0f, 0x0162},
-    {0x01, 0x18, 0x11, 0x05, 0x02, 0x0f, 0x01ce},
+    {
+        .priority = 0,
+        .tilemapLeft = 14,
+        .tilemapTop = 2,
+        .width = 15,
+        .height = 16,
+        .paletteNum = 15,
+        .baseBlock = 30
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 13,
+        .width = 14,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 270
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 354
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 24,
+        .tilemapTop = 17,
+        .width = 5,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 462
+    },
     DUMMY_WIN_TEMPLATE,
 };
 
 static const struct WindowTemplate gUnknown_0861F350[] =
 {
-    {0x01, 0x16, 0x11, 0x07, 0x02, 0x0f, 0x01d8},
-    {0x01, 0x16, 0x0f, 0x07, 0x04, 0x0f, 0x01d8},
-    {0x01, 0x0f, 0x0f, 0x0e, 0x04, 0x0f, 0x01d8},
-    {0x01, 0x0f, 0x0d, 0x0e, 0x06, 0x0f, 0x01d8},
-    {0x01, 0x18, 0x0f, 0x05, 0x04, 0x0f, 0x01d8},
+    {
+        .priority = 1,
+        .tilemapLeft = 22,
+        .tilemapTop = 17,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 472
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 22,
+        .tilemapTop = 15,
+        .width = 7,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 472
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 15,
+        .tilemapTop = 15,
+        .width = 14,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 472
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 15,
+        .tilemapTop = 13,
+        .width = 14,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 472
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 24,
+        .tilemapTop = 15,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 472
+    },
 };
 
 extern const struct CompressedSpriteSheet gUnknown_0861F3CC;

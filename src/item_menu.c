@@ -149,14 +149,57 @@ void sub_81AD6FC(u8 taskId);
 
 // .rodata
 
-const struct BgTemplate gUnknown_08613F90[3] = {
-    {0, 0, 31, 0, 0, 1, 0},
-    {1, 0, 30, 0, 0, 0, 0},
-    {2, 3, 29, 0, 0, 2, 0}
+const struct BgTemplate gUnknown_08613F90[3] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0,
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0,
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0,
+    },
 };
 
-const struct ListMenuTemplate gUnknown_08613F9C = {
-    NULL, bag_menu_change_item_callback, sub_81AB520, 0, 0, 0, 0, 8, 0, 1, 1, 0, 3, 0, 0, 0, 7, 0
+const struct ListMenuTemplate gUnknown_08613F9C =
+{
+    .items = NULL,
+    .moveCursorFunc = bag_menu_change_item_callback,
+    .itemPrintFunc = sub_81AB520,
+    .totalItems = 0,
+    .maxShowed = 0,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 1,
+    .fillValue = 0,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 7,
+    .cursorKind = 0
 };
 
 const struct MenuAction gUnknown_08613FB4[] = {
@@ -221,27 +264,157 @@ const u8 gUnknown_08614164[][3] = {
     {0, 14, 10}
 };
 
-const struct WindowTemplate gUnknown_08614174[] = {
-    {0, 14, 2, 15, 16, 1, 0x27},
-    {0, 0, 13, 14, 6, 1, 0x117},
-    {0, 4, 1, 8, 2, 1, 0x1A1},
-    {0, 1, 13, 5, 6, 12, 0x16B},
-    {0, 7, 13, 4, 6, 12, 0x189},
-    {1, 2, 15, 27, 4, 15, 0x1B1},
-    {0xFF, 0, 0, 0, 0, 0, 0}
+const struct WindowTemplate gUnknown_08614174[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 14,
+        .tilemapTop = 2,
+        .width = 15,
+        .height = 16,
+        .paletteNum = 1,
+        .baseBlock = 0x27,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 13,
+        .width = 14,
+        .height = 6,
+        .paletteNum = 1,
+        .baseBlock = 0x117,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 4,
+        .tilemapTop = 1,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 1,
+        .baseBlock = 0x1A1,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 13,
+        .width = 5,
+        .height = 6,
+        .paletteNum = 12,
+        .baseBlock = 0x16B,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 7,
+        .tilemapTop = 13,
+        .width = 4,
+        .height = 6,
+        .paletteNum = 12,
+        .baseBlock = 0x189,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x1B1,
+    },
+    DUMMY_WIN_TEMPLATE,
 };
 
-const struct WindowTemplate gUnknown_086141AC[] = {
-    {1, 22, 17, 7, 2, 15, 0x21D},
-    {1, 22, 15, 7, 4, 15, 0x21D},
-    {1, 15, 15, 14, 4, 15, 0x21D},
-    {1, 15, 13, 14, 6, 15, 0x21D},
-    {1, 2, 15, 27, 4, 15, 0x1B1},
-    {1, 24, 15, 5, 4, 15, 0x21D},
-    {1, 21, 9, 5, 4, 15, 0x21D},
-    {1, 24, 17, 5, 2, 15, 0x21D},
-    {1, 18, 11, 10, 2, 15, 0x245},
-    {1, 1, 1, 10, 2, 15, 0x231}
+const struct WindowTemplate gUnknown_086141AC[] =
+{
+    {
+        .priority = 1,
+        .tilemapLeft = 22,
+        .tilemapTop = 17,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x21D,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 22,
+        .tilemapTop = 15,
+        .width = 7,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x21D,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 15,
+        .tilemapTop = 15,
+        .width = 14,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x21D,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 15,
+        .tilemapTop = 13,
+        .width = 14,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 0x21D,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x1B1,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 24,
+        .tilemapTop = 15,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x21D,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 21,
+        .tilemapTop = 9,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x21D,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 24,
+        .tilemapTop = 17,
+        .width = 5,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x21D,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 18,
+        .tilemapTop = 11,
+        .width = 10,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x245,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 10,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x231,
+    },
 };
 
 // .text

@@ -226,15 +226,7 @@ gUnknown_020375A4: @ 20375A4
 gUnknown_020375AC: @ 20375AC
 	.space 0x8
 
-gUnknown_020375B4: @ 20375B4
-	.space 0x2
-
-gUnknown_020375B6: @ 20375B6
-	.space 0x2
-
-gLockedAnimEventObjects: @ 20375B8
-	.space 0x4
-
+    .include "src/event_object_movement.o"
     .include "src/field_message_box.o"
 
     .align 2

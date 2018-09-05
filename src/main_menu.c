@@ -131,29 +131,121 @@ const u8 gUnknown_082FEEF0[] = INCBIN_U8("graphics/birch_speech/map.bin.lz");
 const u16 gUnknown_082FF018[] = INCBIN_U16("graphics/birch_speech/bg2.gbapal");
 const u16 gUnknown_082FF028[] = {0, 0, 0, 0, 0, 0, 0, 0};
 
-const struct WindowTemplate sWindowTemplates_NoSavedGame[] = {
-    {0, 2, 1, 26, 2, 15, 1},
-    {0, 2, 5, 26, 2, 15, 0x35}
+const struct WindowTemplate sWindowTemplates_NoSavedGame[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 1,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 5,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x35
+    }
 };
 
-const struct WindowTemplate sWindowTemplates_HasSavedGame[] = {
-    {0, 2, 1, 26, 6, 15, 1},
-    {0, 2, 9, 26, 2, 15, 0x9D},
-    {0, 2, 13, 26, 2, 15, 0xD1},
-    {0, 2, 17, 26, 2, 15, 0x105},
-    {0, 2, 21, 26, 2, 15, 0x139}
+const struct WindowTemplate sWindowTemplates_HasSavedGame[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 1,
+        .width = 26,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 9,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x9D
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 13,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0xD1
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 17,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x105
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 21,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x139
+    }
 };
 
-const struct WindowTemplate sWindowTemplate_ErrorWindow[] = {
-    {0, 2, 15, 26, 4, 15, 0x16D},
-    {0xFF, 0, 0, 0, 0, 0, 0}
+const struct WindowTemplate sWindowTemplate_ErrorWindow[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x16D
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gUnknown_082FF080[] = {
-    {0, 2, 15, 27, 4, 15, 1},
-    {0, 3, 5, 6, 4, 15, 0x6D},
-    {0, 3, 2, 9, 10, 15, 0x85},
-    {0xFF, 0, 0, 0, 0, 0, 0}
+const struct WindowTemplate gUnknown_082FF080[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 5,
+        .width = 6,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x6D
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 2,
+        .width = 9,
+        .height = 10,
+        .paletteNum = 15,
+        .baseBlock = 0x85
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 const u16 gMainMenuBgPal[] = INCBIN_U16("graphics/misc/main_menu_bg.gbapal");

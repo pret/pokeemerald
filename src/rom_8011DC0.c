@@ -1637,7 +1637,7 @@ void sub_8014290(u16 arg0, u16 x, u16 y)
     VarSet(VAR_0x4087, arg0);
     Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     saved_warp2_set_2(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
-    warp_in();
+    WarpIntoMap();
 }
 
 void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
@@ -1648,7 +1648,7 @@ void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
     gUnknown_03005DB4 = GetMultiplayerId();
     sub_809D2BC();
     Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
-    warp_in();
+    WarpIntoMap();
 }
 
 void sub_8014384(void)
