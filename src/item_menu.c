@@ -848,7 +848,7 @@ void sub_81AB520(u8 rboxId, int item_index_in_pocket, u8 a)
         }
         itemId = BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, item_index_in_pocket);
         itemQuantity = BagGetQuantityByPocketPosition(gUnknown_0203CE58.pocket + 1, item_index_in_pocket);
-        if ((u16)(itemId - ITEM_HM01) <= 7)
+        if (itemId >= ITEM_HM01 && itemId <= ITEM_HM08)
             BlitBitmapToWindow(rboxId, gBagMenuHMIcon_Gfx, 8, a - 1, 16, 16);
         if (gUnknown_0203CE58.pocket == 3)
         {
@@ -874,10 +874,10 @@ void sub_81AB520(u8 rboxId, int item_index_in_pocket, u8 a)
 
 void bag_menu_print_description_box_text(int a)
 {
-    u8* str;
+    const u8 *str;
     if (a != -2)
     {
-        str = (u8*)ItemId_GetDescription(BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, a));
+        str = ItemId_GetDescription(BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, a));
     }
     else
     {
@@ -2276,9 +2276,9 @@ void setup_bag_menu_textboxes(void)
 
     InitWindows(gUnknown_08614174);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, -32);
-    LoadMessageBoxGfx(0, 10, -48);
-    sub_819A2BC(-64, 1);
+    LoadUserWindowBorderGfx(0, 1, 0xE0);
+    LoadMessageBoxGfx(0, 10, 0xD0);
+    sub_819A2BC(0xC0, 1);
     LoadPalette(&gUnknown_0860F074, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
     {
