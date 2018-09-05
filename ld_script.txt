@@ -475,7 +475,7 @@ SECTIONS {
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         src/trader.o(.rodata);
-        data/starter_choose.o(.rodata);
+        src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
