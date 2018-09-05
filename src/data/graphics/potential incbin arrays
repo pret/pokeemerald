@@ -1,0 +1,9 @@
+The following contained multiple .incbin's in graphics.s, however I couldn't get them to work as arrays or successive INCBIN's so I've given them seperate labels
+const u8 gHealthboxElementsGfxTable[]
+const u8 gUnknown_08C1249C[]
+const u8 gMonIcon_Deoxys[]
+const u16 gTilesetPalettes_General[]
+const u16 gWallpaperPalettes_Horizontal[]
+const u16 gWallpaperPalettes_Ribbon[]
+const u16 gMonIconPalettes[]
+const u16 gTitleScreenBgPalettes[]

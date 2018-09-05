@@ -1128,7 +1128,7 @@ SECTIONS {
     anim_mon_front_pic_data :
     ALIGN(4)
     {
-        data/anim_mon_front_pics.o(anim_mon_front_pic_data);
+        src/anim_mon_front_pics.o(.rodata);
     } =0
 
     gap2 :
@@ -1142,7 +1142,6 @@ SECTIONS {
     ALIGN(4)
     {
         src/graphics.o(.rodata);
-        data/graphics.o(gfx_data);
     } =0
 
     /* Discard everything not specifically mentioned above. */

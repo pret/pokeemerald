@@ -16,7 +16,7 @@ const u8 gUnusedPal_OldCharmap[] = INCBIN_U8("graphics/unused/old_charmap.gbapal
 const u8 gSmokescreenImpactTiles[] = INCBIN_U8("graphics/battle_anims/sprites/smokescreen_impact.4bpp.lz");
 const u8 gSmokescreenImpactPalette[] = INCBIN_U8("graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz");
 
-#include "graphics/interface_pokeballs.h"
+#include "data/graphics/interface_pokeballs.h"
 
 const u8 gBlankGfxCompressed[] = INCBIN_U8("graphics/interface/blank.4bpp.lz");
 
@@ -950,8 +950,8 @@ const u8 gBattleAnimSpritePalette_257[] = INCBIN_U8("graphics/battle_anims/sprit
 
 const u8 gUnknownPal_C2F9E0[] = INCBIN_U8("graphics/unknown/unknown_C2F9E0.gbapal.lz");
 
-#include "graphics/pokemon.h"
-#include "graphics/trainers.h"
+#include "data/graphics/pokemon.h"
+#include "data/graphics/trainers.h"
 
 const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/icons/question_mark_icon.4bpp");
 const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/footprints/question_mark_footprint.1bpp");
@@ -962,7 +962,7 @@ const u8 gUnknown_08D77AE4[] = INCBIN_U8("graphics/battle_transitions/vs_frame.g
 
 const u8 gUnknown_08D77B0C[] = INCBIN_U8("graphics/battle_transitions/vs.4bpp.lz");
 
-#include "graphics/battle_terrain.h"
+#include "data/graphics/battle_terrain.h"
 
 const u8 gUnknown_08D82F10[] = INCBIN_U8("graphics/battle_frontier/tourney_bg.4bpp.lz");
 const u8 gUnknown_08D834FC[] = INCBIN_U8("graphics/battle_frontier/tourney_line.4bpp.lz"); // the red glow mask for the tourney advancement lines
@@ -1003,7 +1003,7 @@ const u16 gUnknown_08D856C8[] = INCBIN_U16("graphics/battle_frontier/pyramid_lig
 const u16 gUnknown_08D857A8[] = INCBIN_U16("graphics/battle_frontier/battle_tilemap1.bin.lz");
 const u16 gUnknown_08D85A1C[] = INCBIN_U16("graphics/battle_frontier/battle_tilemap2.bin.lz");
 
-#include "graphics/intro_scene.h"
+#include "data/graphics/intro_scene.h"
 
 const u8 gBattleAnimSpriteSheet_261[] = INCBIN_U8("graphics/battle_anims/sprites/261.4bpp.lz");
 
@@ -1218,10 +1218,10 @@ const u8 gPokeblockGold_Pal[] = INCBIN_U8("graphics/pokeblock/gold.gbapal.lz");
 
 const u16 gUnknown_08D9BA44[] = INCBIN_U16("graphics/interface/pokeblock_feeding_bg_map.bin.lz");
 
-#include "graphics/berries.h"
-#include "graphics/rayquaza_scene.h"
-#include "graphics/items.h"
-#include "graphics/decorations.h"
+#include "data/graphics/berries.h"
+#include "data/graphics/rayquaza_scene.h"
+#include "data/graphics/items.h"
+#include "data/graphics/decorations.h"
 
 const u8 gBattleAnimSpritePalette_282[] = INCBIN_U8("graphics/battle_anims/sprites/282.gbapal.lz");
 const u8 gBattleAnimSpriteSheet_282[] = INCBIN_U8("graphics/battle_anims/sprites/282.4bpp.lz");
@@ -1248,7 +1248,7 @@ const u8 gRouletteCreditTiles[] = INCBIN_U8("graphics/roulette/credit.4bpp.lz");
 const u8 gRouletteNumbersTiles[] = INCBIN_U8("graphics/roulette/numbers.4bpp.lz");
 const u8 gRouletteMultiplierTiles[] = INCBIN_U8("graphics/roulette/multiplier.4bpp.lz");
 
-#include "graphics/mail.h"
+#include "data/graphics/mail.h"
 
 const u16 gFrontierFactorySelectMenu_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_menu1.gbapal");
 const u16 gFrontierFactorySelectMenu_Pal2[] = INCBIN_U16("graphics/battle_frontier/factory_menu2.gbapal");
@@ -1424,7 +1424,7 @@ const u8 gUsePokeblockGraph_Gfx[] = INCBIN_U8("graphics/pokeblock/use_screen/gra
 const u16 gUsePokeblockGraph_Tilemap[] = INCBIN_U16("graphics/pokeblock/use_screen/graph.bin.lz");
 const u16 gUsePokeblockNatureWin_Pal[] = INCBIN_U16("graphics/pokeblock/use_screen/nature.gbapal");
 
-#include "graphics/slot_machine.h"
+#include "data/graphics/slot_machine.h"
 
 const u16 gUnknown_08DD19F8[] = INCBIN_U16("graphics/unknown/unknown_DD19F8.bin");
 
@@ -1516,7 +1516,7 @@ const u8 gTradeGba_Gfx[] = INCBIN_U8("graphics/link/gba.4bpp");
 // 8DD8760
 asm(".space 0x20"); //blank palette??
 
-#include "graphics/berry_fix.h"
+#include "data/graphics/berry_fix.h"
 
 // more trade stuff?
 
@@ -1603,12 +1603,11 @@ const u16 gUnknown_08DE3398[] = INCBIN_U16("graphics/berry_crusher/tiles.gbapal"
 const u8 gUnknown_08DE34B8[] = INCBIN_U8("graphics/berry_crusher/tiles.4bpp.lz");
 const u16 gUnknown_08DE3FD4[] = INCBIN_U16("graphics/berry_crusher/tiles.bin.lz");
 
-/* random garbage at the end.
-asm(".space 0x54BAC\
-     .byte 0x0D, 0x00, 0x58, 0x02\
-     .space 0x1145\
-     .byte 0x02\
-     .space 0x3242\
-     .byte 0x40\
+// random garbage at the end.
+asm(".space 0x54BAC \n\
+     .byte 0x0D, 0x00, 0x58, 0x02 \n\
+     .space 0x1145 \n\
+     .byte 0x02 \n\
+     .space 0x3242 \n\
+     .byte 0x40 \n\
      .space 0x13");
-*/
