@@ -1,23 +1,31 @@
 #include "global.h"
 #include "bg.h"
+#include "decompress.h"
 #include "decoration.h"
+#include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"
+#include "fieldmap.h"
+#include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item.h"
+#include "item_icon.h"
 #include "list_menu.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "money.h"
 #include "overworld.h"
 #include "palette.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "shop.h"
 #include "sound.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
+#include "text_window.h"
 #include "tv.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -31,7 +39,12 @@ extern const struct WindowTemplate gUnknown_08589A38[2];
 extern const struct MenuAction gUnknown_08589A10[3];
 extern const struct MenuAction gUnknown_08589A28[2];
 extern const struct ListMenuTemplate gUnknown_08589A48;
-extern const u8 gUnknown_08589AB3[];
+extern const struct BgTemplate gUnknown_08589A60[4];
+extern const u8 gBuyMenuFrame_Gfx[];
+extern const u8 gBuyMenuFrame_Tilemap[];
+extern const u16 gMenuMoneyPal[];
+extern const struct WindowTemplate gUnknown_08589A70[];
+extern u8 gUnknown_08589AB0[][3];
 
 static void Task_ShopMenu(u8 taskId);
 void HandleShopMenuQuit(u8 taskId);
@@ -51,7 +64,14 @@ void BuyMenuDecompressBgGraphics(void);
 void BuyMenuSetListEntry(struct ListMenuItem*, u16, u8*);
 void BuyMenuAddItemIcon(u16, u8);
 void BuyMenuRemoveItemIcon(u16, u8);
-void BuyMenuPrint(u8, const u8*, u8, u8, u8, u8);
+void BuyMenuPrint(u8 windowId, const u8 *text, u8 x, u8 y, s8 speed, u8 colorSet);
+void BuyMenuDrawMapGraphics(void);
+void BuyMenuCopyMenuBgToBg1TilemapBuffer(void);
+void BuyMenuCollectEventObjectData(void);
+void BuyMenuDrawEventObjects(void);
+void BuyMenuDrawMapBg(void);
+bool8 BuyMenuCheckForOverlapWithMenuBg(u16, u16);
+void BuyMenuDrawMapMetatile(s16, s16, u16*, u8);
 
 
 /*static*/ u8 CreateShopMenu(u8 martType)
@@ -227,9 +247,9 @@ void CB2_InitBuyMenu(void)
         ResetTasks();
         clear_scheduled_bg_copies_to_vram();
         gShopDataPtr = AllocZeroed(sizeof(struct ShopData));
-        gShopDataPtr->unk200B = 0xFF;
-        gShopDataPtr->unk200D = -1;
-        gShopDataPtr->unk200E = -1;
+        gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
+        gShopDataPtr->unk200D[0] = -1;
+        gShopDataPtr->unk200D[1] = -1;
         BuyMenuBuildListMenuTemplate();
         BuyMenuInitBgs();
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
@@ -355,6 +375,305 @@ void BuyMenuPrintPriceInList(u8 windowId, int item, u8 y)
 
         StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
         x = GetStringRightAlignXOffset(7, gStringVar4, 0x78);
-        AddTextPrinterParameterized2(windowId, 7, x, y, 0, 0, gUnknown_08589AB3, -1, gStringVar4);
+        AddTextPrinterParameterized2(windowId, 7, x, y, 0, 0, gUnknown_08589AB0[1], -1, gStringVar4);
     }
 }
+
+void BuyMenuAddScrollIndicatorArrows(void)
+{
+    if (gShopDataPtr->scrollIndicatorsTaskId == 0xFF && gMartInfo.itemCount + 1 > 8)
+    {
+        gShopDataPtr->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(
+            SCROLL_ARROW_UP,
+            0xAC,
+            0xC,
+            0x94,
+            gMartInfo.itemCount - 7,
+            0x834,
+            0x834,
+            &gShopDataPtr->unk2008);
+    }
+}
+
+void BuyMenuRemoveScrollIndicatorArrows(void)
+{
+    if (gShopDataPtr->scrollIndicatorsTaskId != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(gShopDataPtr->scrollIndicatorsTaskId);
+        gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
+    }
+}
+
+void BuyMenuPrintCursor(u8 scrollIndicatorsTaskId, u8 colorSet)
+{
+    u8 y = ListMenuGetYCoordForPrintingArrowCursor(scrollIndicatorsTaskId);
+    BuyMenuPrint(1, gText_SelectorArrow2, 0, y, 0, colorSet);
+}
+
+void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
+{
+    u8 spriteId;
+    u8 *spriteIdPtr = &gShopDataPtr->unk200D[iconSlot];
+    if (*spriteIdPtr != 0xFF)
+        return;
+
+    if (gMartInfo.martType == MART_TYPE_0 || item == 0xFFFF)
+    {
+        spriteId = AddItemIconSprite(iconSlot + 0x83E, iconSlot + 0x83E, item);
+        if (spriteId != MAX_SPRITES)
+        {
+            *spriteIdPtr = spriteId;
+            gSprites[spriteId].pos2.x = 24;
+            gSprites[spriteId].pos2.y = 88;
+        }
+    }
+    else
+    {
+        spriteId = AddDecorationIconObject(item, 20, 84, 1, iconSlot + 0x83E, iconSlot + 0x83E);
+        if (spriteId != MAX_SPRITES)
+            *spriteIdPtr = spriteId;
+    }
+}
+
+void BuyMenuRemoveItemIcon(u16 item, u8 iconSlot)
+{
+    u8 *spriteIdPtr = &gShopDataPtr->unk200D[iconSlot];
+    if (*spriteIdPtr == 0xFF)
+        return;
+
+    FreeSpriteTilesByTag(iconSlot + 0x83E);
+    FreeSpritePaletteByTag(iconSlot + 0x83E);
+    DestroySprite(&gSprites[*spriteIdPtr]);
+    *spriteIdPtr = 0xFF;
+}
+
+void BuyMenuInitBgs(void)
+{
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, gUnknown_08589A60, ARRAY_COUNT(gUnknown_08589A60));
+    SetBgTilemapBuffer(1, gShopDataPtr->tilemapBuffers[1]);
+    SetBgTilemapBuffer(2, gShopDataPtr->tilemapBuffers[3]);
+    SetBgTilemapBuffer(3, gShopDataPtr->tilemapBuffers[2]);
+    SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG2HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG2VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG3VOFS, 0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+}
+
+void BuyMenuDecompressBgGraphics(void)
+{
+    decompress_and_copy_tile_data_to_vram(1, gBuyMenuFrame_Gfx, 0x3A0, 0x3E3, 0);
+    LZDecompressWram(gBuyMenuFrame_Tilemap, gShopDataPtr->tilemapBuffers[0]);
+    LoadCompressedPalette(gMenuMoneyPal, 0xC0, 0x20);
+}
+
+void BuyMenuInitWindows(void)
+{
+    InitWindows(gUnknown_08589A70);
+    DeactivateAllTextPrinters();
+    LoadUserWindowBorderGfx(0, 1, 0xD0);
+    LoadMessageBoxGfx(0, 0xA, 0xE0);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    PutWindowTilemap(2);
+}
+
+void BuyMenuPrint(u8 windowId, const u8 *text, u8 x, u8 y, s8 speed, u8 colorSet)
+{
+    AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, gUnknown_08589AB0[colorSet], speed, text);
+}
+
+void BuyMenuDisplayMessage(u8 taskId, const u8 *text, TaskFunc callback)
+{
+    DisplayMessageAndContinueTask(taskId, 5, 10, 14, 1, GetPlayerTextSpeed(), text, callback);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void BuyMenuDrawGraphics(void)
+{
+    BuyMenuDrawMapGraphics();
+    BuyMenuCopyMenuBgToBg1TilemapBuffer();
+    AddMoneyLabelObject(19, 11);
+    PrintMoneyAmountInMoneyBoxWithBorder(0, 1, 13, GetMoney(&gSaveBlock1Ptr->money));
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    schedule_bg_copy_tilemap_to_vram(3);
+}
+
+void BuyMenuDrawMapGraphics(void)
+{
+    BuyMenuCollectEventObjectData();
+    BuyMenuDrawEventObjects();
+    BuyMenuDrawMapBg();
+}
+
+#ifdef NONMATCHING
+// functionally equivalent, but couldn't get the loop variables using the 
+// stack correctly. Might be related to the tileset metatiles type.
+void BuyMenuDrawMapBg(void)
+{
+    s16 i;
+    s16 j;
+    s16 x;
+    s16 y;
+    const struct MapLayout *mapLayout;
+    u16 metatile, metatileLayerType;
+
+    mapLayout = gMapHeader.mapLayout;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    x -= 4;
+    y -= 4;
+
+    for (j = 0; j < 10; j++)
+    {
+        for (i = 0; i < 15; i++)
+        {
+            metatile = MapGridGetMetatileIdAt(x + i, y + j);
+            if (BuyMenuCheckForOverlapWithMenuBg(i, j) == TRUE)
+                metatileLayerType = MapGridGetMetatileLayerTypeAt(x + i, y + j);
+            else
+                metatileLayerType = 1;
+
+            if (metatile < 0x200)
+            {
+                BuyMenuDrawMapMetatile(i, j, (u16*)mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
+            }
+            else
+            {
+                BuyMenuDrawMapMetatile(i, j, (u16*)mapLayout->secondaryTileset->metatiles + ((metatile - 0x200) * 8), metatileLayerType);
+            }
+        }
+    }
+}
+#else
+NAKED
+void BuyMenuDrawMapBg(void)
+{
+    asm_unified("\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x4\n\
+    ldr r0, =gMapHeader\n\
+    ldr r0, [r0]\n\
+    mov r9, r0\n\
+    mov r4, sp\n\
+    adds r4, 0x2\n\
+    mov r0, sp\n\
+    adds r1, r4, 0\n\
+    bl GetXYCoordsOneStepInFrontOfPlayer\n\
+    mov r1, sp\n\
+    mov r0, sp\n\
+    ldrh r0, [r0]\n\
+    subs r0, 0x4\n\
+    strh r0, [r1]\n\
+    ldrh r0, [r4]\n\
+    subs r0, 0x4\n\
+    strh r0, [r4]\n\
+    movs r1, 0\n\
+    mov r10, r4\n\
+_080E05B6:\n\
+    movs r4, 0\n\
+    lsls r7, r1, 16\n\
+    asrs r0, r7, 16\n\
+    mov r8, r0\n\
+_080E05BE:\n\
+    mov r0, sp\n\
+    movs r1, 0\n\
+    ldrsh r0, [r0, r1]\n\
+    lsls r4, 16\n\
+    asrs r5, r4, 16\n\
+    adds r0, r5\n\
+    mov r2, r10\n\
+    movs r3, 0\n\
+    ldrsh r1, [r2, r3]\n\
+    add r1, r8\n\
+    bl MapGridGetMetatileIdAt\n\
+    lsls r0, 16\n\
+    lsrs r6, r0, 16\n\
+    adds r0, r5, 0\n\
+    mov r1, r8\n\
+    bl BuyMenuCheckForOverlapWithMenuBg\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _080E0608\n\
+    mov r0, sp\n\
+    movs r1, 0\n\
+    ldrsh r0, [r0, r1]\n\
+    adds r0, r5\n\
+    mov r2, r10\n\
+    movs r3, 0\n\
+    ldrsh r1, [r2, r3]\n\
+    add r1, r8\n\
+    bl MapGridGetMetatileLayerTypeAt\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    b _080E060A\n\
+    .pool\n\
+_080E0608:\n\
+    movs r5, 0x1\n\
+_080E060A:\n\
+    ldr r0, =0x000001ff\n\
+    cmp r6, r0\n\
+    bhi _080E062C\n\
+    asrs r0, r4, 16\n\
+    mov r2, r9\n\
+    ldr r1, [r2, 0x10]\n\
+    lsls r3, r6, 4\n\
+    ldr r2, [r1, 0xC]\n\
+    adds r2, r3\n\
+    asrs r1, r7, 16\n\
+    adds r3, r5, 0\n\
+    bl BuyMenuDrawMapMetatile\n\
+    b _080E0644\n\
+    .pool\n\
+_080E062C:\n\
+    asrs r0, r4, 16\n\
+    mov r3, r9\n\
+    ldr r2, [r3, 0x14]\n\
+    ldr r3, =0xfffffe00\n\
+    adds r1, r6, r3\n\
+    lsls r1, 4\n\
+    ldr r2, [r2, 0xC]\n\
+    adds r2, r1\n\
+    asrs r1, r7, 16\n\
+    adds r3, r5, 0\n\
+    bl BuyMenuDrawMapMetatile\n\
+_080E0644:\n\
+    movs r1, 0x80\n\
+    lsls r1, 9\n\
+    adds r0, r4, r1\n\
+    lsrs r4, r0, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0xE\n\
+    ble _080E05BE\n\
+    adds r0, r7, r1\n\
+    lsrs r1, r0, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0x9\n\
+    ble _080E05B6\n\
+    add sp, 0x4\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool");
+}
+#endif // NONMATCHING

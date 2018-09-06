@@ -27,13 +27,15 @@ struct BuyMenuLabel
 
 struct ShopData
 {
-	/*0x0000*/ u8 filler0[0x2004];
+	/*0x0000*/ u8 tilemapBuffers[4][0x800];
+	/*0x2000*/ u8 filler2000[0x4];
 	/*0x2004*/ u16 unk2004;
-	/*0x2006*/ u8 filler2006[0x5];
-	/*0x200B*/ u8 unk200B;
+	/*0x2006*/ u8 filler2006[0x2];
+	/*0x2008*/ u16 unk2008;
+	/*0x200A*/ u8 filler200A;
+	/*0x200B*/ u8 scrollIndicatorsTaskId;
 	/*0x200C*/ u8 unk200C;
-	/*0x200D*/ s8 unk200D;
-	/*0x200E*/ s8 unk200E;
+	/*0x200D*/ u8 unk200D[2];
 	/*0x200F*/ u8 filler200F[0xA1];
 };
 
