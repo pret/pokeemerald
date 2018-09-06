@@ -80,12 +80,6 @@ gUnknown_03001279: @ 3001279
 
 	.include "src/battle_factory.o"
 
-gUnknown_03001280: @ 3001280
-	.space 0x4
-
-gUnknown_03001284: @ 3001284
-	.space 0x4
-
 gUnknown_03001288: @ 3001288
 	.space 0x4
 

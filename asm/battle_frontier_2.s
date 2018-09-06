@@ -8,1106 +8,6 @@
 
 
 
-	thumb_func_start sub_819C7E0
-sub_819C7E0: @ 819C7E0
-	push {lr}
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl RunTextPrinters
-	bl UpdatePaletteFade
-	bl RunTasks
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819C7E0
-
-	thumb_func_start sub_819C7FC
-sub_819C7FC: @ 819C7FC
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819C7FC
-
-	thumb_func_start sub_819C810
-sub_819C810: @ 819C810
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	sub sp, 0x4
-	ldr r4, =gPlayerParty
-	ldr r5, =gUnknown_03001284
-	ldr r1, [r5]
-	ldrb r0, [r1, 0x12]
-	movs r6, 0x64
-	muls r0, r6
-	adds r0, r4
-	ldr r2, =gEnemyParty
-	mov r9, r2
-	ldrb r1, [r1, 0x13]
-	muls r1, r6
-	add r1, r9
-	movs r2, 0x64
-	bl memcpy
-	movs r1, 0
-	mov r0, sp
-	strb r1, [r0]
-	ldr r0, [r5]
-	ldrb r0, [r0, 0x12]
-	muls r0, r6
-	adds r0, r4
-	movs r1, 0x20
-	mov r2, sp
-	bl SetMonData
-	ldr r3, =gSaveBlock2Ptr
-	mov r8, r3
-	ldr r3, [r3]
-	ldr r4, [r5]
-	ldrb r0, [r4, 0x12]
-	lsls r2, r0, 1
-	adds r2, r0
-	lsls r2, 2
-	adds r2, r3, r2
-	ldrb r1, [r4, 0x13]
-	adds r1, 0x3
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3, r0
-	movs r1, 0xE7
-	lsls r1, 4
-	adds r0, r1
-	ldrh r0, [r0]
-	adds r2, r1
-	strh r0, [r2]
-	ldrb r0, [r4, 0x12]
-	lsls r2, r0, 1
-	adds r2, r0
-	lsls r2, 2
-	adds r2, r3, r2
-	ldrb r1, [r4, 0x13]
-	adds r1, 0x3
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r3, r0
-	ldr r0, =0x00000e78
-	adds r3, r0
-	ldrb r1, [r3]
-	adds r2, r0
-	strb r1, [r2]
-	ldr r0, [r5]
-	ldrb r0, [r0, 0x13]
-	muls r0, r6
-	add r0, r9
-	movs r1, 0
-	movs r2, 0
-	bl GetMonData
-	mov r1, r8
-	ldr r2, [r1]
-	ldr r4, [r5]
-	ldrb r3, [r4, 0x12]
-	lsls r1, r3, 1
-	adds r1, r3
-	lsls r1, 2
-	ldr r3, =0x00000e74
-	adds r2, r3
-	adds r2, r1
-	str r0, [r2]
-	ldrb r0, [r4, 0x13]
-	muls r0, r6
-	add r0, r9
-	movs r1, 0x2E
-	movs r2, 0
-	bl GetBoxMonData
-	mov r1, r8
-	ldr r2, [r1]
-	ldr r1, [r5]
-	ldrb r3, [r1, 0x12]
-	lsls r1, r3, 1
-	adds r1, r3
-	lsls r1, 2
-	adds r2, r1
-	ldr r3, =0x00000e79
-	adds r2, r3
-	strb r0, [r2]
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819C810
-
-	thumb_func_start sub_819C90C
-sub_819C90C: @ 819C90C
-	push {r4-r6,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r6, r0, r1
-	movs r1, 0x8
-	ldrsh r0, [r6, r1]
-	cmp r0, 0x7
-	beq _0819C950
-	cmp r0, 0x7
-	bgt _0819C934
-	cmp r0, 0x6
-	beq _0819C93A
-	b _0819C9F0
-	.pool
-_0819C934:
-	cmp r0, 0x8
-	beq _0819C9C4
-	b _0819C9F0
-_0819C93A:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r0, 0x7
-	strh r0, [r6, 0x8]
-	b _0819C9F0
-_0819C950:
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0
-	bne _0819C9F0
-	ldr r4, =gUnknown_03001284
-	ldr r0, [r4]
-	adds r0, 0x21
-	ldrb r0, [r0]
-	bl DestroyTask
-	ldr r1, [r4]
-	ldr r0, [r1, 0x2C]
-	adds r1, 0x30
-	bl sub_819F444
-	bl sub_819E538
-	ldr r4, =gUnknown_0203CE40
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	ldr r4, =gUnknown_0203CE44
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	ldr r4, =gUnknown_0203CE48
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	ldr r4, =gUnknown_0203CE4C
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	bl FreeAllWindowBuffers
-	movs r0, 0x8
-	strh r0, [r6, 0x8]
-	b _0819C9F0
-	.pool
-_0819C9C4:
-	adds r0, r2, 0
-	bl DestroyTask
-	ldr r2, =gUnknown_03001284
-	ldr r1, [r2]
-	movs r0, 0x1
-	strb r0, [r1, 0x15]
-	ldr r2, [r2]
-	ldr r0, =gPlttBufferUnfaded
-	movs r1, 0xF4
-	lsls r1, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	strh r0, [r2, 0x24]
-	ldr r1, =gPlayerParty
-	ldrb r2, [r2, 0x3]
-	ldr r0, =sub_819DC1C
-	str r0, [sp]
-	movs r0, 0
-	movs r3, 0x2
-	bl ShowPokemonSummaryScreen
-_0819C9F0:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819C90C
-
-	thumb_func_start sub_819CA08
-sub_819CA08: @ 819CA08
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r7, =gUnknown_03001284
-	ldr r2, [r7]
-	adds r0, r2, 0
-	adds r0, 0x30
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0819CAFE
-	ldr r1, =gTasks
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r0, 0x8
-	ldrsh r1, [r4, r0]
-	cmp r1, 0x1
-	beq _0819CA78
-	cmp r1, 0x1
-	bgt _0819CA44
-	cmp r1, 0
-	beq _0819CA4E
-	b _0819CAFE
-	.pool
-_0819CA44:
-	cmp r1, 0x2
-	beq _0819CA8C
-	cmp r1, 0x3
-	beq _0819CAA4
-	b _0819CAFE
-_0819CA4E:
-	adds r0, r2, 0
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0819CA68
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	ldr r0, =gSpecialVar_Result
-	strh r1, [r0]
-	b _0819CAFE
-	.pool
-_0819CA68:
-	movs r0, 0x2
-	strh r0, [r4, 0x8]
-	ldr r1, =gSpecialVar_Result
-	movs r0, 0x1
-	strh r0, [r1]
-	b _0819CAFE
-	.pool
-_0819CA78:
-	adds r0, r2, 0
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0819CA9C
-	ldrb r0, [r2, 0x3]
-	strb r0, [r2, 0x13]
-	bl sub_819C810
-	b _0819CA9C
-_0819CA8C:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-_0819CA9C:
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	b _0819CAFE
-_0819CAA4:
-	bl UpdatePaletteFade
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0
-	bne _0819CAFE
-	ldr r0, [r7]
-	adds r0, 0x21
-	ldrb r0, [r0]
-	bl DestroyTask
-	bl sub_819E538
-	ldr r4, =gUnknown_0203CE40
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	ldr r4, =gUnknown_0203CE44
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	ldr r4, =gUnknown_0203CE48
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	ldr r4, =gUnknown_0203CE4C
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	ldr r0, [r7]
-	bl Free
-	str r5, [r7]
-	bl FreeAllWindowBuffers
-	ldr r0, =CB2_ReturnToFieldContinueScript
-	bl SetMainCallback2
-	adds r0, r6, 0
-	bl DestroyTask
-_0819CAFE:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819CA08
-
-	thumb_func_start sub_819CB1C
-sub_819CB1C: @ 819CB1C
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r7, =gUnknown_03001284
-	ldr r0, [r7]
-	adds r0, 0x30
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0819CBD6
-	ldr r1, =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x4
-	beq _0819CB50
-	cmp r0, 0x5
-	beq _0819CB5A
-	b _0819CBD6
-	.pool
-_0819CB50:
-	bl sub_819E9E0
-	movs r0, 0x5
-	strh r0, [r4, 0x8]
-	b _0819CBD6
-_0819CB5A:
-	ldr r2, =gMain
-	ldrh r1, [r2, 0x2E]
-	movs r6, 0x1
-	adds r5, r6, 0
-	ands r5, r1
-	cmp r5, 0
-	beq _0819CB86
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, [r7]
-	ldrb r0, [r0, 0x16]
-	cmp r0, 0
-	bne _0819CB80
-	strh r6, [r4, 0xA]
-	b _0819CB9C
-	.pool
-_0819CB80:
-	movs r0, 0
-	strh r0, [r4, 0xA]
-	b _0819CB96
-_0819CB86:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CBA8
-	movs r0, 0x5
-	bl PlaySE
-	strh r5, [r4, 0xA]
-_0819CB96:
-	movs r0, 0x4
-	bl sub_819EA64
-_0819CB9C:
-	ldrh r0, [r4, 0x14]
-	ldrh r1, [r4, 0x16]
-	lsls r0, 16
-	orrs r0, r1
-	str r0, [r4]
-	b _0819CBD6
-_0819CBA8:
-	ldrh r1, [r2, 0x30]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CBC2
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0x1
-	negs r0, r0
-	bl sub_819E758
-	b _0819CBD6
-_0819CBC2:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CBD6
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0x1
-	bl sub_819E758
-_0819CBD6:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819CB1C
-
-	thumb_func_start sub_819CBDC
-sub_819CBDC: @ 819CBDC
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r2, r1, r2
-	movs r1, 0xA
-	ldrsh r0, [r2, r1]
-	cmp r0, 0x1
-	bne _0819CC04
-	movs r0, 0
-	strh r0, [r2, 0x8]
-	ldr r0, =sub_819CA08
-	b _0819CC16
-	.pool
-_0819CC04:
-	movs r0, 0
-	strh r0, [r2, 0x8]
-	ldr r1, =sub_819CE40
-	lsrs r0, r1, 16
-	strh r0, [r2, 0x14]
-	strh r1, [r2, 0x16]
-	movs r0, 0x1
-	strh r0, [r2, 0x12]
-	ldr r0, =sub_819D770
-_0819CC16:
-	str r0, [r2]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819CBDC
-
-	thumb_func_start sub_819CC24
-sub_819CC24: @ 819CC24
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-	movs r0, 0x8
-	ldrsh r5, [r4, r0]
-	cmp r5, 0
-	bne _0819CC5A
-	ldr r0, =gText_QuitSwapping
-	bl sub_819EBEC
-	ldr r0, =gUnknown_03001284
-	ldr r0, [r0]
-	adds r0, 0x20
-	strb r5, [r0]
-	movs r0, 0x4
-	strh r0, [r4, 0x8]
-	ldr r1, =sub_819CBDC
-	lsrs r0, r1, 16
-	strh r0, [r4, 0x14]
-	strh r1, [r4, 0x16]
-	ldr r0, =sub_819CB1C
-	str r0, [r4]
-_0819CC5A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819CC24
-
-	thumb_func_start sub_819CC74
-sub_819CC74: @ 819CC74
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, =gUnknown_03001284
-	ldr r1, [r0]
-	ldr r0, [r1, 0x2C]
-	adds r1, 0x30
-	movs r2, 0x1
-	bl sub_819F3F8
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r2, r0, r1
-	movs r1, 0xA
-	ldrsh r0, [r2, r1]
-	cmp r0, 0x1
-	bne _0819CCB0
-	movs r0, 0
-	strh r0, [r2, 0x8]
-	ldr r0, =sub_819CA08
-	b _0819CCC2
-	.pool
-_0819CCB0:
-	movs r0, 0
-	strh r0, [r2, 0x8]
-	ldr r1, =sub_819CE40
-	lsrs r0, r1, 16
-	strh r0, [r2, 0x14]
-	strh r1, [r2, 0x16]
-	movs r0, 0x1
-	strh r0, [r2, 0x12]
-	ldr r0, =sub_819D770
-_0819CCC2:
-	str r0, [r2]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819CC74
-
-	thumb_func_start sub_819CCD4
-sub_819CCD4: @ 819CCD4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r5, r1, r2
-	movs r1, 0x8
-	ldrsh r0, [r5, r1]
-	cmp r0, 0
-	bne _0819CD1A
-	ldr r4, =gUnknown_03001284
-	ldr r1, [r4]
-	adds r0, r1, 0
-	adds r0, 0x2D
-	adds r1, 0x30
-	movs r2, 0x1
-	bl sub_819F2B4
-	ldr r0, =gText_AcceptThisPkmn
-	bl sub_819EBEC
-	ldr r0, [r4]
-	adds r0, 0x20
-	movs r1, 0x1
-	strb r1, [r0]
-	movs r0, 0x4
-	strh r0, [r5, 0x8]
-	ldr r1, =sub_819CC74
-	lsrs r0, r1, 16
-	strh r0, [r5, 0x14]
-	strh r1, [r5, 0x16]
-	ldr r0, =sub_819CB1C
-	str r0, [r5]
-_0819CD1A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819CCD4
-
-	thumb_func_start sub_819CD34
-sub_819CD34: @ 819CD34
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	adds r5, r0, r1
-	movs r1, 0x8
-	ldrsh r0, [r5, r1]
-	cmp r0, 0x3
-	beq _0819CDA4
-	cmp r0, 0x3
-	bgt _0819CD60
-	cmp r0, 0x2
-	beq _0819CD66
-	b _0819CE36
-	.pool
-_0819CD60:
-	cmp r0, 0x9
-	beq _0819CD88
-	b _0819CE36
-_0819CD66:
-	ldr r0, =gUnknown_03001284
-	ldr r1, [r0]
-	ldrb r0, [r1, 0x15]
-	cmp r0, 0
-	bne _0819CD7C
-	adds r0, r1, 0
-	adds r0, 0x2D
-	adds r1, 0x30
-	movs r2, 0x1
-	bl sub_819F2B4
-_0819CD7C:
-	movs r0, 0x9
-	strh r0, [r5, 0x8]
-	b _0819CE36
-	.pool
-_0819CD88:
-	ldr r0, =gUnknown_03001284
-	ldr r0, [r0]
-	adds r0, 0x30
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0819CE36
-	bl sub_819E944
-	movs r0, 0x3
-	strh r0, [r5, 0x8]
-	b _0819CE36
-	.pool
-_0819CDA4:
-	ldr r7, =gUnknown_03001284
-	ldr r0, [r7]
-	adds r0, 0x30
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0819CE36
-	ldr r2, =gMain
-	ldrh r1, [r2, 0x2E]
-	movs r0, 0x1
-	mov r8, r0
-	mov r4, r8
-	ands r4, r1
-	cmp r4, 0
-	beq _0819CDD8
-	movs r0, 0x5
-	bl PlaySE
-	adds r0, r6, 0
-	bl sub_819F0A0
-	b _0819CE36
-	.pool
-_0819CDD8:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CE14
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, [r7]
-	ldr r0, [r1, 0x2C]
-	adds r1, 0x30
-	movs r2, 0x1
-	bl sub_819F3F8
-	movs r0, 0x3
-	bl sub_819EA64
-	strh r4, [r5, 0x8]
-	ldr r1, =sub_819CE40
-	lsrs r0, r1, 16
-	strh r0, [r5, 0x14]
-	strh r1, [r5, 0x16]
-	mov r1, r8
-	strh r1, [r5, 0x12]
-	ldr r0, =sub_819D770
-	str r0, [r5]
-	b _0819CE36
-	.pool
-_0819CE14:
-	ldrh r1, [r2, 0x30]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CE28
-	movs r0, 0x1
-	negs r0, r0
-	bl sub_819E7C0
-	b _0819CE36
-_0819CE28:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CE36
-	movs r0, 0x1
-	bl sub_819E7C0
-_0819CE36:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819CD34
-
-	thumb_func_start sub_819CE40
-sub_819CE40: @ 819CE40
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _0819CE64
-	cmp r0, 0x1
-	beq _0819CE88
-	b _0819CF4C
-	.pool
-_0819CE64:
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0819CF4C
-	ldr r0, =gUnknown_03001284
-	ldr r0, [r0]
-	adds r0, 0x22
-	movs r1, 0x1
-	strb r1, [r0]
-	strh r1, [r4, 0x8]
-	b _0819CF4C
-	.pool
-_0819CE88:
-	ldr r2, =gMain
-	ldrh r1, [r2, 0x2E]
-	adds r5, r1, 0
-	ands r5, r0
-	cmp r5, 0
-	beq _0819CEBC
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, =gUnknown_03001284
-	ldr r0, [r0]
-	adds r0, 0x22
-	movs r1, 0
-	strb r1, [r0]
-	bl sub_819EE08
-	bl sub_819EAC0
-	adds r0, r6, 0
-	bl sub_819F184
-	b _0819CF4C
-	.pool
-_0819CEBC:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CEF8
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, =gUnknown_03001284
-	ldr r0, [r0]
-	adds r0, 0x22
-	strb r5, [r0]
-	bl sub_819EE08
-	bl sub_819EAC0
-	ldr r1, =sub_819CC24
-	lsrs r0, r1, 16
-	strh r0, [r4, 0x14]
-	strh r1, [r4, 0x16]
-	strh r5, [r4, 0x8]
-	strh r5, [r4, 0x12]
-	ldr r0, =sub_819D588
-	str r0, [r4]
-	b _0819CF4C
-	.pool
-_0819CEF8:
-	ldrh r1, [r2, 0x30]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CF0C
-	movs r0, 0x1
-	negs r0, r0
-	bl sub_819E694
-	b _0819CF2A
-_0819CF0C:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CF1C
-	movs r0, 0x1
-	bl sub_819E694
-	b _0819CF2A
-_0819CF1C:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CF34
-	movs r0, 0x1
-	bl sub_819E6E8
-_0819CF2A:
-	bl sub_819EFA8
-	bl sub_819EB4C
-	b _0819CF4C
-_0819CF34:
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0819CF4C
-	movs r0, 0x1
-	negs r0, r0
-	bl sub_819E6E8
-	bl sub_819EFA8
-	bl sub_819EB4C
-_0819CF4C:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819CE40
-
-	thumb_func_start sub_819CF54
-sub_819CF54: @ 819CF54
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r0, 0x8
-	ldrsh r2, [r4, r0]
-	cmp r2, 0x1
-	beq _0819CFA0
-	cmp r2, 0x1
-	bgt _0819CF7C
-	cmp r2, 0
-	beq _0819CF82
-	b _0819D05C
-	.pool
-_0819CF7C:
-	cmp r2, 0x2
-	beq _0819D03C
-	b _0819D05C
-_0819CF82:
-	ldr r1, =gUnknown_03001284
-	ldr r0, [r1]
-	adds r0, 0x27
-	strb r2, [r0]
-	ldr r0, [r1]
-	adds r0, 0x28
-	strb r2, [r0]
-	ldr r0, [r1]
-	adds r0, 0x26
-	movs r1, 0x1
-	strb r1, [r0]
-	strh r1, [r4, 0x8]
-	b _0819D05C
-	.pool
-_0819CFA0:
-	ldr r1, =gUnknown_03001284
-	ldr r2, [r1]
-	adds r0, r2, 0
-	adds r0, 0x22
-	ldrb r0, [r0]
-	adds r6, r1, 0
-	cmp r0, 0
-	beq _0819D05C
-	adds r0, r2, 0
-	adds r0, 0x29
-	ldrb r3, [r0]
-	cmp r3, 0
-	beq _0819CFC4
-	movs r0, 0x2
-	strh r0, [r4, 0x8]
-	b _0819D05C
-	.pool
-_0819CFC4:
-	adds r1, r2, 0
-	adds r1, 0x27
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r0, [r6]
-	adds r1, r0, 0
-	adds r1, 0x27
-	ldrb r0, [r1]
-	cmp r0, 0x6
-	bls _0819CFF8
-	strb r3, [r1]
-	ldr r1, [r6]
-	adds r0, r1, 0
-	adds r0, 0x26
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0819CFF0
-	adds r1, 0x28
-	ldrb r0, [r1]
-	subs r0, 0x1
-	b _0819CFF6
-_0819CFF0:
-	adds r1, 0x28
-	ldrb r0, [r1]
-	adds r0, 0x1
-_0819CFF6:
-	strb r0, [r1]
-_0819CFF8:
-	movs r0, 0x80
-	lsls r0, 7
-	ldr r1, [r6]
-	adds r1, 0x28
-	ldrb r1, [r1]
-	movs r2, 0
-	bl BlendPalettes
-	ldr r2, [r6]
-	adds r0, r2, 0
-	adds r0, 0x28
-	ldrb r0, [r0]
-	cmp r0, 0x5
-	bls _0819D01C
-	adds r1, r2, 0
-	adds r1, 0x26
-	movs r0, 0
-	b _0819D05A
-_0819D01C:
-	cmp r0, 0
-	bne _0819D05C
-	ldr r1, =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0x2
-	strh r1, [r0, 0x8]
-	adds r1, r2, 0
-	adds r1, 0x26
-	movs r0, 0x1
-	b _0819D05A
-	.pool
-_0819D03C:
-	ldr r0, =gUnknown_03001284
-	ldr r0, [r0]
-	adds r1, r0, 0
-	adds r1, 0x29
-	ldrb r0, [r1]
-	cmp r0, 0xE
-	bls _0819D058
-	movs r0, 0
-	strb r0, [r1]
-	movs r0, 0x1
-	strh r0, [r4, 0x8]
-	b _0819D05C
-	.pool
-_0819D058:
-	adds r0, 0x1
-_0819D05A:
-	strb r0, [r1]
-_0819D05C:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819CF54
-
-	thumb_func_start sub_819D064
-sub_819D064: @ 819D064
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-	movs r0, 0x8
-	ldrsh r1, [r4, r0]
-	cmp r1, 0x1
-	beq _0819D0A4
-	cmp r1, 0x1
-	bgt _0819D08C
-	cmp r1, 0
-	beq _0819D092
-	b _0819D118
-	.pool
-_0819D08C:
-	cmp r1, 0x2
-	beq _0819D0BC
-	b _0819D118
-_0819D092:
-	ldr r0, =gUnknown_03001284
-	ldr r0, [r0]
-	adds r0, 0x27
-	strb r1, [r0]
-	strh r1, [r4, 0x10]
-	b _0819D0AE
-	.pool
-_0819D0A4:
-	ldr r0, =gPlttBufferUnfaded+ 0x1E0
-	movs r1, 0xE0
-	movs r2, 0xA
-	bl LoadPalette
-_0819D0AE:
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	b _0819D118
-	.pool
-_0819D0BC:
-	ldr r2, =gUnknown_03001284
-	ldr r0, [r2]
-	adds r0, 0x28
-	ldrb r0, [r0]
-	cmp r0, 0xF
-	bls _0819D0D2
-	movs r0, 0x1
-	strh r0, [r4, 0x10]
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-_0819D0D2:
-	ldr r1, [r2]
-	adds r1, 0x27
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r0, [r2]
-	adds r1, r0, 0
-	adds r1, 0x27
-	ldrb r0, [r1]
-	cmp r0, 0x3
-	bls _0819D108
-	movs r0, 0
-	strb r0, [r1]
-	ldr r1, =gPlttBufferUnfaded
-	ldr r0, =gPlttBufferFaded
-	movs r3, 0xE4
-	lsls r3, 1
-	adds r0, r3
-	ldrh r0, [r0]
-	adds r3, 0x20
-	adds r1, r3
-	strh r0, [r1]
-	ldr r1, [r2]
-	adds r1, 0x28
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_0819D108:
-	movs r0, 0x80
-	lsls r0, 7
-	ldr r1, [r2]
-	adds r1, 0x28
-	ldrb r1, [r1]
-	movs r2, 0
-	bl BlendPalettes
-_0819D118:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819D064
-
 	thumb_func_start sub_819D12C
 sub_819D12C: @ 819D12C
 	push {r4-r7,lr}
@@ -1154,7 +54,7 @@ _0819D174:
 	cmp r4, 0x2
 	beq _0819D1F2
 	ldr r2, =gSprites
-	ldr r3, =gUnknown_03001284
+	ldr r3, =sFactorySwapScreen
 	ldr r0, [r3]
 	adds r0, 0x5
 	mov r8, r0
@@ -1210,7 +110,7 @@ _0819D1D8:
 	b _0819D210
 _0819D1F2:
 	ldr r3, =gSprites
-	ldr r4, =gUnknown_03001284
+	ldr r4, =sFactorySwapScreen
 	ldr r0, [r4]
 	ldrb r1, [r0, 0x7]
 	lsls r0, r1, 4
@@ -1238,7 +138,7 @@ _0819D210:
 	ldrsh r0, [r0, r3]
 	cmp r0, 0x1
 	bne _0819D26A
-	ldr r1, =gUnknown_03001284
+	ldr r1, =sFactorySwapScreen
 	ldr r0, [r1]
 	adds r0, 0x5
 	adds r0, r2
@@ -1270,7 +170,7 @@ _0819D26A:
 	movs r7, 0
 _0819D26C:
 	mov r6, r10
-	ldr r5, =gUnknown_03001284
+	ldr r5, =sFactorySwapScreen
 	ldr r2, [r5]
 	mov r1, r9
 	asrs r4, r1, 24
@@ -1310,7 +210,7 @@ _0819D26C:
 _0819D2C0:
 	movs r0, 0x64
 	bl IndexOfSpritePaletteTag
-	ldr r2, =gUnknown_03001284
+	ldr r2, =sFactorySwapScreen
 	ldr r1, [r2]
 	adds r1, 0x5
 	adds r1, r4
@@ -1399,7 +299,7 @@ _0819D360:
 	.pool
 _0819D368:
 	ldr r3, =gSprites
-	ldr r2, =gUnknown_03001284
+	ldr r2, =sFactorySwapScreen
 	ldr r0, [r2]
 	ldrb r1, [r0, 0x8]
 	lsls r0, r1, 4
@@ -1439,7 +339,7 @@ _0819D3B2:
 	bne _0819D3FC
 	movs r3, 0
 	ldr r7, =gSprites
-	ldr r6, =gUnknown_03001284
+	ldr r6, =sFactorySwapScreen
 	asrs r5, r2, 24
 _0819D3BE:
 	movs r4, 0
@@ -1481,7 +381,7 @@ _0819D3FC:
 	mov r9, r0
 	ldr r5, =gSprites
 _0819D40E:
-	ldr r1, =gUnknown_03001284
+	ldr r1, =sFactorySwapScreen
 	ldr r2, [r1]
 	lsls r3, r4, 1
 	adds r3, r4
@@ -1535,7 +435,7 @@ _0819D40E:
 	.pool
 _0819D480:
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r1, [r0, 0xE]
 	lsls r0, r1, 4
@@ -1575,7 +475,7 @@ _0819D4CA:
 	bne _0819D510
 	movs r3, 0
 	ldr r7, =gSprites
-	ldr r6, =gUnknown_03001284
+	ldr r6, =sFactorySwapScreen
 	asrs r5, r2, 24
 _0819D4D6:
 	movs r4, 0
@@ -1612,7 +512,7 @@ _0819D510:
 	mov r6, r8
 	adds r6, 0x10
 	ldr r5, =gSprites
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	mov r9, r0
 _0819D520:
 	mov r1, r9
@@ -1761,7 +661,7 @@ _0819D64E:
 	movs r0, 0x5
 	movs r1, 0x2
 	bl CopyWindowToVram
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x1
@@ -1895,7 +795,7 @@ sub_819D770: @ 819D770
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =gUnknown_03001284
+	ldr r1, =sFactorySwapScreen
 	ldr r0, [r1]
 	adds r0, 0x30
 	ldrb r0, [r0]
@@ -2101,20 +1001,20 @@ _0819D936:
 	bl CopyWindowToVram
 	b _0819D990
 _0819D948:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0
 	bne _0819D964
 	ldr r0, =gText_SelectPkmnToSwap
-	bl sub_819EBEC
+	bl Swap_PrintOnYesNoQuestionWindow
 	b _0819D96A
 	.pool
 _0819D964:
 	ldr r0, =gText_SelectPkmnToAccept
-	bl sub_819EBEC
+	bl Swap_PrintOnYesNoQuestionWindow
 _0819D96A:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0x2
@@ -2132,7 +1032,7 @@ _0819D96A:
 	ands r1, r2
 	strb r1, [r0]
 _0819D98C:
-	bl sub_819EFA8
+	bl Swap_PrintMonCategory
 _0819D990:
 	ldr r0, =gTasks
 	adds r1, r5, r6
@@ -2146,7 +1046,7 @@ _0819D990:
 _0819D9B0:
 	bl sub_819EEF0
 	bl sub_819EADC
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	adds r0, 0x22
 	movs r1, 0x1
@@ -2177,7 +1077,7 @@ sub_819D9EC: @ 819D9EC
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	adds r0, 0x30
 	ldrb r0, [r0]
@@ -2222,7 +1122,7 @@ _0819DA44:
 _0819DA58:
 	bl sub_819EADC
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
@@ -2245,7 +1145,7 @@ _0819DA8C:
 	movs r1, 0
 	bl CreateTask
 	ldr r2, =gTasks
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	adds r0, 0x21
 	ldrb r1, [r0]
@@ -2266,7 +1166,7 @@ _0819DABC:
 	b _0819DBCA
 _0819DACA:
 	ldr r2, =gTasks
-	ldr r4, =gUnknown_03001284
+	ldr r4, =sFactorySwapScreen
 	ldr r0, [r4]
 	adds r0, 0x21
 	ldrb r1, [r0]
@@ -2313,7 +1213,7 @@ _0819DB10:
 	bls _0819DB10
 _0819DB32:
 	ldr r5, =gSprites
-	ldr r4, =gUnknown_03001284
+	ldr r4, =sFactorySwapScreen
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x4]
 	lsls r1, r0, 4
@@ -2375,7 +1275,7 @@ _0819DBB0:
 	adds r0, r3
 	movs r1, 0
 	strh r1, [r0, 0x8]
-	ldr r2, =sub_819CE40
+	ldr r2, =Task_HandleSwapScreenChooseMons
 	lsrs r1, r2, 16
 	strh r1, [r0, 0x14]
 	strh r2, [r0, 0x16]
@@ -2393,7 +1293,7 @@ _0819DBCA:
 	thumb_func_start sub_819DBD8
 sub_819DBD8: @ 819DBD8
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_03001284
+	ldr r5, =sFactorySwapScreen
 	ldr r4, [r5]
 	cmp r4, 0
 	bne _0819DBF6
@@ -2416,7 +1316,7 @@ _0819DBF6:
 	thumb_func_start sub_819DC00
 sub_819DC00: @ 819DC00
 	push {lr}
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	movs r1, 0
 	str r1, [r0]
 	ldr r0, =sub_819DC1C
@@ -2666,7 +1566,7 @@ _0819DE94:
 	b _0819E00E
 	.pool
 _0819DECC:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x15]
 	cmp r0, 0x1
@@ -2683,7 +1583,7 @@ _0819DEDC:
 _0819DEEC:
 	bl sub_819DBD8
 	bl sub_819E0C0
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0x1
@@ -2696,7 +1596,7 @@ _0819DF02:
 	.pool
 _0819DF10:
 	ldr r0, =gText_SelectPkmnToSwap
-	bl sub_819EBEC
+	bl Swap_PrintOnYesNoQuestionWindow
 	movs r0, 0x2
 	bl PutWindowTilemap
 	ldr r1, =gMain
@@ -2706,17 +1606,17 @@ _0819DF10:
 	b _0819E00E
 	.pool
 _0819DF30:
-	bl sub_819EFA8
+	bl Swap_PrintMonCategory
 	movs r0, 0x8
 	bl PutWindowTilemap
 	b _0819E006
 _0819DF3C:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0
 	bne _0819DF4A
-	bl sub_819EB4C
+	bl Swap_PrintMonSpecies
 _0819DF4A:
 	movs r0, 0x1
 	bl PutWindowTilemap
@@ -2737,7 +1637,7 @@ _0819DF70:
 	adds r1, r2, r0
 	b _0819E00E
 _0819DF78:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0
@@ -2773,7 +1673,7 @@ _0819DFA4:
 	bl ShowBg
 	movs r0, 0x2
 	bl ShowBg
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0x1
@@ -2806,7 +1706,7 @@ _0819E01C:
 	ldr r0, =sub_819CF54
 	movs r1, 0
 	bl CreateTask
-	ldr r6, =gUnknown_03001284
+	ldr r6, =sFactorySwapScreen
 	ldr r1, [r6]
 	adds r1, 0x21
 	strb r0, [r1]
@@ -2822,7 +1722,7 @@ _0819E01C:
 	lsls r0, 3
 	adds r0, r4
 	strh r5, [r0, 0x8]
-	ldr r0, =sub_819CE40
+	ldr r0, =Task_HandleSwapScreenChooseMons
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24
@@ -2850,7 +1750,7 @@ _0819E06C:
 	strh r1, [r0, 0x8]
 	adds r2, 0x22
 	strb r3, [r2]
-	ldr r0, =sub_819CD34
+	ldr r0, =Task_HandleSwapScreenMenu
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24
@@ -2890,7 +1790,7 @@ sub_819E0C0: @ 819E0C0
 	movs r0, 0x65
 	strh r0, [r1, 0x2]
 	movs r6, 0
-	ldr r4, =gUnknown_03001284
+	ldr r4, =sFactorySwapScreen
 	movs r7, 0
 	ldr r5, =gSprites
 _0819E0E6:
@@ -2923,7 +1823,7 @@ _0819E0E6:
 	lsrs r6, r0, 24
 	cmp r6, 0x2
 	bls _0819E0E6
-	ldr r7, =gUnknown_03001284
+	ldr r7, =sFactorySwapScreen
 	ldr r1, [r7]
 	adds r0, r1, 0x5
 	ldrb r1, [r1, 0x3]
@@ -3347,7 +2247,7 @@ _0819E330:
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r3, =gUnknown_03001284
+	ldr r3, =sFactorySwapScreen
 	mov r8, r3
 	ldr r0, =gSprites
 	mov r9, r0
@@ -3432,7 +2332,7 @@ sub_819E538: @ 819E538
 	push {r4-r7,lr}
 	movs r5, 0
 _0819E53C:
-	ldr r6, =gUnknown_03001284
+	ldr r6, =sFactorySwapScreen
 	ldr r0, [r6]
 	adds r0, 0x5
 	adds r0, r5
@@ -3474,7 +2374,7 @@ _0819E590:
 	movs r4, 0
 	lsls r6, r5, 1
 _0819E594:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	adds r1, r6, r5
 	adds r1, r4, r1
@@ -3503,7 +2403,7 @@ _0819E5C6:
 	adds r7, r5, 0x1
 	lsls r6, r5, 1
 _0819E5CC:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	adds r1, r4, r6
 	adds r0, 0xE
@@ -3538,7 +2438,7 @@ sub_819E608: @ 819E608
 	cmp r6, 0x2
 	bhi _0819E65C
 	ldr r4, =gSprites
-	ldr r5, =gUnknown_03001284
+	ldr r5, =sFactorySwapScreen
 	ldr r0, [r5]
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
@@ -3571,7 +2471,7 @@ sub_819E608: @ 819E608
 	.pool
 _0819E65C:
 	ldr r2, =gSprites
-	ldr r3, =gUnknown_03001284
+	ldr r3, =sFactorySwapScreen
 	ldr r0, [r3]
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
@@ -3596,8 +2496,8 @@ _0819E684:
 	.pool
 	thumb_func_end sub_819E608
 
-	thumb_func_start sub_819E694
-sub_819E694: @ 819E694
+	thumb_func_start Swap_UpdateBallCursorPosition
+Swap_UpdateBallCursorPosition: @ 819E694
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3607,7 +2507,7 @@ sub_819E694: @ 819E694
 	lsls r4, 24
 	cmp r4, 0
 	ble _0819E6C0
-	ldr r1, =gUnknown_03001284
+	ldr r1, =sFactorySwapScreen
 	ldr r2, [r1]
 	ldrb r0, [r2, 0x3]
 	adds r0, 0x1
@@ -3618,7 +2518,7 @@ sub_819E694: @ 819E694
 	b _0819E6D8
 	.pool
 _0819E6C0:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r2, [r0]
 	ldrb r3, [r2, 0x3]
 	adds r1, r0, 0
@@ -3638,10 +2538,10 @@ _0819E6D8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_819E694
+	thumb_func_end Swap_UpdateBallCursorPosition
 
-	thumb_func_start sub_819E6E8
-sub_819E6E8: @ 819E6E8
+	thumb_func_start Swap_UpdateActionCursorPosition
+Swap_UpdateActionCursorPosition: @ 819E6E8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3651,7 +2551,7 @@ sub_819E6E8: @ 819E6E8
 	lsls r4, 24
 	cmp r4, 0
 	ble _0819E728
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x3]
 	adds r4, r0, 0
@@ -3674,7 +2574,7 @@ _0819E722:
 	strb r0, [r2, 0x3]
 	b _0819E74A
 _0819E728:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r3, [r1, 0x3]
 	adds r2, r3, 0
@@ -3698,15 +2598,15 @@ _0819E74A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_819E6E8
+	thumb_func_end Swap_UpdateActionCursorPosition
 
-	thumb_func_start sub_819E758
-sub_819E758: @ 819E758
+	thumb_func_start Swap_UpdateYesNoCursorPosition
+Swap_UpdateYesNoCursorPosition: @ 819E758
 	push {lr}
 	lsls r0, 24
 	cmp r0, 0
 	ble _0819E778
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r3, [r1, 0x16]
 	adds r2, r0, 0
@@ -3719,7 +2619,7 @@ _0819E774:
 	movs r0, 0
 	b _0819E78E
 _0819E778:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r3, [r1, 0x16]
 	adds r2, r0, 0
@@ -3755,10 +2655,10 @@ _0819E78E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_819E758
+	thumb_func_end Swap_UpdateYesNoCursorPosition
 
-	thumb_func_start sub_819E7C0
-sub_819E7C0: @ 819E7C0
+	thumb_func_start Swap_UpdateMenuCursorPosition
+Swap_UpdateMenuCursorPosition: @ 819E7C0
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3768,7 +2668,7 @@ sub_819E7C0: @ 819E7C0
 	lsls r4, 24
 	cmp r4, 0
 	ble _0819E7EC
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r3, [r1]
 	adds r2, r0, 0
@@ -3781,7 +2681,7 @@ _0819E7E8:
 	movs r0, 0
 	b _0819E802
 _0819E7EC:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r3, [r1]
 	adds r2, r0, 0
@@ -3818,7 +2718,7 @@ _0819E802:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_819E7C0
+	thumb_func_end Swap_UpdateMenuCursorPosition
 
 	thumb_func_start sub_819E838
 sub_819E838: @ 819E838
@@ -3836,12 +2736,12 @@ sub_819E838: @ 819E838
 	mov r8, r2
 	ldr r0, =gSprites
 	mov r12, r0
-	ldr r7, =gUnknown_03001284
+	ldr r7, =sFactorySwapScreen
 _0819E856:
 	cmp r6, 0x2
 	bne _0819E898
 	ldr r5, =gSprites
-	ldr r3, =gUnknown_03001284
+	ldr r3, =sFactorySwapScreen
 	ldr r0, [r3]
 	adds r0, 0xB
 	adds r0, r4
@@ -3919,7 +2819,7 @@ sub_819E8EC: @ 819E8EC
 	push {r4-r6,lr}
 	movs r2, 0
 	ldr r5, =gSprites
-	ldr r4, =gUnknown_03001284
+	ldr r4, =sFactorySwapScreen
 	adds r6, r5, 0
 	movs r3, 0x4
 _0819E8F8:
@@ -3961,10 +2861,10 @@ _0819E92C:
 	.pool
 	thumb_func_end sub_819E8EC
 
-	thumb_func_start sub_819E944
-sub_819E944: @ 819E944
+	thumb_func_start Swap_ShowMenuOptions
+Swap_ShowMenuOptions: @ 819E944
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r3, [r0]
 	ldrb r1, [r3, 0x15]
 	adds r5, r0, 0
@@ -4039,12 +2939,12 @@ _0819E960:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_819E944
+	thumb_func_end Swap_ShowMenuOptions
 
 	thumb_func_start sub_819E9E0
 sub_819E9E0: @ 819E9E0
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_03001284
+	ldr r5, =sFactorySwapScreen
 	ldr r1, [r5]
 	movs r0, 0
 	strb r0, [r1, 0x16]
@@ -4113,7 +3013,7 @@ sub_819EA64: @ 819EA64
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r5, =gSprites
-	ldr r3, =gUnknown_03001284
+	ldr r3, =sFactorySwapScreen
 	ldr r0, [r3]
 	ldrb r1, [r0, 0x1]
 	lsls r0, r1, 4
@@ -4220,14 +3120,14 @@ sub_819EB18: @ 819EB18
 	.pool
 	thumb_func_end sub_819EB18
 
-	thumb_func_start sub_819EB4C
-sub_819EB4C: @ 819EB4C
+	thumb_func_start Swap_PrintMonSpecies
+Swap_PrintMonSpecies: @ 819EB4C
 	push {r4,lr}
 	sub sp, 0xC
 	movs r0, 0x1
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0x2
@@ -4290,10 +3190,10 @@ _0819EBD4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_819EB4C
+	thumb_func_end Swap_PrintMonSpecies
 
-	thumb_func_start sub_819EBEC
-sub_819EBEC: @ 819EBEC
+	thumb_func_start Swap_PrintOnYesNoQuestionWindow
+Swap_PrintOnYesNoQuestionWindow: @ 819EBEC
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -4317,7 +3217,7 @@ sub_819EBEC: @ 819EBEC
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_819EBEC
+	thumb_func_end Swap_PrintOnYesNoQuestionWindow
 
 	thumb_func_start sub_819EC20
 sub_819EC20: @ 819EC20
@@ -4446,7 +3346,7 @@ sub_819ED34: @ 819ED34
 	movs r0, 0x5
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0
@@ -4477,7 +3377,7 @@ sub_819ED78: @ 819ED78
 	movs r0, 0x3
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0
@@ -4513,7 +3413,7 @@ sub_819EDBC: @ 819EDBC
 	beq _0819EDEC
 	b _0819EDF6
 _0819EDCC:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x1
@@ -4546,7 +3446,7 @@ sub_819EE08: @ 819EE08
 	add r1, sp, 0xC
 	movs r2, 0x4
 	bl CpuSet
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x15]
 	cmp r0, 0
@@ -4574,7 +3474,7 @@ _0819EE42:
 	movs r0, 0x7
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0x2
@@ -4651,7 +3551,7 @@ sub_819EEF0: @ 819EEF0
 	ldr r1, =gPlttBufferFaded + 0x1C0
 	movs r2, 0x5
 	bl CpuSet
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0x2
@@ -4716,11 +3616,11 @@ _0819EF90:
 	.pool
 	thumb_func_end sub_819EEF0
 
-	thumb_func_start sub_819EFA8
-sub_819EFA8: @ 819EFA8
+	thumb_func_start Swap_PrintMonCategory
+Swap_PrintMonCategory: @ 819EFA8
 	push {r4-r6,lr}
 	sub sp, 0x2C
-	ldr r6, =gUnknown_03001284
+	ldr r6, =sFactorySwapScreen
 	ldr r0, [r6]
 	ldrb r4, [r0, 0x3]
 	adds r5, r4, 0
@@ -4787,14 +3687,14 @@ _0819F03A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_819EFA8
+	thumb_func_end Swap_PrintMonCategory
 
 	thumb_func_start sub_819F048
 sub_819F048: @ 819F048
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r4, =gUnknown_03001284
+	ldr r4, =sFactorySwapScreen
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x15]
 	cmp r0, 0x1
@@ -4835,14 +3735,14 @@ _0819F094:
 	.pool
 	thumb_func_end sub_819F048
 
-	thumb_func_start sub_819F0A0
-sub_819F0A0: @ 819F0A0
+	thumb_func_start Swap_RunMenuOptionFunc
+Swap_RunMenuOptionFunc: @ 819F0A0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =gUnknown_03001280
 	ldr r2, =gUnknown_086108AC
-	ldr r1, =gUnknown_03001284
+	ldr r1, =sFactorySwapScreen
 	ldr r1, [r1]
 	ldrb r1, [r1]
 	lsls r1, 2
@@ -4853,7 +3753,7 @@ sub_819F0A0: @ 819F0A0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_819F0A0
+	thumb_func_end Swap_RunMenuOptionFunc
 
 	thumb_func_start sub_819F0CC
 sub_819F0CC: @ 819F0CC
@@ -4861,7 +3761,7 @@ sub_819F0CC: @ 819F0CC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_03001284
+	ldr r5, =sFactorySwapScreen
 	ldr r1, [r5]
 	ldr r0, [r1, 0x2C]
 	adds r1, 0x30
@@ -4910,7 +3810,7 @@ sub_819F134: @ 819F134
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldr r0, [r1, 0x2C]
 	adds r1, 0x30
@@ -4925,7 +3825,7 @@ sub_819F134: @ 819F134
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x8]
-	ldr r2, =sub_819CE40
+	ldr r2, =Task_HandleSwapScreenChooseMons
 	lsrs r1, r2, 16
 	strh r1, [r0, 0x14]
 	strh r2, [r0, 0x16]
@@ -4945,7 +3845,7 @@ sub_819F184: @ 819F184
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =gUnknown_03001280
-	ldr r1, =gUnknown_03001284
+	ldr r1, =sFactorySwapScreen
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x3]
 	ldr r2, [r2, 0x18]
@@ -5008,7 +3908,7 @@ sub_819F20C: @ 819F20C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_03001284
+	ldr r5, =sFactorySwapScreen
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x14]
 	cmp r0, 0
@@ -5018,7 +3918,7 @@ sub_819F20C: @ 819F20C
 	adds r0, r4, r6
 	lsls r0, 3
 	adds r0, r3
-	ldr r2, =sub_819CD34
+	ldr r2, =Task_HandleSwapScreenMenu
 	lsrs r1, r2, 16
 	strh r1, [r0, 0x14]
 	strh r2, [r0, 0x16]
@@ -5129,7 +4029,7 @@ sub_819F304: @ 819F304
 	movs r2, 0x40
 	movs r3, 0x1
 	bl CreateSprite
-	ldr r6, =gUnknown_03001284
+	ldr r6, =sFactorySwapScreen
 	ldr r1, [r6]
 	adds r1, 0x2D
 	movs r2, 0
@@ -5300,7 +4200,7 @@ sub_819F488: @ 819F488
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =gUnknown_03001284
+	ldr r1, =sFactorySwapScreen
 	ldr r0, [r1]
 	adds r0, 0x30
 	ldrb r0, [r0]
@@ -5332,8 +4232,8 @@ _0819F4C8:
 	.4byte _0819F568
 _0819F4DC:
 	ldr r0, =gText_SamePkmnInPartyAlready
-	bl sub_819EBEC
-	ldr r0, =gUnknown_03001284
+	bl Swap_PrintOnYesNoQuestionWindow
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	adds r0, 0x20
 	movs r1, 0
@@ -5354,7 +4254,7 @@ _0819F4F8:
 _0819F50C:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldr r0, [r1, 0x2C]
 	adds r1, 0x30
@@ -5377,7 +4277,7 @@ _0819F52C:
 	b _0819F54E
 _0819F548:
 	ldr r0, =gText_SelectPkmnToAccept
-	bl sub_819EBEC
+	bl Swap_PrintOnYesNoQuestionWindow
 _0819F54E:
 	ldr r0, =gTasks
 	adds r1, r5, r4
@@ -5391,7 +4291,7 @@ _0819F54E:
 _0819F568:
 	bl sub_819EEF0
 	bl sub_819EADC
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	adds r0, 0x22
 	movs r1, 0x1
@@ -5402,7 +4302,7 @@ _0819F568:
 	adds r0, r1
 	ldrh r1, [r0, 0x12]
 	strh r1, [r0, 0x8]
-	ldr r1, =sub_819CE40
+	ldr r1, =Task_HandleSwapScreenChooseMons
 	str r1, [r0]
 _0819F58A:
 	pop {r4,r5}
@@ -5427,7 +4327,7 @@ sub_819F59C: @ 819F59C
 	lsrs r5, r0, 16
 	movs r4, 0
 _0819F5B8:
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x12]
 	cmp r4, r0
@@ -5516,7 +4416,7 @@ sub_819F654: @ 819F654
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x1
 	bne _0819F688
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r0, [r0]
 	adds r0, 0x30
 	movs r1, 0
@@ -5816,7 +4716,7 @@ _0819F8D8:
 sub_819F8E0: @ 819F8E0
 	push {r4-r6,lr}
 	sub sp, 0x10
-	ldr r0, =gUnknown_03001284
+	ldr r0, =sFactorySwapScreen
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x14]
 	cmp r0, 0
@@ -5863,7 +4763,7 @@ _0819F908:
 	adds r2, r5, 0
 	movs r3, 0x1
 	bl CreateMonPicSprite_HandleDeoxys
-	ldr r2, =gUnknown_03001284
+	ldr r2, =sFactorySwapScreen
 	ldr r1, [r2]
 	adds r1, 0x2C
 	movs r3, 0

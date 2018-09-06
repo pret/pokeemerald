@@ -74,6 +74,53 @@ struct FactorySelectMonsStruct
     u8 unk2A9;
 };
 
+struct FactorySwapMonsStruct
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    u8 unk14;
+    bool8 fromSummaryScreen;
+    u8 yesNoCursorPos;
+    u8 unk17;
+    u8 unk18;
+    u8 unk19;
+    u8 unk1A;
+    u8 unk1B;
+    u8 unk1C;
+    u8 unk1D;
+    u8 unk1E;
+    u8 unk1F;
+    u8 unk20;
+    u8 unk21;
+    u8 unk22;
+    u8 unk23;
+    u16 unk24;
+    bool8 unk26;
+    u8 unk27;
+    u8 unk28;
+    u8 unk29;
+    struct UnkFactoryStruct unk2C;
+    u8 unk30;
+};
+
 extern u8 (*gUnknown_030062E8)(void);
 extern u8 gUnknown_0203CF20;
 
@@ -121,6 +168,25 @@ static u8 Select_OptionRentDeselect(void);
 u8 sub_81A6F70(u8 battleMode, u8 lvlMode);
 u8 sub_81A6CA8(u8 arg0, u8 arg1);
 static bool32 Select_AreSpeciesValid(u16 monSetId);
+void sub_819E538(void);
+void sub_819DC1C(void);
+void sub_819E9E0(void);
+void sub_819EE08(void);
+void sub_819EAC0(void);
+void Swap_UpdateYesNoCursorPosition(s8 direction);
+void Swap_UpdateMenuCursorPosition(s8 direction);
+void sub_819EA64(u8 windowId);
+void sub_819D770(u8 taskId);
+void Task_HandleSwapScreenChooseMons(u8 taskId);
+void sub_819D588(u8 taskId);
+void Swap_PrintOnYesNoQuestionWindow(const u8 *str);
+void Swap_ShowMenuOptions(void);
+void Swap_PrintMonSpecies(void);
+void Swap_PrintMonCategory(void);
+void Swap_UpdateActionCursorPosition(s8 direction);
+void Swap_UpdateBallCursorPosition(s8 direction);
+void Swap_RunMenuOptionFunc(u8 taskId);
+void sub_819F184(u8 taskId);
 
 // Ewram variables
 EWRAM_DATA u8 *gUnknown_0203CE2C = NULL;
@@ -128,9 +194,15 @@ EWRAM_DATA u8 *gUnknown_0203CE30 = NULL;
 EWRAM_DATA u8 *gUnknown_0203CE34 = NULL;
 EWRAM_DATA u8 *gUnknown_0203CE38 = NULL;
 static EWRAM_DATA struct Pokemon *sFactorySelectMons = NULL;
+extern u8 *gUnknown_0203CE40;
+extern u8 *gUnknown_0203CE44;
+extern u8 *gUnknown_0203CE48;
+extern u8 *gUnknown_0203CE4C;
 
 // IWRAM bss
-static IWRAM_DATA struct FactorySelectMonsStruct *sFactorySelectScreen;
+IWRAM_DATA struct FactorySelectMonsStruct *sFactorySelectScreen;
+IWRAM_DATA u8 (*gUnknown_03001280)(void);
+IWRAM_DATA struct FactorySwapMonsStruct *sFactorySwapScreen;
 
 // Const rom data.
 const u16 gUnknown_0860F13C[] = INCBIN_U16("graphics/unknown/unknown_60F13C.gbapal");
@@ -210,6 +282,8 @@ extern const u8 gText_Rent[];
 extern const u8 gText_Others2[];
 extern const u8 gText_Yes2[];
 extern const u8 gText_No2[];
+extern const u8 gText_QuitSwapping[];
+extern const u8 gText_AcceptThisPkmn[];
 
 // code
 void sub_819A44C(struct Sprite *sprite)
@@ -1408,6 +1482,427 @@ static void Task_SelectBlendPalette(u8 taskId)
         {
             sFactorySelectScreen->unk2A9++;
         }
+        break;
+    }
+}
+
+void sub_819C7E0(void)
+{
+    AnimateSprites();
+    BuildOamBuffer();
+    RunTextPrinters();
+    UpdatePaletteFade();
+    RunTasks();
+}
+
+void sub_819C7FC(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_819C810(void)
+{
+    u8 happiness;
+
+    gPlayerParty[sFactorySwapScreen->unk12] = gEnemyParty[sFactorySwapScreen->unk13];
+    happiness = 0;
+    SetMonData(&gPlayerParty[sFactorySwapScreen->unk12], MON_DATA_FRIENDSHIP, &happiness);
+    gSaveBlock2Ptr->frontier.field_E70[sFactorySwapScreen->unk12].monId = gSaveBlock2Ptr->frontier.field_E70[sFactorySwapScreen->unk13 + 3].monId;
+    gSaveBlock2Ptr->frontier.field_E70[sFactorySwapScreen->unk12].ivs = gSaveBlock2Ptr->frontier.field_E70[sFactorySwapScreen->unk13 + 3].ivs;
+    gSaveBlock2Ptr->frontier.field_E70[sFactorySwapScreen->unk12].personality = GetMonData(&gEnemyParty[sFactorySwapScreen->unk13], MON_DATA_PERSONALITY, NULL);
+    gSaveBlock2Ptr->frontier.field_E70[sFactorySwapScreen->unk12].abilityBit = GetBoxMonData(&gEnemyParty[sFactorySwapScreen->unk13].box, MON_DATA_ALT_ABILITY, NULL);
+}
+
+void sub_819C90C(u8 taskId) // Task_FromSelectScreenToSummaryScreen
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 6:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        gTasks[taskId].data[0] = 7;
+        break;
+    case 7:
+        if (!gPaletteFade.active)
+        {
+            DestroyTask(sFactorySwapScreen->unk21);
+            sub_819F444(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30);
+            sub_819E538();
+            FREE_AND_SET_NULL(gUnknown_0203CE40);
+            FREE_AND_SET_NULL(gUnknown_0203CE44);
+            FREE_AND_SET_NULL(gUnknown_0203CE48);
+            FREE_AND_SET_NULL(gUnknown_0203CE4C);
+            FreeAllWindowBuffers();
+            gTasks[taskId].data[0] = 8;
+        }
+        break;
+    case 8:
+        DestroyTask(taskId);
+        sFactorySwapScreen->fromSummaryScreen = TRUE;
+        sFactorySwapScreen->unk24 = gPlttBufferUnfaded[244];
+        ShowPokemonSummaryScreen(0, gPlayerParty, sFactorySwapScreen->unk3, 3 - 1, sub_819DC1C);
+        break;
+    }
+}
+
+void sub_819CA08(u8 taskId) // Task_CloseSelectionScreen
+{
+    if (sFactorySwapScreen->unk30 != 1)
+    {
+        switch (gTasks[taskId].data[0])
+        {
+        case 0:
+            if (sFactorySwapScreen->unk20 == 1)
+            {
+                gTasks[taskId].data[0]++;
+                gSpecialVar_Result = 0;
+            }
+            else
+            {
+                gTasks[taskId].data[0] = 2;
+                gSpecialVar_Result = 1;
+            }
+            break;
+        case 1:
+            if (sFactorySwapScreen->unk20 == 1)
+            {
+                sFactorySwapScreen->unk13 = sFactorySwapScreen->unk3;
+                sub_819C810();
+            }
+            gTasks[taskId].data[0]++;
+            break;
+        case 2:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            gTasks[taskId].data[0]++;
+            break;
+        case 3:
+            if (!UpdatePaletteFade())
+            {
+                DestroyTask(sFactorySwapScreen->unk21);
+                sub_819E538();
+                FREE_AND_SET_NULL(gUnknown_0203CE40);
+                FREE_AND_SET_NULL(gUnknown_0203CE44);
+                FREE_AND_SET_NULL(gUnknown_0203CE48);
+                FREE_AND_SET_NULL(gUnknown_0203CE4C);
+                FREE_AND_SET_NULL(sFactorySwapScreen);
+                FreeAllWindowBuffers();
+                SetMainCallback2(CB2_ReturnToFieldContinueScript);
+                DestroyTask(taskId);
+            }
+            break;
+        }
+    }
+}
+
+void Task_HandleSwapScreenYesNo(u8 taskId)
+{
+    u16 loPtr, hiPtr;
+
+    if (sFactorySwapScreen->unk30 != 1)
+    {
+        switch (gTasks[taskId].data[0])
+        {
+        case 4:
+            sub_819E9E0();
+            gTasks[taskId].data[0] = 5;
+            break;
+        case 5:
+            if (gMain.newKeys & A_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                if (sFactorySwapScreen->yesNoCursorPos == 0)
+                {
+                    gTasks[taskId].data[1] = 1;
+                    hiPtr = gTasks[taskId].data[6];
+                    loPtr = gTasks[taskId].data[7];
+                    gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                }
+                else
+                {
+                    gTasks[taskId].data[1] = 0;
+                    sub_819EA64(4);
+                    hiPtr = gTasks[taskId].data[6];
+                    loPtr = gTasks[taskId].data[7];
+                    gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                }
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                gTasks[taskId].data[1] = 0;
+                sub_819EA64(4);
+                hiPtr = gTasks[taskId].data[6];
+                loPtr = gTasks[taskId].data[7];
+                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+            }
+            else if (gMain.newAndRepeatedKeys & DPAD_UP)
+            {
+                PlaySE(SE_SELECT);
+                Swap_UpdateYesNoCursorPosition(-1);
+            }
+            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            {
+                PlaySE(SE_SELECT);
+                Swap_UpdateYesNoCursorPosition(1);
+            }
+            break;
+        }
+    }
+}
+
+void sub_819CBDC(u8 taskId)
+{
+    if (gTasks[taskId].data[1] == 1)
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_819CA08;
+    }
+    else
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[6] = (u32)(Task_HandleSwapScreenChooseMons) >> 16;
+        gTasks[taskId].data[7] = (u32)(Task_HandleSwapScreenChooseMons);
+        gTasks[taskId].data[5] = 1;
+        gTasks[taskId].func = sub_819D770;
+    }
+}
+
+void sub_819CC24(u8 taskId)
+{
+    if (gTasks[taskId].data[0] == 0)
+    {
+        Swap_PrintOnYesNoQuestionWindow(gText_QuitSwapping);
+        sFactorySwapScreen->unk20 = 0;
+        gTasks[taskId].data[0] = 4;
+        gTasks[taskId].data[6] = (u32)(sub_819CBDC) >> 16;
+        gTasks[taskId].data[7] = (u32)(sub_819CBDC);
+        gTasks[taskId].func = Task_HandleSwapScreenYesNo;
+    }
+}
+
+void sub_819CC74(u8 taskId)
+{
+    sub_819F3F8(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, 1);
+    if (gTasks[taskId].data[1] == 1)
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_819CA08;
+    }
+    else
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[6] = (u32)(Task_HandleSwapScreenChooseMons) >> 16;
+        gTasks[taskId].data[7] = (u32)(Task_HandleSwapScreenChooseMons);
+        gTasks[taskId].data[5] = 1;
+        gTasks[taskId].func = sub_819D770;
+    }
+}
+
+void sub_819CCD4(u8 taskId)
+{
+    if (gTasks[taskId].data[0] == 0)
+    {
+        sub_819F2B4(&sFactorySwapScreen->unk2C.field1, &sFactorySwapScreen->unk30, 1);
+        Swap_PrintOnYesNoQuestionWindow(gText_AcceptThisPkmn);
+        sFactorySwapScreen->unk20 = 1;
+        gTasks[taskId].data[0] = 4;
+        gTasks[taskId].data[6] = (u32)(sub_819CC74) >> 16;
+        gTasks[taskId].data[7] = (u32)(sub_819CC74);
+        gTasks[taskId].func = Task_HandleSwapScreenYesNo;
+    }
+}
+
+void Task_HandleSwapScreenMenu(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 2:
+        if (!sFactorySwapScreen->fromSummaryScreen)
+            sub_819F2B4(&sFactorySwapScreen->unk2C.field1, &sFactorySwapScreen->unk30, 1);
+        gTasks[taskId].data[0] = 9;
+        break;
+    case 9:
+        if (sFactorySwapScreen->unk30 != 1)
+        {
+            Swap_ShowMenuOptions();
+            gTasks[taskId].data[0] = 3;
+        }
+        break;
+    case 3:
+        if (sFactorySwapScreen->unk30 != 1)
+        {
+            if (gMain.newKeys & A_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                Swap_RunMenuOptionFunc(taskId);
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                sub_819F3F8(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, 1);
+                sub_819EA64(3);
+                gTasks[taskId].data[0] = 0;
+                gTasks[taskId].data[6] = (u32)(Task_HandleSwapScreenChooseMons) >> 16;
+                gTasks[taskId].data[7] = (u32)(Task_HandleSwapScreenChooseMons);
+                gTasks[taskId].data[5] = 1;
+                gTasks[taskId].func = sub_819D770;
+            }
+            else if (gMain.newAndRepeatedKeys & DPAD_UP)
+            {
+                Swap_UpdateMenuCursorPosition(-1);
+            }
+            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            {
+                Swap_UpdateMenuCursorPosition(1);
+            }
+        }
+        break;
+    }
+}
+
+void Task_HandleSwapScreenChooseMons(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            sFactorySwapScreen->unk22 = 1;
+            gTasks[taskId].data[0] = 1;
+        }
+        break;
+    case 1:
+        if (gMain.newKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            sFactorySwapScreen->unk22 = 0;
+            sub_819EE08();
+            sub_819EAC0();
+            sub_819F184(taskId);
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            sFactorySwapScreen->unk22 = 0;
+            sub_819EE08();
+            sub_819EAC0();
+            gTasks[taskId].data[6] = (u32)(sub_819CC24) >> 16;
+            gTasks[taskId].data[7] = (u32)(sub_819CC24);
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].data[5] = 0;
+            gTasks[taskId].func = sub_819D588;
+        }
+        else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        {
+            Swap_UpdateBallCursorPosition(-1);
+            Swap_PrintMonCategory();
+            Swap_PrintMonSpecies();
+        }
+        else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        {
+            Swap_UpdateBallCursorPosition(1);
+            Swap_PrintMonCategory();
+            Swap_PrintMonSpecies();
+        }
+        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        {
+            Swap_UpdateActionCursorPosition(1);
+            Swap_PrintMonCategory();
+            Swap_PrintMonSpecies();
+        }
+        else if (gMain.newAndRepeatedKeys & DPAD_UP)
+        {
+            Swap_UpdateActionCursorPosition(-1);
+            Swap_PrintMonCategory();
+            Swap_PrintMonSpecies();
+        }
+        break;
+    }
+}
+
+void sub_819CF54(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        sFactorySwapScreen->unk27 = 0;
+        sFactorySwapScreen->unk28 = 0;
+        sFactorySwapScreen->unk26 = TRUE;
+        gTasks[taskId].data[0] = 1;
+        break;
+    case 1:
+        if (sFactorySwapScreen->unk22)
+        {
+            if (sFactorySwapScreen->unk29)
+            {
+                gTasks[taskId].data[0] = 2;
+            }
+            else
+            {
+                sFactorySwapScreen->unk27++;
+                if (sFactorySwapScreen->unk27 > 6)
+                {
+                    sFactorySwapScreen->unk27 = 0;
+                    if (!sFactorySwapScreen->unk26)
+                        sFactorySwapScreen->unk28--;
+                    else
+                        sFactorySwapScreen->unk28++;
+                }
+                BlendPalettes(0x4000, sFactorySwapScreen->unk28, 0);
+                if (sFactorySwapScreen->unk28 > 5)
+                {
+                    sFactorySwapScreen->unk26 = FALSE;
+                }
+                else if (sFactorySwapScreen->unk28 == 0)
+                {
+                    gTasks[taskId].data[0] = 2;
+                    sFactorySwapScreen->unk26 = TRUE;
+                }
+            }
+        }
+        break;
+    case 2:
+        if (sFactorySwapScreen->unk29 > 14)
+        {
+            sFactorySwapScreen->unk29 = 0;
+            gTasks[taskId].data[0] = 1;
+        }
+        else
+        {
+            sFactorySwapScreen->unk29++;
+        }
+        break;
+    }
+}
+
+void sub_819D064(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        sFactorySwapScreen->unk27 = 0;
+        gTasks[taskId].data[4] = 0;
+        gTasks[taskId].data[0]++;
+        break;
+    case 1:
+        LoadPalette(&gPlttBufferUnfaded[0xF0], 0xE0, 0xA);
+        gTasks[taskId].data[0]++;
+        break;
+    case 2:
+        if (sFactorySwapScreen->unk28 > 15)
+        {
+            gTasks[taskId].data[4] = 1;
+            gTasks[taskId].data[0]++;
+        }
+        sFactorySwapScreen->unk27++;
+        if (sFactorySwapScreen->unk27 > 3)
+        {
+            sFactorySwapScreen->unk27 = 0;
+            gPlttBufferUnfaded[244] = gPlttBufferFaded[228];
+            sFactorySwapScreen->unk28++;
+        }
+        BlendPalettes(0x4000, sFactorySwapScreen->unk28, 0);
         break;
     }
 }
