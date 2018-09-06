@@ -244,18 +244,27 @@ void CFile::CheckIncbin()
 
     m_pos++;
 
-    SkipWhitespace();
+    while (true)
+    {
+        SkipWhitespace();
 
-    std::string path = ReadPath();
+        std::string path = ReadPath();
 
-    SkipWhitespace();
+        SkipWhitespace();
+
+        m_incbins.emplace(path);
+
+        if (m_buffer[m_pos] != ',')
+            break;
+
+        m_pos++;
+    }
 
     if (m_buffer[m_pos] != ')')
         FATAL_INPUT_ERROR("expected ')'");
 
     m_pos++;
 
-    m_incbins.emplace(path);
 }
 
 std::string CFile::ReadPath()
