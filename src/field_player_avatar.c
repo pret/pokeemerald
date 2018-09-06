@@ -266,8 +266,8 @@ u8 (*const gUnknown_0849755C[])(struct Task *) =
 const u16 gUnknown_0849759C[] = {1, 1, 1};
 
 const u16 gUnknown_084975A2[] = {1, 3, 6};
-/*
-const u8 gUnknown_084975A8[] = _("·$");
+
+const u8 gUnknown_084975A8[] = _("·");
 
 const u16 gUnknown_084975AA[] = {36, 33, 30};
 
@@ -279,7 +279,7 @@ const u16 gUnknown_084975B0[] =
 };
 
 const u8 gUnknown_084975BC[] = {0x01, 0x03, 0x04, 0x02, 0x01, 0x00, 0x00, 0x00};
-*/
+
 // .text
 void MovementType_Player(struct Sprite *sprite)
 {

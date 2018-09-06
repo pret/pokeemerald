@@ -409,7 +409,6 @@ SECTIONS {
         src/metatile_behavior.o(.rodata);
         src/field_door.o(.rodata);
         src/field_player_avatar.o(.rodata);
-        data/field_player_avatar.o(.rodata);
         src/event_object_movement.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
