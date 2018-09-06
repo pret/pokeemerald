@@ -545,7 +545,6 @@ SECTIONS {
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);
         src/battle_pyramid_bag.o(.rodata);
-        data/battle_pyramid_bag.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);
