@@ -1,6 +1,8 @@
 #ifndef GUARD_LIST_MENU_H
 #define GUARD_LIST_MENU_H
 
+#include "window.h"
+
 #define LIST_NOTHING_CHOSEN -1
 #define LIST_B_PRESSED -2
 #define LIST_HEADER -3
@@ -9,7 +11,8 @@
 #define LIST_MULTIPLE_SCROLL_DPAD   1
 #define LIST_MULTIPLE_SCROLL_L_R    2
 
-enum {
+enum
+{
     SCROLL_ARROW_LEFT,
     SCROLL_ARROW_RIGHT,
     SCROLL_ARROW_UP,

@@ -4,7 +4,7 @@ LilycoveCity_PokemonCenter_1F_MapScripts:: @ 821C5B2
 	.byte 0
 
 LilycoveCity_PokemonCenter_1F_MapScript1_21C5BD: @ 821C5BD
-	setrespawn 8
+	setrespawn HEAL_LOCATION_LILYCOVE_CITY
 	goto LilycoveCity_PokemonCenter_1F_EventScript_21C5C6
 	end
 

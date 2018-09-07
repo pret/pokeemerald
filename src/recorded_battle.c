@@ -28,7 +28,7 @@ extern u8 gUnknown_03001279;
 struct PlayerInfo
 {
     u32 trainerId;
-    u8 name[PLAYER_NAME_LENGTH];
+    u8 name[PLAYER_NAME_LENGTH + 1];
     u8 gender;
     u16 battlerId;
     u16 language;
@@ -44,7 +44,7 @@ struct RecordedBattleSave
 {
     struct Pokemon playerParty[PARTY_SIZE];
     struct Pokemon opponentParty[PARTY_SIZE];
-    u8 playersName[MAX_BATTLERS_COUNT][PLAYER_NAME_LENGTH];
+    u8 playersName[MAX_BATTLERS_COUNT][PLAYER_NAME_LENGTH + 1];
     u8 playersGender[MAX_BATTLERS_COUNT];
     u32 playersTrainerId[MAX_BATTLERS_COUNT];
     u8 playersLanguage[MAX_BATTLERS_COUNT];
@@ -170,7 +170,7 @@ void sub_8184E58(void)
             }
             else
             {
-                for (j = 0; j < PLAYER_NAME_LENGTH; j++)
+                for (j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
                     sPlayers[i].name[j] = gLinkPlayers[i].name[j];
             }
         }
@@ -186,7 +186,7 @@ void sub_8184E58(void)
         sPlayers[0].battlerId = 0;
         sPlayers[0].language = gGameLanguage;
 
-        for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+        for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
             sPlayers[0].name[i] = gSaveBlock2Ptr->playerName[i];
     }
 }
@@ -343,7 +343,7 @@ u32 MoveRecordedBattleToSaveData(void)
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        for (j = 0; j < PLAYER_NAME_LENGTH; j++)
+        for (j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
         {
             battleSave->playersName[i][j] = sPlayers[i].name[j];
         }
@@ -1293,7 +1293,7 @@ static bool32 AllocTryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst)
 
 static void CB2_RecordedBattleEnd(void)
 {
-    gSaveBlock2Ptr->frontier.chosenLvl = sUnknown_0203C7AD;
+    gSaveBlock2Ptr->frontier.lvlMode = sUnknown_0203C7AD;
     gBattleOutcome = 0;
     gBattleTypeFlags = 0;
     gTrainerBattleOpponent_A = 0;
@@ -1332,7 +1332,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        for (var = FALSE, j = 0; j < PLAYER_NAME_LENGTH; j++)
+        for (var = FALSE, j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
         {
             gLinkPlayers[i].name[j] = src->playersName[i][j];
             if (src->playersName[i][j] == EOS)
@@ -1353,7 +1353,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
     gTrainerBattleOpponent_B = src->opponentB;
     gPartnerTrainerId = src->partnerId;
     gUnknown_0203C7B4 = src->field_4FA;
-    sUnknown_0203C7AD = gSaveBlock2Ptr->frontier.chosenLvl;
+    sUnknown_0203C7AD = gSaveBlock2Ptr->frontier.lvlMode;
     sFrontierFacility = src->field_4FD;
     sUnknown_0203C7AF = src->field_4FE;
     sBattleStyle = src->battleStyle;
@@ -1375,7 +1375,7 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
         sUnknown_0203CCDC[i] = src->field_50E[i];
     }
 
-    gSaveBlock2Ptr->frontier.chosenLvl = src->field_4FC;
+    gSaveBlock2Ptr->frontier.lvlMode = src->field_4FC;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {

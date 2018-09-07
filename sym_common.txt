@@ -43,9 +43,7 @@ gUnknown_030060B0: @ 30060B0
 gUnknown_030060B4: @ 30060B4
 	.space 0x4
 
-gUnknown_030060B8: @ 30060B8
-	.space 0x4
-
+	.include "contest.o"
     .include "tv.o"
     .include "mauville_old_man.o"
 
@@ -91,8 +89,7 @@ gUnknown_030061C0: @ 30061C0
 gUnknown_030061C4: @ 30061C4
 	.space 0xC
 
-gUnknown_030061D0: @ 30061D0
-	.space 0x18
+    .include "field_specials.o"
 
 gCB2_AfterEvolution: @ 30061E8
 	.space 0x4

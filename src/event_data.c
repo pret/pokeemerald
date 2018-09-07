@@ -25,7 +25,7 @@ EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA static u8 gUnknown_020375FC[16] = {0};
 
-extern u16 * const gSpecialVars[];
+extern u16 *const gSpecialVars[];
 
 extern void sub_80BB358(void);
 
@@ -47,7 +47,7 @@ void ClearTempFieldEventData(void)
     FlagClear(FLAG_0x880);
 }
 
-// probably had different flag splits at one point.
+// Probably had different flag splits at one point.
 void ClearUpperFlags(void)
 {
     memset(gSaveBlock1Ptr->flags + 0x124, 0, TEMP_UPPER_FLAGS_SIZE);
@@ -112,34 +112,34 @@ bool32 IsMysteryGiftEnabled(void)
 
 void sub_809D4D8(void)
 {
-    FlagClear(0x1E4);
-    FlagClear(0x1E5);
-    FlagClear(0x1E6);
-    FlagClear(0x1E7);
-    FlagClear(0x1E8);
-    FlagClear(0x1E9);
-    FlagClear(0x1EA);
-    FlagClear(0x1EB);
-    FlagClear(0x1EC);
-    FlagClear(0x1ED);
-    FlagClear(0x1EE);
-    FlagClear(0x1EF);
-    FlagClear(0x1F0);
-    FlagClear(0x1F1);
-    FlagClear(0x1F2);
-    FlagClear(0x1F3);
+    FlagClear(FLAG_MYSTERY_EVENT_DONE);
+    FlagClear(FLAG_0x1E5);
+    FlagClear(FLAG_0x1E6);
+    FlagClear(FLAG_0x1E7);
+    FlagClear(FLAG_0x1E8);
+    FlagClear(FLAG_0x1E9);
+    FlagClear(FLAG_0x1EA);
+    FlagClear(FLAG_0x1EB);
+    FlagClear(FLAG_0x1EC);
+    FlagClear(FLAG_0x1ED);
+    FlagClear(FLAG_0x1EE);
+    FlagClear(FLAG_0x1EF);
+    FlagClear(FLAG_0x1F0);
+    FlagClear(FLAG_0x1F1);
+    FlagClear(FLAG_0x1F2);
+    FlagClear(FLAG_0x1F3);
 }
 
 void sub_809D570(void)
 {
-    VarSet(0x40DD, 0);
-    VarSet(0x40DE, 0);
-    VarSet(0x40DF, 0);
-    VarSet(0x40E0, 0);
-    VarSet(0x40E1, 0);
-    VarSet(0x40E2, 0);
-    VarSet(0x40E3, 0);
-    VarSet(0x40E4, 0);
+    VarSet(VAR_EVENT_PICHU_SLOT, 0);
+    VarSet(VAR_0x40DE, 0);
+    VarSet(VAR_0x40DF, 0);
+    VarSet(VAR_0x40E0, 0);
+    VarSet(VAR_0x40E1, 0);
+    VarSet(VAR_0x40E2, 0);
+    VarSet(VAR_0x40E3, 0);
+    VarSet(VAR_0x40E4, 0);
 }
 
 void DisableResetRTC(void)
@@ -164,13 +164,12 @@ bool32 CanResetRTC(void)
 
 u16 *GetVarPointer(u16 id)
 {
-    if (id < 0x4000)
+    if (id < VARS_START)
         return NULL;
-
-    if ((s16)id >= 0)
-        return &gSaveBlock1Ptr->vars[id - 0x4000];
-
-    return gSpecialVars[id - 0x8000];
+    else if (id < SPECIAL_VARS_START)
+        return &gSaveBlock1Ptr->vars[id - VARS_START];
+    else
+        return gSpecialVars[id - SPECIAL_VARS_START];
 }
 
 u16 VarGet(u16 id)
@@ -192,18 +191,17 @@ bool8 VarSet(u16 id, u16 value)
 
 u8 VarGetEventObjectGraphicsId(u8 id)
 {
-    return VarGet(0x4010 + id);
+    return VarGet(VAR_OBJ_GFX_ID_0 + id);
 }
 
 u8 *GetFlagPointer(u16 id)
 {
     if (id == 0)
-        return 0;
-
-    if (id < 0x4000)
+        return NULL;
+    else if (id < SPECIAL_FLAGS_START)
         return &gSaveBlock1Ptr->flags[id / 8];
-
-    return &gUnknown_020375FC[(id - 0x4000) / 8];
+    else
+        return &gUnknown_020375FC[(id - SPECIAL_FLAGS_START) / 8];
 }
 
 u8 FlagSet(u16 id)

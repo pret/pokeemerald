@@ -2740,7 +2740,7 @@ sub_81B1708: @ 81B1708
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4196,7 +4196,7 @@ sub_81B227C: @ 81B227C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6692,7 +6692,7 @@ sub_81B3730: @ 81B3730
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x3
 	bhi _081B3774
-	bl ProcessMenuInputNoWrapAround_other
+	bl Menu_ProcessInputNoWrapAround_other
 	b _081B3778
 	.pool
 _081B3774:
@@ -6796,7 +6796,7 @@ sub_81B3828: @ 81B3828
 	ldr r0, =sub_81B3894
 	str r0, [sp]
 	movs r0, 0x1
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 	b _081B3880
 	.pool
 _081B3868:
@@ -6810,7 +6810,7 @@ _081B3868:
 	ldr r0, =sub_81B3894
 	str r0, [sp]
 	movs r0, 0
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 _081B3880:
 	add sp, 0x4
 	pop {r4}
@@ -8138,7 +8138,7 @@ sub_81B43DC: @ 81B43DC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8671,7 +8671,7 @@ sub_81B48DC: @ 81B48DC
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r4, r1, r0
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8963,7 +8963,7 @@ sub_81B4BA0: @ 81B4BA0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -9069,7 +9069,7 @@ sub_81B4C94: @ 81B4C94
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -9877,7 +9877,7 @@ sub_81B5430: @ 81B5430
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10171,7 +10171,7 @@ sub_81B56D8: @ 81B56D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -11626,7 +11626,7 @@ c2_815ABFC: @ 81B6254
 	bl GoToBagMenu
 	b _081B6276
 _081B626C:
-	ldr r0, =gUnknown_0203CF30
+	ldr r0, =gPyramidBagCursorData
 	ldr r1, [r0]
 	movs r0, 0x4
 	bl sub_81C4F98
@@ -13156,7 +13156,7 @@ sub_81B7028: @ 81B7028
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -13235,7 +13235,7 @@ sub_81B70B8: @ 81B70B8
 	ldr r3, =sub_81B70F0
 	ldrh r4, [r4, 0xE]
 	str r4, [sp]
-	bl sub_81BFA38
+	bl ShowSelectMovePokemonSummaryScreen
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -13458,7 +13458,7 @@ sub_81B72C8: @ 81B72C8
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r4, r1, r0
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -15240,7 +15240,7 @@ sub_81B82D4: @ 81B82D4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -17663,7 +17663,7 @@ sub_81B968C: @ 81B968C
 	ldr r0, =CB2_ReturnToField
 	str r0, [sp]
 	movs r0, 0x3
-	bl sub_81BF8EC
+	bl ShowPokemonSummaryScreen
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]

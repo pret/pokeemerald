@@ -4,18 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_0857173C:: @ 857173C
-	.incbin "graphics/unknown/unknown_57173C.gbapal"
-
-	.align 2
-gUnknown_0857175C:: @ 857175C
-	.incbin "graphics/pokemon_storage/box_selection_popup_center.4bpp"
-
-	.align 2
-gUnknown_08571F5C:: @ 8571F5C
-	.incbin "graphics/pokemon_storage/box_selection_popup_sides.4bpp"
-
-	.align 2
 gUnknown_085720DC:: @ 85720DC
 	.incbin "graphics/pokemon_storage/scrolling_bg.4bpp.lz"
 

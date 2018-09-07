@@ -24,7 +24,7 @@ InsideOfTruck_EventScript_23BF04:: @ 823BF04
 	end
 
 InsideOfTruck_EventScript_23BF20:: @ 823BF20
-	setrespawn 1
+	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	setvar VAR_0x4092, 1
 	setflag FLAG_0x2F7
 	setflag FLAG_0x2FA
@@ -37,7 +37,7 @@ InsideOfTruck_EventScript_23BF20:: @ 823BF20
 	end
 
 InsideOfTruck_EventScript_23BF46:: @ 823BF46
-	setrespawn 2
+	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 	setvar VAR_0x4092, 2
 	setflag FLAG_0x2F6
 	setflag FLAG_0x2F9

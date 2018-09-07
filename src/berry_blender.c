@@ -51,7 +51,7 @@ enum
 struct BlenderBerry
 {
     u16 itemId;
-    u8 name[BERRY_NAME_COUNT];
+    u8 name[BERRY_NAME_LENGTH + 1];
     u8 flavors[FLAVOR_COUNT];
     u8 smoothness;
 };
@@ -188,7 +188,7 @@ static bool8 sub_8083380(void);
 static void sub_808074C(void);
 static void Blender_PrintPlayerNames(void);
 static void sub_8080588(void);
-static void Blender_SetBankBerryData(u8 bank, u16 itemId);
+static void Blender_SetParticipantBerryData(u8 participantId, u16 itemId);
 static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s32 speed, s32 caseId);
 static void sub_8080DF8(void);
 static void sub_8082E84(void);
@@ -322,18 +322,72 @@ static const struct BgTemplate sBerryBlenderBgTemplates[3] =
 
 static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
 {
-    {0, 1, 6, 7, 2, 0xE, 0x28},
-    {0, 0x16, 6, 7, 2, 0xE, 0x36},
-    {0, 1, 0xC, 7, 2, 0xE, 0x44},
-    {0, 0x16, 0xC, 7, 2, 0xE, 0x52},
-    {0, 2, 0xF, 0x1B, 4, 0xE, 0x60},
-    {0, 5, 3, 0x15, 0xE, 0xE, 0x60},
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 6,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x28,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 6,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x36,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 12,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x44,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 12,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x52,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 14,
+        .baseBlock = 0x60,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 5,
+        .tilemapTop = 3,
+        .width = 21,
+        .height = 14,
+        .paletteNum = 14,
+        .baseBlock = 0x60,
+    },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sBlender_YesNoWindowTemplate =
 {
-    0, 0x15, 9, 5, 4, 0xE, 0xCC
+    .priority = 0,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 14,
+    .baseBlock = 0xCC
 };
 
 static const s8 sUnknown_083399C0[][2] =
@@ -790,7 +844,16 @@ static const u8 sUnknown_08339CD2[] =
     0x05, 0x03, 0x03, 0x03, 0x02, 0x02, 0x03, 0x03, 0x03, 0x03, 0x02
 };
 
-static const struct WindowTemplate sBlenderRecordWindowTemplate = {0, 6, 4, 0x12, 0xB, 0xF, 8};
+static const struct WindowTemplate sBlenderRecordWindowTemplate =
+{
+    .priority = 0,
+    .tilemapLeft = 6,
+    .tilemapTop = 4,
+    .width = 18,
+    .height = 11,
+    .paletteNum = 15,
+    .baseBlock = 8
+};
 
 // code
 
@@ -1391,7 +1454,7 @@ static void Blender_SetOpponentsBerryData(u16 playerBerryItemId, u8 playersNum, 
             if (var <= 4)
                 opponentBerryId -= 5;
         }
-        Blender_SetBankBerryData(i + 1, opponentBerryId + FIRST_BERRY_INDEX);
+        Blender_SetParticipantBerryData(i + 1, opponentBerryId + FIRST_BERRY_INDEX);
     }
 }
 
@@ -1454,7 +1517,7 @@ static void sub_80808D4(void)
     case 0:
         sub_800B4C0();
         sub_8080588();
-        Blender_SetBankBerryData(0, gSpecialVar_ItemId);
+        Blender_SetParticipantBerryData(0, gSpecialVar_ItemId);
         Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[0], gSpecialVar_ItemId);
         Blender_SetOpponentsBerryData(gSpecialVar_ItemId, sBerryBlenderData->playersNo, &sBerryBlenderData->blendedBerries[0]);
 
@@ -2436,7 +2499,7 @@ static void CB2_HandleBlenderEndGame(void)
         sBerryBlenderData->gameEndState++;
         break;
     case 10:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 1:
         case -1:
@@ -2956,10 +3019,10 @@ static void sub_8082F9C(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-static void Blender_SetBankBerryData(u8 bank, u16 itemId)
+static void Blender_SetParticipantBerryData(u8 participantId, u16 itemId)
 {
-    sBerryBlenderData->chosenItemId[bank] = itemId;
-    Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[bank], itemId);
+    sBerryBlenderData->chosenItemId[participantId] = itemId;
+    Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[participantId], itemId);
 }
 
 static void sub_8083010(struct Sprite* sprite)

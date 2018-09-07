@@ -153,7 +153,7 @@ Route104_EventScript_1ECDD0:: @ 81ECDD0
 
 Route104_EventScript_1ECDED:: @ 81ECDED
 	msgbox Route104_Text_1EDDDB, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, Route104_EventScript_1ECE36
 	case 1, Route104_EventScript_1ECE49
 	case 2, Route104_EventScript_1ECE5C
@@ -230,7 +230,7 @@ Route104_EventScript_1ECEEC:: @ 81ECEEC
 
 Route104_EventScript_1ECF09:: @ 81ECF09
 	msgbox Route104_Text_1EE0C7, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, Route104_EventScript_1ECF4D
 	case 1, Route104_EventScript_1ECF60
 	case 2, Route104_EventScript_1ECF73

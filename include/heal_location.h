@@ -1,13 +1,6 @@
 #ifndef GUARD_HEAL_LOCATION_H
 #define GUARD_HEAL_LOCATION_H
 
-// Exported type declarations
-
-struct UnkStruct_0859F534 {
-    const union AffineAnimCmd *const *const affineAnims;
-    void (* callback)(struct Sprite *sprite);
-};
-
 struct HealLocation
 {
     s8 group;
@@ -16,10 +9,8 @@ struct HealLocation
     u16 y;
 };
 
-// Exported RAM declarations
+u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum);
+const struct HealLocation *GetHealLocationByMap(u16 mapGroup, u16 mapNum);
+const struct HealLocation *GetHealLocation(u32 index);
 
-// Exported ROM declarations
-
-const struct HealLocation *GetHealLocationPointer(u32 loc);
-
-#endif //GUARD_HEAL_LOCATION_H
+#endif // GUARD_HEAL_LOCATION_H

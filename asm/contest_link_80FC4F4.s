@@ -11,7 +11,7 @@ sub_80FC4F4: @ 80FC4F4
 	adds r2, r0, 0
 	lsls r4, r1, 16
 	lsrs r4, 16
-	ldr r5, =0x0201c000
+	ldr r5, =gDecompressionBuffer
 	adds r0, r5, 0
 	adds r1, r2, 0
 	adds r2, r4, 0
@@ -139,12 +139,12 @@ sub_80FC5DC: @ 80FC5DC
 	cmp r0, 0
 	beq _080FC650
 	bl GetMultiplayerId
-	ldr r1, =gUnknown_02039F25
+	ldr r1, =gContestPlayerMonIndex
 	strb r0, [r1]
 	bl GetLinkPlayerCount
 	ldr r4, =gUnknown_02039F30
 	strb r0, [r4]
-	ldr r1, =gUnknown_02039F2A
+	ldr r1, =gIsLinkContest
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r0, =gWirelessCommType
@@ -182,7 +182,7 @@ _080FC63A:
 	ldrb r6, [r6]
 	cmp r3, r6
 	bge _080FC64A
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r2, 0x4
 	orrs r1, r2
@@ -201,7 +201,7 @@ _080FC650:
 sub_80FC670: @ 80FC670
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x4
 	ands r0, r1
@@ -285,10 +285,10 @@ _080FC6FE:
 	cmp r0, 0
 	beq _080FC7F4
 	ldr r0, =gBlockSendBuffer
-	ldr r1, =gUnknown_02039F25
+	ldr r1, =gContestPlayerMonIndex
 	ldrb r1, [r1]
 	lsls r1, 6
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	adds r1, r2
 	movs r2, 0x40
 	bl memcpy
@@ -298,10 +298,10 @@ _080FC6FE:
 	.pool
 _080FC738:
 	ldr r0, =gBlockSendBuffer
-	ldr r1, =gUnknown_02039F25
+	ldr r1, =gContestPlayerMonIndex
 	ldrb r1, [r1]
 	lsls r1, 6
-	ldr r2, =gUnknown_02039E00
+	ldr r2, =gContestMons
 	adds r1, r2
 	movs r2, 0x40
 	bl memcpy
@@ -321,7 +321,7 @@ _080FC758:
 	ldr r6, =gLinkPlayers
 _080FC770:
 	lsls r4, r5, 6
-	ldr r0, =gUnknown_02039E00
+	ldr r0, =gContestMons
 	adds r4, r0
 	lsls r1, r5, 8
 	ldr r0, =gBlockRecvBuffer
@@ -434,7 +434,7 @@ _080FC858:
 	adds r1, r4, 0
 	movs r2, 0x4
 	bl memcpy
-	ldr r0, =gUnknown_030060B8
+	ldr r0, =gContestRngValue
 	adds r1, r4, 0
 	movs r2, 0x4
 	bl memcpy
@@ -603,7 +603,7 @@ _080FC9C4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC9F0
-	ldr r0, =gUnknown_02039F25
+	ldr r0, =gContestPlayerMonIndex
 	movs r1, 0x1
 	bl sub_80FC4F4
 	cmp r0, 0x1
@@ -659,7 +659,7 @@ _080FCA30:
 	beq _080FCAB2
 	ldr r0, =gContestResources
 	ldr r2, [r0]
-	ldr r0, =gUnknown_02039F25
+	ldr r0, =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	lsls r1, r0, 3
 	subs r1, r0
@@ -860,7 +860,7 @@ _080FCC08:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCC82
-	ldr r0, =gUnknown_02039F20
+	ldr r0, =gContestFinalStandings
 	movs r1, 0x4
 _080FCC16:
 	bl sub_80FC4F4
@@ -881,7 +881,7 @@ _080FCC38:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCC82
-	ldr r0, =gUnknown_02039F20
+	ldr r0, =gContestFinalStandings
 	ldr r1, =gUnknown_02039F2B
 	ldrb r1, [r1]
 	lsls r1, 8
@@ -1262,7 +1262,7 @@ _080FCF80:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCFBE
-	ldr r0, =gUnknown_02039F00
+	ldr r0, =gContestMonConditions
 	movs r1, 0x8
 	bl sub_80FC4F4
 	cmp r0, 0x1
@@ -1274,7 +1274,7 @@ _080FCF9C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCFBE
-	ldr r0, =gUnknown_02039F00
+	ldr r0, =gContestMonConditions
 	ldr r1, =gUnknown_02039F2B
 	ldrb r1, [r1]
 	lsls r1, 8

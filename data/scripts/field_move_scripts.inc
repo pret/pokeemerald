@@ -113,7 +113,7 @@ Route111_EventScript_2907FB:: @ 82907FB
 	applymovement VAR_LAST_TALKED, Route111_Movement_29082B
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
-	specialvar VAR_RESULT, sub_81393FC
+	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_290829
 	special RockSmashWildEncounter

@@ -65,13 +65,27 @@ static const u8 gUnknown_0860F094[] = { 8, 4, 1 };
 
 static const struct WindowTemplate gUnknown_0860F098[] =
 {
-    { 0x00, 0x02, 0x0F, 0x1B, 0x04, 0x0F, 0x194 },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x194
+    },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate gUnknown_0860F0A8 =
 {
-    0x00, 0x15, 0x09, 0x05, 0x04, 0x0F, 0x125
+    .priority = 0,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x125
 };
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
@@ -120,7 +134,6 @@ extern void DrawWindowBorder(u8, u8, u8, u8, u8, u8);
 extern void sub_81980A8(u8, u8, u8, u8, u8, u8);
 extern u8 MoveMenuCursor(s8);
 extern u8 sub_8199134(s8, s8);
-extern void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing);
 extern void sub_8198C78(void);
 extern void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 
@@ -987,7 +1000,7 @@ s8 ProcessMenuInput(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-s8 ProcessMenuInputNoWrapAround(void)
+s8 Menu_ProcessInputNoWrapAround(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
 
@@ -1045,7 +1058,7 @@ s8 ProcessMenuInput_other(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-s8 ProcessMenuInputNoWrapAround_other(void)
+s8 Menu_ProcessInputNoWrapAround_other(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
 
@@ -1143,7 +1156,7 @@ void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8
     template->baseBlock = baseBlock;
 }
 
-struct WindowTemplate sub_8198A50(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
+struct WindowTemplate CreateWindowTemplate(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
 {
     struct WindowTemplate template;
     SetWindowTemplateFields(&template, bg, left, top, width, height, paletteNum, baseBlock);
@@ -1188,9 +1201,9 @@ void sub_8198C34(const struct WindowTemplate *window, u8 fontId, u16 baseTileNum
     sub_8198AF8(window, fontId, 0, 1, baseTileNum, paletteNum, 0);
 }
 
-s8 ProcessMenuInputNoWrap_(void)
+s8 Menu_ProcessInputNoWrap_(void)
 {
-    s8 result = ProcessMenuInputNoWrapAround();
+    s8 result = Menu_ProcessInputNoWrapAround();
     if (result != MENU_NOTHING_CHOSEN)
         sub_8198C78();
     return result;
@@ -1802,7 +1815,7 @@ void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, 
     return NULL;
 }
 
-void copy_decompressed_tile_data_to_vram_autofree(u8 bgId, const void *src, int size, u16 offset, u8 mode)
+void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, int size, u16 offset, u8 mode)
 {
     int sizeOut;
     void *ptr = malloc_and_decompress(src, &sizeOut);

@@ -87,7 +87,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377:: @ 824B377
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3A9:: @ 824B3A9
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 9
-	special sub_818E9AC
+	special CallBattleDomeFunction
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24BE9A
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB:: @ 824B3BB
@@ -95,7 +95,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB:: @ 824B3BB
 	waitmessage
 	setvar VAR_0x8004, 13
 	setvar VAR_0x8005, 2
-	special sub_818E9AC
+	special CallBattleDomeFunction
 	playse SE_SAVE
 	waitse
 	fadescreen 1
@@ -107,7 +107,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD:: @ 824B3DD
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B9B5, 4
 	fadescreen 1
 	setvar VAR_0x8004, 6
-	special sub_818E9AC
+	special CallBattleDomeFunction
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
@@ -115,7 +115,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5:: @ 824B3F5
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B40A
 	fadescreen 1
 	setvar VAR_0x8004, 7
-	special sub_818E9AC
+	special CallBattleDomeFunction
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
@@ -162,11 +162,11 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 8
-	special sub_818E9AC
+	special CallBattleDomeFunction
 	setvar VAR_0x8004, 18
-	special sub_818E9AC
+	special CallBattleDomeFunction
 	setvar VAR_0x8004, 9
-	special sub_818E9AC
+	special CallBattleDomeFunction
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B748, 4
 	closemessage
 	applymovement 1, BattleFrontier_BattleDomePreBattleRoom_Movement_24B64F
@@ -253,7 +253,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600
 	fadescreen 1
 	setvar VAR_0x8004, 11
-	special sub_818E9AC
+	special CallBattleDomeFunction
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 

@@ -9,7 +9,7 @@ TerraCave_End_MapScript1_23B0BB: @ 823B0BB
 	end
 
 TerraCave_End_EventScript_23B0C5:: @ 823B0C5
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, TerraCave_End_EventScript_27374E
 	removeobject 1
@@ -42,7 +42,7 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq TerraCave_End_EventScript_23B155
 	compare VAR_RESULT, 4

@@ -388,7 +388,7 @@ void sub_80E8FD0(u8 taskId)
                 gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_10 ++;
             }
             sub_80E8F9C();
-            warp_in();
+            WarpIntoMap();
             gFieldCallback = sub_80AF168;
             SetMainCallback2(CB2_LoadMap);
             DestroyTask(taskId);
@@ -446,7 +446,7 @@ void sub_80E916C(u8 taskId)
     {
         idx = sCurSecretBaseId / 10 * 4;
         Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gUnknown_0858CFE8[idx + 2], gUnknown_0858CFE8[idx + 3]);
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_80E9108;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskId);
@@ -644,7 +644,7 @@ void sub_80E96A4(u8 taskId)
             break;
         case 2:
             copy_saved_warp2_bank_and_enter_x_to_warp1(0x7e);
-            warp_in();
+            WarpIntoMap();
             gFieldCallback = mapldr_default;
             SetMainCallback2(CB2_LoadMap);
             ScriptContext2_Disable();
@@ -997,7 +997,7 @@ void sub_80E9FB0(u8 taskId)
 {
     s8 input;
 
-    input = ProcessMenuInputNoWrapAround();
+    input = Menu_ProcessInputNoWrapAround();
     switch (input)
     {
         case -1:
@@ -1354,7 +1354,7 @@ bool8 sub_80EA904(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
 {
     u8 i;
 
-    for (i = 0; i < OT_NAME_LENGTH && (sbr1->trainerName[i] != EOS || sbr2->trainerName[i] != EOS); i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH && (sbr1->trainerName[i] != EOS || sbr2->trainerName[i] != EOS); i++)
     {
         if (sbr1->trainerName[i] != sbr2->trainerName[i])
         {
@@ -1509,7 +1509,7 @@ bool8 DoesSecretBaseBelongToPlayer(struct SecretBaseRecord *secretBase)
             return FALSE;
     }
 
-    for (i = 0; i < OT_NAME_LENGTH && (secretBase->trainerName[i] != EOS || gSaveBlock2Ptr->playerName[i] != EOS); i ++)
+    for (i = 0; i < PLAYER_NAME_LENGTH && (secretBase->trainerName[i] != EOS || gSaveBlock2Ptr->playerName[i] != EOS); i ++)
     {
         if (secretBase->trainerName[i] != gSaveBlock2Ptr->playerName[i])
             return FALSE;

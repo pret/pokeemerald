@@ -152,10 +152,6 @@ void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s
     BgAffineSet(&src, dest, 1);
 }
 
-#ifdef NONMATCHING
-
-// Functionally equivalent.
-// Only the two yflip loops don't match.
 void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 {
     u8 x, y;
@@ -166,32 +162,18 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 
     for (y = 0; y < h; y++)
     {
-        int filler = 32 - w;
-
         for (x = 0; x < w; x++)
         {
             int tile = (*tilemap & 0x3ff) * 32;
-            int attr = *tilemap & 0xc00;
 
-            if (attr == 0)
+            if ((*tilemap & 0xc00) == 0)
             {
-                void *src = tiles + tile;
-                void *dest = output;
-                int length = 32;
-                DmaCopy32(3, src, dest, length);
+                CpuCopy32(tiles + tile, output, 32);
             }
-            else if (attr == 0x800)  // yflip
+            else if ((*tilemap & 0xc00) == 0x800)  // yflip
             {
                 for (i = 0; i < 8; i++)
-                {
-                    void *src = tiles;
-                    void *dest = output;
-                    int length = 4;
-                    // this is likely wrong, but makes it closer to matching
-                    src += tile + (7 - i) * 4;
-                    dest += i * 4;
-                    DmaCopy32(3, src, dest, length);
-                }
+                    CpuCopy32(tiles + (tile + (7 - i) * 4), output + i * 4, 4);
             }
             else  // xflip
             {
@@ -207,244 +189,19 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
                 if (*tilemap & 0x800)  // yflip
                 {
                     for (i = 0; i < 8; i++)
-                    {
-                        void *src = xflip + (7-i) * 4;
-                        void *dest = output + i*4;
-                        int length = 4;
-                        DmaCopy32(3, src, dest, length);
-                    }
+                        CpuCopy32(xflip + (7 - i) * 4, output + i * 4, 4);
                 }
                 else
                 {
-                    void *src = xflip;
-                    void *dest = output;
-                    int length = 32;
-                    DmaCopy32(3, src, dest, length);
+                    CpuCopy32(xflip, output, 32);
                 }
             }
             tilemap++;
             output += 32;
         }
-        tilemap += filler;
+        tilemap += (32 - w);
     }
 }
-
-#else
-NAKED void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
-{
-    asm("\n\
-        .syntax unified\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0x38\n\
-        str r2, [sp, 0x20]\n\
-        adds r4, r3, 0\n\
-        ldr r7, [sp, 0x58]\n\
-        lsls r0, 24\n\
-        lsls r1, 24\n\
-        ldr r2, =sSpriteDimensions\n\
-        lsrs r1, 23\n\
-        lsrs r0, 21\n\
-        adds r1, r0\n\
-        adds r0, r2, 0x1\n\
-        adds r0, r1, r0\n\
-        ldrb r0, [r0]\n\
-        str r0, [sp, 0x24]\n\
-        adds r1, r2\n\
-        ldrb r1, [r1]\n\
-        str r1, [sp, 0x28]\n\
-        movs r0, 0\n\
-        b _0806F88C\n\
-        .pool\n\
-    _0806F740:\n\
-        movs r5, 0\n\
-        adds r0, 0x1\n\
-        str r0, [sp, 0x30]\n\
-        b _0806F874\n\
-    _0806F748:\n\
-        ldrh r0, [r4]\n\
-        ldr r2, =0x000003ff\n\
-        adds r1, r2, 0\n\
-        ands r1, r0\n\
-        lsls r1, 5\n\
-        mov r8, r1\n\
-        movs r2, 0xC0\n\
-        lsls r2, 4\n\
-        adds r1, r2, 0\n\
-        ands r1, r0\n\
-        mov r2, sp\n\
-        strh r0, [r2, 0x34]\n\
-        cmp r1, 0\n\
-        bne _0806F788\n\
-        ldr r0, [sp, 0x20]\n\
-        add r0, r8\n\
-        adds r1, r7, 0\n\
-        ldr r2, =0x04000008\n\
-        bl CpuSet\n\
-        adds r4, 0x2\n\
-        str r4, [sp, 0x2C]\n\
-        adds r7, 0x20\n\
-        mov r10, r7\n\
-        adds r5, 0x1\n\
-        mov r9, r5\n\
-        b _0806F86A\n\
-        .pool\n\
-    _0806F788:\n\
-        movs r0, 0x80\n\
-        lsls r0, 4\n\
-        cmp r1, r0\n\
-        bne _0806F7CC\n\
-        movs r1, 0\n\
-        adds r4, 0x2\n\
-        str r4, [sp, 0x2C]\n\
-        movs r2, 0x20\n\
-        adds r2, r7\n\
-        mov r10, r2\n\
-        adds r5, 0x1\n\
-        mov r9, r5\n\
-    _0806F7A0:\n\
-        lsls r4, r1, 24\n\
-        asrs r4, 24\n\
-        movs r0, 0x7\n\
-        subs r0, r4\n\
-        lsls r0, 2\n\
-        add r0, r8\n\
-        ldr r1, [sp, 0x20]\n\
-        adds r0, r1, r0\n\
-        lsls r1, r4, 2\n\
-        adds r1, r7, r1\n\
-        ldr r2, =0x04000001\n\
-        bl CpuSet\n\
-        adds r4, 0x1\n\
-        lsls r4, 24\n\
-        lsrs r1, r4, 24\n\
-        asrs r4, 24\n\
-        cmp r4, 0x7\n\
-        ble _0806F7A0\n\
-        b _0806F86A\n\
-        .pool\n\
-    _0806F7CC:\n\
-        movs r1, 0\n\
-        adds r4, 0x2\n\
-        str r4, [sp, 0x2C]\n\
-        movs r2, 0x20\n\
-        adds r2, r7\n\
-        mov r10, r2\n\
-        adds r5, 0x1\n\
-        mov r9, r5\n\
-        movs r0, 0xF\n\
-        mov r12, r0\n\
-    _0806F7E0:\n\
-        movs r2, 0\n\
-        lsls r4, r1, 24\n\
-        lsls r0, r4, 2\n\
-        lsrs r0, 24\n\
-        adds r6, r0, 0x3\n\
-        mov r1, r8\n\
-        adds r5, r1, r0\n\
-    _0806F7EE:\n\
-        lsls r1, r2, 24\n\
-        asrs r1, 24\n\
-        subs r0, r6, r1\n\
-        mov r2, sp\n\
-        adds r3, r2, r0\n\
-        adds r0, r5, r1\n\
-        ldr r2, [sp, 0x20]\n\
-        adds r0, r2, r0\n\
-        ldrb r2, [r0]\n\
-        mov r0, r12\n\
-        ands r0, r2\n\
-        lsls r0, 4\n\
-        lsrs r2, 4\n\
-        orrs r0, r2\n\
-        strb r0, [r3]\n\
-        adds r1, 0x1\n\
-        lsls r1, 24\n\
-        lsrs r2, r1, 24\n\
-        asrs r1, 24\n\
-        cmp r1, 0x3\n\
-        ble _0806F7EE\n\
-        movs r1, 0x80\n\
-        lsls r1, 17\n\
-        adds r0, r4, r1\n\
-        lsrs r1, r0, 24\n\
-        asrs r0, 24\n\
-        cmp r0, 0x7\n\
-        ble _0806F7E0\n\
-        mov r2, sp\n\
-        ldrh r0, [r2, 0x34]\n\
-        movs r2, 0x80\n\
-        lsls r2, 4\n\
-        ands r0, r2\n\
-        cmp r0, 0\n\
-        beq _0806F860\n\
-        movs r1, 0\n\
-    _0806F836:\n\
-        lsls r4, r1, 24\n\
-        asrs r4, 24\n\
-        movs r0, 0x7\n\
-        subs r0, r4\n\
-        lsls r0, 2\n\
-        add r0, sp\n\
-        lsls r1, r4, 2\n\
-        adds r1, r7, r1\n\
-        ldr r2, =0x04000001\n\
-        bl CpuSet\n\
-        adds r4, 0x1\n\
-        lsls r4, 24\n\
-        lsrs r1, r4, 24\n\
-        asrs r4, 24\n\
-        cmp r4, 0x7\n\
-        ble _0806F836\n\
-        b _0806F86A\n\
-        .pool\n\
-    _0806F860:\n\
-        mov r0, sp\n\
-        adds r1, r7, 0\n\
-        ldr r2, =0x04000008\n\
-        bl CpuSet\n\
-    _0806F86A:\n\
-        ldr r4, [sp, 0x2C]\n\
-        mov r7, r10\n\
-        mov r1, r9\n\
-        lsls r0, r1, 24\n\
-        lsrs r5, r0, 24\n\
-    _0806F874:\n\
-        ldr r2, [sp, 0x28]\n\
-        cmp r5, r2\n\
-        bcs _0806F87C\n\
-        b _0806F748\n\
-    _0806F87C:\n\
-        movs r0, 0x20\n\
-        ldr r1, [sp, 0x28]\n\
-        subs r0, r1\n\
-        lsls r0, 1\n\
-        adds r4, r0\n\
-        ldr r2, [sp, 0x30]\n\
-        lsls r0, r2, 24\n\
-        lsrs r0, 24\n\
-    _0806F88C:\n\
-        ldr r1, [sp, 0x24]\n\
-        cmp r0, r1\n\
-        bcs _0806F894\n\
-        b _0806F740\n\
-    _0806F894:\n\
-        add sp, 0x38\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .pool\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 int CountTrailingZeroBits(u32 value)
 {

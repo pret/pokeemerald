@@ -63,32 +63,24 @@ s16 GetTruckBoxMovement(int a1) // for the box movement?
     return 0;
 }
 
-// smh STILL BROKEN IN EMERALD
 void Task_Truck1(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    s16 cameraYpan;
-    s16 box1 = 0;
-    s16 box2 = 0;
-    s16 box3 = 0;
-    u8 mapNum, mapGroup;
-    register s16 zero asm("r4");
+    s16 cameraXpan = 0, cameraYpan = 0;
+    s16 box1, box2, box3;
 
     box1 = GetTruckBoxMovement(data[0] + 30) * 4; // top box.
-    sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3, box1 + 3);
+    sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, box1 + 3);
     box2 = GetTruckBoxMovement(data[0]) * 2; // bottom left box.
-    sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, box2 - 3);
+    sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, box2 - 3);
     box3 = GetTruckBoxMovement(data[0]) * 4; // bottom right box.
-    mapNum = gSaveBlock1Ptr->location.mapNum;
-    mapGroup = gSaveBlock1Ptr->location.mapGroup;
-    zero = 0;
-    sub_808E82C(3, mapNum, mapGroup, -3, box3);
+    sub_808E82C(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, box3);
 
     if (++data[0] == SECONDS(500)) // this will never run
-        data[0] = zero; // reset the timer if it gets stuck.
+        data[0] = 0; // reset the timer if it gets stuck.
 
     cameraYpan = GetTruckCameraBobbingY(data[0]);
-    SetCameraPanning(0, cameraYpan);
+    SetCameraPanning(cameraXpan, cameraYpan);
 }
 
 void Task_Truck2(u8 taskId)
@@ -272,7 +264,7 @@ bool8 sub_80FB59C(void)
 void Task_HandlePorthole(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *var = GetVarPointer(VAR_PORTHOLE);
+    u16 *var = GetVarPointer(VAR_PORTHOLE_STATE);
     struct WarpData *location = &gSaveBlock1Ptr->location;
 
     switch (data[0])

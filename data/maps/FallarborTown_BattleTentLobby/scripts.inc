@@ -149,7 +149,7 @@ FallarborTown_BattleTentLobby_EventScript_200021:: @ 8200021
 
 FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	setvar VAR_FRONTIER_FACILITY, 3
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	setvar VAR_RESULT, 2
 	setvar VAR_0x8004, 15
 	special sub_81A1780

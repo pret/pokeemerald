@@ -89,7 +89,7 @@ LilycoveCity_Harbor_EventScript_21E149:: @ 821E149
 	msgbox LilycoveCity_Harbor_Text_21E864, 5
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
-	setvar VAR_PORTHOLE, 5
+	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_21E5CC
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
@@ -398,7 +398,7 @@ LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
 	msgbox LilycoveCity_Harbor_Text_21E864, 5
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
-	setvar VAR_PORTHOLE, 5
+	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_21E5CC
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate

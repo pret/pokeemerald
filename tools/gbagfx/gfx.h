@@ -27,8 +27,8 @@ struct Image {
 	bool hasTransparency;
 };
 
-void ReadImage(char *path, int tilesWidth, int bitDepth, struct Image *image, bool invertColors);
-void WriteImage(char *path, int numTiles, int bitDepth, struct Image *image, bool invertColors);
+void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
+void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
 void FreeImage(struct Image *image);
 void ReadGbaPalette(char *path, struct Palette *palette);
 void WriteGbaPalette(char *path, struct Palette *palette);

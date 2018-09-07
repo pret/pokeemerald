@@ -734,7 +734,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
     if (IsEnigmaBerryValid() == TRUE)
     {
-        for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+        for (i = 0; i < BERRY_NAME_LENGTH; i++)
             battleBerry->name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
         battleBerry->name[i] = EOS;
 
@@ -748,7 +748,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
     {
         const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY));
 
-        for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+        for (i = 0; i < BERRY_NAME_LENGTH; i++)
             battleBerry->name[i] = berryData->name[i];
         battleBerry->name[i] = EOS;
 
@@ -769,7 +769,7 @@ static void SetAllPlayersBerryData(void)
     {
         if (IsEnigmaBerryValid() == TRUE)
         {
-            for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+            for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
                 gEnigmaBerries[0].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
                 gEnigmaBerries[2].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
@@ -792,7 +792,7 @@ static void SetAllPlayersBerryData(void)
         {
             const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY));
 
-            for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+            for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
                 gEnigmaBerries[0].name[i] = berryData->name[i];
                 gEnigmaBerries[2].name[i] = berryData->name[i];
@@ -830,7 +830,7 @@ static void SetAllPlayersBerryData(void)
                 src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
                 battlerId = gLinkPlayers[i].id;
 
-                for (j = 0; j < BERRY_NAME_COUNT - 1; j++)
+                for (j = 0; j < BERRY_NAME_LENGTH; j++)
                     gEnigmaBerries[battlerId].name[j] = src->name[j];
                 gEnigmaBerries[battlerId].name[j] = EOS;
 
@@ -847,7 +847,7 @@ static void SetAllPlayersBerryData(void)
             {
                 src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
 
-                for (j = 0; j < BERRY_NAME_COUNT - 1; j++)
+                for (j = 0; j < BERRY_NAME_LENGTH; j++)
                 {
                     gEnigmaBerries[i].name[j] = src->name[j];
                     gEnigmaBerries[i + 2].name[j] = src->name[j];
@@ -3888,7 +3888,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     // Check all switch in items having effect from the fastest mon to slowest.
     while (gBattleStruct->switchInItemsCounter < gBattlersCount)
     {
-        if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter], 0) != 0)
+        if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter], FALSE))
             effect++;
 
         gBattleStruct->switchInItemsCounter++;
@@ -3929,7 +3929,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
         StopCryAndClearCrySongs();
-        BattleScriptExecute(BattleScript_82DB8BE);
+        BattleScriptExecute(BattleScript_ArenaTurnBeginning);
     }
 }
 
@@ -4019,7 +4019,7 @@ void BattleTurnPassed(void)
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         BattleScriptExecute(BattleScript_82DB881);
     else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_DA == 0)
-        BattleScriptExecute(BattleScript_82DB8BE);
+        BattleScriptExecute(BattleScript_ArenaTurnBeginning);
 }
 
 u8 IsRunningFromBattleImpossible(void)
@@ -4596,13 +4596,10 @@ static void sub_803CDF8(void)
 
 void SwapTurnOrder(u8 id1, u8 id2)
 {
-    u32 temp = gActionsByTurnOrder[id1];
-    gActionsByTurnOrder[id1] = gActionsByTurnOrder[id2];
-    gActionsByTurnOrder[id2] = temp;
-
-    temp = gBattlerByTurnOrder[id1];
-    gBattlerByTurnOrder[id1] = gBattlerByTurnOrder[id2];
-    gBattlerByTurnOrder[id2] = temp;
+	u32 temp;
+	
+	SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
+	SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
 
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)

@@ -20,6 +20,7 @@
 #include "international_string_util.h"
 #include "trig.h"
 #include "scanline_effect.h"
+#include "trainer_pokemon_sprites.h"
 
 #define STARTER_MON_COUNT   3
 
@@ -47,12 +48,6 @@ extern const struct WindowTemplate gUnknown_085B1DE4;
 extern const u8 gStarterChoose_LabelCoords[][2];
 extern const u8 gUnknown_085B1E0C[];
 extern const u8 gUnknown_085B1E28[][2];
-
-extern void clear_scheduled_bg_copies_to_vram(void);
-extern void dp13_810BB8C(void);
-extern void do_scheduled_bg_tilemap_copies_to_vram(void);
-extern u16 sub_818D820(u16);
-extern u8 sub_818D3E4(u16 species, u32 trainerId, u32 personality, u8 flags, s16 x, s16 y, u8, u16);
 
 // this file's functions
 static void MainCallback2_StarterChoose(void);
@@ -132,7 +127,7 @@ void CB2_ChooseStarter(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    dp13_810BB8C();
+    ResetAllPicSprites();
 
     LoadPalette(GetOverworldTextboxPalettePtr(), 0xE0, 0x20);
     LoadPalette(gBirchBagGrassPal, 0, 0x40);
@@ -258,12 +253,12 @@ static void Task_StarterChoose5(u8 taskId)
 {
     u8 spriteId;
 
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:  // YES
         // Return the starter choice and exit.
         gSpecialVar_Result = gTasks[taskId].tStarterSelection;
-        dp13_810BB8C();
+        ResetAllPicSprites();
         SetMainCallback2(gMain.savedCallback);
         break;
     case 1:  // NO
@@ -271,7 +266,7 @@ static void Task_StarterChoose5(u8 taskId)
         PlaySE(SE_SELECT);
         spriteId = gTasks[taskId].tPkmnSpriteId;
         FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
-        sub_818D820(spriteId);
+        FreeAndDestroyMonPicSprite(spriteId);
 
         spriteId = gTasks[taskId].tCircleSpriteId;
         FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
@@ -349,7 +344,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 {
     u8 spriteId;
 
-    spriteId = sub_818D3E4(species, 8, 0, 1, x, y, 0xE, 0xFFFF);
+    spriteId = CreatePicSprite2(species, 8, 0, 1, x, y, 0xE, 0xFFFF);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }

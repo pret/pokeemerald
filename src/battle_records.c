@@ -64,11 +64,28 @@ static const struct BgTemplate sTrainerHillRecordsBgTemplates[] =
 
 static const struct WindowTemplate sTrainerHillRecordsWindowTemplates[] =
 {
-    {0x0, 0x2, 0x1, 0x1A, 0x12, 0xF, 0x14},
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 1,
+        .width = 26,
+        .height = 18,
+        .paletteNum = 15,
+        .baseBlock = 20
+    },
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sLinkBattleRecordsWindow = {0x0, 0x2, 0x1, 0x1A, 0x11, 0xF, 0x1};
+static const struct WindowTemplate sLinkBattleRecordsWindow =
+{
+    .priority = 0,
+    .tilemapLeft = 2,
+    .tilemapTop = 1,
+    .width = 26,
+    .height = 17,
+    .paletteNum = 15,
+    .baseBlock = 1
+};
 
 static const u8 sText_DashesNoPlayer[] = _("-------");
 static const u8 sText_DashesNoScore[] = _("----");
@@ -107,7 +124,7 @@ static s32 FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name
 
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
     {
-        if (!StringCompareN(records[i].name, name, OT_NAME_LENGTH) && records[i].trainerId == trainerId)
+        if (!StringCompareN(records[i].name, name, PLAYER_NAME_LENGTH) && records[i].trainerId == trainerId)
             return i;
     }
 
@@ -198,7 +215,7 @@ static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 
     {
         index = LINK_B_RECORDS_COUNT - 1;
         ClearLinkBattleRecord(&records->entries[index]);
-        StringCopyN(records->entries[index].name, name, OT_NAME_LENGTH);
+        StringCopyN(records->entries[index].name, name, PLAYER_NAME_LENGTH);
         records->entries[index].trainerId = trainerId;
         records->languages[index] = gLinkPlayers[battlerId].language;
     }

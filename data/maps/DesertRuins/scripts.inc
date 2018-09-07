@@ -10,7 +10,7 @@ DesertRuins_MapScript1_22D96B: @ 822D96B
 	end
 
 DesertRuins_EventScript_22D975:: @ 822D975
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, DesertRuins_EventScript_27374E
 	removeobject VAR_LAST_TALKED
@@ -75,7 +75,7 @@ DesertRuins_EventScript_22DA02:: @ 822DA02
 	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq DesertRuins_EventScript_22DA49
 	compare VAR_RESULT, 4

@@ -69,7 +69,7 @@ VerdanturfTown_WandasHouse_EventScript_20294E:: @ 820294E
 	goto_eq VerdanturfTown_WandasHouse_EventScript_202989
 	checkflag FLAG_0x4F3
 	goto_eq VerdanturfTown_WandasHouse_EventScript_20297F
-	checkflag FLAG_0x0C7
+	checkflag FLAG_RUSTURF_TUNNEL_OPENED
 	goto_eq VerdanturfTown_WandasHouse_EventScript_202975
 	msgbox VerdanturfTown_WandasHouse_Text_202E47, 4
 	release

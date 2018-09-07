@@ -119,7 +119,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E7E2:: @ 823E7E2
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23E7F2:: @ 823E7F2
-	compare VAR_0x40CE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, 2
 	goto_if 5, BattleFrontier_BattleTowerLobby_EventScript_23E81E
 	checkflag FLAG_0x152
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E81E
@@ -214,7 +214,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E8E0:: @ 823E8E0
 BattleFrontier_BattleTowerLobby_EventScript_23E8EE:: @ 823E8EE
 	lock
 	faceplayer
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23E930
 	message BattleFrontier_BattleTowerLobby_Text_23F737
 	waitmessage
@@ -254,7 +254,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E948:: @ 823E948
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 
 BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	message BattleFrontier_BattleTowerLobby_Text_23FD3B
 	waitmessage
 	multichoice 17, 6, 24, 0
@@ -334,7 +334,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAB1:: @ 823EAB1
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 
 BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
-	setvar VAR_0x40CE, 1
+	setvar VAR_FRONTIER_BATTLE_MODE, 1
 	message BattleFrontier_BattleTowerLobby_Text_23FD3B
 	waitmessage
 	multichoice 17, 6, 24, 0
@@ -415,7 +415,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC1D:: @ 823EC1D
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 
 BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
-	setvar VAR_0x40CE, 2
+	setvar VAR_FRONTIER_BATTLE_MODE, 2
 	message BattleFrontier_BattleTowerLobby_Text_23FD3B
 	waitmessage
 	multichoice 17, 6, 24, 0
@@ -495,7 +495,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ED86:: @ 823ED86
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 
 BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
-	setvar VAR_0x40CE, 3
+	setvar VAR_FRONTIER_BATTLE_MODE, 3
 	message BattleFrontier_BattleTowerLobby_Text_23FD3B
 	waitmessage
 	multichoice 17, 6, 24, 0
@@ -679,7 +679,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F02B:: @ 823F02B
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_23F08B
 
 BattleFrontier_BattleTowerLobby_EventScript_23F046:: @ 823F046
-	switch VAR_0x40CE
+	switch VAR_FRONTIER_BATTLE_MODE
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_23F06F
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_23F07D
 	msgbox BattleFrontier_BattleTowerLobby_Text_24038B, 4
@@ -697,7 +697,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F07D:: @ 823F07D
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F08B:: @ 823F08B
-	switch VAR_0x40CE
+	switch VAR_FRONTIER_BATTLE_MODE
 	case 0, BattleFrontier_BattleTowerLobby_EventScript_23F0B4
 	case 1, BattleFrontier_BattleTowerLobby_EventScript_23F0C2
 	msgbox BattleFrontier_BattleTowerLobby_Text_24046B, 4
@@ -754,7 +754,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F108:: @ 823F108
 
 BattleFrontier_BattleTowerLobby_EventScript_23F135:: @ 823F135
 	call BattleFrontier_BattleTowerLobby_EventScript_23F1A7
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F152
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FE11, 4
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F15B
@@ -807,13 +807,13 @@ BattleFrontier_BattleTowerLobby_Movement_23F1A0: @ 823F1A0
 	step_end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1A7:: @ 823F1A7
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F1D4
-	compare VAR_0x40CE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F1D9
-	compare VAR_0x40CE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F1DE
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F1E3
 	return
 
@@ -834,13 +834,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23F1E3:: @ 823F1E3
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1E8:: @ 823F1E8
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F215
-	compare VAR_0x40CE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F21B
-	compare VAR_0x40CE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F221
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F227
 	return
 
@@ -861,13 +861,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23F227:: @ 823F227
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F22D:: @ 823F22D
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F25A
-	compare VAR_0x40CE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F260
-	compare VAR_0x40CE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F266
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F26C
 	return
 
@@ -888,13 +888,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23F26C:: @ 823F26C
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F272:: @ 823F272
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F29F
-	compare VAR_0x40CE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F2A5
-	compare VAR_0x40CE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F2AB
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F2B1
 	return
 

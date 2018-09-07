@@ -205,7 +205,7 @@ struct BoxPokemon
     u8 hasSpecies:1;
     u8 isEgg:1;
     u8 unused:5;
-    u8 otName[OT_NAME_LENGTH];
+    u8 otName[PLAYER_NAME_LENGTH];
     u8 markings;
     u16 checksum;
     u16 unknown;
@@ -456,6 +456,7 @@ extern const u8 gStatStageRatios[][2];
 extern const u16 gUnknown_08329D54[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
+extern const s8 gNatureStatTable[][5];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);

@@ -1,8 +1,6 @@
-
-// Includes
 #include "global.h"
 #include "field_effect.h"
-#include "battle_dome_cards.h"
+#include "trainer_pokemon_sprites.h"
 #include "decompress.h"
 #include "field_camera.h"
 #include "field_effect_helpers.h"
@@ -557,7 +555,7 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 #ifdef NONMATCHING
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y)
 {
-    u16 spriteId = sub_818D7D8(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
+    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
     if (spriteId == 0xFFFF)
         return 0x40;
@@ -590,7 +588,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y)
 	movs r1, 0\n\
 	adds r2, r3, 0\n\
 	movs r3, 0x1\n\
-	bl sub_818D7D8\n\
+	bl CreateMonPicSprite_HandleDeoxys\n\
 	lsls r0, 16\n\
 	lsrs r5, r0, 16\n\
 	ldrh r0, [r4, 0x4]\n\
@@ -619,7 +617,7 @@ _080B5FDE:\n\
 u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
 {
     const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
-    u16 spriteId = sub_818D7D8(species, d, g, 1, x, y, 0, spritePalette->tag);
+    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, d, g, 1, x, y, 0, spritePalette->tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
         return 0x40;
@@ -634,7 +632,7 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
     {
         FreeOamMatrix(sprite->oam.matrixNum);
     }
-    sub_818D820(spriteId);
+    FreeAndDestroyMonPicSprite(spriteId);
 }
 
 #ifdef NONMATCHING
@@ -1172,7 +1170,7 @@ void task00_8084310(u8 taskId)
     if (!FieldEffectActiveListContains(FLDEFF_USE_FLY))
     {
         Overworld_ResetStateAfterFly();
-        warp_in();
+        WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
         gFieldCallback = mapldr_08084390;
         DestroyTask(taskId);
@@ -1357,7 +1355,7 @@ void sub_80B6FB8(struct Task *);
 void sub_80B7004(struct Task *);
 void sub_80B7050(void);
 void sub_80B7060(void);
-bool8 sub_80859A0(void);
+bool8 BGMusicStopped(void);
 void sub_80B70B4(void);
 void sub_80E1570(void);
 void sub_80B70DC(u8);
@@ -1478,10 +1476,10 @@ void sub_80B7050(void)
 
 void sub_80B7060(void)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
         sub_80E1570();
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_80B70B4;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B6E88));
@@ -1840,9 +1838,9 @@ bool8 sub_80B77F8(struct Task *task, struct EventObject *eventObject, struct Spr
 
 bool8 sub_80B7814(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = mapldr_080851BC;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B75F0));
@@ -2006,9 +2004,9 @@ void mapldr_080859D4(void);
 
 bool8 sub_80B7BF4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_80B6B68;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B7A8C));
@@ -2065,11 +2063,11 @@ void sub_80B7D34(struct Task *task)
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
-        if (task->data[14] == 0 && !gPaletteFade.active && sub_80859A0() == TRUE)
+        if (task->data[14] == 0 && !gPaletteFade.active && BGMusicStopped() == TRUE)
         {
             SetEventObjectDirection(eventObject, task->data[15]);
             sub_8084E14();
-            warp_in();
+            WarpIntoMap();
             gFieldCallback = mapldr_080859D4;
             SetMainCallback2(CB2_LoadMap);
             DestroyTask(FindTaskIdByFunc(sub_80B7CE4));
@@ -2236,10 +2234,10 @@ static void TeleportFieldEffectTask4(struct Task *task)
             task->data[5] = TRUE;
         }
 
-        if (sub_80859A0() == TRUE)
+        if (BGMusicStopped() == TRUE)
         {
             Overworld_SetWarpDestToLastHealLoc();
-            warp_in();
+            WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             gFieldCallback = mapldr_08085D88;
             DestroyTask(FindTaskIdByFunc(ExecuteTeleportFieldEffectTask));

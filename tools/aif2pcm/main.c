@@ -469,12 +469,12 @@ do { \
 void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 {
 	struct Bytes *aif = read_bytearray(aif_filename);
-	AifData aif_data = {0};
+	AifData aif_data = {0,0,0,0,0,0,0};
 	read_aif(aif, &aif_data);
 
 	int header_size = 0x10;
 	struct Bytes *pcm;
-	struct Bytes output = {0};
+	struct Bytes output = {0,0};
 
 	if (compress)
 	{

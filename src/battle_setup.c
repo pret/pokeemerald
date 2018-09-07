@@ -33,6 +33,7 @@
 #include "field_weather.h"
 #include "gym_leader_rematch.h"
 #include "constants/map_types.h"
+#include "constants/battle_frontier.h"
 
 enum
 {
@@ -863,7 +864,7 @@ u8 sub_80B100C(s32 arg0)
             return sUnknown_0854FEA7[Random() % ARRAY_COUNT(sUnknown_0854FEA7)];
         }
 
-        if (VarGet(VAR_0x40CE) != 3)
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
             return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
     }
     else
@@ -880,7 +881,7 @@ u8 sub_80B100C(s32 arg0)
             return sUnknown_0854FEA7[Random() % ARRAY_COUNT(sUnknown_0854FEA7)];
         }
 
-        if (VarGet(VAR_0x40CE) != 3)
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
             return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
     }
 
@@ -900,7 +901,7 @@ static void CB2_GiveStarter(void)
 {
     u16 starterMon;
 
-    *GetVarPointer(VAR_FIRST_POKE) = gSpecialVar_Result;
+    *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterMon, 5, 0, 0, 0, 0);
     ResetTasks();

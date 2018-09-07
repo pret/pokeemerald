@@ -291,7 +291,7 @@ BattleFrontier_BattleFactoryBattleRoom_Movement_25B18B: @ 825B18B
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B190:: @ 825B190
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B190:: @ 825B190
-	copyvar VAR_RESULT, VAR_0x40CE
+	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B1AA
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 255, 4, 8

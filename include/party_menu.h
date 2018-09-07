@@ -34,6 +34,8 @@ struct Struct203CEC8
 
 extern struct Struct203CEC8 gUnknown_0203CEC8;
 
+extern const u16 gUnknown_0861500C[];
+
 bool8 pokemon_has_move(struct Pokemon *, u16);
 void sub_81B58A8(void);
 void DoWallyTutorialBagMenu(void);
@@ -54,5 +56,9 @@ void sub_81B8518(u8 unused);
 u8 sub_81B1360(void);
 void sub_81B8904(u8 arg0, void (*callback)(void));
 void OpenPartyMenuInBattle(u8 caseId);
+u16 ItemIdToBattleMoveId(u16 itemId);
+u8 sub_81B205C(struct Pokemon* a);
+u8 sub_81B6D14(u16 a);
+bool8 hm_add_c3_without_phase_2(void);
 
 #endif // GUARD_PARTY_MENU_H

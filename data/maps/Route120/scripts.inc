@@ -25,7 +25,7 @@ Route120_EventScript_1F5406:: @ 81F5406
 	return
 
 Route120_EventScript_1F5449:: @ 81F5449
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, Route120_EventScript_27374E
 	removeobject 30
@@ -33,7 +33,7 @@ Route120_EventScript_1F5449:: @ 81F5449
 	return
 
 Route120_EventScript_1F5460:: @ 81F5460
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, Route120_EventScript_27374E
 	removeobject VAR_LAST_TALKED
@@ -220,7 +220,7 @@ Route120_EventScript_1F568B:: @ 81F568B
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq Route120_EventScript_1F571C
 	compare VAR_RESULT, 4

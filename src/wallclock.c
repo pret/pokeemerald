@@ -59,13 +59,38 @@ static void SpriteCB_PMIndicator(struct Sprite *sprite);
 
 static const u8 sUnknown_085B1F58[] = INCBIN_U8("graphics/wallclock/graphics_85b1f58.4bpp.lz");
 static const u16 sUnknown_085B21D4[] = INCBIN_U16("graphics/wallclock/palette_85b21d4.gbapal");
-static const struct WindowTemplate gUnknown_085B21DC[] = {
-    { 0x00, 0x03, 0x11, 0x18, 0x02, 0x0e, 0x200 },
-    { 0x02, 0x18, 0x10, 0x06, 0x02, 0x0c, 0x230 },
+
+static const struct WindowTemplate gUnknown_085B21DC[] = 
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 17,
+        .width = 24,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 512
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 24,
+        .tilemapTop = 16,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 12,
+        .baseBlock = 560
+    },
     DUMMY_WIN_TEMPLATE
 };
-static const struct WindowTemplate gUnknown_085B21F4 = {
-    0x00, 0x18, 0x09, 0x05, 0x04, 0x0e, 0x23c
+static const struct WindowTemplate gUnknown_085B21F4 =
+{
+    .priority = 0,
+    .tilemapLeft = 24,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 14,
+    .baseBlock = 572
 };
 static const struct BgTemplate gUnknown_085B21FC[] = {
     {
@@ -115,23 +140,25 @@ static const union AnimCmd *const gUnknown_085B2248[] = {
 static const union AnimCmd *const gUnknown_085B224C[] = {
     Unknown_085B2240
 };
-static const struct SpriteTemplate gUnknown_085B2250 = {
-    TAG_GFX_WALL_CLOCK_HAND,
-    TAG_PAL_WALL_CLOCK_HAND,
-    &Unknown_085B2230,
-    gUnknown_085B2248,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCB_MinuteHand
+static const struct SpriteTemplate gUnknown_085B2250 =
+{
+    .tileTag = TAG_GFX_WALL_CLOCK_HAND,
+    .paletteTag = TAG_PAL_WALL_CLOCK_HAND,
+    .oam = &Unknown_085B2230,
+    .anims = gUnknown_085B2248,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_MinuteHand
 };
-static const struct SpriteTemplate gUnknown_085B2268 = {
-    TAG_GFX_WALL_CLOCK_HAND,
-    TAG_PAL_WALL_CLOCK_HAND,
-    &Unknown_085B2230,
-    gUnknown_085B224C,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCB_HourHand
+static const struct SpriteTemplate gUnknown_085B2268 =
+{
+    .tileTag = TAG_GFX_WALL_CLOCK_HAND,
+    .paletteTag = TAG_PAL_WALL_CLOCK_HAND,
+    .oam = &Unknown_085B2230,
+    .anims = gUnknown_085B224C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_HourHand
 };
 static const struct OamData Unknown_085B2280 = {
     .y = 0xa0,
@@ -152,23 +179,25 @@ static const union AnimCmd *const gUnknown_085B2298[] = {
 static const union AnimCmd *const gUnknown_085B229C[] = {
     Unknown_085B2290
 };
-static const struct SpriteTemplate gUnknown_085B22A0 = {
-    TAG_GFX_WALL_CLOCK_HAND,
-    TAG_PAL_WALL_CLOCK_HAND,
-    &Unknown_085B2280,
-    gUnknown_085B2298,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCB_AMIndicator
+static const struct SpriteTemplate gUnknown_085B22A0 =
+{
+    .tileTag = TAG_GFX_WALL_CLOCK_HAND,
+    .paletteTag = TAG_PAL_WALL_CLOCK_HAND,
+    .oam = &Unknown_085B2280,
+    .anims = gUnknown_085B2298,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_AMIndicator
 };
-static const struct SpriteTemplate gUnknown_085B22B8 = {
-    TAG_GFX_WALL_CLOCK_HAND,
-    TAG_PAL_WALL_CLOCK_HAND,
-    &Unknown_085B2280,
-    gUnknown_085B229C,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCB_PMIndicator
+static const struct SpriteTemplate gUnknown_085B22B8 =
+{
+    .tileTag = TAG_GFX_WALL_CLOCK_HAND,
+    .paletteTag = TAG_PAL_WALL_CLOCK_HAND,
+    .oam = &Unknown_085B2280,
+    .anims = gUnknown_085B229C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_PMIndicator
 };
 static const s8 sClockHandCoords[][2] = {
     { 0x00, -0x18},
@@ -602,7 +631,7 @@ static void WallClockInit(void)
     ShowBg(3);
 }
 
-void Cb2_StartWallClock(void)
+void CB2_StartWallClock(void)
 {
     u8 taskId;
     u8 spriteId;
@@ -644,7 +673,7 @@ void Cb2_StartWallClock(void)
     schedule_bg_copy_tilemap_to_vram(2);
 }
 
-void Cb2_ViewWallClock(void)
+void CB2_ViewWallClock(void)
 {
     u8 taskId;
     u8 spriteId;
@@ -763,7 +792,7 @@ static void Task_SetClock3(u8 taskId)
 
 static void Task_SetClock4(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
         case 0:
             PlaySE(SE_SELECT);

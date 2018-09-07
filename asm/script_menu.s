@@ -327,7 +327,7 @@ _080E2090:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _080E209E
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	b _080E20A2
 _080E209E:
 	bl ProcessMenuInput
@@ -444,7 +444,7 @@ task_yes_no_maybe: @ 80E215C
 	b _080E21C4
 	.pool
 _080E2180:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1
@@ -1498,7 +1498,7 @@ CreateWindowFromRect: @ 80E2A1C
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl sub_8198A50
+	bl CreateWindowTemplate
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
