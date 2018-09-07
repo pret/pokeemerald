@@ -42,6 +42,7 @@ extern const u8 gUnknown_08D9ADD0[];
 extern const u8 gUnknown_08D9AE04[];
 extern const u8 gUnknown_08D9AF44[];
 extern const u16 gUnknown_0860F074[];
+extern const u8 gBattleFrontierGfx_PyramidBag[];
 
 // This file's functions.
 static void Task_HandlePyramidBagInput(u8 taskId);
@@ -281,8 +282,67 @@ static const struct WindowTemplate gUnknown_0861F350[] =
     },
 };
 
-extern const struct CompressedSpriteSheet gUnknown_0861F3CC;
-extern const struct SpriteTemplate gUnknown_0861F3D4;
+static const struct OamData gOamData_861F378 =
+{
+    .y = 0,
+    .affineMode = 1,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd gSpriteAnim_861F380[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd * const gSpriteAnimTable_861F388[] =
+{
+    gSpriteAnim_861F380,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_861F38C[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_861F39C[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 254, 2),
+    AFFINEANIMCMD_FRAME(0, 0, 2, 4),
+    AFFINEANIMCMD_FRAME(0, 0, 254, 4),
+    AFFINEANIMCMD_FRAME(0, 0, 2, 2),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd * const gSpriteAffineAnimTable_861F3C4[] =
+{
+    gSpriteAffineAnim_861F38C,
+    gSpriteAffineAnim_861F39C,
+};
+
+static const struct CompressedSpriteSheet gUnknown_0861F3CC = {gBattleFrontierGfx_PyramidBag, 0x0800, 0x1024};
+
+static const struct SpriteTemplate gUnknown_0861F3D4 =
+{
+    .tileTag = 0x1024,
+    .paletteTag = 0x1024,
+    .oam = &gOamData_861F378,
+    .anims = gSpriteAnimTable_861F388,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_861F3C4,
+    .callback = SpriteCallbackDummy
+};
 
 // code
 void sub_81C4EEC(void)
