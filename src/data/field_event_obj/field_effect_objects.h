@@ -987,7 +987,7 @@ const union AnimCmd *const gFieldEffectObjectImageAnimTable_Rayquaza[] = {
 };
 
 const struct SpriteFrameImage  gFieldEffectObjectPicTable_Rayquaza[] = {
-    overworld_frame(gEventObjectPic_Rayquaza, 64, 64, 0),
+    {.data = (u8*)gEventObjectPic_Rayquaza, .size = ((64*64)/2) /4} 
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza = {0xFFFF, 0xFFFF, &gEventObjectBaseOam_32x32, gFieldEffectObjectImageAnimTable_Rayquaza, gFieldEffectObjectPicTable_Rayquaza, gDummySpriteAffineAnimTable, sub_8155F80};
