@@ -1,221 +1,618 @@
 OVERWORLDGFXDIR := graphics/event_objects/pics
 
-$(OVERWORLDGFXDIR)/people/brendan/walking.4bpp: $(OVERWORLDGFXDIR)/people/brendan/walking.png
+$(OVERWORLDGFXDIR)/people/brendan/walking.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-	$(GFX) $(OVERWORLDGFXDIR)/people/brendan/running.png    $(OVERWORLDGFXDIR)/people/brendan/running.4bpp    -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/brendan/field_move.png $(OVERWORLDGFXDIR)/people/brendan/field_move.4bpp -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/brendan/surfing.png    $(OVERWORLDGFXDIR)/people/brendan/surfing.4bpp    -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/brendan/mach_bike.png  $(OVERWORLDGFXDIR)/people/brendan/mach_bike.4bpp  -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/brendan/acro_bike.png  $(OVERWORLDGFXDIR)/people/brendan/acro_bike.4bpp  -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/brendan/fishing.png    $(OVERWORLDGFXDIR)/people/brendan/fishing.4bpp    -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/brendan/watering.png   $(OVERWORLDGFXDIR)/people/brendan/watering.4bpp   -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/brendan/underwater.png $(OVERWORLDGFXDIR)/people/brendan/underwater.4bpp -mwidth 4 -mheight 4
+$(OVERWORLDGFXDIR)/people/brendan/running.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-	$(GFX) $(OVERWORLDGFXDIR)/people/elite_four/drake.png  $(OVERWORLDGFXDIR)/people/elite_four/drake.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/elite_four/glacia.png $(OVERWORLDGFXDIR)/people/elite_four/glacia.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/elite_four/phoebe.png $(OVERWORLDGFXDIR)/people/elite_four/phoebe.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/elite_four/sidney.png $(OVERWORLDGFXDIR)/people/elite_four/sidney.4bpp -mwidth 2 -mheight 4
+$(OVERWORLDGFXDIR)/people/brendan/field_move.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-	$(GFX) $(OVERWORLDGFXDIR)/people/frontier_brains/anabel.png  $(OVERWORLDGFXDIR)/people/frontier_brains/anabel.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/frontier_brains/brandon.png $(OVERWORLDGFXDIR)/people/frontier_brains/brandon.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/frontier_brains/greta.png   $(OVERWORLDGFXDIR)/people/frontier_brains/greta.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/frontier_brains/lucy.png    $(OVERWORLDGFXDIR)/people/frontier_brains/lucy.4bpp    -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/frontier_brains/noland.png  $(OVERWORLDGFXDIR)/people/frontier_brains/noland.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/frontier_brains/spenser.png $(OVERWORLDGFXDIR)/people/frontier_brains/spenser.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/frontier_brains/tucker.png  $(OVERWORLDGFXDIR)/people/frontier_brains/tucker.4bpp  -mwidth 2 -mheight 4
+$(OVERWORLDGFXDIR)/people/brendan/surfing.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/brawly.png   $(OVERWORLDGFXDIR)/people/gym_leaders/brawly.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/flannery.png $(OVERWORLDGFXDIR)/people/gym_leaders/flannery.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/juan.png     $(OVERWORLDGFXDIR)/people/gym_leaders/juan.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/liza.png     $(OVERWORLDGFXDIR)/people/gym_leaders/liza.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/norman.png   $(OVERWORLDGFXDIR)/people/gym_leaders/norman.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/roxanne.png  $(OVERWORLDGFXDIR)/people/gym_leaders/roxanne.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/tate.png     $(OVERWORLDGFXDIR)/people/gym_leaders/tate.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/wattson.png  $(OVERWORLDGFXDIR)/people/gym_leaders/wattson.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gym_leaders/winona.png   $(OVERWORLDGFXDIR)/people/gym_leaders/winona.4bpp   -mwidth 2 -mheight 4
+$(OVERWORLDGFXDIR)/people/brendan/mach_bike.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/walking.png    $(OVERWORLDGFXDIR)/people/may/walking.4bpp    -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/running.png    $(OVERWORLDGFXDIR)/people/may/running.4bpp    -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/field_move.png $(OVERWORLDGFXDIR)/people/may/field_move.4bpp -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/surfing.png    $(OVERWORLDGFXDIR)/people/may/surfing.4bpp    -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/mach_bike.png  $(OVERWORLDGFXDIR)/people/may/mach_bike.4bpp  -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/acro_bike.png  $(OVERWORLDGFXDIR)/people/may/acro_bike.4bpp  -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/fishing.png    $(OVERWORLDGFXDIR)/people/may/fishing.4bpp    -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/watering.png   $(OVERWORLDGFXDIR)/people/may/watering.4bpp   -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/may/underwater.png $(OVERWORLDGFXDIR)/people/may/underwater.4bpp -mwidth 4 -mheight 4
+$(OVERWORLDGFXDIR)/people/brendan/acro_bike.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-	$(GFX) $(OVERWORLDGFXDIR)/people/ruby_sapphire_brendan/walking.png $(OVERWORLDGFXDIR)/people/ruby_sapphire_brendan/walking.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/ruby_sapphire_brendan/running.png $(OVERWORLDGFXDIR)/people/ruby_sapphire_brendan/running.4bpp -mwidth 2 -mheight 4
+$(OVERWORLDGFXDIR)/people/brendan/fishing.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-	$(GFX) $(OVERWORLDGFXDIR)/people/ruby_sapphire_may/walking.png $(OVERWORLDGFXDIR)/people/ruby_sapphire_may/walking.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/ruby_sapphire_may/running.png $(OVERWORLDGFXDIR)/people/ruby_sapphire_may/running.4bpp -mwidth 2 -mheight 4
+$(OVERWORLDGFXDIR)/people/brendan/watering.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-	$(GFX) $(OVERWORLDGFXDIR)/people/team_aqua/aqua_member_f.png $(OVERWORLDGFXDIR)/people/team_aqua/aqua_member_f.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/team_aqua/aqua_member_m.png $(OVERWORLDGFXDIR)/people/team_aqua/aqua_member_m.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/team_aqua/archie.png        $(OVERWORLDGFXDIR)/people/team_aqua/archie.4bpp        -mwidth 2 -mheight 4
-
-	$(GFX) $(OVERWORLDGFXDIR)/people/team_magma/magma_member_f.png $(OVERWORLDGFXDIR)/people/team_magma/magma_member_f.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/team_magma/magma_member_m.png $(OVERWORLDGFXDIR)/people/team_magma/magma_member_m.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/team_magma/maxie.png          $(OVERWORLDGFXDIR)/people/team_magma/maxie.4bpp          -mwidth 2 -mheight 4
-
-	$(GFX) $(OVERWORLDGFXDIR)/people/artist.png          $(OVERWORLDGFXDIR)/people/artist.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/beauty.png          $(OVERWORLDGFXDIR)/people/beauty.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/black_belt.png      $(OVERWORLDGFXDIR)/people/black_belt.4bpp      -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/boy_1.png           $(OVERWORLDGFXDIR)/people/boy_1.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/boy_2.png           $(OVERWORLDGFXDIR)/people/boy_2.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/boy_3.png           $(OVERWORLDGFXDIR)/people/boy_3.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/boy_4.png           $(OVERWORLDGFXDIR)/people/boy_4.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/boy_5.png           $(OVERWORLDGFXDIR)/people/boy_5.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/bug_catcher.png     $(OVERWORLDGFXDIR)/people/bug_catcher.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/cameraman.png       $(OVERWORLDGFXDIR)/people/cameraman.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/camper.png          $(OVERWORLDGFXDIR)/people/camper.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/contest_old_man.png $(OVERWORLDGFXDIR)/people/contest_old_man.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/cook.png            $(OVERWORLDGFXDIR)/people/cook.4bpp            -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/cycling_triathlete_f.png $(OVERWORLDGFXDIR)/people/cycling_triathlete_f.4bpp -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/cycling_triathlete_m.png $(OVERWORLDGFXDIR)/people/cycling_triathlete_m.4bpp -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/fat_man.png         $(OVERWORLDGFXDIR)/people/fat_man.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/fisherman.png       $(OVERWORLDGFXDIR)/people/fisherman.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/gentleman.png       $(OVERWORLDGFXDIR)/people/gentleman.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/girl_1.png          $(OVERWORLDGFXDIR)/people/girl_1.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/girl_2.png          $(OVERWORLDGFXDIR)/people/girl_2.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/girl_3.png          $(OVERWORLDGFXDIR)/people/girl_3.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/hex_maniac.png      $(OVERWORLDGFXDIR)/people/hex_maniac.4bpp      -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/hiker.png           $(OVERWORLDGFXDIR)/people/hiker.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/hot_springs_old_woman.png $(OVERWORLDGFXDIR)/people/hot_springs_old_woman.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/lass.png            $(OVERWORLDGFXDIR)/people/lass.4bpp            -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/leaf.png            $(OVERWORLDGFXDIR)/people/leaf.4bpp            -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/little_boy_1.png    $(OVERWORLDGFXDIR)/people/little_boy_1.4bpp    -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/people/little_boy_2.png    $(OVERWORLDGFXDIR)/people/little_boy_2.4bpp    -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/people/little_girl_1.png   $(OVERWORLDGFXDIR)/people/little_girl_1.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/little_girl_2.png    $(OVERWORLDGFXDIR)/people/little_girl_2.4bpp   -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/people/man_1.png           $(OVERWORLDGFXDIR)/people/man_1.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/man_2.png           $(OVERWORLDGFXDIR)/people/man_2.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/man_3.png           $(OVERWORLDGFXDIR)/people/man_3.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/man_4.png           $(OVERWORLDGFXDIR)/people/man_4.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/man_5.png           $(OVERWORLDGFXDIR)/people/man_5.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/man_6.png           $(OVERWORLDGFXDIR)/people/man_6.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/man_7.png           $(OVERWORLDGFXDIR)/people/man_7.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/maniac.png          $(OVERWORLDGFXDIR)/people/maniac.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/mart_employee.png   $(OVERWORLDGFXDIR)/people/mart_employee.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/mauville_old_man_1.png $(OVERWORLDGFXDIR)/people/mauville_old_man_1.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/mauville_old_man_2.png $(OVERWORLDGFXDIR)/people/mauville_old_man_2.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/mom.png             $(OVERWORLDGFXDIR)/people/mom.4bpp             -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/mystery_event_deliveryman.png $(OVERWORLDGFXDIR)/people/mystery_event_deliveryman.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/nurse.png           $(OVERWORLDGFXDIR)/people/nurse.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/old_man_1.png       $(OVERWORLDGFXDIR)/people/old_man_1.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/old_man_2.png       $(OVERWORLDGFXDIR)/people/old_man_2.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/old_woman_1.png     $(OVERWORLDGFXDIR)/people/old_woman_1.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/old_woman_2.png     $(OVERWORLDGFXDIR)/people/old_woman_2.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/picnicker.png       $(OVERWORLDGFXDIR)/people/picnicker.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/prof_birch.png      $(OVERWORLDGFXDIR)/people/prof_birch.4bpp      -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/psychic_m.png       $(OVERWORLDGFXDIR)/people/psychic_m.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/quinty_plump.png    $(OVERWORLDGFXDIR)/people/quinty_plump.4bpp    -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/red.png             $(OVERWORLDGFXDIR)/people/red.4bpp             -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/reporter_f.png      $(OVERWORLDGFXDIR)/people/reporter_f.4bpp      -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/reporter_m.png      $(OVERWORLDGFXDIR)/people/reporter_m.4bpp      -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/rooftop_sale_woman.png $(OVERWORLDGFXDIR)/people/rooftop_sale_woman.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/rs_little_boy.png   $(OVERWORLDGFXDIR)/people/rs_little_boy.4bpp   -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/people/running_triathlete_f.png $(OVERWORLDGFXDIR)/people/running_triathlete_f.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/running_triathlete_m.png $(OVERWORLDGFXDIR)/people/running_triathlete_m.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/sailor.png          $(OVERWORLDGFXDIR)/people/sailor.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/school_kid_m.png    $(OVERWORLDGFXDIR)/people/school_kid_m.4bpp    -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/scientist_1.png     $(OVERWORLDGFXDIR)/people/scientist_1.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/scientist_2.png     $(OVERWORLDGFXDIR)/people/scientist_2.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/scott.png           $(OVERWORLDGFXDIR)/people/scott.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/steven.png          $(OVERWORLDGFXDIR)/people/steven.4bpp          -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/swimmer_f.png       $(OVERWORLDGFXDIR)/people/swimmer_f.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/swimmer_m.png       $(OVERWORLDGFXDIR)/people/swimmer_m.4bpp       -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/teala.png           $(OVERWORLDGFXDIR)/people/teala.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/tuber_f.png         $(OVERWORLDGFXDIR)/people/tuber_f.4bpp         -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/people/tuber_m.png         $(OVERWORLDGFXDIR)/people/tuber_m.4bpp         -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/people/tuber_m_swimming.png $(OVERWORLDGFXDIR)/people/tuber_m_swimming.4bpp -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/people/union_room_attendant.png $(OVERWORLDGFXDIR)/people/union_room_attendant.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/unused_woman.png    $(OVERWORLDGFXDIR)/people/unused_woman.4bpp    -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/wallace.png         $(OVERWORLDGFXDIR)/people/wallace.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/wally.png           $(OVERWORLDGFXDIR)/people/wally.4bpp           -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/woman_1.png         $(OVERWORLDGFXDIR)/people/woman_1.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/woman_2.png         $(OVERWORLDGFXDIR)/people/woman_2.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/woman_3.png         $(OVERWORLDGFXDIR)/people/woman_3.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/woman_4.png         $(OVERWORLDGFXDIR)/people/woman_4.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/woman_5.png         $(OVERWORLDGFXDIR)/people/woman_5.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/woman_6.png         $(OVERWORLDGFXDIR)/people/woman_6.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/woman_7.png         $(OVERWORLDGFXDIR)/people/woman_7.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/people/youngster.png       $(OVERWORLDGFXDIR)/people/youngster.4bpp       -mwidth 2 -mheight 4
+$(OVERWORLDGFXDIR)/people/brendan/underwater.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/azumarill.png $(OVERWORLDGFXDIR)/pokemon/azumarill.4bpp             -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/azurill.png   $(OVERWORLDGFXDIR)/pokemon/azurill.4bpp               -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/deoxys.png    $(OVERWORLDGFXDIR)/pokemon/deoxys.4bpp                -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/dusclops.png  $(OVERWORLDGFXDIR)/pokemon/dusclops.4bpp              -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/enemy_zigzagoon.png $(OVERWORLDGFXDIR)/pokemon/enemy_zigzagoon.4bpp -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/groudon.png   $(OVERWORLDGFXDIR)/pokemon/groudon.4bpp               -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/ho_oh.png     $(OVERWORLDGFXDIR)/pokemon/ho_oh.4bpp                 -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/kecleon.png   $(OVERWORLDGFXDIR)/pokemon/kecleon.4bpp               -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/kirlia.png    $(OVERWORLDGFXDIR)/pokemon/kirlia.4bpp                -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/kyogre.png    $(OVERWORLDGFXDIR)/pokemon/kyogre.4bpp                -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/latias_latios.png $(OVERWORLDGFXDIR)/pokemon/latias_latios.4bpp     -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/lugia.png     $(OVERWORLDGFXDIR)/pokemon/lugia.4bpp                 -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/mew.png       $(OVERWORLDGFXDIR)/pokemon/mew.4bpp                   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/pikachu.png   $(OVERWORLDGFXDIR)/pokemon/pikachu.4bpp               -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/poochyena.png $(OVERWORLDGFXDIR)/pokemon/poochyena.4bpp             -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/rayquaza.png  $(OVERWORLDGFXDIR)/pokemon/rayquaza.4bpp              -mwidth 8 -mheight 8
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/skitty.png    $(OVERWORLDGFXDIR)/pokemon/skitty.4bpp                -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/sudowoodo.png $(OVERWORLDGFXDIR)/pokemon/sudowoodo.4bpp             -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/vigoroth.png  $(OVERWORLDGFXDIR)/pokemon/vigoroth.4bpp              -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/wingull.png   $(OVERWORLDGFXDIR)/pokemon/wingull.4bpp               -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/pokemon/zigzagoon.png $(OVERWORLDGFXDIR)/pokemon/zigzagoon.4bpp             -mwidth 2 -mheight 2
+$(OVERWORLDGFXDIR)/people/elite_four/drake.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/elite_four/glacia.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/elite_four/phoebe.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/elite_four/sidney.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/aguav.png  $(OVERWORLDGFXDIR)/berry_trees/aguav.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/aspear.png $(OVERWORLDGFXDIR)/berry_trees/aspear.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/cheri.png  $(OVERWORLDGFXDIR)/berry_trees/cheri.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/chesto.png $(OVERWORLDGFXDIR)/berry_trees/chesto.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/cornn.png  $(OVERWORLDGFXDIR)/berry_trees/cornn.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/durin.png  $(OVERWORLDGFXDIR)/berry_trees/durin.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/figy.png   $(OVERWORLDGFXDIR)/berry_trees/figy.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/grepa.png  $(OVERWORLDGFXDIR)/berry_trees/grepa.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/hondew.png $(OVERWORLDGFXDIR)/berry_trees/hondew.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/iapapa.png $(OVERWORLDGFXDIR)/berry_trees/iapapa.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/kelpsy.png $(OVERWORLDGFXDIR)/berry_trees/kelpsy.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/lansat.png $(OVERWORLDGFXDIR)/berry_trees/lansat.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/leppa.png  $(OVERWORLDGFXDIR)/berry_trees/leppa.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/liechi.png $(OVERWORLDGFXDIR)/berry_trees/liechi.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/lum.png    $(OVERWORLDGFXDIR)/berry_trees/lum.4bpp    -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/mago.png   $(OVERWORLDGFXDIR)/berry_trees/mago.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/nomel.png  $(OVERWORLDGFXDIR)/berry_trees/nomel.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/oran.png   $(OVERWORLDGFXDIR)/berry_trees/oran.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/pamtre.png $(OVERWORLDGFXDIR)/berry_trees/pamtre.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/pecha.png  $(OVERWORLDGFXDIR)/berry_trees/pecha.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/persim.png $(OVERWORLDGFXDIR)/berry_trees/persim.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/pomeg.png  $(OVERWORLDGFXDIR)/berry_trees/pomeg.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/rabuta.png $(OVERWORLDGFXDIR)/berry_trees/rabuta.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/rawst.png  $(OVERWORLDGFXDIR)/berry_trees/rawst.4bpp  -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/razz.png   $(OVERWORLDGFXDIR)/berry_trees/razz.4bpp   -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/sitrus.png $(OVERWORLDGFXDIR)/berry_trees/sitrus.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/spelon.png $(OVERWORLDGFXDIR)/berry_trees/spelon.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/sprout.png $(OVERWORLDGFXDIR)/berry_trees/sprout.4bpp -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/tamato.png $(OVERWORLDGFXDIR)/berry_trees/tamato.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/wepear.png $(OVERWORLDGFXDIR)/berry_trees/wepear.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/berry_trees/wiki.png   $(OVERWORLDGFXDIR)/berry_trees/wiki.4bpp   -mwidth 2 -mheight 4
+$(OVERWORLDGFXDIR)/people/frontier_brains/anabel.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/frontier_brains/brandon.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/frontier_brains/greta.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/frontier_brains/lucy.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/frontier_brains/noland.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/frontier_brains/spenser.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/frontier_brains/tucker.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 
-	$(GFX) $(OVERWORLDGFXDIR)/misc/breakable_rock.png  $(OVERWORLDGFXDIR)/misc/breakable_rock.4bpp   -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/misc/cuttable_tree.png   $(OVERWORLDGFXDIR)/misc/cuttable_tree.4bpp    -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/misc/mr_brineys_boat.png $(OVERWORLDGFXDIR)/misc/mr_brineys_boat.4bpp  -mwidth 4 -mheight 4
+$(OVERWORLDGFXDIR)/people/gym_leaders/brawly.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gym_leaders/flannery.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gym_leaders/juan.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gym_leaders/liza.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gym_leaders/norman.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gym_leaders/roxanne.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gym_leaders/tate.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gym_leaders/wattson.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gym_leaders/winona.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 
-	$(GFX) $(OVERWORLDGFXDIR)/effects/arrow.png                 $(OVERWORLDGFXDIR)/effects/arrow.4bpp                 -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/effects/ash.png                   $(OVERWORLDGFXDIR)/effects/ash.4bpp                   -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/effects/bike_hop_big_splash.png   $(OVERWORLDGFXDIR)/effects/bike_hop_big_splash.4bpp   -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/effects/bike_hop_small_splash.png $(OVERWORLDGFXDIR)/effects/bike_hop_small_splash.4bpp -mwidth 2 -mheight 1
-	$(GFX) $(OVERWORLDGFXDIR)/effects/bubbles.png               $(OVERWORLDGFXDIR)/effects/bubbles.4bpp               -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/effects/jump_out_of_ash.png       $(OVERWORLDGFXDIR)/effects/jump_out_of_ash.4bpp       -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/effects/mountain_disguise.png     $(OVERWORLDGFXDIR)/effects/mountain_disguise.4bpp     -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/effects/ripple.png                $(OVERWORLDGFXDIR)/effects/ripple.4bpp                -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/effects/sand_disguise_placeholder.png $(OVERWORLDGFXDIR)/effects/sand_disguise_placeholder.4bpp -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/effects/short_grass.png           $(OVERWORLDGFXDIR)/effects/short_grass.4bpp          -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/effects/surf_blob.png             $(OVERWORLDGFXDIR)/effects/surf_blob.4bpp             -mwidth 4 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/effects/tall_grass.png            $(OVERWORLDGFXDIR)/effects/tall_grass.4bpp            -mwidth 2 -mheight 2
-	$(GFX) $(OVERWORLDGFXDIR)/effects/tree_disguise.png         $(OVERWORLDGFXDIR)/effects/tree_disguise.4bpp         -mwidth 2 -mheight 4
-	$(GFX) $(OVERWORLDGFXDIR)/effects/unknown_17.png            $(OVERWORLDGFXDIR)/effects/unknown_17.4bpp            -mwidth 2 -mheight 2
+$(OVERWORLDGFXDIR)/people/may/walking.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/may/running.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/may/field_move.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/may/surfing.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/may/mach_bike.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/may/acro_bike.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/may/fishing.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/may/watering.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/may/underwater.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+
+$(OVERWORLDGFXDIR)/people/ruby_sapphire_brendan/walking.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/ruby_sapphire_brendan/running.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+
+$(OVERWORLDGFXDIR)/people/ruby_sapphire_may/walking.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/ruby_sapphire_may/running.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+
+$(OVERWORLDGFXDIR)/people/team_aqua/aqua_member_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/team_aqua/aqua_member_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/team_aqua/archie.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+
+$(OVERWORLDGFXDIR)/people/team_magma/magma_member_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/team_magma/magma_member_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/team_magma/maxie.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+
+$(OVERWORLDGFXDIR)/people/artist.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/beauty.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/black_belt.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/boy_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/boy_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/boy_3.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/boy_4.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/boy_5.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/bug_catcher.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/cameraman.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/camper.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/contest_old_man.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/cook.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/cycling_triathlete_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/cycling_triathlete_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/fat_man.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/fisherman.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/gentleman.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/girl_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/girl_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/girl_3.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/hex_maniac.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/hiker.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/hot_springs_old_woman.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/lass.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/leaf.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/little_boy_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/people/little_boy_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/people/little_girl_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/little_girl_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/people/man_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/man_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/man_3.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/man_4.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/man_5.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/man_6.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/man_7.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/maniac.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/mart_employee.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/mauville_old_man_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/mauville_old_man_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/mom.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/mystery_event_deliveryman.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/nurse.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/old_man_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/old_man_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/old_woman_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/old_woman_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/picnicker.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/prof_birch.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/psychic_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/quinty_plump.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/red.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/reporter_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/reporter_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/rooftop_sale_woman.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/rs_little_boy.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/people/running_triathlete_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/running_triathlete_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/sailor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/school_kid_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/scientist_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/scientist_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/scott.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/steven.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/swimmer_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/swimmer_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/teala.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/tuber_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/people/tuber_m.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/people/tuber_m_swimming.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/people/union_room_attendant.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/unused_woman.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/wallace.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/wally.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/woman_1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/woman_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/woman_3.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/woman_4.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/woman_5.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/woman_6.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/woman_7.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/people/youngster.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+
+
+$(OVERWORLDGFXDIR)/pokemon/azumarill.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/pokemon/azurill.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/pokemon/deoxys.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/dusclops.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/enemy_zigzagoon.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/groudon.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/ho_oh.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/kecleon.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/pokemon/kirlia.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/kyogre.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/latias_latios.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/lugia.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/mew.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/pikachu.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/pokemon/poochyena.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/rayquaza.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 8
+
+$(OVERWORLDGFXDIR)/pokemon/skitty.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/pokemon/sudowoodo.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/vigoroth.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/pokemon/wingull.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/pokemon/zigzagoon.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+
+
+$(OVERWORLDGFXDIR)/berry_trees/aguav.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/aspear.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/cheri.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/chesto.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/cornn.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/durin.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/figy.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/grepa.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/hondew.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/iapapa.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/kelpsy.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/lansat.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/leppa.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/liechi.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/lum.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/mago.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/nomel.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/oran.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/pamtre.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/pecha.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/persim.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/pomeg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/rabuta.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/rawst.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/razz.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/sitrus.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/spelon.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/sprout.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/berry_trees/tamato.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/wepear.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/berry_trees/wiki.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+
+
+$(OVERWORLDGFXDIR)/misc/breakable_rock.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/misc/cuttable_tree.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/misc/mr_brineys_boat.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+
+
+$(OVERWORLDGFXDIR)/effects/arrow.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/effects/ash.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/effects/bike_hop_big_splash.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/effects/bike_hop_small_splash.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 1
+
+$(OVERWORLDGFXDIR)/effects/bubbles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/effects/jump_out_of_ash.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/effects/mountain_disguise.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/effects/ripple.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/effects/sand_disguise_placeholder.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/effects/short_grass.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/effects/surf_blob.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OVERWORLDGFXDIR)/effects/tall_grass.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OVERWORLDGFXDIR)/effects/tree_disguise.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OVERWORLDGFXDIR)/effects/unknown_17.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
