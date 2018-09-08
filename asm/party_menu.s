@@ -4454,7 +4454,7 @@ _081B243E:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -5938,7 +5938,7 @@ _081B3104:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 _081B313C:
@@ -6132,7 +6132,7 @@ _081B328C:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	mov r2, r9
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -6193,7 +6193,7 @@ sub_81B3300: @ 81B3300
 	movs r0, 0x6
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParameterized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -12508,7 +12508,7 @@ _081B6A40:
 	adds r0, r6, 0
 	mov r1, r10
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	cmp r4, 0
 	beq _081B6A82
 	adds r0, r7, 0x1

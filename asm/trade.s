@@ -4608,7 +4608,7 @@ _080798BC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -5599,7 +5599,7 @@ sub_807A19C: @ 807A19C
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC
@@ -14295,7 +14295,7 @@ sub_807F1A8: @ 807F1A8
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

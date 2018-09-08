@@ -298,5 +298,5 @@ static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 sp
     textColor[2] = 3;
 
     FillWindowPixelBuffer(windowId, (textColor[0]) | (textColor[0] << 4));
-    AddTextPrinterParameterized2(windowId, 1, x, y, letterSpacing, lineSpacing, textColor, speed, text);
+    AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, lineSpacing, textColor, speed, text);
 }

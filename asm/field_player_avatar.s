@@ -3022,7 +3022,7 @@ _0808CA94:
 	movs r0, 0
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -3133,7 +3133,7 @@ fish6: @ 808CB6C
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -3266,7 +3266,7 @@ fish9: @ 808CC64
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParameterized
+	bl AddTextPrinterParameterized2
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -3423,7 +3423,7 @@ fishB: @ 808CD94
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParameterized
+	bl AddTextPrinterParameterized2
 	movs r0, 0xD
 	strh r0, [r5, 0x8]
 	movs r0, 0x1
@@ -3471,7 +3471,7 @@ fishC: @ 808CE04
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParameterized
+	bl AddTextPrinterParameterized2
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]

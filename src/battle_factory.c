@@ -90,6 +90,12 @@ struct FactorySelectMonsStruct
 
 // 'Action' refers to the Cancel, Pknm for swap windows.
 
+struct UnkField18Struct
+{
+    u8 unk0;
+    u8 unk1[7];
+};
+
 struct FactorySwapMonsStruct
 {
     u8 menuCursorPos;
@@ -105,11 +111,8 @@ struct FactorySwapMonsStruct
     u8 actionsState;
     bool8 fromSummaryScreen;
     u8 yesNoCursorPos;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;
-    u8 unk1A;
-    u8 unk1B;
+    u8 actionsCount;
+    struct UnkField18Struct *unk18;
     u8 unk1C;
     u8 unk1D;
     u8 unk1E;
@@ -174,8 +177,9 @@ static u8 Select_OptionRentDeselect(void);
 u8 sub_81A6F70(u8 battleMode, u8 lvlMode);
 u8 sub_81A6CA8(u8 arg0, u8 arg1);
 static bool32 Select_AreSpeciesValid(u16 monSetId);
-void sub_819E538(void);
-void sub_819E9E0(void);
+void Swap_DestroyAllSprites(void);
+void Swap_ShowYesNoOptions(void);
+void sub_819E8EC(void);
 void sub_819EAC0(void);
 void Swap_UpdateYesNoCursorPosition(s8 direction);
 void Swap_UpdateMenuCursorPosition(s8 direction);
@@ -185,6 +189,8 @@ void Task_HandleSwapScreenChooseMons(u8 taskId);
 void sub_819D588(u8 taskId);
 void Swap_PrintOnInfoWindow(const u8 *str);
 void Swap_ShowMenuOptions(void);
+void Swap_PrintMenuOptions(void);
+void Swap_PrintYesNoOptions(void);
 void Swap_PrintMonSpecies(void);
 void Swap_PrintMonSpecies2(void);
 void Swap_PrintMonSpecies3(void);
@@ -201,19 +207,20 @@ void Swap_RunMenuOptionFunc(u8 taskId);
 void sub_819F184(u8 taskId);
 void Swap_PrintActionStrings(void);
 void Swap_PrintActionStrings2(void);
-void Swap_PrintActionStrings3(u8 field);
-void sub_819F048(u8 field);
+void Swap_PrintActionStrings3(u8 arg0);
+void sub_819F048(u8 arg0);
+void sub_819E838(u8 arg0);
 
 // Ewram variables
 EWRAM_DATA u8 *gUnknown_0203CE2C = NULL;
 EWRAM_DATA u8 *gUnknown_0203CE30 = NULL;
 EWRAM_DATA u8 *gUnknown_0203CE34 = NULL;
 EWRAM_DATA u8 *gUnknown_0203CE38 = NULL;
-static EWRAM_DATA struct Pokemon *sFactorySelectMons = NULL;
-extern u8 *gUnknown_0203CE40;
-extern u8 *gUnknown_0203CE44;
-extern u8 *gUnknown_0203CE48;
-extern u8 *gUnknown_0203CE4C;
+EWRAM_DATA struct Pokemon *sFactorySelectMons = NULL;
+EWRAM_DATA u8 *gUnknown_0203CE40 = NULL;
+EWRAM_DATA u8 *gUnknown_0203CE44 = NULL;
+EWRAM_DATA u8 *gUnknown_0203CE48 = NULL;
+EWRAM_DATA u8 *gUnknown_0203CE4C = NULL;
 
 // IWRAM bss
 IWRAM_DATA struct FactorySelectMonsStruct *sFactorySelectScreen;
@@ -281,6 +288,7 @@ extern const struct SpriteTemplate gUnknown_08610608;
 extern const struct SpriteTemplate gUnknown_08610620;
 extern const struct SpriteTemplate gUnknown_08610638;
 extern const u8 gUnknown_08610479[];
+extern const u8 gUnknown_08610925[];
 extern const u8 gUnknown_08610476[];
 extern const struct SpritePalette gUnknown_086106B0[];
 extern const struct SpriteSheet gUnknown_08610650[];
@@ -308,6 +316,7 @@ extern const u8 gText_QuitSwapping[];
 extern const u8 gText_AcceptThisPkmn[];
 extern const u8 gText_SelectPkmnToAccept[];
 extern const u8 gText_SelectPkmnToSwap[];
+extern const u8 gText_PkmnSwap[];
 
 // code
 void sub_819A44C(struct Sprite *sprite)
@@ -1066,7 +1075,7 @@ static void sub_819B958(u8 windowId)
 static void Select_PrintRentalPkmnString(void)
 {
     FillWindowPixelBuffer(0, 0);
-    PrintTextOnWindow(0, 1, gText_RentalPkmn2, 2, 1, 0, NULL);
+    AddTextPrinterParameterized(0, 1, gText_RentalPkmn2, 2, 1, 0, NULL);
     CopyWindowToVram(0, 3);
 }
 
@@ -1098,14 +1107,14 @@ static void Select_PrintSelectMonString(void)
     else
         str = gText_TheseThreePkmnOkay;
 
-    PrintTextOnWindow(2, 1, str, 2, 5, 0, NULL);
+    AddTextPrinterParameterized(2, 1, str, 2, 5, 0, NULL);
     CopyWindowToVram(2, 2);
 }
 
 static void Select_PrintCantSelectSameMon(void)
 {
     FillWindowPixelBuffer(2, 0);
-    PrintTextOnWindow(2, 1, gText_CantSelectSamePkmn, 2, 5, 0, NULL);
+    AddTextPrinterParameterized(2, 1, gText_CantSelectSamePkmn, 2, 5, 0, NULL);
     CopyWindowToVram(2, 2);
 }
 
@@ -1200,7 +1209,7 @@ static void Select_PrintMonCategory(void)
         species = GetMonData(&sFactorySelectScreen->mons[monId].monData, MON_DATA_SPECIES, NULL);
         CopyMonCategoryText(SpeciesToNationalPokedexNum(species), text);
         x = GetStringRightAlignXOffset(1, text, 0x76);
-        PrintTextOnWindow(5, 1, text, x, 1, 0, NULL);
+        AddTextPrinterParameterized(5, 1, text, x, 1, 0, NULL);
         CopyWindowToVram(5, 2);
     }
 }
@@ -1554,7 +1563,7 @@ void sub_819C90C(u8 taskId) // Task_FromSelectScreenToSummaryScreen
         {
             DestroyTask(sFactorySwapScreen->palBlendTaskId);
             sub_819F444(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30);
-            sub_819E538();
+            Swap_DestroyAllSprites();
             FREE_AND_SET_NULL(gUnknown_0203CE40);
             FREE_AND_SET_NULL(gUnknown_0203CE44);
             FREE_AND_SET_NULL(gUnknown_0203CE48);
@@ -1606,7 +1615,7 @@ void sub_819CA08(u8 taskId) // Task_CloseSelectionScreen
             if (!UpdatePaletteFade())
             {
                 DestroyTask(sFactorySwapScreen->palBlendTaskId);
-                sub_819E538();
+                Swap_DestroyAllSprites();
                 FREE_AND_SET_NULL(gUnknown_0203CE40);
                 FREE_AND_SET_NULL(gUnknown_0203CE44);
                 FREE_AND_SET_NULL(gUnknown_0203CE48);
@@ -1630,7 +1639,7 @@ void Task_HandleSwapScreenYesNo(u8 taskId)
         switch (gTasks[taskId].data[0])
         {
         case 4:
-            sub_819E9E0();
+            Swap_ShowYesNoOptions();
             gTasks[taskId].data[0] = 5;
             break;
         case 5:
@@ -2622,4 +2631,268 @@ void Swap_InitAllSprites(void)
     gSprites[sFactorySwapScreen->unk8[0][0]].invisible = 0;
     gSprites[sFactorySwapScreen->unk8[0][1]].invisible = 0;
     gSprites[sFactorySwapScreen->unk8[0][2]].invisible = 0;
+}
+
+void Swap_DestroyAllSprites(void)
+{
+    u8 i, j;
+
+    for (i = 0; i < 3; i++)
+        DestroySprite(&gSprites[sFactorySwapScreen->ballSpriteIds[i]]);
+    DestroySprite(&gSprites[sFactorySwapScreen->cursorSpriteId]);
+    DestroySprite(&gSprites[sFactorySwapScreen->menuCursor1SpriteId]);
+    DestroySprite(&gSprites[sFactorySwapScreen->menuCursor2SpriteId]);
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < 3; j++)
+            DestroySprite(&gSprites[sFactorySwapScreen->unk8[i][j]]);
+    }
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < 2; j++)
+            DestroySprite(&gSprites[sFactorySwapScreen->unkE[i][j]]);
+    }
+}
+
+void Swap_HandleActionCursorChange(u8 cursorId)
+{
+    if (cursorId < 3)
+    {
+        gSprites[sFactorySwapScreen->cursorSpriteId].invisible = 0;
+        sub_819E8EC();
+        gSprites[sFactorySwapScreen->cursorSpriteId].pos1.x = gSprites[sFactorySwapScreen->ballSpriteIds[cursorId]].pos1.x;
+    }
+    else
+    {
+        gSprites[sFactorySwapScreen->cursorSpriteId].invisible = 1;
+        sub_819E838(sFactorySwapScreen->unk18[cursorId].unk0);
+    }
+}
+
+void Swap_UpdateBallCursorPosition(s8 direction)
+{
+    u8 cursorPos;
+    PlaySE(SE_SELECT);
+    if (direction > 0) // Move cursor right.
+    {
+        if (sFactorySwapScreen->cursorPos + 1 != sFactorySwapScreen->actionsCount)
+            sFactorySwapScreen->cursorPos++;
+        else
+            sFactorySwapScreen->cursorPos = 0;
+    }
+    else // Move cursor left.
+    {
+        if (sFactorySwapScreen->cursorPos != 0)
+            sFactorySwapScreen->cursorPos--;
+        else
+            sFactorySwapScreen->cursorPos = sFactorySwapScreen->actionsCount - 1;
+    }
+
+    cursorPos = sFactorySwapScreen->cursorPos;
+    Swap_HandleActionCursorChange(cursorPos);
+}
+
+void Swap_UpdateActionCursorPosition(s8 direction)
+{
+    u8 cursorPos;
+    PlaySE(SE_SELECT);
+    if (direction > 0) // Move cursor down.
+    {
+        if (sFactorySwapScreen->cursorPos < 3)
+            sFactorySwapScreen->cursorPos = 3;
+        else if (sFactorySwapScreen->cursorPos + 1 != sFactorySwapScreen->actionsCount)
+            sFactorySwapScreen->cursorPos++;
+        else
+            sFactorySwapScreen->cursorPos = 0;
+    }
+    else // Move cursor up.
+    {
+        if (sFactorySwapScreen->cursorPos < 3)
+            sFactorySwapScreen->cursorPos = sFactorySwapScreen->actionsCount - 1;
+        else if (sFactorySwapScreen->cursorPos != 0)
+            sFactorySwapScreen->cursorPos--;
+        else
+            sFactorySwapScreen->cursorPos = sFactorySwapScreen->actionsCount - 1;
+    }
+
+    cursorPos = sFactorySwapScreen->cursorPos;
+    Swap_HandleActionCursorChange(cursorPos);
+}
+
+void Swap_UpdateYesNoCursorPosition(s8 direction)
+{
+    if (direction > 0) // Move cursor down.
+    {
+        if (sFactorySwapScreen->yesNoCursorPos != 1)
+            sFactorySwapScreen->yesNoCursorPos++;
+        else
+            sFactorySwapScreen->yesNoCursorPos = 0;
+    }
+    else // Move cursor up.
+    {
+        if (sFactorySwapScreen->yesNoCursorPos != 0)
+            sFactorySwapScreen->yesNoCursorPos--;
+        else
+            sFactorySwapScreen->yesNoCursorPos = 1;
+    }
+
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.y = (sFactorySwapScreen->yesNoCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = (sFactorySwapScreen->yesNoCursorPos * 16) + 112;
+}
+
+void Swap_UpdateMenuCursorPosition(s8 direction)
+{
+    PlaySE(SE_SELECT);
+    if (direction > 0) // Move cursor down.
+    {
+        if (sFactorySwapScreen->menuCursorPos != MENU_OPTIONS_COUNT - 1)
+            sFactorySwapScreen->menuCursorPos++;
+        else
+            sFactorySwapScreen->menuCursorPos = 0;
+    }
+    else // Move cursor up.
+    {
+        if (sFactorySwapScreen->menuCursorPos != 0)
+            sFactorySwapScreen->menuCursorPos--;
+        else
+            sFactorySwapScreen->menuCursorPos = MENU_OPTIONS_COUNT - 1;
+    }
+
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
+}
+
+void sub_819E838(u8 arg0)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (arg0 == 2)
+        {
+            gSprites[sFactorySwapScreen->unk8[1][i]].invisible = 0;
+            if (i < 2)
+                gSprites[sFactorySwapScreen->unkE[1][i]].invisible = 1;
+        }
+        else if (arg0 == 3)
+        {
+            if (i < 2)
+                gSprites[sFactorySwapScreen->unkE[1][i]].invisible = 0;
+            gSprites[sFactorySwapScreen->unk8[1][i]].invisible = 1;
+        }
+    }
+}
+
+void sub_819E8EC(void)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        gSprites[sFactorySwapScreen->unk8[1][i]].invisible = 1;
+        if (i < 2)
+            gSprites[sFactorySwapScreen->unkE[1][i]].invisible = 1;
+    }
+}
+
+void Swap_ShowMenuOptions(void)
+{
+    if (sFactorySwapScreen->fromSummaryScreen == TRUE)
+        sFactorySwapScreen->fromSummaryScreen = FALSE;
+    else
+        sFactorySwapScreen->menuCursorPos = 0;
+
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.x = 176;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.x = 208;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
+
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = 0;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = 0;
+
+    Swap_PrintMenuOptions();
+}
+
+void Swap_ShowYesNoOptions(void)
+{
+    sFactorySwapScreen->yesNoCursorPos = 0;
+
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.x = 176;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].pos1.y = 112;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.x = 208;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = 112;
+
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = 0;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = 0;
+
+    Swap_PrintYesNoOptions();
+}
+
+void sub_819EA64(u8 windowId)
+{
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = 1;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = 1;
+    FillWindowPixelBuffer(windowId, 0);
+    CopyWindowToVram(windowId, 2);
+    ClearWindowTilemap(windowId);
+}
+
+void sub_819EAC0(void)
+{
+    PutWindowTilemap(1);
+    FillWindowPixelBuffer(1, 0);
+    CopyWindowToVram(1, 2);
+}
+
+void sub_819EADC(void)
+{
+    PutWindowTilemap(7);
+    FillWindowPixelBuffer(7, 0);
+    CopyWindowToVram(7, 2);
+}
+
+void sub_819EAF8(void)
+{
+    sub_819EAC0();
+    PutWindowTilemap(5);
+    FillWindowPixelBuffer(5, 0);
+    CopyWindowToVram(5, 2);
+}
+
+void Swap_PrintPkmnSwap(void)
+{
+    FillWindowPixelBuffer(0, 0x11);
+    AddTextPrinterParameterized(0, 1, gText_PkmnSwap, 2, 1, 0, NULL);
+    CopyWindowToVram(0, 3);
+}
+
+void Swap_PrintMonSpecies(void)
+{
+    u16 species;
+    u8 x;
+
+    FillWindowPixelBuffer(1, 0);
+    if (sFactorySwapScreen->cursorPos > 2)
+    {
+        CopyWindowToVram(1, 2);
+    }
+    else
+    {
+        u8 monId = sFactorySwapScreen->cursorPos;
+        if (sFactorySwapScreen->actionsState == 0)
+            species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL);
+        else
+            species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
+        StringCopy(gStringVar4, gSpeciesNames[species]);
+        x = GetStringRightAlignXOffset(1, gStringVar4, 86);
+        AddTextPrinterParameterized3(1, 1, x, 1, gUnknown_08610925, 0, gStringVar4);
+        CopyWindowToVram(1, 3);
+    }
+}
+
+void Swap_PrintOnInfoWindow(const u8 *str)
+{
+    FillWindowPixelBuffer(2, 0);
+    AddTextPrinterParameterized(2, 1, str, 2, 5, 0, NULL);
+    CopyWindowToVram(2, 2);
 }

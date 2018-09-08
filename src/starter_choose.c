@@ -189,7 +189,7 @@ static void Task_StarterChoose1(u8 taskId)
 {
     CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
     SetWindowBorderStyle(0, FALSE, 0x2A8, 0xD);
-    PrintTextOnWindow(0, 1, gText_BirchInTrouble, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, 1, gText_BirchInTrouble, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
     gTasks[taskId].func = Task_StarterChoose2;
@@ -243,7 +243,7 @@ static void Task_StarterChoose4(u8 taskId)
 {
     PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     FillWindowPixelBuffer(0, 0x11);
-    PrintTextOnWindow(0, 1, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, 1, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
     schedule_bg_copy_tilemap_to_vram(0);
     CreateYesNoMenu(&gUnknown_085B1DDC, 0x2A8, 0xD, 0);
     gTasks[taskId].func = Task_StarterChoose5;

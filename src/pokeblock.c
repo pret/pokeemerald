@@ -580,7 +580,7 @@ static void HandleInitWindows(void)
 
 static void PrintOnPokeblockWindow(u8 windowId, const u8 *string, s32 x)
 {
-    AddTextPrinterParameterized2(windowId, 1, x, 1, 0, 0, sTextColorInPokeblockMenu, 0, string);
+    AddTextPrinterParameterized4(windowId, 1, x, 1, 0, 0, sTextColorInPokeblockMenu, 0, string);
 }
 
 static void PutPokeblockInfoText(void)

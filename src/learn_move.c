@@ -632,7 +632,7 @@ static void HideSpritesAndPrintTeachText(bool8 a)
     {
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
         FillWindowPixelBuffer(3, 0x11);
-        PrintTextOnWindow(3, 1, gStringVar4, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(3, 1, gStringVar4, 0, 1, 0, NULL);
     }
 }
 
@@ -696,7 +696,7 @@ static void ShowTeachMoveText(bool8 showContest)
     {
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
         FillWindowPixelBuffer(3, 0x11);
-        PrintTextOnWindow(3, 1, gStringVar4, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(3, 1, gStringVar4, 0, 1, 0, NULL);
     }
 }
 

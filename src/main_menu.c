@@ -1820,7 +1820,7 @@ void set_default_player_name(u8 nameId)
 void CreateMainMenuErrorWindow(const u8* str)
 {
     FillWindowPixelBuffer(7, 17);
-    PrintTextOnWindow(7, 1, str, 0, 1, 2, 0);
+    AddTextPrinterParameterized(7, 1, str, 0, 1, 2, 0);
     PutWindowTilemap(7);
     CopyWindowToVram(7, 2);
     DrawMainMenuWindowBorder(sWindowTemplate_ErrorWindow, MAIN_MENU_BORDER_TILE);

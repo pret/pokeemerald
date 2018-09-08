@@ -379,7 +379,7 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
     }
 
     dst[i] = EOS;
-    PrintTextOnWindow(WIN_OPTIONS, 1, dst, x, y + 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(WIN_OPTIONS, 1, dst, x, y + 1, TEXT_SPEED_FF, NULL);
 }
 
 static u8 TextSpeed_ProcessInput(u8 selection)
@@ -605,7 +605,7 @@ static void ButtonMode_DrawChoices(u8 selection)
 static void DrawTextOption(void)
 {
     FillWindowPixelBuffer(WIN_TEXT_OPTION, 0x11);
-    PrintTextOnWindow(WIN_TEXT_OPTION, 1, gText_Option, 8, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(WIN_TEXT_OPTION, 1, gText_Option, 8, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(WIN_TEXT_OPTION, 3);
 }
 
@@ -616,7 +616,7 @@ static void DrawOptionMenuTexts(void)
     FillWindowPixelBuffer(WIN_OPTIONS, 0x11);
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
-        PrintTextOnWindow(WIN_OPTIONS, 1, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(WIN_OPTIONS, 1, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
     }
     CopyWindowToVram(WIN_OPTIONS, 3);
 }

@@ -419,7 +419,7 @@ _080C2A2C:
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -8258,7 +8258,7 @@ _080C6E08:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	ldr r0, [sp, 0x4C]
 	mov r10, r4
 	cmp r0, 0x6
@@ -8410,7 +8410,7 @@ sub_80C6EAC: @ 80C6EAC
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	lsrs r5, 1
 	adds r0, r7, 0
 	ldr r1, [sp, 0x24]

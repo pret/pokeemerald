@@ -6,900 +6,8 @@
 	.text
 
 
-	thumb_func_start sub_819E538
-sub_819E538: @ 819E538
-	push {r4-r7,lr}
-	movs r5, 0
-_0819E53C:
-	ldr r6, =sFactorySwapScreen
-	ldr r0, [r6]
-	adds r0, 0x5
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r4, =gSprites
-	adds r0, r4
-	bl DestroySprite
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x2
-	bls _0819E53C
-	ldr r0, [r6]
-	ldrb r1, [r0, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	bl DestroySprite
-	ldr r0, [r6]
-	ldrb r1, [r0, 0x1]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	bl DestroySprite
-	ldr r0, [r6]
-	ldrb r1, [r0, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	bl DestroySprite
-	movs r5, 0
-_0819E590:
-	movs r4, 0
-	lsls r6, r5, 1
-_0819E594:
-	ldr r0, =sFactorySwapScreen
-	ldr r0, [r0]
-	adds r1, r6, r5
-	adds r1, r4, r1
-	adds r0, 0x8
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	bl DestroySprite
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x2
-	bls _0819E594
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x1
-	bls _0819E590
-	movs r5, 0
-_0819E5C6:
-	movs r4, 0
-	adds r7, r5, 0x1
-	lsls r6, r5, 1
-_0819E5CC:
-	ldr r0, =sFactorySwapScreen
-	ldr r0, [r0]
-	adds r1, r4, r6
-	adds r0, 0xE
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	bl DestroySprite
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x1
-	bls _0819E5CC
-	lsls r0, r7, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x1
-	bls _0819E5C6
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819E538
-
-	thumb_func_start sub_819E608
-sub_819E608: @ 819E608
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0x2
-	bhi _0819E65C
-	ldr r4, =gSprites
-	ldr r5, =sFactorySwapScreen
-	ldr r0, [r5]
-	ldrb r1, [r0, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	adds r0, 0x3E
-	ldrb r2, [r0]
-	movs r1, 0x5
-	negs r1, r1
-	ands r1, r2
-	strb r1, [r0]
-	bl sub_819E8EC
-	ldr r0, [r5]
-	ldrb r2, [r0, 0x4]
-	lsls r1, r2, 4
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r4
-	adds r0, 0x5
-	adds r0, r6
-	ldrb r2, [r0]
-	lsls r0, r2, 4
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r4
-	ldrh r0, [r0, 0x20]
-	strh r0, [r1, 0x20]
-	b _0819E684
-	.pool
-_0819E65C:
-	ldr r2, =gSprites
-	ldr r3, =sFactorySwapScreen
-	ldr r0, [r3]
-	ldrb r1, [r0, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-	ldr r0, [r3]
-	ldr r1, [r0, 0x18]
-	lsls r0, r6, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	bl sub_819E838
-_0819E684:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819E608
-
-	thumb_func_start Swap_UpdateBallCursorPosition
-Swap_UpdateBallCursorPosition: @ 819E694
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x5
-	bl PlaySE
-	lsls r4, 24
-	cmp r4, 0
-	ble _0819E6C0
-	ldr r1, =sFactorySwapScreen
-	ldr r2, [r1]
-	ldrb r0, [r2, 0x3]
-	adds r0, 0x1
-	ldrb r3, [r2, 0x17]
-	cmp r0, r3
-	bne _0819E6D8
-	movs r0, 0
-	b _0819E6D8
-	.pool
-_0819E6C0:
-	ldr r0, =sFactorySwapScreen
-	ldr r2, [r0]
-	ldrb r3, [r2, 0x3]
-	adds r1, r0, 0
-	cmp r3, 0
-	beq _0819E6D4
-	subs r0, r3, 0x1
-	b _0819E6D8
-	.pool
-_0819E6D4:
-	ldrb r0, [r2, 0x17]
-	subs r0, 0x1
-_0819E6D8:
-	strb r0, [r2, 0x3]
-	ldr r0, [r1]
-	ldrb r0, [r0, 0x3]
-	bl sub_819E608
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end Swap_UpdateBallCursorPosition
-
-	thumb_func_start Swap_UpdateActionCursorPosition
-Swap_UpdateActionCursorPosition: @ 819E6E8
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x5
-	bl PlaySE
-	lsls r4, 24
-	cmp r4, 0
-	ble _0819E728
-	ldr r0, =sFactorySwapScreen
-	ldr r2, [r0]
-	ldrb r1, [r2, 0x3]
-	adds r4, r0, 0
-	cmp r1, 0x2
-	bhi _0819E714
-	movs r0, 0x3
-	strb r0, [r2, 0x3]
-	b _0819E74A
-	.pool
-_0819E714:
-	ldrb r0, [r2, 0x3]
-	adds r0, 0x1
-	ldrb r1, [r2, 0x17]
-	cmp r0, r1
-	beq _0819E722
-	strb r0, [r2, 0x3]
-	b _0819E74A
-_0819E722:
-	movs r0, 0
-	strb r0, [r2, 0x3]
-	b _0819E74A
-_0819E728:
-	ldr r0, =sFactorySwapScreen
-	ldr r1, [r0]
-	ldrb r3, [r1, 0x3]
-	adds r2, r3, 0
-	adds r4, r0, 0
-	cmp r2, 0x2
-	bls _0819E744
-	cmp r2, 0
-	beq _0819E744
-	subs r0, r3, 0x1
-	b _0819E748
-	.pool
-_0819E744:
-	ldrb r0, [r1, 0x17]
-	subs r0, 0x1
-_0819E748:
-	strb r0, [r1, 0x3]
-_0819E74A:
-	ldr r0, [r4]
-	ldrb r0, [r0, 0x3]
-	bl sub_819E608
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end Swap_UpdateActionCursorPosition
-
-	thumb_func_start Swap_UpdateYesNoCursorPosition
-Swap_UpdateYesNoCursorPosition: @ 819E758
-	push {lr}
-	lsls r0, 24
-	cmp r0, 0
-	ble _0819E778
-	ldr r0, =sFactorySwapScreen
-	ldr r1, [r0]
-	ldrb r3, [r1, 0x16]
-	adds r2, r0, 0
-	cmp r3, 0x1
-	beq _0819E774
-	adds r0, r3, 0x1
-	b _0819E78E
-	.pool
-_0819E774:
-	movs r0, 0
-	b _0819E78E
-_0819E778:
-	ldr r0, =sFactorySwapScreen
-	ldr r1, [r0]
-	ldrb r3, [r1, 0x16]
-	adds r2, r0, 0
-	cmp r3, 0
-	beq _0819E78C
-	subs r0, r3, 0x1
-	b _0819E78E
-	.pool
-_0819E78C:
-	movs r0, 0x1
-_0819E78E:
-	strb r0, [r1, 0x16]
-	ldr r3, =gSprites
-	ldr r2, [r2]
-	ldrb r0, [r2, 0x1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r3
-	ldrb r0, [r2, 0x16]
-	lsls r0, 4
-	adds r0, 0x70
-	strh r0, [r1, 0x22]
-	ldrb r0, [r2, 0x2]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r3
-	ldrb r0, [r2, 0x16]
-	lsls r0, 4
-	adds r0, 0x70
-	strh r0, [r1, 0x22]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Swap_UpdateYesNoCursorPosition
-
-	thumb_func_start Swap_UpdateMenuCursorPosition
-Swap_UpdateMenuCursorPosition: @ 819E7C0
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x5
-	bl PlaySE
-	lsls r4, 24
-	cmp r4, 0
-	ble _0819E7EC
-	ldr r0, =sFactorySwapScreen
-	ldr r1, [r0]
-	ldrb r3, [r1]
-	adds r2, r0, 0
-	cmp r3, 0x2
-	beq _0819E7E8
-	adds r0, r3, 0x1
-	b _0819E802
-	.pool
-_0819E7E8:
-	movs r0, 0
-	b _0819E802
-_0819E7EC:
-	ldr r0, =sFactorySwapScreen
-	ldr r1, [r0]
-	ldrb r3, [r1]
-	adds r2, r0, 0
-	cmp r3, 0
-	beq _0819E800
-	subs r0, r3, 0x1
-	b _0819E802
-	.pool
-_0819E800:
-	movs r0, 0x2
-_0819E802:
-	strb r0, [r1]
-	ldr r3, =gSprites
-	ldr r2, [r2]
-	ldrb r0, [r2, 0x1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r3
-	ldrb r0, [r2]
-	lsls r0, 4
-	adds r0, 0x70
-	strh r0, [r1, 0x22]
-	ldrb r0, [r2, 0x2]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r3
-	ldrb r0, [r2]
-	lsls r0, 4
-	adds r0, 0x70
-	strh r0, [r1, 0x22]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Swap_UpdateMenuCursorPosition
-
-	thumb_func_start sub_819E838
-sub_819E838: @ 819E838
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r4, 0
-	movs r0, 0x5
-	negs r0, r0
-	mov r9, r0
-	movs r2, 0x4
-	mov r8, r2
-	ldr r0, =gSprites
-	mov r12, r0
-	ldr r7, =sFactorySwapScreen
-_0819E856:
-	cmp r6, 0x2
-	bne _0819E898
-	ldr r5, =gSprites
-	ldr r3, =sFactorySwapScreen
-	ldr r0, [r3]
-	adds r0, 0xB
-	adds r0, r4
-	ldrb r0, [r0]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r5
-	adds r1, 0x3E
-	ldrb r2, [r1]
-	mov r0, r9
-	ands r0, r2
-	strb r0, [r1]
-	cmp r4, 0x1
-	bhi _0819E8D4
-	ldr r0, [r3]
-	adds r0, 0x10
-	adds r0, r4
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	b _0819E8CA
-	.pool
-_0819E898:
-	cmp r6, 0x3
-	bne _0819E8D4
-	cmp r4, 0x1
-	bhi _0819E8BA
-	ldr r0, [r7]
-	adds r0, 0x10
-	adds r0, r4
-	ldrb r0, [r0]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	add r1, r12
-	adds r1, 0x3E
-	ldrb r2, [r1]
-	mov r0, r9
-	ands r0, r2
-	strb r0, [r1]
-_0819E8BA:
-	ldr r0, [r7]
-	adds r0, 0xB
-	adds r0, r4
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	add r0, r12
-_0819E8CA:
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	mov r2, r8
-	orrs r1, r2
-	strb r1, [r0]
-_0819E8D4:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x2
-	bls _0819E856
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819E838
-
-	thumb_func_start sub_819E8EC
-sub_819E8EC: @ 819E8EC
-	push {r4-r6,lr}
-	movs r2, 0
-	ldr r5, =gSprites
-	ldr r4, =sFactorySwapScreen
-	adds r6, r5, 0
-	movs r3, 0x4
-_0819E8F8:
-	ldr r0, [r4]
-	adds r0, 0xB
-	adds r0, r2
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r3
-	strb r1, [r0]
-	cmp r2, 0x1
-	bhi _0819E92C
-	ldr r0, [r4]
-	adds r0, 0x10
-	adds r0, r2
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r3
-	strb r1, [r0]
-_0819E92C:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x2
-	bls _0819E8F8
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819E8EC
-
-	thumb_func_start Swap_ShowMenuOptions
-Swap_ShowMenuOptions: @ 819E944
-	push {r4,r5,lr}
-	ldr r0, =sFactorySwapScreen
-	ldr r3, [r0]
-	ldrb r1, [r3, 0x15]
-	adds r5, r0, 0
-	cmp r1, 0x1
-	bne _0819E95C
-	movs r0, 0
-	strb r0, [r3, 0x15]
-	b _0819E960
-	.pool
-_0819E95C:
-	movs r0, 0
-	strb r0, [r3]
-_0819E960:
-	ldr r4, =gSprites
-	ldr r2, [r5]
-	ldrb r1, [r2, 0x1]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0xB0
-	strh r1, [r0, 0x20]
-	ldrb r0, [r2, 0x1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r4
-	ldrb r0, [r2]
-	lsls r0, 4
-	adds r0, 0x70
-	strh r0, [r1, 0x22]
-	ldrb r1, [r2, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0xD0
-	strh r1, [r0, 0x20]
-	ldrb r0, [r2, 0x2]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r4
-	ldrb r0, [r2]
-	lsls r0, 4
-	adds r0, 0x70
-	strh r0, [r1, 0x22]
-	ldrb r0, [r2, 0x1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r4
-	adds r1, 0x3E
-	ldrb r3, [r1]
-	movs r2, 0x5
-	negs r2, r2
-	adds r0, r2, 0
-	ands r0, r3
-	strb r0, [r1]
-	ldr r0, [r5]
-	ldrb r1, [r0, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	ands r2, r1
-	strb r2, [r0]
-	bl sub_819EC20
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Swap_ShowMenuOptions
-
-	thumb_func_start sub_819E9E0
-sub_819E9E0: @ 819E9E0
-	push {r4,r5,lr}
-	ldr r5, =sFactorySwapScreen
-	ldr r1, [r5]
-	movs r0, 0
-	strb r0, [r1, 0x16]
-	ldr r4, =gSprites
-	ldr r2, [r5]
-	ldrb r1, [r2, 0x1]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0xB0
-	strh r1, [r0, 0x20]
-	ldrb r1, [r2, 0x1]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r3, 0x70
-	strh r3, [r0, 0x22]
-	ldrb r1, [r2, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0xD0
-	strh r1, [r0, 0x20]
-	ldrb r1, [r2, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	strh r3, [r0, 0x22]
-	ldrb r0, [r2, 0x1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r4
-	adds r1, 0x3E
-	ldrb r3, [r1]
-	movs r2, 0x5
-	negs r2, r2
-	adds r0, r2, 0
-	ands r0, r3
-	strb r0, [r1]
-	ldr r0, [r5]
-	ldrb r1, [r0, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	ands r2, r1
-	strb r2, [r0]
-	bl sub_819EC94
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819E9E0
-
-	thumb_func_start sub_819EA64
-sub_819EA64: @ 819EA64
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r5, =gSprites
-	ldr r3, =sFactorySwapScreen
-	ldr r0, [r3]
-	ldrb r1, [r0, 0x1]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-	ldr r0, [r3]
-	ldrb r1, [r0, 0x2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r2
-	strb r1, [r0]
-	adds r0, r4, 0
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	adds r0, r4, 0
-	movs r1, 0x2
-	bl CopyWindowToVram
-	adds r0, r4, 0
-	bl ClearWindowTilemap
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819EA64
-
-	thumb_func_start sub_819EAC0
-sub_819EAC0: @ 819EAC0
-	push {lr}
-	movs r0, 0x1
-	bl PutWindowTilemap
-	movs r0, 0x1
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	movs r0, 0x1
-	movs r1, 0x2
-	bl CopyWindowToVram
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819EAC0
-
-	thumb_func_start sub_819EADC
-sub_819EADC: @ 819EADC
-	push {lr}
-	movs r0, 0x7
-	bl PutWindowTilemap
-	movs r0, 0x7
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	movs r0, 0x7
-	movs r1, 0x2
-	bl CopyWindowToVram
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819EADC
-
-	thumb_func_start sub_819EAF8
-sub_819EAF8: @ 819EAF8
-	push {lr}
-	bl sub_819EAC0
-	movs r0, 0x5
-	bl PutWindowTilemap
-	movs r0, 0x5
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	movs r0, 0x5
-	movs r1, 0x2
-	bl CopyWindowToVram
-	pop {r0}
-	bx r0
-	thumb_func_end sub_819EAF8
-
-	thumb_func_start Swap_PrintPkmnSwap
-Swap_PrintPkmnSwap: @ 819EB18
-	push {lr}
-	sub sp, 0xC
-	movs r0, 0
-	movs r1, 0x11
-	bl FillWindowPixelBuffer
-	ldr r2, =gText_PkmnSwap
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	movs r1, 0x1
-	movs r3, 0x2
-	bl PrintTextOnWindow
-	movs r0, 0
-	movs r1, 0x3
-	bl CopyWindowToVram
-	add sp, 0xC
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Swap_PrintPkmnSwap
-
-	thumb_func_start Swap_PrintMonSpecies
-Swap_PrintMonSpecies: @ 819EB4C
-	push {r4,lr}
-	sub sp, 0xC
-	movs r0, 0x1
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	ldr r0, =sFactorySwapScreen
-	ldr r1, [r0]
-	ldrb r0, [r1, 0x3]
-	cmp r0, 0x2
-	bls _0819EB70
-	movs r0, 0x1
-	movs r1, 0x2
-	bl CopyWindowToVram
-	b _0819EBD4
-	.pool
-_0819EB70:
-	ldrb r2, [r1, 0x3]
-	ldrb r0, [r1, 0x14]
-	cmp r0, 0
-	bne _0819EB84
-	movs r0, 0x64
-	muls r0, r2
-	ldr r1, =gPlayerParty
-	b _0819EB8A
-	.pool
-_0819EB84:
-	movs r0, 0x64
-	muls r0, r2
-	ldr r1, =gEnemyParty
-_0819EB8A:
-	adds r0, r1
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	lsls r0, 16
-	lsrs r1, r0, 16
-	ldr r4, =gStringVar4
-	movs r0, 0xB
-	muls r1, r0
-	ldr r0, =gSpeciesNames
-	adds r1, r0
-	adds r0, r4, 0
-	bl StringCopy
-	movs r0, 0x1
-	adds r1, r4, 0
-	movs r2, 0x56
-	bl GetStringRightAlignXOffset
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r0, =gUnknown_08610925
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	str r4, [sp, 0x8]
-	movs r0, 0x1
-	movs r1, 0x1
-	movs r3, 0x1
-	bl AddTextPrinterParameterized3
-	movs r0, 0x1
-	movs r1, 0x3
-	bl CopyWindowToVram
-_0819EBD4:
-	add sp, 0xC
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Swap_PrintMonSpecies
-
-	thumb_func_start Swap_PrintOnInfoWindow
-Swap_PrintOnInfoWindow: @ 819EBEC
-	push {r4,lr}
-	sub sp, 0xC
-	adds r4, r0, 0
-	movs r0, 0x2
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	movs r0, 0x5
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	movs r0, 0x2
-	movs r1, 0x1
-	adds r2, r4, 0
-	movs r3, 0x2
-	bl PrintTextOnWindow
-	movs r0, 0x2
-	movs r1, 0x2
-	bl CopyWindowToVram
-	add sp, 0xC
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end Swap_PrintOnInfoWindow
-
-	thumb_func_start sub_819EC20
-sub_819EC20: @ 819EC20
+	thumb_func_start Swap_PrintMenuOptions
+Swap_PrintMenuOptions: @ 819EC20
 	push {r4,r5,lr}
 	sub sp, 0xC
 	movs r0, 0x3
@@ -944,10 +52,10 @@ sub_819EC20: @ 819EC20
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_819EC20
+	thumb_func_end Swap_PrintMenuOptions
 
-	thumb_func_start sub_819EC94
-sub_819EC94: @ 819EC94
+	thumb_func_start Swap_PrintYesNoOptions
+Swap_PrintYesNoOptions: @ 819EC94
 	push {r4,r5,lr}
 	sub sp, 0xC
 	movs r0, 0x4
@@ -983,7 +91,7 @@ sub_819EC94: @ 819EC94
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_819EC94
+	thumb_func_end Swap_PrintYesNoOptions
 
 	thumb_func_start sub_819ECF0
 sub_819ECF0: @ 819ECF0
@@ -1356,7 +464,7 @@ _0819EFF2:
 	movs r0, 0x8
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x8
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -4176,7 +3284,7 @@ _081A06B8:
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -6802,7 +5910,7 @@ sub_81A1C4C: @ 81A1C4C
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -6841,7 +5949,7 @@ _081A1C9E:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0x4
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x34
 	pop {r4}
 	pop {r0}
@@ -6883,7 +5991,7 @@ sub_81A1CD8: @ 81A1CD8
 	movs r1, 0x1
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, =0x0000270f
 	cmp r6, r0
 	bls _081A1D24
@@ -6908,7 +6016,7 @@ _081A1D24:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0xC]
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -7142,7 +6250,7 @@ _081A1F28:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r6]
 	ldr r2, =gText_OpenLv
 	movs r1, 0x61
@@ -7152,7 +6260,7 @@ _081A1F28:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0xA
 	bl sub_81A1C90
 	mov r0, r8
@@ -7255,7 +6363,7 @@ sub_81A2008: @ 81A2008
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	mov r2, r12
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -7275,7 +6383,7 @@ sub_81A2008: @ 81A2008
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -7413,7 +6521,7 @@ _081A2184:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r1, =gRecordsWindowId
 	ldrb r0, [r1]
 	ldr r2, =gText_OpenLv
@@ -7423,7 +6531,7 @@ _081A2184:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0xA
 	bl sub_81A1C90
 	str r6, [sp]
@@ -7549,7 +6657,7 @@ sub_81A22B8: @ 81A22B8
 	movs r1, 0x1
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, =0x0000270f
 	cmp r6, r0
 	bls _081A2304
@@ -7574,7 +6682,7 @@ _081A2304:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0xC]
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -7767,7 +6875,7 @@ _081A24B0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r6]
 	ldr r2, =gText_OpenLv
 	movs r1, 0x61
@@ -7777,7 +6885,7 @@ _081A24B0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0xA
 	bl sub_81A1C90
 	mov r0, r8
@@ -7877,7 +6985,7 @@ sub_81A258C: @ 81A258C
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	mov r2, r12
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -7897,7 +7005,7 @@ sub_81A258C: @ 81A258C
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -8005,7 +7113,7 @@ sub_81A2698: @ 81A2698
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r6]
 	ldr r2, =gText_OpenLv
 	movs r1, 0x61
@@ -8014,7 +7122,7 @@ sub_81A2698: @ 81A2698
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0xA
 	bl sub_81A1C90
 	movs r0, 0
@@ -8130,7 +7238,7 @@ sub_81A27E8: @ 81A27E8
 	movs r1, 0x1
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, =0x0000270f
 	cmp r6, r0
 	bls _081A2834
@@ -8155,7 +7263,7 @@ _081A2834:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0xC]
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -8310,7 +7418,7 @@ sub_81A2968: @ 81A2968
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r5]
 	ldr r2, =gText_OpenLv
 	movs r1, 0x61
@@ -8319,7 +7427,7 @@ sub_81A2968: @ 81A2968
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x48
 	movs r2, 0x7E
@@ -8392,7 +7500,7 @@ sub_81A2A28: @ 81A2A28
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	mov r2, r12
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, =0x0000270f
 	cmp r7, r0
 	bls _081A2A80
@@ -8418,7 +7526,7 @@ _081A2A80:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0x10]
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r5, 0
 	ldr r1, [sp, 0xC]
 	movs r2, 0x1
@@ -8437,7 +7545,7 @@ _081A2A80:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0x14]
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -8693,7 +7801,7 @@ _081A2CE0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r1, r8
 	ldrb r0, [r1]
 	ldr r2, =gText_RentalSwap
@@ -8702,7 +7810,7 @@ _081A2CE0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x98
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r1, r8
 	ldrb r0, [r1]
 	ldr r2, =gText_OpenLv
@@ -8712,7 +7820,7 @@ _081A2CE0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0xA
 	bl sub_81A1C90
 	movs r4, 0x9E
@@ -8798,7 +7906,7 @@ sub_81A2DB4: @ 81A2DB4
 	movs r1, 0x1
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, =0x0000270f
 	cmp r6, r0
 	bls _081A2E00
@@ -8823,7 +7931,7 @@ _081A2E00:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0xC]
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -8978,7 +8086,7 @@ sub_81A2F38: @ 81A2F38
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r5]
 	ldr r2, =gText_OpenLv
 	movs r1, 0x61
@@ -8987,7 +8095,7 @@ sub_81A2F38: @ 81A2F38
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0xA
 	bl sub_81A1C90
 	movs r0, 0
@@ -9058,7 +8166,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r5, 0
 	str r5, [sp, 0x8]
 	mov r2, r9
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r7, =gText_1st
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -9076,7 +8184,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r7, =gText_2nd
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -9093,7 +8201,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r7, =gText_3rd
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -9110,7 +8218,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r7, =gText_4th
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -9127,7 +8235,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	ldr r2, =gText_Cool
 	movs r1, 0x29
@@ -9136,7 +8244,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	ldr r2, =gText_Beauty
 	movs r1, 0x39
@@ -9145,7 +8253,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	ldr r2, =gText_Cute
 	movs r1, 0x49
@@ -9154,7 +8262,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	ldr r2, =gText_Smart
 	movs r1, 0x59
@@ -9163,7 +8271,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	ldr r2, =gText_Tough
 	movs r1, 0x69
@@ -9172,7 +8280,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r1, 0
 _081A314A:
 	movs r5, 0
@@ -9210,7 +8318,7 @@ _081A315C:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	mov r2, r9
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r4, 0x2
 	adds r5, 0x1
 	cmp r5, 0x3
@@ -11497,7 +10605,7 @@ sub_81A4594: @ 81A4594
 	adds r0, r5, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0xFF
 	strb r0, [r6, 0xD]
 	ldrh r0, [r6, 0x4]
@@ -11520,7 +10628,7 @@ sub_81A4594: @ 81A4594
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r1, [r6, 0x4]
 	ldr r0, =0x0000270f
 	cmp r1, r0
@@ -11556,7 +10664,7 @@ _081A4618:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _081A465C:
 	add sp, 0x2C
 	pop {r3-r5}
@@ -11607,7 +10715,7 @@ sub_81A4684: @ 81A4684
 	str r3, [sp, 0x8]
 	movs r1, 0x1
 	mov r3, r12
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r0, [r5, 0x8]
 	cmp r0, 0
 	beq _081A47BC
@@ -11638,7 +10746,7 @@ sub_81A4684: @ 81A4684
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r4, r5, 0
 	adds r4, 0x12
 	adds r0, r4, 0
@@ -11679,7 +10787,7 @@ _081A473C:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r1, [r5, 0x8]
 	ldr r0, =0x0000270f
 	cmp r1, r0
@@ -11715,7 +10823,7 @@ _081A4778:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _081A47BC:
 	add sp, 0x2C
 	pop {r3-r5}
@@ -11990,7 +11098,7 @@ sub_81A4998: @ 81A4998
 	str r5, [sp, 0x8]
 	adds r2, r6, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r1, =gUnknown_08611D00
 	ldr r2, [sp, 0x90]
 	lsls r0, r2, 2
@@ -12012,7 +11120,7 @@ sub_81A4998: @ 81A4998
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	cmp r7, 0x9
 	bne _081A4A6C
 	ldr r2, =gSaveBlock2Ptr

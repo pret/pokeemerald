@@ -1304,7 +1304,7 @@ bool8 ScrCmd_cmdDB(struct ScriptContext *ctx)
         msg = (const u8 *)ctx->data[0];
     sub_81973A4();
     NewMenuHelpers_DrawDialogueFrame(0, 1);
-    PrintTextOnWindow(0, 1, msg, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, 1, msg, 0, 1, 0, 0);
     return FALSE;
 }
 
@@ -1521,7 +1521,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     NewMenuHelpers_DrawStdWindowFrame(gUnknown_03000F30, 0);
     PutWindowTilemap(gUnknown_03000F30);
     FillWindowPixelBuffer(gUnknown_03000F30, 0x11);
-    PrintTextOnWindow(gUnknown_03000F30, 6, gStringVar4, xText, yText, 0xFF, 0x0);
+    AddTextPrinterParameterized(gUnknown_03000F30, 6, gStringVar4, xText, yText, 0xFF, 0x0);
     CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;
 }

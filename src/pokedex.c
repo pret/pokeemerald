@@ -1637,7 +1637,7 @@ void sub_80BCE2C(u8 windowId, u8 fontId, const u8* str, u8 left, u8 top)
     color[0] = 0;
     color[1] = 15;
     color[2] = 3;
-    AddTextPrinterParameterized2(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, -1, str);
 }
 
 void sub_80BCE84(u8 a, u16 b, u16 c)
@@ -2450,7 +2450,7 @@ void sub_80BE8DC(const u8* str, u8 left, u8 top)
     color[1] = 15;
     color[2] = 3;
 
-    AddTextPrinterParameterized2(0, 1, left, top, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(0, 1, left, top, 0, 0, color, -1, str);
 }
 
 u8 sub_80BE91C(struct PokedexListItem* item, u8 b)
@@ -4065,7 +4065,7 @@ void sub_80C0A88(u8 windowId, const u8 *str, u8 left, u8 top)
     color[1] = 15;
     color[2] = 3;
 
-    AddTextPrinterParameterized2(windowId, 1, left, top, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(windowId, 1, left, top, 0, 0, color, -1, str);
 }
 
 void sub_80C0AC4(u8 windowId, u16 order, u8 left, u8 top)
@@ -4368,7 +4368,7 @@ void sub_80C1270(const u8 *str, u32 left, u32 top)
     color[0] = 0;
     color[1] = 15;
     color[2] = 2;
-    AddTextPrinterParameterized2(0, 1, left, top, 0, 0, color, -1, str);
+    AddTextPrinterParameterized4(0, 1, left, top, 0, 0, color, -1, str);
 }
 
 void sub_80C12B0(u32 x, u32 y, u32 width, u32 height)

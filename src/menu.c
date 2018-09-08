@@ -149,7 +149,7 @@ u16 sub_8197224(void)
     return IsTextPrinterActive(0);
 }
 
-u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
+u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
 {
     struct TextSubPrinter printer;
 
@@ -175,19 +175,19 @@ void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
 {
     void (*callback)(struct TextSubPrinter *, u16) = NULL;
     gTextFlags.flag_0 = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized(0, 1, gStringVar4, GetPlayerTextSpeed(), callback, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), callback, 2, 1, 3);
 }
 
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress)
 {
     gTextFlags.flag_0 = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized(0, 1, gStringVar4, GetPlayerTextSpeed(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), NULL, 2, 1, 3);
 }
 
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed)
 {
     gTextFlags.flag_0 = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized(0, 1, gStringVar4, speed, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar4, speed, NULL, 2, 1, 3);
 }
 
 void sub_81973A4(void)
@@ -525,7 +525,7 @@ void RemoveMapNamePopUpWindow(void)
 void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextSubPrinter *, u16))
 {
     gTextFlags.flag_0 = a1;
-    AddTextPrinterParameterized(0, 1, gStringVar4, GetPlayerTextSpeed(), callback, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), callback, 2, 1, 3);
 }
 
 void sub_8197AE8(bool8 copyToVram)
@@ -843,7 +843,7 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
                       0,
                       string2);
         }
-        AddTextPrinterParameterized2(gUnknown_0203CDA0, 1, 4, 1, 0, 0, color, 0, string);
+        AddTextPrinterParameterized4(gUnknown_0203CDA0, 1, 4, 1, 0, 0, color, 0, string);
         if (copyToVram)
             CopyWindowToVram(gUnknown_0203CDA0, 3);
     }
@@ -918,7 +918,7 @@ void RedrawMenuCursor(u8 oldPos, u8 newPos)
     width = GetMenuCursorDimensionByFont(gUnknown_0203CD90.fontId, 0);
     height = GetMenuCursorDimensionByFont(gUnknown_0203CD90.fontId, 1);
     FillWindowPixelRect(gUnknown_0203CD90.windowId, 0x11, gUnknown_0203CD90.left, gUnknown_0203CD90.optionHeight * oldPos + gUnknown_0203CD90.top, width, height);
-    PrintTextOnWindow(gUnknown_0203CD90.windowId, gUnknown_0203CD90.fontId, gText_SelectorArrow3, gUnknown_0203CD90.left, gUnknown_0203CD90.optionHeight * newPos + gUnknown_0203CD90.top, 0, 0);
+    AddTextPrinterParameterized(gUnknown_0203CD90.windowId, gUnknown_0203CD90.fontId, gText_SelectorArrow3, gUnknown_0203CD90.left, gUnknown_0203CD90.optionHeight * newPos + gUnknown_0203CD90.top, 0, 0);
 }
 
 u8 MoveMenuCursor(s8 cursorDelta)
@@ -1079,7 +1079,7 @@ void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 i
     u8 i;
     for (i = 0; i < itemCount; i++)
     {
-        PrintTextOnWindow(windowId, fontId, strs[i].text, left, (lineHeight * i) + top, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, fontId, strs[i].text, left, (lineHeight * i) + top, 0xFF, NULL);
     }
     CopyWindowToVram(windowId, 2);
 }
@@ -1089,7 +1089,7 @@ void sub_81987BC(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 item
     u8 i;
     for (i = 0; i < itemCount; i++)
     {
-        sub_8199F74(windowId, fontId, strs[i].text, left, (lineHeight * i) + top, 0xFF, NULL, a6, a7);
+        AddTextPrinterParameterized5(windowId, fontId, strs[i].text, left, (lineHeight * i) + top, 0xFF, NULL, a6, a7);
     }
     CopyWindowToVram(windowId, 2);
 }
@@ -1209,7 +1209,7 @@ void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u
     {
         for (j = 0; j < a6; j++)
         {
-            PrintTextOnWindow(windowId, fontId, strs[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, 0xFF, NULL);
+            AddTextPrinterParameterized(windowId, fontId, strs[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, 0xFF, NULL);
         }
     }
     CopyWindowToVram(windowId, 2);
@@ -1303,7 +1303,7 @@ void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
                         cursorHeight);
     xPos = (newCursorPos % gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.optionWidth + gUnknown_0203CD90.left;
     yPos = (newCursorPos / gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.optionHeight + gUnknown_0203CD90.top;
-    PrintTextOnWindow(gUnknown_0203CD90.windowId,
+    AddTextPrinterParameterized(gUnknown_0203CD90.windowId,
                       gUnknown_0203CD90.fontId,
                       gText_SelectorArrow3,
                       xPos,
@@ -1588,7 +1588,7 @@ void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs)
 
     for (i = 0; i < itemCount; i++)
     {
-        PrintTextOnWindow(windowId, 1, strs[i].text, 8, (i * 16) + 1, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 1, strs[i].text, 8, (i * 16) + 1, 0xFF, NULL);
     }
 
     CopyWindowToVram(windowId, 2);
@@ -1654,7 +1654,7 @@ void sub_81997AC(u8 windowId, u8 a4, u8 a6, u8 a7, const struct MenuAction *strs
     {
         for (j = 0; j < a6; j++)
         {
-            PrintTextOnWindow(windowId, 1, strs[(i * a6) + j].text, (a4 * j) + 8, (i * 16) + 1, 0xFF, NULL);
+            AddTextPrinterParameterized(windowId, 1, strs[(i * a6) + j].text, (a4 * j) + 8, (i * 16) + 1, 0xFF, NULL);
         }
     }
     CopyWindowToVram(windowId, 2);
@@ -1946,7 +1946,7 @@ void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
+void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
 {
     struct TextSubPrinter printer;
 
@@ -1967,7 +1967,7 @@ void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 left, u8 top, u8 le
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void sub_8199F74(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing)
+void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing)
 {
     struct TextSubPrinter printer;
 
@@ -1997,7 +1997,7 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
 
     StringExpandPlaceholders(gStringVar4, src);
 
-    PrintTextOnWindow(windowId, 1, gStringVar4, x, y, 0xFF, 0);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, 0xFF, 0);
 }
 
 //Screw this function, it's long and unreferenced and ugh
