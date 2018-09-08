@@ -368,6 +368,43 @@ const u8 gInitialMovementTypeFacingDirections[] = {
     DIR_EAST,  // MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT
 };
 
+#define EVENT_OBJ_PAL_TAG_0  0x1103
+#define EVENT_OBJ_PAL_TAG_1  0x1104
+#define EVENT_OBJ_PAL_TAG_2  0x1105
+#define EVENT_OBJ_PAL_TAG_3  0x1106
+#define EVENT_OBJ_PAL_TAG_4  0x1107
+#define EVENT_OBJ_PAL_TAG_5  0x1108
+#define EVENT_OBJ_PAL_TAG_6  0x1109
+#define EVENT_OBJ_PAL_TAG_7  0x110A
+#define EVENT_OBJ_PAL_TAG_8  0x1100
+#define EVENT_OBJ_PAL_TAG_9  0x1101
+#define EVENT_OBJ_PAL_TAG_10 0x1102
+#define EVENT_OBJ_PAL_TAG_11 0x1115
+#define EVENT_OBJ_PAL_TAG_12 0x110B
+#define EVENT_OBJ_PAL_TAG_13 0x110C
+#define EVENT_OBJ_PAL_TAG_14 0x110D
+#define EVENT_OBJ_PAL_TAG_15 0x110E
+#define EVENT_OBJ_PAL_TAG_16 0x110F
+#define EVENT_OBJ_PAL_TAG_17 0x1110
+#define EVENT_OBJ_PAL_TAG_18 0x1111
+#define EVENT_OBJ_PAL_TAG_19 0x1112
+#define EVENT_OBJ_PAL_TAG_20 0x1113
+#define EVENT_OBJ_PAL_TAG_21 0x1114
+#define EVENT_OBJ_PAL_TAG_22 0x1116
+#define EVENT_OBJ_PAL_TAG_23 0x1117
+#define EVENT_OBJ_PAL_TAG_24 0x1118
+#define EVENT_OBJ_PAL_TAG_25 0x1119
+#define EVENT_OBJ_PAL_TAG_26 0x111B
+#define EVENT_OBJ_PAL_TAG_27 0x111C
+#define EVENT_OBJ_PAL_TAG_28 0x111D
+#define EVENT_OBJ_PAL_TAG_29 0x111E
+#define EVENT_OBJ_PAL_TAG_30 0x111F
+#define EVENT_OBJ_PAL_TAG_31 0x1120
+#define EVENT_OBJ_PAL_TAG_32 0x1121
+#define EVENT_OBJ_PAL_TAG_33 0x1122
+#define EVENT_OBJ_PAL_TAG_34 0x1123
+#define EVENT_OBJ_PAL_TAG_NONE 0x11FF
+
 #include "data/field_event_obj/event_object_graphics_info_pointers.h"
 #include "data/field_event_obj/field_effect_object_template_pointers.h"
 #include "data/field_event_obj/event_object_pic_tables.h"
@@ -377,216 +414,216 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #include "data/field_event_obj/event_object_graphics_info.h"
 
 const struct SpritePalette sEventObjectSpritePalettes[] = {
-    {gEventObjectPalette0,  0x1103},
-    {gEventObjectPalette1,  0x1104},
-    {gEventObjectPalette2,  0x1105},
-    {gEventObjectPalette3,  0x1106},
-    {gEventObjectPalette4,  0x1107},
-    {gEventObjectPalette5,  0x1108},
-    {gEventObjectPalette6,  0x1109},
-    {gEventObjectPalette7,  0x110A},
-    {gEventObjectPalette8,  0x1100},
-    {gEventObjectPalette9,  0x1101},
-    {gEventObjectPalette10, 0x1102},
-    {gEventObjectPalette11, 0x1115},
-    {gEventObjectPalette12, 0x110B},
-    {gEventObjectPalette13, 0x110C},
-    {gEventObjectPalette14, 0x110D},
-    {gEventObjectPalette15, 0x110E},
-    {gEventObjectPalette16, 0x110F},
-    {gEventObjectPalette17, 0x1110},
-    {gEventObjectPalette18, 0x1111},
-    {gEventObjectPalette19, 0x1112},
-    {gEventObjectPalette20, 0x1113},
-    {gEventObjectPalette21, 0x1114},
-    {gEventObjectPalette22, 0x1116},
-    {gEventObjectPalette23, 0x1117},
-    {gEventObjectPalette24, 0x1118},
-    {gEventObjectPalette25, 0x1119},
-    {gEventObjectPalette26, 0x111B},
-    {gEventObjectPalette27, 0x111C},
-    {gEventObjectPalette28, 0x111D},
-    {gEventObjectPalette29, 0x111E},
-    {gEventObjectPalette30, 0x111F},
-    {gEventObjectPalette31, 0x1120},
-    {gEventObjectPalette32, 0x1121},
-    {gEventObjectPalette33, 0x1122},
-    {gEventObjectPalette34, 0x1123},
+    {gEventObjectPalette0,  EVENT_OBJ_PAL_TAG_0},
+    {gEventObjectPalette1,  EVENT_OBJ_PAL_TAG_1},
+    {gEventObjectPalette2,  EVENT_OBJ_PAL_TAG_2},
+    {gEventObjectPalette3,  EVENT_OBJ_PAL_TAG_3},
+    {gEventObjectPalette4,  EVENT_OBJ_PAL_TAG_4},
+    {gEventObjectPalette5,  EVENT_OBJ_PAL_TAG_5},
+    {gEventObjectPalette6,  EVENT_OBJ_PAL_TAG_6},
+    {gEventObjectPalette7,  EVENT_OBJ_PAL_TAG_7},
+    {gEventObjectPalette8,  EVENT_OBJ_PAL_TAG_8},
+    {gEventObjectPalette9,  EVENT_OBJ_PAL_TAG_9},
+    {gEventObjectPalette10, EVENT_OBJ_PAL_TAG_10},
+    {gEventObjectPalette11, EVENT_OBJ_PAL_TAG_11},
+    {gEventObjectPalette12, EVENT_OBJ_PAL_TAG_12},
+    {gEventObjectPalette13, EVENT_OBJ_PAL_TAG_13},
+    {gEventObjectPalette14, EVENT_OBJ_PAL_TAG_14},
+    {gEventObjectPalette15, EVENT_OBJ_PAL_TAG_15},
+    {gEventObjectPalette16, EVENT_OBJ_PAL_TAG_16},
+    {gEventObjectPalette17, EVENT_OBJ_PAL_TAG_17},
+    {gEventObjectPalette18, EVENT_OBJ_PAL_TAG_18},
+    {gEventObjectPalette19, EVENT_OBJ_PAL_TAG_19},
+    {gEventObjectPalette20, EVENT_OBJ_PAL_TAG_20},
+    {gEventObjectPalette21, EVENT_OBJ_PAL_TAG_21},
+    {gEventObjectPalette22, EVENT_OBJ_PAL_TAG_22},
+    {gEventObjectPalette23, EVENT_OBJ_PAL_TAG_23},
+    {gEventObjectPalette24, EVENT_OBJ_PAL_TAG_24},
+    {gEventObjectPalette25, EVENT_OBJ_PAL_TAG_25},
+    {gEventObjectPalette26, EVENT_OBJ_PAL_TAG_26},
+    {gEventObjectPalette27, EVENT_OBJ_PAL_TAG_27},
+    {gEventObjectPalette28, EVENT_OBJ_PAL_TAG_28},
+    {gEventObjectPalette29, EVENT_OBJ_PAL_TAG_29},
+    {gEventObjectPalette30, EVENT_OBJ_PAL_TAG_30},
+    {gEventObjectPalette31, EVENT_OBJ_PAL_TAG_31},
+    {gEventObjectPalette32, EVENT_OBJ_PAL_TAG_32},
+    {gEventObjectPalette33, EVENT_OBJ_PAL_TAG_33},
+    {gEventObjectPalette34, EVENT_OBJ_PAL_TAG_34},
     {NULL,                  0x0000},
 };
 
 const u16 gPlayerReflectionPaletteTags[] = {
-    0x1101,
-    0x1101,
-    0x1101,
-    0x1101,
+    EVENT_OBJ_PAL_TAG_9,
+    EVENT_OBJ_PAL_TAG_9,
+    EVENT_OBJ_PAL_TAG_9,
+    EVENT_OBJ_PAL_TAG_9,
 };
 
 const u16 Unknown_0850BCF0[] = {
-    0x1111,
-    0x1111,
-    0x1111,
-    0x1111,
+    EVENT_OBJ_PAL_TAG_18,
+    EVENT_OBJ_PAL_TAG_18,
+    EVENT_OBJ_PAL_TAG_18,
+    EVENT_OBJ_PAL_TAG_18,
 };
 
 const u16 gPlayerUnderwaterReflectionPaletteTags[] = {
-    0x1115,
-    0x1115,
-    0x1115,
-    0x1115,
+    EVENT_OBJ_PAL_TAG_11,
+    EVENT_OBJ_PAL_TAG_11,
+    EVENT_OBJ_PAL_TAG_11,
+    EVENT_OBJ_PAL_TAG_11,
 };
 
 const struct PairedPalettes gPlayerReflectionPaletteSets[] = {
-    {0x1100, gPlayerReflectionPaletteTags},
-    {0x1110, Unknown_0850BCF0},
-    {0x1115, gPlayerUnderwaterReflectionPaletteTags},
-    {0x11FF, NULL},
+    {EVENT_OBJ_PAL_TAG_8, gPlayerReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_17, Unknown_0850BCF0},
+    {EVENT_OBJ_PAL_TAG_11, gPlayerUnderwaterReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_NONE, NULL},
 };
 
 const u16 gQuintyPlumpReflectionPaletteTags[] = {
-    0x110C,
-    0x110C,
-    0x110C,
-    0x110C,
+    EVENT_OBJ_PAL_TAG_13,
+    EVENT_OBJ_PAL_TAG_13,
+    EVENT_OBJ_PAL_TAG_13,
+    EVENT_OBJ_PAL_TAG_13,
 };
 
 const u16 gTruckReflectionPaletteTags[] = {
-    0x110D,
-    0x110D,
-    0x110D,
-    0x110D,
+    EVENT_OBJ_PAL_TAG_14,
+    EVENT_OBJ_PAL_TAG_14,
+    EVENT_OBJ_PAL_TAG_14,
+    EVENT_OBJ_PAL_TAG_14,
 };
 
 const u16 gVigorothMoverReflectionPaletteTags[] = {
-    0x110E,
-    0x110E,
-    0x110E,
-    0x110E,
+    EVENT_OBJ_PAL_TAG_15,
+    EVENT_OBJ_PAL_TAG_15,
+    EVENT_OBJ_PAL_TAG_15,
+    EVENT_OBJ_PAL_TAG_15,
 };
 
 const u16 gMovingBoxReflectionPaletteTags[] = {
-    0x1112,
-    0x1112,
-    0x1112,
-    0x1112,
+    EVENT_OBJ_PAL_TAG_19,
+    EVENT_OBJ_PAL_TAG_19,
+    EVENT_OBJ_PAL_TAG_19,
+    EVENT_OBJ_PAL_TAG_19,
 };
 
 const u16 gCableCarReflectionPaletteTags[] = {
-    0x1113,
-    0x1113,
-    0x1113,
-    0x1113,
+    EVENT_OBJ_PAL_TAG_20,
+    EVENT_OBJ_PAL_TAG_20,
+    EVENT_OBJ_PAL_TAG_20,
+    EVENT_OBJ_PAL_TAG_20,
 };
 
 const u16 gSSTidalReflectionPaletteTags[] = {
-    0x1114,
-    0x1114,
-    0x1114,
-    0x1114,
+    EVENT_OBJ_PAL_TAG_21,
+    EVENT_OBJ_PAL_TAG_21,
+    EVENT_OBJ_PAL_TAG_21,
+    EVENT_OBJ_PAL_TAG_21,
 };
 
 const u16 gSubmarineShadowReflectionPaletteTags[] = {
-    0x111B,
-    0x111B,
-    0x111B,
-    0x111B,
+    EVENT_OBJ_PAL_TAG_26,
+    EVENT_OBJ_PAL_TAG_26,
+    EVENT_OBJ_PAL_TAG_26,
+    EVENT_OBJ_PAL_TAG_26,
 };
 
 const u16 Unknown_0850BD58[] = { // Kyogre2?
-    0x1117,
-    0x1117,
-    0x1117,
-    0x1117,
+    EVENT_OBJ_PAL_TAG_23,
+    EVENT_OBJ_PAL_TAG_23,
+    EVENT_OBJ_PAL_TAG_23,
+    EVENT_OBJ_PAL_TAG_23,
 };
 
 const u16 Unknown_0850BD60[] = { // Groudon2?
-    0x1119,
-    0x1119,
-    0x1119,
-    0x1119,
+    EVENT_OBJ_PAL_TAG_25,
+    EVENT_OBJ_PAL_TAG_25,
+    EVENT_OBJ_PAL_TAG_25,
+    EVENT_OBJ_PAL_TAG_25,
 };
 
 const u16 Unknown_0850BD68[] = { // Invisible Keckleon?
-    0x1109,
-    0x1109,
-    0x1109,
-    0x1109,
+    EVENT_OBJ_PAL_TAG_6,
+    EVENT_OBJ_PAL_TAG_6,
+    EVENT_OBJ_PAL_TAG_6,
+    EVENT_OBJ_PAL_TAG_6,
 };
 
 const u16 gRedLeafReflectionPaletteTags[] = {
-    0x111D,
-    0x111D,
-    0x111D,
-    0x111D,
+    EVENT_OBJ_PAL_TAG_28,
+    EVENT_OBJ_PAL_TAG_28,
+    EVENT_OBJ_PAL_TAG_28,
+    EVENT_OBJ_PAL_TAG_28,
 };
 
 const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
-    {4352, gPlayerReflectionPaletteTags},
-    {4368, Unknown_0850BCF0},
-    {4363, gQuintyPlumpReflectionPaletteTags},
-    {4365, gTruckReflectionPaletteTags},
-    {4366, gVigorothMoverReflectionPaletteTags},
-    {4370, gMovingBoxReflectionPaletteTags},
-    {4371, gCableCarReflectionPaletteTags},
-    {4372, gSSTidalReflectionPaletteTags},
-    {4374, Unknown_0850BD58},
-    {4376, Unknown_0850BD60},
-    {4357, Unknown_0850BD68},
-    {4379, gSubmarineShadowReflectionPaletteTags},
-    {4381, gRedLeafReflectionPaletteTags},
-    {4607, NULL},
+    {EVENT_OBJ_PAL_TAG_8, gPlayerReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_17, Unknown_0850BCF0},
+    {EVENT_OBJ_PAL_TAG_12, gQuintyPlumpReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_14, gTruckReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_15, gVigorothMoverReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_19, gMovingBoxReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_20, gCableCarReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_21, gSSTidalReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_22, Unknown_0850BD58},
+    {EVENT_OBJ_PAL_TAG_24, Unknown_0850BD60},
+    {EVENT_OBJ_PAL_TAG_2, Unknown_0850BD68},
+    {EVENT_OBJ_PAL_TAG_26, gSubmarineShadowReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_28, gRedLeafReflectionPaletteTags},
+    {EVENT_OBJ_PAL_TAG_NONE, NULL},
 };
 
 const u16 gObjectPaletteTags0[] = {
-    0x1100,
-    0x1101,
-    0x1103,
-    0x1104,
-    0x1105,
-    0x1106,
-    0x1107,
-    0x1108,
-    0x1109,
-    0x110A,
+    EVENT_OBJ_PAL_TAG_8,
+    EVENT_OBJ_PAL_TAG_9,
+    EVENT_OBJ_PAL_TAG_0,
+    EVENT_OBJ_PAL_TAG_1,
+    EVENT_OBJ_PAL_TAG_2,
+    EVENT_OBJ_PAL_TAG_3,
+    EVENT_OBJ_PAL_TAG_4,
+    EVENT_OBJ_PAL_TAG_5,
+    EVENT_OBJ_PAL_TAG_6,
+    EVENT_OBJ_PAL_TAG_7,
 };
 
 const u16 gObjectPaletteTags1[] = {
-    0x1100,
-    0x1101,
-    0x1103,
-    0x1104,
-    0x1105,
-    0x1106,
-    0x1107,
-    0x1108,
-    0x1109,
-    0x110A,
+    EVENT_OBJ_PAL_TAG_8,
+    EVENT_OBJ_PAL_TAG_9,
+    EVENT_OBJ_PAL_TAG_0,
+    EVENT_OBJ_PAL_TAG_1,
+    EVENT_OBJ_PAL_TAG_2,
+    EVENT_OBJ_PAL_TAG_3,
+    EVENT_OBJ_PAL_TAG_4,
+    EVENT_OBJ_PAL_TAG_5,
+    EVENT_OBJ_PAL_TAG_6,
+    EVENT_OBJ_PAL_TAG_7,
 };
 
 const u16 gObjectPaletteTags2[] = {
-    0x1100,
-    0x1101,
-    0x1103,
-    0x1104,
-    0x1105,
-    0x1106,
-    0x1107,
-    0x1108,
-    0x1109,
-    0x110A,
+    EVENT_OBJ_PAL_TAG_8,
+    EVENT_OBJ_PAL_TAG_9,
+    EVENT_OBJ_PAL_TAG_0,
+    EVENT_OBJ_PAL_TAG_1,
+    EVENT_OBJ_PAL_TAG_2,
+    EVENT_OBJ_PAL_TAG_3,
+    EVENT_OBJ_PAL_TAG_4,
+    EVENT_OBJ_PAL_TAG_5,
+    EVENT_OBJ_PAL_TAG_6,
+    EVENT_OBJ_PAL_TAG_7,
 };
 
 const u16 gObjectPaletteTags3[] = {
-     0x1100,
-     0x1101,
-     0x1103,
-     0x1104,
-     0x1105,
-     0x1106,
-     0x1107,
-     0x1108,
-     0x1109,
-     0x110A,
+    EVENT_OBJ_PAL_TAG_8,
+    EVENT_OBJ_PAL_TAG_9,
+    EVENT_OBJ_PAL_TAG_0,
+    EVENT_OBJ_PAL_TAG_1,
+    EVENT_OBJ_PAL_TAG_2,
+    EVENT_OBJ_PAL_TAG_3,
+    EVENT_OBJ_PAL_TAG_4,
+    EVENT_OBJ_PAL_TAG_5,
+    EVENT_OBJ_PAL_TAG_6,
+    EVENT_OBJ_PAL_TAG_7,
 };
 
 
@@ -2082,7 +2119,7 @@ static void sub_808E894(u16 paletteTag)
     u16 paletteSlot;
 
     paletteSlot = FindEventObjectPaletteIndexByTag(paletteTag);
-    if (paletteSlot != 0x11ff) // always true
+    if (paletteSlot != EVENT_OBJ_PAL_TAG_NONE) // always true
     {
         sub_808E8F4(&sEventObjectSpritePalettes[paletteSlot]);
     }
@@ -2092,7 +2129,7 @@ void sub_808E8C0(u16 *paletteTags)
 {
     u8 i;
 
-    for (i = 0; paletteTags[i] != 0x11ff; i++)
+    for (i = 0; paletteTags[i] != EVENT_OBJ_PAL_TAG_NONE; i++)
     {
         sub_808E894(paletteTags[i]);
     }
@@ -2129,7 +2166,7 @@ static u8 FindEventObjectPaletteIndexByTag(u16 tag)
 {
     u8 i;
 
-    for (i = 0; sEventObjectSpritePalettes[i].tag != 0x11ff; i++)
+    for (i = 0; sEventObjectSpritePalettes[i].tag != EVENT_OBJ_PAL_TAG_NONE; i++)
     {
         if (sEventObjectSpritePalettes[i].tag == tag)
         {
@@ -2144,7 +2181,7 @@ void LoadPlayerObjectReflectionPalette(u16 tag, u8 slot)
     u8 i;
 
     PatchObjectPalette(tag, slot);
-    for (i = 0; gPlayerReflectionPaletteSets[i].tag != 0x11ff; i++)
+    for (i = 0; gPlayerReflectionPaletteSets[i].tag != EVENT_OBJ_PAL_TAG_NONE; i++)
     {
         if (gPlayerReflectionPaletteSets[i].tag == tag)
         {
@@ -2160,7 +2197,7 @@ void LoadSpecialObjectReflectionPalette(u16 tag, u8 slot)
 
     sCurrentSpecialObjectPaletteTag = tag;
     PatchObjectPalette(tag, slot);
-    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != 0x11ff; i++)
+    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != EVENT_OBJ_PAL_TAG_NONE; i++)
     {
         if (gSpecialObjectReflectionPaletteSets[i].tag == tag)
         {
@@ -2613,7 +2650,7 @@ void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat)
 void InitEventObjectPalettes(u8 palSlot)
 {
     FreeAndReserveObjectSpritePalettes();
-    sCurrentSpecialObjectPaletteTag = 0x11ff;
+    sCurrentSpecialObjectPaletteTag = EVENT_OBJ_PAL_TAG_NONE;
     sCurrentReflectionType = palSlot;
     if (palSlot == 1)
     {
@@ -2634,14 +2671,14 @@ u16 GetObjectPaletteTag(u8 palSlot)
     {
         return gObjectPaletteTagSets[sCurrentReflectionType][palSlot];
     }
-    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != 0x11ff; i++)
+    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != EVENT_OBJ_PAL_TAG_NONE; i++)
     {
         if (gSpecialObjectReflectionPaletteSets[i].tag == sCurrentSpecialObjectPaletteTag)
         {
             return gSpecialObjectReflectionPaletteSets[i].data[sCurrentReflectionType];
         }
     }
-    return 0x11ff;
+    return EVENT_OBJ_PAL_TAG_NONE;
 }
 
 movement_type_empty_callback(MovementType_None)
