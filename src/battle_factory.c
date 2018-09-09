@@ -144,6 +144,7 @@ extern const u8 gUnknown_085B18AC[];
 extern void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 move, u8 moveSlot);
 
 // This file's functions.
+void sub_819A44C(struct Sprite *sprite);
 static void CB2_InitSelectScreen(void);
 static void Select_SetWinRegs(s16 mWin0H, s16 nWin0H, s16 mWin0V, s16 nWin0V);
 static void Select_InitMonsData(void);
@@ -207,6 +208,9 @@ void Swap_ShowSummaryMonSprite(void);
 void Swap_UpdateActionCursorPosition(s8 direction);
 void Swap_UpdateBallCursorPosition(s8 direction);
 void Swap_RunMenuOptionFunc(u8 taskId);
+void sub_819F0CC(u8 taskId);
+void sub_819F114(u8 taskId);
+void sub_819F134(u8 taskId);
 void Swap_RunActionFunc(u8 taskId);
 void sub_819F69C(u8 taskId);
 void Task_SwapCantHaveSameMons(u8 taskId);
@@ -283,26 +287,714 @@ u8 (* const sSelect_MenuOptionFuncs[])(void) =
     [MENU_OTHERS] = Select_OptionOthers
 };
 
-extern void (* const sSwap_MenuOptionFuncs[])(u8 taskId);
+static const struct BgTemplate gUnknown_08610428[3] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 24,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 25,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 27,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+};
 
-extern const struct BgTemplate gUnknown_08610428[3];
-extern const struct BgTemplate gUnknown_086108B8[4];
-extern const struct WindowTemplate gUnknown_08610434[];
-extern const struct WindowTemplate gUnknown_086108C8[];
-extern const u16 gUnknown_0861046C[];
+static const struct WindowTemplate gUnknown_08610434[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x0001,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 19,
+        .tilemapTop = 2,
+        .width = 11,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x0019,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 15,
+        .width = 20,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 0x002f,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 14,
+        .width = 8,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 0x006b,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 14,
+        .width = 8,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x009b,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 15,
+        .tilemapTop = 0,
+        .width = 15,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x00bb,
+    },
+    DUMMY_WIN_TEMPLATE,
+};
+
+static const u16 gUnknown_0861046C[] = INCBIN_U16("graphics/unknown/unknown_61046C.gbapal");
+
+static const u8 gUnknown_08610476[] = {0x00, 0x02, 0x00};
+static const u8 gUnknown_08610479[] = {0x00, 0x04, 0x00};
+
+static const struct OamData gUnknown_0861047C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_08610484 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_0861048C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_08610494 =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 1,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 1,
+};
+
+static const union AnimCmd gUnknown_0861049C[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_086104A4[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_086104AC[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_086104B4[] =
+{
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(32, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(32, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd * const gUnknown_086104FC[] =
+{
+    gUnknown_0861049C,
+};
+
+static const union AnimCmd * const gUnknown_08610500[] =
+{
+    gUnknown_086104A4,
+};
+
+static const union AnimCmd * const gUnknown_08610504[] =
+{
+    gUnknown_086104AC,
+    gUnknown_086104B4,
+};
+
+static const union AffineAnimCmd gUnknown_0861050C[] =
+{
+    AFFINEANIMCMD_FRAME(5, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(16, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(32, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(64, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(128, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(256, 5, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gUnknown_0861056C[] =
+{
+    AFFINEANIMCMD_FRAME(128, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(64, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(32, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(16, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(5, 5, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gUnknown_086105BC[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd * const gUnknown_086105CC[] =
+{
+    gUnknown_0861050C,
+    gUnknown_0861056C,
+    gUnknown_086105BC,
+};
+
+static const struct SpriteTemplate gUnknown_086105D8 =
+{
+    .tileTag = 0x0064,
+    .paletteTag = 0x0064,
+    .oam = &gUnknown_0861047C,
+    .anims = gUnknown_08610504,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_819A44C
+};
+
+static const struct SpriteTemplate gUnknown_086105F0 =
+{
+    .tileTag = 0x0065,
+    .paletteTag = 0x0066,
+    .oam = &gUnknown_08610484,
+    .anims = gUnknown_086104FC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_08610608 =
+{
+    .tileTag = 0x0066,
+    .paletteTag = 0x0066,
+    .oam = &gUnknown_0861048C,
+    .anims = gUnknown_086104FC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_08610620 =
+{
+    .tileTag = 0x0067,
+    .paletteTag = 0x0066,
+    .oam = &gUnknown_0861048C,
+    .anims = gUnknown_086104FC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_08610638 =
+{
+    .tileTag = 0x006d,
+    .paletteTag = 0x0067,
+    .oam = &gUnknown_08610494,
+    .anims = gUnknown_08610500,
+    .images = NULL,
+    .affineAnims = gUnknown_086105CC,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteSheet gUnknown_08610650[] =
+{
+    {gUnknown_0860F3BC, 0x0080, 0x0065},
+    {gUnknown_0860F43C, 0x0100, 0x0066},
+    {gUnknown_0860F53C, 0x0100, 0x0067},
+    {gUnknown_0860F63C, 0x0080, 0x0068},
+    {gUnknown_0860F6BC, 0x0100, 0x0069},
+    {gUnknown_0860F7BC, 0x0100, 0x006a},
+    {gUnknown_0860F83C, 0x0100, 0x006b},
+    {gUnknown_0860F93C, 0x0100, 0x006c},
+    {gUnknown_0860FA3C, 0x0800, 0x006d},
+    {},
+};
+
+static const struct CompressedSpriteSheet gUnknown_086106A0[] =
+{
+    {gUnknown_085B18AC, 0x0800, 0x0064},
+    {},
+};
+
+static const struct SpritePalette gUnknown_086106B0[] =
+{
+    {gUnknown_0860F13C, 0x0064},
+    {gUnknown_0860F15C, 0x0065},
+    {gUnknown_0860F17C, 0x0066},
+    {gUnknown_0861039C, 0x0067},
+    {},
+};
+
+static const struct OamData gUnknown_086106D8 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_086106E0 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_086106E8 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_086106F0 =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 1,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 1,
+};
+
+static const union AnimCmd gUnknown_086106F8[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_08610700[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_08610708[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gUnknown_08610710[] =
+{
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(32, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(32, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd * const gUnknown_08610758[] =
+{
+    gUnknown_086106F8,
+};
+
+static const union AnimCmd * const gUnknown_0861075C[] =
+{
+    gUnknown_08610700,
+};
+
+static const union AnimCmd * const gUnknown_08610760[] =
+{
+    gUnknown_08610708,
+    gUnknown_08610710,
+};
+
+static const union AffineAnimCmd gUnknown_08610768[] =
+{
+    AFFINEANIMCMD_FRAME(5, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(16, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(32, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(64, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(128, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(256, 5, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gUnknown_086107C8[] =
+{
+    AFFINEANIMCMD_FRAME(128, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(64, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(32, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(16, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_FRAME(5, 5, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gUnknown_08610818[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd * const gUnknown_08610828[] =
+{
+    gUnknown_08610768,
+    gUnknown_086107C8,
+    gUnknown_08610818,
+};
+
+static const struct SpriteTemplate gUnknown_08610834 =
+{
+    .tileTag = 0x0064,
+    .paletteTag = 0x0064,
+    .oam = &gUnknown_086106D8,
+    .anims = gUnknown_08610760,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_819A44C
+};
+
+static const struct SpriteTemplate gUnknown_0861084C =
+{
+    .tileTag = 0x0065,
+    .paletteTag = 0x0066,
+    .oam = &gUnknown_086106E0,
+    .anims = gUnknown_08610758,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_08610864 =
+{
+    .tileTag = 0x0066,
+    .paletteTag = 0x0066,
+    .oam = &gUnknown_086106E8,
+    .anims = gUnknown_08610758,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_0861087C =
+{
+    .tileTag = 0x0067,
+    .paletteTag = 0x0066,
+    .oam = &gUnknown_086106E8,
+    .anims = gUnknown_08610758,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_08610894 =
+{
+    .tileTag = 0x006d,
+    .paletteTag = 0x0067,
+    .oam = &gUnknown_086106F0,
+    .anims = gUnknown_0861075C,
+    .images = NULL,
+    .affineAnims = gUnknown_08610828,
+    .callback = SpriteCallbackDummy
+};
+
+void (* const sSwap_MenuOptionFuncs[])(u8 taskId) =
+{
+    sub_819F114,
+    sub_819F0CC,
+    sub_819F134,
+};
+
+static const struct BgTemplate gUnknown_086108B8[4] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 24,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 25,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 26,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 27,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+};
+
+static const struct WindowTemplate gUnknown_086108C8[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x0001,
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 19,
+        .tilemapTop = 2,
+        .width = 11,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x0019,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 15,
+        .width = 20,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 0x002f,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 14,
+        .width = 9,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 0x006b,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 14,
+        .width = 8,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x00a1,
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 21,
+        .tilemapTop = 15,
+        .width = 9,
+        .height = 5,
+        .paletteNum = 14,
+        .baseBlock = 0x006b,
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 10,
+        .tilemapTop = 2,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 0x00c1,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 19,
+        .tilemapTop = 2,
+        .width = 11,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x00c9,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 15,
+        .tilemapTop = 0,
+        .width = 15,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x00df,
+    },
+    DUMMY_WIN_TEMPLATE,
+};
+
+//const u16 gUnknown_08610918[] = {0x00, 0x00, 0x00, 0x00, 0xff, 0x7f, 0x00, 0x00, 0x1f, 0x00}; // palette
+//const u8 gUnknown_08610922[] = {0x00, 0x02, 0x00};
+//const u8 gUnknown_08610925[] = {0x00, 0x04, 0x00};
+
 extern const u16 gUnknown_08610918[];
-extern const struct SpriteTemplate gUnknown_086105D8;
-extern const struct SpriteTemplate gUnknown_086105F0;
-extern const struct SpriteTemplate gUnknown_08610608;
-extern const struct SpriteTemplate gUnknown_08610620;
-extern const struct SpriteTemplate gUnknown_08610638;
-extern const u8 gUnknown_08610479[];
-extern const u8 gUnknown_08610925[];
-extern const u8 gUnknown_08610476[];
 extern const u8 gUnknown_08610922[];
-extern const struct SpritePalette gUnknown_086106B0[];
-extern const struct SpriteSheet gUnknown_08610650[];
-extern const struct CompressedSpriteSheet gUnknown_086106A0[];
+extern const u8 gUnknown_08610925[];
 
 // gfx
 extern const u8 gFrontierFactorySelectMenu_Gfx[];
@@ -1346,8 +2038,8 @@ static void sub_819C1D0(u8 taskId)
         task->data[5] = 64;
         task->data[8] = 65;
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        SetGpuReg(REG_OFFSET_WIN0H, WINHV_COORDS(task->data[3], task->data[24]));
-        SetGpuReg(REG_OFFSET_WIN0V, WINHV_COORDS(task->data[5], task->data[8]));
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[24]));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[8]));
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_CLR | WINOUT_WIN01_OBJ);
         break;
@@ -1365,7 +2057,7 @@ static void sub_819C1D0(u8 taskId)
             task->data[8] = 96;
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         }
-        SetGpuReg(REG_OFFSET_WIN0V, WINHV_COORDS(task->data[5], task->data[8]));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[8]));
         if (task->data[5] != 32)
             return;
         break;
@@ -1402,8 +2094,8 @@ static void sub_819C2D4(u8 taskId)
         task->data[5] = 32;
         task->data[8] = 96;
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        SetGpuReg(REG_OFFSET_WIN0H, WINHV_COORDS(task->data[3], task->data[24]));
-        SetGpuReg(REG_OFFSET_WIN0V, WINHV_COORDS(task->data[5], task->data[8]));
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[24]));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[8]));
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_CLR | WINOUT_WIN01_OBJ);
         task->data[0]++;
@@ -1416,7 +2108,7 @@ static void sub_819C2D4(u8 taskId)
             task->data[5] = 64;
             task->data[8] = 65;
         }
-        SetGpuReg(REG_OFFSET_WIN0V, WINHV_COORDS(task->data[5], task->data[8]));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[8]));
         if (task->data[5] == 64)
             task->data[0]++;
         break;
@@ -1453,8 +2145,8 @@ static void sub_819C568(void)
 static void Select_SetWinRegs(s16 mWin0H, s16 nWin0H, s16 mWin0V, s16 nWin0V)
 {
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-    SetGpuReg(REG_OFFSET_WIN0H, WINHV_COORDS(mWin0H, nWin0H));
-    SetGpuReg(REG_OFFSET_WIN0V, WINHV_COORDS(mWin0V, nWin0V));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(mWin0H, nWin0H));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(mWin0V, nWin0V));
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_CLR | WINOUT_WIN01_OBJ);
 }

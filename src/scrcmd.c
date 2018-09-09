@@ -750,7 +750,7 @@ bool8 ScrCmd_warp(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF734();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -764,7 +764,7 @@ bool8 ScrCmd_warpsilent(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sp13E_warp_to_last_warp();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -778,7 +778,7 @@ bool8 ScrCmd_warpdoor(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF7D0();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -791,11 +791,11 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
 
     PlayerGetDestCoords(&x, &y);
     if (mapGroup == 0xFF && mapNum == 0xFF)
-        sub_8084EBC(x - 7, y - 7);
+        SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
     sp13F_fall_to_last_warp();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -809,7 +809,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF848();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -823,7 +823,7 @@ bool8 ScrCmd_warpD7(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF87C();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -859,7 +859,7 @@ bool8 ScrCmd_setdivewarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_8084E2C(mapGroup, mapNum, warpId, x, y);
+    SetFixedDiveWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
@@ -871,7 +871,7 @@ bool8 ScrCmd_setholewarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_8084E80(mapGroup, mapNum, warpId, x, y);
+    SetFixedHoleWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
@@ -2240,7 +2240,7 @@ bool8 ScrCmd_warpD1(struct ScriptContext *ctx)
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
 	sub_808D074(GetPlayerFacingDirection());
 	sub_80B0244();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -2293,6 +2293,6 @@ bool8 ScrCmd_warpE0(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
 	sub_80AF79C();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }

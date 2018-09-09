@@ -113,12 +113,53 @@ static const struct BgTemplate gUnknown_0858BE00[] =
     }
 };
 
-static const struct WindowTemplate gUnknown_0858BE10[] = {
-    { 0x01, 0x03, 0x0A, 0x13, 0x08, 0x0A, 0x030 },
-    { 0x02, 0x03, 0x0A, 0x13, 0x08, 0x0A, 0x0C8 },
-    { 0x03, 0x08, 0x06, 0x11, 0x02, 0x0A, 0x030 },
-    { 0x03, 0x08, 0x04, 0x11, 0x02, 0x0A, 0x052 },
-    { 0x00, 0x00, 0x00, 0x1E, 0x02, 0x0B, 0x074 },
+static const struct WindowTemplate gUnknown_0858BE10[] =
+{
+    {
+        .priority = 1,
+        .tilemapLeft = 3,
+        .tilemapTop = 10,
+        .width = 19,
+        .height = 8,
+        .paletteNum = 10,
+        .baseBlock = 0x030
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 3,
+        .tilemapTop = 10,
+        .width = 19,
+        .height = 8,
+        .paletteNum = 10,
+        .baseBlock = 0x0C8
+    },
+    {
+        .priority = 3,
+        .tilemapLeft = 8,
+        .tilemapTop = 6,
+        .width = 17,
+        .height = 2,
+        .paletteNum = 10,
+        .baseBlock = 0x030
+    },
+    {
+        .priority = 3,
+        .tilemapLeft = 8,
+        .tilemapTop = 4,
+        .width = 17,
+        .height = 2,
+        .paletteNum = 10,
+        .baseBlock = 0x052
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 11,
+        .baseBlock = 0x074
+    },
     DUMMY_WIN_TEMPLATE
 };
 

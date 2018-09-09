@@ -948,7 +948,15 @@ static const struct BgTemplate gUnknown_085E6F68[] =
 };
 static const struct WindowTemplate gUnknown_085E6F6C[] =
 {
-    { 0x00, 0x00, 0x09, 0x1E, 0x0C, 0x08, 0x0001 },
+    {
+        .priority = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 9,
+        .width = 30,
+        .height = 12,
+        .paletteNum = 8,
+        .baseBlock = 1
+    },
     DUMMY_WIN_TEMPLATE,
 };
 static const u8 gUnknown_085E6F7C[][2] =

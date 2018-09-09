@@ -253,13 +253,27 @@ static const struct BgTemplate sBgTemplates_EggHatch[2] =
 
 static const struct WindowTemplate sWinTemplates_EggHatch[2] =
 {
-    {0, 2, 0xF, 0x1A, 4, 0, 0x40},
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 64
+    },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sYesNoWinTemplate =
 {
-    0, 0x15, 9, 5, 4, 0xF, 0x1A8
+    .priority = 0,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 424
 };
 
 static const s16 sEggShardVelocities[][2] =

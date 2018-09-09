@@ -1170,7 +1170,7 @@ void task00_8084310(u8 taskId)
     if (!FieldEffectActiveListContains(FLDEFF_USE_FLY))
     {
         Overworld_ResetStateAfterFly();
-        warp_in();
+        WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
         gFieldCallback = mapldr_08084390;
         DestroyTask(taskId);
@@ -1355,7 +1355,7 @@ void sub_80B6FB8(struct Task *);
 void sub_80B7004(struct Task *);
 void sub_80B7050(void);
 void sub_80B7060(void);
-bool8 sub_80859A0(void);
+bool8 BGMusicStopped(void);
 void sub_80B70B4(void);
 void sub_80E1570(void);
 void sub_80B70DC(u8);
@@ -1476,10 +1476,10 @@ void sub_80B7050(void)
 
 void sub_80B7060(void)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
         sub_80E1570();
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_80B70B4;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B6E88));
@@ -1838,9 +1838,9 @@ bool8 sub_80B77F8(struct Task *task, struct EventObject *eventObject, struct Spr
 
 bool8 sub_80B7814(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = mapldr_080851BC;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B75F0));
@@ -2004,9 +2004,9 @@ void mapldr_080859D4(void);
 
 bool8 sub_80B7BF4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_80B6B68;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B7A8C));
@@ -2063,11 +2063,11 @@ void sub_80B7D34(struct Task *task)
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
-        if (task->data[14] == 0 && !gPaletteFade.active && sub_80859A0() == TRUE)
+        if (task->data[14] == 0 && !gPaletteFade.active && BGMusicStopped() == TRUE)
         {
             SetEventObjectDirection(eventObject, task->data[15]);
             sub_8084E14();
-            warp_in();
+            WarpIntoMap();
             gFieldCallback = mapldr_080859D4;
             SetMainCallback2(CB2_LoadMap);
             DestroyTask(FindTaskIdByFunc(sub_80B7CE4));
@@ -2234,10 +2234,10 @@ static void TeleportFieldEffectTask4(struct Task *task)
             task->data[5] = TRUE;
         }
 
-        if (sub_80859A0() == TRUE)
+        if (BGMusicStopped() == TRUE)
         {
             Overworld_SetWarpDestToLastHealLoc();
-            warp_in();
+            WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             gFieldCallback = mapldr_08085D88;
             DestroyTask(FindTaskIdByFunc(ExecuteTeleportFieldEffectTask));
