@@ -712,8 +712,8 @@ int GetPostCameraMoveMapBorderId(int x, int y)
 int CanCameraMoveInDirection(int direction)
 {
     int x, y;
-    x = gSaveBlock1Ptr->pos.x + 7 + gUnknown_08339D64[direction].x;
-    y = gSaveBlock1Ptr->pos.y + 7 + gUnknown_08339D64[direction].y;
+    x = gSaveBlock1Ptr->pos.x + 7 + gDirectionToVectors[direction].x;
+    y = gSaveBlock1Ptr->pos.y + 7 + gDirectionToVectors[direction].y;
     if (GetMapBorderIdAt(x, y) == -1)
     {
         return 0;

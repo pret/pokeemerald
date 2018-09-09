@@ -184,9 +184,33 @@ const struct MenuAction gMailboxMailOptions[] =
 
 static const struct WindowTemplate gUnknown_085DFF24[3] =
 {
-    {0x00, 0x01, 0x01, 0x09, 0x06, 0x0F, 0x0001},
-    {0x00, 0x01, 0x01, 0x09, 0x08, 0x0F, 0x0001},
-    {0x00, 0x01, 0x01, 0x0A, 0x08, 0x0F, 0x0001}
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 9,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 9,
+        .height = 8,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 10,
+        .height = 8,
+        .paletteNum = 15,
+        .baseBlock = 1
+    }
 };
 
 static const struct YesNoFuncTable ResumeFromWithdrawYesNoFuncList = // ResumeFromWithdrawYesNoFuncList
@@ -195,27 +219,85 @@ static const struct YesNoFuncTable ResumeFromWithdrawYesNoFuncList = // ResumeFr
     ItemStorage_ResumeInputFromNoToss
 };
 
-static const struct ListMenuTemplate gUnknown_085DFF44 = {
-    NULL,
-    ItemStorage_MoveCursor,
-    fish4_goto_x5_or_x6,
-    0, 0,
-    0, 0, 8, 0,
-    9, 2, 1, 3, FALSE, 0, FALSE, 7
+static const struct ListMenuTemplate gUnknown_085DFF44 =
+{
+    .items = NULL,
+    .moveCursorFunc = ItemStorage_MoveCursor,
+    .itemPrintFunc = fish4_goto_x5_or_x6,
+    .totalItems = 0,
+    .maxShowed = 0,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 9,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = FALSE,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = FALSE,
+    .fontId = 7
 };
 
 static const struct WindowTemplate gUnknown_085DFF5C[5] =
 {
-    {0x00, 0x10, 0x01, 0x0D, 0x12, 0x0F, 0x0001},
-    {0x00, 0x01, 0x0D, 0x0D, 0x06, 0x0F, 0x00EB},
-    {0x00, 0x01, 0x08, 0x03, 0x03, 0x0F, 0x0153},
-    {0x00, 0x01, 0x01, 0x0D, 0x02, 0x0F, 0x0139},
-    {0x00, 0x08, 0x09, 0x06, 0x02, 0x0F, 0x015C}
+    {
+        .priority = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 1,
+        .width = 13,
+        .height = 18,
+        .paletteNum = 15,
+        .baseBlock = 0x0001
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 13,
+        .width = 13,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 0x00EB
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 8,
+        .width = 3,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 0x0153
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 13,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x0139
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 8,
+        .tilemapTop = 9,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x015C
+    }
 };
 
 static const struct WindowTemplate gUnknown_085DFF84 =
 {
-    0x00, 0x09, 0x07, 0x05, 0x04, 0x0F, 0x0168
+    .priority = 0,
+    .tilemapLeft = 9,
+    .tilemapTop = 7,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x0168
 };
 
 static const u8 gUnknown_085DFF8C[] = {0x01, 0x03, 0x02, 0x00};
@@ -476,7 +558,7 @@ static void ItemStorage_WithdrawToss_Helper(u8 taskId, bool8 toss)
     playerPCItemPageInfo.scrollIndicatorId = 0xFF;
     ItemStorage_SetItemAndMailCount(taskId);
     sub_816BC14();
-    gpu_pal_allocator_reset__manage_upper_four();
+    FreeAndReserveObjectSpritePalettes();
     LoadListMenuArrowsGfx();
     sub_8122344(gUnknown_0203BCC4->spriteIds, 7);
     sub_8197434(0,0);

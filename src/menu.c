@@ -65,13 +65,27 @@ static const u8 gUnknown_0860F094[] = { 8, 4, 1 };
 
 static const struct WindowTemplate gUnknown_0860F098[] =
 {
-    { 0x00, 0x02, 0x0F, 0x1B, 0x04, 0x0F, 0x194 },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x194
+    },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate gUnknown_0860F0A8 =
 {
-    0x00, 0x15, 0x09, 0x05, 0x04, 0x0F, 0x125
+    .priority = 0,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x125
 };
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");

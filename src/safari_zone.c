@@ -35,7 +35,7 @@ extern void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 extern void CB2_LoadMap(void);
 extern void sub_80AF6F0(void);
 extern void ScriptContext1_Stop(void);
-extern void warp_in(void);
+extern void WarpIntoMap(void);
 extern void GetXYCoordsOneStepInFrontOfPlayer(s16* x, s16* y);
 extern void PlayerGetDestCoords(s16* x, s16* y);
 
@@ -117,7 +117,7 @@ void CB2_EndSafariBattle(void)
     else if (gBattleOutcome == B_OUTCOME_NO_SAFARI_BALLS)
     {
         ScriptContext2_RunNewScript(EventScript_2A4B4C);
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_80AF6F0;
         SetMainCallback2(CB2_LoadMap);
     }
