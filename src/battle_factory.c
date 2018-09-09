@@ -208,6 +208,7 @@ void Swap_UpdateActionCursorPosition(s8 direction);
 void Swap_UpdateBallCursorPosition(s8 direction);
 void Swap_RunMenuOptionFunc(u8 taskId);
 void Swap_RunActionFunc(u8 taskId);
+void sub_819F69C(u8 taskId);
 void Task_SwapCantHaveSameMons(u8 taskId);
 void Swap_PrintActionStrings(void);
 void Swap_PrintActionStrings2(void);
@@ -3277,4 +3278,18 @@ bool8 Swap_AlreadyHasSameSpecies(u8 monId)
             return TRUE;
     }
     return FALSE;
+}
+
+void sub_819F600(struct Sprite *sprite)
+{
+    u8 taskId;
+
+    if (sprite->affineAnimEnded)
+    {
+        sprite->invisible = 1;
+        taskId = CreateTask(sub_819F69C, 1);
+        gTasks[taskId].data[7] = sprite->data[7];
+        gTasks[taskId].func(taskId);
+        sprite->callback = SpriteCallbackDummy;
+    }
 }

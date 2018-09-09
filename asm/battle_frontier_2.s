@@ -7,44 +7,6 @@
 
 
 
-	thumb_func_start sub_819F600
-sub_819F600: @ 819F600
-	push {r4,lr}
-	adds r4, r0, 0
-	adds r0, 0x3F
-	ldrb r1, [r0]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _0819F640
-	adds r2, r4, 0
-	adds r2, 0x3E
-	ldrb r0, [r2]
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r0, =sub_819F69C
-	movs r1, 0x1
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	ldrh r2, [r4, 0x3C]
-	strh r2, [r1, 0x16]
-	ldr r1, [r1]
-	bl _call_via_r1
-	ldr r0, =SpriteCallbackDummy
-	str r0, [r4, 0x1C]
-_0819F640:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_819F600
 
 	thumb_func_start sub_819F654
 sub_819F654: @ 819F654
