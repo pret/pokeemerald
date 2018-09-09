@@ -91,8 +91,24 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
-    {1, 2, 1, 0x1A, 2, 1, 2},
-    {0, 2, 5, 0x1A, 0xE, 1, 0x36},
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 1,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 1,
+        .baseBlock = 2
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 5,
+        .width = 26,
+        .height = 14,
+        .paletteNum = 1,
+        .baseBlock = 0x36
+    },
     DUMMY_WIN_TEMPLATE
 };
 

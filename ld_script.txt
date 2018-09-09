@@ -409,7 +409,6 @@ SECTIONS {
         src/metatile_behavior.o(.rodata);
         src/field_door.o(.rodata);
         src/field_player_avatar.o(.rodata);
-        data/field_player_avatar.o(.rodata);
         src/event_object_movement.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
@@ -475,7 +474,7 @@ SECTIONS {
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         src/trader.o(.rodata);
-        data/starter_choose.o(.rodata);
+        src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
@@ -545,7 +544,6 @@ SECTIONS {
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);
         src/battle_pyramid_bag.o(.rodata);
-        data/battle_pyramid_bag.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);
@@ -1132,7 +1130,7 @@ SECTIONS {
     anim_mon_front_pic_data :
     ALIGN(4)
     {
-        data/anim_mon_front_pics.o(anim_mon_front_pic_data);
+        src/anim_mon_front_pics.o(.rodata);
     } =0
 
     gap2 :
@@ -1145,7 +1143,7 @@ SECTIONS {
     gfx_data :
     ALIGN(4)
     {
-        data/graphics.o(gfx_data);
+        src/graphics.o(.rodata);
     } =0
 
     /* Discard everything not specifically mentioned above. */

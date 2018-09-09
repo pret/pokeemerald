@@ -1,10 +1,10 @@
 #ifndef GUARD_OVERWORLD_H
 #define GUARD_OVERWORLD_H
 
-struct UnkPlayerStruct
+struct InitialPlayerAvatarState
 {
-    u8 player_field_0;
-    u8 player_field_1;
+    u8 transitionFlags;
+    u8 direction;
 };
 
 struct LinkPlayerEventObject
@@ -16,7 +16,7 @@ struct LinkPlayerEventObject
 };
 
 // Exported RAM declarations
-extern struct WarpData gUnknown_020322DC;
+extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerEventObject gLinkPlayerEventObjects[4];
 
 extern u16 *gBGTilemapBuffers1;
@@ -26,7 +26,7 @@ extern u16 *gBGTilemapBuffers3;
 extern void (*gFieldCallback)(void);
 
 // Exported ROM declarations
-extern const struct UCoords32 gUnknown_08339D64[];
+extern const struct UCoords32 gDirectionToVectors[];
 
 void DoWhiteOut(void);
 void Overworld_ResetStateAfterFly(void);
@@ -45,13 +45,13 @@ const struct MapLayout *GetMapLayout(void);
 void ApplyCurrentWarp(void);
 void set_warp2_warp3_to_neg_1(void);
 void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-bool32 warp_data_is_not_neg_1(struct WarpData *warp);
+bool32 IsDummyWarp(struct WarpData *warp);
 struct MapHeader const *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
-struct MapHeader const *const warp1_get_mapheader(void);
-void set_current_map_header_from_sav1_save_old_name(void);
+struct MapHeader const *const GetDestinationWarpMapHeader(void);
+void LoadCurrentMapData(void);
 void LoadSaveblockMapHeader(void);
-void update_camera_pos_from_warpid(void);
-void warp_in(void);
+void SetPlayerCoordsFromWarp(void);
+void WarpIntoMap(void);
 void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId);
@@ -63,21 +63,21 @@ void Overworld_SetHealLocationWarp(u8 healLocationId);
 void sub_8084D5C(s16 a1, s16 a2);
 void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8084E14(void);
-void sub_8084E2C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-void warp1_set_to_warp2(void);
-void sub_8084E80(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-void sub_8084EBC(s16 x, s16 y);
+void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetFixedDiveWarpAsDestination(void);
+void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetFixedHoleWarpAsDestination(s16 x, s16 y);
 void warp1_set_to_sav1w(void);
 void sub_8084F2C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8084F6C(u8 a1);
 void sub_8084FAC(void);
 const struct MapConnection *GetMapConnection(u8 dir);
-bool8 sub_8084FF8(u8 dir, u16 x, u16 y);
-bool8 sub_8085058(u16 x, u16 y);
-bool8 sub_8085078(u16 x, u16 y);
+bool8 SetDiveWarp(u8 dir, u16 x, u16 y);
+bool8 SetDiveWarpEmerge(u16 x, u16 y);
+bool8 SetDiveWarpDive(u16 x, u16 y);
 void mliX_load_map(u8 mapGroup, u8 mapNum);
-void player_avatar_init_params_reset(void);
-void walkrun_find_lowest_active_bit_in_bitfield(void);
+void ResetInitialPlayerAvatarState(void);
+void StoreInitialPlayerAvatarState(void);
 bool32 Overworld_IsBikingAllowed(void);
 void SetDefaultFlashLevel(void);
 void Overworld_SetFlashLevel(s32 flashLevel);
@@ -96,7 +96,7 @@ void Overworld_ChangeMusicToDefault(void);
 void Overworld_ChangeMusicTo(u16 newMusic);
 u8 GetMapMusicFadeoutSpeed(void);
 void music_something(void);
-bool8 sub_80859A0(void);
+bool8 BGMusicStopped(void);
 void Overworld_FadeOutMapMusic(void);
 void UpdateAmbientCry(s16 *state, u16 *delayCounter);
 u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);

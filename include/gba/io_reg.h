@@ -574,8 +574,6 @@
 #define WINOUT_WINOBJ_OBJ   (1 << 12)
 #define WINOUT_WINOBJ_CLR   (1 << 13)
 
-#define WINHV_COORDS(m, n)     (((m) << 8) | (n))
-
 // BLDCNT
 // Bits 0-5 select layers for the 1st target
 #define BLDCNT_TGT1_BG0      (1 << 0)

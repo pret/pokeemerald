@@ -6024,7 +6024,7 @@ static void HblankCb_BattleDome(void)
         if (vCount < 50)
         {
             REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-            SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
+            SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
             return;
         }
         else if (vCount > 57)
@@ -6032,13 +6032,13 @@ static void HblankCb_BattleDome(void)
             if (vCount < 75)
             {
                 REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                SET_WIN0H_WIN1H(WINHV_COORDS(144, 152), WINHV_COORDS(88, 96));
+                SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
                 return;
             }
             else if (vCount < 82)
             {
                 REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
+                SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
                 return;
             }
             else if (vCount > 94)
@@ -6046,13 +6046,13 @@ static void HblankCb_BattleDome(void)
                 if (vCount < 103)
                 {
                     REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                    SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
+                    SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
                     return;
                 }
                 else if (vCount < 119)
                 {
                     REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                    SET_WIN0H_WIN1H(WINHV_COORDS(144, 152), WINHV_COORDS(88, 96));
+                    SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
                     return;
                 }
                 else if (vCount > 126)
@@ -6060,7 +6060,7 @@ static void HblankCb_BattleDome(void)
                     if (vCount_ < 135)
                     {
                         REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                        SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
+                        SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
                         return;
                     }
                 }
@@ -6449,12 +6449,12 @@ static void CopyDomeTrainerName(u8 *dst, u16 trainerId)
     {
         if (trainerId == TRAINER_PLAYER)
         {
-            for (i = 0; i < OT_NAME_LENGTH; i++)
+            for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 dst[i] = gSaveBlock2Ptr->playerName[i];
         }
         else if (trainerId < 300)
         {
-            for (i = 0; i < 7; i++)
+            for (i = 0; i < FRONTIER_TRAINER_NAME_LENGTH; i++)
                 dst[i] = gFacilityTrainers[trainerId].trainerName[i];
         }
         dst[i] = EOS;
@@ -6475,7 +6475,7 @@ static void CopyDomeBrainTrainerName(u8 *dst)
 {
     s32 i;
 
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < FRONTIER_TRAINER_NAME_LENGTH; i++)
         dst[i] = gTrainers[TRAINER_TUCKER].trainerName[i];
     dst[i] = EOS;
 }
