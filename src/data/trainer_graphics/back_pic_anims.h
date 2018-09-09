@@ -1,4 +1,4 @@
-const union AnimCmd gUnknown_08305C24[] =
+const union AnimCmd gAnimCmd_Brendan_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -8,7 +8,7 @@ const union AnimCmd gUnknown_08305C24[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08305C3C[] =
+const union AnimCmd gAnimCmd_May_Steven_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -18,7 +18,7 @@ const union AnimCmd gUnknown_08305C3C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08305C54[] =
+const union AnimCmd gAnimCmd_Wally_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -28,7 +28,7 @@ const union AnimCmd gUnknown_08305C54[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08305C6C[] =
+const union AnimCmd gAnimCmd_Red_1[] =
 {
     ANIMCMD_FRAME(1, 20),
     ANIMCMD_FRAME(2, 6),
@@ -38,7 +38,7 @@ const union AnimCmd gUnknown_08305C6C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08305C84[] =
+const union AnimCmd gAnimCmd_Leaf_1[] =
 {
     ANIMCMD_FRAME(1, 20),
     ANIMCMD_FRAME(2, 6),
@@ -48,7 +48,7 @@ const union AnimCmd gUnknown_08305C84[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08305C9C[] =
+const union AnimCmd gAnimCmd_RubySapphireBrendan_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -58,7 +58,7 @@ const union AnimCmd gUnknown_08305C9C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08305CB4[] =
+const union AnimCmd gAnimCmd_RubySapphireMay_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -68,62 +68,62 @@ const union AnimCmd gUnknown_08305CB4[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08305CCC[] =
+const union AnimCmd *const gTrainerBackAnims_Brendan[] =
 {
     AnimCmd_82FF540,
-    gUnknown_08305C24,
+    gAnimCmd_Brendan_1,
 };
 
-const union AnimCmd *const gUnknown_08305CD4[] =
+const union AnimCmd *const gTrainerBackAnims_May[] =
 {
     AnimCmd_82FF540,
-    gUnknown_08305C3C,
+    gAnimCmd_May_Steven_1,
 };
 
-const union AnimCmd *const gUnknown_08305CDC[] =
+const union AnimCmd *const gTrainerBackAnims_Red[] =
 {
     gAnimCmd_General_Frame0,
-    gUnknown_08305C6C,
+    gAnimCmd_Red_1,
 };
 
-const union AnimCmd *const gUnknown_08305CE4[] =
+const union AnimCmd *const gTrainerBackAnims_Leaf[] =
 {
     gAnimCmd_General_Frame0,
-    gUnknown_08305C84,
+    gAnimCmd_Leaf_1,
 };
 
-const union AnimCmd *const gUnknown_08305CEC[] =
+const union AnimCmd *const gTrainerBackAnims_RubySapphireBrendan[] =
 {
     AnimCmd_82FF540,
-    gUnknown_08305C9C,
+    gAnimCmd_RubySapphireBrendan_1,
 };
 
-const union AnimCmd *const gUnknown_08305CF4[] =
+const union AnimCmd *const gTrainerBackAnims_RubySapphireMay[] =
 {
     AnimCmd_82FF540,
-    gUnknown_08305CB4,
+    gAnimCmd_RubySapphireMay_1,
 };
 
-const union AnimCmd *const gUnknown_08305CFC[] =
+const union AnimCmd *const gTrainerBackAnims_Wally[] =
 {
     AnimCmd_82FF540,
-    gUnknown_08305C54,
+    gAnimCmd_Wally_1,
 };
 
-const union AnimCmd *const gUnknown_08305D04[] =
+const union AnimCmd *const gTrainerBackAnims_Steven[] =
 {
     AnimCmd_82FF540,
-    gUnknown_08305C3C,
+    gAnimCmd_May_Steven_1,
 };
 
-const union AnimCmd *const *const gUnknown_08305D0C[] =
+const union AnimCmd *const *const gTrainerBackAnimsPtrTable[] =
 {
-    gUnknown_08305CCC,
-    gUnknown_08305CD4,
-    gUnknown_08305CDC,
-    gUnknown_08305CE4,
-    gUnknown_08305CEC,
-    gUnknown_08305CF4,
-    gUnknown_08305CFC,
-    gUnknown_08305D04,
+    gTrainerBackAnims_Brendan,
+    gTrainerBackAnims_May,
+    gTrainerBackAnims_Red,
+    gTrainerBackAnims_Leaf,
+    gTrainerBackAnims_RubySapphireBrendan,
+    gTrainerBackAnims_RubySapphireMay,
+    gTrainerBackAnims_Wally,
+    gTrainerBackAnims_Steven,
 };

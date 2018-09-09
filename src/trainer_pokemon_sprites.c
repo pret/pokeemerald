@@ -19,7 +19,7 @@ extern const union AffineAnimCmd *const gUnknown_082FF618[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *const gPlayerMonSpriteAnimsTable[];
 extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[NUM_SPECIES];
-extern const union AnimCmd *const *const gUnknown_0830536C[];
+extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 
 // Static type declarations
 
@@ -146,7 +146,7 @@ static void AssignSpriteAnimsTable(bool8 isTrainer)
     if (!isTrainer)
         sCreatingSpriteTemplate.anims = gPlayerMonSpriteAnimsTable;
     else
-        sCreatingSpriteTemplate.anims = gUnknown_0830536C[0];
+        sCreatingSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[0];
 }
 
 static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer, bool8 ignoreDeoxys)
