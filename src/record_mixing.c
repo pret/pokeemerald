@@ -306,7 +306,7 @@ static void ReceiveExchangePacket(u32 which)
 static void PrintTextOnRecordMixing(const u8 *src)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    PrintTextOnWindow(0, 1, src, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, 1, src, 0, 1, 0, NULL);
     CopyWindowToVram(0, 3);
 }
 

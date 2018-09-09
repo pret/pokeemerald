@@ -668,7 +668,7 @@ void CB2_StartWallClock(void)
 
     WallClockInit();
 
-    PrintTextOnWindow(1, 1, gText_Confirm3, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(1, 1, gText_Confirm3, 0, 1, 0, NULL);
     PutWindowTilemap(1);
     schedule_bg_copy_tilemap_to_vram(2);
 }
@@ -716,7 +716,7 @@ void CB2_ViewWallClock(void)
 
     WallClockInit();
 
-    PrintTextOnWindow(1, 1, gText_Cancel4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(1, 1, gText_Cancel4, 0, 1, 0, NULL);
     PutWindowTilemap(1);
     schedule_bg_copy_tilemap_to_vram(2);
 }
@@ -783,7 +783,7 @@ static void Task_SetClock2(u8 taskId)
 static void Task_SetClock3(u8 taskId)
 {
     SetWindowBorderStyle(0, FALSE, 0x250, 0x0d);
-    PrintTextOnWindow(0, 1, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, 1, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
     CreateYesNoMenu(&gUnknown_085B21F4, 0x250, 0x0d, 1);

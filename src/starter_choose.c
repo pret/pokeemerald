@@ -470,7 +470,7 @@ static void Task_StarterChoose1(u8 taskId)
 {
     CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
     SetWindowBorderStyle(0, FALSE, 0x2A8, 0xD);
-    PrintTextOnWindow(0, 1, gText_BirchInTrouble, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, 1, gText_BirchInTrouble, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
     gTasks[taskId].func = Task_StarterChoose2;
@@ -524,7 +524,7 @@ static void Task_StarterChoose4(u8 taskId)
 {
     PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     FillWindowPixelBuffer(0, 0x11);
-    PrintTextOnWindow(0, 1, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, 1, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
     schedule_bg_copy_tilemap_to_vram(0);
     CreateYesNoMenu(&gUnknown_085B1DDC, 0x2A8, 0xD, 0);
     gTasks[taskId].func = Task_StarterChoose5;
@@ -582,10 +582,10 @@ static void CreateStarterPokemonLabel(u8 selection)
     FillWindowPixelBuffer(sStarterChooseWindowId, 0);
 
     width = GetStringCenterAlignXOffset(7, text, 0x68);
-    box_print(sStarterChooseWindowId, 7, width, 1, gUnknown_085B1E0C, 0, text);
+    AddTextPrinterParameterized3(sStarterChooseWindowId, 7, width, 1, gUnknown_085B1E0C, 0, text);
 
     width = GetStringCenterAlignXOffset(1, speciesName, 0x68);
-    box_print(sStarterChooseWindowId, 1, width, 0x11, gUnknown_085B1E0C, 0, speciesName);
+    AddTextPrinterParameterized3(sStarterChooseWindowId, 1, width, 0x11, gUnknown_085B1E0C, 0, speciesName);
 
     PutWindowTilemap(sStarterChooseWindowId);
     schedule_bg_copy_tilemap_to_vram(0);

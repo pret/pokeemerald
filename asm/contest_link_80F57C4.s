@@ -2237,7 +2237,7 @@ _080F6BD0:
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	movs r1, 0x7
 	bl GetWindowAttribute

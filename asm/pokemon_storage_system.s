@@ -4387,7 +4387,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, [r6]
 	ldr r1, =0x00000d1d
 	adds r2, r1
@@ -4398,7 +4398,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, [r6]
 	ldr r0, =0x00000d41
 	adds r2, r0
@@ -4409,7 +4409,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xA
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, [r6]
 	ldr r1, =0x00000d65
 	adds r2, r1
@@ -4420,7 +4420,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _080CA5E8
 	.pool
 _080CA588:
@@ -4434,7 +4434,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, [r6]
 	ldr r1, =0x00000cf9
 	adds r2, r1
@@ -4445,7 +4445,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, [r6]
 	ldr r0, =0x00000d1d
 	adds r2, r0
@@ -4456,7 +4456,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x6
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, [r6]
 	ldr r1, =0x00000d41
 	adds r2, r1
@@ -4467,7 +4467,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xA
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _080CA5E8:
 	movs r0, 0
 	movs r1, 0x2
@@ -5337,7 +5337,7 @@ _080CAD30:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xE
@@ -18189,7 +18189,7 @@ _080D17DA:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0x4
-	bl sub_8199F74
+	bl AddTextPrinterParameterized5
 	add sp, 0x14
 	pop {r4}
 	pop {r0}

@@ -635,34 +635,7 @@ gUnknown_0203CD88: @ 203CD88
 	.space 0x4
 
     .include "src/menu.o"
-
-    .align 2
-gUnknown_0203CE2C: @ 203CE2C
-	.space 0x4
-
-gUnknown_0203CE30: @ 203CE30
-	.space 0x4
-
-gUnknown_0203CE34: @ 203CE34
-	.space 0x4
-
-gUnknown_0203CE38: @ 203CE38
-	.space 0x4
-
-gUnknown_0203CE3C: @ 203CE3C
-	.space 0x4
-
-gUnknown_0203CE40: @ 203CE40
-	.space 0x4
-
-gUnknown_0203CE44: @ 203CE44
-	.space 0x4
-
-gUnknown_0203CE48: @ 203CE48
-	.space 0x4
-
-gUnknown_0203CE4C: @ 203CE4C
-	.space 0x4
+    .include "src/battle_factory.o"
 
 gUnknown_0203CE50: @ 203CE50
 	.space 0x4

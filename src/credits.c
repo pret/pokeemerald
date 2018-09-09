@@ -1197,7 +1197,7 @@ static void sub_81755BC(const u8 *string, u8 y, u8 a2)
     }
     
     x = GetStringCenterAlignXOffsetWithLetterSpacing(1, string, 0xF0, 1);
-    AddTextPrinterParameterized2(0, 1, x, y, 1, 0, color, -1, string);
+    AddTextPrinterParameterized4(0, 1, x, y, 1, 0, color, -1, string);
 }
 
 void sub_8175620(void)

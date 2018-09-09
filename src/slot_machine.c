@@ -725,7 +725,7 @@ extern const u8 gText_YouveRunOutOfCoins[];
 bool8 sub_8101F44(struct Task *task)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    PrintTextOnWindow(0, 1, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, 1, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 7;
     return FALSE;
@@ -966,7 +966,7 @@ bool8 sub_81022F0(struct Task *task)
 bool8 sub_8102318(struct Task *task)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    PrintTextOnWindow(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sub_80323CC(0x15, 7, 0x214, 0x180, 0xE, 0xF);
     sSlotMachine->state = 22;
@@ -996,7 +996,7 @@ bool8 sub_8102344(struct Task *task)
 bool8 sub_810239C(struct Task *task)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    PrintTextOnWindow(0, 1, gText_YouveGot9999Coins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, 1, gText_YouveGot9999Coins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 24;
     return FALSE;
@@ -1015,7 +1015,7 @@ bool8 sub_81023B8(struct Task *task)
 bool8 sub_81023E0_(struct Task *task)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    PrintTextOnWindow(0, 1, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, 1, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 26;
     return FALSE;
