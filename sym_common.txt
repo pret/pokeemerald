@@ -99,14 +99,6 @@ gUnknown_030061EC: @ 30061EC
 
     .include "save.o"
 
-    .space 0x8
-
-gRamSaveSectionLocations: @ 3006220
-	.space 0x74
-
-gUnknown_03006294: @ 3006294
-	.space 0x4
-
 gUnknown_03006298: @ 3006298
 	.space 0x8
 

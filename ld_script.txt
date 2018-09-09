@@ -256,7 +256,6 @@ SECTIONS {
         src/item_icon.o(.text);
         asm/party_menu.o(.text);
         src/battle_tent.o(.text);
-        asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
         src/unk_81BAD84.o(.text);

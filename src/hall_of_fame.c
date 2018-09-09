@@ -28,6 +28,7 @@
 #include "overworld.h"
 #include "menu.h"
 #include "trainer_pokemon_sprites.h"
+#include "data2.h"
 
 struct HallofFameMon
 {
@@ -57,10 +58,6 @@ static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
 extern bool8 gHasHallOfFameRecords;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern MainCallback gGameContinueCallback;
-extern u32 gDamagedSaveSectors;
-extern u8 gReservedSpritePaletteCount;
-extern const u8 gSpeciesNames[][11];
 
 #define HALL_OF_FAME_MAX_TEAMS 50
 
@@ -84,10 +81,6 @@ extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
 
 extern void sub_8175620(void);
-extern u8 TrySavingData(u8);
-extern void sub_8197434(u8, u8);
-extern u16 sub_818D97C(u8 playerGender, u8);
-extern void sub_8198204(u8 *dst, const u8 *src, u8, u8, u8);
 extern bool8 sub_80F9C30(void);
 extern void sub_8198314(void);
 extern void ReturnFromHallOfFamePC(void);
@@ -182,19 +175,17 @@ static const u8 sUnknown_085E5388[] = {0, 1, 2, 0};
 
 static const u8 sUnknown_085E538C[] = {0, 2, 3, 0, 4, 5, 0, 0};
 
-static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet =
+static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet[] =
 {
-    gContestConfetti_Gfx, 0x220, 1001
+    {gContestConfetti_Gfx, 0x220, 1001},
+    {},
 };
 
-static const u8 sUnused0[8] = {};
-
-static const struct CompressedSpritePalette sHallOfFame_ConfettiSpritePalette =
+static const struct CompressedSpritePalette sHallOfFame_ConfettiSpritePalette[] =
 {
-    gContestConfetti_Pal, 1001
+    {gContestConfetti_Pal, 1001},
+    {},
 };
-
-static const u8 sUnused1[8] = {};
 
 static const s16 sHallOfFame_MonFullTeamPositions[6][4] =
 {
@@ -610,7 +601,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
     gSprites[spriteId].tSpecies = currMon->species;
     gSprites[spriteId].callback = SpriteCB_GetOnScreenAndAnimate;
     gTasks[taskId].tMonSpriteId(currMonId) = spriteId;
-    sub_8197434(0, 1);
+    sub_8197434(0, TRUE);
     gTasks[taskId].func = Task_Hof_PrintMonInfoAfterAnimating;
 }
 
@@ -964,9 +955,9 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_HOFNumber);
 
     if (gTasks[taskId].tCurrTeamNo <= 0)
-        sub_8198204(gStringVar4, gText_PickCancel, 0, 0, 1);
+        sub_8198204(gStringVar4, gText_PickCancel, 0, 0, TRUE);
     else
-        sub_8198204(gStringVar4, gText_PickNextCancel, 0, 0, 1);
+        sub_8198204(gStringVar4, gText_PickNextCancel, 0, 0, TRUE);
 
     gTasks[taskId].func = Task_HofPC_PrintMonInfo;
 }
@@ -1300,8 +1291,8 @@ static void sub_8174F70(void)
     ResetAllPicSprites();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
-    LoadCompressedObjectPic(&sHallOfFame_ConfettiSpriteSheet);
-    LoadCompressedObjectPalette(&sHallOfFame_ConfettiSpritePalette);
+    LoadCompressedObjectPic(sHallOfFame_ConfettiSpriteSheet);
+    LoadCompressedObjectPalette(sHallOfFame_ConfettiSpritePalette);
 }
 
 static void sub_8174FAC(void)
@@ -1517,8 +1508,8 @@ static void sub_8175364(u8 taskId)
             gSpecialVar_0x8004 = var;
             gSpecialVar_0x8005 = 0xFFFF;
         }
-        LoadCompressedObjectPic(&sHallOfFame_ConfettiSpriteSheet);
-        LoadCompressedObjectPalette(&sHallOfFame_ConfettiSpritePalette);
+        LoadCompressedObjectPic(sHallOfFame_ConfettiSpriteSheet);
+        LoadCompressedObjectPalette(sHallOfFame_ConfettiSpritePalette);
         data[0]++;
         break;
     case 1:

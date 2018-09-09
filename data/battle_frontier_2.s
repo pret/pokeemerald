@@ -6,29 +6,6 @@
 
 	.section .rodata
 
-gUnknown_08610918:: @ 8610918
-	.byte 0x00, 0x00, 0x00, 0x00, 0xff, 0x7f, 0x00, 0x00, 0x1f, 0x00
-
-gUnknown_08610922:: @ 8610922
-	.byte 0x00, 0x02, 0x00
-
-gUnknown_08610925:: @ 8610925
-	.byte 0x00, 0x04, 0x00
-
-	.align 2
-gUnknown_08610928:: @ 8610928
-	.4byte 0x00000001, sub_819F20C
-	.4byte 0x00000001, sub_819F20C
-	.4byte 0x00000001, sub_819F20C
-	.4byte 0x00000003, sub_819F1AC
-
-	.align 2
-gUnknown_08610948:: @ 8610948
-	.4byte 0x00000001, sub_819F20C
-	.4byte 0x00000001, sub_819F20C
-	.4byte 0x00000001, sub_819F20C
-	.4byte 0x00000002, sub_819F1DC
-	.4byte 0x00000003, sub_819F1AC
 
 	.align 2 @ struct, eight bytes x6 for names in different languages, then 0x28 more bytes of data
 gUnknown_08610970:: @ 8610970
