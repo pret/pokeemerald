@@ -236,7 +236,7 @@ gUnknown_08610894:: @ 8610894
 	spr_template 0x006d, 0x0067, gUnknown_086106F0, gUnknown_0861075C, NULL, gUnknown_08610828, SpriteCallbackDummy
 
 	.align 2
-gUnknown_086108AC:: @ 86108AC
+sSwap_MenuOptionFuncs:: @ 86108AC
 	.4byte sub_819F114
 	.4byte sub_819F0CC
 	.4byte sub_819F134
