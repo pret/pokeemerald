@@ -61,7 +61,16 @@ EWRAM_DATA static u16 sHatchedEggMotherMoves[4] = {0};
 
 #include "data/pokemon/egg_moves.h"
 
-static const struct WindowTemplate sDaycareLevelMenuWindowTemplate = {0, 0xF, 1, 0xE, 6, 0xF, 8};
+static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
+{
+    .priority = 0,
+    .tilemapLeft = 15,
+    .tilemapTop = 1,
+    .width = 14,
+    .height = 6,
+    .paletteNum = 15,
+    .baseBlock = 8
+};
 
 static const struct ListMenuItem sLevelMenuItems[] =
 {

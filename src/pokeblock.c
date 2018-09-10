@@ -294,21 +294,118 @@ static const struct Pokeblock sFavoritePokeblocksTable[] =
 
 static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
 {
-    {0, 2, 1, 9, 2, 0xF, 0x1E},
-    {0, 0xF, 1, 0xE, 0x12, 0xF, 0x30},
-    {0, 2, 0xD, 5, 2, 0xF, 0x12C},
-    {0, 2, 0xF, 5, 2, 0xF, 0x136},
-    {0, 2, 0x11, 5, 2, 0xF, 0x140},
-    {0, 8, 0xD, 5, 2, 0xF, 0x14A},
-    {0, 8, 0xF, 5, 2, 0xF, 0x154},
-    {0, 0xB, 0x11, 2, 2, 0xF, 0x15E},
-    {1, 7, 5, 6, 6, 0xF, 0x162},
-    {1, 7, 7, 6, 4, 0xF, 0x186},
-    {1, 2, 0xF, 0x1B, 4, 0xF, 0x19E},
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 1,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x1E
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 15,
+        .tilemapTop = 1,
+        .width = 14,
+        .height = 18,
+        .paletteNum = 15,
+        .baseBlock = 0x30
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 13,
+        .width = 5,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x12C
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 5,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x136
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 17,
+        .width = 5,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x140
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 8,
+        .tilemapTop = 13,
+        .width = 5,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x14A
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 8,
+        .tilemapTop = 15,
+        .width = 5,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x154
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 17,
+        .width = 2,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x15E
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 7,
+        .tilemapTop = 5,
+        .width = 6,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 0x162
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 7,
+        .tilemapTop = 7,
+        .width = 6,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x186
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x19E
+    },
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sTossPkblockWindowTemplate = {1, 0x15, 9, 5, 4, 0xF, 0x20A};
+static const struct WindowTemplate sTossPkblockWindowTemplate =
+{
+    .priority = 1,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x20A
+};
 
 static const struct ListMenuTemplate sPokeblockListMenuTemplate =
 {

@@ -101,10 +101,42 @@ static const u8 sTextColors[2][3] =
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
-    {0x01, 0x0b, 0x04, 0x08, 0x02, 0x0f, 0x0045}, // WIN_BERRY_NAME
-    {0x01, 0x0b, 0x07, 0x12, 0x04, 0x0f, 0x0055}, // WIN_SIZE_FIRM
-    {0x01, 0x04, 0x0e, 0x19, 0x04, 0x0f, 0x009d}, // WIN_DESC
-    {0x00, 0x02, 0x00, 0x08, 0x02, 0x0f, 0x0101}, // WIN_BERRY_TAG
+    { // WIN_BERRY_NAME
+        .priority = 1,
+        .tilemapLeft = 11,
+        .tilemapTop = 4,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 69,
+    },
+    { // WIN_SIZE_FIRM
+        .priority = 1,
+        .tilemapLeft = 11,
+        .tilemapTop = 7,
+        .width = 18,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 85,
+    },
+    { // WIN_DESC
+        .priority = 1,
+        .tilemapLeft = 4,
+        .tilemapTop = 14,
+        .width = 25,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 157,
+    },
+    { // WIN_BERRY_TAG
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 0,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 257,
+    },
     DUMMY_WIN_TEMPLATE
 };
 

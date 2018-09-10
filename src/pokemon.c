@@ -66,8 +66,8 @@ extern const union AffineAnimCmd *const gUnknown_082FF618[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *gPlayerMonSpriteAnimsTable[];
 extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[];
-extern const union AnimCmd *const *const gUnknown_08305D0C[];
-extern const union AnimCmd *const *const gUnknown_0830536C[];
+extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
+extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const struct UnknownPokemonStruct3 gUnknown_08610970[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
@@ -3554,7 +3554,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
         gMultiuseSpriteTemplate = gUnknown_08329DF8[trainerSpriteId];
-        gMultiuseSpriteTemplate.anims = gUnknown_08305D0C[trainerSpriteId];
+        gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerSpriteId];
     }
     else
     {
@@ -3562,7 +3562,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
         else
             gMultiuseSpriteTemplate = gUnknown_08329D98[battlerPosition];
-        gMultiuseSpriteTemplate.anims = gUnknown_0830536C[trainerSpriteId];
+        gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerSpriteId];
     }
 }
 
@@ -3574,7 +3574,7 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 arg0, u8 battlerPosition)
         gMultiuseSpriteTemplate = gUnknown_08329D98[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = arg0;
-    gMultiuseSpriteTemplate.anims = gUnknown_0830536C[arg0];
+    gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[arg0];
 }
 
 static void EncryptBoxMon(struct BoxPokemon *boxMon)
