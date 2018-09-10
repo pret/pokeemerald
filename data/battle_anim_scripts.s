@@ -1,13 +1,16 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/moves.h"
+	.include "asm/macros.inc"
 	.include "asm/macros/battle_anim_script.inc"
+	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
 
 .align 2
-gUnknown_082C8D64:: @ 82C8D64
-	.2byte 0x2F, 0xC3, 0x140, 0xFFFF
+gMovesWithQuietBGM:: @ 82C8D64
+	.2byte MOVE_SING, MOVE_PERISH_SONG, MOVE_GRASS_WHISTLE, 0xFFFF
 
 .align 2
 gBattleAnims_Moves:: @ 82C8D6C
@@ -386,7 +389,7 @@ gBattleAnims_VariousTable:: @ 82C9320
 	.4byte Anim_StatChange
 	.4byte Anim_SubsituteOff
 	.4byte Anim_SubsituteOn
-	.4byte Anim_Table_4
+	.4byte Anim_PokeblockThrow
 	.4byte Anim_ItemKnockOff
 	.4byte Status_Wrap
 	.4byte Anim_ItemEffect
@@ -402,7 +405,7 @@ gBattleAnims_VariousTable:: @ 82C9320
 	.4byte Anim_SnatchMove
 	.4byte Anim_FutureSightHit
 	.4byte Anim_DoomDesireHit
-	.4byte Anim_Table_x14
+	.4byte Anim_FocusPunchSetUp
 	.4byte Status_Ingrain
 	.4byte Anim_WishHeal
 
@@ -434,9 +437,8 @@ Move_DOUBLE_SLAP:
 	loadspritegfx 0x2797
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	choosetwoturnanim AnimScript_82C93F4, AnimScript_82C9408
-
-AnimScript_82C93DA:
+	choosetwoturnanim Anim_DoubleSlapLeft, Anim_DoubleSlapRight
+Anim_DoubleSlapContinue:
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W003, +63
 	waitforvisualfinish
@@ -444,13 +446,13 @@ AnimScript_82C93DA:
 	blendoff
 	end
 
-AnimScript_82C93F4:
+Anim_DoubleSlapLeft:
 	createsprite gUnknown_08597358, 0x2, -8, 0, 1, 2
-	goto AnimScript_82C93DA
+	goto Anim_DoubleSlapContinue
 
-AnimScript_82C9408:
+Anim_DoubleSlapRight:
 	createsprite gUnknown_08597358, 0x2, 8, 0, 1, 2
-	goto AnimScript_82C93DA
+	goto Anim_DoubleSlapContinue
 
 Move_POISON_POWDER:
 	loadspritegfx 0x2751
@@ -624,18 +626,18 @@ Move_SUPERSONIC:
 	monbgprio_2A ANIM_ATTACKER
 	setalpha 0x80C
 	createvisualtask sub_80D52D0, 0x2, 0, 2, 0, 8, 1
-	call AnimScript_82C99FF
-	call AnimScript_82C99FF
-	call AnimScript_82C99FF
-	call AnimScript_82C99FF
-	call AnimScript_82C99FF
-	call AnimScript_82C99FF
+	call Anim_Supersonic1
+	call Anim_Supersonic1
+	call Anim_Supersonic1
+	call Anim_Supersonic1
+	call Anim_Supersonic1
+	call Anim_Supersonic1
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
 
-AnimScript_82C99FF:
+Anim_Supersonic1:
 	playsewithpan SE_W048, -64
 	createsprite gUnknown_08593428, 0x82, 16, 0, 0, 0, 30, 0
 	delay 0x2
@@ -644,14 +646,14 @@ AnimScript_82C99FF:
 Move_SCREECH:
 	loadspritegfx 0x27B4
 	createvisualtask sub_80D52D0, 0x2, 0, 3, 0, 2, 1
-	call AnimScript_82C9A4C
-	call AnimScript_82C9A4C
+	call Anim_Screech1
+	call Anim_Screech1
 	delay 0x10
 	createvisualtask sub_80D5EB8, 0x5, 0, 6, 2048, 2, 1
 	waitforvisualfinish
 	end
 
-AnimScript_82C9A4C:
+Anim_Screech1:
 	playsewithpan SE_W103, -64
 	createsprite gUnknown_08593440, 0x82, 16, 0, 0, 0, 30, 0
 	delay 0x2
@@ -687,14 +689,14 @@ Move_FLAME_WHEEL:
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 8, 1
 	createvisualtask sub_80A7B98, 0x3, 1, RGB_RED, 12, 1, 1
 	playsewithpan SE_W172B, +63
-	call AnimScript_82D2D18
+	call Anim_FireMoveEffect
 	delay 0x7
 	createsprite gUnknown_0857FE58, 0x2, 0, 0, 9
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-AnimScript_82C9B50:
+Anim_FlameWheel1: @ Unused
 	createsprite gUnknown_08595584, 0x3, 0, 0, 50
 	delay 0x4
 	return
@@ -827,7 +829,7 @@ Move_POISON_STING:
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 5, 1
 	playsewithpan SE_W030, +63
 	waitforvisualfinish
-	call AnimScript_82D7A71
+	call Anim_PoisonEffect
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -856,37 +858,37 @@ Move_TWINEEDLE:
 Move_FIRE_BLAST:
 	loadspritegfx 0x272D
 	createsoundtask sub_8158B30, 144, 145
-	call AnimScript_82C9FE9
-	call AnimScript_82C9FE9
-	call AnimScript_82C9FE9
+	call Anim_FireBlast1
+	call Anim_FireBlast1
+	call Anim_FireBlast1
 	delay 0x18
-	createvisualtask sub_8116620, 0xA, 1, 3, 0, 8, 0
+	createvisualtask sub_8116620, 0xA, 1, 3, 0, 8, RGB_BLACK
 	waitforvisualfinish
 	delay 0x13
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 20, 1
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	delay 0x3
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	delay 0x3
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	delay 0x3
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	delay 0x3
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	delay 0x3
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	delay 0x3
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	delay 0x3
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	delay 0x3
-	call AnimScript_82CA02D
+	call Anim_FireBlast2
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 1, 2, 8, 0, 0
+	createvisualtask sub_8116620, 0xA, 1, 2, 8, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
-AnimScript_82C9FE9:
+Anim_FireBlast1:
 	createsprite gUnknown_0859551C, 0x82, 0, 0, 0
 	createsprite gUnknown_0859551C, 0x82, 0, 0, 51
 	createsprite gUnknown_0859551C, 0x82, 0, 0, 102
@@ -895,7 +897,7 @@ AnimScript_82C9FE9:
 	delay 0x5
 	return
 
-AnimScript_82CA02D:
+Anim_FireBlast2:
 	createsprite gUnknown_0859556C, 0x82, 0, 0, 10, 0, -2
 	createsprite gUnknown_0859556C, 0x82, 0, 0, 13, -2, 0
 	createsprite gUnknown_0859556C, 0x82, 0, 0, 13, 2, 0
@@ -928,12 +930,12 @@ Move_EMBER:
 	createsprite gUnknown_085954D4, 0x82, 20, 0, 16, 24, 20, 1
 	delay 0x10
 	playsewithpan SE_W172, +63
-	call AnimScript_82CA135
-	call AnimScript_82CA135
-	call AnimScript_82CA135
+	call Anim_Ember1
+	call Anim_Ember1
+	call Anim_Ember1
 	end
 
-AnimScript_82CA135:
+Anim_Ember1:
 	createsprite gUnknown_085954EC, 0x82, -24, 24, 24, 24, 20, 1, 1
 	delay 0x4
 	return
@@ -947,12 +949,12 @@ Move_MEGA_PUNCH:
 	setalpha 0x80C
 	playsewithpan SE_W025, +63
 	createsprite gUnknown_08595F48, 0x3, 0, 0, 0, 50
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, RGB_WHITE
 	delay 0x32
-	call AnimScript_82CA1E9
+	call Anim_SetImpactBackground
 	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 22, 1
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, RGB_WHITE
 	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
@@ -963,28 +965,28 @@ Move_MEGA_PUNCH:
 	waitbgfadein
 	end
 
-AnimScript_82CA1E9:
+Anim_SetImpactBackground:
 	delay 0x2
-	createvisualtask sub_8117E60, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82CA220
-	createvisualtask sub_815A8C8, 0x2
-	jumpargeq 0x7, 0x0, AnimScript_82CA212
-	jumpargeq 0x7, 0x1, AnimScript_82CA219
+	createvisualtask AnimTask_IsContest, 0x2
+	jumprettrue Anim_SetImpactContestsBG
+	createvisualtask AnimTask_IsTargetPlayerSide, 0x2
+	jumpretfalse Anim_SetImpactOpponentBG
+	jumprettrue Anim_SetImpactPlayerBG
 
-AnimScript_82CA211:
+Anim_SetImpactBackgroundRet:
 	return
 
-AnimScript_82CA212:
+Anim_SetImpactOpponentBG:
 	changebg BG_IMPACT_OPPONENT
-	goto AnimScript_82CA211
+	goto Anim_SetImpactBackgroundRet
 
-AnimScript_82CA219:
+Anim_SetImpactPlayerBG:
 	changebg BG_IMPACT_PLAYER
-	goto AnimScript_82CA211
+	goto Anim_SetImpactBackgroundRet
 
-AnimScript_82CA220:
+Anim_SetImpactContestsBG:
 	changebg BG_IMPACT_CONTESTS
-	goto AnimScript_82CA211
+	goto Anim_SetImpactBackgroundRet
 
 Move_MEGA_KICK:
 	loadspritegfx 0x2797
@@ -995,13 +997,13 @@ Move_MEGA_KICK:
 	setalpha 0x80C
 	playsewithpan SE_W025, +63
 	createsprite gUnknown_08595F48, 0x3, 0, 0, 1, 50
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, RGB_WHITE
 	delay 0x32
 	playsewithpan SE_W025B, +63
-	call AnimScript_82CA1E9
+	call Anim_SetImpactBackground
 	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 22, 1
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, RGB_WHITE
 	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -1016,9 +1018,8 @@ Move_COMET_PUNCH:
 	loadspritegfx 0x279F
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	choosetwoturnanim AnimScript_82CA2F1, AnimScript_82CA316
-
-AnimScript_82CA2D7:
+	choosetwoturnanim Anim_CometPunchLeft, Anim_CometPunchRight
+Anim_CometPunchContinue:
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W004, +63
 	waitforvisualfinish
@@ -1026,15 +1027,15 @@ AnimScript_82CA2D7:
 	blendoff
 	end
 
-AnimScript_82CA2F1:
+Anim_CometPunchLeft:
 	createsprite gUnknown_08597358, 0x2, -8, -8, 1, 2
 	createsprite gUnknown_08595E98, 0x3, -8, 0, 8, 1, 0
-	goto AnimScript_82CA2D7
+	goto Anim_CometPunchContinue
 
-AnimScript_82CA316:
+Anim_CometPunchRight:
 	createsprite gUnknown_08597358, 0x2, 8, -8, 1, 2
 	createsprite gUnknown_08595E98, 0x3, 8, 0, 8, 1, 0
-	goto AnimScript_82CA2D7
+	goto Anim_CometPunchContinue
 
 Move_SONIC_BOOM:
 	loadspritegfx 0x2713
@@ -1042,23 +1043,23 @@ Move_SONIC_BOOM:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
-	call AnimScript_82CA372
-	call AnimScript_82CA372
-	call AnimScript_82CA372
+	call Anim_SonicBoom1
+	call Anim_SonicBoom1
+	call Anim_SonicBoom1
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 10, 1
-	call AnimScript_82CA38A
+	call Anim_SonicBoom2
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82CA372:
+Anim_SonicBoom1:
 	playsewithpan SE_W013B, -64
 	createsprite gUnknown_08593398, 0x82, 16, 0, 0, 0, 15
 	delay 0x4
 	return
 
-AnimScript_82CA38A:
+Anim_SonicBoom2:
 	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 2
 	delay 0x4
 	return
@@ -1066,21 +1067,21 @@ AnimScript_82CA38A:
 Move_THUNDER_SHOCK:
 	loadspritegfx 0x2711
 	loadspritegfx 0x271B
-	createvisualtask sub_8116620, 0xA, 1, 0, 0, 6, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 0, 6, RGB_BLACK
 	waitforvisualfinish
 	delay 0xA
 	createvisualtask sub_810A7DC, 0x5, 0, -44, 0
 	playsewithpan SE_W085, +63
 	delay 0x9
-	createvisualtask sub_8116620, 0xA, 4, 0, 0, 13, 0
+	createvisualtask sub_8116620, 0xA, 4, 0, 0, 13, RGB_BLACK
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 4, 0, 13, 0, 0
-	waitforvisualfinish
-	delay 0x14
-	call AnimScript_82D7BEA
+	createvisualtask sub_8116620, 0xA, 4, 0, 13, 0, RGB_BLACK
 	waitforvisualfinish
 	delay 0x14
-	createvisualtask sub_8116620, 0xA, 1, 0, 6, 0, 0
+	call Anim_ParalysisEffect
+	waitforvisualfinish
+	delay 0x14
+	createvisualtask sub_8116620, 0xA, 1, 0, 6, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -1088,7 +1089,7 @@ Move_THUNDERBOLT:
 	loadspritegfx 0x2711
 	loadspritegfx 0x282A
 	loadspritegfx 0x271B
-	createvisualtask sub_8116620, 0xA, 1, 0, 0, 6, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 0, 6, RGB_BLACK
 	waitforvisualfinish
 	delay 0xA
 	createvisualtask sub_810A7DC, 0x5, 24, -52, 0
@@ -1100,9 +1101,9 @@ Move_THUNDERBOLT:
 	createvisualtask sub_810A7DC, 0x5, 0, -60, 1
 	playsewithpan SE_W085, +63
 	delay 0x9
-	createvisualtask sub_8116620, 0xA, 4, 0, 0, 13, 0
+	createvisualtask sub_8116620, 0xA, 4, 0, 0, 13, RGB_BLACK
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 4, 0, 13, 0, 0
+	createvisualtask sub_8116620, 0xA, 4, 0, 13, 0, RGB_BLACK
 	waitforvisualfinish
 	delay 0x14
 	createsprite gUnknown_085957E0, 0x83, 44, 0, 0, 3
@@ -1116,20 +1117,20 @@ Move_THUNDERBOLT:
 	createsprite gUnknown_085957F8, 0x84, 0, 0, 16, 44, 224, 40, 2, -32765
 	playsewithpan SE_W063, +63
 	delay 0x0
-	createvisualtask sub_8116620, 0xA, 1, 0, 2, 2, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 2, 2, RGB_BLACK
 	delay 0x6
-	createvisualtask sub_8116620, 0xA, 1, 0, 6, 6, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 6, 6, RGB_BLACK
 	delay 0x6
-	createvisualtask sub_8116620, 0xA, 1, 0, 2, 2, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 2, 2, RGB_BLACK
 	delay 0x6
-	createvisualtask sub_8116620, 0xA, 1, 0, 6, 6, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 6, 6, RGB_BLACK
 	waitforvisualfinish
 	delay 0x14
 	waitplaysewithpan SE_W085B, +63, 0x13
-	call AnimScript_82D7BEA
+	call Anim_ParalysisEffect
 	waitforvisualfinish
 	delay 0x14
-	createvisualtask sub_8116620, 0xA, 1, 0, 6, 0, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 6, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -1137,7 +1138,7 @@ Move_THUNDER_WAVE:
 	loadspritegfx 0x2711
 	loadspritegfx 0x271B
 	loadspritegfx 0x27BD
-	createvisualtask sub_8116620, 0xA, 1, 0, 0, 6, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 0, 6, RGB_BLACK
 	waitforvisualfinish
 	delay 0xA
 	createvisualtask sub_810A7DC, 0x5, 0, -48, 0
@@ -1150,7 +1151,7 @@ Move_THUNDER_WAVE:
 	delay 0x4
 	createsprite gUnknown_08595840, 0x82, -16, 16
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 1, 0, 6, 0, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 6, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -1159,15 +1160,14 @@ Move_BEAT_UP:
 	loadspritegfx 0x279F
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	choosetwoturnanim AnimScript_82CA648, AnimScript_82CA6B9
-
-AnimScript_82CA643:
+	choosetwoturnanim Anim_BeatUpLeft, Anim_BeatUpRight
+Anim_BeatUpContinue:
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
 
-AnimScript_82CA648:
+Anim_BeatUpLeft:
 	createsprite gUnknown_08597358, 0x82, -20, -20, 1, 2
 	createsprite gUnknown_08595E98, 0x83, -20, -12, 8, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
@@ -1177,9 +1177,9 @@ AnimScript_82CA648:
 	createsprite gUnknown_08595E98, 0x83, 8, 8, 8, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, +63
-	goto AnimScript_82CA643
+	goto Anim_BeatUpContinue
 
-AnimScript_82CA6B9:
+Anim_BeatUpRight:
 	createsprite gUnknown_08597358, 0x82, 12, -20, 1, 2
 	createsprite gUnknown_08595E98, 0x83, 12, -12, 8, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
@@ -1189,7 +1189,7 @@ AnimScript_82CA6B9:
 	createsprite gUnknown_08595E98, 0x83, -12, 8, 8, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, +63
-	goto AnimScript_82CA643
+	goto Anim_BeatUpContinue
 
 Move_STOMP:
 	loadspritegfx 0x279F
@@ -1265,7 +1265,7 @@ Move_REVERSAL:
 	createsprite gUnknown_0859728C, 0x2, 31, 3, 3, 0x7FFF, 8, 0, 0
 	waitforvisualfinish
 	delay 0x1E
-	createvisualtask sub_8115A04, 0x2, 31, 3, 2, 0, 10, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 31, 3, 2, 0, 10, RGB_WHITE
 	delay 0xA
 	playsewithpan SE_W179, -64
 	createsprite gUnknown_085CE5D8, 0x2, 26, 0
@@ -1292,9 +1292,8 @@ Move_PURSUIT:
 	waitbgfadein
 	delay 0x0
 	setalpha 0x80C
-	choosetwoturnanim AnimScript_82CA99F, AnimScript_82CA9C8
-
-AnimScript_82CA996:
+	choosetwoturnanim Anim_PursuitNormal, Anim_PursuitOnSwitchout
+Anim_PursuitContinue:
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -1303,17 +1302,17 @@ AnimScript_82CA996:
 	waitbgfadein
 	end
 
-AnimScript_82CA99F:
+Anim_PursuitNormal:
 	playsewithpan SE_W004, +63
 	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_80D6388, 0x5, 0, 1, 6, 1, 0
-	goto AnimScript_82CA996
+	goto Anim_PursuitContinue
 
-AnimScript_82CA9C8:
+Anim_PursuitOnSwitchout:
 	playsewithpan SE_W004, +63
 	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 1
 	createvisualtask sub_80D6388, 0x5, 0, 1, 6, 1, 0
-	goto AnimScript_82CA996
+	goto Anim_PursuitContinue
 
 Move_SPIKE_CANNON:
 	loadspritegfx 0x27B1
@@ -1347,7 +1346,7 @@ Move_SWORDS_DANCE:
 	createvisualtask sub_80D5830, 0x2, 0, 16, 6, 1, 4
 	createsprite gUnknown_08593380, 0x2, 0, 0
 	delay 0x16
-	createvisualtask sub_8115D94, 0x2, 10005, 2, 2, 32754, 16, 0, 0
+	createvisualtask sub_8115D94, 0x2, 0x2715, 2, 2, RGB(18, 31, 31), 16, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	blendoff
@@ -1366,7 +1365,7 @@ Move_PSYCH_UP:
 	delay 0x4
 	playsewithpan SE_W060, -64
 	createvisualtask sub_80D6064, 0x5, -5, -5, 10, 0, 1
-	createvisualtask sub_8116620, 0x9, 2, 2, 10, 0, 1023
+	createvisualtask sub_8116620, 0x9, 2, 2, 10, 0, RGB_YELLOW
 	delay 0x1E
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
@@ -1379,7 +1378,7 @@ Move_DIZZY_PUNCH:
 	loadspritegfx 0x2797
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	call AnimScript_82CAC77
+	call Anim_DizzyPunch1
 	createsprite gUnknown_08595E98, 0x85, 16, 8, 20, 1, 0
 	createsprite gUnknown_08597358, 0x84, 16, 0, 1, 1
 	playsewithpan SE_W004, +63
@@ -1390,7 +1389,7 @@ Move_DIZZY_PUNCH:
 	createsprite gUnknown_08595F78, 0x83, 16, 8, -128, -22
 	createsprite gUnknown_08595F78, 0x83, 16, 8, -384, -31
 	delay 0xA
-	call AnimScript_82CAC77
+	call Anim_DizzyPunch1
 	createsprite gUnknown_08595E98, 0x85, -16, -8, 20, 1, 0
 	createsprite gUnknown_08597358, 0x84, -16, -16, 1, 1
 	playsewithpan SE_W233B, +63
@@ -1405,7 +1404,7 @@ Move_DIZZY_PUNCH:
 	blendoff
 	end
 
-AnimScript_82CAC77:
+Anim_DizzyPunch1:
 	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	delay 0x6
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 7, 1
@@ -1415,13 +1414,13 @@ Move_FIRE_SPIN:
 	loadspritegfx 0x272D
 	playsewithpan SE_W221B, +63
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 47, 1
-	call AnimScript_82CACBF
-	call AnimScript_82CACBF
-	call AnimScript_82CACBF
+	call Anim_FireSpinEffect
+	call Anim_FireSpinEffect
+	call Anim_FireSpinEffect
 	waitforvisualfinish
 	end
 
-AnimScript_82CACBF:
+Anim_FireSpinEffect:
 	createsprite gUnknown_08596B88, 0x82, 0, 28, 528, 30, 13, 50, 1
 	delay 0x2
 	createsprite gUnknown_08596B88, 0x82, 0, 32, 480, 20, 16, -46, 1
@@ -1441,18 +1440,16 @@ Move_FURY_CUTTER:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W013, +63
-	createvisualtask sub_8107144, 0x2
-	jumpargeq 0x7, 0x0, AnimScript_82CADA7
-	goto AnimScript_82CADB9
-
-AnimScript_82CAD6A:
-	createvisualtask sub_8107168, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82CAD8E
-	jumpargeq 0x7, 0x2, AnimScript_82CADCB
-	jumpargeq 0x7, 0x3, AnimScript_82CADE5
-	goto AnimScript_82CADFF
-
-AnimScript_82CAD8E:
+	createvisualtask AnimTask_IsFuryCutterHitRight, 0x2
+	jumpretfalse Anim_FuryCutterLeft
+	goto Anim_FuryCutterRight
+Anim_FuryCutterContinue:
+	createvisualtask AnimTask_GetFuryCutterHitCount, 0x2
+	jumpreteq 0x1, Anim_FuryCutterContinue2
+	jumpreteq 0x2, Anim_FuryCutterMedium
+	jumpreteq 0x3, Anim_FuryCutterStrong
+	goto Anim_FuryCutterStrongest
+Anim_FuryCutterContinue2:
 	delay 0x5
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 10, 1
 	waitforvisualfinish
@@ -1461,41 +1458,41 @@ AnimScript_82CAD8E:
 	waitforvisualfinish
 	end
 
-AnimScript_82CADA7:
+Anim_FuryCutterLeft:
 	createsprite gUnknown_08592A1C, 0x2, 40, -32, 0
-	goto AnimScript_82CAD6A
+	goto Anim_FuryCutterContinue
 
-AnimScript_82CADB9:
+Anim_FuryCutterRight:
 	createsprite gUnknown_08592A1C, 0x2, 40, -32, 1
-	goto AnimScript_82CAD6A
+	goto Anim_FuryCutterContinue
 
-AnimScript_82CADCB:
+Anim_FuryCutterMedium:
 	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 10505, 4, 0, 0
-	goto AnimScript_82CAD8E
+	goto Anim_FuryCutterContinue2
 
-AnimScript_82CADE5:
+Anim_FuryCutterStrong:
 	createsprite gUnknown_0859728C, 0x2, 31, 3, 3, 10505, 4, 0, 0
-	goto AnimScript_82CAD8E
+	goto Anim_FuryCutterContinue2
 
-AnimScript_82CADFF:
+Anim_FuryCutterStrongest:
 	createsprite gUnknown_0859728C, 0x2, 31, 3, 3, 10505, 4, 0, 0
-	goto AnimScript_82CAD8E
+	goto Anim_FuryCutterContinue2
 
 Move_SELF_DESTRUCT:
 	loadspritegfx 0x27D6
-	createvisualtask sub_8116620, 0xA, 2, 1, 0, 9, 31
+	createvisualtask sub_8116620, 0xA, 2, 1, 0, 9, RGB_RED
 	createvisualtask sub_80D52D0, 0x5, 4, 6, 0, 38, 1
 	createvisualtask sub_80D52D0, 0x5, 5, 6, 0, 38, 1
 	createvisualtask sub_80D52D0, 0x5, 6, 6, 0, 38, 1
 	createvisualtask sub_80D52D0, 0x5, 7, 6, 0, 38, 1
 	createvisualtask sub_80D52D0, 0x5, 8, 6, 0, 38, 1
-	call AnimScript_82CAE9F
-	call AnimScript_82CAE9F
+	call Anim_SelfDestruct1
+	call Anim_SelfDestruct1
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 2, 1, 9, 0, 31
+	createvisualtask sub_8116620, 0xA, 2, 1, 9, 0, RGB_RED
 	end
 
-AnimScript_82CAE9F:
+Anim_SelfDestruct1:
 	playsewithpan SE_W120, -64
 	createsprite gUnknown_0859371C, 0x3, 0, 0, 0, 1
 	delay 0x6
@@ -1602,13 +1599,13 @@ Move_WATERFALL:
 	delay 0xA
 	createsprite gUnknown_0857FE28, 0x2, 6, 5
 	delay 0x6
-	call AnimScript_82CB102
+	call Anim_UnderWaterAttack1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82CB102:
+Anim_UnderWaterAttack1:
 	playsewithpan SE_W127, +63
 	createvisualtask sub_80D52D0, 0x5, 1, 4, 0, 17, 1
 	createsprite gUnknown_08597388, 0x3, 0, 20, 1, 1
@@ -1656,15 +1653,15 @@ Move_EXPLOSION:
 	createvisualtask sub_80D52D0, 0x5, 6, 8, 0, 40, 1
 	createvisualtask sub_80D52D0, 0x5, 7, 8, 0, 40, 1
 	createvisualtask sub_80D52D0, 0x5, 8, 8, 0, 40, 1
-	call AnimScript_82CB312
-	call AnimScript_82CB312
+	call Anim_Explosion1
+	call Anim_Explosion1
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 1, 1, 16, 16, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 1, 1, 16, 16, RGB_WHITE
 	delay 0x32
-	createvisualtask sub_8116620, 0xA, 1, 3, 16, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 1, 3, 16, 0, RGB_WHITE
 	end
 
-AnimScript_82CB312:
+Anim_Explosion1:
 	playsewithpan SE_W153, -64
 	createsprite gUnknown_0859371C, 0x3, 0, 0, 0, 1
 	delay 0x6
@@ -1708,14 +1705,14 @@ Move_DETECT:
 	loadspritegfx 0x2757
 	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 9, RGB_BLACK
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 2, 1, 0, 9, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 1, 0, 9, RGB_WHITE
 	delay 0x12
 	playsewithpan SE_W197, -64
 	createsprite gUnknown_0853EE84, 0xD, 20, -20
 	waitforvisualfinish
 	delay 0xA
 	createsprite gUnknown_08597274, 0x2, 1, 2, 9, 0, RGB_BLACK
-	createvisualtask sub_8116620, 0xA, 2, 2, 9, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 2, 9, 0, RGB_WHITE
 	waitforvisualfinish
 	end
 
@@ -1724,19 +1721,18 @@ Move_FRUSTRATION:
 	loadspritegfx 0x2767
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createvisualtask sub_80A8140, 0x1
-	jumpargeq 0x7, 0x0, AnimScript_82CB464
-	jumpargeq 0x7, 0x1, AnimScript_82CB56A
-	jumpargeq 0x7, 0x2, AnimScript_82CB637
-	goto AnimScript_82CB6B3
-
-AnimScript_82CB45F:
+	createvisualtask AnimTask_GetHappinessPowerLevel, 0x1
+	jumpreteq 0x0, Anim_Frustration_Strongest
+	jumpreteq 0x1, Anim_Frustration_Strong
+	jumpreteq 0x2, Anim_Frustration_Medium
+	goto Anim_Frustration_Weak
+Anim_Frustration_Continue:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82CB464:
+Anim_Frustration_Strongest:
 	playsewithpan SE_W082, -64
 	createvisualtask sub_80D52D0, 0x5, 0, 1, 0, 15, 1
 	createvisualtask sub_8116620, 0xA, 2, 3, 0, 9, 31
@@ -1771,9 +1767,9 @@ AnimScript_82CB464:
 	playsewithpan SE_W004, +63
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 2, 3, 9, 0, 31
-	goto AnimScript_82CB45F
+	goto Anim_Frustration_Continue
 
-AnimScript_82CB56A:
+Anim_Frustration_Strong:
 	playsewithpan SE_W082, -64
 	createvisualtask sub_80D52D0, 0x5, 0, 1, 0, 15, 1
 	createvisualtask sub_8116620, 0xA, 2, 3, 0, 9, 31
@@ -1798,9 +1794,9 @@ AnimScript_82CB56A:
 	createvisualtask sub_80D52D0, 0x5, 1, 4, 0, 6, 1
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 2, 3, 9, 0, 31
-	goto AnimScript_82CB45F
+	goto Anim_Frustration_Continue
 
-AnimScript_82CB637:
+Anim_Frustration_Medium:
 	playsewithpan SE_W207B, -64
 	createsprite gUnknown_0859368C, 0x2, 0, 20, -28
 	waitforvisualfinish
@@ -1816,9 +1812,9 @@ AnimScript_82CB637:
 	playsewithpan SE_W004, +63
 	createsprite gUnknown_08597358, 0x2, -10, -4, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 6, 1
-	goto AnimScript_82CB45F
+	goto Anim_Frustration_Continue
 
-AnimScript_82CB6B3:
+Anim_Frustration_Weak:
 	createsprite gUnknown_085CE4D0, 0x2, 20, -28
 	waitforvisualfinish
 	delay 0xA
@@ -1827,7 +1823,7 @@ AnimScript_82CB6B3:
 	playsewithpan SE_W004, +63
 	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 1, 0, 6, 1
-	goto AnimScript_82CB45F
+	goto Anim_Frustration_Continue
 
 Move_SAFEGUARD:
 	loadspritegfx 0x2804
@@ -1841,7 +1837,7 @@ Move_SAFEGUARD:
 	createsprite gUnknown_08593C64, 0x2
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, -64
-	createvisualtask sub_8115A04, 0x2, 10, 0, 2, 0, 10, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 10, 0, 2, 0, 10, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
@@ -1897,7 +1893,7 @@ Move_GUILLOTINE:
 	playsewithpan SE_W011, +63
 	createsprite gUnknown_085935D0, 0x2, 0
 	createsprite gUnknown_085935D0, 0x2, 1
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 16, 0
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 16, RGB_BLACK
 	delay 0x9
 	createvisualtask sub_80D52D0, 0x5, 1, 2, 0, 23, 1
 	delay 0x2E
@@ -1933,7 +1929,7 @@ Move_PAY_DAY:
 Move_OUTRAGE:
 	loadspritegfx 0x272D
 	loopsewithpan SE_W082, -64, 0x8, 0x3
-	createvisualtask sub_8115A04, 0x2, 7, 2, 5, 3, 8, 430
+	createvisualtask sub_8115A04, 0x2, 7, 2, 5, 3, 8, RGB(14, 13, 0)
 	createvisualtask sub_80D5830, 0x2, 0, 12, 6, 5, 4
 	delay 0x0
 	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 1280, 0, 3
@@ -1954,12 +1950,12 @@ Move_OUTRAGE:
 	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, -1280, -768, 3
 	delay 0x0
 	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 1280, 0, 3
-	call AnimScript_82CBA0F
-	call AnimScript_82CBA0F
+	call Anim_Outrage1
+	call Anim_Outrage1
 	waitforvisualfinish
 	end
 
-AnimScript_82CBA0F:
+Anim_Outrage1:
 	delay 0x3
 	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, -1280, 0, 3
 	delay 0x0
@@ -1980,25 +1976,25 @@ Move_SPARK:
 	loadspritegfx 0x2797
 	loadspritegfx 0x271B
 	delay 0x0
-	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 5, 5, 23551
+	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 5, 5, RGB(31, 31, 22)
 	playsewithpan SE_W085B, -64
 	createsprite gUnknown_0859574C, 0x0, 32, 24, 190, 12, 0, 1, 0
 	delay 0x0
 	createsprite gUnknown_0859574C, 0x0, 80, 24, 22, 12, 0, 1, 0
 	createsprite gUnknown_0859574C, 0x0, 156, 24, 121, 13, 0, 1, 1
 	delay 0x0
-	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, 23551
+	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, RGB(31, 31, 22)
 	delay 0xA
-	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 5, 5, 23551
+	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 5, 5, RGB(31, 31, 22)
 	playsewithpan SE_W085B, -64
 	createsprite gUnknown_0859574C, 0x0, 100, 24, 60, 10, 0, 1, 0
 	createsprite gUnknown_0859574C, 0x0, 170, 24, 42, 11, 0, 1, 1
 	delay 0x0
 	createsprite gUnknown_0859574C, 0x0, 238, 24, 165, 10, 0, 1, 1
 	delay 0x0
-	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, 23551
+	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, RGB(31, 31, 22)
 	delay 0x14
-	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 7, 7, 23551
+	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 7, 7, RGB(31, 31, 22)
 	playsewithpan SE_W085B, -64
 	createsprite gUnknown_085957F8, 0x4, 0, 0, 32, 12, 0, 20, 0, 0
 	createsprite gUnknown_085957F8, 0x4, 0, 0, 32, 12, 64, 20, 1, 0
@@ -2010,15 +2006,15 @@ Move_SPARK:
 	createsprite gUnknown_085957F8, 0x4, 0, 0, 16, 12, 224, 20, 2, 0
 	delay 0x4
 	waitforvisualfinish
-	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, 23551
+	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, RGB(31, 31, 22)
 	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x4
 	playsewithpan SE_W063, +63
 	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
-	createvisualtask sub_8115A04, 0x2, 4, -31, 2, 0, 6, 23551
-	call AnimScript_82D7BEA
+	createvisualtask sub_8115A04, 0x2, 4, -31, 2, 0, 6, RGB(31, 31, 22)
+	call Anim_ParalysisEffect
 	waitforvisualfinish
 	end
 
@@ -2048,18 +2044,18 @@ Move_ATTRACT:
 	createsprite gUnknown_085939D0, 0x28, 112, 256, 90
 	createsprite gUnknown_085939D0, 0x28, 200, 272, 90
 	delay 0x4B
-	createvisualtask sub_8115A04, 0x2, 4, 4, 4, 0, 10, 28479
+	createvisualtask sub_8115A04, 0x2, 4, 4, 4, 0, 10, RGB(31, 25, 27)
 	end
 
 Move_GROWTH:
-	call AnimScript_82CBDC0
+	call Anim_Growth1
 	waitforvisualfinish
-	call AnimScript_82CBDC0
+	call Anim_Growth1
 	waitforvisualfinish
 	end
 
-AnimScript_82CBDC0:
-	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 8, 0x7FFF
+Anim_Growth1:
+	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 8, RGB_WHITE
 	playsewithpan SE_W036, -64
 	createvisualtask sub_80D6064, 0x5, -3, -3, 16, 0, 0
 	return
@@ -2169,13 +2165,13 @@ Move_ROCK_SLIDE:
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 5, 50, 1
 	createvisualtask sub_80D51AC, 0x2, 3, 0, 5, 50, 1
 	delay 0x2
-	call AnimScript_82CC083
-	call AnimScript_82CC083
+	call Anim_RockSlide1
+	call Anim_RockSlide1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-AnimScript_82CC083:
+Anim_RockSlide1:
 	createsprite gUnknown_08596B04, 0x82, -20, 0, -10, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
@@ -2229,18 +2225,18 @@ Move_BUBBLE_BEAM:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	delay 0x1
-	call AnimScript_82CC1AD
+	call Anim_Bulbblebeam1
 	createvisualtask sub_80D5EB8, 0x5, 0, 3, 3072, 8, 1
-	call AnimScript_82CC1AD
-	call AnimScript_82CC1AD
+	call Anim_Bulbblebeam1
+	call Anim_Bulbblebeam1
 	waitforvisualfinish
-	call AnimScript_82D7AE2
+	call Anim_BulbblebeamEffect
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
 
-AnimScript_82CC1AD:
+Anim_Bulbblebeam1:
 	createsprite gUnknown_08595068, 0x2, 18, 0, 35, 70, 0, 256, 50
 	playsewithpan SE_W145, -64
 	delay 0x3
@@ -2265,28 +2261,28 @@ Move_ICY_WIND:
 	loadspritegfx 0x279D
 	loadspritegfx 0x279E
 	monbg ANIM_DEF_PARTNER
-	createvisualtask sub_8116620, 0xA, 11, 4, 0, 4, 0
+	createvisualtask sub_8116620, 0xA, 11, 4, 0, 4, RGB_BLACK
 	fadetobg BG_ICE
 	waitbgfadeout
 	playsewithpan SE_W196, 0
 	waitbgfadein
 	waitforvisualfinish
 	panse_1B SE_W016, -64, +63, +2, 0x0
-	call AnimScript_82CC2A8
+	call Anim_IcyWind1
 	delay 0x5
-	call AnimScript_82CC2A8
+	call Anim_IcyWind1
 	playsewithpan SE_W016B, +63
 	delay 0x37
-	call AnimScript_82D78F8
+	call Anim_IcyWindEffect2
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	restorebg
 	waitbgfadeout
-	createvisualtask sub_8116620, 0xA, 11, 4, 4, 0, 0
+	createvisualtask sub_8116620, 0xA, 11, 4, 4, 0, RGB_BLACK
 	waitbgfadein
 	end
 
-AnimScript_82CC2A8:
+Anim_IcyWind1:
 	createsprite gUnknown_08595B98, 0xA8, 0, 0, 0, 0, 72, 1
 	delay 0x5
 	createsprite gUnknown_08595B98, 0xA8, 0, 10, 0, 10, 72, 1
@@ -2479,36 +2475,34 @@ Move_FURY_ATTACK:
 	loadspritegfx 0x2797
 	loadspritegfx 0x2724
 	createvisualtask sub_80D6134, 0x2, 4, 256, 0, 2
-	choosetwoturnanim AnimScript_82CC7B8, AnimScript_82CC7DE
-
-AnimScript_82CC7A5:
+	choosetwoturnanim Anim_FuryAttackRight, Anim_FuryAttackLeft
+Anim_FuryAttackContinue:
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 6, 1
 	waitforvisualfinish
 	end
 
-AnimScript_82CC7B8:
+Anim_FuryAttackRight:
 	createsprite gUnknown_08592F44, 0x84, 8, 8, 10
 	waitforvisualfinish
 	createsprite gUnknown_085973E8, 0x83, 0, 0, 1, 1
 	playsewithpan SE_W030, +63
-	goto AnimScript_82CC7A5
+	goto Anim_FuryAttackContinue
 
-AnimScript_82CC7DE:
+Anim_FuryAttackLeft:
 	createsprite gUnknown_08592F44, 0x84, -8, -8, 10
 	waitforvisualfinish
 	createsprite gUnknown_085973E8, 0x83, 0, 0, 1, 1
 	playsewithpan SE_W030, +63
-	goto AnimScript_82CC7A5
+	goto Anim_FuryAttackContinue
 
 Move_HORN_DRILL:
 	loadspritegfx 0x2797
 	loadspritegfx 0x2724
-	jumpifcontest AnimScript_82CC96A
+	jumpifcontest Anim_HornDrillInContest
 	fadetobg BG_DRILL
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, -2304, 768, 1, -1
-
-AnimScript_82CC821:
+Anim_HornDrillContinue:
 	waitbgfadein
 	setalpha 0x80C
 	createsprite gUnknown_08592CD8, 0x2, 0
@@ -2562,11 +2556,11 @@ AnimScript_82CC821:
 	waitbgfadein
 	end
 
-AnimScript_82CC96A:
+Anim_HornDrillInContest:
 	fadetobg BG_DRILL_CONTESTS
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, 2304, 768, 0, -1
-	goto AnimScript_82CC821
+	goto Anim_HornDrillContinue
 
 Move_THRASH:
 	loadspritegfx 0x2797
@@ -2651,15 +2645,15 @@ Move_FISSURE:
 	createvisualtask sub_81152DC, 0x3, 1, 10, 50
 	playsewithpan SE_W089, +63
 	delay 0x8
-	call AnimScript_82CCBFF
+	call Anim_Fissure1
 	delay 0xF
 	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	delay 0xF
-	call AnimScript_82CCC50
+	call Anim_Fissure2
 	delay 0xF
 	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	delay 0xF
-	call AnimScript_82CCBFF
+	call Anim_Fissure1
 	delay 0x32
 	fadetobg BG_FISSURE
 	waitbgfadeout
@@ -2672,7 +2666,7 @@ Move_FISSURE:
 	waitbgfadein
 	end
 
-AnimScript_82CCBFF:
+Anim_Fissure1:
 	createsprite gUnknown_085971FC, 0x82, 1, 0, 12, -48, -16, 24
 	createsprite gUnknown_085971FC, 0x82, 1, 0, 16, -16, -10, 24
 	createsprite gUnknown_085971FC, 0x82, 1, 1, 14, -52, -18, 24
@@ -2680,7 +2674,7 @@ AnimScript_82CCBFF:
 	playsewithpan SE_W091, +63
 	return
 
-AnimScript_82CCC50:
+Anim_Fissure2:
 	createsprite gUnknown_085971FC, 0x82, 1, 0, 12, -24, -16, 24
 	createsprite gUnknown_085971FC, 0x82, 1, 0, 16, -38, -10, 24
 	createsprite gUnknown_085971FC, 0x82, 1, 1, 14, -20, -18, 24
@@ -2689,12 +2683,11 @@ AnimScript_82CCC50:
 	return
 
 Move_DIG:
-	choosetwoturnanim AnimScript_82CCCAB, AnimScript_82CCD06
-
-AnimScript_82CCCAA:
+	choosetwoturnanim Anim_DigSetUp, Anim_DigUnleash
+Anim_DigEnd:
 	end
 
-AnimScript_82CCCAB:
+Anim_DigSetUp:
 	loadspritegfx 0x275A
 	loadspritegfx 0x2829
 	createsprite gUnknown_08597214, 0x1, 0, 0, 180
@@ -2703,18 +2696,18 @@ AnimScript_82CCCAB:
 	delay 0x1
 	createvisualtask sub_8114CBC, 0x2, 0
 	delay 0x6
-	call AnimScript_82CCD6A
-	call AnimScript_82CCD6A
-	call AnimScript_82CCD6A
-	call AnimScript_82CCD6A
-	call AnimScript_82CCD6A
+	call Anim_DigSetUp1
+	call Anim_DigSetUp1
+	call Anim_DigSetUp1
+	call Anim_DigSetUp1
+	call Anim_DigSetUp1
 	waitforvisualfinish
 	clearmonbg_23 ANIM_ATTACKER
 	delay 0x1
 	createvisualtask sub_8114CBC, 0x2, 1
-	goto AnimScript_82CCCAA
+	goto Anim_DigEnd
 
-AnimScript_82CCD06:
+Anim_DigUnleash:
 	loadspritegfx 0x2797
 	loadspritegfx 0x2829
 	createvisualtask sub_8114F14, 0x2, 0
@@ -2729,9 +2722,9 @@ AnimScript_82CCD06:
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 6, 1
 	playsewithpan SE_W025B, -64
 	clearmonbg ANIM_ATTACKER
-	goto AnimScript_82CCCAA
+	goto Anim_DigEnd
 
-AnimScript_82CCD6A:
+Anim_DigSetUp1:
 	createsprite gUnknown_085971FC, 0x2, 0, 0, 12, 4, -16, 18
 	createsprite gUnknown_085971FC, 0x2, 0, 0, 16, 4, -10, 18
 	createsprite gUnknown_085971FC, 0x2, 0, 1, 14, 4, -18, 18
@@ -2741,13 +2734,13 @@ AnimScript_82CCD6A:
 	return
 
 Move_MEDITATE:
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	createvisualtask sub_810F7D4, 0x2
 	playsewithpan SE_W029, -64
 	delay 0x10
 	playsewithpan SE_W036, -64
 	waitforvisualfinish
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_AGILITY:
@@ -2810,11 +2803,11 @@ Move_RAGE:
 	end
 
 Move_TELEPORT:
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	createvisualtask sub_810F83C, 0x2
 	playsewithpan SE_W100, -64
 	delay 0xF
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	waitforvisualfinish
 	end
 
@@ -2866,18 +2859,17 @@ Move_METRONOME:
 	end
 
 Move_SKULL_BASH:
-	choosetwoturnanim AnimScript_82CCF99, AnimScript_82CCFE6
-
-AnimScript_82CCF98:
+	choosetwoturnanim Anim_SkullBashSetUp, Anim_SkullBashAttack
+Anim_SkullBashEnd:
 	end
 
-AnimScript_82CCF99:
-	call AnimScript_82CCFA9
-	call AnimScript_82CCFA9
+Anim_SkullBashSetUp:
+	call Anim_SkullBashSetUp1
+	call Anim_SkullBashSetUp1
 	waitforvisualfinish
-	goto AnimScript_82CCF98
+	goto Anim_SkullBashEnd
 
-AnimScript_82CCFA9:
+Anim_SkullBashSetUp1:
 	createsprite gUnknown_0857FE88, 0x2, 0, -24, 0, 0, 10, 0
 	playsewithpan SE_W036, -64
 	waitforvisualfinish
@@ -2887,7 +2879,7 @@ AnimScript_82CCFA9:
 	waitforvisualfinish
 	return
 
-AnimScript_82CCFE6:
+Anim_SkullBashAttack:
 	loadspritegfx 0x2797
 	createvisualtask sub_8101C94, 0x2, 0
 	playsewithpan SE_W036, -64
@@ -2900,25 +2892,25 @@ AnimScript_82CCFE6:
 	loopsewithpan SE_W025B, +63, 0x8, 0x3
 	waitforvisualfinish
 	createvisualtask sub_8101C94, 0x2, 1
-	goto AnimScript_82CCF98
+	goto Anim_SkullBashEnd
 
 Move_AMNESIA:
 	loadspritegfx 0x276D
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	delay 0x8
 	createsprite gUnknown_08596744, 0x14
 	playsewithpan SE_W118, -64
 	delay 0x36
 	loopsewithpan SE_W118, -64, 0x10, 0x3
 	waitforvisualfinish
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_KINESIS:
 	loadspritegfx 0x275B
 	loadspritegfx 0x2771
 	playsewithpan SE_W060, -64
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	createsprite gUnknown_085966DC, 0x14
 	createsprite gUnknown_08593344, 0x13, 32, -8, 0
 	createsprite gUnknown_08593344, 0x13, 32, 16, 1
@@ -2930,7 +2922,7 @@ Move_KINESIS:
 	delay 0x46
 	playsewithpan SE_W207B, -64
 	waitforvisualfinish
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_GLARE:
@@ -2939,7 +2931,7 @@ Move_GLARE:
 	createvisualtask sub_815E114, 0x5, 0
 	playsewithpan SE_W060B, -64
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0x5, 1, 0, 0, 16, 0
+	createvisualtask sub_8116620, 0x5, 1, 0, 0, 16, RGB_BLACK
 	waitforvisualfinish
 	createsprite gUnknown_08593A84, 0x0, -16, -8
 	createsprite gUnknown_08593A84, 0x0, 16, -8
@@ -2948,7 +2940,7 @@ Move_GLARE:
 	delay 0x2
 	createvisualtask sub_810A094, 0x3, 20, 1, 0
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0x5, 1, 0, 16, 0, 0
+	createvisualtask sub_8116620, 0x5, 1, 0, 16, 0, RGB_BLACK
 	end
 
 Move_BARRAGE:
@@ -2963,59 +2955,58 @@ Move_BARRAGE:
 	end
 
 Move_SKY_ATTACK:
-	choosetwoturnanim AnimScript_82CD185, AnimScript_82CD28E
-
-AnimScript_82CD184:
+	choosetwoturnanim Anim_SkyAttackSetUp, Anim_SkyAttackUnleash
+Anim_SkyAttackEnd:
 	end
 
-AnimScript_82CD185:
+Anim_SkyAttackSetUp:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0xB0C
-	createvisualtask sub_81177AC, 0x5, 7
-	jumpargeq 0x7, 0x0, AnimScript_82CD1A0
-	goto AnimScript_82CD217
+	createvisualtask AnimTask_IsTargetPartner, 0x5, ARG_RET_ID
+	jumpretfalse Anim_SkyAttackSetUpAgainstOpponent
+	goto Anim_SkyAttackSetUpAgainstPartner
 
-AnimScript_82CD1A0:
-	createvisualtask sub_8116620, 0xA, 27, 1, 0, 12, 0
+Anim_SkyAttackSetUpAgainstOpponent:
+	createvisualtask sub_8116620, 0xA, 27, 1, 0, 12, RGB_BLACK
 	waitforvisualfinish
 	delay 0xC
-	createvisualtask sub_8116620, 0xA, 2, 1, 8, 0, 0
+	createvisualtask sub_8116620, 0xA, 2, 1, 8, 0, RGB_BLACK
 	createvisualtask sub_81152DC, 0x5, 0, 2, 16
 	loopsewithpan SE_W287, -64, 0x4, 0x8
-	createvisualtask sub_8116620, 0xA, 2, 1, 0, 15, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 1, 0, 15, RGB_WHITE
 	delay 0x14
-	createvisualtask sub_8116620, 0xA, 2, 1, 15, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 1, 15, 0, RGB_WHITE
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 25, 1, 8, 0, 0
+	createvisualtask sub_8116620, 0xA, 25, 1, 8, 0, RGB_BLACK
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
-	goto AnimScript_82CD184
+	goto Anim_SkyAttackEnd
 
-AnimScript_82CD217:
+Anim_SkyAttackSetUpAgainstPartner:
 	createvisualtask sub_8116664, 0xA, 1, 1, 0, 12, 0
 	waitforvisualfinish
 	delay 0xC
-	createvisualtask sub_8116620, 0xA, 2, 1, 8, 0, 0
+	createvisualtask sub_8116620, 0xA, 2, 1, 8, 0, RGB_BLACK
 	createvisualtask sub_81152DC, 0x5, 0, 2, 16
 	playsewithpan SE_W287, -64
 	delay 0x8
-	createvisualtask sub_8116620, 0xA, 2, 1, 0, 15, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 1, 0, 15, RGB_WHITE
 	delay 0x14
-	createvisualtask sub_8116620, 0xA, 2, 1, 15, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 1, 15, 0, RGB_WHITE
 	waitforvisualfinish
 	createvisualtask sub_8116664, 0xA, 4, 1, 8, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
-	goto AnimScript_82CD184
+	goto Anim_SkyAttackEnd
 
-AnimScript_82CD28E:
+Anim_SkyAttackUnleash:
 	loadspritegfx 0x2797
 	loadspritegfx 0x282C
-	call AnimScript_82D7CE5
+	call Anim_SetFlyingBg
 	monbg ANIM_ATTACKER
-	createvisualtask sub_8116620, 0xA, 2, 0, 0, 16, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 0, 0, 16, RGB_WHITE
 	delay 0x4
 	createvisualtask sub_81136E8, 0x5, 0
 	waitforvisualfinish
@@ -3027,11 +3018,11 @@ AnimScript_82CD28E:
 	delay 0x14
 	createvisualtask sub_81137E4, 0x5, 1
 	delay 0x2
-	createvisualtask sub_8116620, 0xA, 2, 0, 15, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 0, 15, 0, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
-	call AnimScript_82D7D15
-	goto AnimScript_82CD184
+	call Anim_UnsetFlyingBg
+	goto Anim_SkyAttackEnd
 
 Move_FLASH:
 	playsewithpan SE_W043, -64
@@ -3126,7 +3117,7 @@ Move_SKETCH:
 Move_NIGHTMARE:
 	fadetobg BG_GHOST
 	waitbgfadein
-	jumpifcontest AnimScript_82CD4CF
+	jumpifcontest Anim_NightmareInContest
 	monbg ANIM_DEF_PARTNER
 	createvisualtask sub_8111C50, 0x2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 40, 1
@@ -3137,7 +3128,7 @@ Move_NIGHTMARE:
 	waitbgfadein
 	end
 
-AnimScript_82CD4CF:
+Anim_NightmareInContest:
 	createvisualtask sub_80A7B98, 0x2, 0, RGB_WHITE, 10, 2, 1
 	createvisualtask sub_80D51AC, 0x2, 0, 3, 0, 32, 1
 	playsewithpan SE_W171, +63
@@ -3166,7 +3157,7 @@ Move_SPITE:
 	playsewithpan SE_W060, -64
 	waitbgfadein
 	monbg ANIM_DEF_PARTNER
-	createvisualtask sub_8115A04, 0x2, 2, 2, 6, 0, 8, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 2, 2, 6, 0, 8, RGB_WHITE
 	createvisualtask sub_8111E50, 0x2
 	loopsewithpan SE_W060, +63, 0x14, 0x3
 	waitforvisualfinish
@@ -3179,11 +3170,10 @@ Move_MACH_PUNCH:
 	loadspritegfx 0x2797
 	loadspritegfx 0x279F
 	monbg ANIM_ATK_PARTNER
-	createvisualtask sub_8117754, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82CD5E6
+	createvisualtask AnimTask_IsAttackerOpponentSide, 0x2
+	jumprettrue Anim_MachPunchAgainstPlayer
 	fadetobg BG_HIGHSPEED_OPPONENT
-
-AnimScript_82CD57E:
+Anim_MachPunchContinue:
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, -2304, 0, 1, -1
 	waitbgfadein
@@ -3205,9 +3195,9 @@ AnimScript_82CD57E:
 	waitbgfadein
 	end
 
-AnimScript_82CD5E6:
+Anim_MachPunchAgainstPlayer:
 	fadetobg BG_HIGHSPEED_PLAYER
-	goto AnimScript_82CD57E
+	goto Anim_MachPunchContinue
 
 Move_FORESIGHT:
 	loadspritegfx 0x2812
@@ -3251,17 +3241,17 @@ Move_DESTINY_BOND:
 Move_ENDURE:
 	loadspritegfx 0x27C8
 	playsewithpan SE_W082, -64
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	delay 0x8
-	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 11, 31
+	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 11, RGB_RED
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 32, 1
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	delay 0x8
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	waitforvisualfinish
 	end
 
-AnimScript_82CD6C7:
+Anim_EndureEffect:
 	createsprite gUnknown_08592D8C, 0x2, 0, -24, 26, 2
 	delay 0x4
 	createsprite gUnknown_08592D8C, 0x2, 0, 14, 28, 1
@@ -3366,26 +3356,25 @@ Move_MILK_DRINK:
 	playsewithpan SE_W208, -64
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
-	call AnimScript_82D7A28
+	call Anim_HealingEffect2
 	waitforvisualfinish
 	end
 
 Move_MAGNITUDE:
-	createvisualtask sub_8115600, 0x2
+	createvisualtask AnimTask_IsPowerOver99, 0x2
 	waitforvisualfinish
-	jumpargeq 0xF, 0x0, AnimScript_82CD8C9
-	jumpargeq 0xF, 0x1, AnimScript_82CD8EE
-
-AnimScript_82CD8C8:
+	jumpargeq 0xF, FALSE, Anim_MagnitudeRegular
+	jumpargeq 0xF, TRUE, Anim_MagnitudeIntense
+Anim_MagnitudeEnd:
 	end
 
-AnimScript_82CD8C9:
+Anim_MagnitudeRegular:
 	createvisualtask sub_81152DC, 0x5, 5, 0, 50
 	createvisualtask sub_81152DC, 0x5, 4, 0, 50
 	loopsewithpan SE_W070, +63, 0x8, 0xA
-	goto AnimScript_82CD8C8
+	goto Anim_MagnitudeEnd
 
-AnimScript_82CD8EE:
+Anim_MagnitudeIntense:
 	createvisualtask sub_81152DC, 0x5, 5, 0, 50
 	createvisualtask sub_81152DC, 0x5, 4, 0, 50
 	loopsewithpan SE_W070, +63, 0x8, 0xA
@@ -3393,7 +3382,7 @@ AnimScript_82CD8EE:
 	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	delay 0x10
 	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
-	goto AnimScript_82CD8C8
+	goto Anim_MagnitudeEnd
 
 Move_RAPID_SPIN:
 	loadspritegfx 0x2797
@@ -3437,18 +3426,17 @@ Move_MOONLIGHT:
 	delay 0x14
 	createvisualtask sub_81025C0, 0x2
 	waitforvisualfinish
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	end
 
 Move_EXTREME_SPEED:
 	loadspritegfx 0x27DF
 	loadspritegfx 0x2797
-	createvisualtask sub_8117754, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82CDAF5
+	createvisualtask AnimTask_IsAttackerOpponentSide, 0x2
+	jumprettrue Anim_ExtremeSpeedAgainstPlayer
 	fadetobg BG_HIGHSPEED_OPPONENT
-
-AnimScript_82CDA55:
+Anim_ExtremeSpeedContinue:
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, -2304, 0, 1, -1
 	waitbgfadein
@@ -3487,9 +3475,9 @@ AnimScript_82CDA55:
 	delay 0x1
 	end
 
-AnimScript_82CDAF5:
+Anim_ExtremeSpeedAgainstPlayer:
 	fadetobg BG_HIGHSPEED_PLAYER
-	goto AnimScript_82CDA55
+	goto Anim_ExtremeSpeedContinue
 
 Move_UPROAR:
 	loadspritegfx 0x27F1
@@ -3543,12 +3531,12 @@ Move_HEAT_WAVE:
 Move_HAIL:
 	loadspritegfx 0x2817
 	loadspritegfx 0x279D
-	createvisualtask sub_8116620, 0xA, 1, 3, 0, 6, 0
+	createvisualtask sub_8116620, 0xA, 1, 3, 0, 6, RGB_BLACK
 	waitforvisualfinish
 	createvisualtask sub_810C918, 0x5
 	loopsewithpan SE_W258, 0, 0x8, 0xA
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 1, 3, 6, 0, 0
+	createvisualtask sub_8116620, 0xA, 1, 3, 6, 0, RGB_BLACK
 	end
 
 Move_TORMENT:
@@ -3764,9 +3752,8 @@ Move_BRICK_BREAK:
 	loadspritegfx 0x2797
 	loadspritegfx 0x279F
 	loadspritegfx 0x27E0
-	choosetwoturnanim AnimScript_82CE0A7, AnimScript_82CE154
-
-AnimScript_82CE0A7:
+	choosetwoturnanim Anim_BrickBreakNormal, Anim_BrickBreakShatteredWall
+Anim_BrickBreakNormal:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	createsprite gUnknown_0857FE28, 0x2, 3, 8
@@ -3792,7 +3779,7 @@ AnimScript_82CE0A7:
 	clearmonbg ANIM_TARGET
 	end
 
-AnimScript_82CE154:
+Anim_BrickBreakShatteredWall:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	createsprite gUnknown_0857FE28, 0x2, 3, 8
@@ -3884,7 +3871,7 @@ Move_ERUPTION:
 
 Move_SKILL_SWAP:
 	loadspritegfx 0x280B
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	createvisualtask sub_810FBF0, 0x3, 1
 	createvisualtask sub_80A7B98, 0x5, 1, RGB_WHITE, 12, 3, 1
 	loopsewithpan SE_W179, -64, 0x18, 0x3
@@ -3892,13 +3879,13 @@ Move_SKILL_SWAP:
 	createvisualtask sub_810FBF0, 0x3, 0
 	createvisualtask sub_80A7B98, 0x5, 0, RGB_WHITE, 12, 3, 1
 	waitforvisualfinish
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_IMPRISON:
 	loadspritegfx 0x2809
 	loadspritegfx 0x280A
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	monbg ANIM_DEF_PARTNER
 	createvisualtask sub_810F940, 0x5
 	delay 0x8
@@ -3909,7 +3896,7 @@ Move_IMPRISON:
 	createvisualtask sub_81152DC, 0x5, 4, 1, 10
 	playsewithpan SE_W063, -64
 	clearmonbg ANIM_DEF_PARTNER
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_GRUDGE:
@@ -4004,7 +3991,7 @@ Move_LUSTER_PURGE:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	blendoff
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_MIST_BALL:
@@ -4020,11 +4007,11 @@ Move_MIST_BALL:
 	delay 0x0
 	playsewithpan SE_W114, 0
 	createvisualtask sub_810C324, 0x5
-	createvisualtask sub_8116620, 0xA, 4, 3, 0, 16, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 3, 0, 16, RGB_WHITE
 	delay 0x8
 	createvisualtask sub_80D51AC, 0x2, 1, 4, 0, 70, 0
 	delay 0x46
-	createvisualtask sub_8116620, 0xA, 4, 2, 16, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 16, 0, RGB_WHITE
 	end
 
 Move_FEATHER_DANCE:
@@ -4164,7 +4151,7 @@ Move_SLACK_OFF:
 	createvisualtask sub_8160544, 0x2, 0
 	playsewithpan SE_W281, -64
 	waitforvisualfinish
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	end
 
@@ -4382,7 +4369,7 @@ Move_SHADOW_PUNCH:
 	end
 
 Move_EXTRASENSORY:
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	createvisualtask sub_80A7B98, 0x5, 0, RGB(27, 27, 0), 12, 1, 1
@@ -4399,7 +4386,7 @@ Move_EXTRASENSORY:
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_DEF_PARTNER
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_AERIAL_ACE:
@@ -4436,7 +4423,7 @@ Move_HOWL:
 	loadspritegfx 0x2745
 	createvisualtask sub_815D64C, 0x2, 0
 	delay 0xC
-	call AnimScript_82CFECB
+	call Anim_RoarEffect
 	createvisualtask sub_8158D8C, 0x2, 0, 3
 	waitforvisualfinish
 	delay 0x1E
@@ -4475,7 +4462,7 @@ Move_VOLT_TACKLE:
 	loadspritegfx 0x27E5
 	monbg ANIM_ATTACKER
 	setalpha 0x80C
-	createvisualtask sub_8116620, 0xA, 1, 0, 0, 8, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 0, 8, RGB_BLACK
 	waitforvisualfinish
 	createsprite gUnknown_085959A4, 0x1
 	playsewithpan SE_W268, -64
@@ -4512,7 +4499,7 @@ Move_VOLT_TACKLE:
 	delay 0x2
 	createsprite gUnknown_0859598C, 0x2, 0, -16, -16
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 1, 0, 8, 0, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 8, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -4622,10 +4609,10 @@ Move_SHOCK_WAVE:
 	playsewithpan SE_W161B, +63
 	waitforvisualfinish
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 6, 18, 1
-	createvisualtask sub_8116620, 0x5, 1, 3, 16, 0, 0x7FFF
-	createvisualtask sub_8116620, 0x5, 4, 0, 16, 16, 0
+	createvisualtask sub_8116620, 0x5, 1, 3, 16, 0, RGB_WHITE
+	createvisualtask sub_8116620, 0x5, 4, 0, 16, 16, RGB_BLACK
 	delay 0x4
-	createvisualtask sub_8116620, 0x5, 4, 0, 0, 0, 0
+	createvisualtask sub_8116620, 0x5, 4, 0, 0, 0, RGB_BLACK
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	blendoff
@@ -4642,27 +4629,27 @@ Move_BELLY_DRUM:
 	loadspritegfx 0x27D1
 	createvisualtask sub_8102BE8, 0x2
 	waitforvisualfinish
-	call AnimScript_82CF5A6
+	call Anim_BellyDrum1
 	createsprite gUnknown_0859309C, 0x2, 0, 0, 0, 0
 	playsewithpan SE_W187, -64
 	delay 0xF
-	call AnimScript_82CF58B
+	call Anim_BellyDrum2
 	createsprite gUnknown_0859309C, 0x2, 1, 1, 1, 0
 	playsewithpan SE_W187, -64
 	delay 0xF
-	call AnimScript_82CF5A6
+	call Anim_BellyDrum1
 	createsprite gUnknown_0859309C, 0x2, 0, 3, 3, 128
 	playsewithpan SE_W187, -64
 	delay 0x7
-	call AnimScript_82CF58B
+	call Anim_BellyDrum2
 	createsprite gUnknown_0859309C, 0x2, 1, 2, 0, 128
 	playsewithpan SE_W187, -64
 	delay 0x7
-	call AnimScript_82CF5A6
+	call Anim_BellyDrum1
 	createsprite gUnknown_0859309C, 0x2, 0, 1, 1, 0
 	playsewithpan SE_W187, -64
 	delay 0x7
-	call AnimScript_82CF58B
+	call Anim_BellyDrum2
 	createsprite gUnknown_0859309C, 0x2, 1, 0, 3, 0
 	playsewithpan SE_W187, -64
 	waitforvisualfinish
@@ -4670,12 +4657,12 @@ Move_BELLY_DRUM:
 	waitforvisualfinish
 	end
 
-AnimScript_82CF58B:
+Anim_BellyDrum2:
 	createsprite gUnknown_08593068, 0x3, 0
 	createvisualtask sub_80D51AC, 0x2, 0, 0, 8, 2, 1
 	return
 
-AnimScript_82CF5A6:
+Anim_BellyDrum1:
 	createsprite gUnknown_08593068, 0x3, 1
 	createvisualtask sub_80D51AC, 0x2, 0, 0, 8, 2, 1
 	return
@@ -4690,13 +4677,13 @@ Move_MIND_READER:
 	createsprite gUnknown_085CE094, 0x5
 	delay 0x28
 	playsewithpan SE_W043, +63
-	createvisualtask sub_8115A04, 0x2, 1, 1, 2, 0, 10, 0
-	call AnimScript_82CF608
+	createvisualtask sub_8115A04, 0x2, 1, 1, 2, 0, 10, RGB_BLACK
+	call Anim_MindReaderEffect
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-AnimScript_82CF608:
+Anim_MindReaderEffect:
 	createsprite gUnknown_085CE0AC, 0x4, 70, 0, 6
 	createsprite gUnknown_085CE0AC, 0x4, 40, 40, 6
 	createsprite gUnknown_085CE0AC, 0x4, 10, -60, 6
@@ -4727,7 +4714,7 @@ Move_ICE_PUNCH:
 	loadspritegfx 0x2797
 	loadspritegfx 0x279F
 	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 7, RGB_BLACK
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 9, 32588
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 9, RGB(12, 26, 31)
 	delay 0x14
 	playsewithpan SE_W081, +63
 	createsprite gUnknown_08595AE8, 0x2, 0
@@ -4747,9 +4734,9 @@ Move_ICE_PUNCH:
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 3, 1
 	waitforvisualfinish
 	delay 0xF
-	call AnimScript_82D7720
+	call Anim_FreezeEffect1
 	delay 0x5
-	createvisualtask sub_8116620, 0xA, 4, 2, 9, 0, 32588
+	createvisualtask sub_8116620, 0xA, 4, 2, 9, 0, RGB(12, 26, 31)
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 0, 7, 0, RGB_BLACK
 	waitforvisualfinish
@@ -4770,10 +4757,10 @@ Move_REST:
 
 Move_CONFUSION:
 	monbg ANIM_DEF_PARTNER
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	setalpha 0x808
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 10, 1
-	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 8, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 8, RGB_WHITE
 	waitforvisualfinish
 	playsewithpan SE_W048, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 15, 1
@@ -4782,15 +4769,15 @@ Move_CONFUSION:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 0x1
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_PSYCHIC:
 	monbg ANIM_DEF_PARTNER
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	setalpha 0x808
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 10, 1
-	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 8, 767
+	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 8, RGB(31, 23, 0)
 	waitforvisualfinish
 	loopsewithpan SE_W048, +63, 0xA, 0x3
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 15, 1
@@ -4799,30 +4786,30 @@ Move_PSYCHIC:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 0x1
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_FUTURE_SIGHT:
-	goto AnimScript_82CF8F6
+	goto Anim_FutureSight
 
-AnimScript_82CF8ED:
+Anim_FutureSightContinue:
 	waitforvisualfinish
 	delay 0x1
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
-AnimScript_82CF8F6:
+Anim_FutureSight:
 	monbg ANIM_ATK_PARTNER
 	playsewithpan SE_W060, -64
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	setalpha 0x808
 	playsewithpan SE_W048, -64
-	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 8, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 8, RGB_WHITE
 	createvisualtask sub_80D6064, 0x5, -4, -4, 15, 0, 1
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
-	goto AnimScript_82CF8ED
+	goto Anim_FutureSightContinue
 
 Move_THUNDER:
 	loadspritegfx 0x2735
@@ -4994,7 +4981,7 @@ Move_DRAGON_BREATH:
 	delay 0x2
 	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createvisualtask sub_8116620, 0xA, 4, 1, 0, 9, 31
+	createvisualtask sub_8116620, 0xA, 4, 1, 0, 9, RGB_RED
 	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 21, 1
@@ -5014,7 +5001,7 @@ Move_DRAGON_BREATH:
 	delay 0x2
 	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 4, 1, 9, 0, 31
+	createvisualtask sub_8116620, 0xA, 4, 1, 9, 0, RGB_RED
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -5026,7 +5013,7 @@ Move_ROAR:
 	setalpha 0x808
 	createvisualtask sub_8158E9C, 0x2, 0, 2
 	createvisualtask sub_80D6064, 0x5, -5, -5, 10, 0, 1
-	call AnimScript_82CFECB
+	call Anim_RoarEffect
 	delay 0x14
 	createvisualtask sub_80D5DB0, 0x5, 1, 2
 	waitforvisualfinish
@@ -5037,7 +5024,7 @@ Move_ROAR:
 	waitforvisualfinish
 	end
 
-AnimScript_82CFECB:
+Anim_RoarEffect:
 	createsprite gUnknown_085CE7D4, 0x2, 24, -8, 0
 	createsprite gUnknown_085CE7D4, 0x2, 24, 0, 2
 	createsprite gUnknown_085CE7D4, 0x2, 24, 8, 1
@@ -5050,7 +5037,7 @@ AnimScript_82CFECB:
 Move_GROWL:
 	loadspritegfx 0x2745
 	createvisualtask sub_8158E9C, 0x2, 0, 255
-	call AnimScript_82CFECB
+	call Anim_RoarEffect
 	delay 0xA
 	createvisualtask sub_80D52D0, 0x2, 1, 1, 0, 9, 1
 	createvisualtask sub_80D52D0, 0x2, 3, 1, 0, 9, 1
@@ -5063,15 +5050,15 @@ Move_SNORE:
 	loadspritegfx 0x27D5
 	monbg ANIM_ATK_PARTNER
 	setalpha 0x808
-	call AnimScript_82CFF76
+	call Anim_Snore1
 	delay 0x1E
-	call AnimScript_82CFF76
+	call Anim_Snore1
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
 
-AnimScript_82CFF76:
+Anim_Snore1:
 	playsewithpan SE_W173, -64
 	createvisualtask sub_80D6064, 0x5, -7, -7, 7, 0, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 7, 1
@@ -5088,13 +5075,13 @@ Move_LIGHT_SCREEN:
 	waitplaysewithpan SE_W115, -64, 0xF
 	createsprite gUnknown_08596560, 0x1, 40, 0, 10166
 	delay 0xA
-	call AnimScript_82D0014
+	call Anim_SpecialScreenEffect
 	waitforvisualfinish
 	delay 0x1
 	blendoff
 	end
 
-AnimScript_82D0014:
+Anim_SpecialScreenEffect:
 	createsprite gUnknown_08596624, 0x2, 23, 0, 0, 1
 	delay 0x6
 	createsprite gUnknown_08596624, 0x2, 31, -8, 0, 1
@@ -5115,7 +5102,7 @@ Move_MIRROR_COAT:
 	createsprite gUnknown_08596590, 0x1, 40, 0, 10168
 	delay 0xA
 	playsewithpan SE_W115, -64
-	call AnimScript_82D0014
+	call Anim_SpecialScreenEffect
 	waitforvisualfinish
 	delay 0x1
 	blendoff
@@ -5178,7 +5165,7 @@ Move_BUBBLE:
 	playsewithpan SE_W145, -64
 	waitplaysewithpan SE_W145B, +63, 0x64
 	waitforvisualfinish
-	call AnimScript_82D7B53
+	call Anim_BulbbleEffect
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -5190,16 +5177,16 @@ Move_SMOG:
 	monbgprio_29
 	setalpha 0x80C
 	loopsewithpan SE_W054, +63, 0x11, 0xA
-	call AnimScript_82D024A
-	call AnimScript_82D024A
-	call AnimScript_82D024A
-	call AnimScript_82D024A
-	call AnimScript_82D024A
-	call AnimScript_82D024A
-	call AnimScript_82D024A
+	call Anim_Smog1
+	call Anim_Smog1
+	call Anim_Smog1
+	call Anim_Smog1
+	call Anim_Smog1
+	call Anim_Smog1
+	call Anim_Smog1
 	delay 0x78
 	loopsewithpan SE_W092, +63, 0x12, 0x2
-	createvisualtask sub_8115A04, 0x2, 4, 2, 2, 0, 12, 26650
+	createvisualtask sub_8115A04, 0x2, 4, 2, 2, 0, 12, RGB(26, 0, 26)
 	delay 0xA
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 15, 1
 	waitforvisualfinish
@@ -5207,7 +5194,7 @@ Move_SMOG:
 	blendoff
 	end
 
-AnimScript_82D024A:
+Anim_Smog1:
 	createsprite gUnknown_08595C44, 0x2, 0, -24, 48, 240, 1, 0
 	delay 0x7
 	return
@@ -5257,18 +5244,18 @@ Move_SAND_ATTACK:
 	createsprite gUnknown_0857FE70, 0x2, 0, -10, 0, 0, 3
 	waitforvisualfinish
 	createsprite gUnknown_0857FE58, 0x2, 0, 0, 2
-	call AnimScript_82D0337
-	call AnimScript_82D0337
-	call AnimScript_82D0337
-	call AnimScript_82D0337
-	call AnimScript_82D0337
-	call AnimScript_82D0337
+	call Anim_SandAttack1
+	call Anim_SandAttack1
+	call Anim_SandAttack1
+	call Anim_SandAttack1
+	call Anim_SandAttack1
+	call Anim_SandAttack1
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
 
-AnimScript_82D0337:
+Anim_SandAttack1:
 	createsprite gUnknown_085971A8, 0x82, 15, 15, 20, 0, 0
 	createsprite gUnknown_085971A8, 0x82, 15, 15, 20, 10, 10
 	createsprite gUnknown_085971A8, 0x82, 15, 15, 20, -10, -10
@@ -5283,16 +5270,16 @@ Move_MUD_SLAP:
 	createsprite gUnknown_0857FE70, 0x2, 0, -10, 0, 0, 3
 	waitforvisualfinish
 	createsprite gUnknown_0857FE58, 0x2, 0, 0, 2
-	call AnimScript_82D03D5
-	call AnimScript_82D03D5
-	call AnimScript_82D03D5
-	call AnimScript_82D03D5
-	call AnimScript_82D03D5
-	call AnimScript_82D03D5
+	call Anim_MudSlap1
+	call Anim_MudSlap1
+	call Anim_MudSlap1
+	call Anim_MudSlap1
+	call Anim_MudSlap1
+	call Anim_MudSlap1
 	waitforvisualfinish
 	end
 
-AnimScript_82D03D5:
+Anim_MudSlap1:
 	createsprite gUnknown_085971CC, 0x82, 15, 15, 20, 0, 0
 	createsprite gUnknown_085971CC, 0x82, 15, 15, 20, 10, 5
 	createsprite gUnknown_085971CC, 0x82, 15, 15, 20, -10, -5
@@ -5336,14 +5323,14 @@ Move_DRAGON_RAGE:
 Move_RAIN_DANCE:
 	loadspritegfx 0x2783
 	playsewithpan SE_W240, -64
-	createvisualtask sub_8116620, 0xA, 1921, 2, 0, 4, 0
+	createvisualtask sub_8116620, 0xA, 0x781, 2, 0, 4, RGB_BLACK
 	waitforvisualfinish
 	createvisualtask sub_8107188, 0x2, 0, 3, 120
 	createvisualtask sub_8107188, 0x2, 0, 3, 120
 	delay 0x78
 	delay 0x1E
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 1921, 2, 4, 0, 0
+	createvisualtask sub_8116620, 0xA, 0x781, 2, 4, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -5420,25 +5407,25 @@ Move_ICE_BEAM:
 	createsprite gUnknown_08595B2C, 0x2, 20, 12, 0, 12, 20
 	createsprite gUnknown_08595B2C, 0x2, 20, -12, 0, -12, 20
 	delay 0x1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
 	createsprite gUnknown_08597274, 0x2, 4, -31, 0, 7, RGB(0, 20, 31)
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 25, 1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
-	call AnimScript_82D07C1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
+	call Anim_IceBeam1
 	createsprite gUnknown_08595B14, 0x2, 20, 0, 0, 0, 11
 	delay 0x1
 	createsprite gUnknown_08595B14, 0x2, 20, 0, 0, 0, 11
 	waitforvisualfinish
 	delay 0x14
-	call AnimScript_82D7720
+	call Anim_FreezeEffect1
 	createsprite gUnknown_08597274, 0x2, 4, 5, 7, 0, RGB(0, 20, 31)
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 0, 7, 0, RGB_BLACK
@@ -5447,7 +5434,7 @@ Move_ICE_BEAM:
 	blendoff
 	end
 
-AnimScript_82D07C1:
+Anim_IceBeam1:
 	createsprite gUnknown_08595B2C, 0x2, 20, 12, 0, 12, 20
 	createsprite gUnknown_08595B2C, 0x2, 20, -12, 0, -12, 20
 	createsprite gUnknown_08595B14, 0x2, 20, 0, 0, 0, 11
@@ -5467,26 +5454,26 @@ Move_AURORA_BEAM:
 	playsewithpan SE_W062, -64
 	setarg 0x7, 0x0
 	createvisualtask sub_8107528, 0xA, 130
-	call AnimScript_82D088B
+	call Anim_AuroraBeam1
 	createvisualtask sub_80D52D0, 0x5, 1, 1, 0, 17, 1
-	call AnimScript_82D088B
-	call AnimScript_82D088B
-	call AnimScript_82D088B
+	call Anim_AuroraBeam1
+	call Anim_AuroraBeam1
+	call Anim_AuroraBeam1
 	setarg 0x7, 0xFFFF
 	createsoundtask sub_8158C58, 183, -64, 63, 3, 6, 0, 10
 	createvisualtask sub_80D52D0, 0x5, 1, 2, 0, 40, 1
-	call AnimScript_82D088B
-	call AnimScript_82D088B
-	call AnimScript_82D088B
-	call AnimScript_82D088B
-	call AnimScript_82D088B
-	call AnimScript_82D088B
+	call Anim_AuroraBeam1
+	call Anim_AuroraBeam1
+	call Anim_AuroraBeam1
+	call Anim_AuroraBeam1
+	call Anim_AuroraBeam1
+	call Anim_AuroraBeam1
 	waitforvisualfinish
 	restorebg
 	waitbgfadein
 	end
 
-AnimScript_82D088B:
+Anim_AuroraBeam1:
 	createsprite gUnknown_085950B4, 0x82, 20, 0, 0, 0, 17
 	delay 0x1
 	createsprite gUnknown_085950B4, 0x82, 20, 0, 0, 0, 17
@@ -5499,24 +5486,23 @@ AnimScript_82D088B:
 
 Move_SOLAR_BEAM:
 	loadspritegfx 0x27A3
-	choosetwoturnanim AnimScript_82D08E6, AnimScript_82D09E3
-
-AnimScript_82D08E4:
+	choosetwoturnanim Anim_SolarBeamSetUp, Anim_SolarBeamUnleash
+Anim_SolarBeamEnd:
 	waitforvisualfinish
 	end
 
-AnimScript_82D08E6:
+Anim_SolarBeamSetUp:
 	monbg ANIM_ATK_PARTNER
 	setalpha 0x80C
-	createvisualtask sub_8115A04, 0x2, 2, 1, 4, 0, 11, 12287
+	createvisualtask sub_8115A04, 0x2, 2, 1, 4, 0, 11, RGB(31, 31, 11)
 	playsewithpan SE_W025, -64
-	call AnimScript_82D0910
+	call Anim_SolarBeamSetUp1
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
-	goto AnimScript_82D08E4
+	goto Anim_SolarBeamEnd
 
-AnimScript_82D0910:
+Anim_SolarBeamSetUp1:
 	createsprite gUnknown_085921E0, 0x2, 40, 40, 16
 	delay 0x2
 	createsprite gUnknown_085921E0, 0x2, -40, -40, 16
@@ -5547,15 +5533,15 @@ AnimScript_82D0910:
 	delay 0x2
 	return
 
-AnimScript_82D09E3:
-	call AnimScript_82D7D1D
+Anim_SolarBeamUnleash:
+	call Anim_SetSolarbeamBg
 	panse_1B SE_W076, -64, +63, +2, 0x0
 	createvisualtask sub_80FEA58, 0x5
 	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 0
 	delay 0x4
 	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 1
 	delay 0x4
-	createvisualtask sub_8116620, 0xA, 4, 1, 0, 10, 1017
+	createvisualtask sub_8116620, 0xA, 4, 1, 0, 10, RGB(25, 31, 0)
 	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 2
 	delay 0x4
 	createvisualtask sub_80D52D0, 0x5, 1, 2, 0, 65, 1
@@ -5567,14 +5553,14 @@ AnimScript_82D09E3:
 	delay 0x4
 	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 6
 	delay 0x4
-	call AnimScript_82D0AB5
-	call AnimScript_82D0AB5
+	call Anim_SolarBeamUnleash1
+	call Anim_SolarBeamUnleash1
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 4, 1, 10, 0, 1017
-	call AnimScript_82D7D57
-	goto AnimScript_82D08E4
+	createvisualtask sub_8116620, 0xA, 4, 1, 10, 0, RGB(25, 31, 0)
+	call Anim_UnsetSolarbeamBg
+	goto Anim_SolarBeamEnd
 
-AnimScript_82D0AB5:
+Anim_SolarBeamUnleash1:
 	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 0
 	delay 0x4
 	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 1
@@ -5594,21 +5580,20 @@ AnimScript_82D0AB5:
 Move_BLIZZARD:
 	loadspritegfx 0x279D
 	monbg ANIM_DEF_PARTNER
-	createvisualtask sub_8117754, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82D0CB2
+	createvisualtask AnimTask_IsAttackerOpponentSide, 0x2
+	jumprettrue Anim_BlizzardAgainstPlayer
 	fadetobg BG_HIGHSPEED_OPPONENT
-
-AnimScript_82D0B43:
+Anim_BlizzardContinue:
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, -2304, 0, 1, -1
 	waitbgfadein
 	waitforvisualfinish
 	panse_1B SE_W059, -64, +63, +2, 0x0
-	call AnimScript_82D0B7D
-	call AnimScript_82D0B7D
+	call Anim_Blizzard1
+	call Anim_Blizzard1
 	playsewithpan SE_W059B, +63
 	waitforvisualfinish
-	call AnimScript_82D77A4
+	call Anim_FreezeEffect2
 	waitforvisualfinish
 	delay 0x14
 	restorebg
@@ -5618,7 +5603,7 @@ AnimScript_82D0B43:
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-AnimScript_82D0B7D:
+Anim_Blizzard1:
 	createsprite gUnknown_08595B98, 0x28, 0, -10, 0, -10, 72, 1
 	createsprite gUnknown_08595BB0, 0x28, 0, 0, 0, 0, 80, 0, 0, 1
 	delay 0x3
@@ -5642,9 +5627,9 @@ AnimScript_82D0B7D:
 	delay 0x3
 	return
 
-AnimScript_82D0CB2:
+Anim_BlizzardAgainstPlayer:
 	fadetobg BG_HIGHSPEED_PLAYER
-	goto AnimScript_82D0B43
+	goto Anim_BlizzardContinue
 
 Move_POWDER_SNOW:
 	loadspritegfx 0x279D
@@ -5652,19 +5637,19 @@ Move_POWDER_SNOW:
 	createsprite gUnknown_08597274, 0x2, 31, 1, 0, 3, RGB_BLACK
 	waitforvisualfinish
 	panse_1B SE_W016, -64, +63, +2, 0x0
-	call AnimScript_82D0D03
-	call AnimScript_82D0D03
+	call Anim_PowderSnow1
+	call Anim_PowderSnow1
 	playsewithpan SE_W016B, +63
 	waitforvisualfinish
 	waitsound
-	call AnimScript_82D77A4
+	call Anim_FreezeEffect2
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	delay 0x14
 	createsprite gUnknown_08597274, 0x2, 31, 1, 3, 0, RGB_BLACK
 	end
 
-AnimScript_82D0D03:
+Anim_PowderSnow1:
 	createsprite gUnknown_08595BC8, 0x28, 0, 0, 0, 0, 56, 4, 4, 1
 	delay 0x3
 	createsprite gUnknown_08595BC8, 0x28, 0, -10, 0, -10, 56, 4, 4, 1
@@ -5691,32 +5676,32 @@ Move_HYDRO_PUMP:
 	delay 0x6
 	panse_1B SE_W056, -64, +63, +2, 0x0
 	createvisualtask sub_81076C8, 0x5, 100
-	call AnimScript_82D0E52
-	call AnimScript_82D0E52
-	call AnimScript_82D0E52
+	call Anim_HydroPump1
+	call Anim_HydroPump1
+	call Anim_HydroPump1
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 37, 1
-	call AnimScript_82D0E93
-	call AnimScript_82D0E52
-	call AnimScript_82D0E52
-	call AnimScript_82D0E93
-	call AnimScript_82D0E52
-	call AnimScript_82D0E52
-	call AnimScript_82D0E93
-	call AnimScript_82D0E52
-	call AnimScript_82D0E52
-	call AnimScript_82D0E93
-	call AnimScript_82D0E52
-	call AnimScript_82D0E52
-	call AnimScript_82D0E93
+	call Anim_HydroPump2
+	call Anim_HydroPump1
+	call Anim_HydroPump1
+	call Anim_HydroPump2
+	call Anim_HydroPump1
+	call Anim_HydroPump1
+	call Anim_HydroPump2
+	call Anim_HydroPump1
+	call Anim_HydroPump1
+	call Anim_HydroPump2
+	call Anim_HydroPump1
+	call Anim_HydroPump1
+	call Anim_HydroPump2
 	delay 0x1
 	delay 0x1
-	call AnimScript_82D0E93
+	call Anim_HydroPump2
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D0E52:
+Anim_HydroPump1:
 	createsprite gUnknown_085950E4, 0x3, 10, 10, 0, 16
 	createsprite gUnknown_085950E4, 0x3, 10, 10, 0, -16
 	delay 0x1
@@ -5725,7 +5710,7 @@ AnimScript_82D0E52:
 	delay 0x1
 	return
 
-AnimScript_82D0E93:
+Anim_HydroPump2:
 	createsprite gUnknown_08597388, 0x4, 0, 15, 1, 1
 	createsprite gUnknown_08597388, 0x4, 0, -15, 1, 1
 	return
@@ -5738,35 +5723,35 @@ Move_SIGNAL_BEAM:
 	delay 0x6
 	panse_1B SE_W062, -64, +63, +1, 0x0
 	createvisualtask sub_81076C8, 0x5, 100
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 25, 1
 	createsprite gUnknown_0859728C, 0x2, 4, 8, 5, 31, 8, 961, 8
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
-	call AnimScript_82D0F79
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
+	call Anim_SignalBeam1
 	waitforvisualfinish
 	end
 
-AnimScript_82D0F79:
+Anim_SignalBeam1:
 	createsprite gUnknown_08595114, 0x83, 10, 10, 0, 16
 	createsprite gUnknown_0859512C, 0x83, 10, 10, 0, -16
 	delay 0x1
@@ -5787,10 +5772,10 @@ Move_ABSORB:
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 5, 1
 	waitforvisualfinish
 	delay 0x3
-	call AnimScript_82D1009
+	call Anim_AbsorbEffect
 	waitforvisualfinish
 	delay 0xF
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 1, 4, 0, RGB(13, 31, 12)
 	waitforvisualfinish
@@ -5798,7 +5783,7 @@ Move_ABSORB:
 	blendoff
 	end
 
-AnimScript_82D1009:
+Anim_AbsorbEffect:
 	playsewithpan SE_W152, +63
 	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	delay 0x4
@@ -5840,10 +5825,10 @@ Move_MEGA_DRAIN:
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 5, 1
 	waitforvisualfinish
 	delay 0x3
-	call AnimScript_82D1121
+	call Anim_MegaDrainEffect
 	waitforvisualfinish
 	delay 0xF
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 1, 8, 0, RGB(13, 31, 12)
 	waitforvisualfinish
@@ -5851,7 +5836,7 @@ Move_MEGA_DRAIN:
 	blendoff
 	end
 
-AnimScript_82D1121:
+Anim_MegaDrainEffect:
 	playsewithpan SE_W145C, +63
 	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	createsprite gUnknown_08592270, 0x3, 5, -18, -20, 35
@@ -5901,10 +5886,10 @@ Move_GIGA_DRAIN:
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 5, 1
 	waitforvisualfinish
 	delay 0x3
-	call AnimScript_82D12B1
+	call Anim_GigaDrainEffect
 	waitforvisualfinish
 	delay 0xF
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 1, 12, 0, RGB(13, 31, 12)
 	waitforvisualfinish
@@ -5912,7 +5897,7 @@ Move_GIGA_DRAIN:
 	blendoff
 	end
 
-AnimScript_82D12B1:
+Anim_GigaDrainEffect:
 	playsewithpan SE_W202, +63
 	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	createsprite gUnknown_08592270, 0x3, 5, -18, -40, 35
@@ -5974,10 +5959,10 @@ Move_LEECH_LIFE:
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 7, 0
 	waitforvisualfinish
-	call AnimScript_82D1009
+	call Anim_AbsorbEffect
 	waitforvisualfinish
 	delay 0xF
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 1, 7, 0, 0
 	waitforvisualfinish
@@ -5987,29 +5972,29 @@ Move_LEECH_LIFE:
 
 Move_SYNTHESIS:
 	loadspritegfx 0x2741
-	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 16, 19451
+	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 16, RGB(27, 31, 18)
 	playsewithpan SE_W025, -64
-	call AnimScript_82D79B4
+	call Anim_GrantingStarsEffect
 	waitforvisualfinish
 	unloadspritegfx 0x2741
 	delay 0x1
 	loadspritegfx 0x272F
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	end
 
 Move_TOXIC:
 	loadspritegfx 0x27A7
 	loadspritegfx 0x27A6
-	call AnimScript_82D1515
-	call AnimScript_82D1515
+	call Anim_Toxic1
+	call Anim_Toxic1
 	waitforvisualfinish
 	delay 0xF
-	call AnimScript_82D7A71
+	call Anim_PoisonEffect
 	waitforvisualfinish
 	end
 
-AnimScript_82D1515:
+Anim_Toxic1:
 	createsprite gUnknown_08596134, 0x82, -24, 16, 1, 1
 	playsewithpan SE_W092, +63
 	delay 0xF
@@ -6030,25 +6015,25 @@ Move_SLUDGE:
 	createsprite gUnknown_085961A8, 0x82, 20, 0, 40, 0
 	waitforvisualfinish
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 5, 1
-	createvisualtask sub_8115A04, 0x2, 4, 1, 2, 0, 12, 31774
-	call AnimScript_82D7A71
+	createvisualtask sub_8115A04, 0x2, 4, 1, 2, 0, 12, RGB(30, 0, 31)
+	call Anim_PoisonEffect
 	waitforvisualfinish
 	end
 
 Move_SLUDGE_BOMB:
 	loadspritegfx 0x27A6
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
-	call AnimScript_82D16BC
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
+	call Anim_SludgeBomb1
 	createvisualtask sub_80D52D0, 0x5, 1, 3, 0, 15, 1
-	createvisualtask sub_8115A04, 0x2, 4, 1, 2, 0, 12, 31774
+	createvisualtask sub_8115A04, 0x2, 4, 1, 2, 0, 12, RGB(30, 0, 31)
 	createsprite gUnknown_085961D8, 0x82, 42, 27, 20
 	createsprite gUnknown_085961D8, 0x82, -27, 44, 20
 	createsprite gUnknown_085961D8, 0x82, 39, -28, 20
@@ -6069,11 +6054,11 @@ Move_SLUDGE_BOMB:
 	delay 0x0
 	waitsound
 	waitforvisualfinish
-	call AnimScript_82D7A71
+	call Anim_PoisonEffect
 	waitforvisualfinish
 	end
 
-AnimScript_82D16BC:
+Anim_SludgeBomb1:
 	playsewithpan SE_W145C, -64
 	createsprite gUnknown_085961A8, 0x82, 20, 0, 40, 0
 	delay 0x3
@@ -6093,7 +6078,7 @@ Move_ACID:
 	delay 0xF
 	createvisualtask sub_80D52D0, 0x5, 1, 2, 0, 10, 1
 	createvisualtask sub_80D52D0, 0x5, 3, 2, 0, 10, 1
-	createvisualtask sub_8115A04, 0x2, 20, 2, 2, 0, 12, 31774
+	createvisualtask sub_8115A04, 0x2, 20, 2, 2, 0, 12, RGB(30, 0, 31)
 	createsprite gUnknown_0859620C, 0x82, 0, -22, 0, 15, 55
 	playsewithpan SE_W145, +63
 	delay 0xA
@@ -6188,12 +6173,11 @@ Move_MEGAHORN:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_W082, -64
-	jumpifcontest AnimScript_82D19FA
+	jumpifcontest Anim_MegahornInContest
 	fadetobg BG_DRILL
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, -2304, 768, 1, -1
-
-AnimScript_82D1947:
+Anim_MegahornContinue:
 	waitbgfadein
 	setalpha 0x80C
 	createvisualtask sub_80D51AC, 0x5, 0, 2, 0, 15, 1
@@ -6222,11 +6206,11 @@ AnimScript_82D1947:
 	waitbgfadein
 	end
 
-AnimScript_82D19FA:
+Anim_MegahornInContest:
 	fadetobg BG_DRILL_CONTESTS
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, 2304, 768, 0, -1
-	goto AnimScript_82D1947
+	goto Anim_MegahornContinue
 
 Move_GUST:
 	loadspritegfx 0x2719
@@ -6282,15 +6266,15 @@ Move_AEROBLAST:
 	loadspritegfx 0x27AA
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
-	call AnimScript_82D7CE5
+	call Anim_SetFlyingBg
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
-	call AnimScript_82D1B82
+	call Anim_Aeroblast1
 	createvisualtask sub_80D51AC, 0x5, 1, 5, 0, 50, 1
-	call AnimScript_82D1B82
-	call AnimScript_82D1B82
-	call AnimScript_82D1B82
-	call AnimScript_82D1B82
+	call Anim_Aeroblast1
+	call Anim_Aeroblast1
+	call Anim_Aeroblast1
+	call Anim_Aeroblast1
 	waitforvisualfinish
 	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
 	playsewithpan SE_W013, +63
@@ -6298,10 +6282,10 @@ Move_AEROBLAST:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 0x0
-	call AnimScript_82D7D15
+	call Anim_UnsetFlyingBg
 	end
 
-AnimScript_82D1B82:
+Anim_Aeroblast1:
 	playsewithpan SE_W026, -64
 	createsprite gUnknown_085962D4, 0x2, 14, -12, 0, -12, 15, 0, 0
 	createsprite gUnknown_085962D4, 0x2, 26, 8, 12, 8, 15, 0, 0
@@ -6397,24 +6381,24 @@ Move_FLAMETHROWER:
 	delay 0x6
 	createvisualtask sub_81076C8, 0x5, 100
 	panse_1B SE_W053, -64, +63, +2, 0x0
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 43, 1
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
-	call AnimScript_82D1E58
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
+	call Anim_Flamethrower1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D1E58:
+Anim_Flamethrower1:
 	createsprite gUnknown_08595158, 0x3, 10, 10, 0, 16
 	delay 0x2
 	createsprite gUnknown_08595158, 0x3, 10, 10, 0, 16
@@ -6450,16 +6434,16 @@ Move_WHIRLPOOL:
 	createsprite gUnknown_08597274, 0x0, 4, 2, 0, 7, RGB(0, 13, 23)
 	playsewithpan SE_W250, +63
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 50, 1
-	call AnimScript_82D1F5B
-	call AnimScript_82D1F5B
-	call AnimScript_82D1F5B
+	call Anim_WhirlpoolEffect
+	call Anim_WhirlpoolEffect
+	call Anim_WhirlpoolEffect
 	delay 0xC
 	createsprite gUnknown_08597274, 0x0, 4, 2, 7, 0, RGB(0, 13, 23)
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-AnimScript_82D1F5B:
+Anim_WhirlpoolEffect:
 	createsprite gUnknown_08596B70, 0x82, 0, 28, 384, 50, 8, 50, 1
 	delay 0x2
 	createsprite gUnknown_08596B70, 0x82, 0, 32, 240, 40, 11, -46, 1
@@ -6477,18 +6461,17 @@ AnimScript_82D1F5B:
 Move_FLY:
 	loadspritegfx 0x27AC
 	loadspritegfx 0x2797
-	choosetwoturnanim AnimScript_82D1FF7, AnimScript_82D200F
-
-AnimScript_82D1FF5:
+	choosetwoturnanim Anim_FlySetUp, Anim_FlyUnleash
+Anim_FlyEnd:
 	waitforvisualfinish
 	end
 
-AnimScript_82D1FF7:
+Anim_FlySetUp:
 	playsewithpan SE_W019, -64
 	createsprite gUnknown_08596340, 0x2, 0, 0, 13, 336
-	goto AnimScript_82D1FF5
+	goto Anim_FlyEnd
 
-AnimScript_82D200F:
+Anim_FlyUnleash:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W104, -64
@@ -6500,22 +6483,21 @@ AnimScript_82D200F:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
-	goto AnimScript_82D1FF5
+	goto Anim_FlyEnd
 
 Move_BOUNCE:
 	loadspritegfx 0x27AC
 	loadspritegfx 0x2797
-	choosetwoturnanim AnimScript_82D2060, AnimScript_82D2074
-
-AnimScript_82D205F:
+	choosetwoturnanim Anim_BounceSetUp, Anim_BounceUnleash
+Anim_BounceEnd:
 	end
 
-AnimScript_82D2060:
+Anim_BounceSetUp:
 	playsewithpan SE_W100, -64
 	createsprite gUnknown_08596420, 0x2, 0, 0
-	goto AnimScript_82D205F
+	goto Anim_BounceEnd
 
-AnimScript_82D2074:
+Anim_BounceUnleash:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W207, +63
@@ -6527,7 +6509,7 @@ AnimScript_82D2074:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
-	goto AnimScript_82D205F
+	goto Anim_BounceEnd
 
 Move_KARATE_CHOP:
 	loadspritegfx 0x279F
@@ -6627,33 +6609,32 @@ Move_TRIPLE_KICK:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W233B, +63
-	jumpifmoveturn 0x0, AnimScript_82D22B8
-	jumpifmoveturn 0x1, AnimScript_82D22EE
-	goto AnimScript_82D2324
-
-AnimScript_82D22B3:
+	jumpifmoveturn 0x0, Anim_TripleKickLeft
+	jumpifmoveturn 0x1, Anim_TripleKickRight
+	goto Anim_TripleKickCenter
+Anim_TripleKickContinue:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D22B8:
+Anim_TripleKickLeft:
 	createsprite gUnknown_08595E98, 0x84, -16, -8, 20, 1, 1
 	createsprite gUnknown_08597358, 0x83, -16, -16, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 4, 0, 6, 1
-	goto AnimScript_82D22B3
+	goto Anim_TripleKickContinue
 
-AnimScript_82D22EE:
+Anim_TripleKickRight:
 	createsprite gUnknown_08595E98, 0x84, 8, 8, 20, 1, 1
 	createsprite gUnknown_08597358, 0x83, 8, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 4, 0, 6, 1
-	goto AnimScript_82D22B3
+	goto Anim_TripleKickContinue
 
-AnimScript_82D2324:
+Anim_TripleKickCenter:
 	createsprite gUnknown_08595E98, 0x84, 0, 0, 20, 1, 1
 	createsprite gUnknown_08597358, 0x83, 0, -8, 1, 1
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
-	goto AnimScript_82D22B3
+	goto Anim_TripleKickContinue
 
 Move_DYNAMIC_PUNCH:
 	loadspritegfx 0x279F
@@ -6787,15 +6768,15 @@ Move_SUBMISSION:
 	waitplaysewithpan SE_W004, +63, 0x5A
 	createvisualtask sub_80D5738, 0x2, 0, -18, 6, 6, 4
 	createvisualtask sub_80D5738, 0x2, 1, 18, 6, 6, 4
-	call AnimScript_82D26D3
-	call AnimScript_82D26D3
-	call AnimScript_82D26D3
+	call Anim_Submission1
+	call Anim_Submission1
+	call Anim_Submission1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D26D3:
+Anim_Submission1:
 	createsprite gUnknown_08597358, 0x3, 0, -12, 1, 1
 	delay 0x8
 	createsprite gUnknown_08597358, 0x3, -12, 8, 1, 1
@@ -6808,21 +6789,21 @@ Move_SUNNY_DAY:
 	loadspritegfx 0x27AD
 	monbg ANIM_ATK_PARTNER
 	setalpha 0x30D
-	createvisualtask sub_8116620, 0xA, 1921, 1, 0, 6, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 0x781, 1, 0, 6, RGB_WHITE
 	waitforvisualfinish
 	panse_26 SE_W080, -64, +63, +1, 0x0
-	call AnimScript_82D2753
-	call AnimScript_82D2753
-	call AnimScript_82D2753
-	call AnimScript_82D2753
+	call Anim_SunnyDay1
+	call Anim_SunnyDay1
+	call Anim_SunnyDay1
+	call Anim_SunnyDay1
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 1921, 1, 6, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 0x781, 1, 6, 0, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
 
-AnimScript_82D2753:
+Anim_SunnyDay1:
 	createsprite gUnknown_085954A0, 0x28
 	delay 0x6
 	return
@@ -6832,14 +6813,14 @@ Move_COTTON_SPORE:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	loopsewithpan SE_W077, +63, 0x12, 0xA
-	call AnimScript_82D277D
-	call AnimScript_82D277D
-	call AnimScript_82D277D
+	call Anim_CottonSpore1
+	call Anim_CottonSpore1
+	call Anim_CottonSpore1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-AnimScript_82D277D:
+Anim_CottonSpore1:
 	createsprite gUnknown_085922EC, 0x2, 0, -20, 85, 80, 0
 	delay 0xC
 	createsprite gUnknown_085922EC, 0x2, 0, -10, 170, 80, 0
@@ -6854,16 +6835,16 @@ Move_SPORE:
 	setalpha 0x80C
 	createvisualtask sub_80FEE1C, 0x2
 	loopsewithpan SE_W077, +63, 0x10, 0xB
-	call AnimScript_82D27E2
-	call AnimScript_82D27E2
-	call AnimScript_82D27E2
+	call Anim_Spore1
+	call Anim_Spore1
+	call Anim_Spore1
 	waitforvisualfinish
 	delay 0x1
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D27E2:
+Anim_Spore1:
 	createsprite gUnknown_085922EC, 0x82, 0, -20, 85, 80, 1
 	delay 0xC
 	createsprite gUnknown_085922EC, 0x82, 0, -10, 170, 80, 1
@@ -7006,21 +6987,21 @@ Move_MIST:
 	monbg ANIM_ATK_PARTNER
 	setalpha 0x80C
 	loopsewithpan SE_W054, -64, 0x14, 0xF
-	call AnimScript_82D2C34
-	call AnimScript_82D2C34
-	call AnimScript_82D2C34
-	call AnimScript_82D2C34
-	call AnimScript_82D2C34
-	call AnimScript_82D2C34
-	call AnimScript_82D2C34
+	call Anim_Mist1
+	call Anim_Mist1
+	call Anim_Mist1
+	call Anim_Mist1
+	call Anim_Mist1
+	call Anim_Mist1
+	call Anim_Mist1
 	delay 0x20
-	createvisualtask sub_8115A04, 0x2, 10, 8, 2, 0, 14, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 10, 8, 2, 0, 14, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
 
-AnimScript_82D2C34:
+Anim_Mist1:
 	createsprite gUnknown_08595C2C, 0x2, 0, -24, 48, 240, 0, 1
 	delay 0x7
 	return
@@ -7030,9 +7011,9 @@ Move_HAZE:
 	playsewithpan SE_W114, 0
 	createvisualtask sub_810C0A0, 0x5
 	delay 0x1E
-	createvisualtask sub_8116620, 0xA, 1920, 2, 0, 16, 0
+	createvisualtask sub_8116620, 0xA, 0x780, 2, 0, 16, RGB_BLACK
 	delay 0x5A
-	createvisualtask sub_8116620, 0xA, 1920, 1, 16, 0, 0
+	createvisualtask sub_8116620, 0xA, 0x780, 1, 16, 0, RGB_BLACK
 	end
 
 Move_FIRE_PUNCH:
@@ -7041,7 +7022,7 @@ Move_FIRE_PUNCH:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 9, 31
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 9, RGB_RED
 	createsprite gUnknown_08595368, 0x81, 0
 	createsprite gUnknown_08595368, 0x81, 64
 	createsprite gUnknown_08595368, 0x81, 128
@@ -7051,17 +7032,17 @@ Move_FIRE_PUNCH:
 	createsprite gUnknown_08595E98, 0x83, 0, 0, 8, 1, 0
 	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 1
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 15, 1
-	call AnimScript_82D2D18
+	call Anim_FireMoveEffect
 	delay 0x4
 	playsewithpan SE_W007, +63
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 4, 0, 9, 0, 31
+	createvisualtask sub_8116620, 0xA, 4, 0, 9, 0, RGB_RED
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D2D18:
+Anim_FireMoveEffect:
 	createsprite gUnknown_08595380, 0x81, 0, 10, 192, 176, 40
 	createsprite gUnknown_08595380, 0x81, 0, 10, -192, 240, 40
 	createsprite gUnknown_08595380, 0x81, 0, 10, 192, -160, 40
@@ -7096,7 +7077,7 @@ Move_DREAM_EATER:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_2A ANIM_TARGET
 	playsewithpan SE_W060, -64
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	setalpha 0x808
 	playsewithpan SE_W107, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 15, 1
@@ -7104,18 +7085,18 @@ Move_DREAM_EATER:
 	waitforvisualfinish
 	setalpha 0x80C
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 2, 25, 1
-	call AnimScript_82D2E51
+	call Anim_DreamEaterEffect
 	waitforvisualfinish
 	delay 0xF
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 0x1
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
-AnimScript_82D2E51:
+Anim_DreamEaterEffect:
 	playsewithpan SE_W207, +63
 	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	createsprite gUnknown_08592270, 0x3, 5, -18, -40, 35
@@ -7185,7 +7166,7 @@ Move_POISON_GAS:
 	createsprite gUnknown_08595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 0x28
 	loopsewithpan SE_W054, +63, 0x1C, 0x6
-	createvisualtask sub_8115A04, 0x2, 4, 6, 2, 0, 12, 26650
+	createvisualtask sub_8115A04, 0x2, 4, 6, 2, 0, 12, RGB(26, 0, 26)
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_DEF_PARTNER
@@ -7194,65 +7175,65 @@ Move_POISON_GAS:
 
 Move_BIND:
 	createvisualtask sub_80D5EB8, 0x5, 0, 6, 3328, 4, 0
-	goto AnimScript_82D30DE
+	goto Anim_BindWrap
 
-AnimScript_82D30DE:
+Anim_BindWrap:
 	playsewithpan SE_W020, +63
-	call AnimScript_82D30EE
-	call AnimScript_82D30EE
+	call Anim_BindWrap1
+	call Anim_BindWrap1
 	waitforvisualfinish
 	end
 
-AnimScript_82D30EE:
+Anim_BindWrap1:
 	createvisualtask sub_80D6064, 0x5, 10, -5, 5, 1, 0
 	delay 0x10
 	return
 
 Move_WRAP:
 	createvisualtask sub_80D5830, 0x2, 0, 6, 4, 2, 4
-	goto AnimScript_82D30DE
+	goto Anim_BindWrap
 
 Move_PSYBEAM:
 	loadspritegfx 0x27B3
 	playsewithpan SE_W060, -64
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	createsoundtask sub_8158C58, 200, -64, 63, 3, 4, 0, 15
-	call AnimScript_82D319C
-	call AnimScript_82D319C
+	call Anim_Psybeam1
+	call Anim_Psybeam1
 	createvisualtask sub_80D5EB8, 0x5, 0, 6, 2048, 4, 1
-	createvisualtask sub_8115A04, 0x2, 4, 2, 2, 0, 12, 32351
-	call AnimScript_82D319C
-	call AnimScript_82D319C
-	call AnimScript_82D319C
-	call AnimScript_82D319C
-	call AnimScript_82D319C
-	call AnimScript_82D319C
-	call AnimScript_82D319C
-	call AnimScript_82D319C
-	call AnimScript_82D319C
+	createvisualtask sub_8115A04, 0x2, 4, 2, 2, 0, 12, RGB(31, 18, 31)
+	call Anim_Psybeam1
+	call Anim_Psybeam1
+	call Anim_Psybeam1
+	call Anim_Psybeam1
+	call Anim_Psybeam1
+	call Anim_Psybeam1
+	call Anim_Psybeam1
+	call Anim_Psybeam1
+	call Anim_Psybeam1
 	waitforvisualfinish
 	delay 0x1
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
-AnimScript_82D319C:
+Anim_Psybeam1:
 	createsprite gUnknown_0859663C, 0x82, 16, 0, 0, 0, 13, 0
 	delay 0x4
 	return
 
 Move_HYPNOSIS:
 	loadspritegfx 0x27B3
-	call AnimScript_82D7CD1
-	call AnimScript_82D31E5
-	call AnimScript_82D31E5
-	call AnimScript_82D31E5
-	createvisualtask sub_8115A04, 0x2, 4, 2, 2, 0, 12, 32351
+	call Anim_SetPsychicBackground
+	call Anim_Hypnosis1
+	call Anim_Hypnosis1
+	call Anim_Hypnosis1
+	createvisualtask sub_8115A04, 0x2, 4, 2, 2, 0, 12, RGB(31, 18, 31)
 	waitforvisualfinish
 	delay 0x1
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
-AnimScript_82D31E5:
+Anim_Hypnosis1:
 	playsewithpan SE_W048, -64
 	createsprite gUnknown_0859663C, 0x82, 0, 8, 0, 8, 27, 0
 	createsprite gUnknown_0859663C, 0x82, 16, -8, 0, -8, 27, 0
@@ -7262,22 +7243,22 @@ AnimScript_82D31E5:
 Move_PSYWAVE:
 	loadspritegfx 0x27B5
 	playsewithpan SE_W060, -64
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	createvisualtask sub_81076C8, 0x5, 100
 	createsoundtask sub_8158C58, 203, -64, 63, 2, 9, 0, 10
-	call AnimScript_82D3275
-	call AnimScript_82D3275
-	createvisualtask sub_8115A04, 0x2, 4, 1, 4, 0, 12, 32351
-	call AnimScript_82D3275
-	call AnimScript_82D3275
-	call AnimScript_82D3275
-	call AnimScript_82D3275
+	call Anim_Psywave1
+	call Anim_Psywave1
+	createvisualtask sub_8115A04, 0x2, 4, 1, 4, 0, 12, RGB(31, 18, 31)
+	call Anim_Psywave1
+	call Anim_Psywave1
+	call Anim_Psywave1
+	call Anim_Psywave1
 	waitforvisualfinish
 	delay 0x1
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
-AnimScript_82D3275:
+Anim_Psywave1:
 	createsprite gUnknown_08595170, 0x83, 10, 10, 0, 16
 	delay 0x4
 	createsprite gUnknown_08595170, 0x83, 10, 10, 0, 16
@@ -7301,7 +7282,7 @@ Move_ZAP_CANNON:
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 5, 1
 	delay 0xF
 	waitplaysewithpan SE_W085B, +63, 0x13
-	call AnimScript_82D7BEA
+	call Anim_ParalysisEffect
 	waitforvisualfinish
 	end
 
@@ -7368,7 +7349,7 @@ Move_POISON_TAIL:
 	createvisualtask sub_811489C, 0x5, 0, 1
 	clearmonbg ANIM_TARGET
 	blendoff
-	call AnimScript_82D7A71
+	call Anim_PoisonEffect
 	waitforvisualfinish
 	end
 
@@ -7404,7 +7385,7 @@ Move_NIGHT_SHADE:
 	createvisualtask sub_811188C, 0x5, 85
 	delay 0x46
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 12, 1
-	createvisualtask sub_8115A04, 0x2, 4, 0, 2, 0, 13, 0
+	createvisualtask sub_8115A04, 0x2, 4, 0, 2, 0, 13, RGB_BLACK
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	delay 0x1
@@ -7464,33 +7445,32 @@ Move_LICK:
 Move_FOCUS_ENERGY:
 	loadspritegfx 0x27C8
 	playsewithpan SE_W082, -64
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	delay 0x8
-	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 11, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 11, RGB_WHITE
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 32, 1
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	delay 0x8
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	waitforvisualfinish
 	end
 
 Move_BIDE:
-	choosetwoturnanim AnimScript_82D3719, AnimScript_82D3745
+	choosetwoturnanim Anim_BideSetUp, Anim_BideUnleash
 	end
-
-AnimScript_82D3719:
+Anim_BideSetUp:
 	loopsewithpan SE_W036, -64, 0x9, 0x2
-	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 11, 31
+	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 11, RGB_RED
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 32, 1
 	waitforvisualfinish
 	end
 
-AnimScript_82D3745:
+Anim_BideUnleash:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	loopsewithpan SE_W036, -64, 0x9, 0x2
-	createvisualtask sub_8116620, 0xA, 2, 2, 0, 11, 31
+	createvisualtask sub_8116620, 0xA, 2, 2, 0, 11, RGB_RED
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 32, 1
 	waitforvisualfinish
 	createsprite gUnknown_0857FE70, 0x2, 0, 24, 0, 0, 4
@@ -7509,7 +7489,7 @@ AnimScript_82D3745:
 	delay 0x5
 	createsprite gUnknown_0857FE58, 0x2, 0, 0, 7
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 2, 2, 11, 0, 31
+	createvisualtask sub_8116620, 0xA, 2, 2, 11, 0, RGB_RED
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -7523,24 +7503,24 @@ Move_STRING_SHOT:
 	createsprite gUnknown_08597274, 0x5, 1, 2, 0, 9, 0
 	waitforvisualfinish
 	loopsewithpan SE_W081, -64, 0x9, 0x6
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
-	call AnimScript_82D38CC
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
+	call Anim_StringShot1
 	waitforvisualfinish
 	playsewithpan SE_W081B, +63
 	createsprite gUnknown_085969F8, 0x82, 0, 10
@@ -7555,7 +7535,7 @@ Move_STRING_SHOT:
 	createsprite gUnknown_08597274, 0x5, 1, 2, 9, 0, 0
 	end
 
-AnimScript_82D38CC:
+Anim_StringShot1:
 	createsprite gUnknown_085969E0, 0x82, 20, 0, 512, 20, 1
 	delay 0x1
 	return
@@ -7569,20 +7549,20 @@ Move_SPIDER_WEB:
 	waitforvisualfinish
 	monbgprio_28 ANIM_TARGET
 	loopsewithpan SE_W081, -64, 0x9, 0x6
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
-	call AnimScript_82D396D
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
+	call Anim_SpiderWeb1
 	waitforvisualfinish
 	playsewithpan SE_W081B, +63
 	createsprite gUnknown_08596A2C, 0x2
@@ -7592,19 +7572,18 @@ Move_SPIDER_WEB:
 	createsprite gUnknown_08597274, 0x5, 1, 2, 9, 0, 0
 	end
 
-AnimScript_82D396D:
+Anim_SpiderWeb1:
 	createsprite gUnknown_085969E0, 0x82, 20, 0, 512, 20, 0
 	delay 0x1
 	return
 
 Move_RAZOR_WIND:
-	choosetwoturnanim AnimScript_82D398C, AnimScript_82D39DC
-
-AnimScript_82D398A:
+	choosetwoturnanim Anim_RazorWindSetUp, Anim_RazorWindUnleash
+Anim_RazorWindContinue:
 	waitforvisualfinish
 	end
 
-AnimScript_82D398C:
+Anim_RazorWindSetUp:
 	loadspritegfx 0x2719
 	playsewithpan SE_W016, -64
 	createsprite gUnknown_08593550, 0x2, 32, 0, 16, 16, 0, 7, 40
@@ -7612,9 +7591,9 @@ AnimScript_82D398C:
 	createsprite gUnknown_08593550, 0x2, 32, 0, 16, 16, 170, 7, 40
 	waitforvisualfinish
 	playsewithpan SE_W016B, -64
-	goto AnimScript_82D398A
+	goto Anim_RazorWindContinue
 
-AnimScript_82D39DC:
+Anim_RazorWindUnleash:
 	loadspritegfx 0x27AA
 	loadspritegfx 0x2797
 	monbg ANIM_TARGET
@@ -7634,7 +7613,7 @@ AnimScript_82D39DC:
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
-	goto AnimScript_82D398A
+	goto Anim_RazorWindContinue
 
 Move_DISABLE:
 	loadspritegfx 0x2757
@@ -7658,19 +7637,19 @@ Move_RECOVER:
 	monbg ANIM_ATK_PARTNER
 	setalpha 0x80C
 	loopsewithpan SE_W025, -64, 0xD, 0x3
-	createvisualtask sub_8115A04, 0x2, 2, 0, 6, 0, 11, 12287
-	call AnimScript_82D3AD5
-	call AnimScript_82D3AD5
-	call AnimScript_82D3AD5
+	createvisualtask sub_8115A04, 0x2, 2, 0, 6, 0, 11, RGB(31, 31, 11)
+	call Anim_Recover1
+	call Anim_Recover1
+	call Anim_Recover1
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	delay 0x1
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	end
 
-AnimScript_82D3AD5:
+Anim_Recover1:
 	createsprite gUnknown_085921E0, 0x2, 40, -10, 13
 	delay 0x3
 	createsprite gUnknown_085921E0, 0x2, -35, -10, 13
@@ -7700,7 +7679,7 @@ Move_MIMIC:
 	setarg 0x7, 0xFFFF
 	waitforvisualfinish
 	playsewithpan SE_W036, -64
-	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 11, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 2, 0, 2, 0, 11, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg_23 ANIM_DEF_PARTNER
 	blendoff
@@ -7724,9 +7703,8 @@ Move_CONSTRICT:
 	end
 
 Move_CURSE:
-	choosetwoturnanim AnimScript_82D3BFB, AnimScript_82D3C78
-
-AnimScript_82D3BFB:
+	choosetwoturnanim Anim_CurseGhost, Anim_CurseStats
+Anim_CurseGhost:
 	loadspritegfx 0x27D7
 	loadspritegfx 0x27D8
 	monbg ANIM_ATK_PARTNER
@@ -7735,11 +7713,11 @@ AnimScript_82D3BFB:
 	delay 0x14
 	createsprite gUnknown_08596DD0, 0x2
 	delay 0x3C
-	call AnimScript_82D3C62
+	call Anim_CurseGhost1
 	delay 0x29
-	call AnimScript_82D3C62
+	call Anim_CurseGhost1
 	delay 0x29
-	call AnimScript_82D3C62
+	call Anim_CurseGhost1
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	delay 0x1
@@ -7753,23 +7731,23 @@ AnimScript_82D3BFB:
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-AnimScript_82D3C62:
+Anim_CurseGhost1:
 	createvisualtask sub_80D52D0, 0x2, 0, 4, 0, 10, 0
 	playsewithpan SE_W020, -64
 	return
 
-AnimScript_82D3C78:
+Anim_CurseStats:
 	createvisualtask sub_80D5EB8, 0x5, 0, 10, 1536, 3, 0
 	waitforvisualfinish
 	delay 0xA
-	call AnimScript_82D3C93
+	call Anim_CurseStats1
 	waitforvisualfinish
 	end
 
-AnimScript_82D3C93:
+Anim_CurseStats1:
 	playsewithpan SE_W082, -64
 	createvisualtask sub_8116B14, 0x5
-	createvisualtask sub_8115A04, 0x5, 2, 4, 2, 0, 10, 31
+	createvisualtask sub_8115A04, 0x5, 2, 4, 2, 0, 10, RGB_RED
 	return
 
 Move_SOFT_BOILED:
@@ -7792,14 +7770,14 @@ Move_SOFT_BOILED:
 	setarg 0x7, 0xFFFF
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
-	call AnimScript_82D7A28
+	call Anim_HealingEffect2
 	end
 
 Move_HEAL_BELL:
 	loadspritegfx 0x27DD
 	loadspritegfx 0x27DE
 	loadspritegfx 0x27DB
-	createvisualtask sub_8116620, 0xA, 10, 0, 0, 10, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 10, 0, 0, 10, RGB_WHITE
 	waitforvisualfinish
 	createvisualtask sub_8105CB4, 0x5
 	createsprite gUnknown_08593938, 0x2, 0, -24, 0, 1
@@ -7808,19 +7786,19 @@ Move_HEAL_BELL:
 	createsprite gUnknown_08593958, 0x28, 0, -24, -48, 20, 30, 1, 1
 	createsprite gUnknown_08593958, 0x28, 0, -24, -38, -29, 30, 2, 2
 	createsprite gUnknown_08593958, 0x28, 0, -24, 36, 18, 30, 3, 3
-	call AnimScript_82D3EF8
+	call Anim_HealBell1
 	delay 0x21
 	createsprite gUnknown_08593958, 0x28, 0, -24, 19, 26, 35, 4, 4
 	createsprite gUnknown_08593958, 0x28, 0, -24, -34, -12, 30, 5, 5
 	createsprite gUnknown_08593958, 0x28, 0, -24, 41, -20, 34, 6, 2
 	createsprite gUnknown_08593958, 0x28, 0, -24, -15, 26, 32, 7, 0
-	call AnimScript_82D3EF8
+	call Anim_HealBell1
 	delay 0x21
 	createsprite gUnknown_08593958, 0x28, 0, -24, -48, 18, 31, 0, 2
 	createsprite gUnknown_08593958, 0x28, 0, -24, 48, -20, 30, 2, 5
 	createsprite gUnknown_08593958, 0x28, 0, -24, 38, 29, 33, 4, 3
 	createsprite gUnknown_08593958, 0x28, 0, -24, -36, -18, 30, 6, 1
-	call AnimScript_82D3EF8
+	call Anim_HealBell1
 	waitforvisualfinish
 	createvisualtask sub_8105D60, 0x5
 	waitforvisualfinish
@@ -7837,13 +7815,13 @@ Move_HEAL_BELL:
 	loadspritegfx 0x27DB
 	playsewithpan SE_REAPOKE, -64
 	createvisualtask sub_8116664, 0xA, 4, 3, 10, 0, 31500
-	createvisualtask sub_8116620, 0xA, 10, 3, 10, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 10, 3, 10, 0, RGB_WHITE
 	createsprite gUnknown_08593868, 0x10, 0, 0, 0, 1
 	end
 
-AnimScript_82D3EF8:
+Anim_HealBell1:
 	createvisualtask sub_8116664, 0xA, 4, 3, 8, 0, 31500
-	createvisualtask sub_8116620, 0xA, 10, 3, 2, 10, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 10, 3, 2, 10, RGB_WHITE
 	createsprite gUnknown_0859381C, 0x28, 0, -24, 0, 1
 	playsewithpan SE_W215, -64
 	return
@@ -7956,7 +7934,7 @@ Move_INGRAIN:
 
 Move_PRESENT:
 	loadspritegfx 0x27F0
-	createvisualtask sub_815A904, 0x2
+	createvisualtask AnimTask_IsHealingMove, 0x2
 	createsprite gUnknown_08592610, 0x82, 0, -5, 10, 2, -1
 	playsewithpan SE_W039, -64
 	delay 0xE
@@ -7966,11 +7944,11 @@ Move_PRESENT:
 	delay 0x14
 	playsewithpan SE_W145B, +63
 	waitforvisualfinish
-	jumpargeq 0x7, 0x0, AnimScript_82D41D4
-	jumpargeq 0x7, 0x1, AnimScript_82D423F
+	jumpretfalse Anim_PresentDamage
+	jumprettrue Anim_PresentHeal
 	end
 
-AnimScript_82D41D4:
+Anim_PresentDamage:
 	loadspritegfx 0x27D6
 	playsewithpan SE_W120, +63
 	createsprite gUnknown_0859371C, 0x83, 0, 0, 1, 1
@@ -7988,7 +7966,7 @@ AnimScript_82D41D4:
 	createsprite gUnknown_0859371C, 0x83, 16, 16, 1, 1
 	end
 
-AnimScript_82D423F:
+Anim_PresentHeal:
 	loadspritegfx 0x27D3
 	loadspritegfx 0x272F
 	playsewithpan SE_W234, +63
@@ -8011,13 +7989,13 @@ AnimScript_82D423F:
 	createsprite gUnknown_08592658, 0x84, -24, 32, -3, 1
 	waitforvisualfinish
 	waitsound
-	call AnimScript_82D7A28
+	call Anim_HealingEffect2
 	end
 
 Move_BATON_PASS:
 	loadspritegfx 0x27F2
 	playsewithpan SE_W226, -64
-	createvisualtask sub_8115A04, 0x2, 31, 1, 2, 0, 11, 31455
+	createvisualtask sub_8115A04, 0x2, 31, 1, 2, 0, 11, RGB(31, 22, 30)
 	createsprite gUnknown_085CE370, 0x2
 	end
 
@@ -8089,13 +8067,12 @@ Move_HYPER_FANG:
 	playsewithpan SE_W044, +63
 	delay 0x1
 	delay 0x2
-	createvisualtask sub_8117E60, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82D458E
-	createvisualtask sub_815A8C8, 0x2
-	jumpargeq 0x7, 0x0, AnimScript_82D4580
-	goto AnimScript_82D4587
-
-AnimScript_82D455C:
+	createvisualtask AnimTask_IsContest, 0x2
+	jumprettrue Anim_HyperFangInContest
+	createvisualtask AnimTask_IsTargetPlayerSide, 0x2
+	jumpretfalse Anim_HyperFangOnOpponent
+	goto Anim_HyperFangOnPlayer
+Anim_HyperFangContinue:
 	waitbgfadeout
 	createsprite gUnknown_085CE1DC, 0x82
 	waitbgfadein
@@ -8107,17 +8084,17 @@ AnimScript_82D455C:
 	waitforvisualfinish
 	end
 
-AnimScript_82D4580:
+Anim_HyperFangOnOpponent:
 	fadetobg BG_IMPACT_OPPONENT
-	goto AnimScript_82D455C
+	goto Anim_HyperFangContinue
 
-AnimScript_82D4587:
+Anim_HyperFangOnPlayer:
 	fadetobg BG_IMPACT_PLAYER
-	goto AnimScript_82D455C
+	goto Anim_HyperFangContinue
 
-AnimScript_82D458E:
+Anim_HyperFangInContest:
 	fadetobg BG_IMPACT_CONTESTS
-	goto AnimScript_82D455C
+	goto Anim_HyperFangContinue
 
 Move_TRI_ATTACK:
 	loadspritegfx 0x27F6
@@ -8163,7 +8140,7 @@ Move_TRI_ATTACK:
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	waitforvisualfinish
 	loadspritegfx 0x279D
-	call AnimScript_82D7720
+	call Anim_FreezeEffect1
 	createsprite gUnknown_08597274, 0x2, 1, 2, 16, 0, 0
 	waitforvisualfinish
 	end
@@ -8257,7 +8234,7 @@ Move_WISH:
 	waitforvisualfinish
 	delay 0x3C
 	loopsewithpan SE_W215, -64, 0x10, 0x3
-	call AnimScript_82D79B4
+	call Anim_GrantingStarsEffect
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 3, 10, 0, 0
 	waitforvisualfinish
@@ -8266,15 +8243,15 @@ Move_WISH:
 Move_STOCKPILE:
 	loadspritegfx 0x27FB
 	playsewithpan SE_W025, -64
-	createvisualtask sub_8115A04, 0x2, 2, 8, 1, 0, 12, 0x7FFF
+	createvisualtask sub_8115A04, 0x2, 2, 8, 1, 0, 12, RGB_WHITE
 	createvisualtask sub_815B65C, 0x5
-	call AnimScript_82D4972
-	call AnimScript_82D4972
+	call Anim_Stockpile1
+	call Anim_Stockpile1
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 2, 0, 12, 0, RGB_WHITE
 	end
 
-AnimScript_82D4972:
+Anim_Stockpile1:
 	createsprite gUnknown_08592244, 0x2, 55, 55, 13
 	delay 0x1
 	createsprite gUnknown_08592244, 0x2, -55, -55, 13
@@ -8311,10 +8288,9 @@ Move_SPIT_UP:
 	createsprite gUnknown_08593A50, 0x2, 192, 12
 	createsprite gUnknown_08593A50, 0x2, 224, 12
 	delay 0x5
-	jumpifmoveturn 0x2, AnimScript_82D4AB8
-	jumpifmoveturn 0x3, AnimScript_82D4AE1
-
-AnimScript_82D4A7B:
+	jumpifmoveturn 0x2, Anim_SpitUpStrong
+	jumpifmoveturn 0x3, Anim_SpitUpStrongest
+Anim_SpitUpContinue:
 	delay 0x5
 	createvisualtask sub_80D6388, 0x2, 0, 1, 8, 1, 0
 	playsewithpan SE_W003, +63
@@ -8325,14 +8301,14 @@ AnimScript_82D4A7B:
 	waitforvisualfinish
 	end
 
-AnimScript_82D4AB8:
+Anim_SpitUpStrong:
 	createsprite gUnknown_08593A50, 0x2, 16
 	createsprite gUnknown_08593A50, 0x2, 80
 	createsprite gUnknown_08593A50, 0x2, 144
 	createsprite gUnknown_08593A50, 0x2, 208
-	goto AnimScript_82D4A7B
+	goto Anim_SpitUpContinue
 
-AnimScript_82D4AE1:
+Anim_SpitUpStrongest:
 	createsprite gUnknown_08593A50, 0x2, 16
 	createsprite gUnknown_08593A50, 0x2, 48
 	createsprite gUnknown_08593A50, 0x2, 80
@@ -8341,7 +8317,7 @@ AnimScript_82D4AE1:
 	createsprite gUnknown_08593A50, 0x2, 176
 	createsprite gUnknown_08593A50, 0x2, 208
 	createsprite gUnknown_08593A50, 0x2, 240
-	goto AnimScript_82D4A7B
+	goto Anim_SpitUpContinue
 
 Move_SWALLOW:
 	loadspritegfx 0x27FC
@@ -8352,16 +8328,15 @@ Move_SWALLOW:
 	delay 0x26
 	playsewithpan SE_W255, -64
 	createvisualtask sub_80D52D0, 0x2, 0, 2, 0, 12, 1
-	call AnimScript_82D4B7F
-	jumpifmoveturn 0x2, AnimScript_82D4BC1
-	jumpifmoveturn 0x3, AnimScript_82D4BCB
-
-AnimScript_82D4B78:
+	call Anim_SwallowEffect
+	jumpifmoveturn 0x2, Anim_SwallowGood
+	jumpifmoveturn 0x3, Anim_SwallowBest
+Anim_SwallowContinue:
 	waitforvisualfinish
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	end
 
-AnimScript_82D4B7F:
+Anim_SwallowEffect:
 	createsprite gUnknown_085CE418, 0x2, 0, -8
 	delay 0x1
 	createsprite gUnknown_085CE418, 0x2, -24, -8
@@ -8374,14 +8349,14 @@ AnimScript_82D4B7F:
 	delay 0x1
 	return
 
-AnimScript_82D4BC1:
-	call AnimScript_82D4B7F
-	goto AnimScript_82D4B78
+Anim_SwallowGood:
+	call Anim_SwallowEffect
+	goto Anim_SwallowContinue
 
-AnimScript_82D4BCB:
-	call AnimScript_82D4B7F
-	call AnimScript_82D4B7F
-	goto AnimScript_82D4B78
+Anim_SwallowBest:
+	call Anim_SwallowEffect
+	call Anim_SwallowEffect
+	goto Anim_SwallowContinue
 
 Move_TRANSFORM:
 	monbg ANIM_ATTACKER
@@ -8397,30 +8372,30 @@ Move_MORNING_SUN:
 	loadspritegfx 0x272F
 	createvisualtask sub_815BB84, 0x5
 	delay 0x8
-	createvisualtask sub_8116620, 0xA, 1921, 8, 0, 12, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 0x781, 8, 0, 12, RGB_WHITE
 	delay 0xE
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	call AnimScript_82D4C78
-	createvisualtask sub_8116620, 0xA, 1921, 3, 12, 0, 0x7FFF
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	call Anim_MorningSun1
+	createvisualtask sub_8116620, 0xA, 0x781, 3, 12, 0, RGB_WHITE
 	waitforvisualfinish
 	waitsound
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	end
 
-AnimScript_82D4C78:
+Anim_MorningSun1:
 	createsprite gUnknown_085CE48C, 0x2, 30, 640
 	delay 0x5
 	return
@@ -8431,15 +8406,15 @@ Move_SWEET_SCENT:
 	createsprite gUnknown_085CE544, 0x2, 100, 0, 100
 	delay 0x19
 	setpan 0
-	call AnimScript_82D4CCA
+	call Anim_SweetScentEffect
 	createsprite gUnknown_085CE544, 0x2, 55, 0
 	setpan +63
-	createvisualtask sub_8115A04, 0x2, 20, 1, 5, 5, 13, 22207
-	call AnimScript_82D4CCA
+	createvisualtask sub_8115A04, 0x2, 20, 1, 5, 5, 13, RGB(31, 21, 21)
+	call Anim_SweetScentEffect
 	waitforvisualfinish
 	end
 
-AnimScript_82D4CCA:
+Anim_SweetScentEffect:
 	createsprite gUnknown_085CE544, 0x2, 70, 1, 64
 	delay 0x2
 	createsprite gUnknown_085CE544, 0x2, 60, 0, 64
@@ -8476,40 +8451,40 @@ Move_HYPER_BEAM:
 	createsoundtask sub_8158C58, 247, -64, 63, 1, 15, 0, 5
 	createvisualtask sub_80D51AC, 0x2, 0, 0, 4, 50, 1
 	createvisualtask sub_8115D94, 0x2, 10147, 1, 12, 31, 16, 0, 0
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 50, 1
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 11, 26425
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	call AnimScript_82D4EA1
-	createvisualtask sub_8116620, 0xA, 4, 2, 11, 0, 26425
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 11, RGB(25, 25, 25)
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	call Anim_HyperBeam1
+	createvisualtask sub_8116620, 0xA, 4, 2, 11, 0, RGB(25, 25, 25)
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 4, 16, 0, 0
 	end
 
-AnimScript_82D4EA1:
+Anim_HyperBeam1:
 	createsprite gUnknown_08592288, 0x82
 	createsprite gUnknown_08592288, 0x82
 	delay 0x1
@@ -8529,25 +8504,25 @@ Move_FLATTER:
 	createsprite gUnknown_0857FE40, 0x2, 5, 2, 1
 	delay 0x0
 	createvisualtask sub_8159210, 0x5, 229, -64
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
-	call AnimScript_82D4F9B
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
+	call Anim_Flatter1
 	delay 0x5
 	createvisualtask sub_8159210, 0x5, 229, 63
 	waitforvisualfinish
@@ -8556,14 +8531,14 @@ Move_FLATTER:
 	createvisualtask sub_815AC8C, 0x2
 	end
 
-AnimScript_82D4F9B:
+Anim_Flatter1:
 	createsprite gUnknown_085CE5A8, 0x28, 0
 	createsprite gUnknown_085CE5A8, 0x28, 1
 	return
 
 Move_ROLE_PLAY:
 	monbg ANIM_ATK_PARTNER
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 16, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 16, RGB_WHITE
 	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 10, 0
 	waitforvisualfinish
 	playsewithpan SE_W161, -64
@@ -8571,7 +8546,7 @@ Move_ROLE_PLAY:
 	createvisualtask sub_815CED8, 0x2
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
-	createvisualtask sub_8116620, 0xA, 4, 2, 16, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 16, 0, RGB_WHITE
 	delay 0x8
 	createsprite gUnknown_08597274, 0x2, 1, 2, 10, 0, 0
 	end
@@ -8583,7 +8558,7 @@ Move_REFRESH:
 	createvisualtask sub_815DFCC, 0x2, 0
 	waitforvisualfinish
 	playsewithpan SE_W234, -64
-	call AnimScript_82D79B4
+	call Anim_GrantingStarsEffect
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, -64
 	createsprite gUnknown_08597274, 0x2, 31, 3, 10, 0, RGB(12, 24, 30)
@@ -8598,14 +8573,14 @@ Move_BLAZE_KICK:
 	setalpha 0x80C
 	playsewithpan SE_W172, +63
 	createsprite gUnknown_08595F14, 0x83, 0, 0, 1, 30
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, RGB_WHITE
 	delay 0x1E
 	playsewithpan SE_W007, +63
 	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 14, 1
-	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, RGB_WHITE
 	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
-	call AnimScript_82D2D18
+	call Anim_FireMoveEffect
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -8614,15 +8589,15 @@ Move_BLAZE_KICK:
 Move_HYPER_VOICE:
 	loadspritegfx 0x27DB
 	createvisualtask sub_81590B8, 0x5, 0
-	call AnimScript_82D50FA
+	call Anim_HyperVoiceEffect
 	waitforvisualfinish
 	delay 0x8
 	createvisualtask sub_81590B8, 0x5, 1
-	call AnimScript_82D50FA
+	call Anim_HyperVoiceEffect
 	waitforvisualfinish
 	end
 
-AnimScript_82D50FA:
+Anim_HyperVoiceEffect:
 	createsprite gUnknown_08597274, 0x2, 31, 3, 8, 0, RGB_YELLOW
 	createvisualtask sub_80D6064, 0x5, -5, -5, 5, 0, 0
 	createsprite gUnknown_08593880, 0x0, 45, 0, 0, 0, 0, 0, 1
@@ -8637,15 +8612,15 @@ Move_SAND_TOMB:
 	createsprite gUnknown_08597274, 0x0, 4, 2, 0, 7, RGB(19, 17, 0)
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 43, 1
 	playsewithpan SE_W328, +63
-	call AnimScript_82D51B7
-	call AnimScript_82D51B7
-	call AnimScript_82D51B7
+	call Anim_SandTombEffect
+	call Anim_SandTombEffect
+	call Anim_SandTombEffect
 	delay 0x16
 	createsprite gUnknown_08597274, 0x0, 4, 2, 7, 0, RGB(19, 17, 0)
 	waitforvisualfinish
 	end
 
-AnimScript_82D51B7:
+Anim_SandTombEffect:
 	createsprite gUnknown_08596B34, 0x82, 0, 32, 528, 30, 10, 50, 1
 	delay 0x2
 	createsprite gUnknown_08596B34, 0x82, 0, 36, 480, 20, 13, -46, 1
@@ -8692,21 +8667,20 @@ Move_ARM_THRUST:
 	waitforvisualfinish
 	createvisualtask sub_80D6134, 0x5, 8, 5, 0, 1
 	playsewithpan SE_W003, +63
-	choosetwoturnanim AnimScript_82D52D4, AnimScript_82D52E8
-
-AnimScript_82D52C0:
+	choosetwoturnanim Anim_ArmThrustRight, Anim_ArmThrustLeft
+Anim_ArmThrustContinue:
 	createvisualtask sub_80D51AC, 0x5, 1, 4, 0, 6, 1
 	waitforvisualfinish
 	blendoff
 	end
 
-AnimScript_82D52D4:
+Anim_ArmThrustRight:
 	createsprite gUnknown_08597358, 0x82, 8, 0, 1, 2
-	goto AnimScript_82D52C0
+	goto Anim_ArmThrustContinue
 
-AnimScript_82D52E8:
+Anim_ArmThrustLeft:
 	createsprite gUnknown_08597358, 0x82, -8, 0, 1, 2
-	goto AnimScript_82D52C0
+	goto Anim_ArmThrustContinue
 
 Move_MUDDY_WATER:
 	panse_1B SE_W250, -64, +63, +2, 0x0
@@ -8743,10 +8717,10 @@ Move_DRAGON_CLAW:
 	loadspritegfx 0x272D
 	loadspritegfx 0x2737
 	playsewithpan SE_W221B, -64
-	createvisualtask sub_8116620, 0xA, 2, 4, 0, 8, 639
+	createvisualtask sub_8116620, 0xA, 2, 4, 0, 8, RGB(31, 19, 0)
 	createvisualtask sub_80D51AC, 0x5, 0, 0, 2, 15, 1
-	call AnimScript_82D5581
-	call AnimScript_82D5581
+	call Anim_DragonClawEffect
+	call Anim_DragonClawEffect
 	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	createsprite gUnknown_08596B88, 0x2, 0, 28, 528, 30, 13, 50, 0
 	delay 0x2
@@ -8780,11 +8754,11 @@ Move_DRAGON_CLAW:
 	createsprite gUnknown_08596B88, 0x2, 0, 28, 512, 25, 16, 46, 0
 	delay 0x2
 	createsprite gUnknown_08596B88, 0x2, 0, 33, 464, 30, 15, -50, 0
-	createvisualtask sub_8116620, 0xA, 2, 4, 8, 0, 639
+	createvisualtask sub_8116620, 0xA, 2, 4, 8, 0, RGB(31, 19, 0)
 	waitforvisualfinish
 	end
 
-AnimScript_82D5581:
+Anim_DragonClawEffect:
 	createsprite gUnknown_08596B88, 0x2, 0, 28, 528, 30, 13, 50, 0
 	delay 0x2
 	createsprite gUnknown_08596B88, 0x2, 0, 32, 480, 20, 16, -46, 0
@@ -8799,7 +8773,7 @@ AnimScript_82D5581:
 	delay 0x2
 	return
 
-AnimScript_82D560C:
+Anim_End:
 	end
 
 Move_MUD_SHOT:
@@ -8811,24 +8785,24 @@ Move_MUD_SHOT:
 	delay 0x6
 	createvisualtask sub_81076C8, 0x5, 100
 	panse_1B SE_W250, -64, +63, +1, 0x0
-	call AnimScript_82D5687
-	call AnimScript_82D5687
-	call AnimScript_82D5687
+	call Anim_MudShot1
+	call Anim_MudShot1
+	call Anim_MudShot1
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 43, 1
-	call AnimScript_82D5687
-	call AnimScript_82D5687
-	call AnimScript_82D5687
-	call AnimScript_82D5687
-	call AnimScript_82D5687
-	call AnimScript_82D5687
-	call AnimScript_82D5687
-	call AnimScript_82D5687
+	call Anim_MudShot1
+	call Anim_MudShot1
+	call Anim_MudShot1
+	call Anim_MudShot1
+	call Anim_MudShot1
+	call Anim_MudShot1
+	call Anim_MudShot1
+	call Anim_MudShot1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D5687:
+Anim_MudShot1:
 	createsprite gUnknown_085950FC, 0x3, 10, 10, 0, 16
 	delay 0x2
 	createsprite gUnknown_085950FC, 0x3, 10, 10, 0, 16
@@ -8867,7 +8841,7 @@ Move_REVENGE:
 	playsewithpan SE_W036, -64
 	createsprite gUnknown_08596088, 0x2, 10, -10
 	waitforvisualfinish
-	createvisualtask sub_8115A04, 0x2, 2, 0, 4, 2, 8, 31
+	createvisualtask sub_8115A04, 0x2, 2, 0, 4, 2, 8, RGB_RED
 	waitforvisualfinish
 	unloadspritegfx 0x2805
 	loadspritegfx 0x2806
@@ -8897,8 +8871,8 @@ Move_POISON_FANG:
 	delay 0xA
 	createvisualtask sub_80D51AC, 0x3, 1, 3, 0, 10, 1
 	waitforvisualfinish
-	createvisualtask sub_8115A04, 0x2, 4, 0, 4, 0, 12, 26650
-	call AnimScript_82D7A71
+	createvisualtask sub_8115A04, 0x2, 4, 0, 4, 0, 12, RGB(26, 0, 26)
+	call Anim_PoisonEffect
 	waitforvisualfinish
 	end
 
@@ -8972,40 +8946,39 @@ Move_METAL_SOUND:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_2A ANIM_TARGET
 	createvisualtask sub_80D52D0, 0x2, 0, 2, 0, 8, 1
-	call AnimScript_82D59EA
-	call AnimScript_82D59EA
-	call AnimScript_82D59EA
-	call AnimScript_82D59EA
+	call Anim_MetalSound1
+	call Anim_MetalSound1
+	call Anim_MetalSound1
+	call Anim_MetalSound1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	delay 0x0
 	waitforvisualfinish
 	end
 
-AnimScript_82D59EA:
+Anim_MetalSound1:
 	panse_1B SE_W103, -64, +63, +2, 0x0
 	createsprite gUnknown_08593458, 0x82, 16, 0, 0, 0, 30, 0
 	delay 0x2
 	return
 
 Move_FOCUS_PUNCH:
-	goto AnimScript_82D5A0E
+	goto Anim_FocusPunch
 
-AnimScript_82D5A0C:
+Anim_FocusPunchEnd:
 	waitforvisualfinish
 	end
 
-AnimScript_82D5A0E:
+Anim_FocusPunch:
 	loadspritegfx 0x2797
 	loadspritegfx 0x279F
 	delay 0x1
-	createvisualtask sub_8117E60, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82D5AC7
-	createvisualtask sub_815A8C8, 0x2
-	jumpargeq 0x7, 0x0, AnimScript_82D5AB9
-	jumpargeq 0x7, 0x1, AnimScript_82D5AC0
-
-AnimScript_82D5A3C:
+	createvisualtask AnimTask_IsContest, 0x2
+	jumprettrue Anim_FocusPunchInContest
+	createvisualtask AnimTask_IsTargetPlayerSide, 0x2
+	jumpretfalse Anim_FocusPunchOnOpponent
+	jumprettrue Anim_FocusPunchOnPlayer
+Anim_FocusPunchContinue:
 	waitbgfadein
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
@@ -9028,38 +9001,37 @@ AnimScript_82D5A3C:
 	waitbgfadein
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
-	goto AnimScript_82D5A0C
+	goto Anim_FocusPunchEnd
 
-AnimScript_82D5AB9:
+Anim_FocusPunchOnOpponent:
 	fadetobg BG_IMPACT_OPPONENT
-	goto AnimScript_82D5A3C
+	goto Anim_FocusPunchContinue
 
-AnimScript_82D5AC0:
+Anim_FocusPunchOnPlayer:
 	fadetobg BG_IMPACT_PLAYER
-	goto AnimScript_82D5A3C
+	goto Anim_FocusPunchContinue
 
-AnimScript_82D5AC7:
+Anim_FocusPunchInContest:
 	fadetobg BG_IMPACT_CONTESTS
-	goto AnimScript_82D5A3C
+	goto Anim_FocusPunchContinue
 
 Move_RETURN:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createvisualtask sub_815F8A0, 0x2
+	createvisualtask AnimTask_GetHappinessPowerLevel2, 0x2
 	delay 0x2
-	jumpargeq 0x7, 0x0, AnimScript_82D5B04
-	jumpargeq 0x7, 0x1, AnimScript_82D5B56
-	jumpargeq 0x7, 0x2, AnimScript_82D5BB6
-	jumpargeq 0x7, 0x3, AnimScript_82D5CD1
-
-AnimScript_82D5AFF:
+	jumpreteq 0x0, Anim_ReturnWeak
+	jumpreteq 0x1, Anim_ReturnMedium
+	jumpreteq 0x2, Anim_ReturnStrong
+	jumpreteq 0x3, Anim_ReturnStrongest
+Anim_ReturnContinue:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D5B04:
+Anim_ReturnWeak:
 	createsprite gUnknown_0857FE40, 0x2, 16, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
@@ -9068,9 +9040,9 @@ AnimScript_82D5B04:
 	delay 0x5
 	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 2
 	createvisualtask sub_8159210, 0x5, 139, 63
-	goto AnimScript_82D5AFF
+	goto Anim_ReturnContinue
 
-AnimScript_82D5B56:
+Anim_ReturnMedium:
 	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
@@ -9082,9 +9054,9 @@ AnimScript_82D5B56:
 	delay 0x6
 	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_8159210, 0x5, 141, 63
-	goto AnimScript_82D5AFF
+	goto Anim_ReturnContinue
 
-AnimScript_82D5BB6:
+Anim_ReturnStrong:
 	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
@@ -9112,9 +9084,9 @@ AnimScript_82D5BB6:
 	createsprite gUnknown_08597358, 0x2, -5, 3, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
-	goto AnimScript_82D5AFF
+	goto Anim_ReturnContinue
 
-AnimScript_82D5CD1:
+Anim_ReturnStrongest:
 	createsprite gUnknown_08597274, 0x2, 1, 0, 0, 6, 0
 	waitforvisualfinish
 	createsprite gUnknown_0857FE40, 0x2, 16, 1, 0
@@ -9155,10 +9127,10 @@ AnimScript_82D5CD1:
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	createvisualtask sub_81169C0, 0x2, 0, 4, 5, 1
 	waitforvisualfinish
-	call AnimScript_82D5F09
-	call AnimScript_82D5F09
-	call AnimScript_82D5F09
-	call AnimScript_82D5F09
+	call Anim_ReturnStrongest1
+	call Anim_ReturnStrongest1
+	call Anim_ReturnStrongest1
+	call Anim_ReturnStrongest1
 	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 0
 	createvisualtask sub_8159210, 0x5, 141, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 8, 0, 24, 1
@@ -9173,9 +9145,9 @@ AnimScript_82D5CD1:
 	createvisualtask sub_8159210, 0x5, 141, 63
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 0, 6, 0, 0
-	goto AnimScript_82D5AFF
+	goto Anim_ReturnContinue
 
-AnimScript_82D5F09:
+Anim_ReturnStrongest1:
 	createsprite gUnknown_0857FE40, 0x2, 4, 3, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
@@ -9296,15 +9268,14 @@ Move_SILVER_WIND:
 	monbgprio_29
 	delay 0x0
 	createvisualtask sub_8116664, 0xA, 1, 0, 0, 4, 0
-	createvisualtask sub_8117780, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82D650C
+	createvisualtask AnimTask_IsTargetOpponentSide, 0x2
+	jumprettrue Anim_SilverWindOnPlayer
 	fadetobg BG_BUG_OPPONENT
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, 1536, 0, 0, -1
-
-AnimScript_82D6352:
+Anim_SilverWindContinue:
 	delay 0x0
-	createvisualtask sub_8116620, 0xA, 1, 0, 4, 4, 0
+	createvisualtask sub_8116620, 0xA, 1, 0, 4, 4, RGB_BLACK
 	waitbgfadein
 	createsprite gUnknown_08592830, 0xC2, -32, 16, 0, 6, 2, 3, 1
 	createsprite gUnknown_08592830, 0xC2, -8, 18, 64, 3, 2, 2, 1
@@ -9340,11 +9311,11 @@ AnimScript_82D6352:
 	waitbgfadein
 	end
 
-AnimScript_82D650C:
+Anim_SilverWindOnPlayer:
 	fadetobg BG_BUG_PLAYER
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, -1536, 0, 0, -1
-	goto AnimScript_82D6352
+	goto Anim_SilverWindContinue
 
 Move_SNATCH:
 	playsewithpan SE_W036, -64
@@ -9354,48 +9325,48 @@ Move_SNATCH:
 Move_DIVE:
 	loadspritegfx 0x2820
 	loadspritegfx 0x2821
-	choosetwoturnanim AnimScript_82D654C, AnimScript_82D65A1
+	choosetwoturnanim Anim_DiveSetUp, Anim_DiveAttack
 
-AnimScript_82D654C:
+Anim_DiveSetUp:
 	loadspritegfx 0x27AC
 	playsewithpan SE_W029, -64
 	createsprite gUnknown_08596490, 0x2, 0, 0, 13, 336
 	waitforvisualfinish
 	playsewithpan SE_W291, -64
 	createsprite gUnknown_085964CC, 0x3, 0
-	call AnimScript_82D658A
-	call AnimScript_82D658A
-	call AnimScript_82D658A
-	call AnimScript_82D658A
-	call AnimScript_82D658A
+	call Anim_DiveSetUp1
+	call Anim_DiveSetUp1
+	call Anim_DiveSetUp1
+	call Anim_DiveSetUp1
+	call Anim_DiveSetUp1
 	end
 
-AnimScript_82D658A:
+Anim_DiveSetUp1:
 	createsprite gUnknown_085964E4, 0x5, 0, 0
 	createsprite gUnknown_085964E4, 0x5, 1, 0
 	return
 
-AnimScript_82D65A1:
+Anim_DiveAttack:
 	loadspritegfx 0x27A4
 	loadspritegfx 0x27AB
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W153, +63
 	createsprite gUnknown_085964CC, 0x83, 1
-	call AnimScript_82D65E0
-	call AnimScript_82D65E0
-	call AnimScript_82D65E0
-	call AnimScript_82D65E0
-	call AnimScript_82D65E0
+	call Anim_DiveAttack1
+	call Anim_DiveAttack1
+	call Anim_DiveAttack1
+	call Anim_DiveAttack1
+	call Anim_DiveAttack1
 	delay 0xC
-	call AnimScript_82CB102
+	call Anim_UnderWaterAttack1
 	waitforvisualfinish
 	visible ANIM_ATTACKER
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
-AnimScript_82D65E0:
+Anim_DiveAttack1:
 	createsprite gUnknown_085964E4, 0x85, 0, 1
 	createsprite gUnknown_085964E4, 0x85, 1, 1
 	return
@@ -9510,18 +9481,18 @@ Move_HYDRO_CANNON:
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1E
 	panse_1B SE_W056, -64, +63, +2, 0x0
-	call AnimScript_82D6A50
+	call Anim_HydroCannon1
 	createvisualtask sub_80D51AC, 0x5, 1, 10, 0, 40, 1
 	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
-	call AnimScript_82D6A50
+	call Anim_HydroCannon1
 	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
-	call AnimScript_82D6A50
+	call Anim_HydroCannon1
 	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
-	call AnimScript_82D6A50
+	call Anim_HydroCannon1
 	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
-	call AnimScript_82D6A50
+	call Anim_HydroCannon1
 	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
-	call AnimScript_82D6A50
+	call Anim_HydroCannon1
 	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
 	waitforvisualfinish
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
@@ -9530,7 +9501,7 @@ Move_HYDRO_CANNON:
 	blendoff
 	end
 
-AnimScript_82D6A50:
+Anim_HydroCannon1:
 	createsprite gUnknown_085951D8, 0x82, 10, -10, 0, 0, 15, 257
 	delay 0x1
 	createsprite gUnknown_085951D8, 0x82, 10, -10, 0, 0, 15, 257
@@ -9571,11 +9542,10 @@ Move_SEISMIC_TOSS:
 	waitbgfadein
 	waitforvisualfinish
 	createvisualtask sub_8111590, 0x3
-	jumpargeq 0x7, 0x0, AnimScript_82D6B53
-	jumpargeq 0x7, 0x1, AnimScript_82D6B64
-	jumpargeq 0x7, 0x2, AnimScript_82D6B7C
-
-AnimScript_82D6B48:
+	jumpreteq 0x0, Anim_SeismicTossAnim1
+	jumpreteq 0x1, Anim_SeismicTossAnim2
+	jumpreteq 0x2, Anim_SeismicTossAnim3
+Anim_SeismicTossContinue:
 	restorebg
 	waitbgfadeout
 	setarg 0x7, 0xFFF
@@ -9584,31 +9554,31 @@ AnimScript_82D6B48:
 	blendoff
 	end
 
-AnimScript_82D6B53:
-	call AnimScript_82D6B9B
+Anim_SeismicTossAnim1:
+	call Anim_SeismicToss1
 	delay 0x10
-	call AnimScript_82D6BFC
-	goto AnimScript_82D6B48
+	call Anim_SeismicToss2
+	goto Anim_SeismicTossContinue
 
-AnimScript_82D6B64:
-	call AnimScript_82D6B9B
+Anim_SeismicTossAnim2:
+	call Anim_SeismicToss1
 	delay 0xE
-	call AnimScript_82D6BFC
+	call Anim_SeismicToss2
 	delay 0xE
-	call AnimScript_82D6B9B
-	goto AnimScript_82D6B48
+	call Anim_SeismicToss1
+	goto Anim_SeismicTossContinue
 
-AnimScript_82D6B7C:
-	call AnimScript_82D6BFC
+Anim_SeismicTossAnim3:
+	call Anim_SeismicToss2
 	delay 0xA
-	call AnimScript_82D6B9B
+	call Anim_SeismicToss1
 	delay 0xA
-	call AnimScript_82D6BFC
+	call Anim_SeismicToss2
 	delay 0xA
-	call AnimScript_82D6B9B
-	goto AnimScript_82D6B48
+	call Anim_SeismicToss1
+	goto Anim_SeismicTossContinue
 
-AnimScript_82D6B9B:
+Anim_SeismicToss1:
 	createsprite gUnknown_08597358, 0x83, -10, -8, 1, 1
 	playsewithpan SE_W070, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 5, 1
@@ -9618,7 +9588,7 @@ AnimScript_82D6B9B:
 	createsprite gUnknown_08596CB0, 0x82, 12, 25, 4, 4
 	return
 
-AnimScript_82D6BFC:
+Anim_SeismicToss2:
 	createsprite gUnknown_08597358, 0x83, 10, -8, 1, 1
 	playsewithpan SE_W088, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 5, 1
@@ -9677,7 +9647,7 @@ Move_PSYCHO_BOOST:
 	createvisualtask sub_815A5C8, 0x5
 	waitbgfadein
 	delay 0x6
-	createvisualtask sub_8115A04, 0x2, 1, 2, 8, 0, 10, 0
+	createvisualtask sub_8115A04, 0x2, 1, 2, 8, 0, 10, RGB_BLACK
 	delay 0x0
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 0x808
@@ -9693,7 +9663,7 @@ Move_PSYCHO_BOOST:
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Move_KNOCK_OFF:
@@ -9886,101 +9856,98 @@ Move_MAGICAL_LEAF:
 Move_ICE_BALL:
 	loadspritegfx 0x273B
 	loadspritegfx 0x279D
-	createvisualtask sub_810CDFC, 0x5, 0
-	jumpargeq 0x0, 0x4, AnimScript_82D731B
-
-AnimScript_82D72BB:
+	createvisualtask AnimTask_GetRolloutCounter, 0x5, 0
+	jumpargeq 0x0, 0x4, Anim_IceBallSetIceBg
+Anim_IceBallContinue:
 	playsewithpan SE_W196, -64
 	createsprite gUnknown_08595DE4, 0x82, 15, 0, -12, -16, 30, -40
 	delay 0x1C
 	playsewithpan SE_W280, +63
-	createvisualtask sub_810CDFC, 0x5, 0
-	jumpargeq 0x0, 0x0, AnimScript_82D732C
-	jumpargeq 0x0, 0x1, AnimScript_82D735B
-	jumpargeq 0x0, 0x2, AnimScript_82D7394
-	jumpargeq 0x0, 0x3, AnimScript_82D73D7
-	jumpargeq 0x0, 0x4, AnimScript_82D741F
-
-AnimScript_82D7309:
-	createvisualtask sub_810CDFC, 0x5, 0
-	jumpargeq 0x0, 0x4, AnimScript_82D7322
-
-AnimScript_82D731A:
+	createvisualtask AnimTask_GetRolloutCounter, 0x5, 0
+	jumpargeq 0x0, 0x0, Anim_IceBallWeakest
+	jumpargeq 0x0, 0x1, Anim_IceBallWeak
+	jumpargeq 0x0, 0x2, Anim_IceBallMediun
+	jumpargeq 0x0, 0x3, Anim_IceBallStrong
+	jumpargeq 0x0, 0x4, Anim_IceBallStrongest
+Anim_IceBallContinue2:
+	createvisualtask AnimTask_GetRolloutCounter, 0x5, 0
+	jumpargeq 0x0, 0x4, Anim_IceBallUnsetIceBg
+Anim_IceBallEnd:
 	end
 
-AnimScript_82D731B:
+Anim_IceBallSetIceBg:
 	fadetobg BG_ICE
-	goto AnimScript_82D72BB
+	goto Anim_IceBallContinue
 
-AnimScript_82D7322:
+Anim_IceBallUnsetIceBg:
 	waitbgfadein
 	delay 0x2D
 	restorebg
 	waitbgfadein
-	goto AnimScript_82D731A
+	goto Anim_IceBallEnd
 
-AnimScript_82D732C:
+Anim_IceBallWeakest:
 	createvisualtask sub_80D6388, 0x2, 0, 1, 8, 1, 0
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	goto AnimScript_82D7309
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	goto Anim_IceBallContinue2
 
-AnimScript_82D735B:
+Anim_IceBallWeak:
 	createvisualtask sub_80D6388, 0x2, 0, 1, 10, 1, 0
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	goto AnimScript_82D7309
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	goto Anim_IceBallContinue2
 
-AnimScript_82D7394:
+Anim_IceBallMediun:
 	createvisualtask sub_80D6388, 0x2, 0, 1, 14, 1, 0
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	goto AnimScript_82D7309
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	goto Anim_IceBallContinue2
 
-AnimScript_82D73D7:
+Anim_IceBallStrong:
 	createvisualtask sub_80D6388, 0x2, 0, 1, 18, 1, 0
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	goto AnimScript_82D7309
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	goto Anim_IceBallContinue2
 
-AnimScript_82D741F:
+Anim_IceBallStrongest:
 	createvisualtask sub_80D6388, 0x2, 0, 1, 30, 1, 0
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	call AnimScript_82D7467
-	goto AnimScript_82D7309
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	call Anim_IceBall1
+	goto Anim_IceBallContinue2
 
-AnimScript_82D7467:
+Anim_IceBall1:
 	createsprite gUnknown_08595DFC, 0x84, -12, -16
 	return
 
@@ -9995,15 +9962,15 @@ Move_WEATHER_BALL:
 	playsewithpan SE_W197, 0
 	createsprite gUnknown_0859728C, 0x2, 31, 5, 1, 0x7FFF, 10, 0, 0
 	waitforvisualfinish
-	createvisualtask sub_81604F0, 0x2
+	createvisualtask AnimTask_GetWeather, 0x2
 	delay 0x1
-	jumpargeq 0x7, 0x0, AnimScript_82D74DE
-	jumpargeq 0x7, 0x1, AnimScript_82D751B
-	jumpargeq 0x7, 0x2, AnimScript_82D757F
-	jumpargeq 0x7, 0x3, AnimScript_82D75E3
-	jumpargeq 0x7, 0x4, AnimScript_82D7683
+	jumpreteq ANIM_WEATHER_NONE, Anim_WeatherBallNormal
+	jumpreteq ANIM_WEATHER_SUN, Anim_WeatherBallFire
+	jumpreteq ANIM_WEATHER_RAIN, Anim_WeatherBallWater
+	jumpreteq ANIM_WEATHER_SANDSTORM, Anim_WeatherBallSandstorm
+	jumpreteq ANIM_WEATHER_HAIL, Anim_WeatherBallIce
 
-AnimScript_82D74DE:
+Anim_WeatherBallNormal:
 	loadspritegfx 0x2797
 	createsprite gUnknown_0853EE50, 0x82, -30, -100, 25, 1, 0, 0
 	waitforvisualfinish
@@ -10013,7 +9980,7 @@ AnimScript_82D74DE:
 	waitforvisualfinish
 	end
 
-AnimScript_82D751B:
+Anim_WeatherBallFire:
 	loadspritegfx 0x272D
 	createsprite gUnknown_0859559C, 0x82, -30, -100, 25, 1, 40, 10
 	playsewithpan SE_W172, +63
@@ -10029,7 +9996,7 @@ AnimScript_82D751B:
 	waitforvisualfinish
 	end
 
-AnimScript_82D757F:
+Anim_WeatherBallWater:
 	loadspritegfx 0x27AB
 	createsprite gUnknown_08595328, 0x82, -30, -100, 25, 1, 50, 10
 	playsewithpan SE_W152, +63
@@ -10045,7 +10012,7 @@ AnimScript_82D757F:
 	waitforvisualfinish
 	end
 
-AnimScript_82D75E3:
+Anim_WeatherBallSandstorm:
 	loadspritegfx 0x274A
 	createsprite gUnknown_08596CE0, 0x82, -30, -100, 25, 1, 30, 0
 	playsewithpan SE_W088, +63
@@ -10065,7 +10032,7 @@ AnimScript_82D75E3:
 	waitforvisualfinish
 	end
 
-AnimScript_82D7683:
+Anim_WeatherBallIce:
 	loadspritegfx 0x2817
 	loadspritegfx 0x279D
 	createsprite gUnknown_08595D44, 0x82, -30, -100, 25, 25, -40, 20
@@ -10079,7 +10046,7 @@ AnimScript_82D7683:
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
 	playsewithpan SE_W196, +63
-	call AnimScript_82D7720
+	call Anim_FreezeEffect1
 	waitforvisualfinish
 	end
 
@@ -10095,7 +10062,7 @@ Move_COUNT:
 	blendoff
 	end
 
-AnimScript_82D7720:
+Anim_FreezeEffect1:
 	createsprite gUnknown_08595B68, 0x82, -10, -10, 0
 	playsewithpan SE_W196, +63
 	delay 0x4
@@ -10118,7 +10085,7 @@ AnimScript_82D7720:
 	playsewithpan SE_W196, +63
 	return
 
-AnimScript_82D77A4:
+Anim_FreezeEffect2:
 	createsprite gUnknown_08595B68, 0x82, -10, -10, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
@@ -10153,7 +10120,7 @@ AnimScript_82D77A4:
 	playsewithpan SE_W196, +63
 	return
 
-AnimScript_82D7874:
+Anim_IcyWindEffect1: @ Unused
 	loopsewithpan SE_W196, +63, 0x6, 0x4
 	createsprite gUnknown_08595C04, 0x82, 0, 24, 0
 	delay 0x4
@@ -10170,7 +10137,7 @@ AnimScript_82D7874:
 	createsprite gUnknown_08595C04, 0x82, -32, 24, 0
 	return
 
-AnimScript_82D78F8:
+Anim_IcyWindEffect2:
 	loopsewithpan SE_W196, +63, 0x6, 0x4
 	createsprite gUnknown_08595C04, 0x82, 0, 24, 1
 	delay 0x4
@@ -10193,14 +10160,14 @@ AnimScript_82D78F8:
 	createsprite gUnknown_08595C04, 0x82, -48, 24, 1
 	return
 
-AnimScript_82D79B4:
+Anim_GrantingStarsEffect:
 	createsprite gUnknown_08592B7C, 0x2, -15, 0, 0, 0, 32, 60
 	delay 0x8
 	createsprite gUnknown_08592B7C, 0x2, 12, -5, 0, 0, 32, 60
 	delay 0x8
 	return
 
-AnimScript_82D79DF:
+Anim_HealingEffect:
 	playsewithpan SE_W071B, -64
 	createsprite gUnknown_08592F2C, 0x2, 0, -5, 0, 0
 	delay 0x7
@@ -10212,7 +10179,7 @@ AnimScript_82D79DF:
 	delay 0x7
 	return
 
-AnimScript_82D7A28:
+Anim_HealingEffect2:
 	playsewithpan SE_W071B, +63
 	createsprite gUnknown_08592F2C, 0x82, 0, -5, 1, 0
 	delay 0x7
@@ -10224,7 +10191,7 @@ AnimScript_82D7A28:
 	delay 0x7
 	return
 
-AnimScript_82D7A71:
+Anim_PoisonEffect:
 	createsprite gUnknown_08596240, 0x82, 10, 10, 0
 	playsewithpan SE_W092, +63
 	delay 0x6
@@ -10244,7 +10211,7 @@ AnimScript_82D7A71:
 	playsewithpan SE_W092, +63
 	return
 
-AnimScript_82D7AE2:
+Anim_BulbblebeamEffect:
 	createsprite gUnknown_08596258, 0x2, 10, 10, 0
 	playsewithpan SE_W145C, +63
 	delay 0x6
@@ -10264,7 +10231,7 @@ AnimScript_82D7AE2:
 	playsewithpan SE_W145C, +63
 	return
 
-AnimScript_82D7B53:
+Anim_BulbbleEffect:
 	createsprite gUnknown_08596258, 0x2, 10, 10, 1
 	playsewithpan SE_W145C, +63
 	delay 0x6
@@ -10290,7 +10257,7 @@ AnimScript_82D7B53:
 	playsewithpan SE_W145C, +63
 	return
 
-AnimScript_82D7BEA:
+Anim_ParalysisEffect:
 	playsewithpan SE_W085B, +63
 	createsprite gUnknown_08595810, 0x82, 5, 0, 5, 0
 	delay 0x2
@@ -10309,7 +10276,7 @@ AnimScript_82D7BEA:
 	createsprite gUnknown_08595810, 0x82, -20, 15, 5, 1
 	return
 
-AnimScript_82D7C75:
+Anim_ConfusionEffect:
 	loopsewithpan SE_W146, +63, 0xD, 0x6
 	createsprite gUnknown_0859725C, 0x82, 0, -15, 0, 3, 90
 	createsprite gUnknown_0859725C, 0x82, 0, -15, 51, 3, 90
@@ -10318,67 +10285,64 @@ AnimScript_82D7C75:
 	createsprite gUnknown_0859725C, 0x82, 0, -15, 204, 3, 90
 	return
 
-AnimScript_82D7CD1:
+Anim_SetPsychicBackground:
 	fadetobg BG_PSYCHIC
 	waitbgfadeout
 	createvisualtask sub_815A504, 0x5
 	waitbgfadein
 	return
 
-AnimScript_82D7CDD:
+Anim_UnsetPsychicBackground:
 	restorebg
 	waitbgfadeout
 	setarg 0x7, 0xFFFF
 	waitbgfadein
 	return
 
-AnimScript_82D7CE5:
-	jumpifcontest AnimScript_82D7CFE
+Anim_SetFlyingBg:
+	jumpifcontest Anim_SetBgFlyingContest
 	fadetobg BG_FLYING
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, -2304, 768, 1, -1
-
-AnimScript_82D7CFC:
+Anim_SetBgFlyingContinue:
 	waitbgfadein
 	return
-
-AnimScript_82D7CFE:
+Anim_SetBgFlyingContest:
 	fadetobg BG_FLYING_CONTESTS
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, 2304, 768, 0, -1
-	goto AnimScript_82D7CFC
+	goto Anim_SetBgFlyingContinue
 
-AnimScript_82D7D15:
+Anim_UnsetFlyingBg:
 	restorebg
 	waitbgfadeout
 	setarg 0x7, 0xFFFF
 	waitbgfadein
 	return
 
-AnimScript_82D7D1D:
-	createvisualtask sub_8117E60, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82D7D42
-	createvisualtask sub_815A8C8, 0x2
-	jumpargeq 0x7, 0x0, AnimScript_82D7D50
-	goto AnimScript_82D7D49
-
-AnimScript_82D7D40:
+Anim_SetSolarbeamBg:
+	createvisualtask AnimTask_IsContest, 0x2
+	jumprettrue Anim_SetSolarbeamBgContest
+	createvisualtask AnimTask_IsTargetPlayerSide, 0x2
+	jumpretfalse Anim_SetSolarbeamBgOpponent
+	goto Anim_SetSolarbeamBgPlayer
+Anim_SetSolarbeamBgContinue:
 	waitbgfadein
 	return
 
-AnimScript_82D7D42:
+Anim_SetSolarbeamBgContest:
 	fadetobg BG_SOLARBEAM_CONTESTS
-	goto AnimScript_82D7D40
+	goto Anim_SetSolarbeamBgContinue
 
-AnimScript_82D7D49:
+Anim_SetSolarbeamBgPlayer:
 	fadetobg BG_SOLARBEAM_PLAYER
-	goto AnimScript_82D7D40
+	goto Anim_SetSolarbeamBgContinue
 
-AnimScript_82D7D50:
+Anim_SetSolarbeamBgOpponent:
 	fadetobg BG_SOLARBEAM_OPPONENT
-	goto AnimScript_82D7D40
+	goto Anim_SetSolarbeamBgContinue
 
-AnimScript_82D7D57:
+Anim_UnsetSolarbeamBg:
 	restorebg
 	waitbgfadein
 	return
@@ -10386,24 +10350,24 @@ AnimScript_82D7D57:
 Status_Poison:
 	loopsewithpan SE_W092, +63, 0xD, 0x6
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 18, 2
-	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 12, 31774
+	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 12, RGB(30, 0, 31)
 	end
 
 Status_Confusion:
 	loadspritegfx 0x2759
-	call AnimScript_82D7C75
+	call Anim_ConfusionEffect
 	end
 
 Status_Burn:
 	loadspritegfx 0x272D
 	playsewithpan SE_W172, +63
-	call AnimScript_82D7DA6
-	call AnimScript_82D7DA6
-	call AnimScript_82D7DA6
+	call Anim_Burn1
+	call Anim_Burn1
+	call Anim_Burn1
 	waitforvisualfinish
 	end
 
-AnimScript_82D7DA6:
+Anim_Burn1:
 	createsprite gUnknown_08595504, 0x82, -24, 24, 24, 24, 20, 1, 1
 	delay 0x4
 	return
@@ -10431,7 +10395,7 @@ Status_Sleep:
 Status_Paralysis:
 	loadspritegfx 0x271B
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 10, 1
-	call AnimScript_82D7BEA
+	call Anim_ParalysisEffect
 	end
 
 Status_Freeze:
@@ -10467,7 +10431,7 @@ Status_Nightmare:
 
 Anim_CastformTransform:
 	createvisualtask sub_815BB18, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82D7ECA
+	jumpreteq 0x1, AnimScript_82D7ECA
 	goto AnimScript_82D7EB2
 
 AnimScript_82D7EB2:
@@ -10491,13 +10455,13 @@ Anim_StatChange:
 Anim_SubsituteOff:
 	monbg ANIM_ATTACKER
 	createvisualtask sub_8172D98, 0x5
-	createvisualtask sub_8116620, 0xA, 2, 0, 0, 16, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 0, 0, 16, RGB_WHITE
 	waitforvisualfinish
 	delay 0x1
 	clearmonbg ANIM_ATTACKER
 	delay 0x2
 	blendoff
-	createvisualtask sub_8116620, 0xA, 2, 0, 0, 0, 0x7FFF
+	createvisualtask sub_8116620, 0xA, 2, 0, 0, 0, RGB_WHITE
 	createvisualtask sub_8172BF0, 0x2, 1
 	end
 
@@ -10505,7 +10469,7 @@ Anim_SubsituteOn:
 	createvisualtask sub_815F20C, 0x2
 	end
 
-Anim_Table_4:
+Anim_PokeblockThrow:
 	createvisualtask sub_817345C, 0x2, 0
 	createvisualtask sub_81732B0, 0x2
 	delay 0x0
@@ -10525,13 +10489,13 @@ Anim_ItemKnockOff:
 
 Status_Wrap:
 	createvisualtask sub_81734B4, 0x5
-	jumpargeq 0x0, 0x1, AnimScript_82D7FE9
-	jumpargeq 0x0, 0x2, AnimScript_82D800E
-	jumpargeq 0x0, 0x3, AnimScript_82D8062
-	jumpargeq 0x0, 0x4, AnimScript_82D80BF
-	goto AnimScript_82D7FA1
+	jumpargeq 0x0, TRAP_ANIM_FIRE_SPIN, Status_FireSpin
+	jumpargeq 0x0, TRAP_ANIM_WHIRLPOOL, Status_Whrilpool
+	jumpargeq 0x0, TRAP_ANIM_CLAMP, Status_Clamp
+	jumpargeq 0x0, TRAP_ANIM_SAND_TOMB, Status_SandTomb
+	goto Status_BindWrap
 
-AnimScript_82D7FA1:
+Status_BindWrap:
 	loadspritegfx 0x27CA
 	loopsewithpan SE_W010, +63, 0x6, 0x2
 	createsprite gUnknown_08592494, 0x84, 0, 16, 0, 1
@@ -10545,17 +10509,17 @@ AnimScript_82D7FA1:
 	waitforvisualfinish
 	end
 
-AnimScript_82D7FE9:
+Status_FireSpin:
 	loadspritegfx 0x272D
 	playsewithpan SE_W221B, +63
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 30, 1
-	call AnimScript_82CACBF
-	call AnimScript_82CACBF
+	call Anim_FireSpinEffect
+	call Anim_FireSpinEffect
 	waitforvisualfinish
 	stopsound
 	end
 
-AnimScript_82D800E:
+Status_Whrilpool:
 	loadspritegfx 0x27A5
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
@@ -10564,8 +10528,8 @@ AnimScript_82D800E:
 	createsprite gUnknown_08597274, 0x0, 4, 2, 0, 7, RGB(0, 13, 23)
 	playsewithpan SE_W250, +63
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 30, 1
-	call AnimScript_82D1F5B
-	call AnimScript_82D1F5B
+	call Anim_WhirlpoolEffect
+	call Anim_WhirlpoolEffect
 	delay 0xC
 	createsprite gUnknown_08597274, 0x0, 4, 2, 7, 0, RGB(0, 13, 23)
 	waitforvisualfinish
@@ -10573,7 +10537,7 @@ AnimScript_82D800E:
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-AnimScript_82D8062:
+Status_Clamp:
 	loadspritegfx 0x27A1
 	loadspritegfx 0x2797
 	monbg ANIM_TARGET
@@ -10590,13 +10554,13 @@ AnimScript_82D8062:
 	waitforvisualfinish
 	end
 
-AnimScript_82D80BF:
+Status_SandTomb:
 	loadspritegfx 0x275A
 	createsprite gUnknown_08597274, 0x0, 4, 2, 0, 7, RGB(19, 17, 0)
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 30, 1
 	playsewithpan SE_W328, +63
-	call AnimScript_82D51B7
-	call AnimScript_82D51B7
+	call Anim_SandTombEffect
+	call Anim_SandTombEffect
 	delay 0x16
 	createsprite gUnknown_08597274, 0x0, 4, 2, 7, 0, RGB(19, 17, 0)
 	waitforvisualfinish
@@ -10617,7 +10581,7 @@ Anim_ItemEffect:
 	createvisualtask sub_80D622C, 0x2, 16, 128, 0, 2
 	waitforvisualfinish
 	playsewithpan SE_W234, -64
-	call AnimScript_82D79B4
+	call Anim_GrantingStarsEffect
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, -64
 	createsprite gUnknown_08597274, 0x2, 2, 3, 7, 0, RGB(17, 31, 25)
@@ -10677,13 +10641,13 @@ Anim_HangedOn:
 Anim_Rain:
 	loadspritegfx 0x2783
 	playsewithpan SE_W240, -64
-	createvisualtask sub_8116620, 0xA, 1921, 2, 0, 4, 0
+	createvisualtask sub_8116620, 0xA, 0x781, 2, 0, 4, RGB_BLACK
 	waitforvisualfinish
 	createvisualtask sub_8107188, 0x2, 0, 3, 60
 	createvisualtask sub_8107188, 0x2, 0, 3, 60
 	delay 0x32
 	waitforvisualfinish
-	createvisualtask sub_8116620, 0xA, 1921, 2, 4, 0, 0
+	createvisualtask sub_8116620, 0xA, 0x781, 2, 4, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -10729,7 +10693,7 @@ Anim_SnatchMove:
 	createvisualtask sub_80D5EB8, 0x2, 0, 5, 5120, 4, 1
 	waitforvisualfinish
 	createvisualtask sub_8117EC4, 0x2
-	jumpargeq 0x7, 0x0, AnimScript_82D839F
+	jumpreteq 0x0, AnimScript_82D839F
 	goto AnimScript_82D83AF
 
 AnimScript_82D8398:
@@ -10751,7 +10715,7 @@ Anim_FutureSightHit:
 	createvisualtask sub_8117F10, 0x2
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_W060, -64
-	call AnimScript_82D7CD1
+	call Anim_SetPsychicBackground
 	setalpha 0x808
 	playsewithpan SE_W048, +63
 	waitplaysewithpan SE_W048, +63, 0x8
@@ -10764,7 +10728,7 @@ Anim_FutureSightHit:
 	blendoff
 	waitforvisualfinish
 	delay 0x1
-	call AnimScript_82D7CDD
+	call Anim_UnsetPsychicBackground
 	end
 
 Anim_DoomDesireHit:
@@ -10801,16 +10765,16 @@ Anim_DoomDesireHit:
 	waitforvisualfinish
 	end
 
-Anim_Table_x14:
+Anim_FocusPunchSetUp:
 	loadspritegfx 0x27C8
 	playsewithpan SE_W082, -64
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	delay 0x8
-	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 11, 31
+	createvisualtask sub_8115A04, 0x2, 2, 2, 2, 0, 11, RGB_RED
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 32, 1
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	delay 0x8
-	call AnimScript_82CD6C7
+	call Anim_EndureEffect
 	waitforvisualfinish
 	end
 
@@ -10822,10 +10786,10 @@ Status_Ingrain:
 	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 4, RGB(13, 31, 12)
 	waitforvisualfinish
 	delay 0x3
-	call AnimScript_82D1009
+	call Anim_AbsorbEffect
 	waitforvisualfinish
 	delay 0xF
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 1, 4, 0, RGB(13, 31, 12)
 	waitforvisualfinish
@@ -10838,18 +10802,18 @@ Anim_WishHeal:
 	createsprite gUnknown_08597274, 0x2, 1, 3, 0, 10, 0
 	waitforvisualfinish
 	playsewithpan SE_W025, -64
-	call AnimScript_82D79B4
+	call Anim_GrantingStarsEffect
 	waitforvisualfinish
 	unloadspritegfx 0x2741
 	loadspritegfx 0x272F
-	call AnimScript_82D79DF
+	call Anim_HealingEffect
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 3, 10, 0, 0
 	end
 
 AnimScript_82D85A3:
 	createvisualtask sub_8172E9C, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82D85B4
+	jumpreteq 0x1, AnimScript_82D85B4
 
 AnimScript_82D85B2:
 	waitforvisualfinish
@@ -10862,7 +10826,7 @@ AnimScript_82D85B4:
 
 AnimScript_82D85C3:
 	createvisualtask sub_8172E9C, 0x2
-	jumpargeq 0x7, 0x1, AnimScript_82D85D4
+	jumpreteq 0x1, AnimScript_82D85D4
 
 AnimScript_82D85D2:
 	waitforvisualfinish
@@ -10899,15 +10863,14 @@ Anim_BallThrow:
 	delay 0x0
 	playsewithpan SE_NAGERU, 0
 	createvisualtask sub_8170E04, 0x2
-	createvisualtask sub_8170D4C, 0x2
-	jumpargeq 0x7, 0xFFFF, AnimScript_82D8652
-
-AnimScript_82D8649:
+	createvisualtask AnimTask_IsBallBlockedByTrainer, 0x2
+	jumpreteq 0xFFFF, Anim_BallThrowTrainerBlock
+Anim_BallThrowEnd:
 	waitforvisualfinish
 	createvisualtask sub_8170D24, 0x2
 	end
 
-AnimScript_82D8652:
+Anim_BallThrowTrainerBlock:
 	loadspritegfx 0x2797
 	delay 0x19
 	monbg ANIM_DEF_PARTNER
@@ -10918,7 +10881,7 @@ AnimScript_82D8652:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
-	goto AnimScript_82D8649
+	goto Anim_BallThrowEnd
 
 Anim_SafariBallThrow:
 	createvisualtask sub_8170CFC, 0x2

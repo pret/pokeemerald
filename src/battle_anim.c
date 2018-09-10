@@ -33,7 +33,7 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
-extern const u16 gUnknown_082C8D64[];
+extern const u16 gMovesWithQuietBGM[];
 extern const u8 * const gBattleAnims_Moves[];
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
@@ -260,9 +260,9 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
 
     if (isMoveAnim)
     {
-        for (i = 0; gUnknown_082C8D64[i] != 0xFFFF; i++)
+        for (i = 0; gMovesWithQuietBGM[i] != 0xFFFF; i++)
         {
-            if (tableId == gUnknown_082C8D64[i])
+            if (tableId == gMovesWithQuietBGM[i])
             {
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
                 break;

@@ -4802,8 +4802,8 @@ _080A8136:
 	.pool
 	thumb_func_end sub_80A80C8
 
-	thumb_func_start sub_80A8140
-sub_80A8140: @ 80A8140
+	thumb_func_start AnimTask_GetHappinessPowerLevel
+AnimTask_GetHappinessPowerLevel: @ 80A8140
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4827,7 +4827,7 @@ _080A815E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80A8140
+	thumb_func_end AnimTask_GetHappinessPowerLevel
 
 	thumb_func_start sub_80A8174
 sub_80A8174: @ 80A8174

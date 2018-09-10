@@ -17049,8 +17049,8 @@ _08107118:
 	.pool
 	thumb_func_end sub_81070AC
 
-	thumb_func_start sub_8107144
-sub_8107144: @ 8107144
+	thumb_func_start AnimTask_IsFuryCutterHitRight
+AnimTask_IsFuryCutterHitRight: @ 8107144
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17065,10 +17065,10 @@ sub_8107144: @ 8107144
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8107144
+	thumb_func_end AnimTask_IsFuryCutterHitRight
 
-	thumb_func_start sub_8107168
-sub_8107168: @ 8107168
+	thumb_func_start AnimTask_GetFuryCutterHitCount
+AnimTask_GetFuryCutterHitCount: @ 8107168
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17081,7 +17081,7 @@ sub_8107168: @ 8107168
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8107168
+	thumb_func_end AnimTask_GetFuryCutterHitCount
 
 	thumb_func_start sub_8107188
 sub_8107188: @ 8107188
@@ -28522,8 +28522,8 @@ _0810CDF6:
 	bx r0
 	thumb_func_end sub_810CDB0
 
-	thumb_func_start sub_810CDFC
-sub_810CDFC: @ 810CDFC
+	thumb_func_start AnimTask_GetRolloutCounter
+AnimTask_GetRolloutCounter: @ 810CDFC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -28544,7 +28544,7 @@ sub_810CDFC: @ 810CDFC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_810CDFC
+	thumb_func_end AnimTask_GetRolloutCounter
 
 	thumb_func_start unc_080B08A0
 unc_080B08A0: @ 810CE2C
@@ -45184,8 +45184,8 @@ _081155F4:
 	.pool
 	thumb_func_end sub_8115588
 
-	thumb_func_start sub_8115600
-sub_8115600: @ 8115600
+	thumb_func_start AnimTask_IsPowerOver99
+AnimTask_IsPowerOver99: @ 8115600
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -45203,7 +45203,7 @@ _08115614:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8115600
+	thumb_func_end AnimTask_IsPowerOver99
 
 	thumb_func_start sub_8115628
 sub_8115628: @ 8115628
@@ -49190,8 +49190,8 @@ _0811773E:
 	.pool
 	thumb_func_end sub_81176D8
 
-	thumb_func_start sub_8117754
-sub_8117754: @ 8117754
+	thumb_func_start AnimTask_IsAttackerOpponentSide
+AnimTask_IsAttackerOpponentSide: @ 8117754
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -49209,10 +49209,10 @@ sub_8117754: @ 8117754
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117754
+	thumb_func_end AnimTask_IsAttackerOpponentSide
 
-	thumb_func_start sub_8117780
-sub_8117780: @ 8117780
+	thumb_func_start AnimTask_IsTargetOpponentSide
+AnimTask_IsTargetOpponentSide: @ 8117780
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -49230,10 +49230,10 @@ sub_8117780: @ 8117780
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117780
+	thumb_func_end AnimTask_IsTargetOpponentSide
 
-	thumb_func_start sub_81177AC
-sub_81177AC: @ 81177AC
+	thumb_func_start AnimTask_IsTargetPartner
+AnimTask_IsTargetPartner: @ 81177AC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -49256,7 +49256,7 @@ _081177C8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81177AC
+	thumb_func_end AnimTask_IsTargetPartner
 
 	thumb_func_start sub_81177E4
 sub_81177E4: @ 81177E4
@@ -50032,8 +50032,8 @@ _08117E34:
 	.pool
 	thumb_func_end sub_8117DD8
 
-	thumb_func_start sub_8117E60
-sub_8117E60: @ 8117E60
+	thumb_func_start AnimTask_IsContest
+AnimTask_IsContest: @ 8117E60
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -50057,7 +50057,7 @@ _08117E84:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117E60
+	thumb_func_end AnimTask_IsContest
 
 	thumb_func_start sub_8117E94
 sub_8117E94: @ 8117E94

@@ -41,7 +41,7 @@
 #define B_ANIM_STATS_CHANGE             0x1
 #define B_ANIM_SUBSTITUTE_FADE          0x2
 #define B_ANIM_SUBSTITUTE_APPEAR        0x3
-#define B_ANIM_x4                       0x4
+#define B_ANIM_POKEBLOCK_THROW          0x4
 #define B_ANIM_ITEM_KNOCKOFF            0x5
 #define B_ANIM_TURN_TRAP                0x6
 #define B_ANIM_ITEM_EFFECT              0x7
@@ -57,7 +57,7 @@
 #define B_ANIM_SNATCH_MOVE              0x11
 #define B_ANIM_FUTURE_SIGHT_HIT         0x12
 #define B_ANIM_DOOM_DESIRE_HIT          0x13
-#define B_ANIM_x14                      0x14
+#define B_ANIM_FOCUS_PUNCH_SETUP        0x14
 #define B_ANIM_INGRAIN_HEAL             0x15
 #define B_ANIM_WISH_HEAL                0x16
 
@@ -81,5 +81,23 @@
 #define B_ANIM_STATUS_CURSED            0x7
 #define B_ANIM_STATUS_NIGHTMARE         0x8
 #define B_ANIM_STATUS_WRAPPED           0x9 // does not actually exist
+
+// Most tasks return a value to gBattleAnimArgs[7].
+#define ARG_RET_ID 0x7
+
+// Trapping Wrap-like moves end turn animation.
+#define TRAP_ANIM_BIND 0
+#define TRAP_ANIM_WRAP 0
+#define TRAP_ANIM_FIRE_SPIN 1
+#define TRAP_ANIM_WHIRLPOOL 2
+#define TRAP_ANIM_CLAMP 3
+#define TRAP_ANIM_SAND_TOMB 4
+
+// Weather defines for battle animation scripts.
+#define ANIM_WEATHER_NONE 0
+#define ANIM_WEATHER_SUN 1
+#define ANIM_WEATHER_RAIN 2
+#define ANIM_WEATHER_SANDSTORM 3
+#define ANIM_WEATHER_HAIL 4
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H
