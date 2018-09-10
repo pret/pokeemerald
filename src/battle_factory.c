@@ -24,6 +24,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "constants/battle_frontier.h"
 #include "constants/songs.h"
+#include "constants/rgb.h"
 
 // Select_ refers to the first Pokemon selection screen where you choose 3 Pokemon.
 // Swap_   refers to the consecutive selection screen where you can keep your Pokemon or swap one with beaten trainer's.
@@ -989,7 +990,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u16 gUnknown_08610918[] = {0x0, 0x0, 0x7FFF, 0x0, 0x1F}; // Palette.
+static const u16 gUnknown_08610918[] = {RGB_BLACK, RGB_BLACK, RGB_WHITE, RGB_BLACK, RGB_RED}; // Palette.
 static const u8 gUnknown_08610922[] = {0x0, 0x02, 0x0};
 static const u8 gUnknown_08610925[] = {0x0, 0x04, 0x0};
 
@@ -2670,7 +2671,7 @@ static void sub_819D12C(u8 taskId)
 {
     s8 i;
     u8 var_2C;
-    bool8 r7;
+    bool8 destroyTask;
 
     switch (gTasks[taskId].data[0])
     {
@@ -2708,20 +2709,20 @@ static void sub_819D12C(u8 taskId)
                 if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x > (i * 48) + 72)
                 {
                     gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x = (i * 48) + 72;
-                    r7 = TRUE;
+                    destroyTask = TRUE;
                 }
                 else if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x == (i * 48) + 72)
                 {
-                    r7 = TRUE;
+                    destroyTask = TRUE;
                 }
                 else
                 {
-                    r7 = FALSE;
+                    destroyTask = FALSE;
                 }
             }
             else
             {
-                r7 = FALSE;
+                destroyTask = FALSE;
             }
 
             if (gSprites[sFactorySwapScreen->ballSpriteIds[i]].pos1.x - 16 > 240)
@@ -2736,7 +2737,7 @@ static void sub_819D12C(u8 taskId)
                 gTasks[taskId].data[i + 1] = 1;
             }
         }
-        if (r7 == TRUE)
+        if (destroyTask == TRUE)
             DestroyTask(taskId);
         break;
     }
@@ -2862,7 +2863,7 @@ static void sub_819D588(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        LoadPalette(gUnknown_08610918, 0xE0, 0xA);
+        LoadPalette(gUnknown_08610918, 0xE0, sizeof(gUnknown_08610918));
         Swap_PrintActionStrings();
         PutWindowTilemap(5);
         gTasks[taskId].data[0]++;
@@ -3157,8 +3158,8 @@ static void CB2_InitSwapScreen(void)
         CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSwapMenuTilemapBuffer, 0x800);
         LoadBgTilemap(1, sSwapMenuTilemapBuffer, 0x800, 0);
         LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
-        LoadPalette(gUnknown_08610918, 0xF0, 10);
-        LoadPalette(gUnknown_08610918, 0xE0, 10);
+        LoadPalette(gUnknown_08610918, 0xF0, sizeof(gUnknown_08610918));
+        LoadPalette(gUnknown_08610918, 0xE0, sizeof(gUnknown_08610918));
         LoadPalette(gUnknown_0861039C, 0x20, 4);
         gMain.state++;
         break;
@@ -3722,7 +3723,7 @@ static void Swap_PrintMonSpecies3(void)
     u16 species;
     u8 x;
 
-    LoadPalette(gUnknown_08610918, 0xE0, 0xA);
+    LoadPalette(gUnknown_08610918, 0xE0, sizeof(gUnknown_08610918));
     CpuCopy16(gPlttBufferUnfaded + 240, gPlttBufferFaded + 224, 10);
 
     if (sFactorySwapScreen->cursorPos > 2)
