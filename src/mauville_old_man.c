@@ -438,7 +438,7 @@ static void BardSong_TextSubPrinter(struct TextSubPrinter * printer, u16 a1)
 static void sub_8120708(const u8 * src)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    PrintTextOnWindow(0, 1, src, 0, 1, 1, BardSong_TextSubPrinter);
+    AddTextPrinterParameterized(0, 1, src, 0, 1, 1, BardSong_TextSubPrinter);
     gUnknown_03002F84 = TRUE;
     CopyWindowToVram(0, 3);
 }
@@ -1160,9 +1160,9 @@ static void PrintStoryList(void)
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
         if (gameStatID == 0)
             break;
-        PrintTextOnWindow(sStorytellerWindowId, 1, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, 0xFF, NULL);
+        AddTextPrinterParameterized(sStorytellerWindowId, 1, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, 0xFF, NULL);
     }
-    PrintTextOnWindow(sStorytellerWindowId, 1, gText_Exit, 8, 16 * i + 1, 0xFF, NULL);
+    AddTextPrinterParameterized(sStorytellerWindowId, 1, gText_Exit, 8, 16 * i + 1, 0xFF, NULL);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sStorytellerWindowId, GetFreeStorySlot() + 1, 0);
     CopyWindowToVram(sStorytellerWindowId, 3);
 }

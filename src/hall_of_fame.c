@@ -28,6 +28,7 @@
 #include "overworld.h"
 #include "menu.h"
 #include "trainer_pokemon_sprites.h"
+#include "data2.h"
 
 struct HallofFameMon
 {
@@ -57,10 +58,6 @@ static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
 extern bool8 gHasHallOfFameRecords;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern MainCallback gGameContinueCallback;
-extern u32 gDamagedSaveSectors;
-extern u8 gReservedSpritePaletteCount;
-extern const u8 gSpeciesNames[][11];
 
 #define HALL_OF_FAME_MAX_TEAMS 50
 
@@ -84,10 +81,6 @@ extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
 
 extern void sub_8175620(void);
-extern u8 TrySavingData(u8);
-extern void sub_8197434(u8, u8);
-extern u16 sub_818D97C(u8 playerGender, u8);
-extern void sub_8198204(u8 *dst, const u8 *src, u8, u8, u8);
 extern bool8 sub_80F9C30(void);
 extern void sub_8198314(void);
 extern void ReturnFromHallOfFamePC(void);
@@ -182,19 +175,17 @@ static const u8 sUnknown_085E5388[] = {0, 1, 2, 0};
 
 static const u8 sUnknown_085E538C[] = {0, 2, 3, 0, 4, 5, 0, 0};
 
-static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet =
+static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet[] =
 {
-    gContestConfetti_Gfx, 0x220, 1001
+    {gContestConfetti_Gfx, 0x220, 1001},
+    {},
 };
 
-static const u8 sUnused0[8] = {};
-
-static const struct CompressedSpritePalette sHallOfFame_ConfettiSpritePalette =
+static const struct CompressedSpritePalette sHallOfFame_ConfettiSpritePalette[] =
 {
-    gContestConfetti_Pal, 1001
+    {gContestConfetti_Pal, 1001},
+    {},
 };
-
-static const u8 sUnused1[8] = {};
 
 static const s16 sHallOfFame_MonFullTeamPositions[6][4] =
 {
@@ -531,7 +522,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     *lastSavedTeam = *sHofMonPtr;
 
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_SavingDontTurnOffPower, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gText_SavingDontTurnOffPower, 0, NULL, 2, 1, 3);
     CopyWindowToVram(0, 3);
     gTasks[taskId].func = Task_Hof_TrySaveData;
 }
@@ -610,7 +601,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
     gSprites[spriteId].tSpecies = currMon->species;
     gSprites[spriteId].callback = SpriteCB_GetOnScreenAndAnimate;
     gTasks[taskId].tMonSpriteId(currMonId) = spriteId;
-    sub_8197434(0, 1);
+    sub_8197434(0, TRUE);
     gTasks[taskId].func = Task_Hof_PrintMonInfoAfterAnimating;
 }
 
@@ -738,7 +729,7 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         HallOfFame_PrintPlayerInfo(1, 2);
         NewMenuHelpers_DrawDialogueFrame(0, 0);
-        AddTextPrinterParameterized(0, 1, gText_LeagueChamp, 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 1, gText_LeagueChamp, 0, NULL, 2, 1, 3);
         CopyWindowToVram(0, 3);
         gTasks[taskId].func = Task_Hof_ExitOnKeyPressed;
     }
@@ -964,9 +955,9 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_HOFNumber);
 
     if (gTasks[taskId].tCurrTeamNo <= 0)
-        sub_8198204(gStringVar4, gText_PickCancel, 0, 0, 1);
+        sub_8198204(gStringVar4, gText_PickCancel, 0, 0, TRUE);
     else
-        sub_8198204(gStringVar4, gText_PickNextCancel, 0, 0, 1);
+        sub_8198204(gStringVar4, gText_PickNextCancel, 0, 0, TRUE);
 
     gTasks[taskId].func = Task_HofPC_PrintMonInfo;
 }
@@ -1107,7 +1098,7 @@ static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
 {
     sub_8198180(gText_UnkCtrlF800Exit, 8, 1);
     NewMenuHelpers_DrawDialogueFrame(0, 0);
-    AddTextPrinterParameterized(0, 1, gText_HOFCorrupted, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gText_HOFCorrupted, 0, NULL, 2, 1, 3);
     CopyWindowToVram(0, 3);
     gTasks[taskId].func = Task_HofPC_ExitOnButtonPress;
 }
@@ -1128,7 +1119,7 @@ static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
 {
     FillWindowPixelBuffer(0, 0);
     PutWindowTilemap(0);
-    box_print(0, 1, GetStringCenterAlignXOffset(1, gText_WelcomeToHOF, 0xD0), 1, sUnknown_085E5388, 0, gText_WelcomeToHOF);
+    AddTextPrinterParameterized3(0, 1, GetStringCenterAlignXOffset(1, gText_WelcomeToHOF, 0xD0), 1, sUnknown_085E5388, 0, gText_WelcomeToHOF);
     CopyWindowToVram(0, 3);
 }
 
@@ -1164,7 +1155,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
             *(stringPtr)++ = CHAR_QUESTION_MARK;
         }
         stringPtr[0] = EOS;
-        box_print(0, 1, 0x10, 1, sUnknown_085E5388, -1, text);
+        AddTextPrinterParameterized3(0, 1, 0x10, 1, sUnknown_085E5388, -1, text);
     }
 
     // nick, species names, gender and level
@@ -1173,13 +1164,13 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     if (currMon->species == SPECIES_EGG)
     {
         width = GetStringCenterAlignXOffset(1, text, 0xD0);
-        box_print(0, 1, width, 1, sUnknown_085E5388, -1, text);
+        AddTextPrinterParameterized3(0, 1, width, 1, sUnknown_085E5388, -1, text);
         CopyWindowToVram(0, 3);
     }
     else
     {
         width = GetStringRightAlignXOffset(1, text, 0x80);
-        box_print(0, 1, width, 1, sUnknown_085E5388, -1, text);
+        AddTextPrinterParameterized3(0, 1, width, 1, sUnknown_085E5388, -1, text);
 
         text[0] = CHAR_SLASH;
         stringPtr = StringCopy(text + 1, gSpeciesNames[currMon->species]);
@@ -1200,15 +1191,15 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
         }
 
         stringPtr[0] = EOS;
-        box_print(0, 1, 0x80, 1, sUnknown_085E5388, -1, text);
+        AddTextPrinterParameterized3(0, 1, 0x80, 1, sUnknown_085E5388, -1, text);
 
         stringPtr = StringCopy(text, gText_Level);
         ConvertIntToDecimalStringN(stringPtr, currMon->lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
-        box_print(0, 1, 0x24, 0x11, sUnknown_085E5388, -1, text);
+        AddTextPrinterParameterized3(0, 1, 0x24, 0x11, sUnknown_085E5388, -1, text);
 
         stringPtr = StringCopy(text, gText_IDNumber);
         ConvertIntToDecimalStringN(stringPtr, (u16)(currMon->tid), STR_CONV_MODE_LEADING_ZEROS, 5);
-        box_print(0, 1, 0x68, 0x11, sUnknown_085E5388, -1, text);
+        AddTextPrinterParameterized3(0, 1, 0x68, 0x11, sUnknown_085E5388, -1, text);
 
         CopyWindowToVram(0, 3);
     }
@@ -1223,13 +1214,13 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     FillWindowPixelBuffer(1, 0x11);
     PutWindowTilemap(1);
     SetWindowBorderStyle(1, FALSE, 0x21D, 0xD);
-    box_print(1, 1, 0, 1, sUnknown_085E538C, -1, gText_Name);
+    AddTextPrinterParameterized3(1, 1, 0, 1, sUnknown_085E538C, -1, gText_Name);
 
     width = GetStringRightAlignXOffset(1, gSaveBlock2Ptr->playerName, 0x70);
-    box_print(1, 1, width, 1, sUnknown_085E538C, -1, gSaveBlock2Ptr->playerName);
+    AddTextPrinterParameterized3(1, 1, width, 1, sUnknown_085E538C, -1, gSaveBlock2Ptr->playerName);
 
     trainerId = (gSaveBlock2Ptr->playerTrainerId[0]) | (gSaveBlock2Ptr->playerTrainerId[1] << 8);
-    box_print(1, 1, 0, 0x11, sUnknown_085E538C, 0, gText_IDNumber);
+    AddTextPrinterParameterized3(1, 1, 0, 0x11, sUnknown_085E538C, 0, gText_IDNumber);
     text[0] = (trainerId % 100000) / 10000 + CHAR_0;
     text[1] = (trainerId % 10000) / 1000 + CHAR_0;
     text[2] = (trainerId % 1000) / 100 + CHAR_0;
@@ -1237,9 +1228,9 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     text[4] = (trainerId % 10) / 1 + CHAR_0;
     text[5] = EOS;
     width = GetStringRightAlignXOffset(1, text, 0x70);
-    box_print(1, 1, width, 0x11, sUnknown_085E538C, -1, text);
+    AddTextPrinterParameterized3(1, 1, width, 0x11, sUnknown_085E538C, -1, text);
 
-    box_print(1, 1, 0, 0x21, sUnknown_085E538C, -1, gText_MainMenuTime);
+    AddTextPrinterParameterized3(1, 1, 0, 0x21, sUnknown_085E538C, -1, gText_MainMenuTime);
     text[0] = (gSaveBlock2Ptr->playTimeHours / 100) + CHAR_0;
     text[1] = (gSaveBlock2Ptr->playTimeHours % 100) / 10 + CHAR_0;
     text[2] = (gSaveBlock2Ptr->playTimeHours % 10) + CHAR_0;
@@ -1255,7 +1246,7 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     text[6] = EOS;
 
     width = GetStringRightAlignXOffset(1, text, 0x70);
-    box_print(1, 1, width, 0x21, sUnknown_085E538C, -1, text);
+    AddTextPrinterParameterized3(1, 1, width, 0x21, sUnknown_085E538C, -1, text);
 
     CopyWindowToVram(1, 3);
 }
@@ -1300,8 +1291,8 @@ static void sub_8174F70(void)
     ResetAllPicSprites();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
-    LoadCompressedObjectPic(&sHallOfFame_ConfettiSpriteSheet);
-    LoadCompressedObjectPalette(&sHallOfFame_ConfettiSpritePalette);
+    LoadCompressedObjectPic(sHallOfFame_ConfettiSpriteSheet);
+    LoadCompressedObjectPalette(sHallOfFame_ConfettiSpritePalette);
 }
 
 static void sub_8174FAC(void)
@@ -1517,8 +1508,8 @@ static void sub_8175364(u8 taskId)
             gSpecialVar_0x8004 = var;
             gSpecialVar_0x8005 = 0xFFFF;
         }
-        LoadCompressedObjectPic(&sHallOfFame_ConfettiSpriteSheet);
-        LoadCompressedObjectPalette(&sHallOfFame_ConfettiSpritePalette);
+        LoadCompressedObjectPic(sHallOfFame_ConfettiSpriteSheet);
+        LoadCompressedObjectPalette(sHallOfFame_ConfettiSpritePalette);
         data[0]++;
         break;
     case 1:

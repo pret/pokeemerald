@@ -3550,8 +3550,8 @@ void ShowBerryBlenderRecordWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, 0x11);
 
     xPos = GetStringCenterAlignXOffset(1, gText_BlenderMaxSpeedRecord, 0x90);
-    PrintTextOnWindow(gRecordsWindowId, 1, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
-    PrintTextOnWindow(gRecordsWindowId, 1, gText_234Players, 4, 0x29, 0, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, 1, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, 1, gText_234Players, 4, 0x29, 0, NULL);
 
     for (i = 0, yPos = 0x29; i < BLENDER_SCORES_NO; i++)
     {
@@ -3566,7 +3566,7 @@ void ShowBerryBlenderRecordWindow(void)
         txtPtr = StringAppend(txtPtr, sText_RPM);
 
         xPos = GetStringRightAlignXOffset(1, text, 0x8C);
-        PrintTextOnWindow(gRecordsWindowId, 1, text, xPos, yPos + (i * 16), 0, NULL);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, text, xPos, yPos + (i * 16), 0, NULL);
     }
 
     PutWindowTilemap(gRecordsWindowId);
@@ -3659,7 +3659,7 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
         FillWindowPixelBuffer(windowId, txtColor[0] | (txtColor[0] << 4));
     }
 
-    AddTextPrinterParameterized2(windowId, 1, x, y, letterSpacing, 1, txtColor, speed, string);
+    AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, 1, txtColor, speed, string);
 }
 
 static bool32 Blender_PrintText(s16 *textState, const u8 *string, s32 textSpeed)

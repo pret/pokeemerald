@@ -1129,7 +1129,7 @@ static void sub_81C6404(void)
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     sub_81C6CEC(3);
     x = GetStringCenterAlignXOffset(1, gStringVar4, 0x28);
-    PrintTextOnWindow(3, 1, gStringVar4, x, 2, 0, NULL);
+    AddTextPrinterParameterized(3, 1, gStringVar4, x, 2, 0, NULL);
 }
 
 static void sub_81C645C(s16 value)
@@ -1139,7 +1139,7 @@ static void sub_81C645C(s16 value)
     ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     x = GetStringCenterAlignXOffset(1, gStringVar4, 0x28);
-    PrintTextOnWindow(3, 1, gStringVar4, x, 2, 0, NULL);
+    AddTextPrinterParameterized(3, 1, gStringVar4, x, 2, 0, NULL);
 }
 
 static void sub_81C64B4(u8 taskId)
@@ -1412,12 +1412,12 @@ static void sub_81C6BD8(void)
 
 static void PrintOnWindow_Font1(u8 windowId, const u8 *src, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorTableId)
 {
-    AddTextPrinterParameterized2(windowId, 1, x, y, letterSpacing, lineSpacing, sColorTable[colorTableId], speed, src);
+    AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, lineSpacing, sColorTable[colorTableId], speed, src);
 }
 
 static void PrintOnWindow_Font7(u8 windowId, const u8 *src, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorTableId)
 {
-    AddTextPrinterParameterized2(windowId, 7, x, y, letterSpacing, lineSpacing, sColorTable[colorTableId], speed, src);
+    AddTextPrinterParameterized4(windowId, 7, x, y, letterSpacing, lineSpacing, sColorTable[colorTableId], speed, src);
 }
 
 static void sub_81C6CEC(u8 windowId)

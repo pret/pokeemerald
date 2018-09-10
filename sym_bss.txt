@@ -78,14 +78,7 @@ gUnknown_03001278: @ 3001278
 gUnknown_03001279: @ 3001279
 	.space 0x3
 
-gUnknown_0300127C: @ 300127C
-	.space 0x4
-
-gUnknown_03001280: @ 3001280
-	.space 0x4
-
-gUnknown_03001284: @ 3001284
-	.space 0x4
+	.include "src/battle_factory.o"
 
 gUnknown_03001288: @ 3001288
 	.space 0x4
@@ -105,9 +98,7 @@ gUnknown_03001290: @ 3001290
 gUnknown_03001294: @ 3001294
 	.space 0x4
 
-gUnknown_03001298: @ 3001298
-	.space 0x4
-
+	.include "src/battle_tent.o"
 	.include "src/multiboot.o"
 
 	.space 0x4 @ XXX: why is this needed?

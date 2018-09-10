@@ -1,13 +1,15 @@
 #include "global.h"
+#include "battle_tent.h"
 #include "overworld.h"
 #include "event_data.h"
 #include "region_map.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
-#include "battle_frontier_2.h"
 #include "random.h"
 #include "item.h"
+#include "battle_factory.h"
+#include "battle_frontier_2.h"
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 
@@ -15,35 +17,40 @@ extern const struct BattleFrontierTrainer gSlateportBattleTentTrainers[];
 extern const struct FacilityMon gSlateportBattleTentMons[];
 extern const u16 gBattleFrontierHeldItems[];
 
+extern u16 gUnknown_03006298[];
+
 // This file's functions.
-void sub_81B99D4(void);
-void sub_81B9A28(void);
-void sub_81B9A44(void);
-void sub_81B9A60(void);
-void sub_81B9A90(void);
-void sub_81B9ABC(void);
-void sub_81B9B00(void);
-void sub_81B9B28(void);
-void sub_81B9BA0(void);
-void sub_81B9BF4(void);
-void sub_81B9C10(void);
-void sub_81B9C2C(void);
-void sub_81B9C70(void);
-void sub_81B9C98(void);
-void sub_81B9CF0(void);
-void sub_81B9D28(void);
-void sub_81B9D7C(void);
-void sub_81B9D98(void);
-void sub_81B9DB4(void);
-void sub_81B9DF8(void);
-void sub_81B9E20(void);
-void sub_81B9E78(void);
-void sub_81B9E88(void);
-void sub_81BA040(void);
-void sub_81B9EC0(void);
+static void sub_81B99D4(void);
+static void sub_81B9A28(void);
+static void sub_81B9A44(void);
+static void sub_81B9A60(void);
+static void sub_81B9A90(void);
+static void sub_81B9ABC(void);
+static void sub_81B9B00(void);
+static void sub_81B9B28(void);
+static void sub_81B9BA0(void);
+static void sub_81B9BF4(void);
+static void sub_81B9C10(void);
+static void sub_81B9C2C(void);
+static void sub_81B9C70(void);
+static void sub_81B9C98(void);
+static void sub_81B9CF0(void);
+static void sub_81B9D28(void);
+static void sub_81B9D7C(void);
+static void sub_81B9D98(void);
+static void sub_81B9DB4(void);
+static void sub_81B9DF8(void);
+static void sub_81B9E20(void);
+static void sub_81B9E78(void);
+static void sub_81B9E88(void);
+static void sub_81BA040(void);
+static void sub_81B9EC0(void);
+
+// IWRAM bss
+static IWRAM_DATA u16 sRandMonSetId;
 
 // const rom data
-void (*const gUnknown_086160B4[])(void) =
+void static (*const gUnknown_086160B4[])(void) =
 {
     sub_81B99D4,
     sub_81B9A28,
@@ -57,7 +64,7 @@ void (*const gUnknown_086160B4[])(void) =
 
 static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
 
-void (*const gUnknown_086160D8[])(void) =
+void static (*const gUnknown_086160D8[])(void) =
 {
     sub_81B9BA0,
     sub_81B9BF4,
@@ -70,7 +77,7 @@ void (*const gUnknown_086160D8[])(void) =
 
 static const u16 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
 
-void (*const gUnknown_086160F8[])(void) =
+void static (*const gUnknown_086160F8[])(void) =
 {
     sub_81B9D28,
     sub_81B9D7C,
@@ -92,7 +99,7 @@ void sub_81B99B4(void)
     gUnknown_086160B4[gSpecialVar_0x8004]();
 }
 
-void sub_81B99D4(void)
+static void sub_81B99D4(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
     gSaveBlock2Ptr->frontier.field_CB2 = 0;
@@ -100,29 +107,29 @@ void sub_81B99D4(void)
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
-void sub_81B9A28(void)
+static void sub_81B9A28(void)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_E6A;
 }
 
-void sub_81B9A44(void)
+static void sub_81B9A44(void)
 {
     gSaveBlock2Ptr->frontier.field_E6A = gSpecialVar_0x8006;
 }
 
-void sub_81B9A60(void)
+static void sub_81B9A60(void)
 {
     gTrainerBattleOpponent_A = (u32)((Random() % 255) * 5) / 64;
     sub_8162614(gTrainerBattleOpponent_A, 0);
 }
 
-void sub_81B9A90(void)
+static void sub_81B9A90(void)
 {
     if (gTrainerBattleOpponent_A < 300)
         ConvertBattleFrontierTrainerSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
 }
 
-void sub_81B9ABC(void)
+static void sub_81B9ABC(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -130,12 +137,12 @@ void sub_81B9ABC(void)
     sub_81A4C30();
 }
 
-void sub_81B9B00(void)
+static void sub_81B9B00(void)
 {
     gSaveBlock2Ptr->frontier.field_E6A = sVerdanturfTentRewards[Random() % ARRAY_COUNT(sVerdanturfTentRewards)];
 }
 
-void sub_81B9B28(void)
+static void sub_81B9B28(void)
 {
     if (AddBagItem(gSaveBlock2Ptr->frontier.field_E6A, 1) == TRUE)
     {
@@ -154,7 +161,7 @@ void sub_81B9B80(void)
     gUnknown_086160D8[gSpecialVar_0x8004]();
 }
 
-void sub_81B9BA0(void)
+static void sub_81B9BA0(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
     gSaveBlock2Ptr->frontier.field_CB2 = 0;
@@ -162,17 +169,17 @@ void sub_81B9BA0(void)
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
-void sub_81B9BF4(void)
+static void sub_81B9BF4(void)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_E6C;
 }
 
-void sub_81B9C10(void)
+static void sub_81B9C10(void)
 {
     gSaveBlock2Ptr->frontier.field_E6C = gSpecialVar_0x8006;
 }
 
-void sub_81B9C2C(void)
+static void sub_81B9C2C(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -180,12 +187,12 @@ void sub_81B9C2C(void)
     sub_81A4C30();
 }
 
-void sub_81B9C70(void)
+static void sub_81B9C70(void)
 {
     gSaveBlock2Ptr->frontier.field_E6C = sFallarborTentRewards[Random() % ARRAY_COUNT(sFallarborTentRewards)];
 }
 
-void sub_81B9C98(void)
+static void sub_81B9C98(void)
 {
     if (AddBagItem(gSaveBlock2Ptr->frontier.field_E6C, 1) == TRUE)
     {
@@ -199,7 +206,7 @@ void sub_81B9C98(void)
     }
 }
 
-void sub_81B9CF0(void)
+static void sub_81B9CF0(void)
 {
     GetFrontierTrainerName(gStringVar1, gTrainerBattleOpponent_A);
 }
@@ -209,7 +216,7 @@ void sub_81B9D08(void)
     gUnknown_086160F8[gSpecialVar_0x8004]();
 }
 
-void sub_81B9D28(void)
+static void sub_81B9D28(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
     gSaveBlock2Ptr->frontier.field_CB2 = 0;
@@ -217,17 +224,17 @@ void sub_81B9D28(void)
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
-void sub_81B9D7C(void)
+static void sub_81B9D7C(void)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_E6E;
 }
 
-void sub_81B9D98(void)
+static void sub_81B9D98(void)
 {
     gSaveBlock2Ptr->frontier.field_E6E = gSpecialVar_0x8006;
 }
 
-void sub_81B9DB4(void)
+static void sub_81B9DB4(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -235,12 +242,12 @@ void sub_81B9DB4(void)
     sub_81A4C30();
 }
 
-void sub_81B9DF8(void)
+static void sub_81B9DF8(void)
 {
     gSaveBlock2Ptr->frontier.field_E6E = sSlateportTentRewards[Random() % ARRAY_COUNT(sSlateportTentRewards)];
 }
 
-void sub_81B9E20(void)
+static void sub_81B9E20(void)
 {
     if (AddBagItem(gSaveBlock2Ptr->frontier.field_E6E, 1) == TRUE)
     {
@@ -254,15 +261,15 @@ void sub_81B9E20(void)
     }
 }
 
-void sub_81B9E78(void)
+static void sub_81B9E78(void)
 {
     ZeroPlayerPartyMons();
-    sub_819A4F8();
+    DoBattleFactorySelectScreen();
 }
 
-void sub_81B9E88(void)
+static void sub_81B9E88(void)
 {
-    sub_819DC00();
+    DoBattleFactorySwapScreen();
 }
 
 bool8 sub_81B9E94(void)
@@ -273,7 +280,7 @@ bool8 sub_81B9E94(void)
 
 // This function was written very...oddly.
 #ifdef NONMATCHING
-void sub_81B9EC0(void)
+static void sub_81B9EC0(void)
 {
     s32 i, j;
     u16 currMonId = 0, currSpecies = 0;
@@ -335,7 +342,7 @@ void sub_81B9EC0(void)
 }
 #else
 NAKED
-void sub_81B9EC0(void)
+static void sub_81B9EC0(void)
 {
     asm_unified("\n\
     	push {r4-r7,lr}\n\
@@ -526,3 +533,74 @@ _081BA024:\n\
     ");
 }
 #endif // NONMATCHING
+
+static void sub_81BA040(void)
+{
+    u16 trainerId;
+    s32 i, j, k;
+    register const u16 *monSetsPool asm("r9"); // Fix me. Compiler insists on moving that variable into stack.
+    u16 species[3];
+    u16 heldItems[3];
+    s32 monPoolCount = 0;
+
+    gFacilityTrainers = gSlateportBattleTentTrainers;
+    gFacilityTrainerMons = gSlateportBattleTentMons;
+
+    while (1)
+    {
+        do
+        {
+            trainerId = Random() % 30;
+            for (i = 0; i < gSaveBlock2Ptr->frontier.field_CB2; i++)
+            {
+                if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+                    break;
+            }
+        } while (i != gSaveBlock2Ptr->frontier.field_CB2);
+
+        gTrainerBattleOpponent_A = trainerId;
+        while (gFacilityTrainers[gTrainerBattleOpponent_A].btMonPool[monPoolCount] != 0xFFFF)
+            monPoolCount++;
+        if (monPoolCount > 8)
+            break;
+        monPoolCount = 0;
+    }
+
+    if (gSaveBlock2Ptr->frontier.field_CB2 < 2)
+        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.field_CB2] = gTrainerBattleOpponent_A;
+
+    monSetsPool = gFacilityTrainers[gTrainerBattleOpponent_A].btMonPool;
+    i = 0;
+    while (i != 3)
+    {
+        sRandMonSetId = monSetsPool[Random() % monPoolCount];
+        for (j = 0; j < 6; j++)
+        {
+            if (gFacilityTrainerMons[sRandMonSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.field_E70[j].monId].species)
+                break;
+        }
+        if (j != 6)
+            continue;
+
+        for (k = 0; k < i; k++)
+        {
+            if (species[k] == gFacilityTrainerMons[sRandMonSetId].species)
+                break;
+        }
+        if (k != i)
+            continue;
+
+        for (k = 0; k < i; k++)
+        {
+            if (heldItems[k] != 0 && heldItems[k] == gBattleFrontierHeldItems[gFacilityTrainerMons[sRandMonSetId].itemTableId])
+                break;
+        }
+        if (k != i)
+            continue;
+
+        species[i] = gFacilityTrainerMons[sRandMonSetId].species;
+        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[sRandMonSetId].itemTableId];
+        gUnknown_03006298[i] = sRandMonSetId;
+        i++;
+    }
+}

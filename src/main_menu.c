@@ -649,8 +649,8 @@ void Task_DisplayMainMenu(u8 taskId)
             default:
                 FillWindowPixelBuffer(0, 0xAA);
                 FillWindowPixelBuffer(1, 0xAA);
-                box_print(0, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuNewGame);
-                box_print(1, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuOption);
+                AddTextPrinterParameterized3(0, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuNewGame);
+                AddTextPrinterParameterized3(1, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuOption);
                 PutWindowTilemap(0);
                 PutWindowTilemap(1);
                 CopyWindowToVram(0, 2);
@@ -662,9 +662,9 @@ void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(2, 0xAA);
                 FillWindowPixelBuffer(3, 0xAA);
                 FillWindowPixelBuffer(4, 0xAA);
-                box_print(2, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuContinue);
-                box_print(3, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuNewGame);
-                box_print(4, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuOption);
+                AddTextPrinterParameterized3(2, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuContinue);
+                AddTextPrinterParameterized3(3, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuNewGame);
+                AddTextPrinterParameterized3(4, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuOption);
                 fmt_savegame();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -681,10 +681,10 @@ void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(3, 0xAA);
                 FillWindowPixelBuffer(4, 0xAA);
                 FillWindowPixelBuffer(5, 0xAA);
-                box_print(2, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuContinue);
-                box_print(3, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuNewGame);
-                box_print(4, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuMysteryGift);
-                box_print(5, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuOption);
+                AddTextPrinterParameterized3(2, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuContinue);
+                AddTextPrinterParameterized3(3, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuNewGame);
+                AddTextPrinterParameterized3(4, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuMysteryGift);
+                AddTextPrinterParameterized3(5, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuOption);
                 fmt_savegame();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -705,11 +705,11 @@ void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(4, 0xAA);
                 FillWindowPixelBuffer(5, 0xAA);
                 FillWindowPixelBuffer(6, 0xAA);
-                box_print(2, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuContinue);
-                box_print(3, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuNewGame);
-                box_print(4, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuMysteryGift2);
-                box_print(5, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuMysteryEvents);
-                box_print(6, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuOption);
+                AddTextPrinterParameterized3(2, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuContinue);
+                AddTextPrinterParameterized3(3, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuNewGame);
+                AddTextPrinterParameterized3(4, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuMysteryGift2);
+                AddTextPrinterParameterized3(5, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuMysteryEvents);
+                AddTextPrinterParameterized3(6, 1, 0, 1, gTextColor_Headers, -1, gText_MainMenuOption);
                 fmt_savegame();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -1942,7 +1942,7 @@ void set_default_player_name(u8 nameId)
 void CreateMainMenuErrorWindow(const u8* str)
 {
     FillWindowPixelBuffer(7, 17);
-    PrintTextOnWindow(7, 1, str, 0, 1, 2, 0);
+    AddTextPrinterParameterized(7, 1, str, 0, 1, 2, 0);
     PutWindowTilemap(7);
     CopyWindowToVram(7, 2);
     DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[7], MAIN_MENU_BORDER_TILE);
@@ -1961,8 +1961,8 @@ void fmt_savegame(void)
 void fmt_time(void)
 {
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPlayer);
-    box_print(2, 1, 0, 17, gUnknown_082FF0E3, -1, gStringVar4);
-    box_print(2, 1, GetStringRightAlignXOffset(1, gSaveBlock2Ptr->playerName, 100), 17, gUnknown_082FF0E3, -1, gSaveBlock2Ptr->playerName);
+    AddTextPrinterParameterized3(2, 1, 0, 17, gUnknown_082FF0E3, -1, gStringVar4);
+    AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, gSaveBlock2Ptr->playerName, 100), 17, gUnknown_082FF0E3, -1, gSaveBlock2Ptr->playerName);
 }
 
 void fmt_player(void)
@@ -1971,11 +1971,11 @@ void fmt_player(void)
     u8* ptr;
 
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime);
-    box_print(2, 1, 0x6C, 17, gUnknown_082FF0E3, -1, gStringVar4);
+    AddTextPrinterParameterized3(2, 1, 0x6C, 17, gUnknown_082FF0E3, -1, gStringVar4);
     ptr = ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->playTimeHours, 0, 3);
     *ptr = 0xF0;
     ConvertIntToDecimalStringN(ptr + 1, gSaveBlock2Ptr->playTimeMinutes, 2, 2);
-    box_print(2, 1, GetStringRightAlignXOffset(1, str, 0xD0), 17, gUnknown_082FF0E3, -1, str);
+    AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 0xD0), 17, gUnknown_082FF0E3, -1, str);
 }
 
 void fmt_pokedex(void)
@@ -1990,9 +1990,9 @@ void fmt_pokedex(void)
         else
             dexCount = GetHoennPokedexCount(1);
         StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPokedex);
-        box_print(2, 1, 0, 33, gUnknown_082FF0E3, -1, gStringVar4);
+        AddTextPrinterParameterized3(2, 1, 0, 33, gUnknown_082FF0E3, -1, gStringVar4);
         ConvertIntToDecimalStringN(str, dexCount, 0, 3);
-        box_print(2, 1, GetStringRightAlignXOffset(1, str, 100), 33, gUnknown_082FF0E3, -1, str);
+        AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 100), 33, gUnknown_082FF0E3, -1, str);
     }
 }
 
@@ -2008,9 +2008,9 @@ void fmt_badges(void)
             badgeCount++;
     }
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuBadges);
-    box_print(2, 1, 0x6C, 33, gUnknown_082FF0E3, -1, gStringVar4);
+    AddTextPrinterParameterized3(2, 1, 0x6C, 33, gUnknown_082FF0E3, -1, gStringVar4);
     ConvertIntToDecimalStringN(str, badgeCount, 2, 1);
-    box_print(2, 1, GetStringRightAlignXOffset(1, str, 0xD0), 33, gUnknown_082FF0E3, -1, str);
+    AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 0xD0), 33, gUnknown_082FF0E3, -1, str);
 }
 
 void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)

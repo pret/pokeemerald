@@ -2638,7 +2638,7 @@ static void sub_81C2554(void)
 
 static void SummaryScreen_PrintTextOnWindow(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId)
 {
-    AddTextPrinterParameterized2(windowId, 1, x, y, 0, lineSpacing, sTextColors_861CD2C[colorId], 0, string);
+    AddTextPrinterParameterized4(windowId, 1, x, y, 0, lineSpacing, sTextColors_861CD2C[colorId], 0, string);
 }
 
 static void sub_81C25E8(void)
