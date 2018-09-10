@@ -442,7 +442,7 @@ static void sub_8035608(void)
 
     ResetSpriteData();
     spriteId = CreateSprite(&gUnknown_0831AC88, 0, 0, 0);
-    gSprites[spriteId].invisible = 1;
+    gSprites[spriteId].invisible = TRUE;
     SetMainCallback2(sub_8035648);
 }
 

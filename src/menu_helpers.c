@@ -410,7 +410,7 @@ void sub_8122344(u8 *spriteIds, u8 count)
         if (i != 0)
             StartSpriteAnim(&gSprites[spriteIds[i]], 1);
 
-        gSprites[spriteIds[i]].invisible = 1;
+        gSprites[spriteIds[i]].invisible = TRUE;
     }
 }
 

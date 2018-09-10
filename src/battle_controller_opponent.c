@@ -435,7 +435,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
     if (gSprites[spriteId].data[1] == 32)
     {
         gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = FALSE;
         OpponentBufferExecCompleted();
     }

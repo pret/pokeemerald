@@ -974,13 +974,13 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
 
     gSprites[healthboxLeftSpriteId].hMain_HealthBarSpriteId = healthbarSpriteId;
     gSprites[healthboxLeftSpriteId].hMain_Battler = battlerId;
-    gSprites[healthboxLeftSpriteId].invisible = 1;
+    gSprites[healthboxLeftSpriteId].invisible = TRUE;
 
-    gSprites[healthboxRightSpriteId].invisible = 1;
+    gSprites[healthboxRightSpriteId].invisible = TRUE;
 
     healthBarSpritePtr->hBar_HealthBoxSpriteId = healthboxLeftSpriteId;
     healthBarSpritePtr->hBar_Data6 = data6;
-    healthBarSpritePtr->invisible = 1;
+    healthBarSpritePtr->invisible = TRUE;
 
     return healthboxLeftSpriteId;
 }
@@ -1058,16 +1058,16 @@ void SetBattleBarStruct(u8 battlerId, u8 healthboxSpriteId, s32 maxVal, s32 oldV
 
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId)
 {
-    gSprites[healthboxSpriteId].invisible = 1;
-    gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = 1;
-    gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = 1;
+    gSprites[healthboxSpriteId].invisible = TRUE;
+    gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = TRUE;
+    gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = TRUE;
 }
 
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
 {
-    gSprites[healthboxSpriteId].invisible = 0;
-    gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = 0;
-    gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = 0;
+    gSprites[healthboxSpriteId].invisible = FALSE;
+    gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = FALSE;
+    gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = FALSE;
 }
 
 static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)

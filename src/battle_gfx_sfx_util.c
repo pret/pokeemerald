@@ -1173,7 +1173,7 @@ void SpriteCB_EnemyShadow(struct Sprite *shadowSprite)
 
 void SpriteCB_SetInvisible(struct Sprite *sprite)
 {
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
 }
 
 void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species)

@@ -1164,7 +1164,7 @@ void task_new_game_prof_birch_speech_2(u8 taskId)
         spriteId = gTasks[taskId].data[8];
         gSprites[spriteId].pos1.x = 0x88;
         gSprites[spriteId].pos1.y = 0x3C;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = 1;
         sub_8031BAC(taskId, 10);
         sub_8031D34(taskId, 20);
@@ -1225,7 +1225,7 @@ void sub_8030A70(u8 taskId)
 
     gSprites[spriteId].pos1.x = 0x64;
     gSprites[spriteId].pos1.y = 0x4B;
-    gSprites[spriteId].invisible = 0;
+    gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].data[0] = 0;
 
     CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 0x70, 0x3A, 0, 0, 0x20, 0xFFFF, SPECIES_LOTAD);
@@ -1306,8 +1306,8 @@ void task_new_game_prof_birch_speech_9(u8 taskId)
 {
     if (gTasks[taskId].data[5])
     {
-        gSprites[gTasks[taskId].data[8]].invisible = 1;
-        gSprites[gTasks[taskId].data[9]].invisible = 1;
+        gSprites[gTasks[taskId].data[8]].invisible = TRUE;
+        gSprites[gTasks[taskId].data[9]].invisible = TRUE;
         if (gTasks[taskId].data[7])
         {
             gTasks[taskId].data[7]--;
@@ -1318,7 +1318,7 @@ void task_new_game_prof_birch_speech_9(u8 taskId)
 
             gSprites[spriteId].pos1.x = 0xB4;
             gSprites[spriteId].pos1.y = 0x3C;
-            gSprites[spriteId].invisible = 0;
+            gSprites[spriteId].invisible = FALSE;
             gSprites[spriteId].oam.objMode = 1;
             gTasks[taskId].data[2] = spriteId;
             gTasks[taskId].data[6] = 0;
@@ -1394,14 +1394,14 @@ void sub_8030ED4(u8 taskId)
     }
     else
     {
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
         if (gTasks[taskId].data[6])
             spriteId = gTasks[taskId].data[11];
         else
             spriteId = gTasks[taskId].data[10];
         gSprites[spriteId].pos1.x = 0xF0;
         gSprites[spriteId].pos1.y = 0x3C;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gTasks[taskId].data[2] = spriteId;
         gSprites[spriteId].oam.objMode = 1;
         sub_8031BAC(taskId, 0);
@@ -1562,8 +1562,8 @@ void task_new_game_prof_birch_speech_part2_8(u8 taskId)
 
     if (gTasks[taskId].data[5])
     {
-        gSprites[gTasks[taskId].data[8]].invisible = 1;
-        gSprites[gTasks[taskId].data[9]].invisible = 1;
+        gSprites[gTasks[taskId].data[8]].invisible = TRUE;
+        gSprites[gTasks[taskId].data[9]].invisible = TRUE;
         if (gTasks[taskId].data[7])
         {
             gTasks[taskId].data[7]--;
@@ -1575,7 +1575,7 @@ void task_new_game_prof_birch_speech_part2_8(u8 taskId)
             spriteId = gTasks[taskId].data[10];
         gSprites[spriteId].pos1.x = 0x78;
         gSprites[spriteId].pos1.y = 0x3C;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = 1;
         gTasks[taskId].data[2] = spriteId;
         sub_8031BAC(taskId, 2);
@@ -1692,7 +1692,7 @@ void new_game_prof_birch_speech_part2_start(void)
     }
     gSprites[spriteId].pos1.x = 0xB4;
     gSprites[spriteId].pos1.y = 0x3C;
-    gSprites[spriteId].invisible = 0;
+    gSprites[spriteId].invisible = FALSE;
     gTasks[taskId].data[2] = spriteId;
     SetGpuReg(REG_OFFSET_BG1HOFS, -60);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);

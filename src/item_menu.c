@@ -1185,7 +1185,7 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
         ClearWindowTilemap(1);
         DestroyListMenuTask(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
         schedule_bg_copy_tilemap_to_vram(0);
-        gSprites[gUnknown_0203CE54->unk804[2 + (gUnknown_0203CE54->unk81B_1 ^ 1)]].invisible = 1;
+        gSprites[gUnknown_0203CE54->unk804[2 + (gUnknown_0203CE54->unk81B_1 ^ 1)]].invisible = TRUE;
         sub_81AB824();
     }
     pocketId = gUnknown_0203CE58.pocket;
