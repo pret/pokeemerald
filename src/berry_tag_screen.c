@@ -477,29 +477,29 @@ static void SetFlavorCirclesVisiblity(void)
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
 
     if (berry->spicy)
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SPICY]].invisible = 0;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SPICY]].invisible = FALSE;
     else
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SPICY]].invisible = 1;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SPICY]].invisible = TRUE;
 
     if (berry->dry)
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_DRY]].invisible = 0;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_DRY]].invisible = FALSE;
     else
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_DRY]].invisible = 1;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_DRY]].invisible = TRUE;
 
     if (berry->sweet)
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SWEET]].invisible = 0;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SWEET]].invisible = FALSE;
     else
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SWEET]].invisible = 1;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SWEET]].invisible = TRUE;
 
     if (berry->bitter)
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_BITTER]].invisible = 0;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_BITTER]].invisible = FALSE;
     else
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_BITTER]].invisible = 1;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_BITTER]].invisible = TRUE;
 
     if (berry->sour)
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SOUR]].invisible = 0;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SOUR]].invisible = FALSE;
     else
-        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SOUR]].invisible = 1;
+        gSprites[sBerryTag->flavorCircleIds[FLAVOR_SOUR]].invisible = TRUE;
 }
 
 static void DestroyFlavorCircleSprites(void)

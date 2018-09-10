@@ -1097,13 +1097,13 @@ static void sub_808D450(void)
     gSprites[spriteId].oam.affineMode = 1;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
-    gSprites[spriteId].invisible = 1;
+    gSprites[spriteId].invisible = TRUE;
 
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
     gSprites[spriteId].oam.affineMode = 1;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 1);
-    gSprites[spriteId].invisible = 1;
+    gSprites[spriteId].invisible = TRUE;
 }
 
 u8 GetFirstInactiveEventObjectId(void)
@@ -8798,9 +8798,9 @@ void UpdateEventObjectSpriteVisibility(struct Sprite *sprite, bool8 invisible)
     y2 = y - (sprite->centerToCornerVecY >> 1);
 
     if ((s16)x > 255 || x2 < -16)
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
     if ((s16)y > 175 || y2 < -16)
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
 }
 
 void UpdateEventObjectSpriteSubpriorityAndVisibility(struct Sprite *sprite)

@@ -1273,8 +1273,8 @@ static void Select_InitAllSprites(void)
     sFactorySelectScreen->menuCursor1SpriteId = CreateSprite(&gUnknown_08610608, 176, 112, 0);
     sFactorySelectScreen->menuCursor2SpriteId = CreateSprite(&gUnknown_08610620, 176, 144, 0);
 
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = 1;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = 1;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = TRUE;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = TRUE;
 
     gSprites[sFactorySelectScreen->menuCursor1SpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySelectScreen->menuCursor1SpriteId].centerToCornerVecY = 0;
@@ -1767,8 +1767,8 @@ static void Select_ShowMenuOptions(void)
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.x = 208;
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
 
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = 0;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = 0;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = FALSE;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = FALSE;
 
     Select_PrintMenuOptions();
 }
@@ -1782,16 +1782,16 @@ static void Select_ShowYesNoOptions(void)
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.x = 208;
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].pos1.y = 112;
 
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = 0;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = 0;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = FALSE;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = FALSE;
 
     Select_PrintYesNoOptions();
 }
 
 static void sub_819B958(u8 windowId)
 {
-    gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = 1;
-    gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = 1;
+    gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = TRUE;
+    gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = TRUE;
     FillWindowPixelBuffer(windowId, 0);
     CopyWindowToVram(windowId, 2);
     ClearWindowTilemap(windowId);
@@ -1977,7 +1977,7 @@ static void Select_ShowSummaryMonSprite(void)
     gSprites[sFactorySelectScreen->unk294[1].field0].centerToCornerVecX = 0;
     gSprites[sFactorySelectScreen->unk294[1].field0].centerToCornerVecY = 0;
 
-    gSprites[sFactorySelectScreen->unk294[1].field1].invisible = 1;
+    gSprites[sFactorySelectScreen->unk294[1].field1].invisible = TRUE;
 }
 
 static void Select_ShowChosenMonsSprites(void)
@@ -2013,9 +2013,9 @@ static void sub_819C040(struct Sprite *sprite)
         && gSprites[sFactorySelectScreen->unk294[0].field1].affineAnimEnded
         && gSprites[sFactorySelectScreen->unk294[2].field1].affineAnimEnded)
     {
-        sprite->invisible = 1;
-        gSprites[sFactorySelectScreen->unk294[0].field1].invisible = 1;
-        gSprites[sFactorySelectScreen->unk294[2].field1].invisible = 1;
+        sprite->invisible = TRUE;
+        gSprites[sFactorySelectScreen->unk294[0].field1].invisible = TRUE;
+        gSprites[sFactorySelectScreen->unk294[2].field1].invisible = TRUE;
 
         taskId = CreateTask(sub_819C1D0, 1);
         gTasks[taskId].func(taskId);
@@ -2091,11 +2091,11 @@ static void sub_819C2D4(u8 taskId)
     {
     default:
         HideBg(3);
-        gSprites[sFactorySelectScreen->unk294[1].field1].invisible = 0;
+        gSprites[sFactorySelectScreen->unk294[1].field1].invisible = FALSE;
         gSprites[sFactorySelectScreen->unk294[1].field1].callback = sub_819C100;
-        gSprites[sFactorySelectScreen->unk294[0].field1].invisible = 0;
+        gSprites[sFactorySelectScreen->unk294[0].field1].invisible = FALSE;
         gSprites[sFactorySelectScreen->unk294[0].field1].callback = SpriteCallbackDummy;
-        gSprites[sFactorySelectScreen->unk294[2].field1].invisible = 0;
+        gSprites[sFactorySelectScreen->unk294[2].field1].invisible = FALSE;
         gSprites[sFactorySelectScreen->unk294[2].field1].callback = SpriteCallbackDummy;
         StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->unk294[1].field1], 1);
         StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->unk294[0].field1], 1);
@@ -3018,7 +3018,7 @@ static void sub_819D770(u8 taskId)
         else
             Swap_PrintOnInfoWindow(gText_SelectPkmnToAccept);
         if (sFactorySwapScreen->cursorPos < 3)
-            gSprites[sFactorySwapScreen->cursorSpriteId].invisible = 0;
+            gSprites[sFactorySwapScreen->cursorSpriteId].invisible = FALSE;
         Swap_PrintMonCategory();
         gTasks[taskId].data[0]++;
         break;
@@ -3048,7 +3048,7 @@ static void sub_819D9EC(u8 taskId)
         break;
     case 1:
         sub_819EADC();
-        gSprites[sFactorySwapScreen->cursorSpriteId].invisible = 1;
+        gSprites[sFactorySwapScreen->cursorSpriteId].invisible = TRUE;
         gTasks[taskId].data[0]++;
         break;
     case 2:
@@ -3068,7 +3068,7 @@ static void sub_819D9EC(u8 taskId)
             {
                 Swap_InitActions(ACTIONS_PLAYER_SCREEN);
                 for (i = 0; i < 3; i++)
-                    gSprites[sFactorySwapScreen->unk8[1][i]].invisible = 1;
+                    gSprites[sFactorySwapScreen->unk8[1][i]].invisible = TRUE;
             }
             gSprites[sFactorySwapScreen->cursorSpriteId].pos1.x = gSprites[sFactorySwapScreen->ballSpriteIds[sFactorySwapScreen->cursorPos]].pos1.x;
             gTasks[sFactorySwapScreen->fadeSpeciesNameTaskId].func = Task_SwapFadeSpeciesName;
@@ -3279,8 +3279,8 @@ static void Swap_InitAllSprites(void)
     sFactorySwapScreen->cursorSpriteId = CreateSprite(&gUnknown_0861084C, gSprites[sFactorySwapScreen->ballSpriteIds[sFactorySwapScreen->cursorPos]].pos1.x, 88, 0);
     sFactorySwapScreen->menuCursor1SpriteId = CreateSprite(&gUnknown_08610864, 176, 112, 0);
     sFactorySwapScreen->menuCursor2SpriteId = CreateSprite(&gUnknown_0861087C, 176, 144, 0);
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = 1;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = 1;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = TRUE;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = TRUE;
     gSprites[sFactorySwapScreen->menuCursor1SpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->menuCursor1SpriteId].centerToCornerVecY = 0;
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].centerToCornerVecX = 0;
@@ -3339,18 +3339,18 @@ static void Swap_InitAllSprites(void)
         gSprites[sFactorySwapScreen->unkE[i][1]].centerToCornerVecX = 0;
         gSprites[sFactorySwapScreen->unkE[i][1]].centerToCornerVecY = 0;
 
-        gSprites[sFactorySwapScreen->unk8[i][0]].invisible = 1;
-        gSprites[sFactorySwapScreen->unk8[i][1]].invisible = 1;
-        gSprites[sFactorySwapScreen->unk8[i][2]].invisible = 1;
-        gSprites[sFactorySwapScreen->unkE[i][0]].invisible = 1;
-        gSprites[sFactorySwapScreen->unkE[i][1]].invisible = 1;
+        gSprites[sFactorySwapScreen->unk8[i][0]].invisible = TRUE;
+        gSprites[sFactorySwapScreen->unk8[i][1]].invisible = TRUE;
+        gSprites[sFactorySwapScreen->unk8[i][2]].invisible = TRUE;
+        gSprites[sFactorySwapScreen->unkE[i][0]].invisible = TRUE;
+        gSprites[sFactorySwapScreen->unkE[i][1]].invisible = TRUE;
     }
 
-    gSprites[sFactorySwapScreen->unkE[0][0]].invisible = 0;
-    gSprites[sFactorySwapScreen->unkE[0][1]].invisible = 0;
-    gSprites[sFactorySwapScreen->unk8[0][0]].invisible = 0;
-    gSprites[sFactorySwapScreen->unk8[0][1]].invisible = 0;
-    gSprites[sFactorySwapScreen->unk8[0][2]].invisible = 0;
+    gSprites[sFactorySwapScreen->unkE[0][0]].invisible = FALSE;
+    gSprites[sFactorySwapScreen->unkE[0][1]].invisible = FALSE;
+    gSprites[sFactorySwapScreen->unk8[0][0]].invisible = FALSE;
+    gSprites[sFactorySwapScreen->unk8[0][1]].invisible = FALSE;
+    gSprites[sFactorySwapScreen->unk8[0][2]].invisible = FALSE;
 }
 
 static void Swap_DestroyAllSprites(void)
@@ -3378,13 +3378,13 @@ static void Swap_HandleActionCursorChange(u8 cursorId)
 {
     if (cursorId < 3)
     {
-        gSprites[sFactorySwapScreen->cursorSpriteId].invisible = 0;
+        gSprites[sFactorySwapScreen->cursorSpriteId].invisible = FALSE;
         sub_819E8EC();
         gSprites[sFactorySwapScreen->cursorSpriteId].pos1.x = gSprites[sFactorySwapScreen->ballSpriteIds[cursorId]].pos1.x;
     }
     else
     {
-        gSprites[sFactorySwapScreen->cursorSpriteId].invisible = 1;
+        gSprites[sFactorySwapScreen->cursorSpriteId].invisible = TRUE;
         sub_819E838(sFactorySwapScreen->actionsData[cursorId].id);
     }
 }
@@ -3490,15 +3490,15 @@ static void sub_819E838(u8 arg0)
     {
         if (arg0 == 2)
         {
-            gSprites[sFactorySwapScreen->unk8[1][i]].invisible = 0;
+            gSprites[sFactorySwapScreen->unk8[1][i]].invisible = FALSE;
             if (i < 2)
-                gSprites[sFactorySwapScreen->unkE[1][i]].invisible = 1;
+                gSprites[sFactorySwapScreen->unkE[1][i]].invisible = TRUE;
         }
         else if (arg0 == 3)
         {
             if (i < 2)
-                gSprites[sFactorySwapScreen->unkE[1][i]].invisible = 0;
-            gSprites[sFactorySwapScreen->unk8[1][i]].invisible = 1;
+                gSprites[sFactorySwapScreen->unkE[1][i]].invisible = FALSE;
+            gSprites[sFactorySwapScreen->unk8[1][i]].invisible = TRUE;
         }
     }
 }
@@ -3509,9 +3509,9 @@ static void sub_819E8EC(void)
 
     for (i = 0; i < 3; i++)
     {
-        gSprites[sFactorySwapScreen->unk8[1][i]].invisible = 1;
+        gSprites[sFactorySwapScreen->unk8[1][i]].invisible = TRUE;
         if (i < 2)
-            gSprites[sFactorySwapScreen->unkE[1][i]].invisible = 1;
+            gSprites[sFactorySwapScreen->unkE[1][i]].invisible = TRUE;
     }
 }
 
@@ -3527,8 +3527,8 @@ static void Swap_ShowMenuOptions(void)
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.x = 208;
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = (sFactorySwapScreen->menuCursorPos * 16) + 112;
 
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = 0;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = 0;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = FALSE;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = FALSE;
 
     Swap_PrintMenuOptions();
 }
@@ -3542,16 +3542,16 @@ static void Swap_ShowYesNoOptions(void)
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.x = 208;
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].pos1.y = 112;
 
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = 0;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = 0;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = FALSE;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = FALSE;
 
     Swap_PrintYesNoOptions();
 }
 
 static void sub_819EA64(u8 windowId)
 {
-    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = 1;
-    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = 1;
+    gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = TRUE;
+    gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = TRUE;
     FillWindowPixelBuffer(windowId, 0);
     CopyWindowToVram(windowId, 2);
     ClearWindowTilemap(windowId);
@@ -3900,7 +3900,7 @@ static void Swap_ShowSummaryMonSprite(void)
     gSprites[sFactorySwapScreen->unk2C.field0].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->unk2C.field0].centerToCornerVecY = 0;
 
-    gSprites[sFactorySwapScreen->unk2C.field1].invisible = 1;
+    gSprites[sFactorySwapScreen->unk2C.field1].invisible = TRUE;
 }
 
 static void sub_819F3F8(struct UnkFactoryStruct arg0, bool8 *arg1, bool8 swapScreen)
@@ -3984,7 +3984,7 @@ static void sub_819F600(struct Sprite *sprite)
 
     if (sprite->affineAnimEnded)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         taskId = CreateTask(sub_819F69C, 1);
         gTasks[taskId].data[7] = sprite->data[7];
         gTasks[taskId].func(taskId);
@@ -4058,7 +4058,7 @@ static void sub_819F7B4(u8 taskId)
     default:
         HideBg(3);
         gSprites[task->data[6]].data[7] = task->data[7];
-        gSprites[task->data[6]].invisible = 0;
+        gSprites[task->data[6]].invisible = FALSE;
         gSprites[task->data[6]].callback = sub_819F654;
         StartSpriteAffineAnim(&gSprites[task->data[6]], 1);
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);

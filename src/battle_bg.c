@@ -412,8 +412,8 @@ void sub_8035D74(u8 taskId)
         gPlttBufferUnfaded[palId * 16 + 0x10F] = gPlttBufferFaded[palId * 16 + 0x10F] = 0x7FFF;
         gBattleStruct->field_7D = CreateSprite(&gUnknown_0831A9D0, 111, 80, 0);
         gBattleStruct->field_7E = CreateSprite(&gUnknown_0831A9E8, 129, 80, 0);
-        gSprites[gBattleStruct->field_7D].invisible = 1;
-        gSprites[gBattleStruct->field_7E].invisible = 1;
+        gSprites[gBattleStruct->field_7D].invisible = TRUE;
+        gSprites[gBattleStruct->field_7E].invisible = TRUE;
         gTasks[taskId].data[0]++;
         break;
     case 2:
@@ -444,8 +444,8 @@ void sub_8035D74(u8 taskId)
 
             PlaySE(SE_W231);
             DestroyTask(taskId);
-            gSprites[gBattleStruct->field_7D].invisible = 0;
-            gSprites[gBattleStruct->field_7E].invisible = 0;
+            gSprites[gBattleStruct->field_7D].invisible = FALSE;
+            gSprites[gBattleStruct->field_7E].invisible = FALSE;
             gSprites[gBattleStruct->field_7E].oam.tileNum += 0x40;
             gSprites[gBattleStruct->field_7D].data[0] = 0;
             gSprites[gBattleStruct->field_7E].data[0] = 1;
