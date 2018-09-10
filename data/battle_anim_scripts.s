@@ -366,6 +366,273 @@ gBattleAnims_Moves:: @ 82C8D6C
 	.4byte Move_WATER_PULSE
 	.4byte Move_DOOM_DESIRE
 	.4byte Move_PSYCHO_BOOST
+	.4byte Move_ROOST
+		.4byte MOVE_GRAVITY
+	.4byte MOVE_MIRACLE_EYE
+	.4byte MOVE_WAKE_UP_SLAP
+	.4byte MOVE_HAMMER_ARM
+	.4byte MOVE_GYRO_BALL
+	.4byte MOVE_HEALING_WISH
+	.4byte MOVE_BRINE
+	.4byte MOVE_NATURAL_GIFT
+	.4byte MOVE_FEINT
+	.4byte MOVE_PLUCK
+	.4byte MOVE_TAILWIND
+	.4byte MOVE_ACUPRESSURE
+	.4byte MOVE_METAL_BURST
+	.4byte MOVE_U_TURN
+	.4byte MOVE_CLOSE_COMBAT
+	.4byte MOVE_PAYBACK
+	.4byte MOVE_ASSURANCE
+	.4byte MOVE_EMBARGO
+	.4byte MOVE_FLING
+	.4byte MOVE_PSYCHO_SHIFT
+	.4byte MOVE_TRUMP_CARD
+	.4byte MOVE_HEAL_BLOCK
+	.4byte MOVE_WRING_OUT
+	.4byte MOVE_POWER_TRICK
+	.4byte MOVE_GASTRO_ACID
+	.4byte MOVE_LUCKY_CHANT
+	.4byte MOVE_ME_FIRST
+	.4byte MOVE_COPYCAT
+	.4byte MOVE_POWER_SWAP
+	.4byte MOVE_GUARD_SWAP
+	.4byte MOVE_PUNISHMENT
+	.4byte MOVE_LAST_RESORT
+	.4byte MOVE_WORRY_SEED
+	.4byte MOVE_SUCKER_PUNCH
+	.4byte MOVE_TOXIC_SPIKES
+	.4byte MOVE_HEART_SWAP
+	.4byte MOVE_AQUA_RING
+	.4byte MOVE_MAGNET_RISE
+	.4byte MOVE_FLARE_BLITZ
+	.4byte MOVE_FORCE_PALM
+	.4byte MOVE_AURA_SPHERE
+	.4byte MOVE_ROCK_POLISH
+	.4byte MOVE_POISON_JAB
+	.4byte MOVE_DARK_PULSE
+	.4byte MOVE_NIGHT_SLASH
+	.4byte MOVE_AQUA_TAIL
+	.4byte MOVE_SEED_BOMB
+	.4byte MOVE_AIR_SLASH
+	.4byte MOVE_XSCISSOR
+	.4byte MOVE_BUG_BUZZ
+	.4byte MOVE_DRAGON_PULSE
+	.4byte MOVE_DRAGON_RUSH
+	.4byte MOVE_POWER_GEM
+	.4byte MOVE_DRAIN_PUNCH
+	.4byte MOVE_VACUUM_WAVE
+	.4byte MOVE_FOCUS_BLAST
+	.4byte MOVE_ENERGY_BALL
+	.4byte MOVE_BRAVE_BIRD
+	.4byte MOVE_EARTH_POWER
+	.4byte MOVE_SWITCHEROO
+	.4byte MOVE_GIGA_IMPACT
+	.4byte MOVE_NASTY_PLOT
+	.4byte MOVE_BULLET_PUNCH
+	.4byte MOVE_AVALANCHE
+	.4byte MOVE_ICE_SHARD
+	.4byte MOVE_SHADOW_CLAW
+	.4byte MOVE_THUNDER_FANG
+	.4byte MOVE_ICE_FANG
+	.4byte MOVE_FIRE_FANG
+	.4byte MOVE_SHADOW_SNEAK
+	.4byte MOVE_MUD_BOMB
+	.4byte MOVE_PSYCHO_CUT
+	.4byte MOVE_ZEN_HEADBUTT
+	.4byte MOVE_MIRROR_SHOT
+	.4byte MOVE_FLASH_CANNON
+	.4byte MOVE_ROCK_CLIMB
+	.4byte MOVE_DEFOG
+	.4byte MOVE_TRICK_ROOM
+	.4byte MOVE_DRACO_METEOR
+	.4byte MOVE_DISCHARGE
+	.4byte MOVE_LAVA_PLUME
+	.4byte MOVE_LEAF_STORM
+	.4byte MOVE_POWER_WHIP
+	.4byte MOVE_ROCK_WRECKER
+	.4byte MOVE_CROSS_POISON
+	.4byte MOVE_GUNK_SHOT
+	.4byte MOVE_IRON_HEAD
+	.4byte MOVE_MAGNET_BOMB
+	.4byte MOVE_STONE_EDGE
+	.4byte MOVE_CAPTIVATE
+	.4byte MOVE_STEALTH_ROCK
+	.4byte MOVE_GRASS_KNOT
+	.4byte MOVE_CHATTER
+	.4byte MOVE_JUDGMENT
+	.4byte MOVE_BUG_BITE
+	.4byte MOVE_CHARGE_BEAM
+	.4byte MOVE_WOOD_HAMMER
+	.4byte MOVE_AQUA_JET
+	.4byte MOVE_ATTACK_ORDER
+	.4byte MOVE_DEFEND_ORDER
+	.4byte MOVE_HEAL_ORDER
+	.4byte MOVE_HEAD_SMASH
+	.4byte MOVE_DOUBLE_HIT
+	.4byte MOVE_ROAR_OF_TIME
+	.4byte MOVE_SPECIAL_REND
+	.4byte MOVE_LUNAR_DANCE
+	.4byte MOVE_CRUSH_GRIP
+	.4byte MOVE_MAGMA_STORM
+	.4byte MOVE_DARK_VOID
+	.4byte MOVE_SEED_FLARE
+	.4byte MOVE_OMINOUS_WIND
+	.4byte MOVE_SHADOW_FORCE
+	.4byte MOVE_HONE_CLAWS
+	.4byte MOVE_WIDE_GUARD
+	.4byte MOVE_GUARD_SPLIT
+	.4byte MOVE_POWER_SPLIT
+	.4byte MOVE_WONDER_ROOM
+	.4byte MOVE_PSYSHOCK
+	.4byte MOVE_VENOSHOCK
+	.4byte MOVE_AUTOTOMIZE
+	.4byte MOVE_RAGE_POWDER
+	.4byte MOVE_TELEKINESIS
+	.4byte MOVE_MAGIC_ROOM
+	.4byte MOVE_SMACK_DOWN
+	.4byte MOVE_STORM_THROW
+	.4byte MOVE_FLAME_BURST
+	.4byte MOVE_SLUDGE_WAVE
+	.4byte MOVE_QUIVER_DANCE
+	.4byte MOVE_HEAVY_SLAM
+	.4byte MOVE_SYCHRONOISE
+	.4byte MOVE_ELECTRO_BALL
+	.4byte MOVE_SOAK
+	.4byte MOVE_FLAME_CHARGE
+	.4byte MOVE_COIL
+	.4byte MOVE_LOW_SWEEP
+	.4byte MOVE_ACID_SPRAY
+	.4byte MOVE_FOUL_PLAY
+	.4byte MOVE_SIMPLE_BEAM
+	.4byte MOVE_ENTRAINMENT
+	.4byte MOVE_AFTER_YOU
+	.4byte MOVE_ROUND
+	.4byte MOVE_ECHOED_VOICE
+	.4byte MOVE_CHIP_AWAY
+	.4byte MOVE_CLEAR_SMOG
+	.4byte MOVE_STORED_POWER
+	.4byte MOVE_QUICK_GUARD
+	.4byte MOVE_ALLY_SWITCH
+	.4byte MOVE_SCALD
+	.4byte MOVE_SHELL_SMASH
+	.4byte MOVE_HEAL_PULSE
+	.4byte MOVE_HEX
+	.4byte MOVE_SKY_DROP
+	.4byte MOVE_SHIFT_GEAR
+	.4byte MOVE_CIRCLE_THROW
+	.4byte MOVE_INCINERATE
+	.4byte MOVE_QUASH
+	.4byte MOVE_ACROBATICS
+	.4byte MOVE_REFLECT_TYPE
+	.4byte MOVE_RETALITATE
+	.4byte MOVE_FINAL_GAMBIT
+	.4byte MOVE_BESTOW
+	.4byte MOVE_INFERNO
+	.4byte MOVE_WATER_PLEDGE
+	.4byte MOVE_FIRE_PLEDGE
+	.4byte MOVE_GRASS_PLEDGE
+	.4byte MOVE_VOLT_SWITCH
+	.4byte MOVE_STRUGGLE_BUG
+	.4byte MOVE_BULLDOZE
+	.4byte MOVE_FROST_BREATH
+	.4byte MOVE_DRAGON_TAIL
+	.4byte MOVE_WORK_UP
+	.4byte MOVE_ELECTROWEB
+	.4byte MOVE_WILD_CHARGE
+	.4byte MOVE_DRILL_RUN
+	.4byte MOVE_DUAL_CHOP
+	.4byte MOVE_HEART_STAMP
+	.4byte MOVE_HORN_LEECH
+	.4byte MOVE_SACRED_SWORD
+	.4byte MOVE_RAZOR_SHELL
+	.4byte MOVE_HEAT_CRASH
+	.4byte MOVE_LEAF_TORNADO
+	.4byte MOVE_STEAMROLLER
+	.4byte MOVE_COTTON_GUARD
+	.4byte MOVE_NIGHT_DAZE
+	.4byte MOVE_PSYSTRIKE
+	.4byte MOVE_TAIL_SLAP
+	.4byte MOVE_HURRICANE
+	.4byte MOVE_HEAD_CHARGE
+	.4byte MOVE_GEAR_GRIND
+	.4byte MOVE_SEARING_SHOT
+	.4byte MOVE_TECHNO_BLAST
+	.4byte MOVE_RELIC_SONG
+	.4byte MOVE_SECRET_SWORD
+	.4byte MOVE_GLACIATE
+	.4byte MOVE_BOLT_STRIKE
+	.4byte MOVE_BLUE_FLARE
+	.4byte MOVE_FIERY_DANCE
+	.4byte MOVE_FREEZE_SHOCK
+	.4byte MOVE_ICE_BURN
+	.4byte MOVE_SNARL
+	.4byte MOVE_ICICLE_CRASH
+	.4byte MOVE_V_CREATE
+	.4byte MOVE_FUSION_FLARE
+	.4byte MOVE_FUSION_BOLT
+	.4byte MOVE_FLYING_PRESS
+	.4byte MOVE_MAT_BLOCK
+	.4byte MOVE_BELCH
+	.4byte MOVE_ROTOTILLER
+	.4byte MOVE_STICKY_WEB
+	.4byte MOVE_FELL_STINGER
+	.4byte MOVE_PHANTOM_FORCE
+	.4byte MOVE_TRICK_OR_TREAT
+	.4byte MOVE_NOBLE_ROAR
+	.4byte MOVE_ION_DELUGE
+	.4byte MOVE_PARABOLIC_CHARGE
+	.4byte MOVE_FORESTS_CURSE
+	.4byte MOVE_PETAL_BLIZZARD
+	.4byte MOVE_FREEZE_DRY
+	.4byte MOVE_DISARMING_VOICE
+	.4byte MOVE_PARTING_SHOT
+	.4byte MOVE_TOPSY_TURVY
+	.4byte MOVE_DRAINING_KISS
+	.4byte MOVE_CRAFTY_SHIELD
+	.4byte MOVE_FLOWER_SHIELD
+	.4byte MOVE_GRASSY_TERRAIN
+	.4byte MOVE_MISTY_TERRAIN
+	.4byte MOVE_ELECTRIFY
+	.4byte MOVE_PLAY_ROUGH
+	.4byte MOVE_FAIRY_WIND
+	.4byte MOVE_MOONBLAST
+	.4byte MOVE_BOOMBURST
+	.4byte MOVE_FAIRY_LOCK
+	.4byte MOVE_KINGS_SHIELD
+	.4byte MOVE_PLAY_NICE
+	.4byte MOVE_CONFIDE
+	.4byte MOVE_DIAMOND_STORM
+	.4byte MOVE_STEAM_ERUPTION
+	.4byte MOVE_HYPERSPACE_HOLE
+	.4byte MOVE_WATER_SHURIKEN
+	.4byte MOVE_MYSTICAL_FIRE
+	.4byte MOVE_SPIKY_SHIELD
+	.4byte MOVE_AROMATIC_MIST
+	.4byte MOVE_EERIE_IMPULSE
+	.4byte MOVE_VENOM_DRENCH
+	.4byte MOVE_POWDER
+	.4byte MOVE_GEOMANCY
+	.4byte MOVE_MAGNETIC_FLUX
+	.4byte MOVE_HAPPY_HOUR
+	.4byte MOVE_ELECTRIC_TERRAIN
+	.4byte MOVE_DAZZLING_GLEAM
+	.4byte MOVE_CELEBRATE
+	.4byte MOVE_HOLD_HANDS
+	.4byte MOVE_BABY_DOLL_EYES
+	.4byte MOVE_NUZZLE
+	.4byte MOVE_HOLD_BACK
+	.4byte MOVE_INFESTATION
+	.4byte MOVE_POWER_UP_PUNCH
+	.4byte MOVE_OBLIVION_WING
+	.4byte MOVE_THOUSAND_ARROWS
+	.4byte MOVE_THOUSAND_WAVES
+	.4byte MOVE_LANDS_WRATH
+	.4byte MOVE_LIGHT_OF_RUIN
+	.4byte MOVE_ORIGIN_PULSE
+	.4byte MOVE_PRECIPICE_BLADES
+	.4byte MOVE_DRAGON_ASCENT
+	.4byte MOVE_HYPERSPACE_FURY
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 .align 2
@@ -415,6 +682,947 @@ gBattleAnims_Special:: @ 82C937C
 	.4byte Anim_SafariBallThrow
 	.4byte Anim_SubstituteToMon
 	.4byte Anim_MonToSubstitute
+	
+Move_ROOST:
+	loadspritegfx 0x281e
+	monbg ANIM_DEF_PARTNER
+	monbgprio_29
+	playsewithpan 0xca, 0x3f
+	delay 0x0
+	createsprite gUnknown_08596388, 0x80, 0x0, 0xfff0, 0x40, 0x2, 0x68, 0x2c28, 0x20, 0x1
+	delay 0x6
+	createsprite gUnknown_08596388, 0x80, 0x0, 0xfff0, 0x20, 0x2, 0x68, 0x2c28, 0x20, 0x1
+	createsprite gUnknown_08596388, 0x80, 0x0, 0xfff0, 0x0, 0x2, 0x68, 0x2c28, 0x20, 0x1
+	delay 0x6
+	createsprite gUnknown_08596388, 0x80, 0x0, 0xfff0, 0xe0, 0x2, 0x68, 0x2c28, 0x20, 0x1
+	createsprite gUnknown_08596388, 0x80, 0x0, 0xfff0, 0x80, 0x2, 0x68, 0x2c28, 0x20, 0x1
+	delay 0x6
+	createsprite gUnknown_08596388, 0x80, 0x0, 0xfff0, 0xc0, 0x2, 0x68, 0x2c28, 0x20, 0x1
+	createsprite gUnknown_08596388, 0x80, 0x0, 0xfff0, 0xa0, 0x2, 0x68, 0x2c28, 0x20, 0x1
+	delay 0x6
+	createsprite gUnknown_08596388, 0x80, 0x0, 0xfff0, 0x60, 0x2, 0x68, 0x2c28, 0x20, 0x1
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	loadspritegfx 0x272f
+	waitforvisualfinish
+	blendoff
+	delay 0x1
+	call AnimScript_82D79DF
+	waitforvisualfinish
+	end
+	
+MOVE_GRAVITY:
+	fadetobg BG_COSMIC
+	waitbgfadein
+	createvisualtask sub_8117660, 0x2, 0x0, 0x80, 0x0, 0xffff
+	createvisualtask sub_81080E4, 0x5, 0x0
+	playsewithpan 0xa2, 0xc0
+	delay 0x2c
+	playsewithpan 0xe9, 0xc0
+	waitforvisualfinish
+	restorebg
+	waitbgfadeout
+	setarg 0x7, 0xffff
+	waitbgfadein
+	waitforvisualfinish
+	end
+	
+MOVE_MIRACLE_EYE:
+	createsprite gUnknown_08597274, 0x2, 0x1, 0x1, 0x0, 0x6, 0x0
+	waitforvisualfinish
+	loadspritegfx 0x27cd
+	loadspritegfx 0x27ce
+	loadspritegfx 0x27cf
+	monbg ANIM_DEF_PARTNER
+	playsewithpan 0xc4, 0x3f
+	createsprite gUnknown_085CE07C, 0x5, 0x0, 0x0, 0x1, 0x0
+	createsprite gUnknown_085CE094, 0x5,
+	delay 0x28
+	playsewithpan 0xc0, 0x3f
+	createvisualtask sub_8115A04, 0x2, 0x1, 0x1, 0x2, 0x0, 0xa, 0x0
+	call AnimScript_82CF608
+	createsprite gUnknown_08597274, 0x2, 0x1, 0x1, 0x6, 0x0, 0x0
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+	
+MOVE_WAKE_UP_SLAP:
+	loadspritegfx 0x279f
+	loadspritegfx 0x2797
+	loadspritegfx 0x27a5
+	monbg ANIM_TARGET
+	setalpha 0x80c
+	playsewithpan 0x87, 0x3f
+	createsprite gUnknown_08595E68, 0x2, 0xfff0, 0x0, 0x0, 0x0, 0xa, 0x1, 0x3, 0x0
+	waitforvisualfinish
+	playsewithpan 0x8b, 0x3f
+	@ createsprite TEMPL_0x9f2b4d8, 0x3, 0x4, 0x0, 0x0, 0x1, 0x2
+	createvisualtask sub_80D51AC, 0x5, ANIM_TARGET, 0x4, 0x0, 0x6, 0x1
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+	
+MOVE_HAMMER_ARM:
+	loadspritegfx 0x283a
+	loadspritegfx 0x2797
+	monbg ANIM_TARGET
+	setalpha 0x80c
+	playsewithpan 0x87, 0x3f
+	@createsprite TEMPL_0x9f2b564, 0x3, 0x3, 0x0, 0xffe0, 0xf
+	delay 0x13
+	createsprite gUnknown_08597358, 0x2, 0x0, 0xfff8, 0x1, 0x1
+	createvisualtask sub_80D51AC, 0x2, ANIM_TARGET, 0x0, 0x4, 0x9, 0x1
+	playsewithpan 0x8d, 0x3f
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	createvisualtask sub_81152DC, 0x5, 0x5, 0x0, 0x32
+	createvisualtask sub_81152DC, 0x5, 0x5, 0x0, 0x32
+	createvisualtask sub_81152DC, 0x5, 0x4, 0x0, 0x32
+	loopsewithpan 0xd6, 0x3f, 0x8, 0xa
+	end
+	
+MOVE_GYRO_BALL:
+	loadspritegfx 0x2797
+	loadspritegfx 0x27f5
+	loopsewithpan 0x78, 0xc0, 0x1c, 0x2
+	createvisualtask sub_81144F8 , 0x5, 0x1, 0x0, 0x0
+	waitforvisualfinish
+	setalpha 0x80c
+	createsprite gUnknown_0857FE28, 0xa,
+	createsprite gUnknown_085CE288, 0x2, 0x0, 0x0, 0x20, 0xffe0, 0x28, 0xfffe
+	createvisualtask sub_815ADB0, 0x2, 0x3, 0x0, 0x2, 0x0
+	loopsewithpan 0xa0, 0xc0, 0x8, 0x4
+	waitforvisualfinish
+	createsprite gUnknown_08597358, 0x82, 0x0, 0x0, 0x1, 0x2
+	createvisualtask sub_80D6388, 0x2, 0x5, 0x0, 0x1, 0xa, 0x1, 0x0
+	playsewithpan 0x86, 0x3f
+	waitforvisualfinish
+	delay 0x8
+	createvisualtask sub_815ADB0, 0x2, 0x3, 0x0, 0x2, 0x1
+	loopsewithpan 0xa0, 0xc0, 0x8, 0x4
+	waitforvisualfinish
+	createvisualtask sub_811489C, 0x5, 0x2, 0x0, 0x1
+	blendoff
+	unloadspritegfx 0x2797
+	unloadspritegfx 0x27f5
+	end
+	
+MOVE_HEALING_WISH:
+	loadspritegfx 0x27d2
+	loadspritegfx 0x27d3
+	loadspritegfx 0x272f
+	loadspritegfx 0x27f9
+	loadspritegfx 0x2741
+	loopsewithpan 0xc3, 0xc0, 0x10, 0x3
+	call AnimScript_82D79B4
+	waitforvisualfinish
+	createsprite gUnknown_08597274, 0x5, 0x1, 0x2, 0x0, 0x9, 0x0
+	waitforvisualfinish
+	playsewithpan 0xd3, 0x0
+	createsprite gUnknown_08592EEC, 0x28, 0xfff4, 0x0
+	delay 0x1E
+	createsprite gUnknown_08592EEC, 0x28, 0xffe8, 0x0
+	delay 0x1E
+	createsprite gUnknown_08592EEC, 0x28, 0x15, 0x0
+	delay 0x1E
+	createsprite gUnknown_08592EEC, 0x28, 0x0, 0x0
+	delay 0x1E
+	createsprite gUnknown_08592EEC, 0x28, 0x0
+	delay 0x20
+	createvisualtask sub_81025C0, 0x3, 0x0
+    waitforvisualfinish 	
+	createsprite gUnknown_08597274, 0x2, 0x1, 0x3, 0x0, 0xa, 0x0
+	waitforvisualfinish
+	panse_27 0xcf, 0x3f, 0xc0, 0xfd, 0x0
+	createsprite gUnknown_085CE388, 0x28,
+	waitforvisualfinish
+	delay 0x2c
+	createsprite gUnknown_08597274, 0x2, 0x1, 0x3, 0xa, 0x0, 0x0
+	waitforvisualfinish
+	end
+	
+MOVE_BRINE:
+	end
+	
+MOVE_NATURAL_GIFT:
+	end
+	
+MOVE_FEINT:
+	end
+	
+MOVE_PLUCK:
+	end
+	
+MOVE_TAILWIND:
+	end
+	
+MOVE_ACUPRESSURE:
+	end
+	
+MOVE_METAL_BURST:
+	end
+	
+MOVE_U_TURN:
+	end
+	
+MOVE_CLOSE_COMBAT:
+	end
+	
+MOVE_PAYBACK:
+	end
+	
+MOVE_ASSURANCE:
+	end
+	
+MOVE_EMBARGO:
+	end
+	
+MOVE_FLING:
+	end
+	
+MOVE_PSYCHO_SHIFT:
+	end
+	
+MOVE_TRUMP_CARD:
+	end
+	
+MOVE_HEAL_BLOCK:
+	end
+	
+MOVE_WRING_OUT:
+	end
+	
+MOVE_POWER_TRICK:
+	end
+	
+MOVE_GASTRO_ACID:
+	end
+	
+MOVE_LUCKY_CHANT:
+	end
+	
+MOVE_ME_FIRST:
+	end
+	
+MOVE_COPYCAT:
+	end
+	
+MOVE_POWER_SWAP:
+	end
+	
+MOVE_GUARD_SWAP:
+	end
+	
+MOVE_PUNISHMENT:
+	end
+	
+MOVE_LAST_RESORT:
+	end
+	
+MOVE_WORRY_SEED:
+	end
+	
+MOVE_SUCKER_PUNCH:
+	end
+	
+MOVE_TOXIC_SPIKES:
+	end
+	
+MOVE_HEART_SWAP:
+	end
+	
+MOVE_AQUA_RING:
+	end
+	
+MOVE_MAGNET_RISE:
+	end
+	
+MOVE_FLARE_BLITZ:
+	end
+	
+MOVE_FORCE_PALM:
+	end
+	
+MOVE_AURA_SPHERE:
+	end
+	
+MOVE_ROCK_POLISH:
+	end
+	
+MOVE_POISON_JAB:
+	end
+	
+MOVE_DARK_PULSE:
+	end
+	
+MOVE_NIGHT_SLASH:
+	end
+	
+MOVE_AQUA_TAIL:
+	end
+	
+MOVE_SEED_BOMB:
+	end
+	
+MOVE_AIR_SLASH:
+	end
+	
+MOVE_XSCISSOR:
+	end
+	
+MOVE_BUG_BUZZ:
+	end
+	
+MOVE_DRAGON_PULSE:
+	end
+	
+MOVE_DRAGON_RUSH:
+	end
+	
+MOVE_POWER_GEM:
+	end
+	
+MOVE_DRAIN_PUNCH:
+	end
+	
+MOVE_VACUUM_WAVE:
+	end
+	
+MOVE_FOCUS_BLAST:
+	end
+	
+MOVE_ENERGY_BALL:
+	end
+	
+MOVE_BRAVE_BIRD:
+	end
+	
+MOVE_EARTH_POWER:
+	end
+	
+MOVE_SWITCHEROO:
+	end
+	
+MOVE_GIGA_IMPACT:
+	end
+	
+MOVE_NASTY_PLOT:
+	end
+	
+MOVE_BULLET_PUNCH:
+	end
+	
+MOVE_AVALANCHE:
+	end
+	
+MOVE_ICE_SHARD:
+	end
+	
+MOVE_SHADOW_CLAW:
+	end
+	
+MOVE_THUNDER_FANG:
+	end
+	
+MOVE_ICE_FANG:
+	end
+	
+MOVE_FIRE_FANG:
+	end
+	
+MOVE_SHADOW_SNEAK:
+	end
+	
+MOVE_MUD_BOMB:
+	end
+	
+MOVE_PSYCHO_CUT:
+	end
+	
+MOVE_ZEN_HEADBUTT:
+	end
+	
+MOVE_MIRROR_SHOT:
+	end
+	
+MOVE_FLASH_CANNON:
+	end
+	
+MOVE_ROCK_CLIMB:
+	end
+	
+MOVE_DEFOG:
+	end
+	
+MOVE_TRICK_ROOM:
+	end
+	
+MOVE_DRACO_METEOR:
+	end
+	
+MOVE_DISCHARGE:
+	end
+	
+MOVE_LAVA_PLUME:
+	end
+	
+MOVE_LEAF_STORM:
+	end
+	
+MOVE_POWER_WHIP:
+	end
+	
+MOVE_ROCK_WRECKER:
+	end
+	
+MOVE_CROSS_POISON:
+	end
+	
+MOVE_GUNK_SHOT:
+	end
+	
+MOVE_IRON_HEAD:
+	end
+	
+MOVE_MAGNET_BOMB:
+	end
+	
+MOVE_STONE_EDGE:
+	end
+	
+MOVE_CAPTIVATE:
+	end
+	
+MOVE_STEALTH_ROCK:
+	end
+	
+MOVE_GRASS_KNOT:
+	end
+	
+MOVE_CHATTER:
+	end
+	
+MOVE_JUDGMENT:
+	end
+	
+MOVE_BUG_BITE:
+	end
+	
+MOVE_CHARGE_BEAM:
+	end
+	
+MOVE_WOOD_HAMMER:
+	end
+	
+MOVE_AQUA_JET:
+	end
+	
+MOVE_ATTACK_ORDER:
+	end
+	
+MOVE_DEFEND_ORDER:
+	end
+	
+MOVE_HEAL_ORDER:
+	end
+	
+MOVE_HEAD_SMASH:
+	end
+	
+MOVE_DOUBLE_HIT:
+	end
+	
+MOVE_ROAR_OF_TIME:
+	end
+	
+MOVE_SPECIAL_REND:
+	end
+	
+MOVE_LUNAR_DANCE:
+	end
+	
+MOVE_CRUSH_GRIP:
+	end
+	
+MOVE_MAGMA_STORM:
+	end
+	
+MOVE_DARK_VOID:
+	end
+	
+MOVE_SEED_FLARE:
+	end
+	
+MOVE_OMINOUS_WIND:
+	end
+	
+MOVE_SHADOW_FORCE:
+	end
+	
+MOVE_HONE_CLAWS:
+	end
+	
+MOVE_WIDE_GUARD:
+	end
+	
+MOVE_GUARD_SPLIT:
+	end
+	
+MOVE_POWER_SPLIT:
+	end
+	
+MOVE_WONDER_ROOM:
+	end
+	
+MOVE_PSYSHOCK:
+	end
+	
+MOVE_VENOSHOCK:
+	end
+	
+MOVE_AUTOTOMIZE:
+	end
+	
+MOVE_RAGE_POWDER:
+	end
+	
+MOVE_TELEKINESIS:
+	end
+	
+MOVE_MAGIC_ROOM:
+	end
+	
+MOVE_SMACK_DOWN:
+	end
+	
+MOVE_STORM_THROW:
+	end
+	
+MOVE_FLAME_BURST:
+	end
+	
+MOVE_SLUDGE_WAVE:
+	end
+	
+MOVE_QUIVER_DANCE:
+	end
+	
+MOVE_HEAVY_SLAM:
+	end
+	
+MOVE_SYCHRONOISE:
+	end
+	
+MOVE_ELECTRO_BALL:
+	end
+	
+MOVE_SOAK:
+	end
+	
+MOVE_FLAME_CHARGE:
+	end
+	
+MOVE_COIL:
+	end
+	
+MOVE_LOW_SWEEP:
+	end
+	
+MOVE_ACID_SPRAY:
+	end
+	
+MOVE_FOUL_PLAY:
+	end
+	
+MOVE_SIMPLE_BEAM:
+	end
+	
+MOVE_ENTRAINMENT:
+	end
+	
+MOVE_AFTER_YOU:
+	end
+	
+MOVE_ROUND:
+	end
+	
+MOVE_ECHOED_VOICE:
+	end
+	
+MOVE_CHIP_AWAY:
+	end
+	
+MOVE_CLEAR_SMOG:
+	end
+	
+MOVE_STORED_POWER:
+	end
+	
+MOVE_QUICK_GUARD:
+	end
+	
+MOVE_ALLY_SWITCH:
+	end
+	
+MOVE_SCALD:
+	end
+	
+MOVE_SHELL_SMASH:
+	end
+	
+MOVE_HEAL_PULSE:
+	end
+	
+MOVE_HEX:
+	end
+	
+MOVE_SKY_DROP:
+	end
+	
+MOVE_SHIFT_GEAR:
+	end
+	
+MOVE_CIRCLE_THROW:
+	end
+	
+MOVE_INCINERATE:
+	end
+	
+MOVE_QUASH:
+	end
+	
+MOVE_ACROBATICS:
+	end
+	
+MOVE_REFLECT_TYPE:
+	end
+	
+MOVE_RETALITATE:
+	end
+	
+MOVE_FINAL_GAMBIT:
+	end
+	
+MOVE_BESTOW:
+	end
+	
+MOVE_INFERNO:
+	end
+	
+MOVE_WATER_PLEDGE:
+	end
+	
+MOVE_FIRE_PLEDGE:
+	end
+	
+MOVE_GRASS_PLEDGE:
+	end
+	
+MOVE_VOLT_SWITCH:
+	end
+	
+MOVE_STRUGGLE_BUG:
+	end
+	
+MOVE_BULLDOZE:
+	end
+	
+MOVE_FROST_BREATH:
+	end
+	
+MOVE_DRAGON_TAIL:
+	end
+	
+MOVE_WORK_UP:
+	end
+	
+MOVE_ELECTROWEB:
+	end
+	
+MOVE_WILD_CHARGE:
+	end
+	
+MOVE_DRILL_RUN:
+	end
+	
+MOVE_DUAL_CHOP:
+	end
+	
+MOVE_HEART_STAMP:
+	end
+	
+MOVE_HORN_LEECH:
+	end
+	
+MOVE_SACRED_SWORD:
+	end
+	
+MOVE_RAZOR_SHELL:
+	end
+	
+MOVE_HEAT_CRASH:
+	end
+	
+MOVE_LEAF_TORNADO:
+	end
+	
+MOVE_STEAMROLLER:
+	end
+	
+MOVE_COTTON_GUARD:
+	end
+	
+MOVE_NIGHT_DAZE:
+	end
+	
+MOVE_PSYSTRIKE:
+	end
+	
+MOVE_TAIL_SLAP:
+	end
+	
+MOVE_HURRICANE:
+	end
+	
+MOVE_HEAD_CHARGE:
+	end
+	
+MOVE_GEAR_GRIND:
+	end
+	
+MOVE_SEARING_SHOT:
+	end
+	
+MOVE_TECHNO_BLAST:
+	end
+	
+MOVE_RELIC_SONG:
+	end
+	
+MOVE_SECRET_SWORD:
+	end
+	
+MOVE_GLACIATE:
+	end
+	
+MOVE_BOLT_STRIKE:
+	end
+	
+MOVE_BLUE_FLARE:
+	end
+	
+MOVE_FIERY_DANCE:
+	end
+	
+MOVE_FREEZE_SHOCK:
+	end
+	
+MOVE_ICE_BURN:
+	end
+	
+MOVE_SNARL:
+	end
+	
+MOVE_ICICLE_CRASH:
+	end
+	
+MOVE_V_CREATE:
+	end
+	
+MOVE_FUSION_FLARE:
+	end
+	
+MOVE_FUSION_BOLT:
+	end
+	
+MOVE_FLYING_PRESS:
+	end
+	
+MOVE_MAT_BLOCK:
+	end
+	
+MOVE_BELCH:
+	end
+	
+MOVE_ROTOTILLER:
+	end
+	
+MOVE_STICKY_WEB:
+	end
+	
+MOVE_FELL_STINGER:
+	end
+	
+MOVE_PHANTOM_FORCE:
+	end
+	
+MOVE_TRICK_OR_TREAT:
+	end
+	
+MOVE_NOBLE_ROAR:
+	end
+	
+MOVE_ION_DELUGE:
+	end
+	
+MOVE_PARABOLIC_CHARGE:
+	end
+	
+MOVE_FORESTS_CURSE:
+	end
+	
+MOVE_PETAL_BLIZZARD:
+	end
+	
+MOVE_FREEZE_DRY:
+	end
+	
+MOVE_DISARMING_VOICE:
+	end
+	
+MOVE_PARTING_SHOT:
+	end
+	
+MOVE_TOPSY_TURVY:
+	end
+	
+MOVE_DRAINING_KISS:
+	end
+	
+MOVE_CRAFTY_SHIELD:
+	end
+	
+MOVE_FLOWER_SHIELD:
+	end
+	
+MOVE_GRASSY_TERRAIN:
+	end
+	
+MOVE_MISTY_TERRAIN:
+	end
+	
+MOVE_ELECTRIFY:
+	end
+	
+MOVE_PLAY_ROUGH:
+	end
+	
+MOVE_FAIRY_WIND:
+	end
+	
+MOVE_MOONBLAST:
+	end
+	
+MOVE_BOOMBURST:
+	end
+	
+MOVE_FAIRY_LOCK:
+	end
+	
+MOVE_KINGS_SHIELD:
+	end
+	
+MOVE_PLAY_NICE:
+	end
+	
+MOVE_CONFIDE:
+	end
+	
+MOVE_DIAMOND_STORM:
+	end
+	
+MOVE_STEAM_ERUPTION:
+	end
+	
+MOVE_HYPERSPACE_HOLE:
+	end
+	
+MOVE_WATER_SHURIKEN:
+	end
+	
+MOVE_MYSTICAL_FIRE:
+	end
+	
+MOVE_SPIKY_SHIELD:
+	end
+	
+MOVE_AROMATIC_MIST:
+	end
+	
+MOVE_EERIE_IMPULSE:
+	end
+	
+MOVE_VENOM_DRENCH:
+	end
+	
+MOVE_POWDER:
+	end
+	
+MOVE_GEOMANCY:
+	end
+	
+MOVE_MAGNETIC_FLUX:
+	end
+	
+MOVE_HAPPY_HOUR:
+	end
+	
+MOVE_ELECTRIC_TERRAIN:
+	end
+	
+MOVE_DAZZLING_GLEAM:
+	end
+	
+MOVE_CELEBRATE:
+	end
+	
+MOVE_HOLD_HANDS:
+	end
+	
+MOVE_BABY_DOLL_EYES:
+	end
+	
+MOVE_NUZZLE:
+	end
+	
+MOVE_HOLD_BACK:
+	end
+	
+MOVE_INFESTATION:
+	end
+	
+MOVE_POWER_UP_PUNCH:
+	end
+	
+MOVE_OBLIVION_WING:
+	end
+	
+MOVE_THOUSAND_ARROWS:
+	end
+	
+MOVE_THOUSAND_WAVES:
+	end
+	
+MOVE_LANDS_WRATH:
+	end
+	
+MOVE_LIGHT_OF_RUIN:
+	end
+	
+MOVE_ORIGIN_PULSE:
+	end
+	
+MOVE_PRECIPICE_BLADES:
+	end
+	
+MOVE_DRAGON_ASCENT:
+	end
+	
+MOVE_HYPERSPACE_FURY:
+	end
 
 Move_NONE:
 Move_MIRROR_MOVE:
