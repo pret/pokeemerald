@@ -1,19 +1,16 @@
 #include "global.h"
 #include "event_data.h"
-#include "constants/songs.h"
-#include "sound.h"
-#include "script.h"
-#include "constants/species.h"
-#include "task.h"
+#include "field_camera.h"
 #include "field_effect.h"
+#include "script.h"
+#include "sound.h"
+#include "task.h"
 #include "constants/flags.h"
 #include "constants/maps.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 
 extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId); // fieldmap
-extern void DrawWholeMapView(); // field_camera
-extern void SetCameraPanningCallback(void ( *callback)()); // field_camera
-extern void InstallCameraPanAheadCallback(void);
-extern void SetCameraPanning(s16 x, s16 y);
 extern u8 GetCursorSelectionMonId(void);
 extern u8 oei_task_add(void);
 
@@ -26,7 +23,45 @@ enum
 
 EWRAM_DATA static u8 sBraillePuzzleCallbackFlag = 0;
 
-extern const u8 gUnknown_085EFE74[][2];
+static const u8 gUnknown_085EFE74[][2] =
+{
+    {0x04, 0x15},
+    {0x05, 0x15},
+    {0x06, 0x15},
+    {0x07, 0x15},
+    {0x08, 0x15},
+    {0x09, 0x15},
+    {0x0a, 0x15},
+    {0x0b, 0x15},
+    {0x0c, 0x15},
+    {0x0c, 0x16},
+    {0x0c, 0x17},
+    {0x0d, 0x17},
+    {0x0d, 0x18},
+    {0x0d, 0x19},
+    {0x0d, 0x1a},
+    {0x0d, 0x1b},
+    {0x0c, 0x1b},
+    {0x0c, 0x1c},
+    {0x04, 0x1d},
+    {0x05, 0x1d},
+    {0x06, 0x1d},
+    {0x07, 0x1d},
+    {0x08, 0x1d},
+    {0x09, 0x1d},
+    {0x0a, 0x1d},
+    {0x0b, 0x1d},
+    {0x0c, 0x1d},
+    {0x04, 0x1c},
+    {0x04, 0x1b},
+    {0x03, 0x1b},
+    {0x03, 0x1a},
+    {0x03, 0x19},
+    {0x03, 0x18},
+    {0x03, 0x17},
+    {0x04, 0x17},
+    {0x04, 0x16},
+};
 
 void SealedChamberShakingEffect(u8);
 void sub_8179860(void);

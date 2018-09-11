@@ -512,7 +512,7 @@ SECTIONS {
         src/berry_tag_screen.o(.rodata);
         src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
-        data/braille_puzzles.o(.rodata);
+        src/braille_puzzles.o(.rodata);
         src/pokeblock_feed.o(.rodata);
         src/clear_save_data_screen.o(.rodata);
         src/intro_credits_graphics.o(.rodata);
