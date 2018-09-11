@@ -33,6 +33,7 @@
 
 	History
 	-------
+	v1.06 - added output silencing, (Diegoisawesome)
 	v1.05 - added debug offset argument, (Diegoisawesome)
 	v1.04 - converted to plain C, (WinterMute)
 	v1.03 - header.fixed, header.device_type
@@ -48,7 +49,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#define VER		"1.05"
+#define VER		"1.06"
 #define ARGV	argv[arg]
 #define VALUE	(ARGV+2)
 #define NUMBER	strtoul(VALUE, NULL, 0)
@@ -143,7 +144,7 @@ int main(int argc, char *argv[])
 	if (argc <= 1)
 	{
 		printf("GBA ROM fixer v"VER" by Dark Fader / BlackThunder / WinterMute / Diegoisawesome \n");
-		printf("Syntax: gbafix <rom.gba> [-p] [-t[title]] [-c<game_code>] [-m<maker_code>] [-r<version>] [-d<debug>] [-silent]\n");
+		printf("Syntax: gbafix <rom.gba> [-p] [-t[title]] [-c<game_code>] [-m<maker_code>] [-r<version>] [-d<debug>] [--silent]\n");
 		printf("\n");
 		printf("parameters:\n");
 		printf("	-p              Pad to next exact power of 2. No minimum size!\n");
@@ -152,7 +153,7 @@ int main(int argc, char *argv[])
 		printf("	-m<maker_code>  Patch maker code (two characters)\n");
 		printf("	-r<version>     Patch game version (number)\n");
 		printf("	-d<debug>       Enable debugging handler and set debug entry point (0 or 1)\n");
-		printf("	-silent       	Silence non-error output\n");
+		printf("	--silent       	Silence non-error output\n");
 		return -1;
 	}
 
@@ -160,7 +161,7 @@ int main(int argc, char *argv[])
 	for (arg=1; arg<argc; arg++)
 	{
 		if ((ARGV[0] != '-')) { argfile=ARGV; }
-		if (strncmp("-silent", &ARGV[0], 6) == 0) { silent = 1; }
+		if (strncmp("--silent", &ARGV[0], 7) == 0) { silent = 1; }
 	}
 
 	// check filename
@@ -186,8 +187,6 @@ int main(int argc, char *argv[])
 	{
 		if ((ARGV[0] == '-'))
 		{
-			if (strncmp("-silent", &ARGV[0], 6) == 0) { continue; }
-		
 			switch (ARGV[1])
 			{
 				case 'p':	// pad
@@ -261,7 +260,11 @@ int main(int argc, char *argv[])
 					header.device_type = (unsigned char)((NUMBER & 1) << 7);	// debug handler entry point
 					break;
 				}
-
+				case '-':	// long arguments
+				{
+					if (strncmp("silent", &ARGV[2], 6) == 0) { continue; }
+					break;
+				}
 			default:
 				{
 					printf("Invalid option: %s\n", ARGV);
