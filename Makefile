@@ -90,7 +90,7 @@ tidy:
 	rm -r build/*
 
 include graphics_file_rules.mk
-include event_obj_graphics_makefile_rules.mk
+include spritesheet_rules.mk
 
 %.s: ;
 %.png: ;
