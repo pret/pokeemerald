@@ -35,7 +35,7 @@ void CB2_QuitRecordedBattle(void);
 void sub_8038528(struct Sprite* sprite);
 void sub_8038A04(void); // unused
 void VBlankCB_Battle(void);
-void nullsub_17(void);
+void nullsub_17(struct Sprite *sprite);
 void sub_8038B74(struct Sprite *sprite);
 void sub_8038D64(void);
 u32 sub_80391E0(u8 arrayId, u8 caseId);
