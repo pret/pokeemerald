@@ -4077,8 +4077,8 @@ _080A7B90:
 	bx r0
 	thumb_func_end sub_80A7AFC
 
-	thumb_func_start sub_80A7B98
-sub_80A7B98: @ 80A7B98
+	thumb_func_start AnimTask_BlendMonInAndOut
+AnimTask_BlendMonInAndOut: @ 80A7B98
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4117,7 +4117,7 @@ _080A7BE2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80A7B98
+	thumb_func_end AnimTask_BlendMonInAndOut
 
 	thumb_func_start sub_80A7BF4
 sub_80A7BF4: @ 80A7BF4
@@ -4802,8 +4802,8 @@ _080A8136:
 	.pool
 	thumb_func_end sub_80A80C8
 
-	thumb_func_start AnimTask_GetHappinessPowerLevel
-AnimTask_GetHappinessPowerLevel: @ 80A8140
+	thumb_func_start AnimTask_GetFrustrationPowerLevel
+AnimTask_GetFrustrationPowerLevel: @ 80A8140
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4827,7 +4827,7 @@ _080A815E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end AnimTask_GetHappinessPowerLevel
+	thumb_func_end AnimTask_GetFrustrationPowerLevel
 
 	thumb_func_start sub_80A8174
 sub_80A8174: @ 80A8174

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80D51AC
-sub_80D51AC: @ 80D51AC
+	thumb_func_start AnimTask_ShakeMon
+AnimTask_ShakeMon: @ 80D51AC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -56,7 +56,7 @@ _080D520C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D51AC
+	thumb_func_end AnimTask_ShakeMon
 
 	thumb_func_start sub_80D5220
 sub_80D5220: @ 80D5220
@@ -151,8 +151,8 @@ _080D52CA:
 	bx r0
 	thumb_func_end sub_80D5220
 
-	thumb_func_start sub_80D52D0
-sub_80D52D0: @ 80D52D0
+	thumb_func_start AnimTask_ShakeMon2
+AnimTask_ShakeMon2: @ 80D52D0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -265,7 +265,7 @@ _080D53A6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D52D0
+	thumb_func_end AnimTask_ShakeMon2
 
 	thumb_func_start sub_80D53BC
 sub_80D53BC: @ 80D53BC
@@ -372,8 +372,8 @@ _080D5478:
 	bx r0
 	thumb_func_end sub_80D53BC
 
-	thumb_func_start sub_80D5484
-sub_80D5484: @ 80D5484
+	thumb_func_start AnimTask_ShakeMonInPlace
+AnimTask_ShakeMonInPlace: @ 80D5484
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -432,7 +432,7 @@ _080D54F6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D5484
+	thumb_func_end AnimTask_ShakeMonInPlace
 
 	thumb_func_start sub_80D5508
 sub_80D5508: @ 80D5508
@@ -595,8 +595,8 @@ _080D563C:
 	bx r0
 	thumb_func_end sub_80D5508
 
-	thumb_func_start sub_80D5644
-sub_80D5644: @ 80D5644
+	thumb_func_start AnimTask_ShakeAndSinkMon
+AnimTask_ShakeAndSinkMon: @ 80D5644
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -635,7 +635,7 @@ sub_80D5644: @ 80D5644
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D5644
+	thumb_func_end AnimTask_ShakeAndSinkMon
 
 	thumb_func_start sub_80D56A4
 sub_80D56A4: @ 80D56A4
@@ -837,8 +837,8 @@ _080D5822:
 	.pool
 	thumb_func_end sub_80D57B8
 
-	thumb_func_start sub_80D5830
-sub_80D5830: @ 80D5830
+	thumb_func_start AnimTask_TranslateMonEllipticalRespectSide
+AnimTask_TranslateMonEllipticalRespectSide: @ 80D5830
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -859,7 +859,7 @@ _080D584C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D5830
+	thumb_func_end AnimTask_TranslateMonEllipticalRespectSide
 
 	thumb_func_start sub_80D5860
 sub_80D5860: @ 80D5860
@@ -1325,8 +1325,8 @@ sub_80D5C20: @ 80D5C20
 	.pool
 	thumb_func_end sub_80D5C20
 
-	thumb_func_start sub_80D5C50
-sub_80D5C50: @ 80D5C50
+	thumb_func_start AnimTask_WindUpLunge
+AnimTask_WindUpLunge: @ 80D5C50
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1390,7 +1390,7 @@ _080D5C82:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D5C50
+	thumb_func_end AnimTask_WindUpLunge
 
 	thumb_func_start sub_80D5CE4
 sub_80D5CE4: @ 80D5CE4
@@ -1617,8 +1617,8 @@ _080D5EAA:
 	.pool
 	thumb_func_end sub_80D5E6C
 
-	thumb_func_start sub_80D5EB8
-sub_80D5EB8: @ 80D5EB8
+	thumb_func_start AnimTask_SwayMon
+AnimTask_SwayMon: @ 80D5EB8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1676,7 +1676,7 @@ _080D5F18:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D5EB8
+	thumb_func_end AnimTask_SwayMon
 
 	thumb_func_start sub_80D5F3C
 sub_80D5F3C: @ 80D5F3C
@@ -1828,8 +1828,8 @@ _080D6050:
 	.pool
 	thumb_func_end sub_80D5F3C
 
-	thumb_func_start sub_80D6064
-sub_80D6064: @ 80D6064
+	thumb_func_start AnimTask_ScaleMonAndRestore
+AnimTask_ScaleMonAndRestore: @ 80D6064
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -1867,7 +1867,7 @@ sub_80D6064: @ 80D6064
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D6064
+	thumb_func_end AnimTask_ScaleMonAndRestore
 
 	thumb_func_start sub_80D60BC
 sub_80D60BC: @ 80D60BC

@@ -66,9 +66,9 @@
 	.byte \battler
 	.endm
 
-	.macro setalpha param0
-	.byte 0xc
-	.2byte \param0
+	.macro setalpha eva, evb
+	.byte 0x0C
+	.2byte ((\evb) << 8) | (\eva)
 	.endm
 
 	.macro blendoff

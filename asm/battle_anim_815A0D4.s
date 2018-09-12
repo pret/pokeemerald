@@ -10861,8 +10861,8 @@ _0815F896:
 	.pool
 	thumb_func_end sub_815F7C4
 
-	thumb_func_start AnimTask_GetHappinessPowerLevel2
-AnimTask_GetHappinessPowerLevel2: @ 815F8A0
+	thumb_func_start AnimTask_GetReturnPowerLevel
+AnimTask_GetReturnPowerLevel: @ 815F8A0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -10904,7 +10904,7 @@ _0815F8E0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end AnimTask_GetHappinessPowerLevel2
+	thumb_func_end AnimTask_GetReturnPowerLevel
 
 	thumb_func_start sub_815F8F4
 sub_815F8F4: @ 815F8F4

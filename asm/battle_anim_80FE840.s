@@ -7975,7 +7975,7 @@ _08102794:
 	mov r12, r5
 	ldr r7, =gUnknown_08592EBC
 	mov r8, r7
-	ldr r6, =gUnknown_08592EEC
+	ldr r6, =gBattleAnimSpriteTemplate_8592EEC
 	movs r5, 0x1
 _081027B2:
 	lsls r0, r2, 4
@@ -17083,8 +17083,8 @@ AnimTask_GetFuryCutterHitCount: @ 8107168
 	.pool
 	thumb_func_end AnimTask_GetFuryCutterHitCount
 
-	thumb_func_start sub_8107188
-sub_8107188: @ 8107188
+	thumb_func_start AnimTask_CreateRaindrops
+AnimTask_CreateRaindrops: @ 8107188
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17150,7 +17150,7 @@ _0810720A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8107188
+	thumb_func_end AnimTask_CreateRaindrops
 
 	thumb_func_start sub_810721C
 sub_810721C: @ 810721C
@@ -28796,7 +28796,7 @@ _0810D028:
 	mov r1, r9
 	ldrh r0, [r1, 0x2]
 	strh r0, [r5, 0x2E]
-	ldr r0, =gUnknown_08597358
+	ldr r0, =gBasicHitSplatSpriteTemplate
 	movs r2, 0x20
 	ldrsh r1, [r5, r2]
 	movs r3, 0x22
@@ -37293,8 +37293,8 @@ _081114E6:
 	bx r0
 	thumb_func_end sub_811149C
 
-	thumb_func_start sub_81114EC
-sub_81114EC: @ 81114EC
+	thumb_func_start AnimTask_GetSeismicTossDamageLevel
+AnimTask_GetSeismicTossDamageLevel: @ 81114EC
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -37326,7 +37326,7 @@ _0811151A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81114EC
+	thumb_func_end AnimTask_GetSeismicTossDamageLevel
 
 	thumb_func_start sub_811152C
 sub_811152C: @ 811152C
@@ -49753,8 +49753,8 @@ _08117C0C:
 	.pool
 	thumb_func_end sub_8117A60
 
-	thumb_func_start sub_8117C24
-sub_8117C24: @ 8117C24
+	thumb_func_start AnimTask_GetBattleTerrain
+AnimTask_GetBattleTerrain: @ 8117C24
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -49766,7 +49766,7 @@ sub_8117C24: @ 8117C24
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117C24
+	thumb_func_end AnimTask_GetBattleTerrain
 
 	thumb_func_start sub_8117C44
 sub_8117C44: @ 8117C44
@@ -50078,8 +50078,8 @@ sub_8117E94: @ 8117E94
 	.pool
 	thumb_func_end sub_8117E94
 
-	thumb_func_start sub_8117EC4
-sub_8117EC4: @ 8117EC4
+	thumb_func_start AnimTask_IsTargetSameSide
+AnimTask_IsTargetSameSide: @ 8117EC4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -50109,7 +50109,7 @@ _08117EFC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117EC4
+	thumb_func_end AnimTask_IsTargetSameSide
 
 	thumb_func_start sub_8117F10
 sub_8117F10: @ 8117F10

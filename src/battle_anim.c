@@ -16,9 +16,6 @@
 #include "palette.h"
 #include "main.h"
 
-// sprites start at 10000 and thus must be subtracted of 10000 to account for the true index.
-#define GET_TRUE_SPRITE_INDEX(i) ((i - 10000))
-
 #define ANIM_SPRITE_INDEX_COUNT 8
 
 extern u16 gBattle_WIN0H;
