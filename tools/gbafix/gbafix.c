@@ -33,6 +33,7 @@
 
 	History
 	-------
+	v1.06 - added output silencing, (Diegoisawesome)
 	v1.05 - added debug offset argument, (Diegoisawesome)
 	v1.04 - converted to plain C, (WinterMute)
 	v1.03 - header.fixed, header.device_type
@@ -48,7 +49,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#define VER		"1.05"
+#define VER		"1.06"
 #define ARGV	argv[arg]
 #define VALUE	(ARGV+2)
 #define NUMBER	strtoul(VALUE, NULL, 0)
@@ -135,6 +136,7 @@ int main(int argc, char *argv[])
 	int arg;
 	char *argfile = 0;
 	FILE *infile;
+	int silent = 0;
 
 	int size,bit;
 
@@ -142,7 +144,7 @@ int main(int argc, char *argv[])
 	if (argc <= 1)
 	{
 		printf("GBA ROM fixer v"VER" by Dark Fader / BlackThunder / WinterMute / Diegoisawesome \n");
-		printf("Syntax: gbafix <rom.gba> [-p] [-t[title]] [-c<game_code>] [-m<maker_code>] [-r<version>] [-d<debug>]\n");
+		printf("Syntax: gbafix <rom.gba> [-p] [-t[title]] [-c<game_code>] [-m<maker_code>] [-r<version>] [-d<debug>] [--silent]\n");
 		printf("\n");
 		printf("parameters:\n");
 		printf("	-p              Pad to next exact power of 2. No minimum size!\n");
@@ -151,25 +153,27 @@ int main(int argc, char *argv[])
 		printf("	-m<maker_code>  Patch maker code (two characters)\n");
 		printf("	-r<version>     Patch game version (number)\n");
 		printf("	-d<debug>       Enable debugging handler and set debug entry point (0 or 1)\n");
+		printf("	--silent       	Silence non-error output\n");
 		return -1;
 	}
 
 	// get filename
 	for (arg=1; arg<argc; arg++)
 	{
-		if ((ARGV[0] != '-')) { argfile=ARGV; break; }
+		if ((ARGV[0] != '-')) { argfile=ARGV; }
+		if (strncmp("--silent", &ARGV[0], 7) == 0) { silent = 1; }
 	}
 
 	// check filename
 	if (!argfile)
 	{
-		printf("Filename needed!\n");
+		fprintf(stderr, "Filename needed!\n");
 		return -1;
 	}
 
 	// read file
 	infile = fopen(argfile, "r+b");
-	if (!infile) { printf("Error opening input file!\n"); return -1; }
+	if (!infile) { fprintf(stderr, "Error opening input file!\n"); return -1; }
 	fseek(infile, 0, SEEK_SET);
 	fread(&header, sizeof(header), 1, infile);
 
@@ -215,7 +219,7 @@ int main(int argc, char *argv[])
 						t = strrchr(s, '/'); if (t) begin = t+1;
 						t = strrchr(s, '.'); if (t) *t = 0;
 						strncpy(title, begin, sizeof(header.title));
-						printf("%s\n",begin);
+						if (!silent) printf("%s\n",begin);
 					}
 					memcpy(header.title, title, sizeof(header.title));	// copy
 					break;
@@ -223,7 +227,7 @@ int main(int argc, char *argv[])
 
 				case 'c':	// game code
 				{
-					//if (!VALUE[0]) { printf("Need value for %s\n", ARGV); break; }
+					//if (!VALUE[0]) { fprintf(stderr, "Need value for %s\n", ARGV); break; }
 					//header.game_code = NUMBER;
 					header.game_code = VALUE[0] | VALUE[1]<<8 | VALUE[2]<<16 | VALUE[3]<<24;
 					break;
@@ -231,7 +235,7 @@ int main(int argc, char *argv[])
 
 				case 'm':	// maker code
 				{
-					//if (!VALUE[0]) { printf("Need value for %s\n", ARGV); break; }
+					//if (!VALUE[0]) { fprintf(stderr, "Need value for %s\n", ARGV); break; }
 					//header.maker_code = (unsigned short)NUMBER;
 					header.maker_code = VALUE[0] | VALUE[1]<<8;
 					break;
@@ -244,19 +248,23 @@ int main(int argc, char *argv[])
 
 				case 'r':	// version
 				{
-					if (!VALUE[0]) { printf("Need value for %s\n", ARGV); break; }
+					if (!VALUE[0]) { fprintf(stderr, "Need value for %s\n", ARGV); break; }
 					header.game_version = (unsigned char)NUMBER;
 					break;
 				}
 
 				case 'd':	// debug
 				{
-					if (!VALUE[0]) { printf("Need value for %s\n", ARGV); break; }
+					if (!VALUE[0]) { fprintf(stderr, "Need value for %s\n", ARGV); break; }
 					header.logo[0x9C-0x04] = 0xA5;	// debug enable
 					header.device_type = (unsigned char)((NUMBER & 1) << 7);	// debug handler entry point
 					break;
 				}
-
+				case '-':	// long arguments
+				{
+					if (strncmp("silent", &ARGV[2], 6) == 0) { continue; }
+					break;
+				}
 			default:
 				{
 					printf("Invalid option: %s\n", ARGV);
@@ -275,7 +283,7 @@ int main(int argc, char *argv[])
 	fwrite(&header, sizeof(header), 1, infile);
 	fclose(infile);
 
-	printf("ROM fixed!\n");
+	if (!silent) printf("ROM fixed!\n");
 
 	return 0;
 }

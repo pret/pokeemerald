@@ -1,22 +1,21 @@
 #include "global.h"
-#include "task.h"
-#include "sprite.h"
+#include "event_data.h"
 #include "event_object_movement.h"
-#include "constants/songs.h"
-#include "sound.h"
+#include "main.h"
 #include "palette.h"
 #include "script.h"
+#include "script_movement.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "constants/songs.h"
 #include "constants/vars.h"
-#include "event_data.h"
-#include "main.h"
 
 #define SECONDS(value) ((signed) (60.0 * value + 0.5))
 
 extern u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *); // should be in field_specials.h
 extern void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-extern bool8 ScriptMovement_IsObjectMovementFinished(u8, u8, u8);
 extern bool32 CountSSTidalStep(u16);
-extern bool8 ScriptMovement_StartObjectMovementScript(u8, u8, u8, u8 *);
 extern void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 extern void sp13E_warp_to_last_warp(void);
 extern void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
@@ -38,11 +37,12 @@ extern void pal_fill_black(void);
 extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId);
 extern void DrawWholeMapView();
 
-extern s8 gTruckCamera_HorizontalTable[];
+//. rodata
+static const s8 gTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
+const u8 gUnknown_0858E8AB[] = {0x18, 0xFE};
+const u8 gUnknown_0858E8AD[] = {0x17, 0xFE};
 
-extern u8 gUnknown_0858E8AB[];
-extern u8 gUnknown_0858E8AD[];
-
+// .text
 void Task_Truck3(u8);
 
 s16 GetTruckCameraBobbingY(int a1)
