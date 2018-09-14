@@ -10048,8 +10048,8 @@ _0815F1DE:
 	.pool
 	thumb_func_end sub_815F18C
 
-	thumb_func_start sub_815F20C
-sub_815F20C: @ 815F20C
+	thumb_func_start AnimTask_MonToSubstitute
+AnimTask_MonToSubstitute: @ 815F20C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -10183,7 +10183,7 @@ _0815F310:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815F20C
+	thumb_func_end AnimTask_MonToSubstitute
 
 	thumb_func_start sub_815F330
 sub_815F330: @ 815F330

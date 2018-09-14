@@ -31,7 +31,7 @@ extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
 extern const u16 gMovesWithQuietBGM[];
-extern const u8 * const gBattleAnims_Moves[];
+extern const u8 *const gBattleAnims_Moves[];
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];

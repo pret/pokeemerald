@@ -3782,7 +3782,7 @@ gSimplePaletteBlendSpriteTemplate:: @ 8597274
 	spr_template 0x0000, 0x0000, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81157FC
 
 	.align 2
-gBattleAnimSpriteTemplate_859728C:: @ 859728C
+gComplexPaletteBlendSpriteTemplate:: @ 859728C
 	spr_template 0x0000, 0x0000, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81158A4
 
 	.align 2

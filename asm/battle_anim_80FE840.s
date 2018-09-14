@@ -18033,8 +18033,8 @@ _0810794C:
 	bx r0
 	thumb_func_end sub_810790C
 
-	thumb_func_start sub_8107954
-sub_8107954: @ 8107954
+	thumb_func_start AnimTask_CreateSurfWave
+AnimTask_CreateSurfWave: @ 8107954
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -18256,7 +18256,7 @@ _08107B58:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8107954
+	thumb_func_end AnimTask_CreateSurfWave
 
 	thumb_func_start sub_8107B84
 sub_8107B84: @ 8107B84
@@ -22914,8 +22914,8 @@ _0810A054:
 	.pool
 	thumb_func_end sub_8109E2C
 
-	thumb_func_start sub_810A060
-sub_810A060: @ 810A060
+	thumb_func_start AnimTask_BlendBackground
+AnimTask_BlendBackground: @ 810A060
 	push {r4,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -22938,7 +22938,7 @@ sub_810A060: @ 810A060
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_810A060
+	thumb_func_end AnimTask_BlendBackground
 
 	thumb_func_start sub_810A094
 sub_810A094: @ 810A094
@@ -36190,8 +36190,8 @@ _08110BC6:
 	bx r0
 	thumb_func_end sub_8110B80
 
-	thumb_func_start sub_8110BCC
-sub_8110BCC: @ 8110BCC
+	thumb_func_start AnimTask_LoadSandstormBackground
+AnimTask_LoadSandstormBackground: @ 8110BCC
 	push {r4-r6,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -36275,7 +36275,7 @@ _08110C6E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8110BCC
+	thumb_func_end AnimTask_LoadSandstormBackground
 
 	thumb_func_start sub_8110CB0
 sub_8110CB0: @ 8110CB0
@@ -47427,8 +47427,8 @@ _08116832:
 	.pool
 	thumb_func_end sub_811675C
 
-	thumb_func_start sub_8116848
-sub_8116848: @ 8116848
+	thumb_func_start AnimTask_BlendParticle
+AnimTask_BlendParticle: @ 8116848
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -47447,7 +47447,7 @@ sub_8116848: @ 8116848
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8116848
+	thumb_func_end AnimTask_BlendParticle
 
 	thumb_func_start sub_8116874
 sub_8116874: @ 8116874
