@@ -2831,7 +2831,7 @@ sub_8017020: @ 8017020
 	thumb_func_start sub_801704C
 sub_801704C: @ 801704C
 	push {lr}
-	bl sub_8197224
+	bl RunTextPrintersAndIsPrinter0Active
 	lsls r0, 16
 	cmp r0, 0
 	beq _0801705C
@@ -2871,7 +2871,7 @@ _08017076:
 	b _080170AE
 	.pool
 _0801709C:
-	bl sub_8197224
+	bl RunTextPrintersAndIsPrinter0Active
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0

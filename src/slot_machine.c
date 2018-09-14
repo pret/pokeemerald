@@ -968,7 +968,7 @@ bool8 sub_8102318(struct Task *task)
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
-    sub_80323CC(0x15, 7, 0x214, 0x180, 0xE, 0xF);
+    CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
     sSlotMachine->state = 22;
     return FALSE;
 }

@@ -668,7 +668,7 @@ static void Task_BardSong(u8 taskId)
                 task->tState = 3;
             break;
     }
-    sub_8197224();
+    RunTextPrintersAndIsPrinter0Active();
 }
 
 void ScrSpecial_SetMauvilleOldManEventObjGfx(void)

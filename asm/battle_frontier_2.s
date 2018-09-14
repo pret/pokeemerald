@@ -2156,7 +2156,7 @@ sub_81A0A34: @ 81A0A34
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8197224
+	bl RunTextPrintersAndIsPrinter0Active
 	lsls r0, 16
 	cmp r0, 0
 	bne _081A0A68

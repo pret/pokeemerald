@@ -1881,7 +1881,7 @@ sub_807825C: @ 807825C
 	lsrs r1, 24
 	movs r0, 0x1C
 	bl SetGpuReg
-	bl sub_8197224
+	bl RunTextPrintersAndIsPrinter0Active
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
