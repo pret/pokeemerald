@@ -22,7 +22,7 @@ extern const u16 gUnknown_0860F074[];
 
 void sub_81971D0(void);
 void sub_8197200(void);
-u16 sub_8197224(void);
+u16 RunTextPrintersAndIsPrinter0Active(void);
 void sub_81973A4(void);
 void NewMenuHelpers_DrawDialogueFrame(u8, u8);
 void sub_819746C(u8 windowId, bool8 copyToVram);

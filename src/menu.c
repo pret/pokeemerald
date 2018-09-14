@@ -157,7 +157,7 @@ void sub_8197200(void)
     sub_81973A4();
 }
 
-u16 sub_8197224(void)
+u16 RunTextPrintersAndIsPrinter0Active(void)
 {
     RunTextPrinters();
     return IsTextPrinterActive(0);
