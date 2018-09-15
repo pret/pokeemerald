@@ -199,7 +199,7 @@ SECTIONS {
         asm/cable_car.o(.text);
         src/math_util.o(.text);
         asm/roulette_util.o(.text);
-        asm/cable_car_util.o(.text);
+        src/rom_81520A8.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
