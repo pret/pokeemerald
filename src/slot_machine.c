@@ -30,29 +30,31 @@ extern u16 *gUnknown_0203AAC8;
 extern u16 *gUnknown_0203AACC;
 extern u16 *gUnknown_0203AAD0;
 extern u16 *gUnknown_0203AADC;
-extern void *gUnknown_0203AAF4;
-extern void *gUnknown_0203AAF8;
-extern void *gUnknown_0203AAFC;
-extern void *gUnknown_0203AB00;
-extern void *gUnknown_0203AB04;
-extern void *gUnknown_0203AB08;
-extern void *gUnknown_0203AB0C;
-extern void *gUnknown_0203AB10;
-extern void *gUnknown_0203AB14;
-extern void *gUnknown_0203AB18;
-extern void *gUnknown_0203AB1C;
-extern void *gUnknown_0203AB20;
-extern void *gUnknown_0203AB24;
-extern void *gUnknown_0203AB28;
-extern void *gUnknown_0203AAE4;
-extern void *gUnknown_0203AAE8;
-extern void *gUnknown_0203AAEC;
-extern void *gUnknown_0203AAF0;
-extern void *gUnknown_0203AAD4;
-extern void *gUnknown_0203AAD8;
-extern void *gUnknown_0203AAE0;
-extern void *gUnknown_0203AB2C;
-extern void *gUnknown_0203AB30;
+extern struct SpriteFrameImage *gUnknown_0203AAF4;
+extern struct SpriteFrameImage *gUnknown_0203AAF8;
+extern struct SpriteFrameImage *gUnknown_0203AAFC;
+extern struct SpriteFrameImage *gUnknown_0203AB00;
+extern struct SpriteFrameImage *gUnknown_0203AB04;
+extern struct SpriteFrameImage *gUnknown_0203AB08;
+extern struct SpriteFrameImage *gUnknown_0203AB0C;
+extern struct SpriteFrameImage *gUnknown_0203AB10;
+extern struct SpriteFrameImage *gUnknown_0203AB14;
+extern struct SpriteFrameImage *gUnknown_0203AB18;
+extern struct SpriteFrameImage *gUnknown_0203AB1C;
+extern struct SpriteFrameImage *gUnknown_0203AB20;
+extern struct SpriteFrameImage *gUnknown_0203AB24;
+extern struct SpriteFrameImage *gUnknown_0203AB28;
+extern struct SpriteFrameImage *gUnknown_0203AAE4;
+extern struct SpriteFrameImage *gUnknown_0203AAE8;
+extern struct SpriteFrameImage *gUnknown_0203AAEC;
+extern struct SpriteFrameImage *gUnknown_0203AAF0;
+extern u8 *gUnknown_0203AAD4;
+extern u8 *gUnknown_0203AAD8;
+extern u8 *gUnknown_0203AAE0;
+extern struct SpriteSheet *gUnknown_0203AB2C;
+extern struct SpriteSheet *gUnknown_0203AB30;
+
+extern struct SpriteFrameImage *gUnknown_03001188[];
 
 // Text
 extern const u8 gText_YouDontHaveThreeCoins[];
@@ -60,6 +62,9 @@ extern const u8 gText_QuitTheGame[];
 extern const u8 gText_YouveGot9999Coins[];
 extern const u8 gText_YouveRunOutOfCoins[];
 extern const u8 gText_ReelTimeHelp[];
+
+// gfx
+extern const u8 gSlotMachineReelTime_Gfx[];
 
 enum
 {
@@ -345,9 +350,7 @@ bool8 sub_81020C8(struct Task *task);
 /*static*/void sub_81064B8(void);
 /*static*/void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 /*static*/void sub_81065DC(void);
-/*static*/void sub_812F908(void);
 /*static*/void sub_812F958(void);
-/*static*/void sub_812F7E4(void);
 /*static*/void sub_812F968(void);
 void LoadSlotMachineWheelOverlay(void);
 u8 sub_8105BB4(u8 templateIdx, u8 cbAndCoordsIdx, s16 a2);
@@ -359,11 +362,28 @@ u8 sub_8105BB4(u8 templateIdx, u8 cbAndCoordsIdx, s16 a2);
 /*static*/extern const u8 gUnknown_083ECE3A[];
 /*static*/extern const u16 gUnknown_083ECE42[];
 /*static*/extern const u16 gUnknown_083ECE48[];
+extern const s16 gUnknown_083ECE7E[][2];
+extern const SpriteCallback gUnknown_083ECF0C[];
+extern const struct SpriteTemplate *const gUnknown_083EDB5C[];
+extern const struct SubspriteTable *const gUnknown_083EDBC4[];
+extern const struct SpriteTemplate gSpriteTemplate_83ED6CC;
+extern const struct SpriteTemplate gSpriteTemplate_83ED564;
+extern const struct SpriteTemplate gSpriteTemplate_83ED54C;
+extern const struct SpriteTemplate gSpriteTemplate_83ED534;
+extern const u8 gUnknown_083ECC58[2]; // don't remove this until decompiled through gUnknown_083ECCF8
+extern const struct SpriteTemplate gSpriteTemplate_83ED51C;
 extern const u16 gUnknown_083ECE12[];
+extern const u16 *const gUnknown_083EDE10[];
 extern const u16 gUnknown_083ECE1C[][2];
 extern const u16 gUnknown_083ECE30[];
 extern const u16 sSlotMatchFlags[];
 extern const u16 sSlotPayouts[];
+extern const u8 *const gUnknown_083EDCE4;
+extern const u8 *const gUnknown_083EDCDC;
+extern const u8 sReelTimeGfx[];
+extern const struct SpriteSheet sSlotMachineSpriteSheets[];
+extern const struct SpritePalette gSlotMachineSpritePalettes[];
+extern const u16 *const gUnknown_083EDE20;
 extern const s16 gUnknown_083ECCF8[][2];
 extern const struct BgTemplate gUnknown_085A7424[4];
 extern const struct WindowTemplate gUnknown_085A7434[];
@@ -869,9 +889,9 @@ void SlotMachineSetup_4_0(void)
 
 void SlotMachineSetup_5_0(void)
 {
-    sub_812F908();
-    sub_812F958();
-    sub_812F7E4();
+    sub_8106448();
+    sub_81064B8();
+    sub_81063C0();
     LoadMessageBoxGfx(0, 0x200, 0xF0);
     LoadUserWindowBorderGfx(0, 0x214, 0xE0);
     PutWindowTilemap(0);
@@ -3227,3 +3247,1245 @@ void sub_81050C4(void)
     gSprites[spriteId].oam.priority = 3;
     SetSubspriteTables(gSprites + spriteId, gSubspriteTables_83ED704);
 }
+
+void sub_8105100(void)
+{
+    struct SpriteTemplate spriteTemplate;
+    u8 spriteId;
+    if (gUnknown_0203AAE4 == NULL)
+        gUnknown_0203AAE4 = AllocZeroed(sizeof(struct SpriteFrameImage) * 5);
+
+    gUnknown_0203AAE4[0].data = gUnknown_0203AAD8 + (0 * 0x800);
+    gUnknown_0203AAE4[0].size = 0x800;
+    gUnknown_0203AAE4[1].data = gUnknown_0203AAD8 + (1 * 0x800);
+    gUnknown_0203AAE4[1].size = 0x800;
+    gUnknown_0203AAE4[2].data = gUnknown_0203AAD8 + (2 * 0x800);
+    gUnknown_0203AAE4[2].size = 0x800;
+    gUnknown_0203AAE4[3].data = gUnknown_0203AAD8 + (3 * 0x800);
+    gUnknown_0203AAE4[3].size = 0x800;
+    gUnknown_0203AAE4[4].data = gUnknown_0203AAD8 + (4 * 0x800);
+    gUnknown_0203AAE4[4].size = 0x800;
+
+    spriteTemplate = gSpriteTemplate_83ED45C;
+    spriteTemplate.images = gUnknown_0203AAE4;
+    spriteId = CreateSprite(&spriteTemplate, 280, 80, 1);
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
+    sSlotMachine->unk3F = spriteId;
+}
+
+void sub_810514C(void)
+{
+    DestroySprite(gSprites + sSlotMachine->unk3F);
+    if (gUnknown_0203AAE4 != NULL)
+        FREE_AND_SET_NULL(gUnknown_0203AAE4);
+}
+
+void sub_8105170(struct Sprite *sprite)
+{
+    sprite->pos2.y = sprite->pos2.x = 0;
+    if (sprite->animNum == 4)
+    {
+        sprite->pos2.y = sprite->pos2.x = 8;
+        if ((sprite->animCmdIndex != 0 && sprite->animDelayCounter != 0) || (sprite->animCmdIndex == 0 && sprite->animDelayCounter == 0))
+            sprite->pos2.y = -8;
+    }
+}
+
+void sub_81051C0(void)
+{
+    struct SpriteTemplate spriteTemplate;
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    if (gUnknown_0203AAE8 == NULL)
+        gUnknown_0203AAE8 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+
+    gUnknown_0203AAE8[0].data = gUnknown_0203AAD8 + 0x2800;
+    gUnknown_0203AAE8[0].size = 0x300;
+    spriteTemplate = gSpriteTemplate_83ED474;
+    spriteTemplate.images = gUnknown_0203AAE8;
+    spriteId = CreateSprite(&spriteTemplate, 368, 52, 7);
+    sprite = &gSprites[spriteId];
+    sprite->oam.priority = 1;
+    sprite->coordOffsetEnabled = TRUE;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED73C);
+    sSlotMachine->unk49[0] = spriteId;
+
+    if (gUnknown_0203AAEC == NULL)
+        gUnknown_0203AAEC = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+
+    gUnknown_0203AAEC[0].data = gUnknown_0203AAD8 + 0x2800 + 0x300;
+    gUnknown_0203AAEC[0].size = 0x500;
+    spriteTemplate = gSpriteTemplate_83ED48C;
+    spriteTemplate.images = gUnknown_0203AAEC;
+    spriteId = CreateSprite(&spriteTemplate, 368, 84, 7);
+    sprite = &gSprites[spriteId];
+    sprite->oam.priority = 1;
+    sprite->coordOffsetEnabled = TRUE;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED75C);
+    sSlotMachine->unk49[1] = spriteId;
+}
+
+void sub_8105284_(void)
+{
+    struct SpriteTemplate spriteTemplate;
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    if (gUnknown_0203AAF0 == NULL)
+        gUnknown_0203AAF0 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+
+    gUnknown_0203AAF0[0].data = gUnknown_0203AAD8 + 0x3000;
+    gUnknown_0203AAF0[0].size = 0x600;
+    spriteTemplate = gSpriteTemplate_83ED4A4;
+    spriteTemplate.images = gUnknown_0203AAF0;
+    spriteId = CreateSprite(&spriteTemplate, 0xa8 - gSpriteCoordOffsetX, 0x50, 7);
+    sprite = &gSprites[spriteId];
+    sprite->oam.priority = 1;
+    sprite->coordOffsetEnabled = TRUE;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED78C);
+    sSlotMachine->unk42 = spriteId;
+}
+
+void sub_81052EC(void)
+{
+    u8 i;
+    s16 r5;
+    for (i = 0, r5 = 0; i < 3; i++, r5 += 20)
+    {
+        u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4BC, 0x170, 0, 10);
+        struct Sprite *sprite = &gSprites[spriteId];
+        sprite->oam.priority = 1;
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data[7] = r5;
+        sSlotMachine->unk4B[i] = spriteId;
+    }
+}
+
+void sub_810535C(struct Sprite *sprite)
+{
+    s16 r0 = (u16)(sSlotMachine->unk14 + sprite->data[7]);
+    r0 %= 40;
+    sprite->pos1.y = r0 + 59;
+    StartSpriteAnimIfDifferent(sprite, sub_8102C48(r0 / 20));
+}
+
+void sub_81053A0(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4D4, 0x170, 0x64, 9);
+    struct Sprite *sprite = &gSprites[spriteId];
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->oam.priority = 1;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED7B4);
+    sSlotMachine->unk4E[0] = spriteId;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83ED4D4, 0x120, 0x68, 4);
+    sprite = &gSprites[spriteId];
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->oam.priority = 1;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED7B4);
+    sSlotMachine->unk4E[1] = spriteId;
+}
+
+void sub_810545C(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4EC, 0x170, 0x4c, 11);
+    struct Sprite *sprite = &gSprites[spriteId];
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->oam.priority = 1;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED7D4);
+    sSlotMachine->unk40 = spriteId;
+}
+
+void sub_81054B8(void)
+{
+    u8 i;
+
+    DestroySprite(&gSprites[sSlotMachine->unk40]);
+    for (i = 0; i < 2; i++)
+        DestroySprite(&gSprites[sSlotMachine->unk49[i]]);
+
+    if (gUnknown_0203AAE8 != NULL)
+        FREE_AND_SET_NULL(gUnknown_0203AAE8);
+    if (gUnknown_0203AAEC != NULL)
+        FREE_AND_SET_NULL(gUnknown_0203AAEC);
+
+    for (i = 0; i < 3; i++)
+        DestroySprite(&gSprites[sSlotMachine->unk4B[i]]);
+}
+
+void sub_8105524(void)
+{
+    u8 i;
+
+    for (i = 0; i < 2; i++)
+        DestroySprite(&gSprites[sSlotMachine->unk4E[i]]);
+}
+
+void sub_8105554(void)
+{
+    DestroySprite(&gSprites[sSlotMachine->unk42]);
+    if (gUnknown_0203AAF0 != NULL)
+        FREE_AND_SET_NULL(gUnknown_0203AAF0);
+}
+
+void sub_8105578(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED504, 0x98, 0x20, 5);
+    struct Sprite *sprite = &gSprites[spriteId];
+    sprite->oam.priority = 1;
+    sprite->hFlip = TRUE;
+    sSlotMachine->unk50[0] = spriteId;
+    sprite->data[0] = 8;
+    sprite->data[1] = -1;
+    sprite->data[2] = -1;
+    sprite->data[7] = 0x20;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83ED504, 0xb8, 0x20, 5);
+    sprite = &gSprites[spriteId];
+    sprite->oam.priority = 1;
+    sSlotMachine->unk50[1] = spriteId;
+    sprite->data[1] = 1;
+    sprite->data[2] = -1;
+    sprite->data[7] = 0x20;
+}
+
+void sub_810562C(struct Sprite *sprite)
+{
+    if (sprite->data[0] != 0)
+    {
+        sprite->data[0]--;
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        sprite->invisible = TRUE;
+    }
+    else
+    {
+        sprite->invisible = FALSE;
+        sprite->pos2.x += sprite->data[1];
+        sprite->pos2.y += sprite->data[2];
+        if (++sprite->data[3] >= 8)
+        {
+            sprite->data[0] = sprite->data[7];
+            sprite->data[3] = 0;
+        }
+    }
+}
+
+void sub_8105688(s16 a0)
+{
+    gSprites[sSlotMachine->unk50[0]].data[7] = a0;
+    gSprites[sSlotMachine->unk50[1]].data[7] = a0;
+}
+
+void sub_81056C0(void)
+{
+    u8 i;
+
+    for (i = 0; i < 2; i++)
+        DestroySprite(&gSprites[sSlotMachine->unk50[i]]);
+}
+
+void sub_81056F0(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED51C, 0x48, 0x50, 3);
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].data[0] = 1;
+    gSprites[spriteId].data[5] = 0;
+    gSprites[spriteId].data[6] = 16;
+    gSprites[spriteId].data[7] = 8;
+    sSlotMachine->unk52[0] = spriteId;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83ED51C, 0x68, 0x50, 3);
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].hFlip = TRUE;
+    sSlotMachine->unk52[1] = spriteId;
+}
+
+void sub_8105784(struct Sprite *sprite)
+{
+    u8 sp[] = {16, 0};
+    if (sprite->data[0] && --sprite->data[6] <= 0)
+    {
+        MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(7) << 4) + 0x103, sp[sprite->data[5]], sp[sprite->data[5]], sp[sprite->data[5]]);
+        ++sprite->data[5];
+        sprite->data[5] &= 1;
+        sprite->data[6] = sprite->data[7];
+    }
+}
+
+void sub_81057E8(s16 a0)
+{
+    gSprites[sSlotMachine->unk52[0]].data[7] = a0;
+}
+
+void sub_8105804(void)
+{
+    u8 i;
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(7) << 4) + 0x103, 0, 0, 0);
+    for (i = 0; i < 2; i++)
+        DestroySprite(&gSprites[sSlotMachine->unk52[i]]);
+}
+
+void sub_8105854(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED534, 0xa8, 0x50, 6);
+    gSprites[spriteId].oam.priority = 1;
+    sSlotMachine->unk41 = spriteId;
+}
+
+void sub_8105894(struct Sprite *sprite)
+{
+    sprite->pos2.y = gSpriteCoordOffsetY;
+}
+
+void sub_81058A0(void)
+{
+    DestroySprite(&gSprites[sSlotMachine->unk41]);
+}
+
+void sub_81058C4(void)
+{
+    u8 i;
+    u16 sp[] = {0x0, 0x40, 0x80, 0xC0};
+    for (i = 0; i < 4; i++)
+    {
+        u8 spriteId = CreateSprite(&gSpriteTemplate_83ED54C, 0x50 - gSpriteCoordOffsetX, 0x44, 0);
+        struct Sprite *sprite = &gSprites[spriteId];
+        sprite->oam.priority = 1;
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data[0] = sp[i];
+        sSlotMachine->unk54[i] = spriteId;
+    }
+}
+
+void sub_810594C(struct Sprite *sprite)
+{
+    sprite->data[0] -= 2;
+    sprite->data[0] &= 0xff;
+    sprite->pos2.x = Cos(sprite->data[0], 20);
+    sprite->pos2.y = Sin(sprite->data[0], 6);
+    sprite->subpriority = 0;
+    if (sprite->data[0] >= 0x80)
+    {
+        sprite->subpriority = 2;
+    }
+    if (++sprite->data[1] >= 16)
+    {
+        sprite->hFlip ^= 1;
+        sprite->data[1] = 0;
+    }
+}
+
+void sub_81059B8(void)
+{
+    u8 i;
+    for (i = 0; i < 4; i++)
+    {
+        DestroySprite(&gSprites[sSlotMachine->unk54[i]]);
+    }
+}
+
+void sub_81059E8(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED564, 0xa8, 0x3c, 8);
+    struct Sprite *sprite = &gSprites[spriteId];
+    sprite->oam.priority = 1;
+    sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+    InitSpriteAffineAnim(sprite);
+    sSlotMachine->unk43 = spriteId;
+}
+
+void sub_8105A38(struct Sprite *sprite)
+{
+    if (sprite->data[0] == 0)
+    {
+        if (sprite->affineAnimEnded)
+            sprite->data[0]++;
+    }
+    else if (sprite->data[0] == 1)
+    {
+        sprite->invisible ^= 1;
+        if (++sprite->data[2] >= 24)
+        {
+            sprite->data[0]++;
+            sprite->data[2] = 0;
+        }
+    }
+    else
+    {
+        sprite->invisible = TRUE;
+        if (++sprite->data[2] >= 16)
+            sprite->data[7] = 1;
+    }
+    sprite->data[1] &= 0xff;
+    sprite->data[1] += 16;
+    sprite->pos2.y -= (sprite->data[1] >> 8);
+}
+
+u8 sub_8105ACC(void)
+{
+    return gSprites[sSlotMachine->unk43].data[7];
+}
+
+void sub_8105AEC(void)
+{
+    struct Sprite *sprite = &gSprites[sSlotMachine->unk43];
+    FreeOamMatrix(sprite->oam.matrixNum);
+    DestroySprite(sprite);
+}
+
+u8 sub_8105B1C(s16 x, s16 y)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED6CC, x, y, 12);
+    struct Sprite *sprite = &gSprites[spriteId];
+    sprite->oam.priority = 2;
+    sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+    InitSpriteAffineAnim(sprite);
+    return spriteId;
+}
+
+void sub_8105B70(struct Sprite *sprite)
+{
+    if (sprite->affineAnimEnded)
+        sprite->data[7] = 1;
+}
+
+void sub_8105B88(u8 spriteId)
+{
+    struct Sprite *sprite = &gSprites[spriteId];
+    FreeOamMatrix(sprite->oam.matrixNum);
+    DestroySprite(sprite);
+}
+
+u8 sub_8105BB4(u8 templateIdx, u8 cbAndCoordsIdx, s16 a2)
+{
+    return sub_8105BF8(templateIdx, gUnknown_083ECF0C[cbAndCoordsIdx], gUnknown_083ECE7E[cbAndCoordsIdx][0], gUnknown_083ECE7E[cbAndCoordsIdx][1], a2);
+}
+
+u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
+{
+    struct SpriteTemplate spriteTemplate;
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    spriteTemplate = *gUnknown_083EDB5C[templateIdx];
+    spriteTemplate.images = gUnknown_03001188[templateIdx];
+    spriteId = CreateSprite(&spriteTemplate, x, y, 16);
+    sprite = &gSprites[spriteId];
+    sprite->oam.priority = 3;
+    sprite->callback = callback;
+    sprite->data[6] = a4;
+    sprite->data[7] = 1;
+    if (gUnknown_083EDBC4[templateIdx])
+        SetSubspriteTables(sprite, gUnknown_083EDBC4[templateIdx]);
+    return spriteId;
+}
+
+void sub_8105C64(struct Sprite *sprite)
+{
+    sprite->data[7] = 0;
+}
+
+void sub_8105C6C(struct Sprite *sprite)
+{
+    s16 sp0[] = {4, -4, 4, -4};
+    s16 sp8[] = {4, 4, -4, -4};
+
+    if (sprite->data[1]++ >= 16)
+    {
+        sprite->subspriteTableNum ^= 1;
+        sprite->data[1] = 0;
+    }
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    if (sprite->subspriteTableNum != 0)
+    {
+        sprite->pos2.x = sp0[sprite->data[6]];
+        sprite->pos2.y = sp8[sprite->data[6]];
+    }
+}
+
+void sub_8105CF0(struct Sprite *sprite)
+{
+    sprite->hFlip = TRUE;
+    sub_8105C6C(sprite);
+}
+
+void sub_8105D08(struct Sprite *sprite)
+{
+    sprite->vFlip = TRUE;
+    sub_8105C6C(sprite);
+}
+
+void sub_8105D20(struct Sprite *sprite)
+{
+    sprite->hFlip = TRUE;
+    sprite->vFlip = TRUE;
+    sub_8105C6C(sprite);
+}
+
+void sub_8105D3C(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->pos1.x += 4;
+        if (sprite->pos1.x >= 0xd0)
+        {
+            sprite->pos1.x = 0xd0;
+            sprite->data[0]++;
+        }
+        break;
+    case 1:
+        if (++sprite->data[1] > 90)
+            sprite->data[0]++;
+        break;
+    case 2:
+        sprite->pos1.x += 4;
+        if (sprite->pos1.x >= 0x110)
+            sprite->data[0]++;
+        break;
+    case 3:
+        sprite->data[7] = 0;
+        break;
+    }
+}
+
+void sub_8105DA4(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->pos1.x -= 4;
+        if (sprite->pos1.x <= 0xd0)
+        {
+            sprite->pos1.x = 0xd0;
+            sprite->data[0]++;
+        }
+        break;
+    case 1:
+        if (++sprite->data[1] > 90)
+            sprite->data[0]++;
+        break;
+    case 2:
+        sprite->pos1.x -= 4;
+        if (sprite->pos1.x <= 0x90)
+            sprite->data[0]++;
+        break;
+    case 3:
+        sprite->data[7] = 0;
+        break;
+    }
+}
+
+void sub_8105E08(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        StartSpriteAnim(sprite, sSlotMachine->unk0A - 1);
+        sprite->data[0]++;
+        // fallthrough
+    case 1:
+        if (++sprite->data[1] >= 4)
+        {
+            sprite->data[0]++;
+            sprite->data[1] = 0;
+        }
+        break;
+    case 2:
+        sprite->pos1.x += 4;
+        if (sprite->pos1.x >= 0xd0)
+        {
+            sprite->pos1.x = 0xd0;
+            sprite->data[0]++;
+        }
+        break;
+    case 3:
+        if (++sprite->data[1] > 90)
+            sprite->data[0]++;
+        break;
+    case 4:
+        sprite->pos1.x += 4;
+        if (sprite->pos1.x >= 0xf8)
+            sprite->data[0]++;
+        break;
+    case 5:
+        sprite->data[7] = 0;
+        break;
+    }
+}
+
+void sub_8105EB4(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->animPaused = TRUE;
+        sprite->data[0]++;
+        // fallthrough
+    case 1:
+        sprite->pos1.y += 8;
+        if (sprite->pos1.y >= 0x70)
+        {
+            sprite->pos1.y = 0x70;
+            sprite->data[1] = 16;
+            sprite->data[0]++;
+        }
+        break;
+    case 2:
+        if (sprite->data[2] == 0)
+        {
+            sprite->pos1.y -= sprite->data[1];
+            sprite->data[1] = -sprite->data[1];
+            if (++sprite->data[3] >= 2)
+            {
+                sprite->data[1] >>= 2;
+                sprite->data[3] = 0;
+                if (sprite->data[1] == 0)
+                {
+                    sprite->data[0]++;
+                    sprite->data[7] = 0;
+                    sprite->animPaused = FALSE;
+                }
+            }
+        }
+        sprite->data[2]++;
+        sprite->data[2] &= 0x07;
+        break;
+    }
+}
+
+void sub_8105F54(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        if (++sprite->data[1] > 8)
+            sprite->data[0]++;
+        break;
+    case 1:
+        sprite->pos1.y += 2;
+        if (sprite->pos1.y >= 0x30)
+        {
+            sprite->pos1.y = 0x30;
+            sprite->data[0]++;
+            sprite->data[7] = 0;
+        }
+        break;
+    }
+}
+
+void sub_8105F9C(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->invisible = TRUE;
+        if (++sprite->data[1] > 0x20)
+        {
+            sprite->data[0]++;
+            sprite->data[1] = 5;
+            sprite->oam.mosaic = TRUE;
+            sprite->invisible = FALSE;
+            StartSpriteAnim(sprite, 1);
+            SetGpuReg(REG_OFFSET_MOSAIC, ((sprite->data[1] << 4) | sprite->data[1]) << 8);
+        }
+        break;
+    case 1:
+        sprite->data[1] -= (sprite->data[2] >> 8);
+        if (sprite->data[1] < 0)
+            sprite->data[1] = 0;
+        SetGpuReg(REG_OFFSET_MOSAIC, ((sprite->data[1] << 4) | sprite->data[1]) << 8);
+        sprite->data[2] &= 0xff;
+        sprite->data[2] += 0x80;
+        if (sprite->data[1] == 0)
+        {
+            sprite->data[0]++;
+            sprite->data[7] = 0;
+            sprite->oam.mosaic = FALSE;
+            StartSpriteAnim(sprite, 0);
+        }
+        break;
+    }
+}
+
+void sub_8106058(struct Sprite *sprite)
+{
+    if (sprite->data[1] < 3)
+    {
+        LoadPalette(gUnknown_083EDE10[sprite->data[1]], (IndexOfSpritePaletteTag(6) << 4) + 0x100, 0x20);
+        if (++sprite->data[2] >= 4)
+        {
+            sprite->data[1]++;
+            sprite->data[2] = 0;
+        }
+    }
+    else
+    {
+        LoadPalette(gUnknown_083EDE10[sprite->data[1]], (IndexOfSpritePaletteTag(6) << 4) + 0x100, 0x20);
+        if (++sprite->data[2] >= 25)
+        {
+            sprite->data[1] = 0;
+            sprite->data[2] = 0;
+        }
+    }
+    StartSpriteAnimIfDifferent(sprite, 1);
+    sprite->data[7] = 0;
+}
+
+void sub_81060FC(struct Sprite *sprite)
+{
+    s16 sp00[] = {0, -40, 0, 0, 48, 0, 24, 0};
+    s16 sp10[] = {-32, 0, -32, -48, 0, -48, 0, -48};
+    s16 sp20[] = {16, 12, 16, 0, 0, 4, 8, 8};
+
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->pos2.x = sp00[sprite->data[6]];
+        sprite->pos2.y = sp10[sprite->data[6]];
+        sprite->data[1] = sp20[sprite->data[6]];
+        sprite->data[0]++;
+        // fallthrough
+    case 1:
+        if (sprite->data[1]-- == 0)
+            sprite->data[0]++;
+        break;
+    case 2:
+        if (sprite->pos2.x > 0)
+            sprite->pos2.x -= 4;
+        else if (sprite->pos2.x < 0)
+            sprite->pos2.x += 4;
+
+        if (sprite->pos2.y > 0)
+            sprite->pos2.y -= 4;
+        else if (sprite->pos2.y < 0)
+            sprite->pos2.y += 4;
+
+        if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
+            sprite->data[0]++;
+        break;
+    }
+}
+
+void sub_81061C8(struct Sprite *sprite)
+{
+    s16 sp0[] = {160, 192, 224, 104, 80, 64, 48, 24};
+
+    if (sprite->data[0] == 0)
+    {
+        sprite->data[0]++;
+        sprite->data[1] = 12;
+    }
+    sprite->pos2.x = Cos(sp0[sprite->data[6]], sprite->data[1]);
+    sprite->pos2.y = Sin(sp0[sprite->data[6]], sprite->data[1]);
+    if (sprite->data[1] != 0)
+        sprite->data[1]--;
+}
+
+void sub_8106230(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            sSlotMachine->winIn = 0x2f;
+            sSlotMachine->winOut = 0x3f;
+            sSlotMachine->win0v = 0x2088;
+            sprite->invisible = TRUE;
+            sprite->data[0]++;
+            // fallthrough
+        case 1:
+            sprite->data[1] += 2;
+            sprite->data[2] = sprite->data[1] + 0xb0;
+            sprite->data[3] = 0xf0 - sprite->data[1];
+            if (sprite->data[2] > 0xd0)
+                sprite->data[2] = 0xd0;
+            if (sprite->data[3] < 0xd0)
+                sprite->data[3] = 0xd0;
+            sSlotMachine->win0h = (sprite->data[2] << 8) | sprite->data[3];
+            if (sprite->data[1] > 0x33)
+            {
+                sprite->data[0]++;
+                sSlotMachine->winIn = 0x3f;
+            }
+            break;
+        case 2:
+            if (sSlotMachine->bet == 0)
+                break;
+            sub_8104D30(5, SpriteCallbackDummy, 0xd0, 0x74, 0);
+            sSlotMachine->win0h = 0xc0e0;
+            sSlotMachine->win0v = 0x6880;
+            sSlotMachine->winIn = 0x2f;
+            sprite->data[0]++;
+            sprite->data[1] = 0;
+            // fallthrough
+        case 3:
+            sprite->data[1] += 2;
+            sprite->data[2] = sprite->data[1] + 0xc0;
+            sprite->data[3] = 0xe0 - sprite->data[1];
+            if (sprite->data[2] > 0xd0)
+                sprite->data[2] = 0xd0;
+            if (sprite->data[3] < 0xd0)
+                sprite->data[3] = 0xd0;
+            sSlotMachine->win0h = (sprite->data[2] << 8) | sprite->data[3];
+            if (sprite->data[1] > 0x0f)
+            {
+                sprite->data[0]++;
+                sSlotMachine->winIn = 0x3f;
+            }
+            break;
+    }
+}
+
+void nullsub_70(void)
+{
+}
+
+void sub_8106364(void)
+{
+    SetGpuReg(REG_OFFSET_MOSAIC, 0);
+}
+
+void sub_8106370(void)
+{
+    LoadPalette(gUnknown_083EDE20, (IndexOfSpritePaletteTag(6) << 4) + 0x100, 0x20);
+}
+
+void sub_810639C(void)
+{
+    sSlotMachine->win0h = 0xf0;
+    sSlotMachine->win0v = 0xa0;
+    sSlotMachine->winIn = 0x3f;
+    sSlotMachine->winOut = 0x3f;
+}
+
+void sub_81063C0(void)
+{
+    u8 i;
+
+    sub_8106404();
+    gUnknown_0203AAD4 = Alloc(0x3200);
+    LZDecompressWram(gSlotMachineReelTime_Gfx, gUnknown_0203AAD4);
+    gUnknown_0203AAD8 = Alloc(0x3600);
+    LZDecompressWram(sReelTimeGfx, gUnknown_0203AAD8);
+    gUnknown_0203AB30 = AllocZeroed(sizeof(struct SpriteSheet) * 22);
+    for (i = 0; i < 22; i++)
+    {
+        gUnknown_0203AB30[i].data = sSlotMachineSpriteSheets[i].data;
+        gUnknown_0203AB30[i].size = sSlotMachineSpriteSheets[i].size;
+        gUnknown_0203AB30[i].tag = sSlotMachineSpriteSheets[i].tag;
+    }
+    gUnknown_0203AB30[17].data = gUnknown_0203AAD4 + 0xA00;
+    gUnknown_0203AB30[18].data = gUnknown_0203AAD4 + 0x1400;
+    gUnknown_0203AB30[19].data = gUnknown_0203AAD4 + 0x1600;
+    gUnknown_0203AB30[20].data = gUnknown_0203AAD4 + 0x1900;
+    LoadSpriteSheets(gUnknown_0203AB30);
+    LoadSpritePalettes(gSlotMachineSpritePalettes);
+}
+
+void sub_8106404(void)
+{
+    u8 *dest;
+    u8 i, j;
+
+    gUnknown_0203AB2C = AllocZeroed(sizeof(struct SpriteSheet));
+    gUnknown_0203AAE0 = AllocZeroed(0x2000);
+    dest = gUnknown_0203AAE0;
+    for (i = 0; i < 0x40; i++)
+    {
+        for (j = 0; j < 0x20; j++, dest++)
+            *dest = gUnknown_083EDCDC[j];
+    }
+    gUnknown_0203AB2C->data = gUnknown_0203AAE0;
+    gUnknown_0203AB2C->size = 0x800;
+    gUnknown_0203AB2C->tag  = 0x11;
+    LoadSpriteSheet(gUnknown_0203AB2C);
+}
+
+extern const u8 gSlotMachineMenu_Gfx[];
+extern const u8 gSlotMachineMenu_Tilemap[];
+extern const u8 gUnknown_08DCEC70[];
+extern const u16 gSlotMachineMenu_Pal[];
+
+void sub_8106448(void)
+{
+    gUnknown_0203AAC8 = Alloc(0x2200);
+    LZDecompressWram(gSlotMachineMenu_Gfx, gUnknown_0203AAC8);
+    LoadBgTiles(2, gUnknown_0203AAC8, 0x2200, 0);
+    LoadPalette(gSlotMachineMenu_Pal, 0, 160);
+    LoadPalette(gPalette_83EDE24, 208, 32);
+}
+
+void sub_81064B8(void)
+{
+    sub_812F968();
+    LoadSlotMachineWheelOverlay();
+}
+
+void sub_812F968(void)
+{
+    LoadBgTilemap(2, gSlotMachineMenu_Tilemap, 0x500, 0);
+}
+
+void LoadSlotMachineWheelOverlay(void)
+{
+    s16 x, y, dx;
+
+    for (x = 4; x < 18; x += 5)
+    {
+        for (dx = 0; dx < 4; dx++)
+        {
+            LoadBgTilemap(3, gUnknown_0203AAD0,     2, x + dx + 5  * 32);
+            LoadBgTilemap(3, gUnknown_0203AAD0 + 1, 2, x + dx + 13 * 32);
+            LoadBgTilemap(3, gUnknown_0203AAD0 + 2, 2, x + dx + 6  * 32);
+            LoadBgTilemap(3, gUnknown_0203AAD0 + 3, 2, x + dx + 12 * 32);
+        }
+
+        LoadBgTilemap(3, gUnknown_0203AAD0 + 4, 2, x + 6 * 32);
+        LoadBgTilemap(3, gUnknown_0203AAD0 + 5, 2, x + 12 * 32);
+
+        for (y = 7; y <= 11; y++)
+            LoadBgTilemap(3, gUnknown_0203AAD0 + 6, 2, x + y * 32);
+    }
+}
+
+void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4)
+{
+    gUnknown_0203AADC[0] = arg1;
+    gUnknown_0203AADC[1] = arg2;
+    gUnknown_0203AADC[2] = arg3;
+    gUnknown_0203AADC[3] = arg4;
+
+    LoadBgTilemap(2, gUnknown_0203AADC,     2, 15 * 32 + arg0);
+    LoadBgTilemap(2, gUnknown_0203AADC + 1, 2, 15 * 32 + 1 + arg0);
+    LoadBgTilemap(2, gUnknown_0203AADC + 2, 2, 16 * 32 + arg0);
+    LoadBgTilemap(2, gUnknown_0203AADC + 3, 2, 16 * 32 + 1 + arg0);
+}
+
+void sub_81065DC(void)
+{
+    LoadBgTilemap(2, gUnknown_08DCEC70, 0x500, 0);
+    HideBg(3);
+}
+
+void SlotMachineSetup_9_0(void)
+{
+    gUnknown_03001188[0]  = gUnknown_0203AAF4;
+    gUnknown_03001188[1]  = gUnknown_0203AAF8;
+    gUnknown_03001188[2]  = gUnknown_0203AAFC;
+    gUnknown_03001188[3]  = gUnknown_0203AB04;
+    gUnknown_03001188[4]  = gUnknown_0203AB08;
+    gUnknown_03001188[5]  = gUnknown_0203AB18;
+    gUnknown_03001188[6]  = gUnknown_0203AB1C;
+    gUnknown_03001188[7]  = gUnknown_0203AB20;
+    gUnknown_03001188[8]  = gUnknown_0203AB24;
+    gUnknown_03001188[9]  = gUnknown_0203AB28;
+    gUnknown_03001188[10] = gUnknown_0203AB00;
+    gUnknown_03001188[11] = gUnknown_0203AB00;
+    gUnknown_03001188[12] = gUnknown_0203AB00;
+    gUnknown_03001188[13] = gUnknown_0203AB00;
+    gUnknown_03001188[14] = gUnknown_0203AB0C;
+    gUnknown_03001188[15] = gUnknown_0203AB0C;
+    gUnknown_03001188[16] = gUnknown_0203AB0C;
+    gUnknown_03001188[17] = gUnknown_0203AB0C;
+    gUnknown_03001188[18] = gUnknown_0203AB0C;
+    gUnknown_03001188[19] = gUnknown_0203AB10;
+    gUnknown_03001188[20] = gUnknown_0203AB10;
+    gUnknown_03001188[21] = gUnknown_0203AB10;
+    gUnknown_03001188[22] = gUnknown_0203AB14;
+    gUnknown_03001188[23] = gUnknown_0203AB14;
+    gUnknown_03001188[24] = gUnknown_0203AB14;
+    gUnknown_03001188[25] = NULL;
+}
+
+void SlotMachineSetup_8_0(void)
+{
+    gUnknown_0203AAF4 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AAF4[0].data = gUnknown_0203AAD4;
+	gUnknown_0203AAF4[0].size = 0x600;
+
+	gUnknown_0203AAF8 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AAF8[0].data = gUnknown_0203AAD4 + 0x600;
+	gUnknown_0203AAF8[0].size = 0x200;
+
+	gUnknown_0203AAFC = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AAFC[0].data = gUnknown_0203AAD4 + 0x800;
+	gUnknown_0203AAFC[0].size = 0x200;
+
+	gUnknown_0203AB00 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AB00[0].data = gUnknown_0203AAD4 + 0xA00;
+	gUnknown_0203AB00[0].size = 0x200;
+
+	gUnknown_0203AB04 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AB04[0].data = gUnknown_0203AAD4 + 0xC00;
+	gUnknown_0203AB04[0].size = 0x300;
+
+	gUnknown_0203AB08 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AB08[0].data = gUnknown_0203AAD4 + 0x1000;
+	gUnknown_0203AB08[0].size = 0x400;
+
+	gUnknown_0203AB0C = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AB0C[0].data = gUnknown_0203AAD4 + 0x1400;
+	gUnknown_0203AB0C[0].size = 0x200;
+
+	gUnknown_0203AB10 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AB10[0].data = gUnknown_0203AAD4 + 0x1600;
+	gUnknown_0203AB10[0].size = 0x300;
+
+	gUnknown_0203AB14 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AB14[0].data = gUnknown_0203AAD4 + 0x1900;
+	gUnknown_0203AB14[0].size = 0x300;
+
+	gUnknown_0203AB18 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+	gUnknown_0203AB18[0].data = gUnknown_0203AAD4 + 0x1C00;
+	gUnknown_0203AB18[0].size = 0x200;
+	gUnknown_0203AB18[1].data = gUnknown_0203AAD4 + 0x1E00;
+	gUnknown_0203AB18[1].size = 0x200;
+
+	gUnknown_0203AB1C = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+	gUnknown_0203AB1C[0].data = gUnknown_0203AAD4 + 0x2000;
+	gUnknown_0203AB1C[0].size = 640;
+
+	gUnknown_0203AB20 = AllocZeroed(sizeof(struct SpriteFrameImage) * 5);
+	gUnknown_0203AB20[0].data = gUnknown_0203AAD4 + 0x2280;
+	gUnknown_0203AB20[0].size = 0x80;
+	gUnknown_0203AB20[1].data = gUnknown_0203AAD4 + 0x2300;
+	gUnknown_0203AB20[1].size = 0x80;
+	gUnknown_0203AB20[2].data = gUnknown_0203AAD4 + 0x2380;
+	gUnknown_0203AB20[2].size = 0x80;
+	gUnknown_0203AB20[3].data = gUnknown_0203AAD4 + 0x2400;
+	gUnknown_0203AB20[3].size = 0x80;
+	gUnknown_0203AB20[4].data = gUnknown_0203AAD4 + 0x2480;
+	gUnknown_0203AB20[4].size = 0x80;
+
+	gUnknown_0203AB24 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+	gUnknown_0203AB24[0].data = gUnknown_0203AAD4 + 0x2600;
+	gUnknown_0203AB24[0].size = 0x480;
+	gUnknown_0203AB24[1].data = gUnknown_0203AAD4 + 10880;
+	gUnknown_0203AB24[1].size = 0x480;
+
+	gUnknown_0203AB28 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+	gUnknown_0203AB28[0].data = gUnknown_0203AAD4 + 0x2F00;
+	gUnknown_0203AB28[0].size = 0x180;
+	gUnknown_0203AB28[1].data = gUnknown_0203AAD4 + 0x3080;
+	gUnknown_0203AB28[1].size = 0x180;
+}
+
+const u8 sReelSymbols[][21] =
+{
+    {
+        SLOT_MACHINE_TAG_7_RED,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_7_BLUE,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_7_RED,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_7_BLUE,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY
+    },
+    {
+        SLOT_MACHINE_TAG_7_RED,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_7_BLUE,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_CHERRY
+    },
+    {
+        SLOT_MACHINE_TAG_7_RED,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_7_BLUE,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_CHERRY
+    },
+};
+
+const u8 gUnknown_083ECCF1[] = {
+    1, 0, 5, 4, 3, 2
+};
+
+const s16 gUnknown_083ECCF8[][2] = {
+    {0,  6},
+    {0, 10},
+    {0,  2}
+};
+
+const u8 gUnknown_083ECD04[][3] = {
+    {1, 1, 12},
+    {1, 1, 14},
+    {2, 2, 14},
+    {2, 2, 14},
+    {2, 3, 16},
+    {3, 3, 16}
+};
+
+const u8 gUnknown_083ECD16[][6] = {
+    {25, 25, 30, 40, 40, 50},
+    {25, 25, 30, 30, 35, 35},
+    {25, 25, 30, 25, 25, 30}
+};
+
+const u8 gUnknown_083ECD28[][6] = {
+    {20, 25, 25, 20, 25, 25},
+    {12, 15, 15, 18, 19, 22},
+    {25, 25, 25, 30, 30, 40},
+    {25, 25, 20, 20, 15, 15},
+    {40, 40, 35, 35, 40, 40}
+};
+
+const u8 gUnknown_083ECD46[][17] = {
+    {243, 243, 243,  80,  80,  80,  80,  40,  40,  40,  40,  40,  40,   5,   5,   5,   5},
+    {  5,   5,   5, 150, 150, 150, 150, 130, 130, 130, 130, 130, 130, 100, 100, 100,   5},
+    {  4,   4,   4,  20,  20,  20,  20,  80,  80,  80,  80,  80,  80, 100, 100, 100,  40},
+    {  2,   2,   2,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3,  45,  45,  45, 100},
+    {  1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   5,   5,   5, 100},
+    {  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   6}
+};
+
+const u8 gUnknown_083ECDAC[][17] = {
+    { 243, 243, 243, 200, 200, 200, 200, 160, 160, 160, 160, 160, 160,  70,  70,  70,   5},
+    {   5,   5,   5,  25,  25,  25,  25,   5,   5,   5,   5,   5,   5,   2,   2,   2,   6},
+    {   4,   4,   4,  25,  25,  25,  25,  30,  30,  30,  30,  30,  30,  40,  40,  40,  35},
+    {   2,   2,   2,   3,   3,   3,   3,  30,  30,  30,  30,  30,  30, 100, 100, 100,  50},
+    {   1,   1,   1,   2,   2,   2,   2,  30,  30,  30,  30,  30,  30,  40,  40,  40, 100},
+    {   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   4,   4,   4,  60}
+};
+
+const u16 gUnknown_083ECE12[] = {
+    0x80, 0xaf, 0xc8, 0xe1, 0x100
+};
+
+const u16 gUnknown_083ECE1C[][2] = {
+    {10,  5},
+    {10, 10},
+    {10, 15},
+    {10, 25},
+    {10, 35}
+};
+
+const u16 gUnknown_083ECE30[] = {
+    0, 5, 10, 15, 20
+};
+
+const u8 gUnknown_083ECE3A[] = {
+    6, 4, 3, 2, 5, 0, 0, 0
+};
+
+const u16 gUnknown_083ECE42[] = {
+    0x80, 0x20, 0x40
+};
+
+const u16 gUnknown_083ECE48[] = {
+    0x10, 0x08, 0x04, 0x02, 0x01
+};
+
+const u8 sSym2Match[] = {
+    SLOT_MACHINE_MATCHED_777_RED,
+    SLOT_MACHINE_MATCHED_777_BLUE,
+    SLOT_MACHINE_MATCHED_AZURILL,
+    SLOT_MACHINE_MATCHED_LOTAD,
+    SLOT_MACHINE_MATCHED_1CHERRY,
+    SLOT_MACHINE_MATCHED_POWER,
+    SLOT_MACHINE_MATCHED_REPLAY
+};
+
+const u16 sSlotMatchFlags[] = {
+    1 << SLOT_MACHINE_MATCHED_1CHERRY,
+    1 << SLOT_MACHINE_MATCHED_2CHERRY,
+    1 << SLOT_MACHINE_MATCHED_REPLAY,
+    1 << SLOT_MACHINE_MATCHED_LOTAD,
+    1 << SLOT_MACHINE_MATCHED_AZURILL,
+    1 << SLOT_MACHINE_MATCHED_POWER,
+    1 << SLOT_MACHINE_MATCHED_777_MIXED,
+    1 << SLOT_MACHINE_MATCHED_777_RED,
+    1 << SLOT_MACHINE_MATCHED_777_BLUE
+};
+
+const u16 sSlotPayouts[] = {
+    2, 4, 0, 6, 12, 3, 90, 300, 300
+};
+
+const s16 gUnknown_083ECE7E[][2] = {
+    { 0xd0, 0x38},
+    { 0xb8, 0x00},
+    { 0xc8, 0x08},
+    { 0xd8, 0x10},
+    { 0xe8, 0x18},
+    { 0xd0, 0x48},
+    { 0xd0, 0x08},
+    { 0xd0, 0x40},
+    { 0xd0, 0x38},
+    { 0xc0, 0x58},
+    { 0xe0, 0x58},
+    { 0xc0, 0x78},
+    { 0xe0, 0x78},
+    { 0x90, 0x38},
+    {0x110, 0x58},
+    { 0xa8, 0x70},
+    { 0xd0, 0x54},
+    { 0xd0, 0x70},
+    { 0xbc, 0x34},
+    { 0xd0, 0x34},
+    { 0xe4, 0x34},
+    { 0xb8, 0x48},
+    { 0xc4, 0x48},
+    { 0xd0, 0x48},
+    { 0xdc, 0x48},
+    { 0xe8, 0x48},
+    { 0xbc, 0x34},
+    { 0xd0, 0x34},
+    { 0xe4, 0x34},
+    { 0xb8, 0x48},
+    { 0xc4, 0x48},
+    { 0xd0, 0x48},
+    { 0xdc, 0x48},
+    { 0xe8, 0x48},
+    { 0x00, 0x00}
+};
