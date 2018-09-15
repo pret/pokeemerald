@@ -26,35 +26,6 @@
 #include "window.h"
 
 extern u8 gOamLimit;
-extern u16 *gUnknown_0203AAC8;
-extern u16 *gUnknown_0203AACC;
-extern u16 *gUnknown_0203AAD0;
-extern u16 *gUnknown_0203AADC;
-extern struct SpriteFrameImage *gUnknown_0203AAF4;
-extern struct SpriteFrameImage *gUnknown_0203AAF8;
-extern struct SpriteFrameImage *gUnknown_0203AAFC;
-extern struct SpriteFrameImage *gUnknown_0203AB00;
-extern struct SpriteFrameImage *gUnknown_0203AB04;
-extern struct SpriteFrameImage *gUnknown_0203AB08;
-extern struct SpriteFrameImage *gUnknown_0203AB0C;
-extern struct SpriteFrameImage *gUnknown_0203AB10;
-extern struct SpriteFrameImage *gUnknown_0203AB14;
-extern struct SpriteFrameImage *gUnknown_0203AB18;
-extern struct SpriteFrameImage *gUnknown_0203AB1C;
-extern struct SpriteFrameImage *gUnknown_0203AB20;
-extern struct SpriteFrameImage *gUnknown_0203AB24;
-extern struct SpriteFrameImage *gUnknown_0203AB28;
-extern struct SpriteFrameImage *gUnknown_0203AAE4;
-extern struct SpriteFrameImage *gUnknown_0203AAE8;
-extern struct SpriteFrameImage *gUnknown_0203AAEC;
-extern struct SpriteFrameImage *gUnknown_0203AAF0;
-extern u8 *gUnknown_0203AAD4;
-extern u8 *gUnknown_0203AAD8;
-extern u8 *gUnknown_0203AAE0;
-extern struct SpriteSheet *gUnknown_0203AB2C;
-extern struct SpriteSheet *gUnknown_0203AB30;
-
-extern struct SpriteFrameImage *gUnknown_03001188[];
 
 // Text
 extern const u8 gText_YouDontHaveThreeCoins[];
@@ -140,8 +111,6 @@ struct SlotMachineEwramStruct
     /*0x64*/ MainCallback prevMainCb;
 };
 
-extern struct SlotMachineEwramStruct *sSlotMachine;
-
 struct UnkStruct1
 {
     /*0x00*/ u8 unk00;
@@ -151,217 +120,250 @@ struct UnkStruct1
 
 #define SLOTMACHINE_GFX_TILES 233
 
-/*static*/void CB2_SlotMachineSetup(void);
-/*static*/void CB2_SlotMachineLoop(void);
-/*static*/void PlaySlotMachine_Internal(u8 arg0, MainCallback cb);
-/*static*/void SlotMachineDummyTask(u8 taskId);
-/*static*/void SlotMachineSetup_0_0(void);
-/*static*/void SlotMachineSetup_6_2(void);
-/*static*/void SlotMachineSetup_1_0(void);
-/*static*/void SlotMachineSetup_2_0(void);
-/*static*/void SlotMachineSetup_2_1(void);
-/*static*/void SlotMachineSetup_0_1(void);
-/*static*/void SlotMachineSetup_3_0(void);
-/*static*/void SlotMachineSetup_4_0(void);
-/*static*/void SlotMachineSetup_5_0(void);
-/*static*/void SlotMachineSetup_6_0(void);
-/*static*/void SlotMachineSetup_6_1(void);
-/*static*/void SlotMachineSetup_8_0(void);
-/*static*/void SlotMachineSetup_9_0(void);
-/*static*/void SlotMachineSetup_10_0(void);
-/*static*/void SlotMachineSetup_10_1(void);
-/*static*/void sub_8101D04(void);
-/*static*/void sub_8104DA4(void);
-/*static*/void sub_8101D24(u8 taskId);
-/*static*/bool8 sub_8101D5C(struct Task *task);
-/*static*/bool8 sub_8101D8C(struct Task *task);
-/*static*/bool8 sub_8101DB0(struct Task *task);
-/*static*/bool8 sub_8101DF4(struct Task *task);
-/*static*/bool8 sub_8101E10(struct Task *task);
-/*static*/bool8 sub_8101E3C(struct Task *task);
-/*static*/bool8 sub_8101F44(struct Task *task);
-/*static*/bool8 sub_8101F60(struct Task *task);
-/*static*/bool8 sub_8101F88(struct Task *task);
-/*static*/bool8 sub_8101FA4(struct Task *task);
-/*static*/bool8 sub_8102008(struct Task *task);
-/*static*/bool8 sub_8102034(struct Task *task);
-/*static*/bool8 sub_8102058(struct Task *task);
-/*static*/bool8 sub_8102090(struct Task *task);
-bool8 sub_81020C8(struct Task *task);
-/*static*/bool8 sub_81021E0(struct Task *task);
-/*static*/bool8 sub_81021FC(struct Task *task);
-/*static*/bool8 sub_8102264(struct Task *task);
-/*static*/bool8 sub_81022A0(struct Task *task);
-/*static*/bool8 sub_81022CC(struct Task *task);
-/*static*/bool8 sub_81022F0(struct Task *task);
-/*static*/bool8 sub_8102318(struct Task *task);
-/*static*/bool8 sub_8102344(struct Task *task);
-/*static*/bool8 sub_810239C(struct Task *task);
-/*static*/bool8 sub_81023B8(struct Task *task);
-/*static*/bool8 sub_81023E0_(struct Task *task);
-/*static*/bool8 sub_81023FC(struct Task *task);
-/*static*/bool8 sub_8102424(struct Task *task);
-/*static*/bool8 sub_8102460(struct Task *task);
-/*static*/void sub_8102484(void);
-/*static*/void sub_81024F0(void);
-/*static*/bool8 sub_8102540_(void);
-/*static*/u8 sub_8102578(void);
-/*static*/u16 dp15_jump_random_unknown(void);
-/*static*/u8 sub_81025BC(void);
-/*static*/void CheckMatch(void);
-/*static*/void CheckMatch_CenterRow(void);
-/*static*/void CheckMatch_TopAndBottom(void);
-/*static*/void CheckMatch_Diagonals(void);
-/*static*/u8 GetMatchFromSymbolsInRow(u8 c1, u8 c2, u8 c3);
-/*static*/void sub_8102A24(void);
-/*static*/void sub_8102A64(u8 taskId);
-/*static*/bool8 sub_8102A44(void);
-/*static*/bool8 sub_8102A9C(struct Task *task);
-/*static*/bool8 sub_8102AD0(struct Task *task);
-/*static*/bool8 sub_8102B80(struct Task *task);
-/*static*/u8 GetTagOfReelSymbolOnScreenAtPos(u8 x, s16 y);
-/*static*/void sub_8102DA8(void);
-/*static*/void sub_8102DEC(u8 a0);
-/*static*/void sub_8102E1C(u8 a0);
-/*static*/bool8 sub_8102E40(u8 a0);
-/*static*/void sub_8102E68(u8 taskId);
-/*static*/bool8 sub_8102EA0(struct Task *task);
-/*static*/bool8 sub_8102EA4(struct Task *task);
-/*static*/bool8 sub_8102EC0(struct Task *task);
-/*static*/bool8 sub_8102F4C(struct Task *task);
-/*static*/bool8 sub_8103008(struct Task *task);
-/*static*/bool8 sub_810305C(void);
-/*static*/bool8 sub_8103154(u8 a0, u8 a1);
-/*static*/bool8 sub_81031B4(u8 a0, u8 a1);
-/*static*/bool8 sub_81032C0(void);
-/*static*/bool8 sub_81032E8(void);
-/*static*/bool8 sub_810333C(void);
-/*static*/bool8 sub_81033DC(void);
-/*static*/bool8 sub_810341C(u8 a0);
-/*static*/bool8 sub_810347C(u8 a0);
-/*static*/void sub_81034F4(void);
-/*static*/void sub_8103540(void);
-/*static*/void sub_8103564(void);
-/*static*/void j5_08111E84(void);
-/*static*/void sub_8103668(void);
-/*static*/void sub_810380C(void);
-/*static*/void sub_8103830(void);
-/*static*/void sub_8103910(void);
-/*static*/void sub_8103A78(void);
-/*static*/void sub_8103C14(u8 a0);
-/*static*/void sub_8103C48(u8 taskId);
-/*static*/void sub_8103D50(u8 a0);
-/*static*/void sub_8103C78(struct Task *task, u8 taskId);
-/*static*/void sub_8103CAC(struct Task *task, u8 taskId);
-/*static*/void sub_8103CC8(struct Task *task, u8 taskId);
-/*static*/void sub_8103D8C(u8 a0);
-/*static*/void sub_8103DC8(void);
-/*static*/void sub_8103E04(u8 a0);
-/*static*/bool8 sub_8103E38(void);
-/*static*/bool8 sub_8103E7C(void);
-/*static*/bool8 sub_8103EAC(u8 spriteId);
-/*static*/void sub_8103EE4(struct Sprite *sprite);
-/*static*/void sub_8103F70(void);
-/*static*/bool8 sub_8103FA0(void);
-/*static*/void sub_8103FE8_(u8 taskId);
-/*static*/void sub_8104048(void);
-/*static*/void sub_8104064(u8 pikaPower);
-/*static*/bool8 sub_81040C8(void);
-/*static*/void sub_81040E8(u8 taskId);
-/*static*/void nullsub_68(struct Task *task);
-/*static*/void sub_810411C(struct Task *task);
-/*static*/void sub_8104144(struct Task *task);
-/*static*/void sub_81041AC(struct Task *task);
-/*static*/void sub_812D394(struct Task *task);
-/*static*/void sub_810423C(u8 pikaPower);
-/*static*/void sub_810430C(void);
-/*static*/bool8 sub_810432C(void);
-/*static*/void sub_810434C(u8 taskId);
-/*static*/void sub_810437C(struct Task *task);
-/*static*/void sub_81043EC(struct Task *task);
-/*static*/void sub_8104468(struct Task *task);
-/*static*/void sub_8104498(struct Task *task);
-/*static*/void sub_8104548(struct Task *task);
-/*static*/void sub_8104598(struct Task *task);
-/*static*/void sub_81045CC(struct Task *task);
-/*static*/void sub_810463C(struct Task *task);
-/*static*/void sub_81046C0(struct Task *task);
-/*static*/void sub_8104764(struct Task *task);
-/*static*/void sub_8104794(struct Task *task);
-/*static*/void sub_81047EC(struct Task *task);
-/*static*/void sub_8104860(struct Task *task);
-/*static*/void sub_81048A8(struct Task *task);
-/*static*/void sub_81048CC(struct Task *task);
-/*static*/void sub_8104940(struct Task *task);
-/*static*/void sub_81049C8(struct Task *task);
-/*static*/void sub_81049F8(struct Task *task);
-/*static*/void sub_8104A40(s16 a0, s16 a1);
-/*static*/void sub_8104A88(s16 a0);
-/*static*/void sub_8104AB8(u8 a0);
-/*static*/bool8 sub_8104AEC(void);
-/*static*/void sub_8104B0C(u8 taskId);
-/*static*/void sub_8104B3C(struct Task *task);
-/*static*/void sub_8104B60(struct Task *task);
-/*static*/void sub_8104B80(struct Task *task);
-/*static*/void sub_8104BC8(struct Task *task);
-/*static*/void sub_812DD78(struct Task *task);
-/*static*/void sub_8104BFC(struct Task *task);
-/*static*/void sub_812DE14(struct Task *task);
-/*static*/void sub_812DE30(struct Task *task);
-/*static*/void sub_8104C44(struct Task *task);
-/*static*/void sub_8104C5C(void);
-/*static*/void sub_8104CAC(u8 arg0);
-/*static*/bool8 sub_8104E18(void);
-/*static*/void nullsub_69(struct Task *task);
-/*static*/void sub_8104E74_(u8 taskId);
-/*static*/void sub_8104EA8(void);
-/*static*/void sub_8104F8C(void);
-/*static*/void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3);
-/*static*/void sub_81050C4(void);
-/*static*/void sub_8105100(void);
-/*static*/void sub_810514C(void);
-/*static*/void sub_81051C0(void);
-/*static*/void sub_8105284_(void);
-/*static*/void sub_81052EC(void);
-/*static*/void sub_81053A0(void);
-/*static*/void sub_810545C(void);
-/*static*/void sub_81054B8(void);
-/*static*/void sub_8105524(void);
-/*static*/void sub_8105554(void);
-/*static*/void sub_8105578(void);
-/*static*/void sub_8105688(s16 a0);
-/*static*/void sub_81056C0(void);
-/*static*/void sub_81056F0(void);
-/*static*/void sub_81057E8(s16 a0);
-/*static*/void sub_8105804(void);
-/*static*/void sub_8105854(void);
-/*static*/void sub_81058A0(void);
-/*static*/void sub_81058C4(void);
-/*static*/void sub_81059B8(void);
-/*static*/void sub_81059E8(void);
-/*static*/bool8 sub_8105ACC(void);
-/*static*/void sub_8105AEC(void);
-/*static*/u8 sub_8105B1C(s16 x, s16 y);
-/*static*/void sub_8105B88(u8 spriteId);
-/*static*/u8 sub_8105BF8(u8 templateIdx, void (*callback)(struct Sprite*), s16 x, s16 y, s16 a4);
-/*static*/void sub_81063C0(void);
-/*static*/void sub_8106404(void);
-/*static*/void sub_8106448(void);
-/*static*/void sub_81064B8(void);
-/*static*/void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
-/*static*/void sub_81065DC(void);
-/*static*/void sub_812F958(void);
-/*static*/void sub_812F968(void);
-void LoadSlotMachineWheelOverlay(void);
-u8 sub_8105BB4(u8 templateIdx, u8 cbAndCoordsIdx, s16 a2);
+/*static */void CB2_SlotMachineSetup(void);
+/*static */void CB2_SlotMachineLoop(void);
+/*static */void PlaySlotMachine_Internal(u8 arg0, MainCallback cb);
+/*static */void SlotMachineDummyTask(u8 taskId);
+/*static */void SlotMachineSetup_0_0(void);
+/*static */void SlotMachineSetup_6_2(void);
+/*static */void SlotMachineSetup_1_0(void);
+/*static */void SlotMachineSetup_2_0(void);
+/*static */void SlotMachineSetup_2_1(void);
+/*static */void SlotMachineSetup_0_1(void);
+/*static */void SlotMachineSetup_3_0(void);
+/*static */void SlotMachineSetup_4_0(void);
+/*static */void SlotMachineSetup_5_0(void);
+/*static */void SlotMachineSetup_6_0(void);
+/*static */void SlotMachineSetup_6_1(void);
+/*static */void SlotMachineSetup_8_0(void);
+/*static */void SlotMachineSetup_9_0(void);
+/*static */void SlotMachineSetup_10_0(void);
+/*static */void SlotMachineSetup_10_1(void);
+/*static */void sub_8101D04(void);
+/*static */void sub_8104DA4(void);
+/*static */void sub_8101D24(u8 taskId);
+/*static */bool8 sub_8101D5C(struct Task *task);
+/*static */bool8 sub_8101D8C(struct Task *task);
+/*static */bool8 sub_8101DB0(struct Task *task);
+/*static */bool8 sub_8101DF4(struct Task *task);
+/*static */bool8 sub_8101E10(struct Task *task);
+/*static */bool8 sub_8101E3C(struct Task *task);
+/*static */bool8 sub_8101F44(struct Task *task);
+/*static */bool8 sub_8101F60(struct Task *task);
+/*static */bool8 sub_8101F88(struct Task *task);
+/*static */bool8 sub_8101FA4(struct Task *task);
+/*static */bool8 sub_8102008(struct Task *task);
+/*static */bool8 sub_8102034(struct Task *task);
+/*static */bool8 sub_8102058(struct Task *task);
+/*static */bool8 sub_8102090(struct Task *task);
+/*static */bool8 sub_81020C8(struct Task *task);
+/*static */bool8 sub_81021E0(struct Task *task);
+/*static */bool8 sub_81021FC(struct Task *task);
+/*static */bool8 sub_8102264(struct Task *task);
+/*static */bool8 sub_81022A0(struct Task *task);
+/*static */bool8 sub_81022CC(struct Task *task);
+/*static */bool8 sub_81022F0(struct Task *task);
+/*static */bool8 sub_8102318(struct Task *task);
+/*static */bool8 sub_8102344(struct Task *task);
+/*static */bool8 sub_810239C(struct Task *task);
+/*static */bool8 sub_81023B8(struct Task *task);
+/*static */bool8 sub_81023E0_(struct Task *task);
+/*static */bool8 sub_81023FC(struct Task *task);
+/*static */bool8 sub_8102424(struct Task *task);
+/*static */bool8 sub_8102460(struct Task *task);
+/*static */void sub_8102484(void);
+/*static */void sub_81024F0(void);
+/*static */bool8 sub_8102540_(void);
+/*static */u8 sub_8102578(void);
+/*static */u16 dp15_jump_random_unknown(void);
+/*static */u8 sub_81025BC(void);
+/*static */void CheckMatch(void);
+/*static */void CheckMatch_CenterRow(void);
+/*static */void CheckMatch_TopAndBottom(void);
+/*static */void CheckMatch_Diagonals(void);
+/*static */u8 GetMatchFromSymbolsInRow(u8 c1, u8 c2, u8 c3);
+/*static */void sub_8102A24(void);
+/*static */void sub_8102A64(u8 taskId);
+/*static */bool8 sub_8102A44(void);
+/*static */bool8 sub_8102A9C(struct Task *task);
+/*static */bool8 sub_8102AD0(struct Task *task);
+/*static */bool8 sub_8102B80(struct Task *task);
+/*static */u8 GetTagOfReelSymbolOnScreenAtPos(u8 x, s16 y);
+/*static */void sub_8102DA8(void);
+/*static */void sub_8102DEC(u8 a0);
+/*static */void sub_8102E1C(u8 a0);
+/*static */bool8 sub_8102E40(u8 a0);
+/*static */void sub_8102E68(u8 taskId);
+/*static */bool8 sub_8102EA0(struct Task *task);
+/*static */bool8 sub_8102EA4(struct Task *task);
+/*static */bool8 sub_8102EC0(struct Task *task);
+/*static */bool8 sub_8102F4C(struct Task *task);
+/*static */bool8 sub_8103008(struct Task *task);
+/*static */bool8 sub_810305C(void);
+/*static */bool8 sub_8103154(u8 a0, u8 a1);
+/*static */bool8 sub_81031B4(u8 a0, u8 a1);
+/*static */bool8 sub_81032C0(void);
+/*static */bool8 sub_81032E8(void);
+/*static */bool8 sub_810333C(void);
+/*static */bool8 sub_81033DC(void);
+/*static */bool8 sub_810341C(u8 a0);
+/*static */bool8 sub_810347C(u8 a0);
+/*static */void sub_81034F4(void);
+/*static */void sub_8103540(void);
+/*static */void sub_8103564(void);
+/*static */void j5_08111E84(void);
+/*static */void sub_8103668(void);
+/*static */void sub_810380C(void);
+/*static */void sub_8103830(void);
+/*static */void sub_8103910(void);
+/*static */void sub_8103A78(void);
+/*static */void sub_8103C14(u8 a0);
+/*static */void sub_8103C48(u8 taskId);
+/*static */void sub_8103D50(u8 a0);
+/*static */void sub_8103C78(struct Task *task, u8 taskId);
+/*static */void sub_8103CAC(struct Task *task, u8 taskId);
+/*static */void sub_8103CC8(struct Task *task, u8 taskId);
+/*static */void sub_8103D8C(u8 a0);
+/*static */void sub_8103DC8(void);
+/*static */void sub_8103E04(u8 a0);
+/*static */bool8 sub_8103E38(void);
+/*static */bool8 sub_8103E7C(void);
+/*static */bool8 sub_8103EAC(u8 spriteId);
+/*static */void sub_8103EE4(struct Sprite *sprite);
+/*static */void sub_8103F70(void);
+/*static */bool8 sub_8103FA0(void);
+/*static */void sub_8103FE8_(u8 taskId);
+/*static */void sub_8104048(void);
+/*static */void sub_8104064(u8 pikaPower);
+/*static */bool8 sub_81040C8(void);
+/*static */void sub_81040E8(u8 taskId);
+/*static */void nullsub_68(struct Task *task);
+/*static */void sub_810411C(struct Task *task);
+/*static */void sub_8104144(struct Task *task);
+/*static */void sub_81041AC(struct Task *task);
+/*static */void sub_812D394(struct Task *task);
+/*static */void sub_810423C(u8 pikaPower);
+/*static */void sub_810430C(void);
+/*static */bool8 sub_810432C(void);
+/*static */void sub_810434C(u8 taskId);
+/*static */void sub_810437C(struct Task *task);
+/*static */void sub_81043EC(struct Task *task);
+/*static */void sub_8104468(struct Task *task);
+/*static */void sub_8104498(struct Task *task);
+/*static */void sub_8104548(struct Task *task);
+/*static */void sub_8104598(struct Task *task);
+/*static */void sub_81045CC(struct Task *task);
+/*static */void sub_810463C(struct Task *task);
+/*static */void sub_81046C0(struct Task *task);
+/*static */void sub_8104764(struct Task *task);
+/*static */void sub_8104794(struct Task *task);
+/*static */void sub_81047EC(struct Task *task);
+/*static */void sub_8104860(struct Task *task);
+/*static */void sub_81048A8(struct Task *task);
+/*static */void sub_81048CC(struct Task *task);
+/*static */void sub_8104940(struct Task *task);
+/*static */void sub_81049C8(struct Task *task);
+/*static */void sub_81049F8(struct Task *task);
+/*static */void sub_8104A40(s16 a0, s16 a1);
+/*static */void sub_8104A88(s16 a0);
+/*static */void sub_8104AB8(u8 a0);
+/*static */bool8 sub_8104AEC(void);
+/*static */void sub_8104B0C(u8 taskId);
+/*static */void sub_8104B3C(struct Task *task);
+/*static */void sub_8104B60(struct Task *task);
+/*static */void sub_8104B80(struct Task *task);
+/*static */void sub_8104BC8(struct Task *task);
+/*static */void sub_812DD78(struct Task *task);
+/*static */void sub_8104BFC(struct Task *task);
+/*static */void sub_812DE14(struct Task *task);
+/*static */void sub_812DE30(struct Task *task);
+/*static */void sub_8104C44(struct Task *task);
+/*static */void sub_8104C5C(void);
+/*static */void sub_8104CAC(u8 arg0);
+/*static */bool8 sub_8104E18(void);
+/*static */void nullsub_69(struct Task *task);
+/*static */void sub_8104E74_(u8 taskId);
+/*static */void sub_8104EA8(void);
+/*static */void sub_8104F8C(void);
+/*static */void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3);
+/*static */void sub_81050C4(void);
+/*static */void sub_8105100(void);
+/*static */void sub_810514C(void);
+/*static */void sub_81051C0(void);
+/*static */void sub_8105284_(void);
+/*static */void sub_81052EC(void);
+/*static */void sub_81053A0(void);
+/*static */void sub_810545C(void);
+/*static */void sub_81054B8(void);
+/*static */void sub_8105524(void);
+/*static */void sub_8105554(void);
+/*static */void sub_8105578(void);
+/*static */void sub_8105688(s16 a0);
+/*static */void sub_81056C0(void);
+/*static */void sub_81056F0(void);
+/*static */void sub_81057E8(s16 a0);
+/*static */void sub_8105804(void);
+/*static */void sub_8105854(void);
+/*static */void sub_81058A0(void);
+/*static */void sub_81058C4(void);
+/*static */void sub_81059B8(void);
+/*static */void sub_81059E8(void);
+/*static */bool8 sub_8105ACC(void);
+/*static */void sub_8105AEC(void);
+/*static */u8 sub_8105B1C(s16 x, s16 y);
+/*static */void sub_8105B88(u8 spriteId);
+/*static */u8 sub_8105BF8(u8 templateIdx, void (*callback)(struct Sprite*), s16 x, s16 y, s16 a4);
+/*static */void sub_81063C0(void);
+/*static */void sub_8106404(void);
+/*static */void sub_8106448(void);
+/*static */void sub_81064B8(void);
+/*static */void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
+/*static */void sub_81065DC(void);
+/*static */void sub_812F958(void);
+/*static */void sub_812F968(void);
+/*static */void LoadSlotMachineWheelOverlay(void);
+/*static */u8 sub_8105BB4(u8 templateIdx, u8 cbAndCoordsIdx, s16 a2);
+
+// Ewram variables
+static EWRAM_DATA u16 *gUnknown_0203AAC8 = NULL;
+static EWRAM_DATA u16 *gUnknown_0203AACC = NULL;
+static EWRAM_DATA u16 *gUnknown_0203AAD0 = NULL;
+static EWRAM_DATA u8 *gUnknown_0203AAD4 = NULL;
+static EWRAM_DATA u8 *gUnknown_0203AAD8 = NULL;
+static EWRAM_DATA u16 *gUnknown_0203AADC = NULL;
+static EWRAM_DATA u8 *gUnknown_0203AAE0 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AAE4 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AAE8 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AAEC = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AAF0 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AAF4 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AAF8 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AAFC = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB00 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB04 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB08 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB0C = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB10 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB14 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB18 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB1C = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB20 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB24 = NULL;
+static EWRAM_DATA struct SpriteFrameImage *gUnknown_0203AB28 = NULL;
+static EWRAM_DATA struct SpriteSheet *gUnknown_0203AB2C = NULL;
+static EWRAM_DATA struct SpriteSheet *gUnknown_0203AB30 = NULL;
+static EWRAM_DATA struct SlotMachineEwramStruct *sSlotMachine = NULL;
+
+// IWRAM bss
+static IWRAM_DATA struct SpriteFrameImage *gUnknown_03001188[26];
 
 // Const rom data.
-/*static*/extern const struct UnkStruct1 *const gUnknown_083ED048[];
-/*static*/extern const u16 gPalette_83EDE24[];
-/*static*/extern const u8 gUnknown_083ECD04[][3];
-/*static*/extern const u8 gUnknown_083ECE3A[];
-/*static*/extern const u16 gUnknown_083ECE42[];
-/*static*/extern const u16 gUnknown_083ECE48[];
+extern const struct UnkStruct1 *const gUnknown_083ED048[];
+extern const u16 gPalette_83EDE24[];
+extern const u8 gUnknown_083ECD04[][3];
+extern const u8 gUnknown_083ECE3A[];
+extern const u16 gUnknown_083ECE42[];
+extern const u16 gUnknown_083ECE48[];
 extern const s16 gUnknown_083ECE7E[][2];
 extern const SpriteCallback gUnknown_083ECF0C[];
 extern const struct SpriteTemplate *const gUnknown_083EDB5C[];
@@ -370,7 +372,7 @@ extern const struct SpriteTemplate gSpriteTemplate_83ED6CC;
 extern const struct SpriteTemplate gSpriteTemplate_83ED564;
 extern const struct SpriteTemplate gSpriteTemplate_83ED54C;
 extern const struct SpriteTemplate gSpriteTemplate_83ED534;
-extern const u8 gUnknown_083ECC58[2]; // don't remove this until decompiled through gUnknown_083ECCF8
+extern const u8 gUnknown_083ECC58[2];
 extern const struct SpriteTemplate gSpriteTemplate_83ED51C;
 extern const u16 gUnknown_083ECE12[];
 extern const u16 *const gUnknown_083EDE10[];
@@ -654,7 +656,7 @@ extern const struct SpriteTemplate gSpriteTemplate_83ED45C;
 // code
 #define tState data[0]
 
-void Task_FadeToSlotMachine(u8 taskId)
+/*static */void Task_FadeToSlotMachine(u8 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -684,7 +686,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 #undef tState
 
-void CB2_SlotMachineSetup(void)
+/*static */void CB2_SlotMachineSetup(void)
 {
     switch (gMain.state)
     {
@@ -745,7 +747,7 @@ void CB2_SlotMachineSetup(void)
     }
 }
 
-void CB2_SlotMachineLoop(void)
+/*static */void CB2_SlotMachineLoop(void)
 {
     RunTasks();
     AnimateSprites();
@@ -753,7 +755,7 @@ void CB2_SlotMachineLoop(void)
     UpdatePaletteFade();
 }
 
-void SlotMachine_VBlankCallback(void)
+/*static */void SlotMachine_VBlankCallback(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -764,25 +766,25 @@ void SlotMachine_VBlankCallback(void)
     SetGpuReg(REG_OFFSET_WINOUT, sSlotMachine->winOut);
 }
 
-void PlaySlotMachine_Internal(u8 arg0, MainCallback cb)
+/*static */void PlaySlotMachine_Internal(u8 arg0, MainCallback cb)
 {
     struct Task *task = gTasks + CreateTask(SlotMachineDummyTask, 0xFF);
     task->data[0] = arg0;
     StoreWordInTwoHalfwords(task->data + 1, (intptr_t)cb);
 }
 
-void sub_81019EC(void)
+/*static */void sub_81019EC(void)
 {
     struct Task *task = gTasks + FindTaskIdByFunc(SlotMachineDummyTask);
     sSlotMachine->unk01 = task->data[0];
     LoadWordFromTwoHalfwords((u16 *)(task->data + 1), (u32 *)&sSlotMachine->prevMainCb);
 }
 
-void SlotMachineDummyTask(u8 taskId)
+/*static */void SlotMachineDummyTask(u8 taskId)
 {
 }
 
-void SlotMachineSetup_0_0(void)
+/*static */void SlotMachineSetup_0_0(void)
 {
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
@@ -793,24 +795,24 @@ void SlotMachineSetup_0_0(void)
     DeactivateAllTextPrinters();
 }
 
-void SlotMachineSetup_6_0(void)
+/*static */void SlotMachineSetup_6_0(void)
 {
     SetVBlankCallback(SlotMachine_VBlankCallback);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON);
 }
 
-void SlotMachineSetup_1_0(void)
+/*static */void SlotMachineSetup_1_0(void)
 {
     DmaClearLarge16(3, (u16 *)(BG_VRAM), BG_VRAM_SIZE, 0x1000);
 }
 
-void SlotMachineSetup_2_0(void)
+/*static */void SlotMachineSetup_2_0(void)
 {
     DmaClear16(3, (u16 *)OAM, OAM_SIZE);
 }
 
-void SlotMachineSetup_2_1(void)
+/*static */void SlotMachineSetup_2_1(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
@@ -830,7 +832,7 @@ void SlotMachineSetup_2_1(void)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 8));
 }
 
-void SlotMachineSetup_0_1(void)
+/*static */void SlotMachineSetup_0_1(void)
 {
     u8 i;
 
@@ -863,7 +865,7 @@ void SlotMachineSetup_0_1(void)
     sub_80EDE70(GetCoins());
 }
 
-void SlotMachineSetup_3_0(void)
+/*static */void SlotMachineSetup_3_0(void)
 {
     ResetPaletteFade();
     ResetSpriteData();
@@ -872,7 +874,7 @@ void SlotMachineSetup_3_0(void)
     ResetTasks();
 }
 
-void SlotMachineSetup_4_0(void)
+/*static */void SlotMachineSetup_4_0(void)
 {
     gUnknown_0203AACC = Alloc(8);
     gUnknown_0203AAD0 = AllocZeroed(0xE);
@@ -887,7 +889,7 @@ void SlotMachineSetup_4_0(void)
     gUnknown_0203AAD0[6] = 0x20BF;
 }
 
-void SlotMachineSetup_5_0(void)
+/*static */void SlotMachineSetup_5_0(void)
 {
     sub_8106448();
     sub_81064B8();
@@ -897,7 +899,7 @@ void SlotMachineSetup_5_0(void)
     PutWindowTilemap(0);
 }
 
-void SlotMachineSetup_10_0(void)
+/*static */void SlotMachineSetup_10_0(void)
 {
     sub_8104EA8();
     sub_8104F8C();
@@ -905,7 +907,7 @@ void SlotMachineSetup_10_0(void)
     sub_81050C4();
 }
 
-void SlotMachineSetup_10_1(void)
+/*static */void SlotMachineSetup_10_1(void)
 {
     sub_8104048();
     sub_8102DA8();
@@ -913,18 +915,18 @@ void SlotMachineSetup_10_1(void)
     sub_8101D04();
 }
 
-void sub_8101D04(void)
+/*static */void sub_8101D04(void)
 {
     sub_8101D24(CreateTask(sub_8101D24, 0));
 }
 
-void sub_8101D24(u8 taskId)
+/*static */void sub_8101D24(u8 taskId)
 {
     while (gUnknown_083ECAAC[sSlotMachine->state](gTasks + taskId))
         ;
 }
 
-bool8 sub_8101D5C(struct Task *task)
+/*static */bool8 sub_8101D5C(struct Task *task)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     sub_810423C(sSlotMachine->pikaPower);
@@ -932,14 +934,14 @@ bool8 sub_8101D5C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101D8C(struct Task *task)
+/*static */bool8 sub_8101D8C(struct Task *task)
 {
     if (!gPaletteFade.active)
         sSlotMachine->state++;
     return FALSE;
 }
 
-bool8 sub_8101DB0(struct Task *task)
+/*static */bool8 sub_8101DB0(struct Task *task)
 {
     sSlotMachine->payout = 0;
     sSlotMachine->bet = 0;
@@ -958,14 +960,14 @@ bool8 sub_8101DB0(struct Task *task)
     return TRUE;
 }
 
-bool8 sub_8101DF4(struct Task *task)
+/*static */bool8 sub_8101DF4(struct Task *task)
 {
     if (sub_8104E18())
         sSlotMachine->state = 4;
     return FALSE;
 }
 
-bool8 sub_8101E10(struct Task *task)
+/*static */bool8 sub_8101E10(struct Task *task)
 {
     sub_8104CAC(0);
     sSlotMachine->state = 5;
@@ -974,7 +976,7 @@ bool8 sub_8101E10(struct Task *task)
     return TRUE;
 }
 
-bool8 sub_8101E3C(struct Task *task)
+/*static */bool8 sub_8101E3C(struct Task *task)
 {
     s16 i;
 
@@ -1016,7 +1018,7 @@ bool8 sub_8101E3C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101F44(struct Task *task)
+/*static */bool8 sub_8101F44(struct Task *task)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
@@ -1025,7 +1027,7 @@ bool8 sub_8101F44(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101F60(struct Task *task)
+/*static */bool8 sub_8101F60(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -1035,14 +1037,14 @@ bool8 sub_8101F60(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101F88(struct Task *task)
+/*static */bool8 sub_8101F88(struct Task *task)
 {
     if (sub_8104AEC())
         sSlotMachine->state = 5;
     return FALSE;
 }
 
-bool8 sub_8101FA4(struct Task *task)
+/*static */bool8 sub_8101FA4(struct Task *task)
 {
     sub_8102484();
     sub_8104DA4();
@@ -1067,7 +1069,7 @@ bool8 sub_8101FA4(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102008(struct Task *task)
+/*static */bool8 sub_8102008(struct Task *task)
 {
     if (sub_810432C())
     {
@@ -1078,7 +1080,7 @@ bool8 sub_8102008(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102034(struct Task *task)
+/*static */bool8 sub_8102034(struct Task *task)
 {
     if (++task->data[0] >= 30)
     {
@@ -1088,7 +1090,7 @@ bool8 sub_8102034(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102058(struct Task *task)
+/*static */bool8 sub_8102058(struct Task *task)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1100,7 +1102,7 @@ bool8 sub_8102058(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102090(struct Task *task)
+/*static */bool8 sub_8102090(struct Task *task)
 {
     if (!sub_8102E40(sSlotMachine->unk18))
     {
@@ -1115,7 +1117,7 @@ bool8 sub_8102090(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81020C8(struct Task *task)
+/*static */bool8 sub_81020C8(struct Task *task)
 {
     sSlotMachine->unk04 &= 0xc0;
     CheckMatch();
@@ -1177,14 +1179,14 @@ bool8 sub_81020C8(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81021E0(struct Task *task)
+/*static */bool8 sub_81021E0(struct Task *task)
 {
     if (sub_8102A44())
         sSlotMachine->state = 16;
     return FALSE;
 }
 
-bool8 sub_81021FC(struct Task *task)
+/*static */bool8 sub_81021FC(struct Task *task)
 {
     if (sub_8103FA0())
     {
@@ -1207,7 +1209,7 @@ bool8 sub_81021FC(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102264(struct Task *task)
+/*static */bool8 sub_8102264(struct Task *task)
 {
     if (!sub_81040C8())
     {
@@ -1225,7 +1227,7 @@ bool8 sub_8102264(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81022A0(struct Task *task)
+/*static */bool8 sub_81022A0(struct Task *task)
 {
     if (sub_8104E18())
     {
@@ -1238,7 +1240,7 @@ bool8 sub_81022A0(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81022CC(struct Task *task)
+/*static */bool8 sub_81022CC(struct Task *task)
 {
     sub_8103D8C(0);
     sub_8103D8C(1);
@@ -1247,7 +1249,7 @@ bool8 sub_81022CC(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81022F0(struct Task *task)
+/*static */bool8 sub_81022F0(struct Task *task)
 {
     if (++task->data[1] > 64)
     {
@@ -1257,7 +1259,7 @@ bool8 sub_81022F0(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102318(struct Task *task)
+/*static */bool8 sub_8102318(struct Task *task)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
@@ -1267,7 +1269,7 @@ bool8 sub_8102318(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102344(struct Task *task)
+/*static */bool8 sub_8102344(struct Task *task)
 {
     s8 input = Menu_ProcessInputNoWrap_();
     if (input == 0)
@@ -1287,7 +1289,7 @@ bool8 sub_8102344(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_810239C(struct Task *task)
+/*static */bool8 sub_810239C(struct Task *task)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouveGot9999Coins, 0, 1, 0, 0);
@@ -1296,7 +1298,7 @@ bool8 sub_810239C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81023B8(struct Task *task)
+/*static */bool8 sub_81023B8(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -1306,7 +1308,7 @@ bool8 sub_81023B8(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81023E0_(struct Task *task)
+/*static */bool8 sub_81023E0_(struct Task *task)
 {
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
@@ -1315,7 +1317,7 @@ bool8 sub_81023E0_(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81023FC(struct Task *task)
+/*static */bool8 sub_81023FC(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -1325,7 +1327,7 @@ bool8 sub_81023FC(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102424(struct Task *task)
+/*static */bool8 sub_8102424(struct Task *task)
 {
     SetCoins(sSlotMachine->coins);
     sub_80EDD78(GetCoins());
@@ -1334,7 +1336,7 @@ bool8 sub_8102424(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102460(struct Task *task)
+/*static */bool8 sub_8102460(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -1376,7 +1378,7 @@ bool8 sub_8102460(struct Task *task)
     return FALSE;
 }
 
-void sub_8102484(void)
+/*static */void sub_8102484(void)
 {
     u8 r3;
 
@@ -1405,14 +1407,14 @@ void sub_8102484(void)
     }
 }
 
-void sub_81024F0(void)
+/*static */void sub_81024F0(void)
 {
     sSlotMachine->unk06 = 0;
     if (sSlotMachine->unk04)
         sSlotMachine->unk06 = 1;
 }
 
-u8 sub_810250C(u8 a0)
+/*static */u8 sub_810250C(u8 a0)
 {
     u8 i;
 
@@ -1425,7 +1427,7 @@ u8 sub_810250C(u8 a0)
     return 0;
 }
 
-bool8 sub_8102540_(void)
+/*static */bool8 sub_8102540_(void)
 {
     u8 rval = Random();
     if (gUnknown_083ECD04[sSlotMachine->unk01][sSlotMachine->bet - 1] > rval)
@@ -1433,7 +1435,7 @@ bool8 sub_8102540_(void)
     return FALSE;
 }
 
-u8 sub_8102578(void)
+/*static */u8 sub_8102578(void)
 {
     s16 i;
 
@@ -1447,7 +1449,7 @@ u8 sub_8102578(void)
     return i;
 }
 
-u8 sub_81025BC(void)
+/*static */u8 sub_81025BC(void)
 {
     s16 i;
 
@@ -1473,7 +1475,7 @@ u8 sub_81025BC(void)
     return i;
 }
 
-u8 sub_810264C(u8 a0)
+/*static */u8 sub_810264C(u8 a0)
 {
     if (sSlotMachine->unk03 == 0)
         return gUnknown_083ECD46[a0][sSlotMachine->pikaPower];
@@ -1481,7 +1483,7 @@ u8 sub_810264C(u8 a0)
         return gUnknown_083ECDAC[a0][sSlotMachine->pikaPower];
 }
 
-void sub_8102680(void)
+/*static */void sub_8102680(void)
 {
     u8 rval;
     s16 i;
@@ -1499,7 +1501,7 @@ void sub_8102680(void)
     sSlotMachine->unk05 = i;
 }
 
-bool8 sub_81026DC(u16 a0)
+/*static */bool8 sub_81026DC(u16 a0)
 {
     u16 rval = Random() & 0xff;
     if (rval < gUnknown_083ECE12[a0])
@@ -1508,7 +1510,7 @@ bool8 sub_81026DC(u16 a0)
         return FALSE;
 }
 
-u16 dp15_jump_random_unknown(void)
+/*static */u16 dp15_jump_random_unknown(void)
 {
     u8 r4 = 0;
     u8 rval;
@@ -1532,7 +1534,7 @@ u16 dp15_jump_random_unknown(void)
     return 8;
 }
 
-void CheckMatch(void)
+/*static */void CheckMatch(void)
 {
     sSlotMachine->matchedSymbols = 0;
     CheckMatch_CenterRow();
@@ -1542,7 +1544,7 @@ void CheckMatch(void)
         CheckMatch_Diagonals();
 }
 
-void CheckMatch_CenterRow(void)
+/*static */void CheckMatch_CenterRow(void)
 {
     u8 c1, c2, c3, match;
 
@@ -1558,7 +1560,7 @@ void CheckMatch_CenterRow(void)
     }
 }
 
-void CheckMatch_TopAndBottom(void)
+/*static */void CheckMatch_TopAndBottom(void)
 {
     u8 c1, c2, c3, match;
 
@@ -1588,7 +1590,7 @@ void CheckMatch_TopAndBottom(void)
     }
 }
 
-void CheckMatch_Diagonals(void)
+/*static */void CheckMatch_Diagonals(void)
 {
     u8 c1, c2, c3, match;
 
@@ -1620,7 +1622,7 @@ void CheckMatch_Diagonals(void)
     }
 }
 
-u8 GetMatchFromSymbolsInRow(u8 c1, u8 c2, u8 c3)
+/*static */u8 GetMatchFromSymbolsInRow(u8 c1, u8 c2, u8 c3)
 {
     if (c1 == c2 && c1 == c3)
         return sSym2Match[c1];
@@ -1633,12 +1635,12 @@ u8 GetMatchFromSymbolsInRow(u8 c1, u8 c2, u8 c3)
     return SLOT_MACHINE_MATCHED_NONE;
 }
 
-void sub_8102A24(void)
+/*static */void sub_8102A24(void)
 {
     sub_8102A64(CreateTask(sub_8102A64, 4));
 }
 
-bool8 sub_8102A44(void)
+/*static */bool8 sub_8102A44(void)
 {
     if (FindTaskIdByFunc(sub_8102A64) == 0xff)
         return TRUE;
@@ -1646,13 +1648,13 @@ bool8 sub_8102A44(void)
         return FALSE;
 }
 
-void sub_8102A64(u8 taskId)
+/*static */void sub_8102A64(u8 taskId)
 {
     while (gUnknown_083ECB20[gTasks[taskId].data[0]](gTasks + taskId))
         ;
 }
 
-bool8 sub_8102A9C(struct Task *task)
+/*static */bool8 sub_8102A9C(struct Task *task)
 {
     if (sub_8103E38())
     {
@@ -1666,7 +1668,7 @@ bool8 sub_8102A9C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102AD0(struct Task *task)
+/*static */bool8 sub_8102AD0(struct Task *task)
 {
     if (!task->data[1]--)
     {
@@ -1692,14 +1694,14 @@ bool8 sub_8102AD0(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102B80(struct Task *task)
+/*static */bool8 sub_8102B80(struct Task *task)
 {
     if (sub_8103E7C())
         DestroyTask(FindTaskIdByFunc(sub_8102A64));
     return FALSE;
 }
 
-u8 GetTagOfReelSymbolOnScreenAtPos(u8 x, s16 y)
+/*static */u8 GetTagOfReelSymbolOnScreenAtPos(u8 x, s16 y)
 {
     s16 offset = (sSlotMachine->reelPositions[x] + y) % 21;
     if (offset < 0)
@@ -1707,7 +1709,7 @@ u8 GetTagOfReelSymbolOnScreenAtPos(u8 x, s16 y)
     return sReelSymbols[x][offset];
 }
 
-u8 GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(u8 x, s16 y)
+/*static */u8 GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(u8 x, s16 y)
 {
     s16 r6 = 0;
     s16 result = sSlotMachine->unk1C[x] % 24;
@@ -1716,7 +1718,7 @@ u8 GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(u8 x, s16 y)
     return GetTagOfReelSymbolOnScreenAtPos(x, y + r6);
 }
 
-u8 sub_8102C48(s16 a0)
+/*static */u8 sub_8102C48(s16 a0)
 {
     s16 r1 = (sSlotMachine->unk16 + a0) % 6;
     if (r1 < 0)
@@ -1724,7 +1726,7 @@ u8 sub_8102C48(s16 a0)
     return gUnknown_083ECCF1[r1];
 }
 
-void sub_8102C84(u8 a0, s16 a1)
+/*static */void sub_8102C84(u8 a0, s16 a1)
 {
     sSlotMachine->unk1C[a0] += a1;
     sSlotMachine->unk1C[a0] %= 504;
@@ -1744,7 +1746,7 @@ s16 sub_8102CCC(u8 a0, s16 a1)
     return r1;
 }
 
-void sub_8102D28(s16 a0)
+/*static */void sub_8102D28(s16 a0)
 {
     sSlotMachine->unk14 += a0;
     sSlotMachine->unk14 %= 120;
@@ -1764,7 +1766,7 @@ s16 sub_8102D5C(s16 a0)
     return r1;
 }
 
-void sub_8102DA8(void)
+/*static */void sub_8102DA8(void)
 {
     u8 i;
     for (i = 0; i < 3; i++)
@@ -1776,41 +1778,41 @@ void sub_8102DA8(void)
     }
 }
 
-void sub_8102DEC(u8 a0)
+/*static */void sub_8102DEC(u8 a0)
 {
     gTasks[sSlotMachine->reelTasks[a0]].data[0] = 1;
     gTasks[sSlotMachine->reelTasks[a0]].data[14] = 1;
 }
 
-void sub_8102E1C(u8 a0)
+/*static */void sub_8102E1C(u8 a0)
 {
     gTasks[sSlotMachine->reelTasks[a0]].data[0] = 2;
 }
 
-bool8 sub_8102E40(u8 a0)
+/*static */bool8 sub_8102E40(u8 a0)
 {
     return gTasks[sSlotMachine->reelTasks[a0]].data[14];
 }
 
-void sub_8102E68(u8 taskId)
+/*static */void sub_8102E68(u8 taskId)
 {
     while (gUnknown_083ECB2C[gTasks[taskId].data[0]](gTasks + taskId))
         ;
 }
 
-bool8 sub_8102EA0(struct Task *task)
+/*static */bool8 sub_8102EA0(struct Task *task)
 {
     return FALSE;
 }
 
-bool8 sub_8102EA4(struct Task *task)
+/*static */bool8 sub_8102EA4(struct Task *task)
 {
     sub_8102C84(task->data[15], sSlotMachine->unk1A);
     return FALSE;
 }
 
 
-bool8 sub_8102EC0(struct Task *task)
+/*static */bool8 sub_8102EC0(struct Task *task)
 {
     task->data[0]++;
     sSlotMachine->unk34[task->data[15]] = 0;
@@ -1824,7 +1826,7 @@ bool8 sub_8102EC0(struct Task *task)
     return TRUE;
 }
 
-bool8 sub_8102F4C(struct Task *task)
+/*static */bool8 sub_8102F4C(struct Task *task)
 {
     u16 sp[ARRAY_COUNT(gUnknown_085A74FC)];
     s16 r2;
@@ -1848,7 +1850,7 @@ bool8 sub_8102F4C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8103008(struct Task *task)
+/*static */bool8 sub_8103008(struct Task *task)
 {
     sSlotMachine->unk22[task->data[15]] = task->data[1];
     task->data[1] = -task->data[1];
@@ -1864,7 +1866,7 @@ bool8 sub_8103008(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_810305C(void)
+/*static */bool8 sub_810305C(void)
 {
     u8 r3 = sub_810250C(sSlotMachine->unk04);
     u8 r5 = r3;
@@ -1876,7 +1878,7 @@ bool8 sub_810305C(void)
     return gUnknown_083ECB64[sSlotMachine->bet - 1](r5, r3);
 }
 
-bool8 sub_81030A4(s16 y, u8 tag1, u8 tag2)
+/*static */bool8 sub_81030A4(s16 y, u8 tag1, u8 tag2)
 {
     u8 tag = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, y);
     if (tag == tag1 || tag == tag2)
@@ -1887,7 +1889,7 @@ bool8 sub_81030A4(s16 y, u8 tag1, u8 tag2)
     return FALSE;
 }
 
-bool8 sub_81030E0(s16 y)
+/*static */bool8 sub_81030E0(s16 y)
 {
     if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 1 - y) == 4 || GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 2 - y) == 4 || GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 3 - y) == 4)
         return TRUE;
@@ -1895,7 +1897,7 @@ bool8 sub_81030E0(s16 y)
         return FALSE;
 }
 
-bool8 sub_8103134(void)
+/*static */bool8 sub_8103134(void)
 {
     if (sSlotMachine->unk04 & 0xc2)
         return TRUE;
@@ -1903,7 +1905,7 @@ bool8 sub_8103134(void)
         return FALSE;
 }
 
-bool8 sub_8103154(u8 a0, u8 a1)
+/*static */bool8 sub_8103154(u8 a0, u8 a1)
 {
     s16 i;
 
@@ -1919,7 +1921,7 @@ bool8 sub_8103154(u8 a0, u8 a1)
     return FALSE;
 }
 
-bool8 sub_81031B4(u8 tag1, u8 tag2)
+/*static */bool8 sub_81031B4(u8 tag1, u8 tag2)
 {
     s16 i;
     bool8 r6 = sub_8103134();
@@ -1963,12 +1965,12 @@ bool8 sub_81031B4(u8 tag1, u8 tag2)
     return FALSE;
 }
 
-bool8 sub_81032C0(void)
+/*static */bool8 sub_81032C0(void)
 {
     return gUnknown_083ECB70[sSlotMachine->bet - 1]();
 }
 
-bool8 sub_81032E8(void)
+/*static */bool8 sub_81032E8(void)
 {
     s16 i;
     s16 unk34_0 = sSlotMachine->unk34[0];
@@ -1985,7 +1987,7 @@ bool8 sub_81032E8(void)
     return FALSE;
 }
 
-bool8 sub_810333C(void)
+/*static */bool8 sub_810333C(void)
 {
     s16 i;
     if (sub_81032E8())
@@ -2019,7 +2021,7 @@ bool8 sub_810333C(void)
     return FALSE;
 }
 
-bool8 sub_81033DC(void)
+/*static */bool8 sub_81033DC(void)
 {
     u8 r3 = sSlotMachine->unk07;
     if (sSlotMachine->unk04 & 0x40)
@@ -2033,7 +2035,7 @@ bool8 sub_81033DC(void)
     return gUnknown_083ECB7C[sSlotMachine->bet - 1](r3);
 }
 
-bool8 sub_810341C(u8 a0)
+/*static */bool8 sub_810341C(u8 a0)
 {
     s16 i;
     s16 unk34_1 = sSlotMachine->unk34[1];
@@ -2050,7 +2052,7 @@ bool8 sub_810341C(u8 a0)
     return FALSE;
 }
 
-bool8 sub_810347C(u8 a0)
+/*static */bool8 sub_810347C(u8 a0)
 {
     s16 i;
     s16 r8;
@@ -2072,7 +2074,7 @@ bool8 sub_810347C(u8 a0)
     return FALSE;
 }
 
-void sub_81034F4(void)
+/*static */void sub_81034F4(void)
 {
     s16 i = 0;
 
@@ -2081,7 +2083,7 @@ void sub_81034F4(void)
     sSlotMachine->unk2E[0] = i;
 }
 
-bool8 sub_8103520(u8 *a0)
+/*static */bool8 sub_8103520(u8 *a0)
 {
     if (*a0 == 0)
     {
@@ -2096,12 +2098,12 @@ bool8 sub_8103520(u8 *a0)
     return FALSE;
 }
 
-void sub_8103540(void)
+/*static */void sub_8103540(void)
 {
     gUnknown_083ECB88[sSlotMachine->bet - 1]();
 }
 
-void sub_8103564(void)
+/*static */void sub_8103564(void)
 {
     if (sSlotMachine->unk34[0] != 0 && sSlotMachine->unk04 & 0x80)
     {
@@ -2122,7 +2124,7 @@ void sub_8103564(void)
     }
 }
 
-void j5_08111E84(void)
+/*static */void j5_08111E84(void)
 {
     if (sSlotMachine->unk34[0] != 0 && sSlotMachine->unk04 & 0x80)
     {
@@ -2143,7 +2145,7 @@ void j5_08111E84(void)
     }
 }
 
-void sub_8103668(void)
+/*static */void sub_8103668(void)
 {
     s16 i;
     s16 j;
@@ -2208,7 +2210,7 @@ void sub_8103668(void)
     }
 }
 
-bool8 sub_8103764(u8 a0, u8 a1)
+/*static */bool8 sub_8103764(u8 a0, u8 a1)
 {
     if ((a0 == 0 && a1 == 1) || (a0 == 1 && a1 == 0))
         return TRUE;
@@ -2216,7 +2218,7 @@ bool8 sub_8103764(u8 a0, u8 a1)
         return FALSE;
 }
 
-bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
+/*static */bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
 {
     if ((a0 == 0 && a1 == 1 && a2 == 0) || (a0 == 1 && a1 == 0 && a2 == 1))
         return TRUE;
@@ -2224,7 +2226,7 @@ bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
         return FALSE;
 }
 
-bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
+/*static */bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
 {
     if ((a0 == 0 && a1 == 1 && a2 == 0) ||
         (a0 == 1 && a1 == 0 && a2 == 1) ||
@@ -2237,12 +2239,12 @@ bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
     return TRUE;
 }
 
-void sub_810380C(void)
+/*static */void sub_810380C(void)
 {
     gUnknown_083ECB94[sSlotMachine->bet - 1]();
 }
 
-void sub_8103830(void)
+/*static */void sub_8103830(void)
 {
     s16 i = 0;
     u8 r5 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 2 - sSlotMachine->unk2E[0]);
@@ -2281,7 +2283,7 @@ void sub_8103830(void)
     sSlotMachine->unk2E[2] = i;
 }
 
-void sub_8103910(void)
+/*static */void sub_8103910(void)
 {
     s16 sp0 = 0;
     s16 i;
@@ -2327,7 +2329,7 @@ void sub_8103910(void)
     sSlotMachine->unk2E[2] = sp0;
 }
 
-void sub_8103A78(void)
+/*static */void sub_8103A78(void)
 {
     u8 r6;
     u8 r5;
@@ -2376,61 +2378,61 @@ void sub_8103A78(void)
     }
 }
 
-void sub_8103C14(u8 a0)
+/*static */void sub_8103C14(u8 a0)
 {
     u8 taskId = CreateTask(sub_8103C48, 5);
     gTasks[taskId].data[15] = a0;
     sub_8103C48(taskId);
 }
 
-void sub_8103C48(u8 taskId)
+/*static */void sub_8103C48(u8 taskId)
 {
     gUnknown_083ECBA0[gTasks[taskId].data[0]](gTasks + taskId, taskId);
 }
 
-void sub_8103C78(struct Task *task, u8 taskId)
+/*static */void sub_8103C78(struct Task *task, u8 taskId)
 {
     sub_81065A8(gUnknown_083ECBAC[task->data[15]], 0x62, 0x63, 0x72, 0x73);
     task->data[0]++;
 }
 
-void sub_8103CAC(struct Task *task, u8 taskId)
+/*static */void sub_8103CAC(struct Task *task, u8 taskId)
 {
     if (++task->data[1] > 11)
         task->data[0]++;
 }
 
-void sub_8103CC8(struct Task *task, u8 taskId)
+/*static */void sub_8103CC8(struct Task *task, u8 taskId)
 {
     sub_81065A8(gUnknown_083ECBAC[task->data[15]], 0x42, 0x43, 0x52, 0x53);
     DestroyTask(taskId);
 }
 
-void sub_8103D00(u8 a0)
+/*static */void sub_8103D00(u8 a0)
 {
     LoadPalette(gUnknown_083EDD08[a0], gUnknown_083EDD30[a0], 2);
 }
 
-void sub_8103D28(u8 a0)
+/*static */void sub_8103D28(u8 a0)
 {
     LoadPalette(gUnknown_083EDD1C[a0], gUnknown_083EDD30[a0], 2);
 }
 
-void sub_8103D50(u8 a0)
+/*static */void sub_8103D50(u8 a0)
 {
     u8 i;
     for (i = 0; i < gUnknown_083EDD3B[a0]; i++)
         sub_8103D00(gUnknown_083EDD35[a0][i]);
 }
 
-void sub_8103D8C(u8 a0)
+/*static */void sub_8103D8C(u8 a0)
 {
     u8 i;
     for (i = 0; i < gUnknown_083EDD3B[a0]; i++)
         sub_8103D28(gUnknown_083EDD35[a0][i]);
 }
 
-void sub_8103DC8(void)
+/*static */void sub_8103DC8(void)
 {
     u8 i;
     for (i = 0; i < 5; i++)
@@ -2441,7 +2443,7 @@ void sub_8103DC8(void)
     }
 }
 
-void sub_8103E04(u8 a0)
+/*static */void sub_8103E04(u8 a0)
 {
     struct Sprite *sprite = gSprites + sSlotMachine->unk44[a0];
     sprite->data[1] = 1;
@@ -2452,7 +2454,7 @@ void sub_8103E04(u8 a0)
     sprite->data[7] = 0;
 }
 
-bool8 sub_8103E38(void)
+/*static */bool8 sub_8103E38(void)
 {
     u8 i;
     for (i = 0; i < 5; i++)
@@ -2464,7 +2466,7 @@ bool8 sub_8103E38(void)
     return TRUE;
 }
 
-bool8 sub_8103E7C(void)
+/*static */bool8 sub_8103E7C(void)
 {
     u8 i;
     for (i = 0; i < 5; i++)
@@ -2475,7 +2477,7 @@ bool8 sub_8103E7C(void)
     return TRUE;
 }
 
-bool8 sub_8103EAC(u8 spriteId)
+/*static */bool8 sub_8103EAC(u8 spriteId)
 {
     struct Sprite *sprite = gSprites + spriteId;
     if (!sprite->data[1])
@@ -2485,7 +2487,7 @@ bool8 sub_8103EAC(u8 spriteId)
     return sprite->data[7];
 }
 
-void sub_8103EE4(struct Sprite *sprite)
+/*static */void sub_8103EE4(struct Sprite *sprite)
 {
     s16 r4;
     if (sprite->data[1])
@@ -2514,14 +2516,14 @@ void sub_8103EE4(struct Sprite *sprite)
     }
 }
 
-void sub_8103F70(void)
+/*static */void sub_8103F70(void)
 {
     u8 taskId = CreateTask(sub_8103FE8_, 6);
     gTasks[taskId].data[3] = 1;
     sub_8103FE8_(taskId);
 }
 
-bool8 sub_8103FA0(void)
+/*static */bool8 sub_8103FA0(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_8103FE8_);
     if (!gTasks[taskId].data[2])
@@ -2533,7 +2535,7 @@ bool8 sub_8103FA0(void)
     return FALSE;
 }
 
-void sub_8103FE8_(u8 taskId)
+/*static */void sub_8103FE8_(u8 taskId)
 {
     struct Task *task = gTasks + taskId;
     if (!task->data[1]--)
@@ -2546,12 +2548,12 @@ void sub_8103FE8_(u8 taskId)
     LoadPalette(gUnknown_083EDDA0[task->data[2]], 0x10, 0x20);
 }
 
-void sub_8104048(void)
+/*static */void sub_8104048(void)
 {
     sSlotMachine->unk3E = CreateTask(sub_81040E8, 8);
 }
 
-void sub_8104064(u8 pikaPower)
+/*static */void sub_8104064(u8 pikaPower)
 {
     struct Task *task = gTasks + sSlotMachine->unk3E;
     sub_812D394(task);
@@ -2560,7 +2562,7 @@ void sub_8104064(u8 pikaPower)
     task->data[15] = 1;
 }
 
-void sub_8104098(void)
+/*static */void sub_8104098(void)
 {
     struct Task *task = gTasks + sSlotMachine->unk3E;
     sub_812D394(task);
@@ -2568,27 +2570,27 @@ void sub_8104098(void)
     task->data[15] = 1;
 }
 
-bool8 sub_81040C8(void)
+/*static */bool8 sub_81040C8(void)
 {
     return gTasks[sSlotMachine->unk3E].data[15];
 }
 
-void sub_81040E8(u8 taskId)
+/*static */void sub_81040E8(u8 taskId)
 {
     gUnknown_083ECBB4[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-void nullsub_68(struct Task *task)
+/*static */void nullsub_68(struct Task *task)
 {
 }
 
-void sub_810411C(struct Task *task)
+/*static */void sub_810411C(struct Task *task)
 {
     task->data[2] = sub_8105B1C((task->data[1] << 3) + 20, 20);
     task->data[0]++;
 }
 
-void sub_8104144(struct Task *task)
+/*static */void sub_8104144(struct Task *task)
 {
     if (gSprites[task->data[2]].data[7])
     {
@@ -2607,7 +2609,7 @@ void sub_8104144(struct Task *task)
     }
 }
 
-void sub_81041AC(struct Task *task)
+/*static */void sub_81041AC(struct Task *task)
 {
     s16 r5 = task->data[1] + 2;
     s16 r3 = 0;
@@ -2631,7 +2633,7 @@ void sub_81041AC(struct Task *task)
     }
 }
 
-void sub_812D394(struct Task *task)
+/*static */void sub_812D394(struct Task *task)
 {
     u8 i;
 
@@ -2639,7 +2641,7 @@ void sub_812D394(struct Task *task)
         task->data[i] = 0;
 }
 
-void sub_810423C(u8 pikaPower)
+/*static */void sub_810423C(u8 pikaPower)
 {
     s16 i;
     s16 r3 = 0, r1 = 0;
@@ -2667,25 +2669,25 @@ void sub_810423C(u8 pikaPower)
     gTasks[sSlotMachine->unk3E].data[1] = pikaPower;
 }
 
-void sub_810430C(void)
+/*static */void sub_810430C(void)
 {
     u8 taskId = CreateTask(sub_810434C, 7);
     sub_810434C(taskId);
 }
 
-bool8 sub_810432C(void)
+/*static */bool8 sub_810432C(void)
 {
     if (FindTaskIdByFunc(sub_810434C) == 0xFF)
         return TRUE;
     return FALSE;
 }
 
-void sub_810434C(u8 taskId)
+/*static */void sub_810434C(u8 taskId)
 {
     gUnknown_083ECBD0[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-void sub_810437C(struct Task *task)
+/*static */void sub_810437C(struct Task *task)
 {
     sSlotMachine->unk0A = 0;
     sSlotMachine->unk14 = 0;
@@ -2709,7 +2711,7 @@ void sub_810437C(struct Task *task)
     PlayNewMapMusic(MUS_BD_TIME);
 }
 
-void sub_81043EC(struct Task *task)
+/*static */void sub_81043EC(struct Task *task)
 {
     s16 r3;
     gSpriteCoordOffsetX -= 8;
@@ -2730,7 +2732,7 @@ void sub_81043EC(struct Task *task)
     sub_8102D28(task->data[4] >> 8);
 }
 
-void sub_8104468(struct Task *task)
+/*static */void sub_8104468(struct Task *task)
 {
     sub_8102D28(task->data[4] >> 8);
     if (++task->data[5] >= 60)
@@ -2741,7 +2743,7 @@ void sub_8104468(struct Task *task)
     }
 }
 
-void sub_8104498(struct Task *task)
+/*static */void sub_8104498(struct Task *task)
 {
     int r5;
     u8 sp0[ARRAY_COUNT(gUnknown_085A75C0)];
@@ -2766,7 +2768,7 @@ void sub_8104498(struct Task *task)
     }
 }
 
-void sub_8104548(struct Task *task)
+/*static */void sub_8104548(struct Task *task)
 {
     sub_8102D28(task->data[4] >> 8);
     if (++task->data[5] >= 80)
@@ -2778,7 +2780,7 @@ void sub_8104548(struct Task *task)
     }
 }
 
-void sub_8104598(struct Task *task)
+/*static */void sub_8104598(struct Task *task)
 {
     sub_8102D28(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x80;
@@ -2789,7 +2791,7 @@ void sub_8104598(struct Task *task)
     }
 }
 
-void sub_81045CC(struct Task *task)
+/*static */void sub_81045CC(struct Task *task)
 {
     sub_8102D28(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x40;
@@ -2813,7 +2815,7 @@ void sub_81045CC(struct Task *task)
     }
 }
 
-void sub_810463C(struct Task *task)
+/*static */void sub_810463C(struct Task *task)
 {
     s16 r5 = sSlotMachine->unk14 % 20;
     if (r5)
@@ -2834,7 +2836,7 @@ void sub_810463C(struct Task *task)
     }
 }
 
-void sub_81046C0(struct Task *task)
+/*static */void sub_81046C0(struct Task *task)
 {
     if (++task->data[4] >= 60)
     {
@@ -2863,13 +2865,13 @@ void sub_81046C0(struct Task *task)
     }
 }
 
-void sub_8104764(struct Task *task)
+/*static */void sub_8104764(struct Task *task)
 {
     if ((task->data[4] == 0 || --task->data[4] == 0) && !sub_81040C8())
         task->data[0]++;
 }
 
-void sub_8104794(struct Task *task)
+/*static */void sub_8104794(struct Task *task)
 {
     s16 r4;
     gSpriteCoordOffsetX -= 8;
@@ -2883,7 +2885,7 @@ void sub_8104794(struct Task *task)
         task->data[0]++;
 }
 
-void sub_81047EC(struct Task *task)
+/*static */void sub_81047EC(struct Task *task)
 {
     sSlotMachine->unk0B = 0;
     sSlotMachine->unk0A = sSlotMachine->unk05;
@@ -2908,7 +2910,7 @@ void sub_81047EC(struct Task *task)
     }
 }
 
-void sub_8104860(struct Task *task)
+/*static */void sub_8104860(struct Task *task)
 {
     if (sSlotMachine->unk1A == task->data[1])
         task->data[0]++;
@@ -2916,13 +2918,13 @@ void sub_8104860(struct Task *task)
         sSlotMachine->unk1A >>= 1;
 }
 
-void sub_81048A8(struct Task *task)
+/*static */void sub_81048A8(struct Task *task)
 {
     if (sub_8104E18())
         DestroyTask(FindTaskIdByFunc(sub_810434C));
 }
 
-void sub_81048CC(struct Task *task)
+/*static */void sub_81048CC(struct Task *task)
 {
     sub_81054B8();
     sub_81056C0();
@@ -2938,7 +2940,7 @@ void sub_81048CC(struct Task *task)
     PlaySE(SE_W153);
 }
 
-void sub_8104940(struct Task *task)
+/*static */void sub_8104940(struct Task *task)
 {
     gSpriteCoordOffsetY = task->data[4];
     SetGpuReg(REG_OFFSET_BG1VOFS, task->data[4]);
@@ -2958,7 +2960,7 @@ void sub_8104940(struct Task *task)
     }
 }
 
-void sub_81049C8(struct Task *task)
+/*static */void sub_81049C8(struct Task *task)
 {
     gSpriteCoordOffsetY = 0;
     SetGpuReg(REG_OFFSET_BG1VOFS, 0);
@@ -2969,7 +2971,7 @@ void sub_81049C8(struct Task *task)
     }
 }
 
-void sub_81049F8(struct Task *task)
+/*static */void sub_81049F8(struct Task *task)
 {
     gSpriteCoordOffsetX = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, 0);
@@ -2981,7 +2983,7 @@ void sub_81049F8(struct Task *task)
     DestroyTask(FindTaskIdByFunc(sub_810434C));
 }
 
-void sub_8104A40(s16 a0, s16 a1)
+/*static */void sub_8104A40(s16 a0, s16 a1)
 {
     s16 i;
 
@@ -2991,7 +2993,7 @@ void sub_8104A40(s16 a0, s16 a1)
     }
 }
 
-void sub_8104A88(s16 a0)
+/*static */void sub_8104A88(s16 a0)
 {
     u8 i;
 
@@ -3001,14 +3003,14 @@ void sub_8104A88(s16 a0)
     }
 }
 
-void sub_8104AB8(u8 a0)
+/*static */void sub_8104AB8(u8 a0)
 {
     u8 taskId = CreateTask(sub_8104B0C, 1);
     gTasks[taskId].data[1] = a0;
     sub_8104B0C(taskId);
 }
 
-bool8 sub_8104AEC(void)
+/*static */bool8 sub_8104AEC(void)
 {
     if (FindTaskIdByFunc(sub_8104B0C) == 0xFF)
         return TRUE;
@@ -3016,24 +3018,24 @@ bool8 sub_8104AEC(void)
         return FALSE;
 }
 
-void sub_8104B0C(u8 taskId)
+/*static */void sub_8104B0C(u8 taskId)
 {
     gUnknown_083ECC30[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-void sub_8104B3C(struct Task *task)
+/*static */void sub_8104B3C(struct Task *task)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     task->data[0]++;
 }
 
-void sub_8104B60(struct Task *task)
+/*static */void sub_8104B60(struct Task *task)
 {
     if (!gPaletteFade.active)
         task->data[0]++;
 }
 
-void sub_8104B80(struct Task *task)
+/*static */void sub_8104B80(struct Task *task)
 {
     sub_8104DA4();
     sub_81065DC();
@@ -3043,7 +3045,7 @@ void sub_8104B80(struct Task *task)
     task->data[0]++;
 }
 
-void sub_812DD78(struct Task *task)
+/*static */void sub_812DD78(struct Task *task)
 {
     AddTextPrinterParameterized3(1, 1, 2, 5, gUnknown_085A744C, 0, gText_ReelTimeHelp);
     CopyWindowToVram(1, 3);
@@ -3051,7 +3053,7 @@ void sub_812DD78(struct Task *task)
     task->data[0]++;
 }
 
-void sub_8104BC8(struct Task *task)
+/*static */void sub_8104BC8(struct Task *task)
 {
     if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
     {
@@ -3064,32 +3066,32 @@ void sub_8104BC8(struct Task *task)
     }
 }
 
-void sub_812DE14(struct Task *task)
+/*static */void sub_812DE14(struct Task *task)
 {
     sub_812F968();
     ShowBg(3);
     task->data[0]++;
 }
 
-void sub_812DE30(struct Task *task)
+/*static */void sub_812DE30(struct Task *task)
 {
     sub_8104CAC(task->data[1]);
     task->data[0]++;
 }
 
-void sub_8104BFC(struct Task *task)
+/*static */void sub_8104BFC(struct Task *task)
 {
     sub_810423C(sSlotMachine->pikaPower);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     task->data[0]++;
 }
 
-void sub_8104C44(struct Task *task)
+/*static */void sub_8104C44(struct Task *task)
 {
     DestroyTask(FindTaskIdByFunc(sub_8104B0C));
 }
 
-void sub_8104C5C(void)
+/*static */void sub_8104C5C(void)
 {
     u8 i;
     struct Task *task;
@@ -3101,7 +3103,7 @@ void sub_8104C5C(void)
         task->data[i] = MAX_SPRITES;
 }
 
-void sub_8104CAC(u8 arg0)
+/*static */void sub_8104CAC(u8 arg0)
 {
     u8 i;
     struct Task *task;
@@ -3123,7 +3125,7 @@ void sub_8104CAC(u8 arg0)
     }
 }
 
-void sub_8104D30(u8 a0, SpriteCallback a1, s16 a2, s16 a3, s16 a4)
+/*static */void sub_8104D30(u8 a0, SpriteCallback a1, s16 a2, s16 a3, s16 a4)
 {
     u8 i;
     struct Task *task = gTasks + sSlotMachine->unk3D;
@@ -3137,7 +3139,7 @@ void sub_8104D30(u8 a0, SpriteCallback a1, s16 a2, s16 a3, s16 a4)
     }
 }
 
-void sub_8104DA4(void)
+/*static */void sub_8104DA4(void)
 {
     u8 i;
     struct Task *task = gTasks + sSlotMachine->unk3D;
@@ -3153,7 +3155,7 @@ void sub_8104DA4(void)
     }
 }
 
-bool8 sub_8104E18(void)
+/*static */bool8 sub_8104E18(void)
 {
     u8 i;
     struct Task *task = gTasks + sSlotMachine->unk3D;
@@ -3168,16 +3170,16 @@ bool8 sub_8104E18(void)
     return TRUE;
 }
 
-void sub_8104E74_(u8 taskId)
+/*static */void sub_8104E74_(u8 taskId)
 {
     gUnknown_083ECC54[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-void nullsub_69(struct Task *task)
+/*static */void nullsub_69(struct Task *task)
 {
 }
 
-void sub_8104EA8(void)
+/*static */void sub_8104EA8(void)
 {
     s16 i;
     s16 j;
@@ -3195,7 +3197,7 @@ void sub_8104EA8(void)
     }
 }
 
-void sub_8104F18(struct Sprite *sprite)
+/*static */void sub_8104F18(struct Sprite *sprite)
 {
     sprite->data[2] = sSlotMachine->unk1C[sprite->data[0]] + sprite->data[1];
     sprite->data[2] %= 120;
@@ -3204,7 +3206,7 @@ void sub_8104F18(struct Sprite *sprite)
     SetSpriteSheetFrameTileNum(sprite);
 }
 
-void sub_8104F8C(void)
+/*static */void sub_8104F8C(void)
 {
     s16 i;
     s16 x;
@@ -3215,7 +3217,7 @@ void sub_8104F8C(void)
         sub_8104FF4(x, 23, 1, i);
 }
 
-void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3)
+/*static */void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3)
 {
     struct Sprite *sprite = gSprites + CreateSprite(&gSpriteTemplate_83ED42C, x, y, 13);
     sprite->oam.priority = 2;
@@ -3225,7 +3227,7 @@ void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3)
     sprite->data[3] = -1;
 }
 
-void sub_810506C(struct Sprite *sprite)
+/*static */void sub_810506C(struct Sprite *sprite)
 {
     u16 tag = sSlotMachine->coins;
     if (sprite->data[0])
@@ -3241,14 +3243,14 @@ void sub_810506C(struct Sprite *sprite)
     }
 }
 
-void sub_81050C4(void)
+/*static */void sub_81050C4(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED444, 0x58, 0x48, 15);
     gSprites[spriteId].oam.priority = 3;
     SetSubspriteTables(gSprites + spriteId, gSubspriteTables_83ED704);
 }
 
-void sub_8105100(void)
+/*static */void sub_8105100(void)
 {
     struct SpriteTemplate spriteTemplate;
     u8 spriteId;
@@ -3274,14 +3276,14 @@ void sub_8105100(void)
     sSlotMachine->unk3F = spriteId;
 }
 
-void sub_810514C(void)
+/*static */void sub_810514C(void)
 {
     DestroySprite(gSprites + sSlotMachine->unk3F);
     if (gUnknown_0203AAE4 != NULL)
         FREE_AND_SET_NULL(gUnknown_0203AAE4);
 }
 
-void sub_8105170(struct Sprite *sprite)
+/*static */void sub_8105170(struct Sprite *sprite)
 {
     sprite->pos2.y = sprite->pos2.x = 0;
     if (sprite->animNum == 4)
@@ -3292,7 +3294,7 @@ void sub_8105170(struct Sprite *sprite)
     }
 }
 
-void sub_81051C0(void)
+/*static */void sub_81051C0(void)
 {
     struct SpriteTemplate spriteTemplate;
     u8 spriteId;
@@ -3327,7 +3329,7 @@ void sub_81051C0(void)
     sSlotMachine->unk49[1] = spriteId;
 }
 
-void sub_8105284_(void)
+/*static */void sub_8105284_(void)
 {
     struct SpriteTemplate spriteTemplate;
     u8 spriteId;
@@ -3348,7 +3350,7 @@ void sub_8105284_(void)
     sSlotMachine->unk42 = spriteId;
 }
 
-void sub_81052EC(void)
+/*static */void sub_81052EC(void)
 {
     u8 i;
     s16 r5;
@@ -3363,7 +3365,7 @@ void sub_81052EC(void)
     }
 }
 
-void sub_810535C(struct Sprite *sprite)
+/*static */void sub_810535C(struct Sprite *sprite)
 {
     s16 r0 = (u16)(sSlotMachine->unk14 + sprite->data[7]);
     r0 %= 40;
@@ -3371,7 +3373,7 @@ void sub_810535C(struct Sprite *sprite)
     StartSpriteAnimIfDifferent(sprite, sub_8102C48(r0 / 20));
 }
 
-void sub_81053A0(void)
+/*static */void sub_81053A0(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4D4, 0x170, 0x64, 9);
     struct Sprite *sprite = &gSprites[spriteId];
@@ -3388,7 +3390,7 @@ void sub_81053A0(void)
     sSlotMachine->unk4E[1] = spriteId;
 }
 
-void sub_810545C(void)
+/*static */void sub_810545C(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4EC, 0x170, 0x4c, 11);
     struct Sprite *sprite = &gSprites[spriteId];
@@ -3398,7 +3400,7 @@ void sub_810545C(void)
     sSlotMachine->unk40 = spriteId;
 }
 
-void sub_81054B8(void)
+/*static */void sub_81054B8(void)
 {
     u8 i;
 
@@ -3415,7 +3417,7 @@ void sub_81054B8(void)
         DestroySprite(&gSprites[sSlotMachine->unk4B[i]]);
 }
 
-void sub_8105524(void)
+/*static */void sub_8105524(void)
 {
     u8 i;
 
@@ -3423,14 +3425,14 @@ void sub_8105524(void)
         DestroySprite(&gSprites[sSlotMachine->unk4E[i]]);
 }
 
-void sub_8105554(void)
+/*static */void sub_8105554(void)
 {
     DestroySprite(&gSprites[sSlotMachine->unk42]);
     if (gUnknown_0203AAF0 != NULL)
         FREE_AND_SET_NULL(gUnknown_0203AAF0);
 }
 
-void sub_8105578(void)
+/*static */void sub_8105578(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED504, 0x98, 0x20, 5);
     struct Sprite *sprite = &gSprites[spriteId];
@@ -3451,7 +3453,7 @@ void sub_8105578(void)
     sprite->data[7] = 0x20;
 }
 
-void sub_810562C(struct Sprite *sprite)
+/*static */void sub_810562C(struct Sprite *sprite)
 {
     if (sprite->data[0] != 0)
     {
@@ -3473,13 +3475,13 @@ void sub_810562C(struct Sprite *sprite)
     }
 }
 
-void sub_8105688(s16 a0)
+/*static */void sub_8105688(s16 a0)
 {
     gSprites[sSlotMachine->unk50[0]].data[7] = a0;
     gSprites[sSlotMachine->unk50[1]].data[7] = a0;
 }
 
-void sub_81056C0(void)
+/*static */void sub_81056C0(void)
 {
     u8 i;
 
@@ -3487,7 +3489,7 @@ void sub_81056C0(void)
         DestroySprite(&gSprites[sSlotMachine->unk50[i]]);
 }
 
-void sub_81056F0(void)
+/*static */void sub_81056F0(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED51C, 0x48, 0x50, 3);
     gSprites[spriteId].oam.priority = 1;
@@ -3503,7 +3505,7 @@ void sub_81056F0(void)
     sSlotMachine->unk52[1] = spriteId;
 }
 
-void sub_8105784(struct Sprite *sprite)
+/*static */void sub_8105784(struct Sprite *sprite)
 {
     u8 sp[] = {16, 0};
     if (sprite->data[0] && --sprite->data[6] <= 0)
@@ -3515,12 +3517,12 @@ void sub_8105784(struct Sprite *sprite)
     }
 }
 
-void sub_81057E8(s16 a0)
+/*static */void sub_81057E8(s16 a0)
 {
     gSprites[sSlotMachine->unk52[0]].data[7] = a0;
 }
 
-void sub_8105804(void)
+/*static */void sub_8105804(void)
 {
     u8 i;
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(7) << 4) + 0x103, 0, 0, 0);
@@ -3528,24 +3530,24 @@ void sub_8105804(void)
         DestroySprite(&gSprites[sSlotMachine->unk52[i]]);
 }
 
-void sub_8105854(void)
+/*static */void sub_8105854(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED534, 0xa8, 0x50, 6);
     gSprites[spriteId].oam.priority = 1;
     sSlotMachine->unk41 = spriteId;
 }
 
-void sub_8105894(struct Sprite *sprite)
+/*static */void sub_8105894(struct Sprite *sprite)
 {
     sprite->pos2.y = gSpriteCoordOffsetY;
 }
 
-void sub_81058A0(void)
+/*static */void sub_81058A0(void)
 {
     DestroySprite(&gSprites[sSlotMachine->unk41]);
 }
 
-void sub_81058C4(void)
+/*static */void sub_81058C4(void)
 {
     u8 i;
     u16 sp[] = {0x0, 0x40, 0x80, 0xC0};
@@ -3560,7 +3562,7 @@ void sub_81058C4(void)
     }
 }
 
-void sub_810594C(struct Sprite *sprite)
+/*static */void sub_810594C(struct Sprite *sprite)
 {
     sprite->data[0] -= 2;
     sprite->data[0] &= 0xff;
@@ -3578,7 +3580,7 @@ void sub_810594C(struct Sprite *sprite)
     }
 }
 
-void sub_81059B8(void)
+/*static */void sub_81059B8(void)
 {
     u8 i;
     for (i = 0; i < 4; i++)
@@ -3587,7 +3589,7 @@ void sub_81059B8(void)
     }
 }
 
-void sub_81059E8(void)
+/*static */void sub_81059E8(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED564, 0xa8, 0x3c, 8);
     struct Sprite *sprite = &gSprites[spriteId];
@@ -3597,7 +3599,7 @@ void sub_81059E8(void)
     sSlotMachine->unk43 = spriteId;
 }
 
-void sub_8105A38(struct Sprite *sprite)
+/*static */void sub_8105A38(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -3624,19 +3626,19 @@ void sub_8105A38(struct Sprite *sprite)
     sprite->pos2.y -= (sprite->data[1] >> 8);
 }
 
-u8 sub_8105ACC(void)
+/*static */u8 sub_8105ACC(void)
 {
     return gSprites[sSlotMachine->unk43].data[7];
 }
 
-void sub_8105AEC(void)
+/*static */void sub_8105AEC(void)
 {
     struct Sprite *sprite = &gSprites[sSlotMachine->unk43];
     FreeOamMatrix(sprite->oam.matrixNum);
     DestroySprite(sprite);
 }
 
-u8 sub_8105B1C(s16 x, s16 y)
+/*static */u8 sub_8105B1C(s16 x, s16 y)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED6CC, x, y, 12);
     struct Sprite *sprite = &gSprites[spriteId];
@@ -3646,25 +3648,25 @@ u8 sub_8105B1C(s16 x, s16 y)
     return spriteId;
 }
 
-void sub_8105B70(struct Sprite *sprite)
+/*static */void sub_8105B70(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
         sprite->data[7] = 1;
 }
 
-void sub_8105B88(u8 spriteId)
+/*static */void sub_8105B88(u8 spriteId)
 {
     struct Sprite *sprite = &gSprites[spriteId];
     FreeOamMatrix(sprite->oam.matrixNum);
     DestroySprite(sprite);
 }
 
-u8 sub_8105BB4(u8 templateIdx, u8 cbAndCoordsIdx, s16 a2)
+/*static */u8 sub_8105BB4(u8 templateIdx, u8 cbAndCoordsIdx, s16 a2)
 {
     return sub_8105BF8(templateIdx, gUnknown_083ECF0C[cbAndCoordsIdx], gUnknown_083ECE7E[cbAndCoordsIdx][0], gUnknown_083ECE7E[cbAndCoordsIdx][1], a2);
 }
 
-u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
+/*static */u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
 {
     struct SpriteTemplate spriteTemplate;
     u8 spriteId;
@@ -3683,12 +3685,12 @@ u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
     return spriteId;
 }
 
-void sub_8105C64(struct Sprite *sprite)
+/*static */void sub_8105C64(struct Sprite *sprite)
 {
     sprite->data[7] = 0;
 }
 
-void sub_8105C6C(struct Sprite *sprite)
+/*static */void sub_8105C6C(struct Sprite *sprite)
 {
     s16 sp0[] = {4, -4, 4, -4};
     s16 sp8[] = {4, 4, -4, -4};
@@ -3707,26 +3709,26 @@ void sub_8105C6C(struct Sprite *sprite)
     }
 }
 
-void sub_8105CF0(struct Sprite *sprite)
+/*static */void sub_8105CF0(struct Sprite *sprite)
 {
     sprite->hFlip = TRUE;
     sub_8105C6C(sprite);
 }
 
-void sub_8105D08(struct Sprite *sprite)
+/*static */void sub_8105D08(struct Sprite *sprite)
 {
     sprite->vFlip = TRUE;
     sub_8105C6C(sprite);
 }
 
-void sub_8105D20(struct Sprite *sprite)
+/*static */void sub_8105D20(struct Sprite *sprite)
 {
     sprite->hFlip = TRUE;
     sprite->vFlip = TRUE;
     sub_8105C6C(sprite);
 }
 
-void sub_8105D3C(struct Sprite *sprite)
+/*static */void sub_8105D3C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3753,7 +3755,7 @@ void sub_8105D3C(struct Sprite *sprite)
     }
 }
 
-void sub_8105DA4(struct Sprite *sprite)
+/*static */void sub_8105DA4(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3780,7 +3782,7 @@ void sub_8105DA4(struct Sprite *sprite)
     }
 }
 
-void sub_8105E08(struct Sprite *sprite)
+/*static */void sub_8105E08(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3818,7 +3820,7 @@ void sub_8105E08(struct Sprite *sprite)
     }
 }
 
-void sub_8105EB4(struct Sprite *sprite)
+/*static */void sub_8105EB4(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3858,7 +3860,7 @@ void sub_8105EB4(struct Sprite *sprite)
     }
 }
 
-void sub_8105F54(struct Sprite *sprite)
+/*static */void sub_8105F54(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3878,7 +3880,7 @@ void sub_8105F54(struct Sprite *sprite)
     }
 }
 
-void sub_8105F9C(struct Sprite *sprite)
+/*static */void sub_8105F9C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3912,7 +3914,7 @@ void sub_8105F9C(struct Sprite *sprite)
     }
 }
 
-void sub_8106058(struct Sprite *sprite)
+/*static */void sub_8106058(struct Sprite *sprite)
 {
     if (sprite->data[1] < 3)
     {
@@ -3936,7 +3938,7 @@ void sub_8106058(struct Sprite *sprite)
     sprite->data[7] = 0;
 }
 
-void sub_81060FC(struct Sprite *sprite)
+/*static */void sub_81060FC(struct Sprite *sprite)
 {
     s16 sp00[] = {0, -40, 0, 0, 48, 0, 24, 0};
     s16 sp10[] = {-32, 0, -32, -48, 0, -48, 0, -48};
@@ -3971,7 +3973,7 @@ void sub_81060FC(struct Sprite *sprite)
     }
 }
 
-void sub_81061C8(struct Sprite *sprite)
+/*static */void sub_81061C8(struct Sprite *sprite)
 {
     s16 sp0[] = {160, 192, 224, 104, 80, 64, 48, 24};
 
@@ -3986,7 +3988,7 @@ void sub_81061C8(struct Sprite *sprite)
         sprite->data[1]--;
 }
 
-void sub_8106230(struct Sprite *sprite)
+/*static */void sub_8106230(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -4040,21 +4042,21 @@ void sub_8106230(struct Sprite *sprite)
     }
 }
 
-void nullsub_70(void)
+/*static */void nullsub_70(void)
 {
 }
 
-void sub_8106364(void)
+/*static */void sub_8106364(void)
 {
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
 }
 
-void sub_8106370(void)
+/*static */void sub_8106370(void)
 {
     LoadPalette(gUnknown_083EDE20, (IndexOfSpritePaletteTag(6) << 4) + 0x100, 0x20);
 }
 
-void sub_810639C(void)
+/*static */void sub_810639C(void)
 {
     sSlotMachine->win0h = 0xf0;
     sSlotMachine->win0v = 0xa0;
@@ -4062,7 +4064,7 @@ void sub_810639C(void)
     sSlotMachine->winOut = 0x3f;
 }
 
-void sub_81063C0(void)
+/*static */void sub_81063C0(void)
 {
     u8 i;
 
@@ -4086,7 +4088,7 @@ void sub_81063C0(void)
     LoadSpritePalettes(gSlotMachineSpritePalettes);
 }
 
-void sub_8106404(void)
+/*static */void sub_8106404(void)
 {
     u8 *dest;
     u8 i, j;
@@ -4110,7 +4112,7 @@ extern const u8 gSlotMachineMenu_Tilemap[];
 extern const u8 gUnknown_08DCEC70[];
 extern const u16 gSlotMachineMenu_Pal[];
 
-void sub_8106448(void)
+/*static */void sub_8106448(void)
 {
     gUnknown_0203AAC8 = Alloc(0x2200);
     LZDecompressWram(gSlotMachineMenu_Gfx, gUnknown_0203AAC8);
@@ -4119,18 +4121,18 @@ void sub_8106448(void)
     LoadPalette(gPalette_83EDE24, 208, 32);
 }
 
-void sub_81064B8(void)
+/*static */void sub_81064B8(void)
 {
     sub_812F968();
     LoadSlotMachineWheelOverlay();
 }
 
-void sub_812F968(void)
+/*static */void sub_812F968(void)
 {
     LoadBgTilemap(2, gSlotMachineMenu_Tilemap, 0x500, 0);
 }
 
-void LoadSlotMachineWheelOverlay(void)
+/*static */void LoadSlotMachineWheelOverlay(void)
 {
     s16 x, y, dx;
 
@@ -4152,7 +4154,7 @@ void LoadSlotMachineWheelOverlay(void)
     }
 }
 
-void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4)
+/*static */void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4)
 {
     gUnknown_0203AADC[0] = arg1;
     gUnknown_0203AADC[1] = arg2;
@@ -4165,13 +4167,13 @@ void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4)
     LoadBgTilemap(2, gUnknown_0203AADC + 3, 2, 16 * 32 + 1 + arg0);
 }
 
-void sub_81065DC(void)
+/*static */void sub_81065DC(void)
 {
     LoadBgTilemap(2, gUnknown_08DCEC70, 0x500, 0);
     HideBg(3);
 }
 
-void SlotMachineSetup_9_0(void)
+/*static */void SlotMachineSetup_9_0(void)
 {
     gUnknown_03001188[0]  = gUnknown_0203AAF4;
     gUnknown_03001188[1]  = gUnknown_0203AAF8;
@@ -4201,7 +4203,7 @@ void SlotMachineSetup_9_0(void)
     gUnknown_03001188[25] = NULL;
 }
 
-void SlotMachineSetup_8_0(void)
+/*static */void SlotMachineSetup_8_0(void)
 {
     gUnknown_0203AAF4 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
 	gUnknown_0203AAF4[0].data = gUnknown_0203AAD4;
@@ -4488,4 +4490,127 @@ const s16 gUnknown_083ECE7E[][2] = {
     { 0xdc, 0x48},
     { 0xe8, 0x48},
     { 0x00, 0x00}
+};
+
+const SpriteCallback gUnknown_083ECF0C[] = {
+    sub_8105C64,
+    sub_8105F54,
+    sub_8105F54,
+    sub_8105F54,
+    sub_8105F54,
+    sub_8105F9C,
+    sub_8105EB4,
+    sub_8105C64,
+    sub_8105C64,
+    sub_8105C6C,
+    sub_8105CF0,
+    sub_8105D08,
+    sub_8105D20,
+    sub_8105D3C,
+    sub_8105DA4,
+    sub_8105E08,
+    sub_8105C64,
+    sub_8106058,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_8106230
+};
+
+const struct UnkStruct1 Unknown_83ECF98[] = {
+    {25, 34, 0},
+    {2, 0, 0},
+    {9, 16, 0},
+    {255, 0, 0}
+};
+
+const struct UnkStruct1 Unknown_83ECFA8[] = {
+    {10, 1, 0},
+    {11, 2, 0},
+    {12, 3, 0},
+    {13, 4, 0},
+    {5, 5, 0},
+    {8, 6, 0},
+    {255, 0, 0}
+};
+
+const struct UnkStruct1 Unknown_83ECFC4[] = {
+    {3, 7, 0},
+    {8, 17, 0},
+    {255, 0, 0}
+};
+
+const struct UnkStruct1 Unknown_83ECFD0[] = {
+    {4, 8, 0},
+    {6, 9, 0},
+    {6, 10, 1},
+    {6, 11, 2},
+    {6, 12, 3},
+    {255, 0, 0}
+};
+
+const struct UnkStruct1 Unknown_83ECFE8[] = {
+    {0, 13, 0},
+    {1, 14, 0},
+    {7, 15, 0},
+    {255, 0, 0}
+};
+
+const struct UnkStruct1 Unknown_83ECFF8[] = {
+    {19, 26, 0},
+    {20, 27, 1},
+    {21, 28, 2},
+    {14, 29, 3},
+    {15, 30, 4},
+    {16, 31, 5},
+    {17, 32, 6},
+    {18, 33, 7},
+    {8, 17, 0},
+    {255, 0, 0}
+};
+
+const struct UnkStruct1 Unknown_83ED020[] = {
+    {22, 18, 0},
+    {23, 19, 1},
+    {24, 20, 2},
+    {14, 21, 3},
+    {15, 22, 4},
+    {16, 23, 5},
+    {17, 24, 6},
+    {18, 25, 7},
+    {8, 17, 0},
+    {255, 0, 0}
+};
+
+const struct UnkStruct1 *const gUnknown_083ED048[] = {
+    Unknown_83ECF98,
+    Unknown_83ECFA8,
+    Unknown_83ECFC4,
+    Unknown_83ECFD0,
+    Unknown_83ECFE8,
+    Unknown_83ED020,
+    Unknown_83ECFF8
+};
+
+void (*const gUnknown_083ED064[])(void) = {
+    sub_810639C,
+    sub_8106364,
+    sub_8106370,
+    nullsub_70,
+    nullsub_70,
+    sub_8106370,
+    sub_8106370
 };
