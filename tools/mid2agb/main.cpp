@@ -73,6 +73,18 @@ static std::string StripExtension(std::string s)
     return s;
 }
 
+static std::string StripPathAndExtension(std::string s)
+{
+    std::size_t pos = s.find_last_of("/\\");
+
+    if (pos > 0 && pos != std::string::npos)
+    {
+        s = s.substr(pos + 1, pos);
+    }
+
+    return StripExtension(s);
+}
+
 static std::string GetExtension(std::string s)
 {
     std::size_t pos = s.find_last_of('.');
@@ -206,7 +218,7 @@ int main(int argc, char** argv)
         RaiseError("output filename extension is not \"s\"");
 
     if (g_asmLabel.empty())
-        g_asmLabel = StripExtension(outputFilename);
+        g_asmLabel = StripPathAndExtension(outputFilename);
 
     g_inputFile = std::fopen(inputFilename.c_str(), "rb");
 

@@ -52,6 +52,7 @@ static std::int32_t s_absoluteTime;
 static int s_blockCount = 0;
 static int s_minNote;
 static int s_maxNote;
+static int s_runningStatus = 0;
 
 void Seek(long offset)
 {
@@ -181,19 +182,31 @@ void DetermineEventCategory(MidiEventCategory& category, int& typeChan, int& siz
 {
     typeChan = ReadInt8();
 
+    if (typeChan < 0x80 && s_runningStatus != 0)
+    {
+        typeChan = s_runningStatus;
+        Skip(-1);
+    }
+    
     if (typeChan == 0xFF)
     {
         category = MidiEventCategory::Meta;
         size = 0;
     }
+    else if (typeChan >= 0xF8)
+    {
+        category = MidiEventCategory::Invalid;
+    }
     else if (typeChan >= 0xF0)
     {
         category = MidiEventCategory::SysEx;
         size = 0;
+        s_runningStatus = 0;
     }
     else if (typeChan >= 0x80)
     {
         category = MidiEventCategory::Control;
+        s_runningStatus = typeChan;
 
         switch (typeChan >> 4)
         {
