@@ -1552,10 +1552,10 @@ static void OpponentHandleChooseMove(void)
 
             switch (chosenMoveId)
             {
-            case 5:
+            case AI_CHOICE_WATCH:
                 BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
                 break;
-            case 4:
+            case AI_CHOICE_FLEE:
                 BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
                 break;
             case 6:
