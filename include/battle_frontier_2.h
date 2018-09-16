@@ -9,8 +9,6 @@ bool8 InBattlePike(void);
 void sub_819FA50(void);
 void sub_81AA078(u16*, u8);
 void sub_81A4C30(void);
-void sub_819A4F8(void);
-void sub_819DC00(void);
 bool8 sub_81A6BF4(void);
 
 #endif // GUARD_BATTLE_FRONTIER_2_H

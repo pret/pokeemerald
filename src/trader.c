@@ -77,11 +77,11 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     for (i = 0; i < 4; i++)
     {
         if (trader->decorIds[i] > NUM_DECORATIONS)
-            PrintTextOnWindow(data[3], 1, gText_FiveMarks, 8, 16 * i + 1, 255, NULL);
+            AddTextPrinterParameterized(data[3], 1, gText_FiveMarks, 8, 16 * i + 1, 255, NULL);
         else
-            PrintTextOnWindow(data[3], 1, gDecorations[trader->decorIds[i]].name, 8, 16 * i + 1, 255, NULL);
+            AddTextPrinterParameterized(data[3], 1, gDecorations[trader->decorIds[i]].name, 8, 16 * i + 1, 255, NULL);
     }
-    PrintTextOnWindow(data[3], 1, gText_Exit, 8, 16 * i + 1, 255, NULL);
+    AddTextPrinterParameterized(data[3], 1, gText_Exit, 8, 16 * i + 1, 255, NULL);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[3], 5, 0);
     schedule_bg_copy_tilemap_to_vram(0);
 }

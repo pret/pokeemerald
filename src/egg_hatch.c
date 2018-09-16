@@ -451,7 +451,7 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
     case 1:
         SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, r5);
         spriteID = CreateSprite(&gMultiuseSpriteTemplate, 120, 75, 6);
-        gSprites[spriteID].invisible = 1;
+        gSprites[spriteID].invisible = TRUE;
         gSprites[spriteID].callback = SpriteCallbackDummy;
         break;
     }
@@ -808,7 +808,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
     if (!gPaletteFade.active)
     {
         PlaySE(SE_TAMAGO);
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = SpriteCB_Egg_5;
         sprite->data[0] = 0;
     }
@@ -818,7 +818,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
 {
     if (sprite->data[0] == 0)
     {
-        gSprites[sEggHatchData->pokeSpriteID].invisible = 0;
+        gSprites[sEggHatchData->pokeSpriteID].invisible = FALSE;
         StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
     }
     if (sprite->data[0] == 8)
@@ -870,7 +870,7 @@ static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
     sEggHatchData->textColor[0] = 0;
     sEggHatchData->textColor[1] = 5;
     sEggHatchData->textColor[2] = 6;
-    AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, sEggHatchData->textColor, speed, string);
+    AddTextPrinterParameterized4(windowId, 1, x, y, 0, 0, sEggHatchData->textColor, speed, string);
 }
 
 u8 GetEggStepsToSubtract(void)

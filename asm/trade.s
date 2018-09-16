@@ -1881,7 +1881,7 @@ sub_807825C: @ 807825C
 	lsrs r1, 24
 	movs r0, 0x1C
 	bl SetGpuReg
-	bl sub_8197224
+	bl RunTextPrintersAndIsPrinter0Active
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
@@ -4588,7 +4588,7 @@ _080798BC:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r6, sp, 0x28
 	adds r0, r6, 0
 	ldr r1, [sp, 0x60]
@@ -4608,7 +4608,7 @@ _080798BC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -4847,7 +4847,7 @@ sub_8079B84: @ 8079B84
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -5599,7 +5599,7 @@ sub_807A19C: @ 807A19C
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC
@@ -14295,7 +14295,7 @@ sub_807F1A8: @ 807F1A8
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

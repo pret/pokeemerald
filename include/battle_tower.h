@@ -31,7 +31,7 @@ struct BattleFrontierTrainer
     u16 speechBefore[6];
     u16 speechWin[6];
     u16 speechLose[6];
-    u16 *btMonPool;
+    const u16 *btMonPool;
 };
 
 struct FacilityMon

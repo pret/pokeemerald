@@ -572,7 +572,7 @@ static void DisplaySentToPCMessage(void)
     StringExpandPlaceholders(gStringVar4, gUnknown_0858BDB8[stringToDisplay]);
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     gTextFlags.flag_0 = TRUE;
-    AddTextPrinterParameterized(0, 1, gStringVar4, GetPlayerTextSpeed(), 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), 0, 2, 1, 3);
     CopyWindowToVram(0, 3);
 }
 
@@ -1488,7 +1488,7 @@ static void HandleDpadMovement(struct Task *task)
 static void sub_80E4894(void)
 {
     FillWindowPixelBuffer(gNamingScreenData->windows[3], 0x11);
-    PrintTextOnWindow(gNamingScreenData->windows[3], 1, gNamingScreenData->template->title, 8, 1, 0, 0);
+    AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, gNamingScreenData->template->title, 8, 1, 0, 0);
     PutWindowTilemap(gNamingScreenData->windows[3]);
 }
 
@@ -1499,7 +1499,7 @@ static void sub_80E48E8(void)
     StringCopy(buffer, gSpeciesNames[gNamingScreenData->monSpecies]);
     StringAppendN(buffer, gNamingScreenData->template->title, 15);
     FillWindowPixelBuffer(gNamingScreenData->windows[3], 0x11);
-    PrintTextOnWindow(gNamingScreenData->windows[3], 1, buffer, 8, 1, 0, 0);
+    AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, buffer, 8, 1, 0, 0);
     PutWindowTilemap(gNamingScreenData->windows[3]);
 }
 
@@ -1556,7 +1556,7 @@ static void sub_80E49BC(void)
             StringCopy(genderSymbol, gText_FemaleSymbol);
             isFemale = TRUE;
         }
-        box_print(gNamingScreenData->windows[2], 1, 0x68, 1, sGenderColors[isFemale], -1, genderSymbol);
+        AddTextPrinterParameterized3(gNamingScreenData->windows[2], 1, 0x68, 1, sGenderColors[isFemale], -1, genderSymbol);
     }
 }
 
@@ -1693,7 +1693,7 @@ static void sub_80E4D10(void)
         temp[1] = gExpandedPlaceholder_Empty[0];
         unk2 = (sub_80E503C(temp[0]) == 1) ? 2 : 0;
 
-        PrintTextOnWindow(gNamingScreenData->windows[2], 1, temp, i * 8 + unk + unk2, 1, 0xFF, NULL);
+        AddTextPrinterParameterized(gNamingScreenData->windows[2], 1, temp, i * 8 + unk + unk2, 1, 0xFF, NULL);
     }
 
     sub_80E498C();
@@ -1735,7 +1735,7 @@ static void sub_80E4DE4(u8 window, u8 a1)
 
     for (i = 0; i < 4; i++)
     {
-        box_print(window, 1, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
+        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
     }
 
     PutWindowTilemap(window);
@@ -1780,7 +1780,7 @@ static void sub_80E4EF0(void)
     const u8 color[3] = { 15, 1, 2 };
 
     FillWindowPixelBuffer(gNamingScreenData->windows[4], 0xFF);
-    box_print(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
+    AddTextPrinterParameterized3(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
     PutWindowTilemap(gNamingScreenData->windows[4]);
     CopyWindowToVram(gNamingScreenData->windows[4], 3);
 }

@@ -761,7 +761,7 @@ _080E23D4:
 	adds r0, r6, 0
 	movs r1, 0x1
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, =gText_LogOff
 	movs r0, 0x31
 	str r0, [sp]
@@ -770,7 +770,7 @@ _080E23D4:
 	adds r0, r6, 0
 	movs r1, 0x1
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _080E247A
 	.pool
 _080E2448:
@@ -795,7 +795,7 @@ _080E2448:
 	adds r0, r6, 0
 	movs r1, 0x1
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _080E247A:
 	ldr r0, =0x000008ab
 	bl FlagGet
@@ -813,7 +813,7 @@ _080E247A:
 	adds r0, r6, 0
 	movs r1, 0x1
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _080E24C6
 	.pool
 _080E24B0:
@@ -826,7 +826,7 @@ _080E24B0:
 	adds r0, r6, 0
 	movs r1, 0x1
 	adds r3, r7, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _080E24C6:
 	ldr r4, =gStringVar4
 	ldr r1, =gText_PlayersPC
@@ -877,7 +877,7 @@ ScriptMenu_DisplayPCStartupPrompt: @ 80E2514
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParameterized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -1228,7 +1228,7 @@ _080E2802:
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1606,7 +1606,7 @@ _080E2B12:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParameterized
+	bl AddTextPrinterParameterized2
 	b _080E2B70
 	.pool
 _080E2B40:
@@ -1630,7 +1630,7 @@ _080E2B40:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParameterized
+	bl AddTextPrinterParameterized2
 _080E2B70:
 	add sp, 0x10
 	pop {r4}
@@ -1687,7 +1687,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, =gText_MenuOptionPokemon
 	movs r0, 0x19
 	str r0, [sp]
@@ -1696,7 +1696,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, =gText_MenuOptionBag
 	movs r0, 0x29
 	str r0, [sp]
@@ -1705,7 +1705,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, =gText_MenuOptionPokenav
 	movs r0, 0x39
 	str r0, [sp]
@@ -1714,7 +1714,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	movs r0, 0x49
@@ -1724,7 +1724,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, =gText_MenuOptionSave
 	movs r0, 0x59
 	str r0, [sp]
@@ -1733,7 +1733,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, =gText_MenuOptionOption
 	movs r0, 0x69
 	str r0, [sp]
@@ -1742,7 +1742,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r2, =gText_MenuOptionExit
 	movs r0, 0x79
 	str r0, [sp]
@@ -1751,7 +1751,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x10
 	str r0, [sp]
 	movs r0, 0x8

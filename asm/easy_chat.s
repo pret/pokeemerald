@@ -4644,7 +4644,7 @@ sub_811D028: @ 811D028
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	str r6, [sp, 0x8]
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -4693,7 +4693,7 @@ sub_811D058: @ 811D058
 	str r4, [sp, 0x4]
 	str r2, [sp, 0x8]
 	mov r2, r9
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3

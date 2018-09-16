@@ -2058,7 +2058,7 @@ void VBlankCB_Battle(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void nullsub_17(void)
+void nullsub_17(struct Sprite *sprite)
 {
 
 }

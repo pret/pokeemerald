@@ -2347,7 +2347,7 @@ static void pokemonanimfunc_27(struct Sprite *sprite)
         sprite->invisible = sprite->data[4];
         if (++sprite->data[2] > 19)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             sprite->callback = SpriteCB_SetDummyOnAnimEnd;
         }
         sprite->data[3] = 2;
@@ -3069,17 +3069,17 @@ static void pokemonanimfunc_35(struct Sprite *sprite)
     {
         sprite->data[7] = 0;
         sprite->data[2]++;
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
     }
     else
     {
         sprite->data[7]++;
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
     }
 
     if (sprite->data[2] > 10)
     {
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
 }

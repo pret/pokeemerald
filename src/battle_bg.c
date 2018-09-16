@@ -1,24 +1,26 @@
 #include "global.h"
 #include "battle.h"
-#include "sprite.h"
-#include "constants/trainers.h"
-#include "graphics.h"
-#include "decompress.h"
-#include "bg.h"
-#include "palette.h"
-#include "main.h"
-#include "gpu_regs.h"
-#include "link.h"
+#include "battle_bg.h"
+#include "battle_main.h"
 #include "battle_message.h"
-#include "task.h"
-#include "trig.h"
-#include "sound.h"
-#include "constants/songs.h"
-#include "window.h"
-#include "text_window.h"
-#include "menu.h"
 #include "battle_setup.h"
+#include "bg.h"
+#include "decompress.h"
+#include "gpu_regs.h"
+#include "graphics.h"
+#include "link.h"
+#include "main.h"
+#include "menu.h"
+#include "palette.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "text_window.h"
+#include "trig.h"
+#include "window.h"
 #include "constants/map_types.h"
+#include "constants/songs.h"
+#include "constants/trainers.h"
 
 struct BattleBackground
 {
@@ -29,13 +31,6 @@ struct BattleBackground
     const void *palette;
 };
 
-extern const struct SpriteTemplate gUnknown_0831A9D0;
-extern const struct SpriteTemplate gUnknown_0831A9E8;
-extern const struct CompressedSpriteSheet gUnknown_0831AA00;
-extern const struct BgTemplate gBattleBgTemplates[4];
-extern const struct WindowTemplate *const gBattleWindowTemplates[];
-extern const struct BattleBackground gBattleTerrainTable[];
-
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
@@ -43,6 +38,644 @@ extern u16 gBattle_BG2_Y;
 
 extern u8 GetCurrentMapBattleScene(void);
 
+// .rodata
+static const u16 sUnrefArray[] = {0x0300, 0x0000}; //OamData?
+
+static const struct OamData gUnknown_0831A988 =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_0831A990 =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 64,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AffineAnimCmd gUnknown_0831A998[] =
+{
+    AFFINEANIMCMD_FRAME(0x0080, 0x0080, 0x00, 0x00),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gUnknown_0831A9A8[] =
+{
+    AFFINEANIMCMD_FRAME(0x0080, 0x0080, 0x00, 0x00),
+    AFFINEANIMCMD_FRAME(0x0018, 0x0018, 0x00, 0x80),
+    AFFINEANIMCMD_FRAME(0x0018, 0x0018, 0x00, 0x80),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd * const gUnknown_0831A9C8[] =
+{
+    gUnknown_0831A998,
+    gUnknown_0831A9A8,
+};
+
+static const struct SpriteTemplate gUnknown_0831A9D0 =
+{
+    .tileTag = 0x2710,
+    .paletteTag = 0x2710,
+    .oam = &gUnknown_0831A988,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gUnknown_0831A9C8,
+    .callback = nullsub_17
+};
+
+static const struct SpriteTemplate gUnknown_0831A9E8 =
+{
+    .tileTag = 0x2710,
+    .paletteTag = 0x2710,
+    .oam = &gUnknown_0831A990,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gUnknown_0831A9C8,
+    .callback = nullsub_17
+};
+
+static const struct CompressedSpriteSheet gUnknown_0831AA00 =
+{
+    gUnknown_08D77B0C, 0x1000, 0x2710
+};
+
+const struct BgTemplate gBattleBgTemplates[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 24,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 28,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+   {
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 26,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+};
+
+static const struct WindowTemplate gUnknown_0831AA18[] = 
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 0x0090,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 35,
+        .width = 14,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 0x01c0,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 35,
+        .width = 12,
+        .height = 4,
+        .paletteNum = 5,
+        .baseBlock = 0x0190,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 55,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0300,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 55,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0310,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 57,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0320,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 57,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0330,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 55,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0290,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 57,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 5,
+        .baseBlock = 0x0298,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 25,
+        .tilemapTop = 55,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0298,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 57,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x02a0,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 55,
+        .width = 8,
+        .height = 4,
+        .paletteNum = 5,
+        .baseBlock = 0x02b0,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 26,
+        .tilemapTop = 9,
+        .width = 3,
+        .height = 4,
+        .paletteNum = 5,
+        .baseBlock = 0x0100,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 19,
+        .tilemapTop = 8,
+        .width = 10,
+        .height = 11,
+        .paletteNum = 5,
+        .baseBlock = 0x0100,
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 18,
+        .tilemapTop = 0,
+        .width = 12,
+        .height = 3,
+        .paletteNum = 6,
+        .baseBlock = 0x016e,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 3,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0020,
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 2,
+        .tilemapTop = 3,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0040,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 2,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0020,
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 2,
+        .tilemapTop = 2,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0040,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 6,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0060,
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 2,
+        .tilemapTop = 6,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0080,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 12,
+        .tilemapTop = 2,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 0x00a0,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 4,
+        .tilemapTop = 2,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 0x00a0,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 19,
+        .tilemapTop = 2,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 0x00b0,
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate gUnknown_0831AAE0[] = 
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 0x0090,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 35,
+        .width = 14,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 0x01c0,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 35,
+        .width = 12,
+        .height = 4,
+        .paletteNum = 5,
+        .baseBlock = 0x0190,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 55,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0300,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 55,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0310,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 57,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0320,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 57,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0330,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 55,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0290,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 57,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 5,
+        .baseBlock = 0x0298,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 25,
+        .tilemapTop = 55,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0298,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 57,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x02a0,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 55,
+        .width = 8,
+        .height = 4,
+        .paletteNum = 5,
+        .baseBlock = 0x02b0,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 26,
+        .tilemapTop = 9,
+        .width = 3,
+        .height = 4,
+        .paletteNum = 5,
+        .baseBlock = 0x0100,
+    },
+    {
+        .priority = 1,
+        .tilemapLeft = 19,
+        .tilemapTop = 8,
+        .width = 10,
+        .height = 11,
+        .paletteNum = 5,
+        .baseBlock = 0x0100,
+    },
+    {
+        .priority = 2,
+        .tilemapLeft = 18,
+        .tilemapTop = 0,
+        .width = 12,
+        .height = 3,
+        .paletteNum = 6,
+        .baseBlock = 0x016e,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 6,
+        .tilemapTop = 1,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0100,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 14,
+        .tilemapTop = 1,
+        .width = 2,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0110,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 1,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0114,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 12,
+        .tilemapTop = 4,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0124,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 12,
+        .tilemapTop = 6,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0130,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 12,
+        .tilemapTop = 8,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x013c,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 8,
+        .tilemapTop = 11,
+        .width = 14,
+        .height = 2,
+        .paletteNum = 5,
+        .baseBlock = 0x0148,
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 7,
+        .baseBlock = 0x0090,
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate * const gBattleWindowTemplates[] =
+{
+    gUnknown_0831AA18,
+    gUnknown_0831AAE0,
+};
+
+static const struct BattleBackground gBattleTerrainTable[] =
+{
+    {
+        .tileset = gBattleTerrainTiles_TallGrass,
+        .tilemap = gBattleTerrainTilemap_TallGrass,
+        .entryTileset = gBattleTerrainAnimTiles_TallGrass,
+        .entryTilemap = gBattleTerrainAnimTilemap_TallGrass,
+        .palette = gBattleTerrainPalette_TallGrass,
+    },
+    {
+        .tileset = gBattleTerrainTiles_LongGrass,
+        .tilemap = gBattleTerrainTilemap_LongGrass,
+        .entryTileset = gBattleTerrainAnimTiles_LongGrass,
+        .entryTilemap = gBattleTerrainAnimTilemap_LongGrass,
+        .palette = gBattleTerrainPalette_LongGrass,
+    },
+    {
+        .tileset = gBattleTerrainTiles_Sand,
+        .tilemap = gBattleTerrainTilemap_Sand,
+        .entryTileset = gBattleTerrainAnimTiles_Sand,
+        .entryTilemap = gBattleTerrainAnimTilemap_Sand,
+        .palette = gBattleTerrainPalette_Sand,
+    },
+    {
+        .tileset = gBattleTerrainTiles_Underwater,
+        .tilemap = gBattleTerrainTilemap_Underwater,
+        .entryTileset = gBattleTerrainAnimTiles_Underwater,
+        .entryTilemap = gBattleTerrainAnimTilemap_Underwater,
+        .palette = gBattleTerrainPalette_Underwater,
+    },
+    {
+        .tileset = gBattleTerrainTiles_Water,
+        .tilemap = gBattleTerrainTilemap_Water,
+        .entryTileset = gBattleTerrainAnimTiles_Water,
+        .entryTilemap = gBattleTerrainAnimTilemap_Water,
+        .palette = gBattleTerrainPalette_Water,
+    },
+    {
+        .tileset = gBattleTerrainTiles_PondWater,
+        .tilemap = gBattleTerrainTilemap_PondWater,
+        .entryTileset = gBattleTerrainAnimTiles_PondWater,
+        .entryTilemap = gBattleTerrainAnimTilemap_PondWater,
+        .palette = gBattleTerrainPalette_PondWater,
+    },
+    {
+        .tileset = gBattleTerrainTiles_Rock,
+        .tilemap = gBattleTerrainTilemap_Rock,
+        .entryTileset = gBattleTerrainAnimTiles_Rock,
+        .entryTilemap = gBattleTerrainAnimTilemap_Rock,
+        .palette = gBattleTerrainPalette_Rock,
+    },
+    {
+        .tileset = gBattleTerrainTiles_Cave,
+        .tilemap = gBattleTerrainTilemap_Cave,
+        .entryTileset = gBattleTerrainAnimTiles_Cave,
+        .entryTilemap = gBattleTerrainAnimTilemap_Cave,
+        .palette = gBattleTerrainPalette_Cave,
+    },
+    {
+        .tileset = gBattleTerrainTiles_Building,
+        .tilemap = gBattleTerrainTilemap_Building,
+        .entryTileset = gBattleTerrainAnimTiles_Building,
+        .entryTilemap = gBattleTerrainAnimTilemap_Building,
+        .palette = gBattleTerrainPalette_Building,
+    },
+    {// plain
+        .tileset = gBattleTerrainTiles_Building,
+        .tilemap = gBattleTerrainTilemap_Building,
+        .entryTileset = gBattleTerrainAnimTiles_Building,
+        .entryTilemap = gBattleTerrainAnimTilemap_Building,
+        .palette = gBattleTerrainPalette_Plain,
+    },
+};
+
+// .text
 void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
@@ -412,8 +1045,8 @@ void sub_8035D74(u8 taskId)
         gPlttBufferUnfaded[palId * 16 + 0x10F] = gPlttBufferFaded[palId * 16 + 0x10F] = 0x7FFF;
         gBattleStruct->field_7D = CreateSprite(&gUnknown_0831A9D0, 111, 80, 0);
         gBattleStruct->field_7E = CreateSprite(&gUnknown_0831A9E8, 129, 80, 0);
-        gSprites[gBattleStruct->field_7D].invisible = 1;
-        gSprites[gBattleStruct->field_7E].invisible = 1;
+        gSprites[gBattleStruct->field_7D].invisible = TRUE;
+        gSprites[gBattleStruct->field_7E].invisible = TRUE;
         gTasks[taskId].data[0]++;
         break;
     case 2:
@@ -444,8 +1077,8 @@ void sub_8035D74(u8 taskId)
 
             PlaySE(SE_W231);
             DestroyTask(taskId);
-            gSprites[gBattleStruct->field_7D].invisible = 0;
-            gSprites[gBattleStruct->field_7E].invisible = 0;
+            gSprites[gBattleStruct->field_7D].invisible = FALSE;
+            gSprites[gBattleStruct->field_7E].invisible = FALSE;
             gSprites[gBattleStruct->field_7E].oam.tileNum += 0x40;
             gSprites[gBattleStruct->field_7D].data[0] = 0;
             gSprites[gBattleStruct->field_7E].data[0] = 1;

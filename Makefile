@@ -90,7 +90,7 @@ tidy:
 	rm -r build/*
 
 include graphics_file_rules.mk
-include event_obj_graphics_makefile_rules.mk
+include spritesheet_rules.mk
 
 %.s: ;
 %.png: ;
@@ -173,5 +173,5 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
-	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION)
+	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 

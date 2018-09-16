@@ -268,12 +268,12 @@ struct UnknownPokemonStruct3
 
 struct Unknown_806F160_Struct
 {
-    u8 field_0_0 : 4;
-    u8 field_0_1 : 4;
+    u8 field_0_0:4;
+    u8 field_0_1:4;
     u8 field_1;
     u8 magic;
-    u8 field_3_0 : 4;
-    u8 field_3_1 : 4;
+    u8 field_3_0:4;
+    u8 field_3_1:4;
     void *bytes;
     u8 **byteArrays;
     struct SpriteTemplate *templates;

@@ -285,7 +285,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 1;
-    gSprites[ID].invisible = 1;
+    gSprites[ID].invisible = TRUE;
 
     // postEvo sprite
     DecompressPicFromTable_2(&gMonFrontPicTable[speciesToEvolve],
@@ -299,7 +299,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 2;
-    gSprites[ID].invisible = 1;
+    gSprites[ID].invisible = TRUE;
 
     LoadEvoSparkleSpriteAndPal();
 
@@ -514,7 +514,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
 
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 2;
-    gSprites[ID].invisible = 1;
+    gSprites[ID].invisible = TRUE;
 
     LoadEvoSparkleSpriteAndPal();
 
@@ -623,7 +623,7 @@ static void Task_EvolutionScene(u8 taskID)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
-        gSprites[sEvoStructPtr->preEvoSpriteID].invisible = 0;
+        gSprites[sEvoStructPtr->preEvoSpriteID].invisible = FALSE;
         gTasks[taskID].tState++;
         ShowBg(0);
         ShowBg(1);

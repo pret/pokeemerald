@@ -1057,7 +1057,7 @@ void sub_81ABC54(u8 a, s16 b)
     u8 r3 = (gUnknown_0203CE58.pocket == 3) ? 3 : 2;
     ConvertIntToDecimalStringN(gStringVar1, b, 2, r3);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    PrintTextOnWindow(a, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 0x28), 2, 0, 0);
+    AddTextPrinterParameterized(a, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 0x28), 2, 0, 0);
 }
 
 void sub_81ABCC0(int a, int b, int c)
@@ -1065,7 +1065,7 @@ void sub_81ABCC0(int a, int b, int c)
     u8 r3 = (gUnknown_0203CE58.pocket == 3) ? 3 : 2;
     ConvertIntToDecimalStringN(gStringVar1, b, 2, r3);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    PrintTextOnWindow(a, 1, gStringVar4, 0, 1, -1, 0);
+    AddTextPrinterParameterized(a, 1, gStringVar4, 0, 1, -1, 0);
     PrintMoneyAmount(a, 0x26, 1, c, 0);
 }
 
@@ -1185,7 +1185,7 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
         ClearWindowTilemap(1);
         DestroyListMenuTask(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
         schedule_bg_copy_tilemap_to_vram(0);
-        gSprites[gUnknown_0203CE54->unk804[2 + (gUnknown_0203CE54->unk81B_1 ^ 1)]].invisible = 1;
+        gSprites[gUnknown_0203CE54->unk804[2 + (gUnknown_0203CE54->unk81B_1 ^ 1)]].invisible = TRUE;
         sub_81AB824();
     }
     pocketId = gUnknown_0203CE58.pocket;
@@ -2291,7 +2291,7 @@ void setup_bag_menu_textboxes(void)
 
 void bag_menu_print(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 h)
 {
-    AddTextPrinterParameterized2(windowId, fontId, left, top, letterSpacing, lineSpacing, gUnknown_08614164[h], speed, str);
+    AddTextPrinterParameterized4(windowId, fontId, left, top, letterSpacing, lineSpacing, gUnknown_08614164[h], speed, str);
 }
 
 u8 sub_81AE124(u8 a)

@@ -377,7 +377,7 @@ static void ShowSafariBallsWindow(void)
     NewMenuHelpers_DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
-    PrintTextOnWindow(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sSafariBallsWindowId, 2);
 }
 
@@ -392,7 +392,7 @@ static void ShowPyramidFloorWindow(void)
     NewMenuHelpers_DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
     StringCopy(gStringVar1, sPyramindFloorNames[gSaveBlock2Ptr->frontier.field_CB2]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
-    PrintTextOnWindow(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sBattlePyramidFloorWindowId, 2);
 }
 
@@ -422,7 +422,7 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
         }
         else {
             StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
-            PrintTextOnWindow(GetStartMenuWindowId(), 1, gStringVar4, 8, (index << 4) + 9, 0xFF, NULL);
+            AddTextPrinterParameterized(GetStartMenuWindowId(), 1, gStringVar4, 8, (index << 4) + 9, 0xFF, NULL);
         }
 
         index++;
@@ -866,7 +866,7 @@ static void InitSave(void)
 static u8 RunSaveCallback(void)
 {
     // True if text is still printing
-    if (sub_8197224() == TRUE)
+    if (RunTextPrintersAndIsPrinter0Active() == TRUE)
     {
         return SAVE_IN_PROGRESS;
     }
@@ -1249,7 +1249,7 @@ static void sub_80A0550(u8 taskId)
         {
         case 0:
             FillWindowPixelBuffer(0, 17);
-            AddTextPrinterParameterized(0,
+            AddTextPrinterParameterized2(0,
                                         1,
                                         gText_SavingDontTurnOffPower,
                                         255,
@@ -1342,38 +1342,38 @@ static void ShowSaveInfoWindow(void)
     // Print region name
     yOffset = 1;
     sub_819A344(3, gStringVar4, TEXT_COLOR_GREEN);
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gStringVar4, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, 0, yOffset, 0xFF, NULL);
 
     // Print player name
     yOffset = 0x11;
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
     sub_819A344(0, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
     PrintPlayerNameOnWindow(sSaveInfoWindowId, gStringVar4, xOffset, yOffset);
 
     // Print badge count
     yOffset = 0x21;
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
     sub_819A344(4, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         // Print pokedex count
         yOffset = 0x31;
-        PrintTextOnWindow(sSaveInfoWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
+        AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
         sub_819A344(1, gStringVar4, color);
         xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-        PrintTextOnWindow(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+        AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
     }
 
     // Print play time
     yOffset += 0x10;
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
     sub_819A344(2, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
     CopyWindowToVram(sSaveInfoWindowId, 2);
 }

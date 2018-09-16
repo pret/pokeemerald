@@ -3622,7 +3622,7 @@ static void sub_8190400(u8 taskId)
             gSprites[r7].data[0] = i;
             gSprites[r7].data[1] = 0;
             if (r9 == 1)
-                gSprites[r7].invisible = 1;
+                gSprites[r7].invisible = TRUE;
 
             r7 = CreateSprite(&gUnknown_0860D050, 234, 80, 0);
             StartSpriteAnim(&gSprites[r7], 1);
@@ -3644,7 +3644,7 @@ static void SpriteCb_TrainerIconCardScrollUp(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.y >= -32)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -3664,7 +3664,7 @@ static void SpriteCb_TrainerIconCardScrollDown(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.y <= 192)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -3684,7 +3684,7 @@ static void SpriteCb_TrainerIconCardScrollLeft(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.x >= -32)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -3704,7 +3704,7 @@ static void SpriteCb_TrainerIconCardScrollRight(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.x <= 272)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -3734,7 +3734,7 @@ static void SpriteCb_MonIconCardScrollUp(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.y >= -16)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
             sprite->callback = SpriteCb_MonIcon;
     }
@@ -3756,7 +3756,7 @@ static void SpriteCb_MonIconCardScrollDown(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.y <= 176)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
             sprite->callback = SpriteCb_MonIcon;
     }
@@ -3778,7 +3778,7 @@ static void SpriteCb_MonIconCardScrollLeft(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.x >= -16)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
             sprite->callback = SpriteCb_MonIcon;
     }
@@ -3800,7 +3800,7 @@ static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.x <= 256)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
             sprite->callback = SpriteCb_MonIcon;
     }
@@ -3828,29 +3828,29 @@ static void sub_8190B40(struct Sprite *sprite)
             if ((gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].isEliminated
                 && sBattleDomeStruct->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].eliminatedAt))
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
             else if (!gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].isEliminated
                      && sBattleDomeStruct->unk_10 - 1 < r12)
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
             else
             {
                 if (gTasks[taskId1].data[0] == 2)
-                    sprite->invisible = 1;
+                    sprite->invisible = TRUE;
             }
         }
         else
         {
             if (sBattleDomeStruct->unk_10 != 0)
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
             else
             {
                 if (gTasks[taskId1].data[0] == 2)
-                    sprite->invisible = 1;
+                    sprite->invisible = TRUE;
             }
         }
     }
@@ -3861,23 +3861,23 @@ static void sub_8190B40(struct Sprite *sprite)
             if (sBattleDomeStruct->unk_10 > 1)
             {
                 if (gTasks[taskId1].data[0] == 2)
-                    sprite->invisible = 1;
+                    sprite->invisible = TRUE;
             }
             else
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
         }
         else
         {
             if (sBattleDomeStruct->unk_10 != 0)
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
             else
             {
                 if (gTasks[taskId1].data[0] == 2)
-                    sprite->invisible = 1;
+                    sprite->invisible = TRUE;
             }
         }
     }
@@ -3892,11 +3892,11 @@ static void sub_8190C6C(struct Sprite *sprite)
         if (sBattleDomeStruct->unk_10 != 0)
         {
             if (gTasks[taskId1].data[0] == 2)
-                sprite->invisible = 1;
+                sprite->invisible = TRUE;
         }
         else
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         }
     }
     else
@@ -3904,11 +3904,11 @@ static void sub_8190C6C(struct Sprite *sprite)
         if (sBattleDomeStruct->unk_10 != 1)
         {
             if (gTasks[taskId1].data[0] == 2)
-                sprite->invisible = 1;
+                sprite->invisible = TRUE;
         }
         else
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         }
     }
 }
@@ -4770,7 +4770,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[sBattleDomeStruct->arr[arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[arrId]].invisible = TRUE;
 
     for (i = 0; i < 3; i++)
     {
@@ -4803,7 +4803,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         }
 
         if (flags & 0x1E)
-            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = TRUE;
     }
     textPrinter.fontId = 2;
     textPrinter.x = 0;
@@ -5208,7 +5208,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[0]), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[sBattleDomeStruct->arr[arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[arrId]].invisible = TRUE;
     if (lost[0])
         gSprites[sBattleDomeStruct->arr[arrId]].oam.paletteNum = 3;
 
@@ -5221,7 +5221,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         sBattleDomeStruct->arr[1 + arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[1]), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[sBattleDomeStruct->arr[1 + arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[1 + arrId]].invisible = TRUE;
     if (lost[1])
         gSprites[sBattleDomeStruct->arr[1 + arrId]].oam.paletteNum = 3;
 
@@ -5257,7 +5257,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
 
         if (flags & 0x1E)
-            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = TRUE;
         if (lost[0])
         {
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.paletteNum = 3;
@@ -5297,7 +5297,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
 
         if (flags & 0x1E)
-            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].invisible = TRUE;
         if (lost[1])
         {
             gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.paletteNum = 3;
