@@ -171,7 +171,6 @@ SECTIONS {
         asm/cute_sketch.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
-        asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
         src/trader.o(.text);

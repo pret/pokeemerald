@@ -31,9 +31,7 @@
 	.include "src/mauville_old_man.o"
 	.include "src/menu_helpers.o"
 	.include "src/region_map.o"
-
-gUnknown_03001188: @ 3001188
-	.space 0x68
+	.include "src/slot_machine.o"
 
 gUnknown_030011F0: @ 30011F0
 	.space 0x2
