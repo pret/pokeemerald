@@ -3098,6 +3098,10 @@ static void BattleStartClearSetData(void)
 
     gBattleStruct->field_2A0 = 0;
     gBattleStruct->field_2A1 = 0;
+
+    gBattleStruct->megaEvoTriggerSpriteId = 0xFF;
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        gBattleStruct->megaEvoIndicatorSpriteId[i] = 0xFF;
 }
 
 void SwitchInClearSetData(void)
@@ -3306,6 +3310,8 @@ void FaintClearSetData(void)
 
     ClearBattlerMoveHistory(gActiveBattler);
     ClearBattlerAbilityHistory(gActiveBattler);
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+        UndoMegaEvolution(gBattlerPartyIndexes[gActiveBattler]);
 }
 
 static void BattleIntroGetMonsData(void)
@@ -5165,6 +5171,8 @@ static void HandleEndTurn_MonFled(void)
 
 static void HandleEndTurn_FinishBattle(void)
 {
+    u32 i;
+
     if (gCurrentActionFuncId == 0xB || gCurrentActionFuncId == 0xC)
     {
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
@@ -5210,6 +5218,8 @@ static void HandleEndTurn_FinishBattle(void)
         sub_8186444();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
+        for (i = 0; i < PARTY_SIZE; i++)
+            UndoMegaEvolution(i);
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
         gCB2_AfterEvolution = BattleMainCB2;
     }

@@ -602,7 +602,11 @@ struct BattleStruct
     u8 megaEvolvedPartyIds[2]; // As flags using gBitTable;
     bool8 alreadyMegaEvolved[4]; // Array id is used for mon position.
     u16 speciesToMegaEvolve[MAX_BATTLERS_COUNT];
+    u16 playerSpeciesThatMegaEvolved;
     u8 megaEvoBattlerId;
+    bool8 playerMegaEvoSelect;
+    u8 megaEvoTriggerSpriteId;
+    u8 megaEvoIndicatorSpriteId[MAX_BATTLERS_COUNT];
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

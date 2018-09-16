@@ -5600,11 +5600,6 @@ bool32 CanMegaEvolve(u8 battlerId)
         if (IsPartnerMonFromSameTrainer(battlerId) && gBattleStruct->alreadyMegaEvolved[partnerPosition])
             return FALSE;
     }
-    else
-    {
-        if (gBattleStruct->alreadyMegaEvolved[partnerPosition])
-            return FALSE;
-    }
 
     // Check if the pokemon holds an appropriate item,
     if (GetBattlerHoldEffect(battlerId, FALSE) != HOLD_EFFECT_MEGA_STONE)
@@ -5619,6 +5614,9 @@ bool32 CanMegaEvolve(u8 battlerId)
             && gEvolutionTable[species][i].param == itemId)
         {
             gBattleStruct->speciesToMegaEvolve[battlerId] = gEvolutionTable[species][i].targetSpecies;
+            if (battlerPosition == B_POSITION_PLAYER_LEFT
+                || (battlerPosition == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
+                gBattleStruct->playerSpeciesThatMegaEvolved = species;
             break;
         }
     }
@@ -5628,4 +5626,14 @@ bool32 CanMegaEvolve(u8 battlerId)
 
     // All checks passed, the mon CAN mega evolve.
     return TRUE;
+}
+
+void UndoMegaEvolution(u8 monId)
+{
+    if (gBattleStruct->megaEvolvedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
+    {
+        gBattleStruct->megaEvolvedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->playerSpeciesThatMegaEvolved);
+        CalculateMonStats(&gPlayerParty[monId]);
+    }
 }

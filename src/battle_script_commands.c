@@ -6599,6 +6599,7 @@ static void atk76_various(void)
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
 
         CalculateMonStats(mon);
+        gBattleMons[gActiveBattler].level = GetMonData(mon, MON_DATA_LEVEL);
         gBattleMons[gActiveBattler].hp = GetMonData(mon, MON_DATA_HP);
         gBattleMons[gActiveBattler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
         gBattleMons[gActiveBattler].attack = GetMonData(mon, MON_DATA_ATK);
@@ -6606,6 +6607,9 @@ static void atk76_various(void)
         gBattleMons[gActiveBattler].speed = GetMonData(mon, MON_DATA_SPEED);
         gBattleMons[gActiveBattler].spAttack = GetMonData(mon, MON_DATA_SPATK);
         gBattleMons[gActiveBattler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+        gBattleMons[gActiveBattler].ability = GetMonAbility(mon);
+        gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
+        gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
 
         gBattleStruct->alreadyMegaEvolved[GetBattlerPosition(gActiveBattler)] = TRUE;

@@ -386,7 +386,10 @@ static void HandleInputChooseTarget(void)
     {
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039B2C;
-        BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+        if (gBattleStruct->playerMegaEvoSelect)
+            BtlController_EmitTwoReturnValues(1, 10 | RET_MEGA_EVOLUTION, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+        else
+            BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
         PlayerBufferExecCompleted();
     }
@@ -540,7 +543,10 @@ static void HandleInputChooseMove(void)
 
         if (!canSelectTarget)
         {
-            BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+            if (gBattleStruct->playerMegaEvoSelect)
+                BtlController_EmitTwoReturnValues(1, 10 | RET_MEGA_EVOLUTION, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+            else
+                BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
             PlayerBufferExecCompleted();
         }
         else
@@ -560,6 +566,7 @@ static void HandleInputChooseMove(void)
     else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
     {
         PlaySE(SE_SELECT);
+        gBattleStruct->playerMegaEvoSelect = FALSE;
         BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
         PlayerBufferExecCompleted();
     }
@@ -627,6 +634,15 @@ static void HandleInputChooseMove(void)
             MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 27);
             BattlePutTextOnWindow(gText_BattleSwitchWhich, 0xB);
             gBattlerControllerFuncs[gActiveBattler] = HandleMoveSwitchting;
+        }
+    }
+    else if (gMain.newKeys & START_BUTTON)
+    {
+        if (gBattleStruct->megaEvoTriggerSpriteId != 0xFF)
+        {
+            gBattleStruct->playerMegaEvoSelect ^= 1;
+            // StartSpriteAnim(&gSprites[gBattleStruct->megaEvoTriggerSpriteId], gBattleStruct->playerMegaEvoSelect);
+            PlaySE(SE_SELECT);
         }
     }
 }
@@ -2628,6 +2644,11 @@ static void PlayerHandleChooseMove(void)
     {
         InitMoveSelectionsVarsAndStrings();
         gBattlerControllerFuncs[gActiveBattler] = HandleChooseMoveAfterDma3;
+        gBattleStruct->playerMegaEvoSelect = FALSE;
+        if (CanMegaEvolve(gActiveBattler) && gBattleStruct->megaEvoTriggerSpriteId == 0xFF)
+            gBattleStruct->megaEvoTriggerSpriteId = CreateSprite(&gDummySpriteTemplate, 100, 100, 0);
+        else
+            gBattleStruct->megaEvoTriggerSpriteId = 0xFF;
     }
 }
 

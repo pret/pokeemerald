@@ -89,5 +89,6 @@ u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u8 ability
 u16 GetTypeModifier(u8 atkType, u8 defType);
 s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId);
 bool32 CanMegaEvolve(u8 battlerId);
+void UndoMegaEvolution(u8 monId);
 
 #endif // GUARD_BATTLE_UTIL_H

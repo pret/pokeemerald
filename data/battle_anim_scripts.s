@@ -12057,6 +12057,8 @@ Anim_WishHeal:
 	end
 	
 General_MegaEvolution:
+	createvisualtask sub_815B7D0, 0x2, 0
+	waitforvisualfinish
 	end
 
 AnimScript_82D85A3:
