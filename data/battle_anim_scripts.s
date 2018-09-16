@@ -672,6 +672,7 @@ gBattleAnims_VariousTable:: @ 82C9320
 	.4byte Anim_Table_x14
 	.4byte Status_Ingrain
 	.4byte Anim_WishHeal
+	.4byte General_MegaEvolution
 
 .align 2
 gBattleAnims_Special:: @ 82C937C
@@ -12053,6 +12054,9 @@ Anim_WishHeal:
 	call AnimScript_82D79DF
 	waitforvisualfinish
 	createsprite gUnknown_08597274, 0x2, 1, 3, 10, 0, 0
+	end
+	
+General_MegaEvolution:
 	end
 
 AnimScript_82D85A3:

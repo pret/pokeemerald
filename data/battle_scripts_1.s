@@ -4610,6 +4610,16 @@ BattleScript_FocusPunchSetUp::
 	printstring STRINGID_PKMNTIGHTENINGFOCUS
 	waitmessage 0x40
 	end2
+	
+BattleScript_MegaEvolution::
+	printstring STRINGID_MEGAEVOREACTING
+	waitmessage 0x40
+	playanimation BS_ATTACKER, B_ANIM_MEGA_EVOLUTION, NULL
+	waitanimation
+	handlemegaevo BS_ATTACKER
+	printstring STRINGID_MEGAEVOEVOLVED
+	waitmessage 0x40
+	end2
 
 BattleScript_MoveUsedIsAsleep::
 	printstring STRINGID_PKMNFASTASLEEP

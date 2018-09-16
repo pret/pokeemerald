@@ -109,6 +109,7 @@
 
 // Gen6 hold effects
 #define HOLD_EFFECT_FAIRY_POWER    130
+#define HOLD_EFFECT_MEGA_STONE     131
 
 // Gen7 hold effects
 #define HOLD_EFFECT_PROTECTIVE_PADS 150

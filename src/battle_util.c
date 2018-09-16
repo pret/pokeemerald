@@ -5572,3 +5572,60 @@ s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId)
 
     return dmg;
 }
+
+static bool32 IsPartnerMonFromSameTrainer(u8 battlerId)
+{
+    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        return FALSE;
+    else if (GetBattlerSide(battlerId) == B_SIDE_PLAYER && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        return FALSE;
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool32 CanMegaEvolve(u8 battlerId)
+{
+    u32 i;
+    u16 species, itemId;
+    u8 battlerPosition = GetBattlerPosition(battlerId);
+    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battlerId));
+
+    // Check if trainer already mega evolved a pokemon.
+    if (gBattleStruct->alreadyMegaEvolved[battlerPosition])
+        return FALSE;
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        if (IsPartnerMonFromSameTrainer(battlerId) && gBattleStruct->alreadyMegaEvolved[partnerPosition])
+            return FALSE;
+    }
+    else
+    {
+        if (gBattleStruct->alreadyMegaEvolved[partnerPosition])
+            return FALSE;
+    }
+
+    // Check if the pokemon holds an appropriate item,
+    if (GetBattlerHoldEffect(battlerId, FALSE) != HOLD_EFFECT_MEGA_STONE)
+        return FALSE;
+
+    // Check if there is an entry in the evolution table.
+    species = gBattleMons[battlerId].species;
+    itemId = gBattleMons[battlerId].item;
+    for (i = 0; i < EVOS_PER_MON; i++)
+    {
+        if (gEvolutionTable[species][i].method == EVO_MEGA_EVOLUTION
+            && gEvolutionTable[species][i].param == itemId)
+        {
+            gBattleStruct->speciesToMegaEvolve[battlerId] = gEvolutionTable[species][i].targetSpecies;
+            break;
+        }
+    }
+
+    if (i == EVOS_PER_MON)
+        return FALSE;
+
+    // All checks passed, the mon CAN mega evolve.
+    return TRUE;
+}

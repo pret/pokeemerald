@@ -99,6 +99,7 @@
 #define VARIOUS_TRY_ELECTRIFY                   48
 #define VARIOUS_TRY_REFLECT_TYPE                49
 #define VARIOUS_TRY_SOAK                        50
+#define VARIOUS_HANDLE_MEGA_EVO					51
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

@@ -3649,10 +3649,10 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("Mega Stone"),
+        .itemId = ITEM_MEGA_STONE_TESTING,
         .price = 0,
-        .holdEffect = HOLD_EFFECT_NONE,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .holdEffectParam = 0,
         .description = gDummyItemDescription,
         .importance = 0,

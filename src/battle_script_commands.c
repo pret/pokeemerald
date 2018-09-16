@@ -6119,6 +6119,7 @@ static void HandleTerrainMove(u32 moveEffect)
 
 static void atk76_various(void)
 {
+    struct Pokemon *mon;
     u8 side;
     s32 i, j;
     u8 data[10];
@@ -6588,6 +6589,28 @@ static void atk76_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_HANDLE_MEGA_EVO:
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
+            mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
+        else
+            mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
+        gBattleMons[gActiveBattler].species = gBattleStruct->speciesToMegaEvolve[gActiveBattler];
+        SetMonData(mon, MON_DATA_SPECIES, &gBattleMons[gActiveBattler].species);
+        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
+
+        CalculateMonStats(mon);
+        gBattleMons[gActiveBattler].hp = GetMonData(mon, MON_DATA_HP);
+        gBattleMons[gActiveBattler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+        gBattleMons[gActiveBattler].attack = GetMonData(mon, MON_DATA_ATK);
+        gBattleMons[gActiveBattler].defense = GetMonData(mon, MON_DATA_DEF);
+        gBattleMons[gActiveBattler].speed = GetMonData(mon, MON_DATA_SPEED);
+        gBattleMons[gActiveBattler].spAttack = GetMonData(mon, MON_DATA_SPATK);
+        gBattleMons[gActiveBattler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
+
+        gBattleStruct->alreadyMegaEvolved[GetBattlerPosition(gActiveBattler)] = TRUE;
+        gBattleStruct->megaEvolvedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

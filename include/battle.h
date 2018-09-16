@@ -598,6 +598,11 @@ struct BattleStruct
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u32 debugAIFlags;
     bool8 notfirstTimeAIFlags;
+    u8 toMegaEvolve; // As flags using gBitTable.
+    u8 megaEvolvedPartyIds[2]; // As flags using gBitTable;
+    bool8 alreadyMegaEvolved[4]; // Array id is used for mon position.
+    u16 speciesToMegaEvolve[MAX_BATTLERS_COUNT];
+    u8 megaEvoBattlerId;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

@@ -631,8 +631,6 @@ static const u8 sText_NotDoneYet[] = _("This move effect is not done yet!\p");
 static const u8 sText_PkmnBlewAwayToxicSpikes[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nTOXIC SPIKES!");
 static const u8 sText_PkmnBlewAwayStickyWeb[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nSTICKY WEB!");
 static const u8 sText_PkmnBlewAwayStealthRock[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nSTEALTH ROCK!");
-
-// To do.
 static const u8 sText_StickyWebUsed[] = _("A sticky web spreads out on the\nground around your team!");
 static const u8 sText_QuashSuccess[] = _("The opposing {B_ATK_NAME_WITH_PREFIX}’s move was postponed!");
 static const u8 sText_IonDelugeOn[] = _("A deluge of ions showers\nthe battlefield!");
@@ -642,12 +640,11 @@ static const u8 sText_TerrainBecomesGrassy[] = _("Grass grew to cover\nthe battl
 static const u8 sText_TerrainBecomesElectric[] = _("An electric current runs across\nthe battlefield!");
 static const u8 sText_TerrainBecomesPsychic[] = _("The battlefield got weird!");
 static const u8 sText_TargetElectrified[] = _("The opposing {B_ATK_NAME_WITH_PREFIX}’s moves\nhave been electrified!");
-
-// New selection strings, they must end with "\p".
-// Use {B_LAST_ITEM} and {B_CURRENT_MOVE}.
 static const u8 sText_AssaultVestDoesntAllow[] = _("The effects of the {B_LAST_ITEM} prevent status\nmoves from being used!\p");
 static const u8 sText_GravityPreventsUsage[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} can’t use {B_CURRENT_MOVE}\nbecause of gravity!\p");
 static const u8 sText_HealBlockPreventsUsage[] = _("The opposing {B_ATK_NAME_WITH_PREFIX} was\nprevented from healing!\p");
+static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_LAST_ITEM} is reacting\nto {B_ATK_TRAINER_NAME}’s Mega Ring!");
+static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX} has Mega\nEvolved into Mega {B_BUFF1}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1142,6 +1139,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_TerrainBecomesElectric,
     sText_TerrainBecomesPsychic,
     sText_TargetElectrified,
+    sText_MegaEvoReacting,
+    sText_MegaEvoEvolved,
 };
 
 const u16 gTerrainStringIds[] =

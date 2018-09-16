@@ -1473,6 +1473,10 @@
 	.4byte \ptr
 	.endm
 	
+	.macro handlemegaevo battler
+	various \battler, VARIOUS_HANDLE_MEGA_EVO
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
