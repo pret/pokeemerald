@@ -504,9 +504,7 @@ gUnknown_0203ABB4: @ 203ABB4
 gUnknown_0203ABB5: @ 203ABB5
 	.space 0x3
 
-gUnknown_0203ABB8: @ 203ABB8
-	.space 0x4
-
+    .include "src/rom_81520A8.o"
     .include "src/save.o"
 
 .space 0x4 /*unused var?*/
