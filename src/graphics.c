@@ -1485,7 +1485,7 @@ const u16 gUnknown_08DD4C4C[] = INCBIN_U16("graphics/link/link_winedge.bin.lz");
 
 const u8 gUnknown_08DD4CF8[] = INCBIN_U8("graphics/interface/unk_change_case.4bpp.lz");
 
-const u16 gTilesetPalettes_General[][16] = 
+const u16 gTilesetPalettes_General[][16] =
 {
     INCBIN_U16("data/tilesets/primary/general/palettes/00.gbapal"),
     INCBIN_U16("data/tilesets/primary/general/palettes/01.gbapal"),
