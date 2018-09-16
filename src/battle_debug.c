@@ -814,7 +814,7 @@ static void PrintOnBattlerWindow(u8 windowId, u8 battlerId)
     StringCopy(&text[4], gBattleMons[battlerId].nickname);
 
     FillWindowPixelBuffer(windowId, 0x11);
-    PrintTextOnWindow(windowId, 1, text, 0, 0, 0, NULL);
+    AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
     CopyWindowToVram(windowId, 3);
 }
 
@@ -1025,7 +1025,7 @@ static void PrintDigitChars(struct BattleDebugMenu *data)
 
     text[i] = EOS;
 
-    PrintTextOnWindow(data->modifyWindowId, 1, text, 3, 0, 0, NULL);
+    AddTextPrinterParameterized(data->modifyWindowId, 1, text, 3, 0, 0, NULL);
 }
 
 static const u32 GetBitfieldToAndValue(u32 currBit, u32 bitsCount)

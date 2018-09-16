@@ -4615,7 +4615,7 @@ static void sub_803CDF8(void)
 void SwapTurnOrder(u8 id1, u8 id2)
 {
 	u32 temp;
-	
+
 	SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
 	SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
