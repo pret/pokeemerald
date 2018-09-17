@@ -604,7 +604,8 @@ static bool32 IsHealBlockPreventingMove(u8 battler, u32 move)
 u8 TrySetCantSelectMoveBattleScript(void)
 {
     u8 limitations = 0;
-    u32 move = gBattleMons[gActiveBattler].moves[gBattleBufferB[gActiveBattler][2]];
+	u8 moveId = gBattleBufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION);
+    u32 move = gBattleMons[gActiveBattler].moves[moveId];
     u32 holdEffect = GetBattlerHoldEffect(gActiveBattler, TRUE);
     u16* choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
 
@@ -729,7 +730,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
-    if (gBattleMons[gActiveBattler].pp[gBattleBufferB[gActiveBattler][2]] == 0)
+    if (gBattleMons[gActiveBattler].pp[moveId] == 0)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {

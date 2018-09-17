@@ -4382,12 +4382,9 @@ static void HandleTurnActionSelectionState(void)
         case STATE_WAIT_ACTION_CASE_CHOSEN:
             if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
             {
-                bool32 shouldMegaEvolve;
                 switch (gChosenActionByBattler[gActiveBattler])
                 {
                 case B_ACTION_USE_MOVE:
-                    shouldMegaEvolve = gBattleBufferB[gActiveBattler][1] & RET_MEGA_EVOLUTION;
-                    gBattleBufferB[gActiveBattler][1] &= ~(RET_MEGA_EVOLUTION);
                     switch (gBattleBufferB[gActiveBattler][1])
                     {
                     case 3:
@@ -4426,10 +4423,10 @@ static void HandleTurnActionSelectionState(void)
                                 RecordedBattle_SetBattlerAction(gActiveBattler, gBattleBufferB[gActiveBattler][2]);
                                 RecordedBattle_SetBattlerAction(gActiveBattler, gBattleBufferB[gActiveBattler][3]);
                             }
-                            *(gBattleStruct->chosenMovePositions + gActiveBattler) = gBattleBufferB[gActiveBattler][2];
+                            *(gBattleStruct->chosenMovePositions + gActiveBattler) = gBattleBufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION);
                             gChosenMoveByBattler[gActiveBattler] = gBattleMons[gActiveBattler].moves[*(gBattleStruct->chosenMovePositions + gActiveBattler)];
                             *(gBattleStruct->moveTarget + gActiveBattler) = gBattleBufferB[gActiveBattler][3];
-                            if (shouldMegaEvolve)
+                            if (gBattleBufferB[gActiveBattler][2] & RET_MEGA_EVOLUTION)
                                 gBattleStruct->toMegaEvolve |= gBitTable[gActiveBattler];
                             gBattleCommunication[gActiveBattler]++;
                         }

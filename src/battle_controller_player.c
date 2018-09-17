@@ -387,7 +387,7 @@ static void HandleInputChooseTarget(void)
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039B2C;
         if (gBattleStruct->playerMegaEvoSelect)
-            BtlController_EmitTwoReturnValues(1, 10 | RET_MEGA_EVOLUTION, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+            BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
@@ -544,7 +544,7 @@ static void HandleInputChooseMove(void)
         if (!canSelectTarget)
         {
             if (gBattleStruct->playerMegaEvoSelect)
-                BtlController_EmitTwoReturnValues(1, 10 | RET_MEGA_EVOLUTION, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+                BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
             else
                 BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
             PlayerBufferExecCompleted();
