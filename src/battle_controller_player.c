@@ -391,6 +391,7 @@ static void HandleInputChooseTarget(void)
         else
             BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
+        DestroyMegaTriggerSprite();
         PlayerBufferExecCompleted();
     }
     else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
@@ -547,6 +548,7 @@ static void HandleInputChooseMove(void)
                 BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
             else
                 BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+            DestroyMegaTriggerSprite();
             PlayerBufferExecCompleted();
         }
         else
@@ -568,6 +570,7 @@ static void HandleInputChooseMove(void)
         PlaySE(SE_SELECT);
         gBattleStruct->playerMegaEvoSelect = FALSE;
         BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
+        DestroyMegaTriggerSprite();
         PlayerBufferExecCompleted();
     }
     else if (gMain.newKeys & DPAD_LEFT)
@@ -641,7 +644,7 @@ static void HandleInputChooseMove(void)
         if (gBattleStruct->megaEvoTriggerSpriteId != 0xFF)
         {
             gBattleStruct->playerMegaEvoSelect ^= 1;
-            // StartSpriteAnim(&gSprites[gBattleStruct->megaEvoTriggerSpriteId], gBattleStruct->playerMegaEvoSelect);
+            SetMegaTriggerSpritePal(gBattleStruct->megaEvoTriggerSpriteId, gBattleStruct->playerMegaEvoSelect);
             PlaySE(SE_SELECT);
         }
     }
@@ -2645,10 +2648,8 @@ static void PlayerHandleChooseMove(void)
         InitMoveSelectionsVarsAndStrings();
         gBattlerControllerFuncs[gActiveBattler] = HandleChooseMoveAfterDma3;
         gBattleStruct->playerMegaEvoSelect = FALSE;
-        if (CanMegaEvolve(gActiveBattler) && gBattleStruct->megaEvoTriggerSpriteId == 0xFF)
-            gBattleStruct->megaEvoTriggerSpriteId = CreateSprite(&gDummySpriteTemplate, 100, 100, 0);
-        else
-            gBattleStruct->megaEvoTriggerSpriteId = 0xFF;
+        if (CanMegaEvolve(gActiveBattler))
+            CreateMegaTriggerSprite(gActiveBattler, 0);
     }
 }
 

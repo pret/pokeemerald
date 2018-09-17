@@ -39,10 +39,15 @@ enum
 #define TAG_STATUS_SUMMARY_BAR_TILE     0xD70C
 #define TAG_STATUS_SUMMARY_BALLS_TILE   0xD714
 
+#define TAG_MEGA_TRIGGER_TILE			0xD777
+
 #define TAG_HEALTHBOX_PAL               0xD6FF
 #define TAG_HEALTHBAR_PAL               0xD704
 #define TAG_STATUS_SUMMARY_BAR_PAL      0xD710
 #define TAG_STATUS_SUMMARY_BALLS_PAL    0xD712
+
+#define TAG_MEGA_TRIGGER_OFF_PAL		0xD777
+#define TAG_MEGA_TRIGGER_ON_PAL			0xD778
 
 enum
 {
@@ -71,6 +76,9 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority);
 void InitBattlerHealthboxCoords(u8 battler);
 void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 void SwapHpBarsWithHpText(void);
+void SetMegaTriggerSpritePal(u8 spriteId, u8 palId);
+void CreateMegaTriggerSprite(u8 battlerId, u8 palId);
+void DestroyMegaTriggerSprite(void);
 u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart);
 void Task_HidePartyStatusSummary(u8 taskId);
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId);
