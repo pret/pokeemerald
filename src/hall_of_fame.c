@@ -29,6 +29,7 @@
 #include "menu.h"
 #include "trainer_pokemon_sprites.h"
 #include "data2.h"
+#include "rom_81520A8.h"
 
 struct HallofFameMon
 {
@@ -91,13 +92,6 @@ extern void sub_80F9BCC(u16, u16, u8);
 extern bool8 sub_80F9C1C(void);
 extern void sub_81971D0(void);
 extern void sub_8197200(void);
-extern void sub_8152254(void);
-extern void sub_81525D0(u8);
-extern void sub_8152438(u8, void*);
-extern void sub_8152474(u8, u8, u8);
-extern void sub_81522D4(void);
-extern bool32 sub_81521C0(u8);
-extern u8 sub_81524C4(const struct OamData *arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, u8 arg5, s16 arg6);
 
 // this file's functions
 static void ClearVramOamPltt_LoadHofPal(void);
@@ -1444,53 +1438,28 @@ static void sub_81752C0(void)
     FreeSpritePaletteByTag(0x3E9);
 }
 
-struct UnknownStruct912B4
+static void sub_81752F4(struct UnkStruct_81520A8 *structPtr)
 {
-    s16 field_0;
-    s16 field_2;
-    s16 field_4;
-    s16 field_6;
-    s16 field_8;
-    s16 field_A;
-    s16 field_C;
-    s16 field_E;
-    s16 field_10;
-    s16 field_12;
-    s16 field_14;
-    s16 field_16;
-    s16 field_18;
-    s16 field_1A;
-    s16 field_1C;
-    s16 field_1E;
-    s16 field_20;
-    s16 field_22;
-    s16 field_24;
-    s16 field_26;
-    s16 field_28;
-};
-
-static void sub_81752F4(struct UnknownStruct912B4 *unkStruct)
-{
-    if (unkStruct->field_E > 110)
+    if (structPtr->yDelta > 110)
     {
-        gTasks[unkStruct->field_28].data[15]--;
-        sub_81525D0(unkStruct->field_16);
+        gTasks[structPtr->data[7]].data[15]--;
+        sub_81525D0(structPtr->id);
     }
     else
     {
         u8 var;
         s32 rand;
 
-        unkStruct->field_E++;
-        unkStruct->field_E += unkStruct->field_1C;
+        structPtr->yDelta++;
+        structPtr->yDelta += structPtr->data[1];
 
-        var = unkStruct->field_1A;
+        var = structPtr->data[0];
         rand = Random();
         rand &= 3;
         rand += 8;
-        unkStruct->field_C = (rand) * ((gSineTable[var])) / 256;
+        structPtr->xDelta = (rand) * ((gSineTable[var])) / 256;
 
-        unkStruct->field_1A += 4;
+        structPtr->data[0] += 4;
     }
 }
 
