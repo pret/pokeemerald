@@ -1753,9 +1753,17 @@ static const u8 sDOUBLE_HITDescription[] = _(
 	"Slams the foe with a tail\n"
 	"etc. Strikes twice.");
 
+static const u8 sROAR_OF_TIMEDescription[] = _(
+	"Powerful, but leaves the\n"
+	"user immobile the next turn.");
+
 static const u8 sSPACIAL_RENDDescription[] = _(
 	"Tears the foe, and space.\n"
 	"High critical-hit ratio.");
+
+static const u8 sMAGMA_STORMDescription[] = _(
+	"Traps the foe in a vortex\n"
+	"of fire for 2 to 5 turns.");
 
 static const u8 sDARK_VOIDDescription[] = _(
 	"Drags the foe into total\n"
@@ -2974,11 +2982,11 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_HEAL_ORDER - 1] = sNotDoneYetDescription,
     [MOVE_HEAD_SMASH - 1] = sHEAD_SMASHDescription,
     [MOVE_DOUBLE_HIT - 1] = sDOUBLE_HITDescription,
-    [MOVE_ROAR_OF_TIME - 1] = sNotDoneYetDescription,
+    [MOVE_ROAR_OF_TIME - 1] = sROAR_OF_TIMEDescription,
     [MOVE_SPACIAL_REND - 1] = sSPACIAL_RENDDescription,
     [MOVE_LUNAR_DANCE - 1] = sHEALING_WISHDescription,
     [MOVE_CRUSH_GRIP - 1] = sWRING_OUTDescription,
-    [MOVE_MAGMA_STORM - 1] = sNotDoneYetDescription,
+    [MOVE_MAGMA_STORM - 1] = sMAGMA_STORMDescription,
     [MOVE_DARK_VOID - 1] = sDARK_VOIDDescription,
     [MOVE_SEED_FLARE - 1] = sSEED_FLAREDescription,
     [MOVE_OMINOUS_WIND - 1] = sOMINOUS_WINDDescription,
