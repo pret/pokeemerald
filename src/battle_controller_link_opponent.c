@@ -95,6 +95,7 @@ static void LinkOpponentHandleBattleAnimation(void);
 static void LinkOpponentHandleLinkStandbyMsg(void);
 static void LinkOpponentHandleResetActionMoveSelection(void);
 static void LinkOpponentHandleCmd55(void);
+static void LinkOpponentHandleBattleDebug(void);
 static void nullsub_92(void);
 
 static void LinkOpponentBufferRunCommand(void);
@@ -167,6 +168,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentHandleLinkStandbyMsg,
     LinkOpponentHandleResetActionMoveSelection,
     LinkOpponentHandleCmd55,
+    LinkOpponentHandleBattleDebug,
     nullsub_92
 };
 
@@ -1858,6 +1860,11 @@ static void LinkOpponentHandleCmd55(void)
     BeginFastPaletteFade(3);
     LinkOpponentBufferExecCompleted();
     gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
+}
+
+static void LinkOpponentHandleBattleDebug(void)
+{
+    LinkOpponentBufferExecCompleted();
 }
 
 static void nullsub_92(void)

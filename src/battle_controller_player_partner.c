@@ -95,6 +95,7 @@ static void PlayerPartnerHandleBattleAnimation(void);
 static void PlayerPartnerHandleLinkStandbyMsg(void);
 static void PlayerPartnerHandleResetActionMoveSelection(void);
 static void PlayerPartnerHandleCmd55(void);
+static void PlayerPartnerHandleBattleDebug(void);
 static void nullsub_128(void);
 
 static void PlayerPartnerBufferRunCommand(void);
@@ -172,6 +173,7 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerPartnerHandleLinkStandbyMsg,
     PlayerPartnerHandleResetActionMoveSelection,
     PlayerPartnerHandleCmd55,
+    PlayerPartnerHandleBattleDebug,
     nullsub_128
 };
 
@@ -1931,6 +1933,11 @@ static void PlayerPartnerHandleCmd55(void)
     BeginFastPaletteFade(3);
     PlayerPartnerBufferExecCompleted();
     gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
+}
+
+static void PlayerPartnerHandleBattleDebug(void)
+{
+    PlayerPartnerBufferExecCompleted();
 }
 
 static void nullsub_128(void)

@@ -97,6 +97,7 @@ static void RecordedOpponentHandleBattleAnimation(void);
 static void RecordedOpponentHandleLinkStandbyMsg(void);
 static void RecordedOpponentHandleResetActionMoveSelection(void);
 static void RecordedOpponentHandleCmd55(void);
+static void RecordedOpponentHandleBattleDebug(void);
 static void nullsub_119(void);
 
 static void RecordedOpponentBufferRunCommand(void);
@@ -169,6 +170,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     RecordedOpponentHandleLinkStandbyMsg,
     RecordedOpponentHandleResetActionMoveSelection,
     RecordedOpponentHandleCmd55,
+    RecordedOpponentHandleBattleDebug,
     nullsub_119
 };
 
@@ -1795,6 +1797,11 @@ static void RecordedOpponentHandleCmd55(void)
     BeginFastPaletteFade(3);
     RecordedOpponentBufferExecCompleted();
     gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
+}
+
+static void RecordedOpponentHandleBattleDebug(void)
+{
+    RecordedOpponentBufferExecCompleted();
 }
 
 static void nullsub_119(void)
