@@ -232,14 +232,14 @@ static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 b, int c, int 
     u16 metatileId = MapGridGetMetatileIdAt(c, d);
     u16 *metatiles;
 
-    if (metatileId > 1024)
+    if (metatileId > NUM_METATILES_TOTAL)
         metatileId = 0;
-    if (metatileId < 512)
+    if (metatileId < NUM_METATILES_IN_PRIMARY)
         metatiles = mapLayout->primaryTileset->metatiles;
     else
     {
         metatiles = mapLayout->secondaryTileset->metatiles;
-        metatileId -= 512;
+        metatileId -= NUM_METATILES_IN_PRIMARY;
     }
     DrawMetatile(MapGridGetMetatileLayerTypeAt(c, d), metatiles + metatileId * 8, b);
 }
