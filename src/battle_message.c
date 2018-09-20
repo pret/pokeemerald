@@ -47,12 +47,12 @@ extern const u8 gText_PkmnTransferredLanettesPC[];
 
 extern u8 GetFrontierBrainTrainerClass(void); // battle_frontier_2
 extern u8 GetFrontierOpponentClass(u16 trainerId); // battle_tower
-extern u8 sub_81D5530(u16 trainerId); // pokenav
+extern u8 GetTrainerHillOpponentClass(u16 trainerId); // pokenav
 extern u8 GetEreaderTrainerClassId(void); // battle_tower
 extern void CopyFrontierBrainTrainerName(u8 *txtPtr); // battle_frontier_2
-extern void sub_81D5554(u8 *txtPtr, u16 trainerId); // pokenav
+extern void GetTrainerHillTrainerName(u8 *txtPtr, u16 trainerId); // pokenav
 extern void GetEreaderTrainerName(u8 *txtPtr);
-extern void sub_81D572C(u8 arg0, u16 trainerId); // pokenav
+extern void CopyTrainerHillTrainerText(u8 arg0, u16 trainerId); // pokenav
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 
 // this file's functions
@@ -2513,8 +2513,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     toCpy = gTrainerClassNames[GetFrontierBrainTrainerClass()];
                 else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                     toCpy = gTrainerClassNames[GetFrontierOpponentClass(gTrainerBattleOpponent_A)];
-                else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
-                    toCpy = gTrainerClassNames[sub_81D5530(gTrainerBattleOpponent_A)];
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+                    toCpy = gTrainerClassNames[GetTrainerHillOpponentClass(gTrainerBattleOpponent_A)];
                 else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
                     toCpy = gTrainerClassNames[GetEreaderTrainerClassId()];
                 else
@@ -2543,9 +2543,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     GetFrontierTrainerName(text, gTrainerBattleOpponent_A);
                     toCpy = text;
                 }
-                else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    sub_81D5554(text, gTrainerBattleOpponent_A);
+                    GetTrainerHillTrainerName(text, gTrainerBattleOpponent_A);
                     toCpy = text;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
@@ -2585,9 +2585,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     CopyFrontierTrainerText(FRONTIER_LOSE_TEXT, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
-                else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    sub_81D572C(4, gTrainerBattleOpponent_A);
+                    CopyTrainerHillTrainerText(4, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 else
@@ -2601,9 +2601,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     CopyFrontierTrainerText(FRONTIER_WIN_TEXT, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
-                else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    sub_81D572C(3, gTrainerBattleOpponent_A);
+                    CopyTrainerHillTrainerText(3, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 break;
@@ -2655,8 +2655,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER2_CLASS:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                     toCpy = gTrainerClassNames[GetFrontierOpponentClass(gTrainerBattleOpponent_B)];
-                else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
-                    toCpy = gTrainerClassNames[sub_81D5530(gTrainerBattleOpponent_B)];
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+                    toCpy = gTrainerClassNames[GetTrainerHillOpponentClass(gTrainerBattleOpponent_B)];
                 else
                     toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent_B].trainerClass];
                 break;
@@ -2666,9 +2666,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     GetFrontierTrainerName(text, gTrainerBattleOpponent_B);
                     toCpy = text;
                 }
-                else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    sub_81D5554(text, gTrainerBattleOpponent_B);
+                    GetTrainerHillTrainerName(text, gTrainerBattleOpponent_B);
                     toCpy = text;
                 }
                 else
@@ -2682,9 +2682,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     CopyFrontierTrainerText(FRONTIER_LOSE_TEXT, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
-                else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    sub_81D572C(4, gTrainerBattleOpponent_B);
+                    CopyTrainerHillTrainerText(4, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 else
@@ -2698,9 +2698,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     CopyFrontierTrainerText(FRONTIER_WIN_TEXT, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
-                else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    sub_81D572C(3, gTrainerBattleOpponent_B);
+                    CopyTrainerHillTrainerText(3, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 break;
