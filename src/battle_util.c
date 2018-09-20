@@ -5611,7 +5611,8 @@ bool32 CanMegaEvolve(u8 battlerId)
         return FALSE;
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        if (IsPartnerMonFromSameTrainer(battlerId) && gBattleStruct->alreadyMegaEvolved[partnerPosition])
+        if (IsPartnerMonFromSameTrainer(battlerId)
+            && (gBattleStruct->alreadyMegaEvolved[partnerPosition] || (gBattleStruct->toMegaEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
             return FALSE;
     }
 

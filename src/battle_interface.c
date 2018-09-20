@@ -1566,8 +1566,8 @@ void CreateMegaTriggerSprite(u8 battlerId, u8 palId)
         gBattleStruct->megaEvoTriggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
                                                              gSprites[gHealthboxSpriteIds[battlerId]].pos1.x,
                                                              gSprites[gHealthboxSpriteIds[battlerId]].pos1.y - MEGA_TRIGGER_POS_Y_DIFF, 0);
-        gSprites[gBattleStruct->megaEvoTriggerSpriteId].tBattler = battlerId;
     }
+    gSprites[gBattleStruct->megaEvoTriggerSpriteId].tBattler = battlerId;
     gSprites[gBattleStruct->megaEvoTriggerSpriteId].tHide = FALSE;
 
     SetMegaTriggerSpritePal(gBattleStruct->megaEvoTriggerSpriteId, palId);
