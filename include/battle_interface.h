@@ -46,8 +46,7 @@ enum
 #define TAG_STATUS_SUMMARY_BAR_PAL      0xD710
 #define TAG_STATUS_SUMMARY_BALLS_PAL    0xD712
 
-#define TAG_MEGA_TRIGGER_OFF_PAL		0xD777
-#define TAG_MEGA_TRIGGER_ON_PAL			0xD778
+#define TAG_MEGA_TRIGGER_PAL			0xD777
 
 enum
 {
@@ -76,7 +75,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority);
 void InitBattlerHealthboxCoords(u8 battler);
 void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 void SwapHpBarsWithHpText(void);
-void SetMegaTriggerSpritePal(u8 spriteId, u8 palId);
+void ChangeMegaTriggerSprite(u8 spriteId, u8 animId);
 void CreateMegaTriggerSprite(u8 battlerId, u8 palId);
 bool32 IsMegaTriggerSpriteActive(void);
 void HideMegaTriggerSprite(void);

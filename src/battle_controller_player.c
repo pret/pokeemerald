@@ -644,7 +644,7 @@ static void HandleInputChooseMove(void)
         if (CanMegaEvolve(gActiveBattler))
         {
             gBattleStruct->mega.playerSelect ^= 1;
-            SetMegaTriggerSpritePal(gBattleStruct->mega.triggerSpriteId, gBattleStruct->mega.playerSelect);
+            ChangeMegaTriggerSprite(gBattleStruct->mega.triggerSpriteId, gBattleStruct->mega.playerSelect);
             PlaySE(SE_SELECT);
         }
     }
