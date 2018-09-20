@@ -273,7 +273,7 @@ void sub_81851A8(u8 *arg0)
             return;
     }
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
     {
         for (var2 = *arg0; var2 != 0;)
         {
@@ -360,7 +360,7 @@ u32 MoveRecordedBattleToSaveData(void)
         battleSave->battleFlags = (sBattleFlags & ~(BATTLE_TYPE_LINK | BATTLE_TYPE_20));
         battleSave->battleFlags |= BATTLE_TYPE_x2000000;
 
-        if (sBattleFlags & BATTLE_TYPE_WILD)
+        if (sBattleFlags & BATTLE_TYPE_IS_MASTER)
         {
             battleSave->battleFlags |= BATTLE_TYPE_x80000000;
         }

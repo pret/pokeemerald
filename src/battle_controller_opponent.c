@@ -1998,7 +1998,7 @@ static void OpponentHandleResetActionMoveSelection(void)
 
 static void OpponentHandleCmd55(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK && !(gBattleTypeFlags & BATTLE_TYPE_WILD))
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
     {
         gMain.inBattle = 0;
         gMain.callback1 = gPreBattleCallback1;

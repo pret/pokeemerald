@@ -46,7 +46,7 @@
 // Battle Type Flags
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
-#define BATTLE_TYPE_WILD            0x0004
+#define BATTLE_TYPE_IS_MASTER       0x0004 // In not-link battles, it's always set.
 #define BATTLE_TYPE_TRAINER         0x0008
 #define BATTLE_TYPE_FIRST_BATTLE    0x0010
 #define BATTLE_TYPE_20              0x0020

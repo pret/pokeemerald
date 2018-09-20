@@ -334,14 +334,14 @@ static const u8 sText_GotAwaySafely[] = _("{PLAY_SE 0x0011}Got away safely!\p");
 static const u8 sText_PkmnFledUsingIts[] = _("{PLAY_SE 0x0011}{B_ATK_NAME_WITH_PREFIX} fled\nusing its {B_LAST_ITEM}!\p");
 static const u8 sText_PkmnFledUsing[] = _("{PLAY_SE 0x0011}{B_ATK_NAME_WITH_PREFIX} fled\nusing {B_ATK_ABILITY}!\p");
 static const u8 sText_WildPkmnFled[] = _("{PLAY_SE 0x0011}Wild {B_BUFF1} fled!");
-static const u8 sText_PlayerDefeatedLinkTrainer[] = _("Player defeated\n{B_20}!");
-static const u8 sText_TwoLinkTrainersDefeated[] = _("Player beat {B_20}\nand {B_21}!");
-static const u8 sText_PlayerLostAgainstLinkTrainer[] = _("Player lost against\n{B_20}!");
-static const u8 sText_PlayerLostToTwo[] = _("Player lost to {B_20}\nand {B_21}!");
-static const u8 sText_PlayerBattledToDrawLinkTrainer[] = _("Player battled to a draw against\n{B_20}!");
-static const u8 sText_PlayerBattledToDrawVsTwo[] = _("Player battled to a draw against\n{B_20} and {B_21}!");
-static const u8 sText_WildFled[] = _("{PLAY_SE 0x0011}{B_20} fled!");
-static const u8 sText_TwoWildFled[] = _("{PLAY_SE 0x0011}{B_20} and\n{B_21} fled!");
+static const u8 sText_PlayerDefeatedLinkTrainer[] = _("Player defeated\n{B_LINK_OPPONENT1_NAME}!");
+static const u8 sText_TwoLinkTrainersDefeated[] = _("Player beat {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!");
+static const u8 sText_PlayerLostAgainstLinkTrainer[] = _("Player lost against\n{B_LINK_OPPONENT1_NAME}!");
+static const u8 sText_PlayerLostToTwo[] = _("Player lost to {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!");
+static const u8 sText_PlayerBattledToDrawLinkTrainer[] = _("Player battled to a draw against\n{B_LINK_OPPONENT1_NAME}!");
+static const u8 sText_PlayerBattledToDrawVsTwo[] = _("Player battled to a draw against\n{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!");
+static const u8 sText_WildFled[] = _("{PLAY_SE 0x0011}{B_LINK_OPPONENT1_NAME} fled!");
+static const u8 sText_TwoWildFled[] = _("{PLAY_SE 0x0011}{B_LINK_OPPONENT1_NAME} and\n{B_LINK_OPPONENT2_NAME} fled!");
 static const u8 sText_NoRunningFromTrainers[] = _("No! There’s no running\nfrom a TRAINER battle!\p");
 static const u8 sText_CantEscape[] = _("Can’t escape!\p");
 static const u8 sText_DontLeaveBirch[] = _("PROF. BIRCH: Don’t leave me like this!\p");
@@ -398,33 +398,33 @@ static const u8 sText_WildPkmnAppeared2[] = _("Wild {B_OPPONENT_MON1_NAME} appea
 static const u8 sText_WildPkmnAppearedPause[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!{PAUSE 127}");
 static const u8 sText_TwoWildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME} appeared!\p");
 static const u8 sText_Trainer1WantsToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwould like to battle!\p");
-static const u8 sText_LinkTrainerWantsToBattle[] = _("{B_20}\nwants to battle!");
-static const u8 sText_TwoLinkTrainersWantToBattle[] = _("{B_20} and {B_21}\nwant to battle!");
+static const u8 sText_LinkTrainerWantsToBattle[] = _("{B_LINK_OPPONENT1_NAME}\nwants to battle!");
+static const u8 sText_TwoLinkTrainersWantToBattle[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!");
 static const u8 sText_Trainer1SentOutPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}!");
 static const u8 sText_Trainer1SentOutTwoPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!");
 static const u8 sText_Trainer1SentOutPkmn2[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_BUFF1}!");
-static const u8 sText_LinkTrainerSentOutPkmn[] = _("{B_20} sent out\n{B_OPPONENT_MON1_NAME}!");
-static const u8 sText_LinkTrainerSentOutTwoPkmn[] = _("{B_20} sent out\n{B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!");
-static const u8 sText_TwoLinkTrainersSentOutPkmn[] = _("{B_20} sent out {B_LINK_OPPONENT_MON1_NAME}!\n{B_21} sent out {B_LINK_OPPONENT_MON2_NAME}!");
-static const u8 sText_LinkTrainerSentOutPkmn2[] = _("{B_20} sent out\n{B_BUFF1}!");
-static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_22} sent out\n{B_BUFF1}!");
+static const u8 sText_LinkTrainerSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME}!");
+static const u8 sText_LinkTrainerSentOutTwoPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!");
+static const u8 sText_TwoLinkTrainersSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out {B_LINK_OPPONENT_MON1_NAME}!\n{B_LINK_OPPONENT2_NAME} sent out {B_LINK_OPPONENT_MON2_NAME}!");
+static const u8 sText_LinkTrainerSentOutPkmn2[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_BUFF1}!");
+static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} sent out\n{B_BUFF1}!");
 static const u8 sText_GoPkmn[] = _("Go! {B_PLAYER_MON1_NAME}!");
 static const u8 sText_GoTwoPkmn[] = _("Go! {B_PLAYER_MON1_NAME} and\n{B_PLAYER_MON2_NAME}!");
 static const u8 sText_GoPkmn2[] = _("Go! {B_BUFF1}!");
 static const u8 sText_DoItPkmn[] = _("Do it! {B_BUFF1}!");
 static const u8 sText_GoForItPkmn[] = _("Go for it, {B_BUFF1}!");
 static const u8 sText_YourFoesWeakGetEmPkmn[] = _("Your foe’s weak!\nGet ’em, {B_BUFF1}!");
-static const u8 sText_LinkPartnerSentOutPkmnGoPkmn[] = _("{B_1F} sent out {B_LINK_PLAYER_MON2_NAME}!\nGo! {B_LINK_PLAYER_MON1_NAME}!");
+static const u8 sText_LinkPartnerSentOutPkmnGoPkmn[] = _("{B_LINK_PARTNER_NAME} sent out {B_LINK_PLAYER_MON2_NAME}!\nGo! {B_LINK_PLAYER_MON1_NAME}!");
 static const u8 sText_PkmnThatsEnough[] = _("{B_BUFF1}, that’s enough!\nCome back!");
 static const u8 sText_PkmnComeBack[] = _("{B_BUFF1}, come back!");
 static const u8 sText_PkmnOkComeBack[] = _("{B_BUFF1}, OK!\nCome back!");
 static const u8 sText_PkmnGoodComeBack[] = _("{B_BUFF1}, good!\nCome back!");
 static const u8 sText_Trainer1WithdrewPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwithdrew {B_BUFF1}!");
-static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_20} withdrew\n{B_BUFF1}!");
-static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_22} withdrew\n{B_BUFF1}!");
+static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_LINK_OPPONENT1_NAME} withdrew\n{B_BUFF1}!");
+static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} withdrew\n{B_BUFF1}!");
 static const u8 sText_WildPkmnPrefix[] = _("Wild ");
 static const u8 sText_FoePkmnPrefix[] = _("Foe ");
-static const u8 sText_EmptyString8[] = _( "");
+static const u8 sText_EmptyString8[] = _("");
 static const u8 sText_FoePkmnPrefix2[] = _("Foe");
 static const u8 sText_AllyPkmnPrefix[] = _("Ally");
 static const u8 sText_FoePkmnPrefix3[] = _("Foe");
@@ -1321,8 +1321,8 @@ static const u8 sText_PlayerLostAgainstTrainer1[] = _("Player lost against\n{B_T
 static const u8 sText_PlayerBattledToDrawTrainer1[] = _("Player battled to a draw against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
 const u8 gText_RecordBattleToPass[] = _("Would you like to record your battle\non your FRONTIER PASS?");
 const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}’s battle result was recorded\non the FRONTIER PASS.");
-static const u8 sText_LinkTrainerWantsToBattlePause[] = _("{B_20}\nwants to battle!{PAUSE 49}");
-static const u8 sText_TwoLinkTrainersWantToBattlePause[] = _("{B_20} and {B_21}\nwant to battle!{PAUSE 49}");
+static const u8 sText_LinkTrainerWantsToBattlePause[] = _("{B_LINK_OPPONENT1_NAME}\nwants to battle!{PAUSE 49}");
+static const u8 sText_TwoLinkTrainersWantToBattlePause[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!{PAUSE 49}");
 
 // This is four lists of moves which use a different attack string in Japanese
 // to the default. See the documentation for ChooseTypeOfMoveUsedString for more detail.
@@ -2303,13 +2303,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
     u32 dstID = 0; // if they used dstID, why not use srcID as well?
     const u8 *toCpy = NULL;
     u8 text[30];
-    u8 multiplayerID;
+    u8 multiplayerId;
     s32 i;
 
     if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
-        multiplayerID = gUnknown_0203C7B4;
+        multiplayerId = gUnknown_0203C7B4;
     else
-        multiplayerID = GetMultiplayerId();
+        multiplayerId = GetMultiplayerId();
 
     while (*src != EOS)
     {
@@ -2383,25 +2383,25 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON1_NAME: // link first player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id]],
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON1_NAME: // link first opponent poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 1]],
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 1]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON2_NAME: // link second player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 2]],
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 2]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON2_NAME: // link second opponent poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 3]],
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 3]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
@@ -2531,7 +2531,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
                 {
-                    toCpy = gLinkPlayers[multiplayerID ^ BIT_SIDE].name;
+                    toCpy = gLinkPlayers[multiplayerId ^ BIT_SIDE].name;
                 }
                 else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
                 {
@@ -2558,19 +2558,19 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     toCpy = gTrainers[gTrainerBattleOpponent_A].trainerName;
                 }
                 break;
-            case B_TXT_1E: // link player name?
-                toCpy = gLinkPlayers[multiplayerID].name;
+            case B_TXT_LINK_PLAYER_NAME: // link player name
+                toCpy = gLinkPlayers[multiplayerId].name;
                 break;
-            case B_TXT_1F: // link partner name?
-                toCpy = gLinkPlayers[GetBattlerMultiplayerId(2 ^ gLinkPlayers[multiplayerID].id)].name;
+            case B_TXT_LINK_PARTNER_NAME: // link partner name
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(BATTLE_PARTNER(gLinkPlayers[multiplayerId].id))].name;
                 break;
-            case B_TXT_20: // link opponent 1 name?
-                toCpy = gLinkPlayers[GetBattlerMultiplayerId(1 ^ gLinkPlayers[multiplayerID].id)].name;
+            case B_TXT_LINK_OPPONENT1_NAME: // link opponent 1 name
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(BATTLE_OPPOSITE(gLinkPlayers[multiplayerId].id))].name;
                 break;
-            case B_TXT_21: // link opponent 2 name?
-                toCpy = gLinkPlayers[GetBattlerMultiplayerId(3 ^ gLinkPlayers[multiplayerID].id)].name;
+            case B_TXT_LINK_OPPONENT2_NAME: // link opponent 2 name
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(BATTLE_PARTNER(BATTLE_OPPOSITE(gLinkPlayers[multiplayerId].id)))].name;
                 break;
-            case B_TXT_22: // link scripting active name
+            case B_TXT_LINK_SCR_TRAINER_NAME: // link scripting active name
                 toCpy = gLinkPlayers[GetBattlerMultiplayerId(gBattleScripting.battler)].name;
                 break;
             case B_TXT_PLAYER_NAME: // player name

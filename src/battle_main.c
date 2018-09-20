@@ -877,7 +877,7 @@ static void sub_8036EB8(u8 arg0, u8 arg1)
     if (gBlockRecvBuffer[0][0] == 256)
     {
         if (arg1 == 0)
-            gBattleTypeFlags |= BATTLE_TYPE_WILD | BATTLE_TYPE_TRAINER;
+            gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
         else
             gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
         var++;
@@ -896,7 +896,7 @@ static void sub_8036EB8(u8 arg0, u8 arg1)
         if (i == arg0)
         {
             if (arg1 == 0)
-                gBattleTypeFlags |= BATTLE_TYPE_WILD | BATTLE_TYPE_TRAINER;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
             else
                 gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
             var++;
@@ -916,7 +916,7 @@ static void sub_8036EB8(u8 arg0, u8 arg1)
             }
 
             if (i == arg0)
-                gBattleTypeFlags |= BATTLE_TYPE_WILD | BATTLE_TYPE_TRAINER;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
             else
                 gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
         }
@@ -979,7 +979,7 @@ static void CB2_HandleStartBattle(void)
         else
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-                gBattleTypeFlags |= BATTLE_TYPE_WILD;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 15;
             SetAllPlayersBerryData();
         }
@@ -1087,7 +1087,7 @@ static void CB2_HandleStartBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             ResetBlockReceivedFlags();
-            if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+            if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
                 memcpy(&gRecordedBattleRngSeed, gBlockRecvBuffer[enemyMultiplayerId], sizeof(gRecordedBattleRngSeed));
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -1181,7 +1181,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         else
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-                gBattleTypeFlags |= BATTLE_TYPE_WILD;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 13;
             SetAllPlayersBerryData();
         }
@@ -1340,7 +1340,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             ResetBlockReceivedFlags();
-            if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+            if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
                 memcpy(&gRecordedBattleRngSeed, gBlockRecvBuffer[enemyMultiplayerId], sizeof(gRecordedBattleRngSeed));
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -1568,7 +1568,7 @@ static void CB2_HandleStartMultiBattle(void)
         else
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-                gBattleTypeFlags |= BATTLE_TYPE_WILD;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 7;
             SetAllPlayersBerryData();
         }
@@ -3302,7 +3302,7 @@ static void BattleIntroGetMonsData(void)
     {
     case 0:
         gActiveBattler = gBattleCommunication[1];
-        BtlController_EmitGetMonData(0, 0, 0);
+        BtlController_EmitGetMonData(0, REQUEST_ALL_BATTLE, 0);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
@@ -4597,7 +4597,7 @@ static void sub_803CDF8(void)
 void SwapTurnOrder(u8 id1, u8 id2)
 {
 	u32 temp;
-	
+
 	SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
 	SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
