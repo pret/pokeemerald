@@ -78,6 +78,8 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 void SwapHpBarsWithHpText(void);
 void SetMegaTriggerSpritePal(u8 spriteId, u8 palId);
 void CreateMegaTriggerSprite(u8 battlerId, u8 palId);
+bool32 IsMegaTriggerSpriteActive(void);
+void HideMegaTriggerSprite(void);
 void DestroyMegaTriggerSprite(void);
 u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart);
 void Task_HidePartyStatusSummary(u8 taskId);

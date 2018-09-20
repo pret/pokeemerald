@@ -589,7 +589,7 @@ static const struct OamData sOamData_MegaTrigger =
     .matrixNum = 0,
     .size = 2,
     .tileNum = 0,
-    .priority = 1,
+    .priority = 3,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -1554,6 +1554,9 @@ void SetMegaTriggerSpritePal(u8 spriteId, u8 palId)
 #define MEGA_TRIGGER_POS_X_DIFF 19
 #define MEGA_TRIGGER_POS_Y_DIFF 1
 
+#define tBattler    data[0]
+#define tHide       data[1]
+
 void CreateMegaTriggerSprite(u8 battlerId, u8 palId)
 {
     if (GetSpriteTileStartByTag(TAG_MEGA_TRIGGER_TILE) == 0xFFFF)
@@ -1561,21 +1564,55 @@ void CreateMegaTriggerSprite(u8 battlerId, u8 palId)
     if (gBattleStruct->megaEvoTriggerSpriteId == 0xFF)
     {
         gBattleStruct->megaEvoTriggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
-                                                             gSprites[gHealthboxSpriteIds[battlerId]].pos1.x - MEGA_TRIGGER_POS_X_DIFF,
+                                                             gSprites[gHealthboxSpriteIds[battlerId]].pos1.x,
                                                              gSprites[gHealthboxSpriteIds[battlerId]].pos1.y - MEGA_TRIGGER_POS_Y_DIFF, 0);
-        gSprites[gBattleStruct->megaEvoTriggerSpriteId].data[0] = battlerId;
+        gSprites[gBattleStruct->megaEvoTriggerSpriteId].tBattler = battlerId;
     }
+    gSprites[gBattleStruct->megaEvoTriggerSpriteId].tHide = FALSE;
 
     SetMegaTriggerSpritePal(gBattleStruct->megaEvoTriggerSpriteId, palId);
 }
 
 static void SpriteCb_MegaTrigger(struct Sprite *sprite)
 {
-    sprite->pos1.x = gSprites[gHealthboxSpriteIds[sprite->data[0]]].pos1.x - MEGA_TRIGGER_POS_X_DIFF;
-    sprite->pos1.y = gSprites[gHealthboxSpriteIds[sprite->data[0]]].pos1.y - MEGA_TRIGGER_POS_Y_DIFF;
+    if (sprite->tHide)
+    {
+        if (sprite->pos1.x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x + MEGA_TRIGGER_POS_X_DIFF)
+            sprite->pos1.x++;
+        if (sprite->pos2.x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.x + MEGA_TRIGGER_POS_X_DIFF)
+            sprite->pos2.x++;
 
-    sprite->pos2.x = gSprites[gHealthboxSpriteIds[sprite->data[0]]].pos2.x - MEGA_TRIGGER_POS_X_DIFF;
-    sprite->pos2.y = gSprites[gHealthboxSpriteIds[sprite->data[0]]].pos2.y - MEGA_TRIGGER_POS_Y_DIFF;
+        sprite->pos1.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.y - MEGA_TRIGGER_POS_Y_DIFF;
+        sprite->pos2.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.y - MEGA_TRIGGER_POS_Y_DIFF;
+        if (sprite->pos1.x == gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x + MEGA_TRIGGER_POS_X_DIFF
+            && sprite->pos2.x == gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.x + MEGA_TRIGGER_POS_X_DIFF)
+            DestroyMegaTriggerSprite();
+    }
+    else
+    {
+        if (sprite->pos1.x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.x - MEGA_TRIGGER_POS_X_DIFF)
+            sprite->pos1.x--;
+        if (sprite->pos2.x != gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.x - MEGA_TRIGGER_POS_X_DIFF)
+            sprite->pos2.x--;
+
+        sprite->pos1.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos1.y - MEGA_TRIGGER_POS_Y_DIFF;
+        sprite->pos2.y = gSprites[gHealthboxSpriteIds[sprite->tBattler]].pos2.y - MEGA_TRIGGER_POS_Y_DIFF;
+    }
+}
+
+bool32 IsMegaTriggerSpriteActive(void)
+{
+    if (GetSpriteTileStartByTag(TAG_MEGA_TRIGGER_TILE) == 0xFFFF)
+        return FALSE;
+    else if (IndexOfSpritePaletteTag(TAG_MEGA_TRIGGER_OFF_PAL) != 0xFF || IndexOfSpritePaletteTag(TAG_MEGA_TRIGGER_ON_PAL) != 0xFF)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void HideMegaTriggerSprite(void)
+{
+    gSprites[gBattleStruct->megaEvoTriggerSpriteId].tHide = TRUE;
 }
 
 void DestroyMegaTriggerSprite(void)
@@ -1587,6 +1624,9 @@ void DestroyMegaTriggerSprite(void)
         DestroySprite(&gSprites[gBattleStruct->megaEvoTriggerSpriteId]);
     gBattleStruct->megaEvoTriggerSpriteId = 0xFF;
 }
+
+#undef tBattler
+#undef tHide
 
 #define tBattler                data[0]
 #define tSummaryBarSpriteId     data[1]

@@ -2579,7 +2579,7 @@ static const u8* TryGetStatusString(u8 *src)
     StringGetEnd10(text);                                               \
     toCpy = text;
 
-static const u8 *BattleStringGetTrainerName(u16 trainerId, u8 *text, u8 multiplierId)
+static const u8 *BattleStringGetTrainerName(u16 trainerId, u8 *text, u8 multiplayerId, u8 battlerId)
 {
     const u8 *toCpy;
 
@@ -2594,7 +2594,11 @@ static const u8 *BattleStringGetTrainerName(u16 trainerId, u8 *text, u8 multipli
     }
     else if (trainerId == TRAINER_OPPONENT_C00)
     {
-        toCpy = gLinkPlayers[multiplierId ^ BIT_SIDE].name;
+        toCpy = gLinkPlayers[multiplayerId ^ BIT_SIDE].name;
+    }
+    else if (trainerId == TRAINER_LINK_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_LINK && battlerId != 0xFF)
+    {
+        toCpy = gLinkPlayers[GetBattlerMultiplayerId(battlerId)].name;
     }
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
@@ -2651,13 +2655,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
     u32 dstID = 0; // if they used dstID, why not use srcID as well?
     const u8 *toCpy = NULL;
     u8 text[30];
-    u8 multiplayerID;
+    u8 multiplayerId;
     s32 i;
 
     if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
-        multiplayerID = gUnknown_0203C7B4;
+        multiplayerId = gUnknown_0203C7B4;
     else
-        multiplayerID = GetMultiplayerId();
+        multiplayerId = GetMultiplayerId();
 
     while (*src != EOS)
     {
@@ -2732,25 +2736,25 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON1_NAME: // link first player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id]],
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON1_NAME: // link first opponent poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 1]],
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 1]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON2_NAME: // link second player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 2]],
+                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 2]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON2_NAME: // link second opponent poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerID].id ^ 3]],
+                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 3]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
@@ -2857,19 +2861,19 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = BattleStringGetTrainerClass(gTrainerBattleOpponent_A);
                 break;
             case B_TXT_TRAINER1_NAME: // trainer1 name
-                toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_A, text, multiplayerID);
+                toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_A, text, multiplayerId, 0xFF);
                 break;
             case B_TXT_1E: // link player name?
-                toCpy = gLinkPlayers[multiplayerID].name;
+                toCpy = gLinkPlayers[multiplayerId].name;
                 break;
             case B_TXT_1F: // link partner name?
-                toCpy = gLinkPlayers[GetBattlerMultiplayerId(2 ^ gLinkPlayers[multiplayerID].id)].name;
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(2 ^ gLinkPlayers[multiplayerId].id)].name;
                 break;
             case B_TXT_20: // link opponent 1 name?
-                toCpy = gLinkPlayers[GetBattlerMultiplayerId(1 ^ gLinkPlayers[multiplayerID].id)].name;
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(1 ^ gLinkPlayers[multiplayerId].id)].name;
                 break;
             case B_TXT_21: // link opponent 2 name?
-                toCpy = gLinkPlayers[GetBattlerMultiplayerId(3 ^ gLinkPlayers[multiplayerID].id)].name;
+                toCpy = gLinkPlayers[GetBattlerMultiplayerId(3 ^ gLinkPlayers[multiplayerId].id)].name;
                 break;
             case B_TXT_22: // link scripting active name
                 toCpy = gLinkPlayers[GetBattlerMultiplayerId(gBattleScripting.battler)].name;
@@ -2957,7 +2961,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = BattleStringGetTrainerClass(gTrainerBattleOpponent_B);
                 break;
             case B_TXT_TRAINER2_NAME:
-                toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_B, text, multiplayerID);
+                toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_B, text, multiplayerId, 0xFF);
                 break;
             case B_TXT_TRAINER2_LOSE_TEXT:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -3012,13 +3016,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     }
                     break;
                 case B_POSITION_OPPONENT_LEFT:
-                    toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_A, text, multiplayerID);
+                    toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_A, text, multiplayerId, gBattlerAttacker);
                     break;
                 case B_POSITION_OPPONENT_RIGHT:
                     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-                        toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_B, text, multiplayerID);
+                        toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_B, text, multiplayerId, gBattlerAttacker);
                     else
-                        toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_A, text, multiplayerID);
+                        toCpy = BattleStringGetTrainerName(gTrainerBattleOpponent_A, text, multiplayerId, gBattlerAttacker);
                     break;
                 }
                 break;

@@ -6594,7 +6594,15 @@ static void atk76_various(void)
             mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
         else
             mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
-        gBattleMons[gActiveBattler].species = gBattleStruct->speciesToMegaEvolve[gActiveBattler];
+
+        gBattleStruct->speciesThatMegaEvolved[gActiveBattler] = gBattleMons[gActiveBattler].species;
+        if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT
+            || (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
+        {
+            gBattleStruct->playerSpeciesThatMegaEvolved = gBattleStruct->speciesThatMegaEvolved[gActiveBattler];
+        }
+
+        gBattleMons[gActiveBattler].species = GetMegaEvolutionSpecies(gBattleStruct->speciesThatMegaEvolved[gActiveBattler], gBattleMons[gActiveBattler].item);
         SetMonData(mon, MON_DATA_SPECIES, &gBattleMons[gActiveBattler].species);
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
 
@@ -6610,10 +6618,13 @@ static void atk76_various(void)
         gBattleMons[gActiveBattler].ability = GetMonAbility(mon);
         gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
         gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
-        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
 
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
         gBattleStruct->alreadyMegaEvolved[GetBattlerPosition(gActiveBattler)] = TRUE;
         gBattleStruct->megaEvolvedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
+
+        BtlController_EmitSetMonData(0, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], sizeof(struct BattlePokemon), &gBattleMons[gActiveBattler]);
+        MarkBattlerForControllerExec(gActiveBattler);
         break;
     }
 

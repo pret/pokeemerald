@@ -601,7 +601,7 @@ struct BattleStruct
     u8 toMegaEvolve; // As flags using gBitTable.
     u8 megaEvolvedPartyIds[2]; // As flags using gBitTable;
     bool8 alreadyMegaEvolved[4]; // Array id is used for mon position.
-    u16 speciesToMegaEvolve[MAX_BATTLERS_COUNT];
+    u16 speciesThatMegaEvolved[MAX_BATTLERS_COUNT];
     u16 playerSpeciesThatMegaEvolved;
     u8 megaEvoBattlerId;
     bool8 playerMegaEvoSelect;

@@ -5586,10 +5586,23 @@ static bool32 IsPartnerMonFromSameTrainer(u8 battlerId)
         return TRUE;
 }
 
-bool32 CanMegaEvolve(u8 battlerId)
+u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId)
 {
     u32 i;
-    u16 species, itemId;
+
+    for (i = 0; i < EVOS_PER_MON; i++)
+    {
+        if (gEvolutionTable[preEvoSpecies][i].method == EVO_MEGA_EVOLUTION
+            && gEvolutionTable[preEvoSpecies][i].param == heldItemId)
+                return gEvolutionTable[preEvoSpecies][i].targetSpecies;
+    }
+    return SPECIES_NONE;
+}
+
+bool32 CanMegaEvolve(u8 battlerId)
+{
+    u32 itemId, holdEffect;
+    struct Pokemon *mon;
     u8 battlerPosition = GetBattlerPosition(battlerId);
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battlerId));
 
@@ -5602,27 +5615,23 @@ bool32 CanMegaEvolve(u8 battlerId)
             return FALSE;
     }
 
-    // Check if the pokemon holds an appropriate item,
-    if (GetBattlerHoldEffect(battlerId, FALSE) != HOLD_EFFECT_MEGA_STONE)
+    // Check if the pokemon holds an appropriate item.
+    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
+        mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
+    else
+        mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
+
+    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+    if (itemId != ITEM_ENIGMA_BERRY)
+        holdEffect = ItemId_GetHoldEffect(itemId);
+    else
+        holdEffect = gEnigmaBerries[battlerId].holdEffect;
+
+    if (holdEffect != HOLD_EFFECT_MEGA_STONE)
         return FALSE;
 
     // Check if there is an entry in the evolution table.
-    species = gBattleMons[battlerId].species;
-    itemId = gBattleMons[battlerId].item;
-    for (i = 0; i < EVOS_PER_MON; i++)
-    {
-        if (gEvolutionTable[species][i].method == EVO_MEGA_EVOLUTION
-            && gEvolutionTable[species][i].param == itemId)
-        {
-            gBattleStruct->speciesToMegaEvolve[battlerId] = gEvolutionTable[species][i].targetSpecies;
-            if (battlerPosition == B_POSITION_PLAYER_LEFT
-                || (battlerPosition == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
-                gBattleStruct->playerSpeciesThatMegaEvolved = species;
-            break;
-        }
-    }
-
-    if (i == EVOS_PER_MON)
+    if (GetMegaEvolutionSpecies(GetMonData(mon, MON_DATA_SPECIES), itemId) == SPECIES_NONE)
         return FALSE;
 
     // All checks passed, the mon CAN mega evolve.

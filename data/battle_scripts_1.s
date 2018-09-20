@@ -4610,7 +4610,7 @@ BattleScript_FocusPunchSetUp::
 	printstring STRINGID_PKMNTIGHTENINGFOCUS
 	waitmessage 0x40
 	end2
-	
+
 BattleScript_MegaEvolution::
 	printstring STRINGID_MEGAEVOREACTING
 	waitmessage 0x40
