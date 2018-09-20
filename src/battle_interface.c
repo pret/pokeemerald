@@ -1561,16 +1561,16 @@ void CreateMegaTriggerSprite(u8 battlerId, u8 palId)
 {
     if (GetSpriteTileStartByTag(TAG_MEGA_TRIGGER_TILE) == 0xFFFF)
         LoadSpriteSheet(&sSpriteSheet_MegaTrigger);
-    if (gBattleStruct->megaEvoTriggerSpriteId == 0xFF)
+    if (gBattleStruct->mega.triggerSpriteId == 0xFF)
     {
-        gBattleStruct->megaEvoTriggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
+        gBattleStruct->mega.triggerSpriteId = CreateSprite(&sSpriteTemplate_MegaTrigger,
                                                              gSprites[gHealthboxSpriteIds[battlerId]].pos1.x,
                                                              gSprites[gHealthboxSpriteIds[battlerId]].pos1.y - MEGA_TRIGGER_POS_Y_DIFF, 0);
     }
-    gSprites[gBattleStruct->megaEvoTriggerSpriteId].tBattler = battlerId;
-    gSprites[gBattleStruct->megaEvoTriggerSpriteId].tHide = FALSE;
+    gSprites[gBattleStruct->mega.triggerSpriteId].tBattler = battlerId;
+    gSprites[gBattleStruct->mega.triggerSpriteId].tHide = FALSE;
 
-    SetMegaTriggerSpritePal(gBattleStruct->megaEvoTriggerSpriteId, palId);
+    SetMegaTriggerSpritePal(gBattleStruct->mega.triggerSpriteId, palId);
 }
 
 static void SpriteCb_MegaTrigger(struct Sprite *sprite)
@@ -1612,7 +1612,7 @@ bool32 IsMegaTriggerSpriteActive(void)
 
 void HideMegaTriggerSprite(void)
 {
-    gSprites[gBattleStruct->megaEvoTriggerSpriteId].tHide = TRUE;
+    gSprites[gBattleStruct->mega.triggerSpriteId].tHide = TRUE;
 }
 
 void DestroyMegaTriggerSprite(void)
@@ -1620,9 +1620,9 @@ void DestroyMegaTriggerSprite(void)
     FreeSpritePaletteByTag(TAG_MEGA_TRIGGER_OFF_PAL);
     FreeSpritePaletteByTag(TAG_MEGA_TRIGGER_ON_PAL);
     FreeSpriteTilesByTag(TAG_MEGA_TRIGGER_TILE);
-    if (gBattleStruct->megaEvoTriggerSpriteId != 0xFF)
-        DestroySprite(&gSprites[gBattleStruct->megaEvoTriggerSpriteId]);
-    gBattleStruct->megaEvoTriggerSpriteId = 0xFF;
+    if (gBattleStruct->mega.triggerSpriteId != 0xFF)
+        DestroySprite(&gSprites[gBattleStruct->mega.triggerSpriteId]);
+    gBattleStruct->mega.triggerSpriteId = 0xFF;
 }
 
 #undef tBattler

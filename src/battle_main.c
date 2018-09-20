@@ -3099,9 +3099,9 @@ static void BattleStartClearSetData(void)
     gBattleStruct->field_2A0 = 0;
     gBattleStruct->field_2A1 = 0;
 
-    gBattleStruct->megaEvoTriggerSpriteId = 0xFF;
+    gBattleStruct->mega.triggerSpriteId = 0xFF;
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        gBattleStruct->megaEvoIndicatorSpriteId[i] = 0xFF;
+        gBattleStruct->mega.indicatorSpriteIds[i] = 0xFF;
 }
 
 void SwitchInClearSetData(void)
@@ -4339,7 +4339,7 @@ static void HandleTurnActionSelectionState(void)
                         RecordedBattle_ClearBattlerAction(GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))), 3);
                     }
 
-                    gBattleStruct->toMegaEvolve &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))]);
+                    gBattleStruct->mega.toEvolve &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))]);
                     BtlController_EmitEndBounceEffect(0);
                     MarkBattlerForControllerExec(gActiveBattler);
                     return;
@@ -4429,7 +4429,7 @@ static void HandleTurnActionSelectionState(void)
                             gChosenMoveByBattler[gActiveBattler] = gBattleMons[gActiveBattler].moves[*(gBattleStruct->chosenMovePositions + gActiveBattler)];
                             *(gBattleStruct->moveTarget + gActiveBattler) = gBattleBufferB[gActiveBattler][3];
                             if (gBattleBufferB[gActiveBattler][2] & RET_MEGA_EVOLUTION)
-                                gBattleStruct->toMegaEvolve |= gBitTable[gActiveBattler];
+                                gBattleStruct->mega.toEvolve |= gBitTable[gActiveBattler];
                             gBattleCommunication[gActiveBattler]++;
                         }
                         break;
@@ -4856,7 +4856,7 @@ static void SetActionsAndBattlersTurnOrder(void)
                 }
             }
             gBattleMainFunc = CheckMegaEvolutionBeforeTurn;
-            gBattleStruct->megaEvoBattlerId = 0;
+            gBattleStruct->mega.battlerId = 0;
             return;
         }
         else
@@ -4898,7 +4898,7 @@ static void SetActionsAndBattlersTurnOrder(void)
         }
     }
     gBattleMainFunc = CheckMegaEvolutionBeforeTurn;
-    gBattleStruct->megaEvoBattlerId = 0;
+    gBattleStruct->mega.battlerId = 0;
 }
 
 static void TurnValuesCleanUp(bool8 var0)
@@ -4954,14 +4954,14 @@ static void CheckMegaEvolutionBeforeTurn(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
     {
-        while (gBattleStruct->megaEvoBattlerId < gBattlersCount)
+        while (gBattleStruct->mega.battlerId < gBattlersCount)
         {
-            gActiveBattler = gBattlerAttacker = gBattleStruct->megaEvoBattlerId;
-            gBattleStruct->megaEvoBattlerId++;
-            if (gBattleStruct->toMegaEvolve & gBitTable[gActiveBattler]
+            gActiveBattler = gBattlerAttacker = gBattleStruct->mega.battlerId;
+            gBattleStruct->mega.battlerId++;
+            if (gBattleStruct->mega.toEvolve & gBitTable[gActiveBattler]
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                gBattleStruct->toMegaEvolve &= ~(gBitTable[gActiveBattler]);
+                gBattleStruct->mega.toEvolve &= ~(gBitTable[gActiveBattler]);
                 gLastUsedItem = gBattleMons[gActiveBattler].item;
                 BattleScriptExecute(BattleScript_MegaEvolution);
                 return;

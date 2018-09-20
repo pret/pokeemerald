@@ -386,7 +386,7 @@ static void HandleInputChooseTarget(void)
     {
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039B2C;
-        if (gBattleStruct->playerMegaEvoSelect)
+        if (gBattleStruct->mega.playerSelect)
             BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
@@ -544,7 +544,7 @@ static void HandleInputChooseMove(void)
 
         if (!canSelectTarget)
         {
-            if (gBattleStruct->playerMegaEvoSelect)
+            if (gBattleStruct->mega.playerSelect)
                 BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
             else
                 BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
@@ -568,7 +568,7 @@ static void HandleInputChooseMove(void)
     else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
     {
         PlaySE(SE_SELECT);
-        gBattleStruct->playerMegaEvoSelect = FALSE;
+        gBattleStruct->mega.playerSelect = FALSE;
         BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
         HideMegaTriggerSprite();
         PlayerBufferExecCompleted();
@@ -643,8 +643,8 @@ static void HandleInputChooseMove(void)
     {
         if (CanMegaEvolve(gActiveBattler))
         {
-            gBattleStruct->playerMegaEvoSelect ^= 1;
-            SetMegaTriggerSpritePal(gBattleStruct->megaEvoTriggerSpriteId, gBattleStruct->playerMegaEvoSelect);
+            gBattleStruct->mega.playerSelect ^= 1;
+            SetMegaTriggerSpritePal(gBattleStruct->mega.triggerSpriteId, gBattleStruct->mega.playerSelect);
             PlaySE(SE_SELECT);
         }
     }
@@ -2646,9 +2646,9 @@ static void PlayerHandleChooseMove(void)
     else
     {
         InitMoveSelectionsVarsAndStrings();
-        gBattleStruct->playerMegaEvoSelect = FALSE;
+        gBattleStruct->mega.playerSelect = FALSE;
         if (!IsMegaTriggerSpriteActive())
-            gBattleStruct->megaEvoTriggerSpriteId = 0xFF;
+            gBattleStruct->mega.triggerSpriteId = 0xFF;
         if (CanMegaEvolve(gActiveBattler))
             CreateMegaTriggerSprite(gActiveBattler, 0);
         gBattlerControllerFuncs[gActiveBattler] = HandleChooseMoveAfterDma3;

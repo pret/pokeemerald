@@ -5607,12 +5607,12 @@ bool32 CanMegaEvolve(u8 battlerId)
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battlerId));
 
     // Check if trainer already mega evolved a pokemon.
-    if (gBattleStruct->alreadyMegaEvolved[battlerPosition])
+    if (gBattleStruct->mega.alreadyEvolved[battlerPosition])
         return FALSE;
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         if (IsPartnerMonFromSameTrainer(battlerId)
-            && (gBattleStruct->alreadyMegaEvolved[partnerPosition] || (gBattleStruct->toMegaEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
+            && (gBattleStruct->mega.alreadyEvolved[partnerPosition] || (gBattleStruct->mega.toEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
             return FALSE;
     }
 
@@ -5641,10 +5641,10 @@ bool32 CanMegaEvolve(u8 battlerId)
 
 void UndoMegaEvolution(u8 monId)
 {
-    if (gBattleStruct->megaEvolvedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
+    if (gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
     {
-        gBattleStruct->megaEvolvedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
-        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->playerSpeciesThatMegaEvolved);
+        gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->mega.playerEvolvedSpecies);
         CalculateMonStats(&gPlayerParty[monId]);
     }
 }

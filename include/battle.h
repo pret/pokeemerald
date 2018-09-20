@@ -478,6 +478,19 @@ struct BattleTvMovePoints
     s16 points[2][PARTY_SIZE * 4];
 };
 
+struct MegaEvolutionData
+{
+    u8 toEvolve; // As flags using gBitTable.
+    u8 evolvedPartyIds[2]; // As flags using gBitTable;
+    bool8 alreadyEvolved[4]; // Array id is used for mon position.
+    u16 evolvedSpecies[MAX_BATTLERS_COUNT];
+    u16 playerEvolvedSpecies;
+    u8 battlerId;
+    bool8 playerSelect;
+    u8 triggerSpriteId;
+    u8 indicatorSpriteIds[MAX_BATTLERS_COUNT];
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -598,15 +611,7 @@ struct BattleStruct
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u32 debugAIFlags;
     bool8 notfirstTimeAIFlags;
-    u8 toMegaEvolve; // As flags using gBitTable.
-    u8 megaEvolvedPartyIds[2]; // As flags using gBitTable;
-    bool8 alreadyMegaEvolved[4]; // Array id is used for mon position.
-    u16 speciesThatMegaEvolved[MAX_BATTLERS_COUNT];
-    u16 playerSpeciesThatMegaEvolved;
-    u8 megaEvoBattlerId;
-    bool8 playerMegaEvoSelect;
-    u8 megaEvoTriggerSpriteId;
-    u8 megaEvoIndicatorSpriteId[MAX_BATTLERS_COUNT];
+    struct MegaEvolutionData mega;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
