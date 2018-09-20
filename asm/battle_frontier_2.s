@@ -7327,8 +7327,8 @@ _081A36C2:
 	bx r1
 	thumb_func_end sub_81A3610
 
-	thumb_func_start sub_81A36D0
-sub_81A36D0: @ 81A36D0
+	thumb_func_start CopyFrontierTrainerText
+CopyFrontierTrainerText: @ 81A36D0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -7561,7 +7561,7 @@ _081A38F8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81A36D0
+	thumb_func_end CopyFrontierTrainerText
 
 	thumb_func_start sub_81A3908
 sub_81A3908: @ 81A3908

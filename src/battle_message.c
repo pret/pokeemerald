@@ -17,6 +17,7 @@
 #include "menu.h"
 #include "recorded_battle.h"
 #include "international_string_util.h"
+#include "battle_frontier_2.h"
 
 struct BattleWindowText
 {
@@ -51,7 +52,6 @@ extern u8 GetEreaderTrainerClassId(void); // battle_tower
 extern void CopyFrontierBrainTrainerName(u8 *txtPtr); // battle_frontier_2
 extern void sub_81D5554(u8 *txtPtr, u16 trainerId); // pokenav
 extern void GetEreaderTrainerName(u8 *txtPtr);
-extern void sub_81A36D0(u8 arg0, u16 trainerId); // battle_frontier_2
 extern void sub_81D572C(u8 arg0, u16 trainerId); // pokenav
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 
@@ -2582,7 +2582,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_LOSE_TEXT: // trainerA lose text
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    sub_81A36D0(2, gTrainerBattleOpponent_A);
+                    CopyFrontierTrainerText(FRONTIER_LOSE_TEXT, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
@@ -2598,7 +2598,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_WIN_TEXT: // trainerA win text
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    sub_81A36D0(1, gTrainerBattleOpponent_A);
+                    CopyFrontierTrainerText(FRONTIER_WIN_TEXT, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
@@ -2679,7 +2679,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER2_LOSE_TEXT:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    sub_81A36D0(2, gTrainerBattleOpponent_B);
+                    CopyFrontierTrainerText(FRONTIER_LOSE_TEXT, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
@@ -2695,7 +2695,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER2_WIN_TEXT:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    sub_81A36D0(1, gTrainerBattleOpponent_B);
+                    CopyFrontierTrainerText(FRONTIER_WIN_TEXT, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
