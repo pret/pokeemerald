@@ -4224,6 +4224,7 @@ static void HandleTurnActionSelectionState(void)
                     {
                         struct ChooseMoveStruct moveInfo;
 
+                        moveInfo.mega = gBattleStruct->mega;
                         moveInfo.species = gBattleMons[gActiveBattler].species;
                         moveInfo.monType1 = gBattleMons[gActiveBattler].type1;
                         moveInfo.monType2 = gBattleMons[gActiveBattler].type2;
