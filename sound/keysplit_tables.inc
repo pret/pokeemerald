@@ -10,10 +10,6 @@
 @ begins. Therefore, the notes naturally map to the key split table without
 @ any extra offset calculation.
 
-@ This is weird.  There are instruments at the beginning of the keysplit table.
-	voice_square_1 0, 2, 0, 0, 15, 0  @ 86B4698
-	voice_directsound_no_resample 64, 104, DirectSoundWaveData_86DD11C, 255, 0, 255, 0  @ 86B46A4
-	voice_directsound 63, 64, DirectSoundWaveData_86DE6C0, 255, 0, 255, 0  @ 86B46B0
 .set KeySplitTable1, . - 36
 	.byte 0  @ 36
 	.byte 0  @ 37
@@ -395,3 +391,7 @@
 	.byte 1  @ 105
 	.byte 1  @ 106
 	.byte 1  @ 107
+
+	voice_square_1 0, 2, 0, 0, 15, 0  @ 86B4698
+	voice_directsound_no_resample 64, 104, DirectSoundWaveData_86DD11C, 255, 0, 255, 0  @ 86B46A4
+	voice_directsound 63, 64, DirectSoundWaveData_86DE6C0, 255, 0, 255, 0  @ 86B46B0
