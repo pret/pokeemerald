@@ -40,7 +40,7 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
 extern void sub_81A57E4(u8 battlerId, u16 stringId);
 extern u8 GetFrontierBrainTrainerPicIndex(void);
-extern u8 sub_81D5588(u16 trainerId);
+extern u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId);
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 extern u8 GetEreaderTrainerFrontSpriteId(void);
 
@@ -1238,18 +1238,18 @@ static void OpponentHandleDrawTrainerPic(void)
     {
         trainerPicId = GetFrontierBrainTrainerPicIndex();
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         {
             if (gActiveBattler == 1)
-                trainerPicId = sub_81D5588(gTrainerBattleOpponent_A);
+                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
             else
-                trainerPicId = sub_81D5588(gTrainerBattleOpponent_B);
+                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_B);
         }
         else
         {
-            trainerPicId = sub_81D5588(gTrainerBattleOpponent_A);
+            trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -1322,18 +1322,18 @@ static void OpponentHandleTrainerSlide(void)
     {
         trainerPicId = GetFrontierBrainTrainerPicIndex();
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         {
             if (gActiveBattler == 1)
-                trainerPicId = sub_81D5588(gTrainerBattleOpponent_A);
+                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
             else
-                trainerPicId = sub_81D5588(gTrainerBattleOpponent_B);
+                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_B);
         }
         else
         {
-            trainerPicId = sub_81D5588(gTrainerBattleOpponent_A);
+            trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -2002,7 +2002,7 @@ static void OpponentHandleResetActionMoveSelection(void)
 
 static void OpponentHandleCmd55(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK && !(gBattleTypeFlags & BATTLE_TYPE_WILD))
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
     {
         gMain.inBattle = 0;
         gMain.callback1 = gPreBattleCallback1;

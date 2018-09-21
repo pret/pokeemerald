@@ -28077,8 +28077,8 @@ sub_81D5520: @ 81D5520
 	.pool
 	thumb_func_end sub_81D5520
 
-	thumb_func_start sub_81D5530
-sub_81D5530: @ 81D5530
+	thumb_func_start GetTrainerHillOpponentClass
+GetTrainerHillOpponentClass: @ 81D5530
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -28094,10 +28094,10 @@ sub_81D5530: @ 81D5530
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_81D5530
+	thumb_func_end GetTrainerHillOpponentClass
 
-	thumb_func_start sub_81D5554
-sub_81D5554: @ 81D5554
+	thumb_func_start GetTrainerHillTrainerName
+GetTrainerHillTrainerName: @ 81D5554
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -28123,10 +28123,10 @@ _081D556E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D5554
+	thumb_func_end GetTrainerHillTrainerName
 
-	thumb_func_start sub_81D5588
-sub_81D5588: @ 81D5588
+	thumb_func_start GetTrainerHillTrainerFrontSpriteId
+GetTrainerHillTrainerFrontSpriteId: @ 81D5588
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -28158,7 +28158,7 @@ sub_81D5588: @ 81D5588
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81D5588
+	thumb_func_end GetTrainerHillTrainerFrontSpriteId
 
 	thumb_func_start sub_81D55D0
 sub_81D55D0: @ 81D55D0
@@ -28322,8 +28322,8 @@ _081D5722:
 	.pool
 	thumb_func_end sub_81D5710
 
-	thumb_func_start sub_81D572C
-sub_81D572C: @ 81D572C
+	thumb_func_start CopyTrainerHillTrainerText
+CopyTrainerHillTrainerText: @ 81D572C
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -28439,7 +28439,7 @@ _081D580E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D572C
+	thumb_func_end CopyTrainerHillTrainerText
 
 	thumb_func_start sub_81D581C
 sub_81D581C: @ 81D581C
@@ -29702,7 +29702,7 @@ sub_81D62B4: @ 81D62B4
 	ldr r0, =gSpecialVar_LastTalked
 	ldrh r1, [r0]
 	movs r0, 0x5
-	bl sub_81D572C
+	bl CopyTrainerHillTrainerText
 	bl sub_80982B8
 	pop {r0}
 	bx r0

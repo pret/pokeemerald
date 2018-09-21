@@ -330,7 +330,7 @@ static void InitSinglePlayerBtlControllers(void)
                     }
                 }
             }
-            else if (gBattleTypeFlags & BATTLE_TYPE_WILD)
+            else if (gBattleTypeFlags & BATTLE_TYPE_IS_MASTER)
             {
                 gBattlerControllerFuncs[0] = SetControllerToRecordedPlayer;
                 gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
@@ -391,7 +391,7 @@ static void InitLinkBtlControllers(void)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_WILD)
+        if (gBattleTypeFlags & BATTLE_TYPE_IS_MASTER)
         {
             gBattleMainFunc = BeginBattleIntro;
 
@@ -416,7 +416,7 @@ static void InitLinkBtlControllers(void)
     }
     else if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_WILD)
+        if (gBattleTypeFlags & BATTLE_TYPE_IS_MASTER)
         {
             gBattleMainFunc = BeginBattleIntro;
 
@@ -453,7 +453,7 @@ static void InitLinkBtlControllers(void)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_WILD)
+        if (gBattleTypeFlags & BATTLE_TYPE_IS_MASTER)
         {
             gBattleMainFunc = BeginBattleIntro;
 
@@ -501,7 +501,7 @@ static void InitLinkBtlControllers(void)
     {
         multiplayerId = GetMultiplayerId();
 
-        if (gBattleTypeFlags & BATTLE_TYPE_WILD)
+        if (gBattleTypeFlags & BATTLE_TYPE_IS_MASTER)
             gBattleMainFunc = BeginBattleIntro;
 
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
@@ -700,14 +700,14 @@ static void CreateTasksForSendRecvLinkBuffers(void)
 enum
 {
     LINK_BUFF_BUFFER_ID,
-    LINK_BUFF_ACTIVE_BANK,
+    LINK_BUFF_ACTIVE_BATTLER,
     LINK_BUFF_ATTACKER,
     LINK_BUFF_TARGET,
     LINK_BUFF_SIZE_LO,
     LINK_BUFF_SIZE_HI,
-    LINK_BUFF_ABSENT_BANK_FLAGS,
-    LINK_BUFF_EFFECT_BANK,
-    LINK_BUFF_DATA
+    LINK_BUFF_ABSENT_BATTLER_FLAGS,
+    LINK_BUFF_EFFECT_BATTLER,
+    LINK_BUFF_DATA,
 };
 
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
@@ -722,13 +722,13 @@ void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
         gTasks[gUnknown_02022D08].data[14] = 0;
     }
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_BUFFER_ID] = bufferId;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ACTIVE_BANK] = gActiveBattler;
+    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ACTIVE_BATTLER] = gActiveBattler;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ATTACKER] = gBattlerAttacker;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_TARGET] = gBattlerTarget;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_HI] = (alignedSize & 0x0000FF00) >> 8;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ABSENT_BANK_FLAGS] = gAbsentBattlerFlags;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_EFFECT_BANK] = gEffectBattler;
+    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ABSENT_BATTLER_FLAGS] = gAbsentBattlerFlags;
+    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_EFFECT_BATTLER] = gEffectBattler;
 
     for (i = 0; i < size; i++)
         gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_DATA + i] = data[i];
@@ -877,7 +877,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
         }
-        battlerId = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BANK];
+        battlerId = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BATTLER];
         blockSize = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_LO] | (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_HI] << 8);
 
         switch (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 0])
@@ -886,19 +886,19 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             if (gBattleControllerExecFlags & gBitTable[battlerId])
                 return;
 
-            memcpy(gBattleBufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 8], blockSize);
+            memcpy(gBattleBufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
             sub_803F850(battlerId);
 
-            if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+            if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
             {
-                gBattlerAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 2];
-                gBattlerTarget = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 3];
-                gAbsentBattlerFlags = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 6];
-                gEffectBattler = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 7];
+                gBattlerAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ATTACKER];
+                gBattlerTarget = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_TARGET];
+                gAbsentBattlerFlags = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ABSENT_BATTLER_FLAGS];
+                gEffectBattler = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_EFFECT_BATTLER];
             }
             break;
         case 1:
-            memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 8], blockSize);
+            memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
             break;
         case 2:
             var = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA];

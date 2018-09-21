@@ -17,7 +17,7 @@ extern void sub_81B8FB0(u8, u8);
 
 void AllocateBattleResources(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         sub_81D55D0();
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
@@ -47,7 +47,7 @@ void AllocateBattleResources(void)
 
 void FreeBattleResources(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         sub_81D5694();
 
     if (gBattleResources != NULL)
