@@ -4444,7 +4444,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CLOSE_COMBAT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_CLOSE_COMBAT,
 		.power = 120,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,

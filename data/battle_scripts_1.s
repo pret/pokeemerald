@@ -299,6 +299,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectReflectType
 	.4byte BattleScript_EffectSoak
 	.4byte BattleScript_EffectGrowth
+	.4byte BattleScript_EffectCloseCombat
 	
 BattleScript_EffectGrowth:
 	attackcanceler
@@ -3181,6 +3182,10 @@ BattleScript_EffectIngrain:
 BattleScript_EffectSuperpower:
 	setmoveeffect MOVE_EFFECT_ATK_DEF_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
+	
+BattleScript_EffectCloseCombat:
+	setmoveeffect MOVE_EFFECT_DEF_SPDEF_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
 
 BattleScript_EffectMagicCoat:
 	attackcanceler
@@ -4554,18 +4559,37 @@ BattleScript_AtkDefDown::
 	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_ATK, ATK48_DONT_CHECK_LOWER | ATK48_STAT_NEGATIVE | ATK48_ONLY_MULTIPLE
 	playstatchangeanimation BS_ATTACKER, BIT_ATK, ATK48_DONT_CHECK_LOWER | ATK48_STAT_NEGATIVE
 	setstatchanger STAT_ATK, 1, TRUE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | 0x1, BattleScript_82DB144
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DB144
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | 0x1, BattleScript_AtkDefDownTryDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AtkDefDownTryDef
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
-BattleScript_82DB144::
+BattleScript_AtkDefDownTryDef::
 	playstatchangeanimation BS_ATTACKER, BIT_DEF, ATK48_DONT_CHECK_LOWER | ATK48_STAT_NEGATIVE
 	setstatchanger STAT_DEF, 1, TRUE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | 0x1, BattleScript_82DB167
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DB167
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | 0x1, BattleScript_AtkDefDownRet
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AtkDefDownRet
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
-BattleScript_82DB167::
+BattleScript_AtkDefDownRet::
+	return
+	
+BattleScript_DefSpDefDown::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_SPDEF, ATK48_DONT_CHECK_LOWER | ATK48_STAT_NEGATIVE | ATK48_ONLY_MULTIPLE
+	playstatchangeanimation BS_ATTACKER, BIT_DEF, ATK48_DONT_CHECK_LOWER | ATK48_STAT_NEGATIVE
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | 0x1, BattleScript_DefSpDefDownTrySpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_DefSpDefDownTrySpDef
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+BattleScript_DefSpDefDownTrySpDef::
+	playstatchangeanimation BS_ATTACKER, BIT_SPDEF, ATK48_DONT_CHECK_LOWER | ATK48_STAT_NEGATIVE
+	setstatchanger STAT_SPDEF, 1, TRUE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | 0x1, BattleScript_DefSpDefDownRet
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_DefSpDefDownRet
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+BattleScript_DefSpDefDownRet::
 	return
 
 BattleScript_KnockedOff::

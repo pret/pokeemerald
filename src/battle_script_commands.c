@@ -2594,6 +2594,10 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_AtkDefDown;
                 break;
+            case MOVE_EFFECT_DEF_SPDEF_DOWN: // Close Combat
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_DefSpDefDown;
+                break;
             case MOVE_EFFECT_RECOIL_33: // Double Edge
                 gBattleMoveDamage = gHpDealt / 3;
                 if (gBattleMoveDamage == 0)
