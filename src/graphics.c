@@ -643,11 +643,11 @@ const u8 gBattleAnimSpritePalette_187[] = INCBIN_U8("graphics/battle_anims/sprit
 const u8 gBattleAnimSpriteSheet_186[] = INCBIN_U8("graphics/battle_anims/sprites/186.4bpp.lz");
 const u8 gBattleAnimSpritePalette_186[] = INCBIN_U8("graphics/battle_anims/sprites/186.gbapal.lz");
 
-const u8 gUnknown_08C1F1C8[] = INCBIN_U8("graphics/battle_interface/window.4bpp.lz");
-const u8 gUnknown_08C1F46C[] = INCBIN_U8("graphics/battle_interface/window2.4bpp.lz");
-const u8 gUnknown_08C1F5E8[] = INCBIN_U8( "graphics/battle_interface/window3.4bpp.lz");
-const u8 gUnknown_08C1F76C[] = INCBIN_U8("graphics/battle_interface/window4.4bpp.lz");
-const u8 gUnknown_08C1F8E8[] = INCBIN_U8("graphics/battle_interface/window5.4bpp.lz");
+const u8 gHealthboxSinglesPlayerGfx[] = INCBIN_U8("graphics/battle_interface/healthbox_singles_player.4bpp.lz");
+const u8 gHealthboxSinglesOpponentGfx[] = INCBIN_U8("graphics/battle_interface/healthbox_singles_opponent.4bpp.lz");
+const u8 gHealthboxDoublesPlayerGfx[] = INCBIN_U8( "graphics/battle_interface/healthbox_doubles_player.4bpp.lz");
+const u8 gHealthboxDoublesOpponentGfx[] = INCBIN_U8("graphics/battle_interface/healthbox_doubles_opponent.4bpp.lz");
+const u8 gHealthboxSafariGfx[] = INCBIN_U8("graphics/battle_interface/healthbox_safari.4bpp.lz");
 
 const u8 gUnusedGfx_Shadow[] = INCBIN_U8("graphics/unused/shadow.4bpp.lz");
 const u8 gUnusedPal_Shadow[] = INCBIN_U8("graphics/unused/shadow.gbapal.lz");
