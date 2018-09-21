@@ -234,6 +234,7 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_FLING, AI_CBM_Fling
 	if_effect EFFECT_ATTACK_ACCURACY_UP, AI_CBM_AtkAccUp
 	if_effect EFFECT_ATTACK_SPATK_UP, AI_CBM_AtkSpAtkUp
+	if_effect EFFECT_GROWTH, AI_CBM_AtkSpAtkUp
 	end
 	
 AI_CBM_AtkAccUp:

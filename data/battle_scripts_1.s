@@ -298,6 +298,42 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectScald
 	.4byte BattleScript_EffectReflectType
 	.4byte BattleScript_EffectSoak
+	.4byte BattleScript_EffectGrowth
+	
+BattleScript_EffectGrowth:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, 0xC, BattleScript_GrowthDoMoveAnim
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPATK, 0xC, BattleScript_CantRaiseMultipleStats
+BattleScript_GrowthDoMoveAnim::
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_SPATK, 0x0
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, WEATHER_SUN_ANY, BattleScript_GrowthAtk2
+	setstatchanger STAT_ATK, 1, FALSE
+	goto BattleScript_GrowthAtk
+BattleScript_GrowthAtk2:
+	setstatchanger STAT_ATK, 2, FALSE
+BattleScript_GrowthAtk:
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_GrowthTrySpAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_GrowthTrySpAtk
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_GrowthTrySpAtk::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, WEATHER_SUN_ANY, BattleScript_GrowthSpAtk2
+	setstatchanger STAT_SPATK, 1, FALSE
+	goto BattleScript_GrowthSpAtk
+BattleScript_GrowthSpAtk2:
+	setstatchanger STAT_SPATK, 2, FALSE
+BattleScript_GrowthSpAtk:
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_GrowthEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_GrowthEnd
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_GrowthEnd:
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectSoak:
 	attackcanceler
@@ -426,13 +462,13 @@ BattleScript_AttackSpAttackUpDoMoveAnim::
 	attackanimation
 	waitanimation
 	setbyte sSTAT_ANIM_PLAYED, FALSE
-	playstatchangeanimation BS_ATTACKER, BIT_SPATK | BIT_SPDEF, 0x0
+	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_SPATK, 0x0
 	setstatchanger STAT_ATK, 1, FALSE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_AttackSpAttackUpTrySpDef
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AttackSpAttackUpTrySpDef
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_AttackSpAttackUpTrySpAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AttackSpAttackUpTrySpAtk
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
-BattleScript_AttackSpAttackUpTrySpDef::
+BattleScript_AttackSpAttackUpTrySpAtk::
 	setstatchanger STAT_SPATK, 1, FALSE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_AttackSpAttackUpEnd
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AttackSpAttackUpEnd
