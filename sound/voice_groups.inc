@@ -21943,3 +21943,6 @@ voicegroup_86B429C:: @ 86B429C
 	voice_directsound_no_resample 64, 39, DirectSoundWaveData_86DAA94, 255, 165, 103, 188  @ 86B4674
 	voice_directsound_no_resample 64, 64, DirectSoundWaveData_86DB908, 255, 0, 255, 0  @ 86B4680
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 86B468C
+	voice_square_1 0, 2, 0, 0, 15, 0  @ 86B4698
+	voice_directsound_no_resample 64, 104, DirectSoundWaveData_86DD11C, 255, 0, 255, 0  @ 86B46A4
+	voice_directsound 63, 64, DirectSoundWaveData_86DE6C0, 255, 0, 255, 0  @ 86B46B0
