@@ -190,7 +190,7 @@ static void atk5F_swapattackerwithtarget(void);
 static void atk60_incrementgamestat(void);
 static void atk61_drawpartystatussummary(void);
 static void atk62_hidepartystatussummary(void);
-static void atk63_jumptocalledattack(void);
+static void atk63_jumptocalledmove(void);
 static void atk64_statusanimation(void);
 static void atk65_status2animation(void);
 static void atk66_chosenstatusanimation(void);
@@ -442,7 +442,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk60_incrementgamestat,
     atk61_drawpartystatussummary,
     atk62_hidepartystatussummary,
-    atk63_jumptocalledattack,
+    atk63_jumptocalledmove,
     atk64_statusanimation,
     atk65_status2animation,
     atk66_chosenstatusanimation,
@@ -6049,7 +6049,7 @@ static void atk62_hidepartystatussummary(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk63_jumptocalledattack(void)
+static void atk63_jumptocalledmove(void)
 {
     if (gBattlescriptCurrInstr[1])
         gCurrentMove = gCalledMove;
