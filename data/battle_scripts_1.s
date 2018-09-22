@@ -1354,7 +1354,7 @@ BattleScript_SleepTalkUsingMove::
 	waitanimation
 	setbyte sB_ANIM_TURN, 0x0
 	setbyte sB_ANIM_TARGETS_HIT, 0x0
-	jumptorandomattack TRUE
+	jumptocalledmove TRUE
 
 BattleScript_EffectDestinyBond::
 	attackcanceler
@@ -2399,7 +2399,7 @@ BattleScript_EffectAssist::
 	waitanimation
 	setbyte sB_ANIM_TURN, 0x0
 	setbyte sB_ANIM_TARGETS_HIT, 0x0
-	jumptorandomattack TRUE
+	jumptocalledmove TRUE
 
 BattleScript_EffectIngrain::
 	attackcanceler
@@ -4260,7 +4260,7 @@ BattleScript_IgnoresWhileAsleep::
 BattleScript_IgnoresAndUsesRandomMove::
 	printstring STRINGID_PKMNIGNOREDORDERS
 	waitmessage 0x40
-	jumptorandomattack FALSE
+	jumptocalledmove FALSE
 
 BattleScript_MoveUsedLoafingAround::
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0x4, BattleScript_82DB6C7
