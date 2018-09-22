@@ -6105,7 +6105,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SHIFT_GEAR
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SHIFT_GEAR,
 		.power = 0,
 		.type = TYPE_STEEL,
 		.accuracy = 0,
@@ -6345,7 +6345,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_WILD_CHARGE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (recoil damage but 1/4 instead of 1/3)
+		.effect = EFFECT_RECOIL,
 		.power = 90,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -6465,7 +6465,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_COTTON_GUARD
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_DEFENSE_UP_3,
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 0,
@@ -6525,7 +6525,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_HEAD_CHARGE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (same as WILD_CHARGE)
+		.effect = EFFECT_RECOIL,
 		.power = 120,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6826,7 +6826,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_NOBLE_ROAR
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_NOBLE_ROAR,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -7079,7 +7079,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_PLAY_NICE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_ATTACK_DOWN,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
@@ -7115,7 +7115,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_STEAM_ERUPTION
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (Same as SCALD)
+		.effect = EFFECT_SCALD,
 		.power = 110,
 		.type = TYPE_WATER,
 		.accuracy = 95,
@@ -7127,7 +7127,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_HYPERSPACE_HOLE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (Same as SCALD)
+		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
 		.power = 80,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -7139,7 +7139,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_WATER_SHURIKEN
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (Same with tail slap, HOWEVER If Battle Bond is activated, Water Shuriken's power rises from 15 to 20, and it always hits three times, giving it an average power of 60)
+		.effect = EFFECT_MULTI_HIT,
 		.power = 15,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -7199,7 +7199,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_VENOM_DRENCH
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_VENOM_DRENCH,
 		.power = 0,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -7343,7 +7343,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_INFESTATION
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_TRAP,
 		.power = 20,
 		.type = TYPE_BUG,
 		.accuracy = 100,

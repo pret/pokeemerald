@@ -180,6 +180,7 @@ struct DisableStruct
     u8 healBlockTimer;
     u8 laserFocusTimer;
     u8 usedMoves:4;
+    u8 wrapTurns;
 };
 
 struct ProtectStruct
