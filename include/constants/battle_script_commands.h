@@ -29,6 +29,7 @@
 #define sFIELD_24 gBattleScripting + 0x24
 #define sMULTIPLAYER_ID gBattleScripting + 0x25
 #define sMON_CAUGHT gBattleScripting + 0x26
+#define sSAVED_DMG gBattleScripting + 0x28
 
 #define cEFFECT_CHOOSER gBattleCommunication + 3
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
@@ -100,6 +101,8 @@
 #define VARIOUS_TRY_REFLECT_TYPE                49
 #define VARIOUS_TRY_SOAK                        50
 #define VARIOUS_HANDLE_MEGA_EVO					51
+#define VARIOUS_TRY_LAST_RESORT					52
+#define VARIOUS_ARGUMENT_STATUS_EFFECT			53
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

@@ -4132,16 +4132,17 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_VOLT_TACKLE
-		.effect = EFFECT_DOUBLE_EDGE,
+		.effect = EFFECT_RECOIL_33_STATUS,
 		.power = 120,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
 		.pp = 15,
-		.secondaryEffectChance = 0,
+		.secondaryEffectChance = 10,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_RECKLESS_BOOST,
 		.split = SPLIT_PHYSICAL,
+		.argument = STATUS1_PARALYSIS,
 	},
 	{ // MOVE_MAGICAL_LEAF
 		.effect = EFFECT_HIT,
@@ -4648,7 +4649,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_LAST_RESORT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_LAST_RESORT,
 		.power = 140,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -4732,7 +4733,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_FLARE_BLITZ
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_RECOIL_33_STATUS,
 		.power = 120,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -4742,6 +4743,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_RECKLESS_BOOST,
 		.split = SPLIT_PHYSICAL,
+		.argument = STATUS1_BURN,
 	},
 	{ // MOVE_FORCE_PALM
 		.effect = EFFECT_PARALYZE_HIT,
@@ -5068,7 +5070,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_THUNDER_FANG
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (10% paralyze AND 10% flinch)
+		.effect = EFFECT_FLINCH_STATUS,
 		.power = 65,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 95,
@@ -5078,9 +5080,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_STRONG_JAW_BOOST,
 		.split = SPLIT_PHYSICAL,
+		.argument = STATUS1_PARALYSIS,
 	},
 	{ // MOVE_ICE_FANG
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (10% paralyze AND 10% flinch)
+		.effect = EFFECT_FLINCH_STATUS,
 		.power = 65,
 		.type = TYPE_ICE,
 		.accuracy = 95,
@@ -5090,9 +5093,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_STRONG_JAW_BOOST,
 		.split = SPLIT_PHYSICAL,
+		.argument = STATUS1_FREEZE,
 	},
 	{ // MOVE_FIRE_FANG
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (10% paralyze AND 10% flinch)
+		.effect = EFFECT_FLINCH_STATUS,
 		.power = 65,
 		.type = TYPE_FIRE,
 		.accuracy = 95,
@@ -5102,6 +5106,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_STRONG_JAW_BOOST,
 		.split = SPLIT_PHYSICAL,
+		.argument = STATUS1_BURN,
 	},
 	{ // MOVE_SHADOW_SNEAK
 		.effect = EFFECT_HIT,

@@ -273,5 +273,7 @@ extern const u8 BattleScript_ToxicSpikesFree[];
 extern const u8 BattleScript_StickyWebFree[];
 extern const u8 BattleScript_StealthRockFree[];
 extern const u8 BattleScript_MegaEvolution[];
+extern const u8 BattleScript_MoveEffectRecoilWithStatus[];
+extern const u8 BattleScript_EffectWithChance[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

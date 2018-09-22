@@ -2297,7 +2297,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 break;
             case MOVE_EFFECT_FLINCH:
-                if (gBattleMons[gEffectBattler].ability == ABILITY_INNER_FOCUS)
+                if (GetBattlerAbility(gEffectBattler) == ABILITY_INNER_FOCUS)
                 {
                     if (primary == TRUE || certain == MOVE_EFFECT_CERTAIN)
                     {
@@ -2606,6 +2606,14 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 break;
+            case MOVE_EFFECT_RECOIL_33_STATUS: // Flare Blitz - can burn, Volt Tackle - can paralyze
+                gBattleScripting.savedDmg = gHpDealt / 3;
+                if (gBattleScripting.savedDmg == 0)
+                    gBattleScripting.savedDmg = 1;
+
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_MoveEffectRecoilWithStatus;
+                break;
             case MOVE_EFFECT_THRASH:
                 if (gBattleMons[gEffectBattler].status2 & STATUS2_LOCK_CONFUSE)
                 {
@@ -2667,7 +2675,7 @@ static void atk15_seteffectwithchance(void)
 {
     u32 percentChance;
 
-    if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE)
+    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SERENE_GRACE)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
@@ -4193,6 +4201,7 @@ static void atk49_moveend(void)
             gBattleScripting.atk49_state++;
             break;
         case ATK49_UPDATE_LAST_MOVES:
+            gDisableStructs[gBattlerAttacker].usedMoves |= gBitTable[gCurrMovePos];
             if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
             {
                 gActiveBattler = gBattlerAttacker;
@@ -6121,6 +6130,25 @@ static void HandleTerrainMove(u32 moveEffect)
     }
 }
 
+bool32 CanUseLastResort(u8 battlerId)
+{
+    u32 i;
+    u32 knownMovesCount = 0, usedMovesCount = 0;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gBattleMons[battlerId].moves[i] != MOVE_NONE)
+            knownMovesCount++;
+        if (gDisableStructs[battlerId].usedMoves & gBitTable[i])
+            usedMovesCount++;
+    }
+
+    if (knownMovesCount >= 2 && usedMovesCount >= knownMovesCount - 1)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 static void atk76_various(void)
 {
     struct Pokemon *mon;
@@ -6629,6 +6657,41 @@ static void atk76_various(void)
 
         BtlController_EmitSetMonData(0, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], sizeof(struct BattlePokemon), &gBattleMons[gActiveBattler]);
         MarkBattlerForControllerExec(gActiveBattler);
+        break;
+    case VARIOUS_TRY_LAST_RESORT:
+        if (CanUseLastResort(gActiveBattler))
+            gBattlescriptCurrInstr += 7;
+        else
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        return;
+    case VARIOUS_ARGUMENT_STATUS_EFFECT:
+        switch (gBattleMoves[gCurrentMove].argument)
+        {
+        case STATUS1_BURN:
+            gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_BURN;
+            break;
+        case STATUS1_FREEZE:
+            gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FREEZE;
+            break;
+        case STATUS1_PARALYSIS:
+            gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_PARALYSIS;
+            break;
+        case STATUS1_POISON:
+            gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_POISON;
+            break;
+        case STATUS1_TOXIC_POISON:
+            gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_TOXIC;
+            break;
+        default:
+            gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
+            break;
+        }
+        if (gBattleCommunication[MOVE_EFFECT_BYTE] != 0)
+        {
+            BattleScriptPush(gBattlescriptCurrInstr + 3);
+            gBattlescriptCurrInstr = BattleScript_EffectWithChance;
+            return;
+        }
         break;
     }
 
@@ -7901,6 +7964,7 @@ static void atk9B_transformdataexecution(void)
         gDisableStructs[gBattlerAttacker].disableTimer1 = 0;
         gDisableStructs[gBattlerAttacker].transformedMonPersonality = gBattleMons[gBattlerTarget].personality;
         gDisableStructs[gBattlerAttacker].unk18_b = 0;
+        gDisableStructs[gBattlerAttacker].usedMoves = 0;
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].species)
 

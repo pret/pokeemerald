@@ -300,6 +300,17 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSoak
 	.4byte BattleScript_EffectGrowth
 	.4byte BattleScript_EffectCloseCombat
+	.4byte BattleScript_EffectLastResort
+	.4byte BattleScript_EffectRecoil33WithStatus
+	.4byte BattleScript_EffectFlinchWithStatus
+	
+BattleScript_EffectLastResort:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifcantuselastresort BS_ATTACKER, BattleScript_ButItFailed
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	goto BattleScript_HitFromCritCalc
 	
 BattleScript_EffectGrowth:
 	attackcanceler
@@ -1468,7 +1479,32 @@ BattleScript_EffectConversion::
 BattleScript_EffectFlinchHit::
 	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
-
+	
+BattleScript_EffectFlinchWithStatus:
+	setmoveeffect MOVE_EFFECT_FLINCH
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	seteffectwithchance
+	argumentstatuseffect
+	tryfaintmon BS_TARGET, FALSE, NULL
+	goto BattleScript_MoveEnd
+	
 BattleScript_EffectRestoreHp::
 	attackcanceler
 	attackstring
@@ -3348,6 +3384,10 @@ BattleScript_EffectSecretPower::
 BattleScript_EffectDoubleEdge::
 	setmoveeffect MOVE_EFFECT_RECOIL_33 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
+	
+BattleScript_EffectRecoil33WithStatus:
+	setmoveeffect MOVE_EFFECT_RECOIL_33_STATUS | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
 
 BattleScript_EffectTeeterDance::
 	attackcanceler
@@ -4563,14 +4603,14 @@ BattleScript_AtkDefDown::
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AtkDefDownTryDef
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
-BattleScript_AtkDefDownTryDef::
+BattleScript_AtkDefDownTryDef:
 	playstatchangeanimation BS_ATTACKER, BIT_DEF, ATK48_DONT_CHECK_LOWER | ATK48_STAT_NEGATIVE
 	setstatchanger STAT_DEF, 1, TRUE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | 0x1, BattleScript_AtkDefDownRet
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AtkDefDownRet
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
-BattleScript_AtkDefDownRet::
+BattleScript_AtkDefDownRet:
 	return
 	
 BattleScript_DefSpDefDown::
@@ -4945,6 +4985,9 @@ BattleScript_MoveEffectConfusion::
 	waitmessage 0x40
 	return
 
+BattleScript_MoveEffectRecoilWithStatus::
+	argumentstatuseffect
+	copyword gBattleMoveDamage, sSAVED_DMG
 BattleScript_MoveEffectRecoil::
 	jumpifmove MOVE_STRUGGLE, BattleScript_DoRecoil
 	jumpifability BS_ATTACKER, ABILITY_ROCK_HEAD, BattleScript_RecoilEnd
@@ -4956,6 +4999,10 @@ BattleScript_DoRecoil::
 	waitmessage 0x40
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 BattleScript_RecoilEnd::
+	return
+	
+BattleScript_EffectWithChance::
+	seteffectwithchance
 	return
 
 BattleScript_ItemSteal::

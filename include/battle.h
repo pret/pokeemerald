@@ -179,6 +179,7 @@ struct DisableStruct
     u8 telekinesisTimer;
     u8 healBlockTimer;
     u8 laserFocusTimer;
+    u8 usedMoves:4;
 };
 
 struct ProtectStruct
@@ -673,6 +674,7 @@ struct BattleScripting
     u8 windowsType; // 0 - normal, 1 - battle arena
     u8 multiplayerId;
     bool8 monCaught;
+    s32 savedDmg;
 };
 
 // rom_80A5C6C
