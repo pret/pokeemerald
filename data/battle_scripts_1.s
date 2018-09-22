@@ -316,6 +316,19 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectTechnoBlast
 	.4byte BattleScript_EffectJudgment
 	.4byte BattleScript_EffectAutonomize
+	.4byte BattleScript_EffectCopycat
+
+BattleScript_EffectCopycat:
+	attackcanceler
+	attackstring
+	pause 0x5
+	trycopycat BattleScript_CopycatFail
+	attackanimation
+	waitanimation
+	jumptorandomattack TRUE
+BattleScript_CopycatFail:
+	ppreduce
+	goto BattleScript_ButItFailed
 	
 BattleScript_EffectAutonomize:
 	setstatchanger STAT_SPEED, 2, FALSE

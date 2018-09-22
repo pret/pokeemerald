@@ -4601,7 +4601,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_COPYCAT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_COPYCAT,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,

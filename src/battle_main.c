@@ -246,6 +246,7 @@ EWRAM_DATA u16 gLastLandedMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastHitByType[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastResultingMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLockedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastUsedMove = 0;
 EWRAM_DATA u8 gLastHitBy[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gMoveResultFlags = 0;
@@ -3009,6 +3010,7 @@ static void BattleStartClearSetData(void)
         gPalaceSelectionBattleScripts[i] = 0;
     }
 
+    gLastUsedMove = 0;
     gFieldStatuses = 0;
     memset(&gFieldTimers, 0, sizeof(gFieldTimers));
 

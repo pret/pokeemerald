@@ -785,9 +785,11 @@ static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX /
 #define MIMIC_FORBIDDEN_END             0xFFFE
 #define METRONOME_FORBIDDEN_END         0xFFFF
 #define ASSIST_FORBIDDEN_END            0xFFFF
+#define COPYCAT_FORBIDDEN_END           0xFFFF
 
 static const u16 sMovesForbiddenToCopy[] =
 {
+     MOVE_TRANSFORM,
      MOVE_METRONOME,
      MOVE_STRUGGLE,
      MOVE_SKETCH,
@@ -807,6 +809,15 @@ static const u16 sMovesForbiddenToCopy[] =
      MOVE_COVET,
      MOVE_TRICK,
      MOVE_FOCUS_PUNCH,
+     MOVE_CIRCLE_THROW,
+     MOVE_DRAGON_TAIL,
+     MOVE_RAGE_POWDER,
+     MOVE_MAT_BLOCK,
+     MOVE_SPIKY_SHIELD,
+     MOVE_SHELL_TRAP,
+     MOVE_SPOTLIGHT,
+     MOVE_FEINT,
+     MOVE_KING_S_SHIELD,
      METRONOME_FORBIDDEN_END
 };
 
@@ -4241,6 +4252,7 @@ static void atk49_moveend(void)
             if (gHitMarker & HITMARKER_ATTACKSTRING_PRINTED)
             {
                 gLastPrintedMoves[gBattlerAttacker] = gChosenMove;
+                gLastUsedMove = gCurrentMove;
             }
             if (!(gAbsentBattlerFlags & gBitTable[gBattlerAttacker])
                 && !(gBattleStruct->field_91 & gBitTable[gBattlerAttacker])
@@ -6744,6 +6756,24 @@ static void atk76_various(void)
         else
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        return;
+    case VARIOUS_TRY_COPYCAT:
+        for (i = 0; sMovesForbiddenToCopy[i] != COPYCAT_FORBIDDEN_END; i++)
+        {
+            if (sMovesForbiddenToCopy[i] == gLastUsedMove)
+                break;
+        }
+        if (gLastUsedMove == 0 || gLastUsedMove == 0xFFFF || sMovesForbiddenToCopy[i] != COPYCAT_FORBIDDEN_END)
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        else
+        {
+            gRandomMove = gLastUsedMove;
+            gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
+            gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+            gBattlescriptCurrInstr += 7;
         }
         return;
     }
