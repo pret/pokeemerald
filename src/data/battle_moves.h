@@ -5997,12 +5997,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_CLEAR_SMOG
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (Always bypasses accuracy, but same as Haze)
+		.effect = EFFECT_CLEAR_SMOG,
 		.power = 50,
 		.type = TYPE_POISON,
 		.accuracy = 0,
 		.pp = 15,
-		.secondaryEffectChance = 0,
+		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
@@ -6117,7 +6117,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_CIRCLE_THROW
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (similar to whirlwind, but different)
+		.effect = EFFECT_HIT_SWITCH_TARGET,
 		.power = 60,
 		.type = TYPE_FIGHTING,
 		.accuracy = 90,
@@ -6189,7 +6189,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FINAL_GAMBIT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_HIT_SWITCH_TARGET,
 		.power = 1,
 		.type = TYPE_FIGHTING,
 		.accuracy = 100,
@@ -6309,7 +6309,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DRAGON_TAIL
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_HIT_SWITCH_TARGET,
 		.power = 60,
 		.type = TYPE_DRAGON,
 		.accuracy = 90,
@@ -7500,7 +7500,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_BANEFUL_BUNKER
-		.effect = EFFECT_PLACEHOLDER, 
+		.effect = EFFECT_PLACEHOLDER,
 		.power = 0,
 		.type = TYPE_POISON,
 		.accuracy = 0,
@@ -7632,7 +7632,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_TOXIC_THREAD
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_TOXIC_THREAD,
 		.power = 20,
 		.type = TYPE_POISON,
 		.accuracy = 100,
@@ -7704,7 +7704,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_PSYCHIC_TERRAIN
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_PSYCHIC_TERRAIN,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -7796,7 +7796,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
-		.flags = 0FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED,
+		.flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_REVELATION_DANCE
