@@ -530,7 +530,7 @@
 	.byte \battler
 	.endm
 
-	.macro jumptorandomattack param0
+	.macro jumptocalledattack param0
 	.byte 0x63
 	.byte \param0
 	.endm
