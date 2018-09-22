@@ -1902,7 +1902,7 @@ static const u8 sECHOED_VOICEDescription[] = _(
 	"it is used.");
 
 static const u8 sCHIP_AWAYDescription[] = _(
-	"Strikes through the foeApos, s\n"
+	"Strikes through the foe’s\n"
 	"stat changes.");
 
 static const u8 sCLEAR_SMOGDescription[] = _(
@@ -1962,7 +1962,7 @@ static const u8 sACROBATICSDescription[] = _(
 	"user has no item.");
 
 static const u8 sREFLECT_TYPEDescription[] = _(
-	"The user reflects the foeApos, s\n"
+	"The user reflects the foe’s\n"
 	"type, copying it.");
 
 static const u8 sRETALIATEDescription[] = _(
@@ -2231,7 +2231,7 @@ static const u8 sSTEAM_ERUPTIONDescription[] = _(
 
 static const u8 sHYPERSPACE_HOLEDescription[] = _(
 	"Uses a warp hole to attack.\n"
-	"CanApos, t be evaded.");
+	"Can’t be evaded.");
 
 static const u8 sWATER_SHURIKENDescription[] = _(
 	"Throws 2 to 5 stars that\n"
@@ -2411,7 +2411,7 @@ static const u8 sBURN_UPDescription[] = _(
 
 static const u8 sSPEED_SWAPDescription[] = _(
 	"Swaps user’s Speed with\n"
-	"the targetApos, s.");
+	"the target’s.");
 
 static const u8 sSMART_STRIKEDescription[] = _(
 	"Hits with an accurate\n"

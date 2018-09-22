@@ -1,7 +1,7 @@
 #ifndef POKEEMERALD_LEVEL_UP_LEARNSET_POINTERS_H
 #define POKEEMERALD_LEVEL_UP_LEARNSET_POINTERS_H
 
-const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
+const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
 {
     [SPECIES_NONE] = sBulbasaurLevelUpLearnset,
     [SPECIES_BULBASAUR] = sBulbasaurLevelUpLearnset,
