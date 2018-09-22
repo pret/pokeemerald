@@ -5397,7 +5397,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_JUDGMENT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_JUDGMENT,
 		.power = 100,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -5709,7 +5709,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_AUTOTOMIZE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (raises the user's Speed stat by two stages BUT also decreases the user's weight by 100kg)
+		.effect = EFFECT_AUTONOMIZE,
 		.power = 0,
 		.type = TYPE_STEEL,
 		.accuracy = 0,
@@ -6561,7 +6561,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_TECHNO_BLAST
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_TECHNO_BLAST,
 		.power = 120,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,

@@ -104,6 +104,7 @@
 #define VARIOUS_TRY_LAST_RESORT					52
 #define VARIOUS_ARGUMENT_STATUS_EFFECT			53
 #define VARIOUS_TRY_HIT_SWITCH_TARGET			54
+#define VARIOUS_TRY_AUTONOMIZE					55
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

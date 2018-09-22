@@ -313,6 +313,34 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectClearSmog
 	.4byte BattleScript_EffectHitSwitchTarget
 	.4byte BattleScript_EffectFinalGambit
+	.4byte BattleScript_EffectTechnoBlast
+	.4byte BattleScript_EffectJudgment
+	.4byte BattleScript_EffectAutonomize
+	
+BattleScript_EffectAutonomize:
+	setstatchanger STAT_SPEED, 2, FALSE
+	attackcanceler
+	attackstring
+	ppreduce
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | 0x1, BattleScript_AutonomizeWeightLoss
+	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AutonomizeAttackAnim
+	pause 0x20
+	goto BattleScript_AutonomizePrintString
+BattleScript_AutonomizeAttackAnim::
+	attackanimation
+	waitanimation
+BattleScript_AutonomizeDoAnim::
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_AutonomizePrintString::
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_AutonomizeWeightLoss::
+	jumpifmovehadnoeffect BattleScript_MoveEnd
+	tryautonomize BS_ATTACKER, BattleScript_MoveEnd
+	printstring STRINGID_BECAMENIMBLE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectFinalGambit:
 	attackcanceler
@@ -1267,6 +1295,8 @@ BattleScript_EffectWeatherBall:
 BattleScript_EffectHiddenPower:
 BattleScript_EffectFreezeDry:
 BattleScript_EffectTwoTypedMove:
+BattleScript_EffectTechnoBlast:
+BattleScript_EffectJudgment:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER

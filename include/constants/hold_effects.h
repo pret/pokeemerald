@@ -107,6 +107,7 @@
 #define HOLD_EFFECT_EVIOLITE       117
 #define HOLD_EFFECT_ASSAULT_VEST   118
 #define HOLD_EFFECT_BINDING_BAND   119
+#define HOLD_EFFECT_DRIVE          120
 
 // Gen6 hold effects
 #define HOLD_EFFECT_FAIRY_POWER    130

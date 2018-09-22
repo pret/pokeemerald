@@ -1491,6 +1491,11 @@
 	.4byte \ptr
 	.endm
 	
+	.macro tryautonomize battler ptr
+	various \battler, VARIOUS_TRY_AUTONOMIZE
+	.4byte \ptr
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

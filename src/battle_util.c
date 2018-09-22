@@ -4475,6 +4475,7 @@ u8 GetBattleMonMoveSlot(struct BattlePokemon *battleMon, u16 move)
 
 u32 GetBattlerWeight(u8 battlerId)
 {
+    u32 i;
     u32 weight = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[battlerId].species), 1);
     u32 ability = GetBattlerAbility(battlerId);
     u32 holdEffect = GetBattlerHoldEffect(battlerId, TRUE);
@@ -4487,8 +4488,18 @@ u32 GetBattlerWeight(u8 battlerId)
     if (holdEffect == HOLD_EFFECT_FLOAT_STONE)
         weight /= 2;
 
-    if (gDisableStructs[battlerId].autonomizeCount)
-        weight -= 1000 * gDisableStructs[battlerId].autonomizeCount;
+    for (i = 0; i < gDisableStructs[battlerId].autonomizeCount; i++)
+    {
+        if (weight > 1000)
+        {
+            weight -= 1000;
+        }
+        else if (weight <= 1000)
+        {
+            weight = 1;
+            break;
+        }
+    }
 
     if (weight == 0)
         weight = 1;
