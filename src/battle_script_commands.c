@@ -6597,9 +6597,9 @@ static void atk76_various(void)
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
                 break;
             default:
-                gRandomMove = move;
+                gCalledMove = move;
                 gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-                gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+                gBattlerTarget = GetMoveTarget(gCalledMove, 0);
                 gStatuses3[gBattlerAttacker] |= STATUS3_ME_FIRST;
                 gBattlescriptCurrInstr += 7;
                 break;
@@ -6770,9 +6770,9 @@ static void atk76_various(void)
         }
         else
         {
-            gRandomMove = gLastUsedMove;
+            gCalledMove = gLastUsedMove;
             gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-            gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+            gBattlerTarget = GetMoveTarget(gCalledMove, 0);
             gBattlescriptCurrInstr += 7;
         }
         return;

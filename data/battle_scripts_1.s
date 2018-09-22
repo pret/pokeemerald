@@ -325,7 +325,7 @@ BattleScript_EffectCopycat:
 	trycopycat BattleScript_CopycatFail
 	attackanimation
 	waitanimation
-	jumptorandomattack TRUE
+	jumptocalledmove TRUE
 BattleScript_CopycatFail:
 	ppreduce
 	goto BattleScript_ButItFailed
@@ -748,7 +748,7 @@ BattleScript_EffectMeFirst:
 	waitanimation
 	setbyte sB_ANIM_TURN, 0x0
 	setbyte sB_ANIM_TARGETS_HIT, 0x0
-	jumptorandomattack TRUE
+	jumptocalledmove TRUE
 	
 BattleScript_EffectAttackSpAttackUp:
 	attackcanceler
