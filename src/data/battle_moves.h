@@ -5493,7 +5493,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_HEAD_SMASH
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (1/2 recoil instead of 1/3 recoil)
+		.effect = EFFECT_RECOIL_50,
 		.power = 150,
 		.type = TYPE_ROCK,
 		.accuracy = 80,
@@ -5961,7 +5961,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ROUND
-		.effect = EFFECT_ROUND, // Needs a custom move effect
+		.effect = EFFECT_ROUND,
 		.power = 60,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -6057,7 +6057,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_GEN6] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SHELL_SMASH
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SHELL_SMASH,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
