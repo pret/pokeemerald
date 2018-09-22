@@ -312,7 +312,7 @@
 #define MOVE_EFFECT_DEF_SPDEF_DOWN      0x37
 #define MOVE_EFFECT_RECOIL_33_STATUS    0x38
 #define MOVE_EFFECT_RECOIL_50           0x39
-#define MOVE_EFFECT_NOTHING_3A          0x3A
+#define MOVE_EFFECT_CLEAR_SMOG          0x3A
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
 #define MOVE_EFFECT_NOTHING_3C          0x3C
 #define MOVE_EFFECT_NOTHING_3D          0x3D

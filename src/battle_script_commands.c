@@ -1975,6 +1975,7 @@ u8 GetBattlerTurnOrderNum(u8 battlerId)
 
 void SetMoveEffect(bool8 primary, u8 certain)
 {
+    s32 i;
     bool32 statusChanged = FALSE;
     u8 affectsUser = 0; // 0x40 otherwise
     bool32 noSunCanFreeze = TRUE;
@@ -2675,6 +2676,20 @@ void SetMoveEffect(bool8 primary, u8 certain)
             case MOVE_EFFECT_SP_ATK_TWO_DOWN: // Overheat
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_SAtkDown2;
+                break;
+            case MOVE_EFFECT_CLEAR_SMOG:
+                for (i = 0; i < BATTLE_STATS_NO; i++)
+                {
+                    if (gBattleMons[gEffectBattler].statStages[i] != 6)
+                        break;
+                }
+                if ((gSpecialStatuses[gEffectBattler].physicalDmg || gSpecialStatuses[gEffectBattler].specialDmg) && i != BATTLE_STATS_NO)
+                {
+                    for (i = 0; i < BATTLE_STATS_NO; i++)
+                        gBattleMons[gEffectBattler].statStages[i] = 6;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_MoveEffectClearSmog;
+                }
                 break;
             }
         }
@@ -6707,6 +6722,19 @@ static void atk76_various(void)
             return;
         }
         break;
+    case VARIOUS_TRY_HIT_SWITCH_TARGET:
+        if (IsBattlerAlive(gBattlerAttacker)
+            && IsBattlerAlive(gBattlerTarget)
+            && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+            && TARGET_TURN_DAMAGED)
+        {
+            gBattlescriptCurrInstr = BattleScript_ForceRandomSwitch;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -6969,6 +6997,9 @@ static void atk80_manipulatedamage(void)
         break;
     case ATK80_FULL_ATTACKER_HP:
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP;
+        break;
+    case ATK80_CURR_ATTACKER_HP:
+        gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp;
         break;
     }
 
@@ -7428,16 +7459,10 @@ static void atk8F_forcerandomswitch(void)
     s32 i;
     s32 battler1PartyId = 0;
     s32 battler2PartyId = 0;
-
-    #ifdef NONMATCHING
-        s32 lastMonId = 0; // + 1
-    #else
-        register s32 lastMonId asm("r8") = 0; // + 1
-    #endif // NONMATCHING
-
+    s32 lastMonId = 0; // + 1
     s32 firstMonId = 0;
     s32 monsCount = 0;
-    struct Pokemon* party = NULL;
+    struct Pokemon *party = NULL;
     s32 validMons = 0;
     s32 minNeeded = 0;
 

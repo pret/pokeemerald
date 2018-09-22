@@ -1486,6 +1486,11 @@
 	various BS_ATTACKER, VARIOUS_ARGUMENT_STATUS_EFFECT
 	.endm
 	
+	.macro tryhitswitchtarget ptr
+	various BS_ATTACKER, VARIOUS_TRY_HIT_SWITCH_TARGET
+	.4byte \ptr
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
@@ -1573,4 +1578,8 @@
 	
 	.macro dmgtomaxattackerhp
 	manipulatedamage ATK80_FULL_ATTACKER_HP
+	.endm
+	
+	.macro dmgtocurrattackerhp
+	manipulatedamage ATK80_CURR_ATTACKER_HP
 	.endm
