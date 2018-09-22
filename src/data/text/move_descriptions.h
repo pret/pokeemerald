@@ -11,7 +11,7 @@ static const u8 sKarateChopDescription[] = _(
 
 static const u8 sDoubleSlapDescription[] = _(
 	"Repeatedly slaps the foe\n"
-	"2 to 5 times.");
+	"4 to 5 times.");
 
 static const u8 sCometPunchDescription[] = _(
 	"Repeatedly punches the foe\n"
