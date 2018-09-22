@@ -334,8 +334,6 @@ void PrintAgbTrack(std::vector<Event>& events)
 {
     std::fprintf(g_outputFile, "\n@**************** Track %u (Midi-Chn.%u) ****************@\n\n", g_agbTrack, g_midiChan + 1);
     std::fprintf(g_outputFile, "%s_%u:\n", g_asmLabel.c_str(), g_agbTrack);
-    PrintWait(g_initialWait);
-    PrintByte("KEYSH , %s_key%+d", g_asmLabel.c_str(), 0);
 
     int wholeNoteCount = 0;
     int loopEndBlockNum = 0;
@@ -358,6 +356,9 @@ void PrintAgbTrack(std::vector<Event>& events)
 
     if (!foundVolBeforeNote)
         PrintByte("\tVOL   , 127*%s_mvl/mxv", g_asmLabel.c_str());
+
+    PrintWait(g_initialWait);
+    PrintByte("KEYSH , %s_key%+d", g_asmLabel.c_str(), 0);
 
     for (unsigned i = 0; events[i].type != EventType::EndOfTrack; i++)
     {
