@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_network_grp, voicegroup_86AB4DC
+	.equ	mus_rg_network_grp, voicegroup162
 	.equ	mus_rg_network_pri, 0
 	.equ	mus_rg_network_rev, reverb_set+50
 	.equ	mus_rg_network_mvl, 127

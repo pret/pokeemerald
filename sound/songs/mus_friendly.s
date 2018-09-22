@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_friendly_grp, voicegroup_86826D0
+	.equ	mus_friendly_grp, voicegroup050
 	.equ	mus_friendly_pri, 0
 	.equ	mus_friendly_rev, reverb_set+50
 	.equ	mus_friendly_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_nanaiseki_grp, voicegroup_86A5DF4
+	.equ	mus_rg_nanaiseki_grp, voicegroup146
 	.equ	mus_rg_nanaiseki_pri, 0
 	.equ	mus_rg_nanaiseki_rev, reverb_set+50
 	.equ	mus_rg_nanaiseki_mvl, 127

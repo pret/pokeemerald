@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_granroad_grp, voicegroup_8681CB0
+	.equ	mus_granroad_grp, voicegroup048
 	.equ	mus_granroad_pri, 0
 	.equ	mus_granroad_rev, reverb_set+50
 	.equ	mus_granroad_mvl, 127

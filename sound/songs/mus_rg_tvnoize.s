@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_tvnoize_grp, voicegroup_86B2C4C
+	.equ	mus_rg_tvnoize_grp, voicegroup186
 	.equ	mus_rg_tvnoize_pri, 0
 	.equ	mus_rg_tvnoize_rev, reverb_set+50
 	.equ	mus_rg_tvnoize_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_me_asa_grp, voicegroup_8677B28
+	.equ	mus_me_asa_grp, voicegroup012
 	.equ	mus_me_asa_pri, 5
 	.equ	mus_me_asa_rev, reverb_set+50
 	.equ	mus_me_asa_mvl, 127

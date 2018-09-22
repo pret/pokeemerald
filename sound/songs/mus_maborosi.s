@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_maborosi_grp, voicegroup_868E67C
+	.equ	mus_maborosi_grp, voicegroup084
 	.equ	mus_maborosi_pri, 0
 	.equ	mus_maborosi_rev, reverb_set+50
 	.equ	mus_maborosi_mvl, 127

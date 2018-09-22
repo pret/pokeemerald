@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_machi_s2_grp, voicegroup_8678824
+	.equ	mus_machi_s2_grp, voicegroup015
 	.equ	mus_machi_s2_pri, 0
 	.equ	mus_machi_s2_rev, reverb_set+50
 	.equ	mus_machi_s2_mvl, 127

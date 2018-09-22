@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_eikou_r_grp, voicegroup_8691C7C
+	.equ	mus_eikou_r_grp, voicegroup093
 	.equ	mus_eikou_r_pri, 0
 	.equ	mus_eikou_r_rev, reverb_set+50
 	.equ	mus_eikou_r_mvl, 127

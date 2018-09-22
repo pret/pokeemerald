@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_sattower_grp, voicegroup_8697A54
+	.equ	mus_sattower_grp, voicegroup110
 	.equ	mus_sattower_pri, 0
 	.equ	mus_sattower_rev, reverb_set+50
 	.equ	mus_sattower_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_dan03_grp, voicegroup_867E314
+	.equ	mus_dan03_grp, voicegroup037
 	.equ	mus_dan03_pri, 0
 	.equ	mus_dan03_rev, reverb_set+50
 	.equ	mus_dan03_mvl, 127

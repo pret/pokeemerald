@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_nibi_grp, voicegroup_86AF16C
+	.equ	mus_rg_nibi_grp, voicegroup173
 	.equ	mus_rg_nibi_pri, 0
 	.equ	mus_rg_nibi_rev, reverb_set+50
 	.equ	mus_rg_nibi_mvl, 127

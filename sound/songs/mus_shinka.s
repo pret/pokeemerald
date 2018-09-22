@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_shinka_grp, voicegroup_867B3A4
+	.equ	mus_shinka_grp, voicegroup026
 	.equ	mus_shinka_pri, 0
 	.equ	mus_shinka_rev, reverb_set+50
 	.equ	mus_shinka_mvl, 127

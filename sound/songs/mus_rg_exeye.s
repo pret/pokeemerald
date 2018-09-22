@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_exeye_grp, voicegroup_86A51F4
+	.equ	mus_rg_exeye_grp, voicegroup144
 	.equ	mus_rg_exeye_pri, 0
 	.equ	mus_rg_exeye_rev, reverb_set+50
 	.equ	mus_rg_exeye_mvl, 127

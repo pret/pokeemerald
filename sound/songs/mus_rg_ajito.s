@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_ajito_grp, voicegroup_86A1BB8
+	.equ	mus_rg_ajito_grp, voicegroup133
 	.equ	mus_rg_ajito_pri, 0
 	.equ	mus_rg_ajito_rev, reverb_set+50
 	.equ	mus_rg_ajito_mvl, 127

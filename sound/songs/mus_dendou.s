@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_dendou_grp, voicegroup_868DC8C
+	.equ	mus_dendou_grp, voicegroup082
 	.equ	mus_dendou_pri, 0
 	.equ	mus_dendou_rev, reverb_set+50
 	.equ	mus_dendou_mvl, 127

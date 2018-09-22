@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_me_waza_grp, voicegroup_8677B28
+	.equ	mus_me_waza_grp, voicegroup012
 	.equ	mus_me_waza_pri, 5
 	.equ	mus_me_waza_rev, reverb_set+50
 	.equ	mus_me_waza_mvl, 127

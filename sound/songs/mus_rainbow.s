@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rainbow_grp, voicegroup_8688E74
+	.equ	mus_rainbow_grp, voicegroup068
 	.equ	mus_rainbow_pri, 0
 	.equ	mus_rainbow_rev, reverb_set+50
 	.equ	mus_rainbow_mvl, 127

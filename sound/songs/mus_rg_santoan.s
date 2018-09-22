@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_santoan_grp, voicegroup_86AB938
+	.equ	mus_rg_santoan_grp, voicegroup163
 	.equ	mus_rg_santoan_pri, 0
 	.equ	mus_rg_santoan_rev, reverb_set+50
 	.equ	mus_rg_santoan_mvl, 127

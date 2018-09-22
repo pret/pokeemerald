@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_track_haiki_grp, voicegroup_869D0F4
+	.equ	se_track_haiki_grp, voicegroup127
 	.equ	se_track_haiki_pri, 4
 	.equ	se_track_haiki_rev, reverb_set+50
 	.equ	se_track_haiki_mvl, 127

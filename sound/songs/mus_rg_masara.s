@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_masara_grp, voicegroup_86AA4BC
+	.equ	mus_rg_masara_grp, voicegroup159
 	.equ	mus_rg_masara_pri, 0
 	.equ	mus_rg_masara_rev, reverb_set+50
 	.equ	mus_rg_masara_mvl, 127

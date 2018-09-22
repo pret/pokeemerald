@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_hightown_grp, voicegroup_868AC74
+	.equ	mus_hightown_grp, voicegroup073
 	.equ	mus_hightown_pri, 0
 	.equ	mus_hightown_rev, reverb_set+50
 	.equ	mus_hightown_mvl, 127

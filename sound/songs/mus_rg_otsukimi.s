@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_otsukimi_grp, voicegroup_86A63F4
+	.equ	mus_rg_otsukimi_grp, voicegroup147
 	.equ	mus_rg_otsukimi_pri, 0
 	.equ	mus_rg_otsukimi_rev, reverb_set+50
 	.equ	mus_rg_otsukimi_mvl, 127

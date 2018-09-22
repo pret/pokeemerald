@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_vs_last_grp, voicegroup_86A9EBC
+	.equ	mus_rg_vs_last_grp, voicegroup158
 	.equ	mus_rg_vs_last_pri, 0
 	.equ	mus_rg_vs_last_rev, reverb_set+50
 	.equ	mus_rg_vs_last_mvl, 127

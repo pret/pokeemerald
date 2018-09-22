@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_op_basyu_grp, voicegroup_869D0F4
+	.equ	se_op_basyu_grp, voicegroup127
 	.equ	se_op_basyu_pri, 5
 	.equ	se_op_basyu_rev, reverb_set+50
 	.equ	se_op_basyu_mvl, 127

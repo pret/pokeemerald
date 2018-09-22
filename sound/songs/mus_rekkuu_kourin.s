@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rekkuu_kourin_grp, voicegroup_8697670
+	.equ	mus_rekkuu_kourin_grp, voicegroup109
 	.equ	mus_rekkuu_kourin_pri, 0
 	.equ	mus_rekkuu_kourin_rev, reverb_set+50
 	.equ	mus_rekkuu_kourin_mvl, 127

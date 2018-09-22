@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_fune_kan_grp, voicegroup_867A744
+	.equ	mus_fune_kan_grp, voicegroup023
 	.equ	mus_fune_kan_pri, 0
 	.equ	mus_fune_kan_rev, reverb_set+50
 	.equ	mus_fune_kan_mvl, 127

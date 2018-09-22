@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_pokeyashi_grp, voicegroup_86A67E4
+	.equ	mus_rg_pokeyashi_grp, voicegroup148
 	.equ	mus_rg_pokeyashi_pri, 0
 	.equ	mus_rg_pokeyashi_rev, reverb_set+50
 	.equ	mus_rg_pokeyashi_mvl, 127

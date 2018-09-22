@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_win_open_grp, voicegroup_869D0F4
+	.equ	se_win_open_grp, voicegroup127
 	.equ	se_win_open_pri, 5
 	.equ	se_win_open_rev, reverb_set+50
 	.equ	se_win_open_mvl, 127

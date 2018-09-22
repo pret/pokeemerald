@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_mizu_grp, voicegroup_869D6F4
+	.equ	se_mizu_grp, voicegroup128
 	.equ	se_mizu_pri, 4
 	.equ	se_mizu_rev, reverb_set+50
 	.equ	se_mizu_mvl, 127

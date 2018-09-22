@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_battle32_grp, voicegroup_869B0B4
+	.equ	mus_battle32_grp, voicegroup120
 	.equ	mus_battle32_pri, 1
 	.equ	mus_battle32_rev, reverb_set+50
 	.equ	mus_battle32_mvl, 127

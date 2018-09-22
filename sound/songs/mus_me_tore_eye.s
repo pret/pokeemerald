@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_me_tore_eye_grp, voicegroup_869608C
+	.equ	mus_me_tore_eye_grp, voicegroup105
 	.equ	mus_me_tore_eye_pri, 5
 	.equ	mus_me_tore_eye_rev, reverb_set+50
 	.equ	mus_me_tore_eye_mvl, 127

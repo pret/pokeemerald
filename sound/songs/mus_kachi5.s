@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_kachi5_grp, voicegroup_867C184
+	.equ	mus_kachi5_grp, voicegroup029
 	.equ	mus_kachi5_pri, 0
 	.equ	mus_kachi5_rev, reverb_set+50
 	.equ	mus_kachi5_mvl, 127
