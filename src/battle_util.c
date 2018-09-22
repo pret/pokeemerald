@@ -4323,9 +4323,9 @@ u8 IsMonDisobedient(void)
                 gCurrMovePos = gChosenMovePos = Random() & 3;
             } while (gBitTable[gCurrMovePos] & calc);
 
-            gRandomMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+            gCalledMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
             gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
-            gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+            gBattlerTarget = GetMoveTarget(gCalledMove, 0);
             gHitMarker |= HITMARKER_x200000;
             return 2;
         }

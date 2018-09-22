@@ -190,7 +190,7 @@ static void atk5F_swapattackerwithtarget(void);
 static void atk60_incrementgamestat(void);
 static void atk61_drawpartystatussummary(void);
 static void atk62_hidepartystatussummary(void);
-static void atk63_jumptorandomattack(void);
+static void atk63_jumptocalledmove(void);
 static void atk64_statusanimation(void);
 static void atk65_status2animation(void);
 static void atk66_chosenstatusanimation(void);
@@ -449,7 +449,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk60_incrementgamestat,
     atk61_drawpartystatussummary,
     atk62_hidepartystatussummary,
-    atk63_jumptorandomattack,
+    atk63_jumptocalledmove,
     atk64_statusanimation,
     atk65_status2animation,
     atk66_chosenstatusanimation,
@@ -5575,12 +5575,12 @@ static void atk62_hidepartystatussummary(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk63_jumptorandomattack(void)
+static void atk63_jumptocalledmove(void)
 {
     if (gBattlescriptCurrInstr[1])
-        gCurrentMove = gRandomMove;
+        gCurrentMove = gCalledMove;
     else
-        gChosenMove = gCurrentMove = gRandomMove;
+        gChosenMove = gCurrentMove = gCalledMove;
 
     gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
 }
@@ -8529,10 +8529,10 @@ static void atkA9_trychoosesleeptalkmove(void)
             movePosition = Random() & 3;
         } while ((gBitTable[movePosition] & unusableMovesBits));
 
-        gRandomMove = gBattleMons[gBattlerAttacker].moves[movePosition];
+        gCalledMove = gBattleMons[gBattlerAttacker].moves[movePosition];
         gCurrMovePos = movePosition;
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-        gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+        gBattlerTarget = GetMoveTarget(gCalledMove, 0);
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
 }
@@ -9791,8 +9791,8 @@ static void atkDE_asistattackselect(void)
     if (chooseableMovesNo)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-        gRandomMove = movesArray[((Random() & 0xFF) * chooseableMovesNo) >> 8];
-        gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+        gCalledMove = movesArray[((Random() & 0xFF) * chooseableMovesNo) >> 8];
+        gBattlerTarget = GetMoveTarget(gCalledMove, 0);
         gBattlescriptCurrInstr += 5;
     }
     else
