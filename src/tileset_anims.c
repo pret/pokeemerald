@@ -1,4 +1,3 @@
-
 // Includes
 #include "global.h"
 #include "palette.h"
@@ -7,6 +6,9 @@
 #include "task.h"
 #include "battle_transition.h"
 #include "fieldmap.h"
+
+#define SECONDARY_TILESET_VRAM 0x2000
+#define TILE_VRAM(n) (0x20 * (n))
 
 // Static type declarations
 
@@ -720,22 +722,22 @@ void TilesetCb_InsideBuilding(void)
 
 static void sub_80A0B70(u16 timer)
 {
-    static void sub_80A0BCC(u16);
-    static void sub_80A0BF4(u16);
-    static void sub_80A0C1C(u16);
-    static void sub_80A0C44(u16);
-    static void sub_80A12AC(u16);
+    static void gTilesetAnims_Flower(u16);
+    static void gTilesetAnims_Water(u16);
+    static void gTilesetAnims_SandWaterEdge(u16);
+    static void gTilesetAnims_Waterfall(u16);
+    static void gTilesetAnims_LandWaterEdge (u16);
 
     if ((timer & 0x0F) == 0)
-        sub_80A0BCC(timer >> 4);
+        gTilesetAnims_Flower(timer >> 4);
     if ((timer & 0x0F) == 1)
-        sub_80A0BF4(timer >> 4);
+        gTilesetAnims_Water(timer >> 4);
     if ((timer & 0x0F) == 2)
-        sub_80A0C1C(timer >> 4);
+        gTilesetAnims_SandWaterEdge(timer >> 4);
     if ((timer & 0x0F) == 3)
-        sub_80A0C44(timer >> 4);
+        gTilesetAnims_Waterfall(timer >> 4);
     if ((timer & 0x0F) == 4)
-        sub_80A12AC(timer >> 4);
+        gTilesetAnims_LandWaterEdge (timer >> 4);
 }
 
 static void sub_80A0BB4(u16 timer)
@@ -746,7 +748,7 @@ static void sub_80A0BB4(u16 timer)
         sub_80A1688(timer >> 3);
 }
 
-static void sub_80A0BCC(u16 timer)
+static void gTilesetAnims_Flower(u16 timer)
 {
     u16 idx;
 
@@ -754,7 +756,7 @@ static void sub_80A0BCC(u16 timer)
     AppendTilesetAnimToBuffer(gTilesetAnims_General0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 0x80);
 }
 
-static void sub_80A0BF4(u16 timer)
+static void gTilesetAnims_Water(u16 timer)
 {
     u8 idx;
 
@@ -762,7 +764,7 @@ static void sub_80A0BF4(u16 timer)
     AppendTilesetAnimToBuffer(gTilesetAnims_General1[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(432)), 0x3C0);
 }
 
-static void sub_80A0C1C(u16 timer)
+static void gTilesetAnims_SandWaterEdge(u16 timer)
 {
     u16 idx;
 
@@ -770,7 +772,7 @@ static void sub_80A0C1C(u16 timer)
     AppendTilesetAnimToBuffer(gTilesetAnims_General2[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 0x140);
 }
 
-static void sub_80A0C44(u16 timer)
+static void gTilesetAnims_Waterfall(u16 timer)
 {
     u16 idx;
 
@@ -1123,7 +1125,7 @@ static void sub_80A1294(u16 timer)
         sub_80A1570(timer >> 3);
 }
 
-static void sub_80A12AC(u16 timer)
+static void gTilesetAnims_LandWaterEdge (u16 timer)
 {
     u16 idx;
 

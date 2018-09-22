@@ -19,7 +19,7 @@
 #define ILLEGAL_BATTLE_TYPES ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
                               | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER   \
                               | BATTLE_TYPE_KYOGRE_GROUDON | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI           \
-                              | BATTLE_TYPE_RECORDED | BATTLE_TYPE_x4000000 | BATTLE_TYPE_SECRET_BASE           \
+                              | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE           \
                               | BATTLE_TYPE_GROUDON | BATTLE_TYPE_KYOGRE | BATTLE_TYPE_RAYQUAZA))
 
 extern u8 gUnknown_03001278;
@@ -273,7 +273,7 @@ void sub_81851A8(u8 *arg0)
             return;
     }
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
     {
         for (var2 = *arg0; var2 != 0;)
         {
@@ -360,7 +360,7 @@ u32 MoveRecordedBattleToSaveData(void)
         battleSave->battleFlags = (sBattleFlags & ~(BATTLE_TYPE_LINK | BATTLE_TYPE_20));
         battleSave->battleFlags |= BATTLE_TYPE_x2000000;
 
-        if (sBattleFlags & BATTLE_TYPE_WILD)
+        if (sBattleFlags & BATTLE_TYPE_IS_MASTER)
         {
             battleSave->battleFlags |= BATTLE_TYPE_x80000000;
         }
