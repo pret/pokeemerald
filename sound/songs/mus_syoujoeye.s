@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_syoujoeye_grp, voicegroup_867B7A0
+	.equ	mus_syoujoeye_grp, voicegroup027
 	.equ	mus_syoujoeye_pri, 0
 	.equ	mus_syoujoeye_rev, reverb_set+50
 	.equ	mus_syoujoeye_mvl, 127

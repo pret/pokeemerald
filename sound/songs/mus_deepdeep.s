@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_deepdeep_grp, voicegroup_8684E48
+	.equ	mus_deepdeep_grp, voicegroup057
 	.equ	mus_deepdeep_pri, 0
 	.equ	mus_deepdeep_rev, reverb_set+50
 	.equ	mus_deepdeep_mvl, 127

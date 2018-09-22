@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_casino_grp, voicegroup_868A674
+	.equ	mus_casino_grp, voicegroup072
 	.equ	mus_casino_pri, 0
 	.equ	mus_casino_rev, reverb_set+50
 	.equ	mus_casino_mvl, 127

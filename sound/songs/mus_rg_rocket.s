@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_rocket_grp, voicegroup_86A4804
+	.equ	mus_rg_rocket_grp, voicegroup142
 	.equ	mus_rg_rocket_pri, 0
 	.equ	mus_rg_rocket_rev, reverb_set+50
 	.equ	mus_rg_rocket_mvl, 127

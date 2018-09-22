@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_nextroad_grp, voicegroup_86816B0
+	.equ	mus_nextroad_grp, voicegroup047
 	.equ	mus_nextroad_pri, 0
 	.equ	mus_nextroad_rev, reverb_set+50
 	.equ	mus_nextroad_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_field13_grp, voicegroup_pokemon_cry
+	.equ	mus_field13_grp, voicegroup000
 	.equ	mus_field13_pri, 0
 	.equ	mus_field13_rev, reverb_set+50
 	.equ	mus_field13_mvl, 127

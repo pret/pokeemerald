@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_tsuretek_grp, voicegroup_8688274
+	.equ	mus_tsuretek_grp, voicegroup066
 	.equ	mus_tsuretek_pri, 0
 	.equ	mus_tsuretek_rev, reverb_set+50
 	.equ	mus_tsuretek_mvl, 127

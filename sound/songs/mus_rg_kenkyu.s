@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_kenkyu_grp, voicegroup_86AAABC
+	.equ	mus_rg_kenkyu_grp, voicegroup160
 	.equ	mus_rg_kenkyu_pri, 0
 	.equ	mus_rg_kenkyu_rev, reverb_set+50
 	.equ	mus_rg_kenkyu_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_tetsuji_grp, voicegroup_867D528
+	.equ	mus_tetsuji_grp, voicegroup034
 	.equ	mus_tetsuji_pri, 0
 	.equ	mus_tetsuji_rev, reverb_set+50
 	.equ	mus_tetsuji_mvl, 127

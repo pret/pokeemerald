@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_bidoro_grp, voicegroup_869D6F4
+	.equ	se_bidoro_grp, voicegroup128
 	.equ	se_bidoro_pri, 5
 	.equ	se_bidoro_rev, reverb_set+50
 	.equ	se_bidoro_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_conlobby_grp, voicegroup_8693A7C
+	.equ	mus_conlobby_grp, voicegroup098
 	.equ	mus_conlobby_pri, 0
 	.equ	mus_conlobby_rev, reverb_set+50
 	.equ	mus_conlobby_mvl, 127

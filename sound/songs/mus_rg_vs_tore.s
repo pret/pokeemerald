@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_vs_tore_grp, voicegroup_86A92BC
+	.equ	mus_rg_vs_tore_grp, voicegroup156
 	.equ	mus_rg_vs_tore_pri, 0
 	.equ	mus_rg_vs_tore_rev, reverb_set+50
 	.equ	mus_rg_vs_tore_mvl, 127

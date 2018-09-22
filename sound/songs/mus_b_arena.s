@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_b_arena_grp, voicegroup_8695B7C
+	.equ	mus_b_arena_grp, voicegroup104
 	.equ	mus_b_arena_pri, 0
 	.equ	mus_b_arena_rev, reverb_set+50
 	.equ	mus_b_arena_mvl, 127

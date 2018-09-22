@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_yama_eye_grp, voicegroup_869347C
+	.equ	mus_yama_eye_grp, voicegroup097
 	.equ	mus_yama_eye_pri, 0
 	.equ	mus_yama_eye_rev, reverb_set+50
 	.equ	mus_yama_eye_mvl, 127

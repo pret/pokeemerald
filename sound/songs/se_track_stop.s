@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_track_stop_grp, voicegroup_869D6F4
+	.equ	se_track_stop_grp, voicegroup128
 	.equ	se_track_stop_pri, 4
 	.equ	se_track_stop_rev, reverb_set+50
 	.equ	se_track_stop_mvl, 127

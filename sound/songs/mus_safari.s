@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_safari_grp, voicegroup_868B274
+	.equ	mus_safari_grp, voicegroup074
 	.equ	mus_safari_pri, 0
 	.equ	mus_safari_rev, reverb_set+50
 	.equ	mus_safari_mvl, 127

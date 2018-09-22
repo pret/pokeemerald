@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_jido_doa_grp, voicegroup_869D6F4
+	.equ	se_jido_doa_grp, voicegroup128
 	.equ	se_jido_doa_pri, 4
 	.equ	se_jido_doa_rev, reverb_set+50
 	.equ	se_jido_doa_mvl, 127

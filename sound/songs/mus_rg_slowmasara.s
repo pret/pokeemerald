@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_slowmasara_grp, voicegroup_86AA4BC
+	.equ	mus_rg_slowmasara_grp, voicegroup159
 	.equ	mus_rg_slowmasara_pri, 0
 	.equ	mus_rg_slowmasara_rev, reverb_set+50
 	.equ	mus_rg_slowmasara_mvl, 127

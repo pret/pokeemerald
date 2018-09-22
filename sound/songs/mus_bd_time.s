@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_bd_time_grp, voicegroup_867E740
+	.equ	mus_bd_time_grp, voicegroup038
 	.equ	mus_bd_time_pri, 0
 	.equ	mus_bd_time_rev, reverb_set+50
 	.equ	mus_bd_time_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_nageru_grp, voicegroup_869D6F4
+	.equ	se_nageru_grp, voicegroup128
 	.equ	se_nageru_pri, 5
 	.equ	se_nageru_rev, reverb_set+50
 	.equ	se_nageru_mvl, 127

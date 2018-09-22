@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_nanadungeon_grp, voicegroup_86A63F4
+	.equ	mus_rg_nanadungeon_grp, voicegroup147
 	.equ	mus_rg_nanadungeon_pri, 0
 	.equ	mus_rg_nanadungeon_rev, reverb_set+50
 	.equ	mus_rg_nanadungeon_mvl, 127

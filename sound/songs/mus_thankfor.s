@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_thankfor_grp, voicegroup_8694C7C
+	.equ	mus_thankfor_grp, voicegroup101
 	.equ	mus_thankfor_pri, 0
 	.equ	mus_thankfor_rev, reverb_set+50
 	.equ	mus_thankfor_mvl, 127

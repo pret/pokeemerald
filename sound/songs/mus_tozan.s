@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_tozan_grp, voicegroup_8683048
+	.equ	mus_tozan_grp, voicegroup052
 	.equ	mus_tozan_pri, 0
 	.equ	mus_tozan_rev, reverb_set+50
 	.equ	mus_tozan_mvl, 127

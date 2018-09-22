@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_fuusen1_grp, voicegroup_869D6F4
+	.equ	se_fuusen1_grp, voicegroup128
 	.equ	se_fuusen1_pri, 4
 	.equ	se_fuusen1_rev, reverb_set+50
 	.equ	se_fuusen1_mvl, 127

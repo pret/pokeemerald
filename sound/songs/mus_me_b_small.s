@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_me_b_small_grp, voicegroup_8677B28
+	.equ	mus_me_b_small_grp, voicegroup012
 	.equ	mus_me_b_small_pri, 5
 	.equ	mus_me_b_small_rev, reverb_set+50
 	.equ	mus_me_b_small_mvl, 127

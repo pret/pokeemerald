@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_win_yasei_grp, voicegroup_86AE338
+	.equ	mus_rg_win_yasei_grp, voicegroup170
 	.equ	mus_rg_win_yasei_pri, 0
 	.equ	mus_rg_win_yasei_rev, reverb_set+50
 	.equ	mus_rg_win_yasei_mvl, 127

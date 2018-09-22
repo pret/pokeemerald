@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_machupi_grp, voicegroup_868D674
+	.equ	mus_machupi_grp, voicegroup080
 	.equ	mus_machupi_pri, 0
 	.equ	mus_machupi_rev, reverb_set+50
 	.equ	mus_machupi_mvl, 127

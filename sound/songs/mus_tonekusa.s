@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_tonekusa_grp, voicegroup_868E28C
+	.equ	mus_tonekusa_grp, voicegroup083
 	.equ	mus_tonekusa_pri, 0
 	.equ	mus_tonekusa_rev, reverb_set+50
 	.equ	mus_tonekusa_mvl, 127

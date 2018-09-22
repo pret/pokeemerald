@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_shounen_grp, voicegroup_86A51F4
+	.equ	mus_rg_shounen_grp, voicegroup144
 	.equ	mus_rg_shounen_pri, 0
 	.equ	mus_rg_shounen_rev, reverb_set+50
 	.equ	mus_rg_shounen_mvl, 127

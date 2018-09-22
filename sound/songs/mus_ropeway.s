@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_ropeway_grp, voicegroup_868A074
+	.equ	mus_ropeway_grp, voicegroup071
 	.equ	mus_ropeway_pri, 0
 	.equ	mus_ropeway_rev, reverb_set+50
 	.equ	mus_ropeway_mvl, 127

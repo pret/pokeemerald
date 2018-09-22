@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_shiruhu_grp, voicegroup_86ACB38
+	.equ	mus_rg_shiruhu_grp, voicegroup166
 	.equ	mus_rg_shiruhu_pri, 0
 	.equ	mus_rg_shiruhu_rev, reverb_set+50
 	.equ	mus_rg_shiruhu_mvl, 127

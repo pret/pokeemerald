@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_b_tube_grp, voicegroup_8698654
+	.equ	mus_b_tube_grp, voicegroup112
 	.equ	mus_b_tube_pri, 0
 	.equ	mus_b_tube_rev, reverb_set+50
 	.equ	mus_b_tube_mvl, 127

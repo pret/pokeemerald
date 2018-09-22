@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_z_scroll_grp, voicegroup_869D0F4
+	.equ	se_z_scroll_grp, voicegroup127
 	.equ	se_z_scroll_pri, 5
 	.equ	se_z_scroll_rev, reverb_set+50
 	.equ	se_z_scroll_mvl, 127

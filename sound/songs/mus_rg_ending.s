@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_ending_grp, voicegroup_86A6DE4
+	.equ	mus_rg_ending_grp, voicegroup149
 	.equ	mus_rg_ending_pri, 0
 	.equ	mus_rg_ending_rev, reverb_set+50
 	.equ	mus_rg_ending_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	ph_kit_solo_grp, voicegroup_86A0754
+	.equ	ph_kit_solo_grp, voicegroup130
 	.equ	ph_kit_solo_pri, 4
 	.equ	ph_kit_solo_rev, 0
 	.equ	ph_kit_solo_mvl, 127

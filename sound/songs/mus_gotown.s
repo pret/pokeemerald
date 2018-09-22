@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_gotown_grp, voicegroup_8680AB0
+	.equ	mus_gotown_grp, voicegroup045
 	.equ	mus_gotown_pri, 0
 	.equ	mus_gotown_rev, reverb_set+50
 	.equ	mus_gotown_mvl, 127

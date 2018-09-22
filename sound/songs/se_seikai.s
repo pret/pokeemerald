@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_seikai_grp, voicegroup_869D0F4
+	.equ	se_seikai_grp, voicegroup127
 	.equ	se_seikai_pri, 4
 	.equ	se_seikai_rev, reverb_set+50
 	.equ	se_seikai_mvl, 127

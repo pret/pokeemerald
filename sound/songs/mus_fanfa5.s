@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_fanfa5_grp, voicegroup_8677B28
+	.equ	mus_fanfa5_grp, voicegroup012
 	.equ	mus_fanfa5_pri, 5
 	.equ	mus_fanfa5_rev, reverb_set+50
 	.equ	mus_fanfa5_mvl, 127

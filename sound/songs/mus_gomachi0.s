@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_gomachi0_grp, voicegroup_86806E4
+	.equ	mus_gomachi0_grp, voicegroup044
 	.equ	mus_gomachi0_pri, 0
 	.equ	mus_gomachi0_rev, reverb_set+50
 	.equ	mus_gomachi0_mvl, 127

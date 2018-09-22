@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_w019_grp, voicegroup_869D6F4
+	.equ	se_w019_grp, voicegroup128
 	.equ	se_w019_pri, 4
 	.equ	se_w019_rev, reverb_set+50
 	.equ	se_w019_mvl, 127

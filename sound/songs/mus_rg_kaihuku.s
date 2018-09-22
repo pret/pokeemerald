@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_kaihuku_grp, voicegroup_86A41D4
+	.equ	mus_rg_kaihuku_grp, voicegroup140
 	.equ	mus_rg_kaihuku_pri, 0
 	.equ	mus_rg_kaihuku_rev, reverb_set+50
 	.equ	mus_rg_kaihuku_mvl, 127
