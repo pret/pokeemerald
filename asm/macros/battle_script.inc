@@ -1505,6 +1505,12 @@
 	various \battler, VARIOUS_ABILITY_POPUP
 	.endm
 	
+	.macro defogclear battler, clear, ptr
+	various \battler, VARIOUS_DEFOG
+	.byte \clear
+	.4byte \ptr
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

@@ -317,6 +317,41 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectJudgment
 	.4byte BattleScript_EffectAutonomize
 	.4byte BattleScript_EffectCopycat
+	.4byte BattleScript_EffectDefog
+	
+BattleScript_EffectDefog:
+	setstatchanger STAT_EVASION, 1, TRUE
+	attackcanceler
+	jumpifsubstituteblocks BattleScript_DefogIfCanClearHazards
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_EVASION, 0x0, BattleScript_DefogWorks
+BattleScript_DefogIfCanClearHazards:
+	defogclear BS_ATTACKER, FALSE, BattleScript_ButItFailedAtkStringPpReduce
+BattleScript_DefogWorks:
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	statbuffchange 0x1, BattleScript_DefogTryHazardsWithAnim
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, 0x2, BattleScript_DefogDoAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_DefogTryHazardsWithAnim
+	pause 0x20
+	goto BattleScript_DefogPrintString
+BattleScript_DefogDoAnim::
+	attackanimation
+	waitanimation
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_DefogPrintString::
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+BattleScript_DefogTryHazards::
+	copybyte gEffectBattler, gBattlerAttacker
+	defogclear BS_ATTACKER, TRUE, NULL
+	copybyte gBattlerAttacker, gEffectBattler
+	goto BattleScript_MoveEnd
+BattleScript_DefogTryHazardsWithAnim:
+	attackanimation
+	waitanimation
+	goto BattleScript_DefogTryHazards
 
 BattleScript_EffectCopycat:
 	attackcanceler
@@ -4370,10 +4405,10 @@ BattleScript_SideStatusWoreOff::
 	waitmessage 0x40
 	end2
 	
-BattleScript_AuroraVeilEnds::
-	printstring STRINGID_AURORAVEILENDS
+BattleScript_SideStatusWoreOffReturn::
+	printstring STRINGID_PKMNSXWOREOFF
 	waitmessage 0x40
-	end2
+	return
 	
 BattleScript_LuckyChantEnds::
 	printstring STRINGID_LUCKYCHANTENDS

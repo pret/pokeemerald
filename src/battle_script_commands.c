@@ -6190,6 +6190,49 @@ bool32 CanUseLastResort(u8 battlerId)
         return FALSE;
 }
 
+#define DEFOG_CLEAR(status, structField, battlescript, move)\
+{                                                           \
+    if (*sideStatuses & status)                             \
+    {                                                       \
+        if (clear)                                          \
+        {                                                   \
+            if (move)                                       \
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, move);\
+            *sideStatuses &= ~(status);                     \
+            sideTimer->structField = 0;                     \
+            BattleScriptPushCursor();                       \
+            gBattlescriptCurrInstr = battlescript;          \
+        }                                                   \
+        return TRUE;                                        \
+    }                                                       \
+}
+
+static bool32 ClearDefogHazards(u8 battlerAtk, bool32 clear)
+{
+    s32 i;
+    for (i = 0; i < 2; i++)
+    {
+        struct SideTimer *sideTimer = &gSideTimers[i];
+        u32 *sideStatuses = &gSideStatuses[i];
+
+        gBattlerAttacker = i;
+        if (GetBattlerSide(battlerAtk) != i)
+        {
+            DEFOG_CLEAR(SIDE_STATUS_REFLECT, reflectTimer, BattleScript_SideStatusWoreOffReturn, MOVE_REFLECT);
+            DEFOG_CLEAR(SIDE_STATUS_LIGHTSCREEN, lightscreenTimer, BattleScript_SideStatusWoreOffReturn, MOVE_LIGHT_SCREEN);
+            DEFOG_CLEAR(SIDE_STATUS_MIST, mistTimer, BattleScript_SideStatusWoreOffReturn, MOVE_MIST);
+            DEFOG_CLEAR(SIDE_STATUS_AURORA_VEIL, auroraVeilTimer, BattleScript_SideStatusWoreOffReturn, MOVE_AURORA_VEIL);
+            DEFOG_CLEAR(SIDE_STATUS_SAFEGUARD, safeguardTimer, BattleScript_SideStatusWoreOffReturn, MOVE_SAFEGUARD);
+        }
+        DEFOG_CLEAR(SIDE_STATUS_SPIKES, spikesAmount, BattleScript_SpikesFree, 0);
+        DEFOG_CLEAR(SIDE_STATUS_STEALTH_ROCK, stealthRockAmount, BattleScript_StealthRockFree, 0);
+        DEFOG_CLEAR(SIDE_STATUS_TOXIC_SPIKES, toxicSpikesAmount, BattleScript_ToxicSpikesFree, 0);
+        DEFOG_CLEAR(SIDE_STATUS_STICKY_WEB, stickyWebAmount, BattleScript_StickyWebFree, 0);
+    }
+
+    return FALSE;
+}
+
 static void atk76_various(void)
 {
     struct Pokemon *mon;
@@ -6779,6 +6822,22 @@ static void atk76_various(void)
     case VARIOUS_ABILITY_POPUP:
         CreateAbilityPopUp(gActiveBattler, ABILITY_SPEED_BOOST);
         break;
+    case VARIOUS_DEFOG:
+        if (T1_READ_8(gBattlescriptCurrInstr + 3)) // Clear
+        {
+            if (ClearDefogHazards(gEffectBattler, TRUE))
+                return;
+            else
+                gBattlescriptCurrInstr += 8;
+        }
+        else
+        {
+            if (ClearDefogHazards(gActiveBattler, FALSE))
+                gBattlescriptCurrInstr += 8;
+            else
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 4);
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;

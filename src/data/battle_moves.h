@@ -5193,7 +5193,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DEFOG
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_DEFOG,
 		.power = 0,
 		.type = TYPE_FLYING,
 		.accuracy = 0,

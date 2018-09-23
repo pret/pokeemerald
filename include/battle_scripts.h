@@ -277,5 +277,6 @@ extern const u8 BattleScript_MoveEffectRecoilWithStatus[];
 extern const u8 BattleScript_EffectWithChance[];
 extern const u8 BattleScript_MoveEffectClearSmog[];
 extern const u8 BattleScript_ForceRandomSwitch[];
+extern const u8 BattleScript_SideStatusWoreOffReturn[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

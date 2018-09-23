@@ -950,7 +950,9 @@ u8 DoFieldEndTurnEffects(void)
                     if (--gSideTimers[side].auroraVeilTimer == 0)
                     {
                         gSideStatuses[side] &= ~SIDE_STATUS_AURORA_VEIL;
-                        BattleScriptExecute(BattleScript_AuroraVeilEnds);
+                        BattleScriptExecute(BattleScript_SideStatusWoreOff);
+                        gBattleCommunication[MULTISTRING_CHOOSER] = side;
+                        PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_AURORA_VEIL);
                         effect++;
                     }
                 }
