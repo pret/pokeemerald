@@ -153,7 +153,7 @@ int main(int argc, char** argv)
             case 'L':
                 if (arg == nullptr)
                     PrintUsage();
-                g_asmLabel = std::stoi(arg);
+                g_asmLabel = arg;
                 break;
             case 'N':
                 g_compressionEnabled = false;
