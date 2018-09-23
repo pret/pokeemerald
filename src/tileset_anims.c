@@ -7,9 +7,6 @@
 #include "battle_transition.h"
 #include "fieldmap.h"
 
-#define SECONDARY_TILESET_VRAM 0x2000
-#define TILE_VRAM(n) (0x20 * (n))
-
 // Static type declarations
 
 // Static RAM declarations
@@ -226,25 +223,25 @@ const u16 gTilesetAnims_Mauville1b_Frame1[] = INCBIN_U16("data/tilesets/secondar
 const u16 tileset_anims_space_1[16] = {};
 
 u16 *const gTilesetAnims_MauvilleVDests0[] = {
-    (u16 *)(BG_VRAM + 0x4c00),
-    (u16 *)(BG_VRAM + 0x4c80),
-    (u16 *)(BG_VRAM + 0x4d00),
-    (u16 *)(BG_VRAM + 0x4d80),
-    (u16 *)(BG_VRAM + 0x4e00),
-    (u16 *)(BG_VRAM + 0x4e80),
-    (u16 *)(BG_VRAM + 0x4f00),
-    (u16 *)(BG_VRAM + 0x4f80)
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 96)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 100)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 104)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 108)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 112)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 116)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 120)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 124))
 };
 
 u16 *const gTilesetAnims_MauvilleVDests1[] = {
-    (u16 *)(BG_VRAM + 0x5000),
-    (u16 *)(BG_VRAM + 0x5080),
-    (u16 *)(BG_VRAM + 0x5100),
-    (u16 *)(BG_VRAM + 0x5180),
-    (u16 *)(BG_VRAM + 0x5200),
-    (u16 *)(BG_VRAM + 0x5280),
-    (u16 *)(BG_VRAM + 0x5300),
-    (u16 *)(BG_VRAM + 0x5380)
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 128)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 132)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 136)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 140)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 144)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 148)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 152)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 156))
 };
 
 const u16 *const gTilesetAnims_Mauville0a[] = {
@@ -308,14 +305,14 @@ const u16 gTilesetAnims_Rustboro0_Frame6[] = INCBIN_U16("data/tilesets/secondary
 const u16 gTilesetAnims_Rustboro0_Frame7[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/7.4bpp");
 
 u16 *const gTilesetAnims_RustboroVDests0[] = {
-    (u16 *)(BG_VRAM + 0x5000),
-    (u16 *)(BG_VRAM + 0x5080),
-    (u16 *)(BG_VRAM + 0x5100),
-    (u16 *)(BG_VRAM + 0x5180),
-    (u16 *)(BG_VRAM + 0x5200),
-    (u16 *)(BG_VRAM + 0x5280),
-    (u16 *)(BG_VRAM + 0x5300),
-    (u16 *)(BG_VRAM + 0x5380)
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 128)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 132)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 136)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 140)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 144)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 148)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 152)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 156))
 };
 
 const u16 *const gTilesetAnims_Rustboro0[] = {
@@ -384,14 +381,14 @@ const u16 gTilesetAnims_EverGrande0_Frame7[] = INCBIN_U16("data/tilesets/seconda
 const u16 tileset_anims_space_4[16] = {};
 
 u16 *const gTilesetAnims_EverGrandeVDests0[] = {
-    (u16 *)(BG_VRAM + 0x5c00),
-    (u16 *)(BG_VRAM + 0x5c80),
-    (u16 *)(BG_VRAM + 0x5d00),
-    (u16 *)(BG_VRAM + 0x5d80),
-    (u16 *)(BG_VRAM + 0x5e00),
-    (u16 *)(BG_VRAM + 0x5e80),
-    (u16 *)(BG_VRAM + 0x5f00),
-    (u16 *)(BG_VRAM + 0x5f80)
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 224)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 228)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 232)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 236)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 240)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 244)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 248)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 252))
 };
 
 const u16 *const gTilesetAnims_EverGrande0[] = {
