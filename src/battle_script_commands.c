@@ -6776,6 +6776,9 @@ static void atk76_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_ABILITY_POPUP:
+        CreateAbilityPopUp(gActiveBattler, ABILITY_SPEED_BOOST);
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

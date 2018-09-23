@@ -1501,6 +1501,10 @@
 	.4byte \ptr
 	.endm
 	
+	.macro testabilitypopup battler
+	various \battler, VARIOUS_ABILITY_POPUP
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

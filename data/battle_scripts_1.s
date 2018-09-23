@@ -1261,6 +1261,7 @@ BattleScript_HitEscapeEnd:
 	end
 	
 BattleScript_EffectPlaceholder:
+	testabilitypopup BS_BATTLER_0
 	attackcanceler
 	printstring STRINGID_NOTDONEYET
 	goto BattleScript_MoveEnd

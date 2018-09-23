@@ -23,6 +23,7 @@
 #include "constants/rgb.h"
 #include "data2.h"
 #include "battle_debug.h"
+#include "malloc.h"
 
 struct TestingBar
 {
@@ -2810,4 +2811,268 @@ static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 ar
 {
     CpuCopy32(windowTileData, dest, arg2 * 32);
     CpuCopy32(windowTileData + 256, dest + 256, arg2 * 32);
+}
+
+static void SpriteCb_AbilityPopUp1(struct Sprite *sprite);
+static void SpriteCb_AbilityPopUp2(struct Sprite *sprite);
+
+#define ABILITY_POP_UP_TAG 0xD720
+
+#define tBattlerId      data[0]
+#define tHide           data[3]
+#define tFrames         data[4]
+
+static const u8 sAbilityPopUpGfx[] = INCBIN_U8("graphics/battle_interface/ability_pop_up.4bpp");
+static const u16 sAbilityPopUpPalette[] = INCBIN_U16("graphics/battle_interface/ability_pop_up.gbapal");
+
+static const struct SpriteSheet sSpriteSheet_AbilityPopUp =
+{
+    sAbilityPopUpGfx, sizeof(sAbilityPopUpGfx), ABILITY_POP_UP_TAG
+};
+static const struct SpritePalette sSpritePalette_AbilityPopUp =
+{
+    sAbilityPopUpPalette, ABILITY_POP_UP_TAG
+};
+
+static const struct OamData sOamData_AbilityPopUp =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_AbilityPopUp1[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_AbilityPopUp1[] =
+{
+    sSpriteAnim_AbilityPopUp1
+};
+
+static const struct SpriteTemplate sSpriteTemplate_AbilityPopUp1 =
+{
+    .tileTag = ABILITY_POP_UP_TAG,
+    .paletteTag = ABILITY_POP_UP_TAG,
+    .oam = &sOamData_AbilityPopUp,
+    .anims = sSpriteAnimTable_AbilityPopUp1,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCb_AbilityPopUp1
+};
+
+static const union AnimCmd sSpriteAnim_AbilityPopUp2[] =
+{
+    ANIMCMD_FRAME(32, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_AbilityPopUp2[] =
+{
+    sSpriteAnim_AbilityPopUp2
+};
+
+static const struct SpriteTemplate sSpriteTemplate_AbilityPopUp2 =
+{
+    .tileTag = ABILITY_POP_UP_TAG,
+    .paletteTag = ABILITY_POP_UP_TAG,
+    .oam = &sOamData_AbilityPopUp,
+    .anims = sSpriteAnimTable_AbilityPopUp2,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCb_AbilityPopUp2
+};
+
+#define ABILITY_POP_UP_POS_X_DIFF 64
+#define ABILITY_POP_UP_POS_X_SLIDE 68
+
+static const s16 sAbilityPopUpCoords[MAX_BATTLERS_COUNT][2] =
+{
+    {204, 23},
+    {110, 17},
+    {110, 17},
+    {110, 17},
+};
+
+static u8* AddTextPrinterAndCreateWindowOnAbilityPopUp(const u8 *str, u32 x, u32 y, u32 color1, u32 color2, u32 color3, u32 *windowId)
+{
+    u8 color[3] = {color1, color2, color3};
+    struct WindowTemplate winTemplate = {0};
+    winTemplate.width = 8;
+    winTemplate.height = 2;
+
+    *windowId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(*windowId, (color1 << 4) | (color1));
+
+    AddTextPrinterParameterized4(*windowId, 0, x, y, 0, 0, color, -1, str);
+    return (u8*)(GetWindowAttribute(*windowId, WINDOW_TILE_DATA));
+}
+
+static void TextIntoAbilityPopUp(void *dest, u8 *windowTileData, s32 arg2)
+{
+    CpuCopy32(windowTileData + 256, dest + 256, arg2 * 32);
+    if (arg2 > 0)
+    {
+        do
+        {
+            CpuCopy32(windowTileData + 20, dest + 20, 12);
+            dest += 32, windowTileData += 32;
+            arg2--;
+        } while (arg2 != 0);
+    }
+}
+
+#define MAX_CHARS_PRINTED 12
+
+static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTileData2, u32 x1, u32 x2, u32 y, u32 color1, u32 color2, u32 color3)
+{
+    u32 windowId, i;
+    u8 *windowTileData;
+    u8 text1[MAX_CHARS_PRINTED + 1];
+    u8 text2[MAX_CHARS_PRINTED + 1];
+
+    for (i = 0; i < MAX_CHARS_PRINTED; i++)
+    {
+        text1[i] = str[i];
+        if (text1[i] == EOS)
+            break;
+    }
+    text1[i] = EOS;
+
+    windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(text1, x1, y, color1, color2, color3, &windowId);
+    TextIntoAbilityPopUp(spriteTileData1, windowTileData, 8);
+    RemoveWindow(windowId);
+
+    if (i == MAX_CHARS_PRINTED)
+    {
+        for (i = 0; i < MAX_CHARS_PRINTED; i++)
+        {
+            text2[i] = str[MAX_CHARS_PRINTED + i];
+            if (text2[i] == EOS)
+                break;
+        }
+        text2[i] = EOS;
+
+        windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(text2, x2, y, color1, color2, color3, &windowId);
+        TextIntoAbilityPopUp(spriteTileData2, windowTileData, 1);
+        RemoveWindow(windowId);
+    }
+}
+
+static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
+{
+    PrintOnAbilityPopUp(gBattleMons[battlerId].nickname,
+                        (void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32),
+                        (void*)(OBJ_VRAM0) + (gSprites[spriteId2].oam.tileNum * 32),
+                        7, 0,
+                        1,
+                        2, 7, 1);
+}
+
+static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
+{
+    PrintOnAbilityPopUp(gAbilityNames[ability],
+                        (void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32) + 256,
+                        (void*)(OBJ_VRAM0) + (gSprites[spriteId2].oam.tileNum * 32) + 256,
+                        7, 1,
+                        4,
+                        7, 9, 1);
+}
+
+void CreateAbilityPopUp(u8 battlerId, u32 ability)
+{
+    u8 spriteId1, spriteId2;
+
+    LoadSpriteSheet(&sSpriteSheet_AbilityPopUp);
+    LoadSpritePalette(&sSpritePalette_AbilityPopUp);
+
+    spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp1,
+                            sAbilityPopUpCoords[battlerId][0] + ABILITY_POP_UP_POS_X_SLIDE,
+                            sAbilityPopUpCoords[battlerId][1], 0);
+    spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp2,
+                            sAbilityPopUpCoords[battlerId][0] + ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF,
+                            sAbilityPopUpCoords[battlerId][1], 0);
+
+    StartSpriteAnim(&gSprites[spriteId1], 0);
+    StartSpriteAnim(&gSprites[spriteId2], 0);
+
+    gSprites[spriteId1].tBattlerId = battlerId;
+    gSprites[spriteId2].tBattlerId = battlerId;
+
+    PrintBattlerOnAbilityPopUp(battlerId, spriteId1, spriteId2);
+    PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
+}
+
+static void SpriteCb_AbilityPopUp1(struct Sprite *sprite)
+{
+    if (!sprite->tHide) // Show
+    {
+        sprite->pos1.x -= 3;
+        if (sprite->pos1.x <= sAbilityPopUpCoords[sprite->tBattlerId][0])
+        {
+            sprite->pos1.x = sAbilityPopUpCoords[sprite->tBattlerId][0];
+            sprite->tHide = TRUE;
+            sprite->tFrames = 42;
+        }
+    }
+    else // Hide
+    {
+        if (sprite->tFrames == 0)
+        {
+            sprite->pos1.x += 3;
+            if (sprite->pos1.x >= sAbilityPopUpCoords[sprite->tBattlerId][0] + ABILITY_POP_UP_POS_X_SLIDE)
+            {
+                DestroySprite(sprite);
+                FreeSpriteTilesByTag(ABILITY_POP_UP_TAG);
+                FreeSpritePaletteByTag(ABILITY_POP_UP_TAG);
+            }
+        }
+        else
+        {
+            sprite->tFrames--;
+        }
+    }
+}
+
+static void SpriteCb_AbilityPopUp2(struct Sprite *sprite)
+{
+    if (!sprite->tHide) // Show
+    {
+        sprite->pos1.x -= 3;
+        if (sprite->pos1.x <= sAbilityPopUpCoords[sprite->tBattlerId][0] + ABILITY_POP_UP_POS_X_DIFF)
+        {
+            sprite->pos1.x = sAbilityPopUpCoords[sprite->tBattlerId][0] + ABILITY_POP_UP_POS_X_DIFF;
+            sprite->tHide = TRUE;
+            sprite->tFrames = 42;
+        }
+    }
+    else // Hide
+    {
+        if (sprite->tFrames == 0)
+        {
+            sprite->pos1.x += 3;
+            if (sprite->pos1.x >= sAbilityPopUpCoords[sprite->tBattlerId][0] + ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF)
+            {
+                DestroySprite(sprite);
+                FreeSpriteTilesByTag(ABILITY_POP_UP_TAG);
+                FreeSpritePaletteByTag(ABILITY_POP_UP_TAG);
+            }
+        }
+        else
+        {
+            sprite->tFrames--;
+        }
+    }
 }
