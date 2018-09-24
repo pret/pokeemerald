@@ -93,7 +93,7 @@ compare: $(ROM)
 
 clean: tidy
 	rm -f sound/direct_sound_samples/*.bin
-	rm -f $(SONG_OBJS) $(MID_OBJS)
+	rm -f $(SONG_OBJS) $(MID_OBJS) $(MID_SUBDIR)/*.s
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 tidy:
