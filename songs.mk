@@ -15,6 +15,9 @@ $(MID_SUBDIR)/mus_ashroad.s: %.s: %.mid
 $(MID_SUBDIR)/mus_ayasii.s: %.s: %.mid
 	$(MID) $< $@ -G069 -R$(STD_REVERB) -V078
 
+$(MID_SUBDIR)/mus_b_arena.s: %.s: %.mid
+	$(MID) $< $@ -G104 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
