@@ -64,7 +64,7 @@ cd ../pokeemerald
 ./build_tools.sh
 ```
 
-And build the ROM with `make -j4`.
+And build the ROM with `make`.
 
 # Faster builds
 
@@ -78,12 +78,12 @@ By default `make` only runs a single thread. You can tell `make` to run on multi
 
 The optimal value for `-j` is the number of logical cores on your machine. You can run `nproc` to see the exact number.
 
-    $ nproc
-    8
+```
+$ nproc
+8
+```
 
-If you have 8 cores, run:
-
-    make -j8
+If you have 8 cores, run: `make -j8`
 
 `-j` on its own will spawn a new thread for each job. A clean build will have thousands of jobs, which will be slower than not using -j at all.
 
@@ -91,5 +91,5 @@ If you have 8 cores, run:
 
 If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to any other files will be ignored, and the build will either fail or not reflect those changes.
 
-    make NODEP=1
+`make NODEP=1`
 
