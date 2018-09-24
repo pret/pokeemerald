@@ -427,7 +427,7 @@ gSongTable:: @ 86B49F0
 	song mus_tsuretek, 0, 0         @ Follow Me!
 	song mus_boy_sup, 0, 0          @ Encounter! Brendan
 	song mus_rainbow, 0, 0          @ Ever Grande City
-	song mus_ayasii, 0, 0           @ Encounter! Psychic
+	song mus_ayasii, 0, 0           @ Trainers' Eyes Meet (Hex Maniac)
 	song mus_kachi4, 0, 0           @ Victory! Aqua/Magma Grunt
 	song mus_ropeway, 0, 0          @ Cable Car
 	song mus_casino, 0, 0           @ Game Corner
