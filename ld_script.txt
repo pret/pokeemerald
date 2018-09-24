@@ -908,7 +908,7 @@ SECTIONS {
         sound/songs/mus_rainbow.o(.rodata);
         sound/songs/midi/mus_ayasii.o(.rodata);
         sound/songs/mus_kachi4.o(.rodata);
-        sound/songs/mus_ropeway.o(.rodata);
+        sound/songs/midi/mus_ropeway.o(.rodata);
         sound/songs/mus_casino.o(.rodata);
         sound/songs/mus_hightown.o(.rodata);
         sound/songs/mus_safari.o(.rodata);

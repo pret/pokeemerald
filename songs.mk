@@ -17,3 +17,6 @@ $(MID_SUBDIR)/mus_ayasii.s: %.s: %.mid
 
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
+
+$(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
+	$(MID) $< $@ -G071 -R$(STD_REVERB) -V078
