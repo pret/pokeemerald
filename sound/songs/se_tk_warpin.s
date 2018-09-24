@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_tk_warpin_grp, voicegroup_869D0F4
+	.equ	se_tk_warpin_grp, voicegroup127
 	.equ	se_tk_warpin_pri, 4
 	.equ	se_tk_warpin_rev, reverb_set+50
 	.equ	se_tk_warpin_mvl, 127

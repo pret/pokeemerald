@@ -33,6 +33,7 @@
 #include "field_weather.h"
 #include "gym_leader_rematch.h"
 #include "constants/map_types.h"
+#include "constants/battle_frontier.h"
 
 enum
 {
@@ -74,7 +75,7 @@ extern void sub_81D6384(void);
 extern void sub_81D61E8(void);
 extern void sub_80982B8(void);
 extern void sub_81A9EDC(u16 a0);
-extern void sub_81D572C(u8 a0, u16 arg1);
+extern void CopyTrainerHillTrainerText(u8 a0, u16 arg1);
 
 // this file's functions
 static void DoBattlePikeWildBattle(void);
@@ -863,7 +864,7 @@ u8 sub_80B100C(s32 arg0)
             return sUnknown_0854FEA7[Random() % ARRAY_COUNT(sUnknown_0854FEA7)];
         }
 
-        if (VarGet(VAR_0x40CE) != 3)
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
             return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
     }
     else
@@ -880,7 +881,7 @@ u8 sub_80B100C(s32 arg0)
             return sUnknown_0854FEA7[Random() % ARRAY_COUNT(sUnknown_0854FEA7)];
         }
 
-        if (VarGet(VAR_0x40CE) != 3)
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
             return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
     }
 
@@ -900,7 +901,7 @@ static void CB2_GiveStarter(void)
 {
     u16 starterMon;
 
-    *GetVarPointer(VAR_FIRST_POKE) = gSpecialVar_Result;
+    *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterMon, 5, 0, 0, 0, 0);
     ResetTasks();
@@ -1280,7 +1281,7 @@ void BattleSetup_StartTrainerBattle(void)
     }
     else if (sub_81D5C18())
     {
-        gBattleTypeFlags |= BATTLE_TYPE_x4000000;
+        gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL;
 
         if (gNoOfApproachingTrainers == 2)
             sub_81D639C();
@@ -1369,9 +1370,9 @@ void ShowTrainerIntroSpeech(void)
     else if (sub_81D5C18())
     {
         if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
-            sub_81D572C(2, sub_81D6180(gSpecialVar_LastTalked));
+            CopyTrainerHillTrainerText(2, sub_81D6180(gSpecialVar_LastTalked));
         else
-            sub_81D572C(2, sub_81D6180(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
+            CopyTrainerHillTrainerText(2, sub_81D6180(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
 
         sub_80982B8();
     }

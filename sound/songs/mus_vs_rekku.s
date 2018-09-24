@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_vs_rekku_grp, voicegroup_8699254
+	.equ	mus_vs_rekku_grp, voicegroup114
 	.equ	mus_vs_rekku_pri, 1
 	.equ	mus_vs_rekku_rev, reverb_set+50
 	.equ	mus_vs_rekku_mvl, 127

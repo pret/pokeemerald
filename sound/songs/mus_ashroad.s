@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_ashroad_grp, voicegroup_8684248
+	.equ	mus_ashroad_grp, voicegroup055
 	.equ	mus_ashroad_pri, 0
 	.equ	mus_ashroad_rev, reverb_set+50
 	.equ	mus_ashroad_mvl, 127

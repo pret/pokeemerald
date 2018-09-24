@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_me_pointget_grp, voicegroup_869557C
+	.equ	mus_me_pointget_grp, voicegroup103
 	.equ	mus_me_pointget_pri, 5
 	.equ	mus_me_pointget_rev, reverb_set+50
 	.equ	mus_me_pointget_mvl, 127

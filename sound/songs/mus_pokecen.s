@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_pokecen_grp, voicegroup_86810B0
+	.equ	mus_pokecen_grp, voicegroup046
 	.equ	mus_pokecen_pri, 0
 	.equ	mus_pokecen_rev, reverb_set+50
 	.equ	mus_pokecen_mvl, 127

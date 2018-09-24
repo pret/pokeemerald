@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_shoujo_grp, voicegroup_86A4BF4
+	.equ	mus_rg_shoujo_grp, voicegroup143
 	.equ	mus_rg_shoujo_pri, 0
 	.equ	mus_rg_shoujo_rev, reverb_set+50
 	.equ	mus_rg_shoujo_mvl, 127

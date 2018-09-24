@@ -137,7 +137,7 @@ Task_ShopMenu: @ 80DFB88
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r2, r0, 24
 	movs r0, 0x2
@@ -839,7 +839,7 @@ _080E0176:
 	adds r0, r6, 0
 	movs r1, 0x7
 	adds r3, r7, 0
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 _080E01AC:
 	add sp, 0x14
 	pop {r4-r7}
@@ -1201,7 +1201,7 @@ BuyMenuPrint: @ 80E04A4
 	str r6, [sp, 0xC]
 	str r1, [sp, 0x10]
 	movs r1, 0x1
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}

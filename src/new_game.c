@@ -23,6 +23,8 @@
 #include "overworld.h"
 #include "mail.h"
 #include "battle_records.h"
+#include "item.h"
+#include "pokedex.h"
 
 extern u8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
@@ -33,13 +35,11 @@ extern u16 GetGeneratedTrainerIdLower(void);
 extern void ClearContestWinnerPicsInContestHall(void);
 extern void sub_80BB358(void);
 extern void ResetBagScrollPositions(void);
-extern void ResetPokedex(void);
 extern void ResetGabbyAndTy(void);
 extern void ResetSecretBases(void);
 extern void ResetLinkContestBoolean(void);
 extern void sub_8052DA8(void);
 extern void ResetPokemonStorageSystem(void);
-extern void ClearBag(void);
 extern void NewGameInitPCItems(void);
 extern void ClearDecorationInventories(void);
 extern void ResetFanClub(void);
@@ -133,7 +133,7 @@ static void ClearFrontierRecord(void)
 static void WarpToTruck(void)
 {
     Overworld_SetWarpDestination(25, 40, -1, -1, -1); // inside of truck
-    warp_in();
+    WarpIntoMap();
 }
 
 void Sav2_ClearSetDefault(void)

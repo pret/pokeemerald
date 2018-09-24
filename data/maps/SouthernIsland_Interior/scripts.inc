@@ -9,7 +9,7 @@ SouthernIsland_Interior_MapScript1_242A50: @ 8242A50
 	end
 
 SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, SouthernIsland_Interior_EventScript_27374E
 	removeobject 2
@@ -90,7 +90,7 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	special BattleSetup_StartLatiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq SouthernIsland_Interior_EventScript_242B81
 	compare VAR_RESULT, 4

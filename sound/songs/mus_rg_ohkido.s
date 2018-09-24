@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_ohkido_grp, voicegroup_86AAEDC
+	.equ	mus_rg_ohkido_grp, voicegroup161
 	.equ	mus_rg_ohkido_pri, 0
 	.equ	mus_rg_ohkido_rev, reverb_set+50
 	.equ	mus_rg_ohkido_mvl, 127

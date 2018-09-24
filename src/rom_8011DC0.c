@@ -18,6 +18,7 @@
 #include "constants/maps.h"
 #include "constants/species.h"
 #include "constants/rgb.h"
+#include "constants/battle_frontier.h"
 #include "trade.h"
 #include "trainer_card.h"
 #include "overworld.h"
@@ -39,7 +40,7 @@ struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;
     u8 needingPadding[3];
-    u8 playerName[PLAYER_NAME_LENGTH];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
 };
 
 struct UnkStruct_x1C
@@ -468,7 +469,7 @@ void sub_8012780(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.chosenLvl == 1)
+        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F00C4[gSpecialVar_0x8004];
         gUnknown_02022C2D = gUnknown_082F00C4[gSpecialVar_0x8004] >> 8;
@@ -1050,7 +1051,7 @@ void sub_80134E8(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.chosenLvl == 1)
+        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F0530[gSpecialVar_0x8004];
         sub_8010F84(gUnknown_02022C2C, 0, 0);
@@ -1636,7 +1637,7 @@ void sub_8014290(u16 arg0, u16 x, u16 y)
     VarSet(VAR_0x4087, arg0);
     Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     saved_warp2_set_2(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
-    warp_in();
+    WarpIntoMap();
 }
 
 void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
@@ -1647,7 +1648,7 @@ void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
     gUnknown_03005DB4 = GetMultiplayerId();
     sub_809D2BC();
     Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
-    warp_in();
+    WarpIntoMap();
 }
 
 void sub_8014384(void)

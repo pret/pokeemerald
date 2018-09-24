@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_kinomikui_grp, voicegroup_86A15B8
+	.equ	mus_rg_kinomikui_grp, voicegroup132
 	.equ	mus_rg_kinomikui_pri, 0
 	.equ	mus_rg_kinomikui_rev, reverb_set+50
 	.equ	mus_rg_kinomikui_mvl, 127

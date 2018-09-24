@@ -482,15 +482,15 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 u16 GetBehaviorByMetatileId(u16 metatile)
 {
     u16 *attributes;
-    if (metatile <= 0x1ff)
+    if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
         return attributes[metatile];
     }
-    else if (metatile <= 0x3ff)
+    else if (metatile < NUM_METATILES_TOTAL)
     {
         attributes = gMapHeader.mapLayout->secondaryTileset->metatileAttributes;
-        return attributes[metatile - 0x200];
+        return attributes[metatile - NUM_METATILES_IN_PRIMARY];
     }
     else
     {
@@ -712,8 +712,8 @@ int GetPostCameraMoveMapBorderId(int x, int y)
 int CanCameraMoveInDirection(int direction)
 {
     int x, y;
-    x = gSaveBlock1Ptr->pos.x + 7 + gUnknown_08339D64[direction].x;
-    y = gSaveBlock1Ptr->pos.y + 7 + gUnknown_08339D64[direction].y;
+    x = gSaveBlock1Ptr->pos.x + 7 + gDirectionToVectors[direction].x;
+    y = gSaveBlock1Ptr->pos.y + 7 + gDirectionToVectors[direction].y;
     if (GetMapBorderIdAt(x, y) == -1)
     {
         return 0;
@@ -951,7 +951,7 @@ void copy_tileset_patterns_to_vram2(struct Tileset const *tileset, u16 numTiles,
         if (!tileset->isCompressed)
             LoadBgTiles(2, tileset->tiles, numTiles * 32, offset);
         else
-            copy_decompressed_tile_data_to_vram_autofree(2, tileset->tiles, numTiles * 32, offset, 0);
+            DecompressAndLoadBgGfxUsingHeap(2, tileset->tiles, numTiles * 32, offset, 0);
     }
 }
 
@@ -979,7 +979,7 @@ void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u1
         }
         else if (tileset->isSecondary == TRUE)
         {
-            LoadPalette(((u16*)tileset->palettes) + 0x60, destOffset, size);
+            LoadPalette(((u16*)tileset->palettes) + (NUM_PALS_IN_PRIMARY * 16), destOffset, size);
             nullsub_3(destOffset, size >> 1);
         }
         else
@@ -992,35 +992,35 @@ void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u1
 
 void copy_map_tileset1_to_vram(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram(mapLayout->primaryTileset, 0x200, 0);
+    copy_tileset_patterns_to_vram(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
 }
 
 void copy_map_tileset2_to_vram(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram(mapLayout->secondaryTileset, 0x200, 0x200);
+    copy_tileset_patterns_to_vram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
 void copy_map_tileset2_to_vram_2(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram2(mapLayout->secondaryTileset, 0x200, 0x200);
+    copy_tileset_patterns_to_vram2(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
 void apply_map_tileset1_palette(struct MapLayout const *mapLayout)
 {
-    apply_map_tileset_palette(mapLayout->primaryTileset, 0, 0xC0);
+    apply_map_tileset_palette(mapLayout->primaryTileset, 0, NUM_PALS_IN_PRIMARY * 16 * 2);
 }
 
 void apply_map_tileset2_palette(struct MapLayout const *mapLayout)
 {
-    apply_map_tileset_palette(mapLayout->secondaryTileset, 0x60, 0xE0);
+    apply_map_tileset_palette(mapLayout->secondaryTileset, NUM_PALS_IN_PRIMARY * 16, (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * 16 * 2);
 }
 
 void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout)
 {
     if (mapLayout)
     {
-        copy_tileset_patterns_to_vram2(mapLayout->primaryTileset, 0x200, 0);
-        copy_tileset_patterns_to_vram2(mapLayout->secondaryTileset, 0x200, 0x200);
+        copy_tileset_patterns_to_vram2(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+        copy_tileset_patterns_to_vram2(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
     }
 }
 

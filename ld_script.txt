@@ -92,6 +92,7 @@ SECTIONS {
         src/metatile_behavior.o(.text);
         src/field_camera.o(.text);
         src/field_door.o(.text);
+        src/field_player_avatar.o(.text);
         asm/field_player_avatar.o(.text);
         src/event_object_movement.o(.text);
         src/field_message_box.o(.text);
@@ -135,13 +136,14 @@ SECTIONS {
         src/item_menu_icons.o(.text);
         asm/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
+        src/contest.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
         asm/script_menu.o(.text);
         src/naming_screen.o(.text);
         src/money.o(.text);
-        asm/contest_effect.o(.text);
+        src/contest_effect.o(.text);
         src/record_mixing.o(.text);
         src/secret_base.o(.text);
         src/tv.o(.text);
@@ -157,6 +159,7 @@ SECTIONS {
         src/item_use.o(.text);
         asm/battle_anim_80FE840.o(.text);
         src/bike.o(.text);
+        src/easy_chat.o(.text);
         asm/easy_chat.o(.text);
         src/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
@@ -167,7 +170,7 @@ SECTIONS {
         src/region_map.o(.text);
         asm/cute_sketch.o(.text);
         src/decoration.o(.text);
-        asm/slot_machine.o(.text);
+        src/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
         src/trader.o(.text);
@@ -180,7 +183,7 @@ SECTIONS {
         src/time_events.o(.text);
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);
-        asm/field_specials.o(.text);
+        src/field_specials.o(.text);
         src/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
@@ -195,19 +198,20 @@ SECTIONS {
         asm/cable_car.o(.text);
         src/math_util.o(.text);
         asm/roulette_util.o(.text);
-        asm/cable_car_util.o(.text);
+        src/rom_81520A8.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
-        asm/contest_ai.o(.text);
+        src/contest_ai.o(.text);
         src/battle_anim_sound_tasks.o(.text);
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_815A0D4.o(.text);
-        asm/learn_move.o(.text);
+        src/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
+        src/battle_tower.o(.text);
         asm/battle_tower.o(.text);
         src/use_pokeblock.o(.text);
         asm/use_pokeblock.o(.text);
@@ -236,10 +240,13 @@ SECTIONS {
         src/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
-        src/battle_dome_cards.o(.text);
+        src/trainer_pokemon_sprites.o(.text);
         src/lilycove_lady.o(.text);
+        src/battle_dome.o(.text);
+        src/battle_frontier_1.o(.text);
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
+        src/battle_factory.o(.text);
         asm/battle_frontier_2.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
@@ -248,7 +255,6 @@ SECTIONS {
         src/item_icon.o(.text);
         asm/party_menu.o(.text);
         src/battle_tent.o(.text);
-        asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
         src/unk_81BAD84.o(.text);
@@ -258,7 +264,8 @@ SECTIONS {
         asm/fossil_specials.o(.text);
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
-        asm/pokemon_summary_screen.o(.text);
+        src/unk_pokedex_area_screen_helper.o(.text);
+        src/battle_pyramid_bag.o(.text);
         asm/pokenav.o(.text);
         src/match_call.o(.text);
         asm/pokenav.o(.text.after.match.call);
@@ -372,8 +379,9 @@ SECTIONS {
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         src/rom_8034C54.o(.rodata);
-        data/data2b.o(.rodata);
+        src/data2b.o(.rodata);
         src/battle_data.o(.rodata);
+        src/battle_bg.o(.rodata);
         data/data2c.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
@@ -399,7 +407,7 @@ SECTIONS {
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
         src/field_door.o(.rodata);
-        data/field_player_avatar.o(.rodata);
+        src/field_player_avatar.o(.rodata);
         src/event_object_movement.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
@@ -438,7 +446,7 @@ SECTIONS {
         data/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
         src/money.o(.rodata);
-        data/contest_effect.o(.rodata);
+        src/contest_effect.o(.rodata);
         src/record_mixing.o(.rodata);
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
@@ -446,9 +454,9 @@ SECTIONS {
         data/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         data/field_effect_misc.o(.rodata);
-        data/field_special_scene.o(.rodata);
+        src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
-        data/item_use.o(.rodata);
+        src/item_use.o(.rodata);
         data/battle_anim_80FE840.o(.rodata);
         src/bike.o(.rodata);
         data/easy_chat.o(.rodata);
@@ -460,16 +468,17 @@ SECTIONS {
         src/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/decoration.o(.rodata);
+        src/slot_machine.o(.rodata);
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         src/trader.o(.rodata);
-        data/starter_choose.o(.rodata);
+        src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
-        data/field_specials.o(.rodata);
+        src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
@@ -482,10 +491,10 @@ SECTIONS {
         data/cable_car.o(.rodata);
         src/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);
-        data/contest_ai.o(.rodata);
+        src/contest_ai.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         data/battle_anim_815A0D4.o(.rodata);
-        data/learn_move.o(.rodata);
+        src/learn_move.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
@@ -503,7 +512,7 @@ SECTIONS {
         src/berry_tag_screen.o(.rodata);
         src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
-        data/braille_puzzles.o(.rodata);
+        src/braille_puzzles.o(.rodata);
         src/pokeblock_feed.o(.rodata);
         src/clear_save_data_screen.o(.rodata);
         src/intro_credits_graphics.o(.rodata);
@@ -513,10 +522,12 @@ SECTIONS {
         src/pokemon_animation.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);
-        src/battle_dome_cards.o(.rodata);
+        src/trainer_pokemon_sprites.o(.rodata);
         src/lilycove_lady.o(.rodata);
+        src/battle_dome.o(.rodata);
         data/battle_frontier_1.o(.rodata);
         src/menu.o(.rodata);
+        src/battle_factory.o(.rodata);
         data/battle_frontier_2.o(.rodata);
         src/item_menu.o(.rodata);
         src/list_menu.o(.rodata);
@@ -530,7 +541,9 @@ SECTIONS {
         src/fossil_specials.o(.rodata);
         src/fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
-        data/pokemon_summary_screen.o(.rodata);
+        src/pokemon_summary_screen.o(.rodata);
+        src/unk_pokedex_area_screen_helper.o(.rodata);
+        src/battle_pyramid_bag.o(.rodata);
         data/pokenav.o(.rodata);
         src/match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);
@@ -900,7 +913,7 @@ SECTIONS {
         sound/songs/mus_hightown.o(.rodata);
         sound/songs/mus_safari.o(.rodata);
         sound/songs/mus_c_road.o(.rodata);
-        sound/songs/mus_ajito.o(.rodata);
+        sound/songs/midi/mus_ajito.o(.rodata);
         sound/songs/mus_m_boat.o(.rodata);
         sound/songs/mus_m_dungon.o(.rodata);
         sound/songs/mus_finecity.o(.rodata);
@@ -1117,7 +1130,7 @@ SECTIONS {
     anim_mon_front_pic_data :
     ALIGN(4)
     {
-        data/anim_mon_front_pics.o(anim_mon_front_pic_data);
+        src/anim_mon_front_pics.o(.rodata);
     } =0
 
     gap2 :
@@ -1130,7 +1143,7 @@ SECTIONS {
     gfx_data :
     ALIGN(4)
     {
-        data/graphics.o(gfx_data);
+        src/graphics.o(.rodata);
     } =0
 
     /* Discard everything not specifically mentioned above. */

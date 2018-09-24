@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_hanada_grp, voicegroup_86AD138
+	.equ	mus_rg_hanada_grp, voicegroup167
 	.equ	mus_rg_hanada_pri, 0
 	.equ	mus_rg_hanada_rev, reverb_set+50
 	.equ	mus_rg_hanada_mvl, 127

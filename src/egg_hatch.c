@@ -253,13 +253,27 @@ static const struct BgTemplate sBgTemplates_EggHatch[2] =
 
 static const struct WindowTemplate sWinTemplates_EggHatch[2] =
 {
-    {0, 2, 0xF, 0x1A, 4, 0, 0x40},
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 64
+    },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sYesNoWinTemplate =
 {
-    0, 0x15, 9, 5, 4, 0xF, 0x1A8
+    .priority = 0,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 424
 };
 
 static const s16 sEggShardVelocities[][2] =
@@ -437,7 +451,7 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
     case 1:
         SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, r5);
         spriteID = CreateSprite(&gMultiuseSpriteTemplate, 120, 75, 6);
-        gSprites[spriteID].invisible = 1;
+        gSprites[spriteID].invisible = TRUE;
         gSprites[spriteID].callback = SpriteCallbackDummy;
         break;
     }
@@ -512,7 +526,7 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 2:
-        copy_decompressed_tile_data_to_vram_autofree(0, gBattleTextboxTiles, 0, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
         CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
         LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
         gMain.state++;
@@ -659,7 +673,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 10:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar3);
@@ -794,7 +808,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
     if (!gPaletteFade.active)
     {
         PlaySE(SE_TAMAGO);
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = SpriteCB_Egg_5;
         sprite->data[0] = 0;
     }
@@ -804,7 +818,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
 {
     if (sprite->data[0] == 0)
     {
-        gSprites[sEggHatchData->pokeSpriteID].invisible = 0;
+        gSprites[sEggHatchData->pokeSpriteID].invisible = FALSE;
         StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
     }
     if (sprite->data[0] == 8)
@@ -856,7 +870,7 @@ static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
     sEggHatchData->textColor[0] = 0;
     sEggHatchData->textColor[1] = 5;
     sEggHatchData->textColor[2] = 6;
-    AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, sEggHatchData->textColor, speed, string);
+    AddTextPrinterParameterized4(windowId, 1, x, y, 0, 0, sEggHatchData->textColor, speed, string);
 }
 
 u8 GetEggStepsToSubtract(void)

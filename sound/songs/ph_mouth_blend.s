@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	ph_mouth_blend_grp, voicegroup_86A0754
+	.equ	ph_mouth_blend_grp, voicegroup130
 	.equ	ph_mouth_blend_pri, 4
 	.equ	ph_mouth_blend_rev, 0
 	.equ	ph_mouth_blend_mvl, 127

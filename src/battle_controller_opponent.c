@@ -40,7 +40,7 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
 extern void sub_81A57E4(u8 battlerId, u16 stringId);
 extern u8 GetFrontierBrainTrainerPicIndex(void);
-extern u8 sub_81D5588(u16 trainerId);
+extern u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId);
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 extern u8 GetEreaderTrainerFrontSpriteId(void);
 
@@ -435,7 +435,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
     if (gSprites[spriteId].data[1] == 32)
     {
         gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = FALSE;
         OpponentBufferExecCompleted();
     }
@@ -1236,18 +1236,18 @@ static void OpponentHandleDrawTrainerPic(void)
     {
         trainerPicId = GetFrontierBrainTrainerPicIndex();
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         {
             if (gActiveBattler == 1)
-                trainerPicId = sub_81D5588(gTrainerBattleOpponent_A);
+                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
             else
-                trainerPicId = sub_81D5588(gTrainerBattleOpponent_B);
+                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_B);
         }
         else
         {
-            trainerPicId = sub_81D5588(gTrainerBattleOpponent_A);
+            trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -1320,18 +1320,18 @@ static void OpponentHandleTrainerSlide(void)
     {
         trainerPicId = GetFrontierBrainTrainerPicIndex();
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         {
             if (gActiveBattler == 1)
-                trainerPicId = sub_81D5588(gTrainerBattleOpponent_A);
+                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
             else
-                trainerPicId = sub_81D5588(gTrainerBattleOpponent_B);
+                trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_B);
         }
         else
         {
-            trainerPicId = sub_81D5588(gTrainerBattleOpponent_A);
+            trainerPicId = GetTrainerHillTrainerFrontSpriteId(gTrainerBattleOpponent_A);
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -1552,10 +1552,10 @@ static void OpponentHandleChooseMove(void)
 
             switch (chosenMoveId)
             {
-            case 5:
+            case AI_CHOICE_WATCH:
                 BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
                 break;
-            case 4:
+            case AI_CHOICE_FLEE:
                 BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
                 break;
             case 6:
@@ -1606,22 +1606,22 @@ static void OpponentHandleChoosePokemon(void)
 {
     s32 chosenMonId;
 
-    if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == 6)
+    if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
     {
         chosenMonId = GetMostSuitableMonToSwitchInto();
 
-        if (chosenMonId == 6)
+        if (chosenMonId == PARTY_SIZE)
         {
-            s32 bank1, bank2, firstId, lastId;
+            s32 battler1, battler2, firstId, lastId;
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
             {
-                bank2 = bank1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+                battler2 = battler1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             }
             else
             {
-                bank1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-                bank2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                battler1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+                battler2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
             }
 
             if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))
@@ -1639,8 +1639,8 @@ static void OpponentHandleChoosePokemon(void)
             for (chosenMonId = firstId; chosenMonId < lastId; chosenMonId++)
             {
                 if (GetMonData(&gEnemyParty[chosenMonId], MON_DATA_HP) != 0
-                    && chosenMonId != gBattlerPartyIndexes[bank1]
-                    && chosenMonId != gBattlerPartyIndexes[bank2])
+                    && chosenMonId != gBattlerPartyIndexes[battler1]
+                    && chosenMonId != gBattlerPartyIndexes[battler2])
                 {
                     break;
                 }
@@ -1650,7 +1650,7 @@ static void OpponentHandleChoosePokemon(void)
     else
     {
         chosenMonId = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler);
-        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = 6;
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
     }
 
 
@@ -1998,7 +1998,7 @@ static void OpponentHandleResetActionMoveSelection(void)
 
 static void OpponentHandleCmd55(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK && !(gBattleTypeFlags & BATTLE_TYPE_WILD))
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
     {
         gMain.inBattle = 0;
         gMain.callback1 = gPreBattleCallback1;

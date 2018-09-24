@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_sekaikan_grp, voicegroup_86B1824
+	.equ	mus_rg_sekaikan_grp, voicegroup182
 	.equ	mus_rg_sekaikan_pri, 0
 	.equ	mus_rg_sekaikan_rev, reverb_set+50
 	.equ	mus_rg_sekaikan_mvl, 127

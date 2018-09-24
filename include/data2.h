@@ -1,6 +1,8 @@
 #ifndef GUARD_DATA2_H
 #define GUARD_DATA2_H
 
+#define MOVE_NAME_LENGTH 12
+
 struct MonCoords
 {
     // This would use a bitfield, but some function
@@ -9,14 +11,14 @@ struct MonCoords
     u8 y_offset;
 };
 
-extern struct MonCoords gTrainerBackPicCoords[];
-extern struct MonCoords gTrainerFrontPicCoords[];
+extern const struct MonCoords gTrainerBackPicCoords[];
+extern const struct MonCoords gTrainerFrontPicCoords[];
 
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
-extern const u8 gMoveNames[][13];
+extern const u8 gMoveNames[][MOVE_NAME_LENGTH + 1];
 extern struct CompressedSpriteSheet gUnknown_0831C620;
 extern struct CompressedSpritePalette gUnknown_0831C628;
 extern const struct SpriteTemplate gUnknown_0831C688;
-
+extern const struct CompressedSpriteSheet gMonBackPicTable[];
 
 #endif // GUARD_DATA2_H

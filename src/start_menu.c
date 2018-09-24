@@ -33,6 +33,7 @@
 #include "international_string_util.h"
 #include "constants/songs.h"
 #include "field_player_avatar.h"
+#include "battle_pyramid_bag.h"
 
 // Menu actions
 enum
@@ -73,12 +74,11 @@ EWRAM_DATA static u8 sSaveDialogTimer = 0;
 EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
 
-// Extern variables
+// Extern variables.
 extern u8 gDifferentSaveFile;
-extern u16 gSaveFileStatus;
 extern u8 gUnknown_03005DB4;
 
-// Extern functions in uncompiled files
+// Extern functions in not decompiled files.
 extern void sub_80AF688(void);
 extern void var_800D_set_xB(void);
 extern void sub_808B864(void);
@@ -89,7 +89,6 @@ extern void CB2_PokeNav(void);
 extern void sub_80C4DDC(void (*)(void));
 extern void sub_80C51C4(void (*)(void));
 extern void sub_80C4E74(u8, void (*)(void));
-extern void sub_81C4EFC(void);
 extern void ScriptUnfreezeEventObjects(void);
 extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
@@ -378,7 +377,7 @@ static void ShowSafariBallsWindow(void)
     NewMenuHelpers_DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
-    PrintTextOnWindow(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sSafariBallsWindowId, 2);
 }
 
@@ -393,7 +392,7 @@ static void ShowPyramidFloorWindow(void)
     NewMenuHelpers_DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
     StringCopy(gStringVar1, sPyramindFloorNames[gSaveBlock2Ptr->frontier.field_CB2]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
-    PrintTextOnWindow(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sBattlePyramidFloorWindowId, 2);
 }
 
@@ -423,7 +422,7 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
         }
         else {
             StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
-            PrintTextOnWindow(GetStartMenuWindowId(), 1, gStringVar4, 8, (index << 4) + 9, 0xFF, NULL);
+            AddTextPrinterParameterized(GetStartMenuWindowId(), 1, gStringVar4, 8, (index << 4) + 9, 0xFF, NULL);
         }
 
         index++;
@@ -781,7 +780,7 @@ static bool8 StartMenuBattlePyramidBagCallback(void)
         play_some_sound();
         RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
-        SetMainCallback2(sub_81C4EFC);  // Display battle pyramid bag
+        SetMainCallback2(CB2_PyramidBagMenuFromStartMenu);
 
         return TRUE;
     }
@@ -867,7 +866,7 @@ static void InitSave(void)
 static u8 RunSaveCallback(void)
 {
     // True if text is still printing
-    if (sub_8197224() == TRUE)
+    if (RunTextPrintersAndIsPrinter0Active() == TRUE)
     {
         return SAVE_IN_PROGRESS;
     }
@@ -985,7 +984,7 @@ static u8 SaveYesNoCallback(void)
 
 static u8 SaveConfirmInputCallback(void)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0: // Yes
         switch (gSaveFileStatus)
@@ -1045,7 +1044,7 @@ static u8 SaveConfirmOverwriteCallback(void)
 
 static u8 SaveOverwriteInputCallback(void)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0: // Yes
         sSaveDialogCallback = SaveSavingMessageCallback;
@@ -1169,7 +1168,7 @@ static u8 BattlePyramidRetireYesNoCallback(void)
 
 static u8 BattlePyramidRetireInputCallback(void)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0: // Yes
         return SAVE_CANCELED;
@@ -1250,7 +1249,7 @@ static void sub_80A0550(u8 taskId)
         {
         case 0:
             FillWindowPixelBuffer(0, 17);
-            AddTextPrinterParameterized(0,
+            AddTextPrinterParameterized2(0,
                                         1,
                                         gText_SavingDontTurnOffPower,
                                         255,
@@ -1343,38 +1342,38 @@ static void ShowSaveInfoWindow(void)
     // Print region name
     yOffset = 1;
     sub_819A344(3, gStringVar4, TEXT_COLOR_GREEN);
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gStringVar4, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, 0, yOffset, 0xFF, NULL);
 
     // Print player name
     yOffset = 0x11;
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
     sub_819A344(0, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
     PrintPlayerNameOnWindow(sSaveInfoWindowId, gStringVar4, xOffset, yOffset);
 
     // Print badge count
     yOffset = 0x21;
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
     sub_819A344(4, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         // Print pokedex count
         yOffset = 0x31;
-        PrintTextOnWindow(sSaveInfoWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
+        AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
         sub_819A344(1, gStringVar4, color);
         xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-        PrintTextOnWindow(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+        AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
     }
 
     // Print play time
     yOffset += 0x10;
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
     sub_819A344(2, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
-    PrintTextOnWindow(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
     CopyWindowToVram(sSaveInfoWindowId, 2);
 }

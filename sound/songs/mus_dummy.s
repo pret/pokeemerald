@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_dummy_grp, voicegroup_pokemon_cry
+	.equ	mus_dummy_grp, voicegroup000
 	.equ	mus_dummy_pri, 0
 	.equ	mus_dummy_rev, reverb_set+40
 	.equ	mus_dummy_mvl, 127

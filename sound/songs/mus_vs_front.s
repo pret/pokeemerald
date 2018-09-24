@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_vs_front_grp, voicegroup_8699854
+	.equ	mus_vs_front_grp, voicegroup115
 	.equ	mus_vs_front_pri, 1
 	.equ	mus_vs_front_rev, reverb_set+50
 	.equ	mus_vs_front_mvl, 127

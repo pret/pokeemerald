@@ -6,3 +6,5 @@ make -C tools/bin2c CXX=${1:-g++}
 make -C tools/rsfont CXX=${1:-g++}
 make -C tools/aif2pcm CXX=${1:-g++}
 make -C tools/ramscrgen CXX=${1:-g++}
+make -C tools/gbafix CXX=${1:-g++}
+make -C tools/mid2agb CXX=${1:-g++}

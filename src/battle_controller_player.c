@@ -28,19 +28,18 @@
 #include "pokeball.h"
 #include "data2.h"
 #include "battle_setup.h"
-#include "item_use.h"
+#include "item_menu.h"
 #include "recorded_battle.h"
 #include "party_menu.h"
+#include "battle_dome.h"
 
 extern u8 gUnknown_0203CEE8;
 extern u8 gUnknown_0203CEE9;
 extern u8 gUnknown_0203CF00[];
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern s32 gUnknown_0203CD70;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern struct SpriteTemplate gMultiuseSpriteTemplate;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
@@ -52,7 +51,6 @@ extern void sub_81851A8(u8 *);
 
 // this file's functions
 static void PlayerHandleGetMonData(void);
-void PlayerHandleGetRawMonData(void);
 static void PlayerHandleSetMonData(void);
 static void PlayerHandleSetRawMonData(void);
 static void PlayerHandleLoadMonSprite(void);
@@ -1400,7 +1398,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
     if (gSprites[spriteId].data[1] == 32)
     {
         gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = FALSE;
         PlayerBufferExecCompleted();
     }

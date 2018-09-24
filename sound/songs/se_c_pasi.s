@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_c_pasi_grp, voicegroup_869D6F4
+	.equ	se_c_pasi_grp, voicegroup128
 	.equ	se_c_pasi_pri, 5
 	.equ	se_c_pasi_rev, reverb_set+50
 	.equ	se_c_pasi_mvl, 127

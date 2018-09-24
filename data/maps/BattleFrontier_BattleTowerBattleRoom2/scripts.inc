@@ -5,9 +5,9 @@ BattleFrontier_BattleTowerBattleRoom2_MapScripts:: @ 8248EE8
 	.byte 0
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript1_248EF8: @ 8248EF8
-	compare VAR_0x40CE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, 2
 	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F
 	end
 
@@ -70,7 +70,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249528
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_24952E
 	waitmovement 0
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249026
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
@@ -142,7 +142,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2490AA:: @ 82490AA
 	applymovement 5, BattleFrontier_BattleTowerBattleRoom2_Movement_249524
 	applymovement 6, BattleFrontier_BattleTowerBattleRoom2_Movement_249524
 	waitmovement 0
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249118
 	msgbox BattleFrontier_BattleTowerBattleRoom2_Text_242217, 4
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249121
@@ -157,7 +157,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249121:: @ 8249121
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249514
 	playfanfare MUS_ME_ASA
 	waitfanfare
@@ -168,7 +168,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249143:: @ 8249143
 	setvar VAR_0x8005, 2
 	special sub_81A1780
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_2492FD
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249283
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8E0
 	compare VAR_RESULT, 1
@@ -256,7 +256,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB:: @ 82492DB
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2492FD:: @ 82492FD
-	compare VAR_0x40CE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_24937E
 	copyvar VAR_TEMP_F, VAR_RESULT
 	switch VAR_TEMP_F

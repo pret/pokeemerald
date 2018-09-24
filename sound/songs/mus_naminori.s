@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_naminori_grp, voicegroup_8678F80
+	.equ	mus_naminori_grp, voicegroup017
 	.equ	mus_naminori_pri, 0
 	.equ	mus_naminori_rev, reverb_set+50
 	.equ	mus_naminori_mvl, 127

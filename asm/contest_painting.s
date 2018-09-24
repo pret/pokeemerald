@@ -438,7 +438,7 @@ _081301A6:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _081301D4:

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_kuchiba_grp, voicegroup_86AEB6C
+	.equ	mus_rg_kuchiba_grp, voicegroup172
 	.equ	mus_rg_kuchiba_pri, 0
 	.equ	mus_rg_kuchiba_rev, reverb_set+50
 	.equ	mus_rg_kuchiba_mvl, 127

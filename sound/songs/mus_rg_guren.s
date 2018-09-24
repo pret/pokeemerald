@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_guren_grp, voicegroup_86A35D4
+	.equ	mus_rg_guren_grp, voicegroup138
 	.equ	mus_rg_guren_pri, 0
 	.equ	mus_rg_guren_rev, reverb_set+50
 	.equ	mus_rg_guren_mvl, 127

@@ -14,7 +14,7 @@ NewMauville_Inside_MapScript1_2373E7: @ 82373E7
 	end
 
 NewMauville_Inside_EventScript_237407:: @ 8237407
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, NewMauville_Inside_EventScript_27374E
 	removeobject VAR_LAST_TALKED
@@ -193,7 +193,7 @@ NewMauville_Inside_EventScript_2377AF:: @ 82377AF
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq NewMauville_Inside_EventScript_2377F3
 	compare VAR_RESULT, 4
@@ -220,7 +220,7 @@ NewMauville_Inside_EventScript_2377FC:: @ 82377FC
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq NewMauville_Inside_EventScript_237840
 	compare VAR_RESULT, 4
@@ -247,7 +247,7 @@ NewMauville_Inside_EventScript_237849:: @ 8237849
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq NewMauville_Inside_EventScript_23788D
 	compare VAR_RESULT, 4

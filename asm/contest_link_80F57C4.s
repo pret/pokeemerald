@@ -276,10 +276,10 @@ sub_80F5A74: @ 80F5A74
 	lsrs r0, 24
 	adds r5, r0, 0
 	lsls r1, r5, 6
-	ldr r0, =gUnknown_02039E00
+	ldr r0, =gContestMons
 	adds r7, r1, r0
 	ldr r6, =gDisplayedStringBattle
-	ldr r0, =gUnknown_02039F25
+	ldr r0, =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	cmp r5, r0
 	bne _080F5A96
@@ -398,7 +398,7 @@ sub_80F5B00: @ 80F5B00
 	movs r1, 0x14
 	bl CreateTask
 	bl sub_80F7880
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -503,7 +503,7 @@ sub_80F5CE4: @ 80F5CE4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r3, =gUnknown_02039F2A
+	ldr r3, =gIsLinkContest
 	ldrb r1, [r3]
 	movs r0, 0x1
 	ands r0, r1
@@ -535,8 +535,8 @@ _080F5D20:
 	b _080F5E2E
 _080F5D2A:
 	bl sub_80DBED4
-	ldr r1, =gUnknown_02039F20
-	ldr r0, =gUnknown_02039F25
+	ldr r1, =gContestFinalStandings
+	ldr r0, =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -648,7 +648,7 @@ _080F5E2E:
 	lsls r0, 3
 	adds r4, r0, r1
 	strh r2, [r4, 0x8]
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r5, 0x1
 	adds r0, r5, 0
@@ -663,8 +663,8 @@ _080F5E2E:
 _080F5E78:
 	movs r0, 0x24
 	bl IncrementGameStat
-	ldr r1, =gUnknown_02039F20
-	ldr r0, =gUnknown_02039F25
+	ldr r1, =gContestFinalStandings
+	ldr r0, =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1160,7 +1160,7 @@ _080F6298:
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r7
-	ldr r0, =gUnknown_02039F20
+	ldr r0, =gContestFinalStandings
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	strh r0, [r1, 0x8]
@@ -1201,7 +1201,7 @@ _080F62F2:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 	movs r4, 0
-	ldr r1, =gUnknown_02039F20
+	ldr r1, =gContestFinalStandings
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _080F631C
@@ -1236,10 +1236,10 @@ _080F6334:
 	movs r0, 0
 	strh r0, [r2, 0xA]
 	movs r4, 0
-	ldr r1, =gUnknown_02039F20
+	ldr r1, =gContestFinalStandings
 	ldrb r0, [r1]
 	ldr r7, =gStringVar1
-	ldr r2, =gUnknown_02039E00 + 13
+	ldr r2, =gContestMons + 13
 	mov r8, r2
 	cmp r0, 0
 	beq _080F636E
@@ -1355,12 +1355,12 @@ _080F6454:
 	adds r0, r3, 0
 	strh r0, [r1]
 	movs r2, 0
-	ldr r1, =gUnknown_02039F20
+	ldr r1, =gContestFinalStandings
 	ldrb r0, [r1]
 	lsls r4, r7, 2
 	mov r10, r4
-	ldr r3, =gUnknown_02039E00
-	ldr r4, =gUnknown_02039F25
+	ldr r3, =gContestMons
+	ldr r4, =gContestPlayerMonIndex
 	mov r9, r4
 	ldr r4, =gMonFrontPicTable
 	mov r12, r4
@@ -1623,14 +1623,14 @@ sub_80F66B4: @ 80F66B4
 	ands r0, r1
 	cmp r0, 0
 	beq _080F6702
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	adds r0, r2, 0
 	ands r0, r1
 	lsls r6, r7, 2
 	cmp r0, 0
 	bne _080F66F2
-	ldr r5, =gUnknown_02039E00
+	ldr r5, =gContestMons
 	movs r4, 0x3
 _080F66DA:
 	ldrh r0, [r5]
@@ -1664,7 +1664,7 @@ sub_80F671C: @ 80F671C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -1710,7 +1710,7 @@ sub_80F677C: @ 80F677C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F67AC
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1739,14 +1739,14 @@ task_repel: @ 80F67C4
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
 	bne _080F67E6
-	ldr r1, =gUnknown_02039F20
-	ldr r0, =gUnknown_02039F25
+	ldr r1, =gContestFinalStandings
+	ldr r0, =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1980,7 +1980,7 @@ sub_80F69B8: @ 80F69B8
 	lsrs r5, r2, 24
 	lsls r3, 24
 	lsrs r6, r3, 24
-	ldr r0, =gUnknown_02039F25
+	ldr r0, =gContestPlayerMonIndex
 	movs r2, 0
 	ldrb r0, [r0]
 	cmp r4, r0
@@ -2059,7 +2059,7 @@ sub_80F6A64: @ 80F6A64
 	lsls r1, 24
 	lsrs r6, r1, 24
 	movs r5, 0
-	ldr r4, =gUnknown_02039E00
+	ldr r4, =gContestMons
 _080F6A74:
 	ldrh r0, [r4]
 	lsls r1, r5, 24
@@ -2088,7 +2088,7 @@ sub_80F6A9C: @ 80F6A9C
 	movs r5, 0xA0
 	lsls r5, 16
 _080F6AA6:
-	ldr r1, =gUnknown_02039E00
+	ldr r1, =gContestMons
 	lsls r0, r4, 6
 	adds r0, r1
 	ldrh r0, [r0]
@@ -2119,7 +2119,7 @@ _080F6AA6:
 	thumb_func_start sub_80F6AE8
 sub_80F6AE8: @ 80F6AE8
 	push {r4,lr}
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -2237,7 +2237,7 @@ _080F6BD0:
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	movs r1, 0x7
 	bl GetWindowAttribute
@@ -2955,7 +2955,7 @@ sub_80F71C8: @ 80F71C8
 	sub sp, 0xC
 	movs r5, 0x5
 	movs r4, 0x1
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	ands r0, r1
@@ -3104,7 +3104,7 @@ sub_80F7310: @ 80F7310
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r1, =gUnknown_02039F00
+	ldr r1, =gContestMonConditions
 	lsrs r0, 23
 	adds r0, r1
 	movs r1, 0
@@ -3322,7 +3322,7 @@ sub_80F74BC: @ 80F74BC
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r1, =gUnknown_02039F20
+	ldr r1, =gContestFinalStandings
 	ldrb r0, [r1]
 	ldr r6, =gUnknown_0203A034
 	cmp r0, 0
@@ -3729,7 +3729,7 @@ sub_80F77E0: @ 80F77E0
 	adds r1, r2
 	strh r4, [r1, 0x8]
 	strh r5, [r1, 0xA]
-	ldr r0, =gUnknown_02039E00
+	ldr r0, =gContestMons
 	lsls r4, 6
 	adds r4, r0
 	ldrh r0, [r4]
@@ -3765,7 +3765,7 @@ sub_80F7824: @ 80F7824
 	strh r0, [r4, 0x1C]
 	ldrh r0, [r4, 0xC]
 	ldrb r2, [r4, 0x1E]
-	ldr r1, =gUnknown_02039E00
+	ldr r1, =gContestMons
 	lsls r3, r5, 6
 	adds r1, 0x38
 	adds r3, r1
@@ -3847,7 +3847,7 @@ _080F78E4:
 	mov r8, r5
 	mov r10, r5
 _080F78EA:
-	ldr r0, =gUnknown_02039F00
+	ldr r0, =gContestMonConditions
 	mov r1, r8
 	lsls r7, r1, 1
 	adds r0, r7, r0
@@ -3987,7 +3987,7 @@ _080F79CC:
 	negs r0, r0
 _080F7A02:
 	strb r0, [r1, 0x12]
-	ldr r0, =gUnknown_02039F20
+	ldr r0, =gContestFinalStandings
 	add r0, r8
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -4721,8 +4721,8 @@ _080F7FEE:
 sub_80F7FFC: @ 80F7FFC
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, =gUnknown_02039F20
-	ldr r0, =gUnknown_02039F25
+	ldr r1, =gContestFinalStandings
+	ldr r0, =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -4994,7 +4994,7 @@ sub_80F8264: @ 80F8264
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r1, [r0]
 	lsls r1, 6
-	ldr r0, =gUnknown_02039E00 + 13
+	ldr r0, =gContestMons + 13
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -5013,7 +5013,7 @@ sub_80F8290: @ 80F8290
 	ldr r1, =gSpecialVar_0x8006
 	ldrh r1, [r1]
 	lsls r1, 6
-	ldr r2, =gUnknown_02039E00 + 2
+	ldr r2, =gContestMons + 2
 	adds r1, r2
 	bl StringCopy
 	pop {r0}
@@ -5027,7 +5027,7 @@ sub_80F82B4: @ 80F82B4
 	movs r1, 0
 	movs r2, 0
 	ldr r5, =gSpecialVar_0x8004
-	ldr r4, =gUnknown_02039F00
+	ldr r4, =gContestMonConditions
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
@@ -5060,7 +5060,7 @@ _080F82DC:
 	thumb_func_start sub_80F82FC
 sub_80F82FC: @ 80F82FC
 	ldr r2, =gSpecialVar_0x8004
-	ldr r1, =gUnknown_02039F00
+	ldr r1, =gContestMonConditions
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
@@ -5075,7 +5075,7 @@ sub_80F82FC: @ 80F82FC
 sub_80F831C: @ 80F831C
 	push {lr}
 	movs r1, 0
-	ldr r2, =gUnknown_02039F20
+	ldr r2, =gContestFinalStandings
 	ldrb r0, [r2]
 	ldr r3, =gSpecialVar_0x8005
 	cmp r0, 0
@@ -5101,10 +5101,10 @@ _080F833C:
 sub_80F834C: @ 80F834C
 	push {r4,lr}
 	movs r1, 0
-	ldr r2, =gUnknown_02039F20
+	ldr r2, =gContestFinalStandings
 	ldrb r0, [r2]
 	ldr r4, =gStringVar3
-	ldr r3, =gUnknown_02039E00 + 13
+	ldr r3, =gContestMons + 13
 	cmp r0, 0
 	beq _080F836E
 _080F835C:
@@ -5134,10 +5134,10 @@ _080F836E:
 sub_80F8390: @ 80F8390
 	push {r4,lr}
 	movs r1, 0
-	ldr r2, =gUnknown_02039F20
+	ldr r2, =gContestFinalStandings
 	ldrb r0, [r2]
 	ldr r4, =gStringVar1
-	ldr r3, =gUnknown_02039E00 + 2
+	ldr r3, =gContestMons + 2
 	cmp r0, 0
 	beq _080F83B2
 _080F83A0:
@@ -5216,7 +5216,7 @@ sub_80F840C: @ 80F840C
 	thumb_func_start sub_80F8438
 sub_80F8438: @ 80F8438
 	ldr r2, =gSpecialVar_0x8004
-	ldr r1, =gUnknown_02039E00
+	ldr r1, =gContestMons
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 6
@@ -5272,7 +5272,7 @@ sub_80F8484: @ 80F8484
 	thumb_func_start sub_80F84B0
 sub_80F84B0: @ 80F84B0
 	ldr r0, =gSpecialVar_0x8004
-	ldr r1, =gUnknown_02039F25
+	ldr r1, =gContestPlayerMonIndex
 	ldrb r1, [r1]
 	strh r1, [r0]
 	bx lr
@@ -5314,7 +5314,7 @@ sub_80F8508: @ 80F8508
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02039F2A
+	ldr r0, =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x4
 	ands r0, r1
@@ -5578,7 +5578,7 @@ sub_80F8714: @ 80F8714
 	b _080F877E
 	.pool
 _080F8748:
-	ldr r5, =gUnknown_02039E00 + 2
+	ldr r5, =gContestMons + 2
 	movs r4, 0x3
 _080F874C:
 	adds r0, r5, 0

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_t_ooame_grp, voicegroup_869D6F4
+	.equ	se_t_ooame_grp, voicegroup128
 	.equ	se_t_ooame_pri, 2
 	.equ	se_t_ooame_rev, reverb_set+50
 	.equ	se_t_ooame_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_nana67_grp, voicegroup_86B3E4C
+	.equ	mus_rg_nana67_grp, voicegroup189
 	.equ	mus_rg_nana67_pri, 0
 	.equ	mus_rg_nana67_rev, reverb_set+50
 	.equ	mus_rg_nana67_mvl, 127

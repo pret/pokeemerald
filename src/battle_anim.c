@@ -558,7 +558,7 @@ static void sub_80A40F4(u8 taskId)
 
     s16 *selfData = gTasks[taskId].data;
     u8 battlerSpriteId = gBattlerSpriteIds[selfData[t1_MONBG_BATTLER]];
-    gSprites[battlerSpriteId].invisible = 1;
+    gSprites[battlerSpriteId].invisible = TRUE;
 
     if (!selfData[t1_CREATE_ANOTHER_TASK])
     {
@@ -699,7 +699,7 @@ void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
         gBattle_BG1_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
         if (setSpriteInvisible)
-            gSprites[gBattlerSpriteIds[battlerId]].invisible = 1;
+            gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
 
         SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
         SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
@@ -734,7 +734,7 @@ void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         gBattle_BG2_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
 
         if (setSpriteInvisible)
-            gSprites[gBattlerSpriteIds[battlerId]].invisible = 1;
+            gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
 
         SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
@@ -866,9 +866,9 @@ static void ScriptCmd_clearmonbg(void)
         battlerId = gBattleAnimTarget;
 
     if (sMonAnimTaskIdArray[0] != 0xFF)
-        gSprites[gBattlerSpriteIds[battlerId]].invisible = 0;
+        gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     if (animBattlerId > 1 && sMonAnimTaskIdArray[1] != 0xFF)
-        gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = 0;
+        gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = FALSE;
     else
         animBattlerId = 0;
 
@@ -973,9 +973,9 @@ static void ScriptCmd_clearmonbg_23(void)
         battlerId = gBattleAnimTarget;
 
     if (IsBattlerSpriteVisible(battlerId))
-        gSprites[gBattlerSpriteIds[battlerId]].invisible = 0;
+        gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     if (animBattlerId > 1 && IsBattlerSpriteVisible(battlerId ^ BIT_FLANK))
-        gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = 0;
+        gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = FALSE;
     else
         animBattlerId = 0;
 
@@ -1745,7 +1745,7 @@ static void ScriptCmd_invisible(void)
 
     spriteId = GetAnimBattlerSpriteId(sBattleAnimScriptPtr[1]);
     if (spriteId != 0xFF)
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
 
     sBattleAnimScriptPtr += 2;
 }
@@ -1756,7 +1756,7 @@ static void ScriptCmd_visible(void)
 
     spriteId = GetAnimBattlerSpriteId(sBattleAnimScriptPtr[1]);
     if (spriteId != 0xFF)
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
 
     sBattleAnimScriptPtr += 2;
 }

@@ -34,7 +34,7 @@ SlateportCity_House1_EventScript_209AF3:: @ 8209AF3
 	special TV_CheckMonOTIDEqualsPlayerID
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B50
-	specialvar VAR_RESULT, sub_8139770
+	specialvar VAR_RESULT, MonOTNameMatchesPlayer
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B50

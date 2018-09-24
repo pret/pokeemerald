@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_nanashima_grp, voicegroup_86B324C
+	.equ	mus_rg_nanashima_grp, voicegroup187
 	.equ	mus_rg_nanashima_pri, 0
 	.equ	mus_rg_nanashima_rev, reverb_set+50
 	.equ	mus_rg_nanashima_mvl, 127

@@ -79,18 +79,18 @@ void CB2_InitClearSaveDataScreen(void)
 static void Task_DoClearSaveDataScreenYesNo(u8 taskId)
 {
     SetWindowBorderStyle(0, 0, 2, 14);
-    PrintTextOnWindow(0, 1, gText_ClearAllSaveData, 0, 1, 0, 0);
+    AddTextPrinterParameterized(0, 1, gText_ClearAllSaveData, 0, 1, 0, 0);
     CreateYesNoMenu(sClearSaveYesNo, 2, 14, 1);
     gTasks[taskId].func = Task_ClearSaveDataScreenYesNoChoice;
 }
 
 static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
 {
-    switch(ProcessMenuInputNoWrap_())
+    switch(Menu_ProcessInputNoWrap_())
     {
         case 0:
             FillWindowPixelBuffer(0, 17);
-            PrintTextOnWindow(0, 1, gText_ClearingData, 0, 1, 0, 0);
+            AddTextPrinterParameterized(0, 1, gText_ClearingData, 0, 1, 0, 0);
             gTasks[taskId].func = Task_ClearSaveData;
             break;
         case 1:

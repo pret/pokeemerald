@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_m_dungon_grp, voicegroup_868CA74
+	.equ	mus_m_dungon_grp, voicegroup078
 	.equ	mus_m_dungon_pri, 0
 	.equ	mus_m_dungon_rev, reverb_set+50
 	.equ	mus_m_dungon_mvl, 127

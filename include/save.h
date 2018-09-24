@@ -1,8 +1,6 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
-extern u16 gSaveFileStatus;
-
 struct SaveSectionLocation
 {
     void *data;
@@ -32,7 +30,7 @@ struct SaveSectionOffsets
 };
 
 // Emerald changes this definition to be the sectors per slot.
-#define NUM_SECTORS_PER_SLOT 16 // move to save.h
+#define NUM_SECTORS_PER_SLOT 16
 
 #define UNKNOWN_CHECK_VALUE 0x8012025
 
@@ -57,6 +55,20 @@ enum
 };
 
 #define SECTION_ID_RECORDED_BATTLE  31
+
+extern u16 gLastWrittenSector;
+extern u32 gLastSaveCounter;
+extern u16 gLastKnownGoodSector;
+extern u32 gDamagedSaveSectors;
+extern u32 gSaveCounter;
+extern struct SaveSection *gFastSaveSection;
+extern u16 gUnknown_03006208;
+extern u16 gSaveFileStatus;
+extern void (*gGameContinueCallback)(void);
+extern struct SaveSectionLocation gRamSaveSectionLocations[];
+extern u16 gUnknown_03006294;
+
+extern struct SaveSection gSaveDataBuffer;
 
 void ClearSaveData(void);
 void Save_ResetSaveCounters(void);

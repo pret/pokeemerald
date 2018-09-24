@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_okurimono_grp, voicegroup_86B1C44
+	.equ	mus_rg_okurimono_grp, voicegroup183
 	.equ	mus_rg_okurimono_pri, 0
 	.equ	mus_rg_okurimono_rev, reverb_set+50
 	.equ	mus_rg_okurimono_mvl, 127

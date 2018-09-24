@@ -137,7 +137,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 arg2, u8 arg3, u8
         StringExpandPlaceholders(gStringVar4, string);
 
     gTextFlags.flag_0 = 1;
-    AddTextPrinterParameterized(windowId, fontId, gStringVar4, textSpeed, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, 2, 1, 3);
     gUnknown_0300117C = taskFunc;
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
@@ -169,7 +169,7 @@ void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *templa
 
 static void Task_CallYesOrNoCallback(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:
         PlaySE(SE_SELECT);
@@ -410,7 +410,7 @@ void sub_8122344(u8 *spriteIds, u8 count)
         if (i != 0)
             StartSpriteAnim(&gSprites[spriteIds[i]], 1);
 
-        gSprites[spriteIds[i]].invisible = 1;
+        gSprites[spriteIds[i]].invisible = TRUE;
     }
 }
 

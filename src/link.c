@@ -1679,14 +1679,14 @@ void CB2_LinkError(void)
 static void sub_800B080(void)
 {
     LoadBgTiles(0, g2BlankTilesGfx, 0x20, 0);
-    copy_decompressed_tile_data_to_vram_autofree(1, gWirelessLinkDisplayGfx, FALSE, 0, 0);
+    DecompressAndLoadBgGfxUsingHeap(1, gWirelessLinkDisplayGfx, FALSE, 0, 0);
     CopyToBgTilemapBuffer(1, gWirelessLinkDisplayTilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
     LoadPalette(gWirelessLinkDisplayPal, 0, 0x20);
     FillWindowPixelBuffer(0, 0x00);
     FillWindowPixelBuffer(2, 0x00);
-    box_print(0, 3, 2, 6, gUnknown_082ED224, 0, gText_CommErrorEllipsis);
-    box_print(2, 3, 2, 1, gUnknown_082ED224, 0, gText_MoveCloserToLinkPartner);
+    AddTextPrinterParameterized3(0, 3, 2, 6, gUnknown_082ED224, 0, gText_CommErrorEllipsis);
+    AddTextPrinterParameterized3(2, 3, 2, 1, gUnknown_082ED224, 0, gText_MoveCloserToLinkPartner);
     PutWindowTilemap(0);
     PutWindowTilemap(2);
     CopyWindowToVram(0, 0);
@@ -1698,7 +1698,7 @@ static void sub_800B138(void)
     LoadBgTiles(0, g2BlankTilesGfx, 0x20, 0);
     FillWindowPixelBuffer(1, 0x00);
     FillWindowPixelBuffer(2, 0x00);
-    box_print(1, 3, 2, 0, gUnknown_082ED224, 0, gText_CommErrorCheckConnections);
+    AddTextPrinterParameterized3(1, 3, 2, 0, gUnknown_082ED224, 0, gText_CommErrorCheckConnections);
     PutWindowTilemap(1);
     PutWindowTilemap(2);
     CopyWindowToVram(1, 0);
@@ -1738,11 +1738,11 @@ static void CB2_PrintErrorMessage(void)
         case 130:
             if (gWirelessCommType == 2)
             {
-                box_print(0, 3, 2, 20, gUnknown_082ED224, 0, gText_ABtnTitleScreen);
+                AddTextPrinterParameterized3(0, 3, 2, 20, gUnknown_082ED224, 0, gText_ABtnTitleScreen);
             }
             else if (gWirelessCommType == 1)
             {
-                box_print(0, 3, 2, 20, gUnknown_082ED224, 0, gText_ABtnRegistrationCounter);
+                AddTextPrinterParameterized3(0, 3, 2, 20, gUnknown_082ED224, 0, gText_ABtnRegistrationCounter);
             }
             break;
     }

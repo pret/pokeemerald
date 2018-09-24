@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_daigo_grp, voicegroup_869467C
+	.equ	mus_daigo_grp, voicegroup100
 	.equ	mus_daigo_pri, 0
 	.equ	mus_daigo_rev, reverb_set+50
 	.equ	mus_daigo_mvl, 127

@@ -150,7 +150,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201893:: @ 8201893
 
 VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	setvar VAR_FRONTIER_FACILITY, 2
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	setvar VAR_RESULT, 2
 	setvar VAR_0x8004, 15
 	special sub_81A1780

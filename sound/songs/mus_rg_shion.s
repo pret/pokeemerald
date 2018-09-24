@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_shion_grp, voicegroup_86A3BD4
+	.equ	mus_rg_shion_grp, voicegroup139
 	.equ	mus_rg_shion_pri, 0
 	.equ	mus_rg_shion_rev, reverb_set+50
 	.equ	mus_rg_shion_mvl, 127

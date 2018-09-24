@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_kakkoii_grp, voicegroup_8687074
+	.equ	mus_kakkoii_grp, voicegroup063
 	.equ	mus_kakkoii_pri, 0
 	.equ	mus_kakkoii_rev, reverb_set+50
 	.equ	mus_kakkoii_mvl, 127

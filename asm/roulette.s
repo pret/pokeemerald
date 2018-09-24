@@ -519,7 +519,7 @@ _081406E0:
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -751,7 +751,7 @@ sub_8140914: @ 8140914
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r5]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2655,7 +2655,7 @@ _08141902:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2678,7 +2678,7 @@ _08141928:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2816,7 +2816,7 @@ sub_8141A18: @ 8141A18
 	movs r1, 0x1
 	mov r2, r8
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r5]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3012,7 +3012,7 @@ _08141BB0:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3039,7 +3039,7 @@ _08141C58:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3071,7 +3071,7 @@ _08141CBC:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3158,7 +3158,7 @@ _08141D44:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4676,7 +4676,7 @@ sub_81429F0: @ 81429F0
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4753,7 +4753,7 @@ sub_8142A88: @ 8142A88
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4778,7 +4778,7 @@ _08142B28:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4808,7 +4808,7 @@ _08142B78:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4948,7 +4948,7 @@ sub_8142CD0: @ 8142CD0
 	sub sp, 0x8
 	ldr r4, =gUnknown_085B7488
 	ldr r0, [r4]
-	ldr r5, =0x0201c000
+	ldr r5, =gDecompressionBuffer
 	adds r1, r5, 0
 	bl LZ77UnCompWram
 	str r5, [sp]
@@ -5575,7 +5575,7 @@ sub_81431E4: @ 81431E4
 	sub sp, 0xC
 	ldr r4, =gUnknown_085B741C
 	ldr r0, [r4]
-	ldr r5, =0x0201c000
+	ldr r5, =gDecompressionBuffer
 	adds r1, r5, 0
 	bl LZ77UnCompWram
 	str r5, [sp, 0x4]
@@ -5720,7 +5720,7 @@ sub_8143314: @ 8143314
 	push {r7}
 	sub sp, 0x8
 	movs r5, 0
-	ldr r7, =0x0201c000
+	ldr r7, =gDecompressionBuffer
 	mov r6, sp
 _08143322:
 	ldr r0, =gUnknown_085B7750
@@ -6448,7 +6448,7 @@ sub_814391C: @ 814391C
 	sub sp, 0x8
 	ldr r4, =gUnknown_085B7948
 	ldr r0, [r4]
-	ldr r5, =0x0201c000
+	ldr r5, =gDecompressionBuffer
 	adds r1, r5, 0
 	bl LZ77UnCompWram
 	str r5, [sp]

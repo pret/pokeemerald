@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_boyeye_grp, voicegroup_867BDA0
+	.equ	mus_boyeye_grp, voicegroup028
 	.equ	mus_boyeye_pri, 0
 	.equ	mus_boyeye_rev, reverb_set+50
 	.equ	mus_boyeye_mvl, 127

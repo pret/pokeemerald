@@ -431,9 +431,9 @@ static bool32 SharesPalWithAnyActive(u32 id)
     return FALSE;
 }
 
-u8 sub_80355F8(u32 arg0, u32 arg1)
+u8 sub_80355F8(u32 shape, u32 size)
 {
-    return gUnknown_082FF1C8[arg0][arg1];
+    return gUnknown_082FF1C8[shape][size];
 }
 
 static void sub_8035608(void)
@@ -442,7 +442,7 @@ static void sub_8035608(void)
 
     ResetSpriteData();
     spriteId = CreateSprite(&gUnknown_0831AC88, 0, 0, 0);
-    gSprites[spriteId].invisible = 1;
+    gSprites[spriteId].invisible = TRUE;
     SetMainCallback2(sub_8035648);
 }
 

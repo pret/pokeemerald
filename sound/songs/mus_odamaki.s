@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_odamaki_grp, voicegroup_867D144
+	.equ	mus_odamaki_grp, voicegroup033
 	.equ	mus_odamaki_pri, 0
 	.equ	mus_odamaki_rev, reverb_set+50
 	.equ	mus_odamaki_mvl, 127

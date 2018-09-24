@@ -47,11 +47,11 @@ extern const u32 gUnknown_08C093F0[];
 extern const u32 gSubstituteDollTilemap[];
 extern const u32 gSubstituteDollGfx[];
 extern const u16 gSubstituteDollPal[];
-extern const u8 gUnknown_08C1F1C8[];
-extern const u8 gUnknown_08C1F46C[];
-extern const u8 gUnknown_08C1F5E8[];
-extern const u8 gUnknown_08C1F76C[];
-extern const u8 gUnknown_08C1F8E8[];
+extern const u8 gHealthboxSinglesPlayerGfx[];
+extern const u8 gHealthboxSinglesOpponentGfx[];
+extern const u8 gHealthboxDoublesPlayerGfx[];
+extern const u8 gHealthboxDoublesOpponentGfx[];
+extern const u8 gHealthboxSafariGfx[];
 extern const u8 gBlankGfxCompressed[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
@@ -72,29 +72,29 @@ static void ClearSpritesBattlerHealthboxAnimData(void);
 // const rom data
 static const struct CompressedSpriteSheet sSpriteSheet_SinglesPlayerHealthbox =
 {
-    gUnknown_08C1F1C8, 0x1000, TAG_HEALTHBOX_PLAYER1_TILE
+    gHealthboxSinglesPlayerGfx, 0x1000, TAG_HEALTHBOX_PLAYER1_TILE
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_SinglesOpponentHealthbox =
 {
-    gUnknown_08C1F46C, 0x1000, TAG_HEALTHBOX_OPPONENT1_TILE
+    gHealthboxSinglesOpponentGfx, 0x1000, TAG_HEALTHBOX_OPPONENT1_TILE
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets_DoublesPlayerHealthbox[2] =
 {
-    {gUnknown_08C1F5E8, 0x800, TAG_HEALTHBOX_PLAYER1_TILE},
-    {gUnknown_08C1F5E8, 0x800, TAG_HEALTHBOX_PLAYER2_TILE}
+    {gHealthboxDoublesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER1_TILE},
+    {gHealthboxDoublesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER2_TILE}
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets_DoublesOpponentHealthbox[2] =
 {
-    {gUnknown_08C1F76C, 0x800, TAG_HEALTHBOX_OPPONENT1_TILE},
-    {gUnknown_08C1F76C, 0x800, TAG_HEALTHBOX_OPPONENT2_TILE}
+    {gHealthboxDoublesOpponentGfx, 0x800, TAG_HEALTHBOX_OPPONENT1_TILE},
+    {gHealthboxDoublesOpponentGfx, 0x800, TAG_HEALTHBOX_OPPONENT2_TILE}
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_SafariHealthbox =
 {
-    gUnknown_08C1F8E8, 0x1000, TAG_HEALTHBOX_SAFARI_TILE
+    gHealthboxSafariGfx, 0x1000, TAG_HEALTHBOX_SAFARI_TILE
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets_HealthBar[MAX_BATTLERS_COUNT] =
@@ -1173,7 +1173,7 @@ void SpriteCB_EnemyShadow(struct Sprite *shadowSprite)
 
 void SpriteCB_SetInvisible(struct Sprite *sprite)
 {
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
 }
 
 void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species)

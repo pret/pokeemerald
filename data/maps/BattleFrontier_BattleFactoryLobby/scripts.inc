@@ -143,27 +143,27 @@ BattleFrontier_BattleFactoryLobby_EventScript_2585CB:: @ 82585CB
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 4
-	setvar VAR_0x40CE, 0
+	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	goto BattleFrontier_BattleFactoryLobby_EventScript_2585ED
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2585DD:: @ 82585DD
 	setvar VAR_FRONTIER_FACILITY, 4
-	setvar VAR_0x40CE, 1
+	setvar VAR_FRONTIER_BATTLE_MODE, 1
 	goto BattleFrontier_BattleFactoryLobby_EventScript_2585ED
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2585ED:: @ 82585ED
 	special SavePlayerParty
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587B1
-	compare VAR_0x40CE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587BA
 
 BattleFrontier_BattleFactoryLobby_EventScript_258606:: @ 8258606
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587C3
-	compare VAR_0x40CE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587C9
 	waitmessage
 	multichoice 17, 6, 23, 0
@@ -218,9 +218,9 @@ BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258CB1, 4
 	closemessage
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_25875C
-	compare VAR_0x40CE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_258762
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_2587A7
 	applymovement 255, BattleFrontier_BattleFactoryLobby_Movement_2587AC
@@ -239,9 +239,9 @@ BattleFrontier_BattleFactoryLobby_EventScript_258762:: @ 8258762
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_258768:: @ 8258768
-	compare VAR_0x40CE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587CF
-	compare VAR_0x40CE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587D8
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258606
 

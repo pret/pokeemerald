@@ -1,22 +1,21 @@
 #include "global.h"
-#include "task.h"
-#include "sprite.h"
+#include "event_data.h"
 #include "event_object_movement.h"
-#include "constants/songs.h"
-#include "sound.h"
+#include "main.h"
 #include "palette.h"
 #include "script.h"
+#include "script_movement.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "constants/songs.h"
 #include "constants/vars.h"
-#include "event_data.h"
-#include "main.h"
 
 #define SECONDS(value) ((signed) (60.0 * value + 0.5))
 
 extern u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *); // should be in field_specials.h
 extern void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-extern bool8 ScriptMovement_IsObjectMovementFinished(u8, u8, u8);
 extern bool32 CountSSTidalStep(u16);
-extern bool8 ScriptMovement_StartObjectMovementScript(u8, u8, u8, u8 *);
 extern void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 extern void sp13E_warp_to_last_warp(void);
 extern void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
@@ -38,11 +37,12 @@ extern void pal_fill_black(void);
 extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId);
 extern void DrawWholeMapView();
 
-extern s8 gTruckCamera_HorizontalTable[];
+//. rodata
+static const s8 gTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
+const u8 gUnknown_0858E8AB[] = {0x18, 0xFE};
+const u8 gUnknown_0858E8AD[] = {0x17, 0xFE};
 
-extern u8 gUnknown_0858E8AB[];
-extern u8 gUnknown_0858E8AD[];
-
+// .text
 void Task_Truck3(u8);
 
 s16 GetTruckCameraBobbingY(int a1)
@@ -63,32 +63,24 @@ s16 GetTruckBoxMovement(int a1) // for the box movement?
     return 0;
 }
 
-// smh STILL BROKEN IN EMERALD
 void Task_Truck1(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    s16 cameraYpan;
-    s16 box1 = 0;
-    s16 box2 = 0;
-    s16 box3 = 0;
-    u8 mapNum, mapGroup;
-    register s16 zero asm("r4");
+    s16 cameraXpan = 0, cameraYpan = 0;
+    s16 box1, box2, box3;
 
     box1 = GetTruckBoxMovement(data[0] + 30) * 4; // top box.
-    sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3, box1 + 3);
+    sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, box1 + 3);
     box2 = GetTruckBoxMovement(data[0]) * 2; // bottom left box.
-    sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, box2 - 3);
+    sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, box2 - 3);
     box3 = GetTruckBoxMovement(data[0]) * 4; // bottom right box.
-    mapNum = gSaveBlock1Ptr->location.mapNum;
-    mapGroup = gSaveBlock1Ptr->location.mapGroup;
-    zero = 0;
-    sub_808E82C(3, mapNum, mapGroup, -3, box3);
+    sub_808E82C(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, box3);
 
     if (++data[0] == SECONDS(500)) // this will never run
-        data[0] = zero; // reset the timer if it gets stuck.
+        data[0] = 0; // reset the timer if it gets stuck.
 
     cameraYpan = GetTruckCameraBobbingY(data[0]);
-    SetCameraPanning(0, cameraYpan);
+    SetCameraPanning(cameraXpan, cameraYpan);
 }
 
 void Task_Truck2(u8 taskId)
@@ -272,7 +264,7 @@ bool8 sub_80FB59C(void)
 void Task_HandlePorthole(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *var = GetVarPointer(VAR_PORTHOLE);
+    u16 *var = GetVarPointer(VAR_PORTHOLE_STATE);
     struct WarpData *location = &gSaveBlock1Ptr->location;
 
     switch (data[0])

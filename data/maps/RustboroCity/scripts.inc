@@ -306,7 +306,7 @@ RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	clearflag FLAG_0x2DC
 	setflag FLAG_0x08E
 	setvar VAR_0x405A, 2
-	setvar VAR_0x409A, 2
+	setvar VAR_RUSTURF_TUNNEL_STATE, 2
 	setvar VAR_0x406F, 1
 	clearflag FLAG_0x37B
 	clearflag FLAG_0x370
@@ -869,7 +869,7 @@ RustboroCity_EventScript_1E1070:: @ 81E1070
 
 RustboroCity_EventScript_1E1092:: @ 81E1092
 	msgbox RustboroCity_Text_1E1C84, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, RustboroCity_EventScript_1E10DB
 	case 1, RustboroCity_EventScript_1E10EE
 	case 2, RustboroCity_EventScript_1E1101
@@ -940,7 +940,7 @@ RustboroCity_EventScript_1E1174:: @ 81E1174
 
 RustboroCity_EventScript_1E1191:: @ 81E1191
 	msgbox RustboroCity_Text_1E1FA9, 4
-	switch VAR_FIRST_POKE
+	switch VAR_STARTER_MON
 	case 0, RustboroCity_EventScript_1E11D5
 	case 1, RustboroCity_EventScript_1E11E8
 	case 2, RustboroCity_EventScript_1E11FB

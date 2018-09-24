@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_nibi_grp, voicegroup_pokemon_cry
+	.equ	mus_nibi_grp, voicegroup000
 	.equ	mus_nibi_pri, 0
 	.equ	mus_nibi_rev, reverb_set+50
 	.equ	mus_nibi_mvl, 127

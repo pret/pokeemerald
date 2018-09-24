@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_pyramid_grp, voicegroup_8696470
+	.equ	mus_pyramid_grp, voicegroup106
 	.equ	mus_pyramid_pri, 0
 	.equ	mus_pyramid_rev, reverb_set+50
 	.equ	mus_pyramid_mvl, 127

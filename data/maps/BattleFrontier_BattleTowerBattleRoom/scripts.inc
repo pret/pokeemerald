@@ -366,7 +366,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_24210E:: @ 824210E
 	setvar VAR_0x8005, 0
 	special sub_8163AC4
 	waitstate
-	copyvar VAR_0x8004, VAR_0x40CE
+	copyvar VAR_0x8004, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_0x8004, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_24215A
 	setvar VAR_0x8004, 18
@@ -484,7 +484,7 @@ BattleFrontier_BattleTowerBattleRoom_Movement_2421B2: @ 82421B2
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2421B8:: @ 82421B8
 BattleFrontier_BattleTowerBattleRoom_EventScript_2421B8:: @ 82421B8
-	copyvar VAR_RESULT, VAR_0x40CE
+	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_2421E8
 	compare VAR_RESULT, 2

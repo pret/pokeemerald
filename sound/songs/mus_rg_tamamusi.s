@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_tamamusi_grp, voicegroup_86AD738
+	.equ	mus_rg_tamamusi_grp, voicegroup168
 	.equ	mus_rg_tamamusi_pri, 0
 	.equ	mus_rg_tamamusi_rev, reverb_set+50
 	.equ	mus_rg_tamamusi_mvl, 127

@@ -26,7 +26,7 @@ NavelRock_Bottom_MapScript1_269284: @ 8269284
 	end
 
 NavelRock_Bottom_EventScript_26928E:: @ 826928E
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, NavelRock_Bottom_EventScript_27374E
 	removeobject 1
@@ -64,7 +64,7 @@ NavelRock_Bottom_EventScript_2692A2:: @ 82692A2
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq NavelRock_Bottom_EventScript_269336
 	compare VAR_RESULT, 4

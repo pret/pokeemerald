@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_purin_grp, voicegroup_86A25F0
+	.equ	mus_rg_purin_grp, voicegroup135
 	.equ	mus_rg_purin_pri, 5
 	.equ	mus_rg_purin_rev, reverb_set+50
 	.equ	mus_rg_purin_mvl, 127

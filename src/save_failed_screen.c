@@ -4,6 +4,7 @@
 #include "palette.h"
 #include "gpu_regs.h"
 #include "bg.h"
+#include "decompress.h"
 #include "task.h"
 #include "window.h"
 #include "menu.h"
@@ -14,16 +15,11 @@
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
 
-extern void (*gGameContinueCallback)(void);
-
-extern u32 gDamagedSaveSectors;
-
 extern const u8 gBirchHelpGfx[];
 extern const u8 gBirchBagTilemap[];
 extern const u8 gBirchGrassTilemap[];
 extern const u16 gBirchBagGrassPal[];
 extern const u16 gUnknown_0860F074[];
-extern struct SaveSection gSaveDataBuffer;
 
 extern u8 gText_SaveFailedCheckingBackup[];
 extern u8 gText_BackupMemoryDamaged[];
@@ -31,8 +27,6 @@ extern u8 gText_CheckCompleted[];
 extern u8 gText_SaveCompleteGameCannotContinue[];
 extern u8 gText_SaveCompletePressA[];
 extern u8 gText_GamePlayCannotBeContinued[];
-
-extern u8 gDecompressionBuffer[];
 
 // gSaveFailedClockInfo enum
 enum
@@ -173,7 +167,7 @@ static void SaveFailedScreenTextPrint(u8 *text, u8 var1, u8 var2)
     color[0] = 0;
     color[1] = 15;
     color[2] = 3;
-    AddTextPrinterParameterized2(gSaveFailedWindowIds[TEXT_WIN_ID], 1, var1 * 8, var2 * 8 + 1, 0, 0, color, 0, text);
+    AddTextPrinterParameterized4(gSaveFailedWindowIds[TEXT_WIN_ID], 1, var1 * 8, var2 * 8 + 1, 0, 0, color, 0, text);
 }
 
 void DoSaveFailedScreen(u8 saveType)

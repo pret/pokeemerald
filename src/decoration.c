@@ -214,22 +214,67 @@ void (*const SecretBasePC_SelectedDecorActions[][2])(u8 taskId) = {
    }
 };
 
-const struct WindowTemplate gUnknown_085A6B90[4] = {
-    { 0,  1,  1, 18,  8, 15, 0x0001 },
-    { 0,  1,  1, 13, 18, 13, 0x0091 },
-    { 0, 17,  1, 12,  2, 15, 0x017b },
-    { 0, 16, 13, 13,  6, 15, 0x0193 }
+const struct WindowTemplate gUnknown_085A6B90[4] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 18,
+        .height = 8,
+        .paletteNum = 15,
+        .baseBlock = 0x0001
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 13,
+        .height = 18,
+        .paletteNum = 13,
+        .baseBlock = 0x0091
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 1,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x017b
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 13,
+        .width = 13,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 0x0193
+    }
 };
 
 const u16 gUnknown_085A6BB0[] = INCBIN_U16("graphics/decorations/unk_85a6bb0.gbapal");
 
-const struct ListMenuTemplate gUnknown_085A6BD0 = {
-    NULL,
-    sub_8127480,
-    sub_81274A0,
-    0, 0,
-    0, 0, 8, 0,
-    9, 2, 1, 3, FALSE, 0, FALSE, 7
+const struct ListMenuTemplate gUnknown_085A6BD0 =
+{
+    .items = NULL,
+    .moveCursorFunc = sub_8127480,
+    .itemPrintFunc = sub_81274A0,
+    .totalItems = 0,
+    .maxShowed = 0,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 9,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = FALSE,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = FALSE,
+    .fontId = 7
 };
 
 #include "data/decoration/icon.h"
@@ -499,7 +544,7 @@ void sub_8126B80(u8 taskId)
 void sub_8126C08(void)
 {
     FillWindowPixelBuffer(0, 0x11);
-    AddTextPrinterParameterized(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
 }
 
 void SecretBasePC_Decorate(u8 taskId)
@@ -622,7 +667,7 @@ void sub_8126E8C(u8 taskId)
             sub_8126F68(r5, i, 8, i << 4, FALSE, 0xFF);
         }
     }
-    PrintTextOnWindow(r5, 1, gTasks[taskId].data[11] == 2 ? gText_Exit : gText_Cancel, 8, (i << 4) + 1, 0, 0);
+    AddTextPrinterParameterized(r5, 1, gTasks[taskId].data[11] == 2 ? gText_Exit : gText_Cancel, 8, (i << 4) + 1, 0, 0);
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
@@ -636,12 +681,12 @@ void sub_8126F68(u8 winid, u8 decorCat, u8 x, u8 y, bool8 flag, u8 speed)
     sub_8127058(gStringVar4, flag);
     strbuf = StringLength(gStringVar4) + gStringVar4;
     StringCopy(strbuf, sDecorCatNames[decorCat]);
-    PrintTextOnWindow(winid, 1, gStringVar4, x, y, speed, NULL);
+    AddTextPrinterParameterized(winid, 1, gStringVar4, x, y, speed, NULL);
     strbuf = ConvertIntToDecimalStringN(strbuf, CountDecorationCategoryN(decorCat), STR_CONV_MODE_RIGHT_ALIGN, 2);
     *strbuf++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(strbuf, gDecorationInventories[decorCat].size, STR_CONV_MODE_RIGHT_ALIGN, 2);
     x = GetStringRightAlignXOffset(1, gStringVar4, width);
-    PrintTextOnWindow(winid, 1, gStringVar4, x, y, speed, NULL);
+    AddTextPrinterParameterized(winid, 1, gStringVar4, x, y, speed, NULL);
 }
 
 void sub_8127058(u8 *str, bool8 flag)
@@ -932,7 +977,7 @@ void sub_8127744(u32 a0)
     {
         txt = gDecorations[gCurDecorInventoryItems[a0]].description;
     }
-    PrintTextOnWindow(winidx, 1, txt, 0, 1, 0, 0);
+    AddTextPrinterParameterized(winidx, 1, txt, 0, 1, 0, 0);
 }
 
 void sub_81277A8(void)
@@ -1087,7 +1132,7 @@ void sub_8127B04(u8 taskId)
 {
     DrawWholeMapView();
     Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gTasks[taskId].data[3], gTasks[taskId].data[4]);
-    warp_in();
+    WarpIntoMap();
 }
 
 u16 sub_8127B54(u8 decor, u8 a1)

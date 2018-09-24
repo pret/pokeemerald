@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_hideri_grp, voicegroup_8690A7C
+	.equ	mus_hideri_grp, voicegroup090
 	.equ	mus_hideri_pri, 0
 	.equ	mus_hideri_rev, reverb_set+50
 	.equ	mus_hideri_mvl, 127

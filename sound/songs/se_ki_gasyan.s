@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_ki_gasyan_grp, voicegroup_869D6F4
+	.equ	se_ki_gasyan_grp, voicegroup128
 	.equ	se_ki_gasyan_pri, 4
 	.equ	se_ki_gasyan_rev, reverb_set+50
 	.equ	se_ki_gasyan_mvl, 127

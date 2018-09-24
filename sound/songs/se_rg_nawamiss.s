@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_rg_nawamiss_grp, voicegroup_869D0F4
+	.equ	se_rg_nawamiss_grp, voicegroup127
 	.equ	se_rg_nawamiss_pri, 5
 	.equ	se_rg_nawamiss_rev, reverb_set+50
 	.equ	se_rg_nawamiss_mvl, 127

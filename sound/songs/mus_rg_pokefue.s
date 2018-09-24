@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_pokefue_grp, voicegroup_86AC538
+	.equ	mus_rg_pokefue_grp, voicegroup165
 	.equ	mus_rg_pokefue_pri, 5
 	.equ	mus_rg_pokefue_rev, reverb_set+50
 	.equ	mus_rg_pokefue_mvl, 127

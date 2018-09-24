@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_oshie_tv_grp, voicegroup_86A0FB8
+	.equ	mus_rg_oshie_tv_grp, voicegroup131
 	.equ	mus_rg_oshie_tv_pri, 0
 	.equ	mus_rg_oshie_tv_rev, reverb_set+50
 	.equ	mus_rg_oshie_tv_mvl, 127

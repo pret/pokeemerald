@@ -226,15 +226,7 @@ gUnknown_020375A4: @ 20375A4
 gUnknown_020375AC: @ 20375AC
 	.space 0x8
 
-gUnknown_020375B4: @ 20375B4
-	.space 0x2
-
-gUnknown_020375B6: @ 20375B6
-	.space 0x2
-
-gLockedAnimEventObjects: @ 20375B8
-	.space 0x4
-
+    .include "src/event_object_movement.o"
     .include "src/field_message_box.o"
 
     .align 2
@@ -382,61 +374,9 @@ gUnknown_02039D8C: @ 2039D8C
 	.include "src/fldeff_cut.o"
 	.include "src/map_name_popup.o"
 	.include "src/item.o"
+	.include "src/contest.o"
 
-gUnknown_02039E00: @ 2039E00
-	.space 0x100
-
-gUnknown_02039F00: @ 2039F00
-	.space 0x8
-
-gUnknown_02039F08: @ 2039F08
-	.space 0x8
-
-gUnknown_02039F10: @ 2039F10
-	.space 0x8
-
-gUnknown_02039F18: @ 2039F18
-	.space 0x8
-
-gUnknown_02039F20: @ 2039F20
-	.space 0x4
-
-gUnknown_02039F24: @ 2039F24
-	.space 0x1
-
-gUnknown_02039F25: @ 2039F25
-	.space 0x1
-
-gUnknown_02039F26: @ 2039F26
-	.space 0x4
-
-gUnknown_02039F2A: @ 2039F2A
-	.space 0x1
-
-gUnknown_02039F2B: @ 2039F2B
-	.space 0x1
-
-gSpecialVar_ContestCategory: @ 2039F2C
-	.space 0x2
-
-gSpecialVar_ContestRank: @ 2039F2E
-	.space 0x2
-
-gUnknown_02039F30: @ 2039F30
-	.space 0x1
-
-gUnknown_02039F31: @ 2039F31
-	.space 0x3
-
-gContestResources: @ 2039F34
-	.space 0x4
-
-gUnknown_02039F38: @ 2039F38
-	.space 0x4
-
-gUnknown_02039F3C: @ 2039F3C
-	.space 0x20
-
+	.align 2
 gUnknown_02039F5C: @ 2039F5C
 	.space 0x1
 
@@ -508,94 +448,7 @@ gUnknown_0203A120: @ 203A120
     .include "src/menu_helpers.o"
 	.include "src/region_map.o"
     .include "src/decoration.o"
-    .align 2
-
-@ slot_machine
-
-gUnknown_0203AAC8: @ 203AAC8
-	.space 0x4
-
-gUnknown_0203AACC: @ 203AACC
-	.space 0x4
-
-gUnknown_0203AAD0: @ 203AAD0
-	.space 0x4
-
-gUnknown_0203AAD4: @ 203AAD4
-	.space 0x4
-
-gUnknown_0203AAD8: @ 203AAD8
-	.space 0x4
-
-gUnknown_0203AADC: @ 203AADC
-	.space 0x4
-
-gUnknown_0203AAE0: @ 203AAE0
-	.space 0x4
-
-gUnknown_0203AAE4: @ 203AAE4
-	.space 0x4
-
-gUnknown_0203AAE8: @ 203AAE8
-	.space 0x4
-
-gUnknown_0203AAEC: @ 203AAEC
-	.space 0x4
-
-gUnknown_0203AAF0: @ 203AAF0
-	.space 0x4
-
-gUnknown_0203AAF4: @ 203AAF4
-	.space 0x4
-
-gUnknown_0203AAF8: @ 203AAF8
-	.space 0x4
-
-gUnknown_0203AAFC: @ 203AAFC
-	.space 0x4
-
-gUnknown_0203AB00: @ 203AB00
-	.space 0x4
-
-gUnknown_0203AB04: @ 203AB04
-	.space 0x4
-
-gUnknown_0203AB08: @ 203AB08
-	.space 0x4
-
-gUnknown_0203AB0C: @ 203AB0C
-	.space 0x4
-
-gUnknown_0203AB10: @ 203AB10
-	.space 0x4
-
-gUnknown_0203AB14: @ 203AB14
-	.space 0x4
-
-gUnknown_0203AB18: @ 203AB18
-	.space 0x4
-
-gUnknown_0203AB1C: @ 203AB1C
-	.space 0x4
-
-gUnknown_0203AB20: @ 203AB20
-	.space 0x4
-
-gUnknown_0203AB24: @ 203AB24
-	.space 0x4
-
-gUnknown_0203AB28: @ 203AB28
-	.space 0x4
-
-gUnknown_0203AB2C: @ 203AB2C
-	.space 0x4
-
-gUnknown_0203AB30: @ 203AB30
-	.space 0x4
-
-gUnknown_0203AB34: @ 203AB34
-	.space 0x4
-
+    .include "src/slot_machine.o"
     .include "src/battle_ai_script_commands.o"
     
 .align 2
@@ -603,55 +456,7 @@ gPlayerFacingPosition: @ 203AB40
 	.space 0x8
 	
 	.include "src/pokeblock.o"
-
-gBikeCyclingChallenge: @ 203AB54
-	.space 0x1
-
-gBikeCollisions: @ 203AB55
-	.space 0x3
-
-gUnknown_0203AB58: @ 203AB58
-	.space 0x4
-
-gUnknown_0203AB5C: @ 203AB5C
-	.space 0x1
-
-gUnknown_0203AB5D: @ 203AB5D
-	.space 0x1
-
-gUnknown_0203AB5E: @ 203AB5E
-	.space 0x2
-
-gUnknown_0203AB60: @ 203AB60
-	.space 0x2
-
-gUnknown_0203AB62: @ 203AB62
-	.space 0x2
-
-gUnknown_0203AB64: @ 203AB64
-	.space 0x4
-
-gUnknown_0203AB68: @ 203AB68
-	.space 0x2
-
-gUnknown_0203AB6A: @ 203AB6A
-	.space 0x2
-
-gUnknown_0203AB6C: @ 203AB6C
-	.space 0x1
-
-gUnknown_0203AB6D: @ 203AB6D
-	.space 0x1
-
-gUnknown_0203AB6E: @ 203AB6E
-	.space 0x1
-
-gUnknown_0203AB6F: @ 203AB6F
-	.space 0x1
-
-gUnknown_0203AB70: @ 203AB70
-	.space 0x4
-
+	.include "src/field_specials.o"
     .include "src/battle_records.o"
 
 gUnknown_0203AB7C: @ 203AB7C
@@ -699,28 +504,20 @@ gUnknown_0203ABB4: @ 203ABB4
 gUnknown_0203ABB5: @ 203ABB5
 	.space 0x3
 
-gUnknown_0203ABB8: @ 203ABB8
-	.space 0x4
-
+    .include "src/rom_81520A8.o"
     .include "src/save.o"
-    
+
 .space 0x4 /*unused var?*/
 
 	.include "src/mystery_event_script.o"
-
-gUnknown_0203BC34: @ 203BC34
-	.space 0x4
-
-gUnknown_0203BC38: @ 203BC38
-	.space 0x8
-
+	.include "src/learn_move.o"
 	.include "src/decoration_inventory.o"
-    .include "src/roamer.o"
+	.include "src/roamer.o"
 
-gUnknown_0203BC88: @ 203BC88
+gFacilityTrainers: @ 203BC88
 	.space 0x4
 
-gUnknown_0203BC8C: @ 203BC8C
+gFacilityTrainerMons: @ 203BC8C
 	.space 0x4
 
 	.include "src/use_pokeblock.o"
@@ -738,20 +535,9 @@ gUnknown_0203BC8C: @ 203BC8C
 	.include "src/pokeblock_feed.o"
 	.include "src/intro_credits_graphics.o"
     .include "src/recorded_battle.o"
-    .include "src/battle_dome_cards.o"
+    .include "src/trainer_pokemon_sprites.o"
     .include "src/lilycove_lady.o"
-
-gUnknown_0203CD70: @ 203CD70
-	.space 0x4
-
-gUnknown_0203CD74: @ 203CD74
-	.space 0x4
-
-gUnknown_0203CD78: @ 203CD78
-	.space 0x4
-
-gUnknown_0203CD7C: @ 203CD7C
-	.space 0x4
+    .include "src/battle_dome.o"
 
 gUnknown_0203CD80: @ 203CD80
 	.space 0x8
@@ -760,34 +546,7 @@ gUnknown_0203CD88: @ 203CD88
 	.space 0x4
 
     .include "src/menu.o"
-
-    .align 2
-gUnknown_0203CE2C: @ 203CE2C
-	.space 0x4
-
-gUnknown_0203CE30: @ 203CE30
-	.space 0x4
-
-gUnknown_0203CE34: @ 203CE34
-	.space 0x4
-
-gUnknown_0203CE38: @ 203CE38
-	.space 0x4
-
-gUnknown_0203CE3C: @ 203CE3C
-	.space 0x4
-
-gUnknown_0203CE40: @ 203CE40
-	.space 0x4
-
-gUnknown_0203CE44: @ 203CE44
-	.space 0x4
-
-gUnknown_0203CE48: @ 203CE48
-	.space 0x4
-
-gUnknown_0203CE4C: @ 203CE4C
-	.space 0x4
+    .include "src/battle_factory.o"
 
 gUnknown_0203CE50: @ 203CE50
 	.space 0x4
@@ -844,30 +603,9 @@ gUnknown_0203CF00: @ 203CF00
 
 	.include "src/fossil_specials.o"
 	.include "src/fldeff_groundshake.o"
-
-gUnknown_0203CF1C: @ 203CF1C
-	.space 0x4
-
-gUnknown_0203CF20: @ 203CF20
-	.space 0x1
-
-gUnknown_0203CF21: @ 203CF21
-	.space 0x3
-
-gUnknown_0203CF24: @ 203CF24
-	.space 0x4
-
-gUnknown_0203CF28: @ 203CF28
-	.space 0x4
-
-gUnknown_0203CF2C: @ 203CF2C
-	.space 0x4
-
-gUnknown_0203CF30: @ 203CF30
-	.space 0x8
-
-gUnknown_0203CF38: @ 203CF38
-	.space 0x4
+	.include "src/pokemon_summary_screen.o"
+	.include "src/unk_pokedex_area_screen_helper.o"
+	.include "src/battle_pyramid_bag.o"
 
 gUnknown_0203CF3C: @ 203CF3C
 	.space 0x4

@@ -7914,7 +7914,7 @@ sub_80AF0B4: @ 80AF0B4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl warp1_get_mapheader
+	bl GetDestinationWarpMapHeader
 	ldrb r1, [r0, 0x17]
 	adds r0, r4, 0
 	bl sub_8137360
@@ -8924,7 +8924,7 @@ _080AF914:
 	bl sub_80AF710
 	cmp r0, 0
 	bne _080AF93E
-	bl sub_80859A0
+	bl BGMusicStopped
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF93E
@@ -8934,7 +8934,7 @@ _080AF926:
 	strh r0, [r4, 0x8]
 	b _080AF93E
 _080AF92E:
-	bl warp_in
+	bl WarpIntoMap
 	ldr r0, =sub_8086074
 	bl SetMainCallback2
 	adds r0, r5, 0
@@ -8999,7 +8999,7 @@ _080AF9B2:
 	bl sub_80AF710
 	cmp r0, 0
 	bne _080AF9E8
-	bl sub_80859A0
+	bl BGMusicStopped
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF9E8
@@ -9014,7 +9014,7 @@ _080AF9D0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080AF9E8
-	bl warp_in
+	bl WarpIntoMap
 	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
@@ -9076,7 +9076,7 @@ _080AFA44:
 	bl sub_81BE72C
 	strh r5, [r4, 0xA]
 _080AFA5A:
-	bl sub_80859A0
+	bl BGMusicStopped
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AFA7C
@@ -9086,7 +9086,7 @@ _080AFA64:
 	strh r0, [r4, 0x8]
 	b _080AFA7C
 _080AFA6C:
-	bl warp_in
+	bl WarpIntoMap
 	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r6, 0
@@ -9297,7 +9297,7 @@ _080AFC2C:
 	bl sub_80AF710
 	cmp r0, 0
 	bne _080AFC56
-	bl sub_80859A0
+	bl BGMusicStopped
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AFC56
@@ -9307,7 +9307,7 @@ _080AFC3E:
 	strh r0, [r4, 0x8]
 	b _080AFC56
 _080AFC46:
-	bl warp_in
+	bl WarpIntoMap
 	ldr r0, =sub_8086024
 	bl SetMainCallback2
 	adds r0, r5, 0
@@ -10049,7 +10049,7 @@ _080B0210:
 	bl sub_80AF710
 	cmp r0, 0
 	bne _080B023A
-	bl sub_80859A0
+	bl BGMusicStopped
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B023A
@@ -10059,7 +10059,7 @@ _080B0222:
 	strh r0, [r4, 0x8]
 	b _080B023A
 _080B022A:
-	bl warp_in
+	bl WarpIntoMap
 	ldr r0, =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
@@ -10492,7 +10492,7 @@ task50_0807F0C8: @ 80B05CC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80859A0
+	bl BGMusicStopped
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

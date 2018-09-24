@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_mishiro_grp, voicegroup_8682CD0
+	.equ	mus_mishiro_grp, voicegroup051
 	.equ	mus_mishiro_pri, 0
 	.equ	mus_mishiro_rev, reverb_set+50
 	.equ	mus_mishiro_mvl, 127

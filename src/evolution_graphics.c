@@ -220,10 +220,10 @@ static void SpriteCB_PostEvoSparkleSet2(struct Sprite* sprite)
             sprite->subpriority = 1;
         else
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             sprite->subpriority = 20;
             if (sprite->data[6] > 112 && sprite->data[6] & 1)
-                sprite->invisible = 1;
+                sprite->invisible = TRUE;
         }
         if (matrixNum < 20)
             matrixNum = 20;
@@ -498,13 +498,13 @@ u8 sub_817C3A0(u8 preEvoSpriteID, u8 postEvoSpriteID)
     gSprites[preEvoSpriteID].callback = PokeEvoSprite_DummySpriteCB;
     gSprites[preEvoSpriteID].oam.affineMode = 1;
     gSprites[preEvoSpriteID].oam.matrixNum = 30;
-    gSprites[preEvoSpriteID].invisible = 0;
+    gSprites[preEvoSpriteID].invisible = FALSE;
     CpuSet(stack, &gPlttBufferFaded[0x100 + (gSprites[preEvoSpriteID].oam.paletteNum * 16)], 16);
 
     gSprites[postEvoSpriteID].callback = PokeEvoSprite_DummySpriteCB;
     gSprites[postEvoSpriteID].oam.affineMode = 1;
     gSprites[postEvoSpriteID].oam.matrixNum = 31;
-    gSprites[postEvoSpriteID].invisible = 0;
+    gSprites[postEvoSpriteID].invisible = FALSE;
     CpuSet(stack, &gPlttBufferFaded[0x100 + (gSprites[postEvoSpriteID].oam.paletteNum * 16)], 16);
 
     gTasks[taskID].tEvoStopped = FALSE;
@@ -588,11 +588,11 @@ static void PreEvoInvisible_PostEvoVisible_KillTask(u8 taskID)
 {
     gSprites[gTasks[taskID].tPreEvoSpriteID].oam.affineMode = 0;
     gSprites[gTasks[taskID].tPreEvoSpriteID].oam.matrixNum = 0;
-    gSprites[gTasks[taskID].tPreEvoSpriteID].invisible = 1;
+    gSprites[gTasks[taskID].tPreEvoSpriteID].invisible = TRUE;
 
     gSprites[gTasks[taskID].tPostEvoSpriteID].oam.affineMode = 0;
     gSprites[gTasks[taskID].tPostEvoSpriteID].oam.matrixNum = 0;
-    gSprites[gTasks[taskID].tPostEvoSpriteID].invisible = 0;
+    gSprites[gTasks[taskID].tPostEvoSpriteID].invisible = FALSE;
 
     DestroyTask(taskID);
 }
@@ -601,11 +601,11 @@ static void PreEvoVisible_PostEvoInvisible_KillTask(u8 taskID)
 {
     gSprites[gTasks[taskID].tPreEvoSpriteID].oam.affineMode = 0;
     gSprites[gTasks[taskID].tPreEvoSpriteID].oam.matrixNum = 0;
-    gSprites[gTasks[taskID].tPreEvoSpriteID].invisible = 0;
+    gSprites[gTasks[taskID].tPreEvoSpriteID].invisible = FALSE;
 
     gSprites[gTasks[taskID].tPostEvoSpriteID].oam.affineMode = 0;
     gSprites[gTasks[taskID].tPostEvoSpriteID].oam.matrixNum = 0;
-    gSprites[gTasks[taskID].tPostEvoSpriteID].invisible = 1;
+    gSprites[gTasks[taskID].tPostEvoSpriteID].invisible = TRUE;
 
     DestroyTask(taskID);
 }

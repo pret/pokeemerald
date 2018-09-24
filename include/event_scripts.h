@@ -394,6 +394,10 @@ extern const u8 Route111_EventScript_2907F0[];
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_1F863F[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_1F958F[];
 
+//contest_strings
+extern const u8 gText_0827D507[];
+extern const u8 gText_0827D531[];
+
 //mauville_old_man
 extern const u8 gOtherText_Is[];
 extern const u8 gOtherText_DontYouAgree[];

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_hantei1_grp, voicegroup_86A0154
+	.equ	se_hantei1_grp, voicegroup129
 	.equ	se_hantei1_pri, 5
 	.equ	se_hantei1_rev, reverb_set+50
 	.equ	se_hantei1_mvl, 127

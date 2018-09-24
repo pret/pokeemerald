@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_suikun_grp, voicegroup_pokemon_cry
+	.equ	mus_suikun_grp, voicegroup000
 	.equ	mus_suikun_pri, 0
 	.equ	mus_suikun_rev, reverb_set+50
 	.equ	mus_suikun_mvl, 127

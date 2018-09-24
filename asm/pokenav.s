@@ -4,6 +4,239 @@
 	.syntax unified
 
 	.text
+	
+
+
+	thumb_func_start sub_81C7078
+sub_81C7078: @ 81C7078
+	push {r4,r5,lr}
+	adds r5, r0, 0
+	adds r4, r1, 0
+	bl is_c1_link_related_active
+	cmp r0, 0
+	bne _081C7090
+	ldr r0, =sub_81C7170
+	b _081C7092
+	.pool
+_081C7090:
+	ldr r0, =sub_81C71E4
+_081C7092:
+	lsls r1, r4, 24
+	lsrs r1, 24
+	bl CreateTask
+	lsls r0, 24
+	lsrs r4, r0, 24
+	adds r0, r4, 0
+	movs r1, 0x1
+	adds r2, r5, 0
+	bl SetWordTaskArg
+	ldr r1, =gTasks
+	lsls r0, r4, 2
+	adds r0, r4
+	lsls r0, 3
+	adds r0, r1
+	ldr r2, =gUnknown_0203CF3C
+	ldrb r1, [r2]
+	strh r1, [r0, 0xE]
+	ldrb r0, [r2]
+	adds r1, r0, 0x1
+	strb r1, [r2]
+	lsls r0, 24
+	lsrs r0, 8
+	orrs r0, r4
+	pop {r4,r5}
+	pop {r1}
+	bx r1
+	.pool
+	thumb_func_end sub_81C7078
+
+	thumb_func_start sub_81C70D8
+sub_81C70D8: @ 81C70D8
+	push {lr}
+	ldr r1, =0x0000ffff
+	ands r1, r0
+	lsrs r3, r0, 16
+	ldr r2, =gTasks
+	lsls r0, r1, 2
+	adds r0, r1
+	lsls r0, 3
+	adds r1, r0, r2
+	ldrb r0, [r1, 0x4]
+	cmp r0, 0
+	beq _081C711C
+	ldr r2, [r1]
+	ldr r0, =sub_81C7170
+	cmp r2, r0
+	beq _081C70FE
+	ldr r0, =sub_81C71E4
+	cmp r2, r0
+	bne _081C711C
+_081C70FE:
+	movs r2, 0xE
+	ldrsh r0, [r1, r2]
+	cmp r0, r3
+	bne _081C711C
+	movs r0, 0x1
+	b _081C711E
+	.pool
+_081C711C:
+	movs r0, 0
+_081C711E:
+	pop {r1}
+	bx r1
+	thumb_func_end sub_81C70D8
+
+	thumb_func_start sub_81C7124
+sub_81C7124: @ 81C7124
+	push {r4-r6,lr}
+	adds r6, r0, 0
+	movs r5, 0
+	ldr r4, =gTasks
+_081C712C:
+	ldrb r0, [r4, 0x4]
+	cmp r0, 0
+	beq _081C7160
+	ldr r1, [r4]
+	ldr r0, =sub_81C7170
+	cmp r1, r0
+	beq _081C7140
+	ldr r0, =sub_81C71E4
+	cmp r1, r0
+	bne _081C7160
+_081C7140:
+	lsls r0, r5, 24
+	lsrs r0, 24
+	movs r1, 0x1
+	bl GetWordTaskArg
+	cmp r0, r6
+	bne _081C7160
+	movs r0, 0x1
+	b _081C716A
+	.pool
+_081C7160:
+	adds r4, 0x28
+	adds r5, 0x1
+	cmp r5, 0xF
+	ble _081C712C
+	movs r0, 0
+_081C716A:
+	pop {r4-r6}
+	pop {r1}
+	bx r1
+	thumb_func_end sub_81C7124
+
+	thumb_func_start sub_81C7170
+sub_81C7170: @ 81C7170
+	push {r4-r7,lr}
+	lsls r0, 24
+	lsrs r5, r0, 24
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl GetWordTaskArg
+	adds r6, r0, 0
+	lsls r0, r5, 2
+	adds r0, r5
+	lsls r0, 3
+	ldr r1, =gTasks + 0x8
+	adds r4, r0, r1
+	movs r7, 0
+_081C718C:
+	movs r1, 0
+	ldrsh r0, [r4, r1]
+	bl _call_via_r6
+	cmp r0, 0x4
+	bhi _081C71D6
+	lsls r0, 2
+	ldr r1, =_081C71AC
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.pool
+	.align 2, 0
+_081C71AC:
+	.4byte _081C71C6
+	.4byte _081C71C0
+	.4byte _081C71DE
+	.4byte _081C71DA
+	.4byte _081C71CE
+_081C71C0:
+	ldrh r0, [r4]
+	adds r0, 0x1
+	b _081C71D8
+_081C71C6:
+	ldrh r0, [r4]
+	adds r0, 0x1
+	strh r0, [r4]
+	b _081C71DE
+_081C71CE:
+	adds r0, r5, 0
+	bl DestroyTask
+	b _081C71DE
+_081C71D6:
+	subs r0, 0x5
+_081C71D8:
+	strh r0, [r4]
+_081C71DA:
+	cmp r7, 0
+	beq _081C718C
+_081C71DE:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_81C7170
+
+	thumb_func_start sub_81C71E4
+sub_81C71E4: @ 81C71E4
+	push {r4,r5,lr}
+	lsls r0, 24
+	lsrs r5, r0, 24
+	bl sub_8087598
+	cmp r0, 0
+	bne _081C724A
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl GetWordTaskArg
+	adds r2, r0, 0
+	lsls r0, r5, 2
+	adds r0, r5
+	lsls r0, 3
+	ldr r1, =gTasks + 0x8
+	adds r4, r0, r1
+	movs r1, 0
+	ldrsh r0, [r4, r1]
+	bl _call_via_r2
+	cmp r0, 0x4
+	bhi _081C7246
+	lsls r0, 2
+	ldr r1, =_081C7224
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.pool
+	.align 2, 0
+_081C7224:
+	.4byte _081C7238
+	.4byte _081C7238
+	.4byte _081C724A
+	.4byte _081C724A
+	.4byte _081C723E
+_081C7238:
+	ldrh r0, [r4]
+	adds r0, 0x1
+	b _081C7248
+_081C723E:
+	adds r0, r5, 0
+	bl DestroyTask
+	b _081C724A
+_081C7246:
+	subs r0, 0x5
+_081C7248:
+	strh r0, [r4]
+_081C724A:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_81C71E4
 
 	thumb_func_start CB2_PokeNav
 CB2_PokeNav: @ 81C7250
@@ -1238,7 +1471,7 @@ sub_81C7BA4: @ 81C7BA4
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -1585,7 +1818,7 @@ sub_81C7E58: @ 81C7E58
 	adds r0, r4, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r4, =0x0201c000
+	ldr r4, =gDecompressionBuffer
 	mov r0, r8
 	adds r1, r4, 0
 	bl LZ77UnCompWram
@@ -1667,7 +1900,7 @@ sub_81C7F24: @ 81C7F24
 	adds r0, r4, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r4, =0x0201d000
+	ldr r4, =gDecompressionBuffer+0x1000
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl LZ77UnCompWram
@@ -2326,7 +2559,7 @@ _081C8434:
 	str r6, [sp, 0x8]
 	adds r2, r7, 0
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -3474,7 +3707,7 @@ sub_81C8CB4: @ 81C8CB4
 	str r2, [sp, 0x4]
 	str r6, [sp, 0x8]
 	movs r2, 0x8
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81C8C64
@@ -3536,7 +3769,7 @@ sub_81C8D4C: @ 81C8D4C
 	str r2, [sp, 0x8]
 	adds r2, r5, 0
 	movs r3, 0x8
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_81C8C64
@@ -3602,7 +3835,7 @@ sub_81C8DBC: @ 81C8DBC
 	movs r1, 0x7
 	movs r2, 0x2
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldrh r0, [r6, 0x8]
 	lsls r4, 1
 	ldrb r1, [r6, 0x4]
@@ -3664,7 +3897,7 @@ sub_81C8E54: @ 81C8E54
 	movs r1, 0x7
 	adds r2, r5, 0
 	movs r3, 0x2
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r0, [r7, 0x8]
 	ldrb r1, [r7, 0x4]
 	str r1, [sp]
@@ -6845,7 +7078,7 @@ sub_81CA714: @ 81CA714
 	str r6, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -6883,7 +7116,7 @@ sub_81CA770: @ 81CA770
 	str r6, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -9840,7 +10073,7 @@ sub_81CBE88: @ 81CBE88
 	movs r1, 0x7
 	adds r2, r3, 0
 	movs r3, 0x2
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -9875,7 +10108,7 @@ sub_81CBEB4: @ 81CBEB4
 	adds r0, r5, 0
 	movs r1, 0x7
 	adds r2, r6, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -9923,7 +10156,7 @@ _081CBF24:
 	movs r1, 0x7
 	add r2, sp, 0xC
 	adds r3, r4, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x2C
 	pop {r4,r5}
 	pop {r0}
@@ -9957,7 +10190,7 @@ _081CBF76:
 	str r1, [sp, 0x8]
 	movs r1, 0x7
 	movs r3, 0x10
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x80
 	lsls r0, 21
 	adds r6, r0
@@ -10142,7 +10375,7 @@ sub_81CC0E0: @ 81CC0E0
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x20
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -10176,7 +10409,7 @@ sub_81CC11C: @ 81CC11C
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -10219,7 +10452,7 @@ sub_81CC158: @ 81CC158
 	adds r0, r2, 0
 	adds r2, r5, 0
 	movs r3, 0x20
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -11461,7 +11694,7 @@ _081CCB44:
 	str r1, [sp, 0x8]
 	movs r1, 0x7
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r1, [r5]
 	ldrb r2, [r5, 0x3]
 	adds r0, r4, 0
@@ -11493,7 +11726,7 @@ _081CCB8E:
 	str r1, [sp, 0x8]
 	movs r1, 0x7
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r1, =0x00001041
 	movs r0, 0xC
 	str r0, [sp]
@@ -11523,7 +11756,7 @@ _081CCBDC:
 	str r1, [sp, 0x8]
 	movs r1, 0x7
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrh r1, [r5]
 	ldrb r2, [r5, 0x3]
 	adds r0, r4, 0
@@ -11802,7 +12035,7 @@ _081CCE08:
 	movs r1, 0x7
 	adds r2, r6, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x80
 	lsls r0, 21
 	adds r4, r0
@@ -14918,7 +15151,7 @@ _081CE7DA:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _081CE924
 _081CE800:
 	bl sub_81CDD5C
@@ -14943,7 +15176,7 @@ _081CE80C:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add r1, sp, 0xC
 	movs r0, 0xFC
 	strb r0, [r1]
@@ -14969,7 +15202,7 @@ _081CE80C:
 	movs r1, 0x1
 	add r2, sp, 0xC
 	movs r3, 0x4
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	bl sub_81CDD48
 	adds r1, r0, 0
 	lsls r1, 16
@@ -14985,7 +15218,7 @@ _081CE80C:
 	movs r1, 0x1
 	add r2, sp, 0xC
 	movs r3, 0x1C
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	b _081CE924
 	.pool
 _081CE89C:
@@ -16965,7 +17198,7 @@ sub_81CF7F4: @ 81CF7F4
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0
 	adds r1, r7, 0
 	movs r2, 0x1
@@ -16981,7 +17214,7 @@ sub_81CF7F4: @ 81CF7F4
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0x22
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r1, r8
 	ldrb r0, [r1, 0x8]
 	movs r1, 0x2
@@ -18364,7 +18597,7 @@ sub_81D02B0: @ 81D02B0
 	adds r0, r4, 0
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	add sp, 0x1C
 	pop {r4,r5}
 	pop {r0}
@@ -19875,7 +20108,7 @@ sub_81D0E84: @ 81D0E84
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldrb r0, [r5, 0xA]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -19922,7 +20155,7 @@ _081D0F2E:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x80
 	lsls r0, 21
 	adds r5, r0
@@ -19962,7 +20195,7 @@ _081D0F7C:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x80
 	lsls r0, 21
 	adds r6, r0
@@ -20027,7 +20260,7 @@ sub_81D0FF0: @ 81D0FF0
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r6]
 	cmp r0, 0
 	beq _081D1040
@@ -20072,7 +20305,7 @@ _081D104A:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x3C
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -20146,7 +20379,7 @@ sub_81D10D0: @ 81D10D0
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	mov r1, r8
 	ldrb r0, [r1, 0xC]
 	movs r1, 0x2
@@ -20169,7 +20402,7 @@ sub_81D1148: @ 81D1148
 	add r2, sp, 0x8
 	mov r0, sp
 	bl sub_81D0760
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	movs r0, 0x28
 	movs r1, 0x68
 	bl sub_81D1184
@@ -20187,7 +20420,7 @@ sub_81D1148: @ 81D1148
 sub_81D1178: @ 81D1178
 	push {lr}
 	ldrh r0, [r0, 0x10]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81D1178
@@ -20213,7 +20446,7 @@ sub_81D1184: @ 81D1184
 	ldr r3, =0x0000ffff
 	str r3, [sp, 0xC]
 	movs r3, 0x1
-	bl sub_818D7D8
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =gSprites
@@ -20256,7 +20489,7 @@ sub_81D11FC: @ 81D11FC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x10]
-	bl sub_818D820
+	bl FreeAndDestroyMonPicSprite
 	movs r5, 0x20
 	negs r5, r5
 	adds r0, r5, 0
@@ -20873,7 +21106,7 @@ _081D1D8C:
 	movs r1, 0x1
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 _081D1DAC:
 	add sp, 0x34
 	pop {r4,r5}
@@ -22403,7 +22636,7 @@ sub_81D28FC: @ 81D28FC
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r5, =gText_PPSlash
 	movs r1, 0x29
 	mov r10, r1
@@ -22415,7 +22648,7 @@ sub_81D28FC: @ 81D28FC
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r5, =gText_PowerSlash
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -22432,7 +22665,7 @@ sub_81D28FC: @ 81D28FC
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r5, =gText_AccuracySlash
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -22449,7 +22682,7 @@ sub_81D28FC: @ 81D28FC
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x2
 	negs r0, r0
 	cmp r9, r0
@@ -22480,7 +22713,7 @@ _081D29C4:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r1, =gText_PPSlash
 	movs r0, 0x1
 	movs r2, 0
@@ -22501,7 +22734,7 @@ _081D29C4:
 	movs r0, 0
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r6, 0x1]
 	cmp r0, 0x1
 	bhi _081D2A3C
@@ -22525,7 +22758,7 @@ _081D2A4A:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x6A
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldrb r0, [r6, 0x3]
 	cmp r0, 0
 	bne _081D2A70
@@ -22550,7 +22783,7 @@ _081D2A7E:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x6A
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r1, =gMoveDescriptionPointers
 	mov r0, r9
 	subs r0, 0x1
@@ -22565,7 +22798,7 @@ _081D2A7E:
 	movs r1, 0x7
 	adds r2, r5, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 _081D2AB6:
 	add sp, 0x2C
 	pop {r3-r5}
@@ -22585,7 +22818,7 @@ sub_81D2ACC: @ 81D2ACC
 	push {r7}
 	sub sp, 0xC
 	adds r4, r0, 0
-	bl sub_816137C
+	bl ShowHideHearts
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -22604,7 +22837,7 @@ sub_81D2ACC: @ 81D2ACC
 	str r6, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r5, =gText_Appeal2
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -22620,7 +22853,7 @@ sub_81D2ACC: @ 81D2ACC
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r5, =gText_Jam2
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -22635,7 +22868,7 @@ sub_81D2ACC: @ 81D2ACC
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0
@@ -22663,7 +22896,7 @@ _081D2B6C:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	ldr r1, =gContestEffectDescriptionPointers
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -22677,7 +22910,7 @@ _081D2B6C:
 	movs r1, 0x7
 	adds r2, r5, 0
 	movs r3, 0
-	bl PrintTextOnWindow
+	bl AddTextPrinterParameterized
 	movs r0, 0x1
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -22738,7 +22971,7 @@ sub_81D2BF4: @ 81D2BF4
 	str r0, [sp, 0xC]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl AddTextPrinterParameterized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -24180,7 +24413,7 @@ _081D36CA:
 	movs r1, 0x1
 	movs r2, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	lsls r0, r7, 1
 	mov r4, sp
 	adds r4, r0
@@ -24203,7 +24436,7 @@ _081D3704:
 	movs r1, 0x1
 	movs r2, 0x38
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	ldrsh r1, [r4, r0]
 	adds r0, r1, 0
@@ -24234,7 +24467,7 @@ _081D373A:
 	mov r0, r8
 	movs r1, 0x1
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0x1
 	lsls r0, 16
 	lsrs r7, r0, 16
@@ -24352,7 +24585,7 @@ _081D3808:
 	movs r1, 0x1
 	movs r2, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r4, 0x38
 	lsls r4, 24
 	lsrs r4, 24
@@ -24366,7 +24599,7 @@ _081D3808:
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -27036,7 +27269,7 @@ _081D4E1C:
 	thumb_func_start sub_81D4E30
 sub_81D4E30: @ 81D4E30
 	push {lr}
-	ldr r0, =0x0201c000
+	ldr r0, =gDecompressionBuffer
 	movs r2, 0x80
 	lsls r2, 6
 	movs r1, 0
@@ -27657,7 +27890,7 @@ _081D5386:
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D5390:
-	ldr r0, =0x0201c000
+	ldr r0, =gDecompressionBuffer
 	bl sub_81D3920
 	strb r0, [r4, 0xE]
 	ldrb r0, [r4, 0xE]
@@ -27683,7 +27916,7 @@ _081D53C0:
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D53C6:
-	ldr r0, =0x0201c000
+	ldr r0, =gDecompressionBuffer
 	bl sub_81D3AB0
 	cmp r0, 0
 	beq _081D53EC
@@ -27846,8 +28079,8 @@ sub_81D5520: @ 81D5520
 	.pool
 	thumb_func_end sub_81D5520
 
-	thumb_func_start sub_81D5530
-sub_81D5530: @ 81D5530
+	thumb_func_start GetTrainerHillOpponentClass
+GetTrainerHillOpponentClass: @ 81D5530
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -27863,10 +28096,10 @@ sub_81D5530: @ 81D5530
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_81D5530
+	thumb_func_end GetTrainerHillOpponentClass
 
-	thumb_func_start sub_81D5554
-sub_81D5554: @ 81D5554
+	thumb_func_start GetTrainerHillTrainerName
+GetTrainerHillTrainerName: @ 81D5554
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -27892,10 +28125,10 @@ _081D556E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D5554
+	thumb_func_end GetTrainerHillTrainerName
 
-	thumb_func_start sub_81D5588
-sub_81D5588: @ 81D5588
+	thumb_func_start GetTrainerHillTrainerFrontSpriteId
+GetTrainerHillTrainerFrontSpriteId: @ 81D5588
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -27927,7 +28160,7 @@ sub_81D5588: @ 81D5588
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81D5588
+	thumb_func_end GetTrainerHillTrainerFrontSpriteId
 
 	thumb_func_start sub_81D55D0
 sub_81D55D0: @ 81D55D0
@@ -28091,8 +28324,8 @@ _081D5722:
 	.pool
 	thumb_func_end sub_81D5710
 
-	thumb_func_start sub_81D572C
-sub_81D572C: @ 81D572C
+	thumb_func_start CopyTrainerHillTrainerText
+CopyTrainerHillTrainerText: @ 81D572C
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -28208,7 +28441,7 @@ _081D580E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D572C
+	thumb_func_end CopyTrainerHillTrainerText
 
 	thumb_func_start sub_81D581C
 sub_81D581C: @ 81D581C
@@ -28746,7 +28979,7 @@ PrintOnTrainerHillRecordsWindow: @ 81D5C8C
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0x12
 	movs r0, 0
 	mov r8, r0
@@ -28769,7 +29002,7 @@ _081D5CD6:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r7, 0xF
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, =0x00003718
@@ -28835,7 +29068,7 @@ _081D5CD6:
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r7, 0x11
 	movs r1, 0x1
 	add r8, r1
@@ -29471,7 +29704,7 @@ sub_81D62B4: @ 81D62B4
 	ldr r0, =gSpecialVar_LastTalked
 	ldrh r1, [r0]
 	movs r0, 0x5
-	bl sub_81D572C
+	bl CopyTrainerHillTrainerText
 	bl sub_80982B8
 	pop {r0}
 	bx r0

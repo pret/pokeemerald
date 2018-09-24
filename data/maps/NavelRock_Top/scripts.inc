@@ -29,7 +29,7 @@ NavelRock_Top_MapScript1_269151: @ 8269151
 	end
 
 NavelRock_Top_EventScript_26915B:: @ 826915B
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
 	goto_if 5, NavelRock_Top_EventScript_27374E
 	removeobject 1
@@ -69,7 +69,7 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_LAST_TALKED, 1
-	specialvar VAR_RESULT, sub_8138B80
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
 	goto_eq NavelRock_Top_EventScript_269217
 	compare VAR_RESULT, 4

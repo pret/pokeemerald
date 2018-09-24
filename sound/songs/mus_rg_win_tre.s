@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	mus_rg_win_tre_grp, voicegroup_86ADD38
+	.equ	mus_rg_win_tre_grp, voicegroup169
 	.equ	mus_rg_win_tre_pri, 0
 	.equ	mus_rg_win_tre_rev, reverb_set+50
 	.equ	mus_rg_win_tre_mvl, 127
