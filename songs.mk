@@ -6,5 +6,8 @@ $(MID_BUILDDIR)/%.o: $(MID_SUBDIR)/%.s
 $(MID_SUBDIR)/mus_ajito.s: %.s: %.mid
 	$(MID) $< $@ -G076 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_aqa_0.s: %.s: %.mid
+	$(MID) $< $@ -G065 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
