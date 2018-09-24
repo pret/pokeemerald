@@ -900,7 +900,7 @@ void Compress(std::vector<Event>& events)
                 return;
         }
 
-        if (CalculateCompressionScore(events, i) >= 6)
+        if (CalculateCompressionScore(events, i) > 6)
         {
             CompressWholeNote(events, i);
         }
