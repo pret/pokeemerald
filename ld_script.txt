@@ -892,7 +892,7 @@ SECTIONS {
         sound/songs/mus_tozan.o(.rodata);
         sound/songs/mus_girleye.o(.rodata);
         sound/songs/mus_minamo.o(.rodata);
-        sound/songs/mus_ashroad.o(.rodata);
+        sound/songs/midi/mus_ashroad.o(.rodata);
         sound/songs/mus_event0.o(.rodata);
         sound/songs/mus_deepdeep.o(.rodata);
         sound/songs/mus_kachi1.o(.rodata);

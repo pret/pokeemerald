@@ -9,5 +9,8 @@ $(MID_SUBDIR)/mus_ajito.s: %.s: %.mid
 $(MID_SUBDIR)/mus_aqa_0.s: %.s: %.mid
 	$(MID) $< $@ -G065 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_ashroad.s: %.s: %.mid
+	$(MID) $< $@ -G055 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
