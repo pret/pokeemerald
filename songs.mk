@@ -21,6 +21,9 @@ $(MID_SUBDIR)/mus_b_arena.s: %.s: %.mid
 $(MID_SUBDIR)/mus_b_dome.s: %.s: %.mid
 	$(MID) $< $@ -G111 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_b_dome1.s: %.s: %.mid
+	$(MID) $< $@ -G111 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
