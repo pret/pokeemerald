@@ -946,7 +946,7 @@ SECTIONS {
         sound/songs/mus_me_tore_eye.o(.rodata);
         sound/songs/mus_pyramid.o(.rodata);
         sound/songs/mus_pyramid_top.o(.rodata);
-        sound/songs/mus_b_palace.o(.rodata);
+        sound/songs/midi/mus_b_palace.o(.rodata);
         sound/songs/mus_rekkuu_kourin.o(.rodata);
         sound/songs/mus_sattower.o(.rodata);
         sound/songs/mus_me_symbolget.o(.rodata);
