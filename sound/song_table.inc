@@ -369,7 +369,7 @@ gSongTable:: @ 86B49F0
 	song mus_machi_s2, 0, 0         @ Petalburg City
 	song mus_machi_s4, 0, 0         @ Oldale/Lavaridge Town
 	song mus_gim, 0, 0              @ Gym
-	song mus_naminori, 0, 0         @ Surfing
+	song mus_naminori, 0, 0         @ Surf
 	song mus_dan01, 0, 0            @ Caves and Darkness
 	song mus_fanfa1, 2, 2           @ Level Up!
 	song mus_me_asa, 2, 2           @ Pokémon Healed
@@ -423,7 +423,7 @@ gSongTable:: @ 86B49F0
 	song mus_hageshii, 0, 0         @ Encounter! Biker
 	song mus_kakkoii, 0, 0          @ Encounter! Electric Trainer
 	song mus_kazanbai, 0, 0         @ Route 113
-	song mus_aqa_0, 0, 0            @ Encounter! Team Aqua
+	song mus_aqa_0, 0, 0            @ Team Aqua Appears!
 	song mus_tsuretek, 0, 0         @ Follow Me!
 	song mus_boy_sup, 0, 0          @ Encounter! Brendan
 	song mus_rainbow, 0, 0          @ Ever Grande City
@@ -434,7 +434,7 @@ gSongTable:: @ 86B49F0
 	song mus_hightown, 0, 0         @ Dewford Town
 	song mus_safari, 0, 0           @ Safari Zone
 	song mus_c_road, 0, 0           @ Victory Road
-	song mus_ajito, 0, 0            @ Aqua/Magma Hideout
+	song mus_ajito, 0, 0            @ Hideout
 	song mus_m_boat, 0, 0           @ Sailing
 	song mus_m_dungon, 0, 0         @ Mt. Pyre (Inside)
 	song mus_finecity, 0, 0         @ Slateport City
