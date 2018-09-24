@@ -950,7 +950,7 @@ SECTIONS {
         sound/songs/mus_rekkuu_kourin.o(.rodata);
         sound/songs/mus_sattower.o(.rodata);
         sound/songs/mus_me_symbolget.o(.rodata);
-        sound/songs/mus_b_dome.o(.rodata);
+        sound/songs/midi/mus_b_dome.o(.rodata);
         sound/songs/mus_b_tube.o(.rodata);
         sound/songs/mus_b_factory.o(.rodata);
         sound/songs/mus_vs_rekku.o(.rodata);
