@@ -149,6 +149,7 @@
 
 	.macro jumpifsideaffecting battler, sidestatus, param2
 	.byte 0x1f
+	.byte \battler
 	.4byte \sidestatus
 	.4byte \param2
 	.endm
