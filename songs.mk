@@ -27,6 +27,9 @@ $(MID_SUBDIR)/mus_b_dome1.s: %.s: %.mid
 $(MID_SUBDIR)/mus_b_frontier.s: %.s: %.mid
 	$(MID) $< $@ -G103 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_b_factory.s: %.s: %.mid
+	$(MID) $< $@ -G113 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_b_palace.s: %.s: %.mid
 	$(MID) $< $@ -G108 -R$(STD_REVERB)
 
