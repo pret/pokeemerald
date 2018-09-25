@@ -479,7 +479,7 @@ gSongTable:: @ 86B49F0
 	song mus_vs_mew, 0, 0           @ Battle! Mew
 	song mus_b_dome1, 0, 0          @ Battle Dome Lobby
 	song mus_battle27, 0, 0         @ Battle! (Wild Pokémon)
-	song mus_battle31, 0, 0         @ Battle! Team Aqua/Magma
+	song mus_battle31, 0, 0         @ Battle! (Team Aqua / Team Magma)
 	song mus_battle20, 0, 0         @ Battle! (Trainer Battle)
 	song mus_battle32, 0, 0         @ Battle! Gym Leader
 	song mus_battle33, 0, 0         @ Battle! Champion
