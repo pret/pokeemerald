@@ -886,7 +886,7 @@ SECTIONS {
         sound/songs/mus_pokecen.o(.rodata);
         sound/songs/mus_nextroad.o(.rodata);
         sound/songs/mus_granroad.o(.rodata);
-        sound/songs/mus_cycling.o(.rodata);
+        sound/songs/midi/mus_cycling.o(.rodata);
         sound/songs/mus_friendly.o(.rodata);
         sound/songs/mus_mishiro.o(.rodata);
         sound/songs/mus_tozan.o(.rodata);

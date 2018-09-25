@@ -99,6 +99,9 @@ $(MID_SUBDIR)/mus_conlobby.s: %.s: %.mid
 $(MID_SUBDIR)/mus_contest0.s: %.s: %.mid
 	$(MID) $< $@ -G086 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_cycling.s: %.s: %.mid
+	$(MID) $< $@ -G049 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
