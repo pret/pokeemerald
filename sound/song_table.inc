@@ -450,7 +450,7 @@ gSongTable:: @ 86B49F0
 	song mus_ooame, 0, 0            @ The Flood
 	song mus_hideri, 0, 0           @ The Drought
 	song mus_runecity, 0, 0         @ Sootopolis City
-	song mus_con_k, 0, 0            @ Contest/Berry Blending Results
+	song mus_con_k, 0, 0            @ Results Announcement
 	song mus_eikou_r, 0, 0          @ Hall of Fame
 	song mus_karakuri, 0, 0         @ Trick House
 	song mus_hutago, 0, 0           @ Encounter! Kid
