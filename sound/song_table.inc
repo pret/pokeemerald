@@ -388,7 +388,7 @@ gSongTable:: @ 86B49F0
 	song mus_dan02, 0, 0            @ Abandoned Ship/Southern Island
 	song mus_machi_s3, 0, 0         @ Fortree City/Pacifidlog Town
 	song mus_odamaki, 0, 0          @ Professor Birch's Lab
-	song mus_b_tower, 0, 0          @ Battle Tower (RS)
+	song mus_b_tower, 0, 0          @ Battle Tower
 	song mus_swimeye, 0, 0          @ Encounter! Swimmer
 	song mus_dan03, 0, 0            @ Meteor Falls/Cave of Origin
 	song mus_me_kinomi, 2, 2        @ Obtained a Berry!

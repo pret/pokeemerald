@@ -33,6 +33,9 @@ $(MID_SUBDIR)/mus_b_factory.s: %.s: %.mid
 $(MID_SUBDIR)/mus_b_palace.s: %.s: %.mid
 	$(MID) $< $@ -G108 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_b_tower.s: %.s: %.mid
+	$(MID) $< $@ -G035 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
