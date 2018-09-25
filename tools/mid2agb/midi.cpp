@@ -782,7 +782,7 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
     EventType lastType = events[index].type;
     std::int32_t lastDuration = 0x80000000;
     std::uint8_t lastNote = 0x80u;
-    std::int32_t lastParam2;
+    //std::int32_t lastParam2;
 
     if (events[index].time > 0)
         score++;
@@ -846,7 +846,7 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
         // BUG: uses type instead of param1
         lastParam1 = (std::uint8_t)events[i].type;
         // unused
-        lastParam2 = events[i].param2;
+        //lastParam2 = events[i].param2;
         lastType = events[i].type;
 
         if (events[i].time)
