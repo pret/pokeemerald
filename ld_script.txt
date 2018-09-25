@@ -912,7 +912,7 @@ SECTIONS {
         sound/songs/mus_casino.o(.rodata);
         sound/songs/mus_hightown.o(.rodata);
         sound/songs/mus_safari.o(.rodata);
-        sound/songs/mus_c_road.o(.rodata);
+        sound/songs/midi/mus_c_road.o(.rodata);
         sound/songs/midi/mus_ajito.o(.rodata);
         sound/songs/mus_m_boat.o(.rodata);
         sound/songs/mus_m_dungon.o(.rodata);
