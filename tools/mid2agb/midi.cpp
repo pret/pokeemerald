@@ -773,14 +773,16 @@ void CalculateWaits(std::vector<Event>& events)
     }
 }
 
+// This code is (purposely) buggy as shit, to mimic how the real mid2agb worked
 int CalculateCompressionScore(std::vector<Event>& events, int index)
 {
     int score = 0;
-    std::uint8_t lastParam1 = events[index].param1;
+    std::uint8_t lastParam1 = (std::uint8_t)events[index].type;
     std::uint8_t lastVelocity = 0x80u;
     EventType lastType = events[index].type;
     std::int32_t lastDuration = 0x80000000;
     std::uint8_t lastNote = 0x80u;
+    std::int32_t lastParam2;
 
     if (events[index].time > 0)
         score++;
@@ -791,10 +793,11 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
         {
             int val = 0;
 
-            if (events[i].note != lastNote)
+            // BUG: uses type instead of note
+            if ((std::uint8_t)events[i].type != lastNote)
             {
                 val++;
-                lastNote = events[i].note;
+                lastNote = (std::uint8_t)events[i].type;
             }
 
             if (events[i].param1 != lastVelocity)
@@ -836,11 +839,14 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
             }
             else
             {
-                score += 2;
+                score++;
             }
         }
 
-        lastParam1 = events[i].param1;
+        // BUG: uses type instead of param1
+        lastParam1 = (std::uint8_t)events[i].type;
+        // unused
+        lastParam2 = events[i].param2;
         lastType = events[i].type;
 
         if (events[i].time)
@@ -900,7 +906,7 @@ void Compress(std::vector<Event>& events)
                 return;
         }
 
-        if (CalculateCompressionScore(events, i) > 6)
+        if (CalculateCompressionScore(events, i) >= 6)
         {
             CompressWholeNote(events, i);
         }
