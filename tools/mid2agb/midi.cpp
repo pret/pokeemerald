@@ -780,7 +780,7 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
     std::uint8_t lastVelocity = 0x80u;
     EventType lastType = events[index].type;
     std::int32_t lastDuration = 0x80000000;
-    std::uint8_t lastNote = 0x80u;
+    std::uint8_t lastNote = 0x40u;
 
     if (events[index].type == EventType::Note)
     {
