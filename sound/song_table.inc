@@ -486,7 +486,7 @@ gSongTable:: @ 86B49F0
 	song mus_battle36, 0, 0         @ Battle! (Regirock/Regice/Registeel)
 	song mus_battle34, 0, 0         @ Battle! (Groudon/Kyogre)
 	song mus_battle35, 0, 0         @ Battle! (Brendan/May/Steven)
-	song mus_battle38, 0, 0         @ Battle! Elite Four
+	song mus_battle38, 0, 0         @ Battle! (Elite Four)
 	song mus_battle30, 0, 0         @ Battle! (Team Aqua/Team Magma Leaders)
 	@ FRLG Music Below
 	song mus_rg_annai, 0, 0         @ Follow Me!
