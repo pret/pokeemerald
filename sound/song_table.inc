@@ -483,7 +483,7 @@ gSongTable:: @ 86B49F0
 	song mus_battle20, 0, 0         @ Battle! (Trainer Battle)
 	song mus_battle32, 0, 0         @ Battle! (Gym Leader)
 	song mus_battle33, 0, 0         @ Battle! (Champion Wallace)
-	song mus_battle36, 0, 0         @ Battle! Regi Trio
+	song mus_battle36, 0, 0         @ Battle! (Regirock/Regice/Registeel)
 	song mus_battle34, 0, 0         @ Battle! (Groudon/Kyogre)
 	song mus_battle35, 0, 0         @ Battle! (Brendan/May/Steven)
 	song mus_battle38, 0, 0         @ Battle! Elite Four
