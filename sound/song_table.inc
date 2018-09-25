@@ -396,7 +396,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_b_big, 2, 2         @ Slots Jackpot!
 	song mus_me_b_small, 2, 2       @ Slots Victory!
 	song mus_me_zannen, 2, 2        @ Too bad!
-	song mus_bd_time, 0, 0          @ Roulette!
+	song mus_bd_time, 0, 0          @ Reel Time
 	song mus_test1, 0, 0            @ Contest Test 1
 	song mus_test2, 0, 0            @ Contest Test 2
 	song mus_test3, 0, 0            @ Contest Test 3

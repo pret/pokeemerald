@@ -69,6 +69,9 @@ $(MID_SUBDIR)/mus_battle36.s: %.s: %.mid
 $(MID_SUBDIR)/mus_battle38.s: %.s: %.mid
 	$(MID) $< $@ -G125 -R$(STD_REVERB) -P1
 
+$(MID_SUBDIR)/mus_bd_time.s: %.s: %.mid
+	$(MID) $< $@ -G038 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
