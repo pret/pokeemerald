@@ -443,7 +443,7 @@ gSongTable:: @ 86B49F0
 	song mus_dendou, 0, 0           @ You're the Champion!
 	song mus_tonekusa, 0, 0         @ Fallarbor Town
 	song mus_maborosi, 0, 0         @ Sealed Chamber
-	song mus_con_fan, 0, 0          @ Obtained a Contest Ribbon!
+	song mus_con_fan, 0, 0          @ Contest Winner
 	song mus_contest0, 0, 0         @ Pokémon Contest
 	song mus_mgm0, 0, 0             @ Encounter! Team Magma
 	song mus_t_battle, 0, 0         @ Opening Battle

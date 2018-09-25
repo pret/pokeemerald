@@ -87,6 +87,9 @@ $(MID_SUBDIR)/mus_c_road.s: %.s: %.mid
 $(MID_SUBDIR)/mus_casino.s: %.s: %.mid
 	$(MID) $< $@ -G072 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_con_fan.s: %.s: %.mid
+	$(MID) $< $@ -G085 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
