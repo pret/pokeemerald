@@ -482,7 +482,7 @@ gSongTable:: @ 86B49F0
 	song mus_battle31, 0, 0         @ Battle! (Team Aqua / Team Magma)
 	song mus_battle20, 0, 0         @ Battle! (Trainer Battle)
 	song mus_battle32, 0, 0         @ Battle! (Gym Leader)
-	song mus_battle33, 0, 0         @ Battle! Champion
+	song mus_battle33, 0, 0         @ Battle! (Champion Wallace)
 	song mus_battle36, 0, 0         @ Battle! Regi Trio
 	song mus_battle34, 0, 0         @ Battle! Legendary Pokémon (dupe)
 	song mus_battle35, 0, 0         @ Battle! Rival
