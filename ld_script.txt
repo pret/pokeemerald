@@ -959,7 +959,7 @@ SECTIONS {
         sound/songs/midi/mus_b_dome1.o(.rodata);
         sound/songs/mus_battle27.o(.rodata);
         sound/songs/mus_battle31.o(.rodata);
-        sound/songs/mus_battle20.o(.rodata);
+        sound/songs/midi/mus_battle20.o(.rodata);
         sound/songs/mus_battle32.o(.rodata);
         sound/songs/mus_battle33.o(.rodata);
         sound/songs/mus_battle36.o(.rodata);
