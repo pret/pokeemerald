@@ -75,6 +75,9 @@ $(MID_SUBDIR)/mus_bd_time.s: %.s: %.mid
 $(MID_SUBDIR)/mus_bijyutu.s: %.s: %.mid
 	$(MID) $< $@ -G020 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_boy_sup.s: %.s: %.mid
+	$(MID) $< $@ -G067 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 

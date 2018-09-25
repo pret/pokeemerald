@@ -904,7 +904,7 @@ SECTIONS {
         sound/songs/mus_kazanbai.o(.rodata);
         sound/songs/midi/mus_aqa_0.o(.rodata);
         sound/songs/mus_tsuretek.o(.rodata);
-        sound/songs/mus_boy_sup.o(.rodata);
+        sound/songs/midi/mus_boy_sup.o(.rodata);
         sound/songs/mus_rainbow.o(.rodata);
         sound/songs/midi/mus_ayasii.o(.rodata);
         sound/songs/mus_kachi4.o(.rodata);

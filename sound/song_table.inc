@@ -425,7 +425,7 @@ gSongTable:: @ 86B49F0
 	song mus_kazanbai, 0, 0         @ Route 113
 	song mus_aqa_0, 0, 0            @ Team Aqua Appears!
 	song mus_tsuretek, 0, 0         @ Follow Me!
-	song mus_boy_sup, 0, 0          @ Encounter! Brendan
+	song mus_boy_sup, 0, 0          @ Brendan
 	song mus_rainbow, 0, 0          @ Ever Grande City
 	song mus_ayasii, 0, 0           @ Trainers' Eyes Meet (Hex Maniac)
 	song mus_kachi4, 0, 0           @ Victory! Aqua/Magma Grunt
