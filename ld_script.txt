@@ -843,7 +843,7 @@ SECTIONS {
         sound/songs/mus_nibi.o(.rodata);
         sound/songs/mus_suikun.o(.rodata);
         sound/songs/mus_dooro1.o(.rodata);
-        sound/songs/mus_dooro_x1.o(.rodata);
+        sound/songs/midi/mus_dooro_x1.o(.rodata);
         sound/songs/mus_dooro_x3.o(.rodata);
         sound/songs/mus_machi_s2.o(.rodata);
         sound/songs/mus_machi_s4.o(.rodata);
