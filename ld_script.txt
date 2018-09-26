@@ -894,7 +894,7 @@ SECTIONS {
         sound/songs/mus_minamo.o(.rodata);
         sound/songs/midi/mus_ashroad.o(.rodata);
         sound/songs/mus_event0.o(.rodata);
-        sound/songs/mus_deepdeep.o(.rodata);
+        sound/songs/midi/mus_deepdeep.o(.rodata);
         sound/songs/mus_kachi1.o(.rodata);
         sound/songs/mus_title3.o(.rodata);
         sound/songs/mus_demo1.o(.rodata);
