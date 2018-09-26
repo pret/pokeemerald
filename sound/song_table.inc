@@ -368,7 +368,7 @@ gSongTable:: @ 86B49F0
 	song mus_dooro_x3, 0, 0         @ Route 120
 	song mus_machi_s2, 0, 0         @ Petalburg City
 	song mus_machi_s4, 0, 0         @ Oldale/Lavaridge Town
-	song mus_gim, 0, 0              @ Gym
+	song mus_gim, 0, 0              @ Pokémon Gym
 	song mus_naminori, 0, 0         @ Surf
 	song mus_dan01, 0, 0            @ Petalburg Woods
 	song mus_fanfa1, 2, 2           @ Level Up!
