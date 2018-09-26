@@ -198,6 +198,9 @@ $(MID_SUBDIR)/mus_hightown.s: %.s: %.mid
 $(MID_SUBDIR)/mus_hutago.s: %.s: %.mid
 	$(MID) $< $@ -G095 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_inter_v.s: %.s: %.mid
+	$(MID) $< $@ -G099 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 

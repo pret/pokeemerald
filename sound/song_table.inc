@@ -457,7 +457,7 @@ gSongTable:: @ 86B49F0
 	song mus_sitennou, 0, 0         @ Encounter! Elite Four
 	song mus_yama_eye, 0, 0         @ Encounter! Hiker
 	song mus_conlobby, 0, 0         @ Contest Lobby
-	song mus_inter_v, 0, 0          @ Encounter! Gabby and Ty
+	song mus_inter_v, 0, 0          @ Interviewers
 	song mus_daigo, 0, 0            @ Champion Wallace
 	song mus_thankfor, 0, 0         @ Credits
 	song mus_end, 0, 0              @ The End
