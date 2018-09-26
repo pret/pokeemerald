@@ -102,6 +102,9 @@ $(MID_SUBDIR)/mus_contest0.s: %.s: %.mid
 $(MID_SUBDIR)/mus_cycling.s: %.s: %.mid
 	$(MID) $< $@ -G049 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_dan01.s: %.s: %.mid
+	$(MID) $< $@ -G018 -R$(STD_REVERB) -V080 -E
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
