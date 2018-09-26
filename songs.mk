@@ -189,6 +189,9 @@ $(MID_SUBDIR)/mus_granroad.s: %.s: %.mid
 $(MID_SUBDIR)/mus_hageshii.s: %.s: %.mid
 	$(MID) $< $@ -G062 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_hideri.s: %.s: %.mid
+	$(MID) $< $@ -G090 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
