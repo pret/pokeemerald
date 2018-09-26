@@ -939,7 +939,7 @@ SECTIONS {
         sound/songs/mus_inter_v.o(.rodata);
         sound/songs/midi/mus_daigo.o(.rodata);
         sound/songs/mus_thankfor.o(.rodata);
-        sound/songs/mus_end.o(.rodata);
+        sound/songs/midi/mus_end.o(.rodata);
         sound/songs/midi/mus_b_frontier.o(.rodata);
         sound/songs/midi/mus_b_arena.o(.rodata);
         sound/songs/mus_me_pointget.o(.rodata);

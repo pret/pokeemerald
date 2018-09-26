@@ -141,6 +141,9 @@ $(MID_SUBDIR)/mus_dummy.s: %.s: %.mid
 $(MID_SUBDIR)/mus_eikou_r.s: %.s: %.mid
 	$(MID) $< $@ -G093 -R$(STD_REVERB) -V080
 
+$(MID_SUBDIR)/mus_end.s: %.s: %.mid
+	$(MID) $< $@ -G102 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
