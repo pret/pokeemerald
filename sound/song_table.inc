@@ -355,7 +355,7 @@ gSongTable:: @ 86B49F0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song mus_tetsuji, 0, 0          @ Littleroot Town Test 'TETSUJI'
-	song mus_field13, 0, 0          @ GSC - Route 38
+	song mus_field13, 0, 0          @ Unused - Route 38
 	song mus_kachi22, 0, 0          @ Wild Pokémon Defeated
 	song mus_kachi2, 0, 0           @ Wild Pokémon Defeated with Intro
 	song mus_kachi3, 0, 0           @ Gym Leader Defeated
