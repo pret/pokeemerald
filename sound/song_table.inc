@@ -440,7 +440,7 @@ gSongTable:: @ 86B49F0
 	song mus_finecity, 0, 0         @ Slateport City
 	song mus_machupi, 0, 0          @ Mt. Pyre (Outside)
 	song mus_p_school, 0, 0         @ Pokémon Trainer's School
-	song mus_dendou, 0, 0           @ You're the Champion!
+	song mus_dendou, 0, 0           @ The Hall of Fame
 	song mus_tonekusa, 0, 0         @ Fallarbor Town
 	song mus_maborosi, 0, 0         @ Sealed Chamber
 	song mus_con_fan, 0, 0          @ Contest Winner
