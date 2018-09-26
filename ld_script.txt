@@ -869,7 +869,7 @@ SECTIONS {
         sound/songs/mus_odamaki.o(.rodata);
         sound/songs/midi/mus_b_tower.o(.rodata);
         sound/songs/mus_swimeye.o(.rodata);
-        sound/songs/mus_dan03.o(.rodata);
+        sound/songs/midi/mus_dan03.o(.rodata);
         sound/songs/mus_me_kinomi.o(.rodata);
         sound/songs/mus_me_tama.o(.rodata);
         sound/songs/mus_me_b_big.o(.rodata);

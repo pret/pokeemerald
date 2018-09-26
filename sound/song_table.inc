@@ -390,7 +390,7 @@ gSongTable:: @ 86B49F0
 	song mus_odamaki, 0, 0          @ Professor Birch's Lab
 	song mus_b_tower, 0, 0          @ Battle Tower
 	song mus_swimeye, 0, 0          @ Encounter! Swimmer
-	song mus_dan03, 0, 0            @ Meteor Falls/Cave of Origin
+	song mus_dan03, 0, 0            @ Cave of Origin
 	song mus_me_kinomi, 2, 2        @ Obtained a Berry!
 	song mus_me_tama, 2, 2          @ Awakening the Super-Ancient Pokémon
 	song mus_me_b_big, 2, 2         @ Slots Jackpot!
