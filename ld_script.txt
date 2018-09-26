@@ -930,7 +930,7 @@ SECTIONS {
         sound/songs/mus_hideri.o(.rodata);
         sound/songs/mus_runecity.o(.rodata);
         sound/songs/midi/mus_con_k.o(.rodata);
-        sound/songs/mus_eikou_r.o(.rodata);
+        sound/songs/midi/mus_eikou_r.o(.rodata);
         sound/songs/mus_karakuri.o(.rodata);
         sound/songs/mus_hutago.o(.rodata);
         sound/songs/mus_sitennou.o(.rodata);
