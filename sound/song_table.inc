@@ -385,7 +385,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_wasure, 2, 2        @ Move Deleted/Messed Up Appeal
 	song mus_syoujoeye, 0, 0        @ Encounter! Tuber
 	song mus_boyeye, 0, 0           @ Trainers' Eyes Meet (Youngster)
-	song mus_dan02, 0, 0            @ Abandoned Ship/Southern Island
+	song mus_dan02, 0, 0            @ Abandoned Ship
 	song mus_machi_s3, 0, 0         @ Fortree City/Pacifidlog Town
 	song mus_odamaki, 0, 0          @ Professor Birch's Lab
 	song mus_b_tower, 0, 0          @ Battle Tower

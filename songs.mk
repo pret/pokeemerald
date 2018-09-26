@@ -105,6 +105,9 @@ $(MID_SUBDIR)/mus_cycling.s: %.s: %.mid
 $(MID_SUBDIR)/mus_dan01.s: %.s: %.mid
 	$(MID) $< $@ -G018 -R$(STD_REVERB) -V080 -E
 
+$(MID_SUBDIR)/mus_dan02.s: %.s: %.mid
+	$(MID) $< $@ -G030 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
