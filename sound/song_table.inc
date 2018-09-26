@@ -416,7 +416,7 @@ gSongTable:: @ 86B49F0
 	song mus_ashroad, 0, 0          @ Route 111
 	song mus_event0, 0, 0           @ H-Help Me!
 	song mus_deepdeep, 0, 0         @ Dive
-	song mus_kachi1, 0, 0           @ Victory! Trainer
+	song mus_kachi1, 0, 0           @ Victory! (Trainer Battle)
 	song mus_title3, 0, 0           @ Title Screen
 	song mus_demo1, 0, 0            @ Opening Movie: Setting out on a Journey in the Hoenn Region
 	song mus_girl_sup, 0, 0         @ May

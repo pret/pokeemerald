@@ -201,6 +201,9 @@ $(MID_SUBDIR)/mus_hutago.s: %.s: %.mid
 $(MID_SUBDIR)/mus_inter_v.s: %.s: %.mid
 	$(MID) $< $@ -G099 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_kachi1.s: %.s: %.mid
+	$(MID) $< $@ -G058 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
