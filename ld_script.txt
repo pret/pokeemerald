@@ -850,7 +850,7 @@ SECTIONS {
         sound/songs/mus_gim.o(.rodata);
         sound/songs/midi/mus_naminori.o(.rodata);
         sound/songs/midi/mus_dan01.o(.rodata);
-        sound/songs/mus_fanfa1.o(.rodata);
+        sound/songs/midi/mus_fanfa1.o(.rodata);
         sound/songs/mus_me_asa.o(.rodata);
         sound/songs/mus_me_bachi.o(.rodata);
         sound/songs/mus_fanfa4.o(.rodata);

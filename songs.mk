@@ -147,6 +147,9 @@ $(MID_SUBDIR)/mus_end.s: %.s: %.mid
 $(MID_SUBDIR)/mus_event0.s: %.s: %.mid
 	$(MID) $< $@ -G056 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_fanfa1.s: %.s: %.mid
+	$(MID) $< $@ -G012 -R$(STD_REVERB) -P5
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
