@@ -135,6 +135,9 @@ $(MID_SUBDIR)/mus_dooro_x4.s: %.s: %.mid
 $(MID_SUBDIR)/mus_dooro1.s: %.s: %.mid
 	$(MID) $< $@ -G011 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_dummy.s: %.s: %.mid
+	$(MID) $< $@ -R40
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 

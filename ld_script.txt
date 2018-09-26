@@ -563,7 +563,7 @@ SECTIONS {
     song_data :
     ALIGN(4)
     {
-        sound/songs/mus_dummy.o(.rodata);
+        sound/songs/midi/mus_dummy.o(.rodata);
         sound/songs/se_kaifuku.o(.rodata);
         sound/songs/se_pc_login.o(.rodata);
         sound/songs/se_pc_off.o(.rodata);
