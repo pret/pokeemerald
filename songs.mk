@@ -117,6 +117,9 @@ $(MID_SUBDIR)/mus_deepdeep.s: %.s: %.mid
 $(MID_SUBDIR)/mus_demo1.s: %.s: %.mid
 	$(MID) $< $@ -G060 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_daigo.s: %.s: %.mid
+	$(MID) $< $@ -G100 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_dendou.s: %.s: %.mid
 	$(MID) $< $@ -G082 -R$(STD_REVERB)
 

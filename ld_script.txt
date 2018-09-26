@@ -937,7 +937,7 @@ SECTIONS {
         sound/songs/mus_yama_eye.o(.rodata);
         sound/songs/midi/mus_conlobby.o(.rodata);
         sound/songs/mus_inter_v.o(.rodata);
-        sound/songs/mus_daigo.o(.rodata);
+        sound/songs/midi/mus_daigo.o(.rodata);
         sound/songs/mus_thankfor.o(.rodata);
         sound/songs/mus_end.o(.rodata);
         sound/songs/midi/mus_b_frontier.o(.rodata);
