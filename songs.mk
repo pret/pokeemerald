@@ -126,6 +126,9 @@ $(MID_SUBDIR)/mus_dendou.s: %.s: %.mid
 $(MID_SUBDIR)/mus_dooro_x1.s: %.s: %.mid
 	$(MID) $< $@ -G010 -R$(STD_REVERB) -V080
 
+$(MID_SUBDIR)/mus_dooro_x3.s: %.s: %.mid
+	$(MID) $< $@ -G014 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
