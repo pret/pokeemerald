@@ -785,7 +785,7 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
     if (events[index].type == EventType::Note)
     {
         // Bug reintroduction
-        lastParam1 |= events[index].note + 0x40;
+        lastParam1 = events[index].note + 0x40;
     }
 
     if (events[index].time > 0)
@@ -842,7 +842,7 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
             }
             else
             {
-                score++;
+                score += 2;
             }
         }
 
@@ -851,7 +851,7 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
         if (events[i].type == EventType::Note)
         {
             // Bug reintroduction
-            lastParam1 |= events[i].note + 0x40;
+            lastParam1 = events[i].note + 0x40;
         }
 
         lastType = events[i].type;
