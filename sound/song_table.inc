@@ -375,7 +375,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_asa, 2, 2           @ Pokémon Healed
 	song mus_me_bachi, 2, 2         @ Obtained a Badge!
 	song mus_fanfa4, 2, 2           @ Obtained an Item!
-	song mus_fanfa5, 2, 2           @ Your Pokémon Just Evolved!
+	song mus_fanfa5, 2, 2           @ Congratulations! Your Pokémon Evolved!
 	song mus_me_waza, 2, 2          @ Obtained a TM/HM!
 	song mus_bijyutu, 0, 0          @ Museum
 	song mus_dooro_x4, 0, 0         @ Introductions
