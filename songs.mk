@@ -183,6 +183,9 @@ $(MID_SUBDIR)/mus_gomachi0.s: %.s: %.mid
 $(MID_SUBDIR)/mus_gotown.s: %.s: %.mid
 	$(MID) $< $@ -G045 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_granroad.s: %.s: %.mid
+	$(MID) $< $@ -G048 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
