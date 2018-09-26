@@ -177,6 +177,9 @@ $(MID_SUBDIR)/mus_girl_sup.s: %.s: %.mid
 $(MID_SUBDIR)/mus_girleye.s: %.s: %.mid
 	$(MID) $< $@ -G053 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_gomachi0.s: %.s: %.mid
+	$(MID) $< $@ -G044 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
