@@ -403,7 +403,7 @@ gSongTable:: @ 86B49F0
 	song mus_test4, 0, 0            @ Contest Test 4
 	song mus_test, 0, 0             @ Encounter! Gentleman
 	song mus_gomachi0, 0, 0         @ Verdanturf Town
-	song mus_gotown, 0, 0           @ Rustboro/Mauville/Mossdeep City
+	song mus_gotown, 0, 0           @ Rustboro City
 	song mus_pokecen, 0, 0          @ Pokémon Center
 	song mus_nextroad, 0, 0         @ Route 104
 	song mus_granroad, 0, 0         @ Route 119
