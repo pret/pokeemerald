@@ -152,3 +152,6 @@ $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -G071 -R$(STD_REVERB) -V078
+
+$(MID_SUBDIR)/se_z_search.s: %.s: %.mid
+	$(MID) $< $@ -G127 -R$(STD_REVERB) -P5
