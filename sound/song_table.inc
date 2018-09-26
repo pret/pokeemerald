@@ -379,7 +379,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_waza, 2, 2          @ Obtained a TM/HM!
 	song mus_bijyutu, 0, 0          @ Museum
 	song mus_dooro_x4, 0, 0         @ Introductions
-	song mus_fune_kan, 0, 0         @ Slateport Museum
+	song mus_fune_kan, 0, 0         @ Oceanic Museum
 	song mus_me_shinka, 2, 2        @ Evolution Intro
 	song mus_shinka, 0, 0           @ Evolution
 	song mus_me_wasure, 2, 2        @ Move Deleted/Messed Up Appeal

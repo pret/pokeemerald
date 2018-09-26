@@ -165,6 +165,9 @@ $(MID_SUBDIR)/mus_finecity.s: %.s: %.mid
 $(MID_SUBDIR)/mus_friendly.s: %.s: %.mid
 	$(MID) $< $@ -G050 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_fune_kan.s: %.s: %.mid
+	$(MID) $< $@ -G023 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
