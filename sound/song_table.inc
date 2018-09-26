@@ -414,7 +414,7 @@ gSongTable:: @ 86B49F0
 	song mus_girleye, 0, 0          @ Encounter! Girl
 	song mus_minamo, 0, 0           @ Lilycove City
 	song mus_ashroad, 0, 0          @ Route 111
-	song mus_event0, 0, 0           @ Help me!
+	song mus_event0, 0, 0           @ H-Help Me!
 	song mus_deepdeep, 0, 0         @ Dive
 	song mus_kachi1, 0, 0           @ Victory! Trainer
 	song mus_title3, 0, 0           @ Title Screen
