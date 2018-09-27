@@ -355,11 +355,11 @@ gSongTable:: @ 86B49F0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song mus_tetsuji, 0, 0          @ Littleroot Town Test 'TETSUJI'
-	song mus_field13, 0, 0          @ GSC - Route 38
-	song mus_kachi22, 0, 0          @ Wild Pokémon Defeated
-	song mus_kachi2, 0, 0           @ Wild Pokémon Defeated with Intro
-	song mus_kachi3, 0, 0           @ Gym Leader Defeated
-	song mus_kachi5, 0, 0           @ Victory! Elite Four
+	song mus_field13, 0, 0          @ Unused - Route 38
+	song mus_kachi22, 0, 0          @ Victory! (Wild Pokémon) (No Intro)
+	song mus_kachi2, 0, 0           @ Victory! (Wild Pokémon)
+	song mus_kachi3, 0, 0           @ Victory! (Gym Leader)
+	song mus_kachi5, 0, 0           @ Victory! (Wallace)
 	song mus_pcc, 0, 0              @ Crystal - Pokémon Communication Center
 	song mus_nibi, 0, 0             @ GSC - Viridian/Saffron/Pewter/etc
 	song mus_suikun, 0, 0           @ Crystal - Battle! Legendary Beasts
@@ -368,97 +368,97 @@ gSongTable:: @ 86B49F0
 	song mus_dooro_x3, 0, 0         @ Route 120
 	song mus_machi_s2, 0, 0         @ Petalburg City
 	song mus_machi_s4, 0, 0         @ Oldale/Lavaridge Town
-	song mus_gim, 0, 0              @ Gym
-	song mus_naminori, 0, 0         @ Surfing
-	song mus_dan01, 0, 0            @ Caves and Darkness
+	song mus_gim, 0, 0              @ Pokémon Gym
+	song mus_naminori, 0, 0         @ Surf
+	song mus_dan01, 0, 0            @ Petalburg Woods
 	song mus_fanfa1, 2, 2           @ Level Up!
 	song mus_me_asa, 2, 2           @ Pokémon Healed
 	song mus_me_bachi, 2, 2         @ Obtained a Badge!
 	song mus_fanfa4, 2, 2           @ Obtained an Item!
-	song mus_fanfa5, 2, 2           @ Your Pokémon Just Evolved!
+	song mus_fanfa5, 2, 2           @ Congratulations! Your Pokémon Evolved!
 	song mus_me_waza, 2, 2          @ Obtained a TM/HM!
-	song mus_bijyutu, 0, 0          @ Lilycove Museum
-	song mus_dooro_x4, 0, 0         @ Route 122/Intro
-	song mus_fune_kan, 0, 0         @ Slateport Museum
+	song mus_bijyutu, 0, 0          @ Museum
+	song mus_dooro_x4, 0, 0         @ Introductions
+	song mus_fune_kan, 0, 0         @ Oceanic Museum
 	song mus_me_shinka, 2, 2        @ Evolution Intro
 	song mus_shinka, 0, 0           @ Evolution
 	song mus_me_wasure, 2, 2        @ Move Deleted/Messed Up Appeal
 	song mus_syoujoeye, 0, 0        @ Encounter! Tuber
-	song mus_boyeye, 0, 0           @ Encounter! Boy
-	song mus_dan02, 0, 0            @ Abandoned Ship/Southern Island
+	song mus_boyeye, 0, 0           @ Trainers' Eyes Meet (Youngster)
+	song mus_dan02, 0, 0            @ Abandoned Ship
 	song mus_machi_s3, 0, 0         @ Fortree City/Pacifidlog Town
 	song mus_odamaki, 0, 0          @ Professor Birch's Lab
-	song mus_b_tower, 0, 0          @ Battle Tower (RS)
+	song mus_b_tower, 0, 0          @ Battle Tower
 	song mus_swimeye, 0, 0          @ Encounter! Swimmer
-	song mus_dan03, 0, 0            @ Meteor Falls/Cave of Origin
+	song mus_dan03, 0, 0            @ Cave of Origin
 	song mus_me_kinomi, 2, 2        @ Obtained a Berry!
 	song mus_me_tama, 2, 2          @ Awakening the Super-Ancient Pokémon
 	song mus_me_b_big, 2, 2         @ Slots Jackpot!
 	song mus_me_b_small, 2, 2       @ Slots Victory!
 	song mus_me_zannen, 2, 2        @ Too bad!
-	song mus_bd_time, 0, 0          @ Roulette!
+	song mus_bd_time, 0, 0          @ Reel Time
 	song mus_test1, 0, 0            @ Contest Test 1
 	song mus_test2, 0, 0            @ Contest Test 2
 	song mus_test3, 0, 0            @ Contest Test 3
 	song mus_test4, 0, 0            @ Contest Test 4
 	song mus_test, 0, 0             @ Encounter! Gentleman
 	song mus_gomachi0, 0, 0         @ Verdanturf Town
-	song mus_gotown, 0, 0           @ Rustboro/Mauville/Mossdeep City
+	song mus_gotown, 0, 0           @ Rustboro City
 	song mus_pokecen, 0, 0          @ Pokémon Center
 	song mus_nextroad, 0, 0         @ Route 104
 	song mus_granroad, 0, 0         @ Route 119
 	song mus_cycling, 0, 0          @ Cycling
-	song mus_friendly, 0, 0         @ Pokémart
+	song mus_friendly, 0, 0         @ Poké Mart
 	song mus_mishiro, 0, 0          @ Littleroot Town
 	song mus_tozan, 0, 0            @ Sky Pillar
-	song mus_girleye, 0, 0          @ Encounter! Girl
+	song mus_girleye, 0, 0          @ Trainers' Eyes Meet (Lass)
 	song mus_minamo, 0, 0           @ Lilycove City
 	song mus_ashroad, 0, 0          @ Route 111
-	song mus_event0, 0, 0           @ Help me!
-	song mus_deepdeep, 0, 0         @ Underwater
-	song mus_kachi1, 0, 0           @ Victory! Trainer
+	song mus_event0, 0, 0           @ H-Help Me!
+	song mus_deepdeep, 0, 0         @ Dive
+	song mus_kachi1, 0, 0           @ Victory! (Trainer Battle)
 	song mus_title3, 0, 0           @ Title Screen
-	song mus_demo1, 0, 0            @ Opening Movie
-	song mus_girl_sup, 0, 0         @ Encounter! May
-	song mus_hageshii, 0, 0         @ Encounter! Biker
-	song mus_kakkoii, 0, 0          @ Encounter! Electric Trainer
+	song mus_demo1, 0, 0            @ Opening Movie: Setting out on a Journey in the Hoenn Region
+	song mus_girl_sup, 0, 0         @ May
+	song mus_hageshii, 0, 0         @ Trainers' Eyes Meet (Psychic)
+	song mus_kakkoii, 0, 0          @ Trainers' Eyes Meet (Cooltrainer)
 	song mus_kazanbai, 0, 0         @ Route 113
-	song mus_aqa_0, 0, 0            @ Encounter! Team Aqua
+	song mus_aqa_0, 0, 0            @ Team Aqua Appears!
 	song mus_tsuretek, 0, 0         @ Follow Me!
-	song mus_boy_sup, 0, 0          @ Encounter! Brendan
+	song mus_boy_sup, 0, 0          @ Brendan
 	song mus_rainbow, 0, 0          @ Ever Grande City
-	song mus_ayasii, 0, 0           @ Encounter! Psychic
-	song mus_kachi4, 0, 0           @ Victory! Aqua/Magma Grunt
+	song mus_ayasii, 0, 0           @ Trainers' Eyes Meet (Hex Maniac)
+	song mus_kachi4, 0, 0           @ Victory! (Team Aqua / Team Magma)
 	song mus_ropeway, 0, 0          @ Cable Car
 	song mus_casino, 0, 0           @ Game Corner
 	song mus_hightown, 0, 0         @ Dewford Town
 	song mus_safari, 0, 0           @ Safari Zone
 	song mus_c_road, 0, 0           @ Victory Road
-	song mus_ajito, 0, 0            @ Aqua/Magma Hideout
+	song mus_ajito, 0, 0            @ Hideout
 	song mus_m_boat, 0, 0           @ Sailing
 	song mus_m_dungon, 0, 0         @ Mt. Pyre (Inside)
 	song mus_finecity, 0, 0         @ Slateport City
 	song mus_machupi, 0, 0          @ Mt. Pyre (Outside)
 	song mus_p_school, 0, 0         @ Pokémon Trainer's School
-	song mus_dendou, 0, 0           @ You're the Champion!
+	song mus_dendou, 0, 0           @ The Hall of Fame
 	song mus_tonekusa, 0, 0         @ Fallarbor Town
 	song mus_maborosi, 0, 0         @ Sealed Chamber
-	song mus_con_fan, 0, 0          @ Obtained a Contest Ribbon!
-	song mus_contest0, 0, 0         @ Pokémon Contest
+	song mus_con_fan, 0, 0          @ Contest Winner
+	song mus_contest0, 0, 0         @ Pokémon Contest!
 	song mus_mgm0, 0, 0             @ Encounter! Team Magma
 	song mus_t_battle, 0, 0         @ Opening Battle
 	song mus_ooame, 0, 0            @ The Flood
 	song mus_hideri, 0, 0           @ The Drought
 	song mus_runecity, 0, 0         @ Sootopolis City
-	song mus_con_k, 0, 0            @ Contest/Berry Blending Results
-	song mus_eikou_r, 0, 0          @ Hall of Fame
-	song mus_karakuri, 0, 0         @ Trick House
-	song mus_hutago, 0, 0           @ Encounter! Kid
+	song mus_con_k, 0, 0            @ Results Announcement
+	song mus_eikou_r, 0, 0          @ Room of Glory
+	song mus_karakuri, 0, 0         @ The Trick House
+	song mus_hutago, 0, 0           @ Twins
 	song mus_sitennou, 0, 0         @ Encounter! Elite Four
 	song mus_yama_eye, 0, 0         @ Encounter! Hiker
 	song mus_conlobby, 0, 0         @ Contest Lobby
-	song mus_inter_v, 0, 0          @ Encounter! Gabby and Ty
-	song mus_daigo, 0, 0            @ Encounter! Wallace
+	song mus_inter_v, 0, 0          @ Interviewers
+	song mus_daigo, 0, 0            @ Champion Wallace
 	song mus_thankfor, 0, 0         @ Credits
 	song mus_end, 0, 0              @ The End
 	song mus_b_frontier, 0, 0       @ Battle Frontier
@@ -478,16 +478,16 @@ gSongTable:: @ 86B49F0
 	song mus_vs_front, 0, 0         @ Battle! Frontier Brain
 	song mus_vs_mew, 0, 0           @ Battle! Mew
 	song mus_b_dome1, 0, 0          @ Battle Dome Lobby
-	song mus_battle27, 0, 0         @ Battle! Wild Pokémon
-	song mus_battle31, 0, 0         @ Battle! Team Aqua/Magma
-	song mus_battle20, 0, 0         @ Battle! Trainer
-	song mus_battle32, 0, 0         @ Battle! Gym Leader
-	song mus_battle33, 0, 0         @ Battle! Champion
-	song mus_battle36, 0, 0         @ Battle! Regi Trio
-	song mus_battle34, 0, 0         @ Battle! Legendary Pokémon (dupe)
-	song mus_battle35, 0, 0         @ Battle! Rival
-	song mus_battle38, 0, 0         @ Battle! Elite Four
-	song mus_battle30, 0, 0         @ Battle! Archie/Maxie
+	song mus_battle27, 0, 0         @ Battle! (Wild Pokémon)
+	song mus_battle31, 0, 0         @ Battle! (Team Aqua / Team Magma)
+	song mus_battle20, 0, 0         @ Battle! (Trainer Battle)
+	song mus_battle32, 0, 0         @ Battle! (Gym Leader)
+	song mus_battle33, 0, 0         @ Battle! (Champion Wallace)
+	song mus_battle36, 0, 0         @ Battle! (Regirock/Regice/Registeel)
+	song mus_battle34, 0, 0         @ Battle! (Groudon/Kyogre)
+	song mus_battle35, 0, 0         @ Battle! (Brendan/May/Steven)
+	song mus_battle38, 0, 0         @ Battle! (Elite Four)
+	song mus_battle30, 0, 0         @ Battle! (Team Aqua/Team Magma Leaders)
 	@ FRLG Music Below
 	song mus_rg_annai, 0, 0         @ Follow Me!
 	song mus_rg_slot, 0, 0          @ Game Corner
