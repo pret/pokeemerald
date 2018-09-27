@@ -835,7 +835,7 @@ SECTIONS {
         sound/songs/se_ussoki.o(.rodata);
         sound/songs/mus_tetsuji.o(.rodata);
         sound/songs/midi/mus_field13.o(.rodata);
-        sound/songs/mus_kachi22.o(.rodata);
+        sound/songs/midi/mus_kachi22.o(.rodata);
         sound/songs/midi/mus_kachi2.o(.rodata);
         sound/songs/midi/mus_kachi3.o(.rodata);
         sound/songs/midi/mus_kachi5.o(.rodata);
