@@ -838,7 +838,7 @@ SECTIONS {
         sound/songs/mus_kachi22.o(.rodata);
         sound/songs/midi/mus_kachi2.o(.rodata);
         sound/songs/mus_kachi3.o(.rodata);
-        sound/songs/mus_kachi5.o(.rodata);
+        sound/songs/midi/mus_kachi5.o(.rodata);
         sound/songs/mus_pcc.o(.rodata);
         sound/songs/mus_nibi.o(.rodata);
         sound/songs/mus_suikun.o(.rodata);

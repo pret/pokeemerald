@@ -359,7 +359,7 @@ gSongTable:: @ 86B49F0
 	song mus_kachi22, 0, 0          @ Wild Pokémon Defeated
 	song mus_kachi2, 0, 0           @ Victory! (Wild Pokémon)
 	song mus_kachi3, 0, 0           @ Gym Leader Defeated
-	song mus_kachi5, 0, 0           @ Victory! Elite Four
+	song mus_kachi5, 0, 0           @ Victory! (Wallace)
 	song mus_pcc, 0, 0              @ Crystal - Pokémon Communication Center
 	song mus_nibi, 0, 0             @ GSC - Viridian/Saffron/Pewter/etc
 	song mus_suikun, 0, 0           @ Crystal - Battle! Legendary Beasts
