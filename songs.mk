@@ -207,6 +207,9 @@ $(MID_SUBDIR)/mus_kachi1.s: %.s: %.mid
 $(MID_SUBDIR)/mus_kachi2.s: %.s: %.mid
 	$(MID) $< $@ -G025 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_kachi3.s: %.s: %.mid
+	$(MID) $< $@ -G024 -R$(STD_REVERB) -V080
+
 $(MID_SUBDIR)/mus_kachi4.s: %.s: %.mid
 	$(MID) $< $@ -G070 -R$(STD_REVERB)
 
