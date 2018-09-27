@@ -222,6 +222,9 @@ $(MID_SUBDIR)/mus_kachi22.s: %.s: %.mid
 $(MID_SUBDIR)/mus_kakkoii.s: %.s: %.mid
 	$(MID) $< $@ -G063 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_karakuri.s: %.s: %.mid
+	$(MID) $< $@ -G094 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
