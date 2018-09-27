@@ -421,7 +421,7 @@ gSongTable:: @ 86B49F0
 	song mus_demo1, 0, 0            @ Opening Movie: Setting out on a Journey in the Hoenn Region
 	song mus_girl_sup, 0, 0         @ May
 	song mus_hageshii, 0, 0         @ Trainers' Eyes Meet (Psychic)
-	song mus_kakkoii, 0, 0          @ Encounter! Electric Trainer
+	song mus_kakkoii, 0, 0          @ Trainers' Eyes Meet (Cooltrainer)
 	song mus_kazanbai, 0, 0         @ Route 113
 	song mus_aqa_0, 0, 0            @ Team Aqua Appears!
 	song mus_tsuretek, 0, 0         @ Follow Me!
