@@ -249,6 +249,9 @@ $(MID_SUBDIR)/mus_machi_s4.s: %.s: %.mid
 $(MID_SUBDIR)/mus_machupi.s: %.s: %.mid
 	$(MID) $< $@ -G080 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_me_asa.s: %.s: %.mid
+	$(MID) $< $@ -G012 -R$(STD_REVERB) -V090 -P5
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
