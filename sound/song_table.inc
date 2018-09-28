@@ -436,7 +436,7 @@ gSongTable:: @ 86B49F0
 	song mus_c_road, 0, 0           @ Victory Road
 	song mus_ajito, 0, 0            @ Hideout
 	song mus_m_boat, 0, 0           @ Crossing the Sea
-	song mus_m_dungon, 0, 0         @ Mt. Pyre (Inside)
+	song mus_m_dungon, 0, 0         @ Mt. Pyre
 	song mus_finecity, 0, 0         @ Slateport City
 	song mus_machupi, 0, 0          @ Mt. Pyre (Outside)
 	song mus_p_school, 0, 0         @ Pokémon Trainer's School
