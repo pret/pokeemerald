@@ -921,7 +921,7 @@ SECTIONS {
         sound/songs/mus_p_school.o(.rodata);
         sound/songs/midi/mus_dendou.o(.rodata);
         sound/songs/mus_tonekusa.o(.rodata);
-        sound/songs/mus_maborosi.o(.rodata);
+        sound/songs/midi/mus_maborosi.o(.rodata);
         sound/songs/midi/mus_con_fan.o(.rodata);
         sound/songs/midi/mus_contest0.o(.rodata);
         sound/songs/mus_mgm0.o(.rodata);

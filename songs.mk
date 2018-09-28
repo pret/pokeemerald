@@ -234,6 +234,9 @@ $(MID_SUBDIR)/mus_m_boat.s: %.s: %.mid
 $(MID_SUBDIR)/mus_m_dungon.s: %.s: %.mid
 	$(MID) $< $@ -G078 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_maborosi.s: %.s: %.mid
+	$(MID) $< $@ -G084 -R$(STD_REVERB)
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
