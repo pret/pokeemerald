@@ -228,6 +228,9 @@ $(MID_SUBDIR)/mus_karakuri.s: %.s: %.mid
 $(MID_SUBDIR)/mus_kazanbai.s: %.s: %.mid
 	$(MID) $< $@ -G064 -R$(STD_REVERB)
 
+$(MID_SUBDIR)/mus_m_boat.s: %.s: %.mid
+	$(MID) $< $@ -G077 -R$(STD_REVERB) -V086
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
