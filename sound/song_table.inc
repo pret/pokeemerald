@@ -474,7 +474,7 @@ gSongTable:: @ 86B49F0
 	song mus_b_dome, 0, 0           @ Battle Dome
 	song mus_b_tube, 0, 0           @ Battle Pike
 	song mus_b_factory, 0, 0        @ Battle Factory
-	song mus_vs_rekku, 0, 0         @ Battle! Legendary Pokémon
+	song mus_vs_rekku, 0, 0         @ Battle! (Rayquaza)
 	song mus_vs_front, 0, 0         @ Battle! (Frontier Brain)
 	song mus_vs_mew, 0, 0           @ Battle! (Mew)
 	song mus_b_dome1, 0, 0          @ Battle Dome Lobby

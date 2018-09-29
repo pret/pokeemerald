@@ -396,6 +396,9 @@ $(MID_SUBDIR)/mus_vs_front.s: %.s: %.mid
 $(MID_SUBDIR)/mus_vs_mew.s: %.s: %.mid
 	$(MID) $< $@ -G116 -R$(STD_REVERB) -V090
 
+$(MID_SUBDIR)/mus_vs_rekku.s: %.s: %.mid
+	$(MID) $< $@ -G114 -R$(STD_REVERB) -V080 -P1
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
