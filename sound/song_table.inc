@@ -360,7 +360,7 @@ gSongTable:: @ 86B49F0
 	song mus_kachi2, 0, 0           @ Victory! (Wild Pokémon)
 	song mus_kachi3, 0, 0           @ Victory! (Gym Leader)
 	song mus_kachi5, 0, 0           @ Victory! (Wallace)
-	song mus_pcc, 0, 0              @ Crystal - Pokémon Communication Center
+	song mus_pcc, 0, 0              @ Unused - Pokémon Center (2)
 	song mus_nibi, 0, 0             @ Unused - Viridian City
 	song mus_suikun, 0, 0           @ Crystal - Battle! Legendary Beasts
 	song mus_dooro1, 0, 0           @ Route 101
