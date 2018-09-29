@@ -924,7 +924,7 @@ SECTIONS {
         sound/songs/midi/mus_maborosi.o(.rodata);
         sound/songs/midi/mus_con_fan.o(.rodata);
         sound/songs/midi/mus_contest0.o(.rodata);
-        sound/songs/mus_mgm0.o(.rodata);
+        sound/songs/midi/mus_mgm0.o(.rodata);
         sound/songs/mus_t_battle.o(.rodata);
         sound/songs/mus_ooame.o(.rodata);
         sound/songs/midi/mus_hideri.o(.rodata);

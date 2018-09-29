@@ -445,7 +445,7 @@ gSongTable:: @ 86B49F0
 	song mus_maborosi, 0, 0         @ Sealed Chamber
 	song mus_con_fan, 0, 0          @ Contest Winner
 	song mus_contest0, 0, 0         @ Pokémon Contest!
-	song mus_mgm0, 0, 0             @ Encounter! Team Magma
+	song mus_mgm0, 0, 0             @ Team Magma Appears!
 	song mus_t_battle, 0, 0         @ Opening Battle
 	song mus_ooame, 0, 0            @ The Flood
 	song mus_hideri, 0, 0           @ The Drought
