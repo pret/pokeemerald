@@ -339,6 +339,9 @@ $(MID_SUBDIR)/mus_safari.s: %.s: %.mid
 $(MID_SUBDIR)/mus_sattower.s: %.s: %.mid
 	$(MID) $< $@ -G110 -R$(STD_REVERB) -V100
 
+$(MID_SUBDIR)/mus_shinka.s: %.s: %.mid
+	$(MID) $< $@ -G026 -R$(STD_REVERB) -V080
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
