@@ -333,6 +333,9 @@ $(MID_SUBDIR)/mus_rekkuu_kourin.s: %.s: %.mid
 $(MID_SUBDIR)/mus_runecity.s: %.s: %.mid
 	$(MID) $< $@ -G091 -R$(STD_REVERB) -V062
 
+$(MID_SUBDIR)/mus_safari.s: %.s: %.mid
+	$(MID) $< $@ -G074 -R$(STD_REVERB) -V082
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
