@@ -455,7 +455,7 @@ gSongTable:: @ 86B49F0
 	song mus_karakuri, 0, 0         @ The Trick House
 	song mus_hutago, 0, 0           @ Twins
 	song mus_sitennou, 0, 0         @ The Elite Four Appear!
-	song mus_yama_eye, 0, 0         @ Encounter! Hiker
+	song mus_yama_eye, 0, 0         @ Trainers' Eyes Meet (Hiker)
 	song mus_conlobby, 0, 0         @ Contest Lobby
 	song mus_inter_v, 0, 0          @ Interviewers
 	song mus_daigo, 0, 0            @ Champion Wallace
