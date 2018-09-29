@@ -649,6 +649,7 @@ static const u8 sText_drastically[] = _("drastically ");
 static const u8 sText_severely[] = _("severely ");
 static const u8 sText_Infestation[] = _("{B_DEF_NAME_WITH_PREFIX} has been afflicted\nwith an infestation by {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_NoEffectOnTarget[] = _("It had no effect\non {B_DEF_NAME_WITH_PREFIX}!");
+static const u8 sText_BurstingFlames[] = _("The bursting flames\nhit {B_SCR_ACTIVE_NAME_WITH_PREFIX}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1149,6 +1150,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_severely,
     sText_Infestation,
     sText_NoEffectOnTarget,
+    sText_BurstingFlames,
 };
 
 const u16 gTerrainStringIds[] =
@@ -1450,6 +1452,11 @@ const u16 gRoomsStringIds[] =
     STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON, STRINGID_WONDERROOMENDS,
     STRINGID_HELDITEMSLOSEEFFECTS, STRINGID_MAGICROOMENDS,
     STRINGID_EMPTYSTRING3
+};
+
+const u16 gStatusConditionsStringIds[] =
+{
+    STRINGID_PKMNWASPOISONED, STRINGID_PKMNBADLYPOISONED, STRINGID_PKMNWASBURNED, STRINGID_PKMNWASPARALYZED, STRINGID_PKMNFELLASLEEP
 };
 
 const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!");

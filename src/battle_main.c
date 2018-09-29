@@ -3143,6 +3143,8 @@ void SwitchInClearSetData(void)
                 gStatuses3[i] |= 0x10;
             }
         }
+        if (gStatuses3[gActiveBattler] & STATUS3_POWER_TRICK)
+            SWAP(gBattleMons[gActiveBattler].attack, gBattleMons[gActiveBattler].defense, i);
     }
     else
     {

@@ -1522,6 +1522,19 @@
 	.4byte \ptr
 	.endm
 	
+	.macro trypsychoshift ptr
+	various BS_ATTACKER, VARIOUS_PSYCHO_SHIFT
+	.4byte \ptr
+	.endm
+	
+	.macro curestatus battler
+	various \battler, VARIOUS_CURE_STATUS
+	.endm
+	
+	.macro powertrick battler
+	various \battler, VARIOUS_POWER_TRICK
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

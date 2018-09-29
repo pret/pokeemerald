@@ -112,6 +112,9 @@
 #define VARIOUS_DEFOG							58
 #define VARIOUS_JUMP_IF_TARGET_ALLY				59
 #define VARIOUS_TRY_SYNCHRONOISE				60
+#define VARIOUS_PSYCHO_SHIFT					61
+#define VARIOUS_CURE_STATUS						62
+#define VARIOUS_POWER_TRICK						63
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

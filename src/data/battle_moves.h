@@ -4505,7 +4505,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_PSYCHO_SHIFT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_PSYCHO_SHIFT,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -4553,7 +4553,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_POWER_TRICK
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_POWER_TRICK,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -5781,7 +5781,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FLAME_BURST
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_FLAME_BURST,
 		.power = 70,
 		.type = TYPE_FIRE,
 		.accuracy = 100,

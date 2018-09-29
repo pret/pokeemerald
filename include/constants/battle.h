@@ -158,6 +158,7 @@
 #define STATUS3_AQUA_RING               0x10000000
 #define STATUS3_LASER_FOCUS             0x20000000
 #define STATUS3_ELECTRIFIED             0x40000000
+#define STATUS3_POWER_TRICK             0x80000000
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.
@@ -315,7 +316,7 @@
 #define MOVE_EFFECT_CLEAR_SMOG          0x3A
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
 #define MOVE_EFFECT_SMACK_DOWN          0x3C
-#define MOVE_EFFECT_NOTHING_3D          0x3D
+#define MOVE_EFFECT_FLAME_BURST         0x3D
 #define MOVE_EFFECT_NOTHING_3E          0x3E
 #define MOVE_EFFECT_NOTHING_3F          0x3F
 #define MOVE_EFFECT_AFFECTS_USER        0x40

@@ -321,6 +321,56 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectHitEnemyHealAlly
 	.4byte BattleScript_EffectSmackDown
 	.4byte BattleScript_EffectSynchronoise
+	.4byte BattleScript_EffectPsychoShift
+	.4byte BattleScript_EffectPowerTrick
+	.4byte BattleScript_EffectFlameBurst
+	
+BattleScript_EffectFlameBurst:
+	setmoveeffect MOVE_EFFECT_FLAME_BURST | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
+	
+BattleScript_MoveEffectFlameBurst::
+	printstring STRINGID_BURSTINGFLAMESHIT
+	waitmessage 0x40
+	healthbarupdate BS_SCRIPTING
+	datahpupdate BS_SCRIPTING
+	tryfaintmon BS_SCRIPTING, FALSE, NULL
+	return
+	
+BattleScript_EffectPowerTrick:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	powertrick BS_ATTACKER
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSWITCHEDATKANDDEF
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectPsychoShift:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifstatus BS_ATTACKER, STATUS1_ANY, BattleScript_EffectPsychoShiftCanWork
+	goto BattleScript_ButItFailed
+BattleScript_EffectPsychoShiftCanWork:
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	trypsychoshift BattleScript_MoveEnd
+	attackanimation
+	waitanimation
+	printfromtable gStatusConditionsStringIds
+	waitmessage 0x40
+	statusanimation BS_TARGET
+	updatestatusicon BS_TARGET
+	curestatus BS_ATTACKER
+	printstring STRINGID_PKMNSTATUSNORMAL
+	waitmessage 0x40
+	updatestatusicon BS_ATTACKER
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectSynchronoise:
 	attackcanceler

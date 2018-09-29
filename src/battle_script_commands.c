@@ -2711,6 +2711,17 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     gBattlescriptCurrInstr = BattleScript_MoveEffectSmackDown;
                 }
                 break;
+            case MOVE_EFFECT_FLAME_BURST:
+                if (IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)) && GetBattlerAbility(BATTLE_PARTNER(gBattlerTarget)) != ABILITY_MAGIC_GUARD)
+                {
+                    gBattleScripting.battler = BATTLE_PARTNER(gBattlerTarget);
+                    gBattleMoveDamage = gBattleMons[BATTLE_PARTNER(gBattlerTarget)].hp / 16;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_MoveEffectFlameBurst;
+                }
+                break;
             }
         }
     }
@@ -3261,6 +3272,7 @@ static void atk23_getexp(void)
             gActiveBattler = gBattleStruct->expGetterBattlerId;
             if (gBattleBufferB[gActiveBattler][0] == CONTROLLER_TWORETURNVALUES && gBattleBufferB[gActiveBattler][1] == RET_VALUE_LEVELED_UP)
             {
+                u16 temp, battlerId = 0xFF;
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gBattlerPartyIndexes[gActiveBattler] == gBattleStruct->expGetterMonId)
                     HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 
@@ -3276,33 +3288,25 @@ static void atk23_getexp(void)
 
                 // update battle mon structure after level up
                 if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && gBattleMons[0].hp)
-                {
-                    gBattleMons[0].level = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
-                    gBattleMons[0].hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP);
-                    gBattleMons[0].maxHP = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
-                    gBattleMons[0].attack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
-                    gBattleMons[0].defense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
-                    // Why is this duplicated?
-                    gBattleMons[0].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
-                    gBattleMons[0].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
+                    battlerId = 0;
+                else if (gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId && gBattleMons[2].hp && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+                    battlerId = 2;
 
-                    gBattleMons[0].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
-                    gBattleMons[0].spDefense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPDEF);
-                }
-                // What is else if?
-                if (gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId && gBattleMons[2].hp && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+                if (battlerId != 0xFF)
                 {
-                    gBattleMons[2].level = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
-                    gBattleMons[2].hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP);
-                    gBattleMons[2].maxHP = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
-                    gBattleMons[2].attack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
-                    gBattleMons[2].defense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
-                    // Duplicated again, but this time there's no Sp Defense
-                    gBattleMons[2].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
-                    gBattleMons[2].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
+                    gBattleMons[battlerId].level = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
+                    gBattleMons[battlerId].hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP);
+                    gBattleMons[battlerId].maxHP = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
+                    gBattleMons[battlerId].attack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
+                    gBattleMons[battlerId].defense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
+                    gBattleMons[battlerId].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
+                    gBattleMons[battlerId].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
+                    gBattleMons[battlerId].spDefense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPDEF);
 
-                    gBattleMons[2].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
+                    if (gStatuses3[battlerId] & STATUS3_POWER_TRICK)
+                        SWAP(gBattleMons[battlerId].attack, gBattleMons[battlerId].defense, temp);
                 }
+
                 gBattleScripting.atk23_state = 5;
             }
             else
@@ -6878,6 +6882,104 @@ static void atk76_various(void)
         else
             gBattlescriptCurrInstr += 7;
         return;
+    case VARIOUS_PSYCHO_SHIFT:
+        i = TRUE;
+        if (gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS)
+        {
+            if (GetBattlerAbility(gBattlerTarget) == ABILITY_LIMBER)
+            {
+                gBattlerAbility = gBattlerTarget;
+                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
+                gBattlescriptCurrInstr = BattleScript_PRLZPrevention;
+                i = FALSE;
+            }
+            else if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_ELECTRIC))
+            {
+                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
+                gBattlescriptCurrInstr = BattleScript_PRLZPrevention;
+                i = FALSE;
+            }
+            else
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+            }
+        }
+        else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_PSN_ANY)
+        {
+            if (GetBattlerAbility(gBattlerTarget) == ABILITY_IMMUNITY)
+            {
+                gBattlerAbility = gBattlerTarget;
+                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
+                gBattlescriptCurrInstr = BattleScript_PSNPrevention;
+                i = FALSE;
+            }
+            else if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_POISON) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_STEEL))
+            {
+                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
+                gBattlescriptCurrInstr = BattleScript_PSNPrevention;
+                i = FALSE;
+            }
+            else
+            {
+                if (gBattleMons[gBattlerAttacker].status1 & STATUS1_POISON)
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                else
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            }
+        }
+        else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_BURN)
+        {
+            if (GetBattlerAbility(gBattlerTarget) == ABILITY_WATER_VEIL)
+            {
+                gBattlerAbility = gBattlerTarget;
+                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
+                gBattlescriptCurrInstr = BattleScript_BRNPrevention;
+                i = FALSE;
+            }
+            else if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_FIRE))
+            {
+                BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
+                gBattlescriptCurrInstr = BattleScript_BRNPrevention;
+                i = FALSE;
+            }
+            else
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+            }
+        }
+        else if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
+        {
+            if (GetBattlerAbility(gBattlerTarget) == ABILITY_INSOMNIA || GetBattlerAbility(gBattlerTarget) == ABILITY_VITAL_SPIRIT)
+            {
+                gBattlerAbility = gBattlerTarget;
+                // BattleScriptPush(T1_READ_PTR(gBattlescriptCurrInstr + 3));
+                // gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+                i = FALSE;
+            }
+            else
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+            }
+        }
+
+        if (i == TRUE)
+        {
+            gBattleMons[gBattlerTarget].status1 = gBattleMons[gBattlerAttacker].status1;
+            gActiveBattler = gBattlerTarget;
+            BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+            MarkBattlerForControllerExec(gActiveBattler);
+            gBattlescriptCurrInstr += 7;
+        }
+        return;
+    case VARIOUS_CURE_STATUS:
+        gBattleMons[gActiveBattler].status1 = 0;
+        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+        MarkBattlerForControllerExec(gActiveBattler);
+        break;
+    case VARIOUS_POWER_TRICK:
+        gStatuses3[gActiveBattler] ^= STATUS3_POWER_TRICK;
+        SWAP(gBattleMons[gActiveBattler].attack, gBattleMons[gActiveBattler].defense, i);
+        break;
     }
 
     gBattlescriptCurrInstr += 3;
