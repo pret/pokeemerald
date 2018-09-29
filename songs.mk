@@ -270,6 +270,9 @@ $(MID_SUBDIR)/mus_me_pointget.s: %.s: %.mid
 $(MID_SUBDIR)/mus_me_shinka.s: %.s: %.mid
 	$(MID) $< $@ -G026 -R$(STD_REVERB) -V080
 
+$(MID_SUBDIR)/mus_me_symbolget.s: %.s: %.mid
+	$(MID) $< $@ -G103 -R$(STD_REVERB) -V100 -P5
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
