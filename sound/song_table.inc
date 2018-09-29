@@ -392,7 +392,7 @@ gSongTable:: @ 86B49F0
 	song mus_swimeye, 0, 0          @ Encounter! Swimmer
 	song mus_dan03, 0, 0            @ Cave of Origin
 	song mus_me_kinomi, 2, 2        @ Obtained a Berry!
-	song mus_me_tama, 2, 2          @ Awakening the Super-Ancient Pokémon
+	song mus_me_tama, 2, 2          @ The Super-Ancient Pokémon Awaken!
 	song mus_me_b_big, 2, 2         @ Jackpot
 	song mus_me_b_small, 2, 2       @ Win
 	song mus_me_zannen, 2, 2        @ Too bad!
