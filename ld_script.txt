@@ -928,7 +928,7 @@ SECTIONS {
         sound/songs/mus_t_battle.o(.rodata);
         sound/songs/midi/mus_ooame.o(.rodata);
         sound/songs/midi/mus_hideri.o(.rodata);
-        sound/songs/mus_runecity.o(.rodata);
+        sound/songs/midi/mus_runecity.o(.rodata);
         sound/songs/midi/mus_con_k.o(.rodata);
         sound/songs/midi/mus_eikou_r.o(.rodata);
         sound/songs/midi/mus_karakuri.o(.rodata);

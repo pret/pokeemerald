@@ -330,6 +330,9 @@ $(MID_SUBDIR)/mus_rainbow.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rekkuu_kourin.s: %.s: %.mid
 	$(MID) $< $@ -G109 -R$(STD_REVERB) -V090
 
+$(MID_SUBDIR)/mus_runecity.s: %.s: %.mid
+	$(MID) $< $@ -G091 -R$(STD_REVERB) -V062
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
