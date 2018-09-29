@@ -466,7 +466,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_pointget, 2, 2      @ Obtained a Battle Point!
 	song mus_me_tore_eye, 2, 2      @ Registered Trainer!
 	song mus_pyramid, 0, 0          @ Battle Pyramid
-	song mus_pyramid_top, 0, 0      @ Top of the Battle Pyramid
+	song mus_pyramid_top, 0, 0      @ Battle Pyramid Summit
 	song mus_b_palace, 0, 0         @ Battle Palace
 	song mus_rekkuu_kourin, 0, 0    @ Rayquaza Enters
 	song mus_sattower, 0, 0         @ Battle Tower (Emerald)

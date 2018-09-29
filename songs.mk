@@ -321,6 +321,9 @@ $(MID_SUBDIR)/mus_pokecen.s: %.s: %.mid
 $(MID_SUBDIR)/mus_pyramid.s: %.s: %.mid
 	$(MID) $< $@ -G106 -R$(STD_REVERB) -V079
 
+$(MID_SUBDIR)/mus_pyramid_top.s: %.s: %.mid
+	$(MID) $< $@ -G107 -R$(STD_REVERB) -V077
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
