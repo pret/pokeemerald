@@ -388,7 +388,7 @@ gSongTable:: @ 86B49F0
 	song mus_dan02, 0, 0            @ Abandoned Ship
 	song mus_machi_s3, 0, 0         @ Fortree City
 	song mus_odamaki, 0, 0          @ Birch Pokémon Lab
-	song mus_b_tower, 0, 0          @ Battle Tower
+	song mus_b_tower, 0, 0          @ Battle Tower (RS)
 	song mus_swimeye, 0, 0          @ Encounter! Swimmer
 	song mus_dan03, 0, 0            @ Cave of Origin
 	song mus_me_kinomi, 2, 2        @ Obtained a Berry!
@@ -469,7 +469,7 @@ gSongTable:: @ 86B49F0
 	song mus_pyramid_top, 0, 0      @ Battle Pyramid Summit
 	song mus_b_palace, 0, 0         @ Battle Palace
 	song mus_rekkuu_kourin, 0, 0    @ Rayquaza Enters!
-	song mus_sattower, 0, 0         @ Battle Tower (Emerald)
+	song mus_sattower, 0, 0         @ Battle Tower
 	song mus_me_symbolget, 2, 2     @ Obtained a Frontier Symbol!
 	song mus_b_dome, 0, 0           @ Battle Dome
 	song mus_b_tube, 0, 0           @ Battle Pike
