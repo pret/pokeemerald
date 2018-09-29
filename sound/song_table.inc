@@ -424,7 +424,7 @@ gSongTable:: @ 86B49F0
 	song mus_kakkoii, 0, 0          @ Trainers' Eyes Meet (Cooltrainer)
 	song mus_kazanbai, 0, 0         @ Route 113
 	song mus_aqa_0, 0, 0            @ Team Aqua Appears!
-	song mus_tsuretek, 0, 0         @ Follow Me!
+	song mus_tsuretek, 0, 0         @ Hurry Along
 	song mus_boy_sup, 0, 0          @ Brendan
 	song mus_rainbow, 0, 0          @ Evergrande City
 	song mus_ayasii, 0, 0           @ Trainers' Eyes Meet (Hex Maniac)
