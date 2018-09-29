@@ -109,6 +109,7 @@
 #define VARIOUS_TRY_COPYCAT						56
 #define VARIOUS_ABILITY_POPUP					57
 #define VARIOUS_DEFOG							58
+#define VARIOUS_JUMP_IF_TARGET_ALLY				59
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

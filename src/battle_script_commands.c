@@ -6838,6 +6838,12 @@ static void atk76_various(void)
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 4);
         }
         return;
+    case VARIOUS_JUMP_IF_TARGET_ALLY:
+        if (GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget))
+            gBattlescriptCurrInstr += 7;
+        else
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        return;
     }
 
     gBattlescriptCurrInstr += 3;

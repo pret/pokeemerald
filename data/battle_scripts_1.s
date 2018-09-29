@@ -318,6 +318,11 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAutonomize
 	.4byte BattleScript_EffectCopycat
 	.4byte BattleScript_EffectDefog
+	.4byte BattleScript_EffectHitEnemyHealAlly
+	
+BattleScript_EffectHitEnemyHealAlly:
+	jumpiftargetally BattleScript_EffectHealPulse
+	goto BattleScript_EffectHit
 	
 BattleScript_EffectDefog:
 	setstatchanger STAT_EVASION, 1, TRUE
