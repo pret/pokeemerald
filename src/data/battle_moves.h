@@ -7512,7 +7512,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SPIRIT_SHACKLE
-		.effect = EFFECT_MEAN_LOOK,
+		.effect = EFFECT_PLACEHOLDER,
 		.power = 80,
 		.type = TYPE_GHOST,
 		.accuracy = 100,
