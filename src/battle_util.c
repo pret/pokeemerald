@@ -5670,3 +5670,13 @@ void UndoMegaEvolution(u8 monId)
         CalculateMonStats(&gPlayerParty[monId]);
     }
 }
+
+bool32 DoBattlersShareType(u32 battler1, u32 battler2)
+{
+    if (gBattleMons[battler1].type1 == gBattleMons[battler2].type1 || gBattleMons[battler1].type1 == gBattleMons[battler2].type2)
+        return TRUE;
+    else if (gBattleMons[battler1].type2 == gBattleMons[battler2].type1 || gBattleMons[battler1].type2 == gBattleMons[battler2].type2)
+        return TRUE;
+    else
+        return FALSE;
+}

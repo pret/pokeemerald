@@ -1497,6 +1497,11 @@
 	.4byte \ptr
 	.endm
 	
+	.macro jumpifcantusesynchronoise ptr
+	various BS_ATTACKER, VARIOUS_TRY_SYNCHRONOISE
+	.4byte \ptr
+	.endm
+	
 	.macro trycopycat ptr
 	various BS_ATTACKER, VARIOUS_TRY_COPYCAT
 	.4byte \ptr

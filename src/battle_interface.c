@@ -3183,8 +3183,8 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
     {
         if (sprite->tIsMain && ++sprite->tFrames == 4)
             PlaySE(SE_SELECT);
-        if ((!sprite->tRightToLeft && (sprite->pos1.x -= 3) <= sprite->tOriginalX)
-            || (sprite->tRightToLeft && (sprite->pos1.x += 3) >= sprite->tOriginalX)
+        if ((!sprite->tRightToLeft && (sprite->pos1.x -= 4) <= sprite->tOriginalX)
+            || (sprite->tRightToLeft && (sprite->pos1.x += 4) >= sprite->tOriginalX)
            )
         {
             sprite->pos1.x = sprite->tOriginalX;
@@ -3196,8 +3196,8 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
     {
         if (sprite->tFrames == 0)
         {
-            if ((!sprite->tRightToLeft && (sprite->pos1.x += 3) >= sprite->tOriginalX + ABILITY_POP_UP_POS_X_SLIDE)
-                ||(sprite->tRightToLeft && (sprite->pos1.x -= 3) <= sprite->tOriginalX - ABILITY_POP_UP_POS_X_SLIDE)
+            if ((!sprite->tRightToLeft && (sprite->pos1.x += 4) >= sprite->tOriginalX + ABILITY_POP_UP_POS_X_SLIDE)
+                ||(sprite->tRightToLeft && (sprite->pos1.x -= 4) <= sprite->tOriginalX - ABILITY_POP_UP_POS_X_SLIDE)
                )
             {
                 gBattleStruct->activeAbilityPopUps &= ~(gBitTable[sprite->tBattlerId]);

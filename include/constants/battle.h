@@ -314,7 +314,7 @@
 #define MOVE_EFFECT_RECOIL_50           0x39
 #define MOVE_EFFECT_CLEAR_SMOG          0x3A
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
-#define MOVE_EFFECT_NOTHING_3C          0x3C
+#define MOVE_EFFECT_SMACK_DOWN          0x3C
 #define MOVE_EFFECT_NOTHING_3D          0x3D
 #define MOVE_EFFECT_NOTHING_3E          0x3E
 #define MOVE_EFFECT_NOTHING_3F          0x3F

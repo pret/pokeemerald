@@ -5757,12 +5757,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SMACK_DOWN
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SMACK_DOWN,
 		.power = 50,
 		.type = TYPE_ROCK,
 		.accuracy = 100,
 		.pp = 15,
-		.secondaryEffectChance = 0,
+		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
@@ -5829,7 +5829,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SYNCHRONOISE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SYNCHRONOISE,
 		.power = 120,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 100,
@@ -7416,7 +7416,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_LIGHT_OF_RUIN
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (same as HEAD_SMASH)
+		.effect = EFFECT_RECOIL_50,
 		.power = 140,
 		.type = TYPE_FAIRY,
 		.accuracy = 90,

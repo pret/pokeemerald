@@ -648,6 +648,7 @@ static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX} has Mega\nE
 static const u8 sText_drastically[] = _("drastically ");
 static const u8 sText_severely[] = _("severely ");
 static const u8 sText_Infestation[] = _("{B_DEF_NAME_WITH_PREFIX} has been afflicted\nwith an infestation by {B_ATK_NAME_WITH_PREFIX}!");
+static const u8 sText_NoEffectOnTarget[] = _("It had no effect\non {B_DEF_NAME_WITH_PREFIX}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1147,6 +1148,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_drastically,
     sText_severely,
     sText_Infestation,
+    sText_NoEffectOnTarget,
 };
 
 const u16 gTerrainStringIds[] =

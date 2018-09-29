@@ -319,6 +319,59 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectCopycat
 	.4byte BattleScript_EffectDefog
 	.4byte BattleScript_EffectHitEnemyHealAlly
+	.4byte BattleScript_EffectSmackDown
+	.4byte BattleScript_EffectSynchronoise
+	
+BattleScript_EffectSynchronoise:
+	attackcanceler
+	attackstring
+	ppreduce
+	selectfirstvalidtarget
+BattleScript_SynchronoiseLoop:
+	movevaluescleanup
+	jumpifcantusesynchronoise BattleScript_SynchronoiseNoEffect
+	accuracycheck BattleScript_SynchronoiseMissed, ACC_CURR_MOVE
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 0x1
+	tryfaintmon BS_TARGET, FALSE, NULL
+BattleScript_SynchronoiseMoveTargetEnd:
+	setbyte sMOVEEND_STATE, 0x0
+	moveend 0x2, 0x10
+	jumpifnexttargetvalid BattleScript_SynchronoiseLoop
+	end
+BattleScript_SynchronoiseMissed:
+	pause 0x20
+	resultmessage
+	waitmessage 0x40
+	goto BattleScript_SynchronoiseMoveTargetEnd
+BattleScript_SynchronoiseNoEffect:
+	pause 0x20
+	printstring STRINGID_NOEFFECTONTARGET
+	waitmessage 0x40
+	goto BattleScript_SynchronoiseMoveTargetEnd
+	
+BattleScript_EffectSmackDown:
+	setmoveeffect MOVE_EFFECT_SMACK_DOWN
+	goto BattleScript_EffectHit
+	
+BattleScript_MoveEffectSmackDown::
+	printstring STRINGID_FELLSTRAIGHTDOWN
+	waitmessage 0x40
+	return
 	
 BattleScript_EffectHitEnemyHealAlly:
 	jumpiftargetally BattleScript_EffectHealPulse
