@@ -880,7 +880,7 @@ SECTIONS {
         sound/songs/mus_test2.o(.rodata);
         sound/songs/mus_test3.o(.rodata);
         sound/songs/mus_test4.o(.rodata);
-        sound/songs/mus_test.o(.rodata);
+        sound/songs/midi/mus_test.o(.rodata);
         sound/songs/midi/mus_gomachi0.o(.rodata);
         sound/songs/midi/mus_gotown.o(.rodata);
         sound/songs/midi/mus_pokecen.o(.rodata);

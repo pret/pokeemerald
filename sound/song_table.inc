@@ -401,7 +401,7 @@ gSongTable:: @ 86B49F0
 	song mus_test2, 0, 0            @ Contest Test 2
 	song mus_test3, 0, 0            @ Contest Test 3
 	song mus_test4, 0, 0            @ Contest Test 4
-	song mus_test, 0, 0             @ Encounter! Gentleman
+	song mus_test, 0, 0             @ Trainers' Eyes Meet (Gentleman)
 	song mus_gomachi0, 0, 0         @ Verdanturf Town
 	song mus_gotown, 0, 0           @ Rustboro City
 	song mus_pokecen, 0, 0          @ Pokémon Center
