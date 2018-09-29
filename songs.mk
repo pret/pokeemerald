@@ -309,6 +309,9 @@ $(MID_SUBDIR)/mus_odamaki.s: %.s: %.mid
 $(MID_SUBDIR)/mus_ooame.s: %.s: %.mid
 	$(MID) $< $@ -G089 -R$(STD_REVERB) -V080
 
+$(MID_SUBDIR)/mus_p_school.s: %.s: %.mid
+	$(MID) $< $@ -G081 -R$(STD_REVERB) -V100
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
