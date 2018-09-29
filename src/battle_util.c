@@ -275,7 +275,6 @@ static const u16 sTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPE
 	{X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(0.0)}, // dragon
 	{X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(0.5), X(0.5)}, // dark
 	{X(1.0), X(2.0), X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(2.0), X(1.0)}, // fairy
-
 };
 
 #undef X
@@ -323,6 +322,8 @@ u8 GetBattlerForBattleScript(u8 caseId)
     case BS_OPPONENT2:
         ret = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
         break;
+    case BS_ABILITY_BATTLER:
+        ret = gBattlerAbility;
     }
     return ret;
 }
@@ -2075,6 +2076,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 CancelMultiTurnMoves(gBattlerAttacker);
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                gBattlerAbility = gBattlerAttacker;
                 gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
                 gMoveResultFlags |= MOVE_RESULT_MISSED;
                 effect = 1;
@@ -3301,7 +3303,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 gLastUsedAbility = ABILITY_INTIMIDATE;
                 gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
                 BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);
-                gBattleStruct->intimidateBattler = i;
+                gBattlerAbility = gBattleStruct->intimidateBattler = i;
                 effect++;
                 break;
             }
@@ -3457,6 +3459,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 
     if (effect && caseID < ABILITYEFFECT_CHECK_OTHER_SIDE && gLastUsedAbility != 0xFF)
         RecordAbilityBattle(battler, gLastUsedAbility);
+    if (effect && caseID <= ABILITYEFFECT_MOVE_END)
+        gBattlerAbility = battler;
 
     return effect;
 }

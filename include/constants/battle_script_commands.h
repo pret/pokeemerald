@@ -48,6 +48,7 @@
 #define BS_OPPONENT1                12
 #define BS_PLAYER2                  13
 #define BS_OPPONENT2                14
+#define BS_ABILITY_BATTLER			15
 
 // atk 01, accuracy calc
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF

@@ -1502,7 +1502,7 @@
 	.4byte \ptr
 	.endm
 	
-	.macro testabilitypopup battler
+	.macro showabilitypopup battler
 	various \battler, VARIOUS_ABILITY_POPUP
 	.endm
 	

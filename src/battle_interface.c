@@ -2824,6 +2824,7 @@ static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 ar
 #define tFrames         data[2]
 #define tRightToLeft    data[3]
 #define tBattlerId      data[4]
+#define tIsMain         data[5]
 
 // for task
 #define tSpriteId1      data[6]
@@ -2907,9 +2908,9 @@ static const struct SpriteTemplate sSpriteTemplate_AbilityPopUp2 =
 
 static const s16 sAbilityPopUpCoordsDoubles[MAX_BATTLERS_COUNT][2] =
 {
-    {204, 23}, // player left
+    {29, 80}, // player left
     {204, 19}, // opponent left
-    {204, 23}, // player right
+    {29, 97}, // player right
     {204, 36}, // opponent right
 };
 
@@ -3162,6 +3163,7 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
     gTasks[taskId].tSpriteId1 = spriteId1;
     gTasks[taskId].tSpriteId2 = spriteId2;
 
+    gSprites[spriteId1].tIsMain = TRUE;
     gSprites[spriteId1].tBattlerId = battlerId;
     gSprites[spriteId2].tBattlerId = battlerId;
 
@@ -3179,6 +3181,8 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
 {
     if (!sprite->tHide) // Show
     {
+        if (sprite->tIsMain && ++sprite->tFrames == 4)
+            PlaySE(SE_SELECT);
         if ((!sprite->tRightToLeft && (sprite->pos1.x -= 3) <= sprite->tOriginalX)
             || (sprite->tRightToLeft && (sprite->pos1.x += 3) >= sprite->tOriginalX)
            )
