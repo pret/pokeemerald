@@ -384,6 +384,9 @@ $(MID_SUBDIR)/mus_title3.s: %.s: %.mid
 $(MID_SUBDIR)/mus_tonekusa.s: %.s: %.mid
 	$(MID) $< $@ -G083 -R$(STD_REVERB) -V100
 
+$(MID_SUBDIR)/mus_tozan.s: %.s: %.mid
+	$(MID) $< $@ -G052 -R$(STD_REVERB) -V078
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 

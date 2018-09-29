@@ -410,7 +410,7 @@ gSongTable:: @ 86B49F0
 	song mus_cycling, 0, 0          @ Cycling
 	song mus_friendly, 0, 0         @ Poké Mart
 	song mus_mishiro, 0, 0          @ Littleroot Town
-	song mus_tozan, 0, 0            @ Sky Pillar
+	song mus_tozan, 0, 0            @ Mt. Chimney
 	song mus_girleye, 0, 0          @ Trainers' Eyes Meet (Lass)
 	song mus_minamo, 0, 0           @ Lilycove City
 	song mus_ashroad, 0, 0          @ Route 111
