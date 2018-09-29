@@ -613,6 +613,7 @@ struct BattleStruct
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u32 debugAIFlags;
     bool8 notfirstTimeAIFlags;
+    u8 activeAbilityPopUps; // as bits for each battler
     struct MegaEvolutionData mega;
 };
 
