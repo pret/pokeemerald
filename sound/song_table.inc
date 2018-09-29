@@ -468,7 +468,7 @@ gSongTable:: @ 86B49F0
 	song mus_pyramid, 0, 0          @ Battle Pyramid
 	song mus_pyramid_top, 0, 0      @ Battle Pyramid Summit
 	song mus_b_palace, 0, 0         @ Battle Palace
-	song mus_rekkuu_kourin, 0, 0    @ Rayquaza Enters
+	song mus_rekkuu_kourin, 0, 0    @ Rayquaza Enters!
 	song mus_sattower, 0, 0         @ Battle Tower (Emerald)
 	song mus_me_symbolget, 2, 2     @ Obtained a Frontier Symbol!
 	song mus_b_dome, 0, 0           @ Battle Dome

@@ -327,6 +327,9 @@ $(MID_SUBDIR)/mus_pyramid_top.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rainbow.s: %.s: %.mid
 	$(MID) $< $@ -G068 -R$(STD_REVERB) -V086
 
+$(MID_SUBDIR)/mus_rekkuu_kourin.s: %.s: %.mid
+	$(MID) $< $@ -G109 -R$(STD_REVERB) -V090
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
