@@ -6980,6 +6980,36 @@ static void atk76_various(void)
         gStatuses3[gActiveBattler] ^= STATUS3_POWER_TRICK;
         SWAP(gBattleMons[gActiveBattler].attack, gBattleMons[gActiveBattler].defense, i);
         break;
+    case VARIOUS_AFTER_YOU:
+        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget)
+            || GetBattlerTurnOrderNum(gBattlerAttacker) == GetBattlerTurnOrderNum(gBattlerTarget) + 1)
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        else
+        {
+            for (i = 0; i < gBattlersCount; i++)
+                data[i] = gBattlerByTurnOrder[i];
+            if (GetBattlerTurnOrderNum(gBattlerAttacker) == 0 && GetBattlerTurnOrderNum(gBattlerTarget) == 2)
+            {
+                gBattlerByTurnOrder[1] = gBattlerTarget;
+                gBattlerByTurnOrder[2] = data[1];
+                gBattlerByTurnOrder[3] = data[3];
+            }
+            else if (GetBattlerTurnOrderNum(gBattlerAttacker) == 0 && GetBattlerTurnOrderNum(gBattlerTarget) == 3)
+            {
+                gBattlerByTurnOrder[1] = gBattlerTarget;
+                gBattlerByTurnOrder[2] = data[1];
+                gBattlerByTurnOrder[3] = data[2];
+            }
+            else
+            {
+                gBattlerByTurnOrder[2] = gBattlerTarget;
+                gBattlerByTurnOrder[3] = data[2];
+            }
+            gBattlescriptCurrInstr += 7;
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;

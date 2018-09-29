@@ -5949,7 +5949,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_AFTER_YOU
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_AFTER_YOU,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,

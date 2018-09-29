@@ -1440,6 +1440,11 @@
 	.4byte \ptr
 	.endm
 	
+	.macro tryafteryou ptr
+	various BS_ATTACKER, VARIOUS_AFTER_YOU
+	.4byte \ptr
+	.endm
+	
 	.macro invertstatstages battler
 	various \battler, VARIOUS_INVERT_STAT_STAGES
 	.endm

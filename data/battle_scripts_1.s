@@ -324,6 +324,19 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectPsychoShift
 	.4byte BattleScript_EffectPowerTrick
 	.4byte BattleScript_EffectFlameBurst
+	.4byte BattleScript_EffectAfterYou
+	
+BattleScript_EffectAfterYou:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	tryafteryou BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_KINDOFFER
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectFlameBurst:
 	setmoveeffect MOVE_EFFECT_FLAME_BURST | MOVE_EFFECT_AFFECTS_USER
