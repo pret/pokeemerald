@@ -855,7 +855,7 @@ SECTIONS {
         sound/songs/midi/mus_me_bachi.o(.rodata);
         sound/songs/midi/mus_fanfa4.o(.rodata);
         sound/songs/midi/mus_fanfa5.o(.rodata);
-        sound/songs/mus_me_waza.o(.rodata);
+        sound/songs/midi/mus_me_waza.o(.rodata);
         sound/songs/midi/mus_bijyutu.o(.rodata);
         sound/songs/midi/mus_dooro_x4.o(.rodata);
         sound/songs/midi/mus_fune_kan.o(.rodata);
