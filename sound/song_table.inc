@@ -394,7 +394,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_kinomi, 2, 2        @ Obtained a Berry!
 	song mus_me_tama, 2, 2          @ Awakening the Super-Ancient Pokémon
 	song mus_me_b_big, 2, 2         @ Jackpot
-	song mus_me_b_small, 2, 2       @ Slots Victory!
+	song mus_me_b_small, 2, 2       @ Win
 	song mus_me_zannen, 2, 2        @ Too bad!
 	song mus_bd_time, 0, 0          @ Reel Time
 	song mus_test1, 0, 0            @ Contest Test 1
