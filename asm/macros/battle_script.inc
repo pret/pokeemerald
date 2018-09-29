@@ -1529,6 +1529,7 @@
 	
 	.macro setmoveeffect effect
 	setbyte cEFFECT_CHOOSER \effect
+	setbyte sSAVED_MOVE_EFFECT \effect
 	.endm
 	
 	.macro chosenstatus1animation battler, status

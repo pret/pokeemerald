@@ -677,6 +677,7 @@ struct BattleScripting
     u8 multiplayerId;
     bool8 monCaught;
     s32 savedDmg;
+    u8 savedMoveEffect; // For moves hitting multiple targets.
 };
 
 // rom_80A5C6C

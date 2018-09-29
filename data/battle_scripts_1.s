@@ -1395,7 +1395,6 @@ BattleScript_EffectRound:
 BattleScript_EffectBrine:
 BattleScript_EffectVenoshock:
 BattleScript_EffectRetalitate:
-BattleScript_EffectBulldoze:
 BattleScript_EffectFoulPlay:
 BattleScript_EffectPsyshock:
 BattleScript_EffectWeatherBall:
@@ -3065,13 +3064,16 @@ BattleScript_EffectStomp:
 	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
 
-BattleScript_EffectEarthquake::
+BattleScript_EffectBulldoze:
+	setmoveeffect MOVE_EFFECT_SPD_MINUS_1
+BattleScript_EffectEarthquake:
 	attackcanceler
 	attackstring
 	ppreduce
 	selectfirstvalidtarget
 BattleScript_HitsAllWithUndergroundBonusLoop::
 	movevaluescleanup
+	copybyte cEFFECT_CHOOSER, sSAVED_MOVE_EFFECT
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERGROUND, BattleScript_HitsAllNoUndergroundBonus
 	orword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
 	goto BattleScript_DoHitAllWithUndergroundBonus
@@ -3093,6 +3095,7 @@ BattleScript_DoHitAllWithUndergroundBonus::
 	waitmessage 0x40
 	resultmessage
 	waitmessage 0x40
+	seteffectwithchance
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 0x1
 	tryfaintmon BS_TARGET, FALSE, NULL
