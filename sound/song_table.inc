@@ -459,7 +459,7 @@ gSongTable:: @ 86B49F0
 	song mus_conlobby, 0, 0         @ Contest Lobby
 	song mus_inter_v, 0, 0          @ Interviewers
 	song mus_daigo, 0, 0            @ Champion Wallace
-	song mus_thankfor, 0, 0         @ Credits
+	song mus_thankfor, 0, 0         @ Ending Theme
 	song mus_end, 0, 0              @ The End
 	song mus_b_frontier, 0, 0       @ Battle Frontier
 	song mus_b_arena, 0, 0          @ Battle Arena
