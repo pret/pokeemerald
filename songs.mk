@@ -354,6 +354,9 @@ $(MID_SUBDIR)/mus_swimeye.s: %.s: %.mid
 $(MID_SUBDIR)/mus_syoujoeye.s: %.s: %.mid
 	$(MID) $< $@ -G027 -R$(STD_REVERB) -V080
 
+$(MID_SUBDIR)/mus_t_battle.s: %.s: %.mid
+	$(MID) $< $@ -G088 -R$(STD_REVERB) -V088
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
