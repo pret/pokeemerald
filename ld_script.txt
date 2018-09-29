@@ -888,7 +888,7 @@ SECTIONS {
         sound/songs/midi/mus_granroad.o(.rodata);
         sound/songs/midi/mus_cycling.o(.rodata);
         sound/songs/midi/mus_friendly.o(.rodata);
-        sound/songs/mus_mishiro.o(.rodata);
+        sound/songs/midi/mus_mishiro.o(.rodata);
         sound/songs/mus_tozan.o(.rodata);
         sound/songs/midi/mus_girleye.o(.rodata);
         sound/songs/midi/mus_minamo.o(.rodata);

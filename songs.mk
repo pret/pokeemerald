@@ -294,6 +294,9 @@ $(MID_SUBDIR)/mus_mgm0.s: %.s: %.mid
 $(MID_SUBDIR)/mus_minamo.s: %.s: %.mid
 	$(MID) $< $@ -G054 -R$(STD_REVERB) -V085
 
+$(MID_SUBDIR)/mus_mishiro.s: %.s: %.mid
+	$(MID) $< $@ -G051 -R$(STD_REVERB) -V100
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
