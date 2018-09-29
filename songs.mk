@@ -285,6 +285,9 @@ $(MID_SUBDIR)/mus_me_wasure.s: %.s: %.mid
 $(MID_SUBDIR)/mus_me_waza.s: %.s: %.mid
 	$(MID) $< $@ -G012 -R$(STD_REVERB) -V090 -P5
 
+$(MID_SUBDIR)/mus_me_zannen.s: %.s: %.mid
+	$(MID) $< $@ -G012 -R$(STD_REVERB) -V090 -P5
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
