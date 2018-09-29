@@ -345,6 +345,9 @@ $(MID_SUBDIR)/mus_shinka.s: %.s: %.mid
 $(MID_SUBDIR)/mus_sitennou.s: %.s: %.mid
 	$(MID) $< $@ -G096 -R$(STD_REVERB) -V078
 
+$(MID_SUBDIR)/mus_suikun.s: %.s: %.mid
+	$(MID) $< $@ -G000 -R$(STD_REVERB) -V080
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 

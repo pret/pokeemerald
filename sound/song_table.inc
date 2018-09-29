@@ -362,7 +362,7 @@ gSongTable:: @ 86B49F0
 	song mus_kachi5, 0, 0           @ Victory! (Wallace)
 	song mus_pcc, 0, 0              @ Unused - Pokémon Center (2)
 	song mus_nibi, 0, 0             @ Unused - Viridian City
-	song mus_suikun, 0, 0           @ Crystal - Battle! Legendary Beasts
+	song mus_suikun, 0, 0           @ Unused - Battle! (Entei/Raikou/Suicune)
 	song mus_dooro1, 0, 0           @ Route 101
 	song mus_dooro_x1, 0, 0         @ Route 110
 	song mus_dooro_x3, 0, 0         @ Route 120
