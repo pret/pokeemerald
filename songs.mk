@@ -366,6 +366,9 @@ $(MID_SUBDIR)/mus_test1.s: %.s: %.mid
 $(MID_SUBDIR)/mus_test2.s: %.s: %.mid
 	$(MID) $< $@ -G040 -R$(STD_REVERB) -V090
 
+$(MID_SUBDIR)/mus_test3.s: %.s: %.mid
+	$(MID) $< $@ -G041 -R$(STD_REVERB) -V075
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 

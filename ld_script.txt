@@ -878,7 +878,7 @@ SECTIONS {
         sound/songs/midi/mus_bd_time.o(.rodata);
         sound/songs/midi/mus_test1.o(.rodata);
         sound/songs/midi/mus_test2.o(.rodata);
-        sound/songs/mus_test3.o(.rodata);
+        sound/songs/midi/mus_test3.o(.rodata);
         sound/songs/mus_test4.o(.rodata);
         sound/songs/midi/mus_test.o(.rodata);
         sound/songs/midi/mus_gomachi0.o(.rodata);
