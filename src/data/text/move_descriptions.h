@@ -2345,9 +2345,17 @@ static const u8 sSPIRIT_SHACKLEDescription[] = _(
 	"After being hit, foes can\n"
 	"no longer escape.");
 
+static const u8 sDARKEST_LARIATDescription[] = _(
+	"Swings the arms to strike\n"
+	"It ignores stat changes.");
+
 static const u8 sSPARKLING_ARIADescription[] = _(
 	"Sings with bubbles. Cures\n"
 	"burns on contact.");
+
+static const u8 sICE_HAMMERDescription[] = _(
+	"Swings the fist to strike.\n"
+	"Lowers the user’s SPEED.");
 
 static const u8 sFLORAL_HEALINGDescription[] = _(
 	"Restores an ally’s HP.\n"
@@ -2393,6 +2401,10 @@ static const u8 sPOLLEN_PUFFDescription[] = _(
 	"Explodes on foes, but\n"
 	"restores ally’s HP.");
 
+static const u8 sANCHOR_SHOTDescription[] = _(
+	"Strangles the foe with a\n"
+	"chain. The foe can’t flinch.");
+
 static const u8 sPSYCHIC_TERRAINDescription[] = _(
 	"The ground turns weird for\n"
 	"5 turns. Blocks priority.");
@@ -2404,6 +2416,10 @@ static const u8 sLUNGEDescription[] = _(
 static const u8 sFIRE_LASHDescription[] = _(
 	"Whips the foe with fire\n"
 	"lowering its Defense.");
+
+static const u8 sPOWER_TRIPDescription[] = _(
+	"It hits harder the more\n"
+	"stat boosts the user has.");
 
 static const u8 sBURN_UPDescription[] = _(
 	"Burns out the user fully\n"
@@ -3145,4 +3161,54 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_PRECIPICE_BLADES - 1] = sPRECIPICE_BLADESDescription,
     [MOVE_DRAGON_ASCENT - 1] = sCLOSE_COMBATDescription,
     [MOVE_HYPERSPACE_FURY - 1] = sHYPERSPACE_HOLEDescription,
+    [MOVE_SHORE_UP - 1] = sSHORE_UPDescription,
+    [MOVE_FIRST_IMPRESSION - 1] = sFIRST_IMPRESSIONDescription,
+    [MOVE_BANEFUL_BUNKER - 1] = sBANEFUL_BUNKERDescription,
+    [MOVE_SPIRIT_SHACKLE - 1] = sSPIRIT_SHACKLEDescription,
+    [MOVE_DARKEST_LARIAT - 1] = sDARKEST_LARIATDescription,
+    [MOVE_SPARKLING_ARIA - 1] = sSPARKLING_ARIADescription,
+    [MOVE_ICE_HAMMER - 1] = sICE_HAMMERDescription,
+    [MOVE_FLORAL_HEALING - 1] = sFLORAL_HEALINGDescription,
+    [MOVE_HIGH_HORSEPOWER - 1] = sHIGH_HORSEPOWERDescription,
+    [MOVE_STRENGTH_SAP - 1] = sSTRENGTH_SAPDescription,
+    [MOVE_SOLAR_BLADE - 1] = sSOLAR_BLADEDescription,
+    [MOVE_LEAFAGE - 1] = sLEAFAGEDescription,
+    [MOVE_SPOTLIGHT - 1] = sSPOTLIGHTDescription,
+    [MOVE_TOXIC_THREAD - 1] = sTOXIC_THREADDescription,
+    [MOVE_LASER_FOCUS - 1] = sLASER_FOCUSDescription,
+    [MOVE_GEAR_UP - 1] = sGEAR_UPDescription,
+    [MOVE_THROAT_CHOP - 1] = sTHROAT_CHOPDescription,
+    [MOVE_POLLEN_PUFF - 1] = sPOLLEN_PUFFDescription,
+    [MOVE_ANCHOR_SHOT - 1] = sANCHOR_SHOTDescription,
+    [MOVE_PSYCHIC_TERRAIN - 1] = sPSYCHIC_TERRAINDescription,
+    [MOVE_LUNGE - 1] = sLUNGEDescription,
+    [MOVE_FIRE_LASH - 1] = sFIRE_LASHDescription,
+    [MOVE_POWER_TRIP - 1] = sPOWER_TRIPDescription,
+    [MOVE_BURN_UP - 1] = sBURN_UPDescription,
+    [MOVE_SPEED_SWAP - 1] = sSPEED_SWAPDescription,
+    [MOVE_SMART_STRIKE - 1] = sSMART_STRIKEDescription,
+    [MOVE_PURIFY - 1] = sPURIFYDescription,
+    [MOVE_REVELATION_DANCE - 1] = sREVELATION_DANCEDescription,
+    [MOVE_CORE_ENFORCER - 1] = sCORE_ENFORCERDescription,
+    [MOVE_TROP_KICK - 1] = sTROP_KICKDescription,
+    [MOVE_INSTRUCT - 1] = sINSTRUCTDescription,
+    [MOVE_BEAK_BLAST - 1] = sBEAK_BLASTDescription,
+    [MOVE_CLANGING_SCALES - 1] = sCLANGING_SCALESDescription,
+    [MOVE_DRAGON_HAMMER - 1] = sDRAGON_HAMMERDescription,
+    [MOVE_BRUTAL_SWING - 1] = sBRUTAL_SWINGDescription,
+    [MOVE_SHELL_TRAP - 1] = sSHELL_TRAPDescription,
+    [MOVE_FLEUR_CANNON - 1] = sFLEUR_CANNONDescription,
+    [MOVE_PSYCHIC_FANGS - 1] = sPSYCHIC_FANGSDescription,
+    [MOVE_STOMPING_TANTRUM - 1] = sSTOMPING_TANTRUMDescription,
+    [MOVE_SHADOW_BONE - 1] = sSHADOW_BONEDescription,
+    [MOVE_ACCELEROCK - 1] = sACCELEROCKDescription,
+    [MOVE_LIQUIDATION - 1] = sLIQUIDATIONDescription,
+    [MOVE_PRISMATIC_LASER - 1] = sPRISMATIC_LASERDescription,
+    [MOVE_SPECTRAL_THIEF - 1] = sSPECTRAL_THIEFDescription,
+    [MOVE_SUNSTEEL_STRIKE - 1] = sSUNSTEEL_STRIKEDescription,
+    [MOVE_MOONGEIST_BEAM - 1] = sMOONGEIST_BEAMDescription,
+    [MOVE_TEARFUL_LOOK - 1] = sTEARFUL_LOOKDescription,
+    [MOVE_ZING_ZAP - 1] = sZING_ZAPDescription,
+    [MOVE_NATURES_MADNESS - 1] = sNATURES_MADNESSDescription,
+    [MOVE_MULTI_ATTACK - 1] = sMULTI_ATTACKDescription,
 };
