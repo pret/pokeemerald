@@ -300,6 +300,9 @@ $(MID_SUBDIR)/mus_mishiro.s: %.s: %.mid
 $(MID_SUBDIR)/mus_nextroad.s: %.s: %.mid
 	$(MID) $< $@ -G047 -R$(STD_REVERB) -V097
 
+$(MID_SUBDIR)/mus_nibi.s: %.s: %.mid
+	$(MID) $< $@ -G000 -R$(STD_REVERB) -V080
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
