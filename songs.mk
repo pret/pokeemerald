@@ -291,6 +291,9 @@ $(MID_SUBDIR)/mus_me_zannen.s: %.s: %.mid
 $(MID_SUBDIR)/mus_mgm0.s: %.s: %.mid
 	$(MID) $< $@ -G087 -R$(STD_REVERB) -V072
 
+$(MID_SUBDIR)/mus_minamo.s: %.s: %.mid
+	$(MID) $< $@ -G054 -R$(STD_REVERB) -V085
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
