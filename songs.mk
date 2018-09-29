@@ -360,6 +360,9 @@ $(MID_SUBDIR)/mus_t_battle.s: %.s: %.mid
 $(MID_SUBDIR)/mus_test.s: %.s: %.mid
 	$(MID) $< $@ -G043 -R$(STD_REVERB) -V094
 
+$(MID_SUBDIR)/mus_test1.s: %.s: %.mid
+	$(MID) $< $@ -G039 -R$(STD_REVERB) -V079
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
