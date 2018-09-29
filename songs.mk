@@ -255,6 +255,9 @@ $(MID_SUBDIR)/mus_me_asa.s: %.s: %.mid
 $(MID_SUBDIR)/mus_me_b_big.s: %.s: %.mid
 	$(MID) $< $@ -G012 -R$(STD_REVERB) -V090 -P5
 
+$(MID_SUBDIR)/mus_me_b_small.s: %.s: %.mid
+	$(MID) $< $@ -G012 -R$(STD_REVERB) -V090 -P5
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
