@@ -348,6 +348,9 @@ $(MID_SUBDIR)/mus_sitennou.s: %.s: %.mid
 $(MID_SUBDIR)/mus_suikun.s: %.s: %.mid
 	$(MID) $< $@ -G000 -R$(STD_REVERB) -V080
 
+$(MID_SUBDIR)/mus_swimeye.s: %.s: %.mid
+	$(MID) $< $@ -G036 -R$(STD_REVERB) -V080
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 

@@ -389,7 +389,7 @@ gSongTable:: @ 86B49F0
 	song mus_machi_s3, 0, 0         @ Fortree City
 	song mus_odamaki, 0, 0          @ Birch Pokémon Lab
 	song mus_b_tower, 0, 0          @ Battle Tower (RS)
-	song mus_swimeye, 0, 0          @ Encounter! Swimmer
+	song mus_swimeye, 0, 0          @ Trainers' Eyes Meet (Swimmer♀)
 	song mus_dan03, 0, 0            @ Cave of Origin
 	song mus_me_kinomi, 2, 2        @ Obtained a Berry!
 	song mus_me_tama, 2, 2          @ The Super-Ancient Pokémon Awaken!
