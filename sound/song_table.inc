@@ -354,7 +354,7 @@ gSongTable:: @ 86B49F0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
-	song mus_tetsuji, 0, 0          @ Littleroot Town Test 'TETSUJI'
+	song mus_tetsuji, 0, 0          @ Unused - TETSUJI
 	song mus_field13, 0, 0          @ Unused - Route 38
 	song mus_kachi22, 0, 0          @ Victory! (Wild Pokémon) (No Intro)
 	song mus_kachi2, 0, 0           @ Victory! (Wild Pokémon)
