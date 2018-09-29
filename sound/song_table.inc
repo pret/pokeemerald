@@ -383,7 +383,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_shinka, 2, 2        @ Evolution (Intro)
 	song mus_shinka, 0, 0           @ Evolution
 	song mus_me_wasure, 2, 2        @ Move Deleted
-	song mus_syoujoeye, 0, 0        @ Encounter! Tuber
+	song mus_syoujoeye, 0, 0        @ Trainers' Eyes Meet (Tuber♀)
 	song mus_boyeye, 0, 0           @ Trainers' Eyes Meet (Youngster)
 	song mus_dan02, 0, 0            @ Abandoned Ship
 	song mus_machi_s3, 0, 0         @ Fortree City
