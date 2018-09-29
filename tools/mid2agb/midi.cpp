@@ -776,17 +776,11 @@ void CalculateWaits(std::vector<Event>& events)
 int CalculateCompressionScore(std::vector<Event>& events, int index)
 {
     int score = 0;
-    std::uint8_t lastParam1 = (std::uint8_t)events[index].type;
+    std::uint8_t lastParam1 = events[index].param1;
     std::uint8_t lastVelocity = 0x80u;
     EventType lastType = events[index].type;
     std::int32_t lastDuration = 0x80000000;
     std::uint8_t lastNote = 0x40u;
-
-    if (events[index].type == EventType::Note)
-    {
-        // Bug reintroduction
-        lastParam1 = events[index].note + 0x40;
-    }
 
     if (events[index].time > 0)
         score++;
@@ -846,18 +840,11 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
             }
         }
 
-        // BUG: uses type instead of param1
-        lastParam1 = (std::uint8_t)events[i].type;
-        if (events[i].type == EventType::Note)
-        {
-            // Bug reintroduction
-            lastParam1 = events[i].note + 0x40;
-        }
-
+        lastParam1 = events[i].param1;
         lastType = events[i].type;
 
         if (events[i].time)
-            ++score;
+            score++;
     }
 
     return score;
