@@ -463,7 +463,7 @@ gSongTable:: @ 86B49F0
 	song mus_end, 0, 0              @ The End
 	song mus_b_frontier, 0, 0       @ Battle Frontier
 	song mus_b_arena, 0, 0          @ Battle Arena
-	song mus_me_pointget, 2, 2      @ Obtained Battle Points!
+	song mus_me_pointget, 2, 2      @ Obtained a Battle Point!
 	song mus_me_tore_eye, 2, 2      @ Registered Trainer!
 	song mus_pyramid, 0, 0          @ Battle Pyramid
 	song mus_pyramid_top, 0, 0      @ Top of the Battle Pyramid

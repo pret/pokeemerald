@@ -264,6 +264,9 @@ $(MID_SUBDIR)/mus_me_bachi.s: %.s: %.mid
 $(MID_SUBDIR)/mus_me_kinomi.s: %.s: %.mid
 	$(MID) $< $@ -G012 -R$(STD_REVERB) -V090 -P5
 
+$(MID_SUBDIR)/mus_me_pointget.s: %.s: %.mid
+	$(MID) $< $@ -G103 -R$(STD_REVERB) -V090 -P5
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
