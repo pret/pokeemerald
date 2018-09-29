@@ -883,7 +883,7 @@ SECTIONS {
         sound/songs/mus_test.o(.rodata);
         sound/songs/midi/mus_gomachi0.o(.rodata);
         sound/songs/midi/mus_gotown.o(.rodata);
-        sound/songs/mus_pokecen.o(.rodata);
+        sound/songs/midi/mus_pokecen.o(.rodata);
         sound/songs/midi/mus_nextroad.o(.rodata);
         sound/songs/midi/mus_granroad.o(.rodata);
         sound/songs/midi/mus_cycling.o(.rodata);

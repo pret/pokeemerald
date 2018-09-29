@@ -315,6 +315,9 @@ $(MID_SUBDIR)/mus_p_school.s: %.s: %.mid
 $(MID_SUBDIR)/mus_pcc.s: %.s: %.mid
 	$(MID) $< $@ -G000 -R$(STD_REVERB) -V080
 
+$(MID_SUBDIR)/mus_pokecen.s: %.s: %.mid
+	$(MID) $< $@ -G046 -R$(STD_REVERB) -V092
+
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -G017 -R$(STD_REVERB)
 
