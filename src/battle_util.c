@@ -24,6 +24,7 @@
 #include "link.h"
 #include "berry.h"
 #include "pokedex.h"
+#include "mail.h"
 #include "constants/battle_config.h"
 
 extern u8 weather_get_current(void);
@@ -5679,4 +5680,22 @@ bool32 DoBattlersShareType(u32 battler1, u32 battler2)
         return TRUE;
     else
         return FALSE;
+}
+
+bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
+{
+    u16 species = gBattleMons[battlerId].species;
+
+    if (IS_ITEM_MAIL(itemId))
+        return FALSE;
+    else if (itemId == ITEM_ENIGMA_BERRY)
+        return FALSE;
+    else if (species == SPECIES_KYOGRE && itemId == ITEM_BLUE_ORB)
+        return FALSE;
+    else if (species == SPECIES_GROUDON && itemId == ITEM_RED_ORB)
+        return FALSE;
+    else if (ItemId_GetHoldEffect(itemId) == HOLD_EFFECT_MEGA_STONE && GetMegaEvolutionSpecies(species, itemId) != SPECIES_NONE)
+        return FALSE;
+    else
+        return TRUE;
 }

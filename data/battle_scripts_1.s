@@ -325,6 +325,20 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectPowerTrick
 	.4byte BattleScript_EffectFlameBurst
 	.4byte BattleScript_EffectAfterYou
+	.4byte BattleScript_EffectBestow
+	
+BattleScript_EffectBestow:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, NO_ACC_CALC_CHECK_LOCK_ON
+	attackstring
+	ppreduce
+	jumpifsubstituteblocks BattleScript_ButItFailed
+	trybestow BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_BESTOWITEMGIVING
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectAfterYou:
 	attackcanceler

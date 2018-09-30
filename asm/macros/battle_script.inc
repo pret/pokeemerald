@@ -1445,6 +1445,11 @@
 	.4byte \ptr
 	.endm
 	
+	.macro trybestow ptr
+	various BS_ATTACKER, VARIOUS_BESTOW
+	.4byte \ptr
+	.endm
+	
 	.macro invertstatstages battler
 	various \battler, VARIOUS_INVERT_STAT_STAGES
 	.endm

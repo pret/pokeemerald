@@ -116,6 +116,7 @@
 #define VARIOUS_CURE_STATUS						62
 #define VARIOUS_POWER_TRICK						63
 #define VARIOUS_AFTER_YOU						64
+#define VARIOUS_BESTOW							65
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

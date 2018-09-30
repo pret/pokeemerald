@@ -6201,7 +6201,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_BESTOW
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_BESTOW,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
