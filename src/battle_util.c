@@ -4750,6 +4750,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (gChosenMoveByBattler[BATTLE_PARTNER(battlerAtk)] == MOVE_ROUND && !(gAbsentBattlerFlags & gBitTable[BATTLE_PARTNER(battlerAtk)]))
             basePower *= 2;
         break;
+    case EFFECT_FUSION_COMBO:
+        if (gBattleMoves[gLastUsedMove].effect == EFFECT_FUSION_COMBO && move != gLastUsedMove)
+            basePower *= 2;
+        break;
     }
 
     if (basePower == 0)

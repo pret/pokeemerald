@@ -160,7 +160,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_RAZOR_WIND
-		.effect = EFFECT_RAZOR_WIND,
+		.effect = EFFECT_TWO_TURNS_ATTACK,
 		.power = 80,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -1720,7 +1720,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SKY_ATTACK
-		.effect = EFFECT_SKY_ATTACK,
+		.effect = EFFECT_TWO_TURNS_ATTACK,
 		.power = 140,
 		.type = TYPE_FLYING,
 		.accuracy = 90,
@@ -1730,6 +1730,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
 		.split = SPLIT_PHYSICAL,
+		.argument = MOVE_EFFECT_FLINCH,
 	},
 	{ // MOVE_TRANSFORM
 		.effect = EFFECT_TRANSFORM,
@@ -6645,7 +6646,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FREEZE_SHOCK
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_TWO_TURNS_ATTACK,
 		.power = 140,
 		.type = TYPE_ICE,
 		.accuracy = 90,
@@ -6655,9 +6656,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
 		.split = SPLIT_PHYSICAL,
+		.argument = MOVE_EFFECT_PARALYSIS,
 	},
 	{ // MOVE_ICE_BURN
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_TWO_TURNS_ATTACK,
 		.power = 140,
 		.type = TYPE_ICE,
 		.accuracy = 90,
@@ -6667,6 +6669,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
 		.split = SPLIT_SPECIAL,
+		.argument = MOVE_EFFECT_BURN,
 	},
 	{ // MOVE_SNARL
 		.effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
@@ -6705,7 +6708,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FUSION_FLARE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_FUSION_COMBO,
 		.power = 100,
 		.type = TYPE_FIRE,
 		.accuracy = 100,
@@ -6717,7 +6720,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FUSION_BOLT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_FUSION_COMBO,
 		.power = 100,
 		.type = TYPE_ELECTRIC,
 		.accuracy = 100,
@@ -6766,13 +6769,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ROTOTILLER
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_ROTOTILLER,
 		.power = 0,
 		.type = TYPE_GROUND,
 		.accuracy = 0,
 		.pp = 10,
 		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_SELECTED,
+		.target = MOVE_TARGET_FOES_AND_ALLY | MOVE_TARGET_USER,
 		.priority = 0,
 		.flags = 0,
 		.split = SPLIT_STATUS,

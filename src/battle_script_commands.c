@@ -7035,6 +7035,15 @@ static void atk76_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_ARGUMENT_TO_MOVE_EFFECT:
+        gBattleCommunication[MOVE_EFFECT_BYTE] = gBattleMoves[gCurrentMove].argument;
+        break;
+    case VARIOUS_JUMP_IF_NOT_GROUNDED:
+        if (!IsBattlerGrounded(gActiveBattler))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -7127,30 +7136,23 @@ static void atk7A_jumpifnexttargetvalid(void)
 {
     const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    for (gBattlerTarget++; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        for (gBattlerTarget++; ; gBattlerTarget++)
-        {
-            if (gBattlerTarget == gBattlerAttacker)
-                continue;
-            if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
-                break;
-        }
+        if (gBattlerTarget == gBattlerAttacker && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_USER))
+            continue;
+        if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
+            break;
+    }
 
-        if (gBattlerTarget >= gBattlersCount)
-            gBattlescriptCurrInstr += 5;
-        else
-            gBattlescriptCurrInstr = jumpPtr;
-    }
-    else
-    {
+    if (gBattlerTarget >= gBattlersCount)
         gBattlescriptCurrInstr += 5;
-    }
+    else
+        gBattlescriptCurrInstr = jumpPtr;
 }
 
 static void atk7B_tryhealhalfhealth(void)
 {
-    const u8* failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    const u8 *failPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 
     if (gBattlescriptCurrInstr[5] == BS_ATTACKER)
         gBattlerTarget = gBattlerAttacker;
@@ -8718,8 +8720,7 @@ static void atkA8_copymovepermanently(void) // sketch
 static bool8 IsTwoTurnsMove(u16 move)
 {
     if (gBattleMoves[move].effect == EFFECT_SKULL_BASH
-        || gBattleMoves[move].effect == EFFECT_RAZOR_WIND
-        || gBattleMoves[move].effect == EFFECT_SKY_ATTACK
+        || gBattleMoves[move].effect == EFFECT_TWO_TURNS_ATTACK
         || gBattleMoves[move].effect == EFFECT_SOLARBEAM
         || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
         || gBattleMoves[move].effect == EFFECT_BIDE)
@@ -8745,8 +8746,7 @@ static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a c
         return 2;
 
     if (gBattleMoves[move].effect == EFFECT_SKULL_BASH
-        || gBattleMoves[move].effect == EFFECT_RAZOR_WIND
-        || gBattleMoves[move].effect == EFFECT_SKY_ATTACK
+        || gBattleMoves[move].effect == EFFECT_TWO_TURNS_ATTACK
         || gBattleMoves[move].effect == EFFECT_SOLARBEAM
         || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
         || gBattleMoves[move].effect == EFFECT_BIDE)
@@ -9431,7 +9431,7 @@ static void atkC2_selectfirstvalidtarget(void)
 {
     for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        if (gBattlerTarget == gBattlerAttacker)
+        if (gBattlerTarget == gBattlerAttacker && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_USER))
             continue;
         if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
             break;

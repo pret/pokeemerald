@@ -117,6 +117,8 @@
 #define VARIOUS_POWER_TRICK						63
 #define VARIOUS_AFTER_YOU						64
 #define VARIOUS_BESTOW							65
+#define VARIOUS_ARGUMENT_TO_MOVE_EFFECT			66
+#define VARIOUS_JUMP_IF_NOT_GROUNDED			67
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

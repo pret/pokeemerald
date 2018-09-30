@@ -53,7 +53,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectTriAttack
 	.4byte BattleScript_EffectRest
 	.4byte BattleScript_EffectOHKO
-	.4byte BattleScript_EffectRazorWind
+	.4byte BattleScript_EffectFusionCombo
 	.4byte BattleScript_EffectSuperFang
 	.4byte BattleScript_EffectDragonRage
 	.4byte BattleScript_EffectTrap
@@ -89,7 +89,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSpecialDefenseDownHit
 	.4byte BattleScript_EffectAccuracyDownHit
 	.4byte BattleScript_EffectEvasionDownHit
-	.4byte BattleScript_EffectSkyAttack
+	.4byte BattleScript_EffectTwoTurnsAttack
 	.4byte BattleScript_EffectConfuseHit
 	.4byte BattleScript_EffectTwineedle
 	.4byte BattleScript_EffectVitalThrow
@@ -326,6 +326,50 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectFlameBurst
 	.4byte BattleScript_EffectAfterYou
 	.4byte BattleScript_EffectBestow
+	.4byte BattleScript_EffectRototiller
+	
+BattleScript_EffectRototiller:
+	attackcanceler
+	attackstring
+	ppreduce
+	selectfirstvalidtarget
+BattleScript_RototillerLoop:
+	movevaluescleanup
+	jumpifnotgrounded BS_TARGET, BattleScript_RototillerNoEffect
+	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_RototillerLoop2
+BattleScript_RototillerNoEffect:
+	pause 0x20
+	printstring STRINGID_NOEFFECTONTARGET
+	waitmessage 0x40
+	goto BattleScript_RototillerMoveTargetEnd
+BattleScript_RototillerLoop2:
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_ATK, 0xC, BattleScript_RototillerDoMoveAnim
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPATK, 0xC, BattleScript_RototillerCantRaiseMultipleStats
+BattleScript_RototillerDoMoveAnim::
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_SPATK, 0x0
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange 0x1, BattleScript_RototillerTrySpAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_RototillerTrySpAtk
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_RototillerTrySpAtk::
+	setstatchanger STAT_SPATK, 1, FALSE
+	statbuffchange 0x1, BattleScript_RototillerMoveTargetEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_RototillerMoveTargetEnd
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_RototillerMoveTargetEnd:
+	setbyte sMOVEEND_STATE, 0x0
+	moveend 0x2, 0x10
+	jumpifnexttargetvalid BattleScript_RototillerLoop
+	end
+BattleScript_RototillerCantRaiseMultipleStats:
+	printstring STRINGID_STATSWONTINCREASE2
+	waitmessage 0x40
+	goto BattleScript_RototillerMoveTargetEnd
 	
 BattleScript_EffectBestow:
 	attackcanceler
@@ -1431,8 +1475,10 @@ BattleScript_HitEscapeEnd:
 	end
 	
 BattleScript_EffectPlaceholder:
-	showabilitypopup BS_TARGET
 	attackcanceler
+	attackstring
+	ppreduce
+	pause 0x5
 	printstring STRINGID_NOTDONEYET
 	goto BattleScript_MoveEnd
 
@@ -1480,6 +1526,7 @@ BattleScript_EffectFreezeDry:
 BattleScript_EffectTwoTypedMove:
 BattleScript_EffectTechnoBlast:
 BattleScript_EffectJudgment:
+BattleScript_EffectFusionCombo:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
@@ -2070,21 +2117,13 @@ BattleScript_KOFail::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRazorWind::
-	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
-	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	setbyte sTWOTURN_STRINGID, 0x0
-	call BattleScriptFirstChargingTurn
-	goto BattleScript_MoveEnd
-
 BattleScript_TwoTurnMovesSecondTurn::
 	attackcanceler
 	setmoveeffect MOVE_EFFECT_CHARGING
 	setbyte sB_ANIM_TURN, 0x1
 	clearstatusfromeffect BS_ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
-	jumpifnotmove MOVE_SKY_ATTACK, BattleScript_HitFromAccCheck
-	setmoveeffect MOVE_EFFECT_FLINCH
+	argumenttomoveeffect
 	goto BattleScript_HitFromAccCheck
 
 BattleScriptFirstChargingTurn::
@@ -2385,12 +2424,29 @@ BattleScript_EffectAccuracyDownHit::
 	setmoveeffect MOVE_EFFECT_ACC_MINUS_1
 	goto BattleScript_EffectHit
 
-BattleScript_EffectSkyAttack::
+BattleScript_EffectTwoTurnsAttack::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	setbyte sTWOTURN_STRINGID, 0x3
+	jumpifmove MOVE_SKY_ATTACK, BattleScript_EffectTwoTurnsAttackSkyAttack
+	jumpifmove MOVE_RAZOR_WIND, BattleScript_EffectTwoTurnsAttackRazorWind
+	jumpifmove MOVE_ICE_BURN, BattleScript_EffectTwoTurnsAttackIceBurn
+	jumpifmove MOVE_FREEZE_SHOCK, BattleScript_EffectTwoTurnsAttackFreezeShock
+	setbyte sTWOTURN_STRINGID, 0x0
+BattleScript_EffectTwoTurnsAttackContinue:
 	call BattleScriptFirstChargingTurn
 	goto BattleScript_MoveEnd
+BattleScript_EffectTwoTurnsAttackSkyAttack:
+	setbyte sTWOTURN_STRINGID, 0x3
+	goto BattleScript_EffectTwoTurnsAttackContinue
+BattleScript_EffectTwoTurnsAttackRazorWind:
+	setbyte sTWOTURN_STRINGID, 0x0
+	goto BattleScript_EffectTwoTurnsAttackContinue
+BattleScript_EffectTwoTurnsAttackIceBurn:
+	setbyte sTWOTURN_STRINGID, 0x0
+	goto BattleScript_EffectTwoTurnsAttackContinue
+BattleScript_EffectTwoTurnsAttackFreezeShock:
+	setbyte sTWOTURN_STRINGID, 0x0
+	goto BattleScript_EffectTwoTurnsAttackContinue
 
 BattleScript_EffectConfuseHit::
 	setmoveeffect MOVE_EFFECT_CONFUSION

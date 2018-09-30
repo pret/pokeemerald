@@ -1544,6 +1544,15 @@
 	.macro powertrick battler
 	various \battler, VARIOUS_POWER_TRICK
 	.endm
+	
+	.macro argumenttomoveeffect
+	various BS_ATTACKER, VARIOUS_ARGUMENT_TO_MOVE_EFFECT
+	.endm
+	
+	.macro jumpifnotgrounded battler, ptr
+	various \battler, VARIOUS_JUMP_IF_NOT_GROUNDED
+	.4byte \ptr
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat, stages, down
