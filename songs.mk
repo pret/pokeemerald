@@ -336,6 +336,9 @@ $(MID_SUBDIR)/mus_rainbow.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rekkuu_kourin.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G109 -V090
 
+$(MID_SUBDIR)/mus_rg_ajito.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G133 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 

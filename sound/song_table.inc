@@ -491,7 +491,7 @@ gSongTable:: @ 86B49F0
 	@ FRLG Music Below
 	song mus_rg_annai, 0, 0         @ Follow Me!
 	song mus_rg_slot, 0, 0          @ Game Corner
-	song mus_rg_ajito, 0, 0         @ Rocket Hideout
+	song mus_rg_ajito, 0, 0         @ Rocket Hideout (FRLG)
 	song mus_rg_gym, 0, 0           @ Gym
 	song mus_rg_purin, 2, 2         @ Jigglypuff's Song
 	song mus_rg_demo, 0, 0          @ Opening Movie
