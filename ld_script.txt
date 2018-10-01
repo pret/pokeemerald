@@ -977,7 +977,7 @@ SECTIONS {
         sound/songs/mus_rg_guren.o(.rodata);
         sound/songs/mus_rg_shion.o(.rodata);
         sound/songs/mus_rg_kaihuku.o(.rodata);
-        sound/songs/mus_rg_cycling.o(.rodata);
+        sound/songs/midi/mus_rg_cycling.o(.rodata);
         sound/songs/mus_rg_rocket.o(.rodata);
         sound/songs/mus_rg_shoujo.o(.rodata);
         sound/songs/mus_rg_shounen.o(.rodata);

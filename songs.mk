@@ -345,6 +345,9 @@ $(MID_SUBDIR)/mus_rg_annai.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_champ_r.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G154 -V090
 
+$(MID_SUBDIR)/mus_rg_cycling.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G141 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
