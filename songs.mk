@@ -267,6 +267,9 @@ $(MID_SUBDIR)/mus_me_kinomi.s: %.s: %.mid
 $(MID_SUBDIR)/mus_me_pointget.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G103 -V090 -P5
 
+$(MID_SUBDIR)/mus_me_rg_photo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G180 -V100 -P5
+
 $(MID_SUBDIR)/mus_me_shinka.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G026 -V080
 

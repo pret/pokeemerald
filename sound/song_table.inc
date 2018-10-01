@@ -537,7 +537,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_fan2, 2, 2          @ Fanfare 2
 	song mus_rg_fan5, 2, 2          @ Obtained a Starter!
 	song mus_rg_fan6, 2, 2          @ Pokémon Caught! (Used in Emerald)
-	song mus_me_rg_photo, 2, 2      @ Trainer Photo
+	song mus_me_rg_photo, 2, 2      @ Pokémon Printer (FRLG)
 	song mus_rg_titlerog, 0, 0      @ Game Freak
 	song mus_rg_get_yasei, 0, 0     @ Pokémon Caught Victory Theme
 	song mus_rg_sousa, 0, 0         @ Starting Tutorial
