@@ -967,7 +967,7 @@ SECTIONS {
         sound/songs/midi/mus_battle35.o(.rodata);
         sound/songs/midi/mus_battle38.o(.rodata);
         sound/songs/midi/mus_battle30.o(.rodata);
-        sound/songs/mus_rg_annai.o(.rodata);
+        sound/songs/midi/mus_rg_annai.o(.rodata);
         sound/songs/mus_rg_slot.o(.rodata);
         sound/songs/midi/mus_rg_ajito.o(.rodata);
         sound/songs/mus_rg_gym.o(.rodata);
