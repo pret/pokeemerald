@@ -342,6 +342,9 @@ $(MID_SUBDIR)/mus_rg_ajito.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_annai.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G131 -V068
 
+$(MID_SUBDIR)/mus_rg_champ_r.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G154 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
