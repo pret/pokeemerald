@@ -548,7 +548,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_okurimono, 0, 0     @ Mystery Gift (FRLG)
 	song mus_rg_kinomikui, 0, 0     @ Dodrio Berry Picking (FRLG)
 	song mus_rg_nanadungeon, 0, 0   @ Mount Ember (FRLG)
-	song mus_rg_oshie_tv, 0, 0      @ Follow Me!
+	song mus_rg_oshie_tv, 0, 0      @ Teachy TV Lesson (FRLG)
 	song mus_rg_nanashima, 0, 0     @ Sevii Islands (FRLG)
 	song mus_rg_nanaiseki, 0, 0     @ Tanoby Chambers (FRLG)
 	song mus_rg_nana123, 0, 0       @ Sevii Islands: One, Two & Three Islands (FRLG)
