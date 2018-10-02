@@ -393,6 +393,9 @@ $(MID_SUBDIR)/mus_rg_kaihuku.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_kenkyu.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G160 -V075
 
+$(MID_SUBDIR)/mus_rg_kinomikui.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G132 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
