@@ -534,7 +534,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_rival1, 0, 0        @ Encounter! Rival
 	song mus_rg_rival2, 0, 0        @ Rival's Exit
 	song mus_rg_fan2, 2, 2          @ Fanfare: Professor Oak's Evaluation (FRLG)
-	song mus_rg_fan5, 2, 2          @ Obtained a Starter!
+	song mus_rg_fan5, 2, 2          @ Fanfare: Pokémon Obtained (FRLG)
 	song mus_rg_fan6, 2, 2          @ Pokémon Caught! (Used in Emerald)
 	song mus_me_rg_photo, 2, 2      @ Pokémon Printer (FRLG)
 	song mus_rg_titlerog, 0, 0      @ Game Freak
