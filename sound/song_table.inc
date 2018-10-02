@@ -550,7 +550,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_nanadungeon, 0, 0   @ Mount Ember (FRLG)
 	song mus_rg_oshie_tv, 0, 0      @ Follow Me!
 	song mus_rg_nanashima, 0, 0     @ Sevii Islands Routes (Lake of Rage)
-	song mus_rg_nanaiseki, 0, 0     @ Sevii Forests (Viridian Forest)
+	song mus_rg_nanaiseki, 0, 0     @ Tanoby Chambers (FRLG)
 	song mus_rg_nana123, 0, 0       @ Sevii Islands: One, Two & Three Islands (FRLG)
 	song mus_rg_nana45, 0, 0        @ Sevii Islands: Four & Five Islands (FRLG)
 	song mus_rg_nana67, 0, 0        @ Sevii Islands: Six & Seven Islands (FRLG)

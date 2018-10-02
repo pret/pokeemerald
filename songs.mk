@@ -426,6 +426,9 @@ $(MID_SUBDIR)/mus_rg_nana123.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_nanadungeon.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G147 -V090
 
+$(MID_SUBDIR)/mus_rg_nanaiseki.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G146 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
