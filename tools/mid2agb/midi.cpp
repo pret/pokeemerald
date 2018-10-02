@@ -852,6 +852,12 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
 
 bool IsCompressionMatch(std::vector<Event>& events, int index1, int index2)
 {
+    if (events[index1].type != events[index2].type ||
+        events[index1].note != events[index2].note ||
+        events[index1].param1 != events[index2].param1 ||
+        events[index1].time != events[index2].time)
+        return false;
+
     index1++;
     index2++;
 
