@@ -363,6 +363,9 @@ $(MID_SUBDIR)/mus_rg_ending.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_exeye.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G144 -V090
 
+$(MID_SUBDIR)/mus_rg_fan2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G175 -V070 -P5
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
