@@ -357,6 +357,9 @@ $(MID_SUBDIR)/mus_rg_dendou.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_deoeye.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G184 -V079
 
+$(MID_SUBDIR)/mus_rg_ending.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G149 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 

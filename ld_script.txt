@@ -985,7 +985,7 @@ SECTIONS {
         sound/songs/mus_rg_t_mori.o(.rodata);
         sound/songs/mus_rg_otsukimi.o(.rodata);
         sound/songs/mus_rg_pokeyashi.o(.rodata);
-        sound/songs/mus_rg_ending.o(.rodata);
+        sound/songs/midi/mus_rg_ending.o(.rodata);
         sound/songs/mus_rg_load01.o(.rodata);
         sound/songs/mus_rg_opening.o(.rodata);
         sound/songs/mus_rg_load02.o(.rodata);

@@ -506,7 +506,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_t_mori, 0, 0        @ Viridian Forest
 	song mus_rg_otsukimi, 0, 0      @ Mt. Moon
 	song mus_rg_pokeyashi, 0, 0     @ Pokémon Mansion
-	song mus_rg_ending, 0, 0        @ Credits
+	song mus_rg_ending, 0, 0        @ Ending Theme (FRLG)
 	song mus_rg_load01, 0, 0        @ Route 1
 	song mus_rg_opening, 0, 0       @ Route 24/Intro
 	song mus_rg_load02, 0, 0        @ Route 3
