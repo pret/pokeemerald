@@ -516,7 +516,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_vs_tore, 0, 0       @ Battle! Trainer
 	song mus_rg_vs_yasei, 0, 0      @ Battle! Wild Pokémon
 	song mus_rg_vs_last, 0, 0       @ Battle! Champion
-	song mus_rg_masara, 0, 0        @ Pallet Town
+	song mus_rg_masara, 0, 0        @ Pallet Town Theme (FRLG)
 	song mus_rg_kenkyu, 0, 0        @ Professor Oak's Laboratory (FRLG)
 	song mus_rg_ohkido, 0, 0        @ Professor Oak's Theme
 	song mus_rg_pokecen, 0, 0       @ Pokémon Center
