@@ -495,7 +495,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_purin, 2, 2         @ Jigglypuff's Song
 	song mus_rg_demo, 0, 0          @ Opening Movie (FRLG)
 	song mus_rg_title, 0, 0         @ Title Screen
-	song mus_rg_guren, 0, 0         @ Cinnabar Island
+	song mus_rg_guren, 0, 0         @ Cinnabar Island Theme (FRLG)
 	song mus_rg_shion, 0, 0         @ Lavender Town
 	song mus_rg_kaihuku, 0, 0       @ RBY Pokémon Center Healing
 	song mus_rg_cycling, 0, 0       @ Cycling (FRLG)
