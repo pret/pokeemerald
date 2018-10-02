@@ -547,7 +547,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_network, 0, 0       @ Network Center
 	song mus_rg_okurimono, 0, 0     @ Mystery Gift
 	song mus_rg_kinomikui, 0, 0     @ Dodrio Berry Picking (FRLG)
-	song mus_rg_nanadungeon, 0, 0   @ Sevii Caves/Altering Cave (Mt. Moon)
+	song mus_rg_nanadungeon, 0, 0   @ Mount Ember (FRLG)
 	song mus_rg_oshie_tv, 0, 0      @ Follow Me!
 	song mus_rg_nanashima, 0, 0     @ Sevii Islands Routes (Lake of Rage)
 	song mus_rg_nanaiseki, 0, 0     @ Sevii Forests (Viridian Forest)
