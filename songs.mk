@@ -438,6 +438,9 @@ $(MID_SUBDIR)/mus_rg_network.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_nibi.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G173 -V084
 
+$(MID_SUBDIR)/mus_rg_ohkido.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G161 -V086
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 

@@ -997,7 +997,7 @@ SECTIONS {
         sound/songs/mus_rg_vs_last.o(.rodata);
         sound/songs/midi/mus_rg_masara.o(.rodata);
         sound/songs/midi/mus_rg_kenkyu.o(.rodata);
-        sound/songs/mus_rg_ohkido.o(.rodata);
+        sound/songs/midi/mus_rg_ohkido.o(.rodata);
         sound/songs/mus_rg_pokecen.o(.rodata);
         sound/songs/mus_rg_santoan.o(.rodata);
         sound/songs/midi/mus_rg_naminori.o(.rodata);
