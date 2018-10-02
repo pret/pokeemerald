@@ -1017,7 +1017,7 @@ SECTIONS {
         sound/songs/midi/mus_rg_fan6.o(.rodata);
         sound/songs/midi/mus_me_rg_photo.o(.rodata);
         sound/songs/mus_rg_titlerog.o(.rodata);
-        sound/songs/mus_rg_get_yasei.o(.rodata);
+        sound/songs/midi/mus_rg_get_yasei.o(.rodata);
         sound/songs/mus_rg_sousa.o(.rodata);
         sound/songs/mus_rg_sekaikan.o(.rodata);
         sound/songs/mus_rg_seibetu.o(.rodata);
