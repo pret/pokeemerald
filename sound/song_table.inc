@@ -521,7 +521,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_ohkido, 0, 0        @ Professor Oak's Theme
 	song mus_rg_pokecen, 0, 0       @ Pokémon Center
 	song mus_rg_santoan, 0, 0       @ S.S. Anne
-	song mus_rg_naminori, 0, 0      @ Surfing
+	song mus_rg_naminori, 0, 0      @ The Sea (FRLG)
 	song mus_rg_p_tower, 0, 0       @ Pokémon Tower
 	song mus_rg_shiruhu, 0, 0       @ Silph Co.
 	song mus_rg_hanada, 0, 0        @ Fuchsia City Theme (FRLG)
