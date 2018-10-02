@@ -497,7 +497,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_title, 0, 0         @ Title Screen
 	song mus_rg_guren, 0, 0         @ Cinnabar Island Theme (FRLG)
 	song mus_rg_shion, 0, 0         @ Lavender Town
-	song mus_rg_kaihuku, 0, 0       @ RBY Pokémon Center Healing
+	song mus_rg_kaihuku, 0, 0       @ Pokémon Healed (2) (FRLG)
 	song mus_rg_cycling, 0, 0       @ Cycling (FRLG)
 	song mus_rg_rocket, 0, 0        @ Encounter! Team Rocket
 	song mus_rg_shoujo, 0, 0        @ Encounter! Girl
