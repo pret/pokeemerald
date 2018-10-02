@@ -488,7 +488,6 @@ gSongTable:: @ 86B49F0
 	song mus_battle35, 0, 0         @ Battle! (Brendan/May/Steven)
 	song mus_battle38, 0, 0         @ Battle! (Elite Four)
 	song mus_battle30, 0, 0         @ Battle! (Team Aqua/Team Magma Leaders)
-	@ FRLG Music Below
 	song mus_rg_annai, 0, 0         @ Guide (FRLG)
 	song mus_rg_slot, 0, 0          @ Game Corner
 	song mus_rg_ajito, 0, 0         @ Rocket Hideout (FRLG)
@@ -560,7 +559,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_vs_myu2, 0, 0       @ Battle! Mewtwo
 	song mus_rg_vs_den, 0, 0        @ Battle! Legendary Birds
 	song mus_rg_exeye, 0, 0         @ Encounter! Gym Leader
-	song mus_rg_deoeye, 0, 0        @ Encounter! Deoxys
+	song mus_rg_deoeye, 0, 0        @ Deoxys Appears
 	song mus_rg_t_tower, 0, 0       @ Trainer Tower (Gym)
 	song mus_rg_slowmasara, 0, 0    @ Pallet Town (Hall of Fame remix)
 	song mus_rg_tvnoize, 0, 0       @ Teachy TV
