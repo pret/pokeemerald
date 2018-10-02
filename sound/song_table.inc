@@ -529,7 +529,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_win_tre, 0, 0       @ Victory! Trainer
 	song mus_rg_win_yasei, 0, 0     @ Victory! Wild Pokémon
 	song mus_rg_win_gym, 0, 0       @ Victory! Gym Leader
-	song mus_rg_kuchiba, 0, 0       @ Vermillion City
+	song mus_rg_kuchiba, 0, 0       @ Vermillion City Theme (FRLG)
 	song mus_rg_nibi, 0, 0          @ Viridian/Saffron/Pewter City
 	song mus_rg_rival1, 0, 0        @ Encounter! Rival
 	song mus_rg_rival2, 0, 0        @ Rival's Exit
