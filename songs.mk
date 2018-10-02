@@ -402,6 +402,9 @@ $(MID_SUBDIR)/mus_rg_kuchiba.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_load01.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G150 -V079
 
+$(MID_SUBDIR)/mus_rg_load02.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G152 -V083
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 

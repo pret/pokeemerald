@@ -509,7 +509,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_ending, 0, 0        @ Ending Theme (FRLG)
 	song mus_rg_load01, 0, 0        @ Road to Viridian City: Leaving Pallet Town (FRLG)
 	song mus_rg_opening, 0, 0       @ Route 24/Intro
-	song mus_rg_load02, 0, 0        @ Route 3
+	song mus_rg_load02, 0, 0        @ Road to Cerulean City: Leaving Mt. Moon (FRLG)
 	song mus_rg_load03, 0, 0        @ Route 11
 	song mus_rg_champ_r, 0, 0       @ The Final Road (FRLG)
 	song mus_rg_vs_gym, 0, 0        @ Battle! Gym Leader/Elite Four
