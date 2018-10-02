@@ -432,6 +432,9 @@ $(MID_SUBDIR)/mus_rg_nanaiseki.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_nanashima.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G187 -V080
 
+$(MID_SUBDIR)/mus_rg_network.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G162 -V096
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 

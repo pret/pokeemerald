@@ -544,7 +544,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_seibetu, 0, 0       @ Starting Tutorial 3
 	song mus_rg_jump, 0, 0          @ Pokémon Jump (FRLG)
 	song mus_rg_union, 0, 0         @ Union Room
-	song mus_rg_network, 0, 0       @ Network Center
+	song mus_rg_network, 0, 0       @ Pokémon Net Center (FRLG)
 	song mus_rg_okurimono, 0, 0     @ Mystery Gift
 	song mus_rg_kinomikui, 0, 0     @ Dodrio Berry Picking (FRLG)
 	song mus_rg_nanadungeon, 0, 0   @ Mount Ember (FRLG)
