@@ -1037,7 +1037,7 @@ SECTIONS {
         sound/songs/mus_rg_vs_deo.o(.rodata);
         sound/songs/mus_rg_vs_myu2.o(.rodata);
         sound/songs/mus_rg_vs_den.o(.rodata);
-        sound/songs/mus_rg_exeye.o(.rodata);
+        sound/songs/midi/mus_rg_exeye.o(.rodata);
         sound/songs/midi/mus_rg_deoeye.o(.rodata);
         sound/songs/mus_rg_t_tower.o(.rodata);
         sound/songs/mus_rg_slowmasara.o(.rodata);

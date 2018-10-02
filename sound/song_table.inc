@@ -558,7 +558,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_vs_deo, 0, 0        @ Battle! Deoxys
 	song mus_rg_vs_myu2, 0, 0       @ Battle! Mewtwo
 	song mus_rg_vs_den, 0, 0        @ Battle! Legendary Birds
-	song mus_rg_exeye, 0, 0         @ Encounter! Gym Leader
+	song mus_rg_exeye, 0, 0         @ Tense Battle! (FRLG)
 	song mus_rg_deoeye, 0, 0        @ Deoxys Appears
 	song mus_rg_t_tower, 0, 0       @ Trainer Tower (Gym)
 	song mus_rg_slowmasara, 0, 0    @ Pallet Town (Hall of Fame remix)
