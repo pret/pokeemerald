@@ -417,6 +417,9 @@ $(MID_SUBDIR)/mus_rg_naminori.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_nana45.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G188 -V084
 
+$(MID_SUBDIR)/mus_rg_nana67.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G189 -V084
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 

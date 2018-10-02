@@ -1032,7 +1032,7 @@ SECTIONS {
         sound/songs/mus_rg_nanaiseki.o(.rodata);
         sound/songs/mus_rg_nana123.o(.rodata);
         sound/songs/midi/mus_rg_nana45.o(.rodata);
-        sound/songs/mus_rg_nana67.o(.rodata);
+        sound/songs/midi/mus_rg_nana67.o(.rodata);
         sound/songs/mus_rg_pokefue.o(.rodata);
         sound/songs/mus_rg_vs_deo.o(.rodata);
         sound/songs/mus_rg_vs_myu2.o(.rodata);
