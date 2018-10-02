@@ -381,6 +381,9 @@ $(MID_SUBDIR)/mus_rg_guren.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_gym.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G134 -V090
 
+$(MID_SUBDIR)/mus_rg_hanada.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G167 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
