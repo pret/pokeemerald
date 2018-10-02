@@ -444,6 +444,9 @@ $(MID_SUBDIR)/mus_rg_ohkido.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_okurimono.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G183 -V100
 
+$(MID_SUBDIR)/mus_rg_opening.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G151 -V086
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
