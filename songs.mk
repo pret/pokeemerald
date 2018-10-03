@@ -501,6 +501,9 @@ $(MID_SUBDIR)/mus_rg_shounen.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_slot.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G132 -V090
 
+$(MID_SUBDIR)/mus_rg_slowmasara.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G159 -V092
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 

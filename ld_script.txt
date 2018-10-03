@@ -1040,7 +1040,7 @@ SECTIONS {
         sound/songs/midi/mus_rg_exeye.o(.rodata);
         sound/songs/midi/mus_rg_deoeye.o(.rodata);
         sound/songs/mus_rg_t_tower.o(.rodata);
-        sound/songs/mus_rg_slowmasara.o(.rodata);
+        sound/songs/midi/mus_rg_slowmasara.o(.rodata);
         sound/songs/mus_rg_tvnoize.o(.rodata);
         sound/songs/ph_trap_blend.o(.rodata);
         sound/songs/ph_trap_held.o(.rodata);
