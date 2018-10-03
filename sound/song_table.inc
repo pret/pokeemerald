@@ -249,23 +249,21 @@ gSongTable:: @ 86B49F0
 	song se_w287b, 1, 1             @ Stat Decreased
 	song se_w114, 1, 1              @ Haze
 	song se_w063b, 1, 1             @ Hyper Beam 2
-	@ FRLG SFX below
-	song se_rg_w_door, 1, 1         @ Door
-	song se_rg_card1, 1, 1          @ Trainer Card 1
-	song se_rg_card2, 1, 1          @ Trainer Card 2
-	song se_rg_card3, 1, 1          @ Trainer Card 3
-	song se_rg_bag1, 1, 1           @ Bag Scroll
-	song se_rg_bag2, 1, 1           @ Bag Pocket Change
+	song se_rg_w_door, 1, 1         @ Door (FRLG)
+	song se_rg_card1, 1, 1          @ Trainer Card 1 (FRLG)
+	song se_rg_card2, 1, 1          @ Trainer Card 2 (FRLG)
+	song se_rg_card3, 1, 1          @ Trainer Card 3 (FRLG)
+	song se_rg_bag1, 1, 1           @ Bag Scroll (FRLG)
+	song se_rg_bag2, 1, 1           @ Bag Pocket Change (FRLG)
 	song se_rg_getting, 1, 1        
-	song se_rg_shop, 1, 1           @ Cash Register
-	song se_rg_kiteki, 1, 1         @ S.S. Anne Horn
-	song se_rg_help_op, 1, 1        @ Help Menu Open
-	song se_rg_help_cl, 1, 1        @ Help Menu Close
-	song se_rg_help_ng, 1, 1        @ Help Menu Error
+	song se_rg_shop, 1, 1           @ Cash Register (FRLG)
+	song se_rg_kiteki, 1, 1         @ S.S. Anne Horn (FRLG)
+	song se_rg_help_op, 1, 1        @ Help Menu Open (FRLG)
+	song se_rg_help_cl, 1, 1        @ Help Menu Close (FRLG)
+	song se_rg_help_ng, 1, 1        @ Help Menu Error (FRLG)
 	song se_rg_deomov, 1, 1         @ Deoxys Moves
 	song se_rg_excellent, 1, 1
 	song se_rg_nawamiss, 1, 1
-	@ end FRLG SFX
 	song se_toreeye, 1, 1           @ Trainer's Eye Call
 	song se_toreoff, 1, 1           @ Trainer's Eye Hang Up
 	song se_hantei1, 1, 1           @ Battle Arena Time's Up 1
@@ -273,7 +271,6 @@ gSongTable:: @ 86B49F0
 	song se_curtain, 1, 1           @ Battle Pike Curtain Open
 	song se_curtain1, 1, 1          @ Battle Pike Curtain Close
 	song se_ussoki, 1, 1            @ Sudowoodo
-
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
@@ -547,7 +544,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_network, 0, 0       @ Pokémon Net Center (FRLG)
 	song mus_rg_okurimono, 0, 0     @ Mystery Gift (FRLG)
 	song mus_rg_kinomikui, 0, 0     @ Dodrio Berry Picking (FRLG)
-	song mus_rg_nanadungeon, 0, 0   @ Mount Ember (FRLG)
+	song mus_rg_nanadungeon, 0, 0   @ Mt. Ember (FRLG)
 	song mus_rg_oshie_tv, 0, 0      @ Teachy TV Lesson (FRLG)
 	song mus_rg_nanashima, 0, 0     @ Sevii Islands (FRLG)
 	song mus_rg_nanaiseki, 0, 0     @ Tanoby Chambers (FRLG)

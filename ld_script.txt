@@ -1072,7 +1072,7 @@ SECTIONS {
         sound/songs/ph_thought_blend.o(.rodata);
         sound/songs/ph_thought_held.o(.rodata);
         sound/songs/ph_thought_solo.o(.rodata);
-        sound/songs/ph_choice_blend.o(.rodata);
+        sound/songs/midi/ph_choice_blend.o(.rodata);
         sound/songs/ph_choice_held.o(.rodata);
         sound/songs/ph_choice_solo.o(.rodata);
         sound/songs/ph_mouth_blend.o(.rodata);
