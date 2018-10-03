@@ -465,6 +465,9 @@ $(MID_SUBDIR)/mus_rg_pokefue.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_pokeyashi.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G148 -V090
 
+$(MID_SUBDIR)/mus_rg_purin.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G135 -V068 -P5
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
