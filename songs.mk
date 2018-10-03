@@ -411,6 +411,153 @@ $(MID_SUBDIR)/mus_rg_load03.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_masara.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G159 -V100
 
+$(MID_SUBDIR)/mus_rg_naminori.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G164 -V071
+
+$(MID_SUBDIR)/mus_rg_nana45.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G188 -V084
+
+$(MID_SUBDIR)/mus_rg_nana67.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G189 -V084
+
+$(MID_SUBDIR)/mus_rg_nana123.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G173 -V084
+
+$(MID_SUBDIR)/mus_rg_nanadungeon.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G147 -V090
+
+$(MID_SUBDIR)/mus_rg_nanaiseki.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G146 -V090
+
+$(MID_SUBDIR)/mus_rg_nanashima.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G187 -V080
+
+$(MID_SUBDIR)/mus_rg_network.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G162 -V096
+
+$(MID_SUBDIR)/mus_rg_nibi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G173 -V084
+
+$(MID_SUBDIR)/mus_rg_ohkido.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G161 -V086
+
+$(MID_SUBDIR)/mus_rg_okurimono.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G183 -V100
+
+$(MID_SUBDIR)/mus_rg_opening.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G151 -V086
+
+$(MID_SUBDIR)/mus_rg_oshie_tv.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G131 -V068
+
+$(MID_SUBDIR)/mus_rg_otsukimi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G147 -V090
+
+$(MID_SUBDIR)/mus_rg_p_tower.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G165 -V090
+
+$(MID_SUBDIR)/mus_rg_pokecen.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G162 -V096
+
+$(MID_SUBDIR)/mus_rg_pokefue.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G165 -V048 -P5
+
+$(MID_SUBDIR)/mus_rg_pokeyashi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G148 -V090
+
+$(MID_SUBDIR)/mus_rg_purin.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G135 -V068 -P5
+
+$(MID_SUBDIR)/mus_rg_rival1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G174 -V079
+
+$(MID_SUBDIR)/mus_rg_rival2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G174 -V079
+
+$(MID_SUBDIR)/mus_rg_rocket.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G142 -V096
+
+$(MID_SUBDIR)/mus_rg_santoan.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G163 -V090
+
+$(MID_SUBDIR)/mus_rg_seibetu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G182 -V088
+
+$(MID_SUBDIR)/mus_rg_sekaikan.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G182 -V088
+
+$(MID_SUBDIR)/mus_rg_shion.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G139 -V090
+
+$(MID_SUBDIR)/mus_rg_shiruhu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G166 -V076
+
+$(MID_SUBDIR)/mus_rg_shoujo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G143 -V051
+
+$(MID_SUBDIR)/mus_rg_shounen.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G144 -V090
+
+$(MID_SUBDIR)/mus_rg_slot.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G132 -V090
+
+$(MID_SUBDIR)/mus_rg_slowmasara.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G159 -V092
+
+$(MID_SUBDIR)/mus_rg_sousa.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G182 -V085
+
+$(MID_SUBDIR)/mus_rg_t_mori.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G146 -V090
+
+$(MID_SUBDIR)/mus_rg_t_tower.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G134 -V090
+
+$(MID_SUBDIR)/mus_rg_tamamusi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G168 -V070
+
+$(MID_SUBDIR)/mus_rg_title.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G137 -V090
+
+$(MID_SUBDIR)/mus_rg_titlerog.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G181 -V075
+
+$(MID_SUBDIR)/mus_rg_tvnoize.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G186 -V059
+
+$(MID_SUBDIR)/mus_rg_union.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G132 -V090
+
+$(MID_SUBDIR)/mus_rg_vs_den.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G157 -V090
+
+$(MID_SUBDIR)/mus_rg_vs_deo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G185 -V080
+
+$(MID_SUBDIR)/mus_rg_vs_gym.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G155 -V090
+
+$(MID_SUBDIR)/mus_rg_vs_last.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G158 -V090
+
+$(MID_SUBDIR)/mus_rg_vs_myu2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G157 -V090
+
+$(MID_SUBDIR)/mus_rg_vs_tore.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G156 -V090
+
+$(MID_SUBDIR)/mus_rg_vs_yasei.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G157 -V090
+
+$(MID_SUBDIR)/mus_rg_win_gym.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G171 -V090
+
+$(MID_SUBDIR)/mus_rg_win_tre.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G169 -V089
+
+$(MID_SUBDIR)/mus_rg_win_yasei.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G170 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
