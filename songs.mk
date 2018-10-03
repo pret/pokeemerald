@@ -537,6 +537,9 @@ $(MID_SUBDIR)/mus_rg_vs_deo.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_vs_gym.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G155 -V090
 
+$(MID_SUBDIR)/mus_rg_vs_last.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G158 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
