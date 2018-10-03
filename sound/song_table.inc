@@ -497,7 +497,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_title, 0, 0         @ Title Screen (FRLG)
 	song mus_rg_guren, 0, 0         @ Cinnabar Island Theme (FRLG)
 	song mus_rg_shion, 0, 0         @ Lavender Town Theme (FRLG)
-	song mus_rg_kaihuku, 0, 0       @ Pokémon Healed (2) (FRLG)
+	song mus_rg_kaihuku, 0, 0       @ Pokémon Healed (FRLG)
 	song mus_rg_cycling, 0, 0       @ Cycling (FRLG)
 	song mus_rg_rocket, 0, 0        @ A Trainer Appears (Bad Guy Version) (FRLG)
 	song mus_rg_shoujo, 0, 0        @ A Trainer Appears (Girl Version) (FRLG)
@@ -526,7 +526,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_shiruhu, 0, 0       @ Silph Co. (FRLG)
 	song mus_rg_hanada, 0, 0        @ Fuchsia City Theme (FRLG)
 	song mus_rg_tamamusi, 0, 0      @ Celadon City Theme (FRLG)
-	song mus_rg_win_tre, 0, 0       @ Victory! Trainer
+	song mus_rg_win_tre, 0, 0       @ Victory! (Trainer Battle) (FRLG)
 	song mus_rg_win_yasei, 0, 0     @ Victory! Wild Pokémon
 	song mus_rg_win_gym, 0, 0       @ Victory! (Gym Leader Battle) (FRLG)
 	song mus_rg_kuchiba, 0, 0       @ Vermillion City Theme (FRLG)
