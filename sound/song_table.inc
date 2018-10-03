@@ -513,7 +513,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_load03, 0, 0        @ Road to Fuchsia City: Leaving Lavender Town (FRLG)
 	song mus_rg_champ_r, 0, 0       @ The Final Road (FRLG)
 	song mus_rg_vs_gym, 0, 0        @ Battle! (Gym Leader Battle) (FRLG)
-	song mus_rg_vs_tore, 0, 0       @ Battle! Trainer
+	song mus_rg_vs_tore, 0, 0       @ Battle! (Trainer Battle) (FRLG)
 	song mus_rg_vs_yasei, 0, 0      @ Battle! Wild Pokémon
 	song mus_rg_vs_last, 0, 0       @ Final Battle! (Rival) (FRLG)
 	song mus_rg_masara, 0, 0        @ Pallet Town Theme (FRLG)
