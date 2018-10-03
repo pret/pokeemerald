@@ -1022,7 +1022,7 @@ SECTIONS {
         sound/songs/midi/mus_rg_sekaikan.o(.rodata);
         sound/songs/midi/mus_rg_seibetu.o(.rodata);
         sound/songs/midi/mus_rg_jump.o(.rodata);
-        sound/songs/mus_rg_union.o(.rodata);
+        sound/songs/midi/mus_rg_union.o(.rodata);
         sound/songs/midi/mus_rg_network.o(.rodata);
         sound/songs/midi/mus_rg_okurimono.o(.rodata);
         sound/songs/midi/mus_rg_kinomikui.o(.rodata);

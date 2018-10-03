@@ -525,6 +525,9 @@ $(MID_SUBDIR)/mus_rg_titlerog.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_tvnoize.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G186 -V059
 
+$(MID_SUBDIR)/mus_rg_union.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G132 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
