@@ -555,6 +555,9 @@ $(MID_SUBDIR)/mus_rg_win_gym.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_win_tre.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G169 -V089
 
+$(MID_SUBDIR)/mus_rg_win_yasei.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G170 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
