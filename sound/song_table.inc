@@ -503,7 +503,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_shoujo, 0, 0        @ A Trainer Appears (Girl Version) (FRLG)
 	song mus_rg_shounen, 0, 0       @ A Trainer Appears (Boy Version) (FRLG)
 	song mus_rg_dendou, 0, 0        @ Hall of Fame (FRLG)
-	song mus_rg_t_mori, 0, 0        @ Viridian Forest
+	song mus_rg_t_mori, 0, 0        @ Viridian Forest (FRLG)
 	song mus_rg_otsukimi, 0, 0      @ Navel Rock
 	song mus_rg_pokeyashi, 0, 0     @ Pokémon Mansion (FRLG)
 	song mus_rg_ending, 0, 0        @ Ending Theme (FRLG)
