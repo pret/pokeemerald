@@ -532,7 +532,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_kuchiba, 0, 0       @ Vermillion City Theme (FRLG)
 	song mus_rg_nibi, 0, 0          @ Pewter City Theme (FRLG)
 	song mus_rg_rival1, 0, 0        @ A Rival Appears (FRLG)
-	song mus_rg_rival2, 0, 0        @ Rival's Exit
+	song mus_rg_rival2, 0, 0        @ A Rival Appears (No Intro) (FRLG)
 	song mus_rg_fan2, 2, 2          @ Fanfare: Professor Oak's Evaluation (FRLG)
 	song mus_rg_fan5, 2, 2          @ Fanfare: Pokémon Obtained (FRLG)
 	song mus_rg_fan6, 2, 2          @ Fanfare: Pokémon Caught
