@@ -983,7 +983,7 @@ SECTIONS {
         sound/songs/mus_rg_shounen.o(.rodata);
         sound/songs/midi/mus_rg_dendou.o(.rodata);
         sound/songs/mus_rg_t_mori.o(.rodata);
-        sound/songs/mus_rg_otsukimi.o(.rodata);
+        sound/songs/midi/mus_rg_otsukimi.o(.rodata);
         sound/songs/mus_rg_pokeyashi.o(.rodata);
         sound/songs/midi/mus_rg_ending.o(.rodata);
         sound/songs/midi/mus_rg_load01.o(.rodata);
