@@ -453,6 +453,9 @@ $(MID_SUBDIR)/mus_rg_oshie_tv.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_otsukimi.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G147 -V090
 
+$(MID_SUBDIR)/mus_rg_p_tower.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G165 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
