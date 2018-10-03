@@ -489,7 +489,7 @@ gSongTable:: @ 86B49F0
 	song mus_battle38, 0, 0         @ Battle! (Elite Four)
 	song mus_battle30, 0, 0         @ Battle! (Team Aqua/Team Magma Leaders)
 	song mus_rg_annai, 0, 0         @ Guide (FRLG)
-	song mus_rg_slot, 0, 0          @ Game Corner
+	song mus_rg_slot, 0, 0          @ Rocket Game Corner (FRLG)
 	song mus_rg_ajito, 0, 0         @ Rocket Hideout (FRLG)
 	song mus_rg_gym, 0, 0           @ Pokémon Gym (FRLG)
 	song mus_rg_purin, 2, 2         @ Jigglypuff's Song (FRLG)
