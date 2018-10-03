@@ -510,6 +510,9 @@ $(MID_SUBDIR)/mus_rg_sousa.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_t_mori.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G146 -V090
 
+$(MID_SUBDIR)/mus_rg_t_tower.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G134 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
