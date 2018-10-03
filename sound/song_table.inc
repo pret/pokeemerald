@@ -537,7 +537,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_fan5, 2, 2          @ Fanfare: Pokémon Obtained (FRLG)
 	song mus_rg_fan6, 2, 2          @ Fanfare: Pokémon Caught
 	song mus_me_rg_photo, 2, 2      @ Pokémon Printer (FRLG)
-	song mus_rg_titlerog, 0, 0      @ Game Freak
+	song mus_rg_titlerog, 0, 0      @ Game Freak Logo (FRLG)
 	song mus_rg_get_yasei, 0, 0     @ Fanfare: Pokémon Caught (No Intro) (FRLG)
 	song mus_rg_sousa, 0, 0         @ Game Tutorial (1) (FRLG)
 	song mus_rg_sekaikan, 0, 0      @ Game Tutorial (2) (FRLG)

@@ -519,6 +519,9 @@ $(MID_SUBDIR)/mus_rg_tamamusi.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_title.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G137 -V090
 
+$(MID_SUBDIR)/mus_rg_titlerog.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G181 -V075
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
