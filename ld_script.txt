@@ -1049,8 +1049,8 @@ SECTIONS {
         sound/songs/ph_face_held.o(.rodata);
         sound/songs/ph_face_solo.o(.rodata);
         sound/songs/midi/ph_cloth_blend.o(.rodata);
-        sound/songs/ph_cloth_held.o(.rodata);
         sound/songs/ph_cloth_solo.o(.rodata);
+        sound/songs/midi/ph_cloth_held.o(.rodata);
         sound/songs/ph_dress_blend.o(.rodata);
         sound/songs/ph_dress_held.o(.rodata);
         sound/songs/ph_dress_solo.o(.rodata);
