@@ -1010,7 +1010,7 @@ SECTIONS {
         sound/songs/mus_rg_win_gym.o(.rodata);
         sound/songs/midi/mus_rg_kuchiba.o(.rodata);
         sound/songs/midi/mus_rg_nibi.o(.rodata);
-        sound/songs/mus_rg_rival1.o(.rodata);
+        sound/songs/midi/mus_rg_rival1.o(.rodata);
         sound/songs/mus_rg_rival2.o(.rodata);
         sound/songs/midi/mus_rg_fan2.o(.rodata);
         sound/songs/midi/mus_rg_fan5.o(.rodata);

@@ -468,6 +468,9 @@ $(MID_SUBDIR)/mus_rg_pokeyashi.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_purin.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G135 -V068 -P5
 
+$(MID_SUBDIR)/mus_rg_rival1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G174 -V079
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 
