@@ -477,6 +477,9 @@ $(MID_SUBDIR)/mus_rg_rival2.s: %.s: %.mid
 $(MID_SUBDIR)/mus_rg_rocket.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G142 -V096
 
+$(MID_SUBDIR)/mus_rg_santoan.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G163 -V090
+
 $(MID_SUBDIR)/mus_ropeway.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G071 -V078
 

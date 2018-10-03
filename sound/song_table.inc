@@ -520,7 +520,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_kenkyu, 0, 0        @ Professor Oak's Laboratory (FRLG)
 	song mus_rg_ohkido, 0, 0        @ Professor Oak (FRLG)
 	song mus_rg_pokecen, 0, 0       @ Pokémon Center (FRLG)
-	song mus_rg_santoan, 0, 0       @ S.S. Anne
+	song mus_rg_santoan, 0, 0       @ The S.S. Anne (FRLG)
 	song mus_rg_naminori, 0, 0      @ The Sea (FRLG)
 	song mus_rg_p_tower, 0, 0       @ Pokémon Tower (FRLG)
 	song mus_rg_shiruhu, 0, 0       @ Silph Co.
