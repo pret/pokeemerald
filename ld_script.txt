@@ -1002,7 +1002,7 @@ SECTIONS {
         sound/songs/midi/mus_rg_santoan.o(.rodata);
         sound/songs/midi/mus_rg_naminori.o(.rodata);
         sound/songs/midi/mus_rg_p_tower.o(.rodata);
-        sound/songs/mus_rg_shiruhu.o(.rodata);
+        sound/songs/midi/mus_rg_shiruhu.o(.rodata);
         sound/songs/midi/mus_rg_hanada.o(.rodata);
         sound/songs/mus_rg_tamamusi.o(.rodata);
         sound/songs/mus_rg_win_tre.o(.rodata);
