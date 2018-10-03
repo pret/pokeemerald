@@ -633,5 +633,158 @@ $(MID_SUBDIR)/mus_vs_rekku.s: %.s: %.mid
 $(MID_SUBDIR)/mus_yama_eye.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G097 -V076
 
+$(MID_SUBDIR)/ph_choice_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_choice_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_choice_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_cloth_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_cloth_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_cloth_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_cure_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_cure_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_cure_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_dress_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_dress_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_dress_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_face_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_face_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_face_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_fleece_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_fleece_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_fleece_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_foot_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_foot_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_foot_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_goat_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_goat_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_goat_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_goose_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_goose_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_goose_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_kit_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_kit_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_kit_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_lot_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_lot_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_lot_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_mouth_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_mouth_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_mouth_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_nurse_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_nurse_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_nurse_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_price_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_price_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_price_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_strut_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_strut_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_strut_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_thought_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_thought_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_thought_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_trap_blend.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_trap_held.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
+$(MID_SUBDIR)/ph_trap_solo.s: %.s: %.mid
+	$(MID) $< $@ -E -G130 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
