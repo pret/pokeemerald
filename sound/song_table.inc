@@ -540,7 +540,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_titlerog, 0, 0      @ Game Freak
 	song mus_rg_get_yasei, 0, 0     @ Fanfare: Pokémon Caught (No Intro) (FRLG)
 	song mus_rg_sousa, 0, 0         @ Starting Tutorial
-	song mus_rg_sekaikan, 0, 0      @ Starting Tutorial 2
+	song mus_rg_sekaikan, 0, 0      @ Game Tutorial (2) (FRLG)
 	song mus_rg_seibetu, 0, 0       @ Game Tutorial (3) (FRLG)
 	song mus_rg_jump, 0, 0          @ Pokémon Jump (FRLG)
 	song mus_rg_union, 0, 0         @ Union Room

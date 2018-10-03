@@ -1019,7 +1019,7 @@ SECTIONS {
         sound/songs/mus_rg_titlerog.o(.rodata);
         sound/songs/midi/mus_rg_get_yasei.o(.rodata);
         sound/songs/mus_rg_sousa.o(.rodata);
-        sound/songs/mus_rg_sekaikan.o(.rodata);
+        sound/songs/midi/mus_rg_sekaikan.o(.rodata);
         sound/songs/midi/mus_rg_seibetu.o(.rodata);
         sound/songs/midi/mus_rg_jump.o(.rodata);
         sound/songs/mus_rg_union.o(.rodata);
