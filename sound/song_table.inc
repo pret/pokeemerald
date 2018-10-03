@@ -501,7 +501,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_cycling, 0, 0       @ Cycling (FRLG)
 	song mus_rg_rocket, 0, 0        @ A Trainer Appears (Bad Guy Version) (FRLG)
 	song mus_rg_shoujo, 0, 0        @ A Trainer Appears (Girl Version) (FRLG)
-	song mus_rg_shounen, 0, 0       @ Encounter! Boy
+	song mus_rg_shounen, 0, 0       @ A Trainer Appears (Boy Version) (FRLG)
 	song mus_rg_dendou, 0, 0        @ Hall of Fame (FRLG)
 	song mus_rg_t_mori, 0, 0        @ Viridian Forest
 	song mus_rg_otsukimi, 0, 0      @ Navel Rock
