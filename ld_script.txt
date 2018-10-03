@@ -991,7 +991,7 @@ SECTIONS {
         sound/songs/midi/mus_rg_load02.o(.rodata);
         sound/songs/midi/mus_rg_load03.o(.rodata);
         sound/songs/midi/mus_rg_champ_r.o(.rodata);
-        sound/songs/mus_rg_vs_gym.o(.rodata);
+        sound/songs/midi/mus_rg_vs_gym.o(.rodata);
         sound/songs/mus_rg_vs_tore.o(.rodata);
         sound/songs/mus_rg_vs_yasei.o(.rodata);
         sound/songs/mus_rg_vs_last.o(.rodata);
