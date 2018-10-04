@@ -548,7 +548,7 @@ void sub_80E933C(void)
                 gSpecialVar_0x8006 = roomDecorPos[decorIdx] >> 4;
                 gSpecialVar_0x8007 = roomDecorPos[decorIdx] & 0xF;
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
-                if (MetatileBehavior_IsMB_B5(metatile) == TRUE || MetatileBehavior_IsMB_C3(metatile) == TRUE)
+                if (MetatileBehavior_IsSecretBaseLargeMatEdge(metatile) == TRUE || MetatileBehavior_IsLargeMatCenter(metatile) == TRUE)
                 {
                     gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].graphicsId + VAR_0x3F20;
                     VarSet(gSpecialVar_Result, gDecorations[roomDecor[decorIdx]].tiles[0]);
@@ -1271,7 +1271,7 @@ void sub_80EA3E4(u8 taskId)
                         }
                     }
                 }
-                else if (MetatileBehavior_IsMB_BE(behavior) == TRUE)
+                else if (MetatileBehavior_IsSecretBaseBreakableDoor(behavior) == TRUE)
                 {
                     if (gUnknown_0203A01D == TRUE)
                     {
