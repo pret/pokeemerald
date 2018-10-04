@@ -6,7 +6,6 @@
 #include "fieldmap.h"
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
-#include "metatile_behaviors.h"
 #include "overworld.h"
 #include "rotating_gate.h"
 #include "sprite.h"

@@ -51,7 +51,7 @@ FieldGetPlayerInput: @ 809BF08
 	bl cur_mapdata_block_role_at_player_pos
 	lsls r0, 24
 	lsrs r0, 24
-	bl MetatileBehavior_IsMoveTile
+	bl MetatileBehavior_IsForcedMovementTile
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r6, 0x2
@@ -1043,7 +1043,7 @@ _0809C74C:
 	.pool
 _0809C764:
 	adds r0, r5, 0
-	bl MetatileBehavior_IsMB_BF
+	bl MetatileBehavior_IsSecretBaseSandOrnament
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1072,7 +1072,7 @@ _0809C794:
 	b _0809C7E2
 _0809C7A8:
 	adds r0, r5, 0
-	bl MetatileBehavior_IsMB_C3
+	bl MetatileBehavior_IsLargeMatCenter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1081,7 +1081,7 @@ _0809C7A8:
 	b _0809C7E2
 _0809C7BC:
 	adds r0, r5, 0
-	bl MetatileBehavior_IsMB_B5
+	bl MetatileBehavior_IsSecretBaseLargeMatEdge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1376,7 +1376,7 @@ _0809CA04:
 	bne _0809CAF8
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl MetatileBehavior_IsMoveTile
+	bl MetatileBehavior_IsForcedMovementTile
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809CAF8
@@ -2048,7 +2048,7 @@ map_warp_consider_2_to_inside: @ 809CF78
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl MetatileBehavior_IsSecretBaseOpen
+	bl MetatileBehavior_IsOpenSecretBaseDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
