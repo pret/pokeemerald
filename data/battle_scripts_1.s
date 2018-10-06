@@ -327,6 +327,45 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAfterYou
 	.4byte BattleScript_EffectBestow
 	.4byte BattleScript_EffectRototiller
+	.4byte BattleScript_EffectFlowerShield
+	.4byte BattleScript_EffectHitPreventEscape
+	.4byte BattleScript_EffectSpeedSwap
+	
+BattleScript_EffectFlowerShield:
+	attackcanceler
+	attackstring
+	ppreduce
+	selectfirstvalidtarget
+BattleScript_FlowerShieldIsAnyGrass:
+	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_FlowerShieldLoopStart
+	jumpifnexttargetvalid BattleScript_FlowerShieldIsAnyGrass
+	goto BattleScript_ButItFailed
+BattleScript_FlowerShieldLoopStart:
+	selectfirstvalidtarget
+BattleScript_FlowerShieldLoop:
+	movevaluescleanup
+	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_FlowerShieldLoop2
+	goto BattleScript_FlowerShieldMoveTargetEnd
+BattleScript_FlowerShieldLoop2:
+	setstatchanger STAT_DEF, 1, FALSE
+	statbuffchange 0x1, BattleScript_FlowerShieldMoveTargetEnd
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, 0x2, BattleScript_FlowerShieldDoAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_FlowerShieldMoveTargetEnd
+	pause 0x15
+	goto BattleScript_FlowerShieldString
+BattleScript_FlowerShieldDoAnim:
+	attackanimation
+	waitanimation
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_FlowerShieldString:
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_FlowerShieldMoveTargetEnd:
+	setbyte sMOVEEND_STATE, 0x0
+	moveend 0x2, 0x10
+	jumpifnexttargetvalid BattleScript_FlowerShieldLoop
+	end
 	
 BattleScript_EffectRototiller:
 	attackcanceler
@@ -1262,6 +1301,18 @@ BattleScript_EffectGuardSwap:
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	swapstatstages STAT_DEF
 	swapstatstages STAT_SPDEF
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSWITCHEDSTATCHANGES
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
+BattleScript_EffectSpeedSwap:
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	swapstatstages STAT_SPEED
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNSWITCHEDSTATCHANGES
@@ -2815,6 +2866,10 @@ BattleScript_TripleKickEnd::
 
 BattleScript_EffectThief::
 	setmoveeffect MOVE_EFFECT_STEAL_ITEM
+	goto BattleScript_EffectHit
+	
+BattleScript_EffectHitPreventEscape:
+	setmoveeffect MOVE_EFFECT_PREVENT_ESCAPE
 	goto BattleScript_EffectHit
 
 BattleScript_EffectMeanLook::

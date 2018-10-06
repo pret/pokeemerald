@@ -553,7 +553,7 @@ static const u8 sText_PointedStonesFloat[] =_("Pointed stones float in the air\n
 static const u8 sText_CloakedInMysticalMoonlight[] =_("It became cloaked in mystical\nmoonlight!");
 static const u8 sText_TrappedBySwirlingMagma[] =_("{B_DEF_NAME_WITH_PREFIX} became\ntrapped by swirling magma!");
 static const u8 sText_VanishedInstantly[] =_("{B_ATK_NAME_WITH_PREFIX} Vanished\ninstantly!");
-static const u8 sText_ProtectedTeam[] =_("Wide Guard protected your team!");
+static const u8 sText_ProtectedTeam[] =_("{B_CURRENT_MOVE} protected\nyour team!");
 static const u8 sText_SharedItsGuard[] =_("{B_ATK_NAME_WITH_PREFIX} shared its\nguard with the target!");
 static const u8 sText_SharedItsPower[] =_("{B_ATK_NAME_WITH_PREFIX} shared its\npower with the target!");
 static const u8 sText_SwapsDefAndSpDefOfAllPkmn[] =_("It created a bizarre area in which\nthe Defense and Sp.Def stats are swapped!");
@@ -565,7 +565,6 @@ static const u8 sText_TransformedIntoWaterType[] =_("{B_DEF_NAME_WITH_PREFIX} tr
 static const u8 sText_PkmnAcquiredSimple[] =_("{B_DEF_NAME_WITH_PREFIX} acquired\nSimple!");
 static const u8 sText_KindOffer[] =_("{B_DEF_NAME_WITH_PREFIX}\ntook the kind offer!");
 static const u8 sText_ResetsTargetsStatLevels[] =_("{B_DEF_NAME_WITH_PREFIX}’s stat changes\nwere removed!");
-static const u8 sText_ProtectsTeamFromPriority[] =_("Quick Guard protected your team!");
 static const u8 sText_AllySwitchPosition[] =_("{B_ATK_NAME_WITH_PREFIX} and\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} switched places!");
 static const u8 sText_RestoreTargetsHealth[] =_("{B_DEF_NAME_WITH_PREFIX}’s HP was restored!");
 static const u8 sText_TookPkmnIntoTheSky[] =_("{B_ATK_NAME_WITH_PREFIX} took\n{B_DEF_NAME_WITH_PREFIX} into the sky!");
@@ -1067,7 +1066,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_EmptyString4, // 421
     sText_KindOffer, // 422
     sText_ResetsTargetsStatLevels, // 423
-    sText_ProtectsTeamFromPriority, // 424
+    sText_EmptyString4, // 424
     sText_AllySwitchPosition, // 425
     sText_RestoreTargetsHealth, // 426
     sText_TookPkmnIntoTheSky, // 427
@@ -1221,7 +1220,7 @@ const u16 gRainContinuesStringIds[] =
 
 const u16 gProtectLikeUsedStringIds[] =
 {
-    STRINGID_PKMNPROTECTEDITSELF2, STRINGID_PKMNBRACEDITSELF, STRINGID_BUTITFAILED
+    STRINGID_PKMNPROTECTEDITSELF2, STRINGID_PKMNBRACEDITSELF, STRINGID_BUTITFAILED, STRINGID_PROTECTEDTEAM,
 };
 
 const u16 gReflectLightScreenSafeguardStringIds[] =

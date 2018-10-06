@@ -185,41 +185,38 @@ struct DisableStruct
 
 struct ProtectStruct
 {
-    /* field_0 */
-    u32 protected:1;
-    u32 endured:1;
-    u32 noValidMoves:1;
-    u32 helpingHand:1;
-    u32 bounceMove:1;
-    u32 stealMove:1;
-    u32 flag0Unknown:1;
-    u32 prlzImmobility:1;
-    /* field_1 */
-    u32 confusionSelfDmg:1;
-    u32 targetNotAffected:1;
-    u32 chargingTurn:1;
-    u32 fleeFlag:2; // for RunAway and Smoke Ball
-    u32 usedImprisionedMove:1;
-    u32 loveImmobility:1;
-    u32 usedDisabledMove:1;
-    /* field_2 */
-    u32 usedTauntedMove:1;      // 0x1
-    u32 flag2Unknown:1;         // 0x2
-    u32 flinchImmobility:1;     // 0x4
-    u32 notFirstStrike:1;       // 0x8
-    u32 flag_x10:1;           // 0x10
-    u32 flag_x20:1;           // 0x20
-    u32 flag_x40:1;           // 0x40
-    u32 flag_x80:1;           // 0x80
-    u32 usesBouncedMove:1;
-    u32 usedHealBlockedMove:1;
-    u32 usedGravityPreventedMove:1;
-
-    /* field_4 */ u32 physicalDmg;
-    /* field_8 */ u32 specialDmg;
-    /* field_C */ u8 physicalBattlerId;
-    /* field_D */ u8 specialBattlerId;
-    /* field_E */ u16 fieldE;
+    u8 protected:1;
+    u8 wideGuarded:1;
+    u8 quickGuarded:1;
+    u8 spikyShielded:1;
+    u8 kingsShielded:1;
+    u8 banefulBunkered:1;
+    u8 endured:1;
+    u8 noValidMoves:1;
+    u8 helpingHand:1;
+    u8 bounceMove:1;
+    u8 stealMove:1;
+    u8 flag0Unknown:1;
+    u8 prlzImmobility:1;
+    u8 confusionSelfDmg:1;
+    u8 targetNotAffected:1;
+    u8 chargingTurn:1;
+    u8 fleeFlag:2; // for RunAway and Smoke Ball
+    u8 usedImprisionedMove:1;
+    u8 loveImmobility:1;
+    u8 usedDisabledMove:1;
+    u8 usedTauntedMove:1;
+    u8 flag2Unknown:1;
+    u8 flinchImmobility:1;
+    u8 notFirstStrike:1;
+    u8 flag_x10:1;
+    u8 usesBouncedMove:1;
+    u8 usedHealBlockedMove:1;
+    u8 usedGravityPreventedMove:1;
+    u32 physicalDmg;
+    u32 specialDmg;
+    u8 physicalBattlerId;
+    u8 specialBattlerId;
 };
 
 struct SpecialStatus

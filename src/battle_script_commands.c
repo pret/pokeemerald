@@ -73,8 +73,6 @@ extern u16 GetBattlePyramidPickupItemId(void);
 extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
 
-#define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
-
 // this file's functions
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
@@ -933,6 +931,28 @@ static const u8 sUnknown_0831C4F8[] =
 	0x03, 0x00, 0x00, 0x00
 };
 
+bool32 IsBattlerProtected(u8 battlerId, u16 move)
+{
+    if (!(gBattleMoves[move].flags & FLAG_PROTECT_AFFECTED))
+        return FALSE;
+    else if (gProtectStructs[battlerId].protected)
+        return TRUE;
+    else if ((gProtectStructs[battlerId].wideGuarded || gProtectStructs[BATTLE_PARTNER(battlerId)].wideGuarded)
+             && gBattleMoves[move].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
+        return TRUE;
+    else if (gProtectStructs[battlerId].banefulBunkered)
+        return TRUE;
+    else if (gProtectStructs[battlerId].spikyShielded)
+        return TRUE;
+    else if (gProtectStructs[battlerId].kingsShielded && gBattleMoves[move].power != 0)
+        return TRUE;
+    else if ((gProtectStructs[battlerId].quickGuarded || gProtectStructs[BATTLE_PARTNER(battlerId)].quickGuarded)
+             && gBattleMoves[move].priority > 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 static void atk00_attackcanceler(void)
 {
     s32 i;
@@ -1033,7 +1053,7 @@ static void atk00_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_TookAttack;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
-    else if (DEFENDER_IS_PROTECTED
+    else if (IsBattlerProtected(gBattlerTarget, gCurrentMove)
      && (gCurrentMove != MOVE_CURSE || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
      && ((!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))))
     {
@@ -1071,7 +1091,7 @@ static bool32 JumpIfMoveFailed(u8 adder, u16 move)
 
 static void atk40_jumpifaffectedbyprotect(void)
 {
-    if (DEFENDER_IS_PROTECTED)
+    if (IsBattlerProtected(gBattlerTarget, gCurrentMove))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(5, 0);
@@ -1086,7 +1106,7 @@ static void atk40_jumpifaffectedbyprotect(void)
 bool8 JumpIfMoveAffectedByProtect(u16 move)
 {
     bool8 affected = FALSE;
-    if (DEFENDER_IS_PROTECTED)
+    if (IsBattlerProtected(gBattlerTarget, move))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(7, move);
@@ -7051,10 +7071,9 @@ static void atk76_various(void)
 
 static void atk77_setprotectlike(void) // protect and endure
 {
-    bool8 notLastTurn = TRUE;
-    u16 lastMove = gLastResultingMoves[gBattlerAttacker];
+    bool32 notLastTurn = TRUE;
 
-    if (lastMove != MOVE_PROTECT && lastMove != MOVE_DETECT && lastMove != MOVE_ENDURE)
+    if (gBattleMoves[gLastResultingMoves[gBattlerAttacker]].flags & FLAG_PROTECTION_MOVE)
         gDisableStructs[gBattlerAttacker].protectUses = 0;
 
     if (gCurrentTurnActionNumber == (gBattlersCount - 1))
@@ -7062,15 +7081,40 @@ static void atk77_setprotectlike(void) // protect and endure
 
     if (sProtectSuccessRates[gDisableStructs[gBattlerAttacker].protectUses] >= Random() && notLastTurn)
     {
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_PROTECT)
-        {
-            gProtectStructs[gBattlerAttacker].protected = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        }
         if (gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
         {
             gProtectStructs[gBattlerAttacker].endured = 1;
             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        }
+        else if (gCurrentMove == MOVE_DETECT || gCurrentMove == MOVE_PROTECT)
+        {
+            gProtectStructs[gBattlerAttacker].protected = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        }
+        else if (gCurrentMove == MOVE_SPIKY_SHIELD)
+        {
+            gProtectStructs[gBattlerAttacker].spikyShielded = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        }
+        else if (gCurrentMove == MOVE_KING_S_SHIELD)
+        {
+            gProtectStructs[gBattlerAttacker].kingsShielded = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        }
+        else if (gCurrentMove == MOVE_BANEFUL_BUNKER)
+        {
+            gProtectStructs[gBattlerAttacker].banefulBunkered = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        }
+        else if (gCurrentMove == MOVE_WIDE_GUARD)
+        {
+            gProtectStructs[gBattlerAttacker].wideGuarded = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+        }
+        else if (gCurrentMove == MOVE_QUICK_GUARD)
+        {
+            gProtectStructs[gBattlerAttacker].quickGuarded = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
         }
         gDisableStructs[gBattlerAttacker].protectUses++;
     }
@@ -8428,7 +8472,9 @@ static void atk9E_metronome(void)
     {
         s32 i;
 
-        gCurrentMove = (Random() % MOVES_COUNT) + 1;
+        gCurrentMove = (Random() % (MOVES_COUNT - 1)) + 1;
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_PLACEHOLDER)
+            continue;
 
         i = -1;
         while (1)

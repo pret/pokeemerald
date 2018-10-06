@@ -2197,7 +2197,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 3,
-		.flags = 0,
+		.flags = FLAG_PROTECTION_MOVE,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_MACH_PUNCH
@@ -2377,7 +2377,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 3,
-		.flags = 0,
+		.flags = FLAG_PROTECTION_MOVE,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_BONE_RUSH
@@ -2449,7 +2449,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 3,
-		.flags = 0,
+		.flags = FLAG_PROTECTION_MOVE,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_CHARM
@@ -5638,7 +5638,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_WIDE_GUARD
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_PROTECT,
 		.power = 0,
 		.type = TYPE_ROCK,
 		.accuracy = 0,
@@ -5646,7 +5646,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 3,
-		.flags = 0,
+		.flags = FLAG_PROTECTION_MOVE,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_GUARD_SPLIT
@@ -6022,7 +6022,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_QUICK_GUARD
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_PROTECT,
 		.power = 0,
 		.type = TYPE_FIGHTING,
 		.accuracy = 0,
@@ -6030,7 +6030,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 3,
-		.flags = 0,
+		.flags = FLAG_PROTECTION_MOVE,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ALLY_SWITCH
@@ -6901,7 +6901,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_DISARMING_VOICE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_HIT,
 		.power = 40,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
@@ -6962,13 +6962,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_FLOWER_SHIELD
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_FLOWER_SHIELD,
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
 		.pp = 10,
 		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_USER,
+		.target = MOVE_TARGET_USER | MOVE_TARGET_FOES_AND_ALLY,
 		.priority = 0,
 		.flags = 0,
 		.split = SPLIT_STATUS,
@@ -7070,7 +7070,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_KING_S_SHIELD
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect, as it changes Aegislash's form
+		.effect = EFFECT_PROTECT,
 		.power = 0,
 		.type = TYPE_STEEL,
 		.accuracy = 0,
@@ -7078,7 +7078,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 4,
-		.flags = FLAG_SNATCH_AFFECTED,
+		.flags = FLAG_PROTECTION_MOVE,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_PLAY_NICE
@@ -7166,7 +7166,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SPIKY_SHIELD
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_PROTECT,
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 0,
@@ -7174,7 +7174,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 4,
-		.flags = 0,
+		.flags = FLAG_PROTECTION_MOVE,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_AROMATIC_MIST
@@ -7395,7 +7395,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_THOUSAND_WAVES
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect (not sure if this is like Mean Look lol, might be)
+		.effect = EFFECT_HIT_PREVENT_ESCAPE,
 		.power = 90,
 		.type = TYPE_GROUND,
 		.accuracy = 100,
@@ -7503,7 +7503,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_BANEFUL_BUNKER
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_PROTECT,
 		.power = 0,
 		.type = TYPE_POISON,
 		.accuracy = 0,
@@ -7511,11 +7511,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.secondaryEffectChance = 0,
 		.target = MOVE_TARGET_USER,
 		.priority = 4,
-		.flags = 0,
+		.flags = FLAG_PROTECTION_MOVE,
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SPIRIT_SHACKLE
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_HIT_PREVENT_ESCAPE,
 		.power = 80,
 		.type = TYPE_GHOST,
 		.accuracy = 100,
@@ -7540,7 +7540,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 	},
 	{ // MOVE_SPARKLING_ARIA
 		.effect = EFFECT_PLACEHOLDER,
-		.power = 00,
+		.power = 90,
 		.type = TYPE_WATER,
 		.accuracy = 100,
 		.pp = 10,
@@ -7695,7 +7695,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_ANCHOR_SHOT
-		.effect = EFFECT_MEAN_LOOK,
+		.effect = EFFECT_HIT_PREVENT_ESCAPE,
 		.power = 80,
 		.type = TYPE_STEEL,
 		.accuracy = 100,
@@ -7767,7 +7767,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_SPEED_SWAP
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_SPEED_SWAP,
 		.power = 0,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -7779,7 +7779,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_SMART_STRIKE
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_HIT,
 		.power = 70,
 		.type = TYPE_STEEL,
 		.accuracy = 0,
@@ -8043,7 +8043,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_TEARFUL_LOOK
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_NOBLE_ROAR,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,

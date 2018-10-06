@@ -276,8 +276,6 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
 {
     EFFECT_EXPLOSION,
     EFFECT_DREAM_EATER,
-    EFFECT_RAZOR_WIND,
-    EFFECT_SKY_ATTACK,
     EFFECT_RECHARGE,
     EFFECT_SKULL_BASH,
     EFFECT_SOLARBEAM,
