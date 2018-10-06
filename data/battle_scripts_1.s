@@ -6,6 +6,7 @@
 #include "constants/abilities.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/game_stat.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
@@ -922,7 +923,7 @@ BattleScript_EffectFocusEnergy::
 BattleScript_EffectRecoil::
 	setmoveeffect MOVE_EFFECT_RECOIL_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
-	incrementgamestat 0x1B
+	incrementgamestat GAME_STAT_USED_STRUGGLE
 	goto BattleScript_EffectHit
 
 BattleScript_EffectConfuse::
@@ -1200,7 +1201,7 @@ BattleScript_EffectSplash::
 	ppreduce
 	attackanimation
 	waitanimation
-	incrementgamestat 0x1A
+	incrementgamestat GAME_STAT_USED_SPLASH
 	printstring STRINGID_BUTNOTHINGHAPPENED
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
