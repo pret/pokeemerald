@@ -72,17 +72,20 @@ void HandleIntroSlide(u8 terrainId);
 // battle_anim_80A5C6C.s
 void sub_80A6EEC(struct Sprite *sprite);
 void sub_80A68D4(struct Sprite *sprite);
-void sub_80A6F3C(struct Sprite *sprite);
+void TranslateAnimLinear(struct Sprite *sprite);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
 u8 sub_80A82E4(u8 battlerId);
-bool8 AnimateBallThrow(struct Sprite *sprite);
+bool8 TranslateAnimArc(struct Sprite *sprite);
 
 enum
 {
-    BANK_X_POS,
-    BANK_Y_POS,
+    BATTLER_COORD_X,
+    BATTLER_COORD_Y,
+    BATTLER_COORD_X_2,
+    BATTLER_COORD_3,
+    BATTLER_COORD_4,
 };
 
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId);
@@ -107,6 +110,6 @@ u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 
-u8 sub_80A600C(u8, u16, u8);
+u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
 
 #endif // GUARD_BATTLE_ANIM_H

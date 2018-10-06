@@ -234,7 +234,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     else
     {
         for (i = 0; i < 4; i++)
-            gAnimBattlerSpecies[i] = gContestResources->field_18->field_0;
+            gAnimBattlerSpecies[i] = gContestResources->field_18->unk0;
     }
 
     if (!isMoveAnim)
@@ -691,7 +691,7 @@ void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         battlerSpriteId = gBattlerSpriteIds[battlerId];
 
         gBattle_BG1_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
-        if (IsContest() && IsSpeciesNotUnown(gContestResources->field_18->field_0))
+        if (IsContest() && IsSpeciesNotUnown(gContestResources->field_18->unk0))
             gBattle_BG1_X--;
 
         gBattle_BG1_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
@@ -749,7 +749,7 @@ static void sub_80A46A0(void)
     struct UnknownAnimStruct2 unknownStruct;
     u16 *ptr;
 
-    if (IsSpeciesNotUnown(gContestResources->field_18->field_0))
+    if (IsSpeciesNotUnown(gContestResources->field_18->unk0))
     {
         sub_80A6B30(&unknownStruct);
         ptr = unknownStruct.unk4;

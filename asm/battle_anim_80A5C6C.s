@@ -5,1682 +5,12 @@
 
 	.text
 
-	thumb_func_start GetBattlerSpriteCoord
-GetBattlerSpriteCoord: @ 80A5C6C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 24
-	lsrs r4, r1, 24
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A5C8A
-	cmp r4, 0x3
-	bne _080A5C8A
-	cmp r5, 0x3
-	bne _080A5C8A
-	movs r4, 0x1
-_080A5C8A:
-	cmp r4, 0x4
-	bhi _080A5D00
-	lsls r0, r4, 2
-	ldr r1, =_080A5C9C
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080A5C9C:
-	.4byte _080A5CB0
-	.4byte _080A5CD8
-	.4byte _080A5CB0
-	.4byte _080A5D00
-	.4byte _080A5D00
-_080A5CB0:
-	ldr r4, =gUnknown_08525F58
-	adds r0, r5, 0
-	bl GetBattlerPosition
-	lsls r0, 24
-	lsrs r0, 22
-	ldr r1, =gBattleTypeFlags
-	ldr r1, [r1]
-	movs r2, 0x1
-	ands r1, r2
-	lsls r1, 4
-	adds r0, r1
-	adds r0, r4
-	ldrb r0, [r0]
-	b _080A5DB0
-	.pool
-_080A5CD8:
-	ldr r4, =gUnknown_08525F58
-	adds r0, r5, 0
-	bl GetBattlerPosition
-	lsls r0, 24
-	lsrs r0, 22
-	ldr r1, =gBattleTypeFlags
-	ldr r1, [r1]
-	movs r2, 0x1
-	ands r1, r2
-	lsls r1, 4
-	adds r0, r1
-	adds r0, r4
-	ldrb r0, [r0, 0x1]
-	b _080A5DB0
-	.pool
-_080A5D00:
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A5D28
-	ldr r0, =gContestResources
-	ldr r0, [r0]
-	ldr r2, [r0, 0x18]
-	ldrb r1, [r2, 0x4]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080A5D24
-	ldrh r1, [r2, 0x2]
-	b _080A5D9A
-	.pool
-_080A5D24:
-	ldrh r1, [r2]
-	b _080A5D9A
-_080A5D28:
-	adds r0, r5, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A5D60
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r1, [r0]
-	lsls r0, r5, 2
-	adds r1, r0, r1
-	ldrh r0, [r1, 0x2]
-	cmp r0, 0
-	bne _080A5D98
-	ldr r1, =gBattlerPartyIndexes
-	lsls r0, r5, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gEnemyParty
-	b _080A5D7E
-	.pool
-_080A5D60:
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r1, [r0]
-	lsls r0, r5, 2
-	adds r1, r0, r1
-	ldrh r0, [r1, 0x2]
-	cmp r0, 0
-	bne _080A5D98
-	ldr r1, =gBattlerPartyIndexes
-	lsls r0, r5, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-_080A5D7E:
-	adds r0, r1
-	movs r1, 0xB
-	bl GetMonData
-	lsls r0, 16
-	lsrs r1, r0, 16
-	b _080A5D9A
-	.pool
-_080A5D98:
-	ldrh r1, [r1, 0x2]
-_080A5D9A:
-	cmp r4, 0x3
-	bne _080A5DA4
-	adds r0, r5, 0
-	movs r2, 0x1
-	b _080A5DA8
-_080A5DA4:
-	adds r0, r5, 0
-	movs r2, 0
-_080A5DA8:
-	bl sub_80A600C
-	lsls r0, 24
-	lsrs r0, 24
-_080A5DB0:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end GetBattlerSpriteCoord
-
-	thumb_func_start sub_80A5DB8
-sub_80A5DB8: @ 80A5DB8
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 16
-	lsrs r5, r1, 16
-	adds r0, r4, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A5DDA
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A5DDA
-	b _080A5EC8
-_080A5DDA:
-	cmp r5, 0xC9
-	bne _080A5E90
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A5E04
-	ldr r0, =gContestResources
-	ldr r0, [r0]
-	ldr r2, [r0, 0x18]
-	ldrb r1, [r2, 0x4]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080A5E00
-	ldr r2, [r2, 0x10]
-	b _080A5E42
-	.pool
-_080A5E00:
-	ldr r2, [r2, 0x8]
-	b _080A5E42
-_080A5E04:
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r0, [r0]
-	lsls r1, r4, 2
-	adds r0, r1, r0
-	ldrh r0, [r0, 0x2]
-	cmp r0, 0
-	bne _080A5E3C
-	ldr r1, =gBattlerPartyIndexes
-	lsls r0, r4, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0
-	bl GetMonData
-	adds r2, r0, 0
-	b _080A5E42
-	.pool
-_080A5E3C:
-	ldr r0, =gTransformedPersonalities
-	adds r0, r1, r0
-	ldr r2, [r0]
-_080A5E42:
-	movs r0, 0xC0
-	lsls r0, 18
-	ands r0, r2
-	lsrs r0, 18
-	movs r1, 0xC0
-	lsls r1, 10
-	ands r1, r2
-	lsrs r1, 12
-	orrs r0, r1
-	movs r1, 0xC0
-	lsls r1, 2
-	ands r1, r2
-	lsrs r1, 6
-	orrs r0, r1
-	movs r1, 0x3
-	ands r1, r2
-	orrs r0, r1
-	movs r1, 0x1C
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0
-	bne _080A5E7C
-	adds r0, r5, 0
-	b _080A5E86
-	.pool
-_080A5E7C:
-	movs r1, 0xCE
-	lsls r1, 1
-	adds r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-_080A5E86:
-	ldr r1, =gUnknown_083021D8
-	lsls r0, 2
-	b _080A5F90
-	.pool
-_080A5E90:
-	ldr r0, =0x00000181
-	cmp r5, r0
-	bne _080A5EB0
-	ldr r0, =gUnknown_08525F8C
-	ldr r1, =gBattleMonForms
-	adds r1, r4, r1
-	ldrb r1, [r1]
-	adds r1, r0
-	ldrb r0, [r1]
-	b _080A5F94
-	.pool
-_080A5EB0:
-	movs r0, 0xCE
-	lsls r0, 1
-	cmp r5, r0
-	bls _080A5EC0
-	ldr r0, =gUnknown_083021D8
-	b _080A5F92
-	.pool
-_080A5EC0:
-	ldr r1, =gUnknown_083021D8
-	b _080A5F8E
-	.pool
-_080A5EC8:
-	cmp r5, 0xC9
-	bne _080A5F58
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r0, [r0]
-	lsls r1, r4, 2
-	adds r0, r1, r0
-	ldrh r0, [r0, 0x2]
-	cmp r0, 0
-	bne _080A5F04
-	ldr r1, =gBattlerPartyIndexes
-	lsls r0, r4, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gEnemyParty
-	adds r0, r1
-	movs r1, 0
-	bl GetMonData
-	adds r2, r0, 0
-	b _080A5F0A
-	.pool
-_080A5F04:
-	ldr r0, =gTransformedPersonalities
-	adds r0, r1, r0
-	ldr r2, [r0]
-_080A5F0A:
-	movs r0, 0xC0
-	lsls r0, 18
-	ands r0, r2
-	lsrs r0, 18
-	movs r1, 0xC0
-	lsls r1, 10
-	ands r1, r2
-	lsrs r1, 12
-	orrs r0, r1
-	movs r1, 0xC0
-	lsls r1, 2
-	ands r1, r2
-	lsrs r1, 6
-	orrs r0, r1
-	movs r1, 0x3
-	ands r1, r2
-	orrs r0, r1
-	movs r1, 0x1C
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0
-	bne _080A5F44
-	adds r0, r5, 0
-	b _080A5F4E
-	.pool
-_080A5F44:
-	movs r1, 0xCE
-	lsls r1, 1
-	adds r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-_080A5F4E:
-	ldr r1, =gMonFrontPicCoords
-	lsls r0, 2
-	b _080A5F90
-	.pool
-_080A5F58:
-	ldr r0, =0x00000181
-	cmp r5, r0
-	bne _080A5F7C
-	ldr r0, =gCastformFrontSpriteCoords
-	ldr r1, =gBattleMonForms
-	adds r1, r4, r1
-	ldrb r1, [r1]
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0x1]
-	b _080A5F94
-	.pool
-_080A5F7C:
-	movs r0, 0xCE
-	lsls r0, 1
-	cmp r5, r0
-	bls _080A5F8C
-	ldr r0, =gMonFrontPicCoords
-	b _080A5F92
-	.pool
-_080A5F8C:
-	ldr r1, =gMonFrontPicCoords
-_080A5F8E:
-	lsls r0, r5, 2
-_080A5F90:
-	adds r0, r1
-_080A5F92:
-	ldrb r0, [r0, 0x1]
-_080A5F94:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80A5DB8
-
-	thumb_func_start sub_80A5FA0
-sub_80A5FA0: @ 80A5FA0
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r1, 16
-	lsrs r4, r1, 16
-	adds r7, r4, 0
-	movs r5, 0
-	adds r0, r6, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080A5FFE
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A5FFE
-	ldr r0, =0x00000181
-	cmp r4, r0
-	bne _080A5FE8
-	ldr r0, =gUnknown_08525F88
-	ldr r1, =gBattleMonForms
-	adds r1, r6, r1
-	ldrb r1, [r1]
-	adds r1, r0
-	ldrb r5, [r1]
-	b _080A5FFE
-	.pool
-_080A5FE8:
-	movs r0, 0xCE
-	lsls r0, 1
-	cmp r4, r0
-	bls _080A5FF8
-	ldr r0, =gEnemyMonElevation
-	b _080A5FFC
-	.pool
-_080A5FF8:
-	ldr r0, =gEnemyMonElevation
-	adds r0, r7, r0
-_080A5FFC:
-	ldrb r5, [r0]
-_080A5FFE:
-	adds r0, r5, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80A5FA0
-
-	thumb_func_start sub_80A600C
-sub_80A600C: @ 80A600C
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r1, 16
-	lsrs r5, r1, 16
-	lsls r2, 24
-	lsrs r7, r2, 24
-	adds r0, r6, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A6030
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A603E
-_080A6030:
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_80A5DB8
-	lsls r0, 24
-	lsrs r4, r0, 24
-	b _080A605C
-_080A603E:
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_80A5DB8
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl sub_80A5FA0
-	lsls r0, 24
-	lsrs r0, 24
-	subs r0, r4, r0
-	lsls r0, 16
-	lsrs r4, r0, 16
-_080A605C:
-	adds r0, r6, 0
-	bl GetBattlerPosition
-	ldr r3, =gUnknown_08525F58
-	lsls r0, 24
-	lsrs r0, 22
-	ldr r1, =gBattleTypeFlags
-	ldr r1, [r1]
-	movs r2, 0x1
-	ands r1, r2
-	lsls r1, 4
-	adds r0, r1
-	adds r0, r3
-	ldrb r0, [r0, 0x1]
-	adds r0, r4
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r7, 0
-	beq _080A609C
-	adds r0, r6, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A6096
-	adds r0, r4, 0
-	adds r0, 0x8
-	lsls r0, 24
-	lsrs r4, r0, 24
-_080A6096:
-	cmp r4, 0x68
-	bls _080A609C
-	movs r4, 0x68
-_080A609C:
-	adds r0, r4, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80A600C
-
-	thumb_func_start sub_80A60AC
-sub_80A60AC: @ 80A60AC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 24
-	lsrs r5, r1, 24
-	movs r0, 0xFD
-	lsls r0, 24
-	adds r1, r0
-	lsrs r1, 24
-	cmp r1, 0x1
-	bhi _080A6126
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A60E8
-	ldr r0, =gContestResources
-	ldr r0, [r0]
-	ldr r2, [r0, 0x18]
-	ldrb r1, [r2, 0x4]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080A60E4
-	ldrh r1, [r2, 0x2]
-	b _080A610E
-	.pool
-_080A60E4:
-	ldrh r1, [r2]
-	b _080A610E
-_080A60E8:
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r1, [r0]
-	lsls r0, r4, 2
-	adds r1, r0, r1
-	ldrh r0, [r1, 0x2]
-	cmp r0, 0
-	bne _080A610C
-	ldr r1, =gAnimBattlerSpecies
-	lsls r0, r4, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	b _080A610E
-	.pool
-_080A610C:
-	ldrh r1, [r1, 0x2]
-_080A610E:
-	cmp r5, 0x3
-	bne _080A611C
-	adds r0, r4, 0
-	movs r2, 0x1
-	bl sub_80A600C
-	b _080A612E
-_080A611C:
-	adds r0, r4, 0
-	movs r2, 0
-	bl sub_80A600C
-	b _080A612E
-_080A6126:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl GetBattlerSpriteCoord
-_080A612E:
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80A60AC
-
-	thumb_func_start GetBattlerSpriteDefault_Y
-GetBattlerSpriteDefault_Y: @ 80A6138
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x4
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end GetBattlerSpriteDefault_Y
-
-	thumb_func_start GetSubstituteSpriteDefault_Y
-GetSubstituteSpriteDefault_Y: @ 80A614C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A6170
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 8
-	movs r1, 0x80
-	lsls r1, 13
-	b _080A6180
-_080A6170:
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 8
-	movs r1, 0x88
-	lsls r1, 13
-_080A6180:
-	adds r0, r1
-	lsrs r0, 16
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end GetSubstituteSpriteDefault_Y
-
-	thumb_func_start sub_80A6190
-sub_80A6190: @ 80A6190
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r6, r0, 24
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A6238
-	adds r0, r5, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A61E4
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r1, [r0]
-	lsls r0, r5, 2
-	adds r1, r0, r1
-	ldrh r0, [r1, 0x2]
-	cmp r0, 0
-	bne _080A621C
-	ldr r1, =gBattlerPartyIndexes
-	lsls r0, r5, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gEnemyParty
-	b _080A6202
-	.pool
-_080A61E4:
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r1, [r0]
-	lsls r0, r5, 2
-	adds r1, r0, r1
-	ldrh r0, [r1, 0x2]
-	cmp r0, 0
-	bne _080A621C
-	ldr r1, =gBattlerPartyIndexes
-	lsls r0, r5, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-_080A6202:
-	adds r0, r1
-	movs r1, 0xB
-	bl GetMonData
-	lsls r0, 16
-	lsrs r4, r0, 16
-	b _080A621E
-	.pool
-_080A621C:
-	ldrh r4, [r1, 0x2]
-_080A621E:
-	adds r0, r5, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A6238
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_80A5FA0
-	subs r0, r6, r0
-	lsls r0, 24
-	lsrs r6, r0, 24
-_080A6238:
-	adds r0, r6, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80A6190
-
-	thumb_func_start GetAnimBattlerSpriteId
-GetAnimBattlerSpriteId: @ 80A6240
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r1, r0, 0
-	cmp r0, 0
-	bne _080A6268
-	ldr r4, =gBattleAnimAttacker
-	ldrb r0, [r4]
-	bl IsBattlerSpritePresent
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A62B6
-	ldr r1, =gBattlerSpriteIds
-	ldrb r0, [r4]
-	b _080A62C6
-	.pool
-_080A6268:
-	cmp r0, 0x1
-	bne _080A6288
-	ldr r4, =gBattleAnimTarget
-	ldrb r0, [r4]
-	bl IsBattlerSpritePresent
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A62B6
-	ldr r1, =gBattlerSpriteIds
-	ldrb r0, [r4]
-	b _080A62C6
-	.pool
-_080A6288:
-	cmp r1, 0x2
-	bne _080A62A4
-	ldr r5, =gBattleAnimAttacker
-	ldrb r0, [r5]
-	movs r4, 0x2
-	eors r0, r4
-	bl IsBattlerSpriteVisible
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A62B6
-	b _080A62C0
-	.pool
-_080A62A4:
-	ldr r5, =gBattleAnimTarget
-	ldrb r0, [r5]
-	movs r4, 0x2
-	eors r0, r4
-	bl IsBattlerSpriteVisible
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A62C0
-_080A62B6:
-	movs r0, 0xFF
-	b _080A62CA
-	.pool
-_080A62C0:
-	ldr r1, =gBattlerSpriteIds
-	ldrb r0, [r5]
-	eors r0, r4
-_080A62C6:
-	adds r0, r1
-	ldrb r0, [r0]
-_080A62CA:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end GetAnimBattlerSpriteId
-
-	thumb_func_start StoreSpriteCallbackInData6
-StoreSpriteCallbackInData6: @ 80A62D4
-	strh r1, [r0, 0x3A]
-	lsrs r1, 16
-	strh r1, [r0, 0x3C]
-	bx lr
-	thumb_func_end StoreSpriteCallbackInData6
-
-	thumb_func_start sub_80A62DC
-sub_80A62DC: @ 80A62DC
-	ldrh r2, [r0, 0x3A]
-	movs r3, 0x3C
-	ldrsh r1, [r0, r3]
-	lsls r1, 16
-	orrs r2, r1
-	str r2, [r0, 0x1C]
-	bx lr
-	thumb_func_end sub_80A62DC
-
-	thumb_func_start sub_80A62EC
-sub_80A62EC: @ 80A62EC
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x34
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _080A6340
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	movs r2, 0x30
-	ldrsh r1, [r4, r2]
-	bl Sin
-	strh r0, [r4, 0x24]
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	movs r2, 0x30
-	ldrsh r1, [r4, r2]
-	bl Cos
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x32]
-	ldrh r2, [r4, 0x2E]
-	adds r1, r0, r2
-	strh r1, [r4, 0x2E]
-	lsls r0, r1, 16
-	asrs r0, 16
-	cmp r0, 0xFF
-	ble _080A632C
-	ldr r2, =0xffffff00
-	b _080A6334
-	.pool
-_080A632C:
-	cmp r0, 0
-	bge _080A6338
-	movs r2, 0x80
-	lsls r2, 1
-_080A6334:
-	adds r0, r1, r2
-	strh r0, [r4, 0x2E]
-_080A6338:
-	ldrh r0, [r4, 0x34]
-	subs r0, 0x1
-	strh r0, [r4, 0x34]
-	b _080A6346
-_080A6340:
-	adds r0, r4, 0
-	bl sub_80A62DC
-_080A6346:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A62EC
-
-	thumb_func_start sub_80A634C
-sub_80A634C: @ 80A634C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x34
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _080A63BC
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	ldrh r1, [r4, 0x38]
-	lsls r1, 16
-	asrs r1, 24
-	ldrh r2, [r4, 0x30]
-	adds r1, r2
-	lsls r1, 16
-	asrs r1, 16
-	bl Sin
-	strh r0, [r4, 0x24]
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	ldrh r1, [r4, 0x38]
-	lsls r1, 16
-	asrs r1, 24
-	ldrh r2, [r4, 0x30]
-	adds r1, r2
-	lsls r1, 16
-	asrs r1, 16
-	bl Cos
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x32]
-	ldrh r2, [r4, 0x2E]
-	adds r1, r0, r2
-	strh r1, [r4, 0x2E]
-	ldrh r0, [r4, 0x36]
-	ldrh r2, [r4, 0x38]
-	adds r0, r2
-	strh r0, [r4, 0x38]
-	lsls r0, r1, 16
-	asrs r0, 16
-	cmp r0, 0xFF
-	ble _080A63A8
-	ldr r2, =0xffffff00
-	b _080A63B0
-	.pool
-_080A63A8:
-	cmp r0, 0
-	bge _080A63B4
-	movs r2, 0x80
-	lsls r2, 1
-_080A63B0:
-	adds r0, r1, r2
-	strh r0, [r4, 0x2E]
-_080A63B4:
-	ldrh r0, [r4, 0x34]
-	subs r0, 0x1
-	strh r0, [r4, 0x34]
-	b _080A63C2
-_080A63BC:
-	adds r0, r4, 0
-	bl sub_80A62DC
-_080A63C2:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A634C
-
-	thumb_func_start sub_80A63C8
-sub_80A63C8: @ 80A63C8
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x34
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _080A6444
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	movs r2, 0x30
-	ldrsh r1, [r4, r2]
-	bl Sin
-	strh r0, [r4, 0x24]
-	movs r1, 0x36
-	ldrsh r0, [r4, r1]
-	movs r2, 0x30
-	ldrsh r1, [r4, r2]
-	bl Cos
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x32]
-	ldrh r2, [r4, 0x2E]
-	adds r1, r0, r2
-	strh r1, [r4, 0x2E]
-	ldrh r0, [r4, 0x38]
-	ldrh r2, [r4, 0x36]
-	adds r0, r2
-	strh r0, [r4, 0x36]
-	lsls r0, r1, 16
-	asrs r0, 16
-	cmp r0, 0xFF
-	ble _080A6410
-	ldr r2, =0xffffff00
-	b _080A6418
-	.pool
-_080A6410:
-	cmp r0, 0
-	bge _080A641C
-	movs r2, 0x80
-	lsls r2, 1
-_080A6418:
-	adds r0, r1, r2
-	strh r0, [r4, 0x2E]
-_080A641C:
-	ldrh r1, [r4, 0x36]
-	movs r2, 0x36
-	ldrsh r0, [r4, r2]
-	cmp r0, 0xFF
-	ble _080A6430
-	ldr r2, =0xffffff00
-	b _080A6438
-	.pool
-_080A6430:
-	cmp r0, 0
-	bge _080A643C
-	movs r2, 0x80
-	lsls r2, 1
-_080A6438:
-	adds r0, r1, r2
-	strh r0, [r4, 0x36]
-_080A643C:
-	ldrh r0, [r4, 0x34]
-	subs r0, 0x1
-	strh r0, [r4, 0x34]
-	b _080A644A
-_080A6444:
-	adds r0, r4, 0
-	bl sub_80A62DC
-_080A644A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A63C8
-
-	thumb_func_start sub_80A6450
-sub_80A6450: @ 80A6450
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x34
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _080A64A4
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	movs r2, 0x30
-	ldrsh r1, [r4, r2]
-	bl Sin
-	strh r0, [r4, 0x24]
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	movs r2, 0x36
-	ldrsh r1, [r4, r2]
-	bl Cos
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x32]
-	ldrh r2, [r4, 0x2E]
-	adds r1, r0, r2
-	strh r1, [r4, 0x2E]
-	lsls r0, r1, 16
-	asrs r0, 16
-	cmp r0, 0xFF
-	ble _080A6490
-	ldr r2, =0xffffff00
-	b _080A6498
-	.pool
-_080A6490:
-	cmp r0, 0
-	bge _080A649C
-	movs r2, 0x80
-	lsls r2, 1
-_080A6498:
-	adds r0, r1, r2
-	strh r0, [r4, 0x2E]
-_080A649C:
-	ldrh r0, [r4, 0x34]
-	subs r0, 0x1
-	strh r0, [r4, 0x34]
-	b _080A64AA
-_080A64A4:
-	adds r0, r4, 0
-	bl sub_80A62DC
-_080A64AA:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A6450
-
-	thumb_func_start sub_80A64B0
-sub_80A64B0: @ 80A64B0
-	push {lr}
-	adds r1, r0, 0
-	ldrh r2, [r1, 0x2E]
-	movs r3, 0x2E
-	ldrsh r0, [r1, r3]
-	cmp r0, 0
-	ble _080A64C4
-	subs r0, r2, 0x1
-	strh r0, [r1, 0x2E]
-	b _080A64CA
-_080A64C4:
-	adds r0, r1, 0
-	bl sub_80A62DC
-_080A64CA:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A64B0
-
-	thumb_func_start sub_80A64D0
-sub_80A64D0: @ 80A64D0
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_80A64EC
-	ldr r1, =sub_80A653C
-	str r1, [r4, 0x1C]
-	adds r0, r4, 0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A64D0
-
-	thumb_func_start sub_80A64EC
-sub_80A64EC: @ 80A64EC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r0, 0x30
-	ldrsh r1, [r4, r0]
-	movs r2, 0x32
-	ldrsh r0, [r4, r2]
-	cmp r1, r0
-	ble _080A6502
-	ldrh r0, [r4, 0x2E]
-	negs r0, r0
-	strh r0, [r4, 0x2E]
-_080A6502:
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	movs r2, 0x30
-	ldrsh r1, [r4, r2]
-	subs r0, r1
-	ldrh r5, [r4, 0x2E]
-	movs r2, 0x2E
-	ldrsh r1, [r4, r2]
-	bl __divsi3
-	cmp r0, 0
-	bge _080A651C
-	negs r0, r0
-_080A651C:
-	strh r0, [r4, 0x2E]
-	movs r1, 0x36
-	ldrsh r0, [r4, r1]
-	movs r2, 0x34
-	ldrsh r1, [r4, r2]
-	subs r0, r1
-	movs r2, 0x2E
-	ldrsh r1, [r4, r2]
-	bl __divsi3
-	strh r0, [r4, 0x32]
-	strh r5, [r4, 0x30]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A64EC
-
-	thumb_func_start sub_80A653C
-sub_80A653C: @ 80A653C
-	push {lr}
-	adds r1, r0, 0
-	ldrh r2, [r1, 0x2E]
-	movs r3, 0x2E
-	ldrsh r0, [r1, r3]
-	cmp r0, 0
-	ble _080A6560
-	subs r0, r2, 0x1
-	strh r0, [r1, 0x2E]
-	ldrh r0, [r1, 0x30]
-	ldrh r2, [r1, 0x24]
-	adds r0, r2
-	strh r0, [r1, 0x24]
-	ldrh r0, [r1, 0x32]
-	ldrh r3, [r1, 0x26]
-	adds r0, r3
-	strh r0, [r1, 0x26]
-	b _080A6566
-_080A6560:
-	adds r0, r1, 0
-	bl sub_80A62DC
-_080A6566:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A653C
-
-	thumb_func_start sub_80A656C
-sub_80A656C: @ 80A656C
-	push {lr}
-	adds r2, r0, 0
-	ldrh r1, [r2, 0x2E]
-	movs r3, 0x2E
-	ldrsh r0, [r2, r3]
-	cmp r0, 0
-	ble _080A659C
-	subs r0, r1, 0x1
-	strh r0, [r2, 0x2E]
-	ldrh r0, [r2, 0x30]
-	ldrh r1, [r2, 0x34]
-	adds r0, r1
-	strh r0, [r2, 0x34]
-	ldrh r1, [r2, 0x32]
-	ldrh r3, [r2, 0x36]
-	adds r1, r3
-	strh r1, [r2, 0x36]
-	lsls r0, 16
-	asrs r0, 24
-	strh r0, [r2, 0x24]
-	lsls r1, 16
-	asrs r1, 24
-	strh r1, [r2, 0x26]
-	b _080A65A2
-_080A659C:
-	adds r0, r2, 0
-	bl sub_80A62DC
-_080A65A2:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A656C
-
-	thumb_func_start sub_80A65A8
-sub_80A65A8: @ 80A65A8
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r1, [r4, 0x2E]
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	ble _080A65D8
-	subs r0, r1, 0x1
-	strh r0, [r4, 0x2E]
-	ldrh r0, [r4, 0x30]
-	ldrh r1, [r4, 0x34]
-	adds r0, r1
-	strh r0, [r4, 0x34]
-	ldrh r1, [r4, 0x32]
-	ldrh r2, [r4, 0x36]
-	adds r1, r2
-	strh r1, [r4, 0x36]
-	lsls r0, 16
-	asrs r0, 24
-	strh r0, [r4, 0x24]
-	lsls r1, 16
-	asrs r1, 24
-	strh r1, [r4, 0x26]
-	b _080A65DE
-_080A65D8:
-	adds r0, r4, 0
-	bl sub_80A62DC
-_080A65DE:
-	adds r0, r4, 0
-	bl UpdateMonIconFrame
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A65A8
-
-	thumb_func_start sub_80A65EC
-sub_80A65EC: @ 80A65EC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x24]
-	ldrh r1, [r4, 0x20]
-	adds r0, r1
-	strh r0, [r4, 0x30]
-	ldrh r0, [r4, 0x26]
-	ldrh r1, [r4, 0x22]
-	adds r0, r1
-	strh r0, [r4, 0x34]
-	ldr r5, =gBattleAnimTarget
-	ldrb r0, [r5]
-	movs r1, 0x2
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x32]
-	ldrb r0, [r5]
-	movs r1, 0x3
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x36]
-	ldr r0, =sub_80A64D0
-	str r0, [r4, 0x1C]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A65EC
-
-	thumb_func_start sub_80A6630
-sub_80A6630: @ 80A6630
-	push {r4,lr}
-	adds r3, r0, 0
-	ldrh r1, [r3, 0x2E]
-	movs r2, 0x2E
-	ldrsh r0, [r3, r2]
-	cmp r0, 0
-	ble _080A6674
-	subs r0, r1, 0x1
-	strh r0, [r3, 0x2E]
-	ldr r2, =gSprites
-	movs r4, 0x34
-	ldrsh r1, [r3, r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r3, 0x30]
-	ldrh r4, [r0, 0x24]
-	adds r1, r4
-	strh r1, [r0, 0x24]
-	movs r0, 0x34
-	ldrsh r1, [r3, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r3, 0x32]
-	ldrh r2, [r0, 0x26]
-	adds r1, r2
-	strh r1, [r0, 0x26]
-	b _080A667A
-	.pool
-_080A6674:
-	adds r0, r3, 0
-	bl sub_80A62DC
-_080A667A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A6630
-
-	thumb_func_start sub_80A6680
-sub_80A6680: @ 80A6680
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r1, [r4, 0x2E]
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	ble _080A66D0
-	subs r0, r1, 0x1
-	strh r0, [r4, 0x2E]
-	ldrh r1, [r4, 0x30]
-	ldrh r0, [r4, 0x34]
-	adds r1, r0
-	strh r1, [r4, 0x34]
-	ldrh r0, [r4, 0x32]
-	ldrh r2, [r4, 0x36]
-	adds r0, r2
-	strh r0, [r4, 0x36]
-	ldr r3, =gSprites
-	movs r0, 0x38
-	ldrsh r2, [r4, r0]
-	lsls r0, r2, 4
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r3
-	lsls r1, 16
-	asrs r1, 24
-	strh r1, [r0, 0x24]
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r3
-	ldrh r0, [r4, 0x36]
-	lsls r0, 16
-	asrs r0, 24
-	strh r0, [r1, 0x26]
-	b _080A66D6
-	.pool
-_080A66D0:
-	adds r0, r4, 0
-	bl sub_80A62DC
-_080A66D6:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A6680
-
-	thumb_func_start sub_80A66DC
-sub_80A66DC: @ 80A66DC
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r1, [r4, 0x2E]
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	ble _080A673E
-	subs r0, r1, 0x1
-	strh r0, [r4, 0x2E]
-	ldrh r1, [r4, 0x32]
-	lsls r0, r1, 16
-	asrs r0, 24
-	strh r0, [r4, 0x24]
-	ldrh r0, [r4, 0x30]
-	adds r1, r0
-	strh r1, [r4, 0x32]
-	ldrh r1, [r4, 0x36]
-	lsls r0, r1, 16
-	asrs r0, 24
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x34]
-	adds r1, r0
-	strh r1, [r4, 0x36]
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	movs r2, 0x38
-	ldrsh r1, [r4, r2]
-	bl __modsi3
-	cmp r0, 0
-	bne _080A6744
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _080A6744
-	adds r3, r4, 0
-	adds r3, 0x3E
-	ldrb r2, [r3]
-	lsls r0, r2, 29
-	lsrs r0, 31
-	movs r1, 0x1
-	eors r1, r0
-	lsls r1, 2
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r3]
-	b _080A6744
-_080A673E:
-	adds r0, r4, 0
-	bl sub_80A62DC
-_080A6744:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A66DC
-
-	thumb_func_start move_anim_8074EE0
-move_anim_8074EE0: @ 80A674C
-	push {r4,lr}
-	adds r4, r0, 0
-	bl FreeSpriteOamMatrix
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end move_anim_8074EE0
-
-	thumb_func_start sub_80A6760
-sub_80A6760: @ 80A6760
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x24]
-	ldrh r1, [r4, 0x20]
-	adds r0, r1
-	strh r0, [r4, 0x30]
-	ldrh r0, [r4, 0x26]
-	ldrh r1, [r4, 0x22]
-	adds r0, r1
-	strh r0, [r4, 0x34]
-	ldr r5, =gBattleAnimAttacker
-	ldrb r0, [r5]
-	movs r1, 0x2
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x32]
-	ldrb r0, [r5]
-	movs r1, 0x3
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x36]
-	ldr r0, =sub_80A64D0
-	str r0, [r4, 0x1C]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A6760
-
-	thumb_func_start sub_80A67A4
-sub_80A67A4: @ 80A67A4
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x38]
-	bl ResetPaletteStructByUid
-	adds r0, r4, 0
-	bl move_anim_8074EE0
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A67A4
-
-	thumb_func_start sub_80A67BC
-sub_80A67BC: @ 80A67BC
-	push {lr}
-	adds r2, r0, 0
-	adds r0, 0x3F
-	ldrb r1, [r0]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _080A67D2
-	adds r0, r2, 0
-	bl sub_80A62DC
-_080A67D2:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A67BC
-
-	thumb_func_start sub_80A67D8
-sub_80A67D8: @ 80A67D8
-	push {lr}
-	adds r2, r0, 0
-	adds r0, 0x3F
-	ldrb r1, [r0]
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _080A67EE
-	adds r0, r2, 0
-	bl sub_80A62DC
-_080A67EE:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A67D8
-
-	thumb_func_start sub_80A67F4
-sub_80A67F4: @ 80A67F4
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x50
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x52
-	movs r1, 0
-	bl SetGpuReg
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A67F4
-
-	thumb_func_start sub_80A6814
-sub_80A6814: @ 80A6814
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x50
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x52
-	movs r1, 0
-	bl SetGpuReg
-	adds r0, r4, 0
-	bl DestroyAnimVisualTask
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A6814
-
-	thumb_func_start sub_80A6838
-sub_80A6838: @ 80A6838
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r4, =gBattleAnimAttacker
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x20]
-	ldrb r0, [r4]
-	movs r1, 0x3
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x22]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A6838
-
-	thumb_func_start sub_80A6864
-sub_80A6864: @ 80A6864
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r4, r0, 0
-	lsls r1, 16
-	lsrs r5, r1, 16
-	mov r8, r5
-	ldr r7, =gBattleAnimAttacker
-	ldrb r0, [r7]
-	movs r1, 0
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r0, =gBattleAnimTarget
-	ldrb r0, [r0]
-	movs r1, 0
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r6, r0
-	bhi _080A68B0
-	cmp r6, r0
-	bcs _080A68A4
-	lsls r0, r5, 16
-	b _080A68C0
-	.pool
-_080A68A4:
-	ldrb r0, [r7]
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A68BC
-_080A68B0:
-	ldrh r1, [r4, 0x20]
-	lsls r0, r5, 16
-	asrs r0, 16
-	subs r1, r0
-	strh r1, [r4, 0x20]
-	b _080A68C8
-_080A68BC:
-	mov r1, r8
-	lsls r0, r1, 16
-_080A68C0:
-	asrs r0, 16
-	ldrh r1, [r4, 0x20]
-	adds r0, r1
-	strh r0, [r4, 0x20]
-_080A68C8:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A6864
-
-	thumb_func_start sub_80A68D4
-sub_80A68D4: @ 80A68D4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x20]
-	movs r5, 0
-	strh r0, [r4, 0x30]
-	ldrh r0, [r4, 0x22]
-	strh r0, [r4, 0x34]
-	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
-	movs r0, 0x2E
-	ldrsh r1, [r4, r0]
-	movs r0, 0x80
-	lsls r0, 8
-	bl __divsi3
-	strh r0, [r4, 0x3A]
-	strh r5, [r4, 0x3C]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A68D4
-
-	thumb_func_start AnimateBallThrow
-AnimateBallThrow: @ 80A6900
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_80A6F3C
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A692C
-	ldrh r0, [r4, 0x3A]
-	ldrh r1, [r4, 0x3C]
-	adds r0, r1
-	strh r0, [r4, 0x3C]
-	lsls r0, 16
-	lsrs r0, 24
-	movs r2, 0x38
-	ldrsh r1, [r4, r2]
-	bl Sin
-	ldrh r1, [r4, 0x26]
-	adds r0, r1
-	strh r0, [r4, 0x26]
-	movs r0, 0
-	b _080A692E
-_080A692C:
-	movs r0, 0x1
-_080A692E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end AnimateBallThrow
 
 	thumb_func_start sub_80A6934
 sub_80A6934: @ 80A6934
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A6960
@@ -1732,13 +62,13 @@ sub_80A6980: @ 80A6980
 	ldr r4, =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -1768,7 +98,7 @@ sub_80A69CC: @ 80A69CC
 	ldr r4, =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
@@ -1780,14 +110,14 @@ _080A69F0:
 	ldr r4, =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
 _080A6A04:
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -2344,8 +674,8 @@ sub_80A6E14: @ 80A6E14
 	bx r0
 	thumb_func_end sub_80A6E14
 
-	thumb_func_start obj_translate_based_on_private_1_2_3_4
-obj_translate_based_on_private_1_2_3_4: @ 80A6E54
+	thumb_func_start InitAnimLinearTranslation
+InitAnimLinearTranslation: @ 80A6E54
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2423,7 +753,7 @@ _080A6ED0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end obj_translate_based_on_private_1_2_3_4
+	thumb_func_end InitAnimLinearTranslation
 
 	thumb_func_start sub_80A6EEC
 sub_80A6EEC: @ 80A6EEC
@@ -2434,7 +764,7 @@ sub_80A6EEC: @ 80A6EEC
 	ldrh r0, [r4, 0x22]
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r1, =sub_80A6F98
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -2454,7 +784,7 @@ sub_80A6F14: @ 80A6F14
 	ldrh r0, [r4, 0x22]
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r1, =sub_80A6FB4
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -2465,8 +795,8 @@ sub_80A6F14: @ 80A6F14
 	.pool
 	thumb_func_end sub_80A6F14
 
-	thumb_func_start sub_80A6F3C
-sub_80A6F3C: @ 80A6F3C
+	thumb_func_start TranslateAnimLinear
+TranslateAnimLinear: @ 80A6F3C
 	push {r4-r6,lr}
 	adds r2, r0, 0
 	movs r1, 0x2E
@@ -2518,18 +848,18 @@ _080A6F90:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A6F3C
+	thumb_func_end TranslateAnimLinear
 
 	thumb_func_start sub_80A6F98
 sub_80A6F98: @ 80A6F98
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6FAC
 	adds r0, r4, 0
-	bl sub_80A62DC
+	bl SetCallbackToStoredInData6
 _080A6FAC:
 	pop {r4}
 	pop {r0}
@@ -2542,12 +872,12 @@ sub_80A6FB4: @ 80A6FB4
 	adds r4, r0, 0
 	bl sub_8039E9C
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6FCE
 	adds r0, r4, 0
-	bl sub_80A62DC
+	bl SetCallbackToStoredInData6
 _080A6FCE:
 	pop {r4}
 	pop {r0}
@@ -2573,7 +903,7 @@ _080A6FE8:
 	bl __divsi3
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2764,7 +1094,7 @@ sub_80A7144: @ 80A7144
 	cmp r0, 0
 	beq _080A7158
 	adds r0, r4, 0
-	bl sub_80A62DC
+	bl SetCallbackToStoredInData6
 _080A7158:
 	pop {r4}
 	pop {r0}
@@ -3763,7 +2093,7 @@ _080A78CC:
 sub_80A791C: @ 80A791C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A7930
@@ -4558,7 +2888,7 @@ _080A7F42:
 	ldr r0, [r0]
 	ldr r0, [r0, 0x18]
 	ldrh r2, [r0]
-	ldr r1, =gUnknown_083021D8
+	ldr r1, =gMonBackPicCoords
 	lsls r0, r2, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x1]
@@ -4598,11 +2928,11 @@ _080A7FC0:
 _080A7FC2:
 	cmp r2, r7
 	bne _080A7FD0
-	ldr r0, =gUnknown_08525F8C
+	ldr r0, =gCastformBackSpriteYCoords
 	b _080A8018
 	.pool
 _080A7FD0:
-	ldr r0, =gUnknown_083021D8
+	ldr r0, =gMonBackPicCoords
 	b _080A8026
 	.pool
 _080A7FD8:
@@ -4633,7 +2963,7 @@ _080A8010:
 _080A8012:
 	cmp r2, r7
 	bne _080A8024
-	ldr r0, =gUnknown_08525F88
+	ldr r0, =gCastformElevations
 _080A8018:
 	ldrb r1, [r6]
 	adds r1, r0
@@ -5350,7 +3680,7 @@ _080A85A0:
 	mov r2, r10
 	lsls r1, r2, 16
 	asrs r1, 16
-	ldr r3, =gUnknown_083021D8
+	ldr r3, =gMonBackPicCoords
 _080A85B2:
 	lsls r2, r6, 2
 	adds r2, r3
@@ -5467,7 +3797,7 @@ _080A8690:
 	lsrs r0, 16
 _080A869A:
 	lsls r1, r0, 2
-	ldr r0, =gUnknown_083021D8
+	ldr r0, =gMonBackPicCoords
 	b _080A8864
 	.pool
 _080A86A4:
@@ -5481,7 +3811,7 @@ _080A86AC:
 	cmp r7, r0
 	bhi _080A877C
 	lsls r1, r7, 2
-	ldr r0, =gUnknown_083021D8
+	ldr r0, =gMonBackPicCoords
 	b _080A8864
 	.pool
 _080A86C4:
@@ -5562,7 +3892,7 @@ _080A8760:
 	lsrs r0, 16
 _080A876A:
 	lsls r1, r0, 2
-	ldr r0, =gUnknown_083021D8
+	ldr r0, =gMonBackPicCoords
 	b _080A8864
 	.pool
 _080A8774:
@@ -5571,12 +3901,12 @@ _080A8774:
 	cmp r7, r0
 	bls _080A8784
 _080A877C:
-	ldr r4, =gUnknown_083021D8
+	ldr r4, =gMonBackPicCoords
 	b _080A8866
 	.pool
 _080A8784:
 	lsls r1, r7, 2
-	ldr r0, =gUnknown_083021D8
+	ldr r0, =gMonBackPicCoords
 	b _080A8864
 	.pool
 _080A8790:
