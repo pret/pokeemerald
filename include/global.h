@@ -87,9 +87,10 @@ extern u8 gStringVar4[];
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
+// In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
 // In Gen 4 only, migrated Pokemon with Diamond, Pearl, or Platinum's ID show as "----------".
 // Gen 5 and up read Diamond, Pearl, or Platinum's ID as "Sinnoh".
-// In Gen 4, migrated Pokemon with HeartGold or SoulSilver's ID show the unused "Johto" string.
+// In Gen 4 and up, migrated Pokemon with HeartGold or SoulSilver's ID show the unused "Johto" string.
 enum
 {
     VERSION_INVALID_0 = 0,
