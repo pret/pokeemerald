@@ -867,7 +867,7 @@ LaunchStatusAnimation: @ 80AA364
 	strb r4, [r0]
 	ldr r0, =gBattleAnimTarget
 	strb r4, [r0]
-	ldr r0, =gBattleAnims_Statuses
+	ldr r0, =gBattleAnims_StatusConditions
 	movs r2, 0
 	bl LaunchBattleAnimation
 	ldr r0, =task0A_80788BC

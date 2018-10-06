@@ -29,7 +29,7 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const u8 gUnknown_0831C604[];
-extern const u8 * const gBattleAnims_VariousTable[];
+extern const u8 * const gBattleAnims_General[];
 extern const u8 * const gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
@@ -437,7 +437,7 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
     gBattleAnimAttacker = atkBattler;
     gBattleAnimTarget = defBattler;
     gBattleSpritesDataPtr->animationData->animArg = argument;
-    LaunchBattleAnimation(gBattleAnims_VariousTable, tableId, FALSE);
+    LaunchBattleAnimation(gBattleAnims_General, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenBattleTableAnimDone, 10);
     gTasks[taskId].tBattlerId = activeBattler;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBattlerId].animFromTableActive = 1;

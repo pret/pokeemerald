@@ -66,9 +66,9 @@
 	.byte \battler
 	.endm
 
-	.macro setalpha param0
-	.byte 0xc
-	.2byte \param0
+	.macro setalpha eva, evb
+	.byte 0x0C
+	.2byte ((\evb) << 8) | (\eva)
 	.endm
 
 	.macro blendoff
@@ -265,4 +265,17 @@
 
 	.macro stopsound
 	.byte 0x2f
+	.endm
+	
+@ useful macros
+	.macro jumpreteq value, ptr
+	jumpargeq ARG_RET_ID, \value, \ptr
+	.endm
+	
+	.macro jumprettrue ptr
+	jumpreteq TRUE, \ptr
+	.endm
+	
+	.macro jumpretfalse ptr
+	jumpreteq FALSE, \ptr
 	.endm
