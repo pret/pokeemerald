@@ -780,7 +780,7 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
     std::uint8_t lastVelocity = 0x80u;
     EventType lastType = events[index].type;
     std::int32_t lastDuration = 0x80000000;
-    std::uint8_t lastNote = 0x80u;
+    std::uint8_t lastNote = 0x40u;
 
     if (events[index].time > 0)
         score++;
@@ -844,7 +844,7 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
         lastType = events[i].type;
 
         if (events[i].time)
-            ++score;
+            score++;
     }
 
     return score;
@@ -852,6 +852,12 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
 
 bool IsCompressionMatch(std::vector<Event>& events, int index1, int index2)
 {
+    if (events[index1].type != events[index2].type ||
+        events[index1].note != events[index2].note ||
+        events[index1].param1 != events[index2].param1 ||
+        events[index1].time != events[index2].time)
+        return false;
+
     index1++;
     index2++;
 

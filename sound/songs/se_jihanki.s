@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_jihanki_grp, voicegroup_869D6F4
+	.equ	se_jihanki_grp, voicegroup128
 	.equ	se_jihanki_pri, 4
 	.equ	se_jihanki_rev, reverb_set+50
 	.equ	se_jihanki_mvl, 127

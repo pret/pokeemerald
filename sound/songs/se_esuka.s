@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_esuka_grp, voicegroup_869D6F4
+	.equ	se_esuka_grp, voicegroup128
 	.equ	se_esuka_pri, 4
 	.equ	se_esuka_rev, reverb_set+50
 	.equ	se_esuka_mvl, 127

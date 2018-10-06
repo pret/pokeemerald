@@ -642,7 +642,7 @@ u8 BattleSetup_GetTerrainId(void)
     case MAP_TYPE_ROUTE:
         break;
     case MAP_TYPE_UNDERGROUND:
-        if (MetatileBehavior_IsMB_0B(tileBehavior))
+        if (MetatileBehavior_IsIndoorEncounter(tileBehavior))
             return BATTLE_TERRAIN_BUILDING;
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
             return BATTLE_TERRAIN_POND;

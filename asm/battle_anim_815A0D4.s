@@ -1012,8 +1012,8 @@ _0815A8C2:
 	bx r0
 	thumb_func_end sub_815A8AC
 
-	thumb_func_start sub_815A8C8
-sub_815A8C8: @ 815A8C8
+	thumb_func_start AnimTask_IsTargetPlayerSide
+AnimTask_IsTargetPlayerSide: @ 815A8C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1039,10 +1039,10 @@ _0815A8F0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815A8C8
+	thumb_func_end AnimTask_IsTargetPlayerSide
 
-	thumb_func_start sub_815A904
-sub_815A904: @ 815A904
+	thumb_func_start AnimTask_IsHealingMove
+AnimTask_IsHealingMove: @ 815A904
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -1064,7 +1064,7 @@ _0815A924:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815A904
+	thumb_func_end AnimTask_IsHealingMove
 
 	thumb_func_start sub_815A934
 sub_815A934: @ 815A934
@@ -10048,8 +10048,8 @@ _0815F1DE:
 	.pool
 	thumb_func_end sub_815F18C
 
-	thumb_func_start sub_815F20C
-sub_815F20C: @ 815F20C
+	thumb_func_start AnimTask_MonToSubstitute
+AnimTask_MonToSubstitute: @ 815F20C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -10183,7 +10183,7 @@ _0815F310:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815F20C
+	thumb_func_end AnimTask_MonToSubstitute
 
 	thumb_func_start sub_815F330
 sub_815F330: @ 815F330
@@ -10861,8 +10861,8 @@ _0815F896:
 	.pool
 	thumb_func_end sub_815F7C4
 
-	thumb_func_start sub_815F8A0
-sub_815F8A0: @ 815F8A0
+	thumb_func_start AnimTask_GetReturnPowerLevel
+AnimTask_GetReturnPowerLevel: @ 815F8A0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -10904,7 +10904,7 @@ _0815F8E0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815F8A0
+	thumb_func_end AnimTask_GetReturnPowerLevel
 
 	thumb_func_start sub_815F8F4
 sub_815F8F4: @ 815F8F4
@@ -12336,8 +12336,8 @@ _081604E8:
 	bx r0
 	thumb_func_end sub_81603F4
 
-	thumb_func_start sub_81604F0
-sub_81604F0: @ 81604F0
+	thumb_func_start AnimTask_GetWeather
+AnimTask_GetWeather: @ 81604F0
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -12380,7 +12380,7 @@ _08160538:
 	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81604F0
+	thumb_func_end AnimTask_GetWeather
 
 	thumb_func_start sub_8160544
 sub_8160544: @ 8160544

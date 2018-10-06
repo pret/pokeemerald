@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_tk_kasya_grp, voicegroup_869D0F4
+	.equ	se_tk_kasya_grp, voicegroup127
 	.equ	se_tk_kasya_pri, 4
 	.equ	se_tk_kasya_rev, reverb_set+50
 	.equ	se_tk_kasya_mvl, 127

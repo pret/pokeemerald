@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_t_kami_grp, voicegroup_869D6F4
+	.equ	se_t_kami_grp, voicegroup128
 	.equ	se_t_kami_pri, 3
 	.equ	se_t_kami_rev, reverb_set+50
 	.equ	se_t_kami_mvl, 127

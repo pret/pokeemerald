@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_kaifuku_grp, voicegroup_869D0F4
+	.equ	se_kaifuku_grp, voicegroup127
 	.equ	se_kaifuku_pri, 5
 	.equ	se_kaifuku_rev, reverb_set+50
 	.equ	se_kaifuku_mvl, 127

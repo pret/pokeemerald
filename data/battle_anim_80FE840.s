@@ -14,15 +14,15 @@ gUnknown_08592114:: @ 8592114
 	.4byte gUnknown_085920F0
 
     .align 2
-gUnknown_08592118:: @ 8592118
+gSleepPowderParticleSpriteTemplate:: @ 8592118
 	spr_template 0x2753, 0x2753, gUnknown_08524944, gUnknown_08592114, NULL, gDummySpriteAffineAnimTable, sub_80FE840
 	
 	.align 2
-gUnknown_08592130:: @ 8592130
+gStunSporeParticleSpriteTemplate:: @ 8592130
 	spr_template 0x2754, 0x2754, gUnknown_08524944, gUnknown_08592114, NULL, gDummySpriteAffineAnimTable, sub_80FE840
 	
     .align 2
-gUnknown_08592148:: @ 8592148
+gPoisonPowderParticleSpriteTemplate:: @ 8592148
 	spr_template 0x2751, 0x2751, gUnknown_08524944, gUnknown_08592114, NULL, gDummySpriteAffineAnimTable, sub_80FE840
 
     .align 2
@@ -142,7 +142,7 @@ gUnknown_085922B4:: @ 85922B4
 	.4byte gUnknown_085922A8
 
     .align 2
-gUnknown_085922BC:: @ 85922BC
+gLeechSeedSpriteTemplate:: @ 85922BC
 	spr_template 0x2716, 0x2716, gUnknown_0852490C, gUnknown_085922B4, NULL, gDummySpriteAffineAnimTable, sub_80FEC48
 
     .align 2
@@ -230,7 +230,7 @@ gUnknown_08592400:: @ 8592400
 	.4byte gUnknown_085923F0
 
     .align 2
-gUnknown_08592404:: @ 8592404
+gSwiftStarSpriteTemplate:: @ 8592404
 	spr_template 0x27be, 0x27be, gUnknown_08524974, gDummySpriteAnimTable, NULL, gUnknown_08592400, sub_80FF0F4
 
     .align 2
@@ -353,7 +353,7 @@ gUnknown_08592610:: @ 8592610
 	spr_template 0x27f0, 0x27f0, gUnknown_08524974, gUnknown_085925AC, NULL, gUnknown_08592608, sub_80FFB18
 
     .align 2
-gUnknown_08592628:: @ 8592628
+gBattleAnimSpriteTemplate_8592628:: @ 8592628
 	spr_template 0x27f0, 0x27f0, gUnknown_08524974, gUnknown_085925AC, NULL, gUnknown_08592608, sub_80FFBF4
 
     .align 2
@@ -599,7 +599,7 @@ gUnknown_08592A18:: @ 8592A18
 	.4byte gUnknown_08592A04
 
 	.align 2
-gUnknown_08592A1C:: @ 8592A1C
+gCuttingSliceSpriteTemplate:: @ 8592A1C
 	spr_template 0x279a, 0x279a, gUnknown_08524A34, gUnknown_08592A18, NULL, gDummySpriteAffineAnimTable, sub_8100AE0
 
 	.align 2
@@ -888,7 +888,7 @@ gUnknown_08592EE8:: @ 8592EE8
 	.4byte gUnknown_08592ED4
 
 	.align 2
-gUnknown_08592EEC:: @ 8592EEC
+gBattleAnimSpriteTemplate_8592EEC:: @ 8592EEC
 	spr_template 0x27d3, 0x27d3, gUnknown_0852490C, gUnknown_08592EE8, NULL, gDummySpriteAffineAnimTable, sub_8102540
 
 	.align 2
@@ -1157,11 +1157,11 @@ gUnknown_0859337C:: @ 859337C
 	.4byte gUnknown_0859335C
 
 	.align 2
-gUnknown_08593380:: @ 8593380
+gBattleAnimSpriteTemplate_8593380:: @ 8593380
 	spr_template 0x2715, 0x2715, gUnknown_08524ADC, gDummySpriteAnimTable, NULL, gUnknown_0859337C, sub_810387C
 
 	.align 2
-gUnknown_08593398:: @ 8593398
+gSonicBoomSpriteTemplate:: @ 8593398
 	spr_template 0x2713, 0x2713, gUnknown_08524B14, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81038C8
 
 	.align 2
@@ -1189,11 +1189,11 @@ gUnknown_08593424:: @ 8593424
 	.4byte gUnknown_085933E0
 
 	.align 2
-gUnknown_08593428:: @ 8593428
+gSupersonicWaveSpriteTemplate:: @ 8593428
 	spr_template 0x27b3, 0x27b3, gUnknown_08524A14, gDummySpriteAnimTable, NULL, gUnknown_08593420, sub_80A7820
 
 	.align 2
-gUnknown_08593440:: @ 8593440
+gScreechWaveSpriteTemplate:: @ 8593440
 	spr_template 0x27b4, 0x27b4, gUnknown_08524A14, gDummySpriteAnimTable, NULL, gUnknown_08593420, sub_80A7820
 
 	.align 2
@@ -1357,7 +1357,7 @@ gUnknown_08593718:: @ 8593718
 	.4byte gUnknown_08593704
 
 	.align 2
-gUnknown_0859371C:: @ 859371C
+gBattleAnimSpriteTemplate_859371C:: @ 859371C
 	spr_template 0x27d6, 0x27d6, gUnknown_08524914, gUnknown_08593718, NULL, gDummySpriteAffineAnimTable, sub_80A77C8
 
 	.align 2
@@ -1436,7 +1436,7 @@ gUnknown_08593880:: @ 8593880
 	spr_template 0x27db, 0x27db, gUnknown_08524AFC, gDummySpriteAnimTable, NULL, gUnknown_08593818, sub_81052A4
 
 	.align 2
-gUnknown_08593898:: @ 8593898
+gBattleAnimSpriteTemplate_8593898:: @ 8593898
 	spr_template 0x27db, 0x27db, gUnknown_08524AFC, gDummySpriteAnimTable, NULL, gUnknown_08593810, sub_81054E8
 
 	.align 2
@@ -1497,7 +1497,7 @@ gUnknown_085939A0:: @ 85939A0
 	spr_template 0x27e8, 0x27e8, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8106140
 
 	.align 2
-gUnknown_085939B8:: @ 85939B8
+gBattleAnimSpriteTemplate_85939B8:: @ 85939B8
 	spr_template 0x27e8, 0x27e8, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81061C4
 
 	.align 2
@@ -1514,11 +1514,11 @@ gUnknown_08593A00:: @ 8593A00
 	.4byte gUnknown_085939E8
 
 	.align 2
-gUnknown_08593A04:: @ 8593A04
+gHiddenPowerOrbSpriteTemplate:: @ 8593A04
 	spr_template 0x27e9, 0x27e9, gUnknown_0852496C, gDummySpriteAnimTable, NULL, gUnknown_08593A00, sub_810673C
 
 	.align 2
-gUnknown_08593A1C:: @ 8593A1C
+gHiddenPowerOrbScatterSpriteTemplate:: @ 8593A1C
 	spr_template 0x27e9, 0x27e9, gUnknown_085249CC, gDummySpriteAnimTable, NULL, gUnknown_08593A00, sub_8106878
 
 	.align 2
@@ -1620,7 +1620,7 @@ gUnknown_08593B98:: @ 8593B98
 	.2byte 0xfff8, 0x000c, 0x0400, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
 
 	.align 2
-gUnknown_08593BB8:: @ 8593BB8
+gBattleAnimSpriteTemplate_8593BB8:: @ 8593BB8
 	spr_template 0x27f1, 0x27f1, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8106E00
 
 	.align 2
@@ -1703,7 +1703,7 @@ gUnknown_08595064:: @ 8595064
 	.4byte gUnknown_08595054
 
 	.align 2
-gUnknown_08595068:: @ 8595068
+gBattleAnimSpriteTemplate_8595068:: @ 8595068
 	spr_template 0x27a2, 0x27a2, gUnknown_08524A8C, gUnknown_08595064, NULL, gUnknown_08595050, sub_8107260
 
 	.align 2
@@ -1990,11 +1990,11 @@ gUnknown_085954D0:: @ 85954D0
 	.4byte gUnknown_085954B8
 
 	.align 2
-gUnknown_085954D4:: @ 85954D4
+gEmberSpriteTemplate:: @ 85954D4
 	spr_template 0x272d, 0x272d, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A7820
 
 	.align 2
-gUnknown_085954EC:: @ 85954EC
+gEmberFlareSpriteTemplate:: @ 85954EC
 	spr_template 0x272d, 0x272d, gUnknown_08524914, gUnknown_085954D0, NULL, gDummySpriteAffineAnimTable, sub_8109198
 
 	.align 2
@@ -2031,7 +2031,7 @@ gUnknown_0859556C:: @ 859556C
 	spr_template 0x272d, 0x272d, gUnknown_08524914, gUnknown_08595540, NULL, gDummySpriteAffineAnimTable, sub_8109364
 
 	.align 2
-gUnknown_08595584:: @ 8595584
+gBattleAnimSpriteTemplate_8595584:: @ 8595584
 	spr_template 0x272d, 0x272d, gUnknown_08524914, gUnknown_085954D0, NULL, gDummySpriteAffineAnimTable, sub_81093A4
 
 	.align 2
@@ -2138,7 +2138,7 @@ gUnknown_08595734:: @ 8595734
 	spr_template 0x275f, 0x275f, gUnknown_08524914, gUnknown_08595730, NULL, gDummySpriteAffineAnimTable, sub_810A274
 
 	.align 2
-gUnknown_0859574C:: @ 859574C
+gBattleAnimSpriteTemplate_859574C:: @ 859574C
 	spr_template 0x271b, 0x271b, gUnknown_0852496C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_810A308
 
 	.align 2
@@ -2175,15 +2175,15 @@ gUnknown_085957DC:: @ 85957DC
 	.4byte gUnknown_085957BC
 
 	.align 2
-gUnknown_085957E0:: @ 85957E0
+gBattleAnimSpriteTemplate_85957E0:: @ 85957E0
 	spr_template 0x282a, 0x282a, gUnknown_08524974, gUnknown_085957B8, NULL, gUnknown_085957DC, sub_810A5BC
 
 	.align 2
-gUnknown_085957F8:: @ 85957F8
+gBattleAnimSpriteTemplate_85957F8:: @ 85957F8
 	spr_template 0x271b, 0x271b, gUnknown_0852496C, gDummySpriteAnimTable, NULL, gUnknown_0859578C, sub_810A628
 
 	.align 2
-gUnknown_08595810:: @ 8595810
+gElectricitySpriteTemplate:: @ 8595810
 	spr_template 0x271b, 0x271b, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_810A75C
 
 	.align 2
@@ -2613,7 +2613,7 @@ gUnknown_08595E80:: @ 8595E80
 	spr_template 0x279f, 0x279f, gUnknown_08524914, gUnknown_08595E54, NULL, gDummySpriteAffineAnimTable, sub_810CEB4
 
 	.align 2
-gUnknown_08595E98:: @ 8595E98
+gFistFootSpriteTemplate:: @ 8595E98
 	spr_template 0x279f, 0x279f, gUnknown_08524914, gUnknown_08595E54, NULL, gDummySpriteAffineAnimTable, sub_810CEE0
 
 	.align 2
@@ -2651,7 +2651,7 @@ gUnknown_08595F44:: @ 8595F44
 	.4byte gUnknown_08595F2C
 
 	.align 2
-gUnknown_08595F48:: @ 8595F48
+gMegaPunchKickSpriteTemplate:: @ 8595F48
 	spr_template 0x279f, 0x279f, gUnknown_085249D4, gUnknown_08595E54, NULL, gUnknown_08595F44, sub_810D278
 
 	.align 2
@@ -2841,11 +2841,11 @@ gUnknown_0859623C:: @ 859623C
 	.4byte gUnknown_08596224
 
 	.align 2
-gUnknown_08596240:: @ 8596240
+gPoisonBubbleSpriteTemplate:: @ 8596240
 	spr_template 0x27a6, 0x27a6, gUnknown_0852496C, gUnknown_08596164, NULL, gUnknown_0859623C, sub_810DDC4
 
 	.align 2
-gUnknown_08596258:: @ 8596258
+gWaterBubbleSpriteTemplate:: @ 8596258
 	spr_template 0x27ab, 0x27ab, gUnknown_08524A8C, gUnknown_08595200, NULL, gUnknown_0859623C, sub_810DDC4
 
 	.align 2
@@ -2862,7 +2862,7 @@ gUnknown_085962A0:: @ 85962A0
 	.4byte gUnknown_08596288
 
 	.align 2
-gUnknown_085962A4:: @ 85962A4
+gBattleAnimSpriteTemplate_85962A4:: @ 85962A4
 	spr_template 0x2719, 0x2719, gUnknown_085249BC, gDummySpriteAnimTable, NULL, gUnknown_085962A0, sub_810DFA8
 
 	.align 2
@@ -3268,15 +3268,15 @@ gUnknown_08596A2C:: @ 8596A2C
 	spr_template 0x27c5, 0x27c5, gUnknown_08524AFC, gDummySpriteAnimTable, NULL, gUnknown_08596A28, sub_811067C
 
 	.align 2
-gUnknown_08596A44:: @ 8596A44
+gLinearStingerSpriteTemplate:: @ 8596A44
 	spr_template 0x27b1, 0x27b1, gUnknown_0852496C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8110720
 
 	.align 2
-gUnknown_08596A5C:: @ 8596A5C
+gPinMissileSpriteTemplate:: @ 8596A5C
 	spr_template 0x27b1, 0x27b1, gUnknown_0852496C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8110850
 
 	.align 2
-gUnknown_08596A74:: @ 8596A74
+gIcicleSpearSpriteTemplate:: @ 8596A74
 	spr_template 0x2816, 0x2816, gUnknown_08524974, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8110850
 
 	.align 2
@@ -3342,7 +3342,7 @@ gUnknown_08596B88:: @ 8596B88
 	spr_template 0x272d, 0x272d, gUnknown_08524914, gUnknown_085954D0, NULL, gDummySpriteAffineAnimTable, sub_8110B38
 
 	.align 2
-gUnknown_08596BA0:: @ 8596BA0
+gBattleAnimSpriteTemplate_8596BA0:: @ 8596BA0
 	spr_template 0x2815, 0x2815, gUnknown_08524934, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8110E4C
 
 	.align 2
@@ -3500,11 +3500,11 @@ gUnknown_08596DD0:: @ 8596DD0
 	spr_template 0x27d7, 0x27d7, gUnknown_08524A54, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81129F0
 
 	.align 2
-gUnknown_08596DE8:: @ 8596DE8
+gBattleAnimSpriteTemplate_8596DE8:: @ 8596DE8
 	spr_template 0x27d8, 0x27d8, gUnknown_08524A34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8112B78
 
 	.align 2
-gUnknown_08596E00:: @ 8596E00
+gBattleAnimSpriteTemplate_8596E00:: @ 8596E00
 	spr_template 0x27ed, 0x27ed, gUnknown_08524A34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8112B78
 
 	.align 2
@@ -3533,7 +3533,7 @@ gUnknown_08596E78:: @ 8596E78
 	.4byte gUnknown_08596E60
 
 	.align 2
-gUnknown_08596E7C:: @ 8596E7C
+gBattleAnimSpriteTemplate_8596E7C:: @ 8596E7C
 	spr_template 0x272d, 0x272d, gUnknown_08524914, gUnknown_08596E78, NULL, gDummySpriteAffineAnimTable, sub_8113064
 
 	.align 2
@@ -3705,7 +3705,7 @@ gUnknown_08597130:: @ 8597130
 	.4byte gUnknown_08597118
 
 	.align 2
-gUnknown_08597138:: @ 8597138
+gBattleAnimSpriteTemplate_8597138:: @ 8597138
 	spr_template 0x2737, 0x2737, gUnknown_08524914, gUnknown_08597130, NULL, gDummySpriteAffineAnimTable, sub_81144BC
 
 	.align 2
@@ -3774,15 +3774,15 @@ gUnknown_08597254:: @ 8597254
 	.4byte gUnknown_08597240
 
 	.align 2
-gUnknown_0859725C:: @ 859725C
+gConfusionDuckSpriteTemplate:: @ 859725C
 	spr_template 0x2759, 0x2759, gUnknown_0852490C, gUnknown_08597254, NULL, gDummySpriteAffineAnimTable, sub_811572C
 
 	.align 2
-gUnknown_08597274:: @ 8597274
+gSimplePaletteBlendSpriteTemplate:: @ 8597274
 	spr_template 0x0000, 0x0000, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81157FC
 
 	.align 2
-gUnknown_0859728C:: @ 859728C
+gComplexPaletteBlendSpriteTemplate:: @ 859728C
 	spr_template 0x0000, 0x0000, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81158A4
 
 	.align 2
@@ -3799,7 +3799,7 @@ gUnknown_085972C0:: @ 85972C0
 	spr_template 0x2757, 0x2757, gUnknown_08524914, gUnknown_085972BC, NULL, gDummySpriteAffineAnimTable, sub_81159B4
 
 	.align 2
-gUnknown_085972D8:: @ 85972D8
+gBattleAnimSpriteTemplate_85972D8:: @ 85972D8
 	spr_template 0x0000, 0x0000, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81160A4
 
 	.align 2
@@ -3829,11 +3829,11 @@ gUnknown_08597348:: @ 8597348
 	.4byte gUnknown_08597330
 
 	.align 2
-gUnknown_08597358:: @ 8597358
+gBasicHitSplatSpriteTemplate:: @ 8597358
 	spr_template 0x2797, 0x2797, gUnknown_08524A94, gDummySpriteAnimTable, NULL, gUnknown_08597348, sub_8116388
 
 	.align 2
-gUnknown_08597370:: @ 8597370
+gBattleAnimSpriteTemplate_8597370:: @ 8597370
 	spr_template 0x2797, 0x2797, gUnknown_08524A94, gDummySpriteAnimTable, NULL, gUnknown_08597348, sub_8116420
 
 	.align 2
@@ -3845,7 +3845,7 @@ gUnknown_085973A0:: @ 85973A0
 	spr_template 0x2797, 0x2797, gUnknown_08524A94, gDummySpriteAnimTable, NULL, gUnknown_08597348, sub_8116458
 
 	.align 2
-gUnknown_085973B8:: @ 85973B8
+gBattleAnimSpriteTemplate_85973B8:: @ 85973B8
 	spr_template 0x2797, 0x2797, gUnknown_08524A94, gDummySpriteAnimTable, NULL, gUnknown_08597348, sub_81164F0
 
 	.align 2

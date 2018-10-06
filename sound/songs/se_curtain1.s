@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_curtain1_grp, voicegroup_86A0154
+	.equ	se_curtain1_grp, voicegroup129
 	.equ	se_curtain1_pri, 5
 	.equ	se_curtain1_rev, reverb_set+50
 	.equ	se_curtain1_mvl, 127

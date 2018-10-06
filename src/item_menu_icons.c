@@ -414,7 +414,7 @@ static const struct SpriteTemplate gUnknown_0857FE10 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_0857FE28 =
+const struct SpriteTemplate gHorizontalLungeSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -425,7 +425,7 @@ const struct SpriteTemplate gUnknown_0857FE28 =
     .callback = sub_80D5860,
 };
 
-const struct SpriteTemplate gUnknown_0857FE40 =
+const struct SpriteTemplate gVerticalDipSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -436,7 +436,7 @@ const struct SpriteTemplate gUnknown_0857FE40 =
     .callback = sub_80D58F8,
 };
 
-const struct SpriteTemplate gUnknown_0857FE58 =
+const struct SpriteTemplate gSlideMonToOriginalPosSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -447,7 +447,7 @@ const struct SpriteTemplate gUnknown_0857FE58 =
     .callback = sub_80D5968,
 };
 
-const struct SpriteTemplate gUnknown_0857FE70 =
+const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,

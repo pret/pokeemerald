@@ -40,17 +40,6 @@
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
 
-#define BATTLE_TERRAIN_GRASS        0
-#define BATTLE_TERRAIN_LONG_GRASS   1
-#define BATTLE_TERRAIN_SAND         2
-#define BATTLE_TERRAIN_UNDERWATER   3
-#define BATTLE_TERRAIN_WATER        4
-#define BATTLE_TERRAIN_POND         5
-#define BATTLE_TERRAIN_MOUNTAIN     6
-#define BATTLE_TERRAIN_CAVE         7
-#define BATTLE_TERRAIN_BUILDING     8
-#define BATTLE_TERRAIN_PLAIN        9
-
 // array entries for battle communication
 #define MULTIUSE_STATE          0x0
 #define CURSOR_POSITION         0x1
@@ -680,7 +669,7 @@ struct BattleScripting
 // rom_80A5C6C
 u8 GetBattlerSide(u8 battler);
 u8 GetBattlerPosition(u8 battler);
-u8 GetBattlerAtPosition(u8 battler);
+u8 GetBattlerAtPosition(u8 position);
 
 struct BattleSpriteInfo
 {

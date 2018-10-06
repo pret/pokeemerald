@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_toreoff_grp, voicegroup_86A0154
+	.equ	se_toreoff_grp, voicegroup129
 	.equ	se_toreoff_pri, 5
 	.equ	se_toreoff_rev, reverb_set+50
 	.equ	se_toreoff_mvl, 127

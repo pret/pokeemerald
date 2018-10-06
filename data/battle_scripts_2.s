@@ -198,7 +198,7 @@ BattleScript_ActionGetNear:
 BattleScript_ActionThrowPokeblock:
 	printstring STRINGID_THREWPOKEBLOCKATPKMN
 	waitmessage 0x40
-	playanimation BS_ATTACKER, B_ANIM_x4, NULL
+	playanimation BS_ATTACKER, B_ANIM_POKEBLOCK_THROW, NULL
 	printfromtable gSafariPokeblockResultStringIds
 	waitmessage 0x40
 	end2

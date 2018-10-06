@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_dansa_grp, voicegroup_869D0F4
+	.equ	se_dansa_grp, voicegroup127
 	.equ	se_dansa_pri, 4
 	.equ	se_dansa_rev, reverb_set+50
 	.equ	se_dansa_mvl, 127

@@ -7975,7 +7975,7 @@ _08102794:
 	mov r12, r5
 	ldr r7, =gUnknown_08592EBC
 	mov r8, r7
-	ldr r6, =gUnknown_08592EEC
+	ldr r6, =gBattleAnimSpriteTemplate_8592EEC
 	movs r5, 0x1
 _081027B2:
 	lsls r0, r2, 4
@@ -17049,8 +17049,8 @@ _08107118:
 	.pool
 	thumb_func_end sub_81070AC
 
-	thumb_func_start sub_8107144
-sub_8107144: @ 8107144
+	thumb_func_start AnimTask_IsFuryCutterHitRight
+AnimTask_IsFuryCutterHitRight: @ 8107144
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17065,10 +17065,10 @@ sub_8107144: @ 8107144
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8107144
+	thumb_func_end AnimTask_IsFuryCutterHitRight
 
-	thumb_func_start sub_8107168
-sub_8107168: @ 8107168
+	thumb_func_start AnimTask_GetFuryCutterHitCount
+AnimTask_GetFuryCutterHitCount: @ 8107168
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17081,10 +17081,10 @@ sub_8107168: @ 8107168
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8107168
+	thumb_func_end AnimTask_GetFuryCutterHitCount
 
-	thumb_func_start sub_8107188
-sub_8107188: @ 8107188
+	thumb_func_start AnimTask_CreateRaindrops
+AnimTask_CreateRaindrops: @ 8107188
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17150,7 +17150,7 @@ _0810720A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8107188
+	thumb_func_end AnimTask_CreateRaindrops
 
 	thumb_func_start sub_810721C
 sub_810721C: @ 810721C
@@ -18033,8 +18033,8 @@ _0810794C:
 	bx r0
 	thumb_func_end sub_810790C
 
-	thumb_func_start sub_8107954
-sub_8107954: @ 8107954
+	thumb_func_start AnimTask_CreateSurfWave
+AnimTask_CreateSurfWave: @ 8107954
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -18256,7 +18256,7 @@ _08107B58:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8107954
+	thumb_func_end AnimTask_CreateSurfWave
 
 	thumb_func_start sub_8107B84
 sub_8107B84: @ 8107B84
@@ -22914,8 +22914,8 @@ _0810A054:
 	.pool
 	thumb_func_end sub_8109E2C
 
-	thumb_func_start sub_810A060
-sub_810A060: @ 810A060
+	thumb_func_start AnimTask_BlendBackground
+AnimTask_BlendBackground: @ 810A060
 	push {r4,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -22938,7 +22938,7 @@ sub_810A060: @ 810A060
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_810A060
+	thumb_func_end AnimTask_BlendBackground
 
 	thumb_func_start sub_810A094
 sub_810A094: @ 810A094
@@ -28522,8 +28522,8 @@ _0810CDF6:
 	bx r0
 	thumb_func_end sub_810CDB0
 
-	thumb_func_start sub_810CDFC
-sub_810CDFC: @ 810CDFC
+	thumb_func_start AnimTask_GetRolloutCounter
+AnimTask_GetRolloutCounter: @ 810CDFC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -28544,7 +28544,7 @@ sub_810CDFC: @ 810CDFC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_810CDFC
+	thumb_func_end AnimTask_GetRolloutCounter
 
 	thumb_func_start unc_080B08A0
 unc_080B08A0: @ 810CE2C
@@ -28796,7 +28796,7 @@ _0810D028:
 	mov r1, r9
 	ldrh r0, [r1, 0x2]
 	strh r0, [r5, 0x2E]
-	ldr r0, =gUnknown_08597358
+	ldr r0, =gBasicHitSplatSpriteTemplate
 	movs r2, 0x20
 	ldrsh r1, [r5, r2]
 	movs r3, 0x22
@@ -36190,8 +36190,8 @@ _08110BC6:
 	bx r0
 	thumb_func_end sub_8110B80
 
-	thumb_func_start sub_8110BCC
-sub_8110BCC: @ 8110BCC
+	thumb_func_start AnimTask_LoadSandstormBackground
+AnimTask_LoadSandstormBackground: @ 8110BCC
 	push {r4-r6,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -36275,7 +36275,7 @@ _08110C6E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8110BCC
+	thumb_func_end AnimTask_LoadSandstormBackground
 
 	thumb_func_start sub_8110CB0
 sub_8110CB0: @ 8110CB0
@@ -37293,8 +37293,8 @@ _081114E6:
 	bx r0
 	thumb_func_end sub_811149C
 
-	thumb_func_start sub_81114EC
-sub_81114EC: @ 81114EC
+	thumb_func_start AnimTask_GetSeismicTossDamageLevel
+AnimTask_GetSeismicTossDamageLevel: @ 81114EC
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -37326,7 +37326,7 @@ _0811151A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81114EC
+	thumb_func_end AnimTask_GetSeismicTossDamageLevel
 
 	thumb_func_start sub_811152C
 sub_811152C: @ 811152C
@@ -45184,8 +45184,8 @@ _081155F4:
 	.pool
 	thumb_func_end sub_8115588
 
-	thumb_func_start sub_8115600
-sub_8115600: @ 8115600
+	thumb_func_start AnimTask_IsPowerOver99
+AnimTask_IsPowerOver99: @ 8115600
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -45203,7 +45203,7 @@ _08115614:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8115600
+	thumb_func_end AnimTask_IsPowerOver99
 
 	thumb_func_start sub_8115628
 sub_8115628: @ 8115628
@@ -47427,8 +47427,8 @@ _08116832:
 	.pool
 	thumb_func_end sub_811675C
 
-	thumb_func_start sub_8116848
-sub_8116848: @ 8116848
+	thumb_func_start AnimTask_BlendParticle
+AnimTask_BlendParticle: @ 8116848
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -47447,7 +47447,7 @@ sub_8116848: @ 8116848
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8116848
+	thumb_func_end AnimTask_BlendParticle
 
 	thumb_func_start sub_8116874
 sub_8116874: @ 8116874
@@ -49190,8 +49190,8 @@ _0811773E:
 	.pool
 	thumb_func_end sub_81176D8
 
-	thumb_func_start sub_8117754
-sub_8117754: @ 8117754
+	thumb_func_start AnimTask_IsAttackerOpponentSide
+AnimTask_IsAttackerOpponentSide: @ 8117754
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -49209,10 +49209,10 @@ sub_8117754: @ 8117754
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117754
+	thumb_func_end AnimTask_IsAttackerOpponentSide
 
-	thumb_func_start sub_8117780
-sub_8117780: @ 8117780
+	thumb_func_start AnimTask_IsTargetOpponentSide
+AnimTask_IsTargetOpponentSide: @ 8117780
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -49230,10 +49230,10 @@ sub_8117780: @ 8117780
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117780
+	thumb_func_end AnimTask_IsTargetOpponentSide
 
-	thumb_func_start sub_81177AC
-sub_81177AC: @ 81177AC
+	thumb_func_start AnimTask_IsTargetPartner
+AnimTask_IsTargetPartner: @ 81177AC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -49256,7 +49256,7 @@ _081177C8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81177AC
+	thumb_func_end AnimTask_IsTargetPartner
 
 	thumb_func_start sub_81177E4
 sub_81177E4: @ 81177E4
@@ -49753,8 +49753,8 @@ _08117C0C:
 	.pool
 	thumb_func_end sub_8117A60
 
-	thumb_func_start sub_8117C24
-sub_8117C24: @ 8117C24
+	thumb_func_start AnimTask_GetBattleTerrain
+AnimTask_GetBattleTerrain: @ 8117C24
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -49766,7 +49766,7 @@ sub_8117C24: @ 8117C24
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117C24
+	thumb_func_end AnimTask_GetBattleTerrain
 
 	thumb_func_start sub_8117C44
 sub_8117C44: @ 8117C44
@@ -50032,8 +50032,8 @@ _08117E34:
 	.pool
 	thumb_func_end sub_8117DD8
 
-	thumb_func_start sub_8117E60
-sub_8117E60: @ 8117E60
+	thumb_func_start AnimTask_IsContest
+AnimTask_IsContest: @ 8117E60
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -50057,7 +50057,7 @@ _08117E84:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117E60
+	thumb_func_end AnimTask_IsContest
 
 	thumb_func_start sub_8117E94
 sub_8117E94: @ 8117E94
@@ -50078,8 +50078,8 @@ sub_8117E94: @ 8117E94
 	.pool
 	thumb_func_end sub_8117E94
 
-	thumb_func_start sub_8117EC4
-sub_8117EC4: @ 8117EC4
+	thumb_func_start AnimTask_IsTargetSameSide
+AnimTask_IsTargetSameSide: @ 8117EC4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -50109,7 +50109,7 @@ _08117EFC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8117EC4
+	thumb_func_end AnimTask_IsTargetSameSide
 
 	thumb_func_start sub_8117F10
 sub_8117F10: @ 8117F10

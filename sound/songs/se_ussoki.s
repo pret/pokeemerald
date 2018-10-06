@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_ussoki_grp, voicegroup_86A0154
+	.equ	se_ussoki_grp, voicegroup129
 	.equ	se_ussoki_pri, 5
 	.equ	se_ussoki_rev, reverb_set+50
 	.equ	se_ussoki_mvl, 127
