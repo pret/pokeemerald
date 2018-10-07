@@ -1124,7 +1124,7 @@ _080FF154:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldrh r0, [r6, 0x4]
 	ldrh r1, [r5, 0x32]
 	adds r0, r1
@@ -1272,7 +1272,7 @@ sub_80FF268: @ 80FF268
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _080FF28A:
 	ldrh r0, [r4, 0x22]
 	adds r0, 0x20
@@ -4152,7 +4152,7 @@ _08100918:
 	subs r1, r5
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	lsrs r4, r0, 16
 	bl IsContest
@@ -5451,7 +5451,7 @@ _0810137A:
 	adds r3, r5, 0
 	adds r3, 0x22
 	adds r0, r6, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	adds r0, r5, 0
@@ -10172,7 +10172,7 @@ _0810390E:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xF0
 	lsls r1, 24
@@ -10754,7 +10754,7 @@ _08103DB6:
 	movs r1, 0
 	mov r2, sp
 	mov r3, r10
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	b _08103E42
 	.pool
 _08103E20:
@@ -11093,7 +11093,7 @@ _081040CC:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24
@@ -13220,7 +13220,7 @@ _081051F2:
 	adds r1, r4, 0
 	mov r2, sp
 	adds r3, r7, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	cmp r4, 0
 	bne _08105230
 	adds r0, r5, 0
@@ -13466,7 +13466,7 @@ _081053FA:
 	mov r2, sp
 	mov r3, sp
 	adds r3, 0x2
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	b _0810546C
 	.pool
 _0810544C:
@@ -17006,7 +17006,7 @@ sub_81070AC: @ 81070AC
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldrh r0, [r5, 0x22]
 	adds r0, 0x28
 	strh r0, [r5, 0x22]
@@ -26048,7 +26048,7 @@ _0810B990:
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -26155,7 +26155,7 @@ _0810BA74:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _0810BA86:
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
@@ -26454,7 +26454,7 @@ _0810BCE0:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _0810BCF2:
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
@@ -26652,7 +26652,7 @@ _0810BE6C:
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -26719,7 +26719,7 @@ _0810BEF4:
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -26762,7 +26762,7 @@ _0810BF52:
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -27192,7 +27192,7 @@ sub_810C2F0: @ 810C2F0
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r0, =sub_80A7820
+	ldr r0, =TranslateAnimSpriteToTargetMonLocation
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -30270,7 +30270,7 @@ _0810DC44:
 	movs r1, 0x1
 	mov r2, sp
 	adds r3, r6, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -30396,7 +30396,7 @@ sub_810DD50: @ 810DD50
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -30457,7 +30457,7 @@ _0810DDE0:
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -30828,7 +30828,7 @@ _0810E0EC:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _0810E0FE:
 	ldr r4, =gBattleAnimArgs
 	ldrh r0, [r4, 0x4]
@@ -32074,7 +32074,7 @@ sub_810EA4C: @ 810EA4C
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r0, =sub_80A7820
+	ldr r0, =TranslateAnimSpriteToTargetMonLocation
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -32913,7 +32913,7 @@ sub_810F084: @ 810F084
 	asrs r5, 16
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24
@@ -35407,7 +35407,7 @@ _08110548:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _0811055A:
 	adds r0, r5, 0
 	bl sub_80A6FD4
@@ -35464,7 +35464,7 @@ sub_81105B4: @ 81105B4
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -35745,7 +35745,7 @@ _081107B2:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24
@@ -35899,7 +35899,7 @@ _0811090E:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24
@@ -35987,7 +35987,7 @@ sub_81109F0: @ 81109F0
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _08110A10:
 	ldrh r0, [r6]
 	ldrh r1, [r5, 0x20]
@@ -37205,7 +37205,7 @@ sub_8111418: @ 8111418
 	bl StartSpriteAffineAnim
 _08111434:
 	adds r0, r4, 0
-	bl sub_80A7820
+	bl TranslateAnimSpriteToTargetMonLocation
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -50366,8 +50366,8 @@ _08118132:
 	.pool
 	thumb_func_end SetAnimBgAttribute
 
-	thumb_func_start sub_8118140
-sub_8118140: @ 8118140
+	thumb_func_start GetAnimBgAttribute
+GetAnimBgAttribute: @ 8118140
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -50441,7 +50441,7 @@ _081181CA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8118140
+	thumb_func_end GetAnimBgAttribute
 
 	thumb_func_start HandleIntroSlide
 HandleIntroSlide: @ 81181D4

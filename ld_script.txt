@@ -112,7 +112,6 @@ SECTIONS {
         src/sound.o(.text);
         src/battle_anim.o(.text);
         src/battle_anim_80A5C6C.o(.text);
-        asm/battle_anim_80A5C6C.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
         asm/battle_anim_80A9C70.o(.text);

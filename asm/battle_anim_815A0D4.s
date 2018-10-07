@@ -231,7 +231,7 @@ sub_815A254: @ 815A254
 	subs r1, r6
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 23
@@ -775,7 +775,7 @@ sub_815A6C4: @ 815A6C4
 	movs r1, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
