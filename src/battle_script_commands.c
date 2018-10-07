@@ -3,6 +3,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
 #include "battle_message.h"
+#include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
 #include "constants/moves.h"
@@ -4381,16 +4382,16 @@ static void atk47_setgraphicalstatchangevalues(void)
     switch (GET_STAT_BUFF_VALUE2(gBattleScripting.statChanger))
     {
     case SET_STAT_BUFF_VALUE(1): // +1
-        value = 0xF;
+        value = STAT_ANIM_PLUS1;
         break;
     case SET_STAT_BUFF_VALUE(2): // +2
-        value = 0x27;
+        value = STAT_ANIM_PLUS2;
         break;
     case SET_STAT_BUFF_VALUE(1) | STAT_BUFF_NEGATIVE: // -1
-        value = 0x16;
+        value = STAT_ANIM_MINUS1;
         break;
     case SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE: // -2
-        value = 0x2E;
+        value = STAT_ANIM_MINUS2;
         break;
     }
     gBattleScripting.animArg1 = GET_STAT_BUFF_ID(gBattleScripting.statChanger) + value - 1;
@@ -4412,9 +4413,9 @@ static void atk48_playstatchangeanimation(void)
     {
         s16 startingStatAnimId;
         if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
-            startingStatAnimId = 0x2D;
+            startingStatAnimId = STAT_ANIM_MINUS2 - 1;
         else
-            startingStatAnimId = 0x15;
+            startingStatAnimId = STAT_ANIM_MINUS1 - 1;
 
         while (statsToCheck != 0)
         {
@@ -4447,18 +4448,18 @@ static void atk48_playstatchangeanimation(void)
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
             if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
-                statAnimId = 0x3A;
+                statAnimId = STAT_ANIM_MULTIPLE_MINUS2;
             else
-                statAnimId = 0x39;
+                statAnimId = STAT_ANIM_MULTIPLE_MINUS1;
         }
     }
     else // goes up
     {
         s16 startingStatAnimId;
         if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
-            startingStatAnimId = 0x26;
+            startingStatAnimId = STAT_ANIM_PLUS2 - 1;
         else
-            startingStatAnimId = 0xE;
+            startingStatAnimId = STAT_ANIM_PLUS1 - 1;
 
         while (statsToCheck != 0)
         {
@@ -4473,9 +4474,9 @@ static void atk48_playstatchangeanimation(void)
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
             if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
-                statAnimId = 0x38;
+                statAnimId = STAT_ANIM_MULTIPLE_PLUS2;
             else
-                statAnimId = 0x37;
+                statAnimId = STAT_ANIM_MULTIPLE_PLUS1;
         }
     }
 

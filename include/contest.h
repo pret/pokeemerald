@@ -239,14 +239,13 @@ struct Shared18000
 
 struct ContestStruct_field_18
 {
-    // unknown size
-    u16 field_0;
-    u16 field_2;
-    u16 field_4;
-    u16 field_6;
-    u32 field_8;
-    u32 field_C;
-    u32 field_10;
+    u16 unk0;
+    u16 unk2;
+    u8 unk4_0:1;
+    u8 unk5;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
 };
 
 struct Contest
@@ -411,6 +410,7 @@ extern struct ContestResources *gContestResources;
 #define eContestAI (gContestResources->field_C)
 #define shared19328 (*gContestResources->field_10)
 #define shared19338 (*gContestResources->field_14)
+#define shared19348 (*gContestResources->field_18)
 
 #define shared15800 (gHeap + 0x18000)
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))

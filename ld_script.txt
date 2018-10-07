@@ -111,10 +111,10 @@ SECTIONS {
         src/palette.o(.text);
         src/sound.o(.text);
         src/battle_anim.o(.text);
-        asm/battle_anim_80A5C6C.o(.text);
+        src/battle_anim_80A5C6C.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
-        asm/battle_anim_80A9C70.o(.text);
+        src/battle_anim_80A9C70.o(.text);
         src/title_screen.o(.text);
         asm/field_screen.o(.text);
         src/battle_setup.o(.text);
@@ -134,7 +134,7 @@ SECTIONS {
         src/mail_data.o(.text);
         src/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
-        asm/battle_anim_80D51AC.o(.text);
+        src/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
         src/contest.o(.text);
         asm/contest.o(.text);
@@ -420,9 +420,10 @@ SECTIONS {
         data/fanfares.o(.rodata);
         data/battle_anims.o(.rodata);
         src/battle_anim.o(.rodata);
-        data/rom_8525F58.o(.rodata);
+        src/battle_anim_80A5C6C.o(.rodata);
         data/map_events.o(.rodata);
         data/battle_anim_80A9C70.o(.rodata);
+        src/battle_anim_80A9C70.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_screen.o(.rodata);
         src/battle_setup.o(.rodata);

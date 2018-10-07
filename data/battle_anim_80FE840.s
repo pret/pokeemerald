@@ -828,7 +828,7 @@ gUnknown_08592DE4:: @ 8592DE4
 
 	.align 2
 gUnknown_08592DFC:: @ 8592DFC
-	spr_template 0x2721, 0x2721, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A7820
+	spr_template 0x2721, 0x2721, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
 gUnknown_08592E14:: @ 8592E14
@@ -1190,15 +1190,15 @@ gUnknown_08593424:: @ 8593424
 
 	.align 2
 gSupersonicWaveSpriteTemplate:: @ 8593428
-	spr_template 0x27b3, 0x27b3, gUnknown_08524A14, gDummySpriteAnimTable, NULL, gUnknown_08593420, sub_80A7820
+	spr_template 0x27b3, 0x27b3, gUnknown_08524A14, gDummySpriteAnimTable, NULL, gUnknown_08593420, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
 gScreechWaveSpriteTemplate:: @ 8593440
-	spr_template 0x27b4, 0x27b4, gUnknown_08524A14, gDummySpriteAnimTable, NULL, gUnknown_08593420, sub_80A7820
+	spr_template 0x27b4, 0x27b4, gUnknown_08524A14, gDummySpriteAnimTable, NULL, gUnknown_08593420, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
 gUnknown_08593458:: @ 8593458
-	spr_template 0x2814, 0x2814, gUnknown_08524A1C, gDummySpriteAnimTable, NULL, gUnknown_08593420, sub_80A7820
+	spr_template 0x2814, 0x2814, gUnknown_08524A1C, gDummySpriteAnimTable, NULL, gUnknown_08593420, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
 gUnknown_08593470:: @ 8593470
@@ -1991,7 +1991,7 @@ gUnknown_085954D0:: @ 85954D0
 
 	.align 2
 gEmberSpriteTemplate:: @ 85954D4
-	spr_template 0x272d, 0x272d, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A7820
+	spr_template 0x272d, 0x272d, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
 gEmberFlareSpriteTemplate:: @ 85954EC
@@ -2143,7 +2143,7 @@ gBattleAnimSpriteTemplate_859574C:: @ 859574C
 
 	.align 2
 gUnknown_08595764:: @ 8595764
-	spr_template 0x27bb, 0x27bb, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A7820
+	spr_template 0x27bb, 0x27bb, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
 gUnknown_0859577C:: @ 859577C
@@ -3067,7 +3067,7 @@ gUnknown_08596624:: @ 8596624
 
 	.align 2
 gUnknown_0859663C:: @ 859663C
-	spr_template 0x27b3, 0x27b3, gUnknown_08524954, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A7820
+	spr_template 0x27b3, 0x27b3, gUnknown_08524954, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
 gUnknown_08596654:: @ 8596654
