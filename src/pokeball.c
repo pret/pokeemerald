@@ -378,8 +378,8 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
         gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
         break;
     case POKEBALL_OPPONENT_SENDOUT:
-        gSprites[ballSpriteId].pos1.x = GetBattlerSpriteCoord(battlerId, BANK_X_POS);
-        gSprites[ballSpriteId].pos1.y = GetBattlerSpriteCoord(battlerId, BANK_Y_POS) + 24;
+        gSprites[ballSpriteId].pos1.x = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X);
+        gSprites[ballSpriteId].pos1.y = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 24;
         gBattlerTarget = battlerId;
         gSprites[ballSpriteId].data[0] = 0;
         gSprites[ballSpriteId].callback = SpriteCB_OpponentMonSendOut;
@@ -399,8 +399,8 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     // this will perform an unused ball throw animation
     gSprites[ballSpriteId].data[0] = 0x22;
-    gSprites[ballSpriteId].data[2] = GetBattlerSpriteCoord(gBattlerTarget, BANK_X_POS);
-    gSprites[ballSpriteId].data[4] = GetBattlerSpriteCoord(gBattlerTarget, BANK_Y_POS) - 16;
+    gSprites[ballSpriteId].data[2] = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_X);
+    gSprites[ballSpriteId].data[4] = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_Y) - 16;
     gSprites[ballSpriteId].data[5] = -40;
     sub_80A68D4(&gSprites[ballSpriteId]);
     gSprites[ballSpriteId].oam.affineParam = taskId;
@@ -411,7 +411,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
 static void SpriteCB_TestBallThrow(struct Sprite *sprite)
 {
-    if (AnimateBallThrow(sprite))
+    if (TranslateAnimArc(sprite))
     {
         u16 ballId;
         u8 taskId = sprite->oam.affineParam;
@@ -922,7 +922,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
             StartSpriteAffineAnim(sprite, 4);
         }
         r4 = sprite->data[0];
-        sub_80A6F3C(sprite);
+        TranslateAnimLinear(sprite);
         sprite->data[7] += sprite->sBattler / 3;
         sprite->pos2.y += Sin(HIBYTE(sprite->data[7]), sprite->data[5]);
         sprite->oam.affineParam += 0x100;
@@ -940,7 +940,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
     }
     else
     {
-        if (AnimateBallThrow(sprite))
+        if (TranslateAnimArc(sprite))
         {
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;

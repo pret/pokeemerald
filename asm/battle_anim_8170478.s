@@ -1487,7 +1487,7 @@ sub_8171134: @ 8171134
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _081711D2
@@ -2671,7 +2671,7 @@ sub_8171AAC: @ 8171AAC
 	orrs r0, r1
 	strb r0, [r3]
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _08171ADC
@@ -5652,7 +5652,7 @@ _081733C0:
 sub_81733D4: @ 81733D4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _081733F6

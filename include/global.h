@@ -92,13 +92,29 @@ extern u8 gStringVar4[];
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
+// Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
+// In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
+// In Gen 4 only, migrated Pokemon with Diamond, Pearl, or Platinum's ID show as "----------".
+// Gen 5 and up read Diamond, Pearl, or Platinum's ID as "Sinnoh".
+// In Gen 4 and up, migrated Pokemon with HeartGold or SoulSilver's ID show the unused "Johto" string.
 enum
 {
+    VERSION_INVALID_0 = 0,
     VERSION_SAPPHIRE = 1,
     VERSION_RUBY = 2,
     VERSION_EMERALD = 3,
     VERSION_FIRE_RED = 4,
     VERSION_LEAF_GREEN = 5,
+    VERSION_INVALID_6 = 6,
+    VERSION_HEART_GOLD = 7,
+    VERSION_SOUL_SILVER = 8,
+    VERSION_INVALID_9 = 9,
+    VERSION_DIAMOND = 10,
+    VERSION_PEARL = 11,
+    VERSION_PLATINUM = 12,
+    VERSION_INVALID_13 = 13,
+    VERSION_INVALID_14 = 14,
+    VERSION_GAMECUBE = 15,
 };
 
 enum LanguageId

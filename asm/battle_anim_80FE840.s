@@ -183,7 +183,7 @@ sub_80FE988: @ 80FE988
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldrh r0, [r6, 0x6]
 	strh r0, [r4, 0x38]
 	ldr r1, =sub_80FE9E4
@@ -200,7 +200,7 @@ sub_80FE988: @ 80FE988
 sub_80FE9E4: @ 80FE9E4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FE9FA
@@ -350,7 +350,7 @@ sub_80FEAD8: @ 80FEAD8
 sub_80FEB28: @ 80FEB28
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FEB3C
@@ -541,7 +541,7 @@ _080FEC68:
 sub_80FECB8: @ 80FECB8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FECE2
@@ -781,7 +781,7 @@ sub_80FEE78: @ 80FEE78
 	adds r0, r5
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	movs r0, 0x40
 	strh r0, [r4, 0x38]
 	ldr r1, =sub_80FEECC
@@ -798,7 +798,7 @@ sub_80FEE78: @ 80FEE78
 sub_80FEECC: @ 80FEECC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FEF38
@@ -878,7 +878,7 @@ sub_80FEF44: @ 80FEF44
 	adds r0, r5
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	movs r0, 0x40
 	strh r0, [r4, 0x38]
 	ldr r1, =sub_80FEF98
@@ -895,7 +895,7 @@ sub_80FEF44: @ 80FEF44
 sub_80FEF98: @ 80FEF98
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FEFF0
@@ -1124,7 +1124,7 @@ _080FF154:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldrh r0, [r6, 0x4]
 	ldrh r1, [r5, 0x32]
 	adds r0, r1
@@ -1175,7 +1175,7 @@ sub_80FF1C0: @ 80FF1C0
 	movs r0, 0x1
 	strh r0, [r6, 0x2E]
 	adds r0, r6, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	ldrh r0, [r6, 0x3C]
 	strh r5, [r6, 0x2E]
 	lsls r4, 16
@@ -1272,7 +1272,7 @@ sub_80FF268: @ 80FF268
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _080FF28A:
 	ldrh r0, [r4, 0x22]
 	adds r0, 0x20
@@ -3161,7 +3161,7 @@ _08100180:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _08100196
@@ -3190,7 +3190,7 @@ _081001B4:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _081001CA
@@ -3219,7 +3219,7 @@ _081001E6:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _081001FC
@@ -3272,7 +3272,7 @@ _08100254:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810026A
@@ -3403,7 +3403,7 @@ _08100362:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _08100378
@@ -3514,7 +3514,7 @@ _08100448:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _081004FC
@@ -3566,7 +3566,7 @@ _081004B6:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _081004FC
@@ -4152,7 +4152,7 @@ _08100918:
 	subs r1, r5
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	lsrs r4, r0, 16
 	bl IsContest
@@ -4869,7 +4869,7 @@ _08100F06:
 	ldr r6, =gBattleAnimAttacker
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -4878,7 +4878,7 @@ _08100F06:
 	strh r0, [r5, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x1
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x2]
@@ -5451,7 +5451,7 @@ _0810137A:
 	adds r3, r5, 0
 	adds r3, 0x22
 	adds r0, r6, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	adds r0, r5, 0
@@ -9082,7 +9082,7 @@ _08103074:
 	subs r0, 0x28
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x38]
 	ldr r0, =sub_81030B0
@@ -9097,7 +9097,7 @@ _08103074:
 sub_81030B0: @ 81030B0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _08103100
@@ -10172,7 +10172,7 @@ _0810390E:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xF0
 	lsls r1, 24
@@ -10754,7 +10754,7 @@ _08103DB6:
 	movs r1, 0
 	mov r2, sp
 	mov r3, r10
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	b _08103E42
 	.pool
 _08103E20:
@@ -11093,7 +11093,7 @@ _081040CC:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24
@@ -11528,7 +11528,7 @@ _08104448:
 	adds r0, r6
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldrh r0, [r7]
 	strh r0, [r5, 0x38]
 	ldrh r0, [r5, 0x2E]
@@ -11548,7 +11548,7 @@ _08104448:
 sub_81044BC: @ 81044BC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _08104520
@@ -11659,7 +11659,7 @@ _0810458A:
 sub_8104594: @ 8104594
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _081045A8
@@ -12761,7 +12761,7 @@ sub_8104E74: @ 8104E74
 	adds r5, r1, r0
 	ldr r4, =gBattleAnimTarget
 	ldrb r0, [r4]
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x20
@@ -12969,7 +12969,7 @@ sub_810501C: @ 810501C
 	movs r5, 0
 	strh r0, [r4, 0x20]
 	ldrb r0, [r6]
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -13220,7 +13220,7 @@ _081051F2:
 	adds r1, r4, 0
 	mov r2, sp
 	adds r3, r7, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	cmp r4, 0
 	bne _08105230
 	adds r0, r5, 0
@@ -13271,7 +13271,7 @@ _0810526A:
 sub_8105284: @ 8105284
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810529E
@@ -13466,7 +13466,7 @@ _081053FA:
 	mov r2, sp
 	mov r3, sp
 	adds r3, 0x2
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	b _0810546C
 	.pool
 _0810544C:
@@ -13526,7 +13526,7 @@ _0810549E:
 	ldrh r0, [r2]
 	strh r0, [r5, 0x2E]
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r1, =sub_8105284
 	str r1, [r5, 0x1C]
 	adds r0, r5, 0
@@ -15088,7 +15088,7 @@ sub_8106140: @ 8106140
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r0, =sub_810618C
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -15101,7 +15101,7 @@ sub_8106140: @ 8106140
 sub_810618C: @ 810618C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _081061B6
@@ -17006,7 +17006,7 @@ sub_81070AC: @ 81070AC
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldrh r0, [r5, 0x22]
 	adds r0, 0x28
 	strh r0, [r5, 0x22]
@@ -17269,7 +17269,7 @@ _081072D8:
 	lsrs r0, 24
 	strh r0, [r6, 0x36]
 	adds r0, r6, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
 	adds r4, r0, 0
@@ -17339,7 +17339,7 @@ sub_8107380: @ 8107380
 	movs r0, 0x1
 	strh r0, [r5, 0x2E]
 	adds r0, r5, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	mov r1, r8
 	lsrs r6, r1, 8
 	movs r0, 0x2E
@@ -17464,7 +17464,7 @@ _08107482:
 	adds r0, r7
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r0, =sub_81074E4
 	str r0, [r5, 0x1C]
 	adds r2, r5, 0
@@ -17502,7 +17502,7 @@ sub_81074E4: @ 81074E4
 	strb r0, [r2]
 _08107506:
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _08107518
@@ -17637,7 +17637,7 @@ sub_81075EC: @ 81075EC
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	movs r0, 0x2E
 	ldrsh r1, [r5, r0]
 	movs r0, 0xD2
@@ -17678,7 +17678,7 @@ _08107660:
 sub_8107674: @ 8107674
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _08107688
@@ -20234,7 +20234,7 @@ _08108B1A:
 sub_8108B2C: @ 8108B2C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _08108B86
@@ -20283,7 +20283,7 @@ _08108B86:
 sub_8108B94: @ 8108B94
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _08108BD0
@@ -21144,7 +21144,7 @@ sub_8109244: @ 8109244
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r0, =sub_810929C
 	str r0, [r5, 0x1C]
 _0810928E:
@@ -21158,7 +21158,7 @@ _0810928E:
 sub_810929C: @ 810929C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _081092E4
@@ -22386,7 +22386,7 @@ _08109C3E:
 sub_8109C4C: @ 8109C4C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _08109CA4
@@ -23433,7 +23433,7 @@ sub_810A46C: @ 810A46C
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldrh r0, [r5, 0x4]
 	strh r0, [r4, 0x38]
 	ldrh r0, [r5, 0xA]
@@ -23468,7 +23468,7 @@ sub_810A46C: @ 810A46C
 sub_810A4F4: @ 810A4F4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810A55E
@@ -24336,7 +24336,7 @@ sub_810AB78: @ 810AB78
 	strh r0, [r4, 0x36]
 	strh r6, [r4, 0x38]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r1, =sub_810ACC0
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
@@ -24394,7 +24394,7 @@ _0810AC86:
 sub_810AC8C: @ 810AC8C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810ACB4
@@ -26048,7 +26048,7 @@ _0810B990:
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -26155,7 +26155,7 @@ _0810BA74:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _0810BA86:
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
@@ -26454,7 +26454,7 @@ _0810BCE0:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _0810BCF2:
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
@@ -26652,7 +26652,7 @@ _0810BE6C:
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -26719,7 +26719,7 @@ _0810BEF4:
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -26762,7 +26762,7 @@ _0810BF52:
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -26828,7 +26828,7 @@ _0810BFCC:
 	adds r0, r1
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	movs r0, 0x40
 	strh r0, [r5, 0x38]
 	ldr r1, =sub_810C008
@@ -26845,7 +26845,7 @@ _0810BFCC:
 sub_810C008: @ 810C008
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810C092
@@ -27192,7 +27192,7 @@ sub_810C2F0: @ 810C2F0
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r0, =sub_80A7820
+	ldr r0, =TranslateAnimSpriteToTargetMonLocation
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -27608,7 +27608,7 @@ _0810C684:
 	strb r0, [r1]
 _0810C6B8:
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r0, =sub_810C6D4
 	str r0, [r5, 0x1C]
 	pop {r3}
@@ -27642,7 +27642,7 @@ _0810C6F4:
 	b _0810C90C
 _0810C6F6:
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	ldr r1, =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
@@ -27731,12 +27731,12 @@ _0810C78E:
 	ands r0, r1
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	b _0810C90C
 	.pool
 _0810C7BC:
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	ldr r1, =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
@@ -27872,7 +27872,7 @@ _0810C8B6:
 	.pool
 _0810C8D0:
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810C90C
@@ -28414,7 +28414,7 @@ _0810CCCE:
 sub_810CD1C: @ 810CD1C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810CD3E
@@ -29021,7 +29021,7 @@ _0810D1FE:
 	strh r0, [r6, 0x34]
 	strh r0, [r6, 0x36]
 	adds r0, r6, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldrh r0, [r4, 0xA]
 	strh r0, [r6, 0x38]
 	ldrh r0, [r4, 0x8]
@@ -29039,7 +29039,7 @@ _0810D1FE:
 sub_810D240: @ 810D240
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810D26C
@@ -29616,7 +29616,7 @@ sub_810D6A8: @ 810D6A8
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
@@ -29892,7 +29892,7 @@ _0810D918:
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r1, =DestroyAnimSprite
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
@@ -30234,7 +30234,7 @@ _0810DBC2:
 sub_810DC10: @ 810DC10
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810DC24
@@ -30270,7 +30270,7 @@ _0810DC44:
 	movs r1, 0x1
 	mov r2, sp
 	adds r3, r6, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -30309,7 +30309,7 @@ _0810DC72:
 sub_810DCB4: @ 810DCB4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810DCC8
@@ -30396,7 +30396,7 @@ sub_810DD50: @ 810DD50
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -30457,7 +30457,7 @@ _0810DDE0:
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -30716,7 +30716,7 @@ _0810DFC8:
 	adds r0, r4
 	strh r0, [r6, 0x36]
 	adds r0, r6, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r0, =sub_80A67BC
 	str r0, [r6, 0x1C]
 	ldr r1, =sub_810E028
@@ -30732,7 +30732,7 @@ _0810DFC8:
 sub_810E028: @ 810E028
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810E03C
@@ -30828,7 +30828,7 @@ _0810E0EC:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _0810E0FE:
 	ldr r4, =gBattleAnimArgs
 	ldrh r0, [r4, 0x4]
@@ -30971,7 +30971,7 @@ _0810E1FE:
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r0, =sub_810E24C
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -30987,7 +30987,7 @@ sub_810E24C: @ 810E24C
 	movs r0, 0x1
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	ldrh r1, [r4, 0x34]
 	lsrs r0, r1, 8
 	cmp r0, 0xC8
@@ -32074,7 +32074,7 @@ sub_810EA4C: @ 810EA4C
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r0, =sub_80A7820
+	ldr r0, =TranslateAnimSpriteToTargetMonLocation
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -32913,7 +32913,7 @@ sub_810F084: @ 810F084
 	asrs r5, 16
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24
@@ -34508,7 +34508,7 @@ _0810FDE8:
 sub_810FDF0: @ 810FDF0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810FE0E
@@ -34537,7 +34537,7 @@ sub_810FE14: @ 810FE14
 	adds r4, r1, r0
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r0, r1, 0
@@ -35235,7 +35235,7 @@ _081103C4:
 	ldr r5, =gBattleAnimTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -35244,7 +35244,7 @@ _081103C4:
 	strh r0, [r6, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x2]
@@ -35314,7 +35314,7 @@ _08110478:
 	ldr r5, =gBattleAnimTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -35323,7 +35323,7 @@ _08110478:
 	strh r0, [r6, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x2]
@@ -35407,7 +35407,7 @@ _08110548:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _0811055A:
 	adds r0, r5, 0
 	bl sub_80A6FD4
@@ -35426,7 +35426,7 @@ _0811055A:
 sub_811057C: @ 811057C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _08110592
@@ -35464,7 +35464,7 @@ sub_81105B4: @ 81105B4
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -35745,7 +35745,7 @@ _081107B2:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24
@@ -35844,7 +35844,7 @@ sub_81108CC: @ 81108CC
 	ands r1, r0
 	strb r1, [r2]
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _081108F8
@@ -35879,7 +35879,7 @@ _0811090E:
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _08110988
@@ -35899,7 +35899,7 @@ _0811090E:
 	subs r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24
@@ -35987,7 +35987,7 @@ sub_81109F0: @ 81109F0
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 _08110A10:
 	ldrh r0, [r6]
 	ldrh r1, [r5, 0x20]
@@ -37059,7 +37059,7 @@ _08111304:
 sub_811131C: @ 811131C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811134E
@@ -37205,7 +37205,7 @@ sub_8111418: @ 8111418
 	bl StartSpriteAffineAnim
 _08111434:
 	adds r0, r4, 0
-	bl sub_80A7820
+	bl TranslateAnimSpriteToTargetMonLocation
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -37483,7 +37483,7 @@ sub_8111674: @ 8111674
 	adds r4, r0, 0
 	bl sub_8111764
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _08111694
@@ -37541,7 +37541,7 @@ sub_81116E8: @ 81116E8
 	movs r0, 0x1
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xA
@@ -40203,7 +40203,7 @@ sub_8112C6C: @ 8112C6C
 	lsrs r0, 24
 	strh r0, [r4, 0x1A]
 	ldrb r0, [r5]
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -41135,7 +41135,7 @@ _0811342A:
 	strb r5, [r0, 0x9]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -42031,7 +42031,7 @@ _08113B60:
 sub_8113B90: @ 8113B90
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _08113BA4
@@ -43699,7 +43699,7 @@ sub_8114994: @ 8114994
 sub_81149FC: @ 81149FC
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _08114A50
@@ -43746,7 +43746,7 @@ _08114A50:
 sub_8114A60: @ 8114A60
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _08114A74
@@ -43817,13 +43817,13 @@ sub_8114AF0: @ 8114AF0
 	ldr r4, =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A60AC
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r7, r0, 24
 	bl Random2
@@ -44120,7 +44120,7 @@ _08114D78:
 	strh r0, [r4, 0x22]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -44460,7 +44460,7 @@ _08115046:
 	strh r0, [r4, 0x20]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -44663,7 +44663,7 @@ _081151DA:
 	adds r0, r6
 	strh r0, [r5, 0x20]
 	adds r0, r4, 0
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1E
@@ -44693,7 +44693,7 @@ _081151DA:
 sub_8115228: @ 8115228
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811523C
@@ -44735,7 +44735,7 @@ _08115262:
 	adds r0, r1
 	strh r0, [r6, 0x20]
 	adds r0, r5, 0
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x20
@@ -50366,8 +50366,8 @@ _08118132:
 	.pool
 	thumb_func_end SetAnimBgAttribute
 
-	thumb_func_start sub_8118140
-sub_8118140: @ 8118140
+	thumb_func_start GetAnimBgAttribute
+GetAnimBgAttribute: @ 8118140
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -50441,7 +50441,7 @@ _081181CA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8118140
+	thumb_func_end GetAnimBgAttribute
 
 	thumb_func_start HandleIntroSlide
 HandleIntroSlide: @ 81181D4

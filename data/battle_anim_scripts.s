@@ -7248,7 +7248,7 @@ Move_WING_ATTACK:
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
 	loopsewithpan SE_W017, -64, 20, 2
-	createvisualtask sub_80D5738, 2, 0, 12, 4, 1, 4
+	createvisualtask AnimTask_TranslateMonElliptical, 2, 0, 12, 4, 1, 4
 	createvisualtask sub_810DED8, 5, 1, 70
 	createsprite gBattleAnimSpriteTemplate_85962A4, 2, -25, 0, 0, 0, 20
 	createsprite gBattleAnimSpriteTemplate_85962A4, 2, 25, 0, 0, 0, 20
@@ -7776,8 +7776,8 @@ Move_SUBMISSION:
 	waitplaysewithpan SE_W004, +63, 70
 	waitplaysewithpan SE_W104, -64, 80
 	waitplaysewithpan SE_W004, +63, 0x5A
-	createvisualtask sub_80D5738, 2, 0, -18, 6, 6, 4
-	createvisualtask sub_80D5738, 2, 1, 18, 6, 6, 4
+	createvisualtask AnimTask_TranslateMonElliptical, 2, 0, -18, 6, 6, 4
+	createvisualtask AnimTask_TranslateMonElliptical, 2, 1, 18, 6, 6, 4
 	call Submission1
 	call Submission1
 	call Submission1
@@ -8301,7 +8301,7 @@ Move_STEEL_WING:
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
 	loopsewithpan SE_W017, -64, 20, 2
-	createvisualtask sub_80D5738, 2, 0, 12, 4, 1, 4
+	createvisualtask AnimTask_TranslateMonElliptical, 2, 0, 12, 4, 1, 4
 	createvisualtask sub_810DED8, 5, 1, 70
 	createsprite gBattleAnimSpriteTemplate_85962A4, 2, -25, 0, 0, 0, 20
 	createsprite gBattleAnimSpriteTemplate_85962A4, 2, 25, 0, 0, 0, 20
