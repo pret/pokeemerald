@@ -39,7 +39,7 @@ extern bool8 gAnimScriptActive;
 extern u8 gAnimVisualTaskCount;
 extern u8 gAnimSoundTaskCount;
 extern struct DisableStruct *gAnimDisableStructPtr;
-extern u32 gAnimMoveDmg;
+extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
@@ -80,6 +80,13 @@ void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
 u8 sub_80A82E4(u8 battlerId);
 bool8 TranslateAnimArc(struct Sprite *sprite);
+void sub_80A6630(struct Sprite *sprite);
+void sub_80A6680(struct Sprite *sprite);
+void sub_80A7344(u8 spriteId);
+void obj_id_set_rotscale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
+void sub_80A6E14(struct Sprite *sprite);
+void sub_80A7270(u8 spriteId, u8 objMode);
+void sub_80A73A0(u8 spriteId);
 
 enum
 {

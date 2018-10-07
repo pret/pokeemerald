@@ -38,7 +38,6 @@ extern const union AffineAnimCmd *gUnknown_082FF6C0[];
 void sub_80A64EC(struct Sprite *sprite);
 void sub_80A653C(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);
-void sub_80A6E14(struct Sprite *sprite);
 void sub_80A6FB4(struct Sprite *sprite);
 void sub_80A6F98(struct Sprite *sprite);
 void sub_80A7144(struct Sprite *sprite);

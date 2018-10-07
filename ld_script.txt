@@ -134,7 +134,7 @@ SECTIONS {
         src/mail_data.o(.text);
         src/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
-        asm/battle_anim_80D51AC.o(.text);
+        src/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
         src/contest.o(.text);
         asm/contest.o(.text);

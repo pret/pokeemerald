@@ -19,10 +19,10 @@ struct CompressedTilesPal
     const u8 *pal;
 };
 
-extern void sub_80D5860(struct Sprite *sprite);
-extern void sub_80D58F8(struct Sprite *sprite);
-extern void sub_80D5968(struct Sprite *sprite);
-extern void sub_80D5A94(struct Sprite *sprite);
+extern void DoHorizontalLunge(struct Sprite *sprite);
+extern void DoVerticalDip(struct Sprite *sprite);
+extern void SlideMonToOriginalPos(struct Sprite *sprite);
+extern void SlideMonToOffset(struct Sprite *sprite);
 extern void sub_80D5B48(struct Sprite *sprite);
 
 // this file's functions
@@ -422,7 +422,7 @@ const struct SpriteTemplate gHorizontalLungeSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D5860,
+    .callback = DoHorizontalLunge,
 };
 
 const struct SpriteTemplate gVerticalDipSpriteTemplate =
@@ -433,7 +433,7 @@ const struct SpriteTemplate gVerticalDipSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D58F8,
+    .callback = DoVerticalDip,
 };
 
 const struct SpriteTemplate gSlideMonToOriginalPosSpriteTemplate =
@@ -444,7 +444,7 @@ const struct SpriteTemplate gSlideMonToOriginalPosSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D5968,
+    .callback = SlideMonToOriginalPos,
 };
 
 const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
@@ -455,7 +455,7 @@ const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D5A94,
+    .callback = SlideMonToOffset,
 };
 
 const struct SpriteTemplate gUnknown_0857FE88 =
