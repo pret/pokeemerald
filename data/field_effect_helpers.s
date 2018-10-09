@@ -2,15 +2,8 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-
-gUnknown_085CDC38:: @ 85CDC38
-	.2byte 12, 28, 44
-
-gUnknown_085CDC3E:: @ 85CDC3E
-	.byte 0x00, 0x01, 0x02, 0x03
-
-gUnknown_085CDC42:: @ 85CDC42
-	.2byte 0x0004, 0x0004, 0x0004, 0x0010, 0x0000
+    
+    .align 2
 
 gUnknown_085CDC4C:: @ 85CDC4C
 	.4byte sub_8154C7C

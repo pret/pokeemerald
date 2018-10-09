@@ -80,6 +80,7 @@ struct LockedAnimEventObjects
 };
 
 extern const struct SpriteFrameImage gEventObjectPicTable_PechaBerryTree[];
+extern const u8 gReflectionEffectPaletteMap[];
 
 void sub_808D438(void);
 u8 GetMoveDirectionAnimNum(u8);
@@ -189,6 +190,8 @@ u8 GetMoveDirectionFasterAnimNum(u8);
 u8 GetMoveDirectionFastestAnimNum(u8);
 u8 GetLedgeJumpDirection(s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8 objectId);
+u16 GetObjectPaletteTag(u8 palSlot);
+void UpdateEventObjectSpriteVisibility(struct Sprite *sprite, bool8 invisible);
 
 void MovementType_None(struct Sprite *);
 void MovementType_LookAround(struct Sprite *);
@@ -249,6 +252,7 @@ u8 GetSlideMovementAction(u32);
 u8 GetJumpInPlaceMovementAction(u32);
 u8 GetJumpMovementAction(u32);
 u8 GetJump2MovementAction(u32);
+u8 CreateCopySpriteAt(struct Sprite *sprite, s16 x, s16 y, u8 subpriority);
 
 u8 MovementType_WanderAround_Step0(struct EventObject *, struct Sprite *);
 u8 MovementType_WanderAround_Step1(struct EventObject *, struct Sprite *);
