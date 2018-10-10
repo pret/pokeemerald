@@ -882,5 +882,8 @@ $(MID_SUBDIR)/se_fuusen1.s: %.s: %.mid
 $(MID_SUBDIR)/se_fuusen2.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V105 -P4
 
+$(MID_SUBDIR)/se_fuusen3.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V105 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5

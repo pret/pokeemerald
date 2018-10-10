@@ -640,7 +640,7 @@ SECTIONS {
         sound/songs/se_pinpon.o(.rodata);
         sound/songs/midi/se_fuusen1.o(.rodata);
         sound/songs/midi/se_fuusen2.o(.rodata);
-        sound/songs/se_fuusen3.o(.rodata);
+        sound/songs/midi/se_fuusen3.o(.rodata);
         sound/songs/se_toy_kabe.o(.rodata);
         sound/songs/se_toy_dango.o(.rodata);
         sound/songs/midi/se_doku.o(.rodata);
