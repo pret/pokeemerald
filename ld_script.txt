@@ -592,7 +592,7 @@ SECTIONS {
         sound/songs/midi/se_a.o(.rodata);
         sound/songs/se_i.o(.rodata);
         sound/songs/se_u.o(.rodata);
-        sound/songs/se_e.o(.rodata);
+        sound/songs/midi/se_e.o(.rodata);
         sound/songs/se_o.o(.rodata);
         sound/songs/se_n.o(.rodata);
         sound/songs/se_seikai.o(.rodata);
