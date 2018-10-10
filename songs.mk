@@ -828,5 +828,8 @@ $(MID_SUBDIR)/se_c_pikon.s: %.s: %.mid
 $(MID_SUBDIR)/se_c_syu.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V090 -P5
 
+$(MID_SUBDIR)/se_card.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
