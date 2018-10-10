@@ -601,7 +601,7 @@ SECTIONS {
         sound/songs/se_jite_pyoko.o(.rodata);
         sound/songs/se_mu_pachi.o(.rodata);
         sound/songs/se_tk_kasya.o(.rodata);
-        sound/songs/se_fu_zaku.o(.rodata);
+        sound/songs/midi/se_fu_zaku.o(.rodata);
         sound/songs/se_fu_zaku2.o(.rodata);
         sound/songs/se_fu_zuzuzu.o(.rodata);
         sound/songs/se_ru_gashin.o(.rodata);

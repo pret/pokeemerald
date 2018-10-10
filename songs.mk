@@ -867,5 +867,8 @@ $(MID_SUBDIR)/se_exp.s: %.s: %.mid
 $(MID_SUBDIR)/se_expmax.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V094 -P5
 
+$(MID_SUBDIR)/se_fu_zaku.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V120 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
