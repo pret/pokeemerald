@@ -888,5 +888,8 @@ $(MID_SUBDIR)/se_fuusen3.s: %.s: %.mid
 $(MID_SUBDIR)/se_hantei1.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
 
+$(MID_SUBDIR)/se_hantei2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5

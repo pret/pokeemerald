@@ -830,7 +830,7 @@ SECTIONS {
         sound/songs/se_toreeye.o(.rodata);
         sound/songs/se_toreoff.o(.rodata);
         sound/songs/midi/se_hantei1.o(.rodata);
-        sound/songs/se_hantei2.o(.rodata);
+        sound/songs/midi/se_hantei2.o(.rodata);
         sound/songs/midi/se_curtain.o(.rodata);
         sound/songs/midi/se_curtain1.o(.rodata);
         sound/songs/se_ussoki.o(.rodata);
