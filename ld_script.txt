@@ -662,7 +662,7 @@ SECTIONS {
         sound/songs/se_regi.o(.rodata);
         sound/songs/midi/se_c_gaji.o(.rodata);
         sound/songs/se_c_maku_u.o(.rodata);
-        sound/songs/se_c_maku_d.o(.rodata);
+        sound/songs/midi/se_c_maku_d.o(.rodata);
         sound/songs/se_c_pasi.o(.rodata);
         sound/songs/se_c_syu.o(.rodata);
         sound/songs/se_c_pikon.o(.rodata);
