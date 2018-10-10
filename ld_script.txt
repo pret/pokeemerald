@@ -622,7 +622,7 @@ SECTIONS {
         sound/songs/se_save.o(.rodata);
         sound/songs/midi/se_kon.o(.rodata);
         sound/songs/midi/se_kon2.o(.rodata);
-        sound/songs/se_kon3.o(.rodata);
+        sound/songs/midi/se_kon3.o(.rodata);
         sound/songs/se_kon4.o(.rodata);
         sound/songs/se_suikomu.o(.rodata);
         sound/songs/se_nageru.o(.rodata);
