@@ -95,7 +95,7 @@ gSongTable:: @ 86B49F0
 	song se_expmax, 1, 1            @ Exp. Max
 	song se_tamakoro, 2, 2          @ Roulette Ball
 	song se_tamakoro_e, 2, 2        @ Roulette Ball 2
-	song se_basabasa, 1, 1
+	song se_basabasa, 1, 1          @ Wing Attack
 	song se_regi, 1, 1              @ Cash Register
 	song se_c_gaji, 1, 1            @ Contest Hearts
 	song se_c_maku_u, 1, 1          @ Contest Curtain rise
