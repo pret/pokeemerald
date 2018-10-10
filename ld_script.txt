@@ -576,7 +576,7 @@ SECTIONS {
         sound/songs/midi/se_kaidan.o(.rodata);
         sound/songs/midi/se_dansa.o(.rodata);
         sound/songs/midi/se_jitensya.o(.rodata);
-        sound/songs/se_kouka_l.o(.rodata);
+        sound/songs/midi/se_kouka_l.o(.rodata);
         sound/songs/se_kouka_m.o(.rodata);
         sound/songs/midi/se_kouka_h.o(.rodata);
         sound/songs/midi/se_bowa2.o(.rodata);
