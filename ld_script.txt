@@ -589,7 +589,7 @@ SECTIONS {
         sound/songs/se_boo.o(.rodata);
         sound/songs/se_bowa.o(.rodata);
         sound/songs/se_jyuni.o(.rodata);
-        sound/songs/se_a.o(.rodata);
+        sound/songs/midi/se_a.o(.rodata);
         sound/songs/se_i.o(.rodata);
         sound/songs/se_u.o(.rodata);
         sound/songs/se_e.o(.rodata);
