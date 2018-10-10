@@ -789,5 +789,8 @@ $(MID_SUBDIR)/ph_trap_solo.s: %.s: %.mid
 $(MID_SUBDIR)/se_a.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V095 -P4
 
+$(MID_SUBDIR)/se_ban.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
