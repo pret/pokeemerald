@@ -596,7 +596,7 @@ SECTIONS {
         sound/songs/se_o.o(.rodata);
         sound/songs/se_n.o(.rodata);
         sound/songs/se_seikai.o(.rodata);
-        sound/songs/se_hazure.o(.rodata);
+        sound/songs/midi/se_hazure.o(.rodata);
         sound/songs/midi/se_exp.o(.rodata);
         sound/songs/se_jite_pyoko.o(.rodata);
         sound/songs/se_mu_pachi.o(.rodata);
