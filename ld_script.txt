@@ -635,7 +635,7 @@ SECTIONS {
         sound/songs/se_toy_b.o(.rodata);
         sound/songs/se_toy_c1.o(.rodata);
         sound/songs/se_mizu.o(.rodata);
-        sound/songs/se_hashi.o(.rodata);
+        sound/songs/midi/se_hashi.o(.rodata);
         sound/songs/midi/se_daugi.o(.rodata);
         sound/songs/se_pinpon.o(.rodata);
         sound/songs/midi/se_fuusen1.o(.rodata);

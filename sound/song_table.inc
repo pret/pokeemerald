@@ -72,7 +72,7 @@ gSongTable:: @ 86B49F0
 	song se_toy_b, 2, 2             @ Note B
 	song se_toy_c1, 2, 2            @ Note High C
 	song se_mizu, 2, 2              @ Puddle
-	song se_hashi, 2, 2             @ Boardwalk
+	song se_hashi, 2, 2             @ Fortree Walkways
 	song se_daugi, 1, 1             @ Slots - Credits
 	song se_pinpon, 1, 1            @ Ding-dong!
 	song se_fuusen1, 2, 2           @ Red Balloon
