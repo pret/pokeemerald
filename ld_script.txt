@@ -578,7 +578,7 @@ SECTIONS {
         sound/songs/midi/se_jitensya.o(.rodata);
         sound/songs/se_kouka_l.o(.rodata);
         sound/songs/se_kouka_m.o(.rodata);
-        sound/songs/se_kouka_h.o(.rodata);
+        sound/songs/midi/se_kouka_h.o(.rodata);
         sound/songs/midi/se_bowa2.o(.rodata);
         sound/songs/se_poke_dead.o(.rodata);
         sound/songs/se_nigeru.o(.rodata);
