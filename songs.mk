@@ -801,5 +801,8 @@ $(MID_SUBDIR)/se_bidoro.s: %.s: %.mid
 $(MID_SUBDIR)/se_boo.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V110 -P4
 
+$(MID_SUBDIR)/se_bowa.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V070 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
