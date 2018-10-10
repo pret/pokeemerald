@@ -681,7 +681,7 @@ SECTIONS {
         sound/songs/se_tb_start.o(.rodata);
         sound/songs/se_tb_kon.o(.rodata);
         sound/songs/se_tb_kara.o(.rodata);
-        sound/songs/se_bidoro.o(.rodata);
+        sound/songs/midi/se_bidoro.o(.rodata);
         sound/songs/se_w085.o(.rodata);
         sound/songs/se_w085b.o(.rodata);
         sound/songs/se_w231.o(.rodata);
