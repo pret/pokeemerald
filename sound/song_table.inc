@@ -266,8 +266,8 @@ gSongTable:: @ 86B49F0
 	song se_rg_nawamiss, 1, 1
 	song se_toreeye, 1, 1           @ Trainer's Eye Call
 	song se_toreoff, 1, 1           @ Trainer's Eye Hang Up
-	song se_hantei1, 1, 1           @ Battle Arena Time's Up 1
-	song se_hantei2, 1, 1           @ Battle Arena Time's Up 2
+	song se_hantei1, 1, 1           @ Battle Arena - Judgment 1
+	song se_hantei2, 1, 1           @ Battle Arena - Judgment 2
 	song se_curtain, 1, 1           @ Battle Pike - Curtain Opens
 	song se_curtain1, 1, 1          @ Battle Pike - Curtain Closes
 	song se_ussoki, 1, 1            @ Sudowoodo
