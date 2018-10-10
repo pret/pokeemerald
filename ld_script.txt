@@ -643,7 +643,7 @@ SECTIONS {
         sound/songs/se_fuusen3.o(.rodata);
         sound/songs/se_toy_kabe.o(.rodata);
         sound/songs/se_toy_dango.o(.rodata);
-        sound/songs/se_doku.o(.rodata);
+        sound/songs/midi/se_doku.o(.rodata);
         sound/songs/se_esuka.o(.rodata);
         sound/songs/se_t_ame.o(.rodata);
         sound/songs/se_t_ame_e.o(.rodata);

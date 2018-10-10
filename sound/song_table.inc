@@ -80,7 +80,7 @@ gSongTable:: @ 86B49F0
 	song se_fuusen3, 2, 2           @ Yellow Balloon
 	song se_toy_kabe, 2, 2          @ Breakable Door
 	song se_toy_dango, 2, 2         @ Mud Ball
-	song se_doku, 1, 1              @ Overworld Poison Damage
+	song se_doku, 1, 1              @ Overworld - Poison Damage
 	song se_esuka, 1, 1             @ Escalator
 	song se_t_ame, 3, 3             @ Rain
 	song se_t_ame_e, 3, 3           @ Rain Stop
