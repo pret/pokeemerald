@@ -98,9 +98,9 @@ gSongTable:: @ 86B49F0
 	song se_basabasa, 1, 1          @ Wing Attack
 	song se_regi, 1, 1              @ Cash Register
 	song se_c_gaji, 1, 1            @ Contest Hearts
-	song se_c_maku_u, 1, 1          @ Contest Curtain rise
-	song se_c_maku_d, 1, 1          @ Contest Curtain fall
-	song se_c_pasi, 1, 1
+	song se_c_maku_u, 1, 1          @ Contest Curtain Rises
+	song se_c_maku_d, 1, 1          @ Contest Curtain Falls
+	song se_c_pasi, 1, 1            @ Contest Inflict Status
 	song se_c_syu, 1, 1
 	song se_c_pikon, 1, 1           @ Pokémon Appears in Contest
 	song se_reapoke, 1, 1           @ Shiny Pokémon

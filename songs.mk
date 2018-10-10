@@ -819,5 +819,8 @@ $(MID_SUBDIR)/se_c_maku_d.s: %.s: %.mid
 $(MID_SUBDIR)/se_c_maku_u.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V070 -P5
 
+$(MID_SUBDIR)/se_c_pasi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P5
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
