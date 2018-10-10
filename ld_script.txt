@@ -664,7 +664,7 @@ SECTIONS {
         sound/songs/midi/se_c_maku_u.o(.rodata);
         sound/songs/midi/se_c_maku_d.o(.rodata);
         sound/songs/midi/se_c_pasi.o(.rodata);
-        sound/songs/se_c_syu.o(.rodata);
+        sound/songs/midi/se_c_syu.o(.rodata);
         sound/songs/midi/se_c_pikon.o(.rodata);
         sound/songs/se_reapoke.o(.rodata);
         sound/songs/se_op_basyu.o(.rodata);
