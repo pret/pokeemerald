@@ -837,5 +837,8 @@ $(MID_SUBDIR)/se_curtain.s: %.s: %.mid
 $(MID_SUBDIR)/se_curtain1.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
 
+$(MID_SUBDIR)/se_dansa.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
