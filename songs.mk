@@ -849,5 +849,8 @@ $(MID_SUBDIR)/se_dendou.s: %.s: %.mid
 $(MID_SUBDIR)/se_doku.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V110 -P5
 
+$(MID_SUBDIR)/se_door.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V080 -P5
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
