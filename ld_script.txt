@@ -573,7 +573,7 @@ SECTIONS {
         sound/songs/se_win_open.o(.rodata);
         sound/songs/se_wall_hit.o(.rodata);
         sound/songs/midi/se_door.o(.rodata);
-        sound/songs/se_kaidan.o(.rodata);
+        sound/songs/midi/se_kaidan.o(.rodata);
         sound/songs/midi/se_dansa.o(.rodata);
         sound/songs/midi/se_jitensya.o(.rodata);
         sound/songs/se_kouka_l.o(.rodata);
