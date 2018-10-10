@@ -586,7 +586,7 @@ SECTIONS {
         sound/songs/se_naminori.o(.rodata);
         sound/songs/midi/se_ban.o(.rodata);
         sound/songs/se_pin.o(.rodata);
-        sound/songs/se_boo.o(.rodata);
+        sound/songs/midi/se_boo.o(.rodata);
         sound/songs/se_bowa.o(.rodata);
         sound/songs/se_jyuni.o(.rodata);
         sound/songs/midi/se_a.o(.rodata);
