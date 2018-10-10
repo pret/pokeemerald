@@ -670,7 +670,7 @@ SECTIONS {
         sound/songs/se_op_basyu.o(.rodata);
         sound/songs/midi/se_bt_start.o(.rodata);
         sound/songs/midi/se_dendou.o(.rodata);
-        sound/songs/se_jihanki.o(.rodata);
+        sound/songs/midi/se_jihanki.o(.rodata);
         sound/songs/se_tama.o(.rodata);
         sound/songs/se_z_scroll.o(.rodata);
         sound/songs/se_z_page.o(.rodata);
