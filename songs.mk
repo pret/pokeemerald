@@ -873,5 +873,8 @@ $(MID_SUBDIR)/se_fu_zaku.s: %.s: %.mid
 $(MID_SUBDIR)/se_fu_zaku2.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V110 -P4
 
+$(MID_SUBDIR)/se_fu_zuzuzu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
