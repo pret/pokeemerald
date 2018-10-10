@@ -25,7 +25,7 @@ gSongTable:: @ 86B49F0
 	song se_pin, 1, 1               @ Exclamation Bubble
 	song se_boo, 1, 1               @ Contest Jam
 	song se_bowa, 1, 1              @ Giving Poké Ball to Nurse, Poké Ball Wiggle
-	song se_jyuni, 2, 2             @ Places in Contest Appearing
+	song se_jyuni, 2, 2             @ Contest - Rankings Revealed
 	song se_a, 1, 1                 @ Bard A
 	song se_i, 1, 1                 @ Bard I
 	song se_u, 1, 1                 @ Bard U
