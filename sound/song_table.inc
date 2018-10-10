@@ -97,12 +97,12 @@ gSongTable:: @ 86B49F0
 	song se_tamakoro_e, 2, 2        @ Roulette Ball 2
 	song se_basabasa, 1, 1          @ Wing Attack
 	song se_regi, 1, 1              @ Cash Register
-	song se_c_gaji, 1, 1            @ Contest Hearts
-	song se_c_maku_u, 1, 1          @ Contest Curtain Rises
-	song se_c_maku_d, 1, 1          @ Contest Curtain Falls
-	song se_c_pasi, 1, 1            @ Contest Inflict Status
+	song se_c_gaji, 1, 1            @ Contest - Hearts
+	song se_c_maku_u, 1, 1          @ Contest - Curtain Rises
+	song se_c_maku_d, 1, 1          @ Contest - Curtain Falls
+	song se_c_pasi, 1, 1            @ Contest - Inflict Status
 	song se_c_syu, 1, 1
-	song se_c_pikon, 1, 1           @ Pokémon Appears in Contest
+	song se_c_pikon, 1, 1           @ Contest - Pokémon Switches In
 	song se_reapoke, 1, 1           @ Shiny Pokémon
 	song se_op_basyu, 1, 1          @ Opening Movie -> Title Screen whoosh
 	song se_bt_start, 1, 1          @ Battle Mugshot whoosh
