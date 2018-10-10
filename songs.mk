@@ -927,5 +927,8 @@ $(MID_SUBDIR)/se_kaidan.s: %.s: %.mid
 $(MID_SUBDIR)/se_kaifuku.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
 
+$(MID_SUBDIR)/se_ki_gasyan.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V100 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
