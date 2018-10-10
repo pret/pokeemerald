@@ -40,7 +40,7 @@ gSongTable:: @ 86B49F0
 	song se_tk_kasya, 1, 1          @ Mossdeep Gym/Trick House Switch
 	song se_fu_zaku, 1, 1
 	song se_fu_zaku2, 1, 1
-	song se_fu_zuzuzu, 1, 1         @ Lavaridge Gym Warp
+	song se_fu_zuzuzu, 1, 1         @ Lavaridge Gym - Warp
 	song se_ru_gashin, 1, 1         @ Sootopolis Gym - Stairs Appear
 	song se_ru_gasyan, 1, 1         @ Sootopolis Gym - Ice Breaking
 	song se_ru_bari, 1, 1           @ Sootopolis Gym - Walking on Ice
@@ -49,7 +49,7 @@ gSongTable:: @ 86B49F0
 	song se_tk_warpin, 1, 1         @ Warp In
 	song se_tk_warpout, 1, 1        @ Warp Out
 	song se_tu_saa, 1, 1            @ Repel
-	song se_hi_turun, 1, 1          @ Moving Obstacle in Fortree Gym
+	song se_hi_turun, 1, 1          @ Fortree Gym - Obstacle
 	song se_track_move, 1, 1        @ Moving Truck
 	song se_track_stop, 1, 1        @ Moving Truck Stop
 	song se_track_haiki, 2, 2       @ Moving Truck Unload
