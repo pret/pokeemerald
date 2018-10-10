@@ -655,7 +655,7 @@ SECTIONS {
         sound/songs/se_t_kami2.o(.rodata);
         sound/songs/midi/se_elebeta.o(.rodata);
         sound/songs/se_hinsi.o(.rodata);
-        sound/songs/se_expmax.o(.rodata);
+        sound/songs/midi/se_expmax.o(.rodata);
         sound/songs/se_tamakoro.o(.rodata);
         sound/songs/se_tamakoro_e.o(.rodata);
         sound/songs/midi/se_basabasa.o(.rodata);
