@@ -192,6 +192,8 @@ u8 GetLedgeJumpDirection(s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8 objectId);
 u16 GetObjectPaletteTag(u8 palSlot);
 void UpdateEventObjectSpriteVisibility(struct Sprite *sprite, bool8 invisible);
+s16 sub_809773C(s16 a1);
+s16 sub_8097728(s16 a1);
 
 void MovementType_None(struct Sprite *);
 void MovementType_LookAround(struct Sprite *);
