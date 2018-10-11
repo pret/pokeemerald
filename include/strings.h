@@ -843,4 +843,6 @@ extern const u8 gText_TwoDashes[];
 
 extern const u8 *const gReturnToXStringsTable2[];
 
+extern const u8 gText_XPLink[];
+
 #endif //GUARD_STRINGS_H
