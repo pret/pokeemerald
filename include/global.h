@@ -297,9 +297,16 @@ struct UnknownSaveBlock2Struct
 
 struct UnkRecordMixingStruct
 {
-    u8 field_0[0x34];
+    u8 field_0_0:5;
+    u8 field_0_1:2;
+    u8 field_1;
+    u8 field_2;
+    u8 field_3[37];
+    u16 unk28[6];
     u8 playerId[4];
-    u8 field_38[10];
+    u8 playerName[PLAYER_NAME_LENGTH];
+    u8 language;
+    u32 unk40;
 };
 
 struct UnknownPokemonStruct
@@ -492,10 +499,12 @@ struct SaveBlock2
 
         // TODO: fix and verify labels
     /*0xB0*/ u8 field_B0;
-    /*0xB1*/ u8 field_B1;
+    /*0xB1*/ u8 field_B1_0:2;
+    /*0xB1*/ u8 field_B1_1:6;
     /*0xB2*/ u8 field_B2_0:3;
     /*0xB2*/ u8 field_B2_1:2;
-    /*0xB3*/ u8 field_B3[0x29];
+    /*0xB3*/ u8 field_B3;
+    /*0xB4*/ u8 field_B4[0x28];
     /*0xDC*/ struct UnkRecordMixingStruct field_DC[4];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
