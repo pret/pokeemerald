@@ -27,13 +27,16 @@ struct TrainerCard
     /*0x24*/ u32 money;
     /*0x28*/ u16 var_28[4];
     /*0x30*/ u8 playerName[8];
-    /*0x38*/ u8 emeraldAddedUnknownFields[0x64-0x38];
+    /*0x38*/ u8 emeraldAddedUnknownFields[0x54-0x38];
+    /*0x54*/ u16 monSpecies[2];
+    /*0x58*/ u8 emeraldAddedUnknownFields2[0x64-0x58];
 };
 
 extern struct TrainerCard gTrainerCards[4];
 
 void sub_80C3120(struct TrainerCard *arg0, u16 *arg1, u8 gameVersion);
-void sub_80C4E74(u8 arg0, void (*callback)(void));
-void sub_80C30A4(u16 *arg0);
+void TrainerCard_ShowLinkCard(u8 arg0, void (*callback)(void));
+void TrainerCard_GenerateCardForPlayer(struct TrainerCard *);
+u8 sub_80C4904(u8);
 
 #endif // GUARD_TRAINER_CARD_H

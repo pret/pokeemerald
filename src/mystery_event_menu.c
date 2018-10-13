@@ -151,7 +151,7 @@ static void CB2_MysteryEventMenu(void)
         if (!IsTextPrinterActive(0))
         {
             gMain.state++;
-            gLinkType = 21761;
+            gLinkType = 0x5501;
             OpenLink();
         }
         break;

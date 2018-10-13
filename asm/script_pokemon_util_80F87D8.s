@@ -1606,8 +1606,8 @@ _080F94D6:
 	.pool
 	thumb_func_end sub_80F94B8
 
-	thumb_func_start sub_80F94E8
-sub_80F94E8: @ 80F94E8
+	thumb_func_start ReducePlayerPartyToThree
+ReducePlayerPartyToThree: @ 80F94E8
 	push {r4-r7,lr}
 	sub sp, 0x198
 	add r0, sp, 0x190
@@ -1662,6 +1662,6 @@ _080F9538:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80F94E8
+	thumb_func_end ReducePlayerPartyToThree
 
 	.align 2, 0 @ Don't pad with nop.

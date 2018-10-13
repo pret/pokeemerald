@@ -1609,7 +1609,7 @@ void sub_80141A4(void)
         break;
     case 1:
         if (!FuncIsActiveTask(sub_80140E0))
-            sub_80C4E74(GetMultiplayerId() ^ 1, CB2_ReturnToField);
+            TrainerCard_ShowLinkCard(GetMultiplayerId() ^ 1, CB2_ReturnToField);
         break;
     }
 
@@ -1675,7 +1675,7 @@ void sub_80143E4(void *arg0, bool32 arg1)
 {
     u16 *argAsU16Ptr = arg0;
 
-    sub_80C30A4(argAsU16Ptr);
+    TrainerCard_GenerateCardForPlayer((struct TrainerCard *)argAsU16Ptr);
     if (arg1)
         argAsU16Ptr[48] = sub_801B39C();
     else

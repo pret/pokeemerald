@@ -259,7 +259,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F9490
 	def_special ValidateEReaderTrainer
 	def_special GetBestBattleTowerStreak
-	def_special sub_80F94E8
+	def_special ReducePlayerPartyToThree
 	def_special BedroomPC
 	def_special PlayerPC
 	def_special FieldShowRegionMap
