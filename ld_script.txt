@@ -119,7 +119,6 @@ SECTIONS {
         asm/field_screen.o(.text);
         src/battle_setup.o(.text);
         src/cable_club.o(.text);
-        asm/cable_club.o(.text);
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
@@ -427,7 +426,7 @@ SECTIONS {
         src/title_screen.o(.rodata);
         data/field_screen.o(.rodata);
         src/battle_setup.o(.rodata);
-        data/cable_club.o(.rodata);
+        src/cable_club.o(.rodata);
         src/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
         src/field_effect.o(.rodata);

@@ -430,7 +430,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276F60:: @ 8276F60
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	message OldaleTown_PokemonCenter_2F_Text_278091
+	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2DA4
 	waitstate
@@ -532,7 +532,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2770B2:: @ 82770B2
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	message OldaleTown_PokemonCenter_2F_Text_278091
+	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2E4C
 	waitstate
@@ -607,7 +607,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2771DB:: @ 82771DB
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	message OldaleTown_PokemonCenter_2F_Text_278091
+	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2E74
 	waitstate
@@ -1675,21 +1675,21 @@ OldaleTown_PokemonCenter_2F_Text_278061: @ 8278061
 	.string "A POKéMON holding the {STR_VAR_1}\n"
 	.string "BERRY can’t be traded.$"
 
-OldaleTown_PokemonCenter_2F_Text_278091:: @ 8278091
+gText_PleaseWaitForLink:: @ 8278091
 	.string "Please wait.\n"
 	.string "… … B Button: Cancel$"
 
-OldaleTown_PokemonCenter_2F_Text_2780B3:: @ 82780B3
+gText_ConfirmLinkWhenPlayersReady:: @ 82780B3
 	.string "When all players are ready…\n"
 	.string "A Button: Confirm\l"
 	.string "B Button: Cancel$"
 
-OldaleTown_PokemonCenter_2F_Text_2780F2:: @ 82780F2
+gText_ConfirmStartLinkWithXPlayers:: @ 82780F2
 	.string "Start link with {STR_VAR_1} players.\n"
 	.string "A Button: Confirm\l"
 	.string "B Button: Cancel$"
 
-OldaleTown_PokemonCenter_2F_Text_278131:: @ 8278131
+gText_AwaitingLinkup:: @ 8278131
 	.string "Awaiting linkup…\n"
 	.string "… … B Button: Cancel$"
 

@@ -259,6 +259,8 @@ void sub_800AF18(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 un
 void sub_800B348(void);
 void sub_800B3A4(u32 who);
 bool32 sub_800A07C(void);
+void sub_800AB98(void);
+void sub_800AA04(u8 a0);
 
 extern u16 gLinkPartnersHeldKeys[6];
 extern u32 gLinkDebugSeed;
@@ -293,6 +295,7 @@ extern u32 gFiller_0300315c;
 extern u32 gFiller_03004138;
 extern u32 gFiller_0300413C;
 extern u32 gFiller_03003080;
+extern struct LinkPlayer gLocalLinkPlayer;
 
 bool32 Link_AnyPartnersPlayingRubyOrSapphire(void);
 bool32 sub_800A03C(void);
@@ -303,5 +306,10 @@ bool8 sub_800A4D8(u8 a0);
 u8 sub_800A9D8(void);
 u8 sub_800A0C8(s32, s32);
 u16 *sub_801B058(void);
+u8 sub_800A9A8(void);
+void sub_800AD10(void);
+void sub_800AB18(void);
+void sub_8009F18(void);
+bool8 sub_800AA60(void);
 
 #endif // GUARD_LINK_H
