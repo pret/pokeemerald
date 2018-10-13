@@ -240,32 +240,6 @@ struct PokemonStorage
     /*0x83C2*/ u8 boxWallpapers[14];
 };
 
-struct UnknownPokemonSubStruct2
-{
-    u16 species;
-    u16 moves[4];
-    u16 item;
-};
-
-struct UnknownPokemonStruct2
-{
-    u8 field_0_0 : 5;
-    u8 field_0_1 : 2;
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-    struct UnknownPokemonSubStruct2 mons[3];
-    u8 field_28[23];
-    u8 language;
-};
-
-struct UnknownPokemonStruct3
-{
-    u8 field_0[48];
-    u16 field_30;
-    u8 field_32[38];
-};
-
 struct Unknown_806F160_Struct
 {
     u8 field_0_0:4;
@@ -472,7 +446,7 @@ void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u
 void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread);
 void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lvl50);
-void sub_8068528(struct Pokemon *mon, const struct UnknownPokemonStruct2 *src, u8 monId);
+void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
 void CreateMonWithEVSpreadPersonalityOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void sub_80686FC(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
 void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);

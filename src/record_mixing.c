@@ -83,7 +83,7 @@ struct PlayerRecordsEmerald
     /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 unk_1210;
     /* 0x1214 */ LilycoveLady lilycoveLady;
-    /* 0x1254 */ struct UnkRecordMixingStruct unk_1254[2];
+    /* 0x1254 */ struct Apprentice apprentice[2];
     /* 0x12dc */ struct UnkRecordMixingStruct2 unk_12dc;
     /* 0x1434 */ u8 field_1434[0x10];
 }; // 0x1444
@@ -134,8 +134,8 @@ static void sub_80E7B2C(const u8 *);
 static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *, size_t, u8, TVShow *);
 static void sub_80E7F68(u16 *item, u8 which);
 static void sub_80E7FF8(u8 taskId);
-static void sub_80E8110(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1);
-static void sub_80E8468(struct UnkRecordMixingStruct *arg0, size_t arg1, u32 arg2);
+static void sub_80E8110(struct Apprentice *arg0, struct Apprentice *arg1);
+static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2);
 static void sub_80E89AC(struct UnkRecordMixingStruct2 *arg0, size_t arg1, u32 arg2);
 static void sub_80E89F8(struct RecordMixingDayCareMail *dst);
 static void SanitizeDayCareMailForRuby(struct RecordMixingDayCareMail *src);
@@ -265,7 +265,7 @@ static void PrepareExchangePacket(void)
         if (GetMultiplayerId() == 0)
             sSentRecord->emerald.unk_1210 = GetRecordMixingGift();
 
-        sub_80E8110(sSentRecord->emerald.unk_1254, gUnknown_03001154);
+        sub_80E8110(sSentRecord->emerald.apprentice, gUnknown_03001154);
         sub_80E8260(&sSentRecord->emerald.unk_12dc);
     }
 }
@@ -298,7 +298,7 @@ static void ReceiveExchangePacket(u32 which)
         ReceiveBattleTowerData(&sReceivedRecords->emerald.battleTowerRecord, sizeof(struct PlayerRecordsEmerald), which);
         sub_80E7F68(&sReceivedRecords->emerald.unk_1210, which);
         ReceiveLilycoveLadyData(&sReceivedRecords->emerald.lilycoveLady, sizeof(struct PlayerRecordsEmerald), which);
-        sub_80E8468(sReceivedRecords->emerald.unk_1254, sizeof(struct PlayerRecordsEmerald), (u8) which);
+        ReceiveApprenticeData(sReceivedRecords->emerald.apprentice, sizeof(struct PlayerRecordsEmerald), (u8) which);
         sub_80E89AC(&sReceivedRecords->emerald.unk_12dc, sizeof(struct PlayerRecordsEmerald), (u8) which);
     }
 }
@@ -1551,13 +1551,13 @@ static void sub_80E7FF8(u8 taskId)
 
 // New Emerald functions
 
-static void sub_80E8110(struct UnkRecordMixingStruct *dst, struct UnkRecordMixingStruct *src)
+static void sub_80E8110(struct Apprentice *dst, struct Apprentice *src)
 {
     s32 i, id;
     s32 var_2C, var_28, var_24, r8;
 
-    dst[0].field_38[0] = 0xFF;
-    dst[1].field_38[0] = 0xFF;
+    dst[0].playerName[0] = EOS;
+    dst[1].playerName[0] = EOS;
 
     dst[0] = src[0];
 
@@ -1568,7 +1568,7 @@ static void sub_80E8110(struct UnkRecordMixingStruct *dst, struct UnkRecordMixin
     for (i = 0; i < 2; i++)
     {
         id = ((i + gSaveBlock2Ptr->field_B2_1) % 3) + 1;
-        if (src[id].field_38[0] != 0xFF)
+        if (src[id].playerName[0] != EOS)
         {
             if (ReadUnalignedWord(src[id].playerId) != ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
             {
@@ -1646,14 +1646,14 @@ void sub_80E8260(struct UnkRecordMixingStruct2 *dst)
     }
 }
 
-static bool32 sub_80E841C(struct UnkRecordMixingStruct *arg0, struct UnkRecordMixingStruct *arg1)
+static bool32 sub_80E841C(struct Apprentice *arg0, struct Apprentice *arg1)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
         if (ReadUnalignedWord(arg0->playerId) == ReadUnalignedWord(arg1[i].playerId)
-            && arg0->field_0[2] == arg1[i].field_0[2])
+            && arg0->field_2 == arg1[i].field_2)
         {
             return TRUE;
         }
@@ -1662,10 +1662,10 @@ static bool32 sub_80E841C(struct UnkRecordMixingStruct *arg0, struct UnkRecordMi
     return FALSE;
 }
 
-static void sub_80E8468(struct UnkRecordMixingStruct *arg0, size_t arg1, u32 arg2)
+static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2)
 {
     s32 i, r7, r8;
-    struct UnkRecordMixingStruct *structPtr;
+    struct Apprentice *structPtr;
     u32 mixIndices[4];
     u32 structId;
 
@@ -1675,7 +1675,7 @@ static void sub_80E8468(struct UnkRecordMixingStruct *arg0, size_t arg1, u32 arg
     r8 = 0;
     for (i = 0; i < 2; i++)
     {
-        if (structPtr[i].field_38[0] != 0xFF && !sub_80E841C(&structPtr[i], gSaveBlock2Ptr->field_DC))
+        if (structPtr[i].playerName[0] != EOS && !sub_80E841C(&structPtr[i], gSaveBlock2Ptr->field_DC))
         {
             r7++;
             r8 = i;

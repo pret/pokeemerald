@@ -8,7 +8,7 @@
 
 
 	.align 2 @ struct, eight bytes x6 for names in different languages, then 0x28 more bytes of data
-gUnknown_08610970:: @ 8610970
+gApprentices:: @ 8610970
 	.string "サダヒロ$", 8
 	.string "ALANN$", 8
 	.string "ALAIN$", 8
