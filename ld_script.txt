@@ -247,7 +247,7 @@ SECTIONS {
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
         src/battle_factory.o(.text);
-        src/battle_frontier_2.o(.text);
+        src/apprentice.o(.text);
         asm/battle_frontier_2.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);

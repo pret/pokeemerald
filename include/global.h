@@ -310,7 +310,7 @@ struct Apprentice
     u8 field_2;
     u8 field_3;
     struct ApprenticeMon monData[3];
-    u16 unk28[6];
+    u16 easyChatWords[6];
     u8 playerId[4];
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 language;

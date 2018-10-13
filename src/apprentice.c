@@ -11,7 +11,13 @@
 #include "script_menu.h"
 #include "party_menu.h"
 #include "data2.h"
+#include "task.h"
+#include "sound.h"
+#include "event_data.h"
+#include "field_player_avatar.h"
+#include "event_object_movement.h"
 #include "constants/items.h"
+#include "constants/songs.h"
 
 struct Unk030062ECStruct
 {
@@ -32,9 +38,16 @@ extern struct Unk030062ECStruct *gUnknown_030062EC;
 extern struct Unk030062F0Struct *gUnknown_030062F0;
 
 extern const u8 *const gUnknown_08611330[];
+extern const u8 *const gUnknown_08610FF0[][2];
+extern const u8 *const gUnknown_086112B0[][2];
+extern const u8 *const gUnknown_08611230[][2];
+extern const u8 *const gUnknown_086111B0[][2];
+extern const u8 *const gUnknown_08610EF0[][4];
+extern const u8 *const gUnknown_08611070[][5];
 extern const u8 gUnknown_08611548[8];
 extern const u8 gUnknown_086114D3[];
 extern const bool8 gUnknown_08611370[];
+extern void (* const gUnknown_086114E0[])(void);
 
 // text
 extern const u8 gText_Give[];
@@ -46,8 +59,10 @@ extern const u8 gText_No[];
 void sub_81A087C(void);
 u16 sub_819FF98(u8 arg0);
 bool8 sub_81A0194(u8 arg0, u16 moveId);
-void sub_81A0804(u8 arg0, u8 itemsCount, u8 windowId);
-u8 sub_81A0784(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
+void sub_81A0804(bool8 noBButton, u8 itemsCount, u8 windowId);
+u8 sub_81A0784(u8 left, u8 top, u8 width, u8 height);
+void sub_81A07E8(u8 windowId);
+void sub_81A172C(void (*func)(void));
 
 void sub_819F99C(u8 id)
 {
@@ -77,7 +92,7 @@ void sub_819FA5C(struct Apprentice *apprentice)
     u8 i;
 
     for (i = 0; i < 6; i++)
-        apprentice->unk28[i] |= 0xFFFF;
+        apprentice->easyChatWords[i] |= 0xFFFF;
 
     apprentice->playerName[0] = EOS;
     apprentice->field_0_0 = 16;
@@ -91,7 +106,7 @@ void sub_819FAA0(void)
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 6; j++)
-            gSaveBlock2Ptr->field_DC[i].unk28[j] |= 0xFFFF;
+            gSaveBlock2Ptr->field_DC[i].easyChatWords[j] |= 0xFFFF;
         gSaveBlock2Ptr->field_DC[i].field_0_0 = 16;
         gSaveBlock2Ptr->field_DC[i].playerName[0] = EOS;
         gSaveBlock2Ptr->field_DC[i].field_0_1 = 0;
@@ -106,7 +121,7 @@ void sub_819FAA0(void)
     sub_81A087C();
 }
 
-u8 sub_819FBB0(void)
+bool8 sub_819FBB0(void)
 {
     return (gSaveBlock2Ptr->field_B1_0 != 0);
 }
@@ -251,7 +266,13 @@ void sub_819FD64(void)
 
 #define APPRENTICE_SPECIES_ID(speciesArrId, monId) speciesArrId = (gSaveBlock2Ptr->field_B4[monId] >> \
                                                                   (((gSaveBlock2Ptr->field_B2_0 >> monId) & 1) << 2)) & 0xF; \
-                                                                  do {} while (0)
+                                                   do {} while (0)
+
+// Why the need to have two macros do the exact thing differently?
+#define APPRENTICE_SPECIES_ID_2(speciesArrId, monId) {  u8 a0 = ((gSaveBlock2Ptr->field_B2_0 >> monId) & 1);\
+                                                        speciesArrId = gSaveBlock2Ptr->field_B4[monId];     \
+                                                        speciesArrId = ((speciesArrId) >> (a0 << 2)) & 0xF; \
+                                                     }
 
 u16 sub_819FF98(u8 arg0)
 {
@@ -483,23 +504,23 @@ void sub_81A04E4(u8 arg0)
     u8 windowId;
     const u8 *strings[3];
     u8 count = 2;
-    u8 tileWidth;
-    u8 r10;
-    u8 r6;
+    u8 width;
+    u8 left;
+    u8 top;
     s32 pixelWidth;
 
     switch (arg0)
     {
     case 0:
-        r10 = 0x12;
-        r6 = 8;
+        left = 0x12;
+        top = 8;
         strings[0] = gText_Lv50;
         strings[1] = gText_OpenLevel;
         break;
     case 1:
         count = 3;
-        r10 = 0x12;
-        r6 = 6;
+        left = 0x12;
+        top = 6;
         for (i = 0; i < 3; i++)
         {
             u16 species;
@@ -511,34 +532,34 @@ void sub_81A04E4(u8 arg0)
         }
         break;
     case 2:
-        r10 = 0x12;
-        r6 = 8;
+        left = 0x12;
+        top = 8;
         if (gSaveBlock2Ptr->field_B1_1 > 2)
             return;
         strings[1] = gSpeciesNames[gUnknown_030062F0->unk2];
         strings[0] = gSpeciesNames[gUnknown_030062F0->unk0];
         break;
     case 3:
-        r10 = 0x11;
-        r6 = 8;
+        left = 0x11;
+        top = 8;
         strings[0] = gMoveNames[gUnknown_030062F0->unk4];
         strings[1] = gMoveNames[gUnknown_030062F0->unk6];
         break;
     case 4:
-        r10 = 0x12;
-        r6 = 8;
+        left = 0x12;
+        top = 8;
         strings[0] = gText_Give;
         strings[1] = gText_NoNeed;
         break;
     case 6:
-        r10 = 0x14;
-        r6 = 8;
+        left = 0x14;
+        top = 8;
         strings[0] = gText_Yes;
         strings[1] = gText_No;
         break;
     default:
-        r10 = 0;
-        r6 = 0;
+        left = 0;
+        top = 0;
         break;
     }
 
@@ -550,14 +571,377 @@ void sub_81A04E4(u8 arg0)
             pixelWidth = width;
     }
 
-    tileWidth = convert_pixel_width_to_tile_width(pixelWidth);
-    r10 = sub_80E2D5C(r10, tileWidth);
-    windowId = sub_81A0784(r10, r6, tileWidth, count * 2);
+    width = convert_pixel_width_to_tile_width(pixelWidth);
+    left = sub_80E2D5C(left, width);
+    windowId = sub_81A0784(left, top, width, count * 2);
     SetStandardWindowBorderStyle(windowId, 0);
 
     for (i = 0; i < count; i++)
         AddTextPrinterParameterized(windowId, 1, strings[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
 
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, 0);
-    sub_81A0804(1, count, windowId);
+    sub_81A0804(TRUE, count, windowId);
+}
+
+#define tNoBButton data[4]
+#define tWrapAround data[5]
+#define tWindowId data[6]
+
+void sub_81A070C(u8 taskId)
+{
+    s8 input;
+    s16 *data = gTasks[taskId].data;
+
+    if (!tWrapAround)
+        input = Menu_ProcessInputNoWrapAround();
+    else
+        input = ProcessMenuInput();
+
+    switch (input)
+    {
+    case MENU_NOTHING_CHOSEN:
+        return;
+    case MENU_B_PRESSED:
+        if (tNoBButton)
+            return;
+
+        PlaySE(SE_SELECT);
+        gSpecialVar_Result = 0x7F;
+        break;
+    default:
+        gSpecialVar_Result = input;
+        break;
+    }
+
+    sub_81A07E8(tWindowId);
+    DestroyTask(taskId);
+    EnableBothScriptContexts();
+}
+
+u8 sub_81A0784(u8 left, u8 top, u8 width, u8 height)
+{
+    u8 windowId;
+    struct WindowTemplate winTemplate = CreateWindowTemplate(0, left + 1, top + 1, width, height, 15, 100);
+
+    windowId = AddWindow(&winTemplate);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+    return windowId;
+}
+
+void sub_81A07E8(u8 windowId)
+{
+    sub_8198070(windowId, TRUE);
+    RemoveWindow(windowId);
+}
+
+void sub_81A0804(bool8 noBButton, u8 itemsCount, u8 windowId)
+{
+    u8 taskId = CreateTask(sub_81A070C, 80);
+    gTasks[taskId].tNoBButton = noBButton;
+
+    if (itemsCount > 3)
+        gTasks[taskId].tWrapAround = TRUE;
+    else
+        gTasks[taskId].tWrapAround = FALSE;
+
+    gTasks[taskId].tWindowId = windowId;
+}
+
+#undef tNoBButton
+#undef tWrapAround
+#undef tWindowId
+
+void sub_81A085C(void)
+{
+    gUnknown_086114E0[gSpecialVar_0x8004]();
+}
+
+void sub_81A087C(void)
+{
+    u8 i;
+
+    sub_819FBC8();
+    gSaveBlock2Ptr->field_B1_0 = 0;
+    gSaveBlock2Ptr->field_B1_1 = 0;
+    gSaveBlock2Ptr->field_B1_2 = 0;
+    gSaveBlock2Ptr->field_B2_0 = 0;
+
+    for (i = 0; i < 3; i++)
+        gSaveBlock2Ptr->field_B4[i] = 0;
+
+    for (i = 0; i < 9; i++)
+    {
+        gSaveBlock2Ptr->field_B8[i].unk0_0 = 0;
+        gSaveBlock2Ptr->field_B8[i].unk0_1 = 0;
+        gSaveBlock2Ptr->field_B8[i].unk0_2 = 0;
+        gSaveBlock2Ptr->field_B8[i].unk0_3 = 0;
+        gSaveBlock2Ptr->field_B8[i].unk2 = 0;
+    }
+}
+
+void sub_81A093C(void)
+{
+    if (!sub_819FBB0())
+        gSpecialVar_Result = FALSE;
+    else
+        gSpecialVar_Result = TRUE;
+}
+
+void sub_81A0964(void)
+{
+    sub_819FC40(gSpecialVar_0x8005);
+}
+
+void sub_81A0978(void)
+{
+    sub_819FBC8();
+}
+
+void sub_81A0984(void)
+{
+    sub_819FD64();
+}
+
+void sub_81A0990(void)
+{
+    gSaveBlock2Ptr->field_B1_1++;
+}
+
+void sub_81A09B4(void)
+{
+    gSpecialVar_Result = gSaveBlock2Ptr->field_B1_1;
+}
+
+void sub_81A09D0(void)
+{
+    s32 var = gSaveBlock2Ptr->field_B1_1 - 3;
+    if (var < 0)
+    {
+        gSpecialVar_Result = FALSE;
+    }
+    else
+    {
+        if (var > 8)
+            gSpecialVar_Result = TRUE;
+
+        if (!gSaveBlock2Ptr->field_B8[var].unk0_0)
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+    }
+}
+
+void sub_81A0A20(void)
+{
+    sub_81A04E4(gSpecialVar_0x8005);
+}
+
+void sub_81A0A34(u8 taskId)
+{
+    if (!RunTextPrintersAndIsPrinter0Active())
+    {
+        DestroyTask(taskId);
+        if (gSpecialVar_0x8005)
+            sub_81A172C(EnableBothScriptContexts);
+        else
+            EnableBothScriptContexts();
+    }
+}
+
+void sub_81A0A70(void)
+{
+    const u8 *string;
+
+    if (gSpecialVar_0x8006 == 6)
+    {
+        string = gUnknown_08610FF0[gSaveBlock2Ptr->field_B0][0];
+    }
+    else if (gSpecialVar_0x8006 == 7)
+    {
+        string = gUnknown_08610FF0[gSaveBlock2Ptr->field_B0][1];
+    }
+    else if (gSpecialVar_0x8006 == 8)
+    {
+        string = gUnknown_086111B0[gSaveBlock2Ptr->field_B0][0];
+    }
+    else if (gSpecialVar_0x8006 == 9)
+    {
+        string = gUnknown_086111B0[gSaveBlock2Ptr->field_B0][1];
+    }
+    else if (gSpecialVar_0x8006 == 4)
+    {
+        string = gUnknown_08611230[gSaveBlock2Ptr->field_B0][0];
+    }
+    else if (gSpecialVar_0x8006 == 5)
+    {
+        string = gUnknown_08611230[gSaveBlock2Ptr->field_B0][1];
+    }
+    else if (gSpecialVar_0x8006 == 10)
+    {
+        string = gUnknown_08611070[gSaveBlock2Ptr->field_B0][0];
+    }
+    else if (gSpecialVar_0x8006 == 11)
+    {
+        string = gUnknown_086112B0[gSaveBlock2Ptr->field_B0][0];
+    }
+    else if (gSpecialVar_0x8006 == 12)
+    {
+        string = gUnknown_08611070[gSaveBlock2Ptr->field_B0][3];
+    }
+    else if (gSpecialVar_0x8006 == 13)
+    {
+        string = gUnknown_08611070[gSaveBlock2Ptr->field_B0][1];
+    }
+    else if (gSpecialVar_0x8006 == 16)
+    {
+        string = gUnknown_08611070[gSaveBlock2Ptr->field_B0][4];
+    }
+    else if (gSpecialVar_0x8006 == 14)
+    {
+        string = gUnknown_08611070[gSaveBlock2Ptr->field_B0][2];
+    }
+    else if (gSpecialVar_0x8006 == 15)
+    {
+        string = gUnknown_086112B0[gSaveBlock2Ptr->field_B0][1];
+    }
+    else if (gSpecialVar_0x8006 == 0)
+    {
+        string = gUnknown_08610EF0[gSaveBlock2Ptr->field_B0][0];
+    }
+    else if (gSpecialVar_0x8006 == 1)
+    {
+        string = gUnknown_08610EF0[gSaveBlock2Ptr->field_B0][1];
+    }
+    else if (gSpecialVar_0x8006 == 2)
+    {
+        string = gUnknown_08610EF0[gSaveBlock2Ptr->field_B0][2];
+    }
+    else if (gSpecialVar_0x8006 == 3)
+    {
+        string = gUnknown_08610EF0[gSaveBlock2Ptr->field_B0][3];
+    }
+    else
+    {
+        EnableBothScriptContexts();
+        return;
+    }
+
+    StringExpandPlaceholders(gStringVar4, string);
+    AddTextPrinterForMessage(TRUE);
+    CreateTask(sub_81A0A34, 1);
+}
+
+void sub_81A0C9C(void)
+{
+    ScriptContext2_Enable();
+    FreezeEventObjects();
+    sub_808B864();
+    sub_808BCF4();
+    NewMenuHelpers_DrawDialogueFrame(0, 1);
+    sub_81A0A70();
+}
+
+void sub_81A0CC0(void)
+{
+    if (gSaveBlock2Ptr->field_B1_1 < 3)
+    {
+        gSpecialVar_Result = 2;
+    }
+    else if (gSaveBlock2Ptr->field_B1_1 > 11)
+    {
+        gSpecialVar_Result = 5;
+    }
+    else
+    {
+        s32 id = gSaveBlock2Ptr->field_B1_1 - 3;
+        switch (gSaveBlock2Ptr->field_B8[id].unk0_0)
+        {
+        case 1:
+            gSpecialVar_Result = 4;
+            break;
+        case 2:
+            gSpecialVar_Result = 3;
+            break;
+        case 3:
+            gSpecialVar_Result = 1;
+            break;
+        default:
+            gSpecialVar_Result = 5;
+            break;
+        }
+    }
+}
+
+void sub_81A0D40(void)
+{
+    if (gSpecialVar_0x8005)
+    {
+        u8 bitNo = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->field_B2_0 |= 1 << bitNo;
+    }
+}
+
+void sub_81A0D80(void)
+{
+    if (gSaveBlock2Ptr->field_B1_1 >= 3)
+    {
+        u8 id = gSaveBlock2Ptr->field_B1_1 - 3;
+        if (gSpecialVar_0x8005)
+            gSaveBlock2Ptr->field_B8[id].unk0_3 = 1;
+        else
+            gSaveBlock2Ptr->field_B8[id].unk0_3 = 0;
+    }
+}
+
+void sub_81A0DD4(void)
+{
+    u8 i;
+    u8 count = 0;
+    u8 id1, id2;
+
+    for (i = 0; i < 9 && gSaveBlock2Ptr->field_B8[i].unk0_0; count++, i++)
+        ;
+
+    gUnknown_030062F0 = AllocZeroed(sizeof(*gUnknown_030062F0));
+    if (gSpecialVar_0x8005 == 2)
+    {
+        if (gSaveBlock2Ptr->field_B1_1 < 3)
+        {
+            id1 = gSaveBlock2Ptr->field_B4[gSaveBlock2Ptr->field_B1_1] >> 4;
+            gUnknown_030062F0->unk2 = gApprentices[gSaveBlock2Ptr->field_B0].species[id1];
+
+            id2 = gSaveBlock2Ptr->field_B4[gSaveBlock2Ptr->field_B1_1] & 0xF;
+            gUnknown_030062F0->unk0 = gApprentices[gSaveBlock2Ptr->field_B0].species[id2];
+        }
+    }
+    else if (gSpecialVar_0x8005 == 3)
+    {
+        if (gSaveBlock2Ptr->field_B1_1 >= 3
+            && gSaveBlock2Ptr->field_B1_1 < count + 3
+            && gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk0_0 == 2)
+        {
+            count = gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk0_1;
+            APPRENTICE_SPECIES_ID_2(id1, count);
+            gUnknown_030062F0->unk0 = gApprentices[gSaveBlock2Ptr->field_B0].species[id1];
+            gUnknown_030062F0->unk4 = sub_81A0284(count, id1, gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk0_2);
+            gUnknown_030062F0->unk6 = gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk2;
+        }
+    }
+    else if (gSpecialVar_0x8005 == 4)
+    {
+        if (gSaveBlock2Ptr->field_B1_1 >= 3
+            && gSaveBlock2Ptr->field_B1_1 < count + 3
+            && gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk0_0 == 1)
+        {
+            count = gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk0_1;
+            APPRENTICE_SPECIES_ID_2(id2, count);
+            gUnknown_030062F0->unk0 = gApprentices[gSaveBlock2Ptr->field_B0].species[id2];
+        }
+    }
+}
+
+void sub_81A0FE4(void)
+{
+    FREE_AND_SET_NULL(gUnknown_030062F0);
 }
