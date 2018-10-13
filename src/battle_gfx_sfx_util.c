@@ -29,7 +29,7 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const u8 gUnknown_0831C604[];
-extern const u8 * const gBattleAnims_VariousTable[];
+extern const u8 * const gBattleAnims_General[];
 extern const u8 * const gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
@@ -437,7 +437,7 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
     gBattleAnimAttacker = atkBattler;
     gBattleAnimTarget = defBattler;
     gBattleSpritesDataPtr->animationData->animArg = argument;
-    LaunchBattleAnimation(gBattleAnims_VariousTable, tableId, FALSE);
+    LaunchBattleAnimation(gBattleAnims_General, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenBattleTableAnimDone, 10);
     gTasks[taskId].tBattlerId = activeBattler;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBattlerId].animFromTableActive = 1;
@@ -899,14 +899,14 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
         if (IsContest())
         {
             position = 0;
-            targetSpecies = gContestResources->field_18->field_2;
-            personalityValue = gContestResources->field_18->field_8;
-            otId = gContestResources->field_18->field_C;
+            targetSpecies = gContestResources->field_18->unk2;
+            personalityValue = gContestResources->field_18->unk8;
+            otId = gContestResources->field_18->unkC;
 
             HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[targetSpecies],
                                                       gMonSpritesGfxPtr->sprites[0],
                                                       targetSpecies,
-                                                      gContestResources->field_18->field_10);
+                                                      gContestResources->field_18->unk10);
         }
         else
         {
