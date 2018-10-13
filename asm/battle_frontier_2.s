@@ -4152,7 +4152,7 @@ _081A1AEA:
 	cmp r3, r0
 	blt _081A1AEA
 _081A1B00:
-	bl sub_80F94E8
+	bl ReducePlayerPartyToThree
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -17008,7 +17008,7 @@ _081A87EC:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gBattleScripting + 0x14
+	ldr r1, =gPlayerParty - 100
 	adds r0, r1
 	ldr r1, =0x00000e12
 	adds r3, r1

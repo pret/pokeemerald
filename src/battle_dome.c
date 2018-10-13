@@ -68,7 +68,7 @@ extern bool8 sub_81A3610(void);
 extern u16 sub_81A4FF0(u8);
 extern u8 GetFrontierTrainerFrontSpriteId(u16);
 extern u8 GetFrontierOpponentClass(u16);
-extern void sub_80F94E8(void);
+extern void ReducePlayerPartyToThree(void);
 
 extern u8 gUnknown_0203CEF8[];
 extern u16 gBattle_BG0_X;
@@ -6132,7 +6132,7 @@ static void sub_8194E44(void)
 
 static void sub_8194EB4(void)
 {
-    sub_80F94E8();
+    ReducePlayerPartyToThree();
 }
 
 static void sub_8194EC0(void)
