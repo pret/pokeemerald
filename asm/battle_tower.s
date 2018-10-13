@@ -2544,7 +2544,7 @@ _08163718:
 	adds r0, r6, r2
 	adds r2, r3, 0
 	str r3, [sp, 0x1C]
-	bl sub_81A7024
+	bl SetMonMoveAvoidReturn
 	ldr r3, [sp, 0x1C]
 	adds r0, r3, 0x1
 	lsls r0, 24
@@ -2662,7 +2662,7 @@ _08163818:
 	ldr r2, =gEnemyParty
 	adds r0, r6, r2
 	adds r2, r7, 0
-	bl sub_81A7024
+	bl SetMonMoveAvoidReturn
 	ldr r1, =gFacilityTrainerMons
 	ldr r0, [r1]
 	adds r0, r5, r0

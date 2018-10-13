@@ -1631,7 +1631,7 @@ void MCB2_FlyMap(void)
             LoadPalette(sRegionMapFramePal, 0x10, 0x20);
             PutWindowTilemap(2);
             FillWindowPixelBuffer(2, 0x00);
-            PrintTextOnWindow(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);
+            AddTextPrinterParameterized(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             gMain.state++;
             break;
@@ -1697,9 +1697,9 @@ static void sub_8124904(void)
                     flag = TRUE;
                     sub_8198070(0, FALSE);
                     SetWindowBorderStyle(1, FALSE, 0x65, 0x0d);
-                    PrintTextOnWindow(1, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
+                    AddTextPrinterParameterized(1, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
                     name = gUnknown_085A1EDC[i].name[sFlyMap->regionMap.posWithinMapSec];
-                    PrintTextOnWindow(1, 1, name, GetStringRightAlignXOffset(1, name, 0x60), 0x11, 0, NULL);
+                    AddTextPrinterParameterized(1, 1, name, GetStringRightAlignXOffset(1, name, 0x60), 0x11, 0, NULL);
                     schedule_bg_copy_tilemap_to_vram(0);
                     gUnknown_03001180 = TRUE;
                 }
@@ -1717,7 +1717,7 @@ static void sub_8124904(void)
             {
                 FillWindowPixelBuffer(0, 0x11);
             }
-            PrintTextOnWindow(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
+            AddTextPrinterParameterized(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             gUnknown_03001180 = FALSE;
         }

@@ -61,7 +61,16 @@ EWRAM_DATA static u16 sHatchedEggMotherMoves[4] = {0};
 
 #include "data/pokemon/egg_moves.h"
 
-static const struct WindowTemplate sDaycareLevelMenuWindowTemplate = {0, 0xF, 1, 0xE, 6, 0xF, 8};
+static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
+{
+    .priority = 0,
+    .tilemapLeft = 15,
+    .tilemapTop = 1,
+    .width = 14,
+    .height = 6,
+    .paletteNum = 15,
+    .baseBlock = 8
+};
 
 static const struct ListMenuItem sLevelMenuItems[] =
 {
@@ -368,7 +377,7 @@ static void ClearDaycareMonMail(struct DayCareMail *mail)
 {
     s32 i;
 
-    for (i = 0; i < OT_NAME_LENGTH + 1; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
         mail->OT_name[i] = 0;
     for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
         mail->monName[i] = 0;

@@ -26,6 +26,8 @@ struct SpriteFrameImage
 
 #define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
 
+#define overworld_frame(ptr, width, height, frame) {.data = (u8 *)ptr + (width * height * frame * 64)/2, .size = (width * height * 64)/2}
+
 struct SpritePalette
 {
     const u16 *data;  // Raw uncompressed palette data
@@ -158,6 +160,8 @@ struct SubspriteTable
 
 struct Sprite;
 
+typedef void (*SpriteCallback)(struct Sprite *);
+
 struct SpriteTemplate
 {
     u16 tileTag;
@@ -166,7 +170,7 @@ struct SpriteTemplate
     const union AnimCmd *const *anims;
     const struct SpriteFrameImage *images;
     const union AffineAnimCmd *const *affineAnims;
-    void (*callback)(struct Sprite *);
+    SpriteCallback callback;
 };
 
 struct Sprite
@@ -177,7 +181,7 @@ struct Sprite
     /*0x10*/ const union AffineAnimCmd *const *affineAnims;
     /*0x14*/ const struct SpriteTemplate *template;
     /*0x18*/ const struct SubspriteTable *subspriteTables;
-    /*0x1C*/ void (*callback)(struct Sprite *);
+    /*0x1C*/ SpriteCallback callback;
 
     /*0x20*/ struct Coords16 pos1;
     /*0x24*/ struct Coords16 pos2;

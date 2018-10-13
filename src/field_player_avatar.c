@@ -1,17 +1,18 @@
 #include "global.h"
-#include "global.fieldmap.h"
-#include "sprite.h"
-#include "event_object_movement.h"
 #include "bike.h"
-#include "metatile_behavior.h"
-#include "metatile_behaviors.h"
-#include "constants/flags.h"
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "global.fieldmap.h"
+#include "metatile_behavior.h"
 #include "overworld.h"
 #include "rotating_gate.h"
+#include "sprite.h"
+#include "task.h"
+#include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
-#include "field_player_avatar.h"
+#include "constants/flags.h"
 
 extern void task_add_bump_boulder(u8, u8);
 static bool8 ShouldJumpLedge(s16, s16, u8);
@@ -41,6 +42,42 @@ static void PlayerNotOnBikeNotMoving(u8, u16);
 static void PlayerNotOnBikeTurningInPlace(u8, u16);
 static void PlayerNotOnBikeMoving(u8, u16);
 extern void sub_808C750(u8);
+
+extern void PlayerAvatarTransition_Normal(struct EventObject *a);
+extern void PlayerAvatarTransition_MachBike(struct EventObject *a);
+extern void PlayerAvatarTransition_AcroBike(struct EventObject *a);
+extern void PlayerAvatarTransition_Surfing(struct EventObject *a);
+extern void PlayerAvatarTransition_Underwater(struct EventObject *a);
+extern void PlayerAvatarTransition_ReturnToField(struct EventObject *a);
+extern void PlayerAvatarTransition_Dummy(struct EventObject *a);
+
+extern u8 sub_808C3A4(struct Task *task, struct EventObject *playerObject, struct EventObject *strengthObject);
+extern u8 do_boulder_dust(struct Task *task, struct EventObject *playerObject, struct EventObject *strengthObject);
+extern u8 sub_808C484(struct Task *task, struct EventObject *playerObject, struct EventObject *strengthObject);
+
+extern u8 sub_808C544(struct Task *task, struct EventObject *eventObject);
+
+extern u8 sub_808C61C(struct Task *task, struct EventObject *eventObject);
+extern u8 sub_808C644(struct Task *task, struct EventObject *eventObject);
+extern u8 sub_808C6BC(struct Task *task, struct EventObject *eventObject);
+extern u8 sub_808C6FC(struct Task *task, struct EventObject *eventObject);
+
+extern u8 fish0(struct Task *task);
+extern u8 fish1(struct Task *task);
+extern u8 fish2(struct Task *task);
+extern u8 fish3(struct Task *task);
+extern u8 fish4(struct Task *task);
+extern u8 fish5(struct Task *task);
+extern u8 fish6(struct Task *task);
+extern u8 fish7(struct Task *task);
+extern u8 fish8(struct Task *task);
+extern u8 fish9(struct Task *task);
+extern u8 fishA_wait_for_a_pressed(struct Task *task);
+extern u8 fishB(struct Task *task);
+extern u8 fishC(struct Task *task);
+extern u8 fishD(struct Task *task);
+extern u8 fishE(struct Task *task);
+extern u8 fishF(struct Task *task);
 
 static bool8 (*const gUnknown_084973FC[])(u8) =
 {
@@ -105,6 +142,144 @@ static bool8 (*const gUnknown_0849749C[])(u8) =
 
 static const u8 gUnknown_084974B0[] = {9, 10, 11, 12, 13, 0, 0, 0};
 
+void (*const gUnknown_084974B8[])(struct EventObject *) =
+{
+    PlayerAvatarTransition_Normal,
+    PlayerAvatarTransition_MachBike,
+    PlayerAvatarTransition_AcroBike,
+    PlayerAvatarTransition_Surfing,
+    PlayerAvatarTransition_Underwater,
+    PlayerAvatarTransition_ReturnToField,
+    PlayerAvatarTransition_Dummy,
+    PlayerAvatarTransition_Dummy,
+};
+
+bool8 (*const gUnknown_084974D8[])(u8) =
+{
+    MetatileBehavior_IsSouthArrowWarp,
+    MetatileBehavior_IsNorthArrowWarp,
+    MetatileBehavior_IsWestArrowWarp,
+    MetatileBehavior_IsEastArrowWarp,
+};
+
+const u8 gUnknown_084974E8[][2] =
+{
+    {EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,     EVENT_OBJ_GFX_RIVAL_MAY_NORMAL},
+    {EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE,  EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE},
+    {EVENT_OBJ_GFX_RIVAL_BRENDAN_ACRO_BIKE,  EVENT_OBJ_GFX_RIVAL_MAY_ACRO_BIKE},
+    {EVENT_OBJ_GFX_RIVAL_BRENDAN_SURFING,    EVENT_OBJ_GFX_RIVAL_MAY_SURFING},
+    {EVENT_OBJ_GFX_BRENDAN_UNDERWATER,       EVENT_OBJ_GFX_MAY_UNDERWATER},
+    {EVENT_OBJ_GFX_RIVAL_BRENDAN_FIELD_MOVE, EVENT_OBJ_GFX_RIVAL_MAY_FIELD_MOVE},
+    {EVENT_OBJ_GFX_BRENDAN_FISHING,          EVENT_OBJ_GFX_MAY_FISHING},
+    {EVENT_OBJ_GFX_BRENDAN_WATERING,         EVENT_OBJ_GFX_MAY_WATERING}
+};
+
+const u8 gUnknown_084974F8[][2] =
+{
+    {EVENT_OBJ_GFX_BRENDAN_NORMAL,     EVENT_OBJ_GFX_MAY_NORMAL},
+    {EVENT_OBJ_GFX_BRENDAN_MACH_BIKE,  EVENT_OBJ_GFX_MAY_MACH_BIKE},
+    {EVENT_OBJ_GFX_BRENDAN_ACRO_BIKE,  EVENT_OBJ_GFX_MAY_ACRO_BIKE},
+    {EVENT_OBJ_GFX_BRENDAN_SURFING,    EVENT_OBJ_GFX_MAY_SURFING},
+    {EVENT_OBJ_GFX_BRENDAN_UNDERWATER, EVENT_OBJ_GFX_MAY_UNDERWATER},
+    {EVENT_OBJ_GFX_BRENDAN_FIELD_MOVE, EVENT_OBJ_GFX_MAY_FIELD_MOVE},
+    {EVENT_OBJ_GFX_BRENDAN_FISHING,    EVENT_OBJ_GFX_MAY_FISHING},
+    {EVENT_OBJ_GFX_BRENDAN_WATERING,   EVENT_OBJ_GFX_MAY_WATERING},
+};
+
+const u8 gUnknown_08497508[] = {EVENT_OBJ_GFX_RED, EVENT_OBJ_GFX_LEAF};
+
+const u8 gUnknown_0849750A[] = {EVENT_OBJ_GFX_LINK_RS_BRENDAN, EVENT_OBJ_GFX_LINK_RS_MAY};
+
+const u8 gUnknown_0849750C[2][5][2] =
+{
+    //male
+    {
+        {EVENT_OBJ_GFX_BRENDAN_NORMAL, 1},
+        {EVENT_OBJ_GFX_BRENDAN_MACH_BIKE, 2},
+        {EVENT_OBJ_GFX_BRENDAN_ACRO_BIKE, 4},
+        {EVENT_OBJ_GFX_BRENDAN_SURFING, 8},
+        {EVENT_OBJ_GFX_BRENDAN_UNDERWATER, 16},
+    },
+    //female
+    {
+        {EVENT_OBJ_GFX_MAY_NORMAL, 1},
+        {EVENT_OBJ_GFX_MAY_MACH_BIKE, 2},
+        {EVENT_OBJ_GFX_MAY_ACRO_BIKE, 4},
+        {EVENT_OBJ_GFX_MAY_SURFING, 8},
+        {EVENT_OBJ_GFX_MAY_UNDERWATER, 16},
+    }
+};
+
+bool8 (*const gUnknown_08497520[])(u8) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
+{
+    MetatileBehavior_IsSouthArrowWarp,
+    MetatileBehavior_IsNorthArrowWarp,
+    MetatileBehavior_IsWestArrowWarp,
+    MetatileBehavior_IsEastArrowWarp,
+};
+
+u8 (*const gUnknown_08497530[])(struct Task *, struct EventObject *, struct EventObject *) =
+{
+    sub_808C3A4,
+    do_boulder_dust,
+    sub_808C484,
+};
+
+u8 (*const gUnknown_0849753C[])(struct Task *, struct EventObject *) =
+{
+    sub_808C544,
+};
+
+u8 (*const gUnknown_08497540[])(struct Task *, struct EventObject *) =
+{
+    sub_808C61C,
+    sub_808C644,
+    sub_808C6BC,
+    sub_808C6FC,
+};
+
+const u8 gUnknown_08497550[] = {3, 4, 2, 1};
+
+const u8 gUnknown_08497554[] = {16, 16, 17, 18, 19};
+
+u8 (*const gUnknown_0849755C[])(struct Task *) =
+{
+    fish0,
+    fish1,
+    fish2,
+    fish3,
+    fish4,
+    fish5,
+    fish6,
+    fish7,
+    fish8,
+    fish9,
+    fishA_wait_for_a_pressed,
+    fishB,
+    fishC,
+    fishD,
+    fishE,
+    fishF,
+};
+
+const u16 gUnknown_0849759C[] = {1, 1, 1};
+
+const u16 gUnknown_084975A2[] = {1, 3, 6};
+
+const u8 gUnknown_084975A8[] = _("·");
+
+const u16 gUnknown_084975AA[] = {36, 33, 30};
+
+const u16 gUnknown_084975B0[] =
+{
+    0, 0,
+    0x28, 10,
+    0x46, 30,
+};
+
+const u8 gUnknown_084975BC[] = {0x01, 0x03, 0x04, 0x02, 0x01, 0x00, 0x00, 0x00};
+
+// .text
 void MovementType_Player(struct Sprite *sprite)
 {
 	UpdateEventObjectCurrentMovement(&gEventObjects[sprite->data[0]], sprite, EventObjectCB2_NoMovement2);

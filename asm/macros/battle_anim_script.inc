@@ -56,19 +56,19 @@
 	.2byte \param0
 	.endm
 
-	.macro monbg bank
+	.macro monbg battler
 	.byte 0xa
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro clearmonbg bank
+	.macro clearmonbg battler
 	.byte 0xb
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro setalpha param0
-	.byte 0xc
-	.2byte \param0
+	.macro setalpha eva, evb
+	.byte 0x0C
+	.2byte ((\evb) << 8) | (\eva)
 	.endm
 
 	.macro blendoff
@@ -189,14 +189,14 @@
 	.4byte \param2
 	.endm
 
-	.macro monbg_22 bank
+	.macro monbg_22 battler
 	.byte 0x22
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro clearmonbg_23 bank
+	.macro clearmonbg_23 battler
 	.byte 0x23
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro jumpifcontest param0
@@ -229,40 +229,53 @@
 	.byte \param4
 	.endm
 
-	.macro monbgprio_28 bank
+	.macro monbgprio_28 battler
 	.byte 0x28
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro monbgprio_29
 	.byte 0x29
 	.endm
 
-	.macro monbgprio_2A bank
+	.macro monbgprio_2A battler
 	.byte 0x2a
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro invisible bank
+	.macro invisible battler
 	.byte 0x2b
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro visible bank
+	.macro visible battler
 	.byte 0x2c
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro doublebattle_2D bank
+	.macro doublebattle_2D battler
 	.byte 0x2d
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro doublebattle_2E bank
+	.macro doublebattle_2E battler
 	.byte 0x2e
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro stopsound
 	.byte 0x2f
+	.endm
+	
+@ useful macros
+	.macro jumpreteq value, ptr
+	jumpargeq ARG_RET_ID, \value, \ptr
+	.endm
+	
+	.macro jumprettrue ptr
+	jumpreteq TRUE, \ptr
+	.endm
+	
+	.macro jumpretfalse ptr
+	jumpreteq FALSE, \ptr
 	.endm

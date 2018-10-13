@@ -51,7 +51,7 @@ FieldGetPlayerInput: @ 809BF08
 	bl cur_mapdata_block_role_at_player_pos
 	lsls r0, 24
 	lsrs r0, 24
-	bl MetatileBehavior_IsMoveTile
+	bl MetatileBehavior_IsForcedMovementTile
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r6, 0x2
@@ -530,7 +530,7 @@ sub_809C2C8: @ 809C2C8
 	ldrh r1, [r4, 0x2]
 	b _0809C30E
 _0809C2F0:
-	ldr r1, =gUnknown_08339D64
+	ldr r1, =gDirectionToVectors
 	lsls r2, r6, 3
 	adds r0, r2, r1
 	ldr r3, [r0]
@@ -631,7 +631,7 @@ _0809C3B4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C400
-	ldr r1, =gUnknown_08339D64
+	ldr r1, =gDirectionToVectors
 	lsls r2, r7, 3
 	adds r0, r2, r1
 	ldr r3, [r0]
@@ -1043,7 +1043,7 @@ _0809C74C:
 	.pool
 _0809C764:
 	adds r0, r5, 0
-	bl MetatileBehavior_IsMB_BF
+	bl MetatileBehavior_IsSecretBaseSandOrnament
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1072,7 +1072,7 @@ _0809C794:
 	b _0809C7E2
 _0809C7A8:
 	adds r0, r5, 0
-	bl MetatileBehavior_IsMB_C3
+	bl MetatileBehavior_IsLargeMatCenter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1081,7 +1081,7 @@ _0809C7A8:
 	b _0809C7E2
 _0809C7BC:
 	adds r0, r5, 0
-	bl MetatileBehavior_IsMB_B5
+	bl MetatileBehavior_IsSecretBaseLargeMatEdge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1376,7 +1376,7 @@ _0809CA04:
 	bne _0809CAF8
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl MetatileBehavior_IsMoveTile
+	bl MetatileBehavior_IsForcedMovementTile
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809CAF8
@@ -1658,7 +1658,7 @@ mapheader_run_first_tag2_script_list_match_conditionally: @ 809CC38
 	negs r0, r0
 	cmp r4, r0
 	beq _0809CC90
-	bl walkrun_find_lowest_active_bit_in_bitfield
+	bl StoreInitialPlayerAvatarState
 	mov r0, r8
 	adds r1, r4, 0
 	adds r2, r7, 0
@@ -1699,7 +1699,7 @@ sub_809CC9C: @ 809CC9C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809CD8A
-	bl walkrun_find_lowest_active_bit_in_bitfield
+	bl StoreInitialPlayerAvatarState
 	adds r0, r7, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -2048,7 +2048,7 @@ map_warp_consider_2_to_inside: @ 809CF78
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl MetatileBehavior_IsSecretBaseOpen
+	bl MetatileBehavior_IsOpenSecretBaseDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2083,7 +2083,7 @@ _0809CFB0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809CFFC
-	bl walkrun_find_lowest_active_bit_in_bitfield
+	bl StoreInitialPlayerAvatarState
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
@@ -2334,7 +2334,7 @@ dive_warp: @ 809D16C
 	subs r1, 0x7
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_8085058
+	bl SetDiveWarpEmerge
 	b _0809D1C8
 	.pool
 _0809D1A4:
@@ -2353,12 +2353,12 @@ _0809D1A4:
 	subs r1, 0x7
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_8085078
+	bl SetDiveWarpDive
 _0809D1C8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809D1E0
-	bl walkrun_find_lowest_active_bit_in_bitfield
+	bl StoreInitialPlayerAvatarState
 	bl sp13E_warp_to_last_warp
 	movs r0, 0xE9
 	bl PlaySE
@@ -2407,7 +2407,7 @@ sub_809D1E8: @ 809D1E8
 	subs r1, 0x7
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_8085058
+	bl SetDiveWarpEmerge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2431,7 +2431,7 @@ _0809D244:
 	subs r1, 0x7
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_8085078
+	bl SetDiveWarpDive
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

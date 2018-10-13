@@ -325,66 +325,74 @@ void CFile::TryConvertIncbin()
 
     m_pos++;
 
-    SkipWhitespace();
+    std::printf("{");
 
-    if (m_buffer[m_pos] != '"')
-        RaiseError("expected double quote");
-
-    m_pos++;
-
-    int startPos = m_pos;
-
-    while (m_buffer[m_pos] != '"')
+    while (true)
     {
-        if (m_buffer[m_pos] == 0)
+        SkipWhitespace();
+
+        if (m_buffer[m_pos] != '"')
+            RaiseError("expected double quote");
+
+        m_pos++;
+
+        int startPos = m_pos;
+
+        while (m_buffer[m_pos] != '"')
         {
-            if (m_pos >= m_size)
-                RaiseError("unexpected EOF in path string");
-            else
-                RaiseError("unexpected null character in path string");
+            if (m_buffer[m_pos] == 0)
+            {
+                if (m_pos >= m_size)
+                    RaiseError("unexpected EOF in path string");
+                else
+                    RaiseError("unexpected null character in path string");
+            }
+
+            if (m_buffer[m_pos] == '\r' || m_buffer[m_pos] == '\n')
+                RaiseError("unexpected end of line character in path string");
+
+            if (m_buffer[m_pos] == '\\')
+                RaiseError("unexpected escape in path string");
+            
+            m_pos++;
         }
 
-        if (m_buffer[m_pos] == '\r' || m_buffer[m_pos] == '\n')
-            RaiseError("unexpected end of line character in path string");
+        std::string path(&m_buffer[startPos], m_pos - startPos);
 
-        if (m_buffer[m_pos] == '\\')
-            RaiseError("unexpected escape in path string");
-        
+        m_pos++;
+
+        int fileSize;
+        std::unique_ptr<unsigned char[]> buffer = ReadWholeFile(path, fileSize);
+
+        if ((fileSize % size) != 0)
+            RaiseError("Size %d doesn't evenly divide file size %d.\n", size, fileSize);
+
+        int count = fileSize / size;
+        int offset = 0;
+
+        for (int i = 0; i < count; i++)
+        {
+            int data = ExtractData(buffer, offset, size);
+            offset += size;
+
+            if (isSigned)
+                std::printf("%d,", data);
+            else
+                std::printf("%uu,", data);
+        }
+
+        SkipWhitespace();
+
+        if (m_buffer[m_pos] != ',')
+            break;
+
         m_pos++;
     }
-
-    std::string path(&m_buffer[startPos], m_pos - startPos);
-
-    m_pos++;
-
-    SkipWhitespace();
-
+    
     if (m_buffer[m_pos] != ')')
         RaiseError("expected ')'");
 
     m_pos++;
-
-    std::printf("{");
-
-    int fileSize;
-    std::unique_ptr<unsigned char[]> buffer = ReadWholeFile(path, fileSize);
-
-    if ((fileSize % size) != 0)
-        RaiseError("Size %d doesn't evenly divide file size %d.\n", size, fileSize);
-
-    int count = fileSize / size;
-    int offset = 0;
-
-    for (int i = 0; i < count; i++)
-    {
-        int data = ExtractData(buffer, offset, size);
-        offset += size;
-
-        if (isSigned)
-            std::printf("%d,", data);
-        else
-            std::printf("%uu,", data);
-    }
 
     std::printf("}");
 }

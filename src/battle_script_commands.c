@@ -3,6 +3,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
 #include "battle_message.h"
+#include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
 #include "constants/moves.h"
@@ -190,7 +191,7 @@ static void atk5F_swapattackerwithtarget(void);
 static void atk60_incrementgamestat(void);
 static void atk61_drawpartystatussummary(void);
 static void atk62_hidepartystatussummary(void);
-static void atk63_jumptorandomattack(void);
+static void atk63_jumptocalledmove(void);
 static void atk64_statusanimation(void);
 static void atk65_status2animation(void);
 static void atk66_chosenstatusanimation(void);
@@ -442,7 +443,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk60_incrementgamestat,
     atk61_drawpartystatussummary,
     atk62_hidepartystatussummary,
-    atk63_jumptorandomattack,
+    atk63_jumptocalledmove,
     atk64_statusanimation,
     atk65_status2animation,
     atk66_chosenstatusanimation,
@@ -700,7 +701,7 @@ static const u8* const sMoveEffectBS_Ptrs[] =
     BattleScript_MoveEffectPayDay,		//	MOVE_EFFECT_PAYDAY
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_CHARGING
     BattleScript_MoveEffectWrap,		//	MOVE_EFFECT_WRAP
-    BattleScript_MoveEffectRecoil33,	//	MOVE_EFFECT_RECOIL_25
+    BattleScript_MoveEffectRecoil,	    //	MOVE_EFFECT_RECOIL_25
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_PLUS_1
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_DEF_PLUS_1
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SPD_PLUS_1
@@ -724,7 +725,7 @@ static const u8* const sMoveEffectBS_Ptrs[] =
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_RAPIDSPIN
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_REMOVE_PARALYSIS
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_DEF_DOWN
-    BattleScript_MoveEffectRecoil33,	//	MOVE_EFFECT_RECOIL_33_PARALYSIS
+    BattleScript_MoveEffectRecoil,	    //	MOVE_EFFECT_RECOIL_33
 };
 
 static const struct WindowTemplate sUnusedWinTemplate = {0, 1, 3, 7, 0xF, 0x1F, 0x3F};
@@ -2739,7 +2740,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             case MOVE_EFFECT_STEAL_ITEM:
                 {
-                    if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                     {
                         gBattlescriptCurrInstr++;
                         break;
@@ -2843,7 +2844,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_AtkDefDown;
                 break;
-            case MOVE_EFFECT_RECOIL_33_PARALYSIS: // Volt Tackle
+            case MOVE_EFFECT_RECOIL_33: // Double Edge
                 gBattleMoveDamage = gHpDealt / 3;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
@@ -3268,7 +3269,7 @@ static void atk23_getexp(void)
         if (GetBattlerSide(gBattlerFainted) != B_SIDE_OPPONENT || (gBattleTypeFlags &
              (BATTLE_TYPE_LINK
               | BATTLE_TYPE_x2000000
-              | BATTLE_TYPE_x4000000
+              | BATTLE_TYPE_TRAINER_HILL
               | BATTLE_TYPE_FRONTIER
               | BATTLE_TYPE_SAFARI
               | BATTLE_TYPE_BATTLE_TOWER
@@ -4381,16 +4382,16 @@ static void atk47_setgraphicalstatchangevalues(void)
     switch (GET_STAT_BUFF_VALUE2(gBattleScripting.statChanger))
     {
     case SET_STAT_BUFF_VALUE(1): // +1
-        value = 0xF;
+        value = STAT_ANIM_PLUS1;
         break;
     case SET_STAT_BUFF_VALUE(2): // +2
-        value = 0x27;
+        value = STAT_ANIM_PLUS2;
         break;
     case SET_STAT_BUFF_VALUE(1) | STAT_BUFF_NEGATIVE: // -1
-        value = 0x16;
+        value = STAT_ANIM_MINUS1;
         break;
     case SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE: // -2
-        value = 0x2E;
+        value = STAT_ANIM_MINUS2;
         break;
     }
     gBattleScripting.animArg1 = GET_STAT_BUFF_ID(gBattleScripting.statChanger) + value - 1;
@@ -4412,9 +4413,9 @@ static void atk48_playstatchangeanimation(void)
     {
         s16 startingStatAnimId;
         if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
-            startingStatAnimId = 0x2D;
+            startingStatAnimId = STAT_ANIM_MINUS2 - 1;
         else
-            startingStatAnimId = 0x15;
+            startingStatAnimId = STAT_ANIM_MINUS1 - 1;
 
         while (statsToCheck != 0)
         {
@@ -4447,18 +4448,18 @@ static void atk48_playstatchangeanimation(void)
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
             if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
-                statAnimId = 0x3A;
+                statAnimId = STAT_ANIM_MULTIPLE_MINUS2;
             else
-                statAnimId = 0x39;
+                statAnimId = STAT_ANIM_MULTIPLE_MINUS1;
         }
     }
     else // goes up
     {
         s16 startingStatAnimId;
         if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
-            startingStatAnimId = 0x26;
+            startingStatAnimId = STAT_ANIM_PLUS2 - 1;
         else
-            startingStatAnimId = 0xE;
+            startingStatAnimId = STAT_ANIM_PLUS1 - 1;
 
         while (statsToCheck != 0)
         {
@@ -4473,9 +4474,9 @@ static void atk48_playstatchangeanimation(void)
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
             if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
-                statAnimId = 0x38;
+                statAnimId = STAT_ANIM_MULTIPLE_PLUS2;
             else
-                statAnimId = 0x37;
+                statAnimId = STAT_ANIM_MULTIPLE_PLUS1;
         }
     }
 
@@ -4497,19 +4498,37 @@ static void atk48_playstatchangeanimation(void)
     }
 }
 
-#define ATK49_LAST_CASE 17
+enum
+{
+	ATK49_RAGE,
+	ATK49_DEFROST,
+	ATK49_SYNCHRONIZE_TARGET,
+	ATK49_MOVE_END_ABILITIES,
+	ATK49_STATUS_IMMUNITY_ABILITIES,
+	ATK49_SYNCHRONIZE_ATTACKER,
+	ATK49_CHOICE_MOVE,
+	ATK49_CHANGED_ITEMS,
+	ATK49_ATTACKER_INVISIBLE,
+	ATK49_ATTACKER_VISIBLE,
+	ATK49_TARGET_VISIBLE,
+	ATK49_ITEM_EFFECTS_ALL,
+	ATK49_KINGSROCK_SHELLBELL,
+	ATK49_SUBSTITUTE,
+	ATK49_UPDATE_LAST_MOVES,
+	ATK49_MIRROR_MOVE,
+	ATK49_NEXT_TARGET,
+	ATK49_COUNT,
+};
 
 static void atk49_moveend(void)
 {
     s32 i;
-    bool32 effect;
-    u8 moveType;
-    u8 holdEffectAtk;
-    u16 *choicedMoveAtk;
+    bool32 effect = FALSE;
+    u8 moveType = 0;
+    u8 holdEffectAtk = 0;
+    u16 *choicedMoveAtk = NULL;
     u8 arg1, arg2;
     u16 originallyUsedMove;
-
-    effect = FALSE;
 
     if (gChosenMove == 0xFFFF)
         originallyUsedMove = 0;
@@ -4531,7 +4550,7 @@ static void atk49_moveend(void)
     {
         switch (gBattleScripting.atk49_state)
         {
-        case 0: // rage check
+        case ATK49_RAGE: // rage check
             if (gBattleMons[gBattlerTarget].status2 & STATUS2_RAGE
                 && gBattleMons[gBattlerTarget].hp != 0 && gBattlerAttacker != gBattlerTarget
                 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget)
@@ -4545,7 +4564,7 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 1: // defrosting check
+        case ATK49_DEFROST: // defrosting check
             if (gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE
                 && gBattleMons[gBattlerTarget].hp != 0 && gBattlerAttacker != gBattlerTarget
                 && gSpecialStatuses[gBattlerTarget].specialDmg
@@ -4561,28 +4580,28 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 2: // target synchronize
+        case ATK49_SYNCHRONIZE_TARGET: // target synchronize
             if (AbilityBattleEffects(ABILITYEFFECT_SYNCHRONIZE, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
             gBattleScripting.atk49_state++;
             break;
-        case 3: // contact abilities
-            if (AbilityBattleEffects(ABILITYEFFECT_CONTACT, gBattlerTarget, 0, 0, 0))
+        case ATK49_MOVE_END_ABILITIES: // Such as abilities activating on contact(Poison Spore, Rough Skin, etc.).
+            if (AbilityBattleEffects(ABILITYEFFECT_MOVE_END, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
             gBattleScripting.atk49_state++;
             break;
-        case 4: // status immunities
+        case ATK49_STATUS_IMMUNITY_ABILITIES: // status immunities
             if (AbilityBattleEffects(ABILITYEFFECT_IMMUNITY, 0, 0, 0, 0))
                 effect = TRUE; // it loops through all battlers, so we increment after its done with all battlers
             else
                 gBattleScripting.atk49_state++;
             break;
-        case 5: // attacker synchronize
+        case ATK49_SYNCHRONIZE_ATTACKER: // attacker synchronize
             if (AbilityBattleEffects(ABILITYEFFECT_ATK_SYNCHRONIZE, gBattlerAttacker, 0, 0, 0))
                 effect = TRUE;
             gBattleScripting.atk49_state++;
             break;
-        case 6: // update choice band move
+        case ATK49_CHOICE_MOVE: // update choice band move
             if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
                 || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
                     goto LOOP;
@@ -4605,7 +4624,7 @@ static void atk49_moveend(void)
                 gBattleScripting.atk49_state++;
             }
             break;
-        case 7: // changed held items
+        case ATK49_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; i++)
             {
                 u16* changedItem = &gBattleStruct->changedItems[i];
@@ -4617,18 +4636,18 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 11: // item effects for all battlers
-            if (ItemBattleEffects(3, 0, FALSE))
+        case ATK49_ITEM_EFFECTS_ALL: // item effects for all battlers
+            if (ItemBattleEffects(ITEMEFFECT_MOVE_END, 0, FALSE))
                 effect = TRUE;
             else
                 gBattleScripting.atk49_state++;
             break;
-        case 12: // king's rock and shell bell
-            if (ItemBattleEffects(4, 0, FALSE))
+        case ATK49_KINGSROCK_SHELLBELL: // king's rock and shell bell
+            if (ItemBattleEffects(ITEMEFFECT_KINGSROCK_SHELLBELL, 0, FALSE))
                 effect = TRUE;
             gBattleScripting.atk49_state++;
             break;
-        case 8: // make attacker sprite invisible
+        case ATK49_ATTACKER_INVISIBLE: // make attacker sprite invisible
             if (gStatuses3[gBattlerAttacker] & (STATUS3_SEMI_INVULNERABLE)
                 && gHitMarker & HITMARKER_NO_ANIMATIONS)
             {
@@ -4640,7 +4659,7 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 9: // make attacker sprite visible
+        case ATK49_ATTACKER_VISIBLE: // make attacker sprite visible
             if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT
                 || !(gStatuses3[gBattlerAttacker] & (STATUS3_SEMI_INVULNERABLE))
                 || WasUnableToUseMove(gBattlerAttacker))
@@ -4655,7 +4674,7 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 10: // make target sprite visible
+        case ATK49_TARGET_VISIBLE: // make target sprite visible
             if (!gSpecialStatuses[gBattlerTarget].restoredBattlerSprite && gBattlerTarget < gBattlersCount
                 && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
             {
@@ -4668,7 +4687,7 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 13: // update substitute
+        case ATK49_SUBSTITUTE: // update substitute
             for (i = 0; i < gBattlersCount; i++)
             {
                 if (gDisableStructs[i].substituteHP == 0)
@@ -4676,7 +4695,7 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 14: // This case looks interesting, although I am not certain what it does. Probably fine tunes edge cases.
+        case ATK49_UPDATE_LAST_MOVES:
             if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
             {
                 gActiveBattler = gBattlerAttacker;
@@ -4725,7 +4744,7 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 15: // mirror move
+        case ATK49_MIRROR_MOVE: // mirror move
             if (!(gAbsentBattlerFlags & gBitTable[gBattlerAttacker]) && !(gBattleStruct->field_91 & gBitTable[gBattlerAttacker])
                 && gBattleMoves[originallyUsedMove].flags & FLAG_MIRROR_MOVE_AFFECTED && gHitMarker & HITMARKER_OBEYS
                 && gBattlerAttacker != gBattlerTarget && !(gHitMarker & HITMARKER_FAINTED(gBattlerTarget))
@@ -4746,7 +4765,7 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case 16: //
+        case ATK49_NEXT_TARGET: // For moves hitting two opposing Pokemon.
             if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE) && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && !gProtectStructs[gBattlerAttacker].chargingTurn && gBattleMoves[gCurrentMove].target == MOVE_TARGET_BOTH
                 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
@@ -4759,7 +4778,7 @@ static void atk49_moveend(void)
                     gBattleScripting.atk49_state = 0;
                     MoveValuesCleanUp();
                     BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
-                    gBattlescriptCurrInstr = BattleScript_82DB87D;
+                    gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
                     return;
                 }
                 else
@@ -4769,18 +4788,18 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
-        case ATK49_LAST_CASE:
+        case ATK49_COUNT:
             break;
         }
 
         if (arg1 == 1 && effect == FALSE)
-            gBattleScripting.atk49_state = ATK49_LAST_CASE;
+            gBattleScripting.atk49_state = ATK49_COUNT;
         if (arg1 == 2 && arg2 == gBattleScripting.atk49_state)
-            gBattleScripting.atk49_state = ATK49_LAST_CASE;
+            gBattleScripting.atk49_state = ATK49_COUNT;
 
-    } while (gBattleScripting.atk49_state != ATK49_LAST_CASE && effect == FALSE);
+    } while (gBattleScripting.atk49_state != ATK49_COUNT && effect == FALSE);
 
-    if (gBattleScripting.atk49_state == ATK49_LAST_CASE && effect == FALSE)
+    if (gBattleScripting.atk49_state == ATK49_COUNT && effect == FALSE)
         gBattlescriptCurrInstr += 3;
 }
 
@@ -4969,7 +4988,7 @@ static void atk4E_switchinanim(void)
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                  | BATTLE_TYPE_EREADER_TRAINER
                                  | BATTLE_TYPE_x2000000
-                                 | BATTLE_TYPE_x4000000
+                                 | BATTLE_TYPE_TRAINER_HILL
                                  | BATTLE_TYPE_FRONTIER)))
             HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
 
@@ -5550,8 +5569,8 @@ static void atk52_switchineffects(void)
 
         gDisableStructs[gActiveBattler].truantUnknownBit = 0;
 
-        if (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0) == 0 &&
-            ItemBattleEffects(0, gActiveBattler, 0) == 0)
+        if (!AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0)
+			&& !ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE))
         {
             gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED);
 
@@ -6031,12 +6050,12 @@ static void atk62_hidepartystatussummary(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk63_jumptorandomattack(void)
+static void atk63_jumptocalledmove(void)
 {
     if (gBattlescriptCurrInstr[1])
-        gCurrentMove = gRandomMove;
+        gCurrentMove = gCalledMove;
     else
-        gChosenMove = gCurrentMove = gRandomMove;
+        gChosenMove = gCurrentMove = gCalledMove;
 
     gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
 }
@@ -8491,10 +8510,10 @@ static void atkA9_trychoosesleeptalkmove(void)
             movePosition = Random() & 3;
         } while ((gBitTable[movePosition] & unusableMovesBits));
 
-        gRandomMove = gBattleMons[gBattlerAttacker].moves[movePosition];
+        gCalledMove = gBattleMons[gBattlerAttacker].moves[movePosition];
         gCurrMovePos = movePosition;
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-        gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+        gBattlerTarget = GetMoveTarget(gCalledMove, 0);
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
 }
@@ -9387,7 +9406,7 @@ static void atkD1_trysethelpinghand(void)
 static void atkD2_tryswapitems(void) // trick
 {
     // opponent can't swap items with player in regular battles
-    if (gBattleTypeFlags & BATTLE_TYPE_x4000000
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL
         || (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
             && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_EREADER_TRAINER
@@ -9719,8 +9738,8 @@ static void atkDE_asistattackselect(void)
     if (chooseableMovesNo)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-        gRandomMove = movesArray[((Random() & 0xFF) * chooseableMovesNo) >> 8];
-        gBattlerTarget = GetMoveTarget(gRandomMove, 0);
+        gCalledMove = movesArray[((Random() & 0xFF) * chooseableMovesNo) >> 8];
+        gBattlerTarget = GetMoveTarget(gCalledMove, 0);
         gBattlescriptCurrInstr += 5;
     }
     else

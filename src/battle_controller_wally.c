@@ -371,7 +371,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
     if (gSprites[spriteId].data[1] == 32)
     {
         gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = FALSE;
         WallyBufferExecCompleted();
     }
@@ -1560,7 +1560,7 @@ static void WallyHandleCmd55(void)
     BeginFastPaletteFade(3);
     WallyBufferExecCompleted();
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_WILD) && gBattleTypeFlags & BATTLE_TYPE_LINK)
+    if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER) && gBattleTypeFlags & BATTLE_TYPE_LINK)
         gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
 }
 

@@ -57,8 +57,6 @@
 #define PARTY_SIZE 6
 
 #define POKEMON_SLOTS_NUMBER 412
-#define POKEMON_NAME_LENGTH 10
-#define OT_NAME_LENGTH 7
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
@@ -88,6 +86,11 @@ extern u8 gStringVar4[];
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
+// Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
+// In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
+// In Gen 4 only, migrated Pokemon with Diamond, Pearl, or Platinum's ID show as "----------".
+// Gen 5 and up read Diamond, Pearl, or Platinum's ID as "Sinnoh".
+// In Gen 4 and up, migrated Pokemon with HeartGold or SoulSilver's ID show the otherwise unused "Johto" string.
 enum
 {
     VERSION_SAPPHIRE = 1,
@@ -95,6 +98,12 @@ enum
     VERSION_EMERALD = 3,
     VERSION_FIRE_RED = 4,
     VERSION_LEAF_GREEN = 5,
+    VERSION_HEART_GOLD = 7,
+    VERSION_SOUL_SILVER = 8,
+    VERSION_DIAMOND = 10,
+    VERSION_PEARL = 11,
+    VERSION_PLATINUM = 12,
+    VERSION_GAMECUBE = 15,
 };
 
 enum LanguageId
@@ -134,8 +143,7 @@ enum LanguageId
 // string lengths
 #define ITEM_NAME_LENGTH    14
 #define POKEMON_NAME_LENGTH 10
-#define OT_NAME_LENGTH      7
-#define PLAYER_NAME_LENGTH  8
+#define PLAYER_NAME_LENGTH  7
 #define MAIL_WORDS_COUNT    9
 
 enum
@@ -326,7 +334,7 @@ struct EmeraldBattleTowerRecord
     /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
     /*0x01*/ u8 trainerClass;
     /*0x02*/ u16 winStreak;
-    /*0x04*/ u8 name[8];
+    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[4];
     /*0x10*/ struct {
         u16 easyChat[6];
@@ -347,7 +355,9 @@ struct FrontierMonData
 struct Struct_field_E70
 {
     u16 monId;
-    u8 unk2[9];
+    u32 personality;
+    u8 ivs;
+    u8 abilityBit;
 };
 
 struct BattleDomeTrainer
@@ -416,9 +426,7 @@ struct BattleFrontier
     /*0xDD8*/ u16 field_DD8;
     /*0xDDA*/ u16 field_DDA[2];
     /*0xDDE*/ u16 field_DDE[2];
-    /*0xDE2*/ u16 field_DE2[2];
-    /*0xDE6*/ u16 field_DE6;
-    /*0xDE8*/ u16 field_DE8;
+    /*0xDE2*/ u16 field_DE2[2][2];
     /*0xDEA*/ u16 field_DEA[2];
     /*0xDEE*/ u16 field_DEE;
     /*0xDF0*/ u16 field_DF0;
@@ -450,7 +458,7 @@ struct BattleFrontier
     /*0xEBF*/ u8 field_EBF;
     /*0xEC0*/ u16 field_EC0[16];
     /*0xEE0*/ u8 field_EE0;
-    /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH];
+    /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH + 1];
     /*0xEF1*/ u8 field_EF1[2][4];
     /*0xEF9*/ u8 field_EF9;
     /*0xEFA*/ u8 field_EFA;
@@ -460,7 +468,7 @@ struct BattleFrontier
 
 struct SaveBlock2
 {
-    /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
+    /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
     /*0x09*/ u8 specialSaveWarp;
     /*0x0A*/ u8 playerTrainerId[4];
@@ -516,7 +524,7 @@ struct SecretBaseRecord
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 sbr_field_1_5:1;
     /*0x1A9D*/ u8 sbr_field_1_6:2;
-    /*0x1A9E*/ u8 trainerName[OT_NAME_LENGTH];
+    /*0x1A9E*/ u8 trainerName[PLAYER_NAME_LENGTH];
     /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 sbr_field_e;
@@ -602,7 +610,7 @@ struct EasyChatPair
 struct MailStruct
 {
     /*0x00*/ u16 words[MAIL_WORDS_COUNT];
-    /*0x12*/ u8 playerName[PLAYER_NAME_LENGTH];
+    /*0x12*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x1A*/ u8 trainerId[4];
     /*0x1E*/ u16 species;
     /*0x20*/ u16 itemId;
@@ -691,7 +699,7 @@ struct RecordMixing_UnknownStruct
 
 struct LinkBattleRecord
 {
-    u8 name[8];
+    u8 name[PLAYER_NAME_LENGTH + 1];
     u16 trainerId;
     u16 wins;
     u16 losses;
@@ -724,15 +732,15 @@ struct ContestWinner
     u32 trainerId;
     u16 species;
     u8 contestCategory;
-    u8 monName[11];
-    u8 trainerName[8];
+    u8 monName[POKEMON_NAME_LENGTH + 1];
+    u8 trainerName[PLAYER_NAME_LENGTH + 1];
     u8 contestRank;
 };
 
 struct DayCareMail
 {
     struct MailStruct message;
-    u8 OT_name[OT_NAME_LENGTH + 1];
+    u8 OT_name[PLAYER_NAME_LENGTH + 1];
     u8 monName[POKEMON_NAME_LENGTH + 1];
     u8 gameLanguage:4;
     u8 monLanguage:4;
@@ -773,7 +781,7 @@ struct LilycoveLadyQuiz
     /*0x002*/ u16 unk_002[9];
     /*0x014*/ u16 unk_014;
     /*0x016*/ u16 unk_016;
-    /*0x018*/ u8 playerName[8];
+    /*0x018*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x020*/ u16 playerTrainerId[4];
     /*0x028*/ u16 itemId;
     /*0x02a*/ u8 unk_02a;
@@ -788,7 +796,7 @@ struct LilycoveLadyFavour
     /*0x001*/ u8 phase;
     /*0x002*/ u8 unk_002;
     /*0x003*/ u8 unk_003;
-    /*0x004*/ u8 playerName[8];
+    /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x00c*/ u8 unk_00c;
     /*0x00e*/ u16 itemId;
     /*0x010*/ u16 unk_010;
@@ -801,7 +809,7 @@ struct LilycoveLadyContest
     /*0x001*/ u8 phase;
     /*0x002*/ u8 fave_pkblk;
     /*0x003*/ u8 other_pkblk;
-    /*0x004*/ u8 playerName[8];
+    /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x00c*/ u8 max_sheen;
     /*0x00d*/ u8 category;
     /*0x00e*/ u8 language;
@@ -828,7 +836,7 @@ struct WaldaPhrase
 
 struct UnkSaveSubstruct_3b98 {
     u32 trainerId;
-    u8 trainerName[8];
+    u8 trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
 struct SaveBlock1

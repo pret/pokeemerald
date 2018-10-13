@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_tb_kara_grp, voicegroup_869D0F4
+	.equ	se_tb_kara_grp, voicegroup127
 	.equ	se_tb_kara_pri, 5
 	.equ	se_tb_kara_rev, reverb_set+50
 	.equ	se_tb_kara_mvl, 127

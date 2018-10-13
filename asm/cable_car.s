@@ -774,7 +774,7 @@ _08150340:
 	orrs r3, r0
 	str r3, [r2, 0x8]
 	ldr r0, [r2, 0x8]
-	bl warp_in
+	bl WarpIntoMap
 	ldr r0, =gFieldCallback
 	str r4, [r0]
 	ldr r0, =CB2_LoadMap

@@ -375,7 +375,7 @@ void BuyMenuPrintPriceInList(u8 windowId, int item, u8 y)
 
         StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
         x = GetStringRightAlignXOffset(7, gStringVar4, 0x78);
-        AddTextPrinterParameterized2(windowId, 7, x, y, 0, 0, gUnknown_08589AB0[1], -1, gStringVar4);
+        AddTextPrinterParameterized4(windowId, 7, x, y, 0, 0, gUnknown_08589AB0[1], -1, gStringVar4);
     }
 }
 
@@ -490,7 +490,7 @@ void BuyMenuInitWindows(void)
 
 void BuyMenuPrint(u8 windowId, const u8 *text, u8 x, u8 y, s8 speed, u8 colorSet)
 {
-    AddTextPrinterParameterized2(windowId, 1, x, y, 0, 0, gUnknown_08589AB0[colorSet], speed, text);
+    AddTextPrinterParameterized4(windowId, 1, x, y, 0, 0, gUnknown_08589AB0[colorSet], speed, text);
 }
 
 void BuyMenuDisplayMessage(u8 taskId, const u8 *text, TaskFunc callback)

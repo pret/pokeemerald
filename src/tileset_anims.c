@@ -1,4 +1,3 @@
-
 // Includes
 #include "global.h"
 #include "palette.h"
@@ -6,6 +5,7 @@
 #include "battle_transition.h"
 #include "task.h"
 #include "battle_transition.h"
+#include "fieldmap.h"
 
 // Static type declarations
 
@@ -223,25 +223,25 @@ const u16 gTilesetAnims_Mauville1b_Frame1[] = INCBIN_U16("data/tilesets/secondar
 const u16 tileset_anims_space_1[16] = {};
 
 u16 *const gTilesetAnims_MauvilleVDests0[] = {
-    (u16 *)(BG_VRAM + 0x4c00),
-    (u16 *)(BG_VRAM + 0x4c80),
-    (u16 *)(BG_VRAM + 0x4d00),
-    (u16 *)(BG_VRAM + 0x4d80),
-    (u16 *)(BG_VRAM + 0x4e00),
-    (u16 *)(BG_VRAM + 0x4e80),
-    (u16 *)(BG_VRAM + 0x4f00),
-    (u16 *)(BG_VRAM + 0x4f80)
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 96)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 100)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 104)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 108)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 112)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 116)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 120)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 124))
 };
 
 u16 *const gTilesetAnims_MauvilleVDests1[] = {
-    (u16 *)(BG_VRAM + 0x5000),
-    (u16 *)(BG_VRAM + 0x5080),
-    (u16 *)(BG_VRAM + 0x5100),
-    (u16 *)(BG_VRAM + 0x5180),
-    (u16 *)(BG_VRAM + 0x5200),
-    (u16 *)(BG_VRAM + 0x5280),
-    (u16 *)(BG_VRAM + 0x5300),
-    (u16 *)(BG_VRAM + 0x5380)
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 128)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 132)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 136)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 140)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 144)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 148)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 152)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 156))
 };
 
 const u16 *const gTilesetAnims_Mauville0a[] = {
@@ -305,14 +305,14 @@ const u16 gTilesetAnims_Rustboro0_Frame6[] = INCBIN_U16("data/tilesets/secondary
 const u16 gTilesetAnims_Rustboro0_Frame7[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/7.4bpp");
 
 u16 *const gTilesetAnims_RustboroVDests0[] = {
-    (u16 *)(BG_VRAM + 0x5000),
-    (u16 *)(BG_VRAM + 0x5080),
-    (u16 *)(BG_VRAM + 0x5100),
-    (u16 *)(BG_VRAM + 0x5180),
-    (u16 *)(BG_VRAM + 0x5200),
-    (u16 *)(BG_VRAM + 0x5280),
-    (u16 *)(BG_VRAM + 0x5300),
-    (u16 *)(BG_VRAM + 0x5380)
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 128)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 132)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 136)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 140)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 144)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 148)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 152)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 156))
 };
 
 const u16 *const gTilesetAnims_Rustboro0[] = {
@@ -381,14 +381,14 @@ const u16 gTilesetAnims_EverGrande0_Frame7[] = INCBIN_U16("data/tilesets/seconda
 const u16 tileset_anims_space_4[16] = {};
 
 u16 *const gTilesetAnims_EverGrandeVDests0[] = {
-    (u16 *)(BG_VRAM + 0x5c00),
-    (u16 *)(BG_VRAM + 0x5c80),
-    (u16 *)(BG_VRAM + 0x5d00),
-    (u16 *)(BG_VRAM + 0x5d80),
-    (u16 *)(BG_VRAM + 0x5e00),
-    (u16 *)(BG_VRAM + 0x5e80),
-    (u16 *)(BG_VRAM + 0x5f00),
-    (u16 *)(BG_VRAM + 0x5f80)
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 224)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 228)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 232)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 236)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 240)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 244)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 248)),
+    (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 252))
 };
 
 const u16 *const gTilesetAnims_EverGrande0[] = {
@@ -719,22 +719,22 @@ void TilesetCb_InsideBuilding(void)
 
 static void sub_80A0B70(u16 timer)
 {
-    static void sub_80A0BCC(u16);
-    static void sub_80A0BF4(u16);
-    static void sub_80A0C1C(u16);
-    static void sub_80A0C44(u16);
-    static void sub_80A12AC(u16);
+    static void gTilesetAnims_Flower(u16);
+    static void gTilesetAnims_Water(u16);
+    static void gTilesetAnims_SandWaterEdge(u16);
+    static void gTilesetAnims_Waterfall(u16);
+    static void gTilesetAnims_LandWaterEdge (u16);
 
     if ((timer & 0x0F) == 0)
-        sub_80A0BCC(timer >> 4);
+        gTilesetAnims_Flower(timer >> 4);
     if ((timer & 0x0F) == 1)
-        sub_80A0BF4(timer >> 4);
+        gTilesetAnims_Water(timer >> 4);
     if ((timer & 0x0F) == 2)
-        sub_80A0C1C(timer >> 4);
+        gTilesetAnims_SandWaterEdge(timer >> 4);
     if ((timer & 0x0F) == 3)
-        sub_80A0C44(timer >> 4);
+        gTilesetAnims_Waterfall(timer >> 4);
     if ((timer & 0x0F) == 4)
-        sub_80A12AC(timer >> 4);
+        gTilesetAnims_LandWaterEdge (timer >> 4);
 }
 
 static void sub_80A0BB4(u16 timer)
@@ -745,36 +745,36 @@ static void sub_80A0BB4(u16 timer)
         sub_80A1688(timer >> 3);
 }
 
-static void sub_80A0BCC(u16 timer)
+static void gTilesetAnims_Flower(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_General0[idx], (u16 *)(BG_VRAM + 0x3F80), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 0x80);
 }
 
-static void sub_80A0BF4(u16 timer)
+static void gTilesetAnims_Water(u16 timer)
 {
     u8 idx;
 
     idx = timer % 8;
-    AppendTilesetAnimToBuffer(gTilesetAnims_General1[idx], (u16 *)(BG_VRAM + 0x3600), 0x3C0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General1[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(432)), 0x3C0);
 }
 
-static void sub_80A0C1C(u16 timer)
+static void gTilesetAnims_SandWaterEdge(u16 timer)
 {
     u16 idx;
 
     idx = timer % 8;
-    AppendTilesetAnimToBuffer(gTilesetAnims_General2[idx], (u16 *)(BG_VRAM + 0x3a00), 0x140);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General2[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 0x140);
 }
 
-static void sub_80A0C44(u16 timer)
+static void gTilesetAnims_Waterfall(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_General3[idx], (u16 *)(BG_VRAM + 0x3e00), 0xc0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General3[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(496)), 0xc0);
 }
 
 void TilesetCb_Petalburg(void)
@@ -1122,12 +1122,12 @@ static void sub_80A1294(u16 timer)
         sub_80A1570(timer >> 3);
 }
 
-static void sub_80A12AC(u16 timer)
+static void gTilesetAnims_LandWaterEdge (u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_General4[idx], (u16 *)(BG_VRAM + 0x3c00), 0x140);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General4[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(480)), 0x140);
 }
 
 static void sub_80A12D4(u8 timer)
@@ -1135,10 +1135,10 @@ static void sub_80A12D4(u8 timer)
     u8 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge0[idx], (u16 *)(BG_VRAM + 0x6400), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 288)), 0x80);
 
     idx = (timer + 2) % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge0[idx], (u16 *)(BG_VRAM + 0x6480), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 292)), 0x80);
 }
 
 static void sub_80A131C(u8 timer)
@@ -1146,7 +1146,7 @@ static void sub_80A131C(u8 timer)
     u8 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Pacifidlog0[idx], (u16 *)(BG_VRAM + 0x7a00), 0x3C0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Pacifidlog0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 464)), 0x3C0);
 }
 
 static void sub_80A1344(u8 timer)
@@ -1154,7 +1154,7 @@ static void sub_80A1344(u8 timer)
     u8 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Underwater0[idx], (u16 *)(BG_VRAM + 0x7e00), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Underwater0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 496)), 0x80);
 }
 
 static void sub_80A136C(u8 timer)
@@ -1162,7 +1162,7 @@ static void sub_80A136C(u8 timer)
     u8 idx;
 
     idx = timer % 8;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Pacifidlog1[idx], (u16 *)(BG_VRAM + 0x7e00), 0x100);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Pacifidlog1[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 496)), 0x100);
 }
 
 static void sub_80A1394(u16 timer_div, u8 timer_mod)
@@ -1195,7 +1195,7 @@ static void sub_80A1470(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Rustboro1[idx], (u16 *)(BG_VRAM + 0x7800), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Rustboro1[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 448)), 0x80);
 }
 
 static void sub_80A1498(u16 timer)
@@ -1203,7 +1203,7 @@ static void sub_80A1498(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge1_Cave0[idx], (u16 *)(BG_VRAM + 0x5400), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge1_Cave0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 160)), 0x80);
 }
 
 static void sub_80A14C0(u16 timer_div, u8 timer_mod)
@@ -1219,7 +1219,7 @@ static void sub_80A14F8(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge1_Cave0[idx], (u16 *)(BG_VRAM + 0x7400), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge1_Cave0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 416)), 0x80);
 }
 
 static void sub_80A1520(u16 timer)
@@ -1227,7 +1227,7 @@ static void sub_80A1520(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Dewford0[idx], (u16 *)(BG_VRAM + 0x5540), 0xC0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Dewford0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 170)), 0xC0);
 }
 
 static void sub_80A1548(u16 timer)
@@ -1235,7 +1235,7 @@ static void sub_80A1548(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_BattleFrontierOutsideWest0[idx], (u16 *)(BG_VRAM + 0x5b40), 0xC0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BattleFrontierOutsideWest0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 218)), 0xC0);
 }
 
 static void sub_80A1570(u16 timer)
@@ -1243,7 +1243,7 @@ static void sub_80A1570(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_BattleFrontierOutsideEast0[idx], (u16 *)(BG_VRAM + 0x5b40), 0xC0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BattleFrontierOutsideEast0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 218)), 0xC0);
 }
 
 static void sub_80A1598(u16 timer)
@@ -1251,7 +1251,7 @@ static void sub_80A1598(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Slateport0[idx], (u16 *)(BG_VRAM + 0x5c00), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Slateport0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 224)), 0x80);
 }
 
 static void sub_80A15C0(u16 timer)
@@ -1321,7 +1321,7 @@ static void sub_80A1688(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    AppendTilesetAnimToBuffer(gTilesetAnims_InsideBuilding0[idx], (u16 *)(BG_VRAM + 0x3e00), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_InsideBuilding0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(496)), 0x80);
 }
 
 static void sub_80A16B0(u16 timer)
@@ -1329,8 +1329,8 @@ static void sub_80A16B0(u16 timer)
     u16 idx;
 
     idx = timer % 3;
-    AppendTilesetAnimToBuffer(gTilesetAnims_SootopolisGym0[idx], (u16 *)(BG_VRAM + 0x7e00), 0x180);
-    AppendTilesetAnimToBuffer(gTilesetAnims_SootopolisGym1[idx], (u16 *)(BG_VRAM + 0x7a00), 0x280);
+    AppendTilesetAnimToBuffer(gTilesetAnims_SootopolisGym0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 496)), 0x180);
+    AppendTilesetAnimToBuffer(gTilesetAnims_SootopolisGym1[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 464)), 0x280);
 }
 
 static void sub_80A16F8(u16 timer)
@@ -1338,7 +1338,7 @@ static void sub_80A16F8(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    AppendTilesetAnimToBuffer(gTilesetAnims_EliteFour1[idx], (u16 *)(BG_VRAM + 0x7f00), 0x20);
+    AppendTilesetAnimToBuffer(gTilesetAnims_EliteFour1[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 504)), 0x20);
 }
 
 static void sub_80A1720(u16 timer)
@@ -1346,7 +1346,7 @@ static void sub_80A1720(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    AppendTilesetAnimToBuffer(gTilesetAnims_EliteFour0[idx], (u16 *)(BG_VRAM + 0x7c00), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_EliteFour0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 480)), 0x80);
 }
 
 static void sub_80A1748(u16 timer)
@@ -1354,7 +1354,7 @@ static void sub_80A1748(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    AppendTilesetAnimToBuffer(gTilesetAnims_MauvilleGym0[idx], (u16 *)(BG_VRAM + 0x5200), 0x200);
+    AppendTilesetAnimToBuffer(gTilesetAnims_MauvilleGym0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 144)), 0x200);
 }
 
 static void sub_80A1770(u16 timer)
@@ -1362,7 +1362,7 @@ static void sub_80A1770(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    AppendTilesetAnimToBuffer(gTilesetAnims_BikeShop0[idx], (u16 *)(BG_VRAM + 0x7e00), 0x120);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BikeShop0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 496)), 0x120);
 }
 
 static void sub_80A1798(u16 timer)
@@ -1370,7 +1370,7 @@ static void sub_80A1798(u16 timer)
     u16 idx;
 
     idx = timer % 8;
-    AppendTilesetAnimToBuffer(gTilesetAnims_Sootopolis0[idx], (u16 *)(BG_VRAM + 0x5e00), 0xc00);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Sootopolis0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 240)), 0xc00);
 }
 
 static void sub_80A17C0(u16 timer)
@@ -1378,7 +1378,7 @@ static void sub_80A17C0(u16 timer)
     u16 idx;
 
     idx = timer % 3;
-    AppendTilesetAnimToBuffer(gTilesetAnims_BattlePyramid0[idx], (u16 *)(BG_VRAM + 0x52e0), 0x100);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BattlePyramid0[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 151)), 0x100);
 }
 
 static void sub_80A17EC(u16 timer)
@@ -1386,7 +1386,7 @@ static void sub_80A17EC(u16 timer)
     u16 idx;
 
     idx = timer % 3;
-    AppendTilesetAnimToBuffer(gTilesetAnims_BattlePyramid1[idx], (u16 *)(BG_VRAM + 0x50e0), 0x100);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BattlePyramid1[idx], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 135)), 0x100);
 }
 
 static void sub_80A1818(u16 a1)

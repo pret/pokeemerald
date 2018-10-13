@@ -6,7 +6,7 @@ struct UnkRecordMixingStruct2a
 {
     u8 playerId[4];
     u16 field_4;
-    u8 playerName[PLAYER_NAME_LENGTH];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
     u8 language;
 };
 
@@ -15,8 +15,8 @@ struct UnkRecordMixingStruct2b
     u8 playerId1[4];
     u8 playerId2[4];
     u16 field_8;
-    u8 playerName1[PLAYER_NAME_LENGTH];
-    u8 playerName2[PLAYER_NAME_LENGTH];
+    u8 playerName1[PLAYER_NAME_LENGTH + 1];
+    u8 playerName2[PLAYER_NAME_LENGTH + 1];
     u8 language;
 };
 

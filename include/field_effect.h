@@ -236,4 +236,6 @@ void sub_80B9CDC(s16*, u8);
 void sub_80B7CAC(struct Sprite*);
 void sub_80B7A58(struct Sprite*);
 
+void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
+
 #endif //GUARD_FIELD_EFFECTS_H

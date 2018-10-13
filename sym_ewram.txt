@@ -226,15 +226,7 @@ gUnknown_020375A4: @ 20375A4
 gUnknown_020375AC: @ 20375AC
 	.space 0x8
 
-gUnknown_020375B4: @ 20375B4
-	.space 0x2
-
-gUnknown_020375B6: @ 20375B6
-	.space 0x2
-
-gLockedAnimEventObjects: @ 20375B8
-	.space 0x4
-
+    .include "src/event_object_movement.o"
     .include "src/field_message_box.o"
 
     .align 2
@@ -256,12 +248,9 @@ gUnknown_020375D6: @ 20375D6
 	.include "src/palette.o"
     .include "src/sound.o"
     .include "src/battle_anim.o"
-
-.align 2
-
-gUnknown_02038444: @ 2038444
-	.space 0x10
-
+    .include "src/battle_anim_80A5C6C.o"
+	
+	.space 0xC
 gUnknown_02038454: @ 2038454
 	.space 0x200
 
@@ -456,94 +445,7 @@ gUnknown_0203A120: @ 203A120
     .include "src/menu_helpers.o"
 	.include "src/region_map.o"
     .include "src/decoration.o"
-    .align 2
-
-@ slot_machine
-
-gUnknown_0203AAC8: @ 203AAC8
-	.space 0x4
-
-gUnknown_0203AACC: @ 203AACC
-	.space 0x4
-
-gUnknown_0203AAD0: @ 203AAD0
-	.space 0x4
-
-gUnknown_0203AAD4: @ 203AAD4
-	.space 0x4
-
-gUnknown_0203AAD8: @ 203AAD8
-	.space 0x4
-
-gUnknown_0203AADC: @ 203AADC
-	.space 0x4
-
-gUnknown_0203AAE0: @ 203AAE0
-	.space 0x4
-
-gUnknown_0203AAE4: @ 203AAE4
-	.space 0x4
-
-gUnknown_0203AAE8: @ 203AAE8
-	.space 0x4
-
-gUnknown_0203AAEC: @ 203AAEC
-	.space 0x4
-
-gUnknown_0203AAF0: @ 203AAF0
-	.space 0x4
-
-gUnknown_0203AAF4: @ 203AAF4
-	.space 0x4
-
-gUnknown_0203AAF8: @ 203AAF8
-	.space 0x4
-
-gUnknown_0203AAFC: @ 203AAFC
-	.space 0x4
-
-gUnknown_0203AB00: @ 203AB00
-	.space 0x4
-
-gUnknown_0203AB04: @ 203AB04
-	.space 0x4
-
-gUnknown_0203AB08: @ 203AB08
-	.space 0x4
-
-gUnknown_0203AB0C: @ 203AB0C
-	.space 0x4
-
-gUnknown_0203AB10: @ 203AB10
-	.space 0x4
-
-gUnknown_0203AB14: @ 203AB14
-	.space 0x4
-
-gUnknown_0203AB18: @ 203AB18
-	.space 0x4
-
-gUnknown_0203AB1C: @ 203AB1C
-	.space 0x4
-
-gUnknown_0203AB20: @ 203AB20
-	.space 0x4
-
-gUnknown_0203AB24: @ 203AB24
-	.space 0x4
-
-gUnknown_0203AB28: @ 203AB28
-	.space 0x4
-
-gUnknown_0203AB2C: @ 203AB2C
-	.space 0x4
-
-gUnknown_0203AB30: @ 203AB30
-	.space 0x4
-
-sSlotMachine: @ 203AB34
-	.space 0x4
-
+    .include "src/slot_machine.o"
     .include "src/battle_ai_script_commands.o"
     
 .align 2
@@ -599,9 +501,7 @@ gUnknown_0203ABB4: @ 203ABB4
 gUnknown_0203ABB5: @ 203ABB5
 	.space 0x3
 
-gUnknown_0203ABB8: @ 203ABB8
-	.space 0x4
-
+    .include "src/rom_81520A8.o"
     .include "src/save.o"
 
 .space 0x4 /*unused var?*/
@@ -643,34 +543,7 @@ gUnknown_0203CD88: @ 203CD88
 	.space 0x4
 
     .include "src/menu.o"
-
-    .align 2
-gUnknown_0203CE2C: @ 203CE2C
-	.space 0x4
-
-gUnknown_0203CE30: @ 203CE30
-	.space 0x4
-
-gUnknown_0203CE34: @ 203CE34
-	.space 0x4
-
-gUnknown_0203CE38: @ 203CE38
-	.space 0x4
-
-gUnknown_0203CE3C: @ 203CE3C
-	.space 0x4
-
-gUnknown_0203CE40: @ 203CE40
-	.space 0x4
-
-gUnknown_0203CE44: @ 203CE44
-	.space 0x4
-
-gUnknown_0203CE48: @ 203CE48
-	.space 0x4
-
-gUnknown_0203CE4C: @ 203CE4C
-	.space 0x4
+    .include "src/battle_factory.o"
 
 gUnknown_0203CE50: @ 203CE50
 	.space 0x4

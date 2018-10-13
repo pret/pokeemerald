@@ -34,11 +34,11 @@
 #define B_TXT_EFF_ABILITY 0x1B
 #define B_TXT_TRAINER1_CLASS 0x1C
 #define B_TXT_TRAINER1_NAME 0x1D
-#define B_TXT_1E 0x1E // trainer name for a link player
-#define B_TXT_1F 0x1F // trainer name for a link player
-#define B_TXT_20 0x20 // trainer name for a link player
-#define B_TXT_21 0x21 // trainer name for a link player
-#define B_TXT_22 0x22 // trainer name for a link player
+#define B_TXT_LINK_PLAYER_NAME 0x1E
+#define B_TXT_LINK_PARTNER_NAME 0x1F
+#define B_TXT_LINK_OPPONENT1_NAME 0x20
+#define B_TXT_LINK_OPPONENT2_NAME 0x21
+#define B_TXT_LINK_SCR_TRAINER_NAME 0x22
 #define B_TXT_PLAYER_NAME 0x23
 #define B_TXT_TRAINER1_LOSE_TEXT 0x24
 #define B_TXT_TRAINER1_WIN_TEXT 0x25
@@ -177,20 +177,20 @@
     textVar[4] = B_BUFF_EOS;                                    \
 }
 
-#define PREPARE_MON_NICK_WITH_PREFIX_BUFFER(textVar, bank, partyId)         \
+#define PREPARE_MON_NICK_WITH_PREFIX_BUFFER(textVar, battler, partyId)      \
 {                                                                           \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
     textVar[1] = B_BUFF_MON_NICK_WITH_PREFIX;                               \
-    textVar[2] = bank;                                                      \
+    textVar[2] = battler;                                                   \
     textVar[3] = partyId;                                                   \
     textVar[4] = B_BUFF_EOS;                                                \
 }
 
-#define PREPARE_MON_NICK_BUFFER(textVar, bank, partyId)         \
+#define PREPARE_MON_NICK_BUFFER(textVar, battler, partyId)      \
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_MON_NICK;                               \
-    textVar[2] = bank;                                          \
+    textVar[2] = battler;                                       \
     textVar[3] = partyId;                                       \
     textVar[4] = B_BUFF_EOS;                                    \
 }

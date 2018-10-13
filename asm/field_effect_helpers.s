@@ -20,7 +20,7 @@ SetUpReflection: @ 8153ED4
 	ldrsh r2, [r4, r0]
 	adds r0, r4, 0
 	movs r3, 0x98
-	bl obj_unfreeze
+	bl CreateCopySpriteAt
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -34,7 +34,7 @@ SetUpReflection: @ 8153ED4
 	movs r0, 0xC
 	orrs r1, r0
 	strb r1, [r7, 0x5]
-	ldr r2, =gUnknown_084975C4
+	ldr r2, =gReflectionEffectPaletteMap
 	lsrs r0, r1, 4
 	adds r0, r2
 	ldrb r0, [r0]
@@ -185,7 +185,7 @@ npc_pal_op_B: @ 815401C
 	bne _0815404C
 	ldrh r0, [r2, 0x2]
 	adds r1, r4, 0
-	bl npc_load_two_palettes__no_record
+	bl LoadPlayerObjectReflectionPalette
 	b _0815406A
 	.pool
 _0815404C:
@@ -193,15 +193,15 @@ _0815404C:
 	bne _0815405A
 	ldrh r0, [r2, 0x2]
 	adds r1, r4, 0
-	bl npc_load_two_palettes__and_record
+	bl LoadSpecialObjectReflectionPalette
 	b _0815406A
 _0815405A:
 	adds r0, r4, 0
-	bl npc_paltag_by_palslot
+	bl GetObjectPaletteTag
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 _0815406A:
 	adds r0, r4, 0
 	bl UpdateSpritePaletteWithWeather
@@ -225,7 +225,7 @@ npc_pal_op_A: @ 8154078
 	beq _0815409C
 	adds r0, r1, 0
 	adds r1, r4, 0
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 	adds r0, r4, 0
 	bl UpdateSpritePaletteWithWeather
 _0815409C:
@@ -277,7 +277,7 @@ _081540E0:
 	b _08154214
 	.pool
 _081540FC:
-	ldr r1, =gUnknown_084975C4
+	ldr r1, =gReflectionEffectPaletteMap
 	ldrb r0, [r5, 0x5]
 	lsrs r0, 4
 	adds r0, r1

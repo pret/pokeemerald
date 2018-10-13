@@ -3622,7 +3622,7 @@ static void sub_8190400(u8 taskId)
             gSprites[r7].data[0] = i;
             gSprites[r7].data[1] = 0;
             if (r9 == 1)
-                gSprites[r7].invisible = 1;
+                gSprites[r7].invisible = TRUE;
 
             r7 = CreateSprite(&gUnknown_0860D050, 234, 80, 0);
             StartSpriteAnim(&gSprites[r7], 1);
@@ -3644,7 +3644,7 @@ static void SpriteCb_TrainerIconCardScrollUp(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.y >= -32)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -3664,7 +3664,7 @@ static void SpriteCb_TrainerIconCardScrollDown(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.y <= 192)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -3684,7 +3684,7 @@ static void SpriteCb_TrainerIconCardScrollLeft(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.x >= -32)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -3704,7 +3704,7 @@ static void SpriteCb_TrainerIconCardScrollRight(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.x <= 272)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -3734,7 +3734,7 @@ static void SpriteCb_MonIconCardScrollUp(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.y >= -16)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
             sprite->callback = SpriteCb_MonIcon;
     }
@@ -3756,7 +3756,7 @@ static void SpriteCb_MonIconCardScrollDown(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.y <= 176)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
             sprite->callback = SpriteCb_MonIcon;
     }
@@ -3778,7 +3778,7 @@ static void SpriteCb_MonIconCardScrollLeft(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.x >= -16)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
             sprite->callback = SpriteCb_MonIcon;
     }
@@ -3800,7 +3800,7 @@ static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         if (sprite->pos1.x <= 256)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
             sprite->callback = SpriteCb_MonIcon;
     }
@@ -3828,29 +3828,29 @@ static void sub_8190B40(struct Sprite *sprite)
             if ((gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].isEliminated
                 && sBattleDomeStruct->unk_10 - 1 < gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].eliminatedAt))
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
             else if (!gSaveBlock2Ptr->frontier.domeTrainers[tournmanetTrainerId].isEliminated
                      && sBattleDomeStruct->unk_10 - 1 < r12)
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
             else
             {
                 if (gTasks[taskId1].data[0] == 2)
-                    sprite->invisible = 1;
+                    sprite->invisible = TRUE;
             }
         }
         else
         {
             if (sBattleDomeStruct->unk_10 != 0)
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
             else
             {
                 if (gTasks[taskId1].data[0] == 2)
-                    sprite->invisible = 1;
+                    sprite->invisible = TRUE;
             }
         }
     }
@@ -3861,23 +3861,23 @@ static void sub_8190B40(struct Sprite *sprite)
             if (sBattleDomeStruct->unk_10 > 1)
             {
                 if (gTasks[taskId1].data[0] == 2)
-                    sprite->invisible = 1;
+                    sprite->invisible = TRUE;
             }
             else
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
         }
         else
         {
             if (sBattleDomeStruct->unk_10 != 0)
             {
-                sprite->invisible = 0;
+                sprite->invisible = FALSE;
             }
             else
             {
                 if (gTasks[taskId1].data[0] == 2)
-                    sprite->invisible = 1;
+                    sprite->invisible = TRUE;
             }
         }
     }
@@ -3892,11 +3892,11 @@ static void sub_8190C6C(struct Sprite *sprite)
         if (sBattleDomeStruct->unk_10 != 0)
         {
             if (gTasks[taskId1].data[0] == 2)
-                sprite->invisible = 1;
+                sprite->invisible = TRUE;
         }
         else
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         }
     }
     else
@@ -3904,11 +3904,11 @@ static void sub_8190C6C(struct Sprite *sprite)
         if (sBattleDomeStruct->unk_10 != 1)
         {
             if (gTasks[taskId1].data[0] == 2)
-                sprite->invisible = 1;
+                sprite->invisible = TRUE;
         }
         else
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         }
     }
 }
@@ -4770,7 +4770,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[sBattleDomeStruct->arr[arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[arrId]].invisible = TRUE;
 
     for (i = 0; i < 3; i++)
     {
@@ -4803,7 +4803,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         }
 
         if (flags & 0x1E)
-            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = TRUE;
     }
     textPrinter.fontId = 2;
     textPrinter.x = 0;
@@ -5208,7 +5208,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[0]), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[sBattleDomeStruct->arr[arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[arrId]].invisible = TRUE;
     if (lost[0])
         gSprites[sBattleDomeStruct->arr[arrId]].oam.paletteNum = 3;
 
@@ -5221,7 +5221,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         sBattleDomeStruct->arr[1 + arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[1]), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
 
     if (flags & 0x1E)
-        gSprites[sBattleDomeStruct->arr[1 + arrId]].invisible = 1;
+        gSprites[sBattleDomeStruct->arr[1 + arrId]].invisible = TRUE;
     if (lost[1])
         gSprites[sBattleDomeStruct->arr[1 + arrId]].oam.paletteNum = 3;
 
@@ -5257,7 +5257,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
 
         if (flags & 0x1E)
-            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = TRUE;
         if (lost[0])
         {
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].oam.paletteNum = 3;
@@ -5297,7 +5297,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
 
         if (flags & 0x1E)
-            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].invisible = 1;
+            gSprites[sBattleDomeStruct->arr[5 + i + arrId]].invisible = TRUE;
         if (lost[1])
         {
             gSprites[sBattleDomeStruct->arr[5 + i + arrId]].oam.paletteNum = 3;
@@ -6024,7 +6024,7 @@ static void HblankCb_BattleDome(void)
         if (vCount < 50)
         {
             REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-            SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
+            SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
             return;
         }
         else if (vCount > 57)
@@ -6032,13 +6032,13 @@ static void HblankCb_BattleDome(void)
             if (vCount < 75)
             {
                 REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                SET_WIN0H_WIN1H(WINHV_COORDS(144, 152), WINHV_COORDS(88, 96));
+                SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
                 return;
             }
             else if (vCount < 82)
             {
                 REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
+                SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
                 return;
             }
             else if (vCount > 94)
@@ -6046,13 +6046,13 @@ static void HblankCb_BattleDome(void)
                 if (vCount < 103)
                 {
                     REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                    SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
+                    SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
                     return;
                 }
                 else if (vCount < 119)
                 {
                     REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                    SET_WIN0H_WIN1H(WINHV_COORDS(144, 152), WINHV_COORDS(88, 96));
+                    SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
                     return;
                 }
                 else if (vCount > 126)
@@ -6060,7 +6060,7 @@ static void HblankCb_BattleDome(void)
                     if (vCount_ < 135)
                     {
                         REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                        SET_WIN0H_WIN1H(WINHV_COORDS(152, 155), WINHV_COORDS(85, 88));
+                        SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
                         return;
                     }
                 }
@@ -6449,12 +6449,12 @@ static void CopyDomeTrainerName(u8 *dst, u16 trainerId)
     {
         if (trainerId == TRAINER_PLAYER)
         {
-            for (i = 0; i < OT_NAME_LENGTH; i++)
+            for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 dst[i] = gSaveBlock2Ptr->playerName[i];
         }
         else if (trainerId < 300)
         {
-            for (i = 0; i < 7; i++)
+            for (i = 0; i < FRONTIER_TRAINER_NAME_LENGTH; i++)
                 dst[i] = gFacilityTrainers[trainerId].trainerName[i];
         }
         dst[i] = EOS;
@@ -6475,7 +6475,7 @@ static void CopyDomeBrainTrainerName(u8 *dst)
 {
     s32 i;
 
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < FRONTIER_TRAINER_NAME_LENGTH; i++)
         dst[i] = gTrainers[TRAINER_TUCKER].trainerName[i];
     dst[i] = EOS;
 }

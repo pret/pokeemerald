@@ -1078,7 +1078,7 @@ u8 PokecenterHealEffectHelper(s16 x, s16 y)
     spriteIdAtEnd = CreateSpriteAtEnd(&gSpriteTemplate_855C31C, x, y, 0);
     sprite = &gSprites[spriteIdAtEnd];
     sprite->oam.priority = 2;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     SetSubspriteTables(sprite, &gUnknown_0855C2AC);
     return spriteIdAtEnd;
 }
@@ -1088,7 +1088,7 @@ void SpriteCB_PokecenterMonitor(struct Sprite *sprite)
     if (sprite->data[0] != 0)
     {
         sprite->data[0] = 0;
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         StartSpriteAnim(sprite, 1);
     }
     if (sprite->animEnded)
@@ -1108,7 +1108,7 @@ void HallOfFameRecordEffectHelper(s16 a0, s16 a1, s16 a2, u8 a3)
     {
         spriteIdAtEnd = CreateSpriteAtEnd(&gSpriteTemplate_855C34C, a1, a2, 0);
     }
-    gSprites[spriteIdAtEnd].invisible = 1;
+    gSprites[spriteIdAtEnd].invisible = TRUE;
     gSprites[spriteIdAtEnd].data[0] = a0;
 }
 
@@ -1170,7 +1170,7 @@ void task00_8084310(u8 taskId)
     if (!FieldEffectActiveListContains(FLDEFF_USE_FLY))
     {
         Overworld_ResetStateAfterFly();
-        warp_in();
+        WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
         gFieldCallback = mapldr_08084390;
         DestroyTask(taskId);
@@ -1182,7 +1182,7 @@ void mapldr_08084390(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     CreateTask(c3_080843F8, 0);
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
     if (gPlayerAvatar.flags & 0x08)
     {
         EventObjectTurn(&gEventObjects[gPlayerAvatar.eventObjectId], DIR_WEST);
@@ -1242,7 +1242,7 @@ bool8 sub_80B6BCC(struct Task *task) // gUnknown_0855C3C8[0]
     playerObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     playerSprite = &gSprites[gPlayerAvatar.spriteId];
     CameraObjectReset2();
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
     gPlayerAvatar.preventStep = TRUE;
     EventObjectSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
     task->data[4] = playerSprite->subspriteMode;
@@ -1271,7 +1271,7 @@ bool8 sub_80B6C90(struct Task *task) // gUnknown_0855C3C8[2]
     sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
     task->data[1] = 1;
     task->data[2] = 0;
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 0;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = FALSE;
     PlaySE(SE_RU_HYUU);
     task->data[0]++;
     return FALSE;
@@ -1355,7 +1355,7 @@ void sub_80B6FB8(struct Task *);
 void sub_80B7004(struct Task *);
 void sub_80B7050(void);
 void sub_80B7060(void);
-bool8 sub_80859A0(void);
+bool8 BGMusicStopped(void);
 void sub_80B70B4(void);
 void sub_80E1570(void);
 void sub_80B70DC(u8);
@@ -1476,10 +1476,10 @@ void sub_80B7050(void)
 
 void sub_80B7060(void)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
         sub_80E1570();
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_80B70B4;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B6E88));
@@ -1838,9 +1838,9 @@ bool8 sub_80B77F8(struct Task *task, struct EventObject *eventObject, struct Spr
 
 bool8 sub_80B7814(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = mapldr_080851BC;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B75F0));
@@ -1869,7 +1869,7 @@ bool8 sub_80B78EC(struct Task *task, struct EventObject *eventObject, struct Spr
     CameraObjectReset2();
     FreezeEventObjects();
     gPlayerAvatar.preventStep = TRUE;
-    eventObject->invisible = 1;
+    eventObject->invisible = TRUE;
     task->data[0]++;
     return FALSE;
 }
@@ -1894,7 +1894,7 @@ bool8 sub_80B7968(struct Task *task, struct EventObject *eventObject, struct Spr
     if (sprite->animCmdIndex > 1)
     {
         task->data[0]++;
-        eventObject->invisible = 0;
+        eventObject->invisible = FALSE;
         CameraObjectReset1();
         PlaySE(SE_W091);
         EventObjectSetHeldMovement(eventObject, GetJumpMovementAction(DIR_EAST));
@@ -1982,7 +1982,7 @@ bool8 sub_80B7B94(struct Task *task, struct EventObject *eventObject, struct Spr
 {
     if (gSprites[task->data[1]].animCmdIndex == 2)
     {
-        eventObject->invisible = 1;
+        eventObject->invisible = TRUE;
         task->data[0]++;
     }
     return FALSE;
@@ -2004,9 +2004,9 @@ void mapldr_080859D4(void);
 
 bool8 sub_80B7BF4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && sub_80859A0() == TRUE)
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_80B6B68;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(FindTaskIdByFunc(sub_80B7A8C));
@@ -2063,11 +2063,11 @@ void sub_80B7D34(struct Task *task)
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
-        if (task->data[14] == 0 && !gPaletteFade.active && sub_80859A0() == TRUE)
+        if (task->data[14] == 0 && !gPaletteFade.active && BGMusicStopped() == TRUE)
         {
             SetEventObjectDirection(eventObject, task->data[15]);
             sub_8084E14();
-            warp_in();
+            WarpIntoMap();
             gFieldCallback = mapldr_080859D4;
             SetMainCallback2(CB2_LoadMap);
             DestroyTask(FindTaskIdByFunc(sub_80B7CE4));
@@ -2097,7 +2097,7 @@ void mapldr_080859D4(void)
     ScriptContext2_Enable();
     FreezeEventObjects();
     gFieldCallback = NULL;
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
     CreateTask(sub_80B7E94, 0);
 }
 
@@ -2127,7 +2127,7 @@ void sub_80B7EE8(struct Task *task)
         }
         if (task->data[2] >= 32 && task->data[15] == GetPlayerFacingDirection())
         {
-            eventObject->invisible = 0;
+            eventObject->invisible = FALSE;
             ScriptContext2_Disable();
             UnfreezeEventObjects();
             DestroyTask(FindTaskIdByFunc(sub_80B7E94));
@@ -2234,10 +2234,10 @@ static void TeleportFieldEffectTask4(struct Task *task)
             task->data[5] = TRUE;
         }
 
-        if (sub_80859A0() == TRUE)
+        if (BGMusicStopped() == TRUE)
         {
             Overworld_SetWarpDestToLastHealLoc();
-            warp_in();
+            WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             gFieldCallback = mapldr_08085D88;
             DestroyTask(FindTaskIdByFunc(ExecuteTeleportFieldEffectTask));
@@ -2254,7 +2254,7 @@ static void mapldr_08085D88(void)
     ScriptContext2_Enable();
     FreezeEventObjects();
     gFieldCallback = NULL;
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
     CameraObjectReset2();
     CreateTask(sub_80B8250, 0);
 }
@@ -2279,7 +2279,7 @@ void sub_80B8280(struct Task *task)
         sprite = &gSprites[gPlayerAvatar.spriteId];
         centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
         sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
-        gEventObjects[gPlayerAvatar.eventObjectId].invisible = 0;
+        gEventObjects[gPlayerAvatar.eventObjectId].invisible = FALSE;
         task->data[0]++;
         task->data[1] = 8;
         task->data[2] = 1;
@@ -3463,7 +3463,7 @@ void sub_80B96B0(struct Sprite *sprite)
             sprite->data[7]++;
             sprite->oam.affineMode = 0;
             FreeOamMatrix(sprite->oam.matrixNum);
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
         }
     }
 }
@@ -3516,7 +3516,7 @@ void sub_80B9804(struct Task *task)
         CameraObjectReset2();
         EventObjectTurn(eventObject, DIR_WEST);
         StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
-        eventObject->invisible = 0;
+        eventObject->invisible = FALSE;
         task->data[1] = sub_80B94C4();
         sub_80B9524(task->data[1]);
         sub_80B9560(task->data[1], eventObject->spriteId);

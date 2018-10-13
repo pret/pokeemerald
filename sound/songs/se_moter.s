@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_moter_grp, voicegroup_869D6F4
+	.equ	se_moter_grp, voicegroup128
 	.equ	se_moter_pri, 4
 	.equ	se_moter_rev, reverb_set+50
 	.equ	se_moter_mvl, 127

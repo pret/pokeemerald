@@ -1902,7 +1902,7 @@ const union AnimCmd *const gUnknown_0830064C[] = {gAnimCmd_General_Frame0};
 const union AnimCmd *const gUnknown_08300650[] = {gAnimCmd_General_Frame0};
 const union AnimCmd *const gUnknown_08300654[] = {gAnimCmd_General_Frame0};
 
-const union AnimCmd *const *const gUnknownAnimationsSpriteAnimsPtrTable[] =
+const union AnimCmd *const *const gUnusedTrainerFrontAnimsPtrTable[] =
 {
     gUnknown_082FFDCC,
     gUnknown_082FFDD0,

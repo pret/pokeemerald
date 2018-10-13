@@ -131,7 +131,7 @@ void sub_8158D8C(u8 taskId)
     if (IsContest())
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-            species = gContestResources->field_18->field_0;
+            species = gContestResources->field_18->unk0;
         else
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
     }
@@ -177,7 +177,7 @@ void sub_8158E9C(u8 taskId)
     if (IsContest())
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-            species = gContestResources->field_18->field_0;
+            species = gContestResources->field_18->unk0;
         else
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
     }
@@ -281,7 +281,7 @@ void sub_81590B8(u8 taskId)
     pan = BattleAnimAdjustPanning(PAN_SIDE_PLAYER);
 
     if (IsContest())
-        species = gContestResources->field_18->field_0;
+        species = gContestResources->field_18->unk0;
     else
         species = gAnimBattlerSpecies[gBattleAnimAttacker];
 

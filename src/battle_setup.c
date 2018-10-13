@@ -75,7 +75,7 @@ extern void sub_81D6384(void);
 extern void sub_81D61E8(void);
 extern void sub_80982B8(void);
 extern void sub_81A9EDC(u16 a0);
-extern void sub_81D572C(u8 a0, u16 arg1);
+extern void CopyTrainerHillTrainerText(u8 a0, u16 arg1);
 
 // this file's functions
 static void DoBattlePikeWildBattle(void);
@@ -642,7 +642,7 @@ u8 BattleSetup_GetTerrainId(void)
     case MAP_TYPE_ROUTE:
         break;
     case MAP_TYPE_UNDERGROUND:
-        if (MetatileBehavior_IsMB_0B(tileBehavior))
+        if (MetatileBehavior_IsIndoorEncounter(tileBehavior))
             return BATTLE_TERRAIN_BUILDING;
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
             return BATTLE_TERRAIN_POND;
@@ -1281,7 +1281,7 @@ void BattleSetup_StartTrainerBattle(void)
     }
     else if (sub_81D5C18())
     {
-        gBattleTypeFlags |= BATTLE_TYPE_x4000000;
+        gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL;
 
         if (gNoOfApproachingTrainers == 2)
             sub_81D639C();
@@ -1370,9 +1370,9 @@ void ShowTrainerIntroSpeech(void)
     else if (sub_81D5C18())
     {
         if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
-            sub_81D572C(2, sub_81D6180(gSpecialVar_LastTalked));
+            CopyTrainerHillTrainerText(2, sub_81D6180(gSpecialVar_LastTalked));
         else
-            sub_81D572C(2, sub_81D6180(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
+            CopyTrainerHillTrainerText(2, sub_81D6180(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
 
         sub_80982B8();
     }

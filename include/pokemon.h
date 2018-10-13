@@ -205,7 +205,7 @@ struct BoxPokemon
     u8 hasSpecies:1;
     u8 isEgg:1;
     u8 unused:5;
-    u8 otName[OT_NAME_LENGTH];
+    u8 otName[PLAYER_NAME_LENGTH];
     u8 markings;
     u16 checksum;
     u16 unknown;
@@ -268,12 +268,12 @@ struct UnknownPokemonStruct3
 
 struct Unknown_806F160_Struct
 {
-    u8 field_0_0 : 4;
-    u8 field_0_1 : 4;
+    u8 field_0_0:4;
+    u8 field_0_1:4;
     u8 field_1;
     u8 magic;
-    u8 field_3_0 : 4;
-    u8 field_3_1 : 4;
+    u8 field_3_0:4;
+    u8 field_3_1:4;
     void *bytes;
     u8 **byteArrays;
     struct SpriteTemplate *templates;

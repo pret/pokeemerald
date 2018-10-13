@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_ru_bari_grp, voicegroup_869D0F4
+	.equ	se_ru_bari_grp, voicegroup127
 	.equ	se_ru_bari_pri, 4
 	.equ	se_ru_bari_rev, reverb_set+50
 	.equ	se_ru_bari_mvl, 127

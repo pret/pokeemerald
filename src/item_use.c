@@ -1,15 +1,10 @@
 #include "global.h"
 #include "item_use.h"
 #include "battle.h"
-#include "main.h"
+#include "battle_pyramid_bag.h"
 #include "berry.h"
 #include "bike.h"
 #include "coins.h"
-#include "constants/bg_event_constants.h"
-#include "constants/flags.h"
-#include "constants/items.h"
-#include "constants/songs.h"
-#include "constants/vars.h"
 #include "data2.h"
 #include "event_data.h"
 #include "fieldmap.h"
@@ -18,25 +13,31 @@
 #include "field_screen.h"
 #include "field_weather.h"
 #include "item.h"
+#include "item_menu.h"
 #include "mail.h"
+#include "main.h"
+#include "menu.h"
+#include "menu_helpers.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
+#include "party_menu.h"
+#include "pokeblock.h"
 #include "pokemon.h"
 #include "rom_818CFC8.h"
 #include "script.h"
 #include "sound.h"
+#include "strings.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "strings.h"
-#include "pokeblock.h"
-#include "menu.h"
-#include "item_menu.h"
-#include "battle_pyramid_bag.h"
+#include "constants/bg_event_constants.h"
+#include "constants/flags.h"
+#include "constants/items.h"
+#include "constants/songs.h"
+#include "constants/vars.h"
 
 extern void(*gUnknown_0203A0F4)(u8 taskId);
-extern void(*gUnknown_085920D8[])(void);
 extern void (*gUnknown_03006328)(u8, u16, TaskFunc);
 extern void unknown_ItemMenu_Confirm(u8 taskId);
 extern void sub_81C5B14(u8 taskId);
@@ -45,7 +46,6 @@ extern void ItemUseOutOfBattle_TMHM(u8 a);
 extern void ItemUseOutOfBattle_EvolutionStone(u8 b);
 extern bool8 IsPlayerFacingSurfableFishableWater(void);
 extern bool8 sub_81221AC(void);
-extern u8 gUnknown_085920E4[];
 extern u8 Route102_EventScript_274482[];
 extern u8 Route102_EventScript_2744C0[];
 extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
@@ -53,16 +53,7 @@ extern int sub_80247BC(void);
 extern struct MapHeader* mapconnection_get_mapheader(struct MapConnection *connection);
 extern void SetUpItemUseCallback(u8 taskId);
 extern void ItemUseCB_Medicine(u8, u16, TaskFunc);
-extern void sub_81B67C8(u8, u16, TaskFunc);
-extern void sub_81B79E8(u8, u16, TaskFunc);
-extern void dp05_ether(u8, u16, TaskFunc);
-extern void dp05_pp_up(u8, u16, TaskFunc);
-extern void dp05_rare_candy(u8, u16, TaskFunc);
-extern void sub_81B6DC4(u8, u16, TaskFunc);
-extern void sub_81B7C74(u8, u16, TaskFunc);
-extern u16 ItemIdToBattleMoveId(u16);
-extern void bag_menu_yes_no(u8, u8, void(**)(u8 taskId));
-extern void (*gUnknown_085920E8[])(u8 taskId);
+extern void bag_menu_yes_no(u8, u8, const struct YesNoFuncTable*);
 extern void sub_81C5924(void);
 extern void sub_81C59BC(void);
 extern void sub_81AB9A8(u8);
@@ -92,6 +83,7 @@ void sub_80FDE7C(u8 taskId);
 void sub_80FDF90(u8 taskId);
 void task08_0809AD8C(u8 taskId);
 void sub_80FE024(u8 taskId);
+void sub_80FE03C(u8 taskId);
 void sub_80FE124(u8 taskId);
 void sub_80FE164(u8 taskId);
 
@@ -107,6 +99,25 @@ void sub_80FD8E0(u8 taskId, s16 x, s16 y);
 void sub_80FDBEC(void);
 bool8 sub_80FDE2C(void);
 void ItemUseOutOfBattle_CannotUse(u8 taskId);
+
+// .rodata
+
+static const MainCallback gUnknown_085920D8[] =
+{
+    sub_81B617C,
+    CB2_ReturnToField,
+    NULL,
+};
+
+static const u8 gUnknown_085920E4[] = {DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST};
+
+static const struct YesNoFuncTable gUnknown_085920E8 =
+{
+    .yesFunc = sub_80FE03C,
+    .noFunc = bag_menu_inits_lists_menu,
+};
+
+// .text
 
 void SetUpItemUseCallback(u8 taskId)
 {
@@ -784,7 +795,7 @@ void task08_0809AD8C(u8 taskId)
 
 void sub_80FE024(u8 taskId)
 {
-    bag_menu_yes_no(taskId, 6, gUnknown_085920E8);
+    bag_menu_yes_no(taskId, 6, &gUnknown_085920E8);
 }
 
 void sub_80FE03C(u8 taskId)
@@ -878,7 +889,7 @@ void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
 
 void task08_080A1C44(u8 taskId)
 {
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     sub_80B7CC8();
     DestroyTask(taskId);
 }

@@ -269,7 +269,7 @@ u16 GetRecordedCyclingRoadResults(void) {
 }
 
 void UpdateCyclingRoadState(void) {
-    if (gUnknown_020322DC.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE) && gUnknown_020322DC.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE))
+    if (gLastUsedWarp.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE))
     {
         return;
     }
@@ -1836,10 +1836,10 @@ void sub_8139B60(void)
     SetStandardWindowBorderStyle(gUnknown_0203AB5E, 0);
 
     xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
-    PrintTextOnWindow(gUnknown_0203AB5E, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
 
     xPos = GetStringCenterAlignXOffset(1, gElevatorFloorsTable[gSpecialVar_0x8005], 64);
-    PrintTextOnWindow(gUnknown_0203AB5E, 1, gElevatorFloorsTable[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gElevatorFloorsTable[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
 
     PutWindowTilemap(gUnknown_0203AB5E);
     CopyWindowToVram(gUnknown_0203AB5E, 3);
@@ -2094,7 +2094,7 @@ bool32 warp0_in_pokecenter(void)
     static const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xffff };
 
     int i;
-    u16 map = (gUnknown_020322DC.mapGroup << 8) + gUnknown_020322DC.mapNum;
+    u16 map = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
 
     for (i = 0; gUnknown_085B2C2A[i] != 0xFFFF; i++)
     {
@@ -2178,13 +2178,13 @@ void sub_8139F20(void)
             }
             break;
         case 5:
-            if (gSaveBlock2Ptr->frontier.field_DE2[0] >= gSaveBlock2Ptr->frontier.field_DE2[1])
+            if (gSaveBlock2Ptr->frontier.field_DE2[0][0] >= gSaveBlock2Ptr->frontier.field_DE2[0][1])
             {
-                unk = gSaveBlock2Ptr->frontier.field_DE2[0];
+                unk = gSaveBlock2Ptr->frontier.field_DE2[0][0];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.field_DE2[1];
+                unk = gSaveBlock2Ptr->frontier.field_DE2[0][1];
             }
             break;
         case 6:
@@ -3063,7 +3063,7 @@ void sub_813A8FC(void)
     u32 x;
     StringCopy(ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->frontier.frontierBattlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4), gText_BP);
     x = GetStringRightAlignXOffset(1, string, 48);
-    PrintTextOnWindow(gUnknown_0203AB6D, 1, string, x, 1, 0, NULL);
+    AddTextPrinterParameterized(gUnknown_0203AB6D, 1, string, x, 1, 0, NULL);
 }
 
 void sub_813A958(void)
@@ -3201,7 +3201,7 @@ static void sub_813AA60(u16 a0, u16 a1)
         switch (a0)
         {
             case 3:
-                AddTextPrinterParameterized(0, 1, gUnknown_085B3170[a1], 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, 1, gUnknown_085B3170[a1], 0, NULL, 2, 1, 3);
                 if (gUnknown_085B312C[a1] == 0xFFFF)
                 {
                     sub_813ABD4(gUnknown_085B312C[a1]);
@@ -3214,7 +3214,7 @@ static void sub_813AA60(u16 a0, u16 a1)
                 }
                 break;
             case 4:
-                AddTextPrinterParameterized(0, 1, gUnknown_085B319C[a1], 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, 1, gUnknown_085B319C[a1], 0, NULL, 2, 1, 3);
                 if (gUnknown_085B3142[a1] == 0xFFFF)
                 {
                     sub_813ABD4(gUnknown_085B3142[a1]);
@@ -3227,11 +3227,11 @@ static void sub_813AA60(u16 a0, u16 a1)
                 }
                 break;
             case 5:
-                AddTextPrinterParameterized(0, 1, gUnknown_085B31B4[a1], 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, 1, gUnknown_085B31B4[a1], 0, NULL, 2, 1, 3);
                 sub_813ABD4(gUnknown_085B314E[a1]);
                 break;
             case 6:
-                AddTextPrinterParameterized(0, 1, gUnknown_085B31D0[a1], 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, 1, gUnknown_085B31D0[a1], 0, NULL, 2, 1, 3);
                 sub_813ABD4(gUnknown_085B315C[a1]);
                 break;
         }
@@ -3339,11 +3339,11 @@ static void sub_813AD34(u8 a0, u16 a1)
         FillWindowPixelRect(gUnknown_0203AB5E, 0x11, 0, 0, 96, 48);
         if (a0 == 10)
         {
-            PrintTextOnWindow(gUnknown_0203AB5E, 1, gUnknown_085B3254[a1], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gUnknown_085B3254[a1], 0, 1, 0, NULL);
         }
         else
         {
-            PrintTextOnWindow(gUnknown_0203AB5E, 1, gUnknown_085B3228[a1], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gUnknown_085B3228[a1], 0, 1, 0, NULL);
         }
     }
 }
@@ -3367,10 +3367,10 @@ void sub_813ADD4(void)
 
         for (i = 0; i < 6; i++)
         {
-            sub_8199F74(task->data[13], 1, gUnknown_085B2CF0[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
+            AddTextPrinterParameterized5(task->data[13], 1, gUnknown_085B2CF0[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
         }
 
-        PrintTextOnWindow(task->data[13], 1, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(task->data[13], 1, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SPEED_FF, NULL);
         PutWindowTilemap(task->data[13]);
         CopyWindowToVram(task->data[13], 3);
     }

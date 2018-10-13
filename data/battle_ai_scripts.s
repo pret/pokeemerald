@@ -13,8 +13,8 @@
 	.align 2
 gBattleAI_ScriptsTable:: @ 82DBEF8
 	.4byte AI_CheckBadMove
-	.4byte AI_CheckViability
 	.4byte AI_TryToFaint
+	.4byte AI_CheckViability
 	.4byte AI_SetupFirstTurn
 	.4byte AI_Risky
 	.4byte AI_PreferStrongestMove
@@ -47,12 +47,12 @@ gBattleAI_ScriptsTable:: @ 82DBEF8
 
 AI_CheckBadMove:
 	if_target_is_ally AI_Ret
-	if_move MOVE_FISSURE, BattleAIScript_82DBF92
-	if_move MOVE_HORN_DRILL, BattleAIScript_82DBF92
+	if_move MOVE_FISSURE, AI_CBM_CheckIfNegatesType
+	if_move MOVE_HORN_DRILL, AI_CBM_CheckIfNegatesType
 	get_how_powerful_move_is
 	if_equal 0, AI_CheckBadMove_CheckSoundproof
 
-BattleAIScript_82DBF92: @ 82DBF92
+AI_CBM_CheckIfNegatesType: @ 82DBF92
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_VOLT_ABSORB, CheckIfVoltAbsorbCancelsElectric
@@ -60,32 +60,32 @@ BattleAIScript_82DBF92: @ 82DBF92
 	if_equal ABILITY_FLASH_FIRE, CheckIfFlashFireCancelsFire
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
-	goto BattleAIScript_82DBFF7
+	goto AI_CheckBadMove_CheckSoundproof_
 
 CheckIfVoltAbsorbCancelsElectric: @ 82DBFBD
 	get_curr_move_type
 	if_equal_ TYPE_ELECTRIC, Score_Minus12
-	goto BattleAIScript_82DBFF7
+	goto AI_CheckBadMove_CheckSoundproof_
 
 CheckIfWaterAbsorbCancelsWater: @ 82DBFCA
 	get_curr_move_type
 	if_equal_ TYPE_WATER, Score_Minus12
-	goto BattleAIScript_82DBFF7
+	goto AI_CheckBadMove_CheckSoundproof_
 
 CheckIfFlashFireCancelsFire: @ 82DBFD7
 	get_curr_move_type
 	if_equal_ TYPE_FIRE, Score_Minus12
-	goto BattleAIScript_82DBFF7
+	goto AI_CheckBadMove_CheckSoundproof_
 
 CheckIfWonderGuardCancelsMove: @ 82DBFE4
-	if_type_effectiveness AI_EFFECTIVENESS_x2, BattleAIScript_82DBFF7
+	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CheckBadMove_CheckSoundproof_
 	goto Score_Minus10
 
 CheckIfLevitateCancelsGroundMove: @ 82DBFEF
 	get_curr_move_type
 	if_equal_ TYPE_GROUND, Score_Minus10
 
-BattleAIScript_82DBFF7: @ 82DBFF7
+AI_CheckBadMove_CheckSoundproof_: @ 82DBFF7
 	get_how_powerful_move_is
 	if_equal 0, AI_CheckBadMove_CheckSoundproof
 
@@ -654,7 +654,7 @@ Score_Plus10:
 	score +10
 	end
 
-AI_TryToFaint:
+AI_CheckViability:
 	if_target_is_ally AI_Ret
 	if_effect EFFECT_SLEEP, AI_CV_Sleep
 	if_effect EFFECT_ABSORB, AI_CV_Absorb
@@ -707,7 +707,7 @@ AI_TryToFaint:
 	if_effect EFFECT_REFLECT, AI_CV_Reflect
 	if_effect EFFECT_POISON, AI_CV_Poison
 	if_effect EFFECT_PARALYZE, AI_CV_Paralyze
-	if_effect EFFECT_SWAGGER, BattleAIScript_82DD286
+	if_effect EFFECT_SWAGGER, AI_CV_Swagger
 	if_effect EFFECT_SPEED_DOWN_HIT, AI_CV_SpeedDownFromChance
 	if_effect EFFECT_SKY_ATTACK, AI_CV_ChargeUpMove
 	if_effect EFFECT_VITAL_THROW, AI_CV_VitalThrow
@@ -1547,8 +1547,8 @@ AI_CV_HighCrit2:
 AI_CV_HighCrit_End:
 	end
 
-BattleAIScript_82DD286:
-	if_has_move AI_USER, MOVE_PSYCH_UP, BattleAIScript_82DD2B8
+AI_CV_Swagger:
+	if_has_move AI_USER, MOVE_PSYCH_UP, AI_CV_SwaggerHasPsychUp
 
 AI_CV_Flatter:
 	if_random_less_than 128, AI_CV_Confuse
@@ -1568,18 +1568,18 @@ AI_CV_Confuse2:
 AI_CV_Confuse_End:
 	end
 
-BattleAIScript_82DD2B8:
-	if_stat_level_more_than AI_TARGET, STAT_ATK, 3, BattleAIScript_82DD2D0
+AI_CV_SwaggerHasPsychUp:
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 3, AI_CV_SwaggerHasPsychUp_Minus5
 	score +3
 	get_turn_count
-	if_not_equal 0, BattleAIScript_82DD2D2
+	if_not_equal 0, AI_CV_SwaggerHasPsychUp_End
 	score +2
-	goto BattleAIScript_82DD2D2
+	goto AI_CV_SwaggerHasPsychUp_End
 
-BattleAIScript_82DD2D0:
+AI_CV_SwaggerHasPsychUp_Minus5:
 	score -5
 
-BattleAIScript_82DD2D2:
+AI_CV_SwaggerHasPsychUp_End:
 	end
 
 AI_CV_Reflect:
@@ -1735,7 +1735,7 @@ AI_CV_Counter2:
 	score -1
 
 AI_CV_Counter3:
-	if_has_move AI_USER, MOVE_MIRROR_COAT, BattleAIScript_82DD4CD
+	if_has_move AI_USER, MOVE_MIRROR_COAT, AI_CV_Counter7
 	get_last_used_bank_move AI_TARGET
 	get_move_power_from_result
 	if_equal 0, AI_CV_Counter5
@@ -1763,11 +1763,11 @@ AI_CV_Counter6:
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
 	if_random_less_than 50, AI_CV_Counter_End
 
-BattleAIScript_82DD4CD:
-	if_random_less_than 100, BattleAIScript_82DD4D5
+AI_CV_Counter7:
+	if_random_less_than 100, AI_CV_Counter8
 	score +4
 
-BattleAIScript_82DD4D5:
+AI_CV_Counter8:
 	end
 
 AI_CV_Counter_ScoreDown1:
@@ -2756,15 +2756,15 @@ AI_CV_DragonDance2:
 AI_CV_DragonDance_End:
 	end
 
-AI_CheckViability:
+AI_TryToFaint:
 	if_target_is_ally AI_Ret
 	if_can_faint AI_TryToFaint_TryToEncourageQuickAttack
 	get_how_powerful_move_is
-	if_equal 1, Score_Minus1
-	if_type_effectiveness AI_EFFECTIVENESS_x4, BattleAIScript_82DDE57
+	if_equal MOVE_NOT_MOST_POWERFUL, Score_Minus1
+	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_TryToFaint_DoubleSuperEffective
 	end
 
-BattleAIScript_82DDE57:
+AI_TryToFaint_DoubleSuperEffective:
 	if_random_less_than 80, AI_TryToFaint_End
 	score +2
 	end
@@ -2895,9 +2895,9 @@ AI_Risky_EffectsToEncourage:
 AI_PreferBatonPass:
 	if_target_is_ally AI_Ret
 	count_usable_party_mons AI_USER
-	if_equal 0, BattleAIScript_82DDFB3
+	if_equal 0, AI_PreferBatonPassEnd
 	get_how_powerful_move_is
-	if_not_equal 0, BattleAIScript_82DDFB3
+	if_not_equal 0, AI_PreferBatonPassEnd
 	if_has_move_with_effect AI_USER, EFFECT_BATON_PASS, AI_PreferBatonPass_GoForBatonPass
 	if_random_less_than 80, AI_Risky_End
 
@@ -2906,7 +2906,7 @@ AI_PreferBatonPass_GoForBatonPass:
 	if_move MOVE_DRAGON_DANCE, AI_PreferBatonPass2
 	if_move MOVE_CALM_MIND, AI_PreferBatonPass2
 	if_effect EFFECT_PROTECT, AI_PreferBatonPass_End
-	if_move MOVE_BATON_PASS, BattleAIScript_82DDF7B
+	if_move MOVE_BATON_PASS, AI_PreferBatonPass_EncourageIfHighStats
 	if_random_less_than 20, AI_Risky_End
 	score +3
 
@@ -2918,16 +2918,16 @@ AI_PreferBatonPass2:
 
 AI_PreferBatonPass_End:
 	get_last_used_bank_move AI_USER
-	if_in_hwords sMovesTable_82DDF75, Score_Minus2
+	if_in_hwords sMovesTable_ProtectMoves, Score_Minus2
 	score +2
 	end
 
-sMovesTable_82DDF75:
+sMovesTable_ProtectMoves:
     .2byte MOVE_PROTECT
     .2byte MOVE_DETECT
     .2byte -1
 
-BattleAIScript_82DDF7B:
+AI_PreferBatonPass_EncourageIfHighStats:
 	get_turn_count
 	if_equal 0, Score_Minus2
 	if_stat_level_more_than AI_USER, STAT_ATK, 8, Score_Plus3
@@ -2938,39 +2938,39 @@ BattleAIScript_82DDF7B:
 	if_stat_level_more_than AI_USER, STAT_SPATK, 6, Score_Plus1
 	end
 
-BattleAIScript_82DDFB3:
+AI_PreferBatonPassEnd:
 	end
 
 AI_DoubleBattle:
 	if_target_is_ally AI_TryOnAlly
-	if_move MOVE_SKILL_SWAP, BattleAIScript_82DE04B
+	if_move MOVE_SKILL_SWAP, AI_DoubleBattleSkillSwap
 	get_curr_move_type
-	if_move MOVE_EARTHQUAKE, BattleAIScript_82DE010
-	if_move MOVE_MAGNITUDE, BattleAIScript_82DE010
-	if_equal 13, BattleAIScript_82DE062
-	if_equal 10, BattleAIScript_82DE079
+	if_move MOVE_EARTHQUAKE, AI_DoubleBattleAllHittingGroundMove
+	if_move MOVE_MAGNITUDE, AI_DoubleBattleAllHittingGroundMove
+	if_equal TYPE_ELECTRIC, AI_DoubleBattleElectricMove
+	if_equal TYPE_FIRE, AI_DoubleBattleFireMove
 	get_ability AI_USER
-	if_not_equal ABILITY_GUTS, BattleAIScript_82DDFF5
-	if_has_move AI_USER_PARTNER, MOVE_HELPING_HAND, BattleAIScript_82DDFED
+	if_not_equal ABILITY_GUTS, AI_DoubleBattleCheckUserStatus
+	if_has_move AI_USER_PARTNER, MOVE_HELPING_HAND, AI_DoubleBattlePartnerHasHelpingHand
 	end
 
-BattleAIScript_82DDFED:
+AI_DoubleBattlePartnerHasHelpingHand:
 	get_how_powerful_move_is
 	if_not_equal 0, Score_Plus1
 	end
 
-BattleAIScript_82DDFF5:
-	if_status AI_USER, STATUS1_ANY, BattleAIScript_82DE000
+AI_DoubleBattleCheckUserStatus:
+	if_status AI_USER, STATUS1_ANY, AI_DoubleBattleCheckUserStatus2
 	end
 
-BattleAIScript_82DE000:
+AI_DoubleBattleCheckUserStatus2:
 	get_how_powerful_move_is
-	if_equal 0, Score_Minus5
+	if_equal MOVE_POWER_DISCOURAGED, Score_Minus5
 	score +1
-	if_equal 2, Score_Plus2
+	if_equal MOVE_MOST_POWERFUL, Score_Plus2
 	end
 
-BattleAIScript_82DE010:
+AI_DoubleBattleAllHittingGroundMove:
 	if_ability AI_USER_PARTNER, ABILITY_LEVITATE, Score_Plus2
 	if_type AI_USER_PARTNER, TYPE_FLYING, Score_Plus2
 	if_type AI_USER_PARTNER, TYPE_FIRE, Score_Minus10
@@ -2979,7 +2979,7 @@ BattleAIScript_82DE010:
 	if_type AI_USER_PARTNER, TYPE_ROCK, Score_Minus10
 	goto Score_Minus3
 
-BattleAIScript_82DE04B:
+AI_DoubleBattleSkillSwap:
 	get_ability AI_USER
 	if_equal ABILITY_TRUANT, Score_Plus5
 	get_ability AI_TARGET
@@ -2987,96 +2987,96 @@ BattleAIScript_82DE04B:
 	if_equal ABILITY_PURE_POWER, Score_Plus2
 	end
 
-BattleAIScript_82DE062:
-	if_no_ability AI_TARGET_PARTNER, ABILITY_LIGHTNING_ROD, BattleAIScript_82DE078
+AI_DoubleBattleElectricMove:
+	if_no_ability AI_TARGET_PARTNER, ABILITY_LIGHTNING_ROD, AI_DoubleBattleElectricMoveEnd
 	score -2
-	if_no_type AI_TARGET_PARTNER, TYPE_GROUND, BattleAIScript_82DE078
+	if_no_type AI_TARGET_PARTNER, TYPE_GROUND, AI_DoubleBattleElectricMoveEnd
 	score -8
 
-BattleAIScript_82DE078:
+AI_DoubleBattleElectricMoveEnd:
 	end
 
-BattleAIScript_82DE079:
-	if_flash_fired AI_USER, BattleAIScript_82DE080
+AI_DoubleBattleFireMove:
+	if_flash_fired AI_USER, AI_DoubleBattleFireMove2
 	end
 
-BattleAIScript_82DE080:
+AI_DoubleBattleFireMove2:
 	goto Score_Plus1
 
 AI_TryOnAlly:
 	get_how_powerful_move_is
-	if_equal 0, BattleAIScript_82DE0B2
+	if_equal 0, AI_TryStatusMoveOnAlly
 	get_curr_move_type
-	if_equal TYPE_FIRE, BattleAIScript_82DE099
+	if_equal TYPE_FIRE, AI_TryFireMoveOnAlly
 
 AI_DiscourageOnAlly:
 	goto Score_Minus30
 
-BattleAIScript_82DE099:
-	if_ability AI_USER_PARTNER, ABILITY_FLASH_FIRE, BattleAIScript_82DE0A7
+AI_TryFireMoveOnAlly:
+	if_ability AI_USER_PARTNER, ABILITY_FLASH_FIRE, AI_TryFireMoveOnAlly_FlashFire
 	goto AI_DiscourageOnAlly
 
-BattleAIScript_82DE0A7:
+AI_TryFireMoveOnAlly_FlashFire:
 	if_flash_fired AI_USER_PARTNER, AI_DiscourageOnAlly
 	goto Score_Plus3
 
-BattleAIScript_82DE0B2:
-	if_move MOVE_SKILL_SWAP, BattleAIScript_82DE0DA
-	if_move MOVE_WILL_O_WISP, BattleAIScript_82DE14F
-	if_move MOVE_TOXIC, BattleAIScript_82DE14F
-	if_move MOVE_HELPING_HAND, BattleAIScript_82DE16D
-	if_move MOVE_SWAGGER, BattleAIScript_82DE178
+AI_TryStatusMoveOnAlly:
+	if_move MOVE_SKILL_SWAP, AI_TrySkillSwapOnAlly
+	if_move MOVE_WILL_O_WISP, AI_TryStatusOnAlly
+	if_move MOVE_TOXIC, AI_TryStatusOnAlly
+	if_move MOVE_HELPING_HAND, AI_TryHelpingHandOnAlly
+	if_move MOVE_SWAGGER, AI_TrySwaggerOnAlly
 	goto Score_Minus30_
 
-BattleAIScript_82DE0DA:
+AI_TrySkillSwapOnAlly:
 	get_ability AI_TARGET
 	if_equal ABILITY_TRUANT, Score_Plus10
 	get_ability AI_USER
-	if_not_equal ABILITY_LEVITATE, BattleAIScript_82DE107
+	if_not_equal ABILITY_LEVITATE, AI_TrySkillSwapOnAlly2
 	get_ability AI_TARGET
 	if_equal ABILITY_LEVITATE, Score_Minus30_
 	get_target_type1
-	if_not_equal TYPE_ELECTRIC, BattleAIScript_82DE107
+	if_not_equal TYPE_ELECTRIC, AI_TrySkillSwapOnAlly2
 	score +1
 	get_target_type2
-	if_not_equal TYPE_ELECTRIC, BattleAIScript_82DE107
+	if_not_equal TYPE_ELECTRIC, AI_TrySkillSwapOnAlly2
 	score +1
 	end
 
-BattleAIScript_82DE107:
-	if_not_equal 14, Score_Minus30_
-	if_has_move AI_USER_PARTNER, MOVE_FIRE_BLAST, BattleAIScript_82DE14A
-	if_has_move AI_USER_PARTNER, MOVE_THUNDER, BattleAIScript_82DE14A
-	if_has_move AI_USER_PARTNER, MOVE_CROSS_CHOP, BattleAIScript_82DE14A
-	if_has_move AI_USER_PARTNER, MOVE_HYDRO_PUMP, BattleAIScript_82DE14A
-	if_has_move AI_USER_PARTNER, MOVE_DYNAMIC_PUNCH, BattleAIScript_82DE14A
-	if_has_move AI_USER_PARTNER, MOVE_BLIZZARD, BattleAIScript_82DE14A
-	if_has_move AI_USER_PARTNER, MOVE_MEGAHORN, BattleAIScript_82DE14A
+AI_TrySkillSwapOnAlly2:
+	if_not_equal ABILITY_COMPOUND_EYES, Score_Minus30_
+	if_has_move AI_USER_PARTNER, MOVE_FIRE_BLAST, AI_TrySkillSwapOnAllyPlus3
+	if_has_move AI_USER_PARTNER, MOVE_THUNDER, AI_TrySkillSwapOnAllyPlus3
+	if_has_move AI_USER_PARTNER, MOVE_CROSS_CHOP, AI_TrySkillSwapOnAllyPlus3
+	if_has_move AI_USER_PARTNER, MOVE_HYDRO_PUMP, AI_TrySkillSwapOnAllyPlus3
+	if_has_move AI_USER_PARTNER, MOVE_DYNAMIC_PUNCH, AI_TrySkillSwapOnAllyPlus3
+	if_has_move AI_USER_PARTNER, MOVE_BLIZZARD, AI_TrySkillSwapOnAllyPlus3
+	if_has_move AI_USER_PARTNER, MOVE_MEGAHORN, AI_TrySkillSwapOnAllyPlus3
 	goto Score_Minus30_
 
-BattleAIScript_82DE14A:
+AI_TrySkillSwapOnAllyPlus3:
 	goto Score_Plus3
 
-BattleAIScript_82DE14F:
+AI_TryStatusOnAlly:
 	get_ability AI_TARGET
 	if_not_equal ABILITY_GUTS, Score_Minus30_
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus30_
 	if_hp_less_than AI_USER, 91, Score_Minus30_
 	goto Score_Plus5
 
-BattleAIScript_82DE16D:
+AI_TryHelpingHandOnAlly:
 	if_random_less_than 64, Score_Minus1
 	goto Score_Plus2
 
-BattleAIScript_82DE178:
-	if_holds_item AI_TARGET, ITEM_PERSIM_BERRY, BattleAIScript_82DE185
+AI_TrySwaggerOnAlly:
+	if_holds_item AI_TARGET, ITEM_PERSIM_BERRY, AI_TrySwaggerOnAlly2
 	goto Score_Minus30_
 
-BattleAIScript_82DE185:
-	if_stat_level_more_than AI_TARGET, STAT_ATK, 7, BattleAIScript_82DE18F
+AI_TrySwaggerOnAlly2:
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 7, AI_TrySwaggerOnAlly_End
 	score +3
 
-BattleAIScript_82DE18F:
+AI_TrySwaggerOnAlly_End:
 	end
 
 Score_Minus30_:

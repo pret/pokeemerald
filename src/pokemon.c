@@ -66,8 +66,8 @@ extern const union AffineAnimCmd *const gUnknown_082FF618[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *gPlayerMonSpriteAnimsTable[];
 extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[];
-extern const union AnimCmd *const *const gUnknown_08305D0C[];
-extern const union AnimCmd *const *const gUnknown_0830536C[];
+extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
+extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const struct UnknownPokemonStruct3 gUnknown_08610970[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
@@ -3831,7 +3831,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
         gMultiuseSpriteTemplate = gUnknown_08329DF8[trainerSpriteId];
-        gMultiuseSpriteTemplate.anims = gUnknown_08305D0C[trainerSpriteId];
+        gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerSpriteId];
     }
     else
     {
@@ -3839,7 +3839,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
         else
             gMultiuseSpriteTemplate = gUnknown_08329D98[battlerPosition];
-        gMultiuseSpriteTemplate.anims = gUnknown_0830536C[trainerSpriteId];
+        gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerSpriteId];
     }
 }
 
@@ -3851,7 +3851,7 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 arg0, u8 battlerPosition)
         gMultiuseSpriteTemplate = gUnknown_08329D98[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = arg0;
-    gMultiuseSpriteTemplate.anims = gUnknown_0830536C[arg0];
+    gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[arg0];
 }
 
 static void EncryptBoxMon(struct BoxPokemon *boxMon)
@@ -4112,7 +4112,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     {
         retVal = 0;
 
-        while (retVal < OT_NAME_LENGTH)
+        while (retVal < PLAYER_NAME_LENGTH)
         {
             data[retVal] = boxMon->otName[retVal];
             retVal++;
@@ -4480,7 +4480,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_OT_NAME:
     {
         s32 i;
-        for (i = 0; i < OT_NAME_LENGTH; i++)
+        for (i = 0; i < PLAYER_NAME_LENGTH; i++)
             boxMon->otName[i] = data[i];
         break;
     }
@@ -5307,7 +5307,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                         // I have to re-use this variable to match.
                                         r5 = gActiveBattler;
                                         gActiveBattler = battlerId;
-                                        BtlController_EmitGetMonData(0, 0, 0);
+                                        BtlController_EmitGetMonData(0, REQUEST_ALL_BATTLE, 0);
                                         MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = r5;
                                     }
@@ -6621,7 +6621,7 @@ u16 GetBattleBGM(void)
 
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
             trainerClass = GetFrontierOpponentClass(gTrainerBattleOpponent_A);
-        else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+        else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
             trainerClass = TRAINER_CLASS_EXPERT;
         else
             trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
@@ -6778,7 +6778,7 @@ s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {
-    u8 otName[OT_NAME_LENGTH + 1];
+    u8 otName[PLAYER_NAME_LENGTH + 1];
     u32 otId;
     GetMonData(mon, MON_DATA_OT_NAME, otName);
     otId = GetMonData(mon, MON_DATA_OT_ID, 0);

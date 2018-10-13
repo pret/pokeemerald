@@ -219,7 +219,7 @@ EWRAM_DATA u8 gCurrMovePos = 0;
 EWRAM_DATA u8 gChosenMovePos = 0;
 EWRAM_DATA u16 gCurrentMove = 0;
 EWRAM_DATA u16 gChosenMove = 0;
-EWRAM_DATA u16 gRandomMove = 0;
+EWRAM_DATA u16 gCalledMove = 0;
 EWRAM_DATA s32 gBattleMoveDamage = 0;
 EWRAM_DATA s32 gHpDealt = 0;
 EWRAM_DATA s32 gTakenDmg[MAX_BATTLERS_COUNT] = {0};
@@ -734,7 +734,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
     if (IsEnigmaBerryValid() == TRUE)
     {
-        for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+        for (i = 0; i < BERRY_NAME_LENGTH; i++)
             battleBerry->name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
         battleBerry->name[i] = EOS;
 
@@ -748,7 +748,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
     {
         const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY));
 
-        for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+        for (i = 0; i < BERRY_NAME_LENGTH; i++)
             battleBerry->name[i] = berryData->name[i];
         battleBerry->name[i] = EOS;
 
@@ -769,7 +769,7 @@ static void SetAllPlayersBerryData(void)
     {
         if (IsEnigmaBerryValid() == TRUE)
         {
-            for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+            for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
                 gEnigmaBerries[0].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
                 gEnigmaBerries[2].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
@@ -792,7 +792,7 @@ static void SetAllPlayersBerryData(void)
         {
             const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY));
 
-            for (i = 0; i < BERRY_NAME_COUNT - 1; i++)
+            for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
                 gEnigmaBerries[0].name[i] = berryData->name[i];
                 gEnigmaBerries[2].name[i] = berryData->name[i];
@@ -830,7 +830,7 @@ static void SetAllPlayersBerryData(void)
                 src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
                 battlerId = gLinkPlayers[i].id;
 
-                for (j = 0; j < BERRY_NAME_COUNT - 1; j++)
+                for (j = 0; j < BERRY_NAME_LENGTH; j++)
                     gEnigmaBerries[battlerId].name[j] = src->name[j];
                 gEnigmaBerries[battlerId].name[j] = EOS;
 
@@ -847,7 +847,7 @@ static void SetAllPlayersBerryData(void)
             {
                 src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
 
-                for (j = 0; j < BERRY_NAME_COUNT - 1; j++)
+                for (j = 0; j < BERRY_NAME_LENGTH; j++)
                 {
                     gEnigmaBerries[i].name[j] = src->name[j];
                     gEnigmaBerries[i + 2].name[j] = src->name[j];
@@ -877,7 +877,7 @@ static void sub_8036EB8(u8 arg0, u8 arg1)
     if (gBlockRecvBuffer[0][0] == 256)
     {
         if (arg1 == 0)
-            gBattleTypeFlags |= BATTLE_TYPE_WILD | BATTLE_TYPE_TRAINER;
+            gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
         else
             gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
         var++;
@@ -896,7 +896,7 @@ static void sub_8036EB8(u8 arg0, u8 arg1)
         if (i == arg0)
         {
             if (arg1 == 0)
-                gBattleTypeFlags |= BATTLE_TYPE_WILD | BATTLE_TYPE_TRAINER;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
             else
                 gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
             var++;
@@ -916,7 +916,7 @@ static void sub_8036EB8(u8 arg0, u8 arg1)
             }
 
             if (i == arg0)
-                gBattleTypeFlags |= BATTLE_TYPE_WILD | BATTLE_TYPE_TRAINER;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
             else
                 gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
         }
@@ -979,7 +979,7 @@ static void CB2_HandleStartBattle(void)
         else
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-                gBattleTypeFlags |= BATTLE_TYPE_WILD;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 15;
             SetAllPlayersBerryData();
         }
@@ -1087,7 +1087,7 @@ static void CB2_HandleStartBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             ResetBlockReceivedFlags();
-            if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+            if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
                 memcpy(&gRecordedBattleRngSeed, gBlockRecvBuffer[enemyMultiplayerId], sizeof(gRecordedBattleRngSeed));
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -1181,7 +1181,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         else
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-                gBattleTypeFlags |= BATTLE_TYPE_WILD;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 13;
             SetAllPlayersBerryData();
         }
@@ -1340,7 +1340,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             ResetBlockReceivedFlags();
-            if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+            if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
                 memcpy(&gRecordedBattleRngSeed, gBlockRecvBuffer[enemyMultiplayerId], sizeof(gRecordedBattleRngSeed));
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -1568,7 +1568,7 @@ static void CB2_HandleStartMultiBattle(void)
         else
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-                gBattleTypeFlags |= BATTLE_TYPE_WILD;
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 7;
             SetAllPlayersBerryData();
         }
@@ -1920,7 +1920,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
-                                                                        | BATTLE_TYPE_x4000000)))
+                                                                        | BATTLE_TYPE_TRAINER_HILL)))
     {
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
@@ -2055,7 +2055,7 @@ void VBlankCB_Battle(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void nullsub_17(void)
+void nullsub_17(struct Sprite *sprite)
 {
 
 }
@@ -3302,7 +3302,7 @@ static void BattleIntroGetMonsData(void)
     {
     case 0:
         gActiveBattler = gBattleCommunication[1];
-        BtlController_EmitGetMonData(0, 0, 0);
+        BtlController_EmitGetMonData(0, REQUEST_ALL_BATTLE, 0);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
@@ -3385,7 +3385,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
                                       | BATTLE_TYPE_FRONTIER
                                       | BATTLE_TYPE_LINK
                                       | BATTLE_TYPE_x2000000
-                                      | BATTLE_TYPE_x4000000)))
+                                      | BATTLE_TYPE_TRAINER_HILL)))
             {
                 HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
             }
@@ -3398,7 +3398,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
                                       | BATTLE_TYPE_FRONTIER
                                       | BATTLE_TYPE_LINK
                                       | BATTLE_TYPE_x2000000
-                                      | BATTLE_TYPE_x4000000)))
+                                      | BATTLE_TYPE_TRAINER_HILL)))
                 {
                     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
                 }
@@ -3709,7 +3709,7 @@ static void BattleIntroRecordMonsToDex(void)
                                       | BATTLE_TYPE_FRONTIER
                                       | BATTLE_TYPE_LINK
                                       | BATTLE_TYPE_x2000000
-                                      | BATTLE_TYPE_x4000000)))
+                                      | BATTLE_TYPE_TRAINER_HILL)))
             {
                 HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
             }
@@ -3888,7 +3888,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     // Check all switch in items having effect from the fastest mon to slowest.
     while (gBattleStruct->switchInItemsCounter < gBattlersCount)
     {
-        if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter], 0) != 0)
+        if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter], FALSE))
             effect++;
 
         gBattleStruct->switchInItemsCounter++;
@@ -4326,7 +4326,7 @@ static void HandleTurnActionSelectionState(void)
                 }
 
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-                    && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000)
+                    && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL)
                     && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[gActiveBattler] = BattleScript_AskIfWantsToForfeitMatch;
@@ -4597,7 +4597,7 @@ static void sub_803CDF8(void)
 void SwapTurnOrder(u8 id1, u8 id2)
 {
 	u32 temp;
-	
+
 	SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
 	SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
@@ -4978,7 +4978,7 @@ static void HandleEndTurn_BattleWon(void)
         gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-            && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000 | BATTLE_TYPE_EREADER_TRAINER))
+            && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_EREADER_TRAINER))
     {
         BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
@@ -5069,7 +5069,7 @@ static void HandleEndTurn_RanFromBattle(void)
         gBattleOutcome = B_OUTCOME_FORFEITED;
         gSaveBlock2Ptr->frontier.field_CA9_b = 1;
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
     {
         gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = B_OUTCOME_FORFEITED;
@@ -5624,7 +5624,7 @@ bool8 TryRunFromBattle(u8 battler)
             effect++;
         }
     }
-    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000) && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL) && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         effect++;
     }

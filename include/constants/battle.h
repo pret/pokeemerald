@@ -46,7 +46,7 @@
 // Battle Type Flags
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
-#define BATTLE_TYPE_WILD            0x0004
+#define BATTLE_TYPE_IS_MASTER       0x0004 // In not-link battles, it's always set.
 #define BATTLE_TYPE_TRAINER         0x0008
 #define BATTLE_TYPE_FIRST_BATTLE    0x0010
 #define BATTLE_TYPE_20              0x0020
@@ -70,7 +70,7 @@
 #define BATTLE_TYPE_x800000         0x800000
 #define BATTLE_TYPE_RECORDED        0x1000000
 #define BATTLE_TYPE_x2000000        0x2000000
-#define BATTLE_TYPE_x4000000        0x4000000
+#define BATTLE_TYPE_TRAINER_HILL    0x4000000
 #define BATTLE_TYPE_SECRET_BASE     0x8000000
 #define BATTLE_TYPE_GROUDON         0x10000000
 #define BATTLE_TYPE_KYOGRE          0x20000000
@@ -252,7 +252,7 @@
 #define MOVE_EFFECT_RAPIDSPIN           0x23
 #define MOVE_EFFECT_REMOVE_PARALYSIS    0x24
 #define MOVE_EFFECT_ATK_DEF_DOWN        0x25
-#define MOVE_EFFECT_RECOIL_33_PARALYSIS 0x26
+#define MOVE_EFFECT_RECOIL_33           0x26
 #define MOVE_EFFECT_ATK_PLUS_2          0x27
 #define MOVE_EFFECT_DEF_PLUS_2          0x28
 #define MOVE_EFFECT_SPD_PLUS_2          0x29
@@ -280,5 +280,17 @@
 #define MOVE_EFFECT_NOTHING_3F          0x3F
 #define MOVE_EFFECT_AFFECTS_USER        0x40
 #define MOVE_EFFECT_CERTAIN             0x80
+
+// Battle terrain defines for gBattleTerrain.
+#define BATTLE_TERRAIN_GRASS        0
+#define BATTLE_TERRAIN_LONG_GRASS   1
+#define BATTLE_TERRAIN_SAND         2
+#define BATTLE_TERRAIN_UNDERWATER   3
+#define BATTLE_TERRAIN_WATER        4
+#define BATTLE_TERRAIN_POND         5
+#define BATTLE_TERRAIN_MOUNTAIN     6
+#define BATTLE_TERRAIN_CAVE         7
+#define BATTLE_TERRAIN_BUILDING     8
+#define BATTLE_TERRAIN_PLAIN        9
 
 #endif // GUARD_CONSTANTS_BATTLE_H

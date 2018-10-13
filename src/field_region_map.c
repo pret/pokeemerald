@@ -55,9 +55,26 @@ static const struct BgTemplate gUnknown_085E5068[] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_085E5070[] = {
-    { 0, 17, 17, 12,  2, 15, 0x0001 },
-    { 0, 22,  1,  7,  2, 15, 0x0019 },
+static const struct WindowTemplate gUnknown_085E5070[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 17,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    {
+        .priority = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 1,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 25
+    },
     DUMMY_WIN_TEMPLATE
 };
 
@@ -126,7 +143,7 @@ static void FieldUpdateRegionMap(void)
         case 1:
             SetWindowBorderStyle(1, 0, 0x27, 0xd);
             offset = GetStringCenterAlignXOffset(1, gText_Hoenn, 0x38);
-            PrintTextOnWindow(1, 1, gText_Hoenn, offset, 1, 0, NULL);
+            AddTextPrinterParameterized(1, 1, gText_Hoenn, offset, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             SetWindowBorderStyle(0, 0, 0x27, 0xd);
             PrintRegionMapSecName();
@@ -182,7 +199,7 @@ static void PrintRegionMapSecName(void)
     if (sFieldRegionMapHandler->regionMap.iconDrawType != MAPSECTYPE_NONE)
     {
         FillWindowPixelBuffer(0, 0x11);
-        PrintTextOnWindow(0, 1, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(0, 1, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
         schedule_bg_copy_tilemap_to_vram(0);
     }
     else

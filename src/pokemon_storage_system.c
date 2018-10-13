@@ -258,7 +258,7 @@ void Task_PokemonStorageSystem(u8 taskId)
         sub_81973A4();
         NewMenuHelpers_DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, 0x11);
-        AddTextPrinterParameterized(0, 1, gUnknown_085716C0[task->data[1]].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
         CopyWindowToVram(0, 3);
         CopyWindowToVram(task->data[15], 3);
         task->data[0]++;
@@ -284,7 +284,7 @@ void Task_PokemonStorageSystem(u8 taskId)
             {
                 task->data[1] = task->data[3];
                 FillWindowPixelBuffer(0, 0x11);
-                AddTextPrinterParameterized(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             }
             break;
         case -1:
@@ -299,13 +299,13 @@ void Task_PokemonStorageSystem(u8 taskId)
             if (task->data[2] == 0 && CountPartyMons() == PARTY_SIZE)
             {
                 FillWindowPixelBuffer(0, 0x11);
-                AddTextPrinterParameterized(0, 1, gText_PartyFull, 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, 1, gText_PartyFull, 0, NULL, 2, 1, 3);
                 task->data[0] = 3;
             }
             else if (task->data[2] == 1 && CountPartyMons() == 1)
             {
                 FillWindowPixelBuffer(0, 0x11);
-                AddTextPrinterParameterized(0, 1, gText_JustOnePkmn, 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, 1, gText_JustOnePkmn, 0, NULL, 2, 1, 3);
                 task->data[0] = 3;
             }
             else
@@ -320,7 +320,7 @@ void Task_PokemonStorageSystem(u8 taskId)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
         else if (gMain.newKeys & DPAD_UP)
@@ -330,7 +330,7 @@ void Task_PokemonStorageSystem(u8 taskId)
             MoveMenuCursor(-1);
             task->data[1] = GetMenuCursorPos();
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
         else if (gMain.newKeys & DPAD_DOWN)
@@ -340,7 +340,7 @@ void Task_PokemonStorageSystem(u8 taskId)
             MoveMenuCursor(1);
             task->data[1] = GetMenuCursorPos();
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
         break;
@@ -627,12 +627,12 @@ void sub_80C7BE4(void)
     FillWindowPixelBuffer(windowId, 0x44);
 
     center = GetStringCenterAlignXOffset(1, boxName, 0x40);
-    box_print(windowId, 1, center, 1, gUnknown_08571734, TEXT_SPEED_FF, boxName);
+    AddTextPrinterParameterized3(windowId, 1, center, 1, gUnknown_08571734, TEXT_SPEED_FF, boxName);
 
     ConvertIntToDecimalStringN(text, nPokemonInBox, 1, 2);
     StringAppend(text, gUnknown_08571737);
     center = GetStringCenterAlignXOffset(1, text, 0x40);
-    box_print(windowId, 1, center, 0x11, gUnknown_08571734, TEXT_SPEED_FF, text);
+    AddTextPrinterParameterized3(windowId, 1, center, 0x11, gUnknown_08571734, TEXT_SPEED_FF, text);
 
     winTileData = GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     CpuCopy32((void *)winTileData, (void *)OBJ_VRAM0 + 0x100 + (GetSpriteTileStartByTag(gUnknown_02039D04->unk_0240) * 32), 0x400);

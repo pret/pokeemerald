@@ -9,8 +9,6 @@
 
 // for the chunk declarations
 
-extern struct SaveSectionLocation gRamSaveSectionLocations[0xE];
-extern u16 gUnknown_03006294;
 extern bool8 gSoftResetDisabled;
 extern u32 gUnknown_0203CF5C;
 
@@ -83,6 +81,9 @@ u16 gUnknown_03006208;
 u16 gSaveUnusedVar;
 u16 gSaveFileStatus;
 void (*gGameContinueCallback)(void);
+struct SaveSectionLocation gRamSaveSectionLocations[0xE];
+u16 gSaveUnusedVar2;
+u16 gUnknown_03006294;
 
 EWRAM_DATA struct SaveSection gSaveDataBuffer = {0};
 
