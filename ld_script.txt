@@ -76,7 +76,6 @@ SECTIONS {
         src/trig.o(.text);
         src/random.o(.text);
         src/util.o(.text);
-        src/blend_palette.o(.text);
         src/daycare.o(.text);
         src/egg_hatch.o(.text);
         src/battle_interface.o(.text);

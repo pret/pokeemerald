@@ -10,7 +10,6 @@
 #include "constants/flags.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "blend_palette.h"
 #include "contest.h"
 #include "data2.h"
 #include "decompress.h"

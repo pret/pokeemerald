@@ -3,7 +3,7 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "decompress.h"
 #include "palette.h"
 #include "sprite.h"
