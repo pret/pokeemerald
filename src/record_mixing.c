@@ -1567,7 +1567,7 @@ static void sub_80E8110(struct Apprentice *dst, struct Apprentice *src)
     r8 = 0;
     for (i = 0; i < 2; i++)
     {
-        id = ((i + gSaveBlock2Ptr->field_B2_1) % 3) + 1;
+        id = ((i + gSaveBlock2Ptr->playerApprentice.field_B2_1) % 3) + 1;
         if (src[id].playerName[0] != EOS)
         {
             if (ReadUnalignedWord(src[id].playerId) != ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
@@ -1597,11 +1597,11 @@ static void sub_80E8110(struct Apprentice *dst, struct Apprentice *src)
     case 2:
         if (Random2() > 0x3333)
         {
-            dst[1] = src[gSaveBlock2Ptr->field_B2_1 + 1];
+            dst[1] = src[gSaveBlock2Ptr->playerApprentice.field_B2_1 + 1];
         }
         else
         {
-            dst[1] = src[((gSaveBlock2Ptr->field_B2_1 + 1) % 3 + 1)];
+            dst[1] = src[((gSaveBlock2Ptr->playerApprentice.field_B2_1 + 1) % 3 + 1)];
         }
         break;
     }
@@ -1675,7 +1675,7 @@ static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2
     r8 = 0;
     for (i = 0; i < 2; i++)
     {
-        if (structPtr[i].playerName[0] != EOS && !sub_80E841C(&structPtr[i], gSaveBlock2Ptr->apprentices))
+        if (structPtr[i].playerName[0] != EOS && !sub_80E841C(&structPtr[i], &gSaveBlock2Ptr->apprentices[0]))
         {
             r7++;
             r8 = i;
@@ -1685,17 +1685,17 @@ static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2
     switch (r7)
     {
     case 1:
-        structId = gSaveBlock2Ptr->field_B2_1 + 1;
+        structId = gSaveBlock2Ptr->playerApprentice.field_B2_1 + 1;
         gSaveBlock2Ptr->apprentices[structId] = structPtr[r8];
-        gSaveBlock2Ptr->field_B2_1 = (gSaveBlock2Ptr->field_B2_1 + 1) % 3;
+        gSaveBlock2Ptr->playerApprentice.field_B2_1 = (gSaveBlock2Ptr->playerApprentice.field_B2_1 + 1) % 3;
         break;
     case 2:
         for (i = 0; i < 2; i++)
         {
-            structId = ((i ^ 1) + gSaveBlock2Ptr->field_B2_1) % 3 + 1;
+            structId = ((i ^ 1) + gSaveBlock2Ptr->playerApprentice.field_B2_1) % 3 + 1;
             gSaveBlock2Ptr->apprentices[structId] = structPtr[i];
         }
-        gSaveBlock2Ptr->field_B2_1 = (gSaveBlock2Ptr->field_B2_1 + 2) % 3;
+        gSaveBlock2Ptr->playerApprentice.field_B2_1 = (gSaveBlock2Ptr->playerApprentice.field_B2_1 + 2) % 3;
         break;
     }
 }
