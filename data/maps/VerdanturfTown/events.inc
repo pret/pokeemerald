@@ -1,6 +1,6 @@
 VerdanturfTown_EventObjects: @ 8527CDC
 	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 4, 17, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB5A8, 0
-	object_event 2, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 9, 2, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB575, 0
+	object_event 2, EVENT_OBJ_GFX_TWIN, 0, 9, 2, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB575, 0
 	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 7, 11, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, VerdanturfTown_EventScript_1EB5BA, 0
 	object_event 4, EVENT_OBJ_GFX_CAMPER, 0, 7, 6, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB5B1, 0
 

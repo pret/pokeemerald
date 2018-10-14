@@ -1,8 +1,8 @@
 LilycoveCity_LilycoveMuseum_2F_EventObjects: @ 8531428
 	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 10, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_219866, 0
 	object_event 2, EVENT_OBJ_GFX_GIRL_2, 0, 19, 10, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_21998A, 777
-	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 7, 3, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_219993, 780
-	object_event 4, EVENT_OBJ_GFX_BOY_4, 0, 14, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_21999C, 780
+	object_event 3, EVENT_OBJ_GFX_EXPERT_M, 0, 7, 3, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_219993, 780
+	object_event 4, EVENT_OBJ_GFX_RICH_BOY, 0, 14, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_21999C, 780
 
 LilycoveCity_LilycoveMuseum_2F_MapWarps: @ 8531488
 	warp_def 13, 1, 0, 2, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F

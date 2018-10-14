@@ -1,6 +1,6 @@
 Route110_TrickHousePuzzle6_EventObjects: @ 853E6D0
 	object_event 1, EVENT_OBJ_GFX_PICNICKER, 0, 7, 9, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 1, Route110_TrickHousePuzzle6_EventScript_26DDE1, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 11, 10, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 3, Route110_TrickHousePuzzle6_EventScript_26DDF8, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_5, 0, 11, 10, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 3, Route110_TrickHousePuzzle6_EventScript_26DDF8, 0
 	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 4, 5, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 1, 1, Route110_TrickHousePuzzle6_EventScript_26DE0F, 0
 	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 11, 21, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle6_EventScript_29145C, 1067
 

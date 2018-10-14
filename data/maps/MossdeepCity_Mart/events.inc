@@ -1,6 +1,6 @@
 MossdeepCity_Mart_EventObjects: @ 8532B50
 	object_event 1, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 1, 3, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MossdeepCity_Mart_EventScript_2223C8, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 1, 5, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, MossdeepCity_Mart_EventScript_2223F6, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 1, 5, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, MossdeepCity_Mart_EventScript_2223F6, 0
 	object_event 3, EVENT_OBJ_GFX_BOY_2, 0, 8, 3, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, MossdeepCity_Mart_EventScript_2223FF, 0
 	object_event 4, EVENT_OBJ_GFX_SAILOR, 0, 5, 3, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, MossdeepCity_Mart_EventScript_222408, 0
 
