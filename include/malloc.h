@@ -13,6 +13,7 @@
 }
 
 extern u8 gHeap[];
+
 void *Alloc(u32 size);
 void *AllocZeroed(u32 size);
 void Free(void *pointer);

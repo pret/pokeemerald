@@ -860,7 +860,7 @@ bool8 IsBattlerSpritePresent(u8 battlerId)
     return FALSE;
 }
 
-bool8 IsDoubleBattle()
+bool8 IsDoubleBattle(void)
 {
     return IS_DOUBLE_BATTLE();
 }

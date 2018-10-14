@@ -55,7 +55,7 @@ bool8 unref_sub_8073D3C(u32, u8, u8, u8, u16);
 void unref_sub_8073D84(u8, u32 *);
 void ResetPaletteStructByUid(u16);
 void ResetPaletteStruct(u8);
-void ResetPaletteFadeControl();
+void ResetPaletteFadeControl(void);
 void unref_sub_8074168(u16);
 void unref_sub_8074194(u16);
 void InvertPlttBuffer(u32);
