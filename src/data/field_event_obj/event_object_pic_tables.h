@@ -193,16 +193,16 @@ const struct SpriteFrameImage gEventObjectPicTable_LittleBoy[] = {
     overworld_frame(gEventObjectPic_LittleBoy, 2, 2, 8),
 };
 
-const struct SpriteFrameImage gEventObjectPicTable__LittleGirl[] = {
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 0),
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 1),
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 2),
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 3),
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 4),
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 5),
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 6),
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 7),
-    overworld_frame(gEventObjectPic__LittleGirl, 2, 2, 8),
+const struct SpriteFrameImage gEventObjectPicTable_LittleGirl[] = {
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 0),
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 1),
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 2),
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 3),
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 4),
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 5),
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 6),
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 7),
+    overworld_frame(gEventObjectPic_LittleGirl, 2, 2, 8),
 };
 
 const struct SpriteFrameImage gEventObjectPicTable_Boy3[] = {
