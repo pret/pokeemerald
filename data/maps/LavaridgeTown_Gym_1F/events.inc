@@ -1,8 +1,8 @@
 LavaridgeTown_Gym_1F_EventObjects: @ 852DE1C
 	object_event 1, EVENT_OBJ_GFX_FLANNERY, 0, 13, 9, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_Gym_1F_EventScript_1FE78C, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 3, 14, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE87F, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 2, 15, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE900, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_6, 0, 3, 10, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE8AF, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_5, 0, 3, 14, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE87F, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_3, 0, 2, 15, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE900, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_5, 0, 3, 10, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE8AF, 0
 	object_event 5, EVENT_OBJ_GFX_GIRL_3, 0, 5, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 3, 1, LavaridgeTown_Gym_1F_EventScript_1FE8E5, 0
 	object_event 6, EVENT_OBJ_GFX_MAN_2, 0, 12, 16, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LavaridgeTown_Gym_1F_EventScript_1FE96C, 0
 

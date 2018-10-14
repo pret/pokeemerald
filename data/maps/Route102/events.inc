@@ -1,5 +1,5 @@
 Route102_EventObjects: @ 8527FD8
-	object_event 1, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 18, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route102_EventScript_1EC0E1, 0
+	object_event 1, EVENT_OBJ_GFX_LITTLE_BOY, 0, 18, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route102_EventScript_1EC0E1, 0
 	object_event 2, EVENT_OBJ_GFX_YOUNGSTER, 0, 33, 14, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 3, Route102_EventScript_1EC105, 0
 	object_event 3, EVENT_OBJ_GFX_BUG_CATCHER, 0, 25, 15, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 1, 2, Route102_EventScript_1EC1B3, 0
 	object_event 4, EVENT_OBJ_GFX_LASS, 0, 8, 7, 3, MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT, 0, 0, 1, 3, Route102_EventScript_1EC1CA, 0

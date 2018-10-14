@@ -1,8 +1,8 @@
 MossdeepCity_EventObjects: @ 8527018
 	object_event 1, EVENT_OBJ_GFX_SAILOR, 0, 38, 12, 5, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, MossdeepCity_EventScript_1E4AD1, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 50, 34, 5, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, MossdeepCity_EventScript_1E4AF9, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 32, 12, 5, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, MossdeepCity_EventScript_1E4AB2, 0
-	object_event 4, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 26, 21, 5, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, MossdeepCity_EventScript_1E4AF0, 0
+	object_event 2, EVENT_OBJ_GFX_EXPERT_M, 0, 50, 34, 5, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, MossdeepCity_EventScript_1E4AF9, 0
+	object_event 3, EVENT_OBJ_GFX_POKEFAN_F, 0, 32, 12, 5, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, MossdeepCity_EventScript_1E4AB2, 0
+	object_event 4, EVENT_OBJ_GFX_NINJA_BOY, 0, 26, 21, 5, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, MossdeepCity_EventScript_1E4AF0, 0
 	object_event 5, EVENT_OBJ_GFX_GIRL_1, 0, 45, 18, 7, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MossdeepCity_EventScript_1E4B02, 0
 	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 62, 35, 5, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, MossdeepCity_EventScript_2910F5, 1043
 	object_event 7, EVENT_OBJ_GFX_MAN_1, 0, 55, 5, 7, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, MossdeepCity_EventScript_1E4C10, 0

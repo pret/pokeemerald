@@ -1,5 +1,5 @@
 SingleBattleColosseum_EventObjects: @ 8539D44
-	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 9, 3, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, SingleBattleColosseum_EventScript_2774A6, 0
+	object_event 1, EVENT_OBJ_GFX_LINK_RECEPTIONIST, 0, 9, 3, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, SingleBattleColosseum_EventScript_2774A6, 0
 
 SingleBattleColosseum_MapWarps: @ 8539D5C
 	warp_def 6, 8, 3, 127, MAP_NONE

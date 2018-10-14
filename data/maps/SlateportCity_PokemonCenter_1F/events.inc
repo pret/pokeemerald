@@ -1,7 +1,7 @@
 SlateportCity_PokemonCenter_1F_EventObjects: @ 852FBF0
 	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, SlateportCity_PokemonCenter_1F_EventScript_20DAD3, 0
 	object_event 2, EVENT_OBJ_GFX_SAILOR, 0, 2, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, SlateportCity_PokemonCenter_1F_EventScript_20DAE1, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_7, 0, 10, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, SlateportCity_PokemonCenter_1F_EventScript_20DAEA, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_5, 0, 10, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, SlateportCity_PokemonCenter_1F_EventScript_20DAEA, 0
 
 SlateportCity_PokemonCenter_1F_MapWarps: @ 852FC38
 	warp_def 7, 8, 3, 0, MAP_SLATEPORT_CITY

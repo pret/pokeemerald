@@ -1,6 +1,6 @@
 RustboroCity_Flat1_1F_EventObjects: @ 8530890
-	object_event 1, EVENT_OBJ_GFX_MAN_4, 0, 9, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, RustboroCity_Flat1_1F_EventScript_2150CE, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 12, 4, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, RustboroCity_Flat1_1F_EventScript_2150D7, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_3, 0, 9, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, RustboroCity_Flat1_1F_EventScript_2150CE, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 12, 4, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, RustboroCity_Flat1_1F_EventScript_2150D7, 0
 
 RustboroCity_Flat1_1F_MapWarps: @ 85308C0
 	warp_def 6, 7, 0, 1, MAP_RUSTBORO_CITY

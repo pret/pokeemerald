@@ -1,7 +1,7 @@
 MtPyre_Summit_EventObjects: @ 85351A0
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_2, 0, 22, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MtPyre_Summit_EventScript_23213C, 0
+	object_event 1, EVENT_OBJ_GFX_OLD_MAN, 0, 22, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MtPyre_Summit_EventScript_23213C, 0
 	object_event 2, EVENT_OBJ_GFX_ARCHIE, 0, 23, 6, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 916
-	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 23, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MtPyre_Summit_EventScript_2321A2, 0
+	object_event 3, EVENT_OBJ_GFX_EXPERT_F, 0, 23, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MtPyre_Summit_EventScript_2321A2, 0
 	object_event 4, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 21, 15, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 3, MtPyre_Summit_EventScript_2323FD, 917
 	object_event 5, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 25, 18, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 3, MtPyre_Summit_EventScript_232414, 917
 	object_event 6, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 21, 11, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 3, MtPyre_Summit_EventScript_23242B, 917

@@ -1,5 +1,5 @@
 LinkContestRoom1_EventObjects: @ 8539EFC
-	object_event 1, EVENT_OBJ_GFX_WOMAN_4, 0, 6, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 6, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 0
 	object_event 2, EVENT_OBJ_GFX_CONTEST_JUDGE, 0, 7, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 0
 	object_event 3, EVENT_OBJ_GFX_HIPSTER, 0, 4, 7, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 0
 	object_event 4, EVENT_OBJ_GFX_TRADER, 0, 6, 7, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 0

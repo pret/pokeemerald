@@ -1,5 +1,5 @@
 RecordCorner_EventObjects: @ 8539DFC
-	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 10, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, RecordCorner_EventScript_2774C6, 0
+	object_event 1, EVENT_OBJ_GFX_LINK_RECEPTIONIST, 0, 10, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, RecordCorner_EventScript_2774C6, 0
 
 RecordCorner_MapWarps: @ 8539E14
 	warp_def 8, 9, 3, 127, MAP_NONE

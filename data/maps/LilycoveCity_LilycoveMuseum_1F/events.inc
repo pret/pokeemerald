@@ -3,9 +3,9 @@ LilycoveCity_LilycoveMuseum_1F_EventObjects: @ 853124C
 	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 16, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2, 775
 	object_event 3, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 13, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218DF5, 0
 	object_event 4, EVENT_OBJ_GFX_ARTIST, 0, 13, 10, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 2, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218DFE, 0
-	object_event 5, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 2, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E07, 0
-	object_event 6, EVENT_OBJ_GFX_WOMAN_5, 0, 3, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E10, 0
-	object_event 7, EVENT_OBJ_GFX_WOMAN_3, 0, 11, 3, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E19, 776
+	object_event 5, EVENT_OBJ_GFX_NINJA_BOY, 0, 2, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E07, 0
+	object_event 6, EVENT_OBJ_GFX_WOMAN_4, 0, 3, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E10, 0
+	object_event 7, EVENT_OBJ_GFX_WOMAN_2, 0, 11, 3, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E19, 776
 	object_event 8, EVENT_OBJ_GFX_ARTIST, 0, 19, 3, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E2B, 779
 	object_event 9, EVENT_OBJ_GFX_FAT_MAN, 0, 2, 2, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 2, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E42, 780
 	object_event 10, EVENT_OBJ_GFX_PSYCHIC_M, 0, 6, 2, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E22, 778
