@@ -16,7 +16,7 @@ const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_LittleBoy2;
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_LittleGirl2;
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_Boy3;
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_Girl3;
-const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_Boy4;
+const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_RichBoy;
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_Woman1;
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_FatMan;
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_Woman2;
@@ -265,7 +265,7 @@ const struct EventObjectGraphicsInfo *const gEventObjectGraphicsInfoPointers[] =
 	&gEventObjectGraphicsInfo_LittleGirl2,
 	&gEventObjectGraphicsInfo_Boy3,
 	&gEventObjectGraphicsInfo_Girl3,
-	&gEventObjectGraphicsInfo_Boy4,
+	&gEventObjectGraphicsInfo_RichBoy,
 	&gEventObjectGraphicsInfo_Woman1,
 	&gEventObjectGraphicsInfo_FatMan,
 	&gEventObjectGraphicsInfo_Woman2,

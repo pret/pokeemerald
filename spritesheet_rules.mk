@@ -171,7 +171,7 @@ $(EVENTOBJGFXDIR)/people/boy_2.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/people/boy_3.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/boy_4.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/rich_boy.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(EVENTOBJGFXDIR)/people/boy_5.4bpp: %.4bpp: %.png
