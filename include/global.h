@@ -304,11 +304,10 @@ struct ApprenticeMon
 
 struct Apprentice
 {
-    u8 field_0_0:5;
-    u8 field_0_1:2;
+    u8 id:5;
+    u8 lvlMode:2; // + 1
     u8 field_1;
-    u8 field_2;
-    u8 field_3;
+    u8 number;
     struct ApprenticeMon monData[3];
     u16 easyChatWords[6];
     u8 playerId[4];
@@ -514,7 +513,7 @@ struct SaveBlock2
     /*0xA8*/ u32 field_A8;
     /*0xAC*/ u32 encryptionKey;
 
-        // TODO: fix and verify labels
+             // Possibly player's apprentice, will document once battle tower is decompiled.
     /*0xB0*/ u8 field_B0;
     /*0xB1*/ u8 field_B1_0:2;
     /*0xB1*/ u8 field_B1_1:4;
@@ -524,7 +523,7 @@ struct SaveBlock2
     /*0xB3*/ u8 field_B3;
     /*0xB4*/ u8 field_B4[3];
     /*0xB8*/ struct Sav2_B8 field_B8[9];
-    /*0xDC*/ struct Apprentice field_DC[4];
+    /*0xDC*/ struct Apprentice apprentices[4];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;

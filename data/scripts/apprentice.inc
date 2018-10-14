@@ -1,5 +1,26 @@
 #include "constants/apprentice.h"
 
+.macro apprentice_msg waitbuttonpress which
+setvar VAR_0x8004, 8
+setvar VAR_0x8005, \waitbuttonpress
+setvar VAR_0x8006, \which
+special sub_81A085C
+.endm
+
+.macro apprentice_buff whichstringvar tobuff
+setvar VAR_0x8004, 16
+setvar VAR_0x8005, \whichstringvar
+setvar VAR_0x8006, \tobuff
+special sub_81A085C
+.endm
+
+.macro apprentice_menu which
+setvar VAR_0x8004, 7
+setvar VAR_0x8005, \which
+special sub_81A085C
+waitstate
+.endm
+
 EventScript_Apprentice:: @ 82B688D
 	lock
 	faceplayer
@@ -32,46 +53,25 @@ BattleFrontier_BattleTowerLobby_EventScript_2B68BE:
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6900:
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 6
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_NAME
+	apprentice_msg FALSE, 0
 	waitstate
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6925:
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, APPRENTICE_ASK_YES_NO
-	special sub_81A085C
-	waitstate
+	apprentice_menu APPRENTICE_ASK_YES_NO
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B69BB
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 2
-	special sub_81A085C
+	apprentice_msg FALSE, 2
 	waitstate
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, APPRENTICE_ASK_WHICH_LEVEL
-	special sub_81A085C
-	waitstate
+	apprentice_menu APPRENTICE_ASK_WHICH_LEVEL
 	setvar VAR_0x8004, 1
 	setorcopyvar VAR_0x8005, VAR_RESULT
 	addvar VAR_0x8005, 1
 	special sub_81A085C
 	setvar VAR_0x8004, 3
 	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 8
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 3
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_LEVEL
+	apprentice_msg TRUE, 3
 	waitstate
 	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
 	release
@@ -82,10 +82,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6925:
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_2B69BB:
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 1
-	special sub_81A085C
+	apprentice_msg FALSE, 1
 	waitstate
 	goto BattleFrontier_BattleTowerLobby_EventScript_2B6925
 
@@ -93,23 +90,11 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 2
 	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 1
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 6
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_SPECIES1
+	apprentice_buff 1, APPRENTICE_BUFF_SPECIES2
+	apprentice_msg FALSE, 6
 	waitstate
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, APPRENTICE_ASK_2SPECIES
-	special sub_81A085C
-	waitstate
+	apprentice_menu APPRENTICE_ASK_2SPECIES
 	copyvar VAR_0x8005, VAR_RESULT
 	compare VAR_0x8005, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6ABA
@@ -132,10 +117,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:
 	special sub_81A085C
 	setvar VAR_0x8004, 15
 	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 7
-	special sub_81A085C
+	apprentice_msg TRUE, 7
 	waitstate
 	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
 	release
@@ -162,14 +144,8 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6ACF:
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 4
 	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 2
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 10
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
+	apprentice_msg TRUE, 10
 	waitstate
 	setvar VAR_0x8004, 15
 	special sub_81A085C
@@ -186,14 +162,8 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B09:
 	special sub_81A085C
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6C0C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 5
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 12
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_ITEM
+	apprentice_msg TRUE, 12
 	waitstate
 	setvar VAR_0x8004, 5
 	special sub_81A085C
@@ -209,29 +179,17 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B81:
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 4
 	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 2
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 13
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
+	apprentice_msg FALSE, 13
 	waitstate
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, APPRENTICE_ASK_GIVE
-	special sub_81A085C
-	waitstate
+	apprentice_menu APPRENTICE_ASK_GIVE
 	setvar VAR_0x8004, 15
 	special sub_81A085C
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B09
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6BD4:
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 14
-	special sub_81A085C
+	apprentice_msg TRUE, 14
 	waitstate
 	setvar VAR_0x8004, 5
 	special sub_81A085C
@@ -247,23 +205,11 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C0C:
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 4
 	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 5
-	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 2
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 16
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_ITEM
+	apprentice_buff 1, APPRENTICE_BUFF_SPECIES3
+	apprentice_msg FALSE, 16
 	waitstate
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, APPRENTICE_ASK_GIVE
-	special sub_81A085C
-	waitstate
+	apprentice_menu APPRENTICE_ASK_GIVE
 	setvar VAR_0x8004, 15
 	special sub_81A085C
 	compare VAR_RESULT, 0
@@ -275,27 +221,12 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C77:
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 3
 	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 2
-	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 3
-	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 4
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 8
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
+	apprentice_buff 1, APPRENTICE_BUFF_MOVE1
+	apprentice_buff 2, APPRENTICE_BUFF_MOVE2
+	apprentice_msg FALSE, 8
 	waitstate
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, APPRENTICE_ASK_MOVES
-	special sub_81A085C
-	waitstate
+	apprentice_menu APPRENTICE_ASK_MOVES
 	copyvar VAR_0x8005, VAR_RESULT
 	compare VAR_0x8005, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6D50
@@ -311,10 +242,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C77:
 	special sub_81A085C
 	setvar VAR_0x8004, 15
 	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 9
-	special sub_81A085C
+	apprentice_msg TRUE, 9
 	waitstate
 	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
 	release
@@ -333,28 +261,16 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6D56:
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6D5C:
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 4
-	special sub_81A085C
+	apprentice_msg FALSE, 4
 	waitstate
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, APPRENTICE_ASK_3SPECIES
-	special sub_81A085C
-	waitstate
+	apprentice_menu APPRENTICE_ASK_3SPECIES
 	copyvar VAR_0x8005, VAR_RESULT
 	setvar VAR_0x8004, 18
 	special sub_81A085C
 	setvar VAR_0x8004, 5
 	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 9
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 5
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_SPECIES4
+	apprentice_msg TRUE, 5
 	waitstate
 	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
 	release
@@ -365,10 +281,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6D5C:
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 11
-	special sub_81A085C
+	apprentice_msg TRUE, 11
 	waitstate
 	setvar VAR_0x8004, 25
 	special sub_81A085C
@@ -378,14 +291,8 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
 	faceplayer
 	setvar VAR_0x8004, 21
 	special sub_81A085C
-	setvar VAR_0x8004, 16
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 7
-	special sub_81A085C
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 15
-	special sub_81A085C
+	apprentice_buff 0, APPRENTICE_BUFF_EASY_CHAT
+	apprentice_msg TRUE, 15
 	waitstate
 	setvar VAR_0x8004, 9
 	special sub_81A085C

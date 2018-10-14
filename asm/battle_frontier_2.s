@@ -3620,7 +3620,7 @@ _081A3758:
 	adds r0, 0x70
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_819F99C
+	bl CopyFriendsApprenticeChallengeText
 	b _081A38F8
 _081A3766:
 	movs r0, 0xFA

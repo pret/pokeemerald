@@ -2877,13 +2877,13 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
     s32 i;
     u16 evAmount;
     u8 language;
-    u32 otId = gApprentices[src->field_0_0].otId;
-    u32 personality = ((gApprentices[src->field_0_0].otId >> 8) | ((gApprentices[src->field_0_0].otId & 0xFF) << 8))
-                    + src->monData[monId].species + src->field_2;
+    u32 otId = gApprentices[src->id].otId;
+    u32 personality = ((gApprentices[src->id].otId >> 8) | ((gApprentices[src->id].otId & 0xFF) << 8))
+                    + src->monData[monId].species + src->number;
 
     CreateMon(mon,
               src->monData[monId].species,
-              GetFrontierEnemyMonLevel(src->field_0_1 - 1),
+              GetFrontierEnemyMonLevel(src->lvlMode - 1),
               0x1F,
               TRUE,
               personality,
@@ -2900,7 +2900,7 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
 
     language = src->language;
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
-    SetMonData(mon, MON_DATA_OT_NAME, GetApprenticeNameInLanguage(src->field_0_0, language));
+    SetMonData(mon, MON_DATA_OT_NAME, GetApprenticeNameInLanguage(src->id, language));
     CalculateMonStats(mon);
 }
 

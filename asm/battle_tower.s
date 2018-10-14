@@ -2831,7 +2831,7 @@ _0816399C:
 	adds r0, 0x70
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_819F99C
+	bl CopyFriendsApprenticeChallengeText
 _081639A8:
 	pop {r0}
 	bx r0

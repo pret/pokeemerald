@@ -78,21 +78,19 @@ static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height);
 static void RemoveAndHideWindow(u8 windowId);
 static void ExecuteFuncAfterButtonPress(void (*func)(void));
 
-void sub_819F99C(u8 id)
+void CopyFriendsApprenticeChallengeText(u8 saveblockApprenticeId)
 {
     u8 i, var;
     const u8 *str;
 
-    var = gSaveBlock2Ptr->field_DC[id].field_2;
-    for (i = 0; var != 0 && i < 4; i++)
-    {
-        var /= 10;
-    }
+    var = gSaveBlock2Ptr->apprentices[saveblockApprenticeId].number;
+    for (i = 0; var != 0 && i < 4; var /= 10, i++)
+        ;
 
-    StringCopy7(gStringVar1, gSaveBlock2Ptr->field_DC[id].playerName);
-    ConvertInternationalString(gStringVar1, gSaveBlock2Ptr->field_DC[id].language);
-    ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->field_DC[id].field_2, STR_CONV_MODE_RIGHT_ALIGN, i);
-    str = gUnknown_08611330[gSaveBlock2Ptr->field_DC[id].field_0_0];
+    StringCopy7(gStringVar1, gSaveBlock2Ptr->apprentices[saveblockApprenticeId].playerName);
+    ConvertInternationalString(gStringVar1, gSaveBlock2Ptr->apprentices[saveblockApprenticeId].language);
+    ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->apprentices[saveblockApprenticeId].number, STR_CONV_MODE_RIGHT_ALIGN, i);
+    str = gUnknown_08611330[gSaveBlock2Ptr->apprentices[saveblockApprenticeId].id];
     StringExpandPlaceholders(gStringVar4, str);
 }
 
@@ -109,7 +107,7 @@ void sub_819FA5C(struct Apprentice *apprentice)
         apprentice->easyChatWords[i] |= 0xFFFF;
 
     apprentice->playerName[0] = EOS;
-    apprentice->field_0_0 = 16;
+    apprentice->id = 16;
 }
 
 void sub_819FAA0(void)
@@ -120,16 +118,16 @@ void sub_819FAA0(void)
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 6; j++)
-            gSaveBlock2Ptr->field_DC[i].easyChatWords[j] |= 0xFFFF;
-        gSaveBlock2Ptr->field_DC[i].field_0_0 = 16;
-        gSaveBlock2Ptr->field_DC[i].playerName[0] = EOS;
-        gSaveBlock2Ptr->field_DC[i].field_0_1 = 0;
-        gSaveBlock2Ptr->field_DC[i].field_2 = 0;
-        gSaveBlock2Ptr->field_DC[i].field_1 = 0;
+            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] |= 0xFFFF;
+        gSaveBlock2Ptr->apprentices[i].id = 16;
+        gSaveBlock2Ptr->apprentices[i].playerName[0] = EOS;
+        gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
+        gSaveBlock2Ptr->apprentices[i].number = 0;
+        gSaveBlock2Ptr->apprentices[i].field_1 = 0;
         for (j = 0; j < 4; j++)
-            gSaveBlock2Ptr->field_DC[i].playerId[j] = 0;
-        gSaveBlock2Ptr->field_DC[i].language = gGameLanguage;
-        gSaveBlock2Ptr->field_DC[i].unk40 = 0;
+            gSaveBlock2Ptr->apprentices[i].playerId[j] = 0;
+        gSaveBlock2Ptr->apprentices[i].language = gGameLanguage;
+        gSaveBlock2Ptr->apprentices[i].unk40 = 0;
     }
 
     sub_81A087C();
@@ -142,19 +140,19 @@ bool8 sub_819FBB0(void)
 
 void sub_819FBC8(void)
 {
-    if (gSaveBlock2Ptr->field_DC[0].field_2 == 0)
+    if (gSaveBlock2Ptr->apprentices[0].number == 0)
     {
         do
         {
             gSaveBlock2Ptr->field_B0 = gUnknown_08611548[Random() % ARRAY_COUNT(gUnknown_08611548)];
-        } while (gSaveBlock2Ptr->field_B0 == gSaveBlock2Ptr->field_DC[0].field_0_0);
+        } while (gSaveBlock2Ptr->field_B0 == gSaveBlock2Ptr->apprentices[0].id);
     }
     else
     {
         do
         {
             gSaveBlock2Ptr->field_B0 = Random() % 16;
-        } while (gSaveBlock2Ptr->field_B0 == gSaveBlock2Ptr->field_DC[0].field_0_0);
+        } while (gSaveBlock2Ptr->field_B0 == gSaveBlock2Ptr->apprentices[0].id);
     }
 }
 
@@ -472,16 +470,16 @@ void sub_81A0390(u8 arg0)
 
     for (i = 0; i < 3; i++)
     {
-        gSaveBlock2Ptr->field_DC[0].monData[i].species = 0;
-        gSaveBlock2Ptr->field_DC[0].monData[i].item = 0;
+        gSaveBlock2Ptr->apprentices[0].monData[i].species = 0;
+        gSaveBlock2Ptr->apprentices[0].monData[i].item = 0;
         for (j = 0; j < 4; j++)
-            gSaveBlock2Ptr->field_DC[0].monData[i].moves[j] = 0;
+            gSaveBlock2Ptr->apprentices[0].monData[i].moves[j] = 0;
     }
 
     j = gSaveBlock2Ptr->field_B1_2;
     for (i = 0; i < 3; i++)
     {
-        apprenticeMons[j] = &gSaveBlock2Ptr->field_DC[0].monData[i];
+        apprenticeMons[j] = &gSaveBlock2Ptr->apprentices[0].monData[i];
         j = (j + 1) % 3;
     }
 
@@ -983,39 +981,39 @@ void sub_81A0FFC(void)
 
     switch (gSpecialVar_0x8006)
     {
-    case 0:
+    case APPRENTICE_BUFF_SPECIES1:
         StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk0]);
         break;
-    case 1:
+    case APPRENTICE_BUFF_SPECIES2:
         StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk2]);
         break;
-    case 2:
+    case APPRENTICE_BUFF_SPECIES3:
         StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk0]);
         break;
-    case 3:
+    case APPRENTICE_BUFF_MOVE1:
         StringCopy(stringDst, gMoveNames[gUnknown_030062F0->unk4]);
         break;
-    case 4:
+    case APPRENTICE_BUFF_MOVE2:
         StringCopy(stringDst, gMoveNames[gUnknown_030062F0->unk6]);
         break;
-    case 5:
+    case APPRENTICE_BUFF_ITEM:
         StringCopy(stringDst, ItemId_GetName(gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk2));
         break;
-    case 6:
+    case APPRENTICE_BUFF_NAME:
         TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(gSaveBlock2Ptr->field_B0, LANGUAGE_ENGLISH), LANGUAGE_ENGLISH);
         StringCopy(stringDst, text);
         break;
-    case 8:
+    case APPRENTICE_BUFF_LEVEL:
         if (gSaveBlock2Ptr->field_B1_0 == 1)
             StringCopy(stringDst, gText_Lv50);
         else
             StringCopy(stringDst, gText_OpenLevel);
         break;
-    case 7:
-        ConvertBattleFrontierTrainerSpeechToString(gSaveBlock2Ptr->field_DC[0].easyChatWords);
+    case APPRENTICE_BUFF_EASY_CHAT:
+        ConvertBattleFrontierTrainerSpeechToString(gSaveBlock2Ptr->apprentices[0].easyChatWords);
         StringCopy(stringDst, gStringVar4);
         break;
-    case 9:
+    case APPRENTICE_BUFF_SPECIES4:
         if (gSaveBlock2Ptr->field_B1_2 < 3)
         {
             APPRENTICE_SPECIES_ID(speciesArrayId, gSaveBlock2Ptr->field_B1_2);
@@ -1250,14 +1248,14 @@ void sub_81A1370(void)
     s32 r10;
     s32 r9;
 
-    if (gSaveBlock2Ptr->field_DC[0].playerName[0] == EOS)
+    if (gSaveBlock2Ptr->apprentices[0].playerName[0] == EOS)
         return;
 
     for (i = 0; i < 3; i++)
     {
-        if (gSaveBlock2Ptr->field_DC[i + 1].playerName[0] == EOS)
+        if (gSaveBlock2Ptr->apprentices[i + 1].playerName[0] == EOS)
         {
-            gSaveBlock2Ptr->field_DC[i + 1] = gSaveBlock2Ptr->field_DC[0];
+            gSaveBlock2Ptr->apprentices[i + 1] = gSaveBlock2Ptr->apprentices[0];
             return;
         }
     }
@@ -1266,46 +1264,46 @@ void sub_81A1370(void)
     r9 = -1;
     for (i = 1; i < 4; i++)
     {
-        if (ReadUnalignedWord(gSaveBlock2Ptr->field_DC[i].playerId) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId)
-            && gSaveBlock2Ptr->field_DC[i].field_2 < r10)
+        if (ReadUnalignedWord(gSaveBlock2Ptr->apprentices[i].playerId) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId)
+            && gSaveBlock2Ptr->apprentices[i].number < r10)
         {
-            r10 = gSaveBlock2Ptr->field_DC[i].field_2;
+            r10 = gSaveBlock2Ptr->apprentices[i].number;
             r9 = i;
         }
     }
 
     if (r9 > 0)
-        gSaveBlock2Ptr->field_DC[r9] = gSaveBlock2Ptr->field_DC[0];
+        gSaveBlock2Ptr->apprentices[r9] = gSaveBlock2Ptr->apprentices[0];
 }
 
 void sub_81A1438(void)
 {
     u8 i;
 
-    gSaveBlock2Ptr->field_DC[0].field_0_0 = gSaveBlock2Ptr->field_B0;
-    gSaveBlock2Ptr->field_DC[0].field_0_1 = gSaveBlock2Ptr->field_B1_0;
+    gSaveBlock2Ptr->apprentices[0].id = gSaveBlock2Ptr->field_B0;
+    gSaveBlock2Ptr->apprentices[0].lvlMode = gSaveBlock2Ptr->field_B1_0;
 
     for (i = 0; i < 9 && gSaveBlock2Ptr->field_B8[i].unk0_0; i++)
         ;
 
-    gSaveBlock2Ptr->field_DC[0].field_1 = i;
-    if (gSaveBlock2Ptr->field_DC[0].field_2 < 255)
-        gSaveBlock2Ptr->field_DC[0].field_2++;
+    gSaveBlock2Ptr->apprentices[0].field_1 = i;
+    if (gSaveBlock2Ptr->apprentices[0].number < 255)
+        gSaveBlock2Ptr->apprentices[0].number++;
 
-    sub_81A0390(gSaveBlock2Ptr->field_DC[0].field_1);
+    sub_81A0390(gSaveBlock2Ptr->apprentices[0].field_1);
     for (i = 0; i < 4; i++)
-        gSaveBlock2Ptr->field_DC[0].playerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+        gSaveBlock2Ptr->apprentices[0].playerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
-    StringCopy(gSaveBlock2Ptr->field_DC[0].playerName, gSaveBlock2Ptr->playerName);
-    gSaveBlock2Ptr->field_DC[0].language = gGameLanguage;
-    sub_8165AE8(&gSaveBlock2Ptr->field_DC[0]);
+    StringCopy(gSaveBlock2Ptr->apprentices[0].playerName, gSaveBlock2Ptr->playerName);
+    gSaveBlock2Ptr->apprentices[0].language = gGameLanguage;
+    sub_8165AE8(&gSaveBlock2Ptr->apprentices[0]);
 }
 
 void sub_81A150C(void)
 {
     u8 i;
     u8 mapObjectGfxId;
-    u8 class = gApprentices[gSaveBlock2Ptr->field_DC[0].field_0_0].facilityClass;
+    u8 class = gApprentices[gSaveBlock2Ptr->apprentices[0].id].facilityClass;
 
     for (i = 0; i < 30 && gUnknown_085DCEDC[i] != class; i++)
         ;

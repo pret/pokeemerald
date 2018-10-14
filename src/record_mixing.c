@@ -199,7 +199,7 @@ static void SetSrcLookupPointers(void)
     gUnknown_03001148 = &gUnknown_02039F9C;
     sBattleTowerSave = &gSaveBlock2Ptr->frontier.battleTower;
     sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
-    gUnknown_03001154 = gSaveBlock2Ptr->field_DC;
+    gUnknown_03001154 = gSaveBlock2Ptr->apprentices;
     sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->frontier.battleTower;
 }
 
@@ -1675,7 +1675,7 @@ static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2
     r8 = 0;
     for (i = 0; i < 2; i++)
     {
-        if (structPtr[i].playerName[0] != EOS && !sub_80E841C(&structPtr[i], gSaveBlock2Ptr->field_DC))
+        if (structPtr[i].playerName[0] != EOS && !sub_80E841C(&structPtr[i], gSaveBlock2Ptr->apprentices))
         {
             r7++;
             r8 = i;
@@ -1686,14 +1686,14 @@ static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2
     {
     case 1:
         structId = gSaveBlock2Ptr->field_B2_1 + 1;
-        gSaveBlock2Ptr->field_DC[structId] = structPtr[r8];
+        gSaveBlock2Ptr->apprentices[structId] = structPtr[r8];
         gSaveBlock2Ptr->field_B2_1 = (gSaveBlock2Ptr->field_B2_1 + 1) % 3;
         break;
     case 2:
         for (i = 0; i < 2; i++)
         {
             structId = ((i ^ 1) + gSaveBlock2Ptr->field_B2_1) % 3 + 1;
-            gSaveBlock2Ptr->field_DC[structId] = structPtr[i];
+            gSaveBlock2Ptr->apprentices[structId] = structPtr[i];
         }
         gSaveBlock2Ptr->field_B2_1 = (gSaveBlock2Ptr->field_B2_1 + 2) % 3;
         break;
