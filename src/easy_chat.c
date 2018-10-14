@@ -352,7 +352,7 @@ void easy_chat_input_maybe(void)
         words = &gSaveBlock1Ptr->lilycoveLady.quiz.unk_014;
         break;
     case 19:
-        words = gSaveBlock2Ptr->field_DC[0].easyChatWords;
+        words = gSaveBlock2Ptr->apprentices[0].easyChatWords;
         break;
     case 20:
         words = sub_801B058();

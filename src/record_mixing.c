@@ -1653,7 +1653,7 @@ static bool32 sub_80E841C(struct Apprentice *arg0, struct Apprentice *arg1)
     for (i = 0; i < 4; i++)
     {
         if (ReadUnalignedWord(arg0->playerId) == ReadUnalignedWord(arg1[i].playerId)
-            && arg0->field_2 == arg1[i].field_2)
+            && arg0->number == arg1[i].number)
         {
             return TRUE;
         }
