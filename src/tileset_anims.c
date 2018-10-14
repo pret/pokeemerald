@@ -1,7 +1,7 @@
 // Includes
 #include "global.h"
 #include "palette.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "battle_transition.h"
 #include "task.h"
 #include "battle_transition.h"

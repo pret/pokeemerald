@@ -25,7 +25,7 @@
 #include "gpu_regs.h"
 #include "bg.h"
 #include "link.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "trig.h"
 
 struct EvoInfo

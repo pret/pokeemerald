@@ -4,7 +4,7 @@
 #include "pokemon_animation.h"
 #include "trig.h"
 #include "task.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "constants/rgb.h"
 
 struct UnkAnimStruct

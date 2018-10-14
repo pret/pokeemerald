@@ -1,6 +1,6 @@
 #include "global.h"
-#include "blend_palette.h"
 #include "palette.h"
+#include "util.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "task.h"
