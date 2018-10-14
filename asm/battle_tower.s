@@ -6690,7 +6690,7 @@ _08165B10:
 	adds r1, 0x1
 	cmp r1, 0x10
 	bls _08165B10
-	bl sub_819FA5C
+	bl ResetApprenticeStruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8165B08

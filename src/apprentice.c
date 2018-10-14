@@ -25,6 +25,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/moves.h"
 
 #define PLAYER_APPRENTICE gSaveBlock2Ptr->playerApprentice
 
@@ -350,32 +351,40 @@ extern const u8 gUnknown_085DCF0E[];
 extern const u8 gUnknown_085DCEFA[];
 extern const u8 gUnknown_085DCF2C[];
 
-void sub_81A093C(void);
-void sub_81A0964(void);
-void sub_81A0978(void);
-void sub_819FC60(void);
-void sub_81A0984(void);
-void sub_81A0990(void);
-void sub_81A09D0(void);
-void sub_81A0A20(void);
-void sub_81A0C9C(void);
-void sub_81A087C(void);
-void sub_81A1638(void);
-void sub_81A0CC0(void);
-void sub_81A09B4(void);
-void sub_81A0D40(void);
-void sub_81A0DD4(void);
-void sub_81A0FE4(void);
-void sub_81A0FFC(void);
-void sub_81A0D80(void);
-void sub_81A11F8(void);
-void sub_81A1218(void);
-void sub_81A1224(void);
-void sub_81A1438(void);
-void sub_81A150C(void);
-void sub_81A15A4(void);
-void sub_81A1644(void);
-void sub_81A1370(void);
+// This file's functions.
+static u16 sub_819FF98(u8 arg0);
+static bool8 sub_81A0194(u8 arg0, u16 moveId);
+static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId);
+static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height);
+static void RemoveAndHideWindow(u8 windowId);
+static void ExecuteFuncAfterButtonPress(void (*func)(void));
+
+static void Script_IsPlayersApprenticeActive(void);
+static void Script_SetPlayersApprenticeLvlMode(void);
+static void sub_81A0978(void);
+static void sub_819FC60(void);
+static void sub_81A0984(void);
+static void sub_81A0990(void);
+static void sub_81A09D0(void);
+static void Script_CreateApprenticeMenu(void);
+static void Script_PrintMessage(void);
+static void Script_ResetPlayerApprentice(void);
+static void sub_81A1638(void);
+static void sub_81A0CC0(void);
+static void sub_81A09B4(void);
+static void sub_81A0D40(void);
+static void sub_81A0DD4(void);
+static void sub_81A0FE4(void);
+static void sub_81A0FFC(void);
+static void sub_81A0D80(void);
+static void sub_81A11F8(void);
+static void sub_81A1218(void);
+static void sub_81A1224(void);
+static void sub_81A1438(void);
+static void sub_81A150C(void);
+static void sub_81A15A4(void);
+static void sub_81A1644(void);
+static void sub_81A1370(void);
 
 // rodata
 
@@ -428,7 +437,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .otId = 0xF555,
         .facilityClass = 0x31,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_MAGNETON, SPECIES_MEDICHAM, SPECIES_MIGHTYENA, SPECIES_GLALIE, SPECIES_GOLEM, SPECIES_ELECTRODE, SPECIES_PELIPPER, SPECIES_SHARPEDO},
-        .rest = {6, 0, 0x0B, 0x0C, 0x3E, 0x12, 0x00, 0x0C, 0x31, 0x0A, 0x30, 0x14, 0x00, 0x0C}, 
+        .rest = {6, 0, 0x0B, 0x0C, 0x3E, 0x12, 0x00, 0x0C, 0x31, 0x0A, 0x30, 0x14, 0x00, 0x0C},
     },
     {
         .name = {_("カズサ"), _("KALI"), _("JODIE"), _("ILENIA"), _("KARO"), _("ELSA")},
@@ -495,7 +504,7 @@ const struct ApprenticeTrainer gApprentices[] =
     },
 };
 
-const u8 *const gUnknown_08610EF0[][4] =
+static const u8 *const gUnknown_08610EF0[][4] =
 {
     {gText_082B7229, gText_082B731C, gText_082B735B, gText_082B7423},
     {gText_082B74C1, gText_082B756F, gText_082B75B2, gText_082B763F},
@@ -515,7 +524,7 @@ const u8 *const gUnknown_08610EF0[][4] =
     {gText_082B9F55, gText_082BA084, gText_082BA11D, gText_082BA1F3},
 };
 
-const u8 *const gUnknown_08610FF0[][2] =
+static const u8 *const gUnknown_08610FF0[][2] =
 {
     {gText_082BE50D, gText_082BE5F5},
     {gText_082BE679, gText_082BE71E},
@@ -535,7 +544,7 @@ const u8 *const gUnknown_08610FF0[][2] =
     {gText_082BFA5A, gText_082BFB4E},
 };
 
-const u8 *const gUnknown_08611070[][5] =
+static const u8 *const gUnknown_08611070[][5] =
 {
     {gText_082BA2A3, gText_082BA34E, gText_082BA380, gText_082BA3D2, gText_082BA448},
     {gText_082BA4D3, gText_082BA58C, gText_082BA5BF, gText_082BA5F3, gText_082BA635},
@@ -555,7 +564,7 @@ const u8 *const gUnknown_08611070[][5] =
     {gText_082BCA4D, gText_082BCB75, gText_082BCBA6, gText_082BCBFC, gText_082BCCA4},
 };
 
-const u8 *const gUnknown_086111B0[][2] =
+static const u8 *const gUnknown_086111B0[][2] =
 {
     {gText_082BFBF2, gText_082BFCAE},
     {gText_082BFD26, gText_082BFDB1},
@@ -575,7 +584,7 @@ const u8 *const gUnknown_086111B0[][2] =
     {gText_082C1003, gText_082C1122},
 };
 
-const u8 *const gUnknown_08611230[][2] =
+static const u8 *const gUnknown_08611230[][2] =
 {
     {gText_082BCD68, gText_082BCE64},
     {gText_082BCEF2, gText_082BCF61},
@@ -595,7 +604,7 @@ const u8 *const gUnknown_08611230[][2] =
     {gText_082BE33E, gText_082BE46C},
 };
 
-const u8 *const gUnknown_086112B0[][2] =
+static const u8 *const gUnknown_086112B0[][2] =
 {
     {gText_082C11D1, gText_082C12D5},
     {gText_082C13AB, gText_082C1444},
@@ -615,7 +624,7 @@ const u8 *const gUnknown_086112B0[][2] =
     {gText_082C2EF5, gText_082C3023},
 };
 
-const u8 *const gUnknown_08611330[] =
+static const u8 *const gUnknown_08611330[] =
 {
     gText_082B6EA5,
     gText_082B6EEC,
@@ -635,36 +644,379 @@ const u8 *const gUnknown_08611330[] =
     gText_082B71F9,
 };
 
-const bool8 gUnknown_08611370[] =
+static const bool8 gUnknown_08611370[MOVES_COUNT] =
 {
-    0x00, 0x00, 0x01, 0x01, 0x00, 0x01, 0x00, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00,
-    0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01,
-    0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01,
-    0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01,
-    0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01,
-    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01,
-    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-    0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01,
-    0x01, 0x01, 0x01,
+    [MOVE_NONE] = FALSE,
+    [MOVE_POUND] = FALSE,
+    [MOVE_KARATE_CHOP] = TRUE,
+    [MOVE_DOUBLE_SLAP] = TRUE,
+    [MOVE_COMET_PUNCH] = FALSE,
+    [MOVE_MEGA_PUNCH] = TRUE,
+    [MOVE_PAY_DAY] = FALSE,
+    [MOVE_FIRE_PUNCH] = TRUE,
+    [MOVE_ICE_PUNCH] = TRUE,
+    [MOVE_THUNDER_PUNCH] = TRUE,
+    [MOVE_SCRATCH] = FALSE,
+    [MOVE_VICE_GRIP] = FALSE,
+    [MOVE_GUILLOTINE] = TRUE,
+    [MOVE_RAZOR_WIND] = FALSE,
+    [MOVE_SWORDS_DANCE] = TRUE,
+    [MOVE_CUT] = FALSE,
+    [MOVE_GUST] = FALSE,
+    [MOVE_WING_ATTACK] = FALSE,
+    [MOVE_WHIRLWIND] = TRUE,
+    [MOVE_FLY] = TRUE,
+    [MOVE_BIND] = TRUE,
+    [MOVE_SLAM] = TRUE,
+    [MOVE_VINE_WHIP] = FALSE,
+    [MOVE_STOMP] = TRUE,
+    [MOVE_DOUBLE_KICK] = TRUE,
+    [MOVE_MEGA_KICK] = TRUE,
+    [MOVE_JUMP_KICK] = TRUE,
+    [MOVE_ROLLING_KICK] = TRUE,
+    [MOVE_SAND_ATTACK] = TRUE,
+    [MOVE_HEADBUTT] = TRUE,
+    [MOVE_HORN_ATTACK] = FALSE,
+    [MOVE_FURY_ATTACK] = FALSE,
+    [MOVE_HORN_DRILL] = TRUE,
+    [MOVE_TACKLE] = FALSE,
+    [MOVE_BODY_SLAM] = TRUE,
+    [MOVE_WRAP] = TRUE,
+    [MOVE_TAKE_DOWN] = TRUE,
+    [MOVE_THRASH] = TRUE,
+    [MOVE_DOUBLE_EDGE] = TRUE,
+    [MOVE_TAIL_WHIP] = FALSE,
+    [MOVE_POISON_STING] = FALSE,
+    [MOVE_TWINEEDLE] = TRUE,
+    [MOVE_PIN_MISSILE] = FALSE,
+    [MOVE_LEER] = FALSE,
+    [MOVE_BITE] = TRUE,
+    [MOVE_GROWL] = FALSE,
+    [MOVE_ROAR] = TRUE,
+    [MOVE_SING] = TRUE,
+    [MOVE_SUPERSONIC] = TRUE,
+    [MOVE_SONIC_BOOM] = TRUE,
+    [MOVE_DISABLE] = TRUE,
+    [MOVE_ACID] = FALSE,
+    [MOVE_EMBER] = FALSE,
+    [MOVE_FLAMETHROWER] = TRUE,
+    [MOVE_MIST] = TRUE,
+    [MOVE_WATER_GUN] = FALSE,
+    [MOVE_HYDRO_PUMP] = TRUE,
+    [MOVE_SURF] = TRUE,
+    [MOVE_ICE_BEAM] = TRUE,
+    [MOVE_BLIZZARD] = TRUE,
+    [MOVE_PSYBEAM] = TRUE,
+    [MOVE_BUBBLE_BEAM] = FALSE,
+    [MOVE_AURORA_BEAM] = FALSE,
+    [MOVE_HYPER_BEAM] = TRUE,
+    [MOVE_PECK] = FALSE,
+    [MOVE_DRILL_PECK] = TRUE,
+    [MOVE_SUBMISSION] = TRUE,
+    [MOVE_LOW_KICK] = TRUE,
+    [MOVE_COUNTER] = TRUE,
+    [MOVE_SEISMIC_TOSS] = TRUE,
+    [MOVE_STRENGTH] = TRUE,
+    [MOVE_ABSORB] = FALSE,
+    [MOVE_MEGA_DRAIN] = FALSE,
+    [MOVE_LEECH_SEED] = TRUE,
+    [MOVE_GROWTH] = TRUE,
+    [MOVE_RAZOR_LEAF] = TRUE,
+    [MOVE_SOLAR_BEAM] = TRUE,
+    [MOVE_POISON_POWDER] = TRUE,
+    [MOVE_STUN_SPORE] = TRUE,
+    [MOVE_SLEEP_POWDER] = TRUE,
+    [MOVE_PETAL_DANCE] = TRUE,
+    [MOVE_STRING_SHOT] = FALSE,
+    [MOVE_DRAGON_RAGE] = TRUE,
+    [MOVE_FIRE_SPIN] = TRUE,
+    [MOVE_THUNDER_SHOCK] = FALSE,
+    [MOVE_THUNDERBOLT] = TRUE,
+    [MOVE_THUNDER_WAVE] = TRUE,
+    [MOVE_THUNDER] = TRUE,
+    [MOVE_ROCK_THROW] = FALSE,
+    [MOVE_EARTHQUAKE] = TRUE,
+    [MOVE_FISSURE] = TRUE,
+    [MOVE_DIG] = TRUE,
+    [MOVE_TOXIC] = TRUE,
+    [MOVE_CONFUSION] = FALSE,
+    [MOVE_PSYCHIC] = TRUE,
+    [MOVE_HYPNOSIS] = TRUE,
+    [MOVE_MEDITATE] = TRUE,
+    [MOVE_AGILITY] = TRUE,
+    [MOVE_QUICK_ATTACK] = TRUE,
+    [MOVE_RAGE] = FALSE,
+    [MOVE_TELEPORT] = FALSE,
+    [MOVE_NIGHT_SHADE] = TRUE,
+    [MOVE_MIMIC] = TRUE,
+    [MOVE_SCREECH] = TRUE,
+    [MOVE_DOUBLE_TEAM] = TRUE,
+    [MOVE_RECOVER] = TRUE,
+    [MOVE_HARDEN] = TRUE,
+    [MOVE_MINIMIZE] = TRUE,
+    [MOVE_SMOKESCREEN] = TRUE,
+    [MOVE_CONFUSE_RAY] = TRUE,
+    [MOVE_WITHDRAW] = TRUE,
+    [MOVE_DEFENSE_CURL] = TRUE,
+    [MOVE_BARRIER] = TRUE,
+    [MOVE_LIGHT_SCREEN] = TRUE,
+    [MOVE_HAZE] = TRUE,
+    [MOVE_REFLECT] = TRUE,
+    [MOVE_FOCUS_ENERGY] = TRUE,
+    [MOVE_BIDE] = FALSE,
+    [MOVE_METRONOME] = TRUE,
+    [MOVE_MIRROR_MOVE] = TRUE,
+    [MOVE_SELF_DESTRUCT] = TRUE,
+    [MOVE_EGG_BOMB] = TRUE,
+    [MOVE_LICK] = TRUE,
+    [MOVE_SMOG] = FALSE,
+    [MOVE_SLUDGE] = FALSE,
+    [MOVE_BONE_CLUB] = FALSE,
+    [MOVE_FIRE_BLAST] = TRUE,
+    [MOVE_WATERFALL] = TRUE,
+    [MOVE_CLAMP] = TRUE,
+    [MOVE_SWIFT] = TRUE,
+    [MOVE_SKULL_BASH] = TRUE,
+    [MOVE_SPIKE_CANNON] = FALSE,
+    [MOVE_CONSTRICT] = FALSE,
+    [MOVE_AMNESIA] = TRUE,
+    [MOVE_KINESIS] = TRUE,
+    [MOVE_SOFT_BOILED] = TRUE,
+    [MOVE_HI_JUMP_KICK] = TRUE,
+    [MOVE_GLARE] = TRUE,
+    [MOVE_DREAM_EATER] = TRUE,
+    [MOVE_POISON_GAS] = FALSE,
+    [MOVE_BARRAGE] = FALSE,
+    [MOVE_LEECH_LIFE] = FALSE,
+    [MOVE_LOVELY_KISS] = TRUE,
+    [MOVE_SKY_ATTACK] = TRUE,
+    [MOVE_TRANSFORM] = TRUE,
+    [MOVE_BUBBLE] = FALSE,
+    [MOVE_DIZZY_PUNCH] = TRUE,
+    [MOVE_SPORE] = TRUE,
+    [MOVE_FLASH] = TRUE,
+    [MOVE_PSYWAVE] = TRUE,
+    [MOVE_SPLASH] = FALSE,
+    [MOVE_ACID_ARMOR] = TRUE,
+    [MOVE_CRABHAMMER] = TRUE,
+    [MOVE_EXPLOSION] = TRUE,
+    [MOVE_FURY_SWIPES] = FALSE,
+    [MOVE_BONEMERANG] = TRUE,
+    [MOVE_REST] = TRUE,
+    [MOVE_ROCK_SLIDE] = TRUE,
+    [MOVE_HYPER_FANG] = TRUE,
+    [MOVE_SHARPEN] = TRUE,
+    [MOVE_CONVERSION] = TRUE,
+    [MOVE_TRI_ATTACK] = TRUE,
+    [MOVE_SUPER_FANG] = TRUE,
+    [MOVE_SLASH] = TRUE,
+    [MOVE_SUBSTITUTE] = TRUE,
+    [MOVE_STRUGGLE] = TRUE,
+    [MOVE_SKETCH] = TRUE,
+    [MOVE_TRIPLE_KICK] = TRUE,
+    [MOVE_THIEF] = TRUE,
+    [MOVE_SPIDER_WEB] = TRUE,
+    [MOVE_MIND_READER] = TRUE,
+    [MOVE_NIGHTMARE] = TRUE,
+    [MOVE_FLAME_WHEEL] = FALSE,
+    [MOVE_SNORE] = TRUE,
+    [MOVE_CURSE] = TRUE,
+    [MOVE_FLAIL] = TRUE,
+    [MOVE_CONVERSION_2] = TRUE,
+    [MOVE_AEROBLAST] = TRUE,
+    [MOVE_COTTON_SPORE] = TRUE,
+    [MOVE_REVERSAL] = TRUE,
+    [MOVE_SPITE] = TRUE,
+    [MOVE_POWDER_SNOW] = FALSE,
+    [MOVE_PROTECT] = TRUE,
+    [MOVE_MACH_PUNCH] = TRUE,
+    [MOVE_SCARY_FACE] = TRUE,
+    [MOVE_FAINT_ATTACK] = TRUE,
+    [MOVE_SWEET_KISS] = TRUE,
+    [MOVE_BELLY_DRUM] = TRUE,
+    [MOVE_SLUDGE_BOMB] = TRUE,
+    [MOVE_MUD_SLAP] = TRUE,
+    [MOVE_OCTAZOOKA] = TRUE,
+    [MOVE_SPIKES] = TRUE,
+    [MOVE_ZAP_CANNON] = TRUE,
+    [MOVE_FORESIGHT] = TRUE,
+    [MOVE_DESTINY_BOND] = TRUE,
+    [MOVE_PERISH_SONG] = TRUE,
+    [MOVE_ICY_WIND] = TRUE,
+    [MOVE_DETECT] = TRUE,
+    [MOVE_BONE_RUSH] = FALSE,
+    [MOVE_LOCK_ON] = TRUE,
+    [MOVE_OUTRAGE] = TRUE,
+    [MOVE_SANDSTORM] = TRUE,
+    [MOVE_GIGA_DRAIN] = TRUE,
+    [MOVE_ENDURE] = TRUE,
+    [MOVE_CHARM] = TRUE,
+    [MOVE_ROLLOUT] = TRUE,
+    [MOVE_FALSE_SWIPE] = TRUE,
+    [MOVE_SWAGGER] = TRUE,
+    [MOVE_MILK_DRINK] = TRUE,
+    [MOVE_SPARK] = FALSE,
+    [MOVE_FURY_CUTTER] = TRUE,
+    [MOVE_STEEL_WING] = TRUE,
+    [MOVE_MEAN_LOOK] = TRUE,
+    [MOVE_ATTRACT] = TRUE,
+    [MOVE_SLEEP_TALK] = TRUE,
+    [MOVE_HEAL_BELL] = TRUE,
+    [MOVE_RETURN] = TRUE,
+    [MOVE_PRESENT] = TRUE,
+    [MOVE_FRUSTRATION] = TRUE,
+    [MOVE_SAFEGUARD] = TRUE,
+    [MOVE_PAIN_SPLIT] = TRUE,
+    [MOVE_SACRED_FIRE] = TRUE,
+    [MOVE_MAGNITUDE] = FALSE,
+    [MOVE_DYNAMIC_PUNCH] = TRUE,
+    [MOVE_MEGAHORN] = TRUE,
+    [MOVE_DRAGON_BREATH] = TRUE,
+    [MOVE_BATON_PASS] = TRUE,
+    [MOVE_ENCORE] = TRUE,
+    [MOVE_PURSUIT] = TRUE,
+    [MOVE_RAPID_SPIN] = TRUE,
+    [MOVE_SWEET_SCENT] = TRUE,
+    [MOVE_IRON_TAIL] = TRUE,
+    [MOVE_METAL_CLAW] = TRUE,
+    [MOVE_VITAL_THROW] = TRUE,
+    [MOVE_MORNING_SUN] = TRUE,
+    [MOVE_SYNTHESIS] = TRUE,
+    [MOVE_MOONLIGHT] = TRUE,
+    [MOVE_HIDDEN_POWER] = TRUE,
+    [MOVE_CROSS_CHOP] = TRUE,
+    [MOVE_TWISTER] = FALSE,
+    [MOVE_RAIN_DANCE] = TRUE,
+    [MOVE_SUNNY_DAY] = TRUE,
+    [MOVE_CRUNCH] = TRUE,
+    [MOVE_MIRROR_COAT] = TRUE,
+    [MOVE_PSYCH_UP] = TRUE,
+    [MOVE_EXTREME_SPEED] = TRUE,
+    [MOVE_ANCIENT_POWER] = TRUE,
+    [MOVE_SHADOW_BALL] = TRUE,
+    [MOVE_FUTURE_SIGHT] = TRUE,
+    [MOVE_ROCK_SMASH] = TRUE,
+    [MOVE_WHIRLPOOL] = TRUE,
+    [MOVE_BEAT_UP] = TRUE,
+    [MOVE_FAKE_OUT] = TRUE,
+    [MOVE_UPROAR] = TRUE,
+    [MOVE_STOCKPILE] = TRUE,
+    [MOVE_SPIT_UP] = TRUE,
+    [MOVE_SWALLOW] = TRUE,
+    [MOVE_HEAT_WAVE] = TRUE,
+    [MOVE_HAIL] = TRUE,
+    [MOVE_TORMENT] = TRUE,
+    [MOVE_FLATTER] = TRUE,
+    [MOVE_WILL_O_WISP] = TRUE,
+    [MOVE_MEMENTO] = TRUE,
+    [MOVE_FACADE] = TRUE,
+    [MOVE_FOCUS_PUNCH] = TRUE,
+    [MOVE_SMELLING_SALT] = TRUE,
+    [MOVE_FOLLOW_ME] = TRUE,
+    [MOVE_NATURE_POWER] = TRUE,
+    [MOVE_CHARGE] = TRUE,
+    [MOVE_TAUNT] = TRUE,
+    [MOVE_HELPING_HAND] = TRUE,
+    [MOVE_TRICK] = TRUE,
+    [MOVE_ROLE_PLAY] = TRUE,
+    [MOVE_WISH] = TRUE,
+    [MOVE_ASSIST] = TRUE,
+    [MOVE_INGRAIN] = TRUE,
+    [MOVE_SUPERPOWER] = TRUE,
+    [MOVE_MAGIC_COAT] = TRUE,
+    [MOVE_RECYCLE] = TRUE,
+    [MOVE_REVENGE] = TRUE,
+    [MOVE_BRICK_BREAK] = TRUE,
+    [MOVE_YAWN] = TRUE,
+    [MOVE_KNOCK_OFF] = TRUE,
+    [MOVE_ENDEAVOR] = TRUE,
+    [MOVE_ERUPTION] = TRUE,
+    [MOVE_SKILL_SWAP] = TRUE,
+    [MOVE_IMPRISON] = TRUE,
+    [MOVE_REFRESH] = TRUE,
+    [MOVE_GRUDGE] = TRUE,
+    [MOVE_SNATCH] = TRUE,
+    [MOVE_SECRET_POWER] = TRUE,
+    [MOVE_DIVE] = TRUE,
+    [MOVE_ARM_THRUST] = FALSE,
+    [MOVE_CAMOUFLAGE] = TRUE,
+    [MOVE_TAIL_GLOW] = TRUE,
+    [MOVE_LUSTER_PURGE] = TRUE,
+    [MOVE_MIST_BALL] = TRUE,
+    [MOVE_FEATHER_DANCE] = TRUE,
+    [MOVE_TEETER_DANCE] = TRUE,
+    [MOVE_BLAZE_KICK] = TRUE,
+    [MOVE_MUD_SPORT] = TRUE,
+    [MOVE_ICE_BALL] = FALSE,
+    [MOVE_NEEDLE_ARM] = TRUE,
+    [MOVE_SLACK_OFF] = TRUE,
+    [MOVE_HYPER_VOICE] = TRUE,
+    [MOVE_POISON_FANG] = FALSE,
+    [MOVE_CRUSH_CLAW] = TRUE,
+    [MOVE_BLAST_BURN] = TRUE,
+    [MOVE_HYDRO_CANNON] = TRUE,
+    [MOVE_METEOR_MASH] = TRUE,
+    [MOVE_ASTONISH] = TRUE,
+    [MOVE_WEATHER_BALL] = TRUE,
+    [MOVE_AROMATHERAPY] = TRUE,
+    [MOVE_FAKE_TEARS] = TRUE,
+    [MOVE_AIR_CUTTER] = TRUE,
+    [MOVE_OVERHEAT] = TRUE,
+    [MOVE_ODOR_SLEUTH] = TRUE,
+    [MOVE_ROCK_TOMB] = TRUE,
+    [MOVE_SILVER_WIND] = TRUE,
+    [MOVE_METAL_SOUND] = TRUE,
+    [MOVE_GRASS_WHISTLE] = TRUE,
+    [MOVE_TICKLE] = TRUE,
+    [MOVE_COSMIC_POWER] = TRUE,
+    [MOVE_WATER_SPOUT] = TRUE,
+    [MOVE_SIGNAL_BEAM] = TRUE,
+    [MOVE_SHADOW_PUNCH] = TRUE,
+    [MOVE_EXTRASENSORY] = TRUE,
+    [MOVE_SKY_UPPERCUT] = TRUE,
+    [MOVE_SAND_TOMB] = TRUE,
+    [MOVE_SHEER_COLD] = TRUE,
+    [MOVE_MUDDY_WATER] = TRUE,
+    [MOVE_BULLET_SEED] = FALSE,
+    [MOVE_AERIAL_ACE] = TRUE,
+    [MOVE_ICICLE_SPEAR] = FALSE,
+    [MOVE_IRON_DEFENSE] = TRUE,
+    [MOVE_BLOCK] = TRUE,
+    [MOVE_HOWL] = TRUE,
+    [MOVE_DRAGON_CLAW] = TRUE,
+    [MOVE_FRENZY_PLANT] = TRUE,
+    [MOVE_BULK_UP] = TRUE,
+    [MOVE_BOUNCE] = TRUE,
+    [MOVE_MUD_SHOT] = FALSE,
+    [MOVE_POISON_TAIL] = TRUE,
+    [MOVE_COVET] = TRUE,
+    [MOVE_VOLT_TACKLE] = TRUE,
+    [MOVE_MAGICAL_LEAF] = TRUE,
+    [MOVE_WATER_SPORT] = TRUE,
+    [MOVE_CALM_MIND] = TRUE,
+    [MOVE_LEAF_BLADE] = TRUE,
+    [MOVE_DRAGON_DANCE] = TRUE,
+    [MOVE_ROCK_BLAST] = FALSE,
+    [MOVE_SHOCK_WAVE] = TRUE,
+    [MOVE_WATER_PULSE] = TRUE,
+    [MOVE_DOOM_DESIRE] = TRUE,
+    [MOVE_PSYCHO_BOOST] = TRUE,
 };
 
-const u8 gUnknown_086114D3[] = {0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x02, 0x03, 0x00, 0x00, 0x00, 0x00};
+static const u8 gUnknown_086114D3[] = {0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x02, 0x03, 0x00, 0x00, 0x00, 0x00};
 
-void (* const gUnknown_086114E0[])(void) =
+static void (* const sApprenticeFunctions[])(void) =
 {
-    sub_81A093C,
-    sub_81A0964,
+    Script_IsPlayersApprenticeActive,
+    Script_SetPlayersApprenticeLvlMode,
     sub_81A0978,
     sub_819FC60,
     sub_81A0984,
     sub_81A0990,
     sub_81A09D0,
-    sub_81A0A20,
-    sub_81A0C9C,
-    sub_81A087C,
+    Script_CreateApprenticeMenu,
+    Script_PrintMessage,
+    Script_ResetPlayerApprentice,
     sub_81A1638,
     sub_81A0CC0,
     sub_81A09B4,
@@ -683,22 +1035,13 @@ void (* const gUnknown_086114E0[])(void) =
     sub_81A1370,
 };
 
-const u8 gUnknown_08611548[8] = {0x00, 0x01, 0x02, 0x03, 0x06, 0x07, 0x08, 0x09};
+static const u8 gUnknown_08611548[8] = {0x00, 0x01, 0x02, 0x03, 0x06, 0x07, 0x08, 0x09};
 
 // text
 extern const u8 gText_Give[];
 extern const u8 gText_NoNeed[];
 extern const u8 gText_Yes[];
 extern const u8 gText_No[];
-
-// This file's functions.
-void sub_81A087C(void);
-static u16 sub_819FF98(u8 arg0);
-static bool8 sub_81A0194(u8 arg0, u16 moveId);
-static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId);
-static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height);
-static void RemoveAndHideWindow(u8 windowId);
-static void ExecuteFuncAfterButtonPress(void (*func)(void));
 
 void CopyFriendsApprenticeChallengeText(u8 saveblockApprenticeId)
 {
@@ -716,12 +1059,12 @@ void CopyFriendsApprenticeChallengeText(u8 saveblockApprenticeId)
     StringExpandPlaceholders(gStringVar4, str);
 }
 
-void sub_819FA50(void)
+void Apprentice_EnableBothScriptContexts(void)
 {
     EnableBothScriptContexts();
 }
 
-void sub_819FA5C(struct Apprentice *apprentice)
+void ResetApprenticeStruct(struct Apprentice *apprentice)
 {
     u8 i;
 
@@ -732,7 +1075,7 @@ void sub_819FA5C(struct Apprentice *apprentice)
     apprentice->id = 16;
 }
 
-void sub_819FAA0(void)
+void ResetAllApprenticeData(void)
 {
     u8 i, j;
 
@@ -752,7 +1095,7 @@ void sub_819FAA0(void)
         gSaveBlock2Ptr->apprentices[i].unk40 = 0;
     }
 
-    sub_81A087C();
+    Script_ResetPlayerApprentice();
 }
 
 static bool8 IsPlayersApprenticeActive(void)
@@ -760,7 +1103,7 @@ static bool8 IsPlayersApprenticeActive(void)
     return (PLAYER_APPRENTICE.activeLvlMode != 0);
 }
 
-void sub_819FBC8(void)
+static void sub_819FBC8(void)
 {
     if (gSaveBlock2Ptr->apprentices[0].number == 0)
     {
@@ -783,7 +1126,7 @@ static void SetPlayersApprenticeLvlMode(u8 mode)
     PLAYER_APPRENTICE.activeLvlMode = mode;
 }
 
-void sub_819FC60(void)
+static void sub_819FC60(void)
 {
     u8 array[APPRENTICE_SPECIES_COUNT];
     u8 i;
@@ -803,7 +1146,7 @@ void sub_819FC60(void)
         PLAYER_APPRENTICE.monIds[i] = ((array[i * 2] & 0xF) << 4) | ((array[i * 2 + 1]) & 0xF);
 }
 
-u8 sub_819FCF8(u8 val, u8 *arg1, u8 *arg2)
+static u8 sub_819FCF8(u8 val, u8 *arg1, u8 *arg2)
 {
     u8 i, count;
     u8 ret = 0;
@@ -829,7 +1172,7 @@ u8 sub_819FCF8(u8 val, u8 *arg1, u8 *arg2)
     return ret;
 }
 
-void sub_819FD64(void)
+static void sub_819FD64(void)
 {
     u8 sp_0[10];
     u8 sp_C[3];
@@ -1028,7 +1371,7 @@ static bool8 sub_81A0194(u8 arg0, u16 moveId)
     return TRUE;
 }
 
-void GetLatestLearnedMoves(u16 species, u16 *moves)
+static void GetLatestLearnedMoves(u16 species, u16 *moves)
 {
     u8 i, j;
     u8 level, knownMovesCount;
@@ -1054,7 +1397,7 @@ void GetLatestLearnedMoves(u16 species, u16 *moves)
         moves[j] = learnset[(i - 1) - j] & 0x1FF;
 }
 
-u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)
+static u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)
 {
     u16 moves[4];
     u8 i, count;
@@ -1084,7 +1427,7 @@ u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)
     return moves[arg2];
 }
 
-void sub_81A0390(u8 arg0)
+static void sub_81A0390(u8 arg0)
 {
     struct ApprenticeMon *apprenticeMons[3];
     u8 i, j;
@@ -1221,7 +1564,7 @@ static void CreateMenuWithAnswers(u8 arg0)
 #define tWrapAround data[5]
 #define tWindowId data[6]
 
-void Task_ChooseAnswer(u8 taskId)
+static void Task_ChooseAnswer(u8 taskId)
 {
     s8 input;
     s16 *data = gTasks[taskId].data;
@@ -1286,12 +1629,12 @@ static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId)
 #undef tWrapAround
 #undef tWindowId
 
-void sub_81A085C(void)
+void CallApprenticeFunction(void)
 {
-    gUnknown_086114E0[gSpecialVar_0x8004]();
+    sApprenticeFunctions[gSpecialVar_0x8004]();
 }
 
-void sub_81A087C(void)
+static void Script_ResetPlayerApprentice(void)
 {
     u8 i;
 
@@ -1314,7 +1657,7 @@ void sub_81A087C(void)
     }
 }
 
-void sub_81A093C(void)
+static void Script_IsPlayersApprenticeActive(void)
 {
     if (!IsPlayersApprenticeActive())
         gSpecialVar_Result = FALSE;
@@ -1322,32 +1665,32 @@ void sub_81A093C(void)
         gSpecialVar_Result = TRUE;
 }
 
-void sub_81A0964(void)
+static void Script_SetPlayersApprenticeLvlMode(void)
 {
     SetPlayersApprenticeLvlMode(gSpecialVar_0x8005);
 }
 
-void sub_81A0978(void)
+static void sub_81A0978(void)
 {
     sub_819FBC8();
 }
 
-void sub_81A0984(void)
+static void sub_81A0984(void)
 {
     sub_819FD64();
 }
 
-void sub_81A0990(void)
+static void sub_81A0990(void)
 {
     PLAYER_APPRENTICE.field_B1_1++;
 }
 
-void sub_81A09B4(void)
+static void sub_81A09B4(void)
 {
     gSpecialVar_Result = PLAYER_APPRENTICE.field_B1_1;
 }
 
-void sub_81A09D0(void)
+static void sub_81A09D0(void)
 {
     s32 var = PLAYER_APPRENTICE.field_B1_1 - 3;
     if (var < 0)
@@ -1366,7 +1709,7 @@ void sub_81A09D0(void)
     }
 }
 
-void sub_81A0A20(void)
+static void Script_CreateApprenticeMenu(void)
 {
     CreateMenuWithAnswers(gSpecialVar_0x8005);
 }
@@ -1466,7 +1809,7 @@ static void PrintMessage(void)
     CreateTask(Task_WaitForPrintingMessage, 1);
 }
 
-void sub_81A0C9C(void)
+static void Script_PrintMessage(void)
 {
     ScriptContext2_Enable();
     FreezeEventObjects();
@@ -1476,7 +1819,7 @@ void sub_81A0C9C(void)
     PrintMessage();
 }
 
-void sub_81A0CC0(void)
+static void sub_81A0CC0(void)
 {
     if (PLAYER_APPRENTICE.field_B1_1 < 3)
     {
@@ -1507,7 +1850,7 @@ void sub_81A0CC0(void)
     }
 }
 
-void sub_81A0D40(void)
+static void sub_81A0D40(void)
 {
     if (gSpecialVar_0x8005)
     {
@@ -1516,7 +1859,7 @@ void sub_81A0D40(void)
     }
 }
 
-void sub_81A0D80(void)
+static void sub_81A0D80(void)
 {
     if (PLAYER_APPRENTICE.field_B1_1 >= 3)
     {
@@ -1528,7 +1871,7 @@ void sub_81A0D80(void)
     }
 }
 
-void sub_81A0DD4(void)
+static void sub_81A0DD4(void)
 {
     u8 i;
     u8 count = 0;
@@ -1575,12 +1918,12 @@ void sub_81A0DD4(void)
     }
 }
 
-void sub_81A0FE4(void)
+static void sub_81A0FE4(void)
 {
     FREE_AND_SET_NULL(gUnknown_030062F0);
 }
 
-void sub_81A0FFC(void)
+static void sub_81A0FFC(void)
 {
     u8 *stringDst;
     u8 text[16];
@@ -1649,18 +1992,18 @@ void sub_81A0FFC(void)
     }
 }
 
-void sub_81A11F8(void)
+static void sub_81A11F8(void)
 {
     PLAYER_APPRENTICE.field_B1_2 = gSpecialVar_0x8005;
 }
 
-void sub_81A1218(void)
+static void sub_81A1218(void)
 {
     sub_81AAC28();
 }
 
 #ifdef NONMATCHING
-void sub_81A1224(void)
+static void sub_81A1224(void)
 {
     u8 count;
     u8 i, j;
@@ -1691,7 +2034,7 @@ void sub_81A1224(void)
 }
 #else
 NAKED
-void sub_81A1224(void)
+static void sub_81A1224(void)
 {
     asm_unified("\n\
                 	push {r4-r7,lr}\n\
@@ -1864,7 +2207,7 @@ _081A1362:\n\
 }
 #endif // NONMATCHING
 
-void sub_81A1370(void)
+static void sub_81A1370(void)
 {
     s32 i;
     s32 r10;
@@ -1898,7 +2241,7 @@ void sub_81A1370(void)
         gSaveBlock2Ptr->apprentices[r9] = gSaveBlock2Ptr->apprentices[0];
 }
 
-void sub_81A1438(void)
+static void sub_81A1438(void)
 {
     u8 i;
 
@@ -1921,7 +2264,7 @@ void sub_81A1438(void)
     sub_8165AE8(&gSaveBlock2Ptr->apprentices[0]);
 }
 
-void sub_81A150C(void)
+static void sub_81A150C(void)
 {
     u8 i;
     u8 mapObjectGfxId;
@@ -1948,7 +2291,7 @@ void sub_81A150C(void)
     }
 }
 
-void sub_81A15A4(void)
+static void sub_81A15A4(void)
 {
     u8 i;
     u8 mapObjectGfxId;
@@ -1975,12 +2318,12 @@ void sub_81A15A4(void)
     }
 }
 
-void sub_81A1638(void)
+static void sub_81A1638(void)
 {
     gSpecialVar_0x8004 = 1;
 }
 
-void sub_81A1644(void)
+static void sub_81A1644(void)
 {
     gSpecialVar_0x8004 = 1;
 }
@@ -2007,7 +2350,7 @@ const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
     }
 }
 
-void sub_81A16B4(u8 taskId)
+static void sub_81A16B4(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
         SwitchTaskToFollowupFunc(taskId);
@@ -2030,7 +2373,7 @@ static void ExecuteFuncAfterButtonPress(void (*func)(void))
     gTasks[taskId].data[1] = (u32)(func) >> 16;
 }
 
-void sub_81A175C(TaskFunc taskFunc)
+static void sub_81A175C(TaskFunc taskFunc)
 {
     u8 taskId = CreateTask(sub_81A16B4, 1);
     SetTaskFuncWithFollowupFunc(taskId, sub_81A16B4, taskFunc);
