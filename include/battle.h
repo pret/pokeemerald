@@ -27,8 +27,8 @@
 #define B_ACTION_SAFARI_POKEBLOCK       6
 #define B_ACTION_SAFARI_GO_NEAR         7
 #define B_ACTION_SAFARI_RUN             8
+#define B_ACTION_WALLY_THROW            9
 // The exact purposes of these are unclear
-#define B_ACTION_WALLY_THROW             9
 #define B_ACTION_EXEC_SCRIPT            10 // when executing an action
 #define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
 #define B_ACTION_FINISHED               12 // when executing an action
@@ -137,7 +137,7 @@ struct DisableStruct
      u8 disableTimer:4;
      u8 disableTimerStartValue:4;
      u8 encoredMovePos;
-     u8 unkD;
+     u8 filler_D; // Unused field.
      u8 encoreTimer:4;
      u8 encoreTimerStartValue:4;
      u8 perishSongTimer:4;
@@ -146,7 +146,7 @@ struct DisableStruct
      u8 rolloutTimer:4;
      u8 rolloutTimerStartValue:4;
      u8 chargeTimer:4;
-     u8 chargeTimer2:4;
+     u8 chargeTimerStartValue:4;
      u8 tauntTimer:4;
      u8 tauntTimer2:4;
      u8 battlerPreventingEscape;
@@ -229,7 +229,7 @@ struct WishFutureKnock
     u8 wishCounter[MAX_BATTLERS_COUNT];
     u8 wishMonId[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
-    u8 knockedOffPokes[2];
+    u8 knockedOffMons[2]; // Each battler is represented by a bit. The array entry is dependent on the battler's side.
 };
 
 struct AI_ThinkingStruct
@@ -302,7 +302,7 @@ struct BattleResults
     u8 playerSwitchesCounter; // 0x2
     u8 unk3;                  // 0x3
     u8 unk4;                  // 0x4
-    u8 unk5_0:1;              // 0x5
+    u8 playerMonWasDamaged:1;              // 0x5
     u8 usedMasterBall:1;      // 0x5
     u8 caughtMonBall:4;       // 0x5
     u8 shinyWildMon:1;        // 0x5
