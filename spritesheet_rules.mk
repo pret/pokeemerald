@@ -174,7 +174,7 @@ $(EVENTOBJGFXDIR)/people/boy_3.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/people/rich_boy.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/boy_5.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/gameboy_kid.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(EVENTOBJGFXDIR)/people/bug_catcher.4bpp: %.4bpp: %.png
@@ -186,7 +186,7 @@ $(EVENTOBJGFXDIR)/people/cameraman.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/people/camper.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/contest_old_man.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/contest_judge.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(EVENTOBJGFXDIR)/people/cook.4bpp: %.4bpp: %.png
@@ -231,22 +231,25 @@ $(EVENTOBJGFXDIR)/people/lass.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/people/leaf.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/little_boy_1.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/ninja_boy.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(EVENTOBJGFXDIR)/people/little_boy_2.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/little_boy.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(EVENTOBJGFXDIR)/people/little_girl_1.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/twin.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/little_girl_2.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/little_girl.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
 $(EVENTOBJGFXDIR)/people/man_1.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(EVENTOBJGFXDIR)/people/man_2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(EVENTOBJGFXDIR)/people/pokefan_m.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(EVENTOBJGFXDIR)/people/man_3.4bpp: %.4bpp: %.png
@@ -258,10 +261,7 @@ $(EVENTOBJGFXDIR)/people/man_4.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/people/man_5.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/man_6.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 2 -mheight 4
-
-$(EVENTOBJGFXDIR)/people/man_7.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/devon_employee.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(EVENTOBJGFXDIR)/people/maniac.4bpp: %.4bpp: %.png
@@ -285,16 +285,16 @@ $(EVENTOBJGFXDIR)/people/mystery_event_deliveryman.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/people/nurse.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/old_man_1.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/expert_m.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/old_man_2.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/old_man.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/old_woman_1.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/expert_f.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(EVENTOBJGFXDIR)/people/old_woman_2.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/people/old_woman.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(EVENTOBJGFXDIR)/people/picnicker.4bpp: %.4bpp: %.png
@@ -381,6 +381,9 @@ $(EVENTOBJGFXDIR)/people/wally.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/people/woman_1.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
+$(EVENTOBJGFXDIR)/people/pokefan_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
 $(EVENTOBJGFXDIR)/people/woman_2.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
@@ -390,13 +393,10 @@ $(EVENTOBJGFXDIR)/people/woman_3.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/people/woman_4.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
+$(EVENTOBJGFXDIR)/people/link_receptionist.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
 $(EVENTOBJGFXDIR)/people/woman_5.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 2 -mheight 4
-
-$(EVENTOBJGFXDIR)/people/woman_6.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 2 -mheight 4
-
-$(EVENTOBJGFXDIR)/people/woman_7.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(EVENTOBJGFXDIR)/people/youngster.4bpp: %.4bpp: %.png
