@@ -155,7 +155,7 @@ void sub_80AEDBC(void);
 void SetSav1WeatherFromCurrMapHeader(void);
 // ...
 void DoCurrentWeather(void);
-void sub_8080750();
+void sub_8080750(void);
 
 bool8 IsWeatherNotFadingIn(void);
 bool8 IsWeatherChangeComplete(void);

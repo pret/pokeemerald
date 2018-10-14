@@ -3,7 +3,6 @@
 #include "constants/species.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "blend_palette.h"
 #include "contest.h"
 #include "data2.h"
 #include "decompress.h"
@@ -861,7 +860,7 @@ bool8 IsBattlerSpritePresent(u8 battlerId)
     return FALSE;
 }
 
-bool8 IsDoubleBattle()
+bool8 IsDoubleBattle(void)
 {
     return IS_DOUBLE_BATTLE();
 }

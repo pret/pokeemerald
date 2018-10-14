@@ -576,7 +576,7 @@ _0816266C:
 	b _081626BA
 	.pool
 _08162698:
-	ldr r3, =gUnknown_08610970
+	ldr r3, =gApprentices
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0xfffffe70
@@ -747,7 +747,7 @@ _081627E8:
 	b _08162836
 	.pool
 _08162814:
-	ldr r3, =gUnknown_08610970
+	ldr r3, =gApprentices
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0xfffffe70
@@ -1161,7 +1161,7 @@ _08162B64:
 	cmp r0, 0
 	bne _08162BB0
 	ldr r4, =gFacilityClassToPicIndex
-	ldr r3, =gUnknown_08610970
+	ldr r3, =gApprentices
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0xfffffe70
@@ -1184,7 +1184,7 @@ _08162B64:
 	.pool
 _08162BB0:
 	ldr r5, =gFacilityClassToPicIndex
-	ldr r4, =gUnknown_08610970
+	ldr r4, =gApprentices
 	bl sub_81864A8
 	lsls r0, 24
 	lsrs r0, 24
@@ -1301,7 +1301,7 @@ _08162CBC:
 	cmp r0, 0
 	beq _08162CF4
 	ldr r5, =gFacilityClassToTrainerClass
-	ldr r4, =gUnknown_08610970
+	ldr r4, =gApprentices
 	bl sub_81864A8
 	lsls r0, 24
 	lsrs r0, 24
@@ -1316,7 +1316,7 @@ _08162CBC:
 	.pool
 _08162CF4:
 	ldr r4, =gFacilityClassToTrainerClass
-	ldr r3, =gUnknown_08610970
+	ldr r3, =gApprentices
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0xfffffe70
@@ -1407,7 +1407,7 @@ _08162DC0:
 	ands r0, r1
 	cmp r0, 0
 	beq _08162DE8
-	ldr r4, =gUnknown_08610970
+	ldr r4, =gApprentices
 	bl sub_81864A8
 	lsls r0, 24
 	lsrs r0, 24
@@ -1417,7 +1417,7 @@ _08162DC0:
 	b _08162E08
 	.pool
 _08162DE8:
-	ldr r3, =gUnknown_08610970
+	ldr r3, =gApprentices
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0xfffffe70
@@ -1578,7 +1578,7 @@ _08162F24:
 _08162F3E:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_81A1650
+	bl GetApprenticeNameInLanguage
 	adds r1, r0, 0
 	adds r0, r6, 0
 	adds r2, r4, 0
@@ -1648,7 +1648,7 @@ _08162FC0:
 	b _0816300E
 	.pool
 _08162FEC:
-	ldr r3, =gUnknown_08610970
+	ldr r3, =gApprentices
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0xfffffe70
@@ -1927,7 +1927,7 @@ _08163230:
 	ldr r1, [r6]
 	adds r1, r5
 	lsrs r2, r4, 24
-	bl sub_8068528
+	bl CreateApprenticeMon
 	movs r2, 0x80
 	lsls r2, 17
 	adds r4, r2
@@ -2831,7 +2831,7 @@ _0816399C:
 	adds r0, 0x70
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_819F99C
+	bl CopyFriendsApprenticeChallengeText
 _081639A8:
 	pop {r0}
 	bx r0
@@ -3475,7 +3475,7 @@ _08163FCC:
 	adds r1, r0, 0
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gBattleScripting + 0x14
+	ldr r1, =gPlayerParty - 100
 	adds r0, r1
 	movs r1, 0x2C
 	muls r1, r4
@@ -6295,7 +6295,7 @@ _08165812:
 	adds r0, r5
 	ldrb r2, [r0]
 	adds r0, r4, 0
-	bl sub_8068528
+	bl CreateApprenticeMon
 	movs r3, 0xC8
 	lsls r3, 1
 	adds r0, r7, r3
@@ -6690,7 +6690,7 @@ _08165B10:
 	adds r1, 0x1
 	cmp r1, 0x10
 	bls _08165B10
-	bl sub_819FA5C
+	bl ResetApprenticeStruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8165B08

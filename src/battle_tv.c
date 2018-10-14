@@ -659,7 +659,7 @@ void BattleTv_SetDataBasedOnMove(u16 move, u16 weatherFlags, struct DisableStruc
     tvPtr->side[atkSide].usedMoveSlot = moveSlot;
     AddMovePoints(0, moveSlot, gBattleMoves[move].effect, 0);
     AddPointsBasedOnWeather(weatherFlags, move, moveSlot);
-    if (disableStructPtr->chargeTimer1 != 0)
+    if (disableStructPtr->chargeTimer != 0)
         AddMovePoints(7, move, moveSlot, 0);
 
     if (move == MOVE_WISH)

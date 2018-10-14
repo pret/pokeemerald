@@ -19,7 +19,7 @@
 #include "gpu_regs.h"
 #include "decompress.h"
 #include "bg.h"
-#include "blend_palette.h"
+#include "util.h"
 
 struct TransitionData
 {

@@ -77,6 +77,7 @@
 #define CHAR_y              0xED
 #define CHAR_z              0xEE
 #define CHAR_SPECIAL_F7     0xF7
+#define CHAR_SPECIAL_F8     0xF8
 #define CHAR_SPECIAL_F9     0xF9
 #define CHAR_COLON          0xF0
 #define CHAR_PROMPT_SCROLL  0xFA // waits for button press and scrolls dialog

@@ -1141,8 +1141,8 @@ _080C308C:
 	.pool
 	thumb_func_end sub_80C3020
 
-	thumb_func_start sub_80C30A4
-sub_80C30A4: @ 80C30A4
+	thumb_func_start TrainerCard_GenerateCardForPlayer
+TrainerCard_GenerateCardForPlayer: @ 80C30A4
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
@@ -1197,7 +1197,7 @@ _080C3108:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80C30A4
+	thumb_func_end TrainerCard_GenerateCardForPlayer
 
 	thumb_func_start sub_80C3120
 sub_80C3120: @ 80C3120
@@ -4558,8 +4558,8 @@ _080C4E44:
 	.pool
 	thumb_func_end sub_80C4DDC
 
-	thumb_func_start sub_80C4E74
-sub_80C4E74: @ 80C4E74
+	thumb_func_start TrainerCard_ShowLinkCard
+TrainerCard_ShowLinkCard: @ 80C4E74
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -4600,7 +4600,7 @@ sub_80C4E74: @ 80C4E74
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80C4E74
+	thumb_func_end TrainerCard_ShowLinkCard
 
 	thumb_func_start sub_80C4EE4
 sub_80C4EE4: @ 80C4EE4

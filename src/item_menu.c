@@ -46,6 +46,7 @@
 #include "text_window.h"
 #include "menu_helpers.h"
 #include "window.h"
+#include "apprentice.h"
 
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void CB2_Bag(void);
@@ -2203,7 +2204,7 @@ void unknown_ItemMenu_Show(u8 taskId)
 
 void bag_menu_leave_maybe_3(void)
 {
-    gFieldCallback = sub_819FA50;
+    gFieldCallback = Apprentice_EnableBothScriptContexts;
     SetMainCallback2(CB2_ReturnToField);
 }
 
