@@ -200,7 +200,7 @@ SECTIONS {
         src/rom_81520A8.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
-        asm/field_effect_helpers.o(.text);
+        src/field_effect_helpers.o(.text);
         src/contest_ai.o(.text);
         src/battle_anim_sound_tasks.o(.text);
         src/battle_controller_safari.o(.text);
@@ -490,6 +490,7 @@ SECTIONS {
         src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
         src/save.o(.rodata);
+        src/field_effect_helpers.o(.rodata);
         data/field_effect_helpers.o(.rodata);
         src/contest_ai.o(.rodata);
         src/battle_controller_safari.o(.rodata);
