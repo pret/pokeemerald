@@ -5,6 +5,7 @@ setvar VAR_0x8004, 8
 setvar VAR_0x8005, \waitbuttonpress
 setvar VAR_0x8006, \which
 special sub_81A085C
+waitstate
 .endm
 
 .macro apprentice_buff whichstringvar tobuff
@@ -27,7 +28,7 @@ EventScript_Apprentice:: @ 82B688D
 	setvar VAR_0x8004, 0
 	special sub_81A085C
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6900
+	goto_eq Script_Apprentice_FirstMeeting
 	setvar VAR_0x8004, 10
 	special sub_81A085C
 	compare VAR_0x8004, 0
@@ -52,17 +53,15 @@ BattleFrontier_BattleTowerLobby_EventScript_2B68BE:
 	releaseall
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_2B6900:
+Script_Apprentice_FirstMeeting:
 	apprentice_buff 0, APPRENTICE_BUFF_NAME
 	apprentice_msg FALSE, 0
-	waitstate
 
-BattleFrontier_BattleTowerLobby_EventScript_2B6925:
+Script_Apprentice_FirstMeetingNag:
 	apprentice_menu APPRENTICE_ASK_YES_NO
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B69BB
+	goto_eq Script_Apprentice_FirstMeetingAskAgain
 	apprentice_msg FALSE, 2
-	waitstate
 	apprentice_menu APPRENTICE_ASK_WHICH_LEVEL
 	setvar VAR_0x8004, 1
 	setorcopyvar VAR_0x8005, VAR_RESULT
@@ -72,8 +71,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6925:
 	special sub_81A085C
 	apprentice_buff 0, APPRENTICE_BUFF_LEVEL
 	apprentice_msg TRUE, 3
-	waitstate
-	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
+	call Script_Apprentice_SetLeavingFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -81,10 +79,9 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6925:
 	goto Script_Apprentice_Leave
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_2B69BB:
+Script_Apprentice_FirstMeetingAskAgain:
 	apprentice_msg FALSE, 1
-	waitstate
-	goto BattleFrontier_BattleTowerLobby_EventScript_2B6925
+	goto Script_Apprentice_FirstMeetingNag
 
 BattleFrontier_BattleTowerLobby_EventScript_2B69D3:
 	setvar VAR_0x8004, 14
@@ -93,7 +90,6 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:
 	apprentice_buff 0, APPRENTICE_BUFF_SPECIES1
 	apprentice_buff 1, APPRENTICE_BUFF_SPECIES2
 	apprentice_msg FALSE, 6
-	waitstate
 	apprentice_menu APPRENTICE_ASK_2SPECIES
 	copyvar VAR_0x8005, VAR_RESULT
 	compare VAR_0x8005, 0
@@ -118,8 +114,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:
 	setvar VAR_0x8004, 15
 	special sub_81A085C
 	apprentice_msg TRUE, 7
-	waitstate
-	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
+	call Script_Apprentice_SetLeavingFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -146,7 +141,6 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6ACF:
 	special sub_81A085C
 	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
 	apprentice_msg TRUE, 10
-	waitstate
 	setvar VAR_0x8004, 15
 	special sub_81A085C
 
@@ -164,10 +158,9 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B09:
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6C0C
 	apprentice_buff 0, APPRENTICE_BUFF_ITEM
 	apprentice_msg TRUE, 12
-	waitstate
 	setvar VAR_0x8004, 5
 	special sub_81A085C
-	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
+	call Script_Apprentice_SetLeavingFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -181,7 +174,6 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B81:
 	special sub_81A085C
 	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
 	apprentice_msg FALSE, 13
-	waitstate
 	apprentice_menu APPRENTICE_ASK_GIVE
 	setvar VAR_0x8004, 15
 	special sub_81A085C
@@ -190,10 +182,9 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B81:
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6BD4:
 	apprentice_msg TRUE, 14
-	waitstate
 	setvar VAR_0x8004, 5
 	special sub_81A085C
-	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
+	call Script_Apprentice_SetLeavingFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -208,7 +199,6 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C0C:
 	apprentice_buff 0, APPRENTICE_BUFF_ITEM
 	apprentice_buff 1, APPRENTICE_BUFF_SPECIES3
 	apprentice_msg FALSE, 16
-	waitstate
 	apprentice_menu APPRENTICE_ASK_GIVE
 	setvar VAR_0x8004, 15
 	special sub_81A085C
@@ -225,7 +215,6 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C77:
 	apprentice_buff 1, APPRENTICE_BUFF_MOVE1
 	apprentice_buff 2, APPRENTICE_BUFF_MOVE2
 	apprentice_msg FALSE, 8
-	waitstate
 	apprentice_menu APPRENTICE_ASK_MOVES
 	copyvar VAR_0x8005, VAR_RESULT
 	compare VAR_0x8005, 0
@@ -243,8 +232,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C77:
 	setvar VAR_0x8004, 15
 	special sub_81A085C
 	apprentice_msg TRUE, 9
-	waitstate
-	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
+	call Script_Apprentice_SetLeavingFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -262,7 +250,6 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6D56:
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6D5C:
 	apprentice_msg FALSE, 4
-	waitstate
 	apprentice_menu APPRENTICE_ASK_3SPECIES
 	copyvar VAR_0x8005, VAR_RESULT
 	setvar VAR_0x8004, 18
@@ -271,8 +258,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6D5C:
 	special sub_81A085C
 	apprentice_buff 0, APPRENTICE_BUFF_SPECIES4
 	apprentice_msg TRUE, 5
-	waitstate
-	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
+	call Script_Apprentice_SetLeavingFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -282,7 +268,6 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6D5C:
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
 	apprentice_msg TRUE, 11
-	waitstate
 	setvar VAR_0x8004, 25
 	special sub_81A085C
 	setvar VAR_0x8004, 19
@@ -293,10 +278,9 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
 	special sub_81A085C
 	apprentice_buff 0, APPRENTICE_BUFF_EASY_CHAT
 	apprentice_msg TRUE, 15
-	waitstate
 	setvar VAR_0x8004, 9
 	special sub_81A085C
-	call BattleFrontier_BattleTowerLobby_EventScript_2B6E4D
+	call Script_Apprentice_SetLeavingFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -304,7 +288,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
 	goto Script_Apprentice_Leave
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_2B6E4D:
+Script_Apprentice_SetLeavingFlags:
 	setflag FLAG_0x2BD
 	setflag FLAG_0x934
 	return

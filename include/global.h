@@ -178,12 +178,14 @@ enum
     OPTIONS_BATTLE_STYLE_SET
 };
 
-struct Coords8 {
+struct Coords8
+{
     s8 x;
     s8 y;
 };
 
-struct UCoords8 {
+struct UCoords8
+{
     u8 x;
     u8 y;
 };
@@ -489,6 +491,19 @@ struct Sav2_B8
     u16 unk2;
 };
 
+struct PlayersApprentice
+{
+    /*0xB0*/ u8 id;
+    /*0xB1*/ u8 activeLvlMode:2; // +1, 0 means not active
+    /*0xB1*/ u8 field_B1_1:4;
+    /*0xB1*/ u8 field_B1_2:2;
+    /*0xB2*/ u8 field_B2_0:3;
+    /*0xB2*/ u8 field_B2_1:2;
+    /*0xB3*/ u8 field_B3;
+    /*0xB4*/ u8 monIds[3];
+    /*0xB8*/ struct Sav2_B8 field_B8[9];
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -512,17 +527,7 @@ struct SaveBlock2
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 field_A8;
     /*0xAC*/ u32 encryptionKey;
-
-             // Possibly player's apprentice, will document once battle tower is decompiled.
-    /*0xB0*/ u8 field_B0;
-    /*0xB1*/ u8 field_B1_0:2;
-    /*0xB1*/ u8 field_B1_1:4;
-    /*0xB1*/ u8 field_B1_2:2;
-    /*0xB2*/ u8 field_B2_0:3;
-    /*0xB2*/ u8 field_B2_1:2;
-    /*0xB3*/ u8 field_B3;
-    /*0xB4*/ u8 field_B4[3];
-    /*0xB8*/ struct Sav2_B8 field_B8[9];
+    /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[4];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
