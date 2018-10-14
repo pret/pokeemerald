@@ -1578,7 +1578,7 @@ _08162F24:
 _08162F3E:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_81A1650
+	bl GetApprenticeNameInLanguage
 	adds r1, r0, 0
 	adds r0, r6, 0
 	adds r2, r4, 0

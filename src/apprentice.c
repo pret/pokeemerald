@@ -1,5 +1,6 @@
 #include "global.h"
 #include "apprentice.h"
+#include "constants/apprentice.h"
 #include "string_util.h"
 #include "script.h"
 #include "text.h"
@@ -10,11 +11,16 @@
 #include "menu.h"
 #include "script_menu.h"
 #include "party_menu.h"
+#include "item_menu.h"
 #include "data2.h"
 #include "task.h"
+#include "item.h"
 #include "sound.h"
+#include "battle_tower.h"
 #include "event_data.h"
+#include "international_string_util.h"
 #include "field_player_avatar.h"
+#include "new_game.h"
 #include "event_object_movement.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -36,6 +42,9 @@ struct Unk030062F0Struct
 
 extern struct Unk030062ECStruct *gUnknown_030062EC;
 extern struct Unk030062F0Struct *gUnknown_030062F0;
+extern void (*gUnknown_030062F4)(void);
+
+extern void sub_8165AE8(struct Apprentice *);
 
 extern const u8 *const gUnknown_08611330[];
 extern const u8 *const gUnknown_08610FF0[][2];
@@ -49,6 +58,11 @@ extern const u8 gUnknown_086114D3[];
 extern const bool8 gUnknown_08611370[];
 extern void (* const gUnknown_086114E0[])(void);
 
+extern const u8 gUnknown_085DCEDC[];
+extern const u8 gUnknown_085DCF0E[];
+extern const u8 gUnknown_085DCEFA[];
+extern const u8 gUnknown_085DCF2C[];
+
 // text
 extern const u8 gText_Give[];
 extern const u8 gText_NoNeed[];
@@ -57,12 +71,12 @@ extern const u8 gText_No[];
 
 // This file's functions.
 void sub_81A087C(void);
-u16 sub_819FF98(u8 arg0);
-bool8 sub_81A0194(u8 arg0, u16 moveId);
-void sub_81A0804(bool8 noBButton, u8 itemsCount, u8 windowId);
-u8 sub_81A0784(u8 left, u8 top, u8 width, u8 height);
-void sub_81A07E8(u8 windowId);
-void sub_81A172C(void (*func)(void));
+static u16 sub_819FF98(u8 arg0);
+static bool8 sub_81A0194(u8 arg0, u16 moveId);
+static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId);
+static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height);
+static void RemoveAndHideWindow(u8 windowId);
+static void ExecuteFuncAfterButtonPress(void (*func)(void));
 
 void sub_819F99C(u8 id)
 {
@@ -274,7 +288,7 @@ void sub_819FD64(void)
                                                         speciesArrId = ((speciesArrId) >> (a0 << 2)) & 0xF; \
                                                      }
 
-u16 sub_819FF98(u8 arg0)
+static u16 sub_819FF98(u8 arg0)
 {
     u8 i, j;
     u8 id;
@@ -380,7 +394,7 @@ u16 sub_819FF98(u8 arg0)
     return moveId;
 }
 
-bool8 sub_81A0194(u8 arg0, u16 moveId)
+static bool8 sub_81A0194(u8 arg0, u16 moveId)
 {
     u8 i;
 
@@ -498,7 +512,7 @@ void sub_81A0390(u8 arg0)
     }
 }
 
-void sub_81A04E4(u8 arg0)
+static void CreateMenuWithAnswers(u8 arg0)
 {
     u8 i;
     u8 windowId;
@@ -511,13 +525,13 @@ void sub_81A04E4(u8 arg0)
 
     switch (arg0)
     {
-    case 0:
+    case APPRENTICE_ASK_WHICH_LEVEL:
         left = 0x12;
         top = 8;
         strings[0] = gText_Lv50;
         strings[1] = gText_OpenLevel;
         break;
-    case 1:
+    case APPRENTICE_ASK_3SPECIES:
         count = 3;
         left = 0x12;
         top = 6;
@@ -531,7 +545,7 @@ void sub_81A04E4(u8 arg0)
             strings[i] = gSpeciesNames[species];
         }
         break;
-    case 2:
+    case APPRENTICE_ASK_2SPECIES:
         left = 0x12;
         top = 8;
         if (gSaveBlock2Ptr->field_B1_1 > 2)
@@ -539,19 +553,19 @@ void sub_81A04E4(u8 arg0)
         strings[1] = gSpeciesNames[gUnknown_030062F0->unk2];
         strings[0] = gSpeciesNames[gUnknown_030062F0->unk0];
         break;
-    case 3:
+    case APPRENTICE_ASK_MOVES:
         left = 0x11;
         top = 8;
         strings[0] = gMoveNames[gUnknown_030062F0->unk4];
         strings[1] = gMoveNames[gUnknown_030062F0->unk6];
         break;
-    case 4:
+    case APPRENTICE_ASK_GIVE:
         left = 0x12;
         top = 8;
         strings[0] = gText_Give;
         strings[1] = gText_NoNeed;
         break;
-    case 6:
+    case APPRENTICE_ASK_YES_NO:
         left = 0x14;
         top = 8;
         strings[0] = gText_Yes;
@@ -573,21 +587,21 @@ void sub_81A04E4(u8 arg0)
 
     width = convert_pixel_width_to_tile_width(pixelWidth);
     left = sub_80E2D5C(left, width);
-    windowId = sub_81A0784(left, top, width, count * 2);
+    windowId = CreateAndShowWindow(left, top, width, count * 2);
     SetStandardWindowBorderStyle(windowId, 0);
 
     for (i = 0; i < count; i++)
         AddTextPrinterParameterized(windowId, 1, strings[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
 
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, 0);
-    sub_81A0804(TRUE, count, windowId);
+    CreateChooseAnswerTask(TRUE, count, windowId);
 }
 
 #define tNoBButton data[4]
 #define tWrapAround data[5]
 #define tWindowId data[6]
 
-void sub_81A070C(u8 taskId)
+void Task_ChooseAnswer(u8 taskId)
 {
     s8 input;
     s16 *data = gTasks[taskId].data;
@@ -613,12 +627,12 @@ void sub_81A070C(u8 taskId)
         break;
     }
 
-    sub_81A07E8(tWindowId);
+    RemoveAndHideWindow(tWindowId);
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
 
-u8 sub_81A0784(u8 left, u8 top, u8 width, u8 height)
+static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height)
 {
     u8 windowId;
     struct WindowTemplate winTemplate = CreateWindowTemplate(0, left + 1, top + 1, width, height, 15, 100);
@@ -629,15 +643,15 @@ u8 sub_81A0784(u8 left, u8 top, u8 width, u8 height)
     return windowId;
 }
 
-void sub_81A07E8(u8 windowId)
+static void RemoveAndHideWindow(u8 windowId)
 {
     sub_8198070(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
-void sub_81A0804(bool8 noBButton, u8 itemsCount, u8 windowId)
+static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId)
 {
-    u8 taskId = CreateTask(sub_81A070C, 80);
+    u8 taskId = CreateTask(Task_ChooseAnswer, 80);
     gTasks[taskId].tNoBButton = noBButton;
 
     if (itemsCount > 3)
@@ -734,22 +748,22 @@ void sub_81A09D0(void)
 
 void sub_81A0A20(void)
 {
-    sub_81A04E4(gSpecialVar_0x8005);
+    CreateMenuWithAnswers(gSpecialVar_0x8005);
 }
 
-void sub_81A0A34(u8 taskId)
+static void Task_WaitForPrintingMessage(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         DestroyTask(taskId);
         if (gSpecialVar_0x8005)
-            sub_81A172C(EnableBothScriptContexts);
+            ExecuteFuncAfterButtonPress(EnableBothScriptContexts);
         else
             EnableBothScriptContexts();
     }
 }
 
-void sub_81A0A70(void)
+static void PrintMessage(void)
 {
     const u8 *string;
 
@@ -829,7 +843,7 @@ void sub_81A0A70(void)
 
     StringExpandPlaceholders(gStringVar4, string);
     AddTextPrinterForMessage(TRUE);
-    CreateTask(sub_81A0A34, 1);
+    CreateTask(Task_WaitForPrintingMessage, 1);
 }
 
 void sub_81A0C9C(void)
@@ -839,7 +853,7 @@ void sub_81A0C9C(void)
     sub_808B864();
     sub_808BCF4();
     NewMenuHelpers_DrawDialogueFrame(0, 1);
-    sub_81A0A70();
+    PrintMessage();
 }
 
 void sub_81A0CC0(void)
@@ -944,4 +958,460 @@ void sub_81A0DD4(void)
 void sub_81A0FE4(void)
 {
     FREE_AND_SET_NULL(gUnknown_030062F0);
+}
+
+void sub_81A0FFC(void)
+{
+    u8 *stringDst;
+    u8 text[16];
+    u32 speciesArrayId;
+
+    switch (gSpecialVar_0x8005)
+    {
+    case 0:
+        stringDst = gStringVar1;
+        break;
+    case 1:
+        stringDst = gStringVar2;
+        break;
+    case 2:
+        stringDst = gStringVar3;
+        break;
+    default:
+        return;
+    }
+
+    switch (gSpecialVar_0x8006)
+    {
+    case 0:
+        StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk0]);
+        break;
+    case 1:
+        StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk2]);
+        break;
+    case 2:
+        StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk0]);
+        break;
+    case 3:
+        StringCopy(stringDst, gMoveNames[gUnknown_030062F0->unk4]);
+        break;
+    case 4:
+        StringCopy(stringDst, gMoveNames[gUnknown_030062F0->unk6]);
+        break;
+    case 5:
+        StringCopy(stringDst, ItemId_GetName(gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk2));
+        break;
+    case 6:
+        TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(gSaveBlock2Ptr->field_B0, LANGUAGE_ENGLISH), LANGUAGE_ENGLISH);
+        StringCopy(stringDst, text);
+        break;
+    case 8:
+        if (gSaveBlock2Ptr->field_B1_0 == 1)
+            StringCopy(stringDst, gText_Lv50);
+        else
+            StringCopy(stringDst, gText_OpenLevel);
+        break;
+    case 7:
+        ConvertBattleFrontierTrainerSpeechToString(gSaveBlock2Ptr->field_DC[0].easyChatWords);
+        StringCopy(stringDst, gStringVar4);
+        break;
+    case 9:
+        if (gSaveBlock2Ptr->field_B1_2 < 3)
+        {
+            APPRENTICE_SPECIES_ID(speciesArrayId, gSaveBlock2Ptr->field_B1_2);
+        }
+        else
+        {
+            speciesArrayId = 0;
+        }
+        StringCopy(stringDst, gSpeciesNames[gApprentices[gSaveBlock2Ptr->field_B0].species[speciesArrayId]]);
+        break;
+    }
+}
+
+void sub_81A11F8(void)
+{
+    gSaveBlock2Ptr->field_B1_2 = gSpecialVar_0x8005;
+}
+
+void sub_81A1218(void)
+{
+    sub_81AAC28();
+}
+
+#ifdef NONMATCHING
+void sub_81A1224(void)
+{
+    u8 count;
+    u8 i, j;
+
+    if (gSaveBlock2Ptr->field_B1_1 < 3)
+        return;
+
+    count = 0;
+    for (j = 0; j < 9 && gSaveBlock2Ptr->field_B8[j].unk0_0; count++, j++)
+        ;
+
+    for (i = 0; i < count && i < gSaveBlock2Ptr->field_B1_1 - 3; i++)
+    {
+        if (gSaveBlock2Ptr->field_B8[i].unk0_0 == 1
+            && gSaveBlock2Ptr->field_B8[i].unk0_3
+            && gSaveBlock2Ptr->field_B8[i].unk2 == gSpecialVar_0x8005)
+        {
+            gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk0_3 = 0;
+            gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk2 = gSpecialVar_0x8005;
+            gSpecialVar_Result = i;
+            return;
+        }
+    }
+
+    gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk0_3 = 1;
+    gSaveBlock2Ptr->field_B8[gSaveBlock2Ptr->field_B1_1 - 3].unk2 = gSpecialVar_0x8005;
+    gSpecialVar_Result = 1;
+}
+#else
+NAKED
+void sub_81A1224(void)
+{
+    asm_unified("\n\
+                	push {r4-r7,lr}\n\
+	mov r7, r9\n\
+	mov r6, r8\n\
+	push {r6,r7}\n\
+	ldr r1, =gSaveBlock2Ptr\n\
+	ldr r3, [r1]\n\
+	adds r0, r3, 0\n\
+	adds r0, 0xB1\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 26\n\
+	lsrs r0, 28\n\
+	adds r7, r1, 0\n\
+	cmp r0, 0x2\n\
+	bhi _081A1242\n\
+	b _081A1362\n\
+_081A1242:\n\
+	movs r5, 0\n\
+	movs r2, 0\n\
+	adds r0, r3, 0\n\
+	adds r0, 0xB8\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 30\n\
+	ldr r1, =gSpecialVar_0x8005\n\
+	mov r12, r1\n\
+	ldr r1, =gSpecialVar_Result\n\
+	mov r8, r1\n\
+	cmp r0, 0\n\
+	beq _081A127C\n\
+	adds r3, r7, 0\n\
+_081A125C:\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	adds r0, r2, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r2, r0, 24\n\
+	cmp r2, 0x8\n\
+	bhi _081A127C\n\
+	ldr r0, [r3]\n\
+	lsls r1, r2, 2\n\
+	adds r0, r1\n\
+	adds r0, 0xB8\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 30\n\
+	cmp r0, 0\n\
+	bne _081A125C\n\
+_081A127C:\n\
+	movs r4, 0\n\
+	cmp r4, r5\n\
+	bcs _081A1322\n\
+	ldr r0, [r7]\n\
+	adds r0, 0xB1\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 26\n\
+	lsrs r0, 28\n\
+	subs r0, 0x3\n\
+	cmp r4, r0\n\
+	bge _081A1322\n\
+	adds r6, r7, 0\n\
+	mov r9, r4\n\
+_081A1296:\n\
+	ldr r3, [r6]\n\
+	lsls r0, r4, 2\n\
+	adds r2, r3, r0\n\
+	adds r0, r2, 0\n\
+	adds r0, 0xB8\n\
+	ldrb r1, [r0]\n\
+	lsls r0, r1, 30\n\
+	lsrs r0, 30\n\
+	cmp r0, 0x1\n\
+	bne _081A1308\n\
+	lsrs r0, r1, 6\n\
+	cmp r0, 0\n\
+	beq _081A1308\n\
+	adds r0, r2, 0\n\
+	adds r0, 0xBA\n\
+	ldrh r0, [r0]\n\
+	mov r2, r12\n\
+	ldrh r2, [r2]\n\
+	cmp r0, r2\n\
+	bne _081A1308\n\
+	adds r0, r3, 0\n\
+	adds r0, 0xB1\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 26\n\
+	lsrs r0, 28\n\
+	subs r0, 0x3\n\
+	lsls r0, 2\n\
+	adds r0, r3, r0\n\
+	adds r0, 0xB8\n\
+	ldrb r2, [r0]\n\
+	movs r1, 0x3F\n\
+	ands r1, r2\n\
+	strb r1, [r0]\n\
+	ldr r1, [r6]\n\
+	adds r0, r1, 0\n\
+	adds r0, 0xB1\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 26\n\
+	lsrs r0, 28\n\
+	subs r0, 0x3\n\
+	lsls r0, 2\n\
+	adds r1, r0\n\
+	mov r2, r12\n\
+	ldrh r0, [r2]\n\
+	adds r1, 0xBA\n\
+	strh r0, [r1]\n\
+	mov r1, r9\n\
+	mov r0, r8\n\
+	strh r1, [r0]\n\
+	b _081A1362\n\
+	.pool\n\
+_081A1308:\n\
+	adds r0, r4, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	cmp r4, r5\n\
+	bcs _081A1322\n\
+	ldr r0, [r6]\n\
+	adds r0, 0xB1\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 26\n\
+	lsrs r0, 28\n\
+	subs r0, 0x3\n\
+	cmp r4, r0\n\
+	blt _081A1296\n\
+_081A1322:\n\
+	ldr r2, [r7]\n\
+	adds r0, r2, 0\n\
+	adds r0, 0xB1\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 26\n\
+	lsrs r0, 28\n\
+	subs r0, 0x3\n\
+	lsls r0, 2\n\
+	adds r2, r0\n\
+	adds r2, 0xB8\n\
+	ldrb r1, [r2]\n\
+	movs r0, 0x3F\n\
+	ands r0, r1\n\
+	movs r1, 0x40\n\
+	orrs r0, r1\n\
+	strb r0, [r2]\n\
+	ldr r1, [r7]\n\
+	adds r0, r1, 0\n\
+	adds r0, 0xB1\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 26\n\
+	lsrs r0, 28\n\
+	subs r0, 0x3\n\
+	lsls r0, 2\n\
+	adds r1, r0\n\
+	mov r2, r12\n\
+	ldrh r0, [r2]\n\
+	adds r1, 0xBA\n\
+	strh r0, [r1]\n\
+	movs r0, 0x1\n\
+	mov r1, r8\n\
+	strh r0, [r1]\n\
+_081A1362:\n\
+	pop {r3,r4}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+");
+}
+#endif // NONMATCHING
+
+void sub_81A1370(void)
+{
+    s32 i;
+    s32 r10;
+    s32 r9;
+
+    if (gSaveBlock2Ptr->field_DC[0].playerName[0] == EOS)
+        return;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gSaveBlock2Ptr->field_DC[i + 1].playerName[0] == EOS)
+        {
+            gSaveBlock2Ptr->field_DC[i + 1] = gSaveBlock2Ptr->field_DC[0];
+            return;
+        }
+    }
+
+    r10 = 0xFFFF;
+    r9 = -1;
+    for (i = 1; i < 4; i++)
+    {
+        if (ReadUnalignedWord(gSaveBlock2Ptr->field_DC[i].playerId) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId)
+            && gSaveBlock2Ptr->field_DC[i].field_2 < r10)
+        {
+            r10 = gSaveBlock2Ptr->field_DC[i].field_2;
+            r9 = i;
+        }
+    }
+
+    if (r9 > 0)
+        gSaveBlock2Ptr->field_DC[r9] = gSaveBlock2Ptr->field_DC[0];
+}
+
+void sub_81A1438(void)
+{
+    u8 i;
+
+    gSaveBlock2Ptr->field_DC[0].field_0_0 = gSaveBlock2Ptr->field_B0;
+    gSaveBlock2Ptr->field_DC[0].field_0_1 = gSaveBlock2Ptr->field_B1_0;
+
+    for (i = 0; i < 9 && gSaveBlock2Ptr->field_B8[i].unk0_0; i++)
+        ;
+
+    gSaveBlock2Ptr->field_DC[0].field_1 = i;
+    if (gSaveBlock2Ptr->field_DC[0].field_2 < 255)
+        gSaveBlock2Ptr->field_DC[0].field_2++;
+
+    sub_81A0390(gSaveBlock2Ptr->field_DC[0].field_1);
+    for (i = 0; i < 4; i++)
+        gSaveBlock2Ptr->field_DC[0].playerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+
+    StringCopy(gSaveBlock2Ptr->field_DC[0].playerName, gSaveBlock2Ptr->playerName);
+    gSaveBlock2Ptr->field_DC[0].language = gGameLanguage;
+    sub_8165AE8(&gSaveBlock2Ptr->field_DC[0]);
+}
+
+void sub_81A150C(void)
+{
+    u8 i;
+    u8 mapObjectGfxId;
+    u8 class = gApprentices[gSaveBlock2Ptr->field_DC[0].field_0_0].facilityClass;
+
+    for (i = 0; i < 30 && gUnknown_085DCEDC[i] != class; i++)
+        ;
+
+    if (i != 30)
+    {
+        mapObjectGfxId = gUnknown_085DCF0E[i];
+        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+    }
+    else
+    {
+        for (i = 0; i < 20 && gUnknown_085DCEFA[i] != class; i++)
+            ;
+
+        if (i != 20)
+        {
+            mapObjectGfxId = gUnknown_085DCF2C[i];
+            VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        }
+    }
+}
+
+void sub_81A15A4(void)
+{
+    u8 i;
+    u8 mapObjectGfxId;
+    u8 class = gApprentices[gSaveBlock2Ptr->field_B0].facilityClass;
+
+    for (i = 0; i < 30 && gUnknown_085DCEDC[i] != class; i++)
+        ;
+
+    if (i != 30)
+    {
+        mapObjectGfxId = gUnknown_085DCF0E[i];
+        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+    }
+    else
+    {
+        for (i = 0; i < 20 && gUnknown_085DCEFA[i] != class; i++)
+            ;
+
+        if (i != 20)
+        {
+            mapObjectGfxId = gUnknown_085DCF2C[i];
+            VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        }
+    }
+}
+
+void sub_81A1638(void)
+{
+    gSpecialVar_0x8004 = 1;
+}
+
+void sub_81A1644(void)
+{
+    gSpecialVar_0x8004 = 1;
+}
+
+const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
+{
+    const struct ApprenticeTrainer *apprentice = &gApprentices[apprenticeId];
+
+    switch (language)
+    {
+    case LANGUAGE_JAPANESE:
+        return apprentice->name[0];
+    case LANGUAGE_ENGLISH:
+        return apprentice->name[1];
+    case LANGUAGE_FRENCH:
+        return apprentice->name[2];
+    case LANGUAGE_ITALIAN:
+        return apprentice->name[3];
+    case LANGUAGE_GERMAN:
+        return apprentice->name[4];
+    case LANGUAGE_SPANISH:
+    default:
+        return apprentice->name[5];
+    }
+}
+
+void sub_81A16B4(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+        SwitchTaskToFollowupFunc(taskId);
+}
+
+static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        gUnknown_030062F4 = (void*)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 0x10)));
+        gUnknown_030062F4();
+        DestroyTask(taskId);
+    }
+}
+
+static void ExecuteFuncAfterButtonPress(void (*func)(void))
+{
+    u8 taskId = CreateTask(Task_ExecuteFuncAfterButtonPress, 1);
+    gTasks[taskId].data[0] = (u32)(func);
+    gTasks[taskId].data[1] = (u32)(func) >> 16;
+}
+
+void sub_81A175C(TaskFunc taskFunc)
+{
+    u8 taskId = CreateTask(sub_81A16B4, 1);
+    SetTaskFuncWithFollowupFunc(taskId, sub_81A16B4, taskFunc);
 }

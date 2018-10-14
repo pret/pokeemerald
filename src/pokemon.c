@@ -80,7 +80,6 @@ extern u8 StorageGetCurrentBox(void);
 extern void set_unknown_box_id(u8);
 extern void sub_803FA70(u8 battlerId);
 extern u8 sav1_map_get_name(void);
-extern const u8 *sub_81A1650(u8, u8 language);
 extern u8 GetFrontierEnemyMonLevel(u8);
 extern bool8 InBattlePyramid(void);
 extern bool8 InBattlePike(void);
@@ -2901,7 +2900,7 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
 
     language = src->language;
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
-    SetMonData(mon, MON_DATA_OT_NAME, sub_81A1650(src->field_0_0, language));
+    SetMonData(mon, MON_DATA_OT_NAME, GetApprenticeNameInLanguage(src->field_0_0, language));
     CalculateMonStats(mon);
 }
 
