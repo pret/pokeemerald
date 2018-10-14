@@ -1,7 +1,3 @@
-//
-// Created by scott on 9/7/2017.
-//
-
 #ifndef GUARD_FIELD_EFFECT_HELPERS_H
 #define GUARD_FIELD_EFFECT_HELPERS_H
 
@@ -10,29 +6,29 @@
 // Exported RAM declarations
 
 // Exported ROM declarations
-u8 sub_8154228(void);
+u8 CreateWarpArrowSprite(void);
 bool8 sub_8155DA0(struct EventObject *);
 void sub_8155D78(struct EventObject *);
 void sub_81555AC(u8, u8);
-void ash(s16, s16, u16, s16);
+void StartAshFieldEffect(s16, s16, u16, s16);
 void SetUpReflection(struct EventObject*, struct Sprite*, u8);
 u32 StartFieldEffectForEventObject(u8, struct EventObject*);
-u8 sub_81546C8(u8, u8, u8, s16, s16);
+u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void sub_8155F80(struct Sprite*);
-void oamc_shadow(struct Sprite*);
-void unc_grass_normal(struct Sprite*);
+void UpdateShadowFieldEffect(struct Sprite*);
+void UpdateTallGrassFieldEffect(struct Sprite*);
 void sub_81561D0(struct Sprite*);
-void sub_8155460(struct Sprite*);
-void sub_8155658(struct Sprite*);
+void UpdateAshFieldEffect(struct Sprite*);
+void UpdateSurfBlobFieldEffect(struct Sprite*);
 void sub_8156194(struct Sprite*);
-void sub_8154C60(struct Sprite*);
-void sub_8154D90(struct Sprite*);
-void unc_grass_tall(struct Sprite*);
-void sub_81559BC(struct Sprite*);
-void sub_8155C88(struct Sprite*);
-void sub_8154A10(struct Sprite*);
-void sub_8155158(struct Sprite*);
-void sub_8155AEC(struct Sprite*);
-void sub_8155E50(struct Sprite*);
+void UpdateFootprintsTireTracksFieldEffect(struct Sprite*);
+void UpdateSplashFieldEffect(struct Sprite*);
+void UpdateLongGrassFieldEffect(struct Sprite*);
+void UpdateSandPileFieldEffect(struct Sprite*);
+void UpdateDisguiseFieldEffect(struct Sprite*);
+void UpdateShortGrassFieldEffect(struct Sprite*);
+void UpdateHotSpringsWaterFieldEffect(struct Sprite*);
+void UpdateBubblesFieldEffect(struct Sprite*);
+void UpdateSparkleFieldEffect(struct Sprite*);
 
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

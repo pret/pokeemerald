@@ -1868,7 +1868,7 @@ static void sub_808E1B8(u8 eventObjectId, s16 x, s16 y)
         if (eventObject->movementType == 0x0b)
         {
             SetPlayerAvatarEventObjectIdAndObjectId(eventObjectId, spriteId);
-            eventObject->warpArrowSpriteId = sub_8154228();
+            eventObject->warpArrowSpriteId = CreateWarpArrowSprite();
         }
         if (subspriteTables != NULL)
         {
@@ -8206,7 +8206,7 @@ void GroundEffect_JumpOnTallGrass(struct EventObject *eventObj, struct Sprite *s
     gFieldEffectArguments[3] = 2;
     FieldEffectStart(FLDEFF_JUMP_TALL_GRASS);
 
-    spriteId = sub_81546C8(
+    spriteId = FindTallGrassFieldEffectSpriteId(
         eventObj->localId, eventObj->mapNum, eventObj->mapGroup, eventObj->currentCoords.x, eventObj->currentCoords.y);
 
     if (spriteId == MAX_SPRITES)
@@ -8843,14 +8843,14 @@ void sub_8097B78(u8 var1, u8 var2)
         StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(var2));
 }
 
-void sub_8097BB4(u8 var1, u8 var2)
+void sub_8097BB4(u8 var1, u8 graphicsId)
 {
     int spriteId = sub_8097B2C(var1);
 
     if(spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];
-        const struct EventObjectGraphicsInfo *gfxInfo = GetEventObjectGraphicsInfo(var2);
+        const struct EventObjectGraphicsInfo *gfxInfo = GetEventObjectGraphicsInfo(graphicsId);
         u16 tileNum = sprite->oam.tileNum;
 
         sprite->oam = *gfxInfo->oam;
