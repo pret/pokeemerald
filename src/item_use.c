@@ -931,7 +931,17 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) // There are two present pokemon.
+    {
+        u8 textCantThrowPokeBall[] = _("Cannot throw a ball!\nThere are two pokemon out there!\p");
+
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, 1, textCantThrowPokeBall, bag_menu_inits_lists_menu);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, sub_81C6714);
+    }
+    else if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
@@ -944,7 +954,9 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         DisplayItemMessage(taskId, 1, gText_BoxFull, bag_menu_inits_lists_menu);
     }
     else
+    {
         DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, sub_81C6714);
+    }
 }
 
 void sub_80FE408(u8 taskId)
