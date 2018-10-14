@@ -22,7 +22,7 @@
 #include "graphics.h"
 #include "sound.h"
 #include "constants/species.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "title_screen.h"
 #include "constants/rgb.h"
 #include "constants/battle_anim.h"
