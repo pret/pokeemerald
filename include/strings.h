@@ -843,4 +843,14 @@ extern const u8 gText_TwoDashes[];
 
 extern const u8 *const gReturnToXStringsTable2[];
 
+extern const u8 gText_XPLink[];
+extern const u8 gText_ConfirmLinkWhenPlayersReady[];
+extern const u8 gText_ConfirmStartLinkWithXPlayers[];
+extern const u8 gText_AwaitingLinkup[];
+extern const u8 gText_PleaseWaitForLink[];
+extern const u8 gText_BronzeCard[];
+extern const u8 gText_CopperCard[];
+extern const u8 gText_SilverCard[];
+extern const u8 gText_GoldCard[];
+
 #endif //GUARD_STRINGS_H

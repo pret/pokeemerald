@@ -3475,7 +3475,7 @@ _08163FCC:
 	adds r1, r0, 0
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gBattleScripting + 0x14
+	ldr r1, =gPlayerParty - 100
 	adds r0, r1
 	movs r1, 0x2C
 	muls r1, r4
