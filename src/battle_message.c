@@ -477,13 +477,13 @@ static const u8 sText_PkmnBrokeFree[] = _("Oh, no!\nThe POKéMON broke free!");
 static const u8 sText_ItAppearedCaught[] = _("Aww!\nIt appeared to be caught!");
 static const u8 sText_AarghAlmostHadIt[] = _("Aargh!\nAlmost had it!");
 static const u8 sText_ShootSoClose[] = _("Shoot!\nIt was so close, too!");
-static const u8 sText_GotchaPkmnCaught[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{UNKNOWN_A}{PLAY_BGM MUS_KACHI22}\p");
-static const u8 sText_GotchaPkmnCaught2[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{UNKNOWN_A}{PLAY_BGM MUS_KACHI22}{PAUSE 127}");
-static const u8 sText_GiveNicknameCaptured[] = _("Give a nickname to the\ncaptured {B_OPPONENT_MON1_NAME}?");
-static const u8 sText_PkmnSentToPC[] = _("{B_OPPONENT_MON1_NAME} was sent to\n{B_PC_CREATOR_NAME} PC.");
+static const u8 sText_GotchaPkmnCaught[] = _("Gotcha!\n{B_DEF_NAME} was caught!{UNKNOWN_A}{PLAY_BGM MUS_KACHI22}\p");
+static const u8 sText_GotchaPkmnCaught2[] = _("Gotcha!\n{B_DEF_NAME} was caught!{UNKNOWN_A}{PLAY_BGM MUS_KACHI22}{PAUSE 127}");
+static const u8 sText_GiveNicknameCaptured[] = _("Give a nickname to the\ncaptured {B_DEF_NAME}?");
+static const u8 sText_PkmnSentToPC[] = _("{B_DEF_NAME} was sent to\n{B_PC_CREATOR_NAME} PC.");
 static const u8 sText_Someones[] = _("someone’s");
 static const u8 sText_Lanettes[] = _("LANETTE’s");
-static const u8 sText_PkmnDataAddedToDex[] = _("{B_OPPONENT_MON1_NAME}’s data was\nadded to the POKéDEX.\p");
+static const u8 sText_PkmnDataAddedToDex[] = _("{B_DEF_NAME}’s data was\nadded to the POKéDEX.\p");
 static const u8 sText_ItIsRaining[] = _("It is raining.");
 static const u8 sText_SandstormIsRaging[] = _("A sandstorm is raging.");
 static const u8 sText_BoxIsFull[] = _("The BOX is full!\nYou can’t catch any more!\p");
@@ -2857,6 +2857,15 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 break;
             case B_TXT_DEF_NAME_WITH_PREFIX: // target name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
+                break;
+            case B_TXT_DEF_NAME: // target name
+                if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
+                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_NICKNAME, text);
+                else
+                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_NICKNAME, text);
+
+                StringGetEnd10(text);
+                toCpy = text;
                 break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect battlerId name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gEffectBattler, gBattlerPartyIndexes[gEffectBattler])

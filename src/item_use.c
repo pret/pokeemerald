@@ -941,6 +941,15 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, sub_81C6714);
     }
+    else if (gBattlerInMenuId == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)) // Attempting to throw a ball with the second pokemon.
+    {
+        u8 textCantThrowPokeBall[] = _("Cannot throw a ball!\p");
+
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, 1, textCantThrowPokeBall, bag_menu_inits_lists_menu);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, sub_81C6714);
+    }
     else if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);

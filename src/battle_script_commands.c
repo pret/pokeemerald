@@ -10480,6 +10480,14 @@ static void atkEE_removelightscreenreflect(void) // brick break
     gBattlescriptCurrInstr++;
 }
 
+static u8 GetCatchingBattler(void)
+{
+    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)))
+        return GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+    else
+        return GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+}
+
 static void atkEF_handleballthrow(void)
 {
     u8 ballMultiplier = 0;
@@ -10488,9 +10496,7 @@ static void atkEF_handleballthrow(void)
         return;
 
     gActiveBattler = gBattlerAttacker;
-    gBattlerTarget = gBattlerAttacker ^ BIT_SIDE;
-    if (!IsBattlerAlive(gBattlerTarget))
-        gBattlerTarget ^= BIT_FLANK;
+    gBattlerTarget = GetCatchingBattler();
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
@@ -10632,18 +10638,18 @@ static void atkEF_handleballthrow(void)
 
 static void atkF0_givecaughtmon(void)
 {
-    if (GiveMonToPlayer(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]) != MON_GIVEN_TO_PARTY)
+    if (GiveMonToPlayer(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]]) != MON_GIVEN_TO_PARTY)
     {
         if (!sub_813B21C())
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
-            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_NICKNAME, gStringVar2);
+            GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_NICKNAME, gStringVar2);
         }
         else
         {
             StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
-            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_NICKNAME, gStringVar2);
+            GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_NICKNAME, gStringVar2);
             StringCopy(gStringVar3, GetBoxNamePtr(get_unknown_box_id()));
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         }
@@ -10652,17 +10658,17 @@ static void atkF0_givecaughtmon(void)
             gBattleCommunication[MULTISTRING_CHOOSER]++;
     }
 
-    gBattleResults.caughtMonSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_SPECIES, NULL);
-    GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_NICKNAME, gBattleResults.caughtMonNick);
-    gBattleResults.caughtMonBall = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, NULL);
+    gBattleResults.caughtMonSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_SPECIES, NULL);
+    GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_NICKNAME, gBattleResults.caughtMonNick);
+    gBattleResults.caughtMonBall = GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_POKEBALL, NULL);
 
     gBattlescriptCurrInstr++;
 }
 
 static void atkF1_trysetcaughtmondexflags(void)
 {
-    u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_SPECIES, NULL);
-    u32 personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_PERSONALITY, NULL);
+    u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_SPECIES, NULL);
+    u32 personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_PERSONALITY, NULL);
 
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
@@ -10677,7 +10683,7 @@ static void atkF1_trysetcaughtmondexflags(void)
 
 static void atkF2_displaydexinfo(void)
 {
-    u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_SPECIES, NULL);
+    u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_SPECIES, NULL);
 
     switch (gBattleCommunication[0])
     {
@@ -10690,8 +10696,8 @@ static void atkF2_displaydexinfo(void)
         {
             FreeAllWindowBuffers();
             gBattleCommunication[TASK_ID] = CreateDexDisplayMonDataTask(SpeciesToNationalPokedexNum(species),
-                                                                        gBattleMons[gBattlerTarget].otId,
-                                                                        gBattleMons[gBattlerTarget].personality);
+                                                                        gBattleMons[GetCatchingBattler()].otId,
+                                                                        gBattleMons[GetCatchingBattler()].personality);
             gBattleCommunication[0]++;
         }
         break;

@@ -4063,6 +4063,19 @@ u8 IsRunningFromBattleImpossible(void)
 
     gPotentialItemEffectBattler = gActiveBattler;
 
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) // Cannot ever run from saving Birch's battle.
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        return 1;
+    }
+    if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT
+        && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+        && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK))) // The second pokemon cannot run from a double wild battle.
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        return 1;
+    }
+
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
         return 0;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -4105,11 +4118,6 @@ u8 IsRunningFromBattleImpossible(void)
         || (gStatuses3[gActiveBattler] & STATUS3_ROOTED))
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        return 1;
-    }
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-    {
-        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
         return 1;
     }
     return 0;
@@ -4195,6 +4203,13 @@ static void HandleTurnActionSelectionState(void)
                         || gBattleMons[gActiveBattler].status2 & STATUS2_RECHARGE)
                     {
                         gChosenActionByBattler[gActiveBattler] = B_ACTION_USE_MOVE;
+                        gBattleCommunication[gActiveBattler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
+                    }
+                    else if (position == B_POSITION_PLAYER_RIGHT
+                             && (gBattleStruct->throwingPokeBall || gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] == B_ACTION_RUN))
+                    {
+                        gBattleStruct->throwingPokeBall = FALSE;
+                        gChosenActionByBattler[gActiveBattler] = B_ACTION_NOTHING_FAINTED; // Not fainted, but it cannot move, because of the throwing ball.
                         gBattleCommunication[gActiveBattler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
                     }
                     else
@@ -4454,6 +4469,8 @@ static void HandleTurnActionSelectionState(void)
                     else
                     {
                         gLastUsedItem = (gBattleBufferB[gActiveBattler][1] | (gBattleBufferB[gActiveBattler][2] << 8));
+                        if (ItemId_GetPocket(gLastUsedItem) == POCKET_POKE_BALLS)
+                            gBattleStruct->throwingPokeBall = TRUE;
                         gBattleCommunication[gActiveBattler]++;
                     }
                     break;
@@ -5804,25 +5821,26 @@ bool8 TryRunFromBattle(u8 battler)
     }
     else
     {
-        if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        u8 runningFromBattler = BATTLE_OPPOSITE(battler);
+        if (!IsBattlerAlive(runningFromBattler))
+            runningFromBattler |= BIT_FLANK;
+
+        if (InBattlePyramid())
         {
-            if (InBattlePyramid())
-            {
-                pyramidMultiplier = sub_81A9E28();
-                speedVar = (gBattleMons[battler].speed * pyramidMultiplier) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
-                if (speedVar > (Random() & 0xFF))
-                    effect++;
-            }
-            else if (gBattleMons[battler].speed < gBattleMons[BATTLE_OPPOSITE(battler)].speed)
-            {
-                speedVar = (gBattleMons[battler].speed * 128) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
-                if (speedVar > (Random() & 0xFF))
-                    effect++;
-            }
-            else // same speed or faster
-            {
+            pyramidMultiplier = sub_81A9E28();
+            speedVar = (gBattleMons[battler].speed * pyramidMultiplier) / (gBattleMons[runningFromBattler].speed) + (gBattleStruct->runTries * 30);
+            if (speedVar > (Random() & 0xFF))
                 effect++;
-            }
+        }
+        else if (gBattleMons[battler].speed < gBattleMons[runningFromBattler].speed)
+        {
+            speedVar = (gBattleMons[battler].speed * 128) / (gBattleMons[runningFromBattler].speed) + (gBattleStruct->runTries * 30);
+            if (speedVar > (Random() & 0xFF))
+                effect++;
+        }
+        else // same speed or faster
+        {
+            effect++;
         }
 
         gBattleStruct->runTries++;

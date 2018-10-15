@@ -581,6 +581,7 @@ struct BattleStruct
     u32 debugAIFlags;
     bool8 notfirstTimeAIFlags;
     u8 activeAbilityPopUps; // as bits for each battler
+    bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
 };
 
