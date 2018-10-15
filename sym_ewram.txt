@@ -380,10 +380,10 @@ gUnknown_02039F5C: @ 2039F5C
 gUnknown_02039F5D: @ 2039F5D
 	.space 0x3
 
-gUnknown_02039F60: @ 2039F60
+gMartInfo: @ 2039F60
 	.space 0x10
 
-gUnknown_02039F70: @ 2039F70
+gShopDataPtr: @ 2039F70
 	.space 0x4
 
 gUnknown_02039F74: @ 2039F74

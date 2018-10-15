@@ -396,7 +396,7 @@ void sub_81C4F98(u8 a0, void (*callback)(void))
 
     gPyramidBagResources->callback2 = NULL;
     gPyramidBagResources->unk814 = 0xFF;
-    gPyramidBagResources->scrollArrowSpriteId = 0xFF;
+    gPyramidBagResources->scrollIndicatorsTaskId = 0xFF;
 
     memset(gPyramidBagResources->itemsSpriteIds, 0xFF, sizeof(gPyramidBagResources->itemsSpriteIds));
     memset(gPyramidBagResources->windowIds, 0xFF, sizeof(gPyramidBagResources->windowIds));
@@ -664,16 +664,16 @@ static void PrintItemDescription(s32 listMenuId)
 
 static void AddScrollArrow(void)
 {
-    if (gPyramidBagResources->scrollArrowSpriteId == 0xFF)
-        gPyramidBagResources->scrollArrowSpriteId = AddScrollIndicatorArrowPairParameterized(2, 172, 12, 148, gPyramidBagResources->listMenuCount - gPyramidBagResources->listMenuMaxShown, 0xB5E, 0xB5E, &gPyramidBagCursorData.scrollPosition);
+    if (gPyramidBagResources->scrollIndicatorsTaskId == 0xFF)
+        gPyramidBagResources->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(2, 172, 12, 148, gPyramidBagResources->listMenuCount - gPyramidBagResources->listMenuMaxShown, 0xB5E, 0xB5E, &gPyramidBagCursorData.scrollPosition);
 }
 
 static void RemoveScrollArrow(void)
 {
-    if (gPyramidBagResources->scrollArrowSpriteId != 0xFF)
+    if (gPyramidBagResources->scrollIndicatorsTaskId != 0xFF)
     {
-        RemoveScrollIndicatorArrowPair(gPyramidBagResources->scrollArrowSpriteId);
-        gPyramidBagResources->scrollArrowSpriteId = 0xFF;
+        RemoveScrollIndicatorArrowPair(gPyramidBagResources->scrollIndicatorsTaskId);
+        gPyramidBagResources->scrollIndicatorsTaskId = 0xFF;
     }
 }
 

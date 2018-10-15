@@ -137,6 +137,7 @@ SECTIONS {
         src/item.o(.text);
         src/contest.o(.text);
         asm/contest.o(.text);
+        src/shop.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
         asm/script_menu.o(.text);
