@@ -79,7 +79,7 @@ extern u8 fishD(struct Task *task);
 extern u8 fishE(struct Task *task);
 extern u8 fishF(struct Task *task);
 
-static bool8 (*const gUnknown_084973FC[])(u8) =
+static bool8 (*const sForcedMovementTestFuncs[])(u8) =
 {
     MetatileBehavior_IsTrickHouseSlipperyFloor,
     MetatileBehavior_IsIce_2,
@@ -101,7 +101,7 @@ static bool8 (*const gUnknown_084973FC[])(u8) =
     MetatileBehavior_IsMuddySlope,
 };
 
-static bool8 (*const gUnknown_08497444[])(void) =
+static bool8 (*const sForcedMovementFuncs[])(void) =
 {
     ForcedMovement_None,
     ForcedMovement_Slip,
@@ -154,7 +154,7 @@ void (*const gUnknown_084974B8[])(struct EventObject *) =
     PlayerAvatarTransition_Dummy,
 };
 
-bool8 (*const gUnknown_084974D8[])(u8) =
+bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) =
 {
     MetatileBehavior_IsSouthArrowWarp,
     MetatileBehavior_IsNorthArrowWarp,
@@ -162,7 +162,7 @@ bool8 (*const gUnknown_084974D8[])(u8) =
     MetatileBehavior_IsEastArrowWarp,
 };
 
-const u8 gUnknown_084974E8[][2] =
+const u8 sRivalAvatarGfxIds[][2] =
 {
     {EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,     EVENT_OBJ_GFX_RIVAL_MAY_NORMAL},
     {EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE,  EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE},
@@ -174,7 +174,7 @@ const u8 gUnknown_084974E8[][2] =
     {EVENT_OBJ_GFX_BRENDAN_WATERING,         EVENT_OBJ_GFX_MAY_WATERING}
 };
 
-const u8 gUnknown_084974F8[][2] =
+const u8 sPlayerAvatarGfxIds[][2] =
 {
     {EVENT_OBJ_GFX_BRENDAN_NORMAL,     EVENT_OBJ_GFX_MAY_NORMAL},
     {EVENT_OBJ_GFX_BRENDAN_MACH_BIKE,  EVENT_OBJ_GFX_MAY_MACH_BIKE},
@@ -210,7 +210,7 @@ const u8 gUnknown_0849750C[2][5][2] =
     }
 };
 
-bool8 (*const gUnknown_08497520[])(u8) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
+bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u8) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
 {
     MetatileBehavior_IsSouthArrowWarp,
     MetatileBehavior_IsNorthArrowWarp,
@@ -242,7 +242,7 @@ const u8 gUnknown_08497550[] = {3, 4, 2, 1};
 
 const u8 gUnknown_08497554[] = {16, 16, 17, 18, 19};
 
-u8 (*const gUnknown_0849755C[])(struct Task *) =
+u8 (*const sFishingStateFuncs[])(struct Task *) =
 {
     fish0,
     fish1,
@@ -266,9 +266,9 @@ const u16 gUnknown_0849759C[] = {1, 1, 1};
 
 const u16 gUnknown_084975A2[] = {1, 3, 6};
 
-const u8 gUnknown_084975A8[] = _("·");
+const u8 gText_Dot[] = _("·");
 
-const u16 gUnknown_084975AA[] = {36, 33, 30};
+const u16 sReelTimeouts[] = {36, 33, 30};
 
 const u16 gUnknown_084975B0[] =
 {
@@ -377,7 +377,7 @@ static void PlayerAllowForcedMovementIfMovingSameDirection(void)
 
 static bool8 TryDoMetatileBehaviorForcedMovement(void)
 {
-	return gUnknown_08497444[GetForcedMovementByMetatileBehavior()]();
+	return sForcedMovementFuncs[GetForcedMovementByMetatileBehavior()]();
 }
 
 static u8 GetForcedMovementByMetatileBehavior(void)
@@ -390,7 +390,7 @@ static u8 GetForcedMovementByMetatileBehavior(void)
 
         for (i = 0; i < 18; i++)
         {
-            if (gUnknown_084973FC[i](metatileBehavior))
+            if (sForcedMovementTestFuncs[i](metatileBehavior))
                 return i + 1;
         }
     }

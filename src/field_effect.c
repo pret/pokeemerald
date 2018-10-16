@@ -3791,8 +3791,8 @@ const struct SpriteTemplate gUnknown_0855C5EC = {
 void sub_80B9D24(struct Sprite* sprite)
 {
     int i;
-    int xPos = (s16)gUnknown_03005DEC + sprite->pos1.x + sprite->pos2.x;
-    int yPos = (s16)gUnknown_03005DE8 + sprite->pos1.y + sprite->pos2.y - 4;
+    int xPos = (s16)gTotalCameraPixelOffsetX + sprite->pos1.x + sprite->pos2.x;
+    int yPos = (s16)gTotalCameraPixelOffsetY + sprite->pos1.y + sprite->pos2.y - 4;
 
     for (i = 0; i < 4; i++)
     {

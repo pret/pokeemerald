@@ -954,7 +954,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 808B9EC
 	lsls r0, 2
 	adds r0, r2
 	ldrb r0, [r0, 0x1E]
-	ldr r2, =gUnknown_084974D8
+	ldr r2, =sArrowWarpMetatileBehaviorChecks
 	subs r1, r4, 0x1
 	lsls r1, 2
 	adds r1, r2
@@ -1334,7 +1334,7 @@ GetRivalAvatarGraphicsIdByStateIdAndGender: @ 808BD3C
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_084974E8
+	ldr r2, =sRivalAvatarGfxIds
 	lsrs r0, 23
 	adds r1, r0
 	adds r1, r2
@@ -1349,7 +1349,7 @@ GetPlayerAvatarGraphicsIdByStateIdAndGender: @ 808BD54
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_084974F8
+	ldr r2, =sPlayerAvatarGfxIds
 	lsrs r0, 23
 	adds r1, r0
 	adds r1, r2
@@ -2046,7 +2046,7 @@ sub_808C280: @ 808C280
 	mov r0, sp
 	strh r1, [r0]
 	movs r6, 0x1
-	ldr r1, =gUnknown_08497520
+	ldr r1, =sArrowWarpMetatileBehaviorChecks2
 	mov r9, r1
 	mov r4, sp
 	mov r7, sp
@@ -2783,7 +2783,7 @@ Task_Fish: @ 808C8C0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_0849755C
+	ldr r5, =sFishingStateFuncs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2958,7 +2958,7 @@ fish4: @ 808CA20
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
-	ldr r1, =gUnknown_084975A8
+	ldr r1, =gText_Dot
 	add r0, sp, 0xC
 	movs r2, 0x2
 	bl memcpy
@@ -3151,7 +3151,7 @@ fish7: @ 808CBA4
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	ldr r1, =gUnknown_084975AA
+	ldr r1, =sReelTimeouts
 	mov r0, sp
 	movs r2, 0x6
 	bl memcpy
@@ -3851,7 +3851,7 @@ _0808D14A:
 	strh r0, [r7, 0x22]
 	movs r2, 0x22
 	ldrsh r1, [r7, r2]
-	ldr r0, =gUnknown_03005DE8
+	ldr r0, =gTotalCameraPixelOffsetY
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	adds r1, r0

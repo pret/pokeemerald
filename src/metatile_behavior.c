@@ -897,7 +897,7 @@ bool8 MetatileBehavior_IsBridge(u8 metatileBehavior)
         return FALSE;
 }
 
-u8 MetatileBehavior_GetBridgeSth(u8 metatileBehavior)
+u8 MetatileBehavior_GetBridgeType(u8 metatileBehavior)
 {
     u8 result = metatileBehavior - MB_WARP_OR_BRIDGE;
     if (result < 4)

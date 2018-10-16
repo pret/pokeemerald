@@ -5023,8 +5023,8 @@ void sub_8092FF0(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
 {
     *dest_x = (x - gSaveBlock1Ptr->pos.x) << 4;
     *dest_y = (y - gSaveBlock1Ptr->pos.y) << 4;
-    *dest_x -= gUnknown_03005DEC;
-    *dest_y -= gUnknown_03005DE8;
+    *dest_x -= gTotalCameraPixelOffsetX;
+    *dest_y -= gTotalCameraPixelOffsetY;
 }
 
 void sub_8093038(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
@@ -5032,21 +5032,21 @@ void sub_8093038(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
     s16 dx;
     s16 dy;
 
-    dx = -gUnknown_03005DEC - gUnknown_03005DD0.x;
-    dy = -gUnknown_03005DE8 - gUnknown_03005DD0.y;
-    if (gUnknown_03005DD0.x > 0)
+    dx = -gTotalCameraPixelOffsetX - gFieldCamera.x;
+    dy = -gTotalCameraPixelOffsetY - gFieldCamera.y;
+    if (gFieldCamera.x > 0)
     {
         dx += 0x10;
     }
-    if (gUnknown_03005DD0.x < 0)
+    if (gFieldCamera.x < 0)
     {
         dx -= 0x10;
     }
-    if (gUnknown_03005DD0.y > 0)
+    if (gFieldCamera.y > 0)
     {
         dy += 0x10;
     }
-    if (gUnknown_03005DD0.y < 0)
+    if (gFieldCamera.y < 0)
     {
         dy -= 0x10;
     }
@@ -5065,19 +5065,19 @@ static void GetEventObjectMovingCameraOffset(s16 *x, s16 *y)
 {
     *x = 0;
     *y = 0;
-    if (gUnknown_03005DD0.x > 0)
+    if (gFieldCamera.x > 0)
     {
         (*x)++;
     }
-    if (gUnknown_03005DD0.x < 0)
+    if (gFieldCamera.x < 0)
     {
         (*x) --;
     }
-    if (gUnknown_03005DD0.y > 0)
+    if (gFieldCamera.y > 0)
     {
         (*y)++;
     }
-    if (gUnknown_03005DD0.y < 0)
+    if (gFieldCamera.y < 0)
     {
         (*y) --;
     }

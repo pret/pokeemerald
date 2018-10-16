@@ -2166,8 +2166,8 @@ static void sub_8086988(u32 a1)
 
 static void sub_80869DC(void)
 {
-    gUnknown_03005DEC = 0;
-    gUnknown_03005DE8 = 0;
+    gTotalCameraPixelOffsetX = 0;
+    gTotalCameraPixelOffsetY = 0;
     sub_808D438();
     TrySpawnEventObjects(0, 0);
     mapheader_run_first_tag4_script_list_match();
@@ -2178,8 +2178,8 @@ static void mli4_mapscripts_and_other(void)
     s16 x, y;
     struct InitialPlayerAvatarState *player;
 
-    gUnknown_03005DEC = 0;
-    gUnknown_03005DE8 = 0;
+    gTotalCameraPixelOffsetX = 0;
+    gTotalCameraPixelOffsetY = 0;
     sub_808D438();
     sav1_camera_get_focus_coords(&x, &y);
     player = GetInitialPlayerAvatarState();
