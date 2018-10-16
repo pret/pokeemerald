@@ -96,8 +96,8 @@
 #define EVENT_OBJ_GFX_MAY_SURFING                 92
 #define EVENT_OBJ_GFX_MAY_FIELD_MOVE              93
 #define EVENT_OBJ_GFX_TRUCK                       94
-#define EVENT_OBJ_GFX_VIGAROTH_CARRYING_BOX       95
-#define EVENT_OBJ_GFX_VIGAROTH_FACING_AWAY        96
+#define EVENT_OBJ_GFX_VIGOROTH_CARRYING_BOX       95
+#define EVENT_OBJ_GFX_VIGOROTH_FACING_AWAY        96
 #define EVENT_OBJ_GFX_BIRCHS_BAG                  97
 #define EVENT_OBJ_GFX_ZIGZAGOON_1                 98
 #define EVENT_OBJ_GFX_ARTIST                      99
