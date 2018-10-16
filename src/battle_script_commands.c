@@ -3382,17 +3382,17 @@ static void atk23_getexp(void)
                         // check if the pokemon doesn't belong to the player
                         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gBattleStruct->expGetterMonId >= 3)
                         {
-                            i = 0x149;
+                            i = STRINGID_EMPTYSTRING4;
                         }
                         else
                         {
                             gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
-                            i = 0x14A;
+                            i = STRINGID_ABOOSTED;
                         }
                     }
                     else
                     {
-                        i = 0x149;
+                        i = STRINGID_EMPTYSTRING4;
                     }
 
                     // get exp getter battlerId
