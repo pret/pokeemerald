@@ -17,7 +17,7 @@
 #include "bg.h"
 #include "constants/species.h"
 #include "constants/game_stat.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "string_util.h"
 #include "m4a.h"
 #include "international_string_util.h"

@@ -1,4 +1,4 @@
-const struct MonCoords gUnknown_083021D8[] =
+const struct MonCoords gMonBackPicCoords[] =
 {
     {0x88, 0x00}, // SPECIES_NONE
     {0x64, 0x10}, // SPECIES_BULBASAUR

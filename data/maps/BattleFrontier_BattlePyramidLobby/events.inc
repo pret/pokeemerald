@@ -1,7 +1,7 @@
 BattleFrontier_BattlePyramidLobby_EventObjects: @ 853C598
 	object_event 1, EVENT_OBJ_GFX_HIKER, 0, 7, 12, 4, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_2508B1, 0
 	object_event 2, EVENT_OBJ_GFX_HEX_MANIAC, 0, 14, 13, 4, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250ACE, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_4, 0, 2, 15, 4, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250E83, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_3, 0, 2, 15, 4, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250E83, 0
 	object_event 4, EVENT_OBJ_GFX_FAT_MAN, 0, 12, 16, 4, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_BattlePyramidLobby_EventScript_250E8C, 0
 
 BattleFrontier_BattlePyramidLobby_MapWarps: @ 853C5F8

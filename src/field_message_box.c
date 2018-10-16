@@ -131,7 +131,7 @@ void HideFieldMessageBox(void)
     gUnknown_020375BC = 0;
 }
 
-u8 textbox_any_visible(void)
+u8 GetFieldMessageBoxMode(void)
 {
     return gUnknown_020375BC;
 }

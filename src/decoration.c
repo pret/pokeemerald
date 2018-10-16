@@ -1171,7 +1171,7 @@ void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
         {
             decLeft = mapX + j;
             behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decor].tiles[i * decWidth + j]);
-            if (MetatileBehavior_IsMB_B9(behavior) == TRUE || (gDecorations[decor].permission != DECORPERM_PASS_FLOOR && (behavior >> 12)))
+            if (MetatileBehavior_IsSecretBaseImpassable(behavior) == TRUE || (gDecorations[decor].permission != DECORPERM_PASS_FLOOR && (behavior >> 12)))
             {
                 flags = 0xc00;
             }
@@ -1179,7 +1179,7 @@ void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
             {
                 flags = 0x000;
             }
-            if (gDecorations[decor].permission != DECORPERM_NA_WALL && MetatileBehavior_IsMB_B7(MapGridGetMetatileBehaviorAt(decLeft, decBottom)) == TRUE)
+            if (gDecorations[decor].permission != DECORPERM_NA_WALL && MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(decLeft, decBottom)) == TRUE)
             {
                 v0 = 1;
             }
@@ -1446,7 +1446,7 @@ void sub_8128414(u8 taskId)
 
 bool8 sub_8128484(u8 behaviorAt, u16 behaviorBy)
 {
-    if (MetatileBehavior_IsMB_B3(behaviorAt) != TRUE || behaviorBy != 0)
+    if (MetatileBehavior_IsBlockDecoration(behaviorAt) != TRUE || behaviorBy != 0)
     {
         return FALSE;
     }
@@ -1464,9 +1464,9 @@ bool8 sub_81284AC(u8 taskId, s16 x, s16 y, u16 decor)
 
 bool8 sub_81284F4(u16 behaviorAt, const struct Decoration *decoration)
 {
-    if (MetatileBehavior_IsMB_B3(behaviorAt) != TRUE)
+    if (MetatileBehavior_IsBlockDecoration(behaviorAt) != TRUE)
     {
-        if (decoration->id == DECOR_SOLID_BOARD && MetatileBehavior_IsMB_C2(behaviorAt) == TRUE)
+        if (decoration->id == DECOR_SOLID_BOARD && MetatileBehavior_IsSecretBaseHole(behaviorAt) == TRUE)
         {
             return TRUE;
         }
@@ -1548,7 +1548,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 curX = gTasks[taskId].data[0] + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
                 behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & 0xf000;
-                if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsMB_B7(behaviorAt))
+                if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsSecretBaseNorthWall(behaviorAt))
                 {
                     return FALSE;
                 }
@@ -1570,7 +1570,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 for (j=0; j<mapX; j++)
                 {
                     curX = gTasks[taskId].data[0] + j;
-                    if (!MetatileBehavior_IsMB_B7(MapGridGetMetatileBehaviorAt(curX, curY)))
+                    if (!MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(curX, curY)))
                     {
                         return FALSE;
                     }
@@ -1589,14 +1589,14 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
                 if (decoration->shape == DECORSHAPE_1x2)
                 {
-                    if (!MetatileBehavior_IsMB_C3(behaviorAt))
+                    if (!MetatileBehavior_IsLargeMatCenter(behaviorAt))
                     {
                         return FALSE;
                     }
                 }
-                else if (!MetatileBehavior_IsMB_B5(behaviorAt))
+                else if (!MetatileBehavior_IsSecretBaseLargeMatEdge(behaviorAt))
                 {
-                    if (!MetatileBehavior_IsMB_C3(behaviorAt))
+                    if (!MetatileBehavior_IsLargeMatCenter(behaviorAt))
                     {
                         return FALSE;
                     }
@@ -2385,7 +2385,7 @@ void sub_8129C74(u8 taskId)
     {
         data = gTasks[taskId].data;
         behavior = MapGridGetMetatileBehaviorAt(data[0], data[1]);
-        if (MetatileBehavior_IsSecretBasePC(behavior) == TRUE || MetatileBehavior_IsMB_C5(behavior) == TRUE)
+        if (MetatileBehavior_IsSecretBasePC(behavior) == TRUE || MetatileBehavior_IsPlayerRoomPCOn(behavior) == TRUE)
         {
             gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
             gSprites[sDecor_CameraSpriteObjectIdx1].callback = SpriteCallbackDummy;

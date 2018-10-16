@@ -25,6 +25,9 @@ extern u16 *gBGTilemapBuffers3;
 
 extern void (*gFieldCallback)(void);
 
+extern u8 gUnknown_03005DB4;
+extern u8 gFieldLinkPlayerCount;
+
 // Exported ROM declarations
 extern const struct UCoords32 gDirectionToVectors[];
 

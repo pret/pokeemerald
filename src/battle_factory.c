@@ -20,7 +20,7 @@
 #include "pokemon_summary_screen.h"
 #include "sound.h"
 #include "pokedex.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "trainer_pokemon_sprites.h"
 #include "constants/battle_frontier.h"
 #include "constants/songs.h"

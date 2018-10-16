@@ -53,9 +53,10 @@ gUnknown_08589AA8:: @ 8589AA8
 
 gUnknown_08589AB0:: @ 8589AB0
 	.byte 1, 2, 3
+	.byte 0, 2, 3
+	.byte 0, 3, 2
 
-gUnknown_08589AB3:: @ 8589AB3
-	.byte 0, 2, 3, 0, 3, 2, 0
+	.align 1
 
 gUnknown_08589ABA:: @ 8589ABA
 	.2byte 0x284, 0x282, 0x280

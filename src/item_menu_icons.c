@@ -19,10 +19,10 @@ struct CompressedTilesPal
     const u8 *pal;
 };
 
-extern void sub_80D5860(struct Sprite *sprite);
-extern void sub_80D58F8(struct Sprite *sprite);
-extern void sub_80D5968(struct Sprite *sprite);
-extern void sub_80D5A94(struct Sprite *sprite);
+extern void DoHorizontalLunge(struct Sprite *sprite);
+extern void DoVerticalDip(struct Sprite *sprite);
+extern void SlideMonToOriginalPos(struct Sprite *sprite);
+extern void SlideMonToOffset(struct Sprite *sprite);
 extern void sub_80D5B48(struct Sprite *sprite);
 
 // this file's functions
@@ -414,7 +414,7 @@ static const struct SpriteTemplate gUnknown_0857FE10 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_0857FE28 =
+const struct SpriteTemplate gHorizontalLungeSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -422,10 +422,10 @@ const struct SpriteTemplate gUnknown_0857FE28 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D5860,
+    .callback = DoHorizontalLunge,
 };
 
-const struct SpriteTemplate gUnknown_0857FE40 =
+const struct SpriteTemplate gVerticalDipSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -433,10 +433,10 @@ const struct SpriteTemplate gUnknown_0857FE40 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D58F8,
+    .callback = DoVerticalDip,
 };
 
-const struct SpriteTemplate gUnknown_0857FE58 =
+const struct SpriteTemplate gSlideMonToOriginalPosSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -444,10 +444,10 @@ const struct SpriteTemplate gUnknown_0857FE58 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D5968,
+    .callback = SlideMonToOriginalPos,
 };
 
-const struct SpriteTemplate gUnknown_0857FE70 =
+const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -455,7 +455,7 @@ const struct SpriteTemplate gUnknown_0857FE70 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D5A94,
+    .callback = SlideMonToOffset,
 };
 
 const struct SpriteTemplate gUnknown_0857FE88 =

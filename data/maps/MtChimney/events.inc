@@ -7,7 +7,7 @@ MtChimney_EventObjects: @ 85347C8
 	object_event 6, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 19, 39, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MtChimney_EventScript_22F05C, 926
 	object_event 7, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 29, 5, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MtChimney_EventScript_22F053, 926
 	object_event 8, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 31, 12, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MtChimney_EventScript_22F065, 926
-	object_event 9, EVENT_OBJ_GFX_OLD_WOMAN_2, 0, 19, 39, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MtChimney_EventScript_22EEF3, 994
+	object_event 9, EVENT_OBJ_GFX_OLD_WOMAN, 0, 19, 39, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MtChimney_EventScript_22EEF3, 994
 	object_event 10, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 22, 39, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MtChimney_EventScript_22F0C9, 927
 	object_event 11, EVENT_OBJ_GFX_POOCHYENA, 0, 23, 19, 3, MOVEMENT_TYPE_RUN_IN_PLACE_LEFT, 0, 0, 0, 0, MtChimney_EventScript_22F0DB, 926
 	object_event 12, EVENT_OBJ_GFX_POOCHYENA, 0, 23, 18, 3, MOVEMENT_TYPE_WALK_IN_PLACE_DOWN, 0, 0, 0, 0, MtChimney_EventScript_22F0D2, 927
@@ -23,7 +23,7 @@ MtChimney_EventObjects: @ 85347C8
 	object_event 22, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 9, 16, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 3, MtChimney_EventScript_22F085, 927
 	object_event 23, EVENT_OBJ_GFX_POOCHYENA, 0, 20, 39, 3, MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT, 0, 0, 0, 0, MtChimney_EventScript_22F0DB, 926
 	object_event 24, EVENT_OBJ_GFX_POOCHYENA, 0, 21, 39, 3, MOVEMENT_TYPE_WALK_IN_PLACE_LEFT, 0, 0, 0, 0, MtChimney_EventScript_22F0D2, 927
-	object_event 25, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 16, 18, 3, MOVEMENT_TYPE_FACE_DOWN_AND_UP, 0, 0, 1, 3, MtChimney_EventScript_22F14A, 877
+	object_event 25, EVENT_OBJ_GFX_EXPERT_F, 0, 16, 18, 3, MOVEMENT_TYPE_FACE_DOWN_AND_UP, 0, 0, 1, 3, MtChimney_EventScript_22F14A, 877
 	object_event 26, EVENT_OBJ_GFX_BEAUTY, 0, 14, 7, 3, MOVEMENT_TYPE_JOG_IN_PLACE_LEFT, 0, 0, 1, 6, MtChimney_EventScript_22F1AC, 877
 	object_event 27, EVENT_OBJ_GFX_BEAUTY, 0, 29, 7, 3, MOVEMENT_TYPE_FACE_DOWN_AND_LEFT, 1, 1, 1, 3, MtChimney_EventScript_22F1C3, 877
 	object_event 28, EVENT_OBJ_GFX_BEAUTY, 0, 27, 17, 3, MOVEMENT_TYPE_FACE_UP_AND_RIGHT, 1, 1, 1, 3, MtChimney_EventScript_22F1DA, 877

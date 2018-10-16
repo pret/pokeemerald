@@ -248,12 +248,9 @@ gUnknown_020375D6: @ 20375D6
 	.include "src/palette.o"
     .include "src/sound.o"
     .include "src/battle_anim.o"
-
-.align 2
-
-gUnknown_02038444: @ 2038444
-	.space 0x10
-
+    .include "src/battle_anim_80A5C6C.o"
+	
+	.space 0xC
 gUnknown_02038454: @ 2038454
 	.space 0x200
 
@@ -383,10 +380,10 @@ gUnknown_02039F5C: @ 2039F5C
 gUnknown_02039F5D: @ 2039F5D
 	.space 0x3
 
-gUnknown_02039F60: @ 2039F60
+gMartInfo: @ 2039F60
 	.space 0x10
 
-gUnknown_02039F70: @ 2039F70
+gShopDataPtr: @ 2039F70
 	.space 0x4
 
 gUnknown_02039F74: @ 2039F74

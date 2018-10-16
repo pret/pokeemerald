@@ -6,7 +6,6 @@
 #include "fieldmap.h"
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
-#include "metatile_behaviors.h"
 #include "overworld.h"
 #include "rotating_gate.h"
 #include "sprite.h"
@@ -286,7 +285,7 @@ void MovementType_Player(struct Sprite *sprite)
 	UpdateEventObjectCurrentMovement(&gEventObjects[sprite->data[0]], sprite, EventObjectCB2_NoMovement2);
 }
 
-static u8 EventObjectCB2_NoMovement2()
+static u8 EventObjectCB2_NoMovement2(void)
 {
 	return 0;
 }
@@ -376,7 +375,7 @@ static void PlayerAllowForcedMovementIfMovingSameDirection(void)
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_5;
 }
 
-static bool8 TryDoMetatileBehaviorForcedMovement()
+static bool8 TryDoMetatileBehaviorForcedMovement(void)
 {
 	return gUnknown_08497444[GetForcedMovementByMetatileBehavior()]();
 }
