@@ -1,7 +1,7 @@
 LittlerootTown_BrendansHouse_1F_EventObjects: @ 852D08C
 	object_event 1, EVENT_OBJ_GFX_MOM, 0, 2, 6, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LittlerootTown_BrendansHouse_1F_EventScript_2929C5, 758
-	object_event 2, EVENT_OBJ_GFX_VIGAROTH_CARRYING_BOX, 0, 1, 3, 3, MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT, 3, 0, 0, 0, LittlerootTown_BrendansHouse_1F_EventScript_292ACD, 755
-	object_event 3, EVENT_OBJ_GFX_VIGAROTH_FACING_AWAY, 0, 4, 5, 3, MOVEMENT_TYPE_WALK_IN_PLACE_UP, 0, 0, 0, 0, LittlerootTown_BrendansHouse_1F_EventScript_292ABA, 754
+	object_event 2, EVENT_OBJ_GFX_VIGOROTH_CARRYING_BOX, 0, 1, 3, 3, MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT, 3, 0, 0, 0, LittlerootTown_BrendansHouse_1F_EventScript_292ACD, 755
+	object_event 3, EVENT_OBJ_GFX_VIGOROTH_FACING_AWAY, 0, 4, 5, 3, MOVEMENT_TYPE_WALK_IN_PLACE_UP, 0, 0, 0, 0, LittlerootTown_BrendansHouse_1F_EventScript_292ABA, 754
 	object_event 4, EVENT_OBJ_GFX_WOMAN_4, 0, 2, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LittlerootTown_BrendansHouse_1F_EventScript_1F89F3, 784
 	object_event 5, EVENT_OBJ_GFX_NORMAN, 0, 5, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, 0x0, 734
 	object_event 6, EVENT_OBJ_GFX_NINJA_BOY, 0, 1, 5, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 1, 0, 0, LittlerootTown_BrendansHouse_1F_EventScript_1F8A3D, 735
