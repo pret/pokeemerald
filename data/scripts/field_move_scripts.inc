@@ -223,7 +223,7 @@ FieryPath_Text_290A16: @ 8290A16
 	.string "STRENGTH made it possible to move\n"
 	.string "boulders around.$"
 
-EventScript_290A49:: @ 8290A49
+EventScript_UseWaterfall:: @ 8290A49
 	lockall
 	checkpartymove MOVE_WATERFALL
 	compare VAR_RESULT, 6
@@ -237,7 +237,7 @@ EventScript_290A49:: @ 8290A49
 	dofieldeffect 43
 	goto EventScript_290A8C
 
-EventScript_290A83:: @ 8290A83
+EventScript_CannotUseWaterfall:: @ 8290A83
 	lockall
 
 EventScript_290A84:: @ 8290A84
@@ -258,7 +258,7 @@ Text_290AC3: @ 8290AC3
 Text_290AFC: @ 8290AFC
 	.string "{STR_VAR_1} used WATERFALL.$"
 
-EventScript_290B0F:: @ 8290B0F
+EventScript_UseDive:: @ 8290B0F
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, 6
@@ -283,7 +283,7 @@ EventScript_290B58:: @ 8290B58
 	releaseall
 	end
 
-EventScript_290B5A:: @ 8290B5A
+EventScript_UseDiveUnderwater:: @ 8290B5A
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, 6

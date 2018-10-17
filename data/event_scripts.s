@@ -431,7 +431,7 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/SecretBase_YellowCave3/scripts.inc"
 	.include "data/maps/SecretBase_YellowCave4/scripts.inc"
 
-gUnknown_0823B4BB:: @ 823B4BB
+EventScript_SecretBasePC:: @ 823B4BB
 	lockall
 	playse 2
 	message Text_276805
@@ -492,7 +492,7 @@ EventScript_23B585:: @ 823B585
 	special sub_80E9C88
 	end
 
-gUnknown_0823B589:: @ 823B589
+EventScript_RecordMixingSecretBasePC:: @ 823B589
 	lockall
 	message Text_276805
 	playse 2
@@ -581,13 +581,13 @@ EventScript_23B680:: @ 823B680
 	special sub_80EBB28
 	end
 
-gUnknown_0823B684:: @ 823B684
+EventScript_SecretBaseSandOrnament:: @ 823B684
 	special sub_80EBE7C
 	dofieldeffect 52
 	waitstate
 	end
 
-gUnknown_0823B68C:: @ 823B68C
+EventScript_SecretBaseShieldOrToyTV:: @ 823B68C
 	special sub_80FAC78
 	compare VAR_RESULT, 0
 	goto_eq EventScript_23B6BC
@@ -1685,7 +1685,7 @@ EventScript_271CA1:: @ 8271CA1
 	setvar VAR_RESULT, 0
 	return
 
-EventScript_271CB7:: @ 8271CB7
+EventScript_HiddenItemScript:: @ 8271CB7
 	lockall
 	waitse
 	giveitem VAR_0x8005, 1
@@ -1761,7 +1761,7 @@ EventScript_271D89:: @ 8271D89
 	release
 	end
 
-EventScript_271D92:: @ 8271D92
+EventScript_PC:: @ 8271D92
 	lockall
 	setvar VAR_0x8004, 0
 	special DoPCTurnOnEffect
@@ -1902,7 +1902,7 @@ Route109_EventScript_271E95:: @ 8271E95
 	setvar VAR_0x4096, 0
 	return
 
-EventScript_271EA0:: @ 8271EA0
+EventScript_UseSurf:: @ 8271EA0
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, 6
 	goto_eq EventScript_271ED6
@@ -2201,7 +2201,7 @@ SSTidalRooms_EventScript_272083:: @ 8272083
 	fadescreen 0
 	return
 
-EventScript_27208F:: @ 827208F
+EventScript_RegionMap:: @ 827208F
 	lockall
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8820, 4
 	fadescreen 1
@@ -3074,31 +3074,31 @@ Movement_2725CB:: @ 82725CB
 	walk_up
 	step_end
 
-EventScript_2725CE:: @ 82725CE
+EventScript_PictureBookShelf:: @ 82725CE
 	msgbox Text_2A81E5, 3
 	end
 
-EventScript_2725D7:: @ 82725D7
+EventScript_BookShelf:: @ 82725D7
 	msgbox Text_2A820D, 3
 	end
 
-EventScript_2725E0:: @ 82725E0
+EventScript_PokemonCenterBookshelf:: @ 82725E0
 	msgbox Text_2A8232, 3
 	end
 
-EventScript_2725E9:: @ 82725E9
+EventScript_Vase:: @ 82725E9
 	msgbox Text_2A8276, 3
 	end
 
-EventScript_2725F2:: @ 82725F2
+EventScript_TrashCan:: @ 82725F2
 	msgbox Text_2A82B3, 3
 	end
 
-EventScript_2725FB:: @ 82725FB
+EventScript_ShopShelf:: @ 82725FB
 	msgbox Text_2A82BF, 3
 	end
 
-EventScript_272604:: @ 8272604
+EventScript_Blueprint:: @ 8272604
 	msgbox Text_2A82F7, 3
 	end
 
@@ -3322,7 +3322,7 @@ EventScript_2736B3:: @ 82736B3
 	msgbox gUnknown_08272C98, 3
 	end
 
-EventScript_2736BC:: @ 82736BC
+EventScript_Poison:: @ 82736BC
 	lockall
 	special sub_80F972C
 	waitstate
@@ -3565,7 +3565,7 @@ RustboroCity_DevonCorp_2F_EventScript_273811:: @ 8273811
 	release
 	end
 
-EventScript_27381B:: @ 827381B
+EventScript_Questionnaire:: @ 827381B
 	lockall
 	msgbox gUnknown_0827339F, 5
 	compare VAR_RESULT, 0
@@ -5859,7 +5859,7 @@ EventScript_2926F8:: @ 82926F8
 
 	.include "data/scripts/players_house.inc"
 
-EventScript_292DE5:: @ 8292DE5
+EventScript_RunningShoesManual:: @ 8292DE5
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F66, 3
 	end
 
@@ -6010,7 +6010,7 @@ MirageTower_3F_MapScript2_2A8327: @ 82A8327
 MtPyre_2F_MapScript2_2A8327: @ 82A8327
 SkyPillar_2F_MapScript2_2A8327: @ 82A8327
 SkyPillar_4F_MapScript2_2A8327: @ 82A8327
-	map_script_2 VAR_ICE_STEP_COUNT, 0, gUnknown_082A8337
+	map_script_2 VAR_ICE_STEP_COUNT, 0, EventScript_FallDownHole
 	.2byte 0
 
 GraniteCave_B1F_MapScript1_2A8331: @ 82A8331
@@ -6020,7 +6020,7 @@ MtPyre_2F_MapScript1_2A8331: @ 82A8331
 	copyvar VAR_ICE_STEP_COUNT, 0x1
 	end
 
-gUnknown_082A8337:: @ 82A8337
+EventScript_FallDownHole:: @ 82A8337
 	lockall
 	delay 20
 	applymovement 255, GraniteCave_B1F_Movement_2A8369
@@ -11691,7 +11691,7 @@ TrainerHill_Roof_MapScript2_2C8381: @ 82C8381
 	map_script_2 VAR_TEMP_1, 1, TrainerHill_1F_EventScript_2C83DF
 	.2byte 0
 
-TrainerHill_1F_EventScript_2C8393:: @ 82C8393
+EventScript_TrainerHillTimer:: @ 82C8393
 	lockall
 	setvar VAR_0x8004, 7
 	special sp194_trainer_tower

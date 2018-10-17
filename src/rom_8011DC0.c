@@ -1646,7 +1646,7 @@ void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
     VarSet(VAR_0x4087, arg4);
     gFieldLinkPlayerCount = GetLinkPlayerCount();
     gUnknown_03005DB4 = GetMultiplayerId();
-    sub_809D2BC();
+    SetCableClubWarp();
     Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
     WarpIntoMap();
 }

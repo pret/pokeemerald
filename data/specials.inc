@@ -9,7 +9,7 @@
 		.align 2
 gSpecials:: @ 81DBA64
 	def_special HealPlayerParty
-	def_special sub_809D2BC
+	def_special SetCableClubWarp
 	def_special sub_80AF948
 	def_special sub_80AF9F8
 	def_special sub_80B36EC
