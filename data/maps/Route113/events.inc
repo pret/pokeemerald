@@ -48,8 +48,8 @@ Route113_MapBGEvents: @ 8529DF4
 	bg_event 58, 4, 3, BG_EVENT_PLAYER_FACING_ANY, Route113_EventScript_1F21B7
 	bg_event 31, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route113_EventScript_1F21AE
 	bg_secret_base_event 49, 8, 3, SECRET_BASE_RED_CAVE1_3
-	bg_hidden_item_event 66, 3, 3, ITEM_ETHER, FLAG_0x003
-	bg_hidden_item_event 22, 5, 3, ITEM_TM32, FLAG_0x01E
+	bg_hidden_item_event 66, 3, 3, ITEM_ETHER, FLAG_TEMP_3
+	bg_hidden_item_event 22, 5, 3, ITEM_TM32, FLAG_TEMP_1E
 	bg_hidden_item_event 73, 3, 3, ITEM_NUGGET, FLAG_0x062
 
 Route113_MapEvents:: @ 8529E54

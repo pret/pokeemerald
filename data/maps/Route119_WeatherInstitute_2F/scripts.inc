@@ -146,7 +146,7 @@ Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_270160
 	compare VAR_0x8004, 2
 	goto_eq Route119_WeatherInstitute_2F_EventScript_270166
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, Route119_WeatherInstitute_2F_EventScript_270159
 	specialvar VAR_RESULT, sub_813B374
 	compare VAR_RESULT, 1
@@ -162,7 +162,7 @@ Route119_WeatherInstitute_2F_EventScript_27014F:: @ 827014F
 
 Route119_WeatherInstitute_2F_EventScript_270159:: @ 8270159
 	special sub_813B2E4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	return
 
 Route119_WeatherInstitute_2F_EventScript_270160:: @ 8270160

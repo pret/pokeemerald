@@ -220,7 +220,7 @@ Route111_EventScript_28CF56:: @ 828CF56
 	call_if 1, Route111_EventScript_28CF9F
 	compare VAR_FACING, 4
 	call_if 1, Route111_EventScript_28CFB1
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq Route111_EventScript_28D0EE
 	msgbox Route111_Text_28B042, 5
 	goto Route111_EventScript_28D0A7
@@ -254,7 +254,7 @@ Route120_EventScript_28CFC3:: @ 828CFC3
 	call_if 1, Route111_EventScript_28CF9F
 	compare VAR_FACING, 4
 	call_if 1, Route111_EventScript_28CFB1
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq Route111_EventScript_28D0EE
 	specialvar VAR_RESULT, GabbyAndTyGetLastQuote
 	compare VAR_RESULT, 0
@@ -323,13 +323,13 @@ Route111_EventScript_28D0A7:: @ 828D0A7
 	goto_eq Route111_EventScript_28D0E1
 	msgbox Route111_Text_28B4AB, 4
 	special GabbyAndTyAfterInterview
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	release
 	end
 
 Route111_EventScript_28D0E1:: @ 828D0E1
 	msgbox Route111_Text_28B577, 4
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	release
 	end
 

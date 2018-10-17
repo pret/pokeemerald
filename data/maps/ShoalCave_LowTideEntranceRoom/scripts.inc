@@ -43,7 +43,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_272054
 	msgbox ShoalCave_LowTideEntranceRoom_Text_2A8012, 4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 

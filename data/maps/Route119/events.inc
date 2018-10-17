@@ -83,8 +83,8 @@ Route119_MapBGEvents: @ 852B2F4
 	bg_secret_base_event 31, 73, 3, SECRET_BASE_SHRUB4_1
 	bg_secret_base_event 16, 81, 0, SECRET_BASE_BLUE_CAVE3_3
 	bg_secret_base_event 16, 28, 0, SECRET_BASE_BLUE_CAVE4_3
-	bg_hidden_item_event 17, 82, 3, ITEM_CALCIUM, FLAG_0x005
-	bg_hidden_item_event 38, 63, 3, ITEM_ULTRA_BALL, FLAG_0x006
+	bg_hidden_item_event 17, 82, 3, ITEM_CALCIUM, FLAG_TEMP_5
+	bg_hidden_item_event 38, 63, 3, ITEM_ULTRA_BALL, FLAG_TEMP_6
 	bg_secret_base_event 26, 81, 0, SECRET_BASE_RED_CAVE3_3
 	bg_secret_base_event 19, 76, 0, SECRET_BASE_TREE2_3
 	bg_secret_base_event 18, 76, 0, SECRET_BASE_TREE4_3

@@ -5680,7 +5680,7 @@ SlateportCity_PokemonFanClub_EventScript_28CA4F:: @ 828CA4F
 LilycoveCity_ContestLobby_EventScript_28CA59:: @ 828CA59
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CB21
 	setvar VAR_0x8005, 6
 	special InterviewBefore
@@ -5726,7 +5726,7 @@ LilycoveCity_ContestLobby_EventScript_28CADA:: @ 828CADA
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	msgbox LilycoveCity_ContestLobby_Text_27F0EC, 4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	setvar VAR_0x8005, 6
 	goto LilycoveCity_ContestLobby_EventScript_28C7E9
 	end
@@ -5762,7 +5762,7 @@ LilycoveCity_ContestLobby_EventScript_28CB95:: @ 828CB95
 BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
 	setvar VAR_0x8005, 7
 	special InterviewBefore
@@ -5814,7 +5814,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC4A:: @ 828CC4A
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F9FD, 4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	copyvar VAR_0x8004, VAR_0x8008
 	setvar VAR_0x8005, 7
 	goto BattleFrontier_BattleTowerLobby_EventScript_28C7E9

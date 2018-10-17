@@ -56,7 +56,7 @@ SouthernIsland_Interior_EventScript_242AC4:: @ 8242AC4
 	end
 
 SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq SouthernIsland_Interior_EventScript_242B9A
 	checkflag FLAG_0x1C8
 	goto_eq SouthernIsland_Interior_EventScript_242B9A
@@ -65,7 +65,7 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	checkflag FLAG_SYS_HAS_EON_TICKET
 	goto_if 0, SouthernIsland_Interior_EventScript_242B9A
 	setflag FLAG_0x0CE
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	special SpawnScriptEventObject
 	applymovement 127, SouthernIsland_Interior_Movement_242BCA
 	waitmovement 0

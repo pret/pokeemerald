@@ -9,7 +9,7 @@ Route110_TrickHouseEnd_MapCoordEvents: @ 853DF24
 	coord_event 2, 2, 3, VAR_TEMP_2, 0, Route110_TrickHouseEnd_EventScript_26B041
 
 Route110_TrickHouseEnd_MapBGEvents: @ 853DF34
-	bg_hidden_item_event 4, 5, 3, ITEM_NUGGET, FLAG_0x001
+	bg_hidden_item_event 4, 5, 3, ITEM_NUGGET, FLAG_TEMP_1
 
 Route110_TrickHouseEnd_MapEvents:: @ 853DF40
 	map_events Route110_TrickHouseEnd_EventObjects, Route110_TrickHouseEnd_MapWarps, Route110_TrickHouseEnd_MapCoordEvents, Route110_TrickHouseEnd_MapBGEvents

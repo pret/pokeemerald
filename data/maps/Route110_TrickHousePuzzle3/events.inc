@@ -4,8 +4,8 @@ Route110_TrickHousePuzzle3_EventObjects: @ 853E218
 	object_event 3, EVENT_OBJ_GFX_HIKER, 0, 10, 10, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 1, Route110_TrickHousePuzzle3_EventScript_26C5F2, 0
 	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 1, 2, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_291442, FLAG_0x428
 	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 2, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_291435, FLAG_0x427
-	object_event 6, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 1, 20, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route110_TrickHousePuzzle3_EventScript_2907A6, FLAG_0x015
-	object_event 7, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 2, 21, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route110_TrickHousePuzzle3_EventScript_2907A6, FLAG_0x016
+	object_event 6, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 1, 20, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route110_TrickHousePuzzle3_EventScript_2907A6, FLAG_TEMP_15
+	object_event 7, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 2, 21, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route110_TrickHousePuzzle3_EventScript_2907A6, FLAG_TEMP_16
 
 Route110_TrickHousePuzzle3_MapWarps: @ 853E2C0
 	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE

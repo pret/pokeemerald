@@ -55,12 +55,12 @@ IslandCave_EventScript_238EAF:: @ 8238EAF
 
 IslandCave_EventScript_238EEF:: @ 8238EEF
 	lockall
-	checkflag FLAG_0x003
+	checkflag FLAG_TEMP_3
 	call_if 1, IslandCave_EventScript_238F45
 	checkflag FLAG_SYS_BRAILLE_WAIT
 	goto_eq IslandCave_EventScript_238F13
 	braillemessage IslandCave_Braille_2A6CD4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	special ShouldDoBrailleRegicePuzzle
 	goto IslandCave_EventScript_238F41
 	end
@@ -72,12 +72,12 @@ IslandCave_EventScript_238F13:: @ 8238F13
 
 IslandCave_EventScript_238F1D:: @ 8238F1D
 	lockall
-	checkflag FLAG_0x003
+	checkflag FLAG_TEMP_3
 	call_if 1, IslandCave_EventScript_238F45
 	braillemessage IslandCave_Braille_2A6CD4
 	checkflag FLAG_SYS_BRAILLE_WAIT
 	goto_eq IslandCave_EventScript_238F41
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	special ShouldDoBrailleRegicePuzzle
 	goto IslandCave_EventScript_238F41
 	end
@@ -92,7 +92,7 @@ IslandCave_EventScript_238F45:: @ 8238F45
 	setvar VAR_0x403B, 0
 	setvar VAR_0x403C, 0
 	setvar VAR_0x403D, 0
-	clearflag FLAG_0x003
+	clearflag FLAG_TEMP_3
 	return
 
 IslandCave_EventScript_238F58:: @ 8238F58

@@ -220,7 +220,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249251:: @ 8249251
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249283:: @ 8249283
 	closemessage
-	clearflag FLAG_0x002
+	clearflag FLAG_TEMP_2
 	applymovement 5, BattleFrontier_BattleTowerBattleRoom2_Movement_249526
 	applymovement 6, BattleFrontier_BattleTowerBattleRoom2_Movement_249526
 	waitmovement 0
@@ -349,7 +349,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249412:: @ 8249412
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249417:: @ 8249417
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249457
 	multichoice 19, 6, 105, 1
 	switch VAR_RESULT
@@ -387,7 +387,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2494A8:: @ 82494A8
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8B4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	end
 

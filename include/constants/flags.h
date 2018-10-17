@@ -1,38 +1,45 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
-#define FLAG_0x001               0x1
-#define FLAG_0x002               0x2
-#define FLAG_0x003               0x3
-#define FLAG_0x004               0x4
-#define FLAG_0x005               0x5
-#define FLAG_0x006               0x6
-#define FLAG_0x007               0x7
-#define FLAG_0x008               0x8
-#define FLAG_0x009               0x9
-#define FLAG_0x00A               0xA
-#define FLAG_0x00B               0xB
-#define FLAG_0x00C               0xC
-#define FLAG_0x00D               0xD
-#define FLAG_0x00E               0xE
-#define FLAG_0x00F               0xF
-#define FLAG_0x010               0x10
-#define FLAG_0x011               0x11
-#define FLAG_0x012               0x12
-#define FLAG_0x013               0x13
-#define FLAG_0x014               0x14
-#define FLAG_0x015               0x15
-#define FLAG_0x016               0x16
-#define FLAG_0x017               0x17
-#define FLAG_0x018               0x18
-#define FLAG_0x019               0x19
-#define FLAG_0x01A               0x1A
-#define FLAG_0x01B               0x1B
-#define FLAG_0x01C               0x1C
-#define FLAG_0x01D               0x1D
-#define FLAG_0x01E               0x1E
-#define FLAG_0x01F               0x1F
-#define FLAG_0x020               0x20
+// temporary flags
+// These temporary flags are are cleared every time a map is loaded. They are used
+// for things like shortening an NPCs introduction text if the player already spoke
+// to them once.
+#define FLAG_TEMP_1   0x1
+#define FLAG_TEMP_2   0x2
+#define FLAG_TEMP_3   0x3
+#define FLAG_TEMP_4   0x4
+#define FLAG_TEMP_5   0x5
+#define FLAG_TEMP_6   0x6
+#define FLAG_TEMP_7   0x7
+#define FLAG_TEMP_8   0x8
+#define FLAG_TEMP_9   0x9
+#define FLAG_TEMP_A   0xA
+#define FLAG_TEMP_B   0xB
+#define FLAG_TEMP_C   0xC
+#define FLAG_TEMP_D   0xD
+#define FLAG_TEMP_E   0xE
+#define FLAG_TEMP_F   0xF
+#define FLAG_TEMP_10  0x10
+#define FLAG_TEMP_11  0x11
+#define FLAG_TEMP_12  0x12
+#define FLAG_TEMP_13  0x13
+#define FLAG_TEMP_14  0x14
+#define FLAG_TEMP_15  0x15
+#define FLAG_TEMP_16  0x16
+#define FLAG_TEMP_17  0x17
+#define FLAG_TEMP_18  0x18
+#define FLAG_TEMP_19  0x19
+#define FLAG_TEMP_1A  0x1A
+#define FLAG_TEMP_1B  0x1B
+#define FLAG_TEMP_1C  0x1C
+#define FLAG_TEMP_1D  0x1D
+#define FLAG_TEMP_1E  0x1E
+#define FLAG_TEMP_1F  0x1F
+#define FLAG_TEMP_20  0x20
+
+
+
 #define FLAG_0x021               0x21
 #define FLAG_0x022               0x22
 #define FLAG_0x023               0x23
@@ -502,7 +509,7 @@
 #define FLAG_0x1F2               0x1F2
 #define FLAG_0x1F3               0x1F3
 #define FLAG_0x1F4               0x1F4
-#define FLAG_0x1F5               0x1F5
+#define FLAG_0x1F5               0x1F5 // trick house end room?
 #define FLAG_0x1F6               0x1F6
 #define FLAG_0x1F7               0x1F7
 #define FLAG_0x1F8               0x1F8

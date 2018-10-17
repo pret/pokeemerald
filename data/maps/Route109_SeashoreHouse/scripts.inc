@@ -13,10 +13,10 @@ Route109_SeashoreHouse_EventScript_2693FE:: @ 82693FE
 	goto_eq Route109_SeashoreHouse_EventScript_269460
 	checkflag FLAG_0x08D
 	goto_eq Route109_SeashoreHouse_EventScript_269432
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq Route109_SeashoreHouse_EventScript_269428
 	msgbox Route109_SeashoreHouse_Text_269555, 4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 

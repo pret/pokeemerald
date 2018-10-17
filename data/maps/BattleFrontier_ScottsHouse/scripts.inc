@@ -4,11 +4,11 @@ BattleFrontier_ScottsHouse_MapScripts:: @ 82636A7
 BattleFrontier_ScottsHouse_EventScript_2636A8:: @ 82636A8
 	lock
 	faceplayer
-	checkflag FLAG_0x004
+	checkflag FLAG_TEMP_4
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2637DA
-	checkflag FLAG_0x003
+	checkflag FLAG_TEMP_3
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2638AA
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq BattleFrontier_ScottsHouse_EventScript_263939
 	goto BattleFrontier_ScottsHouse_EventScript_2636CB
 	end
@@ -51,7 +51,7 @@ BattleFrontier_ScottsHouse_EventScript_263704:: @ 8263704
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2637D0
 	setflag FLAG_0x05C
-	setflag FLAG_0x004
+	setflag FLAG_TEMP_4
 	release
 	end
 
@@ -75,7 +75,7 @@ BattleFrontier_ScottsHouse_EventScript_26376A:: @ 826376A
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2637D0
 	setflag FLAG_0x1D2
-	setflag FLAG_0x004
+	setflag FLAG_TEMP_4
 	release
 	end
 
@@ -138,7 +138,7 @@ BattleFrontier_ScottsHouse_EventScript_26387A:: @ 826387A
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2638A0
 	setflag FLAG_0x0ED
-	setflag FLAG_0x003
+	setflag FLAG_TEMP_3
 	goto BattleFrontier_ScottsHouse_EventScript_2638AA
 	end
 
@@ -181,7 +181,7 @@ BattleFrontier_ScottsHouse_EventScript_263913:: @ 8263913
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2638A0
 	setflag FLAG_0x0EE
-	setflag FLAG_0x003
+	setflag FLAG_TEMP_3
 	goto BattleFrontier_ScottsHouse_EventScript_2638AA
 	end
 
@@ -244,7 +244,7 @@ BattleFrontier_ScottsHouse_EventScript_2639F8:: @ 82639F8
 	msgbox BattleFrontier_ScottsHouse_Text_263CB0, 9
 	msgbox BattleFrontier_ScottsHouse_Text_263CD0, 4
 	setflag FLAG_0x1D1
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 
