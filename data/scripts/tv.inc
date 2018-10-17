@@ -1,4 +1,4 @@
-EventScript_27EE0B:: @ 827EE0B
+EventScript_TV:: @ 827EE0B
 	lockall
 	incrementgamestat 44
 	special ResetTVShowState

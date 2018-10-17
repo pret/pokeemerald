@@ -5,7 +5,7 @@
 
 #define RAM_SCRIPT_MAGIC 51
 
-extern u8* gUnknown_020375C0;
+extern const u8* gUnknown_020375C0;
 
 extern bool32 sub_801B27C(void);
 
@@ -344,7 +344,7 @@ void ClearRamScript(void)
     CpuFill32(0, &gSaveBlock1Ptr->ramScript, sizeof(struct RamScript));
 }
 
-bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId)
+bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
 
@@ -362,7 +362,7 @@ bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objec
     return TRUE;
 }
 
-u8 *GetRamScript(u8 objectId, u8 *script)
+const u8 *GetRamScript(u8 objectId, const u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     gUnknown_020375C0 = NULL;

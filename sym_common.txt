@@ -26,9 +26,7 @@ gBGTilemapBuffers3: @ 3005DA4
     .include "overworld.o"
     .include "fieldmap.o"
     .include "field_camera.o"
-
-gSelectedEventObject: @ 3005DF0
-	.space 0x4
+    .include "field_control_avatar.o"
 
 gMenuCallback: @ 3005DF4
 	.space 0x4

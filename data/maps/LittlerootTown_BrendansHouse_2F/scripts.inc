@@ -245,7 +245,7 @@ LittlerootTown_BrendansHouse_2F_Movement_1F8609: @ 81F8609
 	walk_in_place_fastest_left
 	step_end
 
-gUnknown_081F860D:: @ 81F860D
+EventScript_PlayerPCMale:: @ 81F860D
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0

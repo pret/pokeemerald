@@ -927,7 +927,7 @@ SootopolisCity_EventScript_1E6154:: @ 81E6154
 	msgbox SootopolisCity_Text_1E65C8, 3
 	end
 
-SootopolisCity_EventScript_1E615D:: @ 81E615D
+EventScript_ClosedSootopolisDoor:: @ 81E615D
 	msgbox SootopolisCity_Text_1E6604, 3
 	end
 
