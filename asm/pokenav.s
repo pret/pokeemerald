@@ -30184,7 +30184,7 @@ _081D6670:
 	asrs r0, 1
 	lsls r0, 1
 	subs r4, r0
-	ldr r0, =0x00000864
+	ldr r0, =0x00000864 @ = FLAG_SYS_GAME_CLEAR
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0

@@ -97,7 +97,7 @@ _081D9EB4:
 	ldrb r1, [r1]
 	adds r0, 0x2C
 	strb r1, [r0]
-	ldr r0, =0x00000864
+	ldr r0, =0x00000864 @ = FLAG_SYS_GAME_CLEAR
 	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
