@@ -1,7 +1,7 @@
 LilycoveCity_DepartmentStoreRooftop_EventObjects: @ 853241C
 	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 4, 4, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_220268, 0
 	object_event 2, EVENT_OBJ_GFX_MAN_3, 0, 7, 5, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_22028C, 0
-	object_event 3, EVENT_OBJ_GFX_ROOFTOP_SALE_WOMAN, 0, 6, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_22022F, 962
+	object_event 3, EVENT_OBJ_GFX_ROOFTOP_SALE_WOMAN, 0, 6, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_22022F, FLAG_0x3C2
 	object_event 4, EVENT_OBJ_GFX_WOMAN_3, 0, 15, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 0, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_2C8186, 0
 
 LilycoveCity_DepartmentStoreRooftop_MapWarps: @ 853247C

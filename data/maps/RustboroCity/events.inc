@@ -7,13 +7,13 @@ RustboroCity_EventObjects: @ 85267E0
 	object_event 6, EVENT_OBJ_GFX_MAN_3, 0, 26, 23, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_EventScript_1E0893, 0
 	object_event 7, EVENT_OBJ_GFX_LITTLE_BOY, 0, 24, 51, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, RustboroCity_EventScript_1E0922, 0
 	object_event 8, EVENT_OBJ_GFX_LITTLE_GIRL, 0, 25, 51, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, RustboroCity_EventScript_1E0938, 0
-	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 30, 10, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, RustboroCity_EventScript_1E0ADD, 732
-	object_event 10, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 13, 21, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, 0x0, 731
+	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 30, 10, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, RustboroCity_EventScript_1E0ADD, FLAG_0x2DC
+	object_event 10, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 13, 21, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, 0x0, FLAG_0x2DB
 	object_event 11, EVENT_OBJ_GFX_DEVON_EMPLOYEE, 0, 13, 34, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, RustboroCity_EventScript_1E087E, 0
-	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 36, 51, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, RustboroCity_EventScript_2910DB, 1041
+	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 36, 51, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, RustboroCity_EventScript_2910DB, FLAG_0x411
 	object_event 13, EVENT_OBJ_GFX_MAN_4, 0, 19, 27, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 1, 0, 0, RustboroCity_EventScript_1E094E, 0
-	object_event 14, EVENT_OBJ_GFX_HIPSTER, 0, 16, 50, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_EventScript_1E0DB8, 814
-	object_event 15, EVENT_OBJ_GFX_SCIENTIST_1, 0, 11, 15, 0, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, 0x0, 844
+	object_event 14, EVENT_OBJ_GFX_HIPSTER, 0, 16, 50, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_EventScript_1E0DB8, FLAG_0x32E
+	object_event 15, EVENT_OBJ_GFX_SCIENTIST_1, 0, 11, 15, 0, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, 0x0, FLAG_0x34C
 	object_event 16, EVENT_OBJ_GFX_BOY_1, 0, 31, 36, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 1, 0, 0, RustboroCity_EventScript_1E1236, 0
 
 RustboroCity_MapWarps: @ 8526960

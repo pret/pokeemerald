@@ -1,5 +1,5 @@
 SkyPillar_Outside_EventObjects: @ 853701C
-	object_event 1, EVENT_OBJ_GFX_WALLACE, 0, 13, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, SkyPillar_Outside_EventScript_2393F8, 855
+	object_event 1, EVENT_OBJ_GFX_WALLACE, 0, 13, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, SkyPillar_Outside_EventScript_2393F8, FLAG_0x357
 
 SkyPillar_Outside_MapWarps: @ 8537034
 	warp_def 17, 13, 3, 1, MAP_SKY_PILLAR_ENTRANCE

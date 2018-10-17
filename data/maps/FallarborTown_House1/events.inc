@@ -1,5 +1,5 @@
 FallarborTown_House1_EventObjects: @ 852E5B8
-	object_event 1, EVENT_OBJ_GFX_SCIENTIST_1, 0, 6, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, FallarborTown_House1_EventScript_200F13, 928
+	object_event 1, EVENT_OBJ_GFX_SCIENTIST_1, 0, 6, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, FallarborTown_House1_EventScript_200F13, FLAG_0x3A0
 	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 5, 6, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, FallarborTown_House1_EventScript_200FBC, 0
 
 FallarborTown_House1_MapWarps: @ 852E5E8

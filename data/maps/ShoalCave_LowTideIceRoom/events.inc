@@ -1,6 +1,6 @@
 ShoalCave_LowTideIceRoom_EventObjects: @ 8537100
-	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 12, 8, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, ShoalCave_LowTideIceRoom_EventScript_2913E7, 1112
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 12, 21, 4, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, ShoalCave_LowTideIceRoom_EventScript_2913F4, 1113
+	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 12, 8, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, ShoalCave_LowTideIceRoom_EventScript_2913E7, FLAG_0x458
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 12, 21, 4, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, ShoalCave_LowTideIceRoom_EventScript_2913F4, FLAG_0x459
 
 ShoalCave_LowTideIceRoom_MapWarps: @ 8537130
 	warp_def 17, 10, 3, 3, MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM

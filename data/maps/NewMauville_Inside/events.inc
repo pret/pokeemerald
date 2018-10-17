@@ -1,12 +1,12 @@
 NewMauville_Inside_EventObjects: @ 85364A8
-	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 32, 25, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, NewMauville_Inside_EventScript_2911EC, 1075
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 16, 22, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, NewMauville_Inside_EventScript_2911F9, 1076
-	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 39, 4, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_291206, 1110
-	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 17, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_291213, 1122
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 2, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_291220, 1123
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 25, 18, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_2377AF, 974
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 6, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_2377FC, 975
-	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 13, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_237849, 976
+	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 32, 25, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, NewMauville_Inside_EventScript_2911EC, FLAG_0x433
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 16, 22, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, NewMauville_Inside_EventScript_2911F9, FLAG_0x434
+	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 39, 4, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_291206, FLAG_0x456
+	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 17, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_291213, FLAG_0x462
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 2, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_291220, FLAG_0x463
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 25, 18, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_2377AF, FLAG_0x3CE
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 6, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_2377FC, FLAG_0x3CF
+	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 13, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, NewMauville_Inside_EventScript_237849, FLAG_0x3D0
 
 NewMauville_Inside_MapWarps: @ 8536568
 	warp_def 32, 33, 3, 1, MAP_NEW_MAUVILLE_ENTRANCE

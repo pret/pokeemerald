@@ -12,9 +12,9 @@ Route117_EventObjects: @ 852A828
 	object_event 11, EVENT_OBJ_GFX_BERRY_TREE, 0, 41, 13, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 29, BerryTreeScript, 0
 	object_event 12, EVENT_OBJ_GFX_BERRY_TREE, 0, 42, 13, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 28, BerryTreeScript, 0
 	object_event 13, EVENT_OBJ_GFX_BERRY_TREE, 0, 43, 13, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 27, BerryTreeScript, 0
-	object_event 14, EVENT_OBJ_GFX_ITEM_BALL, 0, 16, 18, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route117_EventScript_290EB9, 1022
-	object_event 15, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 15, 2, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route117_EventScript_2906BB, 17
-	object_event 16, EVENT_OBJ_GFX_ITEM_BALL, 0, 9, 1, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route117_EventScript_290EC6, 1023
+	object_event 14, EVENT_OBJ_GFX_ITEM_BALL, 0, 16, 18, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route117_EventScript_290EB9, FLAG_0x3FE
+	object_event 15, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 15, 2, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route117_EventScript_2906BB, FLAG_0x011
+	object_event 16, EVENT_OBJ_GFX_ITEM_BALL, 0, 9, 1, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route117_EventScript_290EC6, FLAG_0x3FF
 	object_event 17, EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F, 0, 26, 13, 3, MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN, 2, 2, 1, 5, Route117_EventScript_1F3AF6, 0
 	object_event 18, EVENT_OBJ_GFX_MANIAC, 0, 17, 12, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 1, 4, Route117_EventScript_1F3B58, 0
 	object_event 19, EVENT_OBJ_GFX_LASS, 0, 43, 6, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 1, Route117_EventScript_1F3BD3, 0
@@ -31,7 +31,7 @@ Route117_MapBGEvents: @ 852AA70
 	bg_event 16, 6, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39B5
 	bg_event 49, 12, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39BE
 	bg_event 49, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39C7
-	bg_hidden_item_event 3, 18, 3, ITEM_REPEL, 72
+	bg_hidden_item_event 3, 18, 3, ITEM_REPEL, FLAG_0x048
 
 Route117_MapEvents:: @ 852AAA0
 	map_events Route117_EventObjects, Route117_MapWarps, 0x0, Route117_MapBGEvents

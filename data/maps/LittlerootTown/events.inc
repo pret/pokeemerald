@@ -1,12 +1,12 @@
 LittlerootTown_EventObjects: @ 85276A8
 	object_event 1, EVENT_OBJ_GFX_TWIN, 0, 16, 10, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 2, 0, 0, LittlerootTown_EventScript_1E8034, 0
-	object_event 2, EVENT_OBJ_GFX_FAT_MAN, 0, 12, 13, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 1, 0, 0, LittlerootTown_EventScript_1E8022, 868
+	object_event 2, EVENT_OBJ_GFX_FAT_MAN, 0, 12, 13, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 1, 0, 0, LittlerootTown_EventScript_1E8022, FLAG_0x364
 	object_event 3, EVENT_OBJ_GFX_BOY_2, 0, 14, 17, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 1, 0, 0, LittlerootTown_EventScript_1E802B, 0
-	object_event 4, EVENT_OBJ_GFX_MOM, 0, 5, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LittlerootTown_EventScript_1E863D, 752
-	object_event 5, EVENT_OBJ_GFX_TRUCK, 0, 2, 10, 4, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, 0x0, 761
-	object_event 6, EVENT_OBJ_GFX_TRUCK, 0, 11, 10, 4, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, 0x0, 762
-	object_event 7, EVENT_OBJ_GFX_HIPSTER, 0, 13, 10, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, 794
-	object_event 8, EVENT_OBJ_GFX_PROF_BIRCH, 0, 14, 10, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, 795
+	object_event 4, EVENT_OBJ_GFX_MOM, 0, 5, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, LittlerootTown_EventScript_1E863D, FLAG_0x2F0
+	object_event 5, EVENT_OBJ_GFX_TRUCK, 0, 2, 10, 4, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, 0x0, FLAG_0x2F9
+	object_event 6, EVENT_OBJ_GFX_TRUCK, 0, 11, 10, 4, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, 0x0, FLAG_0x2FA
+	object_event 7, EVENT_OBJ_GFX_HIPSTER, 0, 13, 10, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, FLAG_0x31A
+	object_event 8, EVENT_OBJ_GFX_PROF_BIRCH, 0, 14, 10, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, FLAG_0x31B
 
 LittlerootTown_MapWarps: @ 8527768
 	warp_def 14, 8, 0, 1, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F

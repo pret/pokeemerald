@@ -1,13 +1,13 @@
 UnionRoom_EventObjects: @ 853B020
 	object_event 1, EVENT_OBJ_GFX_UNION_ROOM_NURSE, 0, 3, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, UnionRoom_EventScript_23D236, 0
-	object_event 2, EVENT_OBJ_GFX_GIDDY, 0, 1, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D204, 706
-	object_event 3, 247, 0, 7, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D22C, 710
-	object_event 4, 246, 0, 1, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D222, 709
-	object_event 5, EVENT_OBJ_GFX_PLACEHOLDER_2, 0, 7, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D218, 708
-	object_event 6, EVENT_OBJ_GFX_PLACEHOLDER_1, 0, 13, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D20E, 707
-	object_event 7, EVENT_OBJ_GFX_STORYTELLER, 0, 10, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D1FA, 705
-	object_event 8, EVENT_OBJ_GFX_TRADER, 0, 13, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D1F0, 704
-	object_event 9, EVENT_OBJ_GFX_HIPSTER, 0, 4, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D1E6, 703
+	object_event 2, EVENT_OBJ_GFX_GIDDY, 0, 1, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D204, FLAG_0x2C2
+	object_event 3, 247, 0, 7, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D22C, FLAG_0x2C6
+	object_event 4, 246, 0, 1, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D222, FLAG_0x2C5
+	object_event 5, EVENT_OBJ_GFX_PLACEHOLDER_2, 0, 7, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D218, FLAG_0x2C4
+	object_event 6, EVENT_OBJ_GFX_PLACEHOLDER_1, 0, 13, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D20E, FLAG_0x2C3
+	object_event 7, EVENT_OBJ_GFX_STORYTELLER, 0, 10, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D1FA, FLAG_0x2C1
+	object_event 8, EVENT_OBJ_GFX_TRADER, 0, 13, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D1F0, FLAG_0x2C0
+	object_event 9, EVENT_OBJ_GFX_HIPSTER, 0, 4, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D1E6, FLAG_0x2BF
 
 UnionRoom_MapWarps: @ 853B0F8
 	warp_def 7, 11, 3, 127, MAP_NONE

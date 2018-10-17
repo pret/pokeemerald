@@ -5,7 +5,7 @@ RustboroCity_PokemonSchool_EventObjects: @ 85305EC
 	object_event 4, EVENT_OBJ_GFX_LASS, 0, 10, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_213F7A, 0
 	object_event 5, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 3, 6, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_213F83, 0
 	object_event 6, EVENT_OBJ_GFX_GENTLEMAN, 0, 5, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, RustboroCity_PokemonSchool_EventScript_213F95, 0
-	object_event 7, EVENT_OBJ_GFX_SCOTT, 0, 0, 10, 0, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, RustboroCity_PokemonSchool_EventScript_214040, 999
+	object_event 7, EVENT_OBJ_GFX_SCOTT, 0, 0, 10, 0, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, RustboroCity_PokemonSchool_EventScript_214040, FLAG_0x3E7
 
 RustboroCity_PokemonSchool_MapWarps: @ 8530694
 	warp_def 5, 10, 0, 4, MAP_RUSTBORO_CITY

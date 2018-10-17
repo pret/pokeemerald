@@ -1,5 +1,5 @@
 GraniteCave_B1F_EventObjects: @ 8534420
-	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 15, 21, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, GraniteCave_B1F_EventScript_29115D, 1051
+	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 15, 21, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, GraniteCave_B1F_EventScript_29115D, FLAG_0x41B
 
 GraniteCave_B1F_MapWarps: @ 8534438
 	warp_def 25, 13, 3, 1, MAP_GRANITE_CAVE_1F

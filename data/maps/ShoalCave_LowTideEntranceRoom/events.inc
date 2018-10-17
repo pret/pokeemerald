@@ -1,5 +1,5 @@
 ShoalCave_LowTideEntranceRoom_EventObjects: @ 853627C
-	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 30, 3, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, ShoalCave_LowTideEntranceRoom_EventScript_2913C0, 1081
+	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 30, 3, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, ShoalCave_LowTideEntranceRoom_EventScript_2913C0, FLAG_0x439
 	object_event 2, EVENT_OBJ_GFX_EXPERT_M, 0, 18, 15, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, ShoalCave_LowTideEntranceRoom_EventScript_236DD9, 0
 
 ShoalCave_LowTideEntranceRoom_MapWarps: @ 85362AC

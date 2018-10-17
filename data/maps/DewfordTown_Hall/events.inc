@@ -7,7 +7,7 @@ DewfordTown_Hall_EventObjects: @ 852DC48
 	object_event 6, EVENT_OBJ_GFX_LITTLE_BOY, 0, 14, 7, 0, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, DewfordTown_Hall_EventScript_1FD57F, 0
 	object_event 7, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 12, 3, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, DewfordTown_Hall_EventScript_1FD62F, 0
 	object_event 8, EVENT_OBJ_GFX_PSYCHIC_M, 0, 15, 3, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, DewfordTown_Hall_EventScript_1FD63B, 0
-	object_event 9, EVENT_OBJ_GFX_MANIAC, 0, 8, 6, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, DewfordTown_Hall_EventScript_1FD7DA, 940
+	object_event 9, EVENT_OBJ_GFX_MANIAC, 0, 8, 6, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, DewfordTown_Hall_EventScript_1FD7DA, FLAG_0x3AC
 
 DewfordTown_Hall_MapWarps: @ 852DD20
 	warp_def 5, 8, 0, 0, MAP_DEWFORD_TOWN

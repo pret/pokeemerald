@@ -1,6 +1,6 @@
 SafariZone_Southwest_EventObjects: @ 853B24C
 	object_event 1, EVENT_OBJ_GFX_WOMAN_2, 0, 22, 9, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, SafariZone_Southwest_EventScript_23D267, 0
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 37, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_Southwest_EventScript_2912D6, 1131
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 37, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_Southwest_EventScript_2912D6, FLAG_0x46B
 
 SafariZone_Southwest_MapWarps: @ 853B27C
 	warp_def 29, 7, 3, 0, MAP_SAFARI_ZONE_REST_HOUSE

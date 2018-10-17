@@ -1,5 +1,5 @@
 NavelRock_Bottom_EventObjects: @ 853DD50
-	object_event 1, EVENT_OBJ_GFX_LUGIA, 0, 11, 13, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, NavelRock_Bottom_EventScript_2692A2, 800
+	object_event 1, EVENT_OBJ_GFX_LUGIA, 0, 11, 13, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, NavelRock_Bottom_EventScript_2692A2, FLAG_0x320
 
 NavelRock_Bottom_MapWarps: @ 853DD68
 	warp_def 14, 19, 0, 0, MAP_NAVEL_ROCK_DOWN11
