@@ -1079,7 +1079,7 @@ static void ClearAllEventObjects(void)
 {
     u8 i;
 
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
         ClearEventObject(&gEventObjects[i]);
 }
 
@@ -1109,7 +1109,7 @@ static void CreateReflectionEffectSprites(void)
 u8 GetFirstInactiveEventObjectId(void)
 {
     u8 i;
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (!gEventObjects[i].active)
             break;
@@ -1130,7 +1130,7 @@ u8 GetEventObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId)
 bool8 TryGetEventObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId, u8 *eventObjectId)
 {
     *eventObjectId = GetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroupId);
-    if (*eventObjectId == NUM_EVENT_OBJECTS)
+    if (*eventObjectId == EVENT_OBJECTS_COUNT)
         return TRUE;
     else
         return FALSE;
@@ -1139,7 +1139,7 @@ bool8 TryGetEventObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId, u
 u8 GetEventObjectIdByXY(s16 x, s16 y)
 {
     u8 i;
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active && gEventObjects[i].currentCoords.x == x && gEventObjects[i].currentCoords.y == y)
             break;
@@ -1151,25 +1151,25 @@ u8 GetEventObjectIdByXY(s16 x, s16 y)
 static u8 GetEventObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapNum, u8 mapGroupId)
 {
     u8 i;
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active && gEventObjects[i].localId == localId && gEventObjects[i].mapNum == mapNum && gEventObjects[i].mapGroup == mapGroupId)
             return i;
     }
 
-    return NUM_EVENT_OBJECTS;
+    return EVENT_OBJECTS_COUNT;
 }
 
 static u8 GetEventObjectIdByLocalId(u8 localId)
 {
     u8 i;
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active && gEventObjects[i].localId == localId)
             return i;
     }
 
-    return NUM_EVENT_OBJECTS;
+    return EVENT_OBJECTS_COUNT;
 }
 
 // This function has the same nonmatching quirk as in Ruby/Sapphire.
@@ -1184,7 +1184,7 @@ static u8 InitEventObjectStateFromTemplate(struct EventObjectTemplate *template,
     // mapNum and mapGroup are in the wrong registers (r7/r6 instead of r6/r7)
     if (GetAvailableEventObjectId(template->localId, mapNum, mapGroup, &eventObjectId))
     {
-        return NUM_EVENT_OBJECTS;
+        return EVENT_OBJECTS_COUNT;
     }
     eventObject = &gEventObjects[eventObjectId];
     ClearEventObject(eventObject);
@@ -1414,7 +1414,7 @@ u8 Unref_TryInitLocalEventObject(u8 localId)
             }
         }
     }
-    return NUM_EVENT_OBJECTS;
+    return EVENT_OBJECTS_COUNT;
 }
 
 static bool8 GetAvailableEventObjectId(u16 localId, u8 mapNum, u8 mapGroup, u8 *eventObjectId)
@@ -1426,14 +1426,14 @@ static bool8 GetAvailableEventObjectId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
 {
     u8 i = 0;
 
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (!gEventObjects[i].active)
             break;
         if (gEventObjects[i].localId == localId && gEventObjects[i].mapNum == mapNum && gEventObjects[i].mapGroup == mapGroup)
             return TRUE;
     }
-    if (i >= NUM_EVENT_OBJECTS)
+    if (i >= EVENT_OBJECTS_COUNT)
         return TRUE;
     *eventObjectId = i;
     do
@@ -1441,7 +1441,7 @@ static bool8 GetAvailableEventObjectId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
         if (gEventObjects[i].active && gEventObjects[i].localId == localId && gEventObjects[i].mapNum == mapNum && gEventObjects[i].mapGroup == mapGroup)
             return TRUE;
         i++;
-    } while (i < NUM_EVENT_OBJECTS);
+    } while (i < EVENT_OBJECTS_COUNT);
     return FALSE;
 }
 
@@ -1473,7 +1473,7 @@ void RemoveAllEventObjectsExceptPlayer(void)
 {
     u8 i;
 
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (i != gPlayerAvatar.eventObjectId)
             RemoveEventObject(&gEventObjects[i]);
@@ -1490,8 +1490,8 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjectTempl
     u8 spriteId;
 
     eventObjectId = InitEventObjectStateFromTemplate(eventObjectTemplate, mapNum, mapGroup);
-    if (eventObjectId == NUM_EVENT_OBJECTS)
-        return NUM_EVENT_OBJECTS;
+    if (eventObjectId == EVENT_OBJECTS_COUNT)
+        return EVENT_OBJECTS_COUNT;
 
     eventObject = &gEventObjects[eventObjectId];
     graphicsInfo = GetEventObjectGraphicsInfo(eventObject->graphicsId);
@@ -1509,7 +1509,7 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjectTempl
         paletteSlot -= 16;
         sub_808EAB0(graphicsInfo->paletteTag1, paletteSlot);
     }
-    if (eventObject->movementType == 0x4c)
+    if (eventObject->movementType == MOVEMENT_TYPE_INVISIBLE)
     {
         eventObject->invisible = TRUE;
     }
@@ -1518,7 +1518,7 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjectTempl
     if (spriteId == MAX_SPRITES)
     {
         gEventObjects[eventObjectId].active = FALSE;
-        return NUM_EVENT_OBJECTS;
+        return EVENT_OBJECTS_COUNT;
     }
     sprite = &gSprites[spriteId];
     sub_8092FF0(eventObject->currentCoords.x + cameraX, eventObject->currentCoords.y + cameraY, &sprite->pos1.x, &sprite->pos1.y);
@@ -1554,9 +1554,9 @@ static u8 TrySpawnEventObject(struct EventObjectTemplate *eventObjectTemplate, u
     spriteFrameImage.size = graphicsInfo->size;
     spriteTemplate.images = &spriteFrameImage;
     eventObjectId = TrySetupEventObjectSprite(eventObjectTemplate, &spriteTemplate, mapNum, mapGroup, cameraX, cameraY);
-    if (eventObjectId == NUM_EVENT_OBJECTS)
+    if (eventObjectId == EVENT_OBJECTS_COUNT)
     {
-        return NUM_EVENT_OBJECTS;
+        return EVENT_OBJECTS_COUNT;
     }
     gSprites[gEventObjects[eventObjectId].spriteId].images = graphicsInfo->images;
     if (subspriteTables != NULL)
@@ -1604,7 +1604,7 @@ u8 show_sprite(u8 localId, u8 mapNum, u8 mapGroup)
     eventObjectTemplate = GetEventObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
     if (eventObjectTemplate == NULL)
     {
-        return NUM_EVENT_OBJECTS;
+        return EVENT_OBJECTS_COUNT;
     }
     GetEventObjectMovingCameraOffset(&cameraX, &cameraY);
     return TrySpawnEventObject(eventObjectTemplate, mapNum, mapGroup, cameraX, cameraY);
@@ -1759,7 +1759,7 @@ void RemoveEventObjectsOutsideView(void)
     bool8 isActiveLinkPlayer;
     struct EventObject *eventObject;
 
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         for (j = 0, isActiveLinkPlayer = FALSE; j < ARRAY_COUNT(gLinkPlayerEventObjects); j++)
         {
@@ -1778,21 +1778,16 @@ void RemoveEventObjectsOutsideView(void)
 
 static void RemoveEventObjectIfOutsideView(struct EventObject *eventObject)
 {
-    s16 left;
-    s16 right;
-    s16 top;
-    s16 bottom;
-
-    left = gSaveBlock1Ptr->pos.x - 2;
-    right = gSaveBlock1Ptr->pos.x + 17;
-    top = gSaveBlock1Ptr->pos.y;
-    bottom = gSaveBlock1Ptr->pos.y + 16;
+    s16 left =   gSaveBlock1Ptr->pos.x - 2;
+    s16 right =  gSaveBlock1Ptr->pos.x + 17;
+    s16 top =    gSaveBlock1Ptr->pos.y;
+    s16 bottom = gSaveBlock1Ptr->pos.y + 16;
 
     if (eventObject->currentCoords.x >= left && eventObject->currentCoords.x <= right
-        && eventObject->currentCoords.y >= top && eventObject->currentCoords.y <= bottom)
+     && eventObject->currentCoords.y >= top && eventObject->currentCoords.y <= bottom)
         return;
     if (eventObject->initialCoords.x >= left && eventObject->initialCoords.x <= right
-        && eventObject->initialCoords.y >= top && eventObject->initialCoords.y <= bottom)
+     && eventObject->initialCoords.y >= top && eventObject->initialCoords.y <= bottom)
         return;
     RemoveEventObject(eventObject);
 }
@@ -1802,7 +1797,7 @@ void sub_808E16C(s16 x, s16 y)
     u8 i;
 
     ClearPlayerAvatarInfo();
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active)
         {
@@ -2060,7 +2055,7 @@ void sub_808E75C(s16 x, s16 y)
     struct EventObject *eventObject;
 
     eventObjectId = GetEventObjectIdByXY(x, y);
-    if (eventObjectId != NUM_EVENT_OBJECTS)
+    if (eventObjectId != EVENT_OBJECTS_COUNT)
     {
         eventObject = &gEventObjects[eventObjectId];
         eventObject->triggerGroundEffectsOnMove = TRUE;
@@ -2283,7 +2278,7 @@ void UpdateEventObjectCoordsForCameraUpdate(void)
     {
         dx = gCamera.x;
         dy = gCamera.y;
-        for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+        for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
         {
             if (gEventObjects[i].active)
             {
@@ -2301,7 +2296,7 @@ void UpdateEventObjectCoordsForCameraUpdate(void)
 u8 GetEventObjectIdByXYZ(u16 x, u16 y, u8 z)
 {
     u8 i;
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active)
         {
@@ -2311,7 +2306,7 @@ u8 GetEventObjectIdByXYZ(u16 x, u16 y, u8 z)
             }
         }
     }
-    return NUM_EVENT_OBJECTS;
+    return EVENT_OBJECTS_COUNT;
 }
 
 static bool8 EventObjectDoesZCoordMatch(struct EventObject *eventObject, u8 z)
@@ -4952,7 +4947,7 @@ static bool8 DoesObjectCollideWithObjectAt(struct EventObject *eventObject, s16 
     u8 i;
     struct EventObject *curObject;
 
-    for (i = 0; i < NUM_EVENT_OBJECTS; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         curObject = &gEventObjects[i];
         if (curObject->active && curObject != eventObject)
@@ -5333,7 +5328,7 @@ void npc_apply_direction(struct EventObject *eventObject, struct Sprite *sprite,
     ShiftEventObjectCoords(eventObject, x, y);
     oamt_npc_ministep_reset(sprite, direction, speed);
     sprite->animPaused = FALSE;
-    if (gLockedAnimEventObjects != NULL && FindLockedEventObjectIndex(eventObject) != NUM_EVENT_OBJECTS)
+    if (gLockedAnimEventObjects != NULL && FindLockedEventObjectIndex(eventObject) != EVENT_OBJECTS_COUNT)
     {
         sprite->animPaused = TRUE;
     }

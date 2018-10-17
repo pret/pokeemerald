@@ -119,22 +119,22 @@ enum LanguageId
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
 // capacities of various saveblock objects
-#define DAYCARE_MON_COUNT   2
-#define POKEBLOCKS_COUNT    40
-#define EVENT_OBJECTS_COUNT   16
+#define DAYCARE_MON_COUNT     2
+#define POKEBLOCKS_COUNT     40
+#define EVENT_OBJECTS_COUNT  16
 #define BERRY_TREES_COUNT   128
 #define FLAGS_COUNT         300
 #define VARS_COUNT          256
-#define MAIL_COUNT          16
-#define SECRET_BASES_COUNT  20
-#define TV_SHOWS_COUNT      25
-#define POKE_NEWS_COUNT     16
-#define PC_ITEMS_COUNT      50
-#define BAG_ITEMS_COUNT     30
-#define BAG_KEYITEMS_COUNT  30
-#define BAG_POKEBALLS_COUNT 16
-#define BAG_TMHM_COUNT      64
-#define BAG_BERRIES_COUNT   46
+#define MAIL_COUNT           16
+#define SECRET_BASES_COUNT   20
+#define TV_SHOWS_COUNT       25
+#define POKE_NEWS_COUNT      16
+#define PC_ITEMS_COUNT       50
+#define BAG_ITEMS_COUNT      30
+#define BAG_KEYITEMS_COUNT   30
+#define BAG_POKEBALLS_COUNT  16
+#define BAG_TMHM_COUNT       64
+#define BAG_BERRIES_COUNT    46
 
 #define PYRAMID_BAG_ITEMS_COUNT 10
 

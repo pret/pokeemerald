@@ -1,8 +1,6 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
-#define NUM_EVENT_OBJECTS 16
-
 enum
 {
     CONNECTION_SOUTH = 1,
@@ -313,7 +311,7 @@ struct Camera
     s32 y;
 };
 
-extern struct EventObject gEventObjects[NUM_EVENT_OBJECTS];
+extern struct EventObject gEventObjects[EVENT_OBJECTS_COUNT];
 extern u8 gSelectedEventObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
