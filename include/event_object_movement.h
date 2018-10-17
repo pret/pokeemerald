@@ -82,7 +82,7 @@ struct LockedAnimEventObjects
 extern const struct SpriteFrameImage gEventObjectPicTable_PechaBerryTree[];
 extern const u8 gReflectionEffectPaletteMap[];
 
-void sub_808D438(void);
+void ResetEventObjects(void);
 u8 GetMoveDirectionAnimNum(u8);
 u8 GetEventObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetEventObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);

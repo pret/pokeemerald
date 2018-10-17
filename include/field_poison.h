@@ -13,7 +13,7 @@ enum {
     FLDPSN_FNT
 };
 
-void sub_80F972C(void);
-unsigned int overworld_poison(void);
+void ExecuteWhiteOut(void);
+u32 DoPoisonFieldEffect(void);
 
 #endif //GUARD_FIELD_POISON_H

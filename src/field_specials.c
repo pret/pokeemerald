@@ -1513,7 +1513,7 @@ bool8 FoundBlackGlasses(void)
 
 void SetRoute119Weather(void)
 {
-    if (is_map_type_1_2_3_5_or_6(get_map_light_from_warp0()) != TRUE)
+    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()) != TRUE)
     {
         SetSav1Weather(20);
     }
@@ -1521,7 +1521,7 @@ void SetRoute119Weather(void)
 
 void SetRoute123Weather(void)
 {
-    if (is_map_type_1_2_3_5_or_6(get_map_light_from_warp0()) != TRUE)
+    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()) != TRUE)
     {
         SetSav1Weather(21);
     }

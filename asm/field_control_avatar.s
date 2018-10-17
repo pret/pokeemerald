@@ -178,9 +178,9 @@ _0809C006:
 	bx r0
 	thumb_func_end FieldGetPlayerInput
 
-	thumb_func_start sub_809C014
-@ int sub_809C014(overworld_input_data *input_data)
-sub_809C014: @ 809C014
+	thumb_func_start ProcessPlayerFieldInput
+@ int ProcessPlayerFieldInput(overworld_input_data *input_data)
+ProcessPlayerFieldInput: @ 809C014
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -348,7 +348,7 @@ _0809C172:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809C014
+	thumb_func_end ProcessPlayerFieldInput
 
 	thumb_func_start player_get_pos_to_and_height
 player_get_pos_to_and_height: @ 809C17C
@@ -1560,7 +1560,7 @@ overworld_poison_step: @ 809CB94
 	strh r1, [r0]
 	cmp r1, 0
 	bne _0809CBD4
-	bl overworld_poison
+	bl DoPoisonFieldEffect
 	cmp r0, 0x1
 	beq _0809CBD4
 	cmp r0, 0x1

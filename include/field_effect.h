@@ -179,8 +179,8 @@ bool8 sub_80B7B94(struct Task *, struct EventObject *, struct Sprite *);
 bool8 sub_80B7BCC(struct Task *, struct EventObject *, struct Sprite *);
 bool8 sub_80B7BF4(struct Task *, struct EventObject *, struct Sprite *);
 
-void sub_80B7D14(struct Task *);
-void sub_80B7D34(struct Task *);
+static void EscapeRopeFieldEffect_Step0(struct Task *);
+static void EscapeRopeFieldEffect_Step1(struct Task *);
 
 void sub_80B7EC4(struct Task *);
 void sub_80B7EE8(struct Task *);

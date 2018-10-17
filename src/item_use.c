@@ -58,7 +58,7 @@ extern void sub_81C5924(void);
 extern void sub_81C59BC(void);
 extern void sub_81AB9A8(u8);
 extern void sub_81ABA88(u8);
-extern void sub_80B7CC8(void);
+extern void StartEscapeRopeFieldEffect(void);
 extern u8* sub_806CF78(u16);
 extern void sub_81B89F0(void);
 extern u8 GetItemEffectType(u16);
@@ -260,7 +260,7 @@ bool32 CanFish(void)
     if (MetatileBehavior_IsWaterfall(tileBehavior))
         return FALSE;
 
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_4))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER))
         return FALSE;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
@@ -890,7 +890,7 @@ void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
 void task08_080A1C44(u8 taskId)
 {
     ResetInitialPlayerAvatarState();
-    sub_80B7CC8();
+    StartEscapeRopeFieldEffect();
     DestroyTask(taskId);
 }
 

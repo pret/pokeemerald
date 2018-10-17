@@ -74,7 +74,7 @@ static void sub_8097D68(struct Sprite*);
 static void ApplyLevitateMovement(u8);
 static bool8 MovementType_Disguise_Callback(struct EventObject *, struct Sprite *);
 static bool8 MovementType_Hidden_Callback(struct EventObject *, struct Sprite *);
-static void sub_808D450(void);
+static void CreateReflectionEffectSprites(void);
 static u8 GetEventObjectIdByLocalId(u8);
 static u8 GetEventObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableEventObjectId(u16, u8, u8, u8 *);
@@ -1083,15 +1083,15 @@ static void ClearAllEventObjects(void)
         ClearEventObject(&gEventObjects[i]);
 }
 
-void sub_808D438(void)
+void ResetEventObjects(void)
 {
     ClearLinkPlayerEventObjects();
     ClearAllEventObjects();
     ClearPlayerAvatarInfo();
-    sub_808D450();
+    CreateReflectionEffectSprites();
 }
 
-static void sub_808D450(void)
+static void CreateReflectionEffectSprites(void)
 {
     u8 spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
     gSprites[spriteId].oam.affineMode = 1;
@@ -1809,7 +1809,7 @@ void sub_808E16C(s16 x, s16 y)
             sub_808E1B8(i, x, y);
         }
     }
-    sub_808D450();
+    CreateReflectionEffectSprites();
 }
 
 static void sub_808E1B8(u8 eventObjectId, s16 x, s16 y)
