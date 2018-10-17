@@ -99,7 +99,7 @@ SECTIONS {
         src/text_window.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);
-        asm/field_control_avatar.o(.text);
+        src/field_control_avatar.o(.text);
         src/event_data.o(.text);
         src/coord_event_weather.o(.text);
         src/field_tasks.o(.text);

@@ -23,7 +23,7 @@ LittlerootTown_MaysHouse_2F_MapBGEvents: @ 852D608
 	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_1F865F
 	bg_event 7, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_1F8656
 	bg_event 3, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_29278D
-	bg_event 8, 1, 0, BG_EVENT_PLAYER_FACING_ANY, gUnknown_081F9553
+	bg_event 8, 1, 0, BG_EVENT_PLAYER_FACING_ANY, EventScript_PlayerPCFemale
 
 LittlerootTown_MaysHouse_2F_MapEvents:: @ 852D638
 	map_events LittlerootTown_MaysHouse_2F_EventObjects, LittlerootTown_MaysHouse_2F_MapWarps, 0x0, LittlerootTown_MaysHouse_2F_MapBGEvents

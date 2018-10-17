@@ -501,7 +501,7 @@
 #define FLAG_0x1F1               0x1F1
 #define FLAG_0x1F2               0x1F2
 #define FLAG_0x1F3               0x1F3
-#define FLAG_0x1F4               0x1F4
+#define FLAG_HIDDEN_ITEMS_START               0x1F4
 #define FLAG_0x1F5               0x1F5
 #define FLAG_0x1F6               0x1F6
 #define FLAG_0x1F7               0x1F7

@@ -301,7 +301,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F954A:: @ 81F954A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9BE7, 4
 	return
 
-gUnknown_081F9553:: @ 81F9553
+EventScript_PlayerPCFemale:: @ 81F9553
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0

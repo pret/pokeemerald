@@ -104,10 +104,10 @@ Route111_Movement_276696: @ 8276696
 	walk_down
 	step_end
 
-EventScript_2766A2:: @ 82766A2
+EventScript_SecretPower1:: @ 82766A2
 	special sub_80EB290
 	end
 
-EventScript_2766A6:: @ 82766A6
+EventScript_SecretPower2:: @ 82766A6
 	special sub_80EB2C8
 	end

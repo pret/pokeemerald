@@ -16,5 +16,9 @@ void sub_80AC3E4(void);
 void PreservePaletteInWeather(u8);
 void sub_80AF128(void);
 void sub_80AB104(u8);
+void sub_80AF80C(u8);
+void sub_80AF828(void);
+void sub_80AF838(void);
+void sub_80B0268(void);
 
 #endif //GUARD_FIELD_SCREEN_H
