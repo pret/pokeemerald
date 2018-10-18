@@ -1,7 +1,7 @@
 #ifndef GUARD_SHOP_H
 #define GUARD_SHOP_H
 
-extern EWRAM_DATA struct ItemSlot gUnknown_02039F80[3];
+extern EWRAM_DATA struct ItemSlot gMartPurchaseHistory[3];
 
 enum
 {
@@ -10,9 +10,19 @@ enum
     MART_TYPE_2,
 };
 
+// shop view window NPC info enum
+enum
+{
+    EVENT_OBJ_ID,
+    X_COORD,
+    Y_COORD,
+    ANIM_NUM,
+	LAYER_TYPE
+};
+
 struct MartInfo
 {
-    /*0x0*/ void (* callback) (void);
+    /*0x0*/ void (*callback)(void);
     /*0x4*/ const struct MenuAction *menuActions;
     /*0x8*/ const u16 *itemList;
     /*0xC*/ u16 itemCount;
@@ -20,23 +30,18 @@ struct MartInfo
     /*0xF*/ u8 martType;
 };
 
-struct BuyMenuLabel
-{
-	u8 label[16];
-};
-
 struct ShopData
 {
-	/*0x0000*/ u8 tilemapBuffers[4][0x800];
-	/*0x2000*/ u8 filler2000[0x4];
-	/*0x2004*/ u16 unk2004;
-	/*0x2006*/ u8 filler2006[0x2];
-	/*0x2008*/ u16 unk2008;
-	/*0x200A*/ u8 filler200A;
+	/*0x0000*/ u16 tilemapBuffers[4][0x400];
+	/*0x2000*/ u32 totalCost;
+	/*0x2004*/ u16 itemsShowed;
+	/*0x2006*/ u16 selectedRow;
+	/*0x2008*/ u16 scrollOffset;
+	/*0x200A*/ u8 maxQuantity;
 	/*0x200B*/ u8 scrollIndicatorsTaskId;
-	/*0x200C*/ u8 unk200C;
-	/*0x200D*/ u8 unk200D[2];
-	/*0x200F*/ u8 filler200F[0xA1];
+	/*0x200C*/ u8 iconSlot;
+	/*0x200D*/ u8 itemSpriteIds[2];
+	/*0x2010*/ s16 viewportObjects[16][5];
 };
 
 void CreatePokemartMenu(const u16 *);
