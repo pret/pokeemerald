@@ -855,5 +855,21 @@ extern const u8 gText_CanIHelpWithAnythingElse[];
 extern const u8 gText_AnythingElseICanHelp[];
 extern const u8 gText_QuitShopping[];
 extern const u8 gText_PokedollarVar1[];
+extern const u8 gText_YouDontHaveMoney[];
+extern const u8 gText_Var1CertainlyHowMany2[];
+extern const u8 gText_Var1CertainlyHowMany[];
+extern const u8 gText_Var1IsItThatllBeVar2[];
+extern const u8 gText_YouWantedVar1ThatllBeVar2[];
+extern const u8 gText_InBagVar1[];
+extern const u8 gText_Var1AndYouWantedVar2[];
+extern const u8 gText_HereYouGoThankYou[];
+extern const u8 gText_NoMoreRoomForThis[];
+extern const u8 gText_ThankYouIllSendItHome[];
+extern const u8 gText_ThanksIllSendItHome[];
+extern const u8 gText_SpaceForVar1Full[];
+extern const u8 gText_ThrowInPremierBall[];
+extern const u8 gText_ShopBuy[];
+extern const u8 gText_ShopSell[];
+extern const u8 gText_ShopQuit[];
 
 #endif //GUARD_STRINGS_H

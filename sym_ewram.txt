@@ -373,27 +373,10 @@ gUnknown_02039F5C: @ 2039F5C
 gUnknown_02039F5D: @ 2039F5D
 	.space 0x3
 
-gMartInfo: @ 2039F60
-	.space 0x10
+    .include "src/shop.o"
+    .include "src/fldeff_escalator.o"
 
-gShopDataPtr: @ 2039F70
-	.space 0x4
-
-gUnknown_02039F74: @ 2039F74
-	.space 0x4
-
-gUnknown_02039F78: @ 2039F78
-	.space 0x4
-
-gUnknown_02039F7C: @ 2039F7C
-	.space 0x4
-
-gUnknown_02039F80: @ 2039F80
-	.space 0xC
-
-gUnknown_02039F8C: @ 2039F8C
-	.space 0x4
-
+	.align 2
 gUnknown_02039F90: @ 2039F90
 	.space 0x4
 

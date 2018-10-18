@@ -138,7 +138,7 @@ SECTIONS {
         src/contest.o(.text);
         asm/contest.o(.text);
         src/shop.o(.text);
-        asm/shop.o(.text);
+        src/fldeff_escalator.o(.text);
         src/berry.o(.text);
         asm/script_menu.o(.text);
         src/naming_screen.o(.text);
@@ -443,7 +443,8 @@ SECTIONS {
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
         data/contest.o(.rodata);
-        data/shop.o(.rodata);
+        src/shop.o(.rodata);
+        src/fldeff_escalator.o(.rodata);
         src/berry.o(.rodata);
         data/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);

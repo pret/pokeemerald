@@ -59,5 +59,6 @@ void bag_menu_mail_related(void);
 void CB2_BagMenuFromStartMenu(void);
 u8 sub_81ABB2C(u8 pocketId);
 bool8 UseRegisteredKeyItemOnField(void);
+void CB2_GoToSellMenu(void);
 
 #endif //GUARD_item_menu_H
