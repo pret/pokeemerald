@@ -19,7 +19,6 @@
 #include "decompress.h"
 #include "data2.h"
 #include "palette.h"
-#include "blend_palette.h"
 #include "contest.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"

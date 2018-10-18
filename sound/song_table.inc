@@ -25,7 +25,7 @@ gSongTable:: @ 86B49F0
 	song se_pin, 1, 1               @ Exclamation Bubble
 	song se_boo, 1, 1               @ Contest Jam
 	song se_bowa, 1, 1              @ Giving Poké Ball to Nurse, Poké Ball Wiggle
-	song se_jyuni, 2, 2             @ Places in Contest Appearing
+	song se_jyuni, 2, 2             @ Contest - Rankings Revealed
 	song se_a, 1, 1                 @ Bard A
 	song se_i, 1, 1                 @ Bard I
 	song se_u, 1, 1                 @ Bard U
@@ -40,7 +40,7 @@ gSongTable:: @ 86B49F0
 	song se_tk_kasya, 1, 1          @ Mossdeep Gym/Trick House Switch
 	song se_fu_zaku, 1, 1
 	song se_fu_zaku2, 1, 1
-	song se_fu_zuzuzu, 1, 1         @ Lavaridge Gym Warp
+	song se_fu_zuzuzu, 1, 1         @ Lavaridge Gym - Warp
 	song se_ru_gashin, 1, 1         @ Sootopolis Gym - Stairs Appear
 	song se_ru_gasyan, 1, 1         @ Sootopolis Gym - Ice Breaking
 	song se_ru_bari, 1, 1           @ Sootopolis Gym - Walking on Ice
@@ -49,7 +49,7 @@ gSongTable:: @ 86B49F0
 	song se_tk_warpin, 1, 1         @ Warp In
 	song se_tk_warpout, 1, 1        @ Warp Out
 	song se_tu_saa, 1, 1            @ Repel
-	song se_hi_turun, 1, 1          @ Moving Obstacle in Fortree Gym
+	song se_hi_turun, 1, 1          @ Fortree Gym - Obstacle
 	song se_track_move, 1, 1        @ Moving Truck
 	song se_track_stop, 1, 1        @ Moving Truck Stop
 	song se_track_haiki, 2, 2       @ Moving Truck Unload
@@ -72,15 +72,15 @@ gSongTable:: @ 86B49F0
 	song se_toy_b, 2, 2             @ Note B
 	song se_toy_c1, 2, 2            @ Note High C
 	song se_mizu, 2, 2              @ Puddle
-	song se_hashi, 2, 2             @ Boardwalk
-	song se_daugi, 1, 1             @ Slots Credits
+	song se_hashi, 2, 2             @ Fortree Walkways
+	song se_daugi, 1, 1             @ Slots - Credits
 	song se_pinpon, 1, 1            @ Ding-dong!
 	song se_fuusen1, 2, 2           @ Red Balloon
 	song se_fuusen2, 2, 2           @ Blue Balloon
 	song se_fuusen3, 2, 2           @ Yellow Balloon
 	song se_toy_kabe, 2, 2          @ Breakable Door
 	song se_toy_dango, 2, 2         @ Mud Ball
-	song se_doku, 1, 1              @ Overworld Poison Damage
+	song se_doku, 1, 1              @ Overworld - Poison Damage
 	song se_esuka, 1, 1             @ Escalator
 	song se_t_ame, 3, 3             @ Rain
 	song se_t_ame_e, 3, 3           @ Rain Stop
@@ -95,14 +95,14 @@ gSongTable:: @ 86B49F0
 	song se_expmax, 1, 1            @ Exp. Max
 	song se_tamakoro, 2, 2          @ Roulette Ball
 	song se_tamakoro_e, 2, 2        @ Roulette Ball 2
-	song se_basabasa, 1, 1
+	song se_basabasa, 1, 1          @ Wing Attack
 	song se_regi, 1, 1              @ Cash Register
-	song se_c_gaji, 1, 1            @ Contest Hearts
-	song se_c_maku_u, 1, 1          @ Contest Curtain rise
-	song se_c_maku_d, 1, 1          @ Contest Curtain fall
-	song se_c_pasi, 1, 1
-	song se_c_syu, 1, 1
-	song se_c_pikon, 1, 1           @ Pokémon Appears in Contest
+	song se_c_gaji, 1, 1            @ Contest - Hearts
+	song se_c_maku_u, 1, 1          @ Contest - Curtain Rises
+	song se_c_maku_d, 1, 1          @ Contest - Curtain Falls
+	song se_c_pasi, 1, 1            @ Contest - Inflict Status
+	song se_c_syu, 1, 1             @ Contest - Pokémon Switches Out
+	song se_c_pikon, 1, 1           @ Contest - Pokémon Switches In
 	song se_reapoke, 1, 1           @ Shiny Pokémon
 	song se_op_basyu, 1, 1          @ Opening Movie -> Title Screen whoosh
 	song se_bt_start, 1, 1          @ Battle Mugshot whoosh
@@ -266,10 +266,10 @@ gSongTable:: @ 86B49F0
 	song se_rg_nawamiss, 1, 1
 	song se_toreeye, 1, 1           @ Trainer's Eye Call
 	song se_toreoff, 1, 1           @ Trainer's Eye Hang Up
-	song se_hantei1, 1, 1           @ Battle Arena Time's Up 1
-	song se_hantei2, 1, 1           @ Battle Arena Time's Up 2
-	song se_curtain, 1, 1           @ Battle Pike Curtain Open
-	song se_curtain1, 1, 1          @ Battle Pike Curtain Close
+	song se_hantei1, 1, 1           @ Battle Arena - Judgment 1
+	song se_hantei2, 1, 1           @ Battle Arena - Judgment 2
+	song se_curtain, 1, 1           @ Battle Pike - Curtain Opens
+	song se_curtain1, 1, 1          @ Battle Pike - Curtain Closes
 	song se_ussoki, 1, 1            @ Sudowoodo
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0

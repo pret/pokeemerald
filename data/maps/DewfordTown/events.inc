@@ -1,6 +1,6 @@
 DewfordTown_EventObjects: @ 8527964
-	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 7, 12, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, DewfordTown_EventScript_1E95B1, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 12, 9, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 1, 0, 3, DewfordTown_EventScript_1E9511, 740
+	object_event 1, EVENT_OBJ_GFX_WOMAN_2, 0, 7, 12, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, DewfordTown_EventScript_1E95B1, 0
+	object_event 2, EVENT_OBJ_GFX_EXPERT_M, 0, 12, 9, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 1, 0, 3, DewfordTown_EventScript_1E9511, 740
 	object_event 3, EVENT_OBJ_GFX_FISHERMAN, 0, 12, 14, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, DewfordTown_EventScript_1E95D5, 0
 	object_event 4, EVENT_OBJ_GFX_MR_BRINEYS_BOAT, 0, 12, 8, 1, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 743
 	object_event 5, EVENT_OBJ_GFX_BOY_1, 0, 1, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, DewfordTown_EventScript_1E9922, 0

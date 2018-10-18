@@ -1,5 +1,5 @@
 MossdeepCity_SpaceCenter_2F_EventObjects: @ 8532E4C
-	object_event 1, EVENT_OBJ_GFX_BOY_4, 0, 6, 2, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, MossdeepCity_SpaceCenter_2F_EventScript_223F03, 0
+	object_event 1, EVENT_OBJ_GFX_RICH_BOY, 0, 6, 2, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, MossdeepCity_SpaceCenter_2F_EventScript_223F03, 0
 	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 11, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, MossdeepCity_SpaceCenter_2F_EventScript_223EC8, 0
 	object_event 3, EVENT_OBJ_GFX_SCIENTIST_1, 0, 5, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, MossdeepCity_SpaceCenter_2F_EventScript_223E8D, 0
 	object_event 4, EVENT_OBJ_GFX_STEVEN, 0, 1, 8, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, MossdeepCity_SpaceCenter_2F_EventScript_223F7A, 863

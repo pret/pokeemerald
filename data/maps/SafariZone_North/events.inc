@@ -1,6 +1,6 @@
 SafariZone_North_EventObjects: @ 853B160
 	object_event 1, EVENT_OBJ_GFX_FISHERMAN, 0, 22, 9, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_23D254, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_5, 0, 6, 29, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_23D25D, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_4, 0, 6, 29, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_23D25D, 0
 	object_event 3, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 25, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_2907A6, 17
 	object_event 4, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 25, 13, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_2907A6, 18
 	object_event 5, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 28, 14, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_2907A6, 19

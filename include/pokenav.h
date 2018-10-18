@@ -28,5 +28,13 @@ u16 sub_81D2C3C(void);
 void sub_81D2C50(void);
 u8 sub_81D28C8(const struct ListMenuItem *items, u16 numChoices);
 void sub_81D2824(u16);
+bool32 InTrainerHill(void);
+bool8 EventObjectIsFarawayIslandMew(struct EventObject *);
+u32 sub_81D427C(void);
+void sub_81D4998(void);
+u8 GetCurrentTrainerHillMapId(void);
+u8 sub_81D6490(void);
+const struct WarpEvent *sub_81D6120(void);
+const struct WarpEvent *sub_81D6134(u8);
 
 #endif //GUARD_POKENAV_H

@@ -80,6 +80,7 @@ struct LockedAnimEventObjects
 };
 
 extern const struct SpriteFrameImage gEventObjectPicTable_PechaBerryTree[];
+extern const u8 gReflectionEffectPaletteMap[];
 
 void sub_808D438(void);
 u8 GetMoveDirectionAnimNum(u8);
@@ -101,17 +102,17 @@ void sub_80930E0(s16 *, s16 *, s16, s16);
 void EventObjectClearHeldMovement(struct EventObject *);
 void EventObjectClearHeldMovementIfActive(struct EventObject *);
 void TrySpawnEventObjects(s16, s16);
-u8 sprite_new(u8, u8, s16, s16, u8, u8);
-u8 AddPseudoEventObject(u16, void (*)(struct Sprite *), s16, s16, u8);
+u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction);
+u8 AddPseudoEventObject(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 show_sprite(u8, u8, u8);
-u8 SpawnSpecialEventObjectParameterized(u8, u8, u8, s16, s16, u8);
+u8 SpawnSpecialEventObjectParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z);
 u8 SpawnSpecialEventObject(struct EventObjectTemplate *);
 void sub_8093038(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
-void EventObjectSetGraphicsId(struct EventObject *, u8);
+void EventObjectSetGraphicsId(struct EventObject *, u8 graphicsId);
 void EventObjectTurn(struct EventObject *, u8);
 void EventObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
-const struct EventObjectGraphicsInfo *GetEventObjectGraphicsInfo(u8);
+const struct EventObjectGraphicsInfo *GetEventObjectGraphicsInfo(u8 graphicsId);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 void FreeAndReserveObjectSpritePalettes(void);
 void sub_808E82C(u8, u8, u8, s16, s16);
@@ -189,6 +190,10 @@ u8 GetMoveDirectionFasterAnimNum(u8);
 u8 GetMoveDirectionFastestAnimNum(u8);
 u8 GetLedgeJumpDirection(s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8 objectId);
+u16 GetObjectPaletteTag(u8 palSlot);
+void UpdateEventObjectSpriteVisibility(struct Sprite *sprite, bool8 invisible);
+s16 sub_809773C(s16 a1);
+s16 sub_8097728(s16 a1);
 
 void MovementType_None(struct Sprite *);
 void MovementType_LookAround(struct Sprite *);
@@ -249,6 +254,7 @@ u8 GetSlideMovementAction(u32);
 u8 GetJumpInPlaceMovementAction(u32);
 u8 GetJumpMovementAction(u32);
 u8 GetJump2MovementAction(u32);
+u8 CreateCopySpriteAt(struct Sprite *sprite, s16 x, s16 y, u8 subpriority);
 
 u8 MovementType_WanderAround_Step0(struct EventObject *, struct Sprite *);
 u8 MovementType_WanderAround_Step1(struct EventObject *, struct Sprite *);

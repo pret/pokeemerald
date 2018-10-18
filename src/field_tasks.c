@@ -627,11 +627,11 @@ static void PerStepCallback_8069F64(u8 taskId)
         {
             if (MapGridGetMetatileIdAt(x, y) == 0x20a)
             {
-                ash(x, y, 0x212, 4);
+                StartAshFieldEffect(x, y, 0x212, 4);
             }
             else
             {
-                ash(x, y, 0x206, 4);
+                StartAshFieldEffect(x, y, 0x206, 4);
             }
             if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
             {

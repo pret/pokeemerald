@@ -12,7 +12,7 @@ BattleFrontier_BattleTowerLobby_MapScript1_23E690: @ 823E690
 BattleFrontier_BattleTowerLobby_MapScript1_23E694: @ 823E694
 	call BattleFrontier_BattleTowerLobby_EventScript_28CC84
 	setvar VAR_0x8004, 10
-	special sub_81A085C
+	special CallApprenticeFunction
 	compare VAR_0x8004, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E6B5
 	checkflag FLAG_0x934
@@ -21,7 +21,7 @@ BattleFrontier_BattleTowerLobby_MapScript1_23E694: @ 823E694
 BattleFrontier_BattleTowerLobby_EventScript_23E6B5:: @ 823E6B5
 	clearflag FLAG_0x2BD
 	setvar VAR_0x8004, 23
-	special sub_81A085C
+	special CallApprenticeFunction
 
 BattleFrontier_BattleTowerLobby_EventScript_23E6C0:: @ 823E6C0
 	end
@@ -929,7 +929,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F2B7:: @ 823F2B7
 
 BattleFrontier_BattleTowerLobby_EventScript_23F2C5:: @ 823F2C5
 	setvar VAR_0x8004, 9
-	message OldaleTown_PokemonCenter_2F_Text_278091
+	message gText_PleaseWaitForLink
 	waitmessage
 	setvar VAR_0x8005, 0
 	special sub_80B2DA4

@@ -1,5 +1,5 @@
 Route119_House_EventObjects: @ 853ECD0
-	object_event 1, EVENT_OBJ_GFX_WOMAN_5, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route119_House_EventScript_270966, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_4, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route119_House_EventScript_270966, 0
 	object_event 2, EVENT_OBJ_GFX_WINGULL, 0, 1, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 2, 0, 0, Route119_House_EventScript_27096F, 0
 	object_event 3, EVENT_OBJ_GFX_WINGULL, 0, 0, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 3, 1, 0, 0, Route119_House_EventScript_27096F, 0
 	object_event 4, EVENT_OBJ_GFX_WINGULL, 0, 2, 2, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, Route119_House_EventScript_27096F, 0

@@ -6,9 +6,9 @@ Route127_EventObjects: @ 852C734
 	object_event 5, EVENT_OBJ_GFX_FISHERMAN, 0, 42, 21, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 0, Route127_EventScript_1F6A63, 0
 	object_event 6, EVENT_OBJ_GFX_FISHERMAN, 0, 64, 19, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 0, Route127_EventScript_1F6A91, 0
 	object_event 7, EVENT_OBJ_GFX_FISHERMAN, 0, 54, 14, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 1, 0, Route127_EventScript_1F6A7A, 0
-	object_event 8, EVENT_OBJ_GFX_MAN_6, 0, 15, 23, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 2, Route127_EventScript_1F6AA8, 0
+	object_event 8, EVENT_OBJ_GFX_MAN_5, 0, 15, 23, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 2, Route127_EventScript_1F6AA8, 0
 	object_event 9, EVENT_OBJ_GFX_BLACK_BELT, 0, 63, 63, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 1, 3, Route127_EventScript_1F6AD6, 0
-	object_event 10, EVENT_OBJ_GFX_WOMAN_7, 0, 12, 23, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 2, Route127_EventScript_1F6ABF, 0
+	object_event 10, EVENT_OBJ_GFX_WOMAN_5, 0, 12, 23, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 2, Route127_EventScript_1F6ABF, 0
 	object_event 11, EVENT_OBJ_GFX_ITEM_BALL, 0, 13, 20, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route127_EventScript_29104C, 1155
 
 Route127_MapBGEvents: @ 852C83C

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_controllers.h"
+#include "cable_club.h"
 #include "link.h"
 #include "task.h"
 #include "battle_ai_script_commands.h"
@@ -18,7 +19,6 @@ extern u8 gUnknown_02022D0A;
 
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
 
-extern void task00_08081A90(u8 taskId); // cable_club
 extern void sub_81B8D64(u8 battlerId, u8 arg1); // party_menu
 
 // this file's funcionts

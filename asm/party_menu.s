@@ -7846,7 +7846,7 @@ sub_81B5958: @ 81B5958
 	thumb_func_start sub_81B5974
 sub_81B5974: @ 81B5974
 	push {lr}
-	bl sub_809D1E8
+	bl TrySetDiveWarp
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24

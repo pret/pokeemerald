@@ -203,7 +203,7 @@ u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
         return 0;
 }
 
-void sub_80FD254()
+void sub_80FD254(void)
 {
     struct MailStruct mail;
     mail.itemId = gSpecialVar_ItemId;
@@ -249,7 +249,7 @@ void ItemUseOnFieldCB_Bike(u8 taskId)
     DestroyTask(taskId);
 }
 
-bool32 CanFish()
+bool32 CanFish(void)
 {
     s16 x, y;
     u16 tileBehavior;

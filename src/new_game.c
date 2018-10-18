@@ -25,6 +25,7 @@
 #include "battle_records.h"
 #include "item.h"
 #include "pokedex.h"
+#include "apprentice.h"
 
 extern u8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
@@ -44,7 +45,6 @@ extern void NewGameInitPCItems(void);
 extern void ClearDecorationInventories(void);
 extern void ResetFanClub(void);
 extern void copy_strings_to_sav1(void);
-extern void sub_819FAA0(void);
 extern void sub_81A4B14(void);
 extern void sub_8195E10(void);
 extern void sub_801AFD8(void);
@@ -203,7 +203,7 @@ void NewGameInitData(void)
     ResetMiniGamesResults();
     copy_strings_to_sav1();
 	SetLilycoveLady();
-	sub_819FAA0();
+	ResetAllApprenticeData();
 	sub_81A4B14();
 	sub_8195E10();
 	sub_801AFD8();

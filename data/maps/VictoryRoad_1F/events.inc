@@ -1,13 +1,13 @@
 VictoryRoad_1F_EventObjects: @ 8535E04
-	object_event 1, EVENT_OBJ_GFX_MAN_4, 0, 33, 22, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 3, VictoryRoad_1F_EventScript_235E73, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 6, 15, 4, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 4, VictoryRoad_1F_EventScript_235EA1, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 27, 34, 3, MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT, 0, 0, 1, 3, VictoryRoad_1F_EventScript_235E8A, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_3, 0, 33, 22, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 3, VictoryRoad_1F_EventScript_235E73, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 6, 15, 4, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 4, VictoryRoad_1F_EventScript_235EA1, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_3, 0, 27, 34, 3, MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT, 0, 0, 1, 3, VictoryRoad_1F_EventScript_235E8A, 0
 	object_event 4, EVENT_OBJ_GFX_WALLY, 0, 12, 25, 4, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, VictoryRoad_1F_EventScript_235E2C, 858
 	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 40, 26, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_291483, 1084
 	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 37, 39, 4, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_291490, 1085
 	object_event 7, EVENT_OBJ_GFX_WALLY, 0, 31, 9, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_235E35, 751
-	object_event 8, EVENT_OBJ_GFX_WOMAN_7, 0, 29, 17, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 2, VictoryRoad_1F_EventScript_235ECF, 0
-	object_event 9, EVENT_OBJ_GFX_MAN_4, 0, 32, 17, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 2, VictoryRoad_1F_EventScript_235EB8, 0
+	object_event 8, EVENT_OBJ_GFX_WOMAN_5, 0, 29, 17, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 2, VictoryRoad_1F_EventScript_235ECF, 0
+	object_event 9, EVENT_OBJ_GFX_MAN_3, 0, 32, 17, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 2, VictoryRoad_1F_EventScript_235EB8, 0
 
 VictoryRoad_1F_MapWarps: @ 8535EDC
 	warp_def 15, 40, 3, 2, MAP_EVER_GRANDE_CITY

@@ -936,7 +936,7 @@ void GabbyAndTyBeforeInterview(void)
     {
         gSaveBlock1Ptr->gabbyAndTyData.battleNum ++;
     }
-    gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.unk5_0;
+    gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.playerMonWasDamaged;
     if (gBattleResults.playerFaintCounter != 0)
     {
         gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon = TRUE;

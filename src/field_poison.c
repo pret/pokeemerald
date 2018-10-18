@@ -111,7 +111,7 @@ void sub_80F972C(void)
     ScriptContext1_Stop();
 }
 
-unsigned int overworld_poison(void)
+int DoPoisonFieldEffect(void)
 {
     int i;
     unsigned int hp;

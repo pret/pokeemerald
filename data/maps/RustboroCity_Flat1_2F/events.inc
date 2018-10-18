@@ -1,6 +1,6 @@
 RustboroCity_Flat1_2F_EventObjects: @ 85308EC
-	object_event 1, EVENT_OBJ_GFX_WOMAN_2, 0, 4, 6, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 3, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_21523D, 0
-	object_event 2, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 9, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
+	object_event 1, EVENT_OBJ_GFX_POKEFAN_F, 0, 4, 6, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 3, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_21523D, 0
+	object_event 2, EVENT_OBJ_GFX_TWIN, 0, 9, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
 	object_event 3, EVENT_OBJ_GFX_SKITTY_DOLL, 0, 9, 4, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_215246, 0
 	object_event 4, EVENT_OBJ_GFX_TREECKO_DOLL, 0, 10, 5, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_215246, 0
 	object_event 5, EVENT_OBJ_GFX_TORCHIC_DOLL, 0, 10, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_215246, 0

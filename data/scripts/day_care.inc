@@ -289,7 +289,7 @@ Route117_PokemonDayCare_EventScript_291F95:: @ 8291F95
 	release
 	end
 
-Route117_PokemonDayCare_EventScript_291FC0:: @ 8291FC0
+EventScript_EggHatch:: @ 8291FC0
 	lockall
 	msgbox Text_292668, 4
 	special EggHatch

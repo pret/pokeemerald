@@ -94,6 +94,8 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+#define MAX_LEVEL 100
+
 #define OT_ID_RANDOM_NO_SHINY 2
 #define OT_ID_PRESET 1
 #define OT_ID_PLAYER_ID 0
@@ -110,10 +112,47 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
+#define TYPE_NORMAL   0x00
+#define TYPE_FIGHTING 0x01
+#define TYPE_FLYING   0x02
+#define TYPE_POISON   0x03
+#define TYPE_GROUND   0x04
+#define TYPE_ROCK     0x05
+#define TYPE_BUG      0x06
+#define TYPE_GHOST    0x07
+#define TYPE_STEEL    0x08
+#define TYPE_MYSTERY  0x09
+#define TYPE_FIRE     0x0a
+#define TYPE_WATER    0x0b
+#define TYPE_GRASS    0x0c
+#define TYPE_ELECTRIC 0x0d
+#define TYPE_PSYCHIC  0x0e
+#define TYPE_ICE      0x0f
+#define TYPE_DRAGON   0x10
+#define TYPE_DARK     0x11
+
+#define FRIENDSHIP_EVENT_GROW_LEVEL           0x0
+#define FRIENDSHIP_EVENT_VITAMIN              0x1 // unused
+#define FRIENDSHIP_EVENT_BATTLE_ITEM          0x2 // unused
+#define FRIENDSHIP_EVENT_LEAGUE_BATTLE        0x3
+#define FRIENDSHIP_EVENT_LEARN_TMHM           0x4
+#define FRIENDSHIP_EVENT_WALKING              0x5
+#define FRIENDSHIP_EVENT_FAINT_SMALL          0x6
+#define FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE 0x7
+#define FRIENDSHIP_EVENT_FAINT_LARGE          0x8
+
+#define STATUS_PRIMARY_NONE      0x0
+#define STATUS_PRIMARY_POISON    0x1
+#define STATUS_PRIMARY_PARALYSIS 0x2
+#define STATUS_PRIMARY_SLEEP     0x3
+#define STATUS_PRIMARY_FREEZE    0x4
+#define STATUS_PRIMARY_BURN      0x5
+#define STATUS_PRIMARY_POKERUS   0x6
+#define STATUS_PRIMARY_FAINTED   0x7
+
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
-#define MAX_MON_LEVEL 100
 
 struct PokemonSubstruct0
 {
@@ -238,32 +277,6 @@ struct PokemonStorage
     /*0x0001*/ struct BoxPokemon boxes[14][30];
     /*0x8344*/ u8 boxNames[14][9];
     /*0x83C2*/ u8 boxWallpapers[14];
-};
-
-struct UnknownPokemonSubStruct2
-{
-    u16 species;
-    u16 moves[4];
-    u16 item;
-};
-
-struct UnknownPokemonStruct2
-{
-    u8 field_0_0 : 5;
-    u8 field_0_1 : 2;
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-    struct UnknownPokemonSubStruct2 mons[3];
-    u8 field_28[23];
-    u8 language;
-};
-
-struct UnknownPokemonStruct3
-{
-    u8 field_0[48];
-    u16 field_30;
-    u8 field_32[38];
 };
 
 struct Unknown_806F160_Struct
@@ -447,7 +460,7 @@ extern const u8 gFacilityClassToTrainerClass[];
 extern const struct BaseStats gBaseStats[];
 extern const u8 *const gItemEffectTable[];
 extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
-extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
+extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
 extern const u8 gUnknown_08329D22[];
 extern const u8 gUnknown_08329D26[];
@@ -472,7 +485,7 @@ void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u
 void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread);
 void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lvl50);
-void sub_8068528(struct Pokemon *mon, const struct UnknownPokemonStruct2 *src, u8 monId);
+void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
 void CreateMonWithEVSpreadPersonalityOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void sub_80686FC(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
 void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);

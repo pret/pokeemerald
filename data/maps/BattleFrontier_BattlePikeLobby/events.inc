@@ -1,7 +1,7 @@
 BattleFrontier_BattlePikeLobby_EventObjects: @ 853CBB0
-	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 5, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25B868, 0
+	object_event 1, EVENT_OBJ_GFX_LINK_RECEPTIONIST, 0, 5, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25B868, 0
 	object_event 2, EVENT_OBJ_GFX_HIKER, 0, 10, 9, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BAAB, 0
-	object_event 3, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 0, 5, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BAB4, 0
+	object_event 3, EVENT_OBJ_GFX_TWIN, 0, 0, 5, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BAB4, 0
 	object_event 4, EVENT_OBJ_GFX_BEAUTY, 0, 8, 9, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_BattlePikeLobby_EventScript_25BABD, 0
 
 BattleFrontier_BattlePikeLobby_MapWarps: @ 853CC10

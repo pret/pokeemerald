@@ -1,5 +1,5 @@
 BattleFrontier_BattlePalaceCorridor_EventObjects: @ 853C420
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_1, 0, 8, 12, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, 0
+	object_event 1, EVENT_OBJ_GFX_EXPERT_M, 0, 8, 12, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, 0
 	object_event 2, EVENT_OBJ_GFX_AZURILL, 0, 3, 5, 0, MOVEMENT_TYPE_WANDER_AROUND, 1, 0, 0, 0, 0x0, 0
 	object_event 3, EVENT_OBJ_GFX_KIRLIA, 0, 12, 6, 0, MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT, 0, 2, 0, 0, 0x0, 0
 	object_event 4, EVENT_OBJ_GFX_PIKACHU, 0, 15, 5, 0, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, 0x0, 0

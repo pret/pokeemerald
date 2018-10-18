@@ -50,7 +50,7 @@ void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
 void reset_temp_tile_data_buffers(void);
 void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, u16 offset, u8 mode);
 bool8 free_temp_tile_data_buffers_if_possible(void);
-struct WindowTemplate CreateWindowTemplate(u8, u8, u8, u8, u8, u8, u16);
+struct WindowTemplate CreateWindowTemplate(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock);
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
 void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, int size, u16 offset, u8 mode);
 s8 Menu_ProcessInputNoWrap_(void);
@@ -87,5 +87,6 @@ void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left
 void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
 void sub_8199D3C(void *ptr, int delta, int width, int height, bool32 is8BPP);
 void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyToVram);
+void sub_8197AE8(bool8 copyToVram);
 
 #endif // GUARD_MENU_H

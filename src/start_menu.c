@@ -88,7 +88,7 @@ extern void CB2_PartyMenuFromStartMenu(void);
 extern void CB2_PokeNav(void);
 extern void sub_80C4DDC(void (*)(void));
 extern void sub_80C51C4(void (*)(void));
-extern void sub_80C4E74(u8, void (*)(void));
+extern void TrainerCard_ShowLinkCard(u8, void (*)(void));
 extern void ScriptUnfreezeEventObjects(void);
 extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
@@ -750,7 +750,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void)
     {
         play_some_sound();
         overworld_free_bg_tilemaps();
-        sub_80C4E74(gUnknown_03005DB4, CB2_ReturnToFieldWithOpenMenu);
+        TrainerCard_ShowLinkCard(gUnknown_03005DB4, CB2_ReturnToFieldWithOpenMenu);
 
         return TRUE;
     }
