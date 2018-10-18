@@ -1,6 +1,7 @@
 #ifndef GUARD_PARTY_MENU_H
 #define GUARD_PARTY_MENU_H
 
+#include "main.h"
 #include "task.h"
 
 enum
