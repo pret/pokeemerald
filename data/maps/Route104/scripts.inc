@@ -418,11 +418,11 @@ Route104_EventScript_1ED139:: @ 81ED139
 	setobjectxyperm 2, 12, 8
 	addobject 2
 	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
-	clearflag FLAG_0x2E4
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	applymovement 2, Route104_Movement_1ED35C
 	waitmovement 0
 	addobject 4
-	clearflag FLAG_0x2E7
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	call Route104_EventScript_2720A8
 	setflag FLAG_0x2E6
 	hideobjectat 7, MAP_ROUTE104

@@ -86,7 +86,7 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	removeobject 9
 	setflag FLAG_0x333
 	setflag FLAG_0x0CF
-	setflag FLAG_0x2FF
+	setflag FLAG_HIDE_FALLORBOR_TOWN_BATTLE_TENT_SCOTT
 	setvar VAR_0x40BF, 1
 	releaseall
 	end

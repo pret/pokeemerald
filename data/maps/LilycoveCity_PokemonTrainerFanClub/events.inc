@@ -7,7 +7,7 @@ LilycoveCity_PokemonTrainerFanClub_EventObjects: @ 8531D20
 	object_event 6, EVENT_OBJ_GFX_BOY_2, 0, 1, 9, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_21CC55, FLAG_HIDE_FANCLUB_BOY
 	object_event 7, EVENT_OBJ_GFX_WOMAN_3, 0, 3, 10, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_21CCB7, FLAG_HIDE_FANCLUB_LADY
 	object_event 8, EVENT_OBJ_GFX_EXPERT_F, 0, 10, 10, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_21CD19, FLAG_HIDE_FANCLUB_OLD_LADY
-	object_event 9, EVENT_OBJ_GFX_BOY_1, 0, 11, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_21CD7B, FLAG_0x2DA
+	object_event 9, EVENT_OBJ_GFX_BOY_1, 0, 11, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_21CD7B, FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER
 
 LilycoveCity_PokemonTrainerFanClub_MapWarps: @ 8531DF8
 	warp_def 6, 13, 0, 5, MAP_LILYCOVE_CITY

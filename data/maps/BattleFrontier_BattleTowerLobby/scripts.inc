@@ -19,7 +19,7 @@ BattleFrontier_BattleTowerLobby_MapScript1_23E694: @ 823E694
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E6C1
 
 BattleFrontier_BattleTowerLobby_EventScript_23E6B5:: @ 823E6B5
-	clearflag FLAG_0x2BD
+	clearflag FLAG_HIDE_APPRENTICE
 	setvar VAR_0x8004, 23
 	special CallApprenticeFunction
 
@@ -27,7 +27,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E6C0:: @ 823E6C0
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23E6C1:: @ 823E6C1
-	setflag FLAG_0x2BD
+	setflag FLAG_HIDE_APPRENTICE
 	goto BattleFrontier_BattleTowerLobby_EventScript_23E6C0
 
 BattleFrontier_BattleTowerLobby_MapScript2_23E6C9: @ 823E6C9

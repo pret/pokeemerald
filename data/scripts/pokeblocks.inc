@@ -247,7 +247,7 @@ LilycoveCity_ContestLobby_Text_293BB4: @ 8293BB4
 
 EventScript_Pblock1_Ask:: @ 8293C3E
 	lockall
-	checkflag FLAG_0x340
+	checkflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
 	goto_if 0, LilycoveCity_ContestLobby_EventScript_293EFB
 	setvar VAR_0x8009, 1
 	applymovement 16, LilycoveCity_ContestLobby_Movement_294053

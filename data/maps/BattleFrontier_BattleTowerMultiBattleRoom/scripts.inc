@@ -13,14 +13,14 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7: @ 8243DA7
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
 	checkflag FLAG_0x152
 	goto_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA
-	clearflag FLAG_0x2C7
-	clearflag FLAG_0x2C8
-	clearflag FLAG_0x2C9
-	clearflag FLAG_0x2CA
-	clearflag FLAG_0x2CB
-	clearflag FLAG_0x2CC
-	setflag FLAG_0x360
-	setflag FLAG_0x361
+	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1
+	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_2
+	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_3
+	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_4
+	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_5
+	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_6
+	setflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1
+	setflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_2
 	setvar VAR_0x8004, 10
 	special sub_8161F74
 	end

@@ -1,5 +1,5 @@
 DesertRuins_EventObjects: @ 8534354
-	object_event 1, EVENT_OBJ_GFX_REGIROCK, 0, 8, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, DesertRuins_EventScript_22DA02, FLAG_0x3A7
+	object_event 1, EVENT_OBJ_GFX_REGIROCK, 0, 8, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, DesertRuins_EventScript_22DA02, FLAG_HIDE_REGIROCK
 
 DesertRuins_MapWarps: @ 853436C
 	warp_def 8, 29, 3, 1, MAP_ROUTE111

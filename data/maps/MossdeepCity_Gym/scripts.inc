@@ -66,7 +66,7 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 	msgbox MossdeepCity_Gym_Text_221999, 4
 	setflag FLAG_0x4F6
 	setflag FLAG_BADGE07_GET
-	setflag FLAG_0x39C
+	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 	clearflag FLAG_0x365
 	clearflag FLAG_0x393
 	setvar VAR_0x8008, 7

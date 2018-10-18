@@ -48,7 +48,7 @@ AquaHideout_B2F_EventScript_233E25:: @ 8233E25
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_233FF2, 4
 	setflag FLAG_0x070
-	setflag FLAG_0x354
+	setflag FLAG_HIDE_LILYCOVE_CITY_AQUA_GRUNTS
 	release
 	end
 

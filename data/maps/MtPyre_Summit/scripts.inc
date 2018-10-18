@@ -66,7 +66,7 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	msgbox MtPyre_Summit_Text_23290E, 4
 	giveitem_std ITEM_MAGMA_EMBLEM
 	setflag FLAG_0x0D4
-	setflag FLAG_0x34F
+	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
 	releaseall
 	end
 

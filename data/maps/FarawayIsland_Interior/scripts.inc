@@ -49,7 +49,7 @@ FarawayIsland_Interior_MapScript1_267D72: @ 8267D72
 FarawayIsland_Interior_EventScript_267D86:: @ 8267D86
 	checkflag FLAG_0x1C7
 	goto_eq FarawayIsland_Interior_EventScript_27374E
-	clearflag FLAG_0x2CE
+	clearflag FLAG_HIDE_MEW
 	setvar VAR_TEMP_1, 0
 	return
 
@@ -195,7 +195,7 @@ FarawayIsland_Interior_EventScript_267ED0:: @ 8267ED0
 FarawayIsland_Interior_EventScript_267EDB:: @ 8267EDB
 	lockall
 	fadescreenswapbuffers 1
-	setflag FLAG_0x2CE
+	setflag FLAG_HIDE_MEW
 	removeobject 1
 	fadescreenswapbuffers 0
 	msgbox FarawayIsland_Interior_Text_267EF1, 4

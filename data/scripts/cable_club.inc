@@ -29,11 +29,11 @@ OldaleTown_PokemonCenter_2F_EventScript_276AD5:: @ 8276AD5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276AFB:: @ 8276AFB
-	clearflag FLAG_0x2BE
+	clearflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_276AFF:: @ 8276AFF
-	setflag FLAG_0x2BE
+	setflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
 	return
 
 BattleFrontier_PokemonCenter_2F_EventScript_276B03:: @ 8276B03

@@ -35,10 +35,10 @@
 #define FLAG_TEMP_1C  0x1C
 #define FLAG_TEMP_1D  0x1D
 #define FLAG_TEMP_1E  0x1E
+
+// ???
 #define FLAG_TEMP_1F  0x1F
 #define FLAG_TEMP_20  0x20
-
-
 
 #define FLAG_0x021               0x21
 #define FLAG_0x022               0x22
@@ -237,7 +237,7 @@
 #define FLAG_0x0E3               0xE3
 #define FLAG_0x0E4               0xE4
 #define FLAG_0x0E5               0xE5
-#define FLAG_0x0E6               0xE6
+#define FLAG_RECEIVED_TM_36               0xE6
 #define FLAG_0x0E7               0xE7
 #define FLAG_0x0E8               0xE8
 #define FLAG_0x0E9               0xE9
@@ -299,6 +299,8 @@
 #define FLAG_0x121               0x121
 #define FLAG_0x122               0x122
 #define FLAG_0x123               0x123
+
+// upper flags?
 #define FLAG_0x124               0x124
 #define FLAG_0x125               0x125
 #define FLAG_0x126               0x126
@@ -342,8 +344,8 @@
 #define FLAG_0x14C               0x14C
 #define FLAG_0x14D               0x14D
 #define FLAG_0x14E               0x14E
-#define FLAG_0x14F               0x14F
-#define FLAG_0x150               0x150
+#define FLAG_0x14F               0x14F// PLAYER CHOSE CLAW FOSSIL
+#define FLAG_0x150               0x150// PLAYER CHOSE ROOT FOSSIL
 #define FLAG_0x151               0x151
 #define FLAG_0x152               0x152
 #define FLAG_0x153               0x153
@@ -508,8 +510,12 @@
 #define FLAG_0x1F1               0x1F1
 #define FLAG_0x1F2               0x1F2
 #define FLAG_0x1F3               0x1F3
+
+
+
 #define FLAG_HIDDEN_ITEMS_START               0x1F4
 #define FLAG_0x1F5               0x1F5 // trick house end room?
+
 #define FLAG_0x1F6               0x1F6
 #define FLAG_0x1F7               0x1F7
 #define FLAG_0x1F8               0x1F8
@@ -539,14 +545,33 @@
 #define FLAG_0x210               0x210
 #define FLAG_0x211               0x211
 #define FLAG_0x212               0x212
-#define FLAG_HIDDEN_ITEM_1F               0x213
-#define FLAG_HIDDEN_ITEM_20               0x214
-#define FLAG_HIDDEN_ITEM_21               0x215
-#define FLAG_HIDDEN_ITEM_22               0x216
-#define FLAG_0x217               0x217
-#define FLAG_0x218               0x218
-#define FLAG_0x219               0x219
-#define FLAG_0x21A               0x21A
+
+#define FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL (FLAG_HIDDEN_ITEMS_START + 0x00)
+
+#define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY (FLAG_HIDDEN_ITEMS_START + 0x1F)
+#define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_2_KEY (FLAG_HIDDEN_ITEMS_START + 0x20)
+#define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY (FLAG_HIDDEN_ITEMS_START + 0x21)
+#define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_6_KEY (FLAG_HIDDEN_ITEMS_START + 0x22)
+
+#define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_CALCIUM (FLAG_HIDDEN_ITEMS_START + 0x65)
+#define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_ZINC    (FLAG_HIDDEN_ITEMS_START + 0x66)
+#define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_PROTEIN (FLAG_HIDDEN_ITEMS_START + 0x67)
+#define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_IRON    (FLAG_HIDDEN_ITEMS_START + 0x68)
+
+#define FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_EVERSTONE_1 (FLAG_HIDDEN_ITEMS_START + 0x30)
+#define FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_EVERSTONE_2 (FLAG_HIDDEN_ITEMS_START + 0x31)
+
+#define FLAG_HIDDEN_ITEM_JAGGED_PASS_GREAT_BALL (FLAG_HIDDEN_ITEMS_START + 0x4C)
+#define FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL  (FLAG_HIDDEN_ITEMS_START + 0x4D)
+
+#define FLAG_HIDDEN_ITEM_LILYCOVE_CITY_HEART_SCALE (FLAG_HIDDEN_ITEMS_START + 0x1B)
+#define FLAG_HIDDEN_ITEM_LILYCOVE_CITY_PP_UP       (FLAG_HIDDEN_ITEMS_START + 0x1B)
+#define FLAG_HIDDEN_ITEM_LILYCOVE_CITY_POKE_BALL   (FLAG_HIDDEN_ITEMS_START + 0x1B)
+
+#define FLAG_0x217               0x217//23
+#define FLAG_0x218               0x218//24
+#define FLAG_0x219               0x219//25
+#define FLAG_0x21A               0x21A//26
 #define FLAG_0x21B               0x21B
 #define FLAG_0x21C               0x21C
 #define FLAG_0x21D               0x21D
@@ -709,8 +734,8 @@
 #define FLAG_0x2BA               0x2BA
 #define FLAG_0x2BB               0x2BB
 #define FLAG_0x2BC               0x2BC
-#define FLAG_0x2BD               0x2BD
-#define FLAG_0x2BE               0x2BE
+#define FLAG_HIDE_APPRENTICE               0x2BD
+#define FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN               0x2BE
 #define FLAG_0x2BF               0x2BF
 #define FLAG_0x2C0               0x2C0
 #define FLAG_0x2C1               0x2C1
@@ -719,14 +744,14 @@
 #define FLAG_0x2C4               0x2C4
 #define FLAG_0x2C5               0x2C5
 #define FLAG_0x2C6               0x2C6
-#define FLAG_0x2C7               0x2C7
-#define FLAG_0x2C8               0x2C8
-#define FLAG_0x2C9               0x2C9
-#define FLAG_0x2CA               0x2CA
-#define FLAG_0x2CB               0x2CB
-#define FLAG_0x2CC               0x2CC
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1               0x2C7
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_2               0x2C8
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_3               0x2C9
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_4               0x2CA
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_5               0x2CB
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_6               0x2CC
 #define FLAG_0x2CD               0x2CD
-#define FLAG_0x2CE               0x2CE
+#define FLAG_HIDE_MEW               0x2CE
 #define FLAG_0x2CF               0x2CF
 #define FLAG_0x2D0               0x2D0
 #define FLAG_0x2D1               0x2D1
@@ -738,7 +763,7 @@
 #define FLAG_0x2D7               0x2D7
 #define FLAG_0x2D8               0x2D8
 #define FLAG_0x2D9               0x2D9
-#define FLAG_0x2DA               0x2DA
+#define FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER               0x2DA
 #define FLAG_0x2DB               0x2DB
 #define FLAG_0x2DC               0x2DC
 #define FLAG_0x2DD               0x2DD
@@ -748,15 +773,15 @@
 #define FLAG_0x2E1               0x2E1
 #define FLAG_0x2E2               0x2E2
 #define FLAG_0x2E3               0x2E3
-#define FLAG_0x2E4               0x2E4
+#define FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN               0x2E4
 #define FLAG_0x2E5               0x2E5
 #define FLAG_0x2E6               0x2E6
-#define FLAG_0x2E7               0x2E7
+#define FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN               0x2E7
 #define FLAG_0x2E8               0x2E8
 #define FLAG_0x2E9               0x2E9
 #define FLAG_0x2EA               0x2EA
 #define FLAG_0x2EB               0x2EB
-#define FLAG_0x2EC               0x2EC
+#define FLAG_HIDE_LILYCOVE_HARBOR_EON_TICKET_TAKER               0x2EC
 #define FLAG_0x2ED               0x2ED
 #define FLAG_0x2EE               0x2EE
 #define FLAG_0x2EF               0x2EF
@@ -771,37 +796,37 @@
 #define FLAG_0x2F8               0x2F8
 #define FLAG_0x2F9               0x2F9
 #define FLAG_0x2FA               0x2FA
-#define FLAG_0x2FB               0x2FB
-#define FLAG_0x2FC               0x2FC
+#define FLAG_HIDE_DEOXYS               0x2FB
+#define FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE               0x2FC
 #define FLAG_0x2FD               0x2FD
 #define FLAG_0x2FE               0x2FE
-#define FLAG_0x2FF               0x2FF
+#define FLAG_HIDE_FALLORBOR_TOWN_BATTLE_TENT_SCOTT               0x2FF
 #define FLAG_0x300               0x300
 #define FLAG_0x301               0x301
 #define FLAG_0x302               0x302
 #define FLAG_0x303               0x303
 #define FLAG_0x304               0x304
 #define FLAG_0x305               0x305
-#define FLAG_0x306               0x306
-#define FLAG_0x307               0x307
-#define FLAG_0x308               0x308
-#define FLAG_0x309               0x309
-#define FLAG_0x30A               0x30A
-#define FLAG_0x30B               0x30B
-#define FLAG_0x30C               0x30C
+#define FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_1               0x306
+#define FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR               0x307
+#define FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_1               0x308
+#define FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_2               0x309
+#define FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_3               0x30A
+#define FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_4               0x30B
+#define FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS               0x30C
 #define FLAG_0x30D               0x30D
 #define FLAG_0x30E               0x30E
 #define FLAG_0x30F               0x30F
 #define FLAG_0x310               0x310
 #define FLAG_0x311               0x311
 #define FLAG_0x312               0x312
-#define FLAG_0x313               0x313
+#define FLAG_HIDE_LILCOVE_MOTEL_SCOTT               0x313
 #define FLAG_0x314               0x314
 #define FLAG_HIDE_FANCLUB_OLD_LADY               0x315
 #define FLAG_HIDE_FANCLUB_BOY               0x316
 #define FLAG_HIDE_FANCLUB_LITTLE_BOY               0x317
 #define FLAG_HIDE_FANCLUB_LADY               0x318
-#define FLAG_0x319               0x319
+#define FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT               0x319
 #define FLAG_0x31A               0x31A
 #define FLAG_0x31B               0x31B
 #define FLAG_0x31C               0x31C
@@ -810,7 +835,7 @@
 #define FLAG_0x31F               0x31F
 #define FLAG_0x320               0x320
 #define FLAG_0x321               0x321
-#define FLAG_0x322               0x322
+#define FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER               0x322
 #define FLAG_0x323               0x323
 #define FLAG_0x324               0x324
 #define FLAG_0x325               0x325
@@ -828,9 +853,9 @@
 #define FLAG_0x331               0x331
 #define FLAG_0x332               0x332
 #define FLAG_0x333               0x333
-#define FLAG_0x334               0x334
-#define FLAG_0x335               0x335
-#define FLAG_0x336               0x336
+#define FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE               0x334
+#define FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE               0x335
+#define FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE               0x336
 #define FLAG_0x337               0x337
 #define FLAG_0x338               0x338
 #define FLAG_0x339               0x339
@@ -840,11 +865,11 @@
 #define FLAG_0x33D               0x33D
 #define FLAG_0x33E               0x33E
 #define FLAG_0x33F               0x33F
-#define FLAG_0x340               0x340
-#define FLAG_0x341               0x341
+#define FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS               0x340
+#define FLAG_HIDE_GRANITE_CAVE_STEVEN               0x341
 #define FLAG_0x342               0x342
 #define FLAG_0x343               0x343
-#define FLAG_0x344               0x344
+#define FLAG_HIDE_BATTLE_FRONTIER_RECEPTION_GATE_SCOTT               0x344
 #define FLAG_0x345               0x345
 #define FLAG_0x346               0x346
 #define FLAG_0x347               0x347
@@ -855,12 +880,12 @@
 #define FLAG_0x34C               0x34C
 #define FLAG_0x34D               0x34D
 #define FLAG_0x34E               0x34E
-#define FLAG_0x34F               0x34F
+#define FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD               0x34F
 #define FLAG_0x350               0x350
 #define FLAG_0x351               0x351
 #define FLAG_0x352               0x352
 #define FLAG_0x353               0x353
-#define FLAG_0x354               0x354
+#define FLAG_HIDE_LILYCOVE_CITY_AQUA_GRUNTS               0x354
 #define FLAG_0x355               0x355
 #define FLAG_0x356               0x356
 #define FLAG_0x357               0x357
@@ -869,20 +894,20 @@
 #define FLAG_0x35A               0x35A
 #define FLAG_0x35B               0x35B
 #define FLAG_0x35C               0x35C
-#define FLAG_0x35D               0x35D
+#define FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL               0x35D
 #define FLAG_0x35E               0x35E
 #define FLAG_0x35F               0x35F
-#define FLAG_0x360               0x360
-#define FLAG_0x361               0x361
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1               0x360
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_2               0x361
 #define FLAG_0x362               0x362
 #define FLAG_0x363               0x363
 #define FLAG_0x364               0x364
 #define FLAG_0x365               0x365
 #define FLAG_0x366               0x366
-#define FLAG_0x367               0x367
+#define FLAG_HIDE_LANETTE               0x367
 #define FLAG_0x368               0x368
-#define FLAG_0x369               0x369
-#define FLAG_0x36A               0x36A
+#define FLAG_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT               0x369
+#define FLAG_HIDE_DESERT_UNDERPASS_FOSSIL               0x36A
 #define FLAG_0x36B               0x36B
 #define FLAG_0x36C               0x36C
 #define FLAG_0x36D               0x36D
@@ -896,14 +921,14 @@
 #define FLAG_0x375               0x375
 #define FLAG_0x376               0x376
 #define FLAG_0x377               0x377
-#define FLAG_0x378               0x378
+#define FLAG_HIDE_BATTLE_TOWER_OPPONENT               0x378
 #define FLAG_0x379               0x379
 #define FLAG_0x37A               0x37A
 #define FLAG_0x37B               0x37B
 #define FLAG_0x37C               0x37C
 #define FLAG_0x37D               0x37D
 #define FLAG_0x37E               0x37E
-#define FLAG_0x37F               0x37F
+#define FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_2               0x37F
 #define FLAG_0x380               0x380
 #define FLAG_0x381               0x381
 #define FLAG_0x382               0x382
@@ -915,9 +940,9 @@
 #define FLAG_0x388               0x388
 #define FLAG_0x389               0x389
 #define FLAG_0x38A               0x38A
-#define FLAG_0x38B               0x38B
-#define FLAG_0x38C               0x38C
-#define FLAG_0x38D               0x38D
+#define FLAG_HIDE_FALLARBOR_AZURILL               0x38B
+#define FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT               0x38C
+#define FLAG_HIDE_LILYCOVE_HARBOR_FERRY_SAILOR               0x38D
 #define FLAG_0x38E               0x38E
 #define FLAG_0x38F               0x38F
 #define FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON               0x390
@@ -926,32 +951,32 @@
 #define FLAG_0x393               0x393
 #define FLAG_0x394               0x394
 #define FLAG_0x395               0x395
-#define FLAG_0x396               0x396
+#define FLAG_HIDE_BATTLE_TOWER_REPORTER               0x396
 #define FLAG_0x397               0x397
-#define FLAG_0x398               0x398
-#define FLAG_0x399               0x399
+#define FLAG_HIDE_CHAMPIONS_ROOM_RIVAL               0x398
+#define FLAG_HIDE_CHAMPIONS_ROOM_BIRCH               0x399
 #define FLAG_0x39A               0x39A
 #define FLAG_0x39B               0x39B
-#define FLAG_0x39C               0x39C
-#define FLAG_0x39D               0x39D
+#define FLAG_HIDE_AQUA_HIDEOUT_GRUNTS               0x39C
+#define FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS               0x39D
 #define FLAG_0x39E               0x39E
 #define FLAG_0x39F               0x39F
-#define FLAG_0x3A0               0x3A0
-#define FLAG_0x3A1               0x3A1
-#define FLAG_0x3A2               0x3A2
+#define FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO               0x3A0
+#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1               0x3A1
+#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2               0x3A2
 #define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1               0x3A3
 #define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2               0x3A4
-#define FLAG_0x3A5               0x3A5
+#define FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL               0x3A5
 #define FLAG_0x3A6               0x3A6
-#define FLAG_0x3A7               0x3A7
-#define FLAG_0x3A8               0x3A8
-#define FLAG_0x3A9               0x3A9
+#define FLAG_HIDE_REGIROCK               0x3A7
+#define FLAG_HIDE_REGICE               0x3A8
+#define FLAG_HIDE_REGISTEEL               0x3A9
 #define FLAG_0x3AA               0x3AA
 #define FLAG_0x3AB               0x3AB
-#define FLAG_0x3AC               0x3AC
+#define FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN               0x3AC
 #define FLAG_0x3AD               0x3AD
 #define FLAG_0x3AE               0x3AE
-#define FLAG_0x3AF               0x3AF
+#define FLAG_HIDE_AQUA_HIDEOUT_B2F_SUBMARINE_SHADOW               0x3AF
 #define FLAG_0x3B0               0x3B0
 #define FLAG_0x3B1               0x3B1
 #define FLAG_0x3B2               0x3B2
@@ -970,23 +995,23 @@
 #define FLAG_0x3BF               0x3BF
 #define FLAG_0x3C0               0x3C0
 #define FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION               0x3C1
-#define FLAG_0x3C2               0x3C2
+#define FLAG_HIDE_LILYCOVE_DEPARTMENT_STORE_ROOFTOP_SALE_WOMAN               0x3C2
 #define FLAG_0x3C3               0x3C3
 #define FLAG_0x3C4               0x3C4
 #define FLAG_0x3C5               0x3C5
 #define FLAG_0x3C6               0x3C6
 #define FLAG_0x3C7               0x3C7
 #define FLAG_0x3C8               0x3C8
-#define FLAG_0x3C9               0x3C9
+#define FLAG_HIDE_FORTREE_CITY_KECLEON               0x3C9
 #define FLAG_0x3CA               0x3CA
-#define FLAG_0x3CB               0x3CB
+#define FLAG_HIDE_LILYCOVE_CITY_RIVAL               0x3CB
 #define FLAG_0x3CC               0x3CC
 #define FLAG_0x3CD               0x3CD
 #define FLAG_0x3CE               0x3CE
 #define FLAG_0x3CF               0x3CF
 #define FLAG_0x3D0               0x3D0
-#define FLAG_0x3D1               0x3D1
-#define FLAG_0x3D2               0x3D2
+#define FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1               0x3D1
+#define FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2               0x3D2
 #define FLAG_0x3D3               0x3D3
 #define FLAG_0x3D4               0x3D4
 #define FLAG_0x3D5               0x3D5
@@ -1001,7 +1026,7 @@
 #define FLAG_0x3DE               0x3DE
 #define FLAG_0x3DF               0x3DF
 #define FLAG_0x3E0               0x3E0
-#define FLAG_0x3E1               0x3E1
+#define FLAG_HIDE_LILYCOVE_POKEMON_CENTER_LADY               0x3E1
 #define FLAG_0x3E2               0x3E2
 #define FLAG_0x3E3               0x3E3
 #define FLAG_0x3E4               0x3E4
@@ -1050,7 +1075,7 @@
 #define FLAG_0x40F               0x40F
 #define FLAG_0x410               0x410
 #define FLAG_0x411               0x411
-#define FLAG_0x412               0x412
+#define FLAG_HIDDEN_ITEM_LILYCOVE_CITY_MAX_REPEL               0x412
 #define FLAG_0x413               0x413
 #define FLAG_0x414               0x414
 #define FLAG_0x415               0x415
@@ -1058,11 +1083,11 @@
 #define FLAG_0x417               0x417
 #define FLAG_0x418               0x418
 #define FLAG_0x419               0x419
-#define FLAG_0x41A               0x41A
-#define FLAG_0x41B               0x41B
+#define FLAG_ITEM_GRANITE_CAVE_1F_ESCAPE_ROPE               0x41A
+#define FLAG_ITEM_GRANITE_CAVE_B1F_POKE_BALL               0x41B
 #define FLAG_0x41C               0x41C
-#define FLAG_0x41D               0x41D
-#define FLAG_0x41E               0x41E
+#define FLAG_ITEM_GRANITE_CAVE_B2F_REPEL               0x41D
+#define FLAG_ITEM_GRANITE_CAVE_B2F_RARE_CANDY               0x41E
 #define FLAG_0x41F               0x41F
 #define FLAG_0x420               0x420
 #define FLAG_0x421               0x421
@@ -1078,15 +1103,16 @@
 #define FLAG_0x42B               0x42B
 #define FLAG_0x42C               0x42C
 #define FLAG_0x42D               0x42D
-#define FLAG_0x42E               0x42E
-#define FLAG_0x42F               0x42F
-#define FLAG_0x430               0x430
+#define FLAG_ITEM_JAGGED_PASS_BURN_HEAL               0x42E
+#define FLAG_ITEM_AQUA_HIDEOUT_B1F_MAX_ELIXIR               0x42F
+#define FLAG_ITEM_AQUA_HIDEOUT_B2F_NEST_BALL               0x430
 #define FLAG_0x431               0x431
 #define FLAG_0x432               0x432
 #define FLAG_0x433               0x433
 #define FLAG_0x434               0x434
-#define FLAG_0x435               0x435
-#define FLAG_0x436               0x436
+
+#define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_6_LUXURY_BALL               0x435
+#define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_4_SCANNER               0x436
 #define FLAG_0x437               0x437
 #define FLAG_0x438               0x438
 #define FLAG_0x439               0x439
@@ -1099,18 +1125,18 @@
 #define FLAG_0x440               0x440
 #define FLAG_0x441               0x441
 #define FLAG_0x442               0x442
-#define FLAG_0x443               0x443
+#define FLAG_ITEM_FIERY_PATH_TM06              0x443
 #define FLAG_0x444               0x444
 #define FLAG_0x445               0x445
 #define FLAG_0x446               0x446
-#define FLAG_0x447               0x447
-#define FLAG_0x448               0x448
-#define FLAG_0x449               0x449
-#define FLAG_0x44A               0x44A
-#define FLAG_0x44B               0x44B
-#define FLAG_0x44C               0x44C
-#define FLAG_0x44D               0x44D
-#define FLAG_0x44E               0x44E
+#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_HARBOR_MAIL               0x447
+#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_ESCAPE_ROPE               0x448
+#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_B1F_DIVE_BALL               0x449
+#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_TM_13               0x44A
+#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_1F_REVIVE               0x44B
+#define FLAG_ITEM_ABANDONED_SHIP_CAPTAINS_OFFICE_STORAGE_KEY               0x44C
+#define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_3_WATER_STONE              0x44D
+#define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_TM_18               0x44E
 #define FLAG_0x44F               0x44F
 #define FLAG_0x450               0x450
 #define FLAG_0x451               0x451
@@ -1119,7 +1145,7 @@
 #define FLAG_0x454               0x454
 #define FLAG_0x455               0x455
 #define FLAG_0x456               0x456
-#define FLAG_0x457               0x457
+#define FLAG_ITEM_FIERY_PATH_FIRE_STONE               0x457
 #define FLAG_0x458               0x458
 #define FLAG_0x459               0x459
 #define FLAG_0x45A               0x45A
@@ -1132,7 +1158,7 @@
 #define FLAG_0x461               0x461
 #define FLAG_0x462               0x462
 #define FLAG_0x463               0x463
-#define FLAG_0x464               0x464
+#define FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL               0x464
 #define FLAG_0x465               0x465
 #define FLAG_0x466               0x466
 #define FLAG_0x467               0x467
@@ -1140,7 +1166,7 @@
 #define FLAG_0x469               0x469
 #define FLAG_0x46A               0x46A
 #define FLAG_0x46B               0x46B
-#define FLAG_0x46C               0x46C
+#define FLAG_ITEM_AQUA_HIDEOUT_B1F_NUGGET               0x46C
 #define FLAG_0x46D               0x46D
 #define FLAG_0x46E               0x46E
 #define FLAG_0x46F               0x46F
@@ -1170,8 +1196,8 @@
 #define FLAG_0x487               0x487
 #define FLAG_0x488               0x488
 #define FLAG_0x489               0x489
-#define FLAG_0x48A               0x48A
-#define FLAG_0x48B               0x48B
+#define FLAG_ITEM_ARTISAN_CAVE_B1F_HP_UP               0x48A
+#define FLAG_ITEM_ARTISAN_CAVE_1F_CARBOS               0x48B
 #define FLAG_0x48C               0x48C
 #define FLAG_0x48D               0x48D
 #define FLAG_0x48E               0x48E

@@ -137,7 +137,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	special sub_81BEB7C
 	waitstate
 	setvar VAR_0x40CB, 2
-	clearflag FLAG_0x36A
+	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	checkflag FLAG_0x150
 	goto_eq Route111_EventScript_1F0EA7
 	msgbox Route111_Text_1F1C74, 4

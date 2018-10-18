@@ -73,7 +73,7 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	removeobject 1
 	setflag FLAG_0x39E
 	setflag FLAG_0x08B
-	clearflag FLAG_0x3A0
+	clearflag FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO
 	setflag FLAG_0x3AE
 	clearflag FLAG_0x3E2
 	releaseall

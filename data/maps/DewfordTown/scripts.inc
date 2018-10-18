@@ -138,7 +138,7 @@ DewfordTown_EventScript_1E9660:: @ 81E9660
 	clearflag FLAG_0x2E3
 	clearflag FLAG_0x371
 	clearflag FLAG_0x2E6
-	setflag FLAG_0x2E7
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
 	setvar VAR_0x408E, 2
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
@@ -174,7 +174,7 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	clearflag FLAG_0x2E5
 	addobject 1
 	clearflag FLAG_0x2E8
-	setflag FLAG_0x2E7
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
 	checkflag FLAG_0x095
 	call_if 0, DewfordTown_EventScript_1E9790

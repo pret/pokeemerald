@@ -1089,19 +1089,19 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x2E3
 	setflag FLAG_0x371
 	setflag FLAG_0x2E2
-	setflag FLAG_0x2E4
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_0x2E5
-	setflag FLAG_0x2E7
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_0x2E8
 	setflag FLAG_0x38A
 	setflag FLAG_0x345
-	setflag FLAG_0x306
-	setflag FLAG_0x37F
-	setflag FLAG_0x308
-	setflag FLAG_0x309
-	setflag FLAG_0x30A
-	setflag FLAG_0x30B
-	setflag FLAG_0x30C
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_1
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_2
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_1
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_2
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_3
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_4
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS
 	setflag FLAG_0x30D
 	setflag FLAG_0x338
 	setflag FLAG_0x2E9
@@ -1115,7 +1115,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_HIDE_FANCLUB_BOY
 	setflag FLAG_HIDE_FANCLUB_LITTLE_BOY
 	setflag FLAG_HIDE_FANCLUB_LADY
-	setflag FLAG_0x2DA
+	setflag FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER
 	setflag FLAG_0x31D
 	setflag FLAG_0x31E
 	setflag FLAG_0x31F
@@ -1124,7 +1124,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x387
 	setflag FLAG_0x388
 	setflag FLAG_0x323
-	setflag FLAG_0x322
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
 	setflag FLAG_0x326
 	setflag FLAG_0x328
 	setflag FLAG_0x329
@@ -1142,7 +1142,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x34D
 	setflag FLAG_0x34E
 	setflag FLAG_0x35C
-	setflag FLAG_0x35D
+	setflag FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL
 	setflag FLAG_0x343
 	setflag FLAG_0x348
 	setflag FLAG_0x350
@@ -1164,7 +1164,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x374
 	setflag FLAG_0x375
 	setflag FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION
-	setflag FLAG_0x378
+	setflag FLAG_HIDE_BATTLE_TOWER_OPPONENT
 	setflag FLAG_0x2F0
 	setflag FLAG_0x2F5
 	setflag FLAG_0x31A
@@ -1173,26 +1173,26 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x380
 	setflag FLAG_0x381
 	setflag FLAG_0x382
-	setflag FLAG_0x38D
-	setflag FLAG_0x2EC
+	setflag FLAG_HIDE_LILYCOVE_HARBOR_FERRY_SAILOR
+	setflag FLAG_HIDE_LILYCOVE_HARBOR_EON_TICKET_TAKER
 	setflag FLAG_0x38E
 	setflag FLAG_0x38F
 	setflag FLAG_0x393
 	setflag FLAG_0x358
 	setflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
 	setflag FLAG_0x2FD
-	setflag FLAG_0x398
-	setflag FLAG_0x399
+	setflag FLAG_HIDE_CHAMPIONS_ROOM_RIVAL
+	setflag FLAG_HIDE_CHAMPIONS_ROOM_BIRCH
 	setflag FLAG_0x39A
 	setflag FLAG_0x39B
 	setflag FLAG_0x2CF
-	setflag FLAG_0x39D
-	setflag FLAG_0x3A1
-	setflag FLAG_0x3A2
+	setflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
+	setflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1
+	setflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2
 	setflag FLAG_0x3A6
 	setflag FLAG_0x3AA
-	setflag FLAG_0x3AC
-	setflag FLAG_0x3A0
+	setflag FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN
+	setflag FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO
 	setflag FLAG_0x3E0
 	setflag FLAG_0x342
 	setflag FLAG_0x3B0
@@ -1217,16 +1217,16 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_0x33B
 	setflag FLAG_0x36C
 	setflag FLAG_0x36B
-	setflag FLAG_0x36A
+	setflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	setflag FLAG_0x337
 	setflag FLAG_0x2F4
 	setflag FLAG_0x35E
 	setflag FLAG_0x35F
-	setflag FLAG_0x340
-	setflag FLAG_0x2FB
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
+	setflag FLAG_HIDE_DEOXYS
 	setflag FLAG_0x2EB
-	setflag FLAG_0x2FF
-	setflag FLAG_0x319
+	setflag FLAG_HIDE_FALLORBOR_TOWN_BATTLE_TENT_SCOTT
+	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	setflag FLAG_0x357
 	setflag FLAG_0x050
 	call EventScript_27149D
@@ -1238,7 +1238,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	call EverGrandeCity_HallOfFame_EventScript_271829
 	compare VAR_0x40CC, 0
 	call_if 1, EverGrandeCity_HallOfFame_EventScript_271839
-	clearflag FLAG_0x39D
+	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
 	setflag FLAG_0x365
 	clearflag FLAG_0x3B6
@@ -1247,10 +1247,10 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	setflag FLAG_0x35A
 	clearflag FLAG_0x2EF
 	clearflag FLAG_0x35C
-	clearflag FLAG_0x35D
+	clearflag FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL
 	setflag FLAG_0x2CD
 	clearflag FLAG_0x2EB
-	setflag FLAG_0x3CB
+	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
 	special sub_813BA60
 	checkflag FLAG_0x123
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_271843
@@ -1303,8 +1303,8 @@ EventScript_271862:: @ 8271862
 	end
 
 EverGrandeCity_HallOfFame_EventScript_271884:: @ 8271884
-	setflag FLAG_0x2E4
-	setflag FLAG_0x2E7
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_0x2E5
 	setflag FLAG_0x2E8
 	clearflag FLAG_0x2E6
@@ -1319,8 +1319,8 @@ EverGrandeCity_HallOfFame_EventScript_27189A:: @ 827189A
 	setflag FLAG_0x2E6
 	setflag FLAG_0x2E3
 	setflag FLAG_0x371
-	clearflag FLAG_0x2E4
-	clearflag FLAG_0x2E7
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2718B3:: @ 82718B3
@@ -1328,8 +1328,8 @@ EverGrandeCity_HallOfFame_EventScript_2718B3:: @ 82718B3
 	setflag FLAG_0x2E6
 	setflag FLAG_0x2E3
 	setflag FLAG_0x371
-	setflag FLAG_0x2E4
-	setflag FLAG_0x2E7
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	clearflag FLAG_0x2E5
 	clearflag FLAG_0x2E8
 	end
@@ -1357,7 +1357,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_27374E
 	checkflag FLAG_0x2E6
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_27190C
-	checkflag FLAG_0x2E4
+	checkflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_271912
 	checkflag FLAG_0x2E5
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_271918
@@ -2341,8 +2341,8 @@ SlateportCity_Harbor_Movement_2721F0: @ 82721F0
 	step_end
 
 PetalburgCity_Gym_EventScript_2721F8:: @ 82721F8
-	setflag FLAG_0x2E4
-	setflag FLAG_0x2E7
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_0x2E5
 	setflag FLAG_0x2E8
 	setflag FLAG_0x2E2
@@ -5753,7 +5753,7 @@ LilycoveCity_ContestLobby_EventScript_28CB2B:: @ 828CB2B
 	end
 
 LilycoveCity_ContestLobby_EventScript_28CB91:: @ 828CB91
-	clearflag FLAG_0x322
+	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
 	return
 
 LilycoveCity_ContestLobby_EventScript_28CB95:: @ 828CB95
@@ -5837,11 +5837,11 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC84:: @ 828CC84
 	special InterviewBefore
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
-	clearflag FLAG_0x396
+	clearflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_28CCA6:: @ 828CCA6
-	setflag FLAG_0x396
+	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	return
 
 	.include "data/scripts/gabby_and_ty.inc"

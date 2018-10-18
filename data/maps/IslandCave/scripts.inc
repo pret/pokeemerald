@@ -38,7 +38,7 @@ IslandCave_MapScript1_238E99: @ 8238E99
 	end
 
 IslandCave_EventScript_238EAB:: @ 8238EAB
-	clearflag FLAG_0x3A8
+	clearflag FLAG_HIDE_REGICE
 	return
 
 IslandCave_EventScript_238EAF:: @ 8238EAF

@@ -10,6 +10,6 @@ FieryPath_MapScript1_230F2A: @ 8230F2A
 
 FieryPath_EventScript_230F37:: @ 8230F37
 	setflag FLAG_0x2FE
-	clearflag FLAG_0x2FF
+	clearflag FLAG_HIDE_FALLORBOR_TOWN_BATTLE_TENT_SCOTT
 	return
 

@@ -427,7 +427,7 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	clearflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
 	setvar VAR_0x8008, 5
 	call PetalburgCity_Gym_EventScript_271F43
-	clearflag FLAG_0x3AC
+	clearflag FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN
 	call PetalburgCity_Gym_EventScript_2048FF
 	special DrawWholeMapView
 	call PetalburgCity_Gym_EventScript_204ED2

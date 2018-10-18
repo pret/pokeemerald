@@ -18,7 +18,7 @@ MossdeepCity_House2_EventScript_2220F1:: @ 82220F1
 	waitmoncry
 	closemessage
 	setflag FLAG_0x0E0
-	clearflag FLAG_0x3A5
+	clearflag FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL
 	compare VAR_FACING, 2
 	call_if 1, MossdeepCity_House2_EventScript_222124
 	compare VAR_FACING, 3

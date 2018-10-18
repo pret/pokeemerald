@@ -12,13 +12,13 @@ LilycoveCity_ContestLobby_EventScript_21A227:: @ 821A227
 	getpricereduction 4
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A23C
-	clearflag FLAG_0x369
-	setflag FLAG_0x340
+	clearflag FLAG_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A23C:: @ 821A23C
-	setflag FLAG_0x369
-	clearflag FLAG_0x340
+	setflag FLAG_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT
+	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
 	return
 
 LilycoveCity_ContestLobby_MapScript2_21A243: @ 821A243
@@ -27,7 +27,7 @@ LilycoveCity_ContestLobby_MapScript2_21A243: @ 821A243
 	.2byte 0
 
 LilycoveCity_ContestLobby_EventScript_21A255:: @ 821A255
-	checkflag FLAG_0x307
+	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A264
 	setvar VAR_0x4099, 0
 	end
@@ -111,23 +111,23 @@ LilycoveCity_ContestLobby_EventScript_21A360:: @ 821A360
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3A2:: @ 821A3A2
-	clearflag FLAG_0x308
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_1
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3A6:: @ 821A3A6
-	clearflag FLAG_0x309
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_2
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3AA:: @ 821A3AA
-	clearflag FLAG_0x30A
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_3
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3AE:: @ 821A3AE
-	clearflag FLAG_0x30B
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_4
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3B2:: @ 821A3B2
-	clearflag FLAG_0x30C
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3B6:: @ 821A3B6
@@ -202,7 +202,7 @@ LilycoveCity_ContestLobby_Movement_21A41E: @ 821A41E
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_21A427:: @ 821A427
-	checkflag FLAG_0x307
+	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A436
 	setvar VAR_0x4099, 0
 	end
@@ -356,7 +356,7 @@ LilycoveCity_ContestLobby_EventScript_21A5C9:: @ 821A5C9
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A5CF:: @ 821A5CF
-	setflag FLAG_0x307
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar VAR_0x4094, 0x1
 	giveitem ITEM_CONTEST_PASS, 1
 	setvar VAR_0x800B, 8

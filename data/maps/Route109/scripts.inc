@@ -44,13 +44,13 @@ Route109_EventScript_1EE7D5:: @ 81EE7D5
 	applymovement 255, Route109_Movement_1EE900
 	waitmovement 0
 	addobject 4
-	clearflag FLAG_0x2E7
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setobjectxyperm 2, 12, 8
 	addobject 2
 	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	applymovement 2, Route109_Movement_1EE90D
 	waitmovement 0
-	clearflag FLAG_0x2E4
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_0x2E8
 	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_1E9C1D, 4
