@@ -9,8 +9,8 @@ MirageTower_4F_EventScript_23AD48:: @ 823AD48
 	goto_eq MirageTower_4F_EventScript_23AD7F
 	giveitem_std ITEM_ROOT_FOSSIL
 	closemessage
-	setflag FLAG_0x3C3
-	setflag FLAG_0x3C4
+	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
+	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
 	removeobject 1
 	delay 30
 	setflag FLAG_0x14F
@@ -30,8 +30,8 @@ MirageTower_4F_EventScript_23AD89:: @ 823AD89
 	goto_eq MirageTower_4F_EventScript_23ADC0
 	giveitem_std ITEM_CLAW_FOSSIL
 	closemessage
-	setflag FLAG_0x3C4
-	setflag FLAG_0x3C3
+	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
+	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
 	removeobject 2
 	delay 30
 	setflag FLAG_0x150

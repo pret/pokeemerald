@@ -47,8 +47,8 @@ MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	delay 20
 	applymovement 1, MossdeepCity_StevensHouse_Movement_22283B
 	waitmovement 0
-	setflag FLAG_0x314
-	setflag FLAG_0x3AD
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT
 	setvar VAR_0x40C6, 2
 	releaseall
 	end
@@ -129,7 +129,7 @@ MossdeepCity_StevensHouse_EventScript_2228EB:: @ 82228EB
 	return
 
 MossdeepCity_StevensHouse_EventScript_222901:: @ 8222901
-	setflag FLAG_0x3C8
+	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
 	setflag FLAG_0x12A
 	releaseall
 	end

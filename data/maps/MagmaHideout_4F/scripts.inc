@@ -60,8 +60,8 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	trainerbattle 3, TRAINER_MAXIE_1, 0, MagmaHideout_4F_Text_23ABB5
 	msgbox MagmaHideout_4F_Text_23ABE2, 4
 	closemessage
-	clearflag FLAG_0x348
-	clearflag FLAG_0x343
+	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
+	clearflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
 	setvar VAR_0x4058, 1
 	setflag FLAG_0x06F
 	setvar VAR_0x40A0, 1
@@ -71,7 +71,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	removeobject 3
 	removeobject 4
 	removeobject 5
-	setflag FLAG_0x359
+	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
 	fadescreen 0
 	releaseall
 	end

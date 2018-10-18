@@ -232,7 +232,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	msgbox Route101_Text_1EBF12, 4
 	special HealPlayerParty
 	setflag FLAG_0x2D0
-	clearflag FLAG_0x2D1
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
 	setflag FLAG_0x2BC
 	setvar VAR_0x4084, 2
 	setvar VAR_0x4060, 3
@@ -248,11 +248,11 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	end
 
 Route101_EventScript_1EBE85:: @ 81EBE85
-	setflag FLAG_0x2D2
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	return
 
 Route101_EventScript_1EBE89:: @ 81EBE89
-	setflag FLAG_0x2F8
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	return
 
 Route101_Movement_1EBE8D: @ 81EBE8D

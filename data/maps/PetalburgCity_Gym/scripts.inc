@@ -96,7 +96,7 @@ PetalburgCity_Gym_EventScript_2049A4:: @ 82049A4
 	waitmovement 0
 	playse SE_KAIDAN
 	removeobject 10
-	setflag FLAG_0x2D6
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	delay 30
 	applymovement 255, PetalburgCity_Gym_Movement_2725A6
 	waitmovement 0
@@ -216,12 +216,12 @@ PetalburgCity_Gym_EventScript_204AAC:: @ 8204AAC
 	compare VAR_0x8008, 3
 	call_if 1, PetalburgCity_Gym_EventScript_204CB5
 	removeobject 10
-	setflag FLAG_0x2D8
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_AUNT
 	setvar VAR_0x4085, 1
 	setvar VAR_0x4057, 2
-	clearflag FLAG_0x2D6
-	clearflag FLAG_0x362
-	setflag FLAG_0x379
+	clearflag FLAG_HIDE_PETALBURG_CITY_WALLY
+	clearflag FLAG_HIDE_PETALBURG_GYM_WALLY
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
 	special InitBirchState
 	warp MAP_PETALBURG_CITY, 255, 15, 8
 	waitstate
@@ -423,8 +423,8 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	setflag FLAG_BADGE05_GET
 	special sub_813B9A0
 	call PetalburgCity_Gym_EventScript_2721F8
-	setflag FLAG_SPRITEVIS_MAUVILLE_GYM_WATTSON
-	clearflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
+	setflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
+	clearflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
 	setvar VAR_0x8008, 5
 	call PetalburgCity_Gym_EventScript_271F43
 	clearflag FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN
@@ -500,7 +500,7 @@ PetalburgCity_Gym_EventScript_204F13:: @ 8204F13
 	call_if 1, PetalburgCity_Gym_EventScript_20506C
 	removeobject 11
 	setvar VAR_0x4057, 4
-	clearflag FLAG_0x33E
+	clearflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
 	warp MAP_PETALBURG_CITY, 255, 15, 8
 	waitstate
 	release

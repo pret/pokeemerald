@@ -85,7 +85,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC8C
 	setflag FLAG_0x095
 	clearflag FLAG_0x3B3
-	setflag FLAG_0x3B5
+	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
 	setvar VAR_0x40D2, 1
 	fadescreen 0
 	release

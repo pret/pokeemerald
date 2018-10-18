@@ -52,7 +52,7 @@ Route104_EventScript_1ECC9E:: @ 81ECC9E
 
 Route104_EventScript_1ECCB3:: @ 81ECCB3
 	lockall
-	setflag FLAG_0x32E
+	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
 	applymovement 255, Route104_Movement_2725A6

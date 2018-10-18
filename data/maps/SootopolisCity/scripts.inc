@@ -1445,8 +1445,8 @@ SootopolisCity_EventScript_1E654C:: @ 81E654C
 	setflag FLAG_0x33B
 	setflag FLAG_0x33A
 	setflag FLAG_0x09E
-	clearflag FLAG_0x358
-	clearflag FLAG_0x394
+	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
+	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	setvar VAR_0x40B9, 2
 	warpsilent MAP_SOOTOPOLIS_CITY, 255, 31, 34
 	waitstate

@@ -35,7 +35,7 @@ LavaridgeTown_EventScript_1EA529:: @ 81EA529
 	return
 
 LavaridgeTown_EventScript_1EA53F:: @ 81EA53F
-	clearflag FLAG_0x36D
+	clearflag FLAG_HIDE_MT_CHIMNEY_TRAINERS
 	return
 
 LavaridgeTown_EventScript_1EA543:: @ 81EA543

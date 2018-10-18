@@ -192,8 +192,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	special EnableNationalPokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB466, 4
 	closemessage
-	setflag FLAG_0x31B
-	setflag FLAG_0x31A
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	setvar VAR_0x40D3, 2
 	setvar VAR_0x40F5, 0
 	setflag FLAG_0x072

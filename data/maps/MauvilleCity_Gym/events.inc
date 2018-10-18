@@ -1,5 +1,5 @@
 MauvilleCity_Gym_EventObjects: @ 852FD5C
-	object_event 1, EVENT_OBJ_GFX_WATTSON, 0, 5, 2, 0, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_20DEEB, FLAG_SPRITEVIS_MAUVILLE_GYM_WATTSON
+	object_event 1, EVENT_OBJ_GFX_WATTSON, 0, 5, 2, 0, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_20DEEB, FLAG_HIDE_MAUVILLE_GYM_WATTSON
 	object_event 2, EVENT_OBJ_GFX_MAN_5, 0, 7, 8, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 1, MauvilleCity_Gym_EventScript_20E0D0, 0
 	object_event 3, EVENT_OBJ_GFX_GIRL_3, 0, 1, 16, 0, MOVEMENT_TYPE_FACE_UP, 0, 0, 1, 2, MauvilleCity_Gym_EventScript_20E0FE, 0
 	object_event 4, EVENT_OBJ_GFX_YOUNGSTER, 0, 5, 10, 0, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 2, MauvilleCity_Gym_EventScript_20E0E7, 0

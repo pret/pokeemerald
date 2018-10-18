@@ -51,8 +51,8 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	removeobject 5
 	removeobject 6
 	removeobject 7
-	setflag FLAG_0x394
-	setflag FLAG_0x395
+	setflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
+	setflag FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA
 	fadedefaultbgm
 	fadescreen 0
 	delay 20

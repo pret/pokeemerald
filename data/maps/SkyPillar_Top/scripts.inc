@@ -34,7 +34,7 @@ SkyPillar_Top_EventScript_239705:: @ 8239705
 	return
 
 SkyPillar_Top_EventScript_23970F:: @ 823970F
-	clearflag FLAG_0x050
+	clearflag FLAG_RAYQUAZA_ON_SKY_TOWER_SUMMIT
 	return
 
 SkyPillar_Top_MapScript2_239713: @ 8239713

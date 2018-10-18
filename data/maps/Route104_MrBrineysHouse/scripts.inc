@@ -11,7 +11,7 @@ Route104_MrBrineysHouse_MapScript1_229D34: @ 8229D34
 	end
 
 Route104_MrBrineysHouse_EventScript_229D4C:: @ 8229D4C
-	setflag FLAG_0x32E
+	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	return
 
 Route104_MrBrineysHouse_EventScript_229D50:: @ 8229D50
@@ -85,7 +85,7 @@ Route104_MrBrineysHouse_EventScript_229E27:: @ 8229E27
 	setflag FLAG_0x371
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
-	setflag FLAG_0x32E
+	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setflag FLAG_0x2CF
 	warp MAP_ROUTE104, 255, 13, 51
 	waitstate

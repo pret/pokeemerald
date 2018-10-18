@@ -14,7 +14,7 @@ LilycoveCity_ContestLobby_EventObjects: @ 8531534
 	object_event 13, EVENT_OBJ_GFX_FAT_MAN, 0, 0, 8, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A723, 0
 	object_event 14, EVENT_OBJ_GFX_NINJA_BOY, 0, 8, 7, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, LilycoveCity_ContestLobby_EventScript_21A735, 0
 	object_event 15, EVENT_OBJ_GFX_POKEFAN_F, 0, 22, 9, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_293FAB, 0
-	object_event 16, EVENT_OBJ_GFX_EXPERT_M, 0, 26, 5, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_293FBD, FLAG_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT
+	object_event 16, EVENT_OBJ_GFX_EXPERT_M, 0, 26, 5, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_293FBD, FLAG_HIDE_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT
 	object_event 17, EVENT_OBJ_GFX_GIRL_1, 0, 24, 9, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_21A771, 0
 	object_event 18, EVENT_OBJ_GFX_MAN_5, 0, 27, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_ContestLobby_EventScript_21A7B3, FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
 	object_event 19, EVENT_OBJ_GFX_CAMPER, 0, 28, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_ContestLobby_EventScript_21A7BE, FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS

@@ -84,8 +84,8 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	compare VAR_FACING, 4
 	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F9440
 	setvar VAR_0x408D, 3
-	setflag FLAG_0x332
-	clearflag FLAG_0x2D2
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	setvar VAR_0x4050, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm

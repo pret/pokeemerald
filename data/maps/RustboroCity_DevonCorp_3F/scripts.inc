@@ -55,18 +55,18 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	waitfanfare
 	setflag FLAG_SYS_POKENAV_GET
 	setflag FLAG_0x0BC
-	setflag FLAG_0x3E7
+	setflag FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT
 	msgbox RustboroCity_DevonCorp_3F_Text_212837, 4
 	closemessage
 	call RustboroCity_DevonCorp_3F_EventScript_272083
 	msgbox RustboroCity_DevonCorp_3F_Text_2129D2, 4
 	setflag FLAG_0x37E
-	clearflag FLAG_0x327
-	clearflag FLAG_0x3D7
+	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN
+	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN
 	clearflag FLAG_0x2E3
 	clearflag FLAG_0x371
 	setvar VAR_0x4096, 1
-	clearflag FLAG_0x32E
+	clearflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setvar VAR_0x408F, 1
 	setvar VAR_0x405A, 6
 	releaseall

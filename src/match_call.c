@@ -375,7 +375,7 @@ static const match_call_text_data_t sMayTextScripts[] = {
     { gText_May_Pokenav_2B3AB3, 0xFFFF,              0xFFFF },
     { gText_May_Pokenav_2B3B3F, FLAG_0x4F1,          0xFFFF },
     { gText_May_Pokenav_2B3C13, FLAG_0x095,          0xFFFF },
-    { gText_May_Pokenav_2B3CF3, FLAG_0x324,          0xFFFF },
+    { gText_May_Pokenav_2B3CF3, FLAG_HIDE_MAUVILLE_CITY_WALLY,          0xFFFF },
     { gText_May_Pokenav_2B3D4B, FLAG_0x06A,          0xFFFF },
     { gText_May_Pokenav_2B3DD1, FLAG_0x4F3,          0xFFFF },
     { gText_May_Pokenav_2B3E69, FLAG_0x4F4,          0xFFFF },
@@ -396,7 +396,7 @@ static const match_call_text_data_t sBrendanTextScripts[] = {
     { gText_Brendan_Pokenav_2B43EF, 0xFFFF,              0xFFFF },
     { gText_Brendan_Pokenav_2B4486, FLAG_0x4F1,          0xFFFF },
     { gText_Brendan_Pokenav_2B4560, FLAG_0x095,          0xFFFF },
-    { gText_Brendan_Pokenav_2B463F, FLAG_0x324,          0xFFFF },
+    { gText_Brendan_Pokenav_2B463F, FLAG_HIDE_MAUVILLE_CITY_WALLY,          0xFFFF },
     { gText_Brendan_Pokenav_2B46B7, FLAG_0x06A,          0xFFFF },
     { gText_Brendan_Pokenav_2B4761, FLAG_0x4F3,          0xFFFF },
     { gText_Brendan_Pokenav_2B47F4, FLAG_0x4F4,          0xFFFF },
@@ -425,7 +425,7 @@ static const match_call_text_data_t sWallyTextScripts[] = {
 };
 
 const struct MatchCallSubstruct2 sWallyAdditionalData[] = {
-    { FLAG_0x324, 0x05 },
+    { FLAG_HIDE_MAUVILLE_CITY_WALLY, 0x05 },
     { FLAG_0x06F, 0xD5 },
     { FLAG_0x35A, 0x46 },
     { 0xFFFF,     0xD5 }

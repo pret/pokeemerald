@@ -1,6 +1,6 @@
 MirageTower_4F_EventObjects: @ 8537670
-	object_event 1, EVENT_OBJ_GFX_FOSSIL, 0, 5, 4, 4, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, MirageTower_4F_EventScript_23AD48, FLAG_0x3C3
-	object_event 2, EVENT_OBJ_GFX_FOSSIL, 0, 7, 4, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, MirageTower_4F_EventScript_23AD89, FLAG_0x3C4
+	object_event 1, EVENT_OBJ_GFX_FOSSIL, 0, 5, 4, 4, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, MirageTower_4F_EventScript_23AD48, FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
+	object_event 2, EVENT_OBJ_GFX_FOSSIL, 0, 7, 4, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, MirageTower_4F_EventScript_23AD89, FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
 	object_event 3, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 6, 7, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MirageTower_4F_EventScript_2907A6, FLAG_TEMP_11
 
 MirageTower_4F_MapWarps: @ 85376B8

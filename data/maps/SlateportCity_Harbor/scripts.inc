@@ -12,14 +12,14 @@ SlateportCity_Harbor_MapScript1_20C983: @ 820C983
 	end
 
 SlateportCity_Harbor_EventScript_20C9A5:: @ 820C9A5
-	clearflag FLAG_0x35C
+	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
 	return
 
 SlateportCity_Harbor_EventScript_20C9A9:: @ 820C9A9
 	savebgm MUS_AQA_0
 	setobjectxyperm 4, 12, 13
 	setobjectmovementtype 4, 9
-	setflag FLAG_0x389
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	return
 
 SlateportCity_Harbor_EventScript_20C9BB:: @ 820C9BB

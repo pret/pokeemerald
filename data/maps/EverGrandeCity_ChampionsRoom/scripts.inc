@@ -136,7 +136,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3F
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_228C20
 	waitmovement 0
-	setflag FLAG_0x30D
+	setflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	warp MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 255, 7, 16
 	waitstate
 	releaseall

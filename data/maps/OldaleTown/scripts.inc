@@ -287,7 +287,7 @@ OldaleTown_EventScript_1E911A:: @ 81E911A
 	waitmovement 0
 	removeobject 4
 	setvar VAR_0x40C7, 2
-	setflag FLAG_0x3D3
+	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	releaseall
 	end
 

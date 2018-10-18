@@ -7,7 +7,7 @@ SafariZone_North_EventObjects: @ 853B160
 	object_event 6, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 23, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_2907A6, FLAG_TEMP_14
 	object_event 7, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 20, 7, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_2907A6, FLAG_TEMP_15
 	object_event 8, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 27, 7, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_2907A6, FLAG_TEMP_16
-	object_event 9, EVENT_OBJ_GFX_ITEM_BALL, 0, 7, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_2912C9, FLAG_0x45F
+	object_event 9, EVENT_OBJ_GFX_ITEM_BALL, 0, 7, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_North_EventScript_2912C9, FLAG_ITEM_SAFARI_ZONE_NORTH_CALCIUM
 
 SafariZone_North_MapEvents:: @ 853B238
 	map_events SafariZone_North_EventObjects, 0x0, 0x0, 0x0

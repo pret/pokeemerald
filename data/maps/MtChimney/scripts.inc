@@ -54,7 +54,7 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	removeobject 29
 	removeobject 3
 	removeobject 22
-	setflag FLAG_0x39F
+	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
 	fadescreen 0
 	setobjectxyperm 1, 10, 12
 	addobject 1
@@ -71,11 +71,11 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	compare VAR_FACING, 2
 	call_if 1, MtChimney_EventScript_22EEE8
 	removeobject 1
-	setflag FLAG_0x39E
+	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
 	setflag FLAG_0x08B
 	clearflag FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO
-	setflag FLAG_0x3AE
-	clearflag FLAG_0x3E2
+	setflag FLAG_HIDE_METEOR_FALLS_1F_1R_COZMO
+	clearflag FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY
 	releaseall
 	end
 
