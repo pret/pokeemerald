@@ -25,8 +25,6 @@
 #include "bg.h"
 #include "window.h"
 
-extern u8 gOamLimit;
-
 // Text
 extern const u8 gText_YouDontHaveThreeCoins[];
 extern const u8 gText_QuitTheGame[];
