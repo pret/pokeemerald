@@ -427,5 +427,6 @@ bool8 Contest_IsMonsTurnDisabled(u8 a);
 bool8 sub_80DE1E8(u8 a);
 void SetStartledString(u8 a, u8 b);
 s8 Contest_GetMoveExcitement(u16);
+u8 sub_80DAE0C(struct Pokemon *);
 
 #endif //GUARD_CONTEST_H
