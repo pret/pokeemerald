@@ -28,7 +28,7 @@ LavaridgeTown_MapBGEvents: @ 8527B6C
 	bg_event 10, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E73
 	bg_event 16, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E6A
 	bg_event 11, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E73
-	bg_hidden_item_event_new 4, 5, 3, ITEM_ICE_HEAL, FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL
+	bg_hidden_item_event 4, 5, 3, ITEM_ICE_HEAL, FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL
 
 LavaridgeTown_MapEvents:: @ 8527BCC
 	map_events LavaridgeTown_EventObjects, LavaridgeTown_MapWarps, LavaridgeTown_MapCoordEvents, LavaridgeTown_MapBGEvents

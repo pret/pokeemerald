@@ -31,7 +31,7 @@ Route117_MapBGEvents: @ 852AA70
 	bg_event 16, 6, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39B5
 	bg_event 49, 12, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39BE
 	bg_event 49, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route117_EventScript_1F39C7
-	bg_hidden_item_event_new 3, 18, 3, ITEM_REPEL, FLAG_HIDDEN_ITEM_ROUTE_117_REPEL
+	bg_hidden_item_event 3, 18, 3, ITEM_REPEL, FLAG_HIDDEN_ITEM_ROUTE_117_REPEL
 
 Route117_MapEvents:: @ 852AAA0
 	map_events Route117_EventObjects, Route117_MapWarps, 0x0, Route117_MapBGEvents

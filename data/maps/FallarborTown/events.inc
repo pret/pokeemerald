@@ -19,7 +19,7 @@ FallarborTown_MapBGEvents: @ 8527C68
 	bg_event 10, 11, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_EventScript_1EB259
 	bg_event 17, 15, 0, BG_EVENT_PLAYER_FACING_NORTH, FallarborTown_EventScript_271E6A
 	bg_event 3, 7, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_EventScript_1EB262
-	bg_hidden_item_event 2, 15, 3, ITEM_NUGGET, FLAG_TEMP_1C
+	bg_hidden_item_event 2, 15, 3, ITEM_NUGGET, FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_NUGGET
 
 FallarborTown_MapEvents:: @ 8527CC8
 	map_events FallarborTown_EventObjects, FallarborTown_MapWarps, 0x0, FallarborTown_MapBGEvents

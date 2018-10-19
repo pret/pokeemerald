@@ -22,8 +22,8 @@ MtPyre_Summit_MapCoordEvents: @ 8535278
 	coord_event 24, 9, 3, VAR_0x40B9, 2, MtPyre_Summit_EventScript_232204
 
 MtPyre_Summit_MapBGEvents: @ 85352D8
-	bg_hidden_item_event_new 9, 25, 0, ITEM_ZINC, FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_ZINC
-	bg_hidden_item_event_new 37, 7, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_RARE_CANDY
+	bg_hidden_item_event 9, 25, 0, ITEM_ZINC, FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_ZINC
+	bg_hidden_item_event 37, 7, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_RARE_CANDY
 
 MtPyre_Summit_MapEvents:: @ 85352F0
 	map_events MtPyre_Summit_EventObjects, MtPyre_Summit_MapWarps, MtPyre_Summit_MapCoordEvents, MtPyre_Summit_MapBGEvents

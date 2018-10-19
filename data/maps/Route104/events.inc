@@ -53,11 +53,11 @@ Route104_MapBGEvents: @ 8528664
 	bg_event 23, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route104_EventScript_1ED02A
 	bg_event 7, 20, 0, BG_EVENT_PLAYER_FACING_ANY, Route104_EventScript_1ED033
 	bg_event 17, 23, 3, BG_EVENT_PLAYER_FACING_ANY, Route104_EventScript_1ED03C
-	bg_hidden_item_event_new 7, 6, 3, ITEM_SUPER_POTION, FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION
-	bg_hidden_item_event_new 3, 9, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL
-	bg_hidden_item_event_new 14, 55, 3, ITEM_POTION, FLAG_HIDDEN_ITEM_ROUTE_104_POTION
-	bg_hidden_item_event_new 16, 72, 3, ITEM_ANTIDOTE, FLAG_HIDDEN_ITEM_ROUTE_104_ANTIDOTE
-	bg_hidden_item_event_new 16, 64, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_104_HEART_SCALE
+	bg_hidden_item_event 7, 6, 3, ITEM_SUPER_POTION, FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION
+	bg_hidden_item_event 3, 9, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL
+	bg_hidden_item_event 14, 55, 3, ITEM_POTION, FLAG_HIDDEN_ITEM_ROUTE_104_POTION
+	bg_hidden_item_event 16, 72, 3, ITEM_ANTIDOTE, FLAG_HIDDEN_ITEM_ROUTE_104_ANTIDOTE
+	bg_hidden_item_event 16, 64, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_104_HEART_SCALE
 
 Route104_MapEvents:: @ 85286DC
 	map_events Route104_EventObjects, Route104_MapWarps, Route104_MapCoordEvents, Route104_MapBGEvents

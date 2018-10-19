@@ -49,9 +49,9 @@ LilycoveCity_MapBGEvents: @ 8526F68
 	bg_event 6, 30, 3, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_1E2D44
 	bg_event 36, 14, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_1E2D62
 	bg_event 34, 6, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_1E2D74
-	bg_hidden_item_event_new 36, 31, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_LILYCOVE_CITY_HEART_SCALE
-	bg_hidden_item_event_new 61, 7, 0, ITEM_PP_UP, FLAG_HIDDEN_ITEM_LILYCOVE_CITY_PP_UP
-	bg_hidden_item_event_new 64, 31, 0, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_LILYCOVE_CITY_POKE_BALL
+	bg_hidden_item_event 36, 31, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_LILYCOVE_CITY_HEART_SCALE
+	bg_hidden_item_event 61, 7, 0, ITEM_PP_UP, FLAG_HIDDEN_ITEM_LILYCOVE_CITY_PP_UP
+	bg_hidden_item_event 64, 31, 0, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_LILYCOVE_CITY_POKE_BALL
 
 LilycoveCity_MapEvents:: @ 8527004
 	map_events LilycoveCity_EventObjects, LilycoveCity_MapWarps, 0x0, LilycoveCity_MapBGEvents

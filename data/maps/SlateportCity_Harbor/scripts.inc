@@ -371,7 +371,7 @@ SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 	goto_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, 4
-	setflag FLAG_0x126
+	setflag FLAG_TRADED_SCANNER_TO_STERN
 	goto SlateportCity_Harbor_EventScript_20CE11
 	end
 
@@ -384,7 +384,7 @@ SlateportCity_Harbor_EventScript_20CDBB:: @ 820CDBB
 	goto_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, 4
-	setflag FLAG_0x126
+	setflag FLAG_TRADED_SCANNER_TO_STERN
 	goto SlateportCity_Harbor_EventScript_20CE11
 	end
 

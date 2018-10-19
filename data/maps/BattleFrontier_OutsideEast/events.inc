@@ -12,7 +12,7 @@ BattleFrontier_OutsideEast_EventObjects: @ 853BB10
 	object_event 11, EVENT_OBJ_GFX_TWIN, 0, 18, 40, 0, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242CCD, 0
 	object_event 12, EVENT_OBJ_GFX_MAN_1, 0, 17, 40, 0, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242CD6, 0
 	object_event 13, EVENT_OBJ_GFX_ZIGZAGOON_2, 0, 40, 56, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242C9F, 0
-	object_event 14, EVENT_OBJ_GFX_SUDOWOODO, 0, 54, 62, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242CEA, FLAG_0x34A
+	object_event 14, EVENT_OBJ_GFX_SUDOWOODO, 0, 54, 62, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242CEA, FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO
 	object_event 15, EVENT_OBJ_GFX_MANIAC, 0, 42, 34, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242D79, 0
 	object_event 16, EVENT_OBJ_GFX_GIRL_3, 0, 51, 53, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242D82, 0
 	object_event 17, EVENT_OBJ_GFX_PSYCHIC_M, 0, 62, 18, 0, MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT, 2, 6, 0, 0, BattleFrontier_OutsideEast_EventScript_242D8B, 0

@@ -83,15 +83,15 @@ Route119_MapBGEvents: @ 852B2F4
 	bg_secret_base_event 31, 73, 3, SECRET_BASE_SHRUB4_1
 	bg_secret_base_event 16, 81, 0, SECRET_BASE_BLUE_CAVE3_3
 	bg_secret_base_event 16, 28, 0, SECRET_BASE_BLUE_CAVE4_3
-	bg_hidden_item_event_new 17, 82, 3, ITEM_CALCIUM, FLAG_HIDDEN_ITEM_ROUTE_119_CALCIUM
-	bg_hidden_item_event_new 38, 63, 3, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_ROUTE_119_ULTRA_BALL
+	bg_hidden_item_event 17, 82, 3, ITEM_CALCIUM, FLAG_HIDDEN_ITEM_ROUTE_119_CALCIUM
+	bg_hidden_item_event 38, 63, 3, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_ROUTE_119_ULTRA_BALL
 	bg_secret_base_event 26, 81, 0, SECRET_BASE_RED_CAVE3_3
 	bg_secret_base_event 19, 76, 0, SECRET_BASE_TREE2_3
 	bg_secret_base_event 18, 76, 0, SECRET_BASE_TREE4_3
 	bg_secret_base_event 4, 15, 0, SECRET_BASE_SHRUB3_3
 	bg_secret_base_event 6, 2, 0, SECRET_BASE_SHRUB4_3
-	bg_hidden_item_event_new 26, 120, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_ROUTE_119_FULL_HEAL
-	bg_hidden_item_event_new 20, 29, 3, ITEM_MAX_ETHER, FLAG_HIDDEN_ITEM_ROUTE_119_MAX_ETHER
+	bg_hidden_item_event 26, 120, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_ROUTE_119_FULL_HEAL
+	bg_hidden_item_event 20, 29, 3, ITEM_MAX_ETHER, FLAG_HIDDEN_ITEM_ROUTE_119_MAX_ETHER
 	bg_event 28, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_1F49E3
 
 Route119_MapEvents:: @ 852B3E4

@@ -15,7 +15,7 @@ SlateportCity_MapScript1_1DCC6C: @ 81DCC6C
 SlateportCity_EventScript_1DCC8D:: @ 81DCC8D
 	setflag FLAG_VISITED_SLATEPORT_CITY
 	setvar VAR_0x4086, 0
-	setflag FLAG_0x323
+	setflag FLAG_HIDE_SLATEPORT_CITY_CONTEST_REPORTER
 	return
 
 SlateportCity_EventScript_1DCC99:: @ 81DCC99

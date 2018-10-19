@@ -10,8 +10,8 @@ SafariZone_Northeast_EventObjects: @ 853B968
 	object_event 9, EVENT_OBJ_GFX_ITEM_BALL, 0, 8, 17, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SafariZone_Northeast_EventScript_2912E3, FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET
 
 SafariZone_Northeast_MapBGEvents: @ 853BA40
-	bg_hidden_item_event_new 31, 35, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_RARE_CANDY
-	bg_hidden_item_event_new 21, 5, 3, ITEM_ZINC, FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_ZINC
+	bg_hidden_item_event 31, 35, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_RARE_CANDY
+	bg_hidden_item_event 21, 5, 3, ITEM_ZINC, FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_ZINC
 
 SafariZone_Northeast_MapEvents:: @ 853BA58
 	map_events SafariZone_Northeast_EventObjects, 0x0, 0x0, SafariZone_Northeast_MapBGEvents

@@ -15,8 +15,8 @@ MtPyre_Exterior_MapCoordEvents: @ 8535124
 	coord_event 26, 21, 3, 0, 0, MtPyre_Exterior_EventScript_231FED
 
 MtPyre_Exterior_MapBGEvents: @ 8535174
-	bg_hidden_item_event_new 9, 8, 0, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_MT_PYRE_EXTERIOR_ULTRA_BALL
-	bg_hidden_item_event_new 16, 22, 0, ITEM_MAX_ETHER, FLAG_HIDDEN_ITEM_MT_PYRE_EXTERIOR_MAX_ETHER
+	bg_hidden_item_event 9, 8, 0, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_MT_PYRE_EXTERIOR_ULTRA_BALL
+	bg_hidden_item_event 16, 22, 0, ITEM_MAX_ETHER, FLAG_HIDDEN_ITEM_MT_PYRE_EXTERIOR_MAX_ETHER
 
 MtPyre_Exterior_MapEvents:: @ 853518C
 	map_events MtPyre_Exterior_EventObjects, MtPyre_Exterior_MapWarps, MtPyre_Exterior_MapCoordEvents, MtPyre_Exterior_MapBGEvents

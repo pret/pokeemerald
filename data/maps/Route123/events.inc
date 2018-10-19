@@ -75,13 +75,13 @@ Route123_MapBGEvents: @ 852C32C
 	bg_secret_base_event 47, 3, 0, SECRET_BASE_BLUE_CAVE1_2
 	bg_secret_base_event 49, 3, 0, SECRET_BASE_BLUE_CAVE2_2
 	bg_event 10, 12, 3, BG_EVENT_PLAYER_FACING_ANY, Route123_EventScript_1F61AA
-	bg_hidden_item_event_new 75, 1, 3, ITEM_SUPER_REPEL, FLAG_HIDDEN_ITEM_ROUTE_123_SUPER_REPEL
+	bg_hidden_item_event 75, 1, 3, ITEM_SUPER_REPEL, FLAG_HIDDEN_ITEM_ROUTE_123_SUPER_REPEL
 	bg_event 20, 7, 3, BG_EVENT_PLAYER_FACING_ANY, Route123_EventScript_1F61BC
 	bg_secret_base_event 57, 5, 0, SECRET_BASE_BLUE_CAVE1_3
-	bg_hidden_item_event_new 12, 1, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_123_REVIVE
-	bg_hidden_item_event_new 91, 15, 3, ITEM_HYPER_POTION, FLAG_HIDDEN_ITEM_ROUTE_123_HYPER_POTION
-	bg_hidden_item_event_new 139, 15, 3, ITEM_PP_UP, FLAG_HIDDEN_ITEM_ROUTE_123_PP_UP
-	bg_hidden_item_event_new 138, 18, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY
+	bg_hidden_item_event 12, 1, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_123_REVIVE
+	bg_hidden_item_event 91, 15, 3, ITEM_HYPER_POTION, FLAG_HIDDEN_ITEM_ROUTE_123_HYPER_POTION
+	bg_hidden_item_event 139, 15, 3, ITEM_PP_UP, FLAG_HIDDEN_ITEM_ROUTE_123_PP_UP
+	bg_hidden_item_event 138, 18, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY
 
 Route123_MapEvents:: @ 852C3B0
 	map_events Route123_EventObjects, Route123_MapWarps, Route123_MapCoordEvents, Route123_MapBGEvents

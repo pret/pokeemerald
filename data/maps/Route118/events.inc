@@ -38,8 +38,8 @@ Route118_MapBGEvents: @ 852ACEC
 	bg_secret_base_event 29, 5, 0, SECRET_BASE_YELLOW_CAVE1_2
 	bg_secret_base_event 47, 5, 0, SECRET_BASE_TREE1_3
 	bg_secret_base_event 46, 5, 0, SECRET_BASE_TREE2_1
-	bg_hidden_item_event_new 31, 13, 3, ITEM_IRON, FLAG_HIDDEN_ITEM_ROUTE_118_IRON
-	bg_hidden_item_event_new 12, 14, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_118_HEART_SCALE
+	bg_hidden_item_event 31, 13, 3, ITEM_IRON, FLAG_HIDDEN_ITEM_ROUTE_118_IRON
+	bg_hidden_item_event 12, 14, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_118_HEART_SCALE
 
 Route118_MapEvents:: @ 852AD58
 	map_events Route118_EventObjects, Route118_MapWarps, Route118_MapCoordEvents, Route118_MapBGEvents

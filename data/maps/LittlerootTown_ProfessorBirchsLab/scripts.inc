@@ -500,7 +500,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA294:: @ 81FA294
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E:: @ 81FA29E
-	checkflag FLAG_0x380
+	checkflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380
 	goto_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_272141
 	compare VAR_0x40D3, 3
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_272141

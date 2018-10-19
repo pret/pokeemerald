@@ -100,13 +100,13 @@ Route111_MapBGEvents: @ 8529888
 	bg_event 25, 19, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F1177
 	bg_secret_base_event 35, 1, 0, SECRET_BASE_RED_CAVE2_3
 	bg_secret_base_event 35, 31, 0, SECRET_BASE_YELLOW_CAVE4_3
-	bg_hidden_item_event_new 26, 70, 0, ITEM_STARDUST, FLAG_HIDDEN_ITEM_ROUTE_111_STARDUST
+	bg_hidden_item_event 26, 70, 0, ITEM_STARDUST, FLAG_HIDDEN_ITEM_ROUTE_111_STARDUST
 	bg_secret_base_event 27, 27, 3, SECRET_BASE_RED_CAVE4_3
 	bg_event 7, 84, 3, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F1180
 	bg_secret_base_event 14, 19, 0, SECRET_BASE_TREE1_4
 	bg_secret_base_event 13, 19, 0, SECRET_BASE_TREE1_1
-	bg_hidden_item_event_new 19, 55, 0, ITEM_PROTEIN, FLAG_HIDDEN_ITEM_ROUTE_111_PROTEIN
-	bg_hidden_item_event_new 35, 66, 0, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_111_RARE_CANDY
+	bg_hidden_item_event 19, 55, 0, ITEM_PROTEIN, FLAG_HIDDEN_ITEM_ROUTE_111_PROTEIN
+	bg_hidden_item_event 35, 66, 0, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_111_RARE_CANDY
 	bg_event 24, 116, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F146C
 
 Route111_MapEvents:: @ 8529960

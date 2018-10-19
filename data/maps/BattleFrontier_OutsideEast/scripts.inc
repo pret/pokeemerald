@@ -23,7 +23,7 @@ BattleFrontier_OutsideEast_MapScript1_242C2D: @ 8242C2D
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C3F:: @ 8242C3F
-	clearflag FLAG_0x34A
+	clearflag FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO
 	return
 
 BattleFrontier_OutsideEast_EventScript_242C43:: @ 8242C43

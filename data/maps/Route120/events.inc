@@ -79,10 +79,10 @@ Route120_MapBGEvents: @ 852B958
 	bg_secret_base_event 18, 12, 0, SECRET_BASE_BLUE_CAVE2_3
 	bg_secret_base_event 38, 54, 0, SECRET_BASE_SHRUB1_3
 	bg_secret_base_event 31, 23, 0, SECRET_BASE_SHRUB2_3
-	bg_hidden_item_event_new 9, 1, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_1
-	bg_hidden_item_event_new 31, 11, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_120_REVIVE
-	bg_hidden_item_event_new 0, 86, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_2
-	bg_hidden_item_event_new 24, 42, 3, ITEM_ZINC, FLAG_HIDDEN_ITEM_ROUTE_120_ZINC
+	bg_hidden_item_event 9, 1, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_1
+	bg_hidden_item_event 31, 11, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_120_REVIVE
+	bg_hidden_item_event 0, 86, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_2
+	bg_hidden_item_event 24, 42, 3, ITEM_ZINC, FLAG_HIDDEN_ITEM_ROUTE_120_ZINC
 	bg_secret_base_event 5, 76, 0, SECRET_BASE_SHRUB1_4
 
 Route120_MapEvents:: @ 852BA00

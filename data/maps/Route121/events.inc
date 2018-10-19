@@ -45,10 +45,10 @@ Route121_MapBGEvents: @ 852BD14
 	bg_secret_base_event 43, 7, 0, SECRET_BASE_TREE1_2
 	bg_secret_base_event 42, 7, 0, SECRET_BASE_TREE2_2
 	bg_event 39, 6, 0, BG_EVENT_PLAYER_FACING_ANY, Route121_EventScript_1F5E0F
-	bg_hidden_item_event_new 23, 10, 3, ITEM_HP_UP, FLAG_HIDDEN_ITEM_ROUTE_121_HP_UP
-	bg_hidden_item_event_new 58, 3, 3, ITEM_NUGGET, FLAG_HIDDEN_ITEM_ROUTE_121_NUGGET
-	bg_hidden_item_event_new 72, 5, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_ROUTE_121_FULL_HEAL
-	bg_hidden_item_event_new 68, 8, 3, ITEM_MAX_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_121_MAX_REVIVE
+	bg_hidden_item_event 23, 10, 3, ITEM_HP_UP, FLAG_HIDDEN_ITEM_ROUTE_121_HP_UP
+	bg_hidden_item_event 58, 3, 3, ITEM_NUGGET, FLAG_HIDDEN_ITEM_ROUTE_121_NUGGET
+	bg_hidden_item_event 72, 5, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_ROUTE_121_FULL_HEAL
+	bg_hidden_item_event 68, 8, 3, ITEM_MAX_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_121_MAX_REVIVE
 
 Route121_MapEvents:: @ 852BD8C
 	map_events Route121_EventObjects, Route121_MapWarps, Route121_MapCoordEvents, Route121_MapBGEvents

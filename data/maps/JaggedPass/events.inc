@@ -27,8 +27,8 @@ JaggedPass_MapCoordEvents: @ 8534BB4
 	coord_event 13, 15, 3, VAR_0x40C8, 1, JaggedPass_EventScript_2306BB
 
 JaggedPass_MapBGEvents: @ 8534C54
-	bg_hidden_item_event_new 8, 10, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL
-	bg_hidden_item_event_new 7, 29, 3, ITEM_GREAT_BALL, FLAG_HIDDEN_ITEM_JAGGED_PASS_GREAT_BALL
+	bg_hidden_item_event 8, 10, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL
+	bg_hidden_item_event 7, 29, 3, ITEM_GREAT_BALL, FLAG_HIDDEN_ITEM_JAGGED_PASS_GREAT_BALL
 
 JaggedPass_MapEvents:: @ 8534C6C
 	map_events JaggedPass_EventObjects, JaggedPass_MapWarps, JaggedPass_MapCoordEvents, JaggedPass_MapBGEvents

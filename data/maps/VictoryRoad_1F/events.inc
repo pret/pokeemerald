@@ -21,7 +21,7 @@ VictoryRoad_1F_MapCoordEvents: @ 8535F04
 	coord_event 3, 23, 4, VAR_0x40C3, 0, VictoryRoad_1F_EventScript_235DC8
 
 VictoryRoad_1F_MapBGEvents: @ 8535F24
-	bg_hidden_item_event_new 30, 39, 4, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_VICTORY_ROAD_1F_ULTRA_BALL
+	bg_hidden_item_event 30, 39, 4, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_VICTORY_ROAD_1F_ULTRA_BALL
 
 VictoryRoad_1F_MapEvents:: @ 8535F30
 	map_events VictoryRoad_1F_EventObjects, VictoryRoad_1F_MapWarps, VictoryRoad_1F_MapCoordEvents, VictoryRoad_1F_MapBGEvents

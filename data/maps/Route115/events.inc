@@ -42,7 +42,7 @@ Route115_MapBGEvents: @ 852A3FC
 	bg_secret_base_event 8, 20, 0, SECRET_BASE_TREE3_3
 	bg_secret_base_event 25, 24, 0, SECRET_BASE_BROWN_CAVE3_3
 	bg_secret_base_event 20, 53, 0, SECRET_BASE_RED_CAVE3_1
-	bg_hidden_item_event_new 15, 49, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_115_HEART_SCALE
+	bg_hidden_item_event 15, 49, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_115_HEART_SCALE
 
 Route115_MapEvents:: @ 852A4A4
 	map_events Route115_EventObjects, Route115_MapWarps, 0x0, Route115_MapBGEvents
