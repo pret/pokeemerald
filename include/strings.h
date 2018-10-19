@@ -872,4 +872,9 @@ extern const u8 gText_ShopBuy[];
 extern const u8 gText_ShopSell[];
 extern const u8 gText_ShopQuit[];
 
+extern const u8 gText_OhABite[];
+extern const u8 gText_PokemonOnHook[];
+extern const u8 gText_NotEvenANibble[];
+extern const u8 gText_ItGotAway[];
+
 #endif //GUARD_STRINGS_H

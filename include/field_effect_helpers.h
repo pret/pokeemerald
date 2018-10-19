@@ -7,9 +7,10 @@
 
 // Exported ROM declarations
 u8 CreateWarpArrowSprite(void);
+u8 sub_8155800(u8 oldSpriteId);
+void sub_81555AC(u8, u8);
 bool8 sub_8155DA0(struct EventObject *);
 void sub_8155D78(struct EventObject *);
-void sub_81555AC(u8, u8);
 void StartAshFieldEffect(s16, s16, u16, s16);
 void SetUpReflection(struct EventObject*, struct Sprite*, u8);
 u32 StartFieldEffectForEventObject(u8, struct EventObject*);
@@ -30,5 +31,8 @@ void UpdateShortGrassFieldEffect(struct Sprite*);
 void UpdateHotSpringsWaterFieldEffect(struct Sprite*);
 void UpdateBubblesFieldEffect(struct Sprite*);
 void UpdateSparkleFieldEffect(struct Sprite*);
+void SetSpriteInvisible(u8 spriteId);
+void ShowWarpArrowSprite(u8 spriteId, u8 direction, s16 x, s16 y);
+void sub_8155604(u8 spriteId, u8 value, s16 data1);
 
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

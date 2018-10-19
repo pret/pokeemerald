@@ -209,23 +209,7 @@ gUnknown_020322D5: @ 20322D5
 	.include "src/overworld.o"
 	.include "src/fieldmap.o"
 	.include "src/field_camera.o"
-
-	.align 2
-gUnknown_0203734C: @ 203734C
-	.space 0x4
-
-gEventObjects: @ 2037350
-	.space 0x240
-
-gPlayerAvatar: @ 2037590
-	.space 0x14
-
-gUnknown_020375A4: @ 20375A4
-	.space 0x8
-
-gUnknown_020375AC: @ 20375AC
-	.space 0x8
-
+	.include "src/field_player_avatar.o"
     .include "src/event_object_movement.o"
     .include "src/field_message_box.o"
 

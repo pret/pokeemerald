@@ -166,8 +166,8 @@ extern u32 sub_800B4DC(void);
 extern bool32 sub_80B39D4(u8);
 extern const u8* GetInteractedLinkPlayerScript(struct MapPosition *a1, u8, u8);
 extern u8 *GetCoordEventScriptAtMapPosition(void*);
-extern u8 sub_808BD6C(u8);
-extern u8 sub_808BD7C(u8);
+extern u8 GetFRLGAvatarGraphicsIdByGender(u8);
+extern u8 GetRSAvatarGraphicsIdByGender(u8);
 extern void UpdateEventObjectSpriteVisibility(struct Sprite*, u8);
 
 // this file's functions
@@ -919,7 +919,7 @@ void StoreInitialPlayerAvatarState(void)
         gInitialPlayerAvatarState.transitionFlags = 4;
     else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         gInitialPlayerAvatarState.transitionFlags = 8;
-    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_4))
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER))
         gInitialPlayerAvatarState.transitionFlags = 16;
     else
         gInitialPlayerAvatarState.transitionFlags = 1;
@@ -3137,11 +3137,11 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
         {
         case VERSION_FIRE_RED:
         case VERSION_LEAF_GREEN:
-            eventObj->spriteId = AddPseudoEventObject(sub_808BD6C(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
+            eventObj->spriteId = AddPseudoEventObject(GetFRLGAvatarGraphicsIdByGender(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_RUBY:
         case VERSION_SAPPHIRE:
-            eventObj->spriteId = AddPseudoEventObject(sub_808BD7C(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
+            eventObj->spriteId = AddPseudoEventObject(GetRSAvatarGraphicsIdByGender(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_EMERALD:
             eventObj->spriteId = AddPseudoEventObject(GetRivalAvatarGraphicsIdByStateIdAndGender(0, eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
