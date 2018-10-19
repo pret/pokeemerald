@@ -138,7 +138,7 @@ int main(int argc, char** argv)
 
         if (option[0] == '-' && option[1] != '\0')
         {
-            const char *arg = GetArgument(argc, argv, i);
+            const char *arg;
 
             switch (std::toupper(option[1]))
             {
@@ -146,11 +146,13 @@ int main(int argc, char** argv)
                 g_exactGateTime = true;
                 break;
             case 'G':
+                arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
                 g_voiceGroup = std::stoi(arg);
                 break;
             case 'L':
+                arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
                 g_asmLabel = arg;
@@ -159,16 +161,19 @@ int main(int argc, char** argv)
                 g_compressionEnabled = false;
                 break;
             case 'P':
+                arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
                 g_priority = std::stoi(arg);
                 break;
             case 'R':
+                arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
                 g_reverb = std::stoi(arg);
                 break;
             case 'V':
+                arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
                 g_masterVolume = std::stoi(arg);

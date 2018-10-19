@@ -6,7 +6,7 @@
 #include "menu.h"
 #include "malloc.h"
 #include "pokemon.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "main.h"
 #include "menu_helpers.h"
 #include "bg.h"

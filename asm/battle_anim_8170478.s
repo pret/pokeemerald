@@ -1030,8 +1030,8 @@ sub_8170D24: @ 8170D24
 	.pool
 	thumb_func_end sub_8170D24
 
-	thumb_func_start sub_8170D4C
-sub_8170D4C: @ 8170D4C
+	thumb_func_start AnimTask_IsBallBlockedByTrainer
+AnimTask_IsBallBlockedByTrainer: @ 8170D4C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -1055,7 +1055,7 @@ _08170D74:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8170D4C
+	thumb_func_end AnimTask_IsBallBlockedByTrainer
 
 	thumb_func_start ItemIdToBallId
 ItemIdToBallId: @ 8170D84
@@ -1487,7 +1487,7 @@ sub_8171134: @ 8171134
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _081711D2
@@ -2671,7 +2671,7 @@ sub_8171AAC: @ 8171AAC
 	orrs r0, r1
 	strb r0, [r3]
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _08171ADC
@@ -5652,7 +5652,7 @@ _081733C0:
 sub_81733D4: @ 81733D4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _081733F6
@@ -5757,8 +5757,8 @@ _081734A0:
 	.pool
 	thumb_func_end sub_817345C
 
-	thumb_func_start sub_81734B4
-sub_81734B4: @ 81734B4
+	thumb_func_start AnimTask_GetTrappedMoveAnimId
+AnimTask_GetTrappedMoveAnimId: @ 81734B4
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -5805,7 +5805,7 @@ _0817350C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81734B4
+	thumb_func_end AnimTask_GetTrappedMoveAnimId
 
 	thumb_func_start sub_817351C
 sub_817351C: @ 817351C

@@ -11,7 +11,7 @@ struct PyramidBagResources
     u8 windowIds[5];
     u8 unk814;
     u8 unk815;
-    u8 scrollArrowSpriteId;
+    u8 scrollIndicatorsTaskId;
     const u8 *menuActionIds;
     u8 filler81C[0x820 - 0x81C];
     u8 menuActionsCount;

@@ -5,7 +5,7 @@ Route105_EventObjects: @ 85286F0
 	object_event 4, EVENT_OBJ_GFX_SWIMMER_F, 0, 19, 9, 1, MOVEMENT_TYPE_ROTATE_CLOCKWISE, 0, 5, 1, 3, Route105_EventScript_1EE2A6, 0
 	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 8, 73, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route105_EventScript_290D33, 1003
 	object_event 6, EVENT_OBJ_GFX_HIKER, 0, 17, 48, 3, MOVEMENT_TYPE_WALK_DOWN_AND_UP, 0, 7, 1, 3, Route105_EventScript_1EE24A, 0
-	object_event 7, EVENT_OBJ_GFX_MAN_6, 0, 4, 54, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 2, 1, 2, Route105_EventScript_1EE2BD, 0
+	object_event 7, EVENT_OBJ_GFX_MAN_5, 0, 4, 54, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 2, 1, 2, Route105_EventScript_1EE2BD, 0
 	object_event 8, EVENT_OBJ_GFX_HIKER, 0, 4, 58, 3, MOVEMENT_TYPE_FACE_UP, 0, 2, 1, 4, Route105_EventScript_1EE2D4, 0
 
 Route105_MapWarps: @ 85287B0

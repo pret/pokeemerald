@@ -35,7 +35,7 @@ void hm2_sweet_scent(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
 }
 
-bool8 FldEff_SweetScent()
+bool8 FldEff_SweetScent(void)
 {
     u8 taskId;
 

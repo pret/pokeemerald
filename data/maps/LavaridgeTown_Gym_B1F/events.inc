@@ -1,7 +1,7 @@
 LavaridgeTown_Gym_B1F_EventObjects: @ 852DFA8
-	object_event 1, EVENT_OBJ_GFX_MAN_6, 0, 4, 18, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 3, 1, LavaridgeTown_Gym_B1F_EventScript_1FE91B, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 3, 6, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 3, 1, LavaridgeTown_Gym_B1F_EventScript_1FE8CA, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_6, 0, 13, 17, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 3, 1, LavaridgeTown_Gym_B1F_EventScript_1FE936, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_5, 0, 4, 18, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 3, 1, LavaridgeTown_Gym_B1F_EventScript_1FE91B, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_5, 0, 3, 6, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 3, 1, LavaridgeTown_Gym_B1F_EventScript_1FE8CA, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_5, 0, 13, 17, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 3, 1, LavaridgeTown_Gym_B1F_EventScript_1FE936, 0
 	object_event 4, EVENT_OBJ_GFX_HIKER, 0, 4, 16, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 3, 1, LavaridgeTown_Gym_B1F_EventScript_1FE951, 0
 
 LavaridgeTown_Gym_B1F_MapWarps: @ 852E008

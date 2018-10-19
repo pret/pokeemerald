@@ -10,7 +10,6 @@
 #include "constants/flags.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "blend_palette.h"
 #include "contest.h"
 #include "data2.h"
 #include "decompress.h"
@@ -2535,7 +2534,7 @@ u8 sub_80DB174(u16 species, u32 otId, u32 personality, u32 index)
     LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x120, 0x20);
     SetMultiuseSpriteTemplateToPokemon(species, 0);
 
-    spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x70, sub_80A600C(2, species, 0), 30);
+    spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x70, GetBattlerSpriteFinal_Y(2, species, FALSE), 30);
     gSprites[spriteId].oam.paletteNum = 2;
     gSprites[spriteId].oam.priority = 2;
     gSprites[spriteId].subpriority = sub_80A82E4(2);

@@ -1,6 +1,17 @@
 #ifndef GUARD_FIELD_PLAYER_AVATAR_H
 #define GUARD_FIELD_PLAYER_AVATAR_H
 
+enum {
+    PLAYER_AVATAR_STATE_NORMAL,
+    PLAYER_AVATAR_STATE_MACH_BIKE,
+    PLAYER_AVATAR_STATE_ACRO_BIKE,
+    PLAYER_AVATAR_STATE_SURFING,
+    PLAYER_AVATAR_STATE_UNDERWATER,
+    PLAYER_AVATAR_STATE_FIELD_MOVE,
+    PLAYER_AVATAR_STATE_FISHING,
+    PLAYER_AVATAR_STATE_WATERING,
+};
+
 void player_step(u8 a, u16 b, u16 c);
 void ClearPlayerAvatarInfo(void);
 void SetPlayerAvatarExtraStateTransition(u8, u8);
@@ -13,7 +24,7 @@ u8 GetPlayerMovementDirection(void);
 u8 PlayerGetCopyableMovement(void);
 void PlayerGoSpeed1(u8);
 void PlayerGoSpeed2(u8);
-void PlayerGoSpeed3(u8);
+void PlayerRideWaterCurrent(u8);
 void PlayerGoSpeed4(u8);
 void PlayerOnBikeCollide(u8);
 void PlayerFaceDirection(u8 a);
@@ -44,23 +55,8 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
 void SetPlayerAvatarStateMask(u8 a);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
 u8 GetJumpSpecialMovementAction(u32);
-
-bool8 ForcedMovement_None(void);
-bool8 ForcedMovement_Slip(void);
-bool8 ForcedMovement_WalkSouth(void);
-bool8 ForcedMovement_WalkNorth(void);
-bool8 ForcedMovement_WalkWest(void);
-bool8 ForcedMovement_WalkEast(void);
-bool8 ForcedMovement_PushedSouthByCurrent(void);
-bool8 ForcedMovement_PushedNorthByCurrent(void);
-bool8 ForcedMovement_PushedWestByCurrent(void);
-bool8 ForcedMovement_PushedEastByCurrent(void);
-bool8 ForcedMovement_SlideSouth(void);
-bool8 ForcedMovement_SlideNorth(void);
-bool8 ForcedMovement_SlideWest(void);
-bool8 ForcedMovement_SlideEast(void);
-bool8 ForcedMovement_0xBB(void);
-bool8 ForcedMovement_0xBC(void);
-bool8 ForcedMovement_MuddySlope(void);
+bool8 PartyHasMonWithSurf(void);
+bool8 IsPlayerFacingSurfableFishableWater(void);
+bool8 IsPlayerSurfingNorth(void);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

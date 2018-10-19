@@ -50,5 +50,6 @@ void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlaye
 void BravoTrainerPokemonProfile_BeforeInterview1(u16 move);
 void UpdateTVScreensOnMap(int, int);
 void TV_PrintIntToStringVar(u8 varIdx, int value);
+void SaveRecordedItemPurchasesForTVShow(void);
 
 #endif //GUARD_TV_H

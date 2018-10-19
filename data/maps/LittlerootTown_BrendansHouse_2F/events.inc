@@ -20,7 +20,7 @@ LittlerootTown_BrendansHouse_2F_MapWarps: @ 852D320
 	warp_def 7, 1, 0, 2, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
 
 LittlerootTown_BrendansHouse_2F_MapBGEvents: @ 852D328
-	bg_event 0, 1, 0, BG_EVENT_PLAYER_FACING_NORTH, gUnknown_081F860D
+	bg_event 0, 1, 0, BG_EVENT_PLAYER_FACING_NORTH, EventScript_PlayerPCMale
 	bg_event 1, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_BrendansHouse_2F_EventScript_1F8656
 	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_BrendansHouse_2F_EventScript_292781
 	bg_event 3, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_BrendansHouse_2F_EventScript_1F865F

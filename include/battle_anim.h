@@ -14,11 +14,11 @@ enum
 
 struct UnknownAnimStruct2
 {
-    void *unk0;
+    u8 *bgTiles;
     u16 *unk4;
     u8 unk8;
-    u8 unk9;
-    u16 unkA;
+    u8 bgId;
+    u16 tilesOffset;
     u16 unkC;
 };
 
@@ -36,7 +36,7 @@ extern bool8 gAnimScriptActive;
 extern u8 gAnimVisualTaskCount;
 extern u8 gAnimSoundTaskCount;
 extern struct DisableStruct *gAnimDisableStructPtr;
-extern u32 gAnimMoveDmg;
+extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
@@ -60,36 +60,48 @@ s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
 s16 KeepPanInRange(s16 a);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
+void sub_80A4720(u16 a, u16 *b, u32 c, u8 d);
 
 // battle_anim_80FE840.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
-void sub_8118FBC(u8 arg0, u8 arg1, u8 arg2, u8 bankIdentity, u8 arg4, void *arg5, u16 *arg6, u16 arg7);
+void sub_8118FBC(u8 arg0, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, void *arg5, u16 *arg6, u16 arg7);
 void HandleIntroSlide(u8 terrainId);
+u32 GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_80A5C6C.s
 void sub_80A6EEC(struct Sprite *sprite);
 void sub_80A68D4(struct Sprite *sprite);
-void sub_80A6F3C(struct Sprite *sprite);
+bool8 TranslateAnimLinear(struct Sprite *sprite);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
 u8 sub_80A82E4(u8 battlerId);
-bool8 AnimateBallThrow(struct Sprite *sprite);
+bool8 TranslateAnimArc(struct Sprite *sprite);
+void sub_80A6630(struct Sprite *sprite);
+void sub_80A6680(struct Sprite *sprite);
+void sub_80A7344(u8 spriteId);
+void obj_id_set_rotscale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
+void sub_80A6E14(struct Sprite *sprite);
+void sub_80A7270(u8 spriteId, u8 objMode);
+void sub_80A73A0(u8 spriteId);
 
 enum
 {
-    BANK_X_POS,
-    BANK_Y_POS,
+    BATTLER_COORD_X,
+    BATTLER_COORD_Y,
+    BATTLER_COORD_X_2,
+    BATTLER_COORD_3,
+    BATTLER_COORD_4,
 };
 
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId);
 
 bool8 IsBattlerSpritePresent(u8 battlerId);
-void sub_80A6C68(u8 arg0);
+void sub_80A6C68(u32 arg0);
 u8 GetAnimBattlerSpriteId(u8 wantedBattler);
 bool8 IsDoubleBattle(void);
 u8 sub_80A6D94(void);
-u8 sub_80A8364(u8);
+u8 sub_80A8364(u8 battlerId);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);
@@ -97,6 +109,14 @@ u8 sub_80A82E4(u8 battlerId);
 u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 
 // battle_anim_80A9C70.s
+#define STAT_ANIM_PLUS1  15
+#define STAT_ANIM_PLUS2  39
+#define STAT_ANIM_MINUS1 22
+#define STAT_ANIM_MINUS2 46
+#define STAT_ANIM_MULTIPLE_PLUS1 55
+#define STAT_ANIM_MULTIPLE_PLUS2 56
+#define STAT_ANIM_MULTIPLE_MINUS1 57
+#define STAT_ANIM_MULTIPLE_MINUS2 58
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
 // battle_anim_8170478.s
@@ -104,6 +124,6 @@ u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 
-u8 sub_80A600C(u8, u16, u8);
+u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
 
 #endif // GUARD_BATTLE_ANIM_H

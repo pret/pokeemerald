@@ -25,8 +25,9 @@
 #include "gpu_regs.h"
 #include "bg.h"
 #include "link.h"
-#include "blend_palette.h"
+#include "util.h"
 #include "trig.h"
+#include "data2.h"
 
 struct EvoInfo
 {
@@ -48,8 +49,6 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern bool8 gAffineAnimsDisabled;
-extern const u8 gSpeciesNames[][11];
 
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID      gBattleCommunication[2]
@@ -60,12 +59,9 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 // strings
 extern const u8 gText_CommunicationStandby5[];
 
-extern void sub_80356D0(void);
 extern void sub_807B154(void);
 extern void sub_807F19C(void);
 extern void sub_807B140(void);
-extern void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
-extern void Overworld_PlaySpecialMapMusic(void);
 extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
 extern u8 sub_81C1B94(void);
 extern void sub_807F1A8(u8 arg0, const u8 *arg1, u8 arg2);

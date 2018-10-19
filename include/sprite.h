@@ -235,11 +235,15 @@ extern const struct OamData gDummyOamData;
 extern const union AnimCmd *const gDummySpriteAnimTable[];
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
 extern const struct SpriteTemplate gDummySpriteTemplate;
+
+extern u8 gReservedSpritePaletteCount;
+extern struct Sprite gSprites[];
+extern u8 gOamLimit;
+extern u16 gReservedSpriteTileCount;
 extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
-
-extern struct Sprite gSprites[];
 extern struct OamMatrix gOamMatrices[];
+extern bool8 gAffineAnimsDisabled;
 
 void ResetSpriteData(void);
 void AnimateSprites(void);

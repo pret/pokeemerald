@@ -7,7 +7,7 @@
 struct Task gTasks[NUM_TASKS];
 
 static void InsertTask(u8 newTaskId);
-static u8 FindFirstActiveTask();
+static u8 FindFirstActiveTask(void);
 
 void ResetTasks(void)
 {
@@ -124,7 +124,7 @@ void RunTasks(void)
     }
 }
 
-static u8 FindFirstActiveTask()
+static u8 FindFirstActiveTask(void)
 {
     u8 taskId;
 

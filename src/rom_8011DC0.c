@@ -1609,7 +1609,7 @@ void sub_80141A4(void)
         break;
     case 1:
         if (!FuncIsActiveTask(sub_80140E0))
-            sub_80C4E74(GetMultiplayerId() ^ 1, CB2_ReturnToField);
+            TrainerCard_ShowLinkCard(GetMultiplayerId() ^ 1, CB2_ReturnToField);
         break;
     }
 
@@ -1646,7 +1646,7 @@ void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
     VarSet(VAR_0x4087, arg4);
     gFieldLinkPlayerCount = GetLinkPlayerCount();
     gUnknown_03005DB4 = GetMultiplayerId();
-    sub_809D2BC();
+    SetCableClubWarp();
     Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
     WarpIntoMap();
 }
@@ -1675,7 +1675,7 @@ void sub_80143E4(void *arg0, bool32 arg1)
 {
     u16 *argAsU16Ptr = arg0;
 
-    sub_80C30A4(argAsU16Ptr);
+    TrainerCard_GenerateCardForPlayer((struct TrainerCard *)argAsU16Ptr);
     if (arg1)
         argAsU16Ptr[48] = sub_801B39C();
     else

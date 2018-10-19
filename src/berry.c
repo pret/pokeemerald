@@ -11,7 +11,7 @@
 extern u8 EventObjectGetBerryTreeId(u8 eventObjectId);
 extern void sub_8092EF0(u8 mapId, u8 mapNumber, u8 mapGroup);
 extern void CB2_ChooseBerry(void);
-extern const u8* GetEventObjectScriptPointerForComparison(void);
+extern const u8* GetEventObjectScriptPointerPlayerFacing(void);
 extern bool8 IsBerryTreeSparkling(u8, u8, u8);
 
 extern u16 gSpecialVar_ItemId;
@@ -930,7 +930,7 @@ bool32 EventObjectInteractionWaterBerryTree(void)
 
 bool8 IsPlayerFacingPlantedBerryTree(void)
 {
-    if (GetEventObjectScriptPointerForComparison() == BerryTreeScript
+    if (GetEventObjectScriptPointerPlayerFacing() == BerryTreeScript
      && GetStageByBerryTreeId(EventObjectGetBerryTreeId(gSelectedEventObject)) == 0)
         return TRUE;
     else
@@ -939,7 +939,7 @@ bool8 IsPlayerFacingPlantedBerryTree(void)
 
 bool8 TryToWaterBerryTree(void)
 {
-    if (GetEventObjectScriptPointerForComparison() != BerryTreeScript)
+    if (GetEventObjectScriptPointerPlayerFacing() != BerryTreeScript)
         return FALSE;
     else
         return EventObjectInteractionWaterBerryTree();

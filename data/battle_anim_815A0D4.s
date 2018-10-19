@@ -330,7 +330,7 @@ gUnknown_085CE5A8::
 	spr_template 0x2800, 0x2800, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815CB88
 gUnknown_085CE5C0::
 	spr_template 0x27f3, 0x27f3, gUnknown_085249DC, gDummySpriteAnimTable, NULL, gUnknown_085CE224, sub_815CC94
-gUnknown_085CE5D8::
+gBattleAnimSpriteTemplate_85CE5D8::
 	spr_template 0x27fc, 0x27fc, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815CDB4
 
 	.align 2

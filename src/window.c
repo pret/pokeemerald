@@ -20,7 +20,7 @@ EWRAM_DATA static u16 sWindowSize = 0;
 static u8 GetNumActiveWindowsOnBg(u8 bgId);
 static u8 GetNumActiveWindowsOnBg8Bit(u8 bgId);
 
-static const struct WindowTemplate sDummyWindowTemplate = {0xFF, 0, 0, 0, 0, 0, 0};
+static const struct WindowTemplate sDummyWindowTemplate = DUMMY_WIN_TEMPLATE;
 
 static void nullsub_8(void)
 {

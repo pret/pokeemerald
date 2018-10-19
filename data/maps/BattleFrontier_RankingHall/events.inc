@@ -1,6 +1,6 @@
 BattleFrontier_RankingHall_EventObjects: @ 853CEB8
 	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 24, 13, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_RankingHall_EventScript_25E52F, 0
-	object_event 2, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 4, 10, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_RankingHall_EventScript_25E54A, 0
+	object_event 2, EVENT_OBJ_GFX_NINJA_BOY, 0, 4, 10, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_RankingHall_EventScript_25E54A, 0
 	object_event 3, EVENT_OBJ_GFX_BOY_3, 0, 44, 11, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_RankingHall_EventScript_25E573, 0
 
 BattleFrontier_RankingHall_MapWarps: @ 853CF00

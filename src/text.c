@@ -9,11 +9,11 @@
 #include "window.h"
 #include "text.h"
 #include "blit.h"
+#include "dynamic_placeholder_text_util.h"
 
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-extern u8* DynamicPlaceholderTextUtil_GetPlaceholderPtr(u8 a1);
 extern int sub_8197964();
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
@@ -23,8 +23,6 @@ static u16 gFontHalfRowLookupTable[0x51];
 static u16 gLastTextBgColor;
 static u16 gLastTextFgColor;
 static u16 gLastTextShadowColor;
-
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 const struct FontInfo *gFonts;
 u8 gUnknown_03002F84;
@@ -3095,13 +3093,13 @@ u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
         temp = strLocal[strPos++];
         switch (temp)
         {
-            case 0xFE:
-            case 0xFF:
+            case CHAR_NEWLINE:
+            case EOS:
                 lineWidths[line] = width;
                 width = 0;
                 line++;
                 break;
-            case 0xFC:
+            case EXT_CTRL_CODE_BEGIN:
                 temp2 = strLocal[strPos++];
                 switch (temp2)
                 {
@@ -3135,21 +3133,21 @@ u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
                         break;
                 }
                 break;
-            case 0xF7:
-            case 0xFD:
+            case CHAR_SPECIAL_F7:
+            case PLACEHOLDER_BEGIN:
                 ++strPos;
                 break;
-            case 0xFA:
-            case 0xFB:
+            case CHAR_PROMPT_SCROLL:
+            case CHAR_PROMPT_CLEAR:
                 break;
-            case 0xF8:
-            case 0xF9:
+            case CHAR_SPECIAL_F8:
+            case CHAR_SPECIAL_F9:
                 ++strPos;
             default:
                 ++width;
                 break;
         }
-    } while (temp != 0xFF);
+    } while (temp != EOS);
 
     for (width = 0, strPos = 0; strPos < 8; ++strPos)
     {
@@ -3170,7 +3168,7 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32)
             return gGlyphWidthFuncs[i].func;
     }
 
-    return 0;
+    return NULL;
 }
 
 u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
@@ -3181,7 +3179,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     s32 result;
     int localLetterSpacing;
     u32 lineWidth;
-    u8 *bufferPointer;
+    const u8 *bufferPointer;
     int glyphWidth;
     u32 width;
 
@@ -3201,16 +3199,16 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     lineWidth = 0;
     bufferPointer = 0;
 
-    while (*str != 0xFF)
+    while (*str != EOS)
     {
         switch (*str)
         {
-            case 0xFE:
+            case CHAR_NEWLINE:
                 if (lineWidth > width)
                     width = lineWidth;
                 lineWidth = 0;
                 break;
-            case 0xFD:
+            case PLACEHOLDER_BEGIN:
                 switch (*++str)
                 {
                     case 0x2:
@@ -3225,10 +3223,10 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                     default:
                         return 0;
                 }
-            case 0xF7:
+            case CHAR_SPECIAL_F7:
                 if (bufferPointer == NULL)
                     bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
-                while (*bufferPointer != 0xFF)
+                while (*bufferPointer != EOS)
                 {
                     glyphWidth = func(*bufferPointer++, isJapanese);
                     if (minGlyphWidth > 0)
@@ -3240,13 +3238,13 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                     else
                     {
                         lineWidth += glyphWidth;
-                        if (isJapanese && str[1] != 0xFF)
+                        if (isJapanese && str[1] != EOS)
                             lineWidth += localLetterSpacing;
                     }
                 }
                 bufferPointer = 0;
                 break;
-            case 0xFC:
+            case EXT_CTRL_CODE_BEGIN:
                 switch (*++str)
                 {
                     case 0x4:
@@ -3299,9 +3297,9 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                         break;
                 }
                 break;
-            case 0xF8:
-            case 0xF9:
-                if (*str == 0xF9)
+            case CHAR_SPECIAL_F8:
+            case CHAR_SPECIAL_F9:
+                if (*str == CHAR_SPECIAL_F9)
                     glyphWidth = func(*++str | 0x100, isJapanese);
                 else
                     glyphWidth = GetKeypadIconWidth(*++str);
@@ -3315,12 +3313,12 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 else
                 {
                     lineWidth += glyphWidth;
-                    if (isJapanese && str[1] != 0xFF)
+                    if (isJapanese && str[1] != EOS)
                         lineWidth += localLetterSpacing;
                 }
                 break;
-            case 0xFA:
-            case 0xFB:
+            case CHAR_PROMPT_SCROLL:
+            case CHAR_PROMPT_CLEAR:
                 break;
             default:
                 glyphWidth = func(*str, isJapanese);
@@ -3333,7 +3331,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 else
                 {
                     lineWidth += glyphWidth;
-                    if (isJapanese && str[1] != 0xFF)
+                    if (isJapanese && str[1] != EOS)
                         lineWidth += localLetterSpacing;
                 }
                 break;
@@ -3372,7 +3370,7 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
         temp = strLocal[strPos++];
         switch (temp)
         {
-            case 0xFC:
+            case EXT_CTRL_CODE_BEGIN:
                 temp2 = strLocal[strPos++];
                 switch (temp2)
                 {
@@ -3421,16 +3419,16 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
                         continue;
                 }
                 break;
-            case 0xF7:
-            case 0xF8:
-            case 0xF9:
-            case 0xFD:
+            case CHAR_SPECIAL_F7:
+            case CHAR_SPECIAL_F8:
+            case CHAR_SPECIAL_F9:
+            case PLACEHOLDER_BEGIN:
                 ++strPos;
                 break;
-            case 0xFA:
-            case 0xFB:
-            case 0xFE:
-            case 0xFF:
+            case CHAR_PROMPT_SCROLL:
+            case CHAR_PROMPT_CLEAR:
+            case CHAR_NEWLINE:
+            case EOS:
                 break;
             default:
                 switch (fontId)
@@ -3450,7 +3448,7 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
                 break;
         }
     }
-    while (temp != 0xFF);
+    while (temp != EOS);
 
     RestoreTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
     return 1;

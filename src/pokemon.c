@@ -35,6 +35,7 @@
 #include "pokenav.h"
 #include "pokemon_storage_system.h"
 #include "recorded_battle.h"
+#include "apprentice.h"
 
 struct SpeciesItem
 {
@@ -69,7 +70,6 @@ extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[];
 extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
-extern const struct UnknownPokemonStruct3 gUnknown_08610970[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u8 gTrainerClassNames[][13];
@@ -80,7 +80,6 @@ extern u8 StorageGetCurrentBox(void);
 extern void set_unknown_box_id(u8);
 extern void sub_803FA70(u8 battlerId);
 extern u8 sav1_map_get_name(void);
-extern const u8 *sub_81A1650(u8, u8 language);
 extern u8 GetFrontierEnemyMonLevel(u8);
 extern bool8 InBattlePyramid(void);
 extern bool8 InBattlePike(void);
@@ -2873,27 +2872,27 @@ void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lv
     CalculateMonStats(mon);
 }
 
-void sub_8068528(struct Pokemon *mon, const struct UnknownPokemonStruct2 *src, u8 monId)
+void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId)
 {
     s32 i;
     u16 evAmount;
     u8 language;
-    u32 otId = gUnknown_08610970[src->field_0_0].field_30;
-    u32 personality = ((gUnknown_08610970[src->field_0_0].field_30 >> 8) | ((gUnknown_08610970[src->field_0_0].field_30 & 0xFF) << 8))
-                    + src->mons[monId].species + src->field_2;
+    u32 otId = gApprentices[src->id].otId;
+    u32 personality = ((gApprentices[src->id].otId >> 8) | ((gApprentices[src->id].otId & 0xFF) << 8))
+                    + src->monData[monId].species + src->number;
 
     CreateMon(mon,
-              src->mons[monId].species,
-              GetFrontierEnemyMonLevel(src->field_0_1 - 1),
+              src->monData[monId].species,
+              GetFrontierEnemyMonLevel(src->lvlMode - 1),
               0x1F,
               TRUE,
               personality,
               TRUE,
               otId);
 
-    SetMonData(mon, MON_DATA_HELD_ITEM, &src->mons[monId].item);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &src->monData[monId].item);
     for (i = 0; i < 4; i++)
-        SetMonMoveSlot(mon, src->mons[monId].moves[i], i);
+        SetMonMoveSlot(mon, src->monData[monId].moves[i], i);
 
     evAmount = MAX_TOTAL_EVS / NUM_STATS;
     for (i = 0; i < NUM_STATS; i++)
@@ -2901,7 +2900,7 @@ void sub_8068528(struct Pokemon *mon, const struct UnknownPokemonStruct2 *src, u
 
     language = src->language;
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
-    SetMonData(mon, MON_DATA_OT_NAME, sub_81A1650(src->field_0_0, language));
+    SetMonData(mon, MON_DATA_OT_NAME, GetApprenticeNameInLanguage(src->id, language));
     CalculateMonStats(mon);
 }
 
@@ -3252,7 +3251,7 @@ u8 GetLevelFromMonExp(struct Pokemon *mon)
     u32 exp = GetMonData(mon, MON_DATA_EXP, NULL);
     s32 level = 1;
 
-    while (level <= MAX_MON_LEVEL && gExperienceTables[gBaseStats[species].growthRate][level] <= exp)
+    while (level <= MAX_LEVEL && gExperienceTables[gBaseStats[species].growthRate][level] <= exp)
         level++;
 
     return level - 1;
@@ -3264,7 +3263,7 @@ u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon)
     u32 exp = GetBoxMonData(boxMon, MON_DATA_EXP, NULL);
     s32 level = 1;
 
-    while (level <= MAX_MON_LEVEL && gExperienceTables[gBaseStats[species].growthRate][level] <= exp)
+    while (level <= MAX_LEVEL && gExperienceTables[gBaseStats[species].growthRate][level] <= exp)
         level++;
 
     return level - 1;
@@ -5146,7 +5145,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0x40)  // raise level
-             && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_MON_LEVEL)
+             && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
                 dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
@@ -6431,12 +6430,12 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u8 nextLevel = GetMonData(mon, MON_DATA_LEVEL, 0) + 1;
     u32 expPoints = GetMonData(mon, MON_DATA_EXP, 0);
-    if (expPoints > gExperienceTables[gBaseStats[species].growthRate][MAX_MON_LEVEL])
+    if (expPoints > gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL])
     {
-        expPoints = gExperienceTables[gBaseStats[species].growthRate][MAX_MON_LEVEL];
+        expPoints = gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL];
         SetMonData(mon, MON_DATA_EXP, &expPoints);
     }
-    if (nextLevel > MAX_MON_LEVEL || expPoints < gExperienceTables[gBaseStats[species].growthRate][nextLevel])
+    if (nextLevel > MAX_LEVEL || expPoints < gExperienceTables[gBaseStats[species].growthRate][nextLevel])
     {
         return FALSE;
     }

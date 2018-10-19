@@ -430,7 +430,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276F60:: @ 8276F60
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	message OldaleTown_PokemonCenter_2F_Text_278091
+	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2DA4
 	waitstate
@@ -474,7 +474,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
 	release
 	compare VAR_0x8004, 5
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277036
-	special sub_809D2BC
+	special SetCableClubWarp
 	warp MAP_SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
 	special sub_80AF948
 	waitstate
@@ -486,7 +486,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27702B:: @ 827702B
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_277036:: @ 8277036
-	special sub_809D2BC
+	special SetCableClubWarp
 	warp MAP_DOUBLE_BATTLE_COLOSSEUM, 255, 5, 8
 	special sub_80AF948
 	waitstate
@@ -532,7 +532,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2770B2:: @ 82770B2
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	message OldaleTown_PokemonCenter_2F_Text_278091
+	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2E4C
 	waitstate
@@ -576,7 +576,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27713A:: @ 827713A
 	closedoor 9, 1
 	waitdooranim
 	release
-	special sub_809D2BC
+	special SetCableClubWarp
 	setwarp MAP_TRADE_CENTER, 255, 5, 8
 	special sub_80AF948
 	waitstate
@@ -607,7 +607,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2771DB:: @ 82771DB
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	message OldaleTown_PokemonCenter_2F_Text_278091
+	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2E74
 	waitstate
@@ -651,7 +651,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27724C:: @ 827724C
 	closedoor 9, 1
 	waitdooranim
 	release
-	special sub_809D2BC
+	special SetCableClubWarp
 	setwarp MAP_RECORD_CORNER, 255, 8, 9
 	special sub_80AF948
 	waitstate
@@ -702,7 +702,7 @@ MossdeepCity_GameCorner_1F_EventScript_2772F9:: @ 82772F9
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277306:: @ 8277306
-	special sub_809D2BC
+	special SetCableClubWarp
 	special sub_80AF948
 	waitstate
 	end
@@ -784,7 +784,7 @@ MossdeepCity_GameCorner_1F_Movement_277360: @ 8277360
 	walk_up
 	step_end
 
-gUnknown_08277365:: @ 8277365
+EventScript_CableBoxResults:: @ 8277365
 	lockall
 	setvar VAR_0x8004, 0
 	special ShowLinkBattleRecords
@@ -1050,7 +1050,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	closedoor 5, 1
 	waitdooranim
 	special sub_8018090
-	special sub_809D2BC
+	special SetCableClubWarp
 	warpteleport2 MAP_UNION_ROOM, 255, 7, 11
 	waitstate
 	special UnionRoomSpecial
@@ -1392,7 +1392,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277B3A:: @ 8277B3A
 	waitstate
 	end
 
-OldaleTown_PokemonCenter_2F_EventScript_277B8A:: @ 8277B8A
+EventScript_WirelessBoxResults:: @ 8277B8A
 	lockall
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_27733F
@@ -1675,21 +1675,21 @@ OldaleTown_PokemonCenter_2F_Text_278061: @ 8278061
 	.string "A POKéMON holding the {STR_VAR_1}\n"
 	.string "BERRY can’t be traded.$"
 
-OldaleTown_PokemonCenter_2F_Text_278091:: @ 8278091
+gText_PleaseWaitForLink:: @ 8278091
 	.string "Please wait.\n"
 	.string "… … B Button: Cancel$"
 
-OldaleTown_PokemonCenter_2F_Text_2780B3:: @ 82780B3
+gText_ConfirmLinkWhenPlayersReady:: @ 82780B3
 	.string "When all players are ready…\n"
 	.string "A Button: Confirm\l"
 	.string "B Button: Cancel$"
 
-OldaleTown_PokemonCenter_2F_Text_2780F2:: @ 82780F2
+gText_ConfirmStartLinkWithXPlayers:: @ 82780F2
 	.string "Start link with {STR_VAR_1} players.\n"
 	.string "A Button: Confirm\l"
 	.string "B Button: Cancel$"
 
-OldaleTown_PokemonCenter_2F_Text_278131:: @ 8278131
+gText_AwaitingLinkup:: @ 8278131
 	.string "Awaiting linkup…\n"
 	.string "… … B Button: Cancel$"
 

@@ -3,7 +3,7 @@ TrainerHill_Entrance_EventObjects: @ 853D874
 	object_event 2, EVENT_OBJ_GFX_NURSE, 0, 4, 9, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, TrainerHill_Entrance_EventScript_2681EF, 0
 	object_event 3, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 14, 9, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, TrainerHill_Entrance_EventScript_2683C7, 0
 	object_event 4, EVENT_OBJ_GFX_GIRL_3, 0, 5, 14, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, TrainerHill_Entrance_EventScript_2683AC, 0
-	object_event 5, EVENT_OBJ_GFX_MAN_4, 0, 14, 15, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, TrainerHill_Entrance_EventScript_268391, 0
+	object_event 5, EVENT_OBJ_GFX_MAN_3, 0, 14, 15, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, TrainerHill_Entrance_EventScript_268391, 0
 
 TrainerHill_Entrance_MapWarps: @ 853D8EC
 	warp_def 9, 16, 3, 4, MAP_ROUTE111

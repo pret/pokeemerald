@@ -936,7 +936,7 @@ void GabbyAndTyBeforeInterview(void)
     {
         gSaveBlock1Ptr->gabbyAndTyData.battleNum ++;
     }
-    gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.unk5_0;
+    gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.playerMonWasDamaged;
     if (gBattleResults.playerFaintCounter != 0)
     {
         gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon = TRUE;
@@ -1580,7 +1580,7 @@ void SaveRecordedItemPurchasesForTVShow(void)
         if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SMART_SHOPPER, FALSE) != TRUE)
         {
             TV_SortPurchasesByQuantity();
-            if (gUnknown_02039F80[0].quantity >= 20)
+            if (gMartPurchaseHistory[0].quantity >= 20)
             {
                 show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
                 show->smartshopperShow.kind = TVSHOW_SMART_SHOPPER;
@@ -1588,8 +1588,8 @@ void SaveRecordedItemPurchasesForTVShow(void)
                 show->smartshopperShow.shopLocation = gMapHeader.regionMapSectionId;
                 for (i = 0; i < 3; i ++)
                 {
-                    show->smartshopperShow.itemIds[i] = gUnknown_02039F80[i].itemId;
-                    show->smartshopperShow.itemAmounts[i] = gUnknown_02039F80[i].quantity;
+                    show->smartshopperShow.itemIds[i] = gMartPurchaseHistory[i].itemId;
+                    show->smartshopperShow.itemAmounts[i] = gMartPurchaseHistory[i].quantity;
                 }
                 show->smartshopperShow.priceReduced = GetPriceReduction(1);
                 StringCopy(show->smartshopperShow.playerName, gSaveBlock2Ptr->playerName);
@@ -2992,14 +2992,14 @@ void TV_SortPurchasesByQuantity(void)
     {
         for (j = i + 1; j < 3; j ++)
         {
-            if (gUnknown_02039F80[i].quantity < gUnknown_02039F80[j].quantity)
+            if (gMartPurchaseHistory[i].quantity < gMartPurchaseHistory[j].quantity)
             {
-                tmpId = gUnknown_02039F80[i].itemId;
-                tmpQn = gUnknown_02039F80[i].quantity;
-                gUnknown_02039F80[i].itemId = gUnknown_02039F80[j].itemId;
-                gUnknown_02039F80[i].quantity = gUnknown_02039F80[j].quantity;
-                gUnknown_02039F80[j].itemId = tmpId;
-                gUnknown_02039F80[j].quantity = tmpQn;
+                tmpId = gMartPurchaseHistory[i].itemId;
+                tmpQn = gMartPurchaseHistory[i].quantity;
+                gMartPurchaseHistory[i].itemId = gMartPurchaseHistory[j].itemId;
+                gMartPurchaseHistory[i].quantity = gMartPurchaseHistory[j].quantity;
+                gMartPurchaseHistory[j].itemId = tmpId;
+                gMartPurchaseHistory[j].quantity = tmpQn;
             }
         }
     }

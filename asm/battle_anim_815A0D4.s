@@ -231,7 +231,7 @@ sub_815A254: @ 815A254
 	subs r1, r6
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80A74F4
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 23
@@ -775,7 +775,7 @@ sub_815A6C4: @ 815A6C4
 	movs r1, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_80A8924
+	bl SetAverageBattlerPositions
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -816,7 +816,7 @@ _0815A6F8:
 sub_815A73C: @ 815A73C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815A75E
@@ -1012,8 +1012,8 @@ _0815A8C2:
 	bx r0
 	thumb_func_end sub_815A8AC
 
-	thumb_func_start sub_815A8C8
-sub_815A8C8: @ 815A8C8
+	thumb_func_start AnimTask_IsTargetPlayerSide
+AnimTask_IsTargetPlayerSide: @ 815A8C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1039,10 +1039,10 @@ _0815A8F0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815A8C8
+	thumb_func_end AnimTask_IsTargetPlayerSide
 
-	thumb_func_start sub_815A904
-sub_815A904: @ 815A904
+	thumb_func_start AnimTask_IsHealingMove
+AnimTask_IsHealingMove: @ 815A904
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -1064,7 +1064,7 @@ _0815A924:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815A904
+	thumb_func_end AnimTask_IsHealingMove
 
 	thumb_func_start sub_815A934
 sub_815A934: @ 815A934
@@ -1625,7 +1625,7 @@ _0815ADDC:
 	ldr r4, =gBattleAnimTarget
 _0815ADDE:
 	ldrb r0, [r4]
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
@@ -6104,7 +6104,7 @@ _0815D26E:
 	strh r0, [r4, 0x18]
 _0815D2A0:
 	adds r0, r5, 0
-	bl sub_80A6190
+	bl GetBattlerYCoordWithElevation
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x22
@@ -8524,7 +8524,7 @@ _0815E5FE:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -8542,7 +8542,7 @@ _0815E634:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl AnimateBallThrow
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815E6D2
@@ -9804,11 +9804,11 @@ _0815F022:
 	strh r0, [r4, 0x34]
 	strh r1, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	b _0815F0F8
 _0815F038:
 	adds r0, r4, 0
-	bl sub_80A6F3C
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815F106
@@ -10048,8 +10048,8 @@ _0815F1DE:
 	.pool
 	thumb_func_end sub_815F18C
 
-	thumb_func_start sub_815F20C
-sub_815F20C: @ 815F20C
+	thumb_func_start AnimTask_MonToSubstitute
+AnimTask_MonToSubstitute: @ 815F20C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -10183,7 +10183,7 @@ _0815F310:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815F20C
+	thumb_func_end AnimTask_MonToSubstitute
 
 	thumb_func_start sub_815F330
 sub_815F330: @ 815F330
@@ -10861,8 +10861,8 @@ _0815F896:
 	.pool
 	thumb_func_end sub_815F7C4
 
-	thumb_func_start sub_815F8A0
-sub_815F8A0: @ 815F8A0
+	thumb_func_start AnimTask_GetReturnPowerLevel
+AnimTask_GetReturnPowerLevel: @ 815F8A0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -10904,7 +10904,7 @@ _0815F8E0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_815F8A0
+	thumb_func_end AnimTask_GetReturnPowerLevel
 
 	thumb_func_start sub_815F8F4
 sub_815F8F4: @ 815F8F4
@@ -12336,8 +12336,8 @@ _081604E8:
 	bx r0
 	thumb_func_end sub_81603F4
 
-	thumb_func_start sub_81604F0
-sub_81604F0: @ 81604F0
+	thumb_func_start AnimTask_GetWeather
+AnimTask_GetWeather: @ 81604F0
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -12380,7 +12380,7 @@ _08160538:
 	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81604F0
+	thumb_func_end AnimTask_GetWeather
 
 	thumb_func_start sub_8160544
 sub_8160544: @ 8160544

@@ -9,7 +9,7 @@
 		.align 2
 gSpecials:: @ 81DBA64
 	def_special HealPlayerParty
-	def_special sub_809D2BC
+	def_special SetCableClubWarp
 	def_special sub_80AF948
 	def_special sub_80AF9F8
 	def_special sub_80B36EC
@@ -259,7 +259,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F9490
 	def_special ValidateEReaderTrainer
 	def_special GetBestBattleTowerStreak
-	def_special sub_80F94E8
+	def_special ReducePlayerPartyToThree
 	def_special BedroomPC
 	def_special PlayerPC
 	def_special FieldShowRegionMap
@@ -415,7 +415,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_818E990
 	def_special PutLilycoveContestLadyShowOnTheAir
 	def_special sub_813B880
-	def_special sub_81A085C
+	def_special CallApprenticeFunction
 	def_special ShouldTryGetTrainerScript
 	def_special ShowMapNamePopup
 	def_special ShowMapNamePopup
