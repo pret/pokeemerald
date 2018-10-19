@@ -275,26 +275,6 @@ struct BerryCrush
     u32 unk;
 };
 
-struct UnknownSaveBlock2Struct
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2[2];
-    u8 field_4[8];
-    u8 field_C[16];
-    u16 field_1C[6];
-    u16 field_28[6];
-    u8 field_34[176];
-    u8 field_E4;
-    u8 field_E5;
-    u8 field_E6;
-    u8 field_E7;
-    u8 field_E8;
-    u8 field_E9;
-    u8 field_EA;
-    u8 field_EB;
-}; // sizeof = 0xEC
-
 struct ApprenticeMon
 {
     u16 species;
@@ -345,7 +325,7 @@ struct UnknownPokemonStruct
 
 struct EmeraldBattleTowerRecord
 {
-    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
+    /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
     /*0x01*/ u8 trainerClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
@@ -387,7 +367,7 @@ struct BattleDomeTrainer
 struct BattleFrontier
 {
     /*0x64C*/ struct EmeraldBattleTowerRecord battleTower;
-    /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
+    /*0x738*/ struct EmeraldBattleTowerRecord records[5]; // No idea here, it's probably wrong, no clue.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
     /*0xBD8*/ u8 field_BD8[11];
@@ -415,7 +395,10 @@ struct BattleFrontier
     /*0xCF0*/ u16 field_CF0[2];
     /*0xCF4*/ u16 field_CF4[2];
     /*0xCF8*/ u16 field_CF8[2];
-    /*0xCFC*/ u16 field_CFC[5];
+    /*0xCFC*/ u16 field_CFC[2];
+    /*0xD06*/ u16 field_D00;
+    /*0xD06*/ u16 field_D02;
+    /*0xD06*/ u16 field_D04;
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xD08*/ u8 field_D08_0:1;

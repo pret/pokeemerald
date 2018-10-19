@@ -1544,7 +1544,7 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->frontier.field_BD8);
     show->bravoTrainerTower.species = gSaveBlock2Ptr->frontier.field_BD4;
     show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->frontier.field_BD6;
-    show->bravoTrainerTower.numFights = sub_8164FCC(gSaveBlock2Ptr->frontier.field_D07, 0);
+    show->bravoTrainerTower.numFights = GetCurrentBattleTowerWinStreak(gSaveBlock2Ptr->frontier.field_D07, 0);
     show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->frontier.field_D06;
     if (gSaveBlock2Ptr->frontier.field_D07 == 0)
     {

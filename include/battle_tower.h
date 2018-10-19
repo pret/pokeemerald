@@ -1,6 +1,10 @@
 #ifndef GUARD_BATTLE_TOWER_H
 #define GUARD_BATTLE_TOWER_H
 
+#define BATTLE_TOWER_EREADER_TRAINER_ID 200
+#define BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID 300
+#define BATTLE_TOWER_RECORD_APPRENTICE_BASE_ID 400
+
 struct RSBattleTowerRecord
 {
     /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
@@ -46,7 +50,7 @@ struct FacilityMon
 extern const struct BattleFrontierTrainer *gFacilityTrainers;
 extern const struct FacilityMon *gFacilityTrainerMons;
 
-u16 sub_8164FCC(u8, u8);
+u16 GetCurrentBattleTowerWinStreak(u8, u8);
 void sub_81659DC(struct RSBattleTowerRecord *a0, struct RSBattleTowerRecord *a1);
 bool32 sub_816587C(union BattleTowerRecord *, union BattleTowerRecord *);
 void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *);

@@ -402,73 +402,73 @@ u32 MoveRecordedBattleToSaveData(void)
     {
         for (i = 0; i < 8; i++)
         {
-            battleSave->field_504[i] = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_A - 300].field_4[i];
+            battleSave->field_504[i] = gSaveBlock2Ptr->records[gTrainerBattleOpponent_A - 300].field_4[i];
         }
-        battleSave->field_50C = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_A - 300].field_1;
+        battleSave->field_50C = gSaveBlock2Ptr->records[gTrainerBattleOpponent_A - 300].field_1;
 
         if (sUnknown_0203CCE8 == 1)
         {
             for (i = 0; i < 6; i++)
             {
-                battleSave->field_50E[i] = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_A - 300].field_28[i];
+                battleSave->field_50E[i] = gSaveBlock2Ptr->records[gTrainerBattleOpponent_A - 300].field_28[i];
             }
         }
         else
         {
             for (i = 0; i < 6; i++)
             {
-                battleSave->field_50E[i] = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_A - 300].field_1C[i];
+                battleSave->field_50E[i] = gSaveBlock2Ptr->records[gTrainerBattleOpponent_A - 300].field_1C[i];
             }
         }
-        battleSave->field_51A = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_A - 300].field_E4;
+        battleSave->field_51A = gSaveBlock2Ptr->records[gTrainerBattleOpponent_A - 300].field_E4;
     }
     else if (gTrainerBattleOpponent_B >= 300 && gTrainerBattleOpponent_B <= 399)
     {
         for (i = 0; i < 8; i++)
         {
-            battleSave->field_504[i] = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_B - 300].field_4[i];
+            battleSave->field_504[i] = gSaveBlock2Ptr->records[gTrainerBattleOpponent_B - 300].field_4[i];
         }
-        battleSave->field_50C = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_B - 300].field_1;
+        battleSave->field_50C = gSaveBlock2Ptr->records[gTrainerBattleOpponent_B - 300].field_1;
 
         if (sUnknown_0203CCE8 == 1)
         {
             for (i = 0; i < 6; i++)
             {
-                battleSave->field_50E[i] = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_B - 300].field_28[i];
+                battleSave->field_50E[i] = gSaveBlock2Ptr->records[gTrainerBattleOpponent_B - 300].field_28[i];
             }
         }
         else
         {
             for (i = 0; i < 6; i++)
             {
-                battleSave->field_50E[i] = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_B - 300].field_1C[i];
+                battleSave->field_50E[i] = gSaveBlock2Ptr->records[gTrainerBattleOpponent_B - 300].field_1C[i];
             }
         }
-        battleSave->field_51A = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_B - 300].field_E4;
+        battleSave->field_51A = gSaveBlock2Ptr->records[gTrainerBattleOpponent_B - 300].field_E4;
     }
     else if (gPartnerTrainerId >= 300 && gPartnerTrainerId <= 399)
     {
         for (i = 0; i < 8; i++)
         {
-            battleSave->field_504[i] = gSaveBlock2Ptr->field_738[gPartnerTrainerId - 300].field_4[i];
+            battleSave->field_504[i] = gSaveBlock2Ptr->records[gPartnerTrainerId - 300].field_4[i];
         }
-        battleSave->field_50C = gSaveBlock2Ptr->field_738[gPartnerTrainerId - 300].field_1;
+        battleSave->field_50C = gSaveBlock2Ptr->records[gPartnerTrainerId - 300].field_1;
 
         if (sUnknown_0203CCE8 == 1)
         {
             for (i = 0; i < 6; i++)
             {
-                battleSave->field_50E[i] = gSaveBlock2Ptr->field_738[gPartnerTrainerId - 300].field_28[i];
+                battleSave->field_50E[i] = gSaveBlock2Ptr->records[gPartnerTrainerId - 300].field_28[i];
             }
         }
         else
         {
             for (i = 0; i < 6; i++)
             {
-                battleSave->field_50E[i] = gSaveBlock2Ptr->field_738[gPartnerTrainerId - 300].field_1C[i];
+                battleSave->field_50E[i] = gSaveBlock2Ptr->records[gPartnerTrainerId - 300].field_1C[i];
             }
         }
-        battleSave->field_51A = gSaveBlock2Ptr->field_738[gPartnerTrainerId - 300].field_E4;
+        battleSave->field_51A = gSaveBlock2Ptr->records[gPartnerTrainerId - 300].field_E4;
     }
 
     */

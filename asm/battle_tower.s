@@ -6,270 +6,6 @@
 	.text
 
 
-
-
-	thumb_func_start sub_81621C0
-sub_81621C0: @ 81621C0
-	push {r4,r5,lr}
-	ldr r0, =gTrainerBattleOpponent_A
-	ldrh r1, [r0]
-	movs r0, 0xFA
-	lsls r0, 1
-	cmp r1, r0
-	bne _081621DA
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00000bec
-	adds r0, r1
-	bl sub_816534C
-_081621DA:
-	ldr r5, =gSaveBlock2Ptr
-	ldr r0, [r5]
-	ldr r1, =0x00000d04
-	adds r2, r0, r1
-	ldrh r1, [r2]
-	ldr r0, =0x0000270e
-	cmp r1, r0
-	bhi _081621EE
-	adds r0, r1, 0x1
-	strh r0, [r2]
-_081621EE:
-	ldr r1, [r5]
-	ldr r4, =0x00000cb2
-	adds r1, r4
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	bl sub_8163E90
-	ldr r1, =gSpecialVar_Result
-	ldr r0, [r5]
-	adds r0, r4
-	ldrh r0, [r0]
-	strh r0, [r1]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81621C0
-
-	thumb_func_start sub_816222C
-sub_816222C: @ 816222C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x3C
-	movs r0, 0
-	str r0, [sp, 0x24]
-	ldr r4, =gSaveBlock2Ptr
-	ldr r0, [r4]
-	ldr r1, =0x00000ca9
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 30
-	lsrs r0, 30
-	mov r10, r0
-	ldr r0, =0x000040ce
-	bl VarGet
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x2C]
-	ldr r0, =0x000040cf
-	bl VarGet
-	lsls r0, 16
-	cmp r0, 0
-	beq _08162266
-	b _0816239C
-_08162266:
-	mov r0, r10
-	ldr r1, [sp, 0x2C]
-	bl sub_8164FCC
-	lsls r0, 16
-	lsrs r0, 16
-	str r0, [sp, 0x28]
-	movs r7, 0
-	mov r2, sp
-	str r2, [sp, 0x34]
-_0816227A:
-	movs r3, 0xEC
-	adds r0, r7, 0
-	muls r0, r3
-	movs r4, 0xE7
-	lsls r4, 3
-	adds r0, r4
-	ldr r5, =gSaveBlock2Ptr
-	ldr r1, [r5]
-	movs r2, 0
-	mov r8, r2
-	mov r9, r2
-	movs r5, 0
-	adds r3, r7, 0x1
-	str r3, [sp, 0x30]
-	adds r1, r0
-_08162298:
-	ldm r1!, {r0}
-	mov r4, r8
-	orrs r4, r0
-	mov r8, r4
-	add r9, r0
-	adds r5, 0x1
-	cmp r5, 0x39
-	bls _08162298
-	movs r6, 0
-	movs r5, 0
-	movs r0, 0xEC
-	adds r2, r7, 0
-	muls r2, r0
-_081622B2:
-	ldr r3, =gSaveBlock2Ptr
-	ldr r1, [r3]
-	movs r0, 0x2C
-	muls r0, r5
-	adds r0, r2
-	adds r1, r0
-	ldr r4, =0x0000076c
-	adds r0, r1, r4
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _081622E4
-	movs r0, 0xEF
-	lsls r0, 3
-	adds r4, r1, r0
-	mov r0, r10
-	str r2, [sp, 0x38]
-	bl GetFrontierEnemyMonLevel
-	ldrb r1, [r4]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, [sp, 0x38]
-	cmp r1, r0
-	bhi _081622E4
-	adds r6, 0x1
-_081622E4:
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _081622B2
-	ldr r0, =gUnknown_085DF9F6
-	ldr r1, [sp, 0x2C]
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	cmp r6, r0
-	blt _0816233E
-	ldr r3, =gSaveBlock2Ptr
-	ldr r2, [r3]
-	movs r4, 0xEC
-	adds r3, r7, 0
-	muls r3, r4
-	adds r1, r2, r3
-	ldr r5, =0x0000073a
-	adds r0, r1, r5
-	ldrh r0, [r0]
-	ldr r4, [sp, 0x28]
-	cmp r0, r4
-	bne _0816233E
-	subs r5, 0x2
-	adds r0, r1, r5
-	ldrb r0, [r0]
-	cmp r0, r10
-	bne _0816233E
-	mov r0, r8
-	cmp r0, 0
-	beq _0816233E
-	movs r1, 0x82
-	lsls r1, 4
-	adds r0, r2, r1
-	adds r0, r3
-	ldr r0, [r0]
-	cmp r0, r9
-	bne _0816233E
-	movs r2, 0x96
-	lsls r2, 1
-	adds r0, r7, r2
-	ldr r3, [sp, 0x34]
-	stm r3!, {r0}
-	str r3, [sp, 0x34]
-	ldr r4, [sp, 0x24]
-	adds r4, 0x1
-	str r4, [sp, 0x24]
-_0816233E:
-	ldr r7, [sp, 0x30]
-	cmp r7, 0x4
-	ble _0816227A
-	ldr r5, [sp, 0x2C]
-	cmp r5, 0
-	bne _08162396
-	bl sub_8165B20
-	movs r7, 0
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldr r4, =gUnknown_085DF9EC
-	adds r2, r0, 0
-	adds r2, 0xDC
-	ldr r1, [sp, 0x24]
-	lsls r0, r1, 2
-	mov r5, sp
-	adds r3, r0, r5
-_08162362:
-	ldrb r0, [r2]
-	lsls r1, r0, 25
-	lsrs r0, r1, 30
-	cmp r0, 0
-	beq _0816238E
-	ldrb r0, [r2, 0x1]
-	adds r0, r4
-	ldrb r0, [r0]
-	ldr r5, [sp, 0x28]
-	cmp r0, r5
-	bne _0816238E
-	lsrs r0, r1, 30
-	subs r0, 0x1
-	cmp r0, r10
-	bne _0816238E
-	movs r1, 0xC8
-	lsls r1, 1
-	adds r0, r7, r1
-	stm r3!, {r0}
-	ldr r5, [sp, 0x24]
-	adds r5, 0x1
-	str r5, [sp, 0x24]
-_0816238E:
-	adds r2, 0x44
-	adds r7, 0x1
-	cmp r7, 0x3
-	ble _08162362
-_08162396:
-	ldr r0, [sp, 0x24]
-	cmp r0, 0
-	bne _081623C0
-_0816239C:
-	movs r0, 0
-	b _081623DA
-	.pool
-_081623C0:
-	ldr r4, =gTrainerBattleOpponent_A
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, [sp, 0x24]
-	bl __modsi3
-	lsls r0, 2
-	add r0, sp
-	ldr r0, [r0]
-	strh r0, [r4]
-	movs r0, 0x1
-_081623DA:
-	add sp, 0x3C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_816222C
-
 	thumb_func_start sub_81623F0
 sub_81623F0: @ 81623F0
 	push {r4-r7,lr}
@@ -329,7 +65,7 @@ _08162414:
 	b _08162530
 	.pool
 _08162488:
-	bl sub_816222C
+	bl ChooseSpecialBattleTowerTrainer
 	lsls r0, 24
 	cmp r0, 0
 	beq _081624B4
@@ -3334,7 +3070,7 @@ sub_8163E90: @ 8163E90
 	lsrs r4, 24
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8164FCC
+	bl GetCurrentBattleTowerWinStreak
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r0, [r6]
@@ -3420,7 +3156,7 @@ _08163F52:
 	bl StringCopy7
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_8164FCC
+	bl GetCurrentBattleTowerWinStreak
 	strh r0, [r5, 0x2]
 	movs r4, 0
 	movs r2, 0x10
@@ -5289,8 +5025,8 @@ _08164FBE:
 	bx r0
 	thumb_func_end sub_8164FB8
 
-	thumb_func_start sub_8164FCC
-sub_8164FCC: @ 8164FCC
+	thumb_func_start GetCurrentBattleTowerWinStreak
+GetCurrentBattleTowerWinStreak: @ 8164FCC
 	push {lr}
 	lsls r0, 24
 	lsls r1, 24
@@ -5312,7 +5048,7 @@ _08164FEE:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8164FCC
+	thumb_func_end GetCurrentBattleTowerWinStreak
 
 	thumb_func_start sub_8164FFC
 sub_8164FFC: @ 8164FFC
@@ -5378,7 +5114,7 @@ _0816506A:
 	strh r0, [r1]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8164FCC
+	bl GetCurrentBattleTowerWinStreak
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x37
