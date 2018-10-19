@@ -976,13 +976,4 @@ struct UnkStruct_8054FF8
     u16 field_C;
 };
 
-struct Bitmap           // TODO: Find a better spot for this
-{
-    u8* pixels;
-    u32 width:16;
-    u32 height:16;
-};
-
-extern u8 gReservedSpritePaletteCount;
-
 #endif // GUARD_GLOBAL_H
