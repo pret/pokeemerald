@@ -348,7 +348,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	setflag FLAG_0x08F
 	setvar VAR_0x405A, 4
 	setvar VAR_0x4090, 1
-	setflag FLAG_0x37B
+	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	release
 	end
 

@@ -308,11 +308,11 @@ RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	setvar VAR_0x405A, 2
 	setvar VAR_RUSTURF_TUNNEL_STATE, 2
 	setvar VAR_0x406F, 1
-	clearflag FLAG_0x37B
+	clearflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_PEEKO
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT
-	setflag FLAG_0x2E3
-	setflag FLAG_0x371
+	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	releaseall
 	end
 

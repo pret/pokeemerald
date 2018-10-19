@@ -51,7 +51,7 @@ Route109_EventScript_1EE7D5:: @ 81EE7D5
 	applymovement 2, Route109_Movement_1EE90D
 	waitmovement 0
 	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
-	setflag FLAG_0x2E8
+	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_1E9C1D, 4
 	closemessage

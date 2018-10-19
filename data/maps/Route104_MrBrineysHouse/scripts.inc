@@ -80,13 +80,13 @@ Route104_MrBrineysHouse_EventScript_229E27:: @ 8229E27
 	msgbox Route104_MrBrineysHouse_Text_229FE9, 4
 	call Route104_MrBrineysHouse_EventScript_271E95
 	setvar VAR_0x408E, 1
-	clearflag FLAG_0x2E2
-	setflag FLAG_0x2E3
-	setflag FLAG_0x371
+	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY
+	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
 	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
-	setflag FLAG_0x2CF
+	setflag FLAG_HIDE_ROUTE_104_RIVAL
 	warp MAP_ROUTE104, 255, 13, 51
 	waitstate
 	releaseall

@@ -2,7 +2,7 @@ Route110_TrickHousePuzzle4_EventObjects: @ 853E338
 	object_event 1, EVENT_OBJ_GFX_GIRL_3, 0, 2, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 1, Route110_TrickHousePuzzle4_EventScript_26C87E, 0
 	object_event 2, EVENT_OBJ_GFX_GIRL_3, 0, 14, 7, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 2, Route110_TrickHousePuzzle4_EventScript_26C8AC, 0
 	object_event 3, EVENT_OBJ_GFX_BLACK_BELT, 0, 2, 14, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 2, Route110_TrickHousePuzzle4_EventScript_26C895, 0
-	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 2, 5, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle4_EventScript_29144F, FLAG_0x429
+	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 2, 5, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle4_EventScript_29144F, FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_MECH_MAIL
 	object_event 5, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 13, 3, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle4_EventScript_2908BA, FLAG_TEMP_11
 	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 12, 5, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle4_EventScript_2908BA, FLAG_TEMP_12
 	object_event 7, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 5, 16, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle4_EventScript_2908BA, FLAG_TEMP_13

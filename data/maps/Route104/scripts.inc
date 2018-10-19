@@ -23,11 +23,11 @@ Route104_EventScript_1ECC5E:: @ 81ECC5E
 	goto_if 0, Route104_EventScript_1ECC74
 	checkflag FLAG_BADGE03_GET
 	goto_if 0, Route104_EventScript_1ECC74
-	clearflag FLAG_0x38A
+	clearflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
 	return
 
 Route104_EventScript_1ECC74:: @ 81ECC74
-	setflag FLAG_0x38A
+	setflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
 	return
 
 Route104_EventScript_1ECC78:: @ 81ECC78
@@ -59,7 +59,7 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	waitmovement 0
 	delay 10
 	addobject 34
-	clearflag FLAG_0x2CF
+	clearflag FLAG_HIDE_ROUTE_104_RIVAL
 	applymovement 255, Route104_Movement_1ECF86
 	waitmovement 0
 	applymovement 34, Route104_Movement_1ECF8A
@@ -424,7 +424,7 @@ Route104_EventScript_1ED139:: @ 81ED139
 	addobject 4
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	call Route104_EventScript_2720A8
-	setflag FLAG_0x2E6
+	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	hideobjectat 7, MAP_ROUTE104
 	copyvar VAR_0x4096, VAR_0x8008
 	resetobjectpriority 255, MAP_ROUTE104

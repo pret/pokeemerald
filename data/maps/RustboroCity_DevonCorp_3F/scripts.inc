@@ -60,11 +60,11 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	closemessage
 	call RustboroCity_DevonCorp_3F_EventScript_272083
 	msgbox RustboroCity_DevonCorp_3F_Text_2129D2, 4
-	setflag FLAG_0x37E
+	setflag FLAG_HIDE_ROUTE_116_TUNNELER
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN
-	clearflag FLAG_0x2E3
-	clearflag FLAG_0x371
+	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	setvar VAR_0x4096, 1
 	clearflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setvar VAR_0x408F, 1

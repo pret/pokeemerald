@@ -231,9 +231,9 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	waitmovement 0
 	msgbox Route101_Text_1EBF12, 4
 	special HealPlayerParty
-	setflag FLAG_0x2D0
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
-	setflag FLAG_0x2BC
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setvar VAR_0x4084, 2
 	setvar VAR_0x4060, 3
 	clearflag FLAG_SPECIAL_FLAG_0x4000

@@ -121,7 +121,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E17:: @ 81F9E17
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E36:: @ 81F9E36
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FA9D5, 4
-	clearflag FLAG_0x3DF
+	clearflag FLAG_HIDE_ROUTE_101_BOY
 	setvar VAR_0x4084, 3
 	releaseall
 	end

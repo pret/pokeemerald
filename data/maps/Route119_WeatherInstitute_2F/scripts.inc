@@ -63,11 +63,11 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	msgbox Route119_WeatherInstitute_2F_Text_2705DD, 4
 	closemessage
 	setvar VAR_WEATHER_INSTITUTE_STATE, 1
-	clearflag FLAG_0x37D
+	clearflag FLAG_HIDE_WEATHER_INSTITUTE_2F_WORKERS
 	fadedefaultbgm
 	fadescreen 1
-	setflag FLAG_0x37A
-	setflag FLAG_0x3E0
+	setflag FLAG_HIDE_ROUTE_119_TEAM_AQUA
+	setflag FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M
 	removeobject 1
 	removeobject 2
 	removeobject 3

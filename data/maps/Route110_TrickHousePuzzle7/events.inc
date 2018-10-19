@@ -2,7 +2,7 @@ Route110_TrickHousePuzzle7_EventObjects: @ 853E768
 	object_event 1, EVENT_OBJ_GFX_PSYCHIC_M, 0, 9, 20, 0, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 1, Route110_TrickHousePuzzle7_EventScript_26E389, 0
 	object_event 2, EVENT_OBJ_GFX_LASS, 0, 10, 2, 0, MOVEMENT_TYPE_FACE_UP, 0, 0, 1, 1, Route110_TrickHousePuzzle7_EventScript_26E3B7, 0
 	object_event 3, EVENT_OBJ_GFX_HEX_MANIAC, 0, 8, 17, 0, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 1, Route110_TrickHousePuzzle7_EventScript_26E3A0, 0
-	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 5, 12, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle7_EventScript_291469, FLAG_0x42C
+	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 5, 12, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle7_EventScript_291469, FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_TROPIC_MAIL
 	object_event 5, EVENT_OBJ_GFX_PSYCHIC_M, 0, 9, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 1, 1, Route110_TrickHousePuzzle7_EventScript_26E3E5, 0
 	object_event 6, EVENT_OBJ_GFX_LASS, 0, 8, 13, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 1, 1, Route110_TrickHousePuzzle7_EventScript_26E3CE, 0
 	object_event 7, EVENT_OBJ_GFX_GENTLEMAN, 0, 9, 12, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 1, Route110_TrickHousePuzzle7_EventScript_26E3FC, 0
