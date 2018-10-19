@@ -31,9 +31,6 @@ struct BattleAnimBackground
 
 #define ANIM_ARGS_COUNT 8
 
-#define PAN_SIDE_PLAYER     -64
-#define PAN_SIDE_OPPONENT   63
-
 extern void (*gAnimScriptCallback)(void);
 extern bool8 gAnimScriptActive;
 extern u8 gAnimVisualTaskCount;

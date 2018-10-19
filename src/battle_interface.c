@@ -20,6 +20,7 @@
 #include "international_string_util.h"
 #include "safari_zone.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "data2.h"
 
@@ -1889,9 +1890,9 @@ static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite *sprite)
 
     if (sprite->pos2.x == 0)
     {
-        pan = PAN_SIDE_OPPONENT;
+        pan = SOUND_PAN_TARGET;
         if (var1 != 0)
-            pan = PAN_SIDE_PLAYER;
+            pan = SOUND_PAN_ATTACKER;
 
         if (sprite->data[7] != 0)
             PlaySE2WithPanning(SE_TB_KARA, pan);

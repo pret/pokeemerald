@@ -1265,39 +1265,39 @@ s8 BattleAnimAdjustPanning(s8 pan)
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-            pan = PAN_SIDE_OPPONENT;
+            pan = SOUND_PAN_TARGET;
         else
-            pan = PAN_SIDE_PLAYER;
+            pan = SOUND_PAN_ATTACKER;
     }
     else if (IsContest())
     {
-        if (gBattleAnimAttacker != gBattleAnimTarget || gBattleAnimAttacker != 2 || pan != PAN_SIDE_OPPONENT)
+        if (gBattleAnimAttacker != gBattleAnimTarget || gBattleAnimAttacker != 2 || pan != SOUND_PAN_TARGET)
             pan *= -1;
     }
     else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         {
-            if (pan == PAN_SIDE_OPPONENT)
-                pan = PAN_SIDE_PLAYER;
-            else if (pan != PAN_SIDE_PLAYER)
+            if (pan == SOUND_PAN_TARGET)
+                pan = SOUND_PAN_ATTACKER;
+            else if (pan != SOUND_PAN_ATTACKER)
                 pan *= -1;
         }
     }
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
     {
-        if (pan == PAN_SIDE_PLAYER)
-            pan = PAN_SIDE_OPPONENT;
+        if (pan == SOUND_PAN_ATTACKER)
+            pan = SOUND_PAN_TARGET;
     }
     else
     {
         pan *= -1;
     }
 
-    if (pan > PAN_SIDE_OPPONENT)
-        pan = PAN_SIDE_OPPONENT;
-    else if (pan < PAN_SIDE_PLAYER)
-        pan = PAN_SIDE_PLAYER;
+    if (pan > SOUND_PAN_TARGET)
+        pan = SOUND_PAN_TARGET;
+    else if (pan < SOUND_PAN_ATTACKER)
+        pan = SOUND_PAN_ATTACKER;
 
     return pan;
 }
@@ -1307,9 +1307,9 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-            pan = PAN_SIDE_OPPONENT;
+            pan = SOUND_PAN_TARGET;
         else
-            pan = PAN_SIDE_PLAYER;
+            pan = SOUND_PAN_ATTACKER;
     }
     else
     {
@@ -1323,10 +1323,10 @@ s16 KeepPanInRange(s16 panArg)
 {
     s16 pan = panArg;
 
-    if (pan > PAN_SIDE_OPPONENT)
-        pan = PAN_SIDE_OPPONENT;
-    else if (pan < PAN_SIDE_PLAYER)
-        pan = PAN_SIDE_PLAYER;
+    if (pan > SOUND_PAN_TARGET)
+        pan = SOUND_PAN_TARGET;
+    else if (pan < SOUND_PAN_ATTACKER)
+        pan = SOUND_PAN_ATTACKER;
 
     return pan;
 }
