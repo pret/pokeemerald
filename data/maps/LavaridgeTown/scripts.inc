@@ -31,11 +31,11 @@ LavaridgeTown_EventScript_1EA529:: @ 81EA529
 	setobjectxyperm 8, 11, 9
 	setobjectxyperm 7, 9, 8
 	setobjectmovementtype 7, 7
-	clearflag FLAG_0x3A1
+	clearflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1
 	return
 
 LavaridgeTown_EventScript_1EA53F:: @ 81EA53F
-	clearflag FLAG_0x36D
+	clearflag FLAG_HIDE_MT_CHIMNEY_TRAINERS
 	return
 
 LavaridgeTown_EventScript_1EA543:: @ 81EA543

@@ -19,7 +19,7 @@ SlateportCity_SternsShipyard_1F_EventScript_207F40:: @ 8207F40
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_2725A2
 	waitmovement 0
 	setflag FLAG_0x094
-	setflag FLAG_0x372
+	setflag FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA
 	releaseall
 	end
 

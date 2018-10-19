@@ -219,17 +219,17 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B54C:: @ 824B54C
 	return
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B:: @ 824B58B
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5B5
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BB2E, 4
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	return
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0:: @ 824B5A0
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5BE
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BBAC, 4
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	return
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5B5:: @ 824B5B5

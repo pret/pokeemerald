@@ -65,7 +65,7 @@
 	.endm
 
 	.macro bg_hidden_item_event x, y, height, item, flag
-	bg_event \x, \y, \height, 7, \item, \flag, 0
+	bg_event \x, \y, \height, 7, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), 0
 	.endm
 
 	.macro bg_secret_base_event x, y, height, secret_base_id

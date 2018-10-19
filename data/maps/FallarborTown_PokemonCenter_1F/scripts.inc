@@ -49,7 +49,7 @@ FallarborTown_PokemonCenter_1F_EventScript_200C38:: @ 8200C38
 FallarborTown_PokemonCenter_1F_EventScript_200C48:: @ 8200C48
 	playse SE_JIDO_DOA
 	removeobject 4
-	clearflag FLAG_0x366
+	clearflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
 	release
 	end
 

@@ -37,7 +37,7 @@ DesertRuins_MapScript1_22D9CA: @ 822D9CA
 	end
 
 DesertRuins_EventScript_22D9D7:: @ 822D9D7
-	clearflag FLAG_0x3A7
+	clearflag FLAG_HIDE_REGIROCK
 	return
 
 DesertRuins_EventScript_22D9DB:: @ 822D9DB

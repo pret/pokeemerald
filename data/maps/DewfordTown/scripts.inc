@@ -135,10 +135,10 @@ DewfordTown_EventScript_1E9660:: @ 81E9660
 	applymovement 255, DewfordTown_Movement_1E9914
 	waitmovement 0
 	showobjectat 255, MAP_ROUTE104
-	clearflag FLAG_0x2E3
-	clearflag FLAG_0x371
-	clearflag FLAG_0x2E6
-	setflag FLAG_0x2E7
+	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
+	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
 	setvar VAR_0x408E, 2
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
@@ -171,10 +171,10 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	setobjectpriority 2, MAP_ROUTE109, 0
 	applymovement 2, DewfordTown_Movement_1E991F
 	waitmovement 0
-	clearflag FLAG_0x2E5
+	clearflag FLAG_HIDE_ROUTE_108_MR_BRINEY
 	addobject 1
-	clearflag FLAG_0x2E8
-	setflag FLAG_0x2E7
+	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
 	checkflag FLAG_0x095
 	call_if 0, DewfordTown_EventScript_1E9790

@@ -12,7 +12,7 @@ NavelRock_Top_MapScript1_26911E: @ 826911E
 
 NavelRock_Top_EventScript_269131:: @ 8269131
 	setvar VAR_TEMP_1, 1
-	setflag FLAG_0x321
+	setflag FLAG_HIDE_HOOH
 	return
 
 NavelRock_Top_EventScript_26913A:: @ 826913A
@@ -20,7 +20,7 @@ NavelRock_Top_EventScript_26913A:: @ 826913A
 	checkflag FLAG_0x1DC
 	goto_eq NavelRock_Top_EventScript_27374E
 	setvar VAR_TEMP_1, 0
-	clearflag FLAG_0x321
+	clearflag FLAG_HIDE_HOOH
 	return
 
 NavelRock_Top_MapScript1_269151: @ 8269151

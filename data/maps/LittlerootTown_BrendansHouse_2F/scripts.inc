@@ -83,8 +83,8 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	compare VAR_FACING, 4
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F8594
 	setvar VAR_0x408D, 3
-	setflag FLAG_0x331
-	clearflag FLAG_0x2F8
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setvar VAR_0x4050, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm

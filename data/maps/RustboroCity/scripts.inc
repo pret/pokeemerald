@@ -98,7 +98,7 @@ RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	waitmovement 0
 	playse SE_KAIDAN
 	removeobject 15
-	setflag FLAG_0x34C
+	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
 	setvar VAR_0x405A, 7
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	releaseall
@@ -303,16 +303,16 @@ RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	fadedefaultbgm
 	removeobject 9
 	setobjectxyperm 9, 30, 10
-	clearflag FLAG_0x2DC
+	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
 	setflag FLAG_0x08E
 	setvar VAR_0x405A, 2
 	setvar VAR_RUSTURF_TUNNEL_STATE, 2
 	setvar VAR_0x406F, 1
-	clearflag FLAG_0x37B
-	clearflag FLAG_0x370
-	clearflag FLAG_0x36E
-	setflag FLAG_0x2E3
-	setflag FLAG_0x371
+	clearflag FLAG_HIDE_ROUTE_116_MR_BRINEY
+	clearflag FLAG_HIDE_RUSTURF_TUNNEL_PEEKO
+	clearflag FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT
+	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	releaseall
 	end
 
@@ -599,7 +599,7 @@ RustboroCity_EventScript_1E0C5B:: @ 81E0C5B
 	msgbox RustboroCity_Text_1E1A21, 4
 	closemessage
 	setflag FLAG_0x090
-	setflag FLAG_0x2DC
+	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
 	setvar VAR_0x405A, 5
 	delay 30
 	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2

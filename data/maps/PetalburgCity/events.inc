@@ -1,13 +1,13 @@
 PetalburgCity_EventObjects: @ 8525FD0
-	object_event 1, EVENT_OBJ_GFX_WOMAN_4, 0, 16, 18, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, PetalburgCity_EventScript_1DC3FD, 728
-	object_event 2, EVENT_OBJ_GFX_WALLY, 0, 15, 10, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 726
+	object_event 1, EVENT_OBJ_GFX_WOMAN_4, 0, 16, 18, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, PetalburgCity_EventScript_1DC3FD, FLAG_HIDE_PETALBURG_CITY_WALLYS_AUNT
+	object_event 2, EVENT_OBJ_GFX_WALLY, 0, 15, 10, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, FLAG_HIDE_PETALBURG_CITY_WALLY
 	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 8, 22, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, PetalburgCity_EventScript_1DC3E6, 0
 	object_event 4, EVENT_OBJ_GFX_GENTLEMAN, 0, 20, 10, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, PetalburgCity_EventScript_1DC488, 0
-	object_event 5, EVENT_OBJ_GFX_POKEFAN_M, 0, 15, 10, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 830
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 2, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, PetalburgCity_EventScript_2910B4, 1039
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 28, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, PetalburgCity_EventScript_2910C1, 1040
+	object_event 5, EVENT_OBJ_GFX_POKEFAN_M, 0, 15, 10, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 2, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, PetalburgCity_EventScript_2910B4, FLAG_ITEM_PETALBURG_CITY_MAX_REVIVE
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 28, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, PetalburgCity_EventScript_2910C1, FLAG_ITEM_PETALBURG_CITY_ETHER
 	object_event 8, EVENT_OBJ_GFX_BOY_2, 0, 12, 15, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, PetalburgCity_EventScript_1DC82E, 0
-	object_event 9, EVENT_OBJ_GFX_SCOTT, 0, 13, 12, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, 0x0, 995
+	object_event 9, EVENT_OBJ_GFX_SCOTT, 0, 13, 12, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, 0x0, FLAG_HIDE_PETALBURG_CITY_SCOTT
 
 PetalburgCity_MapWarps: @ 85260A8
 	warp_def 10, 19, 0, 0, MAP_PETALBURG_CITY_HOUSE1
@@ -35,7 +35,7 @@ PetalburgCity_MapBGEvents: @ 8526158
 	bg_event 22, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_EventScript_271E73
 	bg_event 27, 12, 0, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_EventScript_271E6A
 	bg_event 8, 9, 0, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_EventScript_1DC491
-	bg_hidden_item_event 11, 29, 3, ITEM_RARE_CANDY, 95
+	bg_hidden_item_event 11, 29, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_PETALBURG_CITY_RARE_CANDY
 
 PetalburgCity_MapEvents:: @ 85261B8
 	map_events PetalburgCity_EventObjects, PetalburgCity_MapWarps, PetalburgCity_MapCoordEvents, PetalburgCity_MapBGEvents

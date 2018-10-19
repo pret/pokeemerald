@@ -66,18 +66,18 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 	msgbox MossdeepCity_Gym_Text_221999, 4
 	setflag FLAG_0x4F6
 	setflag FLAG_BADGE07_GET
-	setflag FLAG_0x39C
-	clearflag FLAG_0x365
+	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
+	clearflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	clearflag FLAG_0x393
 	setvar VAR_0x8008, 7
 	call MossdeepCity_Gym_EventScript_271F43
-	clearflag FLAG_0x389
-	clearflag FLAG_0x337
-	clearflag FLAG_0x2F4
-	clearflag FLAG_0x35E
-	clearflag FLAG_0x35F
+	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_STEVEN
 	setvar VAR_0x405D, 1
-	setflag FLAG_0x2F1
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_STEVEN
 	setvar VAR_0x409F, 1
 	call MossdeepCity_Gym_EventScript_22095B
 	closemessage

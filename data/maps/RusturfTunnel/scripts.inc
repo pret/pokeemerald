@@ -31,9 +31,9 @@ RusturfTunnel_EventScript_22CE5F:: @ 822CE5F
 RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	lock
 	faceplayer
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq RusturfTunnel_EventScript_22CE99
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_22D510, 4
 	closemessage
 	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
@@ -348,7 +348,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	setflag FLAG_0x08F
 	setvar VAR_0x405A, 4
 	setvar VAR_0x4090, 1
-	setflag FLAG_0x37B
+	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	release
 	end
 

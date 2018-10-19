@@ -54,7 +54,7 @@ CaveOfOrigin_B1F_EventScript_23584D:: @ 823584D
 	setflag FLAG_0x137
 	setvar VAR_0x405E, 3
 	removeobject 1
-	clearflag FLAG_0x357
+	clearflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	fadescreen 0
 	release
 	end

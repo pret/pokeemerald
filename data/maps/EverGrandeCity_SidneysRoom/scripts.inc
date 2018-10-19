@@ -7,7 +7,7 @@ EverGrandeCity_SidneysRoom_MapScripts:: @ 8227F01
 
 EverGrandeCity_SidneysRoom_MapScript1_227F16: @ 8227F16
 	setflag FLAG_0x1CF
-	setflag FLAG_0x319
+	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	end
 
 EverGrandeCity_SidneysRoom_MapScript1_227F1D: @ 8227F1D

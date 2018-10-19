@@ -4,7 +4,7 @@ BattleFrontier_OutsideWest_MapScripts:: @ 823D3E1
 
 BattleFrontier_OutsideWest_MapScript1_23D3E7: @ 823D3E7
 	setvar VAR_0x40BC, 0
-	setflag FLAG_0x396
+	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D3F0:: @ 823D3F0

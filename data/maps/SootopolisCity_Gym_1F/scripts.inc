@@ -105,11 +105,11 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	msgbox SootopolisCity_Gym_1F_Text_2255BE, 4
 	setflag FLAG_0x4F7
 	setflag FLAG_BADGE08_GET
-	setflag FLAG_0x356
-	setflag FLAG_0x3CD
-	setflag FLAG_0x330
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
 	setvar VAR_0x405E, 6
-	clearflag FLAG_0x347
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setvar VAR_0x8008, 8
 	call SootopolisCity_Gym_1F_EventScript_271F43
 	call SootopolisCity_Gym_1F_EventScript_224FD4

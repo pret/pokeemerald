@@ -21,7 +21,7 @@ TerraCave_End_MapScript1_23B0D9: @ 823B0D9
 	end
 
 TerraCave_End_EventScript_23B0E3:: @ 823B0E3
-	clearflag FLAG_0x30F
+	clearflag FLAG_HIDE_TERRA_CAVE_GROUDON
 	setvar VAR_TEMP_1, 1
 	return
 
