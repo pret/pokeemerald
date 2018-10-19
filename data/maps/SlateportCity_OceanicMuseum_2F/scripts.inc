@@ -67,7 +67,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	removeobject 4
 	fadescreen 0
 	delay 30
-	setflag FLAG_0x373
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
 	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_2725A8
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C2BE, 4

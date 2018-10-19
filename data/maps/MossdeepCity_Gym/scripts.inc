@@ -67,7 +67,7 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 	setflag FLAG_0x4F6
 	setflag FLAG_BADGE07_GET
 	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
-	clearflag FLAG_0x365
+	clearflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	clearflag FLAG_0x393
 	setvar VAR_0x8008, 7
 	call MossdeepCity_Gym_EventScript_271F43

@@ -120,13 +120,13 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	msgbox SeafloorCavern_Room9_Text_235723, 4
 	setvar VAR_0x407B, 1
 	setvar VAR_0x405E, 1
-	clearflag FLAG_0x3CD
-	clearflag FLAG_0x33A
-	clearflag FLAG_0x33B
-	clearflag FLAG_0x356
-	clearflag FLAG_0x3E6
-	clearflag FLAG_0x3E5
-	setflag FLAG_0x347
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	clearflag FLAG_0x3B0
 	clearflag FLAG_0x3B1

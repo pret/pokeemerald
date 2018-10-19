@@ -1442,8 +1442,8 @@ SootopolisCity_EventScript_1E6536:: @ 81E6536
 	end
 
 SootopolisCity_EventScript_1E654C:: @ 81E654C
-	setflag FLAG_0x33B
-	setflag FLAG_0x33A
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
 	setflag FLAG_0x09E
 	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
 	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE

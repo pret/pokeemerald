@@ -427,7 +427,7 @@ static const match_call_text_data_t sWallyTextScripts[] = {
 const struct MatchCallSubstruct2 sWallyAdditionalData[] = {
     { FLAG_HIDE_MAUVILLE_CITY_WALLY, 0x05 },
     { FLAG_0x06F, 0xD5 },
-    { FLAG_0x35A, 0x46 },
+    { FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY, 0x46 },
     { 0xFFFF,     0xD5 }
 };
 

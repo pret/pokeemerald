@@ -159,8 +159,8 @@ MauvilleCity_EventScript_1DF53D:: @ 81DF53D
 MauvilleCity_EventScript_1DF593:: @ 81DF593
 	removeobject 6
 	removeobject 7
-	clearflag FLAG_0x326
-	clearflag FLAG_0x329
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE
 	setflag FLAG_0x0BE
 	setvar VAR_0x40F2, 0
 	setflag FLAG_0x088
