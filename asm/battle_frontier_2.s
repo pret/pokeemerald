@@ -6195,8 +6195,8 @@ _081A4D90:
 	.pool
 	thumb_func_end CopyFrontierBrainTrainerName
 
-	thumb_func_start sub_81A4DB8
-sub_81A4DB8: @ 81A4DB8
+	thumb_func_start IsFrontierBrainFemale
+IsFrontierBrainFemale: @ 81A4DB8
 	push {lr}
 	ldr r0, =0x000040cf
 	bl VarGet
@@ -6209,10 +6209,10 @@ sub_81A4DB8: @ 81A4DB8
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81A4DB8
+	thumb_func_end IsFrontierBrainFemale
 
-	thumb_func_start sub_81A4DD8
-sub_81A4DD8: @ 81A4DD8
+	thumb_func_start SetFrontierBrainTrainerGfxId
+SetFrontierBrainTrainerGfxId: @ 81A4DD8
 	push {lr}
 	ldr r0, =0x000040cf
 	bl VarGet
@@ -6227,10 +6227,10 @@ sub_81A4DD8: @ 81A4DD8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81A4DD8
+	thumb_func_end SetFrontierBrainTrainerGfxId
 
-	thumb_func_start sub_81A4E04
-sub_81A4E04: @ 81A4E04
+	thumb_func_start CreateFrontierBrainPokemon
+CreateFrontierBrainPokemon: @ 81A4E04
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -6460,7 +6460,7 @@ _081A4FD0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81A4E04
+	thumb_func_end CreateFrontierBrainPokemon
 
 	thumb_func_start sub_81A4FF0
 sub_81A4FF0: @ 81A4FF0
@@ -8755,7 +8755,7 @@ sub_81A63B8: @ 81A63B8
 	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
-	bl sub_8162614
+	bl SetBattleFacilityTrainerGfxId
 	pop {r0}
 	bx r0
 	.pool
@@ -12662,7 +12662,7 @@ _081A831A:
 	str r0, [r1]
 	ldrh r0, [r5]
 	movs r1, 0
-	bl sub_8162614
+	bl SetBattleFacilityTrainerGfxId
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000cb2
@@ -12747,7 +12747,7 @@ _081A83EE:
 	strh r4, [r5]
 	ldrh r0, [r5]
 	movs r1, 0
-	bl sub_8162614
+	bl SetBattleFacilityTrainerGfxId
 	ldr r3, =gSaveBlock2Ptr
 	ldr r1, [r3]
 	ldr r0, =0x00000cb2
@@ -12808,7 +12808,7 @@ _081A8466:
 	strh r4, [r5]
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_8162614
+	bl SetBattleFacilityTrainerGfxId
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000cb2
@@ -17319,7 +17319,7 @@ _081AA8DC:
 	lsrs r7, r0, 16
 	adds r4, r7, 0
 	adds r0, r4, 0
-	bl sub_81627A4
+	bl GetBattleFacilityTrainerGfxId
 	strb r0, [r5, 0x1]
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]

@@ -332,7 +332,7 @@ gSpecials:: @ 81DBA64
 	def_special sp13F_fall_to_last_warp
 	def_special sub_80F8D28
 	def_special sub_80F8EB8
-	def_special sub_8162794
+	def_special SetEReaderTrainerGfxId
 	def_special BattleSetup_StartLatiBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather

@@ -5,7 +5,7 @@
 #include "random.h"
 #include "battle_tower.h"
 
-extern void sub_8162614(u16, u8);
+extern void SetBattleFacilityTrainerGfxId(u16, u8);
 
 extern void (* const gUnknown_0860DE50[])(void);
 extern const u32 gUnknown_0860DE98[][2];
@@ -23,7 +23,7 @@ void sub_8195980(void)
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
-    gSaveBlock2Ptr->frontier.field_CB2 = 0;
+    gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = 0;
     gSaveBlock2Ptr->frontier.field_CA9_b = 0;
     if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_0860DE98[battleMode][lvlMode]))
@@ -90,7 +90,7 @@ void sub_8195BB0(void)
 void sub_8195C20(void)
 {
     gTrainerBattleOpponent_A = 5 *(Random() % 255) / 64u;
-    sub_8162614(gTrainerBattleOpponent_A, 0);
+    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
 }
 
 void sub_8195C50(void)

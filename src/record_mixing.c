@@ -686,7 +686,7 @@ static void ReceiveBattleTowerData(void *battleTowerRecord, size_t recordSize, u
         }
         CalcEmeraldBattleTowerChecksum(dest);
     }
-    sub_81628A0((void *)battleTowerRecord + recordSize * which);
+    PutNewBattleTowerRecord((void *)battleTowerRecord + recordSize * which);
 }
 
 static void ReceiveLilycoveLadyData(LilycoveLady *lilycoveLady, size_t recordSize, u8 which)

@@ -885,8 +885,8 @@ u8 sub_80B100C(s32 arg0)
             return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
     }
 
-    var = gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.field_CB2 * 2 + 0]
-        + gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.field_CB2 * 2 + 1];
+    var = gSaveBlock2Ptr->frontier.battledTrainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 0]
+        + gSaveBlock2Ptr->frontier.battledTrainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 1];
 
     return sUnknown_0854FE98[var % ARRAY_COUNT(sUnknown_0854FE98)];
 }

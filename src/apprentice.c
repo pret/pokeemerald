@@ -346,11 +346,6 @@ extern void (*gUnknown_030062F4)(void);
 
 extern void sub_8165AE8(struct Apprentice *);
 
-extern const u8 gUnknown_085DCEDC[];
-extern const u8 gUnknown_085DCF0E[];
-extern const u8 gUnknown_085DCEFA[];
-extern const u8 gUnknown_085DCF2C[];
-
 // This file's functions.
 static u16 sub_819FF98(u8 arg0);
 static bool8 sub_81A0194(u8 arg0, u16 moveId);
@@ -382,7 +377,7 @@ static void sub_81A1218(void);
 static void sub_81A1224(void);
 static void sub_81A1438(void);
 static void sub_81A150C(void);
-static void sub_81A15A4(void);
+static void Script_SetPlayerApprenticeTrainerGfxId(void);
 static void sub_81A1644(void);
 static void sub_81A1370(void);
 
@@ -1030,7 +1025,7 @@ static void (* const sApprenticeFunctions[])(void) =
     sub_81A1224,
     sub_81A1438,
     sub_81A150C,
-    sub_81A15A4,
+    Script_SetPlayerApprenticeTrainerGfxId,
     sub_81A1644,
     sub_81A1370,
 };
@@ -2270,51 +2265,46 @@ static void sub_81A150C(void)
     u8 mapObjectGfxId;
     u8 class = gApprentices[gSaveBlock2Ptr->apprentices[0].id].facilityClass;
 
-    for (i = 0; i < 30 && gUnknown_085DCEDC[i] != class; i++)
+    // Search male classes.
+    for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
-
-    if (i != 30)
+    if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
     {
-        mapObjectGfxId = gUnknown_085DCF0E[i];
+        mapObjectGfxId = gTowerMaleTrainerGfxIds[i];
         VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        return;
     }
-    else
-    {
-        for (i = 0; i < 20 && gUnknown_085DCEFA[i] != class; i++)
-            ;
 
-        if (i != 20)
-        {
-            mapObjectGfxId = gUnknown_085DCF2C[i];
-            VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
-        }
+    for (i = 0; i < ARRAY_COUNT(gTowerFemaleFacilityClasses) && gTowerFemaleFacilityClasses[i] != class; i++)
+        ;
+    if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
+    {
+        mapObjectGfxId = gTowerFemaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
     }
 }
 
-static void sub_81A15A4(void)
+static void Script_SetPlayerApprenticeTrainerGfxId(void)
 {
     u8 i;
     u8 mapObjectGfxId;
     u8 class = gApprentices[PLAYER_APPRENTICE.id].facilityClass;
 
-    for (i = 0; i < 30 && gUnknown_085DCEDC[i] != class; i++)
+    for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
-
-    if (i != 30)
+    if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
     {
-        mapObjectGfxId = gUnknown_085DCF0E[i];
+        mapObjectGfxId = gTowerMaleTrainerGfxIds[i];
         VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        return;
     }
-    else
-    {
-        for (i = 0; i < 20 && gUnknown_085DCEFA[i] != class; i++)
-            ;
 
-        if (i != 20)
-        {
-            mapObjectGfxId = gUnknown_085DCF2C[i];
-            VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
-        }
+    for (i = 0; i < ARRAY_COUNT(gTowerFemaleFacilityClasses) && gTowerFemaleFacilityClasses[i] != class; i++)
+        ;
+    if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
+    {
+        mapObjectGfxId = gTowerFemaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
     }
 }
 

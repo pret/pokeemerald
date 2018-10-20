@@ -4,7 +4,7 @@ SootopolisCity_MysteryEventsHouse_B1F_MapScripts:: @ 8227E4F
 	.byte 0
 
 SootopolisCity_MysteryEventsHouse_B1F_MapScript1_227E5A: @ 8227E5A
-	special sub_8162794
+	special SetEReaderTrainerGfxId
 	end
 
 SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E: @ 8227E5E

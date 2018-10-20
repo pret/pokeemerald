@@ -326,17 +326,29 @@ struct UnknownPokemonStruct
 struct EmeraldBattleTowerRecord
 {
     /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
-    /*0x01*/ u8 trainerClass;
+    /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[4];
-    /*0x10*/ struct {
-        u16 easyChat[6];
-    } greeting;
+    /*0x10*/ u16 greeting[6];
     /*0x1C*/ u8 filler_1c[0x18];
     /*0x34*/ struct UnknownPokemonStruct party[4];
     /*0xE4*/ u8 language;
     /*0xE8*/ u32 checksum;
+};
+
+struct BattleTowerEReaderTrainer
+{
+    /*0x00*/ u8 unk0;
+    /*0x01*/ u8 facilityClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ u16 farewellPlayerLost[6];
+    /*0x28*/ u16 farewellPlayerWon[6];
+    /*0x34*/ struct UnknownPokemonStruct party[3];
+    /*0xB8*/ u32 checksum;
 };
 
 struct FrontierMonData
@@ -367,17 +379,13 @@ struct BattleDomeTrainer
 struct BattleFrontier
 {
     /*0x64C*/ struct EmeraldBattleTowerRecord battleTower;
-    /*0x738*/ struct EmeraldBattleTowerRecord records[5]; // No idea here, it's probably wrong, no clue.
+    /*0x738*/ struct EmeraldBattleTowerRecord records[5]; // From record mixing.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
     /*0xBD8*/ u8 field_BD8[11];
     /*0xBE3*/ u8 field_BE3[8];
     /*0xBEB*/ u8 field_BEB;
-    /*0xBEC*/ u8 filler_BEC[16];
-    /*0xBFC*/ u16 ecwords_BFC[6];
-    /*0xC08*/ u16 ecwords_C08[6];
-    /*0xC14*/ u16 ecwords_C14[6];
-    /*0xC20*/ u8 filler_C20[0x88];
+    /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0xCA8*/ u8 field_CA8;
     /*0xCA9*/ u8 lvlMode:2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a:1;   // 0x4
@@ -388,8 +396,8 @@ struct BattleFrontier
     /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
     /*0xCAA*/ u16 field_CAA[3];
     /*0xCB0*/ u16 field_CB0;
-    /*0xCB2*/ u16 field_CB2;
-    /*0xCB4*/ u16 field_CB4[20];
+    /*0xCB2*/ u16 curChallengeBattleNum; // In case of battle pyramid, the floor.
+    /*0xCB4*/ u16 battledTrainerIds[20];
     /*0xCDC*/ u32 field_CDC;
     /*0xCE0*/ u16 field_CE0[4][2];
     /*0xCF0*/ u16 field_CF0[2];
