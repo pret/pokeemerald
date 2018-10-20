@@ -18,7 +18,7 @@
     :(n <= 36) ? ((n + 14)           * CUBE(n) / 50)        \
     :            (((n / 2) + 32)     * CUBE(n) / 50)
 
-const u32 gExperienceTables[][MAX_MON_LEVEL + 1] =
+const u32 gExperienceTables[][MAX_LEVEL + 1] =
 {
     { // Medium Fast
         0, // 0

@@ -23,11 +23,11 @@ AquaHideout_B1F_MapScript1_2339D0: @ 82339D0
 	end
 
 AquaHideout_B1F_EventScript_2339E3:: @ 82339E3
-	clearflag FLAG_0x3D1
+	clearflag FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1
 	return
 
 AquaHideout_B1F_EventScript_2339E7:: @ 82339E7
-	clearflag FLAG_0x3D2
+	clearflag FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2
 	return
 
 AquaHideout_B1F_EventScript_2339EB:: @ 82339EB

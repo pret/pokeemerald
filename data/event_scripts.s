@@ -431,7 +431,7 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/SecretBase_YellowCave3/scripts.inc"
 	.include "data/maps/SecretBase_YellowCave4/scripts.inc"
 
-gUnknown_0823B4BB:: @ 823B4BB
+EventScript_SecretBasePC:: @ 823B4BB
 	lockall
 	playse 2
 	message Text_276805
@@ -492,7 +492,7 @@ EventScript_23B585:: @ 823B585
 	special sub_80E9C88
 	end
 
-gUnknown_0823B589:: @ 823B589
+EventScript_RecordMixingSecretBasePC:: @ 823B589
 	lockall
 	message Text_276805
 	playse 2
@@ -581,13 +581,13 @@ EventScript_23B680:: @ 823B680
 	special sub_80EBB28
 	end
 
-gUnknown_0823B684:: @ 823B684
+EventScript_SecretBaseSandOrnament:: @ 823B684
 	special sub_80EBE7C
 	dofieldeffect 52
 	waitstate
 	end
 
-gUnknown_0823B68C:: @ 823B68C
+EventScript_SecretBaseShieldOrToyTV:: @ 823B68C
 	special sub_80FAC78
 	compare VAR_RESULT, 0
 	goto_eq EventScript_23B6BC
@@ -1070,165 +1070,165 @@ EventScript_27149D:: @ 827149D
 	return
 
 EventScript_2715DE:: @ 82715DE
-	setflag FLAG_0x056
-	setflag FLAG_0x301
-	setflag FLAG_0x302
-	setflag FLAG_0x303
-	setflag FLAG_0x2D1
-	setflag FLAG_0x379
-	setflag FLAG_0x32B
-	setflag FLAG_0x32C
-	setflag FLAG_0x346
-	setflag FLAG_0x2D6
-	setflag FLAG_0x363
-	setflag FLAG_0x2DB
-	setflag FLAG_0x2DC
-	setflag FLAG_0x32E
-	setflag FLAG_0x34C
-	setflag FLAG_0x364
-	setflag FLAG_0x2E3
-	setflag FLAG_0x371
-	setflag FLAG_0x2E2
-	setflag FLAG_0x2E4
-	setflag FLAG_0x2E5
-	setflag FLAG_0x2E7
-	setflag FLAG_0x2E8
-	setflag FLAG_0x38A
-	setflag FLAG_0x345
-	setflag FLAG_0x306
-	setflag FLAG_0x37F
-	setflag FLAG_0x308
-	setflag FLAG_0x309
-	setflag FLAG_0x30A
-	setflag FLAG_0x30B
-	setflag FLAG_0x30C
-	setflag FLAG_0x30D
-	setflag FLAG_0x338
-	setflag FLAG_0x2E9
-	setflag FLAG_0x2EA
-	setflag FLAG_0x2F8
-	setflag FLAG_0x2D2
-	setflag FLAG_0x2DE
-	setflag FLAG_0x351
-	setflag FLAG_0x32F
+	setflag FLAG_LINK_CONTEST_POKE_BALL
+	setflag FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE
+	setflag FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE
+	setflag FLAG_HIDE_ROUTE_111_VICKY_WINSTRATE
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLY
+	setflag FLAG_UNKNOWN_0x363
+	setflag FLAG_HIDE_RUSTBORO_CITY_AQUA_GRUNT
+	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
+	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
+	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
+	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
+	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
+	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
+	setflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
+	setflag FLAG_HIDE_ROUTE_110_BIRCH
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_1
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_2
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_1
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_2
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_3
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_4
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS
+	setflag FLAG_HIDE_PETALBURG_GYM_GREETER
+	setflag FLAG_HIDE_PETALBURG_GYM_WALLYS_UNCLE
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
+	setflag FLAG_HIDE_PLAYERS_HOUSE_DAD
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
 	setflag FLAG_HIDE_FANCLUB_OLD_LADY
 	setflag FLAG_HIDE_FANCLUB_BOY
 	setflag FLAG_HIDE_FANCLUB_LITTLE_BOY
 	setflag FLAG_HIDE_FANCLUB_LADY
-	setflag FLAG_0x2DA
-	setflag FLAG_0x31D
-	setflag FLAG_0x31E
-	setflag FLAG_0x31F
-	setflag FLAG_0x385
-	setflag FLAG_0x386
-	setflag FLAG_0x387
-	setflag FLAG_0x388
-	setflag FLAG_0x323
-	setflag FLAG_0x322
-	setflag FLAG_0x326
-	setflag FLAG_0x328
-	setflag FLAG_0x329
-	setflag FLAG_0x3D8
-	setflag FLAG_0x2FE
-	setflag FLAG_0x33E
-	setflag FLAG_0x362
-	setflag FLAG_0x365
-	setflag FLAG_0x33C
-	setflag FLAG_0x33D
-	setflag FLAG_0x33F
-	setflag FLAG_0x35B
-	setflag FLAG_0x355
-	setflag FLAG_0x349
-	setflag FLAG_0x34D
-	setflag FLAG_0x34E
-	setflag FLAG_0x35C
-	setflag FLAG_0x35D
-	setflag FLAG_0x343
-	setflag FLAG_0x348
-	setflag FLAG_0x350
-	setflag FLAG_0x353
-	setflag FLAG_0x312
-	setflag FLAG_0x3CD
-	setflag FLAG_0x330
-	setflag FLAG_0x366
-	setflag FLAG_0x368
-	setflag FLAG_0x36D
-	setflag FLAG_0x3E2
-	setflag FLAG_0x36F
-	setflag FLAG_0x37B
-	setflag FLAG_0x370
-	setflag FLAG_0x36E
-	setflag FLAG_0x327
-	setflag FLAG_0x3D7
-	setflag FLAG_0x376
-	setflag FLAG_0x374
-	setflag FLAG_0x375
-	setflag FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION
-	setflag FLAG_0x378
-	setflag FLAG_0x2F0
-	setflag FLAG_0x2F5
-	setflag FLAG_0x31A
-	setflag FLAG_0x31B
-	setflag FLAG_0x37C
-	setflag FLAG_0x380
-	setflag FLAG_0x381
-	setflag FLAG_0x382
-	setflag FLAG_0x38D
-	setflag FLAG_0x2EC
-	setflag FLAG_0x38E
-	setflag FLAG_0x38F
+	setflag FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER
+	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_1
+	setflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1
+	setflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3
+	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_2
+	setflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2
+	setflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2
+	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_3
+	setflag FLAG_HIDE_SLATEPORT_CITY_CONTEST_REPORTER
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
+	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
+	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_MAN
+	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE
+	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_WOMAN
+	setflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
+	setflag FLAG_HIDE_PETALBURG_GYM_WALLY
+	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_ARCHIE
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAXIE
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAGMA_GRUNTS
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_1
+	setflag FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_1
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_AQUA_GRUNT
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_ARCHIE
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
+	setflag FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL
+	setflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
+	setflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SUBMARINE_SHADOW
+	setflag FLAG_HIDE_ROUTE_119_RIVAL
+	setflag FLAG_HIDE_ROUTE_119_SCOTT
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
+	setflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
+	setflag FLAG_HIDE_TRICK_HOUSE_ENTRANCE_MAN
+	setflag FLAG_HIDE_MT_CHIMNEY_TRAINERS
+	setflag FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY
+	setflag FLAG_HIDE_RUSTURF_TUNNEL_OLD_MAN
+	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
+	setflag FLAG_HIDE_RUSTURF_TUNNEL_PEEKO
+	setflag FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT
+	setflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN
+	setflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_1
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2
+	setflag FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
+	setflag FLAG_HIDE_BATTLE_TOWER_OPPONENT
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
+	setflag FLAG_HIDE_LITTLE_ROOT_TOWN_PLAYERS_BEDROOM_MOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
+	setflag FLAG_HIDE_WEATHER_INSTITUTE_1F_WORKERS
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380
+	setflag FLAG_HIDE_ROUTE_101_BIRCH
+	setflag FLAG_HIDE_ROUTE_103_BIRCH
+	setflag FLAG_HIDE_LILYCOVE_HARBOR_FERRY_SAILOR
+	setflag FLAG_HIDE_LILYCOVE_HARBOR_EON_TICKET_TAKER
+	setflag FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE
+	setflag FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON
 	setflag FLAG_0x393
-	setflag FLAG_0x358
-	setflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
-	setflag FLAG_0x2FD
-	setflag FLAG_0x398
-	setflag FLAG_0x399
-	setflag FLAG_0x39A
-	setflag FLAG_0x39B
-	setflag FLAG_0x2CF
-	setflag FLAG_0x39D
-	setflag FLAG_0x3A1
-	setflag FLAG_0x3A2
-	setflag FLAG_0x3A6
-	setflag FLAG_0x3AA
-	setflag FLAG_0x3AC
-	setflag FLAG_0x3A0
-	setflag FLAG_0x3E0
-	setflag FLAG_0x342
-	setflag FLAG_0x3B0
-	setflag FLAG_0x3B1
-	setflag FLAG_0x3B3
-	setflag FLAG_0x3B4
-	setflag FLAG_0x2ED
-	setflag FLAG_0x35A
-	setflag FLAG_0x2EF
-	setflag FLAG_0x3B6
-	setflag FLAG_0x3C7
-	setflag FLAG_0x3C8
-	setflag FLAG_0x2D7
-	setflag FLAG_0x3D3
-	setflag FLAG_0x3DF
-	setflag FLAG_0x3E3
-	setflag FLAG_0x3E4
-	setflag FLAG_0x3E5
-	setflag FLAG_0x3E6
-	setflag FLAG_0x356
-	setflag FLAG_0x33A
-	setflag FLAG_0x33B
-	setflag FLAG_0x36C
-	setflag FLAG_0x36B
-	setflag FLAG_0x36A
-	setflag FLAG_0x337
-	setflag FLAG_0x2F4
-	setflag FLAG_0x35E
-	setflag FLAG_0x35F
-	setflag FLAG_0x340
-	setflag FLAG_0x2FB
-	setflag FLAG_0x2EB
-	setflag FLAG_0x2FF
-	setflag FLAG_0x319
-	setflag FLAG_0x357
-	setflag FLAG_0x050
+	setflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
+	setflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
+	setflag FLAG_HIDE_MAUVILLE_CITY_SCOTT
+	setflag FLAG_HIDE_CHAMPIONS_ROOM_RIVAL
+	setflag FLAG_HIDE_CHAMPIONS_ROOM_BIRCH
+	setflag FLAG_HIDE_ROUTE_110_RIVAL_2
+	setflag FLAG_HIDE_ROUTE_119_RIVAL_ON_BIKE
+	setflag FLAG_HIDE_ROUTE_104_RIVAL
+	setflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
+	setflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1
+	setflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2
+	setflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL
+	setflag FLAG_HIDE_METEOR_FALLS_TEAM_AQUA
+	setflag FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN
+	setflag FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO
+	setflag FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M
+	setflag FLAG_HIDE_ROUTE_128_STEVEN
+	setflag FLAG_HIDE_ROUTE_128_ARCHIE
+	setflag FLAG_HIDE_ROUTE_128_MAXIE
+	setflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
+	setflag FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN
+	setflag FLAG_HIDE_SLATEPORT_CITY_SCOTT
+	setflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
+	setflag FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY
+	setflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
+	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
+	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
+	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY
+	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
+	setflag FLAG_HIDE_ROUTE_101_BOY
+	setflag FLAG_HIDE_PETALBURG_CITY_SCOTT
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
+	setflag FLAG_HIDE_ROUTE_111_DESERT_FOSSIL
+	setflag FLAG_HIDE_ROUTE_111_DESERT_RIVAL
+	setflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
+	setflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_STEVEN
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
+	setflag FLAG_HIDE_DEOXYS
+	setflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
+	setflag FLAG_HIDE_FALLORBOR_TOWN_BATTLE_TENT_SCOTT
+	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
+	setflag FLAG_HIDE_SKY_PILLAR_WALLACE
+	setflag FLAG_RAYQUAZA_ON_SKY_TOWER_SUMMIT
 	call EventScript_27149D
 	end
 
@@ -1238,26 +1238,26 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	call EverGrandeCity_HallOfFame_EventScript_271829
 	compare VAR_0x40CC, 0
 	call_if 1, EverGrandeCity_HallOfFame_EventScript_271839
-	clearflag FLAG_0x39D
+	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
-	setflag FLAG_0x365
-	clearflag FLAG_0x3B6
-	clearflag FLAG_0x2D7
+	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
+	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY
 	setvar VAR_0x40C6, 2
-	setflag FLAG_0x35A
-	clearflag FLAG_0x2EF
-	clearflag FLAG_0x35C
-	clearflag FLAG_0x35D
-	setflag FLAG_0x2CD
-	clearflag FLAG_0x2EB
-	setflag FLAG_0x3CB
+	setflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
+	clearflag FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY
+	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
+	clearflag FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL
+	setflag FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS
+	clearflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
+	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
 	special sub_813BA60
 	checkflag FLAG_0x123
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_271843
 	checkflag FLAG_0x12A
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_27183F
-	setflag FLAG_0x2F8
-	setflag FLAG_0x2D2
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	compare VAR_0x40D3, 0
 	call_if 1, EverGrandeCity_HallOfFame_EventScript_271851
 	return
@@ -1275,13 +1275,13 @@ EverGrandeCity_HallOfFame_EventScript_271839:: @ 8271839
 	return
 
 EverGrandeCity_HallOfFame_EventScript_27183F:: @ 827183F
-	clearflag FLAG_0x3C8
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271843:: @ 8271843
 	setvar VAR_0x4082, 3
 	setvar VAR_0x408C, 3
-	clearflag FLAG_0x2DE
+	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
@@ -1303,35 +1303,35 @@ EventScript_271862:: @ 8271862
 	end
 
 EverGrandeCity_HallOfFame_EventScript_271884:: @ 8271884
-	setflag FLAG_0x2E4
-	setflag FLAG_0x2E7
-	setflag FLAG_0x2E5
-	setflag FLAG_0x2E8
-	clearflag FLAG_0x2E6
-	clearflag FLAG_0x2E3
-	clearflag FLAG_0x371
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
+	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
+	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
+	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	end
 
 EverGrandeCity_HallOfFame_EventScript_27189A:: @ 827189A
-	setflag FLAG_0x2E5
-	setflag FLAG_0x2E8
-	setflag FLAG_0x2E2
-	setflag FLAG_0x2E6
-	setflag FLAG_0x2E3
-	setflag FLAG_0x371
-	clearflag FLAG_0x2E4
-	clearflag FLAG_0x2E7
+	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
+	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
+	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2718B3:: @ 82718B3
-	setflag FLAG_0x2E2
-	setflag FLAG_0x2E6
-	setflag FLAG_0x2E3
-	setflag FLAG_0x371
-	setflag FLAG_0x2E4
-	setflag FLAG_0x2E7
-	clearflag FLAG_0x2E5
-	clearflag FLAG_0x2E8
+	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
+	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
+	clearflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2718CC:: @ 82718CC
@@ -1355,11 +1355,11 @@ VerdanturfTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_27374E
 	checkflag FLAG_0x4F4
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_27374E
-	checkflag FLAG_0x2E6
+	checkflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_27190C
-	checkflag FLAG_0x2E4
+	checkflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_271912
-	checkflag FLAG_0x2E5
+	checkflag FLAG_HIDE_ROUTE_108_MR_BRINEY
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_271918
 	return
 
@@ -1685,7 +1685,7 @@ EventScript_271CA1:: @ 8271CA1
 	setvar VAR_RESULT, 0
 	return
 
-EventScript_271CB7:: @ 8271CB7
+EventScript_HiddenItemScript:: @ 8271CB7
 	lockall
 	waitse
 	giveitem VAR_0x8005, 1
@@ -1761,7 +1761,7 @@ EventScript_271D89:: @ 8271D89
 	release
 	end
 
-EventScript_271D92:: @ 8271D92
+EventScript_PC:: @ 8271D92
 	lockall
 	setvar VAR_0x8004, 0
 	special DoPCTurnOnEffect
@@ -1884,7 +1884,7 @@ DewfordTown_Gym_EventScript_271E84:: @ 8271E84
 LavaridgeTown_Gym_1F_EventScript_271E84:: @ 8271E84
 MauvilleCity_Gym_EventScript_271E84:: @ 8271E84
 RustboroCity_Gym_EventScript_271E84:: @ 8271E84
-	clearflag FLAG_0x30D
+	clearflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	setflag FLAG_0x128
 	return
 
@@ -1902,7 +1902,7 @@ Route109_EventScript_271E95:: @ 8271E95
 	setvar VAR_0x4096, 0
 	return
 
-EventScript_271EA0:: @ 8271EA0
+EventScript_UseSurf:: @ 8271EA0
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, 6
 	goto_eq EventScript_271ED6
@@ -2201,7 +2201,7 @@ SSTidalRooms_EventScript_272083:: @ 8272083
 	fadescreen 0
 	return
 
-EventScript_27208F:: @ 827208F
+EventScript_RegionMap:: @ 827208F
 	lockall
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8820, 4
 	fadescreen 1
@@ -2250,24 +2250,24 @@ Route103_EventScript_2720AD:: @ 82720AD
 	return
 
 Route101_EventScript_27211A:: @ 827211A
-	clearflag FLAG_0x2D1
-	clearflag FLAG_0x380
-	setflag FLAG_0x381
-	setflag FLAG_0x382
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380
+	setflag FLAG_HIDE_ROUTE_101_BIRCH
+	setflag FLAG_HIDE_ROUTE_103_BIRCH
 	return
 
 Route101_EventScript_272127:: @ 8272127
-	clearflag FLAG_0x381
-	setflag FLAG_0x2D1
-	setflag FLAG_0x380
-	setflag FLAG_0x382
+	clearflag FLAG_HIDE_ROUTE_101_BIRCH
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380
+	setflag FLAG_HIDE_ROUTE_103_BIRCH
 	return
 
 Route101_EventScript_272134:: @ 8272134
-	clearflag FLAG_0x382
-	setflag FLAG_0x381
-	setflag FLAG_0x2D1
-	setflag FLAG_0x380
+	clearflag FLAG_HIDE_ROUTE_103_BIRCH
+	setflag FLAG_HIDE_ROUTE_101_BIRCH
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_272141:: @ 8272141
@@ -2341,22 +2341,22 @@ SlateportCity_Harbor_Movement_2721F0: @ 82721F0
 	step_end
 
 PetalburgCity_Gym_EventScript_2721F8:: @ 82721F8
-	setflag FLAG_0x2E4
-	setflag FLAG_0x2E7
-	setflag FLAG_0x2E5
-	setflag FLAG_0x2E8
-	setflag FLAG_0x2E2
-	setflag FLAG_0x2E6
-	setflag FLAG_0x2E3
-	setflag FLAG_0x371
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
+	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
+	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
+	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
+	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	setvar VAR_0x4096, 0
 	return
 
 RusturfTunnel_EventScript_272216:: @ 8272216
 	removeobject 1
 	removeobject 10
-	clearflag FLAG_0x328
-	clearflag FLAG_0x3D8
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_MAN
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_WOMAN
 	setvar VAR_RUSTURF_TUNNEL_STATE, 6
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
@@ -3074,31 +3074,31 @@ Movement_2725CB:: @ 82725CB
 	walk_up
 	step_end
 
-EventScript_2725CE:: @ 82725CE
+EventScript_PictureBookShelf:: @ 82725CE
 	msgbox Text_2A81E5, 3
 	end
 
-EventScript_2725D7:: @ 82725D7
+EventScript_BookShelf:: @ 82725D7
 	msgbox Text_2A820D, 3
 	end
 
-EventScript_2725E0:: @ 82725E0
+EventScript_PokemonCenterBookshelf:: @ 82725E0
 	msgbox Text_2A8232, 3
 	end
 
-EventScript_2725E9:: @ 82725E9
+EventScript_Vase:: @ 82725E9
 	msgbox Text_2A8276, 3
 	end
 
-EventScript_2725F2:: @ 82725F2
+EventScript_TrashCan:: @ 82725F2
 	msgbox Text_2A82B3, 3
 	end
 
-EventScript_2725FB:: @ 82725FB
+EventScript_ShopShelf:: @ 82725FB
 	msgbox Text_2A82BF, 3
 	end
 
-EventScript_272604:: @ 8272604
+EventScript_Blueprint:: @ 8272604
 	msgbox Text_2A82F7, 3
 	end
 
@@ -3322,7 +3322,7 @@ EventScript_2736B3:: @ 82736B3
 	msgbox gUnknown_08272C98, 3
 	end
 
-EventScript_2736BC:: @ 82736BC
+EventScript_Poison:: @ 82736BC
 	lockall
 	special ExecuteWhiteOut
 	waitstate
@@ -3565,7 +3565,7 @@ RustboroCity_DevonCorp_2F_EventScript_273811:: @ 8273811
 	release
 	end
 
-EventScript_27381B:: @ 827381B
+EventScript_Questionnaire:: @ 827381B
 	lockall
 	msgbox gUnknown_0827339F, 5
 	compare VAR_RESULT, 0
@@ -4536,7 +4536,7 @@ EventScript_275B5B:: @ 8275B5B
 	closemessage
 	playse SE_KAIDAN
 	setvar VAR_0x4097, 0
-	setflag FLAG_0x0AD
+	setflag FLAG_DECORATION_0
 	special sub_80E8E18
 	special sub_80E9068
 	setvar VAR_0x8004, 0
@@ -4577,14 +4577,14 @@ EventScript_275BB7:: @ 8275BB7
 	special sub_80E9744
 	compare VAR_RESULT, 0
 	goto_eq EventScript_275BDB
-	clearflag FLAG_0x0AD
+	clearflag FLAG_DECORATION_0
 	special sub_80E9068
 	setvar VAR_0x4089, 0
 	waitstate
 	end
 
 EventScript_275BDB:: @ 8275BDB
-	setflag FLAG_0x0AD
+	setflag FLAG_DECORATION_0
 	special sub_80E9068
 	setvar VAR_0x4089, 0
 	waitstate
@@ -4655,20 +4655,20 @@ EventScript_275CDE:: @ 8275CDE
 LittlerootTown_BrendansHouse_2F_EventScript_275CE1:: @ 8275CE1
 LittlerootTown_MaysHouse_2F_EventScript_275CE1:: @ 8275CE1
 SecretBase_RedCave1_EventScript_275CE1:: @ 8275CE1
-	setflag FLAG_0x0AE
-	setflag FLAG_0x0AF
-	setflag FLAG_0x0B0
-	setflag FLAG_0x0B1
-	setflag FLAG_0x0B2
-	setflag FLAG_0x0B3
-	setflag FLAG_0x0B4
-	setflag FLAG_0x0B5
-	setflag FLAG_0x0B6
-	setflag FLAG_0x0B7
-	setflag FLAG_0x0B8
-	setflag FLAG_0x0B9
-	setflag FLAG_0x0BA
-	setflag FLAG_0x0BB
+	setflag FLAG_DECORATION_1
+	setflag FLAG_DECORATION_2
+	setflag FLAG_DECORATION_3
+	setflag FLAG_DECORATION_4
+	setflag FLAG_DECORATION_5
+	setflag FLAG_DECORATION_6
+	setflag FLAG_DECORATION_7
+	setflag FLAG_DECORATION_8
+	setflag FLAG_DECORATION_9
+	setflag FLAG_DECORATION_10
+	setflag FLAG_DECORATION_11
+	setflag FLAG_DECORATION_12
+	setflag FLAG_DECORATION_13
+	setflag FLAG_DECORATION_14
 	return
 
 EventScript_275D0C:: @ 8275D0C
@@ -5680,7 +5680,7 @@ SlateportCity_PokemonFanClub_EventScript_28CA4F:: @ 828CA4F
 LilycoveCity_ContestLobby_EventScript_28CA59:: @ 828CA59
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CB21
 	setvar VAR_0x8005, 6
 	special InterviewBefore
@@ -5726,7 +5726,7 @@ LilycoveCity_ContestLobby_EventScript_28CADA:: @ 828CADA
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	msgbox LilycoveCity_ContestLobby_Text_27F0EC, 4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	setvar VAR_0x8005, 6
 	goto LilycoveCity_ContestLobby_EventScript_28C7E9
 	end
@@ -5753,7 +5753,7 @@ LilycoveCity_ContestLobby_EventScript_28CB2B:: @ 828CB2B
 	end
 
 LilycoveCity_ContestLobby_EventScript_28CB91:: @ 828CB91
-	clearflag FLAG_0x322
+	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
 	return
 
 LilycoveCity_ContestLobby_EventScript_28CB95:: @ 828CB95
@@ -5762,7 +5762,7 @@ LilycoveCity_ContestLobby_EventScript_28CB95:: @ 828CB95
 BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
 	setvar VAR_0x8005, 7
 	special InterviewBefore
@@ -5814,7 +5814,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC4A:: @ 828CC4A
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F9FD, 4
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	copyvar VAR_0x8004, VAR_0x8008
 	setvar VAR_0x8005, 7
 	goto BattleFrontier_BattleTowerLobby_EventScript_28C7E9
@@ -5837,11 +5837,11 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC84:: @ 828CC84
 	special InterviewBefore
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
-	clearflag FLAG_0x396
+	clearflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_28CCA6:: @ 828CCA6
-	setflag FLAG_0x396
+	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	return
 
 	.include "data/scripts/gabby_and_ty.inc"
@@ -5859,7 +5859,7 @@ EventScript_2926F8:: @ 82926F8
 
 	.include "data/scripts/players_house.inc"
 
-EventScript_292DE5:: @ 8292DE5
+EventScript_RunningShoesManual:: @ 8292DE5
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F66, 3
 	end
 
@@ -6010,7 +6010,7 @@ MirageTower_3F_MapScript2_2A8327: @ 82A8327
 MtPyre_2F_MapScript2_2A8327: @ 82A8327
 SkyPillar_2F_MapScript2_2A8327: @ 82A8327
 SkyPillar_4F_MapScript2_2A8327: @ 82A8327
-	map_script_2 VAR_ICE_STEP_COUNT, 0, gUnknown_082A8337
+	map_script_2 VAR_ICE_STEP_COUNT, 0, EventScript_FallDownHole
 	.2byte 0
 
 GraniteCave_B1F_MapScript1_2A8331: @ 82A8331
@@ -6020,7 +6020,7 @@ MtPyre_2F_MapScript1_2A8331: @ 82A8331
 	copyvar VAR_ICE_STEP_COUNT, 0x1
 	end
 
-gUnknown_082A8337:: @ 82A8337
+EventScript_FallDownHole:: @ 82A8337
 	lockall
 	delay 20
 	applymovement 255, GraniteCave_B1F_Movement_2A8369
@@ -11691,7 +11691,7 @@ TrainerHill_Roof_MapScript2_2C8381: @ 82C8381
 	map_script_2 VAR_TEMP_1, 1, TrainerHill_1F_EventScript_2C83DF
 	.2byte 0
 
-TrainerHill_1F_EventScript_2C8393:: @ 82C8393
+EventScript_TrainerHillTimer:: @ 82C8393
 	lockall
 	setvar VAR_0x8004, 7
 	special sp194_trainer_tower

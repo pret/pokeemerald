@@ -86,7 +86,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	setvar VAR_0x405E, 4
 	removeobject 1
-	clearflag FLAG_0x330
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
 	fadescreenswapbuffers 0
 	releaseall
 	end

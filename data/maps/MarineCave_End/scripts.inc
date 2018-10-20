@@ -21,7 +21,7 @@ MarineCave_End_MapScript1_23B008: @ 823B008
 	end
 
 MarineCave_End_EventScript_23B012:: @ 823B012
-	clearflag FLAG_0x30E
+	clearflag FLAG_HIDE_MARINE_CAVE_KYOGRE
 	setvar VAR_TEMP_1, 1
 	return
 

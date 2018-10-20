@@ -107,7 +107,7 @@ extern void sub_80A0A2C(void);
 extern void not_trainer_hill_battle_pyramid(void);
 extern void apply_map_tileset2_palette(const struct MapLayout *);
 extern void copy_map_tileset2_to_vram_2(const struct MapLayout *);
-extern void prev_quest_postbuffer_cursor_backup_reset(void);
+extern void RestartWildEncounterImmunitySteps(void);
 extern void ShowMapNamePopup(void);
 extern bool32 InTrainerHill(void);
 extern bool32 sub_808651C(void);
@@ -164,10 +164,10 @@ extern bool32 sub_8009F3C(void);
 extern void sub_8010198(void);
 extern u32 sub_800B4DC(void);
 extern bool32 sub_80B39D4(u8);
-extern const u8* sub_809C2C8(struct MapPosition *a1, u8, u8);
-extern u8 *sub_809D0F4(void*);
-extern u8 sub_808BD6C(u8);
-extern u8 sub_808BD7C(u8);
+extern const u8* GetInteractedLinkPlayerScript(struct MapPosition *a1, u8, u8);
+extern u8 *GetCoordEventScriptAtMapPosition(void*);
+extern u8 GetFRLGAvatarGraphicsIdByGender(u8);
+extern u8 GetRSAvatarGraphicsIdByGender(u8);
 extern void UpdateEventObjectSpriteVisibility(struct Sprite*, u8);
 
 // this file's functions
@@ -827,7 +827,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
-    prev_quest_postbuffer_cursor_backup_reset();
+    RestartWildEncounterImmunitySteps();
     TryUpdateRandomTrainerRematches(mapGroup, mapNum);
     DoTimeBasedEvents();
     SetSav1WeatherFromCurrMapHeader();
@@ -876,7 +876,7 @@ static void mli0_load_map(u32 a1)
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
-    prev_quest_postbuffer_cursor_backup_reset();
+    RestartWildEncounterImmunitySteps();
     TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     if (a1 != 1)
         DoTimeBasedEvents();
@@ -2706,7 +2706,7 @@ static u8 *sub_8087370(struct UnkStruct_8054FF8 *a1)
 {
     if (a1->c != 2)
         return 0;
-    return sub_809D0F4(&a1->sub);
+    return GetCoordEventScriptAtMapPosition(&a1->sub);
 }
 
 static bool32 sub_8087388(struct UnkStruct_8054FF8 *a1)
@@ -2747,7 +2747,7 @@ static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1)
             return EventScript_TradeRoom_ReadTrainerCard2;
     }
 
-    return sub_809C2C8(&unkStruct, a1->field_C, a1->d);
+    return GetInteractedLinkPlayerScript(&unkStruct, a1->field_C, a1->d);
 }
 
 static u16 sub_8087480(const u8 *script)
@@ -3137,11 +3137,11 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
         {
         case VERSION_FIRE_RED:
         case VERSION_LEAF_GREEN:
-            eventObj->spriteId = AddPseudoEventObject(sub_808BD6C(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
+            eventObj->spriteId = AddPseudoEventObject(GetFRLGAvatarGraphicsIdByGender(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_RUBY:
         case VERSION_SAPPHIRE:
-            eventObj->spriteId = AddPseudoEventObject(sub_808BD7C(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
+            eventObj->spriteId = AddPseudoEventObject(GetRSAvatarGraphicsIdByGender(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_EMERALD:
             eventObj->spriteId = AddPseudoEventObject(GetRivalAvatarGraphicsIdByStateIdAndGender(0, eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);

@@ -313,6 +313,20 @@
 #define ANIM_ATK_PARTNER 2
 #define ANIM_DEF_PARTNER 3
 
+// stereo panning constants [0-255]
+//
+//          0
+//         .  .
+//      .        .
+// 192 .          . 63
+//     .          .
+//      .        .
+//         .  .
+//          127
+//  
+#define SOUND_PAN_ATTACKER -64
+#define SOUND_PAN_TARGET    63
+
 // move background ids
 #define BG_DARK_ 0 // the same as BG_DARK but is unused
 #define BG_DARK 1

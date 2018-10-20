@@ -431,9 +431,9 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
     {
         if (FlagGet(FLAG_SYS_BRAILLE_WAIT) != FALSE)
             return FALSE;
-        if (FlagGet(FLAG_0x002) == FALSE)
+        if (FlagGet(FLAG_TEMP_2) == FALSE)
             return FALSE;
-        if (FlagGet(FLAG_0x003) == TRUE)
+        if (FlagGet(FLAG_TEMP_3) == TRUE)
             return FALSE;
 
         for (i = 0; i < 36; i++)
@@ -474,8 +474,8 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
             }
         }
 
-        FlagSet(FLAG_0x003);
-        FlagClear(FLAG_0x002);
+        FlagSet(FLAG_TEMP_3);
+        FlagClear(FLAG_TEMP_2);
     }
 
     return FALSE;

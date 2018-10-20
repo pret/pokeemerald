@@ -14,9 +14,9 @@ FallarborTown_House1_EventScript_200F13:: @ 8200F13
 	end
 
 FallarborTown_House1_EventScript_200F38:: @ 8200F38
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, FallarborTown_House1_EventScript_200F8B
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, FallarborTown_House1_EventScript_200F9C
 	compare VAR_RESULT, 0
 	goto_eq FallarborTown_House1_EventScript_200FA5
@@ -41,7 +41,7 @@ FallarborTown_House1_EventScript_200F9C:: @ 8200F9C
 	return
 
 FallarborTown_House1_EventScript_200FA5:: @ 8200FA5
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	msgbox FallarborTown_House1_Text_201212, 4
 	release
 	end

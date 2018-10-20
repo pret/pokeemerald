@@ -50,7 +50,7 @@ Route111_EventScript_27661E:: @ 827661E
 	msgbox Route111_Text_27636E, 4
 	closemessage
 	setflag FLAG_0x060
-	clearflag FLAG_0x3B4
+	clearflag FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN
 	compare VAR_FACING, 3
 	call_if 1, Route111_EventScript_27666A
 	compare VAR_FACING, 4
@@ -104,10 +104,10 @@ Route111_Movement_276696: @ 8276696
 	walk_down
 	step_end
 
-EventScript_2766A2:: @ 82766A2
+EventScript_SecretPower1:: @ 82766A2
 	special sub_80EB290
 	end
 
-EventScript_2766A6:: @ 82766A6
+EventScript_SecretPower2:: @ 82766A6
 	special sub_80EB2C8
 	end

@@ -4,12 +4,12 @@ MauvilleCity_EventObjects: @ 852662C
 	object_event 3, EVENT_OBJ_GFX_MANIAC, 0, 14, 11, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MauvilleCity_EventScript_1DF3BC, 0
 	object_event 4, EVENT_OBJ_GFX_WOMAN_4, 0, 18, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, MauvilleCity_EventScript_1DF3C5, 0
 	object_event 5, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 17, 14, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MauvilleCity_EventScript_1DF3FB, 0
-	object_event 6, EVENT_OBJ_GFX_WALLY, 0, 8, 6, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, MauvilleCity_EventScript_1DF452, 804
-	object_event 7, EVENT_OBJ_GFX_POKEFAN_M, 0, 9, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MauvilleCity_EventScript_1DF41D, 805
-	object_event 8, EVENT_OBJ_GFX_WATTSON, 0, 29, 9, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, MauvilleCity_EventScript_1DF73A, 912
-	object_event 9, EVENT_OBJ_GFX_ITEM_BALL, 0, 28, 19, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MauvilleCity_EventScript_2910CE, 1116
+	object_event 6, EVENT_OBJ_GFX_WALLY, 0, 8, 6, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, MauvilleCity_EventScript_1DF452, FLAG_HIDE_MAUVILLE_CITY_WALLY
+	object_event 7, EVENT_OBJ_GFX_POKEFAN_M, 0, 9, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MauvilleCity_EventScript_1DF41D, FLAG_HIDE_MAUVILLE_CITY_WALLYS_UNCLE
+	object_event 8, EVENT_OBJ_GFX_WATTSON, 0, 29, 9, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, MauvilleCity_EventScript_1DF73A, FLAG_HIDE_MAUVILLE_CITY_WATTSON
+	object_event 9, EVENT_OBJ_GFX_ITEM_BALL, 0, 28, 19, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MauvilleCity_EventScript_2910CE, FLAG_ITEM_MAUVILLE_CITY_X_SPEED
 	object_event 10, EVENT_OBJ_GFX_FAT_MAN, 0, 13, 7, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MauvilleCity_EventScript_2C7F7E, 0
-	object_event 11, EVENT_OBJ_GFX_SCOTT, 0, 12, 14, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 765
+	object_event 11, EVENT_OBJ_GFX_SCOTT, 0, 12, 14, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, FLAG_HIDE_MAUVILLE_CITY_SCOTT
 
 MauvilleCity_MapWarps: @ 8526734
 	warp_def 8, 5, 0, 0, MAP_MAUVILLE_CITY_GYM

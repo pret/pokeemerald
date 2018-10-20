@@ -16,7 +16,7 @@ FortreeCity_House4_EventScript_217C8A:: @ 8217C8A
 	msgbox FortreeCity_House4_Text_217DB9, 4
 	closemessage
 	setflag FLAG_0x0DE
-	clearflag FLAG_0x3A6
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL
 	applymovement 3, FortreeCity_House4_Movement_217D1A
 	waitmovement 0
 	removeobject 3

@@ -8,21 +8,21 @@ Route130_MapScript1_1F7365: @ 81F7365
 	specialvar VAR_RESULT, IsMirageIslandPresent
 	compare VAR_RESULT, 1
 	goto_eq Route130_EventScript_1F73B1
-	setflag FLAG_0x011
-	setflag FLAG_0x012
-	setflag FLAG_0x013
-	setflag FLAG_0x014
-	setflag FLAG_0x015
-	setflag FLAG_0x016
-	setflag FLAG_0x017
-	setflag FLAG_0x018
-	setflag FLAG_0x019
-	setflag FLAG_0x01A
-	setflag FLAG_0x01B
-	setflag FLAG_0x01C
-	setflag FLAG_0x01D
-	setflag FLAG_0x01E
-	setflag FLAG_0x01F
+	setflag FLAG_TEMP_11
+	setflag FLAG_TEMP_12
+	setflag FLAG_TEMP_13
+	setflag FLAG_TEMP_14
+	setflag FLAG_TEMP_15
+	setflag FLAG_TEMP_16
+	setflag FLAG_TEMP_17
+	setflag FLAG_TEMP_18
+	setflag FLAG_TEMP_19
+	setflag FLAG_TEMP_1A
+	setflag FLAG_TEMP_1B
+	setflag FLAG_TEMP_1C
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
+	setflag FLAG_TEMP_1F
 	setmaplayoutindex 263
 	end
 

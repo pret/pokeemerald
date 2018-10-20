@@ -76,7 +76,7 @@ Route116_EventScript_1F2CBB:: @ 81F2CBB
 	compare VAR_FACING, 4
 	call_if 1, Route116_EventScript_1F2D20
 	removeobject VAR_LAST_TALKED
-	clearflag FLAG_0x3B5
+	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
 	setflag FLAG_0x100
 	release
 	end

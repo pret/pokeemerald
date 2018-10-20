@@ -289,7 +289,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
 	end
 
 Script_Apprentice_SetLeavingFlags:
-	setflag FLAG_0x2BD
+	setflag FLAG_HIDE_APPRENTICE
 	setflag FLAG_0x934
 	return
 

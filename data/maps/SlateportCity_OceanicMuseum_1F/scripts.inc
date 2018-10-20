@@ -198,7 +198,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AF93:: @ 820AF93
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AFAA:: @ 820AFAA
-	setflag FLAG_0x3C5
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT
 	playse SE_KAIDAN
 	removeobject 13
 	release

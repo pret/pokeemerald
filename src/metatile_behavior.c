@@ -679,7 +679,7 @@ bool8 MetatileBehavior_IsSecretBasePC(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSecretBaseRegisterPC(u8 metatileBehavior)
+bool8 MetatileBehavior_IsRecordMixingSecretBasePC(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_REGISTER_PC)
         return TRUE;
@@ -815,7 +815,7 @@ bool8 MetatileBehavior_IsSecretBaseSandOrnament(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSecretBaseTvOrShield(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSecretBaseShieldOrToyTV(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_TV_SHIELD)
         return TRUE;
@@ -1164,7 +1164,7 @@ bool8 MetatileBehavior_IsRegionMap(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsClosedSootopolisGymDoor(u8 metatileBehavior)
+bool8 MetatileBehavior_IsClosedSootopolisDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_CLOSED_SOOTOPOLIS_DOOR)
         return TRUE;
@@ -1365,7 +1365,7 @@ bool8 MetatileBehavior_IsCuttableGrass(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsRunningShoesInstruction(u8 metatileBehavior)
+bool8 MetatileBehavior_IsRunningShoesManual(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_RUNNING_SHOES_INSTRUCTION)
         return TRUE;

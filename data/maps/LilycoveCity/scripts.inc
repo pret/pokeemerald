@@ -6,7 +6,7 @@ LilycoveCity_MapScripts:: @ 81E2B3C
 LilycoveCity_MapScript1_1E2B47: @ 81E2B47
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_0x4086, 0
-	setflag FLAG_0x322
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
 	checkflag FLAG_SYS_WEATHER_CTRL
 	call_if 1, LilycoveCity_EventScript_27207A
 	call LilycoveCity_EventScript_271ED7
@@ -347,8 +347,8 @@ LilycoveCity_EventScript_1E2F3E:: @ 81E2F3E
 	call_if 1, LilycoveCity_EventScript_1E2F86
 	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_EventScript_1E2F8F
-	clearflag FLAG_0x2D2
-	clearflag FLAG_0x351
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
 	goto LilycoveCity_EventScript_1E3006
 	end
 
@@ -384,8 +384,8 @@ LilycoveCity_EventScript_1E2FAA:: @ 81E2FAA
 	call_if 1, LilycoveCity_EventScript_1E2FE2
 	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_EventScript_1E2FEB
-	clearflag FLAG_0x2F8
-	clearflag FLAG_0x32F
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
 	goto LilycoveCity_EventScript_1E3006
 	end
 

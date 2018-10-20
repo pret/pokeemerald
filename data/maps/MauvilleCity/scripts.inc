@@ -5,7 +5,7 @@ MauvilleCity_MapScripts:: @ 81DF385
 MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	setflag FLAG_VISITED_MAUVILLE_CITY
 	clearflag FLAG_0x09D
-	clearflag FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION
+	clearflag FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_0x063
 	setvar VAR_0x4093, 0
@@ -14,8 +14,8 @@ MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	end
 
 MauvilleCity_EventScript_1DF3A9:: @ 81DF3A9
-	clearflag FLAG_SPRITEVIS_MAUVILLE_GYM_WATTSON
-	setflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
+	clearflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
+	setflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
 	setflag FLAG_WATTSON_REMATCH_AVAILABLE
 	return
 
@@ -159,8 +159,8 @@ MauvilleCity_EventScript_1DF53D:: @ 81DF53D
 MauvilleCity_EventScript_1DF593:: @ 81DF593
 	removeobject 6
 	removeobject 7
-	clearflag FLAG_0x326
-	clearflag FLAG_0x329
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE
 	setflag FLAG_0x0BE
 	setvar VAR_0x40F2, 0
 	setflag FLAG_0x088

@@ -17,7 +17,6 @@
 #include "pokenav.h"
 #include "random.h"
 #include "rom_818CFC8.h"
-#include "rom_81BE66C.h"
 #include "sprite.h"
 #include "trainer_see.h"
 #include "util.h"
@@ -2621,10 +2620,10 @@ void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat)
         switch (decorCat)
         {
             case DECORCAT_DOLL:
-                OverrideMovementTypeForEventObject(&gEventObjects[eventObjectId], EventScript_2766A2);
+                OverrideMovementTypeForEventObject(&gEventObjects[eventObjectId], EventScript_SecretPower1);
                 break;
             case DECORCAT_CUSHION:
-                OverrideMovementTypeForEventObject(&gEventObjects[eventObjectId], EventScript_2766A6);
+                OverrideMovementTypeForEventObject(&gEventObjects[eventObjectId], EventScript_SecretPower2);
                 break;
         }
     }

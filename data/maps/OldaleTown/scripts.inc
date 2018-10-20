@@ -40,9 +40,9 @@ OldaleTown_EventScript_1E8EFC:: @ 81E8EFC
 	faceplayer
 	checkflag FLAG_0x084
 	goto_eq OldaleTown_EventScript_1E8FB9
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq OldaleTown_EventScript_1E8FB9
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	playbgm MUS_TSURETEK, 0
 	msgbox OldaleTown_Text_1E91C0, 4
 	closemessage
@@ -287,7 +287,7 @@ OldaleTown_EventScript_1E911A:: @ 81E911A
 	waitmovement 0
 	removeobject 4
 	setvar VAR_0x40C7, 2
-	setflag FLAG_0x3D3
+	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	releaseall
 	end
 

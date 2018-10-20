@@ -56,8 +56,8 @@ extern bool8 InBattlePyramid(void);
 extern bool8 InBattlePike(void);
 extern bool32 InTrainerHill(void);
 extern bool32 FieldPoisonEffectIsRunning(void);
-extern void prev_quest_postbuffer_cursor_backup_reset(void);
-extern void ResetPoisonStepCounter(void);
+extern void RestartWildEncounterImmunitySteps(void);
+extern void ClearPoisonStepCounter(void);
 extern void sub_81BE72C(void);
 extern void sub_808BCF4(void);
 extern void sub_80EECC8(void);
@@ -354,8 +354,8 @@ static void Task_BattleStart(u8 taskId)
         {
             overworld_free_bg_tilemaps();
             SetMainCallback2(CB2_InitBattle);
-            prev_quest_postbuffer_cursor_backup_reset();
-            ResetPoisonStepCounter();
+            RestartWildEncounterImmunitySteps();
+            ClearPoisonStepCounter();
             DestroyTask(taskId);
         }
         break;
@@ -921,8 +921,8 @@ static void CB2_StartFirstBattle(void)
         gMain.savedCallback = CB2_EndFirstBattle;
         FreeAllWindowBuffers();
         SetMainCallback2(CB2_InitBattle);
-        prev_quest_postbuffer_cursor_backup_reset();
-        ResetPoisonStepCounter();
+        RestartWildEncounterImmunitySteps();
+        ClearPoisonStepCounter();
         IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
         IncrementGameStat(GAME_STAT_WILD_BATTLES);
         sub_80EECC8();

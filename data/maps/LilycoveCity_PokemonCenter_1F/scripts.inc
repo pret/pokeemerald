@@ -17,11 +17,11 @@ LilycoveCity_PokemonCenter_1F_EventScript_21C5C6:: @ 821C5C6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5E0:: @ 821C5E0
-	setflag FLAG_0x3E1
+	setflag FLAG_HIDE_LILYCOVE_POKEMON_CENTER_LADY
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5E4:: @ 821C5E4
-	clearflag FLAG_0x3E1
+	clearflag FLAG_HIDE_LILYCOVE_POKEMON_CENTER_LADY
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5E8:: @ 821C5E8

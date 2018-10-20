@@ -20,14 +20,14 @@ BirthIsland_Exterior_MapScript1_267F29: @ 8267F29
 	end
 
 BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
-	setflag FLAG_0x2FB
-	setflag FLAG_0x2FC
+	setflag FLAG_HIDE_DEOXYS
+	setflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	return
 
 BirthIsland_Exterior_EventScript_267F55:: @ 8267F55
 	checkflag FLAG_0x1AC
 	goto_eq BirthIsland_Exterior_EventScript_27374E
-	clearflag FLAG_0x2FC
+	clearflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	clearflag FLAG_0x8D4
 	return
 

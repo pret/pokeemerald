@@ -72,67 +72,67 @@ Route111_EventScript_28CD8B:: @ 828CD8B
 	return
 
 Route111_EventScript_28CD96:: @ 828CD96
-	setflag FLAG_0x31C
+	setflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1
 	return
 
 Route111_EventScript_28CD9A:: @ 828CD9A
-	clearflag FLAG_0x31C
+	clearflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1
 	return
 
 Route111_EventScript_28CD9E:: @ 828CD9E
-	setflag FLAG_0x31D
+	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_1
 	return
 
 Route111_EventScript_28CDA2:: @ 828CDA2
-	clearflag FLAG_0x31D
+	clearflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_1
 	return
 
 Route111_EventScript_28CDA6:: @ 828CDA6
-	setflag FLAG_0x31E
+	setflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1
 	return
 
 Route111_EventScript_28CDAA:: @ 828CDAA
-	clearflag FLAG_0x31E
+	clearflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1
 	return
 
 Route111_EventScript_28CDAE:: @ 828CDAE
-	setflag FLAG_0x31F
+	setflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3
 	return
 
 Route111_EventScript_28CDB2:: @ 828CDB2
-	clearflag FLAG_0x31F
+	clearflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3
 	return
 
 Route111_EventScript_28CDB6:: @ 828CDB6
-	setflag FLAG_0x385
+	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_2
 	return
 
 Route111_EventScript_28CDBA:: @ 828CDBA
-	clearflag FLAG_0x385
+	clearflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_2
 	return
 
 Route111_EventScript_28CDBE:: @ 828CDBE
-	setflag FLAG_0x386
+	setflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2
 	return
 
 Route111_EventScript_28CDC2:: @ 828CDC2
-	clearflag FLAG_0x386
+	clearflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2
 	return
 
 Route111_EventScript_28CDC6:: @ 828CDC6
-	setflag FLAG_0x387
+	setflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2
 	return
 
 Route111_EventScript_28CDCA:: @ 828CDCA
-	clearflag FLAG_0x387
+	clearflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2
 	return
 
 Route111_EventScript_28CDCE:: @ 828CDCE
-	setflag FLAG_0x388
+	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_3
 	return
 
 Route111_EventScript_28CDD2:: @ 828CDD2
-	clearflag FLAG_0x388
+	clearflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_3
 	return
 
 Route111_EventScript_28CDD6:: @ 828CDD6
@@ -220,7 +220,7 @@ Route111_EventScript_28CF56:: @ 828CF56
 	call_if 1, Route111_EventScript_28CF9F
 	compare VAR_FACING, 4
 	call_if 1, Route111_EventScript_28CFB1
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq Route111_EventScript_28D0EE
 	msgbox Route111_Text_28B042, 5
 	goto Route111_EventScript_28D0A7
@@ -254,7 +254,7 @@ Route120_EventScript_28CFC3:: @ 828CFC3
 	call_if 1, Route111_EventScript_28CF9F
 	compare VAR_FACING, 4
 	call_if 1, Route111_EventScript_28CFB1
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq Route111_EventScript_28D0EE
 	specialvar VAR_RESULT, GabbyAndTyGetLastQuote
 	compare VAR_RESULT, 0
@@ -323,13 +323,13 @@ Route111_EventScript_28D0A7:: @ 828D0A7
 	goto_eq Route111_EventScript_28D0E1
 	msgbox Route111_Text_28B4AB, 4
 	special GabbyAndTyAfterInterview
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	release
 	end
 
 Route111_EventScript_28D0E1:: @ 828D0E1
 	msgbox Route111_Text_28B577, 4
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	release
 	end
 

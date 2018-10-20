@@ -5,7 +5,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220624:: @ 8220624
 	lock
 	faceplayer
 	setvar VAR_0x8004, 0
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, LilycoveCity_DepartmentStoreElevator_EventScript_2207FC
 	copyvar VAR_0x8005, VAR_DEPT_STORE_FLOOR
 	special sub_8139B60
@@ -120,7 +120,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_2207E5:: @ 82207E5
 	waitse
 	special ShakeScreenInElevator
 	waitstate
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	return
 
 LilycoveCity_DepartmentStoreElevator_EventScript_2207FC:: @ 82207FC

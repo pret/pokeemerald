@@ -32,15 +32,15 @@ NewMauville_Inside_MapScript1_23741B: @ 823741B
 	end
 
 NewMauville_Inside_EventScript_237441:: @ 8237441
-	clearflag FLAG_0x3CE
+	clearflag FLAG_HIDE_NEW_MAUVILLE_VOLTORB_1
 	return
 
 NewMauville_Inside_EventScript_237445:: @ 8237445
-	clearflag FLAG_0x3CF
+	clearflag FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2
 	return
 
 NewMauville_Inside_EventScript_237449:: @ 8237449
-	clearflag FLAG_0x3D0
+	clearflag FLAG_HIDE_NEW_MAUVILLE_VOLTORB_3
 	return
 
 NewMauville_Inside_MapScript1_23744D: @ 823744D

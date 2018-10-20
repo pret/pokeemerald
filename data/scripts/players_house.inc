@@ -66,8 +66,8 @@ LittlerootTown_MaysHouse_2F_EventScript_292799:: @ 8292799
 	delay 30
 	setvar VAR_0x4092, 6
 	setflag FLAG_0x051
-	setflag FLAG_0x2F2
-	setflag FLAG_0x2F3
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
 	checkplayergender
 	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_2927DF

@@ -29,11 +29,11 @@ OldaleTown_PokemonCenter_2F_EventScript_276AD5:: @ 8276AD5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276AFB:: @ 8276AFB
-	clearflag FLAG_0x2BE
+	clearflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_276AFF:: @ 8276AFF
-	setflag FLAG_0x2BE
+	setflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
 	return
 
 BattleFrontier_PokemonCenter_2F_EventScript_276B03:: @ 8276B03
@@ -474,7 +474,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
 	release
 	compare VAR_0x8004, 5
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277036
-	special sub_809D2BC
+	special SetCableClubWarp
 	warp MAP_SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
 	special sub_80AF948
 	waitstate
@@ -486,7 +486,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27702B:: @ 827702B
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_277036:: @ 8277036
-	special sub_809D2BC
+	special SetCableClubWarp
 	warp MAP_DOUBLE_BATTLE_COLOSSEUM, 255, 5, 8
 	special sub_80AF948
 	waitstate
@@ -576,7 +576,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27713A:: @ 827713A
 	closedoor 9, 1
 	waitdooranim
 	release
-	special sub_809D2BC
+	special SetCableClubWarp
 	setwarp MAP_TRADE_CENTER, 255, 5, 8
 	special sub_80AF948
 	waitstate
@@ -651,7 +651,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27724C:: @ 827724C
 	closedoor 9, 1
 	waitdooranim
 	release
-	special sub_809D2BC
+	special SetCableClubWarp
 	setwarp MAP_RECORD_CORNER, 255, 8, 9
 	special sub_80AF948
 	waitstate
@@ -702,7 +702,7 @@ MossdeepCity_GameCorner_1F_EventScript_2772F9:: @ 82772F9
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277306:: @ 8277306
-	special sub_809D2BC
+	special SetCableClubWarp
 	special sub_80AF948
 	waitstate
 	end
@@ -784,7 +784,7 @@ MossdeepCity_GameCorner_1F_Movement_277360: @ 8277360
 	walk_up
 	step_end
 
-gUnknown_08277365:: @ 8277365
+EventScript_CableBoxResults:: @ 8277365
 	lockall
 	setvar VAR_0x8004, 0
 	special ShowLinkBattleRecords
@@ -1050,7 +1050,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	closedoor 5, 1
 	waitdooranim
 	special sub_8018090
-	special sub_809D2BC
+	special SetCableClubWarp
 	warpteleport2 MAP_UNION_ROOM, 255, 7, 11
 	waitstate
 	special UnionRoomSpecial
@@ -1392,7 +1392,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277B3A:: @ 8277B3A
 	waitstate
 	end
 
-OldaleTown_PokemonCenter_2F_EventScript_277B8A:: @ 8277B8A
+EventScript_WirelessBoxResults:: @ 8277B8A
 	lockall
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_27733F

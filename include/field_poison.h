@@ -14,6 +14,6 @@ enum {
 };
 
 void ExecuteWhiteOut(void);
-u32 DoPoisonFieldEffect(void);
+s32 DoPoisonFieldEffect(void);
 
 #endif //GUARD_FIELD_POISON_H

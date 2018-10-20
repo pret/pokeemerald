@@ -11,7 +11,7 @@ Underwater_SeafloorCavern_MapScript1_23434B: @ 823434B
 	end
 
 Underwater_SeafloorCavern_EventScript_234358:: @ 8234358
-	setflag FLAG_0x3D4
+	setflag FLAG_HIDE_UNDERWATER_SEA_FLOOR_CAVERN_STOLEN_SUBMARINE
 	end
 
 Underwater_SeafloorCavern_MapScript1_23435C: @ 823435C

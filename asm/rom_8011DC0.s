@@ -8335,7 +8335,7 @@ _08019C5A:
 	beq _08019CE6
 	mov r0, sp
 	adds r1, r4, 0
-	bl plaer_get_pos_including_state_based_drift
+	bl player_get_pos_including_state_based_drift
 	mov r0, sp
 	movs r1, 0
 	ldrsh r2, [r0, r1]
@@ -8881,7 +8881,7 @@ sub_801A064: @ 801A064
 	adds r5, 0x6
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl plaer_get_pos_including_state_based_drift
+	bl player_get_pos_including_state_based_drift
 	lsls r0, r7, 2
 	adds r0, r7
 	subs r0, 0x38

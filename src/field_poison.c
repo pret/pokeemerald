@@ -112,7 +112,7 @@ void ExecuteWhiteOut(void)
     ScriptContext1_Stop();
 }
 
-u32 DoPoisonFieldEffect(void)
+s32 DoPoisonFieldEffect(void)
 {
     int i;
     u32 hp;

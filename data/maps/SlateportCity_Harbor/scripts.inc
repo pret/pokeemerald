@@ -12,14 +12,14 @@ SlateportCity_Harbor_MapScript1_20C983: @ 820C983
 	end
 
 SlateportCity_Harbor_EventScript_20C9A5:: @ 820C9A5
-	clearflag FLAG_0x35C
+	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
 	return
 
 SlateportCity_Harbor_EventScript_20C9A9:: @ 820C9A9
 	savebgm MUS_AQA_0
 	setobjectxyperm 4, 12, 13
 	setobjectmovementtype 4, 9
-	setflag FLAG_0x389
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	return
 
 SlateportCity_Harbor_EventScript_20C9BB:: @ 820C9BB
@@ -65,7 +65,7 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	removeobject 8
 	setvar VAR_0x40A0, 2
 	setflag FLAG_0x061
-	setflag FLAG_0x313
+	setflag FLAG_HIDE_LILCOVE_MOTEL_SCOTT
 	compare VAR_0x8008, 0
 	call_if 1, SlateportCity_Harbor_EventScript_20CA89
 	compare VAR_0x8008, 1
@@ -76,8 +76,8 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	call_if 1, SlateportCity_Harbor_EventScript_20CAB3
 	msgbox SlateportCity_Harbor_Text_20D35A, 4
 	closemessage
-	setflag FLAG_0x335
-	setflag FLAG_0x336
+	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE
+	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE
 	moveobjectoffscreen 4
 	setobjectmovementtype 4, 10
 	releaseall
@@ -371,7 +371,7 @@ SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 	goto_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, 4
-	setflag FLAG_0x126
+	setflag FLAG_TRADED_SCANNER_TO_STERN
 	goto SlateportCity_Harbor_EventScript_20CE11
 	end
 
@@ -384,7 +384,7 @@ SlateportCity_Harbor_EventScript_20CDBB:: @ 820CDBB
 	goto_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, 4
-	setflag FLAG_0x126
+	setflag FLAG_TRADED_SCANNER_TO_STERN
 	goto SlateportCity_Harbor_EventScript_20CE11
 	end
 

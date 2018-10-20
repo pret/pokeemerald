@@ -92,14 +92,13 @@ SECTIONS {
         src/field_camera.o(.text);
         src/field_door.o(.text);
         src/field_player_avatar.o(.text);
-        asm/field_player_avatar.o(.text);
         src/event_object_movement.o(.text);
         src/field_message_box.o(.text);
         src/event_obj_lock.o(.text);
         src/text_window.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);
-        asm/field_control_avatar.o(.text);
+        src/field_control_avatar.o(.text);
         src/event_data.o(.text);
         src/coord_event_weather.o(.text);
         src/field_tasks.o(.text);
@@ -138,7 +137,7 @@ SECTIONS {
         src/contest.o(.text);
         asm/contest.o(.text);
         src/shop.o(.text);
-        asm/shop.o(.text);
+        src/fldeff_escalator.o(.text);
         src/berry.o(.text);
         asm/script_menu.o(.text);
         src/naming_screen.o(.text);
@@ -443,7 +442,8 @@ SECTIONS {
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
         data/contest.o(.rodata);
-        data/shop.o(.rodata);
+        src/shop.o(.rodata);
+        src/fldeff_escalator.o(.rodata);
         src/berry.o(.rodata);
         data/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);

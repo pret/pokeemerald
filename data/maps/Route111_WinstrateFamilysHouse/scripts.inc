@@ -40,10 +40,10 @@ Route111_WinstrateFamilysHouse_EventScript_22A4FD:: @ 822A4FD
 	lock
 	faceplayer
 	setvar VAR_0x8008, 4
-	checkflag FLAG_0x004
+	checkflag FLAG_TEMP_4
 	goto_eq Route111_WinstrateFamilysHouse_EventScript_22A51E
 	msgbox Route111_WinstrateFamilysHouse_Text_22A780, 4
-	setflag FLAG_0x004
+	setflag FLAG_TEMP_4
 	goto Route111_WinstrateFamilysHouse_EventScript_22A52C
 	end
 

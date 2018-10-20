@@ -4029,4 +4029,8 @@ extern const u8 gUnknown_08D97CF4[];
 extern const u8 gStatusGfx_Icons[];
 extern const u8 gStatusPal_Icons[];
 
+extern const u8 gBuyMenuFrame_Gfx[];
+extern const u16 gBuyMenuFrame_Tilemap[];
+extern const u16 gMenuMoneyPal[];
+
 #endif //GUARD_GRAPHICS_H
