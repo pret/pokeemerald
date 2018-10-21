@@ -57,7 +57,7 @@ static void SpriteCB_PMIndicator(struct Sprite *sprite);
 
 // rodata
 
-static const u8 sUnknown_085B1F58[] = INCBIN_U8("graphics/wallclock/graphics_85b1f58.4bpp.lz");
+static const u32 sUnknown_085B1F58[] = INCBIN_U32("graphics/wallclock/graphics_85b1f58.4bpp.lz");
 static const u16 sUnknown_085B21D4[] = INCBIN_U16("graphics/wallclock/palette_85b21d4.gbapal");
 
 static const struct WindowTemplate gUnknown_085B21DC[] = 

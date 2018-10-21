@@ -6700,7 +6700,7 @@ static void sub_806E6CC(u8 taskId)
     DestroyTask(taskId);
 }
 
-const u8 *GetMonFrontSpritePal(struct Pokemon *mon)
+const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
@@ -6714,7 +6714,7 @@ const u8 *GetMonFrontSpritePal(struct Pokemon *mon)
 // Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-const u8 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
+const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 

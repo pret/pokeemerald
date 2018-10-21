@@ -43,24 +43,24 @@ struct GcmbStruct gMultibootProgramStruct;
 //.rodata
 static const u16 gIntro1DropsPal[] = INCBIN_U16("graphics/intro/intro1_drops.gbapal");
 static const u16 gIntro1GFLogoPal[] = INCBIN_U16("graphics/intro/intro1_gflogo.gbapal");
-static const u8 gIntroTiles[] = INCBIN_U8("graphics/intro/intro.4bpp.lz");
+static const u32 gIntroTiles[] = INCBIN_U32("graphics/intro/intro.4bpp.lz");
 static const u16 gIntro1BGPals[16][16] = INCBIN_U16("graphics/intro/intro1_bgpal.gbapal");
-static const u8 gIntro1BG0_Tilemap[] = INCBIN_U8("graphics/intro/intro1_bg0_map.bin.lz");
-static const u8 gIntro1BG1_Tilemap[] = INCBIN_U8("graphics/intro/intro1_bg1_map.bin.lz");
-static const u8 gIntro1BG2_Tilemap[] = INCBIN_U8("graphics/intro/intro1_bg2_map.bin.lz");
-static const u8 gIntro1BG3_Tilemap[] = INCBIN_U8("graphics/intro/intro1_bg3_map.bin.lz");
-static const u8 gIntro1BGLeavesGfx[] = INCBIN_U8("graphics/intro/introgfx.4bpp.lz");
+static const u32 gIntro1BG0_Tilemap[] = INCBIN_U32("graphics/intro/intro1_bg0_map.bin.lz");
+static const u32 gIntro1BG1_Tilemap[] = INCBIN_U32("graphics/intro/intro1_bg1_map.bin.lz");
+static const u32 gIntro1BG2_Tilemap[] = INCBIN_U32("graphics/intro/intro1_bg2_map.bin.lz");
+static const u32 gIntro1BG3_Tilemap[] = INCBIN_U32("graphics/intro/intro1_bg3_map.bin.lz");
+static const u32 gIntro1BGLeavesGfx[] = INCBIN_U32("graphics/intro/introgfx.4bpp.lz");
 static const u16 gIntro3PokeballPal[] = INCBIN_U16("graphics/intro/intro3_pokeball.gbapal");
-static const u8 gIntro3Pokeball_Tilemap[] = INCBIN_U8("graphics/intro/intro3_pokeball_map.bin.lz");
-static const u8 gIntro3Pokeball_Gfx[] = INCBIN_U8("graphics/intro/intro3_pokeball.8bpp.lz");
+static const u32 gIntro3Pokeball_Tilemap[] = INCBIN_U32("graphics/intro/intro3_pokeball_map.bin.lz");
+static const u32 gIntro3Pokeball_Gfx[] = INCBIN_U32("graphics/intro/intro3_pokeball.8bpp.lz");
 static const u16 gIntro3Streaks_Pal_Unused[] = INCBIN_U16("graphics/intro/intro3_streaks.gbapal");
-static const u8 gIntro3Streaks_Gfx_Unused[] = INCBIN_U8("graphics/intro/intro3_streaks.4bpp.lz");
-static const u8 gIntro3Streaks_Tilemap_Unused[] = INCBIN_U8("graphics/intro/intro3_streaks_map.bin.lz");
+static const u32 gIntro3Streaks_Gfx_Unused[] = INCBIN_U32("graphics/intro/intro3_streaks.4bpp.lz");
+static const u32 gIntro3Streaks_Tilemap_Unused[] = INCBIN_U32("graphics/intro/intro3_streaks_map.bin.lz");
 static const u16 gIntro3Misc1Palette[] = INCBIN_U16("graphics/intro/intro3_misc1.gbapal");
 static const u16 gIntro3Misc2Palette_Unused[] = INCBIN_U16("graphics/intro/intro3_misc2.gbapal");
-static const u8 gIntro3MiscTiles[] = INCBIN_U8("graphics/intro/intro3_misc.4bpp.lz");
+static const u32 gIntro3MiscTiles[] = INCBIN_U32("graphics/intro/intro3_misc.4bpp.lz");
 static const u16 gIntro1FlygonPalette[] = INCBIN_U16("graphics/intro/intro1_flygon.gbapal");
-static const u8 gIntro1EonTiles_Unused[] = INCBIN_U8("graphics/intro/intro1_eon.4bpp.lz");
+static const u32 gIntro1EonTiles_Unused[] = INCBIN_U32("graphics/intro/intro1_eon.4bpp.lz");
 static const u8 sUnknownBytes[] = {
 	0x02, 0x03, 0x04, 0x05, 0x01, 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x02, 0x0D,
     0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x02, 0x0D, 0x0E, 0x0F,

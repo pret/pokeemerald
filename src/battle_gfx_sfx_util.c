@@ -7,6 +7,7 @@
 #include "battle_interface.h"
 #include "main.h"
 #include "malloc.h"
+#include "graphics.h"
 #include "random.h"
 #include "util.h"
 #include "pokemon.h"
@@ -40,20 +41,6 @@ extern const union AnimCmd* const * const gMonAnimationsSpriteAnimsPtrTable[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 extern const u8 gEnemyMonElevation[];
-
-// graphics
-extern const u32 gUnknown_08C093F0[];
-extern const u32 gSubstituteDollTilemap[];
-extern const u32 gSubstituteDollGfx[];
-extern const u16 gSubstituteDollPal[];
-extern const u8 gHealthboxSinglesPlayerGfx[];
-extern const u8 gHealthboxSinglesOpponentGfx[];
-extern const u8 gHealthboxDoublesPlayerGfx[];
-extern const u8 gHealthboxDoublesOpponentGfx[];
-extern const u8 gHealthboxSafariGfx[];
-extern const u8 gBlankGfxCompressed[];
-extern const u16 gBattleInterface_BallStatusBarPal[];
-extern const u16 gBattleInterface_BallDisplayPal[];
 
 extern u8 sub_80688F8(u8, u8 battlerId);
 extern u8 pokemon_order_func(u8); // party menu
@@ -874,7 +861,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
     u32 personalityValue;
     u32 otId;
     u8 position;
-    const u8 *lzPaletteData;
+    const u32 *lzPaletteData;
 
     if (notTransform)
     {
