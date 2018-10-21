@@ -179,7 +179,6 @@ SECTIONS {
         src/pokeblock.o(.text);
         src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
-        asm/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);
         src/birch_pc.o(.text);
         src/hof_pc.o(.text);

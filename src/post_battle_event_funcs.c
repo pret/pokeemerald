@@ -55,8 +55,8 @@ int GameClear(void)
          && !GetMonData(mon, MON_DATA_SANITY_BIT3)
          && !GetMonData(mon, MON_DATA_CHAMPION_RIBBON))
         {
-            val = TRUE;
-            SetMonData(mon, MON_DATA_CHAMPION_RIBBON, &val);
+            u8 val[1] = {TRUE};
+            SetMonData(mon, MON_DATA_CHAMPION_RIBBON, val);
             ribbonCounts[i].count = GetRibbonCount(mon);
             ribbonGet = TRUE;
         }
@@ -69,7 +69,7 @@ int GameClear(void)
         
         for (i = 1; i < 6; i++)
         {
-            if (ribbonCounts[0].count > ribbonCounts[i].count)
+            if (ribbonCounts[i].count > ribbonCounts[0].count)
             {
                 struct RibbonCounter prevBest = ribbonCounts[0];
                 ribbonCounts[0] = ribbonCounts[i];
@@ -85,4 +85,10 @@ int GameClear(void)
 
     SetMainCallback2(CB2_DoHallOfFameScreen);
     return 0;
+}
+
+bool8 sp0C8_whiteout_maybe(void)
+{
+    SetMainCallback2(CB2_WhiteOut);
+    return FALSE;
 }
