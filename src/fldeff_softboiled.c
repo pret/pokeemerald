@@ -103,7 +103,7 @@ static void sub_8161784(u8 taskId)
 static void sub_81617B8(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    sub_81B1B5C(&gText_CantBeUsedOnPkmn, 0);
+    sub_81B1B5C(gText_CantBeUsedOnPkmn, 0);
     schedule_bg_copy_tilemap_to_vram(2);
     gTasks[taskId].func = sub_8161784;
 }

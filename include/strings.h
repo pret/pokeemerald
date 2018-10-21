@@ -369,6 +369,7 @@ extern const u8 gText_ThreeDashes[];
 // party menu text
 extern const u8 gText_PkmnHPRestoredByVar2[];
 extern const u8 gText_CantBeUsedOnPkmn[];
+extern const u8 gText_CancelParticipation[];
 
 //pokedex text
 extern const u8 gText_CryOf[];

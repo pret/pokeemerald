@@ -25,6 +25,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "window.h"
@@ -173,6 +174,15 @@ void sub_81B36FC(u8);
 void sub_81B407C(u8);
 void sub_81B2210(u8);
 bool8 sub_81B1660(u8);
+const u8* sub_81B88BC(void);
+u8 sub_81B1B5C(const u8*, u8);
+void sub_81B16D4(u8);
+void sub_81B334C(void);
+void sub_81B1708(u8);
+bool8 sub_81B1BD4(void);
+void sub_81B1C1C(u8);
+void sub_81B8558(void);
+void sub_81B17F8(s8*);
 
 void sub_81B0038(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc f, MainCallback g)
 {
@@ -1082,3 +1092,97 @@ void sub_81B15D0(u8 taskId, s8 *ptr)
             break;
     }
 }    
+
+bool8 sub_81B1660(u8 taskId)
+{
+    const u8* stringPtr = NULL;
+    
+    if (gUnknown_0203CEC8.unk8_0 == 2)
+        stringPtr = gText_CancelParticipation;
+    else if (gUnknown_0203CEC8.unk8_0 == 4)
+        stringPtr = sub_81B88BC();
+    
+    if (stringPtr == NULL)
+        return FALSE;
+    
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    StringExpandPlaceholders(gStringVar4, stringPtr);
+    sub_81B1B5C(gStringVar4, 1);
+    gTasks[taskId].func = sub_81B16D4;
+    return TRUE;
+}
+
+void sub_81B16D4(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B334C();
+        gTasks[taskId].func = sub_81B1708;
+    }
+}
+
+void sub_81B1708(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrap_())
+    {
+        case 0:
+            gUnknown_0203CEE8 = 0;
+            gUnknown_0203CEC8.unk9 = 7;
+            sub_81B8558();
+            sub_81B12C0(taskId);
+            break;
+        case -1:
+            PlaySE(SE_SELECT);
+        case 1:
+            sub_81B1C1C(taskId);
+            break;
+    }
+}
+
+/* u16 sub_81B1760(s8* ptr)
+{
+    s8 r1;
+    
+    switch (gMain.newAndRepeatedKeys)
+    {
+        case DPAD_UP:
+            r1 = -1;
+            break;
+        case DPAD_DOWN:
+            r1 = 1;
+            break;
+        case DPAD_LEFT:
+            r1 = -2;
+            break;
+        case DPAD_RIGHT:
+            r1 = 2;
+            break;
+        default:
+            switch (sub_812210C())
+            {
+                case 1:
+                    r1 = -1;
+                    break;
+                case 2:
+                    r1 = 1;
+                    break;
+                default:
+                    r1 = 0;
+                    break;
+            }
+    }
+    
+    if (gMain.newKeys & START_BUTTON)
+        return 8;
+    
+    if ((s8)r1)
+    {
+        sub_81B17F8(ptr);
+        return 0;
+    }
+    
+    if ((gMain.newKeys & A_BUTTON) && *ptr == 7)
+        return 2;
+    
+    return gMain.newKeys & (A_BUTTON | B_BUTTON);
+} */
