@@ -6,21 +6,21 @@
 
 struct SpriteSheet
 {
-    const u8 *data;  // Raw uncompressed pixel data
+    const void *data;  // Raw uncompressed pixel data
     u16 size;
     u16 tag;
 };
 
 struct CompressedSpriteSheet
 {
-    const u8 *data;  // LZ77 compressed pixel data
+    const u32 *data;  // LZ77 compressed pixel data
     u16 size;        // Uncompressed size of pixel data
     u16 tag;
 };
 
 struct SpriteFrameImage
 {
-    const u8 *data;
+    const void *data;
     u16 size;
 };
 
@@ -36,7 +36,7 @@ struct SpritePalette
 
 struct CompressedSpritePalette
 {
-    const u8 *data;  // LZ77 compressed palette data
+    const u32 *data;  // LZ77 compressed palette data
     u16 tag;
 };
 

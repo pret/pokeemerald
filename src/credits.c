@@ -161,7 +161,7 @@ static const u16 gUnknown_085E56F0[][16] =
     INCBIN_U16("graphics/credits/credits_4.gbapal"),
 };
 
-static const u8 gCreditsCopyrightEnd_Gfx[] = INCBIN_U8("graphics/credits/the_end_copyright.4bpp.lz");
+static const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
 
 static void sub_81772B8(struct Sprite *sprite);
 
@@ -1343,8 +1343,8 @@ static void sub_81758E4(u8 taskIdA)
         ResetAllPicSprites();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
-        LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
+        LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
+        LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x3800));
         LoadPalette(gBirchBagGrassPal[0] + 1, 1, 31 * 2);
 
         for (i = 0; i < 0x800; i++)

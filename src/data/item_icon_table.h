@@ -4,7 +4,7 @@
 #include "global.h"
 #include "graphics.h"
 
-const u8 * const gItemIconTable[][2] = 
+const u32 *const gItemIconTable[][2] = 
 {
     gItemIcon_QuestionMark,    gItemIconPalette_QuestionMark,
 // Pokeballs

@@ -37,13 +37,6 @@
 EWRAM_DATA struct PyramidBagResources *gPyramidBagResources = NULL;
 EWRAM_DATA struct PyramidBagCursorData gPyramidBagCursorData = {0};
 
-// gfx
-extern const u8 gUnknown_08D9ADD0[];
-extern const u8 gUnknown_08D9AE04[];
-extern const u8 gUnknown_08D9AF44[];
-extern const u16 gUnknown_0860F074[];
-extern const u8 gBattleFrontierGfx_PyramidBag[];
-
 // This file's functions.
 static void Task_HandlePyramidBagInput(u8 taskId);
 static void sub_81C4F44(u8 taskId);

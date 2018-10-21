@@ -3,6 +3,7 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "graphics.h"
 #include "sprite.h"
 #include "window.h"
 #include "string_util.h"
@@ -163,13 +164,6 @@ extern const u8 gText_HighlightDarkGrey[];
 extern const u8 gText_DynColor2[];
 extern const u8 gText_DynColor2Male[];
 extern const u8 gText_DynColor1Female[];
-
-// graphics
-extern const u8 gBattleInterface_BallStatusBarGfx[];
-extern const u8 gBattleInterface_BallDisplayGfx[];
-extern const u16 gBattleInterface_BallStatusBarPal[];
-extern const u16 gBattleInterface_BallDisplayPal[];
-extern const u8 gHealthboxElementsGfxTable[][32];
 
 // this file's functions
 
