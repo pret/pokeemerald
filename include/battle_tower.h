@@ -58,7 +58,7 @@ bool32 sub_816587C(union BattleTowerRecord *, union BattleTowerRecord *);
 void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *);
 void PutNewBattleTowerRecord(union BattleTowerRecord *);
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId);
-void ConvertBattleFrontierTrainerSpeechToString(const u16 *words);
+void FrontierSpeechToString(const u16 *words);
 void GetFrontierTrainerName(u8 *dest, u16 trainerIdx);
 void GetEreaderTrainerName(u8 *dest);
 

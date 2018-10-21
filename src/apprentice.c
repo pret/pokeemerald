@@ -1970,7 +1970,7 @@ static void sub_81A0FFC(void)
             StringCopy(stringDst, gText_OpenLevel);
         break;
     case APPRENTICE_BUFF_EASY_CHAT:
-        ConvertBattleFrontierTrainerSpeechToString(gSaveBlock2Ptr->apprentices[0].easyChatWords);
+        FrontierSpeechToString(gSaveBlock2Ptr->apprentices[0].easyChatWords);
         StringCopy(stringDst, gStringVar4);
         break;
     case APPRENTICE_BUFF_SPECIES4:

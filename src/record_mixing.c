@@ -197,10 +197,10 @@ static void SetSrcLookupPointers(void)
     sOldManSave = &gSaveBlock1Ptr->oldMan;
     sEasyChatPairsSave = gSaveBlock1Ptr->easyChatPairs;
     gUnknown_03001148 = &gUnknown_02039F9C;
-    sBattleTowerSave = &gSaveBlock2Ptr->frontier.battleTower;
+    sBattleTowerSave = &gSaveBlock2Ptr->frontier.towerPlayer;
     sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
     gUnknown_03001154 = gSaveBlock2Ptr->apprentices;
-    sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->frontier.battleTower;
+    sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->frontier.towerPlayer;
 }
 
 static void PrepareUnknownExchangePacket(struct PlayerRecordsRS *dest)

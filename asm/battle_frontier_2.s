@@ -3600,7 +3600,7 @@ _081A370C:
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A3738:
@@ -3652,7 +3652,7 @@ _081A3794:
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0x18
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A37B8:
@@ -3720,7 +3720,7 @@ _081A3844:
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0x24
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A3868:
@@ -3736,7 +3736,7 @@ _081A3868:
 	beq _081A3890
 _081A387C:
 	bl sub_81864E0
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A3890:
@@ -3764,7 +3764,7 @@ _081A38A8:
 	ldr r1, =gApprentices+0x4A
 _081A38C4:
 	adds r0, r1
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A38D4:
@@ -3784,7 +3784,7 @@ _081A38D4:
 	muls r0, r3
 	ldr r1, =gApprentices+0x4A
 	adds r0, r1
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 _081A38F8:
 	pop {r0}
 	bx r0
@@ -10896,7 +10896,7 @@ _081A7560:
 	lsls r0, 2
 	ldr r1, =gUnknown_086123E4
 	adds r0, r1
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	pop {r0}
 	bx r0
 	.pool
@@ -12875,7 +12875,7 @@ sub_81A84EC: @ 81A84EC
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A8542
 	.pool
 _081A8524:
@@ -12892,7 +12892,7 @@ _081A8524:
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 _081A8542:
 	pop {r0}
 	bx r0
@@ -16003,7 +16003,7 @@ sub_81A9EDC: @ 81A9EDC
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	pop {r0}
 	bx r0
 	.pool
@@ -16020,7 +16020,7 @@ sub_81A9EFC: @ 81A9EFC
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0x18
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	pop {r0}
 	bx r0
 	.pool
@@ -16037,7 +16037,7 @@ sub_81A9F1C: @ 81A9F1C
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0x24
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	pop {r0}
 	bx r0
 	.pool

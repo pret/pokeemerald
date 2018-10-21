@@ -96,7 +96,7 @@ void sub_8195C20(void)
 void sub_8195C50(void)
 {
     if (gTrainerBattleOpponent_A < 300)
-        ConvertBattleFrontierTrainerSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
+        FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
 }
 
 /*

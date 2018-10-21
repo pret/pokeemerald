@@ -686,7 +686,7 @@ gUnknown_085DF96C:: @ 85DF96C
 	.4byte ChooseNextBattleTowerTrainer
 	.4byte sub_81621C0
 	.4byte sub_816502C
-	.4byte sub_8164040
+	.4byte SaveBattleTowerProgress
 	.4byte sub_8163914
 	.4byte nullsub_61
 	.4byte nullsub_116

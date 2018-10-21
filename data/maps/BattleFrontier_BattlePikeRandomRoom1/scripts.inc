@@ -30,13 +30,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D1C6:: @ 825D1C6
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
 	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	closemessage
 	releaseall
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_SINGLE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D226
@@ -66,13 +66,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D231:: @ 825D231
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
 	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	closemessage
 	releaseall
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_SINGLE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D285
@@ -282,7 +282,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D53E:: @ 825D53E
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
 	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	closemessage
 	delay 16
 	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BD
@@ -290,11 +290,11 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D53E:: @ 825D53E
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 1
 	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	closemessage
-	setvar VAR_0x8004, 9
+	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_DOUBLE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D5DC
@@ -433,9 +433,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B:: @ 825D77B
 	closemessage
 	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DC
 	waitmovement 0
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_SINGLE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	return
 
@@ -590,7 +590,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D81B:: @ 825D81B
 	faceplayer
 	setvar VAR_0x8004, 14
 	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	closemessage
 	release

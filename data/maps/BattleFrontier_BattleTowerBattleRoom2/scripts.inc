@@ -78,14 +78,14 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
 	delay 15
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 1
 	special sub_8161F74
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249069
 

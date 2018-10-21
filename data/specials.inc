@@ -247,7 +247,7 @@ gSpecials:: @ 81DBA64
 	def_special CallBattleDomeFunction
 	def_special sub_8195960
 	def_special sub_8165360
-	def_special sub_8163AC4
+	def_special DoSpecialTrainerBattle
 	def_special sub_81A5238
 	def_special sub_81A5E74
 	def_special sub_81A703C

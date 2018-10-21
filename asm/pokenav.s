@@ -28371,7 +28371,7 @@ _081D5764:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x10
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081D580E
 	.pool
 _081D5790:
@@ -28392,7 +28392,7 @@ _081D5790:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x1C
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081D580E
 	.pool
 _081D57BC:
@@ -28413,7 +28413,7 @@ _081D57BC:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x28
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081D580E
 	.pool
 _081D57E8:
@@ -28434,7 +28434,7 @@ _081D57E8:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x34
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 _081D580E:
 	bl sub_81D5710
 	pop {r4-r6}

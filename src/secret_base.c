@@ -40,6 +40,7 @@
 #include "tv.h"
 #include "secret_base.h"
 #include "constants/map_types.h"
+#include "constants/trainers.h"
 
 extern void mapldr_default(void);
 
@@ -1143,7 +1144,7 @@ const u8 *GetSecretBaseTrainerLoseText(void)
 void sub_80EA2E4(void)
 {
     sub_813BADC(TRUE);
-    gTrainerBattleOpponent_A = 0x400;
+    gTrainerBattleOpponent_A = TRAINER_SECRET_BASE;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_SECRET_BASE;
 }
 

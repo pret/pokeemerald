@@ -61,7 +61,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8BF:: @ 824F8BF
 	waitmovement 0
 	setvar VAR_0x8004, 5
 	special sub_8195960
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
 	switch VAR_RESULT
@@ -338,9 +338,9 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7:: @ 824FDF7
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	special HealPlayerParty
-	setvar VAR_0x8004, 4
+	setvar VAR_0x8004, SPECIAL_BATTLE_PALACE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	setvar VAR_0x8004, 18
 	special sub_81A1780
