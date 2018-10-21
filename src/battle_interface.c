@@ -3,6 +3,7 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "graphics.h"
 #include "sprite.h"
 #include "window.h"
 #include "string_util.h"
@@ -20,6 +21,7 @@
 #include "international_string_util.h"
 #include "safari_zone.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "data2.h"
 
@@ -162,13 +164,6 @@ extern const u8 gText_HighlightDarkGrey[];
 extern const u8 gText_DynColor2[];
 extern const u8 gText_DynColor2Male[];
 extern const u8 gText_DynColor1Female[];
-
-// graphics
-extern const u8 gBattleInterface_BallStatusBarGfx[];
-extern const u8 gBattleInterface_BallDisplayGfx[];
-extern const u16 gBattleInterface_BallStatusBarPal[];
-extern const u16 gBattleInterface_BallDisplayPal[];
-extern const u8 gHealthboxElementsGfxTable[][32];
 
 // this file's functions
 
@@ -1889,9 +1884,9 @@ static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite *sprite)
 
     if (sprite->pos2.x == 0)
     {
-        pan = PAN_SIDE_OPPONENT;
+        pan = SOUND_PAN_TARGET;
         if (var1 != 0)
-            pan = PAN_SIDE_PLAYER;
+            pan = SOUND_PAN_ATTACKER;
 
         if (sprite->data[7] != 0)
             PlaySE2WithPanning(SE_TB_KARA, pan);

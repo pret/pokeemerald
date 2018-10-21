@@ -1,5 +1,5 @@
 const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/menu.gbapal");
-const u8 gSlotMachineMenu_Gfx[] = INCBIN_U8("graphics/slot_machine/menu.4bpp.lz");
+const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
 const u16 gUnknown_08DCEC70[] = INCBIN_U16("graphics/slot_machine/slots_layout.bin");
@@ -26,7 +26,7 @@ const u8 gSlotMachineReelSymbol5Tiles[] = INCBIN_U8("graphics/slot_machine/reel_
 const u8 gSlotMachineReelSymbol6Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/6.4bpp");
 const u8 gSlotMachineReelSymbol7Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/7.4bpp");
 
-const u8 gSlotMachineReelTime_Gfx[] = INCBIN_U8("graphics/slot_machine/reel_time.4bpp.lz");
+const u32 gSlotMachineReelTime_Gfx[] = INCBIN_U32("graphics/slot_machine/reel_time.4bpp.lz");
 
 const u8 gSlotMachineNumber0Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/0.4bpp");
 const u8 gSlotMachineNumber1Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/1.4bpp");

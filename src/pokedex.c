@@ -3429,7 +3429,7 @@ void blockset_load_palette_to_gpu(u8 taskId)
         u32 otId;
         u32 personality;
         u8 paletteNum;
-        const u8 *lzPaletteData;
+        const u32 *lzPaletteData;
         void *buffer;
 
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);

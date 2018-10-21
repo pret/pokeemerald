@@ -49,8 +49,8 @@ static const u16 sDiplomaPalettes[][16] =
     INCBIN_U16("graphics/misc/diploma_hoenn.gbapal"),
 };
 
-static const u8 sDiplomaTilemap[] = INCBIN_U8("graphics/misc/diploma_map.bin.lz");
-static const u8 sDiplomaTiles[] = INCBIN_U8("graphics/misc/diploma.4bpp.lz");
+static const u32 sDiplomaTilemap[] = INCBIN_U32("graphics/misc/diploma_map.bin.lz");
+static const u32 sDiplomaTiles[] = INCBIN_U32("graphics/misc/diploma.4bpp.lz");
 
 void CB2_ShowDiploma(void)
 {
