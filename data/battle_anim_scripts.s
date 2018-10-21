@@ -4130,7 +4130,7 @@ Move_AROMATHERAPY:
 	playsewithpan SE_W080, 0
 	loadspritegfx ANIM_TAG_159
 	loadspritegfx ANIM_TAG_203
-	loadspritegfx ANIM_TAG_SPARKLE
+	loadspritegfx ANIM_TAG_SPARKLE_2
 	createsprite gSimplePaletteBlendSpriteTemplate, 0, 1, 0, 0, 7, RGB(13, 31, 12)
 	delay 1
 	monbg ANIM_ATTACKER
@@ -4852,7 +4852,7 @@ Move_THUNDER_PUNCH:
 
 Move_SACRED_FIRE:
 	loadspritegfx ANIM_TAG_FIRE
-	loadspritegfx ANIM_TAG_035
+	loadspritegfx ANIM_TAG_FIRE_PLUME
 	loopsewithpan SE_W221, -64, 7, 5
 	createsprite gUnknown_08595428, 2, -32, 0, 50, 5, -2, 0
 	delay 1
@@ -5234,7 +5234,7 @@ MudSlap1:
 
 Move_DRAGON_RAGE:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
-	loadspritegfx ANIM_TAG_035
+	loadspritegfx ANIM_TAG_FIRE_PLUME
 	playsewithpan SE_W082, -64
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_ATTACKER, 0, 2, 40, 1
 	waitforvisualfinish
@@ -5903,12 +5903,12 @@ Move_LEECH_LIFE:
 	end
 
 Move_SYNTHESIS:
-	loadspritegfx ANIM_TAG_SPARKLE
+	loadspritegfx ANIM_TAG_SPARKLE_2
 	createvisualtask sub_8115A04, 2, 2, 2, 2, 0, 16, RGB(27, 31, 18)
 	playsewithpan SE_W025, -64
 	call GrantingStarsEffect
 	waitforvisualfinish
-	unloadspritegfx ANIM_TAG_SPARKLE
+	unloadspritegfx ANIM_TAG_SPARKLE_2
 	delay 1
 	loadspritegfx ANIM_TAG_BLUE_STAR
 	call HealingEffect
@@ -6568,7 +6568,7 @@ Move_DYNAMIC_PUNCH:
 	loadspritegfx ANIM_TAG_143
 	loadspritegfx ANIM_TAG_135
 	loadspritegfx ANIM_TAG_EXPLOSION
-	loadspritegfx ANIM_TAG_007
+	loadspritegfx ANIM_TAG_UNUSED_EXPLOSION
 	delay 1
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
@@ -6981,7 +6981,7 @@ FireMoveEffect:
 	return
 
 Move_LEER:
-	loadspritegfx ANIM_TAG_GLARE
+	loadspritegfx ANIM_TAG_LEER
 	monbg ANIM_ATTACKER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 8, 8
@@ -7725,13 +7725,13 @@ Move_HEAL_BELL:
 	unloadspritegfx ANIM_TAG_BELL
 	unloadspritegfx ANIM_TAG_MUSIC_NOTES
 	unloadspritegfx ANIM_TAG_203
-	loadspritegfx ANIM_TAG_SPARKLE
+	loadspritegfx ANIM_TAG_SPARKLE_2
 	playsewithpan SE_W234, -64
 	createsprite gUnknown_08592B94, 16, -15, 0, 0, 0, 32, 60, 1
 	delay 8
 	createsprite gUnknown_08592B94, 16, 12, -5, 0, 0, 32, 60, 1
 	waitforvisualfinish
-	unloadspritegfx ANIM_TAG_SPARKLE
+	unloadspritegfx ANIM_TAG_SPARKLE_2
 	loadspritegfx ANIM_TAG_203
 	playsewithpan SE_REAPOKE, -64
 	createvisualtask sub_8116664, 10, 4, 3, 10, 0, RGB(12, 24, 30)
@@ -8142,7 +8142,7 @@ Move_TRICK:
 
 Move_WISH:
 	loadspritegfx ANIM_TAG_233
-	loadspritegfx ANIM_TAG_SPARKLE
+	loadspritegfx ANIM_TAG_SPARKLE_2
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 3, 0, 10, RGB_BLACK
 	waitforvisualfinish
 	panse_27 SE_W115, +63, -64, -3, 0
@@ -8459,7 +8459,7 @@ Move_ROLE_PLAY:
 
 Move_REFRESH:
 	loadspritegfx ANIM_TAG_203
-	loadspritegfx ANIM_TAG_SPARKLE
+	loadspritegfx ANIM_TAG_SPARKLE_2
 	playsewithpan SE_W287, -64
 	createvisualtask sub_815DFCC, 2, 0
 	waitforvisualfinish
@@ -9048,7 +9048,7 @@ ReturnStrongest1:
 	return
 
 Move_COSMIC_POWER:
-	loadspritegfx ANIM_TAG_SPARKLE
+	loadspritegfx ANIM_TAG_SPARKLE_2
 	createvisualtask sub_8159244, 5, 243, 0
 	playsewithpan SE_W322, 0
 	createvisualtask sub_8117610, 2, 0, 0, 15, 0
@@ -9073,7 +9073,7 @@ Move_COSMIC_POWER:
 	end
 
 Move_BLAST_BURN:
-	loadspritegfx ANIM_TAG_035
+	loadspritegfx ANIM_TAG_FIRE_PLUME
 	loadspritegfx ANIM_TAG_135
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
@@ -10424,7 +10424,7 @@ Status_SandTomb:
 
 General_ItemEffect:
 	loadspritegfx ANIM_TAG_203
-	loadspritegfx ANIM_TAG_SPARKLE
+	loadspritegfx ANIM_TAG_SPARKLE_2
 	delay 0
 	playsewithpan SE_W036, -64
 	createvisualtask sub_80D622C, 2, 16, 128, 0, 2
@@ -10650,13 +10650,13 @@ General_IngrainHeal:
 	end
 
 General_WishHeal:
-	loadspritegfx ANIM_TAG_SPARKLE
+	loadspritegfx ANIM_TAG_SPARKLE_2
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 3, 0, 10, RGB_BLACK
 	waitforvisualfinish
 	playsewithpan SE_W025, -64
 	call GrantingStarsEffect
 	waitforvisualfinish
-	unloadspritegfx ANIM_TAG_SPARKLE
+	unloadspritegfx ANIM_TAG_SPARKLE_2
 	loadspritegfx ANIM_TAG_BLUE_STAR
 	call HealingEffect
 	waitforvisualfinish

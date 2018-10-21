@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_ANIM_H
 #define GUARD_BATTLE_ANIM_H
 
+#include "constants/battle_anim.h"
+
 enum
 {
     BG_ANIM_SCREEN_SIZE,
