@@ -454,7 +454,7 @@ DoubleSlapRight:
 	goto DoubleSlapContinue
 
 Move_POISON_POWDER:
-	loadspritegfx ANIM_TAG_065
+	loadspritegfx ANIM_TAG_POISON_POWDER
 	loadspritegfx ANIM_TAG_POISON_BUBBLE
 	loopsewithpan SE_W077, SOUND_PAN_TARGET, 10, 6
 	createsprite gPoisonPowderParticleSpriteTemplate, 130, -30, -22, 117, 80, 5, 1
@@ -479,7 +479,7 @@ Move_POISON_POWDER:
 	end
 
 Move_STUN_SPORE:
-	loadspritegfx ANIM_TAG_068
+	loadspritegfx ANIM_TAG_STUN_SPORE
 	loopsewithpan SE_W077, SOUND_PAN_TARGET, 10, 6
 	createsprite gStunSporeParticleSpriteTemplate, 130, -30, -22, 117, 80, 5, 1
 	createsprite gStunSporeParticleSpriteTemplate, 130, 10, -22, 117, 80, -5, 1
@@ -503,7 +503,7 @@ Move_STUN_SPORE:
 	end
 
 Move_SLEEP_POWDER:
-	loadspritegfx ANIM_TAG_067
+	loadspritegfx ANIM_TAG_SLEEP_POWDER
 	loopsewithpan SE_W077, SOUND_PAN_TARGET, 10, 6
 	createsprite gSleepPowderParticleSpriteTemplate, 130, -30, -22, 117, 80, 5, 1
 	createsprite gSleepPowderParticleSpriteTemplate, 130, 10, -22, 117, 80, -5, 1
@@ -1486,7 +1486,7 @@ SelfDestruct1:
 	return
 
 Move_SLAM:
-	loadspritegfx ANIM_TAG_056
+	loadspritegfx ANIM_TAG_SLAM_HIT
 	loadspritegfx ANIM_TAG_135
 	monbg ANIM_TARGET
 	setalpha 12, 8
@@ -1676,7 +1676,7 @@ Move_PROTECT:
 	end
 
 Move_DETECT:
-	loadspritegfx ANIM_TAG_071
+	loadspritegfx ANIM_TAG_SPARKLE_4
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 2, 0, 9, RGB_BLACK
 	waitforvisualfinish
 	createvisualtask sub_8116620, 10, 2, 1, 0, 9, RGB_WHITE
@@ -1879,7 +1879,7 @@ Move_GUILLOTINE:
 	end
 
 Move_PAY_DAY:
-	loadspritegfx ANIM_TAG_100
+	loadspritegfx ANIM_TAG_COIN
 	loadspritegfx ANIM_TAG_135
 	monbg ANIM_TARGET
 	monbgprio_28 ANIM_TARGET
@@ -2095,7 +2095,7 @@ Move_MEAN_LOOK:
 	end
 
 Move_ROCK_THROW:
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	createsprite gBattleAnimSpriteTemplate_85972D8, 130, 6, 1, 15, 1
 	createsprite gUnknown_08596B04, 130, 0, 1, 0, 0
 	playsewithpan SE_W088, SOUND_PAN_TARGET
@@ -2116,7 +2116,7 @@ Move_ROCK_THROW:
 	end
 
 Move_ROCK_SLIDE:
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	monbg ANIM_DEF_PARTNER
 	createsprite gBattleAnimSpriteTemplate_85972D8, 2, 7, 1, 11, 1
 	createsprite gUnknown_08596B04, 130, -5, 1, -5, 1
@@ -2547,7 +2547,7 @@ Move_THRASH:
 	end
 
 Move_SING:
-	loadspritegfx ANIM_TAG_MUSIC_NOTES2
+	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	monbg ANIM_DEF_PARTNER
 	createvisualtask sub_8102BE8, 2
 	waitforvisualfinish
@@ -2606,7 +2606,7 @@ Move_EARTHQUAKE:
 	end
 
 Move_FISSURE:
-	loadspritegfx ANIM_TAG_074
+	loadspritegfx ANIM_TAG_MUD_SAND
 	createvisualtask sub_81152DC, 3, 5, 10, 50
 	createvisualtask sub_81152DC, 3, 1, 10, 50
 	playsewithpan SE_W089, SOUND_PAN_TARGET
@@ -2653,7 +2653,7 @@ Move_DIG:
 DigEnd:
 	end
 DigSetUp:
-	loadspritegfx ANIM_TAG_074
+	loadspritegfx ANIM_TAG_MUD_SAND
 	loadspritegfx ANIM_TAG_281
 	createsprite gUnknown_08597214, 1, 0, 0, 180
 	createsprite gUnknown_08597214, 1, 0, 1, 180
@@ -2810,7 +2810,7 @@ Move_MINIMIZE:
 	end
 
 Move_METRONOME:
-	loadspritegfx ANIM_TAG_064
+	loadspritegfx ANIM_TAG_FINGER
 	loadspritegfx ANIM_TAG_209
 	createsprite gUnknown_08593114, 11, 0, 100
 	playsewithpan SE_W118, SOUND_PAN_ATTACKER
@@ -2855,7 +2855,7 @@ SkullBashAttack:
 	goto SkullBashEnd
 
 Move_AMNESIA:
-	loadspritegfx ANIM_TAG_093
+	loadspritegfx ANIM_TAG_AMNESIA
 	call SetPsychicBackground
 	delay 8
 	createsprite gUnknown_08596744, 20
@@ -2867,7 +2867,7 @@ Move_AMNESIA:
 	end
 
 Move_KINESIS:
-	loadspritegfx ANIM_TAG_075
+	loadspritegfx ANIM_TAG_ALERT
 	loadspritegfx ANIM_TAG_BENT_SPOON
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
 	call SetPsychicBackground
@@ -3233,8 +3233,8 @@ Move_CHARM:
 
 Move_ROLLOUT:
 	loadspritegfx ANIM_TAG_135
-	loadspritegfx ANIM_TAG_074
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_MUD_SAND
+	loadspritegfx ANIM_TAG_ROCKS
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
@@ -3276,7 +3276,7 @@ Move_FALSE_SWIPE:
 	end
 
 Move_SWAGGER:
-	loadspritegfx ANIM_TAG_086
+	loadspritegfx ANIM_TAG_BREATH
 	loadspritegfx ANIM_TAG_ANGER
 	createvisualtask sub_8104AB4, 2
 	playsewithpan SE_W207, SOUND_PAN_ATTACKER
@@ -3550,7 +3550,7 @@ Move_SMELLING_SALT:
 	end
 
 Move_FOLLOW_ME:
-	loadspritegfx ANIM_TAG_064
+	loadspritegfx ANIM_TAG_FINGER
 	createsprite gUnknown_085931D4, 2, 0
 	playsewithpan SE_W039, SOUND_PAN_ATTACKER
 	delay 18
@@ -3987,7 +3987,7 @@ Move_FEATHER_DANCE:
 	end
 
 Move_TEETER_DANCE:
-	loadspritegfx ANIM_TAG_MUSIC_NOTES2
+	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	loadspritegfx ANIM_TAG_DUCK
 	createvisualtask sub_8160164, 5
 	createsprite gUnknown_08593050, 2, 0, 16, -2
@@ -4007,7 +4007,7 @@ Move_TEETER_DANCE:
 	end
 
 Move_MUD_SPORT:
-	loadspritegfx ANIM_TAG_074
+	loadspritegfx ANIM_TAG_MUD_SAND
 	createvisualtask sub_8104938, 2, 0, 6
 	delay 24
 	createsprite gUnknown_085971E4, 130, 0, -4, -16
@@ -4168,7 +4168,7 @@ Move_AROMATHERAPY:
 Move_FAKE_TEARS:
 	loadspritegfx ANIM_TAG_155
 	loadspritegfx ANIM_TAG_209
-	loadspritegfx ANIM_TAG_MUSIC_NOTES2
+	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_155, 0, 4, 4, RGB(12, 11, 31)
 	waitforvisualfinish
 	createvisualtask sub_815C478, 5, 0, 2, 1
@@ -4226,7 +4226,7 @@ Move_ODOR_SLEUTH:
 	end
 
 Move_GRASS_WHISTLE:
-	loadspritegfx ANIM_TAG_MUSIC_NOTES2
+	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 2, 0, 4, RGB(18, 31, 12)
 	waitforvisualfinish
 	createvisualtask sub_8102BE8, 2
@@ -4370,7 +4370,7 @@ Move_BLOCK:
 	end
 
 Move_HOWL:
-	loadspritegfx ANIM_TAG_053
+	loadspritegfx ANIM_TAG_NOISE_LINE
 	createvisualtask sub_815D64C, 2, 0
 	delay 12
 	call RoarEffect
@@ -4380,7 +4380,7 @@ Move_HOWL:
 	end
 
 Move_BULK_UP:
-	loadspritegfx ANIM_TAG_086
+	loadspritegfx ANIM_TAG_BREATH
 	createvisualtask sub_8104AB4, 2
 	playsewithpan SE_W207, SOUND_PAN_ATTACKER
 	waitforvisualfinish
@@ -4490,7 +4490,7 @@ Move_CALM_MIND:
 	end
 
 Move_LEAF_BLADE:
-	loadspritegfx ANIM_TAG_063
+	loadspritegfx ANIM_TAG_LEAF
 	loadspritegfx ANIM_TAG_285
 	createvisualtask sub_80FFFC0, 5
 	delay 2
@@ -4575,7 +4575,7 @@ Move_HARDEN:
 	end
 
 Move_BELLY_DRUM:
-	loadspritegfx ANIM_TAG_MUSIC_NOTES2
+	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	loadspritegfx ANIM_TAG_193
 	createvisualtask sub_8102BE8, 2
 	waitforvisualfinish
@@ -4955,7 +4955,7 @@ Move_DRAGON_BREATH:
 	end
 
 Move_ROAR:
-	loadspritegfx ANIM_TAG_053
+	loadspritegfx ANIM_TAG_NOISE_LINE
 	monbg ANIM_ATTACKER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 8, 8
@@ -4983,7 +4983,7 @@ RoarEffect:
 	return
 
 Move_GROWL:
-	loadspritegfx ANIM_TAG_053
+	loadspritegfx ANIM_TAG_NOISE_LINE
 	createvisualtask sub_8158E9C, 2, 0, 255
 	call RoarEffect
 	delay 10
@@ -5016,7 +5016,7 @@ Snore1:
 	return
 
 Move_LIGHT_SCREEN:
-	loadspritegfx ANIM_TAG_070
+	loadspritegfx ANIM_TAG_SPARKLE_3
 	loadspritegfx ANIM_TAG_166
 	setalpha 0, 16
 	waitplaysewithpan SE_W115, SOUND_PAN_ATTACKER, 15
@@ -5043,7 +5043,7 @@ SpecialScreenEffect:
 	return
 
 Move_MIRROR_COAT:
-	loadspritegfx ANIM_TAG_070
+	loadspritegfx ANIM_TAG_SPARKLE_3
 	loadspritegfx ANIM_TAG_168
 	setalpha 0, 16
 	createsprite gUnknown_08596590, 1, 40, 0, 10168
@@ -5056,7 +5056,7 @@ Move_MIRROR_COAT:
 	end
 
 Move_REFLECT:
-	loadspritegfx ANIM_TAG_071
+	loadspritegfx ANIM_TAG_SPARKLE_4
 	loadspritegfx ANIM_TAG_167
 	setalpha 0, 16
 	waitplaysewithpan SE_W115, SOUND_PAN_ATTACKER, 15
@@ -5182,7 +5182,7 @@ Move_FAINT_ATTACK:
 	end
 
 Move_SAND_ATTACK:
-	loadspritegfx ANIM_TAG_074
+	loadspritegfx ANIM_TAG_MUD_SAND
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 12, 8
@@ -5210,7 +5210,7 @@ SandAttack1:
 	return
 
 Move_MUD_SLAP:
-	loadspritegfx ANIM_TAG_074
+	loadspritegfx ANIM_TAG_MUD_SAND
 	playsewithpan SE_W028, SOUND_PAN_ATTACKER
 	createsprite gSlideMonToOffsetSpriteTemplate, 2, 0, -10, 0, 0, 3
 	waitforvisualfinish
@@ -6654,7 +6654,7 @@ Move_VITAL_THROW:
 	end
 
 Move_ROCK_SMASH:
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	loadspritegfx ANIM_TAG_135
 	loadspritegfx ANIM_TAG_143
 	monbg ANIM_DEF_PARTNER
@@ -6820,7 +6820,7 @@ Move_PETAL_DANCE:
 	end
 
 Move_RAZOR_LEAF:
-	loadspritegfx ANIM_TAG_063
+	loadspritegfx ANIM_TAG_LEAF
 	loadspritegfx ANIM_TAG_160
 	loadspritegfx ANIM_TAG_135
 	monbg ANIM_DEF_PARTNER
@@ -6861,7 +6861,7 @@ Move_RAZOR_LEAF:
 
 Move_NATURE_POWER:
 Move_ANCIENT_POWER:
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	loadspritegfx ANIM_TAG_135
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
@@ -7539,7 +7539,7 @@ RazorWindUnleash:
 	goto RazorWindContinue
 
 Move_DISABLE:
-	loadspritegfx ANIM_TAG_071
+	loadspritegfx ANIM_TAG_SPARKLE_4
 	monbg ANIM_TARGET
 	monbgprio_28 ANIM_TARGET
 	setalpha 8, 8
@@ -7695,7 +7695,7 @@ Move_SOFT_BOILED:
 
 Move_HEAL_BELL:
 	loadspritegfx ANIM_TAG_BELL
-	loadspritegfx ANIM_TAG_MUSIC_NOTES
+	loadspritegfx ANIM_TAG_MUSIC_NOTES_2
 	loadspritegfx ANIM_TAG_203
 	createvisualtask sub_8116620, 10, 10, 0, 0, 10, RGB_WHITE
 	waitforvisualfinish
@@ -7723,7 +7723,7 @@ Move_HEAL_BELL:
 	createvisualtask sub_8105D60, 5
 	waitforvisualfinish
 	unloadspritegfx ANIM_TAG_BELL
-	unloadspritegfx ANIM_TAG_MUSIC_NOTES
+	unloadspritegfx ANIM_TAG_MUSIC_NOTES_2
 	unloadspritegfx ANIM_TAG_203
 	loadspritegfx ANIM_TAG_SPARKLE_2
 	playsewithpan SE_W234, SOUND_PAN_ATTACKER
@@ -7919,7 +7919,7 @@ Move_BATON_PASS:
 	end
 
 Move_PERISH_SONG:
-	loadspritegfx ANIM_TAG_MUSIC_NOTES
+	loadspritegfx ANIM_TAG_MUSIC_NOTES_2
 	createsprite gUnknown_08593C0C, 4, 0, 0, 0
 	createsprite gUnknown_08593C0C, 4, 1, 1, 16
 	createsprite gUnknown_08593C0C, 4, 2, 1, 32
@@ -8513,7 +8513,7 @@ HyperVoiceEffect:
 	return
 
 Move_SAND_TOMB:
-	loadspritegfx ANIM_TAG_074
+	loadspritegfx ANIM_TAG_MUD_SAND
 	createsprite gSimplePaletteBlendSpriteTemplate, 0, 4, 2, 0, 7, RGB(19, 17, 0)
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 43, 1
 	playsewithpan SE_W328, SOUND_PAN_TARGET
@@ -9119,7 +9119,7 @@ Move_BLAST_BURN:
 
 Move_ROCK_TOMB:
 	loadspritegfx ANIM_TAG_X_SIGN
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	createvisualtask sub_81162A4, 2, 2, 0, 10, 1
 	waitforvisualfinish
 	createsprite gUnknown_08596C58, 130, 20, 12, 64, 114, 0
@@ -9257,7 +9257,7 @@ DiveAttack1:
 	return
 
 Move_ROCK_BLAST:
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	loadspritegfx ANIM_TAG_135
 	createsprite gHorizontalLungeSpriteTemplate, 2, 4, 6
 	delay 3
@@ -9412,7 +9412,7 @@ Move_ASTONISH:
 
 Move_SEISMIC_TOSS:
 	loadspritegfx ANIM_TAG_135
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	setarg 7, 0
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
@@ -9643,9 +9643,9 @@ Move_SECRET_POWER:
 	goto Move_SLAM
 
 Move_TWISTER:
-	loadspritegfx ANIM_TAG_063
+	loadspritegfx ANIM_TAG_LEAF
 	loadspritegfx ANIM_TAG_135
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	playsewithpan SE_W239, SOUND_PAN_TARGET
@@ -9689,7 +9689,7 @@ Move_TWISTER:
 	end
 
 Move_MAGICAL_LEAF:
-	loadspritegfx ANIM_TAG_063
+	loadspritegfx ANIM_TAG_LEAF
 	loadspritegfx ANIM_TAG_160
 	loadspritegfx ANIM_TAG_135
 	monbg ANIM_DEF_PARTNER
@@ -9880,7 +9880,7 @@ WeatherBallWater:
 	waitforvisualfinish
 	end
 WeatherBallSandstorm:
-	loadspritegfx ANIM_TAG_058
+	loadspritegfx ANIM_TAG_ROCKS
 	createsprite gUnknown_08596CE0, 130, -30, -100, 25, 1, 30, 0
 	playsewithpan SE_W088, SOUND_PAN_TARGET
 	delay 5
@@ -10410,7 +10410,7 @@ Status_Clamp:
 	waitforvisualfinish
 	end
 Status_SandTomb:
-	loadspritegfx ANIM_TAG_074
+	loadspritegfx ANIM_TAG_MUD_SAND
 	createsprite gSimplePaletteBlendSpriteTemplate, 0, 4, 2, 0, 7, RGB(19, 17, 0)
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 30, 1
 	playsewithpan SE_W328, SOUND_PAN_TARGET

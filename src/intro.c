@@ -1542,8 +1542,8 @@ static void Task_IntroLoadPart1Graphics3(u8 taskId)
         LZDecompressVram(gIntro3GroudonTilemap, (void *)(VRAM + 0xC000));
         LZDecompressVram(gIntro3LegendBgGfx, (void *)(VRAM + 0x4000));
         LZDecompressVram(gIntro3GroudonBgTilemap, (void *)(VRAM + 0xE000));
-        LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_058)]);
-        LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_058)]);
+        LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
+        LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
         CpuCopy16(gIntro3BgPal, gPlttBufferUnfaded, sizeof(gIntro3BgPal));
         gTasks[taskId].func = Task_IntroLoadPart1Graphics4;
     }
