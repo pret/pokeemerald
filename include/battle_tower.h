@@ -7,15 +7,14 @@
 
 struct RSBattleTowerRecord
 {
-    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
-    /*0x01*/ u8 trainerClass;
+    /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[4];
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ struct UnknownPokemonStruct party[3];
     /*0xA0*/ u32 checksum;
-    /*0xA4*/ u16 unk_11c8;
 };
 
 union BattleTowerRecord
@@ -54,12 +53,14 @@ extern const struct FacilityMon *gFacilityTrainerMons;
 
 u16 GetCurrentBattleTowerWinStreak(u8, u8);
 void sub_81659DC(struct RSBattleTowerRecord *a0, struct RSBattleTowerRecord *a1);
-bool32 sub_816587C(union BattleTowerRecord *, union BattleTowerRecord *);
+bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst);
 void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *);
-void PutNewBattleTowerRecord(union BattleTowerRecord *);
+void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm);
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId);
 void FrontierSpeechToString(const u16 *words);
 void GetFrontierTrainerName(u8 *dest, u16 trainerIdx);
 void GetEreaderTrainerName(u8 *dest);
+void FillFrontierTrainerParty(u8 monsCount);
+void FillFrontierTrainersParties(u8 monsCount);
 
 #endif //GUARD_BATTLE_TOWER_H

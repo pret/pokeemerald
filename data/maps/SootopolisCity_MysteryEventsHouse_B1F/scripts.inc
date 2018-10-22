@@ -15,7 +15,7 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	lockall
 	applymovement 255, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3
 	waitmovement 0
-	special sub_8165360
+	special CopyEReaderTrainerGreeting
 	msgbox gStringVar4, 4
 	closemessage
 	setvar VAR_0x8004, SPECIAL_BATTLE_EREADER

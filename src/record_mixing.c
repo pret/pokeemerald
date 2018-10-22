@@ -69,6 +69,7 @@ struct PlayerRecordsRS
     struct EasyChatPair easyChatPairs[5];
     struct RecordMixingDayCareMail dayCareMail;
     struct RSBattleTowerRecord battleTowerRecord;
+    u16 giftItem;
     u16 filler11C8[0x32];
 };
 
@@ -81,7 +82,7 @@ struct PlayerRecordsEmerald
     /* 0x1084 */ struct EasyChatPair easyChatPairs[5];
     /* 0x10ac */ struct RecordMixingDayCareMail dayCareMail;
     /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
-    /* 0x1210 */ u16 unk_1210;
+    /* 0x1210 */ u16 giftItem;
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct Apprentice apprentice[2];
     /* 0x12dc */ struct UnkRecordMixingStruct2 unk_12dc;
@@ -132,7 +133,7 @@ static void ReceiveBattleTowerData(void *battleTowerRecord, size_t, u8);
 static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u8);
 static void sub_80E7B2C(const u8 *);
 static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *, size_t, u8, TVShow *);
-static void sub_80E7F68(u16 *item, u8 which);
+static void ReceiveGiftItem(u16 *item, u8 which);
 static void sub_80E7FF8(u8 taskId);
 static void sub_80E8110(struct Apprentice *arg0, struct Apprentice *arg1);
 static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2);
@@ -215,7 +216,7 @@ static void PrepareUnknownExchangePacket(struct PlayerRecordsRS *dest)
     sub_81659DC(sBattleTowerSave, &dest->battleTowerRecord);
 
     if (GetMultiplayerId() == 0)
-        dest->battleTowerRecord.unk_11c8 = GetRecordMixingGift();
+        dest->giftItem = GetRecordMixingGift();
 }
 
 static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
@@ -234,7 +235,7 @@ static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
     SanitizeRubyBattleTowerRecord(&dest->battleTowerRecord);
 
     if (GetMultiplayerId() == 0)
-        dest->battleTowerRecord.unk_11c8 = GetRecordMixingGift();
+        dest->giftItem = GetRecordMixingGift();
 }
 
 static void PrepareExchangePacket(void)
@@ -263,7 +264,7 @@ static void PrepareExchangePacket(void)
         SanitizeEmeraldBattleTowerRecord(&sSentRecord->emerald.battleTowerRecord);
 
         if (GetMultiplayerId() == 0)
-            sSentRecord->emerald.unk_1210 = GetRecordMixingGift();
+            sSentRecord->emerald.giftItem = GetRecordMixingGift();
 
         sub_80E8110(sSentRecord->emerald.apprentice, gUnknown_03001154);
         sub_80E8260(&sSentRecord->emerald.unk_12dc);
@@ -283,7 +284,7 @@ static void ReceiveExchangePacket(u32 which)
         ReceivePokeNewsData(sReceivedRecords->ruby.pokeNews, sizeof(struct PlayerRecordsRS), which);
         ReceiveOldManData(&sReceivedRecords->ruby.oldMan, sizeof(struct PlayerRecordsRS), which);
         ReceiveEasyChatPairsData(sReceivedRecords->ruby.easyChatPairs, sizeof(struct PlayerRecordsRS), which);
-        sub_80E7F68(&sReceivedRecords->ruby.battleTowerRecord.unk_11c8, which);
+        ReceiveGiftItem(&sReceivedRecords->ruby.giftItem, which);
     }
     else
     {
@@ -296,7 +297,7 @@ static void ReceiveExchangePacket(u32 which)
         ReceiveEasyChatPairsData(sReceivedRecords->emerald.easyChatPairs, sizeof(struct PlayerRecordsEmerald), which);
         ReceiveDaycareMailData(&sReceivedRecords->emerald.dayCareMail, sizeof(struct PlayerRecordsEmerald), which, sReceivedRecords->emerald.tvShows);
         ReceiveBattleTowerData(&sReceivedRecords->emerald.battleTowerRecord, sizeof(struct PlayerRecordsEmerald), which);
-        sub_80E7F68(&sReceivedRecords->emerald.unk_1210, which);
+        ReceiveGiftItem(&sReceivedRecords->emerald.giftItem, which);
         ReceiveLilycoveLadyData(&sReceivedRecords->emerald.lilycoveLady, sizeof(struct PlayerRecordsEmerald), which);
         ReceiveApprenticeData(sReceivedRecords->emerald.apprentice, sizeof(struct PlayerRecordsEmerald), (u8) which);
         sub_80E89AC(&sReceivedRecords->emerald.unk_12dc, sizeof(struct PlayerRecordsEmerald), (u8) which);
@@ -667,7 +668,7 @@ static void ReceiveBattleTowerData(void *battleTowerRecord, size_t recordSize, u
     ShufflePlayerIndices(mixIndices);
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
-        if (sub_816587C((void *)battleTowerRecord + recordSize * mixIndices[which], (void *)battleTowerRecord + recordSize * which) == TRUE)
+        if (RubyBattleTowerRecordToEmerald((void *)battleTowerRecord + recordSize * mixIndices[which], (void *)battleTowerRecord + recordSize * which) == TRUE)
         {
             dest = (void *)battleTowerRecord + recordSize * which;
             dest->language = gLinkPlayers[mixIndices[which]].language;
@@ -676,7 +677,7 @@ static void ReceiveBattleTowerData(void *battleTowerRecord, size_t recordSize, u
     }
     else
     {
-        memcpy((void *)battleTowerRecord + recordSize * which, (void *)battleTowerRecord + recordSize * mixIndices[which], sizeof(union BattleTowerRecord));
+        memcpy((void *)battleTowerRecord + recordSize * which, (void *)battleTowerRecord + recordSize * mixIndices[which], sizeof(struct EmeraldBattleTowerRecord));
         dest = (void *)battleTowerRecord + recordSize * which;
         for (i = 0; i < 4; i ++)
         {
@@ -1460,7 +1461,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
 }
 #endif // NONMATCHING
 
-static void sub_80E7F68(u16 *item, u8 which)
+static void ReceiveGiftItem(u16 *item, u8 which)
 {
     if (which != 0 && *item != ITEM_NONE && GetPocketByItemId(*item) == POCKET_KEY_ITEMS)
     {

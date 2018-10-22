@@ -31,6 +31,7 @@
 #include "string_util.h"
 #include "overworld.h"
 #include "field_weather.h"
+#include "battle_tower.h"
 #include "gym_leader_rematch.h"
 #include "constants/map_types.h"
 #include "constants/battle_frontier.h"
@@ -67,8 +68,6 @@ extern u16 sub_81D6180(u8 localId);
 extern bool8 GetBattlePyramidTrainerFlag(u8 eventObjId);
 extern bool8 GetTrainerHillTrainerFlag(u8 eventObjId);
 extern bool8 sub_81D5C18(void);
-extern void sub_816306C(u8 a0);
-extern void sub_8163048(u8 a0);
 extern void sub_81A9B04(void);
 extern void sub_81D639C(void);
 extern void sub_81D6384(void);
@@ -885,8 +884,8 @@ u8 sub_80B100C(s32 arg0)
             return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
     }
 
-    var = gSaveBlock2Ptr->frontier.battledTrainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 0]
-        + gSaveBlock2Ptr->frontier.battledTrainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 1];
+    var = gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 0]
+        + gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 1];
 
     return sUnknown_0854FE98[var % ARRAY_COUNT(sUnknown_0854FE98)];
 }
@@ -1264,7 +1263,7 @@ void BattleSetup_StartTrainerBattle(void)
 
         if (gNoOfApproachingTrainers == 2)
         {
-            sub_816306C(1);
+            FillFrontierTrainersParties(1);
             ZeroMonData(&gEnemyParty[1]);
             ZeroMonData(&gEnemyParty[2]);
             ZeroMonData(&gEnemyParty[4]);
@@ -1272,7 +1271,7 @@ void BattleSetup_StartTrainerBattle(void)
         }
         else
         {
-            sub_8163048(1);
+            FillFrontierTrainerParty(1);
             ZeroMonData(&gEnemyParty[1]);
             ZeroMonData(&gEnemyParty[2]);
         }

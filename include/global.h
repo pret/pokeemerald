@@ -288,7 +288,7 @@ struct Apprentice
     u8 lvlMode:2; // + 1
     u8 field_1;
     u8 number;
-    struct ApprenticeMon monData[3];
+    struct ApprenticeMon party[3];
     u16 easyChatWords[6];
     u8 playerId[4];
     u8 playerName[PLAYER_NAME_LENGTH];
@@ -383,8 +383,8 @@ struct BattleFrontier
     /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[5]; // From record mixing.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
-    /*0xBD8*/ u8 field_BD8[11];
-    /*0xBE3*/ u8 field_BE3[8];
+    /*0xBD8*/ u8 field_BD8[PLAYER_NAME_LENGTH + 1];
+    /*0xBE3*/ u8 field_BE0[POKEMON_NAME_LENGTH + 1];
     /*0xBEB*/ u8 field_BEB;
     /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0xCA8*/ u8 field_CA8;
@@ -395,15 +395,12 @@ struct BattleFrontier
     /*0xCA9*/ u8 field_CA9_d:1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e:1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[3];
+    /*0xCAA*/ u16 selectedPartyMons[3];
     /*0xCB0*/ u16 field_CB0;
     /*0xCB2*/ u16 curChallengeBattleNum; // In case of battle pyramid, the floor.
-    /*0xCB4*/ u16 battledTrainerIds[17];
-              u16 field_CD6;
-              u16 field_CD8;
-              u16 field_CDA;
+    /*0xCB4*/ u16 field_CB4[20];
     /*0xCDC*/ u32 field_CDC;
-    /*0xCE0*/ u16 field_CE0[4][2];
+    /*0xCE0*/ u16 winStreaks[4][2];
     /*0xCF0*/ u16 field_CF0[2];
     /*0xCF4*/ u16 field_CF4[2];
     /*0xCF8*/ u16 field_CF8[2];

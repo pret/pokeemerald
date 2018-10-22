@@ -246,7 +246,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_8161F74
 	def_special CallBattleDomeFunction
 	def_special sub_8195960
-	def_special sub_8165360
+	def_special CopyEReaderTrainerGreeting
 	def_special DoSpecialTrainerBattle
 	def_special sub_81A5238
 	def_special sub_81A5E74
