@@ -10,6 +10,7 @@
 #include "task.h"
 #include "decompress.h"
 #include "sound.h"
+#include "graphics.h"
 #include "dma3.h"
 #include "bg.h"
 #include "gpu_regs.h"
@@ -123,7 +124,1273 @@ EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gUnknown_02038440 = 0;
 
-// const rom data
+const struct OamData gUnknown_08524904 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 0,
+    .priority = 2,
+};
+
+
+const struct OamData gUnknown_0852490C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524914 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852491C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524924 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852492C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524934 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852493C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524944 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852494C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524954 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852495C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524964 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852496C =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524974 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852497C =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524984 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852498C =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524994 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_0852499C =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249A4 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249AC =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249B4 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249BC =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249C4 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249CC =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249D4 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249DC =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249E4 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249EC =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249F4 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_085249FC =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A04 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A0C =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A14 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A1C =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A24 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A2C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A34 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A3C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A44 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A4C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A54 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A5C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A64 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A6C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A74 =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A7C =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A84 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A8C =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A94 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524A9C =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AA4 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AAC =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AB4 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524ABC =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AC4 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524ACC =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AD4 =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524ADC =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AE4 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AEC =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AF4 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524AFC =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_SQUARE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524B04 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524B0C =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524B14 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524B1C =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524B24 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524B2C =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524B34 =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gUnknown_08524B3C =
+{
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct CompressedSpriteSheet gBattleAnimPicTable[] =
+{
+    {gBattleAnimSpriteSheet_000, 0x0200, 0x2710},
+    {gBattleAnimSpriteSheet_001, 0x0300, 0x2711},
+    {gBattleAnimSpriteSheet_002, 0x0200, 0x2712},
+    {gBattleAnimSpriteSheet_003, 0x0100, 0x2713},
+    {gBattleAnimSpriteSheet_004, 0x0200, 0x2714},
+    {gBattleAnimSpriteSheet_005, 0x0400, 0x2715},
+    {gBattleAnimSpriteSheet_006, 0x0180, 0x2716},
+    {gBattleAnimSpriteSheet_007, 0x0800, 0x2717},
+    {gBattleAnimSpriteSheet_008, 0x0020, 0x2718},
+    {gBattleAnimSpriteSheet_009, 0x0400, 0x2719},
+    {gBattleAnimSpriteSheet_010, 0x1200, 0x271a},
+    {gBattleAnimSpriteSheet_011, 0x0180, 0x271b},
+    {gBattleAnimSpriteSheet_012, 0x0080, 0x271c},
+    {gBattleAnimSpriteSheet_013, 0x0080, 0x271d},
+    {gBattleAnimSpriteSheet_014, 0x0280, 0x271e},
+    {gBattleAnimSpriteSheet_015, 0x0080, 0x271f},
+    {gBattleAnimSpriteSheet_016, 0x0100, 0x2720},
+    {gBattleAnimSpriteSheet_017, 0x0020, 0x2721},
+    {gBattleAnimSpriteSheet_018, 0x0080, 0x2722},
+    {gBattleAnimSpriteSheet_019, 0x0400, 0x2723},
+    {gBattleAnimSpriteSheet_020, 0x0200, 0x2724},
+    {gBattleAnimSpriteSheet_021, 0x0a00, 0x2725},
+    {gBattleAnimSpriteSheet_021, 0x0a00, 0x2726},
+    {gBattleAnimSpriteSheet_023, 0x0380, 0x2727},
+    {gBattleAnimSpriteSheet_024, 0x0300, 0x2728},
+    {gBattleAnimSpriteSheet_025, 0x0a00, 0x2729},
+    {gBattleAnimSpriteSheet_026, 0x0a00, 0x272a},
+    {gBattleAnimSpriteSheet_027, 0x0a00, 0x272b},
+    {gBattleAnimSpriteSheet_028, 0x0a00, 0x272c},
+    {gBattleAnimSpriteSheet_029, 0x0a00, 0x272d},
+    {gBattleAnimSpriteSheet_030, 0x0a00, 0x272e},
+    {gBattleAnimSpriteSheet_031, 0x0e00, 0x272f},
+    {gBattleAnimSpriteSheet_032, 0x0380, 0x2730},
+    {gBattleAnimSpriteSheet_033, 0x1000, 0x2731},
+    {gBattleAnimSpriteSheet_034, 0x0800, 0x2732},
+    {gBattleAnimSpriteSheet_035, 0x0a00, 0x2733},
+    {gBattleAnimSpriteSheet_036, 0x0800, 0x2734},
+    {gBattleAnimSpriteSheet_037, 0x0a00, 0x2735},
+    {gBattleAnimSpriteSheet_038, 0x0a00, 0x2736},
+    {gBattleAnimSpriteSheet_039, 0x0a00, 0x2737},
+    {gBattleAnimSpriteSheet_040, 0x0a00, 0x2738},
+    {gBattleAnimSpriteSheet_041, 0x0a00, 0x2739},
+    {gBattleAnimSpriteSheet_042, 0x0a00, 0x273a},
+    {gBattleAnimSpriteSheet_043, 0x0a00, 0x273b},
+    {gBattleAnimSpriteSheet_044, 0x0a00, 0x273c},
+    {gBattleAnimSpriteSheet_045, 0x0a00, 0x273d},
+    {gBattleAnimSpriteSheet_046, 0x1000, 0x273e},
+    {gBattleAnimSpriteSheet_046, 0x1000, 0x273f},
+    {gBattleAnimSpriteSheet_048, 0x1000, 0x2740},
+    {gBattleAnimSpriteSheet_048, 0x1000, 0x2741},
+    {gBattleAnimSpriteSheet_050, 0x0200, 0x2742},
+    {gBattleAnimSpriteSheet_051, 0x0200, 0x2743},
+    {gBattleAnimSpriteSheet_052, 0x0200, 0x2744},
+    {gBattleAnimSpriteSheet_053, 0x0800, 0x2745},
+    {gBattleAnimSpriteSheet_054, 0x0080, 0x2746},
+    {gBattleAnimSpriteSheet_055, 0x0200, 0x2747},
+    {gBattleAnimSpriteSheet_056, 0x1000, 0x2748},
+    {gBattleAnimSpriteSheet_057, 0x0180, 0x2749},
+    {gBattleAnimSpriteSheet_058, 0x0c00, 0x274a},
+    {gBattleAnimSpriteSheet_059, 0x0100, 0x274b},
+    {gBattleAnimSpriteSheet_060, 0x0040, 0x274c},
+    {gBattleAnimSpriteSheet_061, 0x0180, 0x274d},
+    {gBattleAnimSpriteSheet_062, 0x0800, 0x274e},
+    {gBattleAnimSpriteSheet_063, 0x0480, 0x274f},
+    {gBattleAnimSpriteSheet_064, 0x0200, 0x2750},
+    {gBattleAnimSpriteSheet_065, 0x0200, 0x2751},
+    {gBattleAnimSpriteSheet_066, 0x0100, 0x2752},
+    {gBattleAnimSpriteSheet_065, 0x0200, 0x2753},
+    {gBattleAnimSpriteSheet_065, 0x0200, 0x2754},
+    {gBattleAnimSpriteSheet_065, 0x0200, 0x2755},
+    {gBattleAnimSpriteSheet_070, 0x0200, 0x2756},
+    {gBattleAnimSpriteSheet_071, 0x0a00, 0x2757},
+    {gBattleAnimSpriteSheet_072, 0x0300, 0x2758},
+    {gBattleAnimSpriteSheet_073, 0x0180, 0x2759},
+    {gBattleAnimSpriteSheet_074, 0x00a0, 0x275a},
+    {gBattleAnimSpriteSheet_075, 0x0700, 0x275b},
+    {gBattleAnimSpriteSheet_076, 0x0400, 0x275c},
+    {gBattleAnimSpriteSheet_077, 0x0200, 0x275d},
+    {gBattleAnimSpriteSheet_078, 0x0300, 0x275e},
+    {gBattleAnimSpriteSheet_079, 0x0c00, 0x275f},
+    {gBattleAnimSpriteSheet_080, 0x0a00, 0x2760},
+    {gBattleAnimSpriteSheet_081, 0x0080, 0x2761},
+    {gBattleAnimSpriteSheet_082, 0x0040, 0x2762},
+    {gBattleAnimSpriteSheet_083, 0x0e00, 0x2763},
+    {gBattleAnimSpriteSheet_084, 0x0e00, 0x2764},
+    {gBattleAnimSpriteSheet_085, 0x0280, 0x2765},
+    {gBattleAnimSpriteSheet_086, 0x0200, 0x2766},
+    {gBattleAnimSpriteSheet_087, 0x0080, 0x2767},
+    {gBattleAnimSpriteSheet_088, 0x00c0, 0x2768},
+    {gBattleAnimSpriteSheet_089, 0x0a00, 0x2769},
+    {gBattleAnimSpriteSheet_090, 0x0200, 0x276a},
+    {gBattleAnimSpriteSheet_091, 0x0180, 0x276b},
+    {gBattleAnimSpriteSheet_092, 0x0080, 0x276c},
+    {gBattleAnimSpriteSheet_093, 0x1000, 0x276d},
+    {gBattleAnimSpriteSheet_094, 0x0a00, 0x276e},
+    {gBattleAnimSpriteSheet_095, 0x0180, 0x276f},
+    {gBattleAnimSpriteSheet_096, 0x0380, 0x2770},
+    {gBattleAnimSpriteSheet_097, 0x0c00, 0x2771},
+    {gBattleAnimSpriteSheet_098, 0x0200, 0x2772},
+    {gBattleAnimSpriteSheet_099, 0x0200, 0x2773},
+    {gBattleAnimSpriteSheet_100, 0x0200, 0x2774},
+    {gBattleAnimSpriteSheet_101, 0x0200, 0x2775},
+    {gBattleAnimSpriteSheet_102, 0x0400, 0x2776},
+    {gBattleAnimSpriteSheet_103, 0x0080, 0x2777},
+    {gBattleAnimSpriteSheet_104, 0x0400, 0x2778},
+    {gBattleAnimSpriteSheet_105, 0x0c00, 0x2779},
+    {gBattleAnimSpriteSheet_106, 0x0200, 0x277a},
+    {gBattleAnimSpriteSheet_107, 0x1000, 0x277b},
+    {gBattleAnimSpriteSheet_108, 0x0a00, 0x277c},
+    {gBattleAnimSpriteSheet_109, 0x0020, 0x277d},
+    {gBattleAnimSpriteSheet_110, 0x0e00, 0x277e},
+    {gBattleAnimSpriteSheet_111, 0x0080, 0x277f},
+    {gBattleAnimSpriteSheet_112, 0x0a00, 0x2780},
+    {gBattleAnimSpriteSheet_113, 0x0400, 0x2781},
+    {gBattleAnimSpriteSheet_114, 0x0200, 0x2782},
+    {gBattleAnimSpriteSheet_115, 0x0700, 0x2783},
+    {gBattleAnimSpriteSheet_116, 0x0800, 0x2784},
+    {gBattleAnimSpriteSheet_117, 0x0a00, 0x2785},
+    {gBattleAnimSpriteSheet_118, 0x0600, 0x2786},
+    {gBattleAnimSpriteSheet_119, 0x0800, 0x2787},
+    {gBattleAnimSpriteSheet_120, 0x0200, 0x2788},
+    {gBattleAnimSpriteSheet_121, 0x0040, 0x2789},
+    {gBattleAnimSpriteSheet_122, 0x0180, 0x278a},
+    {gBattleAnimSpriteSheet_123, 0x0600, 0x278b},
+    {gBattleAnimSpriteSheet_124, 0x0600, 0x278c},
+    {gBattleAnimSpriteSheet_125, 0x0200, 0x278d},
+    {gBattleAnimSpriteSheet_126, 0x0080, 0x278e},
+    {gBattleAnimSpriteSheet_127, 0x0200, 0x278f},
+    {gBattleAnimSpriteSheet_128, 0x0800, 0x2790},
+    {gBattleAnimSpriteSheet_129, 0x0080, 0x2791},
+    {gBattleAnimSpriteSheet_130, 0x0a00, 0x2792},
+    {gBattleAnimSpriteSheet_131, 0x0280, 0x2793},
+    {gBattleAnimSpriteSheet_132, 0x0280, 0x2794},
+    {gBattleAnimSpriteSheet_133, 0x0100, 0x2795},
+    {gBattleAnimSpriteSheet_134, 0x0200, 0x2796},
+    {gBattleAnimSpriteSheet_135, 0x0200, 0x2797},
+    {gBattleAnimSpriteSheet_136, 0x0020, 0x2798},
+    {gBattleAnimSpriteSheet_137, 0x0a00, 0x2799},
+    {gBattleAnimSpriteSheet_138, 0x0800, 0x279a},
+    {gBattleAnimSpriteSheet_139, 0x0800, 0x279b},
+    {gBattleAnimSpriteSheet_140, 0x00c0, 0x279c},
+    {gBattleAnimSpriteSheet_141, 0x01c0, 0x279d},
+    {gBattleAnimSpriteSheet_142, 0x0100, 0x279e},
+    {gBattleAnimSpriteSheet_143, 0x0800, 0x279f},
+    {gBattleAnimSpriteSheet_144, 0x0200, 0x27a0},
+    {gBattleAnimSpriteSheet_145, 0x0800, 0x27a1},
+    {gBattleAnimSpriteSheet_146, 0x0180, 0x27a2},
+    {gBattleAnimSpriteSheet_147, 0x0180, 0x27a3},
+    {gBattleAnimSpriteSheet_148, 0x0200, 0x27a4},
+    {gBattleAnimSpriteSheet_149, 0x0200, 0x27a5},
+    {gBattleAnimSpriteSheet_150, 0x0180, 0x27a6},
+    {gBattleAnimSpriteSheet_151, 0x0400, 0x27a7},
+    {gBattleAnimSpriteSheet_152, 0x0080, 0x27a8},
+    {gBattleAnimSpriteSheet_153, 0x0100, 0x27a9},
+    {gBattleAnimSpriteSheet_154, 0x0100, 0x27aa},
+    {gBattleAnimSpriteSheet_155, 0x0140, 0x27ab},
+    {gBattleAnimSpriteSheet_156, 0x0800, 0x27ac},
+    {gBattleAnimSpriteSheet_157, 0x0200, 0x27ad},
+    {gBattleAnimSpriteSheet_158, 0x0100, 0x27ae},
+    {gBattleAnimSpriteSheet_159, 0x00a0, 0x27af},
+    {gBattleAnimSpriteSheet_160, 0x0100, 0x27b0},
+    {gBattleAnimSpriteSheet_161, 0x0080, 0x27b1},
+    {gBattleAnimSpriteSheet_162, 0x0300, 0x27b2},
+    {gBattleAnimSpriteSheet_163, 0x0100, 0x27b3},
+    {gBattleAnimSpriteSheet_163, 0x0100, 0x27b4},
+    {gBattleAnimSpriteSheet_163, 0x0100, 0x27b5},
+    {gBattleAnimSpriteSheet_166, 0x0800, 0x27b6},
+    {gBattleAnimSpriteSheet_166, 0x0800, 0x27b7},
+    {gBattleAnimSpriteSheet_166, 0x0800, 0x27b8},
+    {gBattleAnimSpriteSheet_166, 0x0800, 0x27b9},
+    {gBattleAnimSpriteSheet_166, 0x0800, 0x27ba},
+    {gBattleAnimSpriteSheet_171, 0x0080, 0x27bb},
+    {gBattleAnimSpriteSheet_144, 0x0200, 0x27bc},
+    {gBattleAnimSpriteSheet_173, 0x0200, 0x27bd},
+    {gBattleAnimSpriteSheet_174, 0x0200, 0x27be},
+    {gBattleAnimSpriteSheet_175, 0x0080, 0x27bf},
+    {gBattleAnimSpriteSheet_176, 0x0200, 0x27c0},
+    {gBattleAnimSpriteSheet_177, 0x0500, 0x27c1},
+    {gBattleAnimSpriteSheet_178, 0x0800, 0x27c2},
+    {gBattleAnimSpriteSheet_179, 0x0400, 0x27c3},
+    {gBattleAnimSpriteSheet_180, 0x0020, 0x27c4},
+    {gBattleAnimSpriteSheet_181, 0x0800, 0x27c5},
+    {gBattleAnimSpriteSheet_182, 0x0100, 0x27c6},
+    {gBattleAnimSpriteSheet_183, 0x0800, 0x27c7},
+    {gBattleAnimSpriteSheet_184, 0x0400, 0x27c8},
+    {gBattleAnimSpriteSheet_185, 0x0a00, 0x27c9},
+    {gBattleAnimSpriteSheet_186, 0x1000, 0x27ca},
+    {gBattleAnimSpriteSheet_187, 0x0800, 0x27cb},
+    {gBattleAnimSpriteSheet_188, 0x0400, 0x27cc},
+    {gBattleAnimSpriteSheet_189, 0x0200, 0x27cd},
+    {gBattleAnimSpriteSheet_190, 0x0800, 0x27ce},
+    {gBattleAnimSpriteSheet_191, 0x0800, 0x27cf},
+    {gBattleAnimSpriteSheet_192, 0x0800, 0x27d0},
+    {gBattleAnimSpriteSheet_193, 0x0200, 0x27d1},
+    {gBattleAnimSpriteSheet_194, 0x0800, 0x27d2},
+    {gBattleAnimSpriteSheet_195, 0x0200, 0x27d3},
+    {gBattleAnimSpriteSheet_196, 0x0800, 0x27d4},
+    {gBattleAnimSpriteSheet_197, 0x0200, 0x27d5},
+    {gBattleAnimSpriteSheet_198, 0x0800, 0x27d6},
+    {gBattleAnimSpriteSheet_199, 0x0400, 0x27d7},
+    {gBattleAnimSpriteSheet_200, 0x0200, 0x27d8},
+    {gBattleAnimSpriteSheet_201, 0x0a80, 0x27d9},
+    {gBattleAnimSpriteSheet_202, 0x0600, 0x27da},
+    {gBattleAnimSpriteSheet_203, 0x0800, 0x27db},
+    {gBattleAnimSpriteSheet_204, 0x0200, 0x27dc},
+    {gBattleAnimSpriteSheet_205, 0x0600, 0x27dd},
+    {gBattleAnimSpriteSheet_206, 0x0800, 0x27de},
+    {gBattleAnimSpriteSheet_207, 0x0180, 0x27df},
+    {gBattleAnimSpriteSheet_208, 0x0800, 0x27e0},
+    {gBattleAnimSpriteSheet_209, 0x0800, 0x27e1},
+    {gBattleAnimSpriteSheet_210, 0x0080, 0x27e2},
+    {gBattleAnimSpriteSheet_211, 0x0080, 0x27e3},
+    {gBattleAnimSpriteSheet_212, 0x0800, 0x27e4},
+    {gBattleAnimSpriteSheet_213, 0x0800, 0x27e5},
+    {gBattleAnimSpriteSheet_214, 0x0600, 0x27e6},
+    {gBattleAnimSpriteSheet_215, 0x0600, 0x27e7},
+    {gBattleAnimSpriteSheet_210, 0x0080, 0x27e8},
+    {gBattleAnimSpriteSheet_217, 0x0080, 0x27e9},
+    {gBattleAnimSpriteSheet_218, 0x0180, 0x27ea},
+    {gBattleAnimSpriteSheet_210, 0x0080, 0x27eb},
+    {gBattleAnimSpriteSheet_220, 0x0200, 0x27ec},
+    {gBattleAnimSpriteSheet_221, 0x0400, 0x27ed},
+    {gBattleAnimSpriteSheet_222, 0x0a00, 0x27ee},
+    {gBattleAnimSpriteSheet_223, 0x0800, 0x27ef},
+    {gBattleAnimSpriteSheet_224, 0x0200, 0x27f0},
+    {gBattleAnimSpriteSheet_225, 0x0400, 0x27f1},
+    {gBattleAnimSpriteSheet_226, 0x0080, 0x27f2},
+    {gBattleAnimSpriteSheet_227, 0x0800, 0x27f3},
+    {gBattleAnimSpriteSheet_228, 0x0200, 0x27f4},
+    {gBattleAnimSpriteSheet_229, 0x0300, 0x27f5},
+    {gBattleAnimSpriteSheet_230, 0x0800, 0x27f6},
+    {gBattleAnimSpriteSheet_231, 0x0380, 0x27f7},
+    {gBattleAnimSpriteSheet_232, 0x0800, 0x27f8},
+    {gBattleAnimSpriteSheet_233, 0x00c0, 0x27f9},
+    {gBattleAnimSpriteSheet_234, 0x0800, 0x27fa},
+    {gBattleAnimSpriteSheet_235, 0x0060, 0x27fb},
+    {gBattleAnimSpriteSheet_235, 0x0060, 0x27fc},
+    {gBattleAnimSpriteSheet_235, 0x0060, 0x27fd},
+    {gBattleAnimSpriteSheet_238, 0x0080, 0x27fe},
+    {gBattleAnimSpriteSheet_239, 0x0180, 0x27ff},
+    {gBattleAnimSpriteSheet_240, 0x0180, 0x2800},
+    {gBattleAnimSpriteSheet_241, 0x0200, 0x2801},
+    {gBattleAnimSpriteSheet_242, 0x0200, 0x2802},
+    {gBattleAnimSpriteSheet_243, 0x0020, 0x2803},
+    {gBattleAnimSpriteSheet_244, 0x0400, 0x2804},
+    {gBattleAnimSpriteSheet_245, 0x0600, 0x2805},
+    {gBattleAnimSpriteSheet_246, 0x1000, 0x2806},
+    {gBattleAnimSpriteSheet_247, 0x0400, 0x2807},
+    {gBattleAnimSpriteSheet_248, 0x0020, 0x2808},
+    {gBattleAnimSpriteSheet_249, 0x0080, 0x2809},
+    {gBattleAnimSpriteSheet_250, 0x0800, 0x280a},
+    {gBattleAnimSpriteSheet_251, 0x0080, 0x280b},
+    {gBattleAnimSpriteSheet_252, 0x0200, 0x280c},
+    {gBattleAnimSpriteSheet_253, 0x0400, 0x280d},
+    {gBattleAnimSpriteSheet_254, 0x0200, 0x280e},
+    {gBattleAnimSpriteSheet_255, 0x0200, 0x280f},
+    {gBattleAnimSpriteSheet_256, 0x0800, 0x2810},
+    {gBattleAnimSpriteSheet_257, 0x0280, 0x2811},
+    {gBattleAnimSpriteSheet_258, 0x0200, 0x2812},
+    {gBattleAnimSpriteSheet_149, 0x0200, 0x2813},
+    {gBattleAnimSpriteSheet_260, 0x0400, 0x2814},
+    {gBattleAnimSpriteSheet_261, 0x0200, 0x2815},
+    {gBattleAnimSpriteSheet_262, 0x0200, 0x2816},
+    {gBattleAnimSpriteSheet_263, 0x0080, 0x2817},
+    {gBattleAnimSpriteSheet_264, 0x0020, 0x2818},
+    {gBattleAnimSpriteSheet_264, 0x0020, 0x2819},
+    {gBattleAnimSpriteSheet_266, 0x0080, 0x281a},
+    {gBattleAnimSpriteSheet_212, 0x0800, 0x281b},
+    {gBattleAnimSpriteSheet_264, 0x0020, 0x281c},
+    {gBattleAnimSpriteSheet_269, 0x0080, 0x281d},
+    {gBattleAnimSpriteSheet_270, 0x0400, 0x281e},
+    {gBattleAnimSpriteSheet_271, 0x0080, 0x281f},
+    {gBattleAnimSpriteSheet_272, 0x0800, 0x2820},
+    {gBattleAnimSpriteSheet_273, 0x0020, 0x2821},
+    {gBattleAnimSpriteSheet_274, 0x0800, 0x2822},
+    {gBattleAnimSpriteSheet_275, 0x0800, 0x2823},
+    {gBattleAnimSpriteSheet_276, 0x0800, 0x2824},
+    {gBattleAnimSpriteSheet_277, 0x1000, 0x2825},
+    {gBattleAnimSpriteSheet_278, 0x0800, 0x2826},
+    {gBattleAnimSpriteSheet_279, 0x00a0, 0x2827},
+    {gBattleAnimSpriteSheet_280, 0x0800, 0x2828},
+    {gBattleAnimSpriteSheet_281, 0x0200, 0x2829},
+    {gBattleAnimSpriteSheet_282, 0x0600, 0x282a},
+    {gBattleAnimSpriteSheet_283, 0x0200, 0x282b},
+    {gBattleAnimSpriteSheet_284, 0x0800, 0x282c},
+    {gBattleAnimSpriteSheet_285, 0x0200, 0x282d},
+    {gBattleAnimSpriteSheet_183, 0x0800, 0x282e},
+    {gBattleAnimSpriteSheet_056, 0x1000, 0x282f},
+    {gBattleAnimSpriteSheet_163, 0x0100, 0x2830},
+};
+
+
+const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
+{
+    {gBattleAnimSpritePalette_000, 0x2710},
+    {gBattleAnimSpritePalette_001, 0x2711},
+    {gBattleAnimSpritePalette_002, 0x2712},
+    {gBattleAnimSpritePalette_003, 0x2713},
+    {gBattleAnimSpritePalette_004, 0x2714},
+    {gBattleAnimSpritePalette_005, 0x2715},
+    {gBattleAnimSpritePalette_006, 0x2716},
+    {gBattleAnimSpritePalette_007, 0x2717},
+    {gBattleAnimSpritePalette_008, 0x2718},
+    {gBattleAnimSpritePalette_009, 0x2719},
+    {gBattleAnimSpritePalette_010, 0x271a},
+    {gBattleAnimSpritePalette_011, 0x271b},
+    {gBattleAnimSpritePalette_012, 0x271c},
+    {gBattleAnimSpritePalette_013, 0x271d},
+    {gBattleAnimSpritePalette_014, 0x271e},
+    {gBattleAnimSpritePalette_015, 0x271f},
+    {gBattleAnimSpritePalette_016, 0x2720},
+    {gBattleAnimSpritePalette_016, 0x2721},
+    {gBattleAnimSpritePalette_018, 0x2722},
+    {gBattleAnimSpritePalette_019, 0x2723},
+    {gBattleAnimSpritePalette_020, 0x2724},
+    {gBattleAnimSpritePalette_021, 0x2725},
+    {gBattleAnimSpritePalette_022, 0x2726},
+    {gBattleAnimSpritePalette_023, 0x2727},
+    {gBattleAnimSpritePalette_024, 0x2728},
+    {gBattleAnimSpritePalette_025, 0x2729},
+    {gBattleAnimSpritePalette_026, 0x272a},
+    {gBattleAnimSpritePalette_027, 0x272b},
+    {gBattleAnimSpritePalette_028, 0x272c},
+    {gBattleAnimSpritePalette_029, 0x272d},
+    {gBattleAnimSpritePalette_030, 0x272e},
+    {gBattleAnimSpritePalette_031, 0x272f},
+    {gBattleAnimSpritePalette_032, 0x2730},
+    {gBattleAnimSpritePalette_033, 0x2731},
+    {gBattleAnimSpritePalette_033, 0x2732},
+    {gBattleAnimSpritePalette_033, 0x2733},
+    {gBattleAnimSpritePalette_036, 0x2734},
+    {gBattleAnimSpritePalette_036, 0x2735},
+    {gBattleAnimSpritePalette_038, 0x2736},
+    {gBattleAnimSpritePalette_039, 0x2737},
+    {gBattleAnimSpritePalette_038, 0x2738},
+    {gBattleAnimSpritePalette_038, 0x2739},
+    {gBattleAnimSpritePalette_042, 0x273a},
+    {gBattleAnimSpritePalette_043, 0x273b},
+    {gBattleAnimSpritePalette_044, 0x273c},
+    {gBattleAnimSpritePalette_045, 0x273d},
+    {gBattleAnimSpritePalette_046, 0x273e},
+    {gBattleAnimSpritePalette_047, 0x273e},
+    {gBattleAnimSpritePalette_048, 0x2740},
+    {gBattleAnimSpritePalette_049, 0x2741},
+    {gBattleAnimSpritePalette_050, 0x2742},
+    {gBattleAnimSpritePalette_050, 0x2743},
+    {gBattleAnimSpritePalette_050, 0x2744},
+    {gBattleAnimSpritePalette_026, 0x2745},
+    {gBattleAnimSpritePalette_054, 0x2746},
+    {gBattleAnimSpritePalette_050, 0x2747},
+    {gBattleAnimSpritePalette_056, 0x2748},
+    {gBattleAnimSpritePalette_057, 0x2749},
+    {gBattleAnimSpritePalette_058, 0x274a},
+    {gBattleAnimSpritePalette_059, 0x274b},
+    {gBattleAnimSpritePalette_060, 0x274c},
+    {gBattleAnimSpritePalette_061, 0x274d},
+    {gBattleAnimSpritePalette_062, 0x274e},
+    {gBattleAnimSpritePalette_063, 0x274f},
+    {gBattleAnimSpritePalette_064, 0x2750},
+    {gBattleAnimSpritePalette_065, 0x2751},
+    {gBattleAnimSpritePalette_066, 0x2752},
+    {gBattleAnimSpritePalette_067, 0x2753},
+    {gBattleAnimSpritePalette_068, 0x2754},
+    {gBattleAnimSpritePalette_065, 0x2755},
+    {gBattleAnimSpritePalette_070, 0x2756},
+    {gBattleAnimSpritePalette_070, 0x2757},
+    {gBattleAnimSpritePalette_072, 0x2758},
+    {gBattleAnimSpritePalette_073, 0x2759},
+    {gBattleAnimSpritePalette_074, 0x275a},
+    {gBattleAnimSpritePalette_075, 0x275b},
+    {gBattleAnimSpritePalette_076, 0x275c},
+    {gBattleAnimSpritePalette_076, 0x275d},
+    {gBattleAnimSpritePalette_078, 0x275e},
+    {gBattleAnimSpritePalette_078, 0x275f},
+    {gBattleAnimSpritePalette_080, 0x2760},
+    {gBattleAnimSpritePalette_081, 0x2761},
+    {gBattleAnimSpritePalette_082, 0x2762},
+    {gBattleAnimSpritePalette_083, 0x2763},
+    {gBattleAnimSpritePalette_084, 0x2764},
+    {gBattleAnimSpritePalette_085, 0x2765},
+    {gBattleAnimSpritePalette_086, 0x2766},
+    {gBattleAnimSpritePalette_087, 0x2767},
+    {gBattleAnimSpritePalette_088, 0x2768},
+    {gBattleAnimSpritePalette_089, 0x2769},
+    {gBattleAnimSpritePalette_090, 0x276a},
+    {gBattleAnimSpritePalette_091, 0x276b},
+    {gBattleAnimSpritePalette_092, 0x276c},
+    {gBattleAnimSpritePalette_093, 0x276d},
+    {gBattleAnimSpritePalette_094, 0x276e},
+    {gBattleAnimSpritePalette_095, 0x276f},
+    {gBattleAnimSpritePalette_096, 0x2770},
+    {gBattleAnimSpritePalette_097, 0x2771},
+    {gBattleAnimSpritePalette_094, 0x2772},
+    {gBattleAnimSpritePalette_099, 0x2773},
+    {gBattleAnimSpritePalette_100, 0x2774},
+    {gBattleAnimSpritePalette_101, 0x2775},
+    {gBattleAnimSpritePalette_101, 0x2776},
+    {gBattleAnimSpritePalette_103, 0x2777},
+    {gBattleAnimSpritePalette_104, 0x2778},
+    {gBattleAnimSpritePalette_105, 0x2779},
+    {gBattleAnimSpritePalette_105, 0x277a},
+    {gBattleAnimSpritePalette_107, 0x277b},
+    {gBattleAnimSpritePalette_107, 0x277c},
+    {gBattleAnimSpritePalette_109, 0x277d},
+    {gBattleAnimSpritePalette_109, 0x277e},
+    {gBattleAnimSpritePalette_111, 0x277f},
+    {gBattleAnimSpritePalette_112, 0x2780},
+    {gBattleAnimSpritePalette_113, 0x2781},
+    {gBattleAnimSpritePalette_114, 0x2782},
+    {gBattleAnimSpritePalette_115, 0x2783},
+    {gBattleAnimSpritePalette_116, 0x2784},
+    {gBattleAnimSpritePalette_117, 0x2785},
+    {gBattleAnimSpritePalette_118, 0x2786},
+    {gBattleAnimSpritePalette_119, 0x2787},
+    {gBattleAnimSpritePalette_120, 0x2788},
+    {gBattleAnimSpritePalette_121, 0x2789},
+    {gBattleAnimSpritePalette_122, 0x278a},
+    {gBattleAnimSpritePalette_122, 0x278b},
+    {gBattleAnimSpritePalette_124, 0x278c},
+    {gBattleAnimSpritePalette_125, 0x278d},
+    {gBattleAnimSpritePalette_126, 0x278e},
+    {gBattleAnimSpritePalette_127, 0x278f},
+    {gBattleAnimSpritePalette_128, 0x2790},
+    {gBattleAnimSpritePalette_128, 0x2791},
+    {gBattleAnimSpritePalette_130, 0x2792},
+    {gBattleAnimSpritePalette_130, 0x2793},
+    {gBattleAnimSpritePalette_132, 0x2794},
+    {gBattleAnimSpritePalette_133, 0x2795},
+    {gBattleAnimSpritePalette_133, 0x2796},
+    {gBattleAnimSpritePalette_135, 0x2797},
+    {gBattleAnimSpritePalette_136, 0x2798},
+    {gBattleAnimSpritePalette_135, 0x2799},
+    {gBattleAnimSpritePalette_135, 0x279a},
+    {gBattleAnimSpritePalette_139, 0x279b},
+    {gBattleAnimSpritePalette_140, 0x279c},
+    {gBattleAnimSpritePalette_141, 0x279d},
+    {gBattleAnimSpritePalette_141, 0x279e},
+    {gBattleAnimSpritePalette_143, 0x279f},
+    {gBattleAnimSpritePalette_144, 0x27a0},
+    {gBattleAnimSpritePalette_139, 0x27a1},
+    {gBattleAnimSpritePalette_115, 0x27a2},
+    {gBattleAnimSpritePalette_147, 0x27a3},
+    {gBattleAnimSpritePalette_148, 0x27a4},
+    {gBattleAnimSpritePalette_148, 0x27a5},
+    {gBattleAnimSpritePalette_150, 0x27a6},
+    {gBattleAnimSpritePalette_150, 0x27a7},
+    {gBattleAnimSpritePalette_152, 0x27a8},
+    {gBattleAnimSpritePalette_153, 0x27a9},
+    {gBattleAnimSpritePalette_154, 0x27aa},
+    {gBattleAnimSpritePalette_155, 0x27ab},
+    {gBattleAnimSpritePalette_156, 0x27ac},
+    {gBattleAnimSpritePalette_157, 0x27ad},
+    {gBattleAnimSpritePalette_158, 0x27ae},
+    {gBattleAnimSpritePalette_159, 0x27af},
+    {gBattleAnimSpritePalette_160, 0x27b0},
+    {gBattleAnimSpritePalette_161, 0x27b1},
+    {gBattleAnimSpritePalette_162, 0x27b2},
+    {gBattleAnimSpritePalette_163, 0x27b3},
+    {gBattleAnimSpritePalette_164, 0x27b4},
+    {gBattleAnimSpritePalette_165, 0x27b5},
+    {gBattleAnimSpritePalette_166, 0x27b6},
+    {gBattleAnimSpritePalette_167, 0x27b7},
+    {gBattleAnimSpritePalette_168, 0x27b8},
+    {gBattleAnimSpritePalette_169, 0x27b9},
+    {gBattleAnimSpritePalette_170, 0x27ba},
+    {gBattleAnimSpritePalette_171, 0x27bb},
+    {gBattleAnimSpritePalette_172, 0x27bc},
+    {gBattleAnimSpritePalette_001, 0x27bd},
+    {gBattleAnimSpritePalette_174, 0x27be},
+    {gBattleAnimSpritePalette_175, 0x27bf},
+    {gBattleAnimSpritePalette_176, 0x27c0},
+    {gBattleAnimSpritePalette_177, 0x27c1},
+    {gBattleAnimSpritePalette_178, 0x27c2},
+    {gBattleAnimSpritePalette_179, 0x27c3},
+    {gBattleAnimSpritePalette_179, 0x27c4},
+    {gBattleAnimSpritePalette_179, 0x27c5},
+    {gBattleAnimSpritePalette_182, 0x27c6},
+    {gBattleAnimSpritePalette_183, 0x27c7},
+    {gBattleAnimSpritePalette_184, 0x27c8},
+    {gBattleAnimSpritePalette_185, 0x27c9},
+    {gBattleAnimSpritePalette_186, 0x27ca},
+    {gBattleAnimSpritePalette_187, 0x27cb},
+    {gBattleAnimSpritePalette_188, 0x27cc},
+    {gBattleAnimSpritePalette_189, 0x27cd},
+    {gBattleAnimSpritePalette_190, 0x27ce},
+    {gBattleAnimSpritePalette_191, 0x27cf},
+    {gBattleAnimSpritePalette_192, 0x27d0},
+    {gBattleAnimSpritePalette_193, 0x27d1},
+    {gBattleAnimSpritePalette_194, 0x27d2},
+    {gBattleAnimSpritePalette_195, 0x27d3},
+    {gBattleAnimSpritePalette_196, 0x27d4},
+    {gBattleAnimSpritePalette_197, 0x27d5},
+    {gBattleAnimSpritePalette_198, 0x27d6},
+    {gBattleAnimSpritePalette_199, 0x27d7},
+    {gBattleAnimSpritePalette_200, 0x27d8},
+    {gBattleAnimSpritePalette_201, 0x27d9},
+    {gBattleAnimSpritePalette_202, 0x27da},
+    {gBattleAnimSpritePalette_203, 0x27db},
+    {gBattleAnimSpritePalette_204, 0x27dc},
+    {gBattleAnimSpritePalette_205, 0x27dd},
+    {gBattleAnimSpritePalette_206, 0x27de},
+    {gBattleAnimSpritePalette_207, 0x27df},
+    {gBattleAnimSpritePalette_167, 0x27e0},
+    {gBattleAnimSpritePalette_209, 0x27e1},
+    {gBattleAnimSpritePalette_210, 0x27e2},
+    {gBattleAnimSpritePalette_211, 0x27e3},
+    {gBattleAnimSpritePalette_211, 0x27e4},
+    {gBattleAnimSpritePalette_211, 0x27e5},
+    {gBattleAnimSpritePalette_064, 0x27e6},
+    {gBattleAnimSpritePalette_215, 0x27e7},
+    {gBattleAnimSpritePalette_216, 0x27e8},
+    {gBattleAnimSpritePalette_217, 0x27e9},
+    {gBattleAnimSpritePalette_218, 0x27ea},
+    {gBattleAnimSpritePalette_219, 0x27eb},
+    {gBattleAnimSpritePalette_220, 0x27ec},
+    {gBattleAnimSpritePalette_221, 0x27ed},
+    {gBattleAnimSpritePalette_222, 0x27ee},
+    {gBattleAnimSpritePalette_223, 0x27ef},
+    {gBattleAnimSpritePalette_224, 0x27f0},
+    {gBattleAnimSpritePalette_225, 0x27f1},
+    {gBattleAnimSpritePalette_226, 0x27f2},
+    {gBattleAnimSpritePalette_226, 0x27f3},
+    {gBattleAnimSpritePalette_228, 0x27f4},
+    {gBattleAnimSpritePalette_229, 0x27f5},
+    {gBattleAnimSpritePalette_230, 0x27f6},
+    {gBattleAnimSpritePalette_231, 0x27f7},
+    {gBattleAnimSpritePalette_231, 0x27f8},
+    {gBattleAnimSpritePalette_233, 0x27f9},
+    {gBattleAnimSpritePalette_234, 0x27fa},
+    {gBattleAnimSpritePalette_235, 0x27fb},
+    {gBattleAnimSpritePalette_236, 0x27fc},
+    {gBattleAnimSpritePalette_237, 0x27fd},
+    {gBattleAnimSpritePalette_238, 0x27fe},
+    {gBattleAnimSpritePalette_239, 0x27ff},
+    {gBattleAnimSpritePalette_240, 0x2800},
+    {gBattleAnimSpritePalette_241, 0x2801},
+    {gBattleAnimSpritePalette_242, 0x2802},
+    {gBattleAnimSpritePalette_243, 0x2803},
+    {gBattleAnimSpritePalette_244, 0x2804},
+    {gBattleAnimSpritePalette_245, 0x2805},
+    {gBattleAnimSpritePalette_245, 0x2806},
+    {gBattleAnimSpritePalette_064, 0x2807},
+    {gBattleAnimSpritePalette_248, 0x2808},
+    {gBattleAnimSpritePalette_249, 0x2809},
+    {gBattleAnimSpritePalette_249, 0x280a},
+    {gBattleAnimSpritePalette_251, 0x280b},
+    {gBattleAnimSpritePalette_252, 0x280c},
+    {gBattleAnimSpritePalette_253, 0x280d},
+    {gBattleAnimSpritePalette_254, 0x280e},
+    {gBattleAnimSpritePalette_255, 0x280f},
+    {gBattleAnimSpritePalette_256, 0x2810},
+    {gBattleAnimSpritePalette_257, 0x2811},
+    {gBattleAnimSpritePalette_258, 0x2812},
+    {gBattleAnimSpritePalette_259, 0x2813},
+    {gBattleAnimSpritePalette_260, 0x2814},
+    {gBattleAnimSpritePalette_261, 0x2815},
+    {gBattleAnimSpritePalette_262, 0x2816},
+    {gBattleAnimSpritePalette_263, 0x2817},
+    {gBattleAnimSpritePalette_264, 0x2818},
+    {gBattleAnimSpritePalette_265, 0x2819},
+    {gBattleAnimSpritePalette_266, 0x281a},
+    {gBattleAnimSpritePalette_267, 0x281b},
+    {gBattleAnimSpritePalette_268, 0x281c},
+    {gBattleAnimSpritePalette_269, 0x281d},
+    {gBattleAnimSpritePalette_270, 0x281e},
+    {gBattleAnimSpritePalette_271, 0x281f},
+    {gBattleAnimSpritePalette_272, 0x2820},
+    {gBattleAnimSpritePalette_272, 0x2821},
+    {gBattleAnimSpritePalette_274, 0x2822},
+    {gBattleAnimSpritePalette_274, 0x2823},
+    {gBattleAnimSpritePalette_274, 0x2824},
+    {gBattleAnimSpritePalette_277, 0x2825},
+    {gBattleAnimSpritePalette_278, 0x2826},
+    {gBattleAnimSpritePalette_279, 0x2827},
+    {gBattleAnimSpritePalette_280, 0x2828},
+    {gBattleAnimSpritePalette_281, 0x2829},
+    {gBattleAnimSpritePalette_282, 0x282a},
+    {gBattleAnimSpritePalette_283, 0x282b},
+    {gBattleAnimSpritePalette_284, 0x282c},
+    {gBattleAnimSpritePalette_285, 0x282d},
+    {gBattleAnimSpritePalette_286, 0x282e},
+    {gBattleAnimSpritePalette_287, 0x282f},
+    {gBattleAnimSpritePalette_288, 0x2830},
+};
+
+const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
+{
+    &gBattleAnimBackgroundImage_00, &gBattleAnimBackgroundPalette_00, &gBattleAnimBackgroundTilemap_00,
+    &gBattleAnimBackgroundImage_00, &gBattleAnimBackgroundPalette_00, &gBattleAnimBackgroundTilemap_00,
+    &gBattleAnimBackgroundImage_02, &gBattleAnimBackgroundPalette_02, &gBattleAnimBackgroundTilemap_02,
+    &gBattleAnimBackgroundImage_03, &gBattleAnimBackgroundPalette_03, &gBattleAnimBackgroundTilemap_03,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_04, &gBattleAnimBackgroundTilemap_04,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_04, &gBattleAnimBackgroundTilemap_05,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_04, &gBattleAnimBackgroundTilemap_06,
+    &gBattleAnimBackgroundImage_07, &gBattleAnimBackgroundPalette_07, &gBattleAnimBackgroundTilemap_07,
+    &gBattleAnimBackgroundImage_07, &gBattleAnimBackgroundPalette_07, &gBattleAnimBackgroundTilemap_08,
+    &gBattleAnimBackgroundImage_09, &gBattleAnimBackgroundPalette_09, &gBattleAnimBackgroundTilemap_09,
+    &gBattleAnimBackgroundImage_09, &gBattleAnimBackgroundPalette_09, &gBattleAnimBackgroundTilemap_10,
+    &gBattleAnimBackgroundImage_11, &gBattleAnimBackgroundPalette_11, &gBattleAnimBackgroundTilemap_11,
+    &gBattleAnimBackgroundImage_12, &gBattleAnimBackgroundPalette_12, &gBattleAnimBackgroundTilemap_12,
+    &gBattleAnimBackgroundImage_12, &gBattleAnimBackgroundPalette_12, &gBattleAnimBackgroundTilemap_13,
+    &gBattleAnimBackgroundImage_12, &gBattleAnimBackgroundPalette_12, &gBattleAnimBackgroundTilemap_14,
+    &gBattleAnimBackgroundImage_15, &gBattleAnimBackgroundPalette_15, &gBattleAnimBackgroundTilemap_15,
+    &gBattleAnimBackgroundImage_16, &gBattleAnimBackgroundPalette_16, &gBattleAnimBackgroundTilemap_16,
+    &gBattleAnimBackgroundImage_17, &gBattleAnimBackgroundPalette_17, &gBattleAnimBackgroundTilemap_17,
+    &gBattleAnimBackgroundImage_07, &gBattleAnimBackgroundPalette_18, &gBattleAnimBackgroundTilemap_07,
+    &gBattleAnimBackgroundImage_07, &gBattleAnimBackgroundPalette_18, &gBattleAnimBackgroundTilemap_08,
+    &gBattleAnimBackgroundImage_20, &gBattleAnimBackgroundPalette_20, &gBattleAnimBackgroundTilemap_20,
+    &gBattleAnimBackgroundImage_21, &gBattleAnimBackgroundPalette_21, &gBattleAnimBackgroundTilemap_21,
+    &gBattleAnimBackgroundImage_09, &gBattleAnimBackgroundPalette_22, &gBattleAnimBackgroundTilemap_09,
+    &gBattleAnimBackgroundImage_09, &gBattleAnimBackgroundPalette_22, &gBattleAnimBackgroundTilemap_10,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_24, &gBattleAnimBackgroundTilemap_04,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_24, &gBattleAnimBackgroundTilemap_05,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_24, &gBattleAnimBackgroundTilemap_06,
+};
+
 static void (* const sScriptCmdTable[])(void) =
 {
 	ScriptCmd_loadspritegfx,
