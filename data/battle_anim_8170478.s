@@ -153,5 +153,5 @@ gUnknown_085E5358:: @ 8535358
 	.4byte gUnknown_085E5350
 
 	.align 2
-	spr_template 0x274a, 0x274a, gUnknown_08524914, gUnknown_085E5358, NULL, gDummySpriteAffineAnimTable, sub_817330C
+	spr_template ANIM_TAG_ROCKS, ANIM_TAG_ROCKS, gUnknown_08524914, gUnknown_085E5358, NULL, gDummySpriteAffineAnimTable, sub_817330C
 

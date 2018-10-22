@@ -16,15 +16,15 @@ gUnknown_085CE01C:: @ 85CE01C
 
 	.align 2
 gUnknown_085CE020:: @ 85CE020
-	spr_template 0x2799, 0x2799, gUnknown_08524A34, gUnknown_085CE01C, NULL, gDummySpriteAffineAnimTable, sub_80A77C8
+	spr_template ANIM_TAG_SCRATCH, ANIM_TAG_SCRATCH, gUnknown_08524A34, gUnknown_085CE01C, NULL, gDummySpriteAffineAnimTable, sub_80A77C8
 
 	.align 2
 gUnknown_085CE038:: @ 85CE038
-	spr_template 0x2720, 0x2720, gUnknown_08524934, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815A0D4
+	spr_template ANIM_TAG_BLACK_SMOKE, ANIM_TAG_BLACK_SMOKE, gUnknown_08524934, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815A0D4
 
 	.align 2
 gUnknown_085CE050:: @ 85CE050
-	spr_template 0x2721, 0x2721, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A78AC
+	spr_template ANIM_TAG_BLACK_BALL, ANIM_TAG_BLACK_BALL, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A78AC
 
 	.align 2
 gUnknown_085CE068:: @ 85CE068
@@ -85,7 +85,7 @@ gUnknown_085CE14C:: @ 85CE14C
 
 	.align 2
 gUnknown_085CE150:: @ 85CE150
-	spr_template 0x272b, 0x272b, gUnknown_08524914, gUnknown_085CE14C, NULL, gDummySpriteAffineAnimTable, sub_815A7B0
+	spr_template ANIM_TAG_LEER, ANIM_TAG_LEER, gUnknown_08524914, gUnknown_085CE14C, NULL, gDummySpriteAffineAnimTable, sub_815A7B0
 
 	.align 2
 gUnknown_085CE168:: @ 85CE168
@@ -286,7 +286,7 @@ gUnknown_085CE4B0:: @ 85CE4B0
 
 	.align 2
 gUnknown_085CE4D0:: @ 85CE4D0
-	spr_template 0x2767, 0x2767, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815C400
+	spr_template ANIM_TAG_ANGER, ANIM_TAG_ANGER, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815C400
 
 	.align 2
 gUnknown_085CE4E8:: @ 85CE4E8
@@ -416,7 +416,7 @@ gUnknown_085CE7CC:: @ 85CE7CC
 
 	.align 2
 gUnknown_085CE7D4:: @ 85CE7D4
-	spr_template 0x2745, 0x2745, gUnknown_08524914, gUnknown_085CE7CC, NULL, gDummySpriteAffineAnimTable, sub_815E01C
+	spr_template ANIM_TAG_NOISE_LINE, ANIM_TAG_NOISE_LINE, gUnknown_08524914, gUnknown_085CE7CC, NULL, gDummySpriteAffineAnimTable, sub_815E01C
 
 	.align 2
 gUnknown_085CE7EC:: @ 85CE7EC

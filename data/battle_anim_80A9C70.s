@@ -14,8 +14,8 @@ gUnknown_0853EDF8:: @ 853EDF8
 
     .align 2
 gUnknown_0853EDFC:: @ 853EDFC
-	spr_template 0x2714, 0x2714, gUnknown_0852490C, gUnknown_0853EDF8, NULL, gDummySpriteAffineAnimTable, sub_80A8AEC
-	spr_template 0x2714, 0x2714, gUnknown_0852490C, gUnknown_0853EDF8, NULL, gDummySpriteAffineAnimTable, sub_80A8A6C
+	spr_template ANIM_TAG_UNUSED_ORB, ANIM_TAG_UNUSED_ORB, gUnknown_0852490C, gUnknown_0853EDF8, NULL, gDummySpriteAffineAnimTable, sub_80A8AEC
+	spr_template ANIM_TAG_UNUSED_ORB, ANIM_TAG_UNUSED_ORB, gUnknown_0852490C, gUnknown_0853EDF8, NULL, gDummySpriteAffineAnimTable, sub_80A8A6C
 
     .align 2
 gUnknown_0853EE2C:: @ 853EE2C
@@ -43,8 +43,8 @@ gUnknown_0853EE80:: @ 853EE80
 
     .align 2
 gUnknown_0853EE84:: @ 853EE84
-	spr_template 0x2757, 0x2757, gUnknown_08524914, gUnknown_0853EE80, NULL, gDummySpriteAffineAnimTable, sub_80A8B64
-	spr_template 0x2743, 0x2743, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A8AEC
+	spr_template ANIM_TAG_SPARKLE_4, ANIM_TAG_SPARKLE_4, gUnknown_08524914, gUnknown_0853EE80, NULL, gDummySpriteAffineAnimTable, sub_80A8B64
+	spr_template ANIM_TAG_UNUSED_MONSTER_FOOT, ANIM_TAG_UNUSED_MONSTER_FOOT, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A8AEC
 
     .align 2
 gUnknown_0853EEB4:: @ 853EEB4
@@ -66,7 +66,7 @@ gUnknown_0853EECC:: @ 853EECC
 
     .align 2
 gUnknown_0853EED8:: @ 853EED8
-	spr_template 0x2797, 0x2797, gUnknown_08524914, gUnknown_0853EECC, NULL, gDummySpriteAffineAnimTable, sub_80A8AEC
+	spr_template ANIM_TAG_IMPACT, ANIM_TAG_IMPACT, gUnknown_08524914, gUnknown_0853EECC, NULL, gDummySpriteAffineAnimTable, sub_80A8AEC
 
     .align 2
 gUnknown_0853EEF0:: @ 853EEF0
@@ -86,4 +86,4 @@ gUnknown_0853EF14:: @ 853EF14
 
     .align 2
 gUnknown_0853EF18:: @ 853EF18
-	spr_template 0x2714, 0x2714, gUnknown_085249CC, gUnknown_0853EEF8, NULL, gUnknown_0853EF14, sub_80A8A6C
+	spr_template ANIM_TAG_UNUSED_ORB, ANIM_TAG_UNUSED_ORB, gUnknown_085249CC, gUnknown_0853EEF8, NULL, gUnknown_0853EF14, sub_80A8A6C
