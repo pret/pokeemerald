@@ -56,8 +56,8 @@ static const struct SpriteTemplate gUnknown_0853EF48 =
 
 static const struct SpriteTemplate gUnknown_0853EF60 =
 {
-    .tileTag = ANIM_TAG_136,
-    .paletteTag = ANIM_TAG_136,
+    .tileTag = ANIM_TAG_CIRCLE_IMPACT,
+    .paletteTag = ANIM_TAG_CIRCLE_IMPACT,
     .oam = &gUnknown_08524904,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -73,8 +73,8 @@ u8 sub_80A9C70(u8 battlerId, bool8 b)
     u8 spriteId2;
     u8 i;
 
-    LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_136)]);
-    LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_136)]);
+    LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)]);
+    LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)]);
     gTasks[taskId].data[0] = battlerId;
     if (b)
     {

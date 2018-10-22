@@ -1,3 +1,4 @@
+#include "constants/battle_anim.h"
     .include "asm/macros.inc"
     .include "constants/constants.inc"
 
@@ -26,11 +27,11 @@ gUnknown_0853EE34:: @ 853EE34
 
     .align 2
 gUnknown_0853EE38:: @ 853EE38
-	spr_template 0x282b, 0x282b, gUnknown_08524914, gUnknown_0853EE34, NULL, gDummySpriteAffineAnimTable, sub_80A8E30
+	spr_template ANIM_TAG_WEATHER_BALL, ANIM_TAG_WEATHER_BALL, gUnknown_08524914, gUnknown_0853EE34, NULL, gDummySpriteAffineAnimTable, sub_80A8E30
 	
 	.align 2
 gUnknown_0853EE50:: @ 853EE50
-	spr_template 0x282b, 0x282b, gUnknown_08524914, gUnknown_0853EE34, NULL, gDummySpriteAffineAnimTable, sub_80A8EE4
+	spr_template ANIM_TAG_WEATHER_BALL, ANIM_TAG_WEATHER_BALL, gUnknown_08524914, gUnknown_0853EE34, NULL, gDummySpriteAffineAnimTable, sub_80A8EE4
 
     .align 2
 gUnknown_0853EE68:: @ 853EE68
