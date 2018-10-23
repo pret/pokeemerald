@@ -1,6 +1,7 @@
 #ifndef GUARD_BATTLE_ANIM_H
 #define GUARD_BATTLE_ANIM_H
 
+#include "battle.h"
 #include "constants/battle_anim.h"
 
 enum
@@ -127,5 +128,15 @@ u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 
 u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
+
+extern const struct OamData gUnknown_08524944;
+extern const struct OamData gUnknown_08524A8C;
+extern const struct OamData gUnknown_08524904;
+extern const struct OamData gUnknown_085249C4;
+extern const struct OamData gUnknown_0852490C;
+extern const struct OamData gUnknown_08524934;
+extern const struct OamData gUnknown_08524974;
+extern const struct OamData gUnknown_0852499C;
+extern const struct OamData gUnknown_085249CC;
 
 #endif // GUARD_BATTLE_ANIM_H

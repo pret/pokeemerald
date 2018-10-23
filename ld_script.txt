@@ -476,6 +476,8 @@ SECTIONS {
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);
+        /*src/battle/anim/effects_1.o(.rodata);*/
+        src/effects_1.o(.rodata);
         data/battle_anim_80FE840.o(.rodata);
         src/bike.o(.rodata);
         data/easy_chat.o(.rodata);
