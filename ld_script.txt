@@ -478,6 +478,8 @@ SECTIONS {
         src/item_use.o(.rodata);
         /*src/battle/anim/effects_1.o(.rodata);*/
         src/effects_1.o(.rodata);
+        src/effects_2.o(.rodata);
+        src/water.o(.rodata);
         data/battle_anim_80FE840.o(.rodata);
         src/bike.o(.rodata);
         data/easy_chat.o(.rodata);
