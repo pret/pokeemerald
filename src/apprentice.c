@@ -344,7 +344,7 @@ extern struct Unk030062ECStruct *gUnknown_030062EC;
 extern struct Unk030062F0Struct *gUnknown_030062F0;
 extern void (*gUnknown_030062F4)(void);
 
-extern void sub_8165AE8(struct Apprentice *);
+extern void CalcApprenticeChecksum(struct Apprentice *);
 
 // This file's functions.
 static u16 sub_819FF98(u8 arg0);
@@ -1087,7 +1087,7 @@ void ResetAllApprenticeData(void)
         for (j = 0; j < 4; j++)
             gSaveBlock2Ptr->apprentices[i].playerId[j] = 0;
         gSaveBlock2Ptr->apprentices[i].language = gGameLanguage;
-        gSaveBlock2Ptr->apprentices[i].unk40 = 0;
+        gSaveBlock2Ptr->apprentices[i].checksum = 0;
     }
 
     Script_ResetPlayerApprentice();
@@ -1430,16 +1430,16 @@ static void sub_81A0390(u8 arg0)
 
     for (i = 0; i < 3; i++)
     {
-        gSaveBlock2Ptr->apprentices[0].monData[i].species = 0;
-        gSaveBlock2Ptr->apprentices[0].monData[i].item = 0;
+        gSaveBlock2Ptr->apprentices[0].party[i].species = 0;
+        gSaveBlock2Ptr->apprentices[0].party[i].item = 0;
         for (j = 0; j < 4; j++)
-            gSaveBlock2Ptr->apprentices[0].monData[i].moves[j] = 0;
+            gSaveBlock2Ptr->apprentices[0].party[i].moves[j] = 0;
     }
 
     j = PLAYER_APPRENTICE.field_B1_2;
     for (i = 0; i < 3; i++)
     {
-        apprenticeMons[j] = &gSaveBlock2Ptr->apprentices[0].monData[i];
+        apprenticeMons[j] = &gSaveBlock2Ptr->apprentices[0].party[i];
         j = (j + 1) % 3;
     }
 
@@ -2256,7 +2256,7 @@ static void sub_81A1438(void)
 
     StringCopy(gSaveBlock2Ptr->apprentices[0].playerName, gSaveBlock2Ptr->playerName);
     gSaveBlock2Ptr->apprentices[0].language = gGameLanguage;
-    sub_8165AE8(&gSaveBlock2Ptr->apprentices[0]);
+    CalcApprenticeChecksum(&gSaveBlock2Ptr->apprentices[0]);
 }
 
 static void sub_81A150C(void)

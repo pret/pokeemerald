@@ -52,7 +52,7 @@ extern const struct BattleFrontierTrainer *gFacilityTrainers;
 extern const struct FacilityMon *gFacilityTrainerMons;
 
 u16 GetCurrentBattleTowerWinStreak(u8, u8);
-void sub_81659DC(struct RSBattleTowerRecord *a0, struct RSBattleTowerRecord *a1);
+bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, struct RSBattleTowerRecord *dst);
 bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst);
 void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *);
 void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm);

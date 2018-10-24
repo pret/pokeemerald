@@ -10,6 +10,10 @@
 #define FRONTIER_FACILITY_PIKE 5
 #define FRONTIER_FACILITY_PYRAMID 6
 
+#define TENT_VERDANTURF 2
+#define TENT_FALLARBOR 3
+#define TENT_SLATEPORT 4
+
 // Battle Frontier lvl modes.
 #define FRONTIER_LVL_50 0
 #define FRONTIER_LVL_OPEN 1

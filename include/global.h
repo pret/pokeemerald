@@ -293,7 +293,7 @@ struct Apprentice
     u8 playerId[4];
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 language;
-    u32 unk40;
+    u32 checksum;
 };
 
 struct UnknownPokemonStruct

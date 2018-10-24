@@ -213,7 +213,7 @@ static void PrepareUnknownExchangePacket(struct PlayerRecordsRS *dest)
     memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
     memcpy(dest->easyChatPairs, sEasyChatPairsSave, sizeof(dest->easyChatPairs));
     sub_80E89F8(&dest->dayCareMail);
-    sub_81659DC(sBattleTowerSave, &dest->battleTowerRecord);
+    EmeraldBattleTowerRecordToRuby(sBattleTowerSave, &dest->battleTowerRecord);
 
     if (GetMultiplayerId() == 0)
         dest->giftItem = GetRecordMixingGift();
@@ -231,7 +231,7 @@ static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
     memcpy(dest->easyChatPairs, sEasyChatPairsSave, sizeof(dest->easyChatPairs));
     sub_80E89F8(&dest->dayCareMail);
     SanitizeDayCareMailForRuby(&dest->dayCareMail);
-    sub_81659DC(sBattleTowerSave, &dest->battleTowerRecord);
+    EmeraldBattleTowerRecordToRuby(sBattleTowerSave, &dest->battleTowerRecord);
     SanitizeRubyBattleTowerRecord(&dest->battleTowerRecord);
 
     if (GetMultiplayerId() == 0)

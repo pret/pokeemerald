@@ -553,7 +553,7 @@ static void sub_81BA040(void)
             trainerId = Random() % 30;
             for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
             {
-                if (gSaveBlock2Ptr->frontier.battledTrainerIds[i] == trainerId)
+                if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
                     break;
             }
         } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
@@ -567,7 +567,7 @@ static void sub_81BA040(void)
     }
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 2)
-        gSaveBlock2Ptr->frontier.battledTrainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
+        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
 
     monSetsPool = gFacilityTrainers[gTrainerBattleOpponent_A].bfMonPool;
     i = 0;

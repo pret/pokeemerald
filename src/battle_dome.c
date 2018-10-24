@@ -58,7 +58,7 @@ extern void sub_81B8558(void);
 extern u32 sub_81A39C4(void);
 extern u16 sub_8162548(u8, u8);
 extern u16 RandomizeFacilityTrainerMonId(u16);
-extern u8 GetFacilityEnemyMonLevel(void);
+extern u8 SetFacilityPtrsGetLevel(void);
 extern u16 sub_81A5060(u8 monId, u8 moveSlotId);
 extern u8 sub_81A50F0(u8, u8);
 extern u8 sub_81A50B0(u8);
@@ -2595,13 +2595,13 @@ static void InitDomeTrainers(void)
 
     for (i = 0; i < 3; i++)
     {
-        gSaveBlock2Ptr->frontier.domeMonId[0][i] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_SPECIES, NULL);
+        gSaveBlock2Ptr->frontier.domeMonId[0][i] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_SPECIES, NULL);
         for (j = 0; j < 4; j++)
-            gSaveBlock2Ptr->frontier.field_EFC[i].moves[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_MOVE1 + j, NULL);
+            gSaveBlock2Ptr->frontier.field_EFC[i].moves[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_MOVE1 + j, NULL);
         for (j = 0; j < 6; j++)
-            gSaveBlock2Ptr->frontier.field_EFC[i].evs[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1], MON_DATA_HP_EV + j, NULL);
+            gSaveBlock2Ptr->frontier.field_EFC[i].evs[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HP_EV + j, NULL);
 
-        gSaveBlock2Ptr->frontier.field_EFC[i].nature = GetNature(&gPlayerParty[gSaveBlock2Ptr->frontier.field_CAA[i] - 1]);
+        gSaveBlock2Ptr->frontier.field_EFC[i].nature = GetNature(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1]);
     }
 
     for (i = 1; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
@@ -2663,7 +2663,7 @@ static void InitDomeTrainers(void)
     statSums[0] = 0;
     for (i = 0; i < 3; i++)
     {
-        trainerId = gSaveBlock2Ptr->frontier.field_CAA[i] - 1; // Great variable choice, gamefreak.
+        trainerId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1; // Great variable choice, gamefreak.
         statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_ATK, NULL);
         statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_DEF, NULL);
         statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPATK, NULL);
@@ -2681,7 +2681,7 @@ static void InitDomeTrainers(void)
         monTypesBits >>= 1;
     }
 
-    monLevel = GetFacilityEnemyMonLevel();
+    monLevel = SetFacilityPtrsGetLevel();
     statSums[0] += (monTypesCount * monLevel) / 20;
 
     for (i = 1; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
@@ -2847,7 +2847,7 @@ static void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentM
     s32 i;
     u8 happiness = 0xFF;
     u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Should be using trainerId instead of tournamentTrainerId. As a result, all Pokemon have ivs of 3.
-    u8 level = GetFacilityEnemyMonLevel();
+    u8 level = SetFacilityPtrsGetLevel();
     CreateMonWithEVSpreadPersonalityOTID(&gEnemyParty[monPartyId],
                                          gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonId[tournamentTrainerId][tournamentMonId]].species,
                                          level,
@@ -5575,7 +5575,7 @@ static u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roun
     u16 bestScore = 0;
     u16 bestId = 0;
     s32 movePower = 0;
-    GetFacilityEnemyMonLevel(); // Unused return variable.
+    SetFacilityPtrsGetLevel(); // Unused return variable.
 
     // Calc move points of all 4 moves for all 3 pokemon hitting all 3 target mons.
     for (i = 0; i < 3; i++)
@@ -6098,7 +6098,7 @@ static void sub_8194D68(void)
 
     for (i = 0; i < 2; i++)
     {
-        s32 playerMonId = gSaveBlock2Ptr->frontier.field_CAA[gUnknown_0203CEF8[i] - 1] - 1;
+        s32 playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gUnknown_0203CEF8[i] - 1] - 1;
         s32 count;
 
         for (moveSlot = 0; moveSlot < 4; moveSlot++)
@@ -6124,7 +6124,7 @@ static void sub_8194E44(void)
 
     for (i = 0; i < 2; i++)
     {
-        s32 playerMonId = gSaveBlock2Ptr->frontier.field_CAA[gUnknown_0203CEF8[i] - 1] - 1;
+        s32 playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gUnknown_0203CEF8[i] - 1] - 1;
         u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[playerMonId], MON_DATA_HELD_ITEM, NULL);
         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
     }
@@ -6439,7 +6439,7 @@ static void DecideRoundWinners(u8 roundId)
 static void CopyDomeTrainerName(u8 *dst, u16 trainerId)
 {
     s32 i = 0;
-    GetFacilityEnemyMonLevel(); // Unused return value.
+    SetFacilityPtrsGetLevel(); // Unused return value.
 
     if (trainerId == TRAINER_FRONTIER_BRAIN)
     {

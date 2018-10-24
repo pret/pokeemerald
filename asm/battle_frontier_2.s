@@ -6261,7 +6261,7 @@ _081A4E46:
 	bl ZeroEnemyPartyMons
 	movs r1, 0
 	str r1, [sp, 0x18]
-	bl GetFacilityEnemyMonLevel
+	bl SetFacilityPtrsGetLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x1C]
@@ -9904,7 +9904,7 @@ sub_81A6CD0: @ 81A6CD0
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x24]
-	bl GetFacilityEnemyMonLevel
+	bl SetFacilityPtrsGetLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
@@ -11734,7 +11734,7 @@ TryGenerateBattlePikeWildMon: @ 81A7B90
 	ands r0, r1
 	cmp r0, 0
 	beq _081A7C1C
-	bl sub_8165CB4
+	bl GetHighestLevelInPlayerParty
 	adds r7, r0, 0
 	cmp r7, 0x3B
 	ble _081A7C08
@@ -15719,7 +15719,7 @@ _081A9C56:
 	bl SetMonData
 	cmp r5, 0
 	beq _081A9CD4
-	bl GetFacilityEnemyMonLevel
+	bl SetFacilityPtrsGetLevel
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, [sp, 0x10]

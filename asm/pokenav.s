@@ -29731,7 +29731,7 @@ sub_81D62CC: @ 81D62CC
 	lsls r0, r1, 24
 	lsrs r6, r0, 24
 	bl sub_81D56B0
-	bl sub_8165CB4
+	bl GetHighestLevelInPlayerParty
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
