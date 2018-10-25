@@ -480,6 +480,9 @@ SECTIONS {
         src/effects_1.o(.rodata);
         src/effects_2.o(.rodata);
         src/water.o(.rodata);
+        src/fire.o(.rodata);
+        src/electric.o(.rodata);
+        src/ice.o(.rodata);
         data/battle_anim_80FE840.o(.rodata);
         src/bike.o(.rodata);
         data/easy_chat.o(.rodata);

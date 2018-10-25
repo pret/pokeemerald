@@ -161,5 +161,11 @@ extern const struct OamData gUnknown_08524A04;
 extern const struct OamData gUnknown_08524A2C;
 extern const struct OamData gUnknown_08524AEC;
 extern const struct OamData gUnknown_08524964;
+extern const struct OamData gUnknown_08524B24;
+extern const struct OamData gUnknown_08524A24;
+extern const struct OamData gUnknown_08524AC4;
+extern const struct OamData gUnknown_08524A84;
+extern const struct OamData gUnknown_08524A64;
+extern const struct OamData gUnknown_0852496C;
 
 #endif // GUARD_BATTLE_ANIM_H
